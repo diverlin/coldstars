@@ -127,7 +127,7 @@ const int TURN_TIME = 150;  //turn time, depends on game fps
 const int COLLISION_RADIUS_FOR_STATIC_COORD = 5;
 
 const int VISIBLE_DISTANCE_WITHOUT_RADAR = 200;
-const float MASS_DECREASE_SPEED_RATE = 0.4;
+const float MASS_DECREASE_SPEED_RATE = 0.004;
 
 const int SHOCKWAVES_MAX_NUM = 10;
 
@@ -495,8 +495,8 @@ namespace EQUIPMENT
                 const float OVERLOAD_RATE = 1.5f;
                 const float OVERLOAD_DETERIORATION_RATE = 4.0f;
                                 
-		const int SPEED_MIN = 300;   
-		const int SPEED_MAX = 400; 
+		const float SPEED_MIN = 3.0;   
+		const float SPEED_MAX = 4.0; 
 		const float SPEED_TECHLEVEL_RATE = 0.1f;
 				
 		const int HYPER_MIN = 7;

@@ -82,24 +82,6 @@ void disable_DEPTH() { glDisable(GL_DEPTH_TEST); }
 void enable_POINTSPRITE()  { glEnable(GL_POINT_SPRITE);  }
 void disable_POINTSPRITE() { glDisable(GL_POINT_SPRITE); }
 
-//void drawFlatBoxPerVertexIn2D(TextureOb* texOb, 
-			        //const Vec2<float>& bottomLeft, 
-			        //const Vec2<float>& bottomRight, 
-			        //const Vec2<float>& topRight, 
-			        //const Vec2<float>& topLeft, 
-			        //float z_pos)
-//{       
-    	//glBindTexture(GL_TEXTURE_2D, texOb->texture);
-	//int frame = texOb->updateAnimationFrame();
-	
-    	//glBegin(GL_QUADS);
-      		//glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(bottomLeft.x,  bottomLeft.y , z_pos);
-      		//glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f(bottomRight.x, bottomRight.y, z_pos);
-      		//glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f(topRight.x,    topRight.y   , z_pos);
-      		//glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(topLeft.x,     topLeft.y    , z_pos);
-    	//glEnd();
-//}
-
 
 void drawQuad_inXYPlane(TextureOb* texOb,
 		 const Vec3<float>& scale,
@@ -123,15 +105,28 @@ void drawQuad_inXYPlane(TextureOb* texOb,
     	glPopMatrix();
 }
 
-void drawQuad_inXYPlane(TextureOb* texOb,
-		 const Vec2<float>& scale,
-		 const Vec2<float>& center, 
-		 float angle)
-{
-	Vec3<float> scale3(scale.x, scale.y, 1); 
-	Vec3<float> center3(center.x, center.y, -1); 
-	drawQuad_inXYPlane(texOb, scale3, center3, angle);
-}
+//void drawQuad_inXYPlane(TextureOb* texOb,
+		 //const Vec3<float>& scale,
+		 //const Vec3<float>& center, 
+		 //const Vec3<float>& orient)
+//{
+	//int frame = texOb->updateAnimationFrame();
+	
+    	//glBindTexture(GL_TEXTURE_2D, texOb->texture);
+	
+    	//glPushMatrix();
+    		//glTranslatef(center.x, center.y, center.z);
+    		////glRotatef(angle, 0.0, 0.0, 1.0);
+    	    	//glScalef(scale.x, scale.y, scale.z);
+    	    	    		    	    	
+    		//glBegin(GL_QUADS);
+    			//glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
+    			//glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
+   			//glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
+    			//glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);
+    		//glEnd();
+    	//glPopMatrix();
+//}
 
 void drawQuad_inXYPlane(TextureOb* texOb, const Box& quad)
 {
