@@ -1,11 +1,25 @@
 ################### FEATURES #################
+<< move to own matrices
+
+<< redidisgn camera
+
+<< true rotation via quanternion
+
+<< normal mapping shader for planets
+
+<< 3D turrels for 3d models
+
+<< render all particles and beams into a separate FBO, and apply shader illuminocity effect
+
 << glList to VBO
+Done
 
 << allow vehicle to have 3D model
+Done
 
 << redesign the GUi, to have Node, or childs (matrjoshka)
 
-<< VehicleSLot in some(what??) cases has no owner. This looks like a bug.
+<< VehicleSlot in some(what??) cases has no owner. This looks like a bug.
 
 << camera pos is controlled by mouse pos
 - DONE (needs to be enabled via config)

@@ -26,7 +26,7 @@ struct VehiclePropetries
 
 	int protection;
 	int radar;
-	int speed;  // depends on mass and drive
+	float speed;  // depends on mass and drive
 
 	int energy;
 	int hyper;  // depends on drive and bak

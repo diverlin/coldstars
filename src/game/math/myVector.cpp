@@ -67,12 +67,6 @@ float getAngleInD(const Vec2<float>& v_start, const Vec2<float> v_end)
 	return atan2(v_start.y - v_end.y, v_start.x - v_end.x) * RADIAN_TO_DEGREE_RATE;
 }
 
-float getAngle(const Vector2p& v1, const Vector2p& v2)
-{
-	float angle = acos( ((v1.p.x-v1.p0.x)*(v2.p.x-v2.p0.x) + (v1.p.y-v1.p0.y)*(v2.p.y-v2.p0.y))/(v1.GetLength()*v2.GetLength()) ) * RADIAN_TO_DEGREE_RATE;
-    	return angle;
-}
-
 float getAngleBetweenUnits(const Vec3<float>& v1, const Vec3<float>& v2)
 {
 	return acos(dotUnits(v1, v2)) * RADIAN_TO_DEGREE_RATE;

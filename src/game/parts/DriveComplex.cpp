@@ -301,29 +301,92 @@ void DriveComplex::CalcPath()
 	#endif   
 	
 	ClearPath();
+        
+        float speed = owner_vehicle->GetProperties().speed;
+        
+        Vec3<float> new_center(owner_vehicle->GetPoints().GetCenter());
+	Vec3<float> target_dir(target_pos - owner_vehicle->GetPoints().GetCenter());
+	target_dir.Normalize();
+	float az = owner_vehicle->GetPoints().GetAngle().z;
+	Vec3<float> orient(cos(az*DEGREE_TO_RADIAN_RATE), sin(az*DEGREE_TO_RADIAN_RATE), 0.0);
 
-	//std::cout<<str(target_pos - owner_vehicle->GetPoints().GetCenter())<<std::endl;
-	Vec3<float> new_pos(owner_vehicle->GetPoints().GetCenter());
-	Vec3<float> way(target_pos - new_pos);
-	Vec3<float> target_dir;
-	while (way.GetLength() > 1.1)
+	// identify sign for rotation
+	int sign;
 	{
-		target_dir.Set(way.GetNormalized());
-		new_pos += target_dir;
-
-        	//target_angle_diff = getAngle(vehicle_basis, target_basis);
-        	
-		path_center_vec.push_back(new_pos);
-            	angle_inD_vec.push_back(0);		
-
-						
-		way.Set(target_pos - new_pos);
+		float prob_az1 = az+1;
+		float prob_az2 = az-1;
+		
+		Vec3<float> prob_orient1(cos(prob_az1*DEGREE_TO_RADIAN_RATE), sin(prob_az1*DEGREE_TO_RADIAN_RATE), 0.0);
+		Vec3<float> prob_orient2(cos(prob_az2*DEGREE_TO_RADIAN_RATE), sin(prob_az2*DEGREE_TO_RADIAN_RATE), 0.0);
+		
+		float prob_cosa1 = dotUnits(prob_orient1, target_dir);		
+		float prob_cosa2 = dotUnits(prob_orient2, target_dir);
+				
+		if (prob_cosa1 > 0)
+		{
+			if (std::fabs(prob_cosa2) > std::fabs(prob_cosa1))
+			{
+				sign = -1;
+			}
+			else
+			{
+				sign = 1;
+			}
+		}
+		else
+		{
+			if (std::fabs(prob_cosa2) > std::fabs(prob_cosa1))
+			{
+				sign = 1;
+			}
+			else
+			{
+				sign = -1;
+			}
+		}
 	}
-                     
-        //if (CalcRoundPath() == true)
-	//{        
-		//CalcDirectPath();
-	//}
+
+	// rotated path
+	float cosa = dotUnits(orient, target_dir);
+	float angle_step = 3.0;
+	int counter_max = 3 + 360/angle_step;
+	int i = 0;
+	while (std::fabs(cosa) < 0.999 or (cosa < 0)) // cosa <0 condition works if the orient and target vector is straigforward opposite (dot ~ -1)
+	{
+		az += sign*angle_step;
+		orient.x = cos(az*DEGREE_TO_RADIAN_RATE);
+		orient.y = sin(az*DEGREE_TO_RADIAN_RATE);
+		
+		new_center += orient*speed;
+		 
+		target_dir.Set(target_pos - new_center);
+		target_dir.Normalize();
+		 		
+		path_center_vec.push_back(new_center);
+		angle_inD_vec.push_back(az);
+		
+		cosa = dotUnits(orient, target_dir);
+		
+		i++;
+		if (i>counter_max) // target_pos is not reachable (within circle)
+		{
+			ClearPath();
+			return;
+		}
+	}
+	
+	// direct path
+	Vec3<float> way(target_pos - new_center);
+	while (way.GetLength() > 1.1*speed)
+	{
+		new_center += target_dir*speed;
+
+		path_center_vec.push_back(new_center);
+		angle_inD_vec.push_back(az);
+						
+		way.Set(target_pos - new_center);
+	}
+             
 
 	if (path_center_vec.size() > 1)
 	{
@@ -335,128 +398,6 @@ void DriveComplex::CalcPath()
                 ClearPath();    
         }
 }
-
-bool DriveComplex::CalcRoundPath()
-{  	
-    	Vector2p vehicle_basis(owner_vehicle->GetPoints().GetMidLeft(), owner_vehicle->GetPoints().GetCenter());
-    	Vector2p target_basis(owner_vehicle->GetPoints().GetMidLeft(),  target_pos);
-    	    	    	
-    	float target_angle_diff = getAngle(vehicle_basis, target_basis);
-    	float target_angle_diff_start = target_angle_diff;    	
-    	float angle_inD = owner_vehicle->GetPoints().GetAngle().z;
-       
-    	float step = owner_vehicle->GetProperties().speed/100.0;  // remove from here 
-    	float d_angle = 1.0f*step;
-        
-    	int it_max = 360.0f/d_angle + 1;
-    	int i = 0;
-        int sign = 1;  //hack, define right sign here
-    	while (target_angle_diff > 1.1f*d_angle)
-    	{   
-                i++; 
-    		if (i > it_max)
-    		{                        
-    			return false; // if a target point is close to object and is not reachable, then further calc has no sense
-    		}
-                
-    		angle_inD += sign*d_angle;	    	
-	    	
-       		float angle_radian = angle_inD/RADIAN_TO_DEGREE_RATE;
-   		         
-        	float cosa = cos(angle_radian);
-        	float sina = sin(angle_radian);
-        	
-    		Vec3<float> delta_step(step*cosa, step*sina, 0.0);
-    		 
-       		////// rotation around center
-       		Vec3<float> midleft_orig(owner_vehicle->GetPoints().GetMidLeftOrig());
-       		Vec3<float> midleft_rotated(midleft_orig.x * cosa - midleft_orig.y * sina, midleft_orig.x * sina + midleft_orig.y * cosa, owner_vehicle->GetPoints().GetCenter().z);
-     	        	
-        	vehicle_basis.p += delta_step;
-       		Vec3<float> midleft_trans(midleft_rotated + vehicle_basis.p);
-       		
-        	vehicle_basis.p0.Set(midleft_trans);        
-        	target_basis.p0.Set(midleft_trans);        	
-         	        	
-        	target_angle_diff = getAngle(vehicle_basis, target_basis);
-        	
-        	if (target_angle_diff > target_angle_diff_start) // hack
-        	{
-        		sign *= -1;
-        		angle_inD += sign*d_angle;
-        		continue;  
-        	}
-        	//debug_midLeft_vec.push_back(vehicle_basis.p0);
-        	path_center_vec.push_back(vehicle_basis.p);
-            	angle_inD_vec.push_back(angle_inD);
-        }
-        
-        return true;
-}
-
-
-void DriveComplex::CalcDirectPath() 
-{   
-	Vec3<float> start_pos;
-	if (path_center_vec.size() == 0)
-	{
-    		start_pos.Set(owner_vehicle->GetPoints().GetCenter());
-    	}
-    	else
-    	{
-		start_pos.Set(path_center_vec[path_center_vec.size()-1]);
-    	}
-    	
-    	Vec3<float> ll(target_pos - start_pos);
-    	Vec3<float> new_pos(start_pos);
-
-        if ( (owner_vehicle->GetProperties().speed > FLOAT_EPSILON) and (ll.IsNull() == false) )
-    	{
-    		float step = owner_vehicle->GetProperties().speed/100.0;  // remove from here    
-       		    		
-		Vec3<float> vstep = ll.GetNormalized() * step;
-
-       		unsigned int it = ll.GetLength() / step;
-       		for (unsigned int i=0; i<it; i++)
-       		{
-            		new_pos += vstep;
-            		float angleInD = getAngleInD(target_pos, new_pos);
-
-            		path_center_vec.push_back(new_pos);
-            		angle_inD_vec.push_back(angleInD);
-       		}
-    	}
-}
-
-//void DriveComplex::CalcAcceleratedPath() // used for hyper jump effect
-//{
-	//ClearPath();
-	
-	//float angleInD = owner_vehicle->GetPoints().GetAngleDegree();
-
-	//Vec2<float> start_pos(owner_vehicle->GetPoints().GetCenter());
-    	
-    	//Vec2<float> ll(getVec2f(100, angleInD) - start_pos);
-    	
-    	//Vec2<float> new_pos(start_pos);
-    	//for (unsigned int i=0; i<500; i++)
-	//{
-	    	//float step = owner_vehicle->GetProperties().speed/100.0 + i*10;  // remove from here      		    		
-		//Vec2<float> vstep = ll.GetNorm() * step;
-	
-        	//new_pos += vstep;
-
-            	//path_center_vec.push_back(new_pos);
-            	//angle_inD_vec.push_back(angleInD);
-       	//}
-       	
-       	//if (path_center_vec.size() >= 1)
-	//{
-		//direction_list_END = false;
-               
-       		//move_it = 0;
-       	//}
-//}
 
 void DriveComplex::UpdatePosition()
 {

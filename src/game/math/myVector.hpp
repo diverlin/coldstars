@@ -20,24 +20,6 @@ Vec2<float> getVec2f(float length, float angle);
 Vec3<float> getVec3f(float length, float angle, float);
 float getAngleInD(const Vec2<float>& v_start, const Vec2<float> v_end);
 
-
-class Vector2p
-{
-	public:
-		Vector2p(const Vec3<float>& p0, const Vec3<float>& p):p0(p0), p(p) {};
-		~Vector2p() {};
-		
-		Vec3<float> p0;
-		Vec3<float> p;
-		
-
-		float GetLength() const
-		{
-			return sqrt((p.x-p0.x)*(p.x-p0.x) + (p.y-p0.y)*(p.y-p0.y) + (p.z-p0.z)*(p.z-p0.z));
-		}		
-};
-
-float getAngle(const Vector2p& v1, const Vector2p& v2);
 float getAngleBetweenUnits(const Vec3<float>&, const Vec3<float>&);
 float dotUnits(const Vec3<float>& v1, const Vec3<float>& v2);
 

@@ -44,7 +44,7 @@
 #include <iostream>
 
 int main()
-{          
+{
 	init();  
         
 	GameDate::Instance().SetDate(1,1,4000);
@@ -56,8 +56,8 @@ int main()
 	for (unsigned int i=0; i<galaxy_description.starsystem_num; i++)
 	{
 		StarSystemDescription starsystem_description;
-		starsystem_description.spacestation_num_min = 50;
-		starsystem_description.spacestation_num_max = 50;
+		starsystem_description.spacestation_num_min = 10;
+		starsystem_description.spacestation_num_max = 10;
 		starsystem_description.allow_satellites = false;
 		starsystem_description.allow_spacestations = true;
 		

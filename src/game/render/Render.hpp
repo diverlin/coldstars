@@ -53,11 +53,11 @@ void drawQuad_inXYPlane(TextureOb* texOb,
 		 const Vec3<float>& center, 
 		 float angle);
 
-void drawQuad_inXYPlane(TextureOb* texOb, 
-		 const Vec2<float>& scale,
-		 const Vec2<float>& center, 
-		 float angle);
-
+//void drawQuad_inXYPlane(TextureOb* texOb, 
+		 //const Vec3<float>& scale,
+		 //const Vec3<float>& center, 
+		 //const Vec3<float>& orient);
+		 
 void drawQuad_inXYPlane(TextureOb*, const Box&);
 		 		 		 
 //void drawRect(const Rect& rect, float z_pos); // the drawrect function was inverted by Y axis

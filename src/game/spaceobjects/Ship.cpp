@@ -67,8 +67,8 @@ void Ship::UpdateInfo()
     	info.addNameStr("size id:");     	info.addValueStr( int2str(textureOb->size_id) );
     	info.addNameStr("space/free:");   	info.addValueStr( int2str(data_korpus.space) + "/" + int2str(properties.free_space) );
     	info.addNameStr("mass:");   		info.addValueStr( int2str(mass) );
-	info.addNameStr("speed:");       	info.addValueStr( boost::lexical_cast<std::string>(properties.speed) );
-	info.addNameStr("speed dm:");       	info.addValueStr( boost::lexical_cast<std::string>(mass*MASS_DECREASE_SPEED_RATE) );
+	info.addNameStr("speedx100:");       	info.addValueStr( int2str(properties.speed*100) );
+	info.addNameStr("speed dmx100:");     	info.addValueStr( int2str(mass*MASS_DECREASE_SPEED_RATE*100));
     	info.addNameStr("energy:");            	info.addValueStr( int2str(properties.energy) );
 	info.addNameStr("temp.:");       	info.addValueStr( int2str(data_korpus.temperature) );
         info.addNameStr("radar:");    		info.addValueStr( int2str(properties.radar) );
