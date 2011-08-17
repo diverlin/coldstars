@@ -31,10 +31,6 @@ ProtectorItem :: ProtectorItem(TextureOb* _pTo_itemTexOb, int _protection_orig, 
     updatePropetries();
     countPrice();
     updateInfo();
-
-    //self.shield_texOb = TEXTURE_MANAGER.returnShieldEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id)
-    pTo_shieldTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.shieldEffect_texOb_pList); 
-    pTo_shield = new ShieldEffect(this, pTo_shieldTexOb);
 }
 
 ProtectorItem :: ~ProtectorItem()

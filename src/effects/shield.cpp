@@ -20,12 +20,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "shield.h"
 
 
-ShieldEffect :: ShieldEffect(ProtectorItem* _pTo_protectorItem, TextureOb* _pTo_texOb)
+ShieldEffect :: ShieldEffect(Ship* _pTo_ship, TextureOb* _pTo_texOb)
 {
-     pTo_protectorItem = _pTo_protectorItem;
+     pTo_ship = _pTo_ship;
 
      pTo_texOb = _pTo_texOb;
-     texture = (*pTo_texOb).texture;
+     texture = pTo_texOb->texture;
 
      angle_inD   = randIntInRange(0, 360);
      d_angle_inD = randIntInRange(0, 30) * 0.003;
@@ -52,7 +52,15 @@ void ShieldEffect :: render()
     glColor4f(1.0, 1.0, 1.0, alpha);
 
     glBindTexture(GL_TEXTURE_2D, texture);
-    drawFlatQuadPerVertexIn2D(pTo_protectorItem->pTo_ship->points.bottomLeftShield_x, pTo_protectorItem->pTo_ship->points.bottomLeftShield_y, pTo_protectorItem->pTo_ship->points.bottomRightShield_x, pTo_protectorItem->pTo_ship->points.bottomRightShield_y, pTo_protectorItem->pTo_ship->points.topRightShield_x, pTo_protectorItem->pTo_ship->points.topRightShield_y, pTo_protectorItem->pTo_ship->points.topLeftShield_x, pTo_protectorItem->pTo_ship->points.topLeftShield_y, pos_z);
+    drawFlatQuadPerVertexIn2D(pTo_ship->points.bottomLeftShield_x, 
+     			      pTo_ship->points.bottomLeftShield_y, 
+     			      pTo_ship->points.bottomRightShield_x, 
+     			      pTo_ship->points.bottomRightShield_y, 
+     			      pTo_ship->points.topRightShield_x, 
+     			      pTo_ship->points.topRightShield_y, 
+     			      pTo_ship->points.topLeftShield_x, 
+     			      pTo_ship->points.topLeftShield_y, 
+     			      pos_z);
 }
 
 

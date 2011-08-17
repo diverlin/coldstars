@@ -62,7 +62,6 @@ class OtsecSlot : public CommonForSlot
         void insertItem(FreezerItem* pTo_item);
         void insertItem(ScanerItem* pTo_item);
         void insertItem(GrappleItem* pTo_item);
-//
         void insertItem(RocketModule* pTo_module);
         void insertItem(LazerModule* pTo_module);
         void insertItem(RadarModule* pTo_module);
@@ -74,19 +73,16 @@ class OtsecSlot : public CommonForSlot
         void insertItem(FreezerModule* pTo_module);
         void insertItem(ScanerModule* pTo_module);
         void insertItem(GrappleModule* pTo_module);
-        
-        //RocketModule* returnEquipedItem();
-        //LazerModule*  returnEquipedItem();
                 
         void removeItem();
-//
-        int returnEquipedItemMass(); 
-        int returnEquipedItemPrice(); 
+
+        int getItemMass(); 
+        int getItemPrice(); 
 
         void renderFrame(GLuint flash_tex);
-        void renderEquipedItem();
         void renderFrames(GLuint flash_tex);
-
+       
+        void renderEquipedItem();
         void renderItemInfo();
 }; 
 

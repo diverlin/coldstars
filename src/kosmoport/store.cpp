@@ -406,7 +406,7 @@ int Store :: buyFreezerSlotItem(OtsecSlot* pTo_freezer_slot)
 
 int Store :: buyOtsecSlotItem(OtsecSlot* pTo_otsec_slot)
 {
-    int price = pTo_otsec_slot->returnEquipedItemPrice();
+    int price = pTo_otsec_slot->getItemPrice();
 
     // weapons
     if (pTo_otsec_slot->item_subtype_id == LAZER_ITEM_ID)

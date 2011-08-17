@@ -252,7 +252,7 @@ class Ship
         //VEC_pLazerTrace_type effect_LAZERTRACE_pList;
 
         DriveTrailEffect* pTo_drive_jet; 
-
+        ShieldEffect* pTo_shield;
 
         Ship(TextureOb* _pTo_texOb, int _max_weapons, bool _grapple_INHIBIT, int _space, int _armor_max, int _protection, int _nominal_temperature);
         ~Ship();    

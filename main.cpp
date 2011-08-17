@@ -112,8 +112,8 @@ int main()
 
     KeyEventsInSpace g_KEY_EVENTS_IN_SPACE = KeyEventsInSpace(); 
 
-    World world = World();
-    InterfaceInSpace interfaceInSpace = InterfaceInSpace();
+    World world;
+    InterfaceInSpace interfaceInSpace 	      = InterfaceInSpace();
     InterfaceInKosmoport interfaceInKosmoport = InterfaceInKosmoport();
 
     pTo_CURSOR = new Cursor();
