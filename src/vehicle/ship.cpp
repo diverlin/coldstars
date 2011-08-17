@@ -403,6 +403,10 @@ Ship :: Ship(TextureOb* _pTo_texOb, int _max_weapons, bool _inhibit_GRAPPLE, int
    needsToDo.GETBULLETS = false;
    needsToDo.BUY = false;
    needsToDo.SELL = false;
+   
+   //self.shield_texOb = TEXTURE_MANAGER.returnShieldEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id)
+   TextureOb* pTo_shieldTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.shieldEffect_texOb_pList); 
+   pTo_shield = new ShieldEffect(this, pTo_shieldTexOb);
 }
 
 
@@ -466,6 +470,10 @@ void Ship :: calculateDetaledWayToPosition()
     len_direction_list = direction_x_list.size();
 
     direction_list_END = false;
+    
+    //self.shield_texOb = TEXTURE_MANAGER.returnShieldEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id)
+    TextureOb* pTo_shieldTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.shieldEffect_texOb_pList); 
+    pTo_shield = new ShieldEffect(this, pTo_shieldTexOb);
 }
 
 
@@ -784,7 +792,7 @@ void Ship :: hit_TRUE(int _damage)
 {
     armor -= _damage;
     if (ableTo.PROTECT == true)
-       protector_slot.pTo_protectorItem->pTo_shield->alpha = 1.0;
+       pTo_shield->alpha = 1.0;
 
     if (armor < 0)
        is_dying = true; 
@@ -843,12 +851,12 @@ void Ship :: updateFireAbility()
 
      for (unsigned int i = 0; i < weapon_slot_pList.size(); i++)
      { 
-        if ((*weapon_slot_pList[i]).is_EQUIPED == true)
-           if ((*weapon_slot_pList[i]).returnEquipedItemCondition() > 0)
+        if (weapon_slot_pList[i]->is_EQUIPED == true)
+           if (weapon_slot_pList[i]->returnEquipedItemCondition() > 0)
            {
               equiped_weapon_slot_pList.push_back(weapon_slot_pList[i]);
-              sum_damage += (*weapon_slot_pList[i]).returnEquipedItemDamage(); 
-              sum_fire_radius += (*weapon_slot_pList[i]).returnEquipedItemRadius(); 
+              sum_damage += weapon_slot_pList[i]->returnEquipedItemDamage(); 
+              sum_fire_radius += weapon_slot_pList[i]->returnEquipedItemRadius(); 
            }
      }
 
@@ -915,8 +923,8 @@ void Ship :: calculateMass()
     //////// OTSEC SLOT ////////////////////////////////
     for (unsigned int i = 0; i < otsec_slot_pList.size(); i++)
     {
-        if ((*otsec_slot_pList[i]).is_EQUIPED == true)
-           mass += (*otsec_slot_pList[i]).returnEquipedItemMass();      
+        if (otsec_slot_pList[i]->is_EQUIPED == true)
+           mass += otsec_slot_pList[i]->getItemMass();      
     }
 }
 
@@ -1315,7 +1323,7 @@ void Ship :: renderShield()
 {
      if (protector_slot.pTo_protectorItem == NULL)
          printf("pTo_protector = NULL\n");
-     protector_slot.pTo_protectorItem->pTo_shield->render();
+     pTo_shield->render();
 }
 
 

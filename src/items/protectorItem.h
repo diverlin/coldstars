@@ -31,10 +31,6 @@ public:
       int protection_add;
       int protection;
 
-      TextureOb* pTo_shieldTexOb;
-
-      ShieldEffect* pTo_shield;
-
       VEC_pProtectorModule_type modules_pList;
 
       // INFO 

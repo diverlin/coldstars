@@ -26,7 +26,7 @@ class TextureOb;
 class ShieldEffect
 {  
      public:
-        ProtectorItem* pTo_protectorItem;
+        Ship* pTo_ship;
         
         TextureOb* pTo_texOb;
         GLuint texture;
@@ -42,7 +42,7 @@ class ShieldEffect
         float pos_z;
 
         //ShieldEffect();
-        ShieldEffect(ProtectorItem* _pTo_protectorItem, TextureOb* _pTo_texOb);
+        ShieldEffect(Ship* _pTo_ship, TextureOb* _pTo_texOb);
         ~ShieldEffect();
 
         //void renderDynamicFramesLoopRot();
