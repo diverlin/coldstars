@@ -1,0 +1,12 @@
+#####################################################################
+# Project:      freeorion
+# License:	see in << /data/license/freeorion_info.txt >>
+##################################
+filename     << original filename 
+rocket_Race0_Tech0.png,
+rocket_Race0_Tech1.png,
+rocket_Race0_Tech2.png    << nuclear_missile.png
+##################################
+
+
+
