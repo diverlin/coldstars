@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 DroidModule :: DroidModule(TextureOb* _pTo_texOb)
 {
      CommonForModules_init(_pTo_texOb);
-     subtype_id = DROID_MODULE_ID;
+     subtype_id = DROID_ID;
 
      repair_add = 0;
 }

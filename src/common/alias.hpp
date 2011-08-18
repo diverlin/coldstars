@@ -50,7 +50,7 @@ class Asteroid;  typedef std::vector<Asteroid*> VEC_pAsteroid_type;
 typedef std::vector<int> VEC_int_type; 
 
 class OtsecSlot;         typedef std::vector<OtsecSlot*> VEC_pOtsecSlot_type;
-
+		         typedef std::vector<OtsecSlot> VEC_OtsecSlot_type;
 
 class WeaponSlot;       typedef std::vector<WeaponSlot*> VEC_pWeaponSlot_type;
 class OtsecSlot;        typedef std::vector<OtsecSlot*> VEC_pOtsecSlot_type; 

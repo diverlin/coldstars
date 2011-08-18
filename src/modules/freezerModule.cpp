@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 FreezerModule :: FreezerModule(TextureOb* _pTo_texOb)
 {
      CommonForModules_init(_pTo_texOb);
-     subtype_id = FREEZER_MODULE_ID;
+     subtype_id = FREEZER_ID;
 
      freeze_add = 0;
 }

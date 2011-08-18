@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 DriveModule :: DriveModule(TextureOb* _pTo_texOb)
 {
      CommonForModules_init(_pTo_texOb);
-     subtype_id = DRIVE_MODULE_ID;
+     subtype_id = DRIVE_ID;
 
      speed_add = 0;
      hyper_add = 0;

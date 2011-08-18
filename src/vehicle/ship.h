@@ -177,8 +177,10 @@ class Ship
         OtsecSlot freezer_slot;
                                                 
         //######### OTSEC SLOT
+        //VEC_pOtsecSlot_type otsec_slot_pList;
+        VEC_pOtsecSlot_type total_slot_pList;
         VEC_pOtsecSlot_type otsec_slot_pList;
-
+        
         //######### GATE SLOT
         OtsecSlot gate_slot;
 

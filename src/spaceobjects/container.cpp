@@ -29,10 +29,10 @@ Container :: Container(StarSystem* _pTo_starsystem, TextureOb* _pTo_texOb, float
     item_subtype_id = -1;
     mass = -1;
 
-    pTo_rocketItem      = NULL;
-    pTo_lazerItem       = NULL;
-    pTo_radarItem       = NULL;
-    pTo_driveItem       = NULL;
+    pTo_rocketEquipment      = NULL;
+    pTo_lazerEquipment       = NULL;
+    pTo_radarEquipment       = NULL;
+    pTo_driveEquipment       = NULL;
     pTo_bakItem         = NULL;
     pTo_energizerItem   = NULL;
     pTo_protectorItem   = NULL;
@@ -57,7 +57,7 @@ Container :: ~Container()
 
 void Container :: packRocketItem(RocketItem* pTo_item)
 {
-    pTo_rocketItem = pTo_item;
+    pTo_rocketEquipment = pTo_item;
     
     item_subtype_id = pTo_item->subtype_id;    // ROCKET_ID
     item_id         = pTo_item->id;    
@@ -70,7 +70,7 @@ void Container :: packRocketItem(RocketItem* pTo_item)
 
 void Container :: packLazerItem(LazerItem* pTo_item)
 {
-    pTo_lazerItem = pTo_item;
+    pTo_lazerEquipment = pTo_item;
     
     item_subtype_id = pTo_item->subtype_id;    
     item_id         = pTo_item->id;    
@@ -83,7 +83,7 @@ void Container :: packLazerItem(LazerItem* pTo_item)
 
 void Container :: packRadarItem(RadarItem* pTo_item)
 {
-    pTo_radarItem = pTo_item;
+    pTo_radarEquipment = pTo_item;
     
     item_subtype_id = pTo_item->subtype_id;
     item_id         = pTo_item->id;    
@@ -96,7 +96,7 @@ void Container :: packRadarItem(RadarItem* pTo_item)
 
 void Container :: packDriveItem(DriveItem* pTo_item)
 {
-    pTo_driveItem = pTo_item;
+    pTo_driveEquipment = pTo_item;
     
     item_subtype_id = pTo_item->subtype_id;    
     item_id         = pTo_item->id;    

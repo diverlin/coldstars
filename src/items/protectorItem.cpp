@@ -23,7 +23,7 @@ ProtectorItem :: ProtectorItem(TextureOb* _pTo_itemTexOb, int _protection_orig, 
 {
     CommonForItems_init(_pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
     type_id = EQUIPMENT_ID;
-    subtype_id = PROTECTOR_ITEM_ID;
+    subtype_id = PROTECTOR_ID;
 
     protection_orig = _protection_orig;
     protection_add  = 0;

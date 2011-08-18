@@ -28,7 +28,7 @@ RadarItem :: RadarItem(TextureOb* _pTo_itemTexOb, int _radius_orig, int _modules
     CommonForItems_init(_pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
 
     type_id = EQUIPMENT_ID;
-    subtype_id = RADAR_ITEM_ID;
+    subtype_id = RADAR_ID;
 
     radius_orig = _radius_orig;
     radius_add  = 0;

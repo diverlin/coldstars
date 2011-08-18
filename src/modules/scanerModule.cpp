@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 ScanerModule :: ScanerModule(TextureOb* _pTo_texOb)
 {
     CommonForModules_init(_pTo_texOb);
-    subtype_id = SCANER_MODULE_ID;
+    subtype_id = SCANER_ID;
 
     scan_add = 0;
 }

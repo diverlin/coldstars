@@ -27,7 +27,7 @@ ScanerItem :: ScanerItem(TextureOb* _pTo_itemTexOb, int _scan_orig, int _modules
     CommonForItems_init(_pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
 
     type_id = EQUIPMENT_ID;
-    subtype_id = SCANER_ITEM_ID;
+    subtype_id = SCANER_ID;
 
     scan_orig = _scan_orig;
     scan_add = 0;

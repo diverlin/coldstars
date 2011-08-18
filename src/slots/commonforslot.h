@@ -25,7 +25,7 @@ class CommonForSlot
 {
   public:
         int type_id;
-        int item_subtype_id;
+        int item_type_id, item_subtype_id;
 
         bool is_EQUIPED;  
         bool is_FLASHING;

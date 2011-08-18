@@ -121,11 +121,11 @@ int main()
 
     //// player
     pTo_PLAYER = new PlayerInstance();
-
     Ship* pTo_pship = world.pTo_ss_active->SHIP_pList[0];
 
-    equip(pTo_pship);
-    pTo_pship->drive_slot.pTo_driveItem->speed*=5;   // hack debug
+    equip(pTo_pship); // debug
+
+    pTo_pship->drive_slot.pTo_driveEquipment->speed*=5;   // hack debug
     pTo_pship->updateAllStuff(); 
 
     pTo_PLAYER->setShip(pTo_pship);

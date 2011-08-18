@@ -28,7 +28,7 @@ EnergizerItem :: EnergizerItem(TextureOb* _pTo_itemTexOb, int _energy_max_orig, 
     CommonForItems_init(_pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
 
     type_id = EQUIPMENT_ID;
-    subtype_id = ENERGIZER_ITEM_ID;
+    subtype_id = ENERGIZER_ID;
 
     energy_max_orig = _energy_max_orig;
     energy_max_add  = 0;
