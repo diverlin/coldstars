@@ -31,7 +31,7 @@ BakModule :: BakModule(TextureOb* _pTo_texOb)
 BakModule :: ~BakModule()
 {}
 
-void BakModule :: activation(BakItem* _pTo_bak_item)
+void BakModule :: activation(BakEquipment* _pTo_bak_item)
 {
     _pTo_bak_item->fuel_max_add += fuel_max_add;
     _pTo_bak_item->updatePropetries();

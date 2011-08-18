@@ -148,31 +148,31 @@ TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, VEC_int
     // ITEMS
     if (type_id == DRIVE_ITEM_TEXTURE_ID)
         { loadToVRAM();  // remove
-          driveItemArgManager(pTo_arg); }
+          DriveEquipmentArgManager(pTo_arg); }
 
     if (type_id == LAZER_ITEM_TEXTURE_ID)
         { loadToVRAM();  // remove
-          lazerItemArgManager(pTo_arg); }
+          LazerEquipmentArgManager(pTo_arg); }
 
     if ((type_id == ROCKET_ITEM_TEXTURE_ID) or (type_id == TORPED_ITEM_TEXTURE_ID))
         { loadToVRAM();  // remove
-          rocketItemArgManager(pTo_arg); }
+          RocketEquipmentArgManager(pTo_arg); }
 
     if (type_id == PROTECTOR_ITEM_TEXTURE_ID)
         { loadToVRAM();  // remove
-          protectorItemArgManager(pTo_arg); }
+          ProtectorEquipmentArgManager(pTo_arg); }
 
     if (type_id == DROID_ITEM_TEXTURE_ID)
         { loadToVRAM();  // remove
-          droidItemArgManager(pTo_arg); }
+          DroidEquipmentArgManager(pTo_arg); }
 
     if (type_id == GRAPPLE_ITEM_TEXTURE_ID)
         { loadToVRAM();  // remove
-          grappleItemArgManager(pTo_arg); }
+          GrappleEquipmentArgManager(pTo_arg); }
 
     if (type_id == BAK_ITEM_TEXTURE_ID)
        { loadToVRAM();  // remove
-         bakItemArgManager(pTo_arg); }
+         BakEquipmentArgManager(pTo_arg); }
 
     if (type_id == ENERGYBLOCK_ITEM_TEXTURE_ID)
        { loadToVRAM();  // remove
@@ -181,15 +181,15 @@ TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, VEC_int
 
     if (type_id == FREEZER_ITEM_TEXTURE_ID)
        { loadToVRAM();  // remove
-         freezerItemArgManager(pTo_arg); }
+         FreezerEquipmentArgManager(pTo_arg); }
 
     if (type_id == RADAR_ITEM_TEXTURE_ID)
        { loadToVRAM();  // remove
-         radarItemArgManager(pTo_arg); }
+         RadarEquipmentArgManager(pTo_arg); }
 
     if (type_id == SCANER_ITEM_TEXTURE_ID)
        { loadToVRAM();  // remove
-         scanerItemArgManager(pTo_arg); }
+         ScanerEquipmentArgManager(pTo_arg); }
 
     //# BULLETS
     if (type_id == ROCKET_BULLET_TEXTURE_ID)
@@ -427,45 +427,45 @@ void TextureOb :: faceArgManager(VEC_int_type* _pTo_arg)
 
 
 // ITEMS
-void TextureOb :: driveItemArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: DriveEquipmentArgManager(VEC_int_type* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
 }
 
-void TextureOb :: lazerItemArgManager(VEC_int_type* _pTo_arg)
-{
-   race_id       = (*_pTo_arg)[0];
-   tech_level_id = (*_pTo_arg)[1];
-   color_id      = (*_pTo_arg)[2];
-}
-
-void TextureOb :: rocketItemArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: LazerEquipmentArgManager(VEC_int_type* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
    color_id      = (*_pTo_arg)[2];
 }
 
-void TextureOb :: protectorItemArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: RocketEquipmentArgManager(VEC_int_type* _pTo_arg)
+{
+   race_id       = (*_pTo_arg)[0];
+   tech_level_id = (*_pTo_arg)[1];
+   color_id      = (*_pTo_arg)[2];
+}
+
+void TextureOb :: ProtectorEquipmentArgManager(VEC_int_type* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
 }
 
-void TextureOb :: droidItemArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: DroidEquipmentArgManager(VEC_int_type* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
 }
 
-void TextureOb :: grappleItemArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: GrappleEquipmentArgManager(VEC_int_type* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
 }
 
-void TextureOb :: bakItemArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: BakEquipmentArgManager(VEC_int_type* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
@@ -477,19 +477,19 @@ void TextureOb :: energyBlockItemArgManager(VEC_int_type* _pTo_arg)
    tech_level_id = (*_pTo_arg)[1];
 }
 
-void TextureOb :: freezerItemArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: FreezerEquipmentArgManager(VEC_int_type* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
 }
 
-void TextureOb :: radarItemArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: RadarEquipmentArgManager(VEC_int_type* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
 }
 
-void TextureOb :: scanerItemArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: ScanerEquipmentArgManager(VEC_int_type* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
@@ -714,37 +714,37 @@ void TextureManager :: manage(TextureOb* pTo_texOb)
 void TextureManager :: manageItem(TextureOb* pTo_texOb)
 {
     if (pTo_texOb->type_id == ROCKET_ITEM_TEXTURE_ID)
-     { rocketItem_texOb_pList.push_back(pTo_texOb); } 
+     { RocketEquipment_texOb_pList.push_back(pTo_texOb); } 
 
     if (pTo_texOb->type_id == LAZER_ITEM_TEXTURE_ID)
-     { lazerItem_texOb_pList.push_back(pTo_texOb); } 
+     { LazerEquipment_texOb_pList.push_back(pTo_texOb); } 
 
     if (pTo_texOb->type_id == DRIVE_ITEM_TEXTURE_ID)
-       driveItem_texOb_pList.push_back(pTo_texOb); 
+       DriveEquipment_texOb_pList.push_back(pTo_texOb); 
 
     if (pTo_texOb->type_id == PROTECTOR_ITEM_TEXTURE_ID)
-       protectorItem_texOb_pList.push_back(pTo_texOb); 
+       ProtectorEquipment_texOb_pList.push_back(pTo_texOb); 
 
     if (pTo_texOb->type_id == DROID_ITEM_TEXTURE_ID)
-       droidItem_texOb_pList.push_back(pTo_texOb); 
+       DroidEquipment_texOb_pList.push_back(pTo_texOb); 
 
     if (pTo_texOb->type_id == GRAPPLE_ITEM_TEXTURE_ID)
-       grappleItem_texOb_pList.push_back(pTo_texOb); 
+       GrappleEquipment_texOb_pList.push_back(pTo_texOb); 
 
     if (pTo_texOb->type_id == BAK_ITEM_TEXTURE_ID)
-       bakItem_texOb_pList.push_back(pTo_texOb); 
+       BakEquipment_texOb_pList.push_back(pTo_texOb); 
 
     if (pTo_texOb->type_id == ENERGYBLOCK_ITEM_TEXTURE_ID)
        energyBlockItem_texOb_pList.push_back(pTo_texOb); 
 
     if (pTo_texOb->type_id == FREEZER_ITEM_TEXTURE_ID)
-       freezerItem_texOb_pList.push_back(pTo_texOb); 
+       FreezerEquipment_texOb_pList.push_back(pTo_texOb); 
 
     if (pTo_texOb->type_id == RADAR_ITEM_TEXTURE_ID)
-       radarItem_texOb_pList.push_back(pTo_texOb); 
+       RadarEquipment_texOb_pList.push_back(pTo_texOb); 
 
     if (pTo_texOb->type_id == SCANER_ITEM_TEXTURE_ID)
-       scanerItem_texOb_pList.push_back(pTo_texOb); 
+       ScanerEquipment_texOb_pList.push_back(pTo_texOb); 
 }
 
 

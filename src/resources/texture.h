@@ -106,17 +106,17 @@ class TextureOb
         void faceArgManager(VEC_int_type* pTo_arg); 
 
         // ITEMS
-        void driveItemArgManager(VEC_int_type* pTo_arg); 
-        void lazerItemArgManager(VEC_int_type* pTo_arg); 
-        void rocketItemArgManager(VEC_int_type* pTo_arg); 
-        void protectorItemArgManager(VEC_int_type* pTo_arg); 
-        void droidItemArgManager(VEC_int_type* pTo_arg);
-        void grappleItemArgManager(VEC_int_type* pTo_arg); 
-        void bakItemArgManager(VEC_int_type* pTo_arg); 
+        void DriveEquipmentArgManager(VEC_int_type* pTo_arg); 
+        void LazerEquipmentArgManager(VEC_int_type* pTo_arg); 
+        void RocketEquipmentArgManager(VEC_int_type* pTo_arg); 
+        void ProtectorEquipmentArgManager(VEC_int_type* pTo_arg); 
+        void DroidEquipmentArgManager(VEC_int_type* pTo_arg);
+        void GrappleEquipmentArgManager(VEC_int_type* pTo_arg); 
+        void BakEquipmentArgManager(VEC_int_type* pTo_arg); 
         void energyBlockItemArgManager(VEC_int_type* pTo_arg); 
-        void freezerItemArgManager(VEC_int_type* pTo_arg); 
-        void radarItemArgManager(VEC_int_type* pTo_arg); 
-        void scanerItemArgManager(VEC_int_type* pTo_arg); 
+        void FreezerEquipmentArgManager(VEC_int_type* pTo_arg); 
+        void RadarEquipmentArgManager(VEC_int_type* pTo_arg); 
+        void ScanerEquipmentArgManager(VEC_int_type* pTo_arg); 
 
          //# BULLETS
         void rocketBulletArgManager(VEC_int_type* pTo_arg); 
@@ -223,17 +223,17 @@ class TextureManager
 
 
         // ITEMS
-        VEC_pTexOb_type lazerItem_texOb_pList;
-        VEC_pTexOb_type rocketItem_texOb_pList;
-        VEC_pTexOb_type driveItem_texOb_pList;
-        VEC_pTexOb_type protectorItem_texOb_pList;
-        VEC_pTexOb_type droidItem_texOb_pList;
-        VEC_pTexOb_type grappleItem_texOb_pList;
-        VEC_pTexOb_type bakItem_texOb_pList;
+        VEC_pTexOb_type LazerEquipment_texOb_pList;
+        VEC_pTexOb_type RocketEquipment_texOb_pList;
+        VEC_pTexOb_type DriveEquipment_texOb_pList;
+        VEC_pTexOb_type ProtectorEquipment_texOb_pList;
+        VEC_pTexOb_type DroidEquipment_texOb_pList;
+        VEC_pTexOb_type GrappleEquipment_texOb_pList;
+        VEC_pTexOb_type BakEquipment_texOb_pList;
         VEC_pTexOb_type energyBlockItem_texOb_pList;
-        VEC_pTexOb_type freezerItem_texOb_pList;
-        VEC_pTexOb_type radarItem_texOb_pList;
-        VEC_pTexOb_type scanerItem_texOb_pList;
+        VEC_pTexOb_type FreezerEquipment_texOb_pList;
+        VEC_pTexOb_type RadarEquipment_texOb_pList;
+        VEC_pTexOb_type ScanerEquipment_texOb_pList;
 
         // FACE
         VEC_pTexOb_type face_race0_texOb_pList;

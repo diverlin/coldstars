@@ -34,7 +34,7 @@ class FreezerModule : public CommonForModules
       FreezerModule(TextureOb* _pTo_texOb);
       ~FreezerModule();
 
-      void activation(FreezerItem* _pTo_freezer_item);
+      void activation(FreezerEquipment* _pTo_freezer_item);
       void updateInfo();
 };
 

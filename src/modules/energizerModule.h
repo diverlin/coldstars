@@ -38,7 +38,7 @@ class EnergizerModule : public CommonForModules
       EnergizerModule(TextureOb* pTo_texOb);
       ~EnergizerModule();
 
-      void activation(EnergizerItem* pTo_energizer_item);
+      void activation(EnergizerEquipment* pTo_energizer_item);
       void updateInfo();
 };
 

@@ -30,7 +30,7 @@ RadarModule :: RadarModule(TextureOb* _pTo_texOb)
 RadarModule :: ~RadarModule()
 {}
 
-void RadarModule :: activation(RadarItem* _pTo_radar_item)
+void RadarModule :: activation(RadarEquipment* _pTo_radar_item)
 {
      _pTo_radar_item->radius_add += radius_add;
      _pTo_radar_item->updatePropetries();

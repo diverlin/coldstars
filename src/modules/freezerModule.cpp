@@ -27,7 +27,7 @@ FreezerModule :: FreezerModule(TextureOb* _pTo_texOb)
      freeze_add = 0;
 }
 
-void FreezerModule :: activation(FreezerItem* _pTo_freezer_item)
+void FreezerModule :: activation(FreezerEquipment* _pTo_freezer_item)
 {
      _pTo_freezer_item->freeze_add += freeze_add;
      _pTo_freezer_item->updatePropetries();

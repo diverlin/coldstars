@@ -35,7 +35,7 @@ class ProtectorModule : public CommonForModules
        ProtectorModule(TextureOb* _pTo_texOb);
        ~ProtectorModule();
 
-       void activation(ProtectorItem* _pTo_protector_item);
+       void activation(ProtectorEquipment* _pTo_protector_item);
        void updateInfo();
 };
 

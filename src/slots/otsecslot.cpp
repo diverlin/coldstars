@@ -29,7 +29,7 @@ OtsecSlot :: OtsecSlot(int _type_id, Ship* _pTo_ship, TextureOb* _pTo_texOb, int
 	type_id = _type_id;
 }
 
-bool OtsecSlot :: insertItem(RocketItem* pTo_item)
+bool OtsecSlot :: insertItem(RocketEquipment* pTo_item)
 {
 	pTo_rocketEquipment = pTo_item;
     
@@ -46,7 +46,7 @@ bool OtsecSlot :: insertItem(RocketItem* pTo_item)
 	return true;
 }
 
-bool OtsecSlot :: insertItem(LazerItem* pTo_item)
+bool OtsecSlot :: insertItem(LazerEquipment* pTo_item)
 {
 	pTo_lazerEquipment = pTo_item;
     
@@ -63,7 +63,7 @@ bool OtsecSlot :: insertItem(LazerItem* pTo_item)
 	return true;
 }
 
-bool OtsecSlot :: insertItem(RadarItem* pTo_item)
+bool OtsecSlot :: insertItem(RadarEquipment* pTo_item)
 {
 	pTo_radarEquipment = pTo_item;
     
@@ -80,7 +80,7 @@ bool OtsecSlot :: insertItem(RadarItem* pTo_item)
     	return true;
 }
 
-bool OtsecSlot :: insertItem(DriveItem* pTo_item)
+bool OtsecSlot :: insertItem(DriveEquipment* pTo_item)
 {
 	pTo_driveEquipment = pTo_item;
    
@@ -98,9 +98,9 @@ bool OtsecSlot :: insertItem(DriveItem* pTo_item)
 	return true;
 }
 
-bool OtsecSlot :: insertItem(BakItem* pTo_item)
+bool OtsecSlot :: insertItem(BakEquipment* pTo_item)
 {
-	pTo_bakItem = pTo_item;
+	pTo_bakEquipment = pTo_item;
     
 	item_type_id    = pTo_item->type_id;
 	item_subtype_id = pTo_item->subtype_id;
@@ -116,9 +116,9 @@ bool OtsecSlot :: insertItem(BakItem* pTo_item)
 	return true;
 }
 
-bool OtsecSlot :: insertItem(EnergizerItem* pTo_item)
+bool OtsecSlot :: insertItem(EnergizerEquipment* pTo_item)
 {
-	pTo_energizerItem = pTo_item;
+	pTo_energizerEquipment = pTo_item;
     
 	item_type_id    = pTo_item->type_id;
 	item_subtype_id = pTo_item->subtype_id;
@@ -133,9 +133,9 @@ bool OtsecSlot :: insertItem(EnergizerItem* pTo_item)
 	return true;
 }
 
-bool OtsecSlot :: insertItem(ProtectorItem* pTo_item)
+bool OtsecSlot :: insertItem(ProtectorEquipment* pTo_item)
 {
-	pTo_protectorItem = pTo_item;
+	pTo_protectorEquipment = pTo_item;
     
 	item_type_id    = pTo_item->type_id;
 	item_subtype_id = pTo_item->subtype_id;
@@ -150,9 +150,9 @@ bool OtsecSlot :: insertItem(ProtectorItem* pTo_item)
 	return true;
 }
 
-bool OtsecSlot :: insertItem(DroidItem* pTo_item)
+bool OtsecSlot :: insertItem(DroidEquipment* pTo_item)
 {
-	pTo_droidItem = pTo_item;
+	pTo_droidEquipment = pTo_item;
 
 	item_type_id    = pTo_item->type_id;
 	item_subtype_id = pTo_item->subtype_id;
@@ -167,9 +167,9 @@ bool OtsecSlot :: insertItem(DroidItem* pTo_item)
 	return true;
 }
 
-bool OtsecSlot :: insertItem(FreezerItem* pTo_item)
+bool OtsecSlot :: insertItem(FreezerEquipment* pTo_item)
 {
-	pTo_freezerItem = pTo_item;
+	pTo_freezerEquipment = pTo_item;
 
 	item_type_id    = pTo_item->type_id;
 	item_subtype_id = pTo_item->subtype_id;
@@ -184,9 +184,9 @@ bool OtsecSlot :: insertItem(FreezerItem* pTo_item)
 	return true;
 }
 
-bool OtsecSlot :: insertItem(ScanerItem* pTo_item)
+bool OtsecSlot :: insertItem(ScanerEquipment* pTo_item)
 {
-	pTo_scanerItem = pTo_item;
+	pTo_scanerEquipment = pTo_item;
 
 	item_type_id    = pTo_item->type_id;
 	item_subtype_id = pTo_item->subtype_id;
@@ -201,9 +201,9 @@ bool OtsecSlot :: insertItem(ScanerItem* pTo_item)
 	return true;
 }
 
-bool OtsecSlot :: insertItem(GrappleItem* pTo_item)
+bool OtsecSlot :: insertItem(GrappleEquipment* pTo_item)
 {
-	pTo_grappleItem = pTo_item;
+	pTo_grappleEquipment = pTo_item;
 
 	item_type_id    = pTo_item->type_id;
 	item_subtype_id = pTo_item->subtype_id;
@@ -476,7 +476,7 @@ void OtsecSlot :: removeItem()
 
         	if (item_subtype_id == BAK_ID)
 		{
-    			pTo_bakItem = NULL;
+    			pTo_bakEquipment = NULL;
     			if (type_id != OTSEC_SLOT_ID)
     			{ 
     				pTo_ship->updateDriveAbility();
@@ -486,28 +486,28 @@ void OtsecSlot :: removeItem()
 
         	if (item_subtype_id == ENERGIZER_ID)
 		{
-    			pTo_energizerItem = NULL;
+    			pTo_energizerEquipment = NULL;
     			if (type_id != OTSEC_SLOT_ID)
     				pTo_ship->updateEnergyAbility();
     		}
 
         	if (item_subtype_id == PROTECTOR_ID)
 		{
-    			pTo_protectorItem = NULL;
+    			pTo_protectorEquipment = NULL;
     			if (type_id != OTSEC_SLOT_ID)
     				pTo_ship->updateProtectionAbility();
     		}
     	
         	if (item_subtype_id == DROID_ID)
 		{
-    			pTo_droidItem = NULL;
+    			pTo_droidEquipment = NULL;
     			if (type_id != OTSEC_SLOT_ID)
     				pTo_ship->updateRepairAbility();
     		}
 
         	if (item_subtype_id == FREEZER_ID)
 		{
-    			pTo_freezerItem = NULL;
+    			pTo_freezerEquipment = NULL;
     			if (type_id != OTSEC_SLOT_ID)
     				pTo_ship->updateFreezeAbility();
     		}
@@ -515,14 +515,14 @@ void OtsecSlot :: removeItem()
 
  	       if (item_subtype_id == SCANER_ID)
 		{
-    			pTo_scanerItem = NULL;
+    			pTo_scanerEquipment = NULL;
     			if (type_id != OTSEC_SLOT_ID)
     				pTo_ship->updateScanAbility();
     		}
     	
         	if (item_subtype_id == GRAPPLE_ID)
 		{
-    			pTo_grappleItem = NULL;
+    			pTo_grappleEquipment = NULL;
     			if (type_id != OTSEC_SLOT_ID)
     				pTo_ship->updateGrabAbility();
     		}
@@ -601,23 +601,23 @@ int OtsecSlot :: getItemMass()
 		if (item_subtype_id == ROCKET_ID)
 			return pTo_rocketEquipment->mass;
 		if (item_subtype_id == ENERGIZER_ID)
-			return pTo_energizerItem->mass;
+			return pTo_energizerEquipment->mass;
 		if (item_subtype_id == FREEZER_ID)
-			return pTo_freezerItem->mass;
+			return pTo_freezerEquipment->mass;
 		if (item_subtype_id == GRAPPLE_ID)
-			return pTo_grappleItem->mass;
+			return pTo_grappleEquipment->mass;
 		if (item_subtype_id == RADAR_ID)
 			return pTo_radarEquipment->mass;
 		if (item_subtype_id == DRIVE_ID)
 			return pTo_driveEquipment->mass;
 		if (item_subtype_id == PROTECTOR_ID)
-			return pTo_protectorItem->mass;
+			return pTo_protectorEquipment->mass;
 		if (item_subtype_id == BAK_ID)
-			return pTo_bakItem->mass;
+			return pTo_bakEquipment->mass;
 		if (item_subtype_id == DROID_ID)
-			return pTo_droidItem->mass;
+			return pTo_droidEquipment->mass;
 		if (item_subtype_id == SCANER_ID)
-			return pTo_scanerItem->mass;
+			return pTo_scanerEquipment->mass;
 	}
 	
 	if (item_type_id == MODULE_ID)
@@ -640,23 +640,23 @@ int OtsecSlot :: getItemPrice()
 		if (item_subtype_id == ROCKET_ID)
 			return pTo_rocketEquipment->price;
 		if (item_subtype_id == ENERGIZER_ID)
-			return pTo_energizerItem->price;
+			return pTo_energizerEquipment->price;
 		if (item_subtype_id == FREEZER_ID)
-			return pTo_freezerItem->price;
+			return pTo_freezerEquipment->price;
 		if (item_subtype_id == GRAPPLE_ID)
-			return pTo_grappleItem->price;
+			return pTo_grappleEquipment->price;
 		if (item_subtype_id == RADAR_ID)
 			return pTo_radarEquipment->price;
 		if (item_subtype_id == DRIVE_ID)
 			return pTo_driveEquipment->price;
 		if (item_subtype_id == PROTECTOR_ID)
-			return pTo_protectorItem->price;
+			return pTo_protectorEquipment->price;
 		if (item_subtype_id == BAK_ID)
-			return pTo_bakItem->price;
+			return pTo_bakEquipment->price;
 		if (item_subtype_id == DROID_ID)
-			return pTo_droidItem->price;
+			return pTo_droidEquipment->price;
 		if (item_subtype_id == SCANER_ID)
-			return pTo_scanerItem->price;
+			return pTo_scanerEquipment->price;
 	}
 }
 
@@ -687,19 +687,19 @@ void OtsecSlot :: renderEquipedItem()
 			if (item_subtype_id == DRIVE_ID)
 				pTo_driveEquipment->render(rect);
 			if (item_subtype_id == BAK_ID)
-				pTo_bakItem->render(rect);
+				pTo_bakEquipment->render(rect);
 			if (item_subtype_id == ENERGIZER_ID)
-				pTo_energizerItem->render(rect);
+				pTo_energizerEquipment->render(rect);
 			if (item_subtype_id == PROTECTOR_ID)
-          			pTo_protectorItem->render(rect);   
+          			pTo_protectorEquipment->render(rect);   
 			if (item_subtype_id == DROID_ID)
-				pTo_droidItem->render(rect);
+				pTo_droidEquipment->render(rect);
 			if (item_subtype_id == FREEZER_ID)
-				pTo_freezerItem->render(rect);
+				pTo_freezerEquipment->render(rect);
 			if (item_subtype_id == SCANER_ID)
-				pTo_scanerItem->render(rect);
+				pTo_scanerEquipment->render(rect);
 			if (item_subtype_id == GRAPPLE_ID)
-				pTo_grappleItem->render(rect);
+				pTo_grappleEquipment->render(rect);
     		}
     		
     		if (item_type_id == MODULE_ID)
@@ -763,19 +763,19 @@ void OtsecSlot :: renderItemInfo()
 			if (item_subtype_id == DRIVE_ID)
 				pTo_driveEquipment->renderInfo(rect);
 			if (item_subtype_id == BAK_ID)
-				pTo_bakItem->renderInfo(rect);
+				pTo_bakEquipment->renderInfo(rect);
 			if (item_subtype_id == ENERGIZER_ID)
-				pTo_energizerItem->renderInfo(rect);
+				pTo_energizerEquipment->renderInfo(rect);
 			if (item_subtype_id == PROTECTOR_ID)
-				pTo_protectorItem->renderInfo(rect);   
+				pTo_protectorEquipment->renderInfo(rect);   
 			if (item_subtype_id == DROID_ID)
-				pTo_droidItem->renderInfo(rect);
+				pTo_droidEquipment->renderInfo(rect);
 			if (item_subtype_id == FREEZER_ID)
-				pTo_freezerItem->renderInfo(rect);
+				pTo_freezerEquipment->renderInfo(rect);
 			if (item_subtype_id == SCANER_ID)
-				pTo_scanerItem->renderInfo(rect);
+				pTo_scanerEquipment->renderInfo(rect);
 			if (item_subtype_id == GRAPPLE_ID)
-				pTo_grappleItem->renderInfo(rect);
+				pTo_grappleEquipment->renderInfo(rect);
      		}
      		
      		if (item_type_id == MODULE_ID)

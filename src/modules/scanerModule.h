@@ -34,7 +34,7 @@ class ScanerModule : public CommonForModules
        ScanerModule(TextureOb* _pTo_texOb);
        ~ScanerModule();
 
-       void activation(ScanerItem* _pTo_scaner_item);
+       void activation(ScanerEquipment* _pTo_scaner_item);
        void updateInfo();
 };
 

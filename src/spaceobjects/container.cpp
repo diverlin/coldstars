@@ -33,13 +33,13 @@ Container :: Container(StarSystem* _pTo_starsystem, TextureOb* _pTo_texOb, float
     pTo_lazerEquipment       = NULL;
     pTo_radarEquipment       = NULL;
     pTo_driveEquipment       = NULL;
-    pTo_bakItem         = NULL;
-    pTo_energizerItem   = NULL;
-    pTo_protectorItem   = NULL;
-    pTo_droidItem       = NULL;
-    pTo_freezerItem     = NULL;
-    pTo_scanerItem      = NULL;
-    pTo_grappleItem     = NULL;
+    pTo_bakEquipment         = NULL;
+    pTo_energizerEquipment   = NULL;
+    pTo_protectorEquipment   = NULL;
+    pTo_droidEquipment       = NULL;
+    pTo_freezerEquipment     = NULL;
+    pTo_scanerEquipment      = NULL;
+    pTo_grappleEquipment     = NULL;
 
     
     armor = randIntInRange(1,6);
@@ -55,7 +55,7 @@ Container :: ~Container()
 {}
 
 
-void Container :: packRocketItem(RocketItem* pTo_item)
+void Container :: packRocketEquipment(RocketEquipment* pTo_item)
 {
     pTo_rocketEquipment = pTo_item;
     
@@ -68,7 +68,7 @@ void Container :: packRocketItem(RocketItem* pTo_item)
     info_value_pList = pTo_item->info_value_pList;
 }
 
-void Container :: packLazerItem(LazerItem* pTo_item)
+void Container :: packLazerEquipment(LazerEquipment* pTo_item)
 {
     pTo_lazerEquipment = pTo_item;
     
@@ -81,7 +81,7 @@ void Container :: packLazerItem(LazerItem* pTo_item)
     info_value_pList = pTo_item->info_value_pList;
 }
 
-void Container :: packRadarItem(RadarItem* pTo_item)
+void Container :: packRadarEquipment(RadarEquipment* pTo_item)
 {
     pTo_radarEquipment = pTo_item;
     
@@ -94,7 +94,7 @@ void Container :: packRadarItem(RadarItem* pTo_item)
     info_value_pList = pTo_item->info_value_pList;
 }
 
-void Container :: packDriveItem(DriveItem* pTo_item)
+void Container :: packDriveEquipment(DriveEquipment* pTo_item)
 {
     pTo_driveEquipment = pTo_item;
     
@@ -107,9 +107,9 @@ void Container :: packDriveItem(DriveItem* pTo_item)
     info_value_pList = pTo_item->info_value_pList; 
 }
 
-void Container :: packBakItem(BakItem* pTo_item)
+void Container :: packBakEquipment(BakEquipment* pTo_item)
 {
-    pTo_bakItem = pTo_item;
+    pTo_bakEquipment = pTo_item;
     
     item_subtype_id = pTo_item->subtype_id;    
     item_id         = pTo_item->id;    
@@ -120,9 +120,9 @@ void Container :: packBakItem(BakItem* pTo_item)
     info_value_pList = pTo_item->info_value_pList;
 }
 
-void Container :: packEnergizerItem(EnergizerItem* pTo_item)
+void Container :: packEnergizerEquipment(EnergizerEquipment* pTo_item)
 {
-    pTo_energizerItem = pTo_item;
+    pTo_energizerEquipment = pTo_item;
     
     item_subtype_id = pTo_item->subtype_id;   
     item_id         = pTo_item->id;    
@@ -133,9 +133,9 @@ void Container :: packEnergizerItem(EnergizerItem* pTo_item)
     info_value_pList = pTo_item->info_value_pList;
 }
 
-void Container :: packProtectorItem(ProtectorItem* pTo_item)
+void Container :: packProtectorEquipment(ProtectorEquipment* pTo_item)
 {
-    pTo_protectorItem = pTo_item;
+    pTo_protectorEquipment = pTo_item;
     
     item_subtype_id = pTo_item->subtype_id;   
     item_id         = pTo_item->id;    
@@ -146,9 +146,9 @@ void Container :: packProtectorItem(ProtectorItem* pTo_item)
     info_value_pList = pTo_item->info_value_pList;
 }
 
-void Container :: packDroidItem(DroidItem* pTo_item)
+void Container :: packDroidEquipment(DroidEquipment* pTo_item)
 {
-    pTo_droidItem = pTo_item;
+    pTo_droidEquipment = pTo_item;
     
     item_subtype_id = pTo_item->subtype_id; 
     item_id         = pTo_item->id;    
@@ -159,9 +159,9 @@ void Container :: packDroidItem(DroidItem* pTo_item)
     info_value_pList = pTo_item->info_value_pList;
 }
 
-void Container :: packFreezerItem(FreezerItem* pTo_item)
+void Container :: packFreezerEquipment(FreezerEquipment* pTo_item)
 {
-    pTo_freezerItem = pTo_item;
+    pTo_freezerEquipment = pTo_item;
     
     item_subtype_id = pTo_item->subtype_id;    
     item_id         = pTo_item->id;    
@@ -172,9 +172,9 @@ void Container :: packFreezerItem(FreezerItem* pTo_item)
     info_value_pList = pTo_item->info_value_pList;   
 }
 
-void Container :: packScanerItem(ScanerItem* pTo_item)
+void Container :: packScanerEquipment(ScanerEquipment* pTo_item)
 {
-    pTo_scanerItem = pTo_item;
+    pTo_scanerEquipment = pTo_item;
     
     item_subtype_id = pTo_item->subtype_id;   
     item_id         = pTo_item->id;    
@@ -185,9 +185,9 @@ void Container :: packScanerItem(ScanerItem* pTo_item)
     info_value_pList = pTo_item->info_value_pList;
 }
 
-void Container :: packGrappleItem(GrappleItem* pTo_item)
+void Container :: packGrappleEquipment(GrappleEquipment* pTo_item)
 {
-    pTo_grappleItem = pTo_item;
+    pTo_grappleEquipment = pTo_item;
     
     item_subtype_id = pTo_item->subtype_id;    // GRAPPLE_ID
     item_id         = pTo_item->id;    

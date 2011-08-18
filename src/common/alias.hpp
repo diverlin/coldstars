@@ -62,17 +62,17 @@ class Store;
 
 
 
-class RocketItem;
-class LazerItem;
-class RadarItem;
-class DriveItem;
-class BakItem;
-class EnergizerItem;
-class ProtectorItem;
-class DroidItem;
-class FreezerItem;
-class ScanerItem;
-class GrappleItem;
+class RocketEquipment;
+class LazerEquipment;
+class RadarEquipment;
+class DriveEquipment;
+class BakEquipment;
+class EnergizerEquipment;
+class ProtectorEquipment;
+class DroidEquipment;
+class FreezerEquipment;
+class ScanerEquipment;
+class GrappleEquipment;
 
 class RocketModule;    typedef std::vector<RocketModule*>    VEC_pRocketModule_type;
 class LazerModule;     typedef std::vector<LazerModule*>     VEC_pLazerModule_type;
@@ -90,7 +90,7 @@ class GrappleModule;   typedef std::vector<GrappleModule*>   VEC_pGrappleModule_
 class WeaponSlot;
 class RadarSlot;
 class DriveSlot;
-class BakItem;
+class BakEquipment;
 class EnergyBlockSlot;
 class ProtectorSlot;
 class DroidSlot;

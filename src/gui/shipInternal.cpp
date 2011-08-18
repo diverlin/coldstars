@@ -383,13 +383,13 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                         if (pTo_ship->weapon_slot_pList[i]->item_subtype_id == LAZER_ID)
                         {
                             pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->weapon_slot_pList[i]->pTo_lazerEquipment);
-                            pTo_ship->weapon_slot_pList[i]->removeLazerItem();
+                            pTo_ship->weapon_slot_pList[i]->removeLazerEquipment();
                         }
 
                         if (pTo_ship->weapon_slot_pList[i]->item_subtype_id == ROCKET_ID)
                         {
                             pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->weapon_slot_pList[i]->pTo_rocketEquipment);
-                            pTo_ship->weapon_slot_pList[i]->removeRocketItem();
+                            pTo_ship->weapon_slot_pList[i]->removeRocketEquipment();
                         } 
                     }
                     else  
@@ -434,12 +434,12 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                     {   // insert item 
                         if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == LAZER_ID)
                         {
-                            pTo_ship->weapon_slot_pList[i]->insertLazerItem(pTo_CURSOR->pTo_otsec_slot->pTo_lazerEquipment);
+                            pTo_ship->weapon_slot_pList[i]->insertLazerEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_lazerEquipment);
                             pTo_CURSOR->pTo_otsec_slot->removeItem();
                         }
                         if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ROCKET_ID)
                         {
-                            pTo_ship->weapon_slot_pList[i]->insertRocketItem(pTo_CURSOR->pTo_otsec_slot->pTo_rocketEquipment);
+                            pTo_ship->weapon_slot_pList[i]->insertRocketEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_rocketEquipment);
                             pTo_CURSOR->pTo_otsec_slot->removeItem();
                         }                     
                     } 
@@ -529,7 +529,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                     //{   // take item 
                         //if (pTo_ship->bak_slot.item_subtype_id == BAK_ITEM_ID)
                         //{   
-                            //pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->bak_slot.pTo_bakItem);
+                            //pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->bak_slot.pTo_bakEquipment);
                             //pTo_ship->bak_slot.removeItem();
                         //}
                     //}    
@@ -539,7 +539,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                         //{   
                             //if (pTo_ship->bak_slot.item_subtype_id == BAK_ITEM_ID)
                             //{
-                                //if (pTo_ship->bak_slot.pTo_bakItem->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_bakModule) == true)
+                                //if (pTo_ship->bak_slot.pTo_bakEquipment->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_bakModule) == true)
                                 //{
                                     //pTo_CURSOR->pTo_otsec_slot->removeItem();
                                 //}    
@@ -564,7 +564,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                     //{   // insert item
                         //if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == BAK_ITEM_ID)
                         //{   
-                            //pTo_ship->bak_slot.insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_bakItem);
+                            //pTo_ship->bak_slot.insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_bakEquipment);
                             //pTo_CURSOR->pTo_otsec_slot->removeItem();
                         //}
                     //} 
@@ -651,7 +651,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                     //{   // take item
                         //if (pTo_ship->scaner_slot.item_subtype_id == SCANER_ITEM_ID)
                         //{
-                            //pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->scaner_slot.pTo_scanerItem);
+                            //pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->scaner_slot.pTo_scanerEquipment);
                             //pTo_ship->scaner_slot.removeItem();
                         //}
                     //}
@@ -661,7 +661,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                         //{   
                             //if (pTo_ship->scaner_slot.item_subtype_id == SCANER_ITEM_ID)
                             //{
-                                //if (pTo_ship->scaner_slot.pTo_scanerItem->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_scanerModule) == true)
+                                //if (pTo_ship->scaner_slot.pTo_scanerEquipment->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_scanerModule) == true)
                                 //{
                                     //pTo_CURSOR->pTo_otsec_slot->removeItem();
                                 //}    
@@ -683,7 +683,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                     //{   // insert item
                         //if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == SCANER_ITEM_ID)
                         //{
-                           //pTo_ship->scaner_slot.insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_scanerItem);
+                           //pTo_ship->scaner_slot.insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_scanerEquipment);
                            //pTo_CURSOR->pTo_otsec_slot->removeItem();
                         //}
                     //}
@@ -712,7 +712,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                     //{   // take item
                         //if (pTo_ship->energizer_slot.item_subtype_id == ENERGIZER_ITEM_ID)
                         //{
-                            //pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->energizer_slot.pTo_energizerItem);
+                            //pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->energizer_slot.pTo_energizerEquipment);
                             //pTo_ship->energizer_slot.removeItem();
                         //}
                     //}
@@ -722,7 +722,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                         //{   
                             //if (pTo_ship->energizer_slot.item_subtype_id == ENERGIZER_ITEM_ID)
                             //{
-                                //if (pTo_ship->energizer_slot.pTo_energizerItem->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_energizerModule) == true)
+                                //if (pTo_ship->energizer_slot.pTo_energizerEquipment->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_energizerModule) == true)
                                 //{
                                     //pTo_CURSOR->pTo_otsec_slot->removeItem();
                                 //}    
@@ -746,7 +746,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                     //{   // insert item
                         //if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ENERGIZER_ITEM_ID)
                         //{
-                            //pTo_ship->energizer_slot.insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_energizerItem);
+                            //pTo_ship->energizer_slot.insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_energizerEquipment);
                             //pTo_CURSOR->pTo_otsec_slot->removeItem();
                         //}
                     //}
@@ -776,7 +776,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                         //{   // take item
                             //if (pTo_ship->grapple_slot.item_subtype_id == GRAPPLE_ITEM_ID)
                             //{
-                                //pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->grapple_slot.pTo_grappleItem);
+                                //pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->grapple_slot.pTo_grappleEquipment);
                                 //pTo_ship->grapple_slot.removeItem();
                             //}
                         //}
@@ -786,7 +786,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                             //{   
                                 //if (pTo_ship->grapple_slot.item_subtype_id == GRAPPLE_ITEM_ID)
                                 //{
-                                    //if (pTo_ship->grapple_slot.pTo_grappleItem->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_grappleModule) == true)
+                                    //if (pTo_ship->grapple_slot.pTo_grappleEquipment->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_grappleModule) == true)
                                     //{
                                         //pTo_CURSOR->pTo_otsec_slot->removeItem();
                                     //}    
@@ -810,7 +810,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                         //{   // insert item
                             //if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == GRAPPLE_ITEM_ID)
                             //{
-                                //pTo_ship->grapple_slot.insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_grappleItem);
+                                //pTo_ship->grapple_slot.insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_grappleEquipment);
                                 //pTo_CURSOR->pTo_otsec_slot->removeItem();
                             //}
                         //}
@@ -840,7 +840,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                     //{   // take item
                         //if (pTo_ship->protector_slot.item_subtype_id == PROTECTOR_ITEM_ID)
                         //{
-                            //pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->protector_slot.pTo_protectorItem);
+                            //pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->protector_slot.pTo_protectorEquipment);
                             //pTo_ship->protector_slot.removeItem();
                         //}
                     //}
@@ -850,7 +850,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                         //{   
                             //if (pTo_ship->protector_slot.item_subtype_id == PROTECTOR_ITEM_ID)
                             //{
-                                //if (pTo_ship->protector_slot.pTo_protectorItem->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_protectorModule) == true)
+                                //if (pTo_ship->protector_slot.pTo_protectorEquipment->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_protectorModule) == true)
                                 //{
                                     //pTo_CURSOR->pTo_otsec_slot->removeItem();
                                 //}    
@@ -874,7 +874,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                     //{
                         //if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == PROTECTOR_ITEM_ID)
                         //{
-                            //pTo_ship->protector_slot.insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_protectorItem);
+                            //pTo_ship->protector_slot.insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_protectorEquipment);
                             //pTo_CURSOR->pTo_otsec_slot->removeItem();
                         //}
                     //} 
@@ -902,7 +902,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                     //{   // take item
                         //if (pTo_ship->droid_slot.item_subtype_id == DROID_ITEM_ID)
                         //{
-                            //pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->droid_slot.pTo_droidItem);
+                            //pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->droid_slot.pTo_droidEquipment);
                             //pTo_ship->droid_slot.removeItem();
                         //}
                     //}
@@ -912,7 +912,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                         //{   
                             //if (pTo_ship->droid_slot.item_subtype_id == DROID_ITEM_ID)
                             //{
-                                //if (pTo_ship->droid_slot.pTo_droidItem->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_droidModule) == true)
+                                //if (pTo_ship->droid_slot.pTo_droidEquipment->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_droidModule) == true)
                                 //{
                                     //pTo_CURSOR->pTo_otsec_slot->removeItem();
                                 //}    
@@ -937,7 +937,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                     //{
                         //if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == DROID_ITEM_ID)
                         //{
-                            //pTo_ship->droid_slot.insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_droidItem);
+                            //pTo_ship->droid_slot.insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_droidEquipment);
                             //pTo_CURSOR->pTo_otsec_slot->removeItem();
                         //}
                     //} 
@@ -965,7 +965,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                     //{   // take item
                         //if (pTo_ship->freezer_slot.item_subtype_id == FREEZER_ITEM_ID)
                         //{
-                            //pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->freezer_slot.pTo_freezerItem);
+                            //pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->freezer_slot.pTo_freezerEquipment);
                             //pTo_ship->freezer_slot.removeItem();
                         //}
                     //}
@@ -975,7 +975,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                         //{   
                             //if (pTo_ship->freezer_slot.item_subtype_id == FREEZER_ITEM_ID)
                             //{
-                                //if (pTo_ship->freezer_slot.pTo_freezerItem->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_freezerModule) == true)
+                                //if (pTo_ship->freezer_slot.pTo_freezerEquipment->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_freezerModule) == true)
                                 //{
                                     //pTo_CURSOR->pTo_otsec_slot->removeItem();
                                 //}    
@@ -999,7 +999,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                     //{   // insert item
                         //if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == FREEZER_ITEM_ID)
                         //{
-                            //pTo_ship->freezer_slot.insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_freezerItem);
+                            //pTo_ship->freezer_slot.insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_freezerEquipment);
                             //pTo_CURSOR->pTo_otsec_slot->removeItem();
                         //}
                     //}
@@ -1054,37 +1054,37 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
                         	}
                         	if (pTo_ship->total_slot_pList[i]->item_subtype_id == BAK_ID)
                         	{
-                            		if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_bakItem) == true)
+                            		if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_bakEquipment) == true)
                             			pTo_ship->total_slot_pList[i]->removeItem();
                         	}
                         	if (pTo_ship->total_slot_pList[i]->item_subtype_id == ENERGIZER_ID)
                         	{
-                            		if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_energizerItem) == true)
+                            		if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_energizerEquipment) == true)
                             			pTo_ship->total_slot_pList[i]->removeItem();
                         	}
                         	if (pTo_ship->total_slot_pList[i]->item_subtype_id == PROTECTOR_ID)
                         	{
-                            		if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_protectorItem) == true)
+                            		if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_protectorEquipment) == true)
                             			pTo_ship->total_slot_pList[i]->removeItem();
                         	}
                         	if (pTo_ship->total_slot_pList[i]->item_subtype_id == DROID_ID)
                         	{
-                            		if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_droidItem) == true)
+                            		if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_droidEquipment) == true)
                             			pTo_ship->total_slot_pList[i]->removeItem();
                         	}
                         	if (pTo_ship->total_slot_pList[i]->item_subtype_id == FREEZER_ID)
                         	{
-                            		if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_freezerItem) == true)
+                            		if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_freezerEquipment) == true)
                             			pTo_ship->total_slot_pList[i]->removeItem();
                         	}
                         	if (pTo_ship->total_slot_pList[i]->item_subtype_id == SCANER_ID)
                         	{
-                            		if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_scanerItem) == true)
+                            		if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_scanerEquipment) == true)
                             			pTo_ship->total_slot_pList[i]->removeItem();
                         	}
                         	if (pTo_ship->total_slot_pList[i]->item_subtype_id == GRAPPLE_ID)
                         	{
-                            		if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_grappleItem) == true)
+                            		if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_grappleEquipment) == true)
                             			pTo_ship->total_slot_pList[i]->removeItem();
                         	}
                      	}
@@ -1212,37 +1212,37 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
 							}
 							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == BAK_ID)
 							{
-								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_bakItem) == true)
+								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_bakEquipment) == true)
 								pTo_CURSOR->pTo_otsec_slot->removeItem();
 							}
 							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ENERGIZER_ID)
 							{
-								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_energizerItem) == true)
+								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_energizerEquipment) == true)
 									pTo_CURSOR->pTo_otsec_slot->removeItem();
 							}
 							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == PROTECTOR_ID)
 							{
-								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_protectorItem) == true)
+								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_protectorEquipment) == true)
 									pTo_CURSOR->pTo_otsec_slot->removeItem();
 							}
 							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == DROID_ID)
 							{
-								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_droidItem) == true)
+								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_droidEquipment) == true)
 									pTo_CURSOR->pTo_otsec_slot->removeItem();
 							}
 							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == FREEZER_ID)
 							{
-								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_freezerItem) == true)
+								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_freezerEquipment) == true)
 									pTo_CURSOR->pTo_otsec_slot->removeItem();
 							}
 							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == SCANER_ID)
 							{
-								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_scanerItem) == true)
+								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_scanerEquipment) == true)
 									pTo_CURSOR->pTo_otsec_slot->removeItem();
 							}
 							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == GRAPPLE_ID)
 							{
-								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_grappleItem) == true)
+								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_grappleEquipment) == true)
 									pTo_CURSOR->pTo_otsec_slot->removeItem();
 							}
 						}
@@ -1340,58 +1340,58 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
 
                   if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == LAZER_ID)
                   {     
-                      pTo_container->packLazerItem(pTo_CURSOR->pTo_otsec_slot->pTo_lazerEquipment); 
+                      pTo_container->packLazerEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_lazerEquipment); 
                       pTo_CURSOR->pTo_otsec_slot->removeItem();
                   }
                   if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ROCKET_ID)
                   {             
-                      pTo_container->packRocketItem(pTo_CURSOR->pTo_otsec_slot->pTo_rocketEquipment); 
+                      pTo_container->packRocketEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_rocketEquipment); 
                       pTo_CURSOR->pTo_otsec_slot->removeItem();  
                   }
 
                   if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == RADAR_ID)
                   {                      
-                      pTo_container->packRadarItem(pTo_CURSOR->pTo_otsec_slot->pTo_radarEquipment); 
+                      pTo_container->packRadarEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_radarEquipment); 
                       pTo_CURSOR->pTo_otsec_slot->removeItem();
                   }
                   if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == DRIVE_ID)
                   {               
-                      pTo_container->packDriveItem(pTo_CURSOR->pTo_otsec_slot->pTo_driveEquipment); 
+                      pTo_container->packDriveEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_driveEquipment); 
                       pTo_CURSOR->pTo_otsec_slot->removeItem(); 
                   }
                   if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == BAK_ID)
                   {                      
-                      pTo_container->packBakItem(pTo_CURSOR->pTo_otsec_slot->pTo_bakItem); 
+                      pTo_container->packBakEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_bakEquipment); 
                       pTo_CURSOR->pTo_otsec_slot->removeItem();
                   }
                   if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ENERGIZER_ID)
                   {       
-                      pTo_container->packEnergizerItem(pTo_CURSOR->pTo_otsec_slot->pTo_energizerItem); 
+                      pTo_container->packEnergizerEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_energizerEquipment); 
                       pTo_CURSOR->pTo_otsec_slot->removeItem();              
                   }
                   if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == PROTECTOR_ID)
                   {            
-                      pTo_container->packProtectorItem(pTo_CURSOR->pTo_otsec_slot->pTo_protectorItem); 
+                      pTo_container->packProtectorEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_protectorEquipment); 
                       pTo_CURSOR->pTo_otsec_slot->removeItem();         
                   }
                   if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == DROID_ID)
                   {          
-                      pTo_container->packDroidItem(pTo_CURSOR->pTo_otsec_slot->pTo_droidItem); 
+                      pTo_container->packDroidEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_droidEquipment); 
                       pTo_CURSOR->pTo_otsec_slot->removeItem();          
                   }
                   if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == FREEZER_ID)
                   {                  
-                      pTo_container->packFreezerItem(pTo_CURSOR->pTo_otsec_slot->pTo_freezerItem); 
+                      pTo_container->packFreezerEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_freezerEquipment); 
                       pTo_CURSOR->pTo_otsec_slot->removeItem();   
                   }
                   if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == SCANER_ID)
                   {      
-                      pTo_container->packScanerItem(pTo_CURSOR->pTo_otsec_slot->pTo_scanerItem); 
+                      pTo_container->packScanerEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_scanerEquipment); 
                       pTo_CURSOR->pTo_otsec_slot->removeItem();            
                   }
                   if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == GRAPPLE_ID)
                   {                     
-                      pTo_container->packGrappleItem(pTo_CURSOR->pTo_otsec_slot->pTo_grappleItem); 
+                      pTo_container->packGrappleEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_grappleEquipment); 
                       pTo_CURSOR->pTo_otsec_slot->removeItem();
                   }
               } 

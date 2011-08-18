@@ -38,7 +38,7 @@ class DriveModule : public CommonForModules
       DriveModule(TextureOb* _pTo_texOb);
       ~DriveModule();
 
-      void activation(DriveItem* _pTo_drive_item);
+      void activation(DriveEquipment* _pTo_drive_item);
       void updateInfo();
 };
 

@@ -57,18 +57,18 @@ class Store
         void initItemsGenerator();
 
         void addKorpusItem(Ship*     _pTo_ship);
-        void addLazerItem(LazerItem*         _pTo_lazerEquipment);
-        void addRocketItem(RocketItem*       _pTo_rocketEquipment);
+        void addLazerEquipment(LazerEquipment*         _pTo_lazerEquipment);
+        void addRocketEquipment(RocketEquipment*       _pTo_rocketEquipment);
         //void addTorpedItem(     int _race_id, int _revision_id);
-        void addRadarItem(RadarItem*         _pTo_radarEquipment);
-        void addGrappleItem(GrappleItem*     _pTo_grappleItem);
-        void addDriveItem(DriveItem*         _pTo_driveEquipment);
-        void addProtectorItem(ProtectorItem* _pTo_protectorItem);
-        void addBakItem(BakItem*             _pTo_bakItem);
-        void addDroidItem(DroidItem*         _pTo_droid);
-        void addScanerItem(ScanerItem*       _pTo_scaner);
-        void addFreezerItem(FreezerItem*     _pTo_freezer);
-        void addEnergizerItem(EnergizerItem* _pTo_energyBlockItem);
+        void addRadarEquipment(RadarEquipment*         _pTo_radarEquipment);
+        void addGrappleEquipment(GrappleEquipment*     _pTo_grappleEquipment);
+        void addDriveEquipment(DriveEquipment*         _pTo_driveEquipment);
+        void addProtectorEquipment(ProtectorEquipment* _pTo_protectorEquipment);
+        void addBakEquipment(BakEquipment*             _pTo_bakEquipment);
+        void addDroidEquipment(DroidEquipment*         _pTo_droid);
+        void addScanerEquipment(ScanerEquipment*       _pTo_scaner);
+        void addFreezerEquipment(FreezerEquipment*     _pTo_freezer);
+        void addEnergizerEquipment(EnergizerEquipment* _pTo_energyBlockItem);
 
 
         void manageInitItems();
