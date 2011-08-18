@@ -24,30 +24,30 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class OtsecSlot : public CommonForSlot
 {   
 	public:
-		RocketEquipment*    pTo_rocketEquipment;
-		LazerEquipment*     pTo_lazerEquipment;
-		RadarEquipment*     pTo_radarEquipment;
-		DriveEquipment*     pTo_driveEquipment;
-		BakEquipment*       pTo_bakEquipment;
-		EnergizerEquipment* pTo_energizerEquipment;
-		ProtectorEquipment* pTo_protectorEquipment;
-		DroidEquipment*     pTo_droidEquipment;
-		FreezerEquipment*   pTo_freezerEquipment;
-		ScanerEquipment*    pTo_scanerEquipment;
-		GrappleEquipment*   pTo_grappleEquipment;
+                RocketEquipment*    get_pToRocketEquipment()    const;
+                LazerEquipment*     get_pToLazerEquipment()     const;
+                RadarEquipment*     get_pToRadarEquipment()     const;
+                DriveEquipment*     get_pToDriveEquipment()     const;
+                BakEquipment*       get_pToBakEquipment()       const;
+                EnergizerEquipment* get_pToEnergizerEquipment() const;
+                ProtectorEquipment* get_pToProtectorEquipment() const;
+                DroidEquipment*     get_pToDroidEquipment()     const;
+                FreezerEquipment*   get_pToFreezerEquipment()   const;
+                ScanerEquipment*    get_pToScanerEquipment()    const;
+                GrappleEquipment*   get_pToGrappleEquipment()   const;
+                
+                RocketModule*    get_pToRocketModule()    const;
+                LazerModule*     get_pToLazerModule()     const;
+                RadarModule*     get_pToRadarModule()     const;                
+                DriveModule*     get_pToDriveModule()     const;  
+                BakModule*       get_pToBakModule()       const; 
+                EnergizerModule* get_pToEnergizerModule() const; 
+                ProtectorModule* get_pToProtectorModule() const;
+                DroidModule*     get_pToDroidModule()     const;
+                FreezerModule*   get_pToFreezerModule()   const;
+                ScanerModule*    get_pToScanerModule()    const;
+                GrappleModule*   get_pToGrappleModule()   const;
 
-		RocketModule*    pTo_rocketModule;
-		LazerModule*     pTo_lazerModule;
-		RadarModule*     pTo_radarModule;
-		DriveModule*     pTo_driveModule;
-		BakModule*       pTo_bakModule;
-		EnergizerModule* pTo_energizerModule;
-		ProtectorModule* pTo_protectorModule;
-		DroidModule*     pTo_droidModule;
-		FreezerModule*   pTo_freezerModule;
-		ScanerModule*    pTo_scanerModule;
-		GrappleModule*   pTo_grappleModule;
-        
 		OtsecSlot();
 		OtsecSlot(int _type_id, Ship* _pTo_ship, TextureOb* _pTo_texOb, int _pos_x, int _pos_y);
 
@@ -86,6 +86,31 @@ class OtsecSlot : public CommonForSlot
        
 		void renderEquipedItem();
 		void renderItemInfo();
+        
+        private:
+                RocketEquipment*    pTo_rocketEquipment;
+                LazerEquipment*     pTo_lazerEquipment;
+		RadarEquipment*     pTo_radarEquipment;
+		DriveEquipment*     pTo_driveEquipment;
+		BakEquipment*       pTo_bakEquipment;
+		EnergizerEquipment* pTo_energizerEquipment;
+		ProtectorEquipment* pTo_protectorEquipment;
+		DroidEquipment*     pTo_droidEquipment;
+		FreezerEquipment*   pTo_freezerEquipment;
+		ScanerEquipment*    pTo_scanerEquipment;
+		GrappleEquipment*   pTo_grappleEquipment;
+                
+		RocketModule*    pTo_rocketModule;
+		LazerModule*     pTo_lazerModule;
+		RadarModule*     pTo_radarModule;
+		DriveModule*     pTo_driveModule;
+		BakModule*       pTo_bakModule;
+		EnergizerModule* pTo_energizerModule;
+                ProtectorModule* pTo_protectorModule;
+		DroidModule*     pTo_droidModule;
+		FreezerModule*   pTo_freezerModule;
+		ScanerModule*    pTo_scanerModule;
+		GrappleModule*   pTo_grappleModule;
 }; 
 
 #endif

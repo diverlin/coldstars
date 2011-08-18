@@ -366,89 +366,89 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
 
     resetSlotsRenderInfoFlag();
 
-    // WEAPON SLOT
-    for (unsigned int i = 0; i < pTo_ship->weapon_slot_pList.size(); i++)
-    { 
-        if (pTo_ship->weapon_slot_pList[i]->interaction(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y)) == true)
-        {  
-            pTo_ship->weapon_slot_pList[i]->is_CURSORED = true;
-            cursor_has_target = true;
+    //// WEAPON SLOT
+    //for (unsigned int i = 0; i < pTo_ship->weapon_slot_pList.size(); i++)
+    //{ 
+        //if (pTo_ship->weapon_slot_pList[i]->interaction(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y)) == true)
+        //{  
+            //pTo_ship->weapon_slot_pList[i]->is_CURSORED = true;
+            //cursor_has_target = true;
   
-            if (pTo_ship->weapon_slot_pList[i]->is_EQUIPED == true)      
-            {   // SLOT IS EQUIPED
-                if ( (lmb == true) && (allow_full_control == true) && (in_store == false) ) 
-                {
-                    if (pTo_CURSOR->pTo_otsec_slot->is_EQUIPED == false)
-                    {   // take item 
-                        if (pTo_ship->weapon_slot_pList[i]->item_subtype_id == LAZER_ID)
-                        {
-                            pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->weapon_slot_pList[i]->pTo_lazerEquipment);
-                            pTo_ship->weapon_slot_pList[i]->removeLazerEquipment();
-                        }
+            //if (pTo_ship->weapon_slot_pList[i]->is_EQUIPED == true)      
+            //{   // SLOT IS EQUIPED
+                //if ( (lmb == true) && (allow_full_control == true) && (in_store == false) ) 
+                //{
+                    //if (pTo_CURSOR->pTo_otsec_slot->is_EQUIPED == false)
+                    //{   // take item 
+                        //if (pTo_ship->weapon_slot_pList[i]->item_subtype_id == LAZER_ID)
+                        //{
+                            //pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->weapon_slot_pList[i]->pTo_lazerEquipment);
+                            //pTo_ship->weapon_slot_pList[i]->removeLazerEquipment();
+                        //}
 
-                        if (pTo_ship->weapon_slot_pList[i]->item_subtype_id == ROCKET_ID)
-                        {
-                            pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->weapon_slot_pList[i]->pTo_rocketEquipment);
-                            pTo_ship->weapon_slot_pList[i]->removeRocketEquipment();
-                        } 
-                    }
-                    else  
-                    {   // merge module with item                    
-                        if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == LAZER_ID)
-                        {
-                            if (pTo_ship->weapon_slot_pList[i]->item_subtype_id == LAZER_ID)
-                            {
-                                if (pTo_ship->weapon_slot_pList[i]->pTo_lazerEquipment->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_lazerModule) == true)
-                                {
-                                    pTo_CURSOR->pTo_otsec_slot->removeItem();
-                                }    
-                            }
-                        }   
+                        //if (pTo_ship->weapon_slot_pList[i]->item_subtype_id == ROCKET_ID)
+                        //{
+                            //pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->weapon_slot_pList[i]->pTo_rocketEquipment);
+                            //pTo_ship->weapon_slot_pList[i]->removeRocketEquipment();
+                        //} 
+                    //}
+                    //else  
+                    //{   // merge module with item                    
+                        //if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == LAZER_ID)
+                        //{
+                            //if (pTo_ship->weapon_slot_pList[i]->item_subtype_id == LAZER_ID)
+                            //{
+                                //if (pTo_ship->weapon_slot_pList[i]->pTo_lazerEquipment->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_lazerModule) == true)
+                                //{
+                                    //pTo_CURSOR->pTo_otsec_slot->removeItem();
+                                //}    
+                            //}
+                        //}   
 
-                        if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ROCKET_ID)
-                        {
-                            if (pTo_ship->weapon_slot_pList[i]->item_subtype_id == ROCKET_ID)
-                            {
-                                if (pTo_ship->weapon_slot_pList[i]->pTo_rocketEquipment->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_rocketModule) == true)
-                                {
-                                    pTo_CURSOR->pTo_otsec_slot->removeItem();
-                                }    
-                            }
-                        }                         
-                    }
-                }
+                        //if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ROCKET_ID)
+                        //{
+                            //if (pTo_ship->weapon_slot_pList[i]->item_subtype_id == ROCKET_ID)
+                            //{
+                                //if (pTo_ship->weapon_slot_pList[i]->pTo_rocketEquipment->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_rocketModule) == true)
+                                //{
+                                    //pTo_CURSOR->pTo_otsec_slot->removeItem();
+                                //}    
+                            //}
+                        //}                         
+                    //}
+                //}
                 
-                if ( (lmb == true) && (in_store == true) )
-                {   // sell item
-                    int earn_price = pTo_store->buyWeaponSlotItem(pTo_ship->weapon_slot_pList[i]);
-                    pTo_PLAYER->pTo_npc->credits += earn_price;
-                } 
-            }  
+                //if ( (lmb == true) && (in_store == true) )
+                //{   // sell item
+                    //int earn_price = pTo_store->buyWeaponSlotItem(pTo_ship->weapon_slot_pList[i]);
+                    //pTo_PLAYER->pTo_npc->credits += earn_price;
+                //} 
+            //}  
 
             
-            else                              
-            {   // SLOT IS EMPTY     
-                if ( (lmb == true) && (allow_full_control == true) && (in_store == false) )
-                {
-                    if (pTo_CURSOR->pTo_otsec_slot->is_EQUIPED == true)
-                    {   // insert item 
-                        if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == LAZER_ID)
-                        {
-                            pTo_ship->weapon_slot_pList[i]->insertLazerEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_lazerEquipment);
-                            pTo_CURSOR->pTo_otsec_slot->removeItem();
-                        }
-                        if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ROCKET_ID)
-                        {
-                            pTo_ship->weapon_slot_pList[i]->insertRocketEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_rocketEquipment);
-                            pTo_CURSOR->pTo_otsec_slot->removeItem();
-                        }                     
-                    } 
-                }    
-            }
+            //else                              
+            //{   // SLOT IS EMPTY     
+                //if ( (lmb == true) && (allow_full_control == true) && (in_store == false) )
+                //{
+                    //if (pTo_CURSOR->pTo_otsec_slot->is_EQUIPED == true)
+                    //{   // insert item 
+                        //if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == LAZER_ID)
+                        //{
+                            //pTo_ship->weapon_slot_pList[i]->insertLazerEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_lazerEquipment);
+                            //pTo_CURSOR->pTo_otsec_slot->removeItem();
+                        //}
+                        //if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ROCKET_ID)
+                        //{
+                            //pTo_ship->weapon_slot_pList[i]->insertRocketEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_rocketEquipment);
+                            //pTo_CURSOR->pTo_otsec_slot->removeItem();
+                        //}                     
+                    //} 
+                //}    
+            //}
 
            
-        }
-    }
+        //}
+    //}
 
 
 
@@ -460,387 +460,395 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
 			pTo_ship->total_slot_pList[i]->is_CURSORED = true;
 			cursor_has_target = true;
 
-			//// TAKE ITEM ////
-			if (pTo_ship->total_slot_pList[i]->is_EQUIPED == true)
-			{ 
-				// INSERT ITEM TO CURSOR //
-				if ( (lmb == true) && (allow_full_control == true) && (in_store == false) )
-				{
-                    			if (pTo_CURSOR->pTo_otsec_slot->is_EQUIPED == false)
-                    			{
-                        			// weapons
-                        			if (pTo_ship->total_slot_pList[i]->item_subtype_id == LAZER_ID)
-                        			{
-                            				pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_lazerEquipment);
-                            				pTo_ship->total_slot_pList[i]->removeItem();
-                        			}
-                        			if (pTo_ship->total_slot_pList[i]->item_subtype_id == ROCKET_ID)
-                        			{
-                            				pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_rocketEquipment);
-                            				pTo_ship->total_slot_pList[i]->removeItem();
-                        			}
 
-                        			// items
-                        			if (pTo_ship->total_slot_pList[i]->item_type_id == EQUIPMENT_ID)
-                        			{
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == RADAR_ID)
-                        				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_radarEquipment) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
-                        				}
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == DRIVE_ID)
-                        				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_driveEquipment) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
-                        				}
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == BAK_ID)
-                        				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_bakEquipment) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
-                        				}
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == ENERGIZER_ID)
-                        				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_energizerEquipment) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
-                        				}
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == PROTECTOR_ID)
-                        				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_protectorEquipment) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
-                        				}
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == DROID_ID)
-                        				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_droidEquipment) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
-                        				}
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == FREEZER_ID)
-                        				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_freezerEquipment) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
-                        				}
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == SCANER_ID)
-                        				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_scanerEquipment) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
-                        				}
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == GRAPPLE_ID)
-                        				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_grappleEquipment) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
-                        				}
-                     				}
+			if ( (lmb == true) && (allow_full_control == true) && (in_store == false) )
+			{				
+				//// TAKE ITEM from SLOT ////
+				if ( (pTo_ship->total_slot_pList[i]->is_EQUIPED == true) && (pTo_CURSOR->pTo_otsec_slot->is_EQUIPED == false))
+				{ 
+					// equipments
+                       			if (pTo_ship->total_slot_pList[i]->item_type_id == EQUIPMENT_ID)
+                       			{
+                       				if (pTo_ship->total_slot_pList[i]->item_subtype_id == LAZER_ID)
+                       				{
+                       					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToLazerEquipment()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                      				}
+                       				if (pTo_ship->total_slot_pList[i]->item_subtype_id == ROCKET_ID)
+                       				{
+                       					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToRocketEquipment()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                       				}
+                       			
+                       				if (pTo_ship->total_slot_pList[i]->item_subtype_id == RADAR_ID)
+                       				{
+                       					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToRadarEquipment()) == true)
+                       					{
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                       					}
+                       				}
+                       				if (pTo_ship->total_slot_pList[i]->item_subtype_id == DRIVE_ID)
+                       				{
+                       					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToDriveEquipment()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                      				}
+                       				if (pTo_ship->total_slot_pList[i]->item_subtype_id == BAK_ID)
+                       				{
+                       					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToBakEquipment()) == true)
+                      						pTo_ship->total_slot_pList[i]->removeItem();
+                       				}
+                       				if (pTo_ship->total_slot_pList[i]->item_subtype_id == ENERGIZER_ID)
+                       				{
+                       					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToEnergizerEquipment()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                      				}
+                       				if (pTo_ship->total_slot_pList[i]->item_subtype_id == PROTECTOR_ID)
+                       				{
+                      					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToProtectorEquipment()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                       				}
+                       				if (pTo_ship->total_slot_pList[i]->item_subtype_id == DROID_ID)
+                       				{
+                       					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToDroidEquipment()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                       				}
+                       				if (pTo_ship->total_slot_pList[i]->item_subtype_id == FREEZER_ID)
+                       				{
+                       					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToFreezerEquipment()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                       				}
+                       				if (pTo_ship->total_slot_pList[i]->item_subtype_id == SCANER_ID)
+                       				{
+                       					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToScanerEquipment()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                       				}
+                       				if (pTo_ship->total_slot_pList[i]->item_subtype_id == GRAPPLE_ID)
+                       				{
+                       					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToGrappleEquipment()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                      				}
+               				}
                      	
-                        			// modules
-                        			if (pTo_ship->total_slot_pList[i]->item_type_id == MODULE_ID)
-                        			{
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == LAZER_ID)
-                        				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_lazerModule) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
+                       			// modules
+                       			if (pTo_ship->total_slot_pList[i]->item_type_id == MODULE_ID)
+                       			{
+                       				if (pTo_ship->total_slot_pList[i]->item_subtype_id == LAZER_ID)
+                       				{
+                    					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToLazerModule()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                      				}
+                      				if (pTo_ship->total_slot_pList[i]->item_subtype_id == ROCKET_ID)
+                      				{
+                      					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToRocketModule()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                      				}
+                       				if (pTo_ship->total_slot_pList[i]->item_subtype_id == RADAR_ID)
+                       				{
+                       					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToRadarModule()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                      				}
+                       				if (pTo_ship->total_slot_pList[i]->item_subtype_id == DRIVE_ID)
+                       				{
+                 					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToDriveModule()) == true)
+                      						pTo_ship->total_slot_pList[i]->removeItem();
+                      				}
+                      				if (pTo_ship->total_slot_pList[i]->item_subtype_id == BAK_ID)
+                       				{
+                      					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToBakModule()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                       				}
+                      				if (pTo_ship->total_slot_pList[i]->item_subtype_id == ENERGIZER_ID)
+                      				{
+                       					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToEnergizerModule()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                      				}
+                       				if (pTo_ship->total_slot_pList[i]->item_subtype_id == PROTECTOR_ID)
+                       				{
+                       					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToProtectorModule()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                       				}
+                       				if (pTo_ship->total_slot_pList[i]->item_subtype_id == DROID_ID)
+                    				{
+                       					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToDroidModule()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                       				}
+                       				if (pTo_ship->total_slot_pList[i]->item_subtype_id == FREEZER_ID)
+                       				{
+                       					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToFreezerModule()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                      				}
+                       				if (pTo_ship->total_slot_pList[i]->item_subtype_id == SCANER_ID)
+                       				{
+                       					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToScanerModule()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                      				}
+                      				if (pTo_ship->total_slot_pList[i]->item_subtype_id == GRAPPLE_ID)
+                       				{
+                       					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->get_pToGrappleModule()) == true)
+                       						pTo_ship->total_slot_pList[i]->removeItem();
+                      				}
+                       			}
+                        	
+                       			// artifacts
+                       			// bomb
+               			}
+				//// PUT ITEM to SLOT ////
+				else if ( (pTo_ship->total_slot_pList[i]->is_EQUIPED == false) && (pTo_CURSOR->pTo_otsec_slot->is_EQUIPED == true) )
+				{       
+					if ( (pTo_ship->total_slot_pList[i]->type_id == pTo_CURSOR->pTo_otsec_slot->item_subtype_id) || (pTo_ship->total_slot_pList[i]->type_id == OTSEC_SLOT_ID) )
+					{
+						if (pTo_CURSOR->pTo_otsec_slot->item_type_id == EQUIPMENT_ID)
+						{       
+							// equipments
+							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == LAZER_ID)
+							{
+								pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToLazerEquipment());
+								pTo_CURSOR->pTo_otsec_slot->removeItem();
+							}
+							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ROCKET_ID)
+							{
+								pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToRocketEquipment());
+								pTo_CURSOR->pTo_otsec_slot->removeItem();
+							}
+
+							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == RADAR_ID)
+							{
+								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToRadarEquipment()) == true)
+									pTo_CURSOR->pTo_otsec_slot->removeItem();
+							}	
+							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == DRIVE_ID)
+							{
+								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToDriveEquipment()) == true)
+									pTo_CURSOR->pTo_otsec_slot->removeItem();
+							}
+							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == BAK_ID)
+							{
+								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToBakEquipment()) == true)
+									pTo_CURSOR->pTo_otsec_slot->removeItem();
+							}
+							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ENERGIZER_ID)
+							{
+								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToEnergizerEquipment()) == true)
+									pTo_CURSOR->pTo_otsec_slot->removeItem();
+							}
+							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == PROTECTOR_ID)
+							{
+								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToProtectorEquipment()) == true)
+									pTo_CURSOR->pTo_otsec_slot->removeItem();
+							}
+							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == DROID_ID)
+							{
+								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToDroidEquipment()) == true)
+									pTo_CURSOR->pTo_otsec_slot->removeItem();
+							}
+							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == FREEZER_ID)
+							{
+								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToFreezerEquipment()) == true)
+									pTo_CURSOR->pTo_otsec_slot->removeItem();
+							}
+							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == SCANER_ID)
+							{
+								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToScanerEquipment()) == true)
+									pTo_CURSOR->pTo_otsec_slot->removeItem();
+							}
+							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == GRAPPLE_ID)
+							{
+								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToGrappleEquipment()) == true)
+									pTo_CURSOR->pTo_otsec_slot->removeItem();
+							}
+						}
+					
+						// modules	
+						if (pTo_CURSOR->pTo_otsec_slot->item_type_id == MODULE_ID)
+						{
+                        				if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == LAZER_ID)
+       	                				{
+               	            					if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToLazerModule()) == true)
+                       	    						pTo_CURSOR->pTo_otsec_slot->removeItem();
+                       					}
+                       					if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ROCKET_ID)
+                       					{
+                            					if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToRocketModule()) == true)
+       	                    						pTo_CURSOR->pTo_otsec_slot->removeItem();
+               	        				}
+                       					if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == RADAR_ID)
+                       					{ 
+                       						if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToRadarModule()) == true)
+                      							pTo_CURSOR->pTo_otsec_slot->removeItem();
+                       					}
+	                   	  			if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == DRIVE_ID)
+               	        				{
+                       	    					if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToDriveModule()) == true)
+                       							pTo_CURSOR->pTo_otsec_slot->removeItem();
+               		 				}
+      		        	  			if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == BAK_ID)
+                      					{
+                      						if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToBakModule()) == true)
+                       							pTo_CURSOR->pTo_otsec_slot->removeItem();
+                      					}
+               	        				if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ENERGIZER_ID)
+                       					{
+                       						if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToEnergizerModule()) == true)
+                       							pTo_CURSOR->pTo_otsec_slot->removeItem();
+                      					}
+              		       				if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == PROTECTOR_ID)
+                       					{
+                       						if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToProtectorModule()) == true)
+                       							pTo_CURSOR->pTo_otsec_slot->removeItem();
+                      					}
+              		      				if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == DROID_ID)
+                      					{
+                       						if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToDroidModule()) == true)
+                       							pTo_CURSOR->pTo_otsec_slot->removeItem();
+                       					}
+              		      				if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == FREEZER_ID)
+                       					{
+                       						if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToFreezerModule()) == true)
+                            						pTo_CURSOR->pTo_otsec_slot->removeItem();
                         				}
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == ROCKET_ID)
+							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == SCANER_ID)
                         				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_rocketModule) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
-                        				}
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == RADAR_ID)
+                            					if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToScanerModule()) == true)
+                            						pTo_CURSOR->pTo_otsec_slot->removeItem();
+                        				}		
+                        				if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == GRAPPLE_ID)
                         				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_radarModule) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
-                        				}
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == DRIVE_ID)
-                        				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_driveModule) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
-                        				}
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == BAK_ID)
-                        				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_bakModule) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
-                        				}
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == ENERGIZER_ID)
-                        				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_energizerModule) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
-                        				}
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == PROTECTOR_ID)
-                        				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_protectorModule) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
-                        				}
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == DROID_ID)
-                        				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_droidModule) == true)
-                           						pTo_ship->total_slot_pList[i]->removeItem();
-                        				}
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == FREEZER_ID)
-                        				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_freezerModule) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
-                        				}
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == SCANER_ID)
-                        				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_scanerModule) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
-                        				}
-                        				if (pTo_ship->total_slot_pList[i]->item_subtype_id == GRAPPLE_ID)
-                        				{
-                            					if (pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->total_slot_pList[i]->pTo_grappleModule) == true)
-                            						pTo_ship->total_slot_pList[i]->removeItem();
+                            					if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->get_pToGrappleModule()) == true)
+                            						pTo_CURSOR->pTo_otsec_slot->removeItem();
                         				}
                         			}
-                        	
                         			// artifacts
-                        			// bomb
-                    			}
-                    			else    // pTo_CURSOR->pTo_otsec_slot->is_EQUIPED = true
-					{       // merge module with equipment
-						if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == RADAR_ID)
+                        			// bomb                     			
+                    			} 
+                		} //// PUT ITEM to SLOT ////
+                		//// MERGE MODULE WITH EQUIPMENT ////
+                		if ( (pTo_ship->total_slot_pList[i]->is_EQUIPED == true) && (pTo_CURSOR->pTo_otsec_slot->is_EQUIPED == true) )
+                		{	
+					if (pTo_CURSOR->pTo_otsec_slot->item_type_id == MODULE_ID) 
+					{
+						if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == pTo_ship->total_slot_pList[i]->item_subtype_id)
 						{   
-							if (pTo_ship->total_slot_pList[i]->item_subtype_id == RADAR_ID)
+							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == LAZER_ID)
 							{
-								if (pTo_ship->total_slot_pList[i]->pTo_radarEquipment->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_radarModule) == true)
+								if (pTo_ship->total_slot_pList[i]->get_pToLazerEquipment()->insertModule(pTo_CURSOR->pTo_otsec_slot->get_pToLazerModule()) == true)
+								{
+									pTo_CURSOR->pTo_otsec_slot->removeItem();
+								}    
+							}
+
+		
+							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == RADAR_ID)
+							{
+								if (pTo_ship->total_slot_pList[i]->get_pToRadarEquipment()->insertModule(pTo_CURSOR->pTo_otsec_slot->get_pToRadarModule()) == true)
 								{
 									pTo_CURSOR->pTo_otsec_slot->removeItem();
 								}    
 							}
 						}  
-					}
-				}
-				
-				
-                    
-                // SELL ITEM TO STORE //
-                if ( (lmb == true) && (in_store == true) )
-                {
-                    int earn_price = pTo_store->buyOtsecSlotItem(pTo_ship->total_slot_pList[i]);
-                    pTo_PLAYER->pTo_npc->credits += earn_price;
-                } 
 
-            }
-		//// PUT ITEM ////
-		else
-		{             
-                	if ( (lmb == true) && (allow_full_control == true) && (in_store == false) )
-                	{
-				if ( (pTo_ship->total_slot_pList[i]->type_id == pTo_CURSOR->pTo_otsec_slot->item_subtype_id) || (pTo_ship->total_slot_pList[i]->type_id == OTSEC_SLOT_ID) )
-				{
-					if (pTo_CURSOR->pTo_otsec_slot->is_EQUIPED == true)
-					{             
-						if (pTo_CURSOR->pTo_otsec_slot->item_type_id == EQUIPMENT_ID)
-						{       
-							// weapons
-							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == LAZER_ID)
-							{
-								pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_lazerEquipment);
-								pTo_CURSOR->pTo_otsec_slot->removeItem();
-							}
-							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ROCKET_ID)
-							{
-								pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_rocketEquipment);
-								pTo_CURSOR->pTo_otsec_slot->removeItem();
-							}
-
-                    
-							// items
-							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == RADAR_ID)
-							{
-								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_radarEquipment) == true)
-									pTo_CURSOR->pTo_otsec_slot->removeItem();
-							}	
-							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == DRIVE_ID)
-							{
-								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_driveEquipment) == true)
-									pTo_CURSOR->pTo_otsec_slot->removeItem();
-							}
-							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == BAK_ID)
-							{
-								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_bakEquipment) == true)
-								pTo_CURSOR->pTo_otsec_slot->removeItem();
-							}
-							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ENERGIZER_ID)
-							{
-								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_energizerEquipment) == true)
-									pTo_CURSOR->pTo_otsec_slot->removeItem();
-							}
-							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == PROTECTOR_ID)
-							{
-								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_protectorEquipment) == true)
-									pTo_CURSOR->pTo_otsec_slot->removeItem();
-							}
-							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == DROID_ID)
-							{
-								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_droidEquipment) == true)
-									pTo_CURSOR->pTo_otsec_slot->removeItem();
-							}
-							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == FREEZER_ID)
-							{
-								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_freezerEquipment) == true)
-									pTo_CURSOR->pTo_otsec_slot->removeItem();
-							}
-							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == SCANER_ID)
-							{
-								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_scanerEquipment) == true)
-									pTo_CURSOR->pTo_otsec_slot->removeItem();
-							}
-							if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == GRAPPLE_ID)
-							{
-								if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_grappleEquipment) == true)
-									pTo_CURSOR->pTo_otsec_slot->removeItem();
-							}
-						}
-						
-						// modules	
-						if (pTo_CURSOR->pTo_otsec_slot->item_type_id == MODULE_ID)
-						{
-	                        			if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == LAZER_ID)
-        	                			{
-                	            				if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_lazerModule) == true)
-                        	    					pTo_CURSOR->pTo_otsec_slot->removeItem();
-                        				}
-                        				if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ROCKET_ID)
-                        				{
-	                            					if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_rocketModule) == true)
-        	                    					pTo_CURSOR->pTo_otsec_slot->removeItem();
-                	        			}
-                        				if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == RADAR_ID)
-                        				{ 
-                            					if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_radarModule) == true)
-                            						pTo_CURSOR->pTo_otsec_slot->removeItem();
-                        				}
-   		                     			if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == DRIVE_ID)
-                	        			{
-                        	    				if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_driveModule) == true)
-                            						pTo_CURSOR->pTo_otsec_slot->removeItem();
-                        				}
-              		          			if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == BAK_ID)
-                        				{
-                            					if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_bakModule) == true)
-                            						pTo_CURSOR->pTo_otsec_slot->removeItem();
-                        				}
-                	        			if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ENERGIZER_ID)
-                        				{
-                            					if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_energizerModule) == true)
-                            						pTo_CURSOR->pTo_otsec_slot->removeItem();
-                        				}
-                 		       			if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == PROTECTOR_ID)
-                        				{
-                            					if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_protectorModule) == true)
-                            						pTo_CURSOR->pTo_otsec_slot->removeItem();
-                        				}
-                  		      			if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == DROID_ID)
-                        				{
-                            					if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_droidModule) == true)
-                            						pTo_CURSOR->pTo_otsec_slot->removeItem();
-                        				}
-                  		      			if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == FREEZER_ID)
-                        				{
-                            					if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_freezerModule) == true)
-                            						pTo_CURSOR->pTo_otsec_slot->removeItem();
-                        				}
-                    		    			if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == SCANER_ID)
-                        				{
-                            					if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_scanerModule) == true)
-                            						pTo_CURSOR->pTo_otsec_slot->removeItem();
-                        				}	
-                        				if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == GRAPPLE_ID)
-                        				{
-                            					if (pTo_ship->total_slot_pList[i]->insertItem(pTo_CURSOR->pTo_otsec_slot->pTo_grappleModule) == true)
-                            						pTo_CURSOR->pTo_otsec_slot->removeItem();
-                        				}
-                        			}
-                        			// artifacts
-                        			// bomb
-                        			
-                        			
-                    			} 
-                		}    
+					
+					}               		
+                		
+                		}             		
+                		    
             		}
+			// SELL ITEM TO STORE //
+			else if ( (lmb == true) && (in_store == true) )
+			{
+				int earn_price = pTo_store->buyOtsecSlotItem(pTo_ship->total_slot_pList[i]);
+				pTo_PLAYER->pTo_npc->credits += earn_price;
+			} 
 
 
-        	}
+       		}
         	
         }
-    }
+                    
 
-    // GATE SLOT
-    if (cursor_has_target == false)
-    {
-       if (pTo_ship->gate_slot.interaction(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y)) == true)  
-       {
-          pTo_ship->gate_slot.is_CURSORED = true;
-          cursor_has_target = true;
 
-          //// DROP ITEM TO OUTERSPACE ////
-          if ( (lmb == true) && (allow_full_control == true) && (in_store == false) )
-              if (pTo_CURSOR->pTo_otsec_slot->is_EQUIPED == true)
-              {
-                  TextureOb* pTo_containerTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.container_texOb_pList); 
-                  Container* pTo_container = new Container(pTo_ship->pTo_starsystem, pTo_containerTexOb, pTo_ship->points.center_x, pTo_ship->points.center_y, pTo_ship->points.center_x + randIntInRange(50, 250), pTo_ship->points.center_y + randIntInRange(50, 250));
-                  pTo_ship->pTo_starsystem->CONTAINER_pList.push_back(pTo_container); 
 
-                  if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == LAZER_ID)
-                  {     
-                      pTo_container->packLazerEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_lazerEquipment); 
-                      pTo_CURSOR->pTo_otsec_slot->removeItem();
-                  }
-                  if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ROCKET_ID)
-                  {             
-                      pTo_container->packRocketEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_rocketEquipment); 
-                      pTo_CURSOR->pTo_otsec_slot->removeItem();  
-                  }
+            
+            
+            
 
-                  if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == RADAR_ID)
-                  {                      
-                      pTo_container->packRadarEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_radarEquipment); 
-                      pTo_CURSOR->pTo_otsec_slot->removeItem();
-                  }
-                  if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == DRIVE_ID)
-                  {               
-                      pTo_container->packDriveEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_driveEquipment); 
-                      pTo_CURSOR->pTo_otsec_slot->removeItem(); 
-                  }
-                  if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == BAK_ID)
-                  {                      
-                      pTo_container->packBakEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_bakEquipment); 
-                      pTo_CURSOR->pTo_otsec_slot->removeItem();
-                  }
-                  if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ENERGIZER_ID)
-                  {       
-                      pTo_container->packEnergizerEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_energizerEquipment); 
-                      pTo_CURSOR->pTo_otsec_slot->removeItem();              
-                  }
-                  if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == PROTECTOR_ID)
-                  {            
-                      pTo_container->packProtectorEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_protectorEquipment); 
-                      pTo_CURSOR->pTo_otsec_slot->removeItem();         
-                  }
-                  if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == DROID_ID)
-                  {          
-                      pTo_container->packDroidEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_droidEquipment); 
-                      pTo_CURSOR->pTo_otsec_slot->removeItem();          
-                  }
-                  if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == FREEZER_ID)
-                  {                  
-                      pTo_container->packFreezerEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_freezerEquipment); 
-                      pTo_CURSOR->pTo_otsec_slot->removeItem();   
-                  }
-                  if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == SCANER_ID)
-                  {      
-                      pTo_container->packScanerEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_scanerEquipment); 
-                      pTo_CURSOR->pTo_otsec_slot->removeItem();            
-                  }
-                  if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == GRAPPLE_ID)
-                  {                     
-                      pTo_container->packGrappleEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_grappleEquipment); 
-                      pTo_CURSOR->pTo_otsec_slot->removeItem();
-                  }
-              } 
-       }
-    }
+	// GATE SLOT
+	if (cursor_has_target == false)
+	{
+		if (pTo_ship->gate_slot.interaction(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y)) == true)  
+		{
+			pTo_ship->gate_slot.is_CURSORED = true;
+			cursor_has_target = true;
 
+			//// DROP ITEM TO OUTERSPACE ////
+			if ( (lmb == true) && (allow_full_control == true) && (in_store == false) )
+			{
+				if (pTo_CURSOR->pTo_otsec_slot->is_EQUIPED == true)
+				{
+					TextureOb* pTo_containerTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.container_texOb_pList); 
+					Container* pTo_container = new Container(pTo_ship->pTo_starsystem, pTo_containerTexOb, pTo_ship->points.center_x, pTo_ship->points.center_y, pTo_ship->points.center_x + randIntInRange(50, 250), pTo_ship->points.center_y + randIntInRange(50, 250));
+					pTo_ship->pTo_starsystem->CONTAINER_pList.push_back(pTo_container); 
+
+					if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == LAZER_ID)
+					{     
+                      				pTo_container->packLazerEquipment(pTo_CURSOR->pTo_otsec_slot->get_pToLazerEquipment()); 
+                      				pTo_CURSOR->pTo_otsec_slot->removeItem();
+                  			}
+					if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ROCKET_ID)
+					{             
+						pTo_container->packRocketEquipment(pTo_CURSOR->pTo_otsec_slot->get_pToRocketEquipment()); 
+						pTo_CURSOR->pTo_otsec_slot->removeItem();  
+					}
+
+					if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == RADAR_ID)
+					{                      
+						pTo_container->packRadarEquipment(pTo_CURSOR->pTo_otsec_slot->get_pToRadarEquipment()); 
+						pTo_CURSOR->pTo_otsec_slot->removeItem();
+					}
+					if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == DRIVE_ID)
+					{               
+						pTo_container->packDriveEquipment(pTo_CURSOR->pTo_otsec_slot->get_pToDriveEquipment()); 
+						pTo_CURSOR->pTo_otsec_slot->removeItem(); 
+					}
+					if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == BAK_ID)
+					{                      
+						pTo_container->packBakEquipment(pTo_CURSOR->pTo_otsec_slot->get_pToBakEquipment()); 
+						pTo_CURSOR->pTo_otsec_slot->removeItem();
+					}
+					if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ENERGIZER_ID)
+					{       
+						pTo_container->packEnergizerEquipment(pTo_CURSOR->pTo_otsec_slot->get_pToEnergizerEquipment()); 
+						pTo_CURSOR->pTo_otsec_slot->removeItem();              
+					}
+					if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == PROTECTOR_ID)
+					{            
+						pTo_container->packProtectorEquipment(pTo_CURSOR->pTo_otsec_slot->get_pToProtectorEquipment()); 
+						pTo_CURSOR->pTo_otsec_slot->removeItem();         
+					}
+					if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == DROID_ID)
+					{          
+						pTo_container->packDroidEquipment(pTo_CURSOR->pTo_otsec_slot->get_pToDroidEquipment()); 
+						pTo_CURSOR->pTo_otsec_slot->removeItem();          
+					}
+					if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == FREEZER_ID)
+					{                  
+						pTo_container->packFreezerEquipment(pTo_CURSOR->pTo_otsec_slot->get_pToFreezerEquipment()); 
+						pTo_CURSOR->pTo_otsec_slot->removeItem();   
+					}
+					if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == SCANER_ID)
+					{      
+						pTo_container->packScanerEquipment(pTo_CURSOR->pTo_otsec_slot->get_pToScanerEquipment()); 
+						pTo_CURSOR->pTo_otsec_slot->removeItem();            
+					}
+					if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == GRAPPLE_ID)
+					{                     
+						pTo_container->packGrappleEquipment(pTo_CURSOR->pTo_otsec_slot->get_pToGrappleEquipment()); 
+						pTo_CURSOR->pTo_otsec_slot->removeItem();
+					}
+				} 
+			}
+    		}
+	}
 }
-
 
 
 
@@ -893,7 +901,7 @@ void ShipInternal :: renderInternaly()
 
 	for(unsigned int i = 0; i < pTo_ship->total_slot_pList.size(); i++)
 	{
-	pTo_ship->total_slot_pList[i]->renderFrame(-1);
+		pTo_ship->total_slot_pList[i]->renderFrame(-1);
 	}
 	
 	pTo_ship->gate_slot.renderFrame(-1);

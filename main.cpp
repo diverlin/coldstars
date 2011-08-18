@@ -103,8 +103,9 @@ int main()
     g_APP.UseVerticalSync(g_VERT_SYNC);
 
     g_FONT.LoadFromFile("data/font/font.ttf");
-    
+
     initGL(g_VIEW_WIDTH, g_VIEW_HEIGHT); 
+
     loadResources();
 
     bool calculation_per_turn_allowed = true;
@@ -123,9 +124,9 @@ int main()
     pTo_PLAYER = new PlayerInstance();
     Ship* pTo_pship = world.pTo_ss_active->SHIP_pList[0];
 
-    equip(pTo_pship); // debug
+    //equip(pTo_pship); // debug
 
-    pTo_pship->drive_slot.pTo_driveEquipment->speed*=5;   // hack debug
+    pTo_pship->drive_slot.get_pToDriveEquipment()->speed*=5;   // hack debug
     pTo_pship->updateAllStuff(); 
 
     pTo_PLAYER->setShip(pTo_pship);

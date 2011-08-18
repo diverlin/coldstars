@@ -724,12 +724,12 @@ void StarSystem :: renderEntities_OLD()
 	glEnable(GL_DEPTH_TEST);
 	for(unsigned int i = 0; i < visible_STAR_pList.size(); i++) 
 	{ 
-        	visible_STAR_pList[i]->render_NEW(); 
+        	visible_STAR_pList[i]->render_OLD(); 
     	}
 
     	for(unsigned int i = 0; i < visible_PLANET_pList.size(); i++) 
     	{ 
-       		visible_PLANET_pList[i]->render_NEW(); 
+       		visible_PLANET_pList[i]->render_OLD(); 
     	}
 
 
