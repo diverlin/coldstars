@@ -32,10 +32,10 @@ class Container : public CommonForSpaceItems
         int item_subtype_id; 
         int item_id;
                   
-        RocketItem*      pTo_rocketItem;
-        LazerItem*       pTo_lazerItem;
-        RadarItem*       pTo_radarItem;
-        DriveItem*       pTo_driveItem;
+        RocketItem*      pTo_rocketEquipment;
+        LazerItem*       pTo_lazerEquipment;
+        RadarItem*       pTo_radarEquipment;
+        DriveItem*       pTo_driveEquipment;
         BakItem*         pTo_bakItem;
         EnergizerItem*   pTo_energizerItem;
         ProtectorItem*   pTo_protectorItem;

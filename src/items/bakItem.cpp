@@ -28,7 +28,7 @@ BakItem :: BakItem(TextureOb* _pTo_itemTexOb, int _fuel_max_orig, int _modules_n
     CommonForItems_init(_pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
 
     type_id = EQUIPMENT_ID;
-    subtype_id = BAK_ITEM_ID;
+    subtype_id = BAK_ID;
 
     fuel_max_orig = _fuel_max_orig;
     fuel_max_add  = 0;

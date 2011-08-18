@@ -29,7 +29,7 @@ FreezerItem :: FreezerItem(TextureOb* _pTo_itemTexOb, int _freeze_orig, int _mod
     CommonForItems_init(_pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
 
     type_id = EQUIPMENT_ID;
-    subtype_id = FREEZER_ITEM_ID;
+    subtype_id = FREEZER_ID;
 
     freeze_orig = _freeze_orig;
     freeze_add  = 0;

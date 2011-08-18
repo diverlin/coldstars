@@ -425,42 +425,28 @@ const int SELL_GOODS_task_id             = g_TYPE_ID_GENERATOR.returnNextId("SEL
 const int SLOT_TEXTURE_ID       = g_TYPE_ID_GENERATOR.returnNextId("SLOT_TEXTURE_ID"); 
 const int TURREL_TEXTURE_ID     = g_TYPE_ID_GENERATOR.returnNextId("TURREL_TEXTURE_ID"); 
 
-
-// ITEM ID
-const int WEAPON_ID = g_TYPE_ID_GENERATOR.returnNextId("WEAPON_ID");
- 
-const int LAZER_ITEM_ID   = g_TYPE_ID_GENERATOR.returnNextId("LAZER_ITEM_ID"); 
-const int ROCKET_ITEM_ID  = g_TYPE_ID_GENERATOR.returnNextId("ROCKET_ITEM_ID");
-const int ROCKET_BULLET_ID = g_TYPE_ID_GENERATOR.returnNextId("ROCKET_BULLET_ID");
-const int TORPED_ITEM_ID  = g_TYPE_ID_GENERATOR.returnNextId("TORPED_ITEM_ID");
+// SLOTS ID
+const int WEAPON_SLOT_ID = g_TYPE_ID_GENERATOR.returnNextId("WEAPON_SLOT_ID");
 
 const int EQUIPMENT_ID        = g_TYPE_ID_GENERATOR.returnNextId("EQUIPMENT_ID");
-const int ENERGIZER_ITEM_ID   = g_TYPE_ID_GENERATOR.returnNextId("ENERGIZER_ITEM_ID");
-const int FREEZER_ITEM_ID     = g_TYPE_ID_GENERATOR.returnNextId("FREEZER_ITEM_ID");
-const int GRAPPLE_ITEM_ID     = g_TYPE_ID_GENERATOR.returnNextId("GRAPPLE_ITEM_ID");
-const int RADAR_ITEM_ID       = g_TYPE_ID_GENERATOR.returnNextId("RADAR_ITEM_ID");
-const int DRIVE_ITEM_ID       = g_TYPE_ID_GENERATOR.returnNextId("DRIVE_ITEM_ID");
-const int PROTECTOR_ITEM_ID   = g_TYPE_ID_GENERATOR.returnNextId("PROTECTOR_ITEM_ID");
-const int BAK_ITEM_ID         = g_TYPE_ID_GENERATOR.returnNextId("BAK_ITEM_ID");
-const int DROID_ITEM_ID       = g_TYPE_ID_GENERATOR.returnNextId("DROID_ITEM_ID");
-const int SCANER_ITEM_ID      = g_TYPE_ID_GENERATOR.returnNextId("SCANER_ITEM_ID");
-
-//MODULE ID
 const int MODULE_ID = g_TYPE_ID_GENERATOR.returnNextId("MODULE_ID");
+ 
+const int LAZER_ID   = g_TYPE_ID_GENERATOR.returnNextId("LAZER_ID"); 
+const int ROCKET_ID  = g_TYPE_ID_GENERATOR.returnNextId("ROCKET_ID");
 
-const int LAZER_MODULE_ID   = g_TYPE_ID_GENERATOR.returnNextId("LAZER_MODULE_ID"); 
-const int ROCKET_MODULE_ID  = g_TYPE_ID_GENERATOR.returnNextId("ROCKET_MODULE_ID");
-const int TORPED_MODULE_ID  = g_TYPE_ID_GENERATOR.returnNextId("TORPED_MODULE_ID");
+const int DRIVE_ID = g_TYPE_ID_GENERATOR.returnNextId("DRIVE_ID");
+const int RADAR_ID = g_TYPE_ID_GENERATOR.returnNextId("RADAR_ID");
+const int BAK_ID = g_TYPE_ID_GENERATOR.returnNextId("BAK_ID");
+const int ENERGIZER_ID = g_TYPE_ID_GENERATOR.returnNextId("ENERGIZER_ID");
+const int PROTECTOR_ID = g_TYPE_ID_GENERATOR.returnNextId("PROTECTOR_ID");
+const int DROID_ID = g_TYPE_ID_GENERATOR.returnNextId("DROID_SLOT_ID");
+const int FREEZER_ID = g_TYPE_ID_GENERATOR.returnNextId("DROID_ID");
+const int GRAPPLE_ID = g_TYPE_ID_GENERATOR.returnNextId("GRAPPLE_ID");
+const int SCANER_ID = g_TYPE_ID_GENERATOR.returnNextId("SCANER_ID");
 
-const int ENERGIZER_MODULE_ID   = g_TYPE_ID_GENERATOR.returnNextId("ENERGIZER_MODULE_ID");
-const int FREEZER_MODULE_ID     = g_TYPE_ID_GENERATOR.returnNextId("FREEZER_MODULE_ID");
-const int GRAPPLE_MODULE_ID     = g_TYPE_ID_GENERATOR.returnNextId("GRAPPLE_MODULE_ID");
-const int RADAR_MODULE_ID       = g_TYPE_ID_GENERATOR.returnNextId("RADAR_MODULE_ID");
-const int DRIVE_MODULE_ID       = g_TYPE_ID_GENERATOR.returnNextId("DRIVE_MODULE_ID");
-const int PROTECTOR_MODULE_ID   = g_TYPE_ID_GENERATOR.returnNextId("PROTECTOR_MODULE_ID");
-const int BAK_MODULE_ID         = g_TYPE_ID_GENERATOR.returnNextId("BAK_MODULE_ID");
-const int DROID_MODULE_ID       = g_TYPE_ID_GENERATOR.returnNextId("DROID_MODULE_ID");
-const int SCANER_MODULE_ID      = g_TYPE_ID_GENERATOR.returnNextId("SCANER_MODULE_ID");
+
+const int ROCKET_BULLET_ID = g_TYPE_ID_GENERATOR.returnNextId("ROCKET_BULLET_ID");
+
 
 // TEXTURES ID
 const int SPUTNIK_TEXTURE_ID       = g_TYPE_ID_GENERATOR.returnNextId("SPUTNIK_TEXTURE_ID"); 
@@ -529,17 +515,7 @@ const int SHIP_ID = g_TYPE_ID_GENERATOR.returnNextId("SHIP_ID");
 const int NPC_ID = g_TYPE_ID_GENERATOR.returnNextId("NPC_ID");
 const int PLAYER_ID = g_TYPE_ID_GENERATOR.returnNextId("PLAYER_ID");
 
-// SLOTS ID
-const int WEAPON_SLOT_ID = g_TYPE_ID_GENERATOR.returnNextId("WEAPON_SLOT_ID");
-const int DRIVE_SLOT_ID = g_TYPE_ID_GENERATOR.returnNextId("DRIVE_SLOT_ID");
-const int RADAR_SLOT_ID = g_TYPE_ID_GENERATOR.returnNextId("RADAR_SLOT_ID");
-const int BAK_SLOT_ID = g_TYPE_ID_GENERATOR.returnNextId("BAK_SLOT_ID");
-const int ENERGIZER_SLOT_ID = g_TYPE_ID_GENERATOR.returnNextId("ENERGIZER_SLOT_ID");
-const int PROTECTOR_SLOT_ID = g_TYPE_ID_GENERATOR.returnNextId("PROTECTOR_SLOT_ID");
-const int DROID_SLOT_ID = g_TYPE_ID_GENERATOR.returnNextId("DROID_SLOT_ID");
-const int FREEZER_SLOT_ID = g_TYPE_ID_GENERATOR.returnNextId("FREEZER_SLOT_ID");
-const int GRAPPLE_SLOT_ID = g_TYPE_ID_GENERATOR.returnNextId("GRAPPLE_SLOT_ID");
-const int SCANER_SLOT_ID = g_TYPE_ID_GENERATOR.returnNextId("SCANER_SLOT_ID");
+
 
 const int OTSEC_SLOT_ID = g_TYPE_ID_GENERATOR.returnNextId("OTSEC_SLOT_ID");
 const int GATE_SLOT_ID = g_TYPE_ID_GENERATOR.returnNextId("GATE_SLOT_ID");

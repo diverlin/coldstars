@@ -25,8 +25,8 @@ LazerItem :: LazerItem(TextureOb* _pTo_itemTexOb, int _damage_orig, int _radius_
 {
    CommonForItems_init(_pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
 
-   type_id = WEAPON_ID;
-   subtype_id = LAZER_ITEM_ID;
+   type_id = EQUIPMENT_ID;
+   subtype_id = LAZER_ID;
 
    damage_orig = _damage_orig;
    damage_add  = 0;

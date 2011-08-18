@@ -59,18 +59,18 @@ void WeaponSlot :: placed(float* _pTo_pos_x, float* _pTo_pos_y)
 
 void WeaponSlot :: updateTurrelPosition(float _pos_x, float _pos_y, float angle_inD)
 {
-    if (item_subtype_id == LAZER_ITEM_ID)
-       pTo_lazerItem->pTo_turrel->update(_pos_x, _pos_y, angle_inD);
-    if (item_subtype_id == ROCKET_ITEM_ID)
-       pTo_rocketItem->pTo_turrel->update(_pos_x, _pos_y, angle_inD);
+    if (item_subtype_id == LAZER_ID)
+       pTo_lazerEquipment->pTo_turrel->update(_pos_x, _pos_y, angle_inD);
+    if (item_subtype_id == ROCKET_ID)
+       pTo_rocketEquipment->pTo_turrel->update(_pos_x, _pos_y, angle_inD);
 }
 
 void WeaponSlot :: renderTurrel()
 {
-    if (item_subtype_id == LAZER_ITEM_ID)
-       pTo_lazerItem->pTo_turrel->render();
-    if (item_subtype_id == ROCKET_ITEM_ID)
-       pTo_rocketItem->pTo_turrel->render();
+    if (item_subtype_id == LAZER_ID)
+       pTo_lazerEquipment->pTo_turrel->render();
+    if (item_subtype_id == ROCKET_ID)
+       pTo_rocketEquipment->pTo_turrel->render();
 }
 
 
@@ -78,9 +78,9 @@ void WeaponSlot :: insertLazerItem(LazerItem* pTo_item)
 {
     item_subtype_id = pTo_item->subtype_id;   
  
-    pTo_lazerItem = pTo_item;
-    pTo_lazerItem->pTo_ship = pTo_ship;
-    pTo_lazerItem->pTo_wslot = this;
+    pTo_lazerEquipment = pTo_item;
+    pTo_lazerEquipment->pTo_ship = pTo_ship;
+    pTo_lazerEquipment->pTo_wslot = this;
 
     is_EQUIPED = true;
 
@@ -91,9 +91,9 @@ void WeaponSlot :: removeLazerItem()
 {
     item_subtype_id = -1;
         
-    pTo_lazerItem->pTo_ship = NULL;      
-    pTo_lazerItem->pTo_wslot = NULL;
-    pTo_lazerItem = NULL;
+    pTo_lazerEquipment->pTo_ship = NULL;      
+    pTo_lazerEquipment->pTo_wslot = NULL;
+    pTo_lazerEquipment = NULL;
 
     is_EQUIPED = false;
 
@@ -106,10 +106,10 @@ void WeaponSlot :: insertRocketItem(RocketItem* pTo_item)
 {
     item_subtype_id = pTo_item->subtype_id;    
  
-    pTo_rocketItem = pTo_item;
+    pTo_rocketEquipment = pTo_item;
     
-    pTo_rocketItem->pTo_ship = pTo_ship;
-    pTo_rocketItem->pTo_wslot = this;
+    pTo_rocketEquipment->pTo_ship = pTo_ship;
+    pTo_rocketEquipment->pTo_wslot = this;
     
     is_EQUIPED = true;
 
@@ -120,9 +120,9 @@ void WeaponSlot :: removeRocketItem()
 {
     item_subtype_id = -1;
         
-    pTo_rocketItem->pTo_ship = NULL;      
-    pTo_rocketItem->pTo_wslot = NULL;
-    pTo_rocketItem = NULL;
+    pTo_rocketEquipment->pTo_ship = NULL;      
+    pTo_rocketEquipment->pTo_wslot = NULL;
+    pTo_rocketEquipment = NULL;
     
     is_EQUIPED = false;
 
@@ -132,34 +132,34 @@ void WeaponSlot :: removeRocketItem()
 
 int WeaponSlot :: returnEquipedItemDamage()
 {
-    if (item_subtype_id == LAZER_ITEM_ID)
-       return pTo_lazerItem->damage;
-    if (item_subtype_id == ROCKET_ITEM_ID)
-       return pTo_rocketItem->damage;
+    if (item_subtype_id == LAZER_ID)
+       return pTo_lazerEquipment->damage;
+    if (item_subtype_id == ROCKET_ID)
+       return pTo_rocketEquipment->damage;
 }
 
 int WeaponSlot :: returnEquipedItemRadius()
 {
-    if (item_subtype_id == LAZER_ITEM_ID)
-       return pTo_lazerItem->radius;
-    if (item_subtype_id == ROCKET_ITEM_ID)
-       return pTo_rocketItem->radius;   
+    if (item_subtype_id == LAZER_ID)
+       return pTo_lazerEquipment->radius;
+    if (item_subtype_id == ROCKET_ID)
+       return pTo_rocketEquipment->radius;   
 }
 
 int WeaponSlot :: returnEquipedItemCondition()
 {
-    if (item_subtype_id == LAZER_ITEM_ID)
-       return pTo_lazerItem->condition;
-    if (item_subtype_id == ROCKET_ITEM_ID)
-       return pTo_rocketItem->condition;
+    if (item_subtype_id == LAZER_ID)
+       return pTo_lazerEquipment->condition;
+    if (item_subtype_id == ROCKET_ID)
+       return pTo_rocketEquipment->condition;
 }
 
 int WeaponSlot :: returnEquipedItemMass()
 {
-    if (item_subtype_id == LAZER_ITEM_ID)
-       return pTo_lazerItem->mass;
-    if (item_subtype_id == ROCKET_ITEM_ID)
-       return pTo_rocketItem->mass;
+    if (item_subtype_id == LAZER_ID)
+       return pTo_lazerEquipment->mass;
+    if (item_subtype_id == ROCKET_ID)
+       return pTo_rocketEquipment->mass;
 }
 
 
@@ -275,10 +275,10 @@ bool WeaponSlot :: isTargetOnTheSameStarSystem()
 
 bool WeaponSlot :: isAmmoAvailable()
 {
-    if (item_subtype_id == LAZER_ITEM_ID)
+    if (item_subtype_id == LAZER_ID)
        return true;
-    if (item_subtype_id == ROCKET_ITEM_ID)
-       if (pTo_rocketItem->ammo > 0)
+    if (item_subtype_id == ROCKET_ID)
+       if (pTo_rocketEquipment->ammo > 0)
           return true;
 
     return false;           
@@ -288,40 +288,40 @@ bool WeaponSlot :: isAmmoAvailable()
 
 bool WeaponSlot :: fireEvent_TRUE()
 {
-    if (item_subtype_id == LAZER_ITEM_ID)
+    if (item_subtype_id == LAZER_ID)
     {   
-       pTo_lazerItem->fireEvent();
-       pTo_lazerItem->deterioration();
+       pTo_lazerEquipment->fireEvent();
+       pTo_lazerEquipment->deterioration();
 
        if (target_type_id == SHIP_ID) 
        { 
-           pTo_shipTarget->hit_TRUE(pTo_lazerItem->damage);
+           pTo_shipTarget->hit_TRUE(pTo_lazerEquipment->damage);
            return true;
        } 
 
        if (target_type_id == ASTEROID_ID)  
        { 
-           pTo_asteroidTarget->hit_TRUE(pTo_lazerItem->damage);
+           pTo_asteroidTarget->hit_TRUE(pTo_lazerEquipment->damage);
            return true;
        }
 
        if (target_type_id == MINERAL_ID)  
        { 
-           pTo_mineralTarget->hit_TRUE(pTo_lazerItem->damage);
+           pTo_mineralTarget->hit_TRUE(pTo_lazerEquipment->damage);
            return true;
        }
 
        if (target_type_id == CONTAINER_ID)  
        { 
-           pTo_containerTarget->hit_TRUE(pTo_lazerItem->damage);
+           pTo_containerTarget->hit_TRUE(pTo_lazerEquipment->damage);
            return true;
        }
     }
 
-    if (item_subtype_id == ROCKET_ITEM_ID)
+    if (item_subtype_id == ROCKET_ID)
     {   
-       pTo_rocketItem->fireEvent();
-       pTo_rocketItem->deterioration();
+       pTo_rocketEquipment->fireEvent();
+       pTo_rocketEquipment->deterioration();
        return true; 
     }
 
@@ -334,38 +334,38 @@ bool WeaponSlot :: fireEvent_TRUE()
 
 bool WeaponSlot :: fireEvent_FALSE()
 {
-    if (item_subtype_id == LAZER_ITEM_ID)
+    if (item_subtype_id == LAZER_ID)
     {   
-       pTo_lazerItem->deterioration();
+       pTo_lazerEquipment->deterioration();
 
        if (target_type_id == SHIP_ID) 
        { 
-           pTo_shipTarget->hit_FALSE(pTo_lazerItem->damage);
+           pTo_shipTarget->hit_FALSE(pTo_lazerEquipment->damage);
            return true;
        } 
 
        if (target_type_id == ASTEROID_ID)  
        { 
-           pTo_asteroidTarget->hit_FALSE(pTo_lazerItem->damage);
+           pTo_asteroidTarget->hit_FALSE(pTo_lazerEquipment->damage);
            return true;
        }
 
        if (target_type_id == MINERAL_ID)  
        { 
-           pTo_mineralTarget->hit_FALSE(pTo_lazerItem->damage);
+           pTo_mineralTarget->hit_FALSE(pTo_lazerEquipment->damage);
            return true;
        }
 
        if (target_type_id == CONTAINER_ID)  
        { 
-           pTo_containerTarget->hit_FALSE(pTo_lazerItem->damage);
+           pTo_containerTarget->hit_FALSE(pTo_lazerEquipment->damage);
            return true;
        }
     }
 
-    if (item_subtype_id == ROCKET_ITEM_ID)
+    if (item_subtype_id == ROCKET_ID)
     {   
-       pTo_rocketItem->deterioration();
+       pTo_rocketEquipment->deterioration();
        return true; 
     }
 
@@ -479,11 +479,11 @@ void WeaponSlot :: renderFrame(GLuint flash_tex)
        //drawTexturedRect(flash_tex, self.rect, -1.0)
     if (is_EQUIPED == true)
     {
-       if (item_subtype_id == LAZER_ITEM_ID)
-          pTo_lazerItem->render(rect);
+       if (item_subtype_id == LAZER_ID)
+          pTo_lazerEquipment->render(rect);
         
-       if (item_subtype_id == ROCKET_ITEM_ID)
-          pTo_rocketItem->render(rect);
+       if (item_subtype_id == ROCKET_ID)
+          pTo_rocketEquipment->render(rect);
     }
         
 }
@@ -506,11 +506,11 @@ void WeaponSlot :: renderItemInfo()
 {
     if (is_EQUIPED == true)
     {
-       if (item_subtype_id == LAZER_ITEM_ID)
-          pTo_lazerItem->renderInfo(rect);
+       if (item_subtype_id == LAZER_ID)
+          pTo_lazerEquipment->renderInfo(rect);
         
-       if (item_subtype_id == ROCKET_ITEM_ID)
-          pTo_rocketItem->renderInfo(rect);
+       if (item_subtype_id == ROCKET_ID)
+          pTo_rocketEquipment->renderInfo(rect);
     }      
 }
 

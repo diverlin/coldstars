@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 EnergizerModule :: EnergizerModule(TextureOb* pTo_texOb)
 {
      CommonForModules_init(pTo_texOb);
-     subtype_id = ENERGIZER_MODULE_ID;
+     subtype_id = ENERGIZER_ID;
 
      energy_max_add = 0;
      restoration_add = 0;

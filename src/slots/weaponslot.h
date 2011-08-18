@@ -25,8 +25,8 @@ class WeaponSlot : public CommonForSlot
 {   public:
         bool is_READY_TO_FIRE;
 
-        RocketItem*      pTo_rocketItem;
-        LazerItem*       pTo_lazerItem;
+        RocketItem*      pTo_rocketEquipment;
+        LazerItem*       pTo_lazerEquipment;
 
         float* pTo_pos_x;
         float* pTo_pos_y;

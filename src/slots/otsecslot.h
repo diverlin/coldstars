@@ -24,10 +24,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class OtsecSlot : public CommonForSlot
 {   
      public:
-        RocketItem*      pTo_rocketItem;
-        LazerItem*       pTo_lazerItem;
-        RadarItem*       pTo_radarItem;
-        DriveItem*       pTo_driveItem;
+        RocketItem*      pTo_rocketEquipment;
+        LazerItem*       pTo_lazerEquipment;
+        RadarItem*       pTo_radarEquipment;
+        DriveItem*       pTo_driveEquipment;
         BakItem*         pTo_bakItem;
         EnergizerItem*   pTo_energizerItem;
         ProtectorItem*   pTo_protectorItem;
@@ -51,28 +51,30 @@ class OtsecSlot : public CommonForSlot
         OtsecSlot();
         OtsecSlot(int _type_id, Ship* _pTo_ship, TextureOb* _pTo_texOb, int _pos_x, int _pos_y);
 
-        void insertItem(RocketItem* pTo_item);
-        void insertItem(LazerItem* pTo_item);
-        void insertItem(RadarItem* pTo_item);
-        void insertItem(DriveItem* pTo_item);
-        void insertItem(BakItem* pTo_item);
-        void insertItem(EnergizerItem* pTo_item);
-        void insertItem(ProtectorItem* pTo_item);
-        void insertItem(DroidItem* pTo_item);
-        void insertItem(FreezerItem* pTo_item);
-        void insertItem(ScanerItem* pTo_item);
-        void insertItem(GrappleItem* pTo_item);
-        void insertItem(RocketModule* pTo_module);
-        void insertItem(LazerModule* pTo_module);
-        void insertItem(RadarModule* pTo_module);
-        void insertItem(DriveModule* pTo_module);
-        void insertItem(BakModule* pTo_module);
-        void insertItem(EnergizerModule* pTo_module);
-        void insertItem(ProtectorModule* pTo_module);
-        void insertItem(DroidModule* pTo_module);
-        void insertItem(FreezerModule* pTo_module);
-        void insertItem(ScanerModule* pTo_module);
-        void insertItem(GrappleModule* pTo_module);
+        bool insertItem(RocketItem* pTo_item);
+        bool insertItem(LazerItem* pTo_item);
+        
+        bool insertItem(RadarItem* pTo_item);
+        bool insertItem(DriveItem* pTo_item);
+        bool insertItem(BakItem* pTo_item);
+        bool insertItem(EnergizerItem* pTo_item);
+        bool insertItem(ProtectorItem* pTo_item);
+        bool insertItem(DroidItem* pTo_item);
+        bool insertItem(FreezerItem* pTo_item);
+        bool insertItem(ScanerItem* pTo_item);
+        bool insertItem(GrappleItem* pTo_item);
+        
+        bool insertItem(RocketModule* pTo_item);
+        bool insertItem(LazerModule* pTo_item);
+        bool insertItem(RadarModule* pTo_item);
+        bool insertItem(DriveModule* pTo_item);
+        bool insertItem(BakModule* pTo_item);
+        bool insertItem(EnergizerModule* pTo_item);
+        bool insertItem(ProtectorModule* pTo_item);
+        bool insertItem(DroidModule* pTo_item);
+        bool insertItem(FreezerModule* pTo_item);
+        bool insertItem(ScanerModule* pTo_item);
+        bool insertItem(GrappleModule* pTo_item);
                 
         void removeItem();
 

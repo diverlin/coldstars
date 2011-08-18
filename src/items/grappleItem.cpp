@@ -27,7 +27,7 @@ GrappleItem :: GrappleItem(TextureOb* _pTo_itemTexOb, int _strength_orig, int _r
     CommonForItems_init(_pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
 
     type_id = EQUIPMENT_ID;
-    subtype_id = GRAPPLE_ITEM_ID;
+    subtype_id = GRAPPLE_ID;
 
     //grapple_list = []
     //grapple_remove_queue = []

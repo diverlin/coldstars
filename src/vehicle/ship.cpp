@@ -350,21 +350,38 @@ Ship :: Ship(TextureOb* _pTo_texOb, int _max_weapons, bool _inhibit_GRAPPLE, int
     ///////////////////////////////////////////////////
 
 
-    ///////////////////////////////////////////////////
-    //////////// EQUPMENT SLOT ////////////////////////
-    drive_slot       = OtsecSlot(DRIVE_SLOT_ID,     this, pTo_slotTexOb, kontur_rect.center_x - 5*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h/2);
-    bak_slot         = OtsecSlot(BAK_SLOT_ID,       this, pTo_slotTexOb, kontur_rect.center_x - 5*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h/2);
-    radar_slot       = OtsecSlot(RADAR_SLOT_ID,     this, pTo_slotTexOb, kontur_rect.center_x + 4*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h/2);
-    scaner_slot      = OtsecSlot(SCANER_SLOT_ID,    this, pTo_slotTexOb, kontur_rect.center_x + 4*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h/2);
-    energizer_slot   = OtsecSlot(ENERGIZER_SLOT_ID, this, pTo_slotTexOb, kontur_rect.center_x - 2*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2);
-
-    if (inhibit_GRAPPLE == false)
-       grapple_slot  = OtsecSlot(GRAPPLE_SLOT_ID, this, pTo_slotTexOb, kontur_rect.center_x - 3*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h);
-
-    protector_slot   = OtsecSlot(PROTECTOR_SLOT_ID, this, pTo_slotTexOb, kontur_rect.center_x - 3*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h);
-    droid_slot       = OtsecSlot(DROID_SLOT_ID,     this, pTo_slotTexOb, kontur_rect.center_x - 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h);
-    freezer_slot     = OtsecSlot(FREEZER_SLOT_ID,   this, pTo_slotTexOb, kontur_rect.center_x - 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h);
-    ////////////////////////////////////////////////////
+	///////////////////////////////////////////////////
+	//////////// EQUPMENT SLOT ////////////////////////
+	drive_slot       = OtsecSlot(DRIVE_ID,     this, pTo_slotTexOb, kontur_rect.center_x - 5*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h/2);
+	total_slot_pList.push_back(&drive_slot);
+	
+	bak_slot         = OtsecSlot(BAK_ID,       this, pTo_slotTexOb, kontur_rect.center_x - 5*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h/2);
+	total_slot_pList.push_back(&bak_slot);
+	
+	radar_slot       = OtsecSlot(RADAR_ID,     this, pTo_slotTexOb, kontur_rect.center_x + 4*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h/2);
+	total_slot_pList.push_back(&radar_slot);	
+	
+	scaner_slot      = OtsecSlot(SCANER_ID,    this, pTo_slotTexOb, kontur_rect.center_x + 4*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h/2);
+	total_slot_pList.push_back(&scaner_slot);
+	
+	energizer_slot   = OtsecSlot(ENERGIZER_ID, this, pTo_slotTexOb, kontur_rect.center_x - 2*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2);
+    	total_slot_pList.push_back(&energizer_slot);
+    		
+	if (inhibit_GRAPPLE == false)
+	{
+		grapple_slot  = OtsecSlot(GRAPPLE_ID, this, pTo_slotTexOb, kontur_rect.center_x - 3*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h);
+    		total_slot_pList.push_back(&grapple_slot); 
+    	}
+    	
+	protector_slot   = OtsecSlot(PROTECTOR_ID, this, pTo_slotTexOb, kontur_rect.center_x - 3*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h);
+    	total_slot_pList.push_back(&protector_slot); 
+	
+	droid_slot       = OtsecSlot(DROID_ID,     this, pTo_slotTexOb, kontur_rect.center_x - 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h);
+    	total_slot_pList.push_back(&droid_slot); 
+    	
+	freezer_slot     = OtsecSlot(FREEZER_ID,   this, pTo_slotTexOb, kontur_rect.center_x - 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h);
+	total_slot_pList.push_back(&freezer_slot);   
+	////////////////////////////////////////////////////
 
 
     ////////////////////////////////////////////////////
@@ -372,7 +389,8 @@ Ship :: Ship(TextureOb* _pTo_texOb, int _max_weapons, bool _inhibit_GRAPPLE, int
     for (int i = 0; i <= 10; i++)
     {
          OtsecSlot* pTo_otsec_slot = new OtsecSlot(OTSEC_SLOT_ID, this, pTo_slotTexOb, kontur_rect.center_x + (i-6) * (*pTo_slotTexOb).w, kontur_rect.center_y - 3*(*pTo_slotTexOb).h);
-         otsec_slot_pList.push_back(pTo_otsec_slot);       
+         otsec_slot_pList.push_back(pTo_otsec_slot); 
+         total_slot_pList.push_back(pTo_otsec_slot);         
     }
     ////////////////////////////////////////////////////
 
@@ -891,40 +909,40 @@ void Ship :: calculateMass()
 
 
     ////////////// EQUPMENT SLOT ////////////////////////
-    if (drive_slot.is_EQUIPED == true)
-       mass += drive_slot.pTo_driveItem->mass;
+    //if (drive_slot.is_EQUIPED == true)
+       //mass += drive_slot.pTo_driveEquipment->mass;
 
-    if (bak_slot.is_EQUIPED == true)
-       mass += bak_slot.pTo_bakItem->mass;
+    //if (bak_slot.is_EQUIPED == true)
+       //mass += bak_slot.pTo_bakItem->mass;
 
-    if (radar_slot.is_EQUIPED == true)
-       mass += radar_slot.pTo_radarItem->mass;
+    //if (radar_slot.is_EQUIPED == true)
+       //mass += radar_slot.pTo_radarEquipment->mass;
 
-    if (scaner_slot.is_EQUIPED == true)
-       mass += scaner_slot.pTo_scanerItem->mass;
+    //if (scaner_slot.is_EQUIPED == true)
+       //mass += scaner_slot.pTo_scanerItem->mass;
 
-    if (energizer_slot.is_EQUIPED == true)
-       mass += energizer_slot.pTo_energizerItem->mass;
+    //if (energizer_slot.is_EQUIPED == true)
+       //mass += energizer_slot.pTo_energizerItem->mass;
 
-    if (inhibit_GRAPPLE == false)
-       if (grapple_slot.is_EQUIPED == true)
-          mass += grapple_slot.pTo_grappleItem->mass;
+    //if (inhibit_GRAPPLE == false)
+       //if (grapple_slot.is_EQUIPED == true)
+          //mass += grapple_slot.pTo_grappleItem->mass;
 
-    if (protector_slot.is_EQUIPED == true)
-       mass += protector_slot.pTo_protectorItem->mass;
+    //if (protector_slot.is_EQUIPED == true)
+       //mass += protector_slot.pTo_protectorItem->mass;
 
-    if (droid_slot.is_EQUIPED == true)
-       mass += droid_slot.pTo_droidItem->mass;
+    //if (droid_slot.is_EQUIPED == true)
+       //mass += droid_slot.pTo_droidItem->mass;
 
-    if (freezer_slot.is_EQUIPED == true)
-       mass += freezer_slot.pTo_freezerItem->mass;
+    //if (freezer_slot.is_EQUIPED == true)
+       //mass += freezer_slot.pTo_freezerItem->mass;
 
 
     //////// OTSEC SLOT ////////////////////////////////
-    for (unsigned int i = 0; i < otsec_slot_pList.size(); i++)
+    for (unsigned int i = 0; i < total_slot_pList.size(); i++)
     {
-        if (otsec_slot_pList[i]->is_EQUIPED == true)
-           mass += otsec_slot_pList[i]->getItemMass();      
+        if (total_slot_pList[i]->is_EQUIPED == true)
+           mass += total_slot_pList[i]->getItemMass();      
     }
 }
 
@@ -940,9 +958,9 @@ void Ship :: updateDriveAbility()
      ableTo.DRIVE = false;
 
      if (drive_slot.is_EQUIPED == true) 
-        if (drive_slot.pTo_driveItem->condition > 0)  
+        if (drive_slot.pTo_driveEquipment->condition > 0)  
         {
-           float val = (drive_slot.pTo_driveItem->speed - mass/70);
+           float val = (drive_slot.pTo_driveEquipment->speed - mass/70);
            if (val > 0)
            { 
               speed = val;
@@ -960,9 +978,9 @@ void Ship :: updateDriveAbility()
 void Ship :: updateRadarAbility()
 {
    if (radar_slot.is_EQUIPED == true) 
-      if (radar_slot.pTo_radarItem->condition > 0)  
+      if (radar_slot.pTo_radarEquipment->condition > 0)  
       {
-          radius = radar_slot.pTo_radarItem->radius;
+          radius = radar_slot.pTo_radarEquipment->radius;
           ableTo.RADAR = true;
       }
       
@@ -981,12 +999,12 @@ void Ship :: updateJumpAbility()
      ableTo.HJUMP = false;
 
      if (drive_slot.is_EQUIPED == true)
-        if (drive_slot.pTo_driveItem->condition > 0)
+        if (drive_slot.pTo_driveEquipment->condition > 0)
            if (bak_slot.is_EQUIPED == true)
               if (bak_slot.pTo_bakItem->condition > 0)
               {
-                 if (drive_slot.pTo_driveItem->hyper > bak_slot.pTo_bakItem->fuel)
-                    hyper = drive_slot.pTo_driveItem->hyper;
+                 if (drive_slot.pTo_driveEquipment->hyper > bak_slot.pTo_bakItem->fuel)
+                    hyper = drive_slot.pTo_driveEquipment->hyper;
                  else
                     hyper = bak_slot.pTo_bakItem->fuel;
 
@@ -1403,18 +1421,18 @@ void equip(Ship* pTo_ship)
        pTo_ship->grapple_slot.insertItem(pTo_grapple); 
     }
     
-    LazerItem* pTo_lazer;                                 
+                             
     for (unsigned int i = 0; i < 3; i++) //pTo_ship->otsec_slot_pList.size(); i++)
     {        
-        pTo_lazer = lazerGenerator(RACE_0_ID);              
+        LazerItem* pTo_lazer = lazerGenerator(RACE_0_ID);              
         pTo_ship->otsec_slot_pList[i]->insertItem(pTo_lazer);
     }
     
-    LazerModule* pTo_lazerModule;
+
     for (unsigned int i = 3; i < 6; i++) //pTo_ship->otsec_slot_pList.size(); i++)
     {        
-        pTo_lazerModule = lazerModuleGenerator();              
-        pTo_ship->otsec_slot_pList[i]->insertItem(pTo_lazerModule);
+        RadarModule* pTo_radarModule = radarModuleGenerator();              
+        pTo_ship->otsec_slot_pList[i]->insertItem(pTo_radarModule);
     }
     
 }

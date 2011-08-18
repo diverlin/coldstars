@@ -33,8 +33,9 @@ void CommonForSlot :: CommonForSlot_init(Ship* _pTo_ship, TextureOb* _pTo_texOb,
      
      rect = Rect(_pos_x, _pos_y, w, h);         // create rect with size of the texture
 
+     item_type_id    = -1;
      item_subtype_id = -1;
-
+     
      is_EQUIPED       = false;
      is_FLASHING      = false;
      is_CURSORED      = false; 

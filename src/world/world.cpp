@@ -178,7 +178,7 @@ void World :: generateNumFriendlyNPC(StarSystem* _pTo_starsystem, int ship_per_s
        
         equip(pTo_ship);            // improove
         pTo_ship->updateAllStuff(); // improove
-
+        
         pTo_npc->setShip(pTo_ship);
 
         _pTo_starsystem->addShip(pTo_ship);
@@ -226,7 +226,7 @@ bool World :: manage_map()
                 if (ss_cursor_dist < 10)
                 { 
                    int ss_ss_dist = lengthBetweenPoints(STARSYSTEM_pList[si]->rect_onMap.center_x, STARSYSTEM_pList[si]->rect_onMap.center_y, pTo_PLAYER->pTo_npc->pTo_starsystem->rect_onMap.center_x,  pTo_PLAYER->pTo_npc->pTo_starsystem->rect_onMap.center_y);
-                   if ( (ss_ss_dist < pTo_PLAYER->pTo_ship->drive_slot.pTo_driveItem->hyper) && (ss_ss_dist < pTo_PLAYER->pTo_ship->bak_slot.pTo_bakItem->fuel) )
+                   if ( (ss_ss_dist < pTo_PLAYER->pTo_ship->drive_slot.pTo_driveEquipment->hyper) && (ss_ss_dist < pTo_PLAYER->pTo_ship->bak_slot.pTo_bakItem->fuel) )
                       if (lmb == true)
                       { 
                           pTo_ss_active = STARSYSTEM_pList[si];    // debug

@@ -23,7 +23,7 @@ RocketModule :: RocketModule(TextureOb* _pTo_texOb)
 {
      CommonForModules_init(_pTo_texOb);
 
-     subtype_id = ROCKET_MODULE_ID;
+     subtype_id = ROCKET_ID;
 
      ammo_max_add = 0;
      damage_add = 0;
