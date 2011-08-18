@@ -30,7 +30,7 @@ DroidModule :: DroidModule(TextureOb* _pTo_texOb)
 DroidModule :: ~DroidModule()
 {}
 
-void DroidModule :: activation(DroidItem* _pTo_droid_item)
+void DroidModule :: activation(DroidEquipment* _pTo_droid_item)
 {
      _pTo_droid_item->repair_add += repair_add;
      _pTo_droid_item->updatePropetries();

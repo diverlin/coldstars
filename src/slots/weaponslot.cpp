@@ -74,7 +74,7 @@ void WeaponSlot :: renderTurrel()
 }
 
 
-void WeaponSlot :: insertLazerItem(LazerItem* pTo_item)
+void WeaponSlot :: insertLazerEquipment(LazerEquipment* pTo_item)
 {
     item_subtype_id = pTo_item->subtype_id;   
  
@@ -87,7 +87,7 @@ void WeaponSlot :: insertLazerItem(LazerItem* pTo_item)
     pTo_ship->updateFireAbility();
 }
 
-void WeaponSlot :: removeLazerItem()
+void WeaponSlot :: removeLazerEquipment()
 {
     item_subtype_id = -1;
         
@@ -102,7 +102,7 @@ void WeaponSlot :: removeLazerItem()
 
 
 
-void WeaponSlot :: insertRocketItem(RocketItem* pTo_item)
+void WeaponSlot :: insertRocketEquipment(RocketEquipment* pTo_item)
 {
     item_subtype_id = pTo_item->subtype_id;    
  
@@ -116,7 +116,7 @@ void WeaponSlot :: insertRocketItem(RocketItem* pTo_item)
     pTo_ship->updateFireAbility();
 }
 
-void WeaponSlot :: removeRocketItem()
+void WeaponSlot :: removeRocketEquipment()
 {
     item_subtype_id = -1;
         

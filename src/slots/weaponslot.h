@@ -25,8 +25,8 @@ class WeaponSlot : public CommonForSlot
 {   public:
         bool is_READY_TO_FIRE;
 
-        RocketItem*      pTo_rocketEquipment;
-        LazerItem*       pTo_lazerEquipment;
+        RocketEquipment*      pTo_rocketEquipment;
+        LazerEquipment*       pTo_lazerEquipment;
 
         float* pTo_pos_x;
         float* pTo_pos_y;
@@ -56,11 +56,11 @@ class WeaponSlot : public CommonForSlot
         void updateTurrelPosition(float _pos_x, float _pos_y, float angle_inD);
         void renderTurrel();          
 
-        void insertLazerItem(LazerItem* pTo_item);
-        void removeLazerItem();
+        void insertLazerEquipment(LazerEquipment* pTo_item);
+        void removeLazerEquipment();
           
-        void insertRocketItem(RocketItem* pTo_item);
-        void removeRocketItem();
+        void insertRocketEquipment(RocketEquipment* pTo_item);
+        void removeRocketEquipment();
 
         int returnEquipedItemDamage();
         int returnEquipedItemRadius();

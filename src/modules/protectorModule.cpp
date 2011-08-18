@@ -32,7 +32,7 @@ ProtectorModule :: ProtectorModule(TextureOb* _pTo_texOb)
 ProtectorModule :: ~ProtectorModule ()
 {}
 
-void ProtectorModule :: activation(ProtectorItem* _pTo_protector_item)
+void ProtectorModule :: activation(ProtectorEquipment* _pTo_protector_item)
 {
      _pTo_protector_item->protection_add += protection_add;
      _pTo_protector_item->updatePropetries();

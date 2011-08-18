@@ -41,7 +41,7 @@ class GrappleModule : public CommonForModules
       GrappleModule(TextureOb* _pTo_texOb);
       ~GrappleModule();
 
-      void activation(GrappleItem* _pTo_grapple_item);
+      void activation(GrappleEquipment* _pTo_grapple_item);
       void updateInfo();
 };
 

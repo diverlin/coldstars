@@ -32,7 +32,7 @@ ScanerModule :: ScanerModule(TextureOb* _pTo_texOb)
 ScanerModule :: ~ScanerModule ()
 {}
 
-void ScanerModule :: activation(ScanerItem* _pTo_scaner_item)
+void ScanerModule :: activation(ScanerEquipment* _pTo_scaner_item)
 {
     _pTo_scaner_item->scan_add += scan_add;
     _pTo_scaner_item->updatePropetries();

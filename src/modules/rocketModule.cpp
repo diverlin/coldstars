@@ -33,7 +33,7 @@ RocketModule :: RocketModule(TextureOb* _pTo_texOb)
 RocketModule :: ~RocketModule()
 {}
 
-void RocketModule :: activation(RocketItem* _pTo_rocket_item)
+void RocketModule :: activation(RocketEquipment* _pTo_rocket_item)
 {
      _pTo_rocket_item->ammo_max_add += ammo_max_add;
      _pTo_rocket_item->damage_add += damage_add;

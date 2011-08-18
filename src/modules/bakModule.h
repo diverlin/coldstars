@@ -35,7 +35,7 @@ class BakModule : public CommonForModules
       BakModule(TextureOb* _pTo_texOb);
       ~BakModule();
  
-      void activation(BakItem* pTo_bak_item);
+      void activation(BakEquipment* pTo_bak_item);
       void updateInfo();
 };
 

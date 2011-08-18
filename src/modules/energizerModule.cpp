@@ -28,7 +28,7 @@ EnergizerModule :: EnergizerModule(TextureOb* pTo_texOb)
      restoration_add = 0;
 }
 
-void EnergizerModule :: activation(EnergizerItem* pTo_energizer_item)
+void EnergizerModule :: activation(EnergizerEquipment* pTo_energizer_item)
 {
      pTo_energizer_item->energy_max_add  += energy_max_add;
      pTo_energizer_item->restoration_add += restoration_add;

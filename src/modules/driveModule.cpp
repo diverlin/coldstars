@@ -31,7 +31,7 @@ DriveModule :: DriveModule(TextureOb* _pTo_texOb)
 DriveModule :: ~DriveModule()
 {}
 
-void DriveModule :: activation(DriveItem* _pTo_drive_item)
+void DriveModule :: activation(DriveEquipment* _pTo_drive_item)
 {
      _pTo_drive_item->speed_add += speed_add;
      _pTo_drive_item->hyper_add += hyper_add;

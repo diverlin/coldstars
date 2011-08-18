@@ -39,7 +39,7 @@ class LazerModule : public CommonForModules
         LazerModule(TextureOb* _pTo_texOb);
         ~LazerModule();
 
-        void activation(LazerItem* _pTo_lazer_item);
+        void activation(LazerEquipment* _pTo_lazer_item);
         void updateInfo();
 };
 

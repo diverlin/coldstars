@@ -34,7 +34,7 @@ LazerModule :: ~LazerModule()
 }
 
 
-void LazerModule :: activation(LazerItem* _pTo_lazer_item)
+void LazerModule :: activation(LazerEquipment* _pTo_lazer_item)
 {
      _pTo_lazer_item->damage_add += damage_add;
      _pTo_lazer_item->radius_add += radius_add;

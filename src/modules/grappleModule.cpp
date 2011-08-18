@@ -34,7 +34,7 @@ GrappleModule :: GrappleModule(TextureOb* _pTo_texOb)
 GrappleModule :: ~GrappleModule ()
 {}
 
-void GrappleModule :: activation(GrappleItem* _pTo_grapple_item)
+void GrappleModule :: activation(GrappleEquipment* _pTo_grapple_item)
 {
      _pTo_grapple_item->strength_add   += strength_add;
      _pTo_grapple_item->radius_add     += radius_add;

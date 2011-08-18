@@ -35,7 +35,7 @@ class RadarModule : public CommonForModules
       RadarModule(TextureOb* _pTo_texOb);
       ~RadarModule();
 
-      void activation(RadarItem* _pTo_radar_item);
+      void activation(RadarEquipment* _pTo_radar_item);
       void updateInfo();
 };
 

@@ -40,7 +40,7 @@ class RocketModule : public CommonForModules
        RocketModule(TextureOb* _pTo_texOb);
        ~RocketModule();
 
-       void activation(RocketItem* _pTo_rocket_item);
+       void activation(RocketEquipment* _pTo_rocket_item);
        void updateInfo();
 };
 

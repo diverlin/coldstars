@@ -34,7 +34,7 @@ class DroidModule : public CommonForModules
       DroidModule(TextureOb* _pTo_texOb); 
       ~DroidModule(); 
 
-      void activation(DroidItem* _pTo_droid_item);
+      void activation(DroidEquipment* _pTo_droid_item);
       void updateInfo();
 };
 

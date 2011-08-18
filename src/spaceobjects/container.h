@@ -32,17 +32,17 @@ class Container : public CommonForSpaceItems
         int item_subtype_id; 
         int item_id;
                   
-        RocketItem*      pTo_rocketEquipment;
-        LazerItem*       pTo_lazerEquipment;
-        RadarItem*       pTo_radarEquipment;
-        DriveItem*       pTo_driveEquipment;
-        BakItem*         pTo_bakItem;
-        EnergizerItem*   pTo_energizerItem;
-        ProtectorItem*   pTo_protectorItem;
-        DroidItem*       pTo_droidItem;
-        FreezerItem*     pTo_freezerItem;
-        ScanerItem*      pTo_scanerItem;
-        GrappleItem*     pTo_grappleItem;
+        RocketEquipment*      pTo_rocketEquipment;
+        LazerEquipment*       pTo_lazerEquipment;
+        RadarEquipment*       pTo_radarEquipment;
+        DriveEquipment*       pTo_driveEquipment;
+        BakEquipment*         pTo_bakEquipment;
+        EnergizerEquipment*   pTo_energizerEquipment;
+        ProtectorEquipment*   pTo_protectorEquipment;
+        DroidEquipment*       pTo_droidEquipment;
+        FreezerEquipment*     pTo_freezerEquipment;
+        ScanerEquipment*      pTo_scanerEquipment;
+        GrappleEquipment*     pTo_grappleEquipment;
                             
         VEC_pString_type info_title_pList;  
         VEC_pString_type info_value_pList; 
@@ -55,17 +55,17 @@ class Container : public CommonForSpaceItems
         Container(StarSystem* _pTo_starsystem, TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _target_x, float _target_y);
         ~Container();
         
-        void packRocketItem(RocketItem* pTo_item);
-        void packLazerItem(LazerItem* pTo_item);
-        void packRadarItem(RadarItem* pTo_item);
-        void packDriveItem(DriveItem* pTo_item);
-        void packBakItem(BakItem* pTo_item);
-        void packEnergizerItem(EnergizerItem* pTo_item);
-        void packProtectorItem(ProtectorItem* pTo_item);
-        void packDroidItem(DroidItem* pTo_item);
-        void packFreezerItem(FreezerItem* pTo_item);
-        void packScanerItem(ScanerItem* pTo_item);
-        void packGrappleItem(GrappleItem* pTo_item);
+        void packRocketEquipment(RocketEquipment* pTo_item);
+        void packLazerEquipment(LazerEquipment* pTo_item);
+        void packRadarEquipment(RadarEquipment* pTo_item);
+        void packDriveEquipment(DriveEquipment* pTo_item);
+        void packBakEquipment(BakEquipment* pTo_item);
+        void packEnergizerEquipment(EnergizerEquipment* pTo_item);
+        void packProtectorEquipment(ProtectorEquipment* pTo_item);
+        void packDroidEquipment(DroidEquipment* pTo_item);
+        void packFreezerEquipment(FreezerEquipment* pTo_item);
+        void packScanerEquipment(ScanerEquipment* pTo_item);
+        void packGrappleEquipment(GrappleEquipment* pTo_item);
         
         void renderInfo();
 };
