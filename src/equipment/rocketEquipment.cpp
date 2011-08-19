@@ -248,10 +248,6 @@ RocketEquipment :: RocketEquipment(TextureOb* _pTo_itemTexOb, int _ammo_max_orig
         bullet_live_time     = ROCKET_EXISTANCE_TIME;
         bullet_angular_speed = ROCKET_ANGULAR_SPEED;
 
-        pTo_turrelTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.turrel_texOb_pList); 
-        pTo_turrel = new Turrel();
-        pTo_turrel->setTexOb(pTo_turrelTexOb);
-
         updatePropetries();
         countPrice();
         updateInfo();
@@ -348,9 +344,41 @@ void RocketEquipment :: fireEvent()
 {
     RocketBullet* pTo_r1; 
     if (pTo_ship->render_TURRELS == true)
-        pTo_r1 = new RocketBullet(pTo_ship->pTo_starsystem, pTo_bulletTexOb, pTo_turrel->points.center_x, pTo_turrel->points.center_y, pTo_turrel->points.angle_inD, pTo_wslot->pTo_target_pos_x, pTo_wslot->pTo_target_pos_y, pTo_wslot->pTo_target_is_alive, pTo_ship->id, damage, bullet_size, bullet_armor, bullet_speed_init, bullet_speed_max, bullet_d_speed, bullet_angular_speed, bullet_live_time);
+        pTo_r1 = new RocketBullet(pTo_ship->pTo_starsystem, 
+                                  pTo_bulletTexOb, 
+                                  pTo_turrel->points.center_x, 
+                                  pTo_turrel->points.center_y, 
+                                  pTo_turrel->points.angle_inD, 
+                                  pTo_turrel->pTo_target_pos_x, 
+                                  pTo_turrel->pTo_target_pos_y, 
+                                  pTo_turrel->pTo_target_is_alive, 
+                                  pTo_ship->id, 
+                                  damage, 
+                                  bullet_size, 
+                                  bullet_armor, 
+                                  bullet_speed_init, 
+                                  bullet_speed_max, 
+                                  bullet_d_speed, 
+                                  bullet_angular_speed, 
+                                  bullet_live_time);
     else
-        pTo_r1 = new RocketBullet(pTo_ship->pTo_starsystem, pTo_bulletTexOb, pTo_ship->points.center_x, pTo_ship->points.center_y, pTo_turrel->points.angle_inD, pTo_wslot->pTo_target_pos_x, pTo_wslot->pTo_target_pos_y, pTo_wslot->pTo_target_is_alive, pTo_ship->id, damage, bullet_size, bullet_armor, bullet_speed_init, bullet_speed_max, bullet_d_speed, bullet_angular_speed, bullet_live_time);
+        pTo_r1 = new RocketBullet(pTo_ship->pTo_starsystem, 
+                                  pTo_bulletTexOb, 
+                                  pTo_ship->points.center_x, 
+                                  pTo_ship->points.center_y, 
+                                  pTo_turrel->points.angle_inD, 
+                                  pTo_turrel->pTo_target_pos_x, 
+                                  pTo_turrel->pTo_target_pos_y, 
+                                  pTo_turrel->pTo_target_is_alive, 
+                                  pTo_ship->id, 
+                                  damage, 
+                                  bullet_size, 
+                                  bullet_armor, 
+                                  bullet_speed_init, 
+                                  bullet_speed_max, 
+                                  bullet_d_speed, 
+                                  bullet_angular_speed, 
+                                  bullet_live_time);
 
     //if (pTo_wslot->target_type_id == SHIP_ID)
         //pTo_r1->setShipAsTarget(pTo_wslot->pTo_shipTarget);

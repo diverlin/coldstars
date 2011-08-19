@@ -24,6 +24,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class OtsecSlot : public CommonForSlot
 {   
 	public:
+        	OtsecSlot();
+		OtsecSlot(int _type_id, Ship* _pTo_ship, TextureOb* _pTo_texOb, int _pos_x, int _pos_y);
+                
                 RocketEquipment*    get_pToRocketEquipment()    const;
                 LazerEquipment*     get_pToLazerEquipment()     const;
                 RadarEquipment*     get_pToRadarEquipment()     const;
@@ -47,9 +50,6 @@ class OtsecSlot : public CommonForSlot
                 FreezerModule*   get_pToFreezerModule()   const;
                 ScanerModule*    get_pToScanerModule()    const;
                 GrappleModule*   get_pToGrappleModule()   const;
-
-		OtsecSlot();
-		OtsecSlot(int _type_id, Ship* _pTo_ship, TextureOb* _pTo_texOb, int _pos_x, int _pos_y);
 
 		bool insertItem(RocketEquipment* pTo_item);
 		bool insertItem(LazerEquipment* pTo_item);
@@ -80,7 +80,10 @@ class OtsecSlot : public CommonForSlot
 
 		int getItemMass(); 
 		int getItemPrice(); 
-
+                int getItemDamage();
+                int getItemRadius();
+                int getItemCondition();
+                
 		void renderFrame(GLuint flash_tex);
 		void renderFrames(GLuint flash_tex);
        

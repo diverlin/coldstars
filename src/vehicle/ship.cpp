@@ -166,7 +166,13 @@ bool Navigator :: getDockingPermission()
 
 
 
-Ship :: Ship(TextureOb* _pTo_texOb, int _max_weapons, bool _inhibit_GRAPPLE, int _space, int _armor_max, int _protection, int _nominal_temperature)
+Ship :: Ship(TextureOb* _pTo_texOb, 
+             int _max_weapons, 
+             bool _inhibit_GRAPPLE, 
+             int _space, 
+             int _armor_max, 
+             int _protection, 
+             int _nominal_temperature)
 {
     is_alive    = true;
     is_dying    = false;
@@ -275,10 +281,11 @@ Ship :: Ship(TextureOb* _pTo_texOb, int _max_weapons, bool _inhibit_GRAPPLE, int
  
     if (_max_weapons >= 1)
     {  
-       weapon_slot1 = WeaponSlot(this, pTo_slotTexOb, kontur_rect.center_x + 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2);
-       weapon_slot1.placed(&points.weapon1_center_x, &points.weapon1_center_y);
-       weapon_slot_pList.push_back(&weapon_slot1); 
-
+       weapon_slot1 = OtsecSlot(EQUIPMENT_ID, this, pTo_slotTexOb, kontur_rect.center_x + 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2);
+       turrel1.placed(&points.weapon1_center_x, &points.weapon1_center_y);
+       total_slot_pList.push_back(&weapon_slot1); 
+       turrel1.bindSlot(&weapon_slot1);
+       turrel_total_pList.push_back(&turrel1); 
        if (render_TURRELS == true)
        {   
            points.initWeapon1CenterPoint(0, h/3);
@@ -290,9 +297,11 @@ Ship :: Ship(TextureOb* _pTo_texOb, int _max_weapons, bool _inhibit_GRAPPLE, int
    
     if (_max_weapons >= 2)
     {  
-       weapon_slot2 = WeaponSlot(this, pTo_slotTexOb, kontur_rect.center_x + 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h);    
-       weapon_slot2.placed(&points.weapon2_center_x, &points.weapon2_center_y);      
-       weapon_slot_pList.push_back(&weapon_slot2);  
+       weapon_slot2 = OtsecSlot(EQUIPMENT_ID, this, pTo_slotTexOb, kontur_rect.center_x + 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h);    
+       turrel2.placed(&points.weapon2_center_x, &points.weapon2_center_y);      
+       //weapon_slot_pList.push_back(&weapon_slot2);
+       turrel2.bindSlot(&weapon_slot2);  
+       turrel_total_pList.push_back(&turrel2); 
        if (render_TURRELS == true)
        {  
            points.initWeapon2CenterPoint(0, -h/3);
@@ -304,9 +313,11 @@ Ship :: Ship(TextureOb* _pTo_texOb, int _max_weapons, bool _inhibit_GRAPPLE, int
 
     if (_max_weapons >= 3)
     {  
-       weapon_slot3 = WeaponSlot(this, pTo_slotTexOb, kontur_rect.center_x + 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h); 
-       weapon_slot3.placed(&points.weapon3_center_x, &points.weapon3_center_y);  
-       weapon_slot_pList.push_back(&weapon_slot3);  
+       weapon_slot3 = OtsecSlot(EQUIPMENT_ID, this, pTo_slotTexOb, kontur_rect.center_x + 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h); 
+       turrel3.placed(&points.weapon3_center_x, &points.weapon3_center_y);  
+       //weapon_slot_pList.push_back(&weapon_slot3);  
+       turrel3.bindSlot(&weapon_slot3);
+       turrel_total_pList.push_back(&turrel3); 
        if (render_TURRELS == true)
        {  
            points.initWeapon3CenterPoint(-w/5, h/3);
@@ -318,9 +329,11 @@ Ship :: Ship(TextureOb* _pTo_texOb, int _max_weapons, bool _inhibit_GRAPPLE, int
 
     if (_max_weapons >= 4)
     {  
-       weapon_slot4 = WeaponSlot(this, pTo_slotTexOb, kontur_rect.center_x + 2.2*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h/2);
-       weapon_slot4.placed(&points.weapon4_center_x, &points.weapon4_center_y);
-       weapon_slot_pList.push_back(&weapon_slot4);  
+       weapon_slot4 = OtsecSlot(EQUIPMENT_ID, this, pTo_slotTexOb, kontur_rect.center_x + 2.2*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h/2);
+       turrel4.placed(&points.weapon4_center_x, &points.weapon4_center_y);
+       //weapon_slot_pList.push_back(&weapon_slot4); 
+       turrel4.bindSlot(&weapon_slot4);
+       turrel_total_pList.push_back(&turrel4);  
        if (render_TURRELS == true)
        {  
            points.initWeapon4CenterPoint(w/5, -h/3);
@@ -334,9 +347,11 @@ Ship :: Ship(TextureOb* _pTo_texOb, int _max_weapons, bool _inhibit_GRAPPLE, int
 
     if (_max_weapons >= 5)
     {  
-       weapon_slot5 = WeaponSlot(this, pTo_slotTexOb, kontur_rect.center_x + 2.2*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h/2);
-       weapon_slot5.placed(&points.weapon5_center_x, &points.weapon5_center_y);
-       weapon_slot_pList.push_back(&weapon_slot5);  
+       weapon_slot5 = OtsecSlot(EQUIPMENT_ID, this, pTo_slotTexOb, kontur_rect.center_x + 2.2*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h/2);
+       turrel5.placed(&points.weapon5_center_x, &points.weapon5_center_y);
+       //weapon_slot_pList.push_back(&weapon_slot5); 
+       turrel5.bindSlot(&weapon_slot5); 
+       turrel_total_pList.push_back(&turrel5); 
        if (render_TURRELS == true)
        {  
            points.initWeapon5CenterPoint(-w/3, -h/3);
@@ -346,7 +361,8 @@ Ship :: Ship(TextureOb* _pTo_texOb, int _max_weapons, bool _inhibit_GRAPPLE, int
        }
     } 
 
-    total_weapon_slot_num = weapon_slot_pList.size();
+    //total_weapon_slot_num = weapon_slot_pList.size();
+    total_weapon_slot_num = turrel_total_pList.size();
     ///////////////////////////////////////////////////
 
 
@@ -518,10 +534,11 @@ void Ship :: reloadAllWeapons()
      // reload wepons
      // used once at the beginning of turn
 
-     reloaded_weapon_pList.clear();
-     for (unsigned int i = 0; i < equiped_weapon_slot_pList.size(); i++)
-         if ((*equiped_weapon_slot_pList[i]).isAmmoAvailable() == true)
-            reloaded_weapon_pList.push_back(equiped_weapon_slot_pList[i]);
+     //reloaded_weapon_pList.clear();
+     turrel_reloaded_pList.clear();
+     for (unsigned int i = 0; i < turrel_equiped_pList.size(); i++)
+         if (turrel_equiped_pList[i]->isAmmoAvailable() == true)
+            turrel_reloaded_pList.push_back(turrel_equiped_pList[i]);
             
      fire_delay = 10;
      d_fire_delay = 40;   // 0;
@@ -536,22 +553,22 @@ void Ship :: setWeaponsToShipTarget(Ship* pTo_ship, bool wslot_1_SELECTED = true
 {
         // set Target for selected non-targeted weapon slots 
         if (total_weapon_slot_num >= 1)
-           weapon_slot1.is_SELECTED = wslot_1_SELECTED;
+           turrel1.is_SELECTED = wslot_1_SELECTED;
         if (total_weapon_slot_num >= 2)
-           weapon_slot2.is_SELECTED = wslot_2_SELECTED;
+           turrel2.is_SELECTED = wslot_2_SELECTED;
         if (total_weapon_slot_num >= 3)
-           weapon_slot3.is_SELECTED = wslot_3_SELECTED;
+           turrel3.is_SELECTED = wslot_3_SELECTED;
         if (total_weapon_slot_num >= 4)
-           weapon_slot4.is_SELECTED = wslot_4_SELECTED;
+           turrel4.is_SELECTED = wslot_4_SELECTED;
         if (total_weapon_slot_num >= 5)
-           weapon_slot5.is_SELECTED = wslot_5_SELECTED;
+           turrel5.is_SELECTED = wslot_5_SELECTED;
 
         float dist_to_target = lengthBetweenPoints(points.center_x, points.center_y, pTo_ship->points.center_x, pTo_ship->points.center_y);
-        for (unsigned int i = 0; i < equiped_weapon_slot_pList.size(); i++)
-            if ( equiped_weapon_slot_pList[i]->is_SELECTED == true )
-               if ( equiped_weapon_slot_pList[i]->has_TARGET == false )
-                  if ( dist_to_target < equiped_weapon_slot_pList[i]->returnEquipedItemRadius() )
-                     equiped_weapon_slot_pList[i]->setShipTarget(pTo_ship);
+        for (unsigned int i = 0; i < turrel_equiped_pList.size(); i++)
+            if ( turrel_equiped_pList[i]->is_SELECTED == true )
+               if ( turrel_equiped_pList[i]->has_TARGET == false )
+                  if ( dist_to_target < turrel_equiped_pList[i]->pTo_slot->getItemRadius() )
+                     turrel_equiped_pList[i]->setShipTarget(pTo_ship);
                  
 
 }
@@ -565,22 +582,22 @@ void Ship :: setWeaponsToAsteroidTarget(Asteroid* pTo_asteroid, bool wslot_1_SEL
 {
         // set Target for selected non-targeted weapon slots 
         if (total_weapon_slot_num >= 1)
-           weapon_slot1.is_SELECTED = wslot_1_SELECTED;
+           turrel1.is_SELECTED = wslot_1_SELECTED;
         if (total_weapon_slot_num >= 2)
-           weapon_slot2.is_SELECTED = wslot_2_SELECTED;
+           turrel2.is_SELECTED = wslot_2_SELECTED;
         if (total_weapon_slot_num >= 3)
-           weapon_slot3.is_SELECTED = wslot_3_SELECTED;
+           turrel3.is_SELECTED = wslot_3_SELECTED;
         if (total_weapon_slot_num >= 4)
-           weapon_slot4.is_SELECTED = wslot_4_SELECTED;
+           turrel4.is_SELECTED = wslot_4_SELECTED;
         if (total_weapon_slot_num >= 5)
-           weapon_slot5.is_SELECTED = wslot_5_SELECTED;
+           turrel5.is_SELECTED = wslot_5_SELECTED;
 
         float dist_to_target = lengthBetweenPoints(points.center_x, points.center_y, pTo_asteroid->points.center_x, pTo_asteroid->points.center_y);
-        for (unsigned int i = 0; i < equiped_weapon_slot_pList.size(); i++)
-            if ( equiped_weapon_slot_pList[i]->is_SELECTED == true )
-               if ( equiped_weapon_slot_pList[i]->has_TARGET == false )
-                  if ( dist_to_target < equiped_weapon_slot_pList[i]->returnEquipedItemRadius() )
-                     equiped_weapon_slot_pList[i]->setAsteroidTarget(pTo_asteroid);
+        for (unsigned int i = 0; i < turrel_equiped_pList.size(); i++)
+            if ( turrel_equiped_pList[i]->is_SELECTED == true )
+               if ( turrel_equiped_pList[i]->has_TARGET == false )
+                  if ( dist_to_target < turrel_equiped_pList[i]->pTo_slot->getItemRadius() )
+                     turrel_equiped_pList[i]->setAsteroidTarget(pTo_asteroid);
                        
                   
 }
@@ -596,22 +613,22 @@ void Ship :: setWeaponsToMineralTarget(Mineral* pTo_mineral, bool wslot_1_SELECT
 {
         // set Target for selected non-targeted weapon slots 
         if (total_weapon_slot_num >= 1)
-           weapon_slot1.is_SELECTED = wslot_1_SELECTED;
+           turrel1.is_SELECTED = wslot_1_SELECTED;
         if (total_weapon_slot_num >= 2)
-           weapon_slot2.is_SELECTED = wslot_2_SELECTED;
+           turrel2.is_SELECTED = wslot_2_SELECTED;
         if (total_weapon_slot_num >= 3)
-           weapon_slot3.is_SELECTED = wslot_3_SELECTED;
+           turrel3.is_SELECTED = wslot_3_SELECTED;
         if (total_weapon_slot_num >= 4)
-           weapon_slot4.is_SELECTED = wslot_4_SELECTED;
+           turrel4.is_SELECTED = wslot_4_SELECTED;
         if (total_weapon_slot_num >= 5)
-           weapon_slot5.is_SELECTED = wslot_5_SELECTED;
+           turrel5.is_SELECTED = wslot_5_SELECTED;
 
         float dist_to_target = lengthBetweenPoints(points.center_x, points.center_y, pTo_mineral->points.center_x, pTo_mineral->points.center_y);
-        for (unsigned int i = 0; i < equiped_weapon_slot_pList.size(); i++)
-            if ( equiped_weapon_slot_pList[i]->is_SELECTED == true )
-               if ( equiped_weapon_slot_pList[i]->has_TARGET == false )
-                  if ( dist_to_target < equiped_weapon_slot_pList[i]->returnEquipedItemRadius() )
-                     equiped_weapon_slot_pList[i]->setMineralTarget(pTo_mineral);
+        for (unsigned int i = 0; i < turrel_equiped_pList.size(); i++)
+            if ( turrel_equiped_pList[i]->is_SELECTED == true )
+               if ( turrel_equiped_pList[i]->has_TARGET == false )
+                  if ( dist_to_target < turrel_equiped_pList[i]->pTo_slot->getItemRadius() )
+                     turrel_equiped_pList[i]->setMineralTarget(pTo_mineral);
 
 }
 
@@ -620,23 +637,23 @@ void Ship :: setWeaponsToContainerTarget(Container* pTo_container, bool wslot_1_
 {
         // set Target for selected non-targeted weapon slots 
         if (total_weapon_slot_num >= 1)
-           weapon_slot1.is_SELECTED = wslot_1_SELECTED;
+           turrel1.is_SELECTED = wslot_1_SELECTED;
         if (total_weapon_slot_num >= 2)
-           weapon_slot2.is_SELECTED = wslot_2_SELECTED;
+           turrel2.is_SELECTED = wslot_2_SELECTED;
         if (total_weapon_slot_num >= 3)
-           weapon_slot3.is_SELECTED = wslot_3_SELECTED;
+           turrel3.is_SELECTED = wslot_3_SELECTED;
         if (total_weapon_slot_num >= 4)
-           weapon_slot4.is_SELECTED = wslot_4_SELECTED;
+           turrel4.is_SELECTED = wslot_4_SELECTED;
         if (total_weapon_slot_num >= 5)
-           weapon_slot5.is_SELECTED = wslot_5_SELECTED;
+           turrel5.is_SELECTED = wslot_5_SELECTED;
 
         //printf("inside setWeaponsToAsteroidTarget\n ");
         float dist_to_target = lengthBetweenPoints(points.center_x, points.center_y, pTo_container->points.center_x, pTo_container->points.center_y);
-        for (unsigned int i = 0; i < equiped_weapon_slot_pList.size(); i++)
-            if ( equiped_weapon_slot_pList[i]->is_SELECTED == true )
-               if ( equiped_weapon_slot_pList[i]->has_TARGET == false )
-                  if ( dist_to_target < equiped_weapon_slot_pList[i]->returnEquipedItemRadius() )
-                     equiped_weapon_slot_pList[i]->setContainerTarget(pTo_container);
+        for (unsigned int i = 0; i < turrel_equiped_pList.size(); i++)
+            if ( turrel_equiped_pList[i]->is_SELECTED == true )
+               if ( turrel_equiped_pList[i]->has_TARGET == false )
+                  if ( dist_to_target < turrel_equiped_pList[i]->pTo_slot->getItemRadius() )
+                     turrel_equiped_pList[i]->setContainerTarget(pTo_container);
 }
 
 
@@ -648,18 +665,18 @@ void Ship :: setWeaponsToContainerTarget(Container* pTo_container, bool wslot_1_
 void Ship :: weaponsFire_TRUE(int timer)
 {
      if (timer < TURN_TIME - fire_delay)
-        for (unsigned int wi = 0; wi < reloaded_weapon_pList.size(); wi++)
+        for (unsigned int i = 0; i < turrel_reloaded_pList.size(); i++)
         {
-            if ( reloaded_weapon_pList[wi]->fireCheck() == true )
-               if ( reloaded_weapon_pList[wi]->fireEvent_TRUE() == true )
+            if ( turrel_reloaded_pList[i]->fireCheck() == true )
+               if ( turrel_reloaded_pList[i]->fireEvent_TRUE() == true )
                {
-                   reloaded_weapon_pList.erase(reloaded_weapon_pList.begin() + wi);
+                   turrel_reloaded_pList.erase(turrel_reloaded_pList.begin() + i);
                    fire_delay += d_fire_delay;
                    break;
                }
             else
             {
-               reloaded_weapon_pList.erase(reloaded_weapon_pList.begin() + wi);
+               turrel_reloaded_pList.erase(turrel_reloaded_pList.begin() + i);
                break;
             }
         }
@@ -669,18 +686,18 @@ void Ship :: weaponsFire_TRUE(int timer)
 void Ship :: weaponsFire_FALSE(int timer)
 {
      if (timer < TURN_TIME - fire_delay)
-        for (unsigned int wi = 0; wi < reloaded_weapon_pList.size(); wi++)
+        for (unsigned int i = 0; i < turrel_reloaded_pList.size(); i++)
         {
-            if ( reloaded_weapon_pList[wi]->fireCheck() == true )
-               if ( reloaded_weapon_pList[wi]->fireEvent_FALSE() == true )
+            if ( turrel_reloaded_pList[i]->fireCheck() == true )
+               if ( turrel_reloaded_pList[i]->fireEvent_FALSE() == true )
                {
-                   reloaded_weapon_pList.erase(reloaded_weapon_pList.begin() + wi);
+                   turrel_reloaded_pList.erase(turrel_reloaded_pList.begin() + i);
                    fire_delay += d_fire_delay;
                    break;
                }
             else
             {
-               reloaded_weapon_pList.erase(reloaded_weapon_pList.begin() + wi);
+               turrel_reloaded_pList.erase(turrel_reloaded_pList.begin() + i);
                break;
             }
         }
@@ -692,29 +709,29 @@ void Ship :: weaponsFire_FALSE(int timer)
 void Ship :: resetDeselectedWeaponTargets(bool wslot_1_SELECTED = false, bool wslot_2_SELECTED = false, bool wslot_3_SELECTED = false, bool wslot_4_SELECTED = false, bool wslot_5_SELECTED = false)
 {
         // reset Target for selected targeted weapon slots 
-        if (weapon_slot_pList.size() >= 1)
-           weapon_slot1.is_SELECTED = wslot_1_SELECTED;
-        if (weapon_slot_pList.size() >= 2)
-           weapon_slot2.is_SELECTED = wslot_2_SELECTED;
-        if (weapon_slot_pList.size() >= 3)
-           weapon_slot3.is_SELECTED = wslot_3_SELECTED;
-        if (weapon_slot_pList.size() >= 4)
-           weapon_slot4.is_SELECTED = wslot_4_SELECTED;
-        if (weapon_slot_pList.size() >= 5)
-           weapon_slot5.is_SELECTED = wslot_5_SELECTED;
+        if (total_weapon_slot_num >= 1)
+           turrel1.is_SELECTED = wslot_1_SELECTED;
+        if (total_weapon_slot_num >= 2)
+           turrel2.is_SELECTED = wslot_2_SELECTED;
+        if (total_weapon_slot_num >= 3)
+           turrel3.is_SELECTED = wslot_3_SELECTED;
+        if (total_weapon_slot_num >= 4)
+           turrel4.is_SELECTED = wslot_4_SELECTED;
+        if (total_weapon_slot_num >= 5)
+           turrel5.is_SELECTED = wslot_5_SELECTED;
 
-        for (unsigned int i = 0; i < equiped_weapon_slot_pList.size(); i++)
-            if ((*equiped_weapon_slot_pList[i]).is_SELECTED == false)
-               (*equiped_weapon_slot_pList[i]).resetTarget();
+        for (unsigned int i = 0; i < turrel_equiped_pList.size(); i++)
+            if (turrel_equiped_pList[i]->is_SELECTED == false)
+                turrel_equiped_pList[i]->resetTarget();
 }
 
 
 void Ship :: removeWeaponSlotDeadTargets()
 {
-     for (unsigned int i = 0; i < equiped_weapon_slot_pList.size(); i++)
-         if (equiped_weapon_slot_pList[i]->has_TARGET == true)
-            if (equiped_weapon_slot_pList[i]->isTargetAlive() == false)
-                equiped_weapon_slot_pList[i]->resetTarget();
+     for (unsigned int i = 0; i < turrel_equiped_pList.size(); i++)
+         if (turrel_equiped_pList[i]->has_TARGET == true)
+            if (turrel_equiped_pList[i]->isTargetAlive() == false)
+                turrel_equiped_pList[i]->resetTarget();
 }
 
 
@@ -862,25 +879,25 @@ void Ship :: updateAllStuff()
 
 void Ship :: updateFireAbility()
 {
-     equiped_weapon_slot_pList.clear();
+     turrel_equiped_pList.clear();
 
      int sum_damage = 0;
      int sum_fire_radius = 0;
 
-     for (unsigned int i = 0; i < weapon_slot_pList.size(); i++)
+     for (unsigned int i = 0; i < turrel_total_pList.size(); i++)
      { 
-        if (weapon_slot_pList[i]->is_EQUIPED == true)
-           if (weapon_slot_pList[i]->returnEquipedItemCondition() > 0)
+        if (turrel_total_pList[i]->pTo_slot->is_EQUIPED == true)
+           if (turrel_total_pList[i]->pTo_slot->getItemCondition() > 0)
            {
-              equiped_weapon_slot_pList.push_back(weapon_slot_pList[i]);
-              sum_damage += weapon_slot_pList[i]->returnEquipedItemDamage(); 
-              sum_fire_radius += weapon_slot_pList[i]->returnEquipedItemRadius(); 
+              turrel_equiped_pList.push_back(turrel_total_pList[i]);
+              sum_damage += turrel_total_pList[i]->pTo_slot->getItemDamage(); 
+              sum_fire_radius += turrel_total_pList[i]->pTo_slot->getItemRadius(); 
            }
      }
 
-     if (equiped_weapon_slot_pList.size() != 0)
+     if (turrel_equiped_pList.size() != 0)
      {
-        average_fire_radius = sum_fire_radius/equiped_weapon_slot_pList.size();
+        average_fire_radius = sum_fire_radius/turrel_equiped_pList.size();
         ableTo.FIRE = true;
      }
      else
@@ -899,12 +916,12 @@ void Ship :: calculateMass()
 {
      mass = 0;   
 
-     ////////////// WEAPON SLOT ////////////////////////
-     for (unsigned int i = 0; i < weapon_slot_pList.size(); i++)
-     { 
-        if (weapon_slot_pList[i]->is_EQUIPED == true)
-           mass += weapon_slot_pList[i]->returnEquipedItemMass(); 
-     }
+     //////////////// WEAPON SLOT ////////////////////////
+     //for (unsigned int i = 0; i < weapon_slot_pList.size(); i++)
+     //{ 
+        //if (weapon_slot_pList[i]->is_EQUIPED == true)
+           //mass += weapon_slot_pList[i]->returnEquipedItemMass(); 
+     //}
 
 
 
@@ -1311,27 +1328,25 @@ void Ship :: renderKorpus()
 
 void Ship :: renderTurrels()
 {
-    for(unsigned int i = 0; i < weapon_slot_pList.size(); i++)
+    for(unsigned int i = 0; i < turrel_equiped_pList.size(); i++)
     {
-        if (weapon_slot_pList[i]->is_EQUIPED == true)
+        float tur_angle_inD;
+        if (turrel_equiped_pList[i]->has_TARGET == true)
         {
-           float tur_angle_inD;
-           if (weapon_slot_pList[i]->has_TARGET == true)
-           {
-              float tur_xl = (*(weapon_slot_pList[i]->pTo_target_pos_x)) - (*turrel_center_x_pList[i]);
-              float tur_yl = (*(weapon_slot_pList[i]->pTo_target_pos_y)) - (*turrel_center_y_pList[i]);
+              float tur_xl = (*(turrel_equiped_pList[i]->pTo_target_pos_x)) - (*turrel_center_x_pList[i]);
+              float tur_yl = (*(turrel_equiped_pList[i]->pTo_target_pos_y)) - (*turrel_center_y_pList[i]);
 
               float tur_angle_inR = atan2(tur_yl, tur_xl);
               tur_angle_inD = tur_angle_inR * RADIAN_TO_DEGREE_RATE;
-           }
-           else
-           {
-              tur_angle_inD = points.angle_inD;
-           } 
-
-           weapon_slot_pList[i]->updateTurrelPosition((*turrel_center_x_pList[i]), (*turrel_center_y_pList[i]), tur_angle_inD); 
-           weapon_slot_pList[i]->renderTurrel();
         }
+        else
+        {
+        tur_angle_inD = points.angle_inD;
+        } 
+
+        turrel_equiped_pList[i]->updateTurrelPosition((*turrel_center_x_pList[i]), (*turrel_center_y_pList[i]), tur_angle_inD); 
+        turrel_equiped_pList[i]->renderTurrel();
+        
     } 
 }
 
@@ -1352,13 +1367,13 @@ void equip(Ship* pTo_ship)
     if (pTo_ship->total_weapon_slot_num >= 1)
     {
        LazerEquipment* pTo_lazer1 = lazerGenerator(RACE_0_ID);    
-       pTo_ship->weapon_slot1.insertLazerEquipment(pTo_lazer1); 
+       pTo_ship->weapon_slot1.insertItem(pTo_lazer1); 
     }   
 
     if (pTo_ship->total_weapon_slot_num >= 2)
     {
        LazerEquipment* pTo_lazer2 = lazerGenerator(RACE_0_ID);    
-       pTo_ship->weapon_slot2.insertLazerEquipment(pTo_lazer2); 
+       pTo_ship->weapon_slot2.insertItem(pTo_lazer2); 
     }   
     
     if (pTo_ship->total_weapon_slot_num >= 3)
@@ -1366,13 +1381,13 @@ void equip(Ship* pTo_ship)
        //LazerEquipment* pTo_lazer3 = lazerGenerator(RACE_0_ID);    
        //pTo_ship->weapon_slot3.insertLazerEquipment(pTo_lazer3); 
        RocketEquipment* pTo_rocket3 = rocketGenerator(RACE_0_ID);    
-       pTo_ship->weapon_slot3.insertRocketEquipment(pTo_rocket3); 
+       pTo_ship->weapon_slot3.insertItem(pTo_rocket3); 
     }   
         
     if (pTo_ship->total_weapon_slot_num >= 4)
     {
        LazerEquipment* pTo_lazer4 = lazerGenerator(RACE_0_ID);    
-       pTo_ship->weapon_slot4.insertLazerEquipment(pTo_lazer4);         
+       pTo_ship->weapon_slot4.insertItem(pTo_lazer4);         
        //RocketEquipment* pTo_rocket4 = rocketGenerator(RACE_0_ID);    
        //(*pTo_ship).weapon_slot4.insertRocketEquipment(pTo_rocket4); 
     }   
@@ -1380,7 +1395,7 @@ void equip(Ship* pTo_ship)
     if (pTo_ship->total_weapon_slot_num >= 5) 
     {
        LazerEquipment* pTo_lazer5 = lazerGenerator(RACE_0_ID);    
-       pTo_ship->weapon_slot5.insertLazerEquipment(pTo_lazer5); 
+       pTo_ship->weapon_slot5.insertItem(pTo_lazer5); 
        //RocketEquipment* pTo_rocket5 = rocketGenerator(RACE_0_ID);    
        //(*pTo_ship).weapon_slot5.insertRocketEquipment(pTo_rocket5); 
     }   
