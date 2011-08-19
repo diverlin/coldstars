@@ -324,10 +324,10 @@ void ShipInternal :: renderSkill()
 
 void ShipInternal :: resetSlotsRenderInfoFlag()
 {
-    for (unsigned int i = 0; i < pTo_ship->weapon_slot_pList.size(); i++)
-    { 
-         pTo_ship->weapon_slot_pList[i]->is_CURSORED = false;
-    } 
+    //for (unsigned int i = 0; i < pTo_ship->weapon_slot_pList.size(); i++)
+    //{ 
+         //pTo_ship->weapon_slot_pList[i]->is_CURSORED = false;
+    //} 
  
     //pTo_ship->drive_slot.is_CURSORED     = false;
     //pTo_ship->bak_slot.is_CURSORED       = false;
@@ -854,18 +854,18 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
 
 void ShipInternal :: renderItemInfo()
 {
-	// WEAPON SLOT
-	for(unsigned int i = 0; i < pTo_ship->weapon_slot_pList.size(); i++)
-	{ 
-		if (pTo_ship->weapon_slot_pList[i]->is_CURSORED == true)
-		{
-			if (pTo_ship->weapon_slot_pList[i]->is_EQUIPED == true)
-			{
-				pTo_ship->weapon_slot_pList[i]->renderItemInfo();
-				break;
-			}
-		}	
-	}
+	//// WEAPON SLOT
+	//for(unsigned int i = 0; i < pTo_ship->weapon_slot_pList.size(); i++)
+	//{ 
+		//if (pTo_ship->weapon_slot_pList[i]->is_CURSORED == true)
+		//{
+			//if (pTo_ship->weapon_slot_pList[i]->is_EQUIPED == true)
+			//{
+				//pTo_ship->weapon_slot_pList[i]->renderItemInfo();
+				//break;
+			//}
+		//}	
+	//}
 
 	// TOTAL SLOT
 	for(unsigned int i = 0; i < pTo_ship->total_slot_pList.size(); i++)
@@ -894,10 +894,10 @@ void ShipInternal :: renderInternaly()
 
 	drawTexturedRect(pTo_ship->pTo_texOb->texture, pTo_ship->kontur_rect, -1.0);
 
-	for (unsigned int i = 0; i < pTo_ship->weapon_slot_pList.size(); i++)
-	{ 
-	pTo_ship->weapon_slot_pList[i]->renderFrame(-1);
-	}
+	//for (unsigned int i = 0; i < pTo_ship->weapon_slot_pList.size(); i++)
+	//{ 
+	//pTo_ship->weapon_slot_pList[i]->renderFrame(-1);
+	//}
 
 	for(unsigned int i = 0; i < pTo_ship->total_slot_pList.size(); i++)
 	{

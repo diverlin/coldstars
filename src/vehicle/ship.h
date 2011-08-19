@@ -91,6 +91,8 @@ class Navigator
 class Ship
 {   
     public:
+        VEC_pTurrel_type turrel_pList;
+    
         bool is_alive, is_dying, is_explosed;
         int type_id, id;
 
@@ -151,20 +153,27 @@ class Ship
 
         // WEPONS
         int fire_delay, d_fire_delay;
-        VEC_pWeaponSlot_type weapon_slot_pList;
-        VEC_pWeaponSlot_type equiped_weapon_slot_pList;
-        VEC_pWeaponSlot_type reloaded_weapon_pList;
+        //VEC_pWeaponSlot_type weapon_slot_pList;
+        //VEC_pWeaponSlot_type equiped_weapon_slot_pList;
+        //VEC_pWeaponSlot_type reloaded_weapon_pList;
 
         int total_weapon_slot_num;
-        WeaponSlot weapon_slot1;
-        WeaponSlot weapon_slot2;
-        WeaponSlot weapon_slot3;
-        WeaponSlot weapon_slot4;
-        WeaponSlot weapon_slot5;
-
-
-
-
+        OtsecSlot weapon_slot1;
+        OtsecSlot weapon_slot2;
+        OtsecSlot weapon_slot3;
+        OtsecSlot weapon_slot4;
+        OtsecSlot weapon_slot5;
+        
+        VEC_pTurrel_type turrel_total_pList;
+        VEC_pTurrel_type turrel_reloaded_pList;
+        VEC_pTurrel_type turrel_equiped_pList;
+        
+        Turrel turrel1;
+        Turrel turrel2;
+        Turrel turrel3;
+        Turrel turrel4;
+        Turrel turrel5;
+        
         //######### EQUPMENT SLOT
         OtsecSlot drive_slot;
         OtsecSlot bak_slot;
@@ -178,7 +187,7 @@ class Ship
                                                 
         //######### OTSEC SLOT
         //VEC_pOtsecSlot_type otsec_slot_pList;
-        VEC_pOtsecSlot_type total_slot_pList;
+        VEC_pOtsecSlot_type slot_total_pList;
         VEC_pOtsecSlot_type otsec_slot_pList;
         
         //######### GATE SLOT

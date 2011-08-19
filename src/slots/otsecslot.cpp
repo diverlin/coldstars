@@ -809,65 +809,97 @@ void OtsecSlot :: renderFrame(GLuint flash_tex)
         
 }
 
+
+
+int OtsecSlot :: getItemRadius()
+{ 
+        if (item_type_id == EQUIPMENT_ID)
+	{
+		//items 
+		if (item_subtype_id == LAZER_ID)
+			return pTo_lazerEquipment->radius;
+		if (item_subtype_id == ROCKET_ID)
+			return pTo_rocketEquipment->radius;
+        }
+}
+
+
+int OtsecSlot :: getItemDamage()
+{
+        if (item_type_id == EQUIPMENT_ID)
+	{
+		//items 
+		if (item_subtype_id == LAZER_ID)
+			return pTo_lazerEquipment->damage;
+		if (item_subtype_id == ROCKET_ID)
+			return pTo_rocketEquipment->damage;
+        }
+}
+
+
+
+int OtsecSlot :: getItemCondition()
+{  
+        return 1000;
+}
+
 void OtsecSlot :: renderEquipedItem()
 {
-	if (is_EQUIPED == true)
+	if (item_type_id == EQUIPMENT_ID)
 	{
-		if (item_type_id == EQUIPMENT_ID)
-		{
-			//items 
-			if (item_subtype_id == LAZER_ID)
-				pTo_lazerEquipment->render(rect);
-			if (item_subtype_id == ROCKET_ID)
-				pTo_rocketEquipment->render(rect);
-			if (item_subtype_id == RADAR_ID)
-				pTo_radarEquipment->render(rect);
-			if (item_subtype_id == DRIVE_ID)
-				pTo_driveEquipment->render(rect);
-			if (item_subtype_id == BAK_ID)
-				pTo_bakEquipment->render(rect);
-			if (item_subtype_id == ENERGIZER_ID)
-				pTo_energizerEquipment->render(rect);
-			if (item_subtype_id == PROTECTOR_ID)
-          			pTo_protectorEquipment->render(rect);   
-			if (item_subtype_id == DROID_ID)
-				pTo_droidEquipment->render(rect);
-			if (item_subtype_id == FREEZER_ID)
-				pTo_freezerEquipment->render(rect);
-			if (item_subtype_id == SCANER_ID)
-				pTo_scanerEquipment->render(rect);
-			if (item_subtype_id == GRAPPLE_ID)
-				pTo_grappleEquipment->render(rect);
-    		}
+		//items 
+		if (item_subtype_id == LAZER_ID)
+			pTo_lazerEquipment->render(rect);
+		if (item_subtype_id == ROCKET_ID)
+			pTo_rocketEquipment->render(rect);
+		if (item_subtype_id == RADAR_ID)
+                        pTo_radarEquipment->render(rect);
+                if (item_subtype_id == DRIVE_ID)
+			pTo_driveEquipment->render(rect);
+		if (item_subtype_id == BAK_ID)
+			pTo_bakEquipment->render(rect);
+		if (item_subtype_id == ENERGIZER_ID)
+			pTo_energizerEquipment->render(rect);
+		if (item_subtype_id == PROTECTOR_ID)
+          		pTo_protectorEquipment->render(rect);   
+		if (item_subtype_id == DROID_ID)
+			pTo_droidEquipment->render(rect);
+		if (item_subtype_id == FREEZER_ID)
+			pTo_freezerEquipment->render(rect);
+		if (item_subtype_id == SCANER_ID)
+			pTo_scanerEquipment->render(rect);
+		if (item_subtype_id == GRAPPLE_ID)
+			pTo_grappleEquipment->render(rect);
+        }
     		
-    		if (item_type_id == MODULE_ID)
-    		{
-			//modules 
-			if (item_subtype_id == LAZER_ID)
-				pTo_lazerModule->render(rect);
-			if (item_subtype_id == ROCKET_ID)
-				pTo_rocketModule->render(rect);
-			if (item_subtype_id == RADAR_ID)
-				pTo_radarModule->render(rect);
-			if (item_subtype_id == DRIVE_ID)
-				pTo_driveModule->render(rect);
-			if (item_subtype_id == BAK_ID)
-				pTo_bakModule->render(rect);
-			if (item_subtype_id == ENERGIZER_ID)
-				pTo_energizerModule->render(rect);
-			if (item_subtype_id == PROTECTOR_ID)
-				pTo_protectorModule->render(rect);   
-			if (item_subtype_id == DROID_ID)
-				pTo_droidModule->render(rect);
-			if (item_subtype_id == FREEZER_ID)
-				pTo_freezerModule->render(rect);
-			if (item_subtype_id == SCANER_ID)
-				pTo_scanerModule->render(rect);
-			if (item_subtype_id == GRAPPLE_ID)
-				pTo_grappleModule->render(rect);
-		}
+        if (item_type_id == MODULE_ID)
+    	{
+		//modules 
+		if (item_subtype_id == LAZER_ID)
+			pTo_lazerModule->render(rect);
+		if (item_subtype_id == ROCKET_ID)
+			pTo_rocketModule->render(rect);
+		if (item_subtype_id == RADAR_ID)
+			pTo_radarModule->render(rect);
+		if (item_subtype_id == DRIVE_ID)
+			pTo_driveModule->render(rect);
+		if (item_subtype_id == BAK_ID)
+			pTo_bakModule->render(rect);
+		if (item_subtype_id == ENERGIZER_ID)
+			pTo_energizerModule->render(rect);
+		if (item_subtype_id == PROTECTOR_ID)
+			pTo_protectorModule->render(rect);   
+		if (item_subtype_id == DROID_ID)
+			pTo_droidModule->render(rect);
+		if (item_subtype_id == FREEZER_ID)
+			pTo_freezerModule->render(rect);
+		if (item_subtype_id == SCANER_ID)
+			pTo_scanerModule->render(rect);
+		if (item_subtype_id == GRAPPLE_ID)
+			pTo_grappleModule->render(rect);
 	}
 }
+
 
 
 
@@ -887,60 +919,65 @@ void OtsecSlot :: renderFrames(GLuint flash_tex)
 
 void OtsecSlot :: renderItemInfo()
 {
-	if (is_EQUIPED == true)
+	if (item_type_id == EQUIPMENT_ID)
 	{
-		if (item_type_id == EQUIPMENT_ID)
-		{
-			// items
-			if (item_subtype_id == LAZER_ID)
-          			pTo_lazerEquipment->renderInfo(rect);
-			if (item_subtype_id == ROCKET_ID)
-				pTo_rocketEquipment->renderInfo(rect);
-			if (item_subtype_id == RADAR_ID)
-				pTo_radarEquipment->renderInfo(rect);
-			if (item_subtype_id == DRIVE_ID)
-				pTo_driveEquipment->renderInfo(rect);
-			if (item_subtype_id == BAK_ID)
-				pTo_bakEquipment->renderInfo(rect);
-			if (item_subtype_id == ENERGIZER_ID)
-				pTo_energizerEquipment->renderInfo(rect);
-			if (item_subtype_id == PROTECTOR_ID)
-				pTo_protectorEquipment->renderInfo(rect);   
-			if (item_subtype_id == DROID_ID)
-				pTo_droidEquipment->renderInfo(rect);
-			if (item_subtype_id == FREEZER_ID)
-				pTo_freezerEquipment->renderInfo(rect);
-			if (item_subtype_id == SCANER_ID)
-				pTo_scanerEquipment->renderInfo(rect);
-			if (item_subtype_id == GRAPPLE_ID)
-				pTo_grappleEquipment->renderInfo(rect);
-     		}
+                //switch (item_subtype_id)
+                //{
+                        //case LAZER_ID: pTo_lazerEquipment->renderInfo(rect); break;
+                //}
+                // items
+		if (item_subtype_id == LAZER_ID)
+        		pTo_lazerEquipment->renderInfo(rect);
+		if (item_subtype_id == ROCKET_ID)
+			pTo_rocketEquipment->renderInfo(rect);
+		if (item_subtype_id == RADAR_ID)
+			pTo_radarEquipment->renderInfo(rect);
+		if (item_subtype_id == DRIVE_ID)
+			pTo_driveEquipment->renderInfo(rect);
+		if (item_subtype_id == BAK_ID)
+			pTo_bakEquipment->renderInfo(rect);
+		if (item_subtype_id == ENERGIZER_ID)
+			pTo_energizerEquipment->renderInfo(rect);
+		if (item_subtype_id == PROTECTOR_ID)
+			pTo_protectorEquipment->renderInfo(rect);   
+		if (item_subtype_id == DROID_ID)
+			pTo_droidEquipment->renderInfo(rect);
+		if (item_subtype_id == FREEZER_ID)
+			pTo_freezerEquipment->renderInfo(rect);
+		if (item_subtype_id == SCANER_ID)
+			pTo_scanerEquipment->renderInfo(rect);
+		if (item_subtype_id == GRAPPLE_ID)
+			pTo_grappleEquipment->renderInfo(rect);
+     	}
      		
-     		if (item_type_id == MODULE_ID)
-     		{
-			// modules
-			if (item_subtype_id == LAZER_ID)
-				pTo_lazerModule->renderInfo(rect);
-			if (item_subtype_id == ROCKET_ID)
-				pTo_rocketModule->renderInfo(rect);
-			if (item_subtype_id == RADAR_ID)
-				pTo_radarModule->renderInfo(rect);
-			if (item_subtype_id == DRIVE_ID)
-				pTo_driveModule->renderInfo(rect);
-			if (item_subtype_id == BAK_ID)
-				pTo_bakModule->renderInfo(rect);
-			if (item_subtype_id == ENERGIZER_ID)
-				pTo_energizerModule->renderInfo(rect);
-        		if (item_subtype_id == PROTECTOR_ID)
-				pTo_protectorModule->renderInfo(rect);   
-			if (item_subtype_id == DROID_ID)
-				pTo_droidModule->renderInfo(rect);
-			if (item_subtype_id == FREEZER_ID)
-				pTo_freezerModule->renderInfo(rect);
-			if (item_subtype_id == SCANER_ID)
-				pTo_scanerModule->renderInfo(rect);
-			if (item_subtype_id == GRAPPLE_ID)
-				pTo_grappleModule->renderInfo(rect);
-		}
-	}      
+     	if (item_type_id == MODULE_ID)
+     	{
+		// modules
+		if (item_subtype_id == LAZER_ID)
+			pTo_lazerModule->renderInfo(rect);
+		if (item_subtype_id == ROCKET_ID)
+			pTo_rocketModule->renderInfo(rect);
+		if (item_subtype_id == RADAR_ID)
+			pTo_radarModule->renderInfo(rect);
+		if (item_subtype_id == DRIVE_ID)
+			pTo_driveModule->renderInfo(rect);
+		if (item_subtype_id == BAK_ID)
+			pTo_bakModule->renderInfo(rect);
+		if (item_subtype_id == ENERGIZER_ID)
+			pTo_energizerModule->renderInfo(rect);
+        	if (item_subtype_id == PROTECTOR_ID)
+			pTo_protectorModule->renderInfo(rect);   
+		if (item_subtype_id == DROID_ID)
+			pTo_droidModule->renderInfo(rect);
+		if (item_subtype_id == FREEZER_ID)
+			pTo_freezerModule->renderInfo(rect);
+		if (item_subtype_id == SCANER_ID)
+			pTo_scanerModule->renderInfo(rect);
+		if (item_subtype_id == GRAPPLE_ID)
+			pTo_grappleModule->renderInfo(rect);
+	}
 }
+
+
+
+

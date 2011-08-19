@@ -431,6 +431,7 @@ const int WEAPON_SLOT_ID = g_TYPE_ID_GENERATOR.returnNextId("WEAPON_SLOT_ID");
 const int EQUIPMENT_ID        = g_TYPE_ID_GENERATOR.returnNextId("EQUIPMENT_ID");
 const int MODULE_ID = g_TYPE_ID_GENERATOR.returnNextId("MODULE_ID");
  
+//#define LAZER_ID 5
 const int LAZER_ID   = g_TYPE_ID_GENERATOR.returnNextId("LAZER_ID"); 
 const int ROCKET_ID  = g_TYPE_ID_GENERATOR.returnNextId("ROCKET_ID");
 
