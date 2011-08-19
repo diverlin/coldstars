@@ -24,9 +24,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class FreezerEquipment : public CommonForEquipment
 {  
    public:
-      int type_id;
-      int subtype_id;
-
       int freeze_orig;
       int freeze_add;
       int freeze;

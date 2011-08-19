@@ -26,7 +26,6 @@ DroidEquipment :: DroidEquipment(TextureOb* _pTo_itemTexOb, int _repair_orig, in
 {
     CommonForEquipment_init(_pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
 
-    type_id = EQUIPMENT_ID;
     subtype_id = DROID_ID;
 
     repair_orig = _repair_orig;

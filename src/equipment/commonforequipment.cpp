@@ -25,6 +25,8 @@ CommonForEquipment :: CommonForEquipment()
 
 void CommonForEquipment :: CommonForEquipment_init(TextureOb* _pTo_itemTexOb, int _modules_num_max, int _mass, int _condition_max, int _deterioration_rate)
 {
+    type_id = EQUIPMENT_ID;
+    
     pTo_itemTexOb = _pTo_itemTexOb;
 
     if (pTo_itemTexOb->is_animated == false)

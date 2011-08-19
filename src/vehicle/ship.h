@@ -158,11 +158,11 @@ class Ship
         //VEC_pWeaponSlot_type reloaded_weapon_pList;
 
         int total_weapon_slot_num;
-        OtsecSlot weapon_slot1;
-        OtsecSlot weapon_slot2;
-        OtsecSlot weapon_slot3;
-        OtsecSlot weapon_slot4;
-        OtsecSlot weapon_slot5;
+        ItemSlot weapon_slot1;
+        ItemSlot weapon_slot2;
+        ItemSlot weapon_slot3;
+        ItemSlot weapon_slot4;
+        ItemSlot weapon_slot5;
         
         VEC_pTurrel_type turrel_total_pList;
         VEC_pTurrel_type turrel_reloaded_pList;
@@ -175,23 +175,23 @@ class Ship
         Turrel turrel5;
         
         //######### EQUPMENT SLOT
-        OtsecSlot drive_slot;
-        OtsecSlot bak_slot;
-        OtsecSlot radar_slot;
-        OtsecSlot scaner_slot;
-        OtsecSlot energizer_slot;
-        OtsecSlot grapple_slot;
-        OtsecSlot protector_slot;
-        OtsecSlot droid_slot;
-        OtsecSlot freezer_slot;
+        ItemSlot drive_slot;
+        ItemSlot bak_slot;
+        ItemSlot radar_slot;
+        ItemSlot scaner_slot;
+        ItemSlot energizer_slot;
+        ItemSlot grapple_slot;
+        ItemSlot protector_slot;
+        ItemSlot droid_slot;
+        ItemSlot freezer_slot;
                                                 
         //######### OTSEC SLOT
         //VEC_pOtsecSlot_type otsec_slot_pList;
-        VEC_pOtsecSlot_type slot_total_pList;
-        VEC_pOtsecSlot_type otsec_slot_pList;
+        VEC_pItemSlot_type slot_total_pList;
+        VEC_pItemSlot_type slot_otsec_pList;
         
         //######### GATE SLOT
-        OtsecSlot gate_slot;
+        ItemSlot gate_slot;
 
         ///////////////////////////////
         Abilities ableTo;
@@ -306,7 +306,7 @@ class Ship
              void updateScanAbility();
 
 
-        OtsecSlot* return_pToEmptyOtsecSlot();
+        ItemSlot* return_pToEmptyOtsecSlot();
 
         void setMaxArmor();
         void setMaxFuel();

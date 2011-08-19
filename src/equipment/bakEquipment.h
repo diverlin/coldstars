@@ -23,9 +23,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class BakEquipment : public CommonForEquipment
 {
 public:
-     int type_id;
-     int subtype_id;
-
      int fuel_max_orig;
      int fuel_max_add;
      int fuel_max;

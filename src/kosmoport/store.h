@@ -41,7 +41,7 @@ class Store
         int freezer_num;     
         int energyBlock_num; 
 
-        VEC_pOtsecSlot_type slot_pList;
+        VEC_pItemSlot_type slot_pList;
 
 
         Store(TextureOb* _pTo_bg_texOb, TextureOb* _pTo_slot_texOb);
@@ -52,7 +52,7 @@ class Store
 
         void createSlots();
 
-        OtsecSlot* return_pToEmptySlot();
+        ItemSlot* return_pToEmptySlot();
 
         void initItemsGenerator();
 
@@ -77,18 +77,18 @@ class Store
         //void buyItem(ob, slot);
         //void buyKorpus(ob, slot);
     
-        int buyWeaponSlotItem(WeaponSlot*   pTo_weapon_slot); 
-        int buyDriveSlotItem(OtsecSlot*     pTo_drive_slot); 
-        int buyBakSlotItem(OtsecSlot*       pTo_bak_slot); 
-        int buyRadarSlotItem(OtsecSlot*     pTo_radar_slot); 
-        int buyScanerSlotItem(OtsecSlot*    pTo_scaner_slot); 
-        int buyEnergizerSlotItem(OtsecSlot* pTo_energizer_slot); 
-        int buyGrappleSlotItem(OtsecSlot*   pTo_grapple_slot); 
-        int buyProtectorSlotItem(OtsecSlot* pTo_protector_slot); 
-        int buyDroidSlotItem(OtsecSlot*     pTo_droid_slot); 
-        int buyFreezerSlotItem(OtsecSlot*   pTo_freezer_slot); 
+        int buyWeaponSlotItem(ItemSlot*    pTo_weapon_slot); 
+        int buyDriveSlotItem(ItemSlot*     pTo_drive_slot); 
+        int buyBakSlotItem(ItemSlot*       pTo_bak_slot); 
+        int buyRadarSlotItem(ItemSlot*     pTo_radar_slot); 
+        int buyScanerSlotItem(ItemSlot*    pTo_scaner_slot); 
+        int buyEnergizerSlotItem(ItemSlot* pTo_energizer_slot); 
+        int buyGrappleSlotItem(ItemSlot*   pTo_grapple_slot); 
+        int buyProtectorSlotItem(ItemSlot* pTo_protector_slot); 
+        int buyDroidSlotItem(ItemSlot*     pTo_droid_slot); 
+        int buyFreezerSlotItem(ItemSlot*   pTo_freezer_slot); 
 
-        int buyOtsecSlotItem(OtsecSlot* pTo_otsec_slot); 
+        int buyOtsecSlotItem(ItemSlot* pTo_otsec_slot); 
 
         void mouseControl();
              void resetSlotsRenderInfoFlag();

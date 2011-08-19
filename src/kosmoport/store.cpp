@@ -73,7 +73,7 @@ void Store :: createSlots()
             int clm_act = 1;
             while (clm_act <= clm)
             {
-                   OtsecSlot* pTo_slot = new OtsecSlot(OTSEC_SLOT_ID, NULL, pTo_slot_texOb, (x0 + clm_act * 1.1 * pTo_slot_texOb->w), (y0 + row_act * 1.1 * pTo_slot_texOb->h));
+                   ItemSlot* pTo_slot = new ItemSlot(UNIVERSAL_SLOT_ID, NULL, pTo_slot_texOb, (x0 + clm_act * 1.1 * pTo_slot_texOb->w), (y0 + row_act * 1.1 * pTo_slot_texOb->h));
                    slot_pList.push_back(pTo_slot);
                    clm_act++;
             }
@@ -149,7 +149,7 @@ void Store :: manager()
 }
 */  
 
-OtsecSlot* Store :: return_pToEmptySlot()
+ItemSlot* Store :: return_pToEmptySlot()
 {
       for (unsigned int si = 0; si < slot_pList.size(); si++)
           if (slot_pList[si]->is_EQUIPED == false)
@@ -307,28 +307,28 @@ void Store :: addEnergizerEquipment(EnergizerEquipment* _pTo_energizerEquipment)
 
 
 
-int Store :: buyWeaponSlotItem(WeaponSlot* pTo_weapon_slot)
+int Store :: buyWeaponSlotItem(ItemSlot* pTo_weapon_slot)
 {
     int price = 0;
 
     if (pTo_weapon_slot->item_subtype_id == LAZER_ID)
     {
-       price = pTo_weapon_slot->pTo_lazerEquipment->price;
-       addLazerEquipment(pTo_weapon_slot->pTo_lazerEquipment);
-       pTo_weapon_slot->removeLazerEquipment();
+       price = pTo_weapon_slot->get_pToLazerEquipment()->price;
+       addLazerEquipment(pTo_weapon_slot->get_pToLazerEquipment());
+       pTo_weapon_slot->removeItem();
     }
 
     if (pTo_weapon_slot->item_subtype_id == ROCKET_ID)
     {
-       price = pTo_weapon_slot->pTo_rocketEquipment->price;
-       addRocketEquipment(pTo_weapon_slot->pTo_rocketEquipment);
-       pTo_weapon_slot->removeRocketEquipment();
+       price = pTo_weapon_slot->get_pToRocketEquipment()->price;
+       addRocketEquipment(pTo_weapon_slot->get_pToRocketEquipment());
+       pTo_weapon_slot->removeItem();
     } 
     return price;
 }
 
 
-int Store :: buyDriveSlotItem(OtsecSlot* pTo_drive_slot)
+int Store :: buyDriveSlotItem(ItemSlot* pTo_drive_slot)
 {
     int price = pTo_drive_slot->get_pToDriveEquipment()->price;
     addDriveEquipment(pTo_drive_slot->get_pToDriveEquipment());
@@ -337,7 +337,7 @@ int Store :: buyDriveSlotItem(OtsecSlot* pTo_drive_slot)
 } 
 
 
-int Store :: buyBakSlotItem(OtsecSlot* pTo_bak_slot)
+int Store :: buyBakSlotItem(ItemSlot* pTo_bak_slot)
 {
     int price = pTo_bak_slot->get_pToBakEquipment()->price;
     addBakEquipment(pTo_bak_slot->get_pToBakEquipment());
@@ -346,7 +346,7 @@ int Store :: buyBakSlotItem(OtsecSlot* pTo_bak_slot)
 } 
 
 
-int Store :: buyRadarSlotItem(OtsecSlot* pTo_radar_slot)
+int Store :: buyRadarSlotItem(ItemSlot* pTo_radar_slot)
 {
     int price = pTo_radar_slot->get_pToRadarEquipment()->price;
     addRadarEquipment(pTo_radar_slot->get_pToRadarEquipment());
@@ -355,7 +355,7 @@ int Store :: buyRadarSlotItem(OtsecSlot* pTo_radar_slot)
 } 
 
 
-int Store :: buyScanerSlotItem(OtsecSlot* pTo_scaner_slot)
+int Store :: buyScanerSlotItem(ItemSlot* pTo_scaner_slot)
 {
     int price = pTo_scaner_slot->get_pToScanerEquipment()->price;
     addScanerEquipment(pTo_scaner_slot->get_pToScanerEquipment());
@@ -363,7 +363,7 @@ int Store :: buyScanerSlotItem(OtsecSlot* pTo_scaner_slot)
     return price;
 } 
 
-int Store :: buyEnergizerSlotItem(OtsecSlot* pTo_energizer_slot)
+int Store :: buyEnergizerSlotItem(ItemSlot* pTo_energizer_slot)
 {
     int price = pTo_energizer_slot->get_pToEnergizerEquipment()->price;
     addEnergizerEquipment(pTo_energizer_slot->get_pToEnergizerEquipment());
@@ -371,7 +371,7 @@ int Store :: buyEnergizerSlotItem(OtsecSlot* pTo_energizer_slot)
     return price;
 } 
 
-int Store :: buyGrappleSlotItem(OtsecSlot* pTo_grapple_slot)
+int Store :: buyGrappleSlotItem(ItemSlot* pTo_grapple_slot)
 {
     int price = pTo_grapple_slot->get_pToGrappleEquipment()->price;
     addGrappleEquipment(pTo_grapple_slot->get_pToGrappleEquipment());
@@ -379,7 +379,7 @@ int Store :: buyGrappleSlotItem(OtsecSlot* pTo_grapple_slot)
     return price;
 } 
 
-int Store :: buyProtectorSlotItem(OtsecSlot* pTo_protector_slot)
+int Store :: buyProtectorSlotItem(ItemSlot* pTo_protector_slot)
 {
     int price = pTo_protector_slot->get_pToProtectorEquipment()->price;
     addProtectorEquipment(pTo_protector_slot->get_pToProtectorEquipment());
@@ -387,7 +387,7 @@ int Store :: buyProtectorSlotItem(OtsecSlot* pTo_protector_slot)
     return price;
 } 
 
-int Store :: buyDroidSlotItem(OtsecSlot* pTo_droid_slot)
+int Store :: buyDroidSlotItem(ItemSlot* pTo_droid_slot)
 {
     int price = pTo_droid_slot->get_pToDroidEquipment()->price;
     addDroidEquipment(pTo_droid_slot->get_pToDroidEquipment());
@@ -395,7 +395,7 @@ int Store :: buyDroidSlotItem(OtsecSlot* pTo_droid_slot)
     return price;
 } 
 
-int Store :: buyFreezerSlotItem(OtsecSlot* pTo_freezer_slot)
+int Store :: buyFreezerSlotItem(ItemSlot* pTo_freezer_slot)
 {
     int price = pTo_freezer_slot->get_pToFreezerEquipment()->price;
     addFreezerEquipment(pTo_freezer_slot->get_pToFreezerEquipment());
@@ -404,7 +404,7 @@ int Store :: buyFreezerSlotItem(OtsecSlot* pTo_freezer_slot)
 } 
 
 
-int Store :: buyOtsecSlotItem(OtsecSlot* pTo_otsec_slot)
+int Store :: buyOtsecSlotItem(ItemSlot* pTo_otsec_slot)
 {
 	int price = pTo_otsec_slot->getItemPrice();
 

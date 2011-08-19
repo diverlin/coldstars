@@ -238,12 +238,12 @@ Ship :: Ship(TextureOb* _pTo_texOb,
     korpus_protection   = _protection;
     nominal_temperature = _nominal_temperature;
 
-    race_id         = (*pTo_texOb).race_id;
-    subtype_id      = (*pTo_texOb).subtype_id;
-    size_id         = (*pTo_texOb).size_id;
-    mod_id          = (*pTo_texOb).mod_id;
+    race_id         = pTo_texOb->race_id;
+    subtype_id      = pTo_texOb->subtype_id;
+    size_id         = pTo_texOb->size_id;
+    mod_id          = pTo_texOb->mod_id;
 
-    pTo_npc_owner = NULL;
+    pTo_npc_owner   = NULL;
     pTo_playerOwner = NULL;
 
     price = randIntInRange(200, 400);
@@ -279,13 +279,18 @@ Ship :: Ship(TextureOb* _pTo_texOb,
     else
        render_TURRELS = false; 
  
+    TextureOb* pTo_turrelTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.turrel_texOb_pList); 
+   
     if (_max_weapons >= 1)
     {  
-       weapon_slot1 = OtsecSlot(EQUIPMENT_ID, this, pTo_slotTexOb, kontur_rect.center_x + 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2);
+       weapon_slot1 = ItemSlot(WEAPON_SLOT_ID, this, pTo_slotTexOb, kontur_rect.center_x + 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2);
+       slot_total_pList.push_back(&weapon_slot1); 
+       
        turrel1.placed(&points.weapon1_center_x, &points.weapon1_center_y);
-       total_slot_pList.push_back(&weapon_slot1); 
        turrel1.bindSlot(&weapon_slot1);
+       turrel1.setTexOb(pTo_turrelTexOb);
        turrel_total_pList.push_back(&turrel1); 
+       
        if (render_TURRELS == true)
        {   
            points.initWeapon1CenterPoint(0, h/3);
@@ -297,11 +302,14 @@ Ship :: Ship(TextureOb* _pTo_texOb,
    
     if (_max_weapons >= 2)
     {  
-       weapon_slot2 = OtsecSlot(EQUIPMENT_ID, this, pTo_slotTexOb, kontur_rect.center_x + 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h);    
-       turrel2.placed(&points.weapon2_center_x, &points.weapon2_center_y);      
-       //weapon_slot_pList.push_back(&weapon_slot2);
-       turrel2.bindSlot(&weapon_slot2);  
-       turrel_total_pList.push_back(&turrel2); 
+       weapon_slot2 = ItemSlot(WEAPON_SLOT_ID, this, pTo_slotTexOb, kontur_rect.center_x + 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h);    
+       slot_total_pList.push_back(&weapon_slot2); 
+       
+       turrel2.placed(&points.weapon2_center_x, &points.weapon2_center_y);
+       turrel2.bindSlot(&weapon_slot2);
+       turrel2.setTexOb(pTo_turrelTexOb);
+       turrel_total_pList.push_back(&turrel2);
+        
        if (render_TURRELS == true)
        {  
            points.initWeapon2CenterPoint(0, -h/3);
@@ -313,11 +321,14 @@ Ship :: Ship(TextureOb* _pTo_texOb,
 
     if (_max_weapons >= 3)
     {  
-       weapon_slot3 = OtsecSlot(EQUIPMENT_ID, this, pTo_slotTexOb, kontur_rect.center_x + 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h); 
+       weapon_slot3 = ItemSlot(WEAPON_SLOT_ID, this, pTo_slotTexOb, kontur_rect.center_x + 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h); 
+       slot_total_pList.push_back(&weapon_slot3); 
+              
        turrel3.placed(&points.weapon3_center_x, &points.weapon3_center_y);  
-       //weapon_slot_pList.push_back(&weapon_slot3);  
        turrel3.bindSlot(&weapon_slot3);
+       turrel3.setTexOb(pTo_turrelTexOb);
        turrel_total_pList.push_back(&turrel3); 
+       
        if (render_TURRELS == true)
        {  
            points.initWeapon3CenterPoint(-w/5, h/3);
@@ -329,11 +340,14 @@ Ship :: Ship(TextureOb* _pTo_texOb,
 
     if (_max_weapons >= 4)
     {  
-       weapon_slot4 = OtsecSlot(EQUIPMENT_ID, this, pTo_slotTexOb, kontur_rect.center_x + 2.2*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h/2);
+       weapon_slot4 = ItemSlot(WEAPON_SLOT_ID, this, pTo_slotTexOb, kontur_rect.center_x + 2.2*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h/2);
+       slot_total_pList.push_back(&weapon_slot4); 
+              
        turrel4.placed(&points.weapon4_center_x, &points.weapon4_center_y);
-       //weapon_slot_pList.push_back(&weapon_slot4); 
        turrel4.bindSlot(&weapon_slot4);
-       turrel_total_pList.push_back(&turrel4);  
+       turrel4.setTexOb(pTo_turrelTexOb);
+       turrel_total_pList.push_back(&turrel4);
+         
        if (render_TURRELS == true)
        {  
            points.initWeapon4CenterPoint(w/5, -h/3);
@@ -347,11 +361,14 @@ Ship :: Ship(TextureOb* _pTo_texOb,
 
     if (_max_weapons >= 5)
     {  
-       weapon_slot5 = OtsecSlot(EQUIPMENT_ID, this, pTo_slotTexOb, kontur_rect.center_x + 2.2*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h/2);
+       weapon_slot5 = ItemSlot(WEAPON_SLOT_ID, this, pTo_slotTexOb, kontur_rect.center_x + 2.2*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h/2);
+       slot_total_pList.push_back(&weapon_slot5); 
+              
        turrel5.placed(&points.weapon5_center_x, &points.weapon5_center_y);
-       //weapon_slot_pList.push_back(&weapon_slot5); 
-       turrel5.bindSlot(&weapon_slot5); 
+       turrel5.bindSlot(&weapon_slot5);
+       turrel5.setTexOb(pTo_turrelTexOb);
        turrel_total_pList.push_back(&turrel5); 
+       
        if (render_TURRELS == true)
        {  
            points.initWeapon5CenterPoint(-w/3, -h/3);
@@ -368,51 +385,50 @@ Ship :: Ship(TextureOb* _pTo_texOb,
 
 	///////////////////////////////////////////////////
 	//////////// EQUPMENT SLOT ////////////////////////
-	drive_slot       = OtsecSlot(DRIVE_ID,     this, pTo_slotTexOb, kontur_rect.center_x - 5*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h/2);
-	total_slot_pList.push_back(&drive_slot);
+	drive_slot       = ItemSlot(DRIVE_ID,     this, pTo_slotTexOb, kontur_rect.center_x - 5*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h/2);
+	slot_total_pList.push_back(&drive_slot);
 	
-	bak_slot         = OtsecSlot(BAK_ID,       this, pTo_slotTexOb, kontur_rect.center_x - 5*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h/2);
-	total_slot_pList.push_back(&bak_slot);
+	bak_slot         = ItemSlot(BAK_ID,       this, pTo_slotTexOb, kontur_rect.center_x - 5*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h/2);
+	slot_total_pList.push_back(&bak_slot);
 	
-	radar_slot       = OtsecSlot(RADAR_ID,     this, pTo_slotTexOb, kontur_rect.center_x + 4*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h/2);
-	total_slot_pList.push_back(&radar_slot);	
+	radar_slot       = ItemSlot(RADAR_ID,     this, pTo_slotTexOb, kontur_rect.center_x + 4*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h/2);
+	slot_total_pList.push_back(&radar_slot);	
 	
-	scaner_slot      = OtsecSlot(SCANER_ID,    this, pTo_slotTexOb, kontur_rect.center_x + 4*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h/2);
-	total_slot_pList.push_back(&scaner_slot);
+	scaner_slot      = ItemSlot(SCANER_ID,    this, pTo_slotTexOb, kontur_rect.center_x + 4*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h/2);
+	slot_total_pList.push_back(&scaner_slot);
 	
-	energizer_slot   = OtsecSlot(ENERGIZER_ID, this, pTo_slotTexOb, kontur_rect.center_x - 2*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2);
-    	total_slot_pList.push_back(&energizer_slot);
+	energizer_slot   = ItemSlot(ENERGIZER_ID, this, pTo_slotTexOb, kontur_rect.center_x - 2*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2);
+    	slot_total_pList.push_back(&energizer_slot);
     		
 	if (inhibit_GRAPPLE == false)
 	{
-		grapple_slot  = OtsecSlot(GRAPPLE_ID, this, pTo_slotTexOb, kontur_rect.center_x - 3*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h);
-    		total_slot_pList.push_back(&grapple_slot); 
+		grapple_slot  = ItemSlot(GRAPPLE_ID, this, pTo_slotTexOb, kontur_rect.center_x - 3*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h);
+    		slot_total_pList.push_back(&grapple_slot); 
     	}
     	
-	protector_slot   = OtsecSlot(PROTECTOR_ID, this, pTo_slotTexOb, kontur_rect.center_x - 3*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h);
-    	total_slot_pList.push_back(&protector_slot); 
+	protector_slot   = ItemSlot(PROTECTOR_ID, this, pTo_slotTexOb, kontur_rect.center_x - 3*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h);
+    	slot_total_pList.push_back(&protector_slot); 
 	
-	droid_slot       = OtsecSlot(DROID_ID,     this, pTo_slotTexOb, kontur_rect.center_x - 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h);
-    	total_slot_pList.push_back(&droid_slot); 
+	droid_slot       = ItemSlot(DROID_ID,     this, pTo_slotTexOb, kontur_rect.center_x - 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 + 1.1*(*pTo_slotTexOb).h);
+    	slot_total_pList.push_back(&droid_slot); 
     	
-	freezer_slot     = OtsecSlot(FREEZER_ID,   this, pTo_slotTexOb, kontur_rect.center_x - 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h);
-	total_slot_pList.push_back(&freezer_slot);   
+	freezer_slot     = ItemSlot(FREEZER_ID,   this, pTo_slotTexOb, kontur_rect.center_x - 1*(*pTo_slotTexOb).w, kontur_rect.center_y - (*pTo_slotTexOb).h/2 - 1.1*(*pTo_slotTexOb).h);
+	slot_total_pList.push_back(&freezer_slot);   
 	////////////////////////////////////////////////////
 
 
-    ////////////////////////////////////////////////////
     //////// OTSEC SLOT ////////////////////////////////
     for (int i = 0; i <= 10; i++)
     {
-         OtsecSlot* pTo_otsec_slot = new OtsecSlot(OTSEC_SLOT_ID, this, pTo_slotTexOb, kontur_rect.center_x + (i-6) * (*pTo_slotTexOb).w, kontur_rect.center_y - 3*(*pTo_slotTexOb).h);
-         otsec_slot_pList.push_back(pTo_otsec_slot); 
-         total_slot_pList.push_back(pTo_otsec_slot);         
+         ItemSlot* pTo_otsec_slot = new ItemSlot(UNIVERSAL_SLOT_ID, this, pTo_slotTexOb, kontur_rect.center_x + (i-6) * (*pTo_slotTexOb).w, kontur_rect.center_y - 3*(*pTo_slotTexOb).h);
+         slot_otsec_pList.push_back(pTo_otsec_slot); 
+         slot_total_pList.push_back(pTo_otsec_slot);         
     }
     ////////////////////////////////////////////////////
 
-    ////////////////////////////////////////////////////
+
     //////////// GATE SLOT /////////////////////////////
-    gate_slot = OtsecSlot(GATE_SLOT_ID, this, pTo_slotTexOb, kontur_rect.center_x - 5*(*pTo_slotTexOb).w, kontur_rect.center_y + 3*(*pTo_slotTexOb).h);
+    gate_slot = ItemSlot(GATE_SLOT_ID, this, pTo_slotTexOb, kontur_rect.center_x - 5*(*pTo_slotTexOb).w, kontur_rect.center_y + 3*(*pTo_slotTexOb).h);
     ////////////////////////////////////////////////////
 
 
@@ -736,11 +752,11 @@ void Ship :: removeWeaponSlotDeadTargets()
 
 
 
-OtsecSlot* Ship :: return_pToEmptyOtsecSlot()
+ItemSlot* Ship :: return_pToEmptyOtsecSlot()
 {
-      for (unsigned int si = 0; si < otsec_slot_pList.size(); si++)
-          if (otsec_slot_pList[si]->is_EQUIPED == false)
-             return otsec_slot_pList[si];
+      for (unsigned int si = 0; si < slot_otsec_pList.size(); si++)
+          if (slot_otsec_pList[si]->is_EQUIPED == false)
+             return slot_otsec_pList[si];
       return NULL;
 }
 
@@ -956,10 +972,10 @@ void Ship :: calculateMass()
 
 
     //////// OTSEC SLOT ////////////////////////////////
-    for (unsigned int i = 0; i < total_slot_pList.size(); i++)
+    for (unsigned int i = 0; i < slot_total_pList.size(); i++)
     {
-        if (total_slot_pList[i]->is_EQUIPED == true)
-           mass += total_slot_pList[i]->getItemMass();      
+        if (slot_total_pList[i]->is_EQUIPED == true)
+           mass += slot_total_pList[i]->getItemMass();      
     }
 }
 
@@ -1438,14 +1454,14 @@ void equip(Ship* pTo_ship)
     for (unsigned int i = 0; i < 3; i++) //pTo_ship->otsec_slot_pList.size(); i++)
     {        
         LazerEquipment* pTo_lazer = lazerGenerator(RACE_0_ID);              
-        pTo_ship->otsec_slot_pList[i]->insertItem(pTo_lazer);
+        pTo_ship->slot_otsec_pList[i]->insertItem(pTo_lazer);
     }
     
 
     for (unsigned int i = 3; i < 6; i++) //pTo_ship->otsec_slot_pList.size(); i++)
     {        
         RadarModule* pTo_radarModule = radarModuleGenerator();              
-        pTo_ship->otsec_slot_pList[i]->insertItem(pTo_radarModule);
+        pTo_ship->slot_otsec_pList[i]->insertItem(pTo_radarModule);
     }
     
 }

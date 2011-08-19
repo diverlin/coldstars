@@ -24,9 +24,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class GrappleEquipment : public CommonForEquipment
 {
    public:
-      int type_id;
-      int subtype_id;
-
       //grapple_list = []
       //grapple_remove_queue = []
 

@@ -24,9 +24,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class EnergizerEquipment : public CommonForEquipment
 {
 public:
-      int type_id;
-      int subtype_id;
-
       int energy_max_orig;
       int energy_max_add;
       int energy_max;

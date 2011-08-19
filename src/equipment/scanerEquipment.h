@@ -24,9 +24,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class ScanerEquipment : public CommonForEquipment
 {
   public:
-    int type_id;
-    int subtype_id;
-
     int scan_orig;
     int scan_add;
     int scan;

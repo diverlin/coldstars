@@ -26,7 +26,6 @@ DriveEquipment :: DriveEquipment(TextureOb* _pTo_itemTexOb, int _speed_orig, int
 {
      CommonForEquipment_init(_pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
 
-     type_id = EQUIPMENT_ID;
      subtype_id = DRIVE_ID;
 
      speed_orig = _speed_orig;

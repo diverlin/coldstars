@@ -26,7 +26,6 @@ GrappleEquipment :: GrappleEquipment(TextureOb* _pTo_itemTexOb, int _strength_or
 {
     CommonForEquipment_init(_pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
 
-    type_id = EQUIPMENT_ID;
     subtype_id = GRAPPLE_ID;
 
     //grapple_list = []

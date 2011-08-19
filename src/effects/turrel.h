@@ -27,7 +27,7 @@ class Turrel
        bool is_READY_TO_FIRE;
            
        Ship* pTo_ship;
-       OtsecSlot* pTo_slot;
+       ItemSlot* pTo_slot;
 
        TextureOb* pTo_texOb;
        GLuint texture;
@@ -40,7 +40,7 @@ class Turrel
        Turrel();
        ~Turrel();
               
-       void bindSlot(OtsecSlot* _pTo_slot);
+       void bindSlot(ItemSlot* _pTo_slot);
        void setTexOb(TextureOb* _pTo_texOb);
 
 

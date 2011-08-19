@@ -16,133 +16,148 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "otsecslot.h"
+#include "itemSlot.h"
 
 
-OtsecSlot :: OtsecSlot()
+ItemSlot :: ItemSlot()
 {}
 
 
-OtsecSlot :: OtsecSlot(int _type_id, Ship* _pTo_ship, TextureOb* _pTo_texOb, int _pos_x, int _pos_y)
+ItemSlot :: ItemSlot(int _subtype_id, Ship* _pTo_ship, TextureOb* _pTo_texOb, int _pos_x, int _pos_y)
 {
-	CommonForSlot_init(_pTo_ship, _pTo_texOb, _pos_x, _pos_y);
-	type_id = _type_id;
+        type_id    = SLOT_ID;
+	subtype_id = _subtype_id;
+        
+        pTo_ship  = _pTo_ship; 
+
+        pTo_texOb = _pTo_texOb;
+        w = pTo_texOb->w;
+        h = pTo_texOb->h;
+     
+        rect = Rect(_pos_x, _pos_y, w, h);         // create rect with size of the texture
+
+        item_type_id    = -1;
+        item_subtype_id = -1;
+     
+        is_EQUIPED       = false;
+        is_FLASHING      = false;
+        is_CURSORED      = false;         
 }
 
-RocketEquipment* OtsecSlot :: get_pToRocketEquipment() const
+RocketEquipment* ItemSlot :: get_pToRocketEquipment() const
 {
         return pTo_rocketEquipment;
 }
 
-LazerEquipment* OtsecSlot :: get_pToLazerEquipment() const
+LazerEquipment* ItemSlot :: get_pToLazerEquipment() const
 {
         return pTo_lazerEquipment;
 }
 
-RadarEquipment* OtsecSlot :: get_pToRadarEquipment() const
+RadarEquipment* ItemSlot :: get_pToRadarEquipment() const
 {
         return pTo_radarEquipment;
 }
 
-DriveEquipment* OtsecSlot :: get_pToDriveEquipment() const
+DriveEquipment* ItemSlot :: get_pToDriveEquipment() const
 {
         return pTo_driveEquipment;
 }
 
-BakEquipment* OtsecSlot :: get_pToBakEquipment() const
+BakEquipment* ItemSlot :: get_pToBakEquipment() const
 {
         return pTo_bakEquipment;
 }
 
-EnergizerEquipment* OtsecSlot :: get_pToEnergizerEquipment() const
+EnergizerEquipment* ItemSlot :: get_pToEnergizerEquipment() const
 {
         return pTo_energizerEquipment;
 }
 
-ProtectorEquipment* OtsecSlot :: get_pToProtectorEquipment() const
+ProtectorEquipment* ItemSlot :: get_pToProtectorEquipment() const
 {
         return pTo_protectorEquipment;
 }
 
-DroidEquipment* OtsecSlot :: get_pToDroidEquipment() const
+DroidEquipment* ItemSlot :: get_pToDroidEquipment() const
 {
         return pTo_droidEquipment;
 }
 
-FreezerEquipment* OtsecSlot :: get_pToFreezerEquipment() const
+FreezerEquipment* ItemSlot :: get_pToFreezerEquipment() const
 {
         return pTo_freezerEquipment;
 }
 
-ScanerEquipment* OtsecSlot :: get_pToScanerEquipment() const
+ScanerEquipment* ItemSlot :: get_pToScanerEquipment() const
 {
         return pTo_scanerEquipment;
 }
 
-GrappleEquipment* OtsecSlot :: get_pToGrappleEquipment() const
+GrappleEquipment* ItemSlot :: get_pToGrappleEquipment() const
 {
         return pTo_grappleEquipment;
 }
 
-RocketModule* OtsecSlot :: get_pToRocketModule() const
+RocketModule* ItemSlot :: get_pToRocketModule() const
 {
         return pTo_rocketModule;
 }
 
-LazerModule* OtsecSlot :: get_pToLazerModule() const
+LazerModule* ItemSlot :: get_pToLazerModule() const
 {
         return pTo_lazerModule;
 }
 
-RadarModule* OtsecSlot :: get_pToRadarModule() const
+RadarModule* ItemSlot :: get_pToRadarModule() const
 {
         return pTo_radarModule;
 }
 
-DriveModule* OtsecSlot :: get_pToDriveModule() const
+DriveModule* ItemSlot :: get_pToDriveModule() const
 {
         return pTo_driveModule;
 }
 
-BakModule* OtsecSlot :: get_pToBakModule() const
+BakModule* ItemSlot :: get_pToBakModule() const
 {
         return pTo_bakModule;
 }
 
-EnergizerModule* OtsecSlot :: get_pToEnergizerModule() const
+EnergizerModule* ItemSlot :: get_pToEnergizerModule() const
 {
         return pTo_energizerModule;
 }
 
-ProtectorModule* OtsecSlot :: get_pToProtectorModule() const
+ProtectorModule* ItemSlot :: get_pToProtectorModule() const
 {
         return pTo_protectorModule;
 }
 
-DroidModule* OtsecSlot :: get_pToDroidModule() const
+DroidModule* ItemSlot :: get_pToDroidModule() const
 {
         return pTo_droidModule;
 }
 
-FreezerModule* OtsecSlot :: get_pToFreezerModule() const
+FreezerModule* ItemSlot :: get_pToFreezerModule() const
 {
         return pTo_freezerModule;
 }
 
-ScanerModule* OtsecSlot :: get_pToScanerModule() const
+ScanerModule* ItemSlot :: get_pToScanerModule() const
 {
         return pTo_scanerModule;
 }
 
-GrappleModule* OtsecSlot :: get_pToGrappleModule() const
+GrappleModule* ItemSlot :: get_pToGrappleModule() const
 {
         return pTo_grappleModule;
 }
 
 
-bool OtsecSlot :: insertItem(RocketEquipment* pTo_item)
+bool ItemSlot :: insertItem(RocketEquipment* pTo_item)
 {
-	if ((type_id == OTSEC_SLOT_ID) || (type_id == LAZER_ID))
+	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == WEAPON_SLOT_ID))
 	{
 		pTo_rocketEquipment = pTo_item;
     
@@ -151,7 +166,7 @@ bool OtsecSlot :: insertItem(RocketEquipment* pTo_item)
 	
 		is_EQUIPED = true; 
    
-		if (type_id == WEAPON_SLOT_ID)
+		if (subtype_id == WEAPON_SLOT_ID)
 		{
 			pTo_ship->updateFireAbility();
 		}
@@ -163,9 +178,9 @@ bool OtsecSlot :: insertItem(RocketEquipment* pTo_item)
 	
 }
 
-bool OtsecSlot :: insertItem(LazerEquipment* pTo_item)
+bool ItemSlot :: insertItem(LazerEquipment* pTo_item)
 {
-	if ((type_id == OTSEC_SLOT_ID) || (type_id == LAZER_ID))
+	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == WEAPON_SLOT_ID))
 	{	
 		pTo_lazerEquipment = pTo_item;
     
@@ -174,7 +189,7 @@ bool OtsecSlot :: insertItem(LazerEquipment* pTo_item)
 	          
 		is_EQUIPED = true;
     
-		if (type_id == WEAPON_SLOT_ID)
+		if (subtype_id == WEAPON_SLOT_ID)
 		{
 			pTo_ship->updateFireAbility();
 		}
@@ -185,9 +200,9 @@ bool OtsecSlot :: insertItem(LazerEquipment* pTo_item)
 		return false;
 }
 
-bool OtsecSlot :: insertItem(RadarEquipment* pTo_item)
+bool ItemSlot :: insertItem(RadarEquipment* pTo_item)
 {
-	if ((type_id == OTSEC_SLOT_ID) || (type_id == RADAR_ID))
+	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == RADAR_ID))
 	{	
 		pTo_radarEquipment = pTo_item;
     
@@ -196,7 +211,7 @@ bool OtsecSlot :: insertItem(RadarEquipment* pTo_item)
 	 
 		is_EQUIPED = true; 
     
-		if (type_id == RADAR_ID)
+		if (subtype_id == RADAR_ID)
 		{
 			pTo_ship->updateRadarAbility();
 		}
@@ -207,9 +222,9 @@ bool OtsecSlot :: insertItem(RadarEquipment* pTo_item)
 		return false;
 }
 
-bool OtsecSlot :: insertItem(DriveEquipment* pTo_item)
+bool ItemSlot :: insertItem(DriveEquipment* pTo_item)
 {
-	if ((type_id == OTSEC_SLOT_ID) || (type_id == DRIVE_ID))
+	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == DRIVE_ID))
 	{	
 		pTo_driveEquipment = pTo_item;
    
@@ -218,7 +233,7 @@ bool OtsecSlot :: insertItem(DriveEquipment* pTo_item)
 	  
 		is_EQUIPED = true; 
     
-		if (type_id == DRIVE_ID)
+		if (subtype_id == DRIVE_ID)
 		{
 			pTo_ship->updateDriveAbility();
 			pTo_ship->updateJumpAbility();
@@ -230,9 +245,9 @@ bool OtsecSlot :: insertItem(DriveEquipment* pTo_item)
 		return false;
 }
 
-bool OtsecSlot :: insertItem(BakEquipment* pTo_item)
+bool ItemSlot :: insertItem(BakEquipment* pTo_item)
 {
-	if ((type_id == OTSEC_SLOT_ID) || (type_id == BAK_ID))
+	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == BAK_ID))
 	{
 		pTo_bakEquipment = pTo_item;
     
@@ -241,7 +256,7 @@ bool OtsecSlot :: insertItem(BakEquipment* pTo_item)
 	 
 		is_EQUIPED = true; 
     
-		if (type_id == BAK_ID)
+		if (subtype_id == BAK_ID)
 		{
 			pTo_ship->updateDriveAbility();
 			pTo_ship->updateJumpAbility();
@@ -253,9 +268,9 @@ bool OtsecSlot :: insertItem(BakEquipment* pTo_item)
 		return false;
 }
 
-bool OtsecSlot :: insertItem(EnergizerEquipment* pTo_item)
+bool ItemSlot :: insertItem(EnergizerEquipment* pTo_item)
 {
-	if ((type_id == OTSEC_SLOT_ID) || (type_id == ENERGIZER_ID))
+	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == ENERGIZER_ID))
 	{
 		pTo_energizerEquipment = pTo_item;
     
@@ -264,7 +279,7 @@ bool OtsecSlot :: insertItem(EnergizerEquipment* pTo_item)
 	 
 		is_EQUIPED = true; 
     
-		if (type_id == ENERGIZER_ID)
+		if (subtype_id == ENERGIZER_ID)
 		{
 			pTo_ship->updateEnergyAbility();
 		}
@@ -275,9 +290,9 @@ bool OtsecSlot :: insertItem(EnergizerEquipment* pTo_item)
 		return false;
 }
 
-bool OtsecSlot :: insertItem(ProtectorEquipment* pTo_item)
+bool ItemSlot :: insertItem(ProtectorEquipment* pTo_item)
 {
-	if ((type_id == OTSEC_SLOT_ID) || (type_id == PROTECTOR_ID))
+	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == PROTECTOR_ID))
 	{
 		pTo_protectorEquipment = pTo_item;
     
@@ -286,7 +301,7 @@ bool OtsecSlot :: insertItem(ProtectorEquipment* pTo_item)
 	
 		is_EQUIPED = true; 
     
-		if (type_id == PROTECTOR_ID)
+		if (subtype_id == PROTECTOR_ID)
 		{
 			pTo_ship->updateProtectionAbility();
 		}
@@ -297,9 +312,9 @@ bool OtsecSlot :: insertItem(ProtectorEquipment* pTo_item)
 		return false;
 }
 
-bool OtsecSlot :: insertItem(DroidEquipment* pTo_item)
+bool ItemSlot :: insertItem(DroidEquipment* pTo_item)
 {
-	if ((type_id == OTSEC_SLOT_ID) || (type_id == DROID_ID))
+	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == DROID_ID))
 	{
 		pTo_droidEquipment = pTo_item;
 
@@ -308,7 +323,7 @@ bool OtsecSlot :: insertItem(DroidEquipment* pTo_item)
 	  
 		is_EQUIPED = true; 
     
-		if (type_id == DROID_ID)
+		if (subtype_id == DROID_ID)
 		{
 			pTo_ship->updateRepairAbility();
 		}
@@ -319,9 +334,9 @@ bool OtsecSlot :: insertItem(DroidEquipment* pTo_item)
 		return false;	
 }
 
-bool OtsecSlot :: insertItem(FreezerEquipment* pTo_item)
+bool ItemSlot :: insertItem(FreezerEquipment* pTo_item)
 {
-	if ((type_id == OTSEC_SLOT_ID) || (type_id == FREEZER_ID))
+	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == FREEZER_ID))
 	{
 		pTo_freezerEquipment = pTo_item;
 
@@ -330,7 +345,7 @@ bool OtsecSlot :: insertItem(FreezerEquipment* pTo_item)
 	 
 		is_EQUIPED = true; 
     
-		if (type_id == FREEZER_ID)
+		if (subtype_id == FREEZER_ID)
 		{
 			pTo_ship->updateFreezeAbility();
 		}
@@ -341,9 +356,9 @@ bool OtsecSlot :: insertItem(FreezerEquipment* pTo_item)
 		return false;	
 }
 
-bool OtsecSlot :: insertItem(ScanerEquipment* pTo_item)
+bool ItemSlot :: insertItem(ScanerEquipment* pTo_item)
 {
-	if ((type_id == OTSEC_SLOT_ID) || (type_id == SCANER_ID))
+	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == SCANER_ID))
 	{
 		pTo_scanerEquipment = pTo_item;
 
@@ -352,7 +367,7 @@ bool OtsecSlot :: insertItem(ScanerEquipment* pTo_item)
 	
 		is_EQUIPED = true; 
     
-		if (type_id == SCANER_ID)
+		if (subtype_id == SCANER_ID)
 		{
 			pTo_ship->updateScanAbility();
 		}
@@ -363,9 +378,9 @@ bool OtsecSlot :: insertItem(ScanerEquipment* pTo_item)
 		return false;	
 }
 
-bool OtsecSlot :: insertItem(GrappleEquipment* pTo_item)
+bool ItemSlot :: insertItem(GrappleEquipment* pTo_item)
 {
-	if ((type_id == OTSEC_SLOT_ID) || (type_id == GRAPPLE_ID))
+	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == GRAPPLE_ID))
 	{
 		pTo_grappleEquipment = pTo_item;
 
@@ -374,7 +389,7 @@ bool OtsecSlot :: insertItem(GrappleEquipment* pTo_item)
 	
 		is_EQUIPED = true; 
     
-		if (type_id == GRAPPLE_ID)
+		if (subtype_id == GRAPPLE_ID)
 		{
 			pTo_ship->updateGrabAbility();
 		}
@@ -386,9 +401,9 @@ bool OtsecSlot :: insertItem(GrappleEquipment* pTo_item)
 }
 
 //MODULES
-bool OtsecSlot :: insertItem(RocketModule* pTo_item)
+bool ItemSlot :: insertItem(RocketModule* pTo_item)
 {
-	if (type_id == OTSEC_SLOT_ID)
+	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		pTo_rocketModule = pTo_item;
 		pTo_rocketModule->rect.setNewCenter(rect.center_x, rect.center_y);
@@ -403,9 +418,9 @@ bool OtsecSlot :: insertItem(RocketModule* pTo_item)
 		return false; 
 }
 
-bool OtsecSlot :: insertItem(LazerModule* pTo_item)
+bool ItemSlot :: insertItem(LazerModule* pTo_item)
 {
-	if (type_id == OTSEC_SLOT_ID)
+	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		pTo_lazerModule = pTo_item;
 		pTo_lazerModule->rect.setNewCenter(rect.center_x, rect.center_y);
@@ -420,9 +435,9 @@ bool OtsecSlot :: insertItem(LazerModule* pTo_item)
 		return false; 	
 }
 
-bool OtsecSlot :: insertItem(RadarModule* pTo_item)
+bool ItemSlot :: insertItem(RadarModule* pTo_item)
 {
-	if (type_id == OTSEC_SLOT_ID)
+	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		pTo_radarModule = pTo_item;
 		pTo_radarModule->rect.setNewCenter(rect.center_x, rect.center_y);
@@ -439,9 +454,9 @@ bool OtsecSlot :: insertItem(RadarModule* pTo_item)
 		
 }
 
-bool OtsecSlot :: insertItem(DriveModule* pTo_item)
+bool ItemSlot :: insertItem(DriveModule* pTo_item)
 {
-	if (type_id == OTSEC_SLOT_ID)
+	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		pTo_driveModule = pTo_item;
 		pTo_driveModule->rect.setNewCenter(rect.center_x, rect.center_y);
@@ -456,9 +471,9 @@ bool OtsecSlot :: insertItem(DriveModule* pTo_item)
 		return false; 
 }
 
-bool OtsecSlot :: insertItem(BakModule* pTo_item)
+bool ItemSlot :: insertItem(BakModule* pTo_item)
 {     	
-	if (type_id == OTSEC_SLOT_ID)
+	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		pTo_bakModule = pTo_item;
 		pTo_bakModule->rect.setNewCenter(rect.center_x, rect.center_y);
@@ -473,9 +488,9 @@ bool OtsecSlot :: insertItem(BakModule* pTo_item)
 		return false; 
 }
 
-bool OtsecSlot :: insertItem(EnergizerModule* pTo_item)
+bool ItemSlot :: insertItem(EnergizerModule* pTo_item)
 {
-     	if (type_id == OTSEC_SLOT_ID)
+     	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		pTo_energizerModule = pTo_item;
 		pTo_energizerModule->rect.setNewCenter(rect.center_x, rect.center_y);
@@ -490,9 +505,9 @@ bool OtsecSlot :: insertItem(EnergizerModule* pTo_item)
 		return false; 
 }
 
-bool OtsecSlot :: insertItem(ProtectorModule* pTo_item)
+bool ItemSlot :: insertItem(ProtectorModule* pTo_item)
 {
-     	if (type_id == OTSEC_SLOT_ID)
+     	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		pTo_protectorModule = pTo_item;
 		pTo_protectorModule->rect.setNewCenter(rect.center_x, rect.center_y);
@@ -507,9 +522,9 @@ bool OtsecSlot :: insertItem(ProtectorModule* pTo_item)
 		return false; 
 }
 
-bool OtsecSlot :: insertItem(DroidModule* pTo_item)
+bool ItemSlot :: insertItem(DroidModule* pTo_item)
 {
-     	if (type_id == OTSEC_SLOT_ID)
+     	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		pTo_droidModule = pTo_item;
 		pTo_droidModule->rect.setNewCenter(rect.center_x, rect.center_y);
@@ -524,9 +539,9 @@ bool OtsecSlot :: insertItem(DroidModule* pTo_item)
 		return false; 
 }
 
-bool OtsecSlot :: insertItem(FreezerModule* pTo_item)
+bool ItemSlot :: insertItem(FreezerModule* pTo_item)
 {
-     	if (type_id == OTSEC_SLOT_ID)
+     	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		pTo_freezerModule = pTo_item;
 		pTo_freezerModule->rect.setNewCenter(rect.center_x, rect.center_y);
@@ -541,9 +556,9 @@ bool OtsecSlot :: insertItem(FreezerModule* pTo_item)
 		return false; 
 }
 
-bool OtsecSlot :: insertItem(ScanerModule* pTo_item)
+bool ItemSlot :: insertItem(ScanerModule* pTo_item)
 {
-     	if (type_id == OTSEC_SLOT_ID)
+     	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		pTo_scanerModule = pTo_item;
 		pTo_scanerModule->rect.setNewCenter(rect.center_x, rect.center_y);
@@ -558,9 +573,9 @@ bool OtsecSlot :: insertItem(ScanerModule* pTo_item)
 		return false;  
 }
 
-bool OtsecSlot :: insertItem(GrappleModule* pTo_item)
+bool ItemSlot :: insertItem(GrappleModule* pTo_item)
 {
-     	if (type_id == OTSEC_SLOT_ID)
+     	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		pTo_grappleModule = pTo_item;
 		pTo_grappleModule->rect.setNewCenter(rect.center_x, rect.center_y);
@@ -575,7 +590,7 @@ bool OtsecSlot :: insertItem(GrappleModule* pTo_item)
 }
 
 
-void OtsecSlot :: removeItem()
+void ItemSlot :: removeItem()
 {
 	is_EQUIPED = false; 
 	
@@ -584,28 +599,28 @@ void OtsecSlot :: removeItem()
 		if (item_subtype_id == ROCKET_ID)
 		{
     			pTo_rocketEquipment = NULL;
-    			if (type_id != OTSEC_SLOT_ID)
+    			if (subtype_id != UNIVERSAL_SLOT_ID)
     				pTo_ship->updateFireAbility();
     		}
     	
     		if (item_subtype_id == LAZER_ID)
 		{
     			pTo_lazerEquipment = NULL;
-    			if (type_id != OTSEC_SLOT_ID)
+    			if (subtype_id != UNIVERSAL_SLOT_ID)
     				pTo_ship->updateFireAbility();
     		}
     
         	if (item_subtype_id == RADAR_ID)
 		{
     			pTo_radarEquipment = NULL;
-    			if (type_id != OTSEC_SLOT_ID)
+    			if (subtype_id != UNIVERSAL_SLOT_ID)
     				pTo_ship->updateRadarAbility();
       		}
     						
         	if (item_subtype_id == DRIVE_ID)
 		{
     			pTo_driveEquipment = NULL;
-    			if (type_id != OTSEC_SLOT_ID)
+    			if (subtype_id != UNIVERSAL_SLOT_ID)
     			{ 
     				pTo_ship->updateDriveAbility();
     				pTo_ship->updateJumpAbility();
@@ -615,7 +630,7 @@ void OtsecSlot :: removeItem()
         	if (item_subtype_id == BAK_ID)
 		{
     			pTo_bakEquipment = NULL;
-    			if (type_id != OTSEC_SLOT_ID)
+    			if (subtype_id != UNIVERSAL_SLOT_ID)
     			{ 
     				pTo_ship->updateDriveAbility();
     				pTo_ship->updateJumpAbility();
@@ -625,28 +640,28 @@ void OtsecSlot :: removeItem()
         	if (item_subtype_id == ENERGIZER_ID)
 		{
     			pTo_energizerEquipment = NULL;
-    			if (type_id != OTSEC_SLOT_ID)
+    			if (subtype_id != UNIVERSAL_SLOT_ID)
     				pTo_ship->updateEnergyAbility();
     		}
 
         	if (item_subtype_id == PROTECTOR_ID)
 		{
     			pTo_protectorEquipment = NULL;
-    			if (type_id != OTSEC_SLOT_ID)
+    			if (subtype_id != UNIVERSAL_SLOT_ID)
     				pTo_ship->updateProtectionAbility();
     		}
     	
         	if (item_subtype_id == DROID_ID)
 		{
     			pTo_droidEquipment = NULL;
-    			if (type_id != OTSEC_SLOT_ID)
+    			if (subtype_id != UNIVERSAL_SLOT_ID)
     				pTo_ship->updateRepairAbility();
     		}
 
         	if (item_subtype_id == FREEZER_ID)
 		{
     			pTo_freezerEquipment = NULL;
-    			if (type_id != OTSEC_SLOT_ID)
+    			if (subtype_id != UNIVERSAL_SLOT_ID)
     				pTo_ship->updateFreezeAbility();
     		}
     	
@@ -654,14 +669,14 @@ void OtsecSlot :: removeItem()
  	       if (item_subtype_id == SCANER_ID)
 		{
     			pTo_scanerEquipment = NULL;
-    			if (type_id != OTSEC_SLOT_ID)
+    			if (subtype_id != UNIVERSAL_SLOT_ID)
     				pTo_ship->updateScanAbility();
     		}
     	
         	if (item_subtype_id == GRAPPLE_ID)
 		{
     			pTo_grappleEquipment = NULL;
-    			if (type_id != OTSEC_SLOT_ID)
+    			if (subtype_id != UNIVERSAL_SLOT_ID)
     				pTo_ship->updateGrabAbility();
     		}
     	}
@@ -730,7 +745,7 @@ void OtsecSlot :: removeItem()
 
 
 
-int OtsecSlot :: getItemMass()
+int ItemSlot :: getItemMass()
 {  
 	if (item_type_id == EQUIPMENT_ID)
 	{
@@ -769,7 +784,7 @@ int OtsecSlot :: getItemMass()
 
 
 
-int OtsecSlot :: getItemPrice()
+int ItemSlot :: getItemPrice()
 {  
 	if (item_type_id == EQUIPMENT_ID)
 	{
@@ -799,7 +814,7 @@ int OtsecSlot :: getItemPrice()
 }
 
 
-void OtsecSlot :: renderFrame(GLuint flash_tex)
+void ItemSlot :: renderFrame(GLuint flash_tex)
 {
 	drawTexturedRect(pTo_texOb->texture, rect, -1.5);
 
@@ -811,7 +826,7 @@ void OtsecSlot :: renderFrame(GLuint flash_tex)
 
 
 
-int OtsecSlot :: getItemRadius()
+int ItemSlot :: getItemRadius()
 { 
         if (item_type_id == EQUIPMENT_ID)
 	{
@@ -824,7 +839,7 @@ int OtsecSlot :: getItemRadius()
 }
 
 
-int OtsecSlot :: getItemDamage()
+int ItemSlot :: getItemDamage()
 {
         if (item_type_id == EQUIPMENT_ID)
 	{
@@ -838,12 +853,12 @@ int OtsecSlot :: getItemDamage()
 
 
 
-int OtsecSlot :: getItemCondition()
+int ItemSlot :: getItemCondition()
 {  
         return 1000;
 }
 
-void OtsecSlot :: renderEquipedItem()
+void ItemSlot :: renderEquipedItem()
 {
 	if (item_type_id == EQUIPMENT_ID)
 	{
@@ -904,7 +919,7 @@ void OtsecSlot :: renderEquipedItem()
 
 
 
-void OtsecSlot :: renderFrames(GLuint flash_tex)
+void ItemSlot :: renderFrames(GLuint flash_tex)
 {
       //def renderFrames(self, flash_tex):
           //self.renderStaticFramesLoop()
@@ -917,7 +932,7 @@ void OtsecSlot :: renderFrames(GLuint flash_tex)
 
 
 
-void OtsecSlot :: renderItemInfo()
+void ItemSlot :: renderItemInfo()
 {
 	if (item_type_id == EQUIPMENT_ID)
 	{
@@ -979,5 +994,14 @@ void OtsecSlot :: renderItemInfo()
 }
 
 
+
+bool ItemSlot :: interaction(int _x, int _y)
+{        
+        float dist = lengthBetweenPoints(rect.center_x, rect.center_y, _x, _y);
+        if (dist < rect.w/2)
+                return true;
+        else
+                return false;    
+}
 
 
