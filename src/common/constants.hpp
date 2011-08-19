@@ -426,10 +426,14 @@ const int SLOT_TEXTURE_ID       = g_TYPE_ID_GENERATOR.returnNextId("SLOT_TEXTURE
 const int TURREL_TEXTURE_ID     = g_TYPE_ID_GENERATOR.returnNextId("TURREL_TEXTURE_ID"); 
 
 // SLOTS ID
-const int WEAPON_SLOT_ID = g_TYPE_ID_GENERATOR.returnNextId("WEAPON_SLOT_ID");
+const int SLOT_ID           = g_TYPE_ID_GENERATOR.returnNextId("SLOT_ID");
+const int UNIVERSAL_SLOT_ID = g_TYPE_ID_GENERATOR.returnNextId("UNIVERSAL_SLOT_ID");
+const int WEAPON_SLOT_ID    = g_TYPE_ID_GENERATOR.returnNextId("WEAPON_SLOT_ID");
+const int GATE_SLOT_ID      = g_TYPE_ID_GENERATOR.returnNextId("GATE_SLOT_ID");
 
-const int EQUIPMENT_ID        = g_TYPE_ID_GENERATOR.returnNextId("EQUIPMENT_ID");
+const int EQUIPMENT_ID   = g_TYPE_ID_GENERATOR.returnNextId("EQUIPMENT_ID");
 const int MODULE_ID = g_TYPE_ID_GENERATOR.returnNextId("MODULE_ID");
+
  
 //#define LAZER_ID 5
 const int LAZER_ID   = g_TYPE_ID_GENERATOR.returnNextId("LAZER_ID"); 
@@ -440,7 +444,7 @@ const int RADAR_ID = g_TYPE_ID_GENERATOR.returnNextId("RADAR_ID");
 const int BAK_ID = g_TYPE_ID_GENERATOR.returnNextId("BAK_ID");
 const int ENERGIZER_ID = g_TYPE_ID_GENERATOR.returnNextId("ENERGIZER_ID");
 const int PROTECTOR_ID = g_TYPE_ID_GENERATOR.returnNextId("PROTECTOR_ID");
-const int DROID_ID = g_TYPE_ID_GENERATOR.returnNextId("DROID_SLOT_ID");
+const int DROID_ID = g_TYPE_ID_GENERATOR.returnNextId("DROID_ID");
 const int FREEZER_ID = g_TYPE_ID_GENERATOR.returnNextId("DROID_ID");
 const int GRAPPLE_ID = g_TYPE_ID_GENERATOR.returnNextId("GRAPPLE_ID");
 const int SCANER_ID = g_TYPE_ID_GENERATOR.returnNextId("SCANER_ID");
@@ -516,10 +520,6 @@ const int SHIP_ID = g_TYPE_ID_GENERATOR.returnNextId("SHIP_ID");
 const int NPC_ID = g_TYPE_ID_GENERATOR.returnNextId("NPC_ID");
 const int PLAYER_ID = g_TYPE_ID_GENERATOR.returnNextId("PLAYER_ID");
 
-
-
-const int OTSEC_SLOT_ID = g_TYPE_ID_GENERATOR.returnNextId("OTSEC_SLOT_ID");
-const int GATE_SLOT_ID = g_TYPE_ID_GENERATOR.returnNextId("GATE_SLOT_ID");
 
 // SUBTYPE FOR NPC/SHIP
 const int RANGER_ID   = g_TYPE_ID_GENERATOR.returnNextId("RANGER_ID"); 

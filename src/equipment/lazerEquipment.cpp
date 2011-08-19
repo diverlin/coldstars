@@ -25,7 +25,6 @@ LazerEquipment :: LazerEquipment(TextureOb* _pTo_itemTexOb, int _damage_orig, in
 {
    CommonForEquipment_init(_pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
 
-   type_id = EQUIPMENT_ID;
    subtype_id = LAZER_ID;
 
    damage_orig = _damage_orig;

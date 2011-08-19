@@ -49,11 +49,9 @@ class Asteroid;  typedef std::vector<Asteroid*> VEC_pAsteroid_type;
 
 typedef std::vector<int> VEC_int_type; 
 
-class OtsecSlot;         typedef std::vector<OtsecSlot*> VEC_pOtsecSlot_type;
-		         typedef std::vector<OtsecSlot> VEC_OtsecSlot_type;
+class ItemSlot;         typedef std::vector<ItemSlot*> VEC_pItemSlot_type;
+		        typedef std::vector<ItemSlot> VEC_ItemSlot_type;
 
-class WeaponSlot;       typedef std::vector<WeaponSlot*> VEC_pWeaponSlot_type;
-class OtsecSlot;        typedef std::vector<OtsecSlot*> VEC_pOtsecSlot_type; 
 class Turrel;           typedef std::vector<Turrel*> VEC_pTurrel_type; 
 class LazerTraceEffect; typedef std::vector<LazerTraceEffect*> VEC_pLazerTrace_type; 
 
@@ -87,16 +85,7 @@ class ScanerModule;    typedef std::vector<ScanerModule*>    VEC_pScanerModule_t
 class GrappleModule;   typedef std::vector<GrappleModule*>   VEC_pGrappleModule_type;
 
 
-class WeaponSlot;
-class RadarSlot;
-class DriveSlot;
-class BakEquipment;
-class EnergyBlockSlot;
-class ProtectorSlot;
-class DroidSlot;
-class FreezerSlot;
-class ScanerSlot;
-class GrappleSlot;
+
 
 
 class LandingArea; typedef std::vector<LandingArea*> VEC_pLandingArea_type; 

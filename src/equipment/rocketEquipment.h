@@ -98,9 +98,6 @@ class RocketBullet
 class RocketEquipment : public CommonForEquipment
 { 
    public:
-      int type_id;
-      int subtype_id;
-
       int ammo_max_orig;
       int ammo_max_add;
       int ammo;
@@ -125,7 +122,7 @@ class RocketEquipment : public CommonForEquipment
 
       TextureOb* pTo_turrelTexOb;
       Turrel* pTo_turrel;
-      WeaponSlot* pTo_wslot;
+      ItemSlot* pTo_wslot;
       
       VEC_pRocketModule_type modules_pList;
       

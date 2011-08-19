@@ -26,7 +26,7 @@ class Cursor
 {
   public:
         int type;
-        OtsecSlot* pTo_otsec_slot;
+        ItemSlot* pTo_otsec_slot;
         
         Cursor();
 

@@ -550,7 +550,6 @@ g_TEXTURE_MANAGER.manage( new TextureOb(ASTEROID_TEXTURE_ID, "data/asteroid/a_00
 VEC_int_type aArg3; 
 g_TEXTURE_MANAGER.manage( new TextureOb(ASTEROID_TEXTURE_ID, "data/asteroid/a_002.png", true, &aArg3) );
 
-printf("====50\n");
 
 //####################################### MINERAL_TEXTURE ################################
 VEC_int_type mArg0; 
@@ -1210,7 +1209,5 @@ g_TEXTURE_MANAGER.manageItem( new TextureOb(RADAR_ITEM_TEXTURE_ID, "data/item/ra
 VEC_int_type text_background_arg;  
 g_TEXTURE_MANAGER.manage( new TextureOb(TEXT_BACKGROUND_TEXTURE_ID, "data/other/text_background.png", true, &text_background_arg) );
 
-
-printf("====100\n");
 }
 

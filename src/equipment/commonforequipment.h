@@ -23,7 +23,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class CommonForEquipment
 {
-   public:
+        public:
+                int type_id, subtype_id;
+
      bool update_info_request;
 
      VEC_pString_type info_title_pList;  

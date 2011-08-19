@@ -24,9 +24,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class LazerEquipment : public CommonForEquipment
 {
     public:
-      int type_id;
-      int subtype_id;
-
       int damage_orig;
       int damage_add;
       int damage;
@@ -46,7 +43,7 @@ class LazerEquipment : public CommonForEquipment
 
       TextureOb* pTo_turrelTexOb;
       Turrel* pTo_turrel;
-      WeaponSlot* pTo_wslot;
+      ItemSlot* pTo_wslot;
       
       VEC_pLazerModule_type modules_pList;
 

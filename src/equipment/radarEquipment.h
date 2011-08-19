@@ -24,9 +24,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class RadarEquipment : public CommonForEquipment
 {
    public:
-      int type_id;
-      int subtype_id;
-
       int radius_orig;
       int radius_add;
       int radius;

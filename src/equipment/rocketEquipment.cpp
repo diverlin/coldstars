@@ -225,7 +225,6 @@ RocketEquipment :: RocketEquipment(TextureOb* _pTo_itemTexOb, int _ammo_max_orig
 {
         CommonForEquipment_init(_pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
         
-        type_id = EQUIPMENT_ID;
         subtype_id = ROCKET_ID;
 
         ammo_max_orig = _ammo_max_orig;

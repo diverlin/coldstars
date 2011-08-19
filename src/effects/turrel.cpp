@@ -49,7 +49,7 @@ Turrel :: Turrel()
 }
 
 
-void Turrel :: bindSlot(OtsecSlot* _pTo_slot)
+void Turrel :: bindSlot(ItemSlot* _pTo_slot)
 {
         pTo_slot = _pTo_slot;
 }

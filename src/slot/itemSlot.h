@@ -17,15 +17,30 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef OTSECSLOT_H
-#define OTSECSLOT_H
+#ifndef ITEMSLOT_H
+#define ITEMSLOT_H
 
 
-class OtsecSlot : public CommonForSlot
+class ItemSlot
 {   
-	public:
-        	OtsecSlot();
-		OtsecSlot(int _type_id, Ship* _pTo_ship, TextureOb* _pTo_texOb, int _pos_x, int _pos_y);
+	public:        
+                int type_id, subtype_id;
+                int item_type_id, item_subtype_id;
+
+                bool is_EQUIPED;  
+                bool is_FLASHING;
+                bool is_CURSORED;      
+
+                Ship* pTo_ship;
+
+                Rect rect;
+                TextureOb* pTo_texOb;
+                GLuint texture;
+
+                int w, h;
+        
+        	ItemSlot();
+		ItemSlot(int _subtype_id, Ship* _pTo_ship, TextureOb* _pTo_texOb, int _pos_x, int _pos_y);
                 
                 RocketEquipment*    get_pToRocketEquipment()    const;
                 LazerEquipment*     get_pToLazerEquipment()     const;
@@ -89,6 +104,8 @@ class OtsecSlot : public CommonForSlot
        
 		void renderEquipedItem();
 		void renderItemInfo();
+                
+                bool interaction(int _x, int _y);
         
         private:
                 RocketEquipment*    pTo_rocketEquipment;
