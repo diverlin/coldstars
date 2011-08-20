@@ -288,6 +288,7 @@ Ship :: Ship(TextureOb* _pTo_texOb,
        
        turrel1.placed(&points.weapon1_center_x, &points.weapon1_center_y);
        turrel1.bindSlot(&weapon_slot1);
+       turrel1.bindShip(this);
        turrel1.setTexOb(pTo_turrelTexOb);
        turrel_total_pList.push_back(&turrel1); 
        
@@ -307,6 +308,7 @@ Ship :: Ship(TextureOb* _pTo_texOb,
        
        turrel2.placed(&points.weapon2_center_x, &points.weapon2_center_y);
        turrel2.bindSlot(&weapon_slot2);
+        turrel2.bindShip(this);
        turrel2.setTexOb(pTo_turrelTexOb);
        turrel_total_pList.push_back(&turrel2);
         
@@ -326,6 +328,7 @@ Ship :: Ship(TextureOb* _pTo_texOb,
               
        turrel3.placed(&points.weapon3_center_x, &points.weapon3_center_y);  
        turrel3.bindSlot(&weapon_slot3);
+        turrel3.bindShip(this);
        turrel3.setTexOb(pTo_turrelTexOb);
        turrel_total_pList.push_back(&turrel3); 
        
@@ -345,6 +348,7 @@ Ship :: Ship(TextureOb* _pTo_texOb,
               
        turrel4.placed(&points.weapon4_center_x, &points.weapon4_center_y);
        turrel4.bindSlot(&weapon_slot4);
+        turrel4.bindShip(this);
        turrel4.setTexOb(pTo_turrelTexOb);
        turrel_total_pList.push_back(&turrel4);
          
@@ -366,6 +370,7 @@ Ship :: Ship(TextureOb* _pTo_texOb,
               
        turrel5.placed(&points.weapon5_center_x, &points.weapon5_center_y);
        turrel5.bindSlot(&weapon_slot5);
+       turrel5.bindShip(this);
        turrel5.setTexOb(pTo_turrelTexOb);
        turrel_total_pList.push_back(&turrel5); 
        
@@ -755,7 +760,7 @@ void Ship :: removeWeaponSlotDeadTargets()
 ItemSlot* Ship :: return_pToEmptyOtsecSlot()
 {
       for (unsigned int si = 0; si < slot_otsec_pList.size(); si++)
-          if (slot_otsec_pList[si]->is_EQUIPED == false)
+          if (slot_otsec_pList[si]->getEquipedStatus() == false)
              return slot_otsec_pList[si];
       return NULL;
 }
@@ -902,7 +907,7 @@ void Ship :: updateFireAbility()
 
      for (unsigned int i = 0; i < turrel_total_pList.size(); i++)
      { 
-        if (turrel_total_pList[i]->pTo_slot->is_EQUIPED == true)
+        if (turrel_total_pList[i]->pTo_slot->getEquipedStatus() == true)
            if (turrel_total_pList[i]->pTo_slot->getItemCondition() > 0)
            {
               turrel_equiped_pList.push_back(turrel_total_pList[i]);
@@ -974,7 +979,7 @@ void Ship :: calculateMass()
     //////// OTSEC SLOT ////////////////////////////////
     for (unsigned int i = 0; i < slot_total_pList.size(); i++)
     {
-        if (slot_total_pList[i]->is_EQUIPED == true)
+        if (slot_total_pList[i]->getEquipedStatus() == true)
            mass += slot_total_pList[i]->getItemMass();      
     }
 }
@@ -990,10 +995,10 @@ void Ship :: updateDriveAbility()
      speed = 0;
      ableTo.DRIVE = false;
 
-     if (drive_slot.is_EQUIPED == true) 
-        if (drive_slot.get_pToDriveEquipment()->condition > 0)  
+     if (drive_slot.getEquipedStatus() == true) 
+        if (drive_slot.getDriveEquipment()->condition > 0)  
         {
-           float val = (drive_slot.get_pToDriveEquipment()->speed - mass/70);
+           float val = (drive_slot.getDriveEquipment()->speed - mass/70);
            if (val > 0)
            { 
               speed = val;
@@ -1010,10 +1015,10 @@ void Ship :: updateDriveAbility()
 
 void Ship :: updateRadarAbility()
 {
-   if (radar_slot.is_EQUIPED == true) 
-      if (radar_slot.get_pToRadarEquipment()->condition > 0)  
+   if (radar_slot.getEquipedStatus() == true) 
+      if (radar_slot.getRadarEquipment()->condition > 0)  
       {
-          radius = radar_slot.get_pToRadarEquipment()->radius;
+          radius = radar_slot.getRadarEquipment()->radius;
           ableTo.RADAR = true;
       }
       
@@ -1031,15 +1036,15 @@ void Ship :: updateJumpAbility()
      hyper = 0;
      ableTo.HJUMP = false;
 
-     if (drive_slot.is_EQUIPED == true)
-        if (drive_slot.get_pToDriveEquipment()->condition > 0)
-           if (bak_slot.is_EQUIPED == true)
-              if (bak_slot.get_pToBakEquipment()->condition > 0)
+     if (drive_slot.getEquipedStatus() == true)
+        if (drive_slot.getDriveEquipment()->condition > 0)
+           if (bak_slot.getEquipedStatus() == true)
+              if (bak_slot.getBakEquipment()->condition > 0)
               {
-                 if (drive_slot.get_pToDriveEquipment()->hyper > bak_slot.get_pToBakEquipment()->fuel)
-                    hyper = drive_slot.get_pToDriveEquipment()->hyper;
+                 if (drive_slot.getDriveEquipment()->hyper > bak_slot.getBakEquipment()->fuel)
+                    hyper = drive_slot.getDriveEquipment()->hyper;
                  else
-                    hyper = bak_slot.get_pToBakEquipment()->fuel;
+                    hyper = bak_slot.getBakEquipment()->fuel;
 
                  ableTo.HJUMP = true;
               }    
@@ -1051,10 +1056,10 @@ void Ship :: updateEnergyAbility()
      energy = 0;
      ableTo.ENERGIZE = false;
 
-     if (energizer_slot.is_EQUIPED == true)
-        if (energizer_slot.get_pToEnergizerEquipment()->condition > 0)
+     if (energizer_slot.getEquipedStatus() == true)
+        if (energizer_slot.getEnergizerEquipment()->condition > 0)
         {
-           energy = energizer_slot.get_pToEnergizerEquipment()->energy;
+           energy = energizer_slot.getEnergizerEquipment()->energy;
            ableTo.ENERGIZE = true;
         }
 }
@@ -1066,11 +1071,11 @@ void Ship :: updateProtectionAbility()
      protection = korpus_protection;
      ableTo.PROTECT = false;
 
-     if (protector_slot.is_EQUIPED == true)
+     if (protector_slot.getEquipedStatus() == true)
      {
-        if (protector_slot.get_pToProtectorEquipment()->condition > 0)
+        if (protector_slot.getProtectorEquipment()->condition > 0)
         {
-           protection = protector_slot.get_pToProtectorEquipment()->protection + korpus_protection;
+           protection = protector_slot.getProtectorEquipment()->protection + korpus_protection;
            ableTo.PROTECT = true;
         }
      }   
@@ -1084,10 +1089,10 @@ void Ship :: updateRepairAbility()
      repair = 0;
      ableTo.REPAIR = false;
 
-     if (droid_slot.is_EQUIPED == true)
-        if (droid_slot.get_pToDroidEquipment()->condition > 0)
+     if (droid_slot.getEquipedStatus() == true)
+        if (droid_slot.getDroidEquipment()->condition > 0)
         {
-            repair = droid_slot.get_pToDroidEquipment()->repair;
+            repair = droid_slot.getDroidEquipment()->repair;
             ableTo.REPAIR = true;
         }
 }
@@ -1098,10 +1103,10 @@ void Ship :: updateFreezeAbility()
      freeze = 0;
      ableTo.FREEZE = false;
 
-     if (freezer_slot.is_EQUIPED == true)
-        if (freezer_slot.get_pToFreezerEquipment()->condition > 0)
+     if (freezer_slot.getEquipedStatus() == true)
+        if (freezer_slot.getFreezerEquipment()->condition > 0)
         {
-           freeze = freezer_slot.get_pToFreezerEquipment()->freeze;
+           freeze = freezer_slot.getFreezerEquipment()->freeze;
            ableTo.FREEZE = true;
         }
 }
@@ -1113,8 +1118,8 @@ void Ship :: updateGrabAbility()
      ableTo.GRAB = false;
 
      if (inhibit_GRAPPLE == false)
-        if (grapple_slot.is_EQUIPED == true)
-           if (grapple_slot.get_pToGrappleEquipment()->condition > 0)
+        if (grapple_slot.getEquipedStatus() == true)
+           if (grapple_slot.getGrappleEquipment()->condition > 0)
               ableTo.GRAB = true;
 }
 
@@ -1125,10 +1130,10 @@ void Ship :: updateScanAbility()
      scan = 0;
      ableTo.SCAN = false;
 
-     if (scaner_slot.is_EQUIPED == true)
-        if (scaner_slot.get_pToScanerEquipment()->condition > 0)
+     if (scaner_slot.getEquipedStatus() == true)
+        if (scaner_slot.getScanerEquipment()->condition > 0)
         {
-           scan = scaner_slot.get_pToScanerEquipment()->scan;
+           scan = scaner_slot.getScanerEquipment()->scan;
            ableTo.SCAN = true;
         }
 }
@@ -1142,8 +1147,8 @@ void Ship :: setMaxArmor()
 
 void Ship :: setMaxFuel()
 {
-     if (bak_slot.is_EQUIPED == true)
-        bak_slot.get_pToBakEquipment()->fuel = bak_slot.get_pToBakEquipment()->fuel_max;
+     if (bak_slot.getEquipedStatus() == true)
+        bak_slot.getBakEquipment()->fuel = bak_slot.getBakEquipment()->fuel_max;
 }
 
 
@@ -1287,7 +1292,7 @@ void Ship :: updateInfo()
 std::string Ship :: returnProtectionStr()
 {
     if (ableTo.PROTECT == true)
-       return int2str(protector_slot.get_pToProtectorEquipment()->protection) + '+' + int2str(korpus_protection);
+       return int2str(protector_slot.getProtectorEquipment()->protection) + '+' + int2str(korpus_protection);
     else
        return int2str(korpus_protection);
 }

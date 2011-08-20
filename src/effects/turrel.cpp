@@ -54,13 +54,18 @@ void Turrel :: bindSlot(ItemSlot* _pTo_slot)
         pTo_slot = _pTo_slot;
 }
 
+void Turrel :: bindShip(Ship* _pTo_ship)
+{
+        pTo_ship = _pTo_ship; 
+}        
+      
 
 void Turrel :: setTexOb(TextureOb* _pTo_texOb)
 {
     pTo_texOb = _pTo_texOb;
-    w = (*pTo_texOb).w;
-    h = (*pTo_texOb).h;   
-    texture = (*pTo_texOb).texture;   // move this to linkTexture func
+    w = pTo_texOb->w;
+    h = pTo_texOb->h;   
+    texture = pTo_texOb->texture;   // move this to linkTexture func
 
     //////
     points.initCenterPoint();
@@ -209,25 +214,25 @@ bool Turrel :: isTargetInSpace()
 bool Turrel :: isTargetOnTheSameStarSystem()
 {
      if (target_type_id == SHIP_ID)
-        if ((*pTo_shipTarget).pTo_starsystem == (*pTo_ship).pTo_starsystem)
+        if (pTo_shipTarget->pTo_starsystem == pTo_ship->pTo_starsystem)
            return true;
         else
            return false;
 
      if (target_type_id == ASTEROID_ID)
-        if ((*pTo_asteroidTarget).pTo_starsystem == (*pTo_ship).pTo_starsystem)
+        if (pTo_asteroidTarget->pTo_starsystem == pTo_ship->pTo_starsystem)
            return true;
         else
            return false;
 
      if (target_type_id == MINERAL_ID)
-        if ((*pTo_mineralTarget).pTo_starsystem == (*pTo_ship).pTo_starsystem)
+        if (pTo_mineralTarget->pTo_starsystem == pTo_ship->pTo_starsystem)
            return true;
         else
            return false;
 
      if (target_type_id == CONTAINER_ID)
-        if ((*pTo_containerTarget).pTo_starsystem == (*pTo_ship).pTo_starsystem)
+        if (pTo_containerTarget->pTo_starsystem == pTo_ship->pTo_starsystem)
            return true;
         else
            return false;
@@ -241,10 +246,10 @@ bool Turrel :: isTargetOnTheSameStarSystem()
 
 bool Turrel :: isAmmoAvailable()
 {
-    if (pTo_slot->item_subtype_id == LAZER_ID)
+    if (pTo_slot->getItemSubType() == LAZER_ID)
        return true;
-    if (pTo_slot->item_subtype_id == ROCKET_ID)
-       if (pTo_slot->get_pToRocketEquipment()->ammo > 0)
+    if (pTo_slot->getItemSubType() == ROCKET_ID)
+       if (pTo_slot->getRocketEquipment()->ammo > 0)
           return true;
 
     return false;           
@@ -255,40 +260,40 @@ bool Turrel :: isAmmoAvailable()
 
 bool Turrel :: fireEvent_TRUE()
 {
-    if (pTo_slot->item_subtype_id == LAZER_ID)
+    if (pTo_slot->getItemSubType() == LAZER_ID)
     {   
-       pTo_slot->get_pToLazerEquipment()->fireEvent();
-       pTo_slot->get_pToLazerEquipment()->deterioration();
+       pTo_slot->getLazerEquipment()->fireEvent(this);
+       pTo_slot->getLazerEquipment()->deterioration();
 
        if (target_type_id == SHIP_ID) 
        { 
-           pTo_shipTarget->hit_TRUE(pTo_slot->get_pToLazerEquipment()->damage);
+           pTo_shipTarget->hit_TRUE(pTo_slot->getLazerEquipment()->damage);
            return true;
        } 
 
        if (target_type_id == ASTEROID_ID)  
        { 
-           pTo_asteroidTarget->hit_TRUE(pTo_slot->get_pToLazerEquipment()->damage);
+           pTo_asteroidTarget->hit_TRUE(pTo_slot->getLazerEquipment()->damage);
            return true;
        }
 
        if (target_type_id == MINERAL_ID)  
        { 
-           pTo_mineralTarget->hit_TRUE(pTo_slot->get_pToLazerEquipment()->damage);
+           pTo_mineralTarget->hit_TRUE(pTo_slot->getLazerEquipment()->damage);
            return true;
        }
 
        if (target_type_id == CONTAINER_ID)  
        { 
-           pTo_containerTarget->hit_TRUE(pTo_slot->get_pToLazerEquipment()->damage);
+           pTo_containerTarget->hit_TRUE(pTo_slot->getLazerEquipment()->damage);
            return true;
        }
     }
 
-    if (pTo_slot->item_subtype_id == ROCKET_ID)
+    if (pTo_slot->getItemSubType() == ROCKET_ID)
     {   
-       pTo_slot->get_pToRocketEquipment()->fireEvent();
-       pTo_slot->get_pToRocketEquipment()->deterioration();
+       pTo_slot->getRocketEquipment()->fireEvent();
+       pTo_slot->getRocketEquipment()->deterioration();
        return true; 
     }
 
@@ -301,38 +306,38 @@ bool Turrel :: fireEvent_TRUE()
 
 bool Turrel :: fireEvent_FALSE()
 {
-    if (pTo_slot->item_subtype_id == LAZER_ID)
+    if (pTo_slot->getItemSubType() == LAZER_ID)
     {   
-       pTo_slot->get_pToLazerEquipment()->deterioration();
+       pTo_slot->getLazerEquipment()->deterioration();
 
        if (target_type_id == SHIP_ID) 
        { 
-           pTo_shipTarget->hit_FALSE(pTo_slot->get_pToLazerEquipment()->damage);
+           pTo_shipTarget->hit_FALSE(pTo_slot->getLazerEquipment()->damage);
            return true;
        } 
 
        if (target_type_id == ASTEROID_ID)  
        { 
-           pTo_asteroidTarget->hit_FALSE(pTo_slot->get_pToLazerEquipment()->damage);
+           pTo_asteroidTarget->hit_FALSE(pTo_slot->getLazerEquipment()->damage);
            return true;
        }
 
        if (target_type_id == MINERAL_ID)  
        { 
-           pTo_mineralTarget->hit_FALSE(pTo_slot->get_pToLazerEquipment()->damage);
+           pTo_mineralTarget->hit_FALSE(pTo_slot->getLazerEquipment()->damage);
            return true;
        }
 
        if (target_type_id == CONTAINER_ID)  
        { 
-           pTo_containerTarget->hit_FALSE(pTo_slot->get_pToLazerEquipment()->damage);
+           pTo_containerTarget->hit_FALSE(pTo_slot->getLazerEquipment()->damage);
            return true;
        }
     }
 
-    if (pTo_slot->item_subtype_id == ROCKET_ID)
+    if (pTo_slot->getItemSubType() == ROCKET_ID)
     {   
-       pTo_slot->get_pToRocketEquipment()->deterioration();
+       pTo_slot->getRocketEquipment()->deterioration();
        return true; 
     }
 

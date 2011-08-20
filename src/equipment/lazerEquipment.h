@@ -37,13 +37,9 @@ class LazerEquipment : public CommonForEquipment
       
       int particle_Size;
 
-      //l_tex, (self.l_w, self.l_h) = self.lazerEffect_texOb.texture, (self.lazerEffect_texOb.w, self.lazerEffect_texOb.h)
-
-      //self.target = None
-
-      TextureOb* pTo_turrelTexOb;
-      Turrel* pTo_turrel;
-      ItemSlot* pTo_wslot;
+      //TextureOb* pTo_turrelTexOb;
+      //Turrel* pTo_turrel;
+      //ItemSlot* pTo_slot;
       
       VEC_pLazerModule_type modules_pList;
 
@@ -66,7 +62,7 @@ class LazerEquipment : public CommonForEquipment
       void updateInfo();
            std::string returnDamageStr();
            std::string returnRadiusStr();
-      void fireEvent();
+      void fireEvent(Turrel* _turrel);
       
       bool insertModule(LazerModule* pTo_lazerModule);
 };
