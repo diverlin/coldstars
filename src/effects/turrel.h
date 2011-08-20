@@ -41,6 +41,7 @@ class Turrel
        ~Turrel();
               
        void bindSlot(ItemSlot* _pTo_slot);
+        void bindShip(Ship* _pTo_ship);
        void setTexOb(TextureOb* _pTo_texOb);
 
 

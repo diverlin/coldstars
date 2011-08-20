@@ -27,6 +27,8 @@ void CommonForEquipment :: CommonForEquipment_init(TextureOb* _pTo_itemTexOb, in
 {
     type_id = EQUIPMENT_ID;
     
+    slot = NULL;
+    
     pTo_itemTexOb = _pTo_itemTexOb;
 
     if (pTo_itemTexOb->is_animated == false)
@@ -54,11 +56,13 @@ void CommonForEquipment :: CommonForEquipment_init(TextureOb* _pTo_itemTexOb, in
 
     deterioration_rate = _deterioration_rate;
 
-    //turns_LOCKED = 0;
-
     price = 0;
-    pTo_ship = NULL;
 }
+
+void CommonForEquipment :: bindSlot(ItemSlot* _slot)
+{
+                slot = _slot;
+}     
 
 void CommonForEquipment :: deterioration()
 {

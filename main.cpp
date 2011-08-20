@@ -4,7 +4,7 @@ Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
+of the L icense, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -85,7 +85,7 @@ void playerScan(Ship* pTo_ship, bool in_store = false, bool allow_full_control =
     }   
 
     pTo_SHIP_GUI->mouseControl(allow_full_control, in_store);
-    if (pTo_CURSOR->pTo_otsec_slot->is_EQUIPED == false)
+    if (pTo_CURSOR->pTo_otsec_slot->getEquipedStatus() == false)
         pTo_SHIP_GUI->renderItemInfo();
 
     pTo_CURSOR->updatePos();
@@ -125,7 +125,7 @@ int main()
 
     //equip(pTo_pship); // debug
 
-    pTo_pship->drive_slot.get_pToDriveEquipment()->speed*=5;   // hack debug
+    pTo_pship->drive_slot.getDriveEquipment()->speed*=5;   // hack debug
     pTo_pship->updateAllStuff(); 
 
     pTo_PLAYER->setShip(pTo_pship);

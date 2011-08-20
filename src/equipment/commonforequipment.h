@@ -26,6 +26,7 @@ class CommonForEquipment
         public:
                 int type_id, subtype_id;
 
+     ItemSlot* slot;
      bool update_info_request;
 
      VEC_pString_type info_title_pList;  
@@ -51,13 +52,11 @@ class CommonForEquipment
 
      int deterioration_rate;
 
-     //int turns_LOCKED;
-
      int price;
 
-     Ship* pTo_ship;
-      
      CommonForEquipment();
+     
+     void bindSlot(ItemSlot* _slot);
      void CommonForEquipment_init(TextureOb* _pTo_itemTexOb, int _modules_num_max, int _mass, int _condition_max, int _deterioration_rate);
      void deterioration();
      void repair();

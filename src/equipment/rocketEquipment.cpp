@@ -287,7 +287,7 @@ void RocketEquipment :: countPrice()
 
 void RocketEquipment :: updateOwnerPropetries()
 {      
-    pTo_ship->updateFireAbility();
+    slot->getOwnerShip()->updateFireAbility();
 }
 
 std::string RocketEquipment :: returnAmmoStr()
@@ -342,8 +342,8 @@ void RocketEquipment :: updateInfo()
 void RocketEquipment :: fireEvent()
 {
     RocketBullet* pTo_r1; 
-    if (pTo_ship->render_TURRELS == true)
-        pTo_r1 = new RocketBullet(pTo_ship->pTo_starsystem, 
+    if (slot->getOwnerShip()->render_TURRELS == true)
+        pTo_r1 = new RocketBullet(slot->getOwnerShip()->pTo_starsystem, 
                                   pTo_bulletTexOb, 
                                   pTo_turrel->points.center_x, 
                                   pTo_turrel->points.center_y, 
@@ -351,7 +351,7 @@ void RocketEquipment :: fireEvent()
                                   pTo_turrel->pTo_target_pos_x, 
                                   pTo_turrel->pTo_target_pos_y, 
                                   pTo_turrel->pTo_target_is_alive, 
-                                  pTo_ship->id, 
+                                  slot->getOwnerShip()->id, 
                                   damage, 
                                   bullet_size, 
                                   bullet_armor, 
@@ -361,15 +361,15 @@ void RocketEquipment :: fireEvent()
                                   bullet_angular_speed, 
                                   bullet_live_time);
     else
-        pTo_r1 = new RocketBullet(pTo_ship->pTo_starsystem, 
+        pTo_r1 = new RocketBullet(slot->getOwnerShip()->pTo_starsystem, 
                                   pTo_bulletTexOb, 
-                                  pTo_ship->points.center_x, 
-                                  pTo_ship->points.center_y, 
+                                  slot->getOwnerShip()->points.center_x, 
+                                  slot->getOwnerShip()->points.center_y, 
                                   pTo_turrel->points.angle_inD, 
                                   pTo_turrel->pTo_target_pos_x, 
                                   pTo_turrel->pTo_target_pos_y, 
                                   pTo_turrel->pTo_target_is_alive, 
-                                  pTo_ship->id, 
+                                  slot->getOwnerShip()->id, 
                                   damage, 
                                   bullet_size, 
                                   bullet_armor, 
