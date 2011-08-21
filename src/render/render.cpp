@@ -16,11 +16,25 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "render.hpp"
 
-#ifndef RENDER_H
-#define RENDER_H
-
-void drawFlatQuadPerVertexIn2D(float bottomLeft_x, float bottomLeft_y, float bottomRight_x, float bottomRight_y, float topRight_x, float topRight_y, float topLeft_x, float topLeft_y, float z_pos, float texCoord_bottomLeft_x = 0, float texCoord_bottomLeft_y = 0, float texCoord_bottomRight_x = 1, float texCoord_bottomRight_y = 0, float texCoord_topRight_x = 1, float texCoord_topRight_y = 1, float texCoord_topLeft_x = 0, float texCoord_topLeft_y = 1)
+void drawFlatQuadPerVertexIn2D(float bottomLeft_x, 
+			       float bottomLeft_y, 
+			       float bottomRight_x, 
+			       float bottomRight_y, 
+			       float topRight_x, 
+			       float topRight_y, 
+			       float topLeft_x, 
+			       float topLeft_y, 
+			       float z_pos, 
+			       float texCoord_bottomLeft_x, 
+			       float texCoord_bottomLeft_y, 
+			       float texCoord_bottomRight_x, 
+			       float texCoord_bottomRight_y, 
+			       float texCoord_topRight_x, 
+			       float texCoord_topRight_y, 
+			       float texCoord_topLeft_x, 
+			       float texCoord_topLeft_y)
 {       
     glBegin(GL_QUADS);
       glTexCoord3f(texCoord_bottomLeft_x,  texCoord_bottomLeft_y,  0); glVertex3f(bottomLeft_x,  bottomLeft_y , z_pos);
@@ -30,7 +44,22 @@ void drawFlatQuadPerVertexIn2D(float bottomLeft_x, float bottomLeft_y, float bot
     glEnd();
 }
 
-void drawDynamic(float center_x, float center_y, float angleInDegree, int minus_half_w, int minus_half_h, int plus_half_w, int plus_half_h, float pos_z, float texCoord_bottomLeft_x = 0, float texCoord_bottomLeft_y = 0, float texCoord_bottomRight_x = 1, float texCoord_bottomRight_y = 0, float texCoord_topRight_x = 1, float texCoord_topRight_y = 1, float texCoord_topLeft_x = 0, float texCoord_topLeft_y = 1)
+void drawDynamic(float center_x, 
+		 float center_y, 
+		 float angleInDegree, 
+		 int minus_half_w, 
+		 int minus_half_h, 
+		 int plus_half_w, 
+		 int plus_half_h, 
+		 float pos_z, 
+		 float texCoord_bottomLeft_x, 
+		 float texCoord_bottomLeft_y, 
+		 float texCoord_bottomRight_x, 
+		 float texCoord_bottomRight_y, 
+		 float texCoord_topRight_x, 
+		 float texCoord_topRight_y, 
+		 float texCoord_topLeft_x, 
+		 float texCoord_topLeft_y)
 {
     glPushMatrix();
 
@@ -51,7 +80,16 @@ void drawDynamic(float center_x, float center_y, float angleInDegree, int minus_
 
 
 
-void drawRect(Rect rect, float z_pos, float texCoord_bottomLeft_x = 0, float texCoord_bottomLeft_y = 0, float texCoord_bottomRight_x = 1, float texCoord_bottomRight_y = 0, float texCoord_topRight_x = 1, float texCoord_topRight_y = 1, float texCoord_topLeft_x = 0, float texCoord_topLeft_y = 1) // the drawrect function was inverted by Y axis
+void drawRect(Rect rect, 
+              float z_pos, 
+              float texCoord_bottomLeft_x, 
+              float texCoord_bottomLeft_y, 
+              float texCoord_bottomRight_x, 
+              float texCoord_bottomRight_y, 
+              float texCoord_topRight_x, 
+              float texCoord_topRight_y, 
+              float texCoord_topLeft_x, 
+              float texCoord_topLeft_y) // the drawrect function was inverted by Y axis
 {
     glBegin(GL_QUADS);
       glTexCoord3f(texCoord_bottomLeft_x,  texCoord_bottomLeft_y,  0); glVertex3f(rect.bottomLeft_x,           rect.bottomLeft_y + rect.h, z_pos);
@@ -69,7 +107,21 @@ void drawTexturedRect(GLuint tex, Rect rect, float z_pos)   //# z_pos = -1
 
 
 
-void drawLine(GLuint texture, float start_pos_x, float start_pos_y, float z_pos, float len, float angle_inD, int half_h, float texCoord_bottomLeft_x = 0, float texCoord_bottomLeft_y = 0, float texCoord_bottomRight_x = 1, float texCoord_bottomRight_y = 0, float texCoord_topRight_x = 1, float texCoord_topRight_y = 1, float texCoord_topLeft_x = 0, float texCoord_topLeft_y = 1)
+void drawLine(GLuint texture, 
+              float start_pos_x, 
+              float start_pos_y, 
+              float z_pos, 
+              float len, 
+              float angle_inD, 
+              int half_h, 
+              float texCoord_bottomLeft_x, 
+              float texCoord_bottomLeft_y, 
+              float texCoord_bottomRight_x, 
+              float texCoord_bottomRight_y, 
+              float texCoord_topRight_x, 
+              float texCoord_topRight_y, 
+              float texCoord_topLeft_x, 
+              float texCoord_topLeft_y)
 {
     glBindTexture(GL_TEXTURE_2D, texture);
     glPushMatrix();
@@ -96,8 +148,8 @@ void drawInfoIn2Column(
                 VEC_pString_type* pTo_info_title_pList, 
                 VEC_pString_type* pTo_info_value_pList, 
                 float center_x, float center_y,
-                float scroll_x = g_SCROLL_COORD_X,
-                float scroll_y = g_SCROLL_COORD_Y)
+                float scroll_x,
+                float scroll_y)
 {
      int font_size = 13;
      float char_h = 25;
@@ -202,6 +254,5 @@ void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z
     
 
 
-#endif /* RECT_H */
 
 

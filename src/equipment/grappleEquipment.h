@@ -74,4 +74,6 @@ class GrappleEquipment : public CommonForEquipment
       bool insertModule(GrappleModule* pTo_grappleModule);
 };
 
+GrappleEquipment* grappleEquipmentGenerator(int race_id, int revision_id = -1);
+
 #endif 

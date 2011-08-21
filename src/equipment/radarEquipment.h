@@ -53,6 +53,8 @@ class RadarEquipment : public CommonForEquipment
       bool insertModule(RadarModule* pTo_radarModule);
 };
 
+RadarEquipment* radarEquipmentGenerator(int race_id, int revision_id = -1);
+
 #endif 
 
 

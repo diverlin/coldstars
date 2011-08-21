@@ -21,17 +21,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <iostream>
 #include <sstream>
 
-#define SIZE_1 20   // 1 - up to 20x20
-#define SIZE_2 40   // 2 - up to 40x40
-#define SIZE_3 60   // 3 - up to 60x60
-#define SIZE_4 80   // 4 - up to 80x80
-#define SIZE_5 100  // 5 - up to 100x100
-#define SIZE_6 130  // 6 - up to 130x130
-#define SIZE_7 160  // 7 - up to 160x160
-#define SIZE_8 200  // 8 - up to 200x200
-#define SIZE_9 240  // 9 - up to 240x240
+#include "common.hpp"
 
-typedef std::vector<int> VEC_int_type; 
 
 int randIntInRange(int range_start, int range_end)
 {
@@ -49,28 +40,6 @@ int randomInverse()
      return -1; 
 }
 
-struct Color
-{
-   float r;
-   float g;
-   float b;
-   float a;
-};
-
-
-
-struct See
-{
-   bool ASTEROID;
-   bool CONTAINER;
-   bool MINERAL;
-
-   bool RANGER;
-   bool WARRIOR;
-   bool TRADER;  
-   bool PIRAT;
-   bool DIPLOMAT;
-};
 
 
 std :: string returnRaceStringByRaceId(int id)  // replace by generator class

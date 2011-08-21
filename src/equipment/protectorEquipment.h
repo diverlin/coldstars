@@ -53,4 +53,6 @@ public:
 
 };
 
+ProtectorEquipment* protectorEquipmentGenerator(int race_id, int revision_id = -1);
+
 #endif 

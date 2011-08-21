@@ -142,18 +142,18 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
         pTo_lazer_trace_effect = new LazerTraceEffect(pTo_lazerEffectTexOb, 
                                                       pTo_particleTexOb, 
                                                       100, 
-                                                      _turrel->pTo_pos_x, 
-                                                      _turrel->pTo_pos_y, 
-                                                      _turrel->pTo_target_pos_x, 
-                                                      _turrel->pTo_target_pos_y);
+                                                      _turrel->get_pCenterX(), 
+                                                      _turrel->get_pCenterY(), 
+                                                      _turrel->getTarget_pCenterX(), 
+                                                      _turrel->getTarget_pCenterY());
     else
         pTo_lazer_trace_effect = new LazerTraceEffect(pTo_lazerEffectTexOb, 
                                                       pTo_particleTexOb, 
                                                       100, 
                                                       &(slot->getShip()->points.center_x), 
                                                       &(slot->getShip()->points.center_y), 
-                                                      _turrel->pTo_target_pos_x, 
-                                                      _turrel->pTo_target_pos_y);
+                                                      _turrel->getTarget_pCenterX(), 
+                                                      _turrel->getTarget_pCenterY());
 
     slot->getShip()->pTo_starsystem->effect_LAZERTRACE_pList.push_back(pTo_lazer_trace_effect);
     
@@ -162,8 +162,8 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
     //TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(pTo_lazer_trace_effect->pTo_texOb->color_id);   SEGFAULT
     DamageEffect* pTo_damage_effect = new DamageEffect(pTo_particleTexOb, 
                                                        slot->getShip()->pTo_starsystem, 
-                                                       _turrel->pTo_target_pos_x, 
-                                                       _turrel->pTo_target_pos_y, 5, 30, 1.3, 1.0, 0.1, 0.001);
+                                                       _turrel->getTarget_pCenterX(), 
+                                                       _turrel->getTarget_pCenterY(), 5, 30, 1.3, 1.0, 0.1, 0.001);
     slot->getShip()->pTo_starsystem->effect_DAMAGE_pList.push_back(pTo_damage_effect);
 
     pTo_lazer_trace_effect->pTo_damageEffect = pTo_damage_effect;
@@ -193,7 +193,7 @@ bool LazerEquipment :: insertModule(LazerModule* pTo_lazerModule)
 
 
 
-LazerEquipment* lazerGenerator(int race_id, int revision_id = -1)
+LazerEquipment* lazerEquipmentGenerator(int race_id, int revision_id)
 {
     if (race_id == -1)
        race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
@@ -221,129 +221,6 @@ LazerEquipment* lazerGenerator(int race_id, int revision_id = -1)
 
 
 
-
-
-LazerTraceEffect :: LazerTraceEffect(TextureOb* _pTo_texOb, TextureOb* _pTo_particleTexOb, float _particle_size, float* _pTo_start_pos_x, float* _pTo_start_pos_y, float* _pTo_end_pos_x, float* _pTo_end_pos_y)
-{
-          is_alive = true;
-          is_alreadyInRemoveQueue = false; 
-
-    pTo_texOb = _pTo_texOb;
-
-    if (pTo_texOb->is_animated == false)
-       pToFunc_render = &LazerTraceEffect::_renderFrame;
-    else
-       pToFunc_render = &LazerTraceEffect::_renderFrames;
-
-          //pTo_shipOwner = NULL;
-
-          //pTo_shipTarget = NULL;
-          //pTo_asteroidTarget = NULL;
-          //pTo_mineralTarget = NULL;
-
-          pTo_starsystem = NULL;
-          
-
-          texture = pTo_texOb->texture;
-          w = pTo_texOb->w;
-          h = pTo_texOb->h;
-
-          pTo_particleTexOb = _pTo_particleTexOb;
-
-          particle_size = _particle_size;
-
-          existance_time = randIntInRange(40, 45);
-
-          if (randIntInRange(1,2) == 1)
-             d_angle_inR = 0.0005 * 3;  //self.target.size
-          else
-             d_angle_inR = -0.0005 * 3; // self.target.size
-
-
-          additional_angle_inR = 0;
-
-          pTo_damageEffect = NULL;
-          
-
-          pTo_start_pos_x = _pTo_start_pos_x;
-          pTo_start_pos_y = _pTo_start_pos_y;
-
-          pTo_end_pos_x = _pTo_end_pos_x;
-          pTo_end_pos_y = _pTo_end_pos_y;
-
-          updateAngleAndLen();
-}
-
-LazerTraceEffect :: ~LazerTraceEffect()
-{}
-
-
-void LazerTraceEffect :: update()
-{
-    float time = 1;    // hack
-
-    if (time > 0) 
-       updateAngleAndLen();
-
-    if (existance_time < 0)
-    {
-       is_alive = false;
-       if (is_alreadyInRemoveQueue == false)
-       { 
-          pTo_damageEffect->is_dying = true;
-          is_alreadyInRemoveQueue = true;
-       }
-    } 
-    
-    existance_time -= 1;
-}
-
-void LazerTraceEffect :: updateAngleAndLen()
-{
-    // performs within game loop
-    float xl = (*pTo_end_pos_x) - (*pTo_start_pos_x);
-    float yl = (*pTo_end_pos_y) - (*pTo_start_pos_y);
-
-    len = sqrt((xl*xl) + (yl*yl));
-
-    angle_inR = atan2(yl, xl);
-    angle_inR += additional_angle_inR;
-
-    angle_inD = angle_inR * RADIAN_TO_DEGREE_RATE;
-
-    //additional_angle_inR += d_angle_inR;
-
-    //self.ex = sin(HALF_PI - self.angle_radian) * self.Len + self.owner.points.center[0]
-    //self.ey = sin(self.angle_radian) * self.Len + self.owner.points.center[1]
-
-    //# NEW !!!!
-    //if self.damage_effect == None:
-//###                                                    texture,             starsystem,      center,  num_particles, pSize,              velocity_max, alpha_init, alpha_end, d_alpha):
-             //#self.damage_effect = tinyExplosionEffect(self.particle_texOb  self.starsystem, self.p2, 10,             15,                1.5,          1.0,        0.2,       0.05)
-             //self.damage_effect = tinyExplosionEffect(self.particle_texOb,  self.starsystem, self.p2, 5,             self.pSize, 0.5,          0.7,        0.2,       0.1)              
-             //self.starsystem.effect_DAMAGE_list.append(self.damage_effect)
-
-    //self.damage_effect.setNewCenter([self.ex, self.ey])
-}
-
-
-void LazerTraceEffect :: render()
-{
-     (this->*pToFunc_render)();
-}
-
-
-
-void LazerTraceEffect :: _renderFrame()
-{
-    drawLine(texture, (*pTo_start_pos_x), (*pTo_start_pos_y), -2, len, angle_inD, h/4);
-}
-
-void LazerTraceEffect :: _renderFrames()
-{
-    int i = pTo_texOb->updateAnimationFrame(); 
-    drawLine(texture, (*pTo_start_pos_x), (*pTo_start_pos_y), -2, len, angle_inD, h/4, pTo_texOb->texCoord_bottomLeft_x_list[i], pTo_texOb->texCoord_bottomLeft_y_list[i], pTo_texOb->texCoord_bottomRight_x_list[i], pTo_texOb->texCoord_bottomRight_y_list[i], pTo_texOb->texCoord_topLeft_x_list[i], pTo_texOb->texCoord_topLeft_y_list[i], pTo_texOb->texCoord_topRight_x_list[i], pTo_texOb->texCoord_topRight_y_list[i]);
-}
 
 
 

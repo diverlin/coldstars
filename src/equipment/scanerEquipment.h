@@ -53,4 +53,6 @@ class ScanerEquipment : public CommonForEquipment
 
 };
 
+ScanerEquipment* scanerEquipmentGenerator(int race_id, int revision_id = -1);
+
 #endif 

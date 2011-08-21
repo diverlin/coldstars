@@ -131,7 +131,7 @@ bool EnergizerEquipment :: insertModule(EnergizerModule* pTo_energizerModule)
 }
 
 
-EnergizerEquipment* energizerGenerator(int race_id, int revision_id = -1)
+EnergizerEquipment* energizerEquipmentGenerator(int race_id, int revision_id)
 {
     if (race_id == -1)
        race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]

@@ -55,8 +55,11 @@ sf::Event g_EVENT;
 class ObjMeshInstance;
 ObjMeshInstance* pTo_SPHERE_MESH; 
 
-ModelOBJ            g_model;
+//ModelOBJ            g_model;
 
+
+class TextureManager;
+//TextureManager g_TEXTURE_MANAGER;// = TextureManager();
 
 class PlayerInstance;
 PlayerInstance* pTo_PLAYER;

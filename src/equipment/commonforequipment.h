@@ -17,8 +17,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef COMMONFOREQUIPMENTS_H
-#define COMMONFOREQUIPMENTS_H
+#ifndef COMMONFOREQUIPMENT_H
+#define COMMONFOREQUIPMENT_H
 
 
 class CommonForEquipment

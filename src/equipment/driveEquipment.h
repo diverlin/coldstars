@@ -67,6 +67,8 @@ public:
       bool insertModule(DriveModule* pTo_driveModule);
 };
 
+DriveEquipment* driveEquipmentGenerator(int race_id, int revision_id = -1);
+
 #endif 
 
 

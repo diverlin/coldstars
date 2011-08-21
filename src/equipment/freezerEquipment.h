@@ -53,4 +53,6 @@ class FreezerEquipment : public CommonForEquipment
       bool insertModule(FreezerModule* pTo_freezerModule);
 };
 
+FreezerEquipment* freezerEquipmentGenerator(int race_id, int revision_id = -1);
+
 #endif 
