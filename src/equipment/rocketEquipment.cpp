@@ -247,6 +247,8 @@ RocketEquipment :: RocketEquipment(TextureOb* _pTo_itemTexOb, int _ammo_max_orig
         bullet_live_time     = ROCKET_EXISTANCE_TIME;
         bullet_angular_speed = ROCKET_ANGULAR_SPEED;
 
+        turrelTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.turrel_texOb_pList); 
+   
         updatePropetries();
         countPrice();
         updateInfo();
@@ -287,7 +289,7 @@ void RocketEquipment :: countPrice()
 
 void RocketEquipment :: updateOwnerPropetries()
 {      
-    slot->getOwnerShip()->updateFireAbility();
+    slot->getShip()->updateFireAbility();
 }
 
 std::string RocketEquipment :: returnAmmoStr()
@@ -342,16 +344,16 @@ void RocketEquipment :: updateInfo()
 void RocketEquipment :: fireEvent()
 {
     RocketBullet* pTo_r1; 
-    if (slot->getOwnerShip()->render_TURRELS == true)
-        pTo_r1 = new RocketBullet(slot->getOwnerShip()->pTo_starsystem, 
+    if (slot->getShip()->render_TURRELS == true)
+        pTo_r1 = new RocketBullet(slot->getShip()->pTo_starsystem, 
                                   pTo_bulletTexOb, 
-                                  pTo_turrel->points.center_x, 
-                                  pTo_turrel->points.center_y, 
-                                  pTo_turrel->points.angle_inD, 
-                                  pTo_turrel->pTo_target_pos_x, 
-                                  pTo_turrel->pTo_target_pos_y, 
-                                  pTo_turrel->pTo_target_is_alive, 
-                                  slot->getOwnerShip()->id, 
+                                  slot->getTurrel()->getCenterX(), 
+                                  slot->getTurrel()->getCenterY(), 
+                                  slot->getTurrel()->getAngle(), 
+                                  slot->getTurrel()->pTo_target_pos_x, 
+                                  slot->getTurrel()->pTo_target_pos_y, 
+                                  slot->getTurrel()->pTo_target_is_alive, 
+                                  slot->getShip()->id, 
                                   damage, 
                                   bullet_size, 
                                   bullet_armor, 
@@ -361,15 +363,15 @@ void RocketEquipment :: fireEvent()
                                   bullet_angular_speed, 
                                   bullet_live_time);
     else
-        pTo_r1 = new RocketBullet(slot->getOwnerShip()->pTo_starsystem, 
+        pTo_r1 = new RocketBullet(slot->getShip()->pTo_starsystem, 
                                   pTo_bulletTexOb, 
-                                  slot->getOwnerShip()->points.center_x, 
-                                  slot->getOwnerShip()->points.center_y, 
-                                  pTo_turrel->points.angle_inD, 
-                                  pTo_turrel->pTo_target_pos_x, 
-                                  pTo_turrel->pTo_target_pos_y, 
-                                  pTo_turrel->pTo_target_is_alive, 
-                                  slot->getOwnerShip()->id, 
+                                  slot->getShip()->points.center_x, 
+                                  slot->getShip()->points.center_y, 
+                                  slot->getTurrel()->getAngle(), 
+                                  slot->getTurrel()->pTo_target_pos_x, 
+                                  slot->getTurrel()->pTo_target_pos_y, 
+                                  slot->getTurrel()->pTo_target_is_alive, 
+                                  slot->getShip()->id, 
                                   damage, 
                                   bullet_size, 
                                   bullet_armor, 

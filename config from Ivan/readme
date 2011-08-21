@@ -1,0 +1,8 @@
+[2:09:59 AM EEST] Iwan: block1 {    val1 2;  val2 "sdfgdfgs"; } block2 { val1 sdf; } val1 sdf;
+
+[2:12:16 AM EEST] Iwan: ща пример работы с ним скину
+[2:12:29 AM EEST] Iwan: только я забыл ему boost нужен
+[2:12:35 AM EEST] Iwan: для чего
+[2:13:20 AM EEST] Iwan: val1 false; чтобы удобно в bool конфертировать
+
+чтобы в коде обратится к val { val2 sd;} нужно "val.val2"

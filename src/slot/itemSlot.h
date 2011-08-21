@@ -31,7 +31,10 @@ class ItemSlot
                 int getSubType()     const;
                 int getItemType()    const;
                 int getItemSubType() const;
-                    
+
+                Turrel* getTurrel()  const;
+                Turrel* bindTurrel(Turrel* _turrel);
+                                    
                 bool getEquipedStatus()  const;
                 bool getCursoredStatus() const;
                 void setCursoredStatus(bool new_status);
@@ -39,7 +42,7 @@ class ItemSlot
                 void setFlashingStatus(bool new_status);
                       
                 Rect& getRect();
-                Ship* getOwnerShip() const;
+                Ship* getShip() const;
                 
                 RocketEquipment*    getRocketEquipment()    const;
                 LazerEquipment*     getLazerEquipment()     const;
@@ -122,6 +125,8 @@ class ItemSlot
                                 
                 Ship* ship;
                         
+                Turrel* turrel;
+                
                 RocketEquipment*    rocket_equipment;
                 LazerEquipment*     lazer_equipment;
 		RadarEquipment*     radar_equipment;

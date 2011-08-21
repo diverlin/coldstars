@@ -35,6 +35,7 @@ ItemSlot :: ItemSlot(int _subtype_id, Ship* _ship, TextureOb* _texOb, int _pos_x
 	subtype_id = _subtype_id;
         
         ship  = _ship; 
+        turrel = NULL;
 
         texOb = _texOb;
         w = texOb->w;
@@ -55,6 +56,9 @@ int ItemSlot :: getSubType()     const { return subtype_id; }
 int ItemSlot :: getItemType()    const { return item_type_id; }
 int ItemSlot :: getItemSubType() const { return item_subtype_id; }
 
+Turrel* ItemSlot :: getTurrel() const { return turrel; }
+Turrel* ItemSlot :: bindTurrel( Turrel* _turrel) {turrel = _turrel; }
+                                
 bool ItemSlot :: getEquipedStatus() const  { return is_EQUIPED; }
 bool ItemSlot :: getCursoredStatus()            const { return is_CURSORED; }
 void ItemSlot :: setCursoredStatus(bool new_status) { is_CURSORED = new_status; }
@@ -63,7 +67,7 @@ void ItemSlot :: setFlashingStatus(bool new_status) { is_FLASHING = new_status; 
                 
 Rect& ItemSlot :: getRect() { return rect; }
 
-Ship* ItemSlot :: getOwnerShip() const  { return ship; }
+Ship* ItemSlot :: getShip() const { return ship; }
                                 
 RocketEquipment*    ItemSlot :: getRocketEquipment()    const { return rocket_equipment; }
 LazerEquipment*     ItemSlot :: getLazerEquipment()     const { return lazer_equipment; }

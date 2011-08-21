@@ -46,47 +46,6 @@ struct Abilities
 
     
     
-class Navigator
-{
-   public:
-      Ship* pTo_ship;
-   
-      Planet*     pTo_target_planet;
-      Ship*       pTo_target_ship;
-      StarSystem* pTo_target_starsystem;  
-      
-      float target_pos_x;
-      float target_pos_y;
-
-      float* pTo_target_pos_x;
-      float* pTo_target_pos_y;
-      int docking_radius;
-      
-      Navigator(Ship* _pTo_ship);
-      ~Navigator();
-      
-      void setStaticTargetCoords(float _target_pos_x, float _target_pos_y);
-      
-      void setTargetPlanet(Planet* _pTo_planet); 
-      void setTargetShip(Ship* _pTo_ship);    
-      void setTargetStarSystem(StarSystem* _pTo_starsystem);
-      
-      void removeTargetPlanet();
-      void removeTargetShip(); 
-      void removeTargetStarSystem();  
-      
-      bool updateTargetCoords();
-      
-      bool checkDocking();
-      bool getDockingPermission();
-
-};
-
-
-
-
-
-
 
 class Ship
 {   
@@ -153,9 +112,9 @@ class Ship
 
         // WEPONS
         int fire_delay, d_fire_delay;
-        //VEC_pWeaponSlot_type weapon_slot_pList;
-        //VEC_pWeaponSlot_type equiped_weapon_slot_pList;
-        //VEC_pWeaponSlot_type reloaded_weapon_pList;
+        VEC_pItemSlot_type slot_weapon_pList;
+        VEC_pItemSlot_type slot_weapon_equiped_pList;
+        VEC_pItemSlot_type slot_weapon_reloaded_pList;
 
         int total_weapon_slot_num;
         ItemSlot weapon_slot1;
@@ -163,10 +122,6 @@ class Ship
         ItemSlot weapon_slot3;
         ItemSlot weapon_slot4;
         ItemSlot weapon_slot5;
-        
-        VEC_pTurrel_type turrel_total_pList;
-        VEC_pTurrel_type turrel_reloaded_pList;
-        VEC_pTurrel_type turrel_equiped_pList;
         
         Turrel turrel1;
         Turrel turrel2;
@@ -272,15 +227,51 @@ class Ship
         void updatePosition();
 
         void reloadAllWeapons();
-        void setWeaponsToShipTarget(Ship*           pTo_ship,      bool wslot_1_SELECTED, bool wslot_2_SELECTED, bool wslot_3_SELECTED, bool wslot_4_SELECTED, bool wslot_5_SELECTED);
-        void setWeaponsToAsteroidTarget(Asteroid*   pTo_asteroid,  bool wslot_1_SELECTED, bool wslot_2_SELECTED, bool wslot_3_SELECTED, bool wslot_4_SELECTED, bool wslot_5_SELECTED);
-        void setWeaponsToMineralTarget(Mineral*     pTo_mineral,   bool wslot_1_SELECTED, bool wslot_2_SELECTED, bool wslot_3_SELECTED, bool wslot_4_SELECTED, bool wslot_5_SELECTED);
-        void setWeaponsToContainerTarget(Container* pTo_container, bool wslot_1_SELECTED, bool wslot_2_SELECTED, bool wslot_3_SELECTED, bool wslot_4_SELECTED, bool wslot_5_SELECTED);
+        
+        void selectWeaponSlots(bool _wslot_1_SELECTED, 
+                               bool _wslot_2_SELECTED, 
+                               bool _wslot_3_SELECTED, 
+                               bool _wslot_4_SELECTED, 
+                               bool _wslot_5_SELECTED);
+                 
+                        
+        void setWeaponsToShipTarget(Ship* _ship,      
+                                    bool wslot_1_SELECTED, 
+                                    bool wslot_2_SELECTED, 
+                                    bool wslot_3_SELECTED, 
+                                    bool wslot_4_SELECTED, 
+                                    bool wslot_5_SELECTED);
+                                    
+        void setWeaponsToAsteroidTarget(Asteroid* _asteroid,  
+                                        bool wslot_1_SELECTED, 
+                                        bool wslot_2_SELECTED, 
+                                        bool wslot_3_SELECTED, 
+                                        bool wslot_4_SELECTED, 
+                                        bool wslot_5_SELECTED);
+                                        
+        void setWeaponsToMineralTarget(Mineral* _mineral,   
+                                       bool wslot_1_SELECTED, 
+                                       bool wslot_2_SELECTED, 
+                                       bool wslot_3_SELECTED, 
+                                       bool wslot_4_SELECTED, 
+                                       bool wslot_5_SELECTED);
+                                       
+        void setWeaponsToContainerTarget(Container* _container, 
+                                         bool wslot_1_SELECTED, 
+                                         bool wslot_2_SELECTED, 
+                                         bool wslot_3_SELECTED, 
+                                         bool wslot_4_SELECTED, 
+                                         bool wslot_5_SELECTED);
        
         void weaponsFire_TRUE(int timer);
         void weaponsFire_FALSE(int timer);
 
-        void resetDeselectedWeaponTargets(bool wslot_1_SELECTED, bool wslot_2_SELECTED, bool wslot_3_SELECTED, bool wslot_4_SELECTED, bool wslot_5_SELECTED);
+        void resetDeselectedWeaponTargets(bool wslot_1_SELECTED, 
+                                          bool wslot_2_SELECTED, 
+                                          bool wslot_3_SELECTED, 
+                                          bool wslot_4_SELECTED, 
+                                          bool wslot_5_SELECTED);
+                                          
         void removeWeaponSlotDeadTargets();
 
 

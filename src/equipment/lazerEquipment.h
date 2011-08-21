@@ -37,9 +37,8 @@ class LazerEquipment : public CommonForEquipment
       
       int particle_Size;
 
-      //TextureOb* pTo_turrelTexOb;
-      //Turrel* pTo_turrel;
-      //ItemSlot* pTo_slot;
+      TextureOb* turrelTexOb;
+      //Turrel* turrel;
       
       VEC_pLazerModule_type modules_pList;
 
