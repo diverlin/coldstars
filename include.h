@@ -28,43 +28,43 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <SFML/Graphics.hpp> 
 
 #include "src/common/alias.hpp"
-
 #include "src/resources/objLoader.h"
-#include "src/resources/model_obj.cpp"
 
 #include "src/common/global.h"
 #include "src/common/constants.hpp"
-#include "src/common/common.cpp"
+#include "src/common/common.hpp"
 
-#include "src/resources/texture.cpp"
+#include "src/resources/texture.h"
 #include "src/render/glsl.h"
-#include "src/resources/resources.cpp"
+#include "src/resources/resources.h"
 
-class Angar;
-class Shop;
-class Goverment;
+#include "src/kosmoport/angar.h"
+#include "src/kosmoport/shop.h"
+#include "src/kosmoport/goverment.h"
 #include "src/kosmoport/kosmoport.h"
 #include "src/land/land.h"
 
 #include "src/pilots/player.h"
 #include "src/render/init.h"
 
-#include "src/common/rect.cpp"
-#include "src/render/render.h"
-#include "src/render/glsl.cpp"
-#include "src/common/points.cpp"
+#include "src/common/rect.h"
+#include "src/render/render.hpp"
+#include "src/render/glsl.h"
+#include "src/common/points.h"
 
 
-#include "src/effects/background.cpp"
-#include "src/effects/effects.cpp"
+#include "src/effects/background.h"
+#include "src/effects/effects.h"
 
 #include "src/world/starsystem.h"
-#include "src/spaceobjects/commonForSpaceItems.cpp" 
+#include "src/spaceobjects/commonForSpaceItems.h" 
 
 #include "src/effects/shield.h"  
 #include "src/equipment/commonforequipment.h"
 
+#include "src/effects/rocketBullet.h"
 #include "src/equipment/rocketEquipment.h"
+#include "src/effects/lazerTrace.h"
 #include "src/equipment/lazerEquipment.h"
 #include "src/equipment/radarEquipment.h"
 #include "src/equipment/driveEquipment.h"
@@ -99,23 +99,45 @@ class Goverment;
 #include "src/spaceobjects/container.h"
 
 
-#include "src/spaceobjects/container.cpp"    
-#include "src/spaceobjects/star.cpp"  
+#include "src/spaceobjects/container.h"    
+#include "src/spaceobjects/star.h"  
 #include "src/kosmoport/angar.h"
 #include "src/pilots/skill.h"
 #include "src/pilots/npc.h"              
-#include "src/spaceobjects/planet.cpp"
+#include "src/spaceobjects/planet.h"
 
 #include "src/kosmoport/landingarea.h"
 #include "src/kosmoport/angar.h"
 
-#include "src/pilots/skill.cpp"
-#include "src/pilots/npc.cpp"
-#include "src/pilots/player.cpp"
-#include "src/gui/cursor.cpp"                  
+#include "src/pilots/skill.h"
+#include "src/pilots/npc.h"
+#include "src/pilots/player.h"
+#include "src/gui/cursor.h"                  
+#include "src/spaceobjects/asteroid.h"   
+#include "src/spaceobjects/mineral.h" 
+#include "src/world/starsystem.h"    
+#include "src/effects/rocketBullet.h"
+#include "src/equipment/rocketEquipment.h"
+#include "src/effects/lazerTrace.h"
+
+#include "src/vehicle/turrel.h"
+
+#include "src/slot/itemSlot.h"
+#include "src/kosmoport/store.h"
+
+
+
+
+#include "src/world/world.cpp"
+#include "src/world/starsystem.cpp"  
+
+#include "src/spaceobjects/container.cpp"    
+#include "src/spaceobjects/star.cpp"  
+#include "src/spaceobjects/planet.cpp"
+#include "src/spaceobjects/commonForSpaceItems.cpp" 
 #include "src/spaceobjects/asteroid.cpp"   
 #include "src/spaceobjects/mineral.cpp" 
-#include "src/world/starsystem.cpp"    
+
 #include "src/equipment/commonforequipment.cpp"
 #include "src/equipment/rocketEquipment.cpp"
 #include "src/equipment/lazerEquipment.cpp"
@@ -128,11 +150,6 @@ class Goverment;
 #include "src/equipment/freezerEquipment.cpp"
 #include "src/equipment/scanerEquipment.cpp"
 #include "src/equipment/grappleEquipment.cpp"
-#include "src/vehicle/turrel.cpp"
-
-#include "src/slot/itemSlot.cpp"
-#include "src/kosmoport/store.h"
-
 
 #include "src/modules/commonformodules.cpp"
 #include "src/modules/rocketModule.cpp"
@@ -147,23 +164,49 @@ class Goverment;
 #include "src/modules/scanerModule.cpp"
 #include "src/modules/grappleModule.cpp"
 
-#include "src/vehicle/navigator.cpp"
-#include "src/vehicle/ship.cpp"
-#include "src/world/world.cpp"
-#include "src/effects/shield.cpp"
 #include "src/kosmoport/landingarea.cpp"
 #include "src/kosmoport/angar.cpp"
 #include "src/kosmoport/store.cpp"
 #include "src/kosmoport/shop.cpp"
 #include "src/kosmoport/goverment.cpp"
 #include "src/kosmoport/kosmoport.cpp"
+
+#include "src/land/land.cpp"
+
 #include "src/text/text.cpp"
 
 #include "src/gui/button.cpp"
 #include "src/gui/interfaceinspace.cpp"
 #include "src/gui/interfaceinkosmoport.cpp"
 #include "src/gui/shipInternal.cpp"
+#include "src/gui/cursor.cpp"   
 
-#include "src/land/land.cpp"
 #include "src/keyevents/keyEventsInSpace.cpp"
+
+#include "src/resources/texture.cpp"
+#include "src/resources/resources.cpp"
+
+#include "src/common/rect.cpp"
+#include "src/common/points.cpp"
+
+#include "src/slot/itemSlot.cpp"
+
+#include "src/vehicle/ship.cpp"
+#include "src/vehicle/navigator.cpp"
+#include "src/vehicle/turrel.cpp"
+
+#include "src/effects/background.cpp"
+#include "src/effects/effects.cpp"
+#include "src/effects/lazerTrace.cpp"
+#include "src/effects/shield.cpp"
+#include "src/effects/rocketBullet.cpp"
+
+#include "src/pilots/player.cpp"
+#include "src/pilots/skill.cpp"
+#include "src/pilots/npc.cpp"
+
+#include "src/common/common.cpp"
+//#include "src/resources/model_obj.cpp"
+#include "src/render/render.cpp"
+#include "src/render/glsl.cpp"
 ////////////////////////////////////////////

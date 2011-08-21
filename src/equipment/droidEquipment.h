@@ -53,4 +53,6 @@ class DroidEquipment : public CommonForEquipment
 
 };
 
+DroidEquipment* droidEquipmentGenerator(int race_id, int revision_id = -1);
+
 #endif 

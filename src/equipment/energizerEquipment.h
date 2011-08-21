@@ -59,4 +59,6 @@ public:
       bool insertModule(EnergizerModule* pTo_energizerModule);
 };
 
+EnergizerEquipment* energizerEquipmentGenerator(int race_id, int revision_id = -1);
+
 #endif 

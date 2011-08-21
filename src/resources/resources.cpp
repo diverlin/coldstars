@@ -16,15 +16,16 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "resources.h"
 
-TextureManager g_TEXTURE_MANAGER = TextureManager();
+
 
 void loadResources()
 {
 pTo_SPHERE_MESH = new ObjMeshInstance("data/obj/sphere/planet.obj");
 
-g_model.import("data/obj/sphere/planet.obj");
-g_model.normalize();
+//g_model.import("data/obj/sphere/planet.obj");
+//g_model.normalize();
 
 
 

@@ -169,13 +169,13 @@ void Store :: initItemsGenerator()
 
         for (unsigned int lii = 0; lii < lazer_num; lii++)
         { 
-            LazerEquipment* pTo_lazer = lazerGenerator(RACE_0_ID); 
+            LazerEquipment* pTo_lazer = lazerEquipmentGenerator(RACE_0_ID); 
             addLazerEquipment(pTo_lazer);
         }
 
         for (unsigned int rii = 0; rii < rocket_num; rii++)
         { 
-            RocketEquipment* pTo_rocket = rocketGenerator(RACE_0_ID); 
+            RocketEquipment* pTo_rocket = rocketEquipmentGenerator(RACE_0_ID); 
             addRocketEquipment(pTo_rocket);
         }
 
@@ -185,55 +185,55 @@ void Store :: initItemsGenerator()
 
         for (unsigned int rii = 0; rii < radar_num; rii++)
         { 
-            RadarEquipment* pTo_radar = radarGenerator(RACE_0_ID); 
+            RadarEquipment* pTo_radar = radarEquipmentGenerator(RACE_0_ID); 
             addRadarEquipment(pTo_radar);
         }
 
         for (unsigned int gii = 0; gii < grapple_num; gii++)
         { 
-            GrappleEquipment* pTo_grapple = grappleGenerator(RACE_0_ID); 
+            GrappleEquipment* pTo_grapple = grappleEquipmentGenerator(RACE_0_ID); 
             addGrappleEquipment(pTo_grapple);
         }
 
         for (unsigned int dii = 0; dii < drive_num; dii++)
         { 
-            DriveEquipment* pTo_drive = driveGenerator(RACE_0_ID); 
+            DriveEquipment* pTo_drive = driveEquipmentGenerator(RACE_0_ID); 
             addDriveEquipment(pTo_drive);
         }
 
         for (unsigned int pii = 0; pii < protector_num; pii++)
         { 
-            ProtectorEquipment* pTo_protector = protectorGenerator(RACE_0_ID); 
+            ProtectorEquipment* pTo_protector = protectorEquipmentGenerator(RACE_0_ID); 
             addProtectorEquipment(pTo_protector);
         }
 
         for (unsigned int bii = 0; bii < bak_num; bii++)
         { 
-            BakEquipment* pTo_bak = bakGenerator(RACE_0_ID); 
+            BakEquipment* pTo_bak = bakEquipmentGenerator(RACE_0_ID); 
             addBakEquipment(pTo_bak);
         }
 
         for (unsigned int dii = 0; dii < droid_num; dii++)
         { 
-            DroidEquipment* pTo_droid = droidGenerator(RACE_0_ID); 
+            DroidEquipment* pTo_droid = droidEquipmentGenerator(RACE_0_ID); 
             addDroidEquipment(pTo_droid);
         }
 
         for (unsigned int sii = 0; sii < scaner_num; sii++)
         { 
-            ScanerEquipment* pTo_scaner = ScanerEquipmentGenerator(RACE_0_ID); 
+            ScanerEquipment* pTo_scaner = scanerEquipmentGenerator(RACE_0_ID); 
             addScanerEquipment(pTo_scaner);
         }
 
         for (unsigned int fii = 0; fii < freezer_num; fii++)
         { 
-            FreezerEquipment* pTo_freezer = freezerGenerator(RACE_0_ID); 
+            FreezerEquipment* pTo_freezer = freezerEquipmentGenerator(RACE_0_ID); 
             addFreezerEquipment(pTo_freezer);
         }
 
         for (unsigned int ebi = 0; ebi < energyBlock_num; ebi++) 
         { 
-            EnergizerEquipment* pTo_energizer = energizerGenerator(RACE_0_ID); 
+            EnergizerEquipment* pTo_energizer = energizerEquipmentGenerator(RACE_0_ID); 
             addEnergizerEquipment(pTo_energizer);
         }
 }

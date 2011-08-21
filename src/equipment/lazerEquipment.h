@@ -38,7 +38,6 @@ class LazerEquipment : public CommonForEquipment
       int particle_Size;
 
       TextureOb* turrelTexOb;
-      //Turrel* turrel;
       
       VEC_pLazerModule_type modules_pList;
 
@@ -66,55 +65,6 @@ class LazerEquipment : public CommonForEquipment
       bool insertModule(LazerModule* pTo_lazerModule);
 };
 
-
-
-class LazerTraceEffect
-{ 
-    public:
-       bool is_alive;
-       bool is_alreadyInRemoveQueue; 
-
-       StarSystem* pTo_starsystem;
-
-       TextureOb* pTo_texOb;
-       GLuint texture;
-       int w,h;
-
-       TextureOb* pTo_particleTexOb;
-
-       float particle_size;
-
-       int existance_time;
-
-       DamageEffect* pTo_damageEffect;
-
-       float* pTo_start_pos_x;
-       float* pTo_start_pos_y;
-       float* pTo_end_pos_x;
-       float* pTo_end_pos_y;
-
-
-       float len; 
-       float angle_inR;
-       float d_angle_inR;
-       float additional_angle_inR;
-       float angle_inD; 
-
-       // NEW!!!
-       //damage_effect = None
-       // NEW!!!
-        
-
-       LazerTraceEffect(TextureOb* pTo_texOb, TextureOb* pTo_particleTexOb, float _particle_size, float* _pTo_start_pos_x, float* _pTo_start_pos_y, float* _pTo_end_pos_x, float* _pTo_end_pos_y);
-       ~LazerTraceEffect();
-
-       void update();
-       void updateAngleAndLen();
-
-       void render();
-            void (LazerTraceEffect::*pToFunc_render)();
-            void _renderFrame();
-            void _renderFrames();
-};
+LazerEquipment* lazerEquipmentGenerator(int race_id, int revision_id = -1);
 
 #endif 

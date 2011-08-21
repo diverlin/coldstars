@@ -16,7 +16,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
+int const SIZE_1 = 20;   // 1 - up to 20x20
+int const SIZE_2 = 40;   // 2 - up to 40x40
+int const SIZE_3 = 60;   // 3 - up to 60x60
+int const SIZE_4 = 80;   // 4 - up to 80x80
+int const SIZE_5 = 100;  // 5 - up to 100x100
+int const SIZE_6 = 130;  // 6 - up to 130x130
+int const SIZE_7 = 160;  // 7 - up to 160x160
+int const SIZE_8 = 200;  // 8 - up to 200x200
+int const SIZE_9 = 240;  // 9 - up to 240x240
 
 class DetaliedIdGenerator
 {

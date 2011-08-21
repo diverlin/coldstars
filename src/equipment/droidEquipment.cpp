@@ -114,7 +114,7 @@ bool DroidEquipment :: insertModule(DroidModule* pTo_droidModule)
 
 
 
-DroidEquipment* droidGenerator(int race_id, int revision_id = -1)
+DroidEquipment* droidEquipmentGenerator(int race_id, int revision_id)
 {
     if (race_id == -1)
        race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]

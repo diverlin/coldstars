@@ -53,4 +53,6 @@ public:
      bool insertModule(BakModule* pTo_bakModule);
 };
 
+BakEquipment* bakEquipmentGenerator(int race_id, int revision_id = -1);
+
 #endif 
