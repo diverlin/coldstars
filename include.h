@@ -75,7 +75,7 @@ class Goverment;
 #include "src/equipment/freezerEquipment.h"
 #include "src/equipment/scanerEquipment.h"
 #include "src/equipment/grappleEquipment.h"
-#include "src/effects/turrel.h"
+#include "src/vehicle/turrel.h"
 
 #include "src/modules/commonformodules.h"
 #include "src/modules/rocketModule.h"
@@ -92,6 +92,7 @@ class Goverment;
 
 
 #include "src/slot/itemSlot.h"
+#include "src/vehicle/navigator.h"
 #include "src/vehicle/ship.h"
 #include "src/spaceobjects/asteroid.h"
 #include "src/spaceobjects/mineral.h"
@@ -127,7 +128,7 @@ class Goverment;
 #include "src/equipment/freezerEquipment.cpp"
 #include "src/equipment/scanerEquipment.cpp"
 #include "src/equipment/grappleEquipment.cpp"
-#include "src/effects/turrel.cpp"
+#include "src/vehicle/turrel.cpp"
 
 #include "src/slot/itemSlot.cpp"
 #include "src/kosmoport/store.h"
@@ -146,7 +147,7 @@ class Goverment;
 #include "src/modules/scanerModule.cpp"
 #include "src/modules/grappleModule.cpp"
 
-
+#include "src/vehicle/navigator.cpp"
 #include "src/vehicle/ship.cpp"
 #include "src/world/world.cpp"
 #include "src/effects/shield.cpp"

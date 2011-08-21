@@ -38,6 +38,8 @@ LazerEquipment :: LazerEquipment(TextureOb* _pTo_itemTexOb, int _damage_orig, in
    pTo_lazerEffectTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.lazerEffect_texOb_pList);
    pTo_particleTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.particles_texOb_pList);
 
+   turrelTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.turrel_texOb_pList); 
+   
    updatePropetries();
    countPrice();
    updateInfo();
@@ -134,14 +136,9 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
            //l_target.temperature  += WEAPON_HEATING_RATE * self.damage
 
     // LAZER TRACE EFFECT
-    printf("adasdsdf\n");
     LazerTraceEffect* pTo_lazer_trace_effect;
-    printf("1 =%f\n", *_turrel->pTo_pos_x);
-    printf("2 =%f\n", *_turrel->pTo_pos_y);
-    printf("3 =%f\n", *_turrel->pTo_target_pos_x);
-    printf("4 =%f\n", *_turrel->pTo_target_pos_y);
 
-    if (slot->getOwnerShip()->render_TURRELS == true)
+    if (slot->getShip()->render_TURRELS == true)
         pTo_lazer_trace_effect = new LazerTraceEffect(pTo_lazerEffectTexOb, 
                                                       pTo_particleTexOb, 
                                                       100, 
@@ -153,21 +150,21 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
         pTo_lazer_trace_effect = new LazerTraceEffect(pTo_lazerEffectTexOb, 
                                                       pTo_particleTexOb, 
                                                       100, 
-                                                      &(slot->getOwnerShip()->points.center_x), 
-                                                      &(slot->getOwnerShip()->points.center_y), 
+                                                      &(slot->getShip()->points.center_x), 
+                                                      &(slot->getShip()->points.center_y), 
                                                       _turrel->pTo_target_pos_x, 
                                                       _turrel->pTo_target_pos_y);
 
-    slot->getOwnerShip()->pTo_starsystem->effect_LAZERTRACE_pList.push_back(pTo_lazer_trace_effect);
+    slot->getShip()->pTo_starsystem->effect_LAZERTRACE_pList.push_back(pTo_lazer_trace_effect);
     
     // DAMAGE effct
     TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);  
     //TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(pTo_lazer_trace_effect->pTo_texOb->color_id);   SEGFAULT
     DamageEffect* pTo_damage_effect = new DamageEffect(pTo_particleTexOb, 
-                                                       slot->getOwnerShip()->pTo_starsystem, 
+                                                       slot->getShip()->pTo_starsystem, 
                                                        _turrel->pTo_target_pos_x, 
                                                        _turrel->pTo_target_pos_y, 5, 30, 1.3, 1.0, 0.1, 0.001);
-    slot->getOwnerShip()->pTo_starsystem->effect_DAMAGE_pList.push_back(pTo_damage_effect);
+    slot->getShip()->pTo_starsystem->effect_DAMAGE_pList.push_back(pTo_damage_effect);
 
     pTo_lazer_trace_effect->pTo_damageEffect = pTo_damage_effect;
 } 

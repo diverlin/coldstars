@@ -42,13 +42,6 @@ class RocketBullet
         //   self.render = self.renderInSpace
 
         int owner_id;
-        //int target_type_id;
-
-    
-        //Ship*      pTo_shipTarget;
-        //Asteroid*  pTo_asteroidTarget;
-        //Mineral*   pTo_mineralTarget;
-        //Container* pTo_containerTarget; 
         
         float* pTo_target_pos_x;
         float* pTo_target_pos_y;
@@ -74,11 +67,6 @@ class RocketBullet
         RocketBullet(StarSystem* _pTo_starsystem, TextureOb* _pTo_texOb, float _start_pos_x, float _start_pos_y, float _angle_inD, float* _pTo_target_pos_x, float* _pTo_target_pos_y, bool* _pTo_target_is_alive, int _owner_id, int _damage, int _size, int _armor, float _speed_init, float _speed_max, float _d_speed, float _angular_speed, int _live_time);
         ~RocketBullet();
         
-        //void setShipAsTarget(Ship* _pTo_ship);
-        //void setAsteroidAsTarget(Asteroid* _pTo_asteroid);
-        //void setMineralAsTarget(Mineral* _pTo_mineral);
-        //void setContainerAsTarget(Container* _pTo_container);
-
         void update_inSpace_inDynamic();
         void updateDebugWay(int _timer);   // DEBUG
         void stepCalculation();
@@ -120,9 +108,8 @@ class RocketEquipment : public CommonForEquipment
       int bullet_live_time;
       float bullet_angular_speed;
 
-      TextureOb* pTo_turrelTexOb;
-      Turrel* pTo_turrel;
-      ItemSlot* pTo_wslot;
+      TextureOb* turrelTexOb;
+      //Turrel* turrel;
       
       VEC_pRocketModule_type modules_pList;
       
