@@ -23,306 +23,288 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 struct NeedsToDo
 {
-   bool REPAIR;
-   bool CHARGE;
-   bool GETBULLETS;
-   bool BUY;
-   bool SELL;
+  	bool REPAIR;
+  	bool CHARGE;
+   	bool GETBULLETS;
+   	bool BUY;
+   	bool SELL;
 };
 
 struct Abilities
 {
-   bool RADAR;
-   bool DRIVE;
-   bool HJUMP;
-   bool ENERGIZE;
-   bool PROTECT;
-   bool REPAIR;
-   bool FREEZE;
-   bool GRAB;
-   bool SCAN;
-   bool FIRE;
+   	bool RADAR;
+   	bool DRIVE;
+   	bool HJUMP;
+   	bool ENERGIZE;
+   	bool PROTECT;
+   	bool REPAIR;
+   	bool FREEZE;
+   	bool GRAB;
+   	bool SCAN;
+   	bool FIRE;
 };
 
     
+//struct WSelected
+//{
+   	//bool weapon_1;
+   	//bool weapon_2;
+   	//bool weapon_3;
+   	//bool weapon_4;
+   	//bool weapon_5;
+//};
     
+
 
 class Ship
 {   
-    public:
-        VEC_pTurrel_type turrel_pList;
+    	public:
+        	VEC_pTurrel_type turrel_pList;
     
-        bool is_alive, is_dying, is_explosed;
-        int type_id, id;
+        	bool is_alive, is_dying, is_explosed;
+        	int type_id, id;
 
-        int dying_time;
+        	int dying_time;
 
-        bool in_SPACE;
+        	bool in_SPACE;
 
-        bool is_FOLLOWING_PLANET;
-        bool is_FOLLOWING_SHIP;
-        bool is_FOLLOWING_STARSYSTEM;
+        	bool is_FOLLOWING_PLANET;
+        	bool is_FOLLOWING_SHIP;
+        	bool is_FOLLOWING_STARSYSTEM;
 
-        Navigator* pTo_navigator;
+        	Navigator* pTo_navigator;
 
-        TextureOb* pTo_texOb;
-        GLuint texture;
-        int w, h;
-        int size;
-        float collision_radius;
+        	TextureOb* pTo_texOb;
+        	GLuint texture;
+        	int w, h;
+        	int size;
+        	float collision_radius;
 
-        int w_orig, h_orig;
+        	int w_orig, h_orig;
 
-        float angle_inD;
-        Points points;
+        	float angle_inD;
+        	Points points;
 
-        bool controlled_by_player;
-        Npc* pTo_npc_owner;
-        PlayerInstance* pTo_playerOwner;
+        	bool controlled_by_player;
+        	Npc* pTo_npc_owner;
+        	PlayerInstance* pTo_playerOwner;
 
-        StarSystem* pTo_starsystem;
+        	StarSystem* pTo_starsystem;
 
-        int space;
-        int armor_max;
-        int armor;
-        int korpus_protection;
-        int nominal_temperature;
+        	int space;
+        	int armor_max;
+        	int armor;
+        	int korpus_protection;
+        	int nominal_temperature;
 
-        int race_id;
-        int subtype_id;
-        int size_id;
-        int mod_id;
+        	int race_id;
+        	int subtype_id;
+        	int size_id;
+        	int mod_id;
 
-        int color_id;
-        int price;
-
-
-        //######### KONTUR RECT 
-        int w_kontur, h_kontur;
-        Rect kontur_rect; 
+        	int color_id;
+        	int price;
 
 
-        //######### SLOT
-        TextureOb* pTo_slotTexOb;
-
-        bool render_TURRELS;
-        VEC_pFloat_type turrel_center_x_pList;
-        VEC_pFloat_type turrel_center_y_pList;
+        	//######### KONTUR RECT 
+        	int w_kontur, h_kontur;
+        	Rect kontur_rect; 
 
 
-        // WEPONS
-        int fire_delay, d_fire_delay;
-        VEC_pItemSlot_type slot_weapon_pList;
-        VEC_pItemSlot_type slot_weapon_equiped_pList;
-        VEC_pItemSlot_type slot_weapon_reloaded_pList;
+        	//######### SLOT
+        	TextureOb* pTo_slotTexOb;
 
-        int total_weapon_slot_num;
-        ItemSlot weapon_slot1;
-        ItemSlot weapon_slot2;
-        ItemSlot weapon_slot3;
-        ItemSlot weapon_slot4;
-        ItemSlot weapon_slot5;
+        	bool render_TURRELS;
+        	VEC_pFloat_type turrel_center_x_pList;
+        	VEC_pFloat_type turrel_center_y_pList;
+
+
+        	// WEPONS
+        	int fire_delay, d_fire_delay;
+        	VEC_pItemSlot_type slot_weapon_pList;
+        	VEC_pItemSlot_type slot_weapon_equiped_pList;
+        	VEC_pItemSlot_type slot_weapon_reloaded_pList;
+
+        	int total_weapon_slot_num;
+        	ItemSlot weapon_slot1;
+        	ItemSlot weapon_slot2;
+        	ItemSlot weapon_slot3;
+        	ItemSlot weapon_slot4;
+        	ItemSlot weapon_slot5;
         
-        Turrel turrel1;
-        Turrel turrel2;
-        Turrel turrel3;
-        Turrel turrel4;
-        Turrel turrel5;
+        	Turrel turrel1;
+        	Turrel turrel2;
+        	Turrel turrel3;
+        	Turrel turrel4;
+        	Turrel turrel5;
         
-        //######### EQUPMENT SLOT
-        ItemSlot drive_slot;
-        ItemSlot bak_slot;
-        ItemSlot radar_slot;
-        ItemSlot scaner_slot;
-        ItemSlot energizer_slot;
-        ItemSlot grapple_slot;
-        ItemSlot protector_slot;
-        ItemSlot droid_slot;
-        ItemSlot freezer_slot;
+        	//######### EQUPMENT SLOT
+        	ItemSlot drive_slot;
+        	ItemSlot bak_slot;
+        	ItemSlot radar_slot;
+        	ItemSlot scaner_slot;
+        	ItemSlot energizer_slot;
+        	ItemSlot grapple_slot;
+        	ItemSlot protector_slot;
+        	ItemSlot droid_slot;
+        	ItemSlot freezer_slot;
                                                 
-        //######### OTSEC SLOT
-        //VEC_pOtsecSlot_type otsec_slot_pList;
-        VEC_pItemSlot_type slot_total_pList;
-        VEC_pItemSlot_type slot_otsec_pList;
+        	//######### OTSEC SLOT
+        	//VEC_pOtsecSlot_type otsec_slot_pList;
+        	VEC_pItemSlot_type slot_total_pList;
+        	VEC_pItemSlot_type slot_otsec_pList;
         
-        //######### GATE SLOT
-        ItemSlot gate_slot;
+        	//######### GATE SLOT
+        	ItemSlot gate_slot;
 
-        ///////////////////////////////
-        Abilities ableTo;
-        NeedsToDo needsToDo;
+        	///////////////////////////////
+        	Abilities ableTo;
+        	NeedsToDo needsToDo;
+                
+        	bool inhibit_GRAPPLE;
 
+        	//////////////////////////////
+        	/////// PROPERTIES depends on items
+        	int protection;
+        	int radius;
+        	int mass;   // depends on all items mass
+        	int speed;  // depends on mass and drive
 
-        bool inhibit_GRAPPLE;
-
-        //////////////////////////////
-        /////// PROPERTIES depends on items
-        int protection;
-        int radius;
-        int mass;   // depends on all items mass
-        int speed;  // depends on mass and drive
-
-        int hyper;  // depends on drive and bak
-        int repair; // depends on droid
-        int freeze; // depends on freezer
-        int scan;   // depends on scaner
+        	int hyper;  // depends on drive and bak
+        	int repair; // depends on droid
+        	int freeze; // depends on freezer
+        	int scan;   // depends on scaner
         
-        int energy;
-        int temperature;
+        	int energy;
+        	int temperature;
 
-        int dist2star_rate;
-        int energy_restoration_rate;
-
-
-        // INFO 
-        std::string info_title_0;
-        std::string info_title_1;   std::string info_value_1;
-        std::string info_title_2;   std::string info_value_2; 
-        std::string info_title_3;   std::string info_value_3;
-        std::string info_title_4;   std::string info_value_4;
-        std::string info_title_5;   std::string info_value_5;
-        std::string info_title_6;   std::string info_value_6;
-        std::string info_title_7;   std::string info_value_7;
-        std::string info_title_8;   std::string info_value_8;
-        std::string info_title_9;   std::string info_value_9;
-        std::string info_title_10;  std::string info_value_10;
-        std::string info_title_11;  std::string info_value_11;
-        VEC_pString_type info_title_pList;        
-        VEC_pString_type info_value_pList;  
+        	int dist2star_rate;
+        	int energy_restoration_rate;
 
 
-        //////// TARGET COORDINATES //////
-        //self.Gl_LIST_direction_ID = None
+        	// INFO 
+        	std::string info_title_0;
+        	std::string info_title_1;   std::string info_value_1;
+        	std::string info_title_2;   std::string info_value_2; 
+        	std::string info_title_3;   std::string info_value_3;
+        	std::string info_title_4;   std::string info_value_4;
+        	std::string info_title_5;   std::string info_value_5;
+        	std::string info_title_6;   std::string info_value_6;
+        	std::string info_title_7;   std::string info_value_7;
+        	std::string info_title_8;   std::string info_value_8;
+        	std::string info_title_9;   std::string info_value_9;
+        	std::string info_title_10;  std::string info_value_10;
+        	std::string info_title_11;  std::string info_value_11;
+        	VEC_pString_type info_title_pList;        
+        	VEC_pString_type info_value_pList;  
 
-        VEC_float_type direction_x_list;
-        VEC_float_type direction_y_list;
-        VEC_float_type angle_inD_list;
+        	//////// TARGET COORDINATES //////
+        	//self.Gl_LIST_direction_ID = None
 
-        int len_direction_list;
-        bool direction_list_END;
-        int move_it;
+        	VEC_float_type direction_x_list;
+        	VEC_float_type direction_y_list;
+        	VEC_float_type angle_inD_list;
 
-        //self.turn_list_END      = True
+        	int len_direction_list;
+        	bool direction_list_END;
+        	int move_it;
 
-        float target_pos_x;
-        float target_pos_y;
+        	//self.turn_list_END      = True
+
+        	float target_pos_x;
+        	float target_pos_y;
         
-        float jump_pos_x;
-        float jump_pos_y;
-        //////////////////////////////////
+        	float jump_pos_x;
+        	float jump_pos_y;
+        	//////////////////////////////////
 
-        // simplification
-        int average_damage;
-        int average_fire_radius;
+        	// simplification
+        	int average_damage;
+        	int average_fire_radius;
 
-        //VEC_pLazerTrace_type effect_LAZERTRACE_pList;
+        	DriveTrailEffect* pTo_drive_jet; 
+        	ShieldEffect* pTo_shield;
 
-        DriveTrailEffect* pTo_drive_jet; 
-        ShieldEffect* pTo_shield;
+        	Ship(TextureOb* _pTo_texOb, 
+        	     int _max_weapons, 
+        	     bool _grapple_INHIBIT, 
+        	     int _space, 
+        	     int _armor_max, 
+        	     int _protection, 
+        	     int _nominal_temperature);
+        	     
+        	~Ship();    
 
-        Ship(TextureOb* _pTo_texOb, int _max_weapons, bool _grapple_INHIBIT, int _space, int _armor_max, int _protection, int _nominal_temperature);
-        ~Ship();    
+        	void calculateDetaledWayToPosition();
+        	void updatePosition();
 
-        void calculateDetaledWayToPosition();
-        void updatePosition();
-
-        void reloadAllWeapons();
+        	void reloadAllWeapons();
         
-        void selectWeaponSlots(bool _wslot_1_SELECTED, 
-                               bool _wslot_2_SELECTED, 
-                               bool _wslot_3_SELECTED, 
-                               bool _wslot_4_SELECTED, 
-                               bool _wslot_5_SELECTED);
-                 
-                        
-        void setWeaponsToShipTarget(Ship* _ship,      
-                                    bool wslot_1_SELECTED, 
-                                    bool wslot_2_SELECTED, 
-                                    bool wslot_3_SELECTED, 
-                                    bool wslot_4_SELECTED, 
-                                    bool wslot_5_SELECTED);
-                                    
-        void setWeaponsToAsteroidTarget(Asteroid* _asteroid,  
-                                        bool wslot_1_SELECTED, 
-                                        bool wslot_2_SELECTED, 
-                                        bool wslot_3_SELECTED, 
-                                        bool wslot_4_SELECTED, 
-                                        bool wslot_5_SELECTED);
-                                        
-        void setWeaponsToMineralTarget(Mineral* _mineral,   
-                                       bool wslot_1_SELECTED, 
-                                       bool wslot_2_SELECTED, 
-                                       bool wslot_3_SELECTED, 
-                                       bool wslot_4_SELECTED, 
-                                       bool wslot_5_SELECTED);
-                                       
-        void setWeaponsToContainerTarget(Container* _container, 
-                                         bool wslot_1_SELECTED, 
-                                         bool wslot_2_SELECTED, 
-                                         bool wslot_3_SELECTED, 
-                                         bool wslot_4_SELECTED, 
-                                         bool wslot_5_SELECTED);
+        	void selectWeapons(bool _wslot_1_SELECTED = true, 
+                              	   bool _wslot_2_SELECTED = true, 
+                               	   bool _wslot_3_SELECTED = true, 
+                                   bool _wslot_4_SELECTED = true, 
+                                   bool _wslot_5_SELECTED = true);
+                     
+        	void setWeaponsTarget(Ship* _ship);
+        	void setWeaponsTarget(Asteroid* _asteroid);
+		void setWeaponsTarget(Mineral* _mineral);
+	  	void setWeaponsTarget(Container* _container);
        
-        void weaponsFire_TRUE(int timer);
-        void weaponsFire_FALSE(int timer);
+        	void weaponsFire_TRUE(int timer);
+        	void weaponsFire_FALSE(int timer);
 
-        void resetDeselectedWeaponTargets(bool wslot_1_SELECTED, 
-                                          bool wslot_2_SELECTED, 
-                                          bool wslot_3_SELECTED, 
-                                          bool wslot_4_SELECTED, 
-                                          bool wslot_5_SELECTED);
-                                          
-        void removeWeaponSlotDeadTargets();
+        	void resetDeselectedWeaponTargets();                                          
+        	void removeWeaponSlotDeadTargets();
 
+        	void update_inSpace_inDynamic_TRUE();
+        	void update_inSpace_inDynamic_FALSE();
 
-        void update_inSpace_inDynamic_TRUE();
-        void update_inSpace_inDynamic_FALSE();
+        	void hit_TRUE(int _damage);
+        	void hit_FALSE(int _damage);
 
-        void hit_TRUE(int _damage);
-        void hit_FALSE(int _damage);
+        	void death(); 
 
-        void death(); 
+        	void updateAllStuff();
+             		void calculateMass();
+             		void updateFireAbility();
+             		void updateRadarAbility();
+             		void updateDriveAbility();
+             		void updateJumpAbility();
+             		void updateEnergyAbility();
+             		void updateProtectionAbility();
+             		void updateRepairAbility();
+             		void updateFreezeAbility();
+             		void updateGrabAbility();
+             		void updateScanAbility();
 
-        void updateAllStuff();
-             void updateFireAbility();
-             void updateRadarAbility();
-             void calculateMass();
-             void updateDriveAbility();
-             void updateJumpAbility();
-             void updateEnergyAbility();
-             void updateProtectionAbility();
-             void updateRepairAbility();
-             void updateFreezeAbility();
-             void updateGrabAbility();
-             void updateScanAbility();
+        	ItemSlot* return_pToEmptyOtsecSlot();
 
+        	void setMaxArmor();
+        	void setMaxFuel();
 
-        ItemSlot* return_pToEmptyOtsecSlot();
+        	void updateInfo();
+             		std::string returnProtectionStr();
+             		int returnOwnerRaceId();
 
-        void setMaxArmor();
-        void setMaxFuel();
+        	//// docking/launching
+        	bool checkDocking();
+        	bool getDockingPermission();
+        	bool dockingEvent();
 
-        void updateInfo();
-             std::string returnProtectionStr();
-             int returnOwnerRaceId();
+        	bool launchingEvent();
+        	//// docking/launching
 
-        //// docking/launching
-        bool checkDocking();
-        bool getDockingPermission();
-        bool dockingEvent();
+        	void renderInSpace();
+             		void renderKorpus();
+             		void renderTurrels();
+             		void renderShield();
+        	void renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y);
 
-        bool launchingEvent();
-        //// docking/launching
-
-        void renderInSpace();
-             void renderKorpus();
-             void renderTurrels();
-             void renderShield();
-        void renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y);
-
-        void renderInternaly();
+        	void renderInternaly();
 };
 
 void equip(Ship* pTo_ship);
 Ship* shipGenerator(int race_id, int subtype_id, int size_id);
+
 #endif 

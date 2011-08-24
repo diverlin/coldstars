@@ -193,43 +193,43 @@ void BloomEffect :: combine(GLuint _orig_scene_texture)
 
 void compile_program(const GLchar *pTo_vertex_source, const GLchar *pTo_fragment_source, GLuint* pTo_program)
 {
-    GLuint vertex_shader, fragment_shader;
+	GLuint vertex_shader, fragment_shader;
   
-    if (*pTo_program != 0)
-    {
-        vertex_shader = compile_shader(pTo_vertex_source, GL_VERTEX_SHADER);
-        glAttachShader(*pTo_program, vertex_shader);
+    	if (*pTo_program != 0)
+    	{
+        	vertex_shader = compile_shader(pTo_vertex_source, GL_VERTEX_SHADER);
+        	glAttachShader(*pTo_program, vertex_shader);
 
-        fragment_shader = compile_shader(pTo_fragment_source, GL_FRAGMENT_SHADER);
-        glAttachShader(*pTo_program, fragment_shader);
+        	fragment_shader = compile_shader(pTo_fragment_source, GL_FRAGMENT_SHADER);
+        	glAttachShader(*pTo_program, fragment_shader);
  
-        glLinkProgram(*pTo_program);
+        	glLinkProgram(*pTo_program);
 
-        glDeleteShader(vertex_shader);
-        glDeleteShader(fragment_shader);
-    }
-    else
-        printf("program was not generated succesfully\n");
+        	glDeleteShader(vertex_shader);
+        	glDeleteShader(fragment_shader);
+    	}
+    	else
+        	printf("program was not generated succesfully\n");
 
-    printProgramInfoLog(*pTo_program);
+    	printProgramInfoLog(*pTo_program);
 }
 
 
 GLuint compile_shader(const GLchar *source, GLenum shader_type)
 {
-    GLuint shader = glCreateShader(shader_type);
-    glShaderSource(shader, 1, &source, NULL);
+    	GLuint shader = glCreateShader(shader_type);
+    	glShaderSource(shader, 1, &source, NULL);
 
-    glCompileShader(shader);
+    	glCompileShader(shader);
     
-    return shader;
- }
+    	return shader;
+}
 
 void printProgramInfoLog(GLuint program)
 {
-    char log[256];
-    glGetInfoLogARB(program, 256, NULL, log);
-    printf(" Infolog: %s, program id = %i\n", log, program);
+    	char log[256];
+    	glGetInfoLogARB(program, 256, NULL, log);
+    	printf(" Infolog: %s, program id = %i\n", log, program);
 }
 
 
@@ -248,13 +248,13 @@ FBO :: FBO(int _w, int _h)
       glBindTexture(GL_TEXTURE_2D, 0);
 
       // create depth renderbuffer
-      //glGenRenderbuffers(1, &depth_buffer);
+      glGenRenderbuffers(1, &depth_buffer); // putcom
       glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, depth_buffer);
       glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT32, w, h);
 
       // create FBO
-      //glGenFramebuffers(1, &fbo);
-      //glBindFramebuffer(GL_FRAMEBUFFER, fbo);      // switch to our fbo so we can bind stuff to it
+      glGenFramebuffers(1, &fbo);   // putcom
+      glBindFramebuffer(GL_FRAMEBUFFER, fbo);  // putcom     // switch to our fbo so we can bind stuff to it
       glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, texture, 0);
       glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depth_buffer);
 
@@ -265,7 +265,7 @@ FBO :: FBO(int _w, int _h)
 void FBO :: activate()
 {
      glBindTexture(GL_TEXTURE_2D, 0);            // unbind texture
-     //glBindFramebuffer(GL_FRAMEBUFFER, fbo);     // bind fbo
+     glBindFramebuffer(GL_FRAMEBUFFER, fbo);    // putcom // bind fbo
 
      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
      glLoadIdentity();
@@ -279,7 +279,6 @@ void FBO :: deactivate()
      glActiveTexture(GL_TEXTURE0);                // debug
      glPopAttrib();                               // restore viewport
 }
-
 
 
 
@@ -313,22 +312,24 @@ ShockWaveEffect :: ~ShockWaveEffect()
 
 void ShockWaveEffect :: update()
 {
-          x -= d_x;
+	x -= d_x;
 
-          if (y > 0)
-             y -= d_y;
-          else
-             is_alive = false;
+	if (y > 0)
+		y -= d_y;
+	else
+            	is_alive = false;
 
-          z -= d_z;
-          time -= d_time;
+     	z -= d_z;
+      	time -= d_time;
 
-          if (is_alive == false)
-             	if (is_alreadyInRemoveQueue == false)
+    	if (is_alive == false)
+      	{
+          	if (is_alreadyInRemoveQueue == false)
             	{
                 	//pTo_starsystem.effect_SHOCKWAVE_remove_queue.append();
                 	is_alreadyInRemoveQueue = true;
              	}   
+	}	         
 }
              
 // http://www.flashbang.se/archives/48

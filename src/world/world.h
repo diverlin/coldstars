@@ -23,31 +23,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class World 
 {
-  public:
-     Rect map_rect;
+  	public:
+     		Rect map_rect;
 
-     int starsytem_counter;
-     int star_counter;      
-     int ship_counter;
-     int planet_counter;
-     StarSystem* pTo_ss_active;
-     VEC_pStarSystem_type STARSYSTEM_pList;
-     VEC_pStarSystem_type hSTARSYSTEM_pList;
+     		int starsytem_counter;
+     		int star_counter;      
+     		int ship_counter;
+     		int planet_counter;
+     		StarSystem* pTo_ss_active;
+     		VEC_pStarSystem_type STARSYSTEM_pList;
+     		VEC_pStarSystem_type hSTARSYSTEM_pList;
 
-     World();
+     		World();
      
-     void generateEntireStarSystem();
-     void generateBackground(StarSystem* _pTo_starsystem, int distNebula_maxNum, int distStar_maxNum);
-     void generateStar(StarSystem* _pTo_starsystem);
-     void generateNumPlanets(StarSystem* _pTo_starsystem, int planet_per_system);
+     		void generateEntireStarSystem();
+     		void generateBackground(StarSystem* _pTo_starsystem, int distNebula_maxNum, int distStar_maxNum);
+     		void generateStar(StarSystem* _pTo_starsystem);
+     		void generateNumPlanets(StarSystem* _pTo_starsystem, int planet_per_system);
      
-     void generateNumFriendlyNPC(StarSystem* _pTo_starsystem, int ship_per_system);
-     void generateNumEnemyNPC(StarSystem* _pTo_starsystem, int ship_per_system);
+     		void generateNumFriendlyNPC(StarSystem* _pTo_starsystem, int ship_per_system);
+     		void generateNumEnemyNPC(StarSystem* _pTo_starsystem, int ship_per_system);
 
-     void manageHiddenStarSystemList(StarSystem* _pTo_ss);
+     		void manageHiddenStarSystemList(StarSystem* _pTo_ss);
 
-     bool manage_map();
-     void render_map();
+     		bool manage_map();
+     		void render_map();
 };
 
 #endif 

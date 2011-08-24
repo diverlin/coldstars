@@ -535,7 +535,8 @@ void Npc :: thinkUnique_Race6_inSpace_inStatic()
          if (pTo_starsystem->SHIP_pList[ki]->returnOwnerRaceId() != race_id)
          { 
             pTo_ship->pTo_navigator->setTargetShip(pTo_starsystem->SHIP_pList[ki]);
-            pTo_ship->setWeaponsToShipTarget(pTo_starsystem->SHIP_pList[ki], true, true, true, true, true);
+            pTo_ship->selectWeapons();
+            pTo_ship->setWeaponsTarget(pTo_starsystem->SHIP_pList[ki]);
             break;
          }
      }
@@ -563,8 +564,11 @@ void Npc :: makeImmediateDecision()
                a_index = i;
            } 
         //printf("closest asteroid at =%f\n", dist);
-        if (a_index != -1) 
-           pTo_ship->setWeaponsToAsteroidTarget(visible_ASTEROID_pList[a_index], true, true, true, true, true);
+        if (a_index != -1)
+        { 
+           pTo_ship->selectWeapons();
+           pTo_ship->setWeaponsTarget(visible_ASTEROID_pList[a_index]);
+        }   
     }            
 }
 

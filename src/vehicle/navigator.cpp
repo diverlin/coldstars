@@ -20,18 +20,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "navigator.h"
 
 
-Navigator :: Navigator(Ship* _pTo_ship)
+Navigator :: Navigator(Ship* _ship)
 {
-    pTo_ship = _pTo_ship;
+	ship = _ship;
    
-    pTo_target_planet     = NULL;
-    pTo_target_ship       = NULL;
-    pTo_target_starsystem = NULL; 
+	target_planet     = NULL;
+    	target_ship       = NULL;
+    	target_starsystem = NULL; 
 
-    pTo_target_pos_x = NULL;
-    pTo_target_pos_y = NULL; 
+    	pTo_target_pos_x = NULL;
+    	pTo_target_pos_y = NULL; 
 
-    docking_radius = 50;
+    	docking_radius = 50;
 }
 
 Navigator :: ~Navigator()
@@ -40,123 +40,128 @@ Navigator :: ~Navigator()
       
 void Navigator :: setStaticTargetCoords(float _target_pos_x, float _target_pos_y)
 {
-    target_pos_x = _target_pos_x;
-    target_pos_y = _target_pos_y;
+    	target_pos_x = _target_pos_x;
+    	target_pos_y = _target_pos_y;
     
-    removeTargetPlanet();
-    removeTargetShip(); 
-    removeTargetStarSystem(); 
+    	removeTargetPlanet();
+    	removeTargetShip(); 
+    	removeTargetStarSystem(); 
     
-    pTo_ship->calculateDetaledWayToPosition();
+    	ship->calculateDetaledWayToPosition();
 }
       
       
 void Navigator :: setTargetPlanet(Planet* _pTo_planet)
 {
-    removeTargetShip();
-    removeTargetStarSystem(); 
+    	removeTargetShip();
+    	removeTargetStarSystem(); 
 
-    pTo_target_planet = _pTo_planet;
-    pTo_ship->is_FOLLOWING_PLANET = true;
+    	target_planet = _pTo_planet;
+    	ship->is_FOLLOWING_PLANET = true;
 
-    pTo_target_pos_x = &pTo_target_planet->points.center_x;
-    pTo_target_pos_y = &pTo_target_planet->points.center_y;
+    	pTo_target_pos_x = &target_planet->points.center_x;
+    	pTo_target_pos_y = &target_planet->points.center_y;
 
-    docking_radius = 100;
+    	docking_radius = 100;
 }
 
-void Navigator :: setTargetShip(Ship* _pTo_ship)
+void Navigator :: setTargetShip(Ship* _target_ship)
 {    
-    removeTargetPlanet();
-    removeTargetStarSystem(); 
+    	removeTargetPlanet();
+    	removeTargetStarSystem(); 
 
-    pTo_target_ship = _pTo_ship;
-    pTo_ship->is_FOLLOWING_SHIP = true;
+    	target_ship = _target_ship;
+    	ship->is_FOLLOWING_SHIP = true;
 
-    pTo_target_pos_x = &pTo_target_ship->points.center_x;
-    pTo_target_pos_y = &pTo_target_ship->points.center_y;
+    	pTo_target_pos_x = &target_ship->points.center_x;
+    	pTo_target_pos_y = &target_ship->points.center_y;
 }
     
-void Navigator :: setTargetStarSystem(StarSystem* _pTo_starsystem)
+void Navigator :: setTargetStarSystem(StarSystem* _target_starsystem)
 {
-    //target_pos_x = xxx;   jump point 
-    //target_pos_y = yyy;
+    	//target_pos_x = xxx;   jump point 
+    	//target_pos_y = yyy;
 
-    removeTargetPlanet();
-    removeTargetShip(); 
+    	removeTargetPlanet();
+    	removeTargetShip(); 
 
-    pTo_target_starsystem = _pTo_starsystem;
-    pTo_ship->is_FOLLOWING_STARSYSTEM = true;
+    	target_starsystem = _target_starsystem;
+    	ship->is_FOLLOWING_STARSYSTEM = true;
 }
 
 
+Planet* Navigator :: getTargetPlanet() const { return target_planet; }
+
+float Navigator :: getTargetPosX() const { return target_pos_x; }
+float Navigator :: getTargetPosY() const { return target_pos_y; }
+                
 
 void Navigator :: removeTargetPlanet()
 {
-    pTo_target_planet = NULL;
-    pTo_ship->is_FOLLOWING_PLANET = false;
+    	target_planet = NULL;
+    	ship->is_FOLLOWING_PLANET = false;
 
-    pTo_target_pos_x = NULL;
-    pTo_target_pos_y = NULL; 
+    	pTo_target_pos_x = NULL;
+    	pTo_target_pos_y = NULL; 
 }
 
 void Navigator :: removeTargetShip()
 {
-    pTo_target_ship = NULL;
-    pTo_ship->is_FOLLOWING_SHIP = false;
+    	target_ship = NULL;
+    	ship->is_FOLLOWING_SHIP = false;
 
-    pTo_target_pos_x = NULL;
-    pTo_target_pos_y = NULL; 
+    	pTo_target_pos_x = NULL;
+    	pTo_target_pos_y = NULL; 
 }
 
 void Navigator :: removeTargetStarSystem()
 {
-    pTo_target_starsystem = NULL;
-    pTo_ship->is_FOLLOWING_STARSYSTEM = false;
+    	target_starsystem = NULL;
+    	ship->is_FOLLOWING_STARSYSTEM = false;
 }
 
 
 bool Navigator :: updateTargetCoords()
 {
-    if (pTo_ship->is_FOLLOWING_PLANET == true)
-    {
-        target_pos_x = pTo_target_planet->orbit_vector_x[pTo_target_planet->step+TURN_TIME];   
-        target_pos_y = pTo_target_planet->orbit_vector_y[pTo_target_planet->step+TURN_TIME];  
-        pTo_ship->calculateDetaledWayToPosition();
+    	if (ship->is_FOLLOWING_PLANET == true)
+    	{
+        	target_pos_x = target_planet->orbit_vector_x[target_planet->step+TURN_TIME];   
+       	 	target_pos_y = target_planet->orbit_vector_y[target_planet->step+TURN_TIME];  
+        	ship->calculateDetaledWayToPosition();
 
-        return true;
-    } 
+        	return true;
+    	} 
      
-    if (pTo_ship->is_FOLLOWING_SHIP = true)
-    {
-        return true;    
-    }      
+    	if (ship->is_FOLLOWING_SHIP = true)
+    	{
+        	return true;    
+    	}      
 
-    if (pTo_ship->is_FOLLOWING_STARSYSTEM = true)
-    {
-        return true;    
-    }       
+    	if (ship->is_FOLLOWING_STARSYSTEM = true)
+    	{
+        	return true;    
+    	}       
 }
 
 
 bool Navigator :: checkDocking()
 {
-     if (collisionBetweenCenters(pTo_ship->points.center_x, pTo_ship->points.center_y, (*pTo_target_pos_x), (*pTo_target_pos_y), docking_radius) == true)
-        return true;
-     else    
-        return false;
+     	if (collisionBetweenCenters(ship->points.center_x, ship->points.center_y, (*pTo_target_pos_x), (*pTo_target_pos_y), docking_radius) == true)
+        	return true;
+     	else    
+        	return false;
 }
 
 
 bool Navigator :: getDockingPermission()
 {
-    if (pTo_ship->is_FOLLOWING_PLANET == true)
-       return pTo_target_planet->getPermissionToLand();
+    	if (ship->is_FOLLOWING_PLANET == true)
+       		return target_planet->getPermissionToLand();
 
-    //if (pTo_ship->is_FOLLOWING_SHIP == true)
-    //   return pTo_target_ship->getPermissionToLand();
+    	//if (pTo_ship->is_FOLLOWING_SHIP == true)
+    	//   return pTo_target_ship->getPermissionToLand();
 
-    //if (pTo_ship->is_FOLLOWING_SPACESTATION == true)
-    //   return pTo_target_spacestation->getPermissionToLand();
+    	//if (pTo_ship->is_FOLLOWING_SPACESTATION == true)
+    	//   return pTo_target_spacestation->getPermissionToLand();
 }
 
