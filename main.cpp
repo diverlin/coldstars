@@ -20,37 +20,37 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 void starsystemSimulation_inDynamic_TRUE(StarSystem* pTo_ss)
 {
-    pTo_ss->asteroidManager(10); 
+    	pTo_ss->asteroidManager(10); 
 
-    pTo_ss->updateEntities_inDynamic_TRUE();
-    pTo_ss->rocketCollision_TRUE();
-    pTo_ss->asteroidCollision_TRUE();
+    	pTo_ss->updateEntities_inDynamic_TRUE();
+    	pTo_ss->rocketCollision_TRUE();
+    	pTo_ss->asteroidCollision_TRUE();
 
-    pTo_ss->manageEntities(); 
+    	pTo_ss->manageEntities(); 
 
-    pTo_ss->fireEvents_TRUE(g_TIMER);
+    	pTo_ss->fireEvents_TRUE(g_TIMER);
 }
 
 void starsystemSimulation_inDynamic_FALSE(StarSystem* pTo_ss)
 {
-    pTo_ss->asteroidManager(10); 
+    	pTo_ss->asteroidManager(10); 
 
-    pTo_ss->updateEntities_inDynamic_FALSE();
-    pTo_ss->manageEntities(); 
+    	pTo_ss->updateEntities_inDynamic_FALSE();
+    	pTo_ss->manageEntities(); 
 
-    if (randIntInRange(1,10) == 1)
-    {
-        pTo_ss->rocketCollision_FALSE();
-        pTo_ss->asteroidCollision_FALSE();
+    	if (randIntInRange(1,10) == 1)
+    	{
+        	pTo_ss->rocketCollision_FALSE();
+        	pTo_ss->asteroidCollision_FALSE();
 
-        pTo_ss->fireEvents_FALSE(g_TIMER);
-    }
+        	pTo_ss->fireEvents_FALSE(g_TIMER);
+    	}
 }
 
 void starsystemSimulation_inStatic_TRUE(StarSystem* pTo_ss)
 {    
-    pTo_ss->removeDeadEntities(); 
-    pTo_ss->updateEntities_inStatic(); 
+    	pTo_ss->removeDeadEntities(); 
+    	pTo_ss->updateEntities_inStatic(); 
 }
 
 void starsystemSimulation_inStatic_FALSE(StarSystem* pTo_ss)
@@ -64,32 +64,36 @@ void starsystemRender(StarSystem* pTo_ss)
 {
     	//pTo_ss->renderBackground();  // moved to ss
     	pTo_ss->findVisibleEntities();
-    	pTo_ss->renderEntities_OLD(); 
+    	if (USE_MODERN_HW)
+    		pTo_ss->renderEntities_NEW();
+    	else
+        	pTo_ss->renderEntities_OLD();
+    	 
 }
 
 void playerScan(Ship* pTo_ship, bool in_store = false, bool allow_full_control = false)
 {
-    pTo_SHIP_GUI->bindShip(pTo_ship);                               // improove to perform only once
-    pTo_SHIP_GUI->bindSkill(pTo_ship->pTo_npc_owner->pTo_skill);    // improove to perform only once
+    	pTo_SHIP_GUI->bindShip(pTo_ship);                               // improove to perform only once
+    	pTo_SHIP_GUI->bindSkill(pTo_ship->pTo_npc_owner->pTo_skill);    // improove to perform only once
 
-    if (pTo_PLAYER->pTo_ship->id == pTo_ship->id)
-        allow_full_control = true;  
-    // modify full control for friend ships
+    	if (pTo_PLAYER->pTo_ship->id == pTo_ship->id)
+        	allow_full_control = true;  
+    	// modify full control for friend ships
 
-    pTo_SHIP_GUI->renderInternaly();
+    	pTo_SHIP_GUI->renderInternaly();
 
-    if (in_store == false)
-    {
-        pTo_SHIP_GUI->renderSkill();
-        pTo_SHIP_GUI->manageSkill(allow_full_control);
-    }   
+    	if (in_store == false)
+    	{
+        	pTo_SHIP_GUI->renderSkill();
+        	pTo_SHIP_GUI->manageSkill(allow_full_control);
+    	}   
 
-    pTo_SHIP_GUI->mouseControl(allow_full_control, in_store);
-    if (pTo_CURSOR->pTo_otsec_slot->getEquipedStatus() == false)
-        pTo_SHIP_GUI->renderItemInfo();
+    	pTo_SHIP_GUI->mouseControl(allow_full_control, in_store);
+    	if (pTo_CURSOR->pTo_otsec_slot->getEquipedStatus() == false)
+        	pTo_SHIP_GUI->renderItemInfo();
 
-    pTo_CURSOR->updatePos();
-    pTo_CURSOR->renderFrame();
+    	pTo_CURSOR->updatePos();
+    	pTo_CURSOR->renderFrame();
 }
 
 
@@ -138,7 +142,6 @@ int main()
     std::string coord_str;
     std::string fps_str = "";
 
-world.pTo_ss_active->createPostProcessStuff();  // remove
 
     g_TIMER = -1; 
     // GAME LOOP

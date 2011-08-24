@@ -24,11 +24,6 @@ StarSystem :: StarSystem()
 { 
     id = g_ENTITY_ID_GENERATOR.returnNextId();
     is_CAPTURED = false;
-
-    //color.r = 1.0f;
-    //color.g = 1.0f;
-    //color.b = 0.8f;
-    //color.a = 1.0f;
 }
 
 StarSystem :: ~StarSystem()
@@ -667,8 +662,10 @@ pTo_fbo3->deactivate();
 
 
 // render from FBO
+glDepthMask(true);
+
 glEnable(GL_TEXTURE_2D);
-//glBindFramebuffer(GL_FRAMEBUFFER, 0);          // unbind fbo
+glBindFramebuffer(GL_FRAMEBUFFER, 0);      // putcom    // unbind fbo
 
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 glLoadIdentity();
@@ -700,7 +697,8 @@ drawFullScreenTexturedQuad(pTo_fbo3->texture, w, h, -999.0);
     		glDisable(GL_POINT_SPRITE);
     		
     	glEnable(GL_BLEND);
-    	          
+    	
+    	setSceneColor();    	          
 }
     
 
@@ -1161,7 +1159,13 @@ void StarSystem :: mouseControl()
     bool mrb = g_MOUSE_RIGHT_BUTTON;
 
 
-    pTo_PLAYER->pTo_ship->resetDeselectedWeaponTargets(pTo_PLAYER->weapon_slot_1_SELECTED, pTo_PLAYER->weapon_slot_2_SELECTED, pTo_PLAYER->weapon_slot_3_SELECTED, pTo_PLAYER->weapon_slot_4_SELECTED, pTo_PLAYER->weapon_slot_5_SELECTED);
+    pTo_PLAYER->pTo_ship->selectWeapons(pTo_PLAYER->weapon_slot_1_SELECTED, 
+        				pTo_PLAYER->weapon_slot_2_SELECTED, 
+                   			pTo_PLAYER->weapon_slot_3_SELECTED, 
+                   			pTo_PLAYER->weapon_slot_4_SELECTED, 
+                   			pTo_PLAYER->weapon_slot_5_SELECTED);
+                   				       
+    pTo_PLAYER->pTo_ship->resetDeselectedWeaponTargets();
 
 
     if (cursor_has_target == false) 
@@ -1177,8 +1181,16 @@ void StarSystem :: mouseControl()
                visible_MINERAL_pList[mi]->renderInfo(); 
 
                if (mlb == true)
-                  pTo_PLAYER->pTo_ship->setWeaponsToMineralTarget(visible_MINERAL_pList[mi], pTo_PLAYER->weapon_slot_1_SELECTED, pTo_PLAYER->weapon_slot_2_SELECTED, pTo_PLAYER->weapon_slot_3_SELECTED, pTo_PLAYER->weapon_slot_4_SELECTED, pTo_PLAYER->weapon_slot_5_SELECTED);
+               {
+                   pTo_PLAYER->pTo_ship->selectWeapons(pTo_PLAYER->weapon_slot_1_SELECTED, 
+                   				       pTo_PLAYER->weapon_slot_2_SELECTED, 
+                   				       pTo_PLAYER->weapon_slot_3_SELECTED, 
+                   				       pTo_PLAYER->weapon_slot_4_SELECTED, 
+                   				       pTo_PLAYER->weapon_slot_5_SELECTED);
+                   					    
+                   pTo_PLAYER->pTo_ship->setWeaponsTarget(visible_MINERAL_pList[mi]);
 
+	       }
                break; 
             }
         }
@@ -1197,8 +1209,16 @@ void StarSystem :: mouseControl()
                visible_CONTAINER_pList[ci]->renderInfo(); 
 
                if (mlb == true)
-                  pTo_PLAYER->pTo_ship->setWeaponsToContainerTarget(visible_CONTAINER_pList[ci], pTo_PLAYER->weapon_slot_1_SELECTED, pTo_PLAYER->weapon_slot_2_SELECTED, pTo_PLAYER->weapon_slot_3_SELECTED, pTo_PLAYER->weapon_slot_4_SELECTED, pTo_PLAYER->weapon_slot_5_SELECTED);
-
+               {
+                   pTo_PLAYER->pTo_ship->selectWeapons(pTo_PLAYER->weapon_slot_1_SELECTED, 
+                   				       pTo_PLAYER->weapon_slot_2_SELECTED, 
+                   				       pTo_PLAYER->weapon_slot_3_SELECTED, 
+                   				       pTo_PLAYER->weapon_slot_4_SELECTED, 
+                   				       pTo_PLAYER->weapon_slot_5_SELECTED);
+                   					    
+                   pTo_PLAYER->pTo_ship->setWeaponsTarget(visible_CONTAINER_pList[ci]);
+               }
+ 
                break; 
             }
         }
@@ -1218,7 +1238,15 @@ void StarSystem :: mouseControl()
                 visible_SHIP_pList[ki]->renderInfo(visible_SHIP_pList[ki]->points.center_x, visible_SHIP_pList[ki]->points.center_y, g_SCROLL_COORD_X, g_SCROLL_COORD_Y); 
 
                 if (mlb == true)
-                   pTo_PLAYER->pTo_ship->setWeaponsToShipTarget(visible_SHIP_pList[ki], pTo_PLAYER->weapon_slot_1_SELECTED, pTo_PLAYER->weapon_slot_2_SELECTED, pTo_PLAYER->weapon_slot_3_SELECTED, pTo_PLAYER->weapon_slot_4_SELECTED, pTo_PLAYER->weapon_slot_5_SELECTED);
+                {
+                   pTo_PLAYER->pTo_ship->selectWeapons(pTo_PLAYER->weapon_slot_1_SELECTED, 
+                   				       pTo_PLAYER->weapon_slot_2_SELECTED, 
+                   				       pTo_PLAYER->weapon_slot_3_SELECTED, 
+                   				       pTo_PLAYER->weapon_slot_4_SELECTED, 
+                   				       pTo_PLAYER->weapon_slot_5_SELECTED);
+                   					    
+                   pTo_PLAYER->pTo_ship->setWeaponsTarget(visible_SHIP_pList[ki]);
+		}
 
                 if (mrb == true)
                 {
@@ -1247,8 +1275,15 @@ void StarSystem :: mouseControl()
                 visible_ASTEROID_pList[ai]->renderInfo(); 
 
                 if (mlb == true)
-                   pTo_PLAYER->pTo_ship->setWeaponsToAsteroidTarget(visible_ASTEROID_pList[ai], pTo_PLAYER->weapon_slot_1_SELECTED, pTo_PLAYER->weapon_slot_2_SELECTED, pTo_PLAYER->weapon_slot_3_SELECTED, pTo_PLAYER->weapon_slot_4_SELECTED, pTo_PLAYER->weapon_slot_5_SELECTED);
-
+                { 
+                   pTo_PLAYER->pTo_ship->selectWeapons(pTo_PLAYER->weapon_slot_1_SELECTED, 
+                   				       pTo_PLAYER->weapon_slot_2_SELECTED, 
+                   				       pTo_PLAYER->weapon_slot_3_SELECTED, 
+                   				       pTo_PLAYER->weapon_slot_4_SELECTED, 
+                   				       pTo_PLAYER->weapon_slot_5_SELECTED);
+                   					    
+                   pTo_PLAYER->pTo_ship->setWeaponsTarget(visible_ASTEROID_pList[ai]);
+                } 
                 break; 
             }
         }

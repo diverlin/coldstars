@@ -79,5 +79,5 @@ GLuint g_EXTRACT_BRIGHT_PROGRAM;
 GLuint g_COMBINE_PROGRAM;
 GLuint g_MULTITEX_PROGRAM;
 
-int USE_MODERN_HW = false;
+int USE_MODERN_HW = true;
 #endif /* GLOBAL_H */

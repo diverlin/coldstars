@@ -94,6 +94,8 @@ void World :: generateEntireStarSystem()
        generateNumFriendlyNPC(pTo_starsystem, randIntInRange(SHIP_PER_SYSTEM_MIN, SHIP_PER_SYSTEM_MAX));
     else
        generateNumEnemyNPC(pTo_starsystem, randIntInRange(ENEMY_SHIP_PER_SYSTEM_MIN, ENEMY_SHIP_PER_SYSTEM_MAX));
+       
+    pTo_starsystem->createPostProcessStuff();  // remove
 }
 
 

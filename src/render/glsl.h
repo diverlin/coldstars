@@ -27,17 +27,17 @@ void printProgramInfoLog(GLuint program);
 
 class FBO
 {
-   public:
-      GLuint texture;
-      int w, h;
-      GLuint depth_buffer;
-      GLuint fbo;
+	public:
+      		GLuint texture;
+      		int w, h;
+      		GLuint depth_buffer;
+      		GLuint fbo;
 
-      FBO(int _w, int _h);
-      ~FBO();
+      		FBO(int _w, int _h);
+      		~FBO();
 
-      void activate();
-      void deactivate();
+      		void activate();
+      		void deactivate();
 };
 
 typedef std::vector<FBO*> VEC_pFBO_type; 
@@ -84,7 +84,6 @@ class ShockWaveEffect
           	
           	float x, y, z, time, d_x, d_y, d_z, d_time;
 
-
       		ShockWaveEffect(StarSystem* _pTo_starsystem, float _center_x, float _center_y, float _x, float _y, float _z, float _time, float _d_x, float _d_y, float _d_z, float d_time);
       		~ShockWaveEffect();
       		
@@ -95,7 +94,4 @@ typedef std::vector<ShockWaveEffect*> VEC_pShockWaveEffect_type;
 // http://www.flashbang.se/archives/48
 // HDR http://prideout.net/archive/bloom/  
     
-
-
-
 #endif
