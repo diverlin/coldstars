@@ -23,28 +23,36 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class CommonForModules
 {
-    public:
-      TextureOb* pTo_texOb;
-      GLuint texture;
-      int w, h;          
-      int id, type_id;
-      
-      Rect rect;
-      int mass;
+    	public:
+    	    	int getId() const;
+    		int getType() const;
+    		int getSubType() const;
 
-      VEC_pString_type info_title_pList;  
-      VEC_pString_type info_value_pList;  
-     
-      CommonForModules();
-      void CommonForModules_init(TextureOb* _pTo_texOb);
-      ~CommonForModules();
+    		
+       	      	VEC_pString_type info_title_pList;  // make private
+      		VEC_pString_type info_value_pList;  // make private 
+      		
+           	Rect rect;
+      		int mass;   
+    
+      		CommonForModules();
+      		void CommonForModules_init(int _subtype_id, TextureOb* _pTo_texOb);
+      		~CommonForModules();
+      		
+      		TextureOb* getTexOb() const;
 
-      void render(Rect slot_rect);
-           void (CommonForModules::*pToFunc_render)(Rect slot_rect); 
-           void _renderFrame(Rect slot_rect);
-           void _renderFrames(Rect slot_rect);
+      		void render(Rect slot_rect);
+           		void (CommonForModules::*pToFunc_render)(Rect slot_rect); 
+           		void _renderFrame(Rect slot_rect);
+           		void _renderFrames(Rect slot_rect);
 
-      void renderInfo(Rect slot_rect); 
+      		void renderInfo(Rect slot_rect); 
+      		
+      	private:
+      	      	int id, type_id, subtype_id;
+      	      		
+     		TextureOb* pTo_texOb;
+     		int w, h;  
 };
 
 #endif

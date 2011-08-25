@@ -23,46 +23,55 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class LazerEquipment : public CommonForEquipment
 {
-    public:
-      int damage_orig;
-      int damage_add;
-      int damage;
+    	public:
+      		LazerEquipment(TextureOb* _pTo_itemTexOb, 
+      			       int _damage_orig, 
+      			       int _radius_orig, 
+      			       int _modules_num_max, 
+      			       int _mass, 
+      			       int _condition_max, 
+      			       int _deterioration_rate);
+      			       
+      		~LazerEquipment();
 
-      int radius_orig;
-      int radius_add;
-      int radius;
-
-      TextureOb* pTo_lazerEffectTexOb;
-      TextureOb* pTo_particleTexOb;
+		int getDamage() const;
+		int getRadius() const;
+		
+      		void updatePropetries();
+      		void countPrice();
+      		void updateOwnerPropetries();
+      		void updateInfo();
+           		std::string returnDamageStr();
+           		std::string returnRadiusStr();
+      		void fireEvent(Turrel* _turrel);
       
-      int particle_Size;
+      		bool insertModule(LazerModule* pTo_lazerModule);
+      		
+      	private:
+      	      	int damage_orig;
+      		int damage_add;
+      		int damage;
 
-      TextureOb* turrelTexOb;
-      
-      VEC_pLazerModule_type modules_pList;
+      		int radius_orig;
+      		int radius_add;
+      		int radius;
+      		
+      		int particle_Size;
+      		TextureOb* turrelTexOb;
+      		TextureOb* pTo_lazerEffectTexOb;
+      		TextureOb* pTo_particleTexOb;
+      		
+      	      	VEC_pLazerModule_type modules_pList;
 
-      // INFO 
-      std::string info_title_0;
-      std::string info_title_1;   std::string info_value_1;
-      std::string info_title_2;   std::string info_value_2; 
-      std::string info_title_3;   std::string info_value_3;
-      std::string info_title_4;   std::string info_value_4;
-      std::string info_title_5;   std::string info_value_5;
-      std::string info_title_6;   std::string info_value_6;
-
-
-      LazerEquipment(TextureOb* _pTo_itemTexOb, int _damage_orig, int _radius_orig, int _modules_num_max, int _mass, int _condition_max, int _deterioration_rate);
-      ~LazerEquipment();
-
-      void updatePropetries();
-      void countPrice();
-      void updateOwnerPropetries();
-      void updateInfo();
-           std::string returnDamageStr();
-           std::string returnRadiusStr();
-      void fireEvent(Turrel* _turrel);
-      
-      bool insertModule(LazerModule* pTo_lazerModule);
+      		// INFO 
+      		std::string info_title_0;
+      		std::string info_title_1;   std::string info_value_1;
+      		std::string info_title_2;   std::string info_value_2; 
+      		std::string info_title_3;   std::string info_value_3;
+      		std::string info_title_4;   std::string info_value_4;
+      		std::string info_title_5;   std::string info_value_5;
+      		std::string info_title_6;   std::string info_value_6;
+      	
 };
 
 LazerEquipment* lazerEquipmentGenerator(int race_id, int revision_id = -1);

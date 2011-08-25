@@ -22,26 +22,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class RocketModule : public CommonForModules
 {
-     public:
-       int subtype_id;
+     	public:
+       		RocketModule(TextureOb* _pTo_texOb, int _ammo_max_add, int _damage_add, int _radius_add);
+       		~RocketModule();
 
-       int ammo_max_add;
-       int damage_add;
-       int radius_add;
+		int getAmmoMaxAdd() const;
+		int getDamageAdd()  const;
+		int getRadiusAdd()  const;
+				
+       		void updateInfo();
+       		
+       	private:
+       		int ammo_max_add;
+       		int damage_add;
+       		int radius_add;
 
-      // INFO 
-      std::string info_title_0;
-      std::string info_title_1;   std::string info_value_1;
-      std::string info_title_2;   std::string info_value_2; 
-      std::string info_title_3;   std::string info_value_3;
-      std::string info_title_4;   std::string info_value_4;
-
-
-       RocketModule(TextureOb* _pTo_texOb);
-       ~RocketModule();
-
-       void activation(RocketEquipment* _pTo_rocket_item);
-       void updateInfo();
+      		// INFO 
+      		std::string info_title_0;
+      		std::string info_title_1;   std::string info_value_1;
+      		std::string info_title_2;   std::string info_value_2; 
+      		std::string info_title_3;   std::string info_value_3;
+      		std::string info_title_4;   std::string info_value_4;
+       	
 };
 
 RocketModule* rocketModuleGenerator();

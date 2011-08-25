@@ -19,59 +19,52 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "lazerModule.h"
 
-LazerModule :: LazerModule(TextureOb* _pTo_texOb)
+LazerModule :: LazerModule(TextureOb* _pTo_texOb, int _damage_add, int _radius_add)
 {
-     CommonForModules_init(_pTo_texOb);
-     subtype_id = LAZER_ID;
+     	CommonForModules_init(LAZER_ID, _pTo_texOb);
 
-     damage_add = 0;
-     radius_add = 0;
+     	damage_add = _damage_add;
+     	radius_add = _radius_add;
 }
 
 
 LazerModule :: ~LazerModule()
-{
-}
+{}
 
 
-void LazerModule :: activation(LazerEquipment* _pTo_lazer_item)
-{
-     _pTo_lazer_item->damage_add += damage_add;
-     _pTo_lazer_item->radius_add += radius_add;
-     _pTo_lazer_item->updatePropetries();
-}
+int LazerModule :: getDamageAdd() const { return damage_add; }
+int LazerModule :: getRadiusAdd() const { return radius_add; }
+
 
 void LazerModule :: updateInfo()
 {
-    info_title_pList.clear();
-    info_value_pList.clear();
+    	info_title_pList.clear();
+    	info_value_pList.clear();
 
-    info_title_0 = "lazer module";
-    info_title_1 = "damage_add:";      info_value_1 = int2str(damage_add);
-    info_title_2 = "radius_add:";      info_value_2 = int2str(radius_add);
-    info_title_3 = "mass:";            info_value_3 = int2str(mass);
+    	info_title_0 = "lazer module";
+    	info_title_1 = "damage_add:";      info_value_1 = int2str(damage_add);
+    	info_title_2 = "radius_add:";      info_value_2 = int2str(radius_add);
+    	info_title_3 = "mass:";            info_value_3 = int2str(mass);
 
-    info_title_pList.push_back(&info_title_0);  
-    if (damage_add != 0) 
-    {
-        info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
-    }
-    if (radius_add != 0)
-    { 
-        info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
-    }
-    info_title_pList.push_back(&info_title_3);   info_value_pList.push_back(&info_value_3);
+    	info_title_pList.push_back(&info_title_0);  
+    	if (damage_add != 0) 
+    	{
+        	info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
+    	}
+    	if (radius_add != 0)
+    	{ 
+        	info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
+    	}
+    	info_title_pList.push_back(&info_title_3);   info_value_pList.push_back(&info_value_3);
 }
 
 
 LazerModule* lazerModuleGenerator()
 {
-    TextureOb* pTo_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
-    LazerModule* pTo_lazer_module = new LazerModule(pTo_texOb);
+    	TextureOb* pTo_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
+    	int _damage_add = randIntInRange(LAZER_MODULE_DAMAGE_MIN, LAZER_MODULE_DAMAGE_MAX);
+    	int _radius_add = randIntInRange(LAZER_MODULE_RADIUS_MIN, LAZER_MODULE_RADIUS_MAX);
 
-    pTo_lazer_module->damage_add = randIntInRange(LAZER_MODULE_DAMAGE_MIN, LAZER_MODULE_DAMAGE_MAX);
-    pTo_lazer_module->radius_add = randIntInRange(LAZER_MODULE_RADIUS_MIN, LAZER_MODULE_RADIUS_MAX);
-
-    pTo_lazer_module->updateInfo();
-    return pTo_lazer_module;
+    	LazerModule* _lazer_module = new LazerModule(pTo_texOb, _damage_add, _radius_add);
+    	return _lazer_module;
 }

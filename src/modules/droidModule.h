@@ -22,20 +22,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class DroidModule : public CommonForModules
 {
-   public:
-      int subtype_id;
-      int repair_add;
+   	public:
+      		DroidModule(TextureOb* _pTo_texOb, int _repair_add); 
+      		~DroidModule(); 
 
-      // INFO 
-      std::string info_title_0;
-      std::string info_title_1;   std::string info_value_1;
-      std::string info_title_2;   std::string info_value_2; 
-
-      DroidModule(TextureOb* _pTo_texOb); 
-      ~DroidModule(); 
-
-      void activation(DroidEquipment* _pTo_droid_item);
-      void updateInfo();
+		int getRepairAdd() const;
+		
+      		void updateInfo();
+      		
+      	private:
+      	      	int repair_add;
+      	      		
+      	      	// INFO 
+      		std::string info_title_0;
+      		std::string info_title_1;   std::string info_value_1;
+      		std::string info_title_2;   std::string info_value_2; 
 };
 
 DroidModule* droidModuleGenerator();

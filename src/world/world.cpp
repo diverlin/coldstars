@@ -228,7 +228,7 @@ bool World :: manage_map()
                 if (ss_cursor_dist < 10)
                 { 
                    int ss_ss_dist = lengthBetweenPoints(STARSYSTEM_pList[si]->rect_onMap.center_x, STARSYSTEM_pList[si]->rect_onMap.center_y, pTo_PLAYER->pTo_npc->pTo_starsystem->rect_onMap.center_x,  pTo_PLAYER->pTo_npc->pTo_starsystem->rect_onMap.center_y);
-                   if ( (ss_ss_dist < pTo_PLAYER->pTo_ship->drive_slot.getDriveEquipment()->hyper) && (ss_ss_dist < pTo_PLAYER->pTo_ship->bak_slot.getBakEquipment()->fuel) )
+                   if ( (ss_ss_dist < pTo_PLAYER->pTo_ship->drive_slot.getDriveEquipment()->getHyper()) && (ss_ss_dist < pTo_PLAYER->pTo_ship->bak_slot.getBakEquipment()->getFuel()) )
                       if (lmb == true)
                       { 
                           pTo_ss_active = STARSYSTEM_pList[si];    // debug

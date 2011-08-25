@@ -761,7 +761,7 @@ bool Npc :: isScanTargetPossible(Ship* _pTo_ship)
  
      if (pTo_ship->ableTo.SCAN == true) 
         if (_pTo_ship->protector_slot.getEquipedStatus() == true)
-           if (pTo_ship->scaner_slot.getScanerEquipment()->scan >= _pTo_ship->protector_slot.getProtectorEquipment()->protection) 
+           if (pTo_ship->scaner_slot.getScanerEquipment()->getScan() >= _pTo_ship->protector_slot.getProtectorEquipment()->getProtection()) 
               return true;
 
      return false;

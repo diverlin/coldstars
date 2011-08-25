@@ -23,23 +23,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class DriveModule : public CommonForModules
 {
-   public: 
-      int subtype_id;
+   	public: 
+      		DriveModule(TextureOb* _texOb, int _speed_add, int _hyper_add);
+      		~DriveModule();
 
-      int speed_add;
-      int hyper_add;
+		int getSpeedAdd() const;
+		int getHyperAdd() const;
 
-      // INFO 
-      std::string info_title_0;
-      std::string info_title_1;   std::string info_value_1;
-      std::string info_title_2;   std::string info_value_2; 
-      std::string info_title_3;   std::string info_value_3;
-
-      DriveModule(TextureOb* _pTo_texOb);
-      ~DriveModule();
-
-      void activation(DriveEquipment* _pTo_drive_item);
-      void updateInfo();
+      		void updateInfo();
+      		
+      	private:
+      		int speed_add;
+      		int hyper_add;
+      		
+      	      	// INFO 
+      		std::string info_title_0;
+      		std::string info_title_1;   std::string info_value_1;
+      		std::string info_title_2;   std::string info_value_2; 
+      		std::string info_title_3;   std::string info_value_3;
+      		
 };
 
 DriveModule* driveModuleGenerator();

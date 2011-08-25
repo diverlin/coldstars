@@ -23,48 +23,53 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class DriveEquipment :  public CommonForEquipment
 {
-public:
-      int speed_orig;
-      int speed_add;
-      int speed;
+	public:
+      		DriveEquipment();
+      		DriveEquipment(TextureOb* pTo_itemTexOb, int speed_orig, int hyper_orig, int modules_num_max, int mass, int condition_max, int deterioration_rate);
+      		~DriveEquipment();
 
-      int hyper_orig;
-      int hyper_add;
-      int hyper;
+		int getSpeed() const;
+		int getHyper() const;
+		
+      		void updatePropetries();
+      		void countPrice();
+      		void updateOwnerPropetries();
 
-      TextureOb* pTo_particleTexOb;
-      int particle_num;
-      float particle_size;
-      float particle_velocity;
-      float particle_alpha_start;
-      float particle_alpha_end;
-      float particle_d_alpha;
-
-      VEC_pDriveModule_type modules_pList;
-      
-      // INFO 
-      std::string info_title_0;
-      std::string info_title_1;   std::string info_value_1;
-      std::string info_title_2;   std::string info_value_2; 
-      std::string info_title_3;   std::string info_value_3;
-      std::string info_title_4;   std::string info_value_4;
-      std::string info_title_5;   std::string info_value_5;
-      std::string info_title_6;   std::string info_value_6;
-
-
-      DriveEquipment();
-      DriveEquipment(TextureOb* pTo_itemTexOb, int speed_orig, int hyper_orig, int modules_num_max, int mass, int condition_max, int deterioration_rate);
-      ~DriveEquipment();
-
-      void updatePropetries();
-      void countPrice();
-      void updateOwnerPropetries();
-
-      void updateInfo();
-           std::string returnSpeedStr();
-           std::string returnHyperStr();
+      		void updateInfo();
+           		std::string returnSpeedStr();
+           		std::string returnHyperStr();
            
-      bool insertModule(DriveModule* pTo_driveModule);
+      		bool insertModule(DriveModule* pTo_driveModule);
+      		
+      	private:
+      	      	int speed_orig;
+      		int speed_add;
+      		int speed;
+
+      		int hyper_orig;
+      		int hyper_add;
+      		int hyper;
+      		
+      		VEC_pDriveModule_type modules_pList;
+      		
+      	      	// INFO 
+      		std::string info_title_0;
+      		std::string info_title_1;   std::string info_value_1;
+      		std::string info_title_2;   std::string info_value_2; 
+      		std::string info_title_3;   std::string info_value_3;
+      		std::string info_title_4;   std::string info_value_4;
+      		std::string info_title_5;   std::string info_value_5;
+      		std::string info_title_6;   std::string info_value_6;
+      		
+     		// particle system settings
+      	      	TextureOb* pTo_particleTexOb;
+      	      	int particle_num;
+      		float particle_size;
+      		float particle_velocity;
+      		float particle_alpha_start;
+      		float particle_alpha_end;
+      		float particle_d_alpha;
+      	
 };
 
 DriveEquipment* driveEquipmentGenerator(int race_id, int revision_id = -1);

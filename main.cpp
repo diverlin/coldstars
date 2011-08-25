@@ -129,8 +129,8 @@ int main()
 
     //equip(pTo_pship); // debug
 
-    pTo_pship->drive_slot.getDriveEquipment()->speed*=5;   // hack debug
-    pTo_pship->updateAllStuff(); 
+    //pTo_pship->drive_slot.getDriveEquipment()->getSpeed()*=5;   // hack debug
+    //pTo_pship->updateAllStuff(); 
 
     pTo_PLAYER->setShip(pTo_pship);
 

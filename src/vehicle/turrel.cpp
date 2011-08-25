@@ -218,7 +218,7 @@ bool Turrel :: isAmmoAvailable()
     if (slot->getItemSubType() == LAZER_ID)
        return true;
     if (slot->getItemSubType() == ROCKET_ID)
-       if (slot->getRocketEquipment()->ammo > 0)
+       if (slot->getRocketEquipment()->getAmmo() > 0)
           return true;
 
     return false;           
@@ -236,25 +236,25 @@ bool Turrel :: fireEvent_TRUE()
 
        if (target_type_id == SHIP_ID) 
        { 
-           target_ship->hit_TRUE(slot->getLazerEquipment()->damage);
+           target_ship->hit_TRUE(slot->getLazerEquipment()->getDamage());
            return true;
        } 
 
        if (target_type_id == ASTEROID_ID)  
        { 
-           target_asteroid->hit_TRUE(slot->getLazerEquipment()->damage);
+           target_asteroid->hit_TRUE(slot->getLazerEquipment()->getDamage());
            return true;
        }
 
        if (target_type_id == MINERAL_ID)  
        { 
-           target_mineral->hit_TRUE(slot->getLazerEquipment()->damage);
+           target_mineral->hit_TRUE(slot->getLazerEquipment()->getDamage());
            return true;
        }
 
        if (target_type_id == CONTAINER_ID)  
        { 
-           target_container->hit_TRUE(slot->getLazerEquipment()->damage);
+           target_container->hit_TRUE(slot->getLazerEquipment()->getDamage());
            return true;
        }
     }
@@ -281,25 +281,25 @@ bool Turrel :: fireEvent_FALSE()
 
        if (target_type_id == SHIP_ID) 
        { 
-           target_ship->hit_FALSE(slot->getLazerEquipment()->damage);
+           target_ship->hit_FALSE(slot->getLazerEquipment()->getDamage());
            return true;
        } 
 
        if (target_type_id == ASTEROID_ID)  
        { 
-           target_asteroid->hit_FALSE(slot->getLazerEquipment()->damage);
+           target_asteroid->hit_FALSE(slot->getLazerEquipment()->getDamage());
            return true;
        }
 
        if (target_type_id == MINERAL_ID)  
        { 
-           target_mineral->hit_FALSE(slot->getLazerEquipment()->damage);
+           target_mineral->hit_FALSE(slot->getLazerEquipment()->getDamage());
            return true;
        }
 
        if (target_type_id == CONTAINER_ID)  
        { 
-           target_container->hit_FALSE(slot->getLazerEquipment()->damage);
+           target_container->hit_FALSE(slot->getLazerEquipment()->getDamage());
            return true;
        }
     }

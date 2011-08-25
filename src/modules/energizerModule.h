@@ -23,23 +23,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class EnergizerModule : public CommonForModules
 {
-   public:   
-      int subtype_id;
+   	public:   
+      		EnergizerModule(TextureOb* pTo_texOb, int _energy_max_add, int _restoration_add);
+      		~EnergizerModule();
 
-      int energy_max_add;
-      int restoration_add;
+		int getEnergyMaxAdd()   const;
+		int getRestorationAdd() const;
 
-      // INFO 
-      std::string info_title_0;
-      std::string info_title_1;   std::string info_value_1;
-      std::string info_title_2;   std::string info_value_2; 
-      std::string info_title_3;   std::string info_value_3;
-
-      EnergizerModule(TextureOb* pTo_texOb);
-      ~EnergizerModule();
-
-      void activation(EnergizerEquipment* pTo_energizer_item);
-      void updateInfo();
+      		void updateInfo();
+      		
+      	private:
+      	      	int energy_max_add;
+      		int restoration_add;
+      		
+      	      	// INFO 
+      		std::string info_title_0;
+      		std::string info_title_1;   std::string info_value_1;
+      		std::string info_title_2;   std::string info_value_2; 
+      		std::string info_title_3;   std::string info_value_3;
+      	
 };
 
 EnergizerModule* energizerModuleGenerator();

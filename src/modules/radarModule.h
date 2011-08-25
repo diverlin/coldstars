@@ -20,23 +20,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef RADARMODULE_H
 #define RADARMODULE_H
 
-
 class RadarModule : public CommonForModules
 {
-   public:
-      int subtype_id;
-      int radius_add;
+   	public:
+      		RadarModule(TextureOb* _pTo_texOb, int _radius_add);
+      		~RadarModule();
+      		
+      		int getRadiusAdd() const;
 
-      // INFO 
-      std::string info_title_0;
-      std::string info_title_1;   std::string info_value_1;
-      std::string info_title_2;   std::string info_value_2; 
-
-      RadarModule(TextureOb* _pTo_texOb);
-      ~RadarModule();
-
-      void activation(RadarEquipment* _pTo_radar_item);
-      void updateInfo();
+      		void updateInfo();
+      		
+      	private:
+      		int radius_add;
+      		
+      	      	// INFO 
+      		std::string info_title_0;
+      		std::string info_title_1;   std::string info_value_1;
+      		std::string info_title_2;   std::string info_value_2; 
+      		
 };
 
 RadarModule* radarModuleGenerator();

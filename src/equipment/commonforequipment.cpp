@@ -22,9 +22,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 CommonForEquipment :: CommonForEquipment()
 {}
 
-void CommonForEquipment :: CommonForEquipment_init(TextureOb* _pTo_itemTexOb, int _modules_num_max, int _mass, int _condition_max, int _deterioration_rate)
+void CommonForEquipment :: CommonForEquipment_init(int _subtype_id, 
+						   TextureOb* _pTo_itemTexOb, 
+						   int _modules_num_max, 
+						   int _mass, 
+						   int _condition_max, 
+						   int _deterioration_rate)
 {
     type_id = EQUIPMENT_ID;
+    subtype_id = _subtype_id;
     
     slot = NULL;
     
@@ -58,6 +64,11 @@ void CommonForEquipment :: CommonForEquipment_init(TextureOb* _pTo_itemTexOb, in
     price = 0;
 }
 
+
+int CommonForEquipment :: getType()    const { return type_id; }
+int CommonForEquipment :: getSubType() const { return subtype_id; }
+        	
+        	
 void CommonForEquipment :: bindSlot(ItemSlot* _slot)
 {
                 slot = _slot;
@@ -120,5 +131,5 @@ void CommonForEquipment :: _renderFrames(Rect slot_rect)
 
 void CommonForEquipment :: renderInfo(Rect slot_rect)
 {  
-     drawInfoIn2Column(&info_title_pList, &info_value_pList, slot_rect.center_x, slot_rect.center_y, 0, 0);
+     	drawInfoIn2Column(&info_title_pList, &info_value_pList, slot_rect.center_x, slot_rect.center_y, 0, 0);
 }
