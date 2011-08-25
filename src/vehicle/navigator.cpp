@@ -125,8 +125,8 @@ bool Navigator :: updateTargetCoords()
 {
     	if (ship->is_FOLLOWING_PLANET == true)
     	{
-        	target_pos_x = target_planet->orbit_vector_x[target_planet->step+TURN_TIME];   
-       	 	target_pos_y = target_planet->orbit_vector_y[target_planet->step+TURN_TIME];  
+        	target_pos_x = target_planet->orbit_vector_x[target_planet->orbit_it+TURN_TIME];   
+       	 	target_pos_y = target_planet->orbit_vector_y[target_planet->orbit_it+TURN_TIME];  
         	ship->calculateDetaledWayToPosition();
 
         	return true;

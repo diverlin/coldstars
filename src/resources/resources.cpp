@@ -24,6 +24,8 @@ void loadResources()
 {
 pTo_SPHERE_MESH = new ObjMeshInstance("data/obj/sphere/planet.obj");
 
+pTo_DEFORMED_SPHERE_MESH = new ObjMeshInstance("data/obj/sphere_deformed/planet.obj");
+
 //g_model.import("data/obj/sphere/planet.obj");
 //g_model.normalize();
 

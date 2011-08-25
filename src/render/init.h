@@ -40,5 +40,8 @@ void initGL(int width, int height)
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
+  
+      //glShadeModel(GL_SMOOTH);
+      //glDisable(GL_LIGHTING);  
 }   
 

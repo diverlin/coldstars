@@ -149,8 +149,19 @@ void World :: generateNumPlanets(StarSystem* _pTo_starsystem, int planet_per_sys
 
         TextureOb* pTo_planetTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.planet_texOb_pList); 
         TextureOb* pTo_atmosphereTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.atmosphere_texOb_pList); 
-        Planet *pTo_planet = new Planet(subtype_id, pTo_planetTexOb, pTo_atmosphereTexOb, pTo_SPHERE_MESH, planet_size, 0, 0, orbit_radius, speed);
-
+        
+        Planet *pTo_planet = new Planet(subtype_id, 
+        				pTo_planetTexOb, 
+        				pTo_atmosphereTexOb, 
+        				pTo_SPHERE_MESH, 
+        				planet_size, 
+        				0, 
+        				0, 
+        				orbit_radius, 
+        				orbit_radius,
+        				0,
+        				speed);
+	 
         _pTo_starsystem->addPlanet(pTo_planet);
     }
 }

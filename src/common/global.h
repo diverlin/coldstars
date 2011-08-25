@@ -54,6 +54,7 @@ sf::Event g_EVENT;
 
 class ObjMeshInstance;
 ObjMeshInstance* pTo_SPHERE_MESH; 
+ObjMeshInstance* pTo_DEFORMED_SPHERE_MESH;
 
 //ModelOBJ            g_model;
 
