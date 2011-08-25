@@ -99,8 +99,8 @@ bool ItemSlot :: insertItem(RocketEquipment* item)
 	{
 		rocket_equipment = item;
     
-        	item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;  
+        	item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();  
 	
 		is_EQUIPED = true; 
    
@@ -127,8 +127,8 @@ bool ItemSlot :: insertItem(LazerEquipment* item)
 	{	
 		lazer_equipment = item;
     
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	          
 		is_EQUIPED = true;
     
@@ -154,8 +154,8 @@ bool ItemSlot :: insertItem(RadarEquipment* item)
 	{	
 		radar_equipment = item;
     
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	 
 		is_EQUIPED = true; 
     
@@ -181,8 +181,8 @@ bool ItemSlot :: insertItem(DriveEquipment* item)
 	{	
 		drive_equipment = item;
    
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	  
 		is_EQUIPED = true; 
     
@@ -209,8 +209,8 @@ bool ItemSlot :: insertItem(BakEquipment* item)
 	{
 		bak_equipment = item;
     
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	 
 		is_EQUIPED = true; 
     
@@ -237,8 +237,8 @@ bool ItemSlot :: insertItem(EnergizerEquipment* item)
 	{
 		energizer_equipment = item;
     
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	 
 		is_EQUIPED = true; 
     
@@ -264,8 +264,8 @@ bool ItemSlot :: insertItem(ProtectorEquipment* item)
 	{
 		protector_equipment = item;
     
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	
 		is_EQUIPED = true; 
     
@@ -291,8 +291,8 @@ bool ItemSlot :: insertItem(DroidEquipment* item)
 	{
 		droid_equipment = item;
 
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	  
 		is_EQUIPED = true; 
     
@@ -318,8 +318,8 @@ bool ItemSlot :: insertItem(FreezerEquipment* item)
 	{
 		freezer_equipment = item;
 
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	 
 		is_EQUIPED = true; 
     
@@ -345,8 +345,8 @@ bool ItemSlot :: insertItem(ScanerEquipment* item)
 	{
 		scaner_equipment = item;
 
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	
 		is_EQUIPED = true; 
     
@@ -372,8 +372,8 @@ bool ItemSlot :: insertItem(GrappleEquipment* item)
 	{
 		grapple_equipment = item;
 
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	
 		is_EQUIPED = true; 
     
@@ -401,8 +401,8 @@ bool ItemSlot :: insertItem(RocketModule* item)
 		rocket_module = item;
 		rocket_module->rect.setNewCenter(rect.center_x, rect.center_y);
 
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	
 		is_EQUIPED = true;
 		return true;
@@ -418,8 +418,8 @@ bool ItemSlot :: insertItem(LazerModule* item)
 		lazer_module = item;
 		lazer_module->rect.setNewCenter(rect.center_x, rect.center_y);
 
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	
 		is_EQUIPED = true;
 		return true;
@@ -435,8 +435,8 @@ bool ItemSlot :: insertItem(RadarModule* item)
 		radar_module = item;
 		radar_module->rect.setNewCenter(rect.center_x, rect.center_y);
 
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	
 		is_EQUIPED = true;
 
@@ -454,8 +454,8 @@ bool ItemSlot :: insertItem(DriveModule* item)
 		drive_module = item;
 		drive_module->rect.setNewCenter(rect.center_x, rect.center_y);
 
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	 
 		is_EQUIPED = true; 
 		return true;
@@ -471,8 +471,8 @@ bool ItemSlot :: insertItem(BakModule* item)
 		bak_module = item;
 		bak_module->rect.setNewCenter(rect.center_x, rect.center_y);
 
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	
 		is_EQUIPED = true;
 		return true;
@@ -488,8 +488,8 @@ bool ItemSlot :: insertItem(EnergizerModule* item)
 		energizer_module = item;
 		energizer_module->rect.setNewCenter(rect.center_x, rect.center_y);
 
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	
 		is_EQUIPED = true;
 		return true;
@@ -505,8 +505,8 @@ bool ItemSlot :: insertItem(ProtectorModule* item)
 		protector_module = item;
 		protector_module->rect.setNewCenter(rect.center_x, rect.center_y);
 
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	  
 		is_EQUIPED = true;
 		return true;
@@ -522,8 +522,8 @@ bool ItemSlot :: insertItem(DroidModule* item)
 		droid_module = item;
 		droid_module->rect.setNewCenter(rect.center_x, rect.center_y);
 
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	 
 		is_EQUIPED = true;
 		return true;
@@ -539,8 +539,8 @@ bool ItemSlot :: insertItem(FreezerModule* item)
 		freezer_module = item;
 		freezer_module->rect.setNewCenter(rect.center_x, rect.center_y);
     
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	 
 		is_EQUIPED = true;
 		return true;
@@ -556,8 +556,8 @@ bool ItemSlot :: insertItem(ScanerModule* item)
 		scaner_module = item;
 		scaner_module->rect.setNewCenter(rect.center_x, rect.center_y);
 
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 	
 		is_EQUIPED = true;
 		return true;
@@ -573,8 +573,8 @@ bool ItemSlot :: insertItem(GrappleModule* item)
 		grapple_module = item;
 		grapple_module->rect.setNewCenter(rect.center_x, rect.center_y);
         
-		item_type_id    = item->type_id;
-		item_subtype_id = item->subtype_id;
+		item_type_id    = item->getType();
+		item_subtype_id = item->getSubType();
 		is_EQUIPED = true; 
 		return true;
 	}
@@ -825,9 +825,9 @@ int ItemSlot :: getItemRadius()
 	{
 		//items 
 		if (item_subtype_id == LAZER_ID)
-			return lazer_equipment->radius;
+			return lazer_equipment->getRadius();
 		if (item_subtype_id == ROCKET_ID)
-			return rocket_equipment->radius;
+			return rocket_equipment->getRadius();
         }
 }
 
@@ -838,9 +838,9 @@ int ItemSlot :: getItemDamage()
 	{
 		//items 
 		if (item_subtype_id == LAZER_ID)
-			return lazer_equipment->damage;
+			return lazer_equipment->getDamage();
 		if (item_subtype_id == ROCKET_ID)
-			return rocket_equipment->damage;
+			return rocket_equipment->getDamage();
         }
 }
 
@@ -935,54 +935,119 @@ void ItemSlot :: renderItemInfo()
                 //}
                 // items
 		if (item_subtype_id == LAZER_ID)
+		{	lazer_equipment->updateInfo();
         		lazer_equipment->renderInfo(rect);
+		}
 		if (item_subtype_id == ROCKET_ID)
+		{	
+			rocket_equipment->updateInfo();
 			rocket_equipment->renderInfo(rect);
+		}
 		if (item_subtype_id == RADAR_ID)
+		{
+			radar_equipment->updateInfo();
 			radar_equipment->renderInfo(rect);
+		}
 		if (item_subtype_id == DRIVE_ID)
+		{
+			drive_equipment->updateInfo();
 			drive_equipment->renderInfo(rect);
+		}
 		if (item_subtype_id == BAK_ID)
+		{
+			bak_equipment->updateInfo();
 			bak_equipment->renderInfo(rect);
+		}
 		if (item_subtype_id == ENERGIZER_ID)
+		{
+			energizer_equipment->updateInfo();
 			energizer_equipment->renderInfo(rect);
+		}
 		if (item_subtype_id == PROTECTOR_ID)
-			protector_equipment->renderInfo(rect);   
+		{
+			protector_equipment->updateInfo();
+			protector_equipment->renderInfo(rect);
+		}
 		if (item_subtype_id == DROID_ID)
+		{
+			droid_equipment->updateInfo();
 			droid_equipment->renderInfo(rect);
+		}
 		if (item_subtype_id == FREEZER_ID)
+		{
+			freezer_equipment->updateInfo();
 			freezer_equipment->renderInfo(rect);
+		}
 		if (item_subtype_id == SCANER_ID)
+		{
+			scaner_equipment->updateInfo();
 			scaner_equipment->renderInfo(rect);
+		}
 		if (item_subtype_id == GRAPPLE_ID)
+		{
+			grapple_equipment->updateInfo();
 			grapple_equipment->renderInfo(rect);
+		}
      	}
      		
      	if (item_type_id == MODULE_ID)
      	{
 		// _modules
 		if (item_subtype_id == LAZER_ID)
+		{
+			lazer_module->updateInfo();
 			lazer_module->renderInfo(rect);
+		}
 		if (item_subtype_id == ROCKET_ID)
+		{
+			rocket_module->updateInfo();
 			rocket_module->renderInfo(rect);
+		}
 		if (item_subtype_id == RADAR_ID)
+		{
+			radar_module->updateInfo();
 			radar_module->renderInfo(rect);
+		}
 		if (item_subtype_id == DRIVE_ID)
+		{
+			drive_module->updateInfo();
 			drive_module->renderInfo(rect);
+		}
 		if (item_subtype_id == BAK_ID)
+		{
+			bak_module->updateInfo();
 			bak_module->renderInfo(rect);
+		}
 		if (item_subtype_id == ENERGIZER_ID)
+		{
+			energizer_module->updateInfo();
 			energizer_module->renderInfo(rect);
+		}
         	if (item_subtype_id == PROTECTOR_ID)
-			protector_module->renderInfo(rect);   
+		{
+			protector_module->updateInfo();
+			protector_module->renderInfo(rect);
+		}
 		if (item_subtype_id == DROID_ID)
+		{
+			droid_module->updateInfo();
 			droid_module->renderInfo(rect);
+		}
 		if (item_subtype_id == FREEZER_ID)
+		{
+			freezer_module->updateInfo();
 			freezer_module->renderInfo(rect);
+		}
 		if (item_subtype_id == SCANER_ID)
+		{
+			scaner_module->updateInfo();
 			scaner_module->renderInfo(rect);
+		}
 		if (item_subtype_id == GRAPPLE_ID)
+		{
+			grapple_module->updateInfo();
 			grapple_module->renderInfo(rect);
+		}
 	}
 }
 

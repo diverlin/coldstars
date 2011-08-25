@@ -59,7 +59,7 @@ void Container :: packRocketEquipment(RocketEquipment* pTo_item)
 {
     pTo_rocketEquipment = pTo_item;
     
-    item_subtype_id = pTo_item->subtype_id;    // ROCKET_ID
+    item_subtype_id = pTo_item->getSubType();    
     item_id         = pTo_item->id;    
 
     mass = (*pTo_item).mass;
@@ -72,7 +72,7 @@ void Container :: packLazerEquipment(LazerEquipment* pTo_item)
 {
     pTo_lazerEquipment = pTo_item;
     
-    item_subtype_id = pTo_item->subtype_id;    
+    item_subtype_id = pTo_item->getSubType();    
     item_id         = pTo_item->id;    
 
     mass = (*pTo_item).mass; 
@@ -85,7 +85,7 @@ void Container :: packRadarEquipment(RadarEquipment* pTo_item)
 {
     pTo_radarEquipment = pTo_item;
     
-    item_subtype_id = pTo_item->subtype_id;
+    item_subtype_id = pTo_item->getSubType();
     item_id         = pTo_item->id;    
 
     mass = (*pTo_item).mass;     
@@ -98,7 +98,7 @@ void Container :: packDriveEquipment(DriveEquipment* pTo_item)
 {
     pTo_driveEquipment = pTo_item;
     
-    item_subtype_id = pTo_item->subtype_id;    
+    item_subtype_id = pTo_item->getSubType();    
     item_id         = pTo_item->id;    
 
     mass = (*pTo_item).mass;       
@@ -111,7 +111,7 @@ void Container :: packBakEquipment(BakEquipment* pTo_item)
 {
     pTo_bakEquipment = pTo_item;
     
-    item_subtype_id = pTo_item->subtype_id;    
+    item_subtype_id = pTo_item->getSubType();    
     item_id         = pTo_item->id;    
 
     mass = (*pTo_item).mass;      
@@ -124,7 +124,7 @@ void Container :: packEnergizerEquipment(EnergizerEquipment* pTo_item)
 {
     pTo_energizerEquipment = pTo_item;
     
-    item_subtype_id = pTo_item->subtype_id;   
+    item_subtype_id = pTo_item->getSubType();   
     item_id         = pTo_item->id;    
 
     mass = pTo_item->mass;      
@@ -137,7 +137,7 @@ void Container :: packProtectorEquipment(ProtectorEquipment* pTo_item)
 {
     pTo_protectorEquipment = pTo_item;
     
-    item_subtype_id = pTo_item->subtype_id;   
+    item_subtype_id = pTo_item->getSubType();   
     item_id         = pTo_item->id;    
 
     mass = pTo_item->mass;      
@@ -150,7 +150,7 @@ void Container :: packDroidEquipment(DroidEquipment* pTo_item)
 {
     pTo_droidEquipment = pTo_item;
     
-    item_subtype_id = pTo_item->subtype_id; 
+    item_subtype_id = pTo_item->getSubType(); 
     item_id         = pTo_item->id;    
 
     mass = pTo_item->mass;    
@@ -163,7 +163,7 @@ void Container :: packFreezerEquipment(FreezerEquipment* pTo_item)
 {
     pTo_freezerEquipment = pTo_item;
     
-    item_subtype_id = pTo_item->subtype_id;    
+    item_subtype_id = pTo_item->getSubType();    
     item_id         = pTo_item->id;    
 
     mass = (*pTo_item).mass; 
@@ -176,7 +176,7 @@ void Container :: packScanerEquipment(ScanerEquipment* pTo_item)
 {
     pTo_scanerEquipment = pTo_item;
     
-    item_subtype_id = pTo_item->subtype_id;   
+    item_subtype_id = pTo_item->getSubType();   
     item_id         = pTo_item->id;    
 
     mass = (*pTo_item).mass;      
@@ -189,7 +189,7 @@ void Container :: packGrappleEquipment(GrappleEquipment* pTo_item)
 {
     pTo_grappleEquipment = pTo_item;
     
-    item_subtype_id = pTo_item->subtype_id;    // GRAPPLE_ID
+    item_subtype_id = pTo_item->getSubType();    
     item_id         = pTo_item->id;    
 
     mass = (*pTo_item).mass;  

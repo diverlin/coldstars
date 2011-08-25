@@ -20,46 +20,41 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "protectorModule.h"
 
 
-
-ProtectorModule :: ProtectorModule(TextureOb* _pTo_texOb)
+ProtectorModule :: ProtectorModule(TextureOb* _pTo_texOb, int _protection_add)
 {
-     CommonForModules_init(_pTo_texOb);
-     subtype_id = PROTECTOR_ID;
+     	CommonForModules_init(PROTECTOR_ID, _pTo_texOb);
 
-     protection_add = 0;
+     	protection_add = _protection_add;
 }
 
 ProtectorModule :: ~ProtectorModule ()
 {}
 
-void ProtectorModule :: activation(ProtectorEquipment* _pTo_protector_item)
-{
-     _pTo_protector_item->protection_add += protection_add;
-     _pTo_protector_item->updatePropetries();
-}
 
+int ProtectorModule :: getProtectionAdd() const { return protection_add; }
+		
+		
 void ProtectorModule :: updateInfo()
 {
-    info_title_pList.clear();
-    info_value_pList.clear();
+    	info_title_pList.clear();
+    	info_value_pList.clear();
 
-    info_title_0 = "protector module";
-    info_title_1 = "protection_add:";  info_value_1 = int2str(protection_add);
-    info_title_2 = "mass:";            info_value_2 = int2str(mass);
+    	info_title_0 = "protector module";
+    	info_title_1 = "protection_add:";  info_value_1 = int2str(protection_add);
+    	info_title_2 = "mass:";            info_value_2 = int2str(mass);
 
-    info_title_pList.push_back(&info_title_0);  
-    info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
-    info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
+    	info_title_pList.push_back(&info_title_0);  
+    	info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
+    	info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
 }
 
 
 ProtectorModule* protectorModuleGenerator()
 {
-    TextureOb* pTo_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
+    	TextureOb* pTo_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
+    	int _protection_add = randIntInRange(PROTECTOR_MODULE_PROTECTION_MIN, PROTECTOR_MODULE_PROTECTION_MAX);
 
-    ProtectorModule* pTo_protector_module = new ProtectorModule(pTo_texOb);
-    pTo_protector_module->protection_add = randIntInRange(PROTECTOR_MODULE_PROTECTION_MIN, PROTECTOR_MODULE_PROTECTION_MAX);
+    	ProtectorModule* _protector_module = new ProtectorModule(pTo_texOb, _protection_add);
 
-    pTo_protector_module->updateInfo();
-    return pTo_protector_module;
+    	return _protector_module;
 }

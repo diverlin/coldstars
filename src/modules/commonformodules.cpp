@@ -23,30 +23,37 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 CommonForModules :: CommonForModules()
 {}
 
-void CommonForModules :: CommonForModules_init(TextureOb* _pTo_texOb)
+void CommonForModules :: CommonForModules_init(int _subtype_id, TextureOb* _pTo_texOb)
 {
-     pTo_texOb = _pTo_texOb;
+     	pTo_texOb = _pTo_texOb;
 
-     if (pTo_texOb->is_animated == false)
-        pToFunc_render = &CommonForModules::_renderFrame;
-     else
-        pToFunc_render = &CommonForModules::_renderFrames;
+     	if (pTo_texOb->is_animated == false)
+        	pToFunc_render = &CommonForModules::_renderFrame;
+     	else
+        	pToFunc_render = &CommonForModules::_renderFrames;
 
-     w = pTo_texOb->w;
-     h = pTo_texOb->h;
-     texture = pTo_texOb->texture; 
+     	w = pTo_texOb->w;
+     	h = pTo_texOb->h;
           
-     id = g_ENTITY_ID_GENERATOR.returnNextId(); 
+     	id = g_ENTITY_ID_GENERATOR.returnNextId(); 
           
-     type_id = MODULE_ID;
+     	type_id = MODULE_ID;
+     	subtype_id = _subtype_id;
           
-     mass = 1;
+     	mass = 1;
 }
 
 
-CommonForModules  :: ~CommonForModules ()
+CommonForModules :: ~CommonForModules ()
 {}
 
+
+int CommonForModules :: getId()      const { return id; }
+int CommonForModules :: getType()    const { return type_id; }
+int CommonForModules :: getSubType() const { return subtype_id; }
+    		
+TextureOb* CommonForModules  :: getTexOb() const { return pTo_texOb; }
+      		
 
 void CommonForModules :: render(Rect slot_rect)
 {
@@ -56,7 +63,7 @@ void CommonForModules :: render(Rect slot_rect)
 
 void CommonForModules :: _renderFrame(Rect slot_rect)
 {
-     drawTexturedRect(texture, slot_rect, -1);   
+     drawTexturedRect(pTo_texOb->texture, slot_rect, -1);   
 }
 
 void CommonForModules :: _renderFrames(Rect slot_rect)

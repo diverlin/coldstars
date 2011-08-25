@@ -19,44 +19,38 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "droidModule.h"
 
-DroidModule :: DroidModule(TextureOb* _pTo_texOb)
+DroidModule :: DroidModule(TextureOb* _pTo_texOb, int _repair_add)
 {
-     CommonForModules_init(_pTo_texOb);
-     subtype_id = DROID_ID;
+     	CommonForModules_init(DROID_ID, _pTo_texOb);
 
-     repair_add = 0;
+     	repair_add = _repair_add;
 }
 
 DroidModule :: ~DroidModule()
 {}
 
-void DroidModule :: activation(DroidEquipment* _pTo_droid_item)
-{
-     _pTo_droid_item->repair_add += repair_add;
-     _pTo_droid_item->updatePropetries();
-}
-
+int DroidModule :: getRepairAdd() const { return repair_add; }
+		
 void DroidModule :: updateInfo()
 {
-    info_title_pList.clear();
-    info_value_pList.clear();
+    	info_title_pList.clear();
+    	info_value_pList.clear();
 
-    info_title_0 = "droid module";
-    info_title_1 = "repair_add:";     info_value_1 = int2str(repair_add);
-    info_title_2 = "mass:";           info_value_2 = int2str(mass);
+    	info_title_0 = "droid module";
+    	info_title_1 = "repair_add:";     info_value_1 = int2str(repair_add);
+    	info_title_2 = "mass:";           info_value_2 = int2str(mass);
 
-    info_title_pList.push_back(&info_title_0);  
-    info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
-    info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
+    	info_title_pList.push_back(&info_title_0);  
+    	info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
+    	info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
 }
 
 DroidModule* droidModuleGenerator()
 {
-    TextureOb* pTo_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
+    	TextureOb* pTo_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
+    	int _repair_add = randIntInRange(DROID_MODULE_REPAIR_MIN, DROID_MODULE_REPAIR_MAX);
 
-    DroidModule* pTo_droid_module = new DroidModule(pTo_texOb);
-    pTo_droid_module->repair_add = randIntInRange(DROID_MODULE_REPAIR_MIN, DROID_MODULE_REPAIR_MAX);
+    	DroidModule* pTo_droid_module = new DroidModule(pTo_texOb, _repair_add);
 
-    pTo_droid_module->updateInfo();
-    return pTo_droid_module;
+    	return pTo_droid_module;
 }

@@ -23,33 +23,42 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class ProtectorEquipment  : public CommonForEquipment
 {
-public:
-      int protection_orig;
-      int protection_add;
-      int protection;
+	public:
+		ProtectorEquipment(); 
+      		ProtectorEquipment(TextureOb* _pTo_itemTexOb, 
+      				   int _protection_orig, 
+      				   int _modules_num_max, 
+      				   int _mass, 
+      				   int _condition_max,
+      				   int _deterioration_rate);
+      				    
+      		~ProtectorEquipment();
 
-      VEC_pProtectorModule_type modules_pList;
+		int getProtection() const;
+		
+      		void countPrice();
+      		void updatePropetries();
+      		void updateOwnerPropetries();
 
-      // INFO 
-      std::string info_title_0;
-      std::string info_title_1;   std::string info_value_1;
-      std::string info_title_2;   std::string info_value_2; 
-      std::string info_title_3;   std::string info_value_3;
-      std::string info_title_4;   std::string info_value_4;
-      std::string info_title_5;   std::string info_value_5;
-
-      ProtectorEquipment(); 
-      ProtectorEquipment(TextureOb* _pTo_itemTexOb, int _protection_orig, int _modules_num_max, int _mass, int _condition_max, int _deterioration_rate);
-      ~ProtectorEquipment();
-
-      void countPrice();
-      void updatePropetries();
-      void updateOwnerPropetries();
-
-      void updateInfo();
-           std::string returnProtectionStr();
+      		void updateInfo();
+           		std::string returnProtectionStr();
            
-      bool insertModule(ProtectorModule* pTo_protectorModule);
+      		bool insertModule(ProtectorModule* pTo_protectorModule);
+      		
+      	private:
+      	      	int protection_orig;
+      		int protection_add;
+      		int protection;
+      		
+      		VEC_pProtectorModule_type modules_pList;
+
+      		// INFO 
+      		std::string info_title_0;
+      		std::string info_title_1;   std::string info_value_1;
+      		std::string info_title_2;   std::string info_value_2; 
+      		std::string info_title_3;   std::string info_value_3;
+      		std::string info_title_4;   std::string info_value_4;
+      		std::string info_title_5;   std::string info_value_5;      	
 
 };
 

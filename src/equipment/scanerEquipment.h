@@ -23,33 +23,42 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class ScanerEquipment : public CommonForEquipment
 {
-  public:
-    int scan_orig;
-    int scan_add;
-    int scan;
+  	public:
+    		ScanerEquipment();
+    		ScanerEquipment(TextureOb* _pTo_itemTexOb, 
+    				int _scan_orig, 
+    				int _modules_num_max, 
+    				int _mass, 
+    				int _condition_max, 
+    				int _deterioration_rate);
+    				
+    		~ScanerEquipment();
 
-    VEC_pScanerModule_type modules_pList; 
-     
-    // INFO 
-    std::string info_title_0;
-    std::string info_title_1;   std::string info_value_1;
-    std::string info_title_2;   std::string info_value_2; 
-    std::string info_title_3;   std::string info_value_3;
-    std::string info_title_4;   std::string info_value_4;
-    std::string info_title_5;   std::string info_value_5;
+		int getScan() const;
 
-    ScanerEquipment();
-    ScanerEquipment(TextureOb* _pTo_itemTexOb, int _scan_orig, int _modules_num_max, int _mass, int _condition_max, int _deterioration_rate);
-    ~ScanerEquipment();
+    		void countPrice();
+    		void updatePropetries();
+    		void updateOwnerPropetries();
 
-    void countPrice();
-    void updatePropetries();
-    void updateOwnerPropetries();
-
-    void updateInfo();
-         std::string returnScanStr();
+    		void updateInfo();
+         		std::string returnScanStr();
          
-    bool insertModule(ScanerModule* pTo_scanerModule);
+    		bool insertModule(ScanerModule* pTo_scanerModule);
+    		
+    	private:
+    		int scan_orig;
+    		int scan_add;
+    		int scan;
+    		
+    	    	VEC_pScanerModule_type modules_pList; 
+     
+    		// INFO 
+    		std::string info_title_0;
+    		std::string info_title_1;   std::string info_value_1;
+    		std::string info_title_2;   std::string info_value_2; 
+    		std::string info_title_3;   std::string info_value_3;
+    		std::string info_title_4;   std::string info_value_4;
+    		std::string info_title_5;   std::string info_value_5;
 
 };
 

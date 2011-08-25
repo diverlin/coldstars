@@ -22,27 +22,30 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class GrappleModule : public CommonForModules
 {
-    public:     
-       int subtype_id;
+    	public:     
+      		GrappleModule(TextureOb* _pTo_texOb, int _strength_add, int _radius_add, int _speed_add, int _maxNumItem_add);
+      		~GrappleModule();
 
-       int strength_add;
-       int radius_add;
-       int speed_add;
-       int maxNumItem_add;
+		int getStrengthAdd()   const;
+		int getRadiusAdd()     const;
+		int getSpeedAdd()      const;
+		int getMaxNumItemAdd() const;
 
-      // INFO 
-      std::string info_title_0;
-      std::string info_title_1;   std::string info_value_1;
-      std::string info_title_2;   std::string info_value_2; 
-      std::string info_title_3;   std::string info_value_3;
-      std::string info_title_4;   std::string info_value_4;
-      std::string info_title_5;   std::string info_value_5;
-
-      GrappleModule(TextureOb* _pTo_texOb);
-      ~GrappleModule();
-
-      void activation(GrappleEquipment* _pTo_grapple_item);
-      void updateInfo();
+      		void updateInfo();
+      		
+      	private: 
+      	       	int strength_add;
+       		int radius_add;
+       		int speed_add;
+       		int maxNumItem_add;
+       		
+      	      	// INFO 
+      		std::string info_title_0;
+      		std::string info_title_1;   std::string info_value_1;
+      		std::string info_title_2;   std::string info_value_2; 
+      		std::string info_title_3;   std::string info_value_3;
+      		std::string info_title_4;   std::string info_value_4;
+      		std::string info_title_5;   std::string info_value_5;
 };
 
 

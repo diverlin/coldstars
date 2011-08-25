@@ -20,47 +20,41 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "bakModule.h"
 
 
-BakModule :: BakModule(TextureOb* _pTo_texOb)
+BakModule :: BakModule(TextureOb* _pTo_texOb, int _fuel_max_add)
 {
-    CommonForModules_init(_pTo_texOb);
-    subtype_id = BAK_ID;
+    	CommonForModules_init(BAK_ID, _pTo_texOb);
 
-    fuel_max_add = 0;
+    	fuel_max_add = _fuel_max_add;
 }
 
 BakModule :: ~BakModule()
 {}
 
-void BakModule :: activation(BakEquipment* _pTo_bak_item)
-{
-    _pTo_bak_item->fuel_max_add += fuel_max_add;
-    _pTo_bak_item->updatePropetries();
-}
+int BakModule :: getFuelMaxAdd() const { return fuel_max_add; }
+ 	
 
 void BakModule :: updateInfo()
 {
-    info_title_pList.clear();
-    info_value_pList.clear();
+    	info_title_pList.clear();
+    	info_value_pList.clear();
 
-    info_title_0 = "bak module";
-    info_title_1 = "fuel_max_add:";     info_value_1 = int2str(fuel_max_add);
+    	info_title_0 = "bak module";
+    	info_title_1 = "fuel_max_add:";     info_value_1 = int2str(fuel_max_add);
 
-    info_title_2 = "mass:";     info_value_2 = int2str(mass);
+    	info_title_2 = "mass:";     info_value_2 = int2str(mass);
 
-    info_title_pList.push_back(&info_title_0);  
-    info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
-    info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
+    	info_title_pList.push_back(&info_title_0);  
+    	info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
+    	info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
 }
 
 
 
 BakModule* bakModuleGenerator()
 {
-    TextureOb* pTo_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
-
-    BakModule* pTo_bak_module = new BakModule(pTo_texOb);
-    pTo_bak_module->fuel_max_add = randIntInRange(BAK_MODULE_FUEL_MIN, BAK_MODULE_FUEL_MAX);
-
-    pTo_bak_module->updateInfo();
-    return pTo_bak_module;
+    	TextureOb* _texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
+    	int _fuel_max_add = randIntInRange(BAK_MODULE_FUEL_MIN, BAK_MODULE_FUEL_MAX);
+    	
+    	BakModule* _bak_module = new BakModule(_texOb, _fuel_max_add);
+    	return _bak_module;
 }

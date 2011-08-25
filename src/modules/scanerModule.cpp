@@ -20,47 +20,42 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "scanerModule.h"
 
 
-ScanerModule :: ScanerModule(TextureOb* _pTo_texOb)
+ScanerModule :: ScanerModule(TextureOb* _pTo_texOb, int _scan_add)
 {
-    CommonForModules_init(_pTo_texOb);
-    subtype_id = SCANER_ID;
+    	CommonForModules_init(SCANER_ID, _pTo_texOb);
 
-    scan_add = 0;
+    	scan_add = _scan_add;
 }
 
 
 ScanerModule :: ~ScanerModule ()
 {}
 
-void ScanerModule :: activation(ScanerEquipment* _pTo_scaner_item)
-{
-    _pTo_scaner_item->scan_add += scan_add;
-    _pTo_scaner_item->updatePropetries();
-}
 
+int ScanerModule :: getScanAdd() const { return scan_add; }
+		
+		
 void ScanerModule :: updateInfo()
 {
-    info_title_pList.clear();
-    info_value_pList.clear();
+    	info_title_pList.clear();
+    	info_value_pList.clear();
 
-    info_title_0 = "scaner module";
-    info_title_1 = "scan_add:";       info_value_1 = int2str(scan_add);
-    info_title_2 = "mass:";           info_value_2 = int2str(mass);
+    	info_title_0 = "scaner module";
+    	info_title_1 = "scan_add:";       info_value_1 = int2str(scan_add);
+    	info_title_2 = "mass:";           info_value_2 = int2str(mass);
 
 
-    info_title_pList.push_back(&info_title_0);  
-    info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
-    info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
+    	info_title_pList.push_back(&info_title_0);  
+    	info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
+    	info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
 }
 
 
 ScanerModule* scanerModuleGenerator()
 {
-    TextureOb* pTo_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
+    	TextureOb* pTo_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
+    	int _scan_add = randIntInRange(SCANER_MODULE_SCAN_MIN, SCANER_MODULE_SCAN_MAX);
 
-    ScanerModule* pTo_scaner_module = new ScanerModule(pTo_texOb);
-    pTo_scaner_module->scan_add = randIntInRange(SCANER_MODULE_SCAN_MIN, SCANER_MODULE_SCAN_MAX);
-
-    pTo_scaner_module->updateInfo();
-    return pTo_scaner_module;
+    	ScanerModule* _scaner_module = new ScanerModule(pTo_texOb, _scan_add);
+    	return _scaner_module;
 }

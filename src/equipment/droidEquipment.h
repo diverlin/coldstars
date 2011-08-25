@@ -23,33 +23,37 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class DroidEquipment : public CommonForEquipment
 {
-   public: 
-      int repair_orig;
-      int repair_add;
-      int repair;
+   	public: 
+      		DroidEquipment();
+     		DroidEquipment(TextureOb* _pTo_itemTexOb, int _repair_orig, int _modules_num_max, int _mass, int _condition_max, int _deterioration_rate);
+      		~DroidEquipment();
 
-      VEC_pDroidModule_type modules_pList;
+		int getRepair() const;
+		
+      		void countPrice();
+      		void updatePropetries();
+      		void updateOwnerPropetries();
 
-      // INFO 
-      std::string info_title_0;
-      std::string info_title_1;   std::string info_value_1;
-      std::string info_title_2;   std::string info_value_2; 
-      std::string info_title_3;   std::string info_value_3;
-      std::string info_title_4;   std::string info_value_4;
-      std::string info_title_5;   std::string info_value_5;
-
-      DroidEquipment();
-      DroidEquipment(TextureOb* _pTo_itemTexOb, int _repair_orig, int _modules_num_max, int _mass, int _condition_max, int _deterioration_rate);
-      ~DroidEquipment();
-
-      void countPrice();
-      void updatePropetries();
-      void updateOwnerPropetries();
-
-      void updateInfo();
-           std::string returnRepairStr();
+      		void updateInfo();
+           		std::string returnRepairStr();
            
-      bool insertModule(DroidModule* pTo_droidModule);
+      		bool insertModule(DroidModule* pTo_droidModule);
+      		
+      	private:
+      		int repair_orig;
+      		int repair_add;
+      		int repair;
+
+
+      	      	VEC_pDroidModule_type modules_pList;
+
+      		// INFO 
+      		std::string info_title_0;
+      		std::string info_title_1;   std::string info_value_1;
+      		std::string info_title_2;   std::string info_value_2; 
+      		std::string info_title_3;   std::string info_value_3;
+      		std::string info_title_4;   std::string info_value_4;
+      		std::string info_title_5;   std::string info_value_5;
 
 };
 

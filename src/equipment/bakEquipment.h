@@ -22,35 +22,40 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class BakEquipment : public CommonForEquipment
 {
-public:
-     int fuel_max_orig;
-     int fuel_max_add;
-     int fuel_max;
-     int fuel;
+	public:
+   		BakEquipment();
+     		BakEquipment(TextureOb* _pTo_itemTexOb, int _fuel_max_orig, int _modules_num_max, int _mass, int _condition_max, int _deterioration_rate);
+     		~BakEquipment();
 
-     VEC_pBakModule_type modules_pList; 
-     
-     // INFO 
-     std::string info_title_0;
-     std::string info_title_1;   std::string info_value_1;
-     std::string info_title_2;   std::string info_value_2; 
-     std::string info_title_3;   std::string info_value_3;
-     std::string info_title_4;   std::string info_value_4;
-     std::string info_title_5;   std::string info_value_5;
+		int getFuel() const;
+		
+		void fill();
+		
+     		void countPrice();
+     		void updatePropetries();
+     		void updateOwnerPropetries();
 
-
-     BakEquipment();
-     BakEquipment(TextureOb* _pTo_itemTexOb, int _fuel_max_orig, int _modules_num_max, int _mass, int _condition_max, int _deterioration_rate);
-     ~BakEquipment();
-
-     void countPrice();
-     void updatePropetries();
-     void updateOwnerPropetries();
-
-     void updateInfo();
-          std::string returnFuelStr();
+     		void updateInfo();
+          		std::string returnFuelStr();
           
-     bool insertModule(BakModule* pTo_bakModule);
+     		bool insertModule(BakModule* pTo_bakModule);
+     		
+     	private:
+     	     	int fuel_max_orig;
+     		int fuel_max_add;
+     		int fuel_max;
+     		int fuel;
+     		
+     	     	VEC_pBakModule_type modules_pList; 
+     	     		
+     	     	// INFO 
+     		std::string info_title_0;
+     		std::string info_title_1;   std::string info_value_1;
+    		std::string info_title_2;   std::string info_value_2; 
+     		std::string info_title_3;   std::string info_value_3;
+     		std::string info_title_4;   std::string info_value_4;
+     		std::string info_title_5;   std::string info_value_5;
+     	
 };
 
 BakEquipment* bakEquipmentGenerator(int race_id, int revision_id = -1);

@@ -893,7 +893,7 @@ void Ship :: updateDriveAbility()
      	{
         	if (drive_slot.getDriveEquipment()->condition > 0)  
         	{
-           		float val = (drive_slot.getDriveEquipment()->speed - mass/70);
+           		float val = (drive_slot.getDriveEquipment()->getSpeed() - mass/70);
            		if (val > 0)
            		{ 
               			speed = val;
@@ -915,7 +915,7 @@ void Ship :: updateRadarAbility()
    	{
       		if (radar_slot.getRadarEquipment()->condition > 0)  
       		{
-          		radius = radar_slot.getRadarEquipment()->radius;
+          		radius = radar_slot.getRadarEquipment()->getRadius();
           		ableTo.RADAR = true;
       		}
        		else
@@ -938,10 +938,10 @@ void Ship :: updateJumpAbility()
            		if (bak_slot.getEquipedStatus() == true)
               			if (bak_slot.getBakEquipment()->condition > 0)
               			{
-                 			if (drive_slot.getDriveEquipment()->hyper > bak_slot.getBakEquipment()->fuel)
-                    				hyper = drive_slot.getDriveEquipment()->hyper;
+                 			if (drive_slot.getDriveEquipment()->getHyper() > bak_slot.getBakEquipment()->getFuel())
+                    				hyper = drive_slot.getDriveEquipment()->getHyper();
                  			else
-                    				hyper = bak_slot.getBakEquipment()->fuel;
+                    				hyper = bak_slot.getBakEquipment()->getFuel();
 
                  			ableTo.HJUMP = true;
               			}    
@@ -957,7 +957,7 @@ void Ship :: updateEnergyAbility()
      	{
         	if (energizer_slot.getEnergizerEquipment()->condition > 0)
         	{
-           		energy = energizer_slot.getEnergizerEquipment()->energy;
+           		energy = energizer_slot.getEnergizerEquipment()->getEnergy();
            		ableTo.ENERGIZE = true;
         	}
         }
@@ -974,7 +974,7 @@ void Ship :: updateProtectionAbility()
      	{
         	if (protector_slot.getProtectorEquipment()->condition > 0)
         	{
-           		protection = protector_slot.getProtectorEquipment()->protection + korpus_protection;
+           		protection = protector_slot.getProtectorEquipment()->getProtection() + korpus_protection;
            		ableTo.PROTECT = true;
         	}
      	}   
@@ -992,7 +992,7 @@ void Ship :: updateRepairAbility()
      	{
         	if (droid_slot.getDroidEquipment()->condition > 0)
         	{
-            		repair = droid_slot.getDroidEquipment()->repair;
+            		repair = droid_slot.getDroidEquipment()->getRepair();
             		ableTo.REPAIR = true;
         	}
         }
@@ -1008,7 +1008,7 @@ void Ship :: updateFreezeAbility()
      	{
         	if (freezer_slot.getFreezerEquipment()->condition > 0)
         	{
-           		freeze = freezer_slot.getFreezerEquipment()->freeze;
+           		freeze = freezer_slot.getFreezerEquipment()->getFreeze();
            		ableTo.FREEZE = true;
         	}
         }
@@ -1037,7 +1037,7 @@ void Ship :: updateScanAbility()
      	{
         	if (scaner_slot.getScanerEquipment()->condition > 0)
         	{
-           		scan = scaner_slot.getScanerEquipment()->scan;
+           		scan = scaner_slot.getScanerEquipment()->getScan();
            		ableTo.SCAN = true;
         	}
         }
@@ -1053,7 +1053,7 @@ void Ship :: setMaxArmor()
 void Ship :: setMaxFuel()
 {
      	if (bak_slot.getEquipedStatus() == true)
-        	bak_slot.getBakEquipment()->fuel = bak_slot.getBakEquipment()->fuel_max;
+        	bak_slot.getBakEquipment()->fill();
 }
 
 
@@ -1197,11 +1197,10 @@ void Ship :: updateInfo()
 std::string Ship :: returnProtectionStr()
 {
     	if (ableTo.PROTECT == true)
-       		return int2str(protector_slot.getProtectorEquipment()->protection) + '+' + int2str(korpus_protection);
+       		return int2str(protector_slot.getProtectorEquipment()->getProtection()) + '+' + int2str(korpus_protection);
     	else
        		return int2str(korpus_protection);
 }
-
 
 
 

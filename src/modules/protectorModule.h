@@ -22,21 +22,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class ProtectorModule : public CommonForModules
 {
-   public:
-       int subtype_id;
+   	public:
+       		ProtectorModule(TextureOb* _pTo_texOb, int _protection_add);
+       		~ProtectorModule();
 
-       int protection_add;
+		int getProtectionAdd() const;
 
-      // INFO 
-      std::string info_title_0;
-      std::string info_title_1;   std::string info_value_1;
-      std::string info_title_2;   std::string info_value_2; 
-
-       ProtectorModule(TextureOb* _pTo_texOb);
-       ~ProtectorModule();
-
-       void activation(ProtectorEquipment* _pTo_protector_item);
-       void updateInfo();
+       		void updateInfo();
+       		
+       	private:
+       	     	int protection_add;
+       	     		
+       	      	// INFO 
+      		std::string info_title_0;
+      		std::string info_title_1;   std::string info_value_1;
+      		std::string info_title_2;   std::string info_value_2; 
 };
 
 ProtectorModule* protectorModuleGenerator();

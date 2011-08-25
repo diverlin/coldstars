@@ -23,24 +23,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class LazerModule : public CommonForModules
 {
-    public:
-        int subtype_id;
+    	public:
+	       	LazerModule(TextureOb* _pTo_texOb, int _damage_add, int _radius_add);
+        	~LazerModule();
 
-        int damage_add;
-        int radius_add;
+		int getDamageAdd() const;
+		int getRadiusAdd() const;
+		
+        	void updateInfo();
+        	
+        private:
+                int damage_add;
+        	int radius_add;
 
-        // INFO 
-        std::string info_title_0;
-        std::string info_title_1;   std::string info_value_1;
-        std::string info_title_2;   std::string info_value_2; 
-        std::string info_title_3;   std::string info_value_3;
-
-
-        LazerModule(TextureOb* _pTo_texOb);
-        ~LazerModule();
-
-        void activation(LazerEquipment* _pTo_lazer_item);
-        void updateInfo();
+        	// INFO 
+        	std::string info_title_0;
+        	std::string info_title_1;   std::string info_value_1;
+        	std::string info_title_2;   std::string info_value_2; 
+        	std::string info_title_3;   std::string info_value_3;
+        
 };
 
 

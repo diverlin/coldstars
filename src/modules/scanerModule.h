@@ -22,20 +22,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class ScanerModule : public CommonForModules
 {
-    public:
-       int subtype_id;
-       int scan_add;
+    	public:
+       		ScanerModule(TextureOb* _pTo_texOb, int _scan_add);
+       		~ScanerModule();
 
-       // INFO 
-       std::string info_title_0;
-       std::string info_title_1;   std::string info_value_1;
-       std::string info_title_2;   std::string info_value_2; 
+		int getScanAdd() const;
+		
+       		void updateInfo();
+       		
+       	private:
+       		int scan_add;
 
-       ScanerModule(TextureOb* _pTo_texOb);
-       ~ScanerModule();
-
-       void activation(ScanerEquipment* _pTo_scaner_item);
-       void updateInfo();
+       		// INFO 
+       		std::string info_title_0;
+       		std::string info_title_1;   std::string info_value_1;
+       		std::string info_title_2;   std::string info_value_2;        	
 };
 
 ScanerModule* scanerModuleGenerator();

@@ -23,40 +23,44 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class EnergizerEquipment : public CommonForEquipment
 {
-public:
-      int energy_max_orig;
-      int energy_max_add;
-      int energy_max;
-      int energy;
-
-      int restoration_orig;
-      int restoration_add;
-      int restoration;
-
-      VEC_pEnergizerModule_type modules_pList;
-
-      // INFO 
-      std::string info_title_0;
-      std::string info_title_1;   std::string info_value_1;
-      std::string info_title_2;   std::string info_value_2; 
-      std::string info_title_3;   std::string info_value_3;
-      std::string info_title_4;   std::string info_value_4;
-      std::string info_title_5;   std::string info_value_5;
-      std::string info_title_6;   std::string info_value_6;
-
-      EnergizerEquipment();
-      EnergizerEquipment(TextureOb* _pTo_itemTexOb, int _energy_max_orig, int _restoration_orig, int _modules_num_max, int _mass, int _condition_max, int _deterioration_rate);
-      ~EnergizerEquipment();
+	public:
+      		EnergizerEquipment();
+      		EnergizerEquipment(TextureOb* _pTo_itemTexOb, int _energy_max_orig, int _restoration_orig, int _modules_num_max, int _mass, int _condition_max, int _deterioration_rate);
+      		~EnergizerEquipment();
       
-      void countPrice();
-      void updatePropetries();
-      void updateOwnerPropetries();
+      		int getEnergy() const;
+      		
+      		void countPrice();
+      		void updatePropetries();
+      		void updateOwnerPropetries();
 
-      void updateInfo();
-           std::string returnEnergyStr();
-           std::string returnRestorationStr();
+      		void updateInfo();
+           		std::string returnEnergyStr();
+           		std::string returnRestorationStr();
 
-      bool insertModule(EnergizerModule* pTo_energizerModule);
+      		bool insertModule(EnergizerModule* pTo_energizerModule);
+      		
+      	private:
+      		int energy_max_orig;
+      		int energy_max_add;
+      		int energy_max;
+      		int energy;
+
+      		int restoration_orig;
+      		int restoration_add;
+      		int restoration;
+
+      	      	VEC_pEnergizerModule_type modules_pList;
+
+      		// INFO 
+      		std::string info_title_0;
+      		std::string info_title_1;   std::string info_value_1;
+      		std::string info_title_2;   std::string info_value_2; 
+      		std::string info_title_3;   std::string info_value_3;
+      		std::string info_title_4;   std::string info_value_4;
+      		std::string info_title_5;   std::string info_value_5;
+      		std::string info_title_6;   std::string info_value_6;
+      	
 };
 
 EnergizerEquipment* energizerEquipmentGenerator(int race_id, int revision_id = -1);

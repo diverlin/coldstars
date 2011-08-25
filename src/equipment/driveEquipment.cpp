@@ -22,11 +22,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 DriveEquipment :: DriveEquipment()
 {}
 
-DriveEquipment :: DriveEquipment(TextureOb* _pTo_itemTexOb, int _speed_orig, int _hyper_orig, int _modules_num_max, int _mass, int _condition_max, int _deterioration_rate)
+DriveEquipment :: DriveEquipment(TextureOb* _pTo_itemTexOb, 
+				 int _speed_orig, 
+				 int _hyper_orig, 
+				 int _modules_num_max, 
+				 int _mass, 
+				 int _condition_max, 
+				 int _deterioration_rate)
 {
-     CommonForEquipment_init(_pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
-
-     subtype_id = DRIVE_ID;
+     CommonForEquipment_init(DRIVE_ID, _pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
 
      speed_orig = _speed_orig;
      speed_add  = 0;
@@ -35,6 +39,11 @@ DriveEquipment :: DriveEquipment(TextureOb* _pTo_itemTexOb, int _speed_orig, int
      hyper_add  = 0;
 
 
+     updatePropetries();
+     countPrice();
+     
+     
+     // particle system settings
      pTo_particleTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.particles_texOb_pList); ;
      particle_num = 5;
      particle_size = 6;
@@ -42,15 +51,16 @@ DriveEquipment :: DriveEquipment(TextureOb* _pTo_itemTexOb, int _speed_orig, int
      particle_alpha_start = 1.0;
      particle_alpha_end = 0.0;
      particle_d_alpha = 0.05;
- 
-     updatePropetries();
-     countPrice();
-     updateInfo();
 }
 
 DriveEquipment :: ~DriveEquipment()
 {}
 
+
+int DriveEquipment :: getSpeed() const { return speed; }
+int DriveEquipment :: getHyper() const { return hyper; }
+		
+		
 void DriveEquipment :: updatePropetries()
 {
      speed = speed_orig + speed_add;
@@ -120,22 +130,21 @@ void DriveEquipment :: updateInfo()
 }
 
 
-bool DriveEquipment :: insertModule(DriveModule* pTo_driveModule)
+bool DriveEquipment :: insertModule(DriveModule* _drive_module)
 {
-    if (modules_pList.size() < modules_num_max)
-    {
-        speed_add += pTo_driveModule->speed_add;
-        hyper_add += pTo_driveModule->hyper_add;
+    	if (modules_pList.size() < modules_num_max)
+    	{
+        	speed_add += _drive_module->getSpeedAdd();
+        	hyper_add += _drive_module->getHyperAdd();
      
-        updatePropetries();
-        updateInfo();     // ??
+        	updatePropetries();
          
-        texOb_modules_pList.push_back(pTo_driveModule->pTo_texOb);
-        modules_pList.push_back(pTo_driveModule);
-        return true;
-    }
-    else    
-        return false;
+        	texOb_modules_pList.push_back(_drive_module->getTexOb());
+        	modules_pList.push_back(_drive_module);
+        	return true;
+    	}
+    	else    
+        	return false;
 } 
 
 

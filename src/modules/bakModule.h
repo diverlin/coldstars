@@ -23,20 +23,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class BakModule : public CommonForModules
 {
-   public:
-      int subtype_id;
-      int fuel_max_add;
-      
-      // INFO 
-      std::string info_title_0;
-      std::string info_title_1;   std::string info_value_1;
-      std::string info_title_2;   std::string info_value_2; 
-
-      BakModule(TextureOb* _pTo_texOb);
-      ~BakModule();
+   	public:
+     		BakModule(TextureOb* _pTo_texOb, int _fuel_max_add);
+      		~BakModule();
  
-      void activation(BakEquipment* pTo_bak_item);
-      void updateInfo();
+ 		int getFuelMaxAdd() const;
+ 		
+      		void updateInfo();
+      		
+      	private:
+      		int fuel_max_add;
+      		
+      	      	// INFO 
+      		std::string info_title_0;
+      		std::string info_title_1;   std::string info_value_1;
+      		std::string info_title_2;   std::string info_value_2; 
 };
 
 
