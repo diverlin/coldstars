@@ -575,6 +575,11 @@ glTranslatef(-g_SCROLL_COORD_X, -g_SCROLL_COORD_Y, 0.0);    // camera
     		{ 
        			visible_PLANET_pList[i]->render_NEW(); 
     		}
+    		
+    		for(unsigned int i = 0; i < visible_ASTEROID_pList.size(); i++)
+    		{ 
+       			visible_ASTEROID_pList[i]->render_NEW(); 
+    		}
 
     	glDisable(GL_DEPTH_TEST);
 glDepthMask(false); 
@@ -590,10 +595,6 @@ glDepthMask(false);
         	visible_CONTAINER_pList[i]->render2D(); 
     	} 	 
            
-    	for(unsigned int i = 0; i < visible_ASTEROID_pList.size(); i++)
-    	{ 
-       		visible_ASTEROID_pList[i]->render2D(); 
-    	}
 
     	for(unsigned int i = 0; i < visible_SHIP_pList.size(); i++)
     	{ 
@@ -730,6 +731,10 @@ void StarSystem :: renderEntities_OLD()
        		visible_PLANET_pList[i]->render_OLD(); 
     	}
 
+    	for(unsigned int i = 0; i < visible_ASTEROID_pList.size(); i++)
+    	{ 
+       		visible_ASTEROID_pList[i]->render_NEW(); 
+    	}
 
     	glDisable(GL_DEPTH_TEST);
     	glEnable(GL_BLEND);
@@ -743,11 +748,6 @@ void StarSystem :: renderEntities_OLD()
         	visible_CONTAINER_pList[i]->render2D(); 
     	} 	 
            
-    	for(unsigned int i = 0; i < visible_ASTEROID_pList.size(); i++)
-    	{ 
-       		visible_ASTEROID_pList[i]->render2D(); 
-    	}
-
     	for(unsigned int i = 0; i < visible_SHIP_pList.size(); i++)
     	{ 
        		visible_SHIP_pList[i]->renderInSpace(); 
@@ -886,21 +886,31 @@ void StarSystem :: asteroidManager(int num)
 
 void StarSystem :: addAsteroid()
 {
-    float tmp_size = 50;
-    float tmp_orbit_center_x = 0;
-    float tmp_orbit_center_y = 0;
-    int tmp_radius_A = randIntInRange(300, 1200);
-    int tmp_radius_B = randIntInRange(300, 1200);
-    float tmp_orbitPhiInDegree = randIntInRange(0, 360);
-    float tmp_speed = 0.1;
+    TextureOb* _texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.asteroid_texOb_pList); 
+    
+    float _size = 10;
+    float _orbit_center_x = 0;
+    float _orbit_center_y = 0;
+    int _radius_A = randIntInRange(300, 1200);
+    int _radius_B = randIntInRange(300, 1200);
+    float _orbit_phi_inD = randIntInRange(0, 360);
+    float _speed = 0.1;
 
-    TextureOb* pTo_aTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.asteroid_texOb_pList); 
-    Asteroid *pA = new Asteroid(pTo_aTexOb, this, tmp_size, tmp_orbit_center_x, tmp_orbit_center_y, tmp_radius_A, tmp_radius_B, tmp_orbitPhiInDegree, tmp_speed);
+    Asteroid *pA = new Asteroid(_texOb,
+    				pTo_DEFORMED_SPHERE_MESH,
+    				_size, 
+    				_orbit_center_x, 
+    				_orbit_center_y, 
+    				_radius_A, 
+    				_radius_B, 
+    				_orbit_phi_inD, 
+    				_speed);
+    	
+    				
     pA->update_inSpace_inDynamic_FALSE();
+    
     ASTEROID_pList.push_back(pA);
-
-    //printf("___NEW___ Asteroid, asteroid_id/asteroid_ss_id = %i/%i\n", (*pA).id, id);
-    //printf("len Asteroid_pList = %i , ss_id = %i\n", Asteroid_pList.size(), id);
+    pA->starsystem = this;
 }
     
 
@@ -1448,7 +1458,7 @@ bool StarSystem :: removeNpc(int _id, int _race_id, int _subtype_id)
 
 bool StarSystem  :: addPlanet(Planet* _pTo_planet)
 {
-     _pTo_planet->pTo_starsystem = this;  // ???
+     _pTo_planet->starsystem = this;  // ???
 
      PLANET_pList.push_back(_pTo_planet);
      return true;

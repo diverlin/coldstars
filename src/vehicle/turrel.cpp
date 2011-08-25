@@ -189,7 +189,7 @@ bool Turrel :: isTargetOnTheSameStarSystem()
            return false;
 
      if (target_type_id == ASTEROID_ID)
-        if (target_asteroid->pTo_starsystem == slot->getShip()->pTo_starsystem)
+        if (target_asteroid->starsystem == slot->getShip()->pTo_starsystem)
            return true;
         else
            return false;

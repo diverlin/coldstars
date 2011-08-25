@@ -20,40 +20,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef PLANET_H
 #define PLANET_H
 
-class Planet
+class Planet : public CommonForPlanet
 {
   public:
     int id;
     int type_id, subtype_id;
 
-    TextureOb* pTo_texOb;
+
     TextureOb* pTo_atmosphereTexOb;
 
-    StarSystem* pTo_starsystem;
-    Points points;
-    ObjMeshInstance* pTo_mesh; 
-    GLuint texture;
-    
-    float orbit_center_x;
-    float orbit_center_y;
-    int radius;
-    float speed;    
-    float orbit_fi;
+  
  
-    int step;  
-    float angle_x;
-    float angle_y;
-    float angle_z;
-        
-    float scale;
-    float pos_z;
-
-    // !!!!
-    float rate;                                            
-    int w, h;
-    int collision_radius; 
-    // !!!!
-    
 
     // INFO 
     std::string info_title_0;
@@ -63,16 +40,23 @@ class Planet
     VEC_pString_type info_title_pList;        
     VEC_pString_type info_value_pList;  
     // 
-
-    VEC_float_type orbit_vector_x;
-    VEC_float_type orbit_vector_y;
-    int len_orbit_array;
-    
+  
 
     Kosmoport* pTo_kosmoport;
     Land*      pTo_land;
  
-    Planet(int _subtype_id, TextureOb* _pTo_texOb, TextureOb* _pTo_atmoshereTexOb, ObjMeshInstance* _pTo_mesh, float _size, float _orbit_center_x, float _orbit_center_y, int _radius, float _speed);
+    Planet(int _subtype_id, 
+		 TextureOb* _pTo_texOb, 
+		 TextureOb* _pTo_atmoshereTexOb, 
+		 ObjMeshInstance* _pTo_mesh, 
+		 float _size, 
+		 float _orbit_center_x, 
+		 float _orbit_center_y, 
+		 int _radius_A, 
+		 int _radius_B, 
+		 int _orbit_phi_inD,
+		 float _speed);
+    	   
     ~Planet();
 
     void createKosmoport();
@@ -83,14 +67,8 @@ class Planet
     bool removeShipById(int _id);
     bool removeNpcById(int _id);
 
-    void detailedOrbitFormation();
-
     void update_inSpace_inDynamic();
-         void updatePosition();
     void update_inSpace_inStatic();
-
-    void render_NEW();
-    void render_OLD();
 
     void updateInfo();
     void renderInfo();

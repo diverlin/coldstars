@@ -19,71 +19,70 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "asteroid.h"
 
-
-Asteroid :: Asteroid(TextureOb* _pTo_texOb, StarSystem* _pTo_starsystem, float _size, float _orbit_center_x, float _orbit_center_y, int _radius_A, int _radius_B, float _orbitPhiInDegree, float _speed)
-{ 
-      id = g_ENTITY_ID_GENERATOR.returnNextId();
-      
-      is_alive = true;
-      is_dying = false;
-      is_explosed = false;
-      
-      dying_time = 50;
-
-      type_id = ASTEROID_ID;
-
-      pTo_starsystem = _pTo_starsystem;
-      pTo_texOb      = _pTo_texOb;
-            
-      texture = (*pTo_texOb).texture;
-      w = (*pTo_texOb).w;
-      h = (*pTo_texOb).h;
-      updateWHRenderConstants();
-      size = returnObjectSize(w, h);
-
-
-      orbit_center_x = _orbit_center_x;
-      orbit_center_y = _orbit_center_y;
-      radius_A       = _radius_A;
-      radius_B       = _radius_B;
-      orbitPhiInDegree  = _orbitPhiInDegree;
-      speed          = _speed;    
-     
-      pos_z          = -500.0f;
-
-      angle_x        = 0.0;
-      angle_y        = 0.0;
-      angle_z        = 0.0;
-      d_angle_z      = randIntInRange(10, 100)*0.01;
-
-
-
-      
-      //lMesh = LoadObjMesh("asteroid.obj");
-      //lMesh.createGlList();
-      
-      //////
-      points = Points();
-
-      points.initCenterPoint();
-      points.addCenterPoint();
-      //////
-      
-      detailedEllipceOrbitFormation();
-     
-      armor = 10;
-      mass  = randIntInRange(10, 30);
-}
-    
- 
-Asteroid :: ~Asteroid()
+CommonForPlanet :: CommonForPlanet()
 {}
-    
-   
-void Asteroid :: detailedEllipceOrbitFormation()
+
+
+CommonForPlanet :: ~CommonForPlanet()
+{}
+
+
+void CommonForPlanet :: CommonForPlanet_init(TextureOb*       _texOb, 
+    	   				     ObjMeshInstance* _mesh, 
+    	   				     float _size, 
+    	   			             float _orbit_center_x, 
+    	   			             float _orbit_center_y, 
+    	   			             int _radius_A,
+    	   				     int _radius_B, 
+    	   				     float _orbit_phi_inD,
+    	   			             float _speed)
+{  
+	starsystem = NULL;
+        texOb = _texOb;
+        mesh  = _mesh; 
+      
+      	orbit_center_x = _orbit_center_x;
+      	orbit_center_y = _orbit_center_y;
+      	radius_A       = _radius_A;
+      	radius_B       = _radius_B;
+      	orbit_phi_inD  = _orbit_phi_inD;
+      	speed          = _speed;    
+     
+      	pos_z          = -500.0f;
+
+        angle_x        = randIntInRange(10, 40);
+        angle_y        = randIntInRange(10, 40);
+      	angle_z        = 0.0;
+      	d_angle_z      = randIntInRange(10, 100)*0.01;
+      
+
+        orbit_it       = 0;
+     	scale = _size;
+      
+        // !!!!
+        float rate = 5.4;                                            
+        w = rate * scale;
+        h = rate * scale;
+        collision_radius = (w + h)/2; 
+        // !!!!
+                
+        //////
+	points = Points();
+
+	points.initCenterPoint();
+	points.addCenterPoint();
+	//////
+      
+       	detailedEllipceOrbitFormation();
+       	
+       	      updatePosition(); 
+}
+
+
+void CommonForPlanet :: detailedEllipceOrbitFormation()
 {   
      float d_angleInRad = speed / 57.295779;
-     float orbitPhiInRad = orbitPhiInDegree * PI/180;
+     float orbitPhiInRad = orbit_phi_inD * PI/180;
      for(float angleInRad = 0; angleInRad < 2*PI; angleInRad += d_angleInRad) 
      { 
          float new_coord_x = orbit_center_x + radius_A * cos(angleInRad) * cos(orbitPhiInRad) - radius_B * sin(angleInRad) * sin(orbitPhiInRad);
@@ -95,15 +94,141 @@ void Asteroid :: detailedEllipceOrbitFormation()
          orbit_it = randIntInRange(1, orbit_len);
      }
 }    
-        
 
-void Asteroid :: updateWHRenderConstants()
+
+void CommonForPlanet :: updatePosition()
+{   
+     if (orbit_it < orbit_len)
+     { 
+        points.setCenter(orbit_vector_x[orbit_it], orbit_vector_y[orbit_it]);
+        orbit_it++;
+     }
+     else
+        orbit_it = 0;
+}    
+
+
+
+
+void CommonForPlanet :: render_NEW()
 {
-     minus_half_w = -w/2;
-     minus_half_h = -h/2;
-     plus_half_w  =  w/2;
-     plus_half_h  =  h/2;
+     glUseProgram(g_LIGHT_PROGRAM);
+     //printProgramInfoLog(g_LIGHT_PROGRAM);
+
+     //if (glGetUniformLocation(g_LIGHT_PROGRAM, "lightPos") == -1)
+         //printf("shader lightPos fail\n"); 
+     //if (glGetUniformLocation(g_LIGHT_PROGRAM, "eyePos") == -1)
+         //printf("shader eyePos fail\n"); 
+     //if (glGetUniformLocation(g_LIGHT_PROGRAM, "Texture_0") == -1)
+         //printf("shader Texture_0 fail\n"); 
+
+     glUniform4f(glGetUniformLocation(g_LIGHT_PROGRAM, "lightPos"), -g_SCROLL_COORD_X, -g_SCROLL_COORD_Y, -200.0, 0.0);
+     glUniform4f(glGetUniformLocation(g_LIGHT_PROGRAM, "eyePos"), -g_SCROLL_COORD_X, -g_SCROLL_COORD_Y, -200.0, 0.0);
+
+     glActiveTexture(GL_TEXTURE0);
+     glBindTexture(GL_TEXTURE_2D, texOb->texture);
+     glUniform1i(glGetUniformLocation(g_LIGHT_PROGRAM, "Texture_0"), 0);
+      
+     glPushMatrix();
+       glTranslatef(points.center_x, points.center_y, pos_z);
+       glScalef(scale, scale, scale); 
+       glRotatef(-angle_x, 1.0, 0.0, 0.0); 
+       glRotatef(-angle_y, 0.0, 1.0, 0.0); 
+       glRotatef(-angle_z, 0.0, 0.0, 1.0); 
+
+       glCallList(mesh->glList);
+       //g_model.render(); 
+       angle_z += 0.6; 
+     glPopMatrix();
+
+     //// render atmosphere
+     //glEnable(GL_BLEND);
+     //glActiveTexture(GL_TEXTURE0);                                
+     //glBindTexture(GL_TEXTURE_2D, pTo_atmosphereTexOb->texture);
+     //glUniform1i(glGetUniformLocation(g_LIGHT_PROGRAM, "Texture_0"), 0);
+
+     //glPushMatrix();
+       //glTranslatef(points.center_x, points.center_y, pos_z);
+       //glScalef(scale*1.05, scale*1.05, scale*1.05);
+       //glRotatef(angle_x, 1.0, 0.0, 0.0); 
+       //glRotatef(angle_y, 0.0, 1.0, 0.0); 
+       //glRotatef(angle_z, 0.0, 0.0, 1.0); 
+
+       //glCallList(pTo_mesh->glList);
+       ////g_model.render(); 
+     //glPopMatrix();
+     //glDisable(GL_BLEND);
+     //// render atmosphere
+
+     glUseProgram(0);
+     glActiveTexture(GL_TEXTURE0);
 }
+
+void CommonForPlanet :: render_OLD()
+{   
+     glPushMatrix();
+       glBindTexture(GL_TEXTURE_2D, texOb->texture);   
+       glTranslatef(points.center_x, points.center_y, pos_z);
+       glScalef(scale, scale, scale); 
+       glRotatef(angle_x, 1.0, 0.0, 0.0); 
+       glRotatef(angle_y, 0.0, 1.0, 0.0); 
+       glRotatef(angle_z, 0.0, 0.0, 1.0); 
+
+       glCallList(mesh->glList);
+       angle_z += 0.6; 
+     glPopMatrix();
+}
+
+
+
+
+
+
+
+
+
+
+
+Asteroid :: Asteroid(TextureOb* _texOb,
+		     ObjMeshInstance* _mesh,
+		     float _size, 
+		     float _orbit_center_x, 
+		     float _orbit_center_y, 
+		     int _radius_A, 
+		     int _radius_B, 
+		     float _orbit_phi_inD, 
+		     float _speed)
+{ 
+      id = g_ENTITY_ID_GENERATOR.returnNextId();
+  
+       CommonForPlanet_init(_texOb, 
+    	   		    _mesh, 
+    	   	            _size, 
+    	   		    _orbit_center_x, 
+    	   		    _orbit_center_y, 
+    	   		    _radius_A,
+    	   		    _radius_B, 
+    	   		    _orbit_phi_inD,
+    	   		    _speed);
+    	   			                 
+      is_alive = true;
+      is_dying = false;
+      is_explosed = false;
+      
+      dying_time = 50;
+
+      type_id = ASTEROID_ID;
+
+      armor = 10;
+      mass  = randIntInRange(10, 30);
+}
+    
+ 
+Asteroid :: ~Asteroid()
+{}
+    
+   
+   
 
 void Asteroid :: hit_TRUE(int damage)
 {
@@ -139,17 +264,7 @@ void Asteroid :: update_inSpace_inDynamic_FALSE()
      updatePosition();  
 }
 
-void Asteroid :: updatePosition()
-{   
-     if (orbit_it < orbit_len)
-     { 
-        points.setCenter(orbit_vector_x[orbit_it], orbit_vector_y[orbit_it]);
-        orbit_it++;
-     }
-     else
-        orbit_it = 0;
-}    
-    
+  
     
 void Asteroid :: death_TRUE()
 {
@@ -157,8 +272,8 @@ void Asteroid :: death_TRUE()
 
      if (is_explosed == false)
      {   
-        pTo_starsystem->addExplosion(points.center_x, points.center_y, size);
-        pTo_starsystem->addNumMinerals(points.center_x, points.center_y, randIntInRange(1,4));
+        starsystem->addExplosion(points.center_x, points.center_y, scale/2);
+        starsystem->addNumMinerals(points.center_x, points.center_y, randIntInRange(1,4));
         //self.starsystem.screen_QUAKE_runtime_counter = 50
         //self.starsystem.screen_QUAKE_amlitudaDiv2 = 5
         is_explosed = true;
@@ -172,19 +287,10 @@ void Asteroid :: death_FALSE()
 
      if (is_explosed == false)
      {   
-        pTo_starsystem->addNumMinerals(points.center_x, points.center_y, randIntInRange(1,4));
+        starsystem->addNumMinerals(points.center_x, points.center_y, randIntInRange(1,4));
         is_explosed = true;
      }
 }
-
-
-void Asteroid :: render2D()
-{ 
-     glBindTexture(GL_TEXTURE_2D, texture);
-     drawDynamic(points.center_x, points.center_y, angle_z, minus_half_w, minus_half_h, plus_half_w, plus_half_h, pos_z);
-     angle_z += d_angle_z;
-}
-
 
 
 void Asteroid :: updateInfo()
@@ -195,7 +301,7 @@ void Asteroid :: updateInfo()
     info_title_0 = "ASTEROID";
 
     info_title_1 = "id/ss_id:";
-    info_value_1 = int2str(id) + " / " + int2str(pTo_starsystem->id);
+    info_value_1 = int2str(id) + " / " + int2str(starsystem->id);
     info_title_2 = "armor:";
     info_value_2 = int2str(armor);
     info_title_3 = "mass:";

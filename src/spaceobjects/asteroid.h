@@ -20,83 +20,120 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef ASTEROID_H
 #define ASTEROID_H
 
-
-class Asteroid
+class CommonForPlanet
 {
-        TextureOb* pTo_texOb;
-       public:
-        StarSystem* pTo_starsystem;
+	public:
+		TextureOb* texOb;
+
+    		Points points;
+    		ObjMeshInstance* mesh; 
+    
+              	StarSystem* starsystem;
+      
+      		float orbit_center_x;
+      		float orbit_center_y;
+      		int radius_A;
+      		int radius_B;
+      		float orbit_phi_inD;
+      		float speed;    
+     
+      		float pos_z;
+
+      		float angle_x;
+      		float angle_y;
+      		float angle_z;
+      		float d_angle_z;
+      
+                float scale;
                 
-        int type_id, id;
+                VEC_float_type orbit_vector_x;
+    		VEC_float_type orbit_vector_y;
+                int orbit_len;
+                int orbit_it; 
 
-        bool is_alive;
-        bool is_dying;
-        bool is_explosed;
+		// !!!!
+    		float rate;                                            
+    		int w, h;
+    		int collision_radius; 
+    		// !!!!
+    		
+    		CommonForPlanet();
+    		~CommonForPlanet();
+    		
+                   void CommonForPlanet_init(TextureOb*       _texOb, 
+    	   				     ObjMeshInstance* _mesh, 
+    	   				     float _size, 
+    	   			             float _orbit_center_x, 
+    	   			             float _orbit_center_y, 
+    	   			             int _radius_A,
+    	   				     int _radius_B, 
+    	   				     float _orbit_phi_inD,
+    	   			             float _speed);
+    		
+    		void detailedEllipceOrbitFormation();
+    		void updatePosition();
+    		
+    		void render_NEW();
+    		void render_OLD();
+};
+
+
+
+
+
+
+class Asteroid : public CommonForPlanet
+{
+	public:
+	       	int type_id, id;
+
+        	bool is_alive;
+        	bool is_dying;
+        	bool is_explosed;
        
-        int dying_time;
+       		int dying_time;
+                
+        	int armor;
+        	int mass;
+		
+		
+		Asteroid(TextureOb* _pTo_texOb,
+		         ObjMeshInstance* _mesh,
+		         float _size, 
+		         float _orbit_center_x, 
+		         float _orbit_center_y, 
+		         int _radius_A, 
+		         int _radius_B, 
+		         float _orbit_phi_inD, 
+		         float _speed);
+		     
+        	~Asteroid();
+
+
+        	void update_inSpace_inDynamic_TRUE();
+        	void update_inSpace_inDynamic_FALSE();             		
+
+        	void hit_TRUE(int damage);
+        	void hit_FALSE(int damage);
+        	
+        	void death_TRUE();
+        	void death_FALSE();
+
+        	void updateInfo();
+        	void renderInfo();
+        	
+        private:
+                VEC_pString_type info_title_pList;        
+        	VEC_pString_type info_value_pList;
+        	
+                // INFO 
+        	std::string info_title_0;
+        	std::string info_title_1;   std::string info_value_1;
+        	std::string info_title_2;   std::string info_value_2; 
+        	std::string info_title_3;   std::string info_value_3;
+        	std::string info_title_4;   std::string info_value_4;
+
         
-        Points points;
-        //LoadObjMesh lMesh; 
-        GLuint texture;
-    
-        float orbit_center_x;
-        float orbit_center_y;
-        int radius_A;
-        int radius_B;
-        float speed;    
-        float orbitPhiInDegree;
- 
-        int orbit_len;
-        int orbit_it; 
- 
-        float angle_x;
-        float angle_y;
-        float angle_z;
-        float d_angle_z;
-    
-        float scale;
-        float pos_z;
-
-        VEC_float_type orbit_vector_x;
-        VEC_float_type orbit_vector_y;
-        int len_orbit_array;
-
-        int w, h;
-        int minus_half_w, minus_half_h, plus_half_w, plus_half_h;
-        int size;
-        
-        int armor;
-        int mass;
-
-        // INFO 
-        std::string info_title_0;
-        std::string info_title_1;   std::string info_value_1;
-        std::string info_title_2;   std::string info_value_2; 
-        std::string info_title_3;   std::string info_value_3;
-        std::string info_title_4;   std::string info_value_4;
-        VEC_pString_type info_title_pList;        
-        VEC_pString_type info_value_pList;
-    public:
-
-        //Asteroid();
-        Asteroid(TextureOb* _pTo_texOb, StarSystem* _pTo_starsystem, float _size, float _orbit_center_x, float _orbit_center_y, int _radius_A, int _radius_B, float _orbitPhiInDegree, float _speed);
-        ~Asteroid();
-
-        void detailedEllipceOrbitFormation();
-        void update_inSpace_inDynamic_TRUE();
-        void update_inSpace_inDynamic_FALSE();
-             void updatePosition();
-
-        void updateWHRenderConstants();
-        void hit_TRUE(int damage);
-        void hit_FALSE(int damage);
-        void death_TRUE();
-        void death_FALSE();
-
-        void render2D();
-
-        void updateInfo();
-        void renderInfo();
 }; 
 
 #endif 
