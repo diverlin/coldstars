@@ -129,7 +129,7 @@ void CommonForEquipment :: _renderFrames(Rect slot_rect)
 
 
 
-void CommonForEquipment :: renderInfo(Rect slot_rect)
+void CommonForEquipment :: renderInfo(Rect slot_rect, float offset_x, float offset_y)
 {  
-     	drawInfoIn2Column(&info_title_pList, &info_value_pList, slot_rect.center_x, slot_rect.center_y, 0, 0);
+     	drawInfoIn2Column(&info_title_pList, &info_value_pList, slot_rect.center_x, slot_rect.center_y, offset_x, offset_y);
 }

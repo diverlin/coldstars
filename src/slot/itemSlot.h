@@ -105,7 +105,7 @@ class ItemSlot
 		void renderFrames(GLuint flash_tex);
        
 		void renderEquipedItem();
-		void renderItemInfo();
+		void renderItemInfo(float offset_x = 0, float offset_y = 0);
                 
                 bool interaction(int _x, int _y);
         

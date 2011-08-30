@@ -797,58 +797,58 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
 
 					if (pTo_CURSOR->pTo_otsec_slot->getItemSubType() == LAZER_ID)
 					{     
-                      				pTo_container->packLazerEquipment(pTo_CURSOR->pTo_otsec_slot->getLazerEquipment()); 
+                      				pTo_container->otsec_slot->insertItem(pTo_CURSOR->pTo_otsec_slot->getLazerEquipment()); 
                       				pTo_CURSOR->pTo_otsec_slot->removeItem();
                   			}
 					if (pTo_CURSOR->pTo_otsec_slot->getItemSubType() == ROCKET_ID)
 					{             
-						pTo_container->packRocketEquipment(pTo_CURSOR->pTo_otsec_slot->getRocketEquipment()); 
+						pTo_container->otsec_slot->insertItem(pTo_CURSOR->pTo_otsec_slot->getRocketEquipment()); 
 						pTo_CURSOR->pTo_otsec_slot->removeItem();  
 					}
 
 					if (pTo_CURSOR->pTo_otsec_slot->getItemSubType() == RADAR_ID)
 					{                      
-						pTo_container->packRadarEquipment(pTo_CURSOR->pTo_otsec_slot->getRadarEquipment()); 
+						pTo_container->otsec_slot->insertItem(pTo_CURSOR->pTo_otsec_slot->getRadarEquipment()); 
 						pTo_CURSOR->pTo_otsec_slot->removeItem();
 					}
 					if (pTo_CURSOR->pTo_otsec_slot->getItemSubType() == DRIVE_ID)
 					{               
-						pTo_container->packDriveEquipment(pTo_CURSOR->pTo_otsec_slot->getDriveEquipment()); 
+						pTo_container->otsec_slot->insertItem(pTo_CURSOR->pTo_otsec_slot->getDriveEquipment()); 
 						pTo_CURSOR->pTo_otsec_slot->removeItem(); 
 					}
 					if (pTo_CURSOR->pTo_otsec_slot->getItemSubType() == BAK_ID)
 					{                      
-						pTo_container->packBakEquipment(pTo_CURSOR->pTo_otsec_slot->getBakEquipment()); 
+						pTo_container->otsec_slot->insertItem(pTo_CURSOR->pTo_otsec_slot->getBakEquipment()); 
 						pTo_CURSOR->pTo_otsec_slot->removeItem();
 					}
 					if (pTo_CURSOR->pTo_otsec_slot->getItemSubType() == ENERGIZER_ID)
 					{       
-						pTo_container->packEnergizerEquipment(pTo_CURSOR->pTo_otsec_slot->getEnergizerEquipment()); 
+						pTo_container->otsec_slot->insertItem(pTo_CURSOR->pTo_otsec_slot->getEnergizerEquipment()); 
 						pTo_CURSOR->pTo_otsec_slot->removeItem();              
 					}
 					if (pTo_CURSOR->pTo_otsec_slot->getItemSubType() == PROTECTOR_ID)
 					{            
-						pTo_container->packProtectorEquipment(pTo_CURSOR->pTo_otsec_slot->getProtectorEquipment()); 
+						pTo_container->otsec_slot->insertItem(pTo_CURSOR->pTo_otsec_slot->getProtectorEquipment()); 
 						pTo_CURSOR->pTo_otsec_slot->removeItem();         
 					}
 					if (pTo_CURSOR->pTo_otsec_slot->getItemSubType() == DROID_ID)
 					{          
-						pTo_container->packDroidEquipment(pTo_CURSOR->pTo_otsec_slot->getDroidEquipment()); 
+						pTo_container->otsec_slot->insertItem(pTo_CURSOR->pTo_otsec_slot->getDroidEquipment()); 
 						pTo_CURSOR->pTo_otsec_slot->removeItem();          
 					}
 					if (pTo_CURSOR->pTo_otsec_slot->getItemSubType() == FREEZER_ID)
 					{                  
-						pTo_container->packFreezerEquipment(pTo_CURSOR->pTo_otsec_slot->getFreezerEquipment()); 
+						pTo_container->otsec_slot->insertItem(pTo_CURSOR->pTo_otsec_slot->getFreezerEquipment()); 
 						pTo_CURSOR->pTo_otsec_slot->removeItem();   
 					}
 					if (pTo_CURSOR->pTo_otsec_slot->getItemSubType() == SCANER_ID)
 					{      
-						pTo_container->packScanerEquipment(pTo_CURSOR->pTo_otsec_slot->getScanerEquipment()); 
+						pTo_container->otsec_slot->insertItem(pTo_CURSOR->pTo_otsec_slot->getScanerEquipment()); 
 						pTo_CURSOR->pTo_otsec_slot->removeItem();            
 					}
 					if (pTo_CURSOR->pTo_otsec_slot->getItemSubType() == GRAPPLE_ID)
 					{                     
-						pTo_container->packGrappleEquipment(pTo_CURSOR->pTo_otsec_slot->getGrappleEquipment()); 
+						pTo_container->otsec_slot->insertItem(pTo_CURSOR->pTo_otsec_slot->getGrappleEquipment()); 
 						pTo_CURSOR->pTo_otsec_slot->removeItem();
 					}
 				} 

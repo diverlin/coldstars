@@ -27,21 +27,11 @@ Container :: Container(TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float 
     id = g_ENTITY_ID_GENERATOR.returnNextId(); 
     type_id = CONTAINER_ID;
 
-    item_subtype_id = -1;
-    mass = -1;
+    mass = 1;
 
-    pTo_rocketEquipment      = NULL;
-    pTo_lazerEquipment       = NULL;
-    pTo_radarEquipment       = NULL;
-    pTo_driveEquipment       = NULL;
-    pTo_bakEquipment         = NULL;
-    pTo_energizerEquipment   = NULL;
-    pTo_protectorEquipment   = NULL;
-    pTo_droidEquipment       = NULL;
-    pTo_freezerEquipment     = NULL;
-    pTo_scanerEquipment      = NULL;
-    pTo_grappleEquipment     = NULL;
-
+    TextureOb* pTo_slotTexOb   = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.slot_texOb_pList);
+    otsec_slot = new ItemSlot(UNIVERSAL_SLOT_ID, NULL, pTo_slotTexOb, 0, 0);
+     
     
     armor = randIntInRange(1,6);
 
@@ -56,154 +46,10 @@ Container :: ~Container()
 {}
 
 
-void Container :: packRocketEquipment(RocketEquipment* pTo_item)
-{
-    pTo_rocketEquipment = pTo_item;
-    
-    item_subtype_id = pTo_item->getSubType();    
-    item_id         = pTo_item->id;    
-
-    mass = (*pTo_item).mass;
-
-    info_title_pList = pTo_item->info_title_pList;
-    info_value_pList = pTo_item->info_value_pList;
-}
-
-void Container :: packLazerEquipment(LazerEquipment* pTo_item)
-{
-    pTo_lazerEquipment = pTo_item;
-    
-    item_subtype_id = pTo_item->getSubType();    
-    item_id         = pTo_item->id;    
-
-    mass = (*pTo_item).mass; 
-
-    info_title_pList = pTo_item->info_title_pList;
-    info_value_pList = pTo_item->info_value_pList;
-}
-
-void Container :: packRadarEquipment(RadarEquipment* pTo_item)
-{
-    pTo_radarEquipment = pTo_item;
-    
-    item_subtype_id = pTo_item->getSubType();
-    item_id         = pTo_item->id;    
-
-    mass = (*pTo_item).mass;     
-
-    info_title_pList = pTo_item->info_title_pList;
-    info_value_pList = pTo_item->info_value_pList;
-}
-
-void Container :: packDriveEquipment(DriveEquipment* pTo_item)
-{
-    pTo_driveEquipment = pTo_item;
-    
-    item_subtype_id = pTo_item->getSubType();    
-    item_id         = pTo_item->id;    
-
-    mass = (*pTo_item).mass;       
-
-    info_title_pList = pTo_item->info_title_pList;
-    info_value_pList = pTo_item->info_value_pList; 
-}
-
-void Container :: packBakEquipment(BakEquipment* pTo_item)
-{
-    pTo_bakEquipment = pTo_item;
-    
-    item_subtype_id = pTo_item->getSubType();    
-    item_id         = pTo_item->id;    
-
-    mass = (*pTo_item).mass;      
-
-    info_title_pList = pTo_item->info_title_pList;
-    info_value_pList = pTo_item->info_value_pList;
-}
-
-void Container :: packEnergizerEquipment(EnergizerEquipment* pTo_item)
-{
-    pTo_energizerEquipment = pTo_item;
-    
-    item_subtype_id = pTo_item->getSubType();   
-    item_id         = pTo_item->id;    
-
-    mass = pTo_item->mass;      
-
-    info_title_pList = pTo_item->info_title_pList;
-    info_value_pList = pTo_item->info_value_pList;
-}
-
-void Container :: packProtectorEquipment(ProtectorEquipment* pTo_item)
-{
-    pTo_protectorEquipment = pTo_item;
-    
-    item_subtype_id = pTo_item->getSubType();   
-    item_id         = pTo_item->id;    
-
-    mass = pTo_item->mass;      
-
-    info_title_pList = pTo_item->info_title_pList;
-    info_value_pList = pTo_item->info_value_pList;
-}
-
-void Container :: packDroidEquipment(DroidEquipment* pTo_item)
-{
-    pTo_droidEquipment = pTo_item;
-    
-    item_subtype_id = pTo_item->getSubType(); 
-    item_id         = pTo_item->id;    
-
-    mass = pTo_item->mass;    
-
-    info_title_pList = pTo_item->info_title_pList;
-    info_value_pList = pTo_item->info_value_pList;
-}
-
-void Container :: packFreezerEquipment(FreezerEquipment* pTo_item)
-{
-    pTo_freezerEquipment = pTo_item;
-    
-    item_subtype_id = pTo_item->getSubType();    
-    item_id         = pTo_item->id;    
-
-    mass = (*pTo_item).mass; 
-
-    info_title_pList = pTo_item->info_title_pList;
-    info_value_pList = pTo_item->info_value_pList;   
-}
-
-void Container :: packScanerEquipment(ScanerEquipment* pTo_item)
-{
-    pTo_scanerEquipment = pTo_item;
-    
-    item_subtype_id = pTo_item->getSubType();   
-    item_id         = pTo_item->id;    
-
-    mass = (*pTo_item).mass;      
-
-    info_title_pList = pTo_item->info_title_pList;
-    info_value_pList = pTo_item->info_value_pList;
-}
-
-void Container :: packGrappleEquipment(GrappleEquipment* pTo_item)
-{
-    pTo_grappleEquipment = pTo_item;
-    
-    item_subtype_id = pTo_item->getSubType();    
-    item_id         = pTo_item->id;    
-
-    mass = (*pTo_item).mass;  
-
-    info_title_pList = pTo_item->info_title_pList;
-    info_value_pList = pTo_item->info_value_pList;
-}        
-        
-
-
 void Container :: renderInfo()
 {
-     drawInfoIn2Column(&info_title_pList, &info_value_pList, points.getCenter().x, points.getCenter().y);
+     otsec_slot->getRect().setNewCenter(points.getCenter().x, points.getCenter().y);	
+     otsec_slot->renderItemInfo(g_SCROLL_COORD_X, g_SCROLL_COORD_Y);
 }
 
  
