@@ -76,26 +76,30 @@ World :: World()
 
 void World :: generateEntireStarSystem()
 {  
-    StarSystem* pTo_starsystem = new StarSystem();   
-    STARSYSTEM_pList.push_back(pTo_starsystem);
+        StarSystem* _starsystem = new StarSystem();   
+        STARSYSTEM_pList.push_back(_starsystem);
 
-    Rect ssOnMapRect = Rect( randIntInRange( MAP_OFFSET_X, (g_VIEW_WIDTH - 3*MAP_OFFSET_X)), (g_VIEW_HEIGHT - randIntInRange( MAP_OFFSET_Y, (g_VIEW_HEIGHT - 2*MAP_OFFSET_Y)) ), 40, 40);
-    pTo_starsystem->setPositionOnWorldMap(ssOnMapRect);
+        Rect ssOnMapRect = Rect( randIntInRange( MAP_OFFSET_X, (g_VIEW_WIDTH - 3*MAP_OFFSET_X)), (g_VIEW_HEIGHT - randIntInRange( MAP_OFFSET_Y, (g_VIEW_HEIGHT - 2*MAP_OFFSET_Y)) ), 40, 40);
+        _starsystem->setPositionOnWorldMap(ssOnMapRect);
 
-    int distNebula_maxNum = randIntInRange(4,7);
-    int distStar_maxNum = randIntInRange(40, 60);
-    generateBackground(pTo_starsystem, distNebula_maxNum, distStar_maxNum);
+        int distNebula_maxNum = randIntInRange(4,7);
+        int distStar_maxNum = randIntInRange(40, 60);
+        generateBackground(_starsystem, distNebula_maxNum, distStar_maxNum);
 
-    generateStar(pTo_starsystem);       
- 
-    generateNumPlanets(pTo_starsystem, randIntInRange(PLANET_PER_SYSTEM_MIN, PLANET_PER_SYSTEM_MAX));
+        Star* _star = starGenerator();    
+        _starsystem->addStar(_star);
+    
+        _starsystem->defineSceneColor(_star->pTo_texOb);   // the scene color will be depended on star color
+     
+        generateNumPlanets(_starsystem, randIntInRange(PLANET_PER_SYSTEM_MIN, PLANET_PER_SYSTEM_MAX));
 
-    if (pTo_starsystem->is_CAPTURED == false)
-       generateNumFriendlyNPC(pTo_starsystem, randIntInRange(SHIP_PER_SYSTEM_MIN, SHIP_PER_SYSTEM_MAX));
-    else
-       generateNumEnemyNPC(pTo_starsystem, randIntInRange(ENEMY_SHIP_PER_SYSTEM_MIN, ENEMY_SHIP_PER_SYSTEM_MAX));
+        if (_starsystem->is_CAPTURED == false)
+                generateNumFriendlyNPC(_starsystem, randIntInRange(SHIP_PER_SYSTEM_MIN, SHIP_PER_SYSTEM_MAX));
+        else
+                generateNumEnemyNPC(_starsystem, randIntInRange(ENEMY_SHIP_PER_SYSTEM_MIN, ENEMY_SHIP_PER_SYSTEM_MAX));
        
-    pTo_starsystem->createPostProcessStuff();  // remove
+        if (USE_MODERN_HW == true)
+                _starsystem->createPostProcessStuff();  // remove
 }
 
 
@@ -103,67 +107,39 @@ void World :: generateEntireStarSystem()
 
 void World :: generateBackground(StarSystem* _pTo_starsystem, int distNebula_maxNum, int distStar_maxNum)
 {
-    for(int i = 0; i < distNebula_maxNum; i++)
-    { 
-        TextureOb* pTo_aTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.nebulaBgEffect_texOb_pList); 
-        distantNebulaBgEffect *dn = new distantNebulaBgEffect(pTo_aTexOb, randIntInRange(0, 1000), randIntInRange(0, 1000));
-        _pTo_starsystem->distantNebulaBgEffect_pList.push_back(dn);
-    } 
+        for(int i = 0; i < distNebula_maxNum; i++)
+        { 
+                TextureOb* pTo_aTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.nebulaBgEffect_texOb_pList); 
+                distantNebulaBgEffect *dn = new distantNebulaBgEffect(pTo_aTexOb, randIntInRange(0, 1000), randIntInRange(0, 1000));
+                _pTo_starsystem->distantNebulaBgEffect_pList.push_back(dn);
+        } 
 
-    TextureOb* pTo_distantStarTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(YELLOW_COLOR_ID);
-    for(int i = 0; i < distStar_maxNum; i++)
-    { 
-        distantStarBgEffect *ds = new distantStarBgEffect(pTo_distantStarTexOb, randIntInRange(0, 1000), randIntInRange(0, 1000), randIntInRange(5, 30));
-        _pTo_starsystem->distantStarBgEffect_pList.push_back(ds);
-    } 
+        TextureOb* pTo_distantStarTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(YELLOW_COLOR_ID);
+        for(int i = 0; i < distStar_maxNum; i++)
+        { 
+                distantStarBgEffect *ds = new distantStarBgEffect(pTo_distantStarTexOb, randIntInRange(0, 1000), randIntInRange(0, 1000), randIntInRange(5, 30));
+                _pTo_starsystem->distantStarBgEffect_pList.push_back(ds);
+        } 
 }
 
 
-
-void World :: generateStar(StarSystem* _pTo_starsystem)
-{
-    TextureOb* pTo_starTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.star_texOb_pList);
-    Star *s = new Star(pTo_starTexOb, pTo_SPHERE_MESH, _pTo_starsystem, randIntInRange(STAR_SIZE_MIN, STAR_SIZE_MAX));
-    _pTo_starsystem->defineSceneColor(pTo_starTexOb);   // the scene color will be depended on star color
-    _pTo_starsystem->STAR_pList.push_back(s);
-}  
-
-
-void World :: generateNumPlanets(StarSystem* _pTo_starsystem, int planet_per_system)
+void World :: generateNumPlanets(StarSystem* _starsystem, int planet_per_system)
 {   
-    int orbit_radius;
-    int offset = 0;
+        int orbit_radius;
+        int offset = 0;
 
-    for(int pi = 0; pi< planet_per_system; pi++)
-    {             
-        if (pi == 0)
-           orbit_radius = randIntInRange(2 * PLANET_DISTANCE_MIN, 2 * PLANET_DISTANCE_MAX);
-        else
-           orbit_radius = offset + randIntInRange(PLANET_DISTANCE_MIN, PLANET_DISTANCE_MAX);
+        for(int pi = 0; pi< planet_per_system; pi++)
+        {             
+                if (pi == 0)
+                        orbit_radius = randIntInRange(2 * PLANET_DISTANCE_MIN, 2 * PLANET_DISTANCE_MAX);
+                else
+                        orbit_radius = offset + randIntInRange(PLANET_DISTANCE_MIN, PLANET_DISTANCE_MAX);
 
-        offset = orbit_radius;
+                offset = orbit_radius;
 
-        int subtype_id   = INHABITED_ID;
-        int planet_size  = randIntInRange(PLANET_SIZE_MIN, PLANET_SIZE_MAX);
-        float speed      = (float)randIntInRange(PLANET_SPEED_MIN, PLANET_SPEED_MAX) / (float)orbit_radius;
-
-        TextureOb* pTo_planetTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.planet_texOb_pList); 
-        TextureOb* pTo_atmosphereTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.atmosphere_texOb_pList); 
-        
-        Planet *pTo_planet = new Planet(subtype_id, 
-        				pTo_planetTexOb, 
-        				pTo_atmosphereTexOb, 
-        				pTo_SPHERE_MESH, 
-        				planet_size, 
-        				0, 
-        				0, 
-        				orbit_radius, 
-        				orbit_radius,
-        				0,
-        				speed);
-	 
-        _pTo_starsystem->addPlanet(pTo_planet);
-    }
+                Planet* _planet = planetGenerator(orbit_radius);
+                _starsystem->addPlanet(_planet);
+        }
 }
 
     
@@ -235,10 +211,10 @@ bool World :: manage_map()
         {
             //if (STARSYSTEM_pList[si]->id != pTo_PLAYER->pTo_starsystem->id)
             {
-                float ss_cursor_dist = lengthBetweenPoints(STARSYSTEM_pList[si]->rect_onMap.center_x, STARSYSTEM_pList[si]->rect_onMap.center_y, mx, my);
+                float ss_cursor_dist = distBetweenCenters(STARSYSTEM_pList[si]->rect_onMap.center_x, STARSYSTEM_pList[si]->rect_onMap.center_y, mx, my);
                 if (ss_cursor_dist < 10)
                 { 
-                   int ss_ss_dist = lengthBetweenPoints(STARSYSTEM_pList[si]->rect_onMap.center_x, STARSYSTEM_pList[si]->rect_onMap.center_y, pTo_PLAYER->pTo_npc->pTo_starsystem->rect_onMap.center_x,  pTo_PLAYER->pTo_npc->pTo_starsystem->rect_onMap.center_y);
+                   int ss_ss_dist = distBetweenCenters(STARSYSTEM_pList[si]->rect_onMap.center_x, STARSYSTEM_pList[si]->rect_onMap.center_y, pTo_PLAYER->pTo_npc->pTo_starsystem->rect_onMap.center_x,  pTo_PLAYER->pTo_npc->pTo_starsystem->rect_onMap.center_y);
                    if ( (ss_ss_dist < pTo_PLAYER->pTo_ship->drive_slot.getDriveEquipment()->getHyper()) && (ss_ss_dist < pTo_PLAYER->pTo_ship->bak_slot.getBakEquipment()->getFuel()) )
                       if (lmb == true)
                       { 

@@ -23,77 +23,83 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 class CommonForSpaceItems
-{   public:
-        bool is_alive;
-        bool is_dying; 
-        bool is_explosed;
+{   
+	public:
+	       	bool is_alive;
+        	bool is_dying; 
+        	bool is_explosed;
 
-        int dying_time;
+        	int dying_time;
 
-        StarSystem* pTo_starsystem;
+        	bool in_SPACE;
+        	bool is_COLLECTED;
+        	bool draw_grabbing_ICON;
 
-        bool in_SPACE;
-        bool is_COLLECTED;
-        bool draw_grabbing_ICON;
+        	int armor;
 
-        int armor;
-
-        TextureOb* pTo_texOb;
-        GLuint texture;
-        int w, h;
-        int minus_half_w, minus_half_h, plus_half_w, plus_half_h;
-        int size;
-        int collision_threshold;
+        	TextureOb* pTo_texOb;
+        	GLuint texture;
+        	int w, h;
+        	int minus_half_w, minus_half_h, plus_half_w, plus_half_h;
+        	int size;
+        	int collision_threshold;
         
-        float dx, dy;
-        //self.owner = None
+        	float dx, dy;
+        	//self.owner = None
 
-        //if self.animated == True:
-        //   self.renderInSpace = self._renderDynamicFramesLoopRot
-        //   self.renderInSlot = self._renderStaticFramesLoopOnRect
-        //else:
-        //self.renderInSpace = self._renderDynamicFrameRot
-        //   self.renderInSlot = self._renderStaticFrameOnRect
-        int speed;
+        	//if self.animated == True:
+        		//   self.renderInSpace = self._renderDynamicFramesLoopRot
+        	//   self.renderInSlot = self._renderStaticFramesLoopOnRect
+        	//else:
+        		//self.renderInSpace = self._renderDynamicFrameRot
+        	//   self.renderInSlot = self._renderStaticFrameOnRect
+        	int speed;
 
-        //self.hunters_list = []
-        //self.info         = []
+        	//self.hunters_list = []
+        	//self.info         = []
 
 
-        //########  init values  #######
-        float angle_x_inD;
-        float angle_y_inD;
-        float angle_z_inD;
-        float d_angle_z_inD;
-        float pos_z;
+        	//########  init values  #######
+        	float angle_x_inD;
+        	float angle_y_inD;
+        	float angle_z_inD;
+        	float d_angle_z_inD;
+        	float pos_z;
 
-        float target_pos_x;
-        float target_pos_y;
+        	float target_pos_x;
+        	float target_pos_y;
         
-        float step;
+        	float step;
 
-        Points points;
 
-        bool keep_moving;
+        	bool keep_moving;
 
-        CommonForSpaceItems();
-        void CommonForSpaceItems_init(StarSystem* _pTo_starsystem, TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _target_pos_x, float _target_pos_y);
+        	CommonForSpaceItems();
+        	void CommonForSpaceItems_init(TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _target_pos_x, float _target_pos_y);
     
-        void update_inSpace_inDynamic_TRUE();
-        void update_inSpace_inDynamic_FALSE();
-        void stepCalculation();
+        	Points* getPoints();
+        	void setStarSystem(StarSystem* _starsystem);
+            	StarSystem* getStarSystem();
+            	
+        	void update_inSpace_inDynamic_TRUE();
+        	void update_inSpace_inDynamic_FALSE();
+        	void stepCalculation();
 
-        void hit_TRUE(int damage);
-        void hit_FALSE(int damage);
-        void death_TRUE();
-        void death_FALSE();
+        	void hit_TRUE(int damage);
+        	void hit_FALSE(int damage);
+        	void death_TRUE();
+        	void death_FALSE();
 
-        //def _renderDynamicFramesLoopRot(self):
-        //def _renderStaticFramesLoopOnRect(self, rect):
-        //def _renderDynamicFrameRot(self):
-        //def _renderStaticFrameOnRect(self, rect):
-        void updateWHRenderConstants();
-        void render2D();
+        	//def _renderDynamicFramesLoopRot(self):
+        	//def _renderStaticFramesLoopOnRect(self, rect):
+        	//def _renderDynamicFrameRot(self):
+        	//def _renderStaticFrameOnRect(self, rect):
+        	void updateWHRenderConstants();
+        	void render2D();
+        
+        protected:
+               	Points points;
+                StarSystem* starsystem;
 };     
 
 #endif 

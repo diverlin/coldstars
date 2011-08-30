@@ -95,24 +95,65 @@ int returnObjectSize(int w, int h)
 }
 
 
-bool collisionBetweenCenters(float center_1x, float center_1y, float center_2x, float center_2y, float collision_radius)
+//bool collisionBetweenCenters2(float center_1x, float center_1y, float center_2x, float center_2y, float collision_radius)
+//{
+    //if(abs(center_1x - center_2x) > collision_radius)
+       //return false;
+    //if(abs(center_1y - center_2y) > collision_radius)
+       //return false;
+
+    //return true;
+//}
+
+
+bool collisionBetweenCenters(Points* points1, Points* points2, float collision_radius)
 {
-    if(abs(center_1x - center_2x) > collision_radius)
+    if(abs(points1->getCenter().x - points2->getCenter().x) > collision_radius)
        return false;
-    if(abs(center_1y - center_2y) > collision_radius)
+    if(abs(points1->getCenter().y - points2->getCenter().y) > collision_radius)
+       return false;
+
+    return true;
+}
+
+bool collisionBetweenCenters(Points* points1, float center2_x, float center2_y, float collision_radius)
+{
+    if(abs(points1->getCenter().x - center2_x) > collision_radius)
+       return false;
+    if(abs(points1->getCenter().y - center2_y) > collision_radius)
        return false;
 
     return true;
 }
 
 
-
-float lengthBetweenPoints(float x1, float y1, float x2, float y2)
+float distBetweenCenters(Points* points1, Points* points2)
 {
-    float xl = (x2 - x1);
-    float yl = (y2 - y1);
-    return sqrt(xl*xl + yl*yl);
+        float xl = (points2->getCenter().x - points1->getCenter().x);
+        float yl = (points2->getCenter().y - points1->getCenter().y);
+    
+        return sqrt(xl*xl + yl*yl);
 }
+
+float distBetweenCenters(Points* points, float x2, float y2)
+{
+        float xl = (x2 - points->getCenter().x);
+        float yl = (y2 - points->getCenter().y);
+    
+        return sqrt(xl*xl + yl*yl);    
+}
+
+float distBetweenCenters(float x1, float y1, float x2, float y2)
+{
+        float xl = (x2 - x1);
+        float yl = (y2 - y1);
+        
+        return sqrt(xl*xl + yl*yl);
+}
+
+
+
+
 
 std::string int2str(int var) 
 {
@@ -185,7 +226,29 @@ void get_dX_dY_angleInD_ToPoint(float x1, float y1, float x2, float y2, float st
 
 
 
-bool isObjectVisible(int ob_centerx, int ob_centery, int ob_w, int ob_h, int startViewCoord_x, int startViewCoord_y)    
+
+bool isObjectVisible(Points* points, float startViewCoord_x, float startViewCoord_y)    
+{
+        float ob_centerx = points->getCenter().x;
+        float ob_centery = points->getCenter().y;
+        
+        int ob_w = points->getWidth();
+        int ob_h = points->getHeight();
+        
+        if (ob_centerx < (g_SCROLL_COORD_X - ob_w))
+                return false;
+        if (ob_centerx > (startViewCoord_x + ob_w))
+                return false;
+        if (ob_centery < (g_SCROLL_COORD_Y - ob_h))
+                return false;
+        if (ob_centery > (startViewCoord_y + ob_h))
+                return false;
+
+        return true;
+}
+
+
+bool isObjectVisible(float ob_centerx, float ob_centery, int ob_w, int ob_h, float startViewCoord_x, float startViewCoord_y)    
 {
     if (ob_centerx < (g_SCROLL_COORD_X - ob_w))
        return false;
@@ -198,3 +261,5 @@ bool isObjectVisible(int ob_centerx, int ob_centery, int ob_w, int ob_h, int sta
 
     return true;
 }
+
+

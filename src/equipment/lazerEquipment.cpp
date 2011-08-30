@@ -158,8 +158,8 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
         	pTo_lazer_trace_effect = new LazerTraceEffect(pTo_lazerEffectTexOb, 
                                                               pTo_particleTexOb, 
                                                               100, 
-                                                              &(slot->getShip()->points.center_x), 
-                                                              &(slot->getShip()->points.center_y), 
+                                                              &(slot->getShip()->getPoints()->getCenter().x), 
+                                                              &(slot->getShip()->getPoints()->getCenter().y), 
                                                               _turrel->getTarget_pCenterX(), 
                                                               _turrel->getTarget_pCenterY());
         }

@@ -22,135 +22,141 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 CommonForSpaceItems :: CommonForSpaceItems()
 {}
 
-void CommonForSpaceItems :: CommonForSpaceItems_init(StarSystem* _pTo_starsystem, TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _target_pos_x, float _target_pos_y)
+void CommonForSpaceItems :: CommonForSpaceItems_init(TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _target_pos_x, float _target_pos_y)
 {
-    is_alive = true;
-    is_dying = false; 
-    is_explosed = false;
+    	is_alive = true;
+    	is_dying = false; 
+    	is_explosed = false;
     
-    dying_time = 30;
+    	dying_time = 30;
 
-    pTo_texOb = _pTo_texOb;
-    pTo_starsystem = _pTo_starsystem;
+    	pTo_texOb = _pTo_texOb;
+    	starsystem = NULL;
     
-    in_SPACE             = true;
-    is_COLLECTED         = false;
-    draw_grabbing_ICON   = false;
+    	in_SPACE             = true;
+    	is_COLLECTED         = false;
+    	draw_grabbing_ICON   = false;
     
-    dx = 0;
-    dy = 0;
-    //self.owner = None
+    	dx = 0;
+    	dy = 0;
+    	//self.owner = None
 
-    //if self.animated == True:
-    //   self.renderInSpace = self._renderDynamicFramesLoopRot
-    //   self.renderInSlot = self._renderStaticFramesLoopOnRect
-    //else:
-    //self.renderInSpace = self._renderDynamicFrameRot
-    //   self.renderInSlot = self._renderStaticFrameOnRect
+    	//if self.animated == True:
+    	//   self.renderInSpace = self._renderDynamicFramesLoopRot
+    	//   self.renderInSlot = self._renderStaticFramesLoopOnRect
+    	//else:
+    	//self.renderInSpace = self._renderDynamicFrameRot
+    	//   self.renderInSlot = self._renderStaticFrameOnRect
 
-    texture = (*pTo_texOb).texture;
-    w = (*pTo_texOb).w;
-    h = (*pTo_texOb).h;
-    updateWHRenderConstants();
+    	texture = (*pTo_texOb).texture;
+    	w = (*pTo_texOb).w;
+    	h = (*pTo_texOb).h;
+   	updateWHRenderConstants();
      
-    size = returnObjectSize(w, h);
-    collision_threshold = (w + h)/2;
+    	size = returnObjectSize(w, h);
+    	collision_threshold = (w + h)/2;
 
-    //self.hunters_list = []
-    //self.info         = []
+    	//self.hunters_list = []
+    	//self.info         = []
 
-    //////
-    points = Points();
+    	//////
+    	points = Points();
 
-    points.initCenterPoint();
-    points.addCenterPoint();
+    	points.initCenterPoint();
+    	points.addCenterPoint();
 
-    points.setCenter(_pos_x, _pos_y);
-    //////
+    	points.setCenter(_pos_x, _pos_y);
+    	//////
 
 
-    //########  init values  #######
-    angle_x_inD        = 0.0;
-    angle_y_inD        = 0.0;
-    angle_z_inD        = 0.0;
-    d_angle_z_inD      = randIntInRange(10, 100)*0.01;
-    pos_z          = -500.0f;
+    	//########  init values  #######
+    	angle_x_inD        = 0.0;
+    	angle_y_inD        = 0.0;
+    	angle_z_inD        = 0.0;
+    	d_angle_z_inD      = randIntInRange(10, 100)*0.01;
+    	pos_z          = -500.0f;
 
-    target_pos_x = _target_pos_x;
-    target_pos_y = _target_pos_y;
+    	target_pos_x = _target_pos_x;
+    	target_pos_y = _target_pos_y;
 
-    keep_moving = true;
+    	keep_moving = true;
 }
+
+        
+Points* CommonForSpaceItems :: getPoints() { return &points; } 
+void CommonForSpaceItems :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
+StarSystem* CommonForSpaceItems :: getStarSystem() { return starsystem; }
+            	
 
 void CommonForSpaceItems :: update_inSpace_inDynamic_TRUE()
 {
-     if (keep_moving == true)
-     {
-        keep_moving = get_dX_dY_ToPoint(points.center_x, points.center_y, target_pos_x, target_pos_y, step, &dx, &dy);
-        points.setCenter(points.center_x + dx, points.center_y + dy);
-     }
+     	if (keep_moving == true)
+     	{
+        	keep_moving = get_dX_dY_ToPoint(points.getCenter().x, points.getCenter().y, target_pos_x, target_pos_y, step, &dx, &dy);
+        	points.setCenter(points.getCenter().x + dx, points.getCenter().y + dy);
+     	}
       
-     if (is_dying == true)
-     {
-        dying_time--;
-        if (dying_time < 0)
-           death_TRUE();
-     }    
+     	if (is_dying == true)
+     	{
+        	dying_time--;
+        	if (dying_time < 0)
+           		death_TRUE();
+     	}    
 }
 
 void CommonForSpaceItems :: update_inSpace_inDynamic_FALSE()
 {
-     if (keep_moving == true)
-     {
-        points.setCenter(target_pos_x, target_pos_y);
-        keep_moving = false;
-     }
+     	if (keep_moving == true)
+     	{
+       		points.setCenter(target_pos_x, target_pos_y);
+        	keep_moving = false;
+     	}
 }
 
 
 void CommonForSpaceItems :: hit_TRUE(int damage)
 {
-    armor -= damage;
-    if (armor <= 0)
-       is_dying = true;
+    	armor -= damage;
+    	if (armor <= 0)
+       		is_dying = true;
 }
 
 void CommonForSpaceItems :: hit_FALSE(int damage)
 {
-    armor -= damage;
-    if (armor <= 0)
-       death_FALSE();
+    	armor -= damage;
+    	if (armor <= 0)
+       		death_FALSE();
 }
 
 
 void CommonForSpaceItems :: death_TRUE()
 {
-     is_alive = false;   
+     	is_alive = false;   
 
-     if (is_explosed == false)
-     {   
-        pTo_starsystem->addExplosion(points.center_x, points.center_y, size);
-        is_explosed = true;
-     }
+     	if (is_explosed == false)
+     	{   
+        	starsystem->addExplosion(points.getCenter().x, points.getCenter().y, size);
+        	is_explosed = true;
+     	}
 }
    
 void CommonForSpaceItems :: death_FALSE()
 {
-     is_alive = false;   
+     	is_alive = false;   
 }
 
 
 void CommonForSpaceItems :: stepCalculation()
 {
-    step = (float)speed / 100;
+    	step = (float)speed / 100;
 }
 
 void CommonForSpaceItems :: updateWHRenderConstants()
 {
-    minus_half_w = -w/2;
-    minus_half_h = -h/2;
-    plus_half_w  =  w/2;
-    plus_half_h  =  h/2;
+    	minus_half_w = -w/2;
+    	minus_half_h = -h/2;
+    	plus_half_w  =  w/2;
+    	plus_half_h  =  h/2;
 }     
 
 
@@ -173,11 +179,9 @@ void CommonForSpaceItems :: updateWHRenderConstants()
           
 void CommonForSpaceItems :: render2D()
 { 
-    glBindTexture(GL_TEXTURE_2D, texture);
-    //drawDynamic(100, 100, angle_z, -50, -50, 50, 50, pos_z);
-    drawDynamic(points.center_x, points.center_y, angle_z_inD, minus_half_w, minus_half_h, plus_half_w, plus_half_h, pos_z);
-    //printf("ddfs = %i,%i,%i,%i \n ", minus_half_w, minus_half_h, plus_half_w, plus_half_h);
-    angle_z_inD += d_angle_z_inD;
+    	glBindTexture(GL_TEXTURE_2D, texture);
+    	drawDynamic(points.getCenter().x, points.getCenter().y, angle_z_inD, minus_half_w, minus_half_h, plus_half_w, plus_half_h, pos_z);
+    	angle_z_inD += d_angle_z_inD;
 }
 
 

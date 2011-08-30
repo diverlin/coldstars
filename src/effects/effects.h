@@ -40,7 +40,13 @@ class ParticleForDamageEffect
       float velocity_x;
       float velocity_y;
 
-      ParticleForDamageEffect(float* pTo_center_x, float* pTo_center_y, float _velocity_start, float _alpha_start, float _alpha_end, float _d_alpha);
+      ParticleForDamageEffect(float* pTo_center_x, 
+      			      float* pTo_center_y, 
+      			      float _velocity_start, 
+      			      float _alpha_start, 
+      			      float _alpha_end, 
+      			      float _d_alpha);
+      			      
       ~ParticleForDamageEffect();
       
       void fastCalcVelocityVector();
@@ -71,7 +77,17 @@ class DamageEffect
 
        VEC_pParticleForDamageEffect_type particles_pList;
 
-       DamageEffect(TextureOb* _pTo_texOb, StarSystem* _pTo_starsystem, float* _pTo_center_x, float* _pTo_center_y, int _num_particles, float _pSize, float _velocity_start, float _alpha_start, float _alpha_end, float _d_alpha);
+       DamageEffect(TextureOb* _pTo_texOb, 
+       		    StarSystem* _pTo_starsystem, 
+       		    float* _pTo_center_x, 
+       		    float* _pTo_center_y, 
+       		    int _num_particles, 
+       		    float _pSize, 
+       		    float _velocity_start, 
+       		    float _alpha_start, 
+       		    float _alpha_end, 
+       		    float _d_alpha);
+       		    
        ~DamageEffect();
 
        void update();
@@ -106,7 +122,17 @@ class ParticleForExplosionEffect
         float velocity_y;  
         
         
-      ParticleForExplosionEffect(float _center_x_start, float _center_y_start, float _size_start, float _d_size, float _velocity_start, float _d_velocity, float _alpha_start, float _alpha_end, float _d_alpha, float _curnum);
+      ParticleForExplosionEffect(float _center_x_start, 
+      				 float _center_y_start, 
+      				 float _size_start, 
+      				 float _d_size, 
+      				 float _velocity_start, 
+      				 float _d_velocity, 
+      				 float _alpha_start, 
+      				 float _alpha_end, 
+      				 float _d_alpha, 
+      				 float _curnum);
+      				 
       ~ParticleForExplosionEffect();
 
       void fastCalcVelocityVector();
@@ -136,7 +162,18 @@ class ExplosionEffect
            
           float pSize_start;
            
-       ExplosionEffect(TextureOb* _pTo_texOb, StarSystem* _pTo_starsystem, float _center_x, float _center_y, int _num_particles, float _pSize_start, float _d_pSize,  float _velocity_start, float _alpha_start, float _alpha_end, float _d_alpha);
+       ExplosionEffect(TextureOb* _pTo_texOb, 
+       		       StarSystem* _pTo_starsystem, 
+       		       float _center_x, 
+       		       float _center_y, 
+       		       int _num_particles, 
+       		       float _pSize_start, 
+       		       float _d_pSize,  
+       		       float _velocity_start, 
+       		       float _alpha_start, 
+       		       float _alpha_end, 
+       		       float _d_alpha);
+       		       
        ~ExplosionEffect();
 
        void update();
@@ -171,7 +208,13 @@ class particleForDriveTrailEffect
        float d_alpha;
        float alpha;
 
-     particleForDriveTrailEffect(float* _pTo_pos_orig_x, float* _pTo_pos_orig_y, float _alpha_start, float _alpha_end, float _d_alpha, int _num);  // fake
+     particleForDriveTrailEffect(float* _pTo_pos_orig_x, 
+     				 float* _pTo_pos_orig_y, 
+     				 float _alpha_start, 
+     				 float _alpha_end, 
+     				 float _d_alpha, 
+     				 int _num);  // fake
+     				 
      void update(float dx, float dy);
      void render();
 };
@@ -212,7 +255,16 @@ class DriveTrailEffect
 
        VEC_pParticleForDriveTrailEffect_type particles_pList;
 
-       DriveTrailEffect(TextureOb* _pTo_texOb, float* _pTo_OB_angle_inD, float* _pTo_start_pos_x, float* _pTo_start_pos_y, float* _pTo_target_pos_x, float* _pTo_target_pos_y, int _num_particles, float _size, float _velocity_orig, float _alpha_start, float _alpha_end, float _d_alpha);
+       DriveTrailEffect(TextureOb* _pTo_texOb, 
+       			float* _pTo_OB_angle_inD, 
+       			vec2f* _pTo_start_pos, 
+       			vec2f* _pTo_target_pos, 
+       			int _num_particles, 
+       			float _size, 
+       			float _velocity_orig, 
+       			float _alpha_start, 
+       			float _alpha_end, 
+       			float _d_alpha);
 
        ~DriveTrailEffect();
        void generateParticles(); 

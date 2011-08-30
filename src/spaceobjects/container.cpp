@@ -19,10 +19,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "container.h"
 
-Container :: Container(StarSystem* _pTo_starsystem, TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _target_pos_x, float _target_pos_y)
+Container :: Container(TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _target_pos_x, float _target_pos_y)
 {
-    CommonForSpaceItems_init(_pTo_starsystem, _pTo_texOb, _pos_x, _pos_y, _target_pos_x, _target_pos_y);
-
+    CommonForSpaceItems_init(_pTo_texOb, _pos_x, _pos_y, _target_pos_x, _target_pos_y);
+    //printf("=====%f,%f,%f,%f\n", _pos_x, _pos_y, _target_pos_x, _target_pos_y);	
+    
     id = g_ENTITY_ID_GENERATOR.returnNextId(); 
     type_id = CONTAINER_ID;
 
@@ -202,7 +203,7 @@ void Container :: packGrappleEquipment(GrappleEquipment* pTo_item)
 
 void Container :: renderInfo()
 {
-     drawInfoIn2Column(&info_title_pList, &info_value_pList, points.center_x, points.center_y);
+     drawInfoIn2Column(&info_title_pList, &info_value_pList, points.getCenter().x, points.getCenter().y);
 }
 
  

@@ -31,24 +31,24 @@ Planet :: Planet(int _subtype_id,
 		 int _orbit_phi_inD,
 		 float _speed)
 { 
-      id = g_ENTITY_ID_GENERATOR.returnNextId();
       type_id = PLANET_ID;
       subtype_id = _subtype_id;
       
-       CommonForPlanet_init(_texOb, 
-    	   		    _mesh, 
-    	   	            _size, 
-    	   		    _orbit_center_x, 
-    	   		    _orbit_center_y, 
-    	   		    _radius_A,
-    	   		    _radius_B, 
-    	   		    _orbit_phi_inD,
-    	   		    _speed);
+      CommonForPlanet_init(_texOb, 
+    	   		   _mesh, 
+    	   	           _size, 
+    	   		   _orbit_center_x, 
+    	   		   _orbit_center_y, 
+    	   		   _radius_A,
+    	   		   _radius_B, 
+    	   		   _orbit_phi_inD,
+    	   		   _speed);
 
       pTo_atmosphereTexOb = _pTo_atmoshereTexOb;
 
       pTo_kosmoport = NULL;
       pTo_land      = NULL;
+      
       if (subtype_id == INHABITED_ID)
          createKosmoport();
       if (subtype_id == UNINHABITED_ID)
@@ -98,7 +98,7 @@ void Planet :: updateInfo()
 
 void Planet :: renderInfo()
 {  
-     drawInfoIn2Column(&info_title_pList, &info_value_pList, points.center_x, points.center_y ); 
+     drawInfoIn2Column(&info_title_pList, &info_value_pList, points.getCenter().x, points.getCenter().y ); 
 }
 
         
@@ -166,3 +166,26 @@ bool Planet :: getPermissionToLand()
         
 
 
+Planet* planetGenerator(int orbit_radius)
+{
+        int subtype_id   = INHABITED_ID;
+        int planet_size  = randIntInRange(PLANET_SIZE_MIN, PLANET_SIZE_MAX);
+        float speed      = (float)randIntInRange(PLANET_SPEED_MIN, PLANET_SPEED_MAX) / (float)orbit_radius;
+
+        TextureOb* _planetTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.planet_texOb_pList); 
+        TextureOb* _atmosphereTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.atmosphere_texOb_pList); 
+        
+        Planet *_planet = new Planet(subtype_id, 
+        				_planetTexOb, 
+        				_atmosphereTexOb, 
+        				pTo_SPHERE_MESH, 
+        				planet_size, 
+        				0, 
+        				0, 
+        				orbit_radius, 
+        				orbit_radius,
+        				0,
+        				speed);
+	 
+        return _planet;        
+}

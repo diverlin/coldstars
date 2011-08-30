@@ -455,8 +455,6 @@ static const GLchar * pTo_multitexFragmentSource = {
     
 g_MULTITEX_PROGRAM = glCreateProgram();
 compile_program(pTo_multitexVertexSource, pTo_multitexFragmentSource, &g_MULTITEX_PROGRAM);
-
-
 }
 
 

@@ -27,7 +27,7 @@ class Star
     		int id;
     
     		TextureOb* pTo_texOb;
-    		StarSystem* pTo_starsystem;
+    		StarSystem* starsystem;
 
     		ObjMeshInstance* pTo_mesh; 
     		GLuint texture;
@@ -41,8 +41,6 @@ class Star
     		float d_angle_y;
     		float d_angle_z;
                  
-                float pos_x;
-    		float pos_y;  
     		float pos_z;
     		
     		float scale;
@@ -56,8 +54,12 @@ class Star
 
 
    
-    		Star(TextureOb* _pTo_texOb, ObjMeshInstance* _pTo_mesh, StarSystem* _pTo_starsystem, float _size);
+    		Star(TextureOb* _pTo_texOb, ObjMeshInstance* _pTo_mesh, float _size);
     		~Star();
+                
+                Points* getPoints();
+                
+                void setStarSystem(StarSystem* _starsystem);
     		
     		void update_inSpace_inDynamic();
     		
@@ -65,7 +67,13 @@ class Star
     		void render_OLD();
     		
     		void renderInfo();
+                
+        private:
+                Points points;
 }; 
+
+
+Star* starGenerator();
 
 #endif 
     

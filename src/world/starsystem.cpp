@@ -39,66 +39,81 @@ void StarSystem ::setPositionOnWorldMap(Rect rect)
 
 void StarSystem :: rocketCollision_TRUE()
 {
-     bool collide = false;
-     for (unsigned int ri = 0; ri < ROCKET_pList.size(); ri++)
-     {
-         for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
-             if (ROCKET_pList[ri]->owner_id != SHIP_pList[ki]->id)
-                if (collisionBetweenCenters(ROCKET_pList[ri]->points.center_x, ROCKET_pList[ri]->points.center_y, SHIP_pList[ki]->points.center_x, SHIP_pList[ki]->points.center_y, SHIP_pList[ki]->collision_radius) == true)
+        bool collide = false;
+        for (unsigned int ri = 0; ri < ROCKET_pList.size(); ri++)
+        {
+                for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
                 {
-                    SHIP_pList[ki]->hit_TRUE(ROCKET_pList[ri]->damage);
-                    ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
-                    collide = true;
-                    break;
+                        if (ROCKET_pList[ri]->owner_id != SHIP_pList[ki]->id)
+                        {
+                                if (collisionBetweenCenters(ROCKET_pList[ri]->getPoints(), SHIP_pList[ki]->getPoints(), SHIP_pList[ki]->collision_radius) == true)
+                                {
+                                        SHIP_pList[ki]->hit_TRUE(ROCKET_pList[ri]->damage);
+                                        ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
+                                        collide = true;
+                                        break;
+                                }
+                        }
                 }
 
-         if (collide == false)
-            for (unsigned int ai = 0; ai < ASTEROID_pList.size(); ai++)
-                if (collisionBetweenCenters(ROCKET_pList[ri]->points.center_x, ROCKET_pList[ri]->points.center_y, ASTEROID_pList[ai]->points.center_x, ASTEROID_pList[ai]->points.center_y, ASTEROID_pList[ai]->w) == true)
-                {   
-                    ASTEROID_pList[ai]->death_TRUE();
-                    ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
-                    collide = true;
-                    break;
+                if (collide == false)
+                {
+                        for (unsigned int ai = 0; ai < ASTEROID_pList.size(); ai++)
+                        {
+                                if (collisionBetweenCenters(ROCKET_pList[ri]->getPoints(), ASTEROID_pList[ai]->getPoints(), ASTEROID_pList[ai]->w) == true)
+                                {   
+                                        ASTEROID_pList[ai]->death_TRUE();
+                                        ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
+                                        collide = true;
+                                        break;
+                                }
+                        }
                 }
 
-         if (collide == false)
-            for (unsigned int mi = 0; mi < MINERAL_pList.size(); mi++)
-                if (collisionBetweenCenters(ROCKET_pList[ri]->points.center_x, ROCKET_pList[ri]->points.center_y, MINERAL_pList[mi]->points.center_x, MINERAL_pList[mi]->points.center_y, MINERAL_pList[mi]->w) == true)
-                {   
-                    MINERAL_pList[mi]->death_TRUE();
-                    ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
-                    collide = true;
-                    break;
+                if (collide == false)
+                {
+                        for (unsigned int mi = 0; mi < MINERAL_pList.size(); mi++)
+                        {
+                                if (collisionBetweenCenters(ROCKET_pList[ri]->getPoints(), MINERAL_pList[mi]->getPoints(), MINERAL_pList[mi]->w) == true)
+                                {   
+                                        MINERAL_pList[mi]->death_TRUE();
+                                        ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
+                                        collide = true;
+                                        break;
+                                }
+                        }
                 }
 
+                //if collide == False:
+                        //for sp in self.SPUTNIK_list:
+                                //if collisionBetweenCenters(r.points.center, sp.points.center, sp.collision_threshold):
+                                        //sp.hit(r.owner, r)
+                                        //r.hit(r.owner, r)
+                                        //collide = True
+                                        //break
 
-              //if collide == False:
-                 //for sp in self.SPUTNIK_list:
-                     //if collisionBetweenCenters(r.points.center, sp.points.center, sp.collision_threshold):
-                        //sp.hit(r.owner, r)
-                        //r.hit(r.owner, r)
-                        //collide = True
-                        //break
-
-         if (collide == false)
-            for (unsigned int ci = 0; ci < CONTAINER_pList.size(); ci++)
-                if (collisionBetweenCenters(ROCKET_pList[ri]->points.center_x, ROCKET_pList[ri]->points.center_y, CONTAINER_pList[ci]->points.center_x, CONTAINER_pList[ci]->points.center_y, CONTAINER_pList[ci]->w) == true)
-                {   
-                    CONTAINER_pList[ci]->death_TRUE();
-                    ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
-                    collide = true;
-                    break;
+                if (collide == false)
+                {
+                        for (unsigned int ci = 0; ci < CONTAINER_pList.size(); ci++)
+                        {
+                                if (collisionBetweenCenters(ROCKET_pList[ri]->getPoints(), CONTAINER_pList[ci]->getPoints(), CONTAINER_pList[ci]->w) == true)
+                                {   
+                                        CONTAINER_pList[ci]->death_TRUE();
+                                        ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
+                                        collide = true;
+                                        break;
+                                }
+                        }
                 }
-
-              //if collide == False:
-                 //for b in self.BOMB_list:
-                     //if collisionBetweenCenters(r.points.center, b.points.center, b.collision_threshold):
-                        //b.hit(r.owner, r)
-                        //r.hit(r.owner, r)
-                        //collide = True
-                        //break
-     }
+                
+                //if collide == False:
+                        //for b in self.BOMB_list:
+                                //if collisionBetweenCenters(r.points.center, b.points.center, b.collision_threshold):
+                                        //b.hit(r.owner, r)
+                                        //r.hit(r.owner, r)
+                                        //collide = True
+                                        //break
+        }
 }
 
 
@@ -107,65 +122,81 @@ void StarSystem :: rocketCollision_TRUE()
 
 void StarSystem :: rocketCollision_FALSE()
 {
-     bool collide = false;
-     for (unsigned int ri = 0; ri < ROCKET_pList.size(); ri++)
-     {
-         for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
-             if (ROCKET_pList[ri]->owner_id != SHIP_pList[ki]->id)
-                if (collisionBetweenCenters(ROCKET_pList[ri]->points.center_x, ROCKET_pList[ri]->points.center_y, SHIP_pList[ki]->points.center_x, SHIP_pList[ki]->points.center_y, SHIP_pList[ki]->collision_radius) == true)
+        bool collide = false;
+        for (unsigned int ri = 0; ri < ROCKET_pList.size(); ri++)
+        {
+                for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
                 {
-                    SHIP_pList[ki]->hit_FALSE(ROCKET_pList[ri]->damage);
-                    ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
-                    collide = true;
-                    break;
+                        if (ROCKET_pList[ri]->owner_id != SHIP_pList[ki]->id)
+                        {
+                                if (collisionBetweenCenters(ROCKET_pList[ri]->getPoints(), SHIP_pList[ki]->getPoints(), SHIP_pList[ki]->collision_radius) == true)
+                                {
+                                        SHIP_pList[ki]->hit_FALSE(ROCKET_pList[ri]->damage);
+                                        ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
+                                        collide = true;
+                                        break;
+                                }
+                        }
                 }
 
-         if (collide == false)
-            for (unsigned int ai = 0; ai < ASTEROID_pList.size(); ai++)
-                if (collisionBetweenCenters(ROCKET_pList[ri]->points.center_x, ROCKET_pList[ri]->points.center_y, ASTEROID_pList[ai]->points.center_x, ASTEROID_pList[ai]->points.center_y, ASTEROID_pList[ai]->w) == true)
-                {   
-                    ASTEROID_pList[ai]->death_FALSE();
-                    ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
-                    collide = true;
-                    break;
+                if (collide == false)
+                {
+                        for (unsigned int ai = 0; ai < ASTEROID_pList.size(); ai++)
+                        {
+                                if (collisionBetweenCenters(ROCKET_pList[ri]->getPoints(), ASTEROID_pList[ai]->getPoints(), ASTEROID_pList[ai]->w) == true)
+                                {   
+                                        ASTEROID_pList[ai]->death_FALSE();
+                                        ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
+                                        collide = true;
+                                        break;
+                                }
+                        }
                 }
 
-         if (collide == false)
-            for (unsigned int mi = 0; mi < MINERAL_pList.size(); mi++)
-                if (collisionBetweenCenters(ROCKET_pList[ri]->points.center_x, ROCKET_pList[ri]->points.center_y, MINERAL_pList[mi]->points.center_x, MINERAL_pList[mi]->points.center_y, MINERAL_pList[mi]->w) == true)
-                {   
-                    MINERAL_pList[mi]->death_FALSE();
-                    ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
-                    collide = true;
-                    break;
+                if (collide == false)
+                {
+                        for (unsigned int mi = 0; mi < MINERAL_pList.size(); mi++)
+                        {
+                                if (collisionBetweenCenters(ROCKET_pList[ri]->getPoints(), MINERAL_pList[mi]->getPoints(), MINERAL_pList[mi]->w) == true)
+                                {   
+                                        MINERAL_pList[mi]->death_FALSE();
+                                        ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
+                                        collide = true;
+                                        break;
+                                }
+                        }
                 }
 
 
-              //if collide == False:
-                 //for sp in self.SPUTNIK_list:
-                     //if collisionBetweenCenters(r.points.center, sp.points.center, sp.collision_threshold):
-                        //sp.hit(r.owner, r)
-                        //r.hit(r.owner, r)
-                        //collide = True
-                        //break
+                //if collide == False:
+                        //for sp in self.SPUTNIK_list:
+                                //if collisionBetweenCenters(r.points.center, sp.points.center, sp.collision_threshold):
+                                        //sp.hit(r.owner, r)
+                                        //r.hit(r.owner, r)
+                                        //collide = True
+                                        //break
 
-         if (collide == false)
-            for (unsigned int ci = 0; ci < CONTAINER_pList.size(); ci++)
-                if (collisionBetweenCenters(ROCKET_pList[ri]->points.center_x, ROCKET_pList[ri]->points.center_y, CONTAINER_pList[ci]->points.center_x, CONTAINER_pList[ci]->points.center_y, CONTAINER_pList[ci]->w) == true)
-                {   
-                    CONTAINER_pList[ci]->death_FALSE();
-                    ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
-                    collide = true;
-                    break;
+                if (collide == false)
+                {
+                        for (unsigned int ci = 0; ci < CONTAINER_pList.size(); ci++)
+                        {
+                                if (collisionBetweenCenters(ROCKET_pList[ri]->getPoints(), CONTAINER_pList[ci]->getPoints(), CONTAINER_pList[ci]->w) == true)
+                                {   
+                                        CONTAINER_pList[ci]->death_FALSE();
+                                        ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
+                                        collide = true;
+                                        break;
+                                }
+                        }
                 }
 
-              //if collide == False:
-                 //for b in self.BOMB_list:
-                     //if collisionBetweenCenters(r.points.center, b.points.center, b.collision_threshold):
-                        //b.hit(r.owner, r)
-                        //r.hit(r.owner, r)
-                        //collide = True
-                        //break
+                //if collide == False:
+                        //for b in self.BOMB_list:
+                                //if collisionBetweenCenters(r.points.center, b.points.center, b.collision_threshold):
+                                        //b.hit(r.owner, r)
+                                        //r.hit(r.owner, r)
+                                        //collide = True
+                                        //break
      }
 }
 
@@ -177,7 +208,7 @@ void StarSystem :: asteroidCollision_TRUE()
     {
         if (ASTEROID_pList[ai]->is_alive == true)   
            for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
-               if ( collisionBetweenCenters(ASTEROID_pList[ai]->points.center_x, ASTEROID_pList[ai]->points.center_y, SHIP_pList[ki]->points.center_x, SHIP_pList[ki]->points.center_y, SHIP_pList[ki]->collision_radius) )
+               if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), SHIP_pList[ki]->getPoints(), SHIP_pList[ki]->collision_radius) )
                {
                    ASTEROID_pList[ai]->death_TRUE();
                    SHIP_pList[ki]->hit_TRUE( (ASTEROID_pList[ai]->armor) * 10 );
@@ -187,7 +218,7 @@ void StarSystem :: asteroidCollision_TRUE()
 
         if (ASTEROID_pList[ai]->is_alive == true)   
            for (unsigned int pi = 0; pi < PLANET_pList.size(); pi++)
-               if ( collisionBetweenCenters(ASTEROID_pList[ai]->points.center_x, ASTEROID_pList[ai]->points.center_y, PLANET_pList[pi]->points.center_x, PLANET_pList[pi]->points.center_y, PLANET_pList[pi]->collision_radius) )
+               if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), PLANET_pList[pi]->getPoints(), PLANET_pList[pi]->collision_radius) )
                {
                    //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
                    ASTEROID_pList[ai]->death_TRUE();
@@ -202,7 +233,7 @@ void StarSystem :: asteroidCollision_TRUE()
 
         if (ASTEROID_pList[ai]->is_alive == true)   
            for (unsigned int si = 0; si < STAR_pList.size(); si++)
-               if ( collisionBetweenCenters(ASTEROID_pList[ai]->points.center_x, ASTEROID_pList[ai]->points.center_y, STAR_pList[si]->pos_x, STAR_pList[si]->pos_y, STAR_pList[si]->collision_radius) )
+               if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), STAR_pList[si]->getPoints(), STAR_pList[si]->collision_radius) )
                {
                    //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
                    ASTEROID_pList[ai]->death_TRUE();
@@ -221,7 +252,7 @@ void StarSystem :: asteroidCollision_FALSE()
     {
         if (ASTEROID_pList[ai]->is_alive == true)   
            for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
-               if ( collisionBetweenCenters(ASTEROID_pList[ai]->points.center_x, ASTEROID_pList[ai]->points.center_y, SHIP_pList[ki]->points.center_x, SHIP_pList[ki]->points.center_y, SHIP_pList[ki]->collision_radius) )
+               if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), SHIP_pList[ki]->getPoints(), SHIP_pList[ki]->collision_radius) )
                {
                    ASTEROID_pList[ai]->death_FALSE();
                    SHIP_pList[ki]->hit_FALSE( (ASTEROID_pList[ai]->armor) * 10 );
@@ -231,7 +262,7 @@ void StarSystem :: asteroidCollision_FALSE()
 
         if (ASTEROID_pList[ai]->is_alive == true)   
            for (unsigned int pi = 0; pi < PLANET_pList.size(); pi++)
-               if ( collisionBetweenCenters(ASTEROID_pList[ai]->points.center_x, ASTEROID_pList[ai]->points.center_y, PLANET_pList[pi]->points.center_x, PLANET_pList[pi]->points.center_y, PLANET_pList[pi]->collision_radius) )
+               if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), PLANET_pList[pi]->getPoints(), PLANET_pList[pi]->collision_radius) )
                {
                    //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
                    ASTEROID_pList[ai]->death_FALSE();
@@ -246,7 +277,7 @@ void StarSystem :: asteroidCollision_FALSE()
 
         if (ASTEROID_pList[ai]->is_alive == true)   
            for (unsigned int si = 0; si < STAR_pList.size(); si++)
-               if ( collisionBetweenCenters(ASTEROID_pList[ai]->points.center_x, ASTEROID_pList[ai]->points.center_y, STAR_pList[si]->pos_x, STAR_pList[si]->pos_y, STAR_pList[si]->collision_radius) )
+               if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), STAR_pList[si]->getPoints(), STAR_pList[si]->collision_radius) )
                {
                    //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
                    ASTEROID_pList[ai]->death_FALSE();
@@ -345,8 +376,8 @@ void StarSystem :: updateEntities_inStatic()
 
 void StarSystem :: findVisibleEntities()
 {
-    int startViewCoord_x = g_SCROLL_COORD_X + g_VIEW_WIDTH;
-    int startViewCoord_y = g_SCROLL_COORD_Y + g_VIEW_HEIGHT;
+    float startViewCoord_x = g_SCROLL_COORD_X + g_VIEW_WIDTH;
+    float startViewCoord_y = g_SCROLL_COORD_Y + g_VIEW_HEIGHT;
 
     visible_STAR_pList.clear();
     visible_PLANET_pList.clear();
@@ -364,13 +395,13 @@ void StarSystem :: findVisibleEntities()
 
     for (unsigned int i = 0; i < STAR_pList.size(); i++)
     {
-        if (isObjectVisible((*STAR_pList[i]).pos_x, (*STAR_pList[i]).pos_y, (*STAR_pList[i]).w, (*STAR_pList[i]).h, startViewCoord_x, startViewCoord_y))    
+        if (isObjectVisible(STAR_pList[i]->getPoints(), startViewCoord_x, startViewCoord_y))    
            visible_STAR_pList.push_back(STAR_pList[i]); 
     }
     
     for (unsigned int i = 0; i < PLANET_pList.size(); i++)
     {
-        if (isObjectVisible((*PLANET_pList[i]).points.center_x, (*PLANET_pList[i]).points.center_y, (*PLANET_pList[i]).w, (*PLANET_pList[i]).h, startViewCoord_x, startViewCoord_y))    
+        if (isObjectVisible(PLANET_pList[i]->getPoints(), startViewCoord_x, startViewCoord_y))    
            visible_PLANET_pList.push_back(PLANET_pList[i]);  
     }
     
@@ -378,19 +409,19 @@ void StarSystem :: findVisibleEntities()
     //self.visible_SPUTNIK_list   = [s for s in self.SPUTNIK_list   if isObjectVisible((s.points.center[0], s.points.center[1]), (s.w, s.h), (vpCoordinate_x, vpCoordinate_y), (x_startViewCoord, y_startViewCoord))]
     for (unsigned int i = 0; i < ASTEROID_pList.size(); i++)
     {
-        if (isObjectVisible((*ASTEROID_pList[i]).points.center_x, (*ASTEROID_pList[i]).points.center_y, (*ASTEROID_pList[i]).w, (*ASTEROID_pList[i]).h, startViewCoord_x, startViewCoord_y))    
+        if (isObjectVisible(ASTEROID_pList[i]->getPoints(), startViewCoord_x, startViewCoord_y))    
            visible_ASTEROID_pList.push_back(ASTEROID_pList[i]); 
     }
    
     for (unsigned int i = 0; i < MINERAL_pList.size(); i++)
     {
-        if (isObjectVisible((*MINERAL_pList[i]).points.center_x, (*MINERAL_pList[i]).points.center_y, (*MINERAL_pList[i]).w, (*MINERAL_pList[i]).h, startViewCoord_x, startViewCoord_y))    
+        if (isObjectVisible(MINERAL_pList[i]->getPoints(), startViewCoord_x, startViewCoord_y))    
            visible_MINERAL_pList.push_back(MINERAL_pList[i]);  
     }
     
     for (unsigned int i = 0; i < CONTAINER_pList.size(); i++)
     {
-        if (isObjectVisible((*CONTAINER_pList[i]).points.center_x, (*CONTAINER_pList[i]).points.center_y, (*CONTAINER_pList[i]).w, (*CONTAINER_pList[i]).h, startViewCoord_x, startViewCoord_y))    
+        if (isObjectVisible(CONTAINER_pList[i]->getPoints(), startViewCoord_x, startViewCoord_y))    
            visible_CONTAINER_pList.push_back(CONTAINER_pList[i]);  
     }
 
@@ -398,13 +429,13 @@ void StarSystem :: findVisibleEntities()
     
     for (unsigned int i = 0; i < SHIP_pList.size(); i++)
     {
-        if (isObjectVisible((*SHIP_pList[i]).points.center_x, (*SHIP_pList[i]).points.center_y, (*SHIP_pList[i]).w, (*SHIP_pList[i]).h, startViewCoord_x, startViewCoord_y))    
+        if (isObjectVisible(SHIP_pList[i]->getPoints(), startViewCoord_x, startViewCoord_y))    
            visible_SHIP_pList.push_back(SHIP_pList[i]); 
     }
     
     for (unsigned int i = 0; i < ROCKET_pList.size(); i++)
     {
-        if (isObjectVisible(ROCKET_pList[i]->points.center_x, ROCKET_pList[i]->points.center_y, ROCKET_pList[i]->w, ROCKET_pList[i]->h, startViewCoord_x, startViewCoord_y))    
+        if (isObjectVisible(ROCKET_pList[i]->getPoints(), startViewCoord_x, startViewCoord_y))    
            visible_ROCKET_pList.push_back(ROCKET_pList[i]); 
     }
 
@@ -733,7 +764,7 @@ void StarSystem :: renderEntities_OLD()
 
     	for(unsigned int i = 0; i < visible_ASTEROID_pList.size(); i++)
     	{ 
-       		visible_ASTEROID_pList[i]->render_NEW(); 
+       		visible_ASTEROID_pList[i]->render_OLD(); 
     	}
 
     	glDisable(GL_DEPTH_TEST);
@@ -793,7 +824,8 @@ void StarSystem :: renderEntities_OLD()
 
 
 
-
+    		//bool addMineral(Mineral* _mineral);
+    		//bool addContainer(Container* _container);
 
 
 
@@ -879,40 +911,14 @@ void StarSystem :: addShockWave(float _center_x, float _center_y, int obSize)
 
 void StarSystem :: asteroidManager(int num)
 {
-    while (ASTEROID_pList.size() < num)
-       addAsteroid(); 
+        while (ASTEROID_pList.size() < num)
+        {
+                Asteroid* _asteroid = asteroidGenerator();
+                addAsteroid(_asteroid);
+        }
 }
 
 
-void StarSystem :: addAsteroid()
-{
-    TextureOb* _texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.asteroid_texOb_pList); 
-    
-    float _size = 10;
-    float _orbit_center_x = 0;
-    float _orbit_center_y = 0;
-    int _radius_A = randIntInRange(300, 1200);
-    int _radius_B = randIntInRange(300, 1200);
-    float _orbit_phi_inD = randIntInRange(0, 360);
-    float _speed = 0.1;
-
-    Asteroid *pA = new Asteroid(_texOb,
-    				pTo_DEFORMED_SPHERE_MESH,
-    				_size, 
-    				_orbit_center_x, 
-    				_orbit_center_y, 
-    				_radius_A, 
-    				_radius_B, 
-    				_orbit_phi_inD, 
-    				_speed);
-    	
-    				
-    pA->update_inSpace_inDynamic_FALSE();
-    
-    ASTEROID_pList.push_back(pA);
-    pA->starsystem = this;
-}
-    
 
 void StarSystem :: addNumMinerals(float center_x, float center_y, int num)
 {
@@ -926,15 +932,54 @@ void StarSystem :: addNumMinerals(float center_x, float center_y, int num)
         target_x = center_x + sin(alpha) * len;
         target_y = center_y + cos(alpha) * len;
 
-        TextureOb* pTo_mTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.mineral_texOb_pList); 
-        Mineral *pTo_mineral = new Mineral(pTo_mTexOb, this, center_x, center_y, target_x, target_y);
-        MINERAL_pList.push_back(pTo_mineral);
+        TextureOb* _mTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.mineral_texOb_pList); 
+        Mineral* _mineral = new Mineral(_mTexOb, center_x, center_y, target_x, target_y);
+	addMineral(_mineral);
         alpha += d_alpha;
     }
 }
 
 
+bool StarSystem :: addStar(Star* _star)
+{
+        _star->setStarSystem(this);
+        STAR_pList.push_back(_star);
+        
+        return true;           
+}
 
+bool StarSystem :: addPlanet(Planet* _planet)
+{
+        _planet->setStarSystem(this);
+        PLANET_pList.push_back(_planet);
+        
+        return true;        
+}
+                
+bool StarSystem :: addAsteroid(Asteroid* _asteroid)
+{   
+        _asteroid->setStarSystem(this);
+        ASTEROID_pList.push_back(_asteroid);
+        
+        return true;
+}
+
+bool StarSystem :: addMineral(Mineral* _mineral)
+{
+	_mineral->setStarSystem(this);
+        MINERAL_pList.push_back(_mineral);
+        
+        return true;
+}
+
+bool StarSystem :: addContainer(Container* _container)
+{
+	_container->setStarSystem(this);
+        CONTAINER_pList.push_back(_container);
+        
+        return true;
+}
+    		
 void StarSystem :: manageEntities()
 {  
 
@@ -1182,7 +1227,7 @@ void StarSystem :: mouseControl()
     {
         for (unsigned int mi = 0; mi < visible_MINERAL_pList.size(); mi++)
         { 
-            float mineral_cursor_dist = lengthBetweenPoints(visible_MINERAL_pList[mi]->points.center_x, visible_MINERAL_pList[mi]->points.center_y, mxvp, myvp);
+            float mineral_cursor_dist = distBetweenCenters(visible_MINERAL_pList[mi]->getPoints(), mxvp, myvp);
             if (mineral_cursor_dist < 10.0)
             {   
                cursor_has_target = true;
@@ -1211,7 +1256,7 @@ void StarSystem :: mouseControl()
     {
         for (unsigned int ci = 0; ci < visible_CONTAINER_pList.size(); ci++)
         { 
-            float container_cursor_dist = lengthBetweenPoints(visible_CONTAINER_pList[ci]->points.center_x, visible_CONTAINER_pList[ci]->points.center_y, mxvp, myvp);
+            float container_cursor_dist = distBetweenCenters(visible_CONTAINER_pList[ci]->getPoints(), mxvp, myvp);
             if (container_cursor_dist < 10.0)
             {   
                cursor_has_target = true;
@@ -1239,13 +1284,13 @@ void StarSystem :: mouseControl()
     {
        for (unsigned int ki = 0; ki < visible_SHIP_pList.size(); ki++)
        { 
-            float ship_cursor_dist = lengthBetweenPoints(visible_SHIP_pList[ki]->points.center_x, visible_SHIP_pList[ki]->points.center_y, mxvp, myvp);
+            float ship_cursor_dist = distBetweenCenters(visible_SHIP_pList[ki]->getPoints(), mxvp, myvp);
             if (ship_cursor_dist < 50.0)
             { 
                 cursor_has_target = true;
 
                 visible_SHIP_pList[ki]->updateInfo(); 
-                visible_SHIP_pList[ki]->renderInfo(visible_SHIP_pList[ki]->points.center_x, visible_SHIP_pList[ki]->points.center_y, g_SCROLL_COORD_X, g_SCROLL_COORD_Y); 
+                visible_SHIP_pList[ki]->renderInfo(visible_SHIP_pList[ki]->getPoints()->getCenter().x, visible_SHIP_pList[ki]->getPoints()->getCenter().y, g_SCROLL_COORD_X, g_SCROLL_COORD_Y); 
 
                 if (mlb == true)
                 {
@@ -1276,7 +1321,7 @@ void StarSystem :: mouseControl()
     {
         for (unsigned int ai = 0; ai < visible_ASTEROID_pList.size(); ai++)
         { 
-            float asteroid_cursor_dist = lengthBetweenPoints(visible_ASTEROID_pList[ai]->points.center_x, visible_ASTEROID_pList[ai]->points.center_y, mxvp, myvp);
+            float asteroid_cursor_dist = distBetweenCenters(visible_ASTEROID_pList[ai]->getPoints(), mxvp, myvp);
             if (asteroid_cursor_dist < 50.0)
             {   
                 cursor_has_target = true;
@@ -1305,7 +1350,7 @@ void StarSystem :: mouseControl()
     {
         for (unsigned int pi = 0; pi < visible_PLANET_pList.size(); pi++)
         { 
-            float planet_cursor_dist = lengthBetweenPoints(visible_PLANET_pList[pi]->points.center_x, visible_PLANET_pList[pi]->points.center_y, mxvp, myvp);
+            float planet_cursor_dist = distBetweenCenters(visible_PLANET_pList[pi]->getPoints(), mxvp, myvp);
             if (planet_cursor_dist < 50.0)
             {   
                 cursor_has_target = true;
@@ -1456,14 +1501,6 @@ bool StarSystem :: removeNpc(int _id, int _race_id, int _subtype_id)
           return is_removed; 
      }
 
-bool StarSystem  :: addPlanet(Planet* _pTo_planet)
-{
-     _pTo_planet->starsystem = this;  // ???
-
-     PLANET_pList.push_back(_pTo_planet);
-     return true;
-
-}
 //// ******* TRANSITION ******* 
 
 

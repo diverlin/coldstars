@@ -84,6 +84,7 @@ RocketBullet :: RocketBullet(StarSystem* _pTo_starsystem, TextureOb* _pTo_texOb,
 RocketBullet :: ~RocketBullet()
 {}
 
+Points* RocketBullet :: getPoints() { return &points; }
 
 //void RocketBullet :: setShipAsTarget(Ship* _pTo_ship)
 //{
@@ -143,10 +144,10 @@ void RocketBullet :: update_inSpace_inDynamic()
     if (target_is_alive == true)
     { 
         //dx, dy, angle_new = rocketWayCalc((self.points.center[0], self.points.center[1]), (self.target.points.center[0], self.target.points.center[1]), self.points.angle, self.angular_speed, self.step)
-        get_dX_dY_angleInD_ToPoint(points.center_x, points.center_y, (*pTo_target_pos_x), (*pTo_target_pos_y), step, &dx, &dy, &angle_inD);
+        get_dX_dY_angleInD_ToPoint(points.getCenter().x, points.getCenter().y, (*pTo_target_pos_x), (*pTo_target_pos_y), step, &dx, &dy, &angle_inD);
     }      
     points.setAngle(angle_inD);
-    points.setCenter(points.center_x + dx, points.center_y + dy);
+    points.setCenter(points.getCenter().x + dx, points.getCenter().y + dy);
     
 
     live_time -= 1;
@@ -190,7 +191,7 @@ void RocketBullet :: death()
 
      if (is_explosed == false)
      {   
-        pTo_starsystem->addExplosion(points.center_x, points.center_y, size);
+        pTo_starsystem->addExplosion(points.getCenter().x, points.getCenter().y, size);
         is_explosed = true;
      }
 }
@@ -208,7 +209,11 @@ void RocketBullet :: renderInSpace()
     points.update();
 
     glBindTexture(GL_TEXTURE_2D, texture); 
-    drawFlatQuadPerVertexIn2D(points.bottomLeft_x, points.bottomLeft_y, points.bottomRight_x, points.bottomRight_y, points.topRight_x, points.topRight_y, points.topLeft_x, points.topLeft_y, -500);
+    drawFlatQuadPerVertexIn2D(points.getBottomLeft(), 
+                              points.getBottomRight(), 
+                              points.getTopRight(), 
+                              points.getTopLeft(), 
+                              -500);
 }
 
 

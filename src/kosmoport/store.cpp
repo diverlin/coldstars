@@ -505,7 +505,7 @@ void Store :: mouseControl()
 
     for (unsigned int i = 0; i < slot_pList.size(); i++)
     { 
-        float dist = lengthBetweenPoints(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y), slot_pList[i]->getRect().center_x, slot_pList[i]->getRect().center_y);
+        float dist = distBetweenCenters(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y), slot_pList[i]->getRect().center_x, slot_pList[i]->getRect().center_y);
         if (dist < slot_pList[i]->getRect().w/2)
         {
              slot_pList[i]->setCursoredStatus(true);

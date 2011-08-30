@@ -25,8 +25,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Container : public CommonForSpaceItems
 {
     public: 
-        //StarSystem* pTo_starsystem;
-
         int id;
         int type_id;
         int item_subtype_id; 
@@ -52,7 +50,7 @@ class Container : public CommonForSpaceItems
         int size;
 
         Container();
-        Container(StarSystem* _pTo_starsystem, TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _target_x, float _target_y);
+        Container(TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _target_x, float _target_y);
         ~Container();
         
         void packRocketEquipment(RocketEquipment* pTo_item);
