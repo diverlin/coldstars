@@ -421,7 +421,7 @@ void StarSystem :: findVisibleEntities()
     
     for (unsigned int i = 0; i < CONTAINER_pList.size(); i++)
     {
-        if (isObjectVisible(CONTAINER_pList[i]->getPoints(), startViewCoord_x, startViewCoord_y))    
+       // if (isObjectVisible(CONTAINER_pList[i]->getPoints(), startViewCoord_x, startViewCoord_y))    
            visible_CONTAINER_pList.push_back(CONTAINER_pList[i]);  
     }
 

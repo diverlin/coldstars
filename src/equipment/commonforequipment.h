@@ -66,7 +66,7 @@ class CommonForEquipment
           		void (CommonForEquipment::*pToFunc_render)(Rect slot_rect);
           		void _renderFrame(Rect slot_rect);
           		void _renderFrames(Rect slot_rect);
-     		void renderInfo(Rect slot_rect); 
+     		void renderInfo(Rect slot_rect, float offset_x, float offset_y); 
      		
      	private:
      	        int type_id, subtype_id;

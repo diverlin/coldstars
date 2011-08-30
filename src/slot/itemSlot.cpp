@@ -925,7 +925,7 @@ void ItemSlot :: renderFrames(GLuint flash_tex)
 
 
 
-void ItemSlot :: renderItemInfo()
+void ItemSlot :: renderItemInfo(float offset_x, float offset_y)
 {
 	if (item_type_id == EQUIPMENT_ID)
 	{
@@ -936,57 +936,57 @@ void ItemSlot :: renderItemInfo()
                 // items
 		if (item_subtype_id == LAZER_ID)
 		{	lazer_equipment->updateInfo();
-        		lazer_equipment->renderInfo(rect);
+        		lazer_equipment->renderInfo(rect, offset_x, offset_y);
 		}
 		if (item_subtype_id == ROCKET_ID)
 		{	
 			rocket_equipment->updateInfo();
-			rocket_equipment->renderInfo(rect);
+			rocket_equipment->renderInfo(rect, offset_x, offset_y);
 		}
 		if (item_subtype_id == RADAR_ID)
 		{
 			radar_equipment->updateInfo();
-			radar_equipment->renderInfo(rect);
+			radar_equipment->renderInfo(rect, offset_x, offset_y);
 		}
 		if (item_subtype_id == DRIVE_ID)
 		{
 			drive_equipment->updateInfo();
-			drive_equipment->renderInfo(rect);
+			drive_equipment->renderInfo(rect, offset_x, offset_y);
 		}
 		if (item_subtype_id == BAK_ID)
 		{
 			bak_equipment->updateInfo();
-			bak_equipment->renderInfo(rect);
+			bak_equipment->renderInfo(rect, offset_x, offset_y);
 		}
 		if (item_subtype_id == ENERGIZER_ID)
 		{
 			energizer_equipment->updateInfo();
-			energizer_equipment->renderInfo(rect);
+			energizer_equipment->renderInfo(rect, offset_x, offset_y);
 		}
 		if (item_subtype_id == PROTECTOR_ID)
 		{
 			protector_equipment->updateInfo();
-			protector_equipment->renderInfo(rect);
+			protector_equipment->renderInfo(rect, offset_x, offset_y);
 		}
 		if (item_subtype_id == DROID_ID)
 		{
 			droid_equipment->updateInfo();
-			droid_equipment->renderInfo(rect);
+			droid_equipment->renderInfo(rect, offset_x, offset_y);
 		}
 		if (item_subtype_id == FREEZER_ID)
 		{
 			freezer_equipment->updateInfo();
-			freezer_equipment->renderInfo(rect);
+			freezer_equipment->renderInfo(rect, offset_x, offset_y);
 		}
 		if (item_subtype_id == SCANER_ID)
 		{
 			scaner_equipment->updateInfo();
-			scaner_equipment->renderInfo(rect);
+			scaner_equipment->renderInfo(rect, offset_x, offset_y);
 		}
 		if (item_subtype_id == GRAPPLE_ID)
 		{
 			grapple_equipment->updateInfo();
-			grapple_equipment->renderInfo(rect);
+			grapple_equipment->renderInfo(rect, offset_x, offset_y);
 		}
      	}
      		

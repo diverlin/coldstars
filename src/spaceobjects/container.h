@@ -24,48 +24,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Container : public CommonForSpaceItems
 {
-    public: 
-        int id;
-        int type_id;
-        int item_subtype_id; 
-        int item_id;
+    	public: 
+        	int id, type_id;
                   
-        RocketEquipment*      pTo_rocketEquipment;
-        LazerEquipment*       pTo_lazerEquipment;
-        RadarEquipment*       pTo_radarEquipment;
-        DriveEquipment*       pTo_driveEquipment;
-        BakEquipment*         pTo_bakEquipment;
-        EnergizerEquipment*   pTo_energizerEquipment;
-        ProtectorEquipment*   pTo_protectorEquipment;
-        DroidEquipment*       pTo_droidEquipment;
-        FreezerEquipment*     pTo_freezerEquipment;
-        ScanerEquipment*      pTo_scanerEquipment;
-        GrappleEquipment*     pTo_grappleEquipment;
+                ItemSlot* otsec_slot;
                             
-        VEC_pString_type info_title_pList;  
-        VEC_pString_type info_value_pList; 
- 
-        int mass;
+        	int mass;
+        	int size;
 
-        int size;
-
-        Container();
-        Container(TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _target_x, float _target_y);
-        ~Container();
+        	Container();
+        	Container(TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _target_x, float _target_y);
+        	~Container();
         
-        void packRocketEquipment(RocketEquipment* pTo_item);
-        void packLazerEquipment(LazerEquipment* pTo_item);
-        void packRadarEquipment(RadarEquipment* pTo_item);
-        void packDriveEquipment(DriveEquipment* pTo_item);
-        void packBakEquipment(BakEquipment* pTo_item);
-        void packEnergizerEquipment(EnergizerEquipment* pTo_item);
-        void packProtectorEquipment(ProtectorEquipment* pTo_item);
-        void packDroidEquipment(DroidEquipment* pTo_item);
-        void packFreezerEquipment(FreezerEquipment* pTo_item);
-        void packScanerEquipment(ScanerEquipment* pTo_item);
-        void packGrappleEquipment(GrappleEquipment* pTo_item);
-        
-        void renderInfo();
+        	void renderInfo();
 };
 
 #endif 
