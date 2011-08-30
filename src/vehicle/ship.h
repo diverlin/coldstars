@@ -45,20 +45,11 @@ struct Abilities
 };
 
     
-//struct WSelected
-//{
-   	//bool weapon_1;
-   	//bool weapon_2;
-   	//bool weapon_3;
-   	//bool weapon_4;
-   	//bool weapon_5;
-//};
-    
-
-
 class Ship
 {   
     	public:
+                Points* getPoints();
+        
         	VEC_pTurrel_type turrel_pList;
     
         	bool is_alive, is_dying, is_explosed;
@@ -83,7 +74,6 @@ class Ship
         	int w_orig, h_orig;
 
         	float angle_inD;
-        	Points points;
 
         	bool controlled_by_player;
         	Npc* pTo_npc_owner;
@@ -115,8 +105,7 @@ class Ship
         	TextureOb* pTo_slotTexOb;
 
         	bool render_TURRELS;
-        	VEC_pFloat_type turrel_center_x_pList;
-        	VEC_pFloat_type turrel_center_y_pList;
+        	std::vector<vec2f*> turrel_center_pList;
 
 
         	// WEPONS
@@ -302,6 +291,10 @@ class Ship
         	void renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y);
 
         	void renderInternaly();
+                
+        private:
+                Points points;
+
 };
 
 void equip(Ship* pTo_ship);

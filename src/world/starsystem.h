@@ -112,7 +112,6 @@ class StarSystem
     		void addShockWave(float _center_x, float _center_y, int obSize);
     		    		
     		void asteroidManager(int num);
-    		void addAsteroid();
     		void addNumMinerals(float _center_x, float _center_y, int num);
 
     		void manageEntities();
@@ -125,19 +124,22 @@ class StarSystem
     		void fireEvents_FALSE(int timer);
 
     		//// TRANSITION
-    		bool addShip(Ship* _pTo_ship);
-    		bool addNpc(Npc* _pTo_npc);
+                bool addStar(Star* _star);
+                bool addPlanet(Planet* _planet);
+    		bool addAsteroid(Asteroid* _asteroid);
+    		bool addShip(Ship* _ship);
+    		bool addNpc(Npc* _npc);
+    		bool addMineral(Mineral* _mineral);
+    		bool addContainer(Container* _container);
+                
     		bool removeShipById(int _id);    
     		bool removeNpc(int _id, int _race_id, int _subtype_id);  
          	bool removeNpcFromTheListById(VEC_pNpc_type* pTo_npc_pList, int _id);
-
-    		bool addPlanet(Planet* _pTo_planet);   
-    		//// TRANSITION
+   		//// TRANSITION
 
     		Planet* returnClosestPlanet(int _pos_x, int _pos_y);
 
     		void debug__();
-
 };
 
 #endif 

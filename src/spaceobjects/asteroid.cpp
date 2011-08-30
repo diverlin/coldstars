@@ -19,176 +19,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "asteroid.h"
 
-CommonForPlanet :: CommonForPlanet()
-{}
-
-
-CommonForPlanet :: ~CommonForPlanet()
-{}
-
-
-void CommonForPlanet :: CommonForPlanet_init(TextureOb*       _texOb, 
-    	   				     ObjMeshInstance* _mesh, 
-    	   				     float _size, 
-    	   			             float _orbit_center_x, 
-    	   			             float _orbit_center_y, 
-    	   			             int _radius_A,
-    	   				     int _radius_B, 
-    	   				     float _orbit_phi_inD,
-    	   			             float _speed)
-{  
-	starsystem = NULL;
-        texOb = _texOb;
-        mesh  = _mesh; 
-      
-      	orbit_center_x = _orbit_center_x;
-      	orbit_center_y = _orbit_center_y;
-      	radius_A       = _radius_A;
-      	radius_B       = _radius_B;
-      	orbit_phi_inD  = _orbit_phi_inD;
-      	speed          = _speed;    
-     
-      	pos_z          = -500.0f;
-
-        angle_x        = randIntInRange(10, 40);
-        angle_y        = randIntInRange(10, 40);
-      	angle_z        = 0.0;
-      	d_angle_z      = randIntInRange(10, 100)*0.01;
-      
-
-        orbit_it       = 0;
-     	scale = _size;
-      
-        // !!!!
-        float rate = 5.4;                                            
-        w = rate * scale;
-        h = rate * scale;
-        collision_radius = (w + h)/2; 
-        // !!!!
-                
-        //////
-	points = Points();
-
-	points.initCenterPoint();
-	points.addCenterPoint();
-	//////
-      
-       	detailedEllipceOrbitFormation();
-       	
-       	      updatePosition(); 
-}
-
-
-void CommonForPlanet :: detailedEllipceOrbitFormation()
-{   
-     float d_angleInRad = speed / 57.295779;
-     float orbitPhiInRad = orbit_phi_inD * PI/180;
-     for(float angleInRad = 0; angleInRad < 2*PI; angleInRad += d_angleInRad) 
-     { 
-         float new_coord_x = orbit_center_x + radius_A * cos(angleInRad) * cos(orbitPhiInRad) - radius_B * sin(angleInRad) * sin(orbitPhiInRad);
-         float new_coord_y = orbit_center_y + radius_A * cos(angleInRad) * sin(orbitPhiInRad) + radius_B * sin(angleInRad) * cos(orbitPhiInRad);
-         orbit_vector_x.push_back(new_coord_x);
-         orbit_vector_y.push_back(new_coord_y);
-
-         orbit_len = orbit_vector_x.size();
-         orbit_it = randIntInRange(1, orbit_len);
-     }
-}    
-
-
-void CommonForPlanet :: updatePosition()
-{   
-     if (orbit_it < orbit_len)
-     { 
-        points.setCenter(orbit_vector_x[orbit_it], orbit_vector_y[orbit_it]);
-        orbit_it++;
-     }
-     else
-        orbit_it = 0;
-}    
-
-
-
-
-void CommonForPlanet :: render_NEW()
-{
-     glUseProgram(g_LIGHT_PROGRAM);
-     //printProgramInfoLog(g_LIGHT_PROGRAM);
-
-     //if (glGetUniformLocation(g_LIGHT_PROGRAM, "lightPos") == -1)
-         //printf("shader lightPos fail\n"); 
-     //if (glGetUniformLocation(g_LIGHT_PROGRAM, "eyePos") == -1)
-         //printf("shader eyePos fail\n"); 
-     //if (glGetUniformLocation(g_LIGHT_PROGRAM, "Texture_0") == -1)
-         //printf("shader Texture_0 fail\n"); 
-
-     glUniform4f(glGetUniformLocation(g_LIGHT_PROGRAM, "lightPos"), -g_SCROLL_COORD_X, -g_SCROLL_COORD_Y, -200.0, 0.0);
-     glUniform4f(glGetUniformLocation(g_LIGHT_PROGRAM, "eyePos"), -g_SCROLL_COORD_X, -g_SCROLL_COORD_Y, -200.0, 0.0);
-
-     glActiveTexture(GL_TEXTURE0);
-     glBindTexture(GL_TEXTURE_2D, texOb->texture);
-     glUniform1i(glGetUniformLocation(g_LIGHT_PROGRAM, "Texture_0"), 0);
-      
-     glPushMatrix();
-       glTranslatef(points.center_x, points.center_y, pos_z);
-       glScalef(scale, scale, scale); 
-       glRotatef(-angle_x, 1.0, 0.0, 0.0); 
-       glRotatef(-angle_y, 0.0, 1.0, 0.0); 
-       glRotatef(-angle_z, 0.0, 0.0, 1.0); 
-
-       glCallList(mesh->glList);
-       //g_model.render(); 
-       angle_z += 0.6; 
-     glPopMatrix();
-
-     //// render atmosphere
-     //glEnable(GL_BLEND);
-     //glActiveTexture(GL_TEXTURE0);                                
-     //glBindTexture(GL_TEXTURE_2D, pTo_atmosphereTexOb->texture);
-     //glUniform1i(glGetUniformLocation(g_LIGHT_PROGRAM, "Texture_0"), 0);
-
-     //glPushMatrix();
-       //glTranslatef(points.center_x, points.center_y, pos_z);
-       //glScalef(scale*1.05, scale*1.05, scale*1.05);
-       //glRotatef(angle_x, 1.0, 0.0, 0.0); 
-       //glRotatef(angle_y, 0.0, 1.0, 0.0); 
-       //glRotatef(angle_z, 0.0, 0.0, 1.0); 
-
-       //glCallList(pTo_mesh->glList);
-       ////g_model.render(); 
-     //glPopMatrix();
-     //glDisable(GL_BLEND);
-     //// render atmosphere
-
-     glUseProgram(0);
-     glActiveTexture(GL_TEXTURE0);
-}
-
-void CommonForPlanet :: render_OLD()
-{   
-     glPushMatrix();
-       glBindTexture(GL_TEXTURE_2D, texOb->texture);   
-       glTranslatef(points.center_x, points.center_y, pos_z);
-       glScalef(scale, scale, scale); 
-       glRotatef(angle_x, 1.0, 0.0, 0.0); 
-       glRotatef(angle_y, 0.0, 1.0, 0.0); 
-       glRotatef(angle_z, 0.0, 0.0, 1.0); 
-
-       glCallList(mesh->glList);
-       angle_z += 0.6; 
-     glPopMatrix();
-}
-
-
-
-
-
-
-
-
-
-
-
 Asteroid :: Asteroid(TextureOb* _texOb,
 		     ObjMeshInstance* _mesh,
 		     float _size, 
@@ -199,8 +29,6 @@ Asteroid :: Asteroid(TextureOb* _texOb,
 		     float _orbit_phi_inD, 
 		     float _speed)
 { 
-      id = g_ENTITY_ID_GENERATOR.returnNextId();
-  
        CommonForPlanet_init(_texOb, 
     	   		    _mesh, 
     	   	            _size, 
@@ -272,8 +100,8 @@ void Asteroid :: death_TRUE()
 
      if (is_explosed == false)
      {   
-        starsystem->addExplosion(points.center_x, points.center_y, scale/2);
-        starsystem->addNumMinerals(points.center_x, points.center_y, randIntInRange(1,4));
+        starsystem->addExplosion(points.getCenter().x, points.getCenter().y, scale/2);
+        starsystem->addNumMinerals(points.getCenter().x, points.getCenter().y, randIntInRange(1,4));
         //self.starsystem.screen_QUAKE_runtime_counter = 50
         //self.starsystem.screen_QUAKE_amlitudaDiv2 = 5
         is_explosed = true;
@@ -287,7 +115,7 @@ void Asteroid :: death_FALSE()
 
      if (is_explosed == false)
      {   
-        starsystem->addNumMinerals(points.center_x, points.center_y, randIntInRange(1,4));
+        starsystem->addNumMinerals(points.getCenter().x, points.getCenter().y, randIntInRange(1,4));
         is_explosed = true;
      }
 }
@@ -319,10 +147,36 @@ void Asteroid :: updateInfo()
 
 void Asteroid :: renderInfo()
 {  
-     drawInfoIn2Column(&info_title_pList, &info_value_pList, points.center_x, points.center_y);
+     drawInfoIn2Column(&info_title_pList, &info_value_pList, points.getCenter().x, points.getCenter().y);
 }
 
         
 
+
+Asteroid* asteroidGenerator()
+{
+        TextureOb* _texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.asteroid_texOb_pList); 
+    
+        float _size = 10;
+        float _orbit_center_x = 0;
+        float _orbit_center_y = 0;
+        int _radius_A = randIntInRange(300, 1200);
+        int _radius_B = randIntInRange(300, 1200);
+        float _orbit_phi_inD = randIntInRange(0, 360);
+        float _speed = 0.1;
+
+        Asteroid* _asteroid = new Asteroid(_texOb,
+    				pTo_DEFORMED_SPHERE_MESH,
+    				_size, 
+    				_orbit_center_x, 
+    				_orbit_center_y, 
+    				_radius_A, 
+    				_radius_B, 
+    				_orbit_phi_inD, 
+    				_speed);
+    	
+        _asteroid->update_inSpace_inDynamic_FALSE();
+        return _asteroid;        
+}
 
 

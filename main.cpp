@@ -64,11 +64,10 @@ void starsystemRender(StarSystem* pTo_ss)
 {
     	//pTo_ss->renderBackground();  // moved to ss
     	pTo_ss->findVisibleEntities();
-    	if (USE_MODERN_HW)
+    	if (USE_MODERN_HW == true)
     		pTo_ss->renderEntities_NEW();
     	else
-        	pTo_ss->renderEntities_OLD();
-    	 
+        	pTo_ss->renderEntities_OLD(); 
 }
 
 void playerScan(Ship* pTo_ship, bool in_store = false, bool allow_full_control = false)
@@ -134,7 +133,7 @@ int main()
 
     pTo_PLAYER->setShip(pTo_pship);
 
-    pTo_pship->points.setCenter(-200,-200);
+    pTo_pship->getPoints()->setCenter(-200,-200);
     //// player
 
     float fps;

@@ -19,9 +19,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "mineral.h"
 
-Mineral :: Mineral(TextureOb* _pTo_texOb, StarSystem* _pTo_starsystem, float _pos_x, float _pos_y, float _target_pos_x, float _target_pos_y)
+Mineral :: Mineral(TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _target_pos_x, float _target_pos_y)
 {        
-    CommonForSpaceItems_init(_pTo_starsystem, _pTo_texOb, _pos_x, _pos_y, _target_pos_x, _target_pos_y);
+    CommonForSpaceItems_init(_pTo_texOb, _pos_x, _pos_y, _target_pos_x, _target_pos_y);
     //pTo_starsystem = _pTo_starsystem;
 
     id         = g_ENTITY_ID_GENERATOR.returnNextId();
@@ -44,7 +44,7 @@ void Mineral :: updateInfo()
     info_title_0 = "MINERAL";
 
     info_title_1 = "id/ss_id:";
-    info_value_1 = int2str(id) + " / " + int2str(pTo_starsystem->id);
+    info_value_1 = int2str(id) + " / " + int2str(starsystem->id);
     info_title_2 = "armor:";
     info_value_2 = int2str(armor);
     info_title_3 = "mass:";
@@ -77,7 +77,7 @@ std::string Mineral :: returnTypeStr()
 
 void Mineral :: renderInfo()
 {
-     drawInfoIn2Column(&info_title_pList, &info_value_pList, points.center_x, points.center_y);    
+     drawInfoIn2Column(&info_title_pList, &info_value_pList, points.getCenter().x, points.getCenter().y);    
 }
 
 

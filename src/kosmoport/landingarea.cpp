@@ -56,8 +56,8 @@ void LandingArea :: renderInternals()
 {
      if (is_BUSY == true)
      {
-        pTo_ship->points.setAngle(0);
-        pTo_ship->points.setCenter(rect.center_x, rect.center_y);
+        pTo_ship->getPoints()->setAngle(0);
+        pTo_ship->getPoints()->setCenter(rect.center_x, rect.center_y);
         pTo_ship->renderKorpus();
      }
 }

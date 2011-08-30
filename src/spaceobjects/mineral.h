@@ -23,30 +23,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Mineral : public CommonForSpaceItems
 {
-    public:
-        //StarSystem* pTo_starsystem;
-
-        int id;
-        int type_id; 
-        int subtype_id;
+    	public:
+        	int id, type_id, subtype_id;
     
-        int mass;
+        	int mass;
 
 
-        // INFO 
-        std::string info_title_0;
-        std::string info_title_1;   std::string info_value_1;
-        std::string info_title_2;   std::string info_value_2;
-        std::string info_title_3;   std::string info_value_3;
-        VEC_pString_type info_title_pList;        
-        VEC_pString_type info_value_pList;  
+        	// INFO 
+        	VEC_pString_type info_title_pList;        
+        	VEC_pString_type info_value_pList; 
+        	
+        	std::string info_title_0;
+        	std::string info_title_1;   std::string info_value_1;
+        	std::string info_title_2;   std::string info_value_2;
+        	std::string info_title_3;   std::string info_value_3;
  
-        Mineral(TextureOb* _pTo_texOb, StarSystem* _pTo_starsystem, float _pos_x, float _pos_y, float _target_pos_x, float _target_pos_y);
+ 
+        	Mineral(TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _target_pos_x, float _target_pos_y);
 
-        void updateInfo();
-             std::string returnTypeStr();
+        	void updateInfo();
+             		std::string returnTypeStr();
         
-        void renderInfo();
+        	void renderInfo();
 };
 
 #endif 

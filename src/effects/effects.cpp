@@ -20,7 +20,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "effects.h"
 
 
-DamageEffect :: DamageEffect(TextureOb* _pTo_texOb, StarSystem* _pTo_starsystem, float* _pTo_center_x, float* _pTo_center_y, int _num_particles, float _pSize, float _velocity_start, float _alpha_start, float _alpha_end, float _d_alpha)
+DamageEffect :: DamageEffect(TextureOb* _pTo_texOb, 
+			     StarSystem* _pTo_starsystem, 
+			     float* _pTo_center_x, 
+			     float* _pTo_center_y, 
+			     int _num_particles, 
+			     float _pSize, 
+			     float _velocity_start, 
+			     float _alpha_start, 
+			     float _alpha_end, 
+			     float _d_alpha)
 {
     is_alive = true;
     is_dying = false;
@@ -39,7 +48,12 @@ DamageEffect :: DamageEffect(TextureOb* _pTo_texOb, StarSystem* _pTo_starsystem,
 
     for (unsigned int i = 0; i < num_particles; i++)
     {
-        ParticleForDamageEffect* pTo_particle = new ParticleForDamageEffect(pTo_center_x, pTo_center_y, velocity_start, alpha_start, alpha_end, randIntInRange(3,6)*0.01);
+        ParticleForDamageEffect* pTo_particle = new ParticleForDamageEffect(pTo_center_x, 
+        								    pTo_center_y, 
+        								    velocity_start, 
+        								    alpha_start, 
+        								    alpha_end, 
+        								    randIntInRange(3,6)*0.01);
         particles_pList.push_back(pTo_particle);
     } 
 }
@@ -85,7 +99,12 @@ void DamageEffect :: render()
 
 
 
-ParticleForDamageEffect :: ParticleForDamageEffect(float* _pTo_center_x, float* _pTo_center_y, float _velocity_start, float _alpha_start, float _alpha_end, float _d_alpha)
+ParticleForDamageEffect :: ParticleForDamageEffect(float* _pTo_center_x, 
+						   float* _pTo_center_y, 
+						   float _velocity_start, 
+						   float _alpha_start, 
+						   float _alpha_end, 
+						   float _d_alpha)
 {
      is_alive = true;
 
@@ -180,7 +199,17 @@ void ParticleForDamageEffect :: render()
 
 
            
-ExplosionEffect :: ExplosionEffect(TextureOb* _pTo_texOb, StarSystem* _pTo_starsystem, float _center_x, float _center_y, int _num_particles, float _pSize_start, float _d_pSize,  float _velocity_start, float _alpha_start, float _alpha_end, float _d_alpha)
+ExplosionEffect :: ExplosionEffect(TextureOb* _pTo_texOb, 
+				   StarSystem* _pTo_starsystem, 
+				   float _center_x, 
+				   float _center_y, 
+				   int _num_particles, 
+				   float _pSize_start, 
+				   float _d_pSize,  
+				   float _velocity_start, 
+				   float _alpha_start, 
+				   float _alpha_end, 
+				   float _d_alpha)
 {  
     is_alive = true;
     alreadyInRemoveQueue = false;
@@ -207,7 +236,16 @@ ExplosionEffect :: ExplosionEffect(TextureOb* _pTo_texOb, StarSystem* _pTo_stars
     {  
        //velocity_start = randIntInRange(50, 100)*0.005;
        //printf("rand=%f, i=%i\n",d_velocity, i);
-       ParticleForExplosionEffect* pTo_particle = new ParticleForExplosionEffect(center_x, center_y, pSize_start, d_pSize, velocity_start, 0.0, alpha_start, alpha_end, d_alpha, i);
+       ParticleForExplosionEffect* pTo_particle = new ParticleForExplosionEffect(center_x, 
+       										 center_y, 
+       										 pSize_start, 
+       										 d_pSize, 
+       										 velocity_start, 
+       										 0.0, 
+       										 alpha_start, 
+       										 alpha_end, 
+       										 d_alpha, 
+       										 i);
        particles_pList.push_back(pTo_particle);
        //printf("SOMETHING WRONG WITH PARTICLES, %f, %f\n", (*pTo_particle).alpha, (*pTo_particle).size);
     }
@@ -262,7 +300,16 @@ void ExplosionEffect :: render()
 
 
 
-ParticleForExplosionEffect :: ParticleForExplosionEffect(float _center_x_start, float _center_y_start, float _size_start, float _d_size, float _velocity_start, float _d_velocity, float _alpha_start, float _alpha_end, float _d_alpha, float _curnum)
+ParticleForExplosionEffect :: ParticleForExplosionEffect(float _center_x_start, 
+							 float _center_y_start, 
+							 float _size_start, 
+							 float _d_size, 
+							 float _velocity_start, 
+							 float _d_velocity, 
+							 float _alpha_start, 
+							 float _alpha_end, 
+							 float _d_alpha, 
+							 float _curnum)
 {
     is_alive = true;
 
@@ -359,7 +406,16 @@ void ParticleForExplosionEffect :: render()
 
 
 
-DriveTrailEffect :: DriveTrailEffect(TextureOb* _pTo_texOb, float* _pTo_OB_angle_inD, float* _pTo_start_pos_x, float* _pTo_start_pos_y, float* _pTo_target_pos_x, float* _pTo_target_pos_y, int _num_particles, float _size, float _velocity_orig, float _alpha_start, float _alpha_end, float _d_alpha)
+DriveTrailEffect :: DriveTrailEffect(TextureOb* _pTo_texOb, 
+				     float* _pTo_OB_angle_inD, 
+				     vec2f* _pTo_start_pos, 
+				     vec2f* _pTo_target_pos, 
+				     int _num_particles, 
+				     float _size, 
+				     float _velocity_orig, 
+				     float _alpha_start, 
+				     float _alpha_end, 
+				     float _d_alpha)
 {
      pTo_texOb = _pTo_texOb;
  
@@ -367,11 +423,11 @@ DriveTrailEffect :: DriveTrailEffect(TextureOb* _pTo_texOb, float* _pTo_OB_angle
 
      pTo_OB_angle_inD = _pTo_OB_angle_inD;
 
-     pTo_start_pos_x = _pTo_start_pos_x;       //ob.points.midLeft
-     pTo_start_pos_y = _pTo_start_pos_y;
+     pTo_start_pos_x = &_pTo_start_pos->x;       //ob.points.midLeft
+     pTo_start_pos_y = &_pTo_start_pos->y;
 
-     pTo_target_pos_x = _pTo_target_pos_x;     //ob.points.midFarLeft
-     pTo_target_pos_y = _pTo_target_pos_y;  
+     pTo_target_pos_x = &_pTo_target_pos->x;     //ob.points.midFarLeft
+     pTo_target_pos_y = &_pTo_target_pos->y;  
 
      num_particles = _num_particles;
 
@@ -383,7 +439,12 @@ DriveTrailEffect :: DriveTrailEffect(TextureOb* _pTo_texOb, float* _pTo_OB_angle
 
      for (unsigned int i = 0; i < num_particles; i++)
      {
-         particleForDriveTrailEffect* pTo_particle = new particleForDriveTrailEffect(_pTo_start_pos_x, _pTo_start_pos_y, _alpha_start, _alpha_end, _d_alpha, i);  
+         particleForDriveTrailEffect* pTo_particle = new particleForDriveTrailEffect(pTo_start_pos_x, 
+         									     pTo_start_pos_y, 
+         									     _alpha_start, 
+         									     _alpha_end, 
+         									     _d_alpha, 
+         									     i);  
          particles_pList.push_back(pTo_particle);
      }
 
@@ -448,7 +509,12 @@ void DriveTrailEffect :: render()
 
 
 
-particleForDriveTrailEffect :: particleForDriveTrailEffect(float* _pTo_start_pos_x, float* _pTo_start_pos_y, float _alpha_start, float _alpha_end, float _d_alpha, int _num)
+particleForDriveTrailEffect :: particleForDriveTrailEffect(float* _pTo_start_pos_x, 
+							   float* _pTo_start_pos_y, 
+							   float _alpha_start, 
+							   float _alpha_end, 
+							   float _d_alpha, 
+							   int _num)
 {
           num = _num;
           pTo_start_pos_x = _pTo_start_pos_x;

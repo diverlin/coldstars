@@ -787,8 +787,13 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
 				if (pTo_CURSOR->pTo_otsec_slot->getEquipedStatus() == true)
 				{
 					TextureOb* pTo_containerTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.container_texOb_pList); 
-					Container* pTo_container = new Container(pTo_ship->pTo_starsystem, pTo_containerTexOb, pTo_ship->points.center_x, pTo_ship->points.center_y, pTo_ship->points.center_x + randIntInRange(50, 250), pTo_ship->points.center_y + randIntInRange(50, 250));
-					pTo_ship->pTo_starsystem->CONTAINER_pList.push_back(pTo_container); 
+					Container* pTo_container = new Container(pTo_containerTexOb, 
+										 pTo_ship->getPoints()->getCenter().x, 
+										 pTo_ship->getPoints()->getCenter().y, 
+										 pTo_ship->getPoints()->getCenter().x + randIntInRange(50, 100), 
+										 pTo_ship->getPoints()->getCenter().y + randIntInRange(50, 100));
+										 
+					pTo_ship->pTo_starsystem->addContainer(pTo_container); 
 
 					if (pTo_CURSOR->pTo_otsec_slot->getItemSubType() == LAZER_ID)
 					{     

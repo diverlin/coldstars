@@ -38,7 +38,6 @@ class World
      
      		void generateEntireStarSystem();
      		void generateBackground(StarSystem* _pTo_starsystem, int distNebula_maxNum, int distStar_maxNum);
-     		void generateStar(StarSystem* _pTo_starsystem);
      		void generateNumPlanets(StarSystem* _pTo_starsystem, int planet_per_system);
      
      		void generateNumFriendlyNPC(StarSystem* _pTo_starsystem, int ship_per_system);

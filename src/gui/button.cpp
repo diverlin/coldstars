@@ -33,7 +33,7 @@ Button :: ~Button()
 
 bool Button :: interaction(int _x, int _y)
 {        
-    float dist = lengthBetweenPoints(rect.center_x, rect.center_y, _x, _y);
+    float dist = distBetweenCenters(rect.center_x, rect.center_y, _x, _y);
     if (dist < rect.w/2)
         return true;
     else

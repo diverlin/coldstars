@@ -20,14 +20,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef RENDER_H
 #define RENDER_H
 
-void drawFlatQuadPerVertexIn2D(float bottomLeft_x, 
-			       float bottomLeft_y, 
-			       float bottomRight_x, 
-			       float bottomRight_y, 
-			       float topRight_x, 
-			       float topRight_y, 
-			       float topLeft_x, 
-			       float topLeft_y, 
+
+void drawFlatQuadPerVertexIn2D(vec2f bottomLeft, 
+			       vec2f bottomRight, 
+			       vec2f topRight, 
+			       vec2f topLeft, 
 			       float z_pos, 
 			       float texCoord_bottomLeft_x = 0, 
 			       float texCoord_bottomLeft_y = 0, 
@@ -37,7 +34,7 @@ void drawFlatQuadPerVertexIn2D(float bottomLeft_x,
 			       float texCoord_topRight_y = 1, 
 			       float texCoord_topLeft_x = 0,
 			       float texCoord_topLeft_y = 1);
-
+			       
 
 void drawDynamic(float center_x, 
 		 float center_y, 
@@ -71,9 +68,7 @@ void drawRect(Rect rect,
 	      float texCoord_topLeft_y = 1); // the drawrect function was inverted by Y axis
 
 
-void drawTexturedRect(GLuint tex, 
-		      Rect rect, 
-		      float z_pos);   //# z_pos = -1
+void drawTexturedRect(GLuint tex, Rect rect, float z_pos);   //# z_pos = -1
 
 
 

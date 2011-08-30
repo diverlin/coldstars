@@ -52,14 +52,10 @@ void ShieldEffect :: render()
     glColor4f(1.0, 1.0, 1.0, alpha);
 
     glBindTexture(GL_TEXTURE_2D, texture);
-    drawFlatQuadPerVertexIn2D(pTo_ship->points.bottomLeftShield_x, 
-     			      pTo_ship->points.bottomLeftShield_y, 
-     			      pTo_ship->points.bottomRightShield_x, 
-     			      pTo_ship->points.bottomRightShield_y, 
-     			      pTo_ship->points.topRightShield_x, 
-     			      pTo_ship->points.topRightShield_y, 
-     			      pTo_ship->points.topLeftShield_x, 
-     			      pTo_ship->points.topLeftShield_y, 
+    drawFlatQuadPerVertexIn2D(pTo_ship->getPoints()->getBottomLeftShield(), 
+     			      pTo_ship->getPoints()->getBottomRightShield(), 
+     			      pTo_ship->getPoints()->getTopRightShield(), 
+     			      pTo_ship->getPoints()->getTopLeftShield(), 
      			      pos_z);
 }
 

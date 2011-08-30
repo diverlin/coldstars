@@ -51,9 +51,9 @@ void Turrel :: setSelectedStatus(bool _selected) { is_SELECTED = _selected; }
 bool Turrel :: getSelectedStatus() const { return is_SELECTED; }
 bool Turrel :: getHasTargetStatus() const { return has_TARGET; }
 
-float Turrel :: getCenterX() const { return points.center_x; }
-float Turrel :: getCenterY() const { return points.center_y; }
-float Turrel :: getAngle()   const { return points.angle_inD; }
+float Turrel :: getCenterX() const { return points.getCenter().x; }
+float Turrel :: getCenterY() const { return points.getCenter().y; }
+float Turrel :: getAngle()   const { return points.getAngleDegree(); }
                                 
 void Turrel :: bindSlot(ItemSlot* _slot)
 {
@@ -86,10 +86,10 @@ Turrel :: ~Turrel()
 {}
 
 
-void Turrel :: placed(float* _pTo_pos_x, float* _pTo_pos_y)
+void Turrel :: placed(vec2f* _center)
 {
-     pTo_pos_x = _pTo_pos_x;
-     pTo_pos_y = _pTo_pos_y;
+     pTo_pos_x = &_center->x;
+     pTo_pos_y = &_center->y;
 }
 
 
@@ -113,10 +113,7 @@ bool Turrel :: isTargetAchievable()
          return false;
     }  
 
-    float dist_to_target = lengthBetweenPoints(slot->getShip()->points.center_x, 
-                                               slot->getShip()->points.center_y, 
-                                               (*pTo_target_pos_x), 
-                                               (*pTo_target_pos_y));
+    float dist_to_target = distBetweenCenters(slot->getShip()->getPoints(), (*pTo_target_pos_x), (*pTo_target_pos_y));
                                                
     if (dist_to_target > slot->getItemRadius())
     {
@@ -189,19 +186,19 @@ bool Turrel :: isTargetOnTheSameStarSystem()
            return false;
 
      if (target_type_id == ASTEROID_ID)
-        if (target_asteroid->starsystem == slot->getShip()->pTo_starsystem)
+        if (target_asteroid->getStarSystem() == slot->getShip()->pTo_starsystem)
            return true;
         else
            return false;
 
      if (target_type_id == MINERAL_ID)
-        if (target_mineral->pTo_starsystem == slot->getShip()->pTo_starsystem)
+        if (target_mineral->getStarSystem() == slot->getShip()->pTo_starsystem)
            return true;
         else
            return false;
 
      if (target_type_id == CONTAINER_ID)
-        if (target_container->pTo_starsystem == slot->getShip()->pTo_starsystem)
+        if (target_container->getStarSystem() == slot->getShip()->pTo_starsystem)
            return true;
         else
            return false;
@@ -330,7 +327,7 @@ int Turrel :: returnTargetId()
         if (target_type_id == SHIP_ID)
            return target_ship->id;
         if (target_type_id == ASTEROID_ID)
-           return target_asteroid->id;
+           return target_asteroid->getId();
         if (target_type_id == MINERAL_ID)
            return target_mineral->id;
         if (target_type_id == CONTAINER_ID)
@@ -346,8 +343,8 @@ void Turrel :: setShipTarget(Ship* _ship)
      target_ship = _ship;
      target_type_id = target_ship->type_id;
 
-     pTo_target_pos_x = &(target_ship->points.center_x);
-     pTo_target_pos_y = &(target_ship->points.center_y);
+     pTo_target_pos_x = &(target_ship->getPoints()->getpCenter()->x);
+     pTo_target_pos_y = &(target_ship->getPoints()->getpCenter()->y);
 
      pTo_target_is_alive = &(target_ship->is_alive);
      has_TARGET = true;
@@ -356,10 +353,10 @@ void Turrel :: setShipTarget(Ship* _ship)
 void Turrel :: setAsteroidTarget(Asteroid* _asteroid)
 {
      target_asteroid = _asteroid;
-     target_type_id = target_asteroid->type_id;
+     target_type_id = target_asteroid->getType();
 
-     pTo_target_pos_x = &(target_asteroid->points.center_x);
-     pTo_target_pos_y = &(target_asteroid->points.center_y);
+     pTo_target_pos_x = &(target_asteroid->getPoints()->getpCenter()->x);
+     pTo_target_pos_y = &(target_asteroid->getPoints()->getpCenter()->y);
 
      pTo_target_is_alive = &(target_asteroid->is_alive);
      has_TARGET = true;
@@ -370,8 +367,8 @@ void Turrel :: setMineralTarget(Mineral* _mineral)
      target_mineral = _mineral;
      target_type_id = target_mineral->type_id;
 
-     pTo_target_pos_x = &(target_mineral->points.center_x);
-     pTo_target_pos_y = &(target_mineral->points.center_y);
+     pTo_target_pos_x = &(target_mineral->getPoints()->getpCenter()->x);
+     pTo_target_pos_y = &(target_mineral->getPoints()->getpCenter()->y);
 
      pTo_target_is_alive = &(target_mineral->is_alive);
      has_TARGET = true;
@@ -382,8 +379,8 @@ void Turrel :: setContainerTarget(Container* _container)
      target_container = _container;
      target_type_id = target_container->type_id;
 
-     pTo_target_pos_x = &(target_container->points.center_x);
-     pTo_target_pos_y = &(target_container->points.center_y);
+     pTo_target_pos_x = &(target_container->getPoints()->getpCenter()->x);
+     pTo_target_pos_y = &(target_container->getPoints()->getpCenter()->y);
 
      pTo_target_is_alive = &(target_container->is_alive);
      has_TARGET = true;
@@ -427,5 +424,9 @@ void Turrel :: updatePosition(float _center_x, float _center_y, float _angle_inD
 void Turrel :: render()
 {
     glBindTexture(GL_TEXTURE_2D, texture); 
-    drawFlatQuadPerVertexIn2D(points.bottomLeft_x, points.bottomLeft_y, points.bottomRight_x, points.bottomRight_y, points.topRight_x, points.topRight_y, points.topLeft_x, points.topLeft_y, pos_z);
+    drawFlatQuadPerVertexIn2D(points.getBottomLeft(), 
+                              points.getBottomRight(), 
+                              points.getTopRight(), 
+                              points.getTopLeft(), 
+                              pos_z);
 }

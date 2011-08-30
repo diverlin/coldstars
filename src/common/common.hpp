@@ -47,18 +47,26 @@ std :: string returnRaceStringByRaceId(int id);  // replace by generator class
 
 int returnObjectSize(int w, int h);  //size 0...9
 
-bool collisionBetweenCenters(float center_1x, float center_1y, float center_2x, float center_2y, float collision_radius);
-float lengthBetweenPoints(float x1, float y1, float x2, float y2);
+
+bool collisionBetweenCenters(Points* points1, Points* points2, float collision_radius);
+bool collisionBetweenCenters(Points* points1, float center2_x, float center2_y, float collision_radius);
+//bool collisionBetweenCenters(float center_1x, float center_1y, float center_2x, float center_2y, float collision_radius);
+
+
+float distBetweenCenters(Points* points1, Points* points2);
+float distBetweenCenters(Points* points, float x2, float y2);
+float distBetweenCenters(float x1, float y1, float x2, float y2);
+
 
 std::string int2str(int var); 
-
 std::string bool2str(bool var); 
 
 bool get_dX_dY_ToPoint(float x1, float y1, float x2, float y2, float step, float* pTo_dx, float* pTo_dy);
-
 void get_dX_dY_angleInD_ToPoint(float x1, float y1, float x2, float y2, float step, float* pTo_dx, float* pTo_dy, float* pTo_angle_inD);
 
-bool isObjectVisible(int ob_centerx, int ob_centery, int ob_w, int ob_h, int startViewCoord_x, int startViewCoord_y);   
+bool isObjectVisible(Points* points, float startViewCoord_x, float startViewCoord_y);
+bool isObjectVisible(float ob_centerx, float ob_centery, int ob_w, int ob_h, float startViewCoord_x, float startViewCoord_y);   
+
 
 
 #endif

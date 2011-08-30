@@ -28,10 +28,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <SFML/Graphics.hpp> 
 
 #include "src/common/alias.hpp"
+#include "src/common/vector.h"
 #include "src/resources/objLoader.h"
 
 #include "src/common/global.h"
 #include "src/common/constants.hpp"
+#include "src/common/points.h"
 #include "src/common/common.hpp"
 
 #include "src/resources/texture.h"
@@ -50,13 +52,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "src/common/rect.h"
 #include "src/render/render.hpp"
 #include "src/render/glsl.h"
-#include "src/common/points.h"
 
 
 #include "src/effects/background.h"
 #include "src/effects/effects.h"
 
-#include "src/world/starsystem.h"
 #include "src/spaceobjects/commonForSpaceItems.h" 
 
 #include "src/effects/shield.h"  
@@ -94,6 +94,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "src/slot/itemSlot.h"
 #include "src/vehicle/navigator.h"
 #include "src/vehicle/ship.h"
+#include "src/spaceobjects/commonForPlanet.h"
 #include "src/spaceobjects/asteroid.h"
 #include "src/spaceobjects/mineral.h"
 #include "src/spaceobjects/container.h"
@@ -113,8 +114,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "src/pilots/npc.h"
 #include "src/pilots/player.h"
 #include "src/gui/cursor.h"                  
-#include "src/spaceobjects/asteroid.h"   
-#include "src/spaceobjects/mineral.h" 
+
 #include "src/world/starsystem.h"    
 #include "src/effects/rocketBullet.h"
 #include "src/equipment/rocketEquipment.h"
@@ -125,9 +125,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "src/slot/itemSlot.h"
 #include "src/kosmoport/store.h"
 
+#include "src/world/starsystem.h"
 
 
-
+#include "src/common/vector.cpp"
 #include "src/world/world.cpp"
 #include "src/world/starsystem.cpp"  
 
@@ -135,6 +136,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "src/spaceobjects/star.cpp"  
 #include "src/spaceobjects/planet.cpp"
 #include "src/spaceobjects/commonForSpaceItems.cpp" 
+#include "src/spaceobjects/commonForPlanet.cpp"
 #include "src/spaceobjects/asteroid.cpp"   
 #include "src/spaceobjects/mineral.cpp" 
 

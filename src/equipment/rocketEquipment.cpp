@@ -175,8 +175,8 @@ void RocketEquipment :: fireEvent()
     	{
         	pTo_r1 = new RocketBullet(slot->getShip()->pTo_starsystem, 
                                  	  pTo_bulletTexOb, 
-                                  	  slot->getShip()->points.center_x, 
-                                  	  slot->getShip()->points.center_y, 
+                                  	  slot->getShip()->getPoints()->getCenter().x, 
+                                  	  slot->getShip()->getPoints()->getCenter().y, 
                                   	  slot->getTurrel()->getAngle(), 
                                   	  slot->getTurrel()->getTarget_pCenterX(), 
                                   	  slot->getTurrel()->getTarget_pCenterY(), 

@@ -45,7 +45,7 @@ class Turrel
                 float* get_pCenterX() const;
                 float* get_pCenterY() const;
                 
-                void placed(float* _pTo_pos_x, float* _pTo_pos_y);
+                void placed(vec2f* _center);
        
                 bool fireCheck();
                 bool isTargetAchievable();

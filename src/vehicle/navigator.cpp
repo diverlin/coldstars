@@ -59,8 +59,8 @@ void Navigator :: setTargetPlanet(Planet* _pTo_planet)
     	target_planet = _pTo_planet;
     	ship->is_FOLLOWING_PLANET = true;
 
-    	pTo_target_pos_x = &target_planet->points.center_x;
-    	pTo_target_pos_y = &target_planet->points.center_y;
+    	pTo_target_pos_x = &target_planet->getPoints()->getCenter().x;
+    	pTo_target_pos_y = &target_planet->getPoints()->getCenter().y;
 
     	docking_radius = 100;
 }
@@ -73,8 +73,8 @@ void Navigator :: setTargetShip(Ship* _target_ship)
     	target_ship = _target_ship;
     	ship->is_FOLLOWING_SHIP = true;
 
-    	pTo_target_pos_x = &target_ship->points.center_x;
-    	pTo_target_pos_y = &target_ship->points.center_y;
+    	pTo_target_pos_x = &target_ship->getPoints()->getCenter().x;
+    	pTo_target_pos_y = &target_ship->getPoints()->getCenter().y;
 }
     
 void Navigator :: setTargetStarSystem(StarSystem* _target_starsystem)
@@ -146,7 +146,7 @@ bool Navigator :: updateTargetCoords()
 
 bool Navigator :: checkDocking()
 {
-     	if (collisionBetweenCenters(ship->points.center_x, ship->points.center_y, (*pTo_target_pos_x), (*pTo_target_pos_y), docking_radius) == true)
+     	if (collisionBetweenCenters(ship->getPoints(), (*pTo_target_pos_x), (*pTo_target_pos_y), docking_radius) == true)
         	return true;
      	else    
         	return false;
