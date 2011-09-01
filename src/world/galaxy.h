@@ -17,11 +17,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef WORLD_H
-#define WORLD_H
+#ifndef GALAXY_H
+#define GALAXY_H
 
 
-class World 
+class Galaxy 
 {
   	public:
      		Rect map_rect;
@@ -31,10 +31,10 @@ class World
      		int ship_counter;
      		int planet_counter;
      		StarSystem* pTo_ss_active;
-     		VEC_pStarSystem_type STARSYSTEM_pList;
-     		VEC_pStarSystem_type hSTARSYSTEM_pList;
+     		std::vector<StarSystem*> STARSYSTEM_pList;
+     		std::vector<StarSystem*> hSTARSYSTEM_pList;
 
-     		World();
+     		Galaxy();
      
      		void generateEntireStarSystem();
      		void generateBackground(StarSystem* _pTo_starsystem, int distNebula_maxNum, int distStar_maxNum);

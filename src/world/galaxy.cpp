@@ -17,9 +17,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "world.h"
+#include "galaxy.h"
 
-World :: World()
+Galaxy :: Galaxy()
 { 
     // map
     map_rect = Rect(MAP_OFFSET_X, MAP_OFFSET_Y, (g_VIEW_WIDTH - 2 * MAP_OFFSET_X), (g_VIEW_HEIGHT - 2 * MAP_OFFSET_X));
@@ -74,7 +74,7 @@ World :: World()
 }
 
 
-void World :: generateEntireStarSystem()
+void Galaxy :: generateEntireStarSystem()
 {  
         StarSystem* _starsystem = new StarSystem();   
         STARSYSTEM_pList.push_back(_starsystem);
@@ -86,7 +86,7 @@ void World :: generateEntireStarSystem()
         int distStar_maxNum = randIntInRange(40, 60);
         generateBackground(_starsystem, distNebula_maxNum, distStar_maxNum);
 
-        Star* _star = starGenerator();    
+        Star* _star = createStar();    
         _starsystem->addStar(_star);
     
         _starsystem->defineSceneColor(_star->pTo_texOb);   // the scene color will be depended on star color
@@ -105,7 +105,7 @@ void World :: generateEntireStarSystem()
 
 
 
-void World :: generateBackground(StarSystem* _pTo_starsystem, int distNebula_maxNum, int distStar_maxNum)
+void Galaxy :: generateBackground(StarSystem* _pTo_starsystem, int distNebula_maxNum, int distStar_maxNum)
 {
         for(int i = 0; i < distNebula_maxNum; i++)
         { 
@@ -123,7 +123,7 @@ void World :: generateBackground(StarSystem* _pTo_starsystem, int distNebula_max
 }
 
 
-void World :: generateNumPlanets(StarSystem* _starsystem, int planet_per_system)
+void Galaxy :: generateNumPlanets(StarSystem* _starsystem, int planet_per_system)
 {   
         int orbit_radius;
         int offset = 0;
@@ -137,7 +137,7 @@ void World :: generateNumPlanets(StarSystem* _starsystem, int planet_per_system)
 
                 offset = orbit_radius;
 
-                Planet* _planet = planetGenerator(orbit_radius);
+                Planet* _planet = createPlanet(orbit_radius);
                 _starsystem->addPlanet(_planet);
         }
 }
@@ -145,7 +145,7 @@ void World :: generateNumPlanets(StarSystem* _starsystem, int planet_per_system)
     
 
 
-void World :: generateNumFriendlyNPC(StarSystem* _pTo_starsystem, int ship_per_system)
+void Galaxy :: generateNumFriendlyNPC(StarSystem* _pTo_starsystem, int ship_per_system)
 {
     int npc_subtype_id;
     int npc_race_id = RACES_GOOD_LIST[randIntInRange(0, RACES_GOOD_LIST.size())];
@@ -177,12 +177,12 @@ void World :: generateNumFriendlyNPC(StarSystem* _pTo_starsystem, int ship_per_s
 
          
 
-void World :: generateNumEnemyNPC(StarSystem* _pTo_starsystem, int ship_per_system)
+void Galaxy :: generateNumEnemyNPC(StarSystem* _pTo_starsystem, int ship_per_system)
 {}
 
 
 
-void World :: manageHiddenStarSystemList(StarSystem* _pTo_ss)
+void Galaxy :: manageHiddenStarSystemList(StarSystem* _pTo_ss)
 {
      hSTARSYSTEM_pList.clear(); // should be improoved
      for (unsigned int ssi = 0; ssi < STARSYSTEM_pList.size(); ssi++)    // should be improoved
@@ -199,7 +199,7 @@ void World :: manageHiddenStarSystemList(StarSystem* _pTo_ss)
           //else:
              //self.GL_LIST_range_ID = None
 
-bool World :: manage_map()
+bool Galaxy :: manage_map()
 {
      if (pTo_PLAYER->pTo_ship->ableTo.HJUMP == true)
      {
@@ -234,7 +234,7 @@ bool World :: manage_map()
      return false;
 }
 
-void World :: render_map()
+void Galaxy :: render_map()
 {
     glLoadIdentity();    // !!!!
 
