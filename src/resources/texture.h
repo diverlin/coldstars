@@ -51,14 +51,14 @@ class TextureOb
         float last_update_time;
         float delay; 
         float fps;
-        VEC_float_type texCoord_bottomLeft_x_list;
-        VEC_float_type texCoord_bottomLeft_y_list;
-        VEC_float_type texCoord_bottomRight_x_list;
-        VEC_float_type texCoord_bottomRight_y_list;
-        VEC_float_type texCoord_topLeft_x_list;
-        VEC_float_type texCoord_topLeft_y_list;
-        VEC_float_type texCoord_topRight_x_list;
-        VEC_float_type texCoord_topRight_y_list;
+        std::vector<float> texCoord_bottomLeft_x_list;
+        std::vector<float> texCoord_bottomLeft_y_list;
+        std::vector<float> texCoord_bottomRight_x_list;
+        std::vector<float> texCoord_bottomRight_y_list;
+        std::vector<float> texCoord_topLeft_x_list;
+        std::vector<float> texCoord_topLeft_y_list;
+        std::vector<float> texCoord_topRight_x_list;
+        std::vector<float> texCoord_topRight_y_list;
 
         GLuint texture;
         int w, h;
@@ -67,7 +67,7 @@ class TextureOb
         bool is_loaded, is_shared;
         
         TextureOb();
-        TextureOb(int _type_id, std::string _path, bool _use_alpha, VEC_int_type* pTo_arg, int _columns_num = 1, int _rows_num = 1, float _fps = 0);
+        TextureOb(int _type_id, std::string _path, bool _use_alpha, std::vector<int>* pTo_arg, int _columns_num = 1, int _rows_num = 1, float _fps = 0);
 
         void loadToVRAM();
              void loadSingleToVRAM();
@@ -81,50 +81,50 @@ class TextureOb
 
         int updateAnimationFrame();
 
-        void slotArgManager(VEC_int_type* _pTo_arg);
-        void turrelArgManager(VEC_int_type* _pTo_arg);
+        void slotArgManager(std::vector<int>* _pTo_arg);
+        void turrelArgManager(std::vector<int>* _pTo_arg);
         // SPACE OBJECTS
-        void sputnikArgManager(VEC_int_type* pTo_arg); 
-        void shipArgManager(VEC_int_type* pTo_arg); 
+        void sputnikArgManager(std::vector<int>* pTo_arg); 
+        void shipArgManager(std::vector<int>* pTo_arg); 
 
-        void nebulaArgManager(VEC_int_type* pTo_arg);
-        void starArgManager(VEC_int_type* pTo_arg); 
-        void planetArgManager(VEC_int_type* pTo_arg);
-        void atmosphereArgManager(VEC_int_type* pTo_arg);
-        void asteroidArgManager(VEC_int_type* pTo_arg); 
-        void mineralArgManager(VEC_int_type* pTo_arg); 
-        void containerArgManager(VEC_int_type* pTo_arg); 
-        void bombArgManager(VEC_int_type* pTo_arg); 
-        void blackholeArgManager(VEC_int_type*pTo_arg); 
+        void nebulaArgManager(std::vector<int>* pTo_arg);
+        void starArgManager(std::vector<int>* pTo_arg); 
+        void planetArgManager(std::vector<int>* pTo_arg);
+        void atmosphereArgManager(std::vector<int>* pTo_arg);
+        void asteroidArgManager(std::vector<int>* pTo_arg); 
+        void mineralArgManager(std::vector<int>* pTo_arg); 
+        void containerArgManager(std::vector<int>* pTo_arg); 
+        void bombArgManager(std::vector<int>* pTo_arg); 
+        void blackholeArgManager(std::vector<int>* pTo_arg); 
 
         //######### IN KOSMOPORT
-        void landBgArgManager(VEC_int_type* pTo_arg);
-        void angarBgArgManager(VEC_int_type* pTo_arg);
-        void storeBgArgManager(VEC_int_type* pTo_arg);
-        void shopBgArgManager(VEC_int_type* pTo_arg);
-        void govermentBgArgManager(VEC_int_type* pTo_arg);
-        void faceArgManager(VEC_int_type* pTo_arg); 
+        void landBgArgManager(std::vector<int>* pTo_arg);
+        void angarBgArgManager(std::vector<int>* pTo_arg);
+        void storeBgArgManager(std::vector<int>* pTo_arg);
+        void shopBgArgManager(std::vector<int>* pTo_arg);
+        void govermentBgArgManager(std::vector<int>* pTo_arg);
+        void faceArgManager(std::vector<int>* pTo_arg); 
 
         // ITEMS
-        void DriveEquipmentArgManager(VEC_int_type* pTo_arg); 
-        void LazerEquipmentArgManager(VEC_int_type* pTo_arg); 
-        void RocketEquipmentArgManager(VEC_int_type* pTo_arg); 
-        void ProtectorEquipmentArgManager(VEC_int_type* pTo_arg); 
-        void DroidEquipmentArgManager(VEC_int_type* pTo_arg);
-        void GrappleEquipmentArgManager(VEC_int_type* pTo_arg); 
-        void BakEquipmentArgManager(VEC_int_type* pTo_arg); 
-        void energyBlockItemArgManager(VEC_int_type* pTo_arg); 
-        void FreezerEquipmentArgManager(VEC_int_type* pTo_arg); 
-        void RadarEquipmentArgManager(VEC_int_type* pTo_arg); 
-        void ScanerEquipmentArgManager(VEC_int_type* pTo_arg); 
+        void DriveEquipmentArgManager(std::vector<int>* pTo_arg); 
+        void LazerEquipmentArgManager(std::vector<int>* pTo_arg); 
+        void RocketEquipmentArgManager(std::vector<int>* pTo_arg); 
+        void ProtectorEquipmentArgManager(std::vector<int>* pTo_arg); 
+        void DroidEquipmentArgManager(std::vector<int>* pTo_arg);
+        void GrappleEquipmentArgManager(std::vector<int>* pTo_arg); 
+        void BakEquipmentArgManager(std::vector<int>* pTo_arg); 
+        void energyBlockItemArgManager(std::vector<int>* pTo_arg); 
+        void FreezerEquipmentArgManager(std::vector<int>* pTo_arg); 
+        void RadarEquipmentArgManager(std::vector<int>* pTo_arg); 
+        void ScanerEquipmentArgManager(std::vector<int>* pTo_arg); 
 
          //# BULLETS
-        void rocketBulletArgManager(VEC_int_type* pTo_arg); 
-        void torpedBulletArgManager(VEC_int_type* pTo_arg); 
-        void particleArgManager(VEC_int_type* pTo_arg); 
-        void distStarArgManager(VEC_int_type* pTo_arg); 
-        void lazerEffectArgManager(VEC_int_type* pTo_arg); 
-        void shieldEffectArgManager(VEC_int_type* pTo_arg); 
+        void rocketBulletArgManager(std::vector<int>* pTo_arg); 
+        void torpedBulletArgManager(std::vector<int>* pTo_arg); 
+        void particleArgManager(std::vector<int>* pTo_arg); 
+        void distStarArgManager(std::vector<int>* pTo_arg); 
+        void lazerEffectArgManager(std::vector<int>* pTo_arg); 
+        void shieldEffectArgManager(std::vector<int>* pTo_arg); 
 
 };
 

@@ -41,8 +41,8 @@ class CommonForPlanet
       
                 float scale;
                 
-                VEC_float_type orbit_vector_x;
-    		VEC_float_type orbit_vector_y;
+                std::vector<float> orbit_vector_x;
+    		std::vector<float> orbit_vector_y;
                 int orbit_len;
                 int orbit_it; 
 
@@ -71,8 +71,7 @@ class CommonForPlanet
                 void CommonForPlanet_init(TextureOb* _texOb, 
     	   				  ObjMeshInstance* _mesh, 
     	   				  float _size, 
-    	   			          float _orbit_center_x, 
-    	   			          float _orbit_center_y, 
+    	   			          vec2f _orbit_center, 
     	   			          int _radius_A,
     	   				  int _radius_B, 
     	   				  float _orbit_phi_inD,

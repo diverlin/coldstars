@@ -27,12 +27,9 @@ GrappleEquipment :: GrappleEquipment(TextureOb* _pTo_itemTexOb,
 				     int _radius_orig, 
 				     int _speed_orig, 
 				     int _maxNumItem_orig, 
-				     int _modules_num_max, 
-				     int _mass, 
-				     int _condition_max, 
-				     int _deterioration_rate)   // joun strength and speed attributes into one
+				     EquipmentCommonData _common_data)   // joun strength and speed attributes into one
 {
-    	CommonForEquipment_init(GRAPPLE_ID, _pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
+    	CommonForEquipment_init(GRAPPLE_ID, _pTo_itemTexOb, _common_data);
 
     	//grapple_list = []
     	//grapple_remove_queue = []
@@ -77,12 +74,12 @@ void GrappleEquipment :: countPrice()
     	float speed_rate         = (float)speed_orig / GRAPPLE_SPEED_MIN;
     	float maxNumItem_rate    = (float)maxNumItem_orig / GRAPPLE_MAXNUMITEM_MIN;
 
-    	float modules_num_rate   = (float)modules_num_max / GRAPPLE_MODULES_NUM_MAX;
+    	float modules_num_rate   = (float)common_data.modules_num_max / GRAPPLE_MODULES_NUM_MAX;
 
     	float effectiveness_rate = GRAPPLE_STRENGTH_WEIGHT * strength_rate + GRAPPLE_RADIUS_WEIGHT * radius_rate + GRAPPLE_SPEED_WEIGHT * speed_rate + GRAPPLE_MAXNUMITEM_WEIGHT * maxNumItem_rate + GRAPPLE_MODULES_NUM_WEIGHT * modules_num_rate;
 
-    	float mass_rate          = (float)mass / GRAPPLE_MASS_MIN;
-    	float condition_rate     = (float)condition / condition_max;
+    	float mass_rate          = (float)common_data.mass / GRAPPLE_MASS_MIN;
+    	float condition_rate     = (float)condition / common_data.condition_max;
 
     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
@@ -90,40 +87,22 @@ void GrappleEquipment :: countPrice()
 
 void GrappleEquipment :: updateOwnerPropetries()
 {
-    	//      self.owner.updateGrabAbility()
+    	slot->getShip()->updateGrabAbility();
 }
 
 
-void GrappleEquipment :: updateInfo()
-{
-    	info_title_pList.clear();
-    	info_value_pList.clear();
+void GrappleEquipment :: addUniqueInfo()
+{    	
+	info.addTitleStr("GRAPPLE");
 
-    	info_title_0 = "GRAPPLE";
-    	info_title_1 = "strength:";    info_value_1 = returnStrengthStr();
-    	info_title_2 = "radius:";      info_value_2 = returnRadiusStr();
-    	info_title_3 = "speed:";       info_value_3 = returnSpeedStr();
-    	info_title_4 = "maxNumItem:";  info_value_4 = returnMaxNumItemStr(); 
-
-    	info_title_5 = "modules:";     info_value_5 = int2str(modules_num_max);
-    	info_title_6 = "condition:";   info_value_6 = int2str(condition) + "/" + int2str(condition_max);
-    	info_title_7 = "mass:";        info_value_7 = int2str(mass);
-    	info_title_8 = "price:";       info_value_8 = int2str(price);
-
-    	info_title_pList.push_back(&info_title_0);  
-    	info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
-    	info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
-    	info_title_pList.push_back(&info_title_3);   info_value_pList.push_back(&info_value_3);
-    	info_title_pList.push_back(&info_title_4);   info_value_pList.push_back(&info_value_4);
-    	info_title_pList.push_back(&info_title_5);   info_value_pList.push_back(&info_value_5); 
-    	info_title_pList.push_back(&info_title_6);   info_value_pList.push_back(&info_value_6);
-    	info_title_pList.push_back(&info_title_7);   info_value_pList.push_back(&info_value_7);
-    	info_title_pList.push_back(&info_title_8);   info_value_pList.push_back(&info_value_8);
+    	info.addNameStr("strength:");    info.addValueStr( getStrengthStr() );
+    	info.addNameStr("radius:");      info.addValueStr( getRadiusStr() );
+    	info.addNameStr("speed:");       info.addValueStr( getSpeedStr() );
+    	info.addNameStr("maxNumItem:");  info.addValueStr( getMaxNumItemStr() );
 }
 
 
-
-std::string GrappleEquipment :: returnStrengthStr()
+std::string GrappleEquipment :: getStrengthStr()
 {
      	if (strength_add == 0)
         	return int2str(strength_orig);
@@ -131,7 +110,7 @@ std::string GrappleEquipment :: returnStrengthStr()
         	return int2str(strength_orig) + "+" + int2str(strength_add);
 }
 
-std::string GrappleEquipment :: returnRadiusStr()
+std::string GrappleEquipment :: getRadiusStr()
 {
      	if (radius_add == 0)
         	return int2str(radius_orig);
@@ -139,7 +118,7 @@ std::string GrappleEquipment :: returnRadiusStr()
         	return int2str(radius_orig) + "+" + int2str(radius_add);
 }
 
-std::string GrappleEquipment :: returnSpeedStr()
+std::string GrappleEquipment :: getSpeedStr()
 {
      	if (speed_add == 0)
         	return int2str(speed_orig);
@@ -147,7 +126,7 @@ std::string GrappleEquipment :: returnSpeedStr()
         	return int2str(speed_orig) + "+" + int2str(speed_add);
 }
 
-std::string GrappleEquipment :: returnMaxNumItemStr()
+std::string GrappleEquipment :: getMaxNumItemStr()
 {
      	if (maxNumItem_add == 0)
         	return int2str(maxNumItem_orig);
@@ -159,7 +138,7 @@ std::string GrappleEquipment :: returnMaxNumItemStr()
 
 bool GrappleEquipment :: insertModule(GrappleModule* _grapple_module)
 {
-    	if (modules_pList.size() < modules_num_max)
+    	if (modules_pList.size() < common_data.modules_num_max)
     	{
        	 	strength_add   += _grapple_module->getStrengthAdd();
         	radius_add     += _grapple_module->getRadiusAdd();
@@ -188,28 +167,25 @@ GrappleEquipment* grappleEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* pTo_itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.GrappleEquipment_texOb_pList);   
+    	TextureOb* itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.GrappleEquipment_texOb_pList);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(GRAPPLE_ITEM_TEXTURE_ID, revision_id) 
 
     	int strength_orig   = randIntInRange(GRAPPLE_STRENGTH_MIN, GRAPPLE_STRENGTH_MAX);
     	int radius_orig     = randIntInRange(GRAPPLE_RADIUS_MIN, GRAPPLE_RADIUS_MAX);
     	int speed_orig      = randIntInRange(GRAPPLE_SPEED_MIN, GRAPPLE_SPEED_MAX);
     	int maxNumItem_orig = randIntInRange(GRAPPLE_MAXNUMITEM_MIN, GRAPPLE_MAXNUMITEM_MAX);
-    	int modules_num_max = randIntInRange(GRAPPLE_MODULES_NUM_MIN, GRAPPLE_MODULES_NUM_MAX);
+    	
+    	EquipmentCommonData common_data;
+    	common_data.modules_num_max = randIntInRange(GRAPPLE_MODULES_NUM_MIN, GRAPPLE_MODULES_NUM_MAX);
+    	common_data.mass            = randIntInRange(GRAPPLE_MASS_MIN, GRAPPLE_MASS_MAX);
+    	common_data.condition_max   = randIntInRange(GRAPPLE_CONDITION_MIN, GRAPPLE_CONDITION_MAX) * tech_rate;
+    	common_data.deterioration_rate = 1;
 
-    	int mass            = randIntInRange(GRAPPLE_MASS_MIN, GRAPPLE_MASS_MAX);
-    	int condition_max   = randIntInRange(GRAPPLE_CONDITION_MIN, GRAPPLE_CONDITION_MAX) * tech_rate;
-
-    	int deterioration_rate = 1;
-
-    	GrappleEquipment* _grapple_equipment = new GrappleEquipment(pTo_itemTexOb, 
+    	GrappleEquipment* grapple_equipment = new GrappleEquipment(itemTexOb, 
     								    strength_orig, 
     								    radius_orig, 
     								    speed_orig, 
     								    maxNumItem_orig, 
-    								    modules_num_max, 
-    								    mass, 
-    								    condition_max, 
-    								    deterioration_rate);
-    	return _grapple_equipment;
+    								    common_data);
+    	return grapple_equipment;
 }

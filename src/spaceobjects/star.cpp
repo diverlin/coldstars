@@ -131,17 +131,26 @@ void Star :: render_OLD()
 	glPopMatrix();
 }
 
+
+void Star :: updateInfo()
+{ 
+	info.clear();
+
+    	info.addTitleStr("STAR");
+
+    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->id));
+}
+
 void Star :: renderInfo()
 { 
-    printf("planet, id = %i \n", id);
-    printf("planet SS_id = %i \n", starsystem->id);
+     	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y);
 }
 
         
 
 
     
-Star* starGenerator()
+Star* createStar()
 {
     TextureOb* _starTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.star_texOb_pList);
     Star* _star = new Star(_starTexOb, pTo_SPHERE_MESH, randIntInRange(STAR_SIZE_MIN, STAR_SIZE_MAX));

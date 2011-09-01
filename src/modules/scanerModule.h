@@ -32,11 +32,6 @@ class ScanerModule : public CommonForModules
        		
        	private:
        		int scan_add;
-
-       		// INFO 
-       		std::string info_title_0;
-       		std::string info_title_1;   std::string info_value_1;
-       		std::string info_title_2;   std::string info_value_2;        	
 };
 
 ScanerModule* scanerModuleGenerator();

@@ -54,7 +54,7 @@ Ship :: Ship(TextureOb* _pTo_texOb,
     	type_id = SHIP_ID;
     	//subtype_id = ;
 
-    	pTo_starsystem = NULL; 
+    	starsystem = NULL; 
 
     	pTo_texOb = _pTo_texOb;
     	texture   = pTo_texOb->texture;
@@ -706,8 +706,8 @@ bool Ship :: getDockingPermission()
 bool Ship :: dockingEvent()
 {
      	printf("id = %i, dockingEvent()\n", id);
-     	pTo_starsystem->removeShipById(id);
-     	pTo_starsystem->removeNpc(pTo_npc_owner->id, pTo_npc_owner->race_id, pTo_npc_owner->subtype_id);
+     	starsystem->removeShipById(id);
+     	starsystem->removeNpc(pTo_npc_owner->id, pTo_npc_owner->race_id, pTo_npc_owner->subtype_id);
 
      	pTo_navigator->getTargetPlanet()->addShip(this);
      	pTo_navigator->getTargetPlanet()->addNpc(pTo_npc_owner);
@@ -719,8 +719,8 @@ bool Ship :: launchingEvent()
 {
      	printf("id = %i, launchingEvent()\n", id);
 
-     	pTo_starsystem->addShip(this);
-     	pTo_starsystem->addNpc(pTo_npc_owner);
+     	starsystem->addShip(this);
+     	starsystem->addNpc(pTo_npc_owner);
 
      	pTo_navigator->getTargetPlanet()->removeShipById(this->id);
      	pTo_navigator->getTargetPlanet()->removeNpcById(pTo_npc_owner->id);
@@ -761,7 +761,7 @@ void Ship :: death()
 
      	if (is_explosed == false)
      	{   
-        	pTo_starsystem->addExplosion(points.getCenter().x, points.getCenter().y, size);
+        	starsystem->createExplosion(points.getCenter(), size);
         	is_explosed = true;
      	}
 }
@@ -891,7 +891,7 @@ void Ship :: updateDriveAbility()
 
      	if (drive_slot.getEquipedStatus() == true) 
      	{
-        	if (drive_slot.getDriveEquipment()->condition > 0)  
+        	if (drive_slot.getDriveEquipment()->getCondition() > 0)  
         	{
            		float val = (drive_slot.getDriveEquipment()->getSpeed() - mass/70);
            		if (val > 0)
@@ -913,7 +913,7 @@ void Ship :: updateRadarAbility()
 {
    	if (radar_slot.getEquipedStatus() == true) 
    	{
-      		if (radar_slot.getRadarEquipment()->condition > 0)  
+      		if (radar_slot.getRadarEquipment()->getCondition() > 0)  
       		{
           		radius = radar_slot.getRadarEquipment()->getRadius();
           		ableTo.RADAR = true;
@@ -934,9 +934,9 @@ void Ship :: updateJumpAbility()
      	ableTo.HJUMP = false;
 
      	if (drive_slot.getEquipedStatus() == true)
-        	if (drive_slot.getDriveEquipment()->condition > 0)
+        	if (drive_slot.getDriveEquipment()->getCondition() > 0)
            		if (bak_slot.getEquipedStatus() == true)
-              			if (bak_slot.getBakEquipment()->condition > 0)
+              			if (bak_slot.getBakEquipment()->getCondition() > 0)
               			{
                  			if (drive_slot.getDriveEquipment()->getHyper() > bak_slot.getBakEquipment()->getFuel())
                     				hyper = drive_slot.getDriveEquipment()->getHyper();
@@ -955,7 +955,7 @@ void Ship :: updateEnergyAbility()
 
      	if (energizer_slot.getEquipedStatus() == true)
      	{
-        	if (energizer_slot.getEnergizerEquipment()->condition > 0)
+        	if (energizer_slot.getEnergizerEquipment()->getCondition() > 0)
         	{
            		energy = energizer_slot.getEnergizerEquipment()->getEnergy();
            		ableTo.ENERGIZE = true;
@@ -972,7 +972,7 @@ void Ship :: updateProtectionAbility()
 
      	if (protector_slot.getEquipedStatus() == true)
      	{
-        	if (protector_slot.getProtectorEquipment()->condition > 0)
+        	if (protector_slot.getProtectorEquipment()->getCondition() > 0)
         	{
            		protection = protector_slot.getProtectorEquipment()->getProtection() + korpus_protection;
            		ableTo.PROTECT = true;
@@ -990,7 +990,7 @@ void Ship :: updateRepairAbility()
 
      	if (droid_slot.getEquipedStatus() == true)
      	{
-        	if (droid_slot.getDroidEquipment()->condition > 0)
+        	if (droid_slot.getDroidEquipment()->getCondition() > 0)
         	{
             		repair = droid_slot.getDroidEquipment()->getRepair();
             		ableTo.REPAIR = true;
@@ -1006,7 +1006,7 @@ void Ship :: updateFreezeAbility()
 
      	if (freezer_slot.getEquipedStatus() == true)
      	{
-        	if (freezer_slot.getFreezerEquipment()->condition > 0)
+        	if (freezer_slot.getFreezerEquipment()->getCondition() > 0)
         	{
            		freeze = freezer_slot.getFreezerEquipment()->getFreeze();
            		ableTo.FREEZE = true;
@@ -1022,7 +1022,7 @@ void Ship :: updateGrabAbility()
 
      	if (inhibit_GRAPPLE == false)
         	if (grapple_slot.getEquipedStatus() == true)
-           		if (grapple_slot.getGrappleEquipment()->condition > 0)
+           		if (grapple_slot.getGrappleEquipment()->getCondition() > 0)
               			ableTo.GRAB = true;
 }
 
@@ -1035,7 +1035,7 @@ void Ship :: updateScanAbility()
 
      	if (scaner_slot.getEquipedStatus() == true)
      	{
-        	if (scaner_slot.getScanerEquipment()->condition > 0)
+        	if (scaner_slot.getScanerEquipment()->getCondition() > 0)
         	{
            		scan = scaner_slot.getScanerEquipment()->getScan();
            		ableTo.SCAN = true;
@@ -1059,54 +1059,22 @@ void Ship :: setMaxFuel()
 
 void Ship :: updateInfo()
 {
-    	info_title_pList.clear();
-    	info_value_pList.clear();
+	info.clear();
 
-    	info_title_0 = "SHIP";
-
-    	info_title_1 = "id/ss_id:";
-    	info_value_1 = int2str(id) + " / " + int2str(pTo_starsystem->id);
-    
-    	info_title_2 = "ship/pilot race:";
     	int owner_race_id = returnOwnerRaceId();
-    	info_value_2 = returnRaceStringByRaceId(race_id) + "/" + returnRaceStringByRaceId(owner_race_id); 
 
-    	//str3.info.append('name:' + str(self.name))
-    	//str4.info.append('type:' + self.returnTypeStr())
-
-    	info_title_5 = "armor/max/size";
-    	info_value_5 = int2str(armor) + "/" + int2str(armor_max) + "/" + int2str(size);
-
-    	info_title_6 = "space/free/mass:";
-    	info_value_6 = int2str(space) + "/" + int2str(space - mass) + "/" + int2str(mass);
-
-    	info_title_7 = "speed x 100:";
-    	info_value_7 = int2str((int)(speed*100));
-
-    	info_title_8 = "energy:";
-    	info_value_8 = int2str(energy);
-
-    	info_title_9 = "temperature:";
-    	info_value_9 = int2str(nominal_temperature);
-
-    	info_title_10 = "observe radius:";
-    	info_value_10 = int2str(radius);
-
-    	info_title_11 = "protection:";
-    	info_value_11 = returnProtectionStr();
-
-   	info_title_pList.push_back(&info_title_0);  
-    	info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
-    	info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
-    	//info_pList.push_back(&str3);
-    	//info_pList.push_back(&str4);
-    	info_title_pList.push_back(&info_title_5);   info_value_pList.push_back(&info_value_5); 
-    	info_title_pList.push_back(&info_title_6);   info_value_pList.push_back(&info_value_6);
-    	info_title_pList.push_back(&info_title_7);   info_value_pList.push_back(&info_value_7);
-    	info_title_pList.push_back(&info_title_8);   info_value_pList.push_back(&info_value_8);
-    	info_title_pList.push_back(&info_title_9);   info_value_pList.push_back(&info_value_9);
-    	info_title_pList.push_back(&info_title_10);  info_value_pList.push_back(&info_value_10);
-    	info_title_pList.push_back(&info_title_11);  info_value_pList.push_back(&info_value_11);
+    	info.addTitleStr("SHIP");
+    	info.addNameStr("id/ss_id:");          info.addValueStr( int2str(id) + " / " + int2str(starsystem->id) );
+    	info.addNameStr("ship/pilot race:");   info.addValueStr( returnRaceStringByRaceId(race_id) + "/" + returnRaceStringByRaceId(owner_race_id) ); 
+    	info.addNameStr("armor/max/size");     info.addValueStr( int2str(armor) + "/" + int2str(armor_max) + "/" + int2str(size) );
+    	info.addNameStr("space/free/mass:");   info.addValueStr( (space) + "/" + int2str(space - mass) + "/" + int2str(mass) );
+    	info.addNameStr("energy:");            info.addValueStr( int2str(energy) );
+	info.addNameStr("temperature:");       info.addValueStr( int2str(nominal_temperature) );
+        info.addNameStr("observe radius:");    info.addValueStr( int2str(radius) );
+    	info.addNameStr("protection:");        info.addValueStr( returnProtectionStr() );
+	info.addNameStr("speed x 100:");       info.addValueStr(int2str(int(speed*100)) );
+	
+	
 
 
     	//info_pList.push_back(&str5);
@@ -1215,7 +1183,7 @@ int Ship :: returnOwnerRaceId()
 
 void Ship :: renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y)
 {  
-     	drawInfoIn2Column(&info_title_pList, &info_value_pList, _pos_x, _pos_y, _offset_x, _offset_y);
+     	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y);
 }
 
 

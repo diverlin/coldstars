@@ -28,24 +28,19 @@ class Mineral : public CommonForSpaceItems
     
         	int mass;
 
-
-        	// INFO 
-        	VEC_pString_type info_title_pList;        
-        	VEC_pString_type info_value_pList; 
-        	
-        	std::string info_title_0;
-        	std::string info_title_1;   std::string info_value_1;
-        	std::string info_title_2;   std::string info_value_2;
-        	std::string info_title_3;   std::string info_value_3;
- 
- 
-        	Mineral(TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _target_pos_x, float _target_pos_y);
+        	Mineral(TextureOb* _pTo_texOb, vec2f _start_pos);
 
         	void updateInfo();
              		std::string returnTypeStr();
         
         	void renderInfo();
+        	
+        private:
+        	InfoTable info;
 };
+
+Mineral* createMineral(vec2f);
+
 
 #endif 
 

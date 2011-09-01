@@ -26,7 +26,7 @@ class Angar
     public: 
         TextureOb* pTo_bg_texOb;
 
-        VEC_pLandingArea_type landingArea_pList;
+        std::vector<LandingArea*> landingArea_pList;
 
         Angar(TextureOb* _pTo_bg_texOb, TextureOb* _pTo_slot_texOb);
         ~Angar();

@@ -50,7 +50,7 @@ class Ship
     	public:
                 Points* getPoints();
         
-        	VEC_pTurrel_type turrel_pList;
+        	std::vector<Turrel*> turrel_pList;
     
         	bool is_alive, is_dying, is_explosed;
         	int type_id, id;
@@ -79,7 +79,7 @@ class Ship
         	Npc* pTo_npc_owner;
         	PlayerInstance* pTo_playerOwner;
 
-        	StarSystem* pTo_starsystem;
+        	StarSystem* starsystem;
 
         	int space;
         	int armor_max;
@@ -110,9 +110,9 @@ class Ship
 
         	// WEPONS
         	int fire_delay, d_fire_delay;
-        	VEC_pItemSlot_type slot_weapon_pList;
-        	VEC_pItemSlot_type slot_weapon_equiped_pList;
-        	VEC_pItemSlot_type slot_weapon_reloaded_pList;
+        	std::vector<ItemSlot*> slot_weapon_pList;
+        	std::vector<ItemSlot*> slot_weapon_equiped_pList;
+        	std::vector<ItemSlot*> slot_weapon_reloaded_pList;
 
         	int total_weapon_slot_num;
         	ItemSlot weapon_slot1;
@@ -140,8 +140,8 @@ class Ship
                                                 
         	//######### OTSEC SLOT
         	//VEC_pOtsecSlot_type otsec_slot_pList;
-        	VEC_pItemSlot_type slot_total_pList;
-        	VEC_pItemSlot_type slot_otsec_pList;
+        	std::vector<ItemSlot*> slot_total_pList;
+        	std::vector<ItemSlot*> slot_otsec_pList;
         
         	//######### GATE SLOT
         	ItemSlot gate_slot;
@@ -171,28 +171,12 @@ class Ship
         	int energy_restoration_rate;
 
 
-        	// INFO 
-        	std::string info_title_0;
-        	std::string info_title_1;   std::string info_value_1;
-        	std::string info_title_2;   std::string info_value_2; 
-        	std::string info_title_3;   std::string info_value_3;
-        	std::string info_title_4;   std::string info_value_4;
-        	std::string info_title_5;   std::string info_value_5;
-        	std::string info_title_6;   std::string info_value_6;
-        	std::string info_title_7;   std::string info_value_7;
-        	std::string info_title_8;   std::string info_value_8;
-        	std::string info_title_9;   std::string info_value_9;
-        	std::string info_title_10;  std::string info_value_10;
-        	std::string info_title_11;  std::string info_value_11;
-        	VEC_pString_type info_title_pList;        
-        	VEC_pString_type info_value_pList;  
-
         	//////// TARGET COORDINATES //////
         	//self.Gl_LIST_direction_ID = None
 
-        	VEC_float_type direction_x_list;
-        	VEC_float_type direction_y_list;
-        	VEC_float_type angle_inD_list;
+        	std::vector<float> direction_x_list;
+        	std::vector<float> direction_y_list;
+        	std::vector<float> angle_inD_list;
 
         	int len_direction_list;
         	bool direction_list_END;
@@ -294,6 +278,7 @@ class Ship
                 
         private:
                 Points points;
+		InfoTable info;
 
 };
 

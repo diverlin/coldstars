@@ -25,20 +25,16 @@ class DriveEquipment :  public CommonForEquipment
 {
 	public:
       		DriveEquipment();
-      		DriveEquipment(TextureOb* pTo_itemTexOb, int speed_orig, int hyper_orig, int modules_num_max, int mass, int condition_max, int deterioration_rate);
+      		DriveEquipment(TextureOb* pTo_itemTexOb, 
+      			       int speed_orig, 
+      			       int hyper_orig, 
+      			       EquipmentCommonData _common_data);
+      			       
       		~DriveEquipment();
 
 		int getSpeed() const;
 		int getHyper() const;
-		
-      		void updatePropetries();
-      		void countPrice();
-      		void updateOwnerPropetries();
 
-      		void updateInfo();
-           		std::string returnSpeedStr();
-           		std::string returnHyperStr();
-           
       		bool insertModule(DriveModule* pTo_driveModule);
       		
       	private:
@@ -50,18 +46,9 @@ class DriveEquipment :  public CommonForEquipment
       		int hyper_add;
       		int hyper;
       		
-      		VEC_pDriveModule_type modules_pList;
+      		std::vector<DriveModule*> modules_pList;
       		
-      	      	// INFO 
-      		std::string info_title_0;
-      		std::string info_title_1;   std::string info_value_1;
-      		std::string info_title_2;   std::string info_value_2; 
-      		std::string info_title_3;   std::string info_value_3;
-      		std::string info_title_4;   std::string info_value_4;
-      		std::string info_title_5;   std::string info_value_5;
-      		std::string info_title_6;   std::string info_value_6;
-      		
-     		// particle system settings
+     		// particle system settings // MAKE AS STRUCTURE!
       	      	TextureOb* pTo_particleTexOb;
       	      	int particle_num;
       		float particle_size;
@@ -69,7 +56,14 @@ class DriveEquipment :  public CommonForEquipment
       		float particle_alpha_start;
       		float particle_alpha_end;
       		float particle_d_alpha;
-      	
+
+      		void countPrice();
+      		void updatePropetries();
+ 		void virtual updateOwnerPropetries();
+      		
+     		void virtual addUniqueInfo();
+           	std::string getSpeedStr();
+           	std::string getHyperStr();      	
 };
 
 DriveEquipment* driveEquipmentGenerator(int race_id, int revision_id = -1);

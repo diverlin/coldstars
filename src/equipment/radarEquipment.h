@@ -25,18 +25,14 @@ class RadarEquipment : public CommonForEquipment
 {
    	public:
       		RadarEquipment();
-      		RadarEquipment(TextureOb* pTo_itemTexOb, int _radius_orig, int _modules_num_max, int _mass, int _condition_max, int _deterioration_rate);
+      		RadarEquipment(TextureOb* pTo_itemTexOb, 
+      			       int _radius_orig, 
+      			       EquipmentCommonData _common_data);
+      			       
       		~RadarEquipment();
       		
       		int getRadius() const;
 
-      		void updatePropetries();
-      		void countPrice();
-      		void updateOwnerPropetries();
-
-      		void updateInfo();
-           		std::string returnRadiusStr();
-        
       		bool insertModule(RadarModule* pTo_radarModule);
       		
       	private:
@@ -44,15 +40,14 @@ class RadarEquipment : public CommonForEquipment
      		int radius_add;
       		int radius;
       		
-      	     	VEC_pRadarModule_type modules_pList;
+      	     	std::vector<RadarModule*> modules_pList;
+      	     	
+      		void updatePropetries();
+      		void countPrice();
+      		void virtual updateOwnerPropetries();
 
-      		// INFO 
-      		std::string info_title_0;
-      		std::string info_title_1;   std::string info_value_1;
-      		std::string info_title_2;   std::string info_value_2; 
-      		std::string info_title_3;   std::string info_value_3;
-      		std::string info_title_4;   std::string info_value_4;
-      		std::string info_title_5;   std::string info_value_5;
+     		void virtual addUniqueInfo();
+       		std::string getRadiusStr();
 };
 
 RadarEquipment* radarEquipmentGenerator(int race_id, int revision_id = -1);

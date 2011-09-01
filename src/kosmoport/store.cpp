@@ -313,14 +313,14 @@ int Store :: buyWeaponSlotItem(ItemSlot* pTo_weapon_slot)
 
     if (pTo_weapon_slot->getItemSubType() == LAZER_ID)
     {
-       price = pTo_weapon_slot->getLazerEquipment()->price;
+       price = pTo_weapon_slot->getLazerEquipment()->getPrice();
        addLazerEquipment(pTo_weapon_slot->getLazerEquipment());
        pTo_weapon_slot->removeItem();
     }
 
     if (pTo_weapon_slot->getItemSubType() == ROCKET_ID)
     {
-       price = pTo_weapon_slot->getRocketEquipment()->price;
+       price = pTo_weapon_slot->getRocketEquipment()->getPrice();
        addRocketEquipment(pTo_weapon_slot->getRocketEquipment());
        pTo_weapon_slot->removeItem();
     } 
@@ -330,7 +330,7 @@ int Store :: buyWeaponSlotItem(ItemSlot* pTo_weapon_slot)
 
 int Store :: buyDriveSlotItem(ItemSlot* pTo_drive_slot)
 {
-    int price = pTo_drive_slot->getDriveEquipment()->price;
+    int price = pTo_drive_slot->getDriveEquipment()->getPrice();
     addDriveEquipment(pTo_drive_slot->getDriveEquipment());
     pTo_drive_slot->removeItem();
     return price;
@@ -339,7 +339,7 @@ int Store :: buyDriveSlotItem(ItemSlot* pTo_drive_slot)
 
 int Store :: buyBakSlotItem(ItemSlot* pTo_bak_slot)
 {
-    int price = pTo_bak_slot->getBakEquipment()->price;
+    int price = pTo_bak_slot->getBakEquipment()->getPrice();
     addBakEquipment(pTo_bak_slot->getBakEquipment());
     pTo_bak_slot->removeItem();
     return price;
@@ -348,7 +348,7 @@ int Store :: buyBakSlotItem(ItemSlot* pTo_bak_slot)
 
 int Store :: buyRadarSlotItem(ItemSlot* pTo_radar_slot)
 {
-    int price = pTo_radar_slot->getRadarEquipment()->price;
+    int price = pTo_radar_slot->getRadarEquipment()->getPrice();
     addRadarEquipment(pTo_radar_slot->getRadarEquipment());
     pTo_radar_slot->removeItem();
     return price;
@@ -357,7 +357,7 @@ int Store :: buyRadarSlotItem(ItemSlot* pTo_radar_slot)
 
 int Store :: buyScanerSlotItem(ItemSlot* pTo_scaner_slot)
 {
-    int price = pTo_scaner_slot->getScanerEquipment()->price;
+    int price = pTo_scaner_slot->getScanerEquipment()->getPrice();
     addScanerEquipment(pTo_scaner_slot->getScanerEquipment());
     pTo_scaner_slot->removeItem();
     return price;
@@ -365,7 +365,7 @@ int Store :: buyScanerSlotItem(ItemSlot* pTo_scaner_slot)
 
 int Store :: buyEnergizerSlotItem(ItemSlot* pTo_energizer_slot)
 {
-    int price = pTo_energizer_slot->getEnergizerEquipment()->price;
+    int price = pTo_energizer_slot->getEnergizerEquipment()->getPrice();
     addEnergizerEquipment(pTo_energizer_slot->getEnergizerEquipment());
     pTo_energizer_slot->removeItem();
     return price;
@@ -373,7 +373,7 @@ int Store :: buyEnergizerSlotItem(ItemSlot* pTo_energizer_slot)
 
 int Store :: buyGrappleSlotItem(ItemSlot* pTo_grapple_slot)
 {
-    int price = pTo_grapple_slot->getGrappleEquipment()->price;
+    int price = pTo_grapple_slot->getGrappleEquipment()->getPrice();
     addGrappleEquipment(pTo_grapple_slot->getGrappleEquipment());
     pTo_grapple_slot->removeItem();
     return price;
@@ -381,7 +381,7 @@ int Store :: buyGrappleSlotItem(ItemSlot* pTo_grapple_slot)
 
 int Store :: buyProtectorSlotItem(ItemSlot* pTo_protector_slot)
 {
-    int price = pTo_protector_slot->getProtectorEquipment()->price;
+    int price = pTo_protector_slot->getProtectorEquipment()->getPrice();
     addProtectorEquipment(pTo_protector_slot->getProtectorEquipment());
     pTo_protector_slot->removeItem();
     return price;
@@ -389,7 +389,7 @@ int Store :: buyProtectorSlotItem(ItemSlot* pTo_protector_slot)
 
 int Store :: buyDroidSlotItem(ItemSlot* pTo_droid_slot)
 {
-    int price = pTo_droid_slot->getDroidEquipment()->price;
+    int price = pTo_droid_slot->getDroidEquipment()->getPrice();
     addDroidEquipment(pTo_droid_slot->getDroidEquipment());
     pTo_droid_slot->removeItem();
     return price;
@@ -397,7 +397,7 @@ int Store :: buyDroidSlotItem(ItemSlot* pTo_droid_slot)
 
 int Store :: buyFreezerSlotItem(ItemSlot* pTo_freezer_slot)
 {
-    int price = pTo_freezer_slot->getFreezerEquipment()->price;
+    int price = pTo_freezer_slot->getFreezerEquipment()->getPrice();
     addFreezerEquipment(pTo_freezer_slot->getFreezerEquipment());
     pTo_freezer_slot->removeItem();
     return price;

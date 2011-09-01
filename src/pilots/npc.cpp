@@ -132,7 +132,7 @@ void Npc :: setShip(Ship* _pTo_ship)
     pTo_ship->pTo_npc_owner = this;
     //pTo_ship->owner_type_id = this->type_id;
 
-    pTo_ship->pTo_starsystem = pTo_starsystem;
+    pTo_ship->starsystem = pTo_starsystem;
 }
 
 
@@ -712,7 +712,7 @@ bool Npc :: findAndSetTargetDockingObject()
 {
      printf("npc_id = %i, findAndSetTargetDockingObject()\n", id);
 
-     Planet* pTo_target_planet = pTo_starsystem->returnClosestPlanet(pTo_ship->getPoints()->getCenter().x, pTo_ship->getPoints()->getCenter().y);  // improve
+     Planet* pTo_target_planet = pTo_starsystem->returnClosestPlanet(pTo_ship->getPoints()->getCenter());  // improve
      pTo_ship->pTo_navigator->setTargetPlanet(pTo_target_planet);
 
      return true; 

@@ -200,6 +200,77 @@ void drawInfoIn2Column(
 }
 
 
+
+
+void drawInfoIn2Column(
+                std::vector<std::string>* pInfo_title_list, 
+                std::vector<std::string>* pInfo_value_list, 
+                float center_x, 
+                float center_y,
+                float scroll_x,
+                float scroll_y)
+{
+     	int font_size = 13;
+     	float char_h = 25;
+     	float char_w = 10;
+
+     	float max_info_total_str_size = 0;
+     	float max_info_title_str_size = 0;
+
+     	for (unsigned int i = 1; i < pInfo_title_list->size(); i++)
+     	{
+         	int total_length = (*pInfo_title_list)[i].length() + (*pInfo_value_list)[i-1].length();
+         	int title_length = (*pInfo_title_list)[i].length(); 
+
+         	if (total_length > max_info_total_str_size)
+            		max_info_total_str_size = total_length;
+
+         	if (title_length > max_info_title_str_size)
+           		max_info_title_str_size = title_length;
+     	}    
+
+     	float info_total_string_w = char_w * max_info_total_str_size;
+     	float info_total_string_h = char_h * pInfo_title_list->size();
+
+     	TextureOb* pTo_textbg_texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.textBackground_texOb_pList);
+     	Rect rect = Rect(center_x - char_w, center_y - info_total_string_h, info_total_string_w, info_total_string_h + char_h/2);
+
+     	glEnable(GL_BLEND);
+     	drawTexturedRect(pTo_textbg_texOb->texture, rect, -2);
+     	glDisable(GL_BLEND);
+
+     	sf::String s((*pInfo_title_list)[0], g_FONT, (font_size+1));
+     	s.SetColor(sf::Color(255, 255, 255));
+     	s.SetPosition(center_x - scroll_x + info_total_string_w/3, (g_VIEW_HEIGHT - center_y) + scroll_y); 
+     	g_APP.Draw(s);
+
+     	for (unsigned int i = 1; i < pInfo_title_list->size(); i++)
+     	{
+         	sf::String s((*pInfo_title_list)[i], g_FONT, font_size);
+         	s.SetColor(sf::Color(255, 255, 255));
+         	s.SetPosition(center_x - scroll_x, (g_VIEW_HEIGHT - center_y) + char_h*i + scroll_y); 
+         	g_APP.Draw(s);
+     	}       
+
+
+     	for (unsigned int i = 0; i < pInfo_value_list->size(); i++)
+     	{
+         	sf::String s((*pInfo_value_list)[i], g_FONT, font_size);
+         	s.SetColor(sf::Color(250, 250, 0));
+         	s.SetPosition(center_x - scroll_x + max_info_title_str_size * (char_w - 1.2), (g_VIEW_HEIGHT - center_y) + char_h*i + char_h + scroll_y); 
+         	g_APP.Draw(s);
+     	}  
+}
+
+
+
+
+
+
+
+
+
+
 void drawSimpleText(std:: string str, int font_size, float pos_x, float pos_y)
 {
      	sf::String s(str, g_FONT, font_size);

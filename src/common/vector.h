@@ -8,6 +8,7 @@ class vec2f
                 float y;
                 
                 vec2f();
+                vec2f(float _x, float _y);
                 
                 void set(float _x, float _y);
 };

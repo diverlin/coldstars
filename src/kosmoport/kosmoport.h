@@ -29,8 +29,8 @@ class Kosmoport
         Shop*      pTo_shop;
         Goverment* pTo_goverment;  
 
-        VEC_pNpc_type NPC_pList;
-        VEC_pShip_type SHIP_pList;
+        std::vector<Npc*>  NPC_pList;
+        std::vector<Ship*> SHIP_pList;
 
         Kosmoport(int _race_id);
         ~Kosmoport();

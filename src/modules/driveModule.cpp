@@ -36,26 +36,19 @@ int DriveModule :: getHyperAdd() const { return hyper_add; }
 		
 void DriveModule :: updateInfo()
 {
-    	info_title_pList.clear();
-    	info_value_pList.clear();
+	info.clear();
 
-    	info_title_0 = "drive module";
-    	info_title_1 = "speed_add:";       info_value_1 = int2str(speed_add);
-    	info_title_2 = "hyper_add:";       info_value_2 = int2str(hyper_add);
-    	info_title_3 = "mass:";            info_value_3 = int2str(mass);
-
-    	info_title_pList.push_back(&info_title_0);  
+    	info.addTitleStr("drive module"); 
     	if (speed_add != 0)
     	{ 
-       		info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
+    		info.addNameStr("speed_add:");       info.addValueStr( int2str(speed_add) );
     	} 
     	
     	if (hyper_add != 0)
     	{ 
-        	info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
+    		info.addNameStr("hyper_add:");       info.addValueStr( int2str(hyper_add) );
     	}
-    	
-    	info_title_pList.push_back(&info_title_3);   info_value_pList.push_back(&info_value_3);
+    	info.addNameStr("mass:");         info.addValueStr(int2str(mass));
 }
 
 

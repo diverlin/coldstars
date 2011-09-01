@@ -22,8 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 Asteroid :: Asteroid(TextureOb* _texOb,
 		     ObjMeshInstance* _mesh,
 		     float _size, 
-		     float _orbit_center_x, 
-		     float _orbit_center_y, 
+		     vec2f _orbit_center, 
 		     int _radius_A, 
 		     int _radius_B, 
 		     float _orbit_phi_inD, 
@@ -32,8 +31,7 @@ Asteroid :: Asteroid(TextureOb* _texOb,
        CommonForPlanet_init(_texOb, 
     	   		    _mesh, 
     	   	            _size, 
-    	   		    _orbit_center_x, 
-    	   		    _orbit_center_y, 
+    	   		    _orbit_center, 
     	   		    _radius_A,
     	   		    _radius_B, 
     	   		    _orbit_phi_inD,
@@ -96,70 +94,75 @@ void Asteroid :: update_inSpace_inDynamic_FALSE()
     
 void Asteroid :: death_TRUE()
 {
-     is_alive = false; 
+     	is_alive = false; 
 
-     if (is_explosed == false)
-     {   
-        starsystem->addExplosion(points.getCenter().x, points.getCenter().y, scale/2);
-        starsystem->addNumMinerals(points.getCenter().x, points.getCenter().y, randIntInRange(1,4));
-        //self.starsystem.screen_QUAKE_runtime_counter = 50
-        //self.starsystem.screen_QUAKE_amlitudaDiv2 = 5
-        is_explosed = true;
+     	if (is_explosed == false)
+     	{   
+        	starsystem->createExplosion(points.getCenter(), scale/2);
+        
+        	Mineral* _mineral;
+        	TextureOb* _mTexOb;
+        	for (int i = 0; i<3; i++)
+    		{
+        		_mTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.mineral_texOb_pList); 
+        		_mineral = new Mineral(_mTexOb, points.getCenter());
+			starsystem->addMineral(_mineral);
+			
+			printf("----%i,%i, %f,%f\n", id, i, _mineral->getPoints()->getCenter().x, _mineral->getPoints()->getCenter().y);
+			
+    		}
+    		printf("asteroid.death_TRUE ******\n");
+    	   		
+        	//self.starsystem.screen_QUAKE_runtime_counter = 50
+        	//self.starsystem.screen_QUAKE_amlitudaDiv2 = 5
+        	is_explosed = true;
      }
 }
     
 
 void Asteroid :: death_FALSE()
 {
-     is_alive = false; 
+     	is_alive = false; 
 
-     if (is_explosed == false)
-     {   
-        starsystem->addNumMinerals(points.getCenter().x, points.getCenter().y, randIntInRange(1,4));
-        is_explosed = true;
-     }
+     	if (is_explosed == false)
+     	{   
+     		Mineral* _mineral;
+        	for (int i = 0; i<3; i++)
+    		{        		
+        		_mineral = createMineral(points.getCenter());
+			starsystem->addMineral(_mineral);
+    		}
+        	is_explosed = true;
+     	}
 }
 
 
 void Asteroid :: updateInfo()
 {   
-    info_title_pList.clear();
-    info_value_pList.clear();
+	info.clear();
 
-    info_title_0 = "ASTEROID";
-
-    info_title_1 = "id/ss_id:";
-    info_value_1 = int2str(id) + " / " + int2str(starsystem->id);
-    info_title_2 = "armor:";
-    info_value_2 = int2str(armor);
-    info_title_3 = "mass:";
-    info_value_3 = int2str(mass);
-    info_title_4 = "speed x 100:";
-    info_value_4 = int2str(int(speed*100));
-
-    info_title_pList.push_back(&info_title_0);  
-    info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
-    info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
-    info_title_pList.push_back(&info_title_3);   info_value_pList.push_back(&info_value_3);
-    info_title_pList.push_back(&info_title_4);   info_value_pList.push_back(&info_value_4);
+    	info.addTitleStr("ASTEROID");
+    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->id));
+    	info.addNameStr("armor:");       info.addValueStr(int2str(armor));
+    	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
+	info.addNameStr("speed x 100:"); info.addValueStr(int2str(int(speed*100)));
 }     
 
 
 void Asteroid :: renderInfo()
 {  
-     drawInfoIn2Column(&info_title_pList, &info_value_pList, points.getCenter().x, points.getCenter().y);
+     	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y);
 }
 
         
 
 
-Asteroid* asteroidGenerator()
+Asteroid* createAsteroid()
 {
         TextureOb* _texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.asteroid_texOb_pList); 
     
         float _size = 10;
-        float _orbit_center_x = 0;
-        float _orbit_center_y = 0;
+        vec2f _orbit_center = vec2f(0,0);
         int _radius_A = randIntInRange(300, 1200);
         int _radius_B = randIntInRange(300, 1200);
         float _orbit_phi_inD = randIntInRange(0, 360);
@@ -168,8 +171,7 @@ Asteroid* asteroidGenerator()
         Asteroid* _asteroid = new Asteroid(_texOb,
     				pTo_DEFORMED_SPHERE_MESH,
     				_size, 
-    				_orbit_center_x, 
-    				_orbit_center_y, 
+    				_orbit_center, 
     				_radius_A, 
     				_radius_B, 
     				_orbit_phi_inD, 

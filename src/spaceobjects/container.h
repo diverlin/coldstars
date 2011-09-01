@@ -33,10 +33,12 @@ class Container : public CommonForSpaceItems
         	int size;
 
         	Container();
-        	Container(TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _target_x, float _target_y);
+        	Container(TextureOb* _pTo_texOb, vec2f _start_pos);
         	~Container();
         
         	void renderInfo();
 };
+
+Container* createContainer(vec2f);
 
 #endif 

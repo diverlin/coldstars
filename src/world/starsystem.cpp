@@ -821,73 +821,70 @@ void StarSystem :: renderEntities_OLD()
 
 
 
-
-
-
-    		//bool addMineral(Mineral* _mineral);
-    		//bool addContainer(Container* _container);
-
-
-
-
-void StarSystem :: addExplosion(float _center_x, float _center_y, int obSize)
+void StarSystem :: createExplosion(vec2f _center_pos, int obSize)
 {
 	//obSize = randIntInRange(1, 9);  	// DEBUG
 
-	int   _num_particles; 
-	float _pSize;        
+	ExplosionEffect* _explosion;
 
-	TextureOb* pTo_particleTexOb; 
-	ExplosionEffect* pEE;
-    
-	float _velocity_start = randIntInRange(13,17) * 0.1;
-	float _d_velocity    = 0;
+	TextureOb* _particleTexOb; 
+	ParticleSystemData  _psData;
+   
+	_psData.velocity_start = randIntInRange(13,17) * 0.1;
+	_psData.velocity_end = _psData.velocity_start;
 
-	float _alpha_start   = 1.0;
-	float _alpha_end     = 0.1;
-	float _d_alpha       = randIntInRange(5,8) * 0.001;
-
-	float _d_pSize       = randIntInRange(60,80) * 0.01;
+	_psData.alpha_start    = 1.0;
+	_psData.alpha_end      = 0.1;
+	
+	_psData.d_velocity     = 0;
+	_psData.d_alpha        = randIntInRange(5,8) * 0.001;
+	_psData.d_particleSize = randIntInRange(60,80) * 0.01;
  
-    
-    
+        
 	if (obSize < 4)
 	{
-		_num_particles = randIntInRange(10 * obSize, 15 * obSize);    
-		_pSize         = 25 * obSize;                                 
+		_psData.particles_num = randIntInRange(10 * obSize, 15 * obSize);    
+		_psData.particleSize_start  = 25 * obSize;                                 
 
-		pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
-		pEE = new ExplosionEffect(pTo_particleTexOb, this, _center_x, _center_y, _num_particles, _pSize, _d_pSize, _velocity_start, _alpha_start, _alpha_end, _d_alpha);
-		effect_EXPLOSION_pList.push_back(pEE);
+		_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
+
+		_explosion = new ExplosionEffect(_particleTexOb, _center_pos, _psData);
+		addExplosion(_explosion);
 	}
     	else    
 	{
-		_num_particles = 40;
-		_pSize         = 25 * obSize;
-		pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
-		pEE = new ExplosionEffect(pTo_particleTexOb, this, _center_x, _center_y, _num_particles, _pSize, _d_pSize, _velocity_start, _alpha_start, _alpha_end, _d_alpha);
-		effect_EXPLOSION_pList.push_back(pEE);
+		_psData.particles_num = 40;
+		_psData.particleSize_start  = 25 * obSize;
+
+		_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
+		
+		_explosion = new ExplosionEffect(_particleTexOb, _center_pos, _psData);
+		addExplosion(_explosion);
        
 
-		_num_particles = 50;
-		_pSize         = 25 * (obSize-1);
-		pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(YELLOW_COLOR_ID);
-		pEE = new ExplosionEffect(pTo_particleTexOb, this, _center_x, _center_y, _num_particles, _pSize, _d_pSize, _velocity_start, _alpha_start, _alpha_end, _d_alpha);
-		effect_EXPLOSION_pList.push_back(pEE);
+		_psData.particles_num = 50;
+		_psData.particleSize_start  = 25 * (obSize-1);
+
+		_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(YELLOW_COLOR_ID);
+		
+		_explosion = new ExplosionEffect(_particleTexOb, _center_pos, _psData);
+		addExplosion(_explosion);
        
-		_num_particles = 100;                              
-		_pSize         = 25 * (obSize-2);
-		pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
-		pEE = new ExplosionEffect(pTo_particleTexOb, this, _center_x, _center_y, _num_particles, _pSize, _d_pSize, _velocity_start, _alpha_start, _alpha_end, _d_alpha);
-		effect_EXPLOSION_pList.push_back(pEE);
+		_psData.particles_num = 100;                              
+		_psData.particleSize_start  = 25 * (obSize-2);
+
+		_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
+		
+		_explosion = new ExplosionEffect(_particleTexOb, _center_pos, _psData);
+		addExplosion(_explosion);
 	} 	       
  
-	addShockWave(_center_x, _center_y, obSize);
+	createShockWave(_center_pos, obSize);
 	//explosion.play()
 }
 
 
-void StarSystem :: addShockWave(float _center_x, float _center_y, int obSize)
+void StarSystem :: createShockWave(vec2f _center_pos, int obSize)
 {
 	if ( (obSize > 3) && (effect_SHOCKWAVE_pList.size() < 10) )
 	{
@@ -903,9 +900,8 @@ void StarSystem :: addShockWave(float _center_x, float _center_y, int obSize)
 		float dz = 0.0005;
 		float dtime = -(0.002 + 0.3 * obSize * 0.001);     // 10, 1.8, 0.13, 0.0,  0,  0.02, 0.0005, -0.004 
         
-		ShockWaveEffect* pTo_shockWave = new ShockWaveEffect(this, _center_x/float(w), _center_y/float(h), x, y, z, time, dx, dy, dz, dtime);  
-       
-		effect_SHOCKWAVE_pList.push_back(pTo_shockWave);
+		ShockWaveEffect* pTo_shockWave = new ShockWaveEffect(_center_pos, x, y, z, time, dx, dy, dz, dtime);  
+       		addShockWave(pTo_shockWave);
 	}
 }
 
@@ -913,31 +909,12 @@ void StarSystem :: asteroidManager(int num)
 {
         while (ASTEROID_pList.size() < num)
         {
-                Asteroid* _asteroid = asteroidGenerator();
+                Asteroid* _asteroid = createAsteroid();
                 addAsteroid(_asteroid);
         }
 }
 
 
-
-void StarSystem :: addNumMinerals(float center_x, float center_y, int num)
-{
-    float alpha = randIntInRange(0, 360) / 57.0;
-    float d_alpha = 2*PI / num;
-    float len, target_x, target_y;
-    
-    for (int i = 0; i<num; i++)
-    {
-        len = randIntInRange(60, 100);
-        target_x = center_x + sin(alpha) * len;
-        target_y = center_y + cos(alpha) * len;
-
-        TextureOb* _mTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.mineral_texOb_pList); 
-        Mineral* _mineral = new Mineral(_mTexOb, center_x, center_y, target_x, target_y);
-	addMineral(_mineral);
-        alpha += d_alpha;
-    }
-}
 
 
 bool StarSystem :: addStar(Star* _star)
@@ -979,6 +956,28 @@ bool StarSystem :: addContainer(Container* _container)
         
         return true;
 }
+
+
+bool StarSystem :: addExplosion(ExplosionEffect* _explosion)
+{
+	_explosion->setStarSystem(this);
+	effect_EXPLOSION_pList.push_back(_explosion);
+        
+        return true;
+}
+
+
+bool StarSystem :: addShockWave(ShockWaveEffect* _shockWave)
+{
+	_shockWave->setStarSystem(this);
+	effect_SHOCKWAVE_pList.push_back(_shockWave);
+        
+        return true;
+}
+
+
+		
+
     		
 void StarSystem :: manageEntities()
 {  
@@ -1223,6 +1222,27 @@ void StarSystem :: mouseControl()
     pTo_PLAYER->pTo_ship->resetDeselectedWeaponTargets();
 
 
+
+    if (cursor_has_target == false) 
+    {
+        for (unsigned int i = 0; i < visible_STAR_pList.size(); i++)
+        { 
+            float cursor_dist = distBetweenCenters(visible_STAR_pList[i]->getPoints(), mxvp, myvp);
+            if (cursor_dist < 10.0)
+            {   
+               cursor_has_target = true;
+
+               visible_STAR_pList[i]->updateInfo(); 
+               visible_STAR_pList[i]->renderInfo(); 
+
+               break; 
+            }
+        }
+    }
+
+
+
+
     if (cursor_has_target == false) 
     {
         for (unsigned int mi = 0; mi < visible_MINERAL_pList.size(); mi++)
@@ -1429,7 +1449,7 @@ void StarSystem :: fireEvents_FALSE(int timer)
 bool StarSystem :: addShip(Ship* _pTo_ship)
 {
      _pTo_ship->in_SPACE = true;
-     _pTo_ship->pTo_starsystem = this;  
+     _pTo_ship->starsystem = this;  
 
      SHIP_pList.push_back(_pTo_ship);
      return true;
@@ -1489,7 +1509,7 @@ bool StarSystem :: removeNpc(int _id, int _race_id, int _subtype_id)
 }
 
 
-     bool StarSystem :: removeNpcFromTheListById(VEC_pNpc_type* pTo_npc_pList, int _id)
+     bool StarSystem :: removeNpcFromTheListById(std::vector<Npc*>* pTo_npc_pList, int _id)
      {
           bool is_removed = false;
           for (unsigned int ni = 0; ni < pTo_npc_pList->size(); ni++)
@@ -1509,7 +1529,7 @@ bool StarSystem :: removeNpc(int _id, int _race_id, int _subtype_id)
 
 
 
-Planet* StarSystem :: returnClosestPlanet(int _pos_x, int _pos_y)
+Planet* StarSystem :: returnClosestPlanet(vec2f _pos)
 {
      return PLANET_pList[randIntInRange(0, PLANET_pList.size()-1)];
      //p = self.returnClosestInhabitedPlanet(ship)

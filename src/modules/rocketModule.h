@@ -36,14 +36,6 @@ class RocketModule : public CommonForModules
        		int ammo_max_add;
        		int damage_add;
        		int radius_add;
-
-      		// INFO 
-      		std::string info_title_0;
-      		std::string info_title_1;   std::string info_value_1;
-      		std::string info_title_2;   std::string info_value_2; 
-      		std::string info_title_3;   std::string info_value_3;
-      		std::string info_title_4;   std::string info_value_4;
-       	
 };
 
 RocketModule* rocketModuleGenerator();

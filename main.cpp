@@ -3,7 +3,7 @@ Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
+as published by the Free Software F*oundation; either version 2
 of the L icense, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
@@ -15,6 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
+
 
 #include "include.h"
 
@@ -115,7 +116,7 @@ int main()
 
     KeyEventsInSpace g_KEY_EVENTS_IN_SPACE = KeyEventsInSpace(); 
 
-    World world;
+    Galaxy galaxy;
     InterfaceInSpace interfaceInSpace 	      = InterfaceInSpace();
     InterfaceInKosmoport interfaceInKosmoport = InterfaceInKosmoport();
 
@@ -124,7 +125,7 @@ int main()
 
     //// player
     pTo_PLAYER = new PlayerInstance();
-    Ship* pTo_pship = world.pTo_ss_active->SHIP_pList[0];
+    Ship* pTo_pship = galaxy.pTo_ss_active->SHIP_pList[0];
 
     //equip(pTo_pship); // debug
 
@@ -163,12 +164,12 @@ int main()
            if (g_TIMER > 0)   
            {
                if (algorythm_TRUE)
-                   starsystemSimulation_inDynamic_TRUE(world.pTo_ss_active);
+                   starsystemSimulation_inDynamic_TRUE(galaxy.pTo_ss_active);
                else
-                   starsystemSimulation_inDynamic_FALSE(world.pTo_ss_active);
+                   starsystemSimulation_inDynamic_FALSE(galaxy.pTo_ss_active);
 
-               for (unsigned int si = 0; si < world.hSTARSYSTEM_pList.size(); si++)
-                   starsystemSimulation_inDynamic_FALSE(world.hSTARSYSTEM_pList[si]);
+               for (unsigned int si = 0; si < galaxy.hSTARSYSTEM_pList.size(); si++)
+                   starsystemSimulation_inDynamic_FALSE(galaxy.hSTARSYSTEM_pList[si]);
 
                calculation_per_turn_allowed = true;
            }
@@ -179,11 +180,11 @@ int main()
                    pTo_PLAYER->pTo_ship->reloadAllWeapons();   // remove from here
                    pTo_PLAYER->pTo_ship->pTo_navigator->updateTargetCoords();   // remove from here
                    
-                   starsystemSimulation_inStatic_TRUE(world.pTo_ss_active);
+                   starsystemSimulation_inStatic_TRUE(galaxy.pTo_ss_active);
                    //world.pTo_ss_active->debug__();                                 // debug
-                   for (unsigned int si = 0; si < world.hSTARSYSTEM_pList.size(); si++)
+                   for (unsigned int si = 0; si < galaxy.hSTARSYSTEM_pList.size(); si++)
                    {    
-                        starsystemSimulation_inStatic_FALSE(world.hSTARSYSTEM_pList[si]);
+                        starsystemSimulation_inStatic_FALSE(galaxy.hSTARSYSTEM_pList[si]);
                         //world.hSTARSYSTEM_pList[si]->debug__();                       // debug
                    }
 
@@ -192,10 +193,10 @@ int main()
 
            }
 
-           starsystemRender(world.pTo_ss_active);
+           starsystemRender(galaxy.pTo_ss_active);
 
            if ( (pTo_PLAYER->is_SCANNING == false) && (pTo_PLAYER->in_WORLDMAP == false) )
-              world.pTo_ss_active->mouseControl();   
+              galaxy.pTo_ss_active->mouseControl();   
 
            //////////// SCAN ///////////////
            if ( pTo_PLAYER->is_SCANNING == true )  
@@ -205,8 +206,8 @@ int main()
            /////////// WORLDMAP ///////////
            if ( pTo_PLAYER->in_WORLDMAP == true )  
            {
-               world.manage_map();   
-               world.render_map();   
+               galaxy.manage_map();   
+               galaxy.render_map();   
            }
 
            interfaceInSpace.mouseInteraction();
@@ -252,8 +253,8 @@ int main()
 
            if (interfaceInKosmoport.galaxymap_screen_SELECTED == true)
            {
-               world.manage_map();   
-               world.render_map();   
+               galaxy.manage_map();   
+               galaxy.render_map();   
            }
 
            if (interfaceInKosmoport.goverment_screen_SELECTED == true)

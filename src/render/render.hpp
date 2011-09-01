@@ -101,6 +101,14 @@ void drawInfoIn2Column(
                 float scroll_y = g_SCROLL_COORD_Y);
 
 
+void drawInfoIn2Column(
+                std::vector<std::string>* pInfo_title_list, 
+                std::vector<std::string>* pInfo_value_list, 
+                float center_x, 
+                float center_y,
+                float scroll_x = g_SCROLL_COORD_X,
+                float scroll_y = g_SCROLL_COORD_Y);
+
 
 void drawSimpleText(std:: string str, int font_size, float pos_x, float pos_y);
 

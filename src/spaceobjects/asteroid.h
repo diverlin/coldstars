@@ -36,8 +36,7 @@ class Asteroid : public CommonForPlanet
 		Asteroid(TextureOb* _pTo_texOb,
 		         ObjMeshInstance* _mesh,
 		         float _size, 
-		         float _orbit_center_x, 
-		         float _orbit_center_y, 
+		         vec2f _orbit_center, 
 		         int _radius_A, 
 		         int _radius_B, 
 		         float _orbit_phi_inD, 
@@ -59,18 +58,10 @@ class Asteroid : public CommonForPlanet
         	void renderInfo();
         	
         private:
-                VEC_pString_type info_title_pList;        
-        	VEC_pString_type info_value_pList;
-        	
-                // INFO 
-        	std::string info_title_0;
-        	std::string info_title_1;   std::string info_value_1;
-        	std::string info_title_2;   std::string info_value_2; 
-        	std::string info_title_3;   std::string info_value_3;
-        	std::string info_title_4;   std::string info_value_4;
+		InfoTable info;
 }; 
 
 
-Asteroid* asteroidGenerator();
+Asteroid* createAsteroid();
 
 #endif 

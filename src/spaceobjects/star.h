@@ -66,14 +66,17 @@ class Star
     		void render_NEW();
     		void render_OLD();
     		
+    		void updateInfo();
     		void renderInfo();
                 
         private:
                 Points points;
+                
+                InfoTable info;
 }; 
 
 
-Star* starGenerator();
+Star* createStar();
 
 #endif 
     

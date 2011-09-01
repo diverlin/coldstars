@@ -20,6 +20,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef EFFECTS_H
 #define EFFECTS_H
 
+
+struct ParticleSystemData 
+{
+	unsigned int particles_num;
+
+	float particleSize_start;
+	float particleSize_end;
+
+	float velocity_start;
+	float velocity_end;
+
+	float alpha_start;
+	float alpha_end;
+
+	float d_particleSize;
+	float d_velocity;
+	float d_alpha;
+};
+
+
 class ParticleForDamageEffect
 {
    public:
@@ -75,7 +95,7 @@ class DamageEffect
        float alpha_start;
        float alpha_end;
 
-       VEC_pParticleForDamageEffect_type particles_pList;
+       std::vector<ParticleForDamageEffect*> particles_pList;
 
        DamageEffect(TextureOb* _pTo_texOb, 
        		    StarSystem* _pTo_starsystem, 
@@ -122,16 +142,7 @@ class ParticleForExplosionEffect
         float velocity_y;  
         
         
-      ParticleForExplosionEffect(float _center_x_start, 
-      				 float _center_y_start, 
-      				 float _size_start, 
-      				 float _d_size, 
-      				 float _velocity_start, 
-      				 float _d_velocity, 
-      				 float _alpha_start, 
-      				 float _alpha_end, 
-      				 float _d_alpha, 
-      				 float _curnum);
+      ParticleForExplosionEffect(vec2f, ParticleSystemData, int);
       				 
       ~ParticleForExplosionEffect();
 
@@ -147,7 +158,7 @@ class ExplosionEffect
 { 
     public:
           TextureOb* pTo_texOb;
-          StarSystem* pTo_starsystem;
+          StarSystem* starsystem;
           bool is_alive;
           bool alreadyInRemoveQueue;
   
@@ -158,26 +169,17 @@ class ExplosionEffect
           float center_y;
    
           int num_particles;
-          VEC_pParticleForExplosionEffect_type particles_pList;
+          std::vector<ParticleForExplosionEffect*> particles_pList;
            
           float pSize_start;
            
-       ExplosionEffect(TextureOb* _pTo_texOb, 
-       		       StarSystem* _pTo_starsystem, 
-       		       float _center_x, 
-       		       float _center_y, 
-       		       int _num_particles, 
-       		       float _pSize_start, 
-       		       float _d_pSize,  
-       		       float _velocity_start, 
-       		       float _alpha_start, 
-       		       float _alpha_end, 
-       		       float _d_alpha);
+       ExplosionEffect(TextureOb*, vec2f, ParticleSystemData);
        		       
        ~ExplosionEffect();
 
-       void update();
-       void render();
+	void setStarSystem(StarSystem* _starsystem);
+       	void update();
+       	void render();
 };
 
 
@@ -274,16 +276,6 @@ class DriveTrailEffect
        void render();
 };  
 typedef std::vector<DriveTrailEffect*>  VEC_pDriveTrailEffect_type; 
-
-
-
-
-
-
-
-
-
-
 
 
 

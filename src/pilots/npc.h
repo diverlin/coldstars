@@ -41,25 +41,25 @@ class Npc
      int credits;
 
      // observation/radar
-     VEC_pAsteroid_type visible_ASTEROID_pList;
-     VEC_pMineral_type visible_MINERAL_pList;
-     VEC_pContainer_type visible_CONTAINER_pList;
+     std::vector<Asteroid*>  visible_ASTEROID_pList;
+     std::vector<Mineral*>   visible_MINERAL_pList;
+     std::vector<Container*> visible_CONTAINER_pList;
 
-     VEC_pNpc_type visible_NPC_RANGER_pList;
-     VEC_pNpc_type visible_NPC_WARRIOR_pList;
-     VEC_pNpc_type visible_NPC_TRADER_pList;
-     VEC_pNpc_type visible_NPC_PIRAT_pList;
-     VEC_pNpc_type visible_NPC_DIPLOMAT_pList;
+     std::vector<Npc*> visible_NPC_RANGER_pList;
+     std::vector<Npc*> visible_NPC_WARRIOR_pList;
+     std::vector<Npc*> visible_NPC_TRADER_pList;
+     std::vector<Npc*> visible_NPC_PIRAT_pList;
+     std::vector<Npc*> visible_NPC_DIPLOMAT_pList;
 
-     VEC_float_type asteroid_distance_list;
-     VEC_float_type mineral_distance_list;
-     VEC_float_type container_distance_list;
+     std::vector<float> asteroid_distance_list;
+     std::vector<float> mineral_distance_list;
+     std::vector<float> container_distance_list;
 
-     VEC_float_type npc_ranger_distance_list;
-     VEC_float_type npc_warrior_distance_list;
-     VEC_float_type npc_trader_distance_list;
-     VEC_float_type npc_pirat_distance_list;
-     VEC_float_type npc_diplomat_distance_list;
+     std::vector<float> npc_ranger_distance_list;
+     std::vector<float> npc_warrior_distance_list;
+     std::vector<float> npc_trader_distance_list;
+     std::vector<float> npc_pirat_distance_list;
+     std::vector<float> npc_diplomat_distance_list;
 
      See see;
      // observation/radar 

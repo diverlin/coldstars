@@ -76,7 +76,7 @@ void CommonForModules :: _renderFrames(Rect slot_rect)
 
 void CommonForModules :: renderInfo(Rect slot_rect)
 {  
-     drawInfoIn2Column(&info_title_pList, &info_value_pList, slot_rect.center_x, slot_rect.center_y, 0, 0);
+     drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.center_x, slot_rect.center_y, 0, 0);
 }
 
 

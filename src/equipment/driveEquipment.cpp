@@ -22,15 +22,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 DriveEquipment :: DriveEquipment()
 {}
 
-DriveEquipment :: DriveEquipment(TextureOb* _pTo_itemTexOb, 
+DriveEquipment :: DriveEquipment(TextureOb* _itemTexOb, 
 				 int _speed_orig, 
 				 int _hyper_orig, 
-				 int _modules_num_max, 
-				 int _mass, 
-				 int _condition_max, 
-				 int _deterioration_rate)
+				 EquipmentCommonData _common_data)
 {
-     CommonForEquipment_init(DRIVE_ID, _pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
+     CommonForEquipment_init(DRIVE_ID, _itemTexOb, _common_data);
 
      speed_orig = _speed_orig;
      speed_add  = 0;
@@ -72,12 +69,12 @@ void DriveEquipment :: countPrice()
 {
      float speed_rate         = (float)speed_orig / DRIVE_SPEED_MIN;
      float hyper_rate         = (float)hyper_orig / DRIVE_HYPER_MIN;
-     float modules_num_rate   = (float)modules_num_max / DRIVE_MODULES_NUM_MAX;
+     float modules_num_rate   = (float)common_data.modules_num_max / DRIVE_MODULES_NUM_MAX;
 
      float effectiveness_rate = DRIVE_SPEED_WEIGHT * speed_rate + DRIVE_HYPER_WEIGHT * hyper_rate + DRIVE_MODULES_NUM_WEIGHT * modules_num_rate;
 
-     float mass_rate          = (float)mass / DRIVE_MASS_MIN;
-     float condition_rate     = (float)condition / condition_max;
+     float mass_rate          = (float)common_data.mass / DRIVE_MASS_MIN;
+     float condition_rate     = (float)condition / common_data.condition_max;
 
      price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
@@ -85,10 +82,18 @@ void DriveEquipment :: countPrice()
 
 void DriveEquipment :: updateOwnerPropetries()
 {
-    //self.owner.updateDriveAbility()
+    	slot->getShip()->updateDriveAbility();
 }
 
-std::string DriveEquipment :: returnSpeedStr()
+
+void DriveEquipment :: addUniqueInfo()
+{
+    	info.addTitleStr("DRIVE");
+    	info.addNameStr("speed:");     info.addValueStr( getSpeedStr() );
+    	info.addNameStr("hyper:");     info.addValueStr( getHyperStr() );
+}     		
+
+std::string DriveEquipment :: getSpeedStr()
 {
      if (speed_add == 0)
         return int2str(speed_orig);
@@ -96,7 +101,7 @@ std::string DriveEquipment :: returnSpeedStr()
         return int2str(speed_orig) + "+" + int2str(speed_add);
 }
 
-std::string DriveEquipment :: returnHyperStr()
+std::string DriveEquipment :: getHyperStr()
 {
      if (hyper_add == 0)
          return int2str(hyper_orig);
@@ -104,35 +109,9 @@ std::string DriveEquipment :: returnHyperStr()
          return int2str(hyper_orig) + "+" + int2str(hyper_add);
 }
 
-
-
-void DriveEquipment :: updateInfo()
-{
-    info_title_pList.clear();
-    info_value_pList.clear();
-
-    info_title_0 = "DRIVE";
-    info_title_1 = "speed:";       info_value_1 = returnSpeedStr();
-    info_title_2 = "hyper:";       info_value_2 = returnHyperStr();
-
-    info_title_3 = "modules:";    info_value_3 = int2str(modules_num_max);
-    info_title_4 = "condition:";  info_value_4 = int2str(condition) + "/" + int2str(condition_max);
-    info_title_5 = "mass:";       info_value_5 = int2str(mass);
-    info_title_6 = "price:";      info_value_6 = int2str(price);
-
-    info_title_pList.push_back(&info_title_0);  
-    info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
-    info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
-    info_title_pList.push_back(&info_title_3);   info_value_pList.push_back(&info_value_3);
-    info_title_pList.push_back(&info_title_4);   info_value_pList.push_back(&info_value_4);
-    info_title_pList.push_back(&info_title_5);   info_value_pList.push_back(&info_value_5); 
-    info_title_pList.push_back(&info_title_6);   info_value_pList.push_back(&info_value_6);
-}
-
-
 bool DriveEquipment :: insertModule(DriveModule* _drive_module)
 {
-    	if (modules_pList.size() < modules_num_max)
+    	if (modules_pList.size() < common_data.modules_num_max)
     	{
         	speed_add += _drive_module->getSpeedAdd();
         	hyper_add += _drive_module->getHyperAdd();
@@ -163,13 +142,14 @@ DriveEquipment* driveEquipmentGenerator(int race_id, int revision_id)
 
     int speed_orig      = randIntInRange(DRIVE_SPEED_MIN, DRIVE_SPEED_MAX);
     int hyper_orig      = randIntInRange(DRIVE_HYPER_MIN, DRIVE_HYPER_MAX);
-    int modules_num_max = randIntInRange(DRIVE_MODULES_NUM_MIN, DRIVE_MODULES_NUM_MAX);
+    
+    EquipmentCommonData common_data;
+    common_data.modules_num_max = randIntInRange(DRIVE_MODULES_NUM_MIN, DRIVE_MODULES_NUM_MAX);
+    common_data.mass            = randIntInRange(DRIVE_MASS_MIN, DRIVE_MASS_MAX);
+    common_data.condition_max   = randIntInRange(DRIVE_CONDITION_MIN, DRIVE_CONDITION_MAX) * tech_rate;
+    common_data.deterioration_rate = 1;
 
-    int mass            = randIntInRange(DRIVE_MASS_MIN, DRIVE_MASS_MAX);
-    int condition_max   = randIntInRange(DRIVE_CONDITION_MIN, DRIVE_CONDITION_MAX) * tech_rate;
-    int deterioration_rate = 1;
-
-    DriveEquipment* pTo_drive = new DriveEquipment(pTo_itemTexOb, speed_orig, hyper_orig, modules_num_max, mass, condition_max, deterioration_rate);
+    DriveEquipment* pTo_drive = new DriveEquipment(pTo_itemTexOb, speed_orig, hyper_orig, common_data);
     return pTo_drive;
 }
 

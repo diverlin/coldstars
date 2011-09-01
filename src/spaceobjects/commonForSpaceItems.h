@@ -75,7 +75,7 @@ class CommonForSpaceItems
         	bool keep_moving;
 
         	CommonForSpaceItems();
-        	void CommonForSpaceItems_init(TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _target_pos_x, float _target_pos_y);
+        	void CommonForSpaceItems_init(TextureOb* _texOb, vec2f _start_pos);
     
         	Points* getPoints();
         	void setStarSystem(StarSystem* _starsystem);

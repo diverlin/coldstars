@@ -27,22 +27,12 @@ class ProtectorEquipment  : public CommonForEquipment
 		ProtectorEquipment(); 
       		ProtectorEquipment(TextureOb* _pTo_itemTexOb, 
       				   int _protection_orig, 
-      				   int _modules_num_max, 
-      				   int _mass, 
-      				   int _condition_max,
-      				   int _deterioration_rate);
+				   EquipmentCommonData _common_data);
       				    
       		~ProtectorEquipment();
 
 		int getProtection() const;
 		
-      		void countPrice();
-      		void updatePropetries();
-      		void updateOwnerPropetries();
-
-      		void updateInfo();
-           		std::string returnProtectionStr();
-           
       		bool insertModule(ProtectorModule* pTo_protectorModule);
       		
       	private:
@@ -50,15 +40,16 @@ class ProtectorEquipment  : public CommonForEquipment
       		int protection_add;
       		int protection;
       		
-      		VEC_pProtectorModule_type modules_pList;
+      		std::vector<ProtectorModule*> modules_pList;
+      		
+      		void countPrice();
+      		void updatePropetries();
+      		void virtual updateOwnerPropetries();
 
-      		// INFO 
-      		std::string info_title_0;
-      		std::string info_title_1;   std::string info_value_1;
-      		std::string info_title_2;   std::string info_value_2; 
-      		std::string info_title_3;   std::string info_value_3;
-      		std::string info_title_4;   std::string info_value_4;
-      		std::string info_title_5;   std::string info_value_5;      	
+     		void virtual addUniqueInfo();
+           	std::string getProtectionStr();
+
+     	
 
 };
 

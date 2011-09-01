@@ -35,44 +35,45 @@ class StarSystem
     		VEC_pDistantNebulaBgEffect_type distantNebulaBgEffect_pList;
     		VEC_pDistantStarBgEffect_type distantStarBgEffect_pList;
 
-    		VEC_pStar_type         STAR_pList;
-    		VEC_pPlanet_type       PLANET_pList;
-    		VEC_pAsteroid_type     ASTEROID_pList;
-    		VEC_pMineral_type      MINERAL_pList;
-    		VEC_pContainer_type    CONTAINER_pList;
-    		VEC_pRocketBullet_type ROCKET_pList;
+    		std::vector<Star*>         STAR_pList;
+    		std::vector<Planet*>       PLANET_pList;
+    		std::vector<Asteroid*>     ASTEROID_pList;
+    		std::vector<Mineral*>      MINERAL_pList;
+    		std::vector<Container*>    CONTAINER_pList;
+    		std::vector<RocketBullet*> ROCKET_pList;
 
-		VEC_pShip_type     SHIP_pList;
-    		VEC_pNpc_type      NPC_pList;
-    		VEC_pNpc_type      NPC_RANGER_pList;  // these 5 list below is needed for AI
-    		VEC_pNpc_type      NPC_WARRIOR_pList;
-    		VEC_pNpc_type      NPC_TRADER_pList;
-    		VEC_pNpc_type      NPC_PIRAT_pList;
-    		VEC_pNpc_type      NPC_DIPLOMAT_pList;
+		std::vector<Ship*> SHIP_pList;
+    		std::vector<Npc*>  NPC_pList;
+		// these 5 list below is needed for AI
+    		std::vector<Npc*>  NPC_RANGER_pList;  
+    		std::vector<Npc*>  NPC_WARRIOR_pList;
+    		std::vector<Npc*>  NPC_TRADER_pList;
+    		std::vector<Npc*>  NPC_PIRAT_pList;
+    		std::vector<Npc*>  NPC_DIPLOMAT_pList;
 
-    		VEC_pLazerTrace_type       effect_LAZERTRACE_pList;
-    		VEC_pExplosionEffect_type  effect_EXPLOSION_pList;
-    		VEC_pDamageEffect_type 	   effect_DAMAGE_pList;
+    		std::vector<LazerTraceEffect*>       effect_LAZERTRACE_pList;
+    		std::vector<ExplosionEffect*>  effect_EXPLOSION_pList;
+    		std::vector<DamageEffect*> 	   effect_DAMAGE_pList;
     		VEC_pShockWaveEffect_type  effect_SHOCKWAVE_pList;
        
     		// REMOVE QUEUE LIST
-    		VEC_pShip_type      SHIP_remove_queue_pList;
-    		VEC_pNpc_type       NPC_remove_queue_pList;
+    		std::vector<Ship*>  SHIP_remove_queue_pList;
+    		std::vector<Npc*>   NPC_remove_queue_pList;
 
-    		VEC_pAsteroid_type  ASTEROID_remove_queue_pList;
-    		VEC_pMineral_type   MINERAL_remove_queue_pList;
-    		VEC_pContainer_type CONTAINER_remove_queue_pList;
-    		VEC_pRocketBullet_type      ROCKET_remove_queue_pList;
+    		std::vector<Asteroid*>  ASTEROID_remove_queue_pList;
+    		std::vector<Mineral*>   MINERAL_remove_queue_pList;
+    		std::vector<Container*> CONTAINER_remove_queue_pList;
+    		std::vector<RocketBullet*> ROCKET_remove_queue_pList;
 
     		// VISIBLE ENTITY LIST
-    		VEC_pStar_type      visible_STAR_pList;
-    		VEC_pPlanet_type    visible_PLANET_pList;
-    		VEC_pAsteroid_type  visible_ASTEROID_pList;
-    		VEC_pMineral_type   visible_MINERAL_pList;
-    		VEC_pContainer_type visible_CONTAINER_pList;
-    		VEC_pRocketBullet_type      visible_ROCKET_pList;
+    		std::vector<Star*>      visible_STAR_pList;
+    		std::vector<Planet*>    visible_PLANET_pList;
+    		std::vector<Asteroid*>  visible_ASTEROID_pList;
+    		std::vector<Mineral*>   visible_MINERAL_pList;
+    		std::vector<Container*> visible_CONTAINER_pList;
+    		std::vector<RocketBullet*> visible_ROCKET_pList;
 
-    		VEC_pShip_type      visible_SHIP_pList;
+    		std::vector<Ship*>      visible_SHIP_pList;
 
      
 
@@ -100,7 +101,7 @@ class StarSystem
                 FBO* pTo_fbo3;
                 BloomEffect* pTo_bloom; 
                                           
-                void defineSceneColor(TextureOb* _pTo_texOb);
+                void defineSceneColor(TextureOb*);
                                                 
                 void createPostProcessStuff();
     		void renderEntities_NEW();
@@ -108,11 +109,8 @@ class StarSystem
     			void setSceneColor();
     			void renderBackground();
         
-    		void addExplosion(float _center_x, float _center_y, int obSize);
-    		void addShockWave(float _center_x, float _center_y, int obSize);
-    		    		
+   		    		
     		void asteroidManager(int num);
-    		void addNumMinerals(float _center_x, float _center_y, int num);
 
     		void manageEntities();
     		void removeDeadEntities();
@@ -124,20 +122,26 @@ class StarSystem
     		void fireEvents_FALSE(int timer);
 
     		//// TRANSITION
-                bool addStar(Star* _star);
-                bool addPlanet(Planet* _planet);
-    		bool addAsteroid(Asteroid* _asteroid);
-    		bool addShip(Ship* _ship);
-    		bool addNpc(Npc* _npc);
-    		bool addMineral(Mineral* _mineral);
-    		bool addContainer(Container* _container);
+    		void createExplosion(vec2f _center_pos, int obSize);
+    		void createShockWave(vec2f _center_pos, int obSize);
+    		
+                bool addStar(Star*);
+                bool addPlanet(Planet*);
+    		bool addAsteroid(Asteroid*);
+    		bool addShip(Ship*);
+    		bool addNpc(Npc*);
+    		bool addMineral(Mineral*);
+    		bool addContainer(Container*);
+    		bool addExplosion(ExplosionEffect*);
+    		bool addShockWave(ShockWaveEffect*);
+    		
                 
     		bool removeShipById(int _id);    
     		bool removeNpc(int _id, int _race_id, int _subtype_id);  
-         	bool removeNpcFromTheListById(VEC_pNpc_type* pTo_npc_pList, int _id);
+         	bool removeNpcFromTheListById(std::vector<Npc*>* pTo_npc_pList, int _id);
    		//// TRANSITION
 
-    		Planet* returnClosestPlanet(int _pos_x, int _pos_y);
+    		Planet* returnClosestPlanet(vec2f);
 
     		void debug__();
 };

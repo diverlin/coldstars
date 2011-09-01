@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 TextureOb :: TextureOb()
 {}
 
-TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, VEC_int_type* pTo_arg, int _columns_num, int _rows_num, float _fps)
+TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, std::vector<int>* pTo_arg, int _columns_num, int _rows_num, float _fps)
 {
     // TexOb attributes Init
     race_id = -1;
@@ -344,18 +344,18 @@ int TextureOb :: updateAnimationFrame()
 }
 
 
-void TextureOb :: slotArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: slotArgManager(std::vector<int>* _pTo_arg)
 {}
    
-void TextureOb :: turrelArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: turrelArgManager(std::vector<int>* _pTo_arg)
 {}
    
 
 // SPACE OBJECTS
-void TextureOb :: sputnikArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: sputnikArgManager(std::vector<int>* _pTo_arg)
 {}
    
-void TextureOb :: shipArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: shipArgManager(std::vector<int>* _pTo_arg)
 {
      race_id    = (*_pTo_arg)[0];
      subtype_id = (*_pTo_arg)[1];   // warrior/trader and so on
@@ -367,7 +367,7 @@ void TextureOb :: shipArgManager(VEC_int_type* _pTo_arg)
      size_id = returnObjectSize(w, h);
 }
 
-void TextureOb :: nebulaArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: nebulaArgManager(std::vector<int>* _pTo_arg)
 {
      color_r    = (*_pTo_arg)[0];
      color_g    = (*_pTo_arg)[1];
@@ -375,51 +375,51 @@ void TextureOb :: nebulaArgManager(VEC_int_type* _pTo_arg)
      is_rotated = (*_pTo_arg)[3];
 }
 
-void TextureOb :: starArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: starArgManager(std::vector<int>* _pTo_arg)
 {
 	color_id        = (*_pTo_arg)[0];
 	brightThreshold = (float)(*_pTo_arg)[1]/1000;
 }
 
-void TextureOb :: planetArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: planetArgManager(std::vector<int>* _pTo_arg)
 {}
 
-void TextureOb :: atmosphereArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: atmosphereArgManager(std::vector<int>* _pTo_arg)
 {}
 
 
-void TextureOb :: asteroidArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: asteroidArgManager(std::vector<int>* _pTo_arg)
 {}
 
-void TextureOb :: mineralArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: mineralArgManager(std::vector<int>* _pTo_arg)
 {}
 
-void TextureOb :: containerArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: containerArgManager(std::vector<int>* _pTo_arg)
 {}
 
-void TextureOb :: bombArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: bombArgManager(std::vector<int>* _pTo_arg)
 {}
 
-void TextureOb :: blackholeArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: blackholeArgManager(std::vector<int>* _pTo_arg)
 {}
 
 //######### IN KOSMOPORT
-void TextureOb :: landBgArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: landBgArgManager(std::vector<int>* _pTo_arg)
 {}
 
-void TextureOb :: angarBgArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: angarBgArgManager(std::vector<int>* _pTo_arg)
 {}
 
-void TextureOb :: storeBgArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: storeBgArgManager(std::vector<int>* _pTo_arg)
 {}
 
-void TextureOb :: shopBgArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: shopBgArgManager(std::vector<int>* _pTo_arg)
 {}
 
-void TextureOb :: govermentBgArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: govermentBgArgManager(std::vector<int>* _pTo_arg)
 {}
 
-void TextureOb :: faceArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: faceArgManager(std::vector<int>* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    subtype_id    = (*_pTo_arg)[1];   // warrior/trader and so on
@@ -427,69 +427,69 @@ void TextureOb :: faceArgManager(VEC_int_type* _pTo_arg)
 
 
 // ITEMS
-void TextureOb :: DriveEquipmentArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: DriveEquipmentArgManager(std::vector<int>* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
 }
 
-void TextureOb :: LazerEquipmentArgManager(VEC_int_type* _pTo_arg)
-{
-   race_id       = (*_pTo_arg)[0];
-   tech_level_id = (*_pTo_arg)[1];
-   color_id      = (*_pTo_arg)[2];
-}
-
-void TextureOb :: RocketEquipmentArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: LazerEquipmentArgManager(std::vector<int>* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
    color_id      = (*_pTo_arg)[2];
 }
 
-void TextureOb :: ProtectorEquipmentArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: RocketEquipmentArgManager(std::vector<int>* _pTo_arg)
+{
+   race_id       = (*_pTo_arg)[0];
+   tech_level_id = (*_pTo_arg)[1];
+   color_id      = (*_pTo_arg)[2];
+}
+
+void TextureOb :: ProtectorEquipmentArgManager(std::vector<int>* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
 }
 
-void TextureOb :: DroidEquipmentArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: DroidEquipmentArgManager(std::vector<int>* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
 }
 
-void TextureOb :: GrappleEquipmentArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: GrappleEquipmentArgManager(std::vector<int>* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
 }
 
-void TextureOb :: BakEquipmentArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: BakEquipmentArgManager(std::vector<int>* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
 }
 
-void TextureOb :: energyBlockItemArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: energyBlockItemArgManager(std::vector<int>* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
 }
 
-void TextureOb :: FreezerEquipmentArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: FreezerEquipmentArgManager(std::vector<int>* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
 }
 
-void TextureOb :: RadarEquipmentArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: RadarEquipmentArgManager(std::vector<int>* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
 }
 
-void TextureOb :: ScanerEquipmentArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: ScanerEquipmentArgManager(std::vector<int>* _pTo_arg)
 {
    race_id       = (*_pTo_arg)[0];
    tech_level_id = (*_pTo_arg)[1];
@@ -497,27 +497,27 @@ void TextureOb :: ScanerEquipmentArgManager(VEC_int_type* _pTo_arg)
 
 
 //# BULLETS
-void TextureOb :: rocketBulletArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: rocketBulletArgManager(std::vector<int>* _pTo_arg)
 {}
 
-void TextureOb :: torpedBulletArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: torpedBulletArgManager(std::vector<int>* _pTo_arg)
 {}
 
-void TextureOb :: particleArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: particleArgManager(std::vector<int>* _pTo_arg)
 {
    color_id = (*_pTo_arg)[0];
 }
 
-void TextureOb :: distStarArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: distStarArgManager(std::vector<int>* _pTo_arg)
 {}
 
-void TextureOb :: lazerEffectArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: lazerEffectArgManager(std::vector<int>* _pTo_arg)
 {
    tech_level_id = (*_pTo_arg)[0];
    color_id = (*_pTo_arg)[1];
 }
 
-void TextureOb :: shieldEffectArgManager(VEC_int_type* _pTo_arg)
+void TextureOb :: shieldEffectArgManager(std::vector<int>* _pTo_arg)
 {
    color_id = (*_pTo_arg)[0];
 }

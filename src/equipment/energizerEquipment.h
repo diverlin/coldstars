@@ -25,19 +25,15 @@ class EnergizerEquipment : public CommonForEquipment
 {
 	public:
       		EnergizerEquipment();
-      		EnergizerEquipment(TextureOb* _pTo_itemTexOb, int _energy_max_orig, int _restoration_orig, int _modules_num_max, int _mass, int _condition_max, int _deterioration_rate);
+      		EnergizerEquipment(TextureOb* _itemTexOb, 
+      				   int _energy_max_orig, 
+      				   int _restoration_orig, 
+      				   EquipmentCommonData _common_data);
+      				   
       		~EnergizerEquipment();
       
       		int getEnergy() const;
       		
-      		void countPrice();
-      		void updatePropetries();
-      		void updateOwnerPropetries();
-
-      		void updateInfo();
-           		std::string returnEnergyStr();
-           		std::string returnRestorationStr();
-
       		bool insertModule(EnergizerModule* pTo_energizerModule);
       		
       	private:
@@ -50,17 +46,19 @@ class EnergizerEquipment : public CommonForEquipment
       		int restoration_add;
       		int restoration;
 
-      	      	VEC_pEnergizerModule_type modules_pList;
+      	      	std::vector<EnergizerModule*> modules_pList;
 
-      		// INFO 
-      		std::string info_title_0;
-      		std::string info_title_1;   std::string info_value_1;
-      		std::string info_title_2;   std::string info_value_2; 
-      		std::string info_title_3;   std::string info_value_3;
-      		std::string info_title_4;   std::string info_value_4;
-      		std::string info_title_5;   std::string info_value_5;
-      		std::string info_title_6;   std::string info_value_6;
-      	
+      		void countPrice();
+      		void updatePropetries();
+  		void virtual updateOwnerPropetries();
+      		
+     		void virtual addUniqueInfo();
+           	std::string getEnergyStr();
+           	std::string getRestorationStr();
+           	
+
+
+	
 };
 
 EnergizerEquipment* energizerEquipmentGenerator(int race_id, int revision_id = -1);

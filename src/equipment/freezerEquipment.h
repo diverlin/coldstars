@@ -25,18 +25,13 @@ class FreezerEquipment : public CommonForEquipment
 {  
    	public:
       		FreezerEquipment();
-      		FreezerEquipment(TextureOb* _pTo_itemTexOb, int _freeze_orig, int _modules_num_max, int _mass, int _condition_max, int _deterioration_rate);
+      		FreezerEquipment(TextureOb* _itemTexOb, 
+      				 int _freeze_orig, 
+      				 EquipmentCommonData _common_data);
       		~FreezerEquipment();
 
 		int getFreeze() const;
-		
-      		void countPrice();
-      		void updatePropetries();
-      		void updateOwnerPropetries();
-
-      		void updateInfo();
-          		std::string returnFreezeStr();
-           
+  
       		bool insertModule(FreezerModule* pTo_freezerModule);
       		
       	private:
@@ -44,15 +39,18 @@ class FreezerEquipment : public CommonForEquipment
       		int freeze_add;
       		int freeze;
       		
-      	      	VEC_pFreezerModule_type modules_pList;
+      	      	std::vector<FreezerModule*> modules_pList;
 
-      		// INFO 
-      		std::string info_title_0;
-      		std::string info_title_1;   std::string info_value_1;
-      		std::string info_title_2;   std::string info_value_2; 
-      		std::string info_title_3;   std::string info_value_3;
-      		std::string info_title_4;   std::string info_value_4;
-      		std::string info_title_5;   std::string info_value_5;
+      		void countPrice();
+      		void updatePropetries();      		
+      		void virtual updateOwnerPropetries();
+      		
+      		void virtual addUniqueInfo();      		
+       		std::string getFreezeStr();
+       		
+  	
+
+       	
       	
 };
 

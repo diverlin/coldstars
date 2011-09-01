@@ -35,13 +35,6 @@ class DriveModule : public CommonForModules
       	private:
       		int speed_add;
       		int hyper_add;
-      		
-      	      	// INFO 
-      		std::string info_title_0;
-      		std::string info_title_1;   std::string info_value_1;
-      		std::string info_title_2;   std::string info_value_2; 
-      		std::string info_title_3;   std::string info_value_3;
-      		
 };
 
 DriveModule* driveModuleGenerator();

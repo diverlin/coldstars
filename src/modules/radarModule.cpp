@@ -33,16 +33,11 @@ int RadarModule :: getRadiusAdd() const { return radius_add; }
 
 void RadarModule :: updateInfo()
 {
-    	info_title_pList.clear();
-    	info_value_pList.clear();
+	info.clear();
 
-    	info_title_0 = "radar module";
-    	info_title_1 = "radius_add:";     info_value_1 = int2str(radius_add);
-    	info_title_2 = "mass:";           info_value_2 = int2str(mass);
-
-    	info_title_pList.push_back(&info_title_0);  
-    	info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
-    	info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
+    	info.addTitleStr("radar module");
+    	info.addNameStr("radius_add:");   info.addValueStr(int2str(radius_add));
+    	info.addNameStr("mass:");         info.addValueStr(int2str(mass));
 }
 
 

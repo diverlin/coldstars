@@ -41,7 +41,7 @@ class Store
         int freezer_num;     
         int energyBlock_num; 
 
-        VEC_pItemSlot_type slot_pList;
+        std::vector<ItemSlot*> slot_pList;
 
 
         Store(TextureOb* _pTo_bg_texOb, TextureOb* _pTo_slot_texOb);
