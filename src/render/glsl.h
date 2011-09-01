@@ -79,13 +79,15 @@ class ShockWaveEffect
 		bool is_alive;
           	bool is_alreadyInRemoveQueue;
 
-          	StarSystem* pTo_starsystem;
+          	StarSystem* starsystem;
           	float center_x, center_y;
           	
           	float x, y, z, time, d_x, d_y, d_z, d_time;
 
-      		ShockWaveEffect(StarSystem* _pTo_starsystem, float _center_x, float _center_y, float _x, float _y, float _z, float _time, float _d_x, float _d_y, float _d_z, float d_time);
+      		ShockWaveEffect(vec2f _center_pos, float _x, float _y, float _z, float _time, float _d_x, float _d_y, float _d_z, float d_time);
       		~ShockWaveEffect();
+      		
+      		void setStarSystem(StarSystem*);
       		
       		void update();
 };

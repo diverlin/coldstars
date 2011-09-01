@@ -31,16 +31,11 @@ int FreezerModule :: getFreezeAdd() const { return freeze_add; }
 		
 void FreezerModule :: updateInfo()
 {
-    info_title_pList.clear();
-    info_value_pList.clear();
+	info.clear();
 
-    info_title_0 = "freezer module";
-    info_title_1 = "freeze_add:";     info_value_1 = int2str(freeze_add);
-    info_title_2 = "mass:";           info_value_2 = int2str(mass);
-
-    info_title_pList.push_back(&info_title_0);  
-    info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
-    info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
+    	info.addTitleStr("freezer module");
+    	info.addNameStr("freeze_add:");     info.addValueStr( int2str(freeze_add) );
+    	info.addNameStr("mass:");           info.addValueStr( int2str(mass) );
 }
 
 FreezerModule* freezerModuleGenerator()

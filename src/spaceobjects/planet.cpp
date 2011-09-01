@@ -24,8 +24,7 @@ Planet :: Planet(int _subtype_id,
 		 TextureOb* _pTo_atmoshereTexOb, 
 		 ObjMeshInstance* _mesh, 
 		 float _size, 
-		 float _orbit_center_x, 
-		 float _orbit_center_y, 
+		 vec2f _orbit_center, 
 		 int _radius_A, 
 		 int _radius_B, 
 		 int _orbit_phi_inD,
@@ -37,8 +36,7 @@ Planet :: Planet(int _subtype_id,
       CommonForPlanet_init(_texOb, 
     	   		   _mesh, 
     	   	           _size, 
-    	   		   _orbit_center_x, 
-    	   		   _orbit_center_y, 
+    	   		   _orbit_center, 
     	   		   _radius_A,
     	   		   _radius_B, 
     	   		   _orbit_phi_inD,
@@ -83,22 +81,17 @@ void Planet :: update_inSpace_inStatic()
 
 void Planet :: updateInfo()
 {
-    info_title_pList.clear();
-    info_value_pList.clear();
+	info.clear();
 
-    info_title_0 = "PLANET";
+    	info.addTitleStr("PLANET");
 
-    info_title_1 = "id/ss_id:";
-    info_value_1 = int2str(id) + " / " + int2str(starsystem->id);
-
-    info_title_pList.push_back(&info_title_0);  
-    info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
+    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->id));
 }
 
 
 void Planet :: renderInfo()
 {  
-     drawInfoIn2Column(&info_title_pList, &info_value_pList, points.getCenter().x, points.getCenter().y ); 
+     	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y);
 }
 
         
@@ -166,7 +159,7 @@ bool Planet :: getPermissionToLand()
         
 
 
-Planet* planetGenerator(int orbit_radius)
+Planet* createPlanet(int orbit_radius)
 {
         int subtype_id   = INHABITED_ID;
         int planet_size  = randIntInRange(PLANET_SIZE_MIN, PLANET_SIZE_MAX);
@@ -180,8 +173,7 @@ Planet* planetGenerator(int orbit_radius)
         				_atmosphereTexOb, 
         				pTo_SPHERE_MESH, 
         				planet_size, 
-        				0, 
-        				0, 
+        				vec2f(0,0), 
         				orbit_radius, 
         				orbit_radius,
         				0,

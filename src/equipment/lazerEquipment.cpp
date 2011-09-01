@@ -19,15 +19,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "lazerEquipment.h"
 
-LazerEquipment :: LazerEquipment(TextureOb* _pTo_itemTexOb, 
+LazerEquipment :: LazerEquipment(TextureOb* _itemTexOb, 
 				 int _damage_orig, 
 				 int _radius_orig, 
-				 int _modules_num_max, 
-				 int _mass, 
-				 int _condition_max, 
-				 int _deterioration_rate)
+				 EquipmentCommonData _common_data)
 {
-   	CommonForEquipment_init(LAZER_ID, _pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
+   	CommonForEquipment_init(LAZER_ID, _itemTexOb, _common_data);
 
    	damage_orig = _damage_orig;
    	damage_add  = 0;
@@ -66,12 +63,12 @@ void LazerEquipment :: countPrice()
 {
    	float damage_rate        = (float)damage_orig / LAZER_DAMAGE_MIN;
    	float radius_rate        = (float)radius_orig / LAZER_RADIUS_MIN;
-   	float modules_num_rate   = (float)modules_num_max / LAZER_MODULES_NUM_MAX;
+   	float modules_num_rate   = (float)common_data.modules_num_max / LAZER_MODULES_NUM_MAX;
 
    	float effectiveness_rate = LAZER_DAMAGE_WEIGHT * damage_rate + LAZER_RADIUS_WEIGHT * radius_rate + LAZER_MODULES_NUM_WEIGHT * modules_num_rate;
 
-   	float mass_rate          = (float)mass / LAZER_MASS_MIN;
-   	float condition_rate     = (float)condition / condition_max;
+   	float mass_rate          = (float)common_data.mass / LAZER_MASS_MIN;
+   	float condition_rate     = (float)condition / common_data.condition_max;
 
    	price                    = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
@@ -80,34 +77,21 @@ void LazerEquipment :: countPrice()
     
 void LazerEquipment :: updateOwnerPropetries()
 { 
-    	//(*pTo_owner).updateFireAbility();
+    	slot->getShip()->updateFireAbility();
 }
 
 
-void LazerEquipment :: updateInfo()
-{   
-    	info_title_pList.clear();
-    	info_value_pList.clear();
 
-    	info_title_0 = "LAZER";
-    	info_title_1 = "damage:";      info_value_1 = returnDamageStr();
-    	info_title_2 = "radius:";      info_value_2 = returnRadiusStr();
+void LazerEquipment :: addUniqueInfo()
+{
+    	info.addTitleStr("LAZER");
 
-    	info_title_3 = "max modules:"; info_value_3 = int2str(modules_num_max);
-    	info_title_4 = "condition:";   info_value_4 = int2str(condition) + "/" + int2str(condition_max);
-    	info_title_5 = "mass:";        info_value_5 = int2str(mass);
-    	info_title_6 = "price:";       info_value_6 = int2str(price);
+    	info.addNameStr("damage:");     info.addValueStr( getDamageStr() );
+    	info.addNameStr("radius:");     info.addValueStr( getRadiusStr() );
+}
+     		
 
-    	info_title_pList.push_back(&info_title_0);  
-    	info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
-    	info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
-    	info_title_pList.push_back(&info_title_3);   info_value_pList.push_back(&info_value_3);
-    	info_title_pList.push_back(&info_title_4);   info_value_pList.push_back(&info_value_4);
-    	info_title_pList.push_back(&info_title_5);   info_value_pList.push_back(&info_value_5); 
-    	info_title_pList.push_back(&info_title_6);   info_value_pList.push_back(&info_value_6);
-}     
-
-std::string LazerEquipment :: returnDamageStr()
+std::string LazerEquipment :: getDamageStr()
 {
       	if (damage_add == 0)
          	return int2str(damage_orig);
@@ -115,7 +99,7 @@ std::string LazerEquipment :: returnDamageStr()
          	return int2str(damage_orig) + "+" + int2str(damage_add);
 }
 
-std::string LazerEquipment :: returnRadiusStr()
+std::string LazerEquipment :: getRadiusStr()
 {
        	if (radius_add == 0)
           	return int2str(radius_orig);
@@ -164,18 +148,20 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
                                                               _turrel->getTarget_pCenterY());
         }
 
-    	slot->getShip()->pTo_starsystem->effect_LAZERTRACE_pList.push_back(pTo_lazer_trace_effect);
+    	slot->getShip()->starsystem->effect_LAZERTRACE_pList.push_back(pTo_lazer_trace_effect);
     
     	// DAMAGE effct
     	TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);  
     	//TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(pTo_lazer_trace_effect->pTo_texOb->color_id);   SEGFAULT
     	DamageEffect* pTo_damage_effect = new DamageEffect(pTo_particleTexOb, 
-                                                       slot->getShip()->pTo_starsystem, 
+                                                       slot->getShip()->starsystem, 
                                                        _turrel->getTarget_pCenterX(), 
                                                        _turrel->getTarget_pCenterY(), 5, 30, 1.3, 1.0, 0.1, 0.001);
-    	slot->getShip()->pTo_starsystem->effect_DAMAGE_pList.push_back(pTo_damage_effect);
+    	slot->getShip()->starsystem->effect_DAMAGE_pList.push_back(pTo_damage_effect);
 
     	pTo_lazer_trace_effect->pTo_damageEffect = pTo_damage_effect;
+    	
+    	deterioration();
 } 
 
 
@@ -183,7 +169,7 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
 
 bool LazerEquipment :: insertModule(LazerModule* _lazer_module)
 {
-    	if (modules_pList.size() < modules_num_max)
+    	if (modules_pList.size() < common_data.modules_num_max)
     	{
        		damage_add += _lazer_module->getDamageAdd();
        		radius_add += _lazer_module->getRadiusAdd();
@@ -212,23 +198,21 @@ LazerEquipment* lazerEquipmentGenerator(int race_id, int revision_id)
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(LAZER_ITEM_TEXTURE_ID, revision_id)
-    	TextureOb* pTo_itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.LazerEquipment_texOb_pList);     
+    	TextureOb* itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.LazerEquipment_texOb_pList);     
 
     	int damage_orig     = randIntInRange(LAZER_DAMAGE_MIN, LAZER_DAMAGE_MAX);
     	int radius_orig     = randIntInRange(LAZER_RADIUS_MIN, LAZER_RADIUS_MAX);
-    	int modules_num_max = randIntInRange(LAZER_MODULES_NUM_MIN, LAZER_MODULES_NUM_MAX);
+    	
+    	EquipmentCommonData common_data;
+    	common_data.modules_num_max = randIntInRange(LAZER_MODULES_NUM_MIN, LAZER_MODULES_NUM_MAX);
+    	common_data.mass            = randIntInRange(LAZER_MASS_MIN, LAZER_MASS_MAX);
+    	common_data.condition_max   = randIntInRange(LAZER_CONDITION_MIN, LAZER_CONDITION_MAX) * tech_rate;
+    	common_data.deterioration_rate = 1;
 
-    	int mass            = randIntInRange(LAZER_MASS_MIN, LAZER_MASS_MAX);
-    	int condition_max   = randIntInRange(LAZER_CONDITION_MIN, LAZER_CONDITION_MAX) * tech_rate;
-    	int deterioration_rate = 1;
-
-    	LazerEquipment* _lazer_equipment = new LazerEquipment(pTo_itemTexOb, 
+    	LazerEquipment* _lazer_equipment = new LazerEquipment(itemTexOb, 
     							      damage_orig, 
     							      radius_orig, 
-    							      modules_num_max, 
-    							      mass, 
-    							      condition_max, 
-    							      deterioration_rate);
+							      common_data);
     	return _lazer_equipment;
 }
 

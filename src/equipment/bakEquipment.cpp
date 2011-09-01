@@ -25,12 +25,9 @@ BakEquipment :: BakEquipment()
 
 BakEquipment :: BakEquipment(TextureOb* _pTo_itemTexOb, 
 			     int _fuel_max_orig, 
-			     int _modules_num_max, 
-			     int _mass, 
-			     int _condition_max, 
-			     int _deterioration_rate)
+			     EquipmentCommonData _common_data)
 {
-    	CommonForEquipment_init(BAK_ID, _pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
+    	CommonForEquipment_init(BAK_ID, _pTo_itemTexOb, _common_data);
 
     	fuel_max_orig = _fuel_max_orig;
     	fuel_max_add  = 0;
@@ -61,12 +58,12 @@ void BakEquipment :: updatePropetries()
 void BakEquipment :: countPrice()
 {
     	float fuel_rate          = (float)fuel_max_orig / BAK_FUEL_MIN;
-    	float modules_num_rate   = (float)modules_num_max / BAK_MODULES_NUM_MAX;
+    	float modules_num_rate   = (float)common_data.modules_num_max / BAK_MODULES_NUM_MAX;
 
     	float effectiveness_rate = BAK_FUEL_WEIGHT * fuel_rate + BAK_MODULES_NUM_WEIGHT * modules_num_rate;
 
-    	float mass_rate          = (float)mass / BAK_MASS_MIN;
-    	float condition_rate     = (float)condition / condition_max;
+    	float mass_rate          = (float)common_data.mass / BAK_MASS_MIN;
+    	float condition_rate     = (float)condition / common_data.condition_max;
 
    	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
@@ -74,35 +71,19 @@ void BakEquipment :: countPrice()
 
 void BakEquipment :: updateOwnerPropetries()
 {
-     	//self.owner.updateJumpAbility()
+     	slot->getShip()->updateJumpAbility();
 }
 
 
-void BakEquipment :: updateInfo()
+
+void BakEquipment :: addUniqueInfo()
 {
-    	info_title_pList.clear();
-    	info_value_pList.clear();
-
-    	info_title_0 = "BAK";
-    	info_title_1 = "fuel:";     info_value_1 = returnFuelStr();
-
-    	info_title_2 = "modules:";    info_value_2 = int2str(modules_num_max);
-    	info_title_3 = "condition:";  info_value_3 = int2str(condition) + "/" + int2str(condition_max);
-    	info_title_4 = "mass:";       info_value_4 = int2str(mass);
-    	info_title_5 = "price:";      info_value_5 = int2str(price);
-
-    	info_title_pList.push_back(&info_title_0);  
-    	info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
-    	info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
-    	info_title_pList.push_back(&info_title_3);   info_value_pList.push_back(&info_value_3);
-    	info_title_pList.push_back(&info_title_4);   info_value_pList.push_back(&info_value_4);
-    	info_title_pList.push_back(&info_title_5);   info_value_pList.push_back(&info_value_5); 
+    	info.addTitleStr("BAK");
+    	info.addNameStr("fuel:");      info.addValueStr( getFuelStr() );
 }
 
 
-
-
-std::string BakEquipment :: returnFuelStr()
+std::string BakEquipment :: getFuelStr()
 {
      	if (fuel_max_add == 0)
         	return int2str(fuel_max_orig) + "/" + int2str(fuel);
@@ -113,7 +94,7 @@ std::string BakEquipment :: returnFuelStr()
 
 bool BakEquipment :: insertModule(BakModule* _bak_module)
 {
-    	if (modules_pList.size() < modules_num_max)
+    	if (modules_pList.size() < common_data.modules_num_max)
     	{
         	fuel_max_add += _bak_module->getFuelMaxAdd();
      
@@ -138,17 +119,17 @@ BakEquipment* bakEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* pTo_itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.BakEquipment_texOb_pList);    // FAKE TEXTURE OB LIST IS USED HERE
+    	TextureOb* _itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.BakEquipment_texOb_pList);    // FAKE TEXTURE OB LIST IS USED HERE
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(RADAR_ITEM_TEXTURE_ID, revision_id) 
     	int fuel_max_orig = randIntInRange(BAK_FUEL_MIN, BAK_FUEL_MAX);
 
-    	int modules_num_max = randIntInRange(BAK_MODULES_NUM_MIN, BAK_MODULES_NUM_MAX);
+      EquipmentCommonData _common_data;
 
-    	int mass = randIntInRange(BAK_MASS_MIN, BAK_MASS_MAX);
-    	int condition_max = randIntInRange(BAK_CONDITION_MIN, BAK_CONDITION_MAX) * tech_rate;
+    	_common_data.modules_num_max = randIntInRange(BAK_MODULES_NUM_MIN, BAK_MODULES_NUM_MAX);
+    	_common_data.mass = randIntInRange(BAK_MASS_MIN, BAK_MASS_MAX);
+    	_common_data.condition_max = randIntInRange(BAK_CONDITION_MIN, BAK_CONDITION_MAX) * tech_rate;
+    	_common_data.deterioration_rate = 1;
 
-    	int deterioration_rate = 1;
-
-    	BakEquipment* _bak = new BakEquipment(pTo_itemTexOb, fuel_max_orig, modules_num_max, mass, condition_max, deterioration_rate);
+    	BakEquipment* _bak = new BakEquipment(_itemTexOb, fuel_max_orig, _common_data);
     	return _bak;
 }

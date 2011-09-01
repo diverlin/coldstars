@@ -31,7 +31,7 @@ class DetaliedIdGenerator
     public:
         int last_id;
         std::vector<int> id_list; 
-        VEC_string_type description_list; 
+        std::vector<std::string> description_list; 
 
         DetaliedIdGenerator()
         {
@@ -517,10 +517,10 @@ const int RACE_7_ID = g_TYPE_ID_GENERATOR.returnNextId("RACE_7_ID"); //  # shado
 
 
 // -- remove
-VEC_int_type RACES_ALL_LIST;
-VEC_int_type RACES_GOOD_LIST;
-VEC_int_type RACES_EVIL_LIST;
-VEC_int_type RACE4_ALLOWED_SUBTYPE_LIST;
+std::vector<int> RACES_ALL_LIST;
+std::vector<int> RACES_GOOD_LIST;
+std::vector<int> RACES_EVIL_LIST;
+std::vector<int> RACE4_ALLOWED_SUBTYPE_LIST;
 // -- remove
 
 const int CONTAINER_ID = g_TYPE_ID_GENERATOR.returnNextId("CONTAINER_ID");
@@ -535,7 +535,7 @@ const int WARRIOR_ID  = g_TYPE_ID_GENERATOR.returnNextId("WARRIOR_ID");
 const int PIRAT_ID    = g_TYPE_ID_GENERATOR.returnNextId("PIRAT_ID");
 const int TRADER_ID   = g_TYPE_ID_GENERATOR.returnNextId("TRADER_ID");
 const int DIPLOMAT_ID = g_TYPE_ID_GENERATOR.returnNextId("DIPLOMAT_ID"); 
-VEC_int_type SHIP_SUBTYPE_LIST;    // -- remove
+std::vector<int> SHIP_SUBTYPE_LIST;    // -- remove
 
 // TECHLEVEL ID
 const int TECH_LEVEL_0_ID = g_TYPE_ID_GENERATOR.returnNextId("TECH_LEVEL_0_ID");

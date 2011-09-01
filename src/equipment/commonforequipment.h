@@ -21,59 +21,75 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define COMMONFOREQUIPMENT_H
 
 
+struct IdData 
+{
+	unsigned int race_id;
+	unsigned int id; 
+	unsigned int type_id; 
+	unsigned int subtype_id;
+};
+
+struct EquipmentCommonData 
+{
+	unsigned int modules_num_max; 
+	unsigned int condition_max; 
+	unsigned int deterioration_rate;
+	unsigned int mass; 
+};
+
+
 class CommonForEquipment
 {
         public:
-        	int getType() const;
-        	int getSubType() const; 
-        	
-        	VEC_pString_type info_title_pList;  
-     		VEC_pString_type info_value_pList; 
-     		
-     		ItemSlot* slot;
-     		bool update_info_request;
-
-     		TextureOb* pTo_itemTexOb;
-
-     		VEC_pTexOb_type texOb_modules_pList;    // needs for inserted modules drawing
-
-     		int w, h;
-          
-     		bool in_SPACE;                 		// this flag is needed for grap function to check if the item was already collected or not
-     		bool is_DAMAGED;
-
-     		int id;
-
-     		int race_id;
-     		int mass;
-     		int modules_num_max;
-
-     		int condition_max;
-     		int condition;
-
-     		int deterioration_rate;
-
-     		int price;
-
      		CommonForEquipment();
+     		virtual ~CommonForEquipment();
+     		
+     		int getType()    const;
+        	int getSubType() const;
+        	unsigned int getMass() const; 
+        	unsigned int getCondition() const; 
+        	int getPrice() const; 
      
      		void bindSlot(ItemSlot* _slot);
-     		void CommonForEquipment_init(int _subtype_id, TextureOb* _pTo_itemTexOb, int _modules_num_max, int _mass, int _condition_max, int _deterioration_rate);
-     		void deterioration();
      		void repair();
 
      		void render(Rect slot_rect);
-          		void (CommonForEquipment::*pToFunc_render)(Rect slot_rect);
-          		void _renderFrame(Rect slot_rect);
-          		void _renderFrames(Rect slot_rect);
      		void renderInfo(Rect slot_rect, float offset_x, float offset_y); 
      		
+     		void updateInfo();
+     		
      	private:
-     	        int type_id, subtype_id;
-     	        
+     	        int id, type_id, subtype_id;
+     	        TextureOb* itemTexOb;
+     		int w, h;
+     		
+     	        void addCommonInfo();
+ 		void virtual addUniqueInfo();
+ 		
+ 		void virtual updateOwnerPropetries();
+ 		
+ 		void (CommonForEquipment::*pToFunc_render)(Rect slot_rect);
+          	void _renderFrame(Rect slot_rect);
+          	void _renderFrames(Rect slot_rect);
+          	
+          	
      	protected:
- 
-     	
+     	     	ItemSlot* slot;
+     		EquipmentCommonData common_data;
+		
+		int race_id;
+		unsigned int condition;
+     		int price;			// unsigned is not used to debug the formula of price calc
+
+     		bool in_SPACE;                 		// this flag is needed for grap function to check if the item was already collected or not
+     		bool is_DAMAGED;
+     		
+		InfoTable info;
+		
+		VEC_pTexOb_type texOb_modules_pList;      // needs for inserted modules drawing
+				
+		void CommonForEquipment_init(int _subtype_id, TextureOb* _pTo_itemTexOb, EquipmentCommonData _common_data);
+      		void deterioration();     	
      		
 };
 

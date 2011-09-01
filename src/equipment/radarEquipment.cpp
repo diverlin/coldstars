@@ -25,12 +25,9 @@ RadarEquipment :: RadarEquipment()
 
 RadarEquipment :: RadarEquipment(TextureOb* _pTo_itemTexOb, 
 				 int _radius_orig, 
-				 int _modules_num_max, 
-				 int _mass, 
-				 int _condition_max, 
-				 int _deterioration_rate)
+				 EquipmentCommonData _common_data)
 {
-   	CommonForEquipment_init(RADAR_ID, _pTo_itemTexOb, _modules_num_max, _mass, _condition_max, _deterioration_rate);
+   	CommonForEquipment_init(RADAR_ID, _pTo_itemTexOb, _common_data);
 
     	radius_orig = _radius_orig;
     	radius_add  = 0;
@@ -57,12 +54,12 @@ void RadarEquipment :: countPrice()
 {
     	float radius_rate         = (float)radius_orig / RADAR_RADIUS_MIN;
 
-    	float modules_num_rate    = (float)modules_num_max / RADAR_MODULES_NUM_MAX;
+    	float modules_num_rate    = (float)common_data.modules_num_max / RADAR_MODULES_NUM_MAX;
 
     	float effectiveness_rate  = RADAR_RADIUS_WEIGHT * radius_rate +  RADAR_MODULES_NUM_WEIGHT * modules_num_rate;
 
-    	float mass_rate           = (float)mass / RADAR_MASS_MIN;
-    	float condition_rate      = (float)condition / condition_max;
+    	float mass_rate           = (float)common_data.mass / RADAR_MASS_MIN;
+    	float condition_rate      = (float)condition / common_data.condition_max;
 
     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
@@ -70,34 +67,18 @@ void RadarEquipment :: countPrice()
 
 void RadarEquipment :: updateOwnerPropetries()
 {
-          //self.owner.updateRadarAbility()
+	slot->getShip()->updateRadarAbility();
 }
       
 
-
-void RadarEquipment :: updateInfo()
+void RadarEquipment :: addUniqueInfo()
 {
-    	info_title_pList.clear();
-    	info_value_pList.clear();
-
-    	info_title_0 = "RADAR";
-    	info_title_1 = "radius:";     info_value_1 = returnRadiusStr();
-
-    	info_title_2 = "modules:";    info_value_2 = int2str(modules_num_max);
-    	info_title_3 = "condition:";  info_value_3 = int2str(condition) + "/" + int2str(condition_max);
-    	info_title_4 = "mass:";       info_value_4 = int2str(mass);
-    	info_title_5 = "price:";      info_value_5 = int2str(price);
-
-    	info_title_pList.push_back(&info_title_0);  
-    	info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
-    	info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
-    	info_title_pList.push_back(&info_title_3);   info_value_pList.push_back(&info_value_3);
-    	info_title_pList.push_back(&info_title_4);   info_value_pList.push_back(&info_value_4);
-    	info_title_pList.push_back(&info_title_5);   info_value_pList.push_back(&info_value_5); 
+    	info.addTitleStr("RADAR");
+    	info.addNameStr("radius:");     info.addValueStr( getRadiusStr() );
 }
-
-
-std::string RadarEquipment :: returnRadiusStr()
+     		
+     		
+std::string RadarEquipment :: getRadiusStr()
 {
     	if (radius_add == 0)
         	return int2str(radius_orig);
@@ -109,7 +90,7 @@ std::string RadarEquipment :: returnRadiusStr()
 
 bool RadarEquipment :: insertModule(RadarModule* pTo_radarModule)
 {
-    	if (modules_pList.size() < modules_num_max)
+    	if (modules_pList.size() < common_data.modules_num_max)
     	{
         	radius_add += pTo_radarModule->getRadiusAdd();
     
@@ -135,18 +116,18 @@ RadarEquipment* radarEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* pTo_itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.RadarEquipment_texOb_pList);   
+    	TextureOb* itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.RadarEquipment_texOb_pList);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(RADAR_ITEM_TEXTURE_ID, revision_id) 
 
     	int radius_orig     = randIntInRange(RADAR_RADIUS_MIN, RADAR_RADIUS_MAX);
-    	int modules_num_max = randIntInRange(RADAR_MODULES_NUM_MIN, RADAR_MODULES_NUM_MAX);
+    	
+    	EquipmentCommonData common_data;
+    	common_data.modules_num_max = randIntInRange(RADAR_MODULES_NUM_MIN, RADAR_MODULES_NUM_MAX);
+    	common_data.mass            = randIntInRange(RADAR_MASS_MIN, RADAR_MASS_MAX);
+    	common_data.condition_max   = randIntInRange(RADAR_CONDITION_MIN, RADAR_CONDITION_MAX) * tech_rate;
+    	common_data.deterioration_rate = 1;
 
-    	int mass            = randIntInRange(RADAR_MASS_MIN, RADAR_MASS_MAX);
-    	int condition_max   = randIntInRange(RADAR_CONDITION_MIN, RADAR_CONDITION_MAX) * tech_rate;
-
-    	int deterioration_rate = 1;
-
-    	RadarEquipment* _radar = new RadarEquipment(pTo_itemTexOb, radius_orig, modules_num_max, mass, condition_max, deterioration_rate);
-    	return _radar;
+    	RadarEquipment* radar_equipment = new RadarEquipment(itemTexOb, radius_orig, common_data);
+    	return radar_equipment;
 }
 

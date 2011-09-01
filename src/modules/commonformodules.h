@@ -28,10 +28,9 @@ class CommonForModules
     		int getType() const;
     		int getSubType() const;
 
-    		
-       	      	VEC_pString_type info_title_pList;  // make private
-      		VEC_pString_type info_value_pList;  // make private 
-      		
+    				
+    		InfoTable info;  // make protected
+    				     		
            	Rect rect;
       		int mass;   
     

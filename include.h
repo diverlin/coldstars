@@ -36,46 +36,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "src/common/points.h"
 #include "src/common/common.hpp"
 
+#include "src/text/textstuff.h"
+
 #include "src/resources/texture.h"
 #include "src/render/glsl.h"
 #include "src/resources/resources.h"
 
-#include "src/kosmoport/angar.h"
-#include "src/kosmoport/shop.h"
-#include "src/kosmoport/goverment.h"
-#include "src/kosmoport/kosmoport.h"
-#include "src/land/land.h"
-
-#include "src/pilots/player.h"
-#include "src/render/init.h"
-
 #include "src/common/rect.h"
-#include "src/render/render.hpp"
-#include "src/render/glsl.h"
 
-
-#include "src/effects/background.h"
-#include "src/effects/effects.h"
-
-#include "src/spaceobjects/commonForSpaceItems.h" 
-
-#include "src/effects/shield.h"  
-#include "src/equipment/commonforequipment.h"
-
-#include "src/effects/rocketBullet.h"
-#include "src/equipment/rocketEquipment.h"
-#include "src/effects/lazerTrace.h"
-#include "src/equipment/lazerEquipment.h"
-#include "src/equipment/radarEquipment.h"
-#include "src/equipment/driveEquipment.h"
-#include "src/equipment/bakEquipment.h"
-#include "src/equipment/energizerEquipment.h"
-#include "src/equipment/protectorEquipment.h"
-#include "src/equipment/droidEquipment.h"
-#include "src/equipment/freezerEquipment.h"
-#include "src/equipment/scanerEquipment.h"
-#include "src/equipment/grappleEquipment.h"
-#include "src/vehicle/turrel.h"
 
 #include "src/modules/commonformodules.h"
 #include "src/modules/rocketModule.h"
@@ -91,23 +59,69 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "src/modules/grappleModule.h"
 
 
-#include "src/slot/itemSlot.h"
-#include "src/vehicle/navigator.h"
-#include "src/vehicle/ship.h"
-#include "src/spaceobjects/commonForPlanet.h"
+#include "src/equipment/commonforequipment.h"
+#include "src/equipment/rocketEquipment.h"
+#include "src/equipment/lazerEquipment.h"
+#include "src/equipment/radarEquipment.h"
+#include "src/equipment/driveEquipment.h"
+#include "src/equipment/bakEquipment.h"
+#include "src/equipment/energizerEquipment.h"
+#include "src/equipment/protectorEquipment.h"
+#include "src/equipment/droidEquipment.h"
+#include "src/equipment/freezerEquipment.h"
+#include "src/equipment/scanerEquipment.h"
+#include "src/equipment/grappleEquipment.h"
+
+
+#include "src/kosmoport/landingarea.h"
+#include "src/kosmoport/angar.h"
+#include "src/kosmoport/shop.h"
+#include "src/kosmoport/goverment.h"
+#include "src/kosmoport/store.h"
+#include "src/kosmoport/kosmoport.h"
+#include "src/land/land.h"
+
+#include "src/pilots/player.h"
+#include "src/render/init.h"
+
+#include "src/render/render.hpp"
+#include "src/render/glsl.h"
+
+
+#include "src/effects/background.h"
+#include "src/effects/effects.h"
+
+#include "src/spaceobjects/commonForSpaceItems.h" 
+
+#include "src/effects/shield.h"  
+#include "src/effects/rocketBullet.h"
+#include "src/effects/lazerTrace.h"
+
+
+
+
+#include "src/spaceobjects/commonForPlanet.h" 
+#include "src/spaceobjects/star.h"  
+#include "src/spaceobjects/planet.h"
 #include "src/spaceobjects/asteroid.h"
 #include "src/spaceobjects/mineral.h"
 #include "src/spaceobjects/container.h"
 
 
-#include "src/spaceobjects/container.h"    
-#include "src/spaceobjects/star.h"  
-#include "src/kosmoport/angar.h"
+#include "src/vehicle/turrel.h"
+
+#include "src/slot/itemSlot.h"
+#include "src/vehicle/navigator.h"
+#include "src/vehicle/ship.h"
+
+
+
+//#include "src/spaceobjects/container.h"    
+//#include "src/spaceobjects/star.h"  
 #include "src/pilots/skill.h"
 #include "src/pilots/npc.h"              
-#include "src/spaceobjects/planet.h"
 
-#include "src/kosmoport/landingarea.h"
+
 #include "src/kosmoport/angar.h"
 
 #include "src/pilots/skill.h"
@@ -123,13 +137,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "src/vehicle/turrel.h"
 
 #include "src/slot/itemSlot.h"
-#include "src/kosmoport/store.h"
+//#include "src/kosmoport/store.h"
 
 #include "src/world/starsystem.h"
 
 
 #include "src/common/vector.cpp"
-#include "src/world/world.cpp"
+#include "src/world/galaxy.cpp"
 #include "src/world/starsystem.cpp"  
 
 #include "src/spaceobjects/container.cpp"    
@@ -175,8 +189,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "src/land/land.cpp"
 
-#include "src/text/text.cpp"
-
 #include "src/gui/button.cpp"
 #include "src/gui/interfaceinspace.cpp"
 #include "src/gui/interfaceinkosmoport.cpp"
@@ -211,4 +223,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //#include "src/resources/model_obj.cpp"
 #include "src/render/render.cpp"
 #include "src/render/glsl.cpp"
+
+#include "src/text/textstuff.cpp"
 ////////////////////////////////////////////

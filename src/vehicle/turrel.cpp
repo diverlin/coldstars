@@ -180,25 +180,25 @@ bool Turrel :: isTargetInSpace()
 bool Turrel :: isTargetOnTheSameStarSystem()
 {
      if (target_type_id == SHIP_ID)
-        if (target_ship->pTo_starsystem == slot->getShip()->pTo_starsystem)
+        if (target_ship->starsystem == slot->getShip()->starsystem)
            return true;
         else
            return false;
 
      if (target_type_id == ASTEROID_ID)
-        if (target_asteroid->getStarSystem() == slot->getShip()->pTo_starsystem)
+        if (target_asteroid->getStarSystem() == slot->getShip()->starsystem)
            return true;
         else
            return false;
 
      if (target_type_id == MINERAL_ID)
-        if (target_mineral->getStarSystem() == slot->getShip()->pTo_starsystem)
+        if (target_mineral->getStarSystem() == slot->getShip()->starsystem)
            return true;
         else
            return false;
 
      if (target_type_id == CONTAINER_ID)
-        if (target_container->getStarSystem() == slot->getShip()->pTo_starsystem)
+        if (target_container->getStarSystem() == slot->getShip()->starsystem)
            return true;
         else
            return false;
@@ -229,7 +229,6 @@ bool Turrel :: fireEvent_TRUE()
     if (slot->getItemSubType() == LAZER_ID)
     {   
        slot->getLazerEquipment()->fireEvent(this);
-       slot->getLazerEquipment()->deterioration();
 
        if (target_type_id == SHIP_ID) 
        { 
@@ -259,7 +258,6 @@ bool Turrel :: fireEvent_TRUE()
     if (slot->getItemSubType() == ROCKET_ID)
     {   
        slot->getRocketEquipment()->fireEvent();
-       slot->getRocketEquipment()->deterioration();
        return true; 
     }
 
@@ -272,42 +270,7 @@ bool Turrel :: fireEvent_TRUE()
 
 bool Turrel :: fireEvent_FALSE()
 {
-    if (slot->getItemSubType() == LAZER_ID)
-    {   
-       slot->getLazerEquipment()->deterioration();
-
-       if (target_type_id == SHIP_ID) 
-       { 
-           target_ship->hit_FALSE(slot->getLazerEquipment()->getDamage());
-           return true;
-       } 
-
-       if (target_type_id == ASTEROID_ID)  
-       { 
-           target_asteroid->hit_FALSE(slot->getLazerEquipment()->getDamage());
-           return true;
-       }
-
-       if (target_type_id == MINERAL_ID)  
-       { 
-           target_mineral->hit_FALSE(slot->getLazerEquipment()->getDamage());
-           return true;
-       }
-
-       if (target_type_id == CONTAINER_ID)  
-       { 
-           target_container->hit_FALSE(slot->getLazerEquipment()->getDamage());
-           return true;
-       }
-    }
-
-    if (slot->getItemSubType() == ROCKET_ID)
-    {   
-       slot->getRocketEquipment()->deterioration();
-       return true; 
-    }
-
-    return false;
+   	return fireEvent_TRUE();
 }
 
 

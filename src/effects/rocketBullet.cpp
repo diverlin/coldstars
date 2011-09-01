@@ -191,7 +191,7 @@ void RocketBullet :: death()
 
      if (is_explosed == false)
      {   
-        pTo_starsystem->addExplosion(points.getCenter().x, points.getCenter().y, size);
+        pTo_starsystem->createExplosion(points.getCenter(), size);
         is_explosed = true;
      }
 }

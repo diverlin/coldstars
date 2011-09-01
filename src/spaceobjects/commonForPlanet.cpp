@@ -30,8 +30,7 @@ CommonForPlanet :: ~CommonForPlanet()
 void CommonForPlanet :: CommonForPlanet_init(TextureOb*       _texOb, 
     	   				     ObjMeshInstance* _mesh, 
     	   				     float _size, 
-    	   			             float _orbit_center_x, 
-    	   			             float _orbit_center_y, 
+    	   			             vec2f _orbit_center, 
     	   			             int _radius_A,
     	   				     int _radius_B, 
     	   				     float _orbit_phi_inD,
@@ -43,8 +42,8 @@ void CommonForPlanet :: CommonForPlanet_init(TextureOb*       _texOb,
         texOb = _texOb;
         mesh  = _mesh; 
       
-      	orbit_center_x = _orbit_center_x;
-      	orbit_center_y = _orbit_center_y;
+      	orbit_center_x = _orbit_center.x;
+      	orbit_center_y = _orbit_center.y;
       	radius_A       = _radius_A;
       	radius_B       = _radius_B;
       	orbit_phi_inD  = _orbit_phi_inD;

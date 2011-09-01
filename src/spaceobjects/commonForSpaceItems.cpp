@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 CommonForSpaceItems :: CommonForSpaceItems()
 {}
 
-void CommonForSpaceItems :: CommonForSpaceItems_init(TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _target_pos_x, float _target_pos_y)
+void CommonForSpaceItems :: CommonForSpaceItems_init(TextureOb* _pTo_texOb, vec2f _start_pos)
 {
     	is_alive = true;
     	is_dying = false; 
@@ -65,7 +65,7 @@ void CommonForSpaceItems :: CommonForSpaceItems_init(TextureOb* _pTo_texOb, floa
     	points.initCenterPoint();
     	points.addCenterPoint();
 
-    	points.setCenter(_pos_x, _pos_y);
+    	points.setCenter(_start_pos.x, _start_pos.y);
     	//////
 
 
@@ -76,10 +76,14 @@ void CommonForSpaceItems :: CommonForSpaceItems_init(TextureOb* _pTo_texOb, floa
     	d_angle_z_inD      = randIntInRange(10, 100)*0.01;
     	pos_z          = -500.0f;
 
-    	target_pos_x = _target_pos_x;
-    	target_pos_y = _target_pos_y;
-
     	keep_moving = true;
+    	
+    	// gfenerate point where to move
+    	float alpha = (float)randIntInRange(0, 360) / 57.0;
+    	int len = randIntInRange(60, 100);
+   
+    	target_pos_x = _start_pos.x + sin(alpha) * len;
+    	target_pos_y = _start_pos.y + cos(alpha) * len;
 }
 
         
@@ -135,7 +139,7 @@ void CommonForSpaceItems :: death_TRUE()
 
      	if (is_explosed == false)
      	{   
-        	starsystem->addExplosion(points.getCenter().x, points.getCenter().y, size);
+        	starsystem->createExplosion(points.getCenter(), size);
         	is_explosed = true;
      	}
 }

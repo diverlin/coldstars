@@ -42,34 +42,26 @@ int GrappleModule :: getMaxNumItemAdd() const { return maxNumItem_add; }
 
 void GrappleModule :: updateInfo()
 {
-    	info_title_pList.clear();
-    	info_value_pList.clear();
+	info.clear();
 
-    	info_title_0 = "grapple module";
-    	info_title_1 = "strength_add:";    info_value_1 = int2str(strength_add);
-    	info_title_2 = "radius_add:";      info_value_2 = int2str(radius_add);
-    	info_title_3 = "speed_add:";       info_value_3 = int2str(speed_add);
-    	info_title_4 = "maxNumItem_add:";  info_value_4 = int2str(maxNumItem_add); 
-    	info_title_5 = "mass:";            info_value_5 = int2str(mass);
-
-    	info_title_pList.push_back(&info_title_0);  
+    	info.addTitleStr("grapple module");
     	if (strength_add != 0)
     	{
-        	info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
+    		info.addNameStr("strength_add:");    info.addValueStr( int2str(strength_add) );
     	}
     	if (radius_add != 0)
     	{ 
-        	info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
+    		info.addNameStr("radius_add:");      info.addValueStr( int2str(radius_add) );
     	} 
     	if (speed_add != 0)
     	{
-        	info_title_pList.push_back(&info_title_3);   info_value_pList.push_back(&info_value_3);
+    		info.addNameStr("speed_add:");       info.addValueStr( int2str(speed_add) );
     	}
     	if (maxNumItem_add != 0)
     	{
-        	info_title_pList.push_back(&info_title_4);   info_value_pList.push_back(&info_value_4);
+    		info.addNameStr("maxNumItem_add:");  info.addValueStr( int2str(maxNumItem_add) ); 
     	}
-    	info_title_pList.push_back(&info_title_5);   info_value_pList.push_back(&info_value_5); 
+    	info.addNameStr("mass:");         info.addValueStr(int2str(mass));
 }
 
 

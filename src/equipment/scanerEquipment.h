@@ -25,24 +25,14 @@ class ScanerEquipment : public CommonForEquipment
 {
   	public:
     		ScanerEquipment();
-    		ScanerEquipment(TextureOb* _pTo_itemTexOb, 
+    		ScanerEquipment(TextureOb* _itemTexOb, 
     				int _scan_orig, 
-    				int _modules_num_max, 
-    				int _mass, 
-    				int _condition_max, 
-    				int _deterioration_rate);
+    				EquipmentCommonData _common_data);
     				
     		~ScanerEquipment();
 
 		int getScan() const;
 
-    		void countPrice();
-    		void updatePropetries();
-    		void updateOwnerPropetries();
-
-    		void updateInfo();
-         		std::string returnScanStr();
-         
     		bool insertModule(ScanerModule* pTo_scanerModule);
     		
     	private:
@@ -50,15 +40,15 @@ class ScanerEquipment : public CommonForEquipment
     		int scan_add;
     		int scan;
     		
-    	    	VEC_pScanerModule_type modules_pList; 
-     
-    		// INFO 
-    		std::string info_title_0;
-    		std::string info_title_1;   std::string info_value_1;
-    		std::string info_title_2;   std::string info_value_2; 
-    		std::string info_title_3;   std::string info_value_3;
-    		std::string info_title_4;   std::string info_value_4;
-    		std::string info_title_5;   std::string info_value_5;
+    	    	std::vector<ScanerModule*> modules_pList; 
+    	    	
+    	    	void countPrice();
+    		void updatePropetries();
+    		void virtual updateOwnerPropetries();
+
+     		void virtual addUniqueInfo();
+         	std::string getScanStr();
+
 
 };
 

@@ -24,21 +24,17 @@ class BakEquipment : public CommonForEquipment
 {
 	public:
    		BakEquipment();
-     		BakEquipment(TextureOb* _pTo_itemTexOb, int _fuel_max_orig, int _modules_num_max, int _mass, int _condition_max, int _deterioration_rate);
+     		BakEquipment(TextureOb* _pTo_itemTexOb, 
+     			     int _fuel_max_orig, 
+     			     EquipmentCommonData _common_data);
+     			     
      		~BakEquipment();
 
 		int getFuel() const;
 		
-		void fill();
-		
-     		void countPrice();
-     		void updatePropetries();
-     		void updateOwnerPropetries();
+		void fill();		
 
-     		void updateInfo();
-          		std::string returnFuelStr();
-          
-     		bool insertModule(BakModule* pTo_bakModule);
+           	bool insertModule(BakModule* pTo_bakModule);
      		
      	private:
      	     	int fuel_max_orig;
@@ -46,16 +42,14 @@ class BakEquipment : public CommonForEquipment
      		int fuel_max;
      		int fuel;
      		
-     	     	VEC_pBakModule_type modules_pList; 
-     	     		
-     	     	// INFO 
-     		std::string info_title_0;
-     		std::string info_title_1;   std::string info_value_1;
-    		std::string info_title_2;   std::string info_value_2; 
-     		std::string info_title_3;   std::string info_value_3;
-     		std::string info_title_4;   std::string info_value_4;
-     		std::string info_title_5;   std::string info_value_5;
-     	
+     	     	std::vector<BakModule*> modules_pList; 
+     	     	
+     	     	void countPrice();
+     	     	void updatePropetries();
+     	     	void virtual updateOwnerPropetries();
+
+     		void virtual addUniqueInfo();
+          	std::string getFuelStr();
 };
 
 BakEquipment* bakEquipmentGenerator(int race_id, int revision_id = -1);

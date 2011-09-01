@@ -30,27 +30,15 @@ class GrappleEquipment : public CommonForEquipment
       				 int _radius_orig, 
       				 int _speed_orig, 
       				 int _maxNumItem_orig, 
-      				 int _modules_num_max, 
-      				 int _mass, 
-      				 int _condition_max, 
-      				 int _deterioration_rate);   // joun strength and speed attributes into one
+				 EquipmentCommonData _common_data);   // joun strength and speed attributes into one
+				 
       		~GrappleEquipment();
 
 		int getStrength()   const;
 		int getRadius()     const;
 		int getSpeed()      const;
 		int getMaxNumItem() const;
-		
-      		void countPrice();
-      		void updatePropetries();
-      		void updateOwnerPropetries();
 
-      		void updateInfo();
-           		std::string returnStrengthStr();
-           		std::string returnRadiusStr();
-           		std::string returnSpeedStr();
-           		std::string returnMaxNumItemStr();
-           
       		bool insertModule(GrappleModule* pTo_grappleModule);
       		
       	private:
@@ -73,19 +61,17 @@ class GrappleEquipment : public CommonForEquipment
       		int maxNumItem_add;
       		int maxNumItem;
       		
-      	      	VEC_pGrappleModule_type modules_pList; 
-
-      		// INFO 
-      		std::string info_title_0;
-      		std::string info_title_1;   std::string info_value_1;
-      		std::string info_title_2;   std::string info_value_2; 
-      		std::string info_title_3;   std::string info_value_3;
-      		std::string info_title_4;   std::string info_value_4;
-      		std::string info_title_5;   std::string info_value_5;
-      		std::string info_title_6;   std::string info_value_6;
-      		std::string info_title_7;   std::string info_value_7;
-      		std::string info_title_8;   std::string info_value_8;
-      	
+      	      	std::vector<GrappleModule*> modules_pList; 
+      	      	
+      	      	void countPrice();
+      		void updatePropetries();      		
+      		void virtual updateOwnerPropetries();
+      		
+     		void virtual addUniqueInfo();     		
+           	std::string getStrengthStr();
+           	std::string getRadiusStr();
+           	std::string getSpeedStr();
+           	std::string getMaxNumItemStr();
 };
 
 GrappleEquipment* grappleEquipmentGenerator(int race_id, int revision_id = -1);

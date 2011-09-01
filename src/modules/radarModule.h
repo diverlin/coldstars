@@ -32,12 +32,6 @@ class RadarModule : public CommonForModules
       		
       	private:
       		int radius_add;
-      		
-      	      	// INFO 
-      		std::string info_title_0;
-      		std::string info_title_1;   std::string info_value_1;
-      		std::string info_title_2;   std::string info_value_2; 
-      		
 };
 
 RadarModule* radarModuleGenerator();

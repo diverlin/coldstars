@@ -27,22 +27,13 @@ class LazerEquipment : public CommonForEquipment
       		LazerEquipment(TextureOb* _pTo_itemTexOb, 
       			       int _damage_orig, 
       			       int _radius_orig, 
-      			       int _modules_num_max, 
-      			       int _mass, 
-      			       int _condition_max, 
-      			       int _deterioration_rate);
+			       EquipmentCommonData _common_data);
       			       
       		~LazerEquipment();
 
 		int getDamage() const;
 		int getRadius() const;
 		
-      		void updatePropetries();
-      		void countPrice();
-      		void updateOwnerPropetries();
-      		void updateInfo();
-           		std::string returnDamageStr();
-           		std::string returnRadiusStr();
       		void fireEvent(Turrel* _turrel);
       
       		bool insertModule(LazerModule* pTo_lazerModule);
@@ -61,16 +52,16 @@ class LazerEquipment : public CommonForEquipment
       		TextureOb* pTo_lazerEffectTexOb;
       		TextureOb* pTo_particleTexOb;
       		
-      	      	VEC_pLazerModule_type modules_pList;
+      	      	std::vector<LazerModule*> modules_pList;
+      	      	
+      	      	void updatePropetries();
+      		void countPrice();
+      		void virtual updateOwnerPropetries();
 
-      		// INFO 
-      		std::string info_title_0;
-      		std::string info_title_1;   std::string info_value_1;
-      		std::string info_title_2;   std::string info_value_2; 
-      		std::string info_title_3;   std::string info_value_3;
-      		std::string info_title_4;   std::string info_value_4;
-      		std::string info_title_5;   std::string info_value_5;
-      		std::string info_title_6;   std::string info_value_6;
+     		void virtual addUniqueInfo();
+           	std::string getDamageStr();
+           	std::string getRadiusStr();
+
       	
 };
 

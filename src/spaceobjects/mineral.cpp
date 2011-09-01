@@ -19,10 +19,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "mineral.h"
 
-Mineral :: Mineral(TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _target_pos_x, float _target_pos_y)
+Mineral :: Mineral(TextureOb* _pTo_texOb, vec2f _start_pos)
 {        
-    CommonForSpaceItems_init(_pTo_texOb, _pos_x, _pos_y, _target_pos_x, _target_pos_y);
-    //pTo_starsystem = _pTo_starsystem;
+    CommonForSpaceItems_init(_pTo_texOb, _start_pos);
 
     id         = g_ENTITY_ID_GENERATOR.returnNextId();
     type_id    = MINERAL_ID;
@@ -38,22 +37,13 @@ Mineral :: Mineral(TextureOb* _pTo_texOb, float _pos_x, float _pos_y, float _tar
     
 void Mineral :: updateInfo()
 {
-    info_title_pList.clear();
-    info_value_pList.clear();
+	info.clear();
 
-    info_title_0 = "MINERAL";
+    	info.addTitleStr("MINERAL");
 
-    info_title_1 = "id/ss_id:";
-    info_value_1 = int2str(id) + " / " + int2str(starsystem->id);
-    info_title_2 = "armor:";
-    info_value_2 = int2str(armor);
-    info_title_3 = "mass:";
-    info_value_3 = int2str(mass);
-
-    info_title_pList.push_back(&info_title_0);  
-    info_title_pList.push_back(&info_title_1);   info_value_pList.push_back(&info_value_1);
-    info_title_pList.push_back(&info_title_2);   info_value_pList.push_back(&info_value_2);
-    info_title_pList.push_back(&info_title_3);   info_value_pList.push_back(&info_value_3);
+    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->id));
+    	info.addNameStr("armor:");       info.addValueStr(int2str(armor));
+    	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 }
     
 std::string Mineral :: returnTypeStr()
@@ -77,17 +67,18 @@ std::string Mineral :: returnTypeStr()
 
 void Mineral :: renderInfo()
 {
-     drawInfoIn2Column(&info_title_pList, &info_value_pList, points.getCenter().x, points.getCenter().y);    
+     	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y);    
+}
+
+
+Mineral* createMineral(vec2f _start_pos)
+{
+	TextureOb* _mTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.mineral_texOb_pList); 
+	Mineral* _mineral = new Mineral(_mTexOb, vec2f(_start_pos.x, _start_pos.y));
+
+	return _mineral;
 }
 
 
 
 
-//void Mineral :: render2D()
-//{ 
-    //glBindTexture(GL_TEXTURE_2D, texture);
-    ////drawDynamic(100, 100, angle_z, -50, -50, 50, 50, pos_z);
-    //drawDynamic(points.center_x, points.center_y, angle_z, minus_half_w, minus_half_h, plus_half_w, plus_half_h, pos_z);
-    ////printf("ddfs = %i,%i,%i,%i \n ", minus_half_w, minus_half_h, plus_half_w, plus_half_h);
-    //angle_z += d_angle_z;
-//}

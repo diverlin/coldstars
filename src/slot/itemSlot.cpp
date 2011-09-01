@@ -743,27 +743,27 @@ int ItemSlot :: getItemMass()
 	if (item_type_id == EQUIPMENT_ID)
 	{
 		if (item_subtype_id == LAZER_ID)  
-			return lazer_equipment->mass;
+			return lazer_equipment->getMass();
 		if (item_subtype_id == ROCKET_ID)
-			return rocket_equipment->mass;
+			return rocket_equipment->getMass();
 		if (item_subtype_id == ENERGIZER_ID)
-			return energizer_equipment->mass;
+			return energizer_equipment->getMass();
 		if (item_subtype_id == FREEZER_ID)
-			return freezer_equipment->mass;
+			return freezer_equipment->getMass();
 		if (item_subtype_id == GRAPPLE_ID)
-			return grapple_equipment->mass;
+			return grapple_equipment->getMass();
 		if (item_subtype_id == RADAR_ID)
-			return radar_equipment->mass;
+			return radar_equipment->getMass();
 		if (item_subtype_id == DRIVE_ID)
-			return drive_equipment->mass;
+			return drive_equipment->getMass();
 		if (item_subtype_id == PROTECTOR_ID)
-			return protector_equipment->mass;
+			return protector_equipment->getMass();
 		if (item_subtype_id == BAK_ID)
-			return bak_equipment->mass;
+			return bak_equipment->getMass();
 		if (item_subtype_id == DROID_ID)
-			return droid_equipment->mass;
+			return droid_equipment->getMass();
 		if (item_subtype_id == SCANER_ID)
-			return scaner_equipment->mass;
+			return scaner_equipment->getMass();
 	}
 	
 	if (item_type_id == MODULE_ID)
@@ -782,27 +782,27 @@ int ItemSlot :: getItemPrice()
 	if (item_type_id == EQUIPMENT_ID)
 	{
 		if (item_subtype_id == LAZER_ID)  
-			return lazer_equipment->price;
+			return lazer_equipment->getPrice();
 		if (item_subtype_id == ROCKET_ID)
-			return rocket_equipment->price;
+			return rocket_equipment->getPrice();
 		if (item_subtype_id == ENERGIZER_ID)
-			return energizer_equipment->price;
+			return energizer_equipment->getPrice();
 		if (item_subtype_id == FREEZER_ID)
-			return freezer_equipment->price;
+			return freezer_equipment->getPrice();
 		if (item_subtype_id == GRAPPLE_ID)
-			return grapple_equipment->price;
+			return grapple_equipment->getPrice();
 		if (item_subtype_id == RADAR_ID)
-			return radar_equipment->price;
+			return radar_equipment->getPrice();
 		if (item_subtype_id == DRIVE_ID)
-			return drive_equipment->price;
+			return drive_equipment->getPrice();
 		if (item_subtype_id == PROTECTOR_ID)
-			return protector_equipment->price;
+			return protector_equipment->getPrice();
 		if (item_subtype_id == BAK_ID)
-			return bak_equipment->price;
+			return bak_equipment->getPrice();
 		if (item_subtype_id == DROID_ID)
-			return droid_equipment->price;
+			return droid_equipment->getPrice();
 		if (item_subtype_id == SCANER_ID)
-			return scaner_equipment->price;
+			return scaner_equipment->getPrice();
 	}
 }
 

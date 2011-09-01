@@ -283,18 +283,16 @@ void FBO :: deactivate()
 
 
 
-ShockWaveEffect :: ShockWaveEffect(StarSystem* _pTo_starsystem,
- 				   float _center_x, 
- 				   float _center_y, 
+ShockWaveEffect :: ShockWaveEffect(vec2f _center_pos, 
  				   float _x, float _y, float _z, float _time, 
  				   float _d_x, float _d_y, float _d_z, float _d_time)
 {
           is_alive = true;
           is_alreadyInRemoveQueue = false;
 
-          pTo_starsystem = _pTo_starsystem;
-          center_x = _center_x;
-          center_y = _center_y;
+          starsystem = NULL;
+          center_x = _center_pos.x/float(g_VIEW_WIDTH);
+          center_y = _center_pos.y/float(g_VIEW_HEIGHT);
 
           x = _x;
           y = _y;
@@ -310,6 +308,13 @@ ShockWaveEffect :: ShockWaveEffect(StarSystem* _pTo_starsystem,
 ShockWaveEffect :: ~ShockWaveEffect()
 {}
 
+
+void ShockWaveEffect :: setStarSystem(StarSystem* _starsystem)
+{
+	starsystem = _starsystem;
+}
+
+      		
 void ShockWaveEffect :: update()
 {
 	x -= d_x;
