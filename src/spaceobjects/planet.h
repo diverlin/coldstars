@@ -36,9 +36,6 @@ class Planet : public CommonForPlanet
     	   
                 ~Planet();
 
-                void createKosmoport();
-                void createLand();
-
                 bool addShip(Ship* _pTo_ship);
                 bool addNpc(Npc* _pTo_npc);
                 
@@ -60,6 +57,9 @@ class Planet : public CommonForPlanet
                 Land*      pTo_land;
                 
 		InfoTable info;
+		
+		void createKosmoport();
+                void createLand();
 }; 
 
 

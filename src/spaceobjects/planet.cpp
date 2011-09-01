@@ -30,27 +30,27 @@ Planet :: Planet(int _subtype_id,
 		 int _orbit_phi_inD,
 		 float _speed)
 { 
-      type_id = PLANET_ID;
-      subtype_id = _subtype_id;
+      	type_id = PLANET_ID;
+      	subtype_id = _subtype_id;
       
-      CommonForPlanet_init(_texOb, 
-    	   		   _mesh, 
-    	   	           _size, 
-    	   		   _orbit_center, 
-    	   		   _radius_A,
-    	   		   _radius_B, 
-    	   		   _orbit_phi_inD,
-    	   		   _speed);
+      	CommonForPlanet_init(_texOb, 
+    	   		     _mesh, 
+    	   	             _size, 
+    	   		     _orbit_center, 
+    	   		     _radius_A,
+    	   		     _radius_B, 
+    	   		     _orbit_phi_inD,
+    	   		     _speed);
 
-      pTo_atmosphereTexOb = _pTo_atmoshereTexOb;
+      	pTo_atmosphereTexOb = _pTo_atmoshereTexOb;
 
-      pTo_kosmoport = NULL;
-      pTo_land      = NULL;
+      	pTo_kosmoport = NULL;
+      	pTo_land      = NULL;
       
-      if (subtype_id == INHABITED_ID)
-         createKosmoport();
-      if (subtype_id == UNINHABITED_ID)
-         createLand();
+      	if (subtype_id == INHABITED_ID)
+         	createKosmoport();
+      	if (subtype_id == UNINHABITED_ID)
+         	createLand();
 }
 
     
@@ -62,20 +62,20 @@ Planet :: ~Planet()
 
 void Planet :: update_inSpace_inDynamic()
 {      
-     updatePosition();  
+     	updatePosition();  
 }
   
 
 
 void Planet :: update_inSpace_inStatic()
 {      
-     if (subtype_id == INHABITED_ID)
-        for (unsigned int ni = 0; ni < pTo_kosmoport->NPC_pList.size(); ni++)
-            pTo_kosmoport->NPC_pList[ni]->thinkCommon_inKosmoport_inStatic();
+     	if (subtype_id == INHABITED_ID)
+        	for (unsigned int ni = 0; ni < pTo_kosmoport->NPC_pList.size(); ni++)
+            		pTo_kosmoport->NPC_pList[ni]->thinkCommon_inKosmoport_inStatic();
 
-     if (subtype_id == UNINHABITED_ID)
-        for (unsigned int ni = 0; ni < pTo_kosmoport->NPC_pList.size(); ni++)
-            pTo_kosmoport->NPC_pList[ni]->thinkCommon_inLand_inStatic();
+     	if (subtype_id == UNINHABITED_ID)
+        	for (unsigned int ni = 0; ni < pTo_kosmoport->NPC_pList.size(); ni++)
+            		pTo_kosmoport->NPC_pList[ni]->thinkCommon_inLand_inStatic();
 }
          
 
@@ -97,47 +97,47 @@ void Planet :: renderInfo()
         
 void Planet :: createKosmoport()
 {   
-    pTo_kosmoport = new Kosmoport(RACE_0_ID);   
+    	pTo_kosmoport = new Kosmoport(RACE_0_ID);   
 }
 
 
 void Planet :: createLand()
 {   
-    pTo_land = new Land();   
+    	pTo_land = new Land();   
 }
 
 
 //// ******* TRANSITION ******* 
 bool Planet :: addShip(Ship* _pTo_ship)
 {
-     if (subtype_id == INHABITED_ID)
-         return pTo_kosmoport->addShip(_pTo_ship);
-     if (subtype_id == UNINHABITED_ID)
-         return pTo_land->addShip(_pTo_ship);
+     	if (subtype_id == INHABITED_ID)
+         	return pTo_kosmoport->addShip(_pTo_ship);
+     	if (subtype_id == UNINHABITED_ID)
+         	return pTo_land->addShip(_pTo_ship);
 }
 
 bool Planet :: addNpc(Npc* _pTo_npc)
 {
-     if (subtype_id == INHABITED_ID)
-         return pTo_kosmoport->addNpc(_pTo_npc);
-     if (subtype_id == UNINHABITED_ID)
-         return pTo_land->addNpc(_pTo_npc);
+     	if (subtype_id == INHABITED_ID)
+         	return pTo_kosmoport->addNpc(_pTo_npc);
+     	if (subtype_id == UNINHABITED_ID)
+         	return pTo_land->addNpc(_pTo_npc);
 }
 
 bool Planet :: removeShipById(int _id)
 {
-     if (subtype_id == INHABITED_ID)
-         return pTo_kosmoport->removeShipById(_id);
-     if (subtype_id == UNINHABITED_ID)
-         return pTo_land->removeShipById(_id);
+     	if (subtype_id == INHABITED_ID)
+         	return pTo_kosmoport->removeShipById(_id);
+     	if (subtype_id == UNINHABITED_ID)
+         	return pTo_land->removeShipById(_id);
 }
 
 bool Planet :: removeNpcById(int _id)
 {
-     if (subtype_id == INHABITED_ID)
-         return pTo_kosmoport->removeNpcById(_id);
-     if (subtype_id == UNINHABITED_ID)
-         return pTo_land->removeNpcById(_id);
+     	if (subtype_id == INHABITED_ID)
+         	return pTo_kosmoport->removeNpcById(_id);
+     	if (subtype_id == UNINHABITED_ID)
+         	return pTo_land->removeNpcById(_id);
 }
 //// ******* TRANSITION ******* 
 
@@ -145,15 +145,15 @@ bool Planet :: removeNpcById(int _id)
 
 bool Planet :: getPermissionToLand()
 {
-     if (subtype_id == INHABITED_ID)
-     {
-        if (pTo_kosmoport->pTo_angar->returnFreelandingAreaNum() > 0)
-            return true;
-        else
-            return false;       
-     }
-     if (subtype_id == UNINHABITED_ID)
-        return true;
+     	if (subtype_id == INHABITED_ID)
+     	{
+        	if (pTo_kosmoport->pTo_angar->returnFreelandingAreaNum() > 0)
+            		return true;
+        	else
+            		return false;       
+     	}
+     	if (subtype_id == UNINHABITED_ID)
+        	return true;
 }
 
         
@@ -168,7 +168,7 @@ Planet* createPlanet(int orbit_radius)
         TextureOb* _planetTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.planet_texOb_pList); 
         TextureOb* _atmosphereTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.atmosphere_texOb_pList); 
         
-        Planet *_planet = new Planet(subtype_id, 
+        Planet* planet = new Planet(subtype_id, 
         				_planetTexOb, 
         				_atmosphereTexOb, 
         				pTo_SPHERE_MESH, 
@@ -179,5 +179,5 @@ Planet* createPlanet(int orbit_radius)
         				0,
         				speed);
 	 
-        return _planet;        
+        return planet;        
 }

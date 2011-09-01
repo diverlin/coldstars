@@ -134,7 +134,7 @@ bool Turrel :: isTargetAlive()
            return false;
 
      if (target_type_id == ASTEROID_ID)
-        if (target_asteroid->is_alive == true)
+        if (target_asteroid->getAlive() == true)
            return true;
         else
            return false;
@@ -321,7 +321,7 @@ void Turrel :: setAsteroidTarget(Asteroid* _asteroid)
      pTo_target_pos_x = &(target_asteroid->getPoints()->getpCenter()->x);
      pTo_target_pos_y = &(target_asteroid->getPoints()->getpCenter()->y);
 
-     pTo_target_is_alive = &(target_asteroid->is_alive);
+     pTo_target_is_alive = target_asteroid->get_pAlive();
      has_TARGET = true;
 }
 

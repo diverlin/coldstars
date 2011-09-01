@@ -37,57 +37,61 @@ Asteroid :: Asteroid(TextureOb* _texOb,
     	   		    _orbit_phi_inD,
     	   		    _speed);
     	   			                 
-      is_alive = true;
-      is_dying = false;
-      is_explosed = false;
+	is_alive = true;
+      	is_dying = false;
+      	is_explosed = false;
       
-      dying_time = 50;
+      	dying_time = 50;
 
-      type_id = ASTEROID_ID;
+      	type_id = ASTEROID_ID;
 
-      armor = 10;
-      mass  = randIntInRange(10, 30);
+      	armor = 10;
+      	mass  = randIntInRange(10, 30);
 }
     
  
 Asteroid :: ~Asteroid()
 {}
     
-   
-   
+
+bool Asteroid :: getAlive() const { return is_alive; }
+bool* Asteroid :: get_pAlive() { return &is_alive; }
+int Asteroid :: getArmor() const { return armor; }
+int Asteroid :: getMass()  const { return mass; }	
+			
 
 void Asteroid :: hit_TRUE(int damage)
 {
-     armor -= damage;
-     if (armor <= 0)
-     {
-        is_dying = true; 
-        dying_time -= 3;
-     }
+     	armor -= damage;
+     	if (armor <= 0)
+     	{
+        	is_dying = true; 
+        	dying_time -= 3;
+     	}
 }
 
 void Asteroid :: hit_FALSE(int damage)
 {
-     armor -= damage;
-     if (armor <= 0)
-        death_FALSE();
+     	armor -= damage;
+     	if (armor <= 0)
+        	death_FALSE();
 }
 
 void Asteroid :: update_inSpace_inDynamic_TRUE()
 {    
-     updatePosition();  
+     	updatePosition();  
 
-     if (is_dying == true)
-     {
-        dying_time--;
-        if (dying_time < 0)
-           death_TRUE();
-     }   
+     	if (is_dying == true)
+     	{
+        	dying_time--;
+        	if (dying_time < 0)
+           		death_TRUE();
+     	}   
 }
 
 void Asteroid :: update_inSpace_inDynamic_FALSE()
 {    
-     updatePosition();  
+     	updatePosition();  
 }
 
   
