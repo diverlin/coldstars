@@ -62,7 +62,7 @@ void StarSystem :: rocketCollision_TRUE()
                         {
                                 if (collisionBetweenCenters(ROCKET_pList[ri]->getPoints(), ASTEROID_pList[ai]->getPoints(), ASTEROID_pList[ai]->w) == true)
                                 {   
-                                        ASTEROID_pList[ai]->death_TRUE();
+                                        ASTEROID_pList[ai]->hit_TRUE(ASTEROID_pList[ai]->getArmor());
                                         ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
                                         collide = true;
                                         break;
@@ -145,7 +145,7 @@ void StarSystem :: rocketCollision_FALSE()
                         {
                                 if (collisionBetweenCenters(ROCKET_pList[ri]->getPoints(), ASTEROID_pList[ai]->getPoints(), ASTEROID_pList[ai]->w) == true)
                                 {   
-                                        ASTEROID_pList[ai]->death_FALSE();
+                                        ASTEROID_pList[ai]->hit_TRUE(ASTEROID_pList[ai]->getArmor());
                                         ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
                                         collide = true;
                                         break;
@@ -206,22 +206,22 @@ void StarSystem :: asteroidCollision_TRUE()
 {
     for(unsigned int ai = 0; ai < ASTEROID_pList.size(); ai++)
     {
-        if (ASTEROID_pList[ai]->is_alive == true)   
+        if (ASTEROID_pList[ai]->getAlive() == true)   
            for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
                if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), SHIP_pList[ki]->getPoints(), SHIP_pList[ki]->collision_radius) )
                {
-                   ASTEROID_pList[ai]->death_TRUE();
-                   SHIP_pList[ki]->hit_TRUE( (ASTEROID_pList[ai]->armor) * 10 );
+                   ASTEROID_pList[ai]->hit_TRUE(ASTEROID_pList[ai]->getArmor());
+                   SHIP_pList[ki]->hit_TRUE( (ASTEROID_pList[ai]->getArmor()) * 10 );
                    //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
                    break;
                }
 
-        if (ASTEROID_pList[ai]->is_alive == true)   
+        if (ASTEROID_pList[ai]->getAlive() == true)   
            for (unsigned int pi = 0; pi < PLANET_pList.size(); pi++)
                if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), PLANET_pList[pi]->getPoints(), PLANET_pList[pi]->collision_radius) )
                {
                    //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
-                   ASTEROID_pList[ai]->death_TRUE();
+                   ASTEROID_pList[ai]->hit_TRUE(ASTEROID_pList[ai]->getArmor());
                    break;
                }
                 
@@ -231,12 +231,12 @@ void StarSystem :: asteroidCollision_TRUE()
                         //a.hit(a, a)
                         //break
 
-        if (ASTEROID_pList[ai]->is_alive == true)   
+        if (ASTEROID_pList[ai]->getAlive() == true)   
            for (unsigned int si = 0; si < STAR_pList.size(); si++)
                if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), STAR_pList[si]->getPoints(), STAR_pList[si]->collision_radius) )
                {
                    //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
-                   ASTEROID_pList[ai]->death_TRUE();
+                   ASTEROID_pList[ai]->hit_TRUE(ASTEROID_pList[ai]->getArmor());
                    break;
                }
                         
@@ -250,22 +250,22 @@ void StarSystem :: asteroidCollision_FALSE()
 {
     for(unsigned int ai = 0; ai < ASTEROID_pList.size(); ai++)
     {
-        if (ASTEROID_pList[ai]->is_alive == true)   
+        if (ASTEROID_pList[ai]->getAlive() == true)   
            for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
                if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), SHIP_pList[ki]->getPoints(), SHIP_pList[ki]->collision_radius) )
                {
-                   ASTEROID_pList[ai]->death_FALSE();
-                   SHIP_pList[ki]->hit_FALSE( (ASTEROID_pList[ai]->armor) * 10 );
+                   ASTEROID_pList[ai]->hit_FALSE(ASTEROID_pList[ai]->getArmor());
+                   SHIP_pList[ki]->hit_FALSE( (ASTEROID_pList[ai]->getArmor()) * 10 );
                    //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
                    break;
                }
 
-        if (ASTEROID_pList[ai]->is_alive == true)   
+        if (ASTEROID_pList[ai]->getAlive() == true)   
            for (unsigned int pi = 0; pi < PLANET_pList.size(); pi++)
                if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), PLANET_pList[pi]->getPoints(), PLANET_pList[pi]->collision_radius) )
                {
                    //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
-                   ASTEROID_pList[ai]->death_FALSE();
+                   ASTEROID_pList[ai]->hit_FALSE(ASTEROID_pList[ai]->getArmor());
                    break;
                }
                 
@@ -275,12 +275,12 @@ void StarSystem :: asteroidCollision_FALSE()
                         //a.hit(a, a)
                         //break
 
-        if (ASTEROID_pList[ai]->is_alive == true)   
+        if (ASTEROID_pList[ai]->getAlive() == true)   
            for (unsigned int si = 0; si < STAR_pList.size(); si++)
                if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), STAR_pList[si]->getPoints(), STAR_pList[si]->collision_radius) )
                {
                    //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
-                   ASTEROID_pList[ai]->death_FALSE();
+                   ASTEROID_pList[ai]->hit_FALSE(ASTEROID_pList[ai]->getArmor());
                    break;
                }
                         
@@ -1063,7 +1063,7 @@ void StarSystem :: manageEntities()
 
     for(unsigned int i = 0; i < ASTEROID_pList.size(); i++)
     {
-        if (ASTEROID_pList[i]->is_alive == false)
+        if (ASTEROID_pList[i]->getAlive() == false)
         {   //printf("asteroid id to remove ==> %i\n",(*Asteroid_pList[i]).id);
             ASTEROID_remove_queue_pList.push_back(ASTEROID_pList[i]);
             ASTEROID_pList.erase(ASTEROID_pList.begin() + i );

@@ -117,69 +117,73 @@ class DamageEffect
 
 class ParticleForExplosionEffect
 { 
-    public:
-        bool is_alive;
-        int curnum;
+    	public:
+        	bool is_alive;
+        	float size;        	       
         
-        float center_x_start;
-        float center_y_start;   
-        float center_x;
-        float center_y;  
+      		ParticleForExplosionEffect(vec2f, ParticleSystemData, int);      				 
+      		~ParticleForExplosionEffect();
+
+      		void update();
+      		void render();
+      		
+      	private:
+      		int curnum;        
+        	float center_x_start;
+        	float center_y_start;   
+        	float center_x;
+        	float center_y;  
    
-        float alpha_start;
-        float alpha_end;
-        float d_alpha;
-        float alpha;
+        	float alpha_start;
+        	float alpha_end;
+        	float d_alpha;
+        	float alpha;
    
-        float size_start;
-        float d_size;
-        float size;
+        	float size_start;
+        	float d_size;
  
-        float velocity_start;
-        float d_velocity; 
+        	float velocity_start;
+        	float d_velocity; 
 
-        float velocity_x;
-        float velocity_y;  
-        
-        
-      ParticleForExplosionEffect(vec2f, ParticleSystemData, int);
-      				 
-      ~ParticleForExplosionEffect();
-
-      void fastCalcVelocityVector();
-      void accurateCalcVelocityVector();
-      void update();
-      void render();
+        	float velocity_x;
+        	float velocity_y;  
+        	
+        	void fastCalcVelocityVector();
+      		void accurateCalcVelocityVector();
+      	
 };
 
 
 
 class ExplosionEffect
 { 
-    public:
-          TextureOb* pTo_texOb;
-          StarSystem* starsystem;
-          bool is_alive;
-          bool alreadyInRemoveQueue;
-  
-          //type of starsystem;
-          GLuint texture;
+    	public:
+    	       	bool is_alive;    	       	        
+    	       	        
+       		ExplosionEffect(TextureOb*, vec2f, ParticleSystemData);       		       
+       		~ExplosionEffect();
 
-          float center_x;
-          float center_y;
+		void setStarSystem(StarSystem* _starsystem);
+       		void update();
+       		void render();
+       		
+       	private:
+          	bool alreadyInRemoveQueue;
    
-          int num_particles;
-          std::vector<ParticleForExplosionEffect*> particles_pList;
-           
-          float pSize_start;
-           
-       ExplosionEffect(TextureOb*, vec2f, ParticleSystemData);
-       		       
-       ~ExplosionEffect();
 
-	void setStarSystem(StarSystem* _starsystem);
-       	void update();
-       	void render();
+          	std::vector<ParticleForExplosionEffect*> particles_pList;  
+          	
+       	        TextureOb* pTo_texOb;
+          	StarSystem* starsystem;
+          	
+          	GLuint texture;
+          	int num_particles;
+          	         	          	
+       	        float center_x;
+          	float center_y;
+          	
+          	float pSize_start;
+       	
 };
 
 

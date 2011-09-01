@@ -201,28 +201,28 @@ void ParticleForDamageEffect :: render()
            
 ExplosionEffect :: ExplosionEffect(TextureOb* _pTo_texOb, vec2f _center_pos, ParticleSystemData _psData)
 {  
-    is_alive = true;
-    alreadyInRemoveQueue = false;
+    	is_alive = true;
+    	alreadyInRemoveQueue = false;
             
-    pTo_texOb = _pTo_texOb;
-    starsystem = NULL;
+    	pTo_texOb = _pTo_texOb;
+    	starsystem = NULL;
 
-    texture = pTo_texOb->texture;
+    	texture = pTo_texOb->texture;
 
-    center_x = _center_pos.x;
-    center_y = _center_pos.y;
+    	center_x = _center_pos.x;
+    	center_y = _center_pos.y;
 
-    num_particles = _psData.particles_num;
-    pSize_start   = _psData.particleSize_start;
+    	num_particles = _psData.particles_num;
+    	pSize_start   = _psData.particleSize_start;
 
     
-    for(int i=0;i<num_particles;i++)
-    {  
-       //velocity_start = randIntInRange(50, 100)*0.005;
-       //printf("rand=%f, i=%i\n",d_velocity, i);
-       ParticleForExplosionEffect* _particle = new ParticleForExplosionEffect(_center_pos, _psData, i);
-       particles_pList.push_back(_particle);
-    }
+    	for(int i=0;i<num_particles;i++)
+    	{  
+       		//velocity_start = randIntInRange(50, 100)*0.005;
+       		//printf("rand=%f, i=%i\n",d_velocity, i);
+       		ParticleForExplosionEffect* _particle = new ParticleForExplosionEffect(_center_pos, _psData, i);
+       		particles_pList.push_back(_particle);
+    	}
 }
  
 ExplosionEffect :: ~ExplosionEffect()
@@ -235,41 +235,41 @@ void ExplosionEffect :: setStarSystem(StarSystem* _starsystem) { starsystem = _s
 
 void ExplosionEffect :: update()
 {
-    is_alive = false;
-    for(int i = 0; i<particles_pList.size(); i++)
-    {
-        if (particles_pList[i]->is_alive == true)
-        {
-           particles_pList[i]->update();
-           is_alive = true;
-        }
-    }  
+    	is_alive = false;
+    	for(int i = 0; i<particles_pList.size(); i++)
+    	{
+        	if (particles_pList[i]->is_alive == true)
+        	{
+           		particles_pList[i]->update();
+           		is_alive = true;
+        	}
+    	}  
       
-    if(is_alive == false)
-    {
-        if(alreadyInRemoveQueue == false)
-        {
-            //self.starsystem.effect_EXPLOSION_remove_queue.append(self)  
-            alreadyInRemoveQueue = true;
-        }      
-    }
+    	if(is_alive == false)
+    	{
+        	if(alreadyInRemoveQueue == false)
+        	{
+            		//self.starsystem.effect_EXPLOSION_remove_queue.append(self)  
+            		alreadyInRemoveQueue = true;
+        	}      
+    	}
 }     
 
     
 
 void ExplosionEffect :: render()
 {
-    glBindTexture(GL_TEXTURE_2D, texture);
-    for(unsigned int i = 0; i<particles_pList.size(); i++)
-    {
-        if(particles_pList[i]->is_alive == true)
-        {
-           glPointSize(particles_pList[i]->size);
-           glBegin(GL_POINTS);
-           particles_pList[i]->render();
-           glEnd();
-        }
-    }            
+    	glBindTexture(GL_TEXTURE_2D, texture);
+    	for(unsigned int i = 0; i<particles_pList.size(); i++)
+    	{
+        	if(particles_pList[i]->is_alive == true)
+        	{
+           		glPointSize(particles_pList[i]->size);
+           		glBegin(GL_POINTS);
+           			particles_pList[i]->render();
+           		glEnd();
+        	}
+    	}            
 }  
 
 
@@ -281,36 +281,34 @@ void ExplosionEffect :: render()
 
 ParticleForExplosionEffect :: ParticleForExplosionEffect(vec2f _center_pos,  ParticleSystemData _psData, int _curnum)
 {
-    is_alive = true;
-    float animation_speed_rate = 0.5; //???? 
+    	is_alive = true;
+    	float animation_speed_rate = 0.5; //???? 
 
-    center_x_start = _center_pos.x;
-    center_y_start = _center_pos.y;
+    	center_x_start = _center_pos.x;
+    	center_y_start = _center_pos.y;
           
-    size_start = _psData.particleSize_start;
-    d_size = _psData.d_particleSize * animation_speed_rate;
+    	size_start = _psData.particleSize_start;
+    	d_size     = _psData.d_particleSize * animation_speed_rate;
           
-    velocity_start = _psData.velocity_start * animation_speed_rate;
-    d_velocity = _psData.d_velocity;
+    	velocity_start = _psData.velocity_start * animation_speed_rate;
+    	d_velocity     = _psData.d_velocity;
           
-    alpha_start = _psData.alpha_start;
-    alpha_end = _psData.alpha_end;
-    d_alpha = _psData.d_alpha * animation_speed_rate;
+    	alpha_start = _psData.alpha_start;
+    	alpha_end   = _psData.alpha_end;
+    	d_alpha     = _psData.d_alpha * animation_speed_rate;
 
+    	center_x = center_x_start;
+    	center_y = center_y_start;  
 
-    center_x = center_x_start;
-    center_y = center_y_start;  
-
-    size = size_start;
-    alpha = alpha_start;
-
+    	size = size_start;
+    	alpha = alpha_start;
           
-    curnum = _curnum;
+    	curnum = _curnum;
           
-    if (randIntInRange(0,10) > 5)
-      accurateCalcVelocityVector();
-    else
-      fastCalcVelocityVector();
+    	if (randIntInRange(0,10) > 5)
+      		accurateCalcVelocityVector();
+    	else
+      		fastCalcVelocityVector();
 }         
 
 ParticleForExplosionEffect :: ~ParticleForExplosionEffect()
@@ -319,55 +317,55 @@ ParticleForExplosionEffect :: ~ParticleForExplosionEffect()
 
 void ParticleForExplosionEffect :: fastCalcVelocityVector()
 {
-    float dx_n = randIntInRange(0, 10)*randomInverse()*0.1;
-    float dy_n = randIntInRange(0, 10)*randomInverse()*0.1;
+    	float dx_n = randIntInRange(0, 10)*randomInverse()*0.1;
+    	float dy_n = randIntInRange(0, 10)*randomInverse()*0.1;
 
-    velocity_x = dx_n * velocity_start;
-    velocity_y = dy_n * velocity_start;
+    	velocity_x = dx_n * velocity_start;
+    	velocity_y = dy_n * velocity_start;
 }
 
 
 void ParticleForExplosionEffect :: accurateCalcVelocityVector()
 {
-    float _len   = randIntInRange(50, 100);
-    float _angle = randIntInRange(0, 360)/57.0;
+    	float _len   = randIntInRange(50, 100);
+    	float _angle = randIntInRange(0, 360)/57.0;
 
-    float target_x = center_x + sin(_angle) * _len;
-    float target_y = center_y + cos(_angle) * _len;
+    	float target_x = center_x + sin(_angle) * _len;
+    	float target_y = center_y + cos(_angle) * _len;
 
-    float xl = (target_x - center_x);
-    float yl = (target_y - center_y);
+    	float xl = (target_x - center_x);
+    	float yl = (target_y - center_y);
 
-    float dx_n = xl/_len;
-    float dy_n = yl/_len;
+    	float dx_n = xl/_len;
+    	float dy_n = yl/_len;
 
-    velocity_x = dx_n * velocity_start;
-    velocity_y = dy_n * velocity_start;
+    	velocity_x = dx_n * velocity_start;
+    	velocity_y = dy_n * velocity_start;
 }  
           
 
 void ParticleForExplosionEffect :: update()
 {
-    //printf("size = %f\n", size); 
-    center_x += velocity_x;
-    center_y += velocity_y; 
+    	//printf("size = %f\n", size); 
+    	center_x += velocity_x;
+    	center_y += velocity_y; 
 
-    alpha -= d_alpha;
-    size -= d_size;
+    	alpha -= d_alpha;
+    	size -= d_size;
 
-    if ((alpha <= alpha_end) or (size < 1))
-    {   //printf("SOMETHING WRONG WITH PARTICLES, %f, %f\n", alpha, size);
-        //alpha = 0.1;          // hack
-        //size = 100;           // hack
-        is_alive = false;
-    }
+    	if ((alpha <= alpha_end) or (size < 1))
+    	{   	//printf("SOMETHING WRONG WITH PARTICLES, %f, %f\n", alpha, size);
+        	//alpha = 0.1;          // hack
+        	//size = 100;           // hack
+        	is_alive = false;
+    	}
 }
     
        
 void ParticleForExplosionEffect :: render()
 { 
-    glColor4f(1.0f, 1.0f, 1.0f, alpha);
-    glVertex3f(center_x, center_y , -2);
+    	glColor4f(1.0f, 1.0f, 1.0f, alpha);
+    	glVertex3f(center_x, center_y , -2);
 }            
                   
 
