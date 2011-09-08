@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define BACKGROUND_H
 
 
-class distantStarBgEffect
+class DistantStarBgEffect
 {   
     public:
        TextureOb* pTo_texOb;
@@ -31,14 +31,14 @@ class distantStarBgEffect
        float particleSize;
        float distance_rate;
 
-       distantStarBgEffect(TextureOb* _pTo_texOb, float _center_x, float _center_y, float _particleSize);
+       DistantStarBgEffect(TextureOb* _pTo_texOb, float _center_x, float _center_y, float _particleSize);
        void render(float vx, float vy);
 }; 
-typedef std::vector<distantStarBgEffect*> VEC_pDistantStarBgEffect_type; 
+typedef std::vector<DistantStarBgEffect*> VEC_pDistantStarBgEffect_type; 
 
     
 
-class distantNebulaBgEffect
+class DistantNebulaBgEffect
 {
     public:
         TextureOb* pTo_texOb;
@@ -57,12 +57,12 @@ class distantNebulaBgEffect
 
         float pos_z;
 
-        distantNebulaBgEffect(TextureOb* _pTo_texOb, float _center_x, float _center_y);
+        DistantNebulaBgEffect(TextureOb* _pTo_texOb, float _center_x, float _center_y);
         void update();
         void updateWHRenderConstants();
         void render(float vx, float vy);
 };
-typedef std::vector<distantNebulaBgEffect*> VEC_pDistantNebulaBgEffect_type; 
+typedef std::vector<DistantNebulaBgEffect*> VEC_pDistantNebulaBgEffect_type; 
 
 
 #endif /* BACKGROUND_H */

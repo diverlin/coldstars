@@ -28,19 +28,10 @@ class StarSystem
 
     		bool is_CAPTURED; 
    
-    		Color color;
+    		//Color color;
     		Rect rect_onMap;
 
-    		// ENTITY LISTS
-    		VEC_pDistantNebulaBgEffect_type distantNebulaBgEffect_pList;
-    		VEC_pDistantStarBgEffect_type distantStarBgEffect_pList;
 
-    		std::vector<Star*>         STAR_pList;
-    		std::vector<Planet*>       PLANET_pList;
-    		std::vector<Asteroid*>     ASTEROID_pList;
-    		std::vector<Mineral*>      MINERAL_pList;
-    		std::vector<Container*>    CONTAINER_pList;
-    		std::vector<RocketBullet*> ROCKET_pList;
 
 		std::vector<Ship*> SHIP_pList;
     		std::vector<Npc*>  NPC_pList;
@@ -76,12 +67,10 @@ class StarSystem
     		std::vector<Ship*>      visible_SHIP_pList;
 
      
-
     		StarSystem();
     		~StarSystem();
     
     		void setPositionOnWorldMap(Rect rect);
-
 
     		void rocketCollision_TRUE();
     		void rocketCollision_FALSE();
@@ -95,18 +84,12 @@ class StarSystem
 
     		void findVisibleEntities();
         
-                FBO* pTo_fbo0;
-                FBO* pTo_fbo1;
-                FBO* pTo_fbo2;
-                FBO* pTo_fbo3;
-                BloomEffect* pTo_bloom; 
-                                          
-                void defineSceneColor(TextureOb*);
-                                                
-                void createPostProcessStuff();
+
+	        void createPostProcessStuff();
     		void renderEntities_NEW();
     		void renderEntities_OLD();
-    			void setSceneColor();
+    		        void restoreDefaultColor();
+    			void restoreSceneColor();
     			void renderBackground();
         
    		    		
@@ -115,16 +98,12 @@ class StarSystem
     		void manageEntities();
     		void removeDeadEntities();
 
-
     		void mouseControl();
 
     		void fireEvents_TRUE(int timer);
     		void fireEvents_FALSE(int timer);
 
     		//// TRANSITION
-    		void createExplosion(vec2f _center_pos, int obSize);
-    		void createShockWave(vec2f _center_pos, int obSize);
-    		
                 bool addStar(Star*);
                 bool addPlanet(Planet*);
     		bool addAsteroid(Asteroid*);
@@ -132,9 +111,12 @@ class StarSystem
     		bool addNpc(Npc*);
     		bool addMineral(Mineral*);
     		bool addContainer(Container*);
+    		bool addRocket(RocketBullet*);
     		bool addExplosion(ExplosionEffect*);
     		bool addShockWave(ShockWaveEffect*);
     		
+    		bool addDistantNebula(DistantNebulaBgEffect*);
+    		bool addDistantStar(DistantStarBgEffect*);
                 
     		bool removeShipById(int _id);    
     		bool removeNpc(int _id, int _race_id, int _subtype_id);  
@@ -143,8 +125,33 @@ class StarSystem
 
     		Planet* returnClosestPlanet(vec2f);
 
+    	private:
+    	    	// ENTITY LISTS
+    	    	VEC_pDistantNebulaBgEffect_type distantNebulaBgEffect_pList;
+    		VEC_pDistantStarBgEffect_type   distantStarBgEffect_pList;
+    		
+    		std::vector<Star*>         STAR_pList;
+    		std::vector<Planet*>       PLANET_pList;
+    		std::vector<Asteroid*>     ASTEROID_pList;
+    		std::vector<Mineral*>      MINERAL_pList;
+    		std::vector<Container*>    CONTAINER_pList;
+    		std::vector<RocketBullet*> ROCKET_pList;
+    		
+    	        FBO* pTo_fbo0;
+                FBO* pTo_fbo1;
+                FBO* pTo_fbo2;
+                FBO* pTo_fbo3;
+                BloomEffect* pTo_bloom; 
+                
     		void debug__();
+    	
 };
+
+bool collisionBetweenCenters(Points* points1, Points* points2, float collision_radius);
+bool collisionBetweenCenters(Points* points1, float center2_x, float center2_y, float collision_radius);
+
+bool isObjectVisible(Points* points, float startViewCoord_x, float startViewCoord_y);
+bool isObjectVisible(float ob_centerx, float ob_centery, int ob_w, int ob_h, float startViewCoord_x, float startViewCoord_y); 
 
 #endif 
 

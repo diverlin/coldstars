@@ -20,9 +20,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "bakModule.h"
 
 
-BakModule :: BakModule(TextureOb* _pTo_texOb, int _fuel_max_add)
+BakModule :: BakModule(TextureOb* _texOb, int _fuel_max_add)
 {
-    	CommonForModules_init(BAK_ID, _pTo_texOb);
+    	CommonForModules_init(BAK_ID, _texOb);
 
     	fuel_max_add = _fuel_max_add;
 }
@@ -33,22 +33,20 @@ BakModule :: ~BakModule()
 int BakModule :: getFuelMaxAdd() const { return fuel_max_add; }
  	
 
-void BakModule :: updateInfo()
+void BakModule :: addUniqueInfo()
 {
-	info.clear();
-
     	info.addTitleStr("bak module");
     	info.addNameStr("fuel_max_add:"); info.addValueStr( int2str(fuel_max_add) );
-    	info.addNameStr("mass:");         info.addValueStr( int2str(mass) );
 }
 
 
 
 BakModule* bakModuleGenerator()
 {
-    	TextureOb* _texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
-    	int _fuel_max_add = randIntInRange(BAK_MODULE_FUEL_MIN, BAK_MODULE_FUEL_MAX);
+    	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);     	
+    	int fuel_max_add = randIntInRange(BAK_MODULE_FUEL_MIN, BAK_MODULE_FUEL_MAX);
     	
-    	BakModule* _bak_module = new BakModule(_texOb, _fuel_max_add);
-    	return _bak_module;
+    	BakModule* bak_module = new BakModule(texOb, fuel_max_add);
+    	
+    	return bak_module;
 }

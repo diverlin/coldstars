@@ -20,62 +20,39 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef COMMONFORPLANET_H
 #define COMMONFORPLANET_H
 
+
+struct PlanetData
+{
+	float scale; 
+    	vec2f orbit_center; 
+    	int radius_A;
+    	int radius_B; 
+    	float orbit_phi_inD;
+    	float speed;
+};
+
+
 class CommonForPlanet
 {
-	public:
-
-      
-      		float orbit_center_x;
-      		float orbit_center_y;
-      		int radius_A;
-      		int radius_B;
-      		float orbit_phi_inD;
-      		float speed;    
-     
-      		float pos_z;
-
-      		float angle_x;
-      		float angle_y;
-      		float angle_z;
-      		float d_angle_z;
-      
-                float scale;
-                
-                std::vector<float> orbit_vector_x;
-    		std::vector<float> orbit_vector_y;
-                int orbit_len;
-                int orbit_it; 
-
-		// !!!!
-    		float rate;                                            
-    		int w, h;
-    		int collision_radius; 
-    		// !!!!
-    		
-    		CommonForPlanet();
+	public:      
+   		CommonForPlanet();
     		~CommonForPlanet();
-                
-                
+                                
+                // accessors
+                void setStarSystem(StarSystem* _starsystem);
                 
                 int getId() const;
                 int getType() const;
                 int getSubType() const;
-                
+                int getCollisionRadius() const;
+                vec2f getNextTurnPosition() const;
                 Points* getPoints();
-                
-                void setStarSystem(StarSystem* _starsystem);
                 StarSystem* getStarSystem();
-                
-                
-    		
+               
+    		// other methods
                 void CommonForPlanet_init(TextureOb* _texOb, 
     	   				  ObjMeshInstance* _mesh, 
-    	   				  float _size, 
-    	   			          vec2f _orbit_center, 
-    	   			          int _radius_A,
-    	   				  int _radius_B, 
-    	   				  float _orbit_phi_inD,
-    	   			          float _speed);
+    	   				  PlanetData _planet_data);
     		
     		void detailedEllipceOrbitFormation();
     		void updatePosition();
@@ -92,6 +69,25 @@ class CommonForPlanet
     		ObjMeshInstance* mesh; 
     
               	StarSystem* starsystem;
+              	
+              	InfoTable info;
+              	
+              	// !!!!
+    		float rate;                                            
+    		int w, h;
+    		int collision_radius; 
+    		// !!!!
+              	      		
+		vec3f center_pos;
+		vec3f angle;
+		vec3f d_angle;
+     		
+      		PlanetData planet_data;
+     		
+      		std::vector<float> orbit_vector_x;
+    		std::vector<float> orbit_vector_y;
+                int orbit_len;
+                int orbit_it; 
 };
 
 #endif 

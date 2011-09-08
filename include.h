@@ -16,6 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #include "GL/glew.h"   
 
 
@@ -40,6 +41,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "src/resources/texture.h"
 #include "src/render/glsl.h"
+#include "src/render/camera.h"
 #include "src/resources/resources.h"
 
 #include "src/common/rect.h"
@@ -89,6 +91,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 #include "src/effects/background.h"
+#include "src/effects/explosion.h"
 #include "src/effects/effects.h"
 
 #include "src/spaceobjects/commonForSpaceItems.h" 
@@ -210,6 +213,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "src/vehicle/turrel.cpp"
 
 #include "src/effects/background.cpp"
+#include "src/effects/explosion.cpp"
 #include "src/effects/effects.cpp"
 #include "src/effects/lazerTrace.cpp"
 #include "src/effects/shield.cpp"
@@ -222,6 +226,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "src/common/common.cpp"
 //#include "src/resources/model_obj.cpp"
 #include "src/render/render.cpp"
+#include "src/render/camera.cpp"
 #include "src/render/glsl.cpp"
 
 #include "src/text/textstuff.cpp"

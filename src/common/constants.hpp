@@ -96,6 +96,10 @@ const int GREY_COLOR_ID = 4;
 
 const int STARSYSTEM_TOTAL_NUM = 2;
 
+// ASTEROID
+const int ASTEROID_SIZE_MIN = 6;
+const int ASTEROID_SIZE_MAX = 12;
+
 // PLANET 
 const int PLANET_PER_SYSTEM_MIN = 3;
 const int PLANET_PER_SYSTEM_MAX = 5;
@@ -367,6 +371,7 @@ const int ROCKET_EXISTANCE_TIME = 3 * TURN_TIME;
 
 const int CURSOR_ID     = g_TYPE_ID_GENERATOR.returnNextId("CURSOR_ID");  
 
+const int STAR_ID   = g_TYPE_ID_GENERATOR.returnNextId("STAR_ID");  
 const int ASTEROID_ID   = g_TYPE_ID_GENERATOR.returnNextId("ASTEROID_ID");  
 const int PLANET_ID     = g_TYPE_ID_GENERATOR.returnNextId("PLANET_ID");  
 const int INHABITED_ID       = g_TYPE_ID_GENERATOR.returnNextId("INHABITED_ID");  

@@ -24,17 +24,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class LazerModule : public CommonForModules
 {
     	public:
-	       	LazerModule(TextureOb* _pTo_texOb, int _damage_add, int _radius_add);
+	       	LazerModule(TextureOb* _texOb, int _damage_add, int _radius_add);
         	~LazerModule();
 
 		int getDamageAdd() const;
 		int getRadiusAdd() const;
 		
-        	void updateInfo();
-        	
         private:
                 int damage_add;
-        	int radius_add;        
+        	int radius_add; 
+        	
+        	void virtual addUniqueInfo();       
 };
 
 

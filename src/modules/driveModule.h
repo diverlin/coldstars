@@ -30,11 +30,11 @@ class DriveModule : public CommonForModules
 		int getSpeedAdd() const;
 		int getHyperAdd() const;
 
-      		void updateInfo();
-      		
       	private:
       		int speed_add;
       		int hyper_add;
+      		
+      		void virtual addUniqueInfo();
 };
 
 DriveModule* driveModuleGenerator();

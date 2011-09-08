@@ -23,21 +23,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class GrappleModule : public CommonForModules
 {
     	public:     
-      		GrappleModule(TextureOb* _pTo_texOb, int _strength_add, int _radius_add, int _speed_add, int _maxNumItem_add);
+      		GrappleModule(TextureOb* _texOb, int _strength_add, int _radius_add, int _speed_add, int _maxNumItem_add);
       		~GrappleModule();
 
 		int getStrengthAdd()   const;
 		int getRadiusAdd()     const;
 		int getSpeedAdd()      const;
 		int getMaxNumItemAdd() const;
-
-      		void updateInfo();
       		
       	private: 
       	       	int strength_add;
        		int radius_add;
        		int speed_add;
        		int maxNumItem_add;
+       		
+       		void virtual addUniqueInfo();
 };
 
 

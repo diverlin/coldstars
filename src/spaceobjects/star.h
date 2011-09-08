@@ -21,45 +21,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define STAR_H
 
 
-class Star
+class Star : public CommonForPlanet
 {
 	public:
-    		int id;
-    
-    		TextureOb* pTo_texOb;
-    		StarSystem* starsystem;
-
-    		ObjMeshInstance* pTo_mesh; 
-    		GLuint texture;
-    		
     		float texture_offset1, texture_offset2; 
-    
-    		float angle_x;
-    		float angle_y;
-    		float angle_z;
-    		float d_angle_x;
-    		float d_angle_y;
-    		float d_angle_z;
-                 
-    		float pos_z;
-    		
-    		float scale;
-    
-    		// !!!!
-    		float rate;   
-		int w, h;
-    		int collision_radius; 
-    		// !!!!
-      
-
-
    
-    		Star(TextureOb* _pTo_texOb, ObjMeshInstance* _pTo_mesh, float _size);
+   		
+    		Star(TextureOb* _pTo_texOb, ObjMeshInstance* _mesh,  PlanetData _star_data);
     		~Star();
                 
-                Points* getPoints();
-                
-                void setStarSystem(StarSystem* _starsystem);
+                Color getColor() const;
+                float getBrightThreshold() const;
     		
     		void update_inSpace_inDynamic();
     		
@@ -70,9 +42,8 @@ class Star
     		void renderInfo();
                 
         private:
-                Points points;
-                
-                InfoTable info;
+        	Color color;
+
 }; 
 
 

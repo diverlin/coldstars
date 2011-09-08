@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "background.h"
 
-distantStarBgEffect :: distantStarBgEffect(TextureOb* _pTo_texOb, float _center_x, float _center_y, float _particleSize)
+DistantStarBgEffect :: DistantStarBgEffect(TextureOb* _pTo_texOb, float _center_x, float _center_y, float _particleSize)
 {
     pTo_texOb = _pTo_texOb; 
     texture = (*pTo_texOb).texture;
@@ -30,7 +30,7 @@ distantStarBgEffect :: distantStarBgEffect(TextureOb* _pTo_texOb, float _center_
 }
 
 
-void distantStarBgEffect :: render(float vx, float vy)
+void DistantStarBgEffect :: render(float vx, float vy)
 {   //glLoadIdentity(); 
     glPointSize(particleSize);
     //glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
@@ -44,7 +44,7 @@ void distantStarBgEffect :: render(float vx, float vy)
 
 
 
-distantNebulaBgEffect :: distantNebulaBgEffect(TextureOb* _pTo_texOb, float _center_x, float _center_y)
+DistantNebulaBgEffect :: DistantNebulaBgEffect(TextureOb* _pTo_texOb, float _center_x, float _center_y)
 {
     pTo_texOb = _pTo_texOb;
     texture = (*pTo_texOb).texture;
@@ -80,13 +80,13 @@ distantNebulaBgEffect :: distantNebulaBgEffect(TextureOb* _pTo_texOb, float _cen
 }
    
    
-void distantNebulaBgEffect :: update()
+void DistantNebulaBgEffect :: update()
 {
      angleInDegree += d_angleInDegree;  
 }        
 
 
-void distantNebulaBgEffect :: updateWHRenderConstants()
+void DistantNebulaBgEffect :: updateWHRenderConstants()
 {
     // constants needs for render
     // decreases the math during game loop
@@ -97,7 +97,7 @@ void distantNebulaBgEffect :: updateWHRenderConstants()
 }
 
 
-void distantNebulaBgEffect :: render(float vx, float vy)
+void DistantNebulaBgEffect :: render(float vx, float vy)
 { 
    glBindTexture(GL_TEXTURE_2D, texture);
    drawDynamic(center_x - vx*distance_rate, center_y - vy*distance_rate, angleInDegree, minus_half_w, minus_half_h, plus_half_w, plus_half_h, pos_z);

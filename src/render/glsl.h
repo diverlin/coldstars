@@ -91,7 +91,9 @@ class ShockWaveEffect
       		
       		void update();
 };
-typedef std::vector<ShockWaveEffect*> VEC_pShockWaveEffect_type;            
+typedef std::vector<ShockWaveEffect*> VEC_pShockWaveEffect_type;  
+
+void createShockWave(StarSystem* _starsystem, vec2f _center_pos, int obSize);          
    
 // http://www.flashbang.se/archives/48
 // HDR http://prideout.net/archive/bloom/  

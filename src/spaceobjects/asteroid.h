@@ -25,12 +25,7 @@ class Asteroid : public CommonForPlanet
 	public:
 		Asteroid(TextureOb* _pTo_texOb,
 		         ObjMeshInstance* _mesh,
-		         float _size, 
-		         vec2f _orbit_center, 
-		         int _radius_A, 
-		         int _radius_B, 
-		         float _orbit_phi_inD, 
-		         float _speed);
+		         PlanetData _planet_data);
 		     
         	~Asteroid();
 
@@ -58,8 +53,6 @@ class Asteroid : public CommonForPlanet
       		int armor;
       		int mass;
         	
-		InfoTable info;
-		
 		void death_TRUE();
         	void death_FALSE();
 }; 

@@ -95,37 +95,6 @@ int returnObjectSize(int w, int h)
 }
 
 
-//bool collisionBetweenCenters2(float center_1x, float center_1y, float center_2x, float center_2y, float collision_radius)
-//{
-    //if(abs(center_1x - center_2x) > collision_radius)
-       //return false;
-    //if(abs(center_1y - center_2y) > collision_radius)
-       //return false;
-
-    //return true;
-//}
-
-
-bool collisionBetweenCenters(Points* points1, Points* points2, float collision_radius)
-{
-    if(abs(points1->getCenter().x - points2->getCenter().x) > collision_radius)
-       return false;
-    if(abs(points1->getCenter().y - points2->getCenter().y) > collision_radius)
-       return false;
-
-    return true;
-}
-
-bool collisionBetweenCenters(Points* points1, float center2_x, float center2_y, float collision_radius)
-{
-    if(abs(points1->getCenter().x - center2_x) > collision_radius)
-       return false;
-    if(abs(points1->getCenter().y - center2_y) > collision_radius)
-       return false;
-
-    return true;
-}
-
 
 float distBetweenCenters(Points* points1, Points* points2)
 {
@@ -222,44 +191,6 @@ void get_dX_dY_angleInD_ToPoint(float x1, float y1, float x2, float y2, float st
     (*pTo_dy) = yn * step;
     (*pTo_angle_inD) = atan2(ly, lx) * RADIAN_TO_DEGREE_RATE;
 
-}
-
-
-
-
-bool isObjectVisible(Points* points, float startViewCoord_x, float startViewCoord_y)    
-{
-        float ob_centerx = points->getCenter().x;
-        float ob_centery = points->getCenter().y;
-        
-        int ob_w = points->getWidth();
-        int ob_h = points->getHeight();
-        
-        if (ob_centerx < (g_SCROLL_COORD_X - ob_w))
-                return false;
-        if (ob_centerx > (startViewCoord_x + ob_w))
-                return false;
-        if (ob_centery < (g_SCROLL_COORD_Y - ob_h))
-                return false;
-        if (ob_centery > (startViewCoord_y + ob_h))
-                return false;
-
-        return true;
-}
-
-
-bool isObjectVisible(float ob_centerx, float ob_centery, int ob_w, int ob_h, float startViewCoord_x, float startViewCoord_y)    
-{
-    if (ob_centerx < (g_SCROLL_COORD_X - ob_w))
-       return false;
-    if (ob_centerx > (startViewCoord_x + ob_w))
-       return false;
-    if (ob_centery < (g_SCROLL_COORD_Y - ob_h))
-       return false;
-    if (ob_centery > (startViewCoord_y + ob_h))
-       return false;
-
-    return true;
 }
 
 

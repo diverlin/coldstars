@@ -27,43 +27,30 @@ CommonForPlanet :: ~CommonForPlanet()
 {}
 
 
-void CommonForPlanet :: CommonForPlanet_init(TextureOb*       _texOb, 
+void CommonForPlanet :: CommonForPlanet_init(TextureOb* _texOb, 
     	   				     ObjMeshInstance* _mesh, 
-    	   				     float _size, 
-    	   			             vec2f _orbit_center, 
-    	   			             int _radius_A,
-    	   				     int _radius_B, 
-    	   				     float _orbit_phi_inD,
-    	   			             float _speed)
+					     PlanetData _planet_data)
 {
+	planet_data = _planet_data;
+
         id = g_ENTITY_ID_GENERATOR.returnNextId();
               
-	starsystem = NULL;
         texOb = _texOb;
         mesh  = _mesh; 
       
-      	orbit_center_x = _orbit_center.x;
-      	orbit_center_y = _orbit_center.y;
-      	radius_A       = _radius_A;
-      	radius_B       = _radius_B;
-      	orbit_phi_inD  = _orbit_phi_inD;
-      	speed          = _speed;    
+        angle.x        = randIntInRange(10, 40);
+        angle.y        = randIntInRange(10, 40);
+      	angle.z        = 0.0;
+      	
+      	d_angle.x      = 0.0;
+      	d_angle.y      = 0.0;
+      	d_angle.z      = randIntInRange(10, 100)*0.01;      
+
      
-      	pos_z          = -500.0f;
-
-        angle_x        = randIntInRange(10, 40);
-        angle_y        = randIntInRange(10, 40);
-      	angle_z        = 0.0;
-      	d_angle_z      = randIntInRange(10, 100)*0.01;
-      
-
-        orbit_it       = 0;
-     	scale = _size;
-      
         // !!!!
         float rate = 5.4;                                            
-        w = rate * scale;
-        h = rate * scale;
+        w = rate * planet_data.scale;
+        h = rate * planet_data.scale;
         collision_radius = (w + h)/2; 
         // !!!!
                 
@@ -72,51 +59,65 @@ void CommonForPlanet :: CommonForPlanet_init(TextureOb*       _texOb,
 
 	points.initCenterPoint();
 	points.addCenterPoint();
+	
+	points.setWidthHeight(w, h);  
 	//////
       
+      	
        	detailedEllipceOrbitFormation();
        	
         updatePosition(); 
+        
+        
+                
+        starsystem = NULL;
 }
 
+
+void CommonForPlanet :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
 
 int CommonForPlanet :: getId()      const { return id; }   
 int CommonForPlanet :: getType()    const { return type_id; }
 int CommonForPlanet :: getSubType() const { return subtype_id; }
 
-
 Points* CommonForPlanet :: getPoints() { return &points; }
-                
-void CommonForPlanet :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
-StarSystem* CommonForPlanet :: getStarSystem() { return starsystem; }
+           
+int CommonForPlanet :: getCollisionRadius() const { return collision_radius; }
+StarSystem* CommonForPlanet :: getStarSystem() { return starsystem; }           
+                   
+vec2f CommonForPlanet :: getNextTurnPosition() const { return vec2f(orbit_vector_x[orbit_it+TURN_TIME], orbit_vector_y[orbit_it+TURN_TIME]); }
+                                                                    
+
+
                 
 
 void CommonForPlanet :: detailedEllipceOrbitFormation()
 {   
-     float d_angleInRad = speed / 57.295779;
-     float orbitPhiInRad = orbit_phi_inD * PI/180;
-     for(float angleInRad = 0; angleInRad < 2*PI; angleInRad += d_angleInRad) 
-     { 
-         float new_coord_x = orbit_center_x + radius_A * cos(angleInRad) * cos(orbitPhiInRad) - radius_B * sin(angleInRad) * sin(orbitPhiInRad);
-         float new_coord_y = orbit_center_y + radius_A * cos(angleInRad) * sin(orbitPhiInRad) + radius_B * sin(angleInRad) * cos(orbitPhiInRad);
-         orbit_vector_x.push_back(new_coord_x);
-         orbit_vector_y.push_back(new_coord_y);
-
-         orbit_len = orbit_vector_x.size();
-         orbit_it = randIntInRange(1, orbit_len);
-     }
+     	float d_angleInRad  = planet_data.speed / 57.295779;
+     	float orbitPhiInRad = planet_data.orbit_phi_inD * PI/180;
+     	
+     	for(float angleInRad = 0; angleInRad < 2*PI; angleInRad += d_angleInRad) 
+     	{ 
+         	float new_coord_x = planet_data.orbit_center.x + planet_data.radius_A * cos(angleInRad) * cos(orbitPhiInRad) - planet_data.radius_B * sin(angleInRad) * sin(orbitPhiInRad);
+         	float new_coord_y = planet_data.orbit_center.y + planet_data.radius_A * cos(angleInRad) * sin(orbitPhiInRad) + planet_data.radius_B * sin(angleInRad) * cos(orbitPhiInRad);
+         	orbit_vector_x.push_back(new_coord_x);
+         	orbit_vector_y.push_back(new_coord_y);
+     	}
+        orbit_len = orbit_vector_x.size();
+        orbit_it = randIntInRange(1, orbit_len);
 }    
 
 
 void CommonForPlanet :: updatePosition()
 {   
-     if (orbit_it < orbit_len)
-     { 
-        points.setCenter(orbit_vector_x[orbit_it], orbit_vector_y[orbit_it]);
-        orbit_it++;
-     }
-     else
-        orbit_it = 0;
+     	if (orbit_it < orbit_len)
+     	{ 
+        	points.setCenter(orbit_vector_x[orbit_it], orbit_vector_y[orbit_it]);
+        	center_pos.set(orbit_vector_x[orbit_it], orbit_vector_y[orbit_it], -500.0f);
+        	orbit_it++;
+     	}
+     	else
+        	orbit_it = 0;
 }    
 
 
@@ -124,71 +125,52 @@ void CommonForPlanet :: updatePosition()
 
 void CommonForPlanet :: render_NEW()
 {
-     glUseProgram(g_LIGHT_PROGRAM);
-     //printProgramInfoLog(g_LIGHT_PROGRAM);
+	angle.x += d_angle.x;  
+     	angle.y += d_angle.y;  
+     	angle.z += d_angle.z; 
+     	
+     	glUseProgram(g_LIGHT_PROGRAM);
+     	//printProgramInfoLog(g_LIGHT_PROGRAM);
 
-     //if (glGetUniformLocation(g_LIGHT_PROGRAM, "lightPos") == -1)
-         //printf("shader lightPos fail\n"); 
-     //if (glGetUniformLocation(g_LIGHT_PROGRAM, "eyePos") == -1)
-         //printf("shader eyePos fail\n"); 
-     //if (glGetUniformLocation(g_LIGHT_PROGRAM, "Texture_0") == -1)
-         //printf("shader Texture_0 fail\n"); 
+     	//if (glGetUniformLocation(g_LIGHT_PROGRAM, "lightPos") == -1)
+         	//printf("shader lightPos fail\n"); 
+     	//if (glGetUniformLocation(g_LIGHT_PROGRAM, "eyePos") == -1)
+         	//printf("shader eyePos fail\n"); 
+     	//if (glGetUniformLocation(g_LIGHT_PROGRAM, "Texture_0") == -1)
+         	//printf("shader Texture_0 fail\n"); 
 
-     glUniform4f(glGetUniformLocation(g_LIGHT_PROGRAM, "lightPos"), -g_SCROLL_COORD_X, -g_SCROLL_COORD_Y, -200.0, 0.0);
-     glUniform4f(glGetUniformLocation(g_LIGHT_PROGRAM, "eyePos"), -g_SCROLL_COORD_X, -g_SCROLL_COORD_Y, -200.0, 0.0);
+     	glUniform4f(glGetUniformLocation(g_LIGHT_PROGRAM, "lightPos"), -g_SCROLL_COORD_X, -g_SCROLL_COORD_Y, -200.0, 0.0);
+     	glUniform4f(glGetUniformLocation(g_LIGHT_PROGRAM, "eyePos"), -g_SCROLL_COORD_X, -g_SCROLL_COORD_Y, -200.0, 0.0);
 
-     glActiveTexture(GL_TEXTURE0);
-     glBindTexture(GL_TEXTURE_2D, texOb->texture);
-     glUniform1i(glGetUniformLocation(g_LIGHT_PROGRAM, "Texture_0"), 0);
+     	glActiveTexture(GL_TEXTURE0);
+     	glBindTexture(GL_TEXTURE_2D, texOb->texture);
+     	glUniform1i(glGetUniformLocation(g_LIGHT_PROGRAM, "Texture_0"), 0);
       
-     glPushMatrix();
-       glTranslatef(points.getCenter().x, points.getCenter().y, pos_z);
-       glScalef(scale, scale, scale); 
-       glRotatef(-angle_x, 1.0, 0.0, 0.0); 
-       glRotatef(-angle_y, 0.0, 1.0, 0.0); 
-       glRotatef(-angle_z, 0.0, 0.0, 1.0); 
+	renderMesh(mesh->glList, center_pos, angle, planet_data.scale);
 
-       glCallList(mesh->glList);
-       //g_model.render(); 
-       angle_z += 0.6; 
-     glPopMatrix();
+     	//// render atmosphere
+     	//glEnable(GL_BLEND);
+     	//glActiveTexture(GL_TEXTURE0);                                
+     	//glBindTexture(GL_TEXTURE_2D, pTo_atmosphereTexOb->texture);
+     	//glUniform1i(glGetUniformLocation(g_LIGHT_PROGRAM, "Texture_0"), 0);
 
-     //// render atmosphere
-     //glEnable(GL_BLEND);
-     //glActiveTexture(GL_TEXTURE0);                                
-     //glBindTexture(GL_TEXTURE_2D, pTo_atmosphereTexOb->texture);
-     //glUniform1i(glGetUniformLocation(g_LIGHT_PROGRAM, "Texture_0"), 0);
+	//renderMesh(mesh->glList, center_pos, angle, planet_data.scale*1.05);
+	
+     	//glDisable(GL_BLEND);
+     	//// render atmosphere
 
-     //glPushMatrix();
-       //glTranslatef(points.center_x, points.center_y, pos_z);
-       //glScalef(scale*1.05, scale*1.05, scale*1.05);
-       //glRotatef(angle_x, 1.0, 0.0, 0.0); 
-       //glRotatef(angle_y, 0.0, 1.0, 0.0); 
-       //glRotatef(angle_z, 0.0, 0.0, 1.0); 
-
-       //glCallList(pTo_mesh->glList);
-       ////g_model.render(); 
-     //glPopMatrix();
-     //glDisable(GL_BLEND);
-     //// render atmosphere
-
-     glUseProgram(0);
-     glActiveTexture(GL_TEXTURE0);
+     	glUseProgram(0);
+     	glActiveTexture(GL_TEXTURE0);
 }
 
 void CommonForPlanet :: render_OLD()
-{   
-     glPushMatrix();
-       glBindTexture(GL_TEXTURE_2D, texOb->texture);   
-       glTranslatef(points.getCenter().x, points.getCenter().y, pos_z);
-       glScalef(scale, scale, scale); 
-       glRotatef(angle_x, 1.0, 0.0, 0.0); 
-       glRotatef(angle_y, 0.0, 1.0, 0.0); 
-       glRotatef(angle_z, 0.0, 0.0, 1.0); 
-
-       glCallList(mesh->glList);
-       angle_z += 0.6; 
-     glPopMatrix();
+{   	
+	angle.x += d_angle.x;  
+     	angle.y += d_angle.y;  
+     	angle.z += d_angle.z; 
+     	
+	glBindTexture(GL_TEXTURE_2D, texOb->texture);
+	renderMesh(mesh->glList, center_pos, angle, planet_data.scale);
 }
 
 

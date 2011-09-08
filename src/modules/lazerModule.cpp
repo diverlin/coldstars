@@ -19,9 +19,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "lazerModule.h"
 
-LazerModule :: LazerModule(TextureOb* _pTo_texOb, int _damage_add, int _radius_add)
+LazerModule :: LazerModule(TextureOb* _texOb, int _damage_add, int _radius_add)
 {
-     	CommonForModules_init(LAZER_ID, _pTo_texOb);
+     	CommonForModules_init(LAZER_ID, _texOb);
 
      	damage_add = _damage_add;
      	radius_add = _radius_add;
@@ -36,10 +36,8 @@ int LazerModule :: getDamageAdd() const { return damage_add; }
 int LazerModule :: getRadiusAdd() const { return radius_add; }
 
 
-void LazerModule :: updateInfo()
+void LazerModule :: addUniqueInfo()
 {
-	info.clear();
-
     	info.addTitleStr("lazer module");
     	if (damage_add != 0) 
     	{
@@ -49,16 +47,15 @@ void LazerModule :: updateInfo()
     	{ 
     		info.addNameStr("radius_add:");   info.addValueStr(int2str(radius_add));
     	}
-    	info.addNameStr("mass:");         info.addValueStr(int2str(mass));
 }
 
 
 LazerModule* lazerModuleGenerator()
 {
-    	TextureOb* pTo_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
-    	int _damage_add = randIntInRange(LAZER_MODULE_DAMAGE_MIN, LAZER_MODULE_DAMAGE_MAX);
-    	int _radius_add = randIntInRange(LAZER_MODULE_RADIUS_MIN, LAZER_MODULE_RADIUS_MAX);
+    	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
+    	int damage_add = randIntInRange(LAZER_MODULE_DAMAGE_MIN, LAZER_MODULE_DAMAGE_MAX);
+    	int radius_add = randIntInRange(LAZER_MODULE_RADIUS_MIN, LAZER_MODULE_RADIUS_MAX);
 
-    	LazerModule* _lazer_module = new LazerModule(pTo_texOb, _damage_add, _radius_add);
-    	return _lazer_module;
+    	LazerModule* lazer_module = new LazerModule(texOb, damage_add, radius_add);
+    	return lazer_module;
 }

@@ -24,17 +24,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class EnergizerModule : public CommonForModules
 {
    	public:   
-      		EnergizerModule(TextureOb* pTo_texOb, int _energy_max_add, int _restoration_add);
+      		EnergizerModule(TextureOb* _texOb, int _energy_max_add, int _restoration_add);
       		~EnergizerModule();
 
 		int getEnergyMaxAdd()   const;
 		int getRestorationAdd() const;
-
-      		void updateInfo();
       		
       	private:
       	      	int energy_max_add;
       		int restoration_add;
+      		
+      		void virtual addUniqueInfo();
 };
 
 EnergizerModule* energizerModuleGenerator();

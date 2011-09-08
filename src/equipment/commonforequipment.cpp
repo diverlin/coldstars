@@ -95,6 +95,34 @@ void CommonForEquipment :: repair()
     	}
 }
 
+
+
+void CommonForEquipment :: updateInfo()
+{
+	info.clear();
+
+	addUniqueInfo();
+    	addCommonInfo();
+}
+
+void CommonForEquipment :: addUniqueInfo() { /* virtual */ }
+ 		
+void CommonForEquipment :: addCommonInfo()
+{
+    	info.addNameStr("modules:");   info.addValueStr( int2str(common_data.modules_num_max) );
+    	info.addNameStr("race:");      info.addValueStr( returnRaceStringByRaceId(race_id) );
+    	info.addNameStr("condition:"); info.addValueStr( int2str(condition) + "/" + int2str(common_data.condition_max) );
+    	info.addNameStr("mass:");      info.addValueStr( int2str(common_data.mass) );
+    	info.addNameStr("price:");     info.addValueStr( int2str(price) );
+}
+
+void CommonForEquipment :: renderInfo(Rect slot_rect, float offset_x, float offset_y)
+{  
+     	drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.center_x, slot_rect.center_y, offset_x, offset_y);
+}
+
+
+
 void CommonForEquipment :: render(Rect slot_rect)
 {
      	(this->*pToFunc_render)(slot_rect);
@@ -139,30 +167,3 @@ void CommonForEquipment :: _renderFrames(Rect slot_rect)
         	drawTexturedRect(texOb_modules_pList[mi]->texture, module_rect, -1);
     	}
 }      
-
-
-
-void CommonForEquipment :: renderInfo(Rect slot_rect, float offset_x, float offset_y)
-{  
-     	drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.center_x, slot_rect.center_y, offset_x, offset_y);
-}
-
-
-void CommonForEquipment :: updateInfo()
-{
-	info.clear();
-
-	addUniqueInfo();
-    	addCommonInfo();
-}
-
-void CommonForEquipment :: addUniqueInfo() { /* virtual */ }
- 		
-void CommonForEquipment :: addCommonInfo()
-{
-    	info.addNameStr("modules:");   info.addValueStr( int2str(common_data.modules_num_max) );
-    	info.addNameStr("race:");      info.addValueStr( returnRaceStringByRaceId(race_id) );
-    	info.addNameStr("condition:"); info.addValueStr( int2str(condition) + "/" + int2str(common_data.condition_max) );
-    	info.addNameStr("mass:");      info.addValueStr( int2str(common_data.mass) );
-    	info.addNameStr("price:");     info.addValueStr( int2str(price) );
-}

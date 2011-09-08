@@ -139,7 +139,7 @@ void CommonForSpaceItems :: death_TRUE()
 
      	if (is_explosed == false)
      	{   
-        	starsystem->createExplosion(points.getCenter(), size);
+        	createExplosion(starsystem, points.getCenter(), size);
         	is_explosed = true;
      	}
 }
