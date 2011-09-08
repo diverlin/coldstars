@@ -4,7 +4,7 @@
 class vec2f
 {
         public:
-                float x;
+                float x; 
                 float y;
                 
                 vec2f();
@@ -19,6 +19,11 @@ class vec3f
                 float x;
                 float y;
                 float z;
+                
+                vec3f();
+                vec3f(float _x, float _y, float _z);
+                
+                void set(float _x, float _y, float _z);
 };
 
 

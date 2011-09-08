@@ -27,16 +27,14 @@ class Navigator
       		Navigator(Ship* _pTo_ship);
       		~Navigator();
       
-      		void setStaticTargetCoords(float _target_pos_x, float _target_pos_y);
+      		void setStaticTargetCoords(vec2f _target_pos);
       
       		void setTargetPlanet(Planet* _target_planet); 
       		void setTargetShip(Ship* _target_ship);    
       		void setTargetStarSystem(StarSystem* _target_starsystem);
       
                 Planet* getTargetPlanet() const;
-                
-                float getTargetPosX() const;
-                float getTargetPosY() const;
+                vec2f getTargetPos() const;
                 
       		void removeTargetPlanet();
       		void removeTargetShip(); 
@@ -54,8 +52,7 @@ class Navigator
 		Ship*       target_ship;
 		StarSystem* target_starsystem;
 		
-		float target_pos_x;
-		float target_pos_y;
+		vec2f target_pos;
 	
 		float* pTo_target_pos_x;
 		float* pTo_target_pos_y;

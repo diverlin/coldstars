@@ -19,9 +19,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "energizerModule.h"
 
-EnergizerModule :: EnergizerModule(TextureOb* pTo_texOb, int _energy_max_add, int _restoration_add)
+EnergizerModule :: EnergizerModule(TextureOb* _texOb, int _energy_max_add, int _restoration_add)
 {
-     	CommonForModules_init(ENERGIZER_ID, pTo_texOb);
+     	CommonForModules_init(ENERGIZER_ID, _texOb);
 
      	energy_max_add  = _energy_max_add;
      	restoration_add = _restoration_add;
@@ -31,10 +31,9 @@ EnergizerModule :: EnergizerModule(TextureOb* pTo_texOb, int _energy_max_add, in
 int EnergizerModule :: getEnergyMaxAdd()   const { return energy_max_add; }
 int EnergizerModule :: getRestorationAdd() const { return restoration_add; }
 		
-void EnergizerModule :: updateInfo()
+		
+void EnergizerModule :: addUniqueInfo()
 {
-	info.clear();
-
     	info.addTitleStr("energizer module");
     	if (energy_max_add != 0)
     	{ 
@@ -44,19 +43,15 @@ void EnergizerModule :: updateInfo()
     	{
     		info.addNameStr("restoration_add:"); info.addValueStr( int2str(restoration_add) );
     	} 
-    	info.addNameStr("mass:");         info.addValueStr(int2str(mass));
-
 }
 
 
 EnergizerModule* energizerModuleGenerator()
 {
-     	TextureOb* _texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
-     	int _energy_max_add  = randIntInRange(ENERGIZER_MODULE_ENERGY_MIN, ENERGIZER_MODULE_ENERGY_MAX);
-     	int _restoration_add = randIntInRange(ENERGIZER_MODULE_RESTORATION_MIN, ENERGIZER_MODULE_RESTORATION_MAX);
+     	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);      	
+     	int energy_max_add  = randIntInRange(ENERGIZER_MODULE_ENERGY_MIN, ENERGIZER_MODULE_ENERGY_MAX);
+     	int restoration_add = randIntInRange(ENERGIZER_MODULE_RESTORATION_MIN, ENERGIZER_MODULE_RESTORATION_MAX);
      	
-     	EnergizerModule* _energizer_module = new EnergizerModule(_texOb, _energy_max_add, _restoration_add);
-
-
-	return _energizer_module; 
+     	EnergizerModule* energizer_module = new EnergizerModule(texOb, energy_max_add, restoration_add);
+	return energizer_module; 
 }

@@ -24,15 +24,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class BakModule : public CommonForModules
 {
    	public:
-     		BakModule(TextureOb* _pTo_texOb, int _fuel_max_add);
+     		BakModule(TextureOb* _texOb, int _fuel_max_add);
       		~BakModule();
  
  		int getFuelMaxAdd() const;
- 		
-      		void updateInfo();
-      		
-      	private:
+
+     	private:
       		int fuel_max_add;
+      		
+      		void virtual addUniqueInfo();
 };
 
 

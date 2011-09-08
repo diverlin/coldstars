@@ -21,24 +21,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define EFFECTS_H
 
 
-struct ParticleSystemData 
-{
-	unsigned int particles_num;
-
-	float particleSize_start;
-	float particleSize_end;
-
-	float velocity_start;
-	float velocity_end;
-
-	float alpha_start;
-	float alpha_end;
-
-	float d_particleSize;
-	float d_velocity;
-	float d_alpha;
-};
-
 
 class ParticleForDamageEffect
 {
@@ -113,89 +95,6 @@ class DamageEffect
        void update();
        void render();
 };
-
-
-class ParticleForExplosionEffect
-{ 
-    	public:
-        	bool is_alive;
-        	float size;        	       
-        
-      		ParticleForExplosionEffect(vec2f, ParticleSystemData, int);      				 
-      		~ParticleForExplosionEffect();
-
-      		void update();
-      		void render();
-      		
-      	private:
-      		int curnum;        
-        	float center_x_start;
-        	float center_y_start;   
-        	float center_x;
-        	float center_y;  
-   
-        	float alpha_start;
-        	float alpha_end;
-        	float d_alpha;
-        	float alpha;
-   
-        	float size_start;
-        	float d_size;
- 
-        	float velocity_start;
-        	float d_velocity; 
-
-        	float velocity_x;
-        	float velocity_y;  
-        	
-        	void fastCalcVelocityVector();
-      		void accurateCalcVelocityVector();
-      	
-};
-
-
-
-class ExplosionEffect
-{ 
-    	public:
-    	       	bool is_alive;    	       	        
-    	       	        
-       		ExplosionEffect(TextureOb*, vec2f, ParticleSystemData);       		       
-       		~ExplosionEffect();
-
-		void setStarSystem(StarSystem* _starsystem);
-       		void update();
-       		void render();
-       		
-       	private:
-          	bool alreadyInRemoveQueue;
-   
-
-          	std::vector<ParticleForExplosionEffect*> particles_pList;  
-          	
-       	        TextureOb* pTo_texOb;
-          	StarSystem* starsystem;
-          	
-          	GLuint texture;
-          	int num_particles;
-          	         	          	
-       	        float center_x;
-          	float center_y;
-          	
-          	float pSize_start;
-       	
-};
-
-
-
-
-
-
-
-
-
-
-
 
 
 

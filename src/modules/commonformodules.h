@@ -23,35 +23,44 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class CommonForModules
 {
-    	public:
-    	    	int getId() const;
-    		int getType() const;
-    		int getSubType() const;
-
-    				
-    		InfoTable info;  // make protected
-    				     		
-           	Rect rect;
-      		int mass;   
+    	public:    				
+          	Rect rect;
     
       		CommonForModules();
-      		void CommonForModules_init(int _subtype_id, TextureOb* _pTo_texOb);
+      		void CommonForModules_init(int _subtype_id, TextureOb* _texOb);
       		~CommonForModules();
       		
+      		// accessors
+      		unsigned int getId()      const;
+    		unsigned int getType()    const;
+    		unsigned int getSubType() const;
+    		
+    		unsigned int getMass() const;
+     		int mass;   
+    		
       		TextureOb* getTexOb() const;
 
+		// other methods	
+		void updateInfo();
+			
       		void render(Rect slot_rect);
-           		void (CommonForModules::*pToFunc_render)(Rect slot_rect); 
-           		void _renderFrame(Rect slot_rect);
-           		void _renderFrames(Rect slot_rect);
-
       		void renderInfo(Rect slot_rect); 
       		
       	private:
       	      	int id, type_id, subtype_id;
       	      		
-     		TextureOb* pTo_texOb;
+     		TextureOb* texOb;
      		int w, h;  
+    		
+     		void (CommonForModules::*pToFunc_render)(Rect slot_rect); 
+           	void _renderFrame(Rect slot_rect);
+           	void _renderFrames(Rect slot_rect);
+           	
+	protected:
+     		InfoTable info;  // make protected	
+     		
+     		void addCommonInfo();
+ 		void virtual addUniqueInfo();
 };
 
 #endif

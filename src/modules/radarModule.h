@@ -28,10 +28,10 @@ class RadarModule : public CommonForModules
       		
       		int getRadiusAdd() const;
 
-      		void updateInfo();
-      		
       	private:
       		int radius_add;
+      		
+      		void virtual addUniqueInfo();
 };
 
 RadarModule* radarModuleGenerator();

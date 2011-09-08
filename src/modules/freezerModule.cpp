@@ -19,30 +19,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "freezerModule.h"
 
-FreezerModule :: FreezerModule(TextureOb* _pTo_texOb, int _freeze_add)
+FreezerModule :: FreezerModule(TextureOb* _texOb, int _freeze_add)
 {
-     	CommonForModules_init(FREEZER_ID, _pTo_texOb);
+     	CommonForModules_init(FREEZER_ID, _texOb);
 
      	freeze_add = _freeze_add;
 }
 
+
 int FreezerModule :: getFreezeAdd() const { return freeze_add; }
 		
 		
-void FreezerModule :: updateInfo()
+void FreezerModule :: addUniqueInfo()
 {
-	info.clear();
-
     	info.addTitleStr("freezer module");
     	info.addNameStr("freeze_add:");     info.addValueStr( int2str(freeze_add) );
-    	info.addNameStr("mass:");           info.addValueStr( int2str(mass) );
 }
+
 
 FreezerModule* freezerModuleGenerator()
 {
-    TextureOb* pTo_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
-    int _freeze_add = randIntInRange(FREEZER_MODULE_FREEZE_MIN, FREEZER_MODULE_FREEZE_MAX);
+    TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
+    int freeze_add = randIntInRange(FREEZER_MODULE_FREEZE_MIN, FREEZER_MODULE_FREEZE_MAX);
 
-    FreezerModule* _freezer_module = new FreezerModule(pTo_texOb, _freeze_add);
-    return _freezer_module;
+    FreezerModule* freezer_module = new FreezerModule(texOb, freeze_add);
+    return freezer_module;
 }

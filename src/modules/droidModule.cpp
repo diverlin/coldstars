@@ -19,9 +19,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "droidModule.h"
 
-DroidModule :: DroidModule(TextureOb* _pTo_texOb, int _repair_add)
+DroidModule :: DroidModule(TextureOb* _texOb, int _repair_add)
 {
-     	CommonForModules_init(DROID_ID, _pTo_texOb);
+     	CommonForModules_init(DROID_ID, _texOb);
 
      	repair_add = _repair_add;
 }
@@ -31,21 +31,18 @@ DroidModule :: ~DroidModule()
 
 int DroidModule :: getRepairAdd() const { return repair_add; }
 		
-void DroidModule :: updateInfo()
+		
+void DroidModule :: addUniqueInfo()
 {
-	info.clear();
-
     	info.addTitleStr("droid module");
     	info.addNameStr("repair_add:");   info.addValueStr( int2str(repair_add) );
-    	info.addNameStr("mass:");         info.addValueStr( int2str(mass) );
 }
 
 DroidModule* droidModuleGenerator()
 {
-    	TextureOb* pTo_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
-    	int _repair_add = randIntInRange(DROID_MODULE_REPAIR_MIN, DROID_MODULE_REPAIR_MAX);
+    	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);    	 
+    	int repair_add = randIntInRange(DROID_MODULE_REPAIR_MIN, DROID_MODULE_REPAIR_MAX);
 
-    	DroidModule* pTo_droid_module = new DroidModule(pTo_texOb, _repair_add);
-
-    	return pTo_droid_module;
+    	DroidModule* droid_module = new DroidModule(texOb, repair_add);
+    	return droid_module;
 }

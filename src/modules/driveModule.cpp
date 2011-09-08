@@ -34,10 +34,8 @@ int DriveModule :: getSpeedAdd() const { return speed_add; }
 int DriveModule :: getHyperAdd() const { return hyper_add; }
 		
 		
-void DriveModule :: updateInfo()
-{
-	info.clear();
-
+void DriveModule :: addUniqueInfo()
+{ 
     	info.addTitleStr("drive module"); 
     	if (speed_add != 0)
     	{ 
@@ -48,19 +46,17 @@ void DriveModule :: updateInfo()
     	{ 
     		info.addNameStr("hyper_add:");       info.addValueStr( int2str(hyper_add) );
     	}
-    	info.addNameStr("mass:");         info.addValueStr(int2str(mass));
 }
 
 
 DriveModule* driveModuleGenerator()
 {
-    	TextureOb* _texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
-    	int _speed_add = randIntInRange(DRIVE_MODULE_SPEED_MIN, DRIVE_MODULE_SPEED_MAX);
-    	int _hyper_add = randIntInRange(DRIVE_MODULE_HYPER_MIN, DRIVE_MODULE_HYPER_MAX);
+    	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);     	
+    	int speed_add = randIntInRange(DRIVE_MODULE_SPEED_MIN, DRIVE_MODULE_SPEED_MAX);
+    	int hyper_add = randIntInRange(DRIVE_MODULE_HYPER_MIN, DRIVE_MODULE_HYPER_MAX);
 
-    	DriveModule* _drive_module = new DriveModule(_texOb, _speed_add, _hyper_add);
-
-    	return _drive_module;
+    	DriveModule* drive_module = new DriveModule(texOb, speed_add, hyper_add);
+    	return drive_module;
 }
 
 

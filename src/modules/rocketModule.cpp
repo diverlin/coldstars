@@ -19,9 +19,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "rocketModule.h"
 
-RocketModule :: RocketModule(TextureOb* _pTo_texOb, int _ammo_max_add, int _damage_add, int _radius_add)
+RocketModule :: RocketModule(TextureOb* _texOb, int _ammo_max_add, int _damage_add, int _radius_add)
 {
-     	CommonForModules_init(ROCKET_ID, _pTo_texOb);
+     	CommonForModules_init(ROCKET_ID, _texOb);
 
      	ammo_max_add = _ammo_max_add;
      	damage_add   = _damage_add;
@@ -37,12 +37,9 @@ int RocketModule :: getDamageAdd()  const { return damage_add; }
 int RocketModule :: getRadiusAdd()  const { return radius_add; }
 		
 
-void RocketModule :: updateInfo()
+void RocketModule :: addUniqueInfo()
 {
-	info.clear();
-
     	info.addTitleStr("rocket module"); 	
-
     	if (ammo_max_add != 0)
     	{
     		info.addNameStr("ammo_max_add:");   info.addValueStr(int2str(ammo_max_add));
@@ -55,18 +52,16 @@ void RocketModule :: updateInfo()
     	{
     		info.addNameStr("radius_add:");     info.addValueStr(int2str(radius_add));
     	} 
-    	info.addNameStr("mass:");           info.addValueStr(int2str(mass));
 }
 
 
 RocketModule* rocketModuleGenerator()
 {
-    	TextureOb* _texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
+    	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
+    	int ammo_max_add = randIntInRange(ROCKET_MODULE_AMMO_MIN, ROCKET_MODULE_AMMO_MAX);
+    	int damage_add = randIntInRange(ROCKET_MODULE_DAMAGE_MIN, ROCKET_MODULE_DAMAGE_MAX);
+    	int radius_add = randIntInRange(ROCKET_MODULE_RADIUS_MIN, ROCKET_MODULE_RADIUS_MAX);
 
-    	int _ammo_max_add = randIntInRange(ROCKET_MODULE_AMMO_MIN, ROCKET_MODULE_AMMO_MAX);
-    	int _damage_add = randIntInRange(ROCKET_MODULE_DAMAGE_MIN, ROCKET_MODULE_DAMAGE_MAX);
-    	int _radius_add = randIntInRange(ROCKET_MODULE_RADIUS_MIN, ROCKET_MODULE_RADIUS_MAX);
-
-    	RocketModule* _rocket_module = new RocketModule(_texOb, _ammo_max_add, _damage_add, _radius_add);
-    	return _rocket_module;
+    	RocketModule* rocket_module = new RocketModule(texOb, ammo_max_add, damage_add, radius_add);    	
+    	return rocket_module;
 }

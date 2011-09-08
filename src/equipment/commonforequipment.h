@@ -61,9 +61,6 @@ class CommonForEquipment
      	        TextureOb* itemTexOb;
      		int w, h;
      		
-     	        void addCommonInfo();
- 		void virtual addUniqueInfo();
- 		
  		void virtual updateOwnerPropetries();
  		
  		void (CommonForEquipment::*pToFunc_render)(Rect slot_rect);
@@ -82,10 +79,13 @@ class CommonForEquipment
      		bool in_SPACE;                 		// this flag is needed for grap function to check if the item was already collected or not
      		bool is_DAMAGED;
      		
-		InfoTable info;
-		
 		VEC_pTexOb_type texOb_modules_pList;      // needs for inserted modules drawing
-				
+
+		InfoTable info;
+						
+		void addCommonInfo();
+ 		void virtual addUniqueInfo();
+ 		
 		void CommonForEquipment_init(int _subtype_id, TextureOb* _pTo_itemTexOb, EquipmentCommonData _common_data);
       		void deterioration();     	
      		

@@ -38,10 +38,9 @@ Navigator :: ~Navigator()
 {}
       
       
-void Navigator :: setStaticTargetCoords(float _target_pos_x, float _target_pos_y)
+void Navigator :: setStaticTargetCoords(vec2f _target_pos)
 {
-    	target_pos_x = _target_pos_x;
-    	target_pos_y = _target_pos_y;
+    	target_pos = _target_pos;
     
     	removeTargetPlanet();
     	removeTargetShip(); 
@@ -92,9 +91,9 @@ void Navigator :: setTargetStarSystem(StarSystem* _target_starsystem)
 
 Planet* Navigator :: getTargetPlanet() const { return target_planet; }
 
-float Navigator :: getTargetPosX() const { return target_pos_x; }
-float Navigator :: getTargetPosY() const { return target_pos_y; }
-                
+
+vec2f Navigator :: getTargetPos() const { return target_pos; }
+                              
 
 void Navigator :: removeTargetPlanet()
 {
@@ -125,8 +124,8 @@ bool Navigator :: updateTargetCoords()
 {
     	if (ship->is_FOLLOWING_PLANET == true)
     	{
-        	target_pos_x = target_planet->orbit_vector_x[target_planet->orbit_it+TURN_TIME];   
-       	 	target_pos_y = target_planet->orbit_vector_y[target_planet->orbit_it+TURN_TIME];  
+        	target_pos.set(target_planet->getNextTurnPosition().x,    
+       	 		       target_planet->getNextTurnPosition().y);  
         	ship->calculateDetaledWayToPosition();
 
         	return true;

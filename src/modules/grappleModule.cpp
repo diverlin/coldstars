@@ -20,9 +20,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "grappleModule.h"
 
 
-GrappleModule :: GrappleModule(TextureOb* _pTo_texOb, int _strength_add, int _radius_add, int _speed_add, int _maxNumItem_add)
+GrappleModule :: GrappleModule(TextureOb* _texOb, int _strength_add, int _radius_add, int _speed_add, int _maxNumItem_add)
 {
-       CommonForModules_init(GRAPPLE_ID, _pTo_texOb);
+       CommonForModules_init(GRAPPLE_ID, _texOb);
 
        strength_add   = _strength_add;
        radius_add     = _radius_add;
@@ -40,10 +40,8 @@ int GrappleModule :: getSpeedAdd()      const { return speed_add; }
 int GrappleModule :: getMaxNumItemAdd() const { return maxNumItem_add; }
 		
 
-void GrappleModule :: updateInfo()
+void GrappleModule :: addUniqueInfo()
 {
-	info.clear();
-
     	info.addTitleStr("grapple module");
     	if (strength_add != 0)
     	{
@@ -61,20 +59,19 @@ void GrappleModule :: updateInfo()
     	{
     		info.addNameStr("maxNumItem_add:");  info.addValueStr( int2str(maxNumItem_add) ); 
     	}
-    	info.addNameStr("mass:");         info.addValueStr(int2str(mass));
 }
 
 
 GrappleModule* grappleModuleGenerator()
 {
-    	TextureOb* pTo_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
-    	int _strength_add   = randIntInRange(GRAPPLE_MODULE_STRENGTH_MIN, GRAPPLE_MODULE_STRENGTH_MAX);
-    	int _radius_add     = randIntInRange(GRAPPLE_MODULE_RADIUS_MIN, GRAPPLE_MODULE_RADIUS_MAX);
-    	int _speed_add      = randIntInRange(GRAPPLE_MODULE_SPEED_MIN, GRAPPLE_MODULE_SPEED_MAX);
-    	int _maxNumItem_add = randIntInRange(GRAPPLE_MODULE_MAXNUMITEM_MIN, GRAPPLE_MODULE_MAXNUMITEM_MAX);
+    	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
+    	int strength_add   = randIntInRange(GRAPPLE_MODULE_STRENGTH_MIN, GRAPPLE_MODULE_STRENGTH_MAX);
+    	int radius_add     = randIntInRange(GRAPPLE_MODULE_RADIUS_MIN, GRAPPLE_MODULE_RADIUS_MAX);
+    	int speed_add      = randIntInRange(GRAPPLE_MODULE_SPEED_MIN, GRAPPLE_MODULE_SPEED_MAX);
+    	int maxNumItem_add = randIntInRange(GRAPPLE_MODULE_MAXNUMITEM_MIN, GRAPPLE_MODULE_MAXNUMITEM_MAX);
     	
-    	GrappleModule* pTo_grapple_module = new GrappleModule(pTo_texOb, _strength_add, _radius_add, _speed_add, _maxNumItem_add);
-    	return pTo_grapple_module;
+    	GrappleModule* grapple_module = new GrappleModule(texOb, strength_add, radius_add, speed_add, maxNumItem_add);    	
+    	return grapple_module;
 }
 
 

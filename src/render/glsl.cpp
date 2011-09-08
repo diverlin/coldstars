@@ -339,3 +339,29 @@ void ShockWaveEffect :: update()
              
 // http://www.flashbang.se/archives/48
 // HDR http://prideout.net/archive/bloom/  
+
+
+
+
+
+
+void createShockWave(StarSystem* _starsystem, vec2f _center_pos, int obSize)
+{
+	if ( (obSize > 3) && (_starsystem->effect_SHOCKWAVE_pList.size() < 10) )
+	{
+		int w = g_VIEW_WIDTH;
+		int h = g_VIEW_HEIGHT;      
+        
+		float x = 10;
+		float y = 1.8;
+		float z = 0.13;
+		float time = 0.0; 
+		float dx = 0;
+		float dy = 0.02;
+		float dz = 0.0005;
+		float dtime = -(0.002 + 0.3 * obSize * 0.001);     // 10, 1.8, 0.13, 0.0,  0,  0.02, 0.0005, -0.004 
+        
+		ShockWaveEffect* pTo_shockWave = new ShockWaveEffect(_center_pos, x, y, z, time, dx, dy, dz, dtime);  
+       		_starsystem->addShockWave(pTo_shockWave);
+	}
+}

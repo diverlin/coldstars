@@ -21,21 +21,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Asteroid :: Asteroid(TextureOb* _texOb,
 		     ObjMeshInstance* _mesh,
-		     float _size, 
-		     vec2f _orbit_center, 
-		     int _radius_A, 
-		     int _radius_B, 
-		     float _orbit_phi_inD, 
-		     float _speed)
+		     PlanetData _planet_data)
 { 
        CommonForPlanet_init(_texOb, 
     	   		    _mesh, 
-    	   	            _size, 
-    	   		    _orbit_center, 
-    	   		    _radius_A,
-    	   		    _radius_B, 
-    	   		    _orbit_phi_inD,
-    	   		    _speed);
+    	   	            _planet_data);
     	   			                 
 	is_alive = true;
       	is_dying = false;
@@ -102,7 +92,7 @@ void Asteroid :: death_TRUE()
 
      	if (is_explosed == false)
      	{   
-        	starsystem->createExplosion(points.getCenter(), scale/2);
+        	createExplosion(starsystem, points.getCenter(), planet_data.scale/2);
         
         	Mineral* _mineral;
         	TextureOb* _mTexOb;
@@ -149,7 +139,7 @@ void Asteroid :: updateInfo()
     	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->id));
     	info.addNameStr("armor:");       info.addValueStr(int2str(armor));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
-	info.addNameStr("speed x 100:"); info.addValueStr(int2str(int(speed*100)));
+	info.addNameStr("speed x 100:"); info.addValueStr(int2str(int(planet_data.speed*100)));
 }     
 
 
@@ -163,26 +153,23 @@ void Asteroid :: renderInfo()
 
 Asteroid* createAsteroid()
 {
-        TextureOb* _texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.asteroid_texOb_pList); 
-    
-        float _size = 10;
-        vec2f _orbit_center = vec2f(0,0);
-        int _radius_A = randIntInRange(300, 1200);
-        int _radius_B = randIntInRange(300, 1200);
-        float _orbit_phi_inD = randIntInRange(0, 360);
-        float _speed = 0.1;
+    	PlanetData planet_data;
+	
+	planet_data.scale         = randIntInRange(ASTEROID_SIZE_MIN, ASTEROID_SIZE_MAX);  
+    	planet_data.orbit_center  = vec2f(0, 0); 
+    	planet_data.radius_A      = randIntInRange(300, 1200);
+    	planet_data.radius_B      = randIntInRange(300, 1200); 
+    	planet_data.orbit_phi_inD = randIntInRange(0, 360);
+    	planet_data.speed         = 0.1;
 
-        Asteroid* _asteroid = new Asteroid(_texOb,
-    				pTo_DEFORMED_SPHERE_MESH,
-    				_size, 
-    				_orbit_center, 
-    				_radius_A, 
-    				_radius_B, 
-    				_orbit_phi_inD, 
-    				_speed);
+        TextureOb* texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.asteroid_texOb_pList); 
+    
+        Asteroid* asteroid = new Asteroid(texOb,
+    					   pTo_DEFORMED_SPHERE_MESH,
+    				           planet_data);
     	
-        _asteroid->update_inSpace_inDynamic_FALSE();
-        return _asteroid;        
+        asteroid->update_inSpace_inDynamic_FALSE();
+        return asteroid;        
 }
 
 

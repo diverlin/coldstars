@@ -122,7 +122,7 @@ int main()
 
     pTo_CURSOR = new Cursor();
     pTo_SHIP_GUI = new ShipInternal();
-
+    
     //// player
     pTo_PLAYER = new PlayerInstance();
     Ship* pTo_pship = galaxy.pTo_ss_active->SHIP_pList[0];

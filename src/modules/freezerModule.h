@@ -23,15 +23,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class FreezerModule : public CommonForModules
 {
   	public:
-      		FreezerModule(TextureOb* _pTo_texOb, int _freeze_add);
+      		FreezerModule(TextureOb* _texOb, int _freeze_add);
       		~FreezerModule();
 
 		int getFreezeAdd() const;
-		
-      		void updateInfo();
       		
       	private:
       	      	int freeze_add;
+      	      	
+      	      	void virtual addUniqueInfo();
 };
 
 FreezerModule* freezerModuleGenerator();

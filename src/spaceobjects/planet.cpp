@@ -23,24 +23,14 @@ Planet :: Planet(int _subtype_id,
 		 TextureOb* _texOb, 
 		 TextureOb* _pTo_atmoshereTexOb, 
 		 ObjMeshInstance* _mesh, 
-		 float _size, 
-		 vec2f _orbit_center, 
-		 int _radius_A, 
-		 int _radius_B, 
-		 int _orbit_phi_inD,
-		 float _speed)
+		 PlanetData _planet_data)
 { 
       	type_id = PLANET_ID;
       	subtype_id = _subtype_id;
       
       	CommonForPlanet_init(_texOb, 
     	   		     _mesh, 
-    	   	             _size, 
-    	   		     _orbit_center, 
-    	   		     _radius_A,
-    	   		     _radius_B, 
-    	   		     _orbit_phi_inD,
-    	   		     _speed);
+			     _planet_data);
 
       	pTo_atmosphereTexOb = _pTo_atmoshereTexOb;
 
@@ -162,22 +152,25 @@ bool Planet :: getPermissionToLand()
 Planet* createPlanet(int orbit_radius)
 {
         int subtype_id   = INHABITED_ID;
-        int planet_size  = randIntInRange(PLANET_SIZE_MIN, PLANET_SIZE_MAX);
-        float speed      = (float)randIntInRange(PLANET_SPEED_MIN, PLANET_SPEED_MAX) / (float)orbit_radius;
+        
+	PlanetData planet_data;
+	
+	planet_data.scale         = randIntInRange(PLANET_SIZE_MIN, PLANET_SIZE_MAX);  
+    	planet_data.orbit_center  = vec2f(0, 0); 
+    	planet_data.radius_A      = orbit_radius;
+    	planet_data.radius_B      = orbit_radius; 
+    	planet_data.orbit_phi_inD = 0;
+    	planet_data.speed         = (float)randIntInRange(PLANET_SPEED_MIN, PLANET_SPEED_MAX) / (float)orbit_radius;
 
-        TextureOb* _planetTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.planet_texOb_pList); 
-        TextureOb* _atmosphereTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.atmosphere_texOb_pList); 
+
+        TextureOb* planetTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.planet_texOb_pList); 
+        TextureOb* atmosphereTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.atmosphere_texOb_pList); 
         
         Planet* planet = new Planet(subtype_id, 
-        				_planetTexOb, 
-        				_atmosphereTexOb, 
-        				pTo_SPHERE_MESH, 
-        				planet_size, 
-        				vec2f(0,0), 
-        				orbit_radius, 
-        				orbit_radius,
-        				0,
-        				speed);
+        			    planetTexOb, 
+        			    atmosphereTexOb, 
+        			    pTo_SPHERE_MESH, 
+        			    planet_data);
 	 
         return planet;        
 }

@@ -446,10 +446,10 @@ void Ship :: calculateDetaledWayToPosition()
 
     	float step = speed/100.0;
 
-    	if ( ((last_pos_x != pTo_navigator->getTargetPosX()) || (last_pos_y != pTo_navigator->getTargetPosY())) && (speed != 0) )
+    	if ( ((last_pos_x != pTo_navigator->getTargetPos().x) || (last_pos_y != pTo_navigator->getTargetPos().y)) && (speed != 0) )
     	{
-       		float xl = pTo_navigator->getTargetPosX() - last_pos_x;
-       		float yl = pTo_navigator->getTargetPosY() - last_pos_y;
+       		float xl = pTo_navigator->getTargetPos().x - last_pos_x;
+       		float yl = pTo_navigator->getTargetPos().y - last_pos_y;
 
        		float l = sqrt(xl*xl + yl*yl);
        		float x_normalized = xl/l;
@@ -464,7 +464,7 @@ void Ship :: calculateDetaledWayToPosition()
        		{
             		last_pos_x += x_step;
             		last_pos_y += y_step;
-            		float angleInD = atan2(pTo_navigator->getTargetPosY() - last_pos_y, pTo_navigator->getTargetPosX() - last_pos_x) * RADIAN_TO_DEGREE_RATE;
+            		float angleInD = atan2(pTo_navigator->getTargetPos().y - last_pos_y, pTo_navigator->getTargetPos().x - last_pos_x) * RADIAN_TO_DEGREE_RATE;
 
             		direction_x_list.push_back(last_pos_x);
             		direction_y_list.push_back(last_pos_y);
@@ -761,7 +761,7 @@ void Ship :: death()
 
      	if (is_explosed == false)
      	{   
-        	starsystem->createExplosion(points.getCenter(), size);
+        	createExplosion(starsystem, points.getCenter(), size);
         	is_explosed = true;
      	}
 }

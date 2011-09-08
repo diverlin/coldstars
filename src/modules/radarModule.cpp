@@ -19,9 +19,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "radarModule.h"
 
-RadarModule :: RadarModule(TextureOb* _pTo_texOb, int _radius_add)
+RadarModule :: RadarModule(TextureOb* _texOb, int _radius_add)
 {
-     	CommonForModules_init(RADAR_ID, _pTo_texOb);
+     	CommonForModules_init(RADAR_ID, _texOb);
 
      	radius_add = _radius_add;
 }
@@ -29,25 +29,24 @@ RadarModule :: RadarModule(TextureOb* _pTo_texOb, int _radius_add)
 RadarModule :: ~RadarModule()
 {}
 
+
 int RadarModule :: getRadiusAdd() const { return radius_add; }
 
-void RadarModule :: updateInfo()
-{
-	info.clear();
 
+void RadarModule :: addUniqueInfo()
+{
     	info.addTitleStr("radar module");
     	info.addNameStr("radius_add:");   info.addValueStr(int2str(radius_add));
-    	info.addNameStr("mass:");         info.addValueStr(int2str(mass));
 }
 
 
 RadarModule* radarModuleGenerator()
 {
-    	TextureOb* pTo_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
-    	int _radius_add  = randIntInRange(RADAR_MODULE_RADIUS_MIN, RADAR_MODULE_RADIUS_MAX);
+    	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
+    	int radius_add  = randIntInRange(RADAR_MODULE_RADIUS_MIN, RADAR_MODULE_RADIUS_MAX);
     
-    	RadarModule* pTo_radar_module = new RadarModule(pTo_texOb, _radius_add);
-    	return pTo_radar_module;
+    	RadarModule* radar_module = new RadarModule(texOb, radius_add);    	
+    	return radar_module;
 }
 
 

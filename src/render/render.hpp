@@ -20,6 +20,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef RENDER_H
 #define RENDER_H
 
+void clearScreen();
+
+void camera(float x, float y);
+void setColor(Color);	
+
+void enable_BLEND();
+void disable_BLEND();
+
+void enable_DEPTH();
+void disable_DEPTH();
+
+void enable_POINTSPRITE();
+void disable_POINTSPRITE();
+
 
 void drawFlatQuadPerVertexIn2D(vec2f bottomLeft, 
 			       vec2f bottomRight, 
@@ -121,6 +135,8 @@ void drawFullScreenTexturedQuad(GLuint texture, int w, int h, float pos_z);
 
 void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z, GLuint program_blur);
 
+
+void renderMesh(GLuint glList, vec3f center, vec3f angle, float scale);
 
 
 #endif 

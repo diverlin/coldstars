@@ -60,7 +60,7 @@ void StarSystem :: rocketCollision_TRUE()
                 {
                         for (unsigned int ai = 0; ai < ASTEROID_pList.size(); ai++)
                         {
-                                if (collisionBetweenCenters(ROCKET_pList[ri]->getPoints(), ASTEROID_pList[ai]->getPoints(), ASTEROID_pList[ai]->w) == true)
+                                if (collisionBetweenCenters(ROCKET_pList[ri]->getPoints(), ASTEROID_pList[ai]->getPoints(), ASTEROID_pList[ai]->getCollisionRadius()) == true)
                                 {   
                                         ASTEROID_pList[ai]->hit_TRUE(ASTEROID_pList[ai]->getArmor());
                                         ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
@@ -143,7 +143,7 @@ void StarSystem :: rocketCollision_FALSE()
                 {
                         for (unsigned int ai = 0; ai < ASTEROID_pList.size(); ai++)
                         {
-                                if (collisionBetweenCenters(ROCKET_pList[ri]->getPoints(), ASTEROID_pList[ai]->getPoints(), ASTEROID_pList[ai]->w) == true)
+                                if (collisionBetweenCenters(ROCKET_pList[ri]->getPoints(), ASTEROID_pList[ai]->getPoints(), ASTEROID_pList[ai]->getCollisionRadius()) == true)
                                 {   
                                         ASTEROID_pList[ai]->hit_TRUE(ASTEROID_pList[ai]->getArmor());
                                         ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
@@ -218,7 +218,7 @@ void StarSystem :: asteroidCollision_TRUE()
 
         if (ASTEROID_pList[ai]->getAlive() == true)   
            for (unsigned int pi = 0; pi < PLANET_pList.size(); pi++)
-               if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), PLANET_pList[pi]->getPoints(), PLANET_pList[pi]->collision_radius) )
+               if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), PLANET_pList[pi]->getPoints(), PLANET_pList[pi]->getCollisionRadius()) == true )
                {
                    //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
                    ASTEROID_pList[ai]->hit_TRUE(ASTEROID_pList[ai]->getArmor());
@@ -233,7 +233,7 @@ void StarSystem :: asteroidCollision_TRUE()
 
         if (ASTEROID_pList[ai]->getAlive() == true)   
            for (unsigned int si = 0; si < STAR_pList.size(); si++)
-               if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), STAR_pList[si]->getPoints(), STAR_pList[si]->collision_radius) )
+               if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), STAR_pList[si]->getPoints(), STAR_pList[si]->getCollisionRadius() ) == true )
                {
                    //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
                    ASTEROID_pList[ai]->hit_TRUE(ASTEROID_pList[ai]->getArmor());
@@ -262,7 +262,7 @@ void StarSystem :: asteroidCollision_FALSE()
 
         if (ASTEROID_pList[ai]->getAlive() == true)   
            for (unsigned int pi = 0; pi < PLANET_pList.size(); pi++)
-               if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), PLANET_pList[pi]->getPoints(), PLANET_pList[pi]->collision_radius) )
+               if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), PLANET_pList[pi]->getPoints(), PLANET_pList[pi]->getCollisionRadius()) == true )
                {
                    //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
                    ASTEROID_pList[ai]->hit_FALSE(ASTEROID_pList[ai]->getArmor());
@@ -277,7 +277,7 @@ void StarSystem :: asteroidCollision_FALSE()
 
         if (ASTEROID_pList[ai]->getAlive() == true)   
            for (unsigned int si = 0; si < STAR_pList.size(); si++)
-               if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), STAR_pList[si]->getPoints(), STAR_pList[si]->collision_radius) )
+               if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), STAR_pList[si]->getPoints(), STAR_pList[si]->getCollisionRadius()) == true )
                {
                    //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
                    ASTEROID_pList[ai]->hit_FALSE(ASTEROID_pList[ai]->getArmor());
@@ -447,274 +447,251 @@ void StarSystem :: findVisibleEntities()
 
       
 
-void StarSystem :: defineSceneColor(TextureOb* _pTo_texOb)
-{
-	if (_pTo_texOb->color_id == YELLOW_COLOR_ID)
-	{
-		color.r = 255/255.0;
-		color.g = 255/255.0;
-		color.b = 255/220.0;
-		color.a = 1.0;
-	}
+//void StarSystem :: setSceneColor(Color _color)
+//{
+//	color = _color;
+	//if (_pTo_texOb->color_id == YELLOW_COLOR_ID)
+	//{
+		//color.r = 255/255.0;
+		//color.g = 255/255.0;
+		//color.b = 255/220.0;
+		//color.a = 1.0;
+	//}
 	
-	if (_pTo_texOb->color_id == BLUE_COLOR_ID)
-	{
-		color.r = 220/255.0;
-		color.g = 255/255.0;
-		color.b = 255/255.0;
-		color.a = 1.0;
-	}
-}
+	//if (_pTo_texOb->color_id == BLUE_COLOR_ID)
+	//{
+		//color.r = 220/255.0;
+		//color.g = 255/255.0;
+		//color.b = 255/255.0;
+		//color.a = 1.0;
+	//}
+//}
       
-void StarSystem :: setSceneColor()
+void StarSystem :: restoreSceneColor()
 {
-	glColor4f(color.r, color.g, color.b, color.a);
-}      
+        setColor(STAR_pList[0]->getColor());
+}     
+
+void StarSystem :: restoreDefaultColor()
+{
+	Color _color;
+	_color.r = 1.0;
+	_color.g = 1.0;
+	_color.b = 1.0;
+	_color.a = 1.0;
+	
+	setColor(_color);
+}
 
 
 void StarSystem :: renderBackground()
 {   
 	// HACK for point sprites
-    	glEnable(GL_POINT_SPRITE);
-    	distantStarBgEffect_pList[0]->render(g_SCROLL_COORD_X, g_SCROLL_COORD_Y); 
-    	glDisable(GL_POINT_SPRITE);
+    	enable_POINTSPRITE();
+    		distantStarBgEffect_pList[0]->render(g_SCROLL_COORD_X, g_SCROLL_COORD_Y); 
+    	disable_POINTSPRITE();
     	// HACK for point sprites
 
-    	// Clear color and depth buffer
-    	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    	glLoadIdentity();
+	clearScreen();
 
-        setSceneColor();
+        restoreSceneColor();
 
-    	glDisable(GL_DEPTH_TEST);
-    	glEnable(GL_BLEND);
-glDepthMask(false);
+    	enable_BLEND();
+		glDepthMask(false);
 
-    	for(unsigned int i = 0; i<distantNebulaBgEffect_pList.size(); i++)
-    	{ 
-       		distantNebulaBgEffect_pList[i]->update(); 
-        	distantNebulaBgEffect_pList[i]->render(g_SCROLL_COORD_X, g_SCROLL_COORD_Y); 
-    	}
+    		for(unsigned int i = 0; i<distantNebulaBgEffect_pList.size(); i++)
+    		{ 
+       			distantNebulaBgEffect_pList[i]->update(); 
+        		distantNebulaBgEffect_pList[i]->render(g_SCROLL_COORD_X, g_SCROLL_COORD_Y); 
+    		}
 
-    	glEnable(GL_POINT_SPRITE);
-    	for(unsigned int i = 0; i<distantStarBgEffect_pList.size(); i++)
-    	{ 
-       		distantStarBgEffect_pList[i]->render(g_SCROLL_COORD_X, g_SCROLL_COORD_Y); 
-    	}
-    	glDisable(GL_POINT_SPRITE);
+    		enable_POINTSPRITE();
+    			for(unsigned int i = 0; i<distantStarBgEffect_pList.size(); i++)
+    			{ 
+       				distantStarBgEffect_pList[i]->render(g_SCROLL_COORD_X, g_SCROLL_COORD_Y); 
+    			}
+    		disable_POINTSPRITE();
     	
-glDepthMask(true);
-glDisable(GL_BLEND);
+		glDepthMask(true);
+	disable_BLEND();
 }
     
 void StarSystem :: createPostProcessStuff()
 {
-int w = g_VIEW_WIDTH;
-int h = g_VIEW_HEIGHT;
+	int w = g_VIEW_WIDTH;
+	int h = g_VIEW_HEIGHT;
 
-pTo_fbo0 = new FBO(w,h);
-pTo_fbo1 = new FBO(w,h);
-pTo_fbo2 = new FBO(w,h);
-pTo_fbo3 = new FBO(w,h);
-pTo_bloom = new BloomEffect(w, h, g_BLUR_PROGRAM, g_EXTRACT_BRIGHT_PROGRAM, g_COMBINE_PROGRAM, 1, 1);
+	pTo_fbo0 = new FBO(w,h);
+	pTo_fbo1 = new FBO(w,h);	
+	pTo_fbo2 = new FBO(w,h);
+	pTo_fbo3 = new FBO(w,h);
+	pTo_bloom = new BloomEffect(w, h, g_BLUR_PROGRAM, g_EXTRACT_BRIGHT_PROGRAM, g_COMBINE_PROGRAM, 1, 1);
 }
 
     
 void StarSystem :: renderEntities_NEW()
 {   
-int w = g_VIEW_WIDTH;
-int h = g_VIEW_HEIGHT;
+	int w = g_VIEW_WIDTH;
+	int h = g_VIEW_HEIGHT;
 
 
-//######### EFFECT DEMONSTRATION
-//if lb == True:
-//#for x in xrange(0, 10):
-	//#addExplosion(player)
-//pass
+	//######### EFFECT DEMONSTRATION
+	//if lb == True:
+	//#for x in xrange(0, 10):
+		//#addExplosion(player)
+	//pass
  
-//if rb == True:
-//self.shockwaveEffect_list = []
-//self.shockwaveEffect_remove_queue = []
-//######### EFFECT DEMONSTRATION
+	//if rb == True:
+	//self.shockwaveEffect_list = []
+	//self.shockwaveEffect_remove_queue = []
+	//######### EFFECT DEMONSTRATION
 
-glEnable(GL_BLEND);
-glDepthMask(true);
 
-pTo_fbo0->activate();
-     
-        renderBackground();
-           
-	glLoadIdentity();
-	glTranslatef(-g_SCROLL_COORD_X, -g_SCROLL_COORD_Y, 0.0);    // camera
-        
-glColor4f(1.0, 1.0, 1.0, 1.0);
-	glEnable(GL_DEPTH_TEST);
-		for(unsigned int i = 0; i < visible_STAR_pList.size(); i++) 
-		{ 
-        		visible_STAR_pList[i]->render_NEW(); 
-    		}
-    	glDisable(GL_DEPTH_TEST);
-setSceneColor();
-pTo_fbo0->deactivate();
+	pTo_fbo0->activate();
+   
+        	renderBackground();           
+		camera(g_SCROLL_COORD_X, g_SCROLL_COORD_Y);    
+	        
 
-// POST PROCESS BLOOM (many FBO)
-pTo_bloom->pass0(pTo_fbo0->texture, STAR_pList[0]->pTo_texOb->brightThreshold);
-pTo_bloom->restPasses();
-pTo_bloom->combine(pTo_fbo0->texture);
+		restoreDefaultColor();
+		enable_BLEND();
+			for(unsigned int i = 0; i < visible_STAR_pList.size(); i++) 
+			{ 
+        			visible_STAR_pList[i]->render_NEW(); 
+    			}
+    		disable_BLEND();
+		restoreSceneColor();
+	pTo_fbo0->deactivate();
 
-// RENDER to FBO1, VOLUMETRIC LIGHT
-pTo_fbo1->activate();
-glUseProgram(g_VOLUMETRICLIGHT_PROGRAM);
-glActiveTexture(GL_TEXTURE0);                                
-glBindTexture(GL_TEXTURE_2D, pTo_bloom->pTo_fbo_final->texture);
-glUniform1i(glGetUniformLocation(g_VOLUMETRICLIGHT_PROGRAM, "FullSampler"), 0);
+	// POST PROCESS BLOOM (many FBO)
+	pTo_bloom->pass0(pTo_fbo0->texture, STAR_pList[0]->getBrightThreshold());
+	pTo_bloom->restPasses();
+	pTo_bloom->combine(pTo_fbo0->texture);
 
-glActiveTexture(GL_TEXTURE1);                                
-glBindTexture(GL_TEXTURE_2D, pTo_bloom->texture_blured);
-glUniform1i(glGetUniformLocation(g_VOLUMETRICLIGHT_PROGRAM, "BlurSampler"), 1);
+	// RENDER to FBO1, VOLUMETRIC LIGHT
+	pTo_fbo1->activate();
+		glUseProgram(g_VOLUMETRICLIGHT_PROGRAM);
+			glActiveTexture(GL_TEXTURE0);                                
+			glBindTexture(GL_TEXTURE_2D, pTo_bloom->pTo_fbo_final->texture);
+			glUniform1i(glGetUniformLocation(g_VOLUMETRICLIGHT_PROGRAM, "FullSampler"), 0);
 
-glUniform4f(glGetUniformLocation(g_VOLUMETRICLIGHT_PROGRAM, "sun_pos"), -float(g_SCROLL_COORD_X)/w, -float(g_SCROLL_COORD_Y)/h, -100.0, 1.0);
+			glActiveTexture(GL_TEXTURE1);                                
+			glBindTexture(GL_TEXTURE_2D, pTo_bloom->texture_blured);
+			glUniform1i(glGetUniformLocation(g_VOLUMETRICLIGHT_PROGRAM, "BlurSampler"), 1);
+
+			glUniform4f(glGetUniformLocation(g_VOLUMETRICLIGHT_PROGRAM, "sun_pos"), -float(g_SCROLL_COORD_X)/w, -float(g_SCROLL_COORD_Y)/h, -100.0, 1.0);
           
-glActiveTexture(GL_TEXTURE0);
-drawFullScreenQuad(w, h, -999.0);
+			glActiveTexture(GL_TEXTURE0);
+			drawFullScreenQuad(w, h, -999.0);
+		glUseProgram(0);
+		glActiveTexture(GL_TEXTURE0);
+	pTo_fbo1->deactivate();
 
-glUseProgram(0);
-glActiveTexture(GL_TEXTURE0);
-/* */pTo_fbo1->deactivate();
 
-
-/* */pTo_fbo2->activate();
-//renderBackground();
-
-/* */glEnable(GL_BLEND);
-//* */glDepthMask(false);
-
-//glUseProgram(g_BLACK2ALPHA_PROGRAM);
-//glActiveTexture(GL_TEXTURE0);                                
-//glBindTexture(GL_TEXTURE_2D, pTo_fbo1->texture);
-//glUniform1i(glGetUniformLocation(g_BLACK2ALPHA_PROGRAM, "sceneTex"), 0);
-//drawFullScreenQuad(w, h, -999.0); 
-//glUseProgram(0);    
-drawFullScreenTexturedQuad(pTo_fbo1->texture, w, h, -999.0);
+	pTo_fbo2->activate();
+		drawFullScreenTexturedQuad(pTo_fbo1->texture, w, h, -999.0);
            
-          
-glTranslatef(-g_SCROLL_COORD_X, -g_SCROLL_COORD_Y, 0.0);    // camera
+          	camera(g_SCROLL_COORD_X, g_SCROLL_COORD_Y);    
         
-
-	glEnable(GL_DEPTH_TEST);  
-    		for(unsigned int i = 0; i < visible_PLANET_pList.size(); i++) 
-    		{ 
-       			visible_PLANET_pList[i]->render_NEW(); 
-    		}
+		enable_DEPTH();  
+    			for(unsigned int i = 0; i < visible_PLANET_pList.size(); i++) 
+    			{ 
+       				visible_PLANET_pList[i]->render_NEW(); 
+    			}
     		
-    		for(unsigned int i = 0; i < visible_ASTEROID_pList.size(); i++)
-    		{ 
-       			visible_ASTEROID_pList[i]->render_NEW(); 
-    		}
+    			for(unsigned int i = 0; i < visible_ASTEROID_pList.size(); i++)
+    			{ 
+       				visible_ASTEROID_pList[i]->render_NEW(); 
+    			}
 
-    	glDisable(GL_DEPTH_TEST);
-glDepthMask(false); 
+    		disable_DEPTH();
+
     	          
-    	glEnable(GL_BLEND);
-    	for(unsigned int i = 0; i < visible_MINERAL_pList.size(); i++)
-	{ 
-        	visible_MINERAL_pList[i]->render2D(); 
-    	}  
+		enable_BLEND();
+    			for(unsigned int i = 0; i < visible_MINERAL_pList.size(); i++)
+			{ 
+        			visible_MINERAL_pList[i]->render2D(); 
+    			}  
            
-    	for(unsigned int i = 0; i < visible_CONTAINER_pList.size(); i++)
-    	{ 
-        	visible_CONTAINER_pList[i]->render2D(); 
-    	} 	 
+    			for(unsigned int i = 0; i < visible_CONTAINER_pList.size(); i++)
+    			{ 
+        			visible_CONTAINER_pList[i]->render2D(); 
+    			} 	 
            
 
-    	for(unsigned int i = 0; i < visible_SHIP_pList.size(); i++)
-    	{ 
-       		visible_SHIP_pList[i]->renderInSpace(); 
-        	setSceneColor();
-    	}
+    			for(unsigned int i = 0; i < visible_SHIP_pList.size(); i++)
+    			{ 
+       				visible_SHIP_pList[i]->renderInSpace(); 
+        			restoreSceneColor();
+    			}
 
-    	for(unsigned int i = 0; i < visible_ROCKET_pList.size(); i++)
-    	{ 
-       		visible_ROCKET_pList[i]->renderInSpace(); 
-    	}
-
-      	setSceneColor();
-    	
-    	glDisable(GL_BLEND);
-//glDepthMask(true);
-
-    	
-pTo_fbo2->deactivate();
+    			for(unsigned int i = 0; i < visible_ROCKET_pList.size(); i++)
+    			{ 
+       				visible_ROCKET_pList[i]->renderInSpace(); 
+       				restoreSceneColor();
+    			}    	
+		disable_BLEND();
+		
+    	pTo_fbo2->deactivate();
 
 
+	// POST PROCESS WAVE SHOCK into FBO2
+	pTo_fbo3->activate();
 
+		float center_array[10][2];
+		float xyz_array[10][3];
+		float time_array[10];
 
-
-// POST PROCESS WAVE SHOCK into FBO2
-pTo_fbo3->activate();
-
-float center_array[10][2];
-float xyz_array[10][3];
-float time_array[10];
-
-for (unsigned int i = 0; i < effect_SHOCKWAVE_pList.size(); i++)
-{         
-	effect_SHOCKWAVE_pList[i]->update();
+		for (unsigned int i = 0; i < effect_SHOCKWAVE_pList.size(); i++)
+		{         
+			effect_SHOCKWAVE_pList[i]->update();
 	
-	center_array[i][0] = effect_SHOCKWAVE_pList[i]->center_x - float(g_SCROLL_COORD_X)/g_VIEW_WIDTH;
-	center_array[i][1] = effect_SHOCKWAVE_pList[i]->center_y - float(g_SCROLL_COORD_Y)/g_VIEW_HEIGHT;
-	xyz_array[i][0] = effect_SHOCKWAVE_pList[i]->x;
-	xyz_array[i][1] = effect_SHOCKWAVE_pList[i]->y;
-	xyz_array[i][2] = effect_SHOCKWAVE_pList[i]->z;
+			center_array[i][0] = effect_SHOCKWAVE_pList[i]->center_x - float(g_SCROLL_COORD_X)/g_VIEW_WIDTH;
+			center_array[i][1] = effect_SHOCKWAVE_pList[i]->center_y - float(g_SCROLL_COORD_Y)/g_VIEW_HEIGHT;
+			xyz_array[i][0] = effect_SHOCKWAVE_pList[i]->x;
+			xyz_array[i][1] = effect_SHOCKWAVE_pList[i]->y;
+			xyz_array[i][2] = effect_SHOCKWAVE_pList[i]->z;
 				
-	time_array[i] = effect_SHOCKWAVE_pList[i]->time;
-}
+			time_array[i] = effect_SHOCKWAVE_pList[i]->time;
+		}
        
 
-glUseProgram(g_SHOCKWAVE_PROGRAM);
+		glUseProgram(g_SHOCKWAVE_PROGRAM);
+			glActiveTexture(GL_TEXTURE0);                                
+			glBindTexture(GL_TEXTURE_2D, pTo_fbo2->texture);
+			glUniform1i (glGetUniformLocation(g_SHOCKWAVE_PROGRAM, "sceneTex"), 0);
 
-glActiveTexture(GL_TEXTURE0);                                
-glBindTexture(GL_TEXTURE_2D, pTo_fbo2->texture);
-glUniform1i (glGetUniformLocation(g_SHOCKWAVE_PROGRAM, "sceneTex"), 0);
+			int len_effect_SHOCKWAVE_list = effect_SHOCKWAVE_pList.size();
+			glUniform1i (glGetUniformLocation(g_SHOCKWAVE_PROGRAM, "imax"),        len_effect_SHOCKWAVE_list);
+			glUniform2fv(glGetUniformLocation(g_SHOCKWAVE_PROGRAM, "center"),      len_effect_SHOCKWAVE_list, *center_array);
+			glUniform3fv(glGetUniformLocation(g_SHOCKWAVE_PROGRAM, "shockParams"), len_effect_SHOCKWAVE_list, *xyz_array);
+			glUniform1fv(glGetUniformLocation(g_SHOCKWAVE_PROGRAM, "time"),        len_effect_SHOCKWAVE_list, time_array);
 
-int len_effect_SHOCKWAVE_list = effect_SHOCKWAVE_pList.size();
-glUniform1i (glGetUniformLocation(g_SHOCKWAVE_PROGRAM, "imax"),        len_effect_SHOCKWAVE_list);
-glUniform2fv(glGetUniformLocation(g_SHOCKWAVE_PROGRAM, "center"),      len_effect_SHOCKWAVE_list, *center_array);
-glUniform3fv(glGetUniformLocation(g_SHOCKWAVE_PROGRAM, "shockParams"), len_effect_SHOCKWAVE_list, *xyz_array);
-glUniform1fv(glGetUniformLocation(g_SHOCKWAVE_PROGRAM, "time"),        len_effect_SHOCKWAVE_list, time_array);
-
-// DRAW full size w,h texture_scene
-drawFullScreenQuad(w, h, -999.0);
-glUseProgram(0);
-
-pTo_fbo3->deactivate();
+			drawFullScreenQuad(w, h, -999.0);
+		glUseProgram(0);
+	
+	pTo_fbo3->deactivate();
 
 
+	// render from FBO
+	glEnable(GL_TEXTURE_2D);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);      // unbind fbo
 
+	clearScreen();
 
+	drawFullScreenTexturedQuad(pTo_fbo3->texture, w, h, -999.0);
+	//drawFullScreenTexturedQuad(pTo_fbo0->texture, w, h, -999.0);  // debug
 
-// render from FBO
-glDepthMask(true);
-
-glEnable(GL_TEXTURE_2D);
-glBindFramebuffer(GL_FRAMEBUFFER, 0);      // putcom    // unbind fbo
-
-glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
-glLoadIdentity();
-
-/* */glEnable(GL_BLEND);
-drawFullScreenTexturedQuad(pTo_fbo3->texture, w, h, -999.0);
-//drawFullScreenTexturedQuad(pTo_fbo0->texture, w, h, -999.0);  // debug
-
-	glTranslatef(-g_SCROLL_COORD_X, -g_SCROLL_COORD_Y, 0.0);    // camera
-	glEnable(GL_BLEND);
+	camera(g_SCROLL_COORD_X, g_SCROLL_COORD_Y);
+	
+	enable_BLEND();
 		for(unsigned int i = 0; i<effect_LAZERTRACE_pList.size(); i++)
     		{ 
        			effect_LAZERTRACE_pList[i]->update(); 
         		effect_LAZERTRACE_pList[i]->render(); 
     		}
 
-    		glEnable(GL_POINT_SPRITE);
+    		enable_POINTSPRITE();
     			for(unsigned int i = 0; i<effect_EXPLOSION_pList.size(); i++)
     			{ 
        				effect_EXPLOSION_pList[i]->update();
@@ -726,11 +703,11 @@ drawFullScreenTexturedQuad(pTo_fbo3->texture, w, h, -999.0);
        				effect_DAMAGE_pList[i]->update();
         			effect_DAMAGE_pList[i]->render(); 
     			}
-    		glDisable(GL_POINT_SPRITE);
+    		disable_POINTSPRITE();
     		
-    	glEnable(GL_BLEND);
+    	disable_BLEND();
     	
-    	setSceneColor();    	          
+    	restoreSceneColor();    	          
 }
     
 
@@ -748,162 +725,77 @@ void StarSystem :: renderEntities_OLD()
 {   
 	glLoadIdentity();
         renderBackground();
-	glTranslatef(-g_SCROLL_COORD_X, -g_SCROLL_COORD_Y, 0.0);
+	
+        camera(g_SCROLL_COORD_X, g_SCROLL_COORD_Y);
         
-	glDisable(GL_BLEND);
-	glEnable(GL_DEPTH_TEST);
-	for(unsigned int i = 0; i < visible_STAR_pList.size(); i++) 
-	{ 
-        	visible_STAR_pList[i]->render_OLD(); 
-    	}
+        disable_BLEND();
+        enable_DEPTH();
+		for(unsigned int i = 0; i < visible_STAR_pList.size(); i++) 
+		{ 
+        		visible_STAR_pList[i]->render_OLD(); 
+    		}
 
-    	for(unsigned int i = 0; i < visible_PLANET_pList.size(); i++) 
-    	{ 
-       		visible_PLANET_pList[i]->render_OLD(); 
-    	}
+    		for(unsigned int i = 0; i < visible_PLANET_pList.size(); i++) 
+    		{ 
+       			visible_PLANET_pList[i]->render_OLD(); 
+    		}
 
-    	for(unsigned int i = 0; i < visible_ASTEROID_pList.size(); i++)
-    	{ 
-       		visible_ASTEROID_pList[i]->render_OLD(); 
-    	}
+    		for(unsigned int i = 0; i < visible_ASTEROID_pList.size(); i++)
+    		{ 
+       			visible_ASTEROID_pList[i]->render_OLD(); 
+    		}
+        disable_DEPTH();
 
-    	glDisable(GL_DEPTH_TEST);
-    	glEnable(GL_BLEND);
-    	for(unsigned int i = 0; i < visible_MINERAL_pList.size(); i++)
-	{ 
-        	visible_MINERAL_pList[i]->render2D(); 
-    	}  
+        enable_BLEND();
+    		for(unsigned int i = 0; i < visible_MINERAL_pList.size(); i++)
+		{ 
+        		visible_MINERAL_pList[i]->render2D(); 
+    		}  
            
-    	for(unsigned int i = 0; i < visible_CONTAINER_pList.size(); i++)
-    	{ 
-        	visible_CONTAINER_pList[i]->render2D(); 
-    	} 	 
+    		for(unsigned int i = 0; i < visible_CONTAINER_pList.size(); i++)
+    		{ 
+        		visible_CONTAINER_pList[i]->render2D(); 
+    		} 	 
            
-    	for(unsigned int i = 0; i < visible_SHIP_pList.size(); i++)
-    	{ 
-       		visible_SHIP_pList[i]->renderInSpace(); 
-        	setSceneColor();
-    	}
+    		for(unsigned int i = 0; i < visible_SHIP_pList.size(); i++)
+    		{ 
+       			visible_SHIP_pList[i]->renderInSpace(); 
+        		restoreSceneColor();
+    		}
 
-    	for(unsigned int i = 0; i < visible_ROCKET_pList.size(); i++)
-    	{ 
-       		visible_ROCKET_pList[i]->renderInSpace(); 
-    	}
+    		for(unsigned int i = 0; i < visible_ROCKET_pList.size(); i++)
+    		{ 
+       			visible_ROCKET_pList[i]->renderInSpace(); 
+    		}
 
-    	for(unsigned int i = 0; i<effect_LAZERTRACE_pList.size(); i++)
-    	{ 
-       		effect_LAZERTRACE_pList[i]->update(); 
-        	effect_LAZERTRACE_pList[i]->render(); 
-    	}
+    		for(unsigned int i = 0; i<effect_LAZERTRACE_pList.size(); i++)
+    		{ 
+       			effect_LAZERTRACE_pList[i]->update(); 
+        		effect_LAZERTRACE_pList[i]->render(); 
+    		}
+    	disable_BLEND();
 
 
-    	glEnable(GL_POINT_SPRITE);
-    	for(unsigned int i = 0; i<effect_EXPLOSION_pList.size(); i++)
-    	{ 
-       		effect_EXPLOSION_pList[i]->update();
-        	effect_EXPLOSION_pList[i]->render(); 
-    	}
+	enable_BLEND();
+        enable_POINTSPRITE();
+    		for(unsigned int i = 0; i<effect_EXPLOSION_pList.size(); i++)
+    		{ 
+       			effect_EXPLOSION_pList[i]->update();
+        		effect_EXPLOSION_pList[i]->render(); 
+    		}
 
-    	for(unsigned int i = 0; i<effect_DAMAGE_pList.size(); i++)
-    	{ 
-       		effect_DAMAGE_pList[i]->update();
-        	effect_DAMAGE_pList[i]->render(); 
-    	}
-    	glDisable(GL_POINT_SPRITE);
+    		for(unsigned int i = 0; i<effect_DAMAGE_pList.size(); i++)
+    		{ 
+       			effect_DAMAGE_pList[i]->update();
+        		effect_DAMAGE_pList[i]->render(); 
+    		}
+        disable_POINTSPRITE();
+        disable_BLEND();
 
-    	glDisable(GL_BLEND);
-    	glEnable(GL_DEPTH_TEST);
-    	setSceneColor();
+    	restoreSceneColor();
 }
     
 
-
-
-
-
-void StarSystem :: createExplosion(vec2f _center_pos, int obSize)
-{
-	//obSize = randIntInRange(1, 9);  	// DEBUG
-
-	ExplosionEffect* _explosion;
-
-	TextureOb* _particleTexOb; 
-	ParticleSystemData  _psData;
-   
-	_psData.velocity_start = randIntInRange(13,17) * 0.1;
-	_psData.velocity_end = _psData.velocity_start;
-
-	_psData.alpha_start    = 1.0;
-	_psData.alpha_end      = 0.1;
-	
-	_psData.d_velocity     = 0;
-	_psData.d_alpha        = randIntInRange(5,8) * 0.001;
-	_psData.d_particleSize = randIntInRange(60,80) * 0.01;
- 
-        
-	if (obSize < 4)
-	{
-		_psData.particles_num = randIntInRange(10 * obSize, 15 * obSize);    
-		_psData.particleSize_start  = 25 * obSize;                                 
-
-		_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
-
-		_explosion = new ExplosionEffect(_particleTexOb, _center_pos, _psData);
-		addExplosion(_explosion);
-	}
-    	else    
-	{
-		_psData.particles_num = 40;
-		_psData.particleSize_start  = 25 * obSize;
-
-		_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
-		
-		_explosion = new ExplosionEffect(_particleTexOb, _center_pos, _psData);
-		addExplosion(_explosion);
-       
-
-		_psData.particles_num = 50;
-		_psData.particleSize_start  = 25 * (obSize-1);
-
-		_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(YELLOW_COLOR_ID);
-		
-		_explosion = new ExplosionEffect(_particleTexOb, _center_pos, _psData);
-		addExplosion(_explosion);
-       
-		_psData.particles_num = 100;                              
-		_psData.particleSize_start  = 25 * (obSize-2);
-
-		_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
-		
-		_explosion = new ExplosionEffect(_particleTexOb, _center_pos, _psData);
-		addExplosion(_explosion);
-	} 	       
- 
-	createShockWave(_center_pos, obSize);
-	//explosion.play()
-}
-
-
-void StarSystem :: createShockWave(vec2f _center_pos, int obSize)
-{
-	if ( (obSize > 3) && (effect_SHOCKWAVE_pList.size() < 10) )
-	{
-		int w = g_VIEW_WIDTH;
-		int h = g_VIEW_HEIGHT;      
-        
-		float x = 10;
-		float y = 1.8;
-		float z = 0.13;
-		float time = 0.0; 
-		float dx = 0;
-		float dy = 0.02;
-		float dz = 0.0005;
-		float dtime = -(0.002 + 0.3 * obSize * 0.001);     // 10, 1.8, 0.13, 0.0,  0,  0.02, 0.0005, -0.004 
-        
-		ShockWaveEffect* pTo_shockWave = new ShockWaveEffect(_center_pos, x, y, z, time, dx, dy, dz, dtime);  
-       		addShockWave(pTo_shockWave);
-	}
-}
 
 void StarSystem :: asteroidManager(int num)
 {
@@ -913,8 +805,6 @@ void StarSystem :: asteroidManager(int num)
                 addAsteroid(_asteroid);
         }
 }
-
-
 
 
 bool StarSystem :: addStar(Star* _star)
@@ -958,6 +848,12 @@ bool StarSystem :: addContainer(Container* _container)
 }
 
 
+bool addRocket(RocketBullet* rocket);
+{
+	ROCKET_pList.push_back(rocket);
+	return true;
+}    
+
 bool StarSystem :: addExplosion(ExplosionEffect* _explosion)
 {
 	_explosion->setStarSystem(this);
@@ -966,6 +862,7 @@ bool StarSystem :: addExplosion(ExplosionEffect* _explosion)
         return true;
 }
 
+		
 
 bool StarSystem :: addShockWave(ShockWaveEffect* _shockWave)
 {
@@ -975,7 +872,19 @@ bool StarSystem :: addShockWave(ShockWaveEffect* _shockWave)
         return true;
 }
 
+bool StarSystem :: addDistantNebula(DistantNebulaBgEffect* dn)
+{
+	distantNebulaBgEffect_pList.push_back(dn);
+        return true;
+}
 
+bool StarSystem :: addDistantStar(DistantStarBgEffect* ds)
+{
+	distantStarBgEffect_pList.push_back(ds);
+	return true;
+
+}
+    		
 		
 
     		
@@ -1395,7 +1304,7 @@ void StarSystem :: mouseControl()
     if (cursor_has_target == false) 
         if (mlb == true)
         {
-            pTo_PLAYER->pTo_ship->pTo_navigator->setStaticTargetCoords(mxvp, myvp);  
+            pTo_PLAYER->pTo_ship->pTo_navigator->setStaticTargetCoords(vec2f(mxvp, myvp));  
             pTo_PLAYER->pTo_ship->pTo_npc_owner->clearAIfuncSequence();
         }     
 }
@@ -1578,4 +1487,81 @@ void StarSystem :: debug__()
             MINERAL_pList[mi]->death_FALSE();          
      }
 }
+
+
+
+
+
+
+
+
+
+
+
+bool collisionBetweenCenters(Points* points1, Points* points2, float collision_radius)
+{
+    if(abs(points1->getCenter().x - points2->getCenter().x) > collision_radius)
+       return false;
+    if(abs(points1->getCenter().y - points2->getCenter().y) > collision_radius)
+       return false;
+
+    return true;
+}
+
+bool collisionBetweenCenters(Points* points1, float center2_x, float center2_y, float collision_radius)
+{
+    if(abs(points1->getCenter().x - center2_x) > collision_radius)
+       return false;
+    if(abs(points1->getCenter().y - center2_y) > collision_radius)
+       return false;
+
+    return true;
+}
+
+
+
+
+
+
+
+
+
+
+
+bool isObjectVisible(Points* points, float startViewCoord_x, float startViewCoord_y)    
+{
+        float ob_centerx = points->getCenter().x;
+        float ob_centery = points->getCenter().y;
+        
+        int ob_w = points->getWidth();
+        int ob_h = points->getHeight();
+        
+        if (ob_centerx < (g_SCROLL_COORD_X - ob_w))
+                return false;
+        if (ob_centerx > (startViewCoord_x + ob_w))
+                return false;
+        if (ob_centery < (g_SCROLL_COORD_Y - ob_h))
+                return false;
+        if (ob_centery > (startViewCoord_y + ob_h))
+                return false;
+
+        return true;
+}
+
+
+bool isObjectVisible(float ob_centerx, float ob_centery, int ob_w, int ob_h, float startViewCoord_x, float startViewCoord_y)    
+{
+    if (ob_centerx < (g_SCROLL_COORD_X - ob_w))
+       return false;
+    if (ob_centerx > (startViewCoord_x + ob_w))
+       return false;
+    if (ob_centery < (g_SCROLL_COORD_Y - ob_h))
+       return false;
+    if (ob_centery > (startViewCoord_y + ob_h))
+       return false;
+
+    return true;
+}
+
+
 

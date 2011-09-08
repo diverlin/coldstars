@@ -27,12 +27,7 @@ class Planet : public CommonForPlanet
                        TextureOb* _pTo_texOb, 
                        TextureOb* _pTo_atmoshereTexOb, 
                        ObjMeshInstance* _pTo_mesh, 
-                       float _size, 
-                       vec2f _orbit_center, 
-                       int _radius_A, 
-                       int _radius_B, 
-                       int _orbit_phi_inD,
-                       float _speed);
+		       PlanetData _planet_data);
     	   
                 ~Planet();
 
@@ -56,8 +51,6 @@ class Planet : public CommonForPlanet
                 Kosmoport* pTo_kosmoport;
                 Land*      pTo_land;
                 
-		InfoTable info;
-		
 		void createKosmoport();
                 void createLand();
 }; 

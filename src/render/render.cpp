@@ -18,6 +18,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "render.hpp"
 
+void clearScreen()
+{
+    	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    	glLoadIdentity();
+}
+
+void camera(float x, float y) { glTranslatef(-x, -y, 0.0); }
+
+void setColor(Color color) { glColor4f(color.r, color.g, color.b, color.a); }
+
+void enable_BLEND()  { glEnable(GL_BLEND);  }
+void disable_BLEND() { glDisable(GL_BLEND); }
+
+void enable_DEPTH()  { glEnable(GL_DEPTH_TEST); }
+void disable_DEPTH() { glDisable(GL_DEPTH_TEST); }
+
+void enable_POINTSPRITE()  { glEnable(GL_POINT_SPRITE);  }
+void disable_POINTSPRITE() { glDisable(GL_POINT_SPRITE); }
 
 void drawFlatQuadPerVertexIn2D(vec2f bottomLeft, 
 			       vec2f bottomRight, 
@@ -60,7 +78,6 @@ void drawDynamic(float center_x,
 		 float texCoord_topLeft_y)
 {
     	glPushMatrix();
-
     		glTranslatef(center_x, center_y, 0.0);
     		glRotatef(angleInDegree, 0.0, 0.0, 1.0);
 
@@ -70,7 +87,6 @@ void drawDynamic(float center_x,
    			glTexCoord3f(texCoord_topRight_x,    texCoord_topRight_y,    0); glVertex3f(plus_half_w,  plus_half_h,  pos_z);
     			glTexCoord3f(texCoord_topLeft_x,     texCoord_topLeft_y,     0); glVertex3f(minus_half_w, plus_half_h,  pos_z);
     		glEnd();
-
     	glPopMatrix();
 }
 
@@ -317,6 +333,20 @@ void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z
     	glUseProgram(0);
 }
     
+    
+void renderMesh(GLuint glList, vec3f center, vec3f angle, float scale)
+{
+     	glPushMatrix();
+       		glTranslatef(center.x, center.y, center.z);
+       		glScalef(scale, scale, scale); 
+       		glRotatef(-angle.x, 1.0, 0.0, 0.0); 
+       		glRotatef(-angle.y, 0.0, 1.0, 0.0); 
+       		glRotatef(-angle.z, 0.0, 0.0, 1.0); 
+
+       		glCallList(glList);
+     	glPopMatrix();
+
+}
 
 
 

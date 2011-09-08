@@ -89,7 +89,7 @@ void Galaxy :: generateEntireStarSystem()
         Star* _star = createStar();    
         _starsystem->addStar(_star);
     
-        _starsystem->defineSceneColor(_star->pTo_texOb);   // the scene color will be depended on star color
+        //_starsystem->restoreSceneColor();   // the scene color will be depended on star color
      
         generateNumPlanets(_starsystem, randIntInRange(PLANET_PER_SYSTEM_MIN, PLANET_PER_SYSTEM_MAX));
 
@@ -105,20 +105,20 @@ void Galaxy :: generateEntireStarSystem()
 
 
 
-void Galaxy :: generateBackground(StarSystem* _pTo_starsystem, int distNebula_maxNum, int distStar_maxNum)
+void Galaxy :: generateBackground(StarSystem* _starsystem, int distNebula_maxNum, int distStar_maxNum)
 {
         for(int i = 0; i < distNebula_maxNum; i++)
         { 
                 TextureOb* pTo_aTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.nebulaBgEffect_texOb_pList); 
-                distantNebulaBgEffect *dn = new distantNebulaBgEffect(pTo_aTexOb, randIntInRange(0, 1000), randIntInRange(0, 1000));
-                _pTo_starsystem->distantNebulaBgEffect_pList.push_back(dn);
+                DistantNebulaBgEffect* dn = new DistantNebulaBgEffect(pTo_aTexOb, randIntInRange(0, 1000), randIntInRange(0, 1000));
+                _starsystem->addDistantNebula(dn);
         } 
 
         TextureOb* pTo_distantStarTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(YELLOW_COLOR_ID);
         for(int i = 0; i < distStar_maxNum; i++)
         { 
-                distantStarBgEffect *ds = new distantStarBgEffect(pTo_distantStarTexOb, randIntInRange(0, 1000), randIntInRange(0, 1000), randIntInRange(5, 30));
-                _pTo_starsystem->distantStarBgEffect_pList.push_back(ds);
+                DistantStarBgEffect* ds = new DistantStarBgEffect(pTo_distantStarTexOb, randIntInRange(0, 1000), randIntInRange(0, 1000), randIntInRange(5, 30));
+                _starsystem->addDistantStar(ds);
         } 
 }
 

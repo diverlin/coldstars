@@ -20,9 +20,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "scanerModule.h"
 
 
-ScanerModule :: ScanerModule(TextureOb* _pTo_texOb, int _scan_add)
+ScanerModule :: ScanerModule(TextureOb* _texOb, int _scan_add)
 {
-    	CommonForModules_init(SCANER_ID, _pTo_texOb);
+    	CommonForModules_init(SCANER_ID, _texOb);
 
     	scan_add = _scan_add;
 }
@@ -35,21 +35,18 @@ ScanerModule :: ~ScanerModule ()
 int ScanerModule :: getScanAdd() const { return scan_add; }
 		
 		
-void ScanerModule :: updateInfo()
+void ScanerModule :: addUniqueInfo()
 {
-	info.clear();
-
     	info.addTitleStr("scaner module");
     	info.addNameStr("scan_add:");      info.addValueStr( int2str(scan_add) );
-    	info.addNameStr("mass:");          info.addValueStr( int2str(mass) );
 }
 
 
 ScanerModule* scanerModuleGenerator()
 {
-    	TextureOb* pTo_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
-    	int _scan_add = randIntInRange(SCANER_MODULE_SCAN_MIN, SCANER_MODULE_SCAN_MAX);
+    	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
+    	int scan_add = randIntInRange(SCANER_MODULE_SCAN_MIN, SCANER_MODULE_SCAN_MAX);
 
-    	ScanerModule* _scaner_module = new ScanerModule(pTo_texOb, _scan_add);
-    	return _scaner_module;
+    	ScanerModule* scaner_module = new ScanerModule(texOb, scan_add);    	
+    	return scaner_module;
 }
