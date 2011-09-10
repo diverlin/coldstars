@@ -32,9 +32,9 @@ class TextureOb
         int size_id;      // counting from wxh of sprite
         
         int color_id;     // probably color_rgb will be more usefull
-        int color_r;
-        int color_g;
-        int color_b;
+        //int color_r;
+        //int color_g;
+        //int color_b;
         bool is_rotated;
         
         float brightThreshold;
@@ -143,10 +143,11 @@ typedef std::vector<TextureOb*> VEC_pTexOb_type;
 
 
 class TextureManager
-{   public:
-        //VEC_pTexOb_type texOb_pList;
-        VEC_pTexOb_type slot_texOb_pList;
-        VEC_pTexOb_type turrel_texOb_pList;
+{   
+	public:
+        	//VEC_pTexOb_type texOb_pList;
+        	VEC_pTexOb_type slot_texOb_pList;
+        	VEC_pTexOb_type turrel_texOb_pList;
 
         // BACKGROUND 
         VEC_pTexOb_type nebulaBgEffect_texOb_pList;

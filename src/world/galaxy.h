@@ -37,7 +37,7 @@ class Galaxy
      		Galaxy();
      
      		void generateEntireStarSystem();
-     		void generateBackground(StarSystem* _pTo_starsystem, int distNebula_maxNum, int distStar_maxNum);
+     		void generateBackground(StarSystem* _pTo_starsystem, int distNebula_maxNum, int distStar_maxNum, int _color_id);
      		void generateNumPlanets(StarSystem* _pTo_starsystem, int planet_per_system);
      
      		void generateNumFriendlyNPC(StarSystem* _pTo_starsystem, int ship_per_system);

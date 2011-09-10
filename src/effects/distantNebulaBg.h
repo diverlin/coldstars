@@ -17,42 +17,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef STAR_H
-#define STAR_H
+#ifndef DISTANTNEBULABG_H
+#define DISTANTNEBULABG_H
 
-
-class Star : public CommonForPlanet
-{
-	public:
-    		float texture_offset1, texture_offset2; 
-   
-   		
-    		Star(TextureOb* _texOb, ObjMeshInstance* _mesh,  PlanetData _star_data);
-    		~Star();
-                
-                Color getColor() const;
-                int getColorId() const;
-                float getBrightThreshold() const;
-    		
-    		void update_inSpace_inDynamic();
-    		
-    		void render_NEW();
-    		void render_OLD();
-    		
-    		void updateInfo();
-    		void renderInfo();
-                
-        private:
-        	Color color;
-
-}; 
-
-
-Star* createStar();
-
-#endif 
     
 
-        
+class DistantNebulaBgEffect
+{
+    	public:
+	        DistantNebulaBgEffect(TextureOb* _texOb, vec3f _center);
+        	void update();
+        	void render(float vx, float vy);
+        	
+        private:
+                TextureOb* texOb;
+        	int minus_half_w, minus_half_h, plus_half_w, plus_half_h;   
+        	
+        	float angle_inD;
+        	float d_angle_inD;
 
+        	float distance_rate;
+        	vec3f center;
+        	
+        	void updateWHRenderConstants();     
+};
 
+DistantNebulaBgEffect* createDistantNebula(int _color_id);
+
+#endif 

@@ -48,9 +48,9 @@ class LazerEquipment : public CommonForEquipment
       		int radius;
       		
       		int particle_Size;
-      		TextureOb* turrelTexOb;
-      		TextureOb* pTo_lazerEffectTexOb;
-      		TextureOb* pTo_particleTexOb;
+      		TextureOb* texOb_turrel;
+      		TextureOb* texOb_lazerEffect;
+      		TextureOb* texOb_particle;
       		
       	      	std::vector<LazerModule*> modules_pList;
       	      	
@@ -60,9 +60,7 @@ class LazerEquipment : public CommonForEquipment
 
      		void virtual addUniqueInfo();
            	std::string getDamageStr();
-           	std::string getRadiusStr();
-
-      	
+           	std::string getRadiusStr();      	
 };
 
 LazerEquipment* lazerEquipmentGenerator(int race_id, int revision_id = -1);

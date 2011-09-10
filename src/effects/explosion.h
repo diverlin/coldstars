@@ -54,11 +54,9 @@ class ParticleForExplosionEffect
       		void render();
       		
       	private:
-      		int curnum;        
-        	float center_x_start;
-        	float center_y_start;   
-        	float center_x;
-        	float center_y;  
+      		int curnum;  
+      		      
+        	vec2f center;
    
         	float alpha_start;
         	float alpha_end;
@@ -71,8 +69,7 @@ class ParticleForExplosionEffect
         	float velocity_start;
         	float d_velocity; 
 
-        	float velocity_x;
-        	float velocity_y;  
+        	vec2f velocity;
         	
         	void fastCalcVelocityVector();
       		void accurateCalcVelocityVector();
@@ -95,17 +92,13 @@ class ExplosionEffect
        	private:
           	bool alreadyInRemoveQueue;
    
-
           	std::vector<ParticleForExplosionEffect*> particles_pList;  
           	
-       	        TextureOb* pTo_texOb;
-          	StarSystem* starsystem;
+       	        TextureOb* texOb;
           	
-          	GLuint texture;
           	int num_particles;
           	         	          	
-       	        float center_x;
-          	float center_y;
+       	        vec2f center;
           	
           	float pSize_start;       	
 };

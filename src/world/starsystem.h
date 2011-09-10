@@ -31,6 +31,13 @@ class StarSystem
     		//Color color;
     		Rect rect_onMap;
 
+    	    	// ENTITY LISTS
+    		std::vector<Star*>         STAR_pList;
+    		std::vector<Planet*>       PLANET_pList;
+    		std::vector<Asteroid*>     ASTEROID_pList;
+    		std::vector<Mineral*>      MINERAL_pList;
+    		std::vector<Container*>    CONTAINER_pList;
+    		std::vector<RocketBullet*> ROCKET_pList;
 
 
 		std::vector<Ship*> SHIP_pList;
@@ -42,31 +49,7 @@ class StarSystem
     		std::vector<Npc*>  NPC_PIRAT_pList;
     		std::vector<Npc*>  NPC_DIPLOMAT_pList;
 
-    		std::vector<LazerTraceEffect*>       effect_LAZERTRACE_pList;
-    		std::vector<ExplosionEffect*>  effect_EXPLOSION_pList;
-    		std::vector<DamageEffect*> 	   effect_DAMAGE_pList;
-    		VEC_pShockWaveEffect_type  effect_SHOCKWAVE_pList;
-       
-    		// REMOVE QUEUE LIST
-    		std::vector<Ship*>  SHIP_remove_queue_pList;
-    		std::vector<Npc*>   NPC_remove_queue_pList;
-
-    		std::vector<Asteroid*>  ASTEROID_remove_queue_pList;
-    		std::vector<Mineral*>   MINERAL_remove_queue_pList;
-    		std::vector<Container*> CONTAINER_remove_queue_pList;
-    		std::vector<RocketBullet*> ROCKET_remove_queue_pList;
-
-    		// VISIBLE ENTITY LIST
-    		std::vector<Star*>      visible_STAR_pList;
-    		std::vector<Planet*>    visible_PLANET_pList;
-    		std::vector<Asteroid*>  visible_ASTEROID_pList;
-    		std::vector<Mineral*>   visible_MINERAL_pList;
-    		std::vector<Container*> visible_CONTAINER_pList;
-    		std::vector<RocketBullet*> visible_ROCKET_pList;
-
-    		std::vector<Ship*>      visible_SHIP_pList;
-
-     
+    
     		StarSystem();
     		~StarSystem();
     
@@ -82,8 +65,7 @@ class StarSystem
     		void updateEntities_inDynamic_FALSE();
     		void updateEntities_inStatic();
 
-    		void findVisibleEntities();
-        
+    		void findVisibleEntities();        
 
 	        void createPostProcessStuff();
     		void renderEntities_NEW();
@@ -112,9 +94,12 @@ class StarSystem
     		bool addMineral(Mineral*);
     		bool addContainer(Container*);
     		bool addRocket(RocketBullet*);
-    		bool addExplosion(ExplosionEffect*);
-    		bool addShockWave(ShockWaveEffect*);
     		
+    		bool addExplosionEffect(ExplosionEffect*);
+    		bool addShockWaveEffect(ShockWaveEffect*);
+    		bool addLazerTraceEffect(LazerTraceEffect*);
+    		bool addDamageEffect(DamageEffect*);
+   		
     		bool addDistantNebula(DistantNebulaBgEffect*);
     		bool addDistantStar(DistantStarBgEffect*);
                 
@@ -123,19 +108,38 @@ class StarSystem
          	bool removeNpcFromTheListById(std::vector<Npc*>* pTo_npc_pList, int _id);
    		//// TRANSITION
 
+		int getShockWaveNum() const;
     		Planet* returnClosestPlanet(vec2f);
 
     	private:
     	    	// ENTITY LISTS
-    	    	VEC_pDistantNebulaBgEffect_type distantNebulaBgEffect_pList;
-    		VEC_pDistantStarBgEffect_type   distantStarBgEffect_pList;
+    	    	std::vector<DistantNebulaBgEffect*> distantNebulaBgEffect_pList;
+    		std::vector<DistantStarBgEffect*> distantStarBgEffect_pList;
     		
-    		std::vector<Star*>         STAR_pList;
-    		std::vector<Planet*>       PLANET_pList;
-    		std::vector<Asteroid*>     ASTEROID_pList;
-    		std::vector<Mineral*>      MINERAL_pList;
-    		std::vector<Container*>    CONTAINER_pList;
-    		std::vector<RocketBullet*> ROCKET_pList;
+    		std::vector<LazerTraceEffect*> effect_LAZERTRACE_pList;
+    		std::vector<ExplosionEffect*>  effect_EXPLOSION_pList;
+    		std::vector<DamageEffect*>     effect_DAMAGE_pList;
+    		std::vector<ShockWaveEffect*>  effect_SHOCKWAVE_pList;
+    		
+    		
+    		// REMOVE QUEUE LIST
+    		std::vector<Ship*>  SHIP_remove_queue_pList;
+    		std::vector<Npc*>   NPC_remove_queue_pList;
+
+    		std::vector<Asteroid*>  ASTEROID_remove_queue_pList;
+    		std::vector<Mineral*>   MINERAL_remove_queue_pList;
+    		std::vector<Container*> CONTAINER_remove_queue_pList;
+    		std::vector<RocketBullet*> ROCKET_remove_queue_pList;
+    		
+    		// VISIBLE ENTITY LIST
+    		std::vector<Star*>      visible_STAR_pList;
+    		std::vector<Planet*>    visible_PLANET_pList;
+    		std::vector<Asteroid*>  visible_ASTEROID_pList;
+    		std::vector<Mineral*>   visible_MINERAL_pList;
+    		std::vector<Container*> visible_CONTAINER_pList;
+    		std::vector<RocketBullet*> visible_ROCKET_pList;
+
+    		std::vector<Ship*>      visible_SHIP_pList;
     		
     	        FBO* pTo_fbo0;
                 FBO* pTo_fbo1;

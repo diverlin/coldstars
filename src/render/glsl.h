@@ -79,19 +79,22 @@ class ShockWaveEffect
 		bool is_alive;
           	bool is_alreadyInRemoveQueue;
 
-          	StarSystem* starsystem;
-          	float center_x, center_y;
+          	vec2f center;
           	
-          	float x, y, z, time, d_x, d_y, d_z, d_time;
+          	vec3f parameter;
+          	vec3f d_parameter;
+          	float time, d_time;
 
       		ShockWaveEffect(vec2f _center_pos, float _x, float _y, float _z, float _time, float _d_x, float _d_y, float _d_z, float d_time);
       		~ShockWaveEffect();
       		
-      		void setStarSystem(StarSystem*);
-      		
       		void update();
+      		
+      	private:
+
+      	
 };
-typedef std::vector<ShockWaveEffect*> VEC_pShockWaveEffect_type;  
+
 
 void createShockWave(StarSystem* _starsystem, vec2f _center_pos, int obSize);          
    

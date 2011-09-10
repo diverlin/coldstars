@@ -32,7 +32,7 @@ int randIntInRange(int range_start, int range_end)
        return range_start;
 }
 
-int randomInverse()
+int getRandomSign()
 {
   if (randIntInRange(0,10) > 5)
      return 1;

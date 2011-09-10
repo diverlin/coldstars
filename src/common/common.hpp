@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define COMMON_H
 
 int randIntInRange(int range_start, int range_end);
-int randomInverse();
+int getRandomSign();
 
 struct Color
 {
@@ -58,9 +58,6 @@ std::string bool2str(bool var);
 
 bool get_dX_dY_ToPoint(float x1, float y1, float x2, float y2, float step, float* pTo_dx, float* pTo_dy);
 void get_dX_dY_angleInD_ToPoint(float x1, float y1, float x2, float y2, float step, float* pTo_dx, float* pTo_dy, float* pTo_angle_inD);
-
-
-
 
 
 #endif
