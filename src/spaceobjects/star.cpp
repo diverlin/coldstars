@@ -45,8 +45,7 @@ Star :: Star(TextureOb* _texOb, ObjMeshInstance* _mesh, PlanetData _star_data)
 		color.b = 255/255.0;
 		color.a = 1.0;
 	}
-	
-	    
+		    
         points.setCenter(0, 0);
         center_pos.set(0, 0, -500.0f);
 }
@@ -56,6 +55,7 @@ Star :: ~Star()
     
 
 Color Star :: getColor() const           { return color; }
+int Star :: getColorId() const 		 { return texOb->color_id; }
 float Star :: getBrightThreshold() const { return texOb->brightThreshold; }
        
 void Star :: update_inSpace_inDynamic()

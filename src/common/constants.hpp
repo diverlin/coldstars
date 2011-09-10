@@ -92,9 +92,9 @@ const int RED_COLOR_ID    = 0;
 const int GREEN_COLOR_ID  = 1; 
 const int BLUE_COLOR_ID   = 2;
 const int YELLOW_COLOR_ID = 3;
-const int GREY_COLOR_ID = 4;
+const int GREY_COLOR_ID   = 4;
 
-const int STARSYSTEM_TOTAL_NUM = 2;
+const int STARSYSTEM_TOTAL_NUM = 20;
 
 // ASTEROID
 const int ASTEROID_SIZE_MIN = 6;
@@ -367,6 +367,8 @@ const float ROCKET_ANGULAR_SPEED  = 1.0;
 const int ROCKET_EXISTANCE_TIME = 3 * TURN_TIME;
 
 
+const int DISTANTSTAR_SIZE_MIN = 3; 
+const int DISTANTSTAR_SIZE_MAX = 15;
 
 
 const int CURSOR_ID     = g_TYPE_ID_GENERATOR.returnNextId("CURSOR_ID");  

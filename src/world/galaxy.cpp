@@ -82,13 +82,13 @@ void Galaxy :: generateEntireStarSystem()
         Rect ssOnMapRect = Rect( randIntInRange( MAP_OFFSET_X, (g_VIEW_WIDTH - 3*MAP_OFFSET_X)), (g_VIEW_HEIGHT - randIntInRange( MAP_OFFSET_Y, (g_VIEW_HEIGHT - 2*MAP_OFFSET_Y)) ), 40, 40);
         _starsystem->setPositionOnWorldMap(ssOnMapRect);
 
-        int distNebula_maxNum = randIntInRange(4,7);
-        int distStar_maxNum = randIntInRange(40, 60);
-        generateBackground(_starsystem, distNebula_maxNum, distStar_maxNum);
-
         Star* _star = createStar();    
         _starsystem->addStar(_star);
-    
+  
+        int distNebula_maxNum = randIntInRange(4,7);
+        int distStar_maxNum = randIntInRange(40, 60);
+        generateBackground(_starsystem, distNebula_maxNum, distStar_maxNum, _star->getColorId());
+          
         //_starsystem->restoreSceneColor();   // the scene color will be depended on star color
      
         generateNumPlanets(_starsystem, randIntInRange(PLANET_PER_SYSTEM_MIN, PLANET_PER_SYSTEM_MAX));
@@ -105,19 +105,17 @@ void Galaxy :: generateEntireStarSystem()
 
 
 
-void Galaxy :: generateBackground(StarSystem* _starsystem, int distNebula_maxNum, int distStar_maxNum)
+void Galaxy :: generateBackground(StarSystem* _starsystem, int distNebula_maxNum, int distStar_maxNum, int _color_id)
 {
         for(int i = 0; i < distNebula_maxNum; i++)
         { 
-                TextureOb* pTo_aTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.nebulaBgEffect_texOb_pList); 
-                DistantNebulaBgEffect* dn = new DistantNebulaBgEffect(pTo_aTexOb, randIntInRange(0, 1000), randIntInRange(0, 1000));
+		DistantNebulaBgEffect* dn = createDistantNebula(_color_id);
                 _starsystem->addDistantNebula(dn);
         } 
 
-        TextureOb* pTo_distantStarTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(YELLOW_COLOR_ID);
         for(int i = 0; i < distStar_maxNum; i++)
         { 
-                DistantStarBgEffect* ds = new DistantStarBgEffect(pTo_distantStarTexOb, randIntInRange(0, 1000), randIntInRange(0, 1000), randIntInRange(5, 30));
+		DistantStarBgEffect* ds = createDistantStar();
                 _starsystem->addDistantStar(ds);
         } 
 }

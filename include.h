@@ -90,7 +90,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "src/render/glsl.h"
 
 
-#include "src/effects/background.h"
+#include "src/effects/distantNebulaBg.h"
+#include "src/effects/distantStarBg.h"
 #include "src/effects/explosion.h"
 #include "src/effects/effects.h"
 
@@ -212,7 +213,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "src/vehicle/navigator.cpp"
 #include "src/vehicle/turrel.cpp"
 
-#include "src/effects/background.cpp"
+#include "src/effects/distantNebulaBg.cpp"
+#include "src/effects/distantStarBg.cpp"
 #include "src/effects/explosion.cpp"
 #include "src/effects/effects.cpp"
 #include "src/effects/lazerTrace.cpp"

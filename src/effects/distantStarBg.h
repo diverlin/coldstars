@@ -17,42 +17,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef STAR_H
-#define STAR_H
+#ifndef DISTANTSTARBG_H
+#define DISTANTSTARBG_H
 
 
-class Star : public CommonForPlanet
-{
-	public:
-    		float texture_offset1, texture_offset2; 
-   
-   		
-    		Star(TextureOb* _texOb, ObjMeshInstance* _mesh,  PlanetData _star_data);
-    		~Star();
-                
-                Color getColor() const;
-                int getColorId() const;
-                float getBrightThreshold() const;
-    		
-    		void update_inSpace_inDynamic();
-    		
-    		void render_NEW();
-    		void render_OLD();
-    		
-    		void updateInfo();
-    		void renderInfo();
-                
-        private:
-        	Color color;
+class DistantStarBgEffect
+{   
+    	public:
+       		DistantStarBgEffect(TextureOb* _texOb, vec2f _center, float _particleSize);
+       		void render(float vx, float vy);
+       		
+       	private:
+       	       	TextureOb* texOb;
 
+       		vec2f center; 
+       		float particleSize;
+       		float distance_rate;
+       	
 }; 
 
+DistantStarBgEffect* createDistantStar();
 
-Star* createStar();
 
 #endif 
-    
-
-        
-
-

@@ -30,9 +30,9 @@ TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, std::ve
     tech_level_id = -1;
 
     color_id = -1;
-    color_r = 256;
-    color_g = 256;
-    color_b = 256;
+    //color_r = 256;
+    //color_g = 256;
+    //color_b = 256;
     is_rotated = false;
     //
 
@@ -359,20 +359,15 @@ void TextureOb :: shipArgManager(std::vector<int>* _pTo_arg)
 {
      race_id    = (*_pTo_arg)[0];
      subtype_id = (*_pTo_arg)[1];   // warrior/trader and so on
-     color_r    = (*_pTo_arg)[2]; 
-     color_g    = (*_pTo_arg)[3]; 
-     color_b    = (*_pTo_arg)[4]; 
      mod_id     = 0;
           
      size_id = returnObjectSize(w, h);
 }
 
-void TextureOb :: nebulaArgManager(std::vector<int>* _pTo_arg)
+void TextureOb :: nebulaArgManager(std::vector<int>* _arg)
 {
-     color_r    = (*_pTo_arg)[0];
-     color_g    = (*_pTo_arg)[1];
-     color_b    = (*_pTo_arg)[2];
-     is_rotated = (*_pTo_arg)[3];
+     color_id    = (*_arg)[0];
+     is_rotated =  (*_arg)[1];
 }
 
 void TextureOb :: starArgManager(std::vector<int>* _pTo_arg)
@@ -1099,10 +1094,17 @@ TextureOb* TextureManager :: returnPointerToRandomShipTexObWithFollowingAtrribut
 
 TextureOb* TextureManager :: returnParticleTexObByColorId(int _color_id)
 {
-     for(unsigned int i = 0; i < particles_texOb_pList.size(); i++)
-         if (particles_texOb_pList[i]->color_id == _color_id)
-            return particles_texOb_pList[i];
-     printf("Particle with requested color is absent"); 
+	printf("searching color id = %i\n", _color_id);
+     	for(unsigned int i = 0; i < particles_texOb_pList.size(); i++)
+     	{
+            	printf("current color id = %i\n", particles_texOb_pList[i]->color_id);  
+         	if (particles_texOb_pList[i]->color_id == _color_id)
+            		return particles_texOb_pList[i]; 
+        
+	}
+	
+     	printf("Particle with requested color is absent\n"); 
+     	return NULL;
 }
 
 

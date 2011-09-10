@@ -235,49 +235,49 @@ void printProgramInfoLog(GLuint program)
 
 FBO :: FBO(int _w, int _h)
 {
-      w = _w;
-      h = _h;
-      // create a color texture
-      glGenTextures(1, &texture);
-      glBindTexture(GL_TEXTURE_2D, texture);
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,  w, h, 0, GL_RGBA, GL_INT, NULL); // no data transferred
+      	w = _w;
+      	h = _h;
+      	// create a color texture
+      	glGenTextures(1, &texture);
+      	glBindTexture(GL_TEXTURE_2D, texture);
+      	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,  w, h, 0, GL_RGBA, GL_INT, NULL); // no data transferred
 
 
-      glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-      glBindTexture(GL_TEXTURE_2D, 0);
+      	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+      	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+      	glBindTexture(GL_TEXTURE_2D, 0);
 
-      // create depth renderbuffer
-      glGenRenderbuffers(1, &depth_buffer); // putcom
-      glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, depth_buffer);
-      glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT32, w, h);
+      	// create depth renderbuffer
+      	glGenRenderbuffers(1, &depth_buffer); // putcom
+      	glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, depth_buffer);
+      	glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT32, w, h);
 
-      // create FBO
-      glGenFramebuffers(1, &fbo);   // putcom
-      glBindFramebuffer(GL_FRAMEBUFFER, fbo);  // putcom     // switch to our fbo so we can bind stuff to it
-      glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, texture, 0);
-      glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depth_buffer);
+      	// create FBO
+      	glGenFramebuffers(1, &fbo);   // putcom
+      	glBindFramebuffer(GL_FRAMEBUFFER, fbo);  // putcom     // switch to our fbo so we can bind stuff to it
+      	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, texture, 0);
+      	glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depth_buffer);
 
-      // Go back to regular frame buffer rendering
-      glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+      	// Go back to regular frame buffer rendering
+      	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }
 
 void FBO :: activate()
 {
-     glBindTexture(GL_TEXTURE_2D, 0);            // unbind texture
-     glBindFramebuffer(GL_FRAMEBUFFER, fbo);    // putcom // bind fbo
+     	glBindTexture(GL_TEXTURE_2D, 0);            // unbind texture
+     	glBindFramebuffer(GL_FRAMEBUFFER, fbo);    // putcom // bind fbo
 
-     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-     glLoadIdentity();
+     	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+     	glLoadIdentity();
 
-     glPushAttrib(GL_VIEWPORT_BIT);               // viewport is shared with the main context
-     glViewport(0, 0, g_VIEW_WIDTH, g_VIEW_HEIGHT);
+     	glPushAttrib(GL_VIEWPORT_BIT);               // viewport is shared with the main context
+     	glViewport(0, 0, g_VIEW_WIDTH, g_VIEW_HEIGHT);
 }
 
 void FBO :: deactivate()
 {
-     glActiveTexture(GL_TEXTURE0);                // debug
-     glPopAttrib();                               // restore viewport
+     	glActiveTexture(GL_TEXTURE0);                // debug
+     	glPopAttrib();                               // restore viewport
 }
 
 
@@ -287,44 +287,35 @@ ShockWaveEffect :: ShockWaveEffect(vec2f _center_pos,
  				   float _x, float _y, float _z, float _time, 
  				   float _d_x, float _d_y, float _d_z, float _d_time)
 {
-          is_alive = true;
-          is_alreadyInRemoveQueue = false;
+	is_alive = true;
+        is_alreadyInRemoveQueue = false;
 
-          starsystem = NULL;
-          center_x = _center_pos.x/float(g_VIEW_WIDTH);
-          center_y = _center_pos.y/float(g_VIEW_HEIGHT);
+        //starsystem = NULL;
+        center.set(_center_pos.x/float(g_VIEW_WIDTH), _center_pos.y/float(g_VIEW_HEIGHT));
 
-          x = _x;
-          y = _y;
-          z = _z;
-          time = _time; 
+        parameter.set(_x, _y, _z);
+        time = _time; 
 
-          d_x = _d_x;
-          d_y = _d_y;
-          d_z = _d_z;
-          d_time = _d_time; 
+        d_parameter.set(_d_x, _d_y, _d_z);
+        d_time = _d_time; 
 }
 
 ShockWaveEffect :: ~ShockWaveEffect()
 {}
 
 
-void ShockWaveEffect :: setStarSystem(StarSystem* _starsystem)
-{
-	starsystem = _starsystem;
-}
 
       		
 void ShockWaveEffect :: update()
 {
-	x -= d_x;
+	parameter.x -= d_parameter.x;
 
-	if (y > 0)
-		y -= d_y;
+	if (parameter.y > 0)
+		parameter.y -= d_parameter.y;
 	else
             	is_alive = false;
 
-     	z -= d_z;
+     	parameter.z -= d_parameter.z;
       	time -= d_time;
 
     	if (is_alive == false)
@@ -347,7 +338,7 @@ void ShockWaveEffect :: update()
 
 void createShockWave(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 {
-	if ( (obSize > 3) && (_starsystem->effect_SHOCKWAVE_pList.size() < 10) )
+	if ( (obSize > 3) && (_starsystem->getShockWaveNum() < 10) )
 	{
 		int w = g_VIEW_WIDTH;
 		int h = g_VIEW_HEIGHT;      
@@ -362,6 +353,6 @@ void createShockWave(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 		float dtime = -(0.002 + 0.3 * obSize * 0.001);     // 10, 1.8, 0.13, 0.0,  0,  0.02, 0.0005, -0.004 
         
 		ShockWaveEffect* pTo_shockWave = new ShockWaveEffect(_center_pos, x, y, z, time, dx, dy, dz, dtime);  
-       		_starsystem->addShockWave(pTo_shockWave);
+       		_starsystem->addShockWaveEffect(pTo_shockWave);
 	}
 }

@@ -646,11 +646,11 @@ void StarSystem :: renderEntities_NEW()
 		{         
 			effect_SHOCKWAVE_pList[i]->update();
 	
-			center_array[i][0] = effect_SHOCKWAVE_pList[i]->center_x - float(g_SCROLL_COORD_X)/g_VIEW_WIDTH;
-			center_array[i][1] = effect_SHOCKWAVE_pList[i]->center_y - float(g_SCROLL_COORD_Y)/g_VIEW_HEIGHT;
-			xyz_array[i][0] = effect_SHOCKWAVE_pList[i]->x;
-			xyz_array[i][1] = effect_SHOCKWAVE_pList[i]->y;
-			xyz_array[i][2] = effect_SHOCKWAVE_pList[i]->z;
+			center_array[i][0] = effect_SHOCKWAVE_pList[i]->center.x - float(g_SCROLL_COORD_X)/g_VIEW_WIDTH;
+			center_array[i][1] = effect_SHOCKWAVE_pList[i]->center.y - float(g_SCROLL_COORD_Y)/g_VIEW_HEIGHT;
+			xyz_array[i][0] = effect_SHOCKWAVE_pList[i]->parameter.x;
+			xyz_array[i][1] = effect_SHOCKWAVE_pList[i]->parameter.y;
+			xyz_array[i][2] = effect_SHOCKWAVE_pList[i]->parameter.z;
 				
 			time_array[i] = effect_SHOCKWAVE_pList[i]->time;
 		}
@@ -848,30 +848,40 @@ bool StarSystem :: addContainer(Container* _container)
 }
 
 
-bool addRocket(RocketBullet* rocket);
+bool StarSystem :: addRocket(RocketBullet* rocket)
 {
 	ROCKET_pList.push_back(rocket);
 	return true;
 }    
 
-bool StarSystem :: addExplosion(ExplosionEffect* _explosion)
-{
-	_explosion->setStarSystem(this);
-	effect_EXPLOSION_pList.push_back(_explosion);
-        
-        return true;
-}
+	
 
-		
-
-bool StarSystem :: addShockWave(ShockWaveEffect* _shockWave)
+bool StarSystem :: addShockWaveEffect(ShockWaveEffect* _shockWave)
 {
-	_shockWave->setStarSystem(this);
 	effect_SHOCKWAVE_pList.push_back(_shockWave);
-        
         return true;
 }
 
+
+bool StarSystem :: addLazerTraceEffect(LazerTraceEffect* _lazerTraceEffect)
+{
+	effect_LAZERTRACE_pList.push_back(_lazerTraceEffect);
+	return true;
+}
+
+bool StarSystem :: addExplosionEffect(ExplosionEffect* _explosionEffect)
+{
+	effect_EXPLOSION_pList.push_back(_explosionEffect);
+	return true;
+}
+
+bool StarSystem :: addDamageEffect(DamageEffect* _damageEffect)
+{
+	effect_DAMAGE_pList.push_back(_damageEffect);
+	return true;
+}
+    		
+    		
 bool StarSystem :: addDistantNebula(DistantNebulaBgEffect* dn)
 {
 	distantNebulaBgEffect_pList.push_back(dn);
@@ -1434,7 +1444,7 @@ bool StarSystem :: removeNpc(int _id, int _race_id, int _subtype_id)
 
 
 
-
+int StarSystem :: getShockWaveNum() const { return effect_SHOCKWAVE_pList.size(); }
 
 
 

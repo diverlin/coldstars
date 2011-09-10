@@ -21,7 +21,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 DamageEffect :: DamageEffect(TextureOb* _pTo_texOb, 
-			     StarSystem* _pTo_starsystem, 
 			     float* _pTo_center_x, 
 			     float* _pTo_center_y, 
 			     int _num_particles, 
@@ -34,7 +33,6 @@ DamageEffect :: DamageEffect(TextureOb* _pTo_texOb,
     is_alive = true;
     is_dying = false;
 
-    pTo_starsystem = _pTo_starsystem;
     pTo_center_x = _pTo_center_x;
     pTo_center_y = _pTo_center_y;
 
@@ -128,8 +126,8 @@ ParticleForDamageEffect :: ParticleForDamageEffect(float* _pTo_center_x,
 
 void ParticleForDamageEffect :: fastCalcVelocityVector()
 {
-    float dx_n = randIntInRange(0, 10)*randomInverse()*0.1;
-    float dy_n = randIntInRange(0, 10)*randomInverse()*0.1;
+    float dx_n = randIntInRange(0, 10)*getRandomSign()*0.1;
+    float dy_n = randIntInRange(0, 10)*getRandomSign()*0.1;
 
     velocity_x = dx_n * velocity_start;
     velocity_y = dy_n * velocity_start;

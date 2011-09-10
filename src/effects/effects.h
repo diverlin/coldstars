@@ -65,7 +65,6 @@ class DamageEffect
        bool is_alive;
        bool is_dying;
 
-       StarSystem* pTo_starsystem;
        float* pTo_center_x;
        float* pTo_center_y;
 
@@ -80,7 +79,6 @@ class DamageEffect
        std::vector<ParticleForDamageEffect*> particles_pList;
 
        DamageEffect(TextureOb* _pTo_texOb, 
-       		    StarSystem* _pTo_starsystem, 
        		    float* _pTo_center_x, 
        		    float* _pTo_center_y, 
        		    int _num_particles, 
