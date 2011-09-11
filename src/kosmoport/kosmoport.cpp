@@ -58,8 +58,8 @@ bool Kosmoport :: addShip(Ship* _pTo_ship)
 bool Kosmoport :: addNpc(Npc* _pTo_npc)
 {
      NPC_pList.push_back(_pTo_npc);
-     _pTo_npc->pTo_kosmoport = this;
-     _pTo_npc->in_SPACE = false;
+     _pTo_npc->setKosmoport(this);
+     _pTo_npc->setInSpace(false);
  
      return true;
 }
@@ -86,7 +86,7 @@ bool Kosmoport :: removeNpcById(int _id)
 {
     bool is_removed = false;
     for (unsigned int ni = 0; ni < NPC_pList.size(); ni++) 
-        if (NPC_pList[ni]->id == _id)
+        if (NPC_pList[ni]->getId() == _id)
         {
            NPC_pList.erase(NPC_pList.begin() + ni);
            is_removed = true;

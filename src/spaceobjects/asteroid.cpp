@@ -70,6 +70,7 @@ void Asteroid :: hit_FALSE(int damage)
 void Asteroid :: update_inSpace_inDynamic_TRUE()
 {    
      	updatePosition();  
+     	updateRotation();
 
      	if (is_dying == true)
      	{
@@ -84,7 +85,6 @@ void Asteroid :: update_inSpace_inDynamic_FALSE()
      	updatePosition();  
 }
 
-  
     
 void Asteroid :: death_TRUE()
 {
@@ -143,7 +143,7 @@ void Asteroid :: updateInfo()
 }     
 
 
-void Asteroid :: renderInfo()
+void Asteroid :: renderInfo() 
 {  
      	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y);
 }

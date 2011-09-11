@@ -121,17 +121,17 @@ void Points :: addWeapon2CenterPoint()
 
 void Points :: initWeapon3CenterPoint(float _pos_x, float _pos_y)
 {
-     weapon_3_origin_center.set(_pos_x, _pos_y);
-     weapon_3_center.set(_pos_x, _pos_y);
+     	weapon_3_origin_center.set(_pos_x, _pos_y);
+     	weapon_3_center.set(_pos_x, _pos_y);
 }
   
 void Points :: addWeapon3CenterPoint()
 {
-     vector_orig_x.push_back(&weapon_3_origin_center.x);
-     vector_orig_y.push_back(&weapon_3_origin_center.y);
+     	vector_orig_x.push_back(&weapon_3_origin_center.x);
+     	vector_orig_y.push_back(&weapon_3_origin_center.y);
 
-     vector_x.push_back(&weapon_3_center.x);
-     vector_y.push_back(&weapon_3_center.y);
+     	vector_x.push_back(&weapon_3_center.x);
+     	vector_y.push_back(&weapon_3_center.y);
 }
 
 
@@ -139,17 +139,17 @@ void Points :: addWeapon3CenterPoint()
 
 void Points :: initWeapon4CenterPoint(float _pos_x, float _pos_y)
 {
-     weapon_4_origin_center.set(_pos_x, _pos_y);
-     weapon_4_center.set(_pos_x, _pos_y);
+     	weapon_4_origin_center.set(_pos_x, _pos_y);
+     	weapon_4_center.set(_pos_x, _pos_y);
 }
 
 void Points :: addWeapon4CenterPoint()
 {
-     vector_orig_x.push_back(&weapon_4_origin_center.x);
-     vector_orig_y.push_back(&weapon_4_origin_center.y);
+     	vector_orig_x.push_back(&weapon_4_origin_center.x);
+     	vector_orig_y.push_back(&weapon_4_origin_center.y);
 
-     vector_x.push_back(&weapon_4_center.x);
-     vector_y.push_back(&weapon_4_center.y);
+     	vector_x.push_back(&weapon_4_center.x);
+     	vector_y.push_back(&weapon_4_center.y);
 }
 
 
@@ -159,17 +159,17 @@ void Points :: addWeapon4CenterPoint()
     
 void Points :: initWeapon5CenterPoint(float _pos_x, float _pos_y)
 {
-     weapon_5_origin_center.set(_pos_x, _pos_y);
-     weapon_5_center.set(_pos_x, _pos_y);
+     	weapon_5_origin_center.set(_pos_x, _pos_y);
+     	weapon_5_center.set(_pos_x, _pos_y);
 }
    
 void Points :: addWeapon5CenterPoint()
 {
-     vector_orig_x.push_back(&weapon_5_origin_center.x);
-     vector_orig_y.push_back(&weapon_5_origin_center.y);
+     	vector_orig_x.push_back(&weapon_5_origin_center.x);
+     	vector_orig_y.push_back(&weapon_5_origin_center.y);
 
-     vector_x.push_back(&weapon_5_center.x);
-     vector_y.push_back(&weapon_5_center.y);
+     	vector_x.push_back(&weapon_5_center.x);
+     	vector_y.push_back(&weapon_5_center.y);
 }
    
 
@@ -200,53 +200,53 @@ void Points :: initMainQuadPoints(int _w, int _h)
           
 void Points :: addMainQuadPoints()
 { 
-      /////////////////////////////////////////////////////////////
-      ////// Origin entity rect (for rotation only transformation)
-      vector_orig_x.push_back(&bottomLeft_origin.x);
-      vector_orig_y.push_back(&bottomLeft_origin.y);
+      	/////////////////////////////////////////////////////////////
+      	////// Origin entity rect (for rotation only transformation)
+      	vector_orig_x.push_back(&bottomLeft_origin.x);
+      	vector_orig_y.push_back(&bottomLeft_origin.y);
       
-      vector_orig_x.push_back(&bottomRight_origin.x);
-      vector_orig_y.push_back(&bottomRight_origin.y);
+      	vector_orig_x.push_back(&bottomRight_origin.x);
+      	vector_orig_y.push_back(&bottomRight_origin.y);
       
-      vector_orig_x.push_back(&topRight_origin.x);
-      vector_orig_y.push_back(&topRight_origin.y);
+      	vector_orig_x.push_back(&topRight_origin.x);
+      	vector_orig_y.push_back(&topRight_origin.y);
                 
-      vector_orig_x.push_back(&topLeft_origin.x);
-      vector_orig_y.push_back(&topLeft_origin.y);
+      	vector_orig_x.push_back(&topLeft_origin.x);
+      	vector_orig_y.push_back(&topLeft_origin.y);
       
-      ///////////////////////////////////////////
-      ////// Actual entity rect
-      vector_x.push_back(&bottomLeft.x);
-      vector_y.push_back(&bottomLeft.y);
+      	///////////////////////////////////////////
+      	////// Actual entity rect
+      	vector_x.push_back(&bottomLeft.x);
+      	vector_y.push_back(&bottomLeft.y);
       
-      vector_x.push_back(&bottomRight.x);
-      vector_y.push_back(&bottomRight.y);
+      	vector_x.push_back(&bottomRight.x);
+      	vector_y.push_back(&bottomRight.y);
       
-      vector_x.push_back(&topRight.x);
-      vector_y.push_back(&topRight.y);
+      	vector_x.push_back(&topRight.x);
+      	vector_y.push_back(&topRight.y);
                  
-      vector_x.push_back(&topLeft.x);
-      vector_y.push_back(&topLeft.y);
+      	vector_x.push_back(&topLeft.x);
+      	vector_y.push_back(&topLeft.y);
 }
 
 
 
 void Points :: initShieldQuadPoints()
 { 
-     float factor = 1.6;
+     	float factor = 1.6;
      
-     // Origin entity rect (for rotation only transformation)
-     bottomLeftShield_origin.set(-w/factor, -h/factor);
-     bottomRightShield_origin.set(+w/factor, -h/factor);
-     topRightShield_origin.set(+w/factor, +h/factor);
-     topLeftShield_origin.set(-w/factor, +h/factor);
+     	// Origin entity rect (for rotation only transformation)
+     	bottomLeftShield_origin.set(-w/factor, -h/factor);
+     	bottomRightShield_origin.set(+w/factor, -h/factor);
+     	topRightShield_origin.set(+w/factor, +h/factor);
+     	topLeftShield_origin.set(-w/factor, +h/factor);
 
 
-     // Actual entity rect
-     bottomLeftShield.set(-w/factor, -h/factor);
-     bottomRightShield.set(+w/factor, -h/factor);
-     topRightShield.set(+w/factor, +h/factor);
-     topLeftShield.set(-w/factor, +h/factor);
+     	// Actual entity rect
+     	bottomLeftShield.set(-w/factor, -h/factor);
+     	bottomRightShield.set(+w/factor, -h/factor);
+     	topRightShield.set(+w/factor, +h/factor);
+     	topLeftShield.set(-w/factor, +h/factor);
 }
 
 
@@ -255,32 +255,32 @@ void Points :: initShieldQuadPoints()
 
 void Points :: addShieldQuadPoints()
 { 
-     // Origin entity rect (for rotation only transformation)
-     vector_orig_x.push_back(&bottomLeftShield_origin.x);
-     vector_orig_y.push_back(&bottomLeftShield_origin.y);
+     	// Origin entity rect (for rotation only transformation)
+     	vector_orig_x.push_back(&bottomLeftShield_origin.x);
+     	vector_orig_y.push_back(&bottomLeftShield_origin.y);
 
-     vector_orig_x.push_back(&bottomRightShield_origin.x);
-     vector_orig_y.push_back(&bottomRightShield_origin.y);
+     	vector_orig_x.push_back(&bottomRightShield_origin.x);
+     	vector_orig_y.push_back(&bottomRightShield_origin.y);
 
-     vector_orig_x.push_back(&topRightShield_origin.x);
-     vector_orig_y.push_back(&topRightShield_origin.y);
+     	vector_orig_x.push_back(&topRightShield_origin.x);
+     	vector_orig_y.push_back(&topRightShield_origin.y);
 
-     vector_orig_x.push_back(&topLeftShield_origin.x);
-     vector_orig_y.push_back(&topLeftShield_origin.y);
+     	vector_orig_x.push_back(&topLeftShield_origin.x);
+     	vector_orig_y.push_back(&topLeftShield_origin.y);
 
 
-     // Actual entity rect
-     vector_x.push_back(&bottomLeftShield.x);
-     vector_y.push_back(&bottomLeftShield.y);
+     	// Actual entity rect
+     	vector_x.push_back(&bottomLeftShield.x);
+     	vector_y.push_back(&bottomLeftShield.y);
 
-     vector_x.push_back(&bottomRightShield.x);
-     vector_y.push_back(&bottomRightShield.y);
+     	vector_x.push_back(&bottomRightShield.x);
+     	vector_y.push_back(&bottomRightShield.y);
 
-     vector_x.push_back(&topRightShield.x);
-     vector_y.push_back(&topRightShield.y);
+     	vector_x.push_back(&topRightShield.x);
+     	vector_y.push_back(&topRightShield.y);
 
-     vector_x.push_back(&topLeftShield.x);
-     vector_y.push_back(&topLeftShield.y);
+     	vector_x.push_back(&topLeftShield.x);
+     	vector_y.push_back(&topLeftShield.y);
 }
 
 
@@ -288,17 +288,17 @@ void Points :: addShieldQuadPoints()
 
 void Points :: initMidLeftPoint()
 {
-     midLeft_origin.set(-w/2, 0);
-     midLeft.set(-w/2, 0);
+     	midLeft_origin.set(-w/2, 0);
+     	midLeft.set(-w/2, 0);
 }
 
 void Points :: addMidLeftPoint()
 {
-     vector_orig_x.push_back(&midLeft_origin.x);
-     vector_orig_y.push_back(&midLeft_origin.y);
+     	vector_orig_x.push_back(&midLeft_origin.x);
+     	vector_orig_y.push_back(&midLeft_origin.y);
 
-     vector_x.push_back(&midLeft.x);
-     vector_y.push_back(&midLeft.y);
+     	vector_x.push_back(&midLeft.x);
+     	vector_y.push_back(&midLeft.y);
 }
 
 
@@ -306,17 +306,17 @@ void Points :: addMidLeftPoint()
 
 void Points :: initMidFarLeftPoint()
 {
-     midFarLeft_origin.set(-w, 0);
-     midFarLeft.set(-w, 0);
+     	midFarLeft_origin.set(-w, 0);
+     	midFarLeft.set(-w, 0);
 }
 
 void Points :: addMidFarLeftPoint()
 {
-     vector_orig_x.push_back(&midFarLeft_origin.x);
-     vector_orig_y.push_back(&midFarLeft_origin.y);
+     	vector_orig_x.push_back(&midFarLeft_origin.x);
+     	vector_orig_y.push_back(&midFarLeft_origin.y);
 
-     vector_x.push_back(&midFarLeft.x);
-     vector_y.push_back(&midFarLeft.y);
+     	vector_x.push_back(&midFarLeft.x);
+     	vector_y.push_back(&midFarLeft.y);
 }
 
 
@@ -331,96 +331,48 @@ void Points :: setWidthHeight(int _w, int _h)
 
 void Points :: setCenter(float _centerx, float _centery) 
 {
-    center.set(_centerx, _centery);
+    	center.set(_centerx, _centery);
       
-    is_updated = false;       
+    	is_updated = false;       
 }
        
     
 void Points :: setAngle(float _angle_inD)
 { 
-    angle_inD = _angle_inD;
+    	angle_inD = _angle_inD;
     
-    is_updated = false; 
+    	is_updated = false; 
 }  
 
 
 void Points :: update()
 {
-    if (is_updated == false)
-    {   
-        float pos_x = center.x;
-        float pos_y = center.y;
+    	if (is_updated == false)
+    	{   
+        	float pos_x = center.x;
+        	float pos_y = center.y;
 
-        float angle_degree = angle_inD;
-        float angle_radian = angle_degree/57.295779;
+        	float angle_degree = angle_inD;
+       		float angle_radian = angle_degree/57.295779;
          
-        float cosa = cos(angle_radian);
-        float sina = sin(angle_radian);
+        	float cosa = cos(angle_radian);
+        	float sina = sin(angle_radian);
  
-        for (unsigned int i = 0; i < vector_x.size(); i++)
-        {   
-            ////// rotation around center
-            (*vector_x[i]) = (*vector_orig_x[i]) * cosa - (*vector_orig_y[i]) * sina;
-            (*vector_y[i]) = (*vector_orig_x[i]) * sina + (*vector_orig_y[i]) * cosa;  
-            ////// moving to position
-            (*vector_x[i]) += pos_x;
-            (*vector_y[i]) += pos_y;
-        }   
-        is_updated = true;
-    }
+        	for (unsigned int i = 0; i < vector_x.size(); i++)
+        	{   
+           		////// rotation around center
+            		(*vector_x[i]) = (*vector_orig_x[i]) * cosa - (*vector_orig_y[i]) * sina;
+            		(*vector_y[i]) = (*vector_orig_x[i]) * sina + (*vector_orig_y[i]) * cosa;  
+            		////// moving to position
+            		(*vector_x[i]) += pos_x;
+            		(*vector_y[i]) += pos_y;
+        	}   
+        	is_updated = true;
+    	}
 }        
 
 
  
-
-      //def createRocketCascade(self, w, h):
-          //self.angle = 0
-          //self.w, self.h = w, h
-
-          //self.addMainQuad()
-
-          //self.addMidLeftPoint()    # trail vector
-          //self.addMidFarLeftPoint() # drive trail vector
-
-          //self.updated = False
-
-      //def createSpaceShipCascade(self, w, h):
-          //self.angle = 0
-          //self.w, self.h = w, h
-
-          //self.addMainQuad()
-
-          //self.addMidLeftPoint()
-          //self.addMidFarLeftPoint()
-          //self.addShieldCascade()
-
-          //self.updated = False
-     
-
-      //def addShieldCascade(self):
-          //factor = 1.6
-          //w, h = self.w, self.h
-
-          //# Origin entity rect (for rotation only transformation)
-          //self.bottomFarLeft_origin  = [-w/factor, -h/factor]
-          //self.bottomFarRight_origin = [+w/factor, -h/factor]
-          //self.topFarRight_origin    = [+w/factor, +h/factor]
-          //self.topFarLeft_origin     = [-w/factor, +h/factor]
-
-          //# Actual entity rect
-          //self.bottomFarLeft         = [-w/factor, -h/factor]
-          //self.bottomFarRight        = [+w/factor, -h/factor]
-          //self.topFarRight           = [+w/factor, +h/factor]
-          //self.topFarLeft            = [-w/factor, +h/factor]
-
-          
-          //self.points.append((self.bottomFarLeft_origin, self.bottomFarLeft))
-          //self.points.append((self.bottomFarRight_origin, self.bottomFarRight))
-          //self.points.append((self.topFarRight_origin, self.topFarRight))
-          //self.points.append((self.topFarLeft_origin, self.topFarLeft))
-
-
           
 
 

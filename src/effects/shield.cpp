@@ -20,46 +20,46 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "shield.h"
 
 
-ShieldEffect :: ShieldEffect(Ship* _pTo_ship, TextureOb* _pTo_texOb)
+ShieldEffect :: ShieldEffect(Ship* _ship, TextureOb* _texOb)
 {
-     pTo_ship = _pTo_ship;
-
-     pTo_texOb = _pTo_texOb;
-     texture = pTo_texOb->texture;
-
-     angle_inD   = randIntInRange(0, 360);
-     d_angle_inD = randIntInRange(0, 30) * 0.003;
+     ship = _ship;
+     texOb = _texOb;
 
      alpha_start = 0.4;
      d_alpha = 0.01;
 
-     alpha = alpha_start;
-
-     pos_z= -2.0;
+     color.r = 1.0;
+     color.g = 1.0;
+     color.b = 1.0;
+     color.a = alpha_start;
 }
 
 ShieldEffect :: ~ShieldEffect()
 {}
 
 
-void ShieldEffect :: render()
+void ShieldEffect :: setAlpha(float _alpha)	{ color.a = _alpha; }
+
+void ShieldEffect :: update()
 {
-    if (alpha > alpha_start)
-       alpha -= d_alpha;
-    else
-       alpha = alpha_start;
-
-    glColor4f(1.0, 1.0, 1.0, alpha);
-
-    glBindTexture(GL_TEXTURE_2D, texture);
-    drawFlatQuadPerVertexIn2D(pTo_ship->getPoints()->getBottomLeftShield(), 
-     			      pTo_ship->getPoints()->getBottomRightShield(), 
-     			      pTo_ship->getPoints()->getTopRightShield(), 
-     			      pTo_ship->getPoints()->getTopLeftShield(), 
-     			      pos_z);
+    	if (color.a > alpha_start)
+       		color.a -= d_alpha;
+    	else
+       		color.a = alpha_start;
 }
 
+void ShieldEffect :: render() const
+{
+    	setColor(color);
+    	//glColor4f(1.0, 1.0, 1.0, 1.0);
 
+    	glBindTexture(GL_TEXTURE_2D, texOb->texture);
+    	drawFlatQuadPerVertexIn2D(ship->getPoints()->getBottomLeftShield(), 
+     			     	  ship->getPoints()->getBottomRightShield(), 
+     			      	  ship->getPoints()->getTopRightShield(), 
+     			      	  ship->getPoints()->getTopLeftShield(), 
+     			      	  ship->pos_z);
+}
 
 
 

@@ -49,26 +49,28 @@ void LandingArea :: removeShip()
 
 void LandingArea :: renderArea()
 {
-     drawTexturedRect(pTo_texOb->texture, rect, -1);
+     	drawTexturedRect(pTo_texOb->texture, rect, -1);
 }
 
 void LandingArea :: renderInternals()
 {
-     if (is_BUSY == true)
-     {
-        pTo_ship->getPoints()->setAngle(0);
-        pTo_ship->getPoints()->setCenter(rect.center_x, rect.center_y);
-        pTo_ship->renderKorpus();
-     }
+     	if (is_BUSY == true)
+     	{
+        	pTo_ship->getPoints()->setAngle(0);
+        	pTo_ship->getPoints()->setCenter(rect.center_x, rect.center_y);
+        	pTo_ship->render_atPlanet();
+     	}
 }
 
 
 void LandingArea :: renderInfo()
 {
-     if (is_BUSY == true)
-        if (is_CURSORED == true)
-        {
-            pTo_ship->updateInfo();
-            pTo_ship->renderInfo(rect.center_x, rect.center_y, 0, 0);
-        } 
+     	if (is_BUSY == true)
+     	{
+        	if (is_CURSORED == true)
+        	{
+            		//pTo_ship->updateInfo();
+            		pTo_ship->renderInfo(rect.center_x, rect.center_y, 0, 0);
+        	} 
+        }
 }

@@ -35,11 +35,11 @@ bool Land :: addShip(Ship* _pTo_ship)
      return true;
 }
 
-bool Land :: addNpc(Npc* _pTo_npc)
+bool Land :: addNpc(Npc* _npc)
 {
-     NPC_pList.push_back(_pTo_npc);
-     _pTo_npc->pTo_land = this;
-     _pTo_npc->in_SPACE = false;
+     NPC_pList.push_back(_npc);
+     _npc->setLand(this);
+     _npc->setInSpace(false);
  
      return true;
 }
@@ -60,7 +60,7 @@ bool Land :: removeNpcById(int _id)
 {
     bool is_removed = false;
     for (unsigned int ni = 0; ni < NPC_pList.size(); ni++) 
-        if (NPC_pList[ni]->id == _id)
+        if (NPC_pList[ni]->getId() == _id)
         {
            NPC_pList.erase(NPC_pList.begin() + ni);
            is_removed = true;

@@ -25,28 +25,23 @@ class TextureOb;
 
 class ShieldEffect
 {  
-     public:
-        Ship* pTo_ship;
+     	public:
+        	ShieldEffect(Ship*, TextureOb*);
+        	~ShieldEffect();
+
+		void setAlpha(float);
+		
+        	//void renderDynamicFramesLoopRot();
+        	void update();
+        	void render() const;
+        	
+        private:
+                Ship* ship;        
+        	TextureOb* texOb;
         
-        TextureOb* pTo_texOb;
-        GLuint texture;
-
-        float angle_inD;
-        float d_angle_inD;
-
-        float alpha_start;
-        float d_alpha;
-
-        float alpha;
-
-        float pos_z;
-
-        //ShieldEffect();
-        ShieldEffect(Ship* _pTo_ship, TextureOb* _pTo_texOb);
-        ~ShieldEffect();
-
-        //void renderDynamicFramesLoopRot();
-        void render();
+        	Color color;
+        	float alpha_start;
+        	float d_alpha;
 };
 
 #endif 

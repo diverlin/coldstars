@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     
     
 // Create the main window
-int g_VIEW_WIDTH = 1280;
+int g_VIEW_WIDTH = 640;
 int g_VIEW_HEIGHT = g_VIEW_WIDTH*600/800;
 int g_BPP = 32;
 int g_FPS_LIMIT = 60;
@@ -82,5 +82,5 @@ GLuint g_EXTRACT_BRIGHT_PROGRAM;
 GLuint g_COMBINE_PROGRAM;
 GLuint g_MULTITEX_PROGRAM;
 
-int USE_MODERN_HW = false;
+int USE_MODERN_HW = true;
 #endif /* GLOBAL_H */

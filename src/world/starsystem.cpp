@@ -22,8 +22,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 StarSystem :: StarSystem()
 { 
-    id = g_ENTITY_ID_GENERATOR.returnNextId();
-    is_CAPTURED = false;
+    	id = g_ENTITY_ID_GENERATOR.returnNextId();
+    	is_CAPTURED = false;
 }
 
 StarSystem :: ~StarSystem()
@@ -32,7 +32,7 @@ StarSystem :: ~StarSystem()
 
 void StarSystem ::setPositionOnWorldMap(Rect rect)
 {
-     rect_onMap = rect;
+     	rect_onMap = rect;
 }
 
 
@@ -311,7 +311,9 @@ void StarSystem :: updateEntities_inDynamic_TRUE()
         NPC_pList[ni]->taskExecution_inDynamic(); 
     
     for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
+    {
         SHIP_pList[ki]->update_inSpace_inDynamic_TRUE(); 
+    }
     
     for (unsigned int ri = 0; ri < ROCKET_pList.size(); ri++)
         ROCKET_pList[ri]->update_inSpace_inDynamic(); 
@@ -359,17 +361,18 @@ void StarSystem :: updateEntities_inDynamic_FALSE()
       
 void StarSystem :: updateEntities_inStatic()
 {
-     // called once per TURN
-     for(unsigned int ni = 0; ni < NPC_pList.size(); ni++)
-     {
-         NPC_pList[ni]->thinkCommon_inSpace_inStatic();
-         NPC_pList[ni]->thinkUnique_inSpace_inStatic();
-     }
+     	// called once per TURN
+     	for(unsigned int ni = 0; ni < NPC_pList.size(); ni++)
+     	{
+        	NPC_pList[ni]->thinkCommon_inSpace_inStatic();
+         	NPC_pList[ni]->thinkUnique_inSpace_inStatic();
+     	}
 
-     for(unsigned int pi = 0; pi < PLANET_pList.size(); pi++)
-     {
-         PLANET_pList[pi]->update_inSpace_inStatic();
-     }
+
+     	for(unsigned int pi = 0; pi < PLANET_pList.size(); pi++)
+     	{
+         	PLANET_pList[pi]->update_inSpace_inStatic();
+     	}
 }
 
       
@@ -621,7 +624,8 @@ void StarSystem :: renderEntities_NEW()
 
     			for(unsigned int i = 0; i < visible_SHIP_pList.size(); i++)
     			{ 
-       				visible_SHIP_pList[i]->renderInSpace(); 
+    				visible_SHIP_pList[i]->updateRenderStuff();
+       				visible_SHIP_pList[i]->render_inSpace(); 
         			restoreSceneColor();
     			}
 
@@ -759,7 +763,8 @@ void StarSystem :: renderEntities_OLD()
            
     		for(unsigned int i = 0; i < visible_SHIP_pList.size(); i++)
     		{ 
-       			visible_SHIP_pList[i]->renderInSpace(); 
+    		    	visible_SHIP_pList[i]->updateRenderStuff();
+       			visible_SHIP_pList[i]->render_inSpace(); 
         		restoreSceneColor();
     		}
 
@@ -939,7 +944,7 @@ void StarSystem :: manageEntities()
         if (SHIP_pList[ki]->is_alive == false)
         {           
             //if (SHIP_pList[ki]->owner_type_id == NPC_ID)
-            SHIP_pList[ki]->pTo_npc_owner->is_alive = false;
+            SHIP_pList[ki]->getNpc()->setAlive(false);
                
             SHIP_remove_queue_pList.push_back(SHIP_pList[ki]);
             SHIP_pList.erase(SHIP_pList.begin() + ki);
@@ -962,7 +967,7 @@ void StarSystem :: manageEntities()
             //break;
         //} 
          
-        if (NPC_pList[ni]->is_alive == false)
+        if (NPC_pList[ni]->getAlive() == false)
         {   
             NPC_remove_queue_pList.push_back(NPC_pList[ni]);
             NPC_pList.erase(NPC_pList.begin() + ni);
@@ -1228,7 +1233,7 @@ void StarSystem :: mouseControl()
             { 
                 cursor_has_target = true;
 
-                visible_SHIP_pList[ki]->updateInfo(); 
+                //visible_SHIP_pList[ki]->updateInfo(); 
                 visible_SHIP_pList[ki]->renderInfo(visible_SHIP_pList[ki]->getPoints()->getCenter().x, visible_SHIP_pList[ki]->getPoints()->getCenter().y, g_SCROLL_COORD_X, g_SCROLL_COORD_Y); 
 
                 if (mlb == true)
@@ -1244,7 +1249,7 @@ void StarSystem :: mouseControl()
 
                 if (mrb == true)
                 {
-                   if ( pTo_PLAYER->pTo_npc->isScanTargetPossible(visible_SHIP_pList[ki]) == true )
+                   if ( pTo_PLAYER->pTo_npc->checkPossibilityToScan(visible_SHIP_pList[ki]) == true )
                    {
                        pTo_PLAYER->pTo_npc->setScanTarget(visible_SHIP_pList[ki]);
                        pTo_PLAYER->is_SCANNING = true;
@@ -1299,9 +1304,9 @@ void StarSystem :: mouseControl()
 
                 if (mlb == true)
                 {
-                    pTo_PLAYER->pTo_ship->pTo_npc_owner->clearAIfuncSequence();
-                    pTo_PLAYER->pTo_ship->pTo_navigator->setTargetPlanet(visible_PLANET_pList[pi]);  
-                    pTo_PLAYER->pTo_ship->pTo_npc_owner->createDockingSequence();
+                    pTo_PLAYER->pTo_ship->getNpc()->clearAIfuncSequence();
+                    pTo_PLAYER->pTo_ship->getNavigator()->setTargetPlanet(visible_PLANET_pList[pi]);  
+                    pTo_PLAYER->pTo_ship->getNpc()->createDockingSequence();
                 }   
 
                 break; 
@@ -1312,11 +1317,13 @@ void StarSystem :: mouseControl()
 
 
     if (cursor_has_target == false) 
+    {
         if (mlb == true)
         {
-            pTo_PLAYER->pTo_ship->pTo_navigator->setStaticTargetCoords(vec2f(mxvp, myvp));  
-            pTo_PLAYER->pTo_ship->pTo_npc_owner->clearAIfuncSequence();
-        }     
+            pTo_PLAYER->pTo_ship->getNavigator()->setStaticTargetCoords(vec2f(mxvp, myvp));  
+            pTo_PLAYER->pTo_ship->getNpc()->clearAIfuncSequence();
+        }
+    }     
 }
 
 
@@ -1368,32 +1375,32 @@ void StarSystem :: fireEvents_FALSE(int timer)
 bool StarSystem :: addShip(Ship* _pTo_ship)
 {
      _pTo_ship->in_SPACE = true;
-     _pTo_ship->starsystem = this;  
+     _pTo_ship->setStarSystem(this);  
 
      SHIP_pList.push_back(_pTo_ship);
      return true;
 }
 
-bool StarSystem :: addNpc(Npc* _pTo_npc)
+bool StarSystem :: addNpc(Npc* _npc)
 {
-     int _race_id = _pTo_npc->race_id;
-     int _subtype_id = _pTo_npc->subtype_id;
+     int _race_id = _npc->getRaceId();
+     int _subtype_id = _npc->getSubTypeId();
 
-     _pTo_npc->in_SPACE = true;
-     _pTo_npc->pTo_starsystem = this;  
+     _npc->setInSpace(true);
+     _npc->setStarSystem(this);  
 
-     NPC_pList.push_back(_pTo_npc);
+     NPC_pList.push_back(_npc);
 
      if (_subtype_id == RANGER_ID)
-         NPC_RANGER_pList.push_back(_pTo_npc);
+         NPC_RANGER_pList.push_back(_npc);
      if (_subtype_id == WARRIOR_ID)
-         NPC_WARRIOR_pList.push_back(_pTo_npc);
+         NPC_WARRIOR_pList.push_back(_npc);
      if (_subtype_id == TRADER_ID)
-         NPC_TRADER_pList.push_back(_pTo_npc);
+         NPC_TRADER_pList.push_back(_npc);
      if (_subtype_id == PIRAT_ID)
-         NPC_PIRAT_pList.push_back(_pTo_npc);
+         NPC_PIRAT_pList.push_back(_npc);
      if (_subtype_id == DIPLOMAT_ID)
-         NPC_DIPLOMAT_pList.push_back(_pTo_npc);
+         NPC_DIPLOMAT_pList.push_back(_npc);
      
 
      return true;
@@ -1432,7 +1439,7 @@ bool StarSystem :: removeNpc(int _id, int _race_id, int _subtype_id)
      {
           bool is_removed = false;
           for (unsigned int ni = 0; ni < pTo_npc_pList->size(); ni++)
-              if ((*pTo_npc_pList)[ni]->id == _id)
+              if ((*pTo_npc_pList)[ni]->getId() == _id)
               {
                  pTo_npc_pList->erase(pTo_npc_pList->begin() + ni);
                  is_removed = true;

@@ -54,10 +54,7 @@ class CommonForPlanet
     	   				  ObjMeshInstance* _mesh, 
     	   				  PlanetData _planet_data);
     		
-    		void detailedEllipceOrbitFormation();
-    		void updatePosition();
-    		
-    		void render_NEW();
+   		void render_NEW();
     		void render_OLD();
                 
         protected:
@@ -88,6 +85,10 @@ class CommonForPlanet
     		std::vector<float> orbit_vector_y;
                 int orbit_len;
                 int orbit_it; 
+                
+                void detailedEllipceOrbitFormation();
+    		void updatePosition();
+    		void updateRotation();
 };
 
 #endif 

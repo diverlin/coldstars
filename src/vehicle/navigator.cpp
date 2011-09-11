@@ -50,12 +50,12 @@ void Navigator :: setStaticTargetCoords(vec2f _target_pos)
 }
       
       
-void Navigator :: setTargetPlanet(Planet* _pTo_planet)
+void Navigator :: setTargetPlanet(Planet* _planet)
 {
     	removeTargetShip();
     	removeTargetStarSystem(); 
 
-    	target_planet = _pTo_planet;
+    	target_planet = _planet;
     	ship->is_FOLLOWING_PLANET = true;
 
     	pTo_target_pos_x = &target_planet->getPoints()->getCenter().x;

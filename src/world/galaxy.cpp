@@ -84,13 +84,11 @@ void Galaxy :: generateEntireStarSystem()
 
         Star* _star = createStar();    
         _starsystem->addStar(_star);
-  
+        
         int distNebula_maxNum = randIntInRange(4,7);
         int distStar_maxNum = randIntInRange(40, 60);
         generateBackground(_starsystem, distNebula_maxNum, distStar_maxNum, _star->getColorId());
           
-        //_starsystem->restoreSceneColor();   // the scene color will be depended on star color
-     
         generateNumPlanets(_starsystem, randIntInRange(PLANET_PER_SYSTEM_MIN, PLANET_PER_SYSTEM_MAX));
 
         if (_starsystem->is_CAPTURED == false)
@@ -212,7 +210,11 @@ bool Galaxy :: manage_map()
                 float ss_cursor_dist = distBetweenCenters(STARSYSTEM_pList[si]->rect_onMap.center_x, STARSYSTEM_pList[si]->rect_onMap.center_y, mx, my);
                 if (ss_cursor_dist < 10)
                 { 
-                   int ss_ss_dist = distBetweenCenters(STARSYSTEM_pList[si]->rect_onMap.center_x, STARSYSTEM_pList[si]->rect_onMap.center_y, pTo_PLAYER->pTo_npc->pTo_starsystem->rect_onMap.center_x,  pTo_PLAYER->pTo_npc->pTo_starsystem->rect_onMap.center_y);
+                   int ss_ss_dist = distBetweenCenters(STARSYSTEM_pList[si]->rect_onMap.center_x, 
+                   				       STARSYSTEM_pList[si]->rect_onMap.center_y,
+                   				       pTo_PLAYER->pTo_npc->getStarSystem()->rect_onMap.center_x,  
+                   				       pTo_PLAYER->pTo_npc->getStarSystem()->rect_onMap.center_y);
+                   				       
                    if ( (ss_ss_dist < pTo_PLAYER->pTo_ship->drive_slot.getDriveEquipment()->getHyper()) && (ss_ss_dist < pTo_PLAYER->pTo_ship->bak_slot.getBakEquipment()->getFuel()) )
                       if (lmb == true)
                       { 
