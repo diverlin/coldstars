@@ -88,12 +88,9 @@ void Star :: render_NEW()
     
 void Star :: render_OLD()
 {    
-	angle.x += d_angle.x;  
-     	angle.y += d_angle.y;  
-     	angle.z += d_angle.z; 
+	updateRotation();
      	
-     	glBindTexture(GL_TEXTURE_2D, texOb->texture); 
-     		
+     	glBindTexture(GL_TEXTURE_2D, texOb->texture);      		
 	renderMesh(mesh->glList, center_pos, angle, planet_data.scale);
 }
 
@@ -101,9 +98,7 @@ void Star :: render_OLD()
 void Star :: updateInfo()
 { 
 	info.clear();
-
     	info.addTitleStr("STAR");
-
     	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->id));
 }
 
@@ -122,10 +117,10 @@ Star* createStar()
 
 	star_data.scale         = randIntInRange(STAR_SIZE_MIN, STAR_SIZE_MAX);  
     	star_data.orbit_center  = vec2f(0, 0); 
-    	star_data.radius_A      = 200;
-    	star_data.radius_B      = 200; 
+    	star_data.radius_A      = 50;
+    	star_data.radius_B      = 50; 
     	star_data.orbit_phi_inD = 0;
-    	star_data.speed         = 0.1;
+    	star_data.speed         = 1.8;
 
     	TextureOb* _starTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.star_texOb_pList);
     	Star* _star = new Star(_starTexOb, pTo_SPHERE_MESH, star_data);

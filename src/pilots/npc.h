@@ -23,161 +23,191 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Npc 
 {
-   public:
-     bool is_alive;
-    
-     bool in_SPACE;
+   	public:
+   		bool getAlive() const;
+   		int getId() const;
+   		int getSubTypeId() const;
+   		int getRaceId() const;
+   		StarSystem* getStarSystem();
+   		Kosmoport* getKosmoport();
+   		Ship* getShip();
+   		Skill* getSkill();
+   		Ship* getScanShip();
+   		   		   	   
+   		void setInSpace(bool);
+   		void setAlive(bool);			
+   		void setStarSystem(StarSystem*);
+   		void setKosmoport(Kosmoport*);
+   		void setLand(Land*);
+   		void setShip(Ship*);
+   		void setScanTarget(Ship*);
 
-     int id, type_id, subtype_id;
-     int race_id;
-  
-     StarSystem* pTo_starsystem;
-     Ship* pTo_ship;
+		void addCredits(int);
+		void removeCredits(int);
 
-     TextureOb* pTo_texOb;
-     GLuint texture;
-     int w, h;
-
-     int credits;
-
-     // observation/radar
-     std::vector<Asteroid*>  visible_ASTEROID_pList;
-     std::vector<Mineral*>   visible_MINERAL_pList;
-     std::vector<Container*> visible_CONTAINER_pList;
-
-     std::vector<Npc*> visible_NPC_RANGER_pList;
-     std::vector<Npc*> visible_NPC_WARRIOR_pList;
-     std::vector<Npc*> visible_NPC_TRADER_pList;
-     std::vector<Npc*> visible_NPC_PIRAT_pList;
-     std::vector<Npc*> visible_NPC_DIPLOMAT_pList;
-
-     std::vector<float> asteroid_distance_list;
-     std::vector<float> mineral_distance_list;
-     std::vector<float> container_distance_list;
-
-     std::vector<float> npc_ranger_distance_list;
-     std::vector<float> npc_warrior_distance_list;
-     std::vector<float> npc_trader_distance_list;
-     std::vector<float> npc_pirat_distance_list;
-     std::vector<float> npc_diplomat_distance_list;
-
-     See see;
-     // observation/radar 
-
-     Kosmoport* pTo_kosmoport;
-     Land* pTo_land;
-
-     Skill* pTo_skill; 
-
-      Npc(int _race_id, int _subtype_id, TextureOb* _pTo_faceTexOb);
-     ~Npc();
+      		Npc(int _race_id, int _subtype_id, TextureOb* _faceTexOb);
+     		~Npc();
      
-     void setShip(Ship* _pTo_ship);
-       
-     void extractTheMind();        // needs for player
+     		void extractTheMind();        // needs for player
 
-     // AI
-     //void setRandomTargetCoord();
-     bool needs_task_queue_has_been_changed;
+     		// AI
+     		//void setRandomTargetCoord();
+     		void thinkCommon_inKosmoport_inStatic();
+     		void thinkCommon_inLand_inStatic();
 
-     std::vector<int> QUEST_TASK_queue;
-     std::vector<int> NEEDS_TASK_queue;
+     		void thinkCommon_inSpace_inStatic();
+     		void thinkUnique_inSpace_inStatic();
 
-     void generateQuest();
-     void questTaskQueueCreation(); 
-     void checkNeedTaskQueueForNewTasks();
+     		void taskExecution_inDynamic();
+    		void taskExecution_inStatic();
 
-     void observeAll_inSpace_inStatic();
-          void observeAsteroids_inSpace_inStatic();
-          void observeMinerals_inSpace_inStatic();
-          void observeContainers_inSpace_inStatic();
-          void observeNpcs_inSpace_inStatic();
-               void observeRangerNpcs_inSpace_inStatic();
-               void observeWarriorNpcs_inSpace_inStatic();
-               void observeTraderNpcs_inSpace_inStatic();
-               void observePiratNpcs_inSpace_inStatic();
-               void observeDiplomatNpcs_inSpace_inStatic();
+     		void clearAIfuncSequence();   
+     		
 
-     void observe_inPlanet_inStatic();  //inhabited <-> uninhabited
+     		//// docking/launching
+     		void createDockingSequence();
+     		void createLaunchingSequence();
+     		//// docking/launching
+     		
 
-     void thinkNothing_inStatic(); 
-     void thinkCommon_inKosmoport_inStatic();
-     void thinkCommon_inLand_inStatic();
+     		//// scanning
+    		bool checkPossibilityToScan(Ship* _ship);
+     		bool scanProceeding(); 
+     		bool removeScanTarget();
+     		//// scanning
+     		
+   	private:
+   	     	bool is_alive;    
+     		int race_id;
+     		unsigned long int credits;  
+     		int id, type_id, subtype_id;
+     	
+     	     	bool in_SPACE;
+   	     		
+   	     	StarSystem* starsystem;
+   	     	Kosmoport* kosmoport;
+   	     	Land* land;
+   	     	
+   	     	Ship* ship;
+   	     	
+   	     	Skill* skill; 
+   	     	     		
+   	     	TextureOb* texOb;
+   	     	
+   	     	
+   	     	// observation/radar
+     		std::vector<Asteroid*>  visible_ASTEROID_pList;
+     		std::vector<Mineral*>   visible_MINERAL_pList;
+     		std::vector<Container*> visible_CONTAINER_pList;
 
-     void thinkUnique_inSpace_inStatic();
-          void (Npc::*pToFunc_thinkUnique_inSpace_inStatic)();
-     void thinkCommon_inSpace_inStatic();
+     		std::vector<Npc*> visible_NPC_RANGER_pList;
+     		std::vector<Npc*> visible_NPC_WARRIOR_pList;
+     		std::vector<Npc*> visible_NPC_TRADER_pList;
+     		std::vector<Npc*> visible_NPC_PIRAT_pList;
+     		std::vector<Npc*> visible_NPC_DIPLOMAT_pList;
 
-     void thinkUnique_Race0_Ranger_inSpace_inStatic();
-     void thinkUnique_Race0_Warrior_inSpace_inStatic();
-     void thinkUnique_Race0_Trader_inSpace_inStatic();
-     void thinkUnique_Race0_Pirat_inSpace_inStatic();
-     void thinkUnique_Race0_Diplomat_inSpace_inStatic();
+     		std::vector<float> asteroid_distance_list;
+     		std::vector<float> mineral_distance_list;
+     		std::vector<float> container_distance_list;
 
-     void thinkUnique_Race1_Ranger_inSpace_inStatic();
-     void thinkUnique_Race1_Warrior_inSpace_inStatic();
-     void thinkUnique_Race1_Trader_inSpace_inStatic();
-     void thinkUnique_Race1_Pirat_inSpace_inStatic();
-     void thinkUnique_Race1_Diplomat_inSpace_inStatic();
+     		std::vector<float> npc_ranger_distance_list;
+     		std::vector<float> npc_warrior_distance_list;
+     		std::vector<float> npc_trader_distance_list;
+     		std::vector<float> npc_pirat_distance_list;
+     		std::vector<float> npc_diplomat_distance_list;
+     		
+     		See see;
+     		
+     		void observeAll_inSpace_inStatic();
+          		void observeAsteroids_inSpace_inStatic();
+          		void observeMinerals_inSpace_inStatic();
+          		void observeContainers_inSpace_inStatic();
+          		void observeNpcs_inSpace_inStatic();
+               			void observeRangerNpcs_inSpace_inStatic();
+               			void observeWarriorNpcs_inSpace_inStatic();
+               			void observeTraderNpcs_inSpace_inStatic();
+               			void observePiratNpcs_inSpace_inStatic();
+               			void observeDiplomatNpcs_inSpace_inStatic();
 
-     void thinkUnique_Race2_Ranger_inSpace_inStatic();
-     void thinkUnique_Race2_Warrior_inSpace_inStatic();
-     void thinkUnique_Race2_Trader_inSpace_inStatic();
-     void thinkUnique_Race2_Pirat_inSpace_inStatic();
-     void thinkUnique_Race2_Diplomat_inSpace_inStatic();
+     		void observe_inPlanet_inStatic();  //inhabited <-> uninhabited
+     		// observation/radar 
+     		
+     		// AI
+     		void generateQuest();
+     		void questTaskQueueCreation(); 
+     		void checkNeedTaskQueueForNewTasks();
+     		
+     		void initQuestTask();
 
-     void thinkUnique_Race3_Ranger_inSpace_inStatic();
-     void thinkUnique_Race3_Warrior_inSpace_inStatic();
-     void thinkUnique_Race3_Trader_inSpace_inStatic();
-     void thinkUnique_Race3_Pirat_inSpace_inStatic();
-     void thinkUnique_Race3_Diplomat_inSpace_inStatic();
-
-     void thinkUnique_Race4_Ranger_inSpace_inStatic();
-     void thinkUnique_Race4_Warrior_inSpace_inStatic();
-     void thinkUnique_Race4_Trader_inSpace_inStatic();
-     void thinkUnique_Race4_Pirat_inSpace_inStatic();
-     void thinkUnique_Race4_Diplomat_inSpace_inStatic();
-
-     void thinkUnique_Race6_inSpace_inStatic();
-     void thinkUnique_Race7_inSpace_inStatic();
-          void makeImmediateDecision();
-
-     std::vector<bool (Npc::*)()> func_inDynamic_queue;
-     std::vector<bool (Npc::*)()> func_inStatic_queue;
-
-     void initQuestTask();
-
-     void insertNeedTaskId(int _task_id);
-     void removeNeedTaskId(int _task_id);
-     void initNeedTask();
+     		void insertNeedTaskId(int _task_id);
+     		void removeNeedTaskId(int _task_id);
+     		void initNeedTask();
 
 
-     int active_task_id;
-     void taskExecution_inDynamic();
-     void taskExecution_inStatic();
+     		int active_task_id;
+     		
+     		
+     		bool needs_task_queue_has_been_changed;
 
-     // task section
-     bool doNothing();
-     void clearAIfuncSequence();    
+     		std::vector<int> QUEST_TASK_queue;
+     		std::vector<int> NEEDS_TASK_queue;
+     		
+     		void thinkNothing_inStatic(); 
+     		
+          	void (Npc::*pToFunc_thinkUnique_inSpace_inStatic)();
+     		
+     		void thinkUnique_Race0_Ranger_inSpace_inStatic();
+     		void thinkUnique_Race0_Warrior_inSpace_inStatic();
+     		void thinkUnique_Race0_Trader_inSpace_inStatic();
+     		void thinkUnique_Race0_Pirat_inSpace_inStatic();
+     		void thinkUnique_Race0_Diplomat_inSpace_inStatic();
 
-     //// docking/launching
-     bool findAndSetTargetDockingObject();
-     void createDockingSequence();
-          bool checkDocking();
-          bool getDockingPermission();
-          bool dockingEvent();
+     		void thinkUnique_Race1_Ranger_inSpace_inStatic();
+     		void thinkUnique_Race1_Warrior_inSpace_inStatic();
+     		void thinkUnique_Race1_Trader_inSpace_inStatic();
+     		void thinkUnique_Race1_Pirat_inSpace_inStatic();
+     		void thinkUnique_Race1_Diplomat_inSpace_inStatic();
 
-     void createLaunchingSequence();
-          bool launchingEvent();
-     //// docking/launching
+    		void thinkUnique_Race2_Ranger_inSpace_inStatic();
+     		void thinkUnique_Race2_Warrior_inSpace_inStatic();
+     		void thinkUnique_Race2_Trader_inSpace_inStatic();
+     		void thinkUnique_Race2_Pirat_inSpace_inStatic();
+     		void thinkUnique_Race2_Diplomat_inSpace_inStatic();
 
-     //// scanning
-     Ship* pTo_scanShip;   // move to scan_item
-     bool isScanTargetPossible(Ship* _pTo_ship);
-     bool setScanTarget(Ship* _pTo_ship);
-     bool scanProceeding(); 
-     bool removeScanTarget();
-     //// scanning
+     		void thinkUnique_Race3_Ranger_inSpace_inStatic();
+     		void thinkUnique_Race3_Warrior_inSpace_inStatic();
+     		void thinkUnique_Race3_Trader_inSpace_inStatic();
+     		void thinkUnique_Race3_Pirat_inSpace_inStatic();
+     		void thinkUnique_Race3_Diplomat_inSpace_inStatic();
+
+     		void thinkUnique_Race4_Ranger_inSpace_inStatic();
+     		void thinkUnique_Race4_Warrior_inSpace_inStatic();
+     		void thinkUnique_Race4_Trader_inSpace_inStatic();
+     		void thinkUnique_Race4_Pirat_inSpace_inStatic();
+     		void thinkUnique_Race4_Diplomat_inSpace_inStatic();
+
+     		void thinkUnique_Race6_inSpace_inStatic();
+     		void thinkUnique_Race7_inSpace_inStatic();
+          		void makeImmediateDecision();
+          		
+       		std::vector<bool (Npc::*)()> func_inDynamic_queue;
+     		std::vector<bool (Npc::*)()> func_inStatic_queue;
+     		
+     		bool doNothing();
+     		// AI
+     		
+     		
+     		//// docking/launching
+     		bool findAndSetTargetDockingObject();
+
+          	bool checkDocking();
+          	bool getDockingPermission();
+          	bool dockingEvent();
+
+          	bool launchingEvent();
+     		//// docking/launching
+     		     		
+     		Ship* scanShip;      		   	
 };
 
 #endif 

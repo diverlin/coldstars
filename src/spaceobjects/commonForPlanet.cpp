@@ -66,8 +66,7 @@ void CommonForPlanet :: CommonForPlanet_init(TextureOb* _texOb,
       	
        	detailedEllipceOrbitFormation();
        	
-        updatePosition(); 
-        
+        updatePosition();        
         
                 
         starsystem = NULL;
@@ -121,14 +120,17 @@ void CommonForPlanet :: updatePosition()
 }    
 
 
-
-
-void CommonForPlanet :: render_NEW()
+void CommonForPlanet :: updateRotation()
 {
 	angle.x += d_angle.x;  
      	angle.y += d_angle.y;  
      	angle.z += d_angle.z; 
-     	
+}
+
+void CommonForPlanet :: render_NEW()
+{     	
+	updateRotation();
+
      	glUseProgram(g_LIGHT_PROGRAM);
      	//printProgramInfoLog(g_LIGHT_PROGRAM);
 
@@ -165,10 +167,8 @@ void CommonForPlanet :: render_NEW()
 
 void CommonForPlanet :: render_OLD()
 {   	
-	angle.x += d_angle.x;  
-     	angle.y += d_angle.y;  
-     	angle.z += d_angle.z; 
-     	
+	updateRotation();
+
 	glBindTexture(GL_TEXTURE_2D, texOb->texture);
 	renderMesh(mesh->glList, center_pos, angle, planet_data.scale);
 }

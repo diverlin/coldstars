@@ -55,8 +55,8 @@ void PlayerInstance :: setShip(Ship* _pTo_ship)
     pTo_ship = _pTo_ship;
 
     pTo_ship->pTo_playerOwner = this;
-    pTo_npc = pTo_ship->pTo_npc_owner;
-    pTo_ship->pTo_npc_owner->extractTheMind();
+    pTo_npc = pTo_ship->getNpc();
+    pTo_ship->getNpc()->extractTheMind();
 
 }
 

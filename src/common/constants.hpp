@@ -114,7 +114,7 @@ const int PLANET_POPULATION_MAX = 20000;
 
 // STAR 
 const int STAR_SIZE_MIN = 80;
-const int STAR_SIZE_MAX = 100;
+const int STAR_SIZE_MAX = 120;
 
 // SHIP
 const int SHIP_PER_SYSTEM_MIN = 5;

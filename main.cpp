@@ -19,64 +19,65 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "include.h"
 
-void starsystemSimulation_inDynamic_TRUE(StarSystem* pTo_ss)
+
+void starsystemSimulation_inDynamic_TRUE(StarSystem* starsystem)
 {
-    	pTo_ss->asteroidManager(10); 
+    	starsystem->asteroidManager(10); 
 
-    	pTo_ss->updateEntities_inDynamic_TRUE();
-    	pTo_ss->rocketCollision_TRUE();
-    	pTo_ss->asteroidCollision_TRUE();
+    	starsystem->updateEntities_inDynamic_TRUE();
+    	starsystem->rocketCollision_TRUE();
+    	starsystem->asteroidCollision_TRUE();
 
-    	pTo_ss->manageEntities(); 
+    	starsystem->manageEntities(); 
 
-    	pTo_ss->fireEvents_TRUE(g_TIMER);
+    	starsystem->fireEvents_TRUE(g_TIMER);
 }
 
-void starsystemSimulation_inDynamic_FALSE(StarSystem* pTo_ss)
+void starsystemSimulation_inDynamic_FALSE(StarSystem* starsystem)
 {
-    	pTo_ss->asteroidManager(10); 
+    	starsystem->asteroidManager(10); 
 
-    	pTo_ss->updateEntities_inDynamic_FALSE();
-    	pTo_ss->manageEntities(); 
+    	starsystem->updateEntities_inDynamic_FALSE();
+    	starsystem->manageEntities(); 
 
     	if (randIntInRange(1,10) == 1)
     	{
-        	pTo_ss->rocketCollision_FALSE();
-        	pTo_ss->asteroidCollision_FALSE();
+        	starsystem->rocketCollision_FALSE();
+        	starsystem->asteroidCollision_FALSE();
 
-        	pTo_ss->fireEvents_FALSE(g_TIMER);
+        	starsystem->fireEvents_FALSE(g_TIMER);
     	}
 }
 
-void starsystemSimulation_inStatic_TRUE(StarSystem* pTo_ss)
+void starsystemSimulation_inStatic_TRUE(StarSystem* starsystem)
 {    
-    	pTo_ss->removeDeadEntities(); 
-    	pTo_ss->updateEntities_inStatic(); 
+    	starsystem->removeDeadEntities(); 
+    	starsystem->updateEntities_inStatic(); 
 }
 
-void starsystemSimulation_inStatic_FALSE(StarSystem* pTo_ss)
+void starsystemSimulation_inStatic_FALSE(StarSystem* starsystem)
 {   
 	// freq: once per turn (when pause phase begins)
-    	pTo_ss->removeDeadEntities(); 
-    	pTo_ss->updateEntities_inStatic(); 
+    	starsystem->removeDeadEntities(); 
+    	starsystem->updateEntities_inStatic(); 
 }
 
-void starsystemRender(StarSystem* pTo_ss)
+void starsystemRender(StarSystem* starsystem)
 {
     	//pTo_ss->renderBackground();  // moved to ss
-    	pTo_ss->findVisibleEntities();
+    	starsystem->findVisibleEntities();
     	if (USE_MODERN_HW == true)
-    		pTo_ss->renderEntities_NEW();
+    		starsystem->renderEntities_NEW();
     	else
-        	pTo_ss->renderEntities_OLD(); 
+        	starsystem->renderEntities_OLD(); 
 }
 
-void playerScan(Ship* pTo_ship, bool in_store = false, bool allow_full_control = false)
+void playerScan(Ship* ship, bool in_store = false, bool allow_full_control = false)
 {
-    	pTo_SHIP_GUI->bindShip(pTo_ship);                               // improove to perform only once
-    	pTo_SHIP_GUI->bindSkill(pTo_ship->pTo_npc_owner->pTo_skill);    // improove to perform only once
+    	pTo_SHIP_GUI->bindShip(ship);                           // improove to perform only once
+    	pTo_SHIP_GUI->bindSkill(ship->getNpc()->getSkill());    // improove to perform only once
 
-    	if (pTo_PLAYER->pTo_ship->id == pTo_ship->id)
+    	if (pTo_PLAYER->pTo_ship->id == ship->id)
         	allow_full_control = true;  
     	// modify full control for friend ships
 
@@ -178,7 +179,7 @@ int main()
                if (calculation_per_turn_allowed == true)
                {
                    pTo_PLAYER->pTo_ship->reloadAllWeapons();   // remove from here
-                   pTo_PLAYER->pTo_ship->pTo_navigator->updateTargetCoords();   // remove from here
+                   pTo_PLAYER->pTo_ship->getNavigator()->updateTargetCoords();   // remove from here
                    
                    starsystemSimulation_inStatic_TRUE(galaxy.pTo_ss_active);
                    //world.pTo_ss_active->debug__();                                 // debug
@@ -200,7 +201,7 @@ int main()
 
            //////////// SCAN ///////////////
            if ( pTo_PLAYER->is_SCANNING == true )  
-              playerScan(pTo_PLAYER->pTo_npc->pTo_scanShip);
+              playerScan(pTo_PLAYER->pTo_npc->getScanShip());
 
 
            /////////// WORLDMAP ///////////
@@ -224,31 +225,31 @@ int main()
            g_KEY_EVENTS_IN_SPACE.getRealTimeInputs();
 
            
-           pTo_PLAYER->pTo_npc->pTo_kosmoport->clearScreen();
+           pTo_PLAYER->pTo_npc->getKosmoport()->clearScreen();
 
            if (interfaceInKosmoport.angar_screen_SELECTED == true)
            {
-               pTo_PLAYER->pTo_npc->pTo_kosmoport->pTo_angar->mouseControl();
-               pTo_PLAYER->pTo_npc->pTo_kosmoport->pTo_angar->renderBackground();
-               pTo_PLAYER->pTo_npc->pTo_kosmoport->pTo_angar->renderInternals();
+               pTo_PLAYER->pTo_npc->getKosmoport()->pTo_angar->mouseControl();
+               pTo_PLAYER->pTo_npc->getKosmoport()->pTo_angar->renderBackground();
+               pTo_PLAYER->pTo_npc->getKosmoport()->pTo_angar->renderInternals();
                if (pTo_PLAYER->is_SCANNING == true)  
-                   playerScan(pTo_PLAYER->pTo_npc->pTo_scanShip);
+                   playerScan(pTo_PLAYER->pTo_npc->getScanShip());
                else
-                   pTo_PLAYER->pTo_npc->pTo_kosmoport->pTo_angar->renderItemInfo();
+                   pTo_PLAYER->pTo_npc->getKosmoport()->pTo_angar->renderItemInfo();
            }
 
            if (interfaceInKosmoport.store_screen_SELECTED == true)
            {
-               pTo_PLAYER->pTo_npc->pTo_kosmoport->pTo_store->mouseControl();
-               pTo_PLAYER->pTo_npc->pTo_kosmoport->pTo_store->renderBackground();
-               pTo_PLAYER->pTo_npc->pTo_kosmoport->pTo_store->renderInternals();
+               pTo_PLAYER->pTo_npc->getKosmoport()->pTo_store->mouseControl();
+               pTo_PLAYER->pTo_npc->getKosmoport()->pTo_store->renderBackground();
+               pTo_PLAYER->pTo_npc->getKosmoport()->pTo_store->renderInternals();
                playerScan(pTo_PLAYER->pTo_ship, interfaceInKosmoport.store_screen_SELECTED);
-               pTo_PLAYER->pTo_npc->pTo_kosmoport->pTo_store->renderItemInfo();
+               pTo_PLAYER->pTo_npc->getKosmoport()->pTo_store->renderItemInfo();
            }
 
            if (interfaceInKosmoport.shop_screen_SELECTED == true)
            {
-               pTo_PLAYER->pTo_npc->pTo_kosmoport->pTo_shop->render();
+               pTo_PLAYER->pTo_npc->getKosmoport()->pTo_shop->render();
            }
 
            if (interfaceInKosmoport.galaxymap_screen_SELECTED == true)
@@ -259,7 +260,7 @@ int main()
 
            if (interfaceInKosmoport.goverment_screen_SELECTED == true)
            {
-               pTo_PLAYER->pTo_npc->pTo_kosmoport->pTo_goverment->render();
+               pTo_PLAYER->pTo_npc->getKosmoport()->pTo_goverment->render();
            }
 
            interfaceInKosmoport.mouseInteraction(); 

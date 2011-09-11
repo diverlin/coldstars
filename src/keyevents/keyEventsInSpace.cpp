@@ -67,7 +67,7 @@ void KeyEventsInSpace :: getSimpleInputs()
               				if (pTo_PLAYER->is_SCANNING == true)
               				{
                 		  		pTo_PLAYER->is_SCANNING = false;
-                		  		pTo_PLAYER->pTo_npc->pTo_scanShip = NULL; 
+                		  		pTo_PLAYER->pTo_npc->removeScanTarget(); 
               				}
               				break;
                 		}

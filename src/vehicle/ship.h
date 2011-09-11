@@ -49,37 +49,41 @@ class Ship
 {   
     	public:
                 Points* getPoints();
+                Navigator* getNavigator();
+                StarSystem* getStarSystem();
+                Npc* getNpc();
         
-        	std::vector<Turrel*> turrel_pList;
-    
+                void setStarSystem(StarSystem*);
+                void setNpc(Npc*);
+                                        
         	bool is_alive, is_dying, is_explosed;
         	int type_id, id;
 
         	int dying_time;
-
+        	
+		bool render_TURRELS;
+		
         	bool in_SPACE;
 
         	bool is_FOLLOWING_PLANET;
         	bool is_FOLLOWING_SHIP;
         	bool is_FOLLOWING_STARSYSTEM;
 
-        	Navigator* pTo_navigator;
 
-        	TextureOb* pTo_texOb;
-        	GLuint texture;
-        	int w, h;
+
+        	TextureOb* texOb;
+
         	int size;
         	float collision_radius;
 
         	int w_orig, h_orig;
 
-        	float angle_inD;
+
 
         	bool controlled_by_player;
-        	Npc* pTo_npc_owner;
         	PlayerInstance* pTo_playerOwner;
 
-        	StarSystem* starsystem;
+
 
         	int space;
         	int armor_max;
@@ -101,18 +105,9 @@ class Ship
         	Rect kontur_rect; 
 
 
-        	//######### SLOT
-        	TextureOb* pTo_slotTexOb;
-
-        	bool render_TURRELS;
-        	std::vector<vec2f*> turrel_center_pList;
 
 
-        	// WEPONS
-        	int fire_delay, d_fire_delay;
-        	std::vector<ItemSlot*> slot_weapon_pList;
-        	std::vector<ItemSlot*> slot_weapon_equiped_pList;
-        	std::vector<ItemSlot*> slot_weapon_reloaded_pList;
+
 
         	int total_weapon_slot_num;
         	ItemSlot weapon_slot1;
@@ -121,11 +116,7 @@ class Ship
         	ItemSlot weapon_slot4;
         	ItemSlot weapon_slot5;
         
-        	Turrel turrel1;
-        	Turrel turrel2;
-        	Turrel turrel3;
-        	Turrel turrel4;
-        	Turrel turrel5;
+
         
         	//######### EQUPMENT SLOT
         	ItemSlot drive_slot;
@@ -139,7 +130,6 @@ class Ship
         	ItemSlot freezer_slot;
                                                 
         	//######### OTSEC SLOT
-        	//VEC_pOtsecSlot_type otsec_slot_pList;
         	std::vector<ItemSlot*> slot_total_pList;
         	std::vector<ItemSlot*> slot_otsec_pList;
         
@@ -173,7 +163,6 @@ class Ship
 
         	//////// TARGET COORDINATES //////
         	//self.Gl_LIST_direction_ID = None
-
         	std::vector<float> direction_x_list;
         	std::vector<float> direction_y_list;
         	std::vector<float> angle_inD_list;
@@ -181,8 +170,6 @@ class Ship
         	int len_direction_list;
         	bool direction_list_END;
         	int move_it;
-
-        	//self.turn_list_END      = True
 
         	float target_pos_x;
         	float target_pos_y;
@@ -195,8 +182,6 @@ class Ship
         	int average_damage;
         	int average_fire_radius;
 
-        	DriveTrailEffect* pTo_drive_jet; 
-        	ShieldEffect* pTo_shield;
 
         	Ship(TextureOb* _pTo_texOb, 
         	     int _max_weapons, 
@@ -256,10 +241,6 @@ class Ship
         	void setMaxArmor();
         	void setMaxFuel();
 
-        	void updateInfo();
-             		std::string returnProtectionStr();
-             		int returnOwnerRaceId();
-
         	//// docking/launching
         	bool checkDocking();
         	bool getDockingPermission();
@@ -268,17 +249,52 @@ class Ship
         	bool launchingEvent();
         	//// docking/launching
 
-        	void renderInSpace();
-             		void renderKorpus();
-             		void renderTurrels();
-             		void renderShield();
-        	void renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y);
+		void updateRenderStuff();
+		void render_inSpace() const;
+		void render_atPlanet() const;
 
-        	void renderInternaly();
-                
+        	void renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y);
+        	
+        	float pos_z;
+                                           		
         private:
+                float angle_inD;
                 Points points;
 		InfoTable info;
+		
+        	std::vector<vec2f*> turrel_center_pList;
+		std::vector<Turrel*> turrel_pList;
+
+             		
+            	Navigator* navigator;
+            	
+            	TextureOb* texOb_slot;
+            			
+		StarSystem* starsystem;
+		        	
+		Npc* npc_owner;
+		
+		DriveTrailEffect* drive_jet; 
+		ShieldEffect* shield;
+		        	        	
+		void updateInfo();
+             	std::string returnProtectionStr();	
+             		
+		void renderKorpus() const;
+             	void renderTurrels() const;
+             	void renderShield() const;
+             	
+             	        	// WEPONS
+        	int fire_delay, d_fire_delay;
+        	std::vector<ItemSlot*> slot_weapon_pList;
+        	std::vector<ItemSlot*> slot_weapon_equiped_pList;
+        	std::vector<ItemSlot*> slot_weapon_reloaded_pList;
+        	
+             	Turrel turrel1;
+        	Turrel turrel2;
+        	Turrel turrel3;
+        	Turrel turrel4;
+        	Turrel turrel5;
 
 };
 

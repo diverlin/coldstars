@@ -160,8 +160,8 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
     	
     	deterioration();
     	
-    	slot->getShip()->starsystem->addLazerTraceEffect(_lazer_trace_effect);
-    	slot->getShip()->starsystem->addDamageEffect(_damage_effect);
+    	slot->getShip()->getStarSystem()->addLazerTraceEffect(_lazer_trace_effect);
+    	slot->getShip()->getStarSystem()->addDamageEffect(_damage_effect);
 } 
 
 

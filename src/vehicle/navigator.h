@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Navigator
 {
 	public:
-      		Navigator(Ship* _pTo_ship);
+      		Navigator(Ship* _ship);
       		~Navigator();
       
       		void setStaticTargetCoords(vec2f _target_pos);

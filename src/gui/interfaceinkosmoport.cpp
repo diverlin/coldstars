@@ -202,7 +202,7 @@ void InterfaceInKosmoport :: mouseInteraction()
            pTo_launch_button->show_info = true;
            if (lmb == true)
            {
-              pTo_PLAYER->pTo_npc->launchingEvent(); 
+              pTo_PLAYER->pTo_npc->createLaunchingSequence(); 
               pTo_PLAYER->in_SPACE = true;
            }
         }

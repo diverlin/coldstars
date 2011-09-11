@@ -137,7 +137,7 @@ void RocketEquipment :: fireEvent()
     	RocketBullet* pTo_r1; 
     	if (slot->getShip()->render_TURRELS == true)
     	{
-        	pTo_r1 = new RocketBullet(slot->getShip()->starsystem, 
+        	pTo_r1 = new RocketBullet(slot->getShip()->getStarSystem(), 
                                   	  pTo_bulletTexOb, 
                                   	  slot->getTurrel()->getCenterX(), 
                                   	  slot->getTurrel()->getCenterY(), 
@@ -157,7 +157,7 @@ void RocketEquipment :: fireEvent()
         }
     	else
     	{
-        	pTo_r1 = new RocketBullet(slot->getShip()->starsystem, 
+        	pTo_r1 = new RocketBullet(slot->getShip()->getStarSystem(), 
                                  	  pTo_bulletTexOb, 
                                   	  slot->getShip()->getPoints()->getCenter().x, 
                                   	  slot->getShip()->getPoints()->getCenter().y, 

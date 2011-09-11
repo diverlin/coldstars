@@ -346,7 +346,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
 
     Store* pTo_store = NULL;     // move to ship class             
     if (in_store == true) 
-       pTo_store = pTo_ship->pTo_npc_owner->pTo_kosmoport->pTo_store;    // this is used only for player
+       pTo_store = pTo_ship->getNpc()->getKosmoport()->pTo_store;    // this is used only for player
 
 
     resetSlotsRenderInfoFlag();
@@ -758,7 +758,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
 			else if ( (lmb == true) && (in_store == true) )
 			{
 				int earn_price = pTo_store->buyOtsecSlotItem(pTo_ship->slot_total_pList[i]);
-				pTo_PLAYER->pTo_npc->credits += earn_price;
+				pTo_PLAYER->pTo_npc->addCredits(earn_price);
 			} 
 
 
@@ -844,7 +844,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
 						_container->otsec_slot->insertItem(pTo_CURSOR->pTo_otsec_slot->getGrappleEquipment()); 
 						pTo_CURSOR->pTo_otsec_slot->removeItem();
 					}
-					pTo_ship->starsystem->addContainer(_container); 
+					pTo_ship->getStarSystem()->addContainer(_container); 
 				} 
 			}
     		}
@@ -879,7 +879,7 @@ void ShipInternal :: renderInternaly()
 	glDisable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 
-	drawTexturedRect(pTo_ship->pTo_texOb->texture, pTo_ship->kontur_rect, -1.0);
+	drawTexturedRect(pTo_ship->texOb->texture, pTo_ship->kontur_rect, -1.0);
 
 	for(unsigned int i = 0; i < pTo_ship->slot_total_pList.size(); i++)
 	{
