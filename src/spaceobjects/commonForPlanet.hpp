@@ -79,7 +79,7 @@ class CommonForPlanet
 		vec3f angle;
 		vec3f d_angle;
      		
-      		PlanetData planet_data;
+      		PlanetData data;
      		
       		std::vector<float> orbit_vector_x;
     		std::vector<float> orbit_vector_y;

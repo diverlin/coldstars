@@ -16,7 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "lazerTrace.h"
+#include "lazerTrace.hpp"
 
 
 LazerTraceEffect :: LazerTraceEffect(TextureOb* _pTo_texOb, TextureOb* _pTo_particleTexOb, float _particle_size, float* _pTo_start_pos_x, float* _pTo_start_pos_y, float* _pTo_end_pos_x, float* _pTo_end_pos_y)

@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "distantStarBg.h"
+#include "distantStarBg.hpp"
 
 DistantStarBgEffect :: DistantStarBgEffect(TextureOb* _texOb, vec2f _center, float _particleSize)
 {

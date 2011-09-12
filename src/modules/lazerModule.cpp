@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "lazerModule.h"
+#include "lazerModule.hpp"
 
 LazerModule :: LazerModule(TextureOb* _texOb, int _damage_add, int _radius_add)
 {

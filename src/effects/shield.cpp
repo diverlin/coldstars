@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "shield.h"
+#include "shield.hpp"
 
 
 ShieldEffect :: ShieldEffect(Ship* _ship, TextureOb* _texOb)

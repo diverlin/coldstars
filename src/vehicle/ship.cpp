@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "ship.h"
+#include "ship.hpp"
 
 Points* Ship :: getPoints() 	    { return &points; }
 Navigator* Ship :: getNavigator()   { return navigator; }

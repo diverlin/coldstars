@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "store.h"
+#include "store.hpp"
 
 Store :: Store(TextureOb* _pTo_bg_texOb, TextureOb* _pTo_slot_texOb)
 {

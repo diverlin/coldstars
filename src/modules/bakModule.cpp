@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "bakModule.h"
+#include "bakModule.hpp"
 
 
 BakModule :: BakModule(TextureOb* _texOb, int _fuel_max_add)

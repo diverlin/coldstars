@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "protectorEquipment.h"
+#include "protectorEquipment.hpp"
 
 ProtectorEquipment :: ProtectorEquipment(TextureOb* _itemTexOb, 
 					 int _protection_orig, 

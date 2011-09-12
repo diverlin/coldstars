@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "star.h"
+#include "star.hpp"
    
 Star :: Star(TextureOb* _texOb, ObjMeshInstance* _mesh, PlanetData _star_data)
 { 
@@ -79,7 +79,7 @@ void Star :: render_NEW()
         
 	glUniform2f(glGetUniformLocation(g_MULTITEX_PROGRAM, "displ"), texture_offset1, texture_offset2);
 
-	renderMesh(mesh->glList, center_pos, angle, planet_data.scale);
+	renderMesh(mesh->glList, center_pos, angle, data.scale);
 
         glUseProgram(0);
         glActiveTexture(GL_TEXTURE0);
@@ -91,7 +91,7 @@ void Star :: render_OLD()
 	updateRotation();
      	
      	glBindTexture(GL_TEXTURE_2D, texOb->texture);      		
-	renderMesh(mesh->glList, center_pos, angle, planet_data.scale);
+	renderMesh(mesh->glList, center_pos, angle, data.scale);
 }
 
 

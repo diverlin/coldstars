@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "droidModule.h"
+#include "droidModule.hpp"
 
 DroidModule :: DroidModule(TextureOb* _texOb, int _repair_add)
 {

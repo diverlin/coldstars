@@ -17,31 +17,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef GLSL_H
-#define GLSL_H
-
-void compile_program(const GLchar *vertex_source, const GLchar* fragment_source, GLuint* pTo_program);
-GLuint compile_shader(const GLchar *source, GLenum shader_type);
-void printProgramInfoLog(GLuint program);
+#ifndef BLOOM_H
+#define BLOOM_H
 
 
-class FBO
-{
-	public:
-      		GLuint texture;
-      		int w, h;
-      		GLuint depth_buffer;
-      		GLuint fbo;
-
-      		FBO(int _w, int _h);
-      		~FBO();
-
-      		void activate();
-      		void deactivate();
-};
-
-typedef std::vector<FBO*> VEC_pFBO_type; 
-typedef std::vector<VEC_pFBO_type> VEC_pList_pFBO_type; 
 
 class BloomEffect
 {
@@ -68,37 +47,6 @@ class BloomEffect
                 void combine(GLuint _orig_scene_texture);
 };
  
- 
- 
- 
- 
- 
-class ShockWaveEffect
-{
-	public:
-		bool is_alive;
-          	bool is_alreadyInRemoveQueue;
-
-          	vec2f center;
-          	
-          	vec3f parameter;
-          	vec3f d_parameter;
-          	float time, d_time;
-
-      		ShockWaveEffect(vec2f _center_pos, float _x, float _y, float _z, float _time, float _d_x, float _d_y, float _d_z, float d_time);
-      		~ShockWaveEffect();
-      		
-      		void update();
-      		
-      	private:
-
-      	
-};
-
-
-void createShockWave(StarSystem* _starsystem, vec2f _center_pos, int obSize);          
-   
-// http://www.flashbang.se/archives/48
 // HDR http://prideout.net/archive/bloom/  
-    
+ 
 #endif

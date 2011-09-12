@@ -17,177 +17,188 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "skill.h"
+#include "skill.hpp"
 
 Skill :: Skill()
 {
-     attack   = randIntInRange(0, 5);
-     defence  = randIntInRange(0, 5);
-     leader   = randIntInRange(0, 5);
-     trader   = randIntInRange(0, 5);
-     technic  = randIntInRange(0, 5);
-     diplomat = randIntInRange(0, 5);  
+     	attack   = randIntInRange(0, 5);
+     	defence  = randIntInRange(0, 5);
+     	leader   = randIntInRange(0, 5);
+     	trader   = randIntInRange(0, 5);
+     	technic  = randIntInRange(0, 5);
+     	diplomat = randIntInRange(0, 5);  
 
-     acknowledge();
+     	acknowledge();
                   
-     available_points = 3;
+     	available_points = 3;
           
-     expirience = randIntInRange(40, 400);
-     expirience_for_next_level = 1000;
+     	expirience = randIntInRange(40, 400);
+     	expirience_for_next_level = 1000;
 }     
 
 Skill :: ~Skill()
 {}
 
+
+
+int Skill :: getAttack()   const { return attack; }
+int Skill :: getDefence()  const { return defence; }  
+int Skill :: getLeader()   const { return leader; }  
+int Skill :: getTrader()   const { return trader; }   
+int Skill :: getTechnic()  const { return technic; }  
+int Skill :: getDiplomat() const { return diplomat; }
+      		
+      		
+      		
 void Skill :: addExpirience(unsigned long int addExpirience)
 {
-     expirience += addExpirience;
-     if (expirience > expirience_for_next_level)
-     {
-         available_points += 1;
-         expirience_for_next_level *= 2;
-     }
+     	expirience += addExpirience;
+     	if (expirience > expirience_for_next_level)
+     	{
+         	available_points += 1;
+         	expirience_for_next_level *= 2;
+     	}
 }
 
 
 void Skill :: acknowledge()
 {
-     attack_undo   = 0;
-     defence_undo  = 0;
-     leader_undo   = 0;
-     trader_undo   = 0;
-     technic_undo  = 0;
-     diplomat_undo = 0;
+     	attack_undo   = 0;
+    	defence_undo  = 0;
+     	leader_undo   = 0;
+     	trader_undo   = 0;
+     	technic_undo  = 0;
+     	diplomat_undo = 0;
 }
 
 //######### ATTACK ###############
 void Skill :: incrementAttack()
 {
-     if (available_points > 0)
-     {
-         available_points -= 1;
-         attack += 1;
-         attack_undo += 1;
-     }
+     	if (available_points > 0)
+     	{
+         	available_points -= 1;
+         	attack += 1;
+         	attack_undo += 1;
+     	}
 }
 
 void Skill :: decrementAttack()
 {
-    if (attack_undo > 0)
-    { 
-        available_points += 1;
-        attack -= 1;
-        attack_undo -= 1;
-    }
+    	if (attack_undo > 0)
+    	{ 
+        	available_points += 1;
+        	attack -= 1;
+        	attack_undo -= 1;
+    	}
 }
 
 
 //######### DEFENCE ###############
 void Skill :: incrementDefence()
 {
-    if (available_points > 0)
-    {
-        available_points -= 1;
-        defence += 1;
-        defence_undo += 1;
-    }  
+    	if (available_points > 0)
+    	{
+        	available_points -= 1;
+        	defence += 1;
+        	defence_undo += 1;
+    	}  
 } 
 
 void Skill :: decrementDefence()
 {
-     if (defence_undo > 0)
-     {
-         available_points += 1;
-         defence -= 1;
-         defence_undo -= 1;
-     }
+     	if (defence_undo > 0)
+     	{
+        	available_points += 1;
+         	defence -= 1;
+         	defence_undo -= 1;
+     	}
 }
 
 
 //######### LEADER ###############
 void Skill :: incrementLeader()
 {
-     if (available_points > 0)
-     {
-         available_points -= 1;
-         leader += 1;
-         leader_undo += 1;
-     }
+     	if (available_points > 0)
+     	{
+         	available_points -= 1;
+         	leader += 1;
+         	leader_undo += 1;
+     	}
 }
 
 void Skill :: decrementLeader()
 {
-     if (leader_undo > 0)
-     {
-         available_points += 1;
-         leader -= 1;
-         leader_undo -= 1;
-     }
+     	if (leader_undo > 0)
+     	{
+         	available_points += 1;
+         	leader -= 1;
+         	leader_undo -= 1;
+     	}
 }
 
 
 //######### TRADER ###############
 void Skill :: incrementTrader()
 {
-     if (available_points > 0)
-     {
-        available_points -= 1;
-        trader += 1;
-        trader_undo += 1; 
-     }
+     	if (available_points > 0)
+     	{
+        	available_points -= 1;
+        	trader += 1;
+        	trader_undo += 1; 
+     	}
 }
 
 void Skill :: decrementTrader()
 {
-     if (trader_undo > 0)
-     {
-        available_points += 1;
-        trader -= 1;
-        trader_undo -= 1;
-     }
+     	if (trader_undo > 0)
+     	{
+        	available_points += 1;
+        	trader -= 1;
+        	trader_undo -= 1;
+     	}
 }
 
 //######### TECHNIC ###############
 void Skill :: incrementTechnic()
 {
-     if (available_points > 0)
-     {
-        available_points -= 1;
-        technic += 1;
-        technic_undo += 1;
-     }  
+     	if (available_points > 0)
+     	{
+        	available_points -= 1;
+        	technic += 1;
+        	technic_undo += 1;
+     	}  
 }
 
 void Skill :: decrementTechnic()
 {
-     if (technic_undo > 0)
-     {
-        available_points += 1;
-        technic -= 1;
-        technic_undo -= 1;
-     }
+     	if (technic_undo > 0)
+     	{
+        	available_points += 1;
+        	technic -= 1;
+        	technic_undo -= 1;
+     	}
 }
 
       
 //######### DIMPLOMAT ###############
 void Skill :: incrementDiplomat()
 {
-     if (available_points > 0)
-     {
-         available_points -= 1;
-         diplomat += 1;
-         diplomat_undo += 1; 
-     }
+     	if (available_points > 0)
+     	{
+         	available_points -= 1;
+         	diplomat += 1;
+         	diplomat_undo += 1; 
+     	}
 }
 
 void Skill :: decrementDiplomat()
 {
-     if (diplomat_undo > 0)
-     {
-        available_points += 1;
-        diplomat -= 1;
-        diplomat_undo -= 1;
-     }
+     	if (diplomat_undo > 0)
+     	{
+        	available_points += 1;
+        	diplomat -= 1;
+        	diplomat_undo -= 1;
+     	}
 }
 
 
