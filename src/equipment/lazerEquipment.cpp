@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "lazerEquipment.h"
+#include "lazerEquipment.hpp"
 
 LazerEquipment :: LazerEquipment(TextureOb* _itemTexOb, 
 				 int _damage_orig, 

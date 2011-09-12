@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "asteroid.h"
+#include "asteroid.hpp"
 
 Asteroid :: Asteroid(TextureOb* _texOb,
 		     ObjMeshInstance* _mesh,
@@ -92,7 +92,7 @@ void Asteroid :: death_TRUE()
 
      	if (is_explosed == false)
      	{   
-        	createExplosion(starsystem, points.getCenter(), planet_data.scale/2);
+        	createExplosion(starsystem, points.getCenter(), data.scale/2);
         
         	Mineral* _mineral;
         	TextureOb* _mTexOb;
@@ -139,7 +139,7 @@ void Asteroid :: updateInfo()
     	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->id));
     	info.addNameStr("armor:");       info.addValueStr(int2str(armor));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
-	info.addNameStr("speed x 100:"); info.addValueStr(int2str(int(planet_data.speed*100)));
+	info.addNameStr("speed x 100:"); info.addValueStr(int2str(int(data.speed*100)));
 }     
 
 

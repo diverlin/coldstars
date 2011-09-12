@@ -29,121 +29,123 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <SFML/Graphics.hpp> 
 
 #include "src/common/alias.hpp"
-#include "src/common/vector.h"
-#include "src/resources/objLoader.h"
+#include "src/common/vector.hpp"
+#include "src/resources/objLoader.hpp"
 
-#include "src/common/global.h"
+#include "src/common/global.hpp"
 #include "src/common/constants.hpp"
-#include "src/common/points.h"
+#include "src/common/points.hpp"
 #include "src/common/common.hpp"
 
-#include "src/text/textstuff.h"
+#include "src/text/textstuff.hpp"
 
-#include "src/resources/texture.h"
-#include "src/render/glsl.h"
-#include "src/render/camera.h"
-#include "src/resources/resources.h"
+#include "src/resources/texture.hpp"
+#include "src/resources/resources.hpp"
 
-#include "src/common/rect.h"
+#include "src/common/rect.hpp"
 
 
-#include "src/modules/commonformodules.h"
-#include "src/modules/rocketModule.h"
-#include "src/modules/lazerModule.h"
-#include "src/modules/radarModule.h"
-#include "src/modules/driveModule.h"
-#include "src/modules/bakModule.h"
-#include "src/modules/energizerModule.h"
-#include "src/modules/protectorModule.h"
-#include "src/modules/droidModule.h"
-#include "src/modules/freezerModule.h"
-#include "src/modules/scanerModule.h"
-#include "src/modules/grappleModule.h"
+#include "src/modules/commonformodules.hpp"
+#include "src/modules/rocketModule.hpp"
+#include "src/modules/lazerModule.hpp"
+#include "src/modules/radarModule.hpp"
+#include "src/modules/driveModule.hpp"
+#include "src/modules/bakModule.hpp"
+#include "src/modules/energizerModule.hpp"
+#include "src/modules/protectorModule.hpp"
+#include "src/modules/droidModule.hpp"
+#include "src/modules/freezerModule.hpp"
+#include "src/modules/scanerModule.hpp"
+#include "src/modules/grappleModule.hpp"
 
 
-#include "src/equipment/commonforequipment.h"
-#include "src/equipment/rocketEquipment.h"
-#include "src/equipment/lazerEquipment.h"
-#include "src/equipment/radarEquipment.h"
-#include "src/equipment/driveEquipment.h"
-#include "src/equipment/bakEquipment.h"
-#include "src/equipment/energizerEquipment.h"
-#include "src/equipment/protectorEquipment.h"
-#include "src/equipment/droidEquipment.h"
-#include "src/equipment/freezerEquipment.h"
-#include "src/equipment/scanerEquipment.h"
-#include "src/equipment/grappleEquipment.h"
+#include "src/equipment/commonforequipment.hpp"
+#include "src/equipment/rocketEquipment.hpp"
+#include "src/equipment/lazerEquipment.hpp"
+#include "src/equipment/radarEquipment.hpp"
+#include "src/equipment/driveEquipment.hpp"
+#include "src/equipment/bakEquipment.hpp"
+#include "src/equipment/energizerEquipment.hpp"
+#include "src/equipment/protectorEquipment.hpp"
+#include "src/equipment/droidEquipment.hpp"
+#include "src/equipment/freezerEquipment.hpp"
+#include "src/equipment/scanerEquipment.hpp"
+#include "src/equipment/grappleEquipment.hpp"
 
 
-#include "src/kosmoport/landingarea.h"
-#include "src/kosmoport/angar.h"
-#include "src/kosmoport/shop.h"
-#include "src/kosmoport/goverment.h"
-#include "src/kosmoport/store.h"
-#include "src/kosmoport/kosmoport.h"
-#include "src/land/land.h"
+#include "src/kosmoport/landingarea.hpp"
+#include "src/kosmoport/angar.hpp"
+#include "src/kosmoport/shop.hpp"
+#include "src/kosmoport/goverment.hpp"
+#include "src/kosmoport/store.hpp"
+#include "src/kosmoport/kosmoport.hpp"
+#include "src/land/land.hpp"
 
-#include "src/pilots/player.h"
-#include "src/render/init.h"
+#include "src/pilots/player.hpp"
 
 #include "src/render/render.hpp"
-#include "src/render/glsl.h"
+#include "src/render/glsl.hpp"
+#include "src/render/fbo.hpp"
+#include "src/render/bloom.hpp"
+#include "src/effects/shockWave.hpp"
 
 
-#include "src/effects/distantNebulaBg.h"
-#include "src/effects/distantStarBg.h"
-#include "src/effects/explosion.h"
-#include "src/effects/effects.h"
+#include "src/effects/distantNebulaBg.hpp"
+#include "src/effects/distantStarBg.hpp"
+#include "src/effects/particlesystem/explosion.hpp"
+#include "src/effects/particlesystem/driveJet.hpp"
+#include "src/effects/particlesystem/damage.hpp"
 
-#include "src/spaceobjects/commonForSpaceItems.h" 
+#include "src/spaceobjects/commonForSpaceItems.hpp" 
 
-#include "src/effects/shield.h"  
-#include "src/effects/rocketBullet.h"
-#include "src/effects/lazerTrace.h"
-
-
-
-
-#include "src/spaceobjects/commonForPlanet.h" 
-#include "src/spaceobjects/star.h"  
-#include "src/spaceobjects/planet.h"
-#include "src/spaceobjects/asteroid.h"
-#include "src/spaceobjects/mineral.h"
-#include "src/spaceobjects/container.h"
-
-
-#include "src/vehicle/turrel.h"
-
-#include "src/slot/itemSlot.h"
-#include "src/vehicle/navigator.h"
-#include "src/vehicle/ship.h"
+#include "src/effects/shield.hpp"  
+#include "src/effects/rocketBullet.hpp"
+#include "src/effects/lazerTrace.hpp"
 
 
 
-//#include "src/spaceobjects/container.h"    
-//#include "src/spaceobjects/star.h"  
-#include "src/pilots/skill.h"
-#include "src/pilots/npc.h"              
+
+#include "src/spaceobjects/commonForPlanet.hpp" 
+#include "src/spaceobjects/star.hpp"  
+#include "src/spaceobjects/planet.hpp"
+#include "src/spaceobjects/asteroid.hpp"
+#include "src/spaceobjects/mineral.hpp"
+#include "src/spaceobjects/container.hpp"
 
 
-#include "src/kosmoport/angar.h"
+#include "src/vehicle/turrel.hpp"
 
-#include "src/pilots/skill.h"
-#include "src/pilots/npc.h"
-#include "src/pilots/player.h"
-#include "src/gui/cursor.h"                  
+#include "src/slot/itemSlot.hpp"
+#include "src/vehicle/navigator.hpp"
+#include "src/vehicle/ship.hpp"
 
-#include "src/world/starsystem.h"    
-#include "src/effects/rocketBullet.h"
-#include "src/equipment/rocketEquipment.h"
-#include "src/effects/lazerTrace.h"
+#include "src/pilots/skill.hpp"
+#include "src/pilots/npc.hpp"              
 
-#include "src/vehicle/turrel.h"
+#include "src/gui/cursor.hpp"                  
 
-#include "src/slot/itemSlot.h"
-//#include "src/kosmoport/store.h"
+#include "src/world/starsystem.hpp"    
+#include "src/effects/rocketBullet.hpp"
+#include "src/effects/lazerTrace.hpp"
 
-#include "src/world/starsystem.h"
+#include "src/vehicle/turrel.hpp"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #include "src/common/vector.cpp"
@@ -215,8 +217,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "src/effects/distantNebulaBg.cpp"
 #include "src/effects/distantStarBg.cpp"
-#include "src/effects/explosion.cpp"
-#include "src/effects/effects.cpp"
+#include "src/effects/particlesystem/explosion.cpp"
+#include "src/effects/particlesystem/driveJet.cpp"
+#include "src/effects/particlesystem/damage.cpp"
 #include "src/effects/lazerTrace.cpp"
 #include "src/effects/shield.cpp"
 #include "src/effects/rocketBullet.cpp"
@@ -228,8 +231,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "src/common/common.cpp"
 //#include "src/resources/model_obj.cpp"
 #include "src/render/render.cpp"
-#include "src/render/camera.cpp"
+//#include "src/render/camera.cpp"
 #include "src/render/glsl.cpp"
+#include "src/render/fbo.cpp"
+#include "src/render/bloom.cpp"
+#include "src/effects/shockWave.cpp"
 
 #include "src/text/textstuff.cpp"
 ////////////////////////////////////////////

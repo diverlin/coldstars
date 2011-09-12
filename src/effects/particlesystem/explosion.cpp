@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "explosion.h"
+#include "explosion.hpp"
 
            
 ExplosionEffect :: ExplosionEffect(TextureOb* _texOb, vec2f _center_pos, ParticleSystemData _psData)

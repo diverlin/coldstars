@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "shipInternal.h"
+#include "shipInternal.hpp"
 
 ShipInternal :: ShipInternal()
 {
@@ -262,7 +262,7 @@ void ShipInternal :: renderSkill()
      int w = 15;
      int h = 15;
 
-     for (int i = 0; i < pTo_skill->attack; i++) 
+     for (int i = 0; i < pTo_skill->getAttack(); i++) 
      { 
          Rect tmp_rect = Rect(pTo_increment_attack_button->rect.center_x - 10, pTo_increment_attack_button->rect.center_y + i*h, w, h);
          drawTexturedRect(pTo_increment_attack_button->pTo_texOb->texture, tmp_rect, -1.0);
@@ -270,7 +270,7 @@ void ShipInternal :: renderSkill()
      pTo_increment_attack_button->render();
      pTo_decrement_attack_button->render();
                     
-     for (int i = 0; i < pTo_skill->defence; i++) 
+     for (int i = 0; i < pTo_skill->getDefence(); i++) 
      { 
          Rect tmp_rect = Rect(pTo_increment_defence_button->rect.center_x - 10, pTo_increment_defence_button->rect.center_y + i*h, w, h);
          drawTexturedRect(pTo_increment_defence_button->pTo_texOb->texture, tmp_rect, -1.0);
@@ -278,7 +278,7 @@ void ShipInternal :: renderSkill()
      pTo_increment_defence_button->render();
      pTo_decrement_defence_button->render();
 
-     for (int i = 0; i < pTo_skill->leader; i++) 
+     for (int i = 0; i < pTo_skill->getLeader(); i++) 
      { 
          Rect tmp_rect = Rect(pTo_increment_leader_button->rect.center_x - 10, pTo_increment_leader_button->rect.center_y + i*h, w, h);
          drawTexturedRect(pTo_increment_leader_button->pTo_texOb->texture, tmp_rect, -1.0);
@@ -286,7 +286,7 @@ void ShipInternal :: renderSkill()
      pTo_increment_leader_button->render();
      pTo_decrement_leader_button->render();
         
-     for (int i = 0; i < pTo_skill->trader; i++) 
+     for (int i = 0; i < pTo_skill->getTrader(); i++) 
      { 
          Rect tmp_rect = Rect(pTo_increment_trader_button->rect.center_x - 10, pTo_increment_trader_button->rect.center_y + i*h, w, h);
          drawTexturedRect(pTo_increment_trader_button->pTo_texOb->texture, tmp_rect, -1.0);
@@ -294,7 +294,7 @@ void ShipInternal :: renderSkill()
      pTo_increment_trader_button->render();
      pTo_decrement_trader_button->render();
         
-     for (int i = 0; i < pTo_skill->technic; i++) 
+     for (int i = 0; i < pTo_skill->getTechnic(); i++) 
      { 
          Rect tmp_rect = Rect(pTo_increment_technic_button->rect.center_x - 10, pTo_increment_technic_button->rect.center_y + i*h, w, h);
          drawTexturedRect(pTo_increment_technic_button->pTo_texOb->texture, tmp_rect, -1.0);
@@ -302,7 +302,7 @@ void ShipInternal :: renderSkill()
      pTo_increment_technic_button->render();
      pTo_decrement_technic_button->render();
                     
-     for (int i = 0; i < pTo_skill->diplomat; i++) 
+     for (int i = 0; i < pTo_skill->getDiplomat(); i++) 
      { 
          Rect tmp_rect = Rect(pTo_increment_diplomat_button->rect.center_x - 10, pTo_increment_diplomat_button->rect.center_y + i*h, w, h);
          drawTexturedRect(pTo_increment_diplomat_button->pTo_texOb->texture, tmp_rect, -1.0);

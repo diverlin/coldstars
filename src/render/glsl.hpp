@@ -17,36 +17,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "scanerModule.hpp"
+#ifndef GLSL_H
+#define GLSL_H
 
 
-ScanerModule :: ScanerModule(TextureOb* _texOb, int _scan_add)
-{
-    	CommonForModules_init(SCANER_ID, _texOb);
+void compile_program(const GLchar *vertex_source, const GLchar* fragment_source, GLuint* pTo_program);
 
-    	scan_add = _scan_add;
-}
+GLuint compile_shader(const GLchar *source, GLenum shader_type);
 
-
-ScanerModule :: ~ScanerModule ()
-{}
+void printProgramInfoLog(GLuint program);
 
 
-int ScanerModule :: getScanAdd() const { return scan_add; }
-		
-		
-void ScanerModule :: addUniqueInfo()
-{
-    	info.addTitleStr("scaner module");
-    	info.addNameStr("scan_add:");      info.addValueStr( int2str(scan_add) );
-}
+#endif 
 
 
-ScanerModule* scanerModuleGenerator()
-{
-    	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
-    	int scan_add = randIntInRange(SCANER_MODULE_SCAN_MIN, SCANER_MODULE_SCAN_MAX);
-
-    	ScanerModule* scaner_module = new ScanerModule(texOb, scan_add);    	
-    	return scaner_module;
-}

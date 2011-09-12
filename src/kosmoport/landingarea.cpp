@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "landingarea.h"
+#include "landingarea.hpp"
 
 
 LandingArea :: LandingArea(TextureOb* _pTo_texOb, float _center_x, float _center_y, int _w, int _h)

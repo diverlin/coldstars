@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "commonForPlanet.h"
+#include "commonForPlanet.hpp"
 
 CommonForPlanet :: CommonForPlanet()
 {}
@@ -29,9 +29,9 @@ CommonForPlanet :: ~CommonForPlanet()
 
 void CommonForPlanet :: CommonForPlanet_init(TextureOb* _texOb, 
     	   				     ObjMeshInstance* _mesh, 
-					     PlanetData _planet_data)
+					     PlanetData _data)
 {
-	planet_data = _planet_data;
+	data = _data;
 
         id = g_ENTITY_ID_GENERATOR.returnNextId();
               
@@ -49,8 +49,8 @@ void CommonForPlanet :: CommonForPlanet_init(TextureOb* _texOb,
      
         // !!!!
         float rate = 5.4;                                            
-        w = rate * planet_data.scale;
-        h = rate * planet_data.scale;
+        w = rate * data.scale;
+        h = rate * data.scale;
         collision_radius = (w + h)/2; 
         // !!!!
                 
@@ -92,13 +92,13 @@ vec2f CommonForPlanet :: getNextTurnPosition() const { return vec2f(orbit_vector
 
 void CommonForPlanet :: detailedEllipceOrbitFormation()
 {   
-     	float d_angleInRad  = planet_data.speed / 57.295779;
-     	float orbitPhiInRad = planet_data.orbit_phi_inD * PI/180;
+     	float d_angleInRad  = data.speed / 57.295779;
+     	float orbitPhiInRad = data.orbit_phi_inD * PI/180;
      	
      	for(float angleInRad = 0; angleInRad < 2*PI; angleInRad += d_angleInRad) 
      	{ 
-         	float new_coord_x = planet_data.orbit_center.x + planet_data.radius_A * cos(angleInRad) * cos(orbitPhiInRad) - planet_data.radius_B * sin(angleInRad) * sin(orbitPhiInRad);
-         	float new_coord_y = planet_data.orbit_center.y + planet_data.radius_A * cos(angleInRad) * sin(orbitPhiInRad) + planet_data.radius_B * sin(angleInRad) * cos(orbitPhiInRad);
+         	float new_coord_x = data.orbit_center.x + data.radius_A * cos(angleInRad) * cos(orbitPhiInRad) - data.radius_B * sin(angleInRad) * sin(orbitPhiInRad);
+         	float new_coord_y = data.orbit_center.y + data.radius_A * cos(angleInRad) * sin(orbitPhiInRad) + data.radius_B * sin(angleInRad) * cos(orbitPhiInRad);
          	orbit_vector_x.push_back(new_coord_x);
          	orbit_vector_y.push_back(new_coord_y);
      	}
@@ -148,7 +148,7 @@ void CommonForPlanet :: render_NEW()
      	glBindTexture(GL_TEXTURE_2D, texOb->texture);
      	glUniform1i(glGetUniformLocation(g_LIGHT_PROGRAM, "Texture_0"), 0);
       
-	renderMesh(mesh->glList, center_pos, angle, planet_data.scale);
+	renderMesh(mesh->glList, center_pos, angle, data.scale);
 
      	//// render atmosphere
      	//glEnable(GL_BLEND);
@@ -170,7 +170,7 @@ void CommonForPlanet :: render_OLD()
 	updateRotation();
 
 	glBindTexture(GL_TEXTURE_2D, texOb->texture);
-	renderMesh(mesh->glList, center_pos, angle, planet_data.scale);
+	renderMesh(mesh->glList, center_pos, angle, data.scale);
 }
 
 

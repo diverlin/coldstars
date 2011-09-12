@@ -17,40 +17,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "goverment.hpp"
+#ifndef FBO_H
+#define FBO_H
 
 
-Goverment :: Goverment(TextureOb* _pTo_bg_texOb, TextureOb* _pTo_face_texOb)
+
+class FBO
 {
-    pTo_bg_texOb   = _pTo_bg_texOb;
-    pTo_face_texOb = _pTo_face_texOb;   
-}
+	public:
+      		FBO(int _w, int _h);
+      		~FBO();
 
-void Goverment :: linkTexture()
-{
-    //background_tex = pTo_bg_texOb->texture
-}
+		GLuint getTexture() const; 
+		
+      		void activate();
+      		void deactivate();
+      		
+      	private:
+      	      	GLuint texture;
+      		int w, h;
 
-void Goverment :: unlinkTexture()
-{
-     //background_tex = -1; ???
-}
+      		GLuint depth_buffer;
+      		GLuint fbo;      	
+};
 
+typedef std::vector<FBO*> VEC_pFBO_type; 
+typedef std::vector<VEC_pFBO_type> VEC_pList_pFBO_type; 
 
-
-void Goverment :: renderBackground()
-{
-     Rect screen_rect = Rect(0, 0, g_VIEW_WIDTH, g_VIEW_HEIGHT);
-     drawTexturedRect(pTo_bg_texOb->texture, screen_rect, -1);  
-}
-
-void Goverment :: renderInternals()
-{
-}
-            
-void Goverment :: render()
-{
-     renderBackground();
-     renderInternals();
-}
-
+// http://www.flashbang.se/archives/48
+    
+#endif

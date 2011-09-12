@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "freezerModule.h"
+#include "freezerModule.hpp"
 
 FreezerModule :: FreezerModule(TextureOb* _texOb, int _freeze_add)
 {

@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "shop.h"
+#include "shop.hpp"
 
 
 Shop :: Shop(TextureOb* _pTo_bg_texOb)

@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "grappleModule.h"
+#include "grappleModule.hpp"
 
 
 GrappleModule :: GrappleModule(TextureOb* _texOb, int _strength_add, int _radius_add, int _speed_add, int _maxNumItem_add)

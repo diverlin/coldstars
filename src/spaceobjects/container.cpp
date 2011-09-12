@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "container.h"
+#include "container.hpp"
 
 Container :: Container(TextureOb* _pTo_texOb, vec2f _start_pos)
 {

@@ -17,8 +17,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "starsystem.h"
-#include <GL/glew.h>
+#include "starsystem.hpp"
+
 
 StarSystem :: StarSystem()
 { 
@@ -567,15 +567,15 @@ void StarSystem :: renderEntities_NEW()
 	pTo_fbo0->deactivate();
 
 	// POST PROCESS BLOOM (many FBO)
-	pTo_bloom->pass0(pTo_fbo0->texture, STAR_pList[0]->getBrightThreshold());
+	pTo_bloom->pass0(pTo_fbo0->getTexture(), STAR_pList[0]->getBrightThreshold());
 	pTo_bloom->restPasses();
-	pTo_bloom->combine(pTo_fbo0->texture);
+	pTo_bloom->combine(pTo_fbo0->getTexture());
 
 	// RENDER to FBO1, VOLUMETRIC LIGHT
 	pTo_fbo1->activate();
 		glUseProgram(g_VOLUMETRICLIGHT_PROGRAM);
 			glActiveTexture(GL_TEXTURE0);                                
-			glBindTexture(GL_TEXTURE_2D, pTo_bloom->pTo_fbo_final->texture);
+			glBindTexture(GL_TEXTURE_2D, pTo_bloom->pTo_fbo_final->getTexture());
 			glUniform1i(glGetUniformLocation(g_VOLUMETRICLIGHT_PROGRAM, "FullSampler"), 0);
 
 			glActiveTexture(GL_TEXTURE1);                                
@@ -592,7 +592,7 @@ void StarSystem :: renderEntities_NEW()
 
 
 	pTo_fbo2->activate();
-		drawFullScreenTexturedQuad(pTo_fbo1->texture, w, h, -999.0);
+		drawFullScreenTexturedQuad(pTo_fbo1->getTexture(), w, h, -999.0);
            
           	camera(g_SCROLL_COORD_X, g_SCROLL_COORD_Y);    
         
@@ -662,7 +662,7 @@ void StarSystem :: renderEntities_NEW()
 
 		glUseProgram(g_SHOCKWAVE_PROGRAM);
 			glActiveTexture(GL_TEXTURE0);                                
-			glBindTexture(GL_TEXTURE_2D, pTo_fbo2->texture);
+			glBindTexture(GL_TEXTURE_2D, pTo_fbo2->getTexture());
 			glUniform1i (glGetUniformLocation(g_SHOCKWAVE_PROGRAM, "sceneTex"), 0);
 
 			int len_effect_SHOCKWAVE_list = effect_SHOCKWAVE_pList.size();
@@ -683,7 +683,7 @@ void StarSystem :: renderEntities_NEW()
 
 	clearScreen();
 
-	drawFullScreenTexturedQuad(pTo_fbo3->texture, w, h, -999.0);
+	drawFullScreenTexturedQuad(pTo_fbo3->getTexture(), w, h, -999.0);
 	//drawFullScreenTexturedQuad(pTo_fbo0->texture, w, h, -999.0);  // debug
 
 	camera(g_SCROLL_COORD_X, g_SCROLL_COORD_Y);
