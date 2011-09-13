@@ -505,7 +505,11 @@ void Store :: mouseControl()
 
     for (unsigned int i = 0; i < slot_pList.size(); i++)
     { 
-        float dist = distBetweenCenters(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y), slot_pList[i]->getRect().center_x, slot_pList[i]->getRect().center_y);
+        float dist = distBetweenCenters(g_MOUSE_POS_X, 
+        				g_VIEW_HEIGHT - g_MOUSE_POS_Y, 
+        				slot_pList[i]->getRect().getCenter().x, 
+        				slot_pList[i]->getRect().getCenter().y);
+        				
         if (dist < slot_pList[i]->getRect().w/2)
         {
              slot_pList[i]->setCursoredStatus(true);
@@ -584,8 +588,8 @@ void Store :: mouseControl()
 
 void Store :: renderBackground()
 {
-     Rect screen_rect = Rect(0, 0, g_VIEW_WIDTH, g_VIEW_HEIGHT);
-     drawTexturedRect(pTo_bg_texOb->texture, screen_rect, -1);  
+     	Rect screen_rect = Rect(0, 0, g_VIEW_WIDTH, g_VIEW_HEIGHT);
+     	drawTexturedRect(pTo_bg_texOb->texture, screen_rect, -1);  
 }
 
 void Store :: renderInternals()

@@ -118,7 +118,7 @@ void CommonForEquipment :: addCommonInfo()
 
 void CommonForEquipment :: renderInfo(Rect slot_rect, float offset_x, float offset_y)
 {  
-     	drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.center_x, slot_rect.center_y, offset_x, offset_y);
+     	drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.getCenter().x, slot_rect.getCenter().y, offset_x, offset_y);
 }
 
 
@@ -137,7 +137,10 @@ void CommonForEquipment :: _renderFrame(Rect slot_rect)
     
     	for (unsigned int mi = 0; mi < texOb_modules_pList.size(); mi++)
     	{
-        	Rect module_rect(slot_rect.bottomLeft_x + (1.1 * INSERTED_MODULE_SIZE) * (mi), slot_rect.bottomLeft_y + (1.1 * INSERTED_MODULE_SIZE), INSERTED_MODULE_SIZE, INSERTED_MODULE_SIZE);
+        	Rect module_rect(slot_rect.getBottomLeft().x + (1.1 * INSERTED_MODULE_SIZE) * (mi), 
+        		         slot_rect.getBottomLeft().y + (1.1 * INSERTED_MODULE_SIZE),
+        			 INSERTED_MODULE_SIZE, 
+        			 INSERTED_MODULE_SIZE);
         	drawTexturedRect(texOb_modules_pList[mi]->texture, module_rect, -1);
     	}
 }           
@@ -163,7 +166,11 @@ void CommonForEquipment :: _renderFrames(Rect slot_rect)
     
     	for (unsigned int mi = 0; mi < texOb_modules_pList.size(); mi++)
     	{
-        	Rect module_rect(slot_rect.bottomLeft_x + (1.1 * INSERTED_MODULE_SIZE) * (mi), slot_rect.bottomLeft_y + (1.1 * INSERTED_MODULE_SIZE), INSERTED_MODULE_SIZE, INSERTED_MODULE_SIZE);
+        	Rect module_rect(slot_rect.getBottomLeft().x + (1.1 * INSERTED_MODULE_SIZE) * (mi), 
+        			 slot_rect.getBottomLeft().y + (1.1 * INSERTED_MODULE_SIZE),
+        		         INSERTED_MODULE_SIZE, 
+        		         INSERTED_MODULE_SIZE);
+        		         
         	drawTexturedRect(texOb_modules_pList[mi]->texture, module_rect, -1);
     	}
 }      

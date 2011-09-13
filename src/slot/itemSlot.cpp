@@ -399,7 +399,7 @@ bool ItemSlot :: insertItem(RocketModule* item)
 	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		rocket_module = item;
-		rocket_module->rect.setNewCenter(rect.center_x, rect.center_y);
+		rocket_module->rect.setNewCenter(rect.getCenter());
 
 		item_type_id    = item->getType();
 		item_subtype_id = item->getSubType();
@@ -416,7 +416,7 @@ bool ItemSlot :: insertItem(LazerModule* item)
 	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		lazer_module = item;
-		lazer_module->rect.setNewCenter(rect.center_x, rect.center_y);
+		lazer_module->rect.setNewCenter(rect.getCenter());
 
 		item_type_id    = item->getType();
 		item_subtype_id = item->getSubType();
@@ -433,7 +433,7 @@ bool ItemSlot :: insertItem(RadarModule* item)
 	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		radar_module = item;
-		radar_module->rect.setNewCenter(rect.center_x, rect.center_y);
+		radar_module->rect.setNewCenter(rect.getCenter());
 
 		item_type_id    = item->getType();
 		item_subtype_id = item->getSubType();
@@ -452,7 +452,7 @@ bool ItemSlot :: insertItem(DriveModule* item)
 	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		drive_module = item;
-		drive_module->rect.setNewCenter(rect.center_x, rect.center_y);
+		drive_module->rect.setNewCenter(rect.getCenter());
 
 		item_type_id    = item->getType();
 		item_subtype_id = item->getSubType();
@@ -469,7 +469,7 @@ bool ItemSlot :: insertItem(BakModule* item)
 	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		bak_module = item;
-		bak_module->rect.setNewCenter(rect.center_x, rect.center_y);
+		bak_module->rect.setNewCenter(rect.getCenter());
 
 		item_type_id    = item->getType();
 		item_subtype_id = item->getSubType();
@@ -486,7 +486,7 @@ bool ItemSlot :: insertItem(EnergizerModule* item)
      	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		energizer_module = item;
-		energizer_module->rect.setNewCenter(rect.center_x, rect.center_y);
+		energizer_module->rect.setNewCenter(rect.getCenter());
 
 		item_type_id    = item->getType();
 		item_subtype_id = item->getSubType();
@@ -503,7 +503,7 @@ bool ItemSlot :: insertItem(ProtectorModule* item)
      	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		protector_module = item;
-		protector_module->rect.setNewCenter(rect.center_x, rect.center_y);
+		protector_module->rect.setNewCenter(rect.getCenter());
 
 		item_type_id    = item->getType();
 		item_subtype_id = item->getSubType();
@@ -520,7 +520,7 @@ bool ItemSlot :: insertItem(DroidModule* item)
      	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		droid_module = item;
-		droid_module->rect.setNewCenter(rect.center_x, rect.center_y);
+		droid_module->rect.setNewCenter(rect.getCenter());
 
 		item_type_id    = item->getType();
 		item_subtype_id = item->getSubType();
@@ -537,7 +537,7 @@ bool ItemSlot :: insertItem(FreezerModule* item)
      	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		freezer_module = item;
-		freezer_module->rect.setNewCenter(rect.center_x, rect.center_y);
+		freezer_module->rect.setNewCenter(rect.getCenter());
     
 		item_type_id    = item->getType();
 		item_subtype_id = item->getSubType();
@@ -554,7 +554,7 @@ bool ItemSlot :: insertItem(ScanerModule* item)
      	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		scaner_module = item;
-		scaner_module->rect.setNewCenter(rect.center_x, rect.center_y);
+		scaner_module->rect.setNewCenter(rect.getCenter());
 
 		item_type_id    = item->getType();
 		item_subtype_id = item->getSubType();
@@ -571,7 +571,7 @@ bool ItemSlot :: insertItem(GrappleModule* item)
      	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
 		grapple_module = item;
-		grapple_module->rect.setNewCenter(rect.center_x, rect.center_y);
+		grapple_module->rect.setNewCenter(rect.getCenter());
         
 		item_type_id    = item->getType();
 		item_subtype_id = item->getSubType();
@@ -1055,7 +1055,7 @@ void ItemSlot :: renderItemInfo(float offset_x, float offset_y)
 
 bool ItemSlot :: interaction(int _x, int _y)
 {        
-        float dist = distBetweenCenters(rect.center_x, rect.center_y, _x, _y);
+        float dist = distBetweenCenters(rect.getCenter().x, rect.getCenter().y, _x, _y);
         if (dist < rect.w/2)
                 return true;
         else

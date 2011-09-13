@@ -148,8 +148,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
        		weapon_slot1 = ItemSlot(WEAPON_SLOT_ID, 
        					this, 
        					texOb_slot, 
-       					kontur_rect.center_x + 1*texOb_slot->w, 
-       					kontur_rect.center_y - texOb_slot->h/2);
+       					kontur_rect.getCenter().x + 1*texOb_slot->w, 
+       					kontur_rect.getCenter().y - texOb_slot->h/2);
        					
        		slot_weapon_pList.push_back(&weapon_slot1);
        		slot_total_pList.push_back(&weapon_slot1); 
@@ -174,8 +174,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
        		weapon_slot2 = ItemSlot(WEAPON_SLOT_ID, 
        					this, 
        					texOb_slot, 
-       					kontur_rect.center_x + 1*texOb_slot->w, 
-       					kontur_rect.center_y - texOb_slot->h/2 + 1.1*texOb_slot->h);
+       					kontur_rect.getCenter().x + 1*texOb_slot->w, 
+       					kontur_rect.getCenter().y - texOb_slot->h/2 + 1.1*texOb_slot->h);
        					    
        		slot_weapon_pList.push_back(&weapon_slot2);
        		slot_total_pList.push_back(&weapon_slot2); 
@@ -200,8 +200,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
        		weapon_slot3 = ItemSlot(WEAPON_SLOT_ID, 
        					this, 
        					texOb_slot, 
-       					kontur_rect.center_x + 1*texOb_slot->w, 
-       					kontur_rect.center_y - texOb_slot->h/2 - 1.1*texOb_slot->h); 
+       					kontur_rect.getCenter().x + 1*texOb_slot->w, 
+       					kontur_rect.getCenter().y - texOb_slot->h/2 - 1.1*texOb_slot->h); 
        					
        		slot_weapon_pList.push_back(&weapon_slot3);
        		slot_total_pList.push_back(&weapon_slot3); 
@@ -226,8 +226,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
        		weapon_slot4 = ItemSlot(WEAPON_SLOT_ID, 
        					this, 
        					texOb_slot, 
-       					kontur_rect.center_x + 2.2*texOb_slot->w, 
-       					kontur_rect.center_y - texOb_slot->h/2 + 1.1*texOb_slot->h/2);
+       					kontur_rect.getCenter().x + 2.2*texOb_slot->w, 
+       					kontur_rect.getCenter().y - texOb_slot->h/2 + 1.1*texOb_slot->h/2);
        					
        		slot_weapon_pList.push_back(&weapon_slot4);
        		slot_total_pList.push_back(&weapon_slot4); 
@@ -254,8 +254,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
        		weapon_slot5 = ItemSlot(WEAPON_SLOT_ID, 
        					this, 
        					texOb_slot, 
-       					kontur_rect.center_x + 2.2*texOb_slot->w, 
-       					kontur_rect.center_y - texOb_slot->h/2 - 1.1*texOb_slot->h/2);
+       					kontur_rect.getCenter().x + 2.2*texOb_slot->w, 
+       					kontur_rect.getCenter().y - texOb_slot->h/2 - 1.1*texOb_slot->h/2);
        					
        		slot_weapon_pList.push_back(&weapon_slot5);
        		slot_total_pList.push_back(&weapon_slot5); 
@@ -285,8 +285,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
 	drive_slot       = ItemSlot(DRIVE_ID,
 				    this, 
 				    texOb_slot, 
-				    kontur_rect.center_x - 5*texOb_slot->w, 
-				    kontur_rect.center_y - texOb_slot->h/2 + 1.1*texOb_slot->h/2);
+				    kontur_rect.getCenter().x - 5*texOb_slot->w, 
+				    kontur_rect.getCenter().y - texOb_slot->h/2 + 1.1*texOb_slot->h/2);
 				    
 	slot_total_pList.push_back(&drive_slot);
 	
@@ -294,8 +294,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
 	bak_slot         = ItemSlot(BAK_ID,
 				    this, 
 				    texOb_slot, 
-				    kontur_rect.center_x - 5*texOb_slot->w, 
-				    kontur_rect.center_y - texOb_slot->h/2 - 1.1*texOb_slot->h/2);
+				    kontur_rect.getCenter().x - 5*texOb_slot->w, 
+				    kontur_rect.getCenter().y - texOb_slot->h/2 - 1.1*texOb_slot->h/2);
 				    
 	slot_total_pList.push_back(&bak_slot);
 	
@@ -303,8 +303,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
 	radar_slot       = ItemSlot(RADAR_ID,
 				    this, 
 				    texOb_slot, 
-				    kontur_rect.center_x + 4*texOb_slot->w, 
-				    kontur_rect.center_y - texOb_slot->h/2 + 1.1*texOb_slot->h/2);
+				    kontur_rect.getCenter().x + 4*texOb_slot->w, 
+				    kontur_rect.getCenter().y - texOb_slot->h/2 + 1.1*texOb_slot->h/2);
 				    
 	slot_total_pList.push_back(&radar_slot);	
 	
@@ -312,8 +312,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
 	scaner_slot      = ItemSlot(SCANER_ID,
 				    this, 
 				    texOb_slot, 
-				    kontur_rect.center_x + 4*texOb_slot->w, 
-				    kontur_rect.center_y - texOb_slot->h/2 - 1.1*texOb_slot->h/2);
+				    kontur_rect.getCenter().x + 4*texOb_slot->w, 
+				    kontur_rect.getCenter().y - texOb_slot->h/2 - 1.1*texOb_slot->h/2);
 				    
 	slot_total_pList.push_back(&scaner_slot);
 	
@@ -321,8 +321,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
 	energizer_slot   = ItemSlot(ENERGIZER_ID, 
 				    this, 
 				    texOb_slot, 
-				    kontur_rect.center_x - 2*texOb_slot->w, 
-				    kontur_rect.center_y - texOb_slot->h/2);
+				    kontur_rect.getCenter().x - 2*texOb_slot->w, 
+				    kontur_rect.getCenter().y - texOb_slot->h/2);
 				    
     	slot_total_pList.push_back(&energizer_slot);
     		
@@ -332,8 +332,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
 		grapple_slot  = ItemSlot(GRAPPLE_ID, 
 					 this, 
 					 texOb_slot, 
-					 kontur_rect.center_x - 3*texOb_slot->w, 
-					 kontur_rect.center_y - texOb_slot->h/2 + 1.1*texOb_slot->h);
+					 kontur_rect.getCenter().x - 3*texOb_slot->w, 
+					 kontur_rect.getCenter().y - texOb_slot->h/2 + 1.1*texOb_slot->h);
 					 
     		slot_total_pList.push_back(&grapple_slot); 
     	}
@@ -342,8 +342,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
 	protector_slot   = ItemSlot(PROTECTOR_ID, 
 				    this, 
 				    texOb_slot, 
-				    kontur_rect.center_x - 3*texOb_slot->w, 
-				    kontur_rect.center_y - texOb_slot->h/2 - 1.1*texOb_slot->h);
+				    kontur_rect.getCenter().x - 3*texOb_slot->w, 
+				    kontur_rect.getCenter().y - texOb_slot->h/2 - 1.1*texOb_slot->h);
 				    
     	slot_total_pList.push_back(&protector_slot); 
 	
@@ -351,8 +351,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
 	droid_slot       = ItemSlot(DROID_ID,
 				    this, 
 				    texOb_slot, 
-				    kontur_rect.center_x - 1*texOb_slot->w, 
-				    kontur_rect.center_y - texOb_slot->h/2 + 1.1*texOb_slot->h);
+				    kontur_rect.getCenter().x - 1*texOb_slot->w, 
+				    kontur_rect.getCenter().y - texOb_slot->h/2 + 1.1*texOb_slot->h);
 				    
     	slot_total_pList.push_back(&droid_slot); 
     	
@@ -360,8 +360,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
 	freezer_slot     = ItemSlot(FREEZER_ID,
 				    this, 
 				    texOb_slot, 
-				    kontur_rect.center_x - 1*texOb_slot->w, 
-				    kontur_rect.center_y - texOb_slot->h/2 - 1.1*texOb_slot->h);
+				    kontur_rect.getCenter().x - 1*texOb_slot->w, 
+				    kontur_rect.getCenter().y - texOb_slot->h/2 - 1.1*texOb_slot->h);
 				    
 	slot_total_pList.push_back(&freezer_slot);   
 	////////////////////////////////////////////////////
@@ -373,8 +373,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
          	ItemSlot* pTo_otsec_slot = new ItemSlot(UNIVERSAL_SLOT_ID, 
          						this, 
          						texOb_slot, 
-         						kontur_rect.center_x + (i-6) * texOb_slot->w, 
-         						kontur_rect.center_y - 3*texOb_slot->h);
+         						kontur_rect.getCenter().x + (i-6) * texOb_slot->w, 
+         						kontur_rect.getCenter().y - 3*texOb_slot->h);
          						
          	slot_otsec_pList.push_back(pTo_otsec_slot); 
          	slot_total_pList.push_back(pTo_otsec_slot);         
@@ -386,8 +386,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
     	gate_slot = ItemSlot(GATE_SLOT_ID, 
     			     this, 
     			     texOb_slot, 
-    			     kontur_rect.center_x - 5*texOb_slot->w, 
-    			     kontur_rect.center_y + 3*texOb_slot->h);
+    			     kontur_rect.getCenter().x - 5*texOb_slot->w, 
+    			     kontur_rect.getCenter().y + 3*texOb_slot->h);
     	////////////////////////////////////////////////////
 
 

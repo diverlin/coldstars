@@ -104,7 +104,11 @@ void Angar :: mouseControl()
 
     for (unsigned int i = 0; i < landingArea_pList.size(); i++)
     { 
-        float dist = distBetweenCenters(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y), landingArea_pList[i]->rect.center_x, landingArea_pList[i]->rect.center_y);
+        float dist = distBetweenCenters(g_MOUSE_POS_X, 
+        				g_VIEW_HEIGHT - g_MOUSE_POS_Y, 
+        				landingArea_pList[i]->rect.getCenter().x, 
+        				landingArea_pList[i]->rect.getCenter().y);
+        				
         if (dist < landingArea_pList[i]->rect.w/2)
         {
              landingArea_pList[i]->is_CURSORED = true;
@@ -122,8 +126,8 @@ void Angar :: mouseControl()
 
 void Angar :: renderBackground()
 {
-     Rect screen_rect = Rect(0, 0, g_VIEW_WIDTH, g_VIEW_HEIGHT);
-     drawTexturedRect(pTo_bg_texOb->texture, screen_rect, -2);  
+     	Rect screen_rect = Rect(0, 0, g_VIEW_WIDTH, g_VIEW_HEIGHT);
+     	drawTexturedRect(pTo_bg_texOb->texture, screen_rect, -2);  
 }
 
 void Angar :: renderInternals()

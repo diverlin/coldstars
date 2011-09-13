@@ -49,7 +49,7 @@ Container :: ~Container()
 
 void Container :: renderInfo()
 {
-     	otsec_slot->getRect().setNewCenter(points.getCenter().x, points.getCenter().y);	
+     	otsec_slot->getRect().setNewCenter(points.getCenter());	
      	otsec_slot->renderItemInfo(g_SCROLL_COORD_X, g_SCROLL_COORD_Y);
 }
 
