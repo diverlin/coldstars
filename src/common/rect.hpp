@@ -21,23 +21,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define RECT_H
 
 class Rect
-{  public:
+{  
+	public:
+      		int w,h;
 
-      float bottomLeft_x;
-      float bottomLeft_y;
-      int w,h;
-
-      float center_x;
-      float center_y;
-
-
-      Rect();
-      Rect(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h);
-      void calcCenter();
-      void setNewCenter(float _center_x, float _center_y);
-      void setNewBottomLeftPos(float _bottomLeft_x, float _bottomLeft_y);
-
-      ~Rect();
+	    	Rect();
+	    	Rect(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h);
+      		Rect(vec2f _bottomLeft, int _w, int _h);
+      		~Rect();
+      		
+      		vec2f getCenter() const;
+      		vec2f getBottomLeft() const;
+      
+      		void calcCenter();
+      		void setNewCenter(vec2f _center);
+      		void setNewCenter(float _center_x, float _center_y);
+      		void setNewBottomLeftPos(vec2f _bottomLeft);
+      		
+      	private:
+      		vec2f bottomLeft;    
+      		vec2f center;  		
 };
 
 

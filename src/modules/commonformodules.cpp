@@ -79,7 +79,7 @@ void CommonForModules :: addCommonInfo()
 
 void CommonForModules :: renderInfo(Rect slot_rect)
 {  
-     drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.center_x, slot_rect.center_y, 0, 0);
+     drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.getCenter().x, slot_rect.getCenter().y, 0, 0);
 }
 
 

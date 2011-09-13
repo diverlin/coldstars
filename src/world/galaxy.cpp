@@ -79,7 +79,10 @@ void Galaxy :: generateEntireStarSystem()
         StarSystem* _starsystem = new StarSystem();   
         STARSYSTEM_pList.push_back(_starsystem);
 
-        Rect ssOnMapRect = Rect( randIntInRange( MAP_OFFSET_X, (g_VIEW_WIDTH - 3*MAP_OFFSET_X)), (g_VIEW_HEIGHT - randIntInRange( MAP_OFFSET_Y, (g_VIEW_HEIGHT - 2*MAP_OFFSET_Y)) ), 40, 40);
+        Rect ssOnMapRect = Rect( randIntInRange( MAP_OFFSET_X, (g_VIEW_WIDTH - 3*MAP_OFFSET_X)),
+        			 g_VIEW_HEIGHT - randIntInRange( MAP_OFFSET_Y, (g_VIEW_HEIGHT - 2*MAP_OFFSET_Y)),
+        			 40, 40);
+        			 
         _starsystem->setPositionOnWorldMap(ssOnMapRect);
 
         Star* _star = createStar();    
@@ -207,13 +210,13 @@ bool Galaxy :: manage_map()
         {
             //if (STARSYSTEM_pList[si]->id != pTo_PLAYER->pTo_starsystem->id)
             {
-                float ss_cursor_dist = distBetweenCenters(STARSYSTEM_pList[si]->rect_onMap.center_x, STARSYSTEM_pList[si]->rect_onMap.center_y, mx, my);
+                float ss_cursor_dist = distBetweenCenters(STARSYSTEM_pList[si]->rect_onMap.getCenter().x, STARSYSTEM_pList[si]->rect_onMap.getCenter().y, mx, my);
                 if (ss_cursor_dist < 10)
                 { 
-                   int ss_ss_dist = distBetweenCenters(STARSYSTEM_pList[si]->rect_onMap.center_x, 
-                   				       STARSYSTEM_pList[si]->rect_onMap.center_y,
-                   				       pTo_PLAYER->pTo_npc->getStarSystem()->rect_onMap.center_x,  
-                   				       pTo_PLAYER->pTo_npc->getStarSystem()->rect_onMap.center_y);
+                   int ss_ss_dist = distBetweenCenters(STARSYSTEM_pList[si]->rect_onMap.getCenter().x, 
+                   				       STARSYSTEM_pList[si]->rect_onMap.getCenter().y,
+                   				       pTo_PLAYER->pTo_npc->getStarSystem()->rect_onMap.getCenter().x,  
+                   				       pTo_PLAYER->pTo_npc->getStarSystem()->rect_onMap.getCenter().y);
                    				       
                    if ( (ss_ss_dist < pTo_PLAYER->pTo_ship->drive_slot.getDriveEquipment()->getHyper()) && (ss_ss_dist < pTo_PLAYER->pTo_ship->bak_slot.getBakEquipment()->getFuel()) )
                       if (lmb == true)
@@ -249,7 +252,11 @@ void Galaxy :: render_map()
     {
         int font_size = 10;
         drawTexturedRect(pTo_particleTexOb->texture, STARSYSTEM_pList[si]->rect_onMap, -1);
-        drawSimpleText(int2str(STARSYSTEM_pList[si]->id), font_size, STARSYSTEM_pList[si]->rect_onMap.bottomLeft_x, STARSYSTEM_pList[si]->rect_onMap.bottomLeft_y);
+        drawSimpleText(int2str(STARSYSTEM_pList[si]->id), 
+        	       font_size, 
+        	       STARSYSTEM_pList[si]->rect_onMap.getBottomLeft().x, 
+        	       STARSYSTEM_pList[si]->rect_onMap.getBottomLeft().y);
+        	       
         //if ss.CAPTURED == True:
            //drawTexturedRect(mark_enemy_ss_tex, [ss.rectOnMap[0] - 10, ss.rectOnMap[1] - 10, ss.rectOnMap[2] + 20, ss.rectOnMap[3] + 20], -1)
     } 

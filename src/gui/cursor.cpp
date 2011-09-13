@@ -33,7 +33,7 @@ Cursor :: Cursor()
 
 void Cursor :: updatePos()
 {
-     pTo_otsec_slot->getRect().setNewCenter(g_MOUSE_POS_X, g_VIEW_HEIGHT - g_MOUSE_POS_Y);
+     	pTo_otsec_slot->getRect().setNewCenter(g_MOUSE_POS_X, g_VIEW_HEIGHT - g_MOUSE_POS_Y);
 }
 
 void Cursor:: renderFrame()

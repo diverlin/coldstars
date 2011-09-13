@@ -264,7 +264,9 @@ void ShipInternal :: renderSkill()
 
      for (int i = 0; i < pTo_skill->getAttack(); i++) 
      { 
-         Rect tmp_rect = Rect(pTo_increment_attack_button->rect.center_x - 10, pTo_increment_attack_button->rect.center_y + i*h, w, h);
+         Rect tmp_rect = Rect(pTo_increment_attack_button->rect.getCenter().x - 10, 
+         		      pTo_increment_attack_button->rect.getCenter().y + i*h, 
+         		      w, h);
          drawTexturedRect(pTo_increment_attack_button->pTo_texOb->texture, tmp_rect, -1.0);
      }
      pTo_increment_attack_button->render();
@@ -272,7 +274,9 @@ void ShipInternal :: renderSkill()
                     
      for (int i = 0; i < pTo_skill->getDefence(); i++) 
      { 
-         Rect tmp_rect = Rect(pTo_increment_defence_button->rect.center_x - 10, pTo_increment_defence_button->rect.center_y + i*h, w, h);
+         Rect tmp_rect = Rect(pTo_increment_defence_button->rect.getCenter().x - 10, 
+         		      pTo_increment_defence_button->rect.getCenter().y + i*h, 
+         		      w, h);
          drawTexturedRect(pTo_increment_defence_button->pTo_texOb->texture, tmp_rect, -1.0);
      }
      pTo_increment_defence_button->render();
@@ -280,7 +284,9 @@ void ShipInternal :: renderSkill()
 
      for (int i = 0; i < pTo_skill->getLeader(); i++) 
      { 
-         Rect tmp_rect = Rect(pTo_increment_leader_button->rect.center_x - 10, pTo_increment_leader_button->rect.center_y + i*h, w, h);
+         Rect tmp_rect = Rect(pTo_increment_leader_button->rect.getCenter().x - 10, 
+         		      pTo_increment_leader_button->rect.getCenter().y + i*h, 
+         		      w, h);
          drawTexturedRect(pTo_increment_leader_button->pTo_texOb->texture, tmp_rect, -1.0);
      }
      pTo_increment_leader_button->render();
@@ -288,7 +294,9 @@ void ShipInternal :: renderSkill()
         
      for (int i = 0; i < pTo_skill->getTrader(); i++) 
      { 
-         Rect tmp_rect = Rect(pTo_increment_trader_button->rect.center_x - 10, pTo_increment_trader_button->rect.center_y + i*h, w, h);
+         Rect tmp_rect = Rect(pTo_increment_trader_button->rect.getCenter().x - 10, 
+         		      pTo_increment_trader_button->rect.getCenter().y + i*h, 
+         		      w, h);
          drawTexturedRect(pTo_increment_trader_button->pTo_texOb->texture, tmp_rect, -1.0);
      }
      pTo_increment_trader_button->render();
@@ -296,7 +304,9 @@ void ShipInternal :: renderSkill()
         
      for (int i = 0; i < pTo_skill->getTechnic(); i++) 
      { 
-         Rect tmp_rect = Rect(pTo_increment_technic_button->rect.center_x - 10, pTo_increment_technic_button->rect.center_y + i*h, w, h);
+         Rect tmp_rect = Rect(pTo_increment_technic_button->rect.getCenter().x - 10, 
+         		      pTo_increment_technic_button->rect.getCenter().y + i*h, 
+         		      w, h);
          drawTexturedRect(pTo_increment_technic_button->pTo_texOb->texture, tmp_rect, -1.0);
      }
      pTo_increment_technic_button->render();
@@ -304,7 +314,9 @@ void ShipInternal :: renderSkill()
                     
      for (int i = 0; i < pTo_skill->getDiplomat(); i++) 
      { 
-         Rect tmp_rect = Rect(pTo_increment_diplomat_button->rect.center_x - 10, pTo_increment_diplomat_button->rect.center_y + i*h, w, h);
+         Rect tmp_rect = Rect(pTo_increment_diplomat_button->rect.getCenter().x - 10, 
+         		      pTo_increment_diplomat_button->rect.getCenter().y + i*h, 
+         		      w, h);
          drawTexturedRect(pTo_increment_diplomat_button->pTo_texOb->texture, tmp_rect, -1.0);
      }
      pTo_increment_diplomat_button->render();

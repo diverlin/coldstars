@@ -40,8 +40,8 @@ void Goverment :: unlinkTexture()
 
 void Goverment :: renderBackground()
 {
-     Rect screen_rect = Rect(0, 0, g_VIEW_WIDTH, g_VIEW_HEIGHT);
-     drawTexturedRect(pTo_bg_texOb->texture, screen_rect, -1);  
+     	Rect screen_rect = Rect(0, 0, g_VIEW_WIDTH, g_VIEW_HEIGHT);
+     	drawTexturedRect(pTo_bg_texOb->texture, screen_rect, -1);  
 }
 
 void Goverment :: renderInternals()

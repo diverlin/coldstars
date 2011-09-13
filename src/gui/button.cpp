@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 Button :: Button(TextureOb* _pTo_texOb, float _pos_x, float _pos_y, int _w, int _h, std::string _info_str)
 {
     pTo_texOb = _pTo_texOb;
+    
     rect = Rect(_pos_x, _pos_y, _w, _h);
     info_str = _info_str; 
     show_info = false; 
@@ -33,7 +34,7 @@ Button :: ~Button()
 
 bool Button :: interaction(int _x, int _y)
 {        
-    float dist = distBetweenCenters(rect.center_x, rect.center_y, _x, _y);
+    float dist = distBetweenCenters(rect.getCenter().x, rect.getCenter().y, _x, _y);
     if (dist < rect.w/2)
         return true;
     else
@@ -52,5 +53,5 @@ void Button :: render()
 
 void Button :: renderInfo()
 {
-     drawSimpleText(info_str, 12, rect.bottomLeft_x - 50, rect.bottomLeft_y + 30);
+     drawSimpleText(info_str, 12, rect.getBottomLeft().x - 50, rect.getBottomLeft().y + 30);
 }

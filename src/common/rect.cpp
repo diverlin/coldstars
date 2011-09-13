@@ -22,15 +22,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 Rect :: Rect()
 {}
 
+
 Rect :: Rect(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h)
 {
-    bottomLeft_x = _bottomLeft_x;
-    bottomLeft_y = _bottomLeft_y;
+    	bottomLeft.x = _bottomLeft_x;
+    	bottomLeft.y = _bottomLeft_y;
+    	
+    	w = _w;
+    	h = _h;
 
-    w = _w;
-    h = _h;
+    	calcCenter();
+}
 
-    calcCenter();
+
+Rect :: Rect(vec2f _bottomLeft, int _w, int _h)
+{
+    	bottomLeft = _bottomLeft;
+
+    	w = _w;
+    	h = _h;
+
+    	calcCenter();
 }
 
 
@@ -38,30 +50,47 @@ Rect :: ~Rect()
 {}
 
 
+vec2f Rect :: getCenter() const     { return center; }
+vec2f Rect :: getBottomLeft() const { return bottomLeft; }
+      		
+      		
 void Rect :: calcCenter()
 {
-    center_x = bottomLeft_x + w/2;
-    center_y = bottomLeft_y + h/2;
+    	center.x = bottomLeft.x + w/2;
+    	center.y = bottomLeft.y + h/2;
+}
+
+
+void Rect :: setNewCenter(vec2f _center)
+{
+    	float dx = center.x - _center.x;
+    	float dy = center.y - _center.y;
+
+    	bottomLeft.x -= dx;
+    	bottomLeft.y -= dy; 
+
+    	center = _center;
 }
 
 
 void Rect :: setNewCenter(float _center_x, float _center_y)
 {
-    float dx = center_x - _center_x;
-    float dy = center_y - _center_y;
+    	float dx = center.x - _center_x;
+    	float dy = center.y - _center_y;
 
-    bottomLeft_x -= dx;
-    bottomLeft_y -= dy; 
+    	bottomLeft.x -= dx;
+    	bottomLeft.y -= dy; 
 
-    center_x = _center_x;
-    center_y = _center_y;
+    	center.x = _center_x;
+    	center.y = _center_y;
 }
 
 
-void Rect ::  setNewBottomLeftPos(float _bottomLeft_x, float _bottomLeft_y)
-{
-    bottomLeft_x = _bottomLeft_x;
-    bottomLeft_y = _bottomLeft_y;
 
-    calcCenter();
+void Rect ::  setNewBottomLeftPos(vec2f _bottomLeft)
+{
+    	bottomLeft.x = _bottomLeft.x;
+    	bottomLeft.y = _bottomLeft.y;
+
+    	calcCenter();
 }
