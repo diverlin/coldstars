@@ -46,25 +46,18 @@ std :: string returnRaceStringByRaceId(int id)  // replace by generator class
 {
      if (id == RACE_0_ID)
         return "RACE0";
-
      if (id == RACE_1_ID)
         return "RACE1";
-
      if (id == RACE_2_ID)
         return "RACE2";
-
      if (id == RACE_3_ID)
         return "RACE3";
-
      if (id == RACE_4_ID)
         return "RACE4";
-
      if (id == RACE_6_ID)
         return "RACE6";
-
      if (id == RACE_7_ID)
-        return "RACE7";
-        
+        return "RACE7";        
      else
         return "____";   
 }

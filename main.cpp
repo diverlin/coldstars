@@ -90,7 +90,7 @@ void playerScan(Ship* ship, bool in_store = false, bool allow_full_control = fal
     	}   
 
     	pTo_SHIP_GUI->mouseControl(allow_full_control, in_store);
-    	if (pTo_CURSOR->pTo_otsec_slot->getEquipedStatus() == false)
+    	if (pTo_CURSOR->getSlot()->getEquipedStatus() == false)
         	pTo_SHIP_GUI->renderItemInfo();
 
     	pTo_CURSOR->updatePos();
@@ -211,8 +211,13 @@ int main()
                galaxy.render_map();   
            }
 
-           interfaceInSpace.mouseInteraction();
+           interfaceInSpace.resetInfoFlags(); 
+           interfaceInSpace.mouseInteraction();           
+               					glDisable(GL_DEPTH_TEST);
+    						glEnable(GL_BLEND);
+    						glLoadIdentity();
            interfaceInSpace.render();
+           interfaceInSpace.renderInfo(); 
        }
 
 
@@ -226,8 +231,8 @@ int main()
 
            
            pTo_PLAYER->pTo_npc->getKosmoport()->clearScreen();
-
-           if (interfaceInKosmoport.angar_screen_SELECTED == true)
+           
+           if (interfaceInKosmoport.getActiveScreenId() == ANGAR_SCREEN_ID)
            {
                pTo_PLAYER->pTo_npc->getKosmoport()->pTo_angar->mouseControl();
                pTo_PLAYER->pTo_npc->getKosmoport()->pTo_angar->renderBackground();
@@ -238,32 +243,36 @@ int main()
                    pTo_PLAYER->pTo_npc->getKosmoport()->pTo_angar->renderItemInfo();
            }
 
-           if (interfaceInKosmoport.store_screen_SELECTED == true)
+           if (interfaceInKosmoport.getActiveScreenId() == STORE_SCREEN_ID)
            {
                pTo_PLAYER->pTo_npc->getKosmoport()->pTo_store->mouseControl();
                pTo_PLAYER->pTo_npc->getKosmoport()->pTo_store->renderBackground();
                pTo_PLAYER->pTo_npc->getKosmoport()->pTo_store->renderInternals();
-               playerScan(pTo_PLAYER->pTo_ship, interfaceInKosmoport.store_screen_SELECTED);
+               playerScan(pTo_PLAYER->pTo_ship, true);
                pTo_PLAYER->pTo_npc->getKosmoport()->pTo_store->renderItemInfo();
            }
 
-           if (interfaceInKosmoport.shop_screen_SELECTED == true)
+           if (interfaceInKosmoport.getActiveScreenId() == SHOP_SCREEN_ID)
            {
                pTo_PLAYER->pTo_npc->getKosmoport()->pTo_shop->render();
            }
 
-           if (interfaceInKosmoport.galaxymap_screen_SELECTED == true)
+           if (interfaceInKosmoport.getActiveScreenId() == GALAXYMAP_SCREEN_ID)
            {
                galaxy.manage_map();   
                galaxy.render_map();   
            }
 
-           if (interfaceInKosmoport.goverment_screen_SELECTED == true)
+           if (interfaceInKosmoport.getActiveScreenId() == GOVERMENT_SCREEN_ID)
            {
                pTo_PLAYER->pTo_npc->getKosmoport()->pTo_goverment->render();
            }
 
+           interfaceInKosmoport.resetInfoFlags(); 
            interfaceInKosmoport.mouseInteraction(); 
+                				glDisable(GL_DEPTH_TEST);
+    						glEnable(GL_BLEND);
+    						glLoadIdentity();
            interfaceInKosmoport.render();       
            interfaceInKosmoport.renderInfo();   
        } 

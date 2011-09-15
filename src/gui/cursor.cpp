@@ -22,21 +22,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Cursor :: Cursor()
 {
-     type = CURSOR_ID;
+     	type_id = CURSOR_ID;
      
-     TextureOb* pTo_slotTexOb   = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.slot_texOb_pList);
-     pTo_otsec_slot = new ItemSlot(UNIVERSAL_SLOT_ID, NULL, pTo_slotTexOb, 0, 0);
+     	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.slot_texOb_pList);
+     	slot = new ItemSlot(UNIVERSAL_SLOT_ID, NULL, texOb_slot, 0, 0);
      
 }
 
+
+Cursor :: ~Cursor()
+{}
+
+
+ItemSlot* Cursor :: getSlot() { return slot; }
+		
 
 
 void Cursor :: updatePos()
 {
-     	pTo_otsec_slot->getRect().setNewCenter(g_MOUSE_POS_X, g_VIEW_HEIGHT - g_MOUSE_POS_Y);
+     	slot->getRect().setNewCenter(g_MOUSE_POS_X, g_VIEW_HEIGHT - g_MOUSE_POS_Y);
 }
 
 void Cursor:: renderFrame()
 {
-    pTo_otsec_slot->renderEquipedItem(); 
+    	slot->renderEquipedItem(); 
 }

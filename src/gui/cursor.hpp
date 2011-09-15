@@ -24,17 +24,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Cursor
 {
-  public:
-        int type;
-        ItemSlot* pTo_otsec_slot;
+  	public:
+        	Cursor();
+        	~Cursor();
+
+		ItemSlot* getSlot();
+		
+        	void updatePos();
+        	void renderFrame();
+        	//void renderFrames(GLuint flash_tex);
+        	
+        private:
+                int type_id;
+        	ItemSlot* slot;
         
-        Cursor();
-
-
-        void updatePos();
-
-        void renderFrame();
-        //void renderFrames(GLuint flash_tex);
 }; 
 
 #endif 

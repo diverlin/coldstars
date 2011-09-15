@@ -109,7 +109,7 @@ void Angar :: mouseControl()
         				landingArea_pList[i]->rect.getCenter().x, 
         				landingArea_pList[i]->rect.getCenter().y);
         				
-        if (dist < landingArea_pList[i]->rect.w/2)
+        if (dist < landingArea_pList[i]->rect.getWidth()/2)
         {
              landingArea_pList[i]->is_CURSORED = true;
              if (rmb == true)

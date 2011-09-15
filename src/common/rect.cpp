@@ -52,7 +52,8 @@ Rect :: ~Rect()
 
 vec2f Rect :: getCenter() const     { return center; }
 vec2f Rect :: getBottomLeft() const { return bottomLeft; }
-      		
+int Rect :: getWidth() const 	    { return w; }
+int Rect :: getHeight() const 	    { return h; }   		
       		
 void Rect :: calcCenter()
 {

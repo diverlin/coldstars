@@ -22,43 +22,45 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class ShipInternal
 {
-   public:
-      Ship* pTo_ship;
-      Skill* pTo_skill;
+   	public:
+      		Ship* ship;
+      		Skill* skill;
 
-      Button* pTo_increment_attack_button;  
-      Button* pTo_decrement_attack_button;  
+      		ShipInternal();
+      		~ShipInternal();
+
+      		void bindShip(Ship*);
+      		void bindSkill(Skill*);
+      		void createControlSkillButtons();
+
+      		void manageSkill(bool allow_full_control);
+      		void renderSkill();
+
+
+      		void mouseControl(bool allow_full_control, bool is_in_store);
+           		void resetSlotsRenderInfoFlag();
+      		void renderItemInfo();
+      		void renderInternaly();
+      		
+      	private:
+      	      	Button* pTo_increment_attack_button;  
+      		Button* pTo_decrement_attack_button;  
                 
-      Button* pTo_increment_defence_button;  
-      Button* pTo_decrement_defence_button;  
+      		Button* pTo_increment_defence_button;  
+      		Button* pTo_decrement_defence_button;  
         
-      Button* pTo_increment_leader_button;  
-      Button* pTo_decrement_leader_button; 
+      		Button* pTo_increment_leader_button;  
+      		Button* pTo_decrement_leader_button; 
       
-      Button* pTo_increment_trader_button;  
-      Button* pTo_decrement_trader_button; 
+      		Button* pTo_increment_trader_button;  
+      		Button* pTo_decrement_trader_button; 
     
-      Button* pTo_increment_technic_button;  
-      Button* pTo_decrement_technic_button; 
+      		Button* pTo_increment_technic_button;  
+      		Button* pTo_decrement_technic_button; 
      
-      Button* pTo_increment_diplomat_button;  
-      Button* pTo_decrement_diplomat_button;
-
-      ShipInternal();
-      ~ShipInternal();
-
-      void bindShip(Ship* pTo_ship);
-      void bindSkill(Skill* pTo_skill);
-      void createControlSkillButtons();
-
-      void manageSkill(bool allow_full_control);
-      void renderSkill();
-
-
-      void mouseControl(bool allow_full_control, bool is_in_store);
-           void resetSlotsRenderInfoFlag();
-      void renderItemInfo();
-      void renderInternaly();
+      		Button* pTo_increment_diplomat_button;  
+     		Button* pTo_decrement_diplomat_button;
+      	
 };
 
 

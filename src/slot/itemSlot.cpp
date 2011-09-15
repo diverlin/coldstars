@@ -1056,7 +1056,7 @@ void ItemSlot :: renderItemInfo(float offset_x, float offset_y)
 bool ItemSlot :: interaction(int _x, int _y)
 {        
         float dist = distBetweenCenters(rect.getCenter().x, rect.getCenter().y, _x, _y);
-        if (dist < rect.w/2)
+        if (dist < rect.getWidth()/2)
                 return true;
         else
                 return false;    

@@ -510,7 +510,7 @@ void Store :: mouseControl()
         				slot_pList[i]->getRect().getCenter().x, 
         				slot_pList[i]->getRect().getCenter().y);
         				
-        if (dist < slot_pList[i]->getRect().w/2)
+        if (dist < slot_pList[i]->getRect().getWidth()/2)
         {
              slot_pList[i]->setCursoredStatus(true);
              if (lmb == true)

@@ -23,8 +23,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Rect
 {  
 	public:
-      		int w,h;
-
 	    	Rect();
 	    	Rect(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h);
       		Rect(vec2f _bottomLeft, int _w, int _h);
@@ -32,6 +30,8 @@ class Rect
       		
       		vec2f getCenter() const;
       		vec2f getBottomLeft() const;
+      		int getWidth() const;
+      		int getHeight() const;
       
       		void calcCenter();
       		void setNewCenter(vec2f _center);
@@ -40,7 +40,8 @@ class Rect
       		
       	private:
       		vec2f bottomLeft;    
-      		vec2f center;  		
+      		vec2f center;  
+      		int w, h;		
 };
 
 

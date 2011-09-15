@@ -23,15 +23,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class InterfaceInSpace
 {
-    public:
-       Button* pTo_galaxymap_screen_button;
-       
-       InterfaceInSpace();
-       ~InterfaceInSpace();
+    	public:
+      		InterfaceInSpace();
+       		~InterfaceInSpace();
 
-       void mouseInteraction();
-       void render();
+       		void resetInfoFlags();
+       		void mouseInteraction();
+       		
+       		void render() const;
+       		void renderInfo() const;
+       		
+       	private:
+       		std::vector<Button*> button_common_pList;
+       		
+       		Button* galaxymap_screen_button; 
+       		
+       		      		
 };
 
 
-#endif /* INTERFACEINSPACE_H */
+#endif
