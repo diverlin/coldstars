@@ -24,31 +24,32 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class InterfaceInKosmoport
 {
-    public:
-           
-        Button* pTo_angar_screen_button;
-        Button* pTo_store_screen_button;
-        Button* pTo_shop_screen_button;
-        Button* pTo_galaxymap_screen_button;
-        Button* pTo_goverment_screen_button;
+    	public:
+       		InterfaceInKosmoport();
+       		~InterfaceInKosmoport();
 
-        Button* pTo_repair_button;
-        Button* pTo_fuel_button;  
-        Button* pTo_launch_button;
+		int getActiveScreenId() const;
+		
+       		void resetInfoFlags();
+       		void mouseInteraction();
 
-        bool angar_screen_SELECTED;
-        bool store_screen_SELECTED;
-        bool shop_screen_SELECTED;
-        bool galaxymap_screen_SELECTED;
-        bool goverment_screen_SELECTED;
-          
-          
-       InterfaceInKosmoport();
-       ~InterfaceInKosmoport();
+       		void render() const;
+       		void renderInfo() const;
+       		
+       	private:
+       		int active_screen_id; 
+       		std::vector<Button*> button_common_pList;
+       		std::vector<Button*> button_angar_pList;
+       		       		
+       	        Button* angar_screen_button;
+        	Button* store_screen_button;
+        	Button* shop_screen_button;
+        	Button* galaxymap_screen_button;
+        	Button* goverment_screen_button;
 
-       void mouseInteraction();
-       void render();
-       void renderInfo();
+        	Button* repair_button;
+        	Button* fuel_button;  
+        	Button* launch_button;       	
 };
 
 

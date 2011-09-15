@@ -24,15 +24,16 @@ class Planet : public CommonForPlanet
 {
         public:
                 Planet(int _subtype_id, 
-                       TextureOb* _pTo_texOb, 
-                       TextureOb* _pTo_atmoshereTexOb, 
-                       ObjMeshInstance* _pTo_mesh, 
-		       PlanetData _planet_data);
+                       TextureOb* _texOb, 
+                       TextureOb* _texOb_atmoshere, 
+                       ObjMeshInstance* _mesh, 
+		       PlanetData _planet_data,
+		       unsigned long int _population);
     	   
                 ~Planet();
 
-                bool addShip(Ship* _pTo_ship);
-                bool addNpc(Npc* _pTo_npc);
+                bool addShip(Ship*);
+                bool addNpc(Npc*);
                 
                 bool removeShipById(int _id);
                 bool removeNpcById(int _id);
@@ -46,10 +47,12 @@ class Planet : public CommonForPlanet
                 bool getPermissionToLand();
                 
         private:
-                TextureOb* pTo_atmosphereTexOb;
+                TextureOb* texOb_atmosphere;
 
-                Kosmoport* pTo_kosmoport;
-                Land*      pTo_land;
+                Kosmoport* kosmoport;
+                Land*      land;
+                
+                unsigned long int population;
                 
 		void createKosmoport();
                 void createLand();

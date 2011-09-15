@@ -19,39 +19,54 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "button.hpp"
 
-Button :: Button(TextureOb* _pTo_texOb, float _pos_x, float _pos_y, int _w, int _h, std::string _info_str)
+Button :: Button(TextureOb* _texOb, 
+		 int _subtype_id, 
+		 float _pos_x, 
+		 float _pos_y, 
+		 int _w, 
+		 int _h, 
+		 std::string _info_str)
 {
-    pTo_texOb = _pTo_texOb;
+	type_id = BUTTON_ID;
+	subtype_id = _subtype_id;
+	
+    	texOb = _texOb;
     
-    rect = Rect(_pos_x, _pos_y, _w, _h);
-    info_str = _info_str; 
-    show_info = false; 
+    	rect = Rect(_pos_x, _pos_y, _w, _h);
+    	info_str = _info_str; 
+    	show_info = false; 
 }
 
 Button :: ~Button()
 {}
 
+void Button :: setShowInfoFlag(bool _show_info)   { show_info = _show_info; }
+bool Button :: getShowInfoFlag() const { return show_info; }
+Rect Button :: getRect() const         { return rect; }
+TextureOb* Button :: getTexOb()        { return texOb; }
+int Button :: getTypeId() const     { return subtype_id; }
+int Button :: getSubTypeId() const     { return subtype_id; }
 
 bool Button :: interaction(int _x, int _y)
 {        
-    float dist = distBetweenCenters(rect.getCenter().x, rect.getCenter().y, _x, _y);
-    if (dist < rect.w/2)
-        return true;
-    else
-        return false;    
+    	float dist = distBetweenCenters(rect.getCenter().x, rect.getCenter().y, _x, _y);
+    	if (dist < rect.getWidth()/2)
+        	return true;
+    	else
+        	return false;    
 }
     
 void Button :: setCenter(int _x, int _y)
 {        
-     rect.setNewCenter((float)_x, (float)_y);
+     	rect.setNewCenter((float)_x, (float)_y);
 }
    
 void Button :: render()
 {
-   drawTexturedRect(pTo_texOb->texture, rect, -1);
+   	drawTexturedRect(texOb->texture, rect, -1);
 }
 
 void Button :: renderInfo()
 {
-     drawSimpleText(info_str, 12, rect.getBottomLeft().x - 50, rect.getBottomLeft().y + 30);
+     	drawSimpleText(info_str, 12, rect.getBottomLeft().x - 50, rect.getBottomLeft().y + 30);
 }

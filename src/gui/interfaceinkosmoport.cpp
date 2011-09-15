@@ -22,23 +22,81 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 InterfaceInKosmoport :: InterfaceInKosmoport()
 {
-    TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(BLUE_COLOR_ID);    // debug
+    	TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(BLUE_COLOR_ID);    // debug
 
-    pTo_angar_screen_button     = new Button(pTo_particleTexOb, (g_VIEW_WIDTH - 1 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE), INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE, "angar");
-    pTo_store_screen_button     = new Button(pTo_particleTexOb, (g_VIEW_WIDTH - 2 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE), INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE, "store");
-    pTo_shop_screen_button      = new Button(pTo_particleTexOb, (g_VIEW_WIDTH - 3 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE), INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE, "shop");
-    pTo_galaxymap_screen_button = new Button(pTo_particleTexOb, (g_VIEW_WIDTH - 4 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE), INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE, "galaxymap");
-    pTo_goverment_screen_button = new Button(pTo_particleTexOb, (g_VIEW_WIDTH - 5 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE), INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE, "goverment");
+    	angar_screen_button     = new Button(pTo_particleTexOb, 
+    					     ANGAR_SCREEN_ID,
+    					     g_VIEW_WIDTH - 1 * (INTERFACE_ICON_SIZE + 5), 
+    					     INTERFACE_ICON_SIZE, 
+    					     INTERFACE_ICON_SIZE,  
+    					     INTERFACE_ICON_SIZE, 
+    					     "angar");    					     
+    	button_common_pList.push_back(angar_screen_button);
+    	
+    	store_screen_button     = new Button(pTo_particleTexOb, 
+    					     STORE_SCREEN_ID,
+    					     g_VIEW_WIDTH - 2 * (INTERFACE_ICON_SIZE + 5),
+    					     INTERFACE_ICON_SIZE, 
+    					     INTERFACE_ICON_SIZE,  
+    					     INTERFACE_ICON_SIZE, 
+    					     "store");
+	button_common_pList.push_back(store_screen_button);
+    					        	
+    	shop_screen_button      = new Button(pTo_particleTexOb, 
+    					     SHOP_SCREEN_ID,
+    					     g_VIEW_WIDTH - 3 * (INTERFACE_ICON_SIZE + 5), 
+    					     INTERFACE_ICON_SIZE, 
+    					     INTERFACE_ICON_SIZE,  
+    					     INTERFACE_ICON_SIZE, 
+    					     "shop");
+    	button_common_pList.push_back(shop_screen_button);
+    					     
+    	galaxymap_screen_button = new Button(pTo_particleTexOb, 
+    					     GALAXYMAP_SCREEN_ID,
+    					     g_VIEW_WIDTH - 4 * (INTERFACE_ICON_SIZE + 5), 
+    					     INTERFACE_ICON_SIZE, 
+    					     INTERFACE_ICON_SIZE,  
+    					     INTERFACE_ICON_SIZE, 
+    					     "galaxymap");
+        button_common_pList.push_back(galaxymap_screen_button);
+    					     
+    	goverment_screen_button = new Button(pTo_particleTexOb, 
+    					     GOVERMENT_SCREEN_ID,
+    					     g_VIEW_WIDTH - 5 * (INTERFACE_ICON_SIZE + 5), 
+    					     INTERFACE_ICON_SIZE,
+    					     INTERFACE_ICON_SIZE,  
+    					     INTERFACE_ICON_SIZE, 
+    					     "goverment");
+    	button_common_pList.push_back(goverment_screen_button);
 
-    pTo_repair_button = new Button(pTo_particleTexOb, (g_VIEW_WIDTH - 1 * (INTERFACE_ICON_SIZE + 5)), (g_VIEW_HEIGHT - 2*INTERFACE_ICON_SIZE), INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE, "buy_repair");
-    pTo_fuel_button   = new Button(pTo_particleTexOb, (g_VIEW_WIDTH - 1 * (INTERFACE_ICON_SIZE + 5)), (g_VIEW_HEIGHT - 3*INTERFACE_ICON_SIZE), INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE, "buy fuel");  
-    pTo_launch_button = new Button(pTo_particleTexOb, (g_VIEW_WIDTH - 1 * (INTERFACE_ICON_SIZE + 5)), (g_VIEW_HEIGHT - 4*INTERFACE_ICON_SIZE), INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE, "launch");
+    	repair_button = new Button(pTo_particleTexOb, 
+    	    			   REPAIR_BUTTON_ID,
+    				   g_VIEW_WIDTH - 1 * (INTERFACE_ICON_SIZE + 5),
+    				   g_VIEW_HEIGHT - 2*INTERFACE_ICON_SIZE, 
+    				   INTERFACE_ICON_SIZE,  
+    				   INTERFACE_ICON_SIZE, 
+    				   "buy_repair");
+    	button_angar_pList.push_back(repair_button);
+    				   
+    	fuel_button   = new Button(pTo_particleTexOb,
+    	 			   FUEL_BUTTON_ID,
+    	 			   g_VIEW_WIDTH - 1 * (INTERFACE_ICON_SIZE + 5),
+    	 			   g_VIEW_HEIGHT - 3*INTERFACE_ICON_SIZE, 
+    	 			   INTERFACE_ICON_SIZE,  
+    	 			   INTERFACE_ICON_SIZE, 
+    	 			   "buy fuel");  
+    	button_angar_pList.push_back(fuel_button);
+    	 			   
+    	launch_button = new Button(pTo_particleTexOb, 
+    				   LAUNCH_BUTTON_ID,
+    				   g_VIEW_WIDTH - 1 * (INTERFACE_ICON_SIZE + 5), 
+    				   g_VIEW_HEIGHT - 4*INTERFACE_ICON_SIZE, 
+    				   INTERFACE_ICON_SIZE,  
+    				   INTERFACE_ICON_SIZE, 
+    				   "launch");
+    	button_angar_pList.push_back(launch_button);
 
-    angar_screen_SELECTED     = true;
-    store_screen_SELECTED     = false;
-    shop_screen_SELECTED      = false;
-    galaxymap_screen_SELECTED = false;
-    goverment_screen_SELECTED = false;
+	active_screen_id = ANGAR_SCREEN_ID;
 }
 
 
@@ -46,220 +104,116 @@ InterfaceInKosmoport :: ~InterfaceInKosmoport()
 {}
 
 
+int InterfaceInKosmoport :: getActiveScreenId() const { return active_screen_id; }
+	
+	
+
+void InterfaceInKosmoport :: resetInfoFlags()
+{
+    	for (unsigned int i = 0; i< button_common_pList.size(); i++)
+	{
+       		button_common_pList[i]->setShowInfoFlag(false);
+        }
+        
+    	for (unsigned int i = 0; i< button_angar_pList.size(); i++)
+	{
+       		button_angar_pList[i]->setShowInfoFlag(false);
+        }
+}
+       			
+		
 void InterfaceInKosmoport :: mouseInteraction()
 {
-     bool CURSOR_INTERSECT_OBJECT = false;
+     	int mxvp = g_MOUSE_POS_X;
+     	int myvp = g_VIEW_HEIGHT - g_MOUSE_POS_Y;         
+     	int lmb  = g_MOUSE_LEFT_BUTTON;
 
-     int mxvp = g_MOUSE_POS_X;
-     int myvp = g_VIEW_HEIGHT - g_MOUSE_POS_Y;         
-     int lmb  = g_MOUSE_LEFT_BUTTON;
-
-     pTo_angar_screen_button->show_info     = false;
-     pTo_store_screen_button->show_info     = false;
-     pTo_shop_screen_button->show_info      = false;
-     pTo_galaxymap_screen_button->show_info = false;
-     pTo_goverment_screen_button->show_info = false;
-
-     pTo_repair_button->show_info = false;
-     pTo_fuel_button->show_info   = false;
-     pTo_launch_button->show_info = false;
-
-
-     /////////////////////////////////////////////
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_angar_screen_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           pTo_angar_screen_button->show_info = true;
-           if (lmb == true)
-           {
-              angar_screen_SELECTED     = true;
-              store_screen_SELECTED     = false;
-              shop_screen_SELECTED      = false;
-              galaxymap_screen_SELECTED = false;
-              goverment_screen_SELECTED = false;
-           }
+    	for (unsigned int i = 0; i< button_common_pList.size(); i++)
+	{
+       		if (button_common_pList[i]->interaction(mxvp, myvp) == true)
+       		{
+       		        button_common_pList[i]->setShowInfoFlag(true);
+       			if (lmb == true)
+       			{	
+       			   	active_screen_id = button_common_pList[i]->getSubTypeId();       			   	
+       			}
+       			break;
+       		}
         }
-     }
-     /////////////////////////////////////////////
+        
 
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_store_screen_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           pTo_store_screen_button->show_info = true;
-           if (lmb == true)
-           {
-              angar_screen_SELECTED     = false;
-              store_screen_SELECTED     = true;
-              shop_screen_SELECTED      = false;
-              galaxymap_screen_SELECTED = false;
-              goverment_screen_SELECTED = false;
-           }
-        }
-     } 
-     /////////////////////////////////////////////
+     	if (active_screen_id == ANGAR_SCREEN_ID)
+    	{
+     		for (unsigned int i = 0; i< button_angar_pList.size(); i++)
+		{
+       			if (button_angar_pList[i]->interaction(mxvp, myvp) == true)
+       			{
+       		        	button_angar_pList[i]->setShowInfoFlag(true);
+       				if (lmb == true)
+       				{	
+		   			if (button_angar_pList[i]->getSubTypeId() == REPAIR_BUTTON_ID)
+		   			{
+		   				pTo_PLAYER->pTo_ship->setMaxArmor(); 
+		   			}
+		   			if (button_angar_pList[i]->getSubTypeId() == FUEL_BUTTON_ID)
+		   			{
+		   		        	pTo_PLAYER->pTo_ship->setMaxFuel();
+		   			}
+		   			if (button_angar_pList[i]->getSubTypeId() == LAUNCH_BUTTON_ID)
+		   			{
+       						pTo_PLAYER->pTo_npc->createLaunchingSequence(); 
+       						pTo_PLAYER->in_SPACE = true;
+       			   		}
+       				}
+       				break;
+       			}
+        	}
+	}
 
-
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_shop_screen_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           pTo_shop_screen_button->show_info = true;
-           if (lmb == true)
-           {
-              angar_screen_SELECTED     = false;
-              store_screen_SELECTED     = false;
-              shop_screen_SELECTED      = true;
-              galaxymap_screen_SELECTED = false;
-              goverment_screen_SELECTED = false;
-           }
-        }
-
-     }
-     /////////////////////////////////////////////
-
-
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_galaxymap_screen_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           pTo_galaxymap_screen_button->show_info = true;
-           if (lmb == true)
-           {
-              angar_screen_SELECTED     = false;
-              store_screen_SELECTED     = false;
-              shop_screen_SELECTED      = false;
-              galaxymap_screen_SELECTED = true;
-              goverment_screen_SELECTED = false;
-           }
-        }
-
-     }
-     /////////////////////////////////////////////
-
-
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_goverment_screen_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           pTo_goverment_screen_button->show_info = true;
-           if (lmb == true)
-           {
-              angar_screen_SELECTED     = false;
-              store_screen_SELECTED     = false;
-              shop_screen_SELECTED      = false;
-              galaxymap_screen_SELECTED = false;
-              goverment_screen_SELECTED = true;
-           }
-        }
-
-     }
-     /////////////////////////////////////////////
-
-
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_repair_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           pTo_repair_button->show_info = true;
-           if (lmb == true)
-           {
-              pTo_PLAYER->pTo_ship->setMaxArmor(); 
-           }
-        }
-
-     }
-     /////////////////////////////////////////////
-
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_fuel_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           pTo_fuel_button->show_info = true;
-           if (lmb == true)
-           {
-              pTo_PLAYER->pTo_ship->setMaxFuel(); 
-           }
-        }
-
-     }
-     /////////////////////////////////////////////
-
-
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_launch_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           pTo_launch_button->show_info = true;
-           if (lmb == true)
-           {
-              pTo_PLAYER->pTo_npc->createLaunchingSequence(); 
-              pTo_PLAYER->in_SPACE = true;
-           }
-        }
-
-     }
-     /////////////////////////////////////////////
-}
-
-void InterfaceInKosmoport :: render()
-{
-    glDisable(GL_DEPTH_TEST);
-    glEnable(GL_BLEND);
-
-    glLoadIdentity();
-    
-    pTo_angar_screen_button->render();
-    pTo_store_screen_button->render();
-    pTo_shop_screen_button->render();
-    pTo_galaxymap_screen_button->render();
-    pTo_goverment_screen_button->render();
-
-    if (angar_screen_SELECTED == true)
-    {
-        pTo_repair_button->render();
-        pTo_fuel_button->render();  
-        pTo_launch_button->render();
-    } 
 }
 
 
-void InterfaceInKosmoport :: renderInfo()
+void InterfaceInKosmoport :: render() const
 {
-    if (pTo_angar_screen_button->show_info == true)
-        pTo_angar_screen_button->renderInfo();
+   
+    	for (unsigned int i = 0; i< button_common_pList.size(); i++)
+	{
+       		button_common_pList[i]->render();
+        }
 
-    if (pTo_store_screen_button->show_info == true)
-        pTo_store_screen_button->renderInfo();
+    	if (active_screen_id == ANGAR_SCREEN_ID)
+    	{
+    		for (unsigned int i = 0; i< button_angar_pList.size(); i++)
+		{
+       			button_angar_pList[i]->render();
+        	}
+    	} 
+}
 
-    if (pTo_shop_screen_button->show_info == true)
-        pTo_shop_screen_button->renderInfo();
 
-    if (pTo_galaxymap_screen_button->show_info == true)
-        pTo_galaxymap_screen_button->renderInfo();
+void InterfaceInKosmoport :: renderInfo() const
+{
 
-    if (pTo_goverment_screen_button->show_info == true)
-        pTo_goverment_screen_button->renderInfo();
+	for (unsigned int i = 0; i< button_common_pList.size(); i++)
+	{
+	    	if (button_common_pList[i]->getShowInfoFlag() == true)
+	    	{
+        		button_common_pList[i]->renderInfo();
+        		break;
+        	}
+        }       
 
-    if (angar_screen_SELECTED == true)
-    {
-        if (pTo_repair_button->show_info == true)
-            pTo_repair_button->renderInfo();
-
-        if (pTo_fuel_button->show_info == true)
-            pTo_fuel_button->renderInfo();  
-
-        if (pTo_launch_button->show_info == true)
-            pTo_launch_button->renderInfo();
-    } 
+    	if (active_screen_id == ANGAR_SCREEN_ID)
+    	{
+    		for (unsigned int i = 0; i< button_angar_pList.size(); i++)
+		{
+		
+    			if (button_angar_pList[i]->getShowInfoFlag() == true)
+	    		{
+        			button_angar_pList[i]->renderInfo();
+        			break;
+        		}
+        	}
+    	} 
         
 }

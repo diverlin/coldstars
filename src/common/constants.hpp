@@ -216,8 +216,10 @@ const int VISIBLE_DISTANCE_WITHOUT_RADAR = 200;
 
 
 // DRIVE
-const int DRIVE_SPEED_MIN = 130;   // 400 debug
-const int DRIVE_SPEED_MAX = 300;   // 400 debug
+//const int DRIVE_SPEED_MIN = 130;   
+//const int DRIVE_SPEED_MAX = 300;   
+const int DRIVE_SPEED_MIN = 200;   // debug
+const int DRIVE_SPEED_MAX = 200;   // debug
 
 const int DRIVE_HYPER_MIN = 100 * 20;
 const int DRIVE_HYPER_MAX = 400 * 20;
@@ -560,3 +562,18 @@ const int INSERTED_MODULE_SIZE = 15;
 
 
 
+//SCREEN
+const int BUTTON_ID = g_TYPE_ID_GENERATOR.returnNextId("BUTTON_SCREEN_ID");
+
+const int ANGAR_SCREEN_ID = g_TYPE_ID_GENERATOR.returnNextId("ANGAR_SCREEN_ID");
+const int STORE_SCREEN_ID = g_TYPE_ID_GENERATOR.returnNextId("STORE_SCREEN_ID");
+const int SHOP_SCREEN_ID = g_TYPE_ID_GENERATOR.returnNextId("SHOP_SCREEN_ID");
+const int GALAXYMAP_SCREEN_ID = g_TYPE_ID_GENERATOR.returnNextId("GALAXYMAP_SCREEN_ID");
+const int GOVERMENT_SCREEN_ID = g_TYPE_ID_GENERATOR.returnNextId("GOVERMENT_SCREEN_ID");
+
+const int REPAIR_BUTTON_ID = g_TYPE_ID_GENERATOR.returnNextId("REPAIR_BUTTON_ID");
+const int FUEL_BUTTON_ID = g_TYPE_ID_GENERATOR.returnNextId("FUEL_BUTTON_ID");
+const int LAUNCH_BUTTON_ID = g_TYPE_ID_GENERATOR.returnNextId("LAUNCH_BUTTON_ID");
+
+const int INCREMENT_BUTTON_ID = g_TYPE_ID_GENERATOR.returnNextId("INCREMENT_BUTTON_ID");
+const int DECREMENT_BUTTON_ID = g_TYPE_ID_GENERATOR.returnNextId("DECREMENT_BUTTON_ID");

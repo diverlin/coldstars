@@ -21,9 +21,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Planet :: Planet(int _subtype_id, 
 		 TextureOb* _texOb, 
-		 TextureOb* _pTo_atmoshereTexOb, 
+		 TextureOb* _texOb_atmoshere, 
 		 ObjMeshInstance* _mesh, 
-		 PlanetData _planet_data)
+		 PlanetData _planet_data,
+		 unsigned long int _population)
 { 
       	type_id = PLANET_ID;
       	subtype_id = _subtype_id;
@@ -32,10 +33,12 @@ Planet :: Planet(int _subtype_id,
     	   		     _mesh, 
 			     _planet_data);
 
-      	pTo_atmosphereTexOb = _pTo_atmoshereTexOb;
+      	texOb_atmosphere = _texOb_atmoshere;
 
-      	pTo_kosmoport = NULL;
-      	pTo_land      = NULL;
+      	kosmoport = NULL;
+      	land      = NULL;
+      	
+      	population = _population;
       
       	if (subtype_id == INHABITED_ID)
          	createKosmoport();
@@ -60,12 +63,12 @@ void Planet :: update_inSpace_inDynamic()
 void Planet :: update_inSpace_inStatic()
 {      
      	if (subtype_id == INHABITED_ID)
-        	for (unsigned int ni = 0; ni < pTo_kosmoport->NPC_pList.size(); ni++)
-            		pTo_kosmoport->NPC_pList[ni]->thinkCommon_inKosmoport_inStatic();
+        	for (unsigned int ni = 0; ni < kosmoport->NPC_pList.size(); ni++)
+            		kosmoport->NPC_pList[ni]->thinkCommon_inKosmoport_inStatic();
 
      	if (subtype_id == UNINHABITED_ID)
-        	for (unsigned int ni = 0; ni < pTo_kosmoport->NPC_pList.size(); ni++)
-            		pTo_kosmoport->NPC_pList[ni]->thinkCommon_inLand_inStatic();
+        	for (unsigned int ni = 0; ni < kosmoport->NPC_pList.size(); ni++)
+            		kosmoport->NPC_pList[ni]->thinkCommon_inLand_inStatic();
 }
          
 
@@ -76,6 +79,7 @@ void Planet :: updateInfo()
     	info.addTitleStr("PLANET");
 
     	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->id));
+    	info.addNameStr("population:");  info.addValueStr(int2str(population));
 }
 
 
@@ -87,13 +91,13 @@ void Planet :: renderInfo()
         
 void Planet :: createKosmoport()
 {   
-    	pTo_kosmoport = new Kosmoport(RACE_0_ID);   
+    	kosmoport = new Kosmoport(RACE_0_ID);   
 }
 
 
 void Planet :: createLand()
 {   
-    	pTo_land = new Land();   
+    	land = new Land();   
 }
 
 
@@ -101,33 +105,33 @@ void Planet :: createLand()
 bool Planet :: addShip(Ship* _pTo_ship)
 {
      	if (subtype_id == INHABITED_ID)
-         	return pTo_kosmoport->addShip(_pTo_ship);
+         	return kosmoport->addShip(_pTo_ship);
      	if (subtype_id == UNINHABITED_ID)
-         	return pTo_land->addShip(_pTo_ship);
+         	return land->addShip(_pTo_ship);
 }
 
 bool Planet :: addNpc(Npc* _pTo_npc)
 {
      	if (subtype_id == INHABITED_ID)
-         	return pTo_kosmoport->addNpc(_pTo_npc);
+         	return kosmoport->addNpc(_pTo_npc);
      	if (subtype_id == UNINHABITED_ID)
-         	return pTo_land->addNpc(_pTo_npc);
+         	return land->addNpc(_pTo_npc);
 }
 
 bool Planet :: removeShipById(int _id)
 {
      	if (subtype_id == INHABITED_ID)
-         	return pTo_kosmoport->removeShipById(_id);
+         	return kosmoport->removeShipById(_id);
      	if (subtype_id == UNINHABITED_ID)
-         	return pTo_land->removeShipById(_id);
+         	return land->removeShipById(_id);
 }
 
 bool Planet :: removeNpcById(int _id)
 {
      	if (subtype_id == INHABITED_ID)
-         	return pTo_kosmoport->removeNpcById(_id);
+         	return kosmoport->removeNpcById(_id);
      	if (subtype_id == UNINHABITED_ID)
-         	return pTo_land->removeNpcById(_id);
+         	return land->removeNpcById(_id);
 }
 //// ******* TRANSITION ******* 
 
@@ -137,7 +141,7 @@ bool Planet :: getPermissionToLand()
 {
      	if (subtype_id == INHABITED_ID)
      	{
-        	if (pTo_kosmoport->pTo_angar->returnFreelandingAreaNum() > 0)
+        	if (kosmoport->pTo_angar->returnFreelandingAreaNum() > 0)
             		return true;
         	else
             		return false;       
@@ -163,14 +167,17 @@ Planet* createPlanet(int orbit_radius)
     	planet_data.speed         = (float)randIntInRange(PLANET_SPEED_MIN, PLANET_SPEED_MAX) / (float)orbit_radius;
 
 
-        TextureOb* planetTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.planet_texOb_pList); 
-        TextureOb* atmosphereTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.atmosphere_texOb_pList); 
+        TextureOb* texOb 	    = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.planet_texOb_pList); 
+        TextureOb* texOb_atmosphere = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.atmosphere_texOb_pList); 
+        
+        unsigned long int population = randIntInRange(1000, 4000);
         
         Planet* planet = new Planet(subtype_id, 
-        			    planetTexOb, 
-        			    atmosphereTexOb, 
+        			    texOb, 
+        			    texOb_atmosphere, 
         			    pTo_SPHERE_MESH, 
-        			    planet_data);
+        			    planet_data,
+        			    population);
 	 
         return planet;        
 }

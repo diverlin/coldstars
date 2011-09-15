@@ -104,10 +104,10 @@ void drawRect(Rect rect,
               float texCoord_topLeft_y) // the drawrect function was inverted by Y axis
 {
     	glBegin(GL_QUADS);
-      		glTexCoord3f(texCoord_bottomLeft_x,  texCoord_bottomLeft_y,  0); glVertex3f(rect.getBottomLeft().x,           rect.getBottomLeft().y + rect.h, z_pos);
-      		glTexCoord3f(texCoord_bottomRight_x, texCoord_bottomRight_y, 0); glVertex3f(rect.getBottomLeft().x + rect.w,  rect.getBottomLeft().y + rect.h, z_pos);
-      		glTexCoord3f(texCoord_topRight_x,    texCoord_topRight_y,    0); glVertex3f(rect.getBottomLeft().x + rect.w,  rect.getBottomLeft().y,          z_pos);
-     		glTexCoord3f(texCoord_topLeft_x,     texCoord_topLeft_y,     0); glVertex3f(rect.getBottomLeft().x,           rect.getBottomLeft().y,          z_pos);
+      		glTexCoord3f(texCoord_bottomLeft_x,  texCoord_bottomLeft_y,  0); glVertex3f(rect.getBottomLeft().x,           	       rect.getBottomLeft().y + rect.getHeight(), z_pos);
+      		glTexCoord3f(texCoord_bottomRight_x, texCoord_bottomRight_y, 0); glVertex3f(rect.getBottomLeft().x + rect.getWidth(),  rect.getBottomLeft().y + rect.getHeight(), z_pos);
+      		glTexCoord3f(texCoord_topRight_x,    texCoord_topRight_y,    0); glVertex3f(rect.getBottomLeft().x + rect.getWidth(),  rect.getBottomLeft().y,          	  z_pos);
+     		glTexCoord3f(texCoord_topLeft_x,     texCoord_topLeft_y,     0); glVertex3f(rect.getBottomLeft().x,           	       rect.getBottomLeft().y,          	  z_pos);
     	glEnd();
 }
 
