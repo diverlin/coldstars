@@ -1094,16 +1094,16 @@ TextureOb* TextureManager :: returnPointerToRandomShipTexObWithFollowingAtrribut
 
 TextureOb* TextureManager :: returnParticleTexObByColorId(int _color_id)
 {
-	printf("searching color id = %i\n", _color_id);
+	//printf("searching color id = %i\n", _color_id);
      	for(unsigned int i = 0; i < particles_texOb_pList.size(); i++)
      	{
-            	printf("current color id = %i\n", particles_texOb_pList[i]->color_id);  
+            	//printf("current color id = %i\n", particles_texOb_pList[i]->color_id);  
          	if (particles_texOb_pList[i]->color_id == _color_id)
             		return particles_texOb_pList[i]; 
         
 	}
 	
-     	printf("Particle with requested color is absent\n"); 
+     	//printf("Particle with requested color is absent\n"); 
      	return NULL;
 }
 

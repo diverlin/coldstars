@@ -23,16 +23,19 @@
 class Land
 {
         public:
-        std::vector<Npc*>  NPC_pList;
-        std::vector<Ship*> SHIP_pList;
+                Land();
+                ~Land();
 
-        Land();
-        ~Land();
-
-        bool addShip(Ship* _pTo_ship);
-        bool addNpc(Npc* _pTo_npc);
-        bool removeShipById(int _id);
-        bool removeNpcById(int _id);
+                bool addShip(Ship*);
+                bool addNpc(Npc*);
+                bool removeShip(int _id);
+                bool removeNpc(int _id);
+                
+                void ai();       
+                         
+        private:
+                std::vector<Npc*>  NPC_pList;
+                std::vector<Ship*> SHIP_pList;        
 };
 
 #endif

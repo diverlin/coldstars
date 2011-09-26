@@ -108,8 +108,8 @@ void drawLine(GLuint texture,
 
 
 void drawInfoIn2Column(
-                VEC_pString_type* pTo_info_title_pList, 
-                VEC_pString_type* pTo_info_value_pList, 
+                std::vector<std::string*>* pTo_info_title_pList, 
+                std::vector<std::string*>* pTo_info_value_pList, 
                 float center_x, float center_y,
                 float scroll_x = g_SCROLL_COORD_X,
                 float scroll_y = g_SCROLL_COORD_Y);

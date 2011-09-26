@@ -21,78 +21,88 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Kosmoport :: Kosmoport(int _race_id)
 {
-    TextureOb* pTo_slot_texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.slot_texOb_pList);
+        TextureOb* _texOb_slot = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.slot_texOb_pList);
 
-    TextureOb* pTo_angar_bg_texOb     = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.angarBg_texOb_pList);   
-    TextureOb* pTo_store_bg_texOb     = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.storeBg_texOb_pList);    
-    TextureOb* pTo_shop_bg_texOb      = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.shopBg_texOb_pList);    
-    TextureOb* pTo_goverment_bg_texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.govermentBg_texOb_pList);    
+        TextureOb* _texOb_angarBackground  = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.angarBg_texOb_pList);   
+        TextureOb* _texOb_storeBackground  = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.storeBg_texOb_pList);    
+        TextureOb* _texOb_shopBackground   = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.shopBg_texOb_pList);    
+        TextureOb* _texOb_govermentBackground = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.govermentBg_texOb_pList);    
 
-    pTo_angar     = new Angar(pTo_angar_bg_texOb, pTo_slot_texOb);
-    pTo_store     = new Store(pTo_store_bg_texOb, pTo_slot_texOb);
-    pTo_shop      = new Shop(pTo_shop_bg_texOb);
-    pTo_goverment = new Goverment(pTo_store_bg_texOb, pTo_slot_texOb);
+        angar     = new Angar(_texOb_angarBackground, _texOb_slot);
+        store     = new Store(_texOb_storeBackground, _texOb_slot);
+        shop      = new Shop(_texOb_shopBackground);
+        goverment = new Goverment(_texOb_govermentBackground, _texOb_slot);
 }
 
 
 Kosmoport :: ~Kosmoport()
 {}
 
-void Kosmoport :: clearScreen()
+Angar* Kosmoport :: getAngar()         { return angar; }
+Store* Kosmoport :: getStore()         { return store; }
+Shop*  Kosmoport :: getShop()          { return shop; }
+Goverment* Kosmoport :: getGoverment() { return goverment; }
+                
+                
+
+bool Kosmoport :: addShip(Ship* _ship)
 {
-     // Clear color and depth buffer
-     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-     glLoadIdentity();
+        SHIP_pList.push_back(_ship);
+        angar->addShip(_ship);
+        _ship->in_SPACE = false;
+        
+        return true;
 }
 
-
-//// ******* TRANSITION ******* 
-bool Kosmoport :: addShip(Ship* _pTo_ship)
+bool Kosmoport :: addNpc(Npc* _npc)
 {
-     SHIP_pList.push_back(_pTo_ship);
-     pTo_angar->placeShipTolandingArea(_pTo_ship);
-     _pTo_ship->in_SPACE = false;
-     return true;
-}
-
-bool Kosmoport :: addNpc(Npc* _pTo_npc)
-{
-     NPC_pList.push_back(_pTo_npc);
-     _pTo_npc->setKosmoport(this);
-     _pTo_npc->setInSpace(false);
+        NPC_pList.push_back(_npc);
+        _npc->setKosmoport(this);
+        _npc->setInSpace(false);
  
-     return true;
+        return true;
 }
 
-bool Kosmoport :: removeShipById(int _id)
+bool Kosmoport :: removeShip(int _id)
 {
-    bool is_removed_from_list = false;
-    for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++) 
-        if (SHIP_pList[ki]->id == _id)
-        {
-           SHIP_pList.erase(SHIP_pList.begin() + ki);
-           is_removed_from_list = true;
+        bool is_removed_from_list = false;
+        for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
+        { 
+                if (SHIP_pList[ki]->id == _id)
+                {
+                        SHIP_pList.erase(SHIP_pList.begin() + ki);
+                        is_removed_from_list = true;
+                }
         }
-
-    bool is_removed_from_landing_area = pTo_angar->removeShipFromlandingAreaById(_id); 
+        
+        bool is_removed_from_landing_area = angar->removeShipFromlandingAreaById(_id); 
     
-    if (is_removed_from_list && is_removed_from_landing_area)
-       return true;
-    else
-       return false;
+        if (is_removed_from_list && is_removed_from_landing_area)
+                return true;
+        else
+                return false;
 }
 
-bool Kosmoport :: removeNpcById(int _id)
+bool Kosmoport :: removeNpc(int _id)
 {
-    bool is_removed = false;
-    for (unsigned int ni = 0; ni < NPC_pList.size(); ni++) 
-        if (NPC_pList[ni]->getId() == _id)
-        {
-           NPC_pList.erase(NPC_pList.begin() + ni);
-           is_removed = true;
+        bool is_removed = false;
+        for (unsigned int ni = 0; ni < NPC_pList.size(); ni++)
+        { 
+                if (NPC_pList[ni]->getId() == _id)
+                {
+                        NPC_pList.erase(NPC_pList.begin() + ni);
+                        is_removed = true;
+                }
         }
-    return is_removed;
+    
+        return is_removed;
 }
-//// ******* TRANSITION ******* 
 
+
+void Kosmoport :: ai()
+{
+        for (unsigned int ni = 0; ni < NPC_pList.size(); ni++)
+                NPC_pList[ni]->thinkCommon_inKosmoport_inStatic();
+
+}
 

@@ -42,13 +42,13 @@ void StarSystem :: rocketCollision_TRUE()
         bool collide = false;
         for (unsigned int ri = 0; ri < ROCKET_pList.size(); ri++)
         {
-                for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
+                for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
                 {
-                        if (ROCKET_pList[ri]->owner_id != SHIP_pList[ki]->id)
+                        if (ROCKET_pList[ri]->owner_id != SHIP_inSPACE_vec[ki]->id)
                         {
-                                if (collisionBetweenCenters(ROCKET_pList[ri]->getPoints(), SHIP_pList[ki]->getPoints(), SHIP_pList[ki]->collision_radius) == true)
+                                if (collisionBetweenCenters(ROCKET_pList[ri]->getPoints(), SHIP_inSPACE_vec[ki]->getPoints(), SHIP_inSPACE_vec[ki]->collision_radius) == true)
                                 {
-                                        SHIP_pList[ki]->hit_TRUE(ROCKET_pList[ri]->damage);
+                                        SHIP_inSPACE_vec[ki]->hit_TRUE(ROCKET_pList[ri]->damage);
                                         ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
                                         collide = true;
                                         break;
@@ -125,13 +125,13 @@ void StarSystem :: rocketCollision_FALSE()
         bool collide = false;
         for (unsigned int ri = 0; ri < ROCKET_pList.size(); ri++)
         {
-                for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
+                for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
                 {
-                        if (ROCKET_pList[ri]->owner_id != SHIP_pList[ki]->id)
+                        if (ROCKET_pList[ri]->owner_id != SHIP_inSPACE_vec[ki]->id)
                         {
-                                if (collisionBetweenCenters(ROCKET_pList[ri]->getPoints(), SHIP_pList[ki]->getPoints(), SHIP_pList[ki]->collision_radius) == true)
+                                if (collisionBetweenCenters(ROCKET_pList[ri]->getPoints(), SHIP_inSPACE_vec[ki]->getPoints(), SHIP_inSPACE_vec[ki]->collision_radius) == true)
                                 {
-                                        SHIP_pList[ki]->hit_FALSE(ROCKET_pList[ri]->damage);
+                                        SHIP_inSPACE_vec[ki]->hit_FALSE(ROCKET_pList[ri]->damage);
                                         ROCKET_pList[ri]->hit(ROCKET_pList[ri]->armor);
                                         collide = true;
                                         break;
@@ -207,11 +207,11 @@ void StarSystem :: asteroidCollision_TRUE()
     for(unsigned int ai = 0; ai < ASTEROID_pList.size(); ai++)
     {
         if (ASTEROID_pList[ai]->getAlive() == true)   
-           for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
-               if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), SHIP_pList[ki]->getPoints(), SHIP_pList[ki]->collision_radius) )
+           for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
+               if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), SHIP_inSPACE_vec[ki]->getPoints(), SHIP_inSPACE_vec[ki]->collision_radius) )
                {
                    ASTEROID_pList[ai]->hit_TRUE(ASTEROID_pList[ai]->getArmor());
-                   SHIP_pList[ki]->hit_TRUE( (ASTEROID_pList[ai]->getArmor()) * 10 );
+                   SHIP_inSPACE_vec[ki]->hit_TRUE( (ASTEROID_pList[ai]->getArmor()) * 10 );
                    //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
                    break;
                }
@@ -251,11 +251,11 @@ void StarSystem :: asteroidCollision_FALSE()
     for(unsigned int ai = 0; ai < ASTEROID_pList.size(); ai++)
     {
         if (ASTEROID_pList[ai]->getAlive() == true)   
-           for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
-               if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), SHIP_pList[ki]->getPoints(), SHIP_pList[ki]->collision_radius) )
+           for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
+               if ( collisionBetweenCenters(ASTEROID_pList[ai]->getPoints(), SHIP_inSPACE_vec[ki]->getPoints(), SHIP_inSPACE_vec[ki]->collision_radius) )
                {
                    ASTEROID_pList[ai]->hit_FALSE(ASTEROID_pList[ai]->getArmor());
-                   SHIP_pList[ki]->hit_FALSE( (ASTEROID_pList[ai]->getArmor()) * 10 );
+                   SHIP_inSPACE_vec[ki]->hit_FALSE( (ASTEROID_pList[ai]->getArmor()) * 10 );
                    //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
                    break;
                }
@@ -306,13 +306,13 @@ void StarSystem :: updateEntities_inDynamic_TRUE()
     for (unsigned int ai = 0; ai < ASTEROID_pList.size(); ai++) 
         ASTEROID_pList[ai]->update_inSpace_inDynamic_TRUE(); 
     
-    pTo_PLAYER->update_inSpace_inDynamic();
-    for (unsigned int ni = 0; ni < NPC_pList.size(); ni++)
-        NPC_pList[ni]->taskExecution_inDynamic(); 
+    pPLAYER->update_inSpace_inDynamic();
+    for (unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
+        NPC_inSPACE_vec[ni]->taskExecution_inDynamic(); 
     
-    for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
+    for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
     {
-        SHIP_pList[ki]->update_inSpace_inDynamic_TRUE(); 
+        SHIP_inSPACE_vec[ki]->update_inSpace_inDynamic_TRUE(); 
     }
     
     for (unsigned int ri = 0; ri < ROCKET_pList.size(); ri++)
@@ -346,12 +346,12 @@ void StarSystem :: updateEntities_inDynamic_FALSE()
     for (unsigned int ai = 0; ai < ASTEROID_pList.size(); ai++) 
         ASTEROID_pList[ai]->update_inSpace_inDynamic_FALSE(); 
     
-    pTo_PLAYER->update_inSpace_inDynamic(); // remove
-    for (unsigned int ni = 0; ni < NPC_pList.size(); ni++)
-        NPC_pList[ni]->taskExecution_inDynamic(); 
+    pPLAYER->update_inSpace_inDynamic(); // remove
+    for (unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
+        NPC_inSPACE_vec[ni]->taskExecution_inDynamic(); 
 
-    for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
-        SHIP_pList[ki]->update_inSpace_inDynamic_FALSE(); 
+    for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
+        SHIP_inSPACE_vec[ki]->update_inSpace_inDynamic_FALSE(); 
     
     for (unsigned int ri = 0; ri < ROCKET_pList.size(); ri++)
         ROCKET_pList[ri]->update_inSpace_inDynamic(); 
@@ -362,10 +362,10 @@ void StarSystem :: updateEntities_inDynamic_FALSE()
 void StarSystem :: updateEntities_inStatic()
 {
      	// called once per TURN
-     	for(unsigned int ni = 0; ni < NPC_pList.size(); ni++)
+     	for(unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
      	{
-        	NPC_pList[ni]->thinkCommon_inSpace_inStatic();
-         	NPC_pList[ni]->thinkUnique_inSpace_inStatic();
+        	NPC_inSPACE_vec[ni]->thinkCommon_inSpace_inStatic();
+         	NPC_inSPACE_vec[ni]->thinkUnique_inSpace_inStatic();
      	}
 
 
@@ -430,10 +430,10 @@ void StarSystem :: findVisibleEntities()
 
     //self.visible_BOMB_list      = [b for b in self.BOMB_list      if isObjectVisible((b.points.center[0], b.points.center[1]), (b.w, b.h), (vpCoordinate_x, vpCoordinate_y), (x_startViewCoord, y_startViewCoord))]
     
-    for (unsigned int i = 0; i < SHIP_pList.size(); i++)
+    for (unsigned int i = 0; i < SHIP_inSPACE_vec.size(); i++)
     {
-        if (isObjectVisible(SHIP_pList[i]->getPoints(), startViewCoord_x, startViewCoord_y))    
-           visible_SHIP_pList.push_back(SHIP_pList[i]); 
+        if (isObjectVisible(SHIP_inSPACE_vec[i]->getPoints(), startViewCoord_x, startViewCoord_y))    
+           visible_SHIP_pList.push_back(SHIP_inSPACE_vec[i]); 
     }
     
     for (unsigned int i = 0; i < ROCKET_pList.size(); i++)
@@ -812,92 +812,75 @@ void StarSystem :: asteroidManager(int num)
 }
 
 
-bool StarSystem :: addStar(Star* _star)
+void StarSystem :: addStar(Star* _star)
 {
         _star->setStarSystem(this);
         STAR_pList.push_back(_star);
-        
-        return true;           
 }
 
-bool StarSystem :: addPlanet(Planet* _planet)
+void StarSystem :: addPlanet(Planet* _planet)
 {
         _planet->setStarSystem(this);
         PLANET_pList.push_back(_planet);
-        
-        return true;        
 }
                 
-bool StarSystem :: addAsteroid(Asteroid* _asteroid)
+void StarSystem :: addAsteroid(Asteroid* _asteroid)
 {   
         _asteroid->setStarSystem(this);
         ASTEROID_pList.push_back(_asteroid);
-        
-        return true;
 }
 
-bool StarSystem :: addMineral(Mineral* _mineral)
+void StarSystem :: addMineral(Mineral* _mineral)
 {
 	_mineral->setStarSystem(this);
         MINERAL_pList.push_back(_mineral);
-        
-        return true;
 }
 
-bool StarSystem :: addContainer(Container* _container)
+void StarSystem :: addContainer(Container* _container)
 {
 	_container->setStarSystem(this);
         CONTAINER_pList.push_back(_container);
-        
-        return true;
 }
 
 
-bool StarSystem :: addRocket(RocketBullet* rocket)
+void StarSystem :: addRocket(RocketBullet* rocket)
 {
 	ROCKET_pList.push_back(rocket);
-	return true;
 }    
 
 	
 
-bool StarSystem :: addShockWaveEffect(ShockWaveEffect* _shockWave)
+void StarSystem :: addShockWaveEffect(ShockWaveEffect* _shockWave)
 {
 	effect_SHOCKWAVE_pList.push_back(_shockWave);
-        return true;
 }
 
 
-bool StarSystem :: addLazerTraceEffect(LazerTraceEffect* _lazerTraceEffect)
+void StarSystem :: addLazerTraceEffect(LazerTraceEffect* _lazerTraceEffect)
 {
 	effect_LAZERTRACE_pList.push_back(_lazerTraceEffect);
-	return true;
 }
 
-bool StarSystem :: addExplosionEffect(ExplosionEffect* _explosionEffect)
+
+void StarSystem :: addExplosionEffect(ExplosionEffect* _explosionEffect)
 {
 	effect_EXPLOSION_pList.push_back(_explosionEffect);
-	return true;
 }
 
-bool StarSystem :: addDamageEffect(DamageEffect* _damageEffect)
+void StarSystem :: addDamageEffect(DamageEffect* _damageEffect)
 {
 	effect_DAMAGE_pList.push_back(_damageEffect);
-	return true;
 }
     		
     		
-bool StarSystem :: addDistantNebula(DistantNebulaBgEffect* dn)
+void StarSystem :: addDistantNebula(DistantNebulaBgEffect* dn)
 {
 	distantNebulaBgEffect_pList.push_back(dn);
-        return true;
 }
 
-bool StarSystem :: addDistantStar(DistantStarBgEffect* ds)
+void StarSystem :: addDistantStar(DistantStarBgEffect* ds)
 {
 	distantStarBgEffect_pList.push_back(ds);
-	return true;
-
 }
     		
 		
@@ -912,7 +895,7 @@ void StarSystem :: manageEntities()
     	   effect_SHOCKWAVE_pList.erase(effect_SHOCKWAVE_pList.begin() + wi);
     }
 
-    for(unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
+    for(unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
     {
         //if (SHIP_pList[ki]->is_alive == true)
         //{
@@ -941,19 +924,19 @@ void StarSystem :: manageEntities()
             //break;
         //}   
         
-        if (SHIP_pList[ki]->is_alive == false)
+        if (SHIP_inSPACE_vec[ki]->is_alive == false)
         {           
             //if (SHIP_pList[ki]->owner_type_id == NPC_ID)
-            SHIP_pList[ki]->getNpc()->setAlive(false);
+            SHIP_inSPACE_vec[ki]->getNpc()->setAlive(false);
                
-            SHIP_remove_queue_pList.push_back(SHIP_pList[ki]);
-            SHIP_pList.erase(SHIP_pList.begin() + ki);
+            SHIP_remove_queue_pList.push_back(SHIP_inSPACE_vec[ki]);
+            SHIP_inSPACE_vec.erase(SHIP_inSPACE_vec.begin() + ki);
             break;
         } 
     }
 
 
-    for(unsigned int ni = 0; ni < NPC_pList.size(); ni++)
+    for(unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
     {
         //if (NPC_pList[ni]->in_SPACE == false)
         //{   
@@ -967,10 +950,10 @@ void StarSystem :: manageEntities()
             //break;
         //} 
          
-        if (NPC_pList[ni]->getAlive() == false)
+        if (NPC_inSPACE_vec[ni]->getAlive() == false)
         {   
-            NPC_remove_queue_pList.push_back(NPC_pList[ni]);
-            NPC_pList.erase(NPC_pList.begin() + ni);
+            NPC_remove_queue_pList.push_back(NPC_inSPACE_vec[ni]);
+            NPC_inSPACE_vec.erase(NPC_inSPACE_vec.begin() + ni);
             break;
         } 
     }
@@ -1045,9 +1028,9 @@ void StarSystem :: manageEntities()
 void StarSystem :: removeDeadEntities()
 {  
 
-    for(unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
+    for(unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
     { 
-        SHIP_pList[ki]->removeWeaponSlotDeadTargets(); 
+        SHIP_inSPACE_vec[ki]->removeWeaponSlotDeadTargets(); 
     }
 
 
@@ -1137,21 +1120,15 @@ void StarSystem :: mouseControl()
     bool mrb = g_MOUSE_RIGHT_BUTTON;
 
 
-    pTo_PLAYER->pTo_ship->selectWeapons(pTo_PLAYER->weapon_slot_1_SELECTED, 
-        				pTo_PLAYER->weapon_slot_2_SELECTED, 
-                   			pTo_PLAYER->weapon_slot_3_SELECTED, 
-                   			pTo_PLAYER->weapon_slot_4_SELECTED, 
-                   			pTo_PLAYER->weapon_slot_5_SELECTED);
-                   				       
-    pTo_PLAYER->pTo_ship->resetDeselectedWeaponTargets();
-
+    pPLAYER->getShip()->selectWeapons();                   				       
+    pPLAYER->getShip()->resetDeselectedWeaponTargets();
 
 
     if (cursor_has_target == false) 
     {
         for (unsigned int i = 0; i < visible_STAR_pList.size(); i++)
         { 
-            float cursor_dist = distBetweenCenters(visible_STAR_pList[i]->getPoints(), mxvp, myvp);
+            float cursor_dist = distBetweenCenters(visible_STAR_pList[i]->getPoints()->getCenter(), mxvp, myvp);
             if (cursor_dist < 10.0)
             {   
                cursor_has_target = true;
@@ -1171,7 +1148,7 @@ void StarSystem :: mouseControl()
     {
         for (unsigned int mi = 0; mi < visible_MINERAL_pList.size(); mi++)
         { 
-            float mineral_cursor_dist = distBetweenCenters(visible_MINERAL_pList[mi]->getPoints(), mxvp, myvp);
+            float mineral_cursor_dist = distBetweenCenters(visible_MINERAL_pList[mi]->getPoints()->getCenter(), mxvp, myvp);
             if (mineral_cursor_dist < 10.0)
             {   
                cursor_has_target = true;
@@ -1181,13 +1158,8 @@ void StarSystem :: mouseControl()
 
                if (mlb == true)
                {
-                   pTo_PLAYER->pTo_ship->selectWeapons(pTo_PLAYER->weapon_slot_1_SELECTED, 
-                   				       pTo_PLAYER->weapon_slot_2_SELECTED, 
-                   				       pTo_PLAYER->weapon_slot_3_SELECTED, 
-                   				       pTo_PLAYER->weapon_slot_4_SELECTED, 
-                   				       pTo_PLAYER->weapon_slot_5_SELECTED);
-                   					    
-                   pTo_PLAYER->pTo_ship->setWeaponsTarget(visible_MINERAL_pList[mi]);
+                   pPLAYER->getShip()->selectWeapons();
+                   pPLAYER->getShip()->setWeaponsTarget(visible_MINERAL_pList[mi]);
 
 	       }
                break; 
@@ -1200,7 +1172,7 @@ void StarSystem :: mouseControl()
     {
         for (unsigned int ci = 0; ci < visible_CONTAINER_pList.size(); ci++)
         { 
-            float container_cursor_dist = distBetweenCenters(visible_CONTAINER_pList[ci]->getPoints(), mxvp, myvp);
+            float container_cursor_dist = distBetweenCenters(visible_CONTAINER_pList[ci]->getPoints()->getCenter(), mxvp, myvp);
             if (container_cursor_dist < 10.0)
             {   
                cursor_has_target = true;
@@ -1209,13 +1181,8 @@ void StarSystem :: mouseControl()
 
                if (mlb == true)
                {
-                   pTo_PLAYER->pTo_ship->selectWeapons(pTo_PLAYER->weapon_slot_1_SELECTED, 
-                   				       pTo_PLAYER->weapon_slot_2_SELECTED, 
-                   				       pTo_PLAYER->weapon_slot_3_SELECTED, 
-                   				       pTo_PLAYER->weapon_slot_4_SELECTED, 
-                   				       pTo_PLAYER->weapon_slot_5_SELECTED);
-                   					    
-                   pTo_PLAYER->pTo_ship->setWeaponsTarget(visible_CONTAINER_pList[ci]);
+                   pPLAYER->getShip()->selectWeapons();                   					    
+                   pPLAYER->getShip()->setWeaponsTarget(visible_CONTAINER_pList[ci]);
                }
  
                break; 
@@ -1228,7 +1195,7 @@ void StarSystem :: mouseControl()
     {
        for (unsigned int ki = 0; ki < visible_SHIP_pList.size(); ki++)
        { 
-            float ship_cursor_dist = distBetweenCenters(visible_SHIP_pList[ki]->getPoints(), mxvp, myvp);
+            float ship_cursor_dist = distBetweenCenters(visible_SHIP_pList[ki]->getPoints()->getCenter(), mxvp, myvp);
             if (ship_cursor_dist < 50.0)
             { 
                 cursor_has_target = true;
@@ -1238,21 +1205,16 @@ void StarSystem :: mouseControl()
 
                 if (mlb == true)
                 {
-                   pTo_PLAYER->pTo_ship->selectWeapons(pTo_PLAYER->weapon_slot_1_SELECTED, 
-                   				       pTo_PLAYER->weapon_slot_2_SELECTED, 
-                   				       pTo_PLAYER->weapon_slot_3_SELECTED, 
-                   				       pTo_PLAYER->weapon_slot_4_SELECTED, 
-                   				       pTo_PLAYER->weapon_slot_5_SELECTED);
-                   					    
-                   pTo_PLAYER->pTo_ship->setWeaponsTarget(visible_SHIP_pList[ki]);
+                   pPLAYER->getShip()->selectWeapons();
+                   pPLAYER->getShip()->setWeaponsTarget(visible_SHIP_pList[ki]);
 		}
 
                 if (mrb == true)
                 {
-                   if ( pTo_PLAYER->pTo_npc->checkPossibilityToScan(visible_SHIP_pList[ki]) == true )
+                   if ( pPLAYER->getPilot()->checkPossibilityToScan(visible_SHIP_pList[ki]) == true )
                    {
-                       pTo_PLAYER->pTo_npc->setScanTarget(visible_SHIP_pList[ki]);
-                       pTo_PLAYER->is_SCANNING = true;
+                       pPLAYER->getPilot()->setScanTarget(visible_SHIP_pList[ki]);
+                       pPLAYER->is_SCANNING = true;
                    }
                 }
 
@@ -1265,7 +1227,7 @@ void StarSystem :: mouseControl()
     {
         for (unsigned int ai = 0; ai < visible_ASTEROID_pList.size(); ai++)
         { 
-            float asteroid_cursor_dist = distBetweenCenters(visible_ASTEROID_pList[ai]->getPoints(), mxvp, myvp);
+            float asteroid_cursor_dist = distBetweenCenters(visible_ASTEROID_pList[ai]->getPoints()->getCenter(), mxvp, myvp);
             if (asteroid_cursor_dist < 50.0)
             {   
                 cursor_has_target = true;
@@ -1275,13 +1237,8 @@ void StarSystem :: mouseControl()
 
                 if (mlb == true)
                 { 
-                   pTo_PLAYER->pTo_ship->selectWeapons(pTo_PLAYER->weapon_slot_1_SELECTED, 
-                   				       pTo_PLAYER->weapon_slot_2_SELECTED, 
-                   				       pTo_PLAYER->weapon_slot_3_SELECTED, 
-                   				       pTo_PLAYER->weapon_slot_4_SELECTED, 
-                   				       pTo_PLAYER->weapon_slot_5_SELECTED);
-                   					    
-                   pTo_PLAYER->pTo_ship->setWeaponsTarget(visible_ASTEROID_pList[ai]);
+                   pPLAYER->getShip()->selectWeapons();                   					    
+                   pPLAYER->getShip()->setWeaponsTarget(visible_ASTEROID_pList[ai]);
                 } 
                 break; 
             }
@@ -1294,7 +1251,7 @@ void StarSystem :: mouseControl()
     {
         for (unsigned int pi = 0; pi < visible_PLANET_pList.size(); pi++)
         { 
-            float planet_cursor_dist = distBetweenCenters(visible_PLANET_pList[pi]->getPoints(), mxvp, myvp);
+            float planet_cursor_dist = distBetweenCenters(visible_PLANET_pList[pi]->getPoints()->getCenter(), mxvp, myvp);
             if (planet_cursor_dist < 50.0)
             {   
                 cursor_has_target = true;
@@ -1304,9 +1261,9 @@ void StarSystem :: mouseControl()
 
                 if (mlb == true)
                 {
-                    pTo_PLAYER->pTo_ship->getNpc()->clearAIfuncSequence();
-                    pTo_PLAYER->pTo_ship->getNavigator()->setTargetPlanet(visible_PLANET_pList[pi]);  
-                    pTo_PLAYER->pTo_ship->getNpc()->createDockingSequence();
+                    pPLAYER->getShip()->getNpc()->clearAIfuncSequence();
+                    pPLAYER->getShip()->getNavigator()->setTargetPlanet(visible_PLANET_pList[pi]);  
+                    pPLAYER->getShip()->getNpc()->createDockingSequence();
                 }   
 
                 break; 
@@ -1320,8 +1277,8 @@ void StarSystem :: mouseControl()
     {
         if (mlb == true)
         {
-            pTo_PLAYER->pTo_ship->getNavigator()->setStaticTargetCoords(vec2f(mxvp, myvp));  
-            pTo_PLAYER->pTo_ship->getNpc()->clearAIfuncSequence();
+            pPLAYER->getShip()->getNavigator()->setStaticTargetCoords(vec2f(mxvp, myvp));  
+            pPLAYER->getShip()->getNpc()->clearAIfuncSequence();
         }
     }     
 }
@@ -1355,14 +1312,14 @@ void StarSystem :: mouseControl()
 
 void StarSystem :: fireEvents_TRUE(int timer)
 {
-     for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
-         SHIP_pList[ki]->weaponsFire_TRUE(timer);
+     for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
+         SHIP_inSPACE_vec[ki]->weaponsFire_TRUE(timer);
 }
 
 void StarSystem :: fireEvents_FALSE(int timer)
 {
-     for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
-         SHIP_pList[ki]->weaponsFire_FALSE(timer);
+     for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
+         SHIP_inSPACE_vec[ki]->weaponsFire_FALSE(timer);
 }
 
 
@@ -1372,47 +1329,43 @@ void StarSystem :: fireEvents_FALSE(int timer)
 
 
 //// ******* TRANSITION ******* 
-bool StarSystem :: addShip(Ship* _pTo_ship)
+void StarSystem :: addShipToSpace(Ship* _ship)
 {
-     _pTo_ship->in_SPACE = true;
-     _pTo_ship->setStarSystem(this);  
+     	_ship->in_SPACE = true;
+     	_ship->setStarSystem(this);  
 
-     SHIP_pList.push_back(_pTo_ship);
-     return true;
+     	SHIP_inSPACE_vec.push_back(_ship);
 }
 
-bool StarSystem :: addNpc(Npc* _npc)
+void StarSystem :: addNpcToSpace(Npc* _npc)
 {
-     int _race_id = _npc->getRaceId();
-     int _subtype_id = _npc->getSubTypeId();
+     	int _race_id = _npc->getRaceId();
+     	int _subtype_id = _npc->getSubTypeId();
 
-     _npc->setInSpace(true);
-     _npc->setStarSystem(this);  
+     	_npc->setInSpace(true);
+     	_npc->setStarSystem(this);  
 
-     NPC_pList.push_back(_npc);
+     	NPC_inSPACE_vec.push_back(_npc);
 
-     if (_subtype_id == RANGER_ID)
-         NPC_RANGER_pList.push_back(_npc);
-     if (_subtype_id == WARRIOR_ID)
-         NPC_WARRIOR_pList.push_back(_npc);
-     if (_subtype_id == TRADER_ID)
-         NPC_TRADER_pList.push_back(_npc);
-     if (_subtype_id == PIRAT_ID)
-         NPC_PIRAT_pList.push_back(_npc);
-     if (_subtype_id == DIPLOMAT_ID)
-         NPC_DIPLOMAT_pList.push_back(_npc);
-     
-
-     return true;
+     	if (_subtype_id == RANGER_ID)
+         	NPC_RANGER_inSPACE_vec.push_back(_npc);
+     	if (_subtype_id == WARRIOR_ID)
+         	NPC_WARRIOR_inSPACE_vec.push_back(_npc);
+     	if (_subtype_id == TRADER_ID)
+         	NPC_TRADER_inSPACE_vec.push_back(_npc);
+     	if (_subtype_id == PIRAT_ID)
+         	NPC_PIRAT_inSPACE_vec.push_back(_npc);
+     	if (_subtype_id == DIPLOMAT_ID)
+         	NPC_DIPLOMAT_inSPACE_vec.push_back(_npc);
 }
 
 bool StarSystem :: removeShipById(int _id)
 {
      bool is_removed = false;
-     for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
-         if (SHIP_pList[ki]->id == _id)
+     for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
+         if (SHIP_inSPACE_vec[ki]->id == _id)
          {
-            SHIP_pList.erase(SHIP_pList.begin() + ki);
+            SHIP_inSPACE_vec.erase(SHIP_inSPACE_vec.begin() + ki);
             is_removed = true; 
          }
      return is_removed;
@@ -1420,18 +1373,18 @@ bool StarSystem :: removeShipById(int _id)
 
 bool StarSystem :: removeNpc(int _id, int _race_id, int _subtype_id)
 {
-     removeNpcFromTheListById(&NPC_pList, _id);
+     removeNpcFromTheListById(&NPC_inSPACE_vec, _id);
 
      if (_subtype_id == RANGER_ID)
-        removeNpcFromTheListById(&NPC_RANGER_pList, _id);
+        removeNpcFromTheListById(&NPC_RANGER_inSPACE_vec, _id);
      if (_subtype_id == WARRIOR_ID)
-        removeNpcFromTheListById(&NPC_WARRIOR_pList, _id);
+        removeNpcFromTheListById(&NPC_WARRIOR_inSPACE_vec, _id);
      if (_subtype_id == TRADER_ID)
-        removeNpcFromTheListById(&NPC_TRADER_pList, _id);
+        removeNpcFromTheListById(&NPC_TRADER_inSPACE_vec, _id);
      if (_subtype_id == PIRAT_ID)
-        removeNpcFromTheListById(&NPC_PIRAT_pList, _id);
+        removeNpcFromTheListById(&NPC_PIRAT_inSPACE_vec, _id);
      if (_subtype_id == DIPLOMAT_ID)
-        removeNpcFromTheListById(&NPC_DIPLOMAT_pList, _id);
+        removeNpcFromTheListById(&NPC_DIPLOMAT_inSPACE_vec, _id);
 }
 
 

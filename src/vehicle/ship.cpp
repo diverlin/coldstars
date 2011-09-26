@@ -19,14 +19,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "ship.hpp"
 
+void Ship :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
+void Ship :: setNpc(Npc* _npc)                      { npc_owner = _npc; }
+void Ship :: setPlaceTypeId(int _place_type_id)     { place_type_id = _place_type_id; }
+
+
 Points* Ship :: getPoints() 	    { return &points; }
 Navigator* Ship :: getNavigator()   { return navigator; }
 StarSystem* Ship :: getStarSystem() { return starsystem; }
 Npc*  Ship :: getNpc() 		    { return npc_owner; }
-
-void Ship :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
-void Ship :: setNpc(Npc* _npc)                      { npc_owner = _npc; }
-                    
+int Ship :: getPlaceTypeId() const  { return place_type_id; }                    
                                 
 Ship :: Ship(TextureOb* _pTo_texOb, 
              int _max_weapons, 
@@ -425,6 +427,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
    	//self.shield_texOb = TEXTURE_MANAGER.returnShieldEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id)
    	TextureOb* _texOb_shield = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.shieldEffect_texOb_pList); 
    	shield = new ShieldEffect(this, _texOb_shield);
+   	
+	    	weapon_selector.reset();
 }
 
 
@@ -525,24 +529,20 @@ void Ship :: reloadAllWeapons()
 }
 
 
-
-void Ship :: selectWeapons(bool _wslot_1_SELECTED, 
-                           bool _wslot_2_SELECTED, 
-                           bool _wslot_3_SELECTED, 
-                           bool _wslot_4_SELECTED, 
-                           bool _wslot_5_SELECTED)
+void Ship :: selectWeapons()
 {
         if (total_weapon_slot_num >= 1)
-                weapon_slot1.getTurrel()->setSelectedStatus(_wslot_1_SELECTED);
+                weapon_slot1.getTurrel()->setSelectedStatus(weapon_selector.slot_1);
         if (total_weapon_slot_num >= 2)
-                weapon_slot2.getTurrel()->setSelectedStatus(_wslot_2_SELECTED);
+                weapon_slot2.getTurrel()->setSelectedStatus(weapon_selector.slot_2);
         if (total_weapon_slot_num >= 3)
-                weapon_slot3.getTurrel()->setSelectedStatus(_wslot_3_SELECTED);
+                weapon_slot3.getTurrel()->setSelectedStatus(weapon_selector.slot_3);
         if (total_weapon_slot_num >= 4)
-                weapon_slot4.getTurrel()->setSelectedStatus(_wslot_4_SELECTED);
+                weapon_slot4.getTurrel()->setSelectedStatus(weapon_selector.slot_4);
         if (total_weapon_slot_num >= 5)
-                weapon_slot5.getTurrel()->setSelectedStatus(_wslot_5_SELECTED);
+                weapon_slot5.getTurrel()->setSelectedStatus(weapon_selector.slot_5);
 }
+
 
 
 void Ship :: setWeaponsTarget(Ship* _ship)
@@ -553,20 +553,20 @@ void Ship :: setWeaponsTarget(Ship* _ship)
         	if ( slot_weapon_equiped_pList[i]->getTurrel()->getSelectedStatus() == true )
            		if ( slot_weapon_equiped_pList[i]->getTurrel()->getHasTargetStatus() == false )
                   		if ( dist < slot_weapon_equiped_pList[i]->getItemRadius() )
-                       			slot_weapon_equiped_pList[i]->getTurrel()->setShipTarget(_ship);                
+                       			slot_weapon_equiped_pList[i]->getTurrel()->setTarget(_ship);                
 
 }
 
 
 void Ship :: setWeaponsTarget(Asteroid* _asteroid)
 {
-        float dist_to_target = distBetweenCenters(&points, _asteroid->getPoints());
+        float dist_to_target = distBetweenCenters(points.getCenter(), _asteroid->getPoints()->getCenter());
         
         for (unsigned int i = 0; i < slot_weapon_equiped_pList.size(); i++)
             	if ( slot_weapon_equiped_pList[i]->getTurrel()->getSelectedStatus() == true )
                		if ( slot_weapon_equiped_pList[i]->getTurrel()->getHasTargetStatus() == false )
                   		if ( dist_to_target < slot_weapon_equiped_pList[i]->getItemRadius() )
-                       			slot_weapon_equiped_pList[i]->getTurrel()->setAsteroidTarget(_asteroid);                       
+                       			slot_weapon_equiped_pList[i]->getTurrel()->setTarget(_asteroid);                       
                   
 }
 
@@ -574,27 +574,26 @@ void Ship :: setWeaponsTarget(Asteroid* _asteroid)
 
 void Ship :: setWeaponsTarget(Mineral* _mineral)
 {
-        float dist_to_target = distBetweenCenters(&points, _mineral->getPoints());
+        float dist_to_target = distBetweenCenters(points.getCenter(), _mineral->getPoints()->getCenter());
         
         for (unsigned int i = 0; i < slot_weapon_equiped_pList.size(); i++)
             	if ( slot_weapon_equiped_pList[i]->getTurrel()->getSelectedStatus() == true )
                		if ( slot_weapon_equiped_pList[i]->getTurrel()->getHasTargetStatus() == false )
                   		if ( dist_to_target < slot_weapon_equiped_pList[i]->getItemRadius() )
-                       			slot_weapon_equiped_pList[i]->getTurrel()->setMineralTarget(_mineral);
+                       			slot_weapon_equiped_pList[i]->getTurrel()->setTarget(_mineral);
 
 }
 
 
 void Ship :: setWeaponsTarget(Container* _container)
 {
-
-        float dist_to_target = distBetweenCenters(&points, _container->getPoints());
+        float dist_to_target = distBetweenCenters(points.getCenter(), _container->getPoints()->getCenter());
         
         for (unsigned int i = 0; i < slot_weapon_equiped_pList.size(); i++)
             	if ( slot_weapon_equiped_pList[i]->getTurrel()->getSelectedStatus() == true )
                		if ( slot_weapon_equiped_pList[i]->getTurrel()->getHasTargetStatus() == false )
                   		if ( dist_to_target < slot_weapon_equiped_pList[i]->getItemRadius() )
-                       			slot_weapon_equiped_pList[i]->getTurrel()->setContainerTarget(_container);
+                       			slot_weapon_equiped_pList[i]->getTurrel()->setTarget(_container);
 }
 
 
@@ -727,8 +726,8 @@ bool Ship :: launchingEvent()
 {
      	printf("id = %i, launchingEvent()\n", id);
 
-     	starsystem->addShip(this);
-     	starsystem->addNpc(npc_owner);
+     	starsystem->addShipToSpace(this);
+     	starsystem->addNpcToSpace(npc_owner);
 
      	navigator->getTargetPlanet()->removeShipById(this->id);
      	navigator->getTargetPlanet()->removeNpcById(npc_owner->getId());

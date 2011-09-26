@@ -23,25 +23,34 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class LandingArea
 {
-    public:
-        bool is_BUSY;
-        bool is_CURSORED;
-
-        Ship* pTo_ship;
-        Rect rect;
+        public:
+                LandingArea(TextureOb* _pTo_texOb, float _center_x, float _center_y, int _w, int _h);
+                ~LandingArea();
         
-        TextureOb* pTo_texOb;
-        int w,h;
+                Ship* getShip();
+                Rect getRect() const;
+                bool getBusyFlag() const;
+                bool getCursoredFlag() const;
+                
+                void setBusyFlag(bool);
+                void setCursoredFlag(bool);
+                
+                void placeShip(Ship*);
+                void removeShip(); 
         
-        LandingArea(TextureOb* _pTo_texOb, float _center_x, float _center_y, int _w, int _h);
-        ~LandingArea();
+                void renderArea();
+                void renderInternals();
+                void renderInfo();
+                
+        private:
+                bool is_BUSY;
+                bool is_CURSORED;
+                  
+                TextureOb* texOb;
+                        
+                Ship* ship;                
+                Rect rect;
         
-        void placeShip(Ship* _pTo_ship);
-        void removeShip(); 
-        
-        void renderArea();
-        void renderInternals();
-        void renderInfo();
 }; 
 
 #endif

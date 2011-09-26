@@ -19,52 +19,85 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "player.hpp"
 
+
+void WeaponSelector :: reset()
+{
+	slot_1 = false;
+     	slot_2 = false;
+     	slot_3 = false;
+     	slot_4 = false;
+     	slot_5 = false;
+}
+     		
+//void WeaponSlotSelector :: set(bool _slot_1 = true, 
+			       //bool _slot_2 = true, 
+			       //bool _slot_3 = true, 
+			       //bool _slot_4 = true, 
+			       //bool _slot_5 = true)
+//{
+	//slot_1 = _slot_1;
+     	//slot_2 = _slot_2;
+     	//slot_3 = _slot_3;
+     	//slot_4 = _slot_4;
+     	//slot_5 = _slot_5;
+//}
+
+
+
+
 PlayerInstance :: PlayerInstance()
 { 
-    type_id = PLAYER_ID;
-    id = g_ENTITY_ID_GENERATOR.returnNextId(); 
+    	type_id = PLAYER_ID;
+    	id = g_ENTITY_ID_GENERATOR.returnNextId(); 
 
-    pTo_ship       = NULL;
+    	ship       = NULL;
 
-    weapon_slot_1_SELECTED = false;
-    weapon_slot_2_SELECTED = false;
-    weapon_slot_3_SELECTED = false;
-    weapon_slot_4_SELECTED = false;
-    weapon_slot_5_SELECTED = false;
 
-    garpun_slot_SELECTED = false; 
+	
+    	//weapon_slot_1_SELECTED = false;
+    	//weapon_slot_2_SELECTED = false;
+    	//weapon_slot_3_SELECTED = false;
+    	//weapon_slot_4_SELECTED = false;
+    	//weapon_slot_5_SELECTED = false;
+
+    	garpun_slot_SELECTED = false; 
     
-    ships_info_SHOW = false;
-    planets_info_SHOW = false;
-    planets_orbit_SHOW = false;
+    	ships_info_SHOW = false;
+    	planets_info_SHOW = false;
+    	planets_orbit_SHOW = false;
 
-    radar_range_SHOW = false;
+    	radar_range_SHOW = false;
      
-    in_SPACE    = true;
-    is_SCANNING = false;
-    in_WORLDMAP = false;
+    	is_SCANNING = false;
+    	show_WORLDMAP = false;
 }
     
 PlayerInstance :: ~PlayerInstance()
 {}  
     
+    
+void PlayerInstance :: setActiveStarSystem(StarSystem* _ss_active) { ss_active = _ss_active; }	
 
 
-void PlayerInstance :: setShip(Ship* _pTo_ship)
+Ship* PlayerInstance :: getShip() 		    { return ship; }
+Npc* PlayerInstance :: getPilot() 		    { return npc; }
+StarSystem* PlayerInstance :: getActiveStarSystem() { return ss_active; }	
+
+void PlayerInstance :: bindShip(Ship* _ship)
 {
-    pTo_ship = _pTo_ship;
+    	ship = _ship;
 
-    pTo_ship->pTo_playerOwner = this;
-    pTo_npc = pTo_ship->getNpc();
-    pTo_ship->getNpc()->extractTheMind();
+    	ship->pTo_playerOwner = this;
+    	npc = ship->getNpc();
+    	ship->getNpc()->extractTheMind();
 
 }
 
     
 void PlayerInstance :: update_inSpace_inDynamic()
 {
-     if (pTo_ship->in_SPACE == false)
-        in_SPACE = false;
+     if (ship->in_SPACE == false)       // FUUUUUUUUUUUUUUUUUUUUUU must be imprroved
+        npc->setPlaceTypeId(PLANET_ID);
 
      //if (pTo_ship->pTo_npc_owner->pTo_scanShip != NULL)
         //is_SCANNING = true;

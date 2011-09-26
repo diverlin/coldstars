@@ -30,7 +30,6 @@ class ShipInternal
       		~ShipInternal();
 
       		void bindShip(Ship*);
-      		void bindSkill(Skill*);
       		void createControlSkillButtons();
 
       		void manageSkill(bool allow_full_control);
@@ -43,24 +42,25 @@ class ShipInternal
       		void renderInternaly();
       		
       	private:
-      	      	Button* pTo_increment_attack_button;  
-      		Button* pTo_decrement_attack_button;  
-                
-      		Button* pTo_increment_defence_button;  
-      		Button* pTo_decrement_defence_button;  
-        
-      		Button* pTo_increment_leader_button;  
-      		Button* pTo_decrement_leader_button; 
-      
-      		Button* pTo_increment_trader_button;  
-      		Button* pTo_decrement_trader_button; 
-    
-      		Button* pTo_increment_technic_button;  
-      		Button* pTo_decrement_technic_button; 
-     
-      		Button* pTo_increment_diplomat_button;  
-     		Button* pTo_decrement_diplomat_button;
+      		std::vector<Button*> button_pList;
       	
+      	      	Button* increment_attack_button;  
+      		Button* decrement_attack_button;  
+                
+      		Button* increment_defence_button;  
+      		Button* decrement_defence_button;  
+        
+      		Button* increment_leader_button;  
+      		Button* decrement_leader_button; 
+      
+      		Button* increment_trader_button;  
+      		Button* decrement_trader_button; 
+    
+      		Button* increment_technic_button;  
+      		Button* decrement_technic_button; 
+     
+      		Button* increment_diplomat_button;  
+     		Button* decrement_diplomat_button;      	
 };
 
 

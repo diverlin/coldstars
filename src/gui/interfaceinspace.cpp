@@ -64,10 +64,10 @@ void InterfaceInSpace :: mouseInteraction()
            		{
            			if (button_common_pList[i]->getSubTypeId() == GALAXYMAP_SCREEN_ID)
               			{
-              				if (pTo_PLAYER->in_WORLDMAP == false)
-                 				pTo_PLAYER->in_WORLDMAP = true;
+              				if (pPLAYER->show_WORLDMAP == false)
+                 				pPLAYER->show_WORLDMAP = true;
               				else
-                 				pTo_PLAYER->in_WORLDMAP = false;
+                 				pPLAYER->show_WORLDMAP = false;
                  		}
            		}
         	}

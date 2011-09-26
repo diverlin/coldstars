@@ -20,37 +20,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "shop.hpp"
 
 
-Shop :: Shop(TextureOb* _pTo_bg_texOb)
+Shop :: Shop(TextureOb* _texOb_background)
 {
-    pTo_bg_texOb   = _pTo_bg_texOb;
-}
-
-void Shop :: linkTexture()
-{
-    //background_tex = pTo_bg_texOb->texture
-}
-
-void Shop :: unlinkTexture()
-{
-     //background_tex = -1; ???
+        texOb_background  = _texOb_background;
 }
 
 
-
-void Shop :: renderBackground()
+void Shop :: renderBackground() const
 {
      	Rect screen_rect = Rect(0, 0, g_VIEW_WIDTH, g_VIEW_HEIGHT);
-     	drawTexturedRect(pTo_bg_texOb->texture, screen_rect, -1);  
+     	drawTexturedRect(texOb_background->texture, screen_rect, -1);  
 }
 
-void Shop :: renderInternals()
+void Shop :: renderInternals() const
 {
 }
             
 void Shop :: render()
 {
-     renderBackground();
-     renderInternals();
+        renderBackground();
+        renderInternals();
 }
 
 

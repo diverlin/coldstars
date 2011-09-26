@@ -16,63 +16,64 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #include "galaxy.hpp"
 
 Galaxy :: Galaxy()
 { 
-    // map
-    map_rect = Rect(MAP_OFFSET_X, MAP_OFFSET_Y, (g_VIEW_WIDTH - 2 * MAP_OFFSET_X), (g_VIEW_HEIGHT - 2 * MAP_OFFSET_X));
+    	// map
+    	map_rect = Rect(MAP_OFFSET_X, MAP_OFFSET_Y, (g_VIEW_WIDTH - 2 * MAP_OFFSET_X), (g_VIEW_HEIGHT - 2 * MAP_OFFSET_X));
 
-    RACES_ALL_LIST.push_back(RACE_0_ID);
-    RACES_ALL_LIST.push_back(RACE_1_ID);
-    RACES_ALL_LIST.push_back(RACE_2_ID);
-    RACES_ALL_LIST.push_back(RACE_3_ID);
-    RACES_ALL_LIST.push_back(RACE_4_ID);
-    RACES_ALL_LIST.push_back(RACE_6_ID);
-    RACES_ALL_LIST.push_back(RACE_7_ID);
+    	RACES_ALL_LIST.push_back(RACE_0_ID);
+    	RACES_ALL_LIST.push_back(RACE_1_ID);
+    	RACES_ALL_LIST.push_back(RACE_2_ID);
+    	RACES_ALL_LIST.push_back(RACE_3_ID);
+    	RACES_ALL_LIST.push_back(RACE_4_ID);
+   	RACES_ALL_LIST.push_back(RACE_6_ID);
+    	RACES_ALL_LIST.push_back(RACE_7_ID);
 
-    RACES_GOOD_LIST.push_back(RACE_0_ID);
-    RACES_GOOD_LIST.push_back(RACE_1_ID);
-    RACES_GOOD_LIST.push_back(RACE_2_ID);
-    RACES_GOOD_LIST.push_back(RACE_3_ID);
-    RACES_GOOD_LIST.push_back(RACE_4_ID);
+    	RACES_GOOD_LIST.push_back(RACE_0_ID);
+    	RACES_GOOD_LIST.push_back(RACE_1_ID);
+   	RACES_GOOD_LIST.push_back(RACE_2_ID);
+    	RACES_GOOD_LIST.push_back(RACE_3_ID);
+    	RACES_GOOD_LIST.push_back(RACE_4_ID);
 
-    RACES_EVIL_LIST.push_back(RACE_6_ID);
-    RACES_EVIL_LIST.push_back(RACE_7_ID);
+    	RACES_EVIL_LIST.push_back(RACE_6_ID);
+    	RACES_EVIL_LIST.push_back(RACE_7_ID);
 
-    SHIP_SUBTYPE_LIST.push_back(RANGER_ID);
-    SHIP_SUBTYPE_LIST.push_back(WARRIOR_ID);
-    SHIP_SUBTYPE_LIST.push_back(PIRAT_ID);
-    SHIP_SUBTYPE_LIST.push_back(TRADER_ID);
-    SHIP_SUBTYPE_LIST.push_back(DIPLOMAT_ID);
+    	SHIP_SUBTYPE_LIST.push_back(RANGER_ID);
+    	SHIP_SUBTYPE_LIST.push_back(WARRIOR_ID);
+    	SHIP_SUBTYPE_LIST.push_back(PIRAT_ID);
+    	SHIP_SUBTYPE_LIST.push_back(TRADER_ID);
+   	SHIP_SUBTYPE_LIST.push_back(DIPLOMAT_ID);
             
-    RACE4_ALLOWED_SUBTYPE_LIST.push_back(WARRIOR_ID);
-    RACE4_ALLOWED_SUBTYPE_LIST.push_back(TRADER_ID);
-    RACE4_ALLOWED_SUBTYPE_LIST.push_back(DIPLOMAT_ID);
+    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(WARRIOR_ID);
+    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(TRADER_ID);
+    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(DIPLOMAT_ID);
 
-    starsytem_counter = 0;
-    star_counter      = 0;
-    ship_counter      = 0;
-    planet_counter    = 0;
+    	starsytem_counter = 0;
+    	star_counter      = 0;
+    	ship_counter      = 0;
+    	planet_counter    = 0;
 
-    while(starsytem_counter < STARSYSTEM_TOTAL_NUM)
-    {  
-        generateEntireStarSystem();
-        starsytem_counter++;
-    }
+    	while(starsytem_counter < STARSYSTEM_TOTAL_NUM)
+    	{  
+        	generateEntireStarSystem();
+        	starsytem_counter++;
+    	}
 
-    StarSystem *pTo_randStarSystem;
-
-    if (STARSYSTEM_pList.size() == 1)
-       pTo_randStarSystem = STARSYSTEM_pList[0];
-    else
-       pTo_randStarSystem = STARSYSTEM_pList[randIntInRange(0, STARSYSTEM_pList.size())];
- 
-    pTo_ss_active = pTo_randStarSystem;
-    manageHiddenStarSystemList(pTo_ss_active);
+   	//manageHiddenStarSystemList(ss_active);
 }
 
+
+
+StarSystem* Galaxy :: getRandomStarSystem()
+{
+	if (STARSYSTEM_pList.size() == 1)
+       		return STARSYSTEM_pList[0];
+    	else
+      		return STARSYSTEM_pList[randIntInRange(0, STARSYSTEM_pList.size())];
+}
+     		
 
 void Galaxy :: generateEntireStarSystem()
 {  
@@ -144,34 +145,34 @@ void Galaxy :: generateNumPlanets(StarSystem* _starsystem, int planet_per_system
     
 
 
-void Galaxy :: generateNumFriendlyNPC(StarSystem* _pTo_starsystem, int ship_per_system)
+void Galaxy :: generateNumFriendlyNPC(StarSystem* _starsystem, int ship_per_system)
 {
-    int npc_subtype_id;
-    int npc_race_id = RACES_GOOD_LIST[randIntInRange(0, RACES_GOOD_LIST.size())];
+    	int npc_subtype_id;
+    	int npc_race_id = RACES_GOOD_LIST[randIntInRange(0, RACES_GOOD_LIST.size())];
 
-    for (int i=0; i<ship_per_system; i++)
-    {     
-        if (npc_race_id != RACE_4_ID)
-           npc_subtype_id = SHIP_SUBTYPE_LIST[randIntInRange(0, RACES_GOOD_LIST.size())];
-        else
-           npc_subtype_id = RACE4_ALLOWED_SUBTYPE_LIST[randIntInRange(0, RACE4_ALLOWED_SUBTYPE_LIST.size())];
+    	for (int i=0; i<ship_per_system; i++)
+    	{     
+        	if (npc_race_id != RACE_4_ID)
+           		npc_subtype_id = SHIP_SUBTYPE_LIST[randIntInRange(0, RACES_GOOD_LIST.size())];
+        	else
+           		npc_subtype_id = RACE4_ALLOWED_SUBTYPE_LIST[randIntInRange(0, RACE4_ALLOWED_SUBTYPE_LIST.size())];
 
-        TextureOb* pTo_npcTexOb  = g_TEXTURE_MANAGER.returnPointerToRandomFaceTexObWithFolloingAttributes(npc_race_id);
-        Npc* pTo_npc = new Npc(npc_race_id, npc_subtype_id, pTo_npcTexOb);
+        	TextureOb* texOb_npc  = g_TEXTURE_MANAGER.returnPointerToRandomFaceTexObWithFolloingAttributes(npc_race_id);
+        	Npc* npc = new Npc(npc_race_id, npc_subtype_id, texOb_npc);
 
-        int ship_race_id = npc_race_id;         // RACES_ALL_LIST[randIntInRange(0, RACES_ALL_LIST.size())];
-        int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[randIntInRange(0, SHIP_SUBTYPE_LIST.size())];
-        int ship_size_id = randIntInRange(1, 9);
-        Ship* pTo_ship = shipGenerator(ship_race_id, ship_subtype_id, ship_size_id);
+        	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[randIntInRange(0, RACES_ALL_LIST.size())];
+        	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[randIntInRange(0, SHIP_SUBTYPE_LIST.size())];
+        	int ship_size_id = randIntInRange(1, 9);
+        	Ship* ship = shipGenerator(ship_race_id, ship_subtype_id, ship_size_id);
        
-        equip(pTo_ship);            // improove
-        pTo_ship->updateAllStuff(); // improove
+        	equip(ship);            		// improove
+        	ship->updateAllStuff(); 		// improove
         
-        pTo_npc->setShip(pTo_ship);
+        	npc->bind(ship);
 
-        _pTo_starsystem->addShip(pTo_ship);
-        _pTo_starsystem->addNpc(pTo_npc);
-    }
+        	_starsystem->addShipToSpace(ship);
+        	_starsystem->addNpcToSpace(npc);
+    	}
 }
 
          
@@ -181,11 +182,11 @@ void Galaxy :: generateNumEnemyNPC(StarSystem* _pTo_starsystem, int ship_per_sys
 
 
 
-void Galaxy :: manageHiddenStarSystemList(StarSystem* _pTo_ss)
+void Galaxy :: manageHiddenStarSystemList(StarSystem* _ss_active)
 {
      hSTARSYSTEM_pList.clear(); // should be improoved
      for (unsigned int ssi = 0; ssi < STARSYSTEM_pList.size(); ssi++)    // should be improoved
-          if (STARSYSTEM_pList[ssi]->id != pTo_ss_active->id)
+          if (STARSYSTEM_pList[ssi]->id != _ss_active->id)
              hSTARSYSTEM_pList.push_back(STARSYSTEM_pList[ssi]);
 }
 
@@ -200,7 +201,7 @@ void Galaxy :: manageHiddenStarSystemList(StarSystem* _pTo_ss)
 
 bool Galaxy :: manage_map()
 {
-     if (pTo_PLAYER->pTo_ship->ableTo.HJUMP == true)
+     if (pPLAYER->getShip()->ableTo.HJUMP == true)
      {
         int mx  = g_MOUSE_POS_X;
         int my  = g_VIEW_HEIGHT - g_MOUSE_POS_Y; 
@@ -215,17 +216,17 @@ bool Galaxy :: manage_map()
                 { 
                    int ss_ss_dist = distBetweenCenters(STARSYSTEM_pList[si]->rect_onMap.getCenter().x, 
                    				       STARSYSTEM_pList[si]->rect_onMap.getCenter().y,
-                   				       pTo_PLAYER->pTo_npc->getStarSystem()->rect_onMap.getCenter().x,  
-                   				       pTo_PLAYER->pTo_npc->getStarSystem()->rect_onMap.getCenter().y);
+                   				       pPLAYER->getPilot()->getStarSystem()->rect_onMap.getCenter().x,  
+                   				       pPLAYER->getPilot()->getStarSystem()->rect_onMap.getCenter().y);
                    				       
-                   if ( (ss_ss_dist < pTo_PLAYER->pTo_ship->drive_slot.getDriveEquipment()->getHyper()) && (ss_ss_dist < pTo_PLAYER->pTo_ship->bak_slot.getBakEquipment()->getFuel()) )
+                   if ( (ss_ss_dist < pPLAYER->getShip()->drive_slot.getDriveEquipment()->getHyper()) && (ss_ss_dist < pPLAYER->getShip()->bak_slot.getBakEquipment()->getFuel()) )
                       if (lmb == true)
                       { 
-                          pTo_ss_active = STARSYSTEM_pList[si];    // debug
+                          pPLAYER->setActiveStarSystem(STARSYSTEM_pList[si]);    // debug
                           //player.hyperJumpPreparation(ss)
                           //#player.calculateTraceToCoord((player.jump_pos_x, player.jump_pos_y))
                           printf("ss_id = %i\n", STARSYSTEM_pList[si]->id);    // debug
-                          manageHiddenStarSystemList(pTo_ss_active);
+                          manageHiddenStarSystemList(pPLAYER->getActiveStarSystem());
 
                           return true;
                       } 

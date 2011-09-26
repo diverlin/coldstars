@@ -28,43 +28,59 @@ Land :: ~Land()
 
 
 //// ******* TRANSITION ******* 
-bool Land :: addShip(Ship* _pTo_ship)
+bool Land :: addShip(Ship* _ship)
 {
-     SHIP_pList.push_back(_pTo_ship);
-     _pTo_ship->in_SPACE = false;
-     return true;
+        SHIP_pList.push_back(_ship);
+        _ship->in_SPACE = false;
+        
+        return true;
 }
 
 bool Land :: addNpc(Npc* _npc)
 {
-     NPC_pList.push_back(_npc);
-     _npc->setLand(this);
-     _npc->setInSpace(false);
+        NPC_pList.push_back(_npc);
+        _npc->setLand(this);
+        _npc->setInSpace(false);
  
-     return true;
+        return true;
 }
 
-bool Land :: removeShipById(int _id)
+bool Land :: removeShip(int _id)
 {
-    bool is_removed = false;
-    for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++) 
-        if (SHIP_pList[ki]->id == _id)
+        bool is_removed = false;
+        
+        for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++) 
         {
-           SHIP_pList.erase(SHIP_pList.begin() + ki);
-           is_removed = true;
+                if (SHIP_pList[ki]->id == _id)
+                {
+                        SHIP_pList.erase(SHIP_pList.begin() + ki);
+                        is_removed = true;
+                }
         }
-    return is_removed;
+        
+        return is_removed;
 }
 
-bool Land :: removeNpcById(int _id)
+bool Land :: removeNpc(int _id)
 {
-    bool is_removed = false;
-    for (unsigned int ni = 0; ni < NPC_pList.size(); ni++) 
-        if (NPC_pList[ni]->getId() == _id)
-        {
-           NPC_pList.erase(NPC_pList.begin() + ni);
-           is_removed = true;
+        bool is_removed = false;
+    
+        for (unsigned int ni = 0; ni < NPC_pList.size(); ni++)
+        { 
+                if (NPC_pList[ni]->getId() == _id)
+                {
+                        NPC_pList.erase(NPC_pList.begin() + ni);
+                        is_removed = true;
+                }
         }
-    return is_removed;
+        
+        return is_removed;
 }
-//// ******* TRANSITION ******* 
+
+
+
+void Land :: ai()
+{
+        for (unsigned int ni = 0; ni < NPC_pList.size(); ni++)
+           	NPC_pList[ni]->thinkCommon_inLand_inStatic();      
+}  

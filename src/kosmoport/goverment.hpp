@@ -23,20 +23,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Goverment
 {
-    public: 
-        TextureOb* pTo_bg_texOb;
-        TextureOb* pTo_face_texOb;
+        public: 
+                Goverment(TextureOb* _pTo_bg_texOb, TextureOb* _pTo_face_texOb);
+                ~Goverment();
 
-        Goverment(TextureOb* _pTo_bg_texOb, TextureOb* _pTo_face_texOb);
-        ~Goverment();
-                
-        void linkTexture();
-        void unlinkTexture();
+                void renderBackground();
+                void renderInternals();
 
-        void renderBackground();
-        void renderInternals();
-
-        void render();
+                void render();
+        
+        private:
+                TextureOb* texOb_background;
+                TextureOb* texOb_face;
 };
 
 #endif

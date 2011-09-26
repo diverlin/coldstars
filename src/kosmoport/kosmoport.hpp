@@ -23,25 +23,30 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Kosmoport
 {
-    public:
-        Angar*     pTo_angar;
-        Store*     pTo_store;
-        Shop*      pTo_shop;
-        Goverment* pTo_goverment;  
+        public:
+                Kosmoport(int _race_id);
+                ~Kosmoport();
 
-        std::vector<Npc*>  NPC_pList;
-        std::vector<Ship*> SHIP_pList;
-
-        Kosmoport(int _race_id);
-        ~Kosmoport();
-
-        void clearScreen();
-
-    bool addShip(Ship* _pTo_ship);
-    bool addNpc(Npc* _pTo_npc);
-    bool removeShipById(int _id);
-    bool removeNpcById(int _id);
-
+                Angar*     getAngar();
+                Store*     getStore();
+                Shop*      getShop();
+                Goverment* getGoverment(); 
+                
+                bool addShip(Ship*);
+                bool addNpc(Npc*);
+                bool removeShip(int _id);
+                bool removeNpc(int _id);
+                
+                void ai();
+                
+        private:
+                Angar*     angar;
+                Store*     store;
+                Shop*      shop;
+                Goverment* goverment; 
+                
+                std::vector<Npc*>  NPC_pList;
+                std::vector<Ship*> SHIP_pList;
 };
 
 #endif

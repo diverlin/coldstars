@@ -26,27 +26,30 @@ class Galaxy
   	public:
      		Rect map_rect;
 
-     		int starsytem_counter;
-     		int star_counter;      
-     		int ship_counter;
-     		int planet_counter;
-     		StarSystem* pTo_ss_active;
-     		std::vector<StarSystem*> STARSYSTEM_pList;
+     	     	std::vector<StarSystem*> STARSYSTEM_pList;
      		std::vector<StarSystem*> hSTARSYSTEM_pList;
 
      		Galaxy();
+     		
+     		StarSystem* getRandomStarSystem();
      
      		void generateEntireStarSystem();
-     		void generateBackground(StarSystem* _pTo_starsystem, int distNebula_maxNum, int distStar_maxNum, int _color_id);
-     		void generateNumPlanets(StarSystem* _pTo_starsystem, int planet_per_system);
+     		void generateBackground(StarSystem* _starsystem, int distNebula_maxNum, int distStar_maxNum, int _color_id);
+     		void generateNumPlanets(StarSystem* _starsystem, int planet_per_system);
      
-     		void generateNumFriendlyNPC(StarSystem* _pTo_starsystem, int ship_per_system);
-     		void generateNumEnemyNPC(StarSystem* _pTo_starsystem, int ship_per_system);
+     		void generateNumFriendlyNPC(StarSystem* _starsystem, int ship_per_system);
+     		void generateNumEnemyNPC(StarSystem* _starsystem, int ship_per_system);
 
-     		void manageHiddenStarSystemList(StarSystem* _pTo_ss);
+     		void manageHiddenStarSystemList(StarSystem* _starsystem);
 
      		bool manage_map();
      		void render_map();
+     		     		
+     	private:
+    	     	int starsytem_counter;
+     		int star_counter;      
+     		int ship_counter;
+     		int planet_counter;
 };
 
 #endif 

@@ -20,45 +20,54 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "landingarea.hpp"
 
 
-LandingArea :: LandingArea(TextureOb* _pTo_texOb, float _center_x, float _center_y, int _w, int _h)
+LandingArea :: LandingArea(TextureOb* _texOb, float _center_x, float _center_y, int _w, int _h)
 {
     	is_BUSY = false;
     	is_CURSORED = false;
     
-    	pTo_texOb = _pTo_texOb;
-    	w = _w; //pTo_texOb->w;
-    	h = _h; //pTo_texOb->h;
+    	texOb = _texOb;
 
-    	rect = Rect(_center_x - w/2, _center_y - h/2, w, h);
+    	rect = Rect(_center_x - _w/2, _center_y - _h/2, _w, _h);
 }
    
 LandingArea :: ~LandingArea()
 {}
 
-void LandingArea :: placeShip(Ship* _pTo_ship)
+
+Ship* LandingArea :: getShip()      { return ship; }
+Rect LandingArea :: getRect() const { return rect; }
+      
+bool LandingArea :: getBusyFlag()     const { return is_BUSY; }
+bool LandingArea :: getCursoredFlag() const { return is_CURSORED; }
+                
+void LandingArea :: setBusyFlag(bool _busy_flag)         { is_BUSY = _busy_flag; }
+void LandingArea :: setCursoredFlag(bool _cursored_flag) { is_CURSORED = _cursored_flag; }
+                
+                          
+void LandingArea :: placeShip(Ship* _ship)
 {
-   pTo_ship = _pTo_ship;
-   is_BUSY = true;    
+        ship = _ship;
+        is_BUSY = true;    
 }
 
 void LandingArea :: removeShip()
 {
-   pTo_ship = NULL;
-   is_BUSY = false;    
+        ship = NULL;
+        is_BUSY = false;    
 } 
 
 void LandingArea :: renderArea()
 {
-     	drawTexturedRect(pTo_texOb->texture, rect, -1);
+     	drawTexturedRect(texOb->texture, rect, -1);
 }
 
 void LandingArea :: renderInternals()
 {
      	if (is_BUSY == true)
      	{
-        	pTo_ship->getPoints()->setAngle(0);
-        	pTo_ship->getPoints()->setCenter(rect.getCenter().x, rect.getCenter().y);
-        	pTo_ship->render_atPlanet();
+        	ship->getPoints()->setAngle(0);
+        	ship->getPoints()->setCenter(rect.getCenter().x, rect.getCenter().y);
+        	ship->render_atPlanet();
      	}
 }
 
@@ -69,8 +78,8 @@ void LandingArea :: renderInfo()
      	{
         	if (is_CURSORED == true)
         	{
-            		//pTo_ship->updateInfo();
-            		pTo_ship->renderInfo(rect.getCenter().x, rect.getCenter().y, 0, 0);
+            		//ship->updateInfo();
+            		ship->renderInfo(rect.getCenter().x, rect.getCenter().y, 0, 0);
         	} 
         }
 }
