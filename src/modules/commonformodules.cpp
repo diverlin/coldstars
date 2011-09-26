@@ -51,10 +51,8 @@ CommonForModules :: ~CommonForModules ()
 unsigned int CommonForModules :: getId()      const { return id; }
 unsigned int CommonForModules :: getType()    const { return type_id; }
 unsigned int CommonForModules :: getSubType() const { return subtype_id; }
-
-unsigned int CommonForModules :: getMass() const { return mass; }
-
-TextureOb* CommonForModules :: getTexOb() const { return texOb; }
+unsigned int CommonForModules :: getMass()    const { return mass; }
+TextureOb* CommonForModules :: getTexOb()     const { return texOb; }
       		
 
 
@@ -79,7 +77,7 @@ void CommonForModules :: addCommonInfo()
 
 void CommonForModules :: renderInfo(Rect slot_rect)
 {  
-     drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.getCenter().x, slot_rect.getCenter().y, 0, 0);
+        drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.getCenter().x, slot_rect.getCenter().y, 0, 0);
 }
 
 
@@ -87,27 +85,27 @@ void CommonForModules :: renderInfo(Rect slot_rect)
 
 void CommonForModules :: render(Rect slot_rect)
 {
-     (this->*pToFunc_render)(slot_rect);
+        (this->*pToFunc_render)(slot_rect);
 }
 
 
 void CommonForModules :: _renderFrame(Rect slot_rect)
 {
-     drawTexturedRect(texOb->texture, slot_rect, -1);   
+        drawTexturedRect(texOb->texture, slot_rect, -1);   
 }
 
 void CommonForModules :: _renderFrames(Rect slot_rect)
-{
-    int i = texOb->updateAnimationFrame(); 
-    glBindTexture(GL_TEXTURE_2D, texOb->texture);
-    drawRect(slot_rect, 
-    	     -1.0, 
-    	     texOb->texCoord_bottomLeft_x_list[i], 
-    	     texOb->texCoord_bottomLeft_y_list[i], 
-    	     texOb->texCoord_bottomRight_x_list[i], 
-    	     texOb->texCoord_bottomRight_y_list[i], 
-    	     texOb->texCoord_topLeft_x_list[i], 
-    	     texOb->texCoord_topLeft_y_list[i], 
-    	     texOb->texCoord_topRight_x_list[i], 
-    	     texOb->texCoord_topRight_y_list[i]);
+{       
+        int i = texOb->updateAnimationFrame(); 
+        glBindTexture(GL_TEXTURE_2D, texOb->texture);
+        drawRect( slot_rect, 
+                  -1.0, 
+                  texOb->texCoord_bottomLeft_x_list[i], 
+                  texOb->texCoord_bottomLeft_y_list[i], 
+                  texOb->texCoord_bottomRight_x_list[i], 
+                  texOb->texCoord_bottomRight_y_list[i], 
+                  texOb->texCoord_topLeft_x_list[i], 
+                  texOb->texCoord_topLeft_y_list[i], 
+                  texOb->texCoord_topRight_x_list[i], 
+                  texOb->texCoord_topRight_y_list[i] );
 }

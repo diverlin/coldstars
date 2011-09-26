@@ -48,14 +48,16 @@ struct Abilities
 class Ship
 {   
     	public:
+                void setStarSystem(StarSystem*);
+                void setNpc(Npc*);
+                void setPlaceTypeId(int);
+ 
                 Points* getPoints();
                 Navigator* getNavigator();
                 StarSystem* getStarSystem();
                 Npc* getNpc();
-        
-                void setStarSystem(StarSystem*);
-                void setNpc(Npc*);
-                                        
+                int getPlaceTypeId() const;
+                                                       
         	bool is_alive, is_dying, is_explosed;
         	int type_id, id;
 
@@ -198,11 +200,7 @@ class Ship
 
         	void reloadAllWeapons();
         
-        	void selectWeapons(bool _wslot_1_SELECTED = true, 
-                              	   bool _wslot_2_SELECTED = true, 
-                               	   bool _wslot_3_SELECTED = true, 
-                                   bool _wslot_4_SELECTED = true, 
-                                   bool _wslot_5_SELECTED = true);
+     		void selectWeapons();                                     
                      
         	void setWeaponsTarget(Ship* _ship);
         	void setWeaponsTarget(Asteroid* _asteroid);
@@ -256,7 +254,9 @@ class Ship
         	void renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y);
         	
         	float pos_z;
-                                           		
+        	
+        	WeaponSelector weapon_selector; 
+                                          		
         private:
                 float angle_inD;
                 Points points;
@@ -296,6 +296,7 @@ class Ship
         	Turrel turrel4;
         	Turrel turrel5;
 
+        	int place_type_id;
 };
 
 void equip(Ship* pTo_ship);

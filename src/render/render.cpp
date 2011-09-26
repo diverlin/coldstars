@@ -157,8 +157,8 @@ void drawLine(GLuint texture,
 
 
 void drawInfoIn2Column(
-                VEC_pString_type* pTo_info_title_pList, 
-                VEC_pString_type* pTo_info_value_pList, 
+                std::vector<std::string*>* pTo_info_title_pList, 
+                std::vector<std::string*>* pTo_info_value_pList, 
                 float center_x, float center_y,
                 float scroll_x,
                 float scroll_y)
@@ -185,11 +185,11 @@ void drawInfoIn2Column(
      	float info_total_string_w = char_w * max_info_total_str_size;
      	float info_total_string_h = char_h * pTo_info_title_pList->size();
 
-     	TextureOb* pTo_textbg_texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.textBackground_texOb_pList);
+     	TextureOb* texOb_textBoard = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.textBackground_texOb_pList);
      	Rect rect = Rect(center_x - char_w, center_y - info_total_string_h, info_total_string_w, info_total_string_h + char_h/2);
 
      	glEnable(GL_BLEND);
-     	drawTexturedRect(pTo_textbg_texOb->texture, rect, -2);
+     		drawTexturedRect(texOb_textBoard->texture, rect, -2);
      	glDisable(GL_BLEND);
 
      	sf::String s((*(*pTo_info_title_pList)[0]), g_FONT, (font_size+1));

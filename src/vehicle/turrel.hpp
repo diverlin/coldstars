@@ -58,10 +58,10 @@ class Turrel
 
                 int returnTargetId();
      
-                void setShipTarget(Ship* _pTo_ship);
-                void setAsteroidTarget(Asteroid* _pTo_asteroid);
-                void setMineralTarget(Mineral* _pTo_mineral);
-                void setContainerTarget(Container* _pTo_container);
+                void setTarget(Ship*);
+                void setTarget(Asteroid*);
+                void setTarget(Mineral*);
+                void setTarget(Container*);
 
                 void resetTarget();
                 

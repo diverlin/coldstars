@@ -20,28 +20,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "goverment.hpp"
 
 
-Goverment :: Goverment(TextureOb* _pTo_bg_texOb, TextureOb* _pTo_face_texOb)
+Goverment :: Goverment(TextureOb* _texOb_background, TextureOb* _texOb_face)
 {
-    pTo_bg_texOb   = _pTo_bg_texOb;
-    pTo_face_texOb = _pTo_face_texOb;   
+        texOb_background   = _texOb_background;
+        texOb_face         = _texOb_face;   
 }
-
-void Goverment :: linkTexture()
-{
-    //background_tex = pTo_bg_texOb->texture
-}
-
-void Goverment :: unlinkTexture()
-{
-     //background_tex = -1; ???
-}
-
 
 
 void Goverment :: renderBackground()
 {
      	Rect screen_rect = Rect(0, 0, g_VIEW_WIDTH, g_VIEW_HEIGHT);
-     	drawTexturedRect(pTo_bg_texOb->texture, screen_rect, -1);  
+     	drawTexturedRect(texOb_background->texture, screen_rect, -1);  
 }
 
 void Goverment :: renderInternals()
@@ -50,7 +39,7 @@ void Goverment :: renderInternals()
             
 void Goverment :: render()
 {
-     renderBackground();
-     renderInternals();
+        renderBackground();
+        renderInternals();
 }
 

@@ -20,39 +20,54 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef PLAYER_H
 #define PLAYER_H
 
+class WeaponSelector
+{
+	public:
+    		bool slot_1;
+     		bool slot_2;
+     		bool slot_3;
+     		bool slot_4;
+     		bool slot_5;
+     	
+     		void reset();
+     		//void set(bool, bool, bool, bool, bool);
+};
+
 
 class PlayerInstance 
 {
-   public:
-     int type_id, id;
-  
-     Ship* pTo_ship;
-     Npc* pTo_npc;
+   	public:
+    		bool is_SCANNING;
+     		bool show_WORLDMAP;
 
-     bool in_SPACE;
-     bool is_SCANNING;
-     bool in_WORLDMAP;
-
-     bool weapon_slot_1_SELECTED;
-     bool weapon_slot_2_SELECTED;
-     bool weapon_slot_3_SELECTED;
-     bool weapon_slot_4_SELECTED;
-     bool weapon_slot_5_SELECTED;
-
-     bool garpun_slot_SELECTED;
+    		
+     	     	bool garpun_slot_SELECTED;
      
-     bool ships_info_SHOW;
-     bool planets_info_SHOW;
-     bool planets_orbit_SHOW;
+     		bool ships_info_SHOW;
+     		bool planets_info_SHOW;
+     		bool planets_orbit_SHOW;
 
-     bool radar_range_SHOW;
-        
-     PlayerInstance();
-     ~PlayerInstance();
+     		bool radar_range_SHOW;
+     		
+    		PlayerInstance();
+     		~PlayerInstance();
      
-     void setShip(Ship* _pTo_ship);
-
-     void update_inSpace_inDynamic();
+          	void setActiveStarSystem(StarSystem*);
+          		
+        	Ship* getShip();
+   		Npc* getPilot();
+     		StarSystem* getActiveStarSystem();
+     
+     		void bindShip(Ship*);
+     		void update_inSpace_inDynamic();
+     	
+     	private:
+     	     	int type_id, id;
+     	     		
+     	     	Ship* ship;
+     	     	Npc* npc;
+     	     	
+     	     	StarSystem* ss_active;
 };
 
 #endif 

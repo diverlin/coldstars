@@ -26,5 +26,8 @@ class vec3f
                 void set(float _x, float _y, float _z);
 };
 
+float distBetweenCenters(vec2f, vec2f);
+float distBetweenCenters(vec2f center1, float x2, float y2);
+float distBetweenCenters(float x1, float y1, float x2, float y2);
 
 #endif

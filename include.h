@@ -17,6 +17,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
+class Ship;      
+class Npc;   
+class StarSystem;
+class ItemSlot;   
+class Turrel;       
+
+
 #include "GL/glew.h"   
 
 
@@ -28,7 +35,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp> 
 
-#include "src/common/alias.hpp"
 #include "src/common/vector.hpp"
 #include "src/resources/objLoader.hpp"
 

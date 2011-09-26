@@ -64,10 +64,10 @@ void KeyEventsInSpace :: getSimpleInputs()
            		{
            			case sf::Key::Escape:
                			{
-              				if (pTo_PLAYER->is_SCANNING == true)
+              				if (pPLAYER->is_SCANNING == true)
               				{
-                		  		pTo_PLAYER->is_SCANNING = false;
-                		  		pTo_PLAYER->pTo_npc->removeScanTarget(); 
+                		  		pPLAYER->is_SCANNING = false;
+                		  		pPLAYER->getPilot()->removeScanTarget(); 
               				}
               				break;
                 		}
@@ -84,14 +84,14 @@ void KeyEventsInSpace :: getSimpleInputs()
          	  		// WEAPON SLOTS
            			case sf::Key::Num1:
                		 	{
-              				if (pTo_PLAYER->weapon_slot_1_SELECTED == false)
+              				if (pPLAYER->getShip()->weapon_selector.slot_1 == false)
               				{
-                		  		pTo_PLAYER->weapon_slot_1_SELECTED = true;
+                		  		pPLAYER->getShip()->weapon_selector.slot_1 = true;
                 		  		printf("pTo_PLAYER->weapon_slot_1_SELECTED -> YES\n");
               				}
               				else
               				{
-                		  		pTo_PLAYER->weapon_slot_1_SELECTED = false;
+                		  		pPLAYER->getShip()->weapon_selector.slot_1 = false;
                 		  		printf("pTo_PLAYER->weapon_slot_1_SELECTED -> NO\n");
               				}
   					break;
@@ -99,14 +99,14 @@ void KeyEventsInSpace :: getSimpleInputs()
 
            			case sf::Key::Num2:
                 		{
-              				if (pTo_PLAYER->weapon_slot_2_SELECTED == false)
+              				if (pPLAYER->getShip()->weapon_selector.slot_2 == false)
               				{
-                	  			pTo_PLAYER->weapon_slot_2_SELECTED = true;
+                	  			pPLAYER->getShip()->weapon_selector.slot_2 = true;
                 	  			printf("pTo_PLAYER->weapon_slot_2_SELECTED -> YES\n");
               				}
               				else
               				{
-                				  pTo_PLAYER->weapon_slot_2_SELECTED = false;
+                				pPLAYER->getShip()->weapon_selector.slot_2 = false;
                 	  			printf("pTo_PLAYER->weapon_slot_2_SELECTED -> NO\n");
               				}
                 	       		 break;
@@ -114,14 +114,14 @@ void KeyEventsInSpace :: getSimpleInputs()
 
            			case sf::Key::Num3:
                		 	{
-              				if (pTo_PLAYER->weapon_slot_3_SELECTED == false)
+              				if (pPLAYER->getShip()->weapon_selector.slot_3 == false)
               				{
-                		  		pTo_PLAYER->weapon_slot_3_SELECTED = true;
+                		  		pPLAYER->getShip()->weapon_selector.slot_3 = true;
                 		  		printf("pTo_PLAYER->weapon_slot_3_SELECTED -> YES\n");
               				}
               				else
               				{
-                		  		pTo_PLAYER->weapon_slot_3_SELECTED = false;
+                		  		pPLAYER->getShip()->weapon_selector.slot_3 = false;
                 		 	 	printf("pTo_PLAYER->weapon_slot_3_SELECTED -> NO\n");
               				}
                 		     	break;
@@ -130,14 +130,14 @@ void KeyEventsInSpace :: getSimpleInputs()
 
           			case sf::Key::Num4:
                 		{
-              				if (pTo_PLAYER->weapon_slot_4_SELECTED == false)
+              				if (pPLAYER->getShip()->weapon_selector.slot_4 == false)
               				{
-                		 		 pTo_PLAYER->weapon_slot_4_SELECTED = true;
+                		 		 pPLAYER->getShip()->weapon_selector.slot_4 = true;
                 		 		 printf("pTo_PLAYER->weapon_slot_4_SELECTED -> YES\n");
              				}
              				else
              				{
-                				 pTo_PLAYER->weapon_slot_4_SELECTED = false;
+                				 pPLAYER->getShip()->weapon_selector.slot_4 = false;
           				         printf("pTo_PLAYER->weapon_slot_4_SELECTED -> NO\n");
               				}
  					break;
@@ -146,14 +146,14 @@ void KeyEventsInSpace :: getSimpleInputs()
 
            			case sf::Key::Num5:
                 		{
-                			if (pTo_PLAYER->weapon_slot_5_SELECTED == false)
+                			if (pPLAYER->getShip()->weapon_selector.slot_5 == false)
              				{
-                		  		pTo_PLAYER->weapon_slot_5_SELECTED = true;
+                		  		pPLAYER->getShip()->weapon_selector.slot_5 = true;
                 		  		printf("pTo_PLAYER->weapon_slot_5_SELECTED -> YES\n");
              				}
              				else
               				{
-                		  		pTo_PLAYER->weapon_slot_5_SELECTED = false;
+                		  		pPLAYER->getShip()->weapon_selector.slot_5 = false;
                 		  		printf("pTo_PLAYER->weapon_slot_5_SELECTED -> NO\n");
               				}
                		 	        break;
@@ -162,22 +162,22 @@ void KeyEventsInSpace :: getSimpleInputs()
 
            			case sf::Key::A:
                 		{ 
-	        		      	if ( (pTo_PLAYER->weapon_slot_1_SELECTED == true) && (pTo_PLAYER->weapon_slot_2_SELECTED == true) && (pTo_PLAYER->weapon_slot_3_SELECTED == true) && (pTo_PLAYER->weapon_slot_4_SELECTED == true) && (pTo_PLAYER->weapon_slot_5_SELECTED == true) )
+	        		      	if ( (pPLAYER->getShip()->weapon_selector.slot_1 == true) && (pPLAYER->getShip()->weapon_selector.slot_2 == true) && (pPLAYER->getShip()->weapon_selector.slot_3 == true) && (pPLAYER->getShip()->weapon_selector.slot_4 == true) && (pPLAYER->getShip()->weapon_selector.slot_5 == true) )
               				{
-                		  		pTo_PLAYER->weapon_slot_1_SELECTED = false;
-                		  		pTo_PLAYER->weapon_slot_2_SELECTED = false;
-                		  		pTo_PLAYER->weapon_slot_3_SELECTED = false;
-                		  		pTo_PLAYER->weapon_slot_4_SELECTED = false;
-                		  		pTo_PLAYER->weapon_slot_5_SELECTED = false;
-                		  		printf("pTo_PLAYER->weapon slot 1,2,3,4,5 -> NO, targets are reset\n");
+                		  		pPLAYER->getShip()->weapon_selector.slot_1 = false;
+                		  		pPLAYER->getShip()->weapon_selector.slot_2 = false;
+                		  		pPLAYER->getShip()->weapon_selector.slot_3 = false;
+                		  		pPLAYER->getShip()->weapon_selector.slot_4 = false;
+                		  		pPLAYER->getShip()->weapon_selector.slot_5 = false;
+                		  		printf("pTo_PLAYER->getShip()->weapon slot 1,2,3,4,5 -> NO, targets are reset\n");
               				}
               				else
               				{
-                		  		pTo_PLAYER->weapon_slot_1_SELECTED = true;
-                		  		pTo_PLAYER->weapon_slot_2_SELECTED = true;
-                		  		pTo_PLAYER->weapon_slot_3_SELECTED = true;
-                		  		pTo_PLAYER->weapon_slot_4_SELECTED = true;
-                		  		pTo_PLAYER->weapon_slot_5_SELECTED = true;
+                		  		pPLAYER->getShip()->weapon_selector.slot_1 = true;
+                		  		pPLAYER->getShip()->weapon_selector.slot_2 = true;
+                		  		pPLAYER->getShip()->weapon_selector.slot_3 = true;
+                		  		pPLAYER->getShip()->weapon_selector.slot_4 = true;
+                		  		pPLAYER->getShip()->weapon_selector.slot_5 = true;
                 		  		printf("pTo_PLAYER->weapon slot 1,2,3,4,5 -> YES\n");
               				}
                 		        break;
@@ -187,14 +187,14 @@ void KeyEventsInSpace :: getSimpleInputs()
           	
 	           		case sf::Key::G:   // GARPUN
 	               	 	{
-	                	        if (pTo_PLAYER->garpun_slot_SELECTED == false)
+	                	        if (pPLAYER->garpun_slot_SELECTED == false)
 	            			{
-	                 			pTo_PLAYER->garpun_slot_SELECTED = true;
+	                 			pPLAYER->garpun_slot_SELECTED = true;
 	                 			printf("garpun_slot_SELECTED -> YES\n");
 	              			}   
 	              			else
 	              			{
-	                 			pTo_PLAYER->garpun_slot_SELECTED = false;
+	                 			pPLAYER->garpun_slot_SELECTED = false;
 	                 			printf("garpun_slot_SELECTED -> NO\n");
 	              			}
 	                       		break;
@@ -203,14 +203,14 @@ void KeyEventsInSpace :: getSimpleInputs()
 
 	           		case sf::Key::R: // RADAR
 	                	{
-	              			if (pTo_PLAYER->radar_range_SHOW == false)
+	              			if (pPLAYER->radar_range_SHOW == false)
 	              			{
-	                			pTo_PLAYER->radar_range_SHOW = true;
+	                			pPLAYER->radar_range_SHOW = true;
 	                 			printf("radar_range_SHOW -> YES\n");
 	             			}
 	              			else
 	              			{
-	                			pTo_PLAYER->radar_range_SHOW = false;
+	                			pPLAYER->radar_range_SHOW = false;
 	                 			printf("radar_range_SHOW -> NO\n");
 	             			}
 	                 	      	break;

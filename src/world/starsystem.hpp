@@ -40,14 +40,14 @@ class StarSystem
     		std::vector<RocketBullet*> ROCKET_pList;
 
 
-		std::vector<Ship*> SHIP_pList;
-    		std::vector<Npc*>  NPC_pList;
+		std::vector<Ship*> SHIP_inSPACE_vec;
+    		std::vector<Npc*>  NPC_inSPACE_vec;
 		// these 5 list below is needed for AI
-    		std::vector<Npc*>  NPC_RANGER_pList;  
-    		std::vector<Npc*>  NPC_WARRIOR_pList;
-    		std::vector<Npc*>  NPC_TRADER_pList;
-    		std::vector<Npc*>  NPC_PIRAT_pList;
-    		std::vector<Npc*>  NPC_DIPLOMAT_pList;
+    		std::vector<Npc*>  NPC_RANGER_inSPACE_vec;  
+    		std::vector<Npc*>  NPC_WARRIOR_inSPACE_vec;
+    		std::vector<Npc*>  NPC_TRADER_inSPACE_vec;
+    		std::vector<Npc*>  NPC_PIRAT_inSPACE_vec;
+    		std::vector<Npc*>  NPC_DIPLOMAT_inSPACE_vec;
 
     
     		StarSystem();
@@ -86,22 +86,24 @@ class StarSystem
     		void fireEvents_FALSE(int timer);
 
     		//// TRANSITION
-                bool addStar(Star*);
-                bool addPlanet(Planet*);
-    		bool addAsteroid(Asteroid*);
-    		bool addShip(Ship*);
-    		bool addNpc(Npc*);
-    		bool addMineral(Mineral*);
-    		bool addContainer(Container*);
-    		bool addRocket(RocketBullet*);
+                void addStar(Star*);
+                void addPlanet(Planet*);
+    		void addAsteroid(Asteroid*);
+    		void addShipToSpace(Ship*);
+    		void addShipToPlanet(Ship*, Planet*);
+    		void addNpcToSpace(Npc*);
+    		void addNpcToPlanet(Npc*, Planet*);
+    		void addMineral(Mineral*);
+    		void addContainer(Container*);
+    		void addRocket(RocketBullet*);
     		
-    		bool addExplosionEffect(ExplosionEffect*);
-    		bool addShockWaveEffect(ShockWaveEffect*);
-    		bool addLazerTraceEffect(LazerTraceEffect*);
-    		bool addDamageEffect(DamageEffect*);
+    		void addExplosionEffect(ExplosionEffect*);
+    		void addShockWaveEffect(ShockWaveEffect*);
+    		void addLazerTraceEffect(LazerTraceEffect*);
+    		void addDamageEffect(DamageEffect*);
    		
-    		bool addDistantNebula(DistantNebulaBgEffect*);
-    		bool addDistantStar(DistantStarBgEffect*);
+    		void addDistantNebula(DistantNebulaBgEffect*);
+    		void addDistantStar(DistantStarBgEffect*);
                 
     		bool removeShipById(int _id);    
     		bool removeNpc(int _id, int _race_id, int _subtype_id);  

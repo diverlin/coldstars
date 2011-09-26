@@ -24,8 +24,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class CommonForModules
 {
     	public:    				
-          	Rect rect;
-    
       		CommonForModules();
       		void CommonForModules_init(int _subtype_id, TextureOb* _texOb);
       		~CommonForModules();
@@ -34,11 +32,8 @@ class CommonForModules
       		unsigned int getId()      const;
     		unsigned int getType()    const;
     		unsigned int getSubType() const;
-    		
     		unsigned int getMass() const;
-     		int mass;   
-    		
-      		TextureOb* getTexOb() const;
+    		TextureOb* getTexOb() const;
 
 		// other methods	
 		void updateInfo();
@@ -57,10 +52,14 @@ class CommonForModules
            	void _renderFrames(Rect slot_rect);
            	
 	protected:
-     		InfoTable info;  // make protected	
+                int mass;   
+                
+                InfoTable info;  	
      		
      		void addCommonInfo();
  		void virtual addUniqueInfo();
+                
+                
 };
 
 #endif

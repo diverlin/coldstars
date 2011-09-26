@@ -23,19 +23,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Shop
 {
-    public: 
-        TextureOb* pTo_bg_texOb;
-
-        Shop(TextureOb* _pTo_bg_texOb);
-        ~Shop();
+        public: 
+                Shop(TextureOb* _texOb_background);
+                ~Shop();
                 
-        void linkTexture();
-        void unlinkTexture();
-
-        void renderBackground();
-        void renderInternals();
-
-        void render();
+                void render();
+                
+        private:
+                TextureOb* texOb_background;
+                
+                void renderBackground() const;
+                void renderInternals() const;
+        
 };
 
 #endif

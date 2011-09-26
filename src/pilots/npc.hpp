@@ -21,9 +21,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define NPC_H
 
 
+
 class Npc 
 {
    	public:
+   	   	void setInSpace(bool);
+   		void setAlive(bool);			
+   		void setStarSystem(StarSystem*);
+   		void setKosmoport(Kosmoport*);
+   		void setLand(Land*);
+   		void setScanTarget(Ship*);
+   		void setPlaceTypeId(int);
+   		   		
    		bool getAlive() const;
    		int getId() const;
    		int getSubTypeId() const;
@@ -33,14 +42,10 @@ class Npc
    		Ship* getShip();
    		Skill* getSkill();
    		Ship* getScanShip();
+   		int getPlaceTypeId() const;
    		   		   	   
-   		void setInSpace(bool);
-   		void setAlive(bool);			
-   		void setStarSystem(StarSystem*);
-   		void setKosmoport(Kosmoport*);
-   		void setLand(Land*);
-   		void setShip(Ship*);
-   		void setScanTarget(Ship*);
+
+   		void bind(Ship*);
 
 		void addCredits(int);
 		void removeCredits(int);
@@ -207,7 +212,9 @@ class Npc
           	bool launchingEvent();
      		//// docking/launching
      		     		
-     		Ship* scanShip;      		   	
+     		Ship* scanShip;
+     		
+     		int place_type_id;
 };
 
 #endif 

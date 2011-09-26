@@ -21,23 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 ShipInternal :: ShipInternal()
 {
-     pTo_increment_attack_button   = NULL;  
-     pTo_decrement_attack_button   = NULL;  
-                
-     pTo_increment_defence_button  = NULL;  
-     pTo_decrement_defence_button  = NULL;  
-        
-     pTo_increment_leader_button   = NULL;  
-     pTo_decrement_leader_button   = NULL; 
-      
-     pTo_increment_trader_button   = NULL;  
-     pTo_decrement_trader_button   = NULL; 
-    
-     pTo_increment_technic_button  = NULL;  
-     pTo_decrement_technic_button  = NULL; 
-     
-     pTo_increment_diplomat_button = NULL;  
-     pTo_decrement_diplomat_button = NULL;
+        createControlSkillButtons();
 }
 
 ShipInternal :: ~ShipInternal()
@@ -46,287 +30,181 @@ ShipInternal :: ~ShipInternal()
 
 void ShipInternal :: bindShip(Ship* _ship)
 {
-     	ship = _ship;
-}
-
-void ShipInternal :: bindSkill(Skill* _skill)
-{
-     	skill = _skill;
-     	createControlSkillButtons();
+     	ship =  _ship;
+        skill = ship->getNpc()->getSkill();
 }
 
 void ShipInternal :: createControlSkillButtons()
 {
-     int x = 10; //self.korpus.kontur_rect.right
-     int y = 50; //self.korpus.kontur_rect.centery
-     int w = 20;  //skill_w
+     	int x = 10; //self.korpus.kontur_rect.right
+     	int y = 50; //self.korpus.kontur_rect.centery
+     	int w = 20;  //skill_w
 
-     TextureOb* pTo_plus_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
-     TextureOb* pTo_minus_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(BLUE_COLOR_ID);
+     	TextureOb* pTo_plus_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
+     	TextureOb* pTo_minus_texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(BLUE_COLOR_ID);
 
-     pTo_increment_attack_button   = new Button(pTo_plus_texOb, INCREMENT_BUTTON_ID, x, y - w,   w, w, "");  
-     pTo_decrement_attack_button   = new Button(pTo_minus_texOb, DECREMENT_BUTTON_ID, x, y - 2*w, w, w, "");  
-                
-     pTo_increment_defence_button  = new Button(pTo_plus_texOb, INCREMENT_BUTTON_ID, x + w, y - w,   w, w, "");  
-     pTo_decrement_defence_button  = new Button(pTo_minus_texOb, DECREMENT_BUTTON_ID, x + w, y - 2*w, w, w, "");  
-        
-     pTo_increment_leader_button   = new Button(pTo_plus_texOb, INCREMENT_BUTTON_ID, x + 2*w, y - w,   w, w, "");  
-     pTo_decrement_leader_button   = new Button(pTo_minus_texOb, DECREMENT_BUTTON_ID, x + 2*w, y - 2*w, w, w, ""); 
-      
-     pTo_increment_trader_button   = new Button(pTo_plus_texOb, INCREMENT_BUTTON_ID, x + 3*w, y - w,   w, w, "");  
-     pTo_decrement_trader_button   = new Button(pTo_minus_texOb, DECREMENT_BUTTON_ID, x + 3*w, y - 2*w, w, w, ""); 
+     	increment_attack_button   = new Button(pTo_plus_texOb, INCREMENT_ATTACK_BUTTON_ID, x, y - w,   w, w, "");  
+     	button_pList.push_back(increment_attack_button);
+     	decrement_attack_button   = new Button(pTo_minus_texOb, DECREMENT_ATTACK_BUTTON_ID, x, y - 2*w, w, w, "");  
+     	button_pList.push_back(decrement_attack_button);
+                     
+     	increment_defence_button  = new Button(pTo_plus_texOb, INCREMENT_DEFENCE_BUTTON_ID, x + w, y - w,   w, w, "");  
+     	button_pList.push_back(increment_defence_button);
+     	decrement_defence_button  = new Button(pTo_minus_texOb, DECREMENT_DEFENCE_BUTTON_ID, x + w, y - 2*w, w, w, "");  
+     	button_pList.push_back(decrement_defence_button);
+     	        
+     	increment_leader_button   = new Button(pTo_plus_texOb, INCREMENT_LEADER_BUTTON_ID, x + 2*w, y - w,   w, w, "");  
+     	button_pList.push_back(increment_leader_button);
+     	decrement_leader_button   = new Button(pTo_minus_texOb, DECREMENT_LEADER_BUTTON_ID, x + 2*w, y - 2*w, w, w, ""); 
+     	button_pList.push_back(decrement_leader_button);
+     	      
+     	increment_trader_button   = new Button(pTo_plus_texOb, INCREMENT_TRADER_BUTTON_ID, x + 3*w, y - w,   w, w, "");  
+     	button_pList.push_back(increment_trader_button);
+     	decrement_trader_button   = new Button(pTo_minus_texOb, DECREMENT_TRADER_BUTTON_ID, x + 3*w, y - 2*w, w, w, ""); 
+     	button_pList.push_back(decrement_trader_button);
     
-     pTo_increment_technic_button  = new Button(pTo_plus_texOb, INCREMENT_BUTTON_ID, x + 4*w, y - w,   w, w, "");  
-     pTo_decrement_technic_button  = new Button(pTo_minus_texOb, DECREMENT_BUTTON_ID, x + 4*w, y - 2*w, w, w, ""); 
+     	increment_technic_button  = new Button(pTo_plus_texOb, INCREMENT_TECHNIC_BUTTON_ID, x + 4*w, y - w,   w, w, "");  
+     	button_pList.push_back(increment_technic_button);
+     	decrement_technic_button  = new Button(pTo_minus_texOb, DECREMENT_TECHNIC_BUTTON_ID, x + 4*w, y - 2*w, w, w, ""); 
+     	button_pList.push_back(decrement_technic_button);
      
-     pTo_increment_diplomat_button = new Button(pTo_plus_texOb, INCREMENT_BUTTON_ID, x + 5*w, y - w,   w, w, "");  
-     pTo_decrement_diplomat_button = new Button(pTo_minus_texOb, DECREMENT_BUTTON_ID, x + 5*w, y - 2*w, w, w, "");
+     	increment_diplomat_button = new Button(pTo_plus_texOb, INCREMENT_DIPLOMAT_BUTTON_ID, x + 5*w, y - w,   w, w, "");  
+     	button_pList.push_back(increment_diplomat_button);
+     	decrement_diplomat_button = new Button(pTo_minus_texOb, DECREMENT_DIPLOMAT_BUTTON_ID, x + 5*w, y - 2*w, w, w, "");
+        button_pList.push_back(decrement_diplomat_button);     
 }
 
 void ShipInternal :: manageSkill(bool allow_full_control)
 {
-     bool CURSOR_INTERSECT_OBJECT = false;
+     	int mxvp = g_MOUSE_POS_X;
+     	int myvp = g_VIEW_HEIGHT - g_MOUSE_POS_Y;         
+     	int lmb  = g_MOUSE_LEFT_BUTTON;
 
-     int mxvp = g_MOUSE_POS_X;
-     int myvp = g_VIEW_HEIGHT - g_MOUSE_POS_Y;         
-     int lmb  = g_MOUSE_LEFT_BUTTON;
-
-
-     //### ATTACK
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_increment_attack_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           if (lmb == true)
-           {
-               skill->incrementAttack();
-           }
-        }
-     }
-
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_decrement_attack_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           if (lmb == true)
-           {
-               skill->decrementAttack();
-           }
-        }
-     }
-     //### ATTACK
-
-
-     //### DEFENCE
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_increment_defence_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           if (lmb == true)
-           {
-               skill->incrementDefence();
-           }
-        }
-     }
-
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_decrement_defence_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           if (lmb == true)
-           {
-               skill->decrementDefence();
-           }
-        }
-     }
-     //### DEFENCE
-
-
-     //### LEADER 
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_increment_leader_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           if (lmb == true)
-           {
-               skill->incrementLeader();
-           }
-        }
-     }
-
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_decrement_leader_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           if (lmb == true)
-           {
-               skill->decrementLeader();
-           }
-        }
-     }
-     //### LEADER 
-
-
-
-     //### TRADER 
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_increment_trader_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           if (lmb == true)
-           {
-               skill->incrementTrader();
-           }
-        }
-     }
-
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_decrement_trader_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           if (lmb == true)
-           {
-               skill->decrementTrader();
-           }
-        }
-     }
-     //### TRADER 
-
-
-
-     //### TECHNIC 
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_increment_technic_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           if (lmb == true)
-           {
-               skill->incrementTechnic();
-           }
-        }
-     }
-
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_decrement_technic_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           if (lmb == true)
-           {
-               skill->decrementTechnic();
-           }
-        }
-     }
-     //### TECHNIC 
-
-
-
-     //### DIPLOMAT 
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_increment_diplomat_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           if (lmb == true)
-           {
-               skill->incrementDiplomat();
-           }
-        }
-     }
-
-     if (CURSOR_INTERSECT_OBJECT == false)
-     { 
-        if (pTo_decrement_diplomat_button->interaction(mxvp, myvp) == true)
-        {
-           CURSOR_INTERSECT_OBJECT = true;
-           if (lmb == true)
-           {
-               skill->decrementDiplomat();
-           }
-        }
-     }
-     //### DIPLOMAT 
+	for (unsigned int i = 0; i < button_pList.size(); i++)
+	{
+		if (button_pList[i]->interaction(mxvp, myvp) == true)
+		{
+		       	if (lmb == true)
+           		{
+           		   	int buttonSubTypeId = button_pList[i]->getSubTypeId();
+           		   	
+           		   	if (buttonSubTypeId == INCREMENT_ATTACK_BUTTON_ID)
+           		   	      	skill->incrementAttack();
+           		        if (buttonSubTypeId == DECREMENT_ATTACK_BUTTON_ID)
+           		   	      	skill->decrementAttack();
+           		   	      	
+           		   	if (buttonSubTypeId == INCREMENT_DEFENCE_BUTTON_ID)
+           		   	      	skill->incrementDefence();
+           		        if (buttonSubTypeId == DECREMENT_DEFENCE_BUTTON_ID)
+           		   	      	skill->decrementDefence();
+           		   	      	
+           		   	if (buttonSubTypeId == INCREMENT_LEADER_BUTTON_ID)
+           		   	      	skill->incrementLeader();
+           		        if (buttonSubTypeId == DECREMENT_LEADER_BUTTON_ID)
+           		   	      	skill->decrementLeader();
+           		   	      	
+           		   	if (buttonSubTypeId == INCREMENT_TRADER_BUTTON_ID)
+           		   	      	skill->incrementTrader();
+           		        if (buttonSubTypeId == DECREMENT_TRADER_BUTTON_ID)
+           		   	      	skill->decrementTrader();
+           		   	      	
+           		   	if (buttonSubTypeId == INCREMENT_TECHNIC_BUTTON_ID)
+           		   	      	skill->incrementTechnic();
+           		        if (buttonSubTypeId == DECREMENT_TECHNIC_BUTTON_ID)
+           		   	      	skill->decrementTechnic();
+           		   	      	
+           		   	if (buttonSubTypeId == INCREMENT_DIPLOMAT_BUTTON_ID)
+           		   	      	skill->incrementDiplomat();
+           		        if (buttonSubTypeId == DECREMENT_DIPLOMAT_BUTTON_ID)
+           		   	      	skill->decrementDiplomat();           		   	
+           		}
+		}
+	}
 }
 
 void ShipInternal :: renderSkill()
 {
-     int w = 15;
-     int h = 15;
+    	int w = 15;
+     	int h = 15;
 
-     for (int i = 0; i < skill->getAttack(); i++) 
-     { 
-         Rect tmp_rect = Rect(pTo_increment_attack_button->getRect().getCenter().x - 10, 
-         		      pTo_increment_attack_button->getRect().getCenter().y + i*h, 
-         		      w, h);
-         drawTexturedRect(pTo_increment_attack_button->getTexOb()->texture, tmp_rect, -1.0);
-     }
-     pTo_increment_attack_button->render();
-     pTo_decrement_attack_button->render();
-                    
-     for (int i = 0; i < skill->getDefence(); i++) 
-     { 
-         Rect tmp_rect = Rect(pTo_increment_defence_button->getRect().getCenter().x - 10, 
-         		      pTo_increment_defence_button->getRect().getCenter().y + i*h, 
-         		      w, h);
-         drawTexturedRect(pTo_increment_defence_button->getTexOb()->texture, tmp_rect, -1.0);
-     }
-     pTo_increment_defence_button->render();
-     pTo_decrement_defence_button->render();
+ 	for (unsigned int bi = 0; bi < button_pList.size(); bi++)
+	{
+		button_pList[bi]->render();
 
-     for (int i = 0; i < skill->getLeader(); i++) 
-     { 
-         Rect tmp_rect = Rect(pTo_increment_leader_button->getRect().getCenter().x - 10, 
-         		      pTo_increment_leader_button->getRect().getCenter().y + i*h, 
-         		      w, h);
-         drawTexturedRect(pTo_increment_leader_button->getTexOb()->texture, tmp_rect, -1.0);
-     }
-     pTo_increment_leader_button->render();
-     pTo_decrement_leader_button->render();
-        
-     for (int i = 0; i < skill->getTrader(); i++) 
-     { 
-         Rect tmp_rect = Rect(pTo_increment_trader_button->getRect().getCenter().x - 10, 
-         		      pTo_increment_trader_button->getRect().getCenter().y + i*h, 
-         		      w, h);
-         drawTexturedRect(pTo_increment_trader_button->getTexOb()->texture, tmp_rect, -1.0);
-     }
-     pTo_increment_trader_button->render();
-     pTo_decrement_trader_button->render();
-        
-     for (int i = 0; i < skill->getTechnic(); i++) 
-     { 
-         Rect tmp_rect = Rect(pTo_increment_technic_button->getRect().getCenter().x - 10, 
-         		      pTo_increment_technic_button->getRect().getCenter().y + i*h, 
-         		      w, h);
-         drawTexturedRect(pTo_increment_technic_button->getTexOb()->texture, tmp_rect, -1.0);
-     }
-     pTo_increment_technic_button->render();
-     pTo_decrement_technic_button->render();
-                    
-     for (int i = 0; i < skill->getDiplomat(); i++) 
-     { 
-         Rect tmp_rect = Rect(pTo_increment_diplomat_button->getRect().getCenter().x - 10, 
-         		      pTo_increment_diplomat_button->getRect().getCenter().y + i*h, 
-         		      w, h);
-         drawTexturedRect(pTo_increment_diplomat_button->getTexOb()->texture, tmp_rect, -1.0);
-     }
-     pTo_increment_diplomat_button->render();
-     pTo_decrement_diplomat_button->render();
+		int buttonSubTypeId = button_pList[bi]->getSubTypeId();		
+
+		if (buttonSubTypeId == INCREMENT_ATTACK_BUTTON_ID)
+		{
+		     	for (int i = 0; i < skill->getAttack(); i++) 
+     			{ 
+         			Rect tmp_rect = Rect(button_pList[bi]->getRect().getCenter().x - 10, 
+         		      			     button_pList[bi]->getRect().getCenter().y + i*h, 
+         		      			     w, h);
+         		      			     
+         			drawTexturedRect(button_pList[bi]->getTexOb()->texture, tmp_rect, -1.0);
+     			}
+ 
+		}
+          		   	      	
+		if (buttonSubTypeId == INCREMENT_DEFENCE_BUTTON_ID)
+		{
+		     	for (int i = 0; i < skill->getDefence(); i++) 
+     			{ 
+         			Rect tmp_rect = Rect(button_pList[bi]->getRect().getCenter().x - 10, 
+         		      			     button_pList[bi]->getRect().getCenter().y + i*h, 
+         		      			     w, h);
+         			drawTexturedRect(button_pList[bi]->getTexOb()->texture, tmp_rect, -1.0);
+     			}
+		}
+
+	   	if (buttonSubTypeId == INCREMENT_LEADER_BUTTON_ID)
+	   	{
+	   	     	for (int i = 0; i < skill->getLeader(); i++) 
+     			{ 
+         			Rect tmp_rect = Rect(button_pList[bi]->getRect().getCenter().x - 10, 
+         		      			     button_pList[bi]->getRect().getCenter().y + i*h, 
+         		      			     w, h);
+         			drawTexturedRect(button_pList[bi]->getTexOb()->texture, tmp_rect, -1.0);
+     			}
+	   	
+	   	}
+
+	   	if (buttonSubTypeId == INCREMENT_TRADER_BUTTON_ID)
+	   	{
+	   	     	for (int i = 0; i < skill->getTrader(); i++) 
+     			{ 
+         			Rect tmp_rect = Rect(button_pList[bi]->getRect().getCenter().x - 10, 
+         		     			     button_pList[bi]->getRect().getCenter().y + i*h, 
+         		     			     w, h);
+         			drawTexturedRect(button_pList[bi]->getTexOb()->texture, tmp_rect, -1.0);
+    			}
+	   	
+	   	}
+
+	   	if (buttonSubTypeId == INCREMENT_TECHNIC_BUTTON_ID)
+	   	{
+	   	     	for (int i = 0; i < skill->getTechnic(); i++) 
+     			{ 
+         			Rect tmp_rect = Rect(button_pList[bi]->getRect().getCenter().x - 10, 
+         		      			     button_pList[bi]->getRect().getCenter().y + i*h, 
+         		      			     w, h);
+         			drawTexturedRect(button_pList[bi]->getTexOb()->texture, tmp_rect, -1.0);
+     			}     
+	   	}
+
+	   	if (buttonSubTypeId == INCREMENT_DIPLOMAT_BUTTON_ID)
+	   	{
+	   		for (int i = 0; i < skill->getDiplomat(); i++) 
+     			{ 
+         			Rect tmp_rect = Rect(button_pList[bi]->getRect().getCenter().x - 10, 
+         		      			     button_pList[bi]->getRect().getCenter().y + i*h, 
+         		     			     w, h);
+         			drawTexturedRect(button_pList[bi]->getTexOb()->texture, tmp_rect, -1.0);
+     			}
+	   	}
+
+	}
 }
-
-
-
-
-
 
 
 
@@ -336,11 +214,16 @@ void ShipInternal :: renderSkill()
 
 void ShipInternal :: resetSlotsRenderInfoFlag()
 {
-    	for(std::vector<ItemSlot*>::iterator it = ship->slot_total_pList.begin(); it != ship->slot_total_pList.end(); it++)
-    	{ 
-       		(*it)->setCursoredStatus(false);
-    	}
+    	//for(std::vector<ItemSlot*>::iterator it = ship->slot_total_pList.begin(); it != ship->slot_total_pList.end(); it++)
+    	//{ 
+       		//(*it)->setCursoredStatus(false);
+    	//}
    
+   	for(unsigned int i = 0; i < ship->slot_total_pList.size(); i++)
+	{ 
+		ship->slot_total_pList[i]->setCursoredStatus(false);
+	}
+	
     	ship->gate_slot.setCursoredStatus(false);
 }
 
@@ -351,101 +234,17 @@ void ShipInternal :: resetSlotsRenderInfoFlag()
 
 void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
 {
-    bool lmb = g_MOUSE_LEFT_BUTTON; 
-    bool rmb = g_MOUSE_RIGHT_BUTTON; 
+    	bool lmb = g_MOUSE_LEFT_BUTTON; 
+    	bool rmb = g_MOUSE_RIGHT_BUTTON; 
 
-    bool cursor_has_target = false;
+    	bool cursor_has_target = false;
 
-    Store* pTo_store = NULL;     // move to ship class             
-    if (in_store == true) 
-       pTo_store = ship->getNpc()->getKosmoport()->pTo_store;    // this is used only for player
+    	Store* pTo_store = NULL;     // move to ship class             
+    	if (in_store == true) 
+       		pTo_store = ship->getNpc()->getKosmoport()->getStore();    // this is used only for player
 
 
-    resetSlotsRenderInfoFlag();
-
-    //// WEAPON SLOT
-    //for (unsigned int i = 0; i < pTo_ship->weapon_slot_pList.size(); i++)
-    //{ 
-        //if (pTo_ship->weapon_slot_pList[i]->interaction(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y)) == true)
-        //{  
-            //pTo_ship->weapon_slot_pList[i]->is_CURSORED = true;
-            //cursor_has_target = true;
-  
-            //if (pTo_ship->weapon_slot_pList[i]->is_EQUIPED == true)      
-            //{   // SLOT IS EQUIPED
-                //if ( (lmb == true) && (allow_full_control == true) && (in_store == false) ) 
-                //{
-                    //if (pTo_CURSOR->pTo_otsec_slot->is_EQUIPED == false)
-                    //{   // take item 
-                        //if (pTo_ship->weapon_slot_pList[i]->item_subtype_id == LAZER_ID)
-                        //{
-                            //pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->weapon_slot_pList[i]->pTo_lazerEquipment);
-                            //pTo_ship->weapon_slot_pList[i]->removeLazerEquipment();
-                        //}
-
-                        //if (pTo_ship->weapon_slot_pList[i]->item_subtype_id == ROCKET_ID)
-                        //{
-                            //pTo_CURSOR->pTo_otsec_slot->insertItem(pTo_ship->weapon_slot_pList[i]->pTo_rocketEquipment);
-                            //pTo_ship->weapon_slot_pList[i]->removeRocketEquipment();
-                        //} 
-                    //}
-                    //else  
-                    //{   // merge module with item                    
-                        //if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == LAZER_ID)
-                        //{
-                            //if (pTo_ship->weapon_slot_pList[i]->item_subtype_id == LAZER_ID)
-                            //{
-                                //if (pTo_ship->weapon_slot_pList[i]->pTo_lazerEquipment->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_lazerModule) == true)
-                                //{
-                                    //pTo_CURSOR->pTo_otsec_slot->removeItem();
-                                //}    
-                            //}
-                        //}   
-
-                        //if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ROCKET_ID)
-                        //{
-                            //if (pTo_ship->weapon_slot_pList[i]->item_subtype_id == ROCKET_ID)
-                            //{
-                                //if (pTo_ship->weapon_slot_pList[i]->pTo_rocketEquipment->insertModule(pTo_CURSOR->pTo_otsec_slot->pTo_rocketModule) == true)
-                                //{
-                                    //pTo_CURSOR->pTo_otsec_slot->removeItem();
-                                //}    
-                            //}
-                        //}                         
-                    //}
-                //}
-                
-                //if ( (lmb == true) && (in_store == true) )
-                //{   // sell item
-                    //int earn_price = pTo_store->buyWeaponSlotItem(pTo_ship->weapon_slot_pList[i]);
-                    //pTo_PLAYER->pTo_npc->credits += earn_price;
-                //} 
-            //}  
-
-            
-            //else                              
-            //{   // SLOT IS EMPTY     
-                //if ( (lmb == true) && (allow_full_control == true) && (in_store == false) )
-                //{
-                    //if (pTo_CURSOR->pTo_otsec_slot->is_EQUIPED == true)
-                    //{   // insert item 
-                        //if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == LAZER_ID)
-                        //{
-                            //pTo_ship->weapon_slot_pList[i]->insertLazerEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_lazerEquipment);
-                            //pTo_CURSOR->pTo_otsec_slot->removeItem();
-                        //}
-                        //if (pTo_CURSOR->pTo_otsec_slot->item_subtype_id == ROCKET_ID)
-                        //{
-                            //pTo_ship->weapon_slot_pList[i]->insertRocketEquipment(pTo_CURSOR->pTo_otsec_slot->pTo_rocketEquipment);
-                            //pTo_CURSOR->pTo_otsec_slot->removeItem();
-                        //}                     
-                    //} 
-                //}    
-            //}
-
-           
-        //}
-    //}
+    	resetSlotsRenderInfoFlag();
 
 
 
@@ -770,7 +569,7 @@ void ShipInternal :: mouseControl(bool allow_full_control, bool in_store)
 			else if ( (lmb == true) && (in_store == true) )
 			{
 				int earn_price = pTo_store->buyOtsecSlotItem(ship->slot_total_pList[i]);
-				pTo_PLAYER->pTo_npc->addCredits(earn_price);
+				pPLAYER->getPilot()->addCredits(earn_price);
 			} 
 
 
@@ -876,7 +675,7 @@ void ShipInternal :: renderItemInfo()
 				ship->slot_total_pList[i]->renderItemInfo();
 				break;
 			}
-		}	
+		}
 	}
 }
 
@@ -886,11 +685,6 @@ void ShipInternal :: renderItemInfo()
 
 void ShipInternal :: renderInternaly()
 {
-	glLoadIdentity();    // !!!!
-
-	glDisable(GL_DEPTH_TEST);
-	glEnable(GL_BLEND);
-
 	drawTexturedRect(ship->texOb->texture, ship->kontur_rect, -1.0);
 
 	for(unsigned int i = 0; i < ship->slot_total_pList.size(); i++)

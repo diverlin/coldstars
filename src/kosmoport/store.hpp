@@ -23,79 +23,66 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Store
 {
-    public:
-        TextureOb* pTo_bg_texOb; 
-        TextureOb* pTo_slot_texOb; 
+        public:
+                Store(TextureOb* _texOb_background, TextureOb* _texOb_slot);                      
+                ~Store();
 
-        int korpus_num;      
-        int lazer_num;       
-        int rocket_num;      
-        int torped_num;      
-        int radar_num;       
-        int grapple_num;     
-        int drive_num;       
-        int protector_num;   
-        int bak_num;         
-        int droid_num;       
-        int scaner_num;      
-        int freezer_num;     
-        int energyBlock_num; 
+                ItemSlot* getEmptySlot();
+                                                        void createSlots();
+                                                        void initItemsGenerator();
+                void addKorpusItem(Ship*);
+                void addLazerEquipment(LazerEquipment*);
+                void addRocketEquipment(RocketEquipment*);
+                //void addTorpedItem(     int _race_id, int _revision_id);
+                void addRadarEquipment(RadarEquipment*);
+                void addGrappleEquipment(GrappleEquipment*);
+                void addDriveEquipment(DriveEquipment*);
+                void addProtectorEquipment(ProtectorEquipment*);
+                void addBakEquipment(BakEquipment*);
+                void addDroidEquipment(DroidEquipment*);
+                void addScanerEquipment(ScanerEquipment*);
+                void addFreezerEquipment(FreezerEquipment*);
+                void addEnergizerEquipment(EnergizerEquipment*);
 
-        std::vector<ItemSlot*> slot_pList;
+                int buyWeaponSlotItem(ItemSlot*); 
+                int buyDriveSlotItem(ItemSlot*); 
+                int buyBakSlotItem(ItemSlot*); 
+                int buyRadarSlotItem(ItemSlot*); 
+                int buyScanerSlotItem(ItemSlot*); 
+                int buyEnergizerSlotItem(ItemSlot*); 
+                int buyGrappleSlotItem(ItemSlot*); 
+                int buyProtectorSlotItem(ItemSlot*); 
+                int buyDroidSlotItem(ItemSlot*); 
+                int buyFreezerSlotItem(ItemSlot*); 
 
+                int buyOtsecSlotItem(ItemSlot*); 
 
-        Store(TextureOb* _pTo_bg_texOb, TextureOb* _pTo_slot_texOb);
-        ~Store();
-
-        void linkTexture();
-        void unlinkTexture();
-
-        void createSlots();
-
-        ItemSlot* return_pToEmptySlot();
-
-        void initItemsGenerator();
-
-        void addKorpusItem(Ship*     _pTo_ship);
-        void addLazerEquipment(LazerEquipment*         _pTo_lazerEquipment);
-        void addRocketEquipment(RocketEquipment*       _pTo_rocketEquipment);
-        //void addTorpedItem(     int _race_id, int _revision_id);
-        void addRadarEquipment(RadarEquipment*         _pTo_radarEquipment);
-        void addGrappleEquipment(GrappleEquipment*     _pTo_grappleEquipment);
-        void addDriveEquipment(DriveEquipment*         _pTo_driveEquipment);
-        void addProtectorEquipment(ProtectorEquipment* _pTo_protectorEquipment);
-        void addBakEquipment(BakEquipment*             _pTo_bakEquipment);
-        void addDroidEquipment(DroidEquipment*         _pTo_droid);
-        void addScanerEquipment(ScanerEquipment*       _pTo_scaner);
-        void addFreezerEquipment(FreezerEquipment*     _pTo_freezer);
-        void addEnergizerEquipment(EnergizerEquipment* _pTo_energyBlockItem);
-
-
-        void manageInitItems();
-       
-        //void soldItem(ob, slot);
-        //void buyItem(ob, slot);
-        //void buyKorpus(ob, slot);
-    
-        int buyWeaponSlotItem(ItemSlot*    pTo_weapon_slot); 
-        int buyDriveSlotItem(ItemSlot*     pTo_drive_slot); 
-        int buyBakSlotItem(ItemSlot*       pTo_bak_slot); 
-        int buyRadarSlotItem(ItemSlot*     pTo_radar_slot); 
-        int buyScanerSlotItem(ItemSlot*    pTo_scaner_slot); 
-        int buyEnergizerSlotItem(ItemSlot* pTo_energizer_slot); 
-        int buyGrappleSlotItem(ItemSlot*   pTo_grapple_slot); 
-        int buyProtectorSlotItem(ItemSlot* pTo_protector_slot); 
-        int buyDroidSlotItem(ItemSlot*     pTo_droid_slot); 
-        int buyFreezerSlotItem(ItemSlot*   pTo_freezer_slot); 
-
-        int buyOtsecSlotItem(ItemSlot* pTo_otsec_slot); 
-
-        void mouseControl();
-             void resetSlotsRenderInfoFlag();
+                void mouseControl();
+                void resetSlotsRenderInfoFlag();
         
-        void renderBackground();
-        void renderInternals();
-        void renderItemInfo();
+                void renderBackground();
+                void renderInternals();
+                void renderItemInfo();
+                
+        public:
+                TextureOb* texOb_background; 
+                TextureOb* texOb_slot; 
+                
+                int korpus_num;      
+                int lazer_num;       
+                int rocket_num;      
+                int torped_num;      
+                int radar_num;       
+                int grapple_num;     
+                int drive_num;       
+                int protector_num;   
+                int bak_num;         
+                int droid_num;       
+                int scaner_num;      
+                int freezer_num;     
+                int energyBlock_num; 
+                
+                std::vector<ItemSlot*> slot_pList;
 };
            
 #endif

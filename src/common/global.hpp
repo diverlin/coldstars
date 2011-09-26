@@ -19,8 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #ifndef GLOBAL_H
 #define GLOBAL_H
-    
-    
+        
 // Create the main window
 int g_VIEW_WIDTH = 640;
 int g_VIEW_HEIGHT = g_VIEW_WIDTH*600/800;
@@ -46,7 +45,7 @@ int g_TIMER;
 int TURN_TIME = 150;  //turn time, depends on game fps
 int TURN_COUNT = 0; 
          
-sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.1.26 (SFML/C++)");
+sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.1.27 (SFML/C++)");
 sf::Font g_FONT;
 
 sf::Clock g_CLOCK;
@@ -63,7 +62,7 @@ class TextureManager;
 //TextureManager g_TEXTURE_MANAGER;// = TextureManager();
 
 class PlayerInstance;
-PlayerInstance* pTo_PLAYER;
+PlayerInstance* pPLAYER;
 
 class Cursor;
 Cursor* pTo_CURSOR;
@@ -83,4 +82,6 @@ GLuint g_COMBINE_PROGRAM;
 GLuint g_MULTITEX_PROGRAM;
 
 int USE_MODERN_HW = true;
-#endif /* GLOBAL_H */
+
+
+#endif 

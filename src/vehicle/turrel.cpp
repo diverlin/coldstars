@@ -111,7 +111,7 @@ bool Turrel :: isTargetAchievable()
          	return false;
     	}  
 
-    	float dist_to_target = distBetweenCenters(slot->getShip()->getPoints(), (*pTo_target_pos_x), (*pTo_target_pos_y));
+    	float dist_to_target = distBetweenCenters(slot->getShip()->getPoints()->getCenter(), (*pTo_target_pos_x), (*pTo_target_pos_y));
                                                
     	if (dist_to_target > slot->getItemRadius())
     	{
@@ -299,7 +299,7 @@ int Turrel :: returnTargetId()
 }
 
 
-void Turrel :: setShipTarget(Ship* _ship)
+void Turrel :: setTarget(Ship* _ship)
 {
      	target_ship = _ship;
      	target_type_id = target_ship->type_id;
@@ -311,7 +311,7 @@ void Turrel :: setShipTarget(Ship* _ship)
      	has_TARGET = true;
 }
 
-void Turrel :: setAsteroidTarget(Asteroid* _asteroid)
+void Turrel :: setTarget(Asteroid* _asteroid)
 {
      	target_asteroid = _asteroid;
      	target_type_id = target_asteroid->getType();
@@ -323,7 +323,7 @@ void Turrel :: setAsteroidTarget(Asteroid* _asteroid)
      	has_TARGET = true;
 }
 
-void Turrel :: setMineralTarget(Mineral* _mineral)
+void Turrel :: setTarget(Mineral* _mineral)
 {
      	target_mineral = _mineral;
      	target_type_id = target_mineral->type_id;
@@ -335,7 +335,7 @@ void Turrel :: setMineralTarget(Mineral* _mineral)
      	has_TARGET = true;
 }
 
-void Turrel :: setContainerTarget(Container* _container)
+void Turrel :: setTarget(Container* _container)
 {
      	target_container = _container;
      	target_type_id = target_container->type_id;

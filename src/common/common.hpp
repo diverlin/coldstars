@@ -48,11 +48,6 @@ std :: string returnRaceStringByRaceId(int id);  // replace by generator class
 int returnObjectSize(int w, int h);  //size 0...9
 
 
-float distBetweenCenters(Points* points1, Points* points2);
-float distBetweenCenters(Points* points, float x2, float y2);
-float distBetweenCenters(float x1, float y1, float x2, float y2);
-
-
 std::string int2str(int var); 
 std::string bool2str(bool var); 
 

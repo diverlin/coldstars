@@ -63,12 +63,10 @@ void Planet :: update_inSpace_inDynamic()
 void Planet :: update_inSpace_inStatic()
 {      
      	if (subtype_id == INHABITED_ID)
-        	for (unsigned int ni = 0; ni < kosmoport->NPC_pList.size(); ni++)
-            		kosmoport->NPC_pList[ni]->thinkCommon_inKosmoport_inStatic();
-
+                kosmoport->ai();
+                
      	if (subtype_id == UNINHABITED_ID)
-        	for (unsigned int ni = 0; ni < kosmoport->NPC_pList.size(); ni++)
-            		kosmoport->NPC_pList[ni]->thinkCommon_inLand_inStatic();
+                land->ai();        	
 }
          
 
@@ -77,7 +75,6 @@ void Planet :: updateInfo()
 	info.clear();
 
     	info.addTitleStr("PLANET");
-
     	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->id));
     	info.addNameStr("population:");  info.addValueStr(int2str(population));
 }
@@ -121,17 +118,17 @@ bool Planet :: addNpc(Npc* _pTo_npc)
 bool Planet :: removeShipById(int _id)
 {
      	if (subtype_id == INHABITED_ID)
-         	return kosmoport->removeShipById(_id);
+         	return kosmoport->removeShip(_id);
      	if (subtype_id == UNINHABITED_ID)
-         	return land->removeShipById(_id);
+         	return land->removeShip(_id);
 }
 
 bool Planet :: removeNpcById(int _id)
 {
      	if (subtype_id == INHABITED_ID)
-         	return kosmoport->removeNpcById(_id);
+         	return kosmoport->removeNpc(_id);
      	if (subtype_id == UNINHABITED_ID)
-         	return land->removeNpcById(_id);
+         	return land->removeNpc(_id);
 }
 //// ******* TRANSITION ******* 
 
@@ -141,7 +138,7 @@ bool Planet :: getPermissionToLand()
 {
      	if (subtype_id == INHABITED_ID)
      	{
-        	if (kosmoport->pTo_angar->returnFreelandingAreaNum() > 0)
+        	if (kosmoport->getAngar()->getNumFreelandingArea() > 0)
             		return true;
         	else
             		return false;       

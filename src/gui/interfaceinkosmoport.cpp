@@ -153,16 +153,16 @@ void InterfaceInKosmoport :: mouseInteraction()
        				{	
 		   			if (button_angar_pList[i]->getSubTypeId() == REPAIR_BUTTON_ID)
 		   			{
-		   				pTo_PLAYER->pTo_ship->setMaxArmor(); 
+		   				pPLAYER->getShip()->setMaxArmor(); 
 		   			}
 		   			if (button_angar_pList[i]->getSubTypeId() == FUEL_BUTTON_ID)
 		   			{
-		   		        	pTo_PLAYER->pTo_ship->setMaxFuel();
+		   		        	pPLAYER->getShip()->setMaxFuel();
 		   			}
 		   			if (button_angar_pList[i]->getSubTypeId() == LAUNCH_BUTTON_ID)
 		   			{
-       						pTo_PLAYER->pTo_npc->createLaunchingSequence(); 
-       						pTo_PLAYER->in_SPACE = true;
+       						pPLAYER->getPilot()->createLaunchingSequence(); 
+       						pPLAYER->getPilot()->setPlaceTypeId(SPACE_ID);
        			   		}
        				}
        				break;
