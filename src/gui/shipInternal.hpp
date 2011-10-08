@@ -23,44 +23,51 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class ShipInternal
 {
    	public:
-      		Ship* ship;
-      		Skill* skill;
-
       		ShipInternal();
       		~ShipInternal();
 
       		void bindShip(Ship*);
       		void createControlSkillButtons();
 
-      		void manageSkill(bool allow_full_control);
-      		void renderSkill();
+                void configure(Ship* _ship, bool _in_store, bool _allow_full_control);
+     		void update();
+      		void render() const;
 
-
-      		void mouseControl(bool allow_full_control, bool is_in_store);
-           		void resetSlotsRenderInfoFlag();
-      		void renderItemInfo();
-      		void renderInternaly();
-      		
       	private:
+                bool in_store;
+                bool allow_full_control;
+                
+      	      	Ship* ship;
+      		Skill* skill;
+      		
       		std::vector<Button*> button_pList;
       	
-      	      	Button* increment_attack_button;  
-      		Button* decrement_attack_button;  
+      	      			Button* increment_attack_button;  
+      				Button* decrement_attack_button;  
                 
-      		Button* increment_defence_button;  
-      		Button* decrement_defence_button;  
+      				Button* increment_defence_button;  
+      				Button* decrement_defence_button;  
         
-      		Button* increment_leader_button;  
-      		Button* decrement_leader_button; 
+      				Button* increment_leader_button;  
+      				Button* decrement_leader_button; 
       
-      		Button* increment_trader_button;  
-      		Button* decrement_trader_button; 
+      				Button* increment_trader_button;  
+      				Button* decrement_trader_button; 
     
-      		Button* increment_technic_button;  
-      		Button* decrement_technic_button; 
+      				Button* increment_technic_button;  
+      				Button* decrement_technic_button; 
      
-      		Button* increment_diplomat_button;  
-     		Button* decrement_diplomat_button;      	
+      				Button* increment_diplomat_button;  
+     				Button* decrement_diplomat_button;    
+     		
+     		void manageSkill();
+     		void mouseControl();
+     		
+     		void resetSlotsRenderInfoFlag();
+     		           	
+     		void renderInternaly() const;
+      		void renderItemInfo() const;        		
+      		void renderSkill() const;	
 };
 
 

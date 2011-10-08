@@ -57,12 +57,8 @@ class Store
 
                 int buyOtsecSlotItem(ItemSlot*); 
 
-                void mouseControl();
-                void resetSlotsRenderInfoFlag();
-        
-                void renderBackground();
-                void renderInternals();
-                void renderItemInfo();
+                void update();
+                void render() const;
                 
         public:
                 TextureOb* texOb_background; 
@@ -83,6 +79,13 @@ class Store
                 int energyBlock_num; 
                 
                 std::vector<ItemSlot*> slot_pList;
+                
+                void mouseControl();
+                void resetSlotsRenderInfoFlag();
+        
+                void renderBackground() const;
+                void renderInternals() const;
+                void renderItemInfo() const;
 };
            
 #endif

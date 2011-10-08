@@ -32,6 +32,8 @@ class Planet : public CommonForPlanet
     	   
                 ~Planet();
 
+                int getDockingRadius() const;
+
                 bool addShip(Ship*);
                 bool addNpc(Npc*);
                 
@@ -44,7 +46,7 @@ class Planet : public CommonForPlanet
                 void updateInfo();
                 void renderInfo();
 
-                bool getPermissionToLand();
+                bool getPermissionToLand() const;
                 
         private:
                 TextureOb* texOb_atmosphere;

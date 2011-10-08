@@ -27,18 +27,24 @@ Goverment :: Goverment(TextureOb* _texOb_background, TextureOb* _texOb_face)
 }
 
 
-void Goverment :: renderBackground()
+void Goverment :: update()
+{}
+
+
+void Goverment :: renderBackground() const
 {
      	Rect screen_rect = Rect(0, 0, g_VIEW_WIDTH, g_VIEW_HEIGHT);
      	drawTexturedRect(texOb_background->texture, screen_rect, -1);  
 }
 
-void Goverment :: renderInternals()
-{
-}
+void Goverment :: renderInternals() const
+{}
             
-void Goverment :: render()
+void Goverment :: render() const
 {
+        clearScreen();
+        resetRenderTransformation();
+                                                        
         renderBackground();
         renderInternals();
 }

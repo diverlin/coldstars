@@ -18,11 +18,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "render.hpp"
 
-void clearScreen()
-{
-    	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    	glLoadIdentity();
-}
+void clearScreen() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
+void resetRenderTransformation() { glLoadIdentity(); }
+
 
 void camera(float x, float y) { glTranslatef(-x, -y, 0.0); }
 

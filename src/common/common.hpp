@@ -21,26 +21,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 int randIntInRange(int range_start, int range_end);
 int getRandomSign();
+bool getRandomBool();
 
 struct Color
 {
-   float r;
-   float g;
-   float b;
-   float a;
+   	float r;
+   	float g;
+   	float b;
+   	float a;
 };
 
 struct See
 {
-   bool ASTEROID;
-   bool CONTAINER;
-   bool MINERAL;
+   	bool ASTEROID;
+   	bool CONTAINER;
+   	bool MINERAL;
 
-   bool RANGER;
-   bool WARRIOR;
-   bool TRADER;  
-   bool PIRAT;
-   bool DIPLOMAT;
+   	bool RANGER;
+   	bool WARRIOR;
+   	bool TRADER;  
+   	bool PIRAT;
+   	bool DIPLOMAT;
 };
 
 std :: string returnRaceStringByRaceId(int id);  // replace by generator class

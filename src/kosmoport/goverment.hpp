@@ -26,15 +26,16 @@ class Goverment
         public: 
                 Goverment(TextureOb* _pTo_bg_texOb, TextureOb* _pTo_face_texOb);
                 ~Goverment();
-
-                void renderBackground();
-                void renderInternals();
-
-                void render();
+                
+                void update();
+                void render() const;
         
         private:
                 TextureOb* texOb_background;
                 TextureOb* texOb_face;
+                
+                void renderBackground() const;
+                void renderInternals() const;
 };
 
 #endif

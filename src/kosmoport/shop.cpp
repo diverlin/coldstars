@@ -35,11 +35,21 @@ void Shop :: renderBackground() const
 void Shop :: renderInternals() const
 {
 }
-            
-void Shop :: render()
+      
+void Shop :: update()
 {
+}
+            
+void Shop :: render() const
+{
+        clearScreen();
+        resetRenderTransformation();
+        
         renderBackground();
-        renderInternals();
+        
+        enable_BLEND();
+                renderInternals();
+        disable_BLEND();
 }
 
 

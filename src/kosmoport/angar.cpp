@@ -52,13 +52,13 @@ int Angar :: getNumFreelandingArea()
         return sum_free; 
 }
 
-bool Angar :: addShip(Ship* _pTo_ship)
+bool Angar :: addShip(Ship* _ship)
 {
         for (unsigned int la = 0; la < landingArea_pList.size(); la++)
         {
                 if (landingArea_pList[la]->getBusyFlag() == false)
                 {
-                        landingArea_pList[la]->placeShip(_pTo_ship);
+                        landingArea_pList[la]->insertShip(_ship);
                         return true;
                 }
         }
@@ -99,8 +99,6 @@ void Angar :: mouseControl()
         bool lmb = g_MOUSE_LEFT_BUTTON; 
         bool rmb = g_MOUSE_RIGHT_BUTTON; 
 
-        resetSlotsRenderInfoFlag();
-
         for (unsigned int i = 0; i < landingArea_pList.size(); i++)
         { 
                 float dist = distBetweenCenters(g_MOUSE_POS_X, 
@@ -123,13 +121,35 @@ void Angar :: mouseControl()
         }
 }
 
-void Angar :: renderBackground()
+
+void Angar :: update()
+{
+        resetSlotsRenderInfoFlag();
+        mouseControl();
+}
+
+
+void Angar :: render() const
+{
+        clearScreen();
+        resetRenderTransformation();
+                        
+        renderBackground();
+                
+	enable_BLEND();
+        
+        renderInternals();
+        //renderItemInfo();
+        
+}
+
+void Angar :: renderBackground() const
 {
      	Rect screen_rect = Rect(0, 0, g_VIEW_WIDTH, g_VIEW_HEIGHT);
      	drawTexturedRect(texOb_background->texture, screen_rect, -2);  
 }
 
-void Angar :: renderInternals()
+void Angar :: renderInternals() const
 {
         for (unsigned int li = 0; li < landingArea_pList.size(); li++)
         {
@@ -138,15 +158,20 @@ void Angar :: renderInternals()
 
         for (unsigned int li = 0; li < landingArea_pList.size(); li++)
         {
-                landingArea_pList[li]->renderInternals();
+                if (landingArea_pList[li]->getBusyFlag() == true)
+                {
+                        landingArea_pList[li]->renderInternals();
+                }
         }
 }
 
-void Angar :: renderItemInfo()
+void Angar :: renderItemInfo() const
 {
         for (unsigned int li = 0; li < landingArea_pList.size(); li++)
         {
-                landingArea_pList[li]->renderInfo();
+                if (landingArea_pList[li]->getCursoredFlag() == true)
+                        if (landingArea_pList[li]->getBusyFlag() == true)
+                                landingArea_pList[li]->renderInfo();
         }
 }
             

@@ -43,7 +43,20 @@ void Cursor :: updatePos()
      	slot->getRect().setNewCenter(g_MOUSE_POS_X, g_VIEW_HEIGHT - g_MOUSE_POS_Y);
 }
 
-void Cursor:: renderFrame()
+void Cursor :: renderFrame()
 {
     	slot->renderEquipedItem(); 
+}
+
+
+void Cursor :: update()
+{
+	updatePos();
+}
+
+void Cursor :: render()
+{
+	enable_BLEND();
+		renderFrame();
+	disable_BLEND();
 }

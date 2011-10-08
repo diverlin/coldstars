@@ -33,6 +33,9 @@ LandingArea :: LandingArea(TextureOb* _texOb, float _center_x, float _center_y, 
 LandingArea :: ~LandingArea()
 {}
 
+void LandingArea :: setBusyFlag(bool _busy_flag)         { is_BUSY = _busy_flag; }
+void LandingArea :: setCursoredFlag(bool _cursored_flag) { is_CURSORED = _cursored_flag; }
+
 
 Ship* LandingArea :: getShip()      { return ship; }
 Rect LandingArea :: getRect() const { return rect; }
@@ -40,13 +43,17 @@ Rect LandingArea :: getRect() const { return rect; }
 bool LandingArea :: getBusyFlag()     const { return is_BUSY; }
 bool LandingArea :: getCursoredFlag() const { return is_CURSORED; }
                 
-void LandingArea :: setBusyFlag(bool _busy_flag)         { is_BUSY = _busy_flag; }
-void LandingArea :: setCursoredFlag(bool _cursored_flag) { is_CURSORED = _cursored_flag; }
+
                 
                           
-void LandingArea :: placeShip(Ship* _ship)
+void LandingArea :: insertShip(Ship* _ship)
 {
         ship = _ship;
+        
+        ship->getPoints()->setAngle(0);
+       	ship->getPoints()->setCenter(rect.getCenter().x, rect.getCenter().y);
+        ship->getPoints()->update();
+        
         is_BUSY = true;    
 }
 
@@ -56,30 +63,21 @@ void LandingArea :: removeShip()
         is_BUSY = false;    
 } 
 
-void LandingArea :: renderArea()
+
+
+
+void LandingArea :: renderArea() const
 {
      	drawTexturedRect(texOb->texture, rect, -1);
 }
 
-void LandingArea :: renderInternals()
+void LandingArea :: renderInternals() const
 {
-     	if (is_BUSY == true)
-     	{
-        	ship->getPoints()->setAngle(0);
-        	ship->getPoints()->setCenter(rect.getCenter().x, rect.getCenter().y);
-        	ship->render_atPlanet();
-     	}
+       	ship->render_atPlanet();
 }
 
 
-void LandingArea :: renderInfo()
+void LandingArea :: renderInfo() const
 {
-     	if (is_BUSY == true)
-     	{
-        	if (is_CURSORED == true)
-        	{
-            		//ship->updateInfo();
-            		ship->renderInfo(rect.getCenter().x, rect.getCenter().y, 0, 0);
-        	} 
-        }
+	ship->renderInfo(rect.getCenter().x, rect.getCenter().y);
 }

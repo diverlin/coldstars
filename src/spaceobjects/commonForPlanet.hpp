@@ -42,8 +42,8 @@ class CommonForPlanet
                 void setStarSystem(StarSystem* _starsystem);
                 
                 int getId() const;
-                int getType() const;
-                int getSubType() const;
+                int getTypeId() const;
+                int getSubTypeId() const;
                 int getCollisionRadius() const;
                 vec2f getNextTurnPosition() const;
                 Points* getPoints();

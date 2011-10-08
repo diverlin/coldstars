@@ -27,20 +27,20 @@ class LandingArea
                 LandingArea(TextureOb* _pTo_texOb, float _center_x, float _center_y, int _w, int _h);
                 ~LandingArea();
         
+                void setBusyFlag(bool);
+                void setCursoredFlag(bool);
+                
                 Ship* getShip();
                 Rect getRect() const;
                 bool getBusyFlag() const;
                 bool getCursoredFlag() const;
                 
-                void setBusyFlag(bool);
-                void setCursoredFlag(bool);
-                
-                void placeShip(Ship*);
+                void insertShip(Ship*);
                 void removeShip(); 
         
-                void renderArea();
-                void renderInternals();
-                void renderInfo();
+                void renderArea() const;
+                void renderInternals() const;
+                void renderInfo() const;
                 
         private:
                 bool is_BUSY;
@@ -49,8 +49,7 @@ class LandingArea
                 TextureOb* texOb;
                         
                 Ship* ship;                
-                Rect rect;
-        
+                Rect rect;        
 }; 
 
 #endif

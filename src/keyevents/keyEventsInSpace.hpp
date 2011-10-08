@@ -22,23 +22,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class KeyEventsInSpace
 {
-    public:
-        // SCROLLING
-        bool keyboardLeftPressed;
-        bool keyboardRightPressed;    
-        bool keyboardUpPressed;    
-        bool keyboardDownPressed;  
+    	public:
+	       	KeyEventsInSpace();
+        	~KeyEventsInSpace();
+
+		void update();
+		void update2();
+
+	private:
+	        bool keyboardLeftPressed;
+        	bool keyboardRightPressed;    
+        	bool keyboardUpPressed;    
+        	bool keyboardDownPressed;  
         
-        int scroll_accel_x; 
-        int scroll_accel_y;  
-    
-        KeyEventsInSpace();
-        ~KeyEventsInSpace();
-
-        void getSimpleInputs();
-        void getRealTimeInputs();
-        void scrollCamera();
-
+        	int scroll_accel_x; 
+        	int scroll_accel_y; 
+        	
+        	void getSimpleInputs();
+        	void getRealTimeInputs();
+        	void scrollCamera();
+	
 };
 
-#endif /* KEYSINSPACE_H */
+#endif 

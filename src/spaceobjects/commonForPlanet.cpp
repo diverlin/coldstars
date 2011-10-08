@@ -75,9 +75,9 @@ void CommonForPlanet :: CommonForPlanet_init(TextureOb* _texOb,
 
 void CommonForPlanet :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
 
-int CommonForPlanet :: getId()      const { return id; }   
-int CommonForPlanet :: getType()    const { return type_id; }
-int CommonForPlanet :: getSubType() const { return subtype_id; }
+int CommonForPlanet :: getId()        const { return id; }   
+int CommonForPlanet :: getTypeId()    const { return type_id; }
+int CommonForPlanet :: getSubTypeId() const { return subtype_id; }
 
 Points* CommonForPlanet :: getPoints() { return &points; }
            

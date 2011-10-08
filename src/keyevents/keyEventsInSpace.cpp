@@ -42,6 +42,18 @@ KeyEventsInSpace :: ~KeyEventsInSpace()
 {}
 
 
+void KeyEventsInSpace :: update()
+{
+	getSimpleInputs();
+        getRealTimeInputs();
+        scrollCamera();
+}
+
+void KeyEventsInSpace :: update2()
+{
+	getSimpleInputs();
+        getRealTimeInputs();
+}
 
 void KeyEventsInSpace :: getSimpleInputs()
 {

@@ -27,15 +27,13 @@ class Angar
                 Angar(TextureOb* _texOb_background, TextureOb* _texOb_slot);
                 ~Angar();
                 
-                bool addShip(Ship* _ship);
+                bool addShip(Ship*);
                 bool removeShipFromlandingAreaById(int _id);
 
-                void resetSlotsRenderInfoFlag();
-                void mouseControl();
+                void update();
 
-                void renderBackground();
-                void renderInternals();
-                void renderItemInfo();
+                void render() const;
+                void renderItemInfo() const;
 
                 int getNumFreelandingArea();
                 
@@ -44,6 +42,11 @@ class Angar
                 
                 std::vector<LandingArea*> landingArea_pList;
 
+                void renderBackground() const;
+                void renderInternals() const;
+                
+                void resetSlotsRenderInfoFlag();
+                void mouseControl();
         
 };
 

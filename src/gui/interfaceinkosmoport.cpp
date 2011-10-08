@@ -173,7 +173,7 @@ void InterfaceInKosmoport :: mouseInteraction()
 }
 
 
-void InterfaceInKosmoport :: render() const
+void InterfaceInKosmoport :: renderInternal() const
 {
    
     	for (unsigned int i = 0; i< button_common_pList.size(); i++)
@@ -216,4 +216,21 @@ void InterfaceInKosmoport :: renderInfo() const
         	}
     	} 
         
+}
+
+void InterfaceInKosmoport :: update()
+{
+        resetInfoFlags(); 
+        mouseInteraction(); 
+}
+                
+                
+void InterfaceInKosmoport :: render() const
+{
+        resetRenderTransformation();
+        
+        enable_BLEND();   
+                renderInternal(); 
+                renderInfo();    
+        disable_BLEND(); 
 }

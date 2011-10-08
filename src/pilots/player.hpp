@@ -57,7 +57,8 @@ class PlayerInstance
         	Ship* getShip();
    		Npc* getPilot();
      		StarSystem* getActiveStarSystem();
-     
+     		Cursor* getCursor();
+     		     
      		void bindShip(Ship*);
      		void update_inSpace_inDynamic();
      	
@@ -68,6 +69,7 @@ class PlayerInstance
      	     	Npc* npc;
      	     	
      	     	StarSystem* ss_active;
+     	     	Cursor* cursor;
 };
 
 #endif 

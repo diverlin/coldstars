@@ -30,12 +30,9 @@ class InterfaceInKosmoport
 
 		int getActiveScreenId() const;
 		
-       		void resetInfoFlags();
-       		void mouseInteraction();
-
-       		void render() const;
-       		void renderInfo() const;
-       		
+       		void update();
+                void render() const;
+                
        	private:
        		int active_screen_id; 
        		std::vector<Button*> button_common_pList;
@@ -50,6 +47,12 @@ class InterfaceInKosmoport
         	Button* repair_button;
         	Button* fuel_button;  
         	Button* launch_button;       	
+                
+                void resetInfoFlags();
+       		void mouseInteraction();
+
+       		void renderInternal() const;
+       		void renderInfo() const;
 };
 
 

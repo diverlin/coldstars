@@ -22,7 +22,8 @@ class Npc;
 class StarSystem;
 class ItemSlot;   
 class Turrel;       
-
+class FBO;
+class BloomEffect;
 
 #include "GL/glew.h"   
 
@@ -45,7 +46,8 @@ class Turrel;
 
 #include "src/text/textstuff.hpp"
 
-#include "src/resources/texture.hpp"
+#include "src/resources/textureOb.hpp"
+#include "src/resources/textureManager.hpp"
 #include "src/resources/resources.hpp"
 
 #include "src/common/rect.hpp"
@@ -87,6 +89,7 @@ class Turrel;
 #include "src/kosmoport/kosmoport.hpp"
 #include "src/land/land.hpp"
 
+#include "src/gui/cursor.hpp"  
 #include "src/pilots/player.hpp"
 
 #include "src/render/render.hpp"
@@ -128,13 +131,14 @@ class Turrel;
 #include "src/pilots/skill.hpp"
 #include "src/pilots/npc.hpp"              
 
-#include "src/gui/cursor.hpp"                  
+                
 
 #include "src/world/starsystem.hpp"    
 #include "src/effects/rocketBullet.hpp"
 #include "src/effects/lazerTrace.hpp"
 
 #include "src/vehicle/turrel.hpp"
+//#include "src/gui/spaceMap.hpp"
 
 
 
@@ -209,7 +213,8 @@ class Turrel;
 
 #include "src/keyevents/keyEventsInSpace.cpp"
 
-#include "src/resources/texture.cpp"
+#include "src/resources/textureOb.cpp"
+#include "src/resources/textureManager.cpp"
 #include "src/resources/resources.cpp"
 
 #include "src/common/rect.cpp"
@@ -244,4 +249,5 @@ class Turrel;
 #include "src/effects/shockWave.cpp"
 
 #include "src/text/textstuff.cpp"
+#include "src/gui/spaceMap.cpp"
 ////////////////////////////////////////////

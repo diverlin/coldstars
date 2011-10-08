@@ -24,32 +24,32 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Galaxy 
 {
   	public:
-     		Rect map_rect;
-
-     	     	std::vector<StarSystem*> STARSYSTEM_pList;
+  	     	std::vector<StarSystem*> STARSYSTEM_pList;
      		std::vector<StarSystem*> hSTARSYSTEM_pList;
-
+     		
      		Galaxy();
      		
      		StarSystem* getRandomStarSystem();
      
-     		void generateEntireStarSystem();
-     		void generateBackground(StarSystem* _starsystem, int distNebula_maxNum, int distStar_maxNum, int _color_id);
-     		void generateNumPlanets(StarSystem* _starsystem, int planet_per_system);
-     
-     		void generateNumFriendlyNPC(StarSystem* _starsystem, int ship_per_system);
-     		void generateNumEnemyNPC(StarSystem* _starsystem, int ship_per_system);
-
-     		void manageHiddenStarSystemList(StarSystem* _starsystem);
-
-     		bool manage_map();
-     		void render_map();
-     		     		
+    		void update_inDynamic(int);
+     		void update_inStatic();
+     		
+     		//void manageHiddenStarSystemList(StarSystem* _starsystem);
      	private:
-    	     	int starsytem_counter;
+   	     	int starsytem_counter;
      		int star_counter;      
      		int ship_counter;
      		int planet_counter;
 };
 
+
+
+     		
+StarSystem* generateEntireStarSystem();
+void generateBackground(StarSystem* _starsystem, int distNebula_maxNum, int distStar_maxNum, int _color_id);
+void generateNumPlanets(StarSystem* _starsystem, int planet_per_system);
+ 
+void generateNumFriendlyNPC(StarSystem* _starsystem, int ship_per_system);    
+void generateNumEnemyNPC(StarSystem* _starsystem, int ship_per_system);
+     		
 #endif 

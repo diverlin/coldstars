@@ -99,7 +99,7 @@ void Star :: updateInfo()
 { 
 	info.clear();
     	info.addTitleStr("STAR");
-    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->id));
+    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->getId()));
 }
 
 void Star :: renderInfo()
