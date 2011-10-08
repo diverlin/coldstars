@@ -24,7 +24,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class StarSystem
 {
 	public:
-		int id; 
+                int getId() const;
+                int getTypeId() const;
 
     		bool is_CAPTURED; 
    
@@ -54,26 +55,19 @@ class StarSystem
     		~StarSystem();
     
     		void setPositionOnWorldMap(Rect rect);
+		void setDetailedSimulation(bool);
+		
+		bool getDetailedSimulation() const;
 
-    		void rocketCollision_TRUE();
-    		void rocketCollision_FALSE();
+		void update_inDynamic_TRUE(int timer);
+		void update_inDynamic_FALSE(int timer);
 
-    		void asteroidCollision_TRUE();
-    		void asteroidCollision_FALSE();
+		void update_inStatic_TRUE();
+		void update_inStatic_FALSE();	    
 
-    		void updateEntities_inDynamic_TRUE();
-    		void updateEntities_inDynamic_FALSE();
-    		void updateEntities_inStatic();
-
-    		void findVisibleEntities();        
-
-	        void createPostProcessStuff();
-    		void renderEntities_NEW();
-    		void renderEntities_OLD();
-    		        void restoreDefaultColor();
-    			void restoreSceneColor();
-    			void renderBackground();
-        
+	        //void createPostProcessStuff();    // remove
+	        
+	        void render();        
    		    		
     		void asteroidManager(int num);
 
@@ -82,8 +76,7 @@ class StarSystem
 
     		void mouseControl();
 
-    		void fireEvents_TRUE(int timer);
-    		void fireEvents_FALSE(int timer);
+
 
     		//// TRANSITION
                 void addStar(Star*);
@@ -114,6 +107,9 @@ class StarSystem
     		Planet* returnClosestPlanet(vec2f);
 
     	private:
+                int id, type_id;
+    		bool detalied_simulation;
+    	
     	    	// ENTITY LISTS
     	    	std::vector<DistantNebulaBgEffect*> distantNebulaBgEffect_pList;
     		std::vector<DistantStarBgEffect*> distantStarBgEffect_pList;
@@ -143,12 +139,27 @@ class StarSystem
 
     		std::vector<Ship*>      visible_SHIP_pList;
     		
-    	        FBO* pTo_fbo0;
-                FBO* pTo_fbo1;
-                FBO* pTo_fbo2;
-                FBO* pTo_fbo3;
-                BloomEffect* pTo_bloom; 
-                
+                void rocketCollision_TRUE();
+    		void rocketCollision_FALSE();
+
+    		void asteroidCollision_TRUE();
+    		void asteroidCollision_FALSE();
+
+    		void updateEntities_inDynamic_TRUE();
+    		void updateEntities_inDynamic_FALSE();
+    		void updateEntities_inStatic();
+    		
+    		void fireEvents_TRUE(int timer);
+    		void fireEvents_FALSE(int timer);
+    		
+    		
+		void findVisibleEntities();    
+    		void renderEntities_NEW();
+    		void renderEntities_OLD();
+    		        void restoreDefaultColor();
+    			void restoreSceneColor();
+    			void renderBackground();
+    		
     		void debug__();
     	
 };

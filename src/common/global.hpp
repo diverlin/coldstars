@@ -45,7 +45,7 @@ int g_TIMER;
 int TURN_TIME = 150;  //turn time, depends on game fps
 int TURN_COUNT = 0; 
          
-sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.1.27 (SFML/C++)");
+sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.1.28 (SFML/C++)");
 sf::Font g_FONT;
 
 sf::Clock g_CLOCK;
@@ -57,20 +57,11 @@ ObjMeshInstance* pTo_DEFORMED_SPHERE_MESH;
 
 //ModelOBJ            g_model;
 
-
-class TextureManager;
-//TextureManager g_TEXTURE_MANAGER;// = TextureManager();
-
 class PlayerInstance;
 PlayerInstance* pPLAYER;
 
-class Cursor;
-Cursor* pTo_CURSOR;
-
 class ShipInternal;
-ShipInternal* pTo_SHIP_GUI;
-
-class Camera;
+ShipInternal* pSHIP_GUI;
 
 GLuint g_BLACK2ALPHA_PROGRAM;
 GLuint g_SHOCKWAVE_PROGRAM;
@@ -81,7 +72,12 @@ GLuint g_EXTRACT_BRIGHT_PROGRAM;
 GLuint g_COMBINE_PROGRAM;
 GLuint g_MULTITEX_PROGRAM;
 
-int USE_MODERN_HW = true;
+int USE_MODERN_HW = false;
 
+FBO* g_FBO0;
+FBO* g_FBO1;
+FBO* g_FBO2;
+FBO* g_FBO3;
+BloomEffect* g_BLOOM;
 
 #endif 

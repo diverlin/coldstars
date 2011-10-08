@@ -40,6 +40,13 @@ int getRandomSign()
      		return -1; 
 }
 
+bool getRandomBool()
+{
+  	if (randIntInRange(0,10) > 5)
+     		return true;
+  	else
+     		return false; 
+}
 
 
 std :: string returnRaceStringByRaceId(int id)  // replace by generator class

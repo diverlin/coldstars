@@ -57,7 +57,9 @@ class Ship
                 StarSystem* getStarSystem();
                 Npc* getNpc();
                 int getPlaceTypeId() const;
-                                                       
+                int getTypeId() const;
+                   
+              
         	bool is_alive, is_dying, is_explosed;
         	int type_id, id;
 
@@ -67,11 +69,6 @@ class Ship
 		
         	bool in_SPACE;
 
-        	bool is_FOLLOWING_PLANET;
-        	bool is_FOLLOWING_SHIP;
-        	bool is_FOLLOWING_STARSYSTEM;
-
-
 
         	TextureOb* texOb;
 
@@ -80,12 +77,7 @@ class Ship
 
         	int w_orig, h_orig;
 
-
-
-        	bool controlled_by_player;
-        	PlayerInstance* pTo_playerOwner;
-
-
+               
 
         	int space;
         	int armor_max;
@@ -93,12 +85,6 @@ class Ship
         	int korpus_protection;
         	int nominal_temperature;
 
-        	int race_id;
-        	int subtype_id;
-        	int size_id;
-        	int mod_id;
-
-        	int color_id;
         	int price;
 
 
@@ -107,10 +93,7 @@ class Ship
         	Rect kontur_rect; 
 
 
-
-
-
-
+        	//######### SLOT
         	int total_weapon_slot_num;
         	ItemSlot weapon_slot1;
         	ItemSlot weapon_slot2;
@@ -118,9 +101,6 @@ class Ship
         	ItemSlot weapon_slot4;
         	ItemSlot weapon_slot5;
         
-
-        
-        	//######### EQUPMENT SLOT
         	ItemSlot drive_slot;
         	ItemSlot bak_slot;
         	ItemSlot radar_slot;
@@ -163,29 +143,14 @@ class Ship
         	int energy_restoration_rate;
 
 
-        	//////// TARGET COORDINATES //////
-        	//self.Gl_LIST_direction_ID = None
-        	std::vector<float> direction_x_list;
-        	std::vector<float> direction_y_list;
-        	std::vector<float> angle_inD_list;
 
-        	int len_direction_list;
-        	bool direction_list_END;
-        	int move_it;
-
-        	float target_pos_x;
-        	float target_pos_y;
-        
-        	float jump_pos_x;
-        	float jump_pos_y;
-        	//////////////////////////////////
 
         	// simplification
         	int average_damage;
         	int average_fire_radius;
 
 
-        	Ship(TextureOb* _pTo_texOb, 
+        	Ship(TextureOb* _texOb, 
         	     int _max_weapons, 
         	     bool _grapple_INHIBIT, 
         	     int _space, 
@@ -195,17 +160,14 @@ class Ship
         	     
         	~Ship();    
 
-        	void calculateDetaledWayToPosition();
-        	void updatePosition();
+         	void updatePosition();
 
         	void reloadAllWeapons();
         
      		void selectWeapons();                                     
                      
-        	void setWeaponsTarget(Ship* _ship);
-        	void setWeaponsTarget(Asteroid* _asteroid);
-		void setWeaponsTarget(Mineral* _mineral);
-	  	void setWeaponsTarget(Container* _container);
+                template <typename TARGET_TYPE>      
+                void setWeaponsTarget(TARGET_TYPE*);     
        
         	void weaponsFire_TRUE(int timer);
         	void weaponsFire_FALSE(int timer);
@@ -251,7 +213,7 @@ class Ship
 		void render_inSpace() const;
 		void render_atPlanet() const;
 
-        	void renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y);
+        	void renderInfo(float _pos_x, float _pos_y, float _offset_x = 0, float _offset_y = 0);
         	
         	float pos_z;
         	

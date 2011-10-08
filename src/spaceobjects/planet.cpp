@@ -26,7 +26,7 @@ Planet :: Planet(int _subtype_id,
 		 PlanetData _planet_data,
 		 unsigned long int _population)
 { 
-      	type_id = PLANET_ID;
+      	type_id = PLANET_TYPE_ID;
       	subtype_id = _subtype_id;
       
       	CommonForPlanet_init(_texOb, 
@@ -50,7 +50,8 @@ Planet :: Planet(int _subtype_id,
 Planet :: ~Planet()
 {}
     
-   
+
+int Planet :: getDockingRadius() const { return data.scale; }
        
 
 void Planet :: update_inSpace_inDynamic()
@@ -75,7 +76,7 @@ void Planet :: updateInfo()
 	info.clear();
 
     	info.addTitleStr("PLANET");
-    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->id));
+    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->getId()));
     	info.addNameStr("population:");  info.addValueStr(int2str(population));
 }
 
@@ -99,20 +100,28 @@ void Planet :: createLand()
 
 
 //// ******* TRANSITION ******* 
-bool Planet :: addShip(Ship* _pTo_ship)
+bool Planet :: addShip(Ship* _ship)
 {
      	if (subtype_id == INHABITED_ID)
-         	return kosmoport->addShip(_pTo_ship);
+        {
+                return kosmoport->addShip(_ship);
+        }
      	if (subtype_id == UNINHABITED_ID)
-         	return land->addShip(_pTo_ship);
+        {
+                return land->addShip(_ship);
+        }
 }
 
-bool Planet :: addNpc(Npc* _pTo_npc)
+bool Planet :: addNpc(Npc* _npc)
 {
      	if (subtype_id == INHABITED_ID)
-         	return kosmoport->addNpc(_pTo_npc);
+        {       
+                return kosmoport->addNpc(_npc);
+        }
      	if (subtype_id == UNINHABITED_ID)
-         	return land->addNpc(_pTo_npc);
+        {
+                return land->addNpc(_npc);
+        }
 }
 
 bool Planet :: removeShipById(int _id)
@@ -134,7 +143,7 @@ bool Planet :: removeNpcById(int _id)
 
 
 
-bool Planet :: getPermissionToLand()
+bool Planet :: getPermissionToLand() const
 {
      	if (subtype_id == INHABITED_ID)
      	{

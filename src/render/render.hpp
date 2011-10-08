@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define RENDER_H
 
 void clearScreen();
+void resetRenderTransformation();
 
 void camera(float x, float y);
 void setColor(Color);	

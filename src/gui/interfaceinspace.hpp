@@ -27,16 +27,19 @@ class InterfaceInSpace
       		InterfaceInSpace();
        		~InterfaceInSpace();
 
-       		void resetInfoFlags();
-       		void mouseInteraction();
-       		
-       		void render() const;
-       		void renderInfo() const;
+		void update();
+		void render();
        		
        	private:
        		std::vector<Button*> button_common_pList;
        		
        		Button* galaxymap_screen_button; 
+       		
+       		void resetInfoFlags();
+       		void mouseInteraction();
+       		
+       		void renderInternal() const;
+       		void renderInfo() const;
        		
        		      		
 };

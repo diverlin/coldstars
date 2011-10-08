@@ -39,7 +39,12 @@ InterfaceInSpace :: ~InterfaceInSpace()
 {}
 
 
-
+void InterfaceInSpace :: update()
+{
+	resetInfoFlags();
+	mouseInteraction();
+}
+		
 
 void InterfaceInSpace :: resetInfoFlags()
 {
@@ -74,7 +79,19 @@ void InterfaceInSpace :: mouseInteraction()
      	}
 }
 
-void InterfaceInSpace :: render() const
+
+void InterfaceInSpace :: render()
+{
+    	resetRenderTransformation();
+
+	enable_BLEND();    						
+		renderInternal(); 
+		renderInfo();
+	disable_BLEND();
+}
+
+
+void InterfaceInSpace :: renderInternal() const
 {
 	for (unsigned int i = 0; i < button_common_pList.size(); i++)
      	{ 

@@ -314,7 +314,7 @@ void Turrel :: setTarget(Ship* _ship)
 void Turrel :: setTarget(Asteroid* _asteroid)
 {
      	target_asteroid = _asteroid;
-     	target_type_id = target_asteroid->getType();
+     	target_type_id = target_asteroid->getTypeId();
 
      	pTo_target_pos_x = &(target_asteroid->getPoints()->getpCenter()->x);
      	pTo_target_pos_y = &(target_asteroid->getPoints()->getpCenter()->y);

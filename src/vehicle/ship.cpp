@@ -29,8 +29,10 @@ Navigator* Ship :: getNavigator()   { return navigator; }
 StarSystem* Ship :: getStarSystem() { return starsystem; }
 Npc*  Ship :: getNpc() 		    { return npc_owner; }
 int Ship :: getPlaceTypeId() const  { return place_type_id; }                    
-                                
-Ship :: Ship(TextureOb* _pTo_texOb, 
+int Ship :: getTypeId() const       { return type_id; }
+                
+                
+Ship :: Ship(TextureOb* _texOb, 
              int _max_weapons, 
              bool _inhibit_GRAPPLE, 
              int _space, 
@@ -47,9 +49,7 @@ Ship :: Ship(TextureOb* _pTo_texOb,
     	in_SPACE = true;    // will be improved
     	navigator = new Navigator(this);  
     
-    	is_FOLLOWING_PLANET = false;
-    	is_FOLLOWING_SHIP = false;
-    	is_FOLLOWING_STARSYSTEM = false;       
+    
 
     	dying_time = 60;
 
@@ -57,9 +57,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
     	type_id = SHIP_ID;
     	//subtype_id = ;
 
-    	starsystem = NULL; 
 
-    	texOb = _pTo_texOb;
+    	texOb = _texOb;
 
     	size = returnObjectSize(texOb->w, texOb->h);
     	collision_radius = (texOb->w + texOb->h)/3;
@@ -88,9 +87,8 @@ Ship :: Ship(TextureOb* _pTo_texOb,
     	points.initMidFarLeftPoint();
     	points.addMidFarLeftPoint();
 
-    	//points.setCenter(randIntInRange(0, 800), randIntInRange(0, 600));    // debug
-    	points.setAngle(0);
-    	points.setCenter(300, 300); 
+    	points.setAngle(randIntInRange(0, 360));
+    	points.setCenter(randIntInRange(0, 500), randIntInRange(0, 500)); 
 
     	w_orig = texOb->w;
     	h_orig = texOb->h;
@@ -101,16 +99,10 @@ Ship :: Ship(TextureOb* _pTo_texOb,
     	korpus_protection   = _protection;
     	nominal_temperature = _nominal_temperature;
 
-    	race_id         = texOb->race_id;
-    	subtype_id      = texOb->subtype_id;
-    	size_id         = texOb->size_id;
-    	mod_id          = texOb->mod_id;
-
-    	npc_owner   = NULL;
-    	pTo_playerOwner = NULL;
+    	starsystem = NULL; 
+    	npc_owner    = NULL;
 
     	price = randIntInRange(200, 400);
-    	//color = (*pTo_texOb).color_id;
 
 
     	/////////////////////////////////////////////////
@@ -159,9 +151,7 @@ Ship :: Ship(TextureOb* _pTo_texOb,
        		turrel1.placed(points.getpWeapon1Center());
        		turrel1.bindSlot(&weapon_slot1);
        		weapon_slot1.bindTurrel(&turrel1);
-       		//turrel1.bindShip(this);
        		turrel1.setTexOb(turrelTexOb); // remove
-       		//turrel_total_pList.push_back(&turrel1); 
        
        		if (render_TURRELS == true)
        		{   
@@ -185,9 +175,7 @@ Ship :: Ship(TextureOb* _pTo_texOb,
        		turrel2.placed(points.getpWeapon2Center());
        		turrel2.bindSlot(&weapon_slot2);
               	weapon_slot2.bindTurrel(&turrel2);
-       		//turrel2.bindShip(this);
        		turrel2.setTexOb(turrelTexOb);
-       		//turrel_total_pList.push_back(&turrel2);
         
        		if (render_TURRELS == true)
        		{  
@@ -211,9 +199,7 @@ Ship :: Ship(TextureOb* _pTo_texOb,
        		turrel3.placed(points.getpWeapon3Center());  
        		turrel3.bindSlot(&weapon_slot3);
               	weapon_slot3.bindTurrel(&turrel3);
-       		//turrel3.bindShip(this);
        		turrel3.setTexOb(turrelTexOb);
-       		//turrel_total_pList.push_back(&turrel3); 
        
        		if (render_TURRELS == true)
        		{  
@@ -237,9 +223,7 @@ Ship :: Ship(TextureOb* _pTo_texOb,
        		turrel4.placed(points.getpWeapon4Center());
        		turrel4.bindSlot(&weapon_slot4);
               	weapon_slot4.bindTurrel(&turrel4);
-       		//turrel4.bindShip(this);
        		turrel4.setTexOb(turrelTexOb);
-       		//turrel_total_pList.push_back(&turrel4);
          
        		if (render_TURRELS == true)
        		{  
@@ -265,9 +249,7 @@ Ship :: Ship(TextureOb* _pTo_texOb,
        		turrel5.placed(points.getpWeapon5Center());
        		turrel5.bindSlot(&weapon_slot5);
               	weapon_slot5.bindTurrel(&turrel5);
-       		//turrel5.bindShip(this);
        		turrel5.setTexOb(turrelTexOb);
-       		//turrel_total_pList.push_back(&turrel5); 
        
        		if (render_TURRELS == true)
        		{  
@@ -277,7 +259,6 @@ Ship :: Ship(TextureOb* _pTo_texOb,
        		}
     	} 
 
-    	//total_weapon_slot_num = weapon_slot_pList.size();
     	total_weapon_slot_num = slot_weapon_pList.size();
     	///////////////////////////////////////////////////
 
@@ -393,7 +374,7 @@ Ship :: Ship(TextureOb* _pTo_texOb,
     	////////////////////////////////////////////////////
 
 
-   	direction_list_END = true;
+
 
 
    	//TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.particles_texOb_pList);
@@ -451,66 +432,10 @@ Ship :: ~Ship()
 
 
     
-void Ship :: calculateDetaledWayToPosition()
-{   
-    	direction_x_list.clear();
-    	direction_y_list.clear();
-    	angle_inD_list.clear();
-  
-    	float last_pos_x = points.getCenter().x;
-    	float last_pos_y = points.getCenter().y;
-
-    	float step = speed/100.0;
-
-    	if ( ((last_pos_x != navigator->getTargetPos().x) || (last_pos_y != navigator->getTargetPos().y)) && (speed != 0) )
-    	{
-       		float xl = navigator->getTargetPos().x - last_pos_x;
-       		float yl = navigator->getTargetPos().y - last_pos_y;
-
-       		float l = sqrt(xl*xl + yl*yl);
-       		float x_normalized = xl/l;
-       		float y_normalized = yl/l;
-
-       		int it = l / step;
-
-       		float x_step = x_normalized * step;
-       		float y_step = y_normalized * step;
-
-       		for(unsigned int i = 0; i < it; i++)
-       		{
-            		last_pos_x += x_step;
-            		last_pos_y += y_step;
-            		float angleInD = atan2(navigator->getTargetPos().y - last_pos_y, navigator->getTargetPos().x - last_pos_x) * RADIAN_TO_DEGREE_RATE;
-
-            		direction_x_list.push_back(last_pos_x);
-            		direction_y_list.push_back(last_pos_y);
-            		angle_inD_list.push_back(angleInD);
-       		}
-    	}
-    
-    	move_it = 0;
-    	len_direction_list = direction_x_list.size();
-
-    	direction_list_END = false;
-}
-
-
 void Ship :: updatePosition()
 {
-     	if (direction_list_END == false)
-     	{
-        	if (move_it < (len_direction_list - 1))
-        	{
-           		points.setCenter(direction_x_list[move_it], direction_y_list[move_it]);
-           		points.setAngle(angle_inD_list[move_it]);
-           		move_it++;
-        	}
-        	else
-           		direction_list_END = true;
-     	}
+        navigator->updatePosition();
 }
-
-
 
 
 void Ship :: reloadAllWeapons()
@@ -544,61 +469,18 @@ void Ship :: selectWeapons()
 }
 
 
-
-void Ship :: setWeaponsTarget(Ship* _ship)
+template <typename TARGET_TYPE> 
+void Ship :: setWeaponsTarget(TARGET_TYPE* _target)
 {                          
-        float dist = distBetweenCenters(points.getCenter().x, points.getCenter().y, _ship->points.getCenter().x, _ship->points.getCenter().y);
+        float dist = distBetweenCenters(points.getCenter(), _target->getPoints()->getCenter());
         
         for (unsigned int i = 0; i < slot_weapon_equiped_pList.size(); i++)
         	if ( slot_weapon_equiped_pList[i]->getTurrel()->getSelectedStatus() == true )
            		if ( slot_weapon_equiped_pList[i]->getTurrel()->getHasTargetStatus() == false )
                   		if ( dist < slot_weapon_equiped_pList[i]->getItemRadius() )
-                       			slot_weapon_equiped_pList[i]->getTurrel()->setTarget(_ship);                
+                       			slot_weapon_equiped_pList[i]->getTurrel()->setTarget(_target);                
 
 }
-
-
-void Ship :: setWeaponsTarget(Asteroid* _asteroid)
-{
-        float dist_to_target = distBetweenCenters(points.getCenter(), _asteroid->getPoints()->getCenter());
-        
-        for (unsigned int i = 0; i < slot_weapon_equiped_pList.size(); i++)
-            	if ( slot_weapon_equiped_pList[i]->getTurrel()->getSelectedStatus() == true )
-               		if ( slot_weapon_equiped_pList[i]->getTurrel()->getHasTargetStatus() == false )
-                  		if ( dist_to_target < slot_weapon_equiped_pList[i]->getItemRadius() )
-                       			slot_weapon_equiped_pList[i]->getTurrel()->setTarget(_asteroid);                       
-                  
-}
-
-
-
-void Ship :: setWeaponsTarget(Mineral* _mineral)
-{
-        float dist_to_target = distBetweenCenters(points.getCenter(), _mineral->getPoints()->getCenter());
-        
-        for (unsigned int i = 0; i < slot_weapon_equiped_pList.size(); i++)
-            	if ( slot_weapon_equiped_pList[i]->getTurrel()->getSelectedStatus() == true )
-               		if ( slot_weapon_equiped_pList[i]->getTurrel()->getHasTargetStatus() == false )
-                  		if ( dist_to_target < slot_weapon_equiped_pList[i]->getItemRadius() )
-                       			slot_weapon_equiped_pList[i]->getTurrel()->setTarget(_mineral);
-
-}
-
-
-void Ship :: setWeaponsTarget(Container* _container)
-{
-        float dist_to_target = distBetweenCenters(points.getCenter(), _container->getPoints()->getCenter());
-        
-        for (unsigned int i = 0; i < slot_weapon_equiped_pList.size(); i++)
-            	if ( slot_weapon_equiped_pList[i]->getTurrel()->getSelectedStatus() == true )
-               		if ( slot_weapon_equiped_pList[i]->getTurrel()->getHasTargetStatus() == false )
-                  		if ( dist_to_target < slot_weapon_equiped_pList[i]->getItemRadius() )
-                       			slot_weapon_equiped_pList[i]->getTurrel()->setTarget(_container);
-}
-
-
-
-
 
 
 
@@ -1071,10 +953,10 @@ void Ship :: updateInfo()
     	int owner_race_id = npc_owner->getRaceId();
 
     	info.addTitleStr("SHIP");
-    	info.addNameStr("id/ss_id:");          info.addValueStr( int2str(id) + " / " + int2str(starsystem->id) );
-    	info.addNameStr("ship/pilot race:");   info.addValueStr( returnRaceStringByRaceId(race_id) + "/" + returnRaceStringByRaceId(owner_race_id) ); 
+    	info.addNameStr("id/ss_id:");          info.addValueStr( int2str(id) + " / " + int2str(starsystem->getId()) );
+    	info.addNameStr("ship/pilot race:");   info.addValueStr( returnRaceStringByRaceId(texOb->race_id) + "/" + returnRaceStringByRaceId(owner_race_id) ); 
     	info.addNameStr("armor/max/size");     info.addValueStr( int2str(armor) + "/" + int2str(armor_max) + "/" + int2str(size) );
-    	info.addNameStr("space/free/mass:");   info.addValueStr( (space) + "/" + int2str(space - mass) + "/" + int2str(mass) );
+    	info.addNameStr("space/free/mass:");   info.addValueStr( int2str(space) + "/" + int2str(space - mass) + "/" + int2str(mass) );
     	info.addNameStr("energy:");            info.addValueStr( int2str(energy) );
 	info.addNameStr("temperature:");       info.addValueStr( int2str(nominal_temperature) );
         info.addNameStr("observe radius:");    info.addValueStr( int2str(radius) );
@@ -1183,8 +1065,8 @@ std::string Ship :: returnProtectionStr()
 
 void Ship :: renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y)
 {  
-	updateInfo(); 
-     	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y);
+        updateInfo();
+     	drawInfoIn2Column(&info.title_list, &info.value_list, _pos_x, _pos_y, _offset_x, _offset_y);
 }
 
 
@@ -1206,9 +1088,9 @@ void Ship :: render_inSpace() const
     	{
        		drive_jet->update();
 
-       		glEnable(GL_POINT_SPRITE);
+       		enable_POINTSPRITE();
        			drive_jet->render();
-       		glDisable(GL_POINT_SPRITE);
+       		disable_POINTSPRITE();
     	}
 }
 
@@ -1347,7 +1229,7 @@ void equip(Ship* pTo_ship)
         	LazerEquipment* pTo_lazer = lazerEquipmentGenerator(RACE_0_ID);              
         	pTo_ship->slot_otsec_pList[i]->insertItem(pTo_lazer);
     	}
-    
+
 
     	for (unsigned int i = 3; i < 6; i++) //pTo_ship->otsec_slot_pList.size(); i++)
     	{        
@@ -1363,7 +1245,7 @@ void equip(Ship* pTo_ship)
 
 Ship* shipGenerator(int race_id, int subtype_id, int size_id)
 {
-    	TextureOb* pTo_shipTexOb = g_TEXTURE_MANAGER.returnPointerToRandomShipTexObWithFollowingAtrributes(race_id, subtype_id, size_id); 
+    	TextureOb* texOb_ship = g_TEXTURE_MANAGER.returnPointerToRandomShipTexObWithFollowingAtrributes(race_id, subtype_id, size_id); 
 
     	int max_weapons = randIntInRange(1,5);
     	bool inhibit_GRAPPLE = false;
@@ -1372,7 +1254,7 @@ Ship* shipGenerator(int race_id, int subtype_id, int size_id)
     	int protection = 3;
     	int nominal_temperature = 100;
                          
-    	Ship* pTo_ship = new Ship(pTo_shipTexOb, max_weapons, inhibit_GRAPPLE, space, armor_max, protection, nominal_temperature);
+    	Ship* ship = new Ship(texOb_ship, max_weapons, inhibit_GRAPPLE, space, armor_max, protection, nominal_temperature);
     
-    	return pTo_ship;
+    	return ship;
 }

@@ -22,6 +22,35 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 void loadResources()
 {
+    	RACES_ALL_LIST.push_back(RACE_0_ID);
+    	RACES_ALL_LIST.push_back(RACE_1_ID);
+    	RACES_ALL_LIST.push_back(RACE_2_ID);
+    	RACES_ALL_LIST.push_back(RACE_3_ID);
+    	RACES_ALL_LIST.push_back(RACE_4_ID);
+   	RACES_ALL_LIST.push_back(RACE_6_ID);
+    	RACES_ALL_LIST.push_back(RACE_7_ID);
+
+    	RACES_GOOD_LIST.push_back(RACE_0_ID);
+    	RACES_GOOD_LIST.push_back(RACE_1_ID);
+   	RACES_GOOD_LIST.push_back(RACE_2_ID);
+    	RACES_GOOD_LIST.push_back(RACE_3_ID);
+    	RACES_GOOD_LIST.push_back(RACE_4_ID);
+
+    	RACES_EVIL_LIST.push_back(RACE_6_ID);
+    	RACES_EVIL_LIST.push_back(RACE_7_ID);
+
+    	SHIP_SUBTYPE_LIST.push_back(RANGER_ID);
+    	SHIP_SUBTYPE_LIST.push_back(WARRIOR_ID);
+    	SHIP_SUBTYPE_LIST.push_back(PIRAT_ID);
+    	SHIP_SUBTYPE_LIST.push_back(TRADER_ID);
+   	SHIP_SUBTYPE_LIST.push_back(DIPLOMAT_ID);
+            
+    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(WARRIOR_ID);
+    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(TRADER_ID);
+    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(DIPLOMAT_ID);
+    	
+	
+    	
 pTo_SPHERE_MESH = new ObjMeshInstance("data/obj/sphere/planet.obj");
 
 pTo_DEFORMED_SPHERE_MESH = new ObjMeshInstance("data/obj/sphere_deformed/planet.obj");
@@ -765,77 +794,62 @@ g_TEXTURE_MANAGER.manage( new TextureOb(BOMB_TEXTURE_ID, "data/item/bomb_item.pn
 }
 
 
-{
-	std::vector<int> arg;   
-	arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
-	g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_3.png", true, &arg) );
-}
+//{
+	//std::vector<int> arg;   
+	//arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
+	//g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_3.png", true, &arg) );
+//}
 
-{
-	std::vector<int> arg;   
-	arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
-	g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_4.png", true, &arg) );
-}
 
-{
-	std::vector<int> arg;   
-	arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
-	g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_5.png", true, &arg) );
-}
+//{
+	//std::vector<int> arg;   
+	//arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
+	//g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_5.png", true, &arg) );
+//}
 
-{
-	std::vector<int> arg;   
-	arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
-	g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_6.png", true, &arg) );
-}
+//{
+	//std::vector<int> arg;   
+	//arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
+	//g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_6.png", true, &arg) );
+//}
 
-{
-	std::vector<int> arg;   
-	arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
-	g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_7.png", true, &arg) );
-}
+//{
+	//std::vector<int> arg;   
+	//arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
+	//g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_7.png", true, &arg) );
+//}
 
-{
-	std::vector<int> arg;   
-	arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
-	g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_8.png", true, &arg) );
-}
+//{
+	//std::vector<int> arg;   
+	//arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
+	//g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_8.png", true, &arg) );
+//}
 
-{
-	std::vector<int> arg;   
-	arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
-	g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_9.png", true, &arg) );
-}
+//{
+	//std::vector<int> arg;   
+	//arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
+	//g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_9.png", true, &arg) );
+//}
 
-{
-	std::vector<int> arg;   
-	arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
-	g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_10.png", true, &arg) );
-}
+//{
+	//std::vector<int> arg;   
+	//arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
+	//g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_10.png", true, &arg) );
+//}
 
-{
-	std::vector<int> arg;   
-	arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
-	g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_11.png", true, &arg) );
-}
+//{
+	//std::vector<int> arg;   
+	//arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
+	//g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_11.png", true, &arg) );
+//}
 
-{
-	std::vector<int> arg;   
-	arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
-	g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_12.png", true, &arg) );
-}
+//{
+	//std::vector<int> arg;   
+	//arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
+	//g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_12.png", true, &arg) );
+//}
 
-{
-	std::vector<int> arg;   
-	arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
-	g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_13.png", true, &arg) );
-}
 
-{
-	std::vector<int> arg;   
-	arg.push_back(RACE_6_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
-	g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_61_0_g13.png", true, &arg) );
-}
 
 //################################ enemy 2
 {
@@ -847,7 +861,7 @@ g_TEXTURE_MANAGER.manage( new TextureOb(BOMB_TEXTURE_ID, "data/item/bomb_item.pn
 {
 	std::vector<int> arg;   
 	arg.push_back(RACE_7_ID); arg.push_back(WARRIOR_ID); //COLOR_GOLDENROD
-	g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_71_0_1.png", true, &arg) );
+	g_TEXTURE_MANAGER.manage( new TextureOb(SHIP_TEXTURE_ID, "data/ship/k_71_0_1e.png", true, &arg) );
 }
 g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 
@@ -1321,5 +1335,28 @@ g_TEXTURE_MANAGER.manageItem( new TextureOb(RADAR_ITEM_TEXTURE_ID, "data/item/ra
 std::vector<int> text_background_arg;  
 g_TEXTURE_MANAGER.manage( new TextureOb(TEXT_BACKGROUND_TEXTURE_ID, "data/other/text_background.png", true, &text_background_arg) );
 
+
+
+
+
+
+
+
+
+
+
+
+
+    	if (USE_MODERN_HW == true)
+    	{
+    		int w = g_VIEW_WIDTH;
+		int h = g_VIEW_HEIGHT;
+
+		g_FBO0 = new FBO(w,h);
+		g_FBO1 = new FBO(w,h);	
+		g_FBO2 = new FBO(w,h);
+		g_FBO3 = new FBO(w,h);
+		g_BLOOM = new BloomEffect(w, h, g_BLUR_PROGRAM, g_EXTRACT_BRIGHT_PROGRAM, g_COMBINE_PROGRAM, 1, 1);
+	}
 }
 

@@ -24,17 +24,65 @@ StarSystem :: StarSystem()
 { 
     	id = g_ENTITY_ID_GENERATOR.returnNextId();
     	is_CAPTURED = false;
+    	
+    	detalied_simulation = false;
 }
 
 StarSystem :: ~StarSystem()
 {}
       
 
-void StarSystem ::setPositionOnWorldMap(Rect rect)
+void StarSystem :: setPositionOnWorldMap(Rect rect) { rect_onMap = rect; }
+void StarSystem :: setDetailedSimulation(bool _detalied_simulation) { detalied_simulation = _detalied_simulation; }
+		
+bool StarSystem :: getDetailedSimulation() const { return detalied_simulation; }
+int StarSystem :: getId() const     { return id; }
+int StarSystem :: getTypeId() const { return type_id; }
+                
+                
+void StarSystem :: update_inDynamic_TRUE(int timer)
 {
-     	rect_onMap = rect;
+     	asteroidManager(10); 
+
+    	updateEntities_inDynamic_TRUE();
+    	rocketCollision_TRUE();
+    	asteroidCollision_TRUE();
+
+    	manageEntities(); 
+
+	fireEvents_TRUE(timer);
 }
 
+
+void StarSystem :: update_inDynamic_FALSE(int timer)
+{
+    	//asteroidManager(10); 
+
+    	updateEntities_inDynamic_FALSE();
+    	manageEntities(); 
+
+    	if (randIntInRange(1,10) == 1)
+    	{
+        	rocketCollision_FALSE();
+        	asteroidCollision_FALSE();
+
+        	fireEvents_FALSE(timer);
+    	}
+}
+
+
+void StarSystem :: update_inStatic_TRUE()
+{
+	// freq: once per turn (when pause phase begins)
+    	removeDeadEntities(); 
+    	updateEntities_inStatic(); 
+}
+
+
+void StarSystem :: update_inStatic_FALSE()
+{
+	update_inStatic_TRUE();
+}
 
 
 void StarSystem :: rocketCollision_TRUE()
@@ -496,7 +544,7 @@ void StarSystem :: renderBackground()
     	// HACK for point sprites
 
 	clearScreen();
-
+	resetRenderTransformation();
         restoreSceneColor();
 
     	enable_BLEND();
@@ -519,17 +567,27 @@ void StarSystem :: renderBackground()
 	disable_BLEND();
 }
     
-void StarSystem :: createPostProcessStuff()
-{
-	int w = g_VIEW_WIDTH;
-	int h = g_VIEW_HEIGHT;
+//void StarSystem :: createPostProcessStuff()
+//{
+	//int w = g_VIEW_WIDTH;
+	//int h = g_VIEW_HEIGHT;
 
-	pTo_fbo0 = new FBO(w,h);
-	pTo_fbo1 = new FBO(w,h);	
-	pTo_fbo2 = new FBO(w,h);
-	pTo_fbo3 = new FBO(w,h);
-	pTo_bloom = new BloomEffect(w, h, g_BLUR_PROGRAM, g_EXTRACT_BRIGHT_PROGRAM, g_COMBINE_PROGRAM, 1, 1);
-}
+	//pTo_fbo0 = new FBO(w,h);
+	//pTo_fbo1 = new FBO(w,h);	
+	//pTo_fbo2 = new FBO(w,h);
+	//pTo_fbo3 = new FBO(w,h);
+	//pTo_bloom = new BloomEffect(w, h, g_BLUR_PROGRAM, g_EXTRACT_BRIGHT_PROGRAM, g_COMBINE_PROGRAM, 1, 1);
+//}
+
+    
+void StarSystem :: render()
+{
+    	findVisibleEntities();
+    	if (USE_MODERN_HW == true)
+    		renderEntities_NEW();
+    	else
+        	renderEntities_OLD(); 
+} 
 
     
 void StarSystem :: renderEntities_NEW()
@@ -550,7 +608,7 @@ void StarSystem :: renderEntities_NEW()
 	//######### EFFECT DEMONSTRATION
 
 
-	pTo_fbo0->activate();
+	g_FBO0->activate();
    
         	renderBackground();           
 		camera(g_SCROLL_COORD_X, g_SCROLL_COORD_Y);    
@@ -564,22 +622,22 @@ void StarSystem :: renderEntities_NEW()
     			}
     		disable_BLEND();
 		restoreSceneColor();
-	pTo_fbo0->deactivate();
+	g_FBO0->deactivate();
 
 	// POST PROCESS BLOOM (many FBO)
-	pTo_bloom->pass0(pTo_fbo0->getTexture(), STAR_pList[0]->getBrightThreshold());
-	pTo_bloom->restPasses();
-	pTo_bloom->combine(pTo_fbo0->getTexture());
+	g_BLOOM->pass0(g_FBO0->getTexture(), STAR_pList[0]->getBrightThreshold());
+	g_BLOOM->restPasses();
+	g_BLOOM->combine(g_FBO0->getTexture());
 
 	// RENDER to FBO1, VOLUMETRIC LIGHT
-	pTo_fbo1->activate();
+	g_FBO1->activate();
 		glUseProgram(g_VOLUMETRICLIGHT_PROGRAM);
 			glActiveTexture(GL_TEXTURE0);                                
-			glBindTexture(GL_TEXTURE_2D, pTo_bloom->pTo_fbo_final->getTexture());
+			glBindTexture(GL_TEXTURE_2D, g_BLOOM->pTo_fbo_final->getTexture());
 			glUniform1i(glGetUniformLocation(g_VOLUMETRICLIGHT_PROGRAM, "FullSampler"), 0);
 
 			glActiveTexture(GL_TEXTURE1);                                
-			glBindTexture(GL_TEXTURE_2D, pTo_bloom->texture_blured);
+			glBindTexture(GL_TEXTURE_2D, g_BLOOM->texture_blured);
 			glUniform1i(glGetUniformLocation(g_VOLUMETRICLIGHT_PROGRAM, "BlurSampler"), 1);
 
 			glUniform4f(glGetUniformLocation(g_VOLUMETRICLIGHT_PROGRAM, "sun_pos"), -float(g_SCROLL_COORD_X)/w, -float(g_SCROLL_COORD_Y)/h, -100.0, 1.0);
@@ -588,11 +646,11 @@ void StarSystem :: renderEntities_NEW()
 			drawFullScreenQuad(w, h, -999.0);
 		glUseProgram(0);
 		glActiveTexture(GL_TEXTURE0);
-	pTo_fbo1->deactivate();
+	g_FBO1->deactivate();
 
 
-	pTo_fbo2->activate();
-		drawFullScreenTexturedQuad(pTo_fbo1->getTexture(), w, h, -999.0);
+	g_FBO2->activate();
+		drawFullScreenTexturedQuad(g_FBO1->getTexture(), w, h, -999.0);
            
           	camera(g_SCROLL_COORD_X, g_SCROLL_COORD_Y);    
         
@@ -636,11 +694,11 @@ void StarSystem :: renderEntities_NEW()
     			}    	
 		disable_BLEND();
 		
-    	pTo_fbo2->deactivate();
+    	g_FBO2->deactivate();
 
 
 	// POST PROCESS WAVE SHOCK into FBO2
-	pTo_fbo3->activate();
+	g_FBO3->activate();
 
 		float center_array[10][2];
 		float xyz_array[10][3];
@@ -662,7 +720,7 @@ void StarSystem :: renderEntities_NEW()
 
 		glUseProgram(g_SHOCKWAVE_PROGRAM);
 			glActiveTexture(GL_TEXTURE0);                                
-			glBindTexture(GL_TEXTURE_2D, pTo_fbo2->getTexture());
+			glBindTexture(GL_TEXTURE_2D, g_FBO2->getTexture());
 			glUniform1i (glGetUniformLocation(g_SHOCKWAVE_PROGRAM, "sceneTex"), 0);
 
 			int len_effect_SHOCKWAVE_list = effect_SHOCKWAVE_pList.size();
@@ -674,7 +732,7 @@ void StarSystem :: renderEntities_NEW()
 			drawFullScreenQuad(w, h, -999.0);
 		glUseProgram(0);
 	
-	pTo_fbo3->deactivate();
+	g_FBO3->deactivate();
 
 
 	// render from FBO
@@ -682,8 +740,9 @@ void StarSystem :: renderEntities_NEW()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);      // unbind fbo
 
 	clearScreen();
+	resetRenderTransformation();
 
-	drawFullScreenTexturedQuad(pTo_fbo3->getTexture(), w, h, -999.0);
+	drawFullScreenTexturedQuad(g_FBO3->getTexture(), w, h, -999.0);
 	//drawFullScreenTexturedQuad(pTo_fbo0->texture, w, h, -999.0);  // debug
 
 	camera(g_SCROLL_COORD_X, g_SCROLL_COORD_Y);
@@ -1200,7 +1259,6 @@ void StarSystem :: mouseControl()
             { 
                 cursor_has_target = true;
 
-                //visible_SHIP_pList[ki]->updateInfo(); 
                 visible_SHIP_pList[ki]->renderInfo(visible_SHIP_pList[ki]->getPoints()->getCenter().x, visible_SHIP_pList[ki]->getPoints()->getCenter().y, g_SCROLL_COORD_X, g_SCROLL_COORD_Y); 
 
                 if (mlb == true)

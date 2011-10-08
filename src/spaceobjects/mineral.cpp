@@ -41,7 +41,7 @@ void Mineral :: updateInfo()
 
     	info.addTitleStr("MINERAL");
 
-    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->id));
+    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->getId()));
     	info.addNameStr("armor:");       info.addValueStr(int2str(armor));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 }

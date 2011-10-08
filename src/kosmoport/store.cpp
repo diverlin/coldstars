@@ -40,8 +40,6 @@ Store :: Store(TextureOb* _texOb_background, TextureOb* _texOb_slot)
 
         createSlots();
         initItemsGenerator();
-
-        //manageInitItems();
 }
 
 
@@ -51,28 +49,28 @@ Store :: ~Store()
 
 void Store :: createSlots()
 {
-     int row = 3;
-     int clm = 10;
-     int x0 = 120;
-     int y0 = g_VIEW_HEIGHT - (row + 2) * texOb_slot->h;
+        int row = 3;
+        int clm = 10;
+        int x0 = 120;
+        int y0 = g_VIEW_HEIGHT - (row + 2) * texOb_slot->h;
 
-     int row_act = 1;
-     while (row_act <= row)
-     {
-            int clm_act = 1;
-            while (clm_act <= clm)
-            {
-                   ItemSlot* slot = new ItemSlot(UNIVERSAL_SLOT_ID, 
-                                                 NULL, 
-                                                 texOb_slot, 
-                                                 x0 + clm_act * 1.1 * texOb_slot->w, 
-                                                 y0 + row_act * 1.1 * texOb_slot->h);
+        int row_act = 1;
+        while (row_act <= row)
+        {
+                int clm_act = 1;
+                while (clm_act <= clm)
+                {
+                        ItemSlot* slot = new ItemSlot(UNIVERSAL_SLOT_ID, 
+                                                      NULL, 
+                                                      texOb_slot, 
+                                                      x0 + clm_act * 1.1 * texOb_slot->w, 
+                                                      y0 + row_act * 1.1 * texOb_slot->h);
                                                  
-                   slot_pList.push_back(slot);
-                   clm_act++;
-            }
-            row_act++;
-     }
+                        slot_pList.push_back(slot);
+                        clm_act++;
+                }
+                row_act++;
+        }
 }
 
 
@@ -524,13 +522,13 @@ void Store :: mouseControl()
 }
 
 
-void Store :: renderBackground()
+void Store :: renderBackground() const
 {
      	Rect screen_rect = Rect(0, 0, g_VIEW_WIDTH, g_VIEW_HEIGHT);
      	drawTexturedRect(texOb_background->texture, screen_rect, -1);  
 }
 
-void Store :: renderInternals()
+void Store :: renderInternals() const
 {
         for (unsigned int sli = 0; sli < slot_pList.size(); sli ++)
         {
@@ -538,7 +536,7 @@ void Store :: renderInternals()
         }
 }
 
-void Store :: renderItemInfo()
+void Store :: renderItemInfo() const
 {
         for (unsigned int i = 0; i < slot_pList.size(); i++)
         {
@@ -549,4 +547,22 @@ void Store :: renderItemInfo()
 }
 
 
+void Store :: update()
+{
+        mouseControl();
+}
+
+
+void Store :: render() const
+{
+        clearScreen();
+        resetRenderTransformation();
+                                                        
+        renderBackground();
+        
+        enable_BLEND();
+                renderInternals();
+                renderItemInfo();
+        disable_BLEND();
+}
 

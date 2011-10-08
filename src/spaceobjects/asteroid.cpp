@@ -102,10 +102,10 @@ void Asteroid :: death_TRUE()
         		_mineral = new Mineral(_mTexOb, points.getCenter());
 			starsystem->addMineral(_mineral);
 			
-			printf("----%i,%i, %f,%f\n", id, i, _mineral->getPoints()->getCenter().x, _mineral->getPoints()->getCenter().y);
+			//printf("----%i,%i, %f,%f\n", id, i, _mineral->getPoints()->getCenter().x, _mineral->getPoints()->getCenter().y);
 			
     		}
-    		printf("asteroid.death_TRUE ******\n");
+    		//printf("asteroid.death_TRUE ******\n");
     	   		
         	//self.starsystem.screen_QUAKE_runtime_counter = 50
         	//self.starsystem.screen_QUAKE_amlitudaDiv2 = 5
@@ -136,7 +136,7 @@ void Asteroid :: updateInfo()
 	info.clear();
 
     	info.addTitleStr("ASTEROID");
-    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->id));
+    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->getId()));
     	info.addNameStr("armor:");       info.addValueStr(int2str(armor));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 	info.addNameStr("speed x 100:"); info.addValueStr(int2str(int(data.speed*100)));

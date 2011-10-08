@@ -20,289 +20,178 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "include.h"
 
 
-void starsystemSimulation_inDynamic_TRUE(StarSystem* starsystem)
-{
-    	starsystem->asteroidManager(10); 
-
-    	starsystem->updateEntities_inDynamic_TRUE();
-    	starsystem->rocketCollision_TRUE();
-    	starsystem->asteroidCollision_TRUE();
-
-    	starsystem->manageEntities(); 
-
-    	starsystem->fireEvents_TRUE(g_TIMER);
-}
-
-void starsystemSimulation_inDynamic_FALSE(StarSystem* starsystem)
-{
-    	starsystem->asteroidManager(10); 
-
-    	starsystem->updateEntities_inDynamic_FALSE();
-    	starsystem->manageEntities(); 
-
-    	if (randIntInRange(1,10) == 1)
-    	{
-        	starsystem->rocketCollision_FALSE();
-        	starsystem->asteroidCollision_FALSE();
-
-        	starsystem->fireEvents_FALSE(g_TIMER);
-    	}
-}
-
-void starsystemSimulation_inStatic_TRUE(StarSystem* starsystem)
-{    
-    	starsystem->removeDeadEntities(); 
-    	starsystem->updateEntities_inStatic(); 
-}
-
-void starsystemSimulation_inStatic_FALSE(StarSystem* starsystem)
-{   
-	// freq: once per turn (when pause phase begins)
-    	starsystem->removeDeadEntities(); 
-    	starsystem->updateEntities_inStatic(); 
-}
-
-void starsystemRender(StarSystem* starsystem)
-{
-    	starsystem->findVisibleEntities();
-    	if (USE_MODERN_HW == true)
-    		starsystem->renderEntities_NEW();
-    	else
-        	starsystem->renderEntities_OLD(); 
-}
-
-void playerScan(Ship* ship, bool in_store = false, bool allow_full_control = false)
-{
-    	pTo_SHIP_GUI->bindShip(ship);                           // improove to perform only once
-
-    	if (pPLAYER->getShip()->id == ship->id)
-        	allow_full_control = true;  
-    	// modify full control for friend ships
-
-					glLoadIdentity();    // !!!!
-					glDisable(GL_DEPTH_TEST);
-					glEnable(GL_BLEND);
-	
-    	pTo_SHIP_GUI->renderInternaly();
-
-    	if (in_store == false)
-    	{
-        	pTo_SHIP_GUI->renderSkill();
-        	pTo_SHIP_GUI->manageSkill(allow_full_control);
-    	}   
-
-    	pTo_SHIP_GUI->mouseControl(allow_full_control, in_store);
-    	if (pTo_CURSOR->getSlot()->getEquipedStatus() == false)
-        	pTo_SHIP_GUI->renderItemInfo();
-
-    	pTo_CURSOR->updatePos();
-    	pTo_CURSOR->renderFrame();
-}
-
-
-
-
 int main()
 {       
-    g_APP.SetFramerateLimit(g_FPS_LIMIT); // Limit to 60 frames per second
-    g_APP.PreserveOpenGLStates(true);
-    g_APP.UseVerticalSync(g_VERT_SYNC);
+    	g_APP.SetFramerateLimit(g_FPS_LIMIT); // Limit to 60 frames per second
+    	g_APP.PreserveOpenGLStates(true);
+    	g_APP.UseVerticalSync(g_VERT_SYNC);
 
-    g_FONT.LoadFromFile("data/font/font.ttf");
+    	g_FONT.LoadFromFile("data/font/font.ttf");
 
-    initGL(g_VIEW_WIDTH, g_VIEW_HEIGHT); 
+    	initGL(g_VIEW_WIDTH, g_VIEW_HEIGHT); 
 
-    loadResources();
+    	loadResources();
 
-    bool calculation_per_turn_allowed = true;
-    bool algorythm_TRUE = true;      // debug for ss_active  
+    	bool calculation_per_turn_allowed = true;
 
-    KeyEventsInSpace g_KEY_EVENTS_IN_SPACE = KeyEventsInSpace(); 
+    	KeyEventsInSpace keyEvents = KeyEventsInSpace(); 
 
-    Galaxy galaxy;
-    InterfaceInSpace interfaceInSpace 	      = InterfaceInSpace();
-    InterfaceInKosmoport interfaceInKosmoport = InterfaceInKosmoport();
+    	Galaxy galaxy;
+    	SpaceMap spaceMap;
+    	spaceMap.bindGalaxy(&galaxy);
+        
+    	InterfaceInSpace interfaceInSpace 	  = InterfaceInSpace();
+    	InterfaceInKosmoport interfaceInKosmoport = InterfaceInKosmoport();
 
-    pTo_CURSOR = new Cursor();
-    pTo_SHIP_GUI = new ShipInternal();
-    
-    //// player
-    pPLAYER = new PlayerInstance();
-    
+    	pSHIP_GUI = new ShipInternal();
+        pSHIP_GUI->createControlSkillButtons();
+                
+    	pPLAYER   = new PlayerInstance();    
 	pPLAYER->setActiveStarSystem(galaxy.getRandomStarSystem());      		
       		
-    Ship* pship = pPLAYER->getActiveStarSystem()->SHIP_inSPACE_vec[0];
+    	Ship* pship = pPLAYER->getActiveStarSystem()->SHIP_inSPACE_vec[0];
 
-    //equip(pTo_pship); // debug
+    	pPLAYER->bindShip(pship);
+    	pship->getPoints()->setCenter(-200,-200);
+    	//// player
 
-    //pTo_pship->drive_slot.getDriveEquipment()->getSpeed()*=5;   // hack debug
-    //pTo_pship->updateAllStuff(); 
+    	float fps;
 
-    pPLAYER->bindShip(pship);
+    	std::string coord_str;
+    	std::string fps_str = "";
 
-    pship->getPoints()->setCenter(-200,-200);
-    //// player
+    	g_TIMER = -1; 
+    	// GAME LOOP
+    	while (g_APP.IsOpened())
+    	{    
+       		///////////// AUTOTURN //////////////////
+       		//if (g_TIMER < -50)
+       		//{  
+       			// g_TIMER = TURN_TIME;
+           		//TURN_COUNT++;
+           		//printf("        *** auto turn END was activated, turn num = %i\n", TURN_COUNT);
+       		//}
 
-    float fps;
+       		if (pPLAYER->getPilot()->getPlaceTypeId() == SPACE_ID)
+       		{  
+           		//////////// SPACE ///////////////
+           		keyEvents.update();
 
-    std::string coord_str;
-    std::string fps_str = "";
+			if (g_TIMER > 0)   
+        		{
+        			galaxy.update_inDynamic(g_TIMER);
+				calculation_per_turn_allowed = true;
+			}
+			else
+      			{
+        			if (calculation_per_turn_allowed == true)
+               			{
+				        galaxy.update_inStatic();
+                   			calculation_per_turn_allowed = false;
+        			}
+    			}
 
+           		pPLAYER->getActiveStarSystem()->render();
 
-    g_TIMER = -1; 
-    // GAME LOOP
-    while (g_APP.IsOpened())
-    {    
-       ///////////// AUTOTURN //////////////////
-       //if (g_TIMER < -50)
-       //{   g_TIMER = TURN_TIME;
-           //TURN_COUNT++;
-           //printf("        *** auto turn END was activated, turn num = %i\n", TURN_COUNT);
-       //}
+           		if ( (pPLAYER->is_SCANNING == false) && (pPLAYER->show_WORLDMAP == false) )
+              			pPLAYER->getActiveStarSystem()->mouseControl();   
 
-       if (pPLAYER->getPilot()->getPlaceTypeId() == SPACE_ID)
-       {  
-           //////////// SPACE ///////////////
-           g_KEY_EVENTS_IN_SPACE.getSimpleInputs();
-           g_KEY_EVENTS_IN_SPACE.getRealTimeInputs();
-           g_KEY_EVENTS_IN_SPACE.scrollCamera();
+           		//////////// SCAN ///////////////
+           		if ( pPLAYER->is_SCANNING == true )
+                        {  
+                                pSHIP_GUI->configure(pPLAYER->getPilot()->getScanShip());   // improove to perform only once
+              			pSHIP_GUI->update();
+                                pSHIP_GUI->render();
+                        }
 
-           if (g_TIMER > 0)   
-           {
-               if (algorythm_TRUE)
-                   starsystemSimulation_inDynamic_TRUE(pPLAYER->getActiveStarSystem());
-               else
-                   starsystemSimulation_inDynamic_FALSE(pPLAYER->getActiveStarSystem());
+           		/////////// WORLDMAP ///////////
+           		if ( pPLAYER->show_WORLDMAP == true )  
+           		{
+               			spaceMap.update();   
+               			spaceMap.render();   
+          		}
 
-               for (unsigned int si = 0; si < galaxy.hSTARSYSTEM_pList.size(); si++)
-                   starsystemSimulation_inDynamic_FALSE(galaxy.hSTARSYSTEM_pList[si]);
-
-               calculation_per_turn_allowed = true;
-           }
-           else
-           {
-               if (calculation_per_turn_allowed == true)
-               {
-                   pPLAYER->getShip()->reloadAllWeapons();   // remove from here
-                   pPLAYER->getShip()->getNavigator()->updateTargetCoords();   // remove from here
-                   
-                   starsystemSimulation_inStatic_TRUE(pPLAYER->getActiveStarSystem());
-                   //world.pTo_ss_active->debug__();                                 // debug
-                   for (unsigned int si = 0; si < galaxy.hSTARSYSTEM_pList.size(); si++)
-                   {    
-                        starsystemSimulation_inStatic_FALSE(galaxy.hSTARSYSTEM_pList[si]);
-                        //world.hSTARSYSTEM_pList[si]->debug__();                       // debug
-                   }
-
-                   calculation_per_turn_allowed = false;
-               }
-
-           }
-
-           starsystemRender(pPLAYER->getActiveStarSystem());
-
-           if ( (pPLAYER->is_SCANNING == false) && (pPLAYER->show_WORLDMAP == false) )
-              pPLAYER->getActiveStarSystem()->mouseControl();   
-
-           //////////// SCAN ///////////////
-           if ( pPLAYER->is_SCANNING == true )  
-              playerScan(pPLAYER->getPilot()->getScanShip());
+           		interfaceInSpace.update();    
+           		interfaceInSpace.render();
+       		}
 
 
-           /////////// WORLDMAP ///////////
-           if ( pPLAYER->show_WORLDMAP == true )  
-           {
-               galaxy.manage_map();   
-               galaxy.render_map();   
-           }
+       		if (pPLAYER->getPilot()->getPlaceTypeId() == PLANET_TYPE_ID)
+       		{
+           		keyEvents.update2();
+          
+           		if (interfaceInKosmoport.getActiveScreenId() == ANGAR_SCREEN_ID)
+           		{
+               			pPLAYER->getPilot()->getKosmoport()->getAngar()->update();                                
+               			pPLAYER->getPilot()->getKosmoport()->getAngar()->render();
+               			
+                                if (pPLAYER->is_SCANNING == true) 
+                                { 
+                                        pSHIP_GUI->configure(pPLAYER->getPilot()->getScanShip());   // improove to perform only once
+                   			pSHIP_GUI->update();
+                                        pSHIP_GUI->render();
+                                }
+               			else
+                   			pPLAYER->getPilot()->getKosmoport()->getAngar()->renderItemInfo();
+           		}
 
-           interfaceInSpace.resetInfoFlags(); 
-           interfaceInSpace.mouseInteraction();           
-               					glDisable(GL_DEPTH_TEST);
-    						glEnable(GL_BLEND);
-    						glLoadIdentity();
-           interfaceInSpace.render();
-           interfaceInSpace.renderInfo(); 
-       }
+           		if (interfaceInKosmoport.getActiveScreenId() == STORE_SCREEN_ID)
+           		{
+                                pPLAYER->getPilot()->getKosmoport()->getStore()->update();
+               			pPLAYER->getPilot()->getKosmoport()->getStore()->render();                                 
+                                                 
+                                pSHIP_GUI->configure(pPLAYER->getShip(), true);
+               			pSHIP_GUI->update();
+                                pSHIP_GUI->render();
+                        }
 
+           		if (interfaceInKosmoport.getActiveScreenId() == SHOP_SCREEN_ID)
+           		{
+                                pPLAYER->getPilot()->getKosmoport()->getShop()->update();
+                                pPLAYER->getPilot()->getKosmoport()->getShop()->render();
+           		}
 
-       if (pPLAYER->getPilot()->getPlaceTypeId() == PLANET_ID)
-       {
-           g_KEY_EVENTS_IN_SPACE.getSimpleInputs();
-           g_KEY_EVENTS_IN_SPACE.getRealTimeInputs();
+           		if (interfaceInKosmoport.getActiveScreenId() == GALAXYMAP_SCREEN_ID)
+           		{
+               			spaceMap.update();
+                                spaceMap.render();   
+           		}
 
-           clearScreen();
-           
-           if (interfaceInKosmoport.getActiveScreenId() == ANGAR_SCREEN_ID)
-           {
-               pPLAYER->getPilot()->getKosmoport()->getAngar()->mouseControl();
-               pPLAYER->getPilot()->getKosmoport()->getAngar()->renderBackground();
-               pPLAYER->getPilot()->getKosmoport()->getAngar()->renderInternals();
-               if (pPLAYER->is_SCANNING == true)  
-                   playerScan(pPLAYER->getPilot()->getScanShip());
-               else
-                   pPLAYER->getPilot()->getKosmoport()->getAngar()->renderItemInfo();
-           }
+           		if (interfaceInKosmoport.getActiveScreenId() == GOVERMENT_SCREEN_ID)
+           		{
+                                pPLAYER->getPilot()->getKosmoport()->getGoverment()->update();
+                                pPLAYER->getPilot()->getKosmoport()->getGoverment()->render();
+           		}
 
-           if (interfaceInKosmoport.getActiveScreenId() == STORE_SCREEN_ID)
-           {
-               pPLAYER->getPilot()->getKosmoport()->getStore()->mouseControl();
-               pPLAYER->getPilot()->getKosmoport()->getStore()->renderBackground();
-               pPLAYER->getPilot()->getKosmoport()->getStore()->renderInternals();
-               playerScan(pPLAYER->getShip(), true);
-               pPLAYER->getPilot()->getKosmoport()->getStore()->renderItemInfo();
-           }
-
-           if (interfaceInKosmoport.getActiveScreenId() == SHOP_SCREEN_ID)
-           {
-               pPLAYER->getPilot()->getKosmoport()->getShop()->render();
-           }
-
-           if (interfaceInKosmoport.getActiveScreenId() == GALAXYMAP_SCREEN_ID)
-           {
-               galaxy.manage_map();   
-               galaxy.render_map();   
-           }
-
-           if (interfaceInKosmoport.getActiveScreenId() == GOVERMENT_SCREEN_ID)
-           {
-               pPLAYER->getPilot()->getKosmoport()->getGoverment()->render();
-           }
-
-           interfaceInKosmoport.resetInfoFlags(); 
-           interfaceInKosmoport.mouseInteraction(); 
-                				glDisable(GL_DEPTH_TEST);
-    						glEnable(GL_BLEND);
-    						glLoadIdentity();
-           interfaceInKosmoport.render();       
-           interfaceInKosmoport.renderInfo();   
-       } 
+           		interfaceInKosmoport.update(); 
+           		interfaceInKosmoport.render(); 
+       		} 
 
        
-       float fps = 1.f / g_APP.GetFrameTime();
+       		float fps = 1.f / g_APP.GetFrameTime();
 
-       coord_str = "world coord: " + int2str(g_SCROLL_COORD_X) + "," + int2str(g_SCROLL_COORD_Y);
-       if (randIntInRange(0, 20) == 1)
-          fps_str = "FPS:" + int2str((int)fps);
+       		coord_str = "world coord: " + int2str(g_SCROLL_COORD_X) + "," + int2str(g_SCROLL_COORD_Y);
+       		if (randIntInRange(0, 20) == 1)
+          		fps_str = "FPS:" + int2str((int)fps);
 
-       sf::String coord_Str(coord_str, g_FONT, 14);
-       coord_Str.SetColor(sf::Color(255, 255, 255));
-       coord_Str.SetPosition(g_VIEW_WIDTH - 200, 15); 
+       		sf::String coord_Str(coord_str, g_FONT, 14);
+       		coord_Str.SetColor(sf::Color(255, 255, 255));
+       		coord_Str.SetPosition(g_VIEW_WIDTH - 200, 15); 
 
-       sf::String fps_Str(fps_str, g_FONT, 14);
-       fps_Str.SetColor(sf::Color(255, 255, 255));
-       fps_Str.SetPosition(100, 15); 
+       		sf::String fps_Str(fps_str, g_FONT, 14);
+       		fps_Str.SetColor(sf::Color(255, 255, 255));
+       		fps_Str.SetPosition(100, 15); 
 
-       g_APP.Draw(coord_Str);
-       g_APP.Draw(fps_Str);
+       		g_APP.Draw(coord_Str);
+       		g_APP.Draw(fps_Str);
 
-       // Finally, display rendered frame on screen
-       g_APP.Display();
+       		// Finally, display rendered frame on screen
+       		g_APP.Display();
 
-       g_TIMER--;
-    }
+       		g_TIMER--;
+    	}
 
-    return EXIT_SUCCESS;
+    	return EXIT_SUCCESS;
 }
 
 

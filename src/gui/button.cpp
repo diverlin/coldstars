@@ -44,7 +44,7 @@ void Button :: setShowInfoFlag(bool _show_info)   { show_info = _show_info; }
 bool Button :: getShowInfoFlag() const { return show_info; }
 Rect Button :: getRect() const         { return rect; }
 TextureOb* Button :: getTexOb()        { return texOb; }
-int Button :: getTypeId() const     { return subtype_id; }
+int Button :: getTypeId() const        { return subtype_id; }
 int Button :: getSubTypeId() const     { return subtype_id; }
 
 bool Button :: interaction(int _x, int _y)
@@ -61,12 +61,12 @@ void Button :: setCenter(int _x, int _y)
      	rect.setNewCenter((float)_x, (float)_y);
 }
    
-void Button :: render()
+void Button :: render() const
 {
    	drawTexturedRect(texOb->texture, rect, -1);
 }
 
-void Button :: renderInfo()
+void Button :: renderInfo() const
 {
      	drawSimpleText(info_str, 12, rect.getBottomLeft().x - 50, rect.getBottomLeft().y + 30);
 }

@@ -30,13 +30,16 @@ class Cursor
 
 		ItemSlot* getSlot();
 		
-        	void updatePos();
-        	void renderFrame();
+		void update();
+		void render();
         	//void renderFrames(GLuint flash_tex);
         	
         private:
                 int type_id;
         	ItemSlot* slot;
+        	
+        	void updatePos();
+        	void renderFrame();
         
 }; 
 

@@ -27,7 +27,8 @@ class Shop
                 Shop(TextureOb* _texOb_background);
                 ~Shop();
                 
-                void render();
+                void update();
+                void render() const;
                 
         private:
                 TextureOb* texOb_background;

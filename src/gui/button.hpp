@@ -44,8 +44,8 @@ class Button
 
        		void setCenter(int _x, int _y);
 
-       		void render();    
-       		void renderInfo();
+       		void render() const;    
+       		void renderInfo() const;
         
         private:
         	int type_id, subtype_id;

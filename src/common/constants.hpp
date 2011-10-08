@@ -28,62 +28,66 @@ int const SIZE_9 = 240;  // 9 - up to 240x240
 
 class DetaliedIdGenerator
 {
-    public:
-        int last_id;
-        std::vector<int> id_list; 
-        std::vector<std::string> description_list; 
+    	public:
+        	int last_id;
+        	std::vector<int> id_list; 
+        	std::vector<std::string> description_list; 
 
-        DetaliedIdGenerator()
-        {
-           last_id = 0;
-        }
+        	DetaliedIdGenerator()
+        	{
+           		last_id = 0;
+        	}
 
-        ~DetaliedIdGenerator()
-        {}
+        	~DetaliedIdGenerator()
+        	{}
 
-        int returnNextId(std::string id_string)
-        {  
-            last_id++;
-            id_list.push_back(last_id);
-            description_list.push_back(id_string);
-            return last_id;
-        }  
+        	int returnNextId(std::string id_string)
+        	{  
+            		last_id++;
+            		id_list.push_back(last_id);
+            		description_list.push_back(id_string);
+            		return last_id;
+        	}  
 
-        std::string returnStrByTypeId(int _id)
-        {
-            for(unsigned int i=0; i < id_list.size(); i++)
-               if(_id == id_list[i])
-                 return description_list[i]; 
-        }  
+        	std::string returnStrByTypeId(int _id)
+        	{
+            		for(unsigned int i=0; i < id_list.size(); i++)
+               			if(_id == id_list[i])
+                 			return description_list[i]; 
+        	}  
 };
 
 
 
 class SimpleIdGenerator
 {
-    public:
-        int last_id;
-        std::vector<int> id_list; 
+    	public:
+        	int last_id;
+        	std::vector<int> id_list; 
 
-        SimpleIdGenerator()
-        {
-           last_id = 0;
-        }
+        	SimpleIdGenerator()
+        	{
+           		last_id = 0;
+        	}
 
-        ~SimpleIdGenerator()
-        {}
+        	~SimpleIdGenerator()
+        	{}
 
-        int returnNextId()
-        {  
-            last_id++;
-            id_list.push_back(last_id);
-            return last_id;
-        }  
+        	int returnNextId()
+        	{  
+            		last_id++;
+            		id_list.push_back(last_id);
+            		return last_id;
+        	}  
 };
+
+
 
 SimpleIdGenerator   g_ENTITY_ID_GENERATOR  = SimpleIdGenerator();
 SimpleIdGenerator   g_TEXTURE_ID_GENERATOR = SimpleIdGenerator();
 DetaliedIdGenerator g_TYPE_ID_GENERATOR    = DetaliedIdGenerator(); 
+
+const int NONE_ID = -1;
 
 const int MAP_OFFSET_X = 60;
 const int MAP_OFFSET_Y = 60;
@@ -94,7 +98,8 @@ const int BLUE_COLOR_ID   = 2;
 const int YELLOW_COLOR_ID = 3;
 const int GREY_COLOR_ID   = 4;
 
-const int STARSYSTEM_TOTAL_NUM = 20;
+
+const int STARSYSTEM_TOTAL_NUM = 100;
 
 // ASTEROID
 const int ASTEROID_SIZE_MIN = 6;
@@ -117,8 +122,8 @@ const int STAR_SIZE_MIN = 80;
 const int STAR_SIZE_MAX = 120;
 
 // SHIP
-const int SHIP_PER_SYSTEM_MIN = 5;
-const int SHIP_PER_SYSTEM_MAX = 10;
+const int SHIP_PER_SYSTEM_MIN = 2;
+const int SHIP_PER_SYSTEM_MAX = 2;
 const int ENEMY_SHIP_PER_SYSTEM_MIN = 20;
 const int ENEMY_SHIP_PER_SYSTEM_MAX = 30;
 
@@ -218,8 +223,8 @@ const int VISIBLE_DISTANCE_WITHOUT_RADAR = 200;
 // DRIVE
 //const int DRIVE_SPEED_MIN = 130;   
 //const int DRIVE_SPEED_MAX = 300;   
-const int DRIVE_SPEED_MIN = 200;   // debug
-const int DRIVE_SPEED_MAX = 200;   // debug
+const int DRIVE_SPEED_MIN = 2000;   // debug
+const int DRIVE_SPEED_MAX = 2000;   // debug
 
 const int DRIVE_HYPER_MIN = 100 * 20;
 const int DRIVE_HYPER_MAX = 400 * 20;
@@ -375,9 +380,10 @@ const int DISTANTSTAR_SIZE_MAX = 15;
 
 const int CURSOR_ID     = g_TYPE_ID_GENERATOR.returnNextId("CURSOR_ID");  
 
-const int STAR_ID   = g_TYPE_ID_GENERATOR.returnNextId("STAR_ID");  
-const int ASTEROID_ID   = g_TYPE_ID_GENERATOR.returnNextId("ASTEROID_ID");  
-const int PLANET_ID     = g_TYPE_ID_GENERATOR.returnNextId("PLANET_ID");  
+const int STARSYSTEM_TYPE_ID = g_TYPE_ID_GENERATOR.returnNextId("STARSYSTEM_TYPE_ID");  
+const int STAR_ID            = g_TYPE_ID_GENERATOR.returnNextId("STAR_ID");  
+const int ASTEROID_ID        = g_TYPE_ID_GENERATOR.returnNextId("ASTEROID_ID");  
+const int PLANET_TYPE_ID          = g_TYPE_ID_GENERATOR.returnNextId("PLANET_ID");  
 const int INHABITED_ID       = g_TYPE_ID_GENERATOR.returnNextId("INHABITED_ID");  
 const int UNINHABITED_ID     = g_TYPE_ID_GENERATOR.returnNextId("UNINHABITED_ID");  
 
@@ -525,12 +531,7 @@ const int RACE_6_ID = g_TYPE_ID_GENERATOR.returnNextId("RACE_6_ID"); //  # repli
 const int RACE_7_ID = g_TYPE_ID_GENERATOR.returnNextId("RACE_7_ID"); //  # shadow
 
 
-// -- remove
-std::vector<int> RACES_ALL_LIST;
-std::vector<int> RACES_GOOD_LIST;
-std::vector<int> RACES_EVIL_LIST;
-std::vector<int> RACE4_ALLOWED_SUBTYPE_LIST;
-// -- remove
+
 
 const int CONTAINER_ID = g_TYPE_ID_GENERATOR.returnNextId("CONTAINER_ID");
 const int SHIP_ID = g_TYPE_ID_GENERATOR.returnNextId("SHIP_ID");
@@ -599,3 +600,12 @@ const int DECREMENT_DIPLOMAT_BUTTON_ID = g_TYPE_ID_GENERATOR.returnNextId("DECRE
 
 const int SPACE_ID = g_TYPE_ID_GENERATOR.returnNextId("SPACE_ID");  
 //const enum PLACE_ID { SPACE_ID, PLANET_ID};
+
+
+// -- remove
+std::vector<int> RACES_ALL_LIST;
+std::vector<int> RACES_GOOD_LIST;
+std::vector<int> RACES_EVIL_LIST;
+std::vector<int> RACE4_ALLOWED_SUBTYPE_LIST;
+// -- remove
+

@@ -70,24 +70,33 @@ PlayerInstance :: PlayerInstance()
      
     	is_SCANNING = false;
     	show_WORLDMAP = false;
+    	
+    	cursor = new Cursor();
 }
     
 PlayerInstance :: ~PlayerInstance()
 {}  
     
     
-void PlayerInstance :: setActiveStarSystem(StarSystem* _ss_active) { ss_active = _ss_active; }	
+void PlayerInstance :: setActiveStarSystem(StarSystem* _ss_active) 
+{ 
+	// The starsystem were at least one player exist is living with true simulation
+	ss_active->setDetailedSimulation(false);
+	ss_active = _ss_active; 
+	ss_active->setDetailedSimulation(true);	
+}	
 
 
 Ship* PlayerInstance :: getShip() 		    { return ship; }
 Npc* PlayerInstance :: getPilot() 		    { return npc; }
 StarSystem* PlayerInstance :: getActiveStarSystem() { return ss_active; }	
+Cursor* PlayerInstance :: getCursor()               { return cursor; }
 
 void PlayerInstance :: bindShip(Ship* _ship)
 {
     	ship = _ship;
 
-    	ship->pTo_playerOwner = this;
+    	//ship->pTo_playerOwner = this;
     	npc = ship->getNpc();
     	ship->getNpc()->extractTheMind();
 
@@ -97,7 +106,7 @@ void PlayerInstance :: bindShip(Ship* _ship)
 void PlayerInstance :: update_inSpace_inDynamic()
 {
      if (ship->in_SPACE == false)       // FUUUUUUUUUUUUUUUUUUUUUU must be imprroved
-        npc->setPlaceTypeId(PLANET_ID);
+        npc->setPlaceTypeId(PLANET_TYPE_ID);
 
      //if (pTo_ship->pTo_npc_owner->pTo_scanShip != NULL)
         //is_SCANNING = true;

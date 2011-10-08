@@ -32,9 +32,11 @@ class Navigator
       		void setTargetPlanet(Planet* _target_planet); 
       		void setTargetShip(Ship* _target_ship);    
       		void setTargetStarSystem(StarSystem* _target_starsystem);
-      
+                void setFollowingTypeID(int);
+                      
                 Planet* getTargetPlanet() const;
                 vec2f getTargetPos() const;
+                int getFollowingTypeID() const;
                 
       		void removeTargetPlanet();
       		void removeTargetShip(); 
@@ -43,8 +45,9 @@ class Navigator
      		bool updateTargetCoords();
       
       		bool checkDocking();
-      		bool getDockingPermission();
-      		
+      		bool getDockingPermission();               
+               
+        	void updatePosition();
       	private:
       		Ship* ship;
       		
@@ -53,11 +56,24 @@ class Navigator
 		StarSystem* target_starsystem;
 		
 		vec2f target_pos;
-	
-		float* pTo_target_pos_x;
-		float* pTo_target_pos_y;
+		vec2f* pTo_target_pos;
 			
-		int docking_radius;      	
+		int docking_radius;   
+                
+                int following_TYPE_ID;   
+                
+                //////// TARGET COORDINATES //////
+        	//self.Gl_LIST_direction_ID = None
+        	std::vector<float> direction_x_list;
+        	std::vector<float> direction_y_list;
+        	std::vector<float> angle_inD_list;
+
+        	int len_direction_list;
+        	bool direction_list_END;
+        	int move_it;
+        	//////////////////////////////////
+                
+                void calculateDetaledWayToPosition();
 };
 
 

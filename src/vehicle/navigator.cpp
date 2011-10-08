@@ -22,16 +22,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Navigator :: Navigator(Ship* _ship)
 {
+        following_TYPE_ID = NONE_ID;
+       
 	ship = _ship;
    
 	target_planet     = NULL;
     	target_ship       = NULL;
     	target_starsystem = NULL; 
 
-    	pTo_target_pos_x = NULL;
-    	pTo_target_pos_y = NULL; 
-
-    	docking_radius = 50;
+    	pTo_target_pos = NULL;
+        
+        direction_list_END = true;
 }
 
 Navigator :: ~Navigator()
@@ -46,7 +47,7 @@ void Navigator :: setStaticTargetCoords(vec2f _target_pos)
     	removeTargetShip(); 
     	removeTargetStarSystem(); 
     
-    	ship->calculateDetaledWayToPosition();
+    	calculateDetaledWayToPosition();
 }
       
       
@@ -56,12 +57,11 @@ void Navigator :: setTargetPlanet(Planet* _planet)
     	removeTargetStarSystem(); 
 
     	target_planet = _planet;
-    	ship->is_FOLLOWING_PLANET = true;
+    	following_TYPE_ID = target_planet->getTypeId();
 
-    	pTo_target_pos_x = &target_planet->getPoints()->getCenter().x;
-    	pTo_target_pos_y = &target_planet->getPoints()->getCenter().y;
+    	pTo_target_pos = target_planet->getPoints()->getpCenter();
 
-    	docking_radius = 100;
+    	docking_radius = target_planet->getDockingRadius();
 }
 
 void Navigator :: setTargetShip(Ship* _target_ship)
@@ -70,10 +70,9 @@ void Navigator :: setTargetShip(Ship* _target_ship)
     	removeTargetStarSystem(); 
 
     	target_ship = _target_ship;
-    	ship->is_FOLLOWING_SHIP = true;
+        following_TYPE_ID = target_ship->getTypeId();
 
-    	pTo_target_pos_x = &target_ship->getPoints()->getCenter().x;
-    	pTo_target_pos_y = &target_ship->getPoints()->getCenter().y;
+    	pTo_target_pos = target_ship->getPoints()->getpCenter();
 }
     
 void Navigator :: setTargetStarSystem(StarSystem* _target_starsystem)
@@ -85,58 +84,57 @@ void Navigator :: setTargetStarSystem(StarSystem* _target_starsystem)
     	removeTargetShip(); 
 
     	target_starsystem = _target_starsystem;
-    	ship->is_FOLLOWING_STARSYSTEM = true;
+        following_TYPE_ID = target_starsystem->getTypeId();
 }
+
+void Navigator :: setFollowingTypeID(int _type_id) { following_TYPE_ID = _type_id; }
+
 
 
 Planet* Navigator :: getTargetPlanet() const { return target_planet; }
-
-
 vec2f Navigator :: getTargetPos() const { return target_pos; }
-                              
+int Navigator :: getFollowingTypeID() const { following_TYPE_ID; }                         
 
 void Navigator :: removeTargetPlanet()
 {
     	target_planet = NULL;
-    	ship->is_FOLLOWING_PLANET = false;
+    	following_TYPE_ID = NONE_ID;
 
-    	pTo_target_pos_x = NULL;
-    	pTo_target_pos_y = NULL; 
+    	pTo_target_pos = NULL;
 }
 
 void Navigator :: removeTargetShip()
 {
     	target_ship = NULL;
-    	ship->is_FOLLOWING_SHIP = false;
+    	following_TYPE_ID = NONE_ID;
 
-    	pTo_target_pos_x = NULL;
-    	pTo_target_pos_y = NULL; 
+    	pTo_target_pos = NULL;
 }
 
 void Navigator :: removeTargetStarSystem()
 {
     	target_starsystem = NULL;
-    	ship->is_FOLLOWING_STARSYSTEM = false;
+    	following_TYPE_ID = NONE_ID;
 }
 
 
 bool Navigator :: updateTargetCoords()
 {
-    	if (ship->is_FOLLOWING_PLANET == true)
+    	if (following_TYPE_ID == PLANET_TYPE_ID)
     	{
         	target_pos.set(target_planet->getNextTurnPosition().x,    
        	 		       target_planet->getNextTurnPosition().y);  
-        	ship->calculateDetaledWayToPosition();
+        	calculateDetaledWayToPosition();
 
         	return true;
     	} 
      
-    	if (ship->is_FOLLOWING_SHIP = true)
+    	if (following_TYPE_ID == SHIP_ID)
     	{
         	return true;    
     	}      
 
-    	if (ship->is_FOLLOWING_STARSYSTEM = true)
+    	if (following_TYPE_ID  = STARSYSTEM_TYPE_ID)
     	{
         	return true;    
     	}       
@@ -145,7 +143,7 @@ bool Navigator :: updateTargetCoords()
 
 bool Navigator :: checkDocking()
 {
-     	if (collisionBetweenCenters(ship->getPoints(), (*pTo_target_pos_x), (*pTo_target_pos_y), docking_radius) == true)
+     	if (collisionBetweenCenters(ship->getPoints(), pTo_target_pos->x, pTo_target_pos->y, docking_radius) == true)
         	return true;
      	else    
         	return false;
@@ -154,7 +152,7 @@ bool Navigator :: checkDocking()
 
 bool Navigator :: getDockingPermission()
 {
-    	if (ship->is_FOLLOWING_PLANET == true)
+    	if (following_TYPE_ID == PLANET_TYPE_ID)
        		return target_planet->getPermissionToLand();
 
     	//if (pTo_ship->is_FOLLOWING_SHIP == true)
@@ -164,3 +162,65 @@ bool Navigator :: getDockingPermission()
     	//   return pTo_target_spacestation->getPermissionToLand();
 }
 
+
+
+
+    
+void Navigator :: calculateDetaledWayToPosition()
+{   
+    	direction_x_list.clear();
+    	direction_y_list.clear();
+    	angle_inD_list.clear();
+  
+    	float last_pos_x = ship->getPoints()->getCenter().x;
+    	float last_pos_y = ship->getPoints()->getCenter().y;
+
+    	float step = ship->speed/100.0;
+
+    	if ( ((last_pos_x != getTargetPos().x) || (last_pos_y != getTargetPos().y)) && (ship->speed != 0) )
+    	{
+       		float xl = getTargetPos().x - last_pos_x;
+       		float yl = getTargetPos().y - last_pos_y;
+
+       		float l = sqrt(xl*xl + yl*yl);
+       		float x_normalized = xl/l;
+       		float y_normalized = yl/l;
+
+       		int it = l / step;
+
+       		float x_step = x_normalized * step;
+       		float y_step = y_normalized * step;
+
+       		for(unsigned int i = 0; i < it; i++)
+       		{
+            		last_pos_x += x_step;
+            		last_pos_y += y_step;
+            		float angleInD = atan2(getTargetPos().y - last_pos_y, getTargetPos().x - last_pos_x) * RADIAN_TO_DEGREE_RATE;
+
+            		direction_x_list.push_back(last_pos_x);
+            		direction_y_list.push_back(last_pos_y);
+            		angle_inD_list.push_back(angleInD);
+       		}
+    	}
+    
+    	move_it = 0;
+    	len_direction_list = direction_x_list.size();
+
+    	direction_list_END = false;
+}
+
+
+void Navigator :: updatePosition()
+{
+     	if (direction_list_END == false)
+     	{
+        	if (move_it < (len_direction_list - 1))
+        	{
+           		ship->getPoints()->setCenter(direction_x_list[move_it], direction_y_list[move_it]);
+           		ship->getPoints()->setAngle(angle_inD_list[move_it]);
+           		move_it++;
+        	}
+        	else
+           		direction_list_END = true;
+     	}
+}
