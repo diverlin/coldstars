@@ -40,8 +40,6 @@ class InterfaceInSpace
        		
        		void renderInternal() const;
        		void renderInfo() const;
-       		
-       		      		
 };
 
 

@@ -22,128 +22,141 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Navigator :: Navigator(Ship* _ship)
 {
-        following_TYPE_ID = NONE_ID;
+        following_type_id = NONE_ID;
        
-	ship = _ship;
+	ship_owner = _ship;
    
 	target_planet     = NULL;
     	target_ship       = NULL;
     	target_starsystem = NULL; 
 
     	pTo_target_pos = NULL;
-        
+        offset = 0;
         direction_list_END = true;
 }
 
 Navigator :: ~Navigator()
 {}
-      
+  
+  
+void  Navigator :: removeTarget()
+{
+	if (following_type_id == PLANET_TYPE_ID)
+    		target_planet = NULL;   	
+	if (following_type_id == SHIP_ID)
+    		target_ship = NULL;   	
+    	if (following_type_id == STARSYSTEM_TYPE_ID)
+    		target_starsystem = NULL;
+    		
+    	following_type_id = NONE_ID;
+	offset = 0;
+    	pTo_target_pos = NULL;
+}
       
 void Navigator :: setStaticTargetCoords(vec2f _target_pos)
-{
-    	target_pos = _target_pos;
-    
-    	removeTargetPlanet();
-    	removeTargetShip(); 
-    	removeTargetStarSystem(); 
-    
-    	calculateDetaledWayToPosition();
-}
-      
-      
-void Navigator :: setTargetPlanet(Planet* _planet)
-{
-    	removeTargetShip();
-    	removeTargetStarSystem(); 
-
-    	target_planet = _planet;
-    	following_TYPE_ID = target_planet->getTypeId();
-
-    	pTo_target_pos = target_planet->getPoints()->getpCenter();
-
-    	docking_radius = target_planet->getDockingRadius();
-}
-
-void Navigator :: setTargetShip(Ship* _target_ship)
 {    
-    	removeTargetPlanet();
-    	removeTargetStarSystem(); 
+    	removeTarget();
+    	
+        target_pos = _target_pos;
+       	calculateDetaledWayToPosition();
+}
+      
+      
+//template <typename TARGET>
+//void Navigator :: checkHuperJumpNecessary(TARGET _target)
+//{
+    	//if (ship->getStarSystem()->getId() != _target->getStarSystem()->getId())
+    	//{
+    		//JUMP_is_needed = true;
+    		//target_starsystem = _target->getStarSystem();
+    		//jump_pos.set(800, 800);
+    	//}
+	//else
+	//{
+	    	//JUMP_is_needed = false;
+	    	//target_starsystem = NULL;
+	    	//jump_pos.set(0, 0);
+	//}
+//}
 
+      
+      
+      
+void Navigator :: setTargetPlanet(Planet* _target_planet)
+{
+    	removeTarget();
+
+    	target_planet = _target_planet;
+    	pTo_target_pos = target_planet->getPoints()->getpCenter();
+    	echievement_radius = target_planet->getDockingRadius();
+    	
+     	following_type_id = target_planet->getTypeId();
+}
+
+void Navigator :: setTargetShip(Ship* _target_ship, int _offset)
+{   
+    	removeTarget();
+	
     	target_ship = _target_ship;
-        following_TYPE_ID = target_ship->getTypeId();
-
+    	offset = _offset;
     	pTo_target_pos = target_ship->getPoints()->getpCenter();
+    	//docking_radius = target_planet->getDockingRadius();    // ??
+    	following_type_id = target_ship->getTypeId();
 }
     
+
 void Navigator :: setTargetStarSystem(StarSystem* _target_starsystem)
-{
-    	//target_pos_x = xxx;   jump point 
-    	//target_pos_y = yyy;
-
-    	removeTargetPlanet();
-    	removeTargetShip(); 
-
+{   
+    	removeTarget();
+	
     	target_starsystem = _target_starsystem;
-        following_TYPE_ID = target_starsystem->getTypeId();
+    	target_pos.set(800, 800);  // get correct coords
+    	pTo_target_pos = &target_pos;
+    	echievement_radius = 100;  // ??
+    	following_type_id = target_starsystem->getTypeId();
 }
-
-void Navigator :: setFollowingTypeID(int _type_id) { following_TYPE_ID = _type_id; }
 
 
 
 Planet* Navigator :: getTargetPlanet() const { return target_planet; }
-vec2f Navigator :: getTargetPos() const { return target_pos; }
-int Navigator :: getFollowingTypeID() const { following_TYPE_ID; }                         
+vec2f Navigator :: getTargetPos()      const { return target_pos; }
+int Navigator :: getFollowingTypeId()  const { return following_type_id; }                         
 
-void Navigator :: removeTargetPlanet()
+
+
+bool Navigator :: updateDynamicTargetCoords()
 {
-    	target_planet = NULL;
-    	following_TYPE_ID = NONE_ID;
-
-    	pTo_target_pos = NULL;
-}
-
-void Navigator :: removeTargetShip()
-{
-    	target_ship = NULL;
-    	following_TYPE_ID = NONE_ID;
-
-    	pTo_target_pos = NULL;
-}
-
-void Navigator :: removeTargetStarSystem()
-{
-    	target_starsystem = NULL;
-    	following_TYPE_ID = NONE_ID;
-}
-
-
-bool Navigator :: updateTargetCoords()
-{
-    	if (following_TYPE_ID == PLANET_TYPE_ID)
+    	if (following_type_id == PLANET_TYPE_ID)
     	{
-        	target_pos.set(target_planet->getNextTurnPosition().x,    
-       	 		       target_planet->getNextTurnPosition().y);  
+        	target_pos.set(target_planet->getNextTurnPosition().x, target_planet->getNextTurnPosition().y);  
         	calculateDetaledWayToPosition();
-
         	return true;
     	} 
      
-    	if (following_TYPE_ID == SHIP_ID)
+    	if (following_type_id == SHIP_ID)
     	{
+    		if (offset != 0)
+    		{
+    		    	// gfenerate point where to move
+    			float alpha = (float)randIntInRange(0, 360) / 57.0;
+   
+    			target_pos.x = target_ship->getPoints()->getCenter().x + sin(alpha) * offset;
+    			target_pos.y = target_ship->getPoints()->getCenter().y + cos(alpha) * offset;
+    		}    		
+    		else
+    		{
+    			target_pos = target_ship->getPoints()->getCenter();  
+    		}
+    		
+        	calculateDetaledWayToPosition();
         	return true;    
     	}      
-
-    	if (following_TYPE_ID  = STARSYSTEM_TYPE_ID)
-    	{
-        	return true;    
-    	}       
 }
 
 
-bool Navigator :: checkDocking()
+bool Navigator :: checkEchievement()
 {
-     	if (collisionBetweenCenters(ship->getPoints(), pTo_target_pos->x, pTo_target_pos->y, docking_radius) == true)
+     	if (collisionBetweenCenters(ship_owner->getPoints(), pTo_target_pos->x, pTo_target_pos->y, echievement_radius) == true)
         	return true;
      	else    
         	return false;
@@ -152,7 +165,7 @@ bool Navigator :: checkDocking()
 
 bool Navigator :: getDockingPermission()
 {
-    	if (following_TYPE_ID == PLANET_TYPE_ID)
+    	if (following_type_id == PLANET_TYPE_ID)
        		return target_planet->getPermissionToLand();
 
     	//if (pTo_ship->is_FOLLOWING_SHIP == true)
@@ -172,12 +185,12 @@ void Navigator :: calculateDetaledWayToPosition()
     	direction_y_list.clear();
     	angle_inD_list.clear();
   
-    	float last_pos_x = ship->getPoints()->getCenter().x;
-    	float last_pos_y = ship->getPoints()->getCenter().y;
+    	float last_pos_x = ship_owner->getPoints()->getCenter().x;
+    	float last_pos_y = ship_owner->getPoints()->getCenter().y;
 
-    	float step = ship->speed/100.0;
+    	float step = ship_owner->propetries.speed/100.0;
 
-    	if ( ((last_pos_x != getTargetPos().x) || (last_pos_y != getTargetPos().y)) && (ship->speed != 0) )
+    	if ( ((last_pos_x != getTargetPos().x) || (last_pos_y != getTargetPos().y)) && (ship_owner->propetries.speed != 0) )
     	{
        		float xl = getTargetPos().x - last_pos_x;
        		float yl = getTargetPos().y - last_pos_y;
@@ -216,11 +229,13 @@ void Navigator :: updatePosition()
      	{
         	if (move_it < (len_direction_list - 1))
         	{
-           		ship->getPoints()->setCenter(direction_x_list[move_it], direction_y_list[move_it]);
-           		ship->getPoints()->setAngle(angle_inD_list[move_it]);
+           		ship_owner->getPoints()->setCenter(direction_x_list[move_it], direction_y_list[move_it]);
+           		ship_owner->getPoints()->setAngle(angle_inD_list[move_it]);
            		move_it++;
         	}
         	else
+        	{
            		direction_list_END = true;
+           	}
      	}
 }

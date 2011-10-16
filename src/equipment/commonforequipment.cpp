@@ -63,8 +63,9 @@ int CommonForEquipment :: getType()    const { return type_id; }
 int CommonForEquipment :: getSubType() const { return subtype_id; }
 unsigned int CommonForEquipment :: getMass()    const { return common_data.mass; }
 unsigned int CommonForEquipment :: getCondition() const { return condition; }
-int CommonForEquipment :: getPrice() const {return price; } 
-        	    	
+int CommonForEquipment :: getPrice() const { return price; } 
+TextureOb* CommonForEquipment :: getTexOb() const { return itemTexOb; }
+                
         	
 void CommonForEquipment :: bindSlot(ItemSlot* _slot)
 {

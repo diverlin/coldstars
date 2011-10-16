@@ -24,17 +24,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Galaxy 
 {
   	public:
-  	     	std::vector<StarSystem*> STARSYSTEM_pList;
-     		std::vector<StarSystem*> hSTARSYSTEM_pList;
+  	     	std::vector<StarSystem*> STARSYSTEM_pList;  // friend for map class
      		
      		Galaxy();
      		
      		StarSystem* getRandomStarSystem();
      
-    		void update_inDynamic(int);
-     		void update_inStatic();
-     		
-     		//void manageHiddenStarSystemList(StarSystem* _starsystem);
+    		void update(int);
+
      	private:
    	     	int starsytem_counter;
      		int star_counter;      

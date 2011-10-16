@@ -58,7 +58,7 @@ void ShieldEffect :: render() const
      			     	  ship->getPoints()->getBottomRightShield(), 
      			      	  ship->getPoints()->getTopRightShield(), 
      			      	  ship->getPoints()->getTopLeftShield(), 
-     			      	  ship->pos_z);
+     			      	  ship->getPoints()->getPosZ());
 }
 
 

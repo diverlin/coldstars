@@ -36,17 +36,17 @@ DistantNebulaBgEffect :: DistantNebulaBgEffect(TextureOb* _texOb, vec3f _center)
     	else
     	     	d_angle_inD = 0;
     	     	
-    	updateWHRenderConstants();
+    	calcRenderConstants();
 }
    
    
-void DistantNebulaBgEffect :: update()
+void DistantNebulaBgEffect :: updateRenderStuff()
 {
      	angle_inD += d_angle_inD;  
 }        
 
 
-void DistantNebulaBgEffect :: updateWHRenderConstants()
+void DistantNebulaBgEffect :: calcRenderConstants()
 {
     	// constants needs for render
     	// decreases the math during game loop

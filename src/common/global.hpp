@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define GLOBAL_H
         
 // Create the main window
-int g_VIEW_WIDTH = 640;
+int g_VIEW_WIDTH = 1280;
 int g_VIEW_HEIGHT = g_VIEW_WIDTH*600/800;
 int g_BPP = 32;
 int g_FPS_LIMIT = 60;
@@ -45,7 +45,7 @@ int g_TIMER;
 int TURN_TIME = 150;  //turn time, depends on game fps
 int TURN_COUNT = 0; 
          
-sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.1.28 (SFML/C++)");
+sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.1.29 (SFML/C++)");
 sf::Font g_FONT;
 
 sf::Clock g_CLOCK;
@@ -72,7 +72,7 @@ GLuint g_EXTRACT_BRIGHT_PROGRAM;
 GLuint g_COMBINE_PROGRAM;
 GLuint g_MULTITEX_PROGRAM;
 
-int USE_MODERN_HW = false;
+int USE_MODERN_HW = true;
 
 FBO* g_FBO0;
 FBO* g_FBO1;

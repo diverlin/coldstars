@@ -129,7 +129,7 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
 
     	// LAZER TRACE EFFECT
     	LazerTraceEffect* _lazer_trace_effect;
-    	if (slot->getShip()->render_TURRELS == true)
+    	if (slot->getShip()->korpusData.render_TURRELS == true)
     	{
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
                                                       	      texOb_particle, 
@@ -156,7 +156,7 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
                                                         _turrel->getTarget_pCenterY(), 5, 30, 1.3, 1.0, 0.1, 0.001);               
 
 
-    	_lazer_trace_effect->pTo_damageEffect = _damage_effect;
+    	_lazer_trace_effect->setDamageEffect(_damage_effect);
     	
     	deterioration();
     	

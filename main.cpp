@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "include.h"
+#include "include.hpp"
 
 
 int main()
@@ -64,42 +64,35 @@ int main()
     	// GAME LOOP
     	while (g_APP.IsOpened())
     	{    
-       		///////////// AUTOTURN //////////////////
-       		//if (g_TIMER < -50)
-       		//{  
-       			// g_TIMER = TURN_TIME;
-           		//TURN_COUNT++;
-           		//printf("        *** auto turn END was activated, turn num = %i\n", TURN_COUNT);
-       		//}
+       		/////////// AUTOTURN //////////////////
+       		if (g_TIMER < -50)
+       		{  
+       			g_TIMER = TURN_TIME;
+           		TURN_COUNT++;
+           		printf("        *** auto turn END was activated, turn num = %i\n", TURN_COUNT);
+       		}
 
        		if (pPLAYER->getPilot()->getPlaceTypeId() == SPACE_ID)
        		{  
-           		//////////// SPACE ///////////////
+           		//////////// in SPACE ///////////////
            		keyEvents.update();
 
-			if (g_TIMER > 0)   
-        		{
-        			galaxy.update_inDynamic(g_TIMER);
-				calculation_per_turn_allowed = true;
-			}
-			else
-      			{
-        			if (calculation_per_turn_allowed == true)
-               			{
-				        galaxy.update_inStatic();
-                   			calculation_per_turn_allowed = false;
-        			}
-    			}
+       			galaxy.update(g_TIMER);
 
            		pPLAYER->getActiveStarSystem()->render();
-
-           		if ( (pPLAYER->is_SCANNING == false) && (pPLAYER->show_WORLDMAP == false) )
-              			pPLAYER->getActiveStarSystem()->mouseControl();   
+ 
+                        
+                        if (g_TIMER < 0)  
+                        {
+                                if ( (pPLAYER->is_SCANNING == false) && (pPLAYER->show_WORLDMAP == false) )
+                                {
+                                        pPLAYER->getActiveStarSystem()->mouseControl();  // improove to exclude all render calls
+                                }
+                        }
 
            		//////////// SCAN ///////////////
            		if ( pPLAYER->is_SCANNING == true )
-                        {  
-                                pSHIP_GUI->configure(pPLAYER->getPilot()->getScanShip());   // improove to perform only once
+                        {                                
               			pSHIP_GUI->update();
                                 pSHIP_GUI->render();
                         }
@@ -108,7 +101,7 @@ int main()
            		if ( pPLAYER->show_WORLDMAP == true )  
            		{
                			spaceMap.update();   
-               			spaceMap.render();   
+               			spaceMap.render(false);   
           		}
 
            		interfaceInSpace.update();    
@@ -116,7 +109,7 @@ int main()
        		}
 
 
-       		if (pPLAYER->getPilot()->getPlaceTypeId() == PLANET_TYPE_ID)
+       		if (pPLAYER->getPilot()->getPlaceTypeId() == KOSMOPORT_TYPE_ID)
        		{
            		keyEvents.update2();
           
@@ -127,12 +120,13 @@ int main()
                			
                                 if (pPLAYER->is_SCANNING == true) 
                                 { 
-                                        pSHIP_GUI->configure(pPLAYER->getPilot()->getScanShip());   // improove to perform only once
-                   			pSHIP_GUI->update();
+                                        pSHIP_GUI->update();
                                         pSHIP_GUI->render();
                                 }
                			else
+                                {
                    			pPLAYER->getPilot()->getKosmoport()->getAngar()->renderItemInfo();
+                                }
            		}
 
            		if (interfaceInKosmoport.getActiveScreenId() == STORE_SCREEN_ID)
@@ -154,7 +148,7 @@ int main()
            		if (interfaceInKosmoport.getActiveScreenId() == GALAXYMAP_SCREEN_ID)
            		{
                			spaceMap.update();
-                                spaceMap.render();   
+                                spaceMap.render(true);   
            		}
 
            		if (interfaceInKosmoport.getActiveScreenId() == GOVERMENT_SCREEN_ID)
@@ -172,7 +166,17 @@ int main()
 
        		coord_str = "world coord: " + int2str(g_SCROLL_COORD_X) + "," + int2str(g_SCROLL_COORD_Y);
        		if (randIntInRange(0, 20) == 1)
+       		{
           		fps_str = "FPS:" + int2str((int)fps);
+          		//printf("%f\n", fps);
+          		
+          		//if (pPLAYER->getPilot()->getPlaceTypeId() == SPACE_ID)
+          			//printf("space\n");
+          		//if (pPLAYER->getPilot()->getPlaceTypeId() == KOSMOPORT_TYPE_ID)
+          		        //printf("kosmoport\n");
+          		//if (pPLAYER->getPilot()->getPlaceTypeId() == PLANET_TYPE_ID)
+          		        //printf("planet\n");
+          	}
 
        		sf::String coord_Str(coord_str, g_FONT, 14);
        		coord_Str.SetColor(sf::Color(255, 255, 255));

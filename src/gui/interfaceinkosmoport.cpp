@@ -161,8 +161,9 @@ void InterfaceInKosmoport :: mouseInteraction()
 		   			}
 		   			if (button_angar_pList[i]->getSubTypeId() == LAUNCH_BUTTON_ID)
 		   			{
-       						pPLAYER->getPilot()->createLaunchingSequence(); 
-       						pPLAYER->getPilot()->setPlaceTypeId(SPACE_ID);
+       						//pPLAYER->getPilot()->createLaunchingSequence(); 
+       						//pPLAYER->getPilot()->setPlaceTypeId(SPACE_ID);
+       						pPLAYER->getPilot()->launchingEventPlayer();
        			   		}
        				}
        				break;

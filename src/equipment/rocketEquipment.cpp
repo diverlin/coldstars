@@ -135,7 +135,7 @@ std::string RocketEquipment :: getRadiusStr()
 void RocketEquipment :: fireEvent()
 {
     	RocketBullet* pTo_r1; 
-    	if (slot->getShip()->render_TURRELS == true)
+    	if (slot->getShip()->korpusData.render_TURRELS == true)
     	{
         	pTo_r1 = new RocketBullet(slot->getShip()->getStarSystem(), 
                                   	  pTo_bulletTexOb, 
@@ -145,7 +145,7 @@ void RocketEquipment :: fireEvent()
                                   	  slot->getTurrel()->getTarget_pCenterX(), 
                                   	  slot->getTurrel()->getTarget_pCenterY(), 
                                   	  slot->getTurrel()->getTarget_pAliveStatus(), 
-                                  	  slot->getShip()->id, 
+                                  	  slot->getShip()->getId(), 
                                   	  damage, 
                                   	  bullet_size, 
                                   	  bullet_armor, 
@@ -165,7 +165,7 @@ void RocketEquipment :: fireEvent()
                                   	  slot->getTurrel()->getTarget_pCenterX(), 
                                   	  slot->getTurrel()->getTarget_pCenterY(), 
                                   	  slot->getTurrel()->getTarget_pAliveStatus(), 
-                                  	  slot->getShip()->id, 
+                                  	  slot->getShip()->getId(), 
                                   	  damage, 
                                   	  bullet_size, 
                                   	  bullet_armor, 

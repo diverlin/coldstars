@@ -64,7 +64,9 @@ void Asteroid :: hit_FALSE(int damage)
 {
      	armor -= damage;
      	if (armor <= 0)
+     	{
         	death_FALSE();
+        }
 }
 
 void Asteroid :: update_inSpace_inDynamic_TRUE()
@@ -76,7 +78,9 @@ void Asteroid :: update_inSpace_inDynamic_TRUE()
      	{
         	dying_time--;
         	if (dying_time < 0)
+        	{
            		death_TRUE();
+           	}
      	}   
 }
 

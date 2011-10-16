@@ -30,8 +30,8 @@ Land :: ~Land()
 //// ******* TRANSITION ******* 
 bool Land :: addShip(Ship* _ship)
 {
+        _ship->setPlaceTypeId(PLANET_TYPE_ID);
         SHIP_pList.push_back(_ship);
-        _ship->in_SPACE = false;
         
         return true;
 }
@@ -40,7 +40,7 @@ bool Land :: addNpc(Npc* _npc)
 {
         NPC_pList.push_back(_npc);
         _npc->setLand(this);
-        _npc->setInSpace(false);
+        _npc->setPlaceTypeId(LAND_ID);
  
         return true;
 }
@@ -51,7 +51,7 @@ bool Land :: removeShip(int _id)
         
         for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++) 
         {
-                if (SHIP_pList[ki]->id == _id)
+                if (SHIP_pList[ki]->getId() == _id)
                 {
                         SHIP_pList.erase(SHIP_pList.begin() + ki);
                         is_removed = true;

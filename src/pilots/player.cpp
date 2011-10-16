@@ -20,13 +20,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "player.hpp"
 
 
-void WeaponSelector :: reset()
+void WeaponSelector :: setAll(bool status)
 {
-	slot_1 = false;
-     	slot_2 = false;
-     	slot_3 = false;
-     	slot_4 = false;
-     	slot_5 = false;
+	slot_1 = status;
+     	slot_2 = status;
+     	slot_3 = status;
+     	slot_4 = status;
+     	slot_5 = status;
 }
      		
 //void WeaponSlotSelector :: set(bool _slot_1 = true, 
@@ -52,9 +52,7 @@ PlayerInstance :: PlayerInstance()
 
     	ship       = NULL;
 
-
-	
-    	//weapon_slot_1_SELECTED = false;
+	//weapon_slot_1_SELECTED = false;
     	//weapon_slot_2_SELECTED = false;
     	//weapon_slot_3_SELECTED = false;
     	//weapon_slot_4_SELECTED = false;
@@ -105,12 +103,13 @@ void PlayerInstance :: bindShip(Ship* _ship)
     
 void PlayerInstance :: update_inSpace_inDynamic()
 {
-     if (ship->in_SPACE == false)       // FUUUUUUUUUUUUUUUUUUUUUU must be imprroved
+     if (ship->getPlaceTypeId() == PLANET_TYPE_ID)       // FUUUUUUUUUUUUUUUUUUUUUU must be imprroved
         npc->setPlaceTypeId(PLANET_TYPE_ID);
 
      //if (pTo_ship->pTo_npc_owner->pTo_scanShip != NULL)
         //is_SCANNING = true;
 }
+
 
 
 

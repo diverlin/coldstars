@@ -35,11 +35,20 @@ class Points
         ******************************************/
         
         public:
+                void setPosZ(float);
+                
+                void setWidthHeight(int _w, int _h);  
+                void setCenter(float _centerx, float _centery);
+                void setCenter(vec2f _center);
+                void setAngle(float _angle);
+        
         	int getWidth() const;
         	int getHeight() const;
         
                 float getAngleDegree() const;
                 float* getpAngleDegree();
+                        
+                float getPosZ() const;
                         
                 vec2f getCenter()      const;   
                 vec2f* getpCenter();   // used inturrels(for target)
@@ -95,10 +104,6 @@ class Points
                 void initMidFarLeftPoint();
                 void addMidFarLeftPoint();
 
-                void setWidthHeight(int _w, int _h);  
-                void setCenter(float _centerx, float _centery);
-                void setAngle(float _angle);
-
                 void update();
                 
         private:
@@ -121,6 +126,7 @@ class Points
                 // Actual entity rect
                 int w, h; 		// used for collisions
                 float angle_inD;
+                float pos_z;
                 
                 vec2f center;     
       

@@ -40,6 +40,8 @@ class Kosmoport
                 void ai();
                 
         private:
+        	int id, type_id;
+        	
                 Angar*     angar;
                 Store*     store;
                 Shop*      shop;

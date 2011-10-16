@@ -22,28 +22,35 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Turrel
 {
         public:
+                TextureOb* texOb;
                 Turrel();
                 ~Turrel();
+
+                void bindSlot(ItemSlot*);
+                void setTexOb(TextureOb*);
                 
+                void setTarget(Ship*);
+                void setTarget(Asteroid*);
+                void setTarget(Mineral*);
+                void setTarget(Container*);                               
                 void setSelectedStatus(bool _selected);
+                
                 bool getSelectedStatus()  const;
                 bool getHasTargetStatus() const;
                 
                 float getCenterX() const;
                 float getCenterY() const;
-                float getAngle()   const;
-              
-                void bindSlot(ItemSlot* _slot);
-                void setTexOb(TextureOb* _texOb);
-
+                float getAngle()   const;              
+       
+                float* get_pCenterX() const;
+                float* get_pCenterY() const;
+                
                 // TARGET section
+                int getTargetId() const;
                 bool* getTarget_pAliveStatus() const;
                 float* getTarget_pCenterX() const;
                 float* getTarget_pCenterY() const;
                 //
-        
-                float* get_pCenterX() const;
-                float* get_pCenterY() const;
                 
                 void placed(vec2f* _center);
        
@@ -55,13 +62,6 @@ class Turrel
                         bool isAmmoAvailable();
                 bool fireEvent_TRUE();
                 bool fireEvent_FALSE();
-
-                int returnTargetId();
-     
-                void setTarget(Ship*);
-                void setTarget(Asteroid*);
-                void setTarget(Mineral*);
-                void setTarget(Container*);
 
                 void resetTarget();
                 
@@ -90,13 +90,11 @@ class Turrel
                 Mineral*   target_mineral;                
                 Container* target_container;
                 
-                TextureOb* pTo_texOb;
-                GLuint texture;
+                //TextureOb* texOb;
                 int w, h;
                 
                 Points points;
-                float pos_z;
-                
+                float pos_z;                
 }; 
 
 #endif 

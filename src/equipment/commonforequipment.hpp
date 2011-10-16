@@ -47,6 +47,7 @@ class CommonForEquipment
         	unsigned int getMass() const; 
         	unsigned int getCondition() const; 
         	int getPrice() const; 
+                TextureOb* getTexOb() const;
      
      		void bindSlot(ItemSlot* _slot);
      		void repair();
@@ -74,7 +75,7 @@ class CommonForEquipment
 		
 		int race_id;
 		unsigned int condition;
-     		int price;			// unsigned is not used to debug the formula of price calc
+     		unsigned int price;			// unsigned is not used to debug the formula of price calc
 
      		bool in_SPACE;                 		// this flag is needed for grap function to check if the item was already collected or not
      		bool is_DAMAGED;

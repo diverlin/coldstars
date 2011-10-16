@@ -19,19 +19,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "mineral.hpp"
 
-Mineral :: Mineral(TextureOb* _pTo_texOb, vec2f _start_pos)
+Mineral :: Mineral(TextureOb* _texOb, vec2f _start_pos)
 {        
-    CommonForSpaceItems_init(_pTo_texOb, _start_pos);
+    	CommonForSpaceItems_init(_texOb, _start_pos);
 
-    id         = g_ENTITY_ID_GENERATOR.returnNextId();
-    type_id    = MINERAL_ID;
-    //subtype_id = ;
+    	id         = g_ENTITY_ID_GENERATOR.returnNextId();
+    	type_id    = MINERAL_ID;
+    	//subtype_id = ;
 
-    mass = randIntInRange(6, 32);
-    speed = randIntInRange(40, 42);
-    stepCalculation();
+    	mass = randIntInRange(6, 32);
+    	speed = randIntInRange(40, 42);
+    	stepCalculation();
 
-    armor = randIntInRange(1,6);
+    	armor = randIntInRange(1,6);
 }
     
     
@@ -48,14 +48,14 @@ void Mineral :: updateInfo()
     
 std::string Mineral :: returnTypeStr()
 {
-    std::string sType = "";
-    std::string sSubType = ""; 
+    	std::string sType = "";
+    	std::string sSubType = ""; 
         
-    if (type_id == GOODS_ID)
-       std::string sType = "GOODS_id ";
-    if (subtype_id == MINERAL_ID)
-       std::string sSubType = "MINERAL_id";
-    return sType + sSubType;   
+    	if (type_id == GOODS_ID)
+       		std::string sType = "GOODS_id ";
+    	if (subtype_id == MINERAL_ID)
+       		std::string sSubType = "MINERAL_id";
+    	return sType + sSubType;   
 }
     
            

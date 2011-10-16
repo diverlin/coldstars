@@ -29,7 +29,7 @@ class WeaponSelector
      		bool slot_4;
      		bool slot_5;
      	
-     		void reset();
+     		void setAll(bool);
      		//void set(bool, bool, bool, bool, bool);
 };
 
@@ -61,6 +61,8 @@ class PlayerInstance
      		     
      		void bindShip(Ship*);
      		void update_inSpace_inDynamic();
+                
+
      	
      	private:
      	     	int type_id, id;

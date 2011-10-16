@@ -99,7 +99,7 @@ const int YELLOW_COLOR_ID = 3;
 const int GREY_COLOR_ID   = 4;
 
 
-const int STARSYSTEM_TOTAL_NUM = 100;
+const int STARSYSTEM_TOTAL_NUM = 3;
 
 // ASTEROID
 const int ASTEROID_SIZE_MIN = 6;
@@ -122,8 +122,8 @@ const int STAR_SIZE_MIN = 80;
 const int STAR_SIZE_MAX = 120;
 
 // SHIP
-const int SHIP_PER_SYSTEM_MIN = 2;
-const int SHIP_PER_SYSTEM_MAX = 2;
+const int SHIP_PER_SYSTEM_MIN = 4;
+const int SHIP_PER_SYSTEM_MAX = 4;
 const int ENEMY_SHIP_PER_SYSTEM_MIN = 20;
 const int ENEMY_SHIP_PER_SYSTEM_MAX = 30;
 
@@ -221,10 +221,10 @@ const int VISIBLE_DISTANCE_WITHOUT_RADAR = 200;
 
 
 // DRIVE
-//const int DRIVE_SPEED_MIN = 130;   
-//const int DRIVE_SPEED_MAX = 300;   
-const int DRIVE_SPEED_MIN = 2000;   // debug
-const int DRIVE_SPEED_MAX = 2000;   // debug
+const int DRIVE_SPEED_MIN = 130;   
+const int DRIVE_SPEED_MAX = 300;   
+//const int DRIVE_SPEED_MIN = 2000;   // debug
+//const int DRIVE_SPEED_MAX = 2000;   // debug
 
 const int DRIVE_HYPER_MIN = 100 * 20;
 const int DRIVE_HYPER_MAX = 400 * 20;
@@ -383,9 +383,9 @@ const int CURSOR_ID     = g_TYPE_ID_GENERATOR.returnNextId("CURSOR_ID");
 const int STARSYSTEM_TYPE_ID = g_TYPE_ID_GENERATOR.returnNextId("STARSYSTEM_TYPE_ID");  
 const int STAR_ID            = g_TYPE_ID_GENERATOR.returnNextId("STAR_ID");  
 const int ASTEROID_ID        = g_TYPE_ID_GENERATOR.returnNextId("ASTEROID_ID");  
-const int PLANET_TYPE_ID          = g_TYPE_ID_GENERATOR.returnNextId("PLANET_ID");  
-const int INHABITED_ID       = g_TYPE_ID_GENERATOR.returnNextId("INHABITED_ID");  
-const int UNINHABITED_ID     = g_TYPE_ID_GENERATOR.returnNextId("UNINHABITED_ID");  
+const int PLANET_TYPE_ID          = g_TYPE_ID_GENERATOR.returnNextId("PLANET_TYPE_ID");  
+const int KOSMOPORT_TYPE_ID       = g_TYPE_ID_GENERATOR.returnNextId("KOSMOPORT_TYPE_ID");  
+const int LAND_ID     = g_TYPE_ID_GENERATOR.returnNextId("LAND_ID");  
 
 const int GOODS_ID     = g_TYPE_ID_GENERATOR.returnNextId("GOODS_ID");
 const int MINERAL_ID   = g_TYPE_ID_GENERATOR.returnNextId("MINERAL_ID");
@@ -400,44 +400,44 @@ const int PLANET_GAS_SURFACE_ID = g_TYPE_ID_GENERATOR.returnNextId("PLANET_GAS_S
 
 
 
-//// AI section start
-// global task
-const int DEFEND_SHIP_quest_id           = g_TYPE_ID_GENERATOR.returnNextId("DEFEND_SHIP_quest_id");
-const int AREST_SHIP_quest_id            = g_TYPE_ID_GENERATOR.returnNextId("AREST_SHIP_quest_id");
-const int TERROR_SHIP_quest_id           = g_TYPE_ID_GENERATOR.returnNextId("TERROR_SHIP_quest_id");
-const int TRADE_GOODS_quest_id           = g_TYPE_ID_GENERATOR.returnNextId("TRADE_GOODS_quest_id");
-const int DIPLOMACY_VISIT_quest_id       = g_TYPE_ID_GENERATOR.returnNextId("DIPLOMACY_VISIT_quest_id");
-const int STARSYSTEM_LIBERATION_quest_id = g_TYPE_ID_GENERATOR.returnNextId("STARSYSTEM_LIBERATION_quest_id");
+////// AI section start
+//// global task
+//const int DEFEND_SHIP_quest_id           = g_TYPE_ID_GENERATOR.returnNextId("DEFEND_SHIP_quest_id");
+//const int AREST_SHIP_quest_id            = g_TYPE_ID_GENERATOR.returnNextId("AREST_SHIP_quest_id");
+//const int TERROR_SHIP_quest_id           = g_TYPE_ID_GENERATOR.returnNextId("TERROR_SHIP_quest_id");
+//const int TRADE_GOODS_quest_id           = g_TYPE_ID_GENERATOR.returnNextId("TRADE_GOODS_quest_id");
+//const int DIPLOMACY_VISIT_quest_id       = g_TYPE_ID_GENERATOR.returnNextId("DIPLOMACY_VISIT_quest_id");
+//const int STARSYSTEM_LIBERATION_quest_id = g_TYPE_ID_GENERATOR.returnNextId("STARSYSTEM_LIBERATION_quest_id");
 
-// dynamic tasks (are aded if they are necesary)
-const int TASK_COMPLETED_id              = g_TYPE_ID_GENERATOR.returnNextId("TASK_COMPLETED_id");
-const int DESTROY_ASTEROID_task_id       = g_TYPE_ID_GENERATOR.returnNextId("DESTROY_ASTEROID_task_id");
-const int HYPER_JUMP_task_id             = g_TYPE_ID_GENERATOR.returnNextId("HYPER_JUMP_task_id");
-//SELFPRESERVATION_task_id      = TYPE_ID_GENERATOR.returnNextID()
-const int LAUNCHING_task_id              = g_TYPE_ID_GENERATOR.returnNextId("LAUNCHING_task_id");
-const int LANDING_task_id                = g_TYPE_ID_GENERATOR.returnNextId("LANDING_task_id");
-const int GRABBING_MINERAL_task_id       = g_TYPE_ID_GENERATOR.returnNextId("GRABBING_MINERAL_task_id");
-const int GRABBING_CONTAINER_task_id     = g_TYPE_ID_GENERATOR.returnNextId("GRABBING_CONTAINER_task_id");
+//// dynamic tasks (are aded if they are necesary)
+//const int TASK_COMPLETED_id              = g_TYPE_ID_GENERATOR.returnNextId("TASK_COMPLETED_id");
+//const int DESTROY_ASTEROID_task_id       = g_TYPE_ID_GENERATOR.returnNextId("DESTROY_ASTEROID_task_id");
+//const int HYPER_JUMP_task_id             = g_TYPE_ID_GENERATOR.returnNextId("HYPER_JUMP_task_id");
+////SELFPRESERVATION_task_id      = TYPE_ID_GENERATOR.returnNextID()
+//const int LAUNCHING_task_id              = g_TYPE_ID_GENERATOR.returnNextId("LAUNCHING_task_id");
+const int LANDING_TASK_ID               = g_TYPE_ID_GENERATOR.returnNextId("LANDING_TASK_ID");
+//const int GRABBING_MINERAL_task_id       = g_TYPE_ID_GENERATOR.returnNextId("GRABBING_MINERAL_task_id");
+//const int GRABBING_CONTAINER_task_id     = g_TYPE_ID_GENERATOR.returnNextId("GRABBING_CONTAINER_task_id");
 
-const int REPAIR_NEEDED_id               = g_TYPE_ID_GENERATOR.returnNextId("REPAIR_NEEDED_id");
-const int FUEL_NEEDED_id                 = g_TYPE_ID_GENERATOR.returnNextId("FUEL_NEEDED_id");
-const int ROCKET_RELOAD_NEEDED_id        = g_TYPE_ID_GENERATOR.returnNextId("ROCKET_RELOAD_NEEDED_id");
-const int BUY_NEEDED_id                  = g_TYPE_ID_GENERATOR.returnNextId("BUY_NEEDED_id");
-const int SELL_NEEDED_id                 = g_TYPE_ID_GENERATOR.returnNextId("SELL_NEEDED_id");
-// end dynamic tasks
+//const int REPAIR_NEEDED_id               = g_TYPE_ID_GENERATOR.returnNextId("REPAIR_NEEDED_id");
+//const int FUEL_NEEDED_id                 = g_TYPE_ID_GENERATOR.returnNextId("FUEL_NEEDED_id");
+//const int ROCKET_RELOAD_NEEDED_id        = g_TYPE_ID_GENERATOR.returnNextId("ROCKET_RELOAD_NEEDED_id");
+//const int BUY_NEEDED_id                  = g_TYPE_ID_GENERATOR.returnNextId("BUY_NEEDED_id");
+//const int SELL_NEEDED_id                 = g_TYPE_ID_GENERATOR.returnNextId("SELL_NEEDED_id");
+//// end dynamic tasks
 
-const int DESTROY_ALIEN_task_id          = g_TYPE_ID_GENERATOR.returnNextId("DESTROY_ALIEN_task_id");
+const int DESTROY_TASK_ID          = g_TYPE_ID_GENERATOR.returnNextId("DESTROY_TASK_ID");
 
-const int AREST_REQUEST_task_id          = g_TYPE_ID_GENERATOR.returnNextId("AREST_REQUEST_task_id");
-const int TERROR_REQUEST_task_id         = g_TYPE_ID_GENERATOR.returnNextId("TERROR_REQUEST_task_id");
+//const int AREST_REQUEST_task_id          = g_TYPE_ID_GENERATOR.returnNextId("AREST_REQUEST_task_id");
+//const int TERROR_REQUEST_task_id         = g_TYPE_ID_GENERATOR.returnNextId("TERROR_REQUEST_task_id");
 
-const int FIRE_LOW_task_id               = g_TYPE_ID_GENERATOR.returnNextId("FIRE_LOW_task_id");
-const int FIRE_HIGH_task_id              = g_TYPE_ID_GENERATOR.returnNextId("FIRE_HIGH_task_id");
+//const int FIRE_LOW_task_id               = g_TYPE_ID_GENERATOR.returnNextId("FIRE_LOW_task_id");
+//const int FIRE_HIGH_task_id              = g_TYPE_ID_GENERATOR.returnNextId("FIRE_HIGH_task_id");
 
-const int FIND_PLACE_TO_SELL_GOODS_task_id = g_TYPE_ID_GENERATOR.returnNextId("FIND_PLACE_TO_SELL_GOODS_task_id");
-const int BUY_GOODS_task_id              = g_TYPE_ID_GENERATOR.returnNextId("BUY_GOODS_task_id");
-const int SELL_GOODS_task_id             = g_TYPE_ID_GENERATOR.returnNextId("SELL_GOODS_task_id");
-//// END AI ssection
+//const int FIND_PLACE_TO_SELL_GOODS_task_id = g_TYPE_ID_GENERATOR.returnNextId("FIND_PLACE_TO_SELL_GOODS_task_id");
+//const int BUY_GOODS_task_id              = g_TYPE_ID_GENERATOR.returnNextId("BUY_GOODS_task_id");
+//const int SELL_GOODS_task_id             = g_TYPE_ID_GENERATOR.returnNextId("SELL_GOODS_task_id");
+////// END AI ssection
 
 
 

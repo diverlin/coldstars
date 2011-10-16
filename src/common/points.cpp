@@ -29,13 +29,15 @@ Points :: Points()
 Points :: ~Points()
 {}
   
-  
+void Points :: setPosZ(float _pos_z) { pos_z = _pos_z; }
     
 int Points :: getWidth()  const { return w; }
 int Points :: getHeight() const { return h; }
                 
 float Points :: getAngleDegree() const { return angle_inD; }   	
 float* Points :: getpAngleDegree() { return &angle_inD; }
+        
+float Points :: getPosZ() const { return pos_z; }
                 	
 vec2f Points :: getCenter()      const { return center; }     
 vec2f* Points :: getpCenter()    { return &center; }  
@@ -336,6 +338,14 @@ void Points :: setCenter(float _centerx, float _centery)
     	is_updated = false;       
 }
        
+
+void  Points :: setCenter(vec2f _center)
+{
+    	center.set(_center.x, _center.y);
+      
+    	is_updated = false;   
+}
+                       
     
 void Points :: setAngle(float _angle_inD)
 { 
