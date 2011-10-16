@@ -44,39 +44,18 @@ StarSystem* Galaxy :: getRandomStarSystem()
 }
      		
 
-
-//void Galaxy :: manageHiddenStarSystemList(StarSystem* _ss_active)
-//{
-     //hSTARSYSTEM_pList.clear(); // should be improoved
-     //for (unsigned int ssi = 0; ssi < STARSYSTEM_pList.size(); ssi++)    // should be improoved
-          //if (STARSYSTEM_pList[ssi]->id != _ss_active->id)
-             //hSTARSYSTEM_pList.push_back(STARSYSTEM_pList[ssi]);
-//}
-
-
-
-void Galaxy :: update_inDynamic(int timer)
+void Galaxy :: update(int timer)
 {
 	for (unsigned int si = 0; si < STARSYSTEM_pList.size(); si++)
      	{
      		if (STARSYSTEM_pList[si]->getDetailedSimulation() == true)
-     			STARSYSTEM_pList[si]->update_inDynamic_TRUE(timer);
+     			STARSYSTEM_pList[si]->update_TRUE(timer);
      		else
-     		     	STARSYSTEM_pList[si]->update_inDynamic_FALSE(timer);
+     		     	STARSYSTEM_pList[si]->update_FALSE(timer);
      	}
 }
 
 
-void Galaxy :: update_inStatic()
-{
-        for (unsigned int si = 0; si < STARSYSTEM_pList.size(); si++)
-        {    
-             	if (STARSYSTEM_pList[si]->getDetailedSimulation() == true)
-     			STARSYSTEM_pList[si]->update_inStatic_TRUE();
-     		else
-     		     	STARSYSTEM_pList[si]->update_inStatic_FALSE();
-        }
-}
 
 
 

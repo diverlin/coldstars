@@ -32,7 +32,8 @@ struct NeedsToDo
 
 struct Abilities
 {
-   	bool RADAR;
+        /* this structure explain hat feature are avaliable for ship */ 
+        bool RADAR;
    	bool DRIVE;
    	bool HJUMP;
    	bool ENERGIZE;
@@ -44,6 +45,48 @@ struct Abilities
    	bool FIRE;
 };
 
+
+struct KorpusData
+{
+        /* this data depends only on korpus and cannot be changed by artefacts/items */
+        unsigned int protection; 
+        unsigned int space;
+        unsigned int armor;
+        unsigned int temperature;   //???
+        
+        unsigned int price;
+        
+        unsigned int size_id;
+        float collision_radius;
+        
+        bool inhibit_GRAPPLE;
+        bool render_TURRELS;
+        unsigned int weapon_slot_num;
+};
+
+
+struct ShipPropetries
+{       
+        // this data is changed during game play, the propetries depends on many factors
+        int armor;
+        int protection;
+        int radius;
+        int mass;   // depends on all items mass
+        int speed;  // depends on mass and drive
+
+        int hyper;  // depends on drive and bak
+        int repair; // depends on droid
+        int freeze; // depends on freezer
+        int scan;   // depends on scaner
+        
+        int energy;
+        int temperature;
+        
+        // simplification
+        int average_damage;
+        int average_fire_radius;
+};
+
     
 class Ship
 {   
@@ -51,50 +94,25 @@ class Ship
                 void setStarSystem(StarSystem*);
                 void setNpc(Npc*);
                 void setPlaceTypeId(int);
- 
+                 
+                int getTypeId() const;
+                int getId() const;
+                int getPlaceTypeId() const;
+                
+                bool getAliveFlag() const;
+                bool* get_pAliveFlag();
+                
                 Points* getPoints();
                 Navigator* getNavigator();
                 StarSystem* getStarSystem();
                 Npc* getNpc();
-                int getPlaceTypeId() const;
-                int getTypeId() const;
-                   
-              
-        	bool is_alive, is_dying, is_explosed;
-        	int type_id, id;
-
-        	int dying_time;
-        	
-		bool render_TURRELS;
-		
-        	bool in_SPACE;
-
-
-        	TextureOb* texOb;
-
-        	int size;
-        	float collision_radius;
-
-        	int w_orig, h_orig;
-
-               
-
-        	int space;
-        	int armor_max;
-        	int armor;
-        	int korpus_protection;
-        	int nominal_temperature;
-
-        	int price;
-
-
+       	
         	//######### KONTUR RECT 
         	int w_kontur, h_kontur;
         	Rect kontur_rect; 
-
+                TextureOb* texOb_korpus;
 
         	//######### SLOT
-        	int total_weapon_slot_num;
         	ItemSlot weapon_slot1;
         	ItemSlot weapon_slot2;
         	ItemSlot weapon_slot3;
@@ -111,59 +129,23 @@ class Ship
         	ItemSlot droid_slot;
         	ItemSlot freezer_slot;
                                                 
-        	//######### OTSEC SLOT
         	std::vector<ItemSlot*> slot_total_pList;
         	std::vector<ItemSlot*> slot_otsec_pList;
         
-        	//######### GATE SLOT
         	ItemSlot gate_slot;
 
-        	///////////////////////////////
         	Abilities ableTo;
         	NeedsToDo needsToDo;
+                ShipPropetries propetries;
+                KorpusData korpusData;
                 
-        	bool inhibit_GRAPPLE;
 
-        	//////////////////////////////
-        	/////// PROPERTIES depends on items
-        	int protection;
-        	int radius;
-        	int mass;   // depends on all items mass
-        	int speed;  // depends on mass and drive
-
-        	int hyper;  // depends on drive and bak
-        	int repair; // depends on droid
-        	int freeze; // depends on freezer
-        	int scan;   // depends on scaner
-        
-        	int energy;
-        	int temperature;
-
-        	int dist2star_rate;
-        	int energy_restoration_rate;
-
-
-
-
-        	// simplification
-        	int average_damage;
-        	int average_fire_radius;
-
-
-        	Ship(TextureOb* _texOb, 
-        	     int _max_weapons, 
-        	     bool _grapple_INHIBIT, 
-        	     int _space, 
-        	     int _armor_max, 
-        	     int _protection, 
-        	     int _nominal_temperature);
-        	     
+        	Ship(TextureOb* _texOb, KorpusData _korpusData);
         	~Ship();    
 
          	void updatePosition();
-
-        	void reloadAllWeapons();
-        
+                
+        	void reloadAllWeapons();        
      		void selectWeapons();                                     
                      
                 template <typename TARGET_TYPE>      
@@ -202,34 +184,36 @@ class Ship
         	void setMaxFuel();
 
         	//// docking/launching
-        	bool checkDocking();
-        	bool getDockingPermission();
         	bool dockingEvent();
-
         	bool launchingEvent();
         	//// docking/launching
 
 		void updateRenderStuff();
 		void render_inSpace() const;
 		void render_atPlanet() const;
+                
+                void renderWeaponIcons() const;
 
         	void renderInfo(float _pos_x, float _pos_y, float _offset_x = 0, float _offset_y = 0);
-        	
-        	float pos_z;
-        	
+        	void renderInfo();
+        	        	
         	WeaponSelector weapon_selector; 
-                                          		
+          
         private:
+                bool is_alive, is_dying, is_explosed;
+                int type_id, id;
+                
+                int dying_time;
+                        
                 float angle_inD;
                 Points points;
 		InfoTable info;
 		
         	std::vector<vec2f*> turrel_center_pList;
-		std::vector<Turrel*> turrel_pList;
 
-             		
             	Navigator* navigator;
             	
+                TextureOb* texOb;
             	TextureOb* texOb_slot;
             			
 		StarSystem* starsystem;
@@ -246,7 +230,7 @@ class Ship
              	void renderTurrels() const;
              	void renderShield() const;
              	
-             	        	// WEPONS
+                // WEPONS
         	int fire_delay, d_fire_delay;
         	std::vector<ItemSlot*> slot_weapon_pList;
         	std::vector<ItemSlot*> slot_weapon_equiped_pList;

@@ -692,7 +692,7 @@ void ShipInternal :: renderItemInfo() const
 
 void ShipInternal :: renderInternaly() const
 {
-	drawTexturedRect(ship->texOb->texture, ship->kontur_rect, -1.0);
+	drawTexturedRect(ship->texOb_korpus->texture, ship->kontur_rect, -1.0);
 
 	for(unsigned int i = 0; i < ship->slot_total_pList.size(); i++)
 	{
@@ -707,13 +707,13 @@ void ShipInternal :: configure(Ship* _ship, bool _in_store = false, bool _allow_
 {
         bindShip(_ship);                           
 
-        in_store = _in_store; 
+        in_store = _in_store;
+        allow_full_control = _allow_full_control;  
         
-        if ( (pPLAYER->getShip()->id == ship->id) && (_allow_full_control == false) )
+        if ( (pPLAYER->getShip()->getId() == ship->getId()) && (_allow_full_control == false) )
     	{
         	allow_full_control = true;  
-        }    	// modify full control for friend ships
-
+        }    	// modify full control for friend ships       
 }
 
 

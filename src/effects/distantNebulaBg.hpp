@@ -26,7 +26,8 @@ class DistantNebulaBgEffect
 {
     	public:
 	        DistantNebulaBgEffect(TextureOb* _texOb, vec3f _center);
-        	void update();
+	        
+        	void updateRenderStuff();
         	void render(float vx, float vy);
         	
         private:
@@ -39,7 +40,7 @@ class DistantNebulaBgEffect
         	float distance_rate;
         	vec3f center;
         	
-        	void updateWHRenderConstants();     
+        	void calcRenderConstants();     
 };
 
 DistantNebulaBgEffect* createDistantNebula(int _color_id);

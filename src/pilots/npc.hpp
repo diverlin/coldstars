@@ -25,7 +25,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Npc 
 {
    	public:
-   	   	void setInSpace(bool);
    		void setAlive(bool);			
    		void setStarSystem(StarSystem*);
    		void setKosmoport(Kosmoport*);
@@ -35,6 +34,7 @@ class Npc
    		   		
    		bool getAlive() const;
    		int getId() const;
+   		int getTypeId() const;
    		int getSubTypeId() const;
    		int getRaceId() const;
    		StarSystem* getStarSystem();
@@ -43,6 +43,7 @@ class Npc
    		Skill* getSkill();
    		Ship* getScanShip();
    		int getPlaceTypeId() const;
+   		QuestObject* getQuestOb();
    		   		   	   
 
    		void bind(Ship*);
@@ -63,23 +64,23 @@ class Npc
      		void thinkCommon_inSpace_inStatic();
      		void thinkUnique_inSpace_inStatic();
 
-     		void taskExecution_inDynamic();
-    		void taskExecution_inStatic();
+     		void update_inDynamic_inSpace();
 
-     		void clearAIfuncSequence();   
-     		
-
-     		//// docking/launching
-     		void createDockingSequence();
-     		void createLaunchingSequence();
-     		//// docking/launching
-     		
+    		
 
      		//// scanning
     		bool checkPossibilityToScan(Ship* _ship);
      		bool scanProceeding(); 
      		bool removeScanTarget();
-     		//// scanning
+     		//// scanning    		
+     		
+     		
+     		bool launchingEventPlayer();
+     		
+     		QuestObject* questOb;
+     		
+     		
+     		void observeAll_inSpace_inStatic();
      		
    	private:
    	     	bool is_alive;    
@@ -87,8 +88,6 @@ class Npc
      		unsigned long int credits;  
      		int id, type_id, subtype_id;
      	
-     	     	bool in_SPACE;
-   	     		
    	     	StarSystem* starsystem;
    	     	Kosmoport* kosmoport;
    	     	Land* land;
@@ -102,6 +101,8 @@ class Npc
    	     	
    	     	// observation/radar
      		std::vector<Asteroid*>  visible_ASTEROID_pList;
+     		std::vector<Asteroid*>  sorted_visible_ASTEROID_pList;
+     		     		
      		std::vector<Mineral*>   visible_MINERAL_pList;
      		std::vector<Container*> visible_CONTAINER_pList;
 
@@ -123,40 +124,23 @@ class Npc
      		
      		See see;
      		
-     		void observeAll_inSpace_inStatic();
-          		void observeAsteroids_inSpace_inStatic();
-          		void observeMinerals_inSpace_inStatic();
-          		void observeContainers_inSpace_inStatic();
-          		void observeNpcs_inSpace_inStatic();
-               			void observeRangerNpcs_inSpace_inStatic();
-               			void observeWarriorNpcs_inSpace_inStatic();
-               			void observeTraderNpcs_inSpace_inStatic();
-               			void observePiratNpcs_inSpace_inStatic();
-               			void observeDiplomatNpcs_inSpace_inStatic();
+
+          		void findVisibleAsteroids_inSpace_inStatic();
+          		void findVisibleMinerals_inSpace_inStatic();
+          		void findVisibleContainers_inSpace_inStatic();
+          		void findVisibleNpcs_inSpace_inStatic();
+               			void findVisibleRangerNpcs_inSpace_inStatic();
+               			void findVisibleWarriorNpcs_inSpace_inStatic();
+               			void findVisibleTraderNpcs_inSpace_inStatic();
+               			void findVisiblePiratNpcs_inSpace_inStatic();
+               			void findVisibleDiplomatNpcs_inSpace_inStatic();
+               			
+               		void sortVisibleAsteroids_inSpace_inStatic();
 
      		void observe_inPlanet_inStatic();  //inhabited <-> uninhabited
      		// observation/radar 
      		
      		// AI
-     		void generateQuest();
-     		void questTaskQueueCreation(); 
-     		void checkNeedTaskQueueForNewTasks();
-     		
-     		void initQuestTask();
-
-     		void insertNeedTaskId(int _task_id);
-     		void removeNeedTaskId(int _task_id);
-     		void initNeedTask();
-
-
-     		int active_task_id;
-     		
-     		
-     		bool needs_task_queue_has_been_changed;
-
-     		std::vector<int> QUEST_TASK_queue;
-     		std::vector<int> NEEDS_TASK_queue;
-     		
      		void thinkNothing_inStatic(); 
      		
           	void (Npc::*pToFunc_thinkUnique_inSpace_inStatic)();
@@ -195,15 +179,14 @@ class Npc
      		void thinkUnique_Race7_inSpace_inStatic();
           		void makeImmediateDecision();
           		
-       		std::vector<bool (Npc::*)()> func_inDynamic_queue;
-     		std::vector<bool (Npc::*)()> func_inStatic_queue;
+       		bool (Npc::*func_inDynamic)();
      		
      		bool doNothing();
      		// AI
      		
      		
      		//// docking/launching
-     		bool findAndSetTargetDockingObject();
+     		Planet* getPlanetForDocking();
 
           	bool checkDocking();
           	bool getDockingPermission();

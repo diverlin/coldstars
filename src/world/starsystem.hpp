@@ -27,18 +27,19 @@ class StarSystem
                 int getId() const;
                 int getTypeId() const;
 
-    		bool is_CAPTURED; 
+    		bool is_CAPTURED;
+    		bool calculation_per_turn_allowed; 
    
     		//Color color;
     		Rect rect_onMap;
 
     	    	// ENTITY LISTS
-    		std::vector<Star*>         STAR_pList;
-    		std::vector<Planet*>       PLANET_pList;
-    		std::vector<Asteroid*>     ASTEROID_pList;
-    		std::vector<Mineral*>      MINERAL_pList;
-    		std::vector<Container*>    CONTAINER_pList;
-    		std::vector<RocketBullet*> ROCKET_pList;
+    		std::vector<Star*>         STAR_vec;
+    		std::vector<Planet*>       PLANET_vec;
+    		std::vector<Asteroid*>     ASTEROID_vec;
+    		std::vector<Mineral*>      MINERAL_vec;
+    		std::vector<Container*>    CONTAINER_vec;
+    		std::vector<RocketBullet*> ROCKET_vec;
 
 
 		std::vector<Ship*> SHIP_inSPACE_vec;
@@ -59,14 +60,9 @@ class StarSystem
 		
 		bool getDetailedSimulation() const;
 
-		void update_inDynamic_TRUE(int timer);
-		void update_inDynamic_FALSE(int timer);
+		void update_TRUE(int timer);
+		void update_FALSE(int timer);
 
-		void update_inStatic_TRUE();
-		void update_inStatic_FALSE();	    
-
-	        //void createPostProcessStuff();    // remove
-	        
 	        void render();        
    		    		
     		void asteroidManager(int num);
@@ -104,7 +100,10 @@ class StarSystem
    		//// TRANSITION
 
 		int getShockWaveNum() const;
-    		Planet* returnClosestPlanet(vec2f);
+    		Planet* getClosestPlanet(vec2f);
+    		Npc* getRandomNpc();
+    		
+    		void questManager();
 
     	private:
                 int id, type_id;
@@ -114,10 +113,10 @@ class StarSystem
     	    	std::vector<DistantNebulaBgEffect*> distantNebulaBgEffect_pList;
     		std::vector<DistantStarBgEffect*> distantStarBgEffect_pList;
     		
-    		std::vector<LazerTraceEffect*> effect_LAZERTRACE_pList;
-    		std::vector<ExplosionEffect*>  effect_EXPLOSION_pList;
-    		std::vector<DamageEffect*>     effect_DAMAGE_pList;
-    		std::vector<ShockWaveEffect*>  effect_SHOCKWAVE_pList;
+    		std::vector<LazerTraceEffect*> effect_LAZERTRACE_vec;
+    		std::vector<ExplosionEffect*>  effect_EXPLOSION_vec;
+    		std::vector<DamageEffect*>     effect_DAMAGE_vec;
+    		std::vector<ShockWaveEffect*>  effect_SHOCKWAVE_vec;
     		
     		
     		// REMOVE QUEUE LIST
@@ -130,14 +129,14 @@ class StarSystem
     		std::vector<RocketBullet*> ROCKET_remove_queue_pList;
     		
     		// VISIBLE ENTITY LIST
-    		std::vector<Star*>      visible_STAR_pList;
-    		std::vector<Planet*>    visible_PLANET_pList;
-    		std::vector<Asteroid*>  visible_ASTEROID_pList;
-    		std::vector<Mineral*>   visible_MINERAL_pList;
-    		std::vector<Container*> visible_CONTAINER_pList;
-    		std::vector<RocketBullet*> visible_ROCKET_pList;
+    		std::vector<Star*>      visible_STAR_vec;
+    		std::vector<Planet*>    visible_PLANET_vec;
+    		std::vector<Asteroid*>  visible_ASTEROID_vec;
+    		std::vector<Mineral*>   visible_MINERAL_vec;
+    		std::vector<Container*> visible_CONTAINER_vec;
+    		std::vector<RocketBullet*> visible_ROCKET_vec;
 
-    		std::vector<Ship*>      visible_SHIP_pList;
+    		std::vector<Ship*>      visible_SHIP_vec;
     		
                 void rocketCollision_TRUE();
     		void rocketCollision_FALSE();
@@ -148,6 +147,7 @@ class StarSystem
     		void updateEntities_inDynamic_TRUE();
     		void updateEntities_inDynamic_FALSE();
     		void updateEntities_inStatic();
+    		void updateEffects();
     		
     		void fireEvents_TRUE(int timer);
     		void fireEvents_FALSE(int timer);

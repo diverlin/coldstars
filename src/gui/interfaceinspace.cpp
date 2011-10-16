@@ -85,7 +85,7 @@ void InterfaceInSpace :: render()
     	resetRenderTransformation();
 
 	enable_BLEND();    						
-		renderInternal(); 
+		renderInternal();
 		renderInfo();
 	disable_BLEND();
 }
@@ -98,8 +98,6 @@ void InterfaceInSpace :: renderInternal() const
 		button_common_pList[i]->render();
      	}
 }
-
-
 
 void InterfaceInSpace :: renderInfo() const
 {
@@ -114,3 +112,5 @@ void InterfaceInSpace :: renderInfo() const
         }       
 }
         
+
+

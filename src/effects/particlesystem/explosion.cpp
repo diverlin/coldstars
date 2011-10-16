@@ -96,17 +96,17 @@ void ExplosionEffect :: render()
 ParticleForExplosionEffect :: ParticleForExplosionEffect(vec2f _center_pos,  ParticleSystemData _psData, int _curnum)
 {
     	is_alive = true;
-    	float animation_speed_rate = randIntInRange(5,8) * 0.1; //???? 
+    	float speed_rate = randIntInRange(5,8) * 0.1; //???? 
           
     	size_start = _psData.particleSize_start;
-    	d_size     = _psData.d_particleSize * animation_speed_rate;
+    	d_size     = _psData.d_particleSize * speed_rate;
           
-    	velocity_start = _psData.velocity_start * animation_speed_rate;
+    	velocity_start = _psData.velocity_start * speed_rate;
     	d_velocity     = _psData.d_velocity;
           
     	alpha_start = _psData.alpha_start;
     	alpha_end   = _psData.alpha_end;
-    	d_alpha     = _psData.d_alpha * animation_speed_rate;
+    	d_alpha     = _psData.d_alpha * speed_rate;
 
     	center = _center_pos;
     	
@@ -238,6 +238,9 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 		_starsystem->addExplosionEffect(_explosion);
 	} 	       
  
-	createShockWave(_starsystem, _center_pos, obSize);
+ 	if ( (obSize > 3) && (_starsystem->getShockWaveNum() < 10) )
+	{
+		createShockWave(_starsystem, _center_pos, obSize);
+	}
 	//explosion.play()
 } 

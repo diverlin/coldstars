@@ -51,7 +51,7 @@ void CommonForPlanet :: CommonForPlanet_init(TextureOb* _texOb,
         float rate = 5.4;                                            
         w = rate * data.scale;
         h = rate * data.scale;
-        collision_radius = (w + h)/2; 
+        collision_radius = (w + h)/4; 
         // !!!!
                 
         //////

@@ -63,10 +63,9 @@ void Turrel :: bindSlot(ItemSlot* _slot)
 
 void Turrel :: setTexOb(TextureOb* _texOb)
 {
-    	pTo_texOb = _texOb;
-    	w = pTo_texOb->w;
-    	h = pTo_texOb->h;   
-    	texture = pTo_texOb->texture;   // move this to linkTexture func
+    	texOb = _texOb;
+    	w = texOb->w;
+    	h = texOb->h;   
 
     	//////
     	points.initCenterPoint();
@@ -126,7 +125,7 @@ bool Turrel :: isTargetAchievable()
 bool Turrel :: isTargetAlive()
 {
      	if (target_type_id == SHIP_ID)
-        	if (target_ship->is_alive == true)
+        	if (target_ship->getAliveFlag() == true)
            		return true;
         	else
            		return false;
@@ -155,7 +154,7 @@ bool Turrel :: isTargetAlive()
 bool Turrel :: isTargetInSpace()
 {
      	if (target_type_id == SHIP_ID)
-        	if (target_ship->in_SPACE == true)
+        	if (target_ship->getPlaceTypeId() == SPACE_ID)
            		return true;
         	else
            		return false;
@@ -281,12 +280,12 @@ bool Turrel :: fireEvent_FALSE()
 
 
 
-int Turrel :: returnTargetId()
+int Turrel :: getTargetId() const
 {
     	if (has_TARGET == true)
     	{
         	if (target_type_id == SHIP_ID)
-           		return target_ship->id;
+           		return target_ship->getId();
         	if (target_type_id == ASTEROID_ID)
            		return target_asteroid->getId();
         	if (target_type_id == MINERAL_ID)
@@ -302,12 +301,12 @@ int Turrel :: returnTargetId()
 void Turrel :: setTarget(Ship* _ship)
 {
      	target_ship = _ship;
-     	target_type_id = target_ship->type_id;
+     	target_type_id = target_ship->getTypeId();
 
      	pTo_target_pos_x = &(target_ship->getPoints()->getpCenter()->x);
      	pTo_target_pos_y = &(target_ship->getPoints()->getpCenter()->y);
 
-    	pTo_target_is_alive = &(target_ship->is_alive);
+    	pTo_target_is_alive = target_ship->get_pAliveFlag();
      	has_TARGET = true;
 }
 
@@ -384,7 +383,7 @@ void Turrel :: updatePosition(float _center_x, float _center_y, float _angle_inD
 
 void Turrel :: render()
 {
-   	glBindTexture(GL_TEXTURE_2D, texture); 
+   	glBindTexture(GL_TEXTURE_2D, texOb->texture); 
     	drawFlatQuadPerVertexIn2D(points.getBottomLeft(), 
                                   points.getBottomRight(), 
                                   points.getTopRight(), 

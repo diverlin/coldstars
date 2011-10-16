@@ -104,7 +104,9 @@ void CommonForSpaceItems :: update_inSpace_inDynamic_TRUE()
      	{
         	dying_time--;
         	if (dying_time < 0)
+        	{
            		death_TRUE();
+           	}
      	}    
 }
 
@@ -122,14 +124,18 @@ void CommonForSpaceItems :: hit_TRUE(int damage)
 {
     	armor -= damage;
     	if (armor <= 0)
+    	{
        		is_dying = true;
+       	}
 }
 
 void CommonForSpaceItems :: hit_FALSE(int damage)
 {
     	armor -= damage;
     	if (armor <= 0)
+    	{
        		death_FALSE();
+       	}
 }
 
 

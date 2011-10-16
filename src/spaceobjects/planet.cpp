@@ -35,15 +35,22 @@ Planet :: Planet(int _subtype_id,
 
       	texOb_atmosphere = _texOb_atmoshere;
 
-      	kosmoport = NULL;
-      	land      = NULL;
+
+
       	
       	population = _population;
       
-      	if (subtype_id == INHABITED_ID)
-         	createKosmoport();
-      	if (subtype_id == UNINHABITED_ID)
+      	if (subtype_id == KOSMOPORT_TYPE_ID)
+      	{
+      	      	createKosmoport();
+      	      	land      = NULL;
+        }
+        
+      	if (subtype_id == LAND_ID)
+      	{
          	createLand();
+         	kosmoport = NULL;
+        }
 }
 
     
@@ -52,7 +59,9 @@ Planet :: ~Planet()
     
 
 int Planet :: getDockingRadius() const { return data.scale; }
-       
+Kosmoport* Planet :: getKosmoport()    { return kosmoport; }
+Land* Planet :: getLand()              { return land; }
+                
 
 void Planet :: update_inSpace_inDynamic()
 {      
@@ -63,11 +72,15 @@ void Planet :: update_inSpace_inDynamic()
 
 void Planet :: update_inSpace_inStatic()
 {      
-     	if (subtype_id == INHABITED_ID)
+     	if (subtype_id == KOSMOPORT_TYPE_ID)
+     	{
                 kosmoport->ai();
+        }
                 
-     	if (subtype_id == UNINHABITED_ID)
-                land->ai();        	
+     	if (subtype_id == LAND_ID)
+     	{
+                land->ai();    
+        }    	
 }
          
 
@@ -102,11 +115,11 @@ void Planet :: createLand()
 //// ******* TRANSITION ******* 
 bool Planet :: addShip(Ship* _ship)
 {
-     	if (subtype_id == INHABITED_ID)
+     	if (subtype_id == KOSMOPORT_TYPE_ID)
         {
                 return kosmoport->addShip(_ship);
         }
-     	if (subtype_id == UNINHABITED_ID)
+     	if (subtype_id == LAND_ID)
         {
                 return land->addShip(_ship);
         }
@@ -114,11 +127,11 @@ bool Planet :: addShip(Ship* _ship)
 
 bool Planet :: addNpc(Npc* _npc)
 {
-     	if (subtype_id == INHABITED_ID)
+     	if (subtype_id == KOSMOPORT_TYPE_ID)
         {       
                 return kosmoport->addNpc(_npc);
         }
-     	if (subtype_id == UNINHABITED_ID)
+     	if (subtype_id == LAND_ID)
         {
                 return land->addNpc(_npc);
         }
@@ -126,18 +139,28 @@ bool Planet :: addNpc(Npc* _npc)
 
 bool Planet :: removeShipById(int _id)
 {
-     	if (subtype_id == INHABITED_ID)
+     	if (subtype_id == KOSMOPORT_TYPE_ID)
+     	{
          	return kosmoport->removeShip(_id);
-     	if (subtype_id == UNINHABITED_ID)
+        }
+        
+     	if (subtype_id == LAND_ID)
+     	{
          	return land->removeShip(_id);
+        }
 }
 
 bool Planet :: removeNpcById(int _id)
 {
-     	if (subtype_id == INHABITED_ID)
+     	if (subtype_id == KOSMOPORT_TYPE_ID)
+     	{
          	return kosmoport->removeNpc(_id);
-     	if (subtype_id == UNINHABITED_ID)
+        }
+        
+     	if (subtype_id == LAND_ID)
+     	{
          	return land->removeNpc(_id);
+        }
 }
 //// ******* TRANSITION ******* 
 
@@ -145,14 +168,14 @@ bool Planet :: removeNpcById(int _id)
 
 bool Planet :: getPermissionToLand() const
 {
-     	if (subtype_id == INHABITED_ID)
+     	if (subtype_id == KOSMOPORT_TYPE_ID)
      	{
         	if (kosmoport->getAngar()->getNumFreelandingArea() > 0)
             		return true;
         	else
             		return false;       
      	}
-     	if (subtype_id == UNINHABITED_ID)
+     	if (subtype_id == LAND_ID)
         	return true;
 }
 
@@ -161,7 +184,7 @@ bool Planet :: getPermissionToLand() const
 
 Planet* createPlanet(int orbit_radius)
 {
-        int subtype_id   = INHABITED_ID;
+        int subtype_id   = KOSMOPORT_TYPE_ID;
         
 	PlanetData planet_data;
 	

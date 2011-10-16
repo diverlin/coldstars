@@ -73,7 +73,7 @@ bool Angar :: removeShipFromlandingAreaById(int _id)
         {
                 if (landingArea_pList[la]->getBusyFlag() == true)
                 {
-                        if (landingArea_pList[la]->getShip()->id == _id)
+                        if (landingArea_pList[la]->getShip()->getId() == _id)
                         {
                                 landingArea_pList[la]->removeShip();
                                 return true;
@@ -115,6 +115,7 @@ void Angar :: mouseControl()
                                 {
                                         pPLAYER->getPilot()->setScanTarget(landingArea_pList[i]->getShip());
                                         pPLAYER->is_SCANNING = true;
+                                        pSHIP_GUI->configure(pPLAYER->getPilot()->getScanShip(), false, false); 
                                 }
                         }
                 }

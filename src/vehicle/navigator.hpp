@@ -29,27 +29,25 @@ class Navigator
       
       		void setStaticTargetCoords(vec2f _target_pos);
       
-      		void setTargetPlanet(Planet* _target_planet); 
-      		void setTargetShip(Ship* _target_ship);    
-      		void setTargetStarSystem(StarSystem* _target_starsystem);
-                void setFollowingTypeID(int);
+      		void setTargetPlanet(Planet*); 
+      		void setTargetShip(Ship*, int);    
+      		void setTargetStarSystem(StarSystem*);
                       
-                Planet* getTargetPlanet() const;
+                Planet* getTargetPlanet() const;  // ??
                 vec2f getTargetPos() const;
-                int getFollowingTypeID() const;
+                int getFollowingTypeId() const;
                 
-      		void removeTargetPlanet();
-      		void removeTargetShip(); 
-      		void removeTargetStarSystem();  
+    		bool updateDynamicTargetCoords();
       
-     		bool updateTargetCoords();
-      
-      		bool checkDocking();
+      		bool checkEchievement();
       		bool getDockingPermission();               
                
         	void updatePosition();
+        	
+        	void removeTarget();
+        	
       	private:
-      		Ship* ship;
+      		Ship* ship_owner;
       		
       		Planet*     target_planet;
 		Ship*       target_ship;
@@ -58,10 +56,11 @@ class Navigator
 		vec2f target_pos;
 		vec2f* pTo_target_pos;
 			
-		int docking_radius;   
+		float echievement_radius;   
+		float offset;
                 
-                int following_TYPE_ID;   
-                
+                int following_type_id;   
+
                 //////// TARGET COORDINATES //////
         	//self.Gl_LIST_direction_ID = None
         	std::vector<float> direction_x_list;
@@ -74,6 +73,9 @@ class Navigator
         	//////////////////////////////////
                 
                 void calculateDetaledWayToPosition();
+                
+                //template <typename TARGET>
+		//void checkHuperJumpNecessary(TARGET _target);
 };
 
 

@@ -33,6 +33,8 @@ class Planet : public CommonForPlanet
                 ~Planet();
 
                 int getDockingRadius() const;
+                Kosmoport* getKosmoport();
+                Land* getLand();
 
                 bool addShip(Ship*);
                 bool addNpc(Npc*);

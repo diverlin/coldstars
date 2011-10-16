@@ -21,6 +21,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Kosmoport :: Kosmoport(int _race_id)
 {
+	id = 0;
+	type_id = KOSMOPORT_TYPE_ID;
+
         TextureOb* _texOb_slot = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.slot_texOb_pList);
 
         TextureOb* _texOb_angarBackground  = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.angarBg_texOb_pList);   
@@ -47,9 +50,10 @@ Goverment* Kosmoport :: getGoverment() { return goverment; }
 
 bool Kosmoport :: addShip(Ship* _ship)
 {
+        _ship->setPlaceTypeId(type_id);
+                
         SHIP_pList.push_back(_ship);
         angar->addShip(_ship);
-        _ship->in_SPACE = false;
         
         return true;
 }
@@ -58,7 +62,7 @@ bool Kosmoport :: addNpc(Npc* _npc)
 {
         NPC_pList.push_back(_npc);
         _npc->setKosmoport(this);
-        _npc->setInSpace(false);
+        _npc->setPlaceTypeId(type_id);
  
         return true;
 }
@@ -68,7 +72,7 @@ bool Kosmoport :: removeShip(int _id)
         bool is_removed_from_list = false;
         for (unsigned int ki = 0; ki < SHIP_pList.size(); ki++)
         { 
-                if (SHIP_pList[ki]->id == _id)
+                if (SHIP_pList[ki]->getId() == _id)
                 {
                         SHIP_pList.erase(SHIP_pList.begin() + ki);
                         is_removed_from_list = true;
