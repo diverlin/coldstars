@@ -127,6 +127,15 @@ void CommonForPlanet :: updateRotation()
      	angle.z += d_angle.z; 
 }
 
+
+void CommonForPlanet :: hit_TRUE(int) 
+{}
+
+
+void CommonForPlanet :: hit_FALSE(int) 
+{}
+ 		
+ 		 		
 void CommonForPlanet :: render_NEW()
 {     	
 	updateRotation();

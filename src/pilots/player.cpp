@@ -20,31 +20,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "player.hpp"
 
 
-void WeaponSelector :: setAll(bool status)
-{
-	slot_1 = status;
-     	slot_2 = status;
-     	slot_3 = status;
-     	slot_4 = status;
-     	slot_5 = status;
-}
-     		
-//void WeaponSlotSelector :: set(bool _slot_1 = true, 
-			       //bool _slot_2 = true, 
-			       //bool _slot_3 = true, 
-			       //bool _slot_4 = true, 
-			       //bool _slot_5 = true)
-//{
-	//slot_1 = _slot_1;
-     	//slot_2 = _slot_2;
-     	//slot_3 = _slot_3;
-     	//slot_4 = _slot_4;
-     	//slot_5 = _slot_5;
-//}
-
-
-
-
 PlayerInstance :: PlayerInstance()
 { 
     	type_id = PLAYER_ID;
@@ -79,9 +54,9 @@ PlayerInstance :: ~PlayerInstance()
 void PlayerInstance :: setActiveStarSystem(StarSystem* _ss_active) 
 { 
 	// The starsystem were at least one player exist is living with true simulation
-	ss_active->setDetailedSimulation(false);
+	ss_active->setDetailedSimulationFlag(false);
 	ss_active = _ss_active; 
-	ss_active->setDetailedSimulation(true);	
+	ss_active->setDetailedSimulationFlag(true);	
 }	
 
 
@@ -94,9 +69,8 @@ void PlayerInstance :: bindShip(Ship* _ship)
 {
     	ship = _ship;
 
-    	//ship->pTo_playerOwner = this;
     	npc = ship->getNpc();
-    	ship->getNpc()->extractTheMind();
+    	ship->getNpc()->setControlledByPlayer(true);
 
 }
 

@@ -27,7 +27,6 @@ class BloomEffect;
 
 #include "GL/glew.h"   
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <vector>
@@ -124,23 +123,21 @@ class BloomEffect;
 
 #include "src/vehicle/turrel.hpp"
 
-#include "src/slot/itemSlot.hpp"
+#include "src/vehicle/itemSlot.hpp"
 #include "src/vehicle/navigator.hpp"
 #include "src/vehicle/ship.hpp"
 
 #include "src/pilots/skill.hpp"
+#include "src/pilots/questObject.hpp"  
 #include "src/pilots/npc.hpp"              
 
-                
-
+#include "src/gui/button.hpp"
+#include "src/gui/shipInternal.hpp"
 #include "src/world/starsystem.hpp"    
 #include "src/effects/rocketBullet.hpp"
 #include "src/effects/lazerTrace.hpp"
 
 #include "src/vehicle/turrel.hpp"
-//#include "src/gui/spaceMap.hpp"
-
-
 
 
 
@@ -220,7 +217,7 @@ class BloomEffect;
 #include "src/common/rect.cpp"
 #include "src/common/points.cpp"
 
-#include "src/slot/itemSlot.cpp"
+#include "src/vehicle/itemSlot.cpp"
 
 #include "src/vehicle/ship.cpp"
 #include "src/vehicle/navigator.cpp"

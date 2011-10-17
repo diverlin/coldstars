@@ -27,14 +27,15 @@ class ItemSlot
         	ItemSlot();
 		ItemSlot(int _subtype_id, Ship* _ship, TextureOb* _texOb, int _pos_x, int _pos_y);
                 
+                Turrel* bindTurrel(Turrel*);
+                                
                 int getType()        const;
                 int getSubType()     const;
                 int getItemType()    const;
                 int getItemSubType() const;
-
-                Turrel* getTurrel()  const;
-                Turrel* bindTurrel(Turrel* _turrel);
-                                    
+                
+                Turrel* getTurrel()  const;  
+                                                  
                 bool getEquipedStatus()  const;
                 bool getCursoredStatus() const;
                 void setCursoredStatus(bool new_status);
@@ -68,6 +69,13 @@ class ItemSlot
                 ScanerModule*    getScanerModule()    const;
                 GrappleModule*   getGrappleModule()   const;
 
+                TextureOb* getItemTexOb() const;
+		int getItemMass() const; 
+		int getItemPrice() const; 
+                int getItemDamage() const;
+                int getItemRadius() const;
+                int getItemCondition() const;
+                
 		bool insertItem(RocketEquipment* item);
 		bool insertItem(LazerEquipment* item);
         
@@ -94,12 +102,6 @@ class ItemSlot
 		bool insertItem(GrappleModule* item);
                 
 		void removeItem();
-
-		int getItemMass(); 
-		int getItemPrice(); 
-                int getItemDamage();
-                int getItemRadius();
-                int getItemCondition();
                 
 		void renderFrame(GLuint flash_tex);
 		void renderFrames(GLuint flash_tex);
@@ -118,13 +120,11 @@ class ItemSlot
                 bool is_FLASHING;                      // flashing the slot to show that item can be inserted in that one 
                 
                 TextureOb* texOb;
-                GLuint texture;
                 int w, h;
                 
                 Rect rect;
                                 
-                Ship* ship;
-                        
+                Ship* ship;                        
                 Turrel* turrel;
                 
                 RocketEquipment*    rocket_equipment;

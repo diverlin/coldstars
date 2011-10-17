@@ -54,7 +54,7 @@ void CommonForSpaceItems :: CommonForSpaceItems_init(TextureOb* _pTo_texOb, vec2
    	updateWHRenderConstants();
      
     	size = returnObjectSize(w, h);
-    	collision_threshold = (w + h)/2;
+    	collision_radius = (w + h)/2;
 
     	//self.hunters_list = []
     	//self.info         = []
@@ -90,7 +90,7 @@ void CommonForSpaceItems :: CommonForSpaceItems_init(TextureOb* _pTo_texOb, vec2
 Points* CommonForSpaceItems :: getPoints() { return &points; } 
 void CommonForSpaceItems :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
 StarSystem* CommonForSpaceItems :: getStarSystem() { return starsystem; }
-            	
+int CommonForSpaceItems :: getCollisionRadius() const {return collision_radius; }	
 
 void CommonForSpaceItems :: update_inSpace_inDynamic_TRUE()
 {

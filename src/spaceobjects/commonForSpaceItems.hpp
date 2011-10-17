@@ -42,7 +42,6 @@ class CommonForSpaceItems
         	int w, h;
         	int minus_half_w, minus_half_h, plus_half_w, plus_half_h;
         	int size;
-        	int collision_threshold;
         
         	float dx, dy;
         	//self.owner = None
@@ -80,6 +79,7 @@ class CommonForSpaceItems
         	Points* getPoints();
         	void setStarSystem(StarSystem* _starsystem);
             	StarSystem* getStarSystem();
+            	int getCollisionRadius() const;
             	
         	void update_inSpace_inDynamic_TRUE();
         	void update_inSpace_inDynamic_FALSE();
@@ -90,16 +90,16 @@ class CommonForSpaceItems
         	void death_TRUE();
         	void death_FALSE();
 
-        	//def _renderDynamicFramesLoopRot(self):
-        	//def _renderStaticFramesLoopOnRect(self, rect):
-        	//def _renderDynamicFrameRot(self):
-        	//def _renderStaticFrameOnRect(self, rect):
         	void updateWHRenderConstants();
         	void render2D();
+        	
+
         
         protected:
                	Points points;
                 StarSystem* starsystem;
+                
+                int collision_radius;
 };     
 
 #endif 

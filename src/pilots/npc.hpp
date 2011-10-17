@@ -31,6 +31,7 @@ class Npc
    		void setLand(Land*);
    		void setScanTarget(Ship*);
    		void setPlaceTypeId(int);
+   		void setControlledByPlayer(bool);
    		   		
    		bool getAlive() const;
    		int getId() const;
@@ -44,7 +45,7 @@ class Npc
    		Ship* getScanShip();
    		int getPlaceTypeId() const;
    		QuestObject* getQuestOb();
-   		   		   	   
+   		bool getControlledByPlayer() const;		   	   
 
    		void bind(Ship*);
 
@@ -54,19 +55,14 @@ class Npc
       		Npc(int _race_id, int _subtype_id, TextureOb* _faceTexOb);
      		~Npc();
      
-     		void extractTheMind();        // needs for player
-
      		// AI
      		//void setRandomTargetCoord();
      		void thinkCommon_inKosmoport_inStatic();
      		void thinkCommon_inLand_inStatic();
 
-     		void thinkCommon_inSpace_inStatic();
-     		void thinkUnique_inSpace_inStatic();
-
      		void update_inDynamic_inSpace();
 
-    		
+    		void aiSimulation();
 
      		//// scanning
     		bool checkPossibilityToScan(Ship* _ship);
@@ -78,10 +74,7 @@ class Npc
      		bool launchingEventPlayer();
      		
      		QuestObject* questOb;
-     		
-     		
-     		void observeAll_inSpace_inStatic();
-     		
+    		
    	private:
    	     	bool is_alive;    
      		int race_id;
@@ -91,6 +84,8 @@ class Npc
    	     	StarSystem* starsystem;
    	     	Kosmoport* kosmoport;
    	     	Land* land;
+   	     	
+   	     	bool controlled_by_player;
    	     	
    	     	Ship* ship;
    	     	
@@ -124,24 +119,25 @@ class Npc
      		
      		See see;
      		
-
-          		void findVisibleAsteroids_inSpace_inStatic();
-          		void findVisibleMinerals_inSpace_inStatic();
-          		void findVisibleContainers_inSpace_inStatic();
-          		void findVisibleNpcs_inSpace_inStatic();
-               			void findVisibleRangerNpcs_inSpace_inStatic();
-               			void findVisibleWarriorNpcs_inSpace_inStatic();
-               			void findVisibleTraderNpcs_inSpace_inStatic();
-               			void findVisiblePiratNpcs_inSpace_inStatic();
-               			void findVisibleDiplomatNpcs_inSpace_inStatic();
+ 		void observeAll_inSpace_inStatic();
+          	void findVisibleAsteroids_inSpace_inStatic();
+          	void findVisibleMinerals_inSpace_inStatic();
+          	void findVisibleContainers_inSpace_inStatic();
+          	void findVisibleNpcs_inSpace_inStatic();
+               	void findVisibleRangerNpcs_inSpace_inStatic();
+               	void findVisibleWarriorNpcs_inSpace_inStatic();
+               	void findVisibleTraderNpcs_inSpace_inStatic();
+               	void findVisiblePiratNpcs_inSpace_inStatic();
+               	void findVisibleDiplomatNpcs_inSpace_inStatic();
                			
-               		void sortVisibleAsteroids_inSpace_inStatic();
+               	void sortVisibleAsteroids_inSpace_inStatic();
 
      		void observe_inPlanet_inStatic();  //inhabited <-> uninhabited
      		// observation/radar 
      		
      		// AI
-     		void thinkNothing_inStatic(); 
+     		void thinkCommon_inSpace_inStatic();
+     		void thinkUnique_inSpace_inStatic();
      		
           	void (Npc::*pToFunc_thinkUnique_inSpace_inStatic)();
      		

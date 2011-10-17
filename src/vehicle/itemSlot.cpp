@@ -738,7 +738,7 @@ void ItemSlot :: removeItem()
 
 
 
-int ItemSlot :: getItemMass()
+int ItemSlot :: getItemMass() const
 {  
 	if (item_type_id == EQUIPMENT_ID)
 	{
@@ -777,7 +777,7 @@ int ItemSlot :: getItemMass()
 
 
 
-int ItemSlot :: getItemPrice()
+int ItemSlot :: getItemPrice() const
 {  
 	if (item_type_id == EQUIPMENT_ID)
 	{
@@ -818,8 +818,20 @@ void ItemSlot :: renderFrame(GLuint flash_tex)
 }
 
 
-
-int ItemSlot :: getItemRadius()
+TextureOb* ItemSlot :: getItemTexOb() const
+{
+        if (item_type_id == EQUIPMENT_ID)
+	{
+		//items 
+		if (item_subtype_id == LAZER_ID)
+			return lazer_equipment->getTexOb();
+		if (item_subtype_id == ROCKET_ID)
+			return rocket_equipment->getTexOb();
+        }
+}
+                
+                
+int ItemSlot :: getItemRadius() const
 { 
         if (item_type_id == EQUIPMENT_ID)
 	{
@@ -832,7 +844,7 @@ int ItemSlot :: getItemRadius()
 }
 
 
-int ItemSlot :: getItemDamage()
+int ItemSlot :: getItemDamage() const
 {
         if (item_type_id == EQUIPMENT_ID)
 	{
@@ -846,7 +858,7 @@ int ItemSlot :: getItemDamage()
 
 
 
-int ItemSlot :: getItemCondition()
+int ItemSlot :: getItemCondition() const
 {  
         return 1000;
 }

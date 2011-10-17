@@ -36,6 +36,7 @@ Asteroid :: Asteroid(TextureOb* _texOb,
       	type_id = ASTEROID_ID;
 
       	armor = 10;
+      	damage = 10 * armor;
       	mass  = randIntInRange(10, 30);
 }
     
@@ -47,6 +48,7 @@ Asteroid :: ~Asteroid()
 bool Asteroid :: getAlive() const { return is_alive; }
 bool* Asteroid :: get_pAlive() { return &is_alive; }
 int Asteroid :: getArmor() const { return armor; }
+int Asteroid :: getDamage() const { return damage; }
 int Asteroid :: getMass()  const { return mass; }	
 			
 

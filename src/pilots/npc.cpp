@@ -28,7 +28,8 @@ void Npc :: setKosmoport(Kosmoport* _kosmoport)    { kosmoport = _kosmoport; }
 void Npc :: setLand(Land* _land)   		   { land = _land; }
 void Npc :: setScanTarget(Ship* _ship)             { scanShip = _ship; }
 void Npc :: setPlaceTypeId(int _place_type_id)     { place_type_id = _place_type_id; /*if (ship != NULL) ship->setPlaceTypeId(_place_type_id); */ }
-
+void Npc :: setControlledByPlayer(bool _controlled_by_player) { controlled_by_player = _controlled_by_player; }
+   		
 bool Npc :: getAlive() const 	   { return is_alive; }
 int Npc :: getId() const	   { return id; }
 int Npc :: getTypeId() const	   { return type_id; }
@@ -41,7 +42,9 @@ Skill* Npc :: getSkill() 	   { return skill; }
 Ship* Npc :: getScanShip()	   { return scanShip; }	
 int Npc :: getPlaceTypeId() const  { return place_type_id; }
 QuestObject* Npc :: getQuestOb()   { return questOb; }
-   		
+bool Npc :: getControlledByPlayer() const { return controlled_by_player; }
+
+	
 void Npc :: bind(Ship* _ship) 	           
 { 
 	ship = _ship; 
@@ -64,6 +67,8 @@ Npc :: Npc(int _race_id, int _subtype_id, TextureOb* _texOb)
     	texOb = _texOb;
 
     	race_id = _race_id;
+    	
+    	controlled_by_player = false;
 
 
 
@@ -172,15 +177,6 @@ Npc :: ~Npc()
         //pTo_ship->pTo_navigator->setStaticTargetCoords(randIntInRange(0,800), randIntInRange(0,800));  
      //} 
 //}
-
-void Npc :: extractTheMind()
-{
-     	pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkNothing_inStatic;
-     	// player take action
-}   		QuestObject* getQuestOb();
-
-
-
 
 
 //////////// AI
@@ -382,11 +378,6 @@ void Npc :: findVisibleDiplomatNpcs_inSpace_inStatic()
 void Npc :: observe_inPlanet_inStatic()
 {}
 
-
-void Npc :: thinkNothing_inStatic()
-{
-     	// player take action
-}
 
 
 
@@ -617,28 +608,34 @@ void Npc :: thinkUnique_Race7_inSpace_inStatic()
 }
 
 
-
-void Npc :: makeImmediateDecision()
+void Npc :: aiSimulation()
 {
-    	if (see.ASTEROID == true)
-    	{  
-        	int a_index = -1;
-        	float dist = asteroid_distance_list[0];
-
-        	for(unsigned int i = 0; i < visible_ASTEROID_pList.size(); i++)
-           	if (asteroid_distance_list[i] < dist)
-           	{
-               		dist = asteroid_distance_list[i];
-               		a_index = i;
-           	} 
-        	//printf("closest asteroid at =%f\n", dist);
-        	if (a_index != -1)
-        	{ 
-           		ship->selectWeapons();
-           		ship->setWeaponsTarget(visible_ASTEROID_pList[a_index]);
-        	}   
-    	}            
+	observeAll_inSpace_inStatic();     	     	
+        thinkCommon_inSpace_inStatic();
+        thinkUnique_inSpace_inStatic();
 }
+    		
+//void Npc :: makeImmediateDecision()
+//{
+    	//if (see.ASTEROID == true)
+    	//{  
+        	//int a_index = -1;
+        	//float dist = asteroid_distance_list[0];
+
+        	//for(unsigned int i = 0; i < visible_ASTEROID_pList.size(); i++)
+           	//if (asteroid_distance_list[i] < dist)
+           	//{
+               		//dist = asteroid_distance_list[i];
+               		//a_index = i;
+           	//} 
+        	////printf("closest asteroid at =%f\n", dist);
+        	//if (a_index != -1)
+        	//{ 
+           		//ship->selectWeapons();
+           		//ship->setWeaponsTarget(visible_ASTEROID_pList[a_index]);
+        	//}   
+    	//}            
+//}
 
 
 

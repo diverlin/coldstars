@@ -88,6 +88,29 @@ struct ShipPropetries
 };
 
     
+class WeaponSelector
+{
+	public:
+    		bool slot_1;
+     		bool slot_2;
+     		bool slot_3;
+     		bool slot_4;
+     		bool slot_5;
+     	
+		void setAll(bool status)
+		{
+			slot_1 = status;
+     			slot_2 = status;
+     			slot_3 = status;
+     			slot_4 = status;
+     			slot_5 = status;
+		}
+};
+
+
+     		
+
+
 class Ship
 {   
     	public:
@@ -99,8 +122,9 @@ class Ship
                 int getId() const;
                 int getPlaceTypeId() const;
                 
-                bool getAliveFlag() const;
-                bool* get_pAliveFlag();
+                bool getAlive() const;
+                bool* getpAlive();
+                int getCollisionRadius() const;
                 
                 Points* getPoints();
                 Navigator* getNavigator();
@@ -137,7 +161,7 @@ class Ship
         	Abilities ableTo;
         	NeedsToDo needsToDo;
                 ShipPropetries propetries;
-                KorpusData korpusData;
+                KorpusData korpus_data;
                 
 
         	Ship(TextureOb* _texOb, KorpusData _korpusData);
@@ -228,6 +252,7 @@ class Ship
              		
 		void renderKorpus() const;
              	void renderTurrels() const;
+             	void renderDriveJet() const;
              	void renderShield() const;
              	
                 // WEPONS
