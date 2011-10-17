@@ -44,6 +44,22 @@ struct See
    	bool DIPLOMAT;
 };
 
+struct LifeData
+{
+        bool is_alive;
+        bool is_explosed;
+        
+	int armor;
+	int dying_time;
+};
+
+struct IdData  
+{
+	int id;
+	int type_id;
+	int subtype_id;
+};
+
 std :: string returnRaceStringByRaceId(int id);  // replace by generator class
 
 int returnObjectSize(int w, int h);  //size 0...9

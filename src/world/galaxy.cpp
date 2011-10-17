@@ -48,7 +48,7 @@ void Galaxy :: update(int timer)
 {
 	for (unsigned int si = 0; si < STARSYSTEM_pList.size(); si++)
      	{
-     		if (STARSYSTEM_pList[si]->getDetailedSimulation() == true)
+     		if (STARSYSTEM_pList[si]->getDetailedSimulationFlag() == true)
      			STARSYSTEM_pList[si]->update_TRUE(timer);
      		else
      		     	STARSYSTEM_pList[si]->update_FALSE(timer);
@@ -96,8 +96,8 @@ StarSystem* generateEntireStarSystem()
           
         generateNumPlanets(starsystem, randIntInRange(PLANET_PER_SYSTEM_MIN, PLANET_PER_SYSTEM_MAX));
 
-	starsystem->is_CAPTURED = getRandomBool();
-        if (starsystem->is_CAPTURED == false)
+	starsystem->setCapturedFlag( getRandomBool() );
+        if (starsystem->getCapturedFlag() == false)
                 generateNumFriendlyNPC(starsystem, randIntInRange(SHIP_PER_SYSTEM_MIN, SHIP_PER_SYSTEM_MAX));
         else
                 generateNumEnemyNPC(starsystem, randIntInRange(ENEMY_SHIP_PER_SYSTEM_MIN, ENEMY_SHIP_PER_SYSTEM_MAX));

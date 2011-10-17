@@ -53,6 +53,9 @@ class CommonForPlanet
                 void CommonForPlanet_init(TextureOb* _texOb, 
     	   				  ObjMeshInstance* _mesh, 
     	   				  PlanetData _planet_data);
+    	   				  
+ 		void hit_TRUE(int);
+ 		void hit_FALSE(int);
     		
    		void render_NEW();
     		void render_OLD();

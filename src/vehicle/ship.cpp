@@ -26,18 +26,18 @@ void Ship :: setPlaceTypeId(int _place_type_id)     { place_type_id = _place_typ
 int Ship :: getId() const           { return id; }
 int Ship :: getTypeId() const       { return type_id; }
 int Ship :: getPlaceTypeId() const  { return place_type_id; } 
-bool Ship :: getAliveFlag() const { return is_alive; }
-bool* Ship :: get_pAliveFlag() { return &is_alive; }
+bool Ship :: getAlive() const { return is_alive; }
+bool* Ship :: getpAlive()     { return &is_alive; }
 
 Points* Ship :: getPoints() 	    { return &points; }
 Navigator* Ship :: getNavigator()   { return navigator; }
 StarSystem* Ship :: getStarSystem() { return starsystem; }
 Npc*  Ship :: getNpc() 		    { return npc_owner; }
-                   
+int Ship :: getCollisionRadius() const  { return korpus_data.collision_radius; } 
 
                 
                 
-Ship :: Ship(TextureOb* _texOb, KorpusData _korpusData)
+Ship :: Ship(TextureOb* _texOb, KorpusData _korpus_data)
 {  	
     	is_alive    = true;
     	is_dying    = false;
@@ -88,8 +88,8 @@ Ship :: Ship(TextureOb* _texOb, KorpusData _korpusData)
     	//h_orig = texOb->h;
 
 
-        korpusData = _korpusData;
-        propetries.armor      = korpusData.armor;
+        korpus_data = _korpus_data;
+        propetries.armor      = korpus_data.armor;
 
     	starsystem = NULL; 
     	npc_owner    = NULL;
@@ -121,7 +121,7 @@ Ship :: Ship(TextureOb* _texOb, KorpusData _korpusData)
    
     	TextureOb* turrelTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.turrel_texOb_pList); 
    
-    	if (korpusData.weapon_slot_num >= 1)
+    	if (korpus_data.weapon_slot_num >= 1)
     	{  
        		weapon_slot1 = ItemSlot(WEAPON_SLOT_ID, 
        					this, 
@@ -137,7 +137,7 @@ Ship :: Ship(TextureOb* _texOb, KorpusData _korpusData)
        		weapon_slot1.bindTurrel(&turrel1);
        		turrel1.setTexOb(turrelTexOb); // remove
        
-       		if (korpusData.render_TURRELS == true)
+       		if (korpus_data.render_TURRELS == true)
        		{   
            		points.initWeapon1CenterPoint(0, texOb->h/3);
            		points.addWeapon1CenterPoint();
@@ -145,7 +145,7 @@ Ship :: Ship(TextureOb* _texOb, KorpusData _korpusData)
        		} 
     	}
    
-    	if (korpusData.weapon_slot_num >= 2)
+    	if (korpus_data.weapon_slot_num >= 2)
     	{  
        		weapon_slot2 = ItemSlot(WEAPON_SLOT_ID, 
        					this, 
@@ -161,7 +161,7 @@ Ship :: Ship(TextureOb* _texOb, KorpusData _korpusData)
               	weapon_slot2.bindTurrel(&turrel2);
        		turrel2.setTexOb(turrelTexOb);
         
-       		if (korpusData.render_TURRELS == true)
+       		if (korpus_data.render_TURRELS == true)
        		{  
            		points.initWeapon2CenterPoint(0, -texOb->h/3);
            		points.addWeapon2CenterPoint();
@@ -169,7 +169,7 @@ Ship :: Ship(TextureOb* _texOb, KorpusData _korpusData)
        		}
     	}
 
-    	if (korpusData.weapon_slot_num >= 3)
+    	if (korpus_data.weapon_slot_num >= 3)
     	{  
        		weapon_slot3 = ItemSlot(WEAPON_SLOT_ID, 
        					this, 
@@ -185,7 +185,7 @@ Ship :: Ship(TextureOb* _texOb, KorpusData _korpusData)
               	weapon_slot3.bindTurrel(&turrel3);
        		turrel3.setTexOb(turrelTexOb);
        
-       		if (korpusData.render_TURRELS == true)
+       		if (korpus_data.render_TURRELS == true)
        		{  
            		points.initWeapon3CenterPoint(-texOb->w/5, texOb->h/3);
            		points.addWeapon3CenterPoint();
@@ -193,7 +193,7 @@ Ship :: Ship(TextureOb* _texOb, KorpusData _korpusData)
        		}
     	}
 
-    	if (korpusData.weapon_slot_num >= 4)
+    	if (korpus_data.weapon_slot_num >= 4)
     	{  
        		weapon_slot4 = ItemSlot(WEAPON_SLOT_ID, 
        					this, 
@@ -209,7 +209,7 @@ Ship :: Ship(TextureOb* _texOb, KorpusData _korpusData)
               	weapon_slot4.bindTurrel(&turrel4);
        		turrel4.setTexOb(turrelTexOb);
          
-       		if (korpusData.render_TURRELS == true)
+       		if (korpus_data.render_TURRELS == true)
        		{  
            		points.initWeapon4CenterPoint(texOb->w/5, -texOb->h/3);
            		points.addWeapon4CenterPoint();
@@ -219,7 +219,7 @@ Ship :: Ship(TextureOb* _texOb, KorpusData _korpusData)
 
     	}   
 
-    	if (korpusData.weapon_slot_num >= 5)
+    	if (korpus_data.weapon_slot_num >= 5)
     	{  
        		weapon_slot5 = ItemSlot(WEAPON_SLOT_ID, 
        					this, 
@@ -235,7 +235,7 @@ Ship :: Ship(TextureOb* _texOb, KorpusData _korpusData)
               	weapon_slot5.bindTurrel(&turrel5);
        		turrel5.setTexOb(turrelTexOb);
        
-       		if (korpusData.render_TURRELS == true)
+       		if (korpus_data.render_TURRELS == true)
        		{  
            		points.initWeapon5CenterPoint(-texOb->w/3, -texOb->h/3);
            		points.addWeapon5CenterPoint();
@@ -292,7 +292,7 @@ Ship :: Ship(TextureOb* _texOb, KorpusData _korpusData)
     	slot_total_pList.push_back(&energizer_slot);
     		
     		
-	if (korpusData.inhibit_GRAPPLE == false)
+	if (korpus_data.inhibit_GRAPPLE == false)
 	{
 		grapple_slot  = ItemSlot(GRAPPLE_ID, 
 					 this, 
@@ -438,15 +438,15 @@ void Ship :: reloadAllWeapons()
 
 void Ship :: selectWeapons()
 {
-        if (korpusData.weapon_slot_num >= 1)
+        if (korpus_data.weapon_slot_num >= 1)
                 weapon_slot1.getTurrel()->setSelectedStatus(weapon_selector.slot_1);
-        if (korpusData.weapon_slot_num >= 2)
+        if (korpus_data.weapon_slot_num >= 2)
                 weapon_slot2.getTurrel()->setSelectedStatus(weapon_selector.slot_2);
-        if (korpusData.weapon_slot_num >= 3)
+        if (korpus_data.weapon_slot_num >= 3)
                 weapon_slot3.getTurrel()->setSelectedStatus(weapon_selector.slot_3);
-        if (korpusData.weapon_slot_num >= 4)
+        if (korpus_data.weapon_slot_num >= 4)
                 weapon_slot4.getTurrel()->setSelectedStatus(weapon_selector.slot_4);
-        if (korpusData.weapon_slot_num >= 5)
+        if (korpus_data.weapon_slot_num >= 5)
                 weapon_slot5.getTurrel()->setSelectedStatus(weapon_selector.slot_5);
 }
 
@@ -675,7 +675,7 @@ void Ship :: death()
 
      	if (is_explosed == false)
      	{   
-        	createExplosion(starsystem, points.getCenter(), korpusData.size_id);
+        	createExplosion(starsystem, points.getCenter(), korpus_data.size_id);
         	is_explosed = true;
      	}
 }
@@ -881,7 +881,7 @@ void Ship :: updateEnergyAbility()
 
 void Ship :: updateProtectionAbility()
 {
-        propetries.protection = korpusData.protection;
+        propetries.protection = korpus_data.protection;
         ableTo.PROTECT = false;
 
 
@@ -935,7 +935,7 @@ void Ship :: updateGrabAbility()
 {
      	ableTo.GRAB = false;
 
-     	if (korpusData.inhibit_GRAPPLE == false)
+     	if (korpus_data.inhibit_GRAPPLE == false)
         	if (grapple_slot.getEquipedStatus() == true)
            		if (grapple_slot.getGrappleEquipment()->getCondition() > 0)
               			ableTo.GRAB = true;
@@ -962,7 +962,7 @@ void Ship :: updateScanAbility()
 
 void Ship :: setMaxArmor()
 {
-     	propetries.armor = korpusData.armor;
+     	propetries.armor = korpus_data.armor;
 }
 
 void Ship :: setMaxFuel()
@@ -981,10 +981,10 @@ void Ship :: updateInfo()
     	info.addTitleStr("SHIP");
     	info.addNameStr("id/ss_id:");          info.addValueStr( int2str(id) + " / " + int2str(starsystem->getId()) );
     	info.addNameStr("ship/pilot race:");   info.addValueStr( returnRaceStringByRaceId(texOb->race_id) + "/" + returnRaceStringByRaceId(owner_race_id) ); 
-    	info.addNameStr("armor/max/size");     info.addValueStr( int2str(propetries.armor) + "/" + int2str(korpusData.armor) + "/" + int2str(korpusData.size_id) );
-    	info.addNameStr("space/free/mass:");   info.addValueStr( int2str(korpusData.space) + "/" + int2str(korpusData.space - propetries.mass) + "/" + int2str(propetries.mass) );
+    	info.addNameStr("armor/max/size");     info.addValueStr( int2str(propetries.armor) + "/" + int2str(korpus_data.armor) + "/" + int2str(korpus_data.size_id) );
+    	info.addNameStr("space/free/mass:");   info.addValueStr( int2str(korpus_data.space) + "/" + int2str(korpus_data.space - propetries.mass) + "/" + int2str(propetries.mass) );
     	info.addNameStr("energy:");            info.addValueStr( int2str(propetries.energy) );
-	info.addNameStr("temperature:");       info.addValueStr( int2str(korpusData.temperature) );
+	info.addNameStr("temperature:");       info.addValueStr( int2str(korpus_data.temperature) );
         info.addNameStr("observe radius:");    info.addValueStr( int2str(propetries.radius) );
     	info.addNameStr("protection:");        info.addValueStr( returnProtectionStr() );
 	info.addNameStr("speed x 100:");       info.addValueStr(int2str(int(propetries.speed*100)) );
@@ -1080,9 +1080,9 @@ void Ship :: updateInfo()
 std::string Ship :: returnProtectionStr()
 {
     	if (ableTo.PROTECT == true)
-       		return int2str(protector_slot.getProtectorEquipment()->getProtection()) + '+' + int2str(korpusData.protection);
+       		return int2str(protector_slot.getProtectorEquipment()->getProtection()) + '+' + int2str(korpus_data.protection);
     	else
-       		return int2str(korpusData.protection);
+       		return int2str(korpus_data.protection);
 }
 
 
@@ -1106,30 +1106,43 @@ void Ship :: updateRenderStuff()
 {
     	points.update(); 
     	shield->update();
+    	
+    	if (ableTo.DRIVE == true)
+    	{
+       		drive_jet->update();
+    	}
 }
 
 
 void Ship :: render_inSpace() const
 {   
     	renderKorpus();
-
-    	if (ableTo.PROTECT == true)
-        	renderShield(); 
+    	
+    	if (korpus_data.render_TURRELS == true)
+    	{
+        	renderTurrels();
+        }
 
     	if (ableTo.DRIVE == true)
     	{
-       		drive_jet->update();
-
-       		enable_POINTSPRITE();
-       			drive_jet->render();
-       		disable_POINTSPRITE();
+		renderDriveJet();
     	}
+    	
+    	if (ableTo.PROTECT == true)
+    	{
+        	renderShield(); 
+        }
 }
 
 
 void Ship :: render_atPlanet() const
 {
 	renderKorpus();
+	
+	if (korpus_data.render_TURRELS == true)
+    	{
+        	renderTurrels();
+        }
 }		
 		
 void Ship :: renderKorpus() const
@@ -1141,9 +1154,6 @@ void Ship :: renderKorpus() const
                                   points.getTopRight(), 
                                   points.getTopLeft(), 
 				  points.getPosZ());
-                                  
-    	if (korpusData.render_TURRELS == true)
-        	renderTurrels();
 }
 
 
@@ -1172,6 +1182,13 @@ void Ship :: renderTurrels() const
     	} 
 }
 
+
+void Ship :: renderDriveJet() const
+{
+       	enable_POINTSPRITE();
+       		drive_jet->render();
+       	disable_POINTSPRITE();
+}
 
 
 void Ship :: renderShield() const
@@ -1203,27 +1220,27 @@ void Ship :: renderWeaponIcons() const
 
 void equip(Ship* ship)
 {
-    	if (ship->korpusData.weapon_slot_num >= 1)
+    	if (ship->korpus_data.weapon_slot_num >= 1)
     	{
        		LazerEquipment* pTo_lazer1 = lazerEquipmentGenerator(RACE_0_ID);    
        		ship->weapon_slot1.insertItem(pTo_lazer1); 
     	}   
 
-    	if (ship->korpusData.weapon_slot_num >= 2)
+    	if (ship->korpus_data.weapon_slot_num >= 2)
     	{
        		LazerEquipment* pTo_lazer2 = lazerEquipmentGenerator(RACE_0_ID);    
        		ship->weapon_slot2.insertItem(pTo_lazer2); 
     	}   
     
-    	if (ship->korpusData.weapon_slot_num >= 3)
+    	if (ship->korpus_data.weapon_slot_num >= 3)
     	{
-       		//LazerEquipment* pTo_lazer3 = lazerGenerator(RACE_0_ID);    
-       		//pTo_ship->weapon_slot3.insertLazerEquipment(pTo_lazer3); 
-       		RocketEquipment* pTo_rocket3 = rocketEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot3.insertItem(pTo_rocket3); 
+       		LazerEquipment* pTo_lazer3 = lazerEquipmentGenerator(RACE_0_ID);    
+       		ship->weapon_slot3.insertItem(pTo_lazer3); 
+       		//RocketEquipment* pTo_rocket3 = rocketEquipmentGenerator(RACE_0_ID);    
+       		//ship->weapon_slot3.insertItem(pTo_rocket3); 
     	}   
         
-    	if (ship->korpusData.weapon_slot_num >= 4)
+    	if (ship->korpus_data.weapon_slot_num >= 4)
     	{
        		LazerEquipment* pTo_lazer4 = lazerEquipmentGenerator(RACE_0_ID);    
        		ship->weapon_slot4.insertItem(pTo_lazer4);         
@@ -1231,7 +1248,7 @@ void equip(Ship* ship)
        		//(*pTo_ship).weapon_slot4.insertRocketEquipment(pTo_rocket4); 
     	}   
     
-    	if (ship->korpusData.weapon_slot_num >= 5) 
+    	if (ship->korpus_data.weapon_slot_num >= 5) 
     	{
        		LazerEquipment* pTo_lazer5 = lazerEquipmentGenerator(RACE_0_ID);    
        		ship->weapon_slot5.insertItem(pTo_lazer5); 
@@ -1266,7 +1283,7 @@ void equip(Ship* ship)
     	ScanerEquipment* pTo_scaner = scanerEquipmentGenerator(RACE_0_ID);    
     	ship->scaner_slot.insertItem(pTo_scaner); 
     
-    	if (ship->korpusData.inhibit_GRAPPLE == false) 
+    	if (ship->korpus_data.inhibit_GRAPPLE == false) 
     	{
        		GrappleEquipment* pTo_grapple = grappleEquipmentGenerator(RACE_0_ID);    
        		ship->grapple_slot.insertItem(pTo_grapple); 

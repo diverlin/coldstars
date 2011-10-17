@@ -34,13 +34,27 @@ StarSystem :: ~StarSystem()
       
 
 void StarSystem :: setPositionOnWorldMap(Rect rect) { rect_onMap = rect; }
-void StarSystem :: setDetailedSimulation(bool _detalied_simulation) { detalied_simulation = _detalied_simulation; }
-		
-bool StarSystem :: getDetailedSimulation() const { return detalied_simulation; }
+void StarSystem :: setDetailedSimulationFlag(bool _detalied_simulation) { detalied_simulation = _detalied_simulation; }
+void StarSystem :: setCapturedFlag(bool _captured) { is_CAPTURED = _captured; }
+				
 int StarSystem :: getId() const     { return id; }
 int StarSystem :: getTypeId() const { return type_id; }
+bool StarSystem :: getDetailedSimulationFlag() const { return detalied_simulation; }
+bool StarSystem :: getCapturedFlag() const { return is_CAPTURED; }    
+Rect StarSystem :: getRectOnMap() const { return rect_onMap; }  
+int StarSystem :: getShockWaveNum() const { return effect_SHOCKWAVE_vec.size(); }        
                 
                 
+Planet* StarSystem :: getClosestPlanet(vec2f _pos)  // poor
+{
+     	return PLANET_vec[randIntInRange(0, PLANET_vec.size()-1)];
+}
+
+Npc* StarSystem :: getRandomNpc()  // poor
+{
+     	return NPC_inSPACE_vec[randIntInRange(0, NPC_inSPACE_vec.size()-1)];
+}
+
 void StarSystem :: update_TRUE(int timer)
 {
 	if (timer > 0)
@@ -53,7 +67,7 @@ void StarSystem :: update_TRUE(int timer)
     		rocketCollision_TRUE();
     		asteroidCollision_TRUE();
 
-    		manageEntities(); 
+    		manageDeathObjects(); 
 
 		fireEvents_TRUE(timer);
 		
@@ -65,7 +79,9 @@ void StarSystem :: update_TRUE(int timer)
 	    		
 		if (calculation_per_turn_allowed == true)
 		{
-	    		removeDeadEntities(); 
+			removeAllReferencesToDeathObjects();
+			garbage.clear(); 
+	    		
 	    		questManager();
     			updateEntities_inStatic();     			
 
@@ -93,83 +109,60 @@ void StarSystem :: update_FALSE(int timer)
 }
 
 
-
 void StarSystem :: rocketCollision_TRUE()
 {
         bool collide = false;
         for (unsigned int ri = 0; ri < ROCKET_vec.size(); ri++)
         {
-                for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
+                if (ROCKET_vec[ri]->getAlive() == true) 
                 {
-                        if (ROCKET_vec[ri]->owner_id != SHIP_inSPACE_vec[ki]->getId())
-                        {
-                                if (collisionBetweenCenters(ROCKET_vec[ri]->getPoints(), SHIP_inSPACE_vec[ki]->getPoints(), SHIP_inSPACE_vec[ki]->korpusData.collision_radius) == true)
-                                {
-                                        SHIP_inSPACE_vec[ki]->hit_TRUE(ROCKET_vec[ri]->damage);
-                                        ROCKET_vec[ri]->hit(ROCKET_vec[ri]->armor);
-                                        collide = true;
-                                        break;
-                                }
-                        }
-                }
-
-                if (collide == false)
-                {
-                        for (unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++)
-                        {
-                                if (collisionBetweenCenters(ROCKET_vec[ri]->getPoints(), ASTEROID_vec[ai]->getPoints(), ASTEROID_vec[ai]->getCollisionRadius()) == true)
-                                {   
-                                        ASTEROID_vec[ai]->hit_TRUE(ASTEROID_vec[ai]->getArmor());
-                                        ROCKET_vec[ri]->hit(ROCKET_vec[ri]->armor);
-                                        collide = true;
-                                        break;
-                                }
-                        }
-                }
-
-                if (collide == false)
-                {
-                        for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
-                        {
-                                if (collisionBetweenCenters(ROCKET_vec[ri]->getPoints(), MINERAL_vec[mi]->getPoints(), MINERAL_vec[mi]->w) == true)
-                                {   
-                                        MINERAL_vec[mi]->death_TRUE();
-                                        ROCKET_vec[ri]->hit(ROCKET_vec[ri]->armor);
-                                        collide = true;
-                                        break;
-                                }
-                        }
-                }
-
-                //if collide == False:
-                        //for sp in self.SPUTNIK_list:
-                                //if collisionBetweenCenters(r.points.center, sp.points.center, sp.collision_threshold):
-                                        //sp.hit(r.owner, r)
-                                        //r.hit(r.owner, r)
-                                        //collide = True
-                                        //break
-
-                if (collide == false)
-                {
-                        for (unsigned int ci = 0; ci < CONTAINER_vec.size(); ci++)
-                        {
-                                if (collisionBetweenCenters(ROCKET_vec[ri]->getPoints(), CONTAINER_vec[ci]->getPoints(), CONTAINER_vec[ci]->w) == true)
-                                {   
-                                        CONTAINER_vec[ci]->death_TRUE();
-                                        ROCKET_vec[ri]->hit(ROCKET_vec[ri]->armor);
-                                        collide = true;
-                                        break;
-                                }
-                        }
-                }
+                	if (collide == false)
+                	{
+                		for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
+                		{
+                        		if (ROCKET_vec[ri]->getOwnerShipId() != SHIP_inSPACE_vec[ki]->getId())
+                        		{                        
+                        			collide = collideEvent_TRUE(ROCKET_vec[ri], SHIP_inSPACE_vec[ki]);
+                        			if (collide == true) { break; }                        
+                        		}
+                		}
+                	}
+                	else  { continue; }
                 
-                //if collide == False:
-                        //for b in self.BOMB_list:
-                                //if collisionBetweenCenters(r.points.center, b.points.center, b.collision_threshold):
-                                        //b.hit(r.owner, r)
-                                        //r.hit(r.owner, r)
-                                        //collide = True
-                                        //break
+
+                	if (collide == false)
+                	{
+                        	for (unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++)
+                        	{
+                        		collide = collideEvent_TRUE(ROCKET_vec[ri], ASTEROID_vec[ai]);
+                        		if (collide == true) { break; }
+                        	}
+                	}
+                	else  { continue; }
+
+
+
+                	if (collide == false)
+                	{
+                        	for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
+                        	{
+                        		collide = collideEvent_TRUE(ROCKET_vec[ri], MINERAL_vec[mi]);
+                        		if (collide == true) { 	break; }
+                        	}
+                	}
+                	else  { continue; }
+
+
+                	if (collide == false)
+                	{
+                        	for (unsigned int ci = 0; ci < CONTAINER_vec.size(); ci++)
+                        	{
+                        		collide = collideEvent_TRUE(ROCKET_vec[ri], CONTAINER_vec[ci]);
+                        		if (collide == true) { 	break; }
+                        	}
+                	}
+                	else  { continue; }
+                }
         }
 }
 
@@ -179,183 +172,63 @@ void StarSystem :: rocketCollision_TRUE()
 
 void StarSystem :: rocketCollision_FALSE()
 {
-        bool collide = false;
-        for (unsigned int ri = 0; ri < ROCKET_vec.size(); ri++)
-        {
-                for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
-                {
-                        if (ROCKET_vec[ri]->owner_id != SHIP_inSPACE_vec[ki]->getId())
-                        {
-                                if (collisionBetweenCenters(ROCKET_vec[ri]->getPoints(), SHIP_inSPACE_vec[ki]->getPoints(), SHIP_inSPACE_vec[ki]->korpusData.collision_radius) == true)
-                                {
-                                        SHIP_inSPACE_vec[ki]->hit_FALSE(ROCKET_vec[ri]->damage);
-                                        ROCKET_vec[ri]->hit(ROCKET_vec[ri]->armor);
-                                        collide = true;
-                                        break;
-                                }
-                        }
-                }
-
-                if (collide == false)
-                {
-                        for (unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++)
-                        {
-                                if (collisionBetweenCenters(ROCKET_vec[ri]->getPoints(), ASTEROID_vec[ai]->getPoints(), ASTEROID_vec[ai]->getCollisionRadius()) == true)
-                                {   
-                                        ASTEROID_vec[ai]->hit_TRUE(ASTEROID_vec[ai]->getArmor());
-                                        ROCKET_vec[ri]->hit(ROCKET_vec[ri]->armor);
-                                        collide = true;
-                                        break;
-                                }
-                        }
-                }
-
-                if (collide == false)
-                {
-                        for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
-                        {
-                                if (collisionBetweenCenters(ROCKET_vec[ri]->getPoints(), MINERAL_vec[mi]->getPoints(), MINERAL_vec[mi]->w) == true)
-                                {   
-                                        MINERAL_vec[mi]->death_FALSE();
-                                        ROCKET_vec[ri]->hit(ROCKET_vec[ri]->armor);
-                                        collide = true;
-                                        break;
-                                }
-                        }
-                }
-
-
-                //if collide == False:
-                        //for sp in self.SPUTNIK_list:
-                                //if collisionBetweenCenters(r.points.center, sp.points.center, sp.collision_threshold):
-                                        //sp.hit(r.owner, r)
-                                        //r.hit(r.owner, r)
-                                        //collide = True
-                                        //break
-
-                if (collide == false)
-                {
-                        for (unsigned int ci = 0; ci < CONTAINER_vec.size(); ci++)
-                        {
-                                if (collisionBetweenCenters(ROCKET_vec[ri]->getPoints(), CONTAINER_vec[ci]->getPoints(), CONTAINER_vec[ci]->w) == true)
-                                {   
-                                        CONTAINER_vec[ci]->death_FALSE();
-                                        ROCKET_vec[ri]->hit(ROCKET_vec[ri]->armor);
-                                        collide = true;
-                                        break;
-                                }
-                        }
-                }
-
-                //if collide == False:
-                        //for b in self.BOMB_list:
-                                //if collisionBetweenCenters(r.points.center, b.points.center, b.collision_threshold):
-                                        //b.hit(r.owner, r)
-                                        //r.hit(r.owner, r)
-                                        //collide = True
-                                        //break
-     }
+	rocketCollision_TRUE();
+	// use hit_FALSE()
 }
 
 
 
 void StarSystem :: asteroidCollision_TRUE()
 {
+	bool collide = false;
+	
         for(unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++)
         {
                 if (ASTEROID_vec[ai]->getAlive() == true) 
                 {
-                        for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
-                        {
-                                if ( collisionBetweenCenters(ASTEROID_vec[ai]->getPoints(), SHIP_inSPACE_vec[ki]->getPoints(), SHIP_inSPACE_vec[ki]->korpusData.collision_radius) )
-                                {
-                                        ASTEROID_vec[ai]->hit_TRUE(ASTEROID_vec[ai]->getArmor());
-                                        SHIP_inSPACE_vec[ki]->hit_TRUE( (ASTEROID_vec[ai]->getArmor()) * 10 );
-                                        //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
-                                        break;
-                                }
-                        }
+                	if (collide == false)
+                	{
+                        	for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
+                        	{
+                                	collide = collideEvent_TRUE(ASTEROID_vec[ai], SHIP_inSPACE_vec[ki]);
+                        		if (collide == true) { break; }
+                        	}                        	
+                	}
+                	else { continue; }
+                	
+                	
+                	
+                	if (collide == false)
+                	{
+                        	for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
+                        	{
+                                	collide = collideEvent_TRUE(ASTEROID_vec[ai], PLANET_vec[pi]);
+                        		if (collide == true) { break; }
+                        	}                        	
+                	}
+                	else { continue; }
+                	
+                	
+                	
+                	if (collide == false)
+                	{
+                        	for (unsigned int si = 0; si < STAR_vec.size(); si++)
+                        	{
+                                	collide = collideEvent_TRUE(ASTEROID_vec[ai], STAR_vec[si]);
+                        		if (collide == true) { break; }
+                        	}                        	
+                	}
+                	else { continue; }
                 }
-
-                if (ASTEROID_vec[ai]->getAlive() == true)
-                {
-                        for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
-                        {
-                                if ( collisionBetweenCenters(ASTEROID_vec[ai]->getPoints(), PLANET_vec[pi]->getPoints(), PLANET_vec[pi]->getCollisionRadius()) == true )
-                                {
-                                        //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
-                                        ASTEROID_vec[ai]->hit_TRUE(ASTEROID_vec[ai]->getArmor());
-                                        break;
-                                }
-                        }
-                }
-                
-
-                if (ASTEROID_vec[ai]->getAlive() == true)
-                {
-                        for (unsigned int si = 0; si < STAR_vec.size(); si++)
-                        {
-                                if ( collisionBetweenCenters(ASTEROID_vec[ai]->getPoints(), STAR_vec[si]->getPoints(), STAR_vec[si]->getCollisionRadius() ) == true )
-                                {
-                                        //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
-                                        ASTEROID_vec[ai]->hit_TRUE(ASTEROID_vec[ai]->getArmor());
-                                        break;
-                                }
-                        }
-                }
-                        
-        }
-
+	}
 }
 
 
 
 void StarSystem :: asteroidCollision_FALSE()
 {
-        for(unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++)
-        {
-                if (ASTEROID_vec[ai]->getAlive() == true) 
-                {  
-                        for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
-                        {
-                                if ( collisionBetweenCenters(ASTEROID_vec[ai]->getPoints(), SHIP_inSPACE_vec[ki]->getPoints(), SHIP_inSPACE_vec[ki]->korpusData.collision_radius) )
-                                {
-                                        ASTEROID_vec[ai]->hit_FALSE(ASTEROID_vec[ai]->getArmor());
-                                        SHIP_inSPACE_vec[ki]->hit_FALSE( (ASTEROID_vec[ai]->getArmor()) * 10 );
-                                        //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
-                                        break;
-                                }
-                        }
-                }
-
-                if (ASTEROID_vec[ai]->getAlive() == true) 
-                {  
-                        for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
-                        {
-                                if ( collisionBetweenCenters(ASTEROID_vec[ai]->getPoints(), PLANET_vec[pi]->getPoints(), PLANET_vec[pi]->getCollisionRadius()) == true )
-                                {
-                                        //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
-                                        ASTEROID_vec[ai]->hit_FALSE(ASTEROID_vec[ai]->getArmor());
-                                        break;
-                                }
-                        }
-                }
-                
-
-                if (ASTEROID_vec[ai]->getAlive() == true)
-                {   
-                        for (unsigned int si = 0; si < STAR_vec.size(); si++)
-                        {
-                                if ( collisionBetweenCenters(ASTEROID_vec[ai]->getPoints(), STAR_vec[si]->getPoints(), STAR_vec[si]->getCollisionRadius()) == true )
-                                {
-                                        //printf("collision, asteroid_id = %i\n", (*Asteroid_pList[i]).id);
-                                        ASTEROID_vec[ai]->hit_FALSE(ASTEROID_vec[ai]->getArmor());
-                                        break;
-                                }
-                        }
-                }
-        }
-
+       asteroidCollision_TRUE();
+       // use hit_FALSE()
 }
 
 
@@ -458,9 +331,10 @@ void StarSystem :: updateEntities_inStatic()
      	// called once per TURN
      	for (unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
      	{
-     	     	NPC_inSPACE_vec[ni]->observeAll_inSpace_inStatic();     	     	
-        	NPC_inSPACE_vec[ni]->thinkCommon_inSpace_inStatic();
-         	NPC_inSPACE_vec[ni]->thinkUnique_inSpace_inStatic();
+     		if (NPC_inSPACE_vec[ni]->getControlledByPlayer() == false)
+     		{
+     			NPC_inSPACE_vec[ni]->aiSimulation();
+         	}
      	}
 
      	for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
@@ -624,7 +498,7 @@ void StarSystem :: renderBackground()
 {   
 	// HACK for point sprites
     	enable_POINTSPRITE();
-    		distantStarBgEffect_pList[0]->render(g_SCROLL_COORD_X, g_SCROLL_COORD_Y); 
+    		distantStarBgEffect_vec[0]->render(g_SCROLL_COORD_X, g_SCROLL_COORD_Y); 
     	disable_POINTSPRITE();
     	// HACK for point sprites
 
@@ -635,16 +509,16 @@ void StarSystem :: renderBackground()
     	enable_BLEND();
 		glDepthMask(false);
 
-    		for(unsigned int i = 0; i<distantNebulaBgEffect_pList.size(); i++)
+    		for(unsigned int i = 0; i<distantNebulaBgEffect_vec.size(); i++)
     		{ 
-       			distantNebulaBgEffect_pList[i]->updateRenderStuff(); 
-        		distantNebulaBgEffect_pList[i]->render(g_SCROLL_COORD_X, g_SCROLL_COORD_Y); 
+       			distantNebulaBgEffect_vec[i]->updateRenderStuff(); 
+        		distantNebulaBgEffect_vec[i]->render(g_SCROLL_COORD_X, g_SCROLL_COORD_Y); 
     		}
 
     		enable_POINTSPRITE();
-    			for(unsigned int i = 0; i<distantStarBgEffect_pList.size(); i++)
+    			for(unsigned int i = 0; i<distantStarBgEffect_vec.size(); i++)
     			{ 
-       				distantStarBgEffect_pList[i]->render(g_SCROLL_COORD_X, g_SCROLL_COORD_Y); 
+       				distantStarBgEffect_vec[i]->render(g_SCROLL_COORD_X, g_SCROLL_COORD_Y); 
     			}
     		disable_POINTSPRITE();
     	
@@ -773,6 +647,7 @@ void StarSystem :: renderEntities_NEW()
 
     			for(unsigned int i = 0; i < visible_ROCKET_vec.size(); i++)
     			{ 
+    			    	visible_ROCKET_vec[i]->updateRenderStuff();
        				visible_ROCKET_vec[i]->renderInSpace(); 
        				restoreSceneColor();
     			}    	
@@ -979,9 +854,10 @@ void StarSystem :: addContainer(Container* _container)
 }
 
 
-void StarSystem :: addRocket(RocketBullet* rocket)
+void StarSystem :: addRocket(RocketBullet* _rocket)
 {
-	ROCKET_vec.push_back(rocket);
+	_rocket->setStarSystem(this);
+	ROCKET_vec.push_back(_rocket);
 }    
 
 	
@@ -1011,18 +887,17 @@ void StarSystem :: addDamageEffect(DamageEffect* _damageEffect)
     		
 void StarSystem :: addDistantNebula(DistantNebulaBgEffect* dn)
 {
-	distantNebulaBgEffect_pList.push_back(dn);
+	distantNebulaBgEffect_vec.push_back(dn);
 }
 
 void StarSystem :: addDistantStar(DistantStarBgEffect* ds)
 {
-	distantStarBgEffect_pList.push_back(ds);
+	distantStarBgEffect_vec.push_back(ds);
 }
     		
-		
 
     		
-void StarSystem :: manageEntities()
+void StarSystem :: manageDeathObjects()
 {  
 
     for (unsigned int wi = 0; wi < effect_SHOCKWAVE_vec.size(); wi++)
@@ -1035,39 +910,13 @@ void StarSystem :: manageEntities()
 
     for(unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
     {
-        //if (SHIP_pList[ki]->is_alive == true)
-        //{
-           //for (unsigned int lei = 0; lei < SHIP_pList[ki]->effect_LAZERTRACE_pList.size(); lei++)
-           //{
-               //if (SHIP_pList[ki]->effect_LAZERTRACE_pList[lei]->is_alive == false)
-               //{   
-                   //delete SHIP_pList[ki]->effect_LAZERTRACE_pList[lei];
-                   //SHIP_pList[ki]->effect_LAZERTRACE_pList.erase(SHIP_pList[ki]->effect_LAZERTRACE_pList.begin() + lei);
-               //} 
-           //}
-        //}
-
-        //if (SHIP_pList[ki]->in_SPACE == false)
-        //{        
-        //   SHIP_pList.erase(SHIP_pList.begin() + ki);
-        //}   
-
-        //if (SHIP_pList[ki]->isReadyFor_JUMPEVENT == true)
-        //{        
-            //if (SHIP_pList[ki]->owner_type_id == NPC_ID)
-                //SHIP_pList[ki]->pTo_npc_owner->isReadyFor_JUMPEVENT = true;
-                   
-            ////SHIP_forJumpEvent_pList.push_back(SHIP_pList[ki]);
-            //SHIP_pList.erase(SHIP_pList.begin() + ki);
-            //break;
-        //}   
         
-        if (SHIP_inSPACE_vec[ki]->getAliveFlag() == false)
+        if (SHIP_inSPACE_vec[ki]->getAlive() == false)
         {           
             //if (SHIP_pList[ki]->owner_type_id == NPC_ID)
             SHIP_inSPACE_vec[ki]->getNpc()->setAlive(false);
                
-            SHIP_remove_queue_pList.push_back(SHIP_inSPACE_vec[ki]);
+            garbage.add(SHIP_inSPACE_vec[ki]);
             SHIP_inSPACE_vec.erase(SHIP_inSPACE_vec.begin() + ki);
             break;
         } 
@@ -1076,21 +925,11 @@ void StarSystem :: manageEntities()
 
     for(unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
     {
-        //if (NPC_pList[ni]->in_SPACE == false)
-        //{   
-        //    NPC_pList.erase(NPC_pList.begin() + ni);
-        //} 
-       
-        //if (NPC_pList[ni]->isReadyFor_JUMPEVENT == true)
-        //{   
-            ////NPC_forJumpEvent_pList.push_back(NPC_pList[ni]);
-            //NPC_pList.erase(NPC_pList.begin() + ni);
-            //break;
-        //} 
+
          
         if (NPC_inSPACE_vec[ni]->getAlive() == false)
         {   
-            NPC_remove_queue_pList.push_back(NPC_inSPACE_vec[ni]);
+            garbage.add(NPC_inSPACE_vec[ni]);
             NPC_inSPACE_vec.erase(NPC_inSPACE_vec.begin() + ni);
             break;
         } 
@@ -1112,7 +951,7 @@ void StarSystem :: manageEntities()
     {
         if (ASTEROID_vec[i]->getAlive() == false)
         {   //printf("asteroid id to remove ==> %i\n",(*Asteroid_pList[i]).id);
-            ASTEROID_remove_queue_pList.push_back(ASTEROID_vec[i]);
+            garbage.add(ASTEROID_vec[i]);
             ASTEROID_vec.erase(ASTEROID_vec.begin() + i );
         } 
     }
@@ -1122,7 +961,7 @@ void StarSystem :: manageEntities()
     {
         if (MINERAL_vec[i]->is_alive == false)
         {   //printf("asteroid id to remove ==> %i\n",(*Asteroid_pList[i]).id);
-            MINERAL_remove_queue_pList.push_back(MINERAL_vec[i]);
+            garbage.add(MINERAL_vec[i]);
             MINERAL_vec.erase(MINERAL_vec.begin() + i );
         } 
     }
@@ -1131,16 +970,16 @@ void StarSystem :: manageEntities()
     {
         if (CONTAINER_vec[i]->is_alive == false)
         {   //printf("asteroid id to remove ==> %i\n",(*Asteroid_pList[i]).id);
-            CONTAINER_remove_queue_pList.push_back(CONTAINER_vec[i]);
+            garbage.add(CONTAINER_vec[i]);
             CONTAINER_vec.erase(CONTAINER_vec.begin() + i );
         } 
     }
 
     for(unsigned int ri = 0; ri < ROCKET_vec.size(); ri++)
     {
-        if (ROCKET_vec[ri]->is_alive == false)
+        if (ROCKET_vec[ri]->getAlive() == false)
         {   //printf("asteroid id to remove ==> %i\n",(*Asteroid_pList[i]).id);
-            ROCKET_remove_queue_pList.push_back(ROCKET_vec[ri]);
+            garbage.add(ROCKET_vec[ri]);
             ROCKET_vec.erase(ROCKET_vec.begin() + ri );
         } 
     }
@@ -1164,89 +1003,20 @@ void StarSystem :: manageEntities()
     }
 }
 
-              
-void StarSystem :: removeDeadEntities()
-{  
-
-    for(unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
-    { 
-        SHIP_inSPACE_vec[ki]->removeWeaponSlotDeadTargets(); 
-    }
+     
 
 
-    for(unsigned int ki = 0; ki < SHIP_remove_queue_pList.size(); ki++)
-    { 
-       delete SHIP_remove_queue_pList[ki];
-       SHIP_remove_queue_pList.erase(SHIP_remove_queue_pList.begin() + ki);
-    }
+void StarSystem :: removeAllReferencesToDeathObjects()
+{
+    	for(unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
+    	{ 
+		SHIP_inSPACE_vec[ki]->removeWeaponSlotDeadTargets(); 
+	}
 
-    for(unsigned int ni = 0; ni < NPC_remove_queue_pList.size(); ni++)
-    { 
-       delete NPC_remove_queue_pList[ni];
-       NPC_remove_queue_pList.erase(NPC_remove_queue_pList.begin() + ni);
-    }
-
-
-
-    for(unsigned int ri = 0; ri < ROCKET_remove_queue_pList.size(); ri++)
-    { 
-       delete ROCKET_remove_queue_pList[ri];
-       ROCKET_remove_queue_pList.erase(ROCKET_remove_queue_pList.begin() + ri);
-    }
-
-
-    for(unsigned int ai = 0; ai < ASTEROID_remove_queue_pList.size(); ai++)
-    {
-       //printf("asteroid id to remove ==> %i\n",(*Asteroid_pList[i]).id);
-       delete ASTEROID_remove_queue_pList[ai];
-       ASTEROID_remove_queue_pList.erase(ASTEROID_remove_queue_pList.begin() + ai);
-    }
-
-    for(unsigned int mi = 0; mi < MINERAL_remove_queue_pList.size(); mi++)
-    {
-       //printf("mineral id to remove ==> %i\n",(*Asteroid_pList[i]).id);
-
-       delete MINERAL_remove_queue_pList[mi];
-       MINERAL_remove_queue_pList.erase(MINERAL_remove_queue_pList.begin() + mi);
-    }
-
-    for(unsigned int ci = 0; ci < CONTAINER_remove_queue_pList.size(); ci++)
-    {
-       //printf("mineral id to remove ==> %i\n",(*Asteroid_pList[i]).id);
-
-       delete CONTAINER_remove_queue_pList[ci];
-       CONTAINER_remove_queue_pList.erase(CONTAINER_remove_queue_pList.begin() + ci);
-    }
-
-}
-
-/*
-void StarSystem :: removeDeadEntities2()
-{  
-   VEC_int_type iterators_remove_queue;
-
-   for(unsigned int i = 0; i<Asteroid_pList_removeQueue.size(); i++)
-      {
-         for(unsigned int j = 0; j < Asteroid_pList.size(); j++)
-            { if ((*Asteroid_pList_removeQueue[i]).id == (*Asteroid_pList[j]).id)
-                 { printf("asteroid id to remove ==> %i\n",(*Asteroid_pList[j]).id);
-                   printf("iterators_remove_queue.push_back(j) = %i\n", j); 
-                   iterators_remove_queue.push_back(j);
-                   break;
-                 } 
-            }
-      }
-
-   for(unsigned int i=0; i<iterators_remove_queue.size(); i++)
-      {  printf("iterators_remove = %i\n", iterators_remove_queue[i]); 
-         Asteroid_pList.erase(Asteroid_pList.begin() + iterators_remove_queue[i]-1);     
-         printf("asteroid removed // MEMORY LEACK \n"); 
-      }
-
-   Asteroid_pList_removeQueue.clear();
-   
-}*/
-                
+}	
+     
+     
+               
 
 
 void StarSystem :: mouseControl()
@@ -1547,24 +1317,6 @@ bool StarSystem :: removeNpc(int _id, int _race_id, int _subtype_id)
 
 
 
-int StarSystem :: getShockWaveNum() const { return effect_SHOCKWAVE_vec.size(); }
-
-
-
-Planet* StarSystem :: getClosestPlanet(vec2f _pos)
-{
-     return PLANET_vec[randIntInRange(0, PLANET_vec.size()-1)];
-     //p = self.returnClosestInhabitedPlanet(ship)
-     //if p == None:
-             //p = self.returnClosestUninhabitedPlanet(ship)
-          //return p
-}
-
-Npc* StarSystem :: getRandomNpc()
-{
-     return NPC_inSPACE_vec[randIntInRange(0, NPC_inSPACE_vec.size()-1)];
-}
-
 void StarSystem :: questManager()
 {
  	for (unsigned int i = 0; i<NPC_inSPACE_vec.size(); i++)
@@ -1618,7 +1370,21 @@ void StarSystem :: debug__()
 
 
 
-
+template <typename AGRESSOR, typename VICTIM>
+bool collideEvent_TRUE(AGRESSOR* agressor,  VICTIM* victim)
+{
+	if (collisionBetweenCenters(agressor->getPoints(), victim->getPoints(), victim->getCollisionRadius()) == true)
+        {
+        	victim->hit_TRUE(agressor->getDamage());
+                agressor->hit_TRUE(agressor->getArmor());
+                
+                return true;
+        }
+        else
+        {
+        	return false;
+        }
+}
 
 
 

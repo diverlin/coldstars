@@ -20,6 +20,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef ROCKETEQUIPMENT_H
 #define ROCKETEQUIPMENT_H
 
+struct BulletData
+{
+	TextureOb* texOb;
+	
+	int damage; 
+        int armor; 
+        int live_time;
+                
+        float speed_init;
+        float speed_max;
+        float d_speed; 
+        float angular_speed; 
+};
+
+
+
 class RocketEquipment : public CommonForEquipment
 { 
    	public:
@@ -38,7 +54,7 @@ class RocketEquipment : public CommonForEquipment
 		
       		void fireEvent();
       
-      		bool insertModule(RocketModule* pTo_rocketModule);
+      		bool insertModule(RocketModule*);
       		
       	private:
       	      	int ammo_max_orig;
@@ -56,14 +72,7 @@ class RocketEquipment : public CommonForEquipment
       		
       	      	TextureOb* turrelTexOb;
       	      	
-      		TextureOb* pTo_bulletTexOb;
-      		int bullet_size; 
-      		int bullet_armor;
-      		float bullet_speed_init;
-      		float bullet_speed_max;
-      		float bullet_d_speed;
-      		int bullet_live_time;
-      		float bullet_angular_speed;
+      	      	BulletData data_bullet;
       		
       	      	std::vector<RocketModule*> modules_pList;
       	      	

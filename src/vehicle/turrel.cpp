@@ -125,7 +125,7 @@ bool Turrel :: isTargetAchievable()
 bool Turrel :: isTargetAlive()
 {
      	if (target_type_id == SHIP_ID)
-        	if (target_ship->getAliveFlag() == true)
+        	if (target_ship->getAlive() == true)
            		return true;
         	else
            		return false;
@@ -306,7 +306,7 @@ void Turrel :: setTarget(Ship* _ship)
      	pTo_target_pos_x = &(target_ship->getPoints()->getpCenter()->x);
      	pTo_target_pos_y = &(target_ship->getPoints()->getpCenter()->y);
 
-    	pTo_target_is_alive = target_ship->get_pAliveFlag();
+    	pTo_target_is_alive = target_ship->getpAlive();
      	has_TARGET = true;
 }
 

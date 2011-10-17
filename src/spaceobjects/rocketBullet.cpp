@@ -1,0 +1,316 @@
+/*
+Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+*/
+
+#include "rocketBullet.hpp"
+
+
+RocketBullet :: RocketBullet(IdData _data_id, 
+			     LifeData _data_life, 
+			     BulletData _data_bullet, 
+			     float _start_pos_x, 
+			     float _start_pos_y, 
+			     float _angle_inD, 
+			     float* _pTo_target_pos_x, 
+			     float* _pTo_target_pos_y, 
+			     bool* _pTo_target_is_alive, 
+			     int _owner_id)
+{
+	data_id     = _data_id;
+	data_life   = _data_life;
+	data_bullet = _data_bullet;
+	
+
+        starsystem = NULL;
+
+        owner_ship_id = _owner_id;
+        //target_type_id = 0;
+
+        target_is_alive = true;
+        pTo_target_is_alive = _pTo_target_is_alive;
+        pTo_target_pos_x = _pTo_target_pos_x;
+        pTo_target_pos_y = _pTo_target_pos_y;
+
+        texOb = _data_bullet.texOb;
+        size = returnObjectSize(texOb->w, texOb->h);
+
+
+        speed = _data_bullet.speed_init;
+        step = 0;
+
+        // points
+        points = Points();
+
+        points.initCenterPoint();
+        points.addCenterPoint();
+
+        points.initMainQuadPoints(texOb->w, texOb->h);
+        points.addMainQuadPoints();
+        
+        points.initMidLeftPoint();
+    	points.addMidLeftPoint();
+
+    	points.initMidFarLeftPoint();
+    	points.addMidFarLeftPoint();
+    	//
+
+        dx = 0;
+        dy = 0;
+
+        points.setCenter(_start_pos_x, _start_pos_y);
+        angle_inD = _angle_inD;
+        points.setAngle(angle_inD);
+        
+        
+        //self.drive_jet = driveTrailEffect(self, TEXTURE_MANAGER.returnParticleTexObBy_ColorID(YELLOW_COLOR_ID), 5, 15*self.size, 1.0, 1.0, 0.1, 0.15) 
+        
+        TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
+           	
+        int pNum       = 5;
+   	int pSize      = 15;
+   	float pVelocity  = 1.2;
+   	float pAlphaInit = 0.6;
+   	float pAlphaEnd  = 0.0;
+   	float pd_alpha   = 0.05;
+
+   	//drive_jet = DriveTrailEffect(TextureOb* _pTo_texOb, float* _pTo_OB_angle_inD, float* _pTo_start_pos_x, float* _pTo_start_pos_y, float* _pTo_target_pos_x, float* _pTo_target_pos_y, int _num_particles, float _size, float _velocity_orig, float _alpha_start, float _alpha_end, float _d_alpha)
+   	drive_jet = new DriveTrailEffect(pTo_particleTexOb, 
+   					 points.getpAngleDegree(), 
+   					 points.getpMidLeft(),  
+   					 points.getpMidFarLeft(), 
+   					 pNum, 
+   					 pSize, 
+   					 pVelocity, 
+   					 pAlphaInit, 
+   					 pAlphaEnd, 
+   					 pd_alpha);
+}
+
+
+RocketBullet :: ~RocketBullet()
+{}
+
+
+void RocketBullet :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
+
+bool RocketBullet :: getAlive() const { return data_life.is_alive; }
+int RocketBullet :: getArmor() const  { return data_life.armor; }
+int RocketBullet :: getDamage() const { return data_bullet.damage; }
+int RocketBullet :: getOwnerShipId() const { return owner_ship_id; }
+        	
+Points* RocketBullet :: getPoints() { return &points; }
+
+//void RocketBullet :: setShipAsTarget(Ship* _pTo_ship)
+//{
+    //pTo_shipTarget      = _pTo_ship;
+    //target_type_id = pTo_shipTarget->type_id;
+    
+    //pTo_target_pos_x = &(pTo_shipTarget->points.center_x);
+    //pTo_target_pos_y = &(pTo_shipTarget->points.center_y);  
+    
+    //pTo_target_is_alive = &(pTo_shipTarget->is_alive);      
+//}
+
+//void RocketBullet :: setAsteroidAsTarget(Asteroid* _pTo_asteroid)
+//{
+    //pTo_asteroidTarget  = _pTo_asteroid;
+    //target_type_id = pTo_asteroidTarget->type_id;
+    
+    //pTo_target_pos_x = &(pTo_asteroidTarget->points.center_x);
+    //pTo_target_pos_y = &(pTo_asteroidTarget->points.center_y);
+    
+    //pTo_target_is_alive = &(pTo_asteroidTarget->is_alive);   
+//}
+
+//void RocketBullet :: setMineralAsTarget(Mineral* _pTo_mineral)
+//{
+    //pTo_mineralTarget   = _pTo_mineral;
+    //target_type_id = pTo_mineralTarget->type_id;
+    
+    //pTo_target_pos_x = &(pTo_mineralTarget->points.center_x);
+    //pTo_target_pos_y = &(pTo_mineralTarget->points.center_y);
+    
+    //pTo_target_is_alive = &(pTo_mineralTarget->is_alive);   
+//}
+
+//void RocketBullet :: setContainerAsTarget(Container* _pTo_container)
+//{
+    //pTo_containerTarget = _pTo_container; 
+    //target_type_id = pTo_containerTarget->type_id;
+    
+    //pTo_target_pos_x = &(pTo_containerTarget->points.center_x);
+    //pTo_target_pos_y = &(pTo_containerTarget->points.center_y);
+    
+    //pTo_target_is_alive = &(pTo_containerTarget->is_alive);  
+//}
+
+void RocketBullet :: update_inSpace_inDynamic()
+{
+    	if (speed < data_bullet.speed_max)
+    	{
+       		speed += data_bullet.d_speed; 
+       		stepCalculation();
+    	} 
+
+    	if ((*pTo_target_is_alive) == false)
+    	{
+        	target_is_alive = false;    // this step is needed after deleting target object in order to rocket keep moving
+        }
+
+    	if (target_is_alive == true)
+    	{ 
+        	//dx, dy, angle_new = rocketWayCalc((self.points.center[0], self.points.center[1]), (self.target.points.center[0], self.target.points.center[1]), self.points.angle, self.angular_speed, self.step)
+        	get_dX_dY_angleInD_ToPoint(points.getCenter().x, points.getCenter().y, (*pTo_target_pos_x), (*pTo_target_pos_y), step, &dx, &dy, &angle_inD);
+    	}      
+    	points.setAngle(angle_inD);
+    	points.setCenter(points.getCenter().x + dx, points.getCenter().y + dy);
+    
+
+    	data_bullet.live_time -= 1;
+    	if (data_bullet.live_time < 0)
+    	{
+       		death();
+    	}
+}
+
+void RocketBullet :: updateDebugWay(int _timer)   // DEBUG
+{
+   // # DEBUG WAY
+   // def updateDebugWay(self, timer, mx, my):
+    //    if 1 > 0:
+      //     if self.speed < ROCKET_SPEED_MAX:
+        //      self.speed += ROCKET_DELTA_SPEED/2.0
+          //    self.stepCalculation()
+           
+        //   (self.dx, self.dy), self.angle_new = rocketWayCalc((self.points.center[0], self.points.center[1]), (mx, my), self.points.angle, self.angular_speed, self.step)
+           
+        //   # NEW !!!
+        //   self.points.setAngle(self.angle_new)
+        //   self.points.setCenter(self.points.center[0] + self.dx, self.points.center[1] + self.dy)
+         //  self.points.update()
+
+}
+
+void RocketBullet :: stepCalculation()
+{
+     	step = speed / 100.0;
+}
+
+void RocketBullet :: hit_TRUE(int _damage)
+{
+    	data_life.armor -= _damage;
+    	if (data_life.armor <= 0)
+    	{
+        	death();
+        }
+}
+
+void RocketBullet :: hit_FALSE(int _damage)
+{
+	hit_TRUE(_damage);
+}
+
+void RocketBullet :: death()
+{
+     	data_life.is_alive = false; 
+
+     	if (data_life.is_explosed == false)
+     	{   
+        	createExplosion(starsystem, points.getCenter(), size);
+        	data_life.is_explosed = true;
+     	}
+}
+
+
+void RocketBullet :: updateRenderStuff()
+{
+	points.update();
+	drive_jet->update();
+}
+
+void RocketBullet :: renderDriveJet() const
+{
+       	enable_POINTSPRITE();
+       		drive_jet->render();
+       	disable_POINTSPRITE();
+}
+
+void RocketBullet :: renderKorpus() const
+{
+    	glBindTexture(GL_TEXTURE_2D, texOb->texture); 
+    	
+    	drawFlatQuadPerVertexIn2D(points.getBottomLeft(), 
+                              	  points.getBottomRight(), 
+                              	  points.getTopRight(), 
+                              	  points.getTopLeft(), 
+                              	  -500);
+}
+
+void RocketBullet :: renderInSpace() const
+{
+	renderKorpus();
+	renderDriveJet();
+}
+
+
+
+
+
+
+RocketBullet* rocketGenerator(BulletData data_bullet, ItemSlot* slot)
+{
+	IdData data_id;
+	LifeData data_life;
+	
+	data_id.id = -1;
+	data_id.type_id = ROCKET_BULLET_ID;
+	data_id.subtype_id = -1;
+	
+	data_life.is_alive    = true;
+        data_life.is_explosed = false;
+        data_life.armor = data_bullet.armor;        
+
+    	RocketBullet* rocket; 
+    	if (slot->getShip()->korpus_data.render_TURRELS == true)
+    	{
+        	rocket = new RocketBullet(data_id,
+        			          data_life,		
+        				  data_bullet,
+        				  slot->getTurrel()->getCenterX(), 
+                                  	  slot->getTurrel()->getCenterY(), 
+                                  	  slot->getTurrel()->getAngle(), 
+                                  	  slot->getTurrel()->getTarget_pCenterX(), 
+                                  	  slot->getTurrel()->getTarget_pCenterY(), 
+                                  	  slot->getTurrel()->getTarget_pAliveStatus(), 
+                                  	  slot->getShip()->getId());
+        }
+    	else
+    	{
+        	rocket = new RocketBullet(data_id,
+        			          data_life,		
+        				  data_bullet,
+        				  slot->getShip()->getPoints()->getCenter().x, 
+                                  	  slot->getShip()->getPoints()->getCenter().y, 
+                                  	  slot->getTurrel()->getAngle(), 
+                                  	  slot->getTurrel()->getTarget_pCenterX(), 
+                                  	  slot->getTurrel()->getTarget_pCenterY(), 
+                                  	  slot->getTurrel()->getTarget_pAliveStatus(), 
+                                  	  slot->getShip()->getId());
+         }
+         
+         return rocket;
+}

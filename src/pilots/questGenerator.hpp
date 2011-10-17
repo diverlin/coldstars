@@ -17,15 +17,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-typedef std::vector<std::string*> VEC_pString_type;
+#ifndef QUESTGENERATOR_H
+#define QUESTGENERATOR_H
 
 
-class Ship;      
-class Npc;   
-class StarSystem;
-class ItemSlot;   
-class Turrel;           
+void questGenerator(Npc*);
 
 
-
-
+#endif

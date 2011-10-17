@@ -62,7 +62,7 @@ int main()
 
     	g_TIMER = -1; 
     	// GAME LOOP
-    	while (g_APP.IsOpened())
+    	while (g_APP.IsOpened() && pPLAYER->getPilot()->getShip()->getAlive())
     	{    
        		/////////// AUTOTURN //////////////////
        		if (g_TIMER < -50)

@@ -41,14 +41,14 @@ RocketEquipment :: RocketEquipment(TextureOb* _pTo_itemTexOb,
         radius_add = 0;
 
 
-        pTo_bulletTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.rocketBullet_texOb_pList);    
-        bullet_size          = returnObjectSize((*pTo_bulletTexOb).w, (*pTo_bulletTexOb).h); 
-        bullet_armor         = ROCKET_ARMOR;
-        bullet_speed_init    = ROCKET_START_SPEED;
-        bullet_speed_max     = ROCKET_SPEED_MAX;
-        bullet_d_speed       = ROCKET_DELTA_SPEED;
-        bullet_live_time     = ROCKET_EXISTANCE_TIME;
-        bullet_angular_speed = ROCKET_ANGULAR_SPEED;
+        data_bullet.texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.rocketBullet_texOb_pList);    
+        data_bullet.damage        = damage;
+        data_bullet.armor         = ROCKET_ARMOR;
+        data_bullet.speed_init    = ROCKET_START_SPEED;
+        data_bullet.speed_max     = ROCKET_SPEED_MAX;
+        data_bullet.d_speed       = ROCKET_DELTA_SPEED;
+        data_bullet.live_time     = ROCKET_EXISTANCE_TIME;
+        data_bullet.angular_speed = ROCKET_ANGULAR_SPEED;
 
         turrelTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.turrel_texOb_pList); 
    
@@ -134,59 +134,10 @@ std::string RocketEquipment :: getRadiusStr()
 
 void RocketEquipment :: fireEvent()
 {
-    	RocketBullet* pTo_r1; 
-    	if (slot->getShip()->korpusData.render_TURRELS == true)
-    	{
-        	pTo_r1 = new RocketBullet(slot->getShip()->getStarSystem(), 
-                                  	  pTo_bulletTexOb, 
-                                  	  slot->getTurrel()->getCenterX(), 
-                                  	  slot->getTurrel()->getCenterY(), 
-                                  	  slot->getTurrel()->getAngle(), 
-                                  	  slot->getTurrel()->getTarget_pCenterX(), 
-                                  	  slot->getTurrel()->getTarget_pCenterY(), 
-                                  	  slot->getTurrel()->getTarget_pAliveStatus(), 
-                                  	  slot->getShip()->getId(), 
-                                  	  damage, 
-                                  	  bullet_size, 
-                                  	  bullet_armor, 
-                                  	  bullet_speed_init, 
-                                  	  bullet_speed_max, 
-                                  	  bullet_d_speed, 
-                                  	  bullet_angular_speed, 
-                                  	  bullet_live_time);
-        }
-    	else
-    	{
-        	pTo_r1 = new RocketBullet(slot->getShip()->getStarSystem(), 
-                                 	  pTo_bulletTexOb, 
-                                  	  slot->getShip()->getPoints()->getCenter().x, 
-                                  	  slot->getShip()->getPoints()->getCenter().y, 
-                                  	  slot->getTurrel()->getAngle(), 
-                                  	  slot->getTurrel()->getTarget_pCenterX(), 
-                                  	  slot->getTurrel()->getTarget_pCenterY(), 
-                                  	  slot->getTurrel()->getTarget_pAliveStatus(), 
-                                  	  slot->getShip()->getId(), 
-                                  	  damage, 
-                                  	  bullet_size, 
-                                  	  bullet_armor, 
-                                  	  bullet_speed_init, 
-                                  	  bullet_speed_max, 
-                                  	  bullet_d_speed, 
-                                  	  bullet_angular_speed, 
-                                  	  bullet_live_time);
-         }
-
-    	//if (pTo_wslot->target_type_id == SHIP_ID)
-        	//pTo_r1->setShipAsTarget(pTo_wslot->pTo_shipTarget);
-    	//if (pTo_wslot->target_type_id == ASTEROID_ID)
-        	//pTo_r1->setAsteroidAsTarget(pTo_wslot->pTo_asteroidTarget); 
-    	//if (pTo_wslot->target_type_id == MINERAL_ID)
-        	//pTo_r1->setMineralAsTarget(pTo_wslot->pTo_mineralTarget); 
-    	//if (pTo_wslot->target_type_id == CONTAINER_ID)
-        	//pTo_r1->setContainerAsTarget(pTo_wslot->pTo_containerTarget); 
-           
+    	RocketBullet* rocket1 = rocketGenerator(data_bullet, slot);
+          
     	//r1.points.setCenter(l_owner.points.center[0]+15, l_owner.points.center[1])
-    	pTo_r1->pTo_starsystem->addRocket(pTo_r1);
+    	slot->getShip()->getStarSystem()->addRocket(rocket1);
 
     	//r2 = rocketBulletInstance(self.bullet_texOb, l_owner, l_target, self.damage,  self.bullet_size, self.bullet_armor, self.bullet_speed_init, self.bullet_speed_max, self.bullet_d_speed, self.bullet_live_time, self.bullet_angular_speed)
     	//r2.points.setCenter(l_owner.points.center[0]-15, l_owner.points.center[1])

@@ -32,6 +32,7 @@ class Asteroid : public CommonForPlanet
 		bool getAlive() const;
 		bool* get_pAlive();
 		int getArmor() const;
+		int getDamage() const;
 		int getMass()  const;	
 		
         	void update_inSpace_inDynamic_TRUE();
@@ -51,6 +52,7 @@ class Asteroid : public CommonForPlanet
         	int dying_time;
         	
       		int armor;
+      		int damage;
       		int mass;
         	
 		void death_TRUE();
