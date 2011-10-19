@@ -31,7 +31,7 @@ void CommonForEquipment :: CommonForEquipment_init(int _subtype_id,
 						   TextureOb* _itemTexOb, 
 						   EquipmentCommonData _common_data)
 {
-    	id         = g_ENTITY_ID_GENERATOR.returnNextId();
+    	id         = g_EQUIPMENT_ID_GENERATOR.getNextId();
     	type_id    = EQUIPMENT_ID;
     	subtype_id = _subtype_id;
     

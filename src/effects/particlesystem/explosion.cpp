@@ -103,7 +103,7 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 		texOb_particle = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
 
 		explosion = new ExplosionEffect(texOb_particle, _center_pos, data_particle, particles_num);
-		_starsystem->addExplosionEffect(explosion);
+		_starsystem->add(explosion);
 	}
     	else    
 	{
@@ -113,7 +113,7 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 		texOb_particle = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
 		
 		explosion = new ExplosionEffect(texOb_particle, _center_pos, data_particle, particles_num);
-		_starsystem->addExplosionEffect(explosion);
+		_starsystem->add(explosion);
        
 
 		particles_num = 50;
@@ -122,7 +122,7 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 		texOb_particle = g_TEXTURE_MANAGER.returnParticleTexObByColorId(YELLOW_COLOR_ID);
 		
 		explosion = new ExplosionEffect(texOb_particle, _center_pos, data_particle, particles_num);
-		_starsystem->addExplosionEffect(explosion);
+		_starsystem->add(explosion);
        
 		particles_num = 100;                              
 		data_particle.size_start  = 25 * (obSize-2);
@@ -130,7 +130,7 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 		texOb_particle = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
 		
 		explosion = new ExplosionEffect(texOb_particle, _center_pos, data_particle, particles_num);
-		_starsystem->addExplosionEffect(explosion);
+		_starsystem->add(explosion);
 	} 	       
  
  	if ( (obSize > 3) && (_starsystem->getShockWaveNum() < 10) )

@@ -88,7 +88,7 @@ StarSystem* generateEntireStarSystem()
         starsystem->setPositionOnWorldMap(ssOnMapRect);
 
         Star* star = createStar();    
-        starsystem->addStar(star);
+        starsystem->add(star);
         
         int distNebula_maxNum = getRandInt(4,7);
         int distStar_maxNum = getRandInt(40, 60);
@@ -113,13 +113,13 @@ void generateBackground(StarSystem* starsystem, int distNebula_maxNum, int distS
         for(int i = 0; i < distNebula_maxNum; i++)
         { 
 		DistantNebulaBgEffect* dn = createDistantNebula(_color_id);
-                starsystem->addDistantNebula(dn);
+                starsystem->add(dn);
         } 
 
         for(int i = 0; i < distStar_maxNum; i++)
         { 
 		DistantStarBgEffect* ds = createDistantStar();
-                starsystem->addDistantStar(ds);
+                starsystem->add(ds);
         } 
 }
 
@@ -139,7 +139,7 @@ void generateNumPlanets(StarSystem* starsystem, int planet_per_system)
                 offset = orbit_radius;
 
                 Planet* planet = createPlanet(orbit_radius);
-                starsystem->addPlanet(planet);
+                starsystem->add(planet);
         }
 }
 

@@ -25,6 +25,10 @@ CommonForModules :: CommonForModules()
 
 void CommonForModules :: CommonForModules_init(int _subtype_id, TextureOb* _texOb)
 {
+     	id = g_MODULE_ID_GENERATOR.getNextId(); 
+     	type_id = MODULE_ID;
+     	subtype_id = _subtype_id;
+     	
      	texOb = _texOb;
 
      	if (texOb->is_animated == false)
@@ -34,12 +38,7 @@ void CommonForModules :: CommonForModules_init(int _subtype_id, TextureOb* _texO
 
      	w = texOb->w;
      	h = texOb->h;
-          
-     	id = g_ENTITY_ID_GENERATOR.returnNextId(); 
-          
-     	type_id = MODULE_ID;
-     	subtype_id = _subtype_id;
-          
+         
      	mass = 1;
 }
 

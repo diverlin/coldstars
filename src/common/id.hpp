@@ -16,12 +16,45 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#ifndef ID_H
+#define ID_H
 
-#ifndef QUESTGENERATOR_H
-#define QUESTGENERATOR_H
+struct IdInfoData
+{
+	unsigned long int id;
+	std::string str;
+};
 
 
-bool questGenerator(Npc*);
+class DetaliedIdGenerator
+{
+    	public:
+        	DetaliedIdGenerator();
+        	~DetaliedIdGenerator();
+
+        	unsigned long int getNextId(std::string);
+        	std::string getStrByTypeId(unsigned long int);
+        	
+        private:
+                unsigned long int last_id;
+                std::vector<IdInfoData> id_data_vec;        
+};
+
+
+
+class SimpleIdGenerator
+{
+    	public:
+        	SimpleIdGenerator();
+        	~SimpleIdGenerator();
+        	
+        	unsigned long int getNextId();
+        	
+        private:
+        
+                unsigned long int last_id;
+        	std::vector<unsigned long int> id_vec; 
+};
 
 
 #endif

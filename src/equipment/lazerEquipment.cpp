@@ -151,38 +151,13 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
         }
     
     	// DAMAGE effect
-    	//ParticleData _data_particle;
-        //_data_particle.size_start = 30;
-        //_data_particle.size_end = 0.1;
-        //_data_particle.d_size = 0.0; 
-        
-        //_data_particle.velocity_start = 1.3;
-        //_data_particle.velocity_end   = 1.3;        
-        //_data_particle.d_velocity   = 0.0;
-                
-	//_data_particle.alpha_start = 1.0; 
-	//_data_particle.alpha_end = 0.1; 
-	//_data_particle.d_alpha = getRandInt(3,6)*0.01;
-			     
-	//int _num_particles = 5;
-			     
-    	
-    	//DamageEffect* _damage_effect = new DamageEffect(texOb_particle, 
-                                                        //_turrel->getTarget_pCenterX(), 
-                                                        //_turrel->getTarget_pCenterY(), 
-                                                        //_data_particle,
-                                                        //_num_particles);               
-
-	DamageEffect* _damage_effect = createDamageEffect(texOb_particle,
-							  _turrel->getTarget_pCenterX(), 
-			   				  _turrel->getTarget_pCenterY());
-							 
+	DamageEffect* _damage_effect = createDamageEffect(texOb_particle, _turrel->getTarget_pCenterX(), _turrel->getTarget_pCenterY());
     	_lazer_trace_effect->setDamageEffect(_damage_effect);
     	
     	deterioration();
     	
-    	slot->getShip()->getStarSystem()->addLazerTraceEffect(_lazer_trace_effect);
-    	slot->getShip()->getStarSystem()->addDamageEffect(_damage_effect);
+    	slot->getShip()->getStarSystem()->add(_lazer_trace_effect);
+    	slot->getShip()->getStarSystem()->add(_damage_effect);
 } 
 
 

@@ -17,8 +17,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "npc.hpp"
-
 bool Npc :: launchingEventPlayer() { launchingEvent(); }
      		
 
@@ -58,11 +56,12 @@ void Npc :: removeCredits(int _credits) { credits -= _credits; }
 		
 Npc :: Npc(int _race_id, int _subtype_id, TextureOb* _texOb)
 { 
-    	is_alive = true;
-
+    	id = g_NPC_ID_GENERATOR.getNextId(); 
     	type_id = NPC_ID;
     	subtype_id = _subtype_id;
-    	id = g_ENTITY_ID_GENERATOR.returnNextId(); 
+
+    	is_alive = true;
+
       
     	texOb = _texOb;
 
@@ -610,6 +609,8 @@ void Npc :: thinkUnique_Race7_inSpace_inStatic()
 
 void Npc :: aiSimulation()
 {
+	questOb->validation();
+	
 	observeAll_inSpace_inStatic();     	     	
         thinkCommon_inSpace_inStatic();
         thinkUnique_inSpace_inStatic();

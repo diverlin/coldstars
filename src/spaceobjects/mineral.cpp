@@ -23,7 +23,7 @@ Mineral :: Mineral(TextureOb* _texOb, vec2f _start_pos)
 {        
     	CommonForSpaceItems_init(_texOb, _start_pos);
 
-    	id         = g_ENTITY_ID_GENERATOR.returnNextId();
+    	id         = g_MINERAL_ID_GENERATOR.getNextId();
     	type_id    = MINERAL_ID;
     	//subtype_id = ;
 

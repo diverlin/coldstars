@@ -17,15 +17,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-void questGenerator(Npc* npc)
+bool questGenerator(Npc* npc)
 {
-	Npc* target_npc;
+	Npc* target_npc = NULL;
 	
+	int counter = 0;
 	do
 	{
 		target_npc = npc->getStarSystem()->getRandomNpc();
+		counter++;
 	} 
-	while ( npc->getId() == target_npc->getId() );
+	while ( (npc->getId() == target_npc->getId() ) and (counter < 20) );
 	
-	npc->getQuestOb()->setTask(target_npc, DESTROY_TASK_ID);
+	if (target_npc != NULL)
+	{
+		if (npc->getId() != target_npc->getId())
+		{
+			npc->getQuestOb()->setTask(target_npc, DESTROY_TASK_ID);
+			return true;
+		}
+	}
+
+	return false;
+	
 }

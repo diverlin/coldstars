@@ -23,6 +23,8 @@ class StarSystem;
 class ItemSlot;   
 class Turrel;       
 
+#include "src/common/global0.hpp" // used as work around
+
 #include "GL/glew.h"   
 
 #include <stdio.h>
@@ -36,8 +38,7 @@ class Turrel;
 #include "src/common/vector.hpp"
 #include "src/resources/objLoader.hpp"
 
-#include "src/common/global.hpp"
-#include "src/common/constants.hpp"
+#include "src/common/id.hpp"
 #include "src/common/points.hpp"
 #include "src/common/common.hpp"
 
@@ -49,6 +50,7 @@ class Turrel;
 
 #include "src/common/rect.hpp"
 
+#include "src/keyevents/keyEventsInSpace.hpp"
 
 #include "src/modules/commonformodules.hpp"
 #include "src/modules/rocketModule.hpp"
@@ -154,7 +156,9 @@ class Turrel;
 
 
 
-
+#include "src/common/id.cpp"
+#include "src/common/global.cpp"
+#include "src/common/constants.cpp"
 #include "src/common/vector.cpp"
 #include "src/world/galaxy.cpp"
 #include "src/world/garbage.cpp"  

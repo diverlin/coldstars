@@ -38,7 +38,11 @@ int Ship :: getCollisionRadius() const  { return korpus_data.collision_radius; }
                 
                 
 Ship :: Ship(TextureOb* _texOb, KorpusData _korpus_data)
-{  	
+{ 
+    	id      = g_SHIP_ID_GENERATOR.getNextId(); 
+    	type_id = SHIP_ID;
+    	//subtype_id = ;
+    	 	
     	is_alive    = true;
     	is_dying    = false;
     	is_explosed = false;
@@ -48,11 +52,6 @@ Ship :: Ship(TextureOb* _texOb, KorpusData _korpus_data)
     
 
     	dying_time = 60;
-
-    	id      = g_ENTITY_ID_GENERATOR.returnNextId(); 
-    	type_id = SHIP_ID;
-    	//subtype_id = ;
-
 
     	texOb = _texOb;
         texOb_korpus = texOb;
@@ -355,14 +354,14 @@ Ship :: Ship(TextureOb* _texOb, KorpusData _korpus_data)
     			     kontur_rect.getCenter().y + 3*texOb_slot->h);
     	////////////////////////////////////////////////////
  	   	
-   	drive_trail = createTrailEffect(korpus_data.size_id, points.getpMidLeft(), points.getpMidFarLeft());
-
    	needsToDo.REPAIR     = false;
    	needsToDo.CHARGE     = false;
    	needsToDo.GETBULLETS = false;
    	needsToDo.BUY        = false;
    	needsToDo.SELL       = false;
    
+      	drive_trail = createTrailEffect(korpus_data.size_id, points.getpMidLeft(), points.getpMidFarLeft());
+      	
    	//self.shield_texOb = TEXTURE_MANAGER.returnShieldEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id)
    	TextureOb* _texOb_shield = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.shieldEffect_texOb_pList); 
    	shield = new ShieldEffect(this, _texOb_shield);

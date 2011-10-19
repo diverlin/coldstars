@@ -69,10 +69,7 @@ void InterfaceInSpace :: mouseInteraction()
            		{
            			if (button_common_pList[i]->getSubTypeId() == GALAXYMAP_SCREEN_ID)
               			{
-              				if (pPLAYER->show_WORLDMAP == false)
-                 				pPLAYER->show_WORLDMAP = true;
-              				else
-                 				pPLAYER->show_WORLDMAP = false;
+              				pPLAYER->setWorldMapShowFlag(!pPLAYER->getWorldMapShowFlag());
                  		}
            		}
         	}

@@ -52,8 +52,6 @@ class LazerTraceEffect
        		float* pTo_start_pos_y;
        		float* pTo_end_pos_x;
        		float* pTo_end_pos_y;
-       		
-       		StarSystem* starsystem;
        		       		
        		DamageEffect* damage_effect;
  	       		

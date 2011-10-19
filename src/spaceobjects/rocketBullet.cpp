@@ -80,7 +80,9 @@ RocketBullet :: RocketBullet(IdData _data_id,
 
 
 RocketBullet :: ~RocketBullet()
-{}
+{
+	delete drive_trail;
+}
 
 
 void RocketBullet :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }

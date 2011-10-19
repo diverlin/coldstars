@@ -104,7 +104,7 @@ void Asteroid :: death_TRUE()
     		{
                         TextureOb* texOb_mineral = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.mineral_texOb_pList); 
         		Mineral* _mineral = new Mineral(texOb_mineral, points.getCenter());
-			starsystem->addMineral(_mineral);
+			starsystem->add(_mineral);
 			
 			//printf("----%i,%i, %f,%f\n", id, i, _mineral->getPoints()->getCenter().x, _mineral->getPoints()->getCenter().y);
 			
@@ -128,7 +128,7 @@ void Asteroid :: death_FALSE()
         	for (int i = 0; i<3; i++)
     		{        		
         		_mineral = createMineral(points.getCenter());
-			starsystem->addMineral(_mineral);
+			starsystem->add(_mineral);
     		}
         	is_explosed = true;
      	}
