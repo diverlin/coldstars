@@ -40,7 +40,7 @@ StarSystem* Galaxy :: getRandomStarSystem()
 	if (STARSYSTEM_pList.size() == 1)
        		return STARSYSTEM_pList[0];
     	else
-      		return STARSYSTEM_pList[randIntInRange(0, STARSYSTEM_pList.size())];
+      		return STARSYSTEM_pList[getRandInt(0, STARSYSTEM_pList.size())];
 }
      		
 
@@ -81,8 +81,8 @@ void Galaxy :: update(int timer)
 StarSystem* generateEntireStarSystem()
 {  
         StarSystem* starsystem = new StarSystem();   
-        Rect ssOnMapRect = Rect( randIntInRange( MAP_OFFSET_X, (g_VIEW_WIDTH - 3*MAP_OFFSET_X)),
-        			 g_VIEW_HEIGHT - randIntInRange( MAP_OFFSET_Y, (g_VIEW_HEIGHT - 2*MAP_OFFSET_Y)),
+        Rect ssOnMapRect = Rect( getRandInt( MAP_OFFSET_X, (g_VIEW_WIDTH - 3*MAP_OFFSET_X)),
+        			 g_VIEW_HEIGHT - getRandInt( MAP_OFFSET_Y, (g_VIEW_HEIGHT - 2*MAP_OFFSET_Y)),
         			 40, 40);
         			 
         starsystem->setPositionOnWorldMap(ssOnMapRect);
@@ -90,17 +90,17 @@ StarSystem* generateEntireStarSystem()
         Star* star = createStar();    
         starsystem->addStar(star);
         
-        int distNebula_maxNum = randIntInRange(4,7);
-        int distStar_maxNum = randIntInRange(40, 60);
+        int distNebula_maxNum = getRandInt(4,7);
+        int distStar_maxNum = getRandInt(40, 60);
         generateBackground(starsystem, distNebula_maxNum, distStar_maxNum, star->getColorId());
           
-        generateNumPlanets(starsystem, randIntInRange(PLANET_PER_SYSTEM_MIN, PLANET_PER_SYSTEM_MAX));
+        generateNumPlanets(starsystem, getRandInt(PLANET_PER_SYSTEM_MIN, PLANET_PER_SYSTEM_MAX));
 
-	starsystem->setCapturedFlag( getRandomBool() );
+	starsystem->setCapturedFlag(getRandBool());
         if (starsystem->getCapturedFlag() == false)
-                generateNumFriendlyNPC(starsystem, randIntInRange(SHIP_PER_SYSTEM_MIN, SHIP_PER_SYSTEM_MAX));
+                generateNumFriendlyNPC(starsystem, getRandInt(SHIP_PER_SYSTEM_MIN, SHIP_PER_SYSTEM_MAX));
         else
-                generateNumEnemyNPC(starsystem, randIntInRange(ENEMY_SHIP_PER_SYSTEM_MIN, ENEMY_SHIP_PER_SYSTEM_MAX));
+                generateNumEnemyNPC(starsystem, getRandInt(ENEMY_SHIP_PER_SYSTEM_MIN, ENEMY_SHIP_PER_SYSTEM_MAX));
                       
         return starsystem; 
 }
@@ -132,9 +132,9 @@ void generateNumPlanets(StarSystem* starsystem, int planet_per_system)
         for(int pi = 0; pi < planet_per_system; pi++)
         {             
                 if (pi == 0)
-                        orbit_radius = randIntInRange(2 * PLANET_DISTANCE_MIN, 2 * PLANET_DISTANCE_MAX);
+                        orbit_radius = getRandInt(2 * PLANET_DISTANCE_MIN, 2 * PLANET_DISTANCE_MAX);
                 else
-                        orbit_radius = offset + randIntInRange(PLANET_DISTANCE_MIN, PLANET_DISTANCE_MAX);
+                        orbit_radius = offset + getRandInt(PLANET_DISTANCE_MIN, PLANET_DISTANCE_MAX);
 
                 offset = orbit_radius;
 
@@ -149,21 +149,21 @@ void generateNumPlanets(StarSystem* starsystem, int planet_per_system)
 void generateNumFriendlyNPC(StarSystem* starsystem, int ship_per_system)
 {
     	int npc_subtype_id;
-    	int npc_race_id = RACES_GOOD_LIST[randIntInRange(0, RACES_GOOD_LIST.size())];
+    	int npc_race_id = RACES_GOOD_LIST[getRandInt(0, RACES_GOOD_LIST.size())];
 
     	for (int i=0; i<ship_per_system; i++)
     	{     
         	if (npc_race_id != RACE_4_ID)
-           		npc_subtype_id = SHIP_SUBTYPE_LIST[randIntInRange(0, SHIP_SUBTYPE_LIST.size())];
+           		npc_subtype_id = SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
         	else
-           		npc_subtype_id = RACE4_ALLOWED_SUBTYPE_LIST[randIntInRange(0, RACE4_ALLOWED_SUBTYPE_LIST.size())];
+           		npc_subtype_id = RACE4_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE4_ALLOWED_SUBTYPE_LIST.size())];
 
         	TextureOb* texOb_npc  = g_TEXTURE_MANAGER.returnPointerToRandomFaceTexObWithFolloingAttributes(npc_race_id);
         	Npc* npc = new Npc(npc_race_id, npc_subtype_id, texOb_npc);
 
-        	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[randIntInRange(0, RACES_ALL_LIST.size())];
-        	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[randIntInRange(0, SHIP_SUBTYPE_LIST.size())];
-        	int ship_size_id = randIntInRange(1, 9);
+        	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[getRandInt(0, RACES_ALL_LIST.size())];
+        	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
+        	int ship_size_id = getRandInt(1, 9);
         	Ship* ship = shipGenerator(ship_race_id, ship_subtype_id, ship_size_id);
        
         	equip(ship);            		// improove
@@ -181,19 +181,19 @@ void generateNumFriendlyNPC(StarSystem* starsystem, int ship_per_system)
 void generateNumEnemyNPC(StarSystem* starsystem, int ship_per_system)
 {
 	int npc_subtype_id;
-    	int npc_race_id = RACES_EVIL_LIST[randIntInRange(0, RACES_EVIL_LIST.size())];
+    	int npc_race_id = RACES_EVIL_LIST[getRandInt(0, RACES_EVIL_LIST.size())];
         
     	for (int i=0; i<ship_per_system; i++)
     	{     
-       		//npc_subtype_id = SHIP_SUBTYPE_LIST[randIntInRange(0, RACES_EVIL_LIST.size())];
+       		//npc_subtype_id = SHIP_SUBTYPE_LIST[getRandInt(0, RACES_EVIL_LIST.size())];
                 npc_subtype_id = WARRIOR_ID;
 
         	TextureOb* texOb_npc  = g_TEXTURE_MANAGER.returnPointerToRandomFaceTexObWithFolloingAttributes(npc_race_id);
         	Npc* npc = new Npc(npc_race_id, npc_subtype_id, texOb_npc);
 
-        	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[randIntInRange(0, RACES_ALL_LIST.size())];
-        	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[randIntInRange(0, SHIP_SUBTYPE_LIST.size())];
-        	int ship_size_id = randIntInRange(1, 9);
+        	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[getRandInt(0, RACES_ALL_LIST.size())];
+        	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
+        	int ship_size_id = getRandInt(1, 9);
         	Ship* ship = shipGenerator(ship_race_id, ship_subtype_id, ship_size_id);
        
         	equip(ship);            		// improove

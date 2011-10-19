@@ -107,10 +107,12 @@ class StarSystem
     	    	std::vector<DistantNebulaBgEffect*> distantNebulaBgEffect_vec;
     		std::vector<DistantStarBgEffect*> distantStarBgEffect_vec;
     		
+    		// effects
     		std::vector<LazerTraceEffect*> effect_LAZERTRACE_vec;
     		std::vector<ExplosionEffect*>  effect_EXPLOSION_vec;
     		std::vector<DamageEffect*>     effect_DAMAGE_vec;
     		std::vector<ShockWaveEffect*>  effect_SHOCKWAVE_vec;
+    		// effects
     		
    		// VISIBLE ENTITY LIST
     		std::vector<Star*>      visible_STAR_vec;
@@ -127,8 +129,8 @@ class StarSystem
 
     		void asteroidManager(int num);
     		    		
-    		void manageDeathObjects();
-    		void removeAllReferencesToDeathObjects();
+    		void manageDeadObjects();
+    		void removeAllReferencesToDeadObjects();
     		
     		
                 void rocketCollision_TRUE();

@@ -244,7 +244,7 @@ class Ship
 		        	
 		Npc* npc_owner;
 		
-		DriveTrailEffect* drive_jet; 
+		TrailEffect* drive_trail; 
 		ShieldEffect* shield;
 		        	        	
 		void updateInfo();
@@ -252,7 +252,7 @@ class Ship
              		
 		void renderKorpus() const;
              	void renderTurrels() const;
-             	void renderDriveJet() const;
+             	void renderDriveTrail() const;
              	void renderShield() const;
              	
                 // WEPONS

@@ -131,13 +131,13 @@ EnergizerEquipment* energizerEquipmentGenerator(int race_id, int revision_id)
     	TextureOb* itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.energyBlockItem_texOb_pList);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(ENERGIZER_ITEM_TEXTURE_ID, revision_id)
 
-    	int energy_max_orig  = randIntInRange(ENERGIZER_ENERGY_MIN, ENERGIZER_ENERGY_MAX);
-    	int restoration_orig = randIntInRange(ENERGIZER_RESTORATION_MIN, ENERGIZER_RESTORATION_MAX);
+    	int energy_max_orig  = getRandInt(ENERGIZER_ENERGY_MIN, ENERGIZER_ENERGY_MAX);
+    	int restoration_orig = getRandInt(ENERGIZER_RESTORATION_MIN, ENERGIZER_RESTORATION_MAX);
     	
     	EquipmentCommonData common_data;
-    	common_data.modules_num_max  = randIntInRange(ENERGIZER_MODULES_NUM_MIN, ENERGIZER_MODULES_NUM_MAX);
-    	common_data.mass             = randIntInRange(ENERGIZER_MASS_MIN, ENERGIZER_MASS_MAX);
-    	common_data.condition_max    = randIntInRange(ENERGIZER_CONDITION_MIN, ENERGIZER_CONDITION_MAX) * tech_rate;
+    	common_data.modules_num_max  = getRandInt(ENERGIZER_MODULES_NUM_MIN, ENERGIZER_MODULES_NUM_MAX);
+    	common_data.mass             = getRandInt(ENERGIZER_MASS_MIN, ENERGIZER_MASS_MAX);
+    	common_data.condition_max    = getRandInt(ENERGIZER_CONDITION_MIN, ENERGIZER_CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
     	EnergizerEquipment* energizer_equipment = new EnergizerEquipment(itemTexOb, energy_max_orig, restoration_orig, common_data);

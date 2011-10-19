@@ -65,10 +65,10 @@ void GrappleModule :: addUniqueInfo()
 GrappleModule* grappleModuleGenerator()
 {
     	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
-    	int strength_add   = randIntInRange(GRAPPLE_MODULE_STRENGTH_MIN, GRAPPLE_MODULE_STRENGTH_MAX);
-    	int radius_add     = randIntInRange(GRAPPLE_MODULE_RADIUS_MIN, GRAPPLE_MODULE_RADIUS_MAX);
-    	int speed_add      = randIntInRange(GRAPPLE_MODULE_SPEED_MIN, GRAPPLE_MODULE_SPEED_MAX);
-    	int maxNumItem_add = randIntInRange(GRAPPLE_MODULE_MAXNUMITEM_MIN, GRAPPLE_MODULE_MAXNUMITEM_MAX);
+    	int strength_add   = getRandInt(GRAPPLE_MODULE_STRENGTH_MIN, GRAPPLE_MODULE_STRENGTH_MAX);
+    	int radius_add     = getRandInt(GRAPPLE_MODULE_RADIUS_MIN, GRAPPLE_MODULE_RADIUS_MAX);
+    	int speed_add      = getRandInt(GRAPPLE_MODULE_SPEED_MIN, GRAPPLE_MODULE_SPEED_MAX);
+    	int maxNumItem_add = getRandInt(GRAPPLE_MODULE_MAXNUMITEM_MIN, GRAPPLE_MODULE_MAXNUMITEM_MAX);
     	
     	GrappleModule* grapple_module = new GrappleModule(texOb, strength_add, radius_add, speed_add, maxNumItem_add);    	
     	return grapple_module;

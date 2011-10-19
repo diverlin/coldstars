@@ -21,18 +21,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Skill :: Skill()
 {
-     	attack   = randIntInRange(0, 5);
-     	defence  = randIntInRange(0, 5);
-     	leader   = randIntInRange(0, 5);
-     	trader   = randIntInRange(0, 5);
-     	technic  = randIntInRange(0, 5);
-     	diplomat = randIntInRange(0, 5);  
+     	attack   = getRandInt(0, 5);
+     	defence  = getRandInt(0, 5);
+     	leader   = getRandInt(0, 5);
+     	trader   = getRandInt(0, 5);
+     	technic  = getRandInt(0, 5);
+     	diplomat = getRandInt(0, 5);  
 
      	acknowledge();
                   
      	available_points = 3;
           
-     	expirience = randIntInRange(40, 400);
+     	expirience = getRandInt(40, 400);
      	expirience_for_next_level = 1000;
 }     
 

@@ -34,9 +34,9 @@ LazerTraceEffect :: LazerTraceEffect(TextureOb* _texOb, TextureOb* _texOb_partic
 
         particle_size = _particle_size;
 
-        existance_time = randIntInRange(40, 45);
+        existance_time = getRandInt(40, 45);
 
-        if (randIntInRange(1,2) == 1)
+        if (getRandInt(1,2) == 1)
         	d_angle_inR = 0.0005 * 3;  //self.target.size
         else
         	d_angle_inR = -0.0005 * 3; // self.target.size

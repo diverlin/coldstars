@@ -165,7 +165,7 @@ int main()
        		float fps = 1.f / g_APP.GetFrameTime();
 
        		coord_str = "world coord: " + int2str(g_SCROLL_COORD_X) + "," + int2str(g_SCROLL_COORD_Y);
-       		if (randIntInRange(0, 20) == 1)
+       		if (getRandInt(0, 20) == 1)
        		{
           		fps_str = "FPS:" + int2str((int)fps);
           		//printf("%f\n", fps);
@@ -195,6 +195,7 @@ int main()
        		g_TIMER--;
     	}
 
+	printf("GAME OVER. player is DEAD");
     	return EXIT_SUCCESS;
 }
 

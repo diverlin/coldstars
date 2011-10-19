@@ -47,12 +47,12 @@ int StarSystem :: getShockWaveNum() const { return effect_SHOCKWAVE_vec.size(); 
                 
 Planet* StarSystem :: getClosestPlanet(vec2f _pos)  // poor
 {
-     	return PLANET_vec[randIntInRange(0, PLANET_vec.size()-1)];
+     	return PLANET_vec[getRandInt(0, PLANET_vec.size()-1)];
 }
 
 Npc* StarSystem :: getRandomNpc()  // poor
 {
-     	return NPC_inSPACE_vec[randIntInRange(0, NPC_inSPACE_vec.size()-1)];
+     	return NPC_inSPACE_vec[getRandInt(0, NPC_inSPACE_vec.size()-1)];
 }
 
 void StarSystem :: update_TRUE(int timer)
@@ -67,7 +67,7 @@ void StarSystem :: update_TRUE(int timer)
     		rocketCollision_TRUE();
     		asteroidCollision_TRUE();
 
-    		manageDeathObjects(); 
+    		manageDeadObjects(); 
 
 		fireEvents_TRUE(timer);
 		
@@ -79,7 +79,7 @@ void StarSystem :: update_TRUE(int timer)
 	    		
 		if (calculation_per_turn_allowed == true)
 		{
-			removeAllReferencesToDeathObjects();
+			removeAllReferencesToDeadObjects();
 			garbage.clear(); 
 	    		
 	    		questManager();
@@ -99,7 +99,7 @@ void StarSystem :: update_FALSE(int timer)
     	//updateEntities_inDynamic_FALSE();
     	//manageEntities(); 
 
-    	//if (randIntInRange(1,10) == 1)
+    	//if (getRandInt(1,10) == 1)
     	//{
         	//rocketCollision_FALSE();
         	//asteroidCollision_FALSE();
@@ -897,116 +897,120 @@ void StarSystem :: addDistantStar(DistantStarBgEffect* ds)
     		
 
     		
-void StarSystem :: manageDeathObjects()
+void StarSystem :: manageDeadObjects()
 {  
-
-    for (unsigned int wi = 0; wi < effect_SHOCKWAVE_vec.size(); wi++)
-    {
-    	if (effect_SHOCKWAVE_vec[wi]->is_alive == false)
+	{
+	
+   	for(unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
     	{
-    	   	effect_SHOCKWAVE_vec.erase(effect_SHOCKWAVE_vec.begin() + wi);
-    	}
-    }
-
-    for(unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
-    {
-        
-        if (SHIP_inSPACE_vec[ki]->getAlive() == false)
-        {           
-            //if (SHIP_pList[ki]->owner_type_id == NPC_ID)
-            SHIP_inSPACE_vec[ki]->getNpc()->setAlive(false);
+               	if (SHIP_inSPACE_vec[ki]->getAlive() == false)
+        	{           
+            		SHIP_inSPACE_vec[ki]->getNpc()->setAlive(false);
                
-            garbage.add(SHIP_inSPACE_vec[ki]);
-            SHIP_inSPACE_vec.erase(SHIP_inSPACE_vec.begin() + ki);
-            break;
+            		garbage.add(SHIP_inSPACE_vec[ki]);
+            		SHIP_inSPACE_vec.erase(SHIP_inSPACE_vec.begin() + ki);
+        	} 
+    	}
+    	for(unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
+    	{
+	        if (NPC_inSPACE_vec[ni]->getAlive() == false)
+        	{   
+            		garbage.add(NPC_inSPACE_vec[ni]);
+            		NPC_inSPACE_vec.erase(NPC_inSPACE_vec.begin() + ni);
+        	} 
+    	}
+    	
+    	}
+
+    	
+
+
+    	for(unsigned int i = 0; i < ASTEROID_vec.size(); i++)
+    	{
+        	if (ASTEROID_vec[i]->getAlive() == false)
+        	{
+            		garbage.add(ASTEROID_vec[i]);
+            		ASTEROID_vec.erase(ASTEROID_vec.begin() + i );
+            	}
         } 
-    }
+    
 
+    	for(unsigned int i = 0; i < MINERAL_vec.size(); i++)
+    	{
+        	if (MINERAL_vec[i]->is_alive == false)
+        	{  
+            		garbage.add(MINERAL_vec[i]);
+            		MINERAL_vec.erase(MINERAL_vec.begin() + i );
+        	} 
+    	}
+    
+    	for(unsigned int i = 0; i < CONTAINER_vec.size(); i++)
+    	{
+        	if (CONTAINER_vec[i]->is_alive == false)
+        	{   
+            		garbage.add(CONTAINER_vec[i]);
+            		CONTAINER_vec.erase(CONTAINER_vec.begin() + i );
+        	}	 
+    	}
 
-    for(unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
-    {
-
-         
-        if (NPC_inSPACE_vec[ni]->getAlive() == false)
-        {   
-            garbage.add(NPC_inSPACE_vec[ni]);
-            NPC_inSPACE_vec.erase(NPC_inSPACE_vec.begin() + ni);
-            break;
-        } 
-    }
+    	for(unsigned int ri = 0; ri < ROCKET_vec.size(); ri++)
+    	{
+        	if (ROCKET_vec[ri]->getAlive() == false)
+        	{   
+            		garbage.add(ROCKET_vec[ri]);
+            		ROCKET_vec.erase(ROCKET_vec.begin() + ri );
+        	} 
+    	}
+    
+    
+    
+    
+    
+    	// effects
+    	for (unsigned int wi = 0; wi < effect_SHOCKWAVE_vec.size(); wi++)
+    	{
+    		if (effect_SHOCKWAVE_vec[wi]->is_alive == false)
+    		{
+    			garbage.add(effect_SHOCKWAVE_vec[wi]);
+    	   		effect_SHOCKWAVE_vec.erase(effect_SHOCKWAVE_vec.begin() + wi);
+    		}
+    	}
 
 
     	for (unsigned int lei = 0; lei < effect_LAZERTRACE_vec.size(); lei++)
     	{
          	if (effect_LAZERTRACE_vec[lei]->getAlive() == false)
          	{   
-           		delete effect_LAZERTRACE_vec[lei];
+           		garbage.add(effect_LAZERTRACE_vec[lei]);
             		effect_LAZERTRACE_vec.erase(effect_LAZERTRACE_vec.begin() + lei);
          	} 
     	}
-    	
 
 
-    for(unsigned int i = 0; i < ASTEROID_vec.size(); i++)
-    {
-        if (ASTEROID_vec[i]->getAlive() == false)
-        {   //printf("asteroid id to remove ==> %i\n",(*Asteroid_pList[i]).id);
-            garbage.add(ASTEROID_vec[i]);
-            ASTEROID_vec.erase(ASTEROID_vec.begin() + i );
-        } 
-    }
-    
+    	for(unsigned int i = 0; i<effect_EXPLOSION_vec.size(); i++)  
+    	{
+        	if (effect_EXPLOSION_vec[i]->getAlive() == false)
+        	{   
+            		garbage.add(effect_EXPLOSION_vec[i]);
+            		effect_EXPLOSION_vec.erase(effect_EXPLOSION_vec.begin() + i );
+        	} 
+    	}
 
-    for(unsigned int i = 0; i < MINERAL_vec.size(); i++)
-    {
-        if (MINERAL_vec[i]->is_alive == false)
-        {   //printf("asteroid id to remove ==> %i\n",(*Asteroid_pList[i]).id);
-            garbage.add(MINERAL_vec[i]);
-            MINERAL_vec.erase(MINERAL_vec.begin() + i );
-        } 
-    }
-    
-    for(unsigned int i = 0; i < CONTAINER_vec.size(); i++)
-    {
-        if (CONTAINER_vec[i]->is_alive == false)
-        {   //printf("asteroid id to remove ==> %i\n",(*Asteroid_pList[i]).id);
-            garbage.add(CONTAINER_vec[i]);
-            CONTAINER_vec.erase(CONTAINER_vec.begin() + i );
-        } 
-    }
-
-    for(unsigned int ri = 0; ri < ROCKET_vec.size(); ri++)
-    {
-        if (ROCKET_vec[ri]->getAlive() == false)
-        {   //printf("asteroid id to remove ==> %i\n",(*Asteroid_pList[i]).id);
-            garbage.add(ROCKET_vec[ri]);
-            ROCKET_vec.erase(ROCKET_vec.begin() + ri );
-        } 
-    }
-
-    for(unsigned int i = 0; i<effect_EXPLOSION_vec.size(); i++)   // move this to removeDead
-    {
-        if (effect_EXPLOSION_vec[i]->is_alive == false)
-        {   //printf("explosion to remove ==> \n");
-            delete effect_EXPLOSION_vec[i];
-            effect_EXPLOSION_vec.erase(effect_EXPLOSION_vec.begin() + i );
-        } 
-    }
-
-    for(unsigned int edi = 0; edi < effect_DAMAGE_vec.size(); edi++)    // move this to removeDead
-    {
-        if (effect_DAMAGE_vec[edi]->getAlive() == false)
-        {   //printf("explosion to remove ==> \n");
-            delete effect_DAMAGE_vec[edi];
-            effect_DAMAGE_vec.erase(effect_DAMAGE_vec.begin() + edi);
-        } 
-    }
+    	for(unsigned int edi = 0; edi < effect_DAMAGE_vec.size(); edi++)    
+    	{
+        	if (effect_DAMAGE_vec[edi]->getAlive() == false)
+        	{   
+            		garbage.add(effect_DAMAGE_vec[edi]);
+            		effect_DAMAGE_vec.erase(effect_DAMAGE_vec.begin() + edi);
+        	} 
+    	}
+        // effects
 }
 
      
 
 
-void StarSystem :: removeAllReferencesToDeathObjects()
+void StarSystem :: removeAllReferencesToDeadObjects()
 {
     	for(unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
     	{ 

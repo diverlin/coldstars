@@ -81,8 +81,8 @@ Ship :: Ship(TextureOb* _texOb, KorpusData _korpus_data)
     	points.initMidFarLeftPoint();
     	points.addMidFarLeftPoint();
 
-    	points.setAngle(randIntInRange(0, 360));
-    	points.setCenter(randIntInRange(0, 500), randIntInRange(0, 500)); 
+    	points.setAngle(getRandInt(0, 360));
+    	points.setCenter(getRandInt(0, 500), getRandInt(0, 500)); 
 
     	//w_orig = texOb->w;
     	//h_orig = texOb->h;
@@ -354,32 +354,8 @@ Ship :: Ship(TextureOb* _texOb, KorpusData _korpus_data)
     			     kontur_rect.getCenter().x - 5*texOb_slot->w, 
     			     kontur_rect.getCenter().y + 3*texOb_slot->h);
     	////////////////////////////////////////////////////
-
-
-
-
-
-   	//TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.particles_texOb_pList);
-   	TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
-
-   	int pNum       = 5;
-   	int pSize      = 25;
-   	float pVelocity  = 1.2;
-   	float pAlphaInit = 0.6;
-   	float pAlphaEnd  = 0.0;
-   	float pd_alpha   = 0.05;
-
-   	//drive_jet = DriveTrailEffect(TextureOb* _pTo_texOb, float* _pTo_OB_angle_inD, float* _pTo_start_pos_x, float* _pTo_start_pos_y, float* _pTo_target_pos_x, float* _pTo_target_pos_y, int _num_particles, float _size, float _velocity_orig, float _alpha_start, float _alpha_end, float _d_alpha)
-   	drive_jet = new DriveTrailEffect(pTo_particleTexOb, 
-   					 points.getpAngleDegree(), 
-   					 points.getpMidLeft(),  
-   					 points.getpMidFarLeft(), 
-   					 pNum, 
-   					 pSize, 
-   					 pVelocity, 
-   					 pAlphaInit, 
-   					 pAlphaEnd, 
-   					 pd_alpha);
+ 	   	
+   	drive_trail = createTrailEffect(korpus_data.size_id, points.getpMidLeft(), points.getpMidFarLeft());
 
    	needsToDo.REPAIR     = false;
    	needsToDo.CHARGE     = false;
@@ -398,9 +374,13 @@ Ship :: Ship(TextureOb* _texOb, KorpusData _korpus_data)
 
 Ship :: ~Ship()
 {
-     	//for (unsigned int lei = 0; lei < effect_LAZERTRACE_pList.size(); lei++)   
-         	//delete effect_LAZERTRACE_pList[lei];
-            
+	delete drive_trail;
+	delete shield;
+	
+	for (unsigned int i = 0; i < slot_otsec_pList.size(); i++)
+    	{
+		delete slot_otsec_pList[i];  
+    	}
 } 
 
 
@@ -1109,7 +1089,7 @@ void Ship :: updateRenderStuff()
     	
     	if (ableTo.DRIVE == true)
     	{
-       		drive_jet->update();
+       		drive_trail->update();
     	}
 }
 
@@ -1125,7 +1105,7 @@ void Ship :: render_inSpace() const
 
     	if (ableTo.DRIVE == true)
     	{
-		renderDriveJet();
+		renderDriveTrail();
     	}
     	
     	if (ableTo.PROTECT == true)
@@ -1183,11 +1163,9 @@ void Ship :: renderTurrels() const
 }
 
 
-void Ship :: renderDriveJet() const
+void Ship :: renderDriveTrail() const
 {
-       	enable_POINTSPRITE();
-       		drive_jet->render();
-       	disable_POINTSPRITE();
+	drive_trail->render();
 }
 
 
@@ -1234,26 +1212,26 @@ void equip(Ship* ship)
     
     	if (ship->korpus_data.weapon_slot_num >= 3)
     	{
-       		LazerEquipment* pTo_lazer3 = lazerEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot3.insertItem(pTo_lazer3); 
-       		//RocketEquipment* pTo_rocket3 = rocketEquipmentGenerator(RACE_0_ID);    
-       		//ship->weapon_slot3.insertItem(pTo_rocket3); 
+       		//LazerEquipment* pTo_lazer3 = lazerEquipmentGenerator(RACE_0_ID);    
+       		//ship->weapon_slot3.insertItem(pTo_lazer3); 
+       		RocketEquipment* rocket3 = rocketEquipmentGenerator(RACE_0_ID);    
+       		ship->weapon_slot3.insertItem(rocket3); 
     	}   
         
     	if (ship->korpus_data.weapon_slot_num >= 4)
     	{
-       		LazerEquipment* pTo_lazer4 = lazerEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot4.insertItem(pTo_lazer4);         
-       		//RocketEquipment* pTo_rocket4 = rocketGenerator(RACE_0_ID);    
-       		//(*pTo_ship).weapon_slot4.insertRocketEquipment(pTo_rocket4); 
+       		//LazerEquipment* pTo_lazer4 = lazerEquipmentGenerator(RACE_0_ID);    
+       		//ship->weapon_slot4.insertItem(pTo_lazer4);         
+       		RocketEquipment* rocket4 = rocketEquipmentGenerator(RACE_0_ID);    
+       		ship->weapon_slot4.insertItem(rocket4); 
     	}   
     
     	if (ship->korpus_data.weapon_slot_num >= 5) 
     	{
-       		LazerEquipment* pTo_lazer5 = lazerEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot5.insertItem(pTo_lazer5); 
-       		//RocketEquipment* pTo_rocket5 = rocketGenerator(RACE_0_ID);    
-       		//(*pTo_ship).weapon_slot5.insertRocketEquipment(pTo_rocket5); 
+       		//LazerEquipment* pTo_lazer5 = lazerEquipmentGenerator(RACE_0_ID);    
+       		//ship->weapon_slot5.insertItem(pTo_lazer5); 
+       		RocketEquipment* rocket5 = rocketEquipmentGenerator(RACE_0_ID);    
+       		ship->weapon_slot5.insertItem(rocket5); 
     	}   
         
     
@@ -1318,12 +1296,12 @@ Ship* shipGenerator(int race_id, int subtype_id, int size_id)
     	korpusData.armor  = 600;
     	korpusData.protection  = 3;
     	korpusData.temperature = 100;
-        korpusData.price = randIntInRange(200, 400);
+        korpusData.price = getRandInt(200, 400);
         
         korpusData.collision_radius = (texOb_ship->w + texOb_ship->h)/3;
         korpusData.size_id = returnObjectSize(texOb_ship->w, texOb_ship->h);
         korpusData.inhibit_GRAPPLE = false;
-        korpusData.weapon_slot_num = randIntInRange(1,5);
+        korpusData.weapon_slot_num = getRandInt(1,5);
             
         int size_threshold = 2; 
     	if (korpusData.size_id > size_threshold)

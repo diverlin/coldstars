@@ -52,8 +52,8 @@ void DriveModule :: addUniqueInfo()
 DriveModule* driveModuleGenerator()
 {
     	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);     	
-    	int speed_add = randIntInRange(DRIVE_MODULE_SPEED_MIN, DRIVE_MODULE_SPEED_MAX);
-    	int hyper_add = randIntInRange(DRIVE_MODULE_HYPER_MIN, DRIVE_MODULE_HYPER_MAX);
+    	int speed_add = getRandInt(DRIVE_MODULE_SPEED_MIN, DRIVE_MODULE_SPEED_MAX);
+    	int hyper_add = getRandInt(DRIVE_MODULE_HYPER_MIN, DRIVE_MODULE_HYPER_MAX);
 
     	DriveModule* drive_module = new DriveModule(texOb, speed_add, hyper_add);
     	return drive_module;

@@ -74,10 +74,13 @@ GLuint g_MULTITEX_PROGRAM;
 
 int USE_MODERN_HW = true;
 
+class FBO;
 FBO* g_FBO0;
 FBO* g_FBO1;
 FBO* g_FBO2;
 FBO* g_FBO3;
+
+class BloomEffect;
 BloomEffect* g_BLOOM;
 
 #endif 

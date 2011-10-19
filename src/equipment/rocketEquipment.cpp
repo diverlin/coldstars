@@ -185,15 +185,15 @@ RocketEquipment* rocketEquipmentGenerator(int race_id, int revision_id)
     	TextureOb* pTo_itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.RocketEquipment_texOb_pList);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(ROCKET_ITEM_TEXTURE_ID, revision_id)   
     
-    	int ammo_max_orig = randIntInRange(ROCKET_AMMO_MIN, ROCKET_AMMO_MAX);
-    	int damage_orig   = randIntInRange(ROCKET_DAMAGE_MIN, ROCKET_DAMAGE_MAX);
-    	int radius_orig   = randIntInRange(ROCKET_RADIUS_MIN, ROCKET_RADIUS_MAX);
+    	int ammo_max_orig = getRandInt(ROCKET_AMMO_MIN, ROCKET_AMMO_MAX);
+    	int damage_orig   = getRandInt(ROCKET_DAMAGE_MIN, ROCKET_DAMAGE_MAX);
+    	int radius_orig   = getRandInt(ROCKET_RADIUS_MIN, ROCKET_RADIUS_MAX);
 
 	EquipmentCommonData _common_data;
-    	_common_data.modules_num_max = randIntInRange(ROCKET_MODULES_NUM_MIN, ROCKET_MODULES_NUM_MAX);
+    	_common_data.modules_num_max = getRandInt(ROCKET_MODULES_NUM_MIN, ROCKET_MODULES_NUM_MAX);
 
-    	_common_data.mass = randIntInRange(ROCKET_MASS_MIN, ROCKET_MASS_MAX);
-    	_common_data.condition_max = randIntInRange(ROCKET_CONDITION_MIN, ROCKET_CONDITION_MAX) * tech_rate;
+    	_common_data.mass = getRandInt(ROCKET_MASS_MIN, ROCKET_MASS_MAX);
+    	_common_data.condition_max = getRandInt(ROCKET_CONDITION_MIN, ROCKET_CONDITION_MAX) * tech_rate;
 
     	_common_data.deterioration_rate = 1;
 

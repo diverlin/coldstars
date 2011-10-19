@@ -30,9 +30,9 @@ DistantNebulaBgEffect :: DistantNebulaBgEffect(TextureOb* _texOb, vec3f _center)
     	else
       		distance_rate =  1/40.0;
 
-        angle_inD = randIntInRange(0, 360);
+        angle_inD = getRandInt(0, 360);
         if(texOb->is_rotated)
-    		d_angle_inD = randIntInRange(8,12)*0.001 * getRandomSign();
+    		d_angle_inD = getRandInt(8,12)*0.001 * getRandSign();
     	else
     	     	d_angle_inD = 0;
     	     	
@@ -72,7 +72,7 @@ DistantNebulaBgEffect* createDistantNebula(int _color_id)
    		texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.nebulaBgEffect_texOb_pList); 
    	} while (texOb->color_id != _color_id);
    	
-   	vec3f center((float)randIntInRange(0, 1000), (float)randIntInRange(0, 1000), -999.0);
+   	vec3f center((float)getRandInt(0, 1000), (float)getRandInt(0, 1000), -999.0);
         
         DistantNebulaBgEffect* dn = new DistantNebulaBgEffect(texOb, center);
         return dn;

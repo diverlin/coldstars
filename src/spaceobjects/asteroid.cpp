@@ -37,7 +37,7 @@ Asteroid :: Asteroid(TextureOb* _texOb,
 
       	armor = 10;
       	damage = 10 * armor;
-      	mass  = randIntInRange(10, 30);
+      	mass  = getRandInt(10, 30);
 }
     
  
@@ -100,12 +100,10 @@ void Asteroid :: death_TRUE()
      	{   
         	createExplosion(starsystem, points.getCenter(), data.scale/2);
         
-        	Mineral* _mineral;
-        	TextureOb* _mTexOb;
         	for (int i = 0; i<3; i++)
     		{
-        		_mTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.mineral_texOb_pList); 
-        		_mineral = new Mineral(_mTexOb, points.getCenter());
+                        TextureOb* texOb_mineral = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.mineral_texOb_pList); 
+        		Mineral* _mineral = new Mineral(texOb_mineral, points.getCenter());
 			starsystem->addMineral(_mineral);
 			
 			//printf("----%i,%i, %f,%f\n", id, i, _mineral->getPoints()->getCenter().x, _mineral->getPoints()->getCenter().y);
@@ -161,11 +159,11 @@ Asteroid* createAsteroid()
 {
     	PlanetData planet_data;
 	
-	planet_data.scale         = randIntInRange(ASTEROID_SIZE_MIN, ASTEROID_SIZE_MAX);  
+	planet_data.scale         = getRandInt(ASTEROID_SIZE_MIN, ASTEROID_SIZE_MAX);  
     	planet_data.orbit_center  = vec2f(0, 0); 
-    	planet_data.radius_A      = randIntInRange(300, 1200);
-    	planet_data.radius_B      = randIntInRange(300, 1200); 
-    	planet_data.orbit_phi_inD = randIntInRange(0, 360);
+    	planet_data.radius_A      = getRandInt(300, 1200);
+    	planet_data.radius_B      = getRandInt(300, 1200); 
+    	planet_data.orbit_phi_inD = getRandInt(0, 360);
     	planet_data.speed         = 0.1;
 
         TextureOb* texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.asteroid_texOb_pList); 

@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "common.hpp"
 
 
-int randIntInRange(int range_start, int range_end)
+int getRandInt(int range_start, int range_end)
 {
     	if (range_start != range_end)
        		return rand()%(range_end-range_start) + range_start;
@@ -32,17 +32,17 @@ int randIntInRange(int range_start, int range_end)
        		return range_start;
 }
 
-int getRandomSign()
+int getRandSign()
 {
-  	if (randIntInRange(0,10) > 5)
+  	if (getRandInt(0,10) > 5)
      		return 1;
   	else
      		return -1; 
 }
 
-bool getRandomBool()
+bool getRandBool()
 {
-  	if (randIntInRange(0,10) > 5)
+  	if (getRandInt(0,10) > 5)
      		return true;
   	else
      		return false; 

@@ -151,11 +151,32 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
         }
     
     	// DAMAGE effect
-    	DamageEffect* _damage_effect = new DamageEffect(texOb_particle, 
-                                                        _turrel->getTarget_pCenterX(), 
-                                                        _turrel->getTarget_pCenterY(), 5, 30, 1.3, 1.0, 0.1, 0.001);               
+    	//ParticleData _data_particle;
+        //_data_particle.size_start = 30;
+        //_data_particle.size_end = 0.1;
+        //_data_particle.d_size = 0.0; 
+        
+        //_data_particle.velocity_start = 1.3;
+        //_data_particle.velocity_end   = 1.3;        
+        //_data_particle.d_velocity   = 0.0;
+                
+	//_data_particle.alpha_start = 1.0; 
+	//_data_particle.alpha_end = 0.1; 
+	//_data_particle.d_alpha = getRandInt(3,6)*0.01;
+			     
+	//int _num_particles = 5;
+			     
+    	
+    	//DamageEffect* _damage_effect = new DamageEffect(texOb_particle, 
+                                                        //_turrel->getTarget_pCenterX(), 
+                                                        //_turrel->getTarget_pCenterY(), 
+                                                        //_data_particle,
+                                                        //_num_particles);               
 
-
+	DamageEffect* _damage_effect = createDamageEffect(texOb_particle,
+							  _turrel->getTarget_pCenterX(), 
+			   				  _turrel->getTarget_pCenterY());
+							 
     	_lazer_trace_effect->setDamageEffect(_damage_effect);
     	
     	deterioration();
@@ -200,13 +221,13 @@ LazerEquipment* lazerEquipmentGenerator(int race_id, int revision_id)
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(LAZER_ITEM_TEXTURE_ID, revision_id)
     	TextureOb* itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.LazerEquipment_texOb_pList);     
 
-    	int damage_orig     = randIntInRange(LAZER_DAMAGE_MIN, LAZER_DAMAGE_MAX);
-    	int radius_orig     = randIntInRange(LAZER_RADIUS_MIN, LAZER_RADIUS_MAX);
+    	int damage_orig     = getRandInt(LAZER_DAMAGE_MIN, LAZER_DAMAGE_MAX);
+    	int radius_orig     = getRandInt(LAZER_RADIUS_MIN, LAZER_RADIUS_MAX);
     	
     	EquipmentCommonData common_data;
-    	common_data.modules_num_max = randIntInRange(LAZER_MODULES_NUM_MIN, LAZER_MODULES_NUM_MAX);
-    	common_data.mass            = randIntInRange(LAZER_MASS_MIN, LAZER_MASS_MAX);
-    	common_data.condition_max   = randIntInRange(LAZER_CONDITION_MIN, LAZER_CONDITION_MAX) * tech_rate;
+    	common_data.modules_num_max = getRandInt(LAZER_MODULES_NUM_MIN, LAZER_MODULES_NUM_MAX);
+    	common_data.mass            = getRandInt(LAZER_MASS_MIN, LAZER_MASS_MAX);
+    	common_data.condition_max   = getRandInt(LAZER_CONDITION_MIN, LAZER_CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
     	LazerEquipment* _lazer_equipment = new LazerEquipment(itemTexOb, 

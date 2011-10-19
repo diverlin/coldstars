@@ -43,7 +43,7 @@ void RadarModule :: addUniqueInfo()
 RadarModule* radarModuleGenerator()
 {
     	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
-    	int radius_add  = randIntInRange(RADAR_MODULE_RADIUS_MIN, RADAR_MODULE_RADIUS_MAX);
+    	int radius_add  = getRandInt(RADAR_MODULE_RADIUS_MIN, RADAR_MODULE_RADIUS_MAX);
     
     	RadarModule* radar_module = new RadarModule(texOb, radius_add);    	
     	return radar_module;

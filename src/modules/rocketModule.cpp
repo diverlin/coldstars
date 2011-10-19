@@ -58,9 +58,9 @@ void RocketModule :: addUniqueInfo()
 RocketModule* rocketModuleGenerator()
 {
     	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
-    	int ammo_max_add = randIntInRange(ROCKET_MODULE_AMMO_MIN, ROCKET_MODULE_AMMO_MAX);
-    	int damage_add = randIntInRange(ROCKET_MODULE_DAMAGE_MIN, ROCKET_MODULE_DAMAGE_MAX);
-    	int radius_add = randIntInRange(ROCKET_MODULE_RADIUS_MIN, ROCKET_MODULE_RADIUS_MAX);
+    	int ammo_max_add = getRandInt(ROCKET_MODULE_AMMO_MIN, ROCKET_MODULE_AMMO_MAX);
+    	int damage_add = getRandInt(ROCKET_MODULE_DAMAGE_MIN, ROCKET_MODULE_DAMAGE_MAX);
+    	int radius_add = getRandInt(ROCKET_MODULE_RADIUS_MIN, ROCKET_MODULE_RADIUS_MAX);
 
     	RocketModule* rocket_module = new RocketModule(texOb, ammo_max_add, damage_add, radius_add);    	
     	return rocket_module;

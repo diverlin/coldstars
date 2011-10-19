@@ -32,9 +32,9 @@ Container :: Container(TextureOb* _pTo_texOb, vec2f _start_pos)
     	otsec_slot = new ItemSlot(UNIVERSAL_SLOT_ID, NULL, pTo_slotTexOb, 0, 0);
      
     
-    	armor = randIntInRange(1,6);
+    	armor = getRandInt(1,6);
 
-    	speed = randIntInRange(40, 42);
+    	speed = getRandInt(40, 42);
     	stepCalculation();
 
     	size = returnObjectSize(w, h);

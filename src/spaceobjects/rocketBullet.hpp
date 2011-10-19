@@ -68,7 +68,7 @@ class RocketBullet
                 StarSystem* starsystem;
                 
                                
-                int size;
+                int size_id;
 
                 float speed;
                 float step;
@@ -82,12 +82,12 @@ class RocketBullet
                 float angle_inD;
                 
                 
-                DriveTrailEffect* drive_jet;
+                TrailEffect* drive_trail;
                 
                 void stepCalculation();
                 
 		void renderKorpus() const;
-                void renderDriveJet() const;
+                void renderDriveTrail() const;
         
 };
 

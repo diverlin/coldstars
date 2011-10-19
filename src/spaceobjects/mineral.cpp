@@ -27,11 +27,11 @@ Mineral :: Mineral(TextureOb* _texOb, vec2f _start_pos)
     	type_id    = MINERAL_ID;
     	//subtype_id = ;
 
-    	mass = randIntInRange(6, 32);
-    	speed = randIntInRange(40, 42);
+    	mass = getRandInt(6, 32);
+    	speed = getRandInt(40, 42);
     	stepCalculation();
 
-    	armor = randIntInRange(1,6);
+    	armor = getRandInt(1,6);
 }
     
     

@@ -188,18 +188,18 @@ Planet* createPlanet(int orbit_radius)
         
 	PlanetData planet_data;
 	
-	planet_data.scale         = randIntInRange(PLANET_SIZE_MIN, PLANET_SIZE_MAX);  
+	planet_data.scale         = getRandInt(PLANET_SIZE_MIN, PLANET_SIZE_MAX);  
     	planet_data.orbit_center  = vec2f(0, 0); 
     	planet_data.radius_A      = orbit_radius;
     	planet_data.radius_B      = orbit_radius; 
     	planet_data.orbit_phi_inD = 0;
-    	planet_data.speed         = (float)randIntInRange(PLANET_SPEED_MIN, PLANET_SPEED_MAX) / (float)orbit_radius;
+    	planet_data.speed         = (float)getRandInt(PLANET_SPEED_MIN, PLANET_SPEED_MAX) / (float)orbit_radius;
 
 
         TextureOb* texOb 	    = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.planet_texOb_pList); 
         TextureOb* texOb_atmosphere = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.atmosphere_texOb_pList); 
         
-        unsigned long int population = randIntInRange(1000, 4000);
+        unsigned long int population = getRandInt(1000, 4000);
         
         Planet* planet = new Planet(subtype_id, 
         			    texOb, 
