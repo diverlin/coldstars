@@ -38,13 +38,13 @@ void CommonForPlanet :: CommonForPlanet_init(TextureOb* _texOb,
         texOb = _texOb;
         mesh  = _mesh; 
       
-        angle.x        = randIntInRange(10, 40);
-        angle.y        = randIntInRange(10, 40);
+        angle.x        = getRandInt(10, 40);
+        angle.y        = getRandInt(10, 40);
       	angle.z        = 0.0;
       	
       	d_angle.x      = 0.0;
       	d_angle.y      = 0.0;
-      	d_angle.z      = randIntInRange(10, 100)*0.01;      
+      	d_angle.z      = getRandInt(10, 100)*0.01;      
 
      
         // !!!!
@@ -103,7 +103,7 @@ void CommonForPlanet :: detailedEllipceOrbitFormation()
          	orbit_vector_y.push_back(new_coord_y);
      	}
         orbit_len = orbit_vector_x.size();
-        orbit_it = randIntInRange(1, orbit_len);
+        orbit_it = getRandInt(1, orbit_len);
 }    
 
 

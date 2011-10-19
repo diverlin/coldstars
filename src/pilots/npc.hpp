@@ -173,7 +173,6 @@ class Npc
 
      		void thinkUnique_Race6_inSpace_inStatic();
      		void thinkUnique_Race7_inSpace_inStatic();
-          		void makeImmediateDecision();
           		
        		bool (Npc::*func_inDynamic)();
      		

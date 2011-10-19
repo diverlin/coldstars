@@ -112,12 +112,12 @@ ScanerEquipment* scanerEquipmentGenerator(int race_id, int revision_id)
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(SCANER_ITEM_TEXTURE_ID, revision_id)
 
 
-    	int scan_orig       = randIntInRange(SCANER_SCAN_MIN, SCANER_SCAN_MAX);
+    	int scan_orig       = getRandInt(SCANER_SCAN_MIN, SCANER_SCAN_MAX);
     	
     	EquipmentCommonData common_data;
-    	common_data.modules_num_max = randIntInRange(SCANER_MODULES_NUM_MIN, SCANER_MODULES_NUM_MAX);
-    	common_data.mass            = randIntInRange(SCANER_MASS_MIN, SCANER_MASS_MAX);
-    	common_data.condition_max   = randIntInRange(SCANER_CONDITION_MIN, SCANER_CONDITION_MAX) * tech_rate;
+    	common_data.modules_num_max = getRandInt(SCANER_MODULES_NUM_MIN, SCANER_MODULES_NUM_MAX);
+    	common_data.mass            = getRandInt(SCANER_MASS_MIN, SCANER_MASS_MAX);
+    	common_data.condition_max   = getRandInt(SCANER_CONDITION_MIN, SCANER_CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
     	ScanerEquipment* scaner_equipment = new ScanerEquipment(itemTexOb, scan_orig, common_data);

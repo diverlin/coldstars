@@ -170,15 +170,15 @@ GrappleEquipment* grappleEquipmentGenerator(int race_id, int revision_id)
     	TextureOb* itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.GrappleEquipment_texOb_pList);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(GRAPPLE_ITEM_TEXTURE_ID, revision_id) 
 
-    	int strength_orig   = randIntInRange(GRAPPLE_STRENGTH_MIN, GRAPPLE_STRENGTH_MAX);
-    	int radius_orig     = randIntInRange(GRAPPLE_RADIUS_MIN, GRAPPLE_RADIUS_MAX);
-    	int speed_orig      = randIntInRange(GRAPPLE_SPEED_MIN, GRAPPLE_SPEED_MAX);
-    	int maxNumItem_orig = randIntInRange(GRAPPLE_MAXNUMITEM_MIN, GRAPPLE_MAXNUMITEM_MAX);
+    	int strength_orig   = getRandInt(GRAPPLE_STRENGTH_MIN, GRAPPLE_STRENGTH_MAX);
+    	int radius_orig     = getRandInt(GRAPPLE_RADIUS_MIN, GRAPPLE_RADIUS_MAX);
+    	int speed_orig      = getRandInt(GRAPPLE_SPEED_MIN, GRAPPLE_SPEED_MAX);
+    	int maxNumItem_orig = getRandInt(GRAPPLE_MAXNUMITEM_MIN, GRAPPLE_MAXNUMITEM_MAX);
     	
     	EquipmentCommonData common_data;
-    	common_data.modules_num_max = randIntInRange(GRAPPLE_MODULES_NUM_MIN, GRAPPLE_MODULES_NUM_MAX);
-    	common_data.mass            = randIntInRange(GRAPPLE_MASS_MIN, GRAPPLE_MASS_MAX);
-    	common_data.condition_max   = randIntInRange(GRAPPLE_CONDITION_MIN, GRAPPLE_CONDITION_MAX) * tech_rate;
+    	common_data.modules_num_max = getRandInt(GRAPPLE_MODULES_NUM_MIN, GRAPPLE_MODULES_NUM_MAX);
+    	common_data.mass            = getRandInt(GRAPPLE_MASS_MIN, GRAPPLE_MASS_MAX);
+    	common_data.condition_max   = getRandInt(GRAPPLE_CONDITION_MIN, GRAPPLE_CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
     	GrappleEquipment* grapple_equipment = new GrappleEquipment(itemTexOb, 

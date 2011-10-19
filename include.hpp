@@ -22,8 +22,6 @@ class Npc;
 class StarSystem;
 class ItemSlot;   
 class Turrel;       
-class FBO;
-class BloomEffect;
 
 #include "GL/glew.h"   
 
@@ -100,8 +98,9 @@ class BloomEffect;
 
 #include "src/effects/distantNebulaBg.hpp"
 #include "src/effects/distantStarBg.hpp"
+#include "src/effects/particlesystem/particle.hpp"
 #include "src/effects/particlesystem/explosion.hpp"
-#include "src/effects/particlesystem/driveJet.hpp"
+#include "src/effects/particlesystem/trail.hpp"
 #include "src/effects/particlesystem/damage.hpp"
 
 #include "src/spaceobjects/commonForSpaceItems.hpp" 
@@ -227,8 +226,9 @@ class BloomEffect;
 
 #include "src/effects/distantNebulaBg.cpp"
 #include "src/effects/distantStarBg.cpp"
+#include "src/effects/particlesystem/particle.cpp"
 #include "src/effects/particlesystem/explosion.cpp"
-#include "src/effects/particlesystem/driveJet.cpp"
+#include "src/effects/particlesystem/trail.cpp"
 #include "src/effects/particlesystem/damage.cpp"
 #include "src/effects/lazerTrace.cpp"
 #include "src/effects/shield.cpp"

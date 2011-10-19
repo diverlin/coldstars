@@ -46,8 +46,8 @@ void DistantStarBgEffect :: render(float vx, float vy)
 DistantStarBgEffect* createDistantStar()
 {
 	TextureOb* texOb_distantStar = g_TEXTURE_MANAGER.returnParticleTexObByColorId(YELLOW_COLOR_ID);
-        vec2f _center(randIntInRange(0, 1000), randIntInRange(0, 1000));
-        float size = (float)randIntInRange(DISTANTSTAR_SIZE_MIN, DISTANTSTAR_SIZE_MAX);
+        vec2f _center(getRandInt(0, 1000), getRandInt(0, 1000));
+        float size = (float)getRandInt(DISTANTSTAR_SIZE_MIN, DISTANTSTAR_SIZE_MAX);
         
         DistantStarBgEffect* ds = new DistantStarBgEffect(texOb_distantStar, _center, size);
         return ds;

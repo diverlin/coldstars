@@ -54,44 +54,92 @@ void Garbage :: add(RocketBullet* _rocket)
 	ROCKET_vec.push_back(_rocket);
 }		
 		
+	
+// effects	
+void Garbage :: add(LazerTraceEffect* _effect)
+{
+	effect_LAZERTRACE_vec.push_back(_effect);
+}
+
+void Garbage :: add(ExplosionEffect* _effect)
+{
+	effect_EXPLOSION_vec.push_back(_effect);
+}
+		
+void Garbage :: add(DamageEffect* _effect)
+{
+	effect_DAMAGE_vec.push_back(_effect);
+}
+		
+void Garbage :: add(ShockWaveEffect* _effect)
+{
+	effect_SHOCKWAVE_vec.push_back(_effect);
+}		
+// effects
+	
 		
 void Garbage :: clear()
 {  
     	for(unsigned int ki = 0; ki < SHIP_vec.size(); ki++)
     	{ 
        		delete SHIP_vec[ki];
-       		SHIP_vec.erase(SHIP_vec.begin() + ki);
     	}
+    	SHIP_vec.clear();
 
     	for(unsigned int ni = 0; ni < NPC_vec.size(); ni++)
     	{ 
        		delete NPC_vec[ni];
-       		NPC_vec.erase(NPC_vec.begin() + ni);
     	}
+    	NPC_vec.clear();
 
 
     	for(unsigned int ri = 0; ri < ROCKET_vec.size(); ri++)
     	{ 
        		delete ROCKET_vec[ri];
-       		ROCKET_vec.erase(ROCKET_vec.begin() + ri);
     	}
-
+       	ROCKET_vec.clear();
 
     	for(unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++)
     	{
        		delete ASTEROID_vec[ai];
-       		ASTEROID_vec.erase(ASTEROID_vec.begin() + ai);
     	}
-
+       	ASTEROID_vec.clear();
+       		
     	for(unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
    	{
 	        delete MINERAL_vec[mi];
-       		MINERAL_vec.erase(MINERAL_vec.begin() + mi);
     	}
-
+       	MINERAL_vec.clear();
+       		
     	for(unsigned int ci = 0; ci < CONTAINER_vec.size(); ci++)
     	{
        		delete CONTAINER_vec[ci];
-       		CONTAINER_vec.erase(CONTAINER_vec.begin() + ci);
     	}
+       	CONTAINER_vec.clear();
+       		    	
+    	// effects
+    	for(unsigned int ei = 0; ei < effect_LAZERTRACE_vec.size(); ei++)
+    	{
+       		delete effect_LAZERTRACE_vec[ei];
+    	}
+       	effect_LAZERTRACE_vec.clear();
+       		    	
+    	for(unsigned int ei = 0; ei < effect_EXPLOSION_vec.size(); ei++)
+    	{
+       		delete effect_EXPLOSION_vec[ei];
+    	}
+       	effect_EXPLOSION_vec.clear();
+       		    	
+    	for(unsigned int ei = 0; ei < effect_DAMAGE_vec.size(); ei++)
+    	{
+       		delete effect_DAMAGE_vec[ei];
+    	}
+       	effect_DAMAGE_vec.clear();
+       		    	
+    	for(unsigned int ei = 0; ei < effect_SHOCKWAVE_vec.size(); ei++)
+    	{
+       		delete effect_SHOCKWAVE_vec[ei];
+    	}
+       	effect_SHOCKWAVE_vec.clear();
+    	// effects
 }

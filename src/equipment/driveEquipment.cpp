@@ -140,13 +140,13 @@ DriveEquipment* driveEquipmentGenerator(int race_id, int revision_id)
     TextureOb* pTo_itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.DriveEquipment_texOb_pList);   
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(DRIVE_ITEM_TEXTURE_ID, revision_id) 
 
-    int speed_orig      = randIntInRange(DRIVE_SPEED_MIN, DRIVE_SPEED_MAX);
-    int hyper_orig      = randIntInRange(DRIVE_HYPER_MIN, DRIVE_HYPER_MAX);
+    int speed_orig      = getRandInt(DRIVE_SPEED_MIN, DRIVE_SPEED_MAX);
+    int hyper_orig      = getRandInt(DRIVE_HYPER_MIN, DRIVE_HYPER_MAX);
     
     EquipmentCommonData common_data;
-    common_data.modules_num_max = randIntInRange(DRIVE_MODULES_NUM_MIN, DRIVE_MODULES_NUM_MAX);
-    common_data.mass            = randIntInRange(DRIVE_MASS_MIN, DRIVE_MASS_MAX);
-    common_data.condition_max   = randIntInRange(DRIVE_CONDITION_MIN, DRIVE_CONDITION_MAX) * tech_rate;
+    common_data.modules_num_max = getRandInt(DRIVE_MODULES_NUM_MIN, DRIVE_MODULES_NUM_MAX);
+    common_data.mass            = getRandInt(DRIVE_MASS_MIN, DRIVE_MASS_MAX);
+    common_data.condition_max   = getRandInt(DRIVE_CONDITION_MIN, DRIVE_CONDITION_MAX) * tech_rate;
     common_data.deterioration_rate = 1;
 
     DriveEquipment* pTo_drive = new DriveEquipment(pTo_itemTexOb, speed_orig, hyper_orig, common_data);

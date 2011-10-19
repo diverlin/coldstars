@@ -117,12 +117,12 @@ FreezerEquipment* freezerEquipmentGenerator(int race_id, int revision_id)
     	TextureOb* pTo_itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.FreezerEquipment_texOb_pList);    // FAKE TEXTURE OB LIST IS USED HERE
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(RADAR_ITEM_TEXTURE_ID, revision_id) 
 
-    	int freeze_orig     = randIntInRange(FREEZER_FREEZE_MIN, FREEZER_FREEZE_MAX);
+    	int freeze_orig     = getRandInt(FREEZER_FREEZE_MIN, FREEZER_FREEZE_MAX);
     	
     	EquipmentCommonData common_data;
-    	common_data.modules_num_max = randIntInRange(FREEZER_MODULES_NUM_MIN, FREEZER_MODULES_NUM_MAX);
-    	common_data.mass            = randIntInRange(FREEZER_MASS_MIN, FREEZER_MASS_MAX);
-    	common_data.condition_max   = randIntInRange(FREEZER_CONDITION_MIN, FREEZER_CONDITION_MAX) * tech_rate;
+    	common_data.modules_num_max = getRandInt(FREEZER_MODULES_NUM_MIN, FREEZER_MODULES_NUM_MAX);
+    	common_data.mass            = getRandInt(FREEZER_MASS_MIN, FREEZER_MASS_MAX);
+    	common_data.condition_max   = getRandInt(FREEZER_CONDITION_MIN, FREEZER_CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
     	FreezerEquipment* freezer_module = new FreezerEquipment(pTo_itemTexOb, freeze_orig, common_data);

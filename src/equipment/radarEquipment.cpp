@@ -119,12 +119,12 @@ RadarEquipment* radarEquipmentGenerator(int race_id, int revision_id)
     	TextureOb* itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.RadarEquipment_texOb_pList);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(RADAR_ITEM_TEXTURE_ID, revision_id) 
 
-    	int radius_orig     = randIntInRange(RADAR_RADIUS_MIN, RADAR_RADIUS_MAX);
+    	int radius_orig     = getRandInt(RADAR_RADIUS_MIN, RADAR_RADIUS_MAX);
     	
     	EquipmentCommonData common_data;
-    	common_data.modules_num_max = randIntInRange(RADAR_MODULES_NUM_MIN, RADAR_MODULES_NUM_MAX);
-    	common_data.mass            = randIntInRange(RADAR_MASS_MIN, RADAR_MASS_MAX);
-    	common_data.condition_max   = randIntInRange(RADAR_CONDITION_MIN, RADAR_CONDITION_MAX) * tech_rate;
+    	common_data.modules_num_max = getRandInt(RADAR_MODULES_NUM_MIN, RADAR_MODULES_NUM_MAX);
+    	common_data.mass            = getRandInt(RADAR_MASS_MIN, RADAR_MASS_MAX);
+    	common_data.condition_max   = getRandInt(RADAR_CONDITION_MIN, RADAR_CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
     	RadarEquipment* radar_equipment = new RadarEquipment(itemTexOb, radius_orig, common_data);

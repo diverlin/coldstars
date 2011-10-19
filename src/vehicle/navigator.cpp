@@ -138,7 +138,7 @@ bool Navigator :: updateDynamicTargetCoords()
     		if (offset != 0)
     		{
     		    	// gfenerate point where to move
-    			float alpha = (float)randIntInRange(0, 360) / 57.0;
+    			float alpha = (float)getRandInt(0, 360) / 57.0;
    
     			target_pos.x = target_ship->getPoints()->getCenter().x + sin(alpha) * offset;
     			target_pos.y = target_ship->getPoints()->getCenter().y + cos(alpha) * offset;

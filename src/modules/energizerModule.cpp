@@ -49,8 +49,8 @@ void EnergizerModule :: addUniqueInfo()
 EnergizerModule* energizerModuleGenerator()
 {
      	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);      	
-     	int energy_max_add  = randIntInRange(ENERGIZER_MODULE_ENERGY_MIN, ENERGIZER_MODULE_ENERGY_MAX);
-     	int restoration_add = randIntInRange(ENERGIZER_MODULE_RESTORATION_MIN, ENERGIZER_MODULE_RESTORATION_MAX);
+     	int energy_max_add  = getRandInt(ENERGIZER_MODULE_ENERGY_MIN, ENERGIZER_MODULE_ENERGY_MAX);
+     	int restoration_add = getRandInt(ENERGIZER_MODULE_RESTORATION_MIN, ENERGIZER_MODULE_RESTORATION_MAX);
      	
      	EnergizerModule* energizer_module = new EnergizerModule(texOb, energy_max_add, restoration_add);
 	return energizer_module; 

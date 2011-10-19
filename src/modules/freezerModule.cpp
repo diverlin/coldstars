@@ -40,7 +40,7 @@ void FreezerModule :: addUniqueInfo()
 FreezerModule* freezerModuleGenerator()
 {
     TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
-    int freeze_add = randIntInRange(FREEZER_MODULE_FREEZE_MIN, FREEZER_MODULE_FREEZE_MAX);
+    int freeze_add = getRandInt(FREEZER_MODULE_FREEZE_MIN, FREEZER_MODULE_FREEZE_MAX);
 
     FreezerModule* freezer_module = new FreezerModule(texOb, freeze_add);
     return freezer_module;

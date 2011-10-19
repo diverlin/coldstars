@@ -89,7 +89,7 @@ ItemSlot* Store :: getEmptySlot()
 
 void Store :: initItemsGenerator()
 {
-        int race_id = RACES_GOOD_LIST[randIntInRange(0, RACES_GOOD_LIST.size() - 1)];
+        int race_id = RACES_GOOD_LIST[getRandInt(0, RACES_GOOD_LIST.size() - 1)];
         int revision_id = 0;
 
         for (unsigned int lii = 0; lii < lazer_num; lii++)

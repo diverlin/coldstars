@@ -22,59 +22,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-class ParticleForDamageEffect
-{
-   	public:
-      		ParticleForDamageEffect(float* pTo_center_x, 
-      			      		float* pTo_center_y, 
-      			      		float _velocity_start, 
-      			      		float _alpha_start, 
-      			      		float _alpha_end, 
-      			      		float _d_alpha);
-      			      
-      		~ParticleForDamageEffect();
-      		
-      		bool getAlive() const;
-      
-      		void updateLoop();
-      		void updateLast();
-      		void render();
-      		
-      	private:
-      	      	bool is_alive;
- 
-      		float* pTo_center_x;
-      		float* pTo_center_y;  
-
-      		float pos_x;
-      		float pos_y;  
-
-      		float alpha_start;
-      		float alpha_end;
-      		float d_alpha;
-      		float alpha;
-
-      		float velocity_start;
-      		float velocity_x;
-      		float velocity_y;
-      	
-      	      	void fastCalcVelocityVector();
-      		void accurateCalcVelocityVector();
-};
-
-
 class DamageEffect
 {
    	public: 
-       		DamageEffect(TextureOb* _pTo_texOb, 
+       		DamageEffect(TextureOb* _texOb, 
+       		    	     vec2f* _pTo_center, 
+       		    	     ParticleData _data_particle,
+       		    	     int _num_particles);
+       		    	     
+       		DamageEffect(TextureOb* _texOb, 
        		    	     float* _pTo_center_x, 
        		    	     float* _pTo_center_y, 
-       		    	     int _num_particles, 
-       		    	     float _pSize, 
-       		    	     float _velocity_start, 
-       		    	     float _alpha_start, 
-       		    	     float _alpha_end, 
-       		    	     float _d_alpha);
+       		    	     ParticleData _data_particle,
+       		    	     int _num_particles);
        		    
        		~DamageEffect();
 
@@ -91,17 +51,12 @@ class DamageEffect
        		float* pTo_center_x;
        		float* pTo_center_y;
 
-       		GLuint texture;
-       		int num_particles;
-       		float pSize;
+		TextureOb* texOb;
+		ParticleData data_particle;
 
-       		float velocity_start;
-       		float alpha_start;
-       		float alpha_end;
-
-       		std::vector<ParticleForDamageEffect*> particles_pList;       		       	
+       		std::vector<Particle*> particles_vec;       		       	
 };
 
-
+DamageEffect* createDamageEffect(TextureOb* _texOb, float* pTo_pos_x, float* pTo_pos_y);
 
 #endif 

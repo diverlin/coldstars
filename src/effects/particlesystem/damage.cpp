@@ -20,15 +20,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "damage.hpp"
 
 
-DamageEffect :: DamageEffect(TextureOb* _pTo_texOb, 
-			     float* _pTo_center_x, 
+DamageEffect :: DamageEffect(TextureOb* _texOb, 
+			     float* _pTo_center_x,
 			     float* _pTo_center_y, 
-			     int _num_particles, 
-			     float _pSize, 
-			     float _velocity_start, 
-			     float _alpha_start, 
-			     float _alpha_end, 
-			     float _d_alpha)
+			     ParticleData _data_particle,
+			     int _num_particles)
 {
     	is_alive = true;
     	is_dying = false;
@@ -36,28 +32,27 @@ DamageEffect :: DamageEffect(TextureOb* _pTo_texOb,
     	pTo_center_x = _pTo_center_x;
     	pTo_center_y = _pTo_center_y;
 
-    	texture = _pTo_texOb->texture;
-    	num_particles = _num_particles;
-    	pSize = _pSize;
+    	texOb = _texOb;
+    	
+    	data_particle = _data_particle;
 
-    	velocity_start = _velocity_start;
-    	alpha_start = _alpha_start;
-    	alpha_end = _alpha_end;
 
-   	for (unsigned int i = 0; i < num_particles; i++)
+	bool _variation = true;
+   	for (unsigned int i = 0; i < _num_particles; i++)
    	{
-        	ParticleForDamageEffect* pTo_particle = new ParticleForDamageEffect(pTo_center_x, 
-        								    	    pTo_center_y, 
-        								            velocity_start, 
-        								            alpha_start, 
-        								            alpha_end, 
-        								            randIntInRange(3,6)*0.01);
-        	particles_pList.push_back(pTo_particle);
+        	Particle* particle = new Particle(vec2f(*pTo_center_x, *pTo_center_y), _data_particle, _variation);  
+        	particle->randomize_d_alpha(0.003, 0.006);    					  
+        	particles_vec.push_back(particle);
     	} 
 }
 
 DamageEffect :: ~DamageEffect()
-{}
+{
+	for (int i = 0; i < particles_vec.size(); i++) 
+     	{
+  		delete particles_vec[i];
+     	}
+}
 
 
 bool DamageEffect :: getAlive() const { return is_alive; }
@@ -68,160 +63,54 @@ void DamageEffect :: update()
 {
      	is_alive = false;
 
-     	if (is_dying == false)
-     	{
-        	for (unsigned int pi=0; pi < particles_pList.size(); pi++)
+        for (unsigned int pi=0; pi < particles_vec.size(); pi++)
+        {
+                if (particles_vec[pi]->getAlive() == true)
         	{
-            		particles_pList[pi]->updateLoop();
+            		particles_vec[pi]->update();
             		is_alive = true;
-        	}	 
-     	} 
-     	else
-     	{
-        	for (unsigned int pi=0; pi < particles_pList.size(); pi++)
-        	{
-            		if (particles_pList[pi]->getAlive() == true)
+            	}
+            	else
+            	{
+            		if (is_dying == false)
             		{
-                		particles_pList[pi]->updateLast();
-                		is_alive = true;
+            			particles_vec[pi]->reborn(vec2f(*pTo_center_x, *pTo_center_y));
             		}
             	}
-     	}
+        }
 }
 
 void DamageEffect :: render()
 {
-     	glBindTexture(GL_TEXTURE_2D, texture);
-     	glPointSize(pSize);
-
-     	glBegin(GL_POINTS);
-     		for (unsigned int pi=0; pi < particles_pList.size(); pi++)
-     		{
-         		if (particles_pList[pi]->getAlive() == true)
-         		{
-             			particles_pList[pi]->render();
-             		}
-        	}
-     	glEnd();
+     	glBindTexture(GL_TEXTURE_2D, texOb->texture);
+	for (unsigned int pi=0; pi < particles_vec.size(); pi++)
+	{
+       		particles_vec[pi]->render();
+       	}
 }
 
 
 
 
 
-
-
-
-
-
-
-
-
-ParticleForDamageEffect :: ParticleForDamageEffect(float* _pTo_center_x, 
-						   float* _pTo_center_y, 
-						   float _velocity_start, 
-						   float _alpha_start, 
-						   float _alpha_end, 
-						   float _d_alpha)
+DamageEffect* createDamageEffect( TextureOb* _texOb, float* pTo_center_x, float* pTo_center_y)
 {
-     	is_alive = true;
+	int particles_num = 5;
+   
+    	ParticleData data_particle;
+        data_particle.size_start = 30;
+        data_particle.size_end = 0.1;
+        data_particle.d_size = 0.001; 
+        
+        data_particle.velocity_start = 1.3;
+        data_particle.velocity_end   = 1.3;        
+        data_particle.d_velocity   = 0.0;
+                
+	data_particle.alpha_start = 1.0; 
+	data_particle.alpha_end = 0.1; 
+	data_particle.d_alpha = 0;   // is modifed iduvidually for each particle                       
 
-     	pTo_center_x = _pTo_center_x;
-     	pTo_center_y = _pTo_center_y;
-  
-
-     	alpha_start = _alpha_start;
-     	alpha_end   = _alpha_end;
-     	d_alpha     = _d_alpha;
-     	alpha       = _alpha_start;
-
-
-    	velocity_start = _velocity_start;
-
-     	if (randIntInRange(1,2) == 1)
-        	fastCalcVelocityVector();
-     	else
-        	accurateCalcVelocityVector();
+	DamageEffect* damage = new DamageEffect(_texOb, pTo_center_x, pTo_center_y, data_particle, particles_num);
+	return damage;
 }
-
-
-bool ParticleForDamageEffect :: getAlive() const  { return is_alive; }   
-   		
-      		
-void ParticleForDamageEffect :: fastCalcVelocityVector()
-{
-    	float dx_n = randIntInRange(0, 10)*getRandomSign()*0.1;
-    	float dy_n = randIntInRange(0, 10)*getRandomSign()*0.1;
-
-    	velocity_x = dx_n * velocity_start;
-    	velocity_y = dy_n * velocity_start;
-}
-
-
-void ParticleForDamageEffect :: accurateCalcVelocityVector()
-{
-    	float _len   = randIntInRange(50, 100);
-    	float _angle = randIntInRange(0, 360)/57.0;
-
-    	float target_x = pos_x + sin(_angle) * _len;
-    	float target_y = pos_y + cos(_angle) * _len;
-
-    	float xl = (target_x - pos_x);
-    	float yl = (target_y - pos_y);
-
-    	float dx_n = xl/_len;
-    	float dy_n = yl/_len;
-
-    	velocity_x = dx_n * velocity_start;
-    	velocity_y = dy_n * velocity_start;
-}  
-
-
-void ParticleForDamageEffect :: updateLoop()
-{
-    	pos_x += velocity_x;
-    	pos_y += velocity_y; 
-    	alpha  -= d_alpha;
-          
-    	if (alpha < alpha_end)
-    	{
-       		alpha = alpha_start;
-       		pos_x = (*pTo_center_x);
-       		pos_y = (*pTo_center_y);
-
-       		if (randIntInRange(1,2) == 1)
-          		fastCalcVelocityVector();
-       		else
-          		accurateCalcVelocityVector();
-    	}
-}
-
-void ParticleForDamageEffect :: updateLast()
-{
-     	pos_x += velocity_x;
-     	pos_y += velocity_y;
-     	alpha -= d_alpha;
-          
-     	if (alpha < alpha_end)
-     	{
-         	is_alive = false;
-        }
-}
-
-void ParticleForDamageEffect :: render()
-{
-     	glColor4f(1.0, 1.0, 1.0, alpha);
-     	glVertex3f(pos_x, pos_y, -2);
-}
-
-
-
-
-
-
-
-
-
-
-
 

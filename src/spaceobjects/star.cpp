@@ -115,7 +115,7 @@ Star* createStar()
 {
  	PlanetData star_data;
 
-	star_data.scale         = randIntInRange(STAR_SIZE_MIN, STAR_SIZE_MAX);  
+	star_data.scale         = getRandInt(STAR_SIZE_MIN, STAR_SIZE_MAX);  
     	star_data.orbit_center  = vec2f(0, 0); 
     	star_data.radius_A      = 50;
     	star_data.radius_B      = 50; 

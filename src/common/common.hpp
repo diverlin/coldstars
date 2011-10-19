@@ -19,9 +19,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef COMMON_H
 #define COMMON_H
 
-int randIntInRange(int range_start, int range_end);
-int getRandomSign();
-bool getRandomBool();
+int getRandInt(int range_start, int range_end);
+int getRandSign();
+bool getRandBool();
 
 struct Color
 {

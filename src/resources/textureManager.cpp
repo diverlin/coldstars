@@ -264,7 +264,7 @@ void TextureManager :: manage_face(TextureOb* pTo_texOb)
 TextureOb* TextureManager :: returnPointerToRandomTexObFromList(VEC_pTexOb_type* pTo_list)
 {  
      if (pTo_list->size() > 1)
-         return (*pTo_list)[randIntInRange(0, pTo_list->size() )];
+         return (*pTo_list)[getRandInt(0, pTo_list->size() )];
      else 
          return (*pTo_list)[0];
 }

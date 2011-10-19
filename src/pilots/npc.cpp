@@ -174,7 +174,7 @@ Npc :: ~Npc()
 //{
      //if (pTo_ship->direction_list_END == true) 
      //{   
-        //pTo_ship->pTo_navigator->setStaticTargetCoords(randIntInRange(0,800), randIntInRange(0,800));  
+        //pTo_ship->pTo_navigator->setStaticTargetCoords(getRandInt(0,800), getRandInt(0,800));  
      //} 
 //}
 
@@ -429,7 +429,7 @@ void Npc :: thinkCommon_inSpace_inStatic()
 	{
 		if (questOb->getTypeId() == NPC_ID)
 		{
-			ship->getNavigator()->setTargetShip(questOb->getNpc()->getShip(), randIntInRange(30, 100));
+			ship->getNavigator()->setTargetShip(questOb->getNpc()->getShip(), getRandInt(30, 100));
 			if (questOb->getActionId() == DESTROY_TASK_ID)
 			{
 			 	ship->weapon_selector.setAll(true);
@@ -591,7 +591,7 @@ void Npc :: thinkUnique_Race6_inSpace_inStatic()
      	//{
          	//if (starsystem->SHIP_inSPACE_vec[ki]->getNpc()->getRaceId() != race_id)
          	//{
-         	        //ship->getNavigator()->setTargetShip(starsystem->SHIP_inSPACE_vec[ki], randIntInRange(30, 100));
+         	        //ship->getNavigator()->setTargetShip(starsystem->SHIP_inSPACE_vec[ki], getRandInt(30, 100));
          	            		 
 		 	//ship->weapon_selector.setAll(true);
             		//ship->selectWeapons();
@@ -615,29 +615,6 @@ void Npc :: aiSimulation()
         thinkUnique_inSpace_inStatic();
 }
     		
-//void Npc :: makeImmediateDecision()
-//{
-    	//if (see.ASTEROID == true)
-    	//{  
-        	//int a_index = -1;
-        	//float dist = asteroid_distance_list[0];
-
-        	//for(unsigned int i = 0; i < visible_ASTEROID_pList.size(); i++)
-           	//if (asteroid_distance_list[i] < dist)
-           	//{
-               		//dist = asteroid_distance_list[i];
-               		//a_index = i;
-           	//} 
-        	////printf("closest asteroid at =%f\n", dist);
-        	//if (a_index != -1)
-        	//{ 
-           		//ship->selectWeapons();
-           		//ship->setWeaponsTarget(visible_ASTEROID_pList[a_index]);
-        	//}   
-    	//}            
-//}
-
-
 
 void Npc :: update_inDynamic_inSpace()
 {

@@ -112,12 +112,12 @@ ProtectorEquipment* protectorEquipmentGenerator(int race_id, int revision_id)
     	TextureOb* itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.ProtectorEquipment_texOb_pList);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(PROTECTOR_ITEM_TEXTURE_ID, revision_id) 
 
-    	int protection_orig = randIntInRange(PROTECTOR_PROTECTION_MIN, PROTECTOR_PROTECTION_MAX);
+    	int protection_orig = getRandInt(PROTECTOR_PROTECTION_MIN, PROTECTOR_PROTECTION_MAX);
     	
     	EquipmentCommonData common_data;
-    	common_data.modules_num_max = randIntInRange(PROTECTOR_MODULES_NUM_MIN, PROTECTOR_MODULES_NUM_MAX);
-    	common_data.mass            = randIntInRange(PROTECTOR_MASS_MIN, PROTECTOR_MASS_MAX);
-    	common_data.condition_max   = randIntInRange(PROTECTOR_CONDITION_MIN, PROTECTOR_CONDITION_MAX) * tech_rate;
+    	common_data.modules_num_max = getRandInt(PROTECTOR_MODULES_NUM_MIN, PROTECTOR_MODULES_NUM_MAX);
+    	common_data.mass            = getRandInt(PROTECTOR_MASS_MIN, PROTECTOR_MASS_MAX);
+    	common_data.condition_max   = getRandInt(PROTECTOR_CONDITION_MIN, PROTECTOR_CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
     	ProtectorEquipment* protector_equipment = new ProtectorEquipment(itemTexOb, protection_orig, common_data);

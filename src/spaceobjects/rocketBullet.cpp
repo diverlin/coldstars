@@ -46,7 +46,7 @@ RocketBullet :: RocketBullet(IdData _data_id,
         pTo_target_pos_y = _pTo_target_pos_y;
 
         texOb = _data_bullet.texOb;
-        size = returnObjectSize(texOb->w, texOb->h);
+        size_id = returnObjectSize(texOb->w, texOb->h);
 
 
         speed = _data_bullet.speed_init;
@@ -75,29 +75,7 @@ RocketBullet :: RocketBullet(IdData _data_id,
         angle_inD = _angle_inD;
         points.setAngle(angle_inD);
         
-        
-        //self.drive_jet = driveTrailEffect(self, TEXTURE_MANAGER.returnParticleTexObBy_ColorID(YELLOW_COLOR_ID), 5, 15*self.size, 1.0, 1.0, 0.1, 0.15) 
-        
-        TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
-           	
-        int pNum       = 5;
-   	int pSize      = 15;
-   	float pVelocity  = 1.2;
-   	float pAlphaInit = 0.6;
-   	float pAlphaEnd  = 0.0;
-   	float pd_alpha   = 0.05;
-
-   	//drive_jet = DriveTrailEffect(TextureOb* _pTo_texOb, float* _pTo_OB_angle_inD, float* _pTo_start_pos_x, float* _pTo_start_pos_y, float* _pTo_target_pos_x, float* _pTo_target_pos_y, int _num_particles, float _size, float _velocity_orig, float _alpha_start, float _alpha_end, float _d_alpha)
-   	drive_jet = new DriveTrailEffect(pTo_particleTexOb, 
-   					 points.getpAngleDegree(), 
-   					 points.getpMidLeft(),  
-   					 points.getpMidFarLeft(), 
-   					 pNum, 
-   					 pSize, 
-   					 pVelocity, 
-   					 pAlphaInit, 
-   					 pAlphaEnd, 
-   					 pd_alpha);
+   	drive_trail = createTrailEffect(size_id, points.getpMidLeft(), points.getpMidFarLeft());
 }
 
 
@@ -230,7 +208,7 @@ void RocketBullet :: death()
 
      	if (data_life.is_explosed == false)
      	{   
-        	createExplosion(starsystem, points.getCenter(), size);
+        	createExplosion(starsystem, points.getCenter(), size_id);
         	data_life.is_explosed = true;
      	}
 }
@@ -239,14 +217,12 @@ void RocketBullet :: death()
 void RocketBullet :: updateRenderStuff()
 {
 	points.update();
-	drive_jet->update();
+	drive_trail->update();
 }
 
-void RocketBullet :: renderDriveJet() const
+void RocketBullet :: renderDriveTrail() const
 {
-       	enable_POINTSPRITE();
-       		drive_jet->render();
-       	disable_POINTSPRITE();
+	drive_trail->render();
 }
 
 void RocketBullet :: renderKorpus() const
@@ -263,7 +239,7 @@ void RocketBullet :: renderKorpus() const
 void RocketBullet :: renderInSpace() const
 {
 	renderKorpus();
-	renderDriveJet();
+	renderDriveTrail();
 }
 
 

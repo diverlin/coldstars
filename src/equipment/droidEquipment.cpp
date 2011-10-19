@@ -114,12 +114,12 @@ DroidEquipment* droidEquipmentGenerator(int race_id, int revision_id)
     	TextureOb* pTo_itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.DroidEquipment_texOb_pList);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(DROID_ITEM_TEXTURE_ID, revision_id)
 
-    	int repair_orig     = randIntInRange(DROID_REPAIR_MIN, DROID_REPAIR_MAX);
+    	int repair_orig     = getRandInt(DROID_REPAIR_MIN, DROID_REPAIR_MAX);
     	
     	EquipmentCommonData common_data;
-    	common_data.modules_num_max = randIntInRange(DROID_MODULES_NUM_MIN, DROID_MODULES_NUM_MAX);
-    	common_data.mass          = randIntInRange(DROID_MASS_MIN, DROID_MASS_MAX);
-    	common_data.condition_max = randIntInRange(DROID_CONDITION_MIN, DROID_CONDITION_MAX) * tech_rate;
+    	common_data.modules_num_max = getRandInt(DROID_MODULES_NUM_MIN, DROID_MODULES_NUM_MAX);
+    	common_data.mass          = getRandInt(DROID_MASS_MIN, DROID_MASS_MAX);
+    	common_data.condition_max = getRandInt(DROID_CONDITION_MIN, DROID_CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
     	DroidEquipment* droid_equipment = new DroidEquipment(pTo_itemTexOb, repair_orig, common_data);

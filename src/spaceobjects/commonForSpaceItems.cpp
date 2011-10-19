@@ -73,14 +73,14 @@ void CommonForSpaceItems :: CommonForSpaceItems_init(TextureOb* _pTo_texOb, vec2
     	angle_x_inD        = 0.0;
     	angle_y_inD        = 0.0;
     	angle_z_inD        = 0.0;
-    	d_angle_z_inD      = randIntInRange(10, 100)*0.01;
+    	d_angle_z_inD      = getRandInt(10, 100)*0.01;
     	pos_z          = -500.0f;
 
     	keep_moving = true;
     	
     	// gfenerate point where to move
-    	float alpha = (float)randIntInRange(0, 360) / 57.0;
-    	int len = randIntInRange(60, 100);
+    	float alpha = (float)getRandInt(0, 360) / 57.0;
+    	int len = getRandInt(60, 100);
    
     	target_pos_x = _start_pos.x + sin(alpha) * len;
     	target_pos_y = _start_pos.y + cos(alpha) * len;

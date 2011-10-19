@@ -121,13 +121,13 @@ BakEquipment* bakEquipmentGenerator(int race_id, int revision_id)
 
     	TextureOb* _itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.BakEquipment_texOb_pList);    // FAKE TEXTURE OB LIST IS USED HERE
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(RADAR_ITEM_TEXTURE_ID, revision_id) 
-    	int fuel_max_orig = randIntInRange(BAK_FUEL_MIN, BAK_FUEL_MAX);
+    	int fuel_max_orig = getRandInt(BAK_FUEL_MIN, BAK_FUEL_MAX);
 
       EquipmentCommonData _common_data;
 
-    	_common_data.modules_num_max = randIntInRange(BAK_MODULES_NUM_MIN, BAK_MODULES_NUM_MAX);
-    	_common_data.mass = randIntInRange(BAK_MASS_MIN, BAK_MASS_MAX);
-    	_common_data.condition_max = randIntInRange(BAK_CONDITION_MIN, BAK_CONDITION_MAX) * tech_rate;
+    	_common_data.modules_num_max = getRandInt(BAK_MODULES_NUM_MIN, BAK_MODULES_NUM_MAX);
+    	_common_data.mass = getRandInt(BAK_MASS_MIN, BAK_MASS_MAX);
+    	_common_data.condition_max = getRandInt(BAK_CONDITION_MIN, BAK_CONDITION_MAX) * tech_rate;
     	_common_data.deterioration_rate = 1;
 
     	BakEquipment* _bak = new BakEquipment(_itemTexOb, fuel_max_orig, _common_data);

@@ -21,86 +21,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define EXPLOSION_H
 
 
-struct ParticleSystemData 
-{
-	unsigned int particles_num;
-
-	float particleSize_start;
-	float particleSize_end;
-
-	float velocity_start;
-	float velocity_end;
-
-	float alpha_start;
-	float alpha_end;
-
-	float d_particleSize;
-	float d_velocity;
-	float d_alpha;
-};
-
-
-
-class ParticleForExplosionEffect
-{ 
-    	public:
-        	bool is_alive;
-        	float size;        	       
-        
-      		ParticleForExplosionEffect(vec2f, ParticleSystemData, int);      				 
-      		~ParticleForExplosionEffect();
-
-      		void update();
-      		void render();
-      		
-      	private:
-      		int curnum;  
-      		      
-        	vec2f center;
-   
-        	float alpha_start;
-        	float alpha_end;
-        	float d_alpha;
-        	float alpha;
-   
-        	float size_start;
-        	float d_size;
- 
-        	float velocity_start;
-        	float d_velocity; 
-
-        	vec2f velocity;
-        	
-        	void fastCalcVelocityVector();
-      		void accurateCalcVelocityVector();
-      	
-};
-
 
 class ExplosionEffect
 { 
     	public:
-    	       	bool is_alive;    	       	        
-    	       	        
-       		ExplosionEffect(TextureOb*, vec2f, ParticleSystemData);       		       
+       		ExplosionEffect(TextureOb* _texOb, vec2f _center_pos, ParticleData _data_particle, int _num_particles);       		       
        		~ExplosionEffect();
 
-		void setStarSystem(StarSystem* _starsystem);
+		bool getAlive() const;
+		
        		void update();
        		void render();
        		
        	private:
-          	bool alreadyInRemoveQueue;
+       	    	bool is_alive;  
    
-          	std::vector<ParticleForExplosionEffect*> particles_pList;  
+          	std::vector<Particle*> particles_vec;  
           	
-       	        TextureOb* texOb;
-          	
-          	int num_particles;
-          	         	          	
-       	        vec2f center;
-          	
-          	float pSize_start;       	
+       	        TextureOb* texOb;     	
 };
 
 
