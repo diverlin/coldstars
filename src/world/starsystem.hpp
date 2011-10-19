@@ -25,6 +25,8 @@ class StarSystem
 {
 	public:
     	    	// ENTITY VECTORS
+    	    	std::vector<Player*> 	   PLAYER_vec;
+    	    	
     		std::vector<Star*>         STAR_vec;
     		std::vector<Planet*>       PLANET_vec;
     		std::vector<Asteroid*>     ASTEROID_vec;
@@ -47,7 +49,7 @@ class StarSystem
     		~StarSystem();
     
     		void setPositionOnWorldMap(Rect rect);
-		void setDetailedSimulationFlag(bool);
+		//void setDetailedSimulationFlag(bool);
 		void setCapturedFlag(bool);
 		
 		int getId() const;
@@ -70,24 +72,25 @@ class StarSystem
     		void mouseControl();
 
     		//// TRANSITION
-                void addStar(Star*);
-                void addPlanet(Planet*);
-    		void addAsteroid(Asteroid*);
     		void addShipToSpace(Ship*);
     		void addShipToPlanet(Ship*, Planet*);
     		void addNpcToSpace(Npc*);
     		void addNpcToPlanet(Npc*, Planet*);
-    		void addMineral(Mineral*);
-    		void addContainer(Container*);
-    		void addRocket(RocketBullet*);
     		
-    		void addExplosionEffect(ExplosionEffect*);
-    		void addShockWaveEffect(ShockWaveEffect*);
-    		void addLazerTraceEffect(LazerTraceEffect*);
-    		void addDamageEffect(DamageEffect*);
+                void add(Star*);
+                void add(Planet*);
+    		void add(Asteroid*);
+    		void add(Mineral*);
+    		void add(Container*);
+    		void add(RocketBullet*);
+    		
+    		void add(ExplosionEffect*);
+    		void add(ShockWaveEffect*);
+    		void add(LazerTraceEffect*);
+    		void add(DamageEffect*);
    		
-    		void addDistantNebula(DistantNebulaBgEffect*);
-    		void addDistantStar(DistantStarBgEffect*);
+    		void add(DistantNebulaBgEffect*);
+    		void add(DistantStarBgEffect*);
                 
     		bool removeShipById(int _id);    
     		bool removeNpc(int _id, int _race_id, int _subtype_id);  

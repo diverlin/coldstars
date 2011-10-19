@@ -22,7 +22,7 @@ QuestObject :: QuestObject(Npc* _npc_owner)
 {
 	npc_owner = _npc_owner;
 	
-	type_id = NONE_ID;
+	ob_type_id = NONE_ID;
 	action_id = NONE_ID;
 		
 	npc = NULL;
@@ -38,14 +38,14 @@ QuestObject :: ~QuestObject()
 	
 StarSystem* QuestObject :: getObStarSystem()
 {
-	if (type_id == NPC_ID)
+	if (ob_type_id == NPC_ID)
 		return npc->getStarSystem();
-	if (type_id == PLANET_TYPE_ID)
+	if (ob_type_id == PLANET_TYPE_ID)
 		return planet->getStarSystem();
 }
 
-bool QuestObject :: getExist() const { return exist; }
-int QuestObject :: getTypeId() const { return type_id; }
+bool QuestObject :: getExist() const   { return exist; }
+int QuestObject :: getTypeId() const   { return ob_type_id; }
 int QuestObject :: getActionId() const { return action_id; }
 
 Npc* QuestObject :: getNpc()      { return npc; }
@@ -55,7 +55,7 @@ template <typename TARGET>
 void QuestObject :: setTask(TARGET _target, int _action_id)
 {
 	setObject(_target);
-	type_id = _target->getTypeId();
+	ob_type_id = _target->getTypeId();
 	action_id = _action_id;
 	
 	exist = true;
@@ -68,12 +68,17 @@ void QuestObject :: setObject(Planet* _planet) { planet = _planet; }
 
 void QuestObject :: clear()
 {
-	if (type_id == NPC_ID)
+	if (ob_type_id == NPC_ID)
+	{
 		npc = NULL;
-	if (type_id == PLANET_TYPE_ID)
-		planet = NULL;
+	}
 	
-	type_id = NONE_ID;
+	if (ob_type_id == PLANET_TYPE_ID)
+	{
+		planet = NULL;
+	}
+	
+	ob_type_id = NONE_ID;
 	action_id = NONE_ID;
 	exist = false;
 }
@@ -82,7 +87,7 @@ void QuestObject :: clear()
 
 void QuestObject :: validation()
 {
-	if (type_id == NPC_ID)
+	if (ob_type_id == NPC_ID)
 	{
 		if (npc->getAlive() == false)
 		{
@@ -91,7 +96,7 @@ void QuestObject :: validation()
 		}
 	}
 	
-	if (type_id == PLANET_TYPE_ID)
+	if (ob_type_id == PLANET_TYPE_ID)
 	{
 		//return planet->getStarSystem();
 	}

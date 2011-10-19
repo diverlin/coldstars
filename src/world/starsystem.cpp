@@ -17,16 +17,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "starsystem.hpp"
-
 
 StarSystem :: StarSystem()
 { 
-    	id = g_ENTITY_ID_GENERATOR.returnNextId();
+    	id = g_STARSYSTEM_ID_GENERATOR.getNextId();
     	is_CAPTURED = false;
     	calculation_per_turn_allowed = true;
     	
-    	detalied_simulation = false;
+    	detalied_simulation = false; // will be changing depending on player presence
 }
 
 StarSystem :: ~StarSystem()
@@ -34,7 +32,6 @@ StarSystem :: ~StarSystem()
       
 
 void StarSystem :: setPositionOnWorldMap(Rect rect) { rect_onMap = rect; }
-void StarSystem :: setDetailedSimulationFlag(bool _detalied_simulation) { detalied_simulation = _detalied_simulation; }
 void StarSystem :: setCapturedFlag(bool _captured) { is_CAPTURED = _captured; }
 				
 int StarSystem :: getId() const     { return id; }
@@ -57,6 +54,15 @@ Npc* StarSystem :: getRandomNpc()  // poor
 
 void StarSystem :: update_TRUE(int timer)
 {
+	if (PLAYER_vec.size() > 0)
+	{
+		detalied_simulation = true;
+	}
+	else
+	{
+		detalied_simulation = false;
+	}
+
 	if (timer > 0)
 	{
      		asteroidManager(10); 
@@ -259,7 +265,6 @@ void StarSystem :: updateEntities_inDynamic_TRUE()
                 ASTEROID_vec[ai]->update_inSpace_inDynamic_TRUE(); 
     	}
     	
-        pPLAYER->update_inSpace_inDynamic();
         for (unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
         {
                 NPC_inSPACE_vec[ni]->update_inDynamic_inSpace(); 
@@ -305,7 +310,6 @@ void StarSystem :: updateEntities_inDynamic_FALSE()
                 ASTEROID_vec[ai]->update_inSpace_inDynamic_FALSE(); 
         }
     
-        pPLAYER->update_inSpace_inDynamic(); // remove
         for (unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
         {
                 NPC_inSPACE_vec[ni]->update_inDynamic_inSpace(); 
@@ -817,44 +821,44 @@ void StarSystem :: asteroidManager(int num)
         while (ASTEROID_vec.size() < num)
         {
                 Asteroid* _asteroid = createAsteroid();
-                addAsteroid(_asteroid);
+                add(_asteroid);
                 break;
         }
 }
 
 
-void StarSystem :: addStar(Star* _star)
+void StarSystem :: add(Star* _star)
 {
         _star->setStarSystem(this);
         STAR_vec.push_back(_star);
 }
 
-void StarSystem :: addPlanet(Planet* _planet)
+void StarSystem :: add(Planet* _planet)
 {
         _planet->setStarSystem(this);
         PLANET_vec.push_back(_planet);
 }
                 
-void StarSystem :: addAsteroid(Asteroid* _asteroid)
+void StarSystem :: add(Asteroid* _asteroid)
 {   
         _asteroid->setStarSystem(this);
         ASTEROID_vec.push_back(_asteroid);
 }
 
-void StarSystem :: addMineral(Mineral* _mineral)
+void StarSystem :: add(Mineral* _mineral)
 {
 	_mineral->setStarSystem(this);
         MINERAL_vec.push_back(_mineral);
 }
 
-void StarSystem :: addContainer(Container* _container)
+void StarSystem :: add(Container* _container)
 {
 	_container->setStarSystem(this);
         CONTAINER_vec.push_back(_container);
 }
 
 
-void StarSystem :: addRocket(RocketBullet* _rocket)
+void StarSystem :: add(RocketBullet* _rocket)
 {
 	_rocket->setStarSystem(this);
 	ROCKET_vec.push_back(_rocket);
@@ -862,35 +866,35 @@ void StarSystem :: addRocket(RocketBullet* _rocket)
 
 	
 
-void StarSystem :: addShockWaveEffect(ShockWaveEffect* _shockWave)
+void StarSystem :: add(ShockWaveEffect* _shockWave)
 {
 	effect_SHOCKWAVE_vec.push_back(_shockWave);
 }
 
 
-void StarSystem :: addLazerTraceEffect(LazerTraceEffect* _lazerTraceEffect)
+void StarSystem :: add(LazerTraceEffect* _lazerTraceEffect)
 {
 	effect_LAZERTRACE_vec.push_back(_lazerTraceEffect);
 }
 
 
-void StarSystem :: addExplosionEffect(ExplosionEffect* _explosionEffect)
+void StarSystem :: add(ExplosionEffect* _explosionEffect)
 {
 	effect_EXPLOSION_vec.push_back(_explosionEffect);
 }
 
-void StarSystem :: addDamageEffect(DamageEffect* _damageEffect)
+void StarSystem :: add(DamageEffect* _damageEffect)
 {
 	effect_DAMAGE_vec.push_back(_damageEffect);
 }
     		
     		
-void StarSystem :: addDistantNebula(DistantNebulaBgEffect* dn)
+void StarSystem :: add(DistantNebulaBgEffect* dn)
 {
 	distantNebulaBgEffect_vec.push_back(dn);
 }
 
-void StarSystem :: addDistantStar(DistantStarBgEffect* ds)
+void StarSystem :: add(DistantStarBgEffect* ds)
 {
 	distantStarBgEffect_vec.push_back(ds);
 }
@@ -917,8 +921,56 @@ void StarSystem :: manageDeadObjects()
         	{   
             		garbage.add(NPC_inSPACE_vec[ni]);
             		NPC_inSPACE_vec.erase(NPC_inSPACE_vec.begin() + ni);
+            		
         	} 
     	}
+    	
+    	//
+    	for(unsigned int ni = 0; ni < NPC_RANGER_inSPACE_vec.size(); ni++)
+    	{
+	        if (NPC_RANGER_inSPACE_vec[ni]->getAlive() == false)
+        	{   
+            		NPC_RANGER_inSPACE_vec.erase(NPC_RANGER_inSPACE_vec.begin() + ni);
+            		
+        	} 
+    	}
+    	
+    	for(unsigned int ni = 0; ni < NPC_WARRIOR_inSPACE_vec.size(); ni++)
+    	{
+	        if (NPC_WARRIOR_inSPACE_vec[ni]->getAlive() == false)
+        	{   
+            		NPC_WARRIOR_inSPACE_vec.erase(NPC_WARRIOR_inSPACE_vec.begin() + ni);
+            		
+        	} 
+    	}
+    	    	
+    	for(unsigned int ni = 0; ni < NPC_TRADER_inSPACE_vec.size(); ni++)
+    	{
+	        if (NPC_TRADER_inSPACE_vec[ni]->getAlive() == false)
+        	{   
+            		NPC_TRADER_inSPACE_vec.erase(NPC_TRADER_inSPACE_vec.begin() + ni);
+            		
+        	} 
+    	}
+    	
+    	for(unsigned int ni = 0; ni < NPC_PIRAT_inSPACE_vec.size(); ni++)
+    	{
+	        if (NPC_PIRAT_inSPACE_vec[ni]->getAlive() == false)
+        	{   
+            		NPC_PIRAT_inSPACE_vec.erase(NPC_PIRAT_inSPACE_vec.begin() + ni);
+            		
+        	} 
+    	}
+    	
+    	for(unsigned int ni = 0; ni < NPC_DIPLOMAT_inSPACE_vec.size(); ni++)
+    	{
+	        if (NPC_DIPLOMAT_inSPACE_vec[ni]->getAlive() == false)
+        	{   
+            		NPC_DIPLOMAT_inSPACE_vec.erase(NPC_DIPLOMAT_inSPACE_vec.begin() + ni);
+            		
+        	} 
+    	}
+    	//
     	
     	}
 
@@ -1025,202 +1077,203 @@ void StarSystem :: removeAllReferencesToDeadObjects()
 
 void StarSystem :: mouseControl()
 {   
-    bool cursor_has_target = false;   
+    	bool cursor_has_target = false;   
  
-    int mxvp = g_MOUSE_POS_X                 + g_SCROLL_COORD_X;
-    int myvp = g_VIEW_HEIGHT - g_MOUSE_POS_Y + g_SCROLL_COORD_Y;
+    	int mxvp = g_MOUSE_POS_X                 + g_SCROLL_COORD_X;
+    	int myvp = g_VIEW_HEIGHT - g_MOUSE_POS_Y + g_SCROLL_COORD_Y;
 
-    bool mlb = g_MOUSE_LEFT_BUTTON;
-    bool mrb = g_MOUSE_RIGHT_BUTTON;
+    	bool mlb = g_MOUSE_LEFT_BUTTON;
+    	bool mrb = g_MOUSE_RIGHT_BUTTON;
 
+	if ( (pPLAYER->getAlive() == true) and (pPLAYER->getShip() != NULL) )
+	{
+    		pPLAYER->getShip()->selectWeapons();                   				       
+    		pPLAYER->getShip()->resetDeselectedWeaponTargets();
 
-    pPLAYER->getShip()->selectWeapons();                   				       
-    pPLAYER->getShip()->resetDeselectedWeaponTargets();
-
-        pPLAYER->getShip()->renderWeaponIcons();
-
-    if (cursor_has_target == false) 
-    {
-        for (unsigned int i = 0; i < visible_STAR_vec.size(); i++)
-        { 
-            float cursor_dist = distBetweenCenters(visible_STAR_vec[i]->getPoints()->getCenter(), mxvp, myvp);
-            if (cursor_dist < 10.0)
-            {   
-               cursor_has_target = true;
-
-               visible_STAR_vec[i]->updateInfo(); 
-               visible_STAR_vec[i]->renderInfo(); 
-
-               break; 
-            }
+        	pPLAYER->getShip()->renderWeaponIcons();
         }
-    }
 
 
+	/* NOTE: the intersection must be checked in order from small objects to huge */
+	
+
+    	if (cursor_has_target == false) 
+    	{
+        	for (unsigned int mi = 0; mi < visible_MINERAL_vec.size(); mi++)
+        	{ 
+            		float mineral_cursor_dist = distBetweenCenters(visible_MINERAL_vec[mi]->getPoints()->getCenter(), mxvp, myvp);
+            		if (mineral_cursor_dist < visible_MINERAL_vec[mi]->getCollisionRadius())
+            		{   
+               			cursor_has_target = true;
+
+               			visible_MINERAL_vec[mi]->updateInfo(); 
+               			visible_MINERAL_vec[mi]->renderInfo(); 
+
+				if ( (pPLAYER->getAlive() == true) and (pPLAYER->getShip() != NULL) )
+				{
+               				if (mlb == true)
+               				{
+                   				pPLAYER->getShip()->selectWeapons();
+                   				pPLAYER->getShip()->setWeaponsTarget(visible_MINERAL_vec[mi]);
+
+	       				}
+	       			}
+	       			
+               			break; 
+            		}
+       		}
+    	}
 
 
-    if (cursor_has_target == false) 
-    {
-        for (unsigned int mi = 0; mi < visible_MINERAL_vec.size(); mi++)
-        { 
-            float mineral_cursor_dist = distBetweenCenters(visible_MINERAL_vec[mi]->getPoints()->getCenter(), mxvp, myvp);
-            if (mineral_cursor_dist < 10.0)
-            {   
-               cursor_has_target = true;
+    	if (cursor_has_target == false) 
+    	{
+        	for (unsigned int ci = 0; ci < visible_CONTAINER_vec.size(); ci++)
+        	{ 
+            		float container_cursor_dist = distBetweenCenters(visible_CONTAINER_vec[ci]->getPoints()->getCenter(), mxvp, myvp);
+            		if (container_cursor_dist < visible_CONTAINER_vec[ci]->getCollisionRadius())
+            		{   
+               			cursor_has_target = true;
 
-               visible_MINERAL_vec[mi]->updateInfo(); 
-               visible_MINERAL_vec[mi]->renderInfo(); 
+               			visible_CONTAINER_vec[ci]->renderInfo(); 
 
-               if (mlb == true)
-               {
-                   pPLAYER->getShip()->selectWeapons();
-                   pPLAYER->getShip()->setWeaponsTarget(visible_MINERAL_vec[mi]);
-
-	       }
-               break; 
-            }
-        }
-    }
-
-
-    if (cursor_has_target == false) 
-    {
-        for (unsigned int ci = 0; ci < visible_CONTAINER_vec.size(); ci++)
-        { 
-            float container_cursor_dist = distBetweenCenters(visible_CONTAINER_vec[ci]->getPoints()->getCenter(), mxvp, myvp);
-            if (container_cursor_dist < 10.0)
-            {   
-               cursor_has_target = true;
-
-               visible_CONTAINER_vec[ci]->renderInfo(); 
-
-               if (mlb == true)
-               {
-                   pPLAYER->getShip()->selectWeapons();                   					    
-                   pPLAYER->getShip()->setWeaponsTarget(visible_CONTAINER_vec[ci]);
-               }
- 
-               break; 
-            }
-        }
-    }
+				if ( (pPLAYER->getAlive() == true) and (pPLAYER->getShip() != NULL) )
+				{
+               				if (mlb == true)
+               				{
+                   				pPLAYER->getShip()->selectWeapons();                   					    
+                   				pPLAYER->getShip()->setWeaponsTarget(visible_CONTAINER_vec[ci]);
+               				}
+ 				}
+ 					
+               			break; 
+            		}
+        	}
+    	}
 
 
-    if (cursor_has_target == false) 
-    {
-       for (unsigned int ki = 0; ki < visible_SHIP_vec.size(); ki++)
-       { 
-            float ship_cursor_dist = distBetweenCenters(visible_SHIP_vec[ki]->getPoints()->getCenter(), mxvp, myvp);
-            if (ship_cursor_dist < 50.0)
-            { 
-                cursor_has_target = true;
+    
+    	if (cursor_has_target == false) 
+    	{
+        	for (unsigned int ai = 0; ai < visible_ASTEROID_vec.size(); ai++)
+        	{ 
+            		float asteroid_cursor_dist = distBetweenCenters(visible_ASTEROID_vec[ai]->getPoints()->getCenter(), mxvp, myvp);
+            		if (asteroid_cursor_dist < visible_ASTEROID_vec[ai]->getCollisionRadius())
+            		{   
+                		cursor_has_target = true;
 
-                visible_SHIP_vec[ki]->renderInfo(); 
-                visible_SHIP_vec[ki]->renderWeaponIcons();
+                		visible_ASTEROID_vec[ai]->updateInfo(); 
+                		visible_ASTEROID_vec[ai]->renderInfo(); 
+
+				if ( (pPLAYER->getAlive() == true) and (pPLAYER->getShip() != NULL) )
+				{
+                			if (mlb == true)
+                			{ 
+                   				pPLAYER->getShip()->selectWeapons();                   					    
+                   				pPLAYER->getShip()->setWeaponsTarget(visible_ASTEROID_vec[ai]);
+                			} 
+                		}
+                		
+                		break; 
+            		}
+        	}
+    	}
+
+	if (cursor_has_target == false) 
+    	{
+       		for (unsigned int ki = 0; ki < visible_SHIP_vec.size(); ki++)
+       		{ 
+            		float ship_cursor_dist = distBetweenCenters(visible_SHIP_vec[ki]->getPoints()->getCenter(), mxvp, myvp);
+            		if (ship_cursor_dist < visible_SHIP_vec[ki]->getCollisionRadius())
+            		{ 
+                		cursor_has_target = true;
+
+                		visible_SHIP_vec[ki]->renderInfo(); 
+                		visible_SHIP_vec[ki]->renderWeaponIcons();
                 
-                if (mlb == true)
-                {
-                   pPLAYER->getShip()->selectWeapons();
-                   pPLAYER->getShip()->setWeaponsTarget(visible_SHIP_vec[ki]);
-		}
+				if ( (pPLAYER->getAlive() == true) and (pPLAYER->getShip() != NULL) )
+				{
+                			if (mlb == true)
+                			{
+                   				pPLAYER->getShip()->selectWeapons();
+                   				pPLAYER->getShip()->setWeaponsTarget(visible_SHIP_vec[ki]);
+					}
 
-                if (mrb == true)
-                {
-                   if ( pPLAYER->getPilot()->checkPossibilityToScan(visible_SHIP_vec[ki]) == true )
-                   {
-                        pPLAYER->getPilot()->setScanTarget(visible_SHIP_vec[ki]);
-                        pPLAYER->is_SCANNING = true;
-                        pSHIP_GUI->configure(pPLAYER->getPilot()->getScanShip(), false, false);   
-                   }
-                }
-
-                break; 
-            }
-        }
-    }
-
-    if (cursor_has_target == false) 
-    {
-        for (unsigned int ai = 0; ai < visible_ASTEROID_vec.size(); ai++)
-        { 
-            float asteroid_cursor_dist = distBetweenCenters(visible_ASTEROID_vec[ai]->getPoints()->getCenter(), mxvp, myvp);
-            if (asteroid_cursor_dist < 50.0)
-            {   
-                cursor_has_target = true;
-
-                visible_ASTEROID_vec[ai]->updateInfo(); 
-                visible_ASTEROID_vec[ai]->renderInfo(); 
-
-                if (mlb == true)
-                { 
-                   pPLAYER->getShip()->selectWeapons();                   					    
-                   pPLAYER->getShip()->setWeaponsTarget(visible_ASTEROID_vec[ai]);
-                } 
-                break; 
-            }
-        }
-    }
+                			if (mrb == true)
+                			{
+                   				if ( pPLAYER->getPilot()->checkPossibilityToScan(visible_SHIP_vec[ki]) == true )
+                   				{
+                        				pPLAYER->getPilot()->setScanTarget(visible_SHIP_vec[ki]);
+                        				pPLAYER->setScanFlag(true);
+                        				pSHIP_GUI->configure(pPLAYER->getPilot()->getScanShip(), false, false);   
+                   				}
+                			}
+				}
+				
+                		break; 
+            		}
+        	}
+    	}
+    	
 
 
+    	if (cursor_has_target == false) 
+    	{
+        	for (unsigned int pi = 0; pi < visible_PLANET_vec.size(); pi++)
+        	{ 
+            		float planet_cursor_dist = distBetweenCenters(visible_PLANET_vec[pi]->getPoints()->getCenter(), mxvp, myvp);
+            		if (planet_cursor_dist < visible_PLANET_vec[pi]->getCollisionRadius())
+            		{   
+                		cursor_has_target = true;
 
-    if (cursor_has_target == false) 
-    {
-        for (unsigned int pi = 0; pi < visible_PLANET_vec.size(); pi++)
-        { 
-            float planet_cursor_dist = distBetweenCenters(visible_PLANET_vec[pi]->getPoints()->getCenter(), mxvp, myvp);
-            if (planet_cursor_dist < 50.0)
-            {   
-                cursor_has_target = true;
+                		visible_PLANET_vec[pi]->updateInfo(); 
+                		visible_PLANET_vec[pi]->renderInfo(); 
 
-                visible_PLANET_vec[pi]->updateInfo(); 
-                visible_PLANET_vec[pi]->renderInfo(); 
-
-                if (mlb == true)
-                {
-                    //pPLAYER->getShip()->getNpc()->clearAIfuncSequence();
-                    pPLAYER->getShip()->getNavigator()->setTargetPlanet(visible_PLANET_vec[pi]);  
-                    //pPLAYER->getShip()->getNpc()->createDockingSequence();
-                }   
-
-                break; 
-            }
-        }
-    }
+				if ( (pPLAYER->getAlive() == true) and (pPLAYER->getShip() != NULL) )
+				{
+                			if (mlb == true)
+                			{
+                    				pPLAYER->getShip()->getNavigator()->setTargetPlanet(visible_PLANET_vec[pi]);  
+                			}   
+				}
+				
+                		break; 
+            		}
+        	}
+    	}
 
 
 
-    if (cursor_has_target == false) 
-    {
-        if (mlb == true)
-        {
-            pPLAYER->getShip()->getNavigator()->setStaticTargetCoords(vec2f(mxvp, myvp));  
-            //pPLAYER->getShip()->getNpc()->clearAIfuncSequence();
-        }
-    }     
+
+    	if (cursor_has_target == false) 
+    	{
+        	for (unsigned int si = 0; si < visible_STAR_vec.size(); si++)
+        	{ 
+            		float cursor_dist = distBetweenCenters(visible_STAR_vec[si]->getPoints()->getCenter(), mxvp, myvp);
+            		if (cursor_dist < visible_STAR_vec[si]->getCollisionRadius())
+            		{   
+               			cursor_has_target = true;
+
+               			visible_STAR_vec[si]->updateInfo(); 
+               			visible_STAR_vec[si]->renderInfo(); 
+
+               			break; 
+            		}
+        	}
+    	}
+
+
+
+    	if (cursor_has_target == false) 
+    	{
+		if ( (pPLAYER->getAlive() == true) and (pPLAYER->getShip() != NULL) )
+		{
+        		if (mlb == true)
+        		{
+            			pPLAYER->getShip()->getNavigator()->setStaticTargetCoords(vec2f(mxvp, myvp));  
+        		}
+        	}
+   	}     
 }
-
-
- //def mouseInteraction(self, timer, (mx, my), (vpCoordinate_x, vpCoordinate_y), (slot_1_SELECTED, slot_2_SELECTED, slot_3_SELECTED, slot_4_SELECTED, slot_5_SELECTED), show_RADAR, grapple_SELECTED, (lb, rb)):
-          //CURSOR_INTERSECT_OBJECT = False
-
-          //player_cursor_dist = lengthBetweenPoints((player.points.center[0], player.points.center[1]), (mxvp, myvp))
-          //if player_cursor_dist < player.points.w/4.0:
-             //CURSOR_INTERSECT_OBJECT = True
-             //player.renderInfo()
-
-             //if lb == True:
-                //player.in_INVERTAR = True
-
-          //#####################################################################################################
-          //if CURSOR_INTERSECT_OBJECT != True:
-
-             //for k in self.visible_SHIP_list:
-
-                 //if ship_cursor_dist < player.points.w/4.0:
-                    //CURSOR_INTERSECT_OBJECT = True
-                    //k.renderInfo()
-                    //k.calculateWayVisualisation()
-                    //k.renderDirection()
 
 
 
@@ -1305,17 +1358,17 @@ bool StarSystem :: removeNpc(int _id, int _race_id, int _subtype_id)
 }
 
 
-     bool StarSystem :: removeNpcFromTheListById(std::vector<Npc*>* pTo_npc_pList, int _id)
-     {
-          bool is_removed = false;
-          for (unsigned int ni = 0; ni < pTo_npc_pList->size(); ni++)
-              if ((*pTo_npc_pList)[ni]->getId() == _id)
-              {
-                 pTo_npc_pList->erase(pTo_npc_pList->begin() + ni);
-                 is_removed = true;
-              }
-          return is_removed; 
-     }
+bool StarSystem :: removeNpcFromTheListById(std::vector<Npc*>* pTo_npc_pList, int _id)
+{
+      	bool is_removed = false;
+      	for (unsigned int ni = 0; ni < pTo_npc_pList->size(); ni++)
+      	if ((*pTo_npc_pList)[ni]->getId() == _id)
+        {
+        	pTo_npc_pList->erase(pTo_npc_pList->begin() + ni);
+                is_removed = true;
+        }
+        return is_removed; 
+}
 
 //// ******* TRANSITION ******* 
 
@@ -1326,38 +1379,12 @@ void StarSystem :: questManager()
  	for (unsigned int i = 0; i<NPC_inSPACE_vec.size(); i++)
  	{
  		if (NPC_inSPACE_vec[i]->getQuestOb()->getExist() == false)
+ 		{
  			questGenerator(NPC_inSPACE_vec[i]);
+ 		}
  	}
 }
 
-//bool returnClosestInhabitedPlanet()
-//{
-          //planet_with_distance_tuples = []
-          //for p in self.PLANET_list:
-              //if p.kosmoport != None:
-                 //ship_planet_dist = lengthBetweenPoints((ship.points.center[0], ship.points.center[1]), (p.points.center[0], p.points.center[1]))
-                 //planet_with_distance_tuples.append((p, ship_planet_dist))
-
-          //planet_with_distance_tuples_sorted = sorted(planet_with_distance_tuples, key=itemgetter(1))
-          //if len(planet_with_distance_tuples_sorted) > 0:
-             //(p_closest, ship_planet_dist) = planet_with_distance_tuples_sorted[0]
-             //return p_closest
-          //else:
-             //return None
-
-      //def returnClosestUninhabitedPlanet(self, ship):
-          //planet_with_distance_tuples = []
-          //for p in self.PLANET_list:
-              //if p.kosmoport == None:
-                 //ship_planet_dist = lengthBetweenPoints((ship.points.center[0], ship.points.center[1]), (p.points.center[0], p.points.center[1]))
-                 //planet_with_distance_tuples.append((p, ship_planet_dist))
-
-          //planet_with_distance_tuples_sorted = sorted(planet_with_distance_tuples, key=itemgetter(1))
-          //if len(planet_with_distance_tuples_sorted) > 0:
-             //(p_closest, ship_planet_dist) = planet_with_distance_tuples_sorted[0]
-             //return p_closest
-          //else:
-             //return None
 
 
 

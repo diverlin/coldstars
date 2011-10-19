@@ -662,7 +662,7 @@ void ShipInternal :: mouseControl()
 						_container->otsec_slot->insertItem(pPLAYER->getCursor()->getSlot()->getGrappleEquipment()); 
 						pPLAYER->getCursor()->getSlot()->removeItem();
 					}
-					ship->getStarSystem()->addContainer(_container); 
+					ship->getStarSystem()->add(_container); 
 				} 
 			}
     		}

@@ -20,16 +20,46 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef PLAYER_H
 #define PLAYER_H
 
+class WeaponSelector
+{
+	public:
+    		bool slot_1;
+     		bool slot_2;
+     		bool slot_3;
+     		bool slot_4;
+     		bool slot_5;
+     	
+		void setAll(bool status)
+		{
+			slot_1 = status;
+     			slot_2 = status;
+     			slot_3 = status;
+     			slot_4 = status;
+     			slot_5 = status;
+		}
+};
 
 
+class ControlWord
+{
+	public:
+		bool scan;
+		bool grapple;
 
-class PlayerInstance 
+		bool worldmap;
+		bool ship_info;
+		bool planet_info;	
+		bool planet_orbits;
+		bool radar_radius;
+		
+		ControlWord();
+		~ControlWord();
+};
+
+
+class Player 
 {
    	public:
-    		bool is_SCANNING;
-     		bool show_WORLDMAP;
-
-    		
      	     	bool garpun_slot_SELECTED;
      
      		bool ships_info_SHOW;
@@ -38,29 +68,41 @@ class PlayerInstance
 
      		bool radar_range_SHOW;
      		
-    		PlayerInstance();
-     		~PlayerInstance();
+     		WeaponSelector weapon_selector;
+     		
+    		Player();
+     		~Player();
      
-          	void setActiveStarSystem(StarSystem*);
+          	void setStarSystem(StarSystem*);
+          	void setScanFlag(bool);
+          	void setWorldMapShowFlag(bool);
+          	
+          	bool getAlive() const;
+          	bool getWorldMapShowFlag() const;
+          	bool getScanFlag() const;
+          	
+          	Ship* getShip(); 	     
+		Npc* getPilot(); 	     
+		StarSystem* getStarSystem(); 	
+		Cursor* getCursor();         
+          	int getPlaceTypeId() const;
           		
-        	Ship* getShip();
-   		Npc* getPilot();
-     		StarSystem* getActiveStarSystem();
-     		Cursor* getCursor();
-     		     
-     		void bindShip(Ship*);
-     		void update_inSpace_inDynamic();
-                
-
-     	
+     		void update();     
+     		void bindNpc(Npc*);
+     		     	
      	private:
+     	   	bool is_alive;
+     	   		
      	     	int type_id, id;
+     	     	int place_type_id;
      	     		
      	     	Ship* ship;
      	     	Npc* npc;
      	     	
-     	     	StarSystem* ss_active;
+     	     	StarSystem* starsystem;
      	     	Cursor* cursor;
+     	     	
+     	     	ControlWord control;  
 };
 
 #endif 

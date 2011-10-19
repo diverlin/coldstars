@@ -46,13 +46,13 @@ int main()
     	pSHIP_GUI = new ShipInternal();
         pSHIP_GUI->createControlSkillButtons();
                 
-    	pPLAYER   = new PlayerInstance();    
-	pPLAYER->setActiveStarSystem(galaxy.getRandomStarSystem());      		
+    	pPLAYER   = new Player();    
+	pPLAYER->setStarSystem(galaxy.getRandomStarSystem());      		
       		
-    	Ship* pship = pPLAYER->getActiveStarSystem()->SHIP_inSPACE_vec[0];
-
-    	pPLAYER->bindShip(pship);
-    	pship->getPoints()->setCenter(-200,-200);
+    	Npc* pnpc = pPLAYER->getStarSystem()->NPC_inSPACE_vec[0];
+    	pPLAYER->bindNpc(pnpc);
+    	pnpc->getShip()->getPoints()->setCenter(-800,-800);
+    	//pnpc->getShip()->korpus_data.armor = 20000; // debug
     	//// player
 
     	float fps;
@@ -62,43 +62,46 @@ int main()
 
     	g_TIMER = -1; 
     	// GAME LOOP
-    	while (g_APP.IsOpened() && pPLAYER->getPilot()->getShip()->getAlive())
+    	while (g_APP.IsOpened())
     	{    
-       		/////////// AUTOTURN //////////////////
+       		///////// AUTOTURN //////////////////
        		if (g_TIMER < -50)
        		{  
        			g_TIMER = TURN_TIME;
            		TURN_COUNT++;
            		printf("        *** auto turn END was activated, turn num = %i\n", TURN_COUNT);
        		}
-
-       		if (pPLAYER->getPilot()->getPlaceTypeId() == SPACE_ID)
+		
+		pPLAYER->update();
+		
+       		if (pPLAYER->getPlaceTypeId() == SPACE_ID)
        		{  
+       		        //printf("//////////// in SPACE ///////////////\n");
            		//////////// in SPACE ///////////////
            		keyEvents.update();
 
        			galaxy.update(g_TIMER);
 
-           		pPLAYER->getActiveStarSystem()->render();
+           		pPLAYER->getStarSystem()->render();
  
                         
                         if (g_TIMER < 0)  
                         {
-                                if ( (pPLAYER->is_SCANNING == false) && (pPLAYER->show_WORLDMAP == false) )
+                                if ( (pPLAYER->getScanFlag() == false) && (pPLAYER->getWorldMapShowFlag() == false) )
                                 {
-                                        pPLAYER->getActiveStarSystem()->mouseControl();  // improove to exclude all render calls
+                                        pPLAYER->getStarSystem()->mouseControl();  // improove to exclude all render calls
                                 }
                         }
 
            		//////////// SCAN ///////////////
-           		if ( pPLAYER->is_SCANNING == true )
+           		if ( pPLAYER->getScanFlag() == true )
                         {                                
               			pSHIP_GUI->update();
                                 pSHIP_GUI->render();
                         }
 
            		/////////// WORLDMAP ///////////
-           		if ( pPLAYER->show_WORLDMAP == true )  
+           		if ( pPLAYER->getWorldMapShowFlag() == true )  
            		{
                			spaceMap.update();   
                			spaceMap.render(false);   
@@ -109,7 +112,7 @@ int main()
        		}
 
 
-       		if (pPLAYER->getPilot()->getPlaceTypeId() == KOSMOPORT_TYPE_ID)
+       		if (pPLAYER->getPlaceTypeId() == KOSMOPORT_TYPE_ID)
        		{
            		keyEvents.update2();
           
@@ -118,7 +121,7 @@ int main()
                			pPLAYER->getPilot()->getKosmoport()->getAngar()->update();                                
                			pPLAYER->getPilot()->getKosmoport()->getAngar()->render();
                			
-                                if (pPLAYER->is_SCANNING == true) 
+                                if (pPLAYER->getScanFlag() == true) 
                                 { 
                                         pSHIP_GUI->update();
                                         pSHIP_GUI->render();

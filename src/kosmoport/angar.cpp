@@ -114,7 +114,7 @@ void Angar :: mouseControl()
                                 if (landingArea_pList[i]->getBusyFlag() == true)
                                 {
                                         pPLAYER->getPilot()->setScanTarget(landingArea_pList[i]->getShip());
-                                        pPLAYER->is_SCANNING = true;
+                                        pPLAYER->setScanFlag(true);
                                         pSHIP_GUI->configure(pPLAYER->getPilot()->getScanShip(), false, false); 
                                 }
                         }

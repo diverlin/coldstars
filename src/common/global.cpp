@@ -16,7 +16,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #ifndef GLOBAL_H
 #define GLOBAL_H
         
@@ -28,15 +27,14 @@ int g_FPS_LIMIT = 60;
 bool g_VERT_SYNC = true;
 
 // scrolling
-int g_SCROLL_COORD_X = 0;
-int g_SCROLL_COORD_Y = 0;
+//int g_SCROLL_COORD_X = 0;
+//int g_SCROLL_COORD_Y = 0;
 
 int g_SCROLL_VELOCITY_MAX = 20;
 int g_SCROLL_VELOCITY_STEP = 1;
 
 unsigned int g_MOUSE_POS_X;
 unsigned int g_MOUSE_POS_Y;
-
 
 bool g_MOUSE_LEFT_BUTTON;  
 bool g_MOUSE_RIGHT_BUTTON; 
@@ -45,22 +43,20 @@ int g_TIMER;
 int TURN_TIME = 150;  //turn time, depends on game fps
 int TURN_COUNT = 0; 
          
-sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.4.1 (SFML/C++)");
+sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.4.2 (SFML/C++)");
 sf::Font g_FONT;
 
 sf::Clock g_CLOCK;
 sf::Event g_EVENT;
 
-class ObjMeshInstance;
 ObjMeshInstance* pTo_SPHERE_MESH; 
 ObjMeshInstance* pTo_DEFORMED_SPHERE_MESH;
 
 //ModelOBJ            g_model;
 
-class PlayerInstance;
-PlayerInstance* pPLAYER;
 
-class ShipInternal;
+Player* pPLAYER;
+
 ShipInternal* pSHIP_GUI;
 
 GLuint g_BLACK2ALPHA_PROGRAM;
@@ -74,13 +70,25 @@ GLuint g_MULTITEX_PROGRAM;
 
 int USE_MODERN_HW = true;
 
-class FBO;
 FBO* g_FBO0;
 FBO* g_FBO1;
 FBO* g_FBO2;
 FBO* g_FBO3;
 
-class BloomEffect;
 BloomEffect* g_BLOOM;
+
+
+SimpleIdGenerator   g_STARSYSTEM_ID_GENERATOR  = SimpleIdGenerator();
+SimpleIdGenerator   g_CONTAINER_ID_GENERATOR  = SimpleIdGenerator();
+SimpleIdGenerator   g_PLANET_ID_GENERATOR  = SimpleIdGenerator();
+SimpleIdGenerator   g_MINERAL_ID_GENERATOR  = SimpleIdGenerator();
+SimpleIdGenerator   g_EQUIPMENT_ID_GENERATOR  = SimpleIdGenerator();
+SimpleIdGenerator   g_MODULE_ID_GENERATOR  = SimpleIdGenerator();
+SimpleIdGenerator   g_SHIP_ID_GENERATOR  = SimpleIdGenerator();
+SimpleIdGenerator   g_PLAYER_ID_GENERATOR  = SimpleIdGenerator();
+SimpleIdGenerator   g_NPC_ID_GENERATOR  = SimpleIdGenerator();
+
+SimpleIdGenerator   g_TEXTURE_ID_GENERATOR = SimpleIdGenerator();
+DetaliedIdGenerator g_TYPE_ID_GENERATOR    = DetaliedIdGenerator(); 
 
 #endif 

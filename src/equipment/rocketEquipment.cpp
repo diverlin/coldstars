@@ -137,7 +137,7 @@ void RocketEquipment :: fireEvent()
     	RocketBullet* rocket1 = rocketGenerator(data_bullet, slot);
           
     	//r1.points.setCenter(l_owner.points.center[0]+15, l_owner.points.center[1])
-    	slot->getShip()->getStarSystem()->addRocket(rocket1);
+    	slot->getShip()->getStarSystem()->add(rocket1);
 
     	//r2 = rocketBulletInstance(self.bullet_texOb, l_owner, l_target, self.damage,  self.bullet_size, self.bullet_armor, self.bullet_speed_init, self.bullet_speed_max, self.bullet_d_speed, self.bullet_live_time, self.bullet_angular_speed)
     	//r2.points.setCenter(l_owner.points.center[0]-15, l_owner.points.center[1])

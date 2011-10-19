@@ -37,7 +37,7 @@ TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, std::ve
     //
 
     type_id = _type_id; 
-    id      = g_TEXTURE_ID_GENERATOR.returnNextId();
+    id      = g_TEXTURE_ID_GENERATOR.getNextId();
     
     path      = _path;
     use_alpha = _use_alpha;

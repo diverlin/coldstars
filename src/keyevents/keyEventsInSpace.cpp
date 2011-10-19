@@ -17,23 +17,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "keyEventsInSpace.hpp"
-
 KeyEventsInSpace :: KeyEventsInSpace()
 {
-    // KEYBOARD INPUT
-    keyboardLeftPressed  = false;
-    keyboardRightPressed = false;    
-    keyboardUpPressed    = false;    
-    keyboardDownPressed  = false;  
+    	// KEYBOARD INPUT
+    	keyboardLeftPressed  = false;
+    	keyboardRightPressed = false;    
+    	keyboardUpPressed    = false;    
+    	keyboardDownPressed  = false;  
     
-    scroll_accel_x = 0; 
-    scroll_accel_y = 0;  
+    	scroll_accel_x = 0; 
+    	scroll_accel_y = 0;  
     
-    //self.RUNNING = True
-    //self.UPDATE = UPDATE
+    	//self.RUNNING = True
+    	//self.UPDATE = UPDATE
 
-    //reset_turn_timer = false;
+    	//reset_turn_timer = false;
 }
 
 
@@ -76,10 +74,9 @@ void KeyEventsInSpace :: getSimpleInputs()
            		{
            			case sf::Key::Escape:
                			{
-              				if (pPLAYER->is_SCANNING == true)
+              				if (pPLAYER->getScanFlag() == true)
               				{
-                		  		pPLAYER->is_SCANNING = false;
-                		  		pPLAYER->getPilot()->removeScanTarget(); 
+                		  		pPLAYER->setScanFlag(false);
               				}
               				break;
                 		}
@@ -96,45 +93,45 @@ void KeyEventsInSpace :: getSimpleInputs()
          	  		// WEAPON SLOTS
            			case sf::Key::Num1:
                		 	{
-              				if (pPLAYER->getShip()->weapon_selector.slot_1 == false)
+              				if (pPLAYER->weapon_selector.slot_1 == false)
               				{
-                		  		pPLAYER->getShip()->weapon_selector.slot_1 = true;
-                		  		printf("pTo_PLAYER->weapon_slot_1_SELECTED -> YES\n");
+                		  		pPLAYER->weapon_selector.slot_1 = true;
+                		  		printf("pPLAYER->weapon slot 1 -> YES\n");
               				}
               				else
               				{
-                		  		pPLAYER->getShip()->weapon_selector.slot_1 = false;
-                		  		printf("pTo_PLAYER->weapon_slot_1_SELECTED -> NO\n");
+                		  		pPLAYER->weapon_selector.slot_1 = false;
+                		  		printf("pPLAYER->weapon slot 1 -> NO\n");
               				}
   					break;
                 		}
 
            			case sf::Key::Num2:
                 		{
-              				if (pPLAYER->getShip()->weapon_selector.slot_2 == false)
+              				if (pPLAYER->weapon_selector.slot_2 == false)
               				{
-                	  			pPLAYER->getShip()->weapon_selector.slot_2 = true;
-                	  			printf("pTo_PLAYER->weapon_slot_2_SELECTED -> YES\n");
+                	  			pPLAYER->weapon_selector.slot_2 = true;
+                	  			printf("pPLAYER->weapon slot 2 -> YES\n");
               				}
               				else
               				{
-                				pPLAYER->getShip()->weapon_selector.slot_2 = false;
-                	  			printf("pTo_PLAYER->weapon_slot_2_SELECTED -> NO\n");
+                				pPLAYER->weapon_selector.slot_2 = false;
+                	  			printf("pPLAYER->weapon slot 2 -> NO\n");
               				}
                 	       		 break;
                 		}
 
            			case sf::Key::Num3:
                		 	{
-              				if (pPLAYER->getShip()->weapon_selector.slot_3 == false)
+              				if (pPLAYER->weapon_selector.slot_3 == false)
               				{
-                		  		pPLAYER->getShip()->weapon_selector.slot_3 = true;
-                		  		printf("pTo_PLAYER->weapon_slot_3_SELECTED -> YES\n");
+                		  		pPLAYER->weapon_selector.slot_3 = true;
+                		  		printf("pPLAYER->weapon slot 3 -> YES\n");
               				}
               				else
               				{
-                		  		pPLAYER->getShip()->weapon_selector.slot_3 = false;
-                		 	 	printf("pTo_PLAYER->weapon_slot_3_SELECTED -> NO\n");
+                		  		pPLAYER->weapon_selector.slot_3 = false;
+                		 	 	printf("pPLAYER->weapon slot 3 -> NO\n");
               				}
                 		     	break;
                 		}
@@ -142,15 +139,15 @@ void KeyEventsInSpace :: getSimpleInputs()
 
           			case sf::Key::Num4:
                 		{
-              				if (pPLAYER->getShip()->weapon_selector.slot_4 == false)
+              				if (pPLAYER->weapon_selector.slot_4 == false)
               				{
-                		 		 pPLAYER->getShip()->weapon_selector.slot_4 = true;
-                		 		 printf("pTo_PLAYER->weapon_slot_4_SELECTED -> YES\n");
+                		 		 pPLAYER->weapon_selector.slot_4 = true;
+                		 		 printf("pPLAYER->weapon slot 4 -> YES\n");
              				}
              				else
              				{
-                				 pPLAYER->getShip()->weapon_selector.slot_4 = false;
-          				         printf("pTo_PLAYER->weapon_slot_4_SELECTED -> NO\n");
+                				 pPLAYER->weapon_selector.slot_4 = false;
+          				         printf("pPLAYER->weapon slot 4 -> NO\n");
               				}
  					break;
                 		}	
@@ -158,15 +155,15 @@ void KeyEventsInSpace :: getSimpleInputs()
 
            			case sf::Key::Num5:
                 		{
-                			if (pPLAYER->getShip()->weapon_selector.slot_5 == false)
+                			if (pPLAYER->weapon_selector.slot_5 == false)
              				{
-                		  		pPLAYER->getShip()->weapon_selector.slot_5 = true;
-                		  		printf("pTo_PLAYER->weapon_slot_5_SELECTED -> YES\n");
+                		  		pPLAYER->weapon_selector.slot_5 = true;
+                		  		printf("pPLAYER->weapon slot 5 -> YES\n");
              				}
              				else
               				{
-                		  		pPLAYER->getShip()->weapon_selector.slot_5 = false;
-                		  		printf("pTo_PLAYER->weapon_slot_5_SELECTED -> NO\n");
+                		  		pPLAYER->weapon_selector.slot_5 = false;
+                		  		printf("pPLAYER->weapon slot 5 -> NO\n");
               				}
                		 	        break;
  				}
@@ -174,23 +171,23 @@ void KeyEventsInSpace :: getSimpleInputs()
 
            			case sf::Key::A:
                 		{ 
-	        		      	if ( (pPLAYER->getShip()->weapon_selector.slot_1 == true) && (pPLAYER->getShip()->weapon_selector.slot_2 == true) && (pPLAYER->getShip()->weapon_selector.slot_3 == true) && (pPLAYER->getShip()->weapon_selector.slot_4 == true) && (pPLAYER->getShip()->weapon_selector.slot_5 == true) )
+	        		      	if ( (pPLAYER->weapon_selector.slot_1 == true) && (pPLAYER->weapon_selector.slot_2 == true) && (pPLAYER->weapon_selector.slot_3 == true) && (pPLAYER->weapon_selector.slot_4 == true) && (pPLAYER->weapon_selector.slot_5 == true) )
               				{
-                		  		pPLAYER->getShip()->weapon_selector.slot_1 = false;
-                		  		pPLAYER->getShip()->weapon_selector.slot_2 = false;
-                		  		pPLAYER->getShip()->weapon_selector.slot_3 = false;
-                		  		pPLAYER->getShip()->weapon_selector.slot_4 = false;
-                		  		pPLAYER->getShip()->weapon_selector.slot_5 = false;
-                		  		printf("pTo_PLAYER->getShip()->weapon slot 1,2,3,4,5 -> NO, targets are reset\n");
+                		  		pPLAYER->weapon_selector.slot_1 = false;
+                		  		pPLAYER->weapon_selector.slot_2 = false;
+                		  		pPLAYER->weapon_selector.slot_3 = false;
+                		  		pPLAYER->weapon_selector.slot_4 = false;
+                		  		pPLAYER->weapon_selector.slot_5 = false;
+                		  		printf("pPLAYER->weapon slot 1,2,3,4,5 -> NO\n");
               				}
               				else
               				{
-                		  		pPLAYER->getShip()->weapon_selector.slot_1 = true;
-                		  		pPLAYER->getShip()->weapon_selector.slot_2 = true;
-                		  		pPLAYER->getShip()->weapon_selector.slot_3 = true;
-                		  		pPLAYER->getShip()->weapon_selector.slot_4 = true;
-                		  		pPLAYER->getShip()->weapon_selector.slot_5 = true;
-                		  		printf("pTo_PLAYER->weapon slot 1,2,3,4,5 -> YES\n");
+                		  		pPLAYER->weapon_selector.slot_1 = true;
+                		  		pPLAYER->weapon_selector.slot_2 = true;
+                		  		pPLAYER->weapon_selector.slot_3 = true;
+                		  		pPLAYER->weapon_selector.slot_4 = true;
+                		  		pPLAYER->weapon_selector.slot_5 = true;
+                		  		printf("pPLAYER->weapon slot 1,2,3,4,5 -> YES\n");
               				}
                 		        break;
 				}
@@ -278,36 +275,36 @@ void KeyEventsInSpace :: scrollCamera()
         // SCROLLING X AXIS         
         if(keyboardLeftPressed)
         {
-            scroll_accel_x -= g_SCROLL_VELOCITY_STEP;
-            if (abs(scroll_accel_x) > abs(g_SCROLL_VELOCITY_MAX))
-            {
-                scroll_accel_x = -g_SCROLL_VELOCITY_MAX;
-            }
+            	scroll_accel_x -= g_SCROLL_VELOCITY_STEP;
+            	if (abs(scroll_accel_x) > abs(g_SCROLL_VELOCITY_MAX))
+            	{
+                	scroll_accel_x = -g_SCROLL_VELOCITY_MAX;
+            	}
         }
         
         if(keyboardRightPressed)
         {
-            scroll_accel_x += g_SCROLL_VELOCITY_STEP;
-            if (abs(scroll_accel_x) > abs(g_SCROLL_VELOCITY_MAX))
-            {
-                scroll_accel_x = g_SCROLL_VELOCITY_MAX;
-            }
+            	scroll_accel_x += g_SCROLL_VELOCITY_STEP;
+            	if (abs(scroll_accel_x) > abs(g_SCROLL_VELOCITY_MAX))
+            	{
+                	scroll_accel_x = g_SCROLL_VELOCITY_MAX;
+            	}
         }
         
         
         if(!keyboardLeftPressed && !keyboardRightPressed)
         {
-            if (scroll_accel_x != 0)
-            {
-                if (scroll_accel_x > 0)
-                {
-                    scroll_accel_x -= g_SCROLL_VELOCITY_STEP; 
-                } 
-                else if (scroll_accel_x < 0)
-                {
-                    scroll_accel_x += g_SCROLL_VELOCITY_STEP; 
-                }   
-            }
+            	if (scroll_accel_x != 0)
+            	{
+                	if (scroll_accel_x > 0)
+                	{
+                    		scroll_accel_x -= g_SCROLL_VELOCITY_STEP; 
+                	} 
+                	else if (scroll_accel_x < 0)
+                	{
+                    		scroll_accel_x += g_SCROLL_VELOCITY_STEP; 
+                	}   
+            	}
         }
 
 
@@ -315,36 +312,36 @@ void KeyEventsInSpace :: scrollCamera()
         // SCROLLING Y AXIS         
         if(keyboardUpPressed)
         {
-            scroll_accel_y += g_SCROLL_VELOCITY_STEP;
-            if (abs(scroll_accel_y) > abs(g_SCROLL_VELOCITY_MAX))
-            {
-                scroll_accel_y = g_SCROLL_VELOCITY_MAX;
-            }
+            	scroll_accel_y += g_SCROLL_VELOCITY_STEP;
+            	if (abs(scroll_accel_y) > abs(g_SCROLL_VELOCITY_MAX))
+            	{
+                	scroll_accel_y = g_SCROLL_VELOCITY_MAX;
+            	}
         }
         
         if(keyboardDownPressed)
         {
-            scroll_accel_y -= g_SCROLL_VELOCITY_STEP;
-            if (abs(scroll_accel_y) > abs(g_SCROLL_VELOCITY_MAX))
-            {
-                scroll_accel_y = -g_SCROLL_VELOCITY_MAX;
-            }
+            	scroll_accel_y -= g_SCROLL_VELOCITY_STEP;
+            	if (abs(scroll_accel_y) > abs(g_SCROLL_VELOCITY_MAX))
+            	{
+                	scroll_accel_y = -g_SCROLL_VELOCITY_MAX;
+            	}
         }
         
         
         if(!keyboardUpPressed && !keyboardDownPressed)
         {
-            if (scroll_accel_y != 0)
-            {
-                if (scroll_accel_y > 0)
-                {
-                    scroll_accel_y -= g_SCROLL_VELOCITY_STEP; 
-                } 
-                else if (scroll_accel_y < 0)
-                {
-                    scroll_accel_y += g_SCROLL_VELOCITY_STEP; 
-                }   
-            }
+            	if (scroll_accel_y != 0)
+            	{
+                	if (scroll_accel_y > 0)
+                	{
+                    		scroll_accel_y -= g_SCROLL_VELOCITY_STEP; 
+                	} 
+                	else if (scroll_accel_y < 0)
+                	{
+                    		scroll_accel_y += g_SCROLL_VELOCITY_STEP; 
+                	}   
+            	}
         }
       
         g_SCROLL_COORD_X += scroll_accel_x;

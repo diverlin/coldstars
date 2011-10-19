@@ -33,7 +33,7 @@ void CommonForPlanet :: CommonForPlanet_init(TextureOb* _texOb,
 {
 	data = _data;
 
-        id = g_ENTITY_ID_GENERATOR.returnNextId();
+        id = g_PLANET_ID_GENERATOR.getNextId();
               
         texOb = _texOb;
         mesh  = _mesh; 

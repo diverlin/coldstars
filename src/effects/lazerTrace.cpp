@@ -51,7 +51,6 @@ LazerTraceEffect :: LazerTraceEffect(TextureOb* _texOb, TextureOb* _texOb_partic
        	pTo_end_pos_y = _pTo_end_pos_y;
 
        	damage_effect = NULL;
-       	starsystem = NULL;
        
        	updateAngleAndLen();
 }

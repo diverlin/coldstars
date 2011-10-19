@@ -53,7 +53,7 @@ bool SpaceMap :: update()
                       			{
                       				if (lmb == true)
                       				{ 
-                          				pPLAYER->setActiveStarSystem(galaxy->STARSYSTEM_pList[si]);    // debug
+                          				pPLAYER->setStarSystem(galaxy->STARSYSTEM_pList[si]);    // debug
                           				//player.hyperJumpPreparation(ss)
                           				//#player.calculateTraceToCoord((player.jump_pos_x, player.jump_pos_y))
                           				printf("ss_id = %i\n", galaxy->STARSYSTEM_pList[si]->getId());    // debug

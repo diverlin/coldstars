@@ -46,7 +46,7 @@ class QuestObject
 		bool exist;
 		
 		int action_id;
-		int type_id;
+		int ob_type_id;
 		
 		Npc* npc;
 		Planet* planet;
