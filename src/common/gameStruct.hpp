@@ -41,8 +41,10 @@ struct Color4i
    	int a;
 };
 
-struct See
+struct VisionStatus
 {
+	VisionStatus();
+	
    	bool ASTEROID;
    	bool CONTAINER;
    	bool MINERAL;
@@ -58,6 +60,8 @@ struct See
 
 struct NeedsToDo
 {
+	NeedsToDo();
+
   	bool REPAIR;
   	bool CHARGE;
    	bool GETBULLETS;
@@ -65,9 +69,11 @@ struct NeedsToDo
    	bool SELL;
 };
 
-struct Abilities
+struct AbilitiesStatus
 {
-        /* this structure explain hat feature are avaliable for ship */ 
+        /* this structure shows what feature are avaliable for ship */
+        AbilitiesStatus();
+         
         bool RADAR;
    	bool DRIVE;
    	bool HJUMP;
@@ -83,22 +89,47 @@ struct Abilities
 
 struct KorpusData
 {
-        /* this data depends only on korpus and cannot be changed by artefacts/items */
-        unsigned int protection; 
+        /* this data depends only on korpus and cannot be changed by artefacts/items */        
+        KorpusData();
+        
         unsigned int space;
         unsigned int armor;
-        unsigned int temperature;   //???
+        unsigned int protection; 
+        unsigned int temperature;   
         
         unsigned int price;
         
-        unsigned int size_id;
         float collision_radius;
         
         bool inhibit_GRAPPLE;
         bool render_TURRELS;
+        
         unsigned int weapon_slot_num;
 };
 
+struct ShipPropetries
+{       
+        /* this data is changed during game play, the propetries depends on many factors */
+        ShipPropetries();
+        
+        int armor;
+        int protection;
+        int radius;
+        int mass;   // depends on all items mass
+        int speed;  // depends on mass and drive
+
+        int hyper;  // depends on drive and bak
+        int repair; // depends on droid
+        int freeze; // depends on freezer
+        int scan;   // depends on scaner
+        
+        int energy;
+        int temperature;
+        
+        // simplification
+        int average_damage;
+        int average_fire_radius;
+};
 
 struct LifeData
 {
@@ -113,8 +144,11 @@ struct LifeData
         bool is_explosed;
 };
 
+
 struct IdData  
 {
+	IdData();
+	
 	int id;
 	int type_id;
 	int subtype_id;
@@ -124,6 +158,8 @@ struct IdData
  
 struct ParticleData
 {
+	ParticleData();
+	
       	float alpha_start;
       	float alpha_end;
       	float d_alpha;
@@ -142,6 +178,8 @@ struct ParticleData
 
 struct EquipmentCommonData 
 {
+	EquipmentCommonData();
+	
 	unsigned int modules_num_max; 
 	unsigned int condition_max; 
 	unsigned int deterioration_rate;
@@ -154,20 +192,15 @@ struct EquipmentCommonData
 class WeaponSelector
 {
 	public:
+		WeaponSelector();
+		
     		bool slot_1;
      		bool slot_2;
      		bool slot_3;
      		bool slot_4;
      		bool slot_5;
      	
-		void setAll(bool status)
-		{
-			slot_1 = status;
-     			slot_2 = status;
-     			slot_3 = status;
-     			slot_4 = status;
-     			slot_5 = status;
-		}
+		void setAll(bool);
 };
 
 

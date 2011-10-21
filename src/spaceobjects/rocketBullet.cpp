@@ -245,7 +245,7 @@ RocketBullet* rocketGenerator(BulletData data_bullet, ItemSlot* slot)
         data_life.armor = data_bullet.armor;        
 
     	RocketBullet* rocket; 
-    	if (slot->getShip()->korpus_data.render_TURRELS == true)
+    	if (slot->getShip()->data_korpus.render_TURRELS == true)
     	{
         	rocket = new RocketBullet(data_id,
         			          data_life,		

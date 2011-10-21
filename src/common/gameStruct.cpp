@@ -34,17 +34,152 @@ Color4i :: Color4i()
 }
 
 
+VisionStatus :: VisionStatus()
+{
+   	ASTEROID  = false;
+	CONTAINER = false;
+   	MINERAL   = false;
+
+   	RANGER   = false;
+   	WARRIOR  = false;
+   	TRADER   = false;  
+   	PIRAT    = false;
+   	DIPLOMAT = false;
+}
+
+
+
+NeedsToDo :: NeedsToDo()
+{
+  	REPAIR     = false;
+  	CHARGE     = false;
+   	GETBULLETS = false;
+   	BUY        = false;
+   	SELL       = false;
+};
+
+
+AbilitiesStatus :: AbilitiesStatus()
+{
+        RADAR    = false;
+   	DRIVE    = false;
+   	HJUMP    = false;
+   	ENERGIZE = false;
+   	PROTECT  = false;
+   	REPAIR   = false;
+   	FREEZE   = false;
+   	GRAB     = false;
+   	SCAN     = false;
+   	FIRE     = false;
+};
+
+
+KorpusData :: KorpusData()
+{        
+        space       = 0;
+        armor       = 0;
+        protection  = 0; 
+        temperature = 0;   
+        
+        price = 0;
+        
+        collision_radius = 0.0;
+        
+        inhibit_GRAPPLE = false;
+        render_TURRELS = false;
+        
+        weapon_slot_num = 0;
+}
+
+
+
+ShipPropetries :: ShipPropetries()
+{       
+        armor       = 0;
+        protection  = 0;
+        radius      = 0;
+        mass        = 0;   // depends on all items mass
+        speed       = 0;  // depends on mass and drive
+
+        hyper       = 0;  // depends on drive and bak
+        repair      = 0; // depends on droid
+        freeze      = 0; // depends on freezer
+        scan        = 0;   // depends on scaner
+        
+        energy      = 0;
+        temperature = 0;
+        
+        average_damage = 0;
+        average_fire_radius = 0;
+}
+
 
 LifeData :: LifeData()
 {
         is_alive = true;
-        int armor = 1;
+        armor = 1;
         	
-        bool is_dying = false;
-        int dying_time = 0;
+        is_dying = false;
+        dying_time = 0;
         
-        bool is_explosed = false;
+        is_explosed = false;
 }	
+
+
+IdData :: IdData()
+{
+	id         = -1;
+	type_id    = -1;
+	subtype_id = -1;
+}
+
+
+ParticleData :: ParticleData()
+{	
+      	alpha_start = 0.0;
+      	alpha_end   = 0.0;
+      	d_alpha     = 0.0;
+      		
+      	size_start = 0.0;
+      	size_end   = 0.0;
+        d_size     = 0.0;
+
+      	velocity_start = 0.0;
+      	velocity_end   = 0.0;
+	d_velocity     = 0.0;
+}
+	
+	
+EquipmentCommonData :: EquipmentCommonData()
+{	
+	modules_num_max    = 0; 
+	condition_max      = 0; 
+	deterioration_rate = 0;
+	mass               = 0; 
+}	
+
+
+
+
+WeaponSelector :: WeaponSelector()
+{
+	slot_1 = false;
+     	slot_2 = false;
+     	slot_3 = false;
+     	slot_4 = false;
+     	slot_5 = false;
+}
+
+     	
+void WeaponSelector :: setAll(bool _status)
+{
+	slot_1 = _status;
+     	slot_2 = _status;
+     	slot_3 = _status;
+     	slot_4 = _status;
+     	slot_5 = _status;
+}
+
 
 
 ControlWord :: ControlWord()

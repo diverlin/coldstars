@@ -17,6 +17,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
+bool taskGenerator(Npc* npc)
+{
+	if ( (npc->getShip()->needsToDo.REPAIR == true) and (npc->getTaskOb()->getActionId() != LANDING_TASK_ID) )
+	{
+        	Planet* _target_planet = npc->getPlanetForDocking();  // depending on purpouse
+		npc->getTaskOb()->setTask(_target_planet, LANDING_TASK_ID);
+		
+		printf("trololo\n");
+		return true;
+	}
+	
+	return false;
+}
+
+
 bool questGenerator(Npc* npc)
 {
 	Npc* target_npc = NULL;

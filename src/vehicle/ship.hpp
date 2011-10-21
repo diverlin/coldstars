@@ -21,35 +21,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define SHIP_H
 
 
-struct ShipPropetries
-{       
-        // this data is changed during game play, the propetries depends on many factors
-        int armor;
-        int protection;
-        int radius;
-        int mass;   // depends on all items mass
-        int speed;  // depends on mass and drive
-
-        int hyper;  // depends on drive and bak
-        int repair; // depends on droid
-        int freeze; // depends on freezer
-        int scan;   // depends on scaner
-        
-        int energy;
-        int temperature;
-        
-        // simplification
-        int average_damage;
-        int average_fire_radius;
-};
-
-    
-
-
-
-     		
-
-
 class Ship
 {   
     	public:
@@ -97,18 +68,18 @@ class Ship
         
         	ItemSlot gate_slot;
 
-        	Abilities ableTo;
+        	AbilitiesStatus ableTo;
         	NeedsToDo needsToDo;
                 ShipPropetries propetries;
-                KorpusData korpus_data;
+                KorpusData data_korpus;
                 
 
-        	Ship(TextureOb* _texOb, KorpusData _korpusData);
+        	Ship(TextureOb*, LifeData, IdData, KorpusData);
         	~Ship();    
 
          	void updatePosition();
                 
-        	void reloadAllWeapons();        
+        	void reloadWeapons();        
      		void selectWeapons();                                     
                      
                 template <typename TARGET_TYPE>      
@@ -126,8 +97,9 @@ class Ship
         	void hit_TRUE(unsigned int _damage);
         	void hit_FALSE(unsigned int _damage);
 
-        	void death(); 
-
+        	void death_TRUE(); 
+        	void death_FALSE(); 
+        	
         	void updateAllStuff();
              		void calculateMass();
              		void updateFireAbility();
@@ -163,12 +135,9 @@ class Ship
         	WeaponSelector weapon_selector; 
           
         private:
-                bool is_alive, is_dying, is_explosed;
-                int type_id, id;
-                
-                int dying_time;
+        	LifeData data_life;
+        	IdData   data_id;
                         
-                float angle_inD;
                 Points points;
 		InfoTable info;
 		

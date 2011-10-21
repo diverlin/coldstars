@@ -88,7 +88,6 @@ void StarSystem :: update_TRUE(int timer)
 			removeAllReferencesToDeadObjects();
 			garbage.clear(); 
 	    		
-	    		questManager();
     			updateEntities_inStatic();     			
 
     			calculation_per_turn_allowed = false;
@@ -335,6 +334,7 @@ void StarSystem :: updateEntities_inStatic()
      	// called once per TURN
      	for (unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
      	{
+     		NPC_inSPACE_vec[ni]->getShip()->reloadWeapons();
      		if (NPC_inSPACE_vec[ni]->getControlledByPlayer() == false)
      		{
      			NPC_inSPACE_vec[ni]->aiSimulation();
@@ -1388,27 +1388,12 @@ bool StarSystem :: removeNpcFromTheListById(std::vector<Npc*>* pTo_npc_pList, in
 
 
 
-void StarSystem :: questManager()
-{
- 	for (unsigned int i = 0; i<NPC_inSPACE_vec.size(); i++)
- 	{
- 		if (NPC_inSPACE_vec[i]->getQuestOb()->getExist() == false)
- 		{
- 			questGenerator(NPC_inSPACE_vec[i]);
- 		}
- 	}
-}
-
-
-
-
 void StarSystem :: debug__()
 {
      if (MINERAL_vec.size() > 1000)
      {
         for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
         ;
-            //MINERAL_vec[mi]->death_FALSE();          
      }
 }
 

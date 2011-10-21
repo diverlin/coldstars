@@ -53,7 +53,7 @@ class Player
 		Cursor* getCursor();         
           	int getPlaceTypeId() const;
           		
-     		void update();     
+     		void update_inSpace();     
      		void bindNpc(Npc*);
      		     	
      	private:

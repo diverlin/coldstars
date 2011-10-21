@@ -128,7 +128,7 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
 
     	// LAZER TRACE EFFECT
     	LazerTraceEffect* _lazer_trace_effect;
-    	if (slot->getShip()->korpus_data.render_TURRELS == true)
+    	if (slot->getShip()->data_korpus.render_TURRELS == true)
     	{
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
                                                       	      texOb_particle, 
