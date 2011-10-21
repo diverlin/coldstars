@@ -25,7 +25,7 @@ QuestObject :: QuestObject(Npc* _npc_owner)
 	ob_type_id = NONE_ID;
 	action_id = NONE_ID;
 		
-	npc = NULL;
+	npc    = NULL;
 	planet = NULL;
 	
 	exist = false;
@@ -39,9 +39,14 @@ QuestObject :: ~QuestObject()
 StarSystem* QuestObject :: getObStarSystem()
 {
 	if (ob_type_id == NPC_ID)
+	{
 		return npc->getStarSystem();
+	}
+	
 	if (ob_type_id == PLANET_TYPE_ID)
+	{
 		return planet->getStarSystem();
+	}
 }
 
 bool QuestObject :: getExist() const   { return exist; }

@@ -32,8 +32,6 @@ int main()
 
     	loadResources();
 
-    	bool calculation_per_turn_allowed = true;
-
     	KeyEventsInSpace keyEvents = KeyEventsInSpace(); 
 
     	Galaxy galaxy;
@@ -64,16 +62,16 @@ int main()
     	// GAME LOOP
     	while (g_APP.IsOpened())
     	{    
-       		/////// AUTOTURN //////////////////
+       		///// AUTOTURN //////////////////
        		//if (g_TIMER < -50)
        		//{  
        			//g_TIMER = TURN_TIME;
            		//TURN_COUNT++;
            		//printf("        *** auto turn END was activated, turn num = %i\n", TURN_COUNT);
        		//}
-		
-		pPLAYER->update();
-		
+
+		pPLAYER->update_inSpace();
+					
        		if (pPLAYER->getPlaceTypeId() == SPACE_ID)
        		{  
        		        //printf("//////////// in SPACE ///////////////\n");
@@ -82,8 +80,7 @@ int main()
 
        			galaxy.update(g_TIMER);
 
-           		pPLAYER->getStarSystem()->render();
- 
+           		pPLAYER->getStarSystem()->render(); 
                         
                         if (g_TIMER < 0)  
                         {

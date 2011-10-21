@@ -39,6 +39,7 @@ Ship* Npc :: getShip() 	 	   { return ship; }
 Skill* Npc :: getSkill() 	   { return skill; }	
 Ship* Npc :: getScanShip()	   { return scanShip; }	
 int Npc :: getPlaceTypeId() const  { return place_type_id; }
+QuestObject* Npc :: getTaskOb()    { return taskOb; }
 QuestObject* Npc :: getQuestOb()   { return questOb; }
 bool Npc :: getControlledByPlayer() const { return controlled_by_player; }
 
@@ -147,21 +148,22 @@ Npc :: Npc(int _race_id, int _subtype_id, TextureOb* _texOb)
        		pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race7_inSpace_inStatic;
 
     	credits = 1000;
-    	//needs_task_queue_has_been_changed = false;
-    
-    
-        ship       = NULL;
-    	kosmoport  = NULL;
-    	land       = NULL;
-    	starsystem = NULL;
-    	
+   	
     	func_inDynamic = &Npc::doNothing;
     	
     	
 	place_type_id = NONE_ID; // fake
-	
+
+
+        ship       = NULL;
+    	kosmoport  = NULL;
+    	land       = NULL;
+    	starsystem = NULL;
+    		
 	skill = new Skill();
+	
 	questOb = new QuestObject(this);
+	taskOb  = new QuestObject(this);
 }
     
 Npc :: ~Npc()
@@ -382,8 +384,6 @@ void Npc :: observe_inPlanet_inStatic()
 
 void Npc :: thinkCommon_inKosmoport_inStatic()
 {   		
-     	ship->reloadAllWeapons();
-
      	//if (place_type_id == KOSMOPORT_TYPE_ID)
      	//{ 
         	//printf("npc_id=%i,  insertNeedTaskId(LAUNCHING_task_id)\n", id);
@@ -393,8 +393,6 @@ void Npc :: thinkCommon_inKosmoport_inStatic()
 
 void Npc :: thinkCommon_inLand_inStatic()
 {
-     	ship->reloadAllWeapons();
-
      	//if (place_type_id == LAND_ID)
      	//{ 
         	//printf("npc_id=%i,  insertNeedTaskId(LAUNCHING_task_id)\n", id);
@@ -409,9 +407,21 @@ void Npc :: thinkUnique_inSpace_inStatic()
 }
 
 void Npc :: thinkCommon_inSpace_inStatic()
-{
-     	ship->reloadAllWeapons();
-     	
+{   	
+
+	//if (ship->propetries.armor < 0.3*ship->data_korpus.armor)   // move to ship
+	//{
+		ship->needsToDo.REPAIR = true;
+	//}
+	
+	taskGenerator(this);
+	
+	if (taskOb->getExist() == false)
+	{
+		questGenerator(this);
+	}
+       			
+	// emmidiate danger 
 	if (see.ASTEROID == true)
 	{
 		ship->weapon_selector.setAll(false);
@@ -424,25 +434,34 @@ void Npc :: thinkCommon_inSpace_inStatic()
                 ship->setWeaponsTarget(sorted_visible_ASTEROID_pList[0]);	
 	}
 
-	if (questOb->getExist() == true)
+
+	if (taskOb->getExist() == true)
+	{
+		if (taskOb->getTypeId() == PLANET_TYPE_ID)
+		{
+			if (taskOb->getActionId() == LANDING_TASK_ID)
+			{
+				// checkDocking in dinamic = 
+	        		ship->getNavigator()->setTargetPlanet(taskOb->getPlanet());
+	        	}
+	        }	
+        }
+
+	else if (questOb->getExist() == true)
 	{
 		if (questOb->getTypeId() == NPC_ID)
 		{
-			ship->getNavigator()->setTargetShip(questOb->getNpc()->getShip(), getRandInt(30, 100));
 			if (questOb->getActionId() == DESTROY_TASK_ID)
 			{
 			 	ship->weapon_selector.setAll(true);
 			        ship->selectWeapons();
                    		ship->setWeaponsTarget(questOb->getNpc()->getShip());
 			}
+			
+			ship->getNavigator()->setTargetShip(questOb->getNpc()->getShip(), getRandInt(30, 100));
 		}
-	}
-	
-	
-     	//{	 
-        	//Planet* _target_planet = getPlanetForDocking();  // depending on purpouse
-	       	//ship->getNavigator()->setTargetPlanet(_target_planet); 
-        //}
+	}	
+
         
         ship->getNavigator()->updateDynamicTargetCoords();
 }
@@ -609,8 +628,9 @@ void Npc :: thinkUnique_Race7_inSpace_inStatic()
 
 void Npc :: aiSimulation()
 {
+	taskOb->validation();
 	questOb->validation();
-	
+		
 	observeAll_inSpace_inStatic();     	     	
         thinkCommon_inSpace_inStatic();
         thinkUnique_inSpace_inStatic();

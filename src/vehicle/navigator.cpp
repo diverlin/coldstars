@@ -123,7 +123,6 @@ vec2f Navigator :: getTargetPos()      const { return target_pos; }
 int Navigator :: getFollowingTypeId()  const { return following_type_id; }                         
 
 
-
 bool Navigator :: updateDynamicTargetCoords()
 {
     	if (following_type_id == PLANET_TYPE_ID)

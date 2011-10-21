@@ -164,10 +164,7 @@ class StarSystem
     			void restoreSceneColor();
     			void renderBackground();
     		
-    		void debug__();
-    		
-    		void questManager();
-    	
+    		void debug__();    	
 };
 
 template <typename AGRESSOR, typename VICTIM>

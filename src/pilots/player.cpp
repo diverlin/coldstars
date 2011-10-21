@@ -24,9 +24,6 @@ Player :: Player()
     	type_id = PLAYER_ID;
 
 	is_alive = true;
-	
-    	ship = NULL;
-    	npc  = NULL;
     	
     	garpun_slot_SELECTED = false; 
     
@@ -36,8 +33,8 @@ Player :: Player()
 
     	radar_range_SHOW = false;
     	
-    	weapon_selector.setAll(false);
-    	
+    	ship = NULL;
+    	npc  = NULL;
     	cursor = new Cursor();
 }
     
@@ -61,7 +58,7 @@ Cursor* Player :: getCursor()         { return cursor; }
 int Player ::  getPlaceTypeId() const { return place_type_id; }
           
           
-void Player :: update()
+void Player :: update_inSpace()
 {
 	if (is_alive == true)
 	{
@@ -85,6 +82,8 @@ void Player :: update()
 		{
         		npc->setPlaceTypeId(PLANET_TYPE_ID);
         	}
+        	
+        	npc->getShip()->weapon_selector = weapon_selector;
 	}
 }  
                			

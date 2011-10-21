@@ -44,6 +44,7 @@ class Npc
    		Skill* getSkill();
    		Ship* getScanShip();
    		int getPlaceTypeId() const;
+   		QuestObject* getTaskOb();
    		QuestObject* getQuestOb();
    		bool getControlledByPlayer() const;		   	   
 
@@ -73,7 +74,7 @@ class Npc
      		
      		bool launchingEventPlayer();
      		
-     		QuestObject* questOb;
+     		Planet* getPlanetForDocking();
     		
    	private:
    	     	bool is_alive;    
@@ -93,6 +94,8 @@ class Npc
    	     	     		
    	     	TextureOb* texOb;
    	     	
+   	     	QuestObject* questOb;
+   	     	QuestObject* taskOb;   	     	
    	     	
    	     	// observation/radar
      		std::vector<Asteroid*>  visible_ASTEROID_pList;
@@ -117,7 +120,7 @@ class Npc
      		std::vector<float> npc_pirat_distance_list;
      		std::vector<float> npc_diplomat_distance_list;
      		
-     		See see;
+     		VisionStatus see;
      		
  		void observeAll_inSpace_inStatic();
           	void findVisibleAsteroids_inSpace_inStatic();
@@ -181,7 +184,7 @@ class Npc
      		
      		
      		//// docking/launching
-     		Planet* getPlanetForDocking();
+
 
           	bool checkDocking();
           	bool getDockingPermission();

@@ -52,8 +52,7 @@ class QuestObject
 		Planet* planet;
 		
 		void setObject(Npc*);
-		void setObject(Planet*);
-		
+		void setObject(Planet*);		
 };
 
 
