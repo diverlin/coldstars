@@ -1,5 +1,5 @@
-#ifndef VECTOR_H
-#define VECTOR_H
+#ifndef MYVECTOR_H
+#define VMYECTOR_H
 
 class vec2f
 {
@@ -29,5 +29,7 @@ class vec3f
 float distBetweenCenters(vec2f, vec2f);
 float distBetweenCenters(vec2f center1, float x2, float y2);
 float distBetweenCenters(float x1, float y1, float x2, float y2);
+
+vec2f getRandomVec(vec2f center, int radius_min, int radius_max);
 
 #endif

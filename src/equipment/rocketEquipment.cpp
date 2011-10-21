@@ -17,18 +17,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "rocketEquipment.hpp"
-
 RocketEquipment :: RocketEquipment()
 {}
 
-RocketEquipment :: RocketEquipment(TextureOb* _pTo_itemTexOb, 
+RocketEquipment :: RocketEquipment(TextureOb* _texOb_item, 
 				   int _ammo_max_orig, 
 				   int _damage_orig, 
 				   int _radius_orig, 
 				   EquipmentCommonData _common_data)
 {
-	CommonForEquipment_init(ROCKET_ID, _pTo_itemTexOb, _common_data);
+	CommonForEquipment_init(ROCKET_ID, _texOb_item, _common_data);
 
         ammo_max_orig = _ammo_max_orig;
         ammo_max_add = 0;
@@ -36,11 +34,16 @@ RocketEquipment :: RocketEquipment(TextureOb* _pTo_itemTexOb,
         
         damage_orig = _damage_orig;
         damage_add = 0;
+        damage = 0;
 
         radius_orig = _radius_orig;
         radius_add = 0;
-
-
+        radius = 0;
+  
+        updatePropetries();
+        countPrice();
+        updateInfo();
+                
         data_bullet.texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.rocketBullet_texOb_pList);    
         data_bullet.damage        = damage;
         data_bullet.armor         = ROCKET_ARMOR;
@@ -49,17 +52,16 @@ RocketEquipment :: RocketEquipment(TextureOb* _pTo_itemTexOb,
         data_bullet.d_speed       = ROCKET_DELTA_SPEED;
         data_bullet.live_time     = ROCKET_EXISTANCE_TIME;
         data_bullet.angular_speed = ROCKET_ANGULAR_SPEED;
-
-        turrelTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.turrel_texOb_pList); 
-   
-        updatePropetries();
-        countPrice();
-        updateInfo();
 }
 
 
 RocketEquipment :: ~RocketEquipment()
-{}
+{
+	for (unsigned int mi = 0; mi<modules_vec.size(); mi++)
+	{
+		delete modules_vec[mi];
+	}
+}
 
 
 int RocketEquipment :: getAmmo()   const { return ammo; }
@@ -153,7 +155,7 @@ void RocketEquipment :: fireEvent()
 
 bool RocketEquipment :: insertModule(RocketModule* _rocket_module)
 {
-    	if (modules_pList.size() < common_data.modules_num_max)
+    	if (modules_vec.size() < common_data.modules_num_max)
     	{
         	ammo_max_add += _rocket_module->getAmmoMaxAdd();
         	damage_add   += _rocket_module->getDamageAdd();
@@ -162,7 +164,7 @@ bool RocketEquipment :: insertModule(RocketModule* _rocket_module)
         	updatePropetries();
         
         	texOb_modules_pList.push_back(_rocket_module->getTexOb());
-        	modules_pList.push_back(_rocket_module);
+        	modules_vec.push_back(_rocket_module);
         	return true;
     	}
     	else
@@ -182,23 +184,23 @@ RocketEquipment* rocketEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* pTo_itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.RocketEquipment_texOb_pList);    
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.RocketEquipment_texOb_pList);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(ROCKET_ITEM_TEXTURE_ID, revision_id)   
     
     	int ammo_max_orig = getRandInt(ROCKET_AMMO_MIN, ROCKET_AMMO_MAX);
     	int damage_orig   = getRandInt(ROCKET_DAMAGE_MIN, ROCKET_DAMAGE_MAX);
     	int radius_orig   = getRandInt(ROCKET_RADIUS_MIN, ROCKET_RADIUS_MAX);
 
-	EquipmentCommonData _common_data;
-    	_common_data.modules_num_max = getRandInt(ROCKET_MODULES_NUM_MIN, ROCKET_MODULES_NUM_MAX);
+	EquipmentCommonData common_data;
+    	common_data.modules_num_max = getRandInt(ROCKET_MODULES_NUM_MIN, ROCKET_MODULES_NUM_MAX);
 
-    	_common_data.mass = getRandInt(ROCKET_MASS_MIN, ROCKET_MASS_MAX);
-    	_common_data.condition_max = getRandInt(ROCKET_CONDITION_MIN, ROCKET_CONDITION_MAX) * tech_rate;
+    	common_data.mass = getRandInt(ROCKET_MASS_MIN, ROCKET_MASS_MAX);
+    	common_data.condition_max = getRandInt(ROCKET_CONDITION_MIN, ROCKET_CONDITION_MAX) * tech_rate;
 
-    	_common_data.deterioration_rate = 1;
+    	common_data.deterioration_rate = 1;
 
-    	RocketEquipment* _rocket_equipment = new RocketEquipment(pTo_itemTexOb,  ammo_max_orig, damage_orig, radius_orig, _common_data);
-    	return _rocket_equipment;
+    	RocketEquipment* rocket_equipment = new RocketEquipment(texOb_item,  ammo_max_orig, damage_orig, radius_orig, common_data);
+    	return rocket_equipment;
 }
 
 

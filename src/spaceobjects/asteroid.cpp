@@ -52,24 +52,6 @@ int Asteroid :: getDamage() const { return damage; }
 int Asteroid :: getMass()  const { return mass; }	
 			
 
-void Asteroid :: hit_TRUE(int damage)
-{
-     	armor -= damage;
-     	if (armor <= 0)
-     	{
-        	is_dying = true; 
-        	dying_time -= 3;
-     	}
-}
-
-void Asteroid :: hit_FALSE(int damage)
-{
-     	armor -= damage;
-     	if (armor <= 0)
-     	{
-        	death_FALSE();
-        }
-}
 
 void Asteroid :: update_inSpace_inDynamic_TRUE()
 {    
@@ -91,6 +73,35 @@ void Asteroid :: update_inSpace_inDynamic_FALSE()
      	updatePosition();  
 }
 
+void Asteroid :: collision_TRUE()
+{
+	death_TRUE();
+}
+
+void Asteroid :: collision_FALSE()
+{
+	death_FALSE();
+}        	
+
+void Asteroid :: hit_TRUE(int damage)
+{
+     	armor -= damage;
+     	if (armor <= 0)
+     	{
+        	is_dying = true; 
+        	dying_time -= 3;
+     	}
+}
+
+void Asteroid :: hit_FALSE(int damage)
+{
+     	armor -= damage;
+     	if (armor <= 0)
+     	{
+        	death_FALSE();
+        }
+}
+
     
 void Asteroid :: death_TRUE()
 {
@@ -102,37 +113,33 @@ void Asteroid :: death_TRUE()
         
         	for (int i = 0; i<3; i++)
     		{
-                        TextureOb* texOb_mineral = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.mineral_texOb_pList); 
-        		Mineral* _mineral = new Mineral(texOb_mineral, points.getCenter());
-			starsystem->add(_mineral);
-			
+                        Mineral* _mineral = createMineral(points.getCenter());
+			starsystem->add(_mineral);			
 			//printf("----%i,%i, %f,%f\n", id, i, _mineral->getPoints()->getCenter().x, _mineral->getPoints()->getCenter().y);
-			
-    		}
-    		//printf("asteroid.death_TRUE ******\n");
+   		}
     	   		
         	//self.starsystem.screen_QUAKE_runtime_counter = 50
         	//self.starsystem.screen_QUAKE_amlitudaDiv2 = 5
         	is_explosed = true;
      }
-}
-    
+}    
 
 void Asteroid :: death_FALSE()
 {
      	is_alive = false; 
 
      	if (is_explosed == false)
-     	{   
-     		Mineral* _mineral;
+     	{  
         	for (int i = 0; i<3; i++)
     		{        		
-        		_mineral = createMineral(points.getCenter());
+        		Mineral* _mineral = createMineral(points.getCenter());
 			starsystem->add(_mineral);
     		}
         	is_explosed = true;
      	}
 }
+
+
 
 
 void Asteroid :: updateInfo()
@@ -168,11 +175,9 @@ Asteroid* createAsteroid()
 
         TextureOb* texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.asteroid_texOb_pList); 
     
-        Asteroid* asteroid = new Asteroid(texOb,
-    					   pTo_DEFORMED_SPHERE_MESH,
-    				           planet_data);
-    	
+        Asteroid* asteroid = new Asteroid(texOb, pTo_DEFORMED_SPHERE_MESH, planet_data);    	
         asteroid->update_inSpace_inDynamic_FALSE();
+        
         return asteroid;        
 }
 

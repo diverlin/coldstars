@@ -20,22 +20,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define COMMONFOREQUIPMENT_H
 
 
-//struct IdData 
-//{
-	//unsigned int id; 
-	//unsigned int type_id; 
-	//unsigned int subtype_id;
-//};
-
-struct EquipmentCommonData 
-{
-	unsigned int modules_num_max; 
-	unsigned int condition_max; 
-	unsigned int deterioration_rate;
-	unsigned int mass; 
-};
-
-
 class CommonForEquipment
 {
         public:

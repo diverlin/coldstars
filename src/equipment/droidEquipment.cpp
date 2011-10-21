@@ -17,16 +17,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "droidEquipment.hpp"
-
 DroidEquipment :: DroidEquipment()
 {}
 
-DroidEquipment :: DroidEquipment(TextureOb* _itemTexOb, 
+DroidEquipment :: DroidEquipment(TextureOb* _texOb_item, 
 				 int _repair_orig, 
 				 EquipmentCommonData _common_data)
 {
-    	CommonForEquipment_init(DROID_ID, _itemTexOb, _common_data);
+    	CommonForEquipment_init(DROID_ID, _texOb_item, _common_data);
 
     	repair_orig = _repair_orig;
     	repair_add  = 0;
@@ -36,7 +34,12 @@ DroidEquipment :: DroidEquipment(TextureOb* _itemTexOb,
 }
 
 DroidEquipment :: ~DroidEquipment()
-{}
+{
+	for (unsigned int mi = 0; mi<modules_vec.size(); mi++)
+	{
+		delete modules_vec[mi];
+	}
+}
 
 
 int DroidEquipment :: getRepair() const { return repair; }
@@ -85,14 +88,14 @@ std::string DroidEquipment :: getRepairStr()
 
 bool DroidEquipment :: insertModule(DroidModule* _droid_module)
 {
-    	if (modules_pList.size() < common_data.modules_num_max)
+    	if (modules_vec.size() < common_data.modules_num_max)
     	{
         	repair_add += _droid_module->getRepairAdd();
     
         	updatePropetries();
          
         	texOb_modules_pList.push_back(_droid_module->getTexOb());
-        	modules_pList.push_back(_droid_module);
+        	modules_vec.push_back(_droid_module);
         	return true;
     	}
    	else 
@@ -111,7 +114,7 @@ DroidEquipment* droidEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* pTo_itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.DroidEquipment_texOb_pList);    
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.DroidEquipment_texOb_pList);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(DROID_ITEM_TEXTURE_ID, revision_id)
 
     	int repair_orig     = getRandInt(DROID_REPAIR_MIN, DROID_REPAIR_MAX);
@@ -122,7 +125,7 @@ DroidEquipment* droidEquipmentGenerator(int race_id, int revision_id)
     	common_data.condition_max = getRandInt(DROID_CONDITION_MIN, DROID_CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
-    	DroidEquipment* droid_equipment = new DroidEquipment(pTo_itemTexOb, repair_orig, common_data);
+    	DroidEquipment* droid_equipment = new DroidEquipment(texOb_item, repair_orig, common_data);
     	return droid_equipment;
 }
 

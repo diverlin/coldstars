@@ -23,7 +23,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Points :: Points()
 {
-        is_updated = false;             
+        is_updated = false;  
+        pos_z = -500.0;           
 }
 
 Points :: ~Points()

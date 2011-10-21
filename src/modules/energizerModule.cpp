@@ -28,6 +28,10 @@ EnergizerModule :: EnergizerModule(TextureOb* _texOb, int _energy_max_add, int _
 }
 
 
+EnergizerModule :: ~EnergizerModule()
+{}
+      		
+
 int EnergizerModule :: getEnergyMaxAdd()   const { return energy_max_add; }
 int EnergizerModule :: getRestorationAdd() const { return restoration_add; }
 		

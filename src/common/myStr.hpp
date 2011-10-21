@@ -16,28 +16,11 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#ifndef MYSTR_H
+#define MYSTR_H
 
+std :: string returnRaceStringByRaceId(int id);  // replace by generator class
 
-#ifndef CONTAINER_H
-#define CONTAINER_H
-
-
-class Container : public CommonForSpaceItems
-{
-    	public: 
-        	int id, type_id;
-                  
-                ItemSlot* otsec_slot;
-                            
-        	int mass;
-
-        	Container();
-        	Container(TextureOb* _texOb, vec2f _start_pos);
-        	~Container();
-        
-        	void renderInfo();
-};
-
-Container* createContainer(vec2f);
-
-#endif 
+std::string int2str(int var); 
+std::string bool2str(bool var); 
+#endif

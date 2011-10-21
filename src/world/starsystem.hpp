@@ -84,13 +84,17 @@ class StarSystem
     		void add(Container*);
     		void add(RocketBullet*);
     		
+    		// effects
     		void add(ExplosionEffect*);
     		void add(ShockWaveEffect*);
     		void add(LazerTraceEffect*);
     		void add(DamageEffect*);
+    		
+    		void add(VerticalFlowText*);
    		
     		void add(DistantNebulaBgEffect*);
     		void add(DistantStarBgEffect*);
+                // effects
                 
     		bool removeShipById(int _id);    
     		bool removeNpc(int _id, int _race_id, int _subtype_id);  
@@ -115,14 +119,16 @@ class StarSystem
     		std::vector<ExplosionEffect*>  effect_EXPLOSION_vec;
     		std::vector<DamageEffect*>     effect_DAMAGE_vec;
     		std::vector<ShockWaveEffect*>  effect_SHOCKWAVE_vec;
+    		
+    		std::vector<VerticalFlowText*> text_DAMAGE_vec;
     		// effects
     		
    		// VISIBLE ENTITY LIST
-    		std::vector<Star*>      visible_STAR_vec;
-    		std::vector<Planet*>    visible_PLANET_vec;
-    		std::vector<Asteroid*>  visible_ASTEROID_vec;
-    		std::vector<Mineral*>   visible_MINERAL_vec;
-    		std::vector<Container*> visible_CONTAINER_vec;
+    		std::vector<Star*>         visible_STAR_vec;
+    		std::vector<Planet*>       visible_PLANET_vec;
+    		std::vector<Asteroid*>     visible_ASTEROID_vec;
+    		std::vector<Mineral*>      visible_MINERAL_vec;
+    		std::vector<Container*>    visible_CONTAINER_vec;
     		std::vector<RocketBullet*> visible_ROCKET_vec;
 
     		std::vector<Ship*>      visible_SHIP_vec;

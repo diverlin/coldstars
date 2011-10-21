@@ -17,8 +17,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "ship.hpp"
-
 void Ship :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
 void Ship :: setNpc(Npc* _npc)                      { npc_owner = _npc; }
 void Ship :: setPlaceTypeId(int _place_type_id)     { place_type_id = _place_type_id; }
@@ -80,13 +78,9 @@ Ship :: Ship(TextureOb* _texOb, KorpusData _korpus_data)
     	points.initMidFarLeftPoint();
     	points.addMidFarLeftPoint();
 
-    	points.setAngle(getRandInt(0, 360));
-    	points.setCenter(getRandInt(0, 500), getRandInt(0, 500)); 
-
-    	//w_orig = texOb->w;
-    	//h_orig = texOb->h;
-
-
+    	points.setAngle(0);
+    	points.setCenter(0, 0); 
+	
         korpus_data = _korpus_data;
         propetries.armor      = korpus_data.armor;
 
@@ -629,17 +623,26 @@ bool Ship :: launchingEvent()
 
 
 
-void Ship :: hit_TRUE(int _damage)
+void Ship :: hit_TRUE(unsigned int _damage)
 {
     	propetries.armor -= _damage;
     	if (ableTo.PROTECT == true)
+    	{
        		shield->setAlpha(1.0);
+       	}
 
     	if (propetries.armor < 0)
-       		is_dying = true; 
+    	{
+       		is_dying = true;
+       	}
+       	
+       	// improove
+       	Color4i color;  	       		
+       	VerticalFlowText* _text = new VerticalFlowText(int2str(_damage), points.getCenter(), color, korpus_data.collision_radius);
+       	starsystem->add(_text); 
 }
 
-void Ship :: hit_FALSE(int _damage)
+void Ship :: hit_FALSE(unsigned int _damage)
 {
     	propetries.armor -= _damage;
 
@@ -1309,6 +1312,10 @@ Ship* shipGenerator(int race_id, int subtype_id, int size_id)
        		korpusData.render_TURRELS = false; 
                            
     	Ship* ship = new Ship(texOb_ship, korpusData);
+    	
+    	ship->getPoints()->setCenter(getRandInt(0, 800), getRandInt(0, 800)); 
+    	ship->getPoints()->setAngle(getRandInt(0, 360));
+    	
     
     	return ship;
 }

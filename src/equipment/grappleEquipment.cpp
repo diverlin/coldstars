@@ -17,19 +17,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "grappleEquipment.hpp"
-
 GrappleEquipment :: GrappleEquipment()
 {}
 
-GrappleEquipment :: GrappleEquipment(TextureOb* _pTo_itemTexOb, 
+GrappleEquipment :: GrappleEquipment(TextureOb* _texOb_item, 
 				     int _strength_orig, 
 				     int _radius_orig, 
 				     int _speed_orig, 
 				     int _maxNumItem_orig, 
 				     EquipmentCommonData _common_data)   // joun strength and speed attributes into one
 {
-    	CommonForEquipment_init(GRAPPLE_ID, _pTo_itemTexOb, _common_data);
+    	CommonForEquipment_init(GRAPPLE_ID, _texOb_item, _common_data);
 
     	//grapple_list = []
     	//grapple_remove_queue = []
@@ -51,7 +49,12 @@ GrappleEquipment :: GrappleEquipment(TextureOb* _pTo_itemTexOb,
 }
 
 GrappleEquipment :: ~GrappleEquipment()
-{}
+{
+	for (unsigned int mi = 0; mi<modules_vec.size(); mi++)
+	{
+		delete modules_vec[mi];
+	}
+}
 
 int GrappleEquipment :: getStrength()   const { return strength; }
 int GrappleEquipment :: getRadius()     const { return radius; }
@@ -138,7 +141,7 @@ std::string GrappleEquipment :: getMaxNumItemStr()
 
 bool GrappleEquipment :: insertModule(GrappleModule* _grapple_module)
 {
-    	if (modules_pList.size() < common_data.modules_num_max)
+    	if (modules_vec.size() < common_data.modules_num_max)
     	{
        	 	strength_add   += _grapple_module->getStrengthAdd();
         	radius_add     += _grapple_module->getRadiusAdd();
@@ -148,7 +151,7 @@ bool GrappleEquipment :: insertModule(GrappleModule* _grapple_module)
         	updatePropetries();
         
         	texOb_modules_pList.push_back(_grapple_module->getTexOb());
-        	modules_pList.push_back(_grapple_module);
+        	modules_vec.push_back(_grapple_module);
         	return true;
     	}
     	else
@@ -167,7 +170,7 @@ GrappleEquipment* grappleEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.GrappleEquipment_texOb_pList);   
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.GrappleEquipment_texOb_pList);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(GRAPPLE_ITEM_TEXTURE_ID, revision_id) 
 
     	int strength_orig   = getRandInt(GRAPPLE_STRENGTH_MIN, GRAPPLE_STRENGTH_MAX);
@@ -181,11 +184,11 @@ GrappleEquipment* grappleEquipmentGenerator(int race_id, int revision_id)
     	common_data.condition_max   = getRandInt(GRAPPLE_CONDITION_MIN, GRAPPLE_CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
-    	GrappleEquipment* grapple_equipment = new GrappleEquipment(itemTexOb, 
-    								    strength_orig, 
-    								    radius_orig, 
-    								    speed_orig, 
-    								    maxNumItem_orig, 
-    								    common_data);
+    	GrappleEquipment* grapple_equipment = new GrappleEquipment(texOb_item, 
+    								   strength_orig, 
+    								   radius_orig, 
+    								   speed_orig, 
+    								   maxNumItem_orig, 
+    								   common_data);
     	return grapple_equipment;
 }

@@ -17,33 +17,47 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "freezerModule.hpp"
 
-FreezerModule :: FreezerModule(TextureOb* _texOb, int _freeze_add)
+
+std :: string returnRaceStringByRaceId(int id)  // replace by generator class
 {
-     	CommonForModules_init(FREEZER_ID, _texOb);
-
-     	freeze_add = _freeze_add;
+     	if (id == RACE_0_ID)
+        	return "RACE0";
+     	if (id == RACE_1_ID)
+        	return "RACE1";
+     	if (id == RACE_2_ID)
+        	return "RACE2";
+     	if (id == RACE_3_ID)
+        	return "RACE3";
+     	if (id == RACE_4_ID)
+        	return "RACE4";
+     	if (id == RACE_6_ID)
+        	return "RACE6";
+     	if (id == RACE_7_ID)
+        	return "RACE7";        
+     	else
+        	return "____";   
 }
 
-FreezerModule :: ~FreezerModule()
-{}
 
-int FreezerModule :: getFreezeAdd() const { return freeze_add; }
-		
-		
-void FreezerModule :: addUniqueInfo()
+
+std::string int2str(int var) 
 {
-    	info.addTitleStr("freezer module");
-    	info.addNameStr("freeze_add:");     info.addValueStr( int2str(freeze_add) );
+    	std::ostringstream stm;
+    	stm << var;
+    	return stm.str() ;
+}
+
+std::string bool2str(bool var) 
+{
+    	std::ostringstream stm;
+    	if (var == true)
+       		stm << "true";
+    	else
+       		stm << "false";   
+    	return stm.str() ;
 }
 
 
-FreezerModule* freezerModuleGenerator()
-{
-    TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
-    int freeze_add = getRandInt(FREEZER_MODULE_FREEZE_MIN, FREEZER_MODULE_FREEZE_MAX);
 
-    FreezerModule* freezer_module = new FreezerModule(texOb, freeze_add);
-    return freezer_module;
-}
+

@@ -488,12 +488,7 @@ void StarSystem :: restoreSceneColor()
 
 void StarSystem :: restoreDefaultColor()
 {
-	Color _color;
-	_color.r = 1.0;
-	_color.g = 1.0;
-	_color.b = 1.0;
-	_color.a = 1.0;
-	
+	Color4f _color;
 	setColor(_color);
 }
 
@@ -726,6 +721,12 @@ void StarSystem :: renderEntities_NEW()
     			}
     		disable_POINTSPRITE();
     		
+    		for(unsigned int i = 0; i<text_DAMAGE_vec.size(); i++)
+    		{ 
+    		        text_DAMAGE_vec[i]->update(); 
+        		text_DAMAGE_vec[i]->render(); 
+    		}    		
+    		
     	disable_BLEND();
     	
     	restoreSceneColor();    	          
@@ -871,12 +872,10 @@ void StarSystem :: add(ShockWaveEffect* _shockWave)
 	effect_SHOCKWAVE_vec.push_back(_shockWave);
 }
 
-
 void StarSystem :: add(LazerTraceEffect* _lazerTraceEffect)
 {
 	effect_LAZERTRACE_vec.push_back(_lazerTraceEffect);
 }
-
 
 void StarSystem :: add(ExplosionEffect* _explosionEffect)
 {
@@ -887,7 +886,12 @@ void StarSystem :: add(DamageEffect* _damageEffect)
 {
 	effect_DAMAGE_vec.push_back(_damageEffect);
 }
-    		
+    
+void StarSystem :: add(VerticalFlowText* _text)
+{
+	text_DAMAGE_vec.push_back(_text);
+}
+    	
     		
 void StarSystem :: add(DistantNebulaBgEffect* dn)
 {
@@ -989,7 +993,7 @@ void StarSystem :: manageDeadObjects()
 
     	for(unsigned int i = 0; i < MINERAL_vec.size(); i++)
     	{
-        	if (MINERAL_vec[i]->is_alive == false)
+        	if (MINERAL_vec[i]->getAlive() == false)
         	{  
             		garbage.add(MINERAL_vec[i]);
             		MINERAL_vec.erase(MINERAL_vec.begin() + i );
@@ -998,7 +1002,7 @@ void StarSystem :: manageDeadObjects()
     
     	for(unsigned int i = 0; i < CONTAINER_vec.size(); i++)
     	{
-        	if (CONTAINER_vec[i]->is_alive == false)
+        	if (CONTAINER_vec[i]->getAlive() == false)
         	{   
             		garbage.add(CONTAINER_vec[i]);
             		CONTAINER_vec.erase(CONTAINER_vec.begin() + i );
@@ -1056,6 +1060,16 @@ void StarSystem :: manageDeadObjects()
             		effect_DAMAGE_vec.erase(effect_DAMAGE_vec.begin() + edi);
         	} 
     	}
+
+    	for(unsigned int ti = 0; ti < text_DAMAGE_vec.size(); ti++)    
+    	{
+        	if (text_DAMAGE_vec[ti]->getAlive() == false)
+        	{   
+            		garbage.add(text_DAMAGE_vec[ti]);
+            		text_DAMAGE_vec.erase(text_DAMAGE_vec.begin() + ti);
+        	} 
+    	}
+
         // effects
 }
 
@@ -1393,7 +1407,8 @@ void StarSystem :: debug__()
      if (MINERAL_vec.size() > 1000)
      {
         for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
-            MINERAL_vec[mi]->death_FALSE();          
+        ;
+            //MINERAL_vec[mi]->death_FALSE();          
      }
 }
 
@@ -1407,7 +1422,7 @@ bool collideEvent_TRUE(AGRESSOR* agressor,  VICTIM* victim)
 	if (collisionBetweenCenters(agressor->getPoints(), victim->getPoints(), victim->getCollisionRadius()) == true)
         {
         	victim->hit_TRUE(agressor->getDamage());
-                agressor->hit_TRUE(agressor->getArmor());
+                agressor->collision_TRUE();
                 
                 return true;
         }

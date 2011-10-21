@@ -28,10 +28,9 @@ class Mineral : public CommonForSpaceItems
     
         	int mass;
 
-        	Mineral(TextureOb* _pTo_texOb, vec2f _start_pos);
+        	Mineral(TextureOb* _texOb, vec2f _start_pos);
 
         	void updateInfo();
-             		std::string returnTypeStr();
         
         	void renderInfo();
         	

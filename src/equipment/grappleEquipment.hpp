@@ -25,7 +25,7 @@ class GrappleEquipment : public CommonForEquipment
 {
    	public:
       		GrappleEquipment();
-      		GrappleEquipment(TextureOb* _pTo_itemTexOb, 
+      		GrappleEquipment(TextureOb* _texOb_item, 
       				 int _strength_orig, 
       				 int _radius_orig, 
       				 int _speed_orig, 
@@ -39,7 +39,7 @@ class GrappleEquipment : public CommonForEquipment
 		int getSpeed()      const;
 		int getMaxNumItem() const;
 
-      		bool insertModule(GrappleModule* pTo_grappleModule);
+      		bool insertModule(GrappleModule*);
       		
       	private:
       	      	//grapple_list = []
@@ -61,7 +61,7 @@ class GrappleEquipment : public CommonForEquipment
       		int maxNumItem_add;
       		int maxNumItem;
       		
-      	      	std::vector<GrappleModule*> modules_pList; 
+      	      	std::vector<GrappleModule*> modules_vec; 
       	      	
       	      	void countPrice();
       		void updatePropetries();      		

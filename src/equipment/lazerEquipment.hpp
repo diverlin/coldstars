@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class LazerEquipment : public CommonForEquipment
 {
     	public:
-      		LazerEquipment(TextureOb* _pTo_itemTexOb, 
+      		LazerEquipment(TextureOb* _texOb_item, 
       			       int _damage_orig, 
       			       int _radius_orig, 
 			       EquipmentCommonData _common_data);
@@ -34,9 +34,9 @@ class LazerEquipment : public CommonForEquipment
 		int getDamage() const;
 		int getRadius() const;
 		
-      		void fireEvent(Turrel* _turrel);
+      		void fireEvent(Turrel*);
       
-      		bool insertModule(LazerModule* pTo_lazerModule);
+      		bool insertModule(LazerModule*);
       		
       	private:
       	      	int damage_orig;
@@ -52,7 +52,7 @@ class LazerEquipment : public CommonForEquipment
       		TextureOb* texOb_lazerEffect;
       		TextureOb* texOb_particle;
       		
-      	      	std::vector<LazerModule*> modules_pList;
+      	      	std::vector<LazerModule*> modules_vec;
       	      	
       	      	void updatePropetries();
       		void countPrice();

@@ -94,49 +94,6 @@ int RocketBullet :: getOwnerShipId() const { return owner_ship_id; }
         	
 Points* RocketBullet :: getPoints() { return &points; }
 
-//void RocketBullet :: setShipAsTarget(Ship* _pTo_ship)
-//{
-    //pTo_shipTarget      = _pTo_ship;
-    //target_type_id = pTo_shipTarget->type_id;
-    
-    //pTo_target_pos_x = &(pTo_shipTarget->points.center_x);
-    //pTo_target_pos_y = &(pTo_shipTarget->points.center_y);  
-    
-    //pTo_target_is_alive = &(pTo_shipTarget->is_alive);      
-//}
-
-//void RocketBullet :: setAsteroidAsTarget(Asteroid* _pTo_asteroid)
-//{
-    //pTo_asteroidTarget  = _pTo_asteroid;
-    //target_type_id = pTo_asteroidTarget->type_id;
-    
-    //pTo_target_pos_x = &(pTo_asteroidTarget->points.center_x);
-    //pTo_target_pos_y = &(pTo_asteroidTarget->points.center_y);
-    
-    //pTo_target_is_alive = &(pTo_asteroidTarget->is_alive);   
-//}
-
-//void RocketBullet :: setMineralAsTarget(Mineral* _pTo_mineral)
-//{
-    //pTo_mineralTarget   = _pTo_mineral;
-    //target_type_id = pTo_mineralTarget->type_id;
-    
-    //pTo_target_pos_x = &(pTo_mineralTarget->points.center_x);
-    //pTo_target_pos_y = &(pTo_mineralTarget->points.center_y);
-    
-    //pTo_target_is_alive = &(pTo_mineralTarget->is_alive);   
-//}
-
-//void RocketBullet :: setContainerAsTarget(Container* _pTo_container)
-//{
-    //pTo_containerTarget = _pTo_container; 
-    //target_type_id = pTo_containerTarget->type_id;
-    
-    //pTo_target_pos_x = &(pTo_containerTarget->points.center_x);
-    //pTo_target_pos_y = &(pTo_containerTarget->points.center_y);
-    
-    //pTo_target_is_alive = &(pTo_containerTarget->is_alive);  
-//}
 
 void RocketBullet :: update_inSpace_inDynamic()
 {
@@ -163,7 +120,7 @@ void RocketBullet :: update_inSpace_inDynamic()
     	data_bullet.live_time -= 1;
     	if (data_bullet.live_time < 0)
     	{
-       		death();
+       		death_TRUE();
     	}
 }
 
@@ -185,26 +142,45 @@ void RocketBullet :: updateDebugWay(int _timer)   // DEBUG
 
 }
 
+
 void RocketBullet :: stepCalculation()
 {
      	step = speed / 100.0;
 }
+
+
+
+void RocketBullet :: collision_TRUE()
+{
+	death_TRUE();
+}
+
+void RocketBullet :: collision_FALSE()
+{
+	death_FALSE();
+}
+
+
 
 void RocketBullet :: hit_TRUE(int _damage)
 {
     	data_life.armor -= _damage;
     	if (data_life.armor <= 0)
     	{
-        	death();
+        	death_TRUE();
         }
 }
 
 void RocketBullet :: hit_FALSE(int _damage)
 {
-	hit_TRUE(_damage);
+    	data_life.armor -= _damage;
+    	if (data_life.armor <= 0)
+    	{
+        	death_FALSE();
+        }
 }
 
-void RocketBullet :: death()
+void RocketBullet :: death_TRUE()
 {
      	data_life.is_alive = false; 
 
@@ -214,6 +190,12 @@ void RocketBullet :: death()
         	data_life.is_explosed = true;
      	}
 }
+
+void RocketBullet :: death_FALSE()
+{
+     	data_life.is_alive = false; 
+}
+
 
 
 void RocketBullet :: updateRenderStuff()

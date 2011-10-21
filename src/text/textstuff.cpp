@@ -20,11 +20,71 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "textstuff.hpp"
 
 
-TextBoard :: TextBoard()
+//TextBoard :: TextBoard()
+//{}
+
+//TextBoard :: ~TextBoard()
+//{}
+
+
+
+VerticalFlowText :: VerticalFlowText(std::string _str, 
+                                     vec2f _center, 
+                                     Color4i _color, 
+                                     float _collision_radius)
+{
+        is_alive = true;
+        live_time = 70; //TEXT_EXISTANCE_TIME
+
+        str = _str;
+        color = _color;
+
+
+        float kof1 = 0.1 * getRandInt(3, 18);
+        float kof2 = 0.1 * getRandInt(5, 15);
+
+        pos.x = _center.x - _collision_radius * kof1;
+        pos.y = _center.y + _collision_radius * kof2;
+        
+        speed = 2.0;
+}
+
+VerticalFlowText :: ~VerticalFlowText()
 {}
 
-TextBoard :: ~TextBoard()
-{}
+
+bool VerticalFlowText :: getAlive() const { return is_alive; }
+		
+
+void VerticalFlowText :: update()
+{
+        if (is_alive == true)
+        {
+                pos.y += speed;
+                if (speed > 0.5)
+                {
+                        speed -= 0.1;
+                }
+
+                live_time -= 1;
+                if (live_time < 0)
+                {
+                        is_alive = false;
+                }
+        }
+}
+                
+void VerticalFlowText :: render() const
+{
+        if (is_alive == true)
+        {
+                drawSimpleColoredText(str, pos, color);
+        }
+}
+ 
+
+
+
 
 
 

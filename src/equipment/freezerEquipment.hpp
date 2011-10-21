@@ -25,21 +25,21 @@ class FreezerEquipment : public CommonForEquipment
 {  
    	public:
       		FreezerEquipment();
-      		FreezerEquipment(TextureOb* _itemTexOb, 
+      		FreezerEquipment(TextureOb* _texOb_item, 
       				 int _freeze_orig, 
       				 EquipmentCommonData _common_data);
       		~FreezerEquipment();
 
 		int getFreeze() const;
   
-      		bool insertModule(FreezerModule* pTo_freezerModule);
+      		bool insertModule(FreezerModule*);
       		
       	private:
       	      	int freeze_orig;
       		int freeze_add;
       		int freeze;
       		
-      	      	std::vector<FreezerModule*> modules_pList;
+      	      	std::vector<FreezerModule*> modules_vec;
 
       		void countPrice();
       		void updatePropetries();      		
@@ -47,11 +47,6 @@ class FreezerEquipment : public CommonForEquipment
       		
       		void virtual addUniqueInfo();      		
        		std::string getFreezeStr();
-       		
-  	
-
-       	
-      	
 };
 
 FreezerEquipment* freezerEquipmentGenerator(int race_id, int revision_id = -1);

@@ -17,21 +17,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-ControlWord :: ControlWord()
-{
-	scan = false;
-	grapple = false;
-
-	worldmap = false;
-	ship_info = false;
-	planet_info = false;	
-	planet_orbits = false;
-	radar_radius = false;
-}
-
-ControlWord :: ~ControlWord()
-{}		
-
 
 Player :: Player()
 { 

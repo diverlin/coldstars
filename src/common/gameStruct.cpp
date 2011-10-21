@@ -16,28 +16,60 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-
-#ifndef CONTAINER_H
-#define CONTAINER_H
-
-
-class Container : public CommonForSpaceItems
+Color4f :: Color4f()
 {
-    	public: 
-        	int id, type_id;
-                  
-                ItemSlot* otsec_slot;
-                            
-        	int mass;
+	r = 1.0;
+	g = 1.0;
+	b = 1.0;
+	a = 1.0;
+}
 
-        	Container();
-        	Container(TextureOb* _texOb, vec2f _start_pos);
-        	~Container();
+
+Color4i :: Color4i()
+{
+	r = 255;
+	g = 255;
+	b = 255;
+	a = 255;
+}
+
+
+
+LifeData :: LifeData()
+{
+        is_alive = true;
+        int armor = 1;
+        	
+        bool is_dying = false;
+        int dying_time = 0;
         
-        	void renderInfo();
-};
+        bool is_explosed = false;
+}	
 
-Container* createContainer(vec2f);
 
-#endif 
+ControlWord :: ControlWord()
+{
+	scan = false;
+	grapple = false;
+
+	worldmap = false;
+	ship_info = false;
+	planet_info = false;	
+	planet_orbits = false;
+	radar_radius = false;
+}
+
+ControlWord :: ~ControlWord()
+{}
+
+
+
+AngleData :: AngleData()
+{
+	x = 0.0;
+	y = 0.0;
+	z = 0.0;
+	d_x = 0.0;
+	d_y = 0.0;
+	d_z = 0.0;
+}

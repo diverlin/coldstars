@@ -40,7 +40,7 @@ class RocketEquipment : public CommonForEquipment
 { 
    	public:
       		RocketEquipment();
-      		RocketEquipment(TextureOb* pTo_itemTexOb, 
+      		RocketEquipment(TextureOb* _texOb_item, 
       				int _ammo_max_orig, 
       				int _damage_orig, 
       				int _radius_orig, 
@@ -68,13 +68,11 @@ class RocketEquipment : public CommonForEquipment
 
       		int radius_orig;
       		int radius_add;
-      		int radius; 
-      		
-      	      	TextureOb* turrelTexOb;
-      	      	
+      		int radius;       		
+     	      	
       	      	BulletData data_bullet;
       		
-      	      	std::vector<RocketModule*> modules_pList;
+      	      	std::vector<RocketModule*> modules_vec;
       	      	
       	      	void countPrice();
       		void updatePropetries();

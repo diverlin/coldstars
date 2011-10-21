@@ -39,6 +39,8 @@ class Garbage
 		void add(ExplosionEffect*);
 		void add(DamageEffect*);
 		void add(ShockWaveEffect*);
+		
+		void add(VerticalFlowText*);
 		//effect
 		
 		void clear();
@@ -56,7 +58,9 @@ class Garbage
     		std::vector<LazerTraceEffect*> effect_LAZERTRACE_vec;
     		std::vector<ExplosionEffect*>  effect_EXPLOSION_vec;
     		std::vector<DamageEffect*>     effect_DAMAGE_vec;
-    		std::vector<ShockWaveEffect*>  effect_SHOCKWAVE_vec;    		
+    		std::vector<ShockWaveEffect*>  effect_SHOCKWAVE_vec;
+    		
+    		std::vector<VerticalFlowText*> text_DAMAGE_vec;  		
     		// effects
 };
      		

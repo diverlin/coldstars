@@ -17,7 +17,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "mineral.hpp"
 
 Mineral :: Mineral(TextureOb* _texOb, vec2f _start_pos)
 {        
@@ -28,10 +27,9 @@ Mineral :: Mineral(TextureOb* _texOb, vec2f _start_pos)
     	//subtype_id = ;
 
     	mass = getRandInt(6, 32);
-    	speed = getRandInt(40, 42);
-    	stepCalculation();
+    	velocity = getRandInt(40, 42) / 100.0;
 
-    	armor = getRandInt(1,6);
+    	data_life.armor = getRandInt(1,6);
 }
     
     
@@ -42,28 +40,10 @@ void Mineral :: updateInfo()
     	info.addTitleStr("MINERAL");
 
     	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->getId()));
-    	info.addNameStr("armor:");       info.addValueStr(int2str(armor));
+    	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 }
-    
-std::string Mineral :: returnTypeStr()
-{
-    	std::string sType = "";
-    	std::string sSubType = ""; 
-        
-    	if (type_id == GOODS_ID)
-       		std::string sType = "GOODS_id ";
-    	if (subtype_id == MINERAL_ID)
-       		std::string sSubType = "MINERAL_id";
-    	return sType + sSubType;   
-}
-    
-           
-    //def return_(self):
-        //_ = ''
-        //for h in self.hunters_list:
-            //_+= h.name + '_'
-        //return _
+            
 
 void Mineral :: renderInfo()
 {

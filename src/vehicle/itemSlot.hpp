@@ -26,6 +26,7 @@ class ItemSlot
 	public:        
         	ItemSlot();
 		ItemSlot(int _subtype_id, Ship* _ship, TextureOb* _texOb, int _pos_x, int _pos_y);
+		~ItemSlot();
                 
                 Turrel* bindTurrel(Turrel*);
                                 

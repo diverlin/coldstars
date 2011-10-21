@@ -17,17 +17,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "radarEquipment.hpp"
-
 RadarEquipment :: RadarEquipment()
 {}
 
 
-RadarEquipment :: RadarEquipment(TextureOb* _pTo_itemTexOb, 
+RadarEquipment :: RadarEquipment(TextureOb* _texOb_item, 
 				 int _radius_orig, 
 				 EquipmentCommonData _common_data)
 {
-   	CommonForEquipment_init(RADAR_ID, _pTo_itemTexOb, _common_data);
+   	CommonForEquipment_init(RADAR_ID, _texOb_item, _common_data);
 
     	radius_orig = _radius_orig;
     	radius_add  = 0;
@@ -38,7 +36,12 @@ RadarEquipment :: RadarEquipment(TextureOb* _pTo_itemTexOb,
 
 
 RadarEquipment :: ~RadarEquipment()
-{}
+{
+	for (unsigned int mi = 0; mi<modules_vec.size(); mi++)
+	{
+		delete modules_vec[mi];
+	}
+}
 
 
 int RadarEquipment :: getRadius() const { return radius; }
@@ -88,16 +91,16 @@ std::string RadarEquipment :: getRadiusStr()
 
 
 
-bool RadarEquipment :: insertModule(RadarModule* pTo_radarModule)
+bool RadarEquipment :: insertModule(RadarModule* _radar_module)
 {
-    	if (modules_pList.size() < common_data.modules_num_max)
+    	if (modules_vec.size() < common_data.modules_num_max)
     	{
-        	radius_add += pTo_radarModule->getRadiusAdd();
+        	radius_add += _radar_module->getRadiusAdd();
     
         	updatePropetries();
         
-        	texOb_modules_pList.push_back(pTo_radarModule->getTexOb());
-        	modules_pList.push_back(pTo_radarModule);
+        	texOb_modules_pList.push_back(_radar_module->getTexOb());
+        	modules_vec.push_back(_radar_module);
         	return true;
     	}
     	else
@@ -116,7 +119,7 @@ RadarEquipment* radarEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.RadarEquipment_texOb_pList);   
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.RadarEquipment_texOb_pList);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(RADAR_ITEM_TEXTURE_ID, revision_id) 
 
     	int radius_orig     = getRandInt(RADAR_RADIUS_MIN, RADAR_RADIUS_MAX);
@@ -127,7 +130,7 @@ RadarEquipment* radarEquipmentGenerator(int race_id, int revision_id)
     	common_data.condition_max   = getRandInt(RADAR_CONDITION_MIN, RADAR_CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
-    	RadarEquipment* radar_equipment = new RadarEquipment(itemTexOb, radius_orig, common_data);
+    	RadarEquipment* radar_equipment = new RadarEquipment(texOb_item, radius_orig, common_data);
     	return radar_equipment;
 }
 

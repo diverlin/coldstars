@@ -17,17 +17,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "bakEquipment.hpp"
-
 BakEquipment :: BakEquipment()
 {}
 
 
-BakEquipment :: BakEquipment(TextureOb* _pTo_itemTexOb, 
+BakEquipment :: BakEquipment(TextureOb* _texOb_item, 
 			     int _fuel_max_orig, 
 			     EquipmentCommonData _common_data)
 {
-    	CommonForEquipment_init(BAK_ID, _pTo_itemTexOb, _common_data);
+    	CommonForEquipment_init(BAK_ID, _texOb_item, _common_data);
 
     	fuel_max_orig = _fuel_max_orig;
     	fuel_max_add  = 0;
@@ -39,7 +37,12 @@ BakEquipment :: BakEquipment(TextureOb* _pTo_itemTexOb,
 }
    
 BakEquipment :: ~BakEquipment()
-{}
+{
+	for (unsigned int mi = 0; mi<modules_vec.size(); mi++)
+	{
+		delete modules_vec[mi];
+	}
+}
 
 
 int BakEquipment :: getFuel() const { return fuel; }
@@ -94,14 +97,14 @@ std::string BakEquipment :: getFuelStr()
 
 bool BakEquipment :: insertModule(BakModule* _bak_module)
 {
-    	if (modules_pList.size() < common_data.modules_num_max)
+    	if (modules_vec.size() < common_data.modules_num_max)
     	{
         	fuel_max_add += _bak_module->getFuelMaxAdd();
      
         	updatePropetries();
          
         	texOb_modules_pList.push_back(_bak_module->getTexOb());
-        	modules_pList.push_back(_bak_module);
+        	modules_vec.push_back(_bak_module);
         	return true;
     	}
     	else 
@@ -119,17 +122,17 @@ BakEquipment* bakEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* _itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.BakEquipment_texOb_pList);    // FAKE TEXTURE OB LIST IS USED HERE
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.BakEquipment_texOb_pList);    // FAKE TEXTURE OB LIST IS USED HERE
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(RADAR_ITEM_TEXTURE_ID, revision_id) 
     	int fuel_max_orig = getRandInt(BAK_FUEL_MIN, BAK_FUEL_MAX);
 
-      EquipmentCommonData _common_data;
+      	EquipmentCommonData common_data;
 
-    	_common_data.modules_num_max = getRandInt(BAK_MODULES_NUM_MIN, BAK_MODULES_NUM_MAX);
-    	_common_data.mass = getRandInt(BAK_MASS_MIN, BAK_MASS_MAX);
-    	_common_data.condition_max = getRandInt(BAK_CONDITION_MIN, BAK_CONDITION_MAX) * tech_rate;
-    	_common_data.deterioration_rate = 1;
+    	common_data.modules_num_max = getRandInt(BAK_MODULES_NUM_MIN, BAK_MODULES_NUM_MAX);
+    	common_data.mass = getRandInt(BAK_MASS_MIN, BAK_MASS_MAX);
+    	common_data.condition_max = getRandInt(BAK_CONDITION_MIN, BAK_CONDITION_MAX) * tech_rate;
+    	common_data.deterioration_rate = 1;
 
-    	BakEquipment* _bak = new BakEquipment(_itemTexOb, fuel_max_orig, _common_data);
-    	return _bak;
+    	BakEquipment* bak_equipment = new BakEquipment(texOb_item, fuel_max_orig, common_data);
+    	return bak_equipment;
 }

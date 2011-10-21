@@ -54,7 +54,7 @@ Star :: ~Star()
 {}
     
 
-Color Star :: getColor() const           { return color; }
+Color4f Star :: getColor() const           { return color; }
 int Star :: getColorId() const 		 { return texOb->color_id; }
 float Star :: getBrightThreshold() const { return texOb->brightThreshold; }
        

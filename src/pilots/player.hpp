@@ -20,41 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef PLAYER_H
 #define PLAYER_H
 
-class WeaponSelector
-{
-	public:
-    		bool slot_1;
-     		bool slot_2;
-     		bool slot_3;
-     		bool slot_4;
-     		bool slot_5;
-     	
-		void setAll(bool status)
-		{
-			slot_1 = status;
-     			slot_2 = status;
-     			slot_3 = status;
-     			slot_4 = status;
-     			slot_5 = status;
-		}
-};
 
-
-class ControlWord
-{
-	public:
-		bool scan;
-		bool grapple;
-
-		bool worldmap;
-		bool ship_info;
-		bool planet_info;	
-		bool planet_orbits;
-		bool radar_radius;
-		
-		ControlWord();
-		~ControlWord();
-};
 
 
 class Player 

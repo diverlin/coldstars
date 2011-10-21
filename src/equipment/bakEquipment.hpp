@@ -24,7 +24,7 @@ class BakEquipment : public CommonForEquipment
 {
 	public:
    		BakEquipment();
-     		BakEquipment(TextureOb* _pTo_itemTexOb, 
+     		BakEquipment(TextureOb* _texOb_item, 
      			     int _fuel_max_orig, 
      			     EquipmentCommonData _common_data);
      			     
@@ -34,7 +34,7 @@ class BakEquipment : public CommonForEquipment
 		
 		void fill();		
 
-           	bool insertModule(BakModule* pTo_bakModule);
+           	bool insertModule(BakModule*);
      		
      	private:
      	     	int fuel_max_orig;
@@ -42,7 +42,7 @@ class BakEquipment : public CommonForEquipment
      		int fuel_max;
      		int fuel;
      		
-     	     	std::vector<BakModule*> modules_pList; 
+     	     	std::vector<BakModule*> modules_vec; 
      	     	
      	     	void countPrice();
      	     	void updatePropetries();

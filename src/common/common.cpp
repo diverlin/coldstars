@@ -17,57 +17,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include <math.h>
-#include <iostream>
-#include <sstream>
-
-#include "common.hpp"
-
-
-int getRandInt(int range_start, int range_end)
-{
-    	if (range_start != range_end)
-       		return rand()%(range_end-range_start) + range_start;
-   	else
-       		return range_start;
-}
-
-int getRandSign()
-{
-  	if (getRandInt(0,10) > 5)
-     		return 1;
-  	else
-     		return -1; 
-}
-
-bool getRandBool()
-{
-  	if (getRandInt(0,10) > 5)
-     		return true;
-  	else
-     		return false; 
-}
-
-
-std :: string returnRaceStringByRaceId(int id)  // replace by generator class
-{
-     	if (id == RACE_0_ID)
-        	return "RACE0";
-     	if (id == RACE_1_ID)
-        	return "RACE1";
-     	if (id == RACE_2_ID)
-        	return "RACE2";
-     	if (id == RACE_3_ID)
-        	return "RACE3";
-     	if (id == RACE_4_ID)
-        	return "RACE4";
-     	if (id == RACE_6_ID)
-        	return "RACE6";
-     	if (id == RACE_7_ID)
-        	return "RACE7";        
-     	else
-        	return "____";   
-}
 
 //size 0...9
 int returnObjectSize(int w, int h)
@@ -96,32 +45,7 @@ int returnObjectSize(int w, int h)
 
 
 
-
-
-
-
-
-
-std::string int2str(int var) 
-{
-    	std::ostringstream stm;
-    	stm << var;
-    	return stm.str() ;
-}
-
-std::string bool2str(bool var) 
-{
-    	std::ostringstream stm;
-    	if (var == true)
-       		stm << "true";
-    	else
-       		stm << "false";   
-    	return stm.str() ;
-}
-
-
-
-bool get_dX_dY_ToPoint(float x1, float y1, float x2, float y2, float step, float* pTo_dx, float* pTo_dy)
+bool get_dX_dY_ToPoint(float x1, float y1, float x2, float y2, float velocity, float* pTo_dx, float* pTo_dy)
 {    
     	float xn, yn; 
     	float lx = x2 - x1;
@@ -129,7 +53,7 @@ bool get_dX_dY_ToPoint(float x1, float y1, float x2, float y2, float step, float
     
     	float l = sqrt(lx*lx + ly*ly);
 
-    	if (l < 1.1)
+    	if (l < 0.1)
     	{
        		return false;
     	}
@@ -138,15 +62,16 @@ bool get_dX_dY_ToPoint(float x1, float y1, float x2, float y2, float step, float
        		xn = lx/l;
        		yn = ly/l;
      
-       		(*pTo_dx) = xn * step;
-       		(*pTo_dy) = yn * step;
+       		(*pTo_dx) = xn * velocity;
+       		(*pTo_dy) = yn * velocity;
+       		
        		return true;
     	}
 }
 
 
 
-void get_dX_dY_angleInD_ToPoint(float x1, float y1, float x2, float y2, float step, float* pTo_dx, float* pTo_dy, float* pTo_angle_inD)
+void get_dX_dY_angleInD_ToPoint(float x1, float y1, float x2, float y2, float velocity, float* pTo_dx, float* pTo_dy, float* pTo_angle_inD)
 {
     	float xn, yn; 
     	float lx = x2 - x1;
@@ -165,8 +90,8 @@ void get_dX_dY_angleInD_ToPoint(float x1, float y1, float x2, float y2, float st
        		yn = 0;
     	}
      
-    	(*pTo_dx) = xn * step;
-    	(*pTo_dy) = yn * step;
+    	(*pTo_dx) = xn * velocity;
+    	(*pTo_dy) = yn * velocity;
     	(*pTo_angle_inD) = atan2(ly, lx) * RADIAN_TO_DEGREE_RATE;
 }
 

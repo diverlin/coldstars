@@ -24,7 +24,7 @@ void clearScreen();
 void resetRenderTransformation();
 
 void camera(float x, float y);
-void setColor(Color);	
+void setColor(Color4f);	
 
 void enable_BLEND();
 void disable_BLEND();
@@ -105,15 +105,12 @@ void drawLine(GLuint texture,
 
 
 
+void drawSimpleColoredText(std::string str, 
+			   vec2f pos, 
+			   Color4i color,
+			   float scroll_x = g_SCROLL_COORD_X, 
+			   float scroll_y = g_SCROLL_COORD_Y);
 
-
-
-void drawInfoIn2Column(
-                std::vector<std::string*>* pTo_info_title_pList, 
-                std::vector<std::string*>* pTo_info_value_pList, 
-                float center_x, float center_y,
-                float scroll_x = g_SCROLL_COORD_X,
-                float scroll_y = g_SCROLL_COORD_Y);
 
 
 void drawInfoIn2Column(

@@ -17,16 +17,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "scanerEquipment.hpp"
-
 ScanerEquipment :: ScanerEquipment()
 {}
 
-ScanerEquipment :: ScanerEquipment(TextureOb* _itemTexOb, 
+ScanerEquipment :: ScanerEquipment(TextureOb* _texOb_item, 
 				   int _scan_orig, 
 				   EquipmentCommonData _common_data)
 {
-    	CommonForEquipment_init(SCANER_ID, _itemTexOb, _common_data);
+    	CommonForEquipment_init(SCANER_ID, _texOb_item, _common_data);
 
     	scan_orig = _scan_orig;
     	scan_add = 0;
@@ -36,7 +34,12 @@ ScanerEquipment :: ScanerEquipment(TextureOb* _itemTexOb,
 }
 
 ScanerEquipment :: ~ScanerEquipment()
-{}
+{
+	for (unsigned int mi = 0; mi<modules_vec.size(); mi++)
+	{
+		delete modules_vec[mi];
+	}
+}
 
 int ScanerEquipment :: getScan() const { return scan; }
 		
@@ -81,16 +84,16 @@ std::string ScanerEquipment :: getScanStr()
          	return int2str(scan_orig) + "+" + int2str(scan_add);
 }
 
-bool ScanerEquipment :: insertModule(ScanerModule* pTo_scanerModule)
+bool ScanerEquipment :: insertModule(ScanerModule* _scaner_module)
 {
-    	if (modules_pList.size() < common_data.modules_num_max)
+    	if (modules_vec.size() < common_data.modules_num_max)
     	{
-        	scan_add += pTo_scanerModule->getScanAdd();
+        	scan_add += _scaner_module->getScanAdd();
     
         	updatePropetries();
         
-        	texOb_modules_pList.push_back(pTo_scanerModule->getTexOb());
-        	modules_pList.push_back(pTo_scanerModule);
+        	texOb_modules_pList.push_back(_scaner_module->getTexOb());
+        	modules_vec.push_back(_scaner_module);
         	return true;
     	}
     	else
@@ -108,7 +111,7 @@ ScanerEquipment* scanerEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.ScanerEquipment_texOb_pList);   
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.ScanerEquipment_texOb_pList);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(SCANER_ITEM_TEXTURE_ID, revision_id)
 
 
@@ -120,6 +123,6 @@ ScanerEquipment* scanerEquipmentGenerator(int race_id, int revision_id)
     	common_data.condition_max   = getRandInt(SCANER_CONDITION_MIN, SCANER_CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
-    	ScanerEquipment* scaner_equipment = new ScanerEquipment(itemTexOb, scan_orig, common_data);
+    	ScanerEquipment* scaner_equipment = new ScanerEquipment(texOb_item, scan_orig, common_data);
     	return scaner_equipment;
 }

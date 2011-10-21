@@ -39,7 +39,7 @@ class ShieldEffect
                 Ship* ship;        
         	TextureOb* texOb;
         
-        	Color color;
+        	Color4f color;
         	float alpha_start;
         	float d_alpha;
 };

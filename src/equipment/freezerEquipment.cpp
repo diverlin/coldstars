@@ -17,18 +17,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "freezerEquipment.hpp"
-
 FreezerEquipment :: FreezerEquipment()
 {}
 
-
-
-FreezerEquipment :: FreezerEquipment(TextureOb* _itemTexOb, 
+FreezerEquipment :: FreezerEquipment(TextureOb* _texOb_item, 
 				     int _freeze_orig, 
 				     EquipmentCommonData _common_data)
 {
-    	CommonForEquipment_init(FREEZER_ID, _itemTexOb, _common_data);
+    	CommonForEquipment_init(FREEZER_ID, _texOb_item, _common_data);
 
     	freeze_orig = _freeze_orig;
     	freeze_add  = 0;
@@ -37,9 +33,13 @@ FreezerEquipment :: FreezerEquipment(TextureOb* _itemTexOb,
     	countPrice();
 }
 
-
 FreezerEquipment :: ~FreezerEquipment()
-{}
+{
+	for (unsigned int mi = 0; mi<modules_vec.size(); mi++)
+	{
+		delete modules_vec[mi];
+	}
+}
 
 
 int FreezerEquipment :: getFreeze() const { return freeze; }
@@ -89,14 +89,14 @@ std::string FreezerEquipment :: getFreezeStr()
 
 bool FreezerEquipment :: insertModule(FreezerModule* _freezer_module)
 {
-    	if (modules_pList.size() < common_data.modules_num_max)
+    	if (modules_vec.size() < common_data.modules_num_max)
     	{
         	freeze_add += _freezer_module->getFreezeAdd();
     
         	updatePropetries();
         
         	texOb_modules_pList.push_back(_freezer_module->getTexOb());
-        	modules_pList.push_back(_freezer_module);
+        	modules_vec.push_back(_freezer_module);
         	return true;
     	}
     	else
@@ -114,7 +114,7 @@ FreezerEquipment* freezerEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* pTo_itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.FreezerEquipment_texOb_pList);    // FAKE TEXTURE OB LIST IS USED HERE
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.FreezerEquipment_texOb_pList);    // FAKE TEXTURE OB LIST IS USED HERE
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(RADAR_ITEM_TEXTURE_ID, revision_id) 
 
     	int freeze_orig     = getRandInt(FREEZER_FREEZE_MIN, FREEZER_FREEZE_MAX);
@@ -125,6 +125,6 @@ FreezerEquipment* freezerEquipmentGenerator(int race_id, int revision_id)
     	common_data.condition_max   = getRandInt(FREEZER_CONDITION_MIN, FREEZER_CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
-    	FreezerEquipment* freezer_module = new FreezerEquipment(pTo_itemTexOb, freeze_orig, common_data);
-    	return freezer_module;
+    	FreezerEquipment* freezer_equipment = new FreezerEquipment(texOb_item, freeze_orig, common_data);
+    	return freezer_equipment;
 }

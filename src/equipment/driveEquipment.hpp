@@ -25,9 +25,9 @@ class DriveEquipment :  public CommonForEquipment
 {
 	public:
       		DriveEquipment();
-      		DriveEquipment(TextureOb* pTo_itemTexOb, 
-      			       int speed_orig, 
-      			       int hyper_orig, 
+      		DriveEquipment(TextureOb* _texOb_item, 
+      			       int _speed_orig, 
+      			       int _hyper_orig, 
       			       EquipmentCommonData _common_data);
       			       
       		~DriveEquipment();
@@ -35,7 +35,7 @@ class DriveEquipment :  public CommonForEquipment
 		int getSpeed() const;
 		int getHyper() const;
 
-      		bool insertModule(DriveModule* pTo_driveModule);
+      		bool insertModule(DriveModule*);
       		
       	private:
       	      	int speed_orig;
@@ -46,17 +46,8 @@ class DriveEquipment :  public CommonForEquipment
       		int hyper_add;
       		int hyper;
       		
-      		std::vector<DriveModule*> modules_pList;
+      		std::vector<DriveModule*> modules_vec;
       		
-     		// particle system settings // MAKE AS STRUCTURE!
-      	      	TextureOb* pTo_particleTexOb;
-      	      	int particle_num;
-      		float particle_size;
-      		float particle_velocity;
-      		float particle_alpha_start;
-      		float particle_alpha_end;
-      		float particle_d_alpha;
-
       		void countPrice();
       		void updatePropetries();
  		void virtual updateOwnerPropetries();

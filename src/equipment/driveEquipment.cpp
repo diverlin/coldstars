@@ -17,17 +17,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "driveEquipment.hpp"
-
 DriveEquipment :: DriveEquipment()
 {}
 
-DriveEquipment :: DriveEquipment(TextureOb* _itemTexOb, 
+DriveEquipment :: DriveEquipment(TextureOb* _texOb_item, 
 				 int _speed_orig, 
 				 int _hyper_orig, 
 				 EquipmentCommonData _common_data)
 {
-     CommonForEquipment_init(DRIVE_ID, _itemTexOb, _common_data);
+     CommonForEquipment_init(DRIVE_ID, _texOb_item, _common_data);
 
      speed_orig = _speed_orig;
      speed_add  = 0;
@@ -38,20 +36,15 @@ DriveEquipment :: DriveEquipment(TextureOb* _itemTexOb,
 
      updatePropetries();
      countPrice();
-     
-     
-     // particle system settings
-     pTo_particleTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.particles_texOb_pList); ;
-     particle_num = 5;
-     particle_size = 6;
-     particle_velocity = 1.2;
-     particle_alpha_start = 1.0;
-     particle_alpha_end = 0.0;
-     particle_d_alpha = 0.05;
 }
 
 DriveEquipment :: ~DriveEquipment()
-{}
+{
+	for (unsigned int mi = 0; mi<modules_vec.size(); mi++)
+	{
+		delete modules_vec[mi];
+	}
+}
 
 
 int DriveEquipment :: getSpeed() const { return speed; }
@@ -111,7 +104,7 @@ std::string DriveEquipment :: getHyperStr()
 
 bool DriveEquipment :: insertModule(DriveModule* _drive_module)
 {
-    	if (modules_pList.size() < common_data.modules_num_max)
+    	if (modules_vec.size() < common_data.modules_num_max)
     	{
         	speed_add += _drive_module->getSpeedAdd();
         	hyper_add += _drive_module->getHyperAdd();
@@ -119,7 +112,7 @@ bool DriveEquipment :: insertModule(DriveModule* _drive_module)
         	updatePropetries();
          
         	texOb_modules_pList.push_back(_drive_module->getTexOb());
-        	modules_pList.push_back(_drive_module);
+        	modules_vec.push_back(_drive_module);
         	return true;
     	}
     	else    
@@ -137,7 +130,7 @@ DriveEquipment* driveEquipmentGenerator(int race_id, int revision_id)
 
     int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    TextureOb* pTo_itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.DriveEquipment_texOb_pList);   
+    TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.DriveEquipment_texOb_pList);   
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(DRIVE_ITEM_TEXTURE_ID, revision_id) 
 
     int speed_orig      = getRandInt(DRIVE_SPEED_MIN, DRIVE_SPEED_MAX);
@@ -149,7 +142,8 @@ DriveEquipment* driveEquipmentGenerator(int race_id, int revision_id)
     common_data.condition_max   = getRandInt(DRIVE_CONDITION_MIN, DRIVE_CONDITION_MAX) * tech_rate;
     common_data.deterioration_rate = 1;
 
-    DriveEquipment* pTo_drive = new DriveEquipment(pTo_itemTexOb, speed_orig, hyper_orig, common_data);
-    return pTo_drive;
+    DriveEquipment* drive_equipment = new DriveEquipment(texOb_item, speed_orig, hyper_orig, common_data);
+    
+    return drive_equipment;
 }
 
