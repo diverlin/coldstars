@@ -35,9 +35,12 @@ class Turrel;
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp> 
 
-#include "src/common/vector.hpp"
+#include "src/common/myVector.hpp"
+#include "src/common/myStr.hpp"
 #include "src/resources/objLoader.hpp"
 
+#include "src/common/gameStruct.hpp"
+#include "src/common/rand.hpp"
 #include "src/common/id.hpp"
 #include "src/common/points.hpp"
 #include "src/common/common.hpp"
@@ -155,11 +158,13 @@ class Turrel;
 
 
 
-
+#include "src/common/rand.cpp"
+#include "src/common/gameStruct.cpp"
 #include "src/common/id.cpp"
 #include "src/common/global.cpp"
 #include "src/common/constants.cpp"
-#include "src/common/vector.cpp"
+#include "src/common/myVector.cpp"
+#include "src/common/myStr.cpp"
 #include "src/world/galaxy.cpp"
 #include "src/world/garbage.cpp"  
 #include "src/world/starsystem.cpp"  

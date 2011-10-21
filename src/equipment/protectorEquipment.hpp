@@ -25,7 +25,7 @@ class ProtectorEquipment  : public CommonForEquipment
 {
 	public:
 		ProtectorEquipment(); 
-      		ProtectorEquipment(TextureOb* _pTo_itemTexOb, 
+      		ProtectorEquipment(TextureOb* _texOb_item, 
       				   int _protection_orig, 
 				   EquipmentCommonData _common_data);
       				    
@@ -33,14 +33,14 @@ class ProtectorEquipment  : public CommonForEquipment
 
 		int getProtection() const;
 		
-      		bool insertModule(ProtectorModule* pTo_protectorModule);
+      		bool insertModule(ProtectorModule*);
       		
       	private:
       	      	int protection_orig;
       		int protection_add;
       		int protection;
       		
-      		std::vector<ProtectorModule*> modules_pList;
+      		std::vector<ProtectorModule*> modules_vec;
       		
       		void countPrice();
       		void updatePropetries();
@@ -48,9 +48,6 @@ class ProtectorEquipment  : public CommonForEquipment
 
      		void virtual addUniqueInfo();
            	std::string getProtectionStr();
-
-     	
-
 };
 
 ProtectorEquipment* protectorEquipmentGenerator(int race_id, int revision_id = -1);

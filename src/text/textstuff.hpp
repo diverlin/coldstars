@@ -21,12 +21,41 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define TEXTSTUFF_H
 
 
-class TextBoard
-{
- 	public:
-       		TextBoard();
-       		~TextBoard();
+//class TextBoard
+//{
+ 	//public:
+       		//TextBoard();
+       		//~TextBoard();
 
+//};
+
+
+class VerticalFlowText
+{
+        public:
+                VerticalFlowText(std::string _str, 
+                                vec2f _center, 
+                                Color4i _color, 
+                                float _collision_radius);
+                                   
+                ~VerticalFlowText();
+
+		bool getAlive() const;
+
+                void update();
+                void render() const;
+ 
+        private:
+                bool is_alive;
+                int live_time;
+
+                std::string str;
+                Color4i color;
+
+                vec2f offset;
+                vec2f pos;
+                
+                float speed;
 };
 
 

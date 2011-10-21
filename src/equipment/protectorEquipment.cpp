@@ -17,13 +17,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "protectorEquipment.hpp"
-
-ProtectorEquipment :: ProtectorEquipment(TextureOb* _itemTexOb, 
+ProtectorEquipment :: ProtectorEquipment(TextureOb* _texOb_item, 
 					 int _protection_orig, 
 					 EquipmentCommonData _common_data)
 {
-    	CommonForEquipment_init(PROTECTOR_ID, _itemTexOb, _common_data);
+    	CommonForEquipment_init(PROTECTOR_ID, _texOb_item, _common_data);
 
     	protection_orig = _protection_orig;
     	protection_add  = 0;
@@ -33,7 +31,12 @@ ProtectorEquipment :: ProtectorEquipment(TextureOb* _itemTexOb,
 }
 
 ProtectorEquipment :: ~ProtectorEquipment()
-{}
+{
+	for (unsigned int mi = 0; mi<modules_vec.size(); mi++)
+	{
+		delete modules_vec[mi];
+	}
+}
 
 
 int ProtectorEquipment :: getProtection() const { return protection; }
@@ -83,14 +86,14 @@ std::string ProtectorEquipment :: getProtectionStr()
 
 bool ProtectorEquipment :: insertModule(ProtectorModule* _protector_module)
 {
-    	if (modules_pList.size() < common_data.modules_num_max)
+    	if (modules_vec.size() < common_data.modules_num_max)
     	{
         	protection_add += _protector_module->getProtectionAdd();
     
         	updatePropetries();
         
         	texOb_modules_pList.push_back(_protector_module->getTexOb());
-        	modules_pList.push_back(_protector_module);
+        	modules_vec.push_back(_protector_module);
         	return true;
     	}
     	else
@@ -109,7 +112,7 @@ ProtectorEquipment* protectorEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.ProtectorEquipment_texOb_pList);   
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.ProtectorEquipment_texOb_pList);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(PROTECTOR_ITEM_TEXTURE_ID, revision_id) 
 
     	int protection_orig = getRandInt(PROTECTOR_PROTECTION_MIN, PROTECTOR_PROTECTION_MAX);
@@ -120,7 +123,7 @@ ProtectorEquipment* protectorEquipmentGenerator(int race_id, int revision_id)
     	common_data.condition_max   = getRandInt(PROTECTOR_CONDITION_MIN, PROTECTOR_CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
-    	ProtectorEquipment* protector_equipment = new ProtectorEquipment(itemTexOb, protection_orig, common_data);
+    	ProtectorEquipment* protector_equipment = new ProtectorEquipment(texOb_item, protection_orig, common_data);
 
     	return protector_equipment;
 }

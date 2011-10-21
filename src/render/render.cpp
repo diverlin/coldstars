@@ -24,7 +24,7 @@ void resetRenderTransformation() { glLoadIdentity(); }
 
 void camera(float x, float y) { glTranslatef(-x, -y, 0.0); }
 
-void setColor(Color color) { glColor4f(color.r, color.g, color.b, color.a); }
+void setColor(Color4f color) { glColor4f(color.r, color.g, color.b, color.a); }
 
 void enable_BLEND()  { glEnable(GL_BLEND);  }
 void disable_BLEND() { glDisable(GL_BLEND); }
@@ -151,69 +151,20 @@ void drawLine(GLuint texture,
 
 
 
-
-
-
-void drawInfoIn2Column(
-                std::vector<std::string*>* pTo_info_title_pList, 
-                std::vector<std::string*>* pTo_info_value_pList, 
-                float center_x, float center_y,
-                float scroll_x,
-                float scroll_y)
+void drawSimpleColoredText(std::string str, vec2f pos, Color4i color, float scroll_x, float scroll_y)
 {
-     	int font_size = 13;
-     	float char_h = 25;
-     	float char_w = 10;
-
-     	float max_info_total_str_size = 0;
-     	float max_info_title_str_size = 0;
-
-     	for (unsigned int i = 1; i < pTo_info_title_pList->size(); i++)
-     	{
-         	int total_length = (*pTo_info_title_pList)[i]->length() + (*pTo_info_value_pList)[i-1]->length();
-         	int title_length = (*pTo_info_title_pList)[i]->length(); 
-
-         	if (total_length > max_info_total_str_size)
-            		max_info_total_str_size = total_length;
-
-         	if (title_length > max_info_title_str_size)
-           		max_info_title_str_size = title_length;
-     	}    
-
-     	float info_total_string_w = char_w * max_info_total_str_size;
-     	float info_total_string_h = char_h * pTo_info_title_pList->size();
-
-     	TextureOb* texOb_textBoard = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.textBackground_texOb_pList);
-     	Rect rect = Rect(center_x - char_w, center_y - info_total_string_h, info_total_string_w, info_total_string_h + char_h/2);
-
-     	glEnable(GL_BLEND);
-     		drawTexturedRect(texOb_textBoard->texture, rect, -2);
-     	glDisable(GL_BLEND);
-
-     	sf::String s((*(*pTo_info_title_pList)[0]), g_FONT, (font_size+1));
-     	s.SetColor(sf::Color(255, 255, 255));
-     	s.SetPosition(center_x - scroll_x + info_total_string_w/3, (g_VIEW_HEIGHT - center_y) + scroll_y); 
-     	g_APP.Draw(s);
-
-     	for (unsigned int i = 1; i < pTo_info_title_pList->size(); i++)
-     	{
-         	sf::String s((*(*pTo_info_title_pList)[i]), g_FONT, font_size);
-         	s.SetColor(sf::Color(255, 255, 255));
-         	s.SetPosition(center_x - scroll_x, (g_VIEW_HEIGHT - center_y) + char_h*i + scroll_y); 
-         	g_APP.Draw(s);
-     	}       
-
-
-     	for (unsigned int i = 0; i < pTo_info_value_pList->size(); i++)
-     	{
-         	sf::String s((*(*pTo_info_value_pList)[i]), g_FONT, font_size);
-         	s.SetColor(sf::Color(250, 250, 0));
-         	s.SetPosition(center_x - scroll_x + max_info_title_str_size * (char_w - 1.2), (g_VIEW_HEIGHT - center_y) + char_h*i + char_h + scroll_y); 
-         	g_APP.Draw(s);
-     	}      
+     	 int font_size = 12;
+         sf::String s(str, g_FONT, font_size);
+              	
+          /* SHADOW */
+     	 //s.SetColor(sf::Color(0, 0, 0));
+         //s.SetPosition(pos.x - scroll_x - 2, (g_VIEW_HEIGHT - pos.y) + scroll_y + 2); 
+         //g_APP.Draw(s);
+         
+         s.SetColor(sf::Color(color.r, color.g, color.b));
+         s.SetPosition(pos.x - scroll_x, (g_VIEW_HEIGHT - pos.y) + scroll_y); 
+         g_APP.Draw(s);        
 }
-
-
 
 
 void drawInfoIn2Column(
@@ -372,7 +323,7 @@ void initGL(int width, int height)
 
   	glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
   
-      	//glShadeModel(GL_SMOOTH);
+      	glShadeModel(GL_SMOOTH);
       	//glDisable(GL_LIGHTING);  
 }   
 

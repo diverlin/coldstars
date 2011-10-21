@@ -38,6 +38,9 @@ class Asteroid : public CommonForPlanet
         	void update_inSpace_inDynamic_TRUE();
         	void update_inSpace_inDynamic_FALSE();             		
         	
+        	void collision_TRUE();
+        	void collision_FALSE();
+        	
         	void hit_TRUE(int damage);
         	void hit_FALSE(int damage);
         	

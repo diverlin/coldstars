@@ -25,7 +25,7 @@ class DroidEquipment : public CommonForEquipment
 {
    	public: 
       		DroidEquipment();
-     		DroidEquipment(TextureOb* _itemTexOb, 
+     		DroidEquipment(TextureOb* _texOb_item, 
      			       int _repair_orig, 
      			       EquipmentCommonData _common_data);
      			       
@@ -33,14 +33,14 @@ class DroidEquipment : public CommonForEquipment
 
 		int getRepair() const;
 		
-      		bool insertModule(DroidModule* pTo_droidModule);
+      		bool insertModule(DroidModule*);
       		
       	private:
       		int repair_orig;
       		int repair_add;
       		int repair;
 
-      	      	std::vector<DroidModule*> modules_pList;
+      	      	std::vector<DroidModule*> modules_vec;
 
       		void countPrice();
       		void updatePropetries();

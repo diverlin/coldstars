@@ -16,28 +16,11 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#ifndef RAND_H
+#define RAND_H
 
+int getRandInt(int range_start, int range_end);
+int getRandSign();
+bool getRandBool();
 
-#ifndef CONTAINER_H
-#define CONTAINER_H
-
-
-class Container : public CommonForSpaceItems
-{
-    	public: 
-        	int id, type_id;
-                  
-                ItemSlot* otsec_slot;
-                            
-        	int mass;
-
-        	Container();
-        	Container(TextureOb* _texOb, vec2f _start_pos);
-        	~Container();
-        
-        	void renderInfo();
-};
-
-Container* createContainer(vec2f);
-
-#endif 
+#endif

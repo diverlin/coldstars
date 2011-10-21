@@ -25,7 +25,7 @@ class RadarEquipment : public CommonForEquipment
 {
    	public:
       		RadarEquipment();
-      		RadarEquipment(TextureOb* pTo_itemTexOb, 
+      		RadarEquipment(TextureOb* _texOb_item, 
       			       int _radius_orig, 
       			       EquipmentCommonData _common_data);
       			       
@@ -33,14 +33,14 @@ class RadarEquipment : public CommonForEquipment
       		
       		int getRadius() const;
 
-      		bool insertModule(RadarModule* pTo_radarModule);
+      		bool insertModule(RadarModule*);
       		
       	private:
       	      	int radius_orig;
      		int radius_add;
       		int radius;
       		
-      	     	std::vector<RadarModule*> modules_pList;
+      	     	std::vector<RadarModule*> modules_vec;
       	     	
       		void updatePropetries();
       		void countPrice();

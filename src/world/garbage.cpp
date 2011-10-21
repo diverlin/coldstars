@@ -75,6 +75,11 @@ void Garbage :: add(ShockWaveEffect* _effect)
 {
 	effect_SHOCKWAVE_vec.push_back(_effect);
 }		
+
+void Garbage :: add(VerticalFlowText* _text)
+{
+	text_DAMAGE_vec.push_back(_text);
+}
 // effects
 	
 		
@@ -141,5 +146,12 @@ void Garbage :: clear()
        		delete effect_SHOCKWAVE_vec[ei];
     	}
        	effect_SHOCKWAVE_vec.clear();
+       	
+       	
+       	for(unsigned int ti = 0; ti < text_DAMAGE_vec.size(); ti++)
+    	{
+       		delete text_DAMAGE_vec[ti];
+    	}
+       	text_DAMAGE_vec.clear();
     	// effects
 }

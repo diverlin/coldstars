@@ -30,7 +30,7 @@ class Star : public CommonForPlanet
     		Star(TextureOb* _texOb, ObjMeshInstance* _mesh,  PlanetData _star_data);
     		~Star();
                 
-                Color getColor() const;
+                Color4f getColor() const;
                 int getColorId() const;
                 float getBrightThreshold() const;
     		
@@ -43,7 +43,7 @@ class Star : public CommonForPlanet
     		void renderInfo();
                 
         private:
-        	Color color;
+        	Color4f color;
 
 }; 
 

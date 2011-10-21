@@ -25,7 +25,7 @@ class EnergizerEquipment : public CommonForEquipment
 {
 	public:
       		EnergizerEquipment();
-      		EnergizerEquipment(TextureOb* _itemTexOb, 
+      		EnergizerEquipment(TextureOb* _texOb_item, 
       				   int _energy_max_orig, 
       				   int _restoration_orig, 
       				   EquipmentCommonData _common_data);
@@ -34,7 +34,7 @@ class EnergizerEquipment : public CommonForEquipment
       
       		int getEnergy() const;
       		
-      		bool insertModule(EnergizerModule* pTo_energizerModule);
+      		bool insertModule(EnergizerModule*);
       		
       	private:
       		int energy_max_orig;
@@ -46,7 +46,7 @@ class EnergizerEquipment : public CommonForEquipment
       		int restoration_add;
       		int restoration;
 
-      	      	std::vector<EnergizerModule*> modules_pList;
+      	      	std::vector<EnergizerModule*> modules_vec;
 
       		void countPrice();
       		void updatePropetries();

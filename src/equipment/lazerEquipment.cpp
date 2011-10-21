@@ -17,14 +17,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "lazerEquipment.hpp"
-
-LazerEquipment :: LazerEquipment(TextureOb* _itemTexOb, 
+LazerEquipment :: LazerEquipment(TextureOb* _texOb_item, 
 				 int _damage_orig, 
 				 int _radius_orig, 
 				 EquipmentCommonData _common_data)
 {
-   	CommonForEquipment_init(LAZER_ID, _itemTexOb, _common_data);
+   	CommonForEquipment_init(LAZER_ID, _texOb_item, _common_data);
 
    	damage_orig = _damage_orig;
    	damage_add  = 0;
@@ -38,17 +36,18 @@ LazerEquipment :: LazerEquipment(TextureOb* _itemTexOb,
    	texOb_lazerEffect = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.lazerEffect_texOb_pList);
    	//texOb_particle    = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.particles_texOb_pList);
    	texOb_particle    = g_TEXTURE_MANAGER.returnParticleTexObByColorId(texOb_lazerEffect->color_id);
-   	if (texOb_particle == NULL)
-   		printf("trololo\n");
-   	
-   
+   	   
    	updatePropetries();
    	countPrice();
 }
 
 LazerEquipment :: ~LazerEquipment()
-{}
-
+{
+	for (unsigned int mi = 0; mi<modules_vec.size(); mi++)
+	{
+		delete modules_vec[mi];
+	}
+}
 
 int LazerEquipment :: getDamage() const { return damage; }
 int LazerEquipment :: getRadius() const { return radius; }
@@ -165,7 +164,7 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
 
 bool LazerEquipment :: insertModule(LazerModule* _lazer_module)
 {
-    	if (modules_pList.size() < common_data.modules_num_max)
+    	if (modules_vec.size() < common_data.modules_num_max)
     	{
        		damage_add += _lazer_module->getDamageAdd();
        		radius_add += _lazer_module->getRadiusAdd();
@@ -173,7 +172,7 @@ bool LazerEquipment :: insertModule(LazerModule* _lazer_module)
        		updatePropetries();
     
        		texOb_modules_pList.push_back(_lazer_module->getTexOb());
-       		modules_pList.push_back(_lazer_module);
+       		modules_vec.push_back(_lazer_module);
        		return true;
     	}
     	else
@@ -194,7 +193,7 @@ LazerEquipment* lazerEquipmentGenerator(int race_id, int revision_id)
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(LAZER_ITEM_TEXTURE_ID, revision_id)
-    	TextureOb* itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.LazerEquipment_texOb_pList);     
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.LazerEquipment_texOb_pList);     
 
     	int damage_orig     = getRandInt(LAZER_DAMAGE_MIN, LAZER_DAMAGE_MAX);
     	int radius_orig     = getRandInt(LAZER_RADIUS_MIN, LAZER_RADIUS_MAX);
@@ -205,11 +204,11 @@ LazerEquipment* lazerEquipmentGenerator(int race_id, int revision_id)
     	common_data.condition_max   = getRandInt(LAZER_CONDITION_MIN, LAZER_CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
-    	LazerEquipment* _lazer_equipment = new LazerEquipment(itemTexOb, 
+    	LazerEquipment* lazer_equipment = new LazerEquipment(texOb_item, 
     							      damage_orig, 
     							      radius_orig, 
 							      common_data);
-    	return _lazer_equipment;
+    	return lazer_equipment;
 }
 
 

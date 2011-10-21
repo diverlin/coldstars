@@ -18,26 +18,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-#ifndef CONTAINER_H
-#define CONTAINER_H
-
-
-class Container : public CommonForSpaceItems
+int getRandInt(int range_start, int range_end)
 {
-    	public: 
-        	int id, type_id;
-                  
-                ItemSlot* otsec_slot;
-                            
-        	int mass;
+    	if (range_start != range_end)
+       		return rand()%(range_end-range_start) + range_start;
+   	else
+       		return range_start;
+}
 
-        	Container();
-        	Container(TextureOb* _texOb, vec2f _start_pos);
-        	~Container();
-        
-        	void renderInfo();
-};
+int getRandSign()
+{
+  	if (getRandInt(0,10) > 5)
+     		return 1;
+  	else
+     		return -1; 
+}
 
-Container* createContainer(vec2f);
+bool getRandBool()
+{
+  	if (getRandInt(0,10) > 5)
+     		return true;
+  	else
+     		return false; 
+}
 
-#endif 
+
+

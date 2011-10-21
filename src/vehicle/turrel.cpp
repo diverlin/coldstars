@@ -137,13 +137,13 @@ bool Turrel :: isTargetAlive()
            		return false;
 
      	if (target_type_id == MINERAL_ID)
-        	if (target_mineral->is_alive == true)
+        	if (target_mineral->getAlive() == true)
            		return true;
         	else
            		return false; 
 
      	if (target_type_id == CONTAINER_ID)
-        	if (target_container->is_alive == true)
+        	if (target_container->getAlive() == true)
            		return true;
         	else
            		return false;
@@ -330,7 +330,7 @@ void Turrel :: setTarget(Mineral* _mineral)
      	pTo_target_pos_x = &(target_mineral->getPoints()->getpCenter()->x);
      	pTo_target_pos_y = &(target_mineral->getPoints()->getpCenter()->y);
 
-     	pTo_target_is_alive = &(target_mineral->is_alive);
+     	pTo_target_is_alive = target_mineral->getpAlive();
      	has_TARGET = true;
 }
 
@@ -342,7 +342,7 @@ void Turrel :: setTarget(Container* _container)
      	pTo_target_pos_x = &(target_container->getPoints()->getpCenter()->x);
      	pTo_target_pos_y = &(target_container->getPoints()->getpCenter()->y);
 
-     	pTo_target_is_alive = &(target_container->is_alive);
+     	pTo_target_is_alive = target_container->getpAlive();
      	has_TARGET = true;
 }
 

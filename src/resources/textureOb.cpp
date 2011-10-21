@@ -17,8 +17,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "textureOb.hpp"
-
 
 TextureOb :: TextureOb()
 {}
@@ -42,9 +40,6 @@ TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, std::ve
     path      = _path;
     use_alpha = _use_alpha;
     
-    //slice_w = _slice_w;
-    //slice_h = _slice_h;
-
     if ((_columns_num == 1) && (_rows_num == 1))
     {
         is_animated = false;
@@ -62,6 +57,7 @@ TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, std::ve
     is_loaded = false;
     is_shared = false;
 
+        size_id = returnObjectSize(w, h);
 
     if (type_id == SLOT_TEXTURE_ID)
        slotArgManager(pTo_arg);
@@ -360,8 +356,6 @@ void TextureOb :: shipArgManager(std::vector<int>* _pTo_arg)
      race_id    = (*_pTo_arg)[0];
      subtype_id = (*_pTo_arg)[1];   // warrior/trader and so on
      mod_id     = 0;
-          
-     size_id = returnObjectSize(w, h);
 }
 
 void TextureOb :: nebulaArgManager(std::vector<int>* _arg)

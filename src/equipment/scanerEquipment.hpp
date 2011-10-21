@@ -25,7 +25,7 @@ class ScanerEquipment : public CommonForEquipment
 {
   	public:
     		ScanerEquipment();
-    		ScanerEquipment(TextureOb* _itemTexOb, 
+    		ScanerEquipment(TextureOb* _texOb_item, 
     				int _scan_orig, 
     				EquipmentCommonData _common_data);
     				
@@ -33,14 +33,14 @@ class ScanerEquipment : public CommonForEquipment
 
 		int getScan() const;
 
-    		bool insertModule(ScanerModule* pTo_scanerModule);
+    		bool insertModule(ScanerModule*);
     		
     	private:
     		int scan_orig;
     		int scan_add;
     		int scan;
     		
-    	    	std::vector<ScanerModule*> modules_pList; 
+    	    	std::vector<ScanerModule*> modules_vec; 
     	    	
     	    	void countPrice();
     		void updatePropetries();

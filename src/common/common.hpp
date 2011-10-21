@@ -19,57 +19,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef COMMON_H
 #define COMMON_H
 
-int getRandInt(int range_start, int range_end);
-int getRandSign();
-bool getRandBool();
-
-struct Color
-{
-   	float r;
-   	float g;
-   	float b;
-   	float a;
-};
-
-struct See
-{
-   	bool ASTEROID;
-   	bool CONTAINER;
-   	bool MINERAL;
-
-   	bool RANGER;
-   	bool WARRIOR;
-   	bool TRADER;  
-   	bool PIRAT;
-   	bool DIPLOMAT;
-};
-
-struct LifeData
-{
-        bool is_alive;
-        bool is_explosed;
-        
-	int armor;
-	int dying_time;
-};
-
-struct IdData  
-{
-	int id;
-	int type_id;
-	int subtype_id;
-};
-
-std :: string returnRaceStringByRaceId(int id);  // replace by generator class
-
 int returnObjectSize(int w, int h);  //size 0...9
-
-
-std::string int2str(int var); 
-std::string bool2str(bool var); 
 
 bool get_dX_dY_ToPoint(float x1, float y1, float x2, float y2, float step, float* pTo_dx, float* pTo_dy);
 void get_dX_dY_angleInD_ToPoint(float x1, float y1, float x2, float y2, float step, float* pTo_dx, float* pTo_dy, float* pTo_angle_inD);
-
 
 #endif

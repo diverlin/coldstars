@@ -17,18 +17,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "energizerEquipment.hpp"
-
 EnergizerEquipment :: EnergizerEquipment()
 {}
 
 
-EnergizerEquipment :: EnergizerEquipment(TextureOb* _itemTexOb, 
+EnergizerEquipment :: EnergizerEquipment(TextureOb* _texOb_item, 
 					 int _energy_max_orig, 
 					 int _restoration_orig, 
 					 EquipmentCommonData _common_data)
 {
-    	CommonForEquipment_init(ENERGIZER_ID, _itemTexOb, _common_data);
+    	CommonForEquipment_init(ENERGIZER_ID, _texOb_item, _common_data);
 
     	energy_max_orig = _energy_max_orig;
     	energy_max_add  = 0;
@@ -43,10 +41,15 @@ EnergizerEquipment :: EnergizerEquipment(TextureOb* _itemTexOb,
 }
 
 EnergizerEquipment :: ~EnergizerEquipment()
-{}
+{
+	for (unsigned int mi = 0; mi<modules_vec.size(); mi++)
+	{
+		delete modules_vec[mi];
+	}
+}
 
 
-int EnergizerEquipment :: getEnergy() const {  return energy; }
+int EnergizerEquipment :: getEnergy() const { return energy; }
       		
 
 void EnergizerEquipment :: updatePropetries()
@@ -102,7 +105,7 @@ std::string EnergizerEquipment :: getRestorationStr()
 
 bool EnergizerEquipment :: insertModule(EnergizerModule* _energizer_module)
 {
-    	if (modules_pList.size() < common_data.modules_num_max)
+    	if (modules_vec.size() < common_data.modules_num_max)
     	{
         	energy_max_add  += _energizer_module->getEnergyMaxAdd();
         	restoration_add += _energizer_module->getRestorationAdd();
@@ -110,7 +113,7 @@ bool EnergizerEquipment :: insertModule(EnergizerModule* _energizer_module)
         	updatePropetries();
         
         	texOb_modules_pList.push_back(_energizer_module->getTexOb());
-        	modules_pList.push_back(_energizer_module);
+        	modules_vec.push_back(_energizer_module);
         	return true;
     	}
     	else
@@ -128,7 +131,7 @@ EnergizerEquipment* energizerEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* itemTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.energyBlockItem_texOb_pList);   
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.energyBlockItem_texOb_pList);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(ENERGIZER_ITEM_TEXTURE_ID, revision_id)
 
     	int energy_max_orig  = getRandInt(ENERGIZER_ENERGY_MIN, ENERGIZER_ENERGY_MAX);
@@ -140,6 +143,6 @@ EnergizerEquipment* energizerEquipmentGenerator(int race_id, int revision_id)
     	common_data.condition_max    = getRandInt(ENERGIZER_CONDITION_MIN, ENERGIZER_CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
-    	EnergizerEquipment* energizer_equipment = new EnergizerEquipment(itemTexOb, energy_max_orig, restoration_orig, common_data);
+    	EnergizerEquipment* energizer_equipment = new EnergizerEquipment(texOb_item, energy_max_orig, restoration_orig, common_data);
     	return energizer_equipment;
 }

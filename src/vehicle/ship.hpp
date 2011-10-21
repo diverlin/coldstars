@@ -21,50 +21,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define SHIP_H
 
 
-struct NeedsToDo
-{
-  	bool REPAIR;
-  	bool CHARGE;
-   	bool GETBULLETS;
-   	bool BUY;
-   	bool SELL;
-};
-
-struct Abilities
-{
-        /* this structure explain hat feature are avaliable for ship */ 
-        bool RADAR;
-   	bool DRIVE;
-   	bool HJUMP;
-   	bool ENERGIZE;
-   	bool PROTECT;
-   	bool REPAIR;
-   	bool FREEZE;
-   	bool GRAB;
-   	bool SCAN;
-   	bool FIRE;
-};
-
-
-struct KorpusData
-{
-        /* this data depends only on korpus and cannot be changed by artefacts/items */
-        unsigned int protection; 
-        unsigned int space;
-        unsigned int armor;
-        unsigned int temperature;   //???
-        
-        unsigned int price;
-        
-        unsigned int size_id;
-        float collision_radius;
-        
-        bool inhibit_GRAPPLE;
-        bool render_TURRELS;
-        unsigned int weapon_slot_num;
-};
-
-
 struct ShipPropetries
 {       
         // this data is changed during game play, the propetries depends on many factors
@@ -167,8 +123,8 @@ class Ship
         	void update_inSpace_inDynamic_TRUE();
         	void update_inSpace_inDynamic_FALSE();
 
-        	void hit_TRUE(int _damage);
-        	void hit_FALSE(int _damage);
+        	void hit_TRUE(unsigned int _damage);
+        	void hit_FALSE(unsigned int _damage);
 
         	void death(); 
 

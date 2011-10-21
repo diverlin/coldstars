@@ -51,6 +51,126 @@ ItemSlot :: ItemSlot(int _subtype_id, Ship* _ship, TextureOb* _texOb, int _pos_x
         is_CURSORED      = false;         
 }
 
+ItemSlot :: ~ItemSlot()
+{
+	if (item_type_id == EQUIPMENT_ID)
+	{
+		if (item_subtype_id == ROCKET_ID)
+		{
+    			delete rocket_equipment;
+    		}
+    	
+    		if (item_subtype_id == LAZER_ID)
+		{
+    			delete lazer_equipment;
+    		}
+    
+        	if (item_subtype_id == RADAR_ID)
+		{
+    			delete radar_equipment;
+      		}
+    						
+        	if (item_subtype_id == DRIVE_ID)
+		{
+    			delete drive_equipment;
+    		}
+
+        	if (item_subtype_id == BAK_ID)
+		{
+    			delete bak_equipment;
+    		}
+
+        	if (item_subtype_id == ENERGIZER_ID)
+		{
+    			delete energizer_equipment;
+    		}
+
+        	if (item_subtype_id == PROTECTOR_ID)
+		{
+    			delete protector_equipment;
+    		}
+    	
+        	if (item_subtype_id == DROID_ID)
+		{
+    			delete droid_equipment;
+    		}
+
+        	if (item_subtype_id == FREEZER_ID)
+		{
+    			delete freezer_equipment;
+    		}
+    	
+ 	        if (item_subtype_id == SCANER_ID)
+		{
+    			delete scaner_equipment;
+    		}
+    	
+        	if (item_subtype_id == GRAPPLE_ID)
+		{
+    			delete grapple_equipment;
+    		}
+    	}
+    	
+    	if (item_type_id == MODULE_ID)
+	{
+        	if (item_subtype_id == ROCKET_ID)
+		{
+    			delete rocket_module;
+    		}	 
+
+        	if (item_subtype_id == LAZER_ID)
+		{
+    			delete lazer_module;
+    		}	 
+    	
+        	if (item_subtype_id == RADAR_ID)
+		{
+    			delete radar_module;
+    		}	 
+    	
+        	if (item_subtype_id == DRIVE_ID)
+		{
+    			delete drive_module;
+    		}	 
+    		
+        	if (item_subtype_id == BAK_ID)
+		{
+    			delete bak_module;
+    		}
+    	
+        	if (item_subtype_id == ENERGIZER_ID)
+		{
+    			delete energizer_module;
+    		}
+
+       		if (item_subtype_id == PROTECTOR_ID)
+		{
+    			delete protector_module;
+    		}
+
+        	if (item_subtype_id == DROID_ID)
+		{
+    			delete droid_module;
+    		}
+
+        	if (item_subtype_id == FREEZER_ID)
+		{
+    			delete freezer_module;
+    		}	
+    	
+    		if (item_subtype_id == SCANER_ID)
+		{
+    			delete scaner_module;
+    		}
+
+    		if (item_subtype_id == GRAPPLE_ID)
+		{
+    			delete grapple_module;
+    		}
+    	}    		
+}
+
+
 int ItemSlot :: getType()        const { return type_id; }
 int ItemSlot :: getSubType()     const { return subtype_id; }
 int ItemSlot :: getItemType()    const { return item_type_id; }
@@ -585,8 +705,6 @@ bool ItemSlot :: insertItem(GrappleModule* item)
 
 void ItemSlot :: removeItem()
 {
-	is_EQUIPED = false; 
-	
 	if (item_type_id == EQUIPMENT_ID)
 	{
 		if (item_subtype_id == ROCKET_ID)
@@ -732,8 +850,9 @@ void ItemSlot :: removeItem()
     		}
     	}
 
-		item_type_id    = -1;
-		item_subtype_id = -1;
+	is_EQUIPED = false; 
+	item_type_id    = -1;
+	item_subtype_id = -1;
 }
 
 

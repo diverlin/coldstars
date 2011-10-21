@@ -20,21 +20,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef PARTICLE_H
 #define PARTICLE_H
  
- 
-struct ParticleData
-{
-      	float alpha_start;
-      	float alpha_end;
-      	float d_alpha;
-      		
-      	float size_start;
-      	float size_end;
-        float d_size;
-
-      	float velocity_start;
-      	float velocity_end;
-	float d_velocity;
-};
 
 class Particle
 {
