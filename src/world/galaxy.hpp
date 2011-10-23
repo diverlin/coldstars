@@ -37,6 +37,9 @@ class Galaxy
      		int star_counter;      
      		int ship_counter;
      		int planet_counter;
+     		
+     		//bool allow_single_calc_inDynamic;
+     		//bool allow_single_calc_inStatic;
 };
 
 

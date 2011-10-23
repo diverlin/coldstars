@@ -106,6 +106,8 @@ class StarSystem
                 
     		bool detalied_simulation;
     		bool calculation_per_turn_allowed; 
+    		bool calculation_per_turn_allowed_inDynamic; 
+    		    		
     		bool is_CAPTURED;
     		
     		Rect rect_onMap;

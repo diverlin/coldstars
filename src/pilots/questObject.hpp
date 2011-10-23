@@ -37,7 +37,7 @@ class QuestObject
 		Npc* getNpc();
 		Planet* getPlanet();
 				
-		void clear();
+		void reset();
 		void validation();
 	
 	private:

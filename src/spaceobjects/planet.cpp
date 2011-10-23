@@ -113,6 +113,22 @@ void Planet :: createLand()
 
 
 //// ******* TRANSITION ******* 
+ void Planet :: launchingProcedure()
+{
+         for (unsigned int i = 0; i<NPC_launching_vec.size(); i++)
+         {
+         	NPC_launching_vec[i]->launchingEvent();
+         }
+              
+         NPC_launching_vec.clear();  
+}
+
+void Planet :: addToLaunchingQueue(Npc* _npc)
+{
+         NPC_launching_vec.push_back(_npc);
+}
+		
+                
 bool Planet :: addShip(Ship* _ship)
 {
      	if (subtype_id == KOSMOPORT_TYPE_ID)

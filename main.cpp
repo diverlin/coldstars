@@ -62,13 +62,13 @@ int main()
     	// GAME LOOP
     	while (g_APP.IsOpened())
     	{    
-       		///// AUTOTURN //////////////////
-       		//if (g_TIMER < -50)
-       		//{  
-       			//g_TIMER = TURN_TIME;
-           		//TURN_COUNT++;
-           		//printf("        *** auto turn END was activated, turn num = %i\n", TURN_COUNT);
-       		//}
+       		/// AUTOTURN //////////////////
+       		if (g_TIMER < -50)
+       		{  
+       			g_TIMER = TURN_TIME;
+           		TURN_COUNT++;
+           		printf("        *** auto turn END was activated, turn num = %i\n", TURN_COUNT);
+       		}
 
 		pPLAYER->update_inSpace();
 					
