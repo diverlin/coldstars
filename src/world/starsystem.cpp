@@ -22,7 +22,9 @@ StarSystem :: StarSystem()
 { 
     	id = g_STARSYSTEM_ID_GENERATOR.getNextId();
     	is_CAPTURED = false;
+    	
     	calculation_per_turn_allowed = true;
+    	calculation_per_turn_allowed_inDynamic = true;
     	
     	detalied_simulation = false; // will be changing depending on player presence
 }
@@ -65,6 +67,15 @@ void StarSystem :: update_TRUE(int timer)
 
 	if (timer > 0)
 	{
+		if (calculation_per_turn_allowed_inDynamic == true)
+		{
+			for (unsigned int i=0; i<PLANET_vec.size(); i++)
+			{
+				PLANET_vec[i]->launchingProcedure();
+			}
+			calculation_per_turn_allowed_inDynamic = false;
+		}
+		
      		asteroidManager(10); 
 
     		updateEntities_inDynamic_TRUE();
@@ -91,9 +102,12 @@ void StarSystem :: update_TRUE(int timer)
     			updateEntities_inStatic();     			
 
     			calculation_per_turn_allowed = false;
+    			calculation_per_turn_allowed_inDynamic = true;
     		}    		
 	}
 }
+
+
 
 
 void StarSystem :: update_FALSE(int timer)

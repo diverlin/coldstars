@@ -25,6 +25,9 @@ Galaxy :: Galaxy()
     	ship_counter      = 0;
     	planet_counter    = 0;
 
+     	//allow_single_calc_inDynamic = true;
+     	//allow_single_calc_inStatic  = true;
+     		
     	while(starsytem_counter < STARSYSTEM_TOTAL_NUM)
     	{  
         	

@@ -71,7 +71,7 @@ void QuestObject :: setObject(Npc* _npc)       { npc = _npc;  }
 void QuestObject :: setObject(Planet* _planet) { planet = _planet; }
 
 
-void QuestObject :: clear()
+void QuestObject :: reset()
 {
 	if (ob_type_id == NPC_ID)
 	{
@@ -96,7 +96,7 @@ void QuestObject :: validation()
 	{
 		if (npc->getAlive() == false)
 		{
-			clear();
+			reset();
 			return;
 		}
 	}

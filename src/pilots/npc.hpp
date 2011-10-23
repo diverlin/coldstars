@@ -72,7 +72,8 @@ class Npc
      		//// scanning    		
      		
      		
-     		bool launchingEventPlayer();
+     		bool launchingEventPlayer();     		          	
+          	bool launchingEvent();
      		
      		Planet* getPlanetForDocking();
     		
@@ -91,7 +92,7 @@ class Npc
    	     	Ship* ship;
    	     	
    	     	Skill* skill; 
-   	     	     		
+
    	     	TextureOb* texOb;
    	     	
    	     	QuestObject* questOb;
@@ -136,7 +137,7 @@ class Npc
                	void sortVisibleAsteroids_inSpace_inStatic();
 
      		void observe_inPlanet_inStatic();  //inhabited <-> uninhabited
-     		// observation/radar 
+     		// 
      		
      		// AI
      		void thinkCommon_inSpace_inStatic();
@@ -177,21 +178,15 @@ class Npc
      		void thinkUnique_Race6_inSpace_inStatic();
      		void thinkUnique_Race7_inSpace_inStatic();
           		
-       		bool (Npc::*func_inDynamic)();
+       		bool (Npc::*func_inDynamic_inSpace)();
      		
      		bool doNothing();
-     		// AI
+     		// 
      		
      		
      		//// docking/launching
-
-
-          	bool checkDocking();
-          	bool getDockingPermission();
-          	bool dockingEvent();
-
-          	bool launchingEvent();
-     		//// docking/launching
+          	bool docking();
+     		//// 
      		     		
      		Ship* scanShip;
      		

@@ -149,7 +149,7 @@ Npc :: Npc(int _race_id, int _subtype_id, TextureOb* _texOb)
 
     	credits = 1000;
    	
-    	func_inDynamic = &Npc::doNothing;
+    	func_inDynamic_inSpace = &Npc::doNothing;
     	
     	
 	place_type_id = NONE_ID; // fake
@@ -384,20 +384,23 @@ void Npc :: observe_inPlanet_inStatic()
 
 void Npc :: thinkCommon_inKosmoport_inStatic()
 {   		
-     	//if (place_type_id == KOSMOPORT_TYPE_ID)
-     	//{ 
-        	//printf("npc_id=%i,  insertNeedTaskId(LAUNCHING_task_id)\n", id);
-        	//insertNeedTaskId(LAUNCHING_task_id);   // debug
-     	//}
+	if (ship->needsToDo.REPAIR == true)
+	{
+		//repair();
+		ship->propetries.armor = ship->data_korpus.armor;    // FAKE
+		ship->needsToDo.REPAIR == false;
+	}	
+	
+	
+	// if all things are DONE
+	ship->getNavigator()->getTargetPlanet()->addToLaunchingQueue(this);
+	func_inDynamic_inSpace = &Npc::doNothing;
+	taskOb->reset();
 }
 
 void Npc :: thinkCommon_inLand_inStatic()
 {
-     	//if (place_type_id == LAND_ID)
-     	//{ 
-        	//printf("npc_id=%i,  insertNeedTaskId(LAUNCHING_task_id)\n", id);
-        	//insertNeedTaskId(LAUNCHING_task_id);   // debug
-     	//}
+
 }
 
 
@@ -408,11 +411,10 @@ void Npc :: thinkUnique_inSpace_inStatic()
 
 void Npc :: thinkCommon_inSpace_inStatic()
 {   	
-
-	//if (ship->propetries.armor < 0.3*ship->data_korpus.armor)   // move to ship
-	//{
+	if (ship->propetries.armor < 0.9*ship->data_korpus.armor)   // move to ship
+	{
 		ship->needsToDo.REPAIR = true;
-	//}
+	}
 	
 	taskGenerator(this);
 	
@@ -441,7 +443,8 @@ void Npc :: thinkCommon_inSpace_inStatic()
 		{
 			if (taskOb->getActionId() == LANDING_TASK_ID)
 			{
-				// checkDocking in dinamic = 
+				func_inDynamic_inSpace = &Npc::docking;
+				
 	        		ship->getNavigator()->setTargetPlanet(taskOb->getPlanet());
 	        	}
 	        }	
@@ -453,6 +456,8 @@ void Npc :: thinkCommon_inSpace_inStatic()
 		{
 			if (questOb->getActionId() == DESTROY_TASK_ID)
 			{
+				func_inDynamic_inSpace = &Npc::doNothing;
+				
 			 	ship->weapon_selector.setAll(true);
 			        ship->selectWeapons();
                    		ship->setWeaponsTarget(questOb->getNpc()->getShip());
@@ -639,7 +644,7 @@ void Npc :: aiSimulation()
 
 void Npc :: update_inDynamic_inSpace()
 {
-	(this->*func_inDynamic)();
+	(this->*func_inDynamic_inSpace)();
 }
 
 
@@ -655,25 +660,20 @@ Planet* Npc :: getPlanetForDocking()
      	return _target_planet;
 }
 
-bool Npc :: checkDocking()
+
+bool Npc :: docking()
 {
-     	return ship->getNavigator()->checkEchievement();
-}
-
-
-bool Npc :: getDockingPermission()
-{
-     	return ship->getNavigator()->getDockingPermission();
-}
-
-
-bool Npc :: dockingEvent()
-{
-     	if (ship->dockingEvent() == true)
+     	if (ship->getNavigator()->checkEchievement() == true)
      	{
-         	return true;
+     		if (ship->getNavigator()->getDockingPermission() == true)
+     		{
+     		     	ship->dockingEvent();     			
+     		}
+     		else
+     		{
+     			// wait or reset
+     		}
      	}
-     	return false;
 }
 
 

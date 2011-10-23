@@ -38,6 +38,9 @@ class Planet : public CommonForPlanet
 
                 bool addShip(Ship*);
                 bool addNpc(Npc*);
+
+		void addToLaunchingQueue(Npc*);                
+                void launchingProcedure();
                 
                 bool removeShipById(int _id);
                 bool removeNpcById(int _id);
@@ -57,6 +60,8 @@ class Planet : public CommonForPlanet
                 Land*      land;
                 
                 unsigned long int population;
+                
+                std::vector<Npc*> NPC_launching_vec;
                 
 		void createKosmoport();
                 void createLand();
