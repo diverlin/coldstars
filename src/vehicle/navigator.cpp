@@ -17,14 +17,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "navigator.hpp"
-
-
-Navigator :: Navigator(Ship* _ship)
+Navigator :: Navigator(Ship* _ship_owner)
 {
         following_type_id = NONE_ID;
        
-	ship_owner = _ship;
+	ship_owner = _ship_owner;
    
 	target_planet     = NULL;
     	target_ship       = NULL;
@@ -41,15 +38,15 @@ Navigator :: ~Navigator()
   
 void  Navigator :: removeTarget()
 {
-	if (following_type_id == PLANET_TYPE_ID)
+	if (following_type_id == PLANET_ID)
     		target_planet = NULL;   	
 	if (following_type_id == SHIP_ID)
     		target_ship = NULL;   	
-    	if (following_type_id == STARSYSTEM_TYPE_ID)
+    	if (following_type_id == STARSYSTEM_ID)
     		target_starsystem = NULL;
     		
     	following_type_id = NONE_ID;
-	offset = 0;
+	offset = 0.0;
     	pTo_target_pos = NULL;
 }
       
@@ -58,31 +55,11 @@ void Navigator :: setStaticTargetCoords(vec2f _target_pos)
     	removeTarget();
     	
         target_pos = _target_pos;
-       	calculateDetaledWayToPosition();
+       	calcDetaledWay();
 }
       
       
-//template <typename TARGET>
-//void Navigator :: checkHuperJumpNecessary(TARGET _target)
-//{
-    	//if (ship->getStarSystem()->getId() != _target->getStarSystem()->getId())
-    	//{
-    		//JUMP_is_needed = true;
-    		//target_starsystem = _target->getStarSystem();
-    		//jump_pos.set(800, 800);
-    	//}
-	//else
-	//{
-	    	//JUMP_is_needed = false;
-	    	//target_starsystem = NULL;
-	    	//jump_pos.set(0, 0);
-	//}
-//}
-
-      
-      
-      
-void Navigator :: setTargetPlanet(Planet* _target_planet)
+void Navigator :: setTarget(Planet* _target_planet)
 {
     	removeTarget();
 
@@ -93,7 +70,7 @@ void Navigator :: setTargetPlanet(Planet* _target_planet)
      	following_type_id = target_planet->getTypeId();
 }
 
-void Navigator :: setTargetShip(Ship* _target_ship, int _offset)
+void Navigator :: setTarget(Ship* _target_ship, float _offset)
 {   
     	removeTarget();
 	
@@ -105,7 +82,7 @@ void Navigator :: setTargetShip(Ship* _target_ship, int _offset)
 }
     
 
-void Navigator :: setTargetStarSystem(StarSystem* _target_starsystem)
+void Navigator :: setTarget(StarSystem* _target_starsystem)
 {   
     	removeTarget();
 	
@@ -114,29 +91,32 @@ void Navigator :: setTargetStarSystem(StarSystem* _target_starsystem)
     	pTo_target_pos = &target_pos;
     	echievement_radius = 100;  // ??
     	following_type_id = target_starsystem->getTypeId();
+        
+        calcDetaledWay();
 }
 
 
 
 Planet* Navigator :: getTargetPlanet() const { return target_planet; }
-vec2f Navigator :: getTargetPos()      const { return target_pos; }
+StarSystem* Navigator :: getTargetStarSystem() const { return target_starsystem; }
+
 int Navigator :: getFollowingTypeId()  const { return following_type_id; }                         
 
 
-bool Navigator :: updateDynamicTargetCoords()
+void Navigator :: updateDynamicTargetCoord()
 {
-    	if (following_type_id == PLANET_TYPE_ID)
-    	{
-        	target_pos.set(target_planet->getNextTurnPosition().x, target_planet->getNextTurnPosition().y);  
-        	calculateDetaledWayToPosition();
-        	return true;
+    	if (following_type_id == PLANET_ID)
+    	{ 
+        	target_pos = target_planet->getNextTurnPosition(); 
+                calcDetaledWay();
+        	return;
     	} 
      
     	if (following_type_id == SHIP_ID)
-    	{
-    		if (offset != 0)
+    	{ 
+    		if (offset > FLOAT_EPSILON)
     		{
-    		    	// gfenerate point where to move
+    		    	// generate point where to move
     			float alpha = (float)getRandInt(0, 360) / 57.0;
    
     			target_pos.x = target_ship->getPoints()->getCenter().x + sin(alpha) * offset;
@@ -147,8 +127,8 @@ bool Navigator :: updateDynamicTargetCoords()
     			target_pos = target_ship->getPoints()->getCenter();  
     		}
     		
-        	calculateDetaledWayToPosition();
-        	return true;    
+        	calcDetaledWay();
+        	return;    
     	}      
 }
 
@@ -164,7 +144,7 @@ bool Navigator :: checkEchievement()
 
 bool Navigator :: getDockingPermission()
 {
-    	if (following_type_id == PLANET_TYPE_ID)
+    	if (following_type_id == PLANET_ID)
        		return target_planet->getPermissionToLand();
 
     	//if (pTo_ship->is_FOLLOWING_SHIP == true)
@@ -178,7 +158,7 @@ bool Navigator :: getDockingPermission()
 
 
     
-void Navigator :: calculateDetaledWayToPosition()
+void Navigator :: calcDetaledWay()
 {   
     	direction_x_list.clear();
     	direction_y_list.clear();
@@ -189,10 +169,13 @@ void Navigator :: calculateDetaledWayToPosition()
 
     	float step = ship_owner->propetries.speed/100.0;
 
-    	if ( ((last_pos_x != getTargetPos().x) || (last_pos_y != getTargetPos().y)) && (ship_owner->propetries.speed != 0) )
+        //printf("%f,%f,%f,%f\n", last_pos_x, last_pos_y, target_pos.x, target_pos.y);
+
+        if ( ( abs(last_pos_x - target_pos.x) > FLOAT_EPSILON ) || ( abs(last_pos_y - target_pos.y) > FLOAT_EPSILON ) )
+        if (ship_owner->propetries.speed > FLOAT_EPSILON) 
     	{
-       		float xl = getTargetPos().x - last_pos_x;
-       		float yl = getTargetPos().y - last_pos_y;
+       		float xl = target_pos.x - last_pos_x;
+       		float yl = target_pos.y - last_pos_y;
 
        		float l = sqrt(xl*xl + yl*yl);
        		float x_normalized = xl/l;
@@ -207,7 +190,7 @@ void Navigator :: calculateDetaledWayToPosition()
        		{
             		last_pos_x += x_step;
             		last_pos_y += y_step;
-            		float angleInD = atan2(getTargetPos().y - last_pos_y, getTargetPos().x - last_pos_x) * RADIAN_TO_DEGREE_RATE;
+            		float angleInD = atan2(target_pos.y - last_pos_y, target_pos.x - last_pos_x) * RADIAN_TO_DEGREE_RATE;
 
             		direction_x_list.push_back(last_pos_x);
             		direction_y_list.push_back(last_pos_y);

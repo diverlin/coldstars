@@ -220,7 +220,7 @@ void RocketBullet :: renderKorpus() const
                               	  -500);
 }
 
-void RocketBullet :: renderInSpace() const
+void RocketBullet :: render_inSpace() const
 {
 	renderKorpus();
 	renderDriveTrail();

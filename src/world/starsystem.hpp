@@ -43,7 +43,7 @@ class StarSystem
     		std::vector<Npc*>  NPC_TRADER_inSPACE_vec;
     		std::vector<Npc*>  NPC_PIRAT_inSPACE_vec;
     		std::vector<Npc*>  NPC_DIPLOMAT_inSPACE_vec;
-    	    	// ENTITY VECTORS
+    	    	//  
     
     		StarSystem();
     		~StarSystem();
@@ -62,20 +62,24 @@ class StarSystem
 		// poor
     		Planet* getClosestPlanet(vec2f);
     		Npc* getRandomNpc();
-    		// poor
+                Npc* getRandomNpcExcludingRaceId(int);
+                Npc* getEvilNpc(vec2f);
+    		// 
 
 		void update_TRUE(int timer);
 		void update_FALSE(int timer);
 
-	        void render();        
+	        void render();      
    		    		
     		void mouseControl();
 
     		//// TRANSITION
-    		void addShipToSpace(Ship*);
-    		void addShipToPlanet(Ship*, Planet*);
-    		void addNpcToSpace(Npc*);
-    		void addNpcToPlanet(Npc*, Planet*);
+                void addToHyperJumpQueue(Npc*);
+                                
+    		void moveToSpace(Ship*);
+    		void moveToSpace(Npc*);
+    		//void moveToPlanet(Ship*, Planet*);
+    		//void moveToPlanet(Npc*, Planet*);
     		
                 void add(Star*);
                 void add(Planet*);
@@ -94,12 +98,10 @@ class StarSystem
    		
     		void add(DistantNebulaBgEffect*);
     		void add(DistantStarBgEffect*);
-                // effects
                 
-    		bool removeShipById(int _id);    
-    		bool removeNpc(int _id, int _race_id, int _subtype_id);  
-         	bool removeNpcFromTheListById(std::vector<Npc*>* pTo_npc_pList, int _id);
-   		//// TRANSITION
+    		bool removeShip(int _id);    
+    		bool removeNpc(int _id, int _subtype_id);  
+   		//// 
     		
     	private:
                 int id, type_id;
@@ -113,6 +115,8 @@ class StarSystem
     		Rect rect_onMap;
     	
     	    	// ENTITY VECTORS
+                std::vector<Npc*> NPC_appear_vec;
+                
     	    	std::vector<DistantNebulaBgEffect*> distantNebulaBgEffect_vec;
     		std::vector<DistantStarBgEffect*> distantStarBgEffect_vec;
     		
@@ -123,7 +127,7 @@ class StarSystem
     		std::vector<ShockWaveEffect*>  effect_SHOCKWAVE_vec;
     		
     		std::vector<VerticalFlowText*> text_DAMAGE_vec;
-    		// effects
+    		// 
     		
    		// VISIBLE ENTITY LIST
     		std::vector<Star*>         visible_STAR_vec;
@@ -134,9 +138,11 @@ class StarSystem
     		std::vector<RocketBullet*> visible_ROCKET_vec;
 
     		std::vector<Ship*>      visible_SHIP_vec;
-    		// ENTITY VECTORS
+    		//  
     		    	    	
     		Garbage garbage;
+                
+                void postHyperJumpEvent();
 
     		void asteroidManager(int num);
     		    		
@@ -165,6 +171,8 @@ class StarSystem
     		        void restoreDefaultColor();
     			void restoreSceneColor();
     			void renderBackground();
+                        
+                bool removeFromTheListById(std::vector<Npc*>* _pTo_npc_vec, int _id);
     		
     		void debug__();    	
 };

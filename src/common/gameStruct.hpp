@@ -19,6 +19,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef GAMESTRUCT_H
 #define GAMESTRUCT_H
 
+struct PlanetData
+{
+        PlanetData();
+        
+	float scale; 
+    	vec2f orbit_center; 
+    	int radius_A;
+    	int radius_B; 
+    	float orbit_phi_inD;
+    	float speed;
+};
+
 
 struct Color4f
 {
@@ -62,9 +74,13 @@ struct NeedsToDo
 {
 	NeedsToDo();
 
-  	bool REPAIR;
-  	bool CHARGE;
-   	bool GETBULLETS;
+  	bool REPAIR_KORPUS;
+  	bool REPAIR_EQUIPMENT;
+        
+  	bool GET_FUEL;
+   	bool GET_BULLETS;
+        bool GET_CREDITS;
+        
    	bool BUY;
    	bool SELL;
 };
@@ -112,7 +128,6 @@ struct ShipPropetries
         /* this data is changed during game play, the propetries depends on many factors */
         ShipPropetries();
         
-        int armor;
         int protection;
         int radius;
         int mass;   // depends on all items mass

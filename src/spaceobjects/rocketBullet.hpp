@@ -54,7 +54,7 @@ class RocketBullet
                 void hit_FALSE(int _damage);
 
              	void updateRenderStuff();
-                void renderInSpace() const;
+                void render_inSpace() const;
                 
         private:
       		IdData data_id;

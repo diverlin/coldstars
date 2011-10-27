@@ -25,8 +25,9 @@ QuestObject :: QuestObject(Npc* _npc_owner)
 	ob_type_id = NONE_ID;
 	action_id = NONE_ID;
 		
-	npc    = NULL;
-	planet = NULL;
+	npc        = NULL;
+	planet     = NULL;
+	starsystem = NULL;
 	
 	exist = false;
 }
@@ -36,26 +37,33 @@ QuestObject :: ~QuestObject()
 {}
 	
 	
-StarSystem* QuestObject :: getObStarSystem()
+StarSystem* QuestObject :: getStarSystem()
 {
 	if (ob_type_id == NPC_ID)
 	{
 		return npc->getStarSystem();
 	}
 	
-	if (ob_type_id == PLANET_TYPE_ID)
+	if (ob_type_id == PLANET_ID)
 	{
 		return planet->getStarSystem();
 	}
+	
+	if (ob_type_id == STARSYSTEM_ID)
+	{
+		return starsystem;
+	}
 }
+
 
 bool QuestObject :: getExist() const   { return exist; }
 int QuestObject :: getTypeId() const   { return ob_type_id; }
 int QuestObject :: getActionId() const { return action_id; }
 
+
 Npc* QuestObject :: getNpc()      { return npc; }
 Planet* QuestObject :: getPlanet() { return planet; }
-		
+	
 template <typename TARGET>
 void QuestObject :: setTask(TARGET _target, int _action_id)
 {
@@ -65,10 +73,9 @@ void QuestObject :: setTask(TARGET _target, int _action_id)
 	
 	exist = true;
 }
-
-
 void QuestObject :: setObject(Npc* _npc)       { npc = _npc;  }
 void QuestObject :: setObject(Planet* _planet) { planet = _planet; }
+void QuestObject :: setObject(StarSystem* _starsystem) { starsystem = _starsystem; }
 
 
 void QuestObject :: reset()
@@ -78,20 +85,28 @@ void QuestObject :: reset()
 		npc = NULL;
 	}
 	
-	if (ob_type_id == PLANET_TYPE_ID)
+	if (ob_type_id == PLANET_ID)
 	{
 		planet = NULL;
 	}
 	
+	if (ob_type_id == STARSYSTEM_ID)
+	{
+		starsystem = NULL;
+	}
+	
 	ob_type_id = NONE_ID;
-	action_id = NONE_ID;
-	exist = false;
+	action_id  = NONE_ID;
+	
+        exist = false;
 }
 
 		
 
 void QuestObject :: validation()
 {
+	/* check condition of quest object, if it is not valid then reset */
+	
 	if (ob_type_id == NPC_ID)
 	{
 		if (npc->getAlive() == false)
@@ -101,8 +116,17 @@ void QuestObject :: validation()
 		}
 	}
 	
-	if (ob_type_id == PLANET_TYPE_ID)
+	//if (ob_type_id == PLANET_ID)
+	//{
+		//return; 
+	//}
+	
+	if (ob_type_id == STARSYSTEM_ID)
 	{
-		//return planet->getStarSystem();
+		if (starsystem->getCapturedFlag() == false);
+		{
+			reset();
+			return;
+		} 
 	}
 }

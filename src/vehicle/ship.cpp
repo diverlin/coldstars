@@ -26,6 +26,7 @@ int Ship :: getTypeId() const       { return data_id.type_id; }
 int Ship :: getPlaceTypeId() const  { return place_type_id; } 
 bool Ship :: getAlive() const { return data_life.is_alive; }
 bool* Ship :: getpAlive()     { return &data_life.is_alive; }
+int Ship :: getArmor() const  { return data_life.armor; }
 
 Points* Ship :: getPoints() 	    { return &points; }
 Navigator* Ship :: getNavigator()   { return navigator; }
@@ -63,7 +64,6 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
     	// 
 	
         data_korpus = _data_korpus;
-        propetries.armor = data_korpus.armor;
 
     	/////////////////////////////////////////////////
     	///////////////////// KONTUR RECT ///////////////  
@@ -522,34 +522,29 @@ void Ship :: update_inSpace_inDynamic_FALSE()
 
 
 //// ******** DOCKING/LAUNCHING ******** 
-//bool Ship :: checkDocking()
-//{  
-     	//if (navigator->checkDocking() == true)
-        	//return true;
-     	//else    
-        	//return false;
-//}
-
-//bool Ship :: getDockingPermission()
-//{
-     	//if (navigator->getDockingPermission() == true) 
-        	//return true;
-    	//else
-        	//return false;
-//}
-
+bool Ship :: jumpingEvent()
+{
+        printf("ship id = %i, jumpingEvent()\n", data_id.id);
+        starsystem->removeShip(data_id.id);  
+        starsystem->removeNpc(npc_owner->getId(), npc_owner->getSubTypeId());  
+                                                        
+        navigator->getTargetStarSystem()->addToHyperJumpQueue(npc_owner);        
+}
+                
+                
 bool Ship :: dockingEvent()
 {
-     	printf("id = %i, dockingEvent()\n", data_id.id);
-     	starsystem->removeShipById(data_id.id);
-     	starsystem->removeNpc(npc_owner->getId(), npc_owner->getRaceId(), npc_owner->getSubTypeId());
-     	     	     	
-     	if (navigator->getFollowingTypeId() == PLANET_TYPE_ID)
+     	printf("ship id = %i, dockingEvent()\n", data_id.id);
+     	starsystem->removeShip(data_id.id);
+     	starsystem->removeNpc(npc_owner->getId(), npc_owner->getSubTypeId());
+        
+             	     	     	
+     	if (navigator->getFollowingTypeId() == PLANET_ID)
      	{
-     		navigator->getTargetPlanet()->addShip(this);
-		navigator->getTargetPlanet()->addNpc(npc_owner);
+     		navigator->getTargetPlanet()->add(this);
+		navigator->getTargetPlanet()->add(npc_owner);
 		
-		if (navigator->getTargetPlanet()->getSubTypeId() == KOSMOPORT_TYPE_ID)
+		if (navigator->getTargetPlanet()->getSubTypeId() == KOSMOPORT_ID)
 		{
 			npc_owner->setKosmoport(navigator->getTargetPlanet()->getKosmoport());
 		}
@@ -559,16 +554,15 @@ bool Ship :: dockingEvent()
 			npc_owner->setLand(navigator->getTargetPlanet()->getLand());
 		}
 	}
-     	//printf("id = %i, dockingEvent() EEEEENNNNNDDDDD\n", id);
     	return true;
 }
 
 bool Ship :: launchingEvent()
 {
-     	printf("id = %i, launchingEvent()\n", data_id.id);
+     	printf("ship id = %i, launchingEvent()\n", data_id.id);
 
-     	starsystem->addShipToSpace(this);
-     	starsystem->addNpcToSpace(npc_owner);
+     	starsystem->moveToSpace(this);
+     	starsystem->moveToSpace(npc_owner);
 
      	navigator->getTargetPlanet()->removeShipById(data_id.id);
      	navigator->getTargetPlanet()->removeNpcById(npc_owner->getId());
@@ -587,8 +581,7 @@ bool Ship :: launchingEvent()
      	
     	return true;
 }
-
-//// ******** DOCKING/LAUNCHING ******** 
+//// 
 
 
 
@@ -598,13 +591,13 @@ bool Ship :: launchingEvent()
 
 void Ship :: hit_TRUE(unsigned int _damage)
 {
-    	propetries.armor -= _damage;
+    	data_life.armor -= _damage;
     	if (ableTo.PROTECT == true)
     	{
        		shield->setAlpha(1.0);
        	}
 
-    	if (propetries.armor < 0)
+    	if (data_life.armor < 0)
     	{
        		data_life.is_dying = true;
        	}
@@ -617,9 +610,9 @@ void Ship :: hit_TRUE(unsigned int _damage)
 
 void Ship :: hit_FALSE(unsigned int _damage)
 {
-    	propetries.armor -= _damage;
+    	data_life.armor -= _damage;
 
-    	if (propetries.armor < 0)
+    	if (data_life.armor < 0)
     	{
        		death_FALSE();
        	}
@@ -929,7 +922,7 @@ void Ship :: updateScanAbility()
 
 void Ship :: setMaxArmor()
 {
-     	propetries.armor = data_korpus.armor;
+     	data_life.armor = data_korpus.armor;
 }
 
 void Ship :: setMaxFuel()
@@ -946,9 +939,9 @@ void Ship :: updateInfo()
     	int owner_race_id = npc_owner->getRaceId();
 
     	info.addTitleStr("SHIP");
-    	info.addNameStr("id/ss_id:");          info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->getId()) );
+    	info.addNameStr("id/npc_id/ss_id:");   info.addValueStr( int2str(data_id.id) + " / " + int2str(npc_owner->getId()) + " / " + int2str(starsystem->getId()) );
     	info.addNameStr("ship/pilot race:");   info.addValueStr( returnRaceStringByRaceId(texOb->race_id) + "/" + returnRaceStringByRaceId(owner_race_id) ); 
-    	info.addNameStr("armor/max/size");     info.addValueStr( int2str(propetries.armor) + "/" + int2str(data_korpus.armor) + "/" + int2str(texOb->size_id) );
+    	info.addNameStr("armor/max/size");     info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) + "/" + int2str(texOb->size_id) );
     	info.addNameStr("space/free/mass:");   info.addValueStr( int2str(data_korpus.space) + "/" + int2str(data_korpus.space - propetries.mass) + "/" + int2str(propetries.mass) );
     	info.addNameStr("energy:");            info.addValueStr( int2str(propetries.energy) );
 	info.addNameStr("temperature:");       info.addValueStr( int2str(data_korpus.temperature) );
@@ -1278,16 +1271,6 @@ Ship* shipGenerator(int race_id, int subtype_id, int size_id)
 {
     	TextureOb* texOb_ship = g_TEXTURE_MANAGER.returnPointerToRandomShipTexObWithFollowingAtrributes(race_id, subtype_id, size_id); 
        
-        LifeData data_life;
-        //data_life.is_alive = true;
-        //data_life.is_dying = false;
-        data_life.dying_time = 60;
-       
-        IdData data_id;
-        data_id.id      = g_SHIP_ID_GENERATOR.getNextId(); 
-    	data_id.type_id = SHIP_ID;
-    	//subtype_id = ;
-       
         KorpusData data_korpus;
     	data_korpus.space       = 600;
     	data_korpus.armor       = 600;
@@ -1300,6 +1283,16 @@ Ship* shipGenerator(int race_id, int subtype_id, int size_id)
         data_korpus.inhibit_GRAPPLE = false;
         data_korpus.weapon_slot_num = getRandInt(1,5);
             
+            
+        LifeData data_life;
+        data_life.armor = data_korpus.armor;
+        data_life.dying_time = 60;
+       
+        IdData data_id;
+        data_id.id      = g_SHIP_ID_GENERATOR.getNextId(); 
+    	data_id.type_id = SHIP_ID;
+    	//subtype_id = ;       
+
         int size_threshold = 2; 
     	if (texOb_ship->size_id > size_threshold)
        		data_korpus.render_TURRELS = true; 
@@ -1312,4 +1305,20 @@ Ship* shipGenerator(int race_id, int subtype_id, int size_id)
     	ship->getPoints()->setAngle(getRandInt(0, 360));    	
     
     	return ship;
+}
+
+
+bool Ship :: repair()
+{
+        int _fix = data_korpus.armor - data_life.armor;
+        int _price = _fix/10;
+        
+        if (npc_owner->getCredits() > _price)
+        {
+                data_life.armor = data_korpus.armor;
+                npc_owner->removeCredits(_price);
+                return true;  
+        }
+        
+        return false;        
 }

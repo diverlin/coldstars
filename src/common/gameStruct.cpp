@@ -16,6 +16,18 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
+PlanetData :: PlanetData()
+{
+        scale = 0; 
+    	orbit_center = vec2f(0, 0); 
+    	radius_A = 0;
+    	radius_B = 0; 
+    	orbit_phi_inD = 0.0;
+    	speed = 0.0;
+}
+
+
 Color4f :: Color4f()
 {
 	r = 1.0;
@@ -51,11 +63,15 @@ VisionStatus :: VisionStatus()
 
 NeedsToDo :: NeedsToDo()
 {
-  	REPAIR     = false;
-  	CHARGE     = false;
-   	GETBULLETS = false;
-   	BUY        = false;
-   	SELL       = false;
+  	REPAIR_KORPUS    = false;
+  	REPAIR_EQUIPMENT = false;
+        
+  	GET_FUEL    = false;
+   	GET_BULLETS = false;
+        GET_CREDITS = false;
+        
+   	BUY         = false;
+   	SELL        = false;
 };
 
 
@@ -95,7 +111,6 @@ KorpusData :: KorpusData()
 
 ShipPropetries :: ShipPropetries()
 {       
-        armor       = 0;
         protection  = 0;
         radius      = 0;
         mass        = 0;   // depends on all items mass

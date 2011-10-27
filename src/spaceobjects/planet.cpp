@@ -17,8 +17,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "planet.hpp"
-
 Planet :: Planet(int _subtype_id, 
 		 TextureOb* _texOb, 
 		 TextureOb* _texOb_atmoshere, 
@@ -26,7 +24,7 @@ Planet :: Planet(int _subtype_id,
 		 PlanetData _planet_data,
 		 unsigned long int _population)
 { 
-      	type_id = PLANET_TYPE_ID;
+      	type_id = PLANET_ID;
       	subtype_id = _subtype_id;
       
       	CommonForPlanet_init(_texOb, 
@@ -34,13 +32,10 @@ Planet :: Planet(int _subtype_id,
 			     _planet_data);
 
       	texOb_atmosphere = _texOb_atmoshere;
-
-
-
       	
       	population = _population;
       
-      	if (subtype_id == KOSMOPORT_TYPE_ID)
+      	if (subtype_id == KOSMOPORT_ID)
       	{
       	      	createKosmoport();
       	      	land      = NULL;
@@ -72,7 +67,7 @@ void Planet :: update_inSpace_inDynamic()
 
 void Planet :: update_inSpace_inStatic()
 {      
-     	if (subtype_id == KOSMOPORT_TYPE_ID)
+     	if (subtype_id == KOSMOPORT_ID)
      	{
                 kosmoport->ai();
         }
@@ -113,7 +108,7 @@ void Planet :: createLand()
 
 
 //// ******* TRANSITION ******* 
- void Planet :: launchingProcedure()
+void Planet :: launchingProcedure()
 {
          for (unsigned int i = 0; i<NPC_launching_vec.size(); i++)
          {
@@ -129,9 +124,9 @@ void Planet :: addToLaunchingQueue(Npc* _npc)
 }
 		
                 
-bool Planet :: addShip(Ship* _ship)
+bool Planet :: add(Ship* _ship)
 {
-     	if (subtype_id == KOSMOPORT_TYPE_ID)
+     	if (subtype_id == KOSMOPORT_ID)
         {
                 return kosmoport->addShip(_ship);
         }
@@ -141,9 +136,9 @@ bool Planet :: addShip(Ship* _ship)
         }
 }
 
-bool Planet :: addNpc(Npc* _npc)
+bool Planet :: add(Npc* _npc)
 {
-     	if (subtype_id == KOSMOPORT_TYPE_ID)
+     	if (subtype_id == KOSMOPORT_ID)
         {       
                 return kosmoport->addNpc(_npc);
         }
@@ -155,7 +150,7 @@ bool Planet :: addNpc(Npc* _npc)
 
 bool Planet :: removeShipById(int _id)
 {
-     	if (subtype_id == KOSMOPORT_TYPE_ID)
+     	if (subtype_id == KOSMOPORT_ID)
      	{
          	return kosmoport->removeShip(_id);
         }
@@ -168,7 +163,7 @@ bool Planet :: removeShipById(int _id)
 
 bool Planet :: removeNpcById(int _id)
 {
-     	if (subtype_id == KOSMOPORT_TYPE_ID)
+     	if (subtype_id == KOSMOPORT_ID)
      	{
          	return kosmoport->removeNpc(_id);
         }
@@ -184,7 +179,7 @@ bool Planet :: removeNpcById(int _id)
 
 bool Planet :: getPermissionToLand() const
 {
-     	if (subtype_id == KOSMOPORT_TYPE_ID)
+     	if (subtype_id == KOSMOPORT_ID)
      	{
         	if (kosmoport->getAngar()->getNumFreelandingArea() > 0)
             		return true;
@@ -200,7 +195,7 @@ bool Planet :: getPermissionToLand() const
 
 Planet* createPlanet(int orbit_radius)
 {
-        int subtype_id   = KOSMOPORT_TYPE_ID;
+        int subtype_id   = KOSMOPORT_ID;
         
 	PlanetData planet_data;
 	

@@ -20,9 +20,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef QUESTGENERATOR_H
 #define QUESTGENERATOR_H
 
-
-bool taskGenerator(Npc*);
-bool questGenerator(Npc*);
-
+//bool selfcareGenerator(Npc*);
+bool liberationStarSystemQuestGenerator(Npc*);
+bool destroyShipQuestGenerator(Npc*);
+bool questEvilGenerator(Npc*);
 
 #endif

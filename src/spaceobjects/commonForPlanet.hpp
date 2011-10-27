@@ -21,17 +21,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define COMMONFORPLANET_H
 
 
-struct PlanetData
-{
-	float scale; 
-    	vec2f orbit_center; 
-    	int radius_A;
-    	int radius_B; 
-    	float orbit_phi_inD;
-    	float speed;
-};
-
-
 class CommonForPlanet
 {
 	public:      

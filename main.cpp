@@ -34,9 +34,9 @@ int main()
 
     	KeyEventsInSpace keyEvents = KeyEventsInSpace(); 
 
-    	Galaxy galaxy;
+    	pGALAXY = new Galaxy();
     	SpaceMap spaceMap;
-    	spaceMap.bindGalaxy(&galaxy);
+    	spaceMap.bindGalaxy(pGALAXY);
         
     	InterfaceInSpace interfaceInSpace 	  = InterfaceInSpace();
     	InterfaceInKosmoport interfaceInKosmoport = InterfaceInKosmoport();
@@ -45,7 +45,7 @@ int main()
         pSHIP_GUI->createControlSkillButtons();
                 
     	pPLAYER   = new Player();    
-	pPLAYER->setStarSystem(galaxy.getRandomStarSystem());      		
+	pPLAYER->setStarSystem(pGALAXY->getRandomStarSystem());      		
       		
     	Npc* pnpc = pPLAYER->getStarSystem()->NPC_inSPACE_vec[0];
     	pPLAYER->bindNpc(pnpc);
@@ -62,13 +62,13 @@ int main()
     	// GAME LOOP
     	while (g_APP.IsOpened())
     	{    
-       		/// AUTOTURN //////////////////
-       		if (g_TIMER < -50)
-       		{  
-       			g_TIMER = TURN_TIME;
-           		TURN_COUNT++;
-           		printf("        *** auto turn END was activated, turn num = %i\n", TURN_COUNT);
-       		}
+       		///////////// AUTO-TURN /////////////
+       		//if (g_TIMER < -50)
+       		//{  
+       			//g_TIMER = TURN_TIME;
+           		//TURN_COUNT++;
+           		//printf("        *** auto turn END was activated, turn num = %i\n", TURN_COUNT);
+                //}
 
 		pPLAYER->update_inSpace();
 					
@@ -78,7 +78,7 @@ int main()
            		//////////// in SPACE ///////////////
            		keyEvents.update();
 
-       			galaxy.update(g_TIMER);
+       			pGALAXY->update(g_TIMER);
 
            		pPLAYER->getStarSystem()->render(); 
                         
@@ -109,11 +109,11 @@ int main()
        		}
 
 
-       		if (pPLAYER->getPlaceTypeId() == KOSMOPORT_TYPE_ID)
+       		if (pPLAYER->getPlaceTypeId() == KOSMOPORT_ID)
        		{
            		keyEvents.update2();
           
-           		if (interfaceInKosmoport.getActiveScreenId() == ANGAR_SCREEN_ID)
+           		if (interfaceInKosmoport.getActiveScreenId() == SCREEN_ANGAR_ID)
            		{
                			pPLAYER->getPilot()->getKosmoport()->getAngar()->update();                                
                			pPLAYER->getPilot()->getKosmoport()->getAngar()->render();
@@ -129,7 +129,7 @@ int main()
                                 }
            		}
 
-           		if (interfaceInKosmoport.getActiveScreenId() == STORE_SCREEN_ID)
+           		if (interfaceInKosmoport.getActiveScreenId() == SCREEN_STORE_ID)
            		{
                                 pPLAYER->getPilot()->getKosmoport()->getStore()->update();
                			pPLAYER->getPilot()->getKosmoport()->getStore()->render();                                 
@@ -139,19 +139,19 @@ int main()
                                 pSHIP_GUI->render();
                         }
 
-           		if (interfaceInKosmoport.getActiveScreenId() == SHOP_SCREEN_ID)
+           		if (interfaceInKosmoport.getActiveScreenId() == SCREEN_SHOP_ID)
            		{
                                 pPLAYER->getPilot()->getKosmoport()->getShop()->update();
                                 pPLAYER->getPilot()->getKosmoport()->getShop()->render();
            		}
 
-           		if (interfaceInKosmoport.getActiveScreenId() == GALAXYMAP_SCREEN_ID)
+           		if (interfaceInKosmoport.getActiveScreenId() == SCREEN_GALAXYMAP_ID)
            		{
                			spaceMap.update();
                                 spaceMap.render(true);   
            		}
 
-           		if (interfaceInKosmoport.getActiveScreenId() == GOVERMENT_SCREEN_ID)
+           		if (interfaceInKosmoport.getActiveScreenId() == SCREEN_GOVERMENT_ID)
            		{
                                 pPLAYER->getPilot()->getKosmoport()->getGoverment()->update();
                                 pPLAYER->getPilot()->getKosmoport()->getGoverment()->render();
@@ -168,14 +168,6 @@ int main()
        		if (getRandInt(0, 20) == 1)
        		{
           		fps_str = "FPS:" + int2str((int)fps);
-          		//printf("%f\n", fps);
-          		
-          		//if (pPLAYER->getPilot()->getPlaceTypeId() == SPACE_ID)
-          			//printf("space\n");
-          		//if (pPLAYER->getPilot()->getPlaceTypeId() == KOSMOPORT_TYPE_ID)
-          		        //printf("kosmoport\n");
-          		//if (pPLAYER->getPilot()->getPlaceTypeId() == PLANET_TYPE_ID)
-          		        //printf("planet\n");
           	}
 
        		sf::String coord_Str(coord_str, g_FONT, 14);

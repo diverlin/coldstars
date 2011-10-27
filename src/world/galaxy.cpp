@@ -31,7 +31,7 @@ Galaxy :: Galaxy()
     	while(starsytem_counter < STARSYSTEM_TOTAL_NUM)
     	{  
         	
-        	STARSYSTEM_pList.push_back(generateEntireStarSystem());
+        	STARSYSTEM_vec.push_back(generateEntireStarSystem());
         	starsytem_counter++;
     	}
 }
@@ -40,21 +40,34 @@ Galaxy :: Galaxy()
 
 StarSystem* Galaxy :: getRandomStarSystem()
 {
-	if (STARSYSTEM_pList.size() == 1)
-       		return STARSYSTEM_pList[0];
-    	else
-      		return STARSYSTEM_pList[getRandInt(0, STARSYSTEM_pList.size())];
+	return STARSYSTEM_vec[getRandInt(0, STARSYSTEM_vec.size())];
+}
+
+
+StarSystem* Galaxy :: getRandomCapturedStarSystem()
+{
+	std::vector<StarSystem*> ss_vec;
+	
+	for (unsigned int i = 0; i<STARSYSTEM_vec.size(); i++)
+	{
+		if (STARSYSTEM_vec[i]->getCapturedFlag() == true)
+		{
+			ss_vec.push_back(STARSYSTEM_vec[i]);
+		}
+	}
+	
+	return ss_vec[getRandInt(0, ss_vec.size())];
 }
      		
 
 void Galaxy :: update(int timer)
 {
-	for (unsigned int si = 0; si < STARSYSTEM_pList.size(); si++)
+	for (unsigned int si = 0; si < STARSYSTEM_vec.size(); si++)
      	{
-     		if (STARSYSTEM_pList[si]->getDetailedSimulationFlag() == true)
-     			STARSYSTEM_pList[si]->update_TRUE(timer);
+     		if (STARSYSTEM_vec[si]->getDetailedSimulationFlag() == true)
+     			STARSYSTEM_vec[si]->update_TRUE(timer);
      		else
-     		     	STARSYSTEM_pList[si]->update_FALSE(timer);
+     		     	STARSYSTEM_vec[si]->update_FALSE(timer);
      	}
 }
 
@@ -174,8 +187,8 @@ void generateNumFriendlyNPC(StarSystem* starsystem, int ship_per_system)
         
         	npc->bind(ship);
 
-        	starsystem->addShipToSpace(ship);
-        	starsystem->addNpcToSpace(npc);
+        	starsystem->moveToSpace(ship);
+        	starsystem->moveToSpace(npc);
     	}
 }
 
@@ -204,8 +217,8 @@ void generateNumEnemyNPC(StarSystem* starsystem, int ship_per_system)
         
         	npc->bind(ship);
 
-        	starsystem->addShipToSpace(ship);
-        	starsystem->addNpcToSpace(npc);
+        	starsystem->moveToSpace(ship);
+        	starsystem->moveToSpace(npc);
     	}
 
 }

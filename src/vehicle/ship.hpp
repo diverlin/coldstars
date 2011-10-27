@@ -34,6 +34,7 @@ class Ship
                 
                 bool getAlive() const;
                 bool* getpAlive();
+                int getArmor() const;
                 int getCollisionRadius() const;
                 
                 Points* getPoints();
@@ -69,7 +70,6 @@ class Ship
         	ItemSlot gate_slot;
 
         	AbilitiesStatus ableTo;
-        	NeedsToDo needsToDo;
                 ShipPropetries propetries;
                 KorpusData data_korpus;
                 
@@ -118,10 +118,9 @@ class Ship
         	void setMaxArmor();
         	void setMaxFuel();
 
-        	//// docking/launching
+        	bool jumpingEvent();
         	bool dockingEvent();
         	bool launchingEvent();
-        	//// docking/launching
 
 		void updateRenderStuff();
 		void render_inSpace() const;
@@ -133,6 +132,8 @@ class Ship
         	void renderInfo();
         	        	
         	WeaponSelector weapon_selector; 
+                
+                bool repair();
           
         private:
         	LifeData data_life;
