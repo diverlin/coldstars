@@ -24,7 +24,7 @@ InterfaceInSpace :: InterfaceInSpace()
 {
     	TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(BLUE_COLOR_ID);    // debug
     	galaxymap_screen_button = new Button(pTo_particleTexOb, 
-        				     GALAXYMAP_SCREEN_ID,
+        				     SCREEN_GALAXYMAP_ID,
     					     g_VIEW_WIDTH - (INTERFACE_ICON_SIZE + 5),
     					     g_VIEW_HEIGHT - (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE,  
@@ -67,7 +67,7 @@ void InterfaceInSpace :: mouseInteraction()
         	{
            		if (lmb == true)
            		{
-           			if (button_common_pList[i]->getSubTypeId() == GALAXYMAP_SCREEN_ID)
+           			if (button_common_pList[i]->getSubTypeId() == SCREEN_GALAXYMAP_ID)
               			{
               				pPLAYER->setWorldMapShowFlag(!pPLAYER->getWorldMapShowFlag());
                  		}

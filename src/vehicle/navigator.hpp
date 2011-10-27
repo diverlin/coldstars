@@ -29,16 +29,18 @@ class Navigator
       
       		void setStaticTargetCoords(vec2f _target_pos);
       
-      		void setTargetPlanet(Planet*); 
-      		void setTargetShip(Ship*, int);    
-      		void setTargetStarSystem(StarSystem*);
+      		void setTarget(Planet*); 
+      		void setTarget(Ship*, float);    
+      		void setTarget(StarSystem*);
                       
                 Planet* getTargetPlanet() const;  // ??
-                vec2f getTargetPos() const;
+                StarSystem* getTargetStarSystem() const;
+                
+                //vec2f getTargetPos() const;
                 int getFollowingTypeId() const;
                 
-    		bool updateDynamicTargetCoords();
-      
+                void updateDynamicTargetCoord();
+                
       		bool checkEchievement();
       		bool getDockingPermission();               
                
@@ -71,8 +73,7 @@ class Navigator
         	bool direction_list_END;
         	int move_it;
         	//////////////////////////////////
-                
-                void calculateDetaledWayToPosition();
+                void calcDetaledWay();
                 
                 //template <typename TARGET>
 		//void checkHuperJumpNecessary(TARGET _target);

@@ -17,11 +17,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "commonForPlanet.hpp"
-
 CommonForPlanet :: CommonForPlanet()
 {}
-
 
 CommonForPlanet :: ~CommonForPlanet()
 {}
@@ -63,11 +60,9 @@ void CommonForPlanet :: CommonForPlanet_init(TextureOb* _texOb,
 	points.setWidthHeight(w, h);  
 	//////
       
-      	
        	detailedEllipceOrbitFormation();
        	
         updatePosition();        
-        
                 
         starsystem = NULL;
 }
@@ -84,7 +79,18 @@ Points* CommonForPlanet :: getPoints() { return &points; }
 int CommonForPlanet :: getCollisionRadius() const { return collision_radius; }
 StarSystem* CommonForPlanet :: getStarSystem() { return starsystem; }           
                    
-vec2f CommonForPlanet :: getNextTurnPosition() const { return vec2f(orbit_vector_x[orbit_it+TURN_TIME], orbit_vector_y[orbit_it+TURN_TIME]); }
+vec2f CommonForPlanet :: getNextTurnPosition() const 
+{ 
+        if (orbit_it + TURN_TIME < orbit_len)
+        {
+                return vec2f(orbit_vector_x[orbit_it+TURN_TIME], orbit_vector_y[orbit_it+TURN_TIME]); 
+        }
+        else
+        {
+                int d_orbit = orbit_len-orbit_it;
+                return vec2f(orbit_vector_x[TURN_TIME - d_orbit], orbit_vector_y[TURN_TIME - d_orbit]); 
+        }
+}
                                                                     
 
 

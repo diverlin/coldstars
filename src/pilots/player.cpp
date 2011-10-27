@@ -78,9 +78,9 @@ void Player :: update_inSpace()
   		
 		place_type_id = getPilot()->getPlaceTypeId();
 		
-		if (ship->getPlaceTypeId() == PLANET_TYPE_ID)       // FUUUUUUUUUUUUUUUUUUUUUU must be imprroved
+		if (ship->getPlaceTypeId() == PLANET_ID)       // FUUUUUUUUUUUUUUUUUUUUUU must be imprroved
 		{
-        		npc->setPlaceTypeId(PLANET_TYPE_ID);
+        		npc->setPlaceTypeId(PLANET_ID);
         	}
         	
         	npc->getShip()->weapon_selector = weapon_selector;

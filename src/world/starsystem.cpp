@@ -21,11 +21,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 StarSystem :: StarSystem()
 { 
     	id = g_STARSYSTEM_ID_GENERATOR.getNextId();
-    	is_CAPTURED = false;
+    	type_id = STARSYSTEM_ID;
     	
+    	is_CAPTURED = false;
+
     	calculation_per_turn_allowed = true;
     	calculation_per_turn_allowed_inDynamic = true;
-    	
+
     	detalied_simulation = false; // will be changing depending on player presence
 }
 
@@ -43,16 +45,58 @@ bool StarSystem :: getCapturedFlag() const { return is_CAPTURED; }
 Rect StarSystem :: getRectOnMap() const { return rect_onMap; }  
 int StarSystem :: getShockWaveNum() const { return effect_SHOCKWAVE_vec.size(); }        
                 
-                
-Planet* StarSystem :: getClosestPlanet(vec2f _pos)  // poor
+// poor                
+Planet* StarSystem :: getClosestPlanet(vec2f _pos)
 {
      	return PLANET_vec[getRandInt(0, PLANET_vec.size()-1)];
 }
-
-Npc* StarSystem :: getRandomNpc()  // poor
+Npc* StarSystem :: getRandomNpc()
 {
      	return NPC_inSPACE_vec[getRandInt(0, NPC_inSPACE_vec.size()-1)];
 }
+Npc* StarSystem :: getRandomNpcExcludingRaceId(int _race_id)
+{
+        std::vector<Npc*> _npc_vec;
+        Npc* requested_npc;
+        
+        for (unsigned int i = 0; i < NPC_inSPACE_vec.size(); i++)
+        {
+                if (NPC_inSPACE_vec[i]->getRaceId() != _race_id)
+                {
+                        _npc_vec.push_back(NPC_inSPACE_vec[i]);
+                }
+        }
+        
+        if (_npc_vec.size() > 0)
+        {
+                requested_npc = _npc_vec[getRandInt(0, _npc_vec.size()-1)];
+        }
+        
+        return requested_npc;
+}
+
+
+Npc* StarSystem:: getEvilNpc(vec2f _center)
+{
+	std::vector<Npc*> _npc_vec;
+	Npc* requested_npc;
+	
+	for (unsigned int i = 0; i < NPC_inSPACE_vec.size(); i++)
+        {
+                if ( (NPC_inSPACE_vec[i]->getRaceId() == RACE_6_ID) or (NPC_inSPACE_vec[i]->getRaceId() == RACE_7_ID) )
+                {
+                        _npc_vec.push_back(NPC_inSPACE_vec[i]);
+                }
+        }
+        
+        if (_npc_vec.size() > 0)
+        {
+                requested_npc = _npc_vec[getRandInt(0, _npc_vec.size()-1)];
+        }	
+	
+	return requested_npc;
+}
+//
 
 void StarSystem :: update_TRUE(int timer)
 {
@@ -65,10 +109,14 @@ void StarSystem :: update_TRUE(int timer)
 		detalied_simulation = false;
 	}
 
+
+
+
 	if (timer > 0)
 	{
 		if (calculation_per_turn_allowed_inDynamic == true)
 		{
+                        postHyperJumpEvent();
 			for (unsigned int i=0; i<PLANET_vec.size(); i++)
 			{
 				PLANET_vec[i]->launchingProcedure();
@@ -351,7 +399,7 @@ void StarSystem :: updateEntities_inStatic()
      		NPC_inSPACE_vec[ni]->getShip()->reloadWeapons();
      		if (NPC_inSPACE_vec[ni]->getControlledByPlayer() == false)
      		{
-     			NPC_inSPACE_vec[ni]->aiSimulation();
+     			NPC_inSPACE_vec[ni]->thinkCommon_inSpace_inStatic();
          	}
      	}
 
@@ -473,27 +521,7 @@ void StarSystem :: findVisibleEntities()
     //self.visible_effect_DAMAGE_list    = [e for e in self.effect_DAMAGE_list    if isObjectVisible((e.center[0], e.center[1]), (300, 300), (vpCoordinate_x, vpCoordinate_y), (x_startViewCoord, y_startViewCoord))]
 }
 
-      
 
-//void StarSystem :: setSceneColor(Color _color)
-//{
-//	color = _color;
-	//if (_pTo_texOb->color_id == YELLOW_COLOR_ID)
-	//{
-		//color.r = 255/255.0;
-		//color.g = 255/255.0;
-		//color.b = 255/220.0;
-		//color.a = 1.0;
-	//}
-	
-	//if (_pTo_texOb->color_id == BLUE_COLOR_ID)
-	//{
-		//color.r = 220/255.0;
-		//color.g = 255/255.0;
-		//color.b = 255/255.0;
-		//color.a = 1.0;
-	//}
-//}
       
 void StarSystem :: restoreSceneColor()
 {
@@ -539,18 +567,6 @@ void StarSystem :: renderBackground()
 	disable_BLEND();
 }
     
-//void StarSystem :: createPostProcessStuff()
-//{
-	//int w = g_VIEW_WIDTH;
-	//int h = g_VIEW_HEIGHT;
-
-	//pTo_fbo0 = new FBO(w,h);
-	//pTo_fbo1 = new FBO(w,h);	
-	//pTo_fbo2 = new FBO(w,h);
-	//pTo_fbo3 = new FBO(w,h);
-	//pTo_bloom = new BloomEffect(w, h, g_BLUR_PROGRAM, g_EXTRACT_BRIGHT_PROGRAM, g_COMBINE_PROGRAM, 1, 1);
-//}
-
     
 void StarSystem :: render()
 {
@@ -566,18 +582,6 @@ void StarSystem :: renderEntities_NEW()
 {   
 	int w = g_VIEW_WIDTH;
 	int h = g_VIEW_HEIGHT;
-
-	//######### EFFECT DEMONSTRATION
-	//if lb == True:
-	//#for x in xrange(0, 10):
-		//#addExplosion(player)
-	//pass
- 
-	//if rb == True:
-	//self.shockwaveEffect_list = []
-	//self.shockwaveEffect_remove_queue = []
-	//######### EFFECT DEMONSTRATION
-
 
 	g_FBO0->activate();
    
@@ -661,7 +665,7 @@ void StarSystem :: renderEntities_NEW()
     			for(unsigned int i = 0; i < visible_ROCKET_vec.size(); i++)
     			{ 
     			    	visible_ROCKET_vec[i]->updateRenderStuff();
-       				visible_ROCKET_vec[i]->renderInSpace(); 
+       				visible_ROCKET_vec[i]->render_inSpace(); 
        				restoreSceneColor();
     			}    	
 		disable_BLEND();
@@ -802,7 +806,9 @@ void StarSystem :: renderEntities_OLD()
 
     		for(unsigned int i = 0; i < visible_ROCKET_vec.size(); i++)
     		{ 
-       			visible_ROCKET_vec[i]->renderInSpace(); 
+                        visible_ROCKET_vec[i]->updateRenderStuff();
+       			visible_ROCKET_vec[i]->render_inSpace(); 
+                        restoreSceneColor();
     		}
 
     		for(unsigned int i = 0; i<effect_LAZERTRACE_vec.size(); i++)
@@ -826,6 +832,13 @@ void StarSystem :: renderEntities_OLD()
         disable_POINTSPRITE();
         disable_BLEND();
 
+        for(unsigned int i = 0; i<text_DAMAGE_vec.size(); i++)
+    	{ 
+    	        text_DAMAGE_vec[i]->update(); 
+        	text_DAMAGE_vec[i]->render(); 
+    	}    		
+    		
+                
     	restoreSceneColor();
 }
     
@@ -1260,7 +1273,7 @@ void StarSystem :: mouseControl()
 				{
                 			if (mlb == true)
                 			{
-                    				pPLAYER->getShip()->getNavigator()->setTargetPlanet(visible_PLANET_vec[pi]);  
+                    				pPLAYER->getShip()->getNavigator()->setTarget(visible_PLANET_vec[pi]);  
                 			}   
 				}
 				
@@ -1326,7 +1339,25 @@ void StarSystem :: fireEvents_FALSE(int timer)
 
 
 //// ******* TRANSITION ******* 
-void StarSystem :: addShipToSpace(Ship* _ship)
+void StarSystem :: addToHyperJumpQueue(Npc* _npc)
+{
+        NPC_appear_vec.push_back(_npc);
+}
+
+void StarSystem :: postHyperJumpEvent()
+{
+        for (unsigned int i = 0; i<NPC_appear_vec.size(); i++)
+        {
+                NPC_appear_vec[i]->setDoNothing();
+                
+                moveToSpace(NPC_appear_vec[i]);
+                moveToSpace(NPC_appear_vec[i]->getShip());                
+        }
+              
+        NPC_appear_vec.clear();  
+}
+
+void StarSystem :: moveToSpace(Ship* _ship)
 {
      	_ship->setPlaceTypeId(SPACE_ID);
      	_ship->setStarSystem(this);  
@@ -1334,7 +1365,7 @@ void StarSystem :: addShipToSpace(Ship* _ship)
      	SHIP_inSPACE_vec.push_back(_ship);
 }
 
-void StarSystem :: addNpcToSpace(Npc* _npc)
+void StarSystem :: moveToSpace(Npc* _npc)
 {
      	int _race_id = _npc->getRaceId();
      	int _subtype_id = _npc->getSubTypeId();
@@ -1356,59 +1387,61 @@ void StarSystem :: addNpcToSpace(Npc* _npc)
          	NPC_DIPLOMAT_inSPACE_vec.push_back(_npc);
 }
 
-bool StarSystem :: removeShipById(int _id)
-{
-     bool is_removed = false;
-     for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
-         if (SHIP_inSPACE_vec[ki]->getId() == _id)
-         {
-            SHIP_inSPACE_vec.erase(SHIP_inSPACE_vec.begin() + ki);
-            is_removed = true; 
-         }
-     return is_removed;
-}
-
-
-bool StarSystem :: removeNpc(int _id, int _race_id, int _subtype_id)
-{
-     removeNpcFromTheListById(&NPC_inSPACE_vec, _id);
-
-     if (_subtype_id == RANGER_ID)
-        removeNpcFromTheListById(&NPC_RANGER_inSPACE_vec, _id);
-     if (_subtype_id == WARRIOR_ID)
-        removeNpcFromTheListById(&NPC_WARRIOR_inSPACE_vec, _id);
-     if (_subtype_id == TRADER_ID)
-        removeNpcFromTheListById(&NPC_TRADER_inSPACE_vec, _id);
-     if (_subtype_id == PIRAT_ID)
-        removeNpcFromTheListById(&NPC_PIRAT_inSPACE_vec, _id);
-     if (_subtype_id == DIPLOMAT_ID)
-        removeNpcFromTheListById(&NPC_DIPLOMAT_inSPACE_vec, _id);
-}
-
-
-bool StarSystem :: removeNpcFromTheListById(std::vector<Npc*>* pTo_npc_pList, int _id)
-{
-      	bool is_removed = false;
-      	for (unsigned int ni = 0; ni < pTo_npc_pList->size(); ni++)
-      	if ((*pTo_npc_pList)[ni]->getId() == _id)
+bool StarSystem :: removeShip(int _id)
+{       
+        for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
         {
-        	pTo_npc_pList->erase(pTo_npc_pList->begin() + ni);
-                is_removed = true;
-        }
-        return is_removed; 
+                if (SHIP_inSPACE_vec[ki]->getId() == _id)
+                {
+                        SHIP_inSPACE_vec.erase(SHIP_inSPACE_vec.begin() + ki);
+                        return true; 
+                }
+        }        
+        return false;
 }
 
+
+
+bool StarSystem :: removeNpc(int _id, int _subtype_id)
+{
+        removeFromTheListById(&NPC_inSPACE_vec, _id);
+
+        if (_subtype_id == RANGER_ID)
+                removeFromTheListById(&NPC_RANGER_inSPACE_vec, _id);
+        if (_subtype_id == WARRIOR_ID)
+                removeFromTheListById(&NPC_WARRIOR_inSPACE_vec, _id);
+        if (_subtype_id == TRADER_ID)
+                removeFromTheListById(&NPC_TRADER_inSPACE_vec, _id);
+        if (_subtype_id == PIRAT_ID)
+                removeFromTheListById(&NPC_PIRAT_inSPACE_vec, _id);
+        if (_subtype_id == DIPLOMAT_ID)
+                removeFromTheListById(&NPC_DIPLOMAT_inSPACE_vec, _id);
+}
+
+
+bool StarSystem :: removeFromTheListById(std::vector<Npc*>* _pTo_npc_vec, int _id)
+{
+      	for (unsigned int ni = 0; ni < _pTo_npc_vec->size(); ni++)
+      	if ((*_pTo_npc_vec)[ni]->getId() == _id)
+        {
+        	_pTo_npc_vec->erase(_pTo_npc_vec->begin() + ni);
+                return true;
+        }        
+        return false; 
+}
 //// ******* TRANSITION ******* 
 
 
 
 void StarSystem :: debug__()
 {
-     if (MINERAL_vec.size() > 1000)
-     {
-        for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
-        ;
-     }
+        if (MINERAL_vec.size() > 1000)
+        {
+                for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
+                {
+                        MINERAL_vec[mi]->hit_TRUE(100);
+                }
+        }
 }
 
 

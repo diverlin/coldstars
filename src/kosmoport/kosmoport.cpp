@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 Kosmoport :: Kosmoport(int _race_id)
 {
 	id = 0;
-	type_id = KOSMOPORT_TYPE_ID;
+	type_id = KOSMOPORT_ID;
 
         TextureOb* _texOb_slot = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.slot_texOb_pList);
 

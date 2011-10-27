@@ -122,7 +122,7 @@ void LazerTraceEffect :: render()
 
 void LazerTraceEffect :: _renderFrame()
 {
-    	drawLine(texOb->texture, (*pTo_start_pos_x), (*pTo_start_pos_y), -2, len, angle_inD, texOb->h/3);
+    	drawLine(texOb->texture, (*pTo_start_pos_x), (*pTo_start_pos_y), -2, len, angle_inD, texOb->h/4);
 }
 
 void LazerTraceEffect :: _renderFrames()

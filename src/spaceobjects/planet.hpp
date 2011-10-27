@@ -36,8 +36,8 @@ class Planet : public CommonForPlanet
                 Kosmoport* getKosmoport();
                 Land* getLand();
 
-                bool addShip(Ship*);
-                bool addNpc(Npc*);
+                bool add(Ship*);
+                bool add(Npc*);
 
 		void addToLaunchingQueue(Npc*);                
                 void launchingProcedure();

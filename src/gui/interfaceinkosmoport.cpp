@@ -25,7 +25,7 @@ InterfaceInKosmoport :: InterfaceInKosmoport()
     	TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(BLUE_COLOR_ID);    // debug
 
     	angar_screen_button     = new Button(pTo_particleTexOb, 
-    					     ANGAR_SCREEN_ID,
+    					     SCREEN_ANGAR_ID,
     					     g_VIEW_WIDTH - 1 * (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE, 
     					     INTERFACE_ICON_SIZE,  
@@ -34,7 +34,7 @@ InterfaceInKosmoport :: InterfaceInKosmoport()
     	button_common_pList.push_back(angar_screen_button);
     	
     	store_screen_button     = new Button(pTo_particleTexOb, 
-    					     STORE_SCREEN_ID,
+    					     SCREEN_STORE_ID,
     					     g_VIEW_WIDTH - 2 * (INTERFACE_ICON_SIZE + 5),
     					     INTERFACE_ICON_SIZE, 
     					     INTERFACE_ICON_SIZE,  
@@ -43,7 +43,7 @@ InterfaceInKosmoport :: InterfaceInKosmoport()
 	button_common_pList.push_back(store_screen_button);
     					        	
     	shop_screen_button      = new Button(pTo_particleTexOb, 
-    					     SHOP_SCREEN_ID,
+    					     SCREEN_SHOP_ID,
     					     g_VIEW_WIDTH - 3 * (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE, 
     					     INTERFACE_ICON_SIZE,  
@@ -52,7 +52,7 @@ InterfaceInKosmoport :: InterfaceInKosmoport()
     	button_common_pList.push_back(shop_screen_button);
     					     
     	galaxymap_screen_button = new Button(pTo_particleTexOb, 
-    					     GALAXYMAP_SCREEN_ID,
+    					     SCREEN_GALAXYMAP_ID,
     					     g_VIEW_WIDTH - 4 * (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE, 
     					     INTERFACE_ICON_SIZE,  
@@ -61,7 +61,7 @@ InterfaceInKosmoport :: InterfaceInKosmoport()
         button_common_pList.push_back(galaxymap_screen_button);
     					     
     	goverment_screen_button = new Button(pTo_particleTexOb, 
-    					     GOVERMENT_SCREEN_ID,
+    					     SCREEN_GOVERMENT_ID,
     					     g_VIEW_WIDTH - 5 * (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE,
     					     INTERFACE_ICON_SIZE,  
@@ -96,7 +96,7 @@ InterfaceInKosmoport :: InterfaceInKosmoport()
     				   "launch");
     	button_angar_pList.push_back(launch_button);
 
-	active_screen_id = ANGAR_SCREEN_ID;
+	active_screen_id = SCREEN_ANGAR_ID;
 }
 
 
@@ -142,7 +142,7 @@ void InterfaceInKosmoport :: mouseInteraction()
         }
         
 
-     	if (active_screen_id == ANGAR_SCREEN_ID)
+     	if (active_screen_id == SCREEN_ANGAR_ID)
     	{
      		for (unsigned int i = 0; i< button_angar_pList.size(); i++)
 		{
@@ -163,7 +163,7 @@ void InterfaceInKosmoport :: mouseInteraction()
 		   			{
        						//pPLAYER->getPilot()->createLaunchingSequence(); 
        						//pPLAYER->getPilot()->setPlaceTypeId(SPACE_ID);
-       						pPLAYER->getPilot()->launchingEventPlayer();
+       						pPLAYER->getPilot()->launchingEvent();
        			   		}
        				}
        				break;
@@ -182,7 +182,7 @@ void InterfaceInKosmoport :: renderInternal() const
        		button_common_pList[i]->render();
         }
 
-    	if (active_screen_id == ANGAR_SCREEN_ID)
+    	if (active_screen_id == SCREEN_ANGAR_ID)
     	{
     		for (unsigned int i = 0; i< button_angar_pList.size(); i++)
 		{
@@ -204,7 +204,7 @@ void InterfaceInKosmoport :: renderInfo() const
         	}
         }       
 
-    	if (active_screen_id == ANGAR_SCREEN_ID)
+    	if (active_screen_id == SCREEN_ANGAR_ID)
     	{
     		for (unsigned int i = 0; i< button_angar_pList.size(); i++)
 		{

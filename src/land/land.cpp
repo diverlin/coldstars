@@ -30,7 +30,7 @@ Land :: ~Land()
 //// ******* TRANSITION ******* 
 bool Land :: addShip(Ship* _ship)
 {
-        _ship->setPlaceTypeId(PLANET_TYPE_ID);
+        _ship->setPlaceTypeId(PLANET_ID);
         SHIP_pList.push_back(_ship);
         
         return true;

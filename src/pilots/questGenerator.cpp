@@ -17,29 +17,36 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-bool taskGenerator(Npc* npc)
-{
-	if ( (npc->getShip()->needsToDo.REPAIR == true) and (npc->getTaskOb()->getActionId() != LANDING_TASK_ID) )
-	{
-        	Planet* _target_planet = npc->getPlanetForDocking();  // depending on purpouse
-		npc->getTaskOb()->setTask(_target_planet, LANDING_TASK_ID);
+//bool selfcareGenerator(Npc* npc)
+//{
+	//if ( (npc->needsToDo.REPAIR_KORPUS == true) and (npc->getSelfCareOb()->getActionId() != LANDING_TASK_ID) )
+	//{
+        	//Planet* _target_planet = npc->getPlanetForDocking();  // depending on purpouse
+		//npc->getSelfCareOb()->setTask(_target_planet, LANDING_TASK_ID);
 		
-		printf("trololo\n");
-		return true;
-	}
+		//return true;
+	//}
 	
-	return false;
+	//return false;
+//}
+
+
+bool liberationStarSystemQuestGenerator(Npc* npc)
+{
+	StarSystem* taret_starsystem = pGALAXY->getRandomCapturedStarSystem();
+	npc->getQuestOb()->setTask(taret_starsystem, LIBERATION_STARSYSTEM_QUEST_ID);
 }
 
 
-bool questGenerator(Npc* npc)
+bool destroyShipQuestGenerator(Npc* npc)
 {
 	Npc* target_npc = NULL;
 	
 	int counter = 0;
 	do
-	{
-		target_npc = npc->getStarSystem()->getRandomNpc();
+	{ 
+                target_npc = pGALAXY->getRandomStarSystem()->getRandomNpc();
+		//target_npc = npc->getStarSystem()->getRandomNpc();
 		counter++;
 	} 
 	while ( (npc->getId() == target_npc->getId() ) and (counter < 20) );
@@ -48,11 +55,34 @@ bool questGenerator(Npc* npc)
 	{
 		if (npc->getId() != target_npc->getId())
 		{
-			npc->getQuestOb()->setTask(target_npc, DESTROY_TASK_ID);
+			npc->getQuestOb()->setTask(target_npc, DESTROY_SHIP_QEST_ID);
 			return true;
 		}
 	}
 
 	return false;
+}
+
+bool questEvilGenerator(Npc* npc)
+{
+        Npc* target_npc = NULL;
 	
+	int counter = 0;
+	do
+	{
+		target_npc = npc->getStarSystem()->getRandomNpcExcludingRaceId(npc->getRaceId());
+		counter++;
+	} 
+	while ( (npc->getId() == target_npc->getId() ) and (counter < 20) );
+	
+	if (target_npc != NULL)
+	{
+		if (npc->getId() != target_npc->getId())
+		{
+			npc->getQuestOb()->setTask(target_npc, DESTROY_SHIP_QEST_ID);
+			return true;
+		}
+	}
+
+	return false;
 }

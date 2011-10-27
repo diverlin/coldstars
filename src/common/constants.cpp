@@ -39,7 +39,7 @@ const int YELLOW_COLOR_ID = 3;
 const int GREY_COLOR_ID   = 4;
 
 
-const int STARSYSTEM_TOTAL_NUM = 3;
+const int STARSYSTEM_TOTAL_NUM = 10;
 
 // ASTEROID
 const int ASTEROID_SIZE_MIN = 6;
@@ -320,11 +320,11 @@ const int DISTANTSTAR_SIZE_MAX = 15;
 
 const int CURSOR_ID     = g_TYPE_ID_GENERATOR.getNextId("CURSOR_ID");  
 
-const int STARSYSTEM_TYPE_ID = g_TYPE_ID_GENERATOR.getNextId("STARSYSTEM_TYPE_ID");  
+const int STARSYSTEM_ID = g_TYPE_ID_GENERATOR.getNextId("STARSYSTEM_ID");  
 const int STAR_ID            = g_TYPE_ID_GENERATOR.getNextId("STAR_ID");  
 const int ASTEROID_ID        = g_TYPE_ID_GENERATOR.getNextId("ASTEROID_ID");  
-const int PLANET_TYPE_ID          = g_TYPE_ID_GENERATOR.getNextId("PLANET_TYPE_ID");  
-const int KOSMOPORT_TYPE_ID       = g_TYPE_ID_GENERATOR.getNextId("KOSMOPORT_TYPE_ID");  
+const int PLANET_ID          = g_TYPE_ID_GENERATOR.getNextId("PLANET_ID");  
+const int KOSMOPORT_ID       = g_TYPE_ID_GENERATOR.getNextId("KOSMOPORT_ID");  
 const int LAND_ID     = g_TYPE_ID_GENERATOR.getNextId("LAND_ID");  
 
 const int GOODS_ID     = g_TYPE_ID_GENERATOR.getNextId("GOODS_ID");
@@ -347,13 +347,13 @@ const int PLANET_GAS_SURFACE_ID = g_TYPE_ID_GENERATOR.getNextId("PLANET_GAS_SURF
 //const int TERROR_SHIP_quest_id           = g_TYPE_ID_GENERATOR.getNextId("TERROR_SHIP_quest_id");
 //const int TRADE_GOODS_quest_id           = g_TYPE_ID_GENERATOR.getNextId("TRADE_GOODS_quest_id");
 //const int DIPLOMACY_VISIT_quest_id       = g_TYPE_ID_GENERATOR.getNextId("DIPLOMACY_VISIT_quest_id");
-//const int STARSYSTEM_LIBERATION_quest_id = g_TYPE_ID_GENERATOR.getNextId("STARSYSTEM_LIBERATION_quest_id");
+const int LIBERATION_STARSYSTEM_QUEST_ID = g_TYPE_ID_GENERATOR.getNextId("LIBERATION_STARSYSTEM_QUEST_ID");
 
 //// dynamic tasks (are aded if they are necesary)
 //const int TASK_COMPLETED_id              = g_TYPE_ID_GENERATOR.getNextId("TASK_COMPLETED_id");
 //const int DESTROY_ASTEROID_task_id       = g_TYPE_ID_GENERATOR.getNextId("DESTROY_ASTEROID_task_id");
 //const int HYPER_JUMP_task_id             = g_TYPE_ID_GENERATOR.getNextId("HYPER_JUMP_task_id");
-////SELFPRESERVATION_task_id      = TYPE_ID_GENERATOR.getNextId()
+const int SELFCARE_TASK_ID               = g_TYPE_ID_GENERATOR.getNextId("SELFCARE_TASK_ID");
 //const int LAUNCHING_task_id              = g_TYPE_ID_GENERATOR.getNextId("LAUNCHING_task_id");
 const int LANDING_TASK_ID               = g_TYPE_ID_GENERATOR.getNextId("LANDING_TASK_ID");
 //const int GRABBING_MINERAL_task_id       = g_TYPE_ID_GENERATOR.getNextId("GRABBING_MINERAL_task_id");
@@ -366,7 +366,7 @@ const int LANDING_TASK_ID               = g_TYPE_ID_GENERATOR.getNextId("LANDING
 //const int SELL_NEEDED_id                 = g_TYPE_ID_GENERATOR.getNextId("SELL_NEEDED_id");
 //// end dynamic tasks
 
-const int DESTROY_TASK_ID          = g_TYPE_ID_GENERATOR.getNextId("DESTROY_TASK_ID");
+const int DESTROY_SHIP_QEST_ID          = g_TYPE_ID_GENERATOR.getNextId("DESTROY_SHIP_QEST_ID");
 
 //const int AREST_REQUEST_task_id          = g_TYPE_ID_GENERATOR.getNextId("AREST_REQUEST_task_id");
 //const int TERROR_REQUEST_task_id         = g_TYPE_ID_GENERATOR.getNextId("TERROR_REQUEST_task_id");
@@ -504,14 +504,14 @@ const int INSERTED_MODULE_SIZE = 15;
 
 
 //BUTTONS
-const int BUTTON_ID = g_TYPE_ID_GENERATOR.getNextId("BUTTON_SCREEN_ID");
+const int BUTTON_ID = g_TYPE_ID_GENERATOR.getNextId("BUTTON_ID");
 
 // screen
-const int ANGAR_SCREEN_ID = g_TYPE_ID_GENERATOR.getNextId("ANGAR_SCREEN_ID");
-const int STORE_SCREEN_ID = g_TYPE_ID_GENERATOR.getNextId("STORE_SCREEN_ID");
-const int SHOP_SCREEN_ID = g_TYPE_ID_GENERATOR.getNextId("SHOP_SCREEN_ID");
-const int GALAXYMAP_SCREEN_ID = g_TYPE_ID_GENERATOR.getNextId("GALAXYMAP_SCREEN_ID");
-const int GOVERMENT_SCREEN_ID = g_TYPE_ID_GENERATOR.getNextId("GOVERMENT_SCREEN_ID");
+const int SCREEN_ANGAR_ID = g_TYPE_ID_GENERATOR.getNextId("SCREEN_ANGAR_ID");
+const int SCREEN_STORE_ID = g_TYPE_ID_GENERATOR.getNextId("SCREEN_STORE_ID");
+const int SCREEN_SHOP_ID = g_TYPE_ID_GENERATOR.getNextId("SCREEN_SHOP_ID");
+const int SCREEN_GALAXYMAP_ID = g_TYPE_ID_GENERATOR.getNextId("SCREEN_GALAXYMAP_ID");
+const int SCREEN_GOVERMENT_ID = g_TYPE_ID_GENERATOR.getNextId("SCREEN_GOVERMENT_ID");
 
 const int REPAIR_BUTTON_ID = g_TYPE_ID_GENERATOR.getNextId("REPAIR_BUTTON_ID");
 const int FUEL_BUTTON_ID = g_TYPE_ID_GENERATOR.getNextId("FUEL_BUTTON_ID");

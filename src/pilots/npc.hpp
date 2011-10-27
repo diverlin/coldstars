@@ -21,7 +21,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define NPC_H
 
 
-
 class Npc 
 {
    	public:
@@ -32,7 +31,7 @@ class Npc
    		void setScanTarget(Ship*);
    		void setPlaceTypeId(int);
    		void setControlledByPlayer(bool);
-   		   		
+
    		bool getAlive() const;
    		int getId() const;
    		int getTypeId() const;
@@ -44,9 +43,10 @@ class Npc
    		Skill* getSkill();
    		Ship* getScanShip();
    		int getPlaceTypeId() const;
-   		QuestObject* getTaskOb();
+   		QuestObject* getSelfCareOb();
    		QuestObject* getQuestOb();
-   		bool getControlledByPlayer() const;		   	   
+   		bool getControlledByPlayer() const;
+                unsigned long int getCredits() const;   
 
    		void bind(Ship*);
 
@@ -58,25 +58,27 @@ class Npc
      
      		// AI
      		//void setRandomTargetCoord();
+     		void thinkCommon_inSpace_inStatic();
      		void thinkCommon_inKosmoport_inStatic();
      		void thinkCommon_inLand_inStatic();
 
      		void update_inDynamic_inSpace();
-
-    		void aiSimulation();
+                //
 
      		//// scanning
-    		bool checkPossibilityToScan(Ship* _ship);
+    		bool checkPossibilityToScan(Ship*);
      		bool scanProceeding(); 
      		bool removeScanTarget();
-     		//// scanning    		
+     		//// scanning
      		
-     		
-     		bool launchingEventPlayer();     		          	
           	bool launchingEvent();
      		
      		Planet* getPlanetForDocking();
     		
+                NeedsToDo needsToDo;
+                            
+                void setDoNothing();
+                                
    	private:
    	     	bool is_alive;    
      		int race_id;
@@ -87,6 +89,7 @@ class Npc
    	     	Kosmoport* kosmoport;
    	     	Land* land;
    	     	
+
    	     	bool controlled_by_player;
    	     	
    	     	Ship* ship;
@@ -94,11 +97,13 @@ class Npc
    	     	Skill* skill; 
 
    	     	TextureOb* texOb;
-   	     	
-   	     	QuestObject* questOb;
-   	     	QuestObject* taskOb;   	     	
-   	     	
-   	     	// observation/radar
+
+                QuestObject* selfcareOb;      // object to safe life
+                QuestObject* subSelfcareOb;   // object to safe life
+   	     	QuestObject* questOb;         // quest - continius
+                QuestObject* subQuestOb;      // task is very short and can be changed very frequently  within quest
+                               
+   	     	//// observation/radar
      		std::vector<Asteroid*>  visible_ASTEROID_pList;
      		std::vector<Asteroid*>  sorted_visible_ASTEROID_pList;
      		     		
@@ -124,6 +129,8 @@ class Npc
      		VisionStatus see;
      		
  		void observeAll_inSpace_inStatic();
+     		//void observe_inPlanet_inStatic();  //inhabited <-> uninhabited
+                
           	void findVisibleAsteroids_inSpace_inStatic();
           	void findVisibleMinerals_inSpace_inStatic();
           	void findVisibleContainers_inSpace_inStatic();
@@ -135,58 +142,24 @@ class Npc
                	void findVisibleDiplomatNpcs_inSpace_inStatic();
                			
                	void sortVisibleAsteroids_inSpace_inStatic();
-
-     		void observe_inPlanet_inStatic();  //inhabited <-> uninhabited
-     		// 
-     		
-     		// AI
-     		void thinkCommon_inSpace_inStatic();
-     		void thinkUnique_inSpace_inStatic();
-     		
-          	void (Npc::*pToFunc_thinkUnique_inSpace_inStatic)();
-     		
-     		void thinkUnique_Race0_Ranger_inSpace_inStatic();
-     		void thinkUnique_Race0_Warrior_inSpace_inStatic();
-     		void thinkUnique_Race0_Trader_inSpace_inStatic();
-     		void thinkUnique_Race0_Pirat_inSpace_inStatic();
-     		void thinkUnique_Race0_Diplomat_inSpace_inStatic();
-
-     		void thinkUnique_Race1_Ranger_inSpace_inStatic();
-     		void thinkUnique_Race1_Warrior_inSpace_inStatic();
-     		void thinkUnique_Race1_Trader_inSpace_inStatic();
-     		void thinkUnique_Race1_Pirat_inSpace_inStatic();
-     		void thinkUnique_Race1_Diplomat_inSpace_inStatic();
-
-    		void thinkUnique_Race2_Ranger_inSpace_inStatic();
-     		void thinkUnique_Race2_Warrior_inSpace_inStatic();
-     		void thinkUnique_Race2_Trader_inSpace_inStatic();
-     		void thinkUnique_Race2_Pirat_inSpace_inStatic();
-     		void thinkUnique_Race2_Diplomat_inSpace_inStatic();
-
-     		void thinkUnique_Race3_Ranger_inSpace_inStatic();
-     		void thinkUnique_Race3_Warrior_inSpace_inStatic();
-     		void thinkUnique_Race3_Trader_inSpace_inStatic();
-     		void thinkUnique_Race3_Pirat_inSpace_inStatic();
-     		void thinkUnique_Race3_Diplomat_inSpace_inStatic();
-
-     		void thinkUnique_Race4_Ranger_inSpace_inStatic();
-     		void thinkUnique_Race4_Warrior_inSpace_inStatic();
-     		void thinkUnique_Race4_Trader_inSpace_inStatic();
-     		void thinkUnique_Race4_Pirat_inSpace_inStatic();
-     		void thinkUnique_Race4_Diplomat_inSpace_inStatic();
-
-     		void thinkUnique_Race6_inSpace_inStatic();
-     		void thinkUnique_Race7_inSpace_inStatic();
-          		
-       		bool (Npc::*func_inDynamic_inSpace)();
-     		
-     		bool doNothing();
-     		// 
-     		
-     		
-     		//// docking/launching
-          	bool docking();
      		//// 
+     		
+     		//// AI
+     		void selfcareResolver();
+     		void questResolver();
+                
+                // scenarios
+     		void destroyShipQuestScenario();
+     		void liberationStarSystemQuestScenario();
+    		
+                void checkNeeds();
+                
+                //
+       		bool (Npc::*func_inDynamic_inSpace)();
+     		bool doNothing();
+                bool jumpingSequence();
+          	bool dockingSequence();
+     		//
      		     		
      		Ship* scanShip;
      		
@@ -196,5 +169,40 @@ class Npc
 #endif 
 
 
+//void thinkUnique_inSpace_inStatic();
+     		
+          	//void (Npc::*pToFunc_thinkUnique_inSpace_inStatic)();
+     		
+     		//void thinkUnique_Race0_Ranger_inSpace_inStatic();
+     		//void thinkUnique_Race0_Warrior_inSpace_inStatic();
+     		//void thinkUnique_Race0_Trader_inSpace_inStatic();
+     		//void thinkUnique_Race0_Pirat_inSpace_inStatic();
+     		//void thinkUnique_Race0_Diplomat_inSpace_inStatic();
 
+     		//void thinkUnique_Race1_Ranger_inSpace_inStatic();
+     		//void thinkUnique_Race1_Warrior_inSpace_inStatic();
+     		//void thinkUnique_Race1_Trader_inSpace_inStatic();
+     		//void thinkUnique_Race1_Pirat_inSpace_inStatic();
+     		//void thinkUnique_Race1_Diplomat_inSpace_inStatic();
+
+    		//void thinkUnique_Race2_Ranger_inSpace_inStatic();
+     		//void thinkUnique_Race2_Warrior_inSpace_inStatic();
+     		//void thinkUnique_Race2_Trader_inSpace_inStatic();
+     		//void thinkUnique_Race2_Pirat_inSpace_inStatic();
+     		//void thinkUnique_Race2_Diplomat_inSpace_inStatic();
+
+     		//void thinkUnique_Race3_Ranger_inSpace_inStatic();
+     		//void thinkUnique_Race3_Warrior_inSpace_inStatic();
+     		//void thinkUnique_Race3_Trader_inSpace_inStatic();
+     		//void thinkUnique_Race3_Pirat_inSpace_inStatic();
+     		//void thinkUnique_Race3_Diplomat_inSpace_inStatic();
+
+     		//void thinkUnique_Race4_Ranger_inSpace_inStatic();
+     		//void thinkUnique_Race4_Warrior_inSpace_inStatic();
+     		//void thinkUnique_Race4_Trader_inSpace_inStatic();
+     		//void thinkUnique_Race4_Pirat_inSpace_inStatic();
+     		//void thinkUnique_Race4_Diplomat_inSpace_inStatic();
+
+     		//void thinkUnique_Race6_inSpace_inStatic();
+     		//void thinkUnique_Race7_inSpace_inStatic();
         

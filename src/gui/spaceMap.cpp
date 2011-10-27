@@ -39,24 +39,30 @@ bool SpaceMap :: update()
         	int my  = g_VIEW_HEIGHT - g_MOUSE_POS_Y; 
         	int lmb = g_MOUSE_LEFT_BUTTON;
    
-        	for (unsigned int si = 0; si < galaxy->STARSYSTEM_pList.size(); si++)
+        	for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
         	{
             		//if (STARSYSTEM_pList[si]->id != pTo_PLAYER->pTo_starsystem->id)
             		{
-                		float ss_cursor_dist = distBetweenCenters(galaxy->STARSYSTEM_pList[si]->getRectOnMap().getCenter(), mx, my);
+                		float ss_cursor_dist = distBetweenCenters(galaxy->STARSYSTEM_vec[si]->getRectOnMap().getCenter(), mx, my);
                 		if (ss_cursor_dist < 10)
                 		{ 
-                   			int ss_ss_dist = distBetweenCenters(galaxy->STARSYSTEM_pList[si]->getRectOnMap().getCenter(), 
+                   			int ss_ss_dist = distBetweenCenters(galaxy->STARSYSTEM_vec[si]->getRectOnMap().getCenter(), 
                    				       			    pPLAYER->getPilot()->getStarSystem()->getRectOnMap().getCenter() );
                    				       
                    			if ( (ss_ss_dist < pPLAYER->getShip()->drive_slot.getDriveEquipment()->getHyper()) && (ss_ss_dist < pPLAYER->getShip()->bak_slot.getBakEquipment()->getFuel()) )
                       			{
                       				if (lmb == true)
                       				{ 
-                          				pPLAYER->setStarSystem(galaxy->STARSYSTEM_pList[si]);    // debug
+                                                        // debug
+                                                        pPLAYER->getStarSystem()->removeShip(pPLAYER->getShip()->getId());  
+                                                        pPLAYER->getStarSystem()->removeNpc(pPLAYER->getPilot()->getId(), pPLAYER->getPilot()->getSubTypeId());  
+                                                        galaxy->STARSYSTEM_vec[si]->addToHyperJumpQueue(pPLAYER->getPilot());    
+                          				pPLAYER->setStarSystem(galaxy->STARSYSTEM_vec[si]);                     
+                                                        // debug
+                                                        
                           				//player.hyperJumpPreparation(ss)
                           				//#player.calculateTraceToCoord((player.jump_pos_x, player.jump_pos_y))
-                          				printf("ss_id = %i\n", galaxy->STARSYSTEM_pList[si]->getId());    // debug
+                          				printf("ss_id = %i\n", galaxy->STARSYSTEM_vec[si]->getId());    // debug
                           				//manageHiddenStarSystemList(pPLAYER->getActiveStarSystem());
 
                           				return true;
@@ -83,18 +89,18 @@ void SpaceMap :: render(bool _clrscr)
         
         enable_BLEND();                                                
 
-    	TextureOb* pTo_textbg_texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.textBackground_texOb_pList);
-    	TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);  
+    	TextureOb* texOb_textBg = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.textBackground_texOb_pList);
+    	TextureOb* texOb_particle = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);  
 
-    	drawTexturedRect(pTo_textbg_texOb->texture, rect, -1);
-    	for (unsigned int si = 0; si < galaxy->STARSYSTEM_pList.size(); si++)
+    	drawTexturedRect(texOb_textBg->texture, rect, -1);
+    	for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
     	{
         	int font_size = 10;
-        	drawTexturedRect(pTo_particleTexOb->texture, galaxy->STARSYSTEM_pList[si]->getRectOnMap(), -1);
-        	drawSimpleText(int2str(galaxy->STARSYSTEM_pList[si]->getId()), 
+        	drawTexturedRect(texOb_particle->texture, galaxy->STARSYSTEM_vec[si]->getRectOnMap(), -1);
+        	drawSimpleText(int2str(galaxy->STARSYSTEM_vec[si]->getId()), 
         	       		font_size, 
-        	       		galaxy->STARSYSTEM_pList[si]->getRectOnMap().getBottomLeft().x, 
-        	       		galaxy->STARSYSTEM_pList[si]->getRectOnMap().getBottomLeft().y);
+        	       		galaxy->STARSYSTEM_vec[si]->getRectOnMap().getBottomLeft().x, 
+        	       		galaxy->STARSYSTEM_vec[si]->getRectOnMap().getBottomLeft().y);
         	       
         	//if ss.CAPTURED == True:
            		//drawTexturedRect(mark_enemy_ss_tex, [ss.rectOnMap[0] - 10, ss.rectOnMap[1] - 10, ss.rectOnMap[2] + 20, ss.rectOnMap[3] + 20], -1)

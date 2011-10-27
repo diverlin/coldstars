@@ -30,7 +30,7 @@ class QuestObject
 		template <typename TARGET>
 		void setTask(TARGET _target, int _action_id);
 		
-		StarSystem* getObStarSystem();
+		StarSystem* getStarSystem();
 		bool getExist() const;
 		int getTypeId() const;
 		int getActionId() const;
@@ -48,11 +48,13 @@ class QuestObject
 		int action_id;
 		int ob_type_id;
 		
-		Npc* npc;
-		Planet* planet;
+		Npc*        npc;
+		Planet*     planet;
+		StarSystem* starsystem;
 		
 		void setObject(Npc*);
 		void setObject(Planet*);		
+		void setObject(StarSystem*);	
 };
 
 
