@@ -152,6 +152,8 @@ bool Navigator :: getDockingPermission()
 
     	//if (pTo_ship->is_FOLLOWING_SPACESTATION == true)
     	//   return pTo_target_spacestation->getPermissionToLand();
+        
+        return false;
 }
 
 
@@ -181,7 +183,7 @@ void Navigator :: calcDetaledWay()
        		float x_normalized = xl/l;
        		float y_normalized = yl/l;
 
-       		int it = l / step;
+       		unsigned int it = l / step;
 
        		float x_step = x_normalized * step;
        		float y_step = y_normalized * step;

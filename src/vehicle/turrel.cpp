@@ -17,201 +17,62 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "turrel.hpp"
-
-
-Turrel :: Turrel()
-{
-    	//////
-    	points = Points();
-    	points.addCenterPoint();
-    	points.addMainQuadPoints();
-    	//////
-    
-        pos_z = -1.5;
-    
-         
-     	target_type_id = -1;
-     	target_ship      = NULL;
-     	target_asteroid  = NULL;
-     	target_mineral   = NULL;
-     	target_container = NULL;
-     	has_TARGET = false;
-     	pTo_target_is_alive = NULL;
-
-     	pTo_pos_x = NULL;
-     	pTo_pos_y = NULL;
-     
-     	pTo_target_pos_x = NULL;
-     	pTo_target_pos_y = NULL;            
-}
-
-void Turrel :: setSelectedStatus(bool _selected) { is_SELECTED = _selected; }                
-bool Turrel :: getSelectedStatus() const { return is_SELECTED; }
-bool Turrel :: getHasTargetStatus() const { return has_TARGET; }
-
-float Turrel :: getCenterX() const { return points.getCenter().x; }
-float Turrel :: getCenterY() const { return points.getCenter().y; }
-float Turrel :: getAngle()   const { return points.getAngleDegree(); }
-                                
-void Turrel :: bindSlot(ItemSlot* _slot)
+Turrel :: Turrel(ItemSlot* _slot, vec2f* _pCenter)
 {
         slot = _slot;
+        
+    	//////
+    	points.addCenterPoint();
+    	points.addMainQuadPoints();
+    	//////   
+                 
+        pCenter  = _pCenter;
+        
+        targetOb = new TargetObject(slot);
 }
 
 
+Turrel :: ~Turrel()
+{
+        delete targetOb;
+}
+
+void Turrel :: setSelectedStatus(bool _selected) { is_SELECTED = _selected; }    
+            
+bool Turrel :: getSelectedStatus() const { return is_SELECTED; }
+vec2f* Turrel :: getpCenter() const      { return pCenter; }
+vec2f Turrel :: getCenter() const        { return points.getCenter(); }
+float Turrel :: getAngle()   const       { return points.getAngleDegree(); }
+  
+TargetObject* Turrel :: getTargetOb() { return targetOb; }
 
 void Turrel :: setTexOb(TextureOb* _texOb)
 {
     	texOb = _texOb;
-    	w = texOb->w;
-    	h = texOb->h;   
 
     	//////
     	points.initCenterPoint();
-    	points.initMainQuadPoints(w, h);
+    	points.initMainQuadPoints(texOb->w, texOb->h);
     	//////
-}
-
-bool* Turrel :: getTarget_pAliveStatus() const { return pTo_target_is_alive; }
-float* Turrel :: getTarget_pCenterX() const { return pTo_target_pos_x; }
-float* Turrel :: getTarget_pCenterY() const { return pTo_target_pos_y; }
-
-float* Turrel :: get_pCenterX() const { return pTo_pos_x; }
-float* Turrel :: get_pCenterY() const { return pTo_pos_y; }
-
-Turrel :: ~Turrel()
-{}
-
-
-void Turrel :: placed(vec2f* _center)
-{
-     	pTo_pos_x = &_center->x;
-     	pTo_pos_y = &_center->y;
 }
 
 
 bool Turrel :: fireCheck()
 {
-    	if (has_TARGET == true)
-       		if (isTargetAchievable() == true)
-          		if (isAmmoAvailable() == true)
-             			return true;
-    	return false; 
+        targetOb->validation(*pCenter);    
+                        
+    	return targetOb->getValid();
 }
-
-
-bool Turrel :: isTargetAchievable()
-{
-    	if ( (isTargetAlive() == false) or (isTargetInSpace() == false) or (isTargetOnTheSameStarSystem() == false) )
-    	{   
-         	//printf("isTargetAchievable => false\n");  
-         	resetTarget();
-         	return false;
-    	}  
-
-    	float dist_to_target = distBetweenCenters(slot->getShip()->getPoints()->getCenter(), (*pTo_target_pos_x), (*pTo_target_pos_y));
-                                               
-    	if (dist_to_target > slot->getItemRadius())
-    	{
-         	resetTarget();
-         	return false;
-    	}
-     
-    	return true;  
-}
-
-
-bool Turrel :: isTargetAlive()
-{
-     	if (target_type_id == SHIP_ID)
-        	if (target_ship->getAlive() == true)
-           		return true;
-        	else
-           		return false;
-
-     	if (target_type_id == ASTEROID_ID)
-        	if (target_asteroid->getAlive() == true)
-           		return true;
-        	else
-           		return false;
-
-     	if (target_type_id == MINERAL_ID)
-        	if (target_mineral->getAlive() == true)
-           		return true;
-        	else
-           		return false; 
-
-     	if (target_type_id == CONTAINER_ID)
-        	if (target_container->getAlive() == true)
-           		return true;
-        	else
-           		return false;
-
-     	printf("ERROR MES: WeaponSlot :: isTargetAlive(): UNKNOWN TARGET");
-}
-
-bool Turrel :: isTargetInSpace()
-{
-     	if (target_type_id == SHIP_ID)
-        	if (target_ship->getPlaceTypeId() == SPACE_ID)
-           		return true;
-        	else
-           		return false;
-
-     	if (target_type_id == ASTEROID_ID)
-         	return true;
-
-     	if (target_type_id == MINERAL_ID)
-         	return true;
-
-     	if (target_type_id == CONTAINER_ID)
-         	return true;
-
-     	printf("ERROR MES: WeaponSlot :: isTargetInSpace(): UNKNOWN TARGET");
-}
-
-
-
-
-bool Turrel :: isTargetOnTheSameStarSystem()
-{
-     	if (target_type_id == SHIP_ID)
-        	if (target_ship->getStarSystem() == slot->getShip()->getStarSystem())
-           		return true;
-       		else
-           		return false;
-
-     	if (target_type_id == ASTEROID_ID)
-        	if (target_asteroid->getStarSystem() == slot->getShip()->getStarSystem())
-           		return true;
-        	else
-           		return false;
-
-     	if (target_type_id == MINERAL_ID)
-        	if (target_mineral->getStarSystem() == slot->getShip()->getStarSystem())
-           		return true;
-        	else
-           		return false;
-
-     	if (target_type_id == CONTAINER_ID)
-        	if (target_container->getStarSystem() == slot->getShip()->getStarSystem())
-           		return true;
-        	else
-           		return false;
-
-     	printf("ERROR MES: WeaponSlot :: isTargetOnTheSameStarSystem(): UNKNOWN TARGET");
-}
-
 
 
 
 
 bool Turrel :: isAmmoAvailable()
 {
-    	if (slot->getItemSubType() == LAZER_ID)
-       		return true;
-    	if (slot->getItemSubType() == ROCKET_ID)
+    	if (slot->getItemSubTypeId() == LAZER_ID)
+                //if check energy
+                        return true;
+    	if (slot->getItemSubTypeId() == ROCKET_ID)
        		if (slot->getRocketEquipment()->getAmmo() > 0)
           		return true;
 
@@ -223,39 +84,39 @@ bool Turrel :: isAmmoAvailable()
 
 bool Turrel :: fireEvent_TRUE()
 {
-    	if (slot->getItemSubType() == LAZER_ID)
+    	if (slot->getItemSubTypeId() == LAZER_ID)
     	{   
        		slot->getLazerEquipment()->fireEvent(this);
 
-       		if (target_type_id == SHIP_ID) 
+       		if (targetOb->getObTypeId() == SHIP_ID) 
        		{ 
-           		target_ship->hit_TRUE(slot->getLazerEquipment()->getDamage());
+           		targetOb->getShip()->hit_TRUE(slot->getLazerEquipment()->getDamage());
            		return true;
        		} 
 
-       		if (target_type_id == ASTEROID_ID)  
+       		if (targetOb->getObTypeId() == ASTEROID_ID)  
        		{ 
-           		target_asteroid->hit_TRUE(slot->getLazerEquipment()->getDamage());
+           		targetOb->getAsteroid()->hit_TRUE(slot->getLazerEquipment()->getDamage());
            		return true;
        		}
 
-       		if (target_type_id == MINERAL_ID)  
+       		if (targetOb->getObTypeId() == MINERAL_ID)  
        		{ 
-           		target_mineral->hit_TRUE(slot->getLazerEquipment()->getDamage());
+           		targetOb->getMineral()->hit_TRUE(slot->getLazerEquipment()->getDamage());
            		return true;
        		}
 
-       		if (target_type_id == CONTAINER_ID)  
+       		if (targetOb->getObTypeId() == CONTAINER_ID)  
        		{ 
-           		target_container->hit_TRUE(slot->getLazerEquipment()->getDamage());
+           		targetOb->getContainer()->hit_TRUE(slot->getLazerEquipment()->getDamage());
            		return true;
        		}
     	}
 
-    	if (slot->getItemSubType() == ROCKET_ID)
-    	{   
-       		slot->getRocketEquipment()->fireEvent();
-       		return true; 
+    	if (slot->getItemSubTypeId() == ROCKET_ID)
+    	{       
+                slot->getRocketEquipment()->fireEvent();
+                return true;                
     	}
 
     	return false;
@@ -272,121 +133,38 @@ bool Turrel :: fireEvent_FALSE()
 
 
 
-
-
-
-
-
-
-
-
-int Turrel :: getTargetId() const
+                              
+template<typename TARGET_TYPE>
+void Turrel :: setTarget(TARGET_TYPE* _target)
 {
-    	if (has_TARGET == true)
-    	{
-        	if (target_type_id == SHIP_ID)
-           		return target_ship->getId();
-        	if (target_type_id == ASTEROID_ID)
-           		return target_asteroid->getId();
-        	if (target_type_id == MINERAL_ID)
-           		return target_mineral->id;
-        	if (target_type_id == CONTAINER_ID)
-           		return target_container->id;
-
-        	printf("ERROR MES: WeaponSlot :: returnTargetId(): UNKNOWN TARGET");
-    	}
-}
-
-
-void Turrel :: setTarget(Ship* _ship)
-{
-     	target_ship = _ship;
-     	target_type_id = target_ship->getTypeId();
-
-     	pTo_target_pos_x = &(target_ship->getPoints()->getpCenter()->x);
-     	pTo_target_pos_y = &(target_ship->getPoints()->getpCenter()->y);
-
-    	pTo_target_is_alive = target_ship->getpAlive();
-     	has_TARGET = true;
-}
-
-void Turrel :: setTarget(Asteroid* _asteroid)
-{
-     	target_asteroid = _asteroid;
-     	target_type_id = target_asteroid->getTypeId();
-
-     	pTo_target_pos_x = &(target_asteroid->getPoints()->getpCenter()->x);
-     	pTo_target_pos_y = &(target_asteroid->getPoints()->getpCenter()->y);
-
-     	pTo_target_is_alive = target_asteroid->get_pAlive();
-     	has_TARGET = true;
-}
-
-void Turrel :: setTarget(Mineral* _mineral)
-{
-     	target_mineral = _mineral;
-     	target_type_id = target_mineral->type_id;
-
-     	pTo_target_pos_x = &(target_mineral->getPoints()->getpCenter()->x);
-     	pTo_target_pos_y = &(target_mineral->getPoints()->getpCenter()->y);
-
-     	pTo_target_is_alive = target_mineral->getpAlive();
-     	has_TARGET = true;
-}
-
-void Turrel :: setTarget(Container* _container)
-{
-     	target_container = _container;
-     	target_type_id = target_container->type_id;
-
-     	pTo_target_pos_x = &(target_container->getPoints()->getpCenter()->x);
-     	pTo_target_pos_y = &(target_container->getPoints()->getpCenter()->y);
-
-     	pTo_target_is_alive = target_container->getpAlive();
-     	has_TARGET = true;
+     	targetOb->setObject(_target);
 }
 
 
 
+void Turrel :: render(float _tur_angle_inD)
+{        
+        if (targetOb->getValid() == true)
+        {
+        	float _tur_xl = targetOb->getpCenter()->x - pCenter->x;
+        	float _tur_yl = targetOb->getpCenter()->y - pCenter->y;
 
+        	float _tur_angle_inR = atan2(_tur_yl, _tur_xl);
+        	_tur_angle_inD = _tur_angle_inR * RADIAN_TO_DEGREE_RATE;
+        }
 
-
-void Turrel :: resetTarget()
-{
-     	if (has_TARGET == true) 
-     	{  
-        	if (target_type_id == SHIP_ID)
-           		target_ship = NULL;
-        	if (target_type_id == ASTEROID_ID)
-           		target_asteroid = NULL;
-        	if (target_type_id == MINERAL_ID)
-           		target_mineral = NULL;
-        	if (target_type_id == CONTAINER_ID)
-           		target_container = NULL;
-
-        	pTo_target_pos_x = NULL;
-        	pTo_target_pos_y = NULL;
-        	pTo_target_is_alive = NULL;
-
-        	has_TARGET = false;  
-     	}  
-}
-
-
-void Turrel :: updatePosition(float _center_x, float _center_y, float _angle_inD)
-{   
-    	points.setCenter(_center_x, _center_y);
-    	points.setAngle(_angle_inD);
+	//printf("xy target =%f,%f\n", turrel_center_pList[i]->x, turrel_center_pList[i]->y);
+                    	
+        points.setCenter(pCenter->x, pCenter->y);
+    	points.setAngle(_tur_angle_inD);
     	points.update();
-}
-
-
-void Turrel :: render()
-{
+        
+                
    	glBindTexture(GL_TEXTURE_2D, texOb->texture); 
     	drawFlatQuadPerVertexIn2D(points.getBottomLeft(), 
                                   points.getBottomRight(), 
                                   points.getTopRight(), 
                                   points.getTopLeft(), 
-                                  pos_z);
-}
+                                  points.getPosZ());
+}        
+                

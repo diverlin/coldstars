@@ -86,6 +86,8 @@ void drawRect(Rect rect,
 void drawTexturedRect(GLuint tex, Rect rect, float z_pos);   //# z_pos = -1
 
 
+void drawTexturedPoint(GLuint texture, vec2f _center, float size, float pos_z);
+
 
 void drawLine(GLuint texture, 
               float start_pos_x, 

@@ -28,9 +28,6 @@ TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, std::ve
     tech_level_id = -1;
 
     color_id = -1;
-    //color_r = 256;
-    //color_g = 256;
-    //color_b = 256;
     is_rotated = false;
     //
 

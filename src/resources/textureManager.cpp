@@ -17,8 +17,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "textureManager.hpp"
-
 
 TextureManager :: TextureManager()
 {}
@@ -361,6 +359,8 @@ TextureOb* TextureManager :: returnPointerToRandomFaceTexObWithFolloingAttribute
 
        if (_race_id == RACE_7_ID) 
           return returnPointerToRandomTexObFromList(&face_race7_texOb_pList);
+
+        return NULL;
 }
 
 

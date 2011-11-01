@@ -96,7 +96,7 @@ void Angar :: resetSlotsRenderInfoFlag()
 
 void Angar :: mouseControl()
 {
-        bool lmb = g_MOUSE_LEFT_BUTTON; 
+        //bool lmb = g_MOUSE_LEFT_BUTTON; 
         bool rmb = g_MOUSE_RIGHT_BUTTON; 
 
         for (unsigned int i = 0; i < landingArea_pList.size(); i++)
@@ -115,7 +115,7 @@ void Angar :: mouseControl()
                                 {
                                         pPLAYER->getPilot()->setScanTarget(landingArea_pList[i]->getShip());
                                         pPLAYER->setScanFlag(true);
-                                        pSHIP_GUI->configure(pPLAYER->getPilot()->getScanShip(), false, false); 
+                                        g_SHIP_GUI->configure(pPLAYER->getPilot()->getScanShip(), false, false); 
                                 }
                         }
                 }

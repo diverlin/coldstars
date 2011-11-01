@@ -117,6 +117,19 @@ void drawTexturedRect(GLuint tex, Rect rect, float z_pos)   //# z_pos = -1
 
 
 
+void drawTexturedPoint(GLuint texture, vec2f center, float size, float pos_z)
+{
+    	glBindTexture(GL_TEXTURE_2D, texture);
+    	
+     	glPointSize(size);
+        	
+        glBegin(GL_POINTS);
+     		glVertex3f(center.x, center.y, pos_z);     	
+     	glEnd();
+}
+
+
+
 void drawLine(GLuint texture, 
               float start_pos_x, 
               float start_pos_y, 

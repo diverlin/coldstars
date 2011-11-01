@@ -22,7 +22,7 @@ TrailEffect :: TrailEffect(TextureOb* _texOb,
 			   vec2f* _pTo_start_pos, 
 			   vec2f* _pTo_target_pos, 
 			   ParticleData _data_particle,
-			   int _num_particles)
+			   unsigned int _num_particles)
 {
      	texOb = _texOb;
      	data_particle = _data_particle;
@@ -53,7 +53,7 @@ TrailEffect :: TrailEffect(TextureOb* _texOb,
 
 TrailEffect :: ~TrailEffect()
 {
-	for (int i = 0; i < particles_vec.size(); i++) 
+	for (unsigned int i = 0; i < particles_vec.size(); i++) 
      	{
   		delete particles_vec[i];
      	}
@@ -76,7 +76,7 @@ void TrailEffect :: updateVelocity()
 
 void TrailEffect :: putParticlesToInitPos()
 {
-     	for (int i = 0; i < particles_vec.size(); i++) 
+     	for (unsigned int i = 0; i < particles_vec.size(); i++) 
      	{
          	while ( particles_vec[i]->getAlpha() > ( particles_vec[i]->getAlphaStart() - i * particle_offset) ) 
          	{

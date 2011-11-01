@@ -32,9 +32,6 @@ class TextureOb
         int size_id;      // counting from wxh of sprite
         
         int color_id;     // probably color_rgb will be more usefull
-        //int color_r;
-        //int color_g;
-        //int color_b;
         bool is_rotated;
         
         float brightThreshold;

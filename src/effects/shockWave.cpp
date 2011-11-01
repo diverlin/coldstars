@@ -72,8 +72,8 @@ void ShockWaveEffect :: update()
 
 void createShockWave(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 {
-	int w = g_VIEW_WIDTH;
-	int h = g_VIEW_HEIGHT;      
+	//int w = g_VIEW_WIDTH;
+	//int h = g_VIEW_HEIGHT;      
         
 	float x = 10;
 	float y = 1.8;

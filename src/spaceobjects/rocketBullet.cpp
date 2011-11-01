@@ -53,8 +53,6 @@ RocketBullet :: RocketBullet(IdData _data_id,
         step = 0;
 
         // points
-        points = Points();
-
         points.initCenterPoint();
         points.addCenterPoint();
 
@@ -250,12 +248,12 @@ RocketBullet* rocketGenerator(BulletData data_bullet, ItemSlot* slot)
         	rocket = new RocketBullet(data_id,
         			          data_life,		
         				  data_bullet,
-        				  slot->getTurrel()->getCenterX(), 
-                                  	  slot->getTurrel()->getCenterY(), 
+        				  slot->getTurrel()->getCenter().x, 
+                                  	  slot->getTurrel()->getCenter().y, 
                                   	  slot->getTurrel()->getAngle(), 
-                                  	  slot->getTurrel()->getTarget_pCenterX(), 
-                                  	  slot->getTurrel()->getTarget_pCenterY(), 
-                                  	  slot->getTurrel()->getTarget_pAliveStatus(), 
+                                  	  &slot->getTurrel()->getTargetOb()->getpCenter()->x, 
+                                  	  &slot->getTurrel()->getTargetOb()->getpCenter()->y, 
+                                  	  slot->getTurrel()->getTargetOb()->getpAlive(), 
                                   	  slot->getShip()->getId());
         }
     	else
@@ -266,9 +264,9 @@ RocketBullet* rocketGenerator(BulletData data_bullet, ItemSlot* slot)
         				  slot->getShip()->getPoints()->getCenter().x, 
                                   	  slot->getShip()->getPoints()->getCenter().y, 
                                   	  slot->getTurrel()->getAngle(), 
-                                  	  slot->getTurrel()->getTarget_pCenterX(), 
-                                  	  slot->getTurrel()->getTarget_pCenterY(), 
-                                  	  slot->getTurrel()->getTarget_pAliveStatus(), 
+                                  	  &slot->getTurrel()->getTargetOb()->getpCenter()->x, 
+                                  	  &slot->getTurrel()->getTargetOb()->getpCenter()->y, 
+                                  	  slot->getTurrel()->getTargetOb()->getpAlive(), 
                                   	  slot->getShip()->getId());
          }
          

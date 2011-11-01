@@ -31,7 +31,7 @@ class InterfaceInSpace
 		void render();
        		
        	private:
-       		std::vector<Button*> button_common_pList;
+       		std::vector<Button*> button_vec;
        		
        		Button* galaxymap_screen_button; 
        		

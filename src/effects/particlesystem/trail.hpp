@@ -28,7 +28,7 @@ class TrailEffect
 		    	    vec2f* _pTo_start_pos, 
 			    vec2f* _pTo_target_pos, 
 			    ParticleData _data_particle,
-			    int _num_particles);
+			    unsigned int _num_particles);
 
        		~TrailEffect();
        

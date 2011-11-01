@@ -133,10 +133,10 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
                                                       	      texOb_particle, 
                                                      	      100, 
-                                                     	      _turrel->get_pCenterX(), 
-                                                              _turrel->get_pCenterY(), 
-                                                              _turrel->getTarget_pCenterX(), 
-                                                              _turrel->getTarget_pCenterY());
+                                                     	      &_turrel->getpCenter()->x, 
+                                                              &_turrel->getpCenter()->y, 
+                                                              &_turrel->getTargetOb()->getpCenter()->x, 
+                                                              &_turrel->getTargetOb()->getpCenter()->y);
         }
     	else
     	{
@@ -145,12 +145,12 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
                                                               100, 
                                                               &(slot->getShip()->getPoints()->getpCenter()->x), 
                                                               &(slot->getShip()->getPoints()->getpCenter()->y), 
-                                                              _turrel->getTarget_pCenterX(), 
-                                                              _turrel->getTarget_pCenterY());
+                                                              &_turrel->getTargetOb()->getpCenter()->x, 
+                                                              &_turrel->getTargetOb()->getpCenter()->y);
         }
     
     	// DAMAGE effect
-	DamageEffect* _damage_effect = createDamageEffect(texOb_particle, _turrel->getTarget_pCenterX(), _turrel->getTarget_pCenterY());
+	DamageEffect* _damage_effect = createDamageEffect(texOb_particle, _turrel->getTargetOb()->getpCenter());
     	_lazer_trace_effect->setDamageEffect(_damage_effect);
     	
     	deterioration();

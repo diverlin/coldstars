@@ -28,12 +28,12 @@ class ItemSlot
 		ItemSlot(int _subtype_id, Ship* _ship, TextureOb* _texOb, int _pos_x, int _pos_y);
 		~ItemSlot();
                 
-                Turrel* bindTurrel(Turrel*);
+                void bindTurrel(Turrel*);
                                 
                 int getType()        const;
                 int getSubType()     const;
-                int getItemType()    const;
-                int getItemSubType() const;
+                int getItemTypeId()    const;
+                int getItemSubTypeId() const;
                 
                 Turrel* getTurrel()  const;  
                                                   
@@ -44,7 +44,7 @@ class ItemSlot
                 void setFlashingStatus(bool new_status);
                       
                 Rect& getRect();
-                Ship* getShip() const;
+                Ship* getShip();
                 
                 RocketEquipment*    getRocketEquipment()    const;
                 LazerEquipment*     getLazerEquipment()     const;
@@ -111,6 +111,8 @@ class ItemSlot
 		void renderItemInfo(float offset_x = 0, float offset_y = 0);
                 
                 bool interaction(int _x, int _y);
+                
+                void createAndDropContainer(StarSystem* _starsystem, vec2f _center);
         
         private:
                 int type_id, subtype_id;               
@@ -151,6 +153,8 @@ class ItemSlot
 		FreezerModule*   freezer_module;
 		ScanerModule*    scaner_module;
 		GrappleModule*   grapple_module;
+		
+		void resetFlags();
 }; 
 
 #endif

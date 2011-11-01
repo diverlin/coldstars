@@ -18,18 +18,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-Mineral :: Mineral(TextureOb* _texOb, vec2f _start_pos)
+Mineral :: Mineral(IdData _data_id, LifeData _data_life, TextureOb* _texOb, vec2f _start_pos)
 {        
-    	CommonForSpaceItems_init(_texOb, _start_pos);
-
-    	id         = g_MINERAL_ID_GENERATOR.getNextId();
-    	type_id    = MINERAL_ID;
-    	//subtype_id = ;
+    	CommonForSpaceItems_init(_data_id, _data_life, _texOb, _start_pos);
 
     	mass = getRandInt(6, 32);
     	velocity = getRandInt(40, 42) / 100.0;
-
-    	data_life.armor = getRandInt(1,6);
 }
     
     
@@ -39,7 +33,7 @@ void Mineral :: updateInfo()
 
     	info.addTitleStr("MINERAL");
 
-    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->getId()));
+    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->getId()));
     	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 }
@@ -53,10 +47,19 @@ void Mineral :: renderInfo()
 
 Mineral* createMineral(vec2f _start_pos)
 {
-	TextureOb* _mTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.mineral_texOb_pList); 
-	Mineral* _mineral = new Mineral(_mTexOb, vec2f(_start_pos.x, _start_pos.y));
+        IdData data_id;
+        data_id.id         = g_MINERAL_ID_GENERATOR.getNextId();
+    	data_id.type_id    = MINERAL_ID;
+    	//data_id.subtype_id = ; 
+        
+        LifeData data_life;
+    	data_life.armor = getRandInt(1,6);
+        data_life.dying_time = 30;        
+        
+	TextureOb* texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.mineral_texOb_pList); 
+	Mineral* mineral = new Mineral(data_id, data_life, texOb, _start_pos);
 
-	return _mineral;
+	return mineral;
 }
 
 

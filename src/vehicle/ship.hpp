@@ -34,6 +34,7 @@ class Ship
                 
                 bool getAlive() const;
                 bool* getpAlive();
+                int* getpPlaceTypeId();
                 int getArmor() const;
                 int getCollisionRadius() const;
                 
@@ -142,8 +143,6 @@ class Ship
                 Points points;
 		InfoTable info;
 		
-        	std::vector<vec2f*> turrel_center_pList;
-
             	Navigator* navigator;
             	
                 TextureOb* texOb;
@@ -164,17 +163,19 @@ class Ship
              	void renderDriveTrail() const;
              	void renderShield() const;
              	
+             	void dropRandomItemToSpace();
+             	
                 // WEPONS
         	int fire_delay, d_fire_delay;
         	std::vector<ItemSlot*> slot_weapon_pList;
         	std::vector<ItemSlot*> slot_weapon_equiped_pList;
         	std::vector<ItemSlot*> slot_weapon_reloaded_pList;
         	
-             	Turrel turrel1;
-        	Turrel turrel2;
-        	Turrel turrel3;
-        	Turrel turrel4;
-        	Turrel turrel5;
+             	Turrel* turrel1;
+        	Turrel* turrel2;
+        	Turrel* turrel3;
+        	Turrel* turrel4;
+        	Turrel* turrel5;
 
         	int place_type_id;
 };

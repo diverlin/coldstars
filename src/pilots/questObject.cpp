@@ -18,12 +18,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-QuestObject :: QuestObject(Npc* _npc_owner)
+QuestObject :: QuestObject()
 {
-	npc_owner = _npc_owner;
-	
 	ob_type_id = NONE_ID;
-	action_id = NONE_ID;
+	action_id  = NONE_ID;
 		
 	npc        = NULL;
 	planet     = NULL;
@@ -53,6 +51,8 @@ StarSystem* QuestObject :: getStarSystem()
 	{
 		return starsystem;
 	}
+        
+        return NULL;
 }
 
 
@@ -123,7 +123,7 @@ void QuestObject :: validation()
 	
 	if (ob_type_id == STARSYSTEM_ID)
 	{
-		if (starsystem->getCapturedFlag() == false);
+		if (starsystem->getCapturedFlag() == false)
 		{
 			reset();
 			return;

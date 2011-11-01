@@ -52,8 +52,6 @@ void CommonForPlanet :: CommonForPlanet_init(TextureOb* _texOb,
         // !!!!
                 
         //////
-	points = Points();
-
 	points.initCenterPoint();
 	points.addCenterPoint();
 	
