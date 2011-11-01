@@ -26,20 +26,14 @@ class DamageEffect
 {
    	public: 
        		DamageEffect(TextureOb* _texOb, 
-       		    	     vec2f* _pTo_center, 
+       		    	     vec2f* _pCenter, 
        		    	     ParticleData _data_particle,
-       		    	     int _num_particles);
-       		    	     
-       		DamageEffect(TextureOb* _texOb, 
-       		    	     float* _pTo_center_x, 
-       		    	     float* _pTo_center_y, 
-       		    	     ParticleData _data_particle,
-       		    	     int _num_particles);
+       		    	     unsigned int _num_particles);
        		    
        		~DamageEffect();
 
       		bool getAlive() const;
-      		bool setDying();
+      		void setDying();
       		      		
        		void update();
        		void render();
@@ -48,8 +42,7 @@ class DamageEffect
        	       	bool is_alive;
        		bool is_dying;
 
-       		float* pTo_center_x;
-       		float* pTo_center_y;
+       		vec2f* pCenter;
 
 		TextureOb* texOb;
 		ParticleData data_particle;
@@ -57,6 +50,6 @@ class DamageEffect
        		std::vector<Particle*> particles_vec;       		       	
 };
 
-DamageEffect* createDamageEffect(TextureOb* _texOb, float* pTo_pos_x, float* pTo_pos_y);
+DamageEffect* createDamageEffect(TextureOb* _texOb, vec2f* _pCenter);
 
 #endif 

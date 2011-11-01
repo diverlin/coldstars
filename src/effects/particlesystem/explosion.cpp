@@ -36,7 +36,7 @@ ExplosionEffect :: ExplosionEffect(TextureOb* _texOb, vec2f _center_pos, Particl
  
 ExplosionEffect :: ~ExplosionEffect()
 {
-	for (int i = 0; i < particles_vec.size(); i++) 
+	for (unsigned int i = 0; i < particles_vec.size(); i++) 
      	{
   		delete particles_vec[i];
      	}
@@ -49,7 +49,7 @@ bool ExplosionEffect :: getAlive() const { return is_alive; }
 void ExplosionEffect :: update()
 {
     	is_alive = false;
-    	for(int i = 0; i<particles_vec.size(); i++)
+    	for (unsigned int i = 0; i<particles_vec.size(); i++)
     	{
         	if (particles_vec[i]->getAlive() == true)
         	{

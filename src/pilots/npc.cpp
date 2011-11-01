@@ -38,7 +38,7 @@ int Npc :: getPlaceTypeId() const  { return place_type_id; }
 QuestObject* Npc :: getSelfCareOb()    { return selfcareOb; }
 QuestObject* Npc :: getQuestOb()   { return questOb; }
 bool Npc :: getControlledByPlayer() const { return controlled_by_player; }
-unsigned long int Npc :: getCredits() const { credits; }   
+unsigned long int Npc :: getCredits() const { return credits; }   
 
 
 void Npc :: bind(Ship* _ship) 	           
@@ -67,83 +67,6 @@ Npc :: Npc(int _race_id, int _subtype_id, TextureOb* _texOb)
     	
     	controlled_by_player = false;
 
-
-
-    	//if (race_id == RACE_0_ID)
-    	//{  
-       		//if (subtype_id == RANGER_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race0_Ranger_inSpace_inStatic;
-       		//if (subtype_id == WARRIOR_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race0_Warrior_inSpace_inStatic;
-       		//if (subtype_id == TRADER_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race0_Trader_inSpace_inStatic;
-       		//if (subtype_id == PIRAT_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race0_Pirat_inSpace_inStatic;
-       		//if (subtype_id == DIPLOMAT_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race0_Diplomat_inSpace_inStatic;
-    	//}
-
-    	//if (race_id == RACE_1_ID)
-    	//{ 
-       		//if (subtype_id == RANGER_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race1_Ranger_inSpace_inStatic;
-       		//if (subtype_id == WARRIOR_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race1_Warrior_inSpace_inStatic;
-       		//if (subtype_id == TRADER_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race1_Trader_inSpace_inStatic;
-       		//if (subtype_id == PIRAT_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race1_Pirat_inSpace_inStatic;
-       		//if (subtype_id == DIPLOMAT_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race1_Diplomat_inSpace_inStatic;
-    	//}
-
-    	//if (race_id == RACE_2_ID)
-    	//{ 
-       		//if (subtype_id == RANGER_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race2_Ranger_inSpace_inStatic;
-       		//if (subtype_id == WARRIOR_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race2_Warrior_inSpace_inStatic;
-       		//if (subtype_id == TRADER_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race2_Trader_inSpace_inStatic;
-       		//if (subtype_id == PIRAT_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race2_Pirat_inSpace_inStatic;
-       		//if (subtype_id == DIPLOMAT_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race2_Diplomat_inSpace_inStatic;
-    	//}
-
-    	//if (race_id == RACE_3_ID)
-    	//{ 
-       		//if (subtype_id == RANGER_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race3_Ranger_inSpace_inStatic;
-       		//if (subtype_id == WARRIOR_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race3_Warrior_inSpace_inStatic;
-       		//if (subtype_id == TRADER_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race3_Trader_inSpace_inStatic;
-       		//if (subtype_id == PIRAT_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race3_Pirat_inSpace_inStatic;
-       		//if (subtype_id == DIPLOMAT_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race3_Diplomat_inSpace_inStatic;
-    	//}
-
-    	//if (race_id == RACE_4_ID)
-    	//{ 
-       		//if (subtype_id == RANGER_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race4_Ranger_inSpace_inStatic;
-       		//if (subtype_id == WARRIOR_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race4_Warrior_inSpace_inStatic;
-       		//if (subtype_id == TRADER_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race4_Trader_inSpace_inStatic;
-       		//if (subtype_id == PIRAT_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race4_Pirat_inSpace_inStatic;
-       		//if (subtype_id == DIPLOMAT_ID)
-          		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race4_Diplomat_inSpace_inStatic;
-    	//}
-
-    	//if (race_id == RACE_6_ID)
-       		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race6_inSpace_inStatic;
-    	//if (race_id == RACE_7_ID)
-       		//pToFunc_thinkUnique_inSpace_inStatic = &Npc::thinkUnique_Race7_inSpace_inStatic;
-
     	credits = 1000;
    	
     	func_inDynamic_inSpace = &Npc::doNothing;
@@ -159,14 +82,19 @@ Npc :: Npc(int _race_id, int _subtype_id, TextureOb* _texOb)
     		
 	skill = new Skill();
 
-	selfcareOb  = new QuestObject(this);	
-	subSelfcareOb  = new QuestObject(this);
-	questOb     = new QuestObject(this);
-        subQuestOb  = new QuestObject(this);
+	selfcareOb     = new QuestObject();
+	subSelfcareOb  = new QuestObject();
+	questOb        = new QuestObject();
+        subQuestOb     = new QuestObject();
 }
     
 Npc :: ~Npc()
-{}  
+{
+	delete selfcareOb;
+	delete subSelfcareOb;
+	delete questOb;
+	delete subQuestOb;
+}  
     
 
 
@@ -648,6 +576,8 @@ bool Npc :: dockingSequence()
      			// wait or reset
      		}
      	}
+        
+        return true;
 }
 
 
@@ -657,6 +587,8 @@ bool Npc :: jumpingSequence()
      	{
                 ship->jumpingEvent();
      	}
+        
+        return true;
 }
 
 

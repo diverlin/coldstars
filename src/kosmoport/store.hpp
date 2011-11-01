@@ -64,19 +64,19 @@ class Store
                 TextureOb* texOb_background; 
                 TextureOb* texOb_slot; 
                 
-                int korpus_num;      
-                int lazer_num;       
-                int rocket_num;      
-                int torped_num;      
-                int radar_num;       
-                int grapple_num;     
-                int drive_num;       
-                int protector_num;   
-                int bak_num;         
-                int droid_num;       
-                int scaner_num;      
-                int freezer_num;     
-                int energyBlock_num; 
+                unsigned int korpus_num;      
+                unsigned int lazer_num;       
+                unsigned int rocket_num;      
+                unsigned int torped_num;      
+                unsigned int radar_num;       
+                unsigned int grapple_num;     
+                unsigned int drive_num;       
+                unsigned int protector_num;   
+                unsigned int bak_num;         
+                unsigned int droid_num;       
+                unsigned int scaner_num;      
+                unsigned int freezer_num;     
+                unsigned int energyBlock_num; 
                 
                 std::vector<ItemSlot*> slot_pList;
                 

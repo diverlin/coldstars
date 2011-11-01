@@ -173,11 +173,11 @@ ItemSlot :: ~ItemSlot()
 
 int ItemSlot :: getType()        const { return type_id; }
 int ItemSlot :: getSubType()     const { return subtype_id; }
-int ItemSlot :: getItemType()    const { return item_type_id; }
-int ItemSlot :: getItemSubType() const { return item_subtype_id; }
+int ItemSlot :: getItemTypeId()    const { return item_type_id; }
+int ItemSlot :: getItemSubTypeId() const { return item_subtype_id; }
 
 Turrel* ItemSlot :: getTurrel() const { return turrel; }
-Turrel* ItemSlot :: bindTurrel( Turrel* _turrel) {turrel = _turrel; }
+void ItemSlot :: bindTurrel( Turrel* _turrel) {turrel = _turrel; }
                                 
 bool ItemSlot :: getEquipedStatus() const  { return is_EQUIPED; }
 bool ItemSlot :: getCursoredStatus()            const { return is_CURSORED; }
@@ -187,7 +187,7 @@ void ItemSlot :: setFlashingStatus(bool new_status) { is_FLASHING = new_status; 
                 
 Rect& ItemSlot :: getRect() { return rect; }
 
-Ship* ItemSlot :: getShip() const { return ship; }
+Ship* ItemSlot :: getShip() { return ship; }
                                 
 RocketEquipment*    ItemSlot :: getRocketEquipment()    const { return rocket_equipment; }
 LazerEquipment*     ItemSlot :: getLazerEquipment()     const { return lazer_equipment; }
@@ -710,6 +710,7 @@ void ItemSlot :: removeItem()
 		if (item_subtype_id == ROCKET_ID)
 		{
     			rocket_equipment = NULL;
+    			resetFlags();
     			if (subtype_id != UNIVERSAL_SLOT_ID)
     				ship->updateFireAbility();
     		}
@@ -717,6 +718,7 @@ void ItemSlot :: removeItem()
     		if (item_subtype_id == LAZER_ID)
 		{
     			lazer_equipment = NULL;
+    			resetFlags();
     			if (subtype_id != UNIVERSAL_SLOT_ID)
     				ship->updateFireAbility();
     		}
@@ -724,6 +726,8 @@ void ItemSlot :: removeItem()
         	if (item_subtype_id == RADAR_ID)
 		{
     			radar_equipment = NULL;
+    			resetFlags();
+    			    			
     			if (subtype_id != UNIVERSAL_SLOT_ID)
     				ship->updateRadarAbility();
       		}
@@ -731,6 +735,8 @@ void ItemSlot :: removeItem()
         	if (item_subtype_id == DRIVE_ID)
 		{
     			drive_equipment = NULL;
+    			resetFlags();
+    			
     			if (subtype_id != UNIVERSAL_SLOT_ID)
     			{ 
     				ship->updateDriveAbility();
@@ -741,6 +747,7 @@ void ItemSlot :: removeItem()
         	if (item_subtype_id == BAK_ID)
 		{
     			bak_equipment = NULL;
+    			resetFlags();
     			if (subtype_id != UNIVERSAL_SLOT_ID)
     			{ 
     				ship->updateDriveAbility();
@@ -751,6 +758,7 @@ void ItemSlot :: removeItem()
         	if (item_subtype_id == ENERGIZER_ID)
 		{
     			energizer_equipment = NULL;
+    			resetFlags();
     			if (subtype_id != UNIVERSAL_SLOT_ID)
     				ship->updateEnergyAbility();
     		}
@@ -758,6 +766,7 @@ void ItemSlot :: removeItem()
         	if (item_subtype_id == PROTECTOR_ID)
 		{
     			protector_equipment = NULL;
+    			resetFlags();
     			if (subtype_id != UNIVERSAL_SLOT_ID)
     				ship->updateProtectionAbility();
     		}
@@ -765,6 +774,7 @@ void ItemSlot :: removeItem()
         	if (item_subtype_id == DROID_ID)
 		{
     			droid_equipment = NULL;
+    			resetFlags();
     			if (subtype_id != UNIVERSAL_SLOT_ID)
     				ship->updateRepairAbility();
     		}
@@ -772,6 +782,7 @@ void ItemSlot :: removeItem()
         	if (item_subtype_id == FREEZER_ID)
 		{
     			freezer_equipment = NULL;
+    			resetFlags();
     			if (subtype_id != UNIVERSAL_SLOT_ID)
     				ship->updateFreezeAbility();
     		}
@@ -780,6 +791,7 @@ void ItemSlot :: removeItem()
  	       if (item_subtype_id == SCANER_ID)
 		{
     			scaner_equipment = NULL;
+    			resetFlags();
     			if (subtype_id != UNIVERSAL_SLOT_ID)
     				ship->updateScanAbility();
     		}
@@ -787,6 +799,7 @@ void ItemSlot :: removeItem()
         	if (item_subtype_id == GRAPPLE_ID)
 		{
     			grapple_equipment = NULL;
+    			resetFlags();
     			if (subtype_id != UNIVERSAL_SLOT_ID)
     				ship->updateGrabAbility();
     		}
@@ -797,64 +810,78 @@ void ItemSlot :: removeItem()
         	if (item_subtype_id == ROCKET_ID)
 		{
     			rocket_module = NULL;
+    			resetFlags();
     		}	 
 
         	if (item_subtype_id == LAZER_ID)
 		{
     			lazer_module = NULL;
+    			resetFlags();
     		}	 
     	
         	if (item_subtype_id == RADAR_ID)
 		{
     			radar_module = NULL;
+    			resetFlags();
     		}	 
     	
         	if (item_subtype_id == DRIVE_ID)
 		{
     			drive_module = NULL;
+    			resetFlags();
     		}	 
     		
         	if (item_subtype_id == BAK_ID)
 		{
     			bak_module = NULL;
+    			resetFlags();
     		}
     	
         	if (item_subtype_id == ENERGIZER_ID)
 		{
     			energizer_module = NULL;
+    			resetFlags();
     		}
 
        		if (item_subtype_id == PROTECTOR_ID)
 		{
     			protector_module = NULL;
+    			resetFlags();
     		}
 
         	if (item_subtype_id == DROID_ID)
 		{
     			droid_module = NULL;
+    			resetFlags();
     		}
 
         	if (item_subtype_id == FREEZER_ID)
 		{
     			freezer_module = NULL;
+    			resetFlags();
     		}	
     	
     		if (item_subtype_id == SCANER_ID)
 		{
     			scaner_module = NULL;
+    			resetFlags();
     		}
 
     		if (item_subtype_id == GRAPPLE_ID)
 		{
     			grapple_module = NULL;
+    			resetFlags();
     		}
     	}
+}
 
+
+void ItemSlot :: resetFlags()
+{
 	is_EQUIPED = false; 
 	item_type_id    = -1;
 	item_subtype_id = -1;
 }
-
 
 
 int ItemSlot :: getItemMass() const
@@ -890,6 +917,7 @@ int ItemSlot :: getItemMass() const
 		return 1;
 	}
 	
+        return 0;
 }
 
 
@@ -923,6 +951,8 @@ int ItemSlot :: getItemPrice() const
 		if (item_subtype_id == SCANER_ID)
 			return scaner_equipment->getPrice();
 	}
+        
+        return 0;
 }
 
 
@@ -947,6 +977,8 @@ TextureOb* ItemSlot :: getItemTexOb() const
 		if (item_subtype_id == ROCKET_ID)
 			return rocket_equipment->getTexOb();
         }
+        
+        return NULL;
 }
                 
                 
@@ -960,6 +992,8 @@ int ItemSlot :: getItemRadius() const
 		if (item_subtype_id == ROCKET_ID)
 			return rocket_equipment->getRadius();
         }
+        
+        return 0;
 }
 
 
@@ -973,6 +1007,8 @@ int ItemSlot :: getItemDamage() const
 		if (item_subtype_id == ROCKET_ID)
 			return rocket_equipment->getDamage();
         }
+        
+        return 0;
 }
 
 
@@ -1194,3 +1230,153 @@ bool ItemSlot :: interaction(int _x, int _y)
 }
 
 
+void ItemSlot :: createAndDropContainer(StarSystem* _starsystem, vec2f _center)
+{
+	Container* _container = createContainer(_center);
+	
+	if (item_type_id == EQUIPMENT_ID)
+	{
+		if (item_subtype_id == LAZER_ID)
+		{	
+			_container->otsec_slot->insertItem(lazer_equipment);
+        		lazer_equipment = NULL; 
+        		resetFlags();
+		}
+		if (item_subtype_id == ROCKET_ID)
+		{	
+			_container->otsec_slot->insertItem(rocket_equipment);
+        		rocket_equipment = NULL; 
+        		resetFlags();
+		}
+		if (item_subtype_id == RADAR_ID)
+		{
+			_container->otsec_slot->insertItem(radar_equipment);
+        		radar_equipment = NULL;
+        		resetFlags();
+		}
+		if (item_subtype_id == DRIVE_ID)
+		{
+			_container->otsec_slot->insertItem(drive_equipment);
+        		drive_equipment = NULL;
+        		resetFlags();
+		}
+		if (item_subtype_id == BAK_ID)
+		{
+			_container->otsec_slot->insertItem(bak_equipment);
+        		bak_equipment = NULL;
+        		resetFlags();
+		}
+		if (item_subtype_id == ENERGIZER_ID)
+		{
+			_container->otsec_slot->insertItem(energizer_equipment);
+        		energizer_equipment = NULL;
+        		resetFlags();
+		}
+		if (item_subtype_id == PROTECTOR_ID)
+		{
+			_container->otsec_slot->insertItem(protector_equipment);
+        		protector_equipment = NULL;
+        		resetFlags();
+		}
+		if (item_subtype_id == DROID_ID)
+		{
+			_container->otsec_slot->insertItem(droid_equipment);
+        		droid_equipment = NULL;
+        		resetFlags();
+		}
+		if (item_subtype_id == FREEZER_ID)
+		{
+			_container->otsec_slot->insertItem(freezer_equipment);
+        		freezer_equipment = NULL;
+        		resetFlags();
+		}
+		if (item_subtype_id == SCANER_ID)
+		{
+			_container->otsec_slot->insertItem(scaner_equipment);
+        		scaner_equipment = NULL;
+        		resetFlags();
+		}
+		if (item_subtype_id == GRAPPLE_ID)
+		{
+			_container->otsec_slot->insertItem(grapple_equipment);
+        		grapple_equipment = NULL;
+        		resetFlags();
+		}
+     	}
+     		
+     	if (item_type_id == MODULE_ID)
+     	{
+		// _modules
+		if (item_subtype_id == LAZER_ID)
+		{
+			_container->otsec_slot->insertItem(lazer_module);
+        		lazer_module = NULL;
+        		resetFlags();
+		}
+		if (item_subtype_id == ROCKET_ID)
+		{
+			_container->otsec_slot->insertItem(rocket_module);
+        		rocket_module = NULL;
+        		resetFlags();
+		}
+		if (item_subtype_id == RADAR_ID)
+		{
+			_container->otsec_slot->insertItem(radar_module);
+        		radar_module = NULL;
+        		resetFlags();
+		}
+		if (item_subtype_id == DRIVE_ID)
+		{
+			_container->otsec_slot->insertItem(drive_module);
+        		drive_module = NULL;
+        		resetFlags();
+		}
+		if (item_subtype_id == BAK_ID)
+		{
+			_container->otsec_slot->insertItem(bak_module);
+        		bak_module = NULL;
+        		resetFlags();
+		}
+		if (item_subtype_id == ENERGIZER_ID)
+		{
+			_container->otsec_slot->insertItem(energizer_module);
+        		energizer_module = NULL;
+        		resetFlags();
+		}
+        	if (item_subtype_id == PROTECTOR_ID)
+		{
+			_container->otsec_slot->insertItem(protector_module);
+        		protector_module = NULL;
+        		resetFlags();
+		}
+		if (item_subtype_id == DROID_ID)
+		{
+			_container->otsec_slot->insertItem(droid_module);
+        		droid_module = NULL;
+        		resetFlags();
+		}
+		if (item_subtype_id == FREEZER_ID)
+		{
+			_container->otsec_slot->insertItem(freezer_module);
+        		freezer_module = NULL;
+        		resetFlags();
+		}
+		if (item_subtype_id == SCANER_ID)
+		{
+			_container->otsec_slot->insertItem(scaner_module);
+        		scaner_module = NULL;
+        		resetFlags();
+		}
+		if (item_subtype_id == GRAPPLE_ID)
+		{
+			_container->otsec_slot->insertItem(grapple_module);
+        		grapple_module = NULL;
+        		resetFlags();
+		}
+	}
+	
+	// update mass, and abilities if needed !!!!!!!!!!!!!!!!!!!
+
+	//printf("container was created in ss_id = %i, pos = %f, %f\n", _starsystem->getId(), _container->getPoints()->getCenter().x, _container->getPoints()->getCenter().y );
+	_starsystem->add(_container);	
+}

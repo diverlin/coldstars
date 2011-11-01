@@ -17,8 +17,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 // Create the main window
-int USE_MODERN_HW = true;
-int g_VIEW_WIDTH = 1280;
+bool g_USE_MODERN_HW = false;
+bool g_AUTOTURN_ENABLE = true;  // debug
+
+int g_VIEW_WIDTH = 640;
 int g_VIEW_HEIGHT = g_VIEW_WIDTH*600/800;
 int g_BPP = 32;
 int g_FPS_LIMIT = 60;
@@ -40,26 +42,17 @@ bool g_MOUSE_RIGHT_BUTTON;
 int g_TIMER;
 int TURN_TIME = 150;  //turn time, depends on game fps
 int TURN_COUNT = 0; 
-         
-
-float FLOAT_EPSILON = 0.1;         
-
-         
-sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.4.7 (SFML/C++)");
+        
+sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.4.9 (SFML/C++)");
 sf::Font g_FONT;
 
 sf::Clock g_CLOCK;
 sf::Event g_EVENT;
 
-ObjMeshInstance* pTo_SPHERE_MESH; 
-ObjMeshInstance* pTo_DEFORMED_SPHERE_MESH;
+ObjMeshInstance* g_SPHERE_MESH; 
+ObjMeshInstance* g_DEFORMED_SPHERE_MESH;
 
-//ModelOBJ            g_model;
-
-
-Player* pPLAYER;
-
-ShipInternal* pSHIP_GUI;
+//ModelOBJ            g_MODEL;
 
 GLuint g_BLACK2ALPHA_PROGRAM;
 GLuint g_SHOCKWAVE_PROGRAM;
@@ -77,9 +70,10 @@ FBO* g_FBO3;
 
 BloomEffect* g_BLOOM;
 
-class Galaxy;
-Galaxy* pGALAXY;
-        
+Galaxy* g_GALAXY;
+
+Player* pPLAYER;    
+ShipInternal* g_SHIP_GUI;     
 
 SimpleIdGenerator   g_STARSYSTEM_ID_GENERATOR  = SimpleIdGenerator();
 SimpleIdGenerator   g_CONTAINER_ID_GENERATOR  = SimpleIdGenerator();
@@ -94,4 +88,6 @@ SimpleIdGenerator   g_NPC_ID_GENERATOR  = SimpleIdGenerator();
 SimpleIdGenerator   g_TEXTURE_ID_GENERATOR = SimpleIdGenerator();
 DetaliedIdGenerator g_TYPE_ID_GENERATOR    = DetaliedIdGenerator(); 
 
+UniqueTextureCollector g_UNIQUE_TEXTURE_COLLECTOR;
 
+TextureManager g_TEXTURE_MANAGER;

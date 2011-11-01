@@ -41,6 +41,8 @@ int returnObjectSize(int w, int h)
        		return 9;
     	else if(w * h >= SIZE_9 * SIZE_9)
        		return 10;
+                
+        return 0;
 }
 
 

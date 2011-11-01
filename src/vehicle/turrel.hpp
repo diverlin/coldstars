@@ -19,82 +19,46 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef TURREL_H
 #define TURREL_H
 
+
 class Turrel
 {
         public:
-                TextureOb* texOb;
-                Turrel();
+                Turrel(ItemSlot*, vec2f*);
                 ~Turrel();
 
-                void bindSlot(ItemSlot*);
                 void setTexOb(TextureOb*);
-                
-                void setTarget(Ship*);
-                void setTarget(Asteroid*);
-                void setTarget(Mineral*);
-                void setTarget(Container*);                               
+                              
+                template<typename TARGET_TYPE>
+                void setTarget(TARGET_TYPE*);
+                                         
                 void setSelectedStatus(bool _selected);
                 
                 bool getSelectedStatus()  const;
-                bool getHasTargetStatus() const;
+                vec2f getCenter() const;
+                vec2f* getpCenter() const;
+                float getAngle()   const;
                 
-                float getCenterX() const;
-                float getCenterY() const;
-                float getAngle()   const;              
+                TargetObject* getTargetOb();
        
-                float* get_pCenterX() const;
-                float* get_pCenterY() const;
+                bool fireCheck();                
+                bool isAmmoAvailable();
                 
-                // TARGET section
-                int getTargetId() const;
-                bool* getTarget_pAliveStatus() const;
-                float* getTarget_pCenterX() const;
-                float* getTarget_pCenterY() const;
-                //
-                
-                void placed(vec2f* _center);
-       
-                bool fireCheck();
-                bool isTargetAchievable();
-                        bool isTargetAlive();
-                        bool isTargetInSpace(); 
-                        bool isTargetOnTheSameStarSystem();
-                        bool isAmmoAvailable();
                 bool fireEvent_TRUE();
                 bool fireEvent_FALSE();
 
-                void resetTarget();
-                
-                void updatePosition(float _center_x, float _center_y, float _angle_inD);
-                void render();      
-                
+                void render(float);                 
+               
         private:
-                ItemSlot* slot;
-                
-                bool is_SELECTED;
-                bool has_TARGET;
+                TextureOb* texOb;
                         
-                int target_type_id;
+                ItemSlot* slot;
+                TargetObject* targetOb;
                 
-                // TARGET section
-                bool* pTo_target_is_alive;
-                float* pTo_target_pos_x;
-                float* pTo_target_pos_y;
-                //
-                  
-                float* pTo_pos_x;
-                float* pTo_pos_y;
-                
-                Ship*      target_ship;
-                Asteroid*  target_asteroid;
-                Mineral*   target_mineral;                
-                Container* target_container;
-                
-                //TextureOb* texOb;
-                int w, h;
-                
-                Points points;
-                float pos_z;                
+                bool is_SELECTED;                        
+               
+                vec2f* pCenter; 
+               
+                Points points;         
 }; 
 
 #endif 

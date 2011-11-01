@@ -16,11 +16,21 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "resources.hpp"
+
+void initGameData()
+{
+	prepearGlobalVecs();
+	load3DModels();
+    	loadImages();
+	if (g_USE_MODERN_HW == true)
+	{
+		loadShaders();
+		prepearPostProcess();
+	}
+}
 
 
-
-void loadResources()
+void prepearGlobalVecs()
 {
     	RACES_ALL_LIST.push_back(RACE_0_ID);
     	RACES_ALL_LIST.push_back(RACE_1_ID);
@@ -47,450 +57,25 @@ void loadResources()
             
     	RACE4_ALLOWED_SUBTYPE_LIST.push_back(WARRIOR_ID);
     	RACE4_ALLOWED_SUBTYPE_LIST.push_back(TRADER_ID);
-    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(DIPLOMAT_ID);
-    	
-	
-    	
-pTo_SPHERE_MESH = new ObjMeshInstance("data/obj/sphere/planet.obj");
-
-pTo_DEFORMED_SPHERE_MESH = new ObjMeshInstance("data/obj/sphere_deformed/planet.obj");
-
-//g_model.import("data/obj/sphere/planet.obj");
-//g_model.normalize();
-
-
-
-if (USE_MODERN_HW == true)
-{
-//static const char * pTo_lightVertexSource = {
-//"/* vertex */"
-//"    void main() {"
-//"        gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;"
-//"    }"
-//};   
-
-//static const char * pTo_lightFragSource = {
-//"/* fragment */"
-//"    void main() {"
-//"        gl_FragColor = vec4(0.0, 1.0, 0.0, 0.0);"
-//"    }"
-//};       
-
-static const char * pTo_blackToAlphaVertexSource = {
-"/* vertex */"
-"void main()" 
-"{"
-"  gl_Position = ftransform();"
-"  gl_TexCoord[0] = gl_MultiTexCoord0;"
-"}"
-};   
-
-static const char * pTo_blackToAlphaFragSource = {
-"/* fragment */"
-"uniform sampler2D sceneTex;     /* texture unit 0 */"
-"void main()"
-"{"
-"    vec4 c = texture2D(sceneTex, gl_TexCoord[0].st);"
-"    float rgb = c.r + c.g + c.b;"
-"    if (c.g > 0.6)"
-"       gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);"
-"    else"
-"       gl_FragColor = c;"
-"}"
-};       
-
-g_BLACK2ALPHA_PROGRAM = glCreateProgram();
-compile_program(pTo_blackToAlphaVertexSource, pTo_blackToAlphaFragSource, &g_BLACK2ALPHA_PROGRAM);
-
-
-
-
-
-// shaders are taken from http://www.geeks3d.com/20091116/shader-library-2d-shockwave-post-processing-filter-glsl/
-static const GLchar * pTo_shockWaveVertexSource = {
-"/* Vertex program */"
-" "
-"void main(void)"
-"{"
-"  gl_Position = ftransform();"
-"  gl_TexCoord[0] = gl_MultiTexCoord0;"
-"}"
-};
-
-
-static const GLchar * pTo_shockWaveFragSource = {
-"/* Fragment program */"
-" "
-"uniform sampler2D sceneTex;     /* texture unit 0 */"
-"uniform vec2 center[10];"        
-"uniform vec3 shockParams[10];   /* 10.0, 0.8, 0.1 */" 
-"uniform float time[10];         /* effect elapsed time */"
-"uniform int imax;               /* how many shaders */"
-" "
-"void main()"
-"{"
-"  vec2 uv = gl_TexCoord[0].xy;"
-"  vec2 texCoord = uv;"
-"  for(int i=0; i<imax; i++)"
-"  {"
-"      float distance = distance(uv, center[i]);"
-"      /* if ( (distance <= (time[i] + shockParams[i].z)) && (distance >= (time[i] - shockParams[i].z)) ) */"
-"      if (distance <= (time[i] + shockParams[i].z))"
-"         if (distance >= (time[i] - shockParams[i].z))"
-"         {"
-"              float diff = (distance - time[i]);"
-"              float powDiff = 1.0 - pow(abs(diff*shockParams[i].x), shockParams[i].y);"
-"              float diffTime = diff  * powDiff;"
-"              vec2 diffUV = normalize(uv - center[i]);"
-"              texCoord = uv + (diffUV * diffTime);"
-"         }"
-"  }"
-" "
-"  gl_FragColor = texture2D(sceneTex, texCoord);"
-"}"
-};
-
-g_SHOCKWAVE_PROGRAM = glCreateProgram();
-compile_program(pTo_shockWaveVertexSource, pTo_shockWaveFragSource, &g_SHOCKWAVE_PROGRAM);
-
-
-
-
-
-static const GLchar * pTo_volumetricLightVertexSource = {
-"/* Vertex program */"
-" "
-"void main(void)"
-"{"
-"  gl_Position = ftransform();"
-"  gl_TexCoord[0] = gl_MultiTexCoord0;"
-"}"
-};
-
-
-static const GLchar * pTo_volumetricLightFragSource = {
-"/* Fragment program */"
-" "
-"uniform sampler2D FullSampler;"
-"uniform sampler2D BlurSampler;"
-"uniform vec4 sun_pos;"
-" "
-"const vec4 ShaftParams	= vec4(0.05, 1.0, 0.05, 1.0);"
-"const vec4 sunColor	= vec4(0.9, 0.8, 0.6, 1.0);"
-" "
-"float saturate(float val)"
-"{"
-"	return clamp(val,0.0,1.0);"
-"}"
-" "
-"void main(void)"
-"{ "
-"	vec2  sunPosProj = sun_pos.xy;"
-"	float sign = sun_pos.w;"
-" "
-"	vec2  tc = gl_TexCoord[0].xy;"
-" "
-"	vec2  sunVec = sunPosProj.xy - tc; /* + vec2(0.5,0.5); */"
-"	float sunDist = saturate(sign) * (1.0 - saturate(dot(sunVec,sunVec) * ShaftParams.y));"
-" "
-"	sunVec *= ShaftParams.x * sign;"
-" "
-"	tc += sunVec;"
-"	vec4 accum = texture2D(BlurSampler, tc);"
-"	tc += sunVec;"
-"	accum += texture2D(BlurSampler, tc) * 0.875;"
-"	tc += sunVec;"
-"	accum += texture2D(BlurSampler, tc) * 0.75;"
-"	tc += sunVec;"
-"	accum += texture2D(BlurSampler, tc) * 0.625;"
-"	tc += sunVec;"
-"	accum += texture2D(BlurSampler, tc) * 0.5;"
-"	tc += sunVec;"
-"	accum += texture2D(BlurSampler, tc) * 0.375;"
-"	tc += sunVec;"
-"	accum += texture2D(BlurSampler, tc) * 0.25;"
-"	tc += sunVec;"
-"	accum += texture2D(BlurSampler, tc) * 0.125;"
-" "
-"	accum  *= 1.65 * sunDist;"
-" "
-"	vec4 cScreen = texture2D(FullSampler, gl_TexCoord[0].xy);"
-"	accum = cScreen + accum * ShaftParams.w * sunColor * ( 1.0 - cScreen );"
-" "
-"	gl_FragColor = accum;"
-"}"
-};
-
-g_VOLUMETRICLIGHT_PROGRAM = glCreateProgram();
-compile_program(pTo_volumetricLightVertexSource, pTo_volumetricLightFragSource, &g_VOLUMETRICLIGHT_PROGRAM);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//http://www.gamedev.ru/code/forum/?id=90743
-static const GLchar * pTo_lightVertexSource = {
-"/* Vertex program */"
-" "
-"uniform vec4 lightPos, eyePos;"
-"varying vec3 l, v, n;"
-" "
-"void main(void)"
-"{"
-"    vec3 p = vec3(gl_ModelViewMatrix * gl_Vertex);      /* transformed point to world space */ "
-"    l = normalize(vec3(lightPos) - p);                  /* vector to light source */           "
-"    v = normalize(vec3(eyePos)   - p);                  /* vector to the eye */                "
-"    n = normalize(gl_NormalMatrix * gl_Normal);         /* transformed n */                    "
-"    gl_TexCoord[0] = gl_MultiTexCoord0;                                                        " 
-" "
-"    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;                                    "
-"}"
-};   
-
-//http://www.gamedev.ru/code/forum/?id=90743
-static const GLchar * pTo_lightFragSource = {
-"/* Fragment program */"
-" "
-"uniform sampler2D Texture_0;"
-"varying vec3 l, v, n;"
-" "
-"void main (void)"
-"{"
-"    const vec4  diffColor = vec4(1.0, 1.0, 1.0, 1.0);"
-"    const vec4  ambientColor = vec4(0.1, 0.1, 0.1, 1.0);"
-"    const vec4  specColor = vec4(0.7, 0.7, 0.0, 0.0);"
-"    const float specPower = 30.0;"
-" "
-"    vec3 n2   = normalize(n);"
-"    vec3 l2   = normalize(l);"
-"    vec3 v2   = normalize(v);"
-"    vec3 r    = reflect(-v2, n2);"
-"    vec4 diff = diffColor * max(dot(n2, l2), 0.0);"
-"    vec4 spec = specColor * pow(max(dot(l2, r), 0.0), specPower);"
-"    vec2 texCoord0 = gl_TexCoord[0].xy;"
-"    vec4 texColor0 = texture2D(Texture_0, texCoord0);"
-" "
-"    gl_FragColor = (diff + ambientColor) * texColor0;"
-"}"
-};       
-
-g_LIGHT_PROGRAM = glCreateProgram();
-compile_program(pTo_lightVertexSource, pTo_lightFragSource, &g_LIGHT_PROGRAM);
-
-
-
-
-
-
-
-
-static const GLchar * pTo_blurVertexSource = {
-"/* Vertex program */"
-" "
-"void main(void)"
-"{"
-"  gl_Position = ftransform();"
-"  gl_TexCoord[0] = gl_MultiTexCoord0;"
-"}"
-};     
-
-static const GLchar * pTo_blurFragmentSource = {
-"/* Fragment program */"
-"uniform sampler2D sceneTex;  /* 0 */"
-" "
-"uniform float rt_w;    /* render target width  */"
-"uniform float rt_h;    /* render target height */"
-"uniform float vx_offset;"
-" "
-"float offset[3] = float[]( 0.0, 1.3846153846, 3.2307692308 );"
-"float weight[3] = float[]( 0.2270270270, 0.3162162162, 0.0702702703 );"
-" "
-"void main()"
-"{"
-"  vec3 tc = vec3(0.0, 0.0, 0.0);"
-"  if (gl_TexCoord[0].x<(vx_offset-0.01))"
-"  {"
-"    vec2 uv = gl_TexCoord[0].xy;"
-"    tc = texture2D(sceneTex, uv).rgb * weight[0];"
-" "
-"    for (int i=1; i<3; i++)"
-"    {"
-"      tc += texture2D(sceneTex, uv + vec2(offset[i])/rt_w, 0.0).rgb * weight[i];"
-"      tc += texture2D(sceneTex, uv - vec2(offset[i])/rt_w, 0.0).rgb * weight[i];"
-"    }"
-"  }"
-"  else if (gl_TexCoord[0].x>=(vx_offset+0.01))"
-"  {"
-"    tc = texture2D(sceneTex, gl_TexCoord[0].xy).rgb;"
-"  }"
-"  gl_FragColor = vec4(tc, 1.0);"
-"}"
-};  
-
-g_BLUR_PROGRAM = glCreateProgram();
-compile_program(pTo_blurVertexSource, pTo_blurFragmentSource, &g_BLUR_PROGRAM);
-
-
-
-
-
-static const GLchar * pTo_extractBrightVertexSource = {
-"/* Vertex program */"
-" "
-"void main(void)"
-"{"
-"  gl_Position = ftransform();"
-"  gl_TexCoord[0] = gl_MultiTexCoord0;"
-"}"
-};  
-
-
-static const GLchar * pTo_extractBrightFragmentSource = {
-"/* Fragment program */"
-"uniform sampler2D source;"
-"uniform float threshold;"
-" "
-"void main(void)"
-"{"
-"    vec4 c = texture2D(source, gl_TexCoord[0].st);"
-"    float rgb = c.r + c.g + c.b;"
-"    if (rgb > threshold)   /* threshold ~ 1.9 */ "
-"       gl_FragColor = c;"
-"    else"
-"       gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);"
-"}"
-};  
-
-g_EXTRACT_BRIGHT_PROGRAM = glCreateProgram();
-compile_program(pTo_extractBrightVertexSource, pTo_extractBrightFragmentSource, &g_EXTRACT_BRIGHT_PROGRAM);
-
-
-
-
-
-
-
-static const GLchar * pTo_combineVertexSource = {
-"/* Vertex program */"
-" "
-"void main(void)"
-"{"
-"  gl_Position = ftransform();   /* This transforms the input vertex the same way the fixed-function pipeline would */"
-"  gl_TexCoord[0] = gl_MultiTexCoord0;"
-"}"
-};  
-
-
-static const GLchar * pTo_combineFragmentSource = {
-"/* Fragment program */"
-"uniform sampler2D Scene;"
-" "
-"uniform sampler2D Pass0_tex1;"
-"uniform sampler2D Pass0_tex2;"
-"uniform sampler2D Pass0_tex3;"
-"uniform sampler2D Pass0_tex4;"
-" "
-"uniform sampler2D Pass1_tex1;"
-"uniform sampler2D Pass1_tex2;"
-"uniform sampler2D Pass1_tex3;"
-"uniform sampler2D Pass1_tex4;"
-" "
-"uniform sampler2D Pass2_tex1;"
-"uniform sampler2D Pass2_tex2;"
-"uniform sampler2D Pass2_tex3;"
-"uniform sampler2D Pass2_tex4;"
-" "
-"void main(void)"
-"{"
-"    vec4 t0 = texture2D(Scene, gl_TexCoord[0].st);"
-" "
-"    vec4 p0t1 = texture2D(Pass0_tex1, gl_TexCoord[0].st);"
-"    vec4 p0t2 = texture2D(Pass0_tex2, gl_TexCoord[0].st);"
-"    vec4 p0t3 = texture2D(Pass0_tex3, gl_TexCoord[0].st);"
-"    vec4 p0t4 = texture2D(Pass0_tex4, gl_TexCoord[0].st);"
-" "
-"    vec4 p1t1 = texture2D(Pass1_tex1, gl_TexCoord[0].st);"
-"    vec4 p1t2 = texture2D(Pass1_tex2, gl_TexCoord[0].st);"
-"    vec4 p1t3 = texture2D(Pass1_tex3, gl_TexCoord[0].st);"
-"    vec4 p1t4 = texture2D(Pass1_tex4, gl_TexCoord[0].st);"
-" "
-"    vec4 p2t1 = texture2D(Pass2_tex1, gl_TexCoord[0].st);"
-"    vec4 p2t2 = texture2D(Pass2_tex2, gl_TexCoord[0].st);"
-"    vec4 p2t3 = texture2D(Pass2_tex3, gl_TexCoord[0].st);"
-"    vec4 p2t4 = texture2D(Pass2_tex4, gl_TexCoord[0].st);"
-" "
-" "
-"    gl_FragColor = t0 + p0t1 + p0t2 + p0t3 + p0t4 + p1t1 + p1t2 + p1t3 + p1t4 + p2t1 + p2t2 + p2t3 + p2t4;"
-"}"
-};  
-
-g_COMBINE_PROGRAM = glCreateProgram();
-compile_program(pTo_combineVertexSource, pTo_combineFragmentSource, &g_COMBINE_PROGRAM);
-
-
-
-
-
-
-
-
-
-static const GLchar * pTo_multitexVertexSource = {
-"/* Vertex program */"
-" "
-"void main(void)"
-"{"
-"  gl_Position = ftransform();"
-"  gl_TexCoord[0] = gl_MultiTexCoord0;"
-"}"
-};
-
-
-static const GLchar * pTo_multitexFragmentSource = {
-"/* Fragment program */"
-"uniform sampler2D Texture_0;     /* texture unit 0 */"
-"uniform sampler2D Texture_1;"
-" "
-"uniform vec2 displ;"
-" "
-"void main() {"
-"  vec2 uv = gl_TexCoord[0].xy;"
-"  vec2 texCoord0 = uv - displ;"
-"  vec2 texCoord1 = uv + displ;"
-" "
-"  vec4 color0 = texture2D(Texture_0, texCoord0);"
-"  vec4 color1 = texture2D(Texture_1, texCoord1);"
-"  /*vec4 color3 = vec4(1.0, 1.0, 0.0, 1.0); */"
-"  vec4 tmp = mix(color0, color1, 0.5);"
-" "
-"  /*gl_FragColor = mix(tmp, color3, 0.4); */"
-"  gl_FragColor = tmp;"
-"}"
-};
-
-    
-g_MULTITEX_PROGRAM = glCreateProgram();
-compile_program(pTo_multitexVertexSource, pTo_multitexFragmentSource, &g_MULTITEX_PROGRAM);
+    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(DIPLOMAT_ID);    	
 }
 
 
 
+void load3DModels()
+{    	
+g_SPHERE_MESH = new ObjMeshInstance("data/obj/sphere/planet.obj");
+
+g_DEFORMED_SPHERE_MESH = new ObjMeshInstance("data/obj/sphere_deformed/planet.obj");
+//g_DEFORMED_SPHERE_MESH = new ObjMeshInstance("data/obj/ship/Shipyard_Scene.obj");
+//g_MODEL.import("data/obj/ship/Space.obj");
+//g_MODEL.normalize();
+}
 
 
 
+void loadImages()
+{
 //####################################### TURREL_TEXTURE ###################################
 std::vector<int> turrel_arg_00;   
 turrel_arg_00.push_back(RACE_0_ID);
@@ -1338,25 +923,506 @@ g_TEXTURE_MANAGER.manage( new TextureOb(TEXT_BACKGROUND_TEXTURE_ID, "data/other/
 
 
 
-
-
-
-
-
-
-
-
-
-    	if (USE_MODERN_HW == true)
-    	{
-    		int w = g_VIEW_WIDTH;
-		int h = g_VIEW_HEIGHT;
-
-		g_FBO0 = new FBO(w,h);
-		g_FBO1 = new FBO(w,h);	
-		g_FBO2 = new FBO(w,h);
-		g_FBO3 = new FBO(w,h);
-		g_BLOOM = new BloomEffect(w, h, g_BLUR_PROGRAM, g_EXTRACT_BRIGHT_PROGRAM, g_COMBINE_PROGRAM, 1, 1);
-	}
+{
+	std::vector<int> arg;  
+	g_UNIQUE_TEXTURE_COLLECTOR.texOb_module = new TextureOb(NONE_ID, "data/item/module.png", true, &arg);
 }
 
+{
+	std::vector<int> arg;  
+	g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_enemy_ss = new TextureOb(NONE_ID, "data/other/mark_enemy_ss.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
+	g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_player_ss = new TextureOb(NONE_ID, "data/other/mark_player_ss.png", true, &arg);
+}
+
+
+
+{
+	std::vector<int> arg;  
+	g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_minus = new TextureOb(NONE_ID, "data/icon/minus.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
+	g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_plus = new TextureOb(NONE_ID, "data/icon/plus.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
+	g_UNIQUE_TEXTURE_COLLECTOR.texOb_skill = new TextureOb(NONE_ID, "data/other/skill.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
+	g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_map = new TextureOb(NONE_ID, "data/icon/starsystem_ICON.png", true, &arg);
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+void prepearPostProcess()
+{
+	int w = g_VIEW_WIDTH;
+	int h = g_VIEW_HEIGHT;
+
+	g_FBO0 = new FBO(w,h);
+	g_FBO1 = new FBO(w,h);	
+	g_FBO2 = new FBO(w,h);
+	g_FBO3 = new FBO(w,h);
+	g_BLOOM = new BloomEffect(w, h, g_BLUR_PROGRAM, g_EXTRACT_BRIGHT_PROGRAM, g_COMBINE_PROGRAM, 1, 1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void loadShaders()
+{
+//static const char * pTo_lightVertexSource = {
+//"/* vertex */"
+//"    void main() {"
+//"        gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;"
+//"    }"
+//};   
+
+//static const char * pTo_lightFragSource = {
+//"/* fragment */"
+//"    void main() {"
+//"        gl_FragColor = vec4(0.0, 1.0, 0.0, 0.0);"
+//"    }"
+//};       
+
+static const char * pTo_blackToAlphaVertexSource = {
+"/* vertex */"
+"void main()" 
+"{"
+"  gl_Position = ftransform();"
+"  gl_TexCoord[0] = gl_MultiTexCoord0;"
+"}"
+};   
+
+static const char * pTo_blackToAlphaFragSource = {
+"/* fragment */"
+"uniform sampler2D sceneTex;     /* texture unit 0 */"
+"void main()"
+"{"
+"    vec4 c = texture2D(sceneTex, gl_TexCoord[0].st);"
+"    float rgb = c.r + c.g + c.b;"
+"    if (c.g > 0.6)"
+"       gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);"
+"    else"
+"       gl_FragColor = c;"
+"}"
+};       
+
+g_BLACK2ALPHA_PROGRAM = glCreateProgram();
+compile_program(pTo_blackToAlphaVertexSource, pTo_blackToAlphaFragSource, &g_BLACK2ALPHA_PROGRAM);
+
+
+
+
+
+// shaders are taken from http://www.geeks3d.com/20091116/shader-library-2d-shockwave-post-processing-filter-glsl/
+static const GLchar * pTo_shockWaveVertexSource = {
+"/* Vertex program */"
+" "
+"void main(void)"
+"{"
+"  gl_Position = ftransform();"
+"  gl_TexCoord[0] = gl_MultiTexCoord0;"
+"}"
+};
+
+
+static const GLchar * pTo_shockWaveFragSource = {
+"/* Fragment program */"
+" "
+"uniform sampler2D sceneTex;     /* texture unit 0 */"
+"uniform vec2 center[10];"        
+"uniform vec3 shockParams[10];   /* 10.0, 0.8, 0.1 */" 
+"uniform float time[10];         /* effect elapsed time */"
+"uniform int imax;               /* how many shaders */"
+" "
+"void main()"
+"{"
+"  vec2 uv = gl_TexCoord[0].xy;"
+"  vec2 texCoord = uv;"
+"  for(int i=0; i<imax; i++)"
+"  {"
+"      float distance = distance(uv, center[i]);"
+"      /* if ( (distance <= (time[i] + shockParams[i].z)) && (distance >= (time[i] - shockParams[i].z)) ) */"
+"      if (distance <= (time[i] + shockParams[i].z))"
+"         if (distance >= (time[i] - shockParams[i].z))"
+"         {"
+"              float diff = (distance - time[i]);"
+"              float powDiff = 1.0 - pow(abs(diff*shockParams[i].x), shockParams[i].y);"
+"              float diffTime = diff  * powDiff;"
+"              vec2 diffUV = normalize(uv - center[i]);"
+"              texCoord = uv + (diffUV * diffTime);"
+"         }"
+"  }"
+" "
+"  gl_FragColor = texture2D(sceneTex, texCoord);"
+"}"
+};
+
+g_SHOCKWAVE_PROGRAM = glCreateProgram();
+compile_program(pTo_shockWaveVertexSource, pTo_shockWaveFragSource, &g_SHOCKWAVE_PROGRAM);
+
+
+
+
+
+static const GLchar * pTo_volumetricLightVertexSource = {
+"/* Vertex program */"
+" "
+"void main(void)"
+"{"
+"  gl_Position = ftransform();"
+"  gl_TexCoord[0] = gl_MultiTexCoord0;"
+"}"
+};
+
+
+static const GLchar * pTo_volumetricLightFragSource = {
+"/* Fragment program */"
+" "
+"uniform sampler2D FullSampler;"
+"uniform sampler2D BlurSampler;"
+"uniform vec4 sun_pos;"
+" "
+"const vec4 ShaftParams	= vec4(0.05, 1.0, 0.05, 1.0);"
+"const vec4 sunColor	= vec4(0.9, 0.8, 0.6, 1.0);"
+" "
+"float saturate(float val)"
+"{"
+"	return clamp(val,0.0,1.0);"
+"}"
+" "
+"void main(void)"
+"{ "
+"	vec2  sunPosProj = sun_pos.xy;"
+"	float sign = sun_pos.w;"
+" "
+"	vec2  tc = gl_TexCoord[0].xy;"
+" "
+"	vec2  sunVec = sunPosProj.xy - tc; /* + vec2(0.5,0.5); */"
+"	float sunDist = saturate(sign) * (1.0 - saturate(dot(sunVec,sunVec) * ShaftParams.y));"
+" "
+"	sunVec *= ShaftParams.x * sign;"
+" "
+"	tc += sunVec;"
+"	vec4 accum = texture2D(BlurSampler, tc);"
+"	tc += sunVec;"
+"	accum += texture2D(BlurSampler, tc) * 0.875;"
+"	tc += sunVec;"
+"	accum += texture2D(BlurSampler, tc) * 0.75;"
+"	tc += sunVec;"
+"	accum += texture2D(BlurSampler, tc) * 0.625;"
+"	tc += sunVec;"
+"	accum += texture2D(BlurSampler, tc) * 0.5;"
+"	tc += sunVec;"
+"	accum += texture2D(BlurSampler, tc) * 0.375;"
+"	tc += sunVec;"
+"	accum += texture2D(BlurSampler, tc) * 0.25;"
+"	tc += sunVec;"
+"	accum += texture2D(BlurSampler, tc) * 0.125;"
+" "
+"	accum  *= 1.65 * sunDist;"
+" "
+"	vec4 cScreen = texture2D(FullSampler, gl_TexCoord[0].xy);"
+"	accum = cScreen + accum * ShaftParams.w * sunColor * ( 1.0 - cScreen );"
+" "
+"	gl_FragColor = accum;"
+"}"
+};
+
+g_VOLUMETRICLIGHT_PROGRAM = glCreateProgram();
+compile_program(pTo_volumetricLightVertexSource, pTo_volumetricLightFragSource, &g_VOLUMETRICLIGHT_PROGRAM);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//http://www.gamedev.ru/code/forum/?id=90743
+static const GLchar * pTo_lightVertexSource = {
+"/* Vertex program */"
+" "
+"uniform vec4 lightPos, eyePos;"
+"varying vec3 l, v, n;"
+" "
+"void main(void)"
+"{"
+"    vec3 p = vec3(gl_ModelViewMatrix * gl_Vertex);      /* transformed point to world space */ "
+"    l = normalize(vec3(lightPos) - p);                  /* vector to light source */           "
+"    v = normalize(vec3(eyePos)   - p);                  /* vector to the eye */                "
+"    n = normalize(gl_NormalMatrix * gl_Normal);         /* transformed n */                    "
+"    gl_TexCoord[0] = gl_MultiTexCoord0;                                                        " 
+" "
+"    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;                                    "
+"}"
+};   
+
+//http://www.gamedev.ru/code/forum/?id=90743
+static const GLchar * pTo_lightFragSource = {
+"/* Fragment program */"
+" "
+"uniform sampler2D Texture_0;"
+"varying vec3 l, v, n;"
+" "
+"void main (void)"
+"{"
+"    const vec4  diffColor = vec4(1.0, 1.0, 1.0, 1.0);"
+"    const vec4  ambientColor = vec4(0.1, 0.1, 0.1, 1.0);"
+"    const vec4  specColor = vec4(0.7, 0.7, 0.0, 0.0);"
+"    const float specPower = 30.0;"
+" "
+"    vec3 n2   = normalize(n);"
+"    vec3 l2   = normalize(l);"
+"    vec3 v2   = normalize(v);"
+"    vec3 r    = reflect(-v2, n2);"
+"    vec4 diff = diffColor * max(dot(n2, l2), 0.0);"
+"    vec4 spec = specColor * pow(max(dot(l2, r), 0.0), specPower);"
+"    vec2 texCoord0 = gl_TexCoord[0].xy;"
+"    vec4 texColor0 = texture2D(Texture_0, texCoord0);"
+" "
+"    gl_FragColor = (diff + ambientColor) * texColor0;"
+"}"
+};       
+
+g_LIGHT_PROGRAM = glCreateProgram();
+compile_program(pTo_lightVertexSource, pTo_lightFragSource, &g_LIGHT_PROGRAM);
+
+
+
+
+
+
+
+
+static const GLchar * pTo_blurVertexSource = {
+"/* Vertex program */"
+" "
+"void main(void)"
+"{"
+"  gl_Position = ftransform();"
+"  gl_TexCoord[0] = gl_MultiTexCoord0;"
+"}"
+};     
+
+static const GLchar * pTo_blurFragmentSource = {
+"/* Fragment program */"
+"uniform sampler2D sceneTex;  /* 0 */"
+" "
+"uniform float rt_w;    /* render target width  */"
+"uniform float rt_h;    /* render target height */"
+"uniform float vx_offset;"
+" "
+"float offset[3] = float[]( 0.0, 1.3846153846, 3.2307692308 );"
+"float weight[3] = float[]( 0.2270270270, 0.3162162162, 0.0702702703 );"
+" "
+"void main()"
+"{"
+"  vec3 tc = vec3(0.0, 0.0, 0.0);"
+"  if (gl_TexCoord[0].x<(vx_offset-0.01))"
+"  {"
+"    vec2 uv = gl_TexCoord[0].xy;"
+"    tc = texture2D(sceneTex, uv).rgb * weight[0];"
+" "
+"    for (int i=1; i<3; i++)"
+"    {"
+"      tc += texture2D(sceneTex, uv + vec2(offset[i])/rt_w, 0.0).rgb * weight[i];"
+"      tc += texture2D(sceneTex, uv - vec2(offset[i])/rt_w, 0.0).rgb * weight[i];"
+"    }"
+"  }"
+"  else if (gl_TexCoord[0].x>=(vx_offset+0.01))"
+"  {"
+"    tc = texture2D(sceneTex, gl_TexCoord[0].xy).rgb;"
+"  }"
+"  gl_FragColor = vec4(tc, 1.0);"
+"}"
+};  
+
+g_BLUR_PROGRAM = glCreateProgram();
+compile_program(pTo_blurVertexSource, pTo_blurFragmentSource, &g_BLUR_PROGRAM);
+
+
+
+
+
+static const GLchar * pTo_extractBrightVertexSource = {
+"/* Vertex program */"
+" "
+"void main(void)"
+"{"
+"  gl_Position = ftransform();"
+"  gl_TexCoord[0] = gl_MultiTexCoord0;"
+"}"
+};  
+
+
+static const GLchar * pTo_extractBrightFragmentSource = {
+"/* Fragment program */"
+"uniform sampler2D source;"
+"uniform float threshold;"
+" "
+"void main(void)"
+"{"
+"    vec4 c = texture2D(source, gl_TexCoord[0].st);"
+"    float rgb = c.r + c.g + c.b;"
+"    if (rgb > threshold)   /* threshold ~ 1.9 */ "
+"       gl_FragColor = c;"
+"    else"
+"       gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);"
+"}"
+};  
+
+g_EXTRACT_BRIGHT_PROGRAM = glCreateProgram();
+compile_program(pTo_extractBrightVertexSource, pTo_extractBrightFragmentSource, &g_EXTRACT_BRIGHT_PROGRAM);
+
+
+
+
+
+
+
+static const GLchar * pTo_combineVertexSource = {
+"/* Vertex program */"
+" "
+"void main(void)"
+"{"
+"  gl_Position = ftransform();   /* This transforms the input vertex the same way the fixed-function pipeline would */"
+"  gl_TexCoord[0] = gl_MultiTexCoord0;"
+"}"
+};  
+
+
+static const GLchar * pTo_combineFragmentSource = {
+"/* Fragment program */"
+"uniform sampler2D Scene;"
+" "
+"uniform sampler2D Pass0_tex1;"
+"uniform sampler2D Pass0_tex2;"
+"uniform sampler2D Pass0_tex3;"
+"uniform sampler2D Pass0_tex4;"
+" "
+"uniform sampler2D Pass1_tex1;"
+"uniform sampler2D Pass1_tex2;"
+"uniform sampler2D Pass1_tex3;"
+"uniform sampler2D Pass1_tex4;"
+" "
+"uniform sampler2D Pass2_tex1;"
+"uniform sampler2D Pass2_tex2;"
+"uniform sampler2D Pass2_tex3;"
+"uniform sampler2D Pass2_tex4;"
+" "
+"void main(void)"
+"{"
+"    vec4 t0 = texture2D(Scene, gl_TexCoord[0].st);"
+" "
+"    vec4 p0t1 = texture2D(Pass0_tex1, gl_TexCoord[0].st);"
+"    vec4 p0t2 = texture2D(Pass0_tex2, gl_TexCoord[0].st);"
+"    vec4 p0t3 = texture2D(Pass0_tex3, gl_TexCoord[0].st);"
+"    vec4 p0t4 = texture2D(Pass0_tex4, gl_TexCoord[0].st);"
+" "
+"    vec4 p1t1 = texture2D(Pass1_tex1, gl_TexCoord[0].st);"
+"    vec4 p1t2 = texture2D(Pass1_tex2, gl_TexCoord[0].st);"
+"    vec4 p1t3 = texture2D(Pass1_tex3, gl_TexCoord[0].st);"
+"    vec4 p1t4 = texture2D(Pass1_tex4, gl_TexCoord[0].st);"
+" "
+"    vec4 p2t1 = texture2D(Pass2_tex1, gl_TexCoord[0].st);"
+"    vec4 p2t2 = texture2D(Pass2_tex2, gl_TexCoord[0].st);"
+"    vec4 p2t3 = texture2D(Pass2_tex3, gl_TexCoord[0].st);"
+"    vec4 p2t4 = texture2D(Pass2_tex4, gl_TexCoord[0].st);"
+" "
+" "
+"    gl_FragColor = t0 + p0t1 + p0t2 + p0t3 + p0t4 + p1t1 + p1t2 + p1t3 + p1t4 + p2t1 + p2t2 + p2t3 + p2t4;"
+"}"
+};  
+
+g_COMBINE_PROGRAM = glCreateProgram();
+compile_program(pTo_combineVertexSource, pTo_combineFragmentSource, &g_COMBINE_PROGRAM);
+
+
+
+
+
+
+
+
+
+static const GLchar * pTo_multitexVertexSource = {
+"/* Vertex program */"
+" "
+"void main(void)"
+"{"
+"  gl_Position = ftransform();"
+"  gl_TexCoord[0] = gl_MultiTexCoord0;"
+"}"
+};
+
+
+static const GLchar * pTo_multitexFragmentSource = {
+"/* Fragment program */"
+"uniform sampler2D Texture_0;     /* texture unit 0 */"
+"uniform sampler2D Texture_1;"
+" "
+"uniform vec2 displ;"
+" "
+"void main() {"
+"  vec2 uv = gl_TexCoord[0].xy;"
+"  vec2 texCoord0 = uv - displ;"
+"  vec2 texCoord1 = uv + displ;"
+" "
+"  vec4 color0 = texture2D(Texture_0, texCoord0);"
+"  vec4 color1 = texture2D(Texture_1, texCoord1);"
+"  /*vec4 color3 = vec4(1.0, 1.0, 0.0, 1.0); */"
+"  vec4 tmp = mix(color0, color1, 0.5);"
+" "
+"  /*gl_FragColor = mix(tmp, color3, 0.4); */"
+"  gl_FragColor = tmp;"
+"}"
+};
+
+    
+g_MULTITEX_PROGRAM = glCreateProgram();
+compile_program(pTo_multitexVertexSource, pTo_multitexFragmentSource, &g_MULTITEX_PROGRAM);
+}

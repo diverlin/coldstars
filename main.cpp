@@ -3,8 +3,8 @@ Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
-as published by the Free Software F*oundation; either version 2
-of the L icense, or (at your option) any later version.
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -22,38 +22,34 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 int main()
 {       
-    	g_APP.SetFramerateLimit(g_FPS_LIMIT); // Limit to 60 frames per second
+    	g_APP.SetFramerateLimit(g_FPS_LIMIT); 
     	g_APP.PreserveOpenGLStates(true);
     	g_APP.UseVerticalSync(g_VERT_SYNC);
 
     	g_FONT.LoadFromFile("data/font/font.ttf");
 
     	initGL(g_VIEW_WIDTH, g_VIEW_HEIGHT); 
-
-    	loadResources();
+ 	initGameData();
 
     	KeyEventsInSpace keyEvents = KeyEventsInSpace(); 
 
-    	pGALAXY = new Galaxy();
+    	g_GALAXY = new Galaxy();
     	SpaceMap spaceMap;
-    	spaceMap.bindGalaxy(pGALAXY);
+    	spaceMap.bindGalaxy(g_GALAXY);
         
     	InterfaceInSpace interfaceInSpace 	  = InterfaceInSpace();
     	InterfaceInKosmoport interfaceInKosmoport = InterfaceInKosmoport();
 
-    	pSHIP_GUI = new ShipInternal();
-        pSHIP_GUI->createControlSkillButtons();
-                
+    	g_SHIP_GUI = new ShipInternal();
+        g_SHIP_GUI->createControlSkillButtons();
+        
     	pPLAYER   = new Player();    
-	pPLAYER->setStarSystem(pGALAXY->getRandomStarSystem());      		
+	pPLAYER->setStarSystem(g_GALAXY->getRandomStarSystem());      
       		
     	Npc* pnpc = pPLAYER->getStarSystem()->NPC_inSPACE_vec[0];
     	pPLAYER->bindNpc(pnpc);
     	pnpc->getShip()->getPoints()->setCenter(-800,-800);
-    	//pnpc->getShip()->korpus_data.armor = 20000; // debug
     	//// player
-
-    	float fps;
 
     	std::string coord_str;
     	std::string fps_str = "";
@@ -62,23 +58,22 @@ int main()
     	// GAME LOOP
     	while (g_APP.IsOpened())
     	{    
-       		///////////// AUTO-TURN /////////////
-       		//if (g_TIMER < -50)
-       		//{  
-       			//g_TIMER = TURN_TIME;
-           		//TURN_COUNT++;
-           		//printf("        *** auto turn END was activated, turn num = %i\n", TURN_COUNT);
-                //}
+       		/////////// AUTO-TURN /////////////
+       		if ( (g_TIMER < -50) and (g_AUTOTURN_ENABLE == true) )
+       		{  
+       			g_TIMER = TURN_TIME;
+           		TURN_COUNT++;
+           		printf("        *** auto turn END was activated, turn num = %i\n", TURN_COUNT);
+                }
 
 		pPLAYER->update_inSpace();
-					
+
        		if (pPLAYER->getPlaceTypeId() == SPACE_ID)
        		{  
-       		        //printf("//////////// in SPACE ///////////////\n");
            		//////////// in SPACE ///////////////
            		keyEvents.update();
 
-       			pGALAXY->update(g_TIMER);
+       			g_GALAXY->update(g_TIMER);
 
            		pPLAYER->getStarSystem()->render(); 
                         
@@ -93,8 +88,8 @@ int main()
            		//////////// SCAN ///////////////
            		if ( pPLAYER->getScanFlag() == true )
                         {                                
-              			pSHIP_GUI->update();
-                                pSHIP_GUI->render();
+              			g_SHIP_GUI->update();
+                                g_SHIP_GUI->render();
                         }
 
            		/////////// WORLDMAP ///////////
@@ -120,8 +115,8 @@ int main()
                			
                                 if (pPLAYER->getScanFlag() == true) 
                                 { 
-                                        pSHIP_GUI->update();
-                                        pSHIP_GUI->render();
+                                        g_SHIP_GUI->update();
+                                        g_SHIP_GUI->render();
                                 }
                			else
                                 {
@@ -134,9 +129,9 @@ int main()
                                 pPLAYER->getPilot()->getKosmoport()->getStore()->update();
                			pPLAYER->getPilot()->getKosmoport()->getStore()->render();                                 
                                                  
-                                pSHIP_GUI->configure(pPLAYER->getShip(), true);
-               			pSHIP_GUI->update();
-                                pSHIP_GUI->render();
+                                g_SHIP_GUI->configure(pPLAYER->getShip(), true);
+               			g_SHIP_GUI->update();
+                                g_SHIP_GUI->render();
                         }
 
            		if (interfaceInKosmoport.getActiveScreenId() == SCREEN_SHOP_ID)

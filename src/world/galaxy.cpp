@@ -97,11 +97,9 @@ void Galaxy :: update(int timer)
 StarSystem* generateEntireStarSystem()
 {  
         StarSystem* starsystem = new StarSystem();   
-        Rect ssOnMapRect = Rect( getRandInt( MAP_OFFSET_X, (g_VIEW_WIDTH - 3*MAP_OFFSET_X)),
-        			 g_VIEW_HEIGHT - getRandInt( MAP_OFFSET_Y, (g_VIEW_HEIGHT - 2*MAP_OFFSET_Y)),
-        			 40, 40);
-        			 
-        starsystem->setPositionOnWorldMap(ssOnMapRect);
+        
+        vec2f _center(getRandInt(MAP_OFFSET_X, g_VIEW_WIDTH - 3*MAP_OFFSET_X), g_VIEW_HEIGHT - getRandInt(MAP_OFFSET_Y, g_VIEW_HEIGHT - 2*MAP_OFFSET_Y) );			 
+        starsystem->setPosition(_center);
 
         Star* star = createStar();    
         starsystem->add(star);

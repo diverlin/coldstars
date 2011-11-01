@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class QuestObject
 {
 	public:		
-		QuestObject(Npc*);
+		QuestObject();
 		~QuestObject();		
 
 		template <typename TARGET>
@@ -41,8 +41,6 @@ class QuestObject
 		void validation();
 	
 	private:
-		Npc* npc_owner;
-
 		bool exist;
 		
 		int action_id;

@@ -38,6 +38,8 @@ Asteroid :: Asteroid(TextureOb* _texOb,
       	armor = 10;
       	damage = 10 * armor;
       	mass  = getRandInt(10, 30);
+        
+        place_type_id = SPACE_ID;
 }
     
  
@@ -46,7 +48,8 @@ Asteroid :: ~Asteroid()
     
 
 bool Asteroid :: getAlive() const { return is_alive; }
-bool* Asteroid :: get_pAlive() { return &is_alive; }
+bool* Asteroid :: getpAlive() { return &is_alive; }
+int* Asteroid :: getpPlaceTypeId() { return &place_type_id; }
 int Asteroid :: getArmor() const { return armor; }
 int Asteroid :: getDamage() const { return damage; }
 int Asteroid :: getMass()  const { return mass; }	
@@ -175,7 +178,7 @@ Asteroid* createAsteroid()
 
         TextureOb* texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.asteroid_texOb_pList); 
     
-        Asteroid* asteroid = new Asteroid(texOb, pTo_DEFORMED_SPHERE_MESH, planet_data);    	
+        Asteroid* asteroid = new Asteroid(texOb, g_DEFORMED_SPHERE_MESH, planet_data);    	
         asteroid->update_inSpace_inDynamic_FALSE();
         
         return asteroid;        

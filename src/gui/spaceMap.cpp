@@ -43,11 +43,11 @@ bool SpaceMap :: update()
         	{
             		//if (STARSYSTEM_pList[si]->id != pTo_PLAYER->pTo_starsystem->id)
             		{
-                		float ss_cursor_dist = distBetweenCenters(galaxy->STARSYSTEM_vec[si]->getRectOnMap().getCenter(), mx, my);
+                		float ss_cursor_dist = distBetweenCenters(galaxy->STARSYSTEM_vec[si]->getPosition(), mx, my);
                 		if (ss_cursor_dist < 10)
                 		{ 
-                   			int ss_ss_dist = distBetweenCenters(galaxy->STARSYSTEM_vec[si]->getRectOnMap().getCenter(), 
-                   				       			    pPLAYER->getPilot()->getStarSystem()->getRectOnMap().getCenter() );
+                   			int ss_ss_dist = distBetweenCenters(galaxy->STARSYSTEM_vec[si]->getPosition(), 
+                   				       			    pPLAYER->getPilot()->getStarSystem()->getPosition() );
                    				       
                    			if ( (ss_ss_dist < pPLAYER->getShip()->drive_slot.getDriveEquipment()->getHyper()) && (ss_ss_dist < pPLAYER->getShip()->bak_slot.getBakEquipment()->getFuel()) )
                       			{
@@ -81,36 +81,49 @@ bool SpaceMap :: update()
 
 void SpaceMap :: render(bool _clrscr)
 {
+    	TextureOb* texOb_textBg = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.textBackground_texOb_pList);
+    	
         if (_clrscr)
         {
                 clearScreen();
         }
-        resetRenderTransformation();
         
-        enable_BLEND();                                                
-
-    	TextureOb* texOb_textBg = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.textBackground_texOb_pList);
-    	TextureOb* texOb_particle = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);  
+        
+        resetRenderTransformation();
+    	        
+    	        
+        enable_BLEND();                              
 
     	drawTexturedRect(texOb_textBg->texture, rect, -1);
-    	for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
-    	{
-        	int font_size = 10;
-        	drawTexturedRect(texOb_particle->texture, galaxy->STARSYSTEM_vec[si]->getRectOnMap(), -1);
-        	drawSimpleText(int2str(galaxy->STARSYSTEM_vec[si]->getId()), 
-        	       		font_size, 
-        	       		galaxy->STARSYSTEM_vec[si]->getRectOnMap().getBottomLeft().x, 
-        	       		galaxy->STARSYSTEM_vec[si]->getRectOnMap().getBottomLeft().y);
+    	
+    	enable_POINTSPRITE();
+    	
+    		for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
+    		{
+        		int font_size = 10;
+        		
+        		TextureOb* texOb_particle = g_TEXTURE_MANAGER.returnParticleTexObByColorId(galaxy->STARSYSTEM_vec[si]->STAR_vec[0]->getColorId()); 
+        		    	
+        		drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[si]->getPosition(), 30.0, -2.0);
+        		drawSimpleText(int2str(galaxy->STARSYSTEM_vec[si]->getId()), 
+        	       	       		 font_size, 
+        	       	       		 galaxy->STARSYSTEM_vec[si]->getPosition().x - 20, 
+        	       	       		 galaxy->STARSYSTEM_vec[si]->getPosition().y - 20);
         	       
-        	//if ss.CAPTURED == True:
-           		//drawTexturedRect(mark_enemy_ss_tex, [ss.rectOnMap[0] - 10, ss.rectOnMap[1] - 10, ss.rectOnMap[2] + 20, ss.rectOnMap[3] + 20], -1)
-    	} 
-           	//drawTexturedRect(mark_ss_tex, [player.starsystem.rectOnMap[0] - 10, player.starsystem.rectOnMap[1] - 10, player.starsystem.rectOnMap[2] + 20, player.starsystem.rectOnMap[3] + 20], -1)
+        		if (galaxy->STARSYSTEM_vec[si]->getCapturedFlag() == true)
+        		{
+        			drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_enemy_ss->texture, galaxy->STARSYSTEM_vec[si]->getPosition(), 40.0, -2.0);
+           		}
+           	
+    		} 
+           	drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_player_ss->texture, pPLAYER->getStarSystem()->getPosition(), 40.0, -2.0);
 
-    	//if self.GL_LIST_range_ID != None:
-       		//glCallList(self.GL_LIST_range_ID)
+    		//if self.GL_LIST_range_ID != None:
+       			//glCallList(self.GL_LIST_range_ID)
+       		
+        disable_POINTSPRITE();
      
-    	//glDisable(GL_BLEND)
+    	disable_BLEND();  
 }
 
 

@@ -26,6 +26,7 @@ int Ship :: getTypeId() const       { return data_id.type_id; }
 int Ship :: getPlaceTypeId() const  { return place_type_id; } 
 bool Ship :: getAlive() const { return data_life.is_alive; }
 bool* Ship :: getpAlive()     { return &data_life.is_alive; }
+int* Ship :: getpPlaceTypeId()    { return &place_type_id; }
 int Ship :: getArmor() const  { return data_life.armor; }
 
 Points* Ship :: getPoints() 	    { return &points; }
@@ -45,8 +46,6 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
         texOb_korpus = texOb;  
 
    	////// Points creation
-    	points = Points();
-
     	points.initCenterPoint();
     	points.addCenterPoint();
 
@@ -101,17 +100,17 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
        					
        		slot_weapon_pList.push_back(&weapon_slot1);
        		slot_total_pList.push_back(&weapon_slot1); 
-       
-       		turrel1.placed(points.getpWeapon1Center());
-       		turrel1.bindSlot(&weapon_slot1);
-       		weapon_slot1.bindTurrel(&turrel1);
-       		turrel1.setTexOb(turrelTexOb); // remove
+
+       		turrel1 = new Turrel(&weapon_slot1, points.getpWeapon1Center());       
+       		turrel1->setTexOb(turrelTexOb); // remove
+                
+       		weapon_slot1.bindTurrel(turrel1);
+
        
        		if (data_korpus.render_TURRELS == true)
        		{   
            		points.initWeapon1CenterPoint(0, texOb->h/3);
            		points.addWeapon1CenterPoint();
-           		turrel_center_pList.push_back(points.getpWeapon1Center());
        		} 
     	}
    
@@ -126,16 +125,16 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
        		slot_weapon_pList.push_back(&weapon_slot2);
        		slot_total_pList.push_back(&weapon_slot2); 
        
-       		turrel2.placed(points.getpWeapon2Center());
-       		turrel2.bindSlot(&weapon_slot2);
-              	weapon_slot2.bindTurrel(&turrel2);
-       		turrel2.setTexOb(turrelTexOb);
+                turrel2 = new Turrel(&weapon_slot2, points.getpWeapon2Center()); 
+       		turrel2->setTexOb(turrelTexOb);
+                
+              	weapon_slot2.bindTurrel(turrel2);
+
         
        		if (data_korpus.render_TURRELS == true)
        		{  
            		points.initWeapon2CenterPoint(0, -texOb->h/3);
            		points.addWeapon2CenterPoint();
-           		turrel_center_pList.push_back(points.getpWeapon2Center());
        		}
     	}
 
@@ -150,16 +149,15 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
        		slot_weapon_pList.push_back(&weapon_slot3);
        		slot_total_pList.push_back(&weapon_slot3); 
               
-       		turrel3.placed(points.getpWeapon3Center());  
-       		turrel3.bindSlot(&weapon_slot3);
-              	weapon_slot3.bindTurrel(&turrel3);
-       		turrel3.setTexOb(turrelTexOb);
+       		turrel3 = new Turrel(&weapon_slot3, points.getpWeapon3Center()); 
+       		turrel3->setTexOb(turrelTexOb);
+                
+              	weapon_slot3.bindTurrel(turrel3);
        
        		if (data_korpus.render_TURRELS == true)
        		{  
            		points.initWeapon3CenterPoint(-texOb->w/5, texOb->h/3);
            		points.addWeapon3CenterPoint();
-           		turrel_center_pList.push_back(points.getpWeapon3Center());
        		}
     	}
 
@@ -174,17 +172,16 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
        		slot_weapon_pList.push_back(&weapon_slot4);
        		slot_total_pList.push_back(&weapon_slot4); 
               
-       		turrel4.placed(points.getpWeapon4Center());
-       		turrel4.bindSlot(&weapon_slot4);
-              	weapon_slot4.bindTurrel(&turrel4);
-       		turrel4.setTexOb(turrelTexOb);
+       		turrel4 = new Turrel(&weapon_slot4, points.getpWeapon4Center()); 
+       		turrel4->setTexOb(turrelTexOb);
+                
+              	weapon_slot4.bindTurrel(turrel4);
+
          
        		if (data_korpus.render_TURRELS == true)
        		{  
            		points.initWeapon4CenterPoint(texOb->w/5, -texOb->h/3);
            		points.addWeapon4CenterPoint();
-           		turrel_center_pList.push_back(points.getpWeapon4Center());
-
        		}
 
     	}   
@@ -200,16 +197,15 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
        		slot_weapon_pList.push_back(&weapon_slot5);
        		slot_total_pList.push_back(&weapon_slot5); 
               
-       		turrel5.placed(points.getpWeapon5Center());
-       		turrel5.bindSlot(&weapon_slot5);
-              	weapon_slot5.bindTurrel(&turrel5);
-       		turrel5.setTexOb(turrelTexOb);
+       		turrel5 = new Turrel(&weapon_slot5, points.getpWeapon5Center()); 
+              	turrel5->setTexOb(turrelTexOb);
        
+                weapon_slot5.bindTurrel(turrel5);
+       		
        		if (data_korpus.render_TURRELS == true)
        		{  
            		points.initWeapon5CenterPoint(-texOb->w/3, -texOb->h/3);
-           		points.addWeapon5CenterPoint();
-           		turrel_center_pList.push_back(points.getpWeapon5Center());
+           		points.addWeapon5CenterPoint();           		
        		}
     	} 
     	///////////////////////////////////////////////////
@@ -371,11 +367,14 @@ void Ship :: reloadWeapons()
      	// reload wepons
      	// used once at the beginning of turn
 
-     	//reloaded_weapon_pList.clear();
      	slot_weapon_reloaded_pList.clear();
      	for (unsigned int i = 0; i < slot_weapon_equiped_pList.size(); i++)
+        {
          	if (slot_weapon_equiped_pList[i]->getTurrel()->isAmmoAvailable() == true)
+                {
              		slot_weapon_reloaded_pList.push_back(slot_weapon_equiped_pList[i]);
+                }
+        }
             
      	fire_delay = 10;
      	d_fire_delay = 40;   // 0;
@@ -406,7 +405,7 @@ void Ship :: setWeaponsTarget(TARGET_TYPE* _target)
         {
         	if ( slot_weapon_equiped_pList[i]->getTurrel()->getSelectedStatus() == true )
         	{
-           		if ( slot_weapon_equiped_pList[i]->getTurrel()->getHasTargetStatus() == false )
+           		if ( slot_weapon_equiped_pList[i]->getTurrel()->getTargetOb()->getValid() == false )
            		{
            	      		if ( dist < slot_weapon_equiped_pList[i]->getItemRadius() )
            	      		{
@@ -459,7 +458,7 @@ void Ship :: resetDeselectedWeaponTargets()
         {
             	if (slot_weapon_equiped_pList[i]->getTurrel()->getSelectedStatus() == false)
             	{
-                	slot_weapon_equiped_pList[i]->getTurrel()->resetTarget();
+                	slot_weapon_equiped_pList[i]->getTurrel()->getTargetOb()->reset();
                 }
         }
 }
@@ -467,16 +466,16 @@ void Ship :: resetDeselectedWeaponTargets()
 
 void Ship :: removeWeaponSlotDeadTargets()
 {
-        for (unsigned int i = 0; i < slot_weapon_equiped_pList.size(); i++)
-        {
-                if (slot_weapon_equiped_pList[i]->getTurrel()->getHasTargetStatus() == true)
-                {
-                        if (slot_weapon_equiped_pList[i]->getTurrel()->isTargetAlive() == false)
-                        {
-                                slot_weapon_equiped_pList[i]->getTurrel()->resetTarget();
-                        }
-                }
-       }       
+        //for (unsigned int i = 0; i < slot_weapon_equiped_pList.size(); i++)
+        //{
+                //if (slot_weapon_equiped_pList[i]->getTurrel()->getHasTargetStatus() == true)
+                //{
+                        //if (slot_weapon_equiped_pList[i]->getTurrel()->isTargetAlive() == false)
+                        //{
+                                //slot_weapon_equiped_pList[i]->getTurrel()->resetTarget();
+                        //}
+                //}
+       //}       
 }
 
 
@@ -507,14 +506,18 @@ void Ship :: update_inSpace_inDynamic_TRUE()
     	{
        		data_life.dying_time--;
        		if (data_life.dying_time < 0)
+       		{
            		death_TRUE();
+           	}
     	}    
 }
 
 void Ship :: update_inSpace_inDynamic_FALSE()
 {   
     	if (ableTo.DRIVE == true) 
+    	{
        		updatePosition();
+       	}
 }
 
 
@@ -529,6 +532,8 @@ bool Ship :: jumpingEvent()
         starsystem->removeNpc(npc_owner->getId(), npc_owner->getSubTypeId());  
                                                         
         navigator->getTargetStarSystem()->addToHyperJumpQueue(npc_owner);        
+        
+        return true;
 }
                 
                 
@@ -625,6 +630,12 @@ void Ship :: death_TRUE()
 
      	if (data_life.is_explosed == false)
      	{   
+      		int num_items = getRandInt(0, 3);
+     		for (int i = 0; i<num_items; i++)
+     		{
+     			dropRandomItemToSpace();
+     		}
+     	
         	createExplosion(starsystem, points.getCenter(), texOb->size_id);
         	data_life.is_explosed = true;
      	}
@@ -636,6 +647,12 @@ void Ship :: death_FALSE()
 
      	if (data_life.is_explosed == false)
      	{   
+      		int num_items = getRandInt(0, 3);
+     		for (int i = 0; i<num_items; i++)
+     		{
+     			dropRandomItemToSpace();
+     		}
+     		
         	data_life.is_explosed = true;
      	}
 }
@@ -1121,24 +1138,7 @@ void Ship :: renderTurrels() const
 {
     	for(unsigned int i = 0; i < slot_weapon_equiped_pList.size(); i++)
     	{
-        	float tur_angle_inD;
-        	if (slot_weapon_equiped_pList[i]->getTurrel()->getHasTargetStatus() == true)
-        	{
-              		float tur_xl = (*(slot_weapon_equiped_pList[i]->getTurrel()->getTarget_pCenterX())) - (turrel_center_pList[i]->x);
-              		float tur_yl = (*(slot_weapon_equiped_pList[i]->getTurrel()->getTarget_pCenterY())) - (turrel_center_pList[i]->y);
-
-              		float tur_angle_inR = atan2(tur_yl, tur_xl);
-              		tur_angle_inD = tur_angle_inR * RADIAN_TO_DEGREE_RATE;
-        	}
-        	else
-        	{
-        		tur_angle_inD = points.getAngleDegree();
-        	} 
-
-		//printf("xy target =%f,%f\n", turrel_center_pList[i]->x, turrel_center_pList[i]->y);
-		//slot_weapon_equiped_pList[i]->getTurrel()->updatePosition(200, 200, tur_angle_inD); 
-        	slot_weapon_equiped_pList[i]->getTurrel()->updatePosition(turrel_center_pList[i]->x, turrel_center_pList[i]->y, tur_angle_inD); 
-        	slot_weapon_equiped_pList[i]->getTurrel()->render();        
+        	slot_weapon_equiped_pList[i]->getTurrel()->render(points.getAngleDegree());        
     	} 
 }
 
@@ -1163,9 +1163,9 @@ void Ship :: renderWeaponIcons() const
         for (unsigned int wi = 0; wi < slot_weapon_pList.size(); wi++)
         {
                 Turrel* _turrel = slot_weapon_pList[wi]->getTurrel();
-                if (_turrel->getHasTargetStatus() == true)
+                if (_turrel->getTargetOb()->getValid() == true)
                 {       
-                        Rect _rect(*_turrel->getTarget_pCenterX() - 40/2 + 23*offset, *_turrel->getTarget_pCenterY() + 40/2, 20, 20);
+                        Rect _rect(_turrel->getTargetOb()->getpCenter()->x - 40/2 + 23*offset, _turrel->getTargetOb()->getpCenter()->y + 40/2, 20, 20);
                         drawTexturedRect(slot_weapon_pList[wi]->getItemTexOb()->texture, _rect, -2.0);
                         offset++;
                 }        
@@ -1310,8 +1310,8 @@ Ship* shipGenerator(int race_id, int subtype_id, int size_id)
 
 bool Ship :: repair()
 {
-        int _fix = data_korpus.armor - data_life.armor;
-        int _price = _fix/10;
+        unsigned int _fix = data_korpus.armor - data_life.armor;
+        unsigned int _price = _fix/10;
         
         if (npc_owner->getCredits() > _price)
         {
@@ -1321,4 +1321,23 @@ bool Ship :: repair()
         }
         
         return false;        
+}
+
+
+void Ship :: dropRandomItemToSpace()
+{
+	std::vector<ItemSlot*> _equiped_slot_vec;
+	
+	for (unsigned int i = 0; i<slot_total_pList.size(); i++)
+	{
+		if (slot_total_pList[i]->getEquipedStatus() == true)
+		{
+			_equiped_slot_vec.push_back(slot_total_pList[i]);
+		}
+	}
+	
+	unsigned int _rand = getRandInt(0, _equiped_slot_vec.size());
+	
+	_equiped_slot_vec[_rand]->createAndDropContainer(starsystem, points.getCenter());
+		
 }

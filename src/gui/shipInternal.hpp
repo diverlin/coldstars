@@ -40,7 +40,7 @@ class ShipInternal
       	      	Ship* ship;
       		Skill* skill;
       		
-      		std::vector<Button*> button_pList;
+      		std::vector<Button*> button_vec;
       	
       	      			Button* increment_attack_button;  
       				Button* decrement_attack_button;  

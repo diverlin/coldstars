@@ -44,41 +44,38 @@ void ShipInternal :: createControlSkillButtons()
      	int y = 50;  //self.korpus.kontur_rect.centery
      	int w = 20;  //skill_w
 
-     	TextureOb* texOb_plus  = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
-     	TextureOb* texOb_minus = g_TEXTURE_MANAGER.returnParticleTexObByColorId(BLUE_COLOR_ID);
-
-        //TextureOb* texOb_plus  = g_TEXTURE_MANAGER.particles_texOb_pList[0];
-        //TextureOb* texOb_minus = g_TEXTURE_MANAGER.particles_texOb_pList[1]; 
-
-     	increment_attack_button   = new Button(texOb_plus, INCREMENT_ATTACK_BUTTON_ID, x, y - w,   w, w, "");  
-     	button_pList.push_back(increment_attack_button);
-     	decrement_attack_button   = new Button(texOb_minus, DECREMENT_ATTACK_BUTTON_ID, x, y - 2*w, w, w, "");  
-     	button_pList.push_back(decrement_attack_button);
+     	TextureOb* texOb_icon_plus  = g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_plus;
+     	TextureOb* texOb_icon_minus = g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_minus;
+     	     	
+     	increment_attack_button   = new Button(texOb_icon_plus, INCREMENT_ATTACK_BUTTON_ID, x, y - w,   w, w, "");  
+     	button_vec.push_back(increment_attack_button);
+     	decrement_attack_button   = new Button(texOb_icon_minus, DECREMENT_ATTACK_BUTTON_ID, x, y - 2*w, w, w, "");  
+     	button_vec.push_back(decrement_attack_button);
                      
-     	increment_defence_button  = new Button(texOb_plus, INCREMENT_DEFENCE_BUTTON_ID, x + w, y - w,   w, w, "");  
-     	button_pList.push_back(increment_defence_button);
-     	decrement_defence_button  = new Button(texOb_minus, DECREMENT_DEFENCE_BUTTON_ID, x + w, y - 2*w, w, w, "");  
-     	button_pList.push_back(decrement_defence_button);
+     	increment_defence_button  = new Button(texOb_icon_plus, INCREMENT_DEFENCE_BUTTON_ID, x + w, y - w,   w, w, "");  
+     	button_vec.push_back(increment_defence_button);
+     	decrement_defence_button  = new Button(texOb_icon_minus, DECREMENT_DEFENCE_BUTTON_ID, x + w, y - 2*w, w, w, "");  
+     	button_vec.push_back(decrement_defence_button);
      	        
-     	increment_leader_button   = new Button(texOb_plus, INCREMENT_LEADER_BUTTON_ID, x + 2*w, y - w,   w, w, "");  
-     	button_pList.push_back(increment_leader_button);
-     	decrement_leader_button   = new Button(texOb_minus, DECREMENT_LEADER_BUTTON_ID, x + 2*w, y - 2*w, w, w, ""); 
-     	button_pList.push_back(decrement_leader_button);
+     	increment_leader_button   = new Button(texOb_icon_plus, INCREMENT_LEADER_BUTTON_ID, x + 2*w, y - w,   w, w, "");  
+     	button_vec.push_back(increment_leader_button);
+     	decrement_leader_button   = new Button(texOb_icon_minus, DECREMENT_LEADER_BUTTON_ID, x + 2*w, y - 2*w, w, w, ""); 
+     	button_vec.push_back(decrement_leader_button);
      	      
-     	increment_trader_button   = new Button(texOb_plus, INCREMENT_TRADER_BUTTON_ID, x + 3*w, y - w,   w, w, "");  
-     	button_pList.push_back(increment_trader_button);
-     	decrement_trader_button   = new Button(texOb_minus, DECREMENT_TRADER_BUTTON_ID, x + 3*w, y - 2*w, w, w, ""); 
-     	button_pList.push_back(decrement_trader_button);
+     	increment_trader_button   = new Button(texOb_icon_plus, INCREMENT_TRADER_BUTTON_ID, x + 3*w, y - w,   w, w, "");  
+     	button_vec.push_back(increment_trader_button);
+     	decrement_trader_button   = new Button(texOb_icon_minus, DECREMENT_TRADER_BUTTON_ID, x + 3*w, y - 2*w, w, w, ""); 
+     	button_vec.push_back(decrement_trader_button);
     
-     	increment_technic_button  = new Button(texOb_plus, INCREMENT_TECHNIC_BUTTON_ID, x + 4*w, y - w,   w, w, "");  
-     	button_pList.push_back(increment_technic_button);
-     	decrement_technic_button  = new Button(texOb_minus, DECREMENT_TECHNIC_BUTTON_ID, x + 4*w, y - 2*w, w, w, ""); 
-     	button_pList.push_back(decrement_technic_button);
+     	increment_technic_button  = new Button(texOb_icon_plus, INCREMENT_TECHNIC_BUTTON_ID, x + 4*w, y - w,   w, w, "");  
+     	button_vec.push_back(increment_technic_button);
+     	decrement_technic_button  = new Button(texOb_icon_minus, DECREMENT_TECHNIC_BUTTON_ID, x + 4*w, y - 2*w, w, w, ""); 
+     	button_vec.push_back(decrement_technic_button);
      
-     	increment_diplomat_button = new Button(texOb_plus, INCREMENT_DIPLOMAT_BUTTON_ID, x + 5*w, y - w,   w, w, "");  
-     	button_pList.push_back(increment_diplomat_button);
-     	decrement_diplomat_button = new Button(texOb_minus, DECREMENT_DIPLOMAT_BUTTON_ID, x + 5*w, y - 2*w, w, w, "");
-        button_pList.push_back(decrement_diplomat_button);     
+     	increment_diplomat_button = new Button(texOb_icon_plus, INCREMENT_DIPLOMAT_BUTTON_ID, x + 5*w, y - w,   w, w, "");  
+     	button_vec.push_back(increment_diplomat_button);
+     	decrement_diplomat_button = new Button(texOb_icon_minus, DECREMENT_DIPLOMAT_BUTTON_ID, x + 5*w, y - 2*w, w, w, "");
+        button_vec.push_back(decrement_diplomat_button);     
 }
 
 void ShipInternal :: manageSkill()
@@ -87,13 +84,13 @@ void ShipInternal :: manageSkill()
      	int myvp = g_VIEW_HEIGHT - g_MOUSE_POS_Y;         
      	int lmb  = g_MOUSE_LEFT_BUTTON;
 
-	for (unsigned int i = 0; i < button_pList.size(); i++)
+	for (unsigned int i = 0; i < button_vec.size(); i++)
 	{
-		if (button_pList[i]->interaction(mxvp, myvp) == true)
+		if (button_vec[i]->interaction(mxvp, myvp) == true)
 		{
 		       	if (lmb == true)
            		{
-           		   	int buttonSubTypeId = button_pList[i]->getSubTypeId();
+           		   	int buttonSubTypeId = button_vec[i]->getSubTypeId();
            		   	
            		   	if (buttonSubTypeId == INCREMENT_ATTACK_BUTTON_ID)
            		   	      	skill->incrementAttack();
@@ -131,24 +128,26 @@ void ShipInternal :: manageSkill()
 
 void ShipInternal :: renderSkill() const
 {
-    	int w = 15;
-     	int h = 15;
+    	int w = button_vec[0]->getRect().getWidth();
+     	int h = button_vec[0]->getRect().getHeight();
+     	
+     	TextureOb* texOb_skill = g_UNIQUE_TEXTURE_COLLECTOR.texOb_skill;
 
- 	for (unsigned int bi = 0; bi < button_pList.size(); bi++)
+ 	for (unsigned int bi = 0; bi < button_vec.size(); bi++)
 	{
-		button_pList[bi]->render();
+		button_vec[bi]->render();
 
-		int buttonSubTypeId = button_pList[bi]->getSubTypeId();		
+		int buttonSubTypeId = button_vec[bi]->getSubTypeId();		
 
 		if (buttonSubTypeId == INCREMENT_ATTACK_BUTTON_ID)
 		{
 		     	for (int i = 0; i < skill->getAttack(); i++) 
      			{ 
-         			Rect tmp_rect = Rect(button_pList[bi]->getRect().getCenter().x - 10, 
-         		      			     button_pList[bi]->getRect().getCenter().y + i*h, 
+         			Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
+         		      			     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
          		      			     w, h);
          		      			     
-         			drawTexturedRect(button_pList[bi]->getTexOb()->texture, tmp_rect, -1.0);
+         			drawTexturedRect(texOb_skill->texture, tmp_rect, -1.0);
      			}
  
 		}
@@ -157,10 +156,10 @@ void ShipInternal :: renderSkill() const
 		{
 		     	for (int i = 0; i < skill->getDefence(); i++) 
      			{ 
-         			Rect tmp_rect = Rect(button_pList[bi]->getRect().getCenter().x - 10, 
-         		      			     button_pList[bi]->getRect().getCenter().y + i*h, 
+         			Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
+         		      			     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
          		      			     w, h);
-         			drawTexturedRect(button_pList[bi]->getTexOb()->texture, tmp_rect, -1.0);
+         			drawTexturedRect(texOb_skill->texture, tmp_rect, -1.0);
      			}
 		}
 
@@ -168,10 +167,10 @@ void ShipInternal :: renderSkill() const
 	   	{
 	   	     	for (int i = 0; i < skill->getLeader(); i++) 
      			{ 
-         			Rect tmp_rect = Rect(button_pList[bi]->getRect().getCenter().x - 10, 
-         		      			     button_pList[bi]->getRect().getCenter().y + i*h, 
+         			Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
+         		      			     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
          		      			     w, h);
-         			drawTexturedRect(button_pList[bi]->getTexOb()->texture, tmp_rect, -1.0);
+         			drawTexturedRect(texOb_skill->texture, tmp_rect, -1.0);
      			}
 	   	
 	   	}
@@ -180,10 +179,10 @@ void ShipInternal :: renderSkill() const
 	   	{
 	   	     	for (int i = 0; i < skill->getTrader(); i++) 
      			{ 
-         			Rect tmp_rect = Rect(button_pList[bi]->getRect().getCenter().x - 10, 
-         		     			     button_pList[bi]->getRect().getCenter().y + i*h, 
+         			Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
+         		     			     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
          		     			     w, h);
-         			drawTexturedRect(button_pList[bi]->getTexOb()->texture, tmp_rect, -1.0);
+         			drawTexturedRect(texOb_skill->texture, tmp_rect, -1.0);
     			}
 	   	
 	   	}
@@ -192,10 +191,10 @@ void ShipInternal :: renderSkill() const
 	   	{
 	   	     	for (int i = 0; i < skill->getTechnic(); i++) 
      			{ 
-         			Rect tmp_rect = Rect(button_pList[bi]->getRect().getCenter().x - 10, 
-         		      			     button_pList[bi]->getRect().getCenter().y + i*h, 
+         			Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
+         		      			     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
          		      			     w, h);
-         			drawTexturedRect(button_pList[bi]->getTexOb()->texture, tmp_rect, -1.0);
+         			drawTexturedRect(texOb_skill->texture, tmp_rect, -1.0);
      			}     
 	   	}
 
@@ -203,10 +202,10 @@ void ShipInternal :: renderSkill() const
 	   	{
 	   		for (int i = 0; i < skill->getDiplomat(); i++) 
      			{ 
-         			Rect tmp_rect = Rect(button_pList[bi]->getRect().getCenter().x - 10, 
-         		      			     button_pList[bi]->getRect().getCenter().y + i*h, 
+         			Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
+         		      			     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
          		     			     w, h);
-         			drawTexturedRect(button_pList[bi]->getTexOb()->texture, tmp_rect, -1.0);
+         			drawTexturedRect(texOb_skill->texture, tmp_rect, -1.0);
      			}
 	   	}
 
@@ -242,7 +241,7 @@ void ShipInternal :: resetSlotsRenderInfoFlag()
 void ShipInternal :: mouseControl()
 {
     	bool lmb = g_MOUSE_LEFT_BUTTON; 
-    	bool rmb = g_MOUSE_RIGHT_BUTTON; 
+    	//bool rmb = g_MOUSE_RIGHT_BUTTON; 
 
     	bool cursor_has_target = false;
 
@@ -269,62 +268,62 @@ void ShipInternal :: mouseControl()
 				if ( (ship->slot_total_pList[i]->getEquipedStatus() == true) && (pPLAYER->getCursor()->getSlot()->getEquipedStatus() == false))
 				{ 
 					// equipments
-                       			if (ship->slot_total_pList[i]->getItemType() == EQUIPMENT_ID)
+                       			if (ship->slot_total_pList[i]->getItemTypeId() == EQUIPMENT_ID)
                        			{
-                       				if (ship->slot_total_pList[i]->getItemSubType() == LAZER_ID)
+                       				if (ship->slot_total_pList[i]->getItemSubTypeId() == LAZER_ID)
                        				{
                        					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getLazerEquipment()) == true)
                        						ship->slot_total_pList[i]->removeItem();
                       				}
-                       				if (ship->slot_total_pList[i]->getItemSubType() == ROCKET_ID)
+                       				if (ship->slot_total_pList[i]->getItemSubTypeId() == ROCKET_ID)
                        				{
                        					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getRocketEquipment()) == true)
                        						ship->slot_total_pList[i]->removeItem();
                        				}
                        			
-                       				if (ship->slot_total_pList[i]->getItemSubType() == RADAR_ID)
+                       				if (ship->slot_total_pList[i]->getItemSubTypeId() == RADAR_ID)
                        				{
                        					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getRadarEquipment()) == true)
                        					{
                        						ship->slot_total_pList[i]->removeItem();
                        					}
                        				}
-                       				if (ship->slot_total_pList[i]->getItemSubType() == DRIVE_ID)
+                       				if (ship->slot_total_pList[i]->getItemSubTypeId() == DRIVE_ID)
                        				{
                        					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getDriveEquipment()) == true)
                        						ship->slot_total_pList[i]->removeItem();
                       				}
-                       				if (ship->slot_total_pList[i]->getItemSubType() == BAK_ID)
+                       				if (ship->slot_total_pList[i]->getItemSubTypeId() == BAK_ID)
                        				{
                        					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getBakEquipment()) == true)
                       						ship->slot_total_pList[i]->removeItem();
                        				}
-                       				if (ship->slot_total_pList[i]->getItemSubType() == ENERGIZER_ID)
+                       				if (ship->slot_total_pList[i]->getItemSubTypeId() == ENERGIZER_ID)
                        				{
                        					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getEnergizerEquipment()) == true)
                        						ship->slot_total_pList[i]->removeItem();
                       				}
-                       				if (ship->slot_total_pList[i]->getItemSubType() == PROTECTOR_ID)
+                       				if (ship->slot_total_pList[i]->getItemSubTypeId() == PROTECTOR_ID)
                        				{
                       					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getProtectorEquipment()) == true)
                        						ship->slot_total_pList[i]->removeItem();
                        				}
-                       				if (ship->slot_total_pList[i]->getItemSubType() == DROID_ID)
+                       				if (ship->slot_total_pList[i]->getItemSubTypeId() == DROID_ID)
                        				{
                        					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getDroidEquipment()) == true)
                        						ship->slot_total_pList[i]->removeItem();
                        				}
-                       				if (ship->slot_total_pList[i]->getItemSubType() == FREEZER_ID)
+                       				if (ship->slot_total_pList[i]->getItemSubTypeId() == FREEZER_ID)
                        				{
                        					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getFreezerEquipment()) == true)
                        						ship->slot_total_pList[i]->removeItem();
                        				}
-                       				if (ship->slot_total_pList[i]->getItemSubType() == SCANER_ID)
+                       				if (ship->slot_total_pList[i]->getItemSubTypeId() == SCANER_ID)
                        				{
                        					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getScanerEquipment()) == true)
                        						ship->slot_total_pList[i]->removeItem();
                        				}
-                       				if (ship->slot_total_pList[i]->getItemSubType() == GRAPPLE_ID)
+                       				if (ship->slot_total_pList[i]->getItemSubTypeId() == GRAPPLE_ID)
                        				{
                        					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getGrappleEquipment()) == true)
                        						ship->slot_total_pList[i]->removeItem();
@@ -332,59 +331,59 @@ void ShipInternal :: mouseControl()
                				}
                      	
                        			// modules
-                       			if (ship->slot_total_pList[i]->getItemType() == MODULE_ID)
+                       			if (ship->slot_total_pList[i]->getItemTypeId() == MODULE_ID)
                        			{
-                       				if (ship->slot_total_pList[i]->getItemSubType() == LAZER_ID)
+                       				if (ship->slot_total_pList[i]->getItemSubTypeId() == LAZER_ID)
                        				{
                     					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getLazerModule()) == true)
                        						ship->slot_total_pList[i]->removeItem();
                       				}
-                      				if (ship->slot_total_pList[i]->getItemSubType() == ROCKET_ID)
+                      				if (ship->slot_total_pList[i]->getItemSubTypeId() == ROCKET_ID)
                       				{
                       					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getRocketModule()) == true)
                        						ship->slot_total_pList[i]->removeItem();
                       				}
-                       				if (ship->slot_total_pList[i]->getItemSubType() == RADAR_ID)
+                       				if (ship->slot_total_pList[i]->getItemSubTypeId() == RADAR_ID)
                        				{
                        					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getRadarModule()) == true)
                        						ship->slot_total_pList[i]->removeItem();
                       				}
-                       				if (ship->slot_total_pList[i]->getItemSubType() == DRIVE_ID)
+                       				if (ship->slot_total_pList[i]->getItemSubTypeId() == DRIVE_ID)
                        				{
                  					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getDriveModule()) == true)
                       						ship->slot_total_pList[i]->removeItem();
                       				}
-                      				if (ship->slot_total_pList[i]->getItemSubType() == BAK_ID)
+                      				if (ship->slot_total_pList[i]->getItemSubTypeId() == BAK_ID)
                        				{
                       					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getBakModule()) == true)
                        						ship->slot_total_pList[i]->removeItem();
                        				}
-                      				if (ship->slot_total_pList[i]->getItemSubType() == ENERGIZER_ID)
+                      				if (ship->slot_total_pList[i]->getItemSubTypeId() == ENERGIZER_ID)
                       				{
                        					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getEnergizerModule()) == true)
                        						ship->slot_total_pList[i]->removeItem();
                       				}
-                       				if (ship->slot_total_pList[i]->getItemSubType() == PROTECTOR_ID)
+                       				if (ship->slot_total_pList[i]->getItemSubTypeId() == PROTECTOR_ID)
                        				{
                        					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getProtectorModule()) == true)
                        						ship->slot_total_pList[i]->removeItem();
                        				}
-                       				if (ship->slot_total_pList[i]->getItemSubType() == DROID_ID)
+                       				if (ship->slot_total_pList[i]->getItemSubTypeId() == DROID_ID)
                     				{
                        					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getDroidModule()) == true)
                        						ship->slot_total_pList[i]->removeItem();
                        				}
-                       				if (ship->slot_total_pList[i]->getItemSubType() == FREEZER_ID)
+                       				if (ship->slot_total_pList[i]->getItemSubTypeId() == FREEZER_ID)
                        				{
                        					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getFreezerModule()) == true)
                        						ship->slot_total_pList[i]->removeItem();
                       				}
-                       				if (ship->slot_total_pList[i]->getItemSubType() == SCANER_ID)
+                       				if (ship->slot_total_pList[i]->getItemSubTypeId() == SCANER_ID)
                        				{
                        					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getScanerModule()) == true)
                        						ship->slot_total_pList[i]->removeItem();
                       				}
-                      				if (ship->slot_total_pList[i]->getItemSubType() == GRAPPLE_ID)
+                      				if (ship->slot_total_pList[i]->getItemSubTypeId() == GRAPPLE_ID)
                        				{
                        					if (pPLAYER->getCursor()->getSlot()->insertItem(ship->slot_total_pList[i]->getGrappleModule()) == true)
                        						ship->slot_total_pList[i]->removeItem();
@@ -400,14 +399,14 @@ void ShipInternal :: mouseControl()
                                         // weapons                                      
 					if ( (ship->slot_total_pList[i]->getSubType() == WEAPON_SLOT_ID) || (ship->slot_total_pList[i]->getSubType() == UNIVERSAL_SLOT_ID) )
 					{
-						if (pPLAYER->getCursor()->getSlot()->getItemType() == EQUIPMENT_ID)
+						if (pPLAYER->getCursor()->getSlot()->getItemTypeId() == EQUIPMENT_ID)
 						{      
-                                                        if (pPLAYER->getCursor()->getSlot()->getItemSubType() == LAZER_ID)
+                                                        if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == LAZER_ID)
 							{       
 								if ( ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getLazerEquipment()) );
                                                                         pPLAYER->getCursor()->getSlot()->removeItem();
 							}
-							if (pPLAYER->getCursor()->getSlot()->getItemSubType() == ROCKET_ID)
+							if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == ROCKET_ID)
 							{
 								ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getRocketEquipment());
 								pPLAYER->getCursor()->getSlot()->removeItem();
@@ -416,51 +415,51 @@ void ShipInternal :: mouseControl()
                                         }
                                         
                                         // equipment(except weapons)        
-					if ( (ship->slot_total_pList[i]->getSubType() == pPLAYER->getCursor()->getSlot()->getItemSubType()) || (ship->slot_total_pList[i]->getSubType() == UNIVERSAL_SLOT_ID) )
+					if ( (ship->slot_total_pList[i]->getSubType() == pPLAYER->getCursor()->getSlot()->getItemSubTypeId()) || (ship->slot_total_pList[i]->getSubType() == UNIVERSAL_SLOT_ID) )
 					{
-						if (pPLAYER->getCursor()->getSlot()->getItemType() == EQUIPMENT_ID)
+						if (pPLAYER->getCursor()->getSlot()->getItemTypeId() == EQUIPMENT_ID)
 						{       
-							if (pPLAYER->getCursor()->getSlot()->getItemSubType() == RADAR_ID)
+							if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == RADAR_ID)
 							{
 								if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getRadarEquipment()) == true)
 									pPLAYER->getCursor()->getSlot()->removeItem();
 							}	
-							if (pPLAYER->getCursor()->getSlot()->getItemSubType() == DRIVE_ID)
+							if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == DRIVE_ID)
 							{
 								if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getDriveEquipment()) == true)
 									pPLAYER->getCursor()->getSlot()->removeItem();
 							}
-							if (pPLAYER->getCursor()->getSlot()->getItemSubType() == BAK_ID)
+							if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == BAK_ID)
 							{
 								if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getBakEquipment()) == true)
 									pPLAYER->getCursor()->getSlot()->removeItem();
 							}
-							if (pPLAYER->getCursor()->getSlot()->getItemSubType() == ENERGIZER_ID)
+							if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == ENERGIZER_ID)
 							{
 								if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getEnergizerEquipment()) == true)
 									pPLAYER->getCursor()->getSlot()->removeItem();
 							}
-							if (pPLAYER->getCursor()->getSlot()->getItemSubType() == PROTECTOR_ID)
+							if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == PROTECTOR_ID)
 							{
 								if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getProtectorEquipment()) == true)
 									pPLAYER->getCursor()->getSlot()->removeItem();
 							}
-							if (pPLAYER->getCursor()->getSlot()->getItemSubType() == DROID_ID)
+							if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == DROID_ID)
 							{
 								if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getDroidEquipment()) == true)
 									pPLAYER->getCursor()->getSlot()->removeItem();
 							}
-							if (pPLAYER->getCursor()->getSlot()->getItemSubType() == FREEZER_ID)
+							if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == FREEZER_ID)
 							{
 								if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getFreezerEquipment()) == true)
 									pPLAYER->getCursor()->getSlot()->removeItem();
 							}
-							if (pPLAYER->getCursor()->getSlot()->getItemSubType() == SCANER_ID)
+							if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == SCANER_ID)
 							{
 								if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getScanerEquipment()) == true)
 									pPLAYER->getCursor()->getSlot()->removeItem();
 							}
-							if (pPLAYER->getCursor()->getSlot()->getItemSubType() == GRAPPLE_ID)
+							if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == GRAPPLE_ID)
 							{
 								if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getGrappleEquipment()) == true)
 									pPLAYER->getCursor()->getSlot()->removeItem();
@@ -468,59 +467,59 @@ void ShipInternal :: mouseControl()
 						}
 					
 						// modules	
-						if (pPLAYER->getCursor()->getSlot()->getItemType() == MODULE_ID)
+						if (pPLAYER->getCursor()->getSlot()->getItemTypeId() == MODULE_ID)
 						{
-                        				if (pPLAYER->getCursor()->getSlot()->getItemSubType() == LAZER_ID)
+                        				if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == LAZER_ID)
        	                				{
                	            					if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getLazerModule()) == true)
                        	    						pPLAYER->getCursor()->getSlot()->removeItem();
                        					}
-                       					if (pPLAYER->getCursor()->getSlot()->getItemSubType() == ROCKET_ID)
+                       					if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == ROCKET_ID)
                        					{
                             					if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getRocketModule()) == true)
        	                    						pPLAYER->getCursor()->getSlot()->removeItem();
                	        				}
-                       					if (pPLAYER->getCursor()->getSlot()->getItemSubType() == RADAR_ID)
+                       					if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == RADAR_ID)
                        					{ 
                        						if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getRadarModule()) == true)
                       							pPLAYER->getCursor()->getSlot()->removeItem();
                        					}
-	                   	  			if (pPLAYER->getCursor()->getSlot()->getItemSubType() == DRIVE_ID)
+	                   	  			if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == DRIVE_ID)
                	        				{
                        	    					if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getDriveModule()) == true)
                        							pPLAYER->getCursor()->getSlot()->removeItem();
                		 				}
-      		        	  			if (pPLAYER->getCursor()->getSlot()->getItemSubType() == BAK_ID)
+      		        	  			if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == BAK_ID)
                       					{
                       						if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getBakModule()) == true)
                        							pPLAYER->getCursor()->getSlot()->removeItem();
                       					}
-               	        				if (pPLAYER->getCursor()->getSlot()->getItemSubType() == ENERGIZER_ID)
+               	        				if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == ENERGIZER_ID)
                        					{
                        						if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getEnergizerModule()) == true)
                        							pPLAYER->getCursor()->getSlot()->removeItem();
                       					}
-              		       				if (pPLAYER->getCursor()->getSlot()->getItemSubType() == PROTECTOR_ID)
+              		       				if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == PROTECTOR_ID)
                        					{
                        						if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getProtectorModule()) == true)
                        							pPLAYER->getCursor()->getSlot()->removeItem();
                       					}
-              		      				if (pPLAYER->getCursor()->getSlot()->getItemSubType() == DROID_ID)
+              		      				if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == DROID_ID)
                       					{
                        						if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getDroidModule()) == true)
                        							pPLAYER->getCursor()->getSlot()->removeItem();
                        					}
-              		      				if (pPLAYER->getCursor()->getSlot()->getItemSubType() == FREEZER_ID)
+              		      				if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == FREEZER_ID)
                        					{
                        						if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getFreezerModule()) == true)
                             						pPLAYER->getCursor()->getSlot()->removeItem();
                         				}
-							if (pPLAYER->getCursor()->getSlot()->getItemSubType() == SCANER_ID)
+							if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == SCANER_ID)
                         				{
                             					if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getScanerModule()) == true)
                             						pPLAYER->getCursor()->getSlot()->removeItem();
                         				}		
-                        				if (pPLAYER->getCursor()->getSlot()->getItemSubType() == GRAPPLE_ID)
+                        				if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == GRAPPLE_ID)
                         				{
                             					if (ship->slot_total_pList[i]->insertItem(pPLAYER->getCursor()->getSlot()->getGrappleModule()) == true)
                             						pPLAYER->getCursor()->getSlot()->removeItem();
@@ -533,11 +532,11 @@ void ShipInternal :: mouseControl()
                 		//// MERGE MODULE WITH EQUIPMENT ////
                 		if ( (ship->slot_total_pList[i]->getEquipedStatus() == true) && (pPLAYER->getCursor()->getSlot()->getEquipedStatus() == true) )
                 		{	
-					if (pPLAYER->getCursor()->getSlot()->getItemType() == MODULE_ID) 
+					if (pPLAYER->getCursor()->getSlot()->getItemTypeId() == MODULE_ID) 
 					{                                               
 						if ( (ship->slot_total_pList[i]->getSubType() == WEAPON_SLOT_ID) || (ship->slot_total_pList[i]->getSubType() == UNIVERSAL_SLOT_ID) )
 						{   
-							if (pPLAYER->getCursor()->getSlot()->getItemSubType() == LAZER_ID)
+							if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == LAZER_ID)
 							{       
 								if (ship->slot_total_pList[i]->getLazerEquipment()->insertModule(pPLAYER->getCursor()->getSlot()->getLazerModule()) == true)
 								{
@@ -546,9 +545,9 @@ void ShipInternal :: mouseControl()
 							}
                                                 }
 
-						if (pPLAYER->getCursor()->getSlot()->getItemSubType() == ship->slot_total_pList[i]->getItemSubType())
+						if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == ship->slot_total_pList[i]->getItemSubTypeId())
 						{   
-							if (pPLAYER->getCursor()->getSlot()->getItemSubType() == LAZER_ID)
+							if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == LAZER_ID)
 							{       
 								if (ship->slot_total_pList[i]->getLazerEquipment()->insertModule(pPLAYER->getCursor()->getSlot()->getLazerModule()) == true)
 								{
@@ -557,7 +556,7 @@ void ShipInternal :: mouseControl()
 							}
 
 		
-							if (pPLAYER->getCursor()->getSlot()->getItemSubType() == RADAR_ID)
+							if (pPLAYER->getCursor()->getSlot()->getItemSubTypeId() == RADAR_ID)
 							{
 								if (ship->slot_total_pList[i]->getRadarEquipment()->insertModule(pPLAYER->getCursor()->getSlot()->getRadarModule()) == true)
 								{
@@ -604,65 +603,7 @@ void ShipInternal :: mouseControl()
 			{
 				if (pPLAYER->getCursor()->getSlot()->getEquipedStatus() == true)
 				{
-					Container* _container = createContainer( ship->getPoints()->getCenter() );
-										 
-					if (pPLAYER->getCursor()->getSlot()->getItemSubType() == LAZER_ID)
-					{     
-                      				_container->otsec_slot->insertItem(pPLAYER->getCursor()->getSlot()->getLazerEquipment()); 
-                      				pPLAYER->getCursor()->getSlot()->removeItem();
-                  			}
-					if (pPLAYER->getCursor()->getSlot()->getItemSubType() == ROCKET_ID)
-					{             
-						_container->otsec_slot->insertItem(pPLAYER->getCursor()->getSlot()->getRocketEquipment()); 
-						pPLAYER->getCursor()->getSlot()->removeItem();  
-					}
-
-					if (pPLAYER->getCursor()->getSlot()->getItemSubType() == RADAR_ID)
-					{                      
-						_container->otsec_slot->insertItem(pPLAYER->getCursor()->getSlot()->getRadarEquipment()); 
-						pPLAYER->getCursor()->getSlot()->removeItem();
-					}
-					if (pPLAYER->getCursor()->getSlot()->getItemSubType() == DRIVE_ID)
-					{               
-						_container->otsec_slot->insertItem(pPLAYER->getCursor()->getSlot()->getDriveEquipment()); 
-						pPLAYER->getCursor()->getSlot()->removeItem(); 
-					}
-					if (pPLAYER->getCursor()->getSlot()->getItemSubType() == BAK_ID)
-					{                      
-						_container->otsec_slot->insertItem(pPLAYER->getCursor()->getSlot()->getBakEquipment()); 
-						pPLAYER->getCursor()->getSlot()->removeItem();
-					}
-					if (pPLAYER->getCursor()->getSlot()->getItemSubType() == ENERGIZER_ID)
-					{       
-						_container->otsec_slot->insertItem(pPLAYER->getCursor()->getSlot()->getEnergizerEquipment()); 
-						pPLAYER->getCursor()->getSlot()->removeItem();              
-					}
-					if (pPLAYER->getCursor()->getSlot()->getItemSubType() == PROTECTOR_ID)
-					{            
-						_container->otsec_slot->insertItem(pPLAYER->getCursor()->getSlot()->getProtectorEquipment()); 
-						pPLAYER->getCursor()->getSlot()->removeItem();         
-					}
-					if (pPLAYER->getCursor()->getSlot()->getItemSubType() == DROID_ID)
-					{          
-						_container->otsec_slot->insertItem(pPLAYER->getCursor()->getSlot()->getDroidEquipment()); 
-						pPLAYER->getCursor()->getSlot()->removeItem();          
-					}
-					if (pPLAYER->getCursor()->getSlot()->getItemSubType() == FREEZER_ID)
-					{                  
-						_container->otsec_slot->insertItem(pPLAYER->getCursor()->getSlot()->getFreezerEquipment()); 
-						pPLAYER->getCursor()->getSlot()->removeItem();   
-					}
-					if (pPLAYER->getCursor()->getSlot()->getItemSubType() == SCANER_ID)
-					{      
-						_container->otsec_slot->insertItem(pPLAYER->getCursor()->getSlot()->getScanerEquipment()); 
-						pPLAYER->getCursor()->getSlot()->removeItem();            
-					}
-					if (pPLAYER->getCursor()->getSlot()->getItemSubType() == GRAPPLE_ID)
-					{                     
-						_container->otsec_slot->insertItem(pPLAYER->getCursor()->getSlot()->getGrappleEquipment()); 
-						pPLAYER->getCursor()->getSlot()->removeItem();
-					}
-					ship->getStarSystem()->add(_container); 
+					pPLAYER->getCursor()->getSlot()->createAndDropContainer(ship->getStarSystem(), ship->getPoints()->getCenter());	
 				} 
 			}
     		}

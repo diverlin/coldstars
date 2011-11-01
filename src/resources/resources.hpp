@@ -20,8 +20,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef RESOURCES_H
 #define RESOURCES_H
 
-TextureManager g_TEXTURE_MANAGER = TextureManager();
+void initGameData();
 
-void loadResources();
+void prepearGlobalVecs();
+void load3DModels();
+void loadShaders();
+void prepearPostProcess();
+void loadImages();
+
 
 #endif

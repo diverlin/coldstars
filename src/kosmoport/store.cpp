@@ -89,8 +89,8 @@ ItemSlot* Store :: getEmptySlot()
 
 void Store :: initItemsGenerator()
 {
-        int race_id = RACES_GOOD_LIST[getRandInt(0, RACES_GOOD_LIST.size() - 1)];
-        int revision_id = 0;
+        //int race_id = RACES_GOOD_LIST[getRandInt(0, RACES_GOOD_LIST.size() - 1)];
+        //int revision_id = 0;
 
         for (unsigned int lii = 0; lii < lazer_num; lii++)
         { 
@@ -236,14 +236,14 @@ int Store :: buyWeaponSlotItem(ItemSlot* _weapon_slot)
 {
         int price = 0;
 
-        if (_weapon_slot->getItemSubType() == LAZER_ID)
+        if (_weapon_slot->getItemSubTypeId() == LAZER_ID)
         {
                 price = _weapon_slot->getLazerEquipment()->getPrice();
                 addLazerEquipment(_weapon_slot->getLazerEquipment());
                 _weapon_slot->removeItem();
         }
 
-        if (_weapon_slot->getItemSubType() == ROCKET_ID)
+        if (_weapon_slot->getItemSubTypeId() == ROCKET_ID)
         {
                 price = _weapon_slot->getRocketEquipment()->getPrice();
                 addRocketEquipment(_weapon_slot->getRocketEquipment());
@@ -344,70 +344,70 @@ int Store :: buyOtsecSlotItem(ItemSlot* _otsec_slot)
 	int price = _otsec_slot->getItemPrice();
 
 	// weapons
-	if (_otsec_slot->getItemType() == EQUIPMENT_ID)
+	if (_otsec_slot->getItemTypeId() == EQUIPMENT_ID)
 	{
-		if (_otsec_slot->getItemSubType() == LAZER_ID)
+		if (_otsec_slot->getItemSubTypeId() == LAZER_ID)
 		{
 			addLazerEquipment(_otsec_slot->getLazerEquipment());
 			_otsec_slot->removeItem();
 		}
         
-		if (_otsec_slot->getItemSubType() == ROCKET_ID)
+		if (_otsec_slot->getItemSubTypeId() == ROCKET_ID)
 		{
 			addRocketEquipment(_otsec_slot->getRocketEquipment());
 			_otsec_slot->removeItem();
 		}
 
 		// items
-		if (_otsec_slot->getItemSubType() == RADAR_ID)
+		if (_otsec_slot->getItemSubTypeId() == RADAR_ID)
 		{
 			addRadarEquipment(_otsec_slot->getRadarEquipment());
 			_otsec_slot->removeItem();
 		}
    
-		if (_otsec_slot->getItemSubType() == DRIVE_ID)
+		if (_otsec_slot->getItemSubTypeId() == DRIVE_ID)
 		{
 			addDriveEquipment(_otsec_slot->getDriveEquipment());
 			_otsec_slot->removeItem();
 		}
    
-		if (_otsec_slot->getItemSubType() == BAK_ID)
+		if (_otsec_slot->getItemSubTypeId() == BAK_ID)
 		{
 			addBakEquipment(_otsec_slot->getBakEquipment());
 			_otsec_slot->removeItem();
 		}
 
-		if (_otsec_slot->getItemSubType() == ENERGIZER_ID)
+		if (_otsec_slot->getItemSubTypeId() == ENERGIZER_ID)
 		{
 			addEnergizerEquipment(_otsec_slot->getEnergizerEquipment());
 			_otsec_slot->removeItem();
 		}
    
-		if (_otsec_slot->getItemSubType() == PROTECTOR_ID)
+		if (_otsec_slot->getItemSubTypeId() == PROTECTOR_ID)
 		{
 			addProtectorEquipment(_otsec_slot->getProtectorEquipment());
 			_otsec_slot->removeItem();
 		}
    
-		if (_otsec_slot->getItemSubType() == DROID_ID)
+		if (_otsec_slot->getItemSubTypeId() == DROID_ID)
 		{
 			addDroidEquipment(_otsec_slot->getDroidEquipment());
 			_otsec_slot->removeItem();
 		}
    
-		if (_otsec_slot->getItemSubType() == FREEZER_ID)
+		if (_otsec_slot->getItemSubTypeId() == FREEZER_ID)
 		{
 			addFreezerEquipment(_otsec_slot->getFreezerEquipment());
 			_otsec_slot->removeItem();
 		}
    
-		if (_otsec_slot->getItemSubType() == SCANER_ID)
+		if (_otsec_slot->getItemSubTypeId() == SCANER_ID)
 		{
 			addScanerEquipment(_otsec_slot->getScanerEquipment());
 			_otsec_slot->removeItem();
 		}
 
-		if (_otsec_slot->getItemSubType() == GRAPPLE_ID)
+		if (_otsec_slot->getItemSubTypeId() == GRAPPLE_ID)
 		{
 			addGrappleEquipment(_otsec_slot->getGrappleEquipment());
 			_otsec_slot->removeItem();
@@ -435,7 +435,7 @@ void Store :: resetSlotsRenderInfoFlag()
 void Store :: mouseControl()
 {
         bool lmb = g_MOUSE_LEFT_BUTTON; 
-        bool rmb = g_MOUSE_RIGHT_BUTTON; 
+        //bool rmb = g_MOUSE_RIGHT_BUTTON; 
 
                                                                 resetSlotsRenderInfoFlag();
 
@@ -454,59 +454,59 @@ void Store :: mouseControl()
                                 if (slot_pList[i]->getEquipedStatus() == true)
                                 {
                                         // weapons
-                                        if (slot_pList[i]->getItemSubType() == LAZER_ID)
+                                        if (slot_pList[i]->getItemSubTypeId() == LAZER_ID)
                                         {
                                                 pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getLazerEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
-                                        if (slot_pList[i]->getItemSubType() == ROCKET_ID)
+                                        if (slot_pList[i]->getItemSubTypeId() == ROCKET_ID)
                                         {
                                                 pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getRocketEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
 
                                         // items
-                                        if (slot_pList[i]->getItemSubType() == RADAR_ID)
+                                        if (slot_pList[i]->getItemSubTypeId() == RADAR_ID)
                                         {
                                                 pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getRadarEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
-                                        if (slot_pList[i]->getItemSubType() == DRIVE_ID)
+                                        if (slot_pList[i]->getItemSubTypeId() == DRIVE_ID)
                                         {
                                                 pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getDriveEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
-                                        if (slot_pList[i]->getItemSubType() == BAK_ID)
+                                        if (slot_pList[i]->getItemSubTypeId() == BAK_ID)
                                         {
                                                 pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getBakEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
-                                        if (slot_pList[i]->getItemSubType() == ENERGIZER_ID)
+                                        if (slot_pList[i]->getItemSubTypeId() == ENERGIZER_ID)
                                         {
                                                 pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getEnergizerEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
-                                        if (slot_pList[i]->getItemSubType() == PROTECTOR_ID)
+                                        if (slot_pList[i]->getItemSubTypeId() == PROTECTOR_ID)
                                         {
                                                 pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getProtectorEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
-                                        if (slot_pList[i]->getItemSubType() == DROID_ID)
+                                        if (slot_pList[i]->getItemSubTypeId() == DROID_ID)
                                         {
                                                 pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getDroidEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
-                                        if (slot_pList[i]->getItemSubType() == FREEZER_ID)
+                                        if (slot_pList[i]->getItemSubTypeId() == FREEZER_ID)
                                         {
                                                 pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getFreezerEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
-                                        if (slot_pList[i]->getItemSubType() == SCANER_ID)
+                                        if (slot_pList[i]->getItemSubTypeId() == SCANER_ID)
                                         {
                                                 pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getScanerEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
-                                        if (slot_pList[i]->getItemSubType() == GRAPPLE_ID)
+                                        if (slot_pList[i]->getItemSubTypeId() == GRAPPLE_ID)
                                         {
                                                 pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getGrappleEquipment());
                                                 slot_pList[i]->removeItem();

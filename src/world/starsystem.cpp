@@ -35,14 +35,15 @@ StarSystem :: ~StarSystem()
 {}
       
 
-void StarSystem :: setPositionOnWorldMap(Rect rect) { rect_onMap = rect; }
+void StarSystem :: setPosition(vec2f _center) { center = _center; }
 void StarSystem :: setCapturedFlag(bool _captured) { is_CAPTURED = _captured; }
 				
 int StarSystem :: getId() const     { return id; }
 int StarSystem :: getTypeId() const { return type_id; }
 bool StarSystem :: getDetailedSimulationFlag() const { return detalied_simulation; }
 bool StarSystem :: getCapturedFlag() const { return is_CAPTURED; }    
-Rect StarSystem :: getRectOnMap() const { return rect_onMap; }  
+vec2f StarSystem :: getPosition() const { return center; }  
+
 int StarSystem :: getShockWaveNum() const { return effect_SHOCKWAVE_vec.size(); }        
                 
 // poor                
@@ -123,19 +124,20 @@ void StarSystem :: update_TRUE(int timer)
 			}
 			calculation_per_turn_allowed_inDynamic = false;
 		}
-		
-     		asteroidManager(10); 
+
+     		asteroidManager(5); 
+     		//debug__();
 
     		updateEntities_inDynamic_TRUE();
     		updateEffects();
-    		
+
     		rocketCollision_TRUE();
     		asteroidCollision_TRUE();
 
     		manageDeadObjects(); 
 
 		fireEvents_TRUE(timer);
-		
+
 		calculation_per_turn_allowed = true;
 	}
 	else
@@ -432,6 +434,11 @@ void StarSystem :: updateEffects()
 		effect_SHOCKWAVE_vec[i]->update();
 
 	}
+	
+	for(unsigned int i = 0; i<text_DAMAGE_vec.size(); i++)
+    	{ 
+    	        text_DAMAGE_vec[i]->update(); 
+    	}   
 }
     		
       
@@ -571,7 +578,7 @@ void StarSystem :: renderBackground()
 void StarSystem :: render()
 {
     	findVisibleEntities();
-    	if (USE_MODERN_HW == true)
+    	if (g_USE_MODERN_HW == true)
     		renderEntities_NEW();
     	else
         	renderEntities_OLD(); 
@@ -741,7 +748,6 @@ void StarSystem :: renderEntities_NEW()
     		
     		for(unsigned int i = 0; i<text_DAMAGE_vec.size(); i++)
     		{ 
-    		        text_DAMAGE_vec[i]->update(); 
         		text_DAMAGE_vec[i]->render(); 
     		}    		
     		
@@ -834,7 +840,6 @@ void StarSystem :: renderEntities_OLD()
 
         for(unsigned int i = 0; i<text_DAMAGE_vec.size(); i++)
     	{ 
-    	        text_DAMAGE_vec[i]->update(); 
         	text_DAMAGE_vec[i]->render(); 
     	}    		
     		
@@ -844,7 +849,7 @@ void StarSystem :: renderEntities_OLD()
     
 
 
-void StarSystem :: asteroidManager(int num)
+void StarSystem :: asteroidManager(unsigned int num)
 {
         while (ASTEROID_vec.size() < num)
         {
@@ -1245,7 +1250,7 @@ void StarSystem :: mouseControl()
                    				{
                         				pPLAYER->getPilot()->setScanTarget(visible_SHIP_vec[ki]);
                         				pPLAYER->setScanFlag(true);
-                        				pSHIP_GUI->configure(pPLAYER->getPilot()->getScanShip(), false, false);   
+                        				g_SHIP_GUI->configure(pPLAYER->getPilot()->getScanShip(), false, false);   
                    				}
                 			}
 				}
@@ -1367,7 +1372,7 @@ void StarSystem :: moveToSpace(Ship* _ship)
 
 void StarSystem :: moveToSpace(Npc* _npc)
 {
-     	int _race_id = _npc->getRaceId();
+     	//int _race_id = _npc->getRaceId();
      	int _subtype_id = _npc->getSubTypeId();
 
      	_npc->setPlaceTypeId(SPACE_ID);
@@ -1407,15 +1412,17 @@ bool StarSystem :: removeNpc(int _id, int _subtype_id)
         removeFromTheListById(&NPC_inSPACE_vec, _id);
 
         if (_subtype_id == RANGER_ID)
-                removeFromTheListById(&NPC_RANGER_inSPACE_vec, _id);
+                return removeFromTheListById(&NPC_RANGER_inSPACE_vec, _id);
         if (_subtype_id == WARRIOR_ID)
-                removeFromTheListById(&NPC_WARRIOR_inSPACE_vec, _id);
+                return removeFromTheListById(&NPC_WARRIOR_inSPACE_vec, _id);
         if (_subtype_id == TRADER_ID)
-                removeFromTheListById(&NPC_TRADER_inSPACE_vec, _id);
+                return removeFromTheListById(&NPC_TRADER_inSPACE_vec, _id);
         if (_subtype_id == PIRAT_ID)
-                removeFromTheListById(&NPC_PIRAT_inSPACE_vec, _id);
+                return removeFromTheListById(&NPC_PIRAT_inSPACE_vec, _id);
         if (_subtype_id == DIPLOMAT_ID)
-                removeFromTheListById(&NPC_DIPLOMAT_inSPACE_vec, _id);
+                return removeFromTheListById(&NPC_DIPLOMAT_inSPACE_vec, _id);
+
+        return false;
 }
 
 
@@ -1439,7 +1446,7 @@ void StarSystem :: debug__()
         {
                 for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
                 {
-                        MINERAL_vec[mi]->hit_TRUE(100);
+                        MINERAL_vec[mi]->hit_TRUE(1000);
                 }
         }
 }

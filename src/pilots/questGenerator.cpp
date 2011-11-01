@@ -33,8 +33,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 bool liberationStarSystemQuestGenerator(Npc* npc)
 {
-	StarSystem* taret_starsystem = pGALAXY->getRandomCapturedStarSystem();
+	StarSystem* taret_starsystem = g_GALAXY->getRandomCapturedStarSystem();
 	npc->getQuestOb()->setTask(taret_starsystem, LIBERATION_STARSYSTEM_QUEST_ID);
+
+        return true;
 }
 
 
@@ -45,7 +47,7 @@ bool destroyShipQuestGenerator(Npc* npc)
 	int counter = 0;
 	do
 	{ 
-                target_npc = pGALAXY->getRandomStarSystem()->getRandomNpc();
+                target_npc = g_GALAXY->getRandomStarSystem()->getRandomNpc();
 		//target_npc = npc->getStarSystem()->getRandomNpc();
 		counter++;
 	} 

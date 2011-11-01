@@ -134,6 +134,8 @@ bool Planet :: add(Ship* _ship)
         {
                 return land->addShip(_ship);
         }
+        
+        return false;
 }
 
 bool Planet :: add(Npc* _npc)
@@ -146,6 +148,8 @@ bool Planet :: add(Npc* _npc)
         {
                 return land->addNpc(_npc);
         }
+        
+        return false;
 }
 
 bool Planet :: removeShipById(int _id)
@@ -159,6 +163,8 @@ bool Planet :: removeShipById(int _id)
      	{
          	return land->removeShip(_id);
         }
+        
+        return false;
 }
 
 bool Planet :: removeNpcById(int _id)
@@ -172,6 +178,8 @@ bool Planet :: removeNpcById(int _id)
      	{
          	return land->removeNpc(_id);
         }
+        
+        return false;
 }
 //// ******* TRANSITION ******* 
 
@@ -188,6 +196,8 @@ bool Planet :: getPermissionToLand() const
      	}
      	if (subtype_id == LAND_ID)
         	return true;
+                
+        return false;
 }
 
         
@@ -215,7 +225,7 @@ Planet* createPlanet(int orbit_radius)
         Planet* planet = new Planet(subtype_id, 
         			    texOb, 
         			    texOb_atmosphere, 
-        			    pTo_SPHERE_MESH, 
+        			    g_SPHERE_MESH, 
         			    planet_data,
         			    population);
 	 

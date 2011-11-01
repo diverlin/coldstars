@@ -25,10 +25,13 @@ class CommonForSpaceItems
 {   
 	public:
         	CommonForSpaceItems();
-        	void CommonForSpaceItems_init(TextureOb* _texOb, vec2f _start_pos);
+        	void CommonForSpaceItems_init(IdData _data_id, LifeData _data_life, TextureOb* _texOb, vec2f _start_pos);
     
     		bool getAlive() const;
+                int getId() const;
+                int getTypeId() const;
     		bool* getpAlive();
+                int* getpPlaceTypeId();
         	Points* getPoints();
         	void setStarSystem(StarSystem*);
             	StarSystem* getStarSystem();
@@ -44,6 +47,11 @@ class CommonForSpaceItems
         
         protected:     	
         	LifeData data_life;
+                IdData data_id; 
+                       
+        	int mass;
+                int place_type_id;
+                                
         	AngleData data_angle_inD;
       	
         	TextureOb* texOb;

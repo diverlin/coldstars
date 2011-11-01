@@ -72,7 +72,7 @@ NeedsToDo :: NeedsToDo()
         
    	BUY         = false;
    	SELL        = false;
-};
+}
 
 
 AbilitiesStatus :: AbilitiesStatus()
@@ -87,7 +87,7 @@ AbilitiesStatus :: AbilitiesStatus()
    	GRAB     = false;
    	SCAN     = false;
    	FIRE     = false;
-};
+}
 
 
 KorpusData :: KorpusData()

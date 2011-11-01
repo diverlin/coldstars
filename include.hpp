@@ -124,7 +124,7 @@ class Turrel;
 #include "src/spaceobjects/mineral.hpp"
 #include "src/spaceobjects/container.hpp"
 
-
+#include "src/pilots/targetObject.hpp" 
 #include "src/vehicle/turrel.hpp"
 
 #include "src/vehicle/itemSlot.hpp"
@@ -137,13 +137,14 @@ class Turrel;
 #include "src/pilots/npc.hpp"              
 
 #include "src/gui/button.hpp"
+#include "src/gui/interfaceinspace.hpp"
 #include "src/gui/shipInternal.hpp"
 #include "src/world/garbage.hpp"  
 #include "src/world/starsystem.hpp"    
 #include "src/effects/lazerTrace.hpp"
 
 #include "src/vehicle/turrel.hpp"
-
+#include "src/world/galaxy.hpp"
 
 
 
@@ -246,6 +247,7 @@ class Turrel;
 #include "src/pilots/player.cpp"
 #include "src/pilots/skill.cpp"
 #include "src/pilots/questObject.cpp"  
+#include "src/pilots/targetObject.cpp"  
 #include "src/pilots/questGenerator.cpp" 
 #include "src/pilots/npc.cpp"
 

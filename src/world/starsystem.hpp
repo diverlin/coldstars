@@ -48,7 +48,7 @@ class StarSystem
     		StarSystem();
     		~StarSystem();
     
-    		void setPositionOnWorldMap(Rect rect);
+    		void setPosition(vec2f);
 		//void setDetailedSimulationFlag(bool);
 		void setCapturedFlag(bool);
 		
@@ -56,7 +56,7 @@ class StarSystem
                 int getTypeId() const;
 		bool getDetailedSimulationFlag() const;
 		bool getCapturedFlag() const;
-		Rect getRectOnMap() const;
+		vec2f getPosition() const;
 		int getShockWaveNum() const;
 		
 		// poor
@@ -112,7 +112,8 @@ class StarSystem
     		    		
     		bool is_CAPTURED;
     		
-    		Rect rect_onMap;
+    		//Rect rect_onMap;
+    		vec2f center;
     	
     	    	// ENTITY VECTORS
                 std::vector<Npc*> NPC_appear_vec;
@@ -144,7 +145,7 @@ class StarSystem
                 
                 void postHyperJumpEvent();
 
-    		void asteroidManager(int num);
+    		void asteroidManager(unsigned int num);
     		    		
     		void manageDeadObjects();
     		void removeAllReferencesToDeadObjects();

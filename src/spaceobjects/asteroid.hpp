@@ -30,7 +30,8 @@ class Asteroid : public CommonForPlanet
         	~Asteroid();
 
 		bool getAlive() const;
-		bool* get_pAlive();
+		bool* getpAlive();
+                int* getpPlaceTypeId();
 		int getArmor() const;
 		int getDamage() const;
 		int getMass()  const;	
@@ -58,6 +59,8 @@ class Asteroid : public CommonForPlanet
       		int damage;
       		int mass;
         	
+                int place_type_id;
+                
 		void death_TRUE();
         	void death_FALSE();
 }; 

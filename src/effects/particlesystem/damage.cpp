@@ -21,16 +21,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 DamageEffect :: DamageEffect(TextureOb* _texOb, 
-			     float* _pTo_center_x,
-			     float* _pTo_center_y, 
+			     vec2f* _pCenter,
 			     ParticleData _data_particle,
-			     int _num_particles)
+			     unsigned int _num_particles)
 {
     	is_alive = true;
     	is_dying = false;
 
-    	pTo_center_x = _pTo_center_x;
-    	pTo_center_y = _pTo_center_y;
+    	pCenter = _pCenter;
 
     	texOb = _texOb;
     	
@@ -40,7 +38,7 @@ DamageEffect :: DamageEffect(TextureOb* _texOb,
 	bool _variation = true;
    	for (unsigned int i = 0; i < _num_particles; i++)
    	{
-        	Particle* particle = new Particle(vec2f(*pTo_center_x, *pTo_center_y), _data_particle, _variation);  
+        	Particle* particle = new Particle(*pCenter, _data_particle, _variation);  
         	particle->randomize_d_alpha(0.003, 0.006);    					  
         	particles_vec.push_back(particle);
     	} 
@@ -48,7 +46,7 @@ DamageEffect :: DamageEffect(TextureOb* _texOb,
 
 DamageEffect :: ~DamageEffect()
 {
-	for (int i = 0; i < particles_vec.size(); i++) 
+	for (unsigned int i = 0; i < particles_vec.size(); i++) 
      	{
   		delete particles_vec[i];
      	}
@@ -56,7 +54,7 @@ DamageEffect :: ~DamageEffect()
 
 
 bool DamageEffect :: getAlive() const { return is_alive; }
-bool DamageEffect :: setDying() { is_dying = true; }
+void DamageEffect :: setDying() { is_dying = true; }
 
 
 void DamageEffect :: update()
@@ -74,7 +72,7 @@ void DamageEffect :: update()
             	{
             		if (is_dying == false)
             		{
-            			particles_vec[pi]->reborn(vec2f(*pTo_center_x, *pTo_center_y));
+            			particles_vec[pi]->reborn(*pCenter);
             		}
             	}
         }
@@ -93,7 +91,7 @@ void DamageEffect :: render()
 
 
 
-DamageEffect* createDamageEffect( TextureOb* _texOb, float* pTo_center_x, float* pTo_center_y)
+DamageEffect* createDamageEffect(TextureOb* _texOb, vec2f* _pCenter)
 {
 	int particles_num = 5;
    
@@ -110,7 +108,7 @@ DamageEffect* createDamageEffect( TextureOb* _texOb, float* pTo_center_x, float*
 	data_particle.alpha_end = 0.1; 
 	data_particle.d_alpha = 0;   // is modifed iduvidually for each particle                       
 
-	DamageEffect* damage = new DamageEffect(_texOb, pTo_center_x, pTo_center_y, data_particle, particles_num);
+	DamageEffect* damage = new DamageEffect(_texOb, _pCenter, data_particle, particles_num);
 	return damage;
 }
 

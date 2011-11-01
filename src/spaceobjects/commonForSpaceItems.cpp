@@ -21,20 +21,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 CommonForSpaceItems :: CommonForSpaceItems()
 {}
 
-void CommonForSpaceItems :: CommonForSpaceItems_init(TextureOb* _texOb, vec2f _start_pos)
+void CommonForSpaceItems :: CommonForSpaceItems_init(IdData _data_id, LifeData _data_life, TextureOb* _texOb, vec2f _start_pos)
 {   
-    	data_life.dying_time = 30;
-
     	texOb = _texOb;
     	starsystem = NULL;
     
    	calcRenderConstants();
      
-    	collision_radius = (texOb->w, texOb->h)/2;
+    	collision_radius = (texOb->w + texOb->h)/2;
 
     	//////
-    	points = Points();
-
     	points.initCenterPoint();
     	points.addCenterPoint();
 
@@ -45,10 +41,15 @@ void CommonForSpaceItems :: CommonForSpaceItems_init(TextureOb* _texOb, vec2f _s
     	keep_moving = true;
     	
     	target_pos = getRandomVec(_start_pos, 60, 100);
+        
+        place_type_id = SPACE_ID;
 }
 
 bool CommonForSpaceItems :: getAlive() const { return data_life.is_alive; }     
+int CommonForSpaceItems :: getId() const { return data_id.id; }
+int CommonForSpaceItems :: getTypeId() const { return data_id.type_id; }
 bool* CommonForSpaceItems :: getpAlive() { return &data_life.is_alive; }  
+int* CommonForSpaceItems :: getpPlaceTypeId() { return &place_type_id; }
 Points* CommonForSpaceItems :: getPoints() { return &points; } 
 void CommonForSpaceItems :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
 StarSystem* CommonForSpaceItems :: getStarSystem() { return starsystem; }
