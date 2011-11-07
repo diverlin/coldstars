@@ -27,12 +27,9 @@ class RocketBullet
                 RocketBullet(IdData _data_id,
                 	     LifeData _data_life,
                 	     BulletData _data_bullet, 
-                	     float _start_pos_x, 
-                	     float _start_pos_y, 
+                	     vec2f _start_pos, 
                 	     float _angle_inD, 
-                	     float* _pTo_target_pos_x, 
-                	     float* _pTo_target_pos_y, 
-                	     bool* _pTo_target_is_alive, 
+                	     TargetObject* _targetOb, 
                 	     int _owner_id);
                 	     
                 ~RocketBullet();
@@ -67,32 +64,20 @@ class RocketBullet
                 Points points;
                 
                 StarSystem* starsystem;
-                
-                               
-                int size_id;
 
                 float speed;
-                float step;
-
-                float* pTo_target_pos_x;
-                float* pTo_target_pos_y;
-                bool target_is_alive;    
-                bool* pTo_target_is_alive;
-                
+               
                 float dx, dy;
-                float angle_inD;
+                float angle_inD;                
                 
-                
-                TrailEffect* drive_trail;
-                
-                void stepCalculation();
-                
+                TargetObject* targetOb;
+                TrailEffect* drive_trail;                
+               
                 void death_TRUE();
                 void death_FALSE();
                 
 		void renderKorpus() const;
-                void renderDriveTrail() const;
-        
+                void renderDriveTrail() const;        
 };
 
 RocketBullet* rocketGenerator(BulletData, ItemSlot*);

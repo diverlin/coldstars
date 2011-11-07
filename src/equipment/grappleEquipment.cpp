@@ -29,9 +29,6 @@ GrappleEquipment :: GrappleEquipment(TextureOb* _texOb_item,
 {
     	CommonForEquipment_init(GRAPPLE_ID, _texOb_item, _common_data);
 
-    	//grapple_list = []
-    	//grapple_remove_queue = []
-
     	strength_orig = _strength_orig;
     	strength_add  = 0;
 
@@ -46,6 +43,12 @@ GrappleEquipment :: GrappleEquipment(TextureOb* _texOb_item,
 
     	updatePropetries();
     	countPrice();
+        
+        for (int i = 0; i < maxNumItem_orig; i++)
+        {
+                TargetObject* _targetOb = new TargetObject(NULL);   //!!!!
+                target_vec.push_back(_targetOb);
+        }
 }
 
 GrappleEquipment :: ~GrappleEquipment()
@@ -54,13 +57,49 @@ GrappleEquipment :: ~GrappleEquipment()
 	{
 		delete modules_vec[mi];
 	}
+        
+        for (unsigned int i = 0; i < target_vec.size(); i++)
+        {
+                delete target_vec[i];
+        }
 }
 
+void GrappleEquipment :: reshapeTargetObSlot(ItemSlot* _slot)
+{
+        for (unsigned int i = 0; i < target_vec.size(); i++)
+        {
+                target_vec[i]->bindSlot(_slot);
+        }
+}
+
+template <typename TARGET_TYPE>
+void GrappleEquipment :: add(TARGET_TYPE* _target)
+{
+        for (unsigned int i = 0; i < target_vec.size(); i++)
+        {
+                if (target_vec[i]->getValid() == false)
+                {
+                        target_vec[i]->setObject(_target);
+                        break;
+                }
+        }        
+}
+
+
+void GrappleEquipment :: validationTargets()
+{
+        for (unsigned int i = 0; i < target_vec.size(); i++)
+        {
+                target_vec[i]->validation();
+        }
+}
+
+                
 int GrappleEquipment :: getStrength()   const { return strength; }
 int GrappleEquipment :: getRadius()     const { return radius; }
 int GrappleEquipment :: getSpeed()      const { return speed; }
 int GrappleEquipment :: getMaxNumItem() const { return maxNumItem; }
-
+ 
 
 void GrappleEquipment :: updatePropetries()
 {
@@ -159,6 +198,7 @@ bool GrappleEquipment :: insertModule(GrappleModule* _grapple_module)
 }
     
 
+              
 
 GrappleEquipment* grappleEquipmentGenerator(int race_id, int revision_id)
 {

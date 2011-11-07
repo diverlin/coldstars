@@ -59,7 +59,7 @@ void Turrel :: setTexOb(TextureOb* _texOb)
 
 bool Turrel :: fireCheck()
 {
-        targetOb->validation(*pCenter);    
+        targetOb->validation();    
                         
     	return targetOb->getValid();
 }

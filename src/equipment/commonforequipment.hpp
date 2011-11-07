@@ -33,7 +33,7 @@ class CommonForEquipment
         	int getPrice() const; 
                 TextureOb* getTexOb() const;
      
-     		void bindSlot(ItemSlot* _slot);
+     		void bindSlot(ItemSlot*);
      		void repair();
 
      		void render(Rect slot_rect);

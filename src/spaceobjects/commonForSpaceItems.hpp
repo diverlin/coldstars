@@ -37,6 +37,7 @@ class CommonForSpaceItems
             	StarSystem* getStarSystem();
             	int getCollisionRadius() const;
             	
+            	void externalManipulation(vec2f);
         	void update_inSpace_inDynamic_TRUE();
         	void update_inSpace_inDynamic_FALSE();
 

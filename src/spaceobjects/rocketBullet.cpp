@@ -22,12 +22,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 RocketBullet :: RocketBullet(IdData _data_id, 
 			     LifeData _data_life, 
 			     BulletData _data_bullet, 
-			     float _start_pos_x, 
-			     float _start_pos_y, 
+			     vec2f _start_pos, 
 			     float _angle_inD, 
-			     float* _pTo_target_pos_x, 
-			     float* _pTo_target_pos_y, 
-			     bool* _pTo_target_is_alive, 
+                             TargetObject* _targetOb,
 			     int _owner_id)
 {
 	data_id     = _data_id;
@@ -38,19 +35,12 @@ RocketBullet :: RocketBullet(IdData _data_id,
         starsystem = NULL;
 
         owner_ship_id = _owner_id;
-        //target_type_id = 0;
 
-        target_is_alive = true;
-        pTo_target_is_alive = _pTo_target_is_alive;
-        pTo_target_pos_x = _pTo_target_pos_x;
-        pTo_target_pos_y = _pTo_target_pos_y;
+        targetOb = _targetOb;
 
         texOb = _data_bullet.texOb;
-        size_id = returnObjectSize(texOb->w, texOb->h);
-
 
         speed = _data_bullet.speed_init;
-        step = 0;
 
         // points
         points.initCenterPoint();
@@ -69,11 +59,11 @@ RocketBullet :: RocketBullet(IdData _data_id,
         dx = 0;
         dy = 0;
 
-        points.setCenter(_start_pos_x, _start_pos_y);
+        points.setCenter(_start_pos.x, _start_pos.y);
         angle_inD = _angle_inD;
         points.setAngle(angle_inD);
         
-   	drive_trail = createTrailEffect(size_id, points.getpMidLeft(), points.getpMidFarLeft());
+   	drive_trail = createTrailEffect(texOb->size_id, points.getpMidLeft(), points.getpMidFarLeft());
 }
 
 
@@ -98,18 +88,12 @@ void RocketBullet :: update_inSpace_inDynamic()
     	if (speed < data_bullet.speed_max)
     	{
        		speed += data_bullet.d_speed; 
-       		stepCalculation();
     	} 
 
-    	if ((*pTo_target_is_alive) == false)
-    	{
-        	target_is_alive = false;    // this step is needed after deleting target object in order to rocket keep moving
-        }
-
-    	if (target_is_alive == true)
+    	if (targetOb->getValid() == true)
     	{ 
         	//dx, dy, angle_new = rocketWayCalc((self.points.center[0], self.points.center[1]), (self.target.points.center[0], self.target.points.center[1]), self.points.angle, self.angular_speed, self.step)
-        	get_dX_dY_angleInD_ToPoint(points.getCenter().x, points.getCenter().y, (*pTo_target_pos_x), (*pTo_target_pos_y), step, &dx, &dy, &angle_inD);
+        	get_dX_dY_angleInD_ToPoint(points.getCenter().x, points.getCenter().y, targetOb->getpCenter()->x, targetOb->getpCenter()->y, speed/100.0, &dx, &dy, &angle_inD);
     	}      
     	points.setAngle(angle_inD);
     	points.setCenter(points.getCenter().x + dx, points.getCenter().y + dy);
@@ -139,13 +123,6 @@ void RocketBullet :: updateDebugWay(int _timer)   // DEBUG
          //  self.points.update()
 
 }
-
-
-void RocketBullet :: stepCalculation()
-{
-     	step = speed / 100.0;
-}
-
 
 
 void RocketBullet :: collision_TRUE()
@@ -184,7 +161,7 @@ void RocketBullet :: death_TRUE()
 
      	if (data_life.is_explosed == false)
      	{   
-        	createExplosion(starsystem, points.getCenter(), size_id);
+        	createExplosion(starsystem, points.getCenter(), texOb->size_id);
         	data_life.is_explosed = true;
      	}
 }
@@ -215,7 +192,7 @@ void RocketBullet :: renderKorpus() const
                               	  points.getBottomRight(), 
                               	  points.getTopRight(), 
                               	  points.getTopLeft(), 
-                              	  -500);
+                              	  points.getPosZ());
 }
 
 void RocketBullet :: render_inSpace() const
@@ -248,12 +225,9 @@ RocketBullet* rocketGenerator(BulletData data_bullet, ItemSlot* slot)
         	rocket = new RocketBullet(data_id,
         			          data_life,		
         				  data_bullet,
-        				  slot->getTurrel()->getCenter().x, 
-                                  	  slot->getTurrel()->getCenter().y, 
+        				  slot->getTurrel()->getCenter(), 
                                   	  slot->getTurrel()->getAngle(), 
-                                  	  &slot->getTurrel()->getTargetOb()->getpCenter()->x, 
-                                  	  &slot->getTurrel()->getTargetOb()->getpCenter()->y, 
-                                  	  slot->getTurrel()->getTargetOb()->getpAlive(), 
+                                  	  slot->getTurrel()->getTargetOb(), 
                                   	  slot->getShip()->getId());
         }
     	else
@@ -261,12 +235,9 @@ RocketBullet* rocketGenerator(BulletData data_bullet, ItemSlot* slot)
         	rocket = new RocketBullet(data_id,
         			          data_life,		
         				  data_bullet,
-        				  slot->getShip()->getPoints()->getCenter().x, 
-                                  	  slot->getShip()->getPoints()->getCenter().y, 
+                                  	  slot->getShip()->getPoints()->getCenter(), 
                                   	  slot->getTurrel()->getAngle(), 
-                                  	  &slot->getTurrel()->getTargetOb()->getpCenter()->x, 
-                                  	  &slot->getTurrel()->getTargetOb()->getpCenter()->y, 
-                                  	  slot->getTurrel()->getTargetOb()->getpAlive(), 
+                                  	  slot->getTurrel()->getTargetOb(), 
                                   	  slot->getShip()->getId());
          }
          

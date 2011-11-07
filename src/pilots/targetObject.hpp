@@ -27,6 +27,8 @@ class TargetObject
 		TargetObject(ItemSlot*);
 		~TargetObject();
 
+                void bindSlot(ItemSlot*);
+
 		template <typename TARGET>
 		void setObject(TARGET _target);
 
@@ -43,7 +45,9 @@ class TargetObject
                 Ship* getShip();
 
 		void reset();
-		void validation(vec2f);
+		void validation();
+		
+		void externalManipulation(vec2f);
 
 	private:
 		bool is_valid;
@@ -68,7 +72,8 @@ class TargetObject
 		void set(Container*);
 		void set(Ship*);
                 
-                bool checkDistance(vec2f);
+                bool checkAvaliability();
+                bool checkDistance();
 };
 
 

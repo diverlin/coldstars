@@ -500,6 +500,7 @@ bool ItemSlot :: insertItem(GrappleEquipment* item)
 		if (subtype_id == GRAPPLE_ID)
 		{
 			ship->updateGrabAbility();
+                        item->reshapeTargetObSlot(this);
 		}
 
                 if (ship != NULL)

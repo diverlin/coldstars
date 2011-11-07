@@ -960,7 +960,10 @@ g_TEXTURE_MANAGER.manage( new TextureOb(TEXT_BACKGROUND_TEXTURE_ID, "data/other/
 	g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_map = new TextureOb(NONE_ID, "data/icon/starsystem_ICON.png", true, &arg);
 }
 
-
+{
+	std::vector<int> arg;  
+	g_UNIQUE_TEXTURE_COLLECTOR.texOb_grapple_trail = new TextureOb(NONE_ID, "data/effect/grapple_jet.png", true, &arg);
+}
 
 
 }

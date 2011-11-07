@@ -357,7 +357,7 @@ const int LIBERATION_STARSYSTEM_QUEST_ID = g_TYPE_ID_GENERATOR.getNextId("LIBERA
 const int SELFCARE_TASK_ID               = g_TYPE_ID_GENERATOR.getNextId("SELFCARE_TASK_ID");
 //const int LAUNCHING_task_id              = g_TYPE_ID_GENERATOR.getNextId("LAUNCHING_task_id");
 const int LANDING_TASK_ID               = g_TYPE_ID_GENERATOR.getNextId("LANDING_TASK_ID");
-//const int GRABBING_MINERAL_task_id       = g_TYPE_ID_GENERATOR.getNextId("GRABBING_MINERAL_task_id");
+const int GRABBING_TASK_ID              = g_TYPE_ID_GENERATOR.getNextId("GRABBING_TASK_ID");
 //const int GRABBING_CONTAINER_task_id     = g_TYPE_ID_GENERATOR.getNextId("GRABBING_CONTAINER_task_id");
 
 //const int REPAIR_NEEDED_id               = g_TYPE_ID_GENERATOR.getNextId("REPAIR_NEEDED_id");
@@ -367,7 +367,7 @@ const int LANDING_TASK_ID               = g_TYPE_ID_GENERATOR.getNextId("LANDING
 //const int SELL_NEEDED_id                 = g_TYPE_ID_GENERATOR.getNextId("SELL_NEEDED_id");
 //// end dynamic tasks
 
-const int DESTROY_SHIP_QEST_ID          = g_TYPE_ID_GENERATOR.getNextId("DESTROY_SHIP_QEST_ID");
+const int DESTROY_SHIP_QUEST_ID          = g_TYPE_ID_GENERATOR.getNextId("DESTROY_SHIP_QEST_ID");
 
 //const int AREST_REQUEST_task_id          = g_TYPE_ID_GENERATOR.getNextId("AREST_REQUEST_task_id");
 //const int TERROR_REQUEST_task_id         = g_TYPE_ID_GENERATOR.getNextId("TERROR_REQUEST_task_id");

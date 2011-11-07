@@ -64,11 +64,19 @@ void Galaxy :: update(int timer)
 {
 	for (unsigned int si = 0; si < STARSYSTEM_vec.size(); si++)
      	{
-     		if (STARSYSTEM_vec[si]->getDetailedSimulationFlag() == true)
-     			STARSYSTEM_vec[si]->update_TRUE(timer);
-     		else
-     		     	STARSYSTEM_vec[si]->update_FALSE(timer);
+     		if (g_DEBUG == false)
+     		{
+     			if (STARSYSTEM_vec[si]->getDetailedSimulationFlag() == true)
+     				STARSYSTEM_vec[si]->update_TRUE(timer);
+     			else
+     		     		STARSYSTEM_vec[si]->update_FALSE(timer);     		     	
+     		}
      	}
+     	
+	if (g_DEBUG == true)
+	{
+		pPLAYER->getStarSystem()->update_TRUE(timer);
+	}
 }
 
 
@@ -172,8 +180,7 @@ void generateNumFriendlyNPC(StarSystem* starsystem, int ship_per_system)
         	else
            		npc_subtype_id = RACE4_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE4_ALLOWED_SUBTYPE_LIST.size())];
 
-        	TextureOb* texOb_npc  = g_TEXTURE_MANAGER.returnPointerToRandomFaceTexObWithFolloingAttributes(npc_race_id);
-        	Npc* npc = new Npc(npc_race_id, npc_subtype_id, texOb_npc);
+        	Npc* npc = generateNpc(npc_race_id, npc_subtype_id);
 
         	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[getRandInt(0, RACES_ALL_LIST.size())];
         	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
@@ -202,8 +209,7 @@ void generateNumEnemyNPC(StarSystem* starsystem, int ship_per_system)
        		//npc_subtype_id = SHIP_SUBTYPE_LIST[getRandInt(0, RACES_EVIL_LIST.size())];
                 npc_subtype_id = WARRIOR_ID;
 
-        	TextureOb* texOb_npc  = g_TEXTURE_MANAGER.returnPointerToRandomFaceTexObWithFolloingAttributes(npc_race_id);
-        	Npc* npc = new Npc(npc_race_id, npc_subtype_id, texOb_npc);
+        	Npc* npc = generateNpc(npc_race_id, npc_subtype_id);
 
         	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[getRandInt(0, RACES_ALL_LIST.size())];
         	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];

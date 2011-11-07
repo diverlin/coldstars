@@ -163,7 +163,7 @@ void InterfaceInKosmoport :: mouseInteraction()
 		   			{
        						//pPLAYER->getPilot()->createLaunchingSequence(); 
        						//pPLAYER->getPilot()->setPlaceTypeId(SPACE_ID);
-       						pPLAYER->getPilot()->launchingEvent();
+       						pPLAYER->getShip()->launchingEvent();
        			   		}
        				}
        				break;

@@ -29,6 +29,9 @@ TargetObject :: ~TargetObject()
 {}
 
 
+void TargetObject :: bindSlot(ItemSlot* _slot) { slot = _slot; }
+                
+                
 StarSystem* TargetObject :: getStarSystem() { return starsystem; }
 bool TargetObject :: getValid() const     { return is_valid; }
 int TargetObject :: getObId() const       { return ob_id; }
@@ -84,41 +87,62 @@ void TargetObject :: reset()
 }
 
       
-
-void TargetObject :: validation(vec2f _point0)
+void TargetObject :: externalManipulation(vec2f _target_pos)
 {
-        if (is_valid == true)
-        {
-                if ( (*pTo_is_alive == false) or (*pTo_place_type_id != SPACE_ID) or (starsystem != slot->getShip()->getStarSystem()) )
-                {
-                        reset();                        
-                        return;
-                }
-                else
-                {
-                        if (checkDistance(_point0) == false)
-                        {
-                                reset();
-                                return;
-                        }
-                        else
-                        {
-                                return;
-                        }
-                } 
-        }
+	if (ob_type_id == MINERAL_ID)
+	{
+		mineral->externalManipulation(_target_pos);
+	}
+	
+	if (ob_type_id == CONTAINER_ID)
+	{
+		container->externalManipulation(_target_pos);
+	}
 }
 
 
-bool TargetObject :: checkDistance(vec2f _point0)
+bool TargetObject :: checkAvaliability()
 {
-        float dist = distBetweenCenters(_point0, *pCenter);                                               
+        if (*pTo_is_alive == true) 
+        {
+                if (*pTo_place_type_id == SPACE_ID)
+                { 
+                        if (starsystem == slot->getShip()->getStarSystem()) 
+                        {       
+                                return true;
+                        }
+                        else return false;
+                }
+                else return false;
+        }
+        else return false;
+}
+
+
+bool TargetObject :: checkDistance()
+{
+        float dist = distBetweenCenters(slot->getShip()->getPoints()->getCenter(), *pCenter);                                               
     	if (dist < slot->getItemRadius())
         {
                 return true;
         }
-        else
-        {
-                return false;
+        else return false;
+}
+
+
+void TargetObject :: validation()
+{
+        
+        if (is_valid == true)
+        { 
+                if ( checkAvaliability() == true)
+                {
+                        if (checkDistance() == true)
+                        {
+                                return;
+                        }
+                }
+                
+                reset();
         }
 }

@@ -50,11 +50,11 @@ void  Navigator :: removeTarget()
     	pTo_target_pos = NULL;
 }
       
-void Navigator :: setStaticTargetCoords(vec2f _target_pos)
+void Navigator :: setStaticTargetCoords(vec2f _target_pos, float _offset)
 {    
     	removeTarget();
-    	
-        target_pos = _target_pos;
+        
+    	target_pos.set(_target_pos.x - _offset, _target_pos.y - _offset);
        	calcDetaledWay();
 }
       

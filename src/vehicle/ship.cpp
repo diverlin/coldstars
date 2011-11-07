@@ -24,10 +24,10 @@ void Ship :: setPlaceTypeId(int _place_type_id)     { place_type_id = _place_typ
 int Ship :: getId() const           { return data_id.id; }
 int Ship :: getTypeId() const       { return data_id.type_id; }
 int Ship :: getPlaceTypeId() const  { return place_type_id; } 
-bool Ship :: getAlive() const { return data_life.is_alive; }
-bool* Ship :: getpAlive()     { return &data_life.is_alive; }
-int* Ship :: getpPlaceTypeId()    { return &place_type_id; }
-int Ship :: getArmor() const  { return data_life.armor; }
+bool Ship :: getAlive() const       { return data_life.is_alive; }
+bool* Ship :: getpAlive()           { return &data_life.is_alive; }
+int* Ship :: getpPlaceTypeId()      { return &place_type_id; }
+int Ship :: getArmor() const        { return data_life.armor; }
 
 Points* Ship :: getPoints() 	    { return &points; }
 Navigator* Ship :: getNavigator()   { return navigator; }
@@ -525,21 +525,20 @@ void Ship :: update_inSpace_inDynamic_FALSE()
 
 
 //// ******** DOCKING/LAUNCHING ******** 
-bool Ship :: jumpingEvent()
+bool Ship :: jumpEvent()
 {
-        printf("ship id = %i, jumpingEvent()\n", data_id.id);
         starsystem->removeShip(data_id.id);  
         starsystem->removeNpc(npc_owner->getId(), npc_owner->getSubTypeId());  
                                                         
         navigator->getTargetStarSystem()->addToHyperJumpQueue(npc_owner);        
+        navigator->removeTarget();
         
         return true;
 }
                 
                 
-bool Ship :: dockingEvent()
+bool Ship :: dockEvent()
 {
-     	printf("ship id = %i, dockingEvent()\n", data_id.id);
      	starsystem->removeShip(data_id.id);
      	starsystem->removeNpc(npc_owner->getId(), npc_owner->getSubTypeId());
         
@@ -1093,6 +1092,11 @@ void Ship :: updateRenderStuff()
 
 void Ship :: render_inSpace() const
 {   
+        if (ableTo.GRAB == true)
+        {
+                renderGrappleTrail();
+        }
+        
     	renderKorpus();
     	
     	if (data_korpus.render_TURRELS == true)
@@ -1121,6 +1125,34 @@ void Ship :: render_atPlanet() const
         	renderTurrels();
         }
 }		
+
+void Ship :: renderGrappleTrail() const
+{
+        for (unsigned int i = 0; i<grapple_slot.getGrappleEquipment()->target_vec.size(); i++)
+        {
+                if (grapple_slot.getGrappleEquipment()->target_vec[i]->getValid() == true)
+                {
+                        //printf("renderrrrr\n");
+                
+                    	float xl = grapple_slot.getGrappleEquipment()->target_vec[i]->getpCenter()->x - points.getCenter().x;
+                        float yl = grapple_slot.getGrappleEquipment()->target_vec[i]->getpCenter()->y - points.getCenter().y;
+
+                        float len = sqrt((xl*xl) + (yl*yl));
+
+                        float angle_inR = atan2(yl, xl);
+
+                        float angle_inD = angle_inR * RADIAN_TO_DEGREE_RATE;
+        
+                        drawLine(g_UNIQUE_TEXTURE_COLLECTOR.texOb_grapple_trail->texture, 
+                                points.getCenter().x, 
+                                points.getCenter().y, 
+                                points.getPosZ(), 
+                                len, 
+                                angle_inD, 
+                                8);
+                }
+        }
+}
 		
 void Ship :: renderKorpus() const
 {

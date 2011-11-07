@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Asteroid : public CommonForPlanet
 {
 	public:
-		Asteroid(TextureOb* _pTo_texOb,
+		Asteroid(TextureOb* _texOb,
 		         ObjMeshInstance* _mesh,
 		         PlanetData _planet_data);
 		     
