@@ -16,18 +16,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-//bool selfcareGenerator(Npc* npc)
+//bool mineralCollecting(Npc* npc)
 //{
-	//if ( (npc->needsToDo.REPAIR_KORPUS == true) and (npc->getSelfCareOb()->getActionId() != LANDING_TASK_ID) )
-	//{
-        	//Planet* _target_planet = npc->getPlanetForDocking();  // depending on purpouse
-		//npc->getSelfCareOb()->setTask(_target_planet, LANDING_TASK_ID);
-		
-		//return true;
-	//}
-	
-	//return false;
+        //StarSystem* taret_starsystem = npc->getStarSystem();
+        //npc->getQuestOb()->setTask(taret_starsystem, GRABBING_GOODS_QUEST_ID);
+
+        //return true;        
 //}
 
 
@@ -57,7 +51,7 @@ bool destroyShipQuestGenerator(Npc* npc)
 	{
 		if (npc->getId() != target_npc->getId())
 		{
-			npc->getQuestOb()->setTask(target_npc, DESTROY_SHIP_QEST_ID);
+			npc->getQuestOb()->setTask(target_npc, DESTROY_SHIP_QUEST_ID);
 			return true;
 		}
 	}
@@ -81,7 +75,7 @@ bool questEvilGenerator(Npc* npc)
 	{
 		if (npc->getId() != target_npc->getId())
 		{
-			npc->getQuestOb()->setTask(target_npc, DESTROY_SHIP_QEST_ID);
+			npc->getQuestOb()->setTask(target_npc, DESTROY_SHIP_QUEST_ID);
 			return true;
 		}
 	}

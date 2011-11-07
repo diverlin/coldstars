@@ -27,7 +27,7 @@ class Navigator
       		Navigator(Ship* _ship);
       		~Navigator();
       
-      		void setStaticTargetCoords(vec2f _target_pos);
+      		void setStaticTargetCoords(vec2f _target_pos, float _offset = 0.0);
       
       		void setTarget(Planet*); 
       		void setTarget(Ship*, float);    

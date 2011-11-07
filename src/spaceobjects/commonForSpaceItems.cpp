@@ -29,6 +29,8 @@ void CommonForSpaceItems :: CommonForSpaceItems_init(IdData _data_id, LifeData _
    	calcRenderConstants();
      
     	collision_radius = (texOb->w + texOb->h)/2;
+    	
+    	data_id = _data_id;
 
     	//////
     	points.initCenterPoint();
@@ -56,6 +58,12 @@ StarSystem* CommonForSpaceItems :: getStarSystem() { return starsystem; }
 int CommonForSpaceItems :: getCollisionRadius() const {return collision_radius; }	
 
 
+void CommonForSpaceItems :: externalManipulation(vec2f _target)
+{
+        get_dX_dY_ToPoint(points.getCenter().x, points.getCenter().y, _target.x, _target.y, velocity, &d_pos.x, &d_pos.y);
+        points.setCenter(points.getCenter().x + d_pos.x, points.getCenter().y + d_pos.y);
+}
+            	
 
 void CommonForSpaceItems :: update_inSpace_inDynamic_TRUE()
 {
@@ -84,6 +92,7 @@ void CommonForSpaceItems :: update_inSpace_inDynamic_FALSE()
 
 void CommonForSpaceItems :: hit_TRUE(int _damage)
 {
+	printf("id =%i, hiiiiiiiiiiiiiiiit\n", data_id.id);
     	data_life.armor -= _damage;
     	if (data_life.armor <= 0)
     	{

@@ -119,8 +119,8 @@ class Ship
         	void setMaxArmor();
         	void setMaxFuel();
 
-        	bool jumpingEvent();
-        	bool dockingEvent();
+        	bool jumpEvent();
+        	bool dockEvent();
         	bool launchingEvent();
 
 		void updateRenderStuff();
@@ -158,6 +158,7 @@ class Ship
 		void updateInfo();
              	std::string returnProtectionStr();	
              		
+                void renderGrappleTrail() const;
 		void renderKorpus() const;
              	void renderTurrels() const;
              	void renderDriveTrail() const;

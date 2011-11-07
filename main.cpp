@@ -73,7 +73,10 @@ int main()
            		//////////// in SPACE ///////////////
            		keyEvents.update();
 
-       			g_GALAXY->update(g_TIMER);
+			for (int i = 0; i < g_GAMESPEED; i++)  // fakse
+			{
+       				g_GALAXY->update(g_TIMER);
+       			}
 
            		pPLAYER->getStarSystem()->render(); 
                         
@@ -112,7 +115,7 @@ int main()
            		{
                			pPLAYER->getPilot()->getKosmoport()->getAngar()->update();                                
                			pPLAYER->getPilot()->getKosmoport()->getAngar()->render();
-               			
+
                                 if (pPLAYER->getScanFlag() == true) 
                                 { 
                                         g_SHIP_GUI->update();

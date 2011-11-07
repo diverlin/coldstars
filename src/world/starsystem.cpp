@@ -1352,9 +1352,7 @@ void StarSystem :: addToHyperJumpQueue(Npc* _npc)
 void StarSystem :: postHyperJumpEvent()
 {
         for (unsigned int i = 0; i<NPC_appear_vec.size(); i++)
-        {
-                NPC_appear_vec[i]->setDoNothing();
-                
+        {               
                 moveToSpace(NPC_appear_vec[i]);
                 moveToSpace(NPC_appear_vec[i]->getShip());                
         }

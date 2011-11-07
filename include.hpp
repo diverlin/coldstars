@@ -19,6 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Ship;      
 class Npc;   
+class Observation;
 class StarSystem;
 class ItemSlot;   
 class Turrel;       
@@ -68,6 +69,14 @@ class Turrel;
 #include "src/modules/scanerModule.hpp"
 #include "src/modules/grappleModule.hpp"
 
+#include "src/spaceobjects/commonForSpaceItems.hpp" 
+#include "src/spaceobjects/commonForPlanet.hpp" 
+#include "src/spaceobjects/asteroid.hpp"
+#include "src/spaceobjects/mineral.hpp"
+#include "src/spaceobjects/container.hpp"
+
+#include "src/pilots/targetObject.hpp" 
+
 
 #include "src/equipment/commonforequipment.hpp"
 #include "src/equipment/rocketEquipment.hpp"
@@ -108,23 +117,15 @@ class Turrel;
 #include "src/effects/particlesystem/trail.hpp"
 #include "src/effects/particlesystem/damage.hpp"
 
-#include "src/spaceobjects/commonForSpaceItems.hpp" 
-
 #include "src/effects/shield.hpp"  
+
 #include "src/spaceobjects/rocketBullet.hpp"
 #include "src/effects/lazerTrace.hpp"
 
 
-
-
-#include "src/spaceobjects/commonForPlanet.hpp" 
 #include "src/spaceobjects/star.hpp"  
 #include "src/spaceobjects/planet.hpp"
-#include "src/spaceobjects/asteroid.hpp"
-#include "src/spaceobjects/mineral.hpp"
-#include "src/spaceobjects/container.hpp"
 
-#include "src/pilots/targetObject.hpp" 
 #include "src/vehicle/turrel.hpp"
 
 #include "src/vehicle/itemSlot.hpp"
@@ -135,6 +136,7 @@ class Turrel;
 #include "src/pilots/questObject.hpp"  
 #include "src/pilots/questGenerator.hpp" 
 #include "src/pilots/npc.hpp"              
+#include "src/pilots/observation.hpp" 
 
 #include "src/gui/button.hpp"
 #include "src/gui/interfaceinspace.hpp"
@@ -250,6 +252,7 @@ class Turrel;
 #include "src/pilots/targetObject.cpp"  
 #include "src/pilots/questGenerator.cpp" 
 #include "src/pilots/npc.cpp"
+#include "src/pilots/observation.cpp" 
 
 #include "src/common/common.cpp"
 //#include "src/resources/model_obj.cpp"

@@ -34,17 +34,22 @@ class GrappleEquipment : public CommonForEquipment
 				 
       		~GrappleEquipment();
 
+                void reshapeTargetObSlot(ItemSlot*);
+                
 		int getStrength()   const;
 		int getRadius()     const;
 		int getSpeed()      const;
 		int getMaxNumItem() const;
 
       		bool insertModule(GrappleModule*);
+                
+                template <typename TARGET_TYPE>
+                void add(TARGET_TYPE* target);
+                
+                void validationTargets();
+                std::vector<TargetObject*> target_vec;
       		
       	private:
-      	      	//grapple_list = []
-      		//grapple_remove_queue = []
-
       		int strength_orig;
       		int strength_add;
       		int strength;

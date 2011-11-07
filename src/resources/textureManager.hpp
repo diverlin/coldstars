@@ -31,7 +31,8 @@ struct UniqueTextureCollector
 	TextureOb* texOb_icon_plus;	
 	TextureOb* texOb_skill;	
 
-	TextureOb* texOb_icon_map;	
+	TextureOb* texOb_icon_map;
+        TextureOb* texOb_grapple_trail;	
 };
 
 class TextureManager
