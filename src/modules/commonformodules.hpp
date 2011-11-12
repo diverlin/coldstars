@@ -30,8 +30,8 @@ class CommonForModules
       		
       		// accessors
       		unsigned int getId()      const;
-    		unsigned int getType()    const;
-    		unsigned int getSubType() const;
+    		unsigned int getTypeId()    const;
+    		unsigned int getSubTypeId() const;
     		unsigned int getMass() const;
     		TextureOb* getTexOb() const;
 
@@ -57,8 +57,7 @@ class CommonForModules
                 InfoTable info;  	
      		
      		void addCommonInfo();
- 		void virtual addUniqueInfo();
-                
+ 		void virtual addUniqueInfo();              
                 
 };
 

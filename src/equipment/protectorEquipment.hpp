@@ -34,6 +34,7 @@ class ProtectorEquipment  : public CommonForEquipment
 		int getProtection() const;
 		
       		bool insertModule(ProtectorModule*);
+      		void virtual updateOwnerPropetries();
       		
       	private:
       	      	int protection_orig;
@@ -44,7 +45,7 @@ class ProtectorEquipment  : public CommonForEquipment
       		
       		void countPrice();
       		void updatePropetries();
-      		void virtual updateOwnerPropetries();
+
 
      		void virtual addUniqueInfo();
            	std::string getProtectionStr();

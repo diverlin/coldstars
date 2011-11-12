@@ -63,8 +63,8 @@ const int STAR_SIZE_MIN = 80;
 const int STAR_SIZE_MAX = 120;
 
 // SHIP
-const int SHIP_PER_SYSTEM_MIN = 4;
-const int SHIP_PER_SYSTEM_MAX = 5;
+const int SHIP_PER_SYSTEM_MIN = 1;
+const int SHIP_PER_SYSTEM_MAX = 1;
 const int ENEMY_SHIP_PER_SYSTEM_MIN = 20;
 const int ENEMY_SHIP_PER_SYSTEM_MAX = 30;
 
@@ -328,7 +328,7 @@ const int PLANET_ID          = g_TYPE_ID_GENERATOR.getNextId("PLANET_ID");
 const int KOSMOPORT_ID       = g_TYPE_ID_GENERATOR.getNextId("KOSMOPORT_ID");  
 const int LAND_ID     = g_TYPE_ID_GENERATOR.getNextId("LAND_ID");  
 
-//const int GOODS_ID     = g_TYPE_ID_GENERATOR.getNextId("GOODS_ID");
+const int GOODS_ID     = g_TYPE_ID_GENERATOR.getNextId("GOODS_ID");
 const int MINERAL_ID   = g_TYPE_ID_GENERATOR.getNextId("MINERAL_ID");
 
 const int PLANET_EARTH_SURFACE_ID = g_TYPE_ID_GENERATOR.getNextId("PLANET_EARTH_SURFACE_ID");
@@ -358,7 +358,7 @@ const int SELFCARE_TASK_ID               = g_TYPE_ID_GENERATOR.getNextId("SELFCA
 //const int LAUNCHING_task_id              = g_TYPE_ID_GENERATOR.getNextId("LAUNCHING_task_id");
 const int LANDING_TASK_ID               = g_TYPE_ID_GENERATOR.getNextId("LANDING_TASK_ID");
 const int GRABBING_TASK_ID              = g_TYPE_ID_GENERATOR.getNextId("GRABBING_TASK_ID");
-//const int GRABBING_CONTAINER_task_id     = g_TYPE_ID_GENERATOR.getNextId("GRABBING_CONTAINER_task_id");
+//const int GRABBING_GOODS_ID_task_id     = g_TYPE_ID_GENERATOR.getNextId("GRABBING_CONTAINER_task_id");
 
 //const int REPAIR_NEEDED_id               = g_TYPE_ID_GENERATOR.getNextId("REPAIR_NEEDED_id");
 //const int FUEL_NEEDED_id                 = g_TYPE_ID_GENERATOR.getNextId("FUEL_NEEDED_id");

@@ -49,7 +49,7 @@ int Button :: getSubTypeId() const     { return subtype_id; }
 
 bool Button :: interaction(int _x, int _y)
 {        
-    	float dist = distBetweenCenters(rect.getCenter().x, rect.getCenter().y, _x, _y);
+    	float dist = distBetweenPoints(rect.getCenter().x, rect.getCenter().y, _x, _y);
     	if (dist < rect.getWidth()/2)
         	return true;
     	else

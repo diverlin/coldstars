@@ -25,7 +25,7 @@ RadarEquipment :: RadarEquipment(TextureOb* _texOb_item,
 				 int _radius_orig, 
 				 EquipmentCommonData _common_data)
 {
-   	CommonForEquipment_init(RADAR_ID, _texOb_item, _common_data);
+   	CommonForEquipment_init(RADAR_ID, RADAR_ID, _texOb_item, _common_data);
 
     	radius_orig = _radius_orig;
     	radius_add  = 0;
@@ -70,7 +70,7 @@ void RadarEquipment :: countPrice()
 
 void RadarEquipment :: updateOwnerPropetries()
 {
-	slot->getShip()->updateRadarAbility();
+	slot->getOwnerShip()->updateRadarAbility();
 }
       
 

@@ -30,8 +30,8 @@ class ItemSlot
                 
                 void bindTurrel(Turrel*);
                                 
-                int getType()        const;
-                int getSubType()     const;
+                int getTypeId()        const;
+                int getSubTypeId()     const;
                 int getItemTypeId()    const;
                 int getItemSubTypeId() const;
                 
@@ -44,7 +44,7 @@ class ItemSlot
                 void setFlashingStatus(bool new_status);
                       
                 Rect& getRect();
-                Ship* getShip();
+                Ship* getOwnerShip();
                 
                 RocketEquipment*    getRocketEquipment()    const;
                 LazerEquipment*     getLazerEquipment()     const;
@@ -77,31 +77,14 @@ class ItemSlot
                 int getItemRadius() const;
                 int getItemCondition() const;
                 
-		bool insertItem(RocketEquipment* item);
-		bool insertItem(LazerEquipment* item);
+		template <typename EQUIPMENT_TYPE>
+		bool insertEquipment(EQUIPMENT_TYPE*);
         
-		bool insertItem(RadarEquipment* item);
-		bool insertItem(DriveEquipment* item);
-		bool insertItem(BakEquipment* item);
-		bool insertItem(EnergizerEquipment* item);
-		bool insertItem(ProtectorEquipment* item);
-		bool insertItem(DroidEquipment* item);
-		bool insertItem(FreezerEquipment* item);
-		bool insertItem(ScanerEquipment* item);
-		bool insertItem(GrappleEquipment* item);
-        
-		bool insertItem(RocketModule* item);
-		bool insertItem(LazerModule* item);
-		bool insertItem(RadarModule* item);
-		bool insertItem(DriveModule* item);
-		bool insertItem(BakModule* item);
-		bool insertItem(EnergizerModule* item);
-		bool insertItem(ProtectorModule* item);
-		bool insertItem(DroidModule* item);
-		bool insertItem(FreezerModule* item);
-		bool insertItem(ScanerModule* item);
-		bool insertItem(GrappleModule* item);
-                
+		template <typename MODULE_TYPE>
+		bool insertModule(MODULE_TYPE*);
+
+		bool insertGoods(GoodsPack* item);
+		                
 		void removeItem();
                 
 		void renderFrame(GLuint flash_tex);
@@ -127,8 +110,8 @@ class ItemSlot
                 
                 Rect rect;
                                 
-                Ship* ship;                        
-                Turrel* turrel;
+                Ship* owner_ship;  // reference to the ship_owenr                
+                Turrel* turrel;    // only for weapons slot
                 
                 RocketEquipment*    rocket_equipment;
                 LazerEquipment*     lazer_equipment;
@@ -154,6 +137,32 @@ class ItemSlot
 		ScanerModule*    scaner_module;
 		GrappleModule*   grapple_module;
 		
+		GoodsPack* goods_pack;
+		
+		void insert(RocketEquipment*);
+		void insert(LazerEquipment*);        
+		void insert(RadarEquipment*);
+		void insert(DriveEquipment*);
+		void insert(BakEquipment*);
+		void insert(EnergizerEquipment*);
+		void insert(ProtectorEquipment*);
+		void insert(DroidEquipment*);
+		void insert(FreezerEquipment*);
+		void insert(ScanerEquipment*);
+		void insert(GrappleEquipment*);
+				
+		void insert(RocketModule*);
+		void insert(LazerModule*);
+		void insert(RadarModule*);
+		void insert(DriveModule*);
+		void insert(BakModule*);
+		void insert(EnergizerModule*);
+		void insert(ProtectorModule*);
+		void insert(DroidModule*);
+		void insert(FreezerModule*);
+		void insert(ScanerModule*);
+		void insert(GrappleModule*);
+
 		void resetFlags();
 }; 
 

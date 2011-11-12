@@ -25,13 +25,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Container : public CommonForSpaceItems
 {
     	public:                  
-                ItemSlot* otsec_slot;
-
-        	Container();
         	Container(IdData _data_id, LifeData _data_life, TextureOb* _texOb, vec2f _start_pos);
         	~Container();
+        	
+        	ItemSlot* getItemSlot();
         
         	void renderInfo();
+        	
+        private:
+                ItemSlot* item_slot;        
 };
 
 Container* createContainer(vec2f);

@@ -17,47 +17,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-void initGameData()
-{
-	prepearGlobalVecs();
+
+void loadGameData()
+{    	
+    	g_FONT.LoadFromFile("data/font/font.ttf");
+
 	load3DModels();
     	loadImages();
 	if (g_USE_MODERN_HW == true)
 	{
 		loadShaders();
-		prepearPostProcess();
 	}
-}
-
-
-void prepearGlobalVecs()
-{
-    	RACES_ALL_LIST.push_back(RACE_0_ID);
-    	RACES_ALL_LIST.push_back(RACE_1_ID);
-    	RACES_ALL_LIST.push_back(RACE_2_ID);
-    	RACES_ALL_LIST.push_back(RACE_3_ID);
-    	RACES_ALL_LIST.push_back(RACE_4_ID);
-   	RACES_ALL_LIST.push_back(RACE_6_ID);
-    	RACES_ALL_LIST.push_back(RACE_7_ID);
-
-    	RACES_GOOD_LIST.push_back(RACE_0_ID);
-    	RACES_GOOD_LIST.push_back(RACE_1_ID);
-   	RACES_GOOD_LIST.push_back(RACE_2_ID);
-    	RACES_GOOD_LIST.push_back(RACE_3_ID);
-    	RACES_GOOD_LIST.push_back(RACE_4_ID);
-
-    	RACES_EVIL_LIST.push_back(RACE_6_ID);
-    	RACES_EVIL_LIST.push_back(RACE_7_ID);
-
-    	SHIP_SUBTYPE_LIST.push_back(RANGER_ID);
-    	SHIP_SUBTYPE_LIST.push_back(WARRIOR_ID);
-    	SHIP_SUBTYPE_LIST.push_back(PIRAT_ID);
-    	SHIP_SUBTYPE_LIST.push_back(TRADER_ID);
-   	SHIP_SUBTYPE_LIST.push_back(DIPLOMAT_ID);
-            
-    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(WARRIOR_ID);
-    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(TRADER_ID);
-    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(DIPLOMAT_ID);    	
 }
 
 
@@ -967,39 +937,6 @@ g_TEXTURE_MANAGER.manage( new TextureOb(TEXT_BACKGROUND_TEXTURE_ID, "data/other/
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-void prepearPostProcess()
-{
-	int w = g_VIEW_WIDTH;
-	int h = g_VIEW_HEIGHT;
-
-	g_FBO0 = new FBO(w,h);
-	g_FBO1 = new FBO(w,h);	
-	g_FBO2 = new FBO(w,h);
-	g_FBO3 = new FBO(w,h);
-	g_BLOOM = new BloomEffect(w, h, g_BLUR_PROGRAM, g_EXTRACT_BRIGHT_PROGRAM, g_COMBINE_PROGRAM, 1, 1);
-}
-
-
-
-
-
-
-
-
-
-
 
 
 

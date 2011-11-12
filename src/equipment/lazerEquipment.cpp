@@ -22,7 +22,7 @@ LazerEquipment :: LazerEquipment(TextureOb* _texOb_item,
 				 int _radius_orig, 
 				 EquipmentCommonData _common_data)
 {
-   	CommonForEquipment_init(LAZER_ID, _texOb_item, _common_data);
+   	CommonForEquipment_init(LAZER_ID, WEAPON_SLOT_ID, _texOb_item, _common_data);
 
    	damage_orig = _damage_orig;
    	damage_add  = 0;
@@ -79,7 +79,7 @@ void LazerEquipment :: countPrice()
     
 void LazerEquipment :: updateOwnerPropetries()
 { 
-    	slot->getShip()->updateFireAbility();
+    	slot->getOwnerShip()->updateFireAbility();
 }
 
 
@@ -128,7 +128,7 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
 
     	// LAZER TRACE EFFECT
     	LazerTraceEffect* _lazer_trace_effect;
-    	if (slot->getShip()->data_korpus.render_TURRELS == true)
+    	if (slot->getOwnerShip()->data_korpus.render_TURRELS == true)
     	{
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
                                                       	      texOb_particle, 
@@ -143,8 +143,8 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
                                                               texOb_particle, 
                                                               100, 
-                                                              &(slot->getShip()->getPoints()->getpCenter()->x), 
-                                                              &(slot->getShip()->getPoints()->getpCenter()->y), 
+                                                              &(slot->getOwnerShip()->getPoints()->getpCenter()->x), 
+                                                              &(slot->getOwnerShip()->getPoints()->getpCenter()->y), 
                                                               &_turrel->getTargetOb()->getpCenter()->x, 
                                                               &_turrel->getTargetOb()->getpCenter()->y);
         }
@@ -155,8 +155,8 @@ void LazerEquipment :: fireEvent(Turrel* _turrel)
     	
     	deterioration();
     	
-    	slot->getShip()->getStarSystem()->add(_lazer_trace_effect);
-    	slot->getShip()->getStarSystem()->add(_damage_effect);
+    	slot->getOwnerShip()->getStarSystem()->add(_lazer_trace_effect);
+    	slot->getOwnerShip()->getStarSystem()->add(_damage_effect);
 } 
 
 

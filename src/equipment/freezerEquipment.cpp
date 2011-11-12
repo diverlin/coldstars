@@ -24,7 +24,7 @@ FreezerEquipment :: FreezerEquipment(TextureOb* _texOb_item,
 				     int _freeze_orig, 
 				     EquipmentCommonData _common_data)
 {
-    	CommonForEquipment_init(FREEZER_ID, _texOb_item, _common_data);
+    	CommonForEquipment_init(FREEZER_ID, FREEZER_ID, _texOb_item, _common_data);
 
     	freeze_orig = _freeze_orig;
     	freeze_add  = 0;
@@ -67,7 +67,7 @@ void FreezerEquipment :: countPrice()
 
 void FreezerEquipment :: updateOwnerPropetries()
 {
-    	slot->getShip()->updateFreezeAbility();
+    	slot->getOwnerShip()->updateFreezeAbility();
 }
 
       

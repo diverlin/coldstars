@@ -18,49 +18,68 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-Container :: Container(IdData _data_id, LifeData _data_life, TextureOb* _texOb, vec2f _start_pos)
+GoodsPack :: GoodsPack(IdData _data_id, LifeData _data_life, TextureOb* _texOb, vec2f _start_pos)
 {
     	CommonForSpaceItems_init(_data_id, _data_life, _texOb, _start_pos);
         
-    	mass = 1;
+        mineral  = 0;
+        food     = 0;
+        medicine = 0;
+        military = 0;
+        drug     = 0;
+        	
+    	mass = 0;
 
-    	TextureOb* pTo_slotTexOb   = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.slot_texOb_pList);
-    	item_slot = new ItemSlot(UNIVERSAL_SLOT_ID, NULL, pTo_slotTexOb, 0, 0);
-    	
     	velocity = getRandInt(40, 42) / 100.0;
 }
 
 
-Container :: ~Container()
-{
-	delete item_slot;
-}
+GoodsPack :: ~GoodsPack()
+{}
 
 
-ItemSlot* Container :: getItemSlot() { return item_slot; }
+TextureOb* GoodsPack :: getTexOb() { return texOb; }        	
         	
-void Container :: renderInfo()
+void GoodsPack :: increase(unsigned int _ammount)
 {
-     	item_slot->getRect().setNewCenter(points.getCenter());	
-     	item_slot->renderItemInfo(g_SCROLL_COORD_X, g_SCROLL_COORD_Y);
+	if (data_id.subtype_id == MINERAL_ID)
+	{
+		mineral += _ammount;
+		mass = mineral;
+	}
+}
+    
+void GoodsPack :: decrease(unsigned int _ammount)
+{
+	if (data_id.subtype_id == MINERAL_ID)
+	{
+		mineral -= _ammount;
+		mass = mineral;
+	}
+}
+                
+void GoodsPack :: renderInfo()
+{
+     	//otsec_slot->getRect().setNewCenter(points.getCenter());	
+     	//otsec_slot->renderItemInfo(g_SCROLL_COORD_X, g_SCROLL_COORD_Y);
 }
 
  
 
 
-Container* createContainer(vec2f start_pos)
+GoodsPack* createGoodsPack(unsigned int _subtype_id, vec2f start_pos)
 {
         IdData data_id;
         data_id.id = g_CONTAINER_ID_GENERATOR.getNextId(); 
-        data_id.type_id = CONTAINER_ID;
-        
+        data_id.type_id = GOODS_ID;
+        data_id.subtype_id = _subtype_id;
+                
         LifeData data_life;
         data_life.armor = getRandInt(1,6);
-        data_life.dying_time = 30;
-        
+        data_life.dying_time = 30;        
         
 	TextureOb* texOb_container = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.container_texOb_pList); 
-	Container* container = new Container(data_id, data_life, texOb_container, start_pos);
+	GoodsPack* goodsPack = new GoodsPack(data_id, data_life, texOb_container, start_pos);
 	
-	return container;
+	return goodsPack;
 }

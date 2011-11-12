@@ -23,7 +23,7 @@ ItemSlot :: ItemSlot()
 {}
 
 
-ItemSlot :: ItemSlot(int _subtype_id, Ship* _ship, TextureOb* _texOb, int _pos_x, int _pos_y)
+ItemSlot :: ItemSlot(int _subtype_id, Ship* _owner_ship, TextureOb* _texOb, int _pos_x, int _pos_y)
 {
 /* 
         The class provides implementation to insert/hold/remove all game items (equipments, modules and so on)
@@ -34,7 +34,7 @@ ItemSlot :: ItemSlot(int _subtype_id, Ship* _ship, TextureOb* _texOb, int _pos_x
         type_id    = SLOT_ID;
 	subtype_id = _subtype_id;
         
-        ship  = _ship; 
+        owner_ship  = _owner_ship; 
         turrel = NULL;
 
         texOb = _texOb;
@@ -43,8 +43,8 @@ ItemSlot :: ItemSlot(int _subtype_id, Ship* _ship, TextureOb* _texOb, int _pos_x
      
         rect = Rect(_pos_x, _pos_y, w, h);         // create rect with size of the texture
 
-        item_type_id    = -1;
-        item_subtype_id = -1;
+        item_type_id    = NONE_ID;
+        item_subtype_id = NONE_ID;
      
         is_EQUIPED       = false;
         is_FLASHING      = false;
@@ -167,12 +167,17 @@ ItemSlot :: ~ItemSlot()
 		{
     			delete grapple_module;
     		}
-    	}    		
+    	}    
+    	
+    	if (item_type_id == GOODS_ID)
+    	{
+		delete goods_pack;
+	}
 }
 
 
-int ItemSlot :: getType()        const { return type_id; }
-int ItemSlot :: getSubType()     const { return subtype_id; }
+int ItemSlot :: getTypeId()          const { return type_id; }
+int ItemSlot :: getSubTypeId()       const { return subtype_id; }
 int ItemSlot :: getItemTypeId()    const { return item_type_id; }
 int ItemSlot :: getItemSubTypeId() const { return item_subtype_id; }
 
@@ -187,7 +192,7 @@ void ItemSlot :: setFlashingStatus(bool new_status) { is_FLASHING = new_status; 
                 
 Rect& ItemSlot :: getRect() { return rect; }
 
-Ship* ItemSlot :: getShip() { return ship; }
+Ship* ItemSlot :: getOwnerShip() { return owner_ship; }
                                 
 RocketEquipment*    ItemSlot :: getRocketEquipment()    const { return rocket_equipment; }
 LazerEquipment*     ItemSlot :: getLazerEquipment()     const { return lazer_equipment; }
@@ -200,6 +205,7 @@ DroidEquipment*     ItemSlot :: getDroidEquipment()     const { return droid_equ
 FreezerEquipment*   ItemSlot :: getFreezerEquipment()   const { return freezer_equipment; }
 ScanerEquipment*    ItemSlot :: getScanerEquipment()    const { return scaner_equipment; }
 GrappleEquipment*   ItemSlot :: getGrappleEquipment()   const { return grapple_equipment; }
+
 RocketModule*       ItemSlot :: getRocketModule()       const { return rocket_module; }
 LazerModule*        ItemSlot :: getLazerModule()        const { return lazer_module; }
 RadarModule*        ItemSlot :: getRadarModule()        const { return radar_module; }
@@ -213,387 +219,41 @@ ScanerModule*       ItemSlot :: getScanerModule()       const { return scaner_mo
 GrappleModule*      ItemSlot :: getGrappleModule()      const { return grapple_module; }
 
 
-bool ItemSlot :: insertItem(RocketEquipment* item)
+
+template<typename EQUIPMENT_TYPE>
+bool ItemSlot :: insertEquipment(EQUIPMENT_TYPE* equipment)
 {
-	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == WEAPON_SLOT_ID))
+	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == equipment->getFunctionalSlotSubtypeId()))
 	{
-		rocket_equipment = item;
+		insert(equipment);
     
-        	item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();  
+		item_type_id    = equipment->getTypeId();
+		item_subtype_id = equipment->getSubTypeId(); 
 	
 		is_EQUIPED = true; 
    
-		if (subtype_id == WEAPON_SLOT_ID)
+		if (subtype_id == equipment->getFunctionalSlotSubtypeId())
 		{
-			ship->updateFireAbility();
-		}
-                
-                if (ship != NULL)
-                {
-                        item->bindSlot(this);
-                }
-
-		return true;
-	}
-	else
-		return false;
-	
-}
-
-bool ItemSlot :: insertItem(LazerEquipment* item)
-{
-	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == WEAPON_SLOT_ID))
-	{	
-		lazer_equipment = item;
-    
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
-	          
-		is_EQUIPED = true;
-    
-		if (subtype_id == WEAPON_SLOT_ID)
-		{
-			ship->updateFireAbility();
-		}
-	
-                if (ship != NULL)
-                {
-                        item->bindSlot(this);
-                }
-                
-		return true;
-	}
-	else
-		return false;
-}
-
-bool ItemSlot :: insertItem(RadarEquipment* item)
-{
-	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == RADAR_ID))
-	{	
-		radar_equipment = item;
-    
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
-	 
-		is_EQUIPED = true; 
-    
-		if (subtype_id == RADAR_ID)
-		{
-			ship->updateRadarAbility();
-		}
-    	
-                if (ship != NULL)
-                {
-                        item->bindSlot(this);
-                }
-                
-		return true;
-	}
-	else
-		return false;
-}
-
-bool ItemSlot :: insertItem(DriveEquipment* item)
-{
-	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == DRIVE_ID))
-	{	
-		drive_equipment = item;
-   
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
-	  
-		is_EQUIPED = true; 
-    
-		if (subtype_id == DRIVE_ID)
-		{
-			ship->updateDriveAbility();
-			ship->updateJumpAbility();
+			equipment->bindSlot(this);
+			equipment->updateOwnerPropetries();
 		}
 
-                if (ship != NULL)
-                {
-                        item->bindSlot(this);
-                }
-                
-		return true;
-	}
-	else
-		return false;
-}
-
-bool ItemSlot :: insertItem(BakEquipment* item)
-{
-	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == BAK_ID))
-	{
-		bak_equipment = item;
-    
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
-	 
-		is_EQUIPED = true; 
-    
-		if (subtype_id == BAK_ID)
-		{
-			ship->updateDriveAbility();
-			ship->updateJumpAbility();
-		}
-
-                if (ship != NULL)
-                {
-                        item->bindSlot(this);
-                }
-                
-		return true;
-	}
-	else
-		return false;
-}
-
-bool ItemSlot :: insertItem(EnergizerEquipment* item)
-{
-	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == ENERGIZER_ID))
-	{
-		energizer_equipment = item;
-    
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
-	 
-		is_EQUIPED = true; 
-    
-		if (subtype_id == ENERGIZER_ID)
-		{
-			ship->updateEnergyAbility();
-		}
-
-                if (ship != NULL)
-                {
-                        item->bindSlot(this);
-                }
-                
-		return true;
-	}
-	else
-		return false;
-}
-
-bool ItemSlot :: insertItem(ProtectorEquipment* item)
-{
-	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == PROTECTOR_ID))
-	{
-		protector_equipment = item;
-    
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
-	
-		is_EQUIPED = true; 
-    
-		if (subtype_id == PROTECTOR_ID)
-		{
-			ship->updateProtectionAbility();
-		}
-
-                if (ship != NULL)
-                {
-                        item->bindSlot(this);
-                }
-                
-		return true;
-	}
-	else
-		return false;
-}
-
-bool ItemSlot :: insertItem(DroidEquipment* item)
-{
-	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == DROID_ID))
-	{
-		droid_equipment = item;
-
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
-	  
-		is_EQUIPED = true; 
-    
-		if (subtype_id == DROID_ID)
-		{
-			ship->updateRepairAbility();
-		}
-
-                if (ship != NULL)
-                {
-                        item->bindSlot(this);
-                }
-                
 		return true;
 	}
 	else
 		return false;	
 }
 
-bool ItemSlot :: insertItem(FreezerEquipment* item)
-{
-	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == FREEZER_ID))
-	{
-		freezer_equipment = item;
 
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
-	 
-		is_EQUIPED = true; 
-    
-		if (subtype_id == FREEZER_ID)
-		{
-			ship->updateFreezeAbility();
-		}
-
-                if (ship != NULL)
-                {
-                        item->bindSlot(this);
-                }
-                
-		return true;
-	}
-	else
-		return false;	
-}
-
-bool ItemSlot :: insertItem(ScanerEquipment* item)
-{
-	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == SCANER_ID))
-	{
-		scaner_equipment = item;
-
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
-	
-		is_EQUIPED = true; 
-    
-		if (subtype_id == SCANER_ID)
-		{
-			ship->updateScanAbility();
-		}
-
-                if (ship != NULL)
-                {
-                        item->bindSlot(this);
-                }
-                
-		return true;
-	}
-	else
-		return false;	
-}
-
-bool ItemSlot :: insertItem(GrappleEquipment* item)
-{
-	if ((subtype_id == UNIVERSAL_SLOT_ID) || (subtype_id == GRAPPLE_ID))
-	{
-		grapple_equipment = item;
-
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
-	
-		is_EQUIPED = true; 
-    
-		if (subtype_id == GRAPPLE_ID)
-		{
-			ship->updateGrabAbility();
-                        item->reshapeTargetObSlot(this);
-		}
-
-                if (ship != NULL)
-                {
-                        item->bindSlot(this);
-                }
-                
-		return true;
-	}
-	else
-		return false;
-}
-
-//_moduleS
-bool ItemSlot :: insertItem(RocketModule* item)
+template<typename MODULE_TYPE>
+bool ItemSlot :: insertModule(MODULE_TYPE* _module)
 {
 	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
-		rocket_module = item;
-		//rocket_module->rect.setNewCenter(rect.getCenter());
-
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
-	
-		is_EQUIPED = true;
-		return true;
-	}
-	else
-		return false; 
-}
-
-bool ItemSlot :: insertItem(LazerModule* item)
-{
-	if (subtype_id == UNIVERSAL_SLOT_ID)
-	{
-		lazer_module = item;
-		//lazer_module->rect.setNewCenter(rect.getCenter());
-
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
-	
-		is_EQUIPED = true;
-		return true;
-	}
-	else
-		return false; 	
-}
-
-bool ItemSlot :: insertItem(RadarModule* item)
-{
-	if (subtype_id == UNIVERSAL_SLOT_ID)
-	{
-		radar_module = item;
-		//radar_module->rect.setNewCenter(rect.getCenter());
-
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
-	
-		is_EQUIPED = true;
-
-		return true;
-	}
-	else
-		return false; 
+		insert(_module);
 		
-}
-
-bool ItemSlot :: insertItem(DriveModule* item)
-{
-	if (subtype_id == UNIVERSAL_SLOT_ID)
-	{
-		drive_module = item;
-		//drive_module->rect.setNewCenter(rect.getCenter());
-
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
-	 
-		is_EQUIPED = true; 
-		return true;
-	}
-	else
-		return false; 
-}
-
-bool ItemSlot :: insertItem(BakModule* item)
-{     	
-	if (subtype_id == UNIVERSAL_SLOT_ID)
-	{
-		bak_module = item;
-		//bak_module->rect.setNewCenter(rect.getCenter());
-
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
+		item_type_id    = _module->getTypeId();
+		item_subtype_id = _module->getSubTypeId();
 	
 		is_EQUIPED = true;
 		return true;
@@ -601,108 +261,51 @@ bool ItemSlot :: insertItem(BakModule* item)
 	else
 		return false; 
 }
-
-bool ItemSlot :: insertItem(EnergizerModule* item)
-{
-     	if (subtype_id == UNIVERSAL_SLOT_ID)
-	{
-		energizer_module = item;
-		//energizer_module->rect.setNewCenter(rect.getCenter());
-
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
 	
-		is_EQUIPED = true;
-		return true;
-	}
-	else
-		return false; 
-}
+void ItemSlot :: insert(RocketEquipment* item) 		{ rocket_equipment = item; }     
+void ItemSlot :: insert(LazerEquipment* item)  		{ lazer_equipment = item; }      
+void ItemSlot :: insert(RadarEquipment* item)  		{ radar_equipment = item; }      
+void ItemSlot :: insert(DriveEquipment* item)  		{ drive_equipment = item; }      
+void ItemSlot :: insert(BakEquipment* item)    		{ bak_equipment = item; }        
+void ItemSlot :: insert(EnergizerEquipment* item) 	{ energizer_equipment = item; }  
+void ItemSlot :: insert(ProtectorEquipment* item) 	{ protector_equipment = item; } 
+void ItemSlot :: insert(DroidEquipment* item)     	{ droid_equipment = item; }      
+void ItemSlot :: insert(FreezerEquipment* item) 	{ freezer_equipment = item; }    
+void ItemSlot :: insert(ScanerEquipment* item)		{ scaner_equipment = item; }     
+void ItemSlot :: insert(GrappleEquipment* item)		{ grapple_equipment = item; }    // owner_ship->updateGrabAbility(); item->reshapeTargetObSlot(this);  GRAPPLE_ID
 
-bool ItemSlot :: insertItem(ProtectorModule* item)
+
+		
+void ItemSlot :: insert(RocketModule* item) 	{ rocket_module = item; }
+void ItemSlot :: insert(LazerModule* item)  	{ lazer_module = item; }
+void ItemSlot :: insert(RadarModule* item)  	{ radar_module = item; }
+void ItemSlot :: insert(DriveModule* item) 	{ drive_module = item; }
+void ItemSlot :: insert(BakModule* item)	{ bak_module = item; }
+void ItemSlot :: insert(EnergizerModule* item) 	{ energizer_module = item; }
+void ItemSlot :: insert(ProtectorModule* item) 	{ protector_module = item; }
+void ItemSlot :: insert(DroidModule* item)     	{ droid_module = item; }
+void ItemSlot :: insert(FreezerModule* item)   	{ freezer_module = item; }
+void ItemSlot :: insert(ScanerModule* item)    	{ scaner_module = item; }
+void ItemSlot :: insert(GrappleModule* item)  	{ grapple_module = item; }
+
+
+bool ItemSlot :: insertGoods(GoodsPack* item)
 {
      	if (subtype_id == UNIVERSAL_SLOT_ID)
 	{
-		protector_module = item;
-		//protector_module->rect.setNewCenter(rect.getCenter());
-
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
-	  
-		is_EQUIPED = true;
-		return true;
-	}
-	else
-		return false; 
-}
-
-bool ItemSlot :: insertItem(DroidModule* item)
-{
-     	if (subtype_id == UNIVERSAL_SLOT_ID)
-	{
-		droid_module = item;
-		//droid_module->rect.setNewCenter(rect.getCenter());
-
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
-	 
-		is_EQUIPED = true;
-		return true;
-	}
-	else
-		return false; 
-}
-
-bool ItemSlot :: insertItem(FreezerModule* item)
-{
-     	if (subtype_id == UNIVERSAL_SLOT_ID)
-	{
-		freezer_module = item;
-		//freezer_module->rect.setNewCenter(rect.getCenter());
-    
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
-	 
-		is_EQUIPED = true;
-		return true;
-	}
-	else
-		return false; 
-}
-
-bool ItemSlot :: insertItem(ScanerModule* item)
-{
-     	if (subtype_id == UNIVERSAL_SLOT_ID)
-	{
-		scaner_module = item;
-		//scaner_module->rect.setNewCenter(rect.getCenter());
-
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
-	
-		is_EQUIPED = true;
-		return true;
-	}
-	else
-		return false;  
-}
-
-bool ItemSlot :: insertItem(GrappleModule* item)
-{
-     	if (subtype_id == UNIVERSAL_SLOT_ID)
-	{
-		grapple_module = item;
-		//grapple_module->rect.setNewCenter(rect.getCenter());
+		goods_pack = item;
         
-		item_type_id    = item->getType();
-		item_subtype_id = item->getSubType();
+		item_type_id    = item->getTypeId();
+		item_subtype_id = item->getSubTypeId();
+		
 		is_EQUIPED = true; 
 		return true;
 	}
 	else
 		return false;
 }
-
+		
+		
 
 void ItemSlot :: removeItem()
 {
@@ -713,7 +316,7 @@ void ItemSlot :: removeItem()
     			rocket_equipment = NULL;
     			resetFlags();
     			if (subtype_id != UNIVERSAL_SLOT_ID)
-    				ship->updateFireAbility();
+    				owner_ship->updateFireAbility();
     		}
     	
     		if (item_subtype_id == LAZER_ID)
@@ -721,7 +324,7 @@ void ItemSlot :: removeItem()
     			lazer_equipment = NULL;
     			resetFlags();
     			if (subtype_id != UNIVERSAL_SLOT_ID)
-    				ship->updateFireAbility();
+    				owner_ship->updateFireAbility();
     		}
     
         	if (item_subtype_id == RADAR_ID)
@@ -730,7 +333,7 @@ void ItemSlot :: removeItem()
     			resetFlags();
     			    			
     			if (subtype_id != UNIVERSAL_SLOT_ID)
-    				ship->updateRadarAbility();
+    				owner_ship->updateRadarAbility();
       		}
     						
         	if (item_subtype_id == DRIVE_ID)
@@ -740,8 +343,8 @@ void ItemSlot :: removeItem()
     			
     			if (subtype_id != UNIVERSAL_SLOT_ID)
     			{ 
-    				ship->updateDriveAbility();
-    				ship->updateJumpAbility();
+    				owner_ship->updateDriveAbility();
+    				owner_ship->updateJumpAbility();
     			}	
     		}
 
@@ -751,8 +354,8 @@ void ItemSlot :: removeItem()
     			resetFlags();
     			if (subtype_id != UNIVERSAL_SLOT_ID)
     			{ 
-    				ship->updateDriveAbility();
-    				ship->updateJumpAbility();
+    				owner_ship->updateDriveAbility();
+    				owner_ship->updateJumpAbility();
     			}
     		}
 
@@ -761,7 +364,7 @@ void ItemSlot :: removeItem()
     			energizer_equipment = NULL;
     			resetFlags();
     			if (subtype_id != UNIVERSAL_SLOT_ID)
-    				ship->updateEnergyAbility();
+    				owner_ship->updateEnergyAbility();
     		}
 
         	if (item_subtype_id == PROTECTOR_ID)
@@ -769,7 +372,7 @@ void ItemSlot :: removeItem()
     			protector_equipment = NULL;
     			resetFlags();
     			if (subtype_id != UNIVERSAL_SLOT_ID)
-    				ship->updateProtectionAbility();
+    				owner_ship->updateProtectionAbility();
     		}
     	
         	if (item_subtype_id == DROID_ID)
@@ -777,7 +380,7 @@ void ItemSlot :: removeItem()
     			droid_equipment = NULL;
     			resetFlags();
     			if (subtype_id != UNIVERSAL_SLOT_ID)
-    				ship->updateRepairAbility();
+    				owner_ship->updateRepairAbility();
     		}
 
         	if (item_subtype_id == FREEZER_ID)
@@ -785,7 +388,7 @@ void ItemSlot :: removeItem()
     			freezer_equipment = NULL;
     			resetFlags();
     			if (subtype_id != UNIVERSAL_SLOT_ID)
-    				ship->updateFreezeAbility();
+    				owner_ship->updateFreezeAbility();
     		}
     	
 
@@ -794,7 +397,7 @@ void ItemSlot :: removeItem()
     			scaner_equipment = NULL;
     			resetFlags();
     			if (subtype_id != UNIVERSAL_SLOT_ID)
-    				ship->updateScanAbility();
+    				owner_ship->updateScanAbility();
     		}
     	
         	if (item_subtype_id == GRAPPLE_ID)
@@ -802,7 +405,7 @@ void ItemSlot :: removeItem()
     			grapple_equipment = NULL;
     			resetFlags();
     			if (subtype_id != UNIVERSAL_SLOT_ID)
-    				ship->updateGrabAbility();
+    				owner_ship->updateGrabAbility();
     		}
     	}
     	
@@ -874,14 +477,20 @@ void ItemSlot :: removeItem()
     			resetFlags();
     		}
     	}
+    	
+    	if (item_type_id == GOODS_ID)
+	{
+		goods_pack = NULL;
+		resetFlags();
+	}
 }
 
 
 void ItemSlot :: resetFlags()
 {
 	is_EQUIPED = false; 
-	item_type_id    = -1;
-	item_subtype_id = -1;
+	item_type_id    = NONE_ID;
+	item_subtype_id = NONE_ID;
 }
 
 
@@ -992,6 +601,9 @@ int ItemSlot :: getItemRadius() const
 			return lazer_equipment->getRadius();
 		if (item_subtype_id == ROCKET_ID)
 			return rocket_equipment->getRadius();
+			
+		if (item_subtype_id == GRAPPLE_ID)
+			return grapple_equipment->getRadius();
         }
         
         return 0;
@@ -1073,6 +685,11 @@ void ItemSlot :: renderEquipedItem()
 			scaner_module->render(rect);
 		if (item_subtype_id == GRAPPLE_ID)
 			grapple_module->render(rect);
+	}
+	
+	if (item_type_id == GOODS_ID)
+	{
+		drawTexturedRect(goods_pack->getTexOb()->texture, rect, -1.0);
 	}
 }
 
@@ -1223,7 +840,7 @@ void ItemSlot :: renderItemInfo(float offset_x, float offset_y)
 
 bool ItemSlot :: interaction(int _x, int _y)
 {        
-        float dist = distBetweenCenters(rect.getCenter().x, rect.getCenter().y, _x, _y);
+        float dist = distBetweenPoints(rect.getCenter().x, rect.getCenter().y, _x, _y);
         if (dist < rect.getWidth()/2)
                 return true;
         else
@@ -1239,67 +856,67 @@ void ItemSlot :: createAndDropContainer(StarSystem* _starsystem, vec2f _center)
 	{
 		if (item_subtype_id == LAZER_ID)
 		{	
-			_container->otsec_slot->insertItem(lazer_equipment);
+			_container->getItemSlot()->insertEquipment(lazer_equipment);
         		lazer_equipment = NULL; 
         		resetFlags();
 		}
 		if (item_subtype_id == ROCKET_ID)
 		{	
-			_container->otsec_slot->insertItem(rocket_equipment);
+			_container->getItemSlot()->insertEquipment(rocket_equipment);
         		rocket_equipment = NULL; 
         		resetFlags();
 		}
 		if (item_subtype_id == RADAR_ID)
 		{
-			_container->otsec_slot->insertItem(radar_equipment);
+			_container->getItemSlot()->insertEquipment(radar_equipment);
         		radar_equipment = NULL;
         		resetFlags();
 		}
 		if (item_subtype_id == DRIVE_ID)
 		{
-			_container->otsec_slot->insertItem(drive_equipment);
+			_container->getItemSlot()->insertEquipment(drive_equipment);
         		drive_equipment = NULL;
         		resetFlags();
 		}
 		if (item_subtype_id == BAK_ID)
 		{
-			_container->otsec_slot->insertItem(bak_equipment);
+			_container->getItemSlot()->insertEquipment(bak_equipment);
         		bak_equipment = NULL;
         		resetFlags();
 		}
 		if (item_subtype_id == ENERGIZER_ID)
 		{
-			_container->otsec_slot->insertItem(energizer_equipment);
+			_container->getItemSlot()->insertEquipment(energizer_equipment);
         		energizer_equipment = NULL;
         		resetFlags();
 		}
 		if (item_subtype_id == PROTECTOR_ID)
 		{
-			_container->otsec_slot->insertItem(protector_equipment);
+			_container->getItemSlot()->insertEquipment(protector_equipment);
         		protector_equipment = NULL;
         		resetFlags();
 		}
 		if (item_subtype_id == DROID_ID)
 		{
-			_container->otsec_slot->insertItem(droid_equipment);
+			_container->getItemSlot()->insertEquipment(droid_equipment);
         		droid_equipment = NULL;
         		resetFlags();
 		}
 		if (item_subtype_id == FREEZER_ID)
 		{
-			_container->otsec_slot->insertItem(freezer_equipment);
+			_container->getItemSlot()->insertEquipment(freezer_equipment);
         		freezer_equipment = NULL;
         		resetFlags();
 		}
 		if (item_subtype_id == SCANER_ID)
 		{
-			_container->otsec_slot->insertItem(scaner_equipment);
+			_container->getItemSlot()->insertEquipment(scaner_equipment);
         		scaner_equipment = NULL;
         		resetFlags();
 		}
 		if (item_subtype_id == GRAPPLE_ID)
 		{
-			_container->otsec_slot->insertItem(grapple_equipment);
+			_container->getItemSlot()->insertEquipment(grapple_equipment);
         		grapple_equipment = NULL;
         		resetFlags();
 		}
@@ -1310,67 +927,67 @@ void ItemSlot :: createAndDropContainer(StarSystem* _starsystem, vec2f _center)
 		// _modules
 		if (item_subtype_id == LAZER_ID)
 		{
-			_container->otsec_slot->insertItem(lazer_module);
+			_container->getItemSlot()->insertModule(lazer_module);
         		lazer_module = NULL;
         		resetFlags();
 		}
 		if (item_subtype_id == ROCKET_ID)
 		{
-			_container->otsec_slot->insertItem(rocket_module);
+			_container->getItemSlot()->insertModule(rocket_module);
         		rocket_module = NULL;
         		resetFlags();
 		}
 		if (item_subtype_id == RADAR_ID)
 		{
-			_container->otsec_slot->insertItem(radar_module);
+			_container->getItemSlot()->insertModule(radar_module);
         		radar_module = NULL;
         		resetFlags();
 		}
 		if (item_subtype_id == DRIVE_ID)
 		{
-			_container->otsec_slot->insertItem(drive_module);
+			_container->getItemSlot()->insertModule(drive_module);
         		drive_module = NULL;
         		resetFlags();
 		}
 		if (item_subtype_id == BAK_ID)
 		{
-			_container->otsec_slot->insertItem(bak_module);
+			_container->getItemSlot()->insertModule(bak_module);
         		bak_module = NULL;
         		resetFlags();
 		}
 		if (item_subtype_id == ENERGIZER_ID)
 		{
-			_container->otsec_slot->insertItem(energizer_module);
+			_container->getItemSlot()->insertModule(energizer_module);
         		energizer_module = NULL;
         		resetFlags();
 		}
         	if (item_subtype_id == PROTECTOR_ID)
 		{
-			_container->otsec_slot->insertItem(protector_module);
+			_container->getItemSlot()->insertModule(protector_module);
         		protector_module = NULL;
         		resetFlags();
 		}
 		if (item_subtype_id == DROID_ID)
 		{
-			_container->otsec_slot->insertItem(droid_module);
+			_container->getItemSlot()->insertModule(droid_module);
         		droid_module = NULL;
         		resetFlags();
 		}
 		if (item_subtype_id == FREEZER_ID)
 		{
-			_container->otsec_slot->insertItem(freezer_module);
+			_container->getItemSlot()->insertModule(freezer_module);
         		freezer_module = NULL;
         		resetFlags();
 		}
 		if (item_subtype_id == SCANER_ID)
 		{
-			_container->otsec_slot->insertItem(scaner_module);
+			_container->getItemSlot()->insertModule(scaner_module);
         		scaner_module = NULL;
         		resetFlags();
 		}
 		if (item_subtype_id == GRAPPLE_ID)
 		{
-			_container->otsec_slot->insertItem(grapple_module);
+			_container->getItemSlot()->insertModule(grapple_module);
         		grapple_module = NULL;
         		resetFlags();
 		}

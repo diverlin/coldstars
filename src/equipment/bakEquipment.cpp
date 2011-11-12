@@ -25,7 +25,7 @@ BakEquipment :: BakEquipment(TextureOb* _texOb_item,
 			     int _fuel_max_orig, 
 			     EquipmentCommonData _common_data)
 {
-    	CommonForEquipment_init(BAK_ID, _texOb_item, _common_data);
+    	CommonForEquipment_init(BAK_ID, BAK_ID, _texOb_item, _common_data);
 
     	fuel_max_orig = _fuel_max_orig;
     	fuel_max_add  = 0;
@@ -74,7 +74,8 @@ void BakEquipment :: countPrice()
 
 void BakEquipment :: updateOwnerPropetries()
 {
-     	slot->getShip()->updateJumpAbility();
+    	slot->getOwnerShip()->updateDriveAbility();
+    	slot->getOwnerShip()->updateJumpAbility(); 
 }
 
 

@@ -35,6 +35,16 @@ StarSystem* Ship :: getStarSystem() { return starsystem; }
 Npc*  Ship :: getNpc() 		    { return npc_owner; }
 int Ship :: getCollisionRadius() const  { return data_korpus.collision_radius; } 
 
+ItemSlot* Ship :: getEmptyOtsecSlot()
+{
+      	for (unsigned int si = 0; si < slot_otsec_pList.size(); si++)
+      	{
+          	if (slot_otsec_pList[si]->getEquipedStatus() == false)
+             		return slot_otsec_pList[si];
+        }
+        
+      	return NULL;
+}
                 
                 
 Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData _data_korpus)
@@ -399,7 +409,7 @@ void Ship :: selectWeapons()
 template <typename TARGET_TYPE> 
 void Ship :: setWeaponsTarget(TARGET_TYPE* _target)
 {                          
-        float dist = distBetweenCenters(points.getCenter(), _target->getPoints()->getCenter());
+        float dist = distBetweenPoints(points.getCenter(), _target->getPoints()->getCenter());
         
         for (unsigned int i = 0; i < slot_weapon_equiped_pList.size(); i++)
         {
@@ -478,18 +488,6 @@ void Ship :: removeWeaponSlotDeadTargets()
        //}       
 }
 
-
-
-ItemSlot* Ship :: return_pToEmptyOtsecSlot()
-{
-      	for (unsigned int si = 0; si < slot_otsec_pList.size(); si++)
-      	{
-          	if (slot_otsec_pList[si]->getEquipedStatus() == false)
-             		return slot_otsec_pList[si];
-        }
-        
-      	return NULL;
-}
 
 
 void Ship :: update_inSpace_inDynamic_TRUE()
@@ -955,103 +953,18 @@ void Ship :: updateInfo()
     	int owner_race_id = npc_owner->getRaceId();
 
     	info.addTitleStr("SHIP");
-    	info.addNameStr("id/npc_id/ss_id:");   info.addValueStr( int2str(data_id.id) + " / " + int2str(npc_owner->getId()) + " / " + int2str(starsystem->getId()) );
-    	info.addNameStr("ship/pilot race:");   info.addValueStr( returnRaceStringByRaceId(texOb->race_id) + "/" + returnRaceStringByRaceId(owner_race_id) ); 
-    	info.addNameStr("armor/max/size");     info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) + "/" + int2str(texOb->size_id) );
-    	info.addNameStr("space/free/mass:");   info.addValueStr( int2str(data_korpus.space) + "/" + int2str(data_korpus.space - propetries.mass) + "/" + int2str(propetries.mass) );
-    	info.addNameStr("energy:");            info.addValueStr( int2str(propetries.energy) );
-	info.addNameStr("temperature:");       info.addValueStr( int2str(data_korpus.temperature) );
-        info.addNameStr("observe radius:");    info.addValueStr( int2str(propetries.radius) );
-    	info.addNameStr("protection:");        info.addValueStr( returnProtectionStr() );
-	info.addNameStr("speed x 100:");       info.addValueStr(int2str(int(propetries.speed*100)) );
-	
-	
-
-
-    	//info_pList.push_back(&str5);
-    	//if self.name != 'plr':
-       		//self.info.append(self.returnCurTaskStr(self.task_id_being_exec))   # debug
-       		//self.info.append(self.returnQuestTaskListStr())                    # debug
-       		//self.info.append(self.returnNeedsTaskListStr())                    # debug
+    	info.addNameStr("id/ss_id:");          	info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->getId()) );
+    	info.addNameStr("race:");   		info.addValueStr( returnRaceStringByRaceId(texOb->race_id) ); 
+    	info.addNameStr("armor/max:");     	info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) );
+    	info.addNameStr("size id:");     	info.addValueStr( int2str(texOb->size_id) );
+    	info.addNameStr("space/free:");   	info.addValueStr( int2str(data_korpus.space) + "/" + int2str(data_korpus.space - propetries.mass) );
+    	info.addNameStr("mass:");   		info.addValueStr( int2str(propetries.mass) );
+    	info.addNameStr("energy:");            	info.addValueStr( int2str(propetries.energy) );
+	info.addNameStr("temp.:");       	info.addValueStr( int2str(data_korpus.temperature) );
+        info.addNameStr("radius:");    		info.addValueStr( int2str(propetries.radius) );
+    	info.addNameStr("protect:");        	info.addValueStr( returnProtectionStr() );
+	info.addNameStr("speedx:");       	info.addValueStr(int2str(int(propetries.speed*100)) );
 }
-
-
-   //def returnQuestTaskListStr(self):
-        //str = 'QTL: '
-        //for task in self.QUEST_TASK_queue:
-            //str += self.returnCurTaskStr(task) + ";   "
-        //return str
-
-    //def returnNeedsTaskListStr(self):
-        //str = 'NTL: '
-        //for task in self.NEEDS_TASK_queue:
-            //str += self.returnCurTaskStr(task) + ";   "
-        //return str
-
-    //def returnCurTaskStr(self, task_id):
-        //if task_id == HYPER_JUMP_task_id:
-           //return 'HYPER_JUMP_to_' + self.returnTargetSsnameStr()
-        //elif task_id == DESTROY_ALIEN_task_id:
-             //return 'DESTROY_ALIEN_task_id'
-        //elif task_id == LANDING_task_id:
-             //return 'LANDING_task_id'
-        //elif task_id == LAUNCHING_task_id:
-             //return 'LAUNCHING_task_id'
-        //elif task_id == AREST_REQUEST_task_id:
-             //return 'AREST_REQUEST_task_id'
-        //elif task_id == TERROR_REQUEST_task_id:
-             //return 'TERROR_REQUEST_task_id'
-        //elif task_id == FIRE_LOW_task_id:
-             //return 'FIRE_LOW_task_id'
-        //elif task_id == FIRE_HIGH_task_id:
-             //return 'FIRE_HIGH_task_id'
-        //elif task_id == FIND_PLACE_TO_SELL_GOODS_task_id:
-             //return 'FIND_PLACE_TO_SELL_GOODS_task_id'
-        //elif task_id == BUY_GOODS_task_id:
-             //return 'BUY_GOODS_task_id'
-        //elif task_id == SELL_GOODS_task_id:
-             //return 'SELL_GOODS_task_id'
-        //elif task_id == GRABBING_MINERAL_task_id:
-             //return 'GRABBING_MINERAL_task_id, items:' + str(len(self.korpus.grapple_slot.item.grapple_list))
-        //elif task_id == GRABBING_CONTAINER_task_id:
-             //return 'GRABBING_CONTAINER_task_id, items:'+ str(len(self.korpus.grapple_slot.item.grapple_list))
-        //elif task_id == None:
-             //return 'None'
-        //else:
-             //return 'unknown'
-
-    //def returnTargetSsnameStr(self):
-        //if self.target_starsystem != None:
-           //return self.target_starsystem.name
-        //else:
-           //return ''
-
-    //def returnTypeStr(self):
-        //if self.subtype == RANGER_ID:
-           //if self.subsubtype == WARRIOR_ID:
-              //return 'ranger-warrior'
-           //elif self.subsubtype == PIRAT_ID:
-                //return 'ranger-pirat'
-           //elif self.subsubtype == TRADER_ID:
-                //return 'ranger-trader'
-           //elif self.subsubtype == DIPLOMAT_ID:
-                //return 'ranger-diplomat'
-
-           //else:
-                //return "ranger-unknown"
-
-        //elif self.subtype == WARRIOR_ID:
-             //return 'warrior'
-        //elif self.subtype == PIRAT_ID:
-             //return 'pirat'
-        //elif self.subtype == TRADER_ID:
-             //return 'trader'
-        //elif self.subtype == DIPLOMAT_ID:
-             //return 'diplomat'
-
-        //else:
-             //return "unknown"
-
 
 std::string Ship :: returnProtectionStr()
 {
@@ -1061,20 +974,19 @@ std::string Ship :: returnProtectionStr()
        		return int2str(data_korpus.protection);
 }
 
-
-
-
-
 void Ship :: renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y)
 {  
         updateInfo();
      	drawInfoIn2Column(&info.title_list, &info.value_list, _pos_x, _pos_y, _offset_x, _offset_y);
+     	
+     	npc_owner->renderInfo(_pos_x, _pos_y, _offset_x, _offset_y);
 }
 
 void Ship :: renderInfo()
 {  
         updateInfo();
      	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y);
+     	npc_owner->renderInfo(points.getCenter().x, points.getCenter().y);
 }
 	
 
@@ -1213,13 +1125,13 @@ void equip(Ship* ship)
     	if (ship->data_korpus.weapon_slot_num >= 1)
     	{
        		LazerEquipment* pTo_lazer1 = lazerEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot1.insertItem(pTo_lazer1); 
+       		ship->weapon_slot1.insertEquipment(pTo_lazer1); 
     	}   
 
     	if (ship->data_korpus.weapon_slot_num >= 2)
     	{
        		LazerEquipment* pTo_lazer2 = lazerEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot2.insertItem(pTo_lazer2); 
+       		ship->weapon_slot2.insertEquipment(pTo_lazer2); 
     	}   
     
     	if (ship->data_korpus.weapon_slot_num >= 3)
@@ -1227,7 +1139,7 @@ void equip(Ship* ship)
        		//LazerEquipment* pTo_lazer3 = lazerEquipmentGenerator(RACE_0_ID);    
        		//ship->weapon_slot3.insertItem(pTo_lazer3); 
        		RocketEquipment* rocket3 = rocketEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot3.insertItem(rocket3); 
+       		ship->weapon_slot3.insertEquipment(rocket3); 
     	}   
         
     	if (ship->data_korpus.weapon_slot_num >= 4)
@@ -1235,7 +1147,7 @@ void equip(Ship* ship)
        		//LazerEquipment* pTo_lazer4 = lazerEquipmentGenerator(RACE_0_ID);    
        		//ship->weapon_slot4.insertItem(pTo_lazer4);         
        		RocketEquipment* rocket4 = rocketEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot4.insertItem(rocket4); 
+       		ship->weapon_slot4.insertEquipment(rocket4); 
     	}   
     
     	if (ship->data_korpus.weapon_slot_num >= 5) 
@@ -1243,54 +1155,54 @@ void equip(Ship* ship)
        		//LazerEquipment* pTo_lazer5 = lazerEquipmentGenerator(RACE_0_ID);    
        		//ship->weapon_slot5.insertItem(pTo_lazer5); 
        		RocketEquipment* rocket5 = rocketEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot5.insertItem(rocket5); 
+       		ship->weapon_slot5.insertEquipment(rocket5); 
     	}   
         
     
     
     	RadarEquipment* pTo_radar = radarEquipmentGenerator(RACE_0_ID);    
-    	ship->radar_slot.insertItem(pTo_radar); 
+    	ship->radar_slot.insertEquipment(pTo_radar); 
     
    	DriveEquipment* pTo_drive = driveEquipmentGenerator(RACE_0_ID);    
-    	ship->drive_slot.insertItem(pTo_drive); 
+    	ship->drive_slot.insertEquipment(pTo_drive); 
 
     	BakEquipment* pTo_bak = bakEquipmentGenerator(RACE_0_ID);    
-    	ship->bak_slot.insertItem(pTo_bak); 
+    	ship->bak_slot.insertEquipment(pTo_bak); 
             
     	EnergizerEquipment* pTo_energizer = energizerEquipmentGenerator(RACE_0_ID);    
-    	ship->energizer_slot.insertItem(pTo_energizer); 
+    	ship->energizer_slot.insertEquipment(pTo_energizer); 
     
     	ProtectorEquipment* pTo_protector = protectorEquipmentGenerator(RACE_0_ID);    
-    	ship->protector_slot.insertItem(pTo_protector); 
+    	ship->protector_slot.insertEquipment(pTo_protector); 
         
     	DroidEquipment* pTo_droid = droidEquipmentGenerator(RACE_0_ID);    
-    	ship->droid_slot.insertItem(pTo_droid); 
+    	ship->droid_slot.insertEquipment(pTo_droid); 
     
     
     	FreezerEquipment* pTo_freezer = freezerEquipmentGenerator(RACE_0_ID);    
-    	ship->freezer_slot.insertItem(pTo_freezer);     
+    	ship->freezer_slot.insertEquipment(pTo_freezer);     
 
     	ScanerEquipment* pTo_scaner = scanerEquipmentGenerator(RACE_0_ID);    
-    	ship->scaner_slot.insertItem(pTo_scaner); 
+    	ship->scaner_slot.insertEquipment(pTo_scaner); 
     
     	if (ship->data_korpus.inhibit_GRAPPLE == false) 
     	{
        		GrappleEquipment* pTo_grapple = grappleEquipmentGenerator(RACE_0_ID);    
-       		ship->grapple_slot.insertItem(pTo_grapple); 
+       		ship->grapple_slot.insertEquipment(pTo_grapple); 
    	}
     
                              
     	for (unsigned int i = 0; i < 3; i++) //pTo_ship->otsec_slot_pList.size(); i++)
     	{        
         	LazerEquipment* pTo_lazer = lazerEquipmentGenerator(RACE_0_ID);              
-        	ship->slot_otsec_pList[i]->insertItem(pTo_lazer);
+        	ship->slot_otsec_pList[i]->insertEquipment(pTo_lazer);
     	}
 
 
     	for (unsigned int i = 3; i < 6; i++) //pTo_ship->otsec_slot_pList.size(); i++)
     	{        
         	RadarModule* pTo_radarModule = radarModuleGenerator();              
-        	ship->slot_otsec_pList[i]->insertItem(pTo_radarModule);
+        	ship->slot_otsec_pList[i]->insertModule(pTo_radarModule);
     	}    
 }
 

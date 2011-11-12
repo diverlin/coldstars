@@ -17,13 +17,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef RESOURCES_H
-#define RESOURCES_H
 
-void loadGameData();
+#ifndef GOODSPACK_H
+#define GOODSPACK_H
 
-void load3DModels();
-void loadShaders();
-void loadImages();
 
-#endif
+class GoodsPack : public CommonForSpaceItems
+{
+    	public:                  
+        	GoodsPack(IdData _data_id, LifeData _data_life, TextureOb* _texOb, vec2f _start_pos);
+        	~GoodsPack();
+        	
+        	TextureOb* getTexOb();
+        	
+        	void increase(unsigned int _ammount);       
+                void decrease(unsigned int _ammount);
+        	
+        	void renderInfo();
+        	
+        private:
+        	unsigned int mineral;
+        	unsigned int food;
+        	unsigned int medicine;
+        	unsigned int military;
+        	unsigned int drug;
+        	
+};
+
+GoodsPack* createGoodsPack(unsigned int _subtype_id, vec2f);
+
+#endif 

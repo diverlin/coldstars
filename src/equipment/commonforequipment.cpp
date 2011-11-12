@@ -26,12 +26,15 @@ CommonForEquipment :: ~CommonForEquipment()
 
 
 void CommonForEquipment :: CommonForEquipment_init(int _subtype_id, 
+						   int _functional_slot_subtype_id, 
 						   TextureOb* _itemTexOb, 
 						   EquipmentCommonData _common_data)
 {
     	id         = g_EQUIPMENT_ID_GENERATOR.getNextId();
     	type_id    = EQUIPMENT_ID;
     	subtype_id = _subtype_id;
+    
+    	functional_slot_subtype_id = _functional_slot_subtype_id;
     
     	common_data = _common_data;
 
@@ -57,13 +60,13 @@ void CommonForEquipment :: CommonForEquipment_init(int _subtype_id,
 }
 
 
-int CommonForEquipment :: getType()    const { return type_id; }
-int CommonForEquipment :: getSubType() const { return subtype_id; }
+int CommonForEquipment :: getTypeId()    const { return type_id; }
+int CommonForEquipment :: getSubTypeId() const { return subtype_id; }
 unsigned int CommonForEquipment :: getMass()    const { return common_data.mass; }
 unsigned int CommonForEquipment :: getCondition() const { return condition; }
 int CommonForEquipment :: getPrice() const { return price; } 
 TextureOb* CommonForEquipment :: getTexOb() const { return itemTexOb; }
-                
+int CommonForEquipment :: getFunctionalSlotSubtypeId() const { return functional_slot_subtype_id; }
         	
 void CommonForEquipment :: bindSlot(ItemSlot* _slot)
 {
@@ -76,7 +79,7 @@ void CommonForEquipment :: deterioration()
     	if (condition <= 0)
     	{
        		is_DAMAGED = true;
-       		if (slot->getShip() != NULL)   
+       		if (slot->getOwnerShip() != NULL)   
            		updateOwnerPropetries();
     	}
 }
@@ -89,7 +92,7 @@ void CommonForEquipment :: repair()
     	if (is_DAMAGED == true)
     	{
         	is_DAMAGED = false;
-        	if (slot->getShip() != NULL)   
+        	if (slot->getOwnerShip() != NULL)   
            		updateOwnerPropetries();
     	}
 }

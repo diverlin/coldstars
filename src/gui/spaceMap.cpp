@@ -43,10 +43,10 @@ bool SpaceMap :: update()
         	{
             		//if (STARSYSTEM_pList[si]->id != pTo_PLAYER->pTo_starsystem->id)
             		{
-                		float ss_cursor_dist = distBetweenCenters(galaxy->STARSYSTEM_vec[si]->getPosition(), mx, my);
+                		float ss_cursor_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->getPosition(), mx, my);
                 		if (ss_cursor_dist < 10)
                 		{ 
-                   			int ss_ss_dist = distBetweenCenters(galaxy->STARSYSTEM_vec[si]->getPosition(), 
+                   			int ss_ss_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->getPosition(), 
                    				       			    pPLAYER->getPilot()->getStarSystem()->getPosition() );
                    				       
                    			if ( (ss_ss_dist < pPLAYER->getShip()->drive_slot.getDriveEquipment()->getHyper()) && (ss_ss_dist < pPLAYER->getShip()->bak_slot.getBakEquipment()->getFuel()) )

@@ -42,7 +42,8 @@ class Ship
                 Navigator* getNavigator();
                 StarSystem* getStarSystem();
                 Npc* getNpc();
-       	
+       	        ItemSlot* getEmptyOtsecSlot();
+       	        	
         	//######### KONTUR RECT 
         	int w_kontur, h_kontur;
         	Rect kontur_rect; 
@@ -114,8 +115,6 @@ class Ship
              		void updateGrabAbility();
              		void updateScanAbility();
 
-        	ItemSlot* return_pToEmptyOtsecSlot();
-
         	void setMaxArmor();
         	void setMaxFuel();
 
@@ -129,7 +128,7 @@ class Ship
                 
                 void renderWeaponIcons() const;
 
-        	void renderInfo(float _pos_x, float _pos_y, float _offset_x = 0, float _offset_y = 0);
+        	void renderInfo(float _pos_x, float _pos_y, float _offset_x = 0.0, float _offset_y = 0.0);
         	void renderInfo();
         	        	
         	WeaponSelector weapon_selector; 

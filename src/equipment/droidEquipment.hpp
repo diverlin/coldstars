@@ -34,6 +34,7 @@ class DroidEquipment : public CommonForEquipment
 		int getRepair() const;
 		
       		bool insertModule(DroidModule*);
+      		void virtual updateOwnerPropetries();
       		
       	private:
       		int repair_orig;
@@ -44,7 +45,6 @@ class DroidEquipment : public CommonForEquipment
 
       		void countPrice();
       		void updatePropetries();
-      		void virtual updateOwnerPropetries();
       		
      		void virtual addUniqueInfo();
        		std::string getRepairStr();

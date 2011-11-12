@@ -35,6 +35,7 @@ class EnergizerEquipment : public CommonForEquipment
       		int getEnergy() const;
       		
       		bool insertModule(EnergizerModule*);
+      		void virtual updateOwnerPropetries();
       		
       	private:
       		int energy_max_orig;
@@ -50,7 +51,6 @@ class EnergizerEquipment : public CommonForEquipment
 
       		void countPrice();
       		void updatePropetries();
-  		void virtual updateOwnerPropetries();
       		
      		void virtual addUniqueInfo();
            	std::string getEnergyStr();

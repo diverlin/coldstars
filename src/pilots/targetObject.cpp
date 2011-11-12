@@ -61,6 +61,7 @@ void TargetObject :: setObject(TARGET _target)
 
 	is_valid = true;
 }
+
 void TargetObject :: set(Asteroid* _asteroid)     { asteroid = _asteroid; }
 void TargetObject :: set(Mineral* _mineral)       { mineral = _mineral; }
 void TargetObject :: set(Container* _container)   { container = _container; }
@@ -87,16 +88,16 @@ void TargetObject :: reset()
 }
 
       
-void TargetObject :: externalManipulation(vec2f _target_pos)
+void TargetObject :: moveExternalyToPosition(vec2f _target_pos)
 {
 	if (ob_type_id == MINERAL_ID)
 	{
-		mineral->externalManipulation(_target_pos);
+		mineral->moveExternalyToPosition(_target_pos);
 	}
 	
 	if (ob_type_id == CONTAINER_ID)
 	{
-		container->externalManipulation(_target_pos);
+		container->moveExternalyToPosition(_target_pos);
 	}
 }
 
@@ -107,7 +108,7 @@ bool TargetObject :: checkAvaliability()
         {
                 if (*pTo_place_type_id == SPACE_ID)
                 { 
-                        if (starsystem == slot->getShip()->getStarSystem()) 
+                        if (starsystem == slot->getOwnerShip()->getStarSystem()) 
                         {       
                                 return true;
                         }
@@ -121,7 +122,7 @@ bool TargetObject :: checkAvaliability()
 
 bool TargetObject :: checkDistance()
 {
-        float dist = distBetweenCenters(slot->getShip()->getPoints()->getCenter(), *pCenter);                                               
+        float dist = distBetweenPoints(slot->getOwnerShip()->getPoints()->getCenter(), *pCenter);                                               
     	if (dist < slot->getItemRadius())
         {
                 return true;

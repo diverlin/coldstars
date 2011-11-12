@@ -30,17 +30,21 @@ class CommonForSpaceItems
     		bool getAlive() const;
                 int getId() const;
                 int getTypeId() const;
+                int getSubTypeId() const;
     		bool* getpAlive();
                 int* getpPlaceTypeId();
         	Points* getPoints();
+        	void setPlaceTypeId(int);
         	void setStarSystem(StarSystem*);
             	StarSystem* getStarSystem();
             	int getCollisionRadius() const;
+            	int getMass() const;
             	
-            	void externalManipulation(vec2f);
+            	void moveExternalyToPosition(vec2f);
         	void update_inSpace_inDynamic_TRUE();
         	void update_inSpace_inDynamic_FALSE();
 
+		void silentKill();
         	void hit_TRUE(int damage);
         	void hit_FALSE(int damage);
 

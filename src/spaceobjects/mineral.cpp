@@ -22,7 +22,7 @@ Mineral :: Mineral(IdData _data_id, LifeData _data_life, TextureOb* _texOb, vec2
 {        
     	CommonForSpaceItems_init(_data_id, _data_life, _texOb, _start_pos);
 
-    	mass = getRandInt(6, 32);
+    	mass = getRandInt(1, 4);
     	velocity = getRandInt(40, 42) / 100.0;
 }
     

@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Npc 
 {
    	public:
-              	Npc(int _race_id, IdData _data_id, TextureOb* _faceTexOb);
+              	Npc(int _race_id, IdData _data_id, TextureOb* _texOb_face);
      		~Npc();
                 
    		void setAlive(bool);
@@ -76,7 +76,9 @@ class Npc
     		
                 NeedsToDo needsToDo;
                             
-                void setDoNothing();
+                //void setDoNothing();
+                
+                void renderInfo(float _pos_x, float _pos_y, float _offset_x = 0.0, float _offset_y = 0.0);
                                 
    	private:
    	     	bool is_alive;    
@@ -88,6 +90,7 @@ class Npc
    	     	Kosmoport* kosmoport;
    	     	Land* land;
    	     	
+   	     	InfoTable info;
 
    	     	bool controlled_by_player;
    	     	
@@ -112,7 +115,7 @@ class Npc
      		void questResolver();
                 
                 // scenarios (performes in static)
-                void grabbingScenario();
+                void grabScenario();
                 void asteroidScenario();
                 
      		void destroyShipQuestScenario();
@@ -135,6 +138,8 @@ class Npc
      		Ship* ship_to_scan;
      		
      		int place_type_id;
+     		
+     		void updateInfo();
  };
 
 

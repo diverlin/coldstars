@@ -35,6 +35,7 @@ class BakEquipment : public CommonForEquipment
 		void fill();		
 
            	bool insertModule(BakModule*);
+     	     	void virtual updateOwnerPropetries();
      		
      	private:
      	     	int fuel_max_orig;
@@ -46,7 +47,6 @@ class BakEquipment : public CommonForEquipment
      	     	
      	     	void countPrice();
      	     	void updatePropetries();
-     	     	void virtual updateOwnerPropetries();
 
      		void virtual addUniqueInfo();
           	std::string getFuelStr();

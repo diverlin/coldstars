@@ -17,13 +17,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef RESOURCES_H
-#define RESOURCES_H
+#ifndef INIT_H
+#define INIT_H
 
-void loadGameData();
+void inuit();
 
-void load3DModels();
-void loadShaders();
-void loadImages();
+void prepearGlobalVecs();
+
+void initGL(int width, int height);
+void initPostProcess();
 
 #endif

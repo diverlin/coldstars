@@ -48,8 +48,8 @@ CommonForModules :: ~CommonForModules ()
 
 
 unsigned int CommonForModules :: getId()      const { return id; }
-unsigned int CommonForModules :: getType()    const { return type_id; }
-unsigned int CommonForModules :: getSubType() const { return subtype_id; }
+unsigned int CommonForModules :: getTypeId()    const { return type_id; }
+unsigned int CommonForModules :: getSubTypeId() const { return subtype_id; }
 unsigned int CommonForModules :: getMass()    const { return mass; }
 TextureOb* CommonForModules :: getTexOb()     const { return texOb; }
       		

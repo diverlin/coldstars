@@ -45,7 +45,7 @@ void vec3f :: set(float _x, float _y, float _z)
 
 
 
-float distBetweenCenters(vec2f center1, vec2f center2)
+float distBetweenPoints(vec2f center1, vec2f center2)
 {
         float xl = center2.x - center1.x;
         float yl = center2.y - center1.y;
@@ -53,7 +53,7 @@ float distBetweenCenters(vec2f center1, vec2f center2)
         return sqrt(xl*xl + yl*yl);
 }
 
-float distBetweenCenters(vec2f center1, float x2, float y2)
+float distBetweenPoints(vec2f center1, float x2, float y2)
 {
         float xl = (x2 - center1.x);
         float yl = (y2 - center1.y);
@@ -61,7 +61,7 @@ float distBetweenCenters(vec2f center1, float x2, float y2)
         return sqrt(xl*xl + yl*yl);    
 }
 
-float distBetweenCenters(float x1, float y1, float x2, float y2)
+float distBetweenPoints(float x1, float y1, float x2, float y2)
 {
         float xl = (x2 - x1);
         float yl = (y2 - y1);

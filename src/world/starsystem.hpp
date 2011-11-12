@@ -78,8 +78,7 @@ class StarSystem
                                 
     		void moveToSpace(Ship*);
     		void moveToSpace(Npc*);
-    		//void moveToPlanet(Ship*, Planet*);
-    		//void moveToPlanet(Npc*, Planet*);
+
     		
                 void add(Star*);
                 void add(Planet*);
@@ -88,6 +87,10 @@ class StarSystem
     		void add(Container*);
     		void add(RocketBullet*);
     		
+    		
+    		void killMineralById(int _id);
+    		void removeContainer(int _id);
+    		    		
     		// effects
     		void add(ExplosionEffect*);
     		void add(ShockWaveEffect*);
@@ -112,7 +115,6 @@ class StarSystem
     		    		
     		bool is_CAPTURED;
     		
-    		//Rect rect_onMap;
     		vec2f center;
     	
     	    	// ENTITY VECTORS

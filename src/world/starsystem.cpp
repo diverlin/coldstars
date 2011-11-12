@@ -898,6 +898,37 @@ void StarSystem :: add(RocketBullet* _rocket)
 }    
 
 	
+void StarSystem :: killMineralById(int _id)
+{
+	for (unsigned int i = 0; i < MINERAL_vec.size(); i++)
+	{
+		if (MINERAL_vec[i]->getId() == _id);
+		{
+			MINERAL_vec[i]->silentKill();
+			printf("MINERAL with id = %i HAS BEEN KILLED\n", _id);
+			return;
+		}
+	}
+	
+	printf("ERROR!!!, in attempt to find and kill MINERAL with id = %i\n", _id);
+}
+
+
+void StarSystem :: removeContainer(int _id)
+{
+	for (unsigned int i = 0; i < CONTAINER_vec.size(); i++)
+	{
+		if (CONTAINER_vec[i]->getId() == _id);
+		{
+			CONTAINER_vec.erase(CONTAINER_vec.begin() + i);
+			break;
+		}
+	}
+	
+	printf("ERROR!!!, in attempt to remove CONTAINER with id = %i\n", _id);
+}
+	
+	
 
 void StarSystem :: add(ShockWaveEffect* _shockWave)
 {
@@ -1147,7 +1178,7 @@ void StarSystem :: mouseControl()
     	{
         	for (unsigned int mi = 0; mi < visible_MINERAL_vec.size(); mi++)
         	{ 
-            		float mineral_cursor_dist = distBetweenCenters(visible_MINERAL_vec[mi]->getPoints()->getCenter(), mxvp, myvp);
+            		float mineral_cursor_dist = distBetweenPoints(visible_MINERAL_vec[mi]->getPoints()->getCenter(), mxvp, myvp);
             		if (mineral_cursor_dist < visible_MINERAL_vec[mi]->getCollisionRadius())
             		{   
                			cursor_has_target = true;
@@ -1175,7 +1206,7 @@ void StarSystem :: mouseControl()
     	{
         	for (unsigned int ci = 0; ci < visible_CONTAINER_vec.size(); ci++)
         	{ 
-            		float container_cursor_dist = distBetweenCenters(visible_CONTAINER_vec[ci]->getPoints()->getCenter(), mxvp, myvp);
+            		float container_cursor_dist = distBetweenPoints(visible_CONTAINER_vec[ci]->getPoints()->getCenter(), mxvp, myvp);
             		if (container_cursor_dist < visible_CONTAINER_vec[ci]->getCollisionRadius())
             		{   
                			cursor_has_target = true;
@@ -1202,7 +1233,7 @@ void StarSystem :: mouseControl()
     	{
         	for (unsigned int ai = 0; ai < visible_ASTEROID_vec.size(); ai++)
         	{ 
-            		float asteroid_cursor_dist = distBetweenCenters(visible_ASTEROID_vec[ai]->getPoints()->getCenter(), mxvp, myvp);
+            		float asteroid_cursor_dist = distBetweenPoints(visible_ASTEROID_vec[ai]->getPoints()->getCenter(), mxvp, myvp);
             		if (asteroid_cursor_dist < visible_ASTEROID_vec[ai]->getCollisionRadius())
             		{   
                 		cursor_has_target = true;
@@ -1228,7 +1259,7 @@ void StarSystem :: mouseControl()
     	{
        		for (unsigned int ki = 0; ki < visible_SHIP_vec.size(); ki++)
        		{ 
-            		float ship_cursor_dist = distBetweenCenters(visible_SHIP_vec[ki]->getPoints()->getCenter(), mxvp, myvp);
+            		float ship_cursor_dist = distBetweenPoints(visible_SHIP_vec[ki]->getPoints()->getCenter(), mxvp, myvp);
             		if (ship_cursor_dist < visible_SHIP_vec[ki]->getCollisionRadius())
             		{ 
                 		cursor_has_target = true;
@@ -1266,7 +1297,7 @@ void StarSystem :: mouseControl()
     	{
         	for (unsigned int pi = 0; pi < visible_PLANET_vec.size(); pi++)
         	{ 
-            		float planet_cursor_dist = distBetweenCenters(visible_PLANET_vec[pi]->getPoints()->getCenter(), mxvp, myvp);
+            		float planet_cursor_dist = distBetweenPoints(visible_PLANET_vec[pi]->getPoints()->getCenter(), mxvp, myvp);
             		if (planet_cursor_dist < visible_PLANET_vec[pi]->getCollisionRadius())
             		{   
                 		cursor_has_target = true;
@@ -1294,7 +1325,7 @@ void StarSystem :: mouseControl()
     	{
         	for (unsigned int si = 0; si < visible_STAR_vec.size(); si++)
         	{ 
-            		float cursor_dist = distBetweenCenters(visible_STAR_vec[si]->getPoints()->getCenter(), mxvp, myvp);
+            		float cursor_dist = distBetweenPoints(visible_STAR_vec[si]->getPoints()->getCenter(), mxvp, myvp);
             		if (cursor_dist < visible_STAR_vec[si]->getCollisionRadius())
             		{   
                			cursor_has_target = true;
