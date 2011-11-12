@@ -33,6 +33,7 @@ class FreezerEquipment : public CommonForEquipment
 		int getFreeze() const;
   
       		bool insertModule(FreezerModule*);
+      		void virtual updateOwnerPropetries();
       		
       	private:
       	      	int freeze_orig;
@@ -43,7 +44,6 @@ class FreezerEquipment : public CommonForEquipment
 
       		void countPrice();
       		void updatePropetries();      		
-      		void virtual updateOwnerPropetries();
       		
       		void virtual addUniqueInfo();      		
        		std::string getFreezeStr();

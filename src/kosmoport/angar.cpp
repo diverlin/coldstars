@@ -101,7 +101,7 @@ void Angar :: mouseControl()
 
         for (unsigned int i = 0; i < landingArea_pList.size(); i++)
         { 
-                float dist = distBetweenCenters(g_MOUSE_POS_X, 
+                float dist = distBetweenPoints(g_MOUSE_POS_X, 
                                                 g_VIEW_HEIGHT - g_MOUSE_POS_Y, 
                                                 landingArea_pList[i]->getRect().getCenter().x, 
                                                 landingArea_pList[i]->getRect().getCenter().y);

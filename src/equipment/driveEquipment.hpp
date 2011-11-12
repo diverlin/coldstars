@@ -36,6 +36,7 @@ class DriveEquipment :  public CommonForEquipment
 		int getHyper() const;
 
       		bool insertModule(DriveModule*);
+      		void virtual updateOwnerPropetries();
       		
       	private:
       	      	int speed_orig;
@@ -50,7 +51,6 @@ class DriveEquipment :  public CommonForEquipment
       		
       		void countPrice();
       		void updatePropetries();
- 		void virtual updateOwnerPropetries();
       		
      		void virtual addUniqueInfo();
            	std::string getSpeedStr();

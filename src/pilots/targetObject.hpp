@@ -47,7 +47,7 @@ class TargetObject
 		void reset();
 		void validation();
 		
-		void externalManipulation(vec2f);
+		void moveExternalyToPosition(vec2f);
 
 	private:
 		bool is_valid;

@@ -55,6 +55,7 @@ class RocketEquipment : public CommonForEquipment
       		void fireEvent();
       
       		bool insertModule(RocketModule*);
+      		void virtual updateOwnerPropetries();
       		
       	private:
       	      	int ammo_max_orig;
@@ -76,7 +77,6 @@ class RocketEquipment : public CommonForEquipment
       	      	
       	      	void countPrice();
       		void updatePropetries();
-      		void virtual updateOwnerPropetries();
 
      		void virtual addUniqueInfo();
            	std::string getAmmoStr();

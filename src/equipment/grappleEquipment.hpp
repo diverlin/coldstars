@@ -42,12 +42,15 @@ class GrappleEquipment : public CommonForEquipment
 		int getMaxNumItem() const;
 
       		bool insertModule(GrappleModule*);
+      		void virtual updateOwnerPropetries();
                 
                 template <typename TARGET_TYPE>
                 void add(TARGET_TYPE* target);
                 
                 void validationTargets();
                 std::vector<TargetObject*> target_vec;
+		
+		std::string getTargetStr() const;
       		
       	private:
       		int strength_orig;
@@ -70,7 +73,6 @@ class GrappleEquipment : public CommonForEquipment
       	      	
       	      	void countPrice();
       		void updatePropetries();      		
-      		void virtual updateOwnerPropetries();
       		
      		void virtual addUniqueInfo();     		
            	std::string getStrengthStr();

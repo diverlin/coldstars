@@ -27,7 +27,7 @@ GrappleEquipment :: GrappleEquipment(TextureOb* _texOb_item,
 				     int _maxNumItem_orig, 
 				     EquipmentCommonData _common_data)   // joun strength and speed attributes into one
 {
-    	CommonForEquipment_init(GRAPPLE_ID, _texOb_item, _common_data);
+    	CommonForEquipment_init(GRAPPLE_ID, GRAPPLE_ID, _texOb_item, _common_data);
 
     	strength_orig = _strength_orig;
     	strength_add  = 0;
@@ -94,6 +94,20 @@ void GrappleEquipment :: validationTargets()
         }
 }
 
+std::string GrappleEquipment :: getTargetStr() const
+{
+	std::string str = "";
+	
+        for (unsigned int i = 0; i < target_vec.size(); i++)
+        {
+        	if (target_vec[i]->getObTypeId() == MINERAL_ID)
+        	{
+        		str += "m" + int2str(target_vec[i]->getObId()) + ", ";
+        	}
+        }
+        
+        return str;
+}
                 
 int GrappleEquipment :: getStrength()   const { return strength; }
 int GrappleEquipment :: getRadius()     const { return radius; }
@@ -129,7 +143,8 @@ void GrappleEquipment :: countPrice()
 
 void GrappleEquipment :: updateOwnerPropetries()
 {
-    	slot->getShip()->updateGrabAbility();
+    	slot->getOwnerShip()->updateGrabAbility();
+    	reshapeTargetObSlot(slot);
 }
 
 

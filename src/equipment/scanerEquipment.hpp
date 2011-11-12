@@ -34,6 +34,7 @@ class ScanerEquipment : public CommonForEquipment
 		int getScan() const;
 
     		bool insertModule(ScanerModule*);
+    		void virtual updateOwnerPropetries();
     		
     	private:
     		int scan_orig;
@@ -44,7 +45,6 @@ class ScanerEquipment : public CommonForEquipment
     	    	
     	    	void countPrice();
     		void updatePropetries();
-    		void virtual updateOwnerPropetries();
 
      		void virtual addUniqueInfo();
          	std::string getScanStr();

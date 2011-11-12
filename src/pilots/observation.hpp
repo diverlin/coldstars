@@ -20,6 +20,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef OBSERVATION_H
 #define OBSERVATION_H
 
+class MineralObservationData
+{
+	public:
+		Mineral* mineral;
+		float dist;
+		
+		MineralObservationData(Mineral*, float);
+};
 
 class Observation 
 {
@@ -27,14 +35,12 @@ class Observation
       		Observation(Npc*);
      		~Observation();
                                 
-   	//private:
                 Npc* npc;
         
      		std::vector<Asteroid*>  visible_ASTEROID_vec;
      		std::vector<Asteroid*>  sorted_visible_ASTEROID_vec;
      		     		
-     		std::vector<Mineral*>   visible_MINERAL_vec;
-                std::vector<Mineral*>   sorted_visible_MINERAL_vec;
+     		std::vector<MineralObservationData> visible_MINERAL_vec;
                 
      		std::vector<Container*> visible_CONTAINER_vec;
      		std::vector<Container*> sorted_visible_CONTAINER_vec;
@@ -63,9 +69,10 @@ class Observation
                 void sortVisibleMinerals_inSpace_inStatic();
                	void sortVisibleAsteroids_inSpace_inStatic(); 
                	
+               	void printVisibleMineralInformation() const;
+               	
 	private:
 	     	std::vector<float> asteroid_distance_vec;
-     		std::vector<float> mineral_distance_vec;
      		std::vector<float> container_distance_vec;
 
      		std::vector<float> npc_ranger_distance_vec;

@@ -34,6 +34,7 @@ class RadarEquipment : public CommonForEquipment
       		int getRadius() const;
 
       		bool insertModule(RadarModule*);
+      		void virtual updateOwnerPropetries();
       		
       	private:
       	      	int radius_orig;
@@ -44,7 +45,6 @@ class RadarEquipment : public CommonForEquipment
       	     	
       		void updatePropetries();
       		void countPrice();
-      		void virtual updateOwnerPropetries();
 
      		void virtual addUniqueInfo();
        		std::string getRadiusStr();

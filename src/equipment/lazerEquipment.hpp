@@ -37,6 +37,7 @@ class LazerEquipment : public CommonForEquipment
       		void fireEvent(Turrel*);
       
       		bool insertModule(LazerModule*);
+      		void virtual updateOwnerPropetries();
       		
       	private:
       	      	int damage_orig;
@@ -56,7 +57,6 @@ class LazerEquipment : public CommonForEquipment
       	      	
       	      	void updatePropetries();
       		void countPrice();
-      		void virtual updateOwnerPropetries();
 
      		void virtual addUniqueInfo();
            	std::string getDamageStr();

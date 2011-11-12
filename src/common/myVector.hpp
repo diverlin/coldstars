@@ -26,9 +26,9 @@ class vec3f
                 void set(float _x, float _y, float _z);
 };
 
-float distBetweenCenters(vec2f, vec2f);
-float distBetweenCenters(vec2f center1, float x2, float y2);
-float distBetweenCenters(float x1, float y1, float x2, float y2);
+float distBetweenPoints(vec2f, vec2f);
+float distBetweenPoints(vec2f center1, float x2, float y2);
+float distBetweenPoints(float x1, float y1, float x2, float y2);
 
 vec2f getRandomVec(vec2f center, int radius_min, int radius_max);
 

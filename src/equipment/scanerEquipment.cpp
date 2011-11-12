@@ -24,7 +24,7 @@ ScanerEquipment :: ScanerEquipment(TextureOb* _texOb_item,
 				   int _scan_orig, 
 				   EquipmentCommonData _common_data)
 {
-    	CommonForEquipment_init(SCANER_ID, _texOb_item, _common_data);
+    	CommonForEquipment_init(SCANER_ID, SCANER_ID, _texOb_item, _common_data);
 
     	scan_orig = _scan_orig;
     	scan_add = 0;
@@ -65,7 +65,7 @@ void ScanerEquipment :: countPrice()
 
 void ScanerEquipment :: updateOwnerPropetries()
 {
-    	slot->getShip()->updateScanAbility();
+    	slot->getOwnerShip()->updateScanAbility();
 }
 
 

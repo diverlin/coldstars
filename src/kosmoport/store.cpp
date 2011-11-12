@@ -174,59 +174,59 @@ void Store :: addKorpusItem(Ship*         _pTo_ship)
 
 void Store :: addLazerEquipment(LazerEquipment*             _lazerEquipment)
 {
-        getEmptySlot()->insertItem(_lazerEquipment);
+        getEmptySlot()->insertEquipment(_lazerEquipment);
 }
 
 void Store :: addRocketEquipment(RocketEquipment*           _rocketEquipment)
 {
-        getEmptySlot()->insertItem(_rocketEquipment);
+        getEmptySlot()->insertEquipment(_rocketEquipment);
 }
 
 //void addTorpedItem(     int _race_id, int _revision_id)
 
 void Store :: addRadarEquipment(RadarEquipment*             _radarEquipment)
 {
-        getEmptySlot()->insertItem(_radarEquipment);
+        getEmptySlot()->insertEquipment(_radarEquipment);
 }
 
 void Store :: addGrappleEquipment(GrappleEquipment*         _grappleEquipment)
 {
-        getEmptySlot()->insertItem(_grappleEquipment);
+        getEmptySlot()->insertEquipment(_grappleEquipment);
 }
 
 void Store :: addDriveEquipment(DriveEquipment*             _driveEquipment)
 {
-        getEmptySlot()->insertItem(_driveEquipment);
+        getEmptySlot()->insertEquipment(_driveEquipment);
 }
 
 void Store :: addProtectorEquipment(ProtectorEquipment*     _protectorEquipment)
 {
-        getEmptySlot()->insertItem(_protectorEquipment);
+        getEmptySlot()->insertEquipment(_protectorEquipment);
 }
 
 void Store :: addBakEquipment(BakEquipment*                 _bakEquipment)
 {
-        getEmptySlot()->insertItem(_bakEquipment);
+        getEmptySlot()->insertEquipment(_bakEquipment);
 }
 
 void Store :: addDroidEquipment(DroidEquipment*             _droidEquipment)
 {
-        getEmptySlot()->insertItem(_droidEquipment);
+        getEmptySlot()->insertEquipment(_droidEquipment);
 }
 
 void Store :: addScanerEquipment(ScanerEquipment*           _scanerEquipment)
 {
-        getEmptySlot()->insertItem(_scanerEquipment);
+        getEmptySlot()->insertEquipment(_scanerEquipment);
 }
 
 void Store :: addFreezerEquipment(FreezerEquipment*         _freezerEquipment)
 {
-        getEmptySlot()->insertItem(_freezerEquipment);
+        getEmptySlot()->insertEquipment(_freezerEquipment);
 }
 
 void Store :: addEnergizerEquipment(EnergizerEquipment* _energizerEquipment)
 {
-        getEmptySlot()->insertItem(_energizerEquipment);
+        getEmptySlot()->insertEquipment(_energizerEquipment);
 }
 
 
@@ -441,7 +441,7 @@ void Store :: mouseControl()
 
         for (unsigned int i = 0; i < slot_pList.size(); i++)
         { 
-                float dist = distBetweenCenters(g_MOUSE_POS_X, 
+                float dist = distBetweenPoints(g_MOUSE_POS_X, 
                                                 g_VIEW_HEIGHT - g_MOUSE_POS_Y, 
                                                 slot_pList[i]->getRect().getCenter().x, 
                                                 slot_pList[i]->getRect().getCenter().y);
@@ -456,59 +456,59 @@ void Store :: mouseControl()
                                         // weapons
                                         if (slot_pList[i]->getItemSubTypeId() == LAZER_ID)
                                         {
-                                                pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getLazerEquipment());
+                                                pPLAYER->getShip()->getEmptyOtsecSlot()->insertEquipment(slot_pList[i]->getLazerEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
                                         if (slot_pList[i]->getItemSubTypeId() == ROCKET_ID)
                                         {
-                                                pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getRocketEquipment());
+                                                pPLAYER->getShip()->getEmptyOtsecSlot()->insertEquipment(slot_pList[i]->getRocketEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
 
                                         // items
                                         if (slot_pList[i]->getItemSubTypeId() == RADAR_ID)
                                         {
-                                                pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getRadarEquipment());
+                                                pPLAYER->getShip()->getEmptyOtsecSlot()->insertEquipment(slot_pList[i]->getRadarEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
                                         if (slot_pList[i]->getItemSubTypeId() == DRIVE_ID)
                                         {
-                                                pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getDriveEquipment());
+                                                pPLAYER->getShip()->getEmptyOtsecSlot()->insertEquipment(slot_pList[i]->getDriveEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
                                         if (slot_pList[i]->getItemSubTypeId() == BAK_ID)
                                         {
-                                                pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getBakEquipment());
+                                                pPLAYER->getShip()->getEmptyOtsecSlot()->insertEquipment(slot_pList[i]->getBakEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
                                         if (slot_pList[i]->getItemSubTypeId() == ENERGIZER_ID)
                                         {
-                                                pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getEnergizerEquipment());
+                                                pPLAYER->getShip()->getEmptyOtsecSlot()->insertEquipment(slot_pList[i]->getEnergizerEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
                                         if (slot_pList[i]->getItemSubTypeId() == PROTECTOR_ID)
                                         {
-                                                pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getProtectorEquipment());
+                                                pPLAYER->getShip()->getEmptyOtsecSlot()->insertEquipment(slot_pList[i]->getProtectorEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
                                         if (slot_pList[i]->getItemSubTypeId() == DROID_ID)
                                         {
-                                                pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getDroidEquipment());
+                                                pPLAYER->getShip()->getEmptyOtsecSlot()->insertEquipment(slot_pList[i]->getDroidEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
                                         if (slot_pList[i]->getItemSubTypeId() == FREEZER_ID)
                                         {
-                                                pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getFreezerEquipment());
+                                                pPLAYER->getShip()->getEmptyOtsecSlot()->insertEquipment(slot_pList[i]->getFreezerEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
                                         if (slot_pList[i]->getItemSubTypeId() == SCANER_ID)
                                         {
-                                                pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getScanerEquipment());
+                                                pPLAYER->getShip()->getEmptyOtsecSlot()->insertEquipment(slot_pList[i]->getScanerEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
                                         if (slot_pList[i]->getItemSubTypeId() == GRAPPLE_ID)
                                         {
-                                                pPLAYER->getShip()->return_pToEmptyOtsecSlot()->insertItem(slot_pList[i]->getGrappleEquipment());
+                                                pPLAYER->getShip()->getEmptyOtsecSlot()->insertEquipment(slot_pList[i]->getGrappleEquipment());
                                                 slot_pList[i]->removeItem();
                                         }
                                         // modules

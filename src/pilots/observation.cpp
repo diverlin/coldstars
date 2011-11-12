@@ -16,6 +16,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+MineralObservationData :: MineralObservationData(Mineral* _mineral, float _dist)
+{
+	mineral = _mineral;
+	dist = _dist;
+}		
+
 
 Observation :: Observation(Npc* _npc)
 { 
@@ -47,7 +53,7 @@ void Observation :: findVisibleAsteroids_inSpace_inStatic()
 
         for (unsigned int ai = 0; ai < npc->getStarSystem()->ASTEROID_vec.size(); ai++)
         {    
-        	float dist = distBetweenCenters(npc->getShip()->getPoints()->getCenter(), npc->getStarSystem()->ASTEROID_vec[ai]->getPoints()->getCenter());
+        	float dist = distBetweenPoints(npc->getShip()->getPoints()->getCenter(), npc->getStarSystem()->ASTEROID_vec[ai]->getPoints()->getCenter());
                 if (dist < npc->getShip()->propetries.radius)
                 {
                 	visible_ASTEROID_vec.push_back(npc->getStarSystem()->ASTEROID_vec[ai]);
@@ -85,15 +91,14 @@ void Observation :: findVisibleMinerals_inSpace_inStatic()
 {
 	see.MINERAL   = false;
         visible_MINERAL_vec.clear();
-        mineral_distance_vec.clear();
 
         for (unsigned int mi = 0; mi < npc->getStarSystem()->MINERAL_vec.size(); mi++)
         {    
-         	float dist = distBetweenCenters(npc->getShip()->getPoints()->getCenter(), npc->getStarSystem()->MINERAL_vec[mi]->getPoints()->getCenter());
+         	float dist = distBetweenPoints(npc->getShip()->getPoints()->getCenter(), npc->getStarSystem()->MINERAL_vec[mi]->getPoints()->getCenter());
                	if (dist < npc->getShip()->propetries.radius)
               	{
-               		visible_MINERAL_vec.push_back(npc->getStarSystem()->MINERAL_vec[mi]);
-               		mineral_distance_vec.push_back(dist);
+              		
+               		visible_MINERAL_vec.push_back(MineralObservationData(npc->getStarSystem()->MINERAL_vec[mi], dist));
               		see.MINERAL = true;
                	} 
         }
@@ -102,25 +107,42 @@ void Observation :: findVisibleMinerals_inSpace_inStatic()
 
 void Observation :: sortVisibleMinerals_inSpace_inStatic()
 {
-	sorted_visible_MINERAL_vec.clear();
-	
-	for (unsigned int i = 0; i<visible_MINERAL_vec.size(); i++)
+	for (unsigned int i = 0; i < visible_MINERAL_vec.size(); i++)
 	{
-		int i_min = 0;
-		float min = mineral_distance_vec[i];
+		int i_min = i;
+		float min = visible_MINERAL_vec[i].dist;
 		
-		for (unsigned int j = i; j<visible_MINERAL_vec.size(); j++)
+		for (unsigned int j = i; j < visible_MINERAL_vec.size(); j++)
 		{	
-        		if ( mineral_distance_vec[j] < min )
+        		if ( visible_MINERAL_vec[j].dist < min )
         		{
         			i_min = j;
-        			min = mineral_distance_vec[j];
+        			min = visible_MINERAL_vec[j].dist;
         		}
         	}
-        	sorted_visible_MINERAL_vec.push_back(visible_MINERAL_vec[i_min]);        	
+        	MineralObservationData tmp = visible_MINERAL_vec[i];
+        	visible_MINERAL_vec[i]     = visible_MINERAL_vec[i_min];
+        	visible_MINERAL_vec[i_min] = tmp;
         }
 }
 
+
+
+	//for (unsigned int i = 0; i<visible_MINERAL_vec.size(); i++)
+	//{
+		//int i_min = 0;
+		//float min = mineral_distance_vec[i];
+		
+		//for (unsigned int j = 0; j<visible_MINERAL_vec.size(); j++)
+		//{	
+        		//if ( mineral_distance_vec[j] < min )
+        		//{
+        			//i_min = j;
+        			//min = mineral_distance_vec[j];
+        		//}
+        	//}
+        	//sorted_visible_MINERAL_vec.push_back(visible_MINERAL_vec[i_min]);        	
+        //}
 
 
 void Observation :: findVisibleContainers_inSpace_inStatic()
@@ -131,7 +153,7 @@ void Observation :: findVisibleContainers_inSpace_inStatic()
 
         for (unsigned int ci = 0; ci < npc->getStarSystem()->CONTAINER_vec.size(); ci++)
         {    
-        	float dist = distBetweenCenters(npc->getShip()->getPoints()->getCenter(), npc->getStarSystem()->CONTAINER_vec[ci]->getPoints()->getCenter());
+        	float dist = distBetweenPoints(npc->getShip()->getPoints()->getCenter(), npc->getStarSystem()->CONTAINER_vec[ci]->getPoints()->getCenter());
                 if (dist < npc->getShip()->propetries.radius)
                 {
                 	visible_CONTAINER_vec.push_back(npc->getStarSystem()->CONTAINER_vec[ci]);
@@ -161,7 +183,7 @@ void Observation :: findVisibleRangerNpcs_inSpace_inStatic()
 
         for (unsigned int nri = 0; nri < npc->getStarSystem()->NPC_RANGER_inSPACE_vec.size(); nri++)
         {    
-        	float dist = distBetweenCenters(npc->getShip()->getPoints()->getCenter(), npc->getStarSystem()->NPC_RANGER_inSPACE_vec[nri]->getShip()->getPoints()->getCenter());
+        	float dist = distBetweenPoints(npc->getShip()->getPoints()->getCenter(), npc->getStarSystem()->NPC_RANGER_inSPACE_vec[nri]->getShip()->getPoints()->getCenter());
                 if (dist < npc->getShip()->propetries.radius)
                 {
                 	visible_NPC_RANGER_vec.push_back(npc->getStarSystem()->NPC_RANGER_inSPACE_vec[nri]);
@@ -180,7 +202,7 @@ void Observation :: findVisibleWarriorNpcs_inSpace_inStatic()
 
         for (unsigned int nwi = 0; nwi < npc->getStarSystem()->NPC_WARRIOR_inSPACE_vec.size(); nwi++)
         {    
-        	float dist = distBetweenCenters(npc->getShip()->getPoints()->getCenter(), npc->getStarSystem()->NPC_WARRIOR_inSPACE_vec[nwi]->getShip()->getPoints()->getCenter());
+        	float dist = distBetweenPoints(npc->getShip()->getPoints()->getCenter(), npc->getStarSystem()->NPC_WARRIOR_inSPACE_vec[nwi]->getShip()->getPoints()->getCenter());
                	if (dist < npc->getShip()->propetries.radius)
               	{
                		visible_NPC_WARRIOR_vec.push_back(npc->getStarSystem()->NPC_WARRIOR_inSPACE_vec[nwi]);
@@ -199,7 +221,7 @@ void Observation :: findVisibleTraderNpcs_inSpace_inStatic()
 
        for (unsigned int nti = 0; nti < npc->getStarSystem()->NPC_TRADER_inSPACE_vec.size(); nti++)
        {    
-       		float dist = distBetweenCenters(npc->getShip()->getPoints()->getCenter(), npc->getStarSystem()->NPC_TRADER_inSPACE_vec[nti]->getShip()->getPoints()->getCenter());
+       		float dist = distBetweenPoints(npc->getShip()->getPoints()->getCenter(), npc->getStarSystem()->NPC_TRADER_inSPACE_vec[nti]->getShip()->getPoints()->getCenter());
                	if (dist < npc->getShip()->propetries.radius)
                	{
                		visible_NPC_TRADER_vec.push_back(npc->getStarSystem()->NPC_TRADER_inSPACE_vec[nti]);
@@ -218,7 +240,7 @@ void Observation :: findVisiblePiratNpcs_inSpace_inStatic()
 
         for (unsigned int npi = 0; npi < npc->getStarSystem()->NPC_PIRAT_inSPACE_vec.size(); npi++)
         {    
-       		float dist = distBetweenCenters(npc->getShip()->getPoints()->getCenter(), npc->getStarSystem()->NPC_PIRAT_inSPACE_vec[npi]->getShip()->getPoints()->getCenter());
+       		float dist = distBetweenPoints(npc->getShip()->getPoints()->getCenter(), npc->getStarSystem()->NPC_PIRAT_inSPACE_vec[npi]->getShip()->getPoints()->getCenter());
                	if (dist < npc->getShip()->propetries.radius)
                	{
                		visible_NPC_PIRAT_vec.push_back(npc->getStarSystem()->NPC_PIRAT_inSPACE_vec[npi]);
@@ -237,7 +259,7 @@ void Observation :: findVisibleDiplomatNpcs_inSpace_inStatic()
 
         for (unsigned int ndi = 0; ndi < npc->getStarSystem()->NPC_DIPLOMAT_inSPACE_vec.size(); ndi++)
         {    
-         	float dist = distBetweenCenters(npc->getShip()->getPoints()->getCenter(), npc->getStarSystem()->NPC_DIPLOMAT_inSPACE_vec[ndi]->getShip()->getPoints()->getCenter());
+         	float dist = distBetweenPoints(npc->getShip()->getPoints()->getCenter(), npc->getStarSystem()->NPC_DIPLOMAT_inSPACE_vec[ndi]->getShip()->getPoints()->getCenter());
                	if (dist < npc->getShip()->propetries.radius)
                	{
                		visible_NPC_DIPLOMAT_vec.push_back(npc->getStarSystem()->NPC_DIPLOMAT_inSPACE_vec[ndi]);
@@ -246,3 +268,23 @@ void Observation :: findVisibleDiplomatNpcs_inSpace_inStatic()
               	} 
         }
 }
+
+
+void Observation :: printVisibleMineralInformation() const
+{
+	printf("visible_MINERAL_vec for npc_id = %i\n", npc->getId());
+	for (unsigned int i = 0; i < visible_MINERAL_vec.size(); i++)
+        {                   
+        	printf("%i ", visible_MINERAL_vec[i].mineral->getId());                                              
+	}
+	printf("\n");
+	
+	for (unsigned int i = 0; i < visible_MINERAL_vec.size(); i++)
+        {                   
+        	printf("%f ", visible_MINERAL_vec[i].dist);                                              
+	}
+	printf("\n");
+}
+               	
+
+

@@ -154,10 +154,6 @@ void Npc :: thinkCommon_inSpace_inStatic()
 	selfcareOb->validation();
 	subSelfcareOb->validation();
         
-        if (ship->ableTo.GRAB == true)
-        {
-                ship->grapple_slot.getGrappleEquipment()->validationTargets();  
-        }
         
         if ( (observation->see.MINERAL == false) or (ship->ableTo.GRAB == false) )
         {
@@ -166,6 +162,9 @@ void Npc :: thinkCommon_inSpace_inStatic()
                         grabOb->reset();
                 }
         }
+        
+        ship->grapple_slot.getGrappleEquipment()->validationTargets(); 
+                
 
 	questOb->validation();
 	subQuestOb->validation();       
@@ -211,7 +210,7 @@ void Npc :: thinkCommon_inSpace_inStatic()
         {
                 if (grabOb->getActionId() == GRABBING_TASK_ID)
                 {
-                        grabbingScenario();                        
+                        grabScenario();                        
                         busy = true;
                 }
         }
@@ -301,7 +300,7 @@ void Npc :: asteroidScenario()
 }
 
 
-void Npc :: grabbingScenario()
+void Npc :: grabScenario()
 {
         if ( starsystem->getId() != grabOb->getStarSystem()->getId() )
 	{
@@ -314,16 +313,17 @@ void Npc :: grabbingScenario()
        	}
         else
         {        
-                ship->getNavigator()->setStaticTargetCoords(observation->sorted_visible_MINERAL_vec[0]->getPoints()->getCenter(), 30.0);
-        
-                for (unsigned int i = 0; i < observation->sorted_visible_MINERAL_vec.size(); i++)
+                ship->getNavigator()->setStaticTargetCoords(observation->visible_MINERAL_vec[0].mineral->getPoints()->getCenter(), 30.0);
+                
+                // debug
+                observation->printVisibleMineralInformation();
+                // debug
+                
+                for (unsigned int i = 0; i < observation->visible_MINERAL_vec.size(); i++)
                 {                	
-                        float dist = distBetweenCenters(ship->getPoints()->getCenter(), observation->sorted_visible_MINERAL_vec[i]->getPoints()->getCenter());
-                        printf("npc_id =%i,, dist/radius=%f,%i\n ", data_id.id, dist, ship->grapple_slot.getGrappleEquipment()->getRadius() );  
-                        if (dist < ship->grapple_slot.getGrappleEquipment()->getRadius())
+                        if (observation->visible_MINERAL_vec[i].dist < ship->grapple_slot.getGrappleEquipment()->getRadius())
                         {                                       
-                                ship->grapple_slot.getGrappleEquipment()->add(observation->sorted_visible_MINERAL_vec[i]);  
-                                printf("npc_id =%i, mineral_id = %i ADDED // total vec.size()%i\n", data_id.id, observation->sorted_visible_MINERAL_vec[i]->getId(), ship->grapple_slot.getGrappleEquipment()->target_vec.size());                                              
+                                ship->grapple_slot.getGrappleEquipment()->add(observation->visible_MINERAL_vec[i].mineral);
                         }
                         else
                         {
@@ -492,10 +492,39 @@ bool Npc :: jumpTracking()
 
 bool Npc :: grabTracking()
 {
+        ship->grapple_slot.getGrappleEquipment()->validationTargets();  
+                
         for (unsigned int i = 0; i < ship->grapple_slot.getGrappleEquipment()->target_vec.size(); i++)
-        {
-        	ship->grapple_slot.getGrappleEquipment()->target_vec[i]->externalManipulation(ship->getPoints()->getCenter());
-        }        
+        {	//printf("blablabla\n");
+                if (ship->grapple_slot.getGrappleEquipment()->target_vec[i]->getValid() == true)
+                {
+                	//printf("blablabla\n");
+                       	ship->grapple_slot.getGrappleEquipment()->target_vec[i]->moveExternalyToPosition(ship->getPoints()->getCenter());        	
+       	
+        		float dist = distBetweenPoints(ship->getPoints()->getCenter(), *ship->grapple_slot.getGrappleEquipment()->target_vec[i]->getpCenter() ); 
+        		if (dist < ship->getCollisionRadius()/10)
+        		{
+        			if (ship->grapple_slot.getGrappleEquipment()->target_vec[i]->getObTypeId() == MINERAL_ID)
+        			{
+        				GoodsPack* _goodsPack = createGoodsPack(MINERAL_ID, vec2f (0, 0));
+        				_goodsPack->increase(ship->grapple_slot.getGrappleEquipment()->target_vec[i]->getMineral()->getMass());
+        				ItemSlot* _slot = ship->getEmptyOtsecSlot();
+        				if (_slot != NULL)
+        				{
+        					_slot->insertGoods(_goodsPack);
+        					starsystem->killMineralById(ship->grapple_slot.getGrappleEquipment()->target_vec[i]->getObId());   
+        					ship->grapple_slot.getGrappleEquipment()->target_vec[i]->reset();
+        				}			
+        			}
+        			
+        			if (ship->grapple_slot.getGrappleEquipment()->target_vec[i]->getObTypeId() == CONTAINER_ID)
+        			{
+        				starsystem->removeContainer(ship->grapple_slot.getGrappleEquipment()->target_vec[i]->getObId());
+        			}
+        		}
+        	}
+        }                 
+        
 }
 
 
@@ -579,6 +608,38 @@ bool Npc :: removeScanTarget()
 }
 //// *********** SCANNING ***********
 
+
+
+
+void Npc :: updateInfo()
+{
+	info.clear();
+
+    	info.addTitleStr("NPC");
+    	info.addNameStr("id/ss_id:");           info.addValueStr( int2str(data_id.id) + " / "  + int2str(starsystem->getId()) );
+    	info.addNameStr("race:");   		info.addValueStr( returnRaceStringByRaceId(texOb->race_id) ); 
+    	
+    	if (grabOb->getExist() == true)
+    	{   	
+    	info.addNameStr("grabOb:");   		info.addValueStr( ship->grapple_slot.getGrappleEquipment()->getTargetStr() ); 
+    	}
+    	if (selfcareOb->getExist() == true)
+    	{   	
+    	info.addNameStr("selfcareOb:");   	info.addValueStr( "" ); 
+    	}
+    	if (questOb->getExist() == true)
+    	{   	
+    	info.addNameStr("questOb:");   		info.addValueStr( "" ); 
+    	}
+}
+
+
+
+void Npc :: renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y)
+{  
+        updateInfo();
+     	drawInfoIn2Column(&info.title_list, &info.value_list, _pos_x + 190, _pos_y);
+}
      
 
 

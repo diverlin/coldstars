@@ -139,8 +139,6 @@ void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z
 void renderMesh(GLuint glList, vec3f center, vec3f angle, float scale);
 
 
-void initGL(int width, int height);
-
 #endif 
 
 

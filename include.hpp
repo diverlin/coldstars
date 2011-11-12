@@ -51,6 +51,7 @@ class Turrel;
 #include "src/resources/textureOb.hpp"
 #include "src/resources/textureManager.hpp"
 #include "src/resources/resources.hpp"
+#include "src/resources/init.hpp"
 
 #include "src/common/rect.hpp"
 
@@ -74,6 +75,7 @@ class Turrel;
 #include "src/spaceobjects/asteroid.hpp"
 #include "src/spaceobjects/mineral.hpp"
 #include "src/spaceobjects/container.hpp"
+#include "src/spaceobjects/goodsPack.hpp"
 
 #include "src/pilots/targetObject.hpp" 
 
@@ -173,6 +175,7 @@ class Turrel;
 #include "src/world/starsystem.cpp"  
 
 #include "src/spaceobjects/container.cpp"    
+#include "src/spaceobjects/goodsPack.cpp"   
 #include "src/spaceobjects/star.cpp"  
 #include "src/spaceobjects/planet.cpp"
 #include "src/spaceobjects/commonForSpaceItems.cpp" 
@@ -226,6 +229,7 @@ class Turrel;
 #include "src/resources/textureOb.cpp"
 #include "src/resources/textureManager.cpp"
 #include "src/resources/resources.cpp"
+#include "src/resources/init.cpp"
 
 #include "src/common/rect.cpp"
 #include "src/common/points.cpp"

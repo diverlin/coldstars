@@ -26,12 +26,13 @@ class CommonForEquipment
      		CommonForEquipment();
      		virtual ~CommonForEquipment();
      		
-     		int getType()    const;
-        	int getSubType() const;
+     		int getTypeId()    const;
+        	int getSubTypeId() const;
         	unsigned int getMass() const; 
         	unsigned int getCondition() const; 
         	int getPrice() const; 
                 TextureOb* getTexOb() const;
+                int getFunctionalSlotSubtypeId() const;
      
      		void bindSlot(ItemSlot*);
      		void repair();
@@ -41,13 +42,13 @@ class CommonForEquipment
      		
      		void updateInfo();
      		
+     		void virtual updateOwnerPropetries();
+     		
      	private:
      	        int id, type_id, subtype_id;
      	        TextureOb* itemTexOb;
      		int w, h;
-     		
- 		void virtual updateOwnerPropetries();
- 		
+	
  		void (CommonForEquipment::*pToFunc_render)(Rect slot_rect);
           	void _renderFrame(Rect slot_rect);
           	void _renderFrames(Rect slot_rect);
@@ -56,6 +57,7 @@ class CommonForEquipment
      	protected:
      	     	ItemSlot* slot;
      		EquipmentCommonData common_data;
+     		int functional_slot_subtype_id;
 		
 		int race_id;
 		unsigned int condition;
@@ -71,7 +73,7 @@ class CommonForEquipment
 		void addCommonInfo();
  		void virtual addUniqueInfo();
  		
-		void CommonForEquipment_init(int _subtype_id, TextureOb* _pTo_itemTexOb, EquipmentCommonData _common_data);
+		void CommonForEquipment_init(int _subtype_id, int _functional_slot_subtype_id, TextureOb* _pTo_itemTexOb, EquipmentCommonData _common_data);
       		void deterioration();     	
      		
 };

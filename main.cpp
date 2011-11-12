@@ -22,14 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 int main()
 {       
-    	g_APP.SetFramerateLimit(g_FPS_LIMIT); 
-    	g_APP.PreserveOpenGLStates(true);
-    	g_APP.UseVerticalSync(g_VERT_SYNC);
-
-    	g_FONT.LoadFromFile("data/font/font.ttf");
-
-    	initGL(g_VIEW_WIDTH, g_VIEW_HEIGHT); 
- 	initGameData();
+ 	init();
 
     	KeyEventsInSpace keyEvents = KeyEventsInSpace(); 
 
