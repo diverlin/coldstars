@@ -32,18 +32,22 @@ TargetObject :: ~TargetObject()
 void TargetObject :: bindSlot(ItemSlot* _slot) { slot = _slot; }
                 
                 
-StarSystem* TargetObject :: getStarSystem() { return starsystem; }
 bool TargetObject :: getValid() const     { return is_valid; }
 int TargetObject :: getObId() const       { return ob_id; }
 int TargetObject :: getObTypeId() const   { return ob_type_id; }
-
-Asteroid* TargetObject :: getAsteroid()   { return asteroid; }
-Mineral* TargetObject :: getMineral()     { return mineral; }
-Container* TargetObject :: getContainer() { return container; }
-Ship* TargetObject :: getShip()           { return ship; }
+int TargetObject :: getObPlaceTypeId() const { return *pTo_place_type_id; }
+                
+Star* TargetObject :: getStar()   	      { return star; }
+Planet* TargetObject :: getPlanet()   	      { return planet; }
+Asteroid* TargetObject :: getAsteroid()       { return asteroid; }
+Mineral* TargetObject :: getMineral()         { return mineral; }
+Container* TargetObject :: getContainer()     { return container; }
+Ship* TargetObject :: getShip()               { return ship; }
 
 vec2f* TargetObject :: getpCenter() { return pCenter; }
 bool* TargetObject :: getpAlive()   { return pTo_is_alive; } 
+bool TargetObject :: getAlive() const  { return *pTo_is_alive; } 
+StarSystem* TargetObject :: getObStarSystem()   { return ob_starsystem; }
 
 template <typename TARGET>
 void TargetObject :: setObject(TARGET _target)
@@ -53,15 +57,16 @@ void TargetObject :: setObject(TARGET _target)
         ob_id      = _target->getId();
 	ob_type_id = _target->getTypeId();
         
-        pCenter      = _target->getPoints()->getpCenter();
-        pTo_is_alive = _target->getpAlive();
-        pTo_place_type_id = _target->getpPlaceTypeId();
+       	pCenter      = _target->getPoints()->getpCenter();
+       	pTo_is_alive = _target->getpAlive();
+       	pTo_place_type_id = _target->getpPlaceTypeId();
+        ob_starsystem = _target->getStarSystem();
         
-        starsystem = _target->getStarSystem();
-
 	is_valid = true;
 }
 
+void TargetObject :: set(Star* _star) 		  { star = _star; }
+void TargetObject :: set(Planet* _planet)     	  { planet = _planet; }
 void TargetObject :: set(Asteroid* _asteroid)     { asteroid = _asteroid; }
 void TargetObject :: set(Mineral* _mineral)       { mineral = _mineral; }
 void TargetObject :: set(Container* _container)   { container = _container; }
@@ -70,15 +75,17 @@ void TargetObject :: set(Ship* _ship)             { ship = _ship; }
 
 void TargetObject :: reset()
 {
-        asteroid  = NULL;
-        mineral   = NULL;
-        container = NULL;
-	ship      = NULL;
+	star	   = NULL;
+	planet 	   = NULL;
+        asteroid   = NULL;
+        mineral    = NULL;
+        container  = NULL;
+	ship       = NULL;
         
         pCenter      = NULL;
         pTo_is_alive = NULL;
         pTo_place_type_id = NULL;
-        starsystem   = NULL;
+        ob_starsystem   = NULL;
         
         ob_id      = NONE_ID; 
 	ob_type_id = NONE_ID;
@@ -108,7 +115,7 @@ bool TargetObject :: checkAvaliability()
         {
                 if (*pTo_place_type_id == SPACE_ID)
                 { 
-                        if (starsystem == slot->getOwnerShip()->getStarSystem()) 
+                        if (ob_starsystem == slot->getOwnerShip()->getStarSystem()) 
                         {       
                                 return true;
                         }
@@ -122,6 +129,11 @@ bool TargetObject :: checkAvaliability()
 
 bool TargetObject :: checkDistance()
 {
+	if (ob_type_id == STARSYSTEM_ID)
+	{
+		return true;
+	}
+	
         float dist = distBetweenPoints(slot->getOwnerShip()->getPoints()->getCenter(), *pCenter);                                               
     	if (dist < slot->getItemRadius())
         {
@@ -132,8 +144,7 @@ bool TargetObject :: checkDistance()
 
 
 void TargetObject :: validation()
-{
-        
+{        
         if (is_valid == true)
         { 
                 if ( checkAvaliability() == true)

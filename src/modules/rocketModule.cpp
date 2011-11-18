@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 RocketModule :: RocketModule(TextureOb* _texOb, int _ammo_max_add, int _damage_add, int _radius_add)
 {
-     	CommonForModules_init(ROCKET_ID, _texOb);
+     	CommonForModules_init(ROCKET_MODULE_ID, _texOb);
 
      	ammo_max_add = _ammo_max_add;
      	damage_add   = _damage_add;

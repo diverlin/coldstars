@@ -17,17 +17,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-Planet :: Planet(int _subtype_id, 
-		 TextureOb* _texOb, 
-		 TextureOb* _texOb_atmoshere, 
+Planet :: Planet(IdData _data_id, LifeData _data_life, 
+		 TextureOb* _texOb, TextureOb* _texOb_atmoshere, 
 		 ObjMeshInstance* _mesh, 
 		 PlanetData _planet_data,
 		 unsigned long int _population)
-{ 
-      	type_id = PLANET_ID;
-      	subtype_id = _subtype_id;
-      
-      	CommonForPlanet_init(_texOb, 
+{    
+      	CommonForPlanet_init(_data_id, _data_life, 
+      			     _texOb, 
     	   		     _mesh, 
 			     _planet_data);
 
@@ -35,13 +32,13 @@ Planet :: Planet(int _subtype_id,
       	
       	population = _population;
       
-      	if (subtype_id == KOSMOPORT_ID)
+      	if (data_id.subtype_id == KOSMOPORT_ID)
       	{
       	      	createKosmoport();
       	      	land      = NULL;
         }
         
-      	if (subtype_id == LAND_ID)
+      	if (data_id.subtype_id == LAND_ID)
       	{
          	createLand();
          	kosmoport = NULL;
@@ -67,12 +64,12 @@ void Planet :: update_inSpace_inDynamic()
 
 void Planet :: update_inSpace_inStatic()
 {      
-     	if (subtype_id == KOSMOPORT_ID)
+     	if (data_id.subtype_id == KOSMOPORT_ID)
      	{
                 kosmoport->ai();
         }
                 
-     	if (subtype_id == LAND_ID)
+     	if (data_id.subtype_id == LAND_ID)
      	{
                 land->ai();    
         }    	
@@ -84,7 +81,7 @@ void Planet :: updateInfo()
 	info.clear();
 
     	info.addTitleStr("PLANET");
-    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->getId()));
+    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->getId()));
     	info.addNameStr("population:");  info.addValueStr(int2str(population));
 }
 
@@ -126,11 +123,11 @@ void Planet :: addToLaunchingQueue(Npc* _npc)
                 
 bool Planet :: add(Ship* _ship)
 {
-     	if (subtype_id == KOSMOPORT_ID)
+     	if (data_id.subtype_id == KOSMOPORT_ID)
         {
                 return kosmoport->addShip(_ship);
         }
-     	if (subtype_id == LAND_ID)
+     	if (data_id.subtype_id == LAND_ID)
         {
                 return land->addShip(_ship);
         }
@@ -140,11 +137,11 @@ bool Planet :: add(Ship* _ship)
 
 bool Planet :: add(Npc* _npc)
 {
-     	if (subtype_id == KOSMOPORT_ID)
+     	if (data_id.subtype_id == KOSMOPORT_ID)
         {       
                 return kosmoport->addNpc(_npc);
         }
-     	if (subtype_id == LAND_ID)
+     	if (data_id.subtype_id == LAND_ID)
         {
                 return land->addNpc(_npc);
         }
@@ -154,12 +151,12 @@ bool Planet :: add(Npc* _npc)
 
 bool Planet :: removeShipById(int _id)
 {
-     	if (subtype_id == KOSMOPORT_ID)
+     	if (data_id.subtype_id == KOSMOPORT_ID)
      	{
          	return kosmoport->removeShip(_id);
         }
         
-     	if (subtype_id == LAND_ID)
+     	if (data_id.subtype_id == LAND_ID)
      	{
          	return land->removeShip(_id);
         }
@@ -169,12 +166,12 @@ bool Planet :: removeShipById(int _id)
 
 bool Planet :: removeNpcById(int _id)
 {
-     	if (subtype_id == KOSMOPORT_ID)
+     	if (data_id.subtype_id == KOSMOPORT_ID)
      	{
          	return kosmoport->removeNpc(_id);
         }
         
-     	if (subtype_id == LAND_ID)
+     	if (data_id.subtype_id == LAND_ID)
      	{
          	return land->removeNpc(_id);
         }
@@ -187,14 +184,14 @@ bool Planet :: removeNpcById(int _id)
 
 bool Planet :: getPermissionToLand() const
 {
-     	if (subtype_id == KOSMOPORT_ID)
+     	if (data_id.subtype_id == KOSMOPORT_ID)
      	{
         	if (kosmoport->getAngar()->getNumFreelandingArea() > 0)
             		return true;
         	else
             		return false;       
      	}
-     	if (subtype_id == LAND_ID)
+     	if (data_id.subtype_id == LAND_ID)
         	return true;
                 
         return false;
@@ -205,7 +202,12 @@ bool Planet :: getPermissionToLand() const
 
 Planet* createPlanet(int orbit_radius)
 {
-        int subtype_id   = KOSMOPORT_ID;
+	IdData data_id;
+	data_id.id         = g_PLANET_ID_GENERATOR.getNextId();
+      	data_id.type_id    = PLANET_ID;
+      	data_id.subtype_id = KOSMOPORT_ID;
+        
+        LifeData data_life;
         
 	PlanetData planet_data;
 	
@@ -222,9 +224,8 @@ Planet* createPlanet(int orbit_radius)
         
         unsigned long int population = getRandInt(1000, 4000);
         
-        Planet* planet = new Planet(subtype_id, 
-        			    texOb, 
-        			    texOb_atmosphere, 
+        Planet* planet = new Planet(data_id, data_life, 
+        			    texOb, texOb_atmosphere, 
         			    g_SPHERE_MESH, 
         			    planet_data,
         			    population);

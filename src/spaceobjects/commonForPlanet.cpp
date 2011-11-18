@@ -24,13 +24,15 @@ CommonForPlanet :: ~CommonForPlanet()
 {}
 
 
-void CommonForPlanet :: CommonForPlanet_init(TextureOb* _texOb, 
+void CommonForPlanet :: CommonForPlanet_init(IdData _data_id,
+					     LifeData _data_life,
+					     TextureOb* _texOb, 
     	   				     ObjMeshInstance* _mesh, 
 					     PlanetData _data)
 {
+	data_id   = _data_id;
+	data_life = _data_life;
 	data = _data;
-
-        id = g_PLANET_ID_GENERATOR.getNextId();
               
         texOb = _texOb;
         mesh  = _mesh; 
@@ -41,7 +43,7 @@ void CommonForPlanet :: CommonForPlanet_init(TextureOb* _texOb,
       	
       	d_angle.x      = 0.0;
       	d_angle.y      = 0.0;
-      	d_angle.z      = getRandInt(10, 100)*0.01;      
+      	d_angle.z      = getRandInt(10, 100)*0.01;     
 
      
         // !!!!
@@ -62,21 +64,28 @@ void CommonForPlanet :: CommonForPlanet_init(TextureOb* _texOb,
        	
         updatePosition();        
                 
+        place_type_id = SPACE_ID;
+                        
         starsystem = NULL;
 }
 
 
 void CommonForPlanet :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
 
-int CommonForPlanet :: getId()        const { return id; }   
-int CommonForPlanet :: getTypeId()    const { return type_id; }
-int CommonForPlanet :: getSubTypeId() const { return subtype_id; }
+int CommonForPlanet :: getId()        const { return data_id.id; }   
+int CommonForPlanet :: getTypeId()    const { return data_id.type_id; }
+int CommonForPlanet :: getSubTypeId() const { return data_id.subtype_id; }
 
 Points* CommonForPlanet :: getPoints() { return &points; }
            
 int CommonForPlanet :: getCollisionRadius() const { return collision_radius; }
 StarSystem* CommonForPlanet :: getStarSystem() { return starsystem; }           
-                   
+
+bool CommonForPlanet :: getGarbageReady() const  { return data_life.garbage_ready; }            
+bool CommonForPlanet :: getAlive() const  { return data_life.is_alive; }
+bool* CommonForPlanet :: getpAlive()      { return &data_life.is_alive; }
+int* CommonForPlanet :: getpPlaceTypeId() { return &place_type_id; }
+       
 vec2f CommonForPlanet :: getNextTurnPosition() const 
 { 
         if (orbit_it + TURN_TIME < orbit_len)

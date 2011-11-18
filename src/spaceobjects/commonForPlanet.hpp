@@ -37,9 +37,16 @@ class CommonForPlanet
                 vec2f getNextTurnPosition() const;
                 Points* getPoints();
                 StarSystem* getStarSystem();
-               
+
+               	bool getGarbageReady() const;               
+               	bool getAlive() const;
+		bool* getpAlive();
+                int* getpPlaceTypeId();
+                
     		// other methods
-                void CommonForPlanet_init(TextureOb* _texOb, 
+                void CommonForPlanet_init(IdData,
+                			  LifeData,                
+                			  TextureOb* _texOb, 
     	   				  ObjMeshInstance* _mesh, 
     	   				  PlanetData _planet_data);
     	   				  
@@ -50,7 +57,8 @@ class CommonForPlanet
     		void render_OLD();
                 
         protected:
-                int id, type_id, subtype_id;
+                IdData data_id;
+                LifeData data_life;
                 
                 TextureOb* texOb;
 
@@ -71,6 +79,7 @@ class CommonForPlanet
 		vec3f angle;
 		vec3f d_angle;
      		
+     		int place_type_id;
       		PlanetData data;
      		
       		std::vector<float> orbit_vector_x;

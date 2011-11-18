@@ -17,6 +17,15 @@ void vec2f :: set(float _x, float _y)
         y = _y; 
 }
 
+vec2f vec2f :: operator+(const vec2f& _vec_add)
+{
+	vec2f result;
+	
+	result.x = x + _vec_add.x;
+	result.y = y + _vec_add.y;
+	
+	return result;
+}
 
 
 
@@ -71,15 +80,12 @@ float distBetweenPoints(float x1, float y1, float x2, float y2)
 
 
 
-vec2f getRandomVec(vec2f center, int radius_min, int radius_max)
+vec2f getRandVec(int radius_min, int radius_max)
 {
-	vec2f target;
-	
     	float alpha = (float)getRandInt(0, 360) / 57.0;
     	int len = getRandInt(radius_min, radius_max);
    
-    	target.x = center.x + sin(alpha) * len;
-    	target.y = center.y + cos(alpha) * len;
+ 	vec2f target(sin(alpha) * len, cos(alpha) * len) ;
     	
     	return target;
 }

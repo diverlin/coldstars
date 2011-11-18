@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 LazerModule :: LazerModule(TextureOb* _texOb, int _damage_add, int _radius_add)
 {
-     	CommonForModules_init(LAZER_ID, _texOb);
+     	CommonForModules_init(LAZER_MODULE_ID, _texOb);
 
      	damage_add = _damage_add;
      	radius_add = _radius_add;

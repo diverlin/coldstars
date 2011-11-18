@@ -33,7 +33,8 @@ class GoodsPack : public CommonForSpaceItems
         	void increase(unsigned int _ammount);       
                 void decrease(unsigned int _ammount);
         	
-        	void renderInfo();
+        	void updateInfo();
+        	void renderInfo(Rect slot_rect, float offset_x, float offset_y);
         	
         private:
         	unsigned int mineral;
@@ -41,6 +42,8 @@ class GoodsPack : public CommonForSpaceItems
         	unsigned int medicine;
         	unsigned int military;
         	unsigned int drug;
+        	
+        	InfoTable info;
         	
 };
 

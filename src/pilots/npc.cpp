@@ -16,15 +16,17 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-void Npc :: setAlive(bool _alive) 		   { is_alive = _alive; }
+void Npc :: setGarbageReady(bool _garbage_ready)   { data_life.garbage_ready = _garbage_ready; }
+void Npc :: setAlive(bool _alive) 		   { data_life.is_alive = _alive; }
 void Npc :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
 void Npc :: setKosmoport(Kosmoport* _kosmoport)    { kosmoport = _kosmoport; }
 void Npc :: setLand(Land* _land)   		   { land = _land; }
 void Npc :: setScanTarget(Ship* _ship)             { ship_to_scan = _ship; }
 void Npc :: setPlaceTypeId(int _place_type_id)     { place_type_id = _place_type_id; /*if (ship != NULL) ship->setPlaceTypeId(_place_type_id); */ }
 void Npc :: setControlledByPlayer(bool _controlled_by_player) { controlled_by_player = _controlled_by_player; }
-   		
-bool Npc :: getAlive() const 	   { return is_alive; }
+
+bool Npc :: getGarbageReady() const { return data_life.garbage_ready; }   		
+bool Npc :: getAlive() const 	   { return data_life.is_alive; }
 int Npc :: getId() const	   { return data_id.id; }
 int Npc :: getTypeId() const	   { return data_id.type_id; }
 int  Npc :: getSubTypeId() const   { return data_id.subtype_id; }
@@ -48,13 +50,14 @@ void Npc :: bind(Ship* _ship)
 	ship->setStarSystem(starsystem);  //???	
 } 	
 
-void Npc :: addCredits(int _credits)    { credits += _credits; }
-void Npc :: removeCredits(int _credits) { credits -= _credits; }
+void Npc :: increaseCredits(int _credits) { credits += _credits; }
+void Npc :: decreaseCredits(int _credits) { credits -= _credits; }
 
 		
-Npc :: Npc(int _race_id, IdData _data_id, TextureOb* _texOb)
+Npc :: Npc(int _race_id, IdData _data_id, LifeData _data_life, TextureOb* _texOb)
 { 
-    	is_alive = true;
+   	data_id = _data_id;
+   	data_life = _data_life;	
 
       
     	texOb = _texOb;
@@ -65,9 +68,7 @@ Npc :: Npc(int _race_id, IdData _data_id, TextureOb* _texOb)
 
     	credits = 1000;
    	
-   	data_id = _data_id;
    	
-    	
 	place_type_id = NONE_ID; 
 
 
@@ -229,7 +230,7 @@ void Npc :: thinkCommon_inSpace_inStatic()
                 busy = true;  
         }
 
-	ship->getNavigator()->updateDynamicTargetCoord();
+	ship->getNavigator()->update_inSpace_inStatic();
 }
 
 
@@ -294,7 +295,7 @@ void Npc :: asteroidScenario()
 
         ship->weapon_selector.setAll(true);
         ship->selectWeapons();
-        ship->setWeaponsTarget(observation->sorted_visible_ASTEROID_vec[0]);
+        ship->setWeaponsTarget(observation->visible_ASTEROID_vec[0].asteroid);
                 
         //printf("TARGET => ship_id, asteroid id = %i/%i\n", ship->getId(), sorted_visible_ASTEROID_pList[0]->getId());
 }
@@ -304,7 +305,7 @@ void Npc :: grabScenario()
 {
         if ( starsystem->getId() != grabOb->getStarSystem()->getId() )
 	{
-		if (ship->getNavigator()->getFollowingTypeId() != STARSYSTEM_ID)
+		if (ship->getNavigator()->getTargetTypeId() != STARSYSTEM_ID)
 		{
                         ship->getNavigator()->setTarget(grabOb->getStarSystem()); 
                         
@@ -313,10 +314,11 @@ void Npc :: grabScenario()
        	}
         else
         {        
-                ship->getNavigator()->setStaticTargetCoords(observation->visible_MINERAL_vec[0].mineral->getPoints()->getCenter(), 30.0);
+        	vec2f offset_target = getRandVec(30, 60);
+                ship->getNavigator()->setStaticTargetCoords(observation->visible_MINERAL_vec[0].mineral->getPoints()->getCenter() + offset_target);
                 
                 // debug
-                observation->printVisibleMineralInformation();
+                //observation->printVisibleMineralInformation();
                 // debug
                 
                 for (unsigned int i = 0; i < observation->visible_MINERAL_vec.size(); i++)
@@ -338,7 +340,7 @@ void Npc :: destroyShipQuestScenario()
 {
 	if ( starsystem->getId() != questOb->getStarSystem()->getId() )
 	{
-		if (ship->getNavigator()->getFollowingTypeId() != STARSYSTEM_ID)
+		if (ship->getNavigator()->getTargetTypeId() != STARSYSTEM_ID)
 		{                               
        			ship->getNavigator()->setTarget(questOb->getStarSystem()); 
        			
@@ -363,7 +365,7 @@ void Npc :: liberationStarSystemQuestScenario()
 {
 	if ( starsystem->getId() != questOb->getStarSystem()->getId() )
 	{
-		if (ship->getNavigator()->getFollowingTypeId() != STARSYSTEM_ID)
+		if (ship->getNavigator()->getTargetTypeId() != STARSYSTEM_ID)
 		{                         
        			ship->getNavigator()->setTarget(questOb->getStarSystem());
        			
@@ -393,7 +395,7 @@ void Npc :: selfcareResolver()
 {       
        	if (selfcareOb->getStarSystem()->getId() != starsystem->getId())
 	{
-		if (ship->getNavigator()->getFollowingTypeId() != STARSYSTEM_ID)
+		if (ship->getNavigator()->getTargetTypeId() != STARSYSTEM_ID)
 		{       
        			ship->getNavigator()->setTarget(selfcareOb->getStarSystem());
        			
@@ -440,12 +442,12 @@ void Npc :: questResolver()
 void Npc :: update_inDynamic_inSpace()
 {
      	//printf("npc_id = %i update_inDynamic_inSpace \n", id);
-     	if (ship->getNavigator()->getFollowingTypeId() == STARSYSTEM_ID)
+     	if (ship->getNavigator()->getTargetTypeId() == STARSYSTEM_ID)
      	{
 		jumpTracking();
 	}
 	
-	if (ship->getNavigator()->getFollowingTypeId() == PLANET_ID)
+	if (ship->getNavigator()->getTargetTypeId() == PLANET_ID)
 	{
 	        dockTracking();
 	}
@@ -490,7 +492,7 @@ bool Npc :: jumpTracking()
      	return false;
 }
 
-bool Npc :: grabTracking()
+void Npc :: grabTracking()
 {
         ship->grapple_slot.getGrappleEquipment()->validationTargets();  
                 
@@ -651,8 +653,10 @@ Npc* generateNpc(int _race_id, int _subtype_id)
     	data_id.type_id    = NPC_ID;
     	data_id.subtype_id = _subtype_id;
     	
+    	LifeData data_life;
+    	
        	TextureOb* texOb_face  = g_TEXTURE_MANAGER.returnPointerToRandomFaceTexObWithFolloingAttributes(_race_id);
-	Npc* npc = new Npc(_race_id, data_id, texOb_face);
+	Npc* npc = new Npc(_race_id, data_id, data_life, texOb_face);
 	
 	return npc;
 }

@@ -32,14 +32,18 @@ class TargetObject
 		template <typename TARGET>
 		void setObject(TARGET _target);
 
-		StarSystem* getStarSystem();
 		bool getValid() const;
 		int getObId() const;
 		int getObTypeId() const;
                 vec2f* getpCenter();
                 bool* getpAlive();
-
-                Asteroid* getAsteroid();                
+                bool getAlive() const;
+                int getObPlaceTypeId() const;
+                StarSystem* getObStarSystem();
+                
+		Star* getStar();
+		Planet* getPlanet();
+		Asteroid* getAsteroid();                
                 Mineral* getMineral();
                 Container* getContainer();
                 Ship* getShip();
@@ -57,16 +61,20 @@ class TargetObject
                 
                 ItemSlot* slot;
 
-                Asteroid*  asteroid;
-                Mineral*   mineral;
-                Container* container;
-                Ship*      ship;
+		Star* 	    star;
+		Planet*     planet;
+                Asteroid*   asteroid;
+                Mineral*    mineral;
+                Container*  container;
+                Ship*       ship;
                 
                 vec2f* pCenter;
                 bool* pTo_is_alive; 
                 int* pTo_place_type_id;
-                StarSystem* starsystem;
+                StarSystem* ob_starsystem;
 
+		void set(Star*);
+		void set(Planet*);
 		void set(Asteroid*);
 		void set(Mineral*);
 		void set(Container*);

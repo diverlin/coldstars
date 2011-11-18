@@ -53,7 +53,9 @@ Mineral* createMineral(vec2f _start_pos)
     	//data_id.subtype_id = ; 
         
         LifeData data_life;
-    	data_life.armor = getRandInt(1,6);
+        data_life.is_alive   = true;
+        data_life.garbage_ready = false;
+    	data_life.armor      = getRandInt(1,6);
         data_life.dying_time = 30;        
         
 	TextureOb* texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.mineral_texOb_pList); 

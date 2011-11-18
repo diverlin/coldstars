@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 RadarModule :: RadarModule(TextureOb* _texOb, int _radius_add)
 {
-     	CommonForModules_init(RADAR_ID, _texOb);
+     	CommonForModules_init(RADAR_MODULE_ID, _texOb);
 
      	radius_add = _radius_add;
 }

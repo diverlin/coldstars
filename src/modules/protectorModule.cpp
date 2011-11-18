@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 ProtectorModule :: ProtectorModule(TextureOb* _texOb, int _protection_add)
 {
-     	CommonForModules_init(PROTECTOR_ID, _texOb);
+     	CommonForModules_init(PROTECTOR_MODULE_ID, _texOb);
 
      	protection_add = _protection_add;
 }

@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 BakModule :: BakModule(TextureOb* _texOb, int _fuel_max_add)
 {
-    	CommonForModules_init(BAK_ID, _texOb);
+    	CommonForModules_init(BAK_MODULE_ID, _texOb);
 
     	fuel_max_add = _fuel_max_add;
 }

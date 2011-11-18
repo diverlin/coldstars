@@ -25,12 +25,13 @@ class CommonForSpaceItems
 {   
 	public:
         	CommonForSpaceItems();
-        	void CommonForSpaceItems_init(IdData _data_id, LifeData _data_life, TextureOb* _texOb, vec2f _start_pos);
+        	void CommonForSpaceItems_init(IdData, LifeData, TextureOb*, vec2f _start_pos);
     
-    		bool getAlive() const;
                 int getId() const;
                 int getTypeId() const;
                 int getSubTypeId() const;
+                bool getGarbageReady() const;
+    		bool getAlive() const;
     		bool* getpAlive();
                 int* getpPlaceTypeId();
         	Points* getPoints();

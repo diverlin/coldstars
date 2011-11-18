@@ -25,7 +25,7 @@ RadarEquipment :: RadarEquipment(TextureOb* _texOb_item,
 				 int _radius_orig, 
 				 EquipmentCommonData _common_data)
 {
-   	CommonForEquipment_init(RADAR_ID, RADAR_ID, _texOb_item, _common_data);
+   	CommonForEquipment_init(RADAR_EQUIPMENT_ID, RADAR_EQUIPMENT_ID, _texOb_item, _common_data);
 
     	radius_orig = _radius_orig;
     	radius_add  = 0;

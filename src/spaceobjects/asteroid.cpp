@@ -19,27 +19,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "asteroid.hpp"
 
-Asteroid :: Asteroid(TextureOb* _texOb,
+Asteroid :: Asteroid(IdData _data_id, LifeData _data_life,	
+		     TextureOb* _texOb,
 		     ObjMeshInstance* _mesh,
 		     PlanetData _planet_data)
 { 
-       CommonForPlanet_init(_texOb, 
+       CommonForPlanet_init(_data_id, _data_life,
+       			    _texOb, 
     	   		    _mesh, 
     	   	            _planet_data);
-    	   			                 
-	is_alive = true;
-      	is_dying = false;
-      	is_explosed = false;
-      
-      	dying_time = 50;
-
-      	type_id = ASTEROID_ID;
-
-      	armor = 10;
-      	damage = 10 * armor;
+   	   			                 
+      	damage = 10 * data_life.armor;
       	mass  = getRandInt(10, 30);
-        
-        place_type_id = SPACE_ID;
 }
     
  
@@ -47,12 +38,9 @@ Asteroid :: ~Asteroid()
 {}
     
 
-bool Asteroid :: getAlive() const { return is_alive; }
-bool* Asteroid :: getpAlive() { return &is_alive; }
-int* Asteroid :: getpPlaceTypeId() { return &place_type_id; }
-int Asteroid :: getArmor() const { return armor; }
+int Asteroid :: getArmor() const  { return data_life.armor; }
 int Asteroid :: getDamage() const { return damage; }
-int Asteroid :: getMass()  const { return mass; }	
+int Asteroid :: getMass()  const  { return mass; }	
 			
 
 
@@ -61,10 +49,10 @@ void Asteroid :: update_inSpace_inDynamic_TRUE()
      	updatePosition();  
      	updateRotation();
 
-     	if (is_dying == true)
+     	if (data_life.is_alive == false)
      	{
-        	dying_time--;
-        	if (dying_time < 0)
+        	data_life.dying_time--;
+        	if (data_life.dying_time < 0)
         	{
            		death_TRUE();
            	}
@@ -88,19 +76,20 @@ void Asteroid :: collision_FALSE()
 
 void Asteroid :: hit_TRUE(int damage)
 {
-     	armor -= damage;
-     	if (armor <= 0)
+     	data_life.armor -= damage;
+     	if (data_life.armor <= 0)
      	{
-        	is_dying = true; 
-        	dying_time -= 3;
+        	data_life.is_alive = false; 
+        	data_life.dying_time -= 3;
      	}
 }
 
 void Asteroid :: hit_FALSE(int damage)
 {
-     	armor -= damage;
-     	if (armor <= 0)
+     	data_life.armor -= damage;
+     	if (data_life.armor <= 0)
      	{
+     	     	data_life.is_alive = false; 
         	death_FALSE();
         }
 }
@@ -108,9 +97,7 @@ void Asteroid :: hit_FALSE(int damage)
     
 void Asteroid :: death_TRUE()
 {
-     	is_alive = false; 
-
-     	if (is_explosed == false)
+     	if (data_life.garbage_ready == false)
      	{   
         	createExplosion(starsystem, points.getCenter(), data.scale/2);
         
@@ -123,22 +110,20 @@ void Asteroid :: death_TRUE()
     	   		
         	//self.starsystem.screen_QUAKE_runtime_counter = 50
         	//self.starsystem.screen_QUAKE_amlitudaDiv2 = 5
-        	is_explosed = true;
+        	data_life.garbage_ready = true;
      }
 }    
 
 void Asteroid :: death_FALSE()
 {
-     	is_alive = false; 
-
-     	if (is_explosed == false)
+     	if (data_life.garbage_ready == false)
      	{  
         	for (int i = 0; i<3; i++)
     		{        		
         		Mineral* _mineral = createMineral(points.getCenter());
 			starsystem->add(_mineral);
     		}
-        	is_explosed = true;
+        	data_life.garbage_ready = true;
      	}
 }
 
@@ -150,8 +135,8 @@ void Asteroid :: updateInfo()
 	info.clear();
 
     	info.addTitleStr("ASTEROID");
-    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->getId()));
-    	info.addNameStr("armor:");       info.addValueStr(int2str(armor));
+    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->getId()));
+    	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 	info.addNameStr("speed x 100:"); info.addValueStr(int2str(int(data.speed*100)));
 }     
@@ -167,6 +152,14 @@ void Asteroid :: renderInfo()
 
 Asteroid* createAsteroid()
 {
+	IdData data_id;
+	data_id.id      = g_ASTEROID_ID_GENERATOR.getNextId();
+      	data_id.type_id = ASTEROID_ID;
+      	
+	LifeData data_life;   
+	data_life.armor      = 10;
+      	data_life.dying_time = 50;
+      	
     	PlanetData planet_data;
 	
 	planet_data.scale         = getRandInt(ASTEROID_SIZE_MIN, ASTEROID_SIZE_MAX);  
@@ -178,7 +171,7 @@ Asteroid* createAsteroid()
 
         TextureOb* texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.asteroid_texOb_pList); 
     
-        Asteroid* asteroid = new Asteroid(texOb, g_DEFORMED_SPHERE_MESH, planet_data);    	
+        Asteroid* asteroid = new Asteroid(data_id, data_life, texOb, g_DEFORMED_SPHERE_MESH, planet_data);    	
         asteroid->update_inSpace_inDynamic_FALSE();
         
         return asteroid;        

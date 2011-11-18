@@ -93,6 +93,7 @@ void Player :: bindNpc(Npc* _npc)
 
     	ship = npc->getShip();
     	ship->getNpc()->setControlledByPlayer(true);
+    	cursor->getSlot()->setShipOwner(ship);
 }
 
     

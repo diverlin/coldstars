@@ -24,10 +24,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Star : public CommonForPlanet
 {
 	public:
-    		float texture_offset1, texture_offset2; 
-   
+    		float texture_offset1, texture_offset2;    
    		
-    		Star(TextureOb* _texOb, ObjMeshInstance* _mesh,  PlanetData _star_data);
+    		Star(IdData, LifeData,
+    		     TextureOb*, 
+    		     ObjMeshInstance*,  
+    		     PlanetData);
+    		     
     		~Star();
                 
                 Color4f getColor() const;

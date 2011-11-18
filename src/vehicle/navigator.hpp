@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Navigator
 {
 	public:
-      		Navigator(Ship* _ship);
+      		Navigator(Ship*);
       		~Navigator();
       
       		void setStaticTargetCoords(vec2f _target_pos, float _offset = 0.0);
@@ -33,38 +33,31 @@ class Navigator
       		void setTarget(Ship*, float);    
       		void setTarget(StarSystem*);
                       
-                Planet* getTargetPlanet() const;  // ??
+                Planet* getTargetPlanet() const;  
                 StarSystem* getTargetStarSystem() const;
                 
-                //vec2f getTargetPos() const;
-                int getFollowingTypeId() const;
+                int getTargetTypeId() const;
                 
-                void updateDynamicTargetCoord();
-                
+               
       		bool checkEchievement();
       		bool getDockingPermission();               
-               
-        	void updatePosition();
+       	
+        	void resetTarget();
         	
-        	void removeTarget();
-        	
+        	void update_inSpace_inStatic();
+        	void update_inSpace_inDynamic();
+        	        	
       	private:
       		Ship* ship_owner;
+      		TargetObject* targetOb;
       		
-      		Planet*     target_planet;
-		Ship*       target_ship;
 		StarSystem* target_starsystem;
 		
 		vec2f target_pos;
-		vec2f* pTo_target_pos;
 			
 		float echievement_radius;   
 		float offset;
-                
-                int following_type_id;   
 
-                //////// TARGET COORDINATES //////
-        	//self.Gl_LIST_direction_ID = None
         	std::vector<float> direction_x_list;
         	std::vector<float> direction_y_list;
         	std::vector<float> angle_inD_list;
@@ -72,11 +65,17 @@ class Navigator
         	int len_direction_list;
         	bool direction_list_END;
         	int move_it;
-        	//////////////////////////////////
-                void calcDetaledWay();
-                
-                //template <typename TARGET>
-		//void checkHuperJumpNecessary(TARGET _target);
+   
+                void updatePosition();
+                       	
+                void targetValidation();
+		void isJumpNeeded();
+	
+	        void updateTargetCoord();
+		void calcDetaledWay();
+		
+		bool targetObValidation_dip1() const;
+		bool targetObValidation_dip2() const;
 };
 
 

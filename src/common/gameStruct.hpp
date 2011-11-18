@@ -153,10 +153,9 @@ struct LifeData
         bool is_alive;
         int armor;
         	
-        bool is_dying;
         int dying_time;
         
-        bool is_explosed;
+        bool garbage_ready;
 };
 
 

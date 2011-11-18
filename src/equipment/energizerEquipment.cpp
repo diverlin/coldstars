@@ -26,7 +26,7 @@ EnergizerEquipment :: EnergizerEquipment(TextureOb* _texOb_item,
 					 int _restoration_orig, 
 					 EquipmentCommonData _common_data)
 {
-    	CommonForEquipment_init(ENERGIZER_ID, ENERGIZER_ID, _texOb_item, _common_data);
+    	CommonForEquipment_init(ENERGIZER_EQUIPMENT_ID, ENERGIZER_EQUIPMENT_ID, _texOb_item, _common_data);
 
     	energy_max_orig = _energy_max_orig;
     	energy_max_add  = 0;

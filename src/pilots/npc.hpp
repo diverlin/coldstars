@@ -24,10 +24,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Npc 
 {
    	public:
-              	Npc(int _race_id, IdData _data_id, TextureOb* _texOb_face);
+              	Npc(int _race_id, 
+              	    IdData, LifeData, 
+              	    TextureOb*);
      		~Npc();
                 
    		void setAlive(bool);
+   		void setGarbageReady(bool);
    		void setStarSystem(StarSystem*);
    		void setKosmoport(Kosmoport*);
    		void setLand(Land*);
@@ -36,6 +39,7 @@ class Npc
    		void setControlledByPlayer(bool);
 
    		bool getAlive()    const;
+   		bool getGarbageReady() const;
    		int getId()        const;
    		int getTypeId()    const;
    		int getSubTypeId() const;
@@ -53,8 +57,8 @@ class Npc
 
    		void bind(Ship*);
 
-		void addCredits(int);
-		void removeCredits(int);
+		void increaseCredits(int);
+		void decreaseCredits(int);
      
      		// AI
      		//void setRandomTargetCoord();
@@ -81,10 +85,11 @@ class Npc
                 void renderInfo(float _pos_x, float _pos_y, float _offset_x = 0.0, float _offset_y = 0.0);
                                 
    	private:
-   	     	bool is_alive;    
      		int race_id;
-     		unsigned long int credits;  
+     		unsigned long int credits; 
+     		 
      		IdData data_id;
+     		LifeData data_life;
      		
    	     	StarSystem* starsystem;
    	     	Kosmoport* kosmoport;
@@ -129,7 +134,7 @@ class Npc
                 // Tracking and they events
                 bool jumpTracking();
           	bool dockTracking();
-                bool grabTracking();
+                void grabTracking();
                 
                 void jumpEvent();
                 void dockEvent();

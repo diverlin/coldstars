@@ -23,7 +23,7 @@ CommonForSpaceItems :: CommonForSpaceItems()
 
 void CommonForSpaceItems :: CommonForSpaceItems_init(IdData _data_id, LifeData _data_life, TextureOb* _texOb, vec2f _start_pos)
 {   
-    	data_id = _data_id;
+    	data_id   = _data_id;
     	data_life = _data_life;
     	
     	texOb = _texOb;
@@ -44,21 +44,25 @@ void CommonForSpaceItems :: CommonForSpaceItems_init(IdData _data_id, LifeData _
     	data_angle_inD.d_z      = getRandInt(10, 100)*0.01;    	    	    	
     	keep_moving = true;
     	
-    	target_pos = getRandomVec(_start_pos, 60, 100);
+    	target_pos = points.getCenter() + getRandVec(60, 100);
+        //printf("target_pos = %f,%f\n", target_pos.x, target_pos.y);
         
         place_type_id = SPACE_ID;
 }
 
-bool CommonForSpaceItems :: getAlive() const { return data_life.is_alive; }     
+void CommonForSpaceItems :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
+
+
 int CommonForSpaceItems :: getId() const { return data_id.id; }
 int CommonForSpaceItems :: getTypeId() const { return data_id.type_id; }
 int CommonForSpaceItems :: getSubTypeId() const { return data_id.subtype_id; }
+bool CommonForSpaceItems :: getGarbageReady() const { return data_life.garbage_ready; }  
+bool CommonForSpaceItems :: getAlive() const { return data_life.is_alive; }  
 bool* CommonForSpaceItems :: getpAlive() { return &data_life.is_alive; }  
 int* CommonForSpaceItems :: getpPlaceTypeId() { return &place_type_id; }
 void CommonForSpaceItems :: setPlaceTypeId(int _place_type_id) { place_type_id = _place_type_id; }
         	
 Points* CommonForSpaceItems :: getPoints() { return &points; } 
-void CommonForSpaceItems :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
 StarSystem* CommonForSpaceItems :: getStarSystem() { return starsystem; }
 int CommonForSpaceItems :: getCollisionRadius() const {return collision_radius; }	
 int CommonForSpaceItems :: getMass() const { return mass; }
@@ -67,6 +71,7 @@ void CommonForSpaceItems :: moveExternalyToPosition(vec2f _target)
 {
         get_dX_dY_ToPoint(points.getCenter().x, points.getCenter().y, _target.x, _target.y, velocity, &d_pos.x, &d_pos.y);
         points.setCenter(points.getCenter().x + d_pos.x, points.getCenter().y + d_pos.y);
+        //points.setCenter(points.getCenter() + d_pos);
 }
             	
 
@@ -78,7 +83,7 @@ void CommonForSpaceItems :: update_inSpace_inDynamic_TRUE()
         	points.setCenter(points.getCenter().x + d_pos.x, points.getCenter().y + d_pos.y);
      	}
       
-     	if (data_life.is_dying == true)
+     	if (data_life.is_alive == false)
      	{
         	data_life.dying_time--;
         	if (data_life.dying_time < 0)
@@ -100,7 +105,7 @@ void CommonForSpaceItems :: hit_TRUE(int _damage)
     	data_life.armor -= _damage;
     	if (data_life.armor <= 0)
     	{
-       		data_life.is_dying = true;
+       		data_life.is_alive = false;
        	}
        	
        	// improove
@@ -114,29 +119,29 @@ void CommonForSpaceItems :: hit_FALSE(int damage)
     	data_life.armor -= damage;
     	if (data_life.armor <= 0)
     	{
+    		data_life.is_alive = false;
        		death_FALSE();
        	}
 }
 
 void CommonForSpaceItems :: silentKill()
 {
-	data_life.is_alive = false;  
+	data_life.is_alive      = false;  
+	data_life.garbage_ready = true; 
 }
 
 void CommonForSpaceItems :: death_TRUE()
 {
-     	data_life.is_alive = false;   
-
-     	if (data_life.is_explosed == false)
+     	if (data_life.garbage_ready == false)
      	{   
         	createExplosion(starsystem, points.getCenter(), texOb->size_id);
-        	data_life.is_explosed = true;
+        	data_life.garbage_ready = true;
      	}
 }
    
 void CommonForSpaceItems :: death_FALSE()
 {
-     	data_life.is_alive = false;   
+	data_life.garbage_ready = true;
 }
 
 

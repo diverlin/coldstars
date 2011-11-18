@@ -40,6 +40,7 @@ void StarSystem :: setCapturedFlag(bool _captured) { is_CAPTURED = _captured; }
 				
 int StarSystem :: getId() const     { return id; }
 int StarSystem :: getTypeId() const { return type_id; }
+StarSystem* StarSystem :: getStarSystem() { return this; }
 bool StarSystem :: getDetailedSimulationFlag() const { return detalied_simulation; }
 bool StarSystem :: getCapturedFlag() const { return is_CAPTURED; }    
 vec2f StarSystem :: getPosition() const { return center; }  
@@ -145,14 +146,13 @@ void StarSystem :: update_TRUE(int timer)
 	    	updateEffects();
 	    		
 		if (calculation_per_turn_allowed == true)
-		{
-			removeAllReferencesToDeadObjects();
-			garbage.clear(); 
-	    		
+		{    		
     			updateEntities_inStatic();     			
 
     			calculation_per_turn_allowed = false;
     			calculation_per_turn_allowed_inDynamic = true;
+
+			garbage.clear(); 
     		}    		
 	}
 }
@@ -398,7 +398,7 @@ void StarSystem :: updateEntities_inStatic()
      	// called once per TURN
      	for (unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
      	{
-     		NPC_inSPACE_vec[ni]->getShip()->reloadWeapons();
+     		NPC_inSPACE_vec[ni]->getShip()->prepareWeapons();
      		if (NPC_inSPACE_vec[ni]->getControlledByPlayer() == false)
      		{
      			NPC_inSPACE_vec[ni]->thinkCommon_inSpace_inStatic();
@@ -904,6 +904,7 @@ void StarSystem :: killMineralById(int _id)
 	{
 		if (MINERAL_vec[i]->getId() == _id);
 		{
+			MINERAL_vec[i]->setPlaceTypeId(NONE_ID);
 			MINERAL_vec[i]->silentKill();
 			printf("MINERAL with id = %i HAS BEEN KILLED\n", _id);
 			return;
@@ -974,9 +975,10 @@ void StarSystem :: manageDeadObjects()
 	
    	for(unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
     	{
-               	if (SHIP_inSPACE_vec[ki]->getAlive() == false)
+               	if (SHIP_inSPACE_vec[ki]->getGarbageReady() == true)
         	{           
             		SHIP_inSPACE_vec[ki]->getNpc()->setAlive(false);
+               		SHIP_inSPACE_vec[ki]->getNpc()->setGarbageReady(true);
                
             		garbage.add(SHIP_inSPACE_vec[ki]);
             		SHIP_inSPACE_vec.erase(SHIP_inSPACE_vec.begin() + ki);
@@ -984,7 +986,7 @@ void StarSystem :: manageDeadObjects()
     	}
     	for(unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
     	{
-	        if (NPC_inSPACE_vec[ni]->getAlive() == false)
+	        if (NPC_inSPACE_vec[ni]->getGarbageReady() == true)
         	{   
             		garbage.add(NPC_inSPACE_vec[ni]);
             		NPC_inSPACE_vec.erase(NPC_inSPACE_vec.begin() + ni);
@@ -995,7 +997,7 @@ void StarSystem :: manageDeadObjects()
     	//
     	for(unsigned int ni = 0; ni < NPC_RANGER_inSPACE_vec.size(); ni++)
     	{
-	        if (NPC_RANGER_inSPACE_vec[ni]->getAlive() == false)
+	        if (NPC_RANGER_inSPACE_vec[ni]->getGarbageReady() == true)
         	{   
             		NPC_RANGER_inSPACE_vec.erase(NPC_RANGER_inSPACE_vec.begin() + ni);
             		
@@ -1004,7 +1006,7 @@ void StarSystem :: manageDeadObjects()
     	
     	for(unsigned int ni = 0; ni < NPC_WARRIOR_inSPACE_vec.size(); ni++)
     	{
-	        if (NPC_WARRIOR_inSPACE_vec[ni]->getAlive() == false)
+	        if (NPC_WARRIOR_inSPACE_vec[ni]->getGarbageReady() == true)
         	{   
             		NPC_WARRIOR_inSPACE_vec.erase(NPC_WARRIOR_inSPACE_vec.begin() + ni);
             		
@@ -1013,7 +1015,7 @@ void StarSystem :: manageDeadObjects()
     	    	
     	for(unsigned int ni = 0; ni < NPC_TRADER_inSPACE_vec.size(); ni++)
     	{
-	        if (NPC_TRADER_inSPACE_vec[ni]->getAlive() == false)
+	        if (NPC_TRADER_inSPACE_vec[ni]->getGarbageReady() == true)
         	{   
             		NPC_TRADER_inSPACE_vec.erase(NPC_TRADER_inSPACE_vec.begin() + ni);
             		
@@ -1022,7 +1024,7 @@ void StarSystem :: manageDeadObjects()
     	
     	for(unsigned int ni = 0; ni < NPC_PIRAT_inSPACE_vec.size(); ni++)
     	{
-	        if (NPC_PIRAT_inSPACE_vec[ni]->getAlive() == false)
+	        if (NPC_PIRAT_inSPACE_vec[ni]->getGarbageReady() == true)
         	{   
             		NPC_PIRAT_inSPACE_vec.erase(NPC_PIRAT_inSPACE_vec.begin() + ni);
             		
@@ -1031,7 +1033,7 @@ void StarSystem :: manageDeadObjects()
     	
     	for(unsigned int ni = 0; ni < NPC_DIPLOMAT_inSPACE_vec.size(); ni++)
     	{
-	        if (NPC_DIPLOMAT_inSPACE_vec[ni]->getAlive() == false)
+	        if (NPC_DIPLOMAT_inSPACE_vec[ni]->getGarbageReady() == true)
         	{   
             		NPC_DIPLOMAT_inSPACE_vec.erase(NPC_DIPLOMAT_inSPACE_vec.begin() + ni);
             		
@@ -1046,7 +1048,7 @@ void StarSystem :: manageDeadObjects()
 
     	for(unsigned int i = 0; i < ASTEROID_vec.size(); i++)
     	{
-        	if (ASTEROID_vec[i]->getAlive() == false)
+        	if (ASTEROID_vec[i]->getGarbageReady() == true)
         	{
             		garbage.add(ASTEROID_vec[i]);
             		ASTEROID_vec.erase(ASTEROID_vec.begin() + i );
@@ -1056,7 +1058,7 @@ void StarSystem :: manageDeadObjects()
 
     	for(unsigned int i = 0; i < MINERAL_vec.size(); i++)
     	{
-        	if (MINERAL_vec[i]->getAlive() == false)
+        	if (MINERAL_vec[i]->getGarbageReady() == true)
         	{  
             		garbage.add(MINERAL_vec[i]);
             		MINERAL_vec.erase(MINERAL_vec.begin() + i );
@@ -1065,7 +1067,7 @@ void StarSystem :: manageDeadObjects()
     
     	for(unsigned int i = 0; i < CONTAINER_vec.size(); i++)
     	{
-        	if (CONTAINER_vec[i]->getAlive() == false)
+        	if (CONTAINER_vec[i]->getGarbageReady() == true)
         	{   
             		garbage.add(CONTAINER_vec[i]);
             		CONTAINER_vec.erase(CONTAINER_vec.begin() + i );
@@ -1074,7 +1076,7 @@ void StarSystem :: manageDeadObjects()
 
     	for(unsigned int ri = 0; ri < ROCKET_vec.size(); ri++)
     	{
-        	if (ROCKET_vec[ri]->getAlive() == false)
+        	if (ROCKET_vec[ri]->getGarbageReady() == true)
         	{   
             		garbage.add(ROCKET_vec[ri]);
             		ROCKET_vec.erase(ROCKET_vec.begin() + ri );
@@ -1135,20 +1137,7 @@ void StarSystem :: manageDeadObjects()
 
         // effects
 }
-
-     
-
-
-void StarSystem :: removeAllReferencesToDeadObjects()
-{
-    	for(unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
-    	{ 
-		SHIP_inSPACE_vec[ki]->removeWeaponSlotDeadTargets(); 
-	}
-
-}	
-     
-     
+    
                
 
 
@@ -1192,7 +1181,13 @@ void StarSystem :: mouseControl()
                				{
                    				pPLAYER->getShip()->selectWeapons();
                    				pPLAYER->getShip()->setWeaponsTarget(visible_MINERAL_vec[mi]);
-
+	       				}
+	       				if (mrb == true)
+	       				{
+	       					if (pPLAYER->getShip()->ableTo.GRAB == true)
+	       					{
+	       						pPLAYER->getShip()->grapple_slot.getGrappleEquipment()->add(visible_MINERAL_vec[mi]);
+	       					}
 	       				}
 	       			}
 	       			
@@ -1509,6 +1504,16 @@ bool collisionBetweenCenters(Points* points1, Points* points2, float collision_r
     if(abs(points1->getCenter().x - points2->getCenter().x) > collision_radius)
        return false;
     if(abs(points1->getCenter().y - points2->getCenter().y) > collision_radius)
+       return false;
+
+    return true;
+}
+
+bool collisionBetweenCenters(Points* points1, vec2f point2, float collision_radius)
+{
+    if(abs(points1->getCenter().x - point2.x) > collision_radius)
+       return false;
+    if(abs(points1->getCenter().y - point2.y) > collision_radius)
        return false;
 
     return true;
