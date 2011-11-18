@@ -28,6 +28,7 @@ class ItemSlot
 		ItemSlot(int _subtype_id, Ship* _ship, TextureOb* _texOb, int _pos_x, int _pos_y);
 		~ItemSlot();
                 
+                void setShipOwner(Ship*);
                 void bindTurrel(Turrel*);
                                 
                 int getTypeId()        const;
@@ -95,7 +96,9 @@ class ItemSlot
                 
                 bool interaction(int _x, int _y);
                 
-                void createAndDropContainer(StarSystem* _starsystem, vec2f _center);
+                void dropItemToSpace();
+                
+                bool SwapItemWith(ItemSlot*);
         
         private:
                 int type_id, subtype_id;               

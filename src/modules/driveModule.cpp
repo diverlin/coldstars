@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 DriveModule :: DriveModule(TextureOb* _texOb, int _speed_add, int _hyper_add)
 {
-     	CommonForModules_init(DRIVE_ID, _texOb);
+     	CommonForModules_init(DRIVE_MODULE_ID, _texOb);
 
      	speed_add = _speed_add;
      	hyper_add = _hyper_add;

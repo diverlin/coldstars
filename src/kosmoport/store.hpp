@@ -55,7 +55,7 @@ class Store
                 int buyDroidSlotItem(ItemSlot*); 
                 int buyFreezerSlotItem(ItemSlot*); 
 
-                int buyOtsecSlotItem(ItemSlot*); 
+                bool buyItemFromSlot(ItemSlot*); 
 
                 void update();
                 void render() const;

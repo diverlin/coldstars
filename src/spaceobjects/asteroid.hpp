@@ -23,15 +23,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Asteroid : public CommonForPlanet
 {
 	public:
-		Asteroid(TextureOb* _texOb,
-		         ObjMeshInstance* _mesh,
-		         PlanetData _planet_data);
+		Asteroid(IdData, LifeData,
+			 TextureOb*,
+		         ObjMeshInstance*,
+		         PlanetData);
 		     
         	~Asteroid();
 
-		bool getAlive() const;
-		bool* getpAlive();
-                int* getpPlaceTypeId();
 		int getArmor() const;
 		int getDamage() const;
 		int getMass()  const;	
@@ -42,25 +40,16 @@ class Asteroid : public CommonForPlanet
         	void collision_TRUE();
         	void collision_FALSE();
         	
-        	void hit_TRUE(int damage);
-        	void hit_FALSE(int damage);
+        	void hit_TRUE(int);
+        	void hit_FALSE(int);
         	
         	void updateInfo();
         	void renderInfo();
         	
-        private:
-                bool is_alive;
-        	bool is_dying;
-        	bool is_explosed;
-        	
-        	int dying_time;
-        	
-      		int armor;
+        private:      	
       		int damage;
-      		int mass;
-        	
-                int place_type_id;
-                
+      		int mass;        	
+               
 		void death_TRUE();
         	void death_FALSE();
 }; 

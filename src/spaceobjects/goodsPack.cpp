@@ -58,10 +58,28 @@ void GoodsPack :: decrease(unsigned int _ammount)
 	}
 }
                 
-void GoodsPack :: renderInfo()
+                
+void GoodsPack :: updateInfo()
 {
-     	//otsec_slot->getRect().setNewCenter(points.getCenter());	
-     	//otsec_slot->renderItemInfo(g_SCROLL_COORD_X, g_SCROLL_COORD_Y);
+	info.clear();
+	
+    	info.addTitleStr("GOODS");
+    	
+    	if (data_id.subtype_id == MINERAL_ID)
+    	{
+    		info.addNameStr("mineral:");   info.addValueStr( int2str(mineral) );
+    		info.addNameStr("mass:");   info.addValueStr( int2str(mass) );
+    	}
+	else
+	{
+	    	info.addNameStr("UNKNOWN:");   info.addValueStr( "---" );
+	}
+}                        	
+                    
+                    
+void GoodsPack :: renderInfo(Rect slot_rect, float offset_x, float offset_y)
+{
+     	drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.getCenter().x, slot_rect.getCenter().y, offset_x, offset_y);
 }
 
  

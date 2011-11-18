@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 GrappleModule :: GrappleModule(TextureOb* _texOb, int _strength_add, int _radius_add, int _speed_add, int _maxNumItem_add)
 {
-       CommonForModules_init(GRAPPLE_ID, _texOb);
+       CommonForModules_init(GRAPPLE_MODULE_ID, _texOb);
 
        strength_add   = _strength_add;
        radius_add     = _radius_add;

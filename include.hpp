@@ -77,6 +77,9 @@ class Turrel;
 #include "src/spaceobjects/container.hpp"
 #include "src/spaceobjects/goodsPack.hpp"
 
+class Planet;
+class StarSystem;
+class Star;
 #include "src/pilots/targetObject.hpp" 
 
 

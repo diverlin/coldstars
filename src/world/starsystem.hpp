@@ -37,7 +37,7 @@ class StarSystem
 
 		std::vector<Ship*> SHIP_inSPACE_vec;
     		std::vector<Npc*>  NPC_inSPACE_vec;
-			// these 5 list below is needed for AI
+		// these 5 list below is needed for AI
     		std::vector<Npc*>  NPC_RANGER_inSPACE_vec;  
     		std::vector<Npc*>  NPC_WARRIOR_inSPACE_vec;
     		std::vector<Npc*>  NPC_TRADER_inSPACE_vec;
@@ -54,6 +54,7 @@ class StarSystem
 		
 		int getId() const;
                 int getTypeId() const;
+                StarSystem* getStarSystem();
 		bool getDetailedSimulationFlag() const;
 		bool getCapturedFlag() const;
 		vec2f getPosition() const;
@@ -150,9 +151,7 @@ class StarSystem
     		void asteroidManager(unsigned int num);
     		    		
     		void manageDeadObjects();
-    		void removeAllReferencesToDeadObjects();
-    		
-    		
+   		
                 void rocketCollision_TRUE();
     		void rocketCollision_FALSE();
 
@@ -184,6 +183,7 @@ template <typename AGRESSOR, typename VICTIM>
 bool collideEvent_TRUE(AGRESSOR*,  VICTIM*);
 
 bool collisionBetweenCenters(Points* points1, Points* points2, float collision_radius);
+bool collisionBetweenCenters(Points* points1, vec2f point2, float collision_radius);
 bool collisionBetweenCenters(Points* points1, float center2_x, float center2_y, float collision_radius);
 
 bool isObjectVisible(Points* points, float startViewCoord_x, float startViewCoord_y);

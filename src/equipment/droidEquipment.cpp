@@ -24,7 +24,7 @@ DroidEquipment :: DroidEquipment(TextureOb* _texOb_item,
 				 int _repair_orig, 
 				 EquipmentCommonData _common_data)
 {
-    	CommonForEquipment_init(DROID_ID, DROID_ID, _texOb_item, _common_data);
+    	CommonForEquipment_init(DROID_EQUIPMENT_ID, DROID_EQUIPMENT_ID, _texOb_item, _common_data);
 
     	repair_orig = _repair_orig;
     	repair_add  = 0;

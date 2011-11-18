@@ -19,11 +19,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "star.hpp"
    
-Star :: Star(TextureOb* _texOb, ObjMeshInstance* _mesh, PlanetData _star_data)
+Star :: Star(IdData _data_id, LifeData _data_life, TextureOb* _texOb, ObjMeshInstance* _mesh, PlanetData _star_data)
 { 
-	type_id = STAR_ID;
-	
-      	CommonForPlanet_init(_texOb, 
+      	CommonForPlanet_init(_data_id, _data_life, 
+      			     _texOb, 
     	   		     _mesh, 
     	   	             _star_data);
     	   		       
@@ -99,7 +98,7 @@ void Star :: updateInfo()
 { 
 	info.clear();
     	info.addTitleStr("STAR");
-    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(id) + " / " + int2str(starsystem->getId()));
+    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->getId()));
 }
 
 void Star :: renderInfo()
@@ -109,10 +108,15 @@ void Star :: renderInfo()
 
         
 
-
     
 Star* createStar()
 {
+	IdData data_id;
+	data_id.id         = g_STAR_ID_GENERATOR.getNextId();
+      	data_id.type_id    = STAR_ID;
+        
+        LifeData data_life;
+
  	PlanetData star_data;
 
 	star_data.scale         = getRandInt(STAR_SIZE_MIN, STAR_SIZE_MAX);  
@@ -122,10 +126,10 @@ Star* createStar()
     	star_data.orbit_phi_inD = 0;
     	star_data.speed         = 1.8;
 
-    	TextureOb* _starTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.star_texOb_pList);
-    	Star* _star = new Star(_starTexOb, g_SPHERE_MESH, star_data);
+    	TextureOb* texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.star_texOb_pList);
+    	Star* star = new Star(data_id, data_life, texOb, g_SPHERE_MESH, star_data);
     
-    	return _star;
+    	return star;
 }
         
 

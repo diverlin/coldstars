@@ -27,7 +27,7 @@ GrappleEquipment :: GrappleEquipment(TextureOb* _texOb_item,
 				     int _maxNumItem_orig, 
 				     EquipmentCommonData _common_data)   // joun strength and speed attributes into one
 {
-    	CommonForEquipment_init(GRAPPLE_ID, GRAPPLE_ID, _texOb_item, _common_data);
+    	CommonForEquipment_init(GRAPPLE_EQUIPMENT_ID, GRAPPLE_EQUIPMENT_ID, _texOb_item, _common_data);
 
     	strength_orig = _strength_orig;
     	strength_add  = 0;
@@ -77,10 +77,17 @@ void GrappleEquipment :: add(TARGET_TYPE* _target)
 {
         for (unsigned int i = 0; i < target_vec.size(); i++)
         {
-                if (target_vec[i]->getValid() == false)
+                if (target_vec[i]->getValid() == true)
+                {
+                        if (target_vec[i]->getObId() == _target->getId() )
+                        {
+                        	return;  // avoiding dublicated items in the vector
+                        }
+                }                
+                else
                 {
                         target_vec[i]->setObject(_target);
-                        break;
+                        return;
                 }
         }        
 }

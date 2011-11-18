@@ -26,7 +26,7 @@ RocketEquipment :: RocketEquipment(TextureOb* _texOb_item,
 				   int _radius_orig, 
 				   EquipmentCommonData _common_data)
 {
-	CommonForEquipment_init(ROCKET_ID, WEAPON_SLOT_ID, _texOb_item, _common_data);
+	CommonForEquipment_init(ROCKET_EQUIPMENT_ID, WEAPON_SLOT_ID, _texOb_item, _common_data);
 
         ammo_max_orig = _ammo_max_orig;
         ammo_max_add = 0;

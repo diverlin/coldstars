@@ -57,7 +57,7 @@ void Turrel :: setTexOb(TextureOb* _texOb)
 }
 
 
-bool Turrel :: fireCheck()
+bool Turrel :: validateTarget()
 {
         targetOb->validation();    
                         
@@ -69,13 +69,12 @@ bool Turrel :: fireCheck()
 
 bool Turrel :: isAmmoAvailable()
 {
-    	if (slot->getItemSubTypeId() == LAZER_ID)
-                //if check energy
-                        return true;
-    	if (slot->getItemSubTypeId() == ROCKET_ID)
-       		if (slot->getRocketEquipment()->getAmmo() > 0)
-          		return true;
-
+	switch(slot->getItemSubTypeId() )
+	{
+    		case LAZER_EQUIPMENT_ID:  { /*if check energy */  return true; }
+    		case ROCKET_EQUIPMENT_ID: { if (slot->getRocketEquipment()->getAmmo() > 0) return true; }
+	}
+	
     	return false;           
 }
 
@@ -84,41 +83,45 @@ bool Turrel :: isAmmoAvailable()
 
 bool Turrel :: fireEvent_TRUE()
 {
-    	if (slot->getItemSubTypeId() == LAZER_ID)
-    	{   
-       		slot->getLazerEquipment()->fireEvent(this);
+	switch(slot->getItemSubTypeId())
+	{
+    		case LAZER_EQUIPMENT_ID:
+    		{   
+       			slot->getLazerEquipment()->fireEvent(this);
 
-       		if (targetOb->getObTypeId() == SHIP_ID) 
-       		{ 
-           		targetOb->getShip()->hit_TRUE(slot->getLazerEquipment()->getDamage());
-           		return true;
-       		} 
+       			if (targetOb->getObTypeId() == SHIP_ID) 
+       			{ 
+           			targetOb->getShip()->hit_TRUE(slot->getLazerEquipment()->getDamage());
+           			return true;
+       			} 
 
-       		if (targetOb->getObTypeId() == ASTEROID_ID)  
-       		{ 
-           		targetOb->getAsteroid()->hit_TRUE(slot->getLazerEquipment()->getDamage());
-           		return true;
-       		}
+       			if (targetOb->getObTypeId() == ASTEROID_ID)  
+       			{ 
+           			targetOb->getAsteroid()->hit_TRUE(slot->getLazerEquipment()->getDamage());
+           			return true;
+       			}
 
-       		if (targetOb->getObTypeId() == MINERAL_ID)  
-       		{ 
-           		targetOb->getMineral()->hit_TRUE(slot->getLazerEquipment()->getDamage());
-           		return true;
-       		}
+       			if (targetOb->getObTypeId() == MINERAL_ID)  
+       			{ 
+           			targetOb->getMineral()->hit_TRUE(slot->getLazerEquipment()->getDamage());
+           			return true;
+       			}
 
-       		if (targetOb->getObTypeId() == CONTAINER_ID)  
-       		{ 
-           		targetOb->getContainer()->hit_TRUE(slot->getLazerEquipment()->getDamage());
-           		return true;
-       		}
-    	}
+       			if (targetOb->getObTypeId() == CONTAINER_ID)  
+       			{ 
+           			targetOb->getContainer()->hit_TRUE(slot->getLazerEquipment()->getDamage());
+           			return true;
+       			}
+    		}
 
-    	if (slot->getItemSubTypeId() == ROCKET_ID)
-    	{       
-                slot->getRocketEquipment()->fireEvent();
-                return true;                
-    	}
+    		case ROCKET_EQUIPMENT_ID:
+    		{       
+                	slot->getRocketEquipment()->fireEvent();
+                	return true;                
+    		}
 
+	}
+	
     	return false;
 }
 

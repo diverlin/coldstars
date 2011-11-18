@@ -75,6 +75,7 @@ RocketBullet :: ~RocketBullet()
 
 void RocketBullet :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
 
+bool RocketBullet :: getGarbageReady() const { return data_life.garbage_ready; }
 bool RocketBullet :: getAlive() const { return data_life.is_alive; }
 int RocketBullet :: getArmor() const  { return data_life.armor; }
 int RocketBullet :: getDamage() const { return data_bullet.damage; }
@@ -142,6 +143,7 @@ void RocketBullet :: hit_TRUE(int _damage)
     	data_life.armor -= _damage;
     	if (data_life.armor <= 0)
     	{
+    	     	data_life.is_alive = false; 
         	death_TRUE();
         }
 }
@@ -151,24 +153,23 @@ void RocketBullet :: hit_FALSE(int _damage)
     	data_life.armor -= _damage;
     	if (data_life.armor <= 0)
     	{
+    	     	data_life.is_alive = false; 
         	death_FALSE();
         }
 }
 
 void RocketBullet :: death_TRUE()
 {
-     	data_life.is_alive = false; 
-
-     	if (data_life.is_explosed == false)
+     	if (data_life.garbage_ready == false)
      	{   
         	createExplosion(starsystem, points.getCenter(), texOb->size_id);
-        	data_life.is_explosed = true;
+        	data_life.garbage_ready = true;
      	}
 }
 
 void RocketBullet :: death_FALSE()
 {
-     	data_life.is_alive = false; 
+     	data_life.garbage_ready = true; 
 }
 
 
@@ -215,8 +216,8 @@ RocketBullet* rocketGenerator(BulletData data_bullet, ItemSlot* slot)
 	data_id.type_id = ROCKET_BULLET_ID;
 	data_id.subtype_id = -1;
 	
-	data_life.is_alive    = true;
-        data_life.is_explosed = false;
+	data_life.is_alive      = true;
+        data_life.garbage_ready = false;
         data_life.armor = data_bullet.armor;        
 
     	RocketBullet* rocket; 

@@ -23,10 +23,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Planet : public CommonForPlanet
 {
         public:
-                Planet(int _subtype_id, 
-                       TextureOb* _texOb, 
-                       TextureOb* _texOb_atmoshere, 
-                       ObjMeshInstance* _mesh, 
+                Planet(IdData, LifeData, 
+                       TextureOb*, TextureOb*, 
+                       ObjMeshInstance*, 
 		       PlanetData _planet_data,
 		       unsigned long int _population);
     	   
@@ -42,8 +41,8 @@ class Planet : public CommonForPlanet
 		void addToLaunchingQueue(Npc*);                
                 void launchingProcedure();
                 
-                bool removeShipById(int _id);
-                bool removeNpcById(int _id);
+                bool removeShipById(int);
+                bool removeNpcById(int);
 
                 void update_inSpace_inDynamic();
                 void update_inSpace_inStatic();

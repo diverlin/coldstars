@@ -40,7 +40,7 @@ class Turrel
                 
                 TargetObject* getTargetOb();
        
-                bool fireCheck();                
+                bool validateTarget();                
                 bool isAmmoAvailable();
                 
                 bool fireEvent_TRUE();

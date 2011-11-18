@@ -22,7 +22,7 @@ LazerEquipment :: LazerEquipment(TextureOb* _texOb_item,
 				 int _radius_orig, 
 				 EquipmentCommonData _common_data)
 {
-   	CommonForEquipment_init(LAZER_ID, WEAPON_SLOT_ID, _texOb_item, _common_data);
+   	CommonForEquipment_init(LAZER_EQUIPMENT_ID, WEAPON_SLOT_ID, _texOb_item, _common_data);
 
    	damage_orig = _damage_orig;
    	damage_add  = 0;

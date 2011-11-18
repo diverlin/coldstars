@@ -21,7 +21,7 @@ ProtectorEquipment :: ProtectorEquipment(TextureOb* _texOb_item,
 					 int _protection_orig, 
 					 EquipmentCommonData _common_data)
 {
-    	CommonForEquipment_init(PROTECTOR_ID, PROTECTOR_ID, _texOb_item, _common_data);
+    	CommonForEquipment_init(PROTECTOR_EQUIPMENT_ID, PROTECTOR_EQUIPMENT_ID, _texOb_item, _common_data);
 
     	protection_orig = _protection_orig;
     	protection_add  = 0;

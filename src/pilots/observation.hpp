@@ -29,32 +29,53 @@ class MineralObservationData
 		MineralObservationData(Mineral*, float);
 };
 
+class ContainerObservationData
+{
+	public:
+		Container* container;
+		float dist;
+		
+		ContainerObservationData(Container*, float);
+};
+
+class AsteroidObservationData
+{
+	public:
+		Asteroid* asteroid;
+		float dist;
+		
+		AsteroidObservationData(Asteroid*, float);
+};
+
+class NpcObservationData
+{
+	public:
+		Npc* npc;
+		float dist;
+		
+		NpcObservationData(Npc*, float);
+};
+
+
 class Observation 
 {
    	public:
       		Observation(Npc*);
      		~Observation();
                                 
-                Npc* npc;
-        
-     		std::vector<Asteroid*>  visible_ASTEROID_vec;
-     		std::vector<Asteroid*>  sorted_visible_ASTEROID_vec;
-     		     		
-     		std::vector<MineralObservationData> visible_MINERAL_vec;
+     		std::vector<AsteroidObservationData>  visible_ASTEROID_vec; 		
+     		std::vector<MineralObservationData>   visible_MINERAL_vec;                
+     		std::vector<ContainerObservationData> visible_CONTAINER_vec;
                 
-     		std::vector<Container*> visible_CONTAINER_vec;
-     		std::vector<Container*> sorted_visible_CONTAINER_vec;
-                
-     		std::vector<Npc*> visible_NPC_RANGER_vec;
-     		std::vector<Npc*> visible_NPC_WARRIOR_vec;
-     		std::vector<Npc*> visible_NPC_TRADER_vec;
-     		std::vector<Npc*> visible_NPC_PIRAT_vec;
-     		std::vector<Npc*> visible_NPC_DIPLOMAT_vec;
+     		std::vector<NpcObservationData> visible_NPC_RANGER_vec;
+     		std::vector<NpcObservationData> visible_NPC_WARRIOR_vec;
+     		std::vector<NpcObservationData> visible_NPC_TRADER_vec;
+     		std::vector<NpcObservationData> visible_NPC_PIRAT_vec;
+     		std::vector<NpcObservationData> visible_NPC_DIPLOMAT_vec;
 
      		VisionStatus see;
 
  		void observeAll_inSpace_inStatic();
-     		//void observe_inPlanet_inStatic();  //inhabited <-> uninhabited
                 
           	void findVisibleAsteroids_inSpace_inStatic();
           	void findVisibleMinerals_inSpace_inStatic();
@@ -66,20 +87,14 @@ class Observation
                	void findVisiblePiratNpcs_inSpace_inStatic();
                	void findVisibleDiplomatNpcs_inSpace_inStatic();
 
-                void sortVisibleMinerals_inSpace_inStatic();
-               	void sortVisibleAsteroids_inSpace_inStatic(); 
-               	
-               	void printVisibleMineralInformation() const;
+                template <typename OBSERVED_DATA_TYPE>
+		void sort(std::vector<OBSERVED_DATA_TYPE>*);
+
+              	
+               	void printVisibleMineralInformation() const;  // debug
                	
 	private:
-	     	std::vector<float> asteroid_distance_vec;
-     		std::vector<float> container_distance_vec;
-
-     		std::vector<float> npc_ranger_distance_vec;
-     		std::vector<float> npc_warrior_distance_vec;
-     		std::vector<float> npc_trader_distance_vec;
-     		std::vector<float> npc_pirat_distance_vec;
-     		std::vector<float> npc_diplomat_distance_vec;
+                Npc* npc_owner;	
 };
 
 #endif 

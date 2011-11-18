@@ -31,7 +31,8 @@ class Ship
                 int getTypeId() const;
                 int getId() const;
                 int getPlaceTypeId() const;
-                
+
+                bool getGarbageReady() const;                
                 bool getAlive() const;
                 bool* getpAlive();
                 int* getpPlaceTypeId();
@@ -78,11 +79,8 @@ class Ship
 
         	Ship(TextureOb*, LifeData, IdData, KorpusData);
         	~Ship();    
-
-         	void updatePosition();
-                
-        	void reloadWeapons();        
-     		void selectWeapons();                                     
+               
+               	void prepareWeapons();
                      
                 template <typename TARGET_TYPE>      
                 void setWeaponsTarget(TARGET_TYPE*);     
@@ -90,8 +88,8 @@ class Ship
         	void weaponsFire_TRUE(int timer);
         	void weaponsFire_FALSE(int timer);
 
+     		void selectWeapons();  
         	void resetDeselectedWeaponTargets();                                          
-        	void removeWeaponSlotDeadTargets();
 
         	void update_inSpace_inDynamic_TRUE();
         	void update_inSpace_inDynamic_FALSE();
@@ -134,7 +132,7 @@ class Ship
         	WeaponSelector weapon_selector; 
                 
                 bool repair();
-          
+         
         private:
         	LifeData data_life;
         	IdData   data_id;
@@ -167,9 +165,9 @@ class Ship
              	
                 // WEPONS
         	int fire_delay, d_fire_delay;
-        	std::vector<ItemSlot*> slot_weapon_pList;
-        	std::vector<ItemSlot*> slot_weapon_equiped_pList;
-        	std::vector<ItemSlot*> slot_weapon_reloaded_pList;
+        	std::vector<ItemSlot*> slot_weapon_vec;
+        	std::vector<ItemSlot*> slot_weapon_equiped_vec;
+        	std::vector<ItemSlot*> slot_weapon_reloaded_vec;
         	
              	Turrel* turrel1;
         	Turrel* turrel2;
@@ -178,6 +176,9 @@ class Ship
         	Turrel* turrel5;
 
         	int place_type_id;
+        	
+        	void reloadAllWeapons();  
+        	void validateAllReloadedWeaponsTarget();
 };
 
 void equip(Ship* pTo_ship);

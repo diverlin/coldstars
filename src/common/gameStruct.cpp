@@ -134,10 +134,9 @@ LifeData :: LifeData()
         is_alive = true;
         armor = 1;
         	
-        is_dying = false;
         dying_time = 0;
         
-        is_explosed = false;
+        garbage_ready = false;
 }	
 
 

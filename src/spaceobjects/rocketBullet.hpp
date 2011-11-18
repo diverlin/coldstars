@@ -35,7 +35,8 @@ class RocketBullet
                 ~RocketBullet();
         
         	void setStarSystem(StarSystem*);
-        	
+
+        	bool getGarbageReady() const;        	
         	bool getAlive() const;
         	int getArmor() const;
         	int getDamage() const;

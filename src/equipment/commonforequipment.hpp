@@ -45,7 +45,9 @@ class CommonForEquipment
      		void virtual updateOwnerPropetries();
      		
      	private:
-     	        int id, type_id, subtype_id;
+     	        int id;
+     	        int type_id, subtype_id;
+     	        
      	        TextureOb* itemTexOb;
      		int w, h;
 	

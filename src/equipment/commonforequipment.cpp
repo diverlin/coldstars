@@ -120,6 +120,7 @@ void CommonForEquipment :: addCommonInfo()
 
 void CommonForEquipment :: renderInfo(Rect slot_rect, float offset_x, float offset_y)
 {  
+	updateInfo();
      	drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.getCenter().x, slot_rect.getCenter().y, offset_x, offset_y);
 }
 
