@@ -35,6 +35,8 @@ Kosmoport :: Kosmoport(int _race_id)
         store     = new Store(_texOb_storeBackground, _texOb_slot);
         shop      = new Shop(_texOb_shopBackground);
         goverment = new Goverment(_texOb_govermentBackground, _texOb_slot);
+        
+        equipStore(store);
 }
 
 

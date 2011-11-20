@@ -24,7 +24,7 @@ FreezerEquipment :: FreezerEquipment(TextureOb* _texOb_item,
 				     int _freeze_orig, 
 				     EquipmentCommonData _common_data)
 {
-    	CommonForEquipment_init(FREEZER_EQUIPMENT_ID, FREEZER_EQUIPMENT_ID, _texOb_item, _common_data);
+    	CommonForEquipment_init(FREEZER_EQUIPMENT_ID, FREEZER_SLOT_ID, _texOb_item, _common_data);
 
     	freeze_orig = _freeze_orig;
     	freeze_add  = 0;

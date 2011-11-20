@@ -54,6 +54,12 @@ unsigned int CommonForModules :: getMass()    const { return mass; }
 TextureOb* CommonForModules :: getTexOb()     const { return texOb; }
       		
 
+// not relevant for this cals but is needed for interface
+int CommonForModules :: getFunctionalSlotSubTypeId() { return NONE_SLOT_ID; }
+void CommonForModules :: bindSlot(ItemSlot* _slot)   { /* do nothing*/ }
+void CommonForModules :: updateOwnerPropetries()     { /* do nothing*/ } 
+//
+      		
 
 void CommonForModules :: updateInfo()
 {

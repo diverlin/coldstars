@@ -126,13 +126,15 @@ void RocketBullet :: updateDebugWay(int _timer)   // DEBUG
 }
 
 
-void RocketBullet :: collision_TRUE()
+void RocketBullet :: collisionEvent_TRUE()
 {
+	data_life.is_alive = false; 
 	death_TRUE();
 }
 
-void RocketBullet :: collision_FALSE()
+void RocketBullet :: collisionEvent_FALSE()
 {
+	data_life.is_alive = false; 
 	death_FALSE();
 }
 

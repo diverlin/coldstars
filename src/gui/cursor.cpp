@@ -25,7 +25,7 @@ Cursor :: Cursor()
      	type_id = CURSOR_ID;
      
      	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.slot_texOb_pList);
-     	slot = new ItemSlot(UNIVERSAL_SLOT_ID, NULL, texOb_slot, 0, 0);
+     	slot = new ItemSlot(CARGO_SLOT_ID, NULL, texOb_slot, 0, 0);
      
 }
 

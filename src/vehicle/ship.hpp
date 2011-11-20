@@ -89,7 +89,8 @@ class Ship
         	void weaponsFire_FALSE(int timer);
 
      		void selectWeapons();  
-        	void resetDeselectedWeaponTargets();                                          
+        	void resetDeselectedWeaponTargets();   
+        	bool isAnyWeaponSelected() const;                                       
 
         	void update_inSpace_inDynamic_TRUE();
         	void update_inSpace_inDynamic_FALSE();

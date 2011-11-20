@@ -10,9 +10,18 @@ class vec2f
                 vec2f();
                 vec2f(float _x, float _y);
                 
-                void set(float _x, float _y);
+                bool isNull() const;
                 
-                vec2f operator+(const vec2f&);
+                float getLen() const;
+                vec2f getNorm() const;
+                
+                void set(float _x, float _y);
+
+                vec2f operator+=(const vec2f&);                
+                vec2f operator+(const vec2f&) const;
+                vec2f operator-(const vec2f&) const;
+                vec2f operator*(const float) const;
+                vec2f operator/(const float) const;
 };
 
 class vec3f

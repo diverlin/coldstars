@@ -27,11 +27,12 @@ class Navigator
       		Navigator(Ship*);
       		~Navigator();
       
-      		void setStaticTargetCoords(vec2f _target_pos, float _offset = 0.0);
+      		void setStaticTargetCoords(vec2f);
       
-      		void setTarget(Planet*); 
-      		void setTarget(Ship*, float);    
-      		void setTarget(StarSystem*);
+      		template <typename TARGET_TYPE>
+      		void setTarget(TARGET_TYPE*, int);
+      		 
+      		void forceJump(StarSystem*);
                       
                 Planet* getTargetPlanet() const;  
                 StarSystem* getTargetStarSystem() const;
@@ -55,14 +56,13 @@ class Navigator
 		
 		vec2f target_pos;
 			
-		float echievement_radius;   
-		float offset;
+		int action_id;
+		float target_distance;   
+		vec2f target_offset;
 
-        	std::vector<float> direction_x_list;
-        	std::vector<float> direction_y_list;
-        	std::vector<float> angle_inD_list;
+        	std::vector<vec2f> path_vec;
+        	std::vector<float> angle_inD_vec;
 
-        	int len_direction_list;
         	bool direction_list_END;
         	int move_it;
    
@@ -73,7 +73,8 @@ class Navigator
 	
 	        void updateTargetCoord();
 		void calcDetaledWay();
-		
+		void calcDetaledWay2();
+				
 		bool targetObValidation_dip1() const;
 		bool targetObValidation_dip2() const;
 };

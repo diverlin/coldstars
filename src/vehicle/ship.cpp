@@ -230,7 +230,7 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
 
 	///////////////////////////////////////////////////
 	//////////// EQUPMENT SLOT ////////////////////////
-	drive_slot       = ItemSlot(DRIVE_EQUIPMENT_ID,
+	drive_slot       = ItemSlot(DRIVE_SLOT_ID,
 				    this, 
 				    texOb_slot, 
 				    kontur_rect.getCenter().x - 5*texOb_slot->w, 
@@ -239,7 +239,7 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
 	slot_total_pList.push_back(&drive_slot);
 	
 	
-	bak_slot         = ItemSlot(BAK_EQUIPMENT_ID,
+	bak_slot         = ItemSlot(BAK_SLOT_ID,
 				    this, 
 				    texOb_slot, 
 				    kontur_rect.getCenter().x - 5*texOb_slot->w, 
@@ -248,7 +248,7 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
 	slot_total_pList.push_back(&bak_slot);
 	
 	
-	radar_slot       = ItemSlot(RADAR_EQUIPMENT_ID,
+	radar_slot       = ItemSlot(RADAR_SLOT_ID,
 				    this, 
 				    texOb_slot, 
 				    kontur_rect.getCenter().x + 4*texOb_slot->w, 
@@ -257,7 +257,7 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
 	slot_total_pList.push_back(&radar_slot);	
 	
 	
-	scaner_slot      = ItemSlot(SCANER_EQUIPMENT_ID,
+	scaner_slot      = ItemSlot(SCANER_SLOT_ID,
 				    this, 
 				    texOb_slot, 
 				    kontur_rect.getCenter().x + 4*texOb_slot->w, 
@@ -266,7 +266,7 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
 	slot_total_pList.push_back(&scaner_slot);
 	
 	
-	energizer_slot   = ItemSlot(ENERGIZER_EQUIPMENT_ID, 
+	energizer_slot   = ItemSlot(ENERGIZER_SLOT_ID, 
 				    this, 
 				    texOb_slot, 
 				    kontur_rect.getCenter().x - 2*texOb_slot->w, 
@@ -277,7 +277,7 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
     		
 	if (data_korpus.inhibit_GRAPPLE == false)
 	{
-		grapple_slot  = ItemSlot(GRAPPLE_EQUIPMENT_ID, 
+		grapple_slot  = ItemSlot(GRAPPLE_SLOT_ID, 
 					 this, 
 					 texOb_slot, 
 					 kontur_rect.getCenter().x - 3*texOb_slot->w, 
@@ -287,7 +287,7 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
     	}
     	
     	
-	protector_slot   = ItemSlot(PROTECTOR_EQUIPMENT_ID, 
+	protector_slot   = ItemSlot(PROTECTOR_SLOT_ID, 
 				    this, 
 				    texOb_slot, 
 				    kontur_rect.getCenter().x - 3*texOb_slot->w, 
@@ -296,7 +296,7 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
     	slot_total_pList.push_back(&protector_slot); 
 	
 	
-	droid_slot       = ItemSlot(DROID_EQUIPMENT_ID,
+	droid_slot       = ItemSlot(DROID_SLOT_ID,
 				    this, 
 				    texOb_slot, 
 				    kontur_rect.getCenter().x - 1*texOb_slot->w, 
@@ -305,7 +305,7 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
     	slot_total_pList.push_back(&droid_slot); 
     	
     	
-	freezer_slot     = ItemSlot(FREEZER_EQUIPMENT_ID,
+	freezer_slot     = ItemSlot(FREEZER_SLOT_ID,
 				    this, 
 				    texOb_slot, 
 				    kontur_rect.getCenter().x - 1*texOb_slot->w, 
@@ -318,7 +318,7 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
     	//////// OTSEC SLOT ////////////////////////////////
     	for (int i = 0; i <= 10; i++)
     	{
-         	ItemSlot* pTo_otsec_slot = new ItemSlot(UNIVERSAL_SLOT_ID, 
+         	ItemSlot* pTo_otsec_slot = new ItemSlot(CARGO_SLOT_ID, 
          						this, 
          						texOb_slot, 
          						kontur_rect.getCenter().x + (i-6) * texOb_slot->w, 
@@ -409,6 +409,12 @@ void Ship :: selectWeapons()
                 weapon_slot4.getTurrel()->setSelectedStatus(weapon_selector.slot_4);
         if (data_korpus.weapon_slot_num >= 5)
                 weapon_slot5.getTurrel()->setSelectedStatus(weapon_selector.slot_5);
+}
+
+
+bool Ship :: isAnyWeaponSelected() const
+{
+	return weapon_selector.isAnySelected();     	
 }
 
 
@@ -1075,13 +1081,13 @@ void equip(Ship* ship)
     	if (ship->data_korpus.weapon_slot_num >= 1)
     	{
        		LazerEquipment* pTo_lazer1 = lazerEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot1.insertEquipment(pTo_lazer1); 
+       		ship->weapon_slot1.insertItem(pTo_lazer1); 
     	}   
 
     	if (ship->data_korpus.weapon_slot_num >= 2)
     	{
        		LazerEquipment* pTo_lazer2 = lazerEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot2.insertEquipment(pTo_lazer2); 
+       		ship->weapon_slot2.insertItem(pTo_lazer2); 
     	}   
     
     	if (ship->data_korpus.weapon_slot_num >= 3)
@@ -1089,7 +1095,7 @@ void equip(Ship* ship)
        		//LazerEquipment* pTo_lazer3 = lazerEquipmentGenerator(RACE_0_ID);    
        		//ship->weapon_slot3.insertItem(pTo_lazer3); 
        		RocketEquipment* rocket3 = rocketEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot3.insertEquipment(rocket3); 
+       		ship->weapon_slot3.insertItem(rocket3); 
     	}   
         
     	if (ship->data_korpus.weapon_slot_num >= 4)
@@ -1097,7 +1103,7 @@ void equip(Ship* ship)
        		//LazerEquipment* pTo_lazer4 = lazerEquipmentGenerator(RACE_0_ID);    
        		//ship->weapon_slot4.insertItem(pTo_lazer4);         
        		RocketEquipment* rocket4 = rocketEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot4.insertEquipment(rocket4); 
+       		ship->weapon_slot4.insertItem(rocket4); 
     	}   
     
     	if (ship->data_korpus.weapon_slot_num >= 5) 
@@ -1105,54 +1111,54 @@ void equip(Ship* ship)
        		//LazerEquipment* pTo_lazer5 = lazerEquipmentGenerator(RACE_0_ID);    
        		//ship->weapon_slot5.insertItem(pTo_lazer5); 
        		RocketEquipment* rocket5 = rocketEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot5.insertEquipment(rocket5); 
+       		ship->weapon_slot5.insertItem(rocket5); 
     	}   
         
     
     
     	RadarEquipment* pTo_radar = radarEquipmentGenerator(RACE_0_ID);    
-    	ship->radar_slot.insertEquipment(pTo_radar); 
+    	ship->radar_slot.insertItem(pTo_radar); 
     
    	DriveEquipment* pTo_drive = driveEquipmentGenerator(RACE_0_ID);    
-    	ship->drive_slot.insertEquipment(pTo_drive); 
+    	ship->drive_slot.insertItem(pTo_drive); 
 
     	BakEquipment* pTo_bak = bakEquipmentGenerator(RACE_0_ID);    
-    	ship->bak_slot.insertEquipment(pTo_bak); 
+    	ship->bak_slot.insertItem(pTo_bak); 
             
     	EnergizerEquipment* pTo_energizer = energizerEquipmentGenerator(RACE_0_ID);    
-    	ship->energizer_slot.insertEquipment(pTo_energizer); 
+    	ship->energizer_slot.insertItem(pTo_energizer); 
     
     	ProtectorEquipment* pTo_protector = protectorEquipmentGenerator(RACE_0_ID);    
-    	ship->protector_slot.insertEquipment(pTo_protector); 
+    	ship->protector_slot.insertItem(pTo_protector); 
         
     	DroidEquipment* pTo_droid = droidEquipmentGenerator(RACE_0_ID);    
-    	ship->droid_slot.insertEquipment(pTo_droid); 
+    	ship->droid_slot.insertItem(pTo_droid); 
     
     
     	FreezerEquipment* pTo_freezer = freezerEquipmentGenerator(RACE_0_ID);    
-    	ship->freezer_slot.insertEquipment(pTo_freezer);     
+    	ship->freezer_slot.insertItem(pTo_freezer);     
 
     	ScanerEquipment* pTo_scaner = scanerEquipmentGenerator(RACE_0_ID);    
-    	ship->scaner_slot.insertEquipment(pTo_scaner); 
+    	ship->scaner_slot.insertItem(pTo_scaner); 
     
     	if (ship->data_korpus.inhibit_GRAPPLE == false) 
     	{
        		GrappleEquipment* pTo_grapple = grappleEquipmentGenerator(RACE_0_ID);    
-       		ship->grapple_slot.insertEquipment(pTo_grapple); 
+       		ship->grapple_slot.insertItem(pTo_grapple); 
    	}
     
                              
     	for (unsigned int i = 0; i < 3; i++) //pTo_ship->otsec_slot_pList.size(); i++)
     	{        
         	LazerEquipment* pTo_lazer = lazerEquipmentGenerator(RACE_0_ID);              
-        	ship->slot_otsec_pList[i]->insertEquipment(pTo_lazer);
+        	ship->slot_otsec_pList[i]->insertItem(pTo_lazer);
     	}
 
 
     	for (unsigned int i = 3; i < 6; i++) //pTo_ship->otsec_slot_pList.size(); i++)
     	{        
         	RadarModule* pTo_radarModule = radarModuleGenerator();              
-        	ship->slot_otsec_pList[i]->insertModule(pTo_radarModule);
+        	ship->slot_otsec_pList[i]->insertItem(pTo_radarModule);
     	}    
 }
 

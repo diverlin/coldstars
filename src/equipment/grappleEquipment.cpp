@@ -27,7 +27,7 @@ GrappleEquipment :: GrappleEquipment(TextureOb* _texOb_item,
 				     int _maxNumItem_orig, 
 				     EquipmentCommonData _common_data)   // joun strength and speed attributes into one
 {
-    	CommonForEquipment_init(GRAPPLE_EQUIPMENT_ID, GRAPPLE_EQUIPMENT_ID, _texOb_item, _common_data);
+    	CommonForEquipment_init(GRAPPLE_EQUIPMENT_ID, GRAPPLE_SLOT_ID, _texOb_item, _common_data);
 
     	strength_orig = _strength_orig;
     	strength_add  = 0;

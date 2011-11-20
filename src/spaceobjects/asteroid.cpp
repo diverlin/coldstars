@@ -64,13 +64,15 @@ void Asteroid :: update_inSpace_inDynamic_FALSE()
      	updatePosition();  
 }
 
-void Asteroid :: collision_TRUE()
+void Asteroid :: collisionEvent_TRUE()
 {
+	data_life.is_alive = false;
 	death_TRUE();
 }
 
-void Asteroid :: collision_FALSE()
+void Asteroid :: collisionEvent_FALSE()
 {
+	data_life.is_alive = false;
 	death_FALSE();
 }        	
 

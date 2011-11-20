@@ -10,14 +10,47 @@ vec2f :: vec2f(float _x, float _y)
         x = _x; 
         y = _y; 
 }
-            
+          
+       
+bool vec2f :: isNull() const
+{
+	if ( (x == 0) and ( y == 0 ) )
+		return true;
+	else
+		return false;
+}
+
+  
+float vec2f :: getLen() const
+{
+	return sqrt(x*x+y*y);
+}                
+         
+vec2f vec2f :: getNorm() const
+{
+	float len = getLen();
+
+	return vec2f(x/len, y/len);
+}	
+                
+                         
 void vec2f :: set(float _x, float _y) 
 { 
         x = _x; 
         y = _y; 
 }
 
-vec2f vec2f :: operator+(const vec2f& _vec_add)
+
+vec2f vec2f :: operator+=(const vec2f& _vec_add)
+{
+	x += _vec_add.x;
+	y += _vec_add.y;
+	
+	return *this;
+}
+
+
+vec2f vec2f :: operator+(const vec2f& _vec_add) const
 {
 	vec2f result;
 	
@@ -26,6 +59,43 @@ vec2f vec2f :: operator+(const vec2f& _vec_add)
 	
 	return result;
 }
+
+vec2f vec2f :: operator-(const vec2f& _vec_add) const
+{
+	vec2f result;
+	
+	result.x = x - _vec_add.x;
+	result.y = y - _vec_add.y;
+	
+	return result;
+}
+
+vec2f vec2f :: operator*(const float _val) const
+{
+	vec2f result;
+	
+	result.x = x * _val;
+	result.y = y * _val;
+	
+	return result;
+}
+
+vec2f vec2f :: operator/(const float _val) const
+{
+	vec2f result;
+	
+	result.x = x / _val;
+	result.y = y / _val;
+	
+	return result;
+}
+
+
+
+
+
+
+
 
 
 
