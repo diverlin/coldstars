@@ -45,8 +45,8 @@ class RocketBullet
         
                 void update_inSpace_inDynamic();
                 					void updateDebugWay(int _timer);   // DEBUG
-		void collision_TRUE();
-		void collision_FALSE();
+		void collisionEvent_TRUE();
+		void collisionEvent_FALSE();
 
                 void hit_TRUE(int _damage);
                 void hit_FALSE(int _damage);

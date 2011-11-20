@@ -215,6 +215,7 @@ class WeaponSelector
      		bool slot_5;
      	
 		void setAll(bool);
+		bool isAnySelected() const;
 };
 
 

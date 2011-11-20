@@ -191,7 +191,7 @@ void StarSystem :: rocketCollision_TRUE()
                 		{
                         		if (ROCKET_vec[ri]->getOwnerShipId() != SHIP_inSPACE_vec[ki]->getId())
                         		{                        
-                        			collide = collideEvent_TRUE(ROCKET_vec[ri], SHIP_inSPACE_vec[ki]);
+                        			collide = checkCollision_TRUE(ROCKET_vec[ri], SHIP_inSPACE_vec[ki]);
                         			if (collide == true) { break; }                        
                         		}
                 		}
@@ -203,7 +203,7 @@ void StarSystem :: rocketCollision_TRUE()
                 	{
                         	for (unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++)
                         	{
-                        		collide = collideEvent_TRUE(ROCKET_vec[ri], ASTEROID_vec[ai]);
+                        		collide = checkCollision_TRUE(ROCKET_vec[ri], ASTEROID_vec[ai]);
                         		if (collide == true) { break; }
                         	}
                 	}
@@ -215,7 +215,7 @@ void StarSystem :: rocketCollision_TRUE()
                 	{
                         	for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
                         	{
-                        		collide = collideEvent_TRUE(ROCKET_vec[ri], MINERAL_vec[mi]);
+                        		collide = checkCollision_TRUE(ROCKET_vec[ri], MINERAL_vec[mi]);
                         		if (collide == true) { 	break; }
                         	}
                 	}
@@ -226,7 +226,7 @@ void StarSystem :: rocketCollision_TRUE()
                 	{
                         	for (unsigned int ci = 0; ci < CONTAINER_vec.size(); ci++)
                         	{
-                        		collide = collideEvent_TRUE(ROCKET_vec[ri], CONTAINER_vec[ci]);
+                        		collide = checkCollision_TRUE(ROCKET_vec[ri], CONTAINER_vec[ci]);
                         		if (collide == true) { 	break; }
                         	}
                 	}
@@ -259,7 +259,7 @@ void StarSystem :: asteroidCollision_TRUE()
                 	{
                         	for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
                         	{
-                                	collide = collideEvent_TRUE(ASTEROID_vec[ai], SHIP_inSPACE_vec[ki]);
+                                	collide = checkCollision_TRUE(ASTEROID_vec[ai], SHIP_inSPACE_vec[ki]);
                         		if (collide == true) { break; }
                         	}                        	
                 	}
@@ -271,7 +271,7 @@ void StarSystem :: asteroidCollision_TRUE()
                 	{
                         	for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
                         	{
-                                	collide = collideEvent_TRUE(ASTEROID_vec[ai], PLANET_vec[pi]);
+                                	collide = checkCollision_TRUE(ASTEROID_vec[ai], PLANET_vec[pi]);
                         		if (collide == true) { break; }
                         	}                        	
                 	}
@@ -283,7 +283,7 @@ void StarSystem :: asteroidCollision_TRUE()
                 	{
                         	for (unsigned int si = 0; si < STAR_vec.size(); si++)
                         	{
-                                	collide = collideEvent_TRUE(ASTEROID_vec[ai], STAR_vec[si]);
+                                	collide = checkCollision_TRUE(ASTEROID_vec[ai], STAR_vec[si]);
                         		if (collide == true) { break; }
                         	}                        	
                 	}
@@ -402,7 +402,8 @@ void StarSystem :: updateEntities_inStatic()
      		if (NPC_inSPACE_vec[ni]->getControlledByPlayer() == false)
      		{
      			NPC_inSPACE_vec[ni]->thinkCommon_inSpace_inStatic();
-         	}
+         	}         	
+         	NPC_inSPACE_vec[ni]->getShip()->getNavigator()->update_inSpace_inStatic();
      	}
 
      	for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
@@ -1239,10 +1240,19 @@ void StarSystem :: mouseControl()
 				if ( (pPLAYER->getAlive() == true) and (pPLAYER->getShip() != NULL) )
 				{
                 			if (mlb == true)
-                			{ 
-                   				pPLAYER->getShip()->selectWeapons();                   					    
-                   				pPLAYER->getShip()->setWeaponsTarget(visible_ASTEROID_vec[ai]);
-                			} 
+					{
+                			
+                			        if (pPLAYER->getShip()->isAnyWeaponSelected() == true)
+                				{
+                   					pPLAYER->getShip()->selectWeapons();
+                   					pPLAYER->getShip()->setWeaponsTarget(visible_ASTEROID_vec[ai]);
+                   				}
+                   				else
+                   				{
+                   					pPLAYER->getShip()->getNavigator()->setTarget(visible_ASTEROID_vec[ai], FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID);  
+                   					pPLAYER->getShip()->getNavigator()->update_inSpace_inStatic();
+                   				}
+                   			}
                 		}
                 		
                 		break; 
@@ -1266,8 +1276,16 @@ void StarSystem :: mouseControl()
 				{
                 			if (mlb == true)
                 			{
-                   				pPLAYER->getShip()->selectWeapons();
-                   				pPLAYER->getShip()->setWeaponsTarget(visible_SHIP_vec[ki]);
+                				if (pPLAYER->getShip()->isAnyWeaponSelected() == true)
+                				{
+                   					pPLAYER->getShip()->selectWeapons();
+                   					pPLAYER->getShip()->setWeaponsTarget(visible_SHIP_vec[ki]);
+                   				}
+                   				else
+                   				{
+                   					pPLAYER->getShip()->getNavigator()->setTarget(visible_SHIP_vec[ki], FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID);  
+                   					pPLAYER->getShip()->getNavigator()->update_inSpace_inStatic();
+                   				}
 					}
 
                 			if (mrb == true)
@@ -1304,7 +1322,8 @@ void StarSystem :: mouseControl()
 				{
                 			if (mlb == true)
                 			{
-                    				pPLAYER->getShip()->getNavigator()->setTarget(visible_PLANET_vec[pi]);  
+                    				pPLAYER->getShip()->getNavigator()->setTarget(visible_PLANET_vec[pi], DOCKING_NAVIGATOR_ACTION_ID);
+                    				pPLAYER->getShip()->getNavigator()->update_inSpace_inStatic();  
                 			}   
 				}
 				
@@ -1480,12 +1499,12 @@ void StarSystem :: debug__()
 
 
 template <typename AGRESSOR, typename VICTIM>
-bool collideEvent_TRUE(AGRESSOR* agressor,  VICTIM* victim)
+bool checkCollision_TRUE(AGRESSOR* agressor,  VICTIM* victim)
 {
 	if (collisionBetweenCenters(agressor->getPoints(), victim->getPoints(), victim->getCollisionRadius()) == true)
         {
         	victim->hit_TRUE(agressor->getDamage());
-                agressor->collision_TRUE();
+                agressor->collisionEvent_TRUE();
                 
                 return true;
         }

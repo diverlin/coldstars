@@ -28,33 +28,13 @@ class Store
                 ~Store();
 
                 ItemSlot* getEmptySlot();
+                
+                template <typename STORE_ITEM>
+                bool add(STORE_ITEM*);
                                                         void createSlots();
                                                         void initItemsGenerator();
-                void addKorpusItem(Ship*);
-                void addLazerEquipment(LazerEquipment*);
-                void addRocketEquipment(RocketEquipment*);
-                //void addTorpedItem(     int _race_id, int _revision_id);
-                void addRadarEquipment(RadarEquipment*);
-                void addGrappleEquipment(GrappleEquipment*);
-                void addDriveEquipment(DriveEquipment*);
-                void addProtectorEquipment(ProtectorEquipment*);
-                void addBakEquipment(BakEquipment*);
-                void addDroidEquipment(DroidEquipment*);
-                void addScanerEquipment(ScanerEquipment*);
-                void addFreezerEquipment(FreezerEquipment*);
-                void addEnergizerEquipment(EnergizerEquipment*);
-
-                int buyWeaponSlotItem(ItemSlot*); 
-                int buyDriveSlotItem(ItemSlot*); 
-                int buyBakSlotItem(ItemSlot*); 
-                int buyRadarSlotItem(ItemSlot*); 
-                int buyScanerSlotItem(ItemSlot*); 
-                int buyEnergizerSlotItem(ItemSlot*); 
-                int buyGrappleSlotItem(ItemSlot*); 
-                int buyProtectorSlotItem(ItemSlot*); 
-                int buyDroidSlotItem(ItemSlot*); 
-                int buyFreezerSlotItem(ItemSlot*); 
-
+                                                        
+                     			
                 bool buyItemFromSlot(ItemSlot*); 
 
                 void update();
@@ -62,23 +42,9 @@ class Store
                 
         public:
                 TextureOb* texOb_background; 
-                TextureOb* texOb_slot; 
-                
-                unsigned int korpus_num;      
-                unsigned int lazer_num;       
-                unsigned int rocket_num;      
-                unsigned int torped_num;      
-                unsigned int radar_num;       
-                unsigned int grapple_num;     
-                unsigned int drive_num;       
-                unsigned int protector_num;   
-                unsigned int bak_num;         
-                unsigned int droid_num;       
-                unsigned int scaner_num;      
-                unsigned int freezer_num;     
-                unsigned int energyBlock_num; 
-                
-                std::vector<ItemSlot*> slot_pList;
+                TextureOb* texOb_slot;                 
+              
+                std::vector<ItemSlot*> slot_vec;
                 
                 void mouseControl();
                 void resetSlotsRenderInfoFlag();
@@ -88,6 +54,11 @@ class Store
                 void renderItemInfo() const;
 };
            
+           
+           
+void equipStore(Store* store);
+//Store* createStore(int race_id);
+
 #endif
 
 

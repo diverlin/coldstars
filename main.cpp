@@ -16,9 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #include "include.hpp"
-
 
 int main()
 {       
@@ -41,7 +39,7 @@ int main()
       		
     	Npc* pnpc = pPLAYER->getStarSystem()->NPC_inSPACE_vec[0];
     	pPLAYER->bindNpc(pnpc);
-    	pnpc->getShip()->getPoints()->setCenter(-800,-800);
+    	pnpc->getShip()->getPoints()->setCenter(-400,-400);
     	//// player
 
     	std::string coord_str;

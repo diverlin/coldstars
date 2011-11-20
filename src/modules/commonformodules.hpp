@@ -41,6 +41,12 @@ class CommonForModules
       		void render(Rect slot_rect);
       		void renderInfo(Rect slot_rect); 
       		
+      		// not relevant for this cals but is needed for interface
+      		int getFunctionalSlotSubTypeId();
+      		void bindSlot(ItemSlot*);
+      		void updateOwnerPropetries();
+      		//
+      		
       	private:
       	      	int id, type_id, subtype_id;
       	      		

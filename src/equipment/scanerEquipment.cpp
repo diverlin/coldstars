@@ -24,7 +24,7 @@ ScanerEquipment :: ScanerEquipment(TextureOb* _texOb_item,
 				   int _scan_orig, 
 				   EquipmentCommonData _common_data)
 {
-    	CommonForEquipment_init(SCANER_EQUIPMENT_ID, SCANER_EQUIPMENT_ID, _texOb_item, _common_data);
+    	CommonForEquipment_init(SCANER_EQUIPMENT_ID, SCANER_SLOT_ID, _texOb_item, _common_data);
 
     	scan_orig = _scan_orig;
     	scan_add = 0;

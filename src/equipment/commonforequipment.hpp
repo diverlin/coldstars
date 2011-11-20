@@ -32,7 +32,7 @@ class CommonForEquipment
         	unsigned int getCondition() const; 
         	int getPrice() const; 
                 TextureOb* getTexOb() const;
-                int getFunctionalSlotSubtypeId() const;
+                int getFunctionalSlotSubTypeId() const;
      
      		void bindSlot(ItemSlot*);
      		void repair();

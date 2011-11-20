@@ -229,8 +229,6 @@ void Npc :: thinkCommon_inSpace_inStatic()
                 questResolver();
                 busy = true;  
         }
-
-	ship->getNavigator()->update_inSpace_inStatic();
 }
 
 
@@ -307,7 +305,7 @@ void Npc :: grabScenario()
 	{
 		if (ship->getNavigator()->getTargetTypeId() != STARSYSTEM_ID)
 		{
-                        ship->getNavigator()->setTarget(grabOb->getStarSystem()); 
+                        ship->getNavigator()->forceJump(grabOb->getStarSystem()); 
                         
 			printf("npc_id =%i navigate StarSystem id =%i, reason = GRAB HUNTING\n", data_id.id, grabOb->getStarSystem()->getId() );   // debug
                 }
@@ -342,7 +340,7 @@ void Npc :: destroyShipQuestScenario()
 	{
 		if (ship->getNavigator()->getTargetTypeId() != STARSYSTEM_ID)
 		{                               
-       			ship->getNavigator()->setTarget(questOb->getStarSystem()); 
+       			ship->getNavigator()->forceJump(questOb->getStarSystem()); 
        			
 			printf("npc_id =%i navigate StarSystem id =%i, reason = DESTROY SHIP HUNTING\n", data_id.id, questOb->getStarSystem()->getId() );   // debug
        		}
@@ -367,7 +365,7 @@ void Npc :: liberationStarSystemQuestScenario()
 	{
 		if (ship->getNavigator()->getTargetTypeId() != STARSYSTEM_ID)
 		{                         
-       			ship->getNavigator()->setTarget(questOb->getStarSystem());
+       			ship->getNavigator()->forceJump(questOb->getStarSystem());
        			
 			printf("npc_id =%i navigate StarSystem id =%i, reason = LIBERATION THIS SYSTEM\n", data_id.id, questOb->getStarSystem()->getId() );   // debug
        		}
@@ -397,7 +395,7 @@ void Npc :: selfcareResolver()
 	{
 		if (ship->getNavigator()->getTargetTypeId() != STARSYSTEM_ID)
 		{       
-       			ship->getNavigator()->setTarget(selfcareOb->getStarSystem());
+       			ship->getNavigator()->forceJump(selfcareOb->getStarSystem());
        			
        			printf("npc_id =%i navigate StarSystem id =%i, reason = SELF_CARE\n", data_id.id, selfcareOb->getStarSystem()->getId() );   // debug
        		}
@@ -411,7 +409,7 @@ void Npc :: selfcareResolver()
 		}
 		else
 		{
-        		ship->getNavigator()->setTarget(subSelfcareOb->getPlanet());
+        		ship->getNavigator()->setTarget(subSelfcareOb->getPlanet(), DOCKING_NAVIGATOR_ACTION_ID);
 		}              
         }
 }

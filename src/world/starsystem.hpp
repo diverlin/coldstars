@@ -180,7 +180,7 @@ class StarSystem
 };
 
 template <typename AGRESSOR, typename VICTIM>
-bool collideEvent_TRUE(AGRESSOR*,  VICTIM*);
+bool checkCollision_TRUE(AGRESSOR*,  VICTIM*);
 
 bool collisionBetweenCenters(Points* points1, Points* points2, float collision_radius);
 bool collisionBetweenCenters(Points* points1, vec2f point2, float collision_radius);

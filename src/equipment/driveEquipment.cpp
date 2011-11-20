@@ -25,7 +25,7 @@ DriveEquipment :: DriveEquipment(TextureOb* _texOb_item,
 				 int _hyper_orig, 
 				 EquipmentCommonData _common_data)
 {
-     CommonForEquipment_init(DRIVE_EQUIPMENT_ID, DRIVE_EQUIPMENT_ID, _texOb_item, _common_data);
+     CommonForEquipment_init(DRIVE_EQUIPMENT_ID, DRIVE_SLOT_ID, _texOb_item, _common_data);
 
      speed_orig = _speed_orig;
      speed_add  = 0;

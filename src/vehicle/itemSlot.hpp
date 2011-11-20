@@ -78,11 +78,8 @@ class ItemSlot
                 int getItemRadius() const;
                 int getItemCondition() const;
                 
-		template <typename EQUIPMENT_TYPE>
-		bool insertEquipment(EQUIPMENT_TYPE*);
-        
-		template <typename MODULE_TYPE>
-		bool insertModule(MODULE_TYPE*);
+		template <typename ITEM_TYPE>
+		bool insertItem(ITEM_TYPE*);
 
 		bool insertGoods(GoodsPack* item);
 		                
@@ -109,7 +106,6 @@ class ItemSlot
                 bool is_FLASHING;                      // flashing the slot to show that item can be inserted in that one 
                 
                 TextureOb* texOb;
-                int w, h;
                 
                 Rect rect;
                                 

@@ -194,6 +194,11 @@ void WeaponSelector :: setAll(bool _status)
      	slot_5 = _status;
 }
 
+bool WeaponSelector :: isAnySelected() const
+{
+	return (slot_1 or slot_2 or slot_3 or slot_4 or slot_5);
+}
+		
 
 
 ControlWord :: ControlWord()

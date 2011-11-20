@@ -17,29 +17,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "store.hpp"
 
 Store :: Store(TextureOb* _texOb_background, TextureOb* _texOb_slot)
 {
         texOb_background = _texOb_background; 
         texOb_slot       = _texOb_slot; 
 
-        korpus_num      = 3;
-        lazer_num       = 3;
-        rocket_num      = 2;
-        torped_num      = 2;
-        radar_num       = 1;
-        grapple_num     = 1;
-        drive_num       = 1;
-        protector_num   = 1;
-        bak_num         = 1;
-        droid_num       = 1;
-        scaner_num      = 1;
-        freezer_num     = 1;
-        energyBlock_num = 1;
-
         createSlots();
-        initItemsGenerator();
 }
 
 
@@ -60,13 +44,13 @@ void Store :: createSlots()
                 int clm_act = 1;
                 while (clm_act <= clm)
                 {
-                        ItemSlot* slot = new ItemSlot(UNIVERSAL_SLOT_ID, 
+                        ItemSlot* slot = new ItemSlot(CARGO_SLOT_ID, 
                                                       NULL, 
                                                       texOb_slot, 
                                                       x0 + clm_act * 1.1 * texOb_slot->w, 
                                                       y0 + row_act * 1.1 * texOb_slot->h);
                                                  
-                        slot_pList.push_back(slot);
+                        slot_vec.push_back(slot);
                         clm_act++;
                 }
                 row_act++;
@@ -77,273 +61,25 @@ void Store :: createSlots()
 
 ItemSlot* Store :: getEmptySlot()
 {
-        for (unsigned int si = 0; si < slot_pList.size(); si++)
+        for (unsigned int si = 0; si < slot_vec.size(); si++)
         {
-                if (slot_pList[si]->getEquipedStatus() == false)
-                        return slot_pList[si];
+                if (slot_vec[si]->getEquipedStatus() == false)
+                        return slot_vec[si];
         }
       
         return NULL;
 }
 
-
-void Store :: initItemsGenerator()
-{
-        //int race_id = RACES_GOOD_LIST[getRandInt(0, RACES_GOOD_LIST.size() - 1)];
-        //int revision_id = 0;
-
-        for (unsigned int lii = 0; lii < lazer_num; lii++)
-        { 
-                LazerEquipment* pTo_lazer = lazerEquipmentGenerator(RACE_0_ID); 
-                addLazerEquipment(pTo_lazer);
-        }
-
-        for (unsigned int rii = 0; rii < rocket_num; rii++)
-        { 
-                RocketEquipment* pTo_rocket = rocketEquipmentGenerator(RACE_0_ID); 
-                addRocketEquipment(pTo_rocket);
-        }
-
-        for (unsigned int tii = 0; tii < torped_num; tii++)
-        { 
-        }
-
-        for (unsigned int rii = 0; rii < radar_num; rii++)
-        { 
-                RadarEquipment* pTo_radar = radarEquipmentGenerator(RACE_0_ID); 
-                addRadarEquipment(pTo_radar);
-        }
-
-        for (unsigned int gii = 0; gii < grapple_num; gii++)
-        { 
-                GrappleEquipment* pTo_grapple = grappleEquipmentGenerator(RACE_0_ID); 
-                addGrappleEquipment(pTo_grapple);
-        }
-
-        for (unsigned int dii = 0; dii < drive_num; dii++)
-        { 
-                DriveEquipment* pTo_drive = driveEquipmentGenerator(RACE_0_ID); 
-                addDriveEquipment(pTo_drive);
-        }
-
-        for (unsigned int pii = 0; pii < protector_num; pii++)
-        { 
-                ProtectorEquipment* pTo_protector = protectorEquipmentGenerator(RACE_0_ID); 
-                addProtectorEquipment(pTo_protector);
-        }
-
-        for (unsigned int bii = 0; bii < bak_num; bii++)
-        { 
-                BakEquipment* pTo_bak = bakEquipmentGenerator(RACE_0_ID); 
-                addBakEquipment(pTo_bak);
-        }
-
-        for (unsigned int dii = 0; dii < droid_num; dii++)
-        { 
-                DroidEquipment* pTo_droid = droidEquipmentGenerator(RACE_0_ID); 
-                addDroidEquipment(pTo_droid);
-        }
-
-        for (unsigned int sii = 0; sii < scaner_num; sii++)
-        { 
-                ScanerEquipment* pTo_scaner = scanerEquipmentGenerator(RACE_0_ID); 
-                addScanerEquipment(pTo_scaner);
-        }
-
-        for (unsigned int fii = 0; fii < freezer_num; fii++)
-        { 
-                FreezerEquipment* pTo_freezer = freezerEquipmentGenerator(RACE_0_ID); 
-                addFreezerEquipment(pTo_freezer);
-        }
-
-        for (unsigned int ebi = 0; ebi < energyBlock_num; ebi++) 
-        { 
-                EnergizerEquipment* pTo_energizer = energizerEquipmentGenerator(RACE_0_ID); 
-                addEnergizerEquipment(pTo_energizer);
-        }
-}
-         
-
-
- 
-
-void Store :: addKorpusItem(Ship*         _pTo_ship)
-{
-
-}
-
-void Store :: addLazerEquipment(LazerEquipment*             _lazerEquipment)
-{
-        getEmptySlot()->insertEquipment(_lazerEquipment);
-}
-
-void Store :: addRocketEquipment(RocketEquipment*           _rocketEquipment)
-{
-        getEmptySlot()->insertEquipment(_rocketEquipment);
-}
-
-//void addTorpedItem(     int _race_id, int _revision_id)
-
-void Store :: addRadarEquipment(RadarEquipment*             _radarEquipment)
-{
-        getEmptySlot()->insertEquipment(_radarEquipment);
-}
-
-void Store :: addGrappleEquipment(GrappleEquipment*         _grappleEquipment)
-{
-        getEmptySlot()->insertEquipment(_grappleEquipment);
-}
-
-void Store :: addDriveEquipment(DriveEquipment*             _driveEquipment)
-{
-        getEmptySlot()->insertEquipment(_driveEquipment);
-}
-
-void Store :: addProtectorEquipment(ProtectorEquipment*     _protectorEquipment)
-{
-        getEmptySlot()->insertEquipment(_protectorEquipment);
-}
-
-void Store :: addBakEquipment(BakEquipment*                 _bakEquipment)
-{
-        getEmptySlot()->insertEquipment(_bakEquipment);
-}
-
-void Store :: addDroidEquipment(DroidEquipment*             _droidEquipment)
-{
-        getEmptySlot()->insertEquipment(_droidEquipment);
-}
-
-void Store :: addScanerEquipment(ScanerEquipment*           _scanerEquipment)
-{
-        getEmptySlot()->insertEquipment(_scanerEquipment);
-}
-
-void Store :: addFreezerEquipment(FreezerEquipment*         _freezerEquipment)
-{
-        getEmptySlot()->insertEquipment(_freezerEquipment);
-}
-
-void Store :: addEnergizerEquipment(EnergizerEquipment* _energizerEquipment)
-{
-        getEmptySlot()->insertEquipment(_energizerEquipment);
-}
-
-
-
-
-int Store :: buyWeaponSlotItem(ItemSlot* _weapon_slot)
-{
-        int price = 0;
-
-	switch(_weapon_slot->getItemSubTypeId())
-	{
-        	case LAZER_EQUIPMENT_ID:
-        	{
-                	price = _weapon_slot->getLazerEquipment()->getPrice();
-                	addLazerEquipment(_weapon_slot->getLazerEquipment());
-                	_weapon_slot->removeItem();
-                	
-                	break;
-        	}
-
-        	case ROCKET_EQUIPMENT_ID:
-        	{
-                	price = _weapon_slot->getRocketEquipment()->getPrice();
-                	addRocketEquipment(_weapon_slot->getRocketEquipment());
-                	_weapon_slot->removeItem();
-                	
-                	break;
-        	} 
-        }
         
-        return price;
+
+
+template <typename STORE_ITEM>
+bool Store :: add(STORE_ITEM* item)
+{
+	getEmptySlot()->insertItem(item);
+	return true;
 }
 
-
-int Store :: buyDriveSlotItem(ItemSlot* _drive_slot)
-{
-        int price = _drive_slot->getDriveEquipment()->getPrice();
-        addDriveEquipment(_drive_slot->getDriveEquipment());
-        _drive_slot->removeItem();
-    
-        return price;
-} 
-
-
-int Store :: buyBakSlotItem(ItemSlot* _bak_slot)
-{
-        int price = _bak_slot->getBakEquipment()->getPrice();
-        addBakEquipment(_bak_slot->getBakEquipment());
-        _bak_slot->removeItem();
-    
-        return price;
-} 
-
-
-int Store :: buyRadarSlotItem(ItemSlot* _radar_slot)
-{
-        int price = _radar_slot->getRadarEquipment()->getPrice();
-        addRadarEquipment(_radar_slot->getRadarEquipment());
-        _radar_slot->removeItem();
-    
-        return price;
-} 
-
-
-int Store :: buyScanerSlotItem(ItemSlot* _scaner_slot)
-{
-        int price = _scaner_slot->getScanerEquipment()->getPrice();
-        addScanerEquipment(_scaner_slot->getScanerEquipment());
-        _scaner_slot->removeItem();
-    
-        return price;
-} 
-
-int Store :: buyEnergizerSlotItem(ItemSlot* _energizer_slot)
-{
-        int price = _energizer_slot->getEnergizerEquipment()->getPrice();
-        addEnergizerEquipment(_energizer_slot->getEnergizerEquipment());
-        _energizer_slot->removeItem();
-        
-        return price;
-} 
-
-int Store :: buyGrappleSlotItem(ItemSlot* _grapple_slot)
-{
-        int price = _grapple_slot->getGrappleEquipment()->getPrice();
-        addGrappleEquipment(_grapple_slot->getGrappleEquipment());
-        _grapple_slot->removeItem();
-        
-        return price;
-} 
-
-int Store :: buyProtectorSlotItem(ItemSlot* _protector_slot)
-{
-        int price = _protector_slot->getProtectorEquipment()->getPrice();
-        addProtectorEquipment(_protector_slot->getProtectorEquipment());
-        _protector_slot->removeItem();
-        
-        return price;
-} 
-
-int Store :: buyDroidSlotItem(ItemSlot* _droid_slot)
-{
-        int price = _droid_slot->getDroidEquipment()->getPrice();
-        addDroidEquipment(_droid_slot->getDroidEquipment());
-        _droid_slot->removeItem();
-    
-        return price;
-} 
-
-int Store :: buyFreezerSlotItem(ItemSlot* _freezer_slot)
-{
-        int price = _freezer_slot->getFreezerEquipment()->getPrice();
-        addFreezerEquipment(_freezer_slot->getFreezerEquipment());
-        _freezer_slot->removeItem();
-        
-        return price;
-} 
 
 
 bool Store :: buyItemFromSlot(ItemSlot* _slot)
@@ -364,9 +100,9 @@ bool Store :: buyItemFromSlot(ItemSlot* _slot)
 
 void Store :: resetSlotsRenderInfoFlag()
 {
-        for (unsigned int i = 0; i < slot_pList.size(); i++)
+        for (unsigned int i = 0; i < slot_vec.size(); i++)
         {
-                slot_pList[i]->setCursoredStatus(false);
+                slot_vec[i]->setCursoredStatus(false);
         }
 }
 
@@ -378,25 +114,25 @@ void Store :: mouseControl()
 
                                                                 resetSlotsRenderInfoFlag();
 
-        for (unsigned int i = 0; i < slot_pList.size(); i++)
+        for (unsigned int i = 0; i < slot_vec.size(); i++)
         { 
                 float dist = distBetweenPoints(g_MOUSE_POS_X, 
                                                 g_VIEW_HEIGHT - g_MOUSE_POS_Y, 
-                                                slot_pList[i]->getRect().getCenter().x, 
-                                                slot_pList[i]->getRect().getCenter().y);
+                                                slot_vec[i]->getRect().getCenter().x, 
+                                                slot_vec[i]->getRect().getCenter().y);
         				
-                if (dist < slot_pList[i]->getRect().getWidth()/2)
+                if (dist < slot_vec[i]->getRect().getWidth()/2)
                 {
-                        slot_pList[i]->setCursoredStatus(true);
+                        slot_vec[i]->setCursoredStatus(true);
                         if (lmb == true)
                         {
-                                if (slot_pList[i]->getEquipedStatus() == true)
+                                if (slot_vec[i]->getEquipedStatus() == true)
                                 {
                                 	// get Item price, check if OK and then next
-                                	unsigned int _price = slot_pList[i]->getItemPrice();
+                                	unsigned int _price = slot_vec[i]->getItemPrice();
                                 	if (pPLAYER->getPilot()->getCredits() >= _price)
                                 	{
-                                		pPLAYER->getShip()->getEmptyOtsecSlot()->SwapItemWith(slot_pList[i]); 
+                                		pPLAYER->getShip()->getEmptyOtsecSlot()->SwapItemWith(slot_vec[i]); 
                                 		pPLAYER->getPilot()->decreaseCredits(_price);                     	                                       
                                         }
                                 }
@@ -415,19 +151,19 @@ void Store :: renderBackground() const
 
 void Store :: renderInternals() const
 {
-        for (unsigned int sli = 0; sli < slot_pList.size(); sli ++)
+        for (unsigned int sli = 0; sli < slot_vec.size(); sli ++)
         {
-                slot_pList[sli]->renderFrame(-1);
+                slot_vec[sli]->renderFrame(-1);
         }
 }
 
 void Store :: renderItemInfo() const
 {
-        for (unsigned int i = 0; i < slot_pList.size(); i++)
+        for (unsigned int i = 0; i < slot_vec.size(); i++)
         {
-                if (slot_pList[i]->getCursoredStatus() == true)
-                        if (slot_pList[i]->getEquipedStatus() == true)
-                                slot_pList[i]->renderItemInfo();
+                if (slot_vec[i]->getCursoredStatus() == true)
+                        if (slot_vec[i]->getEquipedStatus() == true)
+                                slot_vec[i]->renderItemInfo();
         }
 }
 
@@ -451,3 +187,95 @@ void Store :: render() const
         disable_BLEND();
 }
 
+
+
+
+
+
+
+void equipStore(Store* store)
+{
+        //int race_id = RACES_GOOD_LIST[getRandInt(0, RACES_GOOD_LIST.size() - 1)];
+        //int revision_id = 0;
+
+        int korpus_num      = 3;
+        int lazer_num       = 3;
+        int rocket_num      = 2;
+        int torped_num      = 2;
+        int radar_num       = 1;
+        int grapple_num     = 1;
+        int drive_num       = 1;
+        int protector_num   = 1;
+        int bak_num         = 1;
+        int droid_num       = 1;
+        int scaner_num      = 1;
+        int freezer_num     = 1;
+        int energyBlock_num = 1;
+        
+        for (unsigned int lii = 0; lii < lazer_num; lii++)
+        { 
+                store->add(lazerEquipmentGenerator(RACE_0_ID));
+        }
+
+        for (unsigned int rii = 0; rii < rocket_num; rii++)
+        { 
+                store->add(rocketEquipmentGenerator(RACE_0_ID));
+        }
+
+        for (unsigned int rii = 0; rii < radar_num; rii++)
+        { 
+                store->add(radarEquipmentGenerator(RACE_0_ID));
+        }
+
+        for (unsigned int gii = 0; gii < grapple_num; gii++)
+        { 
+                store->add( grappleEquipmentGenerator(RACE_0_ID));
+        }
+
+        for (unsigned int dii = 0; dii < drive_num; dii++)
+        { 
+                store->add(driveEquipmentGenerator(RACE_0_ID));
+        }
+
+        for (unsigned int pii = 0; pii < protector_num; pii++)
+        { 
+                store->add(protectorEquipmentGenerator(RACE_0_ID));
+        }
+
+        for (unsigned int bii = 0; bii < bak_num; bii++)
+        { 
+                store->add(bakEquipmentGenerator(RACE_0_ID));
+        }
+
+        for (unsigned int dii = 0; dii < droid_num; dii++)
+        { 
+                store->add(droidEquipmentGenerator(RACE_0_ID));
+        }
+
+        for (unsigned int sii = 0; sii < scaner_num; sii++)
+        { 
+                store->add(scanerEquipmentGenerator(RACE_0_ID));
+        }
+
+        for (unsigned int fii = 0; fii < freezer_num; fii++)
+        { 
+                store->add(freezerEquipmentGenerator(RACE_0_ID));
+        }
+
+        for (unsigned int ebi = 0; ebi < energyBlock_num; ebi++) 
+        { 
+                store->add(energizerEquipmentGenerator(RACE_0_ID));
+        }
+}
+
+
+//Store* createStore(int race_id)
+//{
+	//TextureOb* texOb_background = 
+	//TextureOb* texOb_slot       =
+
+	//Store* store = new  Store(texOb_background, texOb_slot);
+        //initItemsGenerator(store);
+        
+        //return store;
+//}
