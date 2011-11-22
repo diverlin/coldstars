@@ -50,8 +50,10 @@ class Npc
    		Skill* getSkill();
    		Ship* getScanShip();
    		int getPlaceTypeId() const;
-   		QuestObject* getSelfCareOb();
+   		StateMachine* getStateMachine();
+   		
    		QuestObject* getQuestOb();
+   		QuestObject* getTaskOb();
    		bool getControlledByPlayer()   const;
                 unsigned long int getCredits() const;   
 
@@ -76,13 +78,18 @@ class Npc
      		//// scanning
      		
      		Planet* getPlanetForDocking();
-    		StarSystem* getCloseSafeStarSystem();
+    		StarSystem* getClosestFriendlyStarSystem();
     		
                 NeedsToDo needsToDo;
                             
                 //void setDoNothing();
                 
                 void renderInfo(float _pos_x, float _pos_y, float _offset_x = 0.0, float _offset_y = 0.0);
+                
+                Observation* observation;
+                
+                void jumpEvent();
+                void dockEvent();
                                 
    	private:
      		int race_id;
@@ -105,25 +112,20 @@ class Npc
 
    	     	TextureOb* texOb;
 
-                QuestObject* selfcareOb;      // object to safe life
-                QuestObject* subSelfcareOb;   // object to safe life
-                
-                QuestObject* grabOb;      
-                QuestObject* subGrabOb;   
-                
    	     	QuestObject* questOb;         // quest - continius
-                QuestObject* subQuestOb;      // task is very short and can be changed very frequently  within quest
+   	     	QuestObject* taskOb;
+                //QuestObject* subQuestOb;      // task is very short and can be changed very frequently  within quest
                      
-                Observation* observation;
+
    	     	
      		void selfcareResolver();
      		void questResolver();
                 
                 // scenarios (performes in static)
-                void grabScenario();
+                //void grabScenario();
                 void asteroidScenario();
                 
-     		void destroyShipQuestScenario();
+     		//void destroyShipQuestScenario();
      		void liberationStarSystemQuestScenario();
     		//
     		
@@ -132,14 +134,15 @@ class Npc
                 void generateQuest();
                 
                 // Tracking and they events
-                bool jumpTracking();
-          	bool dockTracking();
-                void grabTracking();
+                //bool jumpTracking();
+          	//bool dockTracking();
+                //void grabTracking();
                 
-                void jumpEvent();
-                void dockEvent();
+
      		//
-     		     		
+     		     	
+     		StateMachine* state_machine;
+     		 	
      		Ship* ship_to_scan;
      		
      		int place_type_id;

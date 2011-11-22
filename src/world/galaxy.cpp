@@ -50,7 +50,7 @@ StarSystem* Galaxy :: getRandomCapturedStarSystem()
 	
 	for (unsigned int i = 0; i<STARSYSTEM_vec.size(); i++)
 	{
-		if (STARSYSTEM_vec[i]->getCapturedFlag() == true)
+		if (STARSYSTEM_vec[i]->getCaptured() == true)
 		{
 			ss_vec.push_back(STARSYSTEM_vec[i]);
 		}
@@ -119,7 +119,7 @@ StarSystem* generateEntireStarSystem()
         generateNumPlanets(starsystem, getRandInt(PLANET_PER_SYSTEM_MIN, PLANET_PER_SYSTEM_MAX));
 
 	starsystem->setCapturedFlag(getRandBool());
-        if (starsystem->getCapturedFlag() == false)
+        if (starsystem->getCaptured() == false)
                 generateNumFriendlyNPC(starsystem, getRandInt(SHIP_PER_SYSTEM_MIN, SHIP_PER_SYSTEM_MAX));
         else
                 generateNumEnemyNPC(starsystem, getRandInt(ENEMY_SHIP_PER_SYSTEM_MIN, ENEMY_SHIP_PER_SYSTEM_MAX));

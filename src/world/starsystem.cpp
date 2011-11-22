@@ -42,7 +42,7 @@ int StarSystem :: getId() const     { return id; }
 int StarSystem :: getTypeId() const { return type_id; }
 StarSystem* StarSystem :: getStarSystem() { return this; }
 bool StarSystem :: getDetailedSimulationFlag() const { return detalied_simulation; }
-bool StarSystem :: getCapturedFlag() const { return is_CAPTURED; }    
+bool StarSystem :: getCaptured() const { return is_CAPTURED; }    
 vec2f StarSystem :: getPosition() const { return center; }  
 
 int StarSystem :: getShockWaveNum() const { return effect_SHOCKWAVE_vec.size(); }        

@@ -20,6 +20,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 int main()
 {       
+	g_STATE_DOCKING = new StateDocking();    // make as singlenton
+	g_STATE_JUMP    = new StateJump();       // make as singlenton
+
  	init();
 
     	KeyEventsInSpace keyEvents = KeyEventsInSpace(); 

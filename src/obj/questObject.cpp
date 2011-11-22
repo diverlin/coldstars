@@ -51,7 +51,7 @@ StarSystem* QuestObject :: getStarSystem()
 bool QuestObject :: getExist()   const { return exist; }
 int QuestObject :: getObTypeId() const { return ob_type_id; }
 int QuestObject :: getActionId() const { return action_id; }
-
+int QuestObject :: getObId() const { return ob_id; }
 
 Npc* QuestObject :: getNpc()      { return npc; }
 Planet* QuestObject :: getPlanet() { return planet; }
@@ -61,8 +61,10 @@ void QuestObject :: setTask(TARGET _target, int _action_id)
 {
 	setObject(_target);
 	ob_type_id = _target->getTypeId();
+	ob_id = _target->getId();
+
 	action_id = _action_id;
-	
+		
 	exist = true;
 }
 void QuestObject :: setObject(Npc* _npc)               { npc = _npc;  }
@@ -104,7 +106,7 @@ void QuestObject :: validation()
 	
 	if (ob_type_id == STARSYSTEM_ID)
 	{
-		if (starsystem->getCapturedFlag() == false)
+		if (starsystem->getCaptured() == false)
 		{
 			reset();
 			return;

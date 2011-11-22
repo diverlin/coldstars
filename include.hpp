@@ -80,7 +80,7 @@ class Turrel;
 class Planet;
 class StarSystem;
 class Star;
-#include "src/pilots/targetObject.hpp" 
+#include "src/obj/targetObject.hpp" 
 
 
 #include "src/equipment/commonforequipment.hpp"
@@ -106,7 +106,7 @@ class Star;
 #include "src/land/land.hpp"
 
 #include "src/gui/cursor.hpp"  
-#include "src/pilots/player.hpp"
+#include "src/player/player.hpp"
 
 #include "src/render/render.hpp"
 #include "src/render/glsl.hpp"
@@ -137,10 +137,25 @@ class Star;
 #include "src/vehicle/navigator.hpp"
 #include "src/vehicle/ship.hpp"
 
-#include "src/pilots/skill.hpp"
-#include "src/pilots/questObject.hpp"  
-#include "src/pilots/questGenerator.hpp" 
-#include "src/pilots/npc.hpp"              
+#include "src/skill/skill.hpp"
+#include "src/obj/questObject.hpp"  
+#include "src/obj/questGenerator.hpp" 
+class StateMachine;
+#include "src/pilots/npc.hpp"           
+
+
+//
+#include "src/pilots/states/stateBase.hpp" 
+#include "src/pilots/states/stateDestroyShip.hpp" 
+#include "src/pilots/states/stateGrab.hpp" 
+#include "src/pilots/states/stateJump.hpp" 
+#include "src/pilots/states/stateDocking.hpp"
+
+#include "src/pilots/stateMachine.hpp"
+
+#include "src/pilots/quests/questBase.hpp"
+#include "src/pilots/quests/questSafety.hpp"
+//   
 #include "src/pilots/observation.hpp" 
 
 #include "src/gui/button.hpp"
@@ -253,12 +268,24 @@ class Star;
 #include "src/effects/shield.cpp"
 #include "src/spaceobjects/rocketBullet.cpp"
 
-#include "src/pilots/player.cpp"
-#include "src/pilots/skill.cpp"
-#include "src/pilots/questObject.cpp"  
-#include "src/pilots/targetObject.cpp"  
-#include "src/pilots/questGenerator.cpp" 
+#include "src/player/player.cpp"
+#include "src/skill/skill.cpp"
+#include "src/obj/questObject.cpp"  
+#include "src/obj/targetObject.cpp"  
+#include "src/obj/questGenerator.cpp" 
 #include "src/pilots/npc.cpp"
+//
+#include "src/pilots/states/stateBase.cpp"
+#include "src/pilots/states/stateDestroyShip.cpp" 
+#include "src/pilots/states/stateGrab.cpp"
+#include "src/pilots/states/stateJump.cpp"
+#include "src/pilots/states/stateDocking.cpp"
+
+#include "src/pilots/stateMachine.cpp"
+
+#include "src/pilots/quests/questBase.cpp"
+#include "src/pilots/quests/questSafety.cpp"
+//
 #include "src/pilots/observation.cpp" 
 
 #include "src/common/common.cpp"

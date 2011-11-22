@@ -56,7 +56,7 @@ class StarSystem
                 int getTypeId() const;
                 StarSystem* getStarSystem();
 		bool getDetailedSimulationFlag() const;
-		bool getCapturedFlag() const;
+		bool getCaptured() const;
 		vec2f getPosition() const;
 		int getShockWaveNum() const;
 		

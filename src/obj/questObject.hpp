@@ -33,6 +33,7 @@ class QuestObject
 		StarSystem* getStarSystem();
 		bool getExist() const;
 		int getObTypeId() const;
+		int getObId() const;
 		int getActionId() const;
 		Npc* getNpc();
 		Planet* getPlanet();
@@ -45,6 +46,7 @@ class QuestObject
 		
 		int action_id;
 		int ob_type_id;
+		int ob_id;
 		
 		Npc*        npc;
 		Planet*     planet;

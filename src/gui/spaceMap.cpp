@@ -110,7 +110,7 @@ void SpaceMap :: render(bool _clrscr)
         	       	       		 galaxy->STARSYSTEM_vec[si]->getPosition().x - 20, 
         	       	       		 galaxy->STARSYSTEM_vec[si]->getPosition().y - 20);
         	       
-        		if (galaxy->STARSYSTEM_vec[si]->getCapturedFlag() == true)
+        		if (galaxy->STARSYSTEM_vec[si]->getCaptured() == true)
         		{
         			drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_enemy_ss->texture, galaxy->STARSYSTEM_vec[si]->getPosition(), 40.0, -2.0);
            		}

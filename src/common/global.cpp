@@ -95,3 +95,9 @@ DetaliedIdGenerator g_TYPE_ID_GENERATOR    = DetaliedIdGenerator();
 UniqueTextureCollector g_UNIQUE_TEXTURE_COLLECTOR;
 
 TextureManager g_TEXTURE_MANAGER;
+
+class StateBase;
+class StateDocking;
+class StateJump;
+StateDocking* g_STATE_DOCKING;
+StateJump*    g_STATE_JUMP;
