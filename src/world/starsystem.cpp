@@ -24,6 +24,9 @@ StarSystem :: StarSystem()
     	type_id = STARSYSTEM_ID;
     	
     	is_CAPTURED = false;
+    	
+    	race_id = RACE_0_ID;
+    	conqueror_race_id = NONE_ID;
 
     	calculation_per_turn_allowed = true;
     	calculation_per_turn_allowed_inDynamic = true;
@@ -36,7 +39,6 @@ StarSystem :: ~StarSystem()
       
 
 void StarSystem :: setPosition(vec2f _center) { center = _center; }
-void StarSystem :: setCapturedFlag(bool _captured) { is_CAPTURED = _captured; }
 				
 int StarSystem :: getId() const     { return id; }
 int StarSystem :: getTypeId() const { return type_id; }
@@ -46,7 +48,16 @@ bool StarSystem :: getCaptured() const { return is_CAPTURED; }
 vec2f StarSystem :: getPosition() const { return center; }  
 
 int StarSystem :: getShockWaveNum() const { return effect_SHOCKWAVE_vec.size(); }        
-                
+int StarSystem :: getRaceId() const 	     { return race_id; }
+int StarSystem :: getConquerorRaceId() const { return conqueror_race_id; }
+     
+     
+Points* StarSystem :: getPoints() const    { return NULL; }
+bool* StarSystem :: getpAlive()            { return NULL; }
+int* StarSystem :: getpPlaceTypeId()       { return NULL; }
+float StarSystem :: getCollisionRadius() const { return 0.0; }
+   		
+   		           
 // poor                
 Planet* StarSystem :: getClosestPlanet(vec2f _pos)
 {
@@ -77,15 +88,14 @@ Npc* StarSystem :: getRandomNpcExcludingRaceId(int _race_id)
         return requested_npc;
 }
 
-
-Npc* StarSystem:: getEvilNpc(vec2f _center)
+Npc* StarSystem :: getRandNpcByRaceId(int _race_id) const
 {
 	std::vector<Npc*> _npc_vec;
-	Npc* requested_npc;
+	Npc* requested_npc = NULL;
 	
 	for (unsigned int i = 0; i < NPC_inSPACE_vec.size(); i++)
         {
-                if ( (NPC_inSPACE_vec[i]->getRaceId() == RACE_6_ID) or (NPC_inSPACE_vec[i]->getRaceId() == RACE_7_ID) )
+                if (NPC_inSPACE_vec[i]->getRaceId() == _race_id)
                 {
                         _npc_vec.push_back(NPC_inSPACE_vec[i]);
                 }
@@ -98,9 +108,55 @@ Npc* StarSystem:: getEvilNpc(vec2f _center)
 	
 	return requested_npc;
 }
-//
+                
 
-void StarSystem :: update_TRUE(int timer)
+Npc* StarSystem:: getRandNpc(std::vector<int>* _pVec_race_id) const
+{
+	std::vector<Npc*> _npc_vec;
+	Npc* requested_npc = NULL;
+	
+	for (unsigned int i = 0; i < NPC_inSPACE_vec.size(); i++)
+        {
+        	for (unsigned int j = 0; j < _pVec_race_id->size(); j++)
+        	{
+        		if ( NPC_inSPACE_vec[i]->getRaceId() == (*_pVec_race_id)[j])
+        		{
+        			_npc_vec.push_back(NPC_inSPACE_vec[i]);
+        			break;
+        		}
+        	}
+        }
+        
+        if (_npc_vec.size() > 0)
+        {
+                requested_npc = _npc_vec[getRandInt(0, _npc_vec.size()-1)];
+        }	
+	
+	return requested_npc;
+}
+
+//Npc* StarSystem:: getRandNpcFromVec(_pVec_id)
+//{
+	//std::vector<Npc*> _npc_vec;
+	//Npc* requested_npc = NULL;
+	
+	//for (unsigned int i = 0; i < NPC_inSPACE_vec.size(); i++)
+        //{
+                //if ( (NPC_inSPACE_vec[i]->getRaceId() == RACE_6_ID) or (NPC_inSPACE_vec[i]->getRaceId() == RACE_7_ID) )
+                //{
+                        //_npc_vec.push_back(NPC_inSPACE_vec[i]);
+                //}
+        //}
+        
+        //if (_npc_vec.size() > 0)
+        //{
+                //requested_npc = _npc_vec[getRandInt(0, _npc_vec.size()-1)];
+        //}	
+	
+	//return requested_npc;
+//}
+//
+void StarSystem :: updateStates()
 {
 	if (PLAYER_vec.size() > 0)
 	{
@@ -111,18 +167,82 @@ void StarSystem :: update_TRUE(int timer)
 		detalied_simulation = false;
 	}
 
+	bool enemy_is_here;
+	bool friendly_is_here; 
+	
+	Npc* _npc_evil = getRandNpc(&RACES_EVIL_LIST);
+	if (_npc_evil != NULL)
+	{
+		enemy_is_here = true;
+	}
+	else
+	{
+		enemy_is_here = false;
+	}
+	
+	Npc* _npc_good = getRandNpc(&RACES_GOOD_LIST);
+	if (_npc_good != NULL)
+	{
+		friendly_is_here = true;
+	}
+	else
+	{
+		friendly_is_here = false;
+	}
+
+	
+	
+	if (is_CAPTURED == false)
+	{
+		if (enemy_is_here == true)
+		{
+			if (friendly_is_here == true)
+			{
+				// war is going
+			}
+			else
+			{
+				is_CAPTURED = true;
+				if (getRandNpcByRaceId(RACE_6_ID) != NULL)
+				{
+					conqueror_race_id = RACE_6_ID;
+				}
+				
+				if (getRandNpcByRaceId(RACE_7_ID) != NULL)
+				{
+					conqueror_race_id = RACE_7_ID;
+				}
+			}
+		}
+	}
+
+	if (is_CAPTURED == true)
+	{
+		if (friendly_is_here == true)
+		{
+			if (enemy_is_here == true)
+			{
+				// war is going
+			}
+			else
+			{
+				is_CAPTURED = false;
+				conqueror_race_id = NONE_ID;
+			}
+		}
+	}
+}
 
 
-
+void StarSystem :: update_TRUE(int timer)
+{
 	if (timer > 0)
 	{
 		if (calculation_per_turn_allowed_inDynamic == true)
 		{
                         postHyperJumpEvent();
-			for (unsigned int i=0; i<PLANET_vec.size(); i++)
-			{
-				PLANET_vec[i]->launchingProcedure();
-			}
+                        launchingEvent();
+
 			calculation_per_turn_allowed_inDynamic = false;
 		}
 
@@ -132,17 +252,18 @@ void StarSystem :: update_TRUE(int timer)
     		updateEntities_inDynamic_TRUE();
     		updateEffects();
 
-    		rocketCollision_TRUE();
-    		asteroidCollision_TRUE();
+    		rocketCollision_TRUE(); // pri /2
+    		asteroidCollision_TRUE(); // pri/2
 
-    		manageDeadObjects(); 
+    		manageDeadObjects();  // no need to update so frequently, pri /6
 
-		fireEvents_TRUE(timer);
+		fireEvents_TRUE(timer); // move to ship update
 
 		calculation_per_turn_allowed = true;
 	}
 	else
 	{
+		updateStates();
 	    	updateEffects();
 	    		
 		if (calculation_per_turn_allowed == true)
@@ -330,7 +451,7 @@ void StarSystem :: updateEntities_inDynamic_TRUE()
     	
         for (unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
         {
-                NPC_inSPACE_vec[ni]->update_inDynamic_inSpace(); 
+                NPC_inSPACE_vec[ni]->update_inSpace_inDynamic(); 
     	}
     	
         for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
@@ -375,7 +496,7 @@ void StarSystem :: updateEntities_inDynamic_FALSE()
     
         for (unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
         {
-                NPC_inSPACE_vec[ni]->update_inDynamic_inSpace(); 
+                NPC_inSPACE_vec[ni]->update_inSpace_inDynamic(); 
         }
 
         for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
@@ -395,16 +516,10 @@ void StarSystem :: updateEntities_inDynamic_FALSE()
       
 void StarSystem :: updateEntities_inStatic()
 {
-     	// called once per TURN
      	for (unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
      	{
-     		NPC_inSPACE_vec[ni]->getShip()->prepareWeapons();
-     		if (NPC_inSPACE_vec[ni]->getControlledByPlayer() == false)
-     		{
-     			NPC_inSPACE_vec[ni]->thinkCommon_inSpace_inStatic();
-         	}         	
-         	NPC_inSPACE_vec[ni]->getShip()->getNavigator()->update_inSpace_inStatic();
-     	}
+		NPC_inSPACE_vec[ni]->update_inSpace_inStatic();
+    	}
 
      	for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
      	{
@@ -1404,6 +1519,14 @@ void StarSystem :: postHyperJumpEvent()
               
         NPC_appear_vec.clear();  
 }
+
+void StarSystem :: launchingEvent() const
+{
+	for (unsigned int i=0; i<PLANET_vec.size(); i++)
+	{
+		PLANET_vec[i]->launchingProcedure();
+	}
+}		
 
 void StarSystem :: moveToSpace(Ship* _ship)
 {

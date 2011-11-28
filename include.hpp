@@ -138,23 +138,37 @@ class Star;
 #include "src/vehicle/ship.hpp"
 
 #include "src/skill/skill.hpp"
-#include "src/obj/questObject.hpp"  
 #include "src/obj/questGenerator.hpp" 
-class StateMachine;
+class MicroScenarioStateMachine;
+class MacroScenarioStateMachine;
+
+class MicroScenarioBase;
+class MacroScenarioBase;
+
+class AiModelBase;
 #include "src/pilots/npc.hpp"           
 
 
 //
-#include "src/pilots/states/stateBase.hpp" 
-#include "src/pilots/states/stateDestroyShip.hpp" 
-#include "src/pilots/states/stateGrab.hpp" 
-#include "src/pilots/states/stateJump.hpp" 
-#include "src/pilots/states/stateDocking.hpp"
+#include "src/pilots/scenarios/microScenarioBase.hpp" 
+#include "src/pilots/scenarios/macroScenarioBase.hpp" 
 
-#include "src/pilots/stateMachine.hpp"
+#include "src/pilots/scenarios/microScenarioDestroy.hpp" 
+#include "src/pilots/scenarios/microScenarioGrab.hpp" 
+#include "src/pilots/scenarios/microScenarioJump.hpp" 
+#include "src/pilots/scenarios/microScenarioDocking.hpp"
 
-#include "src/pilots/quests/questBase.hpp"
-#include "src/pilots/quests/questSafety.hpp"
+#include "src/pilots/scenarios/microScenarioStateMachine.hpp"
+#include "src/pilots/scenarios/macroScenarioStateMachine.hpp"
+
+#include "src/pilots/scenarios/macroScenarioSelfSafety.hpp"
+#include "src/pilots/scenarios/macroScenarioStarSystemLiberation.hpp"
+#include "src/pilots/scenarios/macroScenarioStarSystemDefence.hpp"
+
+#include "src/pilots/aiModel/aiModelBase.hpp"
+#include "src/pilots/aiModel/aiModelRanger.hpp"
+#include "src/pilots/aiModel/aiModelConqueror.hpp"
+
 //   
 #include "src/pilots/observation.hpp" 
 
@@ -270,21 +284,29 @@ class StateMachine;
 
 #include "src/player/player.cpp"
 #include "src/skill/skill.cpp"
-#include "src/obj/questObject.cpp"  
+
 #include "src/obj/targetObject.cpp"  
 #include "src/obj/questGenerator.cpp" 
 #include "src/pilots/npc.cpp"
 //
-#include "src/pilots/states/stateBase.cpp"
-#include "src/pilots/states/stateDestroyShip.cpp" 
-#include "src/pilots/states/stateGrab.cpp"
-#include "src/pilots/states/stateJump.cpp"
-#include "src/pilots/states/stateDocking.cpp"
+#include "src/pilots/scenarios/microScenarioBase.cpp" 
+#include "src/pilots/scenarios/macroScenarioBase.cpp" 
 
-#include "src/pilots/stateMachine.cpp"
+#include "src/pilots/scenarios/microScenarioDestroy.cpp" 
+#include "src/pilots/scenarios/microScenarioGrab.cpp" 
+#include "src/pilots/scenarios/microScenarioJump.cpp" 
+#include "src/pilots/scenarios/microScenarioDocking.cpp"
 
-#include "src/pilots/quests/questBase.cpp"
-#include "src/pilots/quests/questSafety.cpp"
+#include "src/pilots/scenarios/microScenarioStateMachine.cpp"
+#include "src/pilots/scenarios/macroScenarioStateMachine.cpp"
+
+#include "src/pilots/scenarios/macroScenarioSelfSafety.cpp"
+#include "src/pilots/scenarios/macroScenarioStarSystemLiberation.cpp"
+#include "src/pilots/scenarios/macroScenarioStarSystemDefence.cpp"
+
+#include "src/pilots/aiModel/aiModelBase.cpp"
+#include "src/pilots/aiModel/aiModelRanger.cpp"
+#include "src/pilots/aiModel/aiModelConqueror.cpp"
 //
 #include "src/pilots/observation.cpp" 
 

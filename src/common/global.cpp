@@ -18,9 +18,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 // Create the main window
 bool g_USE_MODERN_HW = false;
-				const bool g_DEBUG = true;            // debug 
+				const bool g_DEBUG = false;            // debug 
 				const bool g_AUTOTURN_ENABLE = false;  // debug
-const int g_GAMESPEED = 3;
+const int g_GAMESPEED = 5;
 
 const int g_VIEW_WIDTH = 1280;
 const int g_VIEW_HEIGHT = g_VIEW_WIDTH*600/800;
@@ -45,7 +45,7 @@ int g_TIMER;
 int TURN_TIME = 150;  //turn time, depends on game fps
 int TURN_COUNT = 0; 
         
-sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.4.14 (SFML/C++)");
+sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.4.17 (SFML/C++)");
 sf::Font g_FONT;
 
 sf::Clock g_CLOCK;
@@ -96,8 +96,14 @@ UniqueTextureCollector g_UNIQUE_TEXTURE_COLLECTOR;
 
 TextureManager g_TEXTURE_MANAGER;
 
-class StateBase;
-class StateDocking;
-class StateJump;
-StateDocking* g_STATE_DOCKING;
-StateJump*    g_STATE_JUMP;
+
+class MacroScenarioStarSystemLiberation; MacroScenarioStarSystemLiberation* g_MACROSCENARIO_STARSYSTEMLIBERATION;
+class MacroScenarioStarSystemDefence;    MacroScenarioStarSystemDefence*    g_MACROSCENARIO_STARSYSTEMDEFENCE;
+class MacroScenarioSelfSafety;           MacroScenarioSelfSafety*           g_MACROSCENARIO_SELFSAFETY;
+
+class MicroScenarioDocking;              MicroScenarioDocking* g_MICROSCENARIO_DOCKING;
+class MicroScenarioJump;                 MicroScenarioJump*    g_MICROSCENARIO_JUMP;
+class MicroScenarioDestroy;              MicroScenarioDestroy* g_MICROSCENARIO_DESTROY;
+
+class AiModelRanger;       AiModelRanger*      g_AIMODEL_RANGER;
+class AiModelConqueror;    AiModelConqueror*   g_AIMODEL_CONQUEROR;

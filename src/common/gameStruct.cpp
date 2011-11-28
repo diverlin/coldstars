@@ -111,18 +111,18 @@ KorpusData :: KorpusData()
 
 ShipPropetries :: ShipPropetries()
 {       
-        protection  = 0;
-        radius      = 0;
-        mass        = 0;   // depends on all items mass
-        speed       = 0;  // depends on mass and drive
+        protection   = 0;
+        radius       = 0;
+        mass         = 0;   // depends on all items mass
+        speed        = 0;  // depends on mass and drive
 
-        hyper       = 0;  // depends on drive and bak
-        repair      = 0; // depends on droid
-        freeze      = 0; // depends on freezer
-        scan        = 0;   // depends on scaner
+        hyper        = 0;  // depends on drive and bak
+        repair       = 0; // depends on droid
+        freeze       = 0; // depends on freezer
+        scan         = 0;   // depends on scaner
         
-        energy      = 0;
-        temperature = 0;
+        energy       = 0;
+        temperature  = 0;
         
         average_damage = 0;
         average_fire_radius = 0;

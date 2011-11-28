@@ -17,19 +17,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-StateGrab :: StateGrab()
+MicroScenarioGrab :: MicroScenarioGrab()
 {}
 
 
-StateGrab :: ~StateGrab()
+MicroScenarioGrab :: ~MicroScenarioGrab()
 {}
 		
-void StateGrab :: Enter(Npc* _npc)
+void MicroScenarioGrab :: Enter(Npc* _npc) const
 {	
-	printf("npc_id = %i, STARTS grabbing item id = %i\n", _npc->getId(), _npc->getTaskOb()->getObId());
+	printf("npc_id = %i, STARTS MicroScenarioGrab item id = %i\n", _npc->getId(), _npc->getMicroTask()->getTarget()->getObId());
 }
 
-void StateGrab :: update_inStatic(Npc* _npc)
+void MicroScenarioGrab :: update_inStatic(Npc* _npc) const
 {
               
         for (unsigned int i = 0; i < _npc->observation->visible_MINERAL_vec.size(); i++)
@@ -44,10 +44,10 @@ void StateGrab :: update_inStatic(Npc* _npc)
                 }
         }
         
-        _npc->getShip()->getNavigator()->setTarget(_npc->getTaskOb()->getNpc()->getShip(), FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID );
+        _npc->getShip()->getNavigator()->setTarget(_npc->getMicroTask()->getTarget()->getNpc()->getShip(), FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID );
 }
 
-void StateGrab :: update_inDynamic(Npc* _npc)
+void MicroScenarioGrab :: update_inDynamic(Npc* _npc) const
 {
         _npc->getShip()->grapple_slot.getGrappleEquipment()->validationTargets();  
                 
@@ -84,7 +84,13 @@ void StateGrab :: update_inDynamic(Npc* _npc)
 
 }
 
-void StateGrab :: Exit(Npc* _npc)
+void MicroScenarioGrab :: Exit(Npc* _npc) const
 {
-	printf("npc_id = %i, STARTS grabbing item id = %i\n", _npc->getId(), _npc->getTaskOb()->getObId());
+	printf("npc_id = %i, ends MicroScenarioGrab\n", _npc->getId());
+}
+
+
+std::string MicroScenarioGrab :: getDescription(Npc* _npc) const 
+{
+	return "GRAB to ob id = %i\n" + int2str( _npc->getMicroTask()->getTarget()->getObId());
 }

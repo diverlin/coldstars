@@ -17,21 +17,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef STATEDOCKING_H
-#define STATEDOCKING_H
+#ifndef MACROSCENARIOSTARSYSTEMLIBERATION_H
+#define MACROSCENARIOSTARSYSTEMLIBERATION_H
 
-class StateDocking : public StateBase
+class MacroScenarioStarSystemLiberation : public MacroScenarioBase
 {
 	public:
-		StateDocking();
-		virtual ~StateDocking();
+		MacroScenarioStarSystemLiberation();
+		virtual ~MacroScenarioStarSystemLiberation();
 		
-		virtual void enter(Npc*);
-		virtual void update_inStatic(Npc*);
-		virtual void update_inDynamic(Npc*);	
-		virtual void exit(Npc*);
+		virtual void update_inStatic(Npc*) const;	
+		virtual std::string getDescription(Npc*) const;	
+}; 
 
-};
 
 #endif 
      

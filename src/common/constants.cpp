@@ -65,8 +65,8 @@ const int STAR_SIZE_MAX = 120;
 // SHIP
 const int SHIP_PER_SYSTEM_MIN = 3;
 const int SHIP_PER_SYSTEM_MAX = 5;
-const int ENEMY_SHIP_PER_SYSTEM_MIN = 20;
-const int ENEMY_SHIP_PER_SYSTEM_MAX = 30;
+const int ENEMY_SHIP_PER_SYSTEM_MIN = 10;
+const int ENEMY_SHIP_PER_SYSTEM_MAX = 20;
 
 // trigonomerty
 const float PI = 3.141592653589797;

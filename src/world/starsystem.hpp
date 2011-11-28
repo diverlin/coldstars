@@ -44,13 +44,18 @@ class StarSystem
     		std::vector<Npc*>  NPC_PIRAT_inSPACE_vec;
     		std::vector<Npc*>  NPC_DIPLOMAT_inSPACE_vec;
     	    	//  
+    	    	
+    	    	Points* getPoints() const;
+   		bool* getpAlive();
+   		int* getpPlaceTypeId();
+   		float getCollisionRadius() const;
+   		
     
     		StarSystem();
     		~StarSystem();
     
     		void setPosition(vec2f);
 		//void setDetailedSimulationFlag(bool);
-		void setCapturedFlag(bool);
 		
 		int getId() const;
                 int getTypeId() const;
@@ -59,12 +64,16 @@ class StarSystem
 		bool getCaptured() const;
 		vec2f getPosition() const;
 		int getShockWaveNum() const;
+		int getRaceId() const;
+		int getConquerorRaceId() const;
 		
 		// poor
     		Planet* getClosestPlanet(vec2f);
     		Npc* getRandomNpc();
                 Npc* getRandomNpcExcludingRaceId(int);
-                Npc* getEvilNpc(vec2f);
+                Npc* getRandNpcByRaceId(int) const;
+		Npc* getRandNpc(std::vector<int>*) const;
+
     		// 
 
 		void update_TRUE(int timer);
@@ -109,6 +118,7 @@ class StarSystem
     		
     	private:
                 int id, type_id;
+                int race_id, conqueror_race_id;
                 
     		bool detalied_simulation;
     		bool calculation_per_turn_allowed; 
@@ -147,6 +157,7 @@ class StarSystem
     		Garbage garbage;
                 
                 void postHyperJumpEvent();
+                void launchingEvent() const;
 
     		void asteroidManager(unsigned int num);
     		    		
@@ -160,7 +171,9 @@ class StarSystem
 
     		void updateEntities_inDynamic_TRUE();
     		void updateEntities_inDynamic_FALSE();
+    		
     		void updateEntities_inStatic();
+    		
     		void updateEffects();
     		
     		void fireEvents_TRUE(int timer);
@@ -175,6 +188,8 @@ class StarSystem
     			void renderBackground();
                         
                 bool removeFromTheListById(std::vector<Npc*>* _pTo_npc_vec, int _id);
+    		
+    		void updateStates();
     		
     		void debug__();    	
 };

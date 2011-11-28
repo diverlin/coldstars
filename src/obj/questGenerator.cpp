@@ -25,60 +25,60 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //}
 
 
-bool liberationStarSystemQuestGenerator(Npc* npc)
-{
-	StarSystem* taret_starsystem = g_GALAXY->getRandomCapturedStarSystem();
-	npc->getQuestOb()->setTask(taret_starsystem, LIBERATION_STARSYSTEM_QUEST_ID);
+//bool liberationStarSystemQuestGenerator(Npc* npc)
+//{
+	////StarSystem* taret_starsystem = g_GALAXY->getRandomCapturedStarSystem();
+	////npc->getQuestOb()->setTask(taret_starsystem, LIBERATION_STARSYSTEM_QUEST_ID);
 
-        return true;
-}
+        ////return true;
+//}
 
 
-bool destroyShipQuestGenerator(Npc* npc)
-{
-	Npc* target_npc = NULL;
+//bool destroyShipQuestGenerator(Npc* npc)
+//{
+	//Npc* target_npc = NULL;
 	
-	int counter = 0;
-	do
-	{ 
-                target_npc = g_GALAXY->getRandomStarSystem()->getRandomNpc();
-		//target_npc = npc->getStarSystem()->getRandomNpc();
-		counter++;
-	} 
-	while ( (npc->getId() == target_npc->getId() ) and (counter < 20) );
+	//int counter = 0;
+	//do
+	//{ 
+                //target_npc = g_GALAXY->getRandomStarSystem()->getRandomNpc();
+		////target_npc = npc->getStarSystem()->getRandomNpc();
+		//counter++;
+	//} 
+	//while ( (npc->getId() == target_npc->getId() ) and (counter < 20) );
 	
-	if (target_npc != NULL)
-	{
-		if (npc->getId() != target_npc->getId())
-		{
-			npc->getQuestOb()->setTask(target_npc, DESTROY_SHIP_QUEST_ID);
-			return true;
-		}
-	}
+	//if (target_npc != NULL)
+	//{
+		//if (npc->getId() != target_npc->getId())
+		//{
+			//npc->getQuestOb()->setObject(target_npc);
+			//return true;
+		//}
+	//}
 
-	return false;
-}
+	//return false;
+//}
 
-bool questEvilGenerator(Npc* npc)
-{
-        Npc* target_npc = NULL;
+//bool questEvilGenerator(Npc* npc)
+//{
+        //Npc* target_npc = NULL;
 	
-	int counter = 0;
-	do
-	{
-		target_npc = npc->getStarSystem()->getRandomNpcExcludingRaceId(npc->getRaceId());
-		counter++;
-	} 
-	while ( (npc->getId() == target_npc->getId() ) and (counter < 20) );
+	//int counter = 0;
+	//do
+	//{
+		//target_npc = npc->getStarSystem()->getRandomNpcExcludingRaceId(npc->getRaceId());
+		//counter++;
+	//} 
+	//while ( (npc->getId() == target_npc->getId() ) and (counter < 20) );
 	
-	if (target_npc != NULL)
-	{
-		if (npc->getId() != target_npc->getId())
-		{
-			npc->getQuestOb()->setTask(target_npc, DESTROY_SHIP_QUEST_ID);
-			return true;
-		}
-	}
+	//if (target_npc != NULL)
+	//{
+		//if (npc->getId() != target_npc->getId())
+		//{
+			//npc->getQuestOb()->setObject(target_npc);
+			//return true;
+		//}
+	//}
 
-	return false;
-}
+	//return false;
+//}

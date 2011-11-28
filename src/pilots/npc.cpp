@@ -16,6 +16,70 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
+MacroTaskHolder :: MacroTaskHolder()
+{
+	is_valid = false;
+	
+	scenario = NULL;
+	target   = new TargetObject(NULL);
+}
+
+MacroTaskHolder :: ~MacroTaskHolder()
+{
+	delete target;
+}
+
+template <typename TARGET_TYPE>
+void MacroTaskHolder :: set(MacroScenarioBase* _scenario, TARGET_TYPE* _target)
+{
+	is_valid = true;
+	
+	scenario = _scenario;
+	target->setObject(_target);
+}
+
+bool MacroTaskHolder :: getValid() const { return is_valid; }
+MacroScenarioBase* MacroTaskHolder :: getScenario()   const { return scenario; }
+TargetObject*  MacroTaskHolder :: getTarget() const { return target; }	
+	
+void MacroTaskHolder :: reset()
+{
+	is_valid = false;
+	
+	target->reset();
+	//scenario->reset();
+}
+
+
+
+
+MicroTaskHolder :: MicroTaskHolder()
+{
+	is_valid = false;
+	
+	scenario = NULL;
+	target   = new TargetObject(NULL);
+}
+
+MicroTaskHolder :: ~MicroTaskHolder()
+{
+	delete target;
+}
+
+MicroScenarioBase* MicroTaskHolder :: getScenario()   const { return scenario; }
+TargetObject*  MicroTaskHolder :: getTarget() const { return target; }	
+	
+//template <typename TARGET_TYPE>
+//void MicroTaskHolder :: set(MicroScenarioBase* _scenario, TARGET_TYPE* _target)
+//{
+	//scenario = _scenario;
+	//target->setObject(_target);
+//}
+
+
+
+
 void Npc :: setGarbageReady(bool _garbage_ready)   { data_life.garbage_ready = _garbage_ready; }
 void Npc :: setAlive(bool _alive) 		   { data_life.is_alive = _alive; }
 void Npc :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
@@ -31,20 +95,31 @@ int Npc :: getId() const	   { return data_id.id; }
 int Npc :: getTypeId() const	   { return data_id.type_id; }
 int  Npc :: getSubTypeId() const   { return data_id.subtype_id; }
 int Npc :: getRaceId() const	   { return race_id; }
-StarSystem* Npc :: getStarSystem() { return starsystem; }
+StarSystem* Npc :: getStarSystem() const { return starsystem; }
+StarSystem* Npc :: getFailBackStarSystem() const { return failback_starsystem; }
 Kosmoport* Npc :: getKosmoport()   { return kosmoport; }
 Ship* Npc :: getShip() 	 	   { return ship; }
 Skill* Npc :: getSkill() 	   { return skill; }	
 Ship* Npc :: getScanShip()	   { return ship_to_scan; }	
 int Npc :: getPlaceTypeId() const  { return place_type_id; }
+Observation* Npc :: getObservation() const { return observation; }
 
-QuestObject* Npc :: getQuestOb()   { return questOb; }
-QuestObject* Npc :: getTaskOb()   { return taskOb; }
 
+MacroTaskHolder* Npc :: getMacroTaskMain() const { return macro_task_main; }
+MacroTaskHolder* Npc :: getMacroTaskSelf() const { return macro_task_self; }
+MicroTaskHolder* Npc :: getMicroTask() const { return micro_task; }
+   		
 bool Npc :: getControlledByPlayer() const { return controlled_by_player; }
 unsigned long int Npc :: getCredits() const { return credits; }   
-StateMachine* Npc :: getStateMachine() {return state_machine; }
+MacroScenarioStateMachine* Npc :: getMacroTaskStateMachine() {return macroTask_stateMachine; }
+MicroScenarioStateMachine* Npc :: getMicroTaskStateMachine() {return microTask_stateMachine; }
 
+
+Points* Npc :: getPoints() const    { return ship->getPoints(); }
+bool* Npc :: getpAlive()       { return &data_life.is_alive; }
+int* Npc :: getpPlaceTypeId()  { return &place_type_id; }
+float Npc :: getCollisionRadius() { return ship->getCollisionRadius(); }
+   		
 void Npc :: bind(Ship* _ship) 	           
 { 
 	ship = _ship; 
@@ -78,41 +153,39 @@ Npc :: Npc(int _race_id, IdData _data_id, LifeData _data_life, TextureOb* _texOb
     	kosmoport  = NULL;
     	land       = NULL;
     	starsystem = NULL;
-    		
+    	
+    	failback_starsystem = NULL;
+    	    		
 	skill = new Skill();
-
-	questOb        = new QuestObject();
-        taskOb 	       = new QuestObject();
         
+        macro_task_main = new MacroTaskHolder();
+   	macro_task_self = new MacroTaskHolder();
+  	micro_task = new MicroTaskHolder();
+   		
         observation = new Observation(this);
+
+        macroTask_stateMachine = new MacroScenarioStateMachine(this);        
+        microTask_stateMachine = new MicroScenarioStateMachine(this);
         
-        state_machine = new StateMachine(this);
+        // depending on type
+        ai_model = g_AIMODEL_RANGER;
 }
     
 Npc :: ~Npc()
 {
         delete skill;
       
-	delete questOb;
-	delete taskOb;
+      	delete macro_task_main;
+      	delete macro_task_self;
+      	delete micro_task;
+
         
         delete observation;
-        
-        delete state_machine;
+
+        delete macroTask_stateMachine;        
+        delete microTask_stateMachine;
 }  
     
-
-
-//void Npc :: setRandomTargetCoord()
-//{
-     //if (pTo_ship->direction_list_END == true) 
-     //{   
-        //pTo_ship->pTo_navigator->setStaticTargetCoords(getRandInt(0,800), getRandInt(0,800));  
-     //} 
-//}
-
-
-
 
 
 void Npc :: thinkCommon_inKosmoport_inStatic()
@@ -132,113 +205,45 @@ void Npc :: thinkCommon_inLand_inStatic()
 {}
 
 
-//void Npc :: thinkUnique_inSpace_inStatic()
-//{
-     	//(this->*pToFunc_thinkUnique_inSpace_inStatic)();
-//}
 
-void Npc :: thinkCommon_inSpace_inStatic()
+
+void Npc :: update_inSpace_inStatic()
 {
-        bool busy = false;
+        checkNeeds();
+           
+     	ship->prepareWeapons();
         
 	observation->observeAll_inSpace_inStatic();  
+   
+        ship->grapple_slot.getGrappleEquipment()->validationTargets();
+        
+        
+        // place model here
+	ai_model->update_inStatic(this);
+	//
         
        
-        
-        //if ( (observation->see.MINERAL == false) or (ship->ableTo.GRAB == false) )
-        //{
-                //if (grabOb->getActionId() == GRABBING_TASK_ID)
-                //{
-                        //grabOb->reset();
-                //}
-        //}
-        
-        ship->grapple_slot.getGrappleEquipment()->validationTargets(); 
-                
-
-	questOb->validation();
-       
-        if ( (race_id != RACE_6_ID) or (race_id != RACE_7_ID) )
-        {
-                checkNeeds();    
-        }
-       
-        ////// generator
-        //if ( (observation->see.MINERAL == true) and (ship->ableTo.GRAB == true) )
-        //{
-                //if (grabOb->getActionId() != GRABBING_TASK_ID)                
-                //{
-                	//printf("npc_id =%i, grabOb set GRABBING_TASK_ID\n", data_id.id);
-                        //grabOb->setTask(starsystem, GRABBING_TASK_ID);
-                //}
-        //}
-       
-  
-        
-        //if (selfcareOb->getExist() == false)
-	//{
-	        //if ( (needsToDo.REPAIR_KORPUS == true) and (selfcareOb->getActionId() != SELFCARE_TASK_ID) )
-	        //{
-                	////generateSelfCare();
-                //}
-        //}
-         
-       	if (questOb->getExist() == false)
-	{
-                //generateQuest();
-        }
-        ////
-        
 	if (observation->see.ASTEROID == true)
 	{
                 asteroidScenario();
 	}
-                        
              
-        //if ( (grabOb->getExist() == true) and (busy == false) )
-        //{
-                //if (grabOb->getActionId() == GRABBING_TASK_ID)
-                //{
-                        ////grabScenario();                        
-                        //busy = true;
-                //}
-        //}
 
+       	macroTask_stateMachine->update_inStatic();                 
+       	microTask_stateMachine->update_inStatic();
         
-        //if ( (selfcareOb->getExist() == true) and (busy == false) )
-        //{                            
-                //selfcareResolver(); 
-                //busy = true;   
-        //}
-        
-
-        if ( (questOb->getExist() == true) and (busy == false) )
-        {
-                questResolver();
-                busy = true;  
-        }
+        ship->getNavigator()->update_inSpace_inStatic();
 }
 
 
-void Npc :: generateSelfCare()
+void Npc :: update_inSpace_inDynamic()
 {
-        //selfcareOb->setTask(getCloseSafeStarSystem(), SELFCARE_TASK_ID); 
-}
+        //	macroTask_stateMachine->update_inDynamic(); // is it needed ?
+       	microTask_stateMachine->update_inDynamic();
+}     	
 
 
 
-void Npc :: generateQuest()
-{
-        if ((race_id != RACE_6_ID) or (race_id != RACE_7_ID))
-        {
-                //destroyShipQuestGenerator(this);
-                liberationStarSystemQuestGenerator(this);
-        }
-        else
-        {
-                questEvilGenerator(this);    
-        }
-}
 
 
 void Npc :: checkNeeds()
@@ -246,6 +251,10 @@ void Npc :: checkNeeds()
         if (ship->getArmor() < 0.5*ship->data_korpus.armor)   // move to ship
 	{
 		needsToDo.REPAIR_KORPUS = true;
+		//if (quest_self != g_QUEST_SELF_SAFETY)
+		//{
+			//quest_self = g_QUEST_SELF_SAFETY;
+		//}
 	}
         else
         {
@@ -255,8 +264,16 @@ void Npc :: checkNeeds()
         // check conditions of all items here and set REPAIR_EQUIPMENT flag accordingly
         needsToDo.REPAIR_EQUIPMENT = false;
         
-        // check bak
-   	needsToDo.GET_FUEL = false;
+        // checkhjump
+        failback_starsystem = getClosestStarSystem(false);
+        if (failback_starsystem != NULL)
+        {
+   		needsToDo.GET_FUEL = false;
+   	}
+   	else
+   	{
+   	   	needsToDo.GET_FUEL = true;
+   	}
         
         // check if rockets are ended
    	needsToDo.GET_BULLETS = false;
@@ -287,246 +304,16 @@ void Npc :: asteroidScenario()
 }
 
 
-//void Npc :: grabScenario()
-//{
-        //if ( starsystem->getId() != grabOb->getStarSystem()->getId() )
-	//{
-		//if (ship->getNavigator()->getTargetTypeId() != STARSYSTEM_ID)
-		//{
-                        //ship->getNavigator()->forceJump(grabOb->getStarSystem()); 
-                        
-			//printf("npc_id =%i navigate StarSystem id =%i, reason = GRAB HUNTING\n", data_id.id, grabOb->getStarSystem()->getId() );   // debug
-                //}
-       	//}
-        //else
-        //{        
-        	//vec2f offset_target = getRandVec(30, 60);
-                //ship->getNavigator()->setStaticTargetCoords(observation->visible_MINERAL_vec[0].mineral->getPoints()->getCenter() + offset_target);
-                
-                //// debug
-                ////observation->printVisibleMineralInformation();
-                //// debug
-                
-                //for (unsigned int i = 0; i < observation->visible_MINERAL_vec.size(); i++)
-                //{                	
-                        //if (observation->visible_MINERAL_vec[i].dist < ship->grapple_slot.getGrappleEquipment()->getRadius())
-                        //{                                       
-                                //ship->grapple_slot.getGrappleEquipment()->add(observation->visible_MINERAL_vec[i].mineral);
-                        //}
-                        //else
-                        //{
-                                //break;
-                        //}
-                //}
-        //}
-//}
-
-
-//void Npc :: destroyShipQuestScenario()
-//{
-	//if ( starsystem->getId() != questOb->getStarSystem()->getId() )
-	//{
-		//if (ship->getNavigator()->getTargetTypeId() != STARSYSTEM_ID)
-		//{                               
-       			//ship->getNavigator()->forceJump(questOb->getStarSystem()); 
-       			
-			//printf("npc_id =%i navigate StarSystem id =%i, reason = DESTROY SHIP HUNTING\n", data_id.id, questOb->getStarSystem()->getId() );   // debug
-       		//}
-       	//}
-	//else
-	//{
-		//ship->weapon_selector.setAll(true);
-		//ship->selectWeapons();
-		//ship->setWeaponsTarget(questOb->getNpc()->getShip());
-                      
-                //int _dist_close = questOb->getNpc()->getShip()->getCollisionRadius();  
-                //int _dist_far = 2 * _dist_close;
-                                                
-		//ship->getNavigator()->setTarget(questOb->getNpc()->getShip(), getRandInt(_dist_close, _dist_far) );
-	//}
-//}
-
-
-//void Npc :: liberationStarSystemQuestScenario()
-//{
-	//if ( starsystem->getId() != questOb->getStarSystem()->getId() )
-	//{
-		//if (ship->getNavigator()->getTargetTypeId() != STARSYSTEM_ID)
-		//{                         
-       			//ship->getNavigator()->forceJump(questOb->getStarSystem());
-       			
-			//printf("npc_id =%i navigate StarSystem id =%i, reason = LIBERATION THIS SYSTEM\n", data_id.id, questOb->getStarSystem()->getId() );   // debug
-       		//}
-	//}
-	//else
-	//{
-		//if (subQuestOb->getActionId() != DESTROY_SHIP_QUEST_ID)
-		//{
-			//subQuestOb->setTask(questOb->getStarSystem()->getEvilNpc(ship->getPoints()->getCenter()), DESTROY_SHIP_QUEST_ID);
-		//}
-
-		//ship->weapon_selector.setAll(true);
-		//ship->selectWeapons();
-		//ship->setWeaponsTarget(subQuestOb->getNpc()->getShip());
-                      
-                //int _dist_close = subQuestOb->getNpc()->getShip()->getCollisionRadius();  
-                //int _dist_far = 2 * _dist_close;
-                                                
-		//ship->getNavigator()->setTarget(subQuestOb->getNpc()->getShip(), getRandInt(_dist_close, _dist_far) );
-	//}
-//}
-
-
-void Npc :: selfcareResolver()
-{       
-       	//if (selfcareOb->getStarSystem()->getId() != starsystem->getId())
-	//{
-		//if (ship->getNavigator()->getTargetTypeId() != STARSYSTEM_ID)
-		//{       
-       			//ship->getNavigator()->forceJump(selfcareOb->getStarSystem());
-       			
-       			//printf("npc_id =%i navigate StarSystem id =%i, reason = SELF_CARE\n", data_id.id, selfcareOb->getStarSystem()->getId() );   // debug
-       		//}
-        //}
-        //else
-        //{
-		//if (subSelfcareOb->getActionId() != LANDING_TASK_ID)
-		//{
-			//Planet* _target_planet = getPlanetForDocking();  // depending on purpouse
-			//subSelfcareOb->setTask(_target_planet, LANDING_TASK_ID);
-		//}
-		//else
-		//{
-        		//ship->getNavigator()->setTarget(subSelfcareOb->getPlanet(), DOCKING_NAVIGATOR_ACTION_ID);
-		//}              
-        //}
-}
-
-
-void Npc :: questResolver()
-{
-	if (questOb->getObTypeId() == NPC_ID)
-	{
-		if (questOb->getActionId() == DESTROY_SHIP_QUEST_ID)
-		{
-			//destroyShipQuestScenario();
-		}
-	}
-
-	if (questOb->getObTypeId() == STARSYSTEM_ID)
-	{	
-		if (questOb->getActionId() == LIBERATION_STARSYSTEM_QUEST_ID)
-		{ 
-			//liberationStarSystemQuestScenario();
-		}
-	}
-}
-
-
-
-
-void Npc :: update_inDynamic_inSpace()
-{
-     	//printf("npc_id = %i update_inDynamic_inSpace \n", id);
-     	if (ship->getNavigator()->getTargetTypeId() == STARSYSTEM_ID)
-     	{
-		//jumpTracking();
-	}
-	
-	if (ship->getNavigator()->getTargetTypeId() == PLANET_ID)
-	{
-	        //dockTracking();
-	}
-
-	if (ship->ableTo.GRAB == true) // think how to optimize this
-	{
-       		//grabTracking();        	
-        }
-}
-
-
-
-
-
-//bool Npc :: dockTracking()
-//{
-     	//if (ship->getNavigator()->checkEchievement() == true)
-     	//{
-     		//if (ship->getNavigator()->getDockingPermission() == true)
-     		//{
-     		     	//dockEvent();
-                        //return true;
-     		//}
-     		//else
-     		//{
-     			//// wait or reset
-     		//}
-     	//}
-        
-        //return true;
-//}
-
-
-//bool Npc :: jumpTracking()
-//{
-     	//if (ship->getNavigator()->checkEchievement() == true)
-     	//{
-                //jumpEvent();
-                //return true;
-     	//}
-     	
-     	//return false;
-//}
-
-//void Npc :: grabTracking()
-//{
-        //ship->grapple_slot.getGrappleEquipment()->validationTargets();  
-                
-        //for (unsigned int i = 0; i < ship->grapple_slot.getGrappleEquipment()->target_vec.size(); i++)
-        //{	//printf("blablabla\n");
-                //if (ship->grapple_slot.getGrappleEquipment()->target_vec[i]->getValid() == true)
-                //{
-                	////printf("blablabla\n");
-                       	//ship->grapple_slot.getGrappleEquipment()->target_vec[i]->moveExternalyToPosition(ship->getPoints()->getCenter());        	
-       	
-        		//float dist = distBetweenPoints(ship->getPoints()->getCenter(), *ship->grapple_slot.getGrappleEquipment()->target_vec[i]->getpCenter() ); 
-        		//if (dist < ship->getCollisionRadius()/10)
-        		//{
-        			//if (ship->grapple_slot.getGrappleEquipment()->target_vec[i]->getObTypeId() == MINERAL_ID)
-        			//{
-        				//GoodsPack* _goodsPack = createGoodsPack(MINERAL_ID, vec2f (0, 0));
-        				//_goodsPack->increase(ship->grapple_slot.getGrappleEquipment()->target_vec[i]->getMineral()->getMass());
-        				//ItemSlot* _slot = ship->getEmptyOtsecSlot();
-        				//if (_slot != NULL)
-        				//{
-        					//_slot->insertGoods(_goodsPack);
-        					//starsystem->killMineralById(ship->grapple_slot.getGrappleEquipment()->target_vec[i]->getObId());   
-        					//ship->grapple_slot.getGrappleEquipment()->target_vec[i]->reset();
-        				//}			
-        			//}
-        			
-        			//if (ship->grapple_slot.getGrappleEquipment()->target_vec[i]->getObTypeId() == CONTAINER_ID)
-        			//{
-        				//starsystem->removeContainer(ship->grapple_slot.getGrappleEquipment()->target_vec[i]->getObId());
-        			//}
-        		//}
-        	//}
-        //}                 
-        
-//}
-
 
 
 void Npc:: jumpEvent()
 {
-        printf("npc id = %i, jumpEvent()\n", data_id.id);
 	ship->jumpEvent();
 }
 
 
 void Npc:: dockEvent()
 {
-        printf("npc id = %i, dockEvent()\n", data_id.id);
 	ship->dockEvent();
 }
 
@@ -539,26 +326,18 @@ void Npc:: dockEvent()
 
 Planet* Npc :: getPlanetForDocking()
 {
-     	printf("npc_id = %i, getPlanetForDocking()\n", data_id.id);
-
      	Planet* _target_planet = starsystem->getClosestPlanet(ship->getPoints()->getCenter());  // improove
      	return _target_planet;
 }
 
 
-StarSystem* Npc :: getClosestFriendlyStarSystem()
+StarSystem* Npc :: getClosestStarSystem(bool _captured)
 {
- 	if (starsystem->getCaptured() == false)
-        {
-        	return starsystem;
-        }
-        else
-        {
-        	StarSystem* _target_starsystem = starsystem;   // HACK, find close safe starsystem instead
-		return _target_starsystem;
-        }
+       	observation->findEchievableStarSystems_inStatic();
+        	
+       	StarSystem* _target_starsystem = observation->getClosestStarSystem(_captured);   
+	return _target_starsystem;
 }
-
 
 
 //// *********** SCANNING ***********
@@ -606,18 +385,20 @@ void Npc :: updateInfo()
     	info.addTitleStr("NPC");
     	info.addNameStr("id/ss_id:");           info.addValueStr( int2str(data_id.id) + " / "  + int2str(starsystem->getId()) );
     	info.addNameStr("race:");   		info.addValueStr( returnRaceStringByRaceId(texOb->race_id) ); 
+
+    	if (macro_task_self->getValid())
+    	{   
+    	info.addNameStr("quest_self:");   	info.addValueStr( macro_task_self->getScenario()->getDescription(this) ); 
+    	}
+    	    	
+    	if (macro_task_main->getValid())
+    	{ 	
+    	info.addNameStr("macro_task_main:");   	info.addValueStr( macro_task_main->getScenario()->getDescription(this) ); 
+    	}
     	
-    	//if (grabOb->getExist() == true)
-    	//{   	
-    	//info.addNameStr("grabOb:");   		info.addValueStr( ship->grapple_slot.getGrappleEquipment()->getTargetStr() ); 
-    	//}
-    	//if (selfcareOb->getExist() == true)
-    	//{   	
-    	//info.addNameStr("selfcareOb:");   	info.addValueStr( "" ); 
-    	//}
-    	if (questOb->getExist() == true)
-    	{   	
-    	info.addNameStr("questOb:");   		info.addValueStr( "" ); 
+    	if (microTask_stateMachine->getCurrentState() != NULL)
+    	{
+    	info.addNameStr("micro_task:");   	info.addValueStr( microTask_stateMachine->getCurrentStateDescription() ); 
     	}
 }
 

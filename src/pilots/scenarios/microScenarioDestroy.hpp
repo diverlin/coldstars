@@ -17,18 +17,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef QUESTSAFETY_H
-#define QUESTSAFETY_H
+#ifndef MICROSCENARIODESTROY_H
+#define MICROSCENARIODESTROY_H
 
-class QuestSafety : public QuestBase
+class MicroScenarioDestroy : public MicroScenarioBase
 {
 	public:
-		QuestSafety();
-		virtual ~QuestSafety();
+		MicroScenarioDestroy();
+		virtual ~MicroScenarioDestroy();
 		
-		virtual void manageLogic(Npc*);	
-}; 
-
+		virtual void enter(Npc*) const;
+		virtual void update_inStatic(Npc*) const;
+		virtual void update_inDynamic(Npc*) const;	
+		virtual void exit(Npc*) const;
+		
+		virtual std::string getDescription(Npc*) const;
+};
 
 #endif 
      

@@ -338,8 +338,7 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
     			     kontur_rect.getCenter().y + 3*texOb_slot->h);
     	////////////////////////////////////////////////////
  	   	   	
- 	TextureOb* _texOb_shield = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.shieldEffect_texOb_pList); 
- 	shield = new ShieldEffect(this, _texOb_shield);
+
    
        	starsystem = NULL; 
     	npc_owner  = NULL;
@@ -347,18 +346,18 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
     	navigator = new Navigator(this);  
     	    	
       	drive_trail = createTrailEffect(texOb->size_id, points.getpMidLeft(), points.getpMidFarLeft());
+      	 
+      	TextureOb* _texOb_shield = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.shieldEffect_texOb_pList); 
+ 	shield = new ShieldEffect(this, _texOb_shield);
 }
 
 
 
 Ship :: ~Ship()
 {
-	delete drive_trail;
-	delete shield;
-	
-	for (unsigned int i = 0; i < slot_total_pList.size(); i++)
+	for (unsigned int i = 0; i < slot_otsec_pList.size(); i++)
     	{
-		delete slot_total_pList[i];  
+		delete slot_otsec_pList[i];  
     	}
     	
     	delete navigator;
@@ -368,6 +367,9 @@ Ship :: ~Ship()
         delete turrel3;
         delete turrel4;
         delete turrel5;
+        
+        delete drive_trail;
+	delete shield;
 } 
 
 
@@ -532,7 +534,8 @@ bool Ship :: jumpEvent()
         starsystem->removeShip(data_id.id);  
         starsystem->removeNpc(npc_owner->getId(), npc_owner->getSubTypeId());  
                                                         
-        navigator->getTargetStarSystem()->addToHyperJumpQueue(npc_owner);        
+        navigator->getTargetOb()->getStarSystem()->addToHyperJumpQueue(npc_owner);
+        navigator->resetTarget();        
         
         return true;
 }
@@ -1092,26 +1095,26 @@ void equip(Ship* ship)
     
     	if (ship->data_korpus.weapon_slot_num >= 3)
     	{
-       		//LazerEquipment* pTo_lazer3 = lazerEquipmentGenerator(RACE_0_ID);    
-       		//ship->weapon_slot3.insertItem(pTo_lazer3); 
-       		RocketEquipment* rocket3 = rocketEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot3.insertItem(rocket3); 
+       		LazerEquipment* pTo_lazer3 = lazerEquipmentGenerator(RACE_0_ID);    
+       		ship->weapon_slot3.insertItem(pTo_lazer3); 
+       		//RocketEquipment* rocket3 = rocketEquipmentGenerator(RACE_0_ID);    
+       		//ship->weapon_slot3.insertItem(rocket3); 
     	}   
         
     	if (ship->data_korpus.weapon_slot_num >= 4)
     	{
-       		//LazerEquipment* pTo_lazer4 = lazerEquipmentGenerator(RACE_0_ID);    
-       		//ship->weapon_slot4.insertItem(pTo_lazer4);         
-       		RocketEquipment* rocket4 = rocketEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot4.insertItem(rocket4); 
+       		LazerEquipment* pTo_lazer4 = lazerEquipmentGenerator(RACE_0_ID);    
+       		ship->weapon_slot4.insertItem(pTo_lazer4);         
+       		//RocketEquipment* rocket4 = rocketEquipmentGenerator(RACE_0_ID);    
+       		//ship->weapon_slot4.insertItem(rocket4); 
     	}   
     
     	if (ship->data_korpus.weapon_slot_num >= 5) 
     	{
-       		//LazerEquipment* pTo_lazer5 = lazerEquipmentGenerator(RACE_0_ID);    
-       		//ship->weapon_slot5.insertItem(pTo_lazer5); 
-       		RocketEquipment* rocket5 = rocketEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot5.insertItem(rocket5); 
+       		LazerEquipment* pTo_lazer5 = lazerEquipmentGenerator(RACE_0_ID);    
+       		ship->weapon_slot5.insertItem(pTo_lazer5); 
+       		//RocketEquipment* rocket5 = rocketEquipmentGenerator(RACE_0_ID);    
+       		//ship->weapon_slot5.insertItem(rocket5); 
     	}   
         
     

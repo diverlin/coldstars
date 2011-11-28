@@ -17,9 +17,54 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
+
 #ifndef NPC_H
 #define NPC_H
 
+class MacroTaskHolder
+{
+	public:
+		MacroTaskHolder();
+		~MacroTaskHolder();
+		
+		template <typename TARGET_TYPE>
+		void set(MacroScenarioBase*, TARGET_TYPE*);
+
+		bool getValid() const;		
+		MacroScenarioBase* getScenario() const;
+		TargetObject*      getTarget() const;	
+		
+		void reset();
+				
+	private:
+		MacroScenarioBase*     scenario;
+		TargetObject* target;	
+		
+		bool is_valid;
+};
+
+
+class MicroTaskHolder
+{
+	public:
+		MicroTaskHolder();
+		~MicroTaskHolder();
+	
+		//template <typename TARGET_TYPE>
+		//void set(MicroScenarioBase*, TARGET_TYPE*);
+	
+		bool getValid() const;
+		MicroScenarioBase*  getScenario() const;
+		TargetObject*       getTarget() const;
+		
+		void reset();
+			
+	private:
+		MicroScenarioBase*     scenario;
+		TargetObject* target;	
+		
+		bool is_valid;
+};
 
 class Npc 
 {
@@ -27,6 +72,7 @@ class Npc
               	Npc(int _race_id, 
               	    IdData, LifeData, 
               	    TextureOb*);
+              	    
      		~Npc();
                 
    		void setAlive(bool);
@@ -44,16 +90,32 @@ class Npc
    		int getTypeId()    const;
    		int getSubTypeId() const;
    		int getRaceId()    const;
-   		StarSystem* getStarSystem();
+   		
+   		Observation* getObservation() const;
+   		
+   		StarSystem* getStarSystem() const;
+   		StarSystem* getFailBackStarSystem() const;
+   		
    		Kosmoport* getKosmoport();
    		Ship* getShip();
    		Skill* getSkill();
    		Ship* getScanShip();
    		int getPlaceTypeId() const;
-   		StateMachine* getStateMachine();
    		
-   		QuestObject* getQuestOb();
-   		QuestObject* getTaskOb();
+   		MacroScenarioStateMachine* getMacroTaskStateMachine();
+   		MicroScenarioStateMachine* getMicroTaskStateMachine();
+   		   		
+   		Points* getPoints() const;
+   		bool* getpAlive();
+   		int* getpPlaceTypeId();
+   		float getCollisionRadius();
+   		
+   		MacroTaskHolder* getMacroTaskMain() const;
+   		MacroTaskHolder* getMacroTaskSelf() const;
+   		MicroTaskHolder* getMicroTask() const;   		
+
+     		
+     		
    		bool getControlledByPlayer()   const;
                 unsigned long int getCredits() const;   
 
@@ -63,8 +125,9 @@ class Npc
 		void decreaseCredits(int);
      
      		// AI
-     		//void setRandomTargetCoord();
-     		void thinkCommon_inSpace_inStatic();
+     		void update_inSpace_inStatic();     		
+     		void update_inSpace_inDynamic();
+     		
      		void thinkCommon_inKosmoport_inStatic();
      		void thinkCommon_inLand_inStatic();
 
@@ -78,12 +141,11 @@ class Npc
      		//// scanning
      		
      		Planet* getPlanetForDocking();
-    		StarSystem* getClosestFriendlyStarSystem();
+    		StarSystem* getClosestStarSystem(bool);
     		
                 NeedsToDo needsToDo;
                             
-                //void setDoNothing();
-                
+               
                 void renderInfo(float _pos_x, float _pos_y, float _offset_x = 0.0, float _offset_y = 0.0);
                 
                 Observation* observation;
@@ -99,6 +161,8 @@ class Npc
      		LifeData data_life;
      		
    	     	StarSystem* starsystem;
+   	     	StarSystem* failback_starsystem;
+   	     	
    	     	Kosmoport* kosmoport;
    	     	Land* land;
    	     	
@@ -112,42 +176,23 @@ class Npc
 
    	     	TextureOb* texOb;
 
-   	     	QuestObject* questOb;         // quest - continius
-   	     	QuestObject* taskOb;
-                //QuestObject* subQuestOb;      // task is very short and can be changed very frequently  within quest
-                     
-
-   	     	
-     		void selfcareResolver();
-     		void questResolver();
-                
-                // scenarios (performes in static)
-                //void grabScenario();
+     		AiModelBase* ai_model;
+     		MacroScenarioStateMachine* macroTask_stateMachine;
+     		MicroScenarioStateMachine* microTask_stateMachine;
+     		     		
                 void asteroidScenario();
-                
-     		//void destroyShipQuestScenario();
-     		void liberationStarSystemQuestScenario();
-    		//
-    		
                 void checkNeeds();
-                void generateSelfCare();
-                void generateQuest();
-                
-                // Tracking and they events
-                //bool jumpTracking();
-          	//bool dockTracking();
-                //void grabTracking();
-                
-
-     		//
      		     	
-     		StateMachine* state_machine;
      		 	
      		Ship* ship_to_scan;
      		
      		int place_type_id;
      		
-     		void updateInfo();
+     		void updateInfo();     		
+     		     		
+     		MacroTaskHolder* macro_task_main;
+   		MacroTaskHolder* macro_task_self;
+   		MicroTaskHolder* micro_task;
  };
 
 

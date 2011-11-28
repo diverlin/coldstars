@@ -17,27 +17,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef STATEMACHINE_H
-#define STATEMACHINE_H
+#ifndef MACROCENARIOBASE_H
+#define MACROCENARIOBASE_H
 
-class StateMachine
+class MacroScenarioBase
 {
 	public:
-		StateMachine(Npc*);
-		~StateMachine();
-
-		void update_inDynamic();			
-		void update_inStatic();	
-
-		void setCurrentState(StateBase*);
-		void revertPreviousState();
-				
-	private:
-		bool done;
-		Npc* npc;
+		MacroScenarioBase();
+		virtual ~MacroScenarioBase();
 		
-		StateBase* current_state;
-		StateBase* previous_state;
+		virtual void enter(Npc*) const;
+		virtual void update_inStatic(Npc*) const;	
+		//virtual void update_inDynamic(Npc*) const;	
+		virtual void exit(Npc*) const;
+		
+		virtual std::string getDescription(Npc*) const;
 }; 
 
 

@@ -17,42 +17,32 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-StateMachine :: StateMachine(Npc* _npc) 
-{
-	current_state  = NULL;
-	previous_state = NULL;
-	
-	npc = _npc;
-	
-	done = false;
-}
-		
-StateMachine :: ~StateMachine() 
+MacroScenarioSelfSafety :: MacroScenarioSelfSafety() 
 {}
 
-void StateMachine :: update_inStatic()
-{
-	 current_state->update_inStatic(npc);
-}
+MacroScenarioSelfSafety :: ~MacroScenarioSelfSafety() 
+{}
 
-void StateMachine :: update_inDynamic()
+void MacroScenarioSelfSafety :: update_inStatic(Npc* _npc) const
 {
-	 current_state->update_inDynamic(npc);
-}
-					
-void StateMachine :: setCurrentState(StateBase* _new_state)
-{
-	if (previous_state != NULL)
+	if (_npc->getStarSystem()->getCaptured() == false)
 	{
-		previous_state->exit(npc);
+		if (_npc->getMicroTask()->getTarget()->getObTypeId() != PLANET_ID)
+		{ 
+			_npc->getMicroTaskStateMachine()->setCurrentState(g_MICROSCENARIO_DOCKING, _npc->getPlanetForDocking());
+		}
 	}
-	previous_state = current_state;
-	current_state = _new_state;
-	
-	current_state->enter(npc);
+	else
+	{
+		if (_npc->getMicroTask()->getTarget()->getObTypeId() != STARSYSTEM_ID)
+		{
+			_npc->getMicroTaskStateMachine()->setCurrentState(g_MICROSCENARIO_JUMP, _npc->getFailBackStarSystem());
+		}
+	}        
 }
 
-void StateMachine :: revertPreviousState()
+
+std::string MacroScenarioSelfSafety :: getDescription(Npc* _npc) const
 {
-	current_state = previous_state;
+	return "MacroScenarioSelfSafety";
 }

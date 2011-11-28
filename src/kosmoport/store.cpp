@@ -198,19 +198,19 @@ void equipStore(Store* store)
         //int race_id = RACES_GOOD_LIST[getRandInt(0, RACES_GOOD_LIST.size() - 1)];
         //int revision_id = 0;
 
-        int korpus_num      = 3;
-        int lazer_num       = 3;
-        int rocket_num      = 2;
-        int torped_num      = 2;
-        int radar_num       = 1;
-        int grapple_num     = 1;
-        int drive_num       = 1;
-        int protector_num   = 1;
-        int bak_num         = 1;
-        int droid_num       = 1;
-        int scaner_num      = 1;
-        int freezer_num     = 1;
-        int energyBlock_num = 1;
+        //unsigned int korpus_num      = 3;
+        unsigned int lazer_num       = 3;
+        unsigned int rocket_num      = 2;
+        //unsigned int torped_num      = 2;
+        unsigned int radar_num       = 1;
+        unsigned int grapple_num     = 1;
+        unsigned int drive_num       = 1;
+        unsigned int protector_num   = 1;
+        unsigned int bak_num         = 1;
+        unsigned int droid_num       = 1;
+        unsigned int scaner_num      = 1;
+        unsigned int freezer_num     = 1;
+        unsigned int energyBlock_num = 1;
         
         for (unsigned int lii = 0; lii < lazer_num; lii++)
         { 

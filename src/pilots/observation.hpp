@@ -57,16 +57,30 @@ class NpcObservationData
 };
 
 
+class StarSystemObservationData
+{
+	public:
+		StarSystem* starsystem;
+		float dist;
+		
+		StarSystemObservationData(StarSystem*, float);
+};
+
+
+
 class Observation 
 {
    	public:
       		Observation(Npc*);
      		~Observation();
-                                
+
+     		std::vector<StarSystemObservationData> visible_STARSYSTEM_vec; 
+     		                                
      		std::vector<AsteroidObservationData>  visible_ASTEROID_vec; 		
      		std::vector<MineralObservationData>   visible_MINERAL_vec;                
      		std::vector<ContainerObservationData> visible_CONTAINER_vec;
-                
+
+     		std::vector<NpcObservationData> visible_NPC_vec;                
      		std::vector<NpcObservationData> visible_NPC_RANGER_vec;
      		std::vector<NpcObservationData> visible_NPC_WARRIOR_vec;
      		std::vector<NpcObservationData> visible_NPC_TRADER_vec;
@@ -76,7 +90,11 @@ class Observation
      		VisionStatus see;
 
  		void observeAll_inSpace_inStatic();
-                
+          	
+          	void findEchievableStarSystems_inStatic();
+          	StarSystem* getClosestStarSystem(bool) const;
+          	Npc* getClosestNpc(std::vector<int>*) const;
+          	          	          	                
           	void findVisibleAsteroids_inSpace_inStatic();
           	void findVisibleMinerals_inSpace_inStatic();
           	void findVisibleContainers_inSpace_inStatic();
