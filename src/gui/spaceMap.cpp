@@ -63,7 +63,6 @@ bool SpaceMap :: update()
                           				//player.hyperJumpPreparation(ss)
                           				//#player.calculateTraceToCoord((player.jump_pos_x, player.jump_pos_y))
                           				printf("ss_id = %i\n", galaxy->STARSYSTEM_vec[si]->getId());    // debug
-                          				//manageHiddenStarSystemList(pPLAYER->getActiveStarSystem());
 
                           				return true;
                       				} 
@@ -94,35 +93,39 @@ void SpaceMap :: render(bool _clrscr)
     	        
         enable_BLEND();                              
 
-    	drawTexturedRect(texOb_textBg->texture, rect, -1);
+    		drawTexturedRect(texOb_textBg->texture, rect, -1);
     	
-    	enable_POINTSPRITE();
-    	
-    		for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
-    		{
-        		int font_size = 10;
-        		
-        		TextureOb* texOb_particle = g_TEXTURE_MANAGER.returnParticleTexObByColorId(galaxy->STARSYSTEM_vec[si]->STAR_vec[0]->getColorId()); 
+    		enable_POINTSPRITE();
+    		
+    			for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
+    			{
+   		
+        			TextureOb* texOb_particle = g_TEXTURE_MANAGER.returnParticleTexObByColorId(galaxy->STARSYSTEM_vec[si]->STAR_vec[0]->getColorId()); 
         		    	
-        		drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[si]->getPosition(), 30.0, -2.0);
-        		drawSimpleText(int2str(galaxy->STARSYSTEM_vec[si]->getId()), 
-        	       	       		 font_size, 
+        			drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[si]->getPosition(), 30.0, -2.0);
+        	       
+        			if (galaxy->STARSYSTEM_vec[si]->getCaptured() == true)
+        			{
+        				drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_enemy_ss->texture, galaxy->STARSYSTEM_vec[si]->getPosition(), 40.0, -2.0);
+           			}
+           	
+    			}	 
+           		drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_player_ss->texture, pPLAYER->getStarSystem()->getPosition(), 40.0, -2.0);
+
+    			//if self.GL_LIST_range_ID != None:
+       				//glCallList(self.GL_LIST_range_ID)
+       		
+        	disable_POINTSPRITE();
+        	
+        	int font_size = 10;     
+        	for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
+    		{
+	  		drawSimpleText(int2str(galaxy->STARSYSTEM_vec[si]->getId()), 
+        	       	      		 font_size, 
         	       	       		 galaxy->STARSYSTEM_vec[si]->getPosition().x - 20, 
         	       	       		 galaxy->STARSYSTEM_vec[si]->getPosition().y - 20);
-        	       
-        		if (galaxy->STARSYSTEM_vec[si]->getCaptured() == true)
-        		{
-        			drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_enemy_ss->texture, galaxy->STARSYSTEM_vec[si]->getPosition(), 40.0, -2.0);
-           		}
-           	
     		} 
-           	drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_player_ss->texture, pPLAYER->getStarSystem()->getPosition(), 40.0, -2.0);
-
-    		//if self.GL_LIST_range_ID != None:
-       			//glCallList(self.GL_LIST_range_ID)
-       		
-        disable_POINTSPRITE();
-     
+    		
     	disable_BLEND();  
 }
 

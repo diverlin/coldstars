@@ -17,20 +17,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-StateBase :: StateBase() 
-{}
+#ifndef AIMODELBASE_H
+#define AIMODELBASE_H
 
-StateBase :: ~StateBase() 
-{}
+class AiModelBase
+{
+	public:
+		AiModelBase();
+		virtual ~AiModelBase();
+		
+		virtual void update_inStatic(Npc*) const;
+		virtual std::string getDescription(Npc*) const;
+}; 
 
-void StateBase :: enter(Npc*)
-{}
 
-void StateBase :: update_inStatic(Npc*)
-{}
-
-void StateBase :: update_inDynamic(Npc*)
-{}
-
-void StateBase :: exit(Npc*)
-{}
+#endif 
+     

@@ -23,7 +23,6 @@ Navigator :: Navigator(Ship* _ship_owner)
    
         targetOb = new TargetObject(NULL);
         
-	target_starsystem = NULL;
 	target_distance = 0.0;
 	
 	action_id = NONE_NAVIGATOR_ACTION_ID;
@@ -39,7 +38,6 @@ Navigator :: ~Navigator()
   
 void  Navigator :: resetTarget()
 {
-	target_starsystem = NULL;
 	targetOb->reset();
     		
 	target_distance = 0.0;
@@ -57,75 +55,77 @@ void Navigator :: setStaticTargetCoords(vec2f _target_pos)
        	calcDetaledWay();
 }      
     
+    
+          		
 template <typename TARGET_TYPE>
 void Navigator :: setTarget(TARGET_TYPE* _target, int _action_id)
 {
     	resetTarget();
 
-    	targetOb->setObject(_target);
-    	
-    	action_id = _action_id;
+	targetOb->setObject(_target);    
+	
+	defineDistance(_action_id);
+}
+  
+
+void Navigator :: defineDistance(int _action_id)
+{
+	action_id = _action_id;
     	
     	switch(action_id)
     	{	
     		case DOCKING_NAVIGATOR_ACTION_ID:
     		{
-    			target_distance = _target->getCollisionRadius()/4;
-    			target_offset = getRandVec(_target->getCollisionRadius()/15, _target->getCollisionRadius()/10); 
+    			target_distance = targetOb->getCollisionRadius()/4;
+    			target_offset = getRandVec(targetOb->getCollisionRadius()/15, targetOb->getCollisionRadius()/10); 
     			
     			break;   		
     		}
     		
     		case COLLECTING_NAVIGATOR_ACTION_ID:
     		{
-    		    	target_distance = _target->getCollisionRadius()*1.2;
-    			target_offset = getRandVec(_target->getCollisionRadius()/10, _target->getCollisionRadius()/5); 
+    		    	target_distance = targetOb->getCollisionRadius()*1.2;
+    			target_offset = getRandVec(targetOb->getCollisionRadius()/10, targetOb->getCollisionRadius()/5); 
     			
     			break;    		
     		}
     		
     		case FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID:
     		{
-    		    	target_distance = _target->getCollisionRadius()*1.2;
-    			target_offset = getRandVec(_target->getCollisionRadius()/10, _target->getCollisionRadius()/5); 
+    		    	target_distance = targetOb->getCollisionRadius()*1.2;
+    			target_offset = getRandVec(targetOb->getCollisionRadius()/10, targetOb->getCollisionRadius()/5); 
     			
     			break;    		
     		}
 
     		case FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID:
     		{
-    		    	target_distance = _target->getCollisionRadius()*2.5;
-    			target_offset = getRandVec(_target->getCollisionRadius()/10, _target->getCollisionRadius()/5); 
+    		    	target_distance = targetOb->getCollisionRadius()*2.5;
+    			target_offset = getRandVec(targetOb->getCollisionRadius()/10, targetOb->getCollisionRadius()/5); 
     			
     			break;    		
     		}
     		
     		case FOLLOWING_FAR_NAVIGATOR_ACTION_ID:
     		{
-    		    	target_distance = _target->getCollisionRadius()*4;
-    			target_offset = getRandVec(_target->getCollisionRadius()/10, _target->getCollisionRadius()/5); 
+    		    	target_distance = targetOb->getCollisionRadius()*4;
+    			target_offset = getRandVec(targetOb->getCollisionRadius()/10, targetOb->getCollisionRadius()/5); 
     			
     			break;    		
     		}
 
     	}
 }
+		
   
-      		   
-
-void Navigator :: forceJump(StarSystem* _starsystem) { target_starsystem = _starsystem; }
-
-
-
 Planet* Navigator :: getTargetPlanet() const         { return targetOb->getPlanet(); }
-StarSystem* Navigator :: getTargetStarSystem() const { return targetOb->getObStarSystem(); }
+TargetObject* Navigator :: getTargetOb() const       { return targetOb; } 
 
 int Navigator :: getTargetTypeId()  const 	     { return targetOb->getObTypeId(); }                         
 
 void Navigator :: update_inSpace_inStatic()
 {
 	targetValidation();
-	isJumpNeeded();
 	
 	updateTargetCoord();	
 	calcDetaledWay();
@@ -137,12 +137,7 @@ void Navigator :: update_inSpace_inDynamic()
 }
 
 void Navigator :: targetValidation()
-{
-	if ( target_starsystem == ship_owner->getStarSystem() )
-	{
-		target_starsystem = NULL;
-	}
-	
+{	
 	int _type_id = targetOb->getObTypeId();
 	 
 	if ( (_type_id == PLANET_ID) or (_type_id == STAR_ID) or (_type_id == ASTEROID_ID) )
@@ -199,18 +194,11 @@ bool Navigator :: targetObValidation_dip2() const
 }
 
 
-void Navigator :: isJumpNeeded()
-{
-	if (targetOb->getObStarSystem() != ship_owner->getStarSystem())
-	{
-		target_starsystem = targetOb->getObStarSystem();
-	}
-}
 
 void Navigator :: updateTargetCoord()
 {		
-	if (target_starsystem != NULL)
-	{
+    	if (targetOb->getObTypeId() == STARSYSTEM_ID)
+    	{ 
 	    	target_pos.set(800, 800);  // get correct coords
     		target_distance = 100;  // ??        
 
@@ -242,10 +230,15 @@ void Navigator :: updateTargetCoord()
 
 bool Navigator :: checkEchievement()
 {
-     	if (collisionBetweenCenters(ship_owner->getPoints(), *targetOb->getpCenter(), target_distance) == true)
-        	return true;
-     	else    
-        	return false;
+	if (targetOb->getValid() == true)
+	{
+     		if (collisionBetweenCenters(ship_owner->getPoints(), target_pos, target_distance) == true)
+     		{
+        		return true;
+        	}
+	}
+	
+	return false;
 }
 
 
@@ -265,50 +258,6 @@ bool Navigator :: getDockingPermission()
 
 
 
-
-    
-void Navigator :: calcDetaledWay2()
-{   
-    	path_vec.clear();
-    	angle_inD_vec.clear();
-  
-    	float last_pos_x = ship_owner->getPoints()->getCenter().x;
-    	float last_pos_y = ship_owner->getPoints()->getCenter().y;
-
-    	float step = ship_owner->propetries.speed/100.0;
-
-        //printf("%f,%f,%f,%f\n", last_pos_x, last_pos_y, target_pos.x, target_pos.y);
-
-        if ( ( abs(last_pos_x - target_pos.x) > FLOAT_EPSILON ) || ( abs(last_pos_y - target_pos.y) > FLOAT_EPSILON ) )
-        if (ship_owner->propetries.speed > FLOAT_EPSILON) 
-    	{
-       		float xl = target_pos.x - last_pos_x;
-       		float yl = target_pos.y - last_pos_y;
-
-       		float l = sqrt(xl*xl + yl*yl);
-       		float x_normalized = xl/l;
-       		float y_normalized = yl/l;
-
-       		unsigned int it = l / step;
-
-       		float x_step = x_normalized * step;
-       		float y_step = y_normalized * step;
-
-       		for(unsigned int i = 0; i < it; i++)
-       		{
-            		last_pos_x += x_step;
-            		last_pos_y += y_step;
-            		float angleInD = atan2(target_pos.y - last_pos_y, target_pos.x - last_pos_x) * RADIAN_TO_DEGREE_RATE;
-
-            		path_vec.push_back( vec2f(last_pos_x, last_pos_y) );
-            		angle_inD_vec.push_back(angleInD);
-       		}
-    	}
-    
-    	move_it = 0;
-
-    	direction_list_END = false;
-}
 
 
 void Navigator :: calcDetaledWay() // not sure if speed will be better
@@ -360,4 +309,51 @@ void Navigator :: updatePosition()
      	}
 }
 
+
+
+
+
+    
+//void Navigator :: calcDetaledWay()
+//{   
+    	//path_vec.clear();
+    	//angle_inD_vec.clear();
+  
+    	//float last_pos_x = ship_owner->getPoints()->getCenter().x;
+    	//float last_pos_y = ship_owner->getPoints()->getCenter().y;
+
+    	//float step = ship_owner->propetries.speed/100.0;
+
+        //printf("%f,%f,%f,%f\n", last_pos_x, last_pos_y, target_pos.x, target_pos.y);
+
+        //if ( ( abs(last_pos_x - target_pos.x) > FLOAT_EPSILON ) || ( abs(last_pos_y - target_pos.y) > FLOAT_EPSILON ) )
+        //if (ship_owner->propetries.speed > FLOAT_EPSILON) 
+    	//{
+       		//float xl = target_pos.x - last_pos_x;
+       		//float yl = target_pos.y - last_pos_y;
+
+       		//float l = sqrt(xl*xl + yl*yl);
+       		//float x_normalized = xl/l;
+       		//float y_normalized = yl/l;
+
+       		//unsigned int it = l / step;
+
+       		//float x_step = x_normalized * step;
+       		//float y_step = y_normalized * step;
+
+       		//for(unsigned int i = 0; i < it; i++)
+       		//{
+            		//last_pos_x += x_step;
+            		//last_pos_y += y_step;
+            		//float angleInD = atan2(target_pos.y - last_pos_y, target_pos.x - last_pos_x) * RADIAN_TO_DEGREE_RATE;
+
+            		//path_vec.push_back( vec2f(last_pos_x, last_pos_y) );
+            		//angle_inD_vec.push_back(angleInD);
+       		//}
+    	//}
+    
+    	//move_it = 0;
+
+    	//direction_list_END = false;
+//}
 

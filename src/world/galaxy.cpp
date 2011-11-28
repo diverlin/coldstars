@@ -118,8 +118,7 @@ StarSystem* generateEntireStarSystem()
           
         generateNumPlanets(starsystem, getRandInt(PLANET_PER_SYSTEM_MIN, PLANET_PER_SYSTEM_MAX));
 
-	starsystem->setCapturedFlag(getRandBool());
-        if (starsystem->getCaptured() == false)
+        if (getRandBool())
                 generateNumFriendlyNPC(starsystem, getRandInt(SHIP_PER_SYSTEM_MIN, SHIP_PER_SYSTEM_MAX));
         else
                 generateNumEnemyNPC(starsystem, getRandInt(ENEMY_SHIP_PER_SYSTEM_MIN, ENEMY_SHIP_PER_SYSTEM_MAX));

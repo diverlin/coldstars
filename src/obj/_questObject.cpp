@@ -50,26 +50,24 @@ StarSystem* QuestObject :: getStarSystem()
 
 bool QuestObject :: getExist()   const { return exist; }
 int QuestObject :: getObTypeId() const { return ob_type_id; }
-int QuestObject :: getActionId() const { return action_id; }
+
 int QuestObject :: getObId() const { return ob_id; }
 
 Npc* QuestObject :: getNpc()      { return npc; }
 Planet* QuestObject :: getPlanet() { return planet; }
 	
 template <typename TARGET>
-void QuestObject :: setTask(TARGET _target, int _action_id)
+void QuestObject :: setObject(TARGET _target)
 {
-	setObject(_target);
+	set(_target);
 	ob_type_id = _target->getTypeId();
 	ob_id = _target->getId();
 
-	action_id = _action_id;
-		
 	exist = true;
 }
-void QuestObject :: setObject(Npc* _npc)               { npc = _npc;  }
-void QuestObject :: setObject(Planet* _planet)         { planet = _planet; }
-void QuestObject :: setObject(StarSystem* _starsystem) { starsystem = _starsystem; }
+void QuestObject :: set(Npc* _npc)               { npc = _npc;  }
+void QuestObject :: set(Planet* _planet)         { planet = _planet; }
+void QuestObject :: set(StarSystem* _starsystem) { starsystem = _starsystem; }
 
 
 void QuestObject :: reset()
@@ -79,7 +77,6 @@ void QuestObject :: reset()
 	starsystem = NULL;
 	
 	ob_type_id = NONE_ID;
-	action_id  = NONE_ID;
 	
         exist = false;
 }

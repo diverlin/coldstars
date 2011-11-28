@@ -39,7 +39,7 @@ class TargetObject
                 bool* getpAlive();
                 bool getAlive() const;
                 int getObPlaceTypeId() const;
-                StarSystem* getObStarSystem();
+                float getCollisionRadius() const;
                 
 		Star* getStar();
 		Planet* getPlanet();
@@ -47,7 +47,9 @@ class TargetObject
                 Mineral* getMineral();
                 Container* getContainer();
                 Ship* getShip();
-
+                Npc* getNpc() const;
+                StarSystem* getStarSystem();
+                
 		void reset();
 		void validation();
 		
@@ -55,7 +57,7 @@ class TargetObject
 
 	private:
 		bool is_valid;
-
+		
                 int ob_id;
 		int ob_type_id;
                 
@@ -67,11 +69,13 @@ class TargetObject
                 Mineral*    mineral;
                 Container*  container;
                 Ship*       ship;
-                
+                Npc*	    npc;
+                StarSystem* starsystem;
+                                
                 vec2f* pCenter;
                 bool* pTo_is_alive; 
                 int* pTo_place_type_id;
-                StarSystem* ob_starsystem;
+                float collision_radius;
 
 		void set(Star*);
 		void set(Planet*);
@@ -79,7 +83,9 @@ class TargetObject
 		void set(Mineral*);
 		void set(Container*);
 		void set(Ship*);
-                
+		void set(Npc*);
+		void set(StarSystem*);
+						                
                 bool checkAvaliability();
                 bool checkDistance();
 };

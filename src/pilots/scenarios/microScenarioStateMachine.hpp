@@ -17,39 +17,36 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-StateDocking :: StateDocking()
-{}
+#ifndef MICROSCENARIOSTATEMACHINE_H
+#define MICROSCENARIOSTATEMACHINE_H
+
+class MicroScenarioStateMachine
+{
+	public:
+		MicroScenarioStateMachine(Npc*);
+		~MicroScenarioStateMachine();
+
+		template <typename TARGET_TYPE>
+		void setCurrentState(MicroScenarioBase*, TARGET_TYPE*);
+		MicroScenarioBase* getCurrentState() const;
+				
+		void update_inDynamic();			
+		void update_inStatic();	
 
 
-StateDocking :: ~StateDocking()
-{}
+		//void revertPreviousState();
 		
-void StateDocking :: enter(Npc* _npc)
-{	
-	printf("npc_id = %i, is going to DOCKING to ob id = %i\n", _npc->getId(), _npc->getTaskOb()->getObId());
-}
+		void reset();
+		
+		std::string getCurrentStateDescription() const;
+				
+	private:
+		Npc* npc_owner;
+		
+		MicroScenarioBase* current_state;
+		MicroScenarioBase* previous_state;
+}; 
 
-void StateDocking :: update_inStatic(Npc* _npc)
-{
 
-}
-
-void StateDocking :: update_inDynamic(Npc* _npc)
-{
-     	if (_npc->getShip()->getNavigator()->checkEchievement() == true)
-     	{
-     		if (_npc->getShip()->getNavigator()->getDockingPermission() == true)
-     		{
-     		     	_npc->dockEvent();
-     		}
-     		else
-     		{
-     			// wait or reset
-     		}
-     	}
-}
-
-void StateDocking :: exit(Npc* _npc)
-{
-	printf("npc_id = %i, finish to DOCKING to ob id = %i\n", _npc->getId(), _npc->getTaskOb()->getObId());
-}
+#endif 
+     

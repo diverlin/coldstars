@@ -17,32 +17,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-StateJump :: StateJump()
+MicroScenarioBase :: MicroScenarioBase() 
 {}
 
-
-StateJump :: ~StateJump()
+MicroScenarioBase :: ~MicroScenarioBase() 
 {}
-		
-void StateJump :: enter(Npc* _npc)
-{	
-	printf("npc_id = %i, is going to JUMP to ss id = %i\n", _npc->getId(), _npc->getTaskOb()->getStarSystem()->getId());
-}
 
-void StateJump :: update_inStatic(Npc* _npc)
-{
-	_npc->getShip()->getNavigator()->forceJump(_npc->getTaskOb()->getStarSystem());
-}
+void MicroScenarioBase :: enter(Npc*) const
+{}
 
-void StateJump :: update_inDynamic(Npc* _npc)
-{
-     	if (_npc->getShip()->getNavigator()->checkEchievement() == true)
-     	{
-                _npc->jumpEvent();
-     	}
-}
+void MicroScenarioBase :: update_inStatic(Npc*) const 
+{}
 
-void StateJump :: exit(Npc* _npc)
-{
-	printf("npc_id = %i, finish JUMP to ss id = %i\n", _npc->getId(), _npc->getTaskOb()->getStarSystem()->getId());
-}
+void MicroScenarioBase :: update_inDynamic(Npc*) const
+{}
+
+void MicroScenarioBase :: exit(Npc*) const 
+{}
+
+std::string MicroScenarioBase :: getDescription(Npc* _npc) const
+{}

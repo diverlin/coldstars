@@ -30,12 +30,10 @@ class Navigator
       		void setStaticTargetCoords(vec2f);
       
       		template <typename TARGET_TYPE>
-      		void setTarget(TARGET_TYPE*, int);
-      		 
-      		void forceJump(StarSystem*);
-                      
+      		void setTarget(TARGET_TYPE*, int);      		 
+                     
+                TargetObject* getTargetOb() const;     
                 Planet* getTargetPlanet() const;  
-                StarSystem* getTargetStarSystem() const;
                 
                 int getTargetTypeId() const;
                 
@@ -50,10 +48,8 @@ class Navigator
         	        	
       	private:
       		Ship* ship_owner;
-      		TargetObject* targetOb;
-      		
-		StarSystem* target_starsystem;
-		
+      		TargetObject* targetOb;      		
+	
 		vec2f target_pos;
 			
 		int action_id;
@@ -69,14 +65,14 @@ class Navigator
                 void updatePosition();
                        	
                 void targetValidation();
-		void isJumpNeeded();
 	
 	        void updateTargetCoord();
 		void calcDetaledWay();
-		void calcDetaledWay2();
 				
 		bool targetObValidation_dip1() const;
 		bool targetObValidation_dip2() const;
+		
+		void defineDistance(int);
 };
 
 

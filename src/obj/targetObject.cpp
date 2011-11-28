@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 TargetObject :: TargetObject(ItemSlot* _slot)
 {
         slot = _slot;
-        
+     
         reset();
 }
 
@@ -43,11 +43,16 @@ Asteroid* TargetObject :: getAsteroid()       { return asteroid; }
 Mineral* TargetObject :: getMineral()         { return mineral; }
 Container* TargetObject :: getContainer()     { return container; }
 Ship* TargetObject :: getShip()               { return ship; }
-
+Npc* TargetObject :: getNpc() const           { return npc; }
+StarSystem* TargetObject :: getStarSystem()   { return starsystem; }
+                
 vec2f* TargetObject :: getpCenter() { return pCenter; }
 bool* TargetObject :: getpAlive()   { return pTo_is_alive; } 
 bool TargetObject :: getAlive() const  { return *pTo_is_alive; } 
-StarSystem* TargetObject :: getObStarSystem()   { return ob_starsystem; }
+
+
+float TargetObject :: getCollisionRadius() const { return collision_radius; }
+
 
 template <typename TARGET>
 void TargetObject :: setObject(TARGET _target)
@@ -60,18 +65,21 @@ void TargetObject :: setObject(TARGET _target)
        	pCenter      = _target->getPoints()->getpCenter();
        	pTo_is_alive = _target->getpAlive();
        	pTo_place_type_id = _target->getpPlaceTypeId();
-        ob_starsystem = _target->getStarSystem();
+        starsystem = _target->getStarSystem();
+        
+        collision_radius = _target->getCollisionRadius();
         
 	is_valid = true;
 }
 
-void TargetObject :: set(Star* _star) 		  { star = _star; }
-void TargetObject :: set(Planet* _planet)     	  { planet = _planet; }
-void TargetObject :: set(Asteroid* _asteroid)     { asteroid = _asteroid; }
-void TargetObject :: set(Mineral* _mineral)       { mineral = _mineral; }
-void TargetObject :: set(Container* _container)   { container = _container; }
-void TargetObject :: set(Ship* _ship)             { ship = _ship; }
-
+void TargetObject :: set(Star* _star) 		   { star = _star; }
+void TargetObject :: set(Planet* _planet)     	   { planet = _planet; }
+void TargetObject :: set(Asteroid* _asteroid)      { asteroid = _asteroid; }
+void TargetObject :: set(Mineral* _mineral)        { mineral = _mineral; }
+void TargetObject :: set(Container* _container)    { container = _container; }
+void TargetObject :: set(Ship* _ship)              { ship = _ship; }
+void TargetObject :: set(Npc* _npc)                { npc = _npc; }
+void TargetObject :: set(StarSystem* _starsystem)  { starsystem = _starsystem; }
 
 void TargetObject :: reset()
 {
@@ -81,17 +89,19 @@ void TargetObject :: reset()
         mineral    = NULL;
         container  = NULL;
 	ship       = NULL;
+	npc        = NULL;
         
         pCenter      = NULL;
         pTo_is_alive = NULL;
         pTo_place_type_id = NULL;
-        ob_starsystem   = NULL;
+        starsystem   = NULL;
+        
+        collision_radius = 0;
         
         ob_id      = NONE_ID; 
 	ob_type_id = NONE_ID;
         
         is_valid = false; 
-
 }
 
       
@@ -115,7 +125,7 @@ bool TargetObject :: checkAvaliability()
         {
                 if (*pTo_place_type_id == SPACE_ID)
                 { 
-                        if (ob_starsystem == slot->getOwnerShip()->getStarSystem()) 
+                        if (starsystem == slot->getOwnerShip()->getStarSystem()) 
                         {       
                                 return true;
                         }

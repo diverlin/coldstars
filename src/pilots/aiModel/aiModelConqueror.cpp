@@ -17,26 +17,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-QuestSafety :: QuestSafety() 
+AiModelConqueror :: AiModelConqueror() 
 {}
 
-QuestSafety :: ~QuestSafety() 
+AiModelConqueror :: ~AiModelConqueror() 
 {}
 
-void QuestSafety :: manageLogic(Npc* _npc)
+void AiModelConqueror :: update_inStatic(Npc* _npc) const
 {
-	if (_npc->getStarSystem()->getCaptured() == false)
+	if ( _npc->getMacroTaskMain()->getValid() == false) 
 	{
-		Planet* _target_planet = _npc->getPlanetForDocking();  
-		_npc->getTaskOb()->setTask(_target_planet, NONE_ID);
-		_npc->getStateMachine()->setCurrentState(g_STATE_DOCKING);
+	        _npc->getMacroTaskMain()->set(g_MACROSCENARIO_STARSYSTEMDEFENCE, _npc->getStarSystem());
 	}
-	else
-	{
-		StarSystem* _target_starsystem = _npc->getClosestFriendlyStarSystem();
-		// if able to jump
-		
-		_npc->getTaskOb()->setTask(_target_starsystem, NONE_ID);
-		_npc->getStateMachine()->setCurrentState(g_STATE_JUMP);
-	}        
+}
+
+std::string AiModelConqueror :: getDescription(Npc* _npc) const
+{
+	return "AiModelConqueror";
 }

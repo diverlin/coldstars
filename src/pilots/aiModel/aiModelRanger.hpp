@@ -17,11 +17,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-QuestBase :: QuestBase() 
-{}
+#ifndef AIMODELRANGER_H
+#define AIMODELRANGER_H
 
-QuestBase :: ~QuestBase() 
-{}
+class AiModelRanger : public AiModelBase
+{
+	public:
+		AiModelRanger();
+		virtual ~AiModelRanger();
+		
+		virtual void update_inStatic(Npc*) const;
+		virtual std::string getDescription(Npc*) const;
+}; 
 
-void QuestBase :: manageLogic(Npc* _npc)
-{}
+
+#endif 
+     

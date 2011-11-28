@@ -20,8 +20,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 int main()
 {       
-	g_STATE_DOCKING = new StateDocking();    // make as singlenton
-	g_STATE_JUMP    = new StateJump();       // make as singlenton
+	g_MICROSCENARIO_DOCKING = new MicroScenarioDocking();    	 // make as singlenton
+	g_MICROSCENARIO_JUMP    = new MicroScenarioJump();       	 // make as singlenton
+	g_MICROSCENARIO_DESTROY = new MicroScenarioDestroy();	 	 // make as singlenton
+	//g_STATE_EXPLORE = new StateExplore();	 	 // make as singlenton
+	
+	g_MACROSCENARIO_STARSYSTEMLIBERATION = new MacroScenarioStarSystemLiberation();   // make as singlenton
+	g_MACROSCENARIO_STARSYSTEMDEFENCE    = new MacroScenarioStarSystemDefence();      // make as singlenton
+	g_MACROSCENARIO_SELFSAFETY           = new MacroScenarioSelfSafety();	 	   // make as singlenton
+	
+ 	g_AIMODEL_RANGER    = new AiModelRanger();     // make as singlenton
+	g_AIMODEL_CONQUEROR = new AiModelConqueror();  // make as singlenton
 
  	init();
 
@@ -176,7 +185,7 @@ int main()
        		// Finally, display rendered frame on screen
        		g_APP.Display();
 
-       		g_TIMER--;
+       		g_TIMER-=g_GAMESPEED;
     	}
 
 	printf("EXIT_SUCCESS");

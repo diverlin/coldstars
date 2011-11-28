@@ -817,4 +817,6 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
 	
 	// artifacts
 	// bomb 
+	
+	return false;
 }

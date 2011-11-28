@@ -17,21 +17,34 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef STATEDESTROYSHIP_H
-#define STATEDESTROYSHIP_H
+#ifndef MACROSCENARIOSTATEMACHINE_H
+#define MACROSCENARIOSTATEMACHINE_H
 
-class StateDestroyShip : public StateBase
+class MacroScenarioStateMachine
 {
 	public:
-		StateDestroyShip();
-		virtual ~StateDestroyShip();
-		
-		virtual void Enter(Npc*);
-		virtual void update_inStatic(Npc*);
-		virtual void update_inDynamic(Npc*);	
-		virtual void Exit(Npc*);
+		MacroScenarioStateMachine(Npc*);
+		~MacroScenarioStateMachine();
 
-};
+		template <typename TARGET_TYPE>
+		void setCurrentState(MacroScenarioBase*, TARGET_TYPE*);
+		MacroScenarioBase* getCurrentState() const;
+				
+		//void update_inDynamic();			
+		void update_inStatic();	
+
+	
+		void reset();
+		
+		std::string getCurrentStateDescription() const;
+				
+	private:
+		Npc* npc_owner;
+		
+		MacroScenarioBase* current_state;
+		MacroScenarioBase* previous_state;
+}; 
+
 
 #endif 
      
