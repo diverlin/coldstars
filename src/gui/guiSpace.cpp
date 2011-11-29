@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-InterfaceInSpace :: InterfaceInSpace()
+GuiSpace :: GuiSpace()
 {
     	TextureOb* texOb_icon_map = g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_map;
     	
@@ -33,18 +33,18 @@ InterfaceInSpace :: InterfaceInSpace()
 }
 
 
-InterfaceInSpace :: ~InterfaceInSpace()
+GuiSpace :: ~GuiSpace()
 {}
 
 
-void InterfaceInSpace :: update()
+void GuiSpace :: update()
 {
 	resetInfoFlags();
 	mouseInteraction();
 }
 		
 
-void InterfaceInSpace :: resetInfoFlags()
+void GuiSpace :: resetInfoFlags()
 {
     	for (unsigned int i = 0; i< button_vec.size(); i++)
 	{
@@ -53,7 +53,7 @@ void InterfaceInSpace :: resetInfoFlags()
 }
 
 
-void InterfaceInSpace :: mouseInteraction()
+void GuiSpace :: mouseInteraction()
 {
      	int mxvp = g_MOUSE_POS_X;
      	int myvp = g_VIEW_HEIGHT - g_MOUSE_POS_Y;         
@@ -75,7 +75,7 @@ void InterfaceInSpace :: mouseInteraction()
 }
 
 
-void InterfaceInSpace :: render()
+void GuiSpace :: render()
 {
     	resetRenderTransformation();
 
@@ -83,10 +83,12 @@ void InterfaceInSpace :: render()
 		renderInternal();
 		renderInfo();
 	disable_BLEND();
+	
+	renderText();
 }
 
 
-void InterfaceInSpace :: renderInternal() const
+void GuiSpace :: renderInternal() const
 {
 	for (unsigned int i = 0; i < button_vec.size(); i++)
      	{ 
@@ -94,7 +96,7 @@ void InterfaceInSpace :: renderInternal() const
      	}
 }
 
-void InterfaceInSpace :: renderInfo() const
+void GuiSpace :: renderInfo() const
 {
 
 	for (unsigned int i = 0; i< button_vec.size(); i++)
@@ -107,5 +109,14 @@ void InterfaceInSpace :: renderInfo() const
         }       
 }
         
+void GuiSpace :: renderText() const
+{
+       	std::string _coord_str = "world coord: " + int2str(g_SCROLL_COORD_X) + "," + int2str(g_SCROLL_COORD_Y);
 
+       	sf::String _str(_coord_str, g_FONT, 14);
+       	_str.SetColor(sf::Color(255, 255, 255));
+       	_str.SetPosition(g_VIEW_WIDTH - 200, 15); 
+
+       	g_APP.Draw(_str);    
+}
 

@@ -17,14 +17,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef SHIPINTERNAL_H
-#define SHIPINTERNAL_H
+#ifndef GUISHIP_H
+#define GUISHIP_H
 
-class ShipInternal
+class GuiShip
 {
    	public:
-      		ShipInternal();
-      		~ShipInternal();
+      		GuiShip();
+      		~GuiShip();
 
       		void bindShip(Ship*);
       		void createControlSkillButtons();

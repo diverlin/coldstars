@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 bool g_USE_MODERN_HW = false;
 				const bool g_DEBUG = false;            // debug 
 				const bool g_AUTOTURN_ENABLE = false;  // debug
-const int g_GAMESPEED = 5;
+const int g_GAMESPEED = 3;
 
 const int g_VIEW_WIDTH = 1280;
 const int g_VIEW_HEIGHT = g_VIEW_WIDTH*600/800;
@@ -41,11 +41,11 @@ unsigned int g_MOUSE_POS_Y;
 bool g_MOUSE_LEFT_BUTTON;  
 bool g_MOUSE_RIGHT_BUTTON; 
 
-int g_TIMER;
+//int g_TIMER;
 int TURN_TIME = 150;  //turn time, depends on game fps
 int TURN_COUNT = 0; 
         
-sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.4.17 (SFML/C++)");
+sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.4.18 (SFML/C++)");
 sf::Font g_FONT;
 
 sf::Clock g_CLOCK;
@@ -75,7 +75,16 @@ BloomEffect* g_BLOOM;
 Galaxy* g_GALAXY;
 
 Player* pPLAYER;    
-ShipInternal* g_SHIP_GUI;     
+
+/* GUI */
+GuiShip* g_GUI_SHIP;   
+GuiSpace* g_GUI_SPACE;  
+GuiKosmoport* g_GUI_KOSMOPORT;
+GuiMap* g_GUI_MAP;
+KeyEvents* g_KEYEVENTS;
+
+Fps* g_FPS;
+GameTimer* g_TIMER;
 
 SimpleIdGenerator   g_STARSYSTEM_ID_GENERATOR  = SimpleIdGenerator();
 SimpleIdGenerator   g_CONTAINER_ID_GENERATOR  = SimpleIdGenerator();

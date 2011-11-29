@@ -17,34 +17,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MACROSCENARIOSTATEMACHINE_H
-#define MACROSCENARIOSTATEMACHINE_H
+#ifndef KEYEVENTS_H
+#define KEYEVENTS_H
 
-class MacroScenarioStateMachine
+class KeyEvents
 {
-	public:
-		MacroScenarioStateMachine(Npc*);
-		~MacroScenarioStateMachine();
+    	public:
+	       	KeyEvents();
+        	~KeyEvents();
 
-		template <typename TARGET_TYPE>
-		void setCurrentState(MacroScenarioBase*, TARGET_TYPE*);
-		MacroScenarioBase* getCurrentState() const;
-				
-		//void update_inDynamic();			
-		void update_inStatic();	
+		void update_inSpace();
+		void update_inKosmoport();
 
-	
-		void reset();
-		
-		std::string getCurrentStateDescription() const;
-				
 	private:
-		Npc* npc_owner;
-		
-		MacroScenarioBase* current_state;
-		MacroScenarioBase* previous_state;
-}; 
-
+	        bool keyboardLeftPressed;
+        	bool keyboardRightPressed;    
+        	bool keyboardUpPressed;    
+        	bool keyboardDownPressed;  
+        
+        	int scroll_accel_x; 
+        	int scroll_accel_y; 
+        	
+        	void getSimpleInputs();
+        	void getRealTimeInputs();
+        	void scrollCamera();
+	
+};
 
 #endif 
-     

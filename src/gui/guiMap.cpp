@@ -16,22 +16,22 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "spaceMap.hpp"
 
-SpaceMap :: SpaceMap()
+
+GuiMap :: GuiMap()
 { 
 	galaxy = NULL;
     	rect = Rect(MAP_OFFSET_X, MAP_OFFSET_Y, (g_VIEW_WIDTH - 2 * MAP_OFFSET_X), (g_VIEW_HEIGHT - 2 * MAP_OFFSET_X));
 }
 
 
-void SpaceMap :: bindGalaxy(Galaxy* _galaxy)
+void GuiMap :: bindGalaxy(Galaxy* _galaxy)
 {
 	galaxy = _galaxy;
 }
 
 
-bool SpaceMap :: update()
+bool GuiMap :: update()
 {
      	if (pPLAYER->getShip()->ableTo.HJUMP == true)
      	{
@@ -78,7 +78,7 @@ bool SpaceMap :: update()
 
 
 
-void SpaceMap :: render(bool _clrscr)
+void GuiMap :: render(bool _clrscr)
 {
     	TextureOb* texOb_textBg = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.textBackground_texOb_pList);
     	

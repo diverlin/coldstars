@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-KeyEventsInSpace :: KeyEventsInSpace()
+KeyEvents :: KeyEvents()
 {
     	// KEYBOARD INPUT
     	keyboardLeftPressed  = false;
@@ -36,24 +36,24 @@ KeyEventsInSpace :: KeyEventsInSpace()
 
 
 
-KeyEventsInSpace :: ~KeyEventsInSpace()
+KeyEvents :: ~KeyEvents()
 {}
 
 
-void KeyEventsInSpace :: update()
+void KeyEvents :: update_inSpace()
 {
 	getSimpleInputs();
         getRealTimeInputs();
         scrollCamera();
 }
 
-void KeyEventsInSpace :: update2()
+void KeyEvents :: update_inKosmoport()
 {
 	getSimpleInputs();
         getRealTimeInputs();
 }
 
-void KeyEventsInSpace :: getSimpleInputs()
+void KeyEvents :: getSimpleInputs()
 {
    	g_MOUSE_LEFT_BUTTON = false;
   	g_MOUSE_RIGHT_BUTTON = false;
@@ -83,8 +83,11 @@ void KeyEventsInSpace :: getSimpleInputs()
 
           			case sf::Key::Space:
                		 	{
-              				if (g_TIMER < 0)
-               	 	 		g_TIMER = TURN_TIME;
+              				if (g_TIMER->getTurnEnded() == true)
+              				{
+              				       	g_TIMER->nextTurn();
+              				}
+       
                 		        break;
                 		} 
 
@@ -252,7 +255,7 @@ void KeyEventsInSpace :: getSimpleInputs()
 	 } // endwhile
 }
 
-void KeyEventsInSpace :: getRealTimeInputs()
+void KeyEvents :: getRealTimeInputs()
 {       
         const sf::Input& Input = g_APP.GetInput();
 
@@ -270,7 +273,7 @@ void KeyEventsInSpace :: getRealTimeInputs()
 }
 
 
-void KeyEventsInSpace :: scrollCamera()
+void KeyEvents :: scrollCamera()
 {
         // SCROLLING X AXIS         
         if(keyboardLeftPressed)

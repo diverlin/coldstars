@@ -36,6 +36,8 @@ class Turrel;
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp> 
 
+#include "src/gui/fps.hpp"
+
 #include "src/common/myVector.hpp"
 #include "src/common/myStr.hpp"
 #include "src/resources/objLoader.hpp"
@@ -55,7 +57,7 @@ class Turrel;
 
 #include "src/common/rect.hpp"
 
-#include "src/keyevents/keyEventsInSpace.hpp"
+#include "src/gui/keyEvents.hpp"
 
 #include "src/modules/commonformodules.hpp"
 #include "src/modules/rocketModule.hpp"
@@ -139,8 +141,7 @@ class Star;
 
 #include "src/skill/skill.hpp"
 #include "src/obj/questGenerator.hpp" 
-class MicroScenarioStateMachine;
-class MacroScenarioStateMachine;
+class StateMachine;
 
 class MicroScenarioBase;
 class MacroScenarioBase;
@@ -158,8 +159,7 @@ class AiModelBase;
 #include "src/pilots/scenarios/microScenarioJump.hpp" 
 #include "src/pilots/scenarios/microScenarioDocking.hpp"
 
-#include "src/pilots/scenarios/microScenarioStateMachine.hpp"
-#include "src/pilots/scenarios/macroScenarioStateMachine.hpp"
+#include "src/pilots/scenarios/stateMachine.hpp"
 
 #include "src/pilots/scenarios/macroScenarioSelfSafety.hpp"
 #include "src/pilots/scenarios/macroScenarioStarSystemLiberation.hpp"
@@ -173,14 +173,19 @@ class AiModelBase;
 #include "src/pilots/observation.hpp" 
 
 #include "src/gui/button.hpp"
-#include "src/gui/interfaceinspace.hpp"
-#include "src/gui/shipInternal.hpp"
+#include "src/gui/guiSpace.hpp"
+#include "src/gui/guiKosmoport.hpp"
+#include "src/gui/guiShip.hpp"
 #include "src/world/garbage.hpp"  
 #include "src/world/starsystem.hpp"    
 #include "src/effects/lazerTrace.hpp"
 
 #include "src/vehicle/turrel.hpp"
 #include "src/world/galaxy.hpp"
+#include "src/gui/guiMap.hpp"
+
+
+#include "src/common/gameTimer.hpp"
 
 
 
@@ -251,12 +256,13 @@ class AiModelBase;
 #include "src/land/land.cpp"
 
 #include "src/gui/button.cpp"
-#include "src/gui/interfaceinspace.cpp"
-#include "src/gui/interfaceinkosmoport.cpp"
-#include "src/gui/shipInternal.cpp"
+#include "src/gui/guiSpace.cpp"
+#include "src/gui/guiKosmoport.cpp"
+#include "src/gui/guiShip.cpp"
+#include "src/gui/guiMap.cpp"
 #include "src/gui/cursor.cpp"   
 
-#include "src/keyevents/keyEventsInSpace.cpp"
+#include "src/gui/keyEvents.cpp"
 
 #include "src/resources/textureOb.cpp"
 #include "src/resources/textureManager.cpp"
@@ -297,8 +303,7 @@ class AiModelBase;
 #include "src/pilots/scenarios/microScenarioJump.cpp" 
 #include "src/pilots/scenarios/microScenarioDocking.cpp"
 
-#include "src/pilots/scenarios/microScenarioStateMachine.cpp"
-#include "src/pilots/scenarios/macroScenarioStateMachine.cpp"
+#include "src/pilots/scenarios/stateMachine.cpp"
 
 #include "src/pilots/scenarios/macroScenarioSelfSafety.cpp"
 #include "src/pilots/scenarios/macroScenarioStarSystemLiberation.cpp"
@@ -320,5 +325,8 @@ class AiModelBase;
 #include "src/effects/shockWave.cpp"
 
 #include "src/text/textstuff.cpp"
-#include "src/gui/spaceMap.cpp"
+
+#include "src/gui/fps.cpp"
+#include "src/common/gameTimer.cpp"
+
 ////////////////////////////////////////////

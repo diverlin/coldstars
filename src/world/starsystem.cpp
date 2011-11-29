@@ -1409,7 +1409,7 @@ void StarSystem :: mouseControl()
                    				{
                         				pPLAYER->getPilot()->setScanTarget(visible_SHIP_vec[ki]);
                         				pPLAYER->setScanFlag(true);
-                        				g_SHIP_GUI->configure(pPLAYER->getPilot()->getScanShip(), false, false);   
+                        				g_GUI_SHIP->configure(pPLAYER->getPilot()->getScanShip(), false, false);   
                    				}
                 			}
 				}

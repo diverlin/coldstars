@@ -32,6 +32,51 @@ void init()
 	{
 		initPostProcess();
 	}
+	
+	/* create Macro Scenaries */
+	g_MACROSCENARIO_STARSYSTEMLIBERATION = new MacroScenarioStarSystemLiberation();    // make as singlenton
+	g_MACROSCENARIO_STARSYSTEMDEFENCE    = new MacroScenarioStarSystemDefence();       // make as singlenton
+	g_MACROSCENARIO_SELFSAFETY           = new MacroScenarioSelfSafety();	 	   // make as singlenton
+	
+	/* create Micro Scenaries */
+	g_MICROSCENARIO_DOCKING = new MicroScenarioDocking();    	 // make as singlenton
+	g_MICROSCENARIO_JUMP    = new MicroScenarioJump();       	 // make as singlenton
+	g_MICROSCENARIO_DESTROY = new MicroScenarioDestroy();	 	 // make as singlenton
+	//g_STATE_EXPLORE = new StateExplore();	 	 // make as singlenton
+	
+	/* create AI models */
+ 	g_AIMODEL_RANGER    = new AiModelRanger();     // make as singlenton
+	g_AIMODEL_CONQUEROR = new AiModelConqueror();  // make as singlenton
+	
+	
+	/* create galaxy */
+    	g_GALAXY = new Galaxy();
+    	
+   
+        
+        /* create player */
+        pPLAYER   = new Player();    
+	pPLAYER->setStarSystem(g_GALAXY->getRandomStarSystem());      
+      		
+    	Npc* pnpc = pPLAYER->getStarSystem()->NPC_inSPACE_vec[0];
+    	pPLAYER->bindNpc(pnpc);
+    	pnpc->getShip()->getPoints()->setCenter(-400,-400);
+
+
+    	/* create GUI */
+    	g_GUI_SHIP = new GuiShip();
+        g_GUI_SHIP->createControlSkillButtons();
+        
+        g_GUI_SPACE = new GuiSpace();
+        g_GUI_KOSMOPORT = new GuiKosmoport();   
+            	
+    	g_GUI_MAP = new GuiMap();
+    	g_GUI_MAP->bindGalaxy(g_GALAXY);
+    	
+    	g_KEYEVENTS = new KeyEvents(); 
+    	
+    	g_FPS = new Fps();
+    	g_TIMER = new GameTimer();
 }
 
 

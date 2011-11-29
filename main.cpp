@@ -20,70 +20,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 int main()
 {       
-	g_MICROSCENARIO_DOCKING = new MicroScenarioDocking();    	 // make as singlenton
-	g_MICROSCENARIO_JUMP    = new MicroScenarioJump();       	 // make as singlenton
-	g_MICROSCENARIO_DESTROY = new MicroScenarioDestroy();	 	 // make as singlenton
-	//g_STATE_EXPLORE = new StateExplore();	 	 // make as singlenton
-	
-	g_MACROSCENARIO_STARSYSTEMLIBERATION = new MacroScenarioStarSystemLiberation();   // make as singlenton
-	g_MACROSCENARIO_STARSYSTEMDEFENCE    = new MacroScenarioStarSystemDefence();      // make as singlenton
-	g_MACROSCENARIO_SELFSAFETY           = new MacroScenarioSelfSafety();	 	   // make as singlenton
-	
- 	g_AIMODEL_RANGER    = new AiModelRanger();     // make as singlenton
-	g_AIMODEL_CONQUEROR = new AiModelConqueror();  // make as singlenton
-
  	init();
 
-    	KeyEventsInSpace keyEvents = KeyEventsInSpace(); 
-
-    	g_GALAXY = new Galaxy();
-    	SpaceMap spaceMap;
-    	spaceMap.bindGalaxy(g_GALAXY);
-        
-    	InterfaceInSpace interfaceInSpace 	  = InterfaceInSpace();
-    	InterfaceInKosmoport interfaceInKosmoport = InterfaceInKosmoport();
-
-    	g_SHIP_GUI = new ShipInternal();
-        g_SHIP_GUI->createControlSkillButtons();
-        
-    	pPLAYER   = new Player();    
-	pPLAYER->setStarSystem(g_GALAXY->getRandomStarSystem());      
-      		
-    	Npc* pnpc = pPLAYER->getStarSystem()->NPC_inSPACE_vec[0];
-    	pPLAYER->bindNpc(pnpc);
-    	pnpc->getShip()->getPoints()->setCenter(-400,-400);
-    	//// player
-
-    	std::string coord_str;
-    	std::string fps_str = "";
-
-    	g_TIMER = -1; 
     	// GAME LOOP
     	while (g_APP.IsOpened())
     	{    
-       		/////////// AUTO-TURN /////////////
-       		if ( (g_TIMER < -50) and (g_AUTOTURN_ENABLE == true) )
-       		{  
-       			g_TIMER = TURN_TIME;
-           		TURN_COUNT++;
-           		printf("        *** auto turn END was activated, turn num = %i\n", TURN_COUNT);
-                }
-
 		pPLAYER->update_inSpace();
 
        		if (pPLAYER->getPlaceTypeId() == SPACE_ID)
        		{  
            		//////////// in SPACE ///////////////
-           		keyEvents.update();
+           		g_KEYEVENTS->update_inSpace();
 
 			for (int i = 0; i < g_GAMESPEED; i++)  // fakse
 			{
-       				g_GALAXY->update(g_TIMER);
+       				g_GALAXY->update(g_TIMER->getTurnTick());
        			}
 
            		pPLAYER->getStarSystem()->render(); 
                         
-                        if (g_TIMER < 0)  
+                        if (g_TIMER->getTurnEnded() == true)  
                         {
                                 if ( (pPLAYER->getScanFlag() == false) && (pPLAYER->getWorldMapShowFlag() == false) )
                                 {
@@ -94,35 +50,35 @@ int main()
            		//////////// SCAN ///////////////
            		if ( pPLAYER->getScanFlag() == true )
                         {                                
-              			g_SHIP_GUI->update();
-                                g_SHIP_GUI->render();
+              			g_GUI_SHIP->update();
+                                g_GUI_SHIP->render();
                         }
 
            		/////////// WORLDMAP ///////////
            		if ( pPLAYER->getWorldMapShowFlag() == true )  
            		{
-               			spaceMap.update();   
-               			spaceMap.render(false);   
+               			g_GUI_MAP->update();   
+               			g_GUI_MAP->render(false);   
           		}
 
-           		interfaceInSpace.update();    
-           		interfaceInSpace.render();
+           		g_GUI_SPACE->update();    
+           		g_GUI_SPACE->render();
        		}
 
 
        		if (pPLAYER->getPlaceTypeId() == KOSMOPORT_ID)
        		{
-           		keyEvents.update2();
+           		g_KEYEVENTS->update_inKosmoport();
           
-           		if (interfaceInKosmoport.getActiveScreenId() == SCREEN_ANGAR_ID)
+           		if (g_GUI_KOSMOPORT->getActiveScreenId() == SCREEN_ANGAR_ID)
            		{
                			pPLAYER->getPilot()->getKosmoport()->getAngar()->update();                                
                			pPLAYER->getPilot()->getKosmoport()->getAngar()->render();
 
                                 if (pPLAYER->getScanFlag() == true) 
                                 { 
-                                        g_SHIP_GUI->update();
-                                        g_SHIP_GUI->render();
+                                        g_GUI_SHIP->update();
+                                        g_GUI_SHIP->render();
                                 }
                			else
                                 {
@@ -130,62 +86,47 @@ int main()
                                 }
            		}
 
-           		if (interfaceInKosmoport.getActiveScreenId() == SCREEN_STORE_ID)
+           		if (g_GUI_KOSMOPORT->getActiveScreenId() == SCREEN_STORE_ID)
            		{
                                 pPLAYER->getPilot()->getKosmoport()->getStore()->update();
                			pPLAYER->getPilot()->getKosmoport()->getStore()->render();                                 
                                                  
-                                g_SHIP_GUI->configure(pPLAYER->getShip(), true);
-               			g_SHIP_GUI->update();
-                                g_SHIP_GUI->render();
+                                g_GUI_SHIP->configure(pPLAYER->getShip(), true);
+               			g_GUI_SHIP->update();
+                                g_GUI_SHIP->render();
                         }
 
-           		if (interfaceInKosmoport.getActiveScreenId() == SCREEN_SHOP_ID)
+           		if (g_GUI_KOSMOPORT->getActiveScreenId() == SCREEN_SHOP_ID)
            		{
                                 pPLAYER->getPilot()->getKosmoport()->getShop()->update();
                                 pPLAYER->getPilot()->getKosmoport()->getShop()->render();
            		}
 
-           		if (interfaceInKosmoport.getActiveScreenId() == SCREEN_GALAXYMAP_ID)
+           		if (g_GUI_KOSMOPORT->getActiveScreenId() == SCREEN_GALAXYMAP_ID)
            		{
-               			spaceMap.update();
-                                spaceMap.render(true);   
+               			g_GUI_MAP->update();
+                                g_GUI_MAP->render(true);   
            		}
 
-           		if (interfaceInKosmoport.getActiveScreenId() == SCREEN_GOVERMENT_ID)
+           		if (g_GUI_KOSMOPORT->getActiveScreenId() == SCREEN_GOVERMENT_ID)
            		{
                                 pPLAYER->getPilot()->getKosmoport()->getGoverment()->update();
                                 pPLAYER->getPilot()->getKosmoport()->getGoverment()->render();
            		}
 
-           		interfaceInKosmoport.update(); 
-           		interfaceInKosmoport.render(); 
+           		g_GUI_KOSMOPORT->update(); 
+           		g_GUI_KOSMOPORT->render(); 
        		} 
 
-       
-       		float fps = 1.f / g_APP.GetFrameTime();
+            	
+            	g_FPS->update();
+            	g_FPS->draw();            	
 
-       		coord_str = "world coord: " + int2str(g_SCROLL_COORD_X) + "," + int2str(g_SCROLL_COORD_Y);
-       		if (getRandInt(0, 20) == 1)
-       		{
-          		fps_str = "FPS:" + int2str((int)fps);
-          	}
 
-       		sf::String coord_Str(coord_str, g_FONT, 14);
-       		coord_Str.SetColor(sf::Color(255, 255, 255));
-       		coord_Str.SetPosition(g_VIEW_WIDTH - 200, 15); 
-
-       		sf::String fps_Str(fps_str, g_FONT, 14);
-       		fps_Str.SetColor(sf::Color(255, 255, 255));
-       		fps_Str.SetPosition(100, 15); 
-
-       		g_APP.Draw(coord_Str);
-       		g_APP.Draw(fps_Str);
-
+		g_TIMER->update();
+		
        		// Finally, display rendered frame on screen
        		g_APP.Display();
-
-       		g_TIMER-=g_GAMESPEED;
     	}
 
 	printf("EXIT_SUCCESS");
