@@ -17,21 +17,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-AiModelConqueror :: AiModelConqueror() 
-{}
+#ifndef GUIMAP_H
+#define GUIMAP_H
 
-AiModelConqueror :: ~AiModelConqueror() 
-{}
 
-void AiModelConqueror :: update_inStatic(Npc* _npc) const
+class GuiMap 
 {
-	if ( _npc->getStateMachine()->getCurrentMacroTask()->getValid() == false) 
-	{
-	        _npc->getStateMachine()->setCurrentMacroTask(g_MACROSCENARIO_STARSYSTEMDEFENCE, _npc->getStarSystem());
-	}
-}
+  	public:
+     		GuiMap();
+     		~GuiMap();
+     		     
+     		void bindGalaxy(Galaxy*);
+     
+     		bool update();
+     		void render(bool);
 
-std::string AiModelConqueror :: getDescription(Npc* _npc) const
-{
-	return "AiModelConqueror";
-}
+     	private:
+     		Galaxy* galaxy;
+     		Rect rect;
+};
+     		
+#endif 

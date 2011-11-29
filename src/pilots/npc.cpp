@@ -17,66 +17,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-MacroTaskHolder :: MacroTaskHolder()
-{
-	is_valid = false;
-	
-	scenario = NULL;
-	target   = new TargetObject(NULL);
-}
-
-MacroTaskHolder :: ~MacroTaskHolder()
-{
-	delete target;
-}
-
-template <typename TARGET_TYPE>
-void MacroTaskHolder :: set(MacroScenarioBase* _scenario, TARGET_TYPE* _target)
-{
-	is_valid = true;
-	
-	scenario = _scenario;
-	target->setObject(_target);
-}
-
-bool MacroTaskHolder :: getValid() const { return is_valid; }
-MacroScenarioBase* MacroTaskHolder :: getScenario()   const { return scenario; }
-TargetObject*  MacroTaskHolder :: getTarget() const { return target; }	
-	
-void MacroTaskHolder :: reset()
-{
-	is_valid = false;
-	
-	target->reset();
-	//scenario->reset();
-}
-
-
-
-
-MicroTaskHolder :: MicroTaskHolder()
-{
-	is_valid = false;
-	
-	scenario = NULL;
-	target   = new TargetObject(NULL);
-}
-
-MicroTaskHolder :: ~MicroTaskHolder()
-{
-	delete target;
-}
-
-MicroScenarioBase* MicroTaskHolder :: getScenario()   const { return scenario; }
-TargetObject*  MicroTaskHolder :: getTarget() const { return target; }	
-	
-//template <typename TARGET_TYPE>
-//void MicroTaskHolder :: set(MicroScenarioBase* _scenario, TARGET_TYPE* _target)
-//{
-	//scenario = _scenario;
-	//target->setObject(_target);
-//}
-
 
 
 
@@ -105,14 +45,14 @@ int Npc :: getPlaceTypeId() const  { return place_type_id; }
 Observation* Npc :: getObservation() const { return observation; }
 
 
-MacroTaskHolder* Npc :: getMacroTaskMain() const { return macro_task_main; }
-MacroTaskHolder* Npc :: getMacroTaskSelf() const { return macro_task_self; }
-MicroTaskHolder* Npc :: getMicroTask() const { return micro_task; }
+//MacroTaskHolder* Npc :: getMacroTaskMain() const { return macro_task_main; }
+//MacroTaskHolder* Npc :: getMacroTaskSelf() const { return macro_task_self; }
+//MicroTaskHolder* Npc :: getMicroTask() const { return micro_task; }
    		
 bool Npc :: getControlledByPlayer() const { return controlled_by_player; }
 unsigned long int Npc :: getCredits() const { return credits; }   
-MacroScenarioStateMachine* Npc :: getMacroTaskStateMachine() {return macroTask_stateMachine; }
-MicroScenarioStateMachine* Npc :: getMicroTaskStateMachine() {return microTask_stateMachine; }
+StateMachine* Npc :: getStateMachine() {return state_machine; }
+
 
 
 Points* Npc :: getPoints() const    { return ship->getPoints(); }
@@ -158,32 +98,32 @@ Npc :: Npc(int _race_id, IdData _data_id, LifeData _data_life, TextureOb* _texOb
     	    		
 	skill = new Skill();
         
-        macro_task_main = new MacroTaskHolder();
-   	macro_task_self = new MacroTaskHolder();
-  	micro_task = new MicroTaskHolder();
+        //macro_task_main = new MacroTaskHolder();
+   	//macro_task_self = new MacroTaskHolder();
+  	//micro_task = new MicroTaskHolder();
    		
         observation = new Observation(this);
 
-        macroTask_stateMachine = new MacroScenarioStateMachine(this);        
-        microTask_stateMachine = new MicroScenarioStateMachine(this);
+        state_machine = new StateMachine(this);        
         
-        // depending on type
-        ai_model = g_AIMODEL_RANGER;
+        // depending on type        
+        if (( race_id == RACE_6_ID) or ( race_id == RACE_7_ID) )
+        {
+                ai_model = g_AIMODEL_CONQUEROR;
+        }
+        else
+        {
+       		ai_model = g_AIMODEL_RANGER;        
+        }
 }
     
 Npc :: ~Npc()
 {
         delete skill;
       
-      	delete macro_task_main;
-      	delete macro_task_self;
-      	delete micro_task;
-
-        
         delete observation;
 
-        delete macroTask_stateMachine;        
-        delete microTask_stateMachine;
+        delete state_machine;        
 }  
     
 
@@ -229,8 +169,7 @@ void Npc :: update_inSpace_inStatic()
 	}
              
 
-       	macroTask_stateMachine->update_inStatic();                 
-       	microTask_stateMachine->update_inStatic();
+       	state_machine->update_inStatic();                 
         
         ship->getNavigator()->update_inSpace_inStatic();
 }
@@ -239,7 +178,7 @@ void Npc :: update_inSpace_inStatic()
 void Npc :: update_inSpace_inDynamic()
 {
         //	macroTask_stateMachine->update_inDynamic(); // is it needed ?
-       	microTask_stateMachine->update_inDynamic();
+       	state_machine->update_inDynamic();
 }     	
 
 
@@ -386,19 +325,19 @@ void Npc :: updateInfo()
     	info.addNameStr("id/ss_id:");           info.addValueStr( int2str(data_id.id) + " / "  + int2str(starsystem->getId()) );
     	info.addNameStr("race:");   		info.addValueStr( returnRaceStringByRaceId(texOb->race_id) ); 
 
-    	if (macro_task_self->getValid())
-    	{   
-    	info.addNameStr("quest_self:");   	info.addValueStr( macro_task_self->getScenario()->getDescription(this) ); 
-    	}
+    	//if (macro_task_self->getValid())
+    	//{   
+    	//info.addNameStr("quest_self:");   	info.addValueStr( macro_task_self->getScenario()->getDescription(this) ); 
+    	//}
     	    	
-    	if (macro_task_main->getValid())
+    	if (state_machine->getCurrentMacroTask()->getScenario() != NULL)
     	{ 	
-    	info.addNameStr("macro_task_main:");   	info.addValueStr( macro_task_main->getScenario()->getDescription(this) ); 
+    	info.addNameStr("macro_task_main:");   	info.addValueStr( state_machine->getCurrentMacroTask()->getScenario()->getDescription(this) ); 
     	}
     	
-    	if (microTask_stateMachine->getCurrentState() != NULL)
-    	{
-    	info.addNameStr("micro_task:");   	info.addValueStr( microTask_stateMachine->getCurrentStateDescription() ); 
+    	if (state_machine->getCurrentMicroTask()->getScenario() != NULL)
+    	{ 	
+    	info.addNameStr("micro_task:");   	info.addValueStr( state_machine->getCurrentMicroTask()->getScenario()->getDescription(this)  ); 
     	}
 }
 

@@ -17,31 +17,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef KEYEVENTSINSPACE_H
-#define KEYEVENTSINSPACE_H
+Fps :: Fps(): str("")
+{}
 
-class KeyEventsInSpace
-{
-    	public:
-	       	KeyEventsInSpace();
-        	~KeyEventsInSpace();
-
-		void update();
-		void update2();
-
-	private:
-	        bool keyboardLeftPressed;
-        	bool keyboardRightPressed;    
-        	bool keyboardUpPressed;    
-        	bool keyboardDownPressed;  
-        
-        	int scroll_accel_x; 
-        	int scroll_accel_y; 
+Fps :: ~Fps()
+{}
         	
-        	void getSimpleInputs();
-        	void getRealTimeInputs();
-        	void scrollCamera();
+void Fps :: update()
+{
+	float fps = 1.f / g_APP.GetFrameTime();
 	
-};
+	if (getRandInt(0, 20) == 1)
+       	{
+        	str = "FPS:" + int2str((int)fps);
+        }
+}
 
-#endif 
+void Fps :: draw() const
+{
+       	sf::String _str(str, g_FONT, 14);
+       	_str.SetColor(sf::Color(255, 255, 255));
+       	_str.SetPosition(100, 15); 
+       	
+       	g_APP.Draw(_str);
+}

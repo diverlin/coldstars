@@ -17,15 +17,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef INTERFACEINSPACE_H
-#define INTERFACEINSPACE_H
+#ifndef GUISPACE_H
+#define GUISPACE_H
 
 
-class InterfaceInSpace
+class GuiSpace
 {
     	public:
-      		InterfaceInSpace();
-       		~InterfaceInSpace();
+      		GuiSpace();
+       		~GuiSpace();
 
 		void update();
 		void render();
@@ -40,6 +40,7 @@ class InterfaceInSpace
        		
        		void renderInternal() const;
        		void renderInfo() const;
+       		void renderText() const;
 };
 
 

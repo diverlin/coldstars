@@ -17,36 +17,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MICROSCENARIOSTATEMACHINE_H
-#define MICROSCENARIOSTATEMACHINE_H
 
-class MicroScenarioStateMachine
+#ifndef FPS_H
+#define FPS_H
+
+
+class Fps
 {
-	public:
-		MicroScenarioStateMachine(Npc*);
-		~MicroScenarioStateMachine();
+  	public:
+        	Fps();
+        	~Fps();
+        	
+        	void update();
+        	void draw() const;
 
-		template <typename TARGET_TYPE>
-		void setCurrentState(MicroScenarioBase*, TARGET_TYPE*);
-		MicroScenarioBase* getCurrentState() const;
-				
-		void update_inDynamic();			
-		void update_inStatic();	
-
-
-		//void revertPreviousState();
-		
-		void reset();
-		
-		std::string getCurrentStateDescription() const;
-				
 	private:
-		Npc* npc_owner;
-		
-		MicroScenarioBase* current_state;
-		MicroScenarioBase* previous_state;
+    		std::string str;        
 }; 
 
-
 #endif 
-     

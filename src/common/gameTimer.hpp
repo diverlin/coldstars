@@ -16,24 +16,31 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#ifndef GAMETIMER_H
+#define GAMETIMER_H
 
-#ifndef SPACEMAP_H
-#define SPACEMAP_H
-
-
-class SpaceMap 
+class GameTimer
 {
-  	public:
-     		SpaceMap();
-     
-     		void bindGalaxy(Galaxy*);
-     
-     		bool update();
-     		void render(bool);
-
-     	private:
-     		Galaxy* galaxy;
-     		Rect rect;
+	public:
+		GameTimer();
+		~GameTimer();
+		
+		bool getTurnEnded() const;
+		int getTurnTick() const;
+		void nextTurn();
+		
+		void update();
+		void draw() const;
+		
+	
+	private:
+		unsigned int year;
+		unsigned int month;
+		unsigned int day;	
+		
+		int turn_tick;
+		
+		bool turn_ended;	
 };
-     		
-#endif 
+
+#endif

@@ -18,15 +18,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-#ifndef INTERFACEINKOSMOPORT_H
-#define INTERFACEINKOSMOPORT_H
+#ifndef GUIKOSMOPORT_H
+#define GUIKOSMOPORT_H
 
 
-class InterfaceInKosmoport
+class GuiKosmoport
 {
     	public:
-       		InterfaceInKosmoport();
-       		~InterfaceInKosmoport();
+       		GuiKosmoport();
+       		~GuiKosmoport();
 
 		int getActiveScreenId() const;
 		

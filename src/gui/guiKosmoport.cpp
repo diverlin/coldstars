@@ -18,9 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-#include "interfaceinkosmoport.hpp"
-
-InterfaceInKosmoport :: InterfaceInKosmoport()
+GuiKosmoport :: GuiKosmoport()
 {
     	TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(BLUE_COLOR_ID);    // debug
 
@@ -100,15 +98,15 @@ InterfaceInKosmoport :: InterfaceInKosmoport()
 }
 
 
-InterfaceInKosmoport :: ~InterfaceInKosmoport()
+GuiKosmoport :: ~GuiKosmoport()
 {}
 
 
-int InterfaceInKosmoport :: getActiveScreenId() const { return active_screen_id; }
+int GuiKosmoport :: getActiveScreenId() const { return active_screen_id; }
 	
 	
 
-void InterfaceInKosmoport :: resetInfoFlags()
+void GuiKosmoport :: resetInfoFlags()
 {
     	for (unsigned int i = 0; i< button_common_pList.size(); i++)
 	{
@@ -122,7 +120,7 @@ void InterfaceInKosmoport :: resetInfoFlags()
 }
        			
 		
-void InterfaceInKosmoport :: mouseInteraction()
+void GuiKosmoport :: mouseInteraction()
 {
      	int mxvp = g_MOUSE_POS_X;
      	int myvp = g_VIEW_HEIGHT - g_MOUSE_POS_Y;         
@@ -174,7 +172,7 @@ void InterfaceInKosmoport :: mouseInteraction()
 }
 
 
-void InterfaceInKosmoport :: renderInternal() const
+void GuiKosmoport :: renderInternal() const
 {
    
     	for (unsigned int i = 0; i< button_common_pList.size(); i++)
@@ -192,7 +190,7 @@ void InterfaceInKosmoport :: renderInternal() const
 }
 
 
-void InterfaceInKosmoport :: renderInfo() const
+void GuiKosmoport :: renderInfo() const
 {
 
 	for (unsigned int i = 0; i< button_common_pList.size(); i++)
@@ -219,14 +217,14 @@ void InterfaceInKosmoport :: renderInfo() const
         
 }
 
-void InterfaceInKosmoport :: update()
+void GuiKosmoport :: update()
 {
         resetInfoFlags(); 
         mouseInteraction(); 
 }
                 
                 
-void InterfaceInKosmoport :: render() const
+void GuiKosmoport :: render() const
 {
         resetRenderTransformation();
         

@@ -25,13 +25,12 @@ AiModelRanger :: ~AiModelRanger()
 
 void AiModelRanger :: update_inStatic(Npc* _npc) const
 {
-	if (_npc->getMacroTaskMain()->getValid() != true)
+	if (_npc->getStateMachine()->getCurrentMacroTask()->getValid() != true)
         {
         	StarSystem* ss_to_free = _npc->getClosestStarSystem(true);
         	if (ss_to_free != NULL)
         	{
-        		_npc->getMacroTaskMain()->set(g_MACROSCENARIO_STARSYSTEMLIBERATION, ss_to_free);        			
-			_npc->getMacroTaskStateMachine()->setCurrentState(g_MACROSCENARIO_STARSYSTEMLIBERATION, ss_to_free);    // work around
+        		_npc->getStateMachine()->setCurrentMacroTask(g_MACROSCENARIO_STARSYSTEMLIBERATION, ss_to_free);        			
         	}
         }            
 }

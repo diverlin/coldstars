@@ -17,9 +17,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "shipInternal.hpp"
 
-ShipInternal :: ShipInternal()
+GuiShip :: GuiShip()
 {
         in_store           = false;
         allow_full_control = false;
@@ -28,17 +27,17 @@ ShipInternal :: ShipInternal()
         skill = NULL;
 }
 
-ShipInternal :: ~ShipInternal()
+GuiShip :: ~GuiShip()
 {}
 
 
-void ShipInternal :: bindShip(Ship* _ship)
+void GuiShip :: bindShip(Ship* _ship)
 {
      	ship =  _ship;
         skill = ship->getNpc()->getSkill();
 }
 
-void ShipInternal :: createControlSkillButtons()
+void GuiShip :: createControlSkillButtons()
 {
      	int x = 10;  //self.korpus.kontur_rect.right
      	int y = 50;  //self.korpus.kontur_rect.centery
@@ -78,7 +77,7 @@ void ShipInternal :: createControlSkillButtons()
         button_vec.push_back(decrement_diplomat_button);     
 }
 
-void ShipInternal :: manageSkill()
+void GuiShip :: manageSkill()
 {
      	int mxvp = g_MOUSE_POS_X;
      	int myvp = g_VIEW_HEIGHT - g_MOUSE_POS_Y;         
@@ -126,7 +125,7 @@ void ShipInternal :: manageSkill()
 	}
 }
 
-void ShipInternal :: renderSkill() const
+void GuiShip :: renderSkill() const
 {
     	int w = button_vec[0]->getRect().getWidth();
      	int h = button_vec[0]->getRect().getHeight();
@@ -218,7 +217,7 @@ void ShipInternal :: renderSkill() const
 
 
 
-void ShipInternal :: resetSlotsRenderInfoFlag()
+void GuiShip :: resetSlotsRenderInfoFlag()
 {
     	//for(std::vector<ItemSlot*>::iterator it = ship->slot_total_pList.begin(); it != ship->slot_total_pList.end(); it++)
     	//{ 
@@ -238,7 +237,7 @@ void ShipInternal :: resetSlotsRenderInfoFlag()
 
 
 
-void ShipInternal :: mouseControl()
+void GuiShip :: mouseControl()
 {
     	bool lmb = g_MOUSE_LEFT_BUTTON; 
     	//bool rmb = g_MOUSE_RIGHT_BUTTON; 
@@ -302,7 +301,7 @@ void ShipInternal :: mouseControl()
 
 
 
-void ShipInternal :: renderItemInfo() const
+void GuiShip :: renderItemInfo() const
 {
 	for(unsigned int i = 0; i < ship->slot_total_pList.size(); i++)
 	{ 
@@ -321,7 +320,7 @@ void ShipInternal :: renderItemInfo() const
 
 
 
-void ShipInternal :: renderInternaly() const
+void GuiShip :: renderInternaly() const
 {
 	drawTexturedRect(ship->texOb_korpus->texture, ship->kontur_rect, -1.0);
 
@@ -334,7 +333,7 @@ void ShipInternal :: renderInternaly() const
 }
 
 
-void ShipInternal :: configure(Ship* _ship, bool _in_store = false, bool _allow_full_control = false)
+void GuiShip :: configure(Ship* _ship, bool _in_store = false, bool _allow_full_control = false)
 {
         bindShip(_ship);                           
 
@@ -348,7 +347,7 @@ void ShipInternal :: configure(Ship* _ship, bool _in_store = false, bool _allow_
 }
 
 
-void ShipInternal :: update()
+void GuiShip :: update()
 {
         mouseControl();
 
@@ -360,7 +359,7 @@ void ShipInternal :: update()
         pPLAYER->getCursor()->update();
 }
 
-void ShipInternal :: render() const
+void GuiShip :: render() const
 {
 	resetRenderTransformation();
 	enable_BLEND();

@@ -21,51 +21,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef NPC_H
 #define NPC_H
 
-class MacroTaskHolder
-{
-	public:
-		MacroTaskHolder();
-		~MacroTaskHolder();
-		
-		template <typename TARGET_TYPE>
-		void set(MacroScenarioBase*, TARGET_TYPE*);
-
-		bool getValid() const;		
-		MacroScenarioBase* getScenario() const;
-		TargetObject*      getTarget() const;	
-		
-		void reset();
-				
-	private:
-		MacroScenarioBase*     scenario;
-		TargetObject* target;	
-		
-		bool is_valid;
-};
-
-
-class MicroTaskHolder
-{
-	public:
-		MicroTaskHolder();
-		~MicroTaskHolder();
-	
-		//template <typename TARGET_TYPE>
-		//void set(MicroScenarioBase*, TARGET_TYPE*);
-	
-		bool getValid() const;
-		MicroScenarioBase*  getScenario() const;
-		TargetObject*       getTarget() const;
-		
-		void reset();
-			
-	private:
-		MicroScenarioBase*     scenario;
-		TargetObject* target;	
-		
-		bool is_valid;
-};
-
 class Npc 
 {
    	public:
@@ -102,17 +57,16 @@ class Npc
    		Ship* getScanShip();
    		int getPlaceTypeId() const;
    		
-   		MacroScenarioStateMachine* getMacroTaskStateMachine();
-   		MicroScenarioStateMachine* getMicroTaskStateMachine();
+   		StateMachine* getStateMachine();
    		   		
    		Points* getPoints() const;
    		bool* getpAlive();
    		int* getpPlaceTypeId();
    		float getCollisionRadius();
    		
-   		MacroTaskHolder* getMacroTaskMain() const;
-   		MacroTaskHolder* getMacroTaskSelf() const;
-   		MicroTaskHolder* getMicroTask() const;   		
+   		//MacroTaskHolder* getMacroTaskMain() const;
+   		//MacroTaskHolder* getMacroTaskSelf() const;
+   		//MicroTaskHolder* getMicroTask() const;   		
 
      		
      		
@@ -177,8 +131,8 @@ class Npc
    	     	TextureOb* texOb;
 
      		AiModelBase* ai_model;
-     		MacroScenarioStateMachine* macroTask_stateMachine;
-     		MicroScenarioStateMachine* microTask_stateMachine;
+     		StateMachine* state_machine;
+
      		     		
                 void asteroidScenario();
                 void checkNeeds();
@@ -190,9 +144,9 @@ class Npc
      		
      		void updateInfo();     		
      		     		
-     		MacroTaskHolder* macro_task_main;
-   		MacroTaskHolder* macro_task_self;
-   		MicroTaskHolder* micro_task;
+     		//MacroTaskHolder* macro_task_main;
+   		//MacroTaskHolder* macro_task_self;
+   		//MicroTaskHolder* micro_task;
  };
 
 

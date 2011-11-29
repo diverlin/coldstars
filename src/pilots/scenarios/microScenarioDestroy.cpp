@@ -25,26 +25,26 @@ MicroScenarioDestroy :: ~MicroScenarioDestroy()
 		
 void MicroScenarioDestroy :: enter(Npc* _npc) const
 {	
-	printf("npc_id = %i, enter MicroScenarioDestroy (hunting on npc id = %i)\n", _npc->getId(), _npc->getMicroTask()->getTarget()->getNpc()->getId());
+	printf("npc_id = %i, enter MicroScenarioDestroy\n", _npc->getId());
 }
 
 void MicroScenarioDestroy :: update_inStatic(Npc* _npc) const
 {
-	if (_npc->getMicroTask()->getTarget()->getValid() == true)
+	if (_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getValid() == true)
 	{
-		if ( (*_npc->getMicroTask()->getTarget()->getpAlive() == false) or ( _npc->getStarSystem()->getId() != _npc->getMicroTask()->getTarget()->getStarSystem()->getId()) )
+		if ( (*_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getpAlive() == false) or ( _npc->getStarSystem()->getId() != _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getStarSystem()->getId()) )
 		{
-			_npc->getMicroTask()->getTarget()->reset();
+			_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->reset();
 		}
 
 		else
 		{
 			_npc->getShip()->weapon_selector.setAll(true);
 			_npc->getShip()->selectWeapons();
-			_npc->getShip()->setWeaponsTarget(_npc->getMicroTask()->getTarget()->getNpc()->getShip());
+			_npc->getShip()->setWeaponsTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getNpc()->getShip());
                       
                              
-			_npc->getShip()->getNavigator()->setTarget(_npc->getMicroTask()->getTarget()->getNpc()->getShip(), FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID );
+			_npc->getShip()->getNavigator()->setTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getNpc()->getShip(), FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID );
 		}
 	}
 }
@@ -60,5 +60,5 @@ void MicroScenarioDestroy :: exit(Npc* _npc) const
 
 std::string MicroScenarioDestroy :: getDescription(Npc* _npc) const
 {
-	return "DESTROY to ob_id" + int2str( _npc->getMicroTask()->getTarget()->getObId()) ;
+	return "DESTROY to ob_id" + int2str( _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getObId()) ;
 }
