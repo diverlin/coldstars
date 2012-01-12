@@ -935,6 +935,30 @@ g_TEXTURE_MANAGER.manage( new TextureOb(TEXT_BACKGROUND_TEXTURE_ID, "data/other/
 	g_UNIQUE_TEXTURE_COLLECTOR.texOb_grapple_trail = new TextureOb(NONE_ID, "data/effect/grapple_jet.png", true, &arg);
 }
 
+{
+	std::vector<int> arg;  
+	g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue = new TextureOb(NONE_ID, "data/other/dot_blue.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
+	g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_green = new TextureOb(NONE_ID, "data/other/dot_green.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
+	g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_red = new TextureOb(NONE_ID, "data/other/dot_red.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
+	g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_black = new TextureOb(NONE_ID, "data/other/dot_black.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
+	g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_yellow = new TextureOb(NONE_ID, "data/other/dot_yellow.png", true, &arg);
+}
 
 }
 

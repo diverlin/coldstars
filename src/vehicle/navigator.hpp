@@ -30,7 +30,7 @@ class Navigator
       		void setStaticTargetCoords(vec2f);
       
       		template <typename TARGET_TYPE>
-      		void setTarget(TARGET_TYPE*, int);      		 
+      		void setTarget(TARGET_TYPE*, int);      
                      
                 TargetObject* getTargetOb() const;     
                 Planet* getTargetPlanet() const;  
@@ -45,13 +45,15 @@ class Navigator
         	
         	void update_inSpace_inStatic();
         	void update_inSpace_inDynamic();
-        	        	
+                
+                void drawPath();
+
       	private:
       		Ship* ship_owner;
-      		TargetObject* targetOb;      		
-	
+      		TargetObject* targetOb;
+
 		vec2f target_pos;
-			
+		
 		int action_id;
 		float target_distance;   
 		vec2f target_offset;
@@ -59,16 +61,30 @@ class Navigator
         	std::vector<vec2f> path_vec;
         	std::vector<float> angle_inD_vec;
 
+                                        std::vector<vec2f> c1c2_vec;   // debug
+                                        std::vector<vec2f> rc_vec;     // debug
+                                        std::vector<vec2f> k1k2_vec;   // debug
+                                        std::vector<vec2f> k_vec;      // debug
+                                        std::vector<vec2f> target_vec; // debug
+                                
         	bool direction_list_END;
         	int move_it;
    
+                PathVisual visual_path;
+                                        PathVisual visual_c1c2;      // debug
+                                        PathVisual visual_rc;        // debug
+                                        PathVisual visual_k1k2;      // debug
+                                        PathVisual visual_k;         // debug
+                                        PathVisual visual_target;    // debug
                 void updatePosition();
                        	
-                void targetValidation();
+                bool targetValidation();
 	
-	        void updateTargetCoord();
-		void calcDetaledWay();
-				
+	        bool updateTargetCoord();
+	        void calcPath();
+			vec2f calcRoundPath();
+			void calcDirectPath(vec2f);
+		                				
 		bool targetObValidation_dip1() const;
 		bool targetObValidation_dip2() const;
 		

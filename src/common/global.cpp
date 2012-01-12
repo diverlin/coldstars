@@ -17,12 +17,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 // Create the main window
-bool g_USE_MODERN_HW = false;
+bool g_USE_MODERN_HW = true;
 				const bool g_DEBUG = false;            // debug 
 				const bool g_AUTOTURN_ENABLE = false;  // debug
 const int g_GAMESPEED = 3;
 
-const int g_VIEW_WIDTH = 1280;
+const int g_VIEW_WIDTH = 1024;
 const int g_VIEW_HEIGHT = g_VIEW_WIDTH*600/800;
 const int g_BPP = 32;
 const int g_FPS_LIMIT = 60;
@@ -45,7 +45,7 @@ bool g_MOUSE_RIGHT_BUTTON;
 int TURN_TIME = 150;  //turn time, depends on game fps
 int TURN_COUNT = 0; 
         
-sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.4.18 (SFML/C++)");
+sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.4.20 (SFML/C++)");
 sf::Font g_FONT;
 
 sf::Clock g_CLOCK;

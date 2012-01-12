@@ -28,7 +28,7 @@ class CommonForPlanet
     		~CommonForPlanet();
                                 
                 // accessors
-                void setStarSystem(StarSystem* _starsystem);
+                void setStarSystem(StarSystem*);
                 
                 int getId() const;
                 int getTypeId() const;
@@ -46,22 +46,24 @@ class CommonForPlanet
     		// other methods
                 void CommonForPlanet_init(IdData,
                 			  LifeData,                
-                			  TextureOb* _texOb, 
-    	   				  ObjMeshInstance* _mesh, 
-    	   				  PlanetData _planet_data);
+                			  TextureOb*, 
+    	   				  ObjMeshInstance*, 
+    	   				  PlanetData);
     	   				  
  		void hit_TRUE(int);
  		void hit_FALSE(int);
     		
    		void render_NEW();
     		void render_OLD();
-                
+    		void drawOrbit();
+                                
         protected:
                 IdData data_id;
                 LifeData data_life;
                 
                 TextureOb* texOb;
-
+                PathVisual orbit_visual;
+                
     		Points points;
     		ObjMeshInstance* mesh; 
     
@@ -74,19 +76,17 @@ class CommonForPlanet
     		int w, h;
     		int collision_radius; 
     		// !!!!
-              	      		
+                
+                
 		vec3f center_pos;
-		vec3f angle;
-		vec3f d_angle;
+		vec3f angle, d_angle;
      		
      		int place_type_id;
       		PlanetData data;
      		
-      		std::vector<float> orbit_vector_x;
-    		std::vector<float> orbit_vector_y;
-                int orbit_len;
-                int orbit_it; 
-                
+      		std::vector<float> orbit_vector_x, orbit_vector_y;
+                int orbit_len, orbit_it; 
+                                
                 void detailedEllipceOrbitFormation();
     		void updatePosition();
     		void updateRotation();
