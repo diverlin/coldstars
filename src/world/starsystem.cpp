@@ -690,14 +690,45 @@ void StarSystem :: renderBackground()
 	disable_BLEND();
 }
     
-    
-void StarSystem :: render()
+void StarSystem :: drawOrbits()
+{
+        for(unsigned int i = 0; i < PLANET_vec.size(); i++) 
+	{ 
+		PLANET_vec[i]->drawOrbit(); 
+	}
+
+	for(unsigned int i = 0; i < ASTEROID_vec.size(); i++)
+	{ 
+		ASTEROID_vec[i]->drawOrbit(); 
+	}
+}
+ 
+void StarSystem :: drawPath()
+{
+        for(unsigned int i = 0; i < SHIP_inSPACE_vec.size(); i++) 
+	{ 
+		SHIP_inSPACE_vec[i]->getNavigator()->drawPath(); 
+	}
+
+}
+   
+void StarSystem :: render(bool forceDraw_orbits, bool forceDraw_path)
 {
     	findVisibleEntities();
     	if (g_USE_MODERN_HW == true)
     		renderEntities_NEW();
     	else
         	renderEntities_OLD(); 
+                
+        if (forceDraw_orbits == true)
+        {
+                drawOrbits();
+        }
+        
+        if (forceDraw_path == true)
+        {
+                drawPath();
+        }
 } 
 
     
@@ -762,7 +793,6 @@ void StarSystem :: renderEntities_NEW()
     			{ 
        				visible_ASTEROID_vec[i]->render_NEW(); 
     			}
-
     		disable_DEPTH();
 
     	          
@@ -1351,6 +1381,8 @@ void StarSystem :: mouseControl()
 
                 		visible_ASTEROID_vec[ai]->updateInfo(); 
                 		visible_ASTEROID_vec[ai]->renderInfo(); 
+                                
+                                visible_ASTEROID_vec[ai]->drawOrbit();
 
 				if ( (pPLAYER->getAlive() == true) and (pPLAYER->getShip() != NULL) )
 				{
@@ -1386,6 +1418,8 @@ void StarSystem :: mouseControl()
 
                 		visible_SHIP_vec[ki]->renderInfo(); 
                 		visible_SHIP_vec[ki]->renderWeaponIcons();
+                                
+                                visible_SHIP_vec[ki]->getNavigator()->drawPath(); 
                 
 				if ( (pPLAYER->getAlive() == true) and (pPLAYER->getShip() != NULL) )
 				{
@@ -1433,6 +1467,8 @@ void StarSystem :: mouseControl()
                 		visible_PLANET_vec[pi]->updateInfo(); 
                 		visible_PLANET_vec[pi]->renderInfo(); 
 
+                                visible_PLANET_vec[pi]->drawOrbit();
+          
 				if ( (pPLAYER->getAlive() == true) and (pPLAYER->getShip() != NULL) )
 				{
                 			if (mlb == true)

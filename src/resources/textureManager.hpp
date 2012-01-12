@@ -27,12 +27,18 @@ struct UniqueTextureCollector
 	TextureOb* texOb_mark_enemy_ss;	
 	TextureOb* texOb_mark_player_ss;
 	
-	TextureOb* texOb_icon_minus;	
-	TextureOb* texOb_icon_plus;	
+	TextureOb* texOb_icon_minus;
+	TextureOb* texOb_icon_plus;
 	TextureOb* texOb_skill;	
 
 	TextureOb* texOb_icon_map;
         TextureOb* texOb_grapple_trail;	
+
+        TextureOb* texOb_dot_blue;	
+        TextureOb* texOb_dot_red;
+        TextureOb* texOb_dot_green;
+        TextureOb* texOb_dot_black;
+        TextureOb* texOb_dot_yellow;
 };
 
 class TextureManager

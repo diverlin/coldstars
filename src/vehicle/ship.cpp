@@ -1206,7 +1206,8 @@ Ship* shipGenerator(int race_id, int subtype_id, int size_id)
     	
     	ship->getPoints()->setCenter(getRandInt(0, 800), getRandInt(0, 800)); 
     	ship->getPoints()->setAngle(getRandInt(0, 360));    	
-    
+    	ship->getNavigator()->setStaticTargetCoords(vec2f (1200, 1200));    	
+    	    
     	return ship;
 }
 

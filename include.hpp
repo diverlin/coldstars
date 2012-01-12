@@ -48,6 +48,8 @@ class Turrel;
 #include "src/common/points.hpp"
 #include "src/common/common.hpp"
 
+#include "src/render/pathVisual.hpp"
+
 #include "src/text/textstuff.hpp"
 
 #include "src/resources/textureOb.hpp"
@@ -199,7 +201,7 @@ class AiModelBase;
 
 
 
-
+#include "src/render/pathVisual.cpp"
 #include "src/common/rand.cpp"
 #include "src/common/gameStruct.cpp"
 #include "src/common/id.cpp"

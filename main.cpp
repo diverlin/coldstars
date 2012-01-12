@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 int main()
 {       
- 	init();
+ 	init(); 
 
     	// GAME LOOP
     	while (g_APP.IsOpened())
@@ -37,8 +37,9 @@ int main()
        				g_GALAXY->update(g_TIMER->getTurnTick());
        			}
 
-           		pPLAYER->getStarSystem()->render(); 
-                        
+           		//pPLAYER->getStarSystem()->render(pPLAYER->getShowOrbits(), pPLAYER->getShowShipWays()); 
+           		pPLAYER->getStarSystem()->render(false, true); 
+                                                
                         if (g_TIMER->getTurnEnded() == true)  
                         {
                                 if ( (pPLAYER->getScanFlag() == false) && (pPLAYER->getWorldMapShowFlag() == false) )

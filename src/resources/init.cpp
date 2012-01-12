@@ -61,7 +61,7 @@ void init()
     	Npc* pnpc = pPLAYER->getStarSystem()->NPC_inSPACE_vec[0];
     	pPLAYER->bindNpc(pnpc);
     	pnpc->getShip()->getPoints()->setCenter(-400,-400);
-
+    	pnpc->getShip()->getPoints()->setAngle(0);
 
     	/* create GUI */
     	g_GUI_SHIP = new GuiShip();

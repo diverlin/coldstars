@@ -140,6 +140,7 @@ float distBetweenPoints(vec2f center1, float x2, float y2)
         return sqrt(xl*xl + yl*yl);    
 }
 
+
 float distBetweenPoints(float x1, float y1, float x2, float y2)
 {
         float xl = (x2 - x1);

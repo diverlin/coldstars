@@ -24,18 +24,18 @@ CommonForPlanet :: ~CommonForPlanet()
 {}
 
 
-void CommonForPlanet :: CommonForPlanet_init(IdData _data_id,
-					     LifeData _data_life,
-					     TextureOb* _texOb, 
-    	   				     ObjMeshInstance* _mesh, 
-					     PlanetData _data)
+void CommonForPlanet :: CommonForPlanet_init(IdData data_id,
+					     LifeData data_life,
+					     TextureOb* texOb, 
+    	   				     ObjMeshInstance* mesh, 
+					     PlanetData data)
 {
-	data_id   = _data_id;
-	data_life = _data_life;
-	data = _data;
+	this->data_id   = data_id;
+	this->data_life = data_life;
+	this->data      = data;
               
-        texOb = _texOb;
-        mesh  = _mesh; 
+        this->texOb = texOb;
+        this->mesh  = mesh; 
       
         angle.x        = getRandInt(10, 40);
         angle.y        = getRandInt(10, 40);
@@ -48,8 +48,8 @@ void CommonForPlanet :: CommonForPlanet_init(IdData _data_id,
      
         // !!!!
         float rate = 5.4;                                            
-        w = rate * data.scale;
-        h = rate * data.scale;
+        w = rate * this->data.scale;
+        h = rate * this->data.scale;
         collision_radius = (w + h)/4; 
         // !!!!
                 
@@ -67,10 +67,12 @@ void CommonForPlanet :: CommonForPlanet_init(IdData _data_id,
         place_type_id = SPACE_ID;
                         
         starsystem = NULL;
+        
+        orbit_visual.fillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue->texture, &orbit_vector_x, &orbit_vector_y, 50, 10);
 }
 
 
-void CommonForPlanet :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
+void CommonForPlanet :: setStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
 
 int CommonForPlanet :: getId()        const { return data_id.id; }   
 int CommonForPlanet :: getTypeId()    const { return data_id.type_id; }
@@ -195,7 +197,10 @@ void CommonForPlanet :: render_OLD()
 	renderMesh(mesh->glList, center_pos, angle, data.scale);
 }
 
-
+void CommonForPlanet :: drawOrbit()
+{   
+        orbit_visual.draw();
+}
 
 
 

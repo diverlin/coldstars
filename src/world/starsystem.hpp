@@ -79,7 +79,7 @@ class StarSystem
 		void update_TRUE(int timer);
 		void update_FALSE(int timer);
 
-	        void render();      
+	        void render(bool, bool);      
    		    		
     		void mouseControl();
 
@@ -186,6 +186,8 @@ class StarSystem
     		        void restoreDefaultColor();
     			void restoreSceneColor();
     			void renderBackground();
+                        void drawOrbits();
+                        void drawPath();
                         
                 bool removeFromTheListById(std::vector<Npc*>* _pTo_npc_vec, int _id);
     		
