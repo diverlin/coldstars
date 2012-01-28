@@ -123,7 +123,7 @@ void TrailEffect :: render()
 
 TrailEffect* createTrailEffect(int size_id, vec2f* pTo_pos, vec2f* pTo_target_pos)
 {
-	TextureOb* texOb_particle = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
+	TextureOb* texOb_particle = g_TEXTURE_MANAGER.getParticleTexObByColorId(RED_COLOR_ID);
 
    	ParticleData data_particle;
    	data_particle.size_start = 15.0 + size_id;
@@ -134,9 +134,9 @@ TrailEffect* createTrailEffect(int size_id, vec2f* pTo_pos, vec2f* pTo_target_po
    	data_particle.velocity_end   = 1.2;   	
    	data_particle.d_velocity     = 0.0; 
    	
-   	data_particle.alpha_start = 0.6;
-   	data_particle.alpha_end   = 0.0;
-   	data_particle.d_alpha     = 0.05;  	
+   	data_particle.alpha_start = 0.9;
+   	data_particle.alpha_end   = 0.1;
+   	data_particle.d_alpha     = 0.1;  	
    	   	
    	int particles_num = 5;
    	   	

@@ -25,7 +25,8 @@ RocketBullet :: RocketBullet(IdData _data_id,
 			     vec2f _start_pos, 
 			     float _angle_inD, 
                              TargetObject* _targetOb,
-			     int _owner_id)
+			     int _owner_id,
+			     float offset)
 {
 	data_id     = _data_id;
 	data_life   = _data_life;
@@ -36,7 +37,8 @@ RocketBullet :: RocketBullet(IdData _data_id,
 
         owner_ship_id = _owner_id;
 
-        targetOb = _targetOb;
+	targetOb = new TargetObject();
+        targetOb->copy(_targetOb);
 
         texOb = _data_bullet.texOb;
 
@@ -59,7 +61,7 @@ RocketBullet :: RocketBullet(IdData _data_id,
         dx = 0;
         dy = 0;
 
-        points.setCenter(_start_pos.x, _start_pos.y);
+        points.setCenter(_start_pos.x + offset, _start_pos.y + offset);
         angle_inD = _angle_inD;
         points.setAngle(angle_inD);
         
@@ -70,6 +72,7 @@ RocketBullet :: RocketBullet(IdData _data_id,
 RocketBullet :: ~RocketBullet()
 {
 	delete drive_trail;
+	delete targetOb;
 }
 
 
@@ -91,6 +94,7 @@ void RocketBullet :: update_inSpace_inDynamic()
        		speed += data_bullet.d_speed; 
     	} 
 
+	targetOb->validation(starsystem);
     	if (targetOb->getValid() == true)
     	{ 
         	//dx, dy, angle_new = rocketWayCalc((self.points.center[0], self.points.center[1]), (self.target.points.center[0], self.target.points.center[1]), self.points.angle, self.angular_speed, self.step)
@@ -189,9 +193,8 @@ void RocketBullet :: renderDriveTrail() const
 
 void RocketBullet :: renderKorpus() const
 {
-    	glBindTexture(GL_TEXTURE_2D, texOb->texture); 
-    	
-    	drawFlatQuadPerVertexIn2D(points.getBottomLeft(), 
+    	drawFlatQuadPerVertexIn2D(texOb,
+    				  points.getBottomLeft(), 
                               	  points.getBottomRight(), 
                               	  points.getTopRight(), 
                               	  points.getTopLeft(), 
@@ -209,7 +212,7 @@ void RocketBullet :: render_inSpace() const
 
 
 
-RocketBullet* rocketGenerator(BulletData data_bullet, ItemSlot* slot)
+RocketBullet* rocketBulletGenerator(BulletData data_bullet, ItemSlot* slot, float offset, bool force_center_start)
 {
 	IdData data_id;
 	LifeData data_life;
@@ -223,7 +226,7 @@ RocketBullet* rocketGenerator(BulletData data_bullet, ItemSlot* slot)
         data_life.armor = data_bullet.armor;        
 
     	RocketBullet* rocket; 
-    	if (slot->getOwnerShip()->data_korpus.render_TURRELS == true)
+    	if ( (slot->getOwnerShip()->data_korpus.render_TURRELS == true) and (force_center_start == false))
     	{
         	rocket = new RocketBullet(data_id,
         			          data_life,		
@@ -231,7 +234,8 @@ RocketBullet* rocketGenerator(BulletData data_bullet, ItemSlot* slot)
         				  slot->getTurrel()->getCenter(), 
                                   	  slot->getTurrel()->getAngle(), 
                                   	  slot->getTurrel()->getTargetOb(), 
-                                  	  slot->getOwnerShip()->getId());
+                                  	  slot->getOwnerShip()->getId(),
+                                  	  offset);
         }
     	else
     	{
@@ -241,7 +245,8 @@ RocketBullet* rocketGenerator(BulletData data_bullet, ItemSlot* slot)
                                   	  slot->getOwnerShip()->getPoints()->getCenter(), 
                                   	  slot->getTurrel()->getAngle(), 
                                   	  slot->getTurrel()->getTargetOb(), 
-                                  	  slot->getOwnerShip()->getId());
+                                  	  slot->getOwnerShip()->getId(),
+                                  	  offset);
          }
          
          return rocket;

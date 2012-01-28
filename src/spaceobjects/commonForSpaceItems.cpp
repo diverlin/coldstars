@@ -21,7 +21,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 CommonForSpaceItems :: CommonForSpaceItems()
 {}
 
-void CommonForSpaceItems :: CommonForSpaceItems_init(IdData _data_id, LifeData _data_life, TextureOb* _texOb, vec2f _start_pos)
+
+
+void CommonForSpaceItems :: CommonForSpaceItems_init(IdData _data_id, LifeData _data_life, TextureOb* _texOb)
 {   
     	data_id   = _data_id;
     	data_life = _data_life;
@@ -29,29 +31,34 @@ void CommonForSpaceItems :: CommonForSpaceItems_init(IdData _data_id, LifeData _
     	texOb = _texOb;
     	starsystem = NULL;
     
-   	calcRenderConstants();
+   	this->calcRenderConstants();
      
-    	collision_radius = (texOb->w + texOb->h)/2;
-    	
+    	collision_radius = (texOb->w + texOb->h)/4;    	
 
     	//////
     	points.initCenterPoint();
     	points.addCenterPoint();
-
-    	points.setCenter(_start_pos.x, _start_pos.y);
     	//////
 
-    	data_angle_inD.d_z      = getRandInt(10, 100)*0.01;    	    	    	
-    	keep_moving = true;
-    	
-    	target_pos = points.getCenter() + getRandVec(60, 100);
-        //printf("target_pos = %f,%f\n", target_pos.x, target_pos.y);
-        
-        place_type_id = SPACE_ID;
+    	data_angle_inD.d_z      = -getRandInt(10, 100)*0.01;    	    	    	
 }
 
-void CommonForSpaceItems :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
 
+void CommonForSpaceItems :: moveToSpace(StarSystem* starsystem, vec2f start_pos)
+{
+	this->starsystem = starsystem;	
+    	points.setCenter(start_pos.x, start_pos.y);    	
+    	target_pos = start_pos + getRandVec(60, 100);
+        
+        place_type_id = SPACE_ID;
+        keep_moving = true;
+        //printf("target_pos = %f,%f\n", target_pos.x, target_pos.y);
+}
+
+
+
+//void CommonForSpaceItems :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
+void CommonForSpaceItems :: setPlaceTypeId(int _place_type_id) { place_type_id = _place_type_id; }
 
 int CommonForSpaceItems :: getId() const { return data_id.id; }
 int CommonForSpaceItems :: getTypeId() const { return data_id.type_id; }
@@ -60,7 +67,7 @@ bool CommonForSpaceItems :: getGarbageReady() const { return data_life.garbage_r
 bool CommonForSpaceItems :: getAlive() const { return data_life.is_alive; }  
 bool* CommonForSpaceItems :: getpAlive() { return &data_life.is_alive; }  
 int* CommonForSpaceItems :: getpPlaceTypeId() { return &place_type_id; }
-void CommonForSpaceItems :: setPlaceTypeId(int _place_type_id) { place_type_id = _place_type_id; }
+int CommonForSpaceItems :: getPlaceTypeId() const { return place_type_id; }
         	
 Points* CommonForSpaceItems :: getPoints() { return &points; } 
 StarSystem* CommonForSpaceItems :: getStarSystem() { return starsystem; }
@@ -69,7 +76,7 @@ int CommonForSpaceItems :: getMass() const { return mass; }
 
 void CommonForSpaceItems :: moveExternalyToPosition(vec2f _target)
 {
-        get_dX_dY_ToPoint(points.getCenter().x, points.getCenter().y, _target.x, _target.y, velocity, &d_pos.x, &d_pos.y);
+        get_dX_dY_ToPoint(points.getCenter().x, points.getCenter().y, _target.x, _target.y, 10*velocity, &d_pos.x, &d_pos.y);
         points.setCenter(points.getCenter().x + d_pos.x, points.getCenter().y + d_pos.y);
         //points.setCenter(points.getCenter() + d_pos);
 }
@@ -81,16 +88,7 @@ void CommonForSpaceItems :: update_inSpace_inDynamic_TRUE()
      	{
         	keep_moving = get_dX_dY_ToPoint(points.getCenter().x, points.getCenter().y, target_pos.x, target_pos.y, velocity, &d_pos.x, &d_pos.y);
         	points.setCenter(points.getCenter().x + d_pos.x, points.getCenter().y + d_pos.y);
-     	}
-      
-     	if (data_life.is_alive == false)
-     	{
-        	data_life.dying_time--;
-        	if (data_life.dying_time < 0)
-        	{
-           		death_TRUE();
-           	}
-     	}    
+     	}  
 }
 
 void CommonForSpaceItems :: update_inSpace_inDynamic_FALSE()
@@ -99,6 +97,25 @@ void CommonForSpaceItems :: update_inSpace_inDynamic_FALSE()
        	keep_moving = false;
 }
 
+void CommonForSpaceItems :: updateDyingEffect_TRUE()
+{
+	if (data_life.is_alive == false)
+     	{
+        	data_life.dying_time--;
+        	if (data_life.dying_time < 0)
+        	{
+           		death_TRUE();
+           	}
+     	}  
+}
+
+void CommonForSpaceItems :: updateDyingEffect_FALSE()
+{
+	if (data_life.is_alive == false)
+     	{
+       		death_FALSE();
+     	}  
+}
 
 void CommonForSpaceItems :: hit_TRUE(int _damage)
 {
@@ -156,8 +173,7 @@ void CommonForSpaceItems :: calcRenderConstants()
           
 void CommonForSpaceItems :: render2D()
 { 
-    	glBindTexture(GL_TEXTURE_2D, texOb->texture);
-    	drawDynamic(points.getCenter().x, points.getCenter().y, data_angle_inD.z, minus_half_w, minus_half_h, plus_half_w, plus_half_h, points.getPosZ());
+    	drawDynamic(texOb, points.getCenter(), data_angle_inD.z, minus_half_w, minus_half_h, plus_half_w, plus_half_h, points.getPosZ());
     	data_angle_inD.z += data_angle_inD.d_z;
 }
 

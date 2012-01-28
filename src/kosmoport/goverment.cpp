@@ -34,7 +34,7 @@ void Goverment :: update()
 void Goverment :: renderBackground() const
 {
      	Rect screen_rect = Rect(0, 0, g_VIEW_WIDTH, g_VIEW_HEIGHT);
-     	drawTexturedRect(texOb_background->texture, screen_rect, -1);  
+     	drawTexturedRect(texOb_background, screen_rect, -1);  
 }
 
 void Goverment :: renderInternals() const

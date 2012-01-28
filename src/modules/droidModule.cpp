@@ -40,7 +40,7 @@ void DroidModule :: addUniqueInfo()
 
 DroidModule* droidModuleGenerator()
 {
-    	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);    	 
+    	TextureOb* texOb = g_TEXTURE_MANAGER.getParticleTexObByColorId(RED_COLOR_ID);    	 
     	int repair_add = getRandInt(DROID_MODULE_REPAIR_MIN, DROID_MODULE_REPAIR_MAX);
 
     	DroidModule* droid_module = new DroidModule(texOb, repair_add);

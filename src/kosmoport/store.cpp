@@ -47,8 +47,10 @@ void Store :: createSlots()
                         ItemSlot* slot = new ItemSlot(CARGO_SLOT_ID, 
                                                       NULL, 
                                                       texOb_slot, 
-                                                      x0 + clm_act * 1.1 * texOb_slot->w, 
-                                                      y0 + row_act * 1.1 * texOb_slot->h);
+                                                      x0 + clm_act * 1.1 * STORE_SLOT_WIDTH, 
+                                                      y0 + row_act * 1.1 * STORE_SLOT_HEIGHT,
+                                                      STORE_SLOT_WIDTH,
+                                                      STORE_SLOT_HEIGHT);
                                                  
                         slot_vec.push_back(slot);
                         clm_act++;
@@ -97,33 +99,20 @@ bool Store :: buyItemFromSlot(ItemSlot* _slot)
 }
 
 
-
-void Store :: resetSlotsRenderInfoFlag()
-{
-        for (unsigned int i = 0; i < slot_vec.size(); i++)
-        {
-                slot_vec[i]->setCursoredStatus(false);
-        }
-}
-
-
 void Store :: mouseControl()
 {
         bool lmb = g_MOUSE_LEFT_BUTTON; 
         //bool rmb = g_MOUSE_RIGHT_BUTTON; 
 
-                                                                resetSlotsRenderInfoFlag();
-
         for (unsigned int i = 0; i < slot_vec.size(); i++)
         { 
-                float dist = distBetweenPoints(g_MOUSE_POS_X, 
-                                                g_VIEW_HEIGHT - g_MOUSE_POS_Y, 
-                                                slot_vec[i]->getRect().getCenter().x, 
-                                                slot_vec[i]->getRect().getCenter().y);
-        				
+                float dist = distBetweenPoints(slot_vec[i]->getRect().getCenter(),
+                			       g_MOUSE_POS_X, 
+                                               g_VIEW_HEIGHT - g_MOUSE_POS_Y);
+                                                       				
                 if (dist < slot_vec[i]->getRect().getWidth()/2)
                 {
-                        slot_vec[i]->setCursoredStatus(true);
+                        pPLAYER->getCursor()->setInfoSlot(slot_vec[i]);
                         if (lmb == true)
                         {
                                 if (slot_vec[i]->getEquipedStatus() == true)
@@ -146,27 +135,16 @@ void Store :: mouseControl()
 void Store :: renderBackground() const
 {
      	Rect screen_rect = Rect(0, 0, g_VIEW_WIDTH, g_VIEW_HEIGHT);
-     	drawTexturedRect(texOb_background->texture, screen_rect, -1);  
+     	drawTexturedRect(texOb_background, screen_rect, -1);  
 }
 
 void Store :: renderInternals() const
 {
         for (unsigned int sli = 0; sli < slot_vec.size(); sli ++)
         {
-                slot_vec[sli]->renderFrame(-1);
+                slot_vec[sli]->render(-1);
         }
 }
-
-void Store :: renderItemInfo() const
-{
-        for (unsigned int i = 0; i < slot_vec.size(); i++)
-        {
-                if (slot_vec[i]->getCursoredStatus() == true)
-                        if (slot_vec[i]->getEquipedStatus() == true)
-                                slot_vec[i]->renderItemInfo();
-        }
-}
-
 
 void Store :: update()
 {
@@ -183,7 +161,6 @@ void Store :: render() const
         
         enable_BLEND();
                 renderInternals();
-                renderItemInfo();
         disable_BLEND();
 }
 

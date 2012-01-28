@@ -59,8 +59,7 @@ void DistantNebulaBgEffect :: calcRenderConstants()
 
 void DistantNebulaBgEffect :: render(float vx, float vy)
 { 
-   	glBindTexture(GL_TEXTURE_2D, texOb->texture);
-   	drawDynamic(center.x - vx*distance_rate, center.y - vy*distance_rate, angle_inD, minus_half_w, minus_half_h, plus_half_w, plus_half_h, center.z);
+   	drawDynamic(texOb, vec2f(center.x - vx*distance_rate, center.y - vy*distance_rate), angle_inD, minus_half_w, minus_half_h, plus_half_w, plus_half_h, center.z);
 }
               
 
@@ -69,7 +68,7 @@ DistantNebulaBgEffect* createDistantNebula(int _color_id)
 	TextureOb* texOb;
 	do 
 	{
-   		texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.nebulaBgEffect_texOb_pList); 
+   		texOb = g_TEXTURE_MANAGER.getRandomTexOb(NEBULA_TEXTURE_ID); 
    	} while (texOb->color_id != _color_id);
    	
    	vec3f center((float)getRandInt(0, 1000), (float)getRandInt(0, 1000), -999.0);

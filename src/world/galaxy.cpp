@@ -16,7 +16,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "galaxy.hpp"
 
 Galaxy :: Galaxy()
 { 
@@ -104,7 +103,7 @@ void Galaxy :: update(int timer)
 
 StarSystem* generateEntireStarSystem()
 {  
-        StarSystem* starsystem = new StarSystem();   
+        StarSystem* starsystem = new StarSystem(RACE_0_ID);   
         
         vec2f _center(getRandInt(MAP_OFFSET_X, g_VIEW_WIDTH - 3*MAP_OFFSET_X), g_VIEW_HEIGHT - getRandInt(MAP_OFFSET_Y, g_VIEW_HEIGHT - 2*MAP_OFFSET_Y) );			 
         starsystem->setPosition(_center);
@@ -117,6 +116,12 @@ StarSystem* generateEntireStarSystem()
         generateBackground(starsystem, distNebula_maxNum, distStar_maxNum, star->getColorId());
           
         generateNumPlanets(starsystem, getRandInt(PLANET_PER_SYSTEM_MIN, PLANET_PER_SYSTEM_MAX));
+        
+        for (int i = 0; i < 10; i++)
+        {
+        	BlackHole* bh = getNewBlackHole();
+        	starsystem->add(bh, vec2f((float)getRandInt(0, 3000), (float)getRandInt(0, 3000)));
+        }
 
         if (getRandBool())
                 generateNumFriendlyNPC(starsystem, getRandInt(SHIP_PER_SYSTEM_MIN, SHIP_PER_SYSTEM_MAX));
@@ -179,12 +184,13 @@ void generateNumFriendlyNPC(StarSystem* starsystem, int ship_per_system)
         	else
            		npc_subtype_id = RACE4_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE4_ALLOWED_SUBTYPE_LIST.size())];
 
-        	Npc* npc = generateNpc(npc_race_id, npc_subtype_id);
+        	Npc* npc = getNewNpc(npc_race_id, npc_subtype_id);
 
         	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[getRandInt(0, RACES_ALL_LIST.size())];
         	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
         	int ship_size_id = getRandInt(1, 9);
-        	Ship* ship = shipGenerator(ship_race_id, ship_subtype_id, ship_size_id);
+        	int weapons_num = getRandInt(1, 5);
+        	Ship* ship = shipGenerator(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
        
         	equip(ship);            		// improove
         	ship->updateAllStuff(); 		// improove
@@ -208,12 +214,13 @@ void generateNumEnemyNPC(StarSystem* starsystem, int ship_per_system)
        		//npc_subtype_id = SHIP_SUBTYPE_LIST[getRandInt(0, RACES_EVIL_LIST.size())];
                 npc_subtype_id = WARRIOR_ID;
 
-        	Npc* npc = generateNpc(npc_race_id, npc_subtype_id);
+        	Npc* npc = getNewNpc(npc_race_id, npc_subtype_id);
 
         	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[getRandInt(0, RACES_ALL_LIST.size())];
         	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
         	int ship_size_id = getRandInt(1, 9);
-        	Ship* ship = shipGenerator(ship_race_id, ship_subtype_id, ship_size_id);
+        	int weapons_num = getRandInt(1, 5);
+        	Ship* ship = shipGenerator(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
        
         	equip(ship);            		// improove
         	ship->updateAllStuff(); 		// improove

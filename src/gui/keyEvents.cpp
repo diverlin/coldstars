@@ -197,17 +197,15 @@ void KeyEvents :: getSimpleInputs()
 
 
           	
-	           		case sf::Key::G:   // GARPUN
+	           		case sf::Key::G:   // Grapple
 	               	 	{
-	                	        if (pPLAYER->garpun_slot_SELECTED == false)
+	                	        if (pPLAYER->getShowGrappleRange() == false)
 	            			{
-	                 			pPLAYER->garpun_slot_SELECTED = true;
-	                 			printf("garpun_slot_SELECTED -> YES\n");
+	                 			pPLAYER->setShowGrappleRange(true);
 	              			}   
 	              			else
 	              			{
-	                 			pPLAYER->garpun_slot_SELECTED = false;
-	                 			printf("garpun_slot_SELECTED -> NO\n");
+	                 			pPLAYER->setShowGrappleRange(false);
 	              			}
 	                       		break;
 	 			}
@@ -215,20 +213,43 @@ void KeyEvents :: getSimpleInputs()
 
 	           		case sf::Key::R: // RADAR
 	                	{
-	              			if (pPLAYER->radar_range_SHOW == false)
+	              			if (pPLAYER->getShowRadarRange() == false)
 	              			{
-	                			pPLAYER->radar_range_SHOW = true;
-	                 			printf("radar_range_SHOW -> YES\n");
+	                			pPLAYER->setShowRadarRange(true);
 	             			}
 	              			else
 	              			{
-	                			pPLAYER->radar_range_SHOW = false;
-	                 			printf("radar_range_SHOW -> NO\n");
+	                			pPLAYER->setShowRadarRange(false);
 	             			}
 	                 	      	break;
 				}
 
+	           		case sf::Key::O: // Orbits
+	                	{
+	              			if (pPLAYER->getShowAllOrbit() == false)
+	              			{
+	                			pPLAYER->setShowAllOrbit(true);
+	             			}
+	              			else
+	              			{
+	                			pPLAYER->setShowAllOrbit(false);
+	             			}
+	                 	      	break;
+				}
 
+	           		case sf::Key::P: // Path
+	                	{
+	              			if (pPLAYER->getShowAllPath() == false)
+	              			{
+	                			pPLAYER->setShowAllPath(true);
+	             			}
+	              			else
+	              			{
+	                			pPLAYER->setShowAllPath(false);
+	             			}
+	                 	      	break;
+				}
+				
 	        	} // end switch      
 	        } //enfif 
 

@@ -80,7 +80,7 @@ bool GuiMap :: update()
 
 void GuiMap :: render(bool _clrscr)
 {
-    	TextureOb* texOb_textBg = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.textBackground_texOb_pList);
+    	TextureOb* texOb_textBg = g_TEXTURE_MANAGER.getRandomTexOb(TEXT_BACKGROUND_TEXTURE_ID);
     	
         if (_clrscr)
         {
@@ -93,14 +93,14 @@ void GuiMap :: render(bool _clrscr)
     	        
         enable_BLEND();                              
 
-    		drawTexturedRect(texOb_textBg->texture, rect, -1);
+    		drawTexturedRect(texOb_textBg, rect, -1);
     	
     		enable_POINTSPRITE();
     		
     			for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
     			{
    		
-        			TextureOb* texOb_particle = g_TEXTURE_MANAGER.returnParticleTexObByColorId(galaxy->STARSYSTEM_vec[si]->STAR_vec[0]->getColorId()); 
+        			TextureOb* texOb_particle = g_TEXTURE_MANAGER.getParticleTexObByColorId(galaxy->STARSYSTEM_vec[si]->STAR_vec[0]->getColorId()); 
         		    	
         			drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[si]->getPosition(), 30.0, -2.0);
         	       

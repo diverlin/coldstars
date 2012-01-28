@@ -31,6 +31,7 @@ class Garbage
 		void add(Npc*);
 		void add(Asteroid*);
 		void add(Mineral*);
+		void add(Bomb*);
 		void add(Container*);
 		void add(RocketBullet*);
 		
@@ -51,6 +52,7 @@ class Garbage
 
     		std::vector<Asteroid*>     ASTEROID_vec;
     		std::vector<Mineral*>      MINERAL_vec;
+    		std::vector<Bomb*>      BOMB_vec;
     		std::vector<Container*>    CONTAINER_vec;
     		std::vector<RocketBullet*> ROCKET_vec;
     		

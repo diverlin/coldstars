@@ -29,6 +29,7 @@ class Ship
                 void setPlaceTypeId(int);
                  
                 int getTypeId() const;
+                int getSubTypeId() const;
                 int getId() const;
                 int getPlaceTypeId() const;
 
@@ -38,13 +39,21 @@ class Ship
                 int* getpPlaceTypeId();
                 int getArmor() const;
                 int getCollisionRadius() const;
+                float getVisionRadius() const;
+                TextureOb* getTexOb() const;
                 
                 Points* getPoints();
                 Navigator* getNavigator();
-                StarSystem* getStarSystem();
+                StarSystem* getStarSystem() const;
                 Npc* getNpc();
        	        ItemSlot* getEmptyOtsecSlot();
-       	        	
+       	        ItemSlot* getOtsecSlotWithGoods(int);
+       	        
+       	        //
+       	        int getFunctionalSlotSubTypeId() const;    // return NONE_ID
+       	        void bindSlot(ItemSlot*);		   // do nothing	
+       	        void updateOwnerPropetries();		   // do nothing
+       	               	        	
         	//######### KONTUR RECT 
         	int w_kontur, h_kontur;
         	Rect kontur_rect; 
@@ -94,7 +103,9 @@ class Ship
 
         	void update_inSpace_inDynamic_TRUE();
         	void update_inSpace_inDynamic_FALSE();
-
+       	
+        	void droidRepair();
+        	
         	void hit_TRUE(unsigned int _damage);
         	void hit_FALSE(unsigned int _damage);
 
@@ -129,10 +140,20 @@ class Ship
 
         	void renderInfo(float _pos_x, float _pos_y, float _offset_x = 0.0, float _offset_y = 0.0);
         	void renderInfo();
+        	
+        	void renderRadarRange();
+        	void renderGrappleRange();
+        	void renderWeaponsRange();
         	        	
         	WeaponSelector weapon_selector; 
                 
                 bool repair();
+                
+                void grappleScenario();
+                void moveExternalyToPosition(vec2f);
+                
+                void updateDyingEffect_TRUE();
+        	void updateDyingEffect_FALSE();
          
         private:
         	LifeData data_life;
@@ -160,8 +181,8 @@ class Ship
 		void renderKorpus() const;
              	void renderTurrels() const;
              	void renderDriveTrail() const;
-             	void renderShield() const;
-             	
+          	void renderShield() const;
+             	             	
              	void dropRandomItemToSpace();
              	
                 // WEPONS
@@ -183,6 +204,6 @@ class Ship
 };
 
 void equip(Ship* pTo_ship);
-Ship* shipGenerator(int race_id, int subtype_id, int size_id);
+Ship* shipGenerator(int race_id, int subtype_id, int size_id, int weapons_num);
 
 #endif 

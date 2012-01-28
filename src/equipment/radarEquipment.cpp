@@ -119,7 +119,7 @@ RadarEquipment* radarEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.RadarEquipment_texOb_pList);   
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(RADAR_ITEM_TEXTURE_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(RADAR_ITEM_TEXTURE_ID, revision_id) 
 
     	int radius_orig     = getRandInt(RADAR_RADIUS_MIN, RADAR_RADIUS_MAX);

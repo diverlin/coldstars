@@ -24,11 +24,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Angar
 {
         public: 
-                Angar(TextureOb* _texOb_background, TextureOb* _texOb_slot);
+                Angar(TextureOb*, TextureOb*);
                 ~Angar();
                 
                 bool addShip(Ship*);
-                bool removeShipFromlandingAreaById(int _id);
+                bool removeShipFromlandingAreaById(int);
 
                 void update();
 
@@ -40,7 +40,7 @@ class Angar
         private:
                 TextureOb* texOb_background;
                 
-                std::vector<LandingArea*> landingArea_pList;
+                std::vector<LandingArea*> landingArea_vec;
 
                 void renderBackground() const;
                 void renderInternals() const;

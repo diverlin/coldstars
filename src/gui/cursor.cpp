@@ -23,8 +23,8 @@ Cursor :: Cursor()
 {
      	type_id = CURSOR_ID;
      
-     	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.slot_texOb_pList);
-     	slot = new ItemSlot(CARGO_SLOT_ID, NULL, texOb_slot, 0, 0);
+     	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID);
+     	slot = new ItemSlot(CARGO_SLOT_ID, NULL, texOb_slot, 0, 0, CURSOR_SLOT_WIDTH, CURSOR_SLOT_HEIGHT);
      
 }
 
@@ -34,7 +34,8 @@ Cursor :: ~Cursor()
 
 
 ItemSlot* Cursor :: getSlot() { return slot; }
-		
+ItemSlot* Cursor :: getInfoSlot() { return slot_info; }
+void Cursor :: setInfoSlot(ItemSlot* slot_info) { this->slot_info = slot_info; }
 
 
 void Cursor :: updatePos()
@@ -42,11 +43,10 @@ void Cursor :: updatePos()
      	slot->getRect().setNewCenter(g_MOUSE_POS_X, g_VIEW_HEIGHT - g_MOUSE_POS_Y);
 }
 
-void Cursor :: renderFrame()
+void  Cursor :: resetInfoSlot()
 {
-    	slot->renderEquipedItem(); 
+	slot_info = NULL;
 }
-
 
 void Cursor :: update()
 {
@@ -56,6 +56,16 @@ void Cursor :: update()
 void Cursor :: render()
 {
 	enable_BLEND();
-		renderFrame();
+		slot->renderEquipedItem(); 
 	disable_BLEND();
+}
+
+void Cursor :: renderInfoSlot()
+{
+	if (slot_info != NULL)
+	{
+		enable_BLEND();
+			slot_info->renderItemInfo();
+		disable_BLEND();
+	}
 }

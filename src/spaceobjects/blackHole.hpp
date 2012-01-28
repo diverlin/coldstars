@@ -17,15 +17,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MINERAL_H
-#define MINERAL_H
+#ifndef BLACKHOLE_H
+#define BLACKHOLE_H
 
 
-class Mineral : public CommonForSpaceItems
+class BlackHole : public CommonForSpaceItems
 {
     	public:  
-        	Mineral(IdData _data_id, LifeData _data_life, TextureOb* _texOb);
+        	BlackHole(IdData _data_id, LifeData _data_life, TextureOb* _texOb);
+        	~BlackHole();
 
+		void update_inSpace_inDynamic_TRUE();
+		void update_inSpace_inDynamic_FALSE();
+		
         	void updateInfo();
         
         	void renderInfo();
@@ -34,7 +38,7 @@ class Mineral : public CommonForSpaceItems
         	InfoTable info;
 };
 
-Mineral* createMineral();
+BlackHole* getNewBlackHole();
 
 
 #endif 

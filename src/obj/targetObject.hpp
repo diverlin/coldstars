@@ -24,10 +24,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class TargetObject
 {
 	public:	
-		TargetObject(ItemSlot*);
+		TargetObject();
 		~TargetObject();
-
-                void bindSlot(ItemSlot*);
 
 		template <typename TARGET>
 		void setObject(TARGET _target);
@@ -39,6 +37,7 @@ class TargetObject
                 bool* getpAlive();
                 bool getAlive() const;
                 int getObPlaceTypeId() const;
+                int* getpObPlaceTypeId() const;
                 float getCollisionRadius() const;
                 
 		Star* getStar();
@@ -49,10 +48,12 @@ class TargetObject
                 Ship* getShip();
                 Npc* getNpc() const;
                 StarSystem* getStarSystem();
-                
+                Bomb* getBomb() const;
+                              
 		void reset();
-		void validation();
+		bool validation(StarSystem* _starsystem);
 		
+		void copy(TargetObject*);
 		void moveExternalyToPosition(vec2f);
 
 	private:
@@ -61,8 +62,6 @@ class TargetObject
                 int ob_id;
 		int ob_type_id;
                 
-                ItemSlot* slot;
-
 		Star* 	    star;
 		Planet*     planet;
                 Asteroid*   asteroid;
@@ -71,6 +70,7 @@ class TargetObject
                 Ship*       ship;
                 Npc*	    npc;
                 StarSystem* starsystem;
+                Bomb*       bomb;
                                 
                 vec2f* pCenter;
                 bool* pTo_is_alive; 
@@ -85,9 +85,9 @@ class TargetObject
 		void set(Ship*);
 		void set(Npc*);
 		void set(StarSystem*);
-						                
-                bool checkAvaliability();
-                bool checkDistance();
+		void set(Bomb*);
+								                
+                bool checkAvaliability(StarSystem*);
 };
 
 

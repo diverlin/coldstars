@@ -58,11 +58,27 @@ void init()
         pPLAYER   = new Player();    
 	pPLAYER->setStarSystem(g_GALAXY->getRandomStarSystem());      
       		
-    	Npc* pnpc = pPLAYER->getStarSystem()->NPC_inSPACE_vec[0];
-    	pPLAYER->bindNpc(pnpc);
-    	pnpc->getShip()->getPoints()->setCenter(-400,-400);
-    	pnpc->getShip()->getPoints()->setAngle(0);
+      	int prace_id = RACE_7_ID;
+      	int psubtype_id = WARRIOR_ID;
+      	int size_id = 5;
+      	int weapons_num = 5;
+    	Npc* pnpc = getNewNpc(prace_id, psubtype_id);   
+    	Ship* pship = shipGenerator(prace_id, psubtype_id, size_id, weapons_num);
+	
+    	equip(pship);            		// improove
+        pship->updateAllStuff(); 		// improove
+        
+        pnpc->bind(pship);
 
+        pPLAYER->getStarSystem()->moveToSpace(pship);
+        pPLAYER->getStarSystem()->moveToSpace(pnpc);
+        	
+    	pship->getPoints()->setCenter(-400, -400);
+    	pship->getPoints()->setAngle(0);
+    	pship->getPoints()->update();
+
+   	pPLAYER->bindNpc(pnpc);
+   	    	
     	/* create GUI */
     	g_GUI_SHIP = new GuiShip();
         g_GUI_SHIP->createControlSkillButtons();

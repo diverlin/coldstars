@@ -63,10 +63,7 @@ class GuiShip
      		void manageSkill();
      		void mouseControl();
      		
-     		void resetSlotsRenderInfoFlag();
-     		           	
      		void renderInternaly() const;
-      		void renderItemInfo() const;        		
       		void renderSkill() const;	
 };
 

@@ -39,7 +39,7 @@ class CommonForModules
 		void updateInfo();
 			
       		void render(Rect slot_rect);
-      		void renderInfo(Rect slot_rect); 
+      		void renderInfo(Rect slot_rect, float, float); 
       		
       		// not relevant for this cals but is needed for interface
       		int getFunctionalSlotSubTypeId();
@@ -52,11 +52,7 @@ class CommonForModules
       	      		
      		TextureOb* texOb;
      		int w, h;  
-    		
-     		void (CommonForModules::*pToFunc_render)(Rect slot_rect); 
-           	void _renderFrame(Rect slot_rect);
-           	void _renderFrames(Rect slot_rect);
-           	
+         	
 	protected:
                 int mass;   
                 

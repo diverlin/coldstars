@@ -30,7 +30,8 @@ class RocketBullet
                 	     vec2f _start_pos, 
                 	     float _angle_inD, 
                 	     TargetObject* _targetOb, 
-                	     int _owner_id);
+                	     int _owner_id,
+                	     float offset);
                 	     
                 ~RocketBullet();
         
@@ -81,6 +82,6 @@ class RocketBullet
                 void renderDriveTrail() const;        
 };
 
-RocketBullet* rocketGenerator(BulletData, ItemSlot*);
+RocketBullet* rocketBulletGenerator(BulletData, ItemSlot*, float, bool force_center_start = false);
 
 #endif 

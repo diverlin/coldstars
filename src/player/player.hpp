@@ -26,14 +26,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Player 
 {
    	public:
-     	     	bool garpun_slot_SELECTED;
-     
-     		bool ships_info_SHOW;
-     		bool planets_info_SHOW;
-     		bool planets_orbit_SHOW;
-
-     		bool radar_range_SHOW;
-     		
      		WeaponSelector weapon_selector;
      		
     		Player();
@@ -43,17 +35,26 @@ class Player
           	void setScanFlag(bool);
           	void setWorldMapShowFlag(bool);
           	
+          	void setShowAllOrbit(bool);
+          	void setShowAllPath(bool);
+          	void setShowRadarRange(bool);
+          	void setShowGrappleRange(bool);
+          	          	
           	bool getAlive() const;
           	bool getWorldMapShowFlag() const;
           	bool getScanFlag() const;
-          	
+          	bool getShowAllOrbit() const;
+          	bool getShowAllPath() const;
+          	bool getShowRadarRange() const;
+          	bool getShowGrappleRange() const;
+          	          	
           	Ship* getShip(); 	     
 		Npc* getPilot(); 	     
 		StarSystem* getStarSystem(); 	
 		Cursor* getCursor();         
           	int getPlaceTypeId() const;
           		
-     		void update_inSpace();     
+     		void update_global();     
      		void bindNpc(Npc*);
      		     	
      	private:
@@ -69,6 +70,11 @@ class Player
      	     	Cursor* cursor;
      	     	
      	     	ControlWord control;  
+     	     	
+     	     	bool show_all_orbit;
+     	     	bool show_all_path;
+     	     	bool show_radar_range;
+     	     	bool show_grapple_range;
 };
 
 #endif 

@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 bool g_USE_MODERN_HW = true;
 				const bool g_DEBUG = false;            // debug 
 				const bool g_AUTOTURN_ENABLE = false;  // debug
-const int g_GAMESPEED = 3;
+const int g_GAMESPEED = 1;
 
 const int g_VIEW_WIDTH = 1024;
 const int g_VIEW_HEIGHT = g_VIEW_WIDTH*600/800;
@@ -45,7 +45,7 @@ bool g_MOUSE_RIGHT_BUTTON;
 int TURN_TIME = 150;  //turn time, depends on game fps
 int TURN_COUNT = 0; 
         
-sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.4.20 (SFML/C++)");
+sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.4.27 (SFML/C++)");
 sf::Font g_FONT;
 
 sf::Clock g_CLOCK;
@@ -92,6 +92,8 @@ SimpleIdGenerator   g_ASTEROID_ID_GENERATOR  = SimpleIdGenerator();
 SimpleIdGenerator   g_STAR_ID_GENERATOR  = SimpleIdGenerator();
 SimpleIdGenerator   g_PLANET_ID_GENERATOR  = SimpleIdGenerator();
 SimpleIdGenerator   g_MINERAL_ID_GENERATOR  = SimpleIdGenerator();
+SimpleIdGenerator   g_BOMB_ID_GENERATOR  = SimpleIdGenerator();
+SimpleIdGenerator   g_BLACKHOLE_ID_GENERATOR  = SimpleIdGenerator();
 SimpleIdGenerator   g_EQUIPMENT_ID_GENERATOR  = SimpleIdGenerator();
 SimpleIdGenerator   g_MODULE_ID_GENERATOR  = SimpleIdGenerator();
 SimpleIdGenerator   g_SHIP_ID_GENERATOR  = SimpleIdGenerator();
@@ -116,3 +118,11 @@ class MicroScenarioDestroy;              MicroScenarioDestroy* g_MICROSCENARIO_D
 
 class AiModelRanger;       AiModelRanger*      g_AIMODEL_RANGER;
 class AiModelConqueror;    AiModelConqueror*   g_AIMODEL_CONQUEROR;
+
+std::vector<int> SHIP_SUBTYPE_LIST;
+
+std::vector<int> RACES_ALL_LIST;
+std::vector<int> RACES_GOOD_LIST;
+std::vector<int> RACES_EVIL_LIST;
+std::vector<int> RACE4_ALLOWED_SUBTYPE_LIST;
+

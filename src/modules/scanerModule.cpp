@@ -44,7 +44,7 @@ void ScanerModule :: addUniqueInfo()
 
 ScanerModule* scanerModuleGenerator()
 {
-    	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
+    	TextureOb* texOb = g_TEXTURE_MANAGER.getParticleTexObByColorId(RED_COLOR_ID); 
     	int scan_add = getRandInt(SCANER_MODULE_SCAN_MIN, SCANER_MODULE_SCAN_MAX);
 
     	ScanerModule* scaner_module = new ScanerModule(texOb, scan_add);    	

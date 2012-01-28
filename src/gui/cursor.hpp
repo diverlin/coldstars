@@ -28,19 +28,23 @@ class Cursor
         	Cursor();
         	~Cursor();
 
-		ItemSlot* getSlot();
+		void setInfoSlot(ItemSlot*);
 		
+		ItemSlot* getSlot();
+		ItemSlot* getInfoSlot();
+				
+		void resetInfoSlot();
+						
 		void update();
 		void render();
-        	//void renderFrames(GLuint flash_tex);
+		void renderInfoSlot();
         	
         private:
                 int type_id;
         	ItemSlot* slot;
+        	ItemSlot* slot_info;  // slot to render item info
         	
         	void updatePos();
-        	void renderFrame();
-        
 }; 
 
 #endif 

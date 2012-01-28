@@ -16,10 +16,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-#include "landingarea.hpp"
-
-
 LandingArea :: LandingArea(TextureOb* _texOb, float _center_x, float _center_y, int _w, int _h)
 {
     	is_BUSY = false;
@@ -68,7 +64,7 @@ void LandingArea :: removeShip()
 
 void LandingArea :: renderArea() const
 {
-     	drawTexturedRect(texOb->texture, rect, -1);
+     	drawTexturedRect(texOb, rect, -1);
 }
 
 void LandingArea :: renderInternals() const

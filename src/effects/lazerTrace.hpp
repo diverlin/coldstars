@@ -22,7 +22,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class LazerTraceEffect
 { 
     	public:
-       		LazerTraceEffect(TextureOb* _texOb, TextureOb* texOb_particle, float _particle_size, float* _pTo_start_pos_x, float* _pTo_start_pos_y, float* _pTo_end_pos_x, float* _pTo_end_pos_y);
+       		LazerTraceEffect(TextureOb* _texOb, 
+       				 TextureOb* texOb_particle, 
+       				 float _particle_size, 
+       				 vec2f* _pTo_start_pos, 
+       				 vec2f* _pTo_end_pos);
        		~LazerTraceEffect();
 
 		void setDamageEffect(DamageEffect*);
@@ -48,18 +52,12 @@ class LazerTraceEffect
        		
        		int existance_time;
        		       		
-       		float* pTo_start_pos_x;
-       		float* pTo_start_pos_y;
-       		float* pTo_end_pos_x;
-       		float* pTo_end_pos_y;
+       		vec2f* pTo_start_pos;
+       		vec2f* pTo_end_pos;
        		       		
        		DamageEffect* damage_effect;
  	       		
            	void updateAngleAndLen();
-           	
-           	void (LazerTraceEffect::*pToFunc_render)();
-		void _renderFrame();
-		void _renderFrames();
 };
 
 

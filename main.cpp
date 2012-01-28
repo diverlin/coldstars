@@ -25,20 +25,20 @@ int main()
     	// GAME LOOP
     	while (g_APP.IsOpened())
     	{    
-		pPLAYER->update_inSpace();
+		pPLAYER->update_global();
 
        		if (pPLAYER->getPlaceTypeId() == SPACE_ID)
        		{  
            		//////////// in SPACE ///////////////
            		g_KEYEVENTS->update_inSpace();
+           		pPLAYER->getCursor()->resetInfoSlot();
 
 			for (int i = 0; i < g_GAMESPEED; i++)  // fakse
 			{
        				g_GALAXY->update(g_TIMER->getTurnTick());
        			}
 
-           		//pPLAYER->getStarSystem()->render(pPLAYER->getShowOrbits(), pPLAYER->getShowShipWays()); 
-           		pPLAYER->getStarSystem()->render(false, true); 
+           		pPLAYER->getStarSystem()->render(g_TIMER->getTurnEnded(), pPLAYER->getShowAllOrbit(), pPLAYER->getShowAllPath()); 
                                                 
                         if (g_TIMER->getTurnEnded() == true)  
                         {
@@ -70,6 +70,7 @@ int main()
        		if (pPLAYER->getPlaceTypeId() == KOSMOPORT_ID)
        		{
            		g_KEYEVENTS->update_inKosmoport();
+           		pPLAYER->getCursor()->resetInfoSlot();
           
            		if (g_GUI_KOSMOPORT->getActiveScreenId() == SCREEN_ANGAR_ID)
            		{

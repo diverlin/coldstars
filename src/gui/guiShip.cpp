@@ -146,7 +146,7 @@ void GuiShip :: renderSkill() const
          		      			     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
          		      			     w, h);
          		      			     
-         			drawTexturedRect(texOb_skill->texture, tmp_rect, -1.0);
+         			drawTexturedRect(texOb_skill, tmp_rect, -1.0);
      			}
  
 		}
@@ -158,7 +158,7 @@ void GuiShip :: renderSkill() const
          			Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
          		      			     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
          		      			     w, h);
-         			drawTexturedRect(texOb_skill->texture, tmp_rect, -1.0);
+         			drawTexturedRect(texOb_skill, tmp_rect, -1.0);
      			}
 		}
 
@@ -169,7 +169,7 @@ void GuiShip :: renderSkill() const
          			Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
          		      			     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
          		      			     w, h);
-         			drawTexturedRect(texOb_skill->texture, tmp_rect, -1.0);
+         			drawTexturedRect(texOb_skill, tmp_rect, -1.0);
      			}
 	   	
 	   	}
@@ -181,7 +181,7 @@ void GuiShip :: renderSkill() const
          			Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
          		     			     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
          		     			     w, h);
-         			drawTexturedRect(texOb_skill->texture, tmp_rect, -1.0);
+         			drawTexturedRect(texOb_skill, tmp_rect, -1.0);
     			}
 	   	
 	   	}
@@ -193,7 +193,7 @@ void GuiShip :: renderSkill() const
          			Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
          		      			     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
          		      			     w, h);
-         			drawTexturedRect(texOb_skill->texture, tmp_rect, -1.0);
+         			drawTexturedRect(texOb_skill, tmp_rect, -1.0);
      			}     
 	   	}
 
@@ -204,35 +204,12 @@ void GuiShip :: renderSkill() const
          			Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
          		      			     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
          		     			     w, h);
-         			drawTexturedRect(texOb_skill->texture, tmp_rect, -1.0);
+         			drawTexturedRect(texOb_skill, tmp_rect, -1.0);
      			}
 	   	}
 
 	}
 }
-
-
-
-
-
-
-
-void GuiShip :: resetSlotsRenderInfoFlag()
-{
-    	//for(std::vector<ItemSlot*>::iterator it = ship->slot_total_pList.begin(); it != ship->slot_total_pList.end(); it++)
-    	//{ 
-       		//(*it)->setCursoredStatus(false);
-    	//}
-   
-   	for(unsigned int i = 0; i < ship->slot_total_pList.size(); i++)
-	{ 
-		ship->slot_total_pList[i]->setCursoredStatus(false);
-	}
-	
-    	ship->gate_slot.setCursoredStatus(false);
-}
-
-
 
 
 
@@ -250,14 +227,11 @@ void GuiShip :: mouseControl()
        		pTo_store = ship->getNpc()->getKosmoport()->getStore();    // this is used only for player
         }
 
-    	resetSlotsRenderInfoFlag();
-
-
 	for(unsigned int i = 0; i < ship->slot_total_pList.size(); i++)
 	{ 
 		if (ship->slot_total_pList[i]->interaction(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y)) == true)
 		{  
-			ship->slot_total_pList[i]->setCursoredStatus(true);
+			pPLAYER->getCursor()->setInfoSlot(ship->slot_total_pList[i]);
 			cursor_has_target = true;
 
 			if (lmb == true)
@@ -284,7 +258,6 @@ void GuiShip :: mouseControl()
 	{
 		if (ship->gate_slot.interaction(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y)) == true)  
 		{
-			ship->gate_slot.setCursoredStatus(true);
 			cursor_has_target = true;
 
 			//// DROP ITEM TO OUTERSPACE ////
@@ -301,35 +274,17 @@ void GuiShip :: mouseControl()
 
 
 
-void GuiShip :: renderItemInfo() const
-{
-	for(unsigned int i = 0; i < ship->slot_total_pList.size(); i++)
-	{ 
-		if (ship->slot_total_pList[i]->getCursoredStatus() == true)
-		{
-			if (ship->slot_total_pList[i]->getEquipedStatus() == true)
-			{
-				ship->slot_total_pList[i]->renderItemInfo();
-				break;
-			}
-		}
-	}
-}
-
-
-
-
 
 void GuiShip :: renderInternaly() const
 {
-	drawTexturedRect(ship->texOb_korpus->texture, ship->kontur_rect, -1.0);
+	drawTexturedRect(ship->texOb_korpus, ship->kontur_rect, -1.0);
 
 	for(unsigned int i = 0; i < ship->slot_total_pList.size(); i++)
 	{
-		ship->slot_total_pList[i]->renderFrame(-1);
+		ship->slot_total_pList[i]->render(-1);
 	}
 	
-	ship->gate_slot.renderFrame(-1);
+	ship->gate_slot.render(-1);
 }
 
 
@@ -372,7 +327,7 @@ void GuiShip :: render() const
 		
 	if (pPLAYER->getCursor()->getSlot()->getEquipedStatus() == false)
 	{
-        	renderItemInfo();
+        	pPLAYER->getCursor()->renderInfoSlot();
         }
         
         pPLAYER->getCursor()->render();

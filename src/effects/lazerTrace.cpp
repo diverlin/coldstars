@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "lazerTrace.hpp"
 
 
-LazerTraceEffect :: LazerTraceEffect(TextureOb* _texOb, TextureOb* _texOb_particle, float _particle_size, float* _pTo_start_pos_x, float* _pTo_start_pos_y, float* _pTo_end_pos_x, float* _pTo_end_pos_y)
+LazerTraceEffect :: LazerTraceEffect(TextureOb* _texOb, TextureOb* _texOb_particle, float _particle_size, vec2f* _pTo_start_pos, vec2f* _pTo_end_pos)
 {
         is_alive = true;
         is_alreadyInRemoveQueue = false; 
@@ -27,11 +27,6 @@ LazerTraceEffect :: LazerTraceEffect(TextureOb* _texOb, TextureOb* _texOb_partic
 	texOb = _texOb;
         texOb_particle = _texOb_particle;
         
-    	if (texOb->is_animated == false)
-       		pToFunc_render = &LazerTraceEffect::_renderFrame;
-    	else
-       		pToFunc_render = &LazerTraceEffect::_renderFrames;
-
         particle_size = _particle_size;
 
         existance_time = getRandInt(40, 45);
@@ -44,11 +39,8 @@ LazerTraceEffect :: LazerTraceEffect(TextureOb* _texOb, TextureOb* _texOb_partic
 
        	additional_angle_inR = 0;
 
-       	pTo_start_pos_x = _pTo_start_pos_x;
-       	pTo_start_pos_y = _pTo_start_pos_y;
-
-       	pTo_end_pos_x = _pTo_end_pos_x;
-       	pTo_end_pos_y = _pTo_end_pos_y;
+       	pTo_start_pos = _pTo_start_pos;
+       	pTo_end_pos   = _pTo_end_pos;
 
        	damage_effect = NULL;
        
@@ -84,8 +76,8 @@ void LazerTraceEffect :: update()
 void LazerTraceEffect :: updateAngleAndLen()
 {
     	// performs within game loop
-    	float xl = (*pTo_end_pos_x) - (*pTo_start_pos_x);
-    	float yl = (*pTo_end_pos_y) - (*pTo_start_pos_y);
+    	float xl = pTo_end_pos->x - pTo_start_pos->x;
+    	float yl = pTo_end_pos->y - pTo_start_pos->y;
 
     	len = sqrt((xl*xl) + (yl*yl));
 
@@ -114,34 +106,13 @@ void LazerTraceEffect :: render()
 {
 	if (is_alive == true)
 	{
-     		(this->*pToFunc_render)();
+     	    	 drawLine(texOb, 
+    		 *pTo_start_pos, 
+    		 -2, 
+    		 len, 
+    		 angle_inD, 
+    		 texOb->h/4);	
 	}
 }
 
-
-
-void LazerTraceEffect :: _renderFrame()
-{
-    	drawLine(texOb->texture, (*pTo_start_pos_x), (*pTo_start_pos_y), -2, len, angle_inD, texOb->h/4);
-}
-
-void LazerTraceEffect :: _renderFrames()
-{
-    	int i = texOb->updateAnimationFrame(); 
-    	drawLine(texOb->texture, 
-    	*pTo_start_pos_x, 
-    	*pTo_start_pos_y, 
-    	-2, 
-    	len, 
-    	angle_inD, 
-    	texOb->h/3, 
-    	texOb->texCoord_bottomLeft_x_list[i], 
-    	texOb->texCoord_bottomLeft_y_list[i], 
-    	texOb->texCoord_bottomRight_x_list[i], 
-    	texOb->texCoord_bottomRight_y_list[i], 
-    	texOb->texCoord_topLeft_x_list[i], 
-    	texOb->texCoord_topLeft_y_list[i], 
-    	texOb->texCoord_topRight_x_list[i], 
-    	texOb->texCoord_topRight_y_list[i]);
-}
 

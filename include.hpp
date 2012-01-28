@@ -78,8 +78,10 @@ class Turrel;
 #include "src/spaceobjects/commonForPlanet.hpp" 
 #include "src/spaceobjects/asteroid.hpp"
 #include "src/spaceobjects/mineral.hpp"
+#include "src/spaceobjects/bomb.hpp"
 #include "src/spaceobjects/container.hpp"
 #include "src/spaceobjects/goodsPack.hpp"
+#include "src/spaceobjects/blackHole.hpp"
 
 class Planet;
 class StarSystem;
@@ -221,6 +223,8 @@ class AiModelBase;
 #include "src/spaceobjects/commonForPlanet.cpp"
 #include "src/spaceobjects/asteroid.cpp"   
 #include "src/spaceobjects/mineral.cpp" 
+#include "src/spaceobjects/bomb.cpp" 
+#include "src/spaceobjects/blackHole.cpp"
 
 #include "src/equipment/commonforequipment.cpp"
 #include "src/equipment/rocketEquipment.cpp"

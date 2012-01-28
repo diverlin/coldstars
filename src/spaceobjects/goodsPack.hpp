@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class GoodsPack : public CommonForSpaceItems
 {
     	public:                  
-        	GoodsPack(IdData _data_id, LifeData _data_life, TextureOb* _texOb, vec2f _start_pos);
+        	GoodsPack(IdData _data_id, LifeData _data_life, TextureOb* _texOb);
         	~GoodsPack();
         	
         	TextureOb* getTexOb();

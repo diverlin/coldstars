@@ -31,11 +31,6 @@ void CommonForModules :: CommonForModules_init(int _subtype_id, TextureOb* _texO
      	
      	texOb = _texOb;
 
-     	if (texOb->is_animated == false)
-        	pToFunc_render = &CommonForModules::_renderFrame;
-     	else
-        	pToFunc_render = &CommonForModules::_renderFrames;
-
      	w = texOb->w;
      	h = texOb->h;
          
@@ -80,38 +75,17 @@ void CommonForModules :: addCommonInfo()
     	//info.addNameStr("price:");     info.addValueStr( int2str(price) );
 }
 
-void CommonForModules :: renderInfo(Rect slot_rect)
+void CommonForModules :: renderInfo(Rect slot_rect, float offset_x, float offset_y)
 {  
 	updateInfo();
-        drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.getCenter().x, slot_rect.getCenter().y, 0, 0);
+        drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.getCenter().x, slot_rect.getCenter().y, offset_x, offset_y);
 }
-
 
 
 
 void CommonForModules :: render(Rect slot_rect)
 {
-        (this->*pToFunc_render)(slot_rect);
+        drawTexturedRect(texOb, slot_rect, -1);   
 }
 
 
-void CommonForModules :: _renderFrame(Rect slot_rect)
-{
-        drawTexturedRect(texOb->texture, slot_rect, -1);   
-}
-
-void CommonForModules :: _renderFrames(Rect slot_rect)
-{       
-        int i = texOb->updateAnimationFrame(); 
-        glBindTexture(GL_TEXTURE_2D, texOb->texture);
-        drawRect( slot_rect, 
-                  -1.0, 
-                  texOb->texCoord_bottomLeft_x_list[i], 
-                  texOb->texCoord_bottomLeft_y_list[i], 
-                  texOb->texCoord_bottomRight_x_list[i], 
-                  texOb->texCoord_bottomRight_y_list[i], 
-                  texOb->texCoord_topLeft_x_list[i], 
-                  texOb->texCoord_topLeft_y_list[i], 
-                  texOb->texCoord_topRight_x_list[i], 
-                  texOb->texCoord_topRight_y_list[i] );
-}

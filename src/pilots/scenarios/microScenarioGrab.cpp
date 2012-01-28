@@ -49,39 +49,38 @@ void MicroScenarioGrab :: update_inStatic(Npc* _npc) const
 
 void MicroScenarioGrab :: update_inDynamic(Npc* _npc) const
 {
-        _npc->getShip()->grapple_slot.getGrappleEquipment()->validationTargets();  
+        //_npc->getShip()->grapple_slot.getGrappleEquipment()->validationTargets();  
                 
-        for (unsigned int i = 0; i < _npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec.size(); i++)
-        {	//printf("blablabla\n");
-                if (_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getValid() == true)
-                {
-                	//printf("blablabla\n");
-                       	_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->moveExternalyToPosition(_npc->getShip()->getPoints()->getCenter());        	
+        //for (unsigned int i = 0; i < _npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec.size(); i++)
+        //{	//printf("blablabla\n");
+                //if (_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getValid() == true)
+                //{
+                	////printf("blablabla\n");
+                       	//_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->moveExternalyToPosition(_npc->getShip()->getPoints()->getCenter());        	
        	
-        		float dist = distBetweenPoints(_npc->getShip()->getPoints()->getCenter(), *_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getpCenter() ); 
-        		if (dist < _npc->getShip()->getCollisionRadius()/10)
-        		{
-        			if (_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getObTypeId() == MINERAL_ID)
-        			{
-        				GoodsPack* _goodsPack = createGoodsPack(MINERAL_ID, vec2f (0, 0));
-        				_goodsPack->increase(_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getMineral()->getMass());
-        				ItemSlot* _slot = _npc->getShip()->getEmptyOtsecSlot();
-        				if (_slot != NULL)
-        				{
-        					_slot->insertGoods(_goodsPack);
-        					_npc->getStarSystem()->killMineralById(_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getObId());   
-        					_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->reset();
-        				}			
-        			}
+        		//float dist = distBetweenPoints(_npc->getShip()->getPoints()->getCenter(), *_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getpCenter() ); 
+        		//if (dist < _npc->getShip()->getCollisionRadius()/10)
+        		//{
+        			//if (_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getObTypeId() == MINERAL_ID)
+        			//{
+        				//GoodsPack* _goodsPack = createGoodsPack(MINERAL_ID, vec2f (0, 0));
+        				//_goodsPack->increase(_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getMineral()->getMass());
+        				//ItemSlot* _slot = _npc->getShip()->getEmptyOtsecSlot();
+        				//if (_slot != NULL)
+        				//{
+        					//_slot->insertGoods(_goodsPack);
+        					//_npc->getStarSystem()->killMineralById(_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getObId());   
+        					//_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->reset();
+        				//}			
+        			//}
         			
-        			if (_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getObTypeId() == CONTAINER_ID)
-        			{
-        				_npc->getStarSystem()->removeContainer(_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getObId());
-        			}
-        		}
-        	}
-        }
-
+        			//if (_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getObTypeId() == CONTAINER_ID)
+        			//{
+        				//_npc->getStarSystem()->removeContainer(_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getObId());
+        			//}
+        		//}
+        	//}
+        //}
 }
 
 void MicroScenarioGrab :: Exit(Npc* _npc) const

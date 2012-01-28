@@ -86,6 +86,8 @@ class StateMachine
 				
 		void update_inDynamic();			
 		void update_inStatic();	
+		
+		void reset();
 
 	private:
 		Npc* npc_owner;

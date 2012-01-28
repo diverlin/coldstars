@@ -34,11 +34,12 @@ class LazerEquipment : public CommonForEquipment
 		int getDamage() const;
 		int getRadius() const;
 		
-      		void fireEvent(Turrel*);
-      
+      		void fireEvent_TRUE();
+      		void fireEvent_FALSE();
+      		      
       		bool insertModule(LazerModule*);
       		void virtual updateOwnerPropetries();
-      		
+    		
       	private:
       	      	int damage_orig;
       		int damage_add;

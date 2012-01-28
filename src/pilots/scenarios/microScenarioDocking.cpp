@@ -27,6 +27,7 @@ MicroScenarioDocking :: ~MicroScenarioDocking()
 void MicroScenarioDocking :: enter(Npc* _npc) const
 {	
 	_npc->getShip()->getNavigator()->setTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getPlanet(), FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID);
+	_npc->getShip()->getNavigator()->update_inSpace_inStatic();
 	printf("npc_id = %i, is going to MicroScenarioDocking to ob id = %i\n", _npc->getId(), _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getObId());
 }
 

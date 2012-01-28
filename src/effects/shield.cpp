@@ -52,8 +52,8 @@ void ShieldEffect :: render() const
 {
     	setColor(color);
 
-    	glBindTexture(GL_TEXTURE_2D, texOb->texture);
-    	drawFlatQuadPerVertexIn2D(ship->getPoints()->getBottomLeftShield(), 
+    	drawFlatQuadPerVertexIn2D(texOb,
+    				  ship->getPoints()->getBottomLeftShield(), 
      			     	  ship->getPoints()->getBottomRightShield(), 
      			      	  ship->getPoints()->getTopRightShield(), 
      			      	  ship->getPoints()->getTopLeftShield(), 

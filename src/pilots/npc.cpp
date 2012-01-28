@@ -27,7 +27,7 @@ void Npc :: setKosmoport(Kosmoport* _kosmoport)    { kosmoport = _kosmoport; }
 void Npc :: setLand(Land* _land)   		   { land = _land; }
 void Npc :: setScanTarget(Ship* _ship)             { ship_to_scan = _ship; }
 void Npc :: setPlaceTypeId(int _place_type_id)     { place_type_id = _place_type_id; /*if (ship != NULL) ship->setPlaceTypeId(_place_type_id); */ }
-void Npc :: setControlledByPlayer(bool _controlled_by_player) { controlled_by_player = _controlled_by_player; }
+void Npc :: setUpperControl(bool upper_control) { this->upper_control = upper_control; }
 
 bool Npc :: getGarbageReady() const { return data_life.garbage_ready; }   		
 bool Npc :: getAlive() const 	   { return data_life.is_alive; }
@@ -49,7 +49,7 @@ Observation* Npc :: getObservation() const { return observation; }
 //MacroTaskHolder* Npc :: getMacroTaskSelf() const { return macro_task_self; }
 //MicroTaskHolder* Npc :: getMicroTask() const { return micro_task; }
    		
-bool Npc :: getControlledByPlayer() const { return controlled_by_player; }
+//bool Npc :: getControlledByPlayer() const { return controlled_by_player; }
 unsigned long int Npc :: getCredits() const { return credits; }   
 StateMachine* Npc :: getStateMachine() {return state_machine; }
 
@@ -81,7 +81,7 @@ Npc :: Npc(int _race_id, IdData _data_id, LifeData _data_life, TextureOb* _texOb
 
     	race_id = _race_id;
     	
-    	controlled_by_player = false;
+    	upper_control = false;
 
     	credits = 1000;
    	
@@ -149,28 +149,32 @@ void Npc :: thinkCommon_inLand_inStatic()
 
 void Npc :: update_inSpace_inStatic()
 {
-        checkNeeds();
-           
-     	ship->prepareWeapons();
-        
-	observation->observeAll_inSpace_inStatic();  
-   
+	ship->prepareWeapons();
         ship->grapple_slot.getGrappleEquipment()->validationTargets();
+        ship->droidRepair();
+        // drive work, energy and so on
+               	     		
+	if (upper_control == false)
+	{
+        	checkNeeds();
+                
+		observation->observeAll_inSpace_inStatic();  
+         
         
-        
-        // place model here
-	ai_model->update_inStatic(this);
-	//
+        	// place model here
+		ai_model->update_inStatic(this);
+		//
         
        
-	if (observation->see.ASTEROID == true)
-	{
-                asteroidScenario();
-	}
+		if (observation->see.ASTEROID == true)
+		{
+                	asteroidScenario();
+		}
              
 
-       	state_machine->update_inStatic();                 
-        
+       		state_machine->update_inStatic();                 
+        }
+
         ship->getNavigator()->update_inSpace_inStatic();
 }
 
@@ -325,11 +329,14 @@ void Npc :: updateInfo()
     	info.addNameStr("id/ss_id:");           info.addValueStr( int2str(data_id.id) + " / "  + int2str(starsystem->getId()) );
     	info.addNameStr("race:");   		info.addValueStr( returnRaceStringByRaceId(texOb->race_id) ); 
 
-    	//if (macro_task_self->getValid())
-    	//{   
-    	//info.addNameStr("quest_self:");   	info.addValueStr( macro_task_self->getScenario()->getDescription(this) ); 
-    	//}
-    	    	
+	if (ship->ableTo.GRAB == true)
+	{
+		std::string grab_str = ship->grapple_slot.getGrappleEquipment()->getTargetStr();
+		if (grab_str.size() > 0)
+		{
+			info.addNameStr("grab_id:");   		info.addValueStr( grab_str ); 
+		}
+	}
     	if (state_machine->getCurrentMacroTask()->getScenario() != NULL)
     	{ 	
     	info.addNameStr("macro_task_main:");   	info.addValueStr( state_machine->getCurrentMacroTask()->getScenario()->getDescription(this) ); 
@@ -352,7 +359,7 @@ void Npc :: renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offse
 
 
 
-Npc* generateNpc(int _race_id, int _subtype_id)
+Npc* getNewNpc(int _race_id, int _subtype_id)
 {
 	IdData data_id;
     	data_id.id         = g_NPC_ID_GENERATOR.getNextId(); 
@@ -361,7 +368,7 @@ Npc* generateNpc(int _race_id, int _subtype_id)
     	
     	LifeData data_life;
     	
-       	TextureOb* texOb_face  = g_TEXTURE_MANAGER.returnPointerToRandomFaceTexObWithFolloingAttributes(_race_id);
+       	TextureOb* texOb_face  = g_TEXTURE_MANAGER.getRandomFaceTexObWithFolloingAttributes(_race_id);
 	Npc* npc = new Npc(_race_id, data_id, data_life, texOb_face);
 	
 	return npc;

@@ -17,24 +17,37 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MINERAL_H
-#define MINERAL_H
+#ifndef BOMB_H
+#define BOMB_H
 
 
-class Mineral : public CommonForSpaceItems
+class Bomb : public CommonForSpaceItems
 {
     	public:  
-        	Mineral(IdData _data_id, LifeData _data_life, TextureOb* _texOb);
+        	Bomb(IdData _data_id, LifeData _data_life, TextureOb* _texOb);
+        	~Bomb();
 
+        	int getFunctionalSlotSubTypeId() const;
+        	TextureOb* getTexOb() const;
+        	
+        	int getDamage() const;
+        	int getRadius() const;
+        	
+        	void bindSlot(ItemSlot*);
+		void updateOwnerPropetries();
+			
         	void updateInfo();
         
         	void renderInfo();
+        	void renderInfo(Rect, float, float);
         	
         private:
         	InfoTable info;
+        	int damage;
+        	int radius;
 };
 
-Mineral* createMineral();
+Bomb* getNewBomb();
 
 
 #endif 
