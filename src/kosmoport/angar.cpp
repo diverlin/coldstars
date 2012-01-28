@@ -17,48 +17,43 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "angar.hpp"
-
-
-Angar :: Angar(TextureOb* _texOb_background, TextureOb* _texOb_slot)
+Angar :: Angar(TextureOb* _texOb_background, TextureOb* _texOb_landingArea)
 {
         texOb_background = _texOb_background;
 
-        int slot_w = 120;
+        LandingArea* landingArea0 = new LandingArea(_texOb_landingArea, g_VIEW_WIDTH/2,       g_VIEW_HEIGHT/2,       ANGAR_SLOT_WIDTH, ANGAR_SLOT_HEIGHT);
+        landingArea_vec.push_back(landingArea0);
 
-        LandingArea* pTo_landingArea0 = new LandingArea(_texOb_slot, g_VIEW_WIDTH/2,       g_VIEW_HEIGHT/2,       slot_w, slot_w);
-        landingArea_pList.push_back(pTo_landingArea0);
-
-        LandingArea* pTo_landingArea1 = new LandingArea(_texOb_slot, g_VIEW_WIDTH/2 + 150, g_VIEW_HEIGHT/2,       slot_w, slot_w);
-        landingArea_pList.push_back(pTo_landingArea1);
+        LandingArea* landingArea1 = new LandingArea(_texOb_landingArea, g_VIEW_WIDTH/2 + 150, g_VIEW_HEIGHT/2,       ANGAR_SLOT_WIDTH, ANGAR_SLOT_HEIGHT);
+        landingArea_vec.push_back(landingArea1);
     
-        LandingArea* pTo_landingArea2 = new LandingArea(_texOb_slot, g_VIEW_WIDTH/2 - 150, g_VIEW_HEIGHT/2,       slot_w, slot_w);
-        landingArea_pList.push_back(pTo_landingArea2);
+        LandingArea* landingArea2 = new LandingArea(_texOb_landingArea, g_VIEW_WIDTH/2 - 150, g_VIEW_HEIGHT/2,       ANGAR_SLOT_WIDTH, ANGAR_SLOT_HEIGHT);
+        landingArea_vec.push_back(landingArea2);
 
-        LandingArea* pTo_landingArea3 = new LandingArea(_texOb_slot, g_VIEW_WIDTH/2,       g_VIEW_HEIGHT/2 + 150, slot_w, slot_w);
-        landingArea_pList.push_back(pTo_landingArea3);
+        LandingArea* landingArea3 = new LandingArea(_texOb_landingArea, g_VIEW_WIDTH/2,       g_VIEW_HEIGHT/2 + 150, ANGAR_SLOT_WIDTH, ANGAR_SLOT_HEIGHT);
+        landingArea_vec.push_back(landingArea3);
 
-        LandingArea* pTo_landingArea4 = new LandingArea(_texOb_slot, g_VIEW_WIDTH/2,       g_VIEW_HEIGHT/2 - 150, slot_w, slot_w);
-        landingArea_pList.push_back(pTo_landingArea4);
+        LandingArea* landingArea4 = new LandingArea(_texOb_landingArea, g_VIEW_WIDTH/2,       g_VIEW_HEIGHT/2 - 150, ANGAR_SLOT_WIDTH, ANGAR_SLOT_HEIGHT);
+        landingArea_vec.push_back(landingArea4);
 }
 
 
 int Angar :: getNumFreelandingArea()
 {
         int sum_free = 0;
-        for (unsigned int la = 0; la < landingArea_pList.size(); la++)
-                if (landingArea_pList[la]->getBusyFlag() == false)
+        for (unsigned int la = 0; la < landingArea_vec.size(); la++)
+                if (landingArea_vec[la]->getBusyFlag() == false)
                         sum_free++;
         return sum_free; 
 }
 
 bool Angar :: addShip(Ship* _ship)
 {
-        for (unsigned int la = 0; la < landingArea_pList.size(); la++)
+        for (unsigned int la = 0; la < landingArea_vec.size(); la++)
         {
-                if (landingArea_pList[la]->getBusyFlag() == false)
+                if (landingArea_vec[la]->getBusyFlag() == false)
                 {
-                        landingArea_pList[la]->insertShip(_ship);
+                        landingArea_vec[la]->insertShip(_ship);
                         return true;
                 }
         }
@@ -69,13 +64,13 @@ bool Angar :: addShip(Ship* _ship)
 
 bool Angar :: removeShipFromlandingAreaById(int _id)
 {
-        for (unsigned int la = 0; la < landingArea_pList.size(); la++)
+        for (unsigned int la = 0; la < landingArea_vec.size(); la++)
         {
-                if (landingArea_pList[la]->getBusyFlag() == true)
+                if (landingArea_vec[la]->getBusyFlag() == true)
                 {
-                        if (landingArea_pList[la]->getShip()->getId() == _id)
+                        if (landingArea_vec[la]->getShip()->getId() == _id)
                         {
-                                landingArea_pList[la]->removeShip();
+                                landingArea_vec[la]->removeShip();
                                 return true;
                         }
                 }
@@ -87,9 +82,9 @@ bool Angar :: removeShipFromlandingAreaById(int _id)
 
 void Angar :: resetSlotsRenderInfoFlag()
 {
-        for (unsigned int i = 0; i < landingArea_pList.size(); i++)
+        for (unsigned int i = 0; i < landingArea_vec.size(); i++)
         {
-                landingArea_pList[i]->setCursoredFlag(false);
+                landingArea_vec[i]->setCursoredFlag(false);
         }
 }
 
@@ -99,21 +94,21 @@ void Angar :: mouseControl()
         //bool lmb = g_MOUSE_LEFT_BUTTON; 
         bool rmb = g_MOUSE_RIGHT_BUTTON; 
 
-        for (unsigned int i = 0; i < landingArea_pList.size(); i++)
+        for (unsigned int i = 0; i < landingArea_vec.size(); i++)
         { 
                 float dist = distBetweenPoints(g_MOUSE_POS_X, 
                                                 g_VIEW_HEIGHT - g_MOUSE_POS_Y, 
-                                                landingArea_pList[i]->getRect().getCenter().x, 
-                                                landingArea_pList[i]->getRect().getCenter().y);
+                                                landingArea_vec[i]->getRect().getCenter().x, 
+                                                landingArea_vec[i]->getRect().getCenter().y);
         				
-                if (dist < landingArea_pList[i]->getRect().getWidth()/2)
+                if (dist < landingArea_vec[i]->getRect().getWidth()/2)
                 {
-                        landingArea_pList[i]->setCursoredFlag(true);
+                        landingArea_vec[i]->setCursoredFlag(true);
                         if (rmb == true)
                         {
-                                if (landingArea_pList[i]->getBusyFlag() == true)
+                                if (landingArea_vec[i]->getBusyFlag() == true)
                                 {
-                                        pPLAYER->getPilot()->setScanTarget(landingArea_pList[i]->getShip());
+                                        pPLAYER->getPilot()->setScanTarget(landingArea_vec[i]->getShip());
                                         pPLAYER->setScanFlag(true);
                                         g_GUI_SHIP->configure(pPLAYER->getPilot()->getScanShip(), false, false); 
                                 }
@@ -147,32 +142,32 @@ void Angar :: render() const
 void Angar :: renderBackground() const
 {
      	Rect screen_rect = Rect(0, 0, g_VIEW_WIDTH, g_VIEW_HEIGHT);
-     	drawTexturedRect(texOb_background->texture, screen_rect, -2);  
+     	drawTexturedRect(texOb_background, screen_rect, -2);  
 }
 
 void Angar :: renderInternals() const
 {
-        for (unsigned int li = 0; li < landingArea_pList.size(); li++)
+        for (unsigned int li = 0; li < landingArea_vec.size(); li++)
         {
-                landingArea_pList[li]->renderArea();
+                landingArea_vec[li]->renderArea();
         }
 
-        for (unsigned int li = 0; li < landingArea_pList.size(); li++)
+        for (unsigned int li = 0; li < landingArea_vec.size(); li++)
         {
-                if (landingArea_pList[li]->getBusyFlag() == true)
+                if (landingArea_vec[li]->getBusyFlag() == true)
                 {
-                        landingArea_pList[li]->renderInternals();
+                        landingArea_vec[li]->renderInternals();
                 }
         }
 }
 
 void Angar :: renderItemInfo() const
 {
-        for (unsigned int li = 0; li < landingArea_pList.size(); li++)
+        for (unsigned int li = 0; li < landingArea_vec.size(); li++)
         {
-                if (landingArea_pList[li]->getCursoredFlag() == true)
-                        if (landingArea_pList[li]->getBusyFlag() == true)
-                                landingArea_pList[li]->renderInfo();
+                if (landingArea_vec[li]->getCursoredFlag() == true)
+                        if (landingArea_vec[li]->getBusyFlag() == true)
+                                landingArea_vec[li]->renderInfo();
         }
 }
             

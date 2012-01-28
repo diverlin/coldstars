@@ -28,7 +28,7 @@ Turrel :: Turrel(ItemSlot* _slot, vec2f* _pCenter)
                  
         pCenter  = _pCenter;
         
-        targetOb = new TargetObject(slot);
+        targetOb = new TargetObject();
 }
 
 
@@ -59,7 +59,7 @@ void Turrel :: setTexOb(TextureOb* _texOb)
 
 bool Turrel :: validateTarget()
 {
-        targetOb->validation();    
+        slot->targetObValidation(targetOb);    
                         
     	return targetOb->getValid();
 }
@@ -87,37 +87,24 @@ bool Turrel :: fireEvent_TRUE()
 	{
     		case LAZER_EQUIPMENT_ID:
     		{   
-       			slot->getLazerEquipment()->fireEvent(this);
+       			slot->getLazerEquipment()->fireEvent_TRUE();
 
-       			if (targetOb->getObTypeId() == SHIP_ID) 
-       			{ 
-           			targetOb->getShip()->hit_TRUE(slot->getLazerEquipment()->getDamage());
-           			return true;
-       			} 
-
-       			if (targetOb->getObTypeId() == ASTEROID_ID)  
-       			{ 
-           			targetOb->getAsteroid()->hit_TRUE(slot->getLazerEquipment()->getDamage());
-           			return true;
+			switch(targetOb->getObTypeId())
+			{
+				case SHIP_ID:      { targetOb->getShip()->hit_TRUE(slot->getLazerEquipment()->getDamage());      return true; break; }
+       				case ASTEROID_ID:  { targetOb->getAsteroid()->hit_TRUE(slot->getLazerEquipment()->getDamage());  return true; break; }
+				case MINERAL_ID:   { targetOb->getMineral()->hit_TRUE(slot->getLazerEquipment()->getDamage());   return true; break; }
+				case CONTAINER_ID: { targetOb->getContainer()->hit_TRUE(slot->getLazerEquipment()->getDamage()); return true; break; }
+				case BOMB_ID:      { targetOb->getBomb()->hit_TRUE(slot->getLazerEquipment()->getDamage());    	 return true; break; }
        			}
-
-       			if (targetOb->getObTypeId() == MINERAL_ID)  
-       			{ 
-           			targetOb->getMineral()->hit_TRUE(slot->getLazerEquipment()->getDamage());
-           			return true;
-       			}
-
-       			if (targetOb->getObTypeId() == CONTAINER_ID)  
-       			{ 
-           			targetOb->getContainer()->hit_TRUE(slot->getLazerEquipment()->getDamage());
-           			return true;
-       			}
+       			
+       			break;
     		}
 
     		case ROCKET_EQUIPMENT_ID:
     		{       
-                	slot->getRocketEquipment()->fireEvent();
-                	return true;                
+                	slot->getRocketEquipment()->fireEvent_TRUE();
+                	return true; break;              
     		}
 
 	}
@@ -131,7 +118,33 @@ bool Turrel :: fireEvent_TRUE()
 
 bool Turrel :: fireEvent_FALSE()
 {
-   	return fireEvent_TRUE();
+	switch(slot->getItemSubTypeId())
+	{
+    		case LAZER_EQUIPMENT_ID:
+    		{   
+   			slot->getLazerEquipment()->fireEvent_FALSE();
+
+			switch(targetOb->getObTypeId())
+			{
+				case SHIP_ID:      { targetOb->getShip()->hit_FALSE(slot->getLazerEquipment()->getDamage());      return true; break; }
+       				case ASTEROID_ID:  { targetOb->getAsteroid()->hit_FALSE(slot->getLazerEquipment()->getDamage());  return true; break; }
+				case MINERAL_ID:   { targetOb->getMineral()->hit_FALSE(slot->getLazerEquipment()->getDamage());   return true; break; }
+				case CONTAINER_ID: { targetOb->getContainer()->hit_FALSE(slot->getLazerEquipment()->getDamage()); return true; break; }
+				case BOMB_ID:      { targetOb->getBomb()->hit_FALSE(slot->getLazerEquipment()->getDamage());    	 return true; break; }
+       			}
+       			
+       			break;
+    		}
+
+    		case ROCKET_EQUIPMENT_ID:
+    		{       
+                	slot->getRocketEquipment()->fireEvent_FALSE();
+                	return true; break;            
+    		}
+
+	}
+	
+    	return false;
 }
 
 
@@ -162,9 +175,9 @@ void Turrel :: render(float _tur_angle_inD)
     	points.setAngle(_tur_angle_inD);
     	points.update();
         
-                
-   	glBindTexture(GL_TEXTURE_2D, texOb->texture); 
-    	drawFlatQuadPerVertexIn2D(points.getBottomLeft(), 
+
+    	drawFlatQuadPerVertexIn2D(texOb,
+    				  points.getBottomLeft(), 
                                   points.getBottomRight(), 
                                   points.getTopRight(), 
                                   points.getTopLeft(), 

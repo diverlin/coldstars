@@ -32,10 +32,9 @@ LazerEquipment :: LazerEquipment(TextureOb* _texOb_item,
 
    	//TextureOb lazerEffect_texOb   = TEXTURE_MANAGER.returnLazerEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id);
    	//TextureOb particle_texOb = TEXTURE_MANAGER.returnParticleTexObBy_ColorID(self.item_texOb.color_id);
-   	texOb_turrel	  = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.turrel_texOb_pList); 
-   	texOb_lazerEffect = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.lazerEffect_texOb_pList);
-   	//texOb_particle    = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.particles_texOb_pList);
-   	texOb_particle    = g_TEXTURE_MANAGER.returnParticleTexObByColorId(texOb_lazerEffect->color_id);
+   	texOb_turrel	  = g_TEXTURE_MANAGER.getRandomTexOb(TURREL_TEXTURE_ID); 
+   	texOb_lazerEffect = g_TEXTURE_MANAGER.getRandomTexOb(LAZER_EFFECT_TEXTURE_ID);
+   	texOb_particle    = g_TEXTURE_MANAGER.getParticleTexObByColorId(texOb_lazerEffect->color_id);
    	   
    	updatePropetries();
    	countPrice();
@@ -83,7 +82,6 @@ void LazerEquipment :: updateOwnerPropetries()
 }
 
 
-
 void LazerEquipment :: addUniqueInfo()
 {
     	info.addTitleStr("LAZER");
@@ -111,52 +109,41 @@ std::string LazerEquipment :: getRadiusStr()
 
 
 
-void LazerEquipment :: fireEvent(Turrel* _turrel)
+void LazerEquipment :: fireEvent_TRUE()
 { 
-        
-     //if l_owner.energy > (WEAPON_ENERGY_CONSUMPTION_RATE * self.damage):
-        //lazer.play()
-        //l = lazerEffect((self.l_tex, (self.l_w, self.l_h)), l_owner, l_target, self.particle_texOb, self.pSize)
-        //l.starsystem.effect_LAZER_list.append(l)
-
-        //l_owner.energy       -= WEAPON_ENERGY_CONSUMPTION_RATE * self.damage
-
-        //l_target.hit(l_owner, self)
-             
-        //if l_target.type == SHIP_ID:
-           //l_target.temperature  += WEAPON_HEATING_RATE * self.damage
-
-    	// LAZER TRACE EFFECT
     	LazerTraceEffect* _lazer_trace_effect;
     	if (slot->getOwnerShip()->data_korpus.render_TURRELS == true)
     	{
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
                                                       	      texOb_particle, 
                                                      	      100, 
-                                                     	      &_turrel->getpCenter()->x, 
-                                                              &_turrel->getpCenter()->y, 
-                                                              &_turrel->getTargetOb()->getpCenter()->x, 
-                                                              &_turrel->getTargetOb()->getpCenter()->y);
+                                                     	      slot->getTurrel()->getpCenter(), 
+                                                              slot->getTurrel()->getTargetOb()->getpCenter());
         }
     	else
     	{
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
                                                               texOb_particle, 
                                                               100, 
-                                                              &(slot->getOwnerShip()->getPoints()->getpCenter()->x), 
-                                                              &(slot->getOwnerShip()->getPoints()->getpCenter()->y), 
-                                                              &_turrel->getTargetOb()->getpCenter()->x, 
-                                                              &_turrel->getTargetOb()->getpCenter()->y);
+                                                              slot->getOwnerShip()->getPoints()->getpCenter(), 
+                                                              slot->getTurrel()->getTargetOb()->getpCenter());
         }
     
     	// DAMAGE effect
-	DamageEffect* _damage_effect = createDamageEffect(texOb_particle, _turrel->getTargetOb()->getpCenter());
+	DamageEffect* _damage_effect = createDamageEffect(texOb_particle, slot->getTurrel()->getTargetOb()->getpCenter());
     	_lazer_trace_effect->setDamageEffect(_damage_effect);
     	
     	deterioration();
     	
     	slot->getOwnerShip()->getStarSystem()->add(_lazer_trace_effect);
     	slot->getOwnerShip()->getStarSystem()->add(_damage_effect);
+} 
+
+
+
+void LazerEquipment :: fireEvent_FALSE()
+{ 
+    	deterioration();
 } 
 
 
@@ -193,7 +180,7 @@ LazerEquipment* lazerEquipmentGenerator(int race_id, int revision_id)
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(LAZER_ITEM_TEXTURE_ID, revision_id)
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.LazerEquipment_texOb_pList);     
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(LAZER_ITEM_TEXTURE_ID);     
 
     	int damage_orig     = getRandInt(LAZER_DAMAGE_MIN, LAZER_DAMAGE_MAX);
     	int radius_orig     = getRandInt(LAZER_RADIUS_MIN, LAZER_RADIUS_MAX);

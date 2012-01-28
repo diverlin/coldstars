@@ -219,8 +219,8 @@ Planet* createPlanet(int orbit_radius)
     	planet_data.speed         = (float)getRandInt(PLANET_SPEED_MIN, PLANET_SPEED_MAX) / (float)orbit_radius;
 
 
-        TextureOb* texOb 	    = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.planet_texOb_pList); 
-        TextureOb* texOb_atmosphere = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.atmosphere_texOb_pList); 
+        TextureOb* texOb 	    = g_TEXTURE_MANAGER.getRandomTexOb(PLANET_TEXTURE_ID); 
+        TextureOb* texOb_atmosphere = g_TEXTURE_MANAGER.getRandomTexOb(ATMOSPHERE_TEXTURE_ID); 
         
         unsigned long int population = getRandInt(1000, 4000);
         

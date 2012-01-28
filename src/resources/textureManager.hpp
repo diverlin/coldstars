@@ -44,123 +44,126 @@ struct UniqueTextureCollector
 class TextureManager
 {   
 	public:
-        	//VEC_pTexOb_type texOb_pList;
-        	VEC_pTexOb_type slot_texOb_pList;
-        	VEC_pTexOb_type turrel_texOb_pList;
+        	TextureManager();
+        	~TextureManager();
+        	
+        	void manage(TextureOb*);
+
+        	TextureOb* getRandomFaceTexObWithFolloingAttributes(int _race_id);
+        	TextureOb* getRandomShipTexObWithFollowingAtrributes(int _race_id, int _subtype_id, int _size_id);
+
+        	TextureOb* getParticleTexObByColorId(int _color_id);
+        	
+		TextureOb* getRandomTexOb(int);
+
+        	void DEBUG_CheckShipTexOb();
+        	
+        private:
+        	std::vector<TextureOb*> slot_texOb_vec;
+        	std::vector<TextureOb*> landingArea_texOb_vec;
+        	std::vector<TextureOb*> turrel_texOb_vec;
 
         	// BACKGROUND 
-        	VEC_pTexOb_type nebulaBgEffect_texOb_pList;
-        	VEC_pTexOb_type starBgEffect_texOb_pList;
+        	std::vector<TextureOb*> nebulaBgEffect_texOb_vec;
+        	std::vector<TextureOb*> starBgEffect_texOb_vec;
 
-          	// BACKGROUND AT PLANET (KOSMOPORT)
-          	VEC_pTexOb_type angarBg_texOb_pList;
-          	VEC_pTexOb_type storeBg_texOb_pList;
-          	VEC_pTexOb_type shopBg_texOb_pList;
-          	VEC_pTexOb_type govermentBg_texOb_pList;
-          	// BACKGROUND AT PLANET (UNINHABITED LAND)
-          	VEC_pTexOb_type landBg_texOb_pList;
+          	// BACKGROUND AT PLANET 
+          	std::vector<TextureOb*> angarBg_texOb_vec;
+          	std::vector<TextureOb*> storeBg_texOb_vec;
+          	std::vector<TextureOb*> shopBg_texOb_vec;
+          	std::vector<TextureOb*> govermentBg_texOb_vec;
+          	std::vector<TextureOb*> landBg_texOb_vec;
 
         	// PARTICLES
-        	VEC_pTexOb_type particles_texOb_pList;
-        	VEC_pTexOb_type rocketBullet_texOb_pList;
-        	VEC_pTexOb_type lazerEffect_texOb_pList;
-        	VEC_pTexOb_type shieldEffect_texOb_pList;
+        	std::vector<TextureOb*> particles_texOb_vec;
+        	std::vector<TextureOb*> rocketBullet_texOb_vec;
+        	std::vector<TextureOb*> lazerEffect_texOb_vec;
+        	std::vector<TextureOb*> shieldEffect_texOb_vec;
 
 
         	// SPACE OBJECTS
-        	VEC_pTexOb_type star_texOb_pList;
-        	VEC_pTexOb_type planet_texOb_pList;
-        	VEC_pTexOb_type atmosphere_texOb_pList;
-        	VEC_pTexOb_type asteroid_texOb_pList;  
-        	VEC_pTexOb_type mineral_texOb_pList;   
-
-        	VEC_pTexOb_type container_texOb_pList;  
-        	VEC_pTexOb_type bomb_texOb_pList;   
-
+        	std::vector<TextureOb*> star_texOb_vec;
+        	std::vector<TextureOb*> planet_texOb_vec;
+        	std::vector<TextureOb*> atmosphere_texOb_vec;
+        	std::vector<TextureOb*> asteroid_texOb_vec;  
+        	std::vector<TextureOb*> mineral_texOb_vec;   
+        	std::vector<TextureOb*> container_texOb_vec;  
+        	std::vector<TextureOb*> bomb_texOb_vec;   
+        	std::vector<TextureOb*> blackhole_texOb_vec;  
+        	
         	// SHIPS
-        	VEC_pTexOb_type ship_race0_ranger_texOb_pList;
-        	VEC_pTexOb_type ship_race0_warrior_texOb_pList;
-        	VEC_pTexOb_type ship_race0_trader_texOb_pList;
-        	VEC_pTexOb_type ship_race0_pirat_texOb_pList;
-        	VEC_pTexOb_type ship_race0_diplomat_texOb_pList;
+        	std::vector<TextureOb*> ship_race0_ranger_texOb_vec;
+        	std::vector<TextureOb*> ship_race0_warrior_texOb_vec;
+        	std::vector<TextureOb*> ship_race0_trader_texOb_vec;
+        	std::vector<TextureOb*> ship_race0_pirat_texOb_vec;
+        	std::vector<TextureOb*> ship_race0_diplomat_texOb_vec;
 
-        	VEC_pTexOb_type ship_race1_ranger_texOb_pList;
-        	VEC_pTexOb_type ship_race1_warrior_texOb_pList;
-        	VEC_pTexOb_type ship_race1_trader_texOb_pList;
-        	VEC_pTexOb_type ship_race1_pirat_texOb_pList;
-        	VEC_pTexOb_type ship_race1_diplomat_texOb_pList;
+        	std::vector<TextureOb*> ship_race1_ranger_texOb_vec;
+        	std::vector<TextureOb*> ship_race1_warrior_texOb_vec;
+        	std::vector<TextureOb*> ship_race1_trader_texOb_vec;
+        	std::vector<TextureOb*> ship_race1_pirat_texOb_vec;
+        	std::vector<TextureOb*> ship_race1_diplomat_texOb_vec;
 
-        	VEC_pTexOb_type ship_race2_ranger_texOb_pList;
-        	VEC_pTexOb_type ship_race2_warrior_texOb_pList;
-        	VEC_pTexOb_type ship_race2_trader_texOb_pList;
-        	VEC_pTexOb_type ship_race2_pirat_texOb_pList;
-        	VEC_pTexOb_type ship_race2_diplomat_texOb_pList;
+        	std::vector<TextureOb*> ship_race2_ranger_texOb_vec;
+        	std::vector<TextureOb*> ship_race2_warrior_texOb_vec;
+        	std::vector<TextureOb*> ship_race2_trader_texOb_vec;
+        	std::vector<TextureOb*> ship_race2_pirat_texOb_vec;
+        	std::vector<TextureOb*> ship_race2_diplomat_texOb_vec;
 
-        	VEC_pTexOb_type ship_race3_ranger_texOb_pList;
-        	VEC_pTexOb_type ship_race3_warrior_texOb_pList;
-        	VEC_pTexOb_type ship_race3_trader_texOb_pList;
-        	VEC_pTexOb_type ship_race3_pirat_texOb_pList;
-        	VEC_pTexOb_type ship_race3_diplomat_texOb_pList;
+        	std::vector<TextureOb*> ship_race3_ranger_texOb_vec;
+        	std::vector<TextureOb*> ship_race3_warrior_texOb_vec;
+        	std::vector<TextureOb*> ship_race3_trader_texOb_vec;
+        	std::vector<TextureOb*> ship_race3_pirat_texOb_vec;
+        	std::vector<TextureOb*> ship_race3_diplomat_texOb_vec;
 
-        	VEC_pTexOb_type ship_race4_ranger_texOb_pList;
-        	VEC_pTexOb_type ship_race4_warrior_texOb_pList;
-        	VEC_pTexOb_type ship_race4_trader_texOb_pList;
-        	VEC_pTexOb_type ship_race4_pirat_texOb_pList;
-        	VEC_pTexOb_type ship_race4_diplomat_texOb_pList;
+        	std::vector<TextureOb*> ship_race4_ranger_texOb_vec;
+        	std::vector<TextureOb*> ship_race4_warrior_texOb_vec;
+        	std::vector<TextureOb*> ship_race4_trader_texOb_vec;
+        	std::vector<TextureOb*> ship_race4_pirat_texOb_vec;
+        	std::vector<TextureOb*> ship_race4_diplomat_texOb_vec;
 
-        	VEC_pTexOb_type ship_race6_ranger_texOb_pList;
-        	VEC_pTexOb_type ship_race6_warrior_texOb_pList;
-       		VEC_pTexOb_type ship_race6_trader_texOb_pList;
-        	VEC_pTexOb_type ship_race6_pirat_texOb_pList;
-        	VEC_pTexOb_type ship_race6_diplomat_texOb_pList;
+        	std::vector<TextureOb*> ship_race6_ranger_texOb_vec;
+        	std::vector<TextureOb*> ship_race6_warrior_texOb_vec;
+       		std::vector<TextureOb*> ship_race6_trader_texOb_vec;
+        	std::vector<TextureOb*> ship_race6_pirat_texOb_vec;
+        	std::vector<TextureOb*> ship_race6_diplomat_texOb_vec;
 
-        	VEC_pTexOb_type ship_race7_ranger_texOb_pList;
-        	VEC_pTexOb_type ship_race7_warrior_texOb_pList;
-        	VEC_pTexOb_type ship_race7_trader_texOb_pList;
-        	VEC_pTexOb_type ship_race7_pirat_texOb_pList;
-        	VEC_pTexOb_type ship_race7_diplomat_texOb_pList;
+        	std::vector<TextureOb*> ship_race7_ranger_texOb_vec;
+        	std::vector<TextureOb*> ship_race7_warrior_texOb_vec;
+        	std::vector<TextureOb*> ship_race7_trader_texOb_vec;
+        	std::vector<TextureOb*> ship_race7_pirat_texOb_vec;
+        	std::vector<TextureOb*> ship_race7_diplomat_texOb_vec;
 
 
 
         	// ITEMS
-        	VEC_pTexOb_type LazerEquipment_texOb_pList;
-        	VEC_pTexOb_type RocketEquipment_texOb_pList;
-        	VEC_pTexOb_type DriveEquipment_texOb_pList;
-        	VEC_pTexOb_type ProtectorEquipment_texOb_pList;
-        	VEC_pTexOb_type DroidEquipment_texOb_pList;
-        	VEC_pTexOb_type GrappleEquipment_texOb_pList;
-        	VEC_pTexOb_type BakEquipment_texOb_pList;
-        	VEC_pTexOb_type energyBlockItem_texOb_pList;
-        	VEC_pTexOb_type FreezerEquipment_texOb_pList;
-        	VEC_pTexOb_type RadarEquipment_texOb_pList;
-        	VEC_pTexOb_type ScanerEquipment_texOb_pList;
+        	std::vector<TextureOb*> lazerEquipment_texOb_vec;
+        	std::vector<TextureOb*> rocketEquipment_texOb_vec;
+        	std::vector<TextureOb*> driveEquipment_texOb_vec;
+        	std::vector<TextureOb*> protectorEquipment_texOb_vec;
+        	std::vector<TextureOb*> droidEquipment_texOb_vec;
+        	std::vector<TextureOb*> grappleEquipment_texOb_vec;
+        	std::vector<TextureOb*> bakEquipment_texOb_vec;
+        	std::vector<TextureOb*> energyBlockEquipment_texOb_vec;
+        	std::vector<TextureOb*> freezerEquipment_texOb_vec;
+        	std::vector<TextureOb*> radarEquipment_texOb_vec;
+        	std::vector<TextureOb*> scanerEquipment_texOb_vec;
 
         	// FACE
-        	VEC_pTexOb_type face_race0_texOb_pList;
-        	VEC_pTexOb_type face_race1_texOb_pList;
-       		VEC_pTexOb_type face_race2_texOb_pList;
-        	VEC_pTexOb_type face_race3_texOb_pList;
-       		VEC_pTexOb_type face_race4_texOb_pList;
-        	VEC_pTexOb_type face_race6_texOb_pList;
-        	VEC_pTexOb_type face_race7_texOb_pList;
-        	VEC_pTexOb_type textBackground_texOb_pList;
+        	std::vector<TextureOb*> face_race0_texOb_vec;
+        	std::vector<TextureOb*> face_race1_texOb_vec;
+       		std::vector<TextureOb*> face_race2_texOb_vec;
+        	std::vector<TextureOb*> face_race3_texOb_vec;
+       		std::vector<TextureOb*> face_race4_texOb_vec;
+        	std::vector<TextureOb*> face_race6_texOb_vec;
+        	std::vector<TextureOb*> face_race7_texOb_vec;
+        	
+        	std::vector<TextureOb*> textBackground_texOb_vec;
+        	
+        	TextureOb* getRandomTexObFromList(std::vector<TextureOb*>*);
+       		TextureOb* getShipTexObByClosestSizeFromList(std::vector<TextureOb*>* pTo_list, int _size_id);
+        	TextureOb* getShipTexObBySizeFromList(std::vector<TextureOb*>* pTo_list, int _size_id);
 
-        	TextureManager();
-        	void manage(TextureOb* pTo_texOb);
-        	void manageItem(TextureOb* pTo_texOb);
-        	void manage_face(TextureOb* pTo_texOb);
-        	TextureOb* returnPointerToRandomTexObFromList(VEC_pTexOb_type* pTo_list);
-
-        	TextureOb* returnPointerToShipTexObByClosestSizeFromList(VEC_pTexOb_type* pTo_list, int _size_id);
-        	TextureOb* returnPointerToShipTexObBySizeFromList(VEC_pTexOb_type* pTo_list, int _size_id);
-
-        	TextureOb* returnPointerToRandomFaceTexObWithFolloingAttributes(int _race_id);
-        	TextureOb* returnPointerToRandomShipTexObWithFollowingAtrributes(int _race_id, int _subtype_id, int _size_id);
-
-
-        	TextureOb* returnParticleTexObByColorId(int _color_id);
-
-        	void DEBUG_CheckShipTexOb();
 };
 
         

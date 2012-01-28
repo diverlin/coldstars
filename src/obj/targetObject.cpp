@@ -17,25 +17,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-TargetObject :: TargetObject(ItemSlot* _slot)
+TargetObject :: TargetObject()
 {
-        slot = _slot;
-     
         reset();
 }
 
 
 TargetObject :: ~TargetObject()
 {}
-
-
-void TargetObject :: bindSlot(ItemSlot* _slot) { slot = _slot; }
                 
                 
 bool TargetObject :: getValid() const     { return is_valid; }
 int TargetObject :: getObId() const       { return ob_id; }
 int TargetObject :: getObTypeId() const   { return ob_type_id; }
 int TargetObject :: getObPlaceTypeId() const { return *pTo_place_type_id; }
+int* TargetObject :: getpObPlaceTypeId() const { return pTo_place_type_id; }
                 
 Star* TargetObject :: getStar()   	      { return star; }
 Planet* TargetObject :: getPlanet()   	      { return planet; }
@@ -45,6 +41,7 @@ Container* TargetObject :: getContainer()     { return container; }
 Ship* TargetObject :: getShip()               { return ship; }
 Npc* TargetObject :: getNpc() const           { return npc; }
 StarSystem* TargetObject :: getStarSystem()   { return starsystem; }
+Bomb* TargetObject :: getBomb() const         { return bomb; }
                 
 vec2f* TargetObject :: getpCenter() { return pCenter; }
 bool* TargetObject :: getpAlive()   { return pTo_is_alive; } 
@@ -80,6 +77,7 @@ void TargetObject :: set(Container* _container)    { container = _container; }
 void TargetObject :: set(Ship* _ship)              { ship = _ship; }
 void TargetObject :: set(Npc* _npc)                { npc = _npc; }
 void TargetObject :: set(StarSystem* _starsystem)  { starsystem = _starsystem; }
+void TargetObject :: set(Bomb* bomb)              { this->bomb = bomb; }
 
 void TargetObject :: reset()
 {
@@ -90,6 +88,7 @@ void TargetObject :: reset()
         container  = NULL;
 	ship       = NULL;
 	npc        = NULL;
+	bomb       = NULL;
         
         pCenter      = NULL;
         pTo_is_alive = NULL;
@@ -104,28 +103,69 @@ void TargetObject :: reset()
         is_valid = false; 
 }
 
+void TargetObject :: copy(TargetObject* tgOb)
+{
+	star	   = tgOb->getStar();
+	planet 	   = tgOb->getPlanet();
+        asteroid   = tgOb->getAsteroid();
+        mineral    = tgOb->getMineral();
+        container  = tgOb->getContainer();
+	ship       = tgOb->getShip();
+	npc        = tgOb->getNpc();
+	bomb       = tgOb->getBomb();
+        
+        pCenter      = tgOb->getpCenter();
+        pTo_is_alive = tgOb->getpAlive();
+        pTo_place_type_id = tgOb->getpObPlaceTypeId();
+        starsystem   = tgOb->getStarSystem();
+        
+        collision_radius = tgOb->getCollisionRadius();
+        
+        ob_id      = tgOb->getObId(); 
+	ob_type_id = tgOb->getObTypeId();
+        
+        is_valid = tgOb->getValid(); 
+
+}
       
 void TargetObject :: moveExternalyToPosition(vec2f _target_pos)
 {
-	if (ob_type_id == MINERAL_ID)
+	switch(ob_type_id)
 	{
-		mineral->moveExternalyToPosition(_target_pos);
-	}
+		case MINERAL_ID:
+		{
+			mineral->moveExternalyToPosition(_target_pos);
+			break;
+		}
 	
-	if (ob_type_id == CONTAINER_ID)
-	{
-		container->moveExternalyToPosition(_target_pos);
+		case CONTAINER_ID:
+		{
+			container->moveExternalyToPosition(_target_pos);
+			break;
+		}	
+	
+		case BOMB_ID:
+		{
+			bomb->moveExternalyToPosition(_target_pos);
+			break;
+		}
+
+		case SHIP_ID:
+		{
+			ship->moveExternalyToPosition(_target_pos);
+			break;
+		}
 	}
 }
 
 
-bool TargetObject :: checkAvaliability()
+bool TargetObject :: checkAvaliability(StarSystem* _starsystem)
 {
         if (*pTo_is_alive == true) 
         {
                 if (*pTo_place_type_id == SPACE_ID)
                 { 
-                        if (starsystem == slot->getOwnerShip()->getStarSystem()) 
+                        if (starsystem == _starsystem) 
                         {       
                                 return true;
                         }
@@ -137,34 +177,19 @@ bool TargetObject :: checkAvaliability()
 }
 
 
-bool TargetObject :: checkDistance()
-{
-	if (ob_type_id == STARSYSTEM_ID)
-	{
-		return true;
-	}
-	
-        float dist = distBetweenPoints(slot->getOwnerShip()->getPoints()->getCenter(), *pCenter);                                               
-    	if (dist < slot->getItemRadius())
-        {
-                return true;
-        }
-        else return false;
-}
-
-
-void TargetObject :: validation()
+bool TargetObject :: validation(StarSystem* _starsystem)
 {        
         if (is_valid == true)
         { 
-                if ( checkAvaliability() == true)
+                if ( checkAvaliability(_starsystem) == true)
                 {
-                        if (checkDistance() == true)
-                        {
-                                return;
-                        }
+                	return true;
                 }
-                
-                reset();
+                else
+                {              
+                	reset();
+                }
         }
+        
+        return false;
 }

@@ -21,20 +21,30 @@ void Ship :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; 
 void Ship :: setNpc(Npc* _npc)                      { npc_owner = _npc; }
 void Ship :: setPlaceTypeId(int _place_type_id)     { place_type_id = _place_type_id; }
 
-int Ship :: getId() const           { return data_id.id; }
-int Ship :: getTypeId() const       { return data_id.type_id; }
-int Ship :: getPlaceTypeId() const  { return place_type_id; } 
+int Ship :: getId() const            { return data_id.id; }
+int Ship :: getTypeId() const        { return data_id.type_id; }
+int Ship :: getSubTypeId() const     { return data_id.subtype_id; }
+int Ship :: getPlaceTypeId() const   { return place_type_id; } 
 bool Ship :: getGarbageReady() const { return data_life.garbage_ready; }
-bool Ship :: getAlive() const       { return data_life.is_alive; }
-bool* Ship :: getpAlive()           { return &data_life.is_alive; }
-int* Ship :: getpPlaceTypeId()      { return &place_type_id; }
-int Ship :: getArmor() const        { return data_life.armor; }
+bool Ship :: getAlive() const        { return data_life.is_alive; }
+bool* Ship :: getpAlive()            { return &data_life.is_alive; }
+int* Ship :: getpPlaceTypeId()       { return &place_type_id; }
+int Ship :: getArmor() const         { return data_life.armor; }
 
-Points* Ship :: getPoints() 	    { return &points; }
-Navigator* Ship :: getNavigator()   { return navigator; }
-StarSystem* Ship :: getStarSystem() { return starsystem; }
-Npc*  Ship :: getNpc() 		    { return npc_owner; }
+Points* Ship :: getPoints() 	     { return &points; }
+Navigator* Ship :: getNavigator()    { return navigator; }
+StarSystem* Ship :: getStarSystem() const { return starsystem; }
+Npc*  Ship :: getNpc() 		     { return npc_owner; }
+
+// needs for grabbing interface
+int Ship :: getFunctionalSlotSubTypeId() const { return NONE_SLOT_ID; } 
+void Ship :: bindSlot(ItemSlot* slot)          { return; }	   	
+void Ship :: updateOwnerPropetries()	       { return; }	   
+//
+       	        
 int Ship :: getCollisionRadius() const  { return data_korpus.collision_radius; } 
+float Ship :: getVisionRadius() const { return propetries.radius; }
+TextureOb* Ship :: getTexOb() const { return texOb; }
 
 ItemSlot* Ship :: getEmptyOtsecSlot()
 {
@@ -46,6 +56,28 @@ ItemSlot* Ship :: getEmptyOtsecSlot()
         
       	return NULL;
 }
+
+
+ItemSlot* Ship :: getOtsecSlotWithGoods(int requested_goods_subtype_id)
+{
+      	for (unsigned int i = 0; i < slot_otsec_pList.size(); i++)
+      	{
+          	if (slot_otsec_pList[i]->getEquipedStatus() == true)
+          	{
+          		if (slot_otsec_pList[i]->getItemTypeId() == GOODS_ID)
+          		{
+          			if (slot_otsec_pList[i]->getItemSubTypeId() == requested_goods_subtype_id)
+          			{
+          				return slot_otsec_pList[i];
+          			}
+          		}
+          	}             		
+        }
+        
+      	return NULL;
+}
+
+
                 
                 
 Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData _data_korpus)
@@ -102,24 +134,25 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
 
     	/////////////////////////////////////////////////
     	//////////////////////// WEAPONS SLOT ///////////
-    	texOb_slot   = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.slot_texOb_pList);
+    	texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID);
   
    
-    	TextureOb* turrelTexOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.turrel_texOb_pList); 
+    	TextureOb* texOb_turrel = g_TEXTURE_MANAGER.getRandomTexOb(TURREL_TEXTURE_ID); 
    
     	if (data_korpus.weapon_slot_num >= 1)
     	{  
        		weapon_slot1 = ItemSlot(WEAPON_SLOT_ID, 
        					this, 
        					texOb_slot, 
-       					kontur_rect.getCenter().x + 1*texOb_slot->w, 
-       					kontur_rect.getCenter().y - texOb_slot->h/2);
+       					kontur_rect.getCenter().x + 1*WEAPON_SLOT_WIDTH, 
+       					kontur_rect.getCenter().y - WEAPON_SLOT_HEIGHT/2,
+       					WEAPON_SLOT_WIDTH, WEAPON_SLOT_HEIGHT);
        					
        		slot_weapon_vec.push_back(&weapon_slot1);
        		slot_total_pList.push_back(&weapon_slot1); 
 
        		turrel1 = new Turrel(&weapon_slot1, points.getpWeapon1Center());       
-       		turrel1->setTexOb(turrelTexOb); // remove
+       		turrel1->setTexOb(texOb_turrel); // remove
                 
        		weapon_slot1.bindTurrel(turrel1);
 
@@ -136,14 +169,15 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
        		weapon_slot2 = ItemSlot(WEAPON_SLOT_ID, 
        					this, 
        					texOb_slot, 
-       					kontur_rect.getCenter().x + 1*texOb_slot->w, 
-       					kontur_rect.getCenter().y - texOb_slot->h/2 + 1.1*texOb_slot->h);
+       					kontur_rect.getCenter().x + 1*WEAPON_SLOT_WIDTH, 
+       					kontur_rect.getCenter().y - WEAPON_SLOT_HEIGHT/2 + 1.1*WEAPON_SLOT_HEIGHT,
+       					WEAPON_SLOT_WIDTH, WEAPON_SLOT_HEIGHT);
        					    
        		slot_weapon_vec.push_back(&weapon_slot2);
        		slot_total_pList.push_back(&weapon_slot2); 
        
                 turrel2 = new Turrel(&weapon_slot2, points.getpWeapon2Center()); 
-       		turrel2->setTexOb(turrelTexOb);
+       		turrel2->setTexOb(texOb_turrel);
                 
               	weapon_slot2.bindTurrel(turrel2);
 
@@ -160,14 +194,15 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
        		weapon_slot3 = ItemSlot(WEAPON_SLOT_ID, 
        					this, 
        					texOb_slot, 
-       					kontur_rect.getCenter().x + 1*texOb_slot->w, 
-       					kontur_rect.getCenter().y - texOb_slot->h/2 - 1.1*texOb_slot->h); 
+       					kontur_rect.getCenter().x + 1*WEAPON_SLOT_WIDTH, 
+       					kontur_rect.getCenter().y - WEAPON_SLOT_HEIGHT/2 - 1.1*WEAPON_SLOT_HEIGHT,
+       					WEAPON_SLOT_WIDTH, WEAPON_SLOT_HEIGHT); 
        					
        		slot_weapon_vec.push_back(&weapon_slot3);
        		slot_total_pList.push_back(&weapon_slot3); 
               
        		turrel3 = new Turrel(&weapon_slot3, points.getpWeapon3Center()); 
-       		turrel3->setTexOb(turrelTexOb);
+       		turrel3->setTexOb(texOb_turrel);
                 
               	weapon_slot3.bindTurrel(turrel3);
        
@@ -183,14 +218,15 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
        		weapon_slot4 = ItemSlot(WEAPON_SLOT_ID, 
        					this, 
        					texOb_slot, 
-       					kontur_rect.getCenter().x + 2.2*texOb_slot->w, 
-       					kontur_rect.getCenter().y - texOb_slot->h/2 + 1.1*texOb_slot->h/2);
+       					kontur_rect.getCenter().x + 2.2*WEAPON_SLOT_WIDTH, 
+       					kontur_rect.getCenter().y - WEAPON_SLOT_HEIGHT/2 + 1.1*WEAPON_SLOT_HEIGHT/2,
+       					WEAPON_SLOT_WIDTH, WEAPON_SLOT_HEIGHT);
        					
        		slot_weapon_vec.push_back(&weapon_slot4);
        		slot_total_pList.push_back(&weapon_slot4); 
               
        		turrel4 = new Turrel(&weapon_slot4, points.getpWeapon4Center()); 
-       		turrel4->setTexOb(turrelTexOb);
+       		turrel4->setTexOb(texOb_turrel);
                 
               	weapon_slot4.bindTurrel(turrel4);
 
@@ -208,14 +244,15 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
        		weapon_slot5 = ItemSlot(WEAPON_SLOT_ID, 
        					this, 
        					texOb_slot, 
-       					kontur_rect.getCenter().x + 2.2*texOb_slot->w, 
-       					kontur_rect.getCenter().y - texOb_slot->h/2 - 1.1*texOb_slot->h/2);
+       					kontur_rect.getCenter().x + 2.2*WEAPON_SLOT_WIDTH, 
+       					kontur_rect.getCenter().y - WEAPON_SLOT_HEIGHT/2 - 1.1*WEAPON_SLOT_HEIGHT/2,
+       					WEAPON_SLOT_WIDTH, WEAPON_SLOT_HEIGHT);
        					
        		slot_weapon_vec.push_back(&weapon_slot5);
        		slot_total_pList.push_back(&weapon_slot5); 
               
        		turrel5 = new Turrel(&weapon_slot5, points.getpWeapon5Center()); 
-              	turrel5->setTexOb(turrelTexOb);
+              	turrel5->setTexOb(texOb_turrel);
        
                 weapon_slot5.bindTurrel(turrel5);
        		
@@ -233,8 +270,9 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
 	drive_slot       = ItemSlot(DRIVE_SLOT_ID,
 				    this, 
 				    texOb_slot, 
-				    kontur_rect.getCenter().x - 5*texOb_slot->w, 
-				    kontur_rect.getCenter().y - texOb_slot->h/2 + 1.1*texOb_slot->h/2);
+				    kontur_rect.getCenter().x - 5*SHIP_SLOT_WIDTH, 
+				    kontur_rect.getCenter().y - SHIP_SLOT_HEIGHT/2 + 1.1*SHIP_SLOT_HEIGHT/2,
+				    SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
 				    
 	slot_total_pList.push_back(&drive_slot);
 	
@@ -242,8 +280,9 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
 	bak_slot         = ItemSlot(BAK_SLOT_ID,
 				    this, 
 				    texOb_slot, 
-				    kontur_rect.getCenter().x - 5*texOb_slot->w, 
-				    kontur_rect.getCenter().y - texOb_slot->h/2 - 1.1*texOb_slot->h/2);
+				    kontur_rect.getCenter().x - 5*SHIP_SLOT_WIDTH, 
+				    kontur_rect.getCenter().y - SHIP_SLOT_HEIGHT/2 - 1.1*SHIP_SLOT_HEIGHT/2,
+				    SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
 				    
 	slot_total_pList.push_back(&bak_slot);
 	
@@ -251,8 +290,9 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
 	radar_slot       = ItemSlot(RADAR_SLOT_ID,
 				    this, 
 				    texOb_slot, 
-				    kontur_rect.getCenter().x + 4*texOb_slot->w, 
-				    kontur_rect.getCenter().y - texOb_slot->h/2 + 1.1*texOb_slot->h/2);
+				    kontur_rect.getCenter().x + 4*SHIP_SLOT_WIDTH, 
+				    kontur_rect.getCenter().y - SHIP_SLOT_HEIGHT/2 + 1.1*SHIP_SLOT_HEIGHT/2,
+				    SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
 				    
 	slot_total_pList.push_back(&radar_slot);	
 	
@@ -260,8 +300,9 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
 	scaner_slot      = ItemSlot(SCANER_SLOT_ID,
 				    this, 
 				    texOb_slot, 
-				    kontur_rect.getCenter().x + 4*texOb_slot->w, 
-				    kontur_rect.getCenter().y - texOb_slot->h/2 - 1.1*texOb_slot->h/2);
+				    kontur_rect.getCenter().x + 4*SHIP_SLOT_WIDTH, 
+				    kontur_rect.getCenter().y - SHIP_SLOT_HEIGHT/2 - 1.1*SHIP_SLOT_HEIGHT/2,
+				    SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
 				    
 	slot_total_pList.push_back(&scaner_slot);
 	
@@ -269,8 +310,9 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
 	energizer_slot   = ItemSlot(ENERGIZER_SLOT_ID, 
 				    this, 
 				    texOb_slot, 
-				    kontur_rect.getCenter().x - 2*texOb_slot->w, 
-				    kontur_rect.getCenter().y - texOb_slot->h/2);
+				    kontur_rect.getCenter().x - 2*SHIP_SLOT_WIDTH, 
+				    kontur_rect.getCenter().y - SHIP_SLOT_HEIGHT/2,
+				    SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
 				    
     	slot_total_pList.push_back(&energizer_slot);
     		
@@ -280,8 +322,9 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
 		grapple_slot  = ItemSlot(GRAPPLE_SLOT_ID, 
 					 this, 
 					 texOb_slot, 
-					 kontur_rect.getCenter().x - 3*texOb_slot->w, 
-					 kontur_rect.getCenter().y - texOb_slot->h/2 + 1.1*texOb_slot->h);
+					 kontur_rect.getCenter().x - 3*SHIP_SLOT_WIDTH, 
+					 kontur_rect.getCenter().y - SHIP_SLOT_HEIGHT/2 + 1.1*SHIP_SLOT_HEIGHT,
+					 SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
 					 
     		slot_total_pList.push_back(&grapple_slot); 
     	}
@@ -290,8 +333,9 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
 	protector_slot   = ItemSlot(PROTECTOR_SLOT_ID, 
 				    this, 
 				    texOb_slot, 
-				    kontur_rect.getCenter().x - 3*texOb_slot->w, 
-				    kontur_rect.getCenter().y - texOb_slot->h/2 - 1.1*texOb_slot->h);
+				    kontur_rect.getCenter().x - 3*SHIP_SLOT_WIDTH, 
+				    kontur_rect.getCenter().y - SHIP_SLOT_HEIGHT/2 - 1.1*SHIP_SLOT_HEIGHT,
+				    SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
 				    
     	slot_total_pList.push_back(&protector_slot); 
 	
@@ -299,8 +343,9 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
 	droid_slot       = ItemSlot(DROID_SLOT_ID,
 				    this, 
 				    texOb_slot, 
-				    kontur_rect.getCenter().x - 1*texOb_slot->w, 
-				    kontur_rect.getCenter().y - texOb_slot->h/2 + 1.1*texOb_slot->h);
+				    kontur_rect.getCenter().x - 1*SHIP_SLOT_WIDTH, 
+				    kontur_rect.getCenter().y - SHIP_SLOT_HEIGHT/2 + 1.1*SHIP_SLOT_HEIGHT,
+				    SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
 				    
     	slot_total_pList.push_back(&droid_slot); 
     	
@@ -308,8 +353,9 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
 	freezer_slot     = ItemSlot(FREEZER_SLOT_ID,
 				    this, 
 				    texOb_slot, 
-				    kontur_rect.getCenter().x - 1*texOb_slot->w, 
-				    kontur_rect.getCenter().y - texOb_slot->h/2 - 1.1*texOb_slot->h);
+				    kontur_rect.getCenter().x - 1*SHIP_SLOT_WIDTH, 
+				    kontur_rect.getCenter().y - SHIP_SLOT_HEIGHT/2 - 1.1*SHIP_SLOT_HEIGHT,
+				    SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
 				    
 	slot_total_pList.push_back(&freezer_slot);   
 	////////////////////////////////////////////////////
@@ -318,14 +364,15 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
     	//////// OTSEC SLOT ////////////////////////////////
     	for (int i = 0; i <= 10; i++)
     	{
-         	ItemSlot* pTo_otsec_slot = new ItemSlot(CARGO_SLOT_ID, 
+         	ItemSlot* otsec_slot = new ItemSlot(CARGO_SLOT_ID, 
          						this, 
          						texOb_slot, 
-         						kontur_rect.getCenter().x + (i-6) * texOb_slot->w, 
-         						kontur_rect.getCenter().y - 3*texOb_slot->h);
+         						kontur_rect.getCenter().x + (i-6) * SHIP_SLOT_WIDTH, 
+         						kontur_rect.getCenter().y - 3*SHIP_SLOT_HEIGHT,
+         						SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
          						
-         	slot_otsec_pList.push_back(pTo_otsec_slot); 
-         	slot_total_pList.push_back(pTo_otsec_slot);         
+         	slot_otsec_pList.push_back(otsec_slot); 
+         	slot_total_pList.push_back(otsec_slot);         
     	}
     	////////////////////////////////////////////////////
 
@@ -334,8 +381,9 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
     	gate_slot = ItemSlot(GATE_SLOT_ID, 
     			     this, 
     			     texOb_slot, 
-    			     kontur_rect.getCenter().x - 5*texOb_slot->w, 
-    			     kontur_rect.getCenter().y + 3*texOb_slot->h);
+    			     kontur_rect.getCenter().x - 5*SHIP_SLOT_WIDTH, 
+    			     kontur_rect.getCenter().y + 3*SHIP_SLOT_HEIGHT,
+    			     SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
     	////////////////////////////////////////////////////
  	   	   	
 
@@ -347,7 +395,7 @@ Ship :: Ship(TextureOb* _texOb, LifeData _data_life, IdData _data_id, KorpusData
     	    	
       	drive_trail = createTrailEffect(texOb->size_id, points.getpMidLeft(), points.getpMidFarLeft());
       	 
-      	TextureOb* _texOb_shield = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.shieldEffect_texOb_pList); 
+      	TextureOb* _texOb_shield = g_TEXTURE_MANAGER.getRandomTexOb(SHIELD_EFFECT_TEXTURE_ID); 
  	shield = new ShieldEffect(this, _texOb_shield);
 }
 
@@ -500,20 +548,17 @@ void Ship :: resetDeselectedWeaponTargets()
 
 void Ship :: update_inSpace_inDynamic_TRUE()
 {   
+	points.update(); 
+
     	if (ableTo.DRIVE == true) 
     	{ 
        		navigator->update_inSpace_inDynamic();
     	}
     
-
-    	if (data_life.is_alive == false)
+    	if (ableTo.GRAB == true)
     	{
-       		data_life.dying_time--;
-       		if (data_life.dying_time < 0)
-       		{
-           		death_TRUE();
-           	}
-    	}    
+    		grappleScenario();
+    	}
 }
 
 void Ship :: update_inSpace_inDynamic_FALSE()
@@ -524,9 +569,27 @@ void Ship :: update_inSpace_inDynamic_FALSE()
        	}
 }
 
+	
 
+void Ship :: updateDyingEffect_TRUE()
+{
+	if (data_life.is_alive == false)
+     	{
+        	data_life.dying_time--;
+        	if (data_life.dying_time < 0)
+        	{
+           		death_TRUE();
+           	}
+     	}  
+}
 
-
+void Ship :: updateDyingEffect_FALSE()
+{
+	if (data_life.is_alive == false)
+     	{
+       		death_FALSE();
+     	}  
+}
 
 //// ******** DOCKING/LAUNCHING ******** 
 bool Ship :: jumpEvent()
@@ -585,6 +648,7 @@ bool Ship :: launchingEvent()
 	//}
 		
 	points.setCenter(navigator->getTargetPlanet()->getPoints()->getCenter());
+	points.update();
      	navigator->resetTarget();
      	
     	return true;
@@ -775,6 +839,11 @@ void Ship :: updateRadarAbility()
           		ableTo.RADAR = false;
       		}
       	}
+      	else
+      	{
+      	        propetries.radius = VISIBLE_DISTANCE_WITHOUT_RADAR;
+          	ableTo.RADAR = false;
+      	}
 }
 
 
@@ -850,6 +919,22 @@ void Ship :: updateRepairAbility()
         }
 }
 
+void Ship :: droidRepair()
+{
+	if (ableTo.REPAIR == true)
+	{
+		if (data_life.armor < data_korpus.armor)
+		{
+			data_life.armor += propetries.repair;
+			droid_slot.getDroidEquipment()->deterioration();
+		}
+		
+		if (data_life.armor > data_korpus.armor)
+		{
+			data_life.armor = data_korpus.armor;
+		}
+	}
+}
 
 void Ship :: updateFreezeAbility()
 {
@@ -953,7 +1038,7 @@ void Ship :: renderInfo()
 
 void Ship :: updateRenderStuff()
 {
-    	points.update(); 
+    	//points.update(); 
     	shield->update();
     	
     	if (ableTo.DRIVE == true)
@@ -1014,9 +1099,8 @@ void Ship :: renderGrappleTrail() const
 
                         float angle_inD = angle_inR * RADIAN_TO_DEGREE_RATE;
         
-                        drawLine(g_UNIQUE_TEXTURE_COLLECTOR.texOb_grapple_trail->texture, 
-                                points.getCenter().x, 
-                                points.getCenter().y, 
+                        drawLine(g_UNIQUE_TEXTURE_COLLECTOR.texOb_grapple_trail, 
+                                points.getCenter(), 
                                 points.getPosZ(), 
                                 len, 
                                 angle_inD, 
@@ -1027,9 +1111,8 @@ void Ship :: renderGrappleTrail() const
 		
 void Ship :: renderKorpus() const
 {
-   	glBindTexture(GL_TEXTURE_2D, texOb->texture); 
-                                  
-    	drawFlatQuadPerVertexIn2D(points.getBottomLeft(), 
+    	drawFlatQuadPerVertexIn2D(texOb,
+    				  points.getBottomLeft(), 
                                   points.getBottomRight(), 
                                   points.getTopRight(), 
                                   points.getTopLeft(), 
@@ -1057,6 +1140,39 @@ void Ship :: renderShield() const
      	shield->render();
 }
 
+void Ship :: renderRadarRange()
+{
+	glPushMatrix();
+		glTranslatef(points.getCenter().x, points.getCenter().y, 0.0f);
+		radar_slot.updateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_yellow);
+             	radar_slot.drawRange();
+	glPopMatrix();
+}
+
+void Ship :: renderGrappleRange()
+{
+	glPushMatrix();
+		glTranslatef(points.getCenter().x, points.getCenter().y, 0.0f);
+		grapple_slot.updateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue);
+             	grapple_slot.drawRange();
+	glPopMatrix();
+}
+
+void Ship :: renderWeaponsRange()
+{
+	glPushMatrix();
+		glTranslatef(points.getCenter().x, points.getCenter().y, 0.0f);
+		for (unsigned int i = 0; i < slot_weapon_reloaded_vec.size(); i++)
+        	{
+         		if (slot_weapon_reloaded_vec[i]->getTurrel()->getSelectedStatus() == true)
+                	{
+                		slot_weapon_reloaded_vec[i]->updateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_red);
+             			slot_weapon_reloaded_vec[i]->drawRange();
+             		}
+
+        	}
+	glPopMatrix();
+}
 
 void Ship :: renderWeaponIcons() const
 {
@@ -1069,146 +1185,12 @@ void Ship :: renderWeaponIcons() const
                 if (_turrel->getTargetOb()->getValid() == true)
                 {       
                         Rect _rect(_turrel->getTargetOb()->getpCenter()->x - 40/2 + 23*offset, _turrel->getTargetOb()->getpCenter()->y + 40/2, 20, 20);
-                        drawTexturedRect(slot_weapon_vec[wi]->getItemTexOb()->texture, _rect, -2.0);
+                        drawTexturedRect(slot_weapon_vec[wi]->getItemTexOb(), _rect, -2.0);
                         offset++;
                 }        
         }
         
         disable_BLEND();
-}
-
-
-
-void equip(Ship* ship)
-{
-    	if (ship->data_korpus.weapon_slot_num >= 1)
-    	{
-       		LazerEquipment* pTo_lazer1 = lazerEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot1.insertItem(pTo_lazer1); 
-    	}   
-
-    	if (ship->data_korpus.weapon_slot_num >= 2)
-    	{
-       		LazerEquipment* pTo_lazer2 = lazerEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot2.insertItem(pTo_lazer2); 
-    	}   
-    
-    	if (ship->data_korpus.weapon_slot_num >= 3)
-    	{
-       		LazerEquipment* pTo_lazer3 = lazerEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot3.insertItem(pTo_lazer3); 
-       		//RocketEquipment* rocket3 = rocketEquipmentGenerator(RACE_0_ID);    
-       		//ship->weapon_slot3.insertItem(rocket3); 
-    	}   
-        
-    	if (ship->data_korpus.weapon_slot_num >= 4)
-    	{
-       		LazerEquipment* pTo_lazer4 = lazerEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot4.insertItem(pTo_lazer4);         
-       		//RocketEquipment* rocket4 = rocketEquipmentGenerator(RACE_0_ID);    
-       		//ship->weapon_slot4.insertItem(rocket4); 
-    	}   
-    
-    	if (ship->data_korpus.weapon_slot_num >= 5) 
-    	{
-       		LazerEquipment* pTo_lazer5 = lazerEquipmentGenerator(RACE_0_ID);    
-       		ship->weapon_slot5.insertItem(pTo_lazer5); 
-       		//RocketEquipment* rocket5 = rocketEquipmentGenerator(RACE_0_ID);    
-       		//ship->weapon_slot5.insertItem(rocket5); 
-    	}   
-        
-    
-    
-    	RadarEquipment* pTo_radar = radarEquipmentGenerator(RACE_0_ID);    
-    	ship->radar_slot.insertItem(pTo_radar); 
-    
-   	DriveEquipment* pTo_drive = driveEquipmentGenerator(RACE_0_ID);    
-    	ship->drive_slot.insertItem(pTo_drive); 
-
-    	BakEquipment* pTo_bak = bakEquipmentGenerator(RACE_0_ID);    
-    	ship->bak_slot.insertItem(pTo_bak); 
-            
-    	EnergizerEquipment* pTo_energizer = energizerEquipmentGenerator(RACE_0_ID);    
-    	ship->energizer_slot.insertItem(pTo_energizer); 
-    
-    	ProtectorEquipment* pTo_protector = protectorEquipmentGenerator(RACE_0_ID);    
-    	ship->protector_slot.insertItem(pTo_protector); 
-        
-    	DroidEquipment* pTo_droid = droidEquipmentGenerator(RACE_0_ID);    
-    	ship->droid_slot.insertItem(pTo_droid); 
-    
-    
-    	FreezerEquipment* pTo_freezer = freezerEquipmentGenerator(RACE_0_ID);    
-    	ship->freezer_slot.insertItem(pTo_freezer);     
-
-    	ScanerEquipment* pTo_scaner = scanerEquipmentGenerator(RACE_0_ID);    
-    	ship->scaner_slot.insertItem(pTo_scaner); 
-    
-    	if (ship->data_korpus.inhibit_GRAPPLE == false) 
-    	{
-       		GrappleEquipment* pTo_grapple = grappleEquipmentGenerator(RACE_0_ID);    
-       		ship->grapple_slot.insertItem(pTo_grapple); 
-   	}
-    
-                             
-    	for (unsigned int i = 0; i < 3; i++) //pTo_ship->otsec_slot_pList.size(); i++)
-    	{        
-        	LazerEquipment* pTo_lazer = lazerEquipmentGenerator(RACE_0_ID);              
-        	ship->slot_otsec_pList[i]->insertItem(pTo_lazer);
-    	}
-
-
-    	for (unsigned int i = 3; i < 6; i++) //pTo_ship->otsec_slot_pList.size(); i++)
-    	{        
-        	RadarModule* pTo_radarModule = radarModuleGenerator();              
-        	ship->slot_otsec_pList[i]->insertItem(pTo_radarModule);
-    	}    
-}
-
-
-
-
-
-
-Ship* shipGenerator(int race_id, int subtype_id, int size_id)
-{
-    	TextureOb* texOb_ship = g_TEXTURE_MANAGER.returnPointerToRandomShipTexObWithFollowingAtrributes(race_id, subtype_id, size_id); 
-       
-        KorpusData data_korpus;
-    	data_korpus.space       = 600;
-    	data_korpus.armor       = 600;
-    	data_korpus.protection  = 3;
-    	data_korpus.temperature = 100;
-        data_korpus.price = getRandInt(200, 400);
-        
-        data_korpus.collision_radius = (texOb_ship->w + texOb_ship->h)/3;
-
-        data_korpus.inhibit_GRAPPLE = false;
-        data_korpus.weapon_slot_num = getRandInt(1,5);
-            
-            
-        LifeData data_life;
-        data_life.armor = data_korpus.armor;
-        data_life.dying_time = 60;
-       
-        IdData data_id;
-        data_id.id      = g_SHIP_ID_GENERATOR.getNextId(); 
-    	data_id.type_id = SHIP_ID;
-    	//subtype_id = ;       
-
-        int size_threshold = 2; 
-    	if (texOb_ship->size_id > size_threshold)
-       		data_korpus.render_TURRELS = true; 
-    	else
-       		data_korpus.render_TURRELS = false; 
-                           
-    	Ship* ship = new Ship(texOb_ship, data_life, data_id, data_korpus);
-    	
-    	ship->getPoints()->setCenter(getRandInt(0, 800), getRandInt(0, 800)); 
-    	ship->getPoints()->setAngle(getRandInt(0, 360));    	
-    	ship->getNavigator()->setStaticTargetCoords(vec2f (1200, 1200));    	
-    	    
-    	return ship;
 }
 
 
@@ -1245,3 +1227,253 @@ void Ship :: dropRandomItemToSpace()
 	_equiped_slot_vec[_rand]->dropItemToSpace();
 		
 }
+
+void Ship :: grappleScenario()
+{
+        grapple_slot.getGrappleEquipment()->validationTargets();  
+                
+        for (unsigned int i = 0; i < grapple_slot.getGrappleEquipment()->target_vec.size(); i++)
+        {	//printf("blablabla\n");
+                if (grapple_slot.getGrappleEquipment()->target_vec[i]->getValid() == true)
+                {
+                	//printf("blablabla\n");
+                       	grapple_slot.getGrappleEquipment()->target_vec[i]->moveExternalyToPosition(points.getCenter());        	
+       	
+        		float dist = distBetweenPoints(points.getCenter(), *grapple_slot.getGrappleEquipment()->target_vec[i]->getpCenter() ); 
+        		if (dist < getCollisionRadius()/4.0f)
+        		{
+        			switch(grapple_slot.getGrappleEquipment()->target_vec[i]->getObTypeId())
+        			{
+        				case MINERAL_ID:
+        				{
+        					ItemSlot* _slot;
+        					_slot = getOtsecSlotWithGoods(MINERAL_ID);
+        					if (_slot != NULL)
+        					{
+        						_slot->getGoodsPack()->increase(grapple_slot.getGrappleEquipment()->target_vec[i]->getMineral()->getMass());
+        						        							
+        						grapple_slot.getGrappleEquipment()->target_vec[i]->getMineral()->setPlaceTypeId(NONE_ID);
+        					}
+        					else
+        					{
+        						GoodsPack* _goodsPack = createGoodsPack(MINERAL_ID);
+        						_goodsPack->increase(grapple_slot.getGrappleEquipment()->target_vec[i]->getMineral()->getMass());
+        						_slot = getEmptyOtsecSlot();
+        						if (_slot != NULL)
+        						{
+        							_slot->insertGoods(_goodsPack);
+        							grapple_slot.getGrappleEquipment()->target_vec[i]->getMineral()->setPlaceTypeId(NONE_ID);
+        						}
+        					}
+        					grapple_slot.getGrappleEquipment()->target_vec[i]->reset();
+        					break;			
+        				}
+        			
+        				case CONTAINER_ID:
+        				{
+        					ItemSlot* _slot = getEmptyOtsecSlot();
+        				        if (_slot != NULL)
+        					{
+        						_slot->insertContainer(grapple_slot.getGrappleEquipment()->target_vec[i]->getContainer());
+        						grapple_slot.getGrappleEquipment()->target_vec[i]->getContainer()->setPlaceTypeId(NONE_ID);
+        					}
+       						grapple_slot.getGrappleEquipment()->target_vec[i]->reset();
+        					break;
+        				}
+        			
+        				case BOMB_ID:
+        				{
+        					ItemSlot* _slot = getEmptyOtsecSlot();
+        				        if (_slot != NULL)
+        					{
+        						_slot->insertItem(grapple_slot.getGrappleEquipment()->target_vec[i]->getBomb());
+        						starsystem->addToRemoveFromOuterSpaceQueue(grapple_slot.getGrappleEquipment()->target_vec[i]->getBomb());
+        					}
+       						grapple_slot.getGrappleEquipment()->target_vec[i]->reset();
+        					break;
+        				}
+        				
+        				case SHIP_ID:
+        				{
+        					ItemSlot* _slot = getEmptyOtsecSlot();
+        				        if (_slot != NULL)
+        					{
+        						_slot->insertItem(grapple_slot.getGrappleEquipment()->target_vec[i]->getShip());
+        						starsystem->addToRemoveFromOuterSpaceQueue(grapple_slot.getGrappleEquipment()->target_vec[i]->getShip());
+        					}
+       						grapple_slot.getGrappleEquipment()->target_vec[i]->reset();
+        					break;
+        				}
+        			}
+
+        		}
+        	}
+        
+        }
+}
+
+
+
+void Ship :: moveExternalyToPosition(vec2f _target)
+{
+	vec2f d_pos;
+        get_dX_dY_ToPoint(points.getCenter().x, points.getCenter().y, _target.x, _target.y, 10*propetries.speed, &d_pos.x, &d_pos.y);
+        points.setCenter(points.getCenter().x + d_pos.x, points.getCenter().y + d_pos.y);
+        //points.setCenter(points.getCenter() + d_pos);
+}
+
+
+
+
+
+
+
+
+
+Ship* shipGenerator(int race_id, int subtype_id, int size_id, int weapons_num)
+{
+    	TextureOb* texOb_ship = g_TEXTURE_MANAGER.getRandomShipTexObWithFollowingAtrributes(race_id, subtype_id, size_id); 
+       
+       	int protection_rate = 1;
+       	if (subtype_id == WARRIOR_ID)
+        {
+        	protection_rate = 3;
+        }
+        
+        KorpusData data_korpus;
+    	data_korpus.space       = size_id*150 + getRandInt(0, 100);
+    	data_korpus.armor       = data_korpus.space;
+    	data_korpus.protection  = size_id/2*protection_rate;
+    	data_korpus.temperature = 100;
+        data_korpus.price       = getRandInt(200, 400)*size_id;
+        
+        data_korpus.collision_radius = (texOb_ship->w + texOb_ship->h)/3;
+
+        data_korpus.inhibit_GRAPPLE = false;
+        data_korpus.weapon_slot_num = weapons_num;
+            
+            
+        LifeData data_life;
+        data_life.armor = data_korpus.armor;
+        data_life.dying_time = 10*texOb_ship->size_id;
+       
+        IdData data_id;
+        data_id.id      = g_SHIP_ID_GENERATOR.getNextId(); 
+    	data_id.type_id = SHIP_ID;
+    	//subtype_id = ;       
+
+        int size_threshold = 2; 
+    	if (texOb_ship->size_id > size_threshold)
+       		data_korpus.render_TURRELS = true; 
+    	else
+       		data_korpus.render_TURRELS = false; 
+                           
+    	Ship* ship = new Ship(texOb_ship, data_life, data_id, data_korpus);
+    	
+    	ship->getPoints()->setCenter(getRandInt(0, 800), getRandInt(0, 800)); 
+    	ship->getPoints()->setAngle(getRandInt(0, 360));   
+    	ship->getPoints()->update();   
+    	    	 	
+    	ship->getNavigator()->setStaticTargetCoords(vec2f(getRandInt(0, 1200), getRandInt(0, 1200)));    	
+    	    
+    	return ship;
+}
+
+
+
+
+void equip(Ship* ship)
+{
+    	if (ship->data_korpus.weapon_slot_num >= 1)
+    	{
+       		//LazerEquipment* pTo_lazer1 = lazerEquipmentGenerator(RACE_0_ID);    
+       		//ship->weapon_slot1.insertItem(pTo_lazer1); 
+    	       	RocketEquipment* rocket1 = rocketEquipmentGenerator(RACE_0_ID);    
+       		ship->weapon_slot1.insertItem(rocket1); 
+    	
+    	}   
+
+    	if (ship->data_korpus.weapon_slot_num >= 2)
+    	{
+       		LazerEquipment* pTo_lazer2 = lazerEquipmentGenerator(RACE_0_ID);    
+       		ship->weapon_slot2.insertItem(pTo_lazer2); 
+    	}   
+    
+    	if (ship->data_korpus.weapon_slot_num >= 3)
+    	{
+       		LazerEquipment* pTo_lazer3 = lazerEquipmentGenerator(RACE_0_ID);    
+       		ship->weapon_slot3.insertItem(pTo_lazer3); 
+       		//RocketEquipment* rocket3 = rocketEquipmentGenerator(RACE_0_ID);    
+       		//ship->weapon_slot3.insertItem(rocket3); 
+    	}   
+        
+    	if (ship->data_korpus.weapon_slot_num >= 4)
+    	{
+       		//LazerEquipment* pTo_lazer4 = lazerEquipmentGenerator(RACE_0_ID);    
+       		//ship->weapon_slot4.insertItem(pTo_lazer4);         
+       		RocketEquipment* rocket4 = rocketEquipmentGenerator(RACE_0_ID);    
+       		ship->weapon_slot4.insertItem(rocket4); 
+    	}   
+    
+    	if (ship->data_korpus.weapon_slot_num >= 5) 
+    	{
+       		//LazerEquipment* pTo_lazer5 = lazerEquipmentGenerator(RACE_0_ID);    
+       		//ship->weapon_slot5.insertItem(pTo_lazer5); 
+       		RocketEquipment* rocket5 = rocketEquipmentGenerator(RACE_0_ID);    
+       		ship->weapon_slot5.insertItem(rocket5); 
+    	}   
+        
+    
+    
+    	RadarEquipment* pTo_radar = radarEquipmentGenerator(RACE_0_ID);    
+    	ship->radar_slot.insertItem(pTo_radar); 
+    
+   	DriveEquipment* pTo_drive = driveEquipmentGenerator(RACE_0_ID);    
+    	ship->drive_slot.insertItem(pTo_drive); 
+
+    	BakEquipment* pTo_bak = bakEquipmentGenerator(RACE_0_ID);    
+    	ship->bak_slot.insertItem(pTo_bak); 
+            
+    	EnergizerEquipment* pTo_energizer = energizerEquipmentGenerator(RACE_0_ID);    
+    	ship->energizer_slot.insertItem(pTo_energizer); 
+    
+    	ProtectorEquipment* pTo_protector = protectorEquipmentGenerator(RACE_0_ID);    
+    	ship->protector_slot.insertItem(pTo_protector); 
+        
+    	DroidEquipment* pTo_droid = droidEquipmentGenerator(RACE_0_ID);    
+    	ship->droid_slot.insertItem(pTo_droid); 
+    
+    
+    	FreezerEquipment* pTo_freezer = freezerEquipmentGenerator(RACE_0_ID);    
+    	ship->freezer_slot.insertItem(pTo_freezer);     
+
+    	ScanerEquipment* pTo_scaner = scanerEquipmentGenerator(RACE_0_ID);    
+    	ship->scaner_slot.insertItem(pTo_scaner); 
+    
+    	if (ship->data_korpus.inhibit_GRAPPLE == false) 
+    	{
+       		GrappleEquipment* pTo_grapple = grappleEquipmentGenerator(RACE_0_ID);    
+       		ship->grapple_slot.insertItem(pTo_grapple); 
+   	}
+    
+                             
+    	for (unsigned int i = 0; i < 3; i++) 
+    	{        
+        	LazerEquipment* pTo_lazer = lazerEquipmentGenerator(RACE_0_ID);              
+        	ship->slot_otsec_pList[i]->insertItem(pTo_lazer);
+    	}
+
+
+    	for (unsigned int i = 3; i < 6; i++) 
+    	{        
+        	RadarModule* radar_module = radarModuleGenerator();              
+        	ship->slot_otsec_pList[i]->insertItem(radar_module);
+    	}  
+    	
+    	for (unsigned int i = 6; i < 8; i++) 
+    	{        
+        	Bomb* bomb = getNewBomb();              
+        	ship->slot_otsec_pList[i]->insertItem(bomb);
+    	}   
+}
+

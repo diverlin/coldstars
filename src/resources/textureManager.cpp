@@ -21,245 +21,187 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 TextureManager :: TextureManager()
 {}
 
+TextureManager :: ~TextureManager()
+{}
 
-void TextureManager :: manage(TextureOb* pTo_texOb)
-{   
-    if (pTo_texOb->type_id == SLOT_TEXTURE_ID)
-       slot_texOb_pList.push_back(pTo_texOb);
-
-    if (pTo_texOb->type_id == TURREL_TEXTURE_ID)
-       turrel_texOb_pList.push_back(pTo_texOb);
-
-    if (pTo_texOb->type_id == NEBULA_TEXTURE_ID)
-       nebulaBgEffect_texOb_pList.push_back(pTo_texOb);
-
-    if (pTo_texOb->type_id == STAR_TEXTURE_ID)
-       star_texOb_pList.push_back(pTo_texOb);
-
-    if (pTo_texOb->type_id == PLANET_TEXTURE_ID)
-       planet_texOb_pList.push_back(pTo_texOb);
-
-    if (pTo_texOb->type_id == ATMOSPHERE_TEXTURE_ID)
-       atmosphere_texOb_pList.push_back(pTo_texOb);
-
-    if (pTo_texOb->type_id == SHIP_TEXTURE_ID)
-    { 
-        if (pTo_texOb->race_id == RACE_0_ID)
-        {
-           if (pTo_texOb->subtype_id == RANGER_ID)
-              ship_race0_ranger_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == WARRIOR_ID)
-              ship_race0_warrior_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == TRADER_ID)
-              ship_race0_trader_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == PIRAT_ID)
-              ship_race0_pirat_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == DIPLOMAT_ID)
-              ship_race0_diplomat_texOb_pList.push_back(pTo_texOb);
-        }
-
-        if (pTo_texOb->race_id == RACE_1_ID)
-        {
-           if (pTo_texOb->subtype_id == RANGER_ID)
-              ship_race1_ranger_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == WARRIOR_ID)
-              ship_race1_warrior_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == TRADER_ID)
-              ship_race1_trader_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == PIRAT_ID)
-              ship_race1_pirat_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == DIPLOMAT_ID)
-              ship_race1_diplomat_texOb_pList.push_back(pTo_texOb);
-        }
-
-        if (pTo_texOb->race_id == RACE_2_ID)
-        {
-           if (pTo_texOb->subtype_id == RANGER_ID)
-              ship_race2_ranger_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == WARRIOR_ID)
-              ship_race2_warrior_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == TRADER_ID)
-              ship_race2_trader_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == PIRAT_ID)
-              ship_race2_pirat_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == DIPLOMAT_ID)
-              ship_race2_diplomat_texOb_pList.push_back(pTo_texOb);
-        }
-
-        if (pTo_texOb->race_id == RACE_3_ID)
-        {
-           if (pTo_texOb->subtype_id == RANGER_ID)
-              ship_race3_ranger_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == WARRIOR_ID)
-              ship_race3_warrior_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == TRADER_ID)
-              ship_race3_trader_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == PIRAT_ID)
-              ship_race3_pirat_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == DIPLOMAT_ID)
-              ship_race3_diplomat_texOb_pList.push_back(pTo_texOb);
-        }
-
-        if (pTo_texOb->race_id == RACE_4_ID)
-        {
-           if (pTo_texOb->subtype_id == RANGER_ID)
-              ship_race4_ranger_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == WARRIOR_ID)
-              ship_race4_warrior_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == TRADER_ID)
-              ship_race4_trader_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == PIRAT_ID)
-              ship_race4_pirat_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == DIPLOMAT_ID)
-              ship_race4_diplomat_texOb_pList.push_back(pTo_texOb);
-        }
-
-        if (pTo_texOb->race_id == RACE_6_ID)
-        {
-           if (pTo_texOb->subtype_id == RANGER_ID)
-              ship_race6_ranger_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == WARRIOR_ID)
-              ship_race6_warrior_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == TRADER_ID)
-              ship_race6_trader_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == PIRAT_ID)
-              ship_race6_pirat_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == DIPLOMAT_ID)
-              ship_race6_diplomat_texOb_pList.push_back(pTo_texOb);
-        }
-
-        if (pTo_texOb->race_id == RACE_7_ID)
-        {
-           if (pTo_texOb->subtype_id == RANGER_ID)
-              ship_race7_ranger_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == WARRIOR_ID)
-              ship_race7_warrior_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == TRADER_ID)
-              ship_race7_trader_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == PIRAT_ID)
-              ship_race7_pirat_texOb_pList.push_back(pTo_texOb);
-           if (pTo_texOb->subtype_id == DIPLOMAT_ID)
-              ship_race7_diplomat_texOb_pList.push_back(pTo_texOb);
-        }
-    }
-
-    if (pTo_texOb->type_id == PARTICLE_TEXTURE_ID)
-       particles_texOb_pList.push_back(pTo_texOb);
-
-    if (pTo_texOb->type_id == ROCKET_BULLET_TEXTURE_ID)
-       rocketBullet_texOb_pList.push_back(pTo_texOb);
-
-    if (pTo_texOb->type_id == LAZER_EFFECT_TEXTURE_ID)
-       lazerEffect_texOb_pList.push_back(pTo_texOb);
-
-    if (pTo_texOb->type_id == SHIELD_EFFECT_TEXTURE_ID)
-       shieldEffect_texOb_pList.push_back(pTo_texOb);
-
-    if (pTo_texOb->type_id == DISTANTSTAR_TEXTURE_ID)
-       starBgEffect_texOb_pList.push_back(pTo_texOb);
-
-    // ASTEROIDS/MINERALS
-    if (pTo_texOb->type_id == ASTEROID_TEXTURE_ID)
-     { asteroid_texOb_pList.push_back(pTo_texOb); } 
-
-    if (pTo_texOb->type_id == MINERAL_TEXTURE_ID)
-       mineral_texOb_pList.push_back(pTo_texOb); 
-
-    if (pTo_texOb->type_id == CONTAINER_TEXTURE_ID)
-       container_texOb_pList.push_back(pTo_texOb); 
-
-    if (pTo_texOb->type_id == BOMB_TEXTURE_ID)
-       bomb_texOb_pList.push_back(pTo_texOb); 
-
-
-    // other
-    if (pTo_texOb->type_id == TEXT_BACKGROUND_TEXTURE_ID)
-       textBackground_texOb_pList.push_back(pTo_texOb); 
-
-
-
-    // LAND
-    if (pTo_texOb->type_id == LAND_BG_TEXTURE_ID)
-       landBg_texOb_pList.push_back(pTo_texOb);
-
-    //######### IN KOSMOPORT
-    if (pTo_texOb->type_id  == ANGAR_BG_TEXTURE_ID)
-       angarBg_texOb_pList.push_back(pTo_texOb);
-
-    if (pTo_texOb->type_id == STORE_BG_TEXTURE_ID)
-       storeBg_texOb_pList.push_back(pTo_texOb);
-
-    if (pTo_texOb->type_id == SHOP_BG_TEXTURE_ID)
-       shopBg_texOb_pList.push_back(pTo_texOb);
-
-    if (pTo_texOb->type_id == GOVERMENT_BG_TEXTURE_ID)
-       govermentBg_texOb_pList.push_back(pTo_texOb);
-}
-
-
-
-void TextureManager :: manageItem(TextureOb* pTo_texOb)
+void TextureManager :: manage(TextureOb* texOb)
 {
-    if (pTo_texOb->type_id == ROCKET_ITEM_TEXTURE_ID)
-     { RocketEquipment_texOb_pList.push_back(pTo_texOb); } 
+	switch(texOb->type_id)
+	{
+  		case SLOT_TEXTURE_ID:        { slot_texOb_vec.push_back(texOb);        break; }       
+    		case LANDINGAREA_TEXTURE_ID: { landingArea_texOb_vec.push_back(texOb); break; }
+       		case TURREL_TEXTURE_ID:      { turrel_texOb_vec.push_back(texOb);      break; }
 
-    if (pTo_texOb->type_id == LAZER_ITEM_TEXTURE_ID)
-     { LazerEquipment_texOb_pList.push_back(pTo_texOb); } 
+    		case NEBULA_TEXTURE_ID:      { nebulaBgEffect_texOb_vec.push_back(texOb); break; }
+    		case STAR_TEXTURE_ID:        { star_texOb_vec.push_back(texOb);           break; } 
+		case PLANET_TEXTURE_ID:      { planet_texOb_vec.push_back(texOb);         break; }
+		case ATMOSPHERE_TEXTURE_ID:  { atmosphere_texOb_vec.push_back(texOb);     break; }
+		case SHIP_TEXTURE_ID:        
+		{  
+			switch(texOb->race_id) 
+			{
+        			case RACE_0_ID:
+        			{
+        				switch(texOb->subtype_id)
+        				{
+        					case RANGER_ID:   { ship_race0_ranger_texOb_vec.push_back(texOb);   break; }
+        					case WARRIOR_ID:  { ship_race0_warrior_texOb_vec.push_back(texOb);  break; }
+           					case TRADER_ID:   { ship_race0_trader_texOb_vec.push_back(texOb);   break; }
+           					case PIRAT_ID:    { ship_race0_pirat_texOb_vec.push_back(texOb);    break; }
+           					case DIPLOMAT_ID: { ship_race0_diplomat_texOb_vec.push_back(texOb); break; }
+        				}
+        				
+        				break;
+        			}
+        			
 
-    if (pTo_texOb->type_id == DRIVE_ITEM_TEXTURE_ID)
-       DriveEquipment_texOb_pList.push_back(pTo_texOb); 
+        			case RACE_1_ID:
+        			{
+        			         switch(texOb->subtype_id)
+        			         {
+        			         	case RANGER_ID:   { ship_race1_ranger_texOb_vec.push_back(texOb);   break; }
+           					case WARRIOR_ID:  { ship_race1_warrior_texOb_vec.push_back(texOb);  break; }
+           					case TRADER_ID:   { ship_race1_trader_texOb_vec.push_back(texOb);   break; }
+           					case PIRAT_ID:    { ship_race1_pirat_texOb_vec.push_back(texOb);    break; }
+           					case DIPLOMAT_ID: { ship_race1_diplomat_texOb_vec.push_back(texOb); break; }
+        				 }
+        				 
+        				 break;
+        			}
 
-    if (pTo_texOb->type_id == PROTECTOR_ITEM_TEXTURE_ID)
-       ProtectorEquipment_texOb_pList.push_back(pTo_texOb); 
+        			case RACE_2_ID:
+        			{
+        			         switch(texOb->subtype_id)
+        			         {
+        			         	case RANGER_ID: { ship_race2_ranger_texOb_vec.push_back(texOb); break; }
+           					case WARRIOR_ID: { ship_race2_warrior_texOb_vec.push_back(texOb); break; }
+           					case TRADER_ID: { ship_race2_trader_texOb_vec.push_back(texOb); break; }
+           					case PIRAT_ID:  { ship_race2_pirat_texOb_vec.push_back(texOb);  break; }
+           					case DIPLOMAT_ID: { ship_race2_diplomat_texOb_vec.push_back(texOb); break; }
+        				 }
+        				 
+        				 break;
+        			}
+        			
+        			
+				case RACE_3_ID:
+				{
+					switch(texOb->subtype_id)
+					{
+						case RANGER_ID:  { ship_race3_ranger_texOb_vec.push_back(texOb);    break; }
+           					case WARRIOR_ID: { ship_race3_warrior_texOb_vec.push_back(texOb);   break; }
+           					case TRADER_ID:  { ship_race3_trader_texOb_vec.push_back(texOb);    break; }
+           					case PIRAT_ID:   { ship_race3_pirat_texOb_vec.push_back(texOb);     break; }
+           					case DIPLOMAT_ID: { ship_race3_diplomat_texOb_vec.push_back(texOb); break; }
+        				}
+        				
+        				break;
+        			}
 
-    if (pTo_texOb->type_id == DROID_ITEM_TEXTURE_ID)
-       DroidEquipment_texOb_pList.push_back(pTo_texOb); 
+        			case RACE_4_ID:
+        			{
+        				switch(texOb->subtype_id)
+        				{	
+        					case RANGER_ID:   { ship_race4_ranger_texOb_vec.push_back(texOb);   break; }
+           					case WARRIOR_ID:  { ship_race4_warrior_texOb_vec.push_back(texOb);  break; }
+           					case TRADER_ID:   { ship_race4_trader_texOb_vec.push_back(texOb);   break; }
+           					case PIRAT_ID:    { ship_race4_pirat_texOb_vec.push_back(texOb);    break; } 
+           					case DIPLOMAT_ID: { ship_race4_diplomat_texOb_vec.push_back(texOb); break; }
+           				}
+           				
+           				break;
+           			}
+			
+				case RACE_6_ID:
+				{	
+					switch(texOb->subtype_id)
+					{
+						case RANGER_ID:   { ship_race6_ranger_texOb_vec.push_back(texOb);   break; }
+           					case WARRIOR_ID:  { ship_race6_warrior_texOb_vec.push_back(texOb);  break; }
+           					case TRADER_ID:   { ship_race6_trader_texOb_vec.push_back(texOb);   break; }
+           					case PIRAT_ID:    { ship_race6_pirat_texOb_vec.push_back(texOb);    break; }
+           					case DIPLOMAT_ID: { ship_race6_diplomat_texOb_vec.push_back(texOb); break; }
+        				}
+        				
+        				break;
+        			}
 
-    if (pTo_texOb->type_id == GRAPPLE_ITEM_TEXTURE_ID)
-       GrappleEquipment_texOb_pList.push_back(pTo_texOb); 
+				case RACE_7_ID:
+				{	
+					switch(texOb->subtype_id)
+					{
+						case RANGER_ID:   { ship_race7_ranger_texOb_vec.push_back(texOb);   break; }
+           					case WARRIOR_ID:  { ship_race7_warrior_texOb_vec.push_back(texOb);  break; }
+           					case TRADER_ID:   { ship_race7_trader_texOb_vec.push_back(texOb);   break; }
+           					case PIRAT_ID:    { ship_race7_pirat_texOb_vec.push_back(texOb);    break; }
+           					case DIPLOMAT_ID: { ship_race7_diplomat_texOb_vec.push_back(texOb); break; }
+        				}
+        				
+        				break;
+        			}
+    			}
+    		break;
+    		}
+    		
+    		case PARTICLE_TEXTURE_ID:      { particles_texOb_vec.push_back(texOb);    break; }
+		case ROCKET_BULLET_TEXTURE_ID: { rocketBullet_texOb_vec.push_back(texOb); break; }
+		case LAZER_EFFECT_TEXTURE_ID:  { lazerEffect_texOb_vec.push_back(texOb);  break; }
+		case SHIELD_EFFECT_TEXTURE_ID: { shieldEffect_texOb_vec.push_back(texOb); break; }
+		case DISTANTSTAR_TEXTURE_ID:   { starBgEffect_texOb_vec.push_back(texOb); break; }
 
-    if (pTo_texOb->type_id == BAK_ITEM_TEXTURE_ID)
-       BakEquipment_texOb_pList.push_back(pTo_texOb); 
+    		// ASTEROIDS/MINERALS
+    		case ASTEROID_TEXTURE_ID:  { asteroid_texOb_vec.push_back(texOb);  break; } 
+		case MINERAL_TEXTURE_ID:   { mineral_texOb_vec.push_back(texOb);   break; } 
+		case CONTAINER_TEXTURE_ID: { container_texOb_vec.push_back(texOb); break; }
+		case BOMB_TEXTURE_ID:      { bomb_texOb_vec.push_back(texOb);      break; }
 
-    if (pTo_texOb->type_id == ENERGYBLOCK_ITEM_TEXTURE_ID)
-       energyBlockItem_texOb_pList.push_back(pTo_texOb); 
+    		case BLACKHOLE_TEXTURE_ID: { blackhole_texOb_vec.push_back(texOb); break; }
+       		case TEXT_BACKGROUND_TEXTURE_ID: { textBackground_texOb_vec.push_back(texOb); break; } 
 
-    if (pTo_texOb->type_id == FREEZER_ITEM_TEXTURE_ID)
-       FreezerEquipment_texOb_pList.push_back(pTo_texOb); 
+		// LAND
+    		case LAND_BG_TEXTURE_ID: { landBg_texOb_vec.push_back(texOb); break; }
 
-    if (pTo_texOb->type_id == RADAR_ITEM_TEXTURE_ID)
-       RadarEquipment_texOb_pList.push_back(pTo_texOb); 
+		// IN KOSMOPORT
+    		case ANGAR_BG_TEXTURE_ID: { angarBg_texOb_vec.push_back(texOb); break; }
+		case STORE_BG_TEXTURE_ID: { storeBg_texOb_vec.push_back(texOb); break; }
+		case SHOP_BG_TEXTURE_ID:  { shopBg_texOb_vec.push_back(texOb); break; }
+		case GOVERMENT_BG_TEXTURE_ID: { govermentBg_texOb_vec.push_back(texOb); break; }
+		
+		
+		// ITEMS
+		case ROCKET_ITEM_TEXTURE_ID:      { rocketEquipment_texOb_vec.push_back(texOb);      break; } 
+		case LAZER_ITEM_TEXTURE_ID:       { lazerEquipment_texOb_vec.push_back(texOb);       break; } 
+		case DRIVE_ITEM_TEXTURE_ID:       { driveEquipment_texOb_vec.push_back(texOb);       break; } 
+		case PROTECTOR_ITEM_TEXTURE_ID:   { protectorEquipment_texOb_vec.push_back(texOb);   break; } 
+		case DROID_ITEM_TEXTURE_ID:       { droidEquipment_texOb_vec.push_back(texOb);       break; } 
+		case GRAPPLE_ITEM_TEXTURE_ID:     { grappleEquipment_texOb_vec.push_back(texOb);     break; } 
+		case BAK_ITEM_TEXTURE_ID:         { bakEquipment_texOb_vec.push_back(texOb);         break; } 
+		case ENERGYBLOCK_ITEM_TEXTURE_ID: { energyBlockEquipment_texOb_vec.push_back(texOb); break; } 
+		case FREEZER_ITEM_TEXTURE_ID:     { freezerEquipment_texOb_vec.push_back(texOb);     break; } 
+		case RADAR_ITEM_TEXTURE_ID:       { radarEquipment_texOb_vec.push_back(texOb);       break; } 
+		case SCANER_ITEM_TEXTURE_ID:      { scanerEquipment_texOb_vec.push_back(texOb);      break; } 
+		
+		case FACE_TEXTURE_ID:
+		{
+			switch(texOb->race_id)
+			{
+			       	case RACE_0_ID: { face_race0_texOb_vec.push_back(texOb); break; } 
+       				case RACE_1_ID: { face_race1_texOb_vec.push_back(texOb); break; } 
+       				case RACE_2_ID: { face_race2_texOb_vec.push_back(texOb); break; } 
+       				case RACE_3_ID: { face_race3_texOb_vec.push_back(texOb); break; } 
+       				case RACE_4_ID: { face_race4_texOb_vec.push_back(texOb); break; } 
 
-    if (pTo_texOb->type_id == SCANER_ITEM_TEXTURE_ID)
-       ScanerEquipment_texOb_pList.push_back(pTo_texOb); 
+       				case RACE_6_ID: { face_race6_texOb_vec.push_back(texOb); break; } 
+       				case RACE_7_ID: { face_race7_texOb_vec.push_back(texOb); break; }   
+			}
+			break;
+		}
+	}
 }
 
 
 
-void TextureManager :: manage_face(TextureOb* pTo_texOb)
-{
-    if (pTo_texOb->type_id == FACE_TEXTURE_ID)
-    {
-       if (pTo_texOb->race_id == RACE_0_ID) 
-          face_race0_texOb_pList.push_back(pTo_texOb); 
-       if (pTo_texOb->race_id == RACE_1_ID) 
-          face_race1_texOb_pList.push_back(pTo_texOb); 
-       if (pTo_texOb->race_id == RACE_2_ID) 
-          face_race2_texOb_pList.push_back(pTo_texOb);  
-       if (pTo_texOb->race_id == RACE_3_ID) 
-          face_race3_texOb_pList.push_back(pTo_texOb); 
-       if (pTo_texOb->race_id == RACE_4_ID) 
-          face_race4_texOb_pList.push_back(pTo_texOb); 
-
-       if (pTo_texOb->race_id == RACE_6_ID) 
-          face_race6_texOb_pList.push_back(pTo_texOb); 
-       if (pTo_texOb->race_id == RACE_7_ID) 
-          face_race7_texOb_pList.push_back(pTo_texOb);       
-    }
-}
-
-
-TextureOb* TextureManager :: returnPointerToRandomTexObFromList(VEC_pTexOb_type* pTo_list)
+TextureOb* TextureManager :: getRandomTexObFromList(std::vector<TextureOb*>* pTo_list)
 {  
      if (pTo_list->size() > 1)
          return (*pTo_list)[getRandInt(0, pTo_list->size() )];
@@ -267,61 +209,61 @@ TextureOb* TextureManager :: returnPointerToRandomTexObFromList(VEC_pTexOb_type*
          return (*pTo_list)[0];
 }
 
-TextureOb* TextureManager :: returnPointerToShipTexObByClosestSizeFromList(VEC_pTexOb_type* pTo_list, int _size_id)
+TextureOb* TextureManager :: getShipTexObByClosestSizeFromList(std::vector<TextureOb*>* pTo_list, int _size_id)
 {  
     int size_id = _size_id;
-    TextureOb* pTo_texOb;
+    TextureOb* texOb;
 
     size_id -= 1;
-    pTo_texOb = returnPointerToShipTexObBySizeFromList(pTo_list, size_id);
+    texOb = getShipTexObBySizeFromList(pTo_list, size_id);
 
-    if (pTo_texOb == NULL)
+    if (texOb == NULL)
     {
        size_id += 2;
-       pTo_texOb = returnPointerToShipTexObBySizeFromList(pTo_list, size_id);
+       texOb = getShipTexObBySizeFromList(pTo_list, size_id);
     }
      
-    if (pTo_texOb == NULL)
+    if (texOb == NULL)
     {
        size_id -= 3;
-       pTo_texOb = returnPointerToShipTexObBySizeFromList(pTo_list, size_id);
+       texOb = getShipTexObBySizeFromList(pTo_list, size_id);
     }
 
-    if (pTo_texOb == NULL)
+    if (texOb == NULL)
     {
        size_id += 4;
-       pTo_texOb = returnPointerToShipTexObBySizeFromList(pTo_list, size_id);
+       texOb = getShipTexObBySizeFromList(pTo_list, size_id);
     }
    
-    if (pTo_texOb == NULL)
+    if (texOb == NULL)
     {
        size_id -= 5;
-       pTo_texOb = returnPointerToShipTexObBySizeFromList(pTo_list, size_id);
+       texOb = getShipTexObBySizeFromList(pTo_list, size_id);
     }
 
-    if (pTo_texOb == NULL)
+    if (texOb == NULL)
     {
        size_id += 6;
-       pTo_texOb = returnPointerToShipTexObBySizeFromList(pTo_list, size_id);
+       texOb = getShipTexObBySizeFromList(pTo_list, size_id);
     }
 
-    if (pTo_texOb == NULL)
+    if (texOb == NULL)
     {
        size_id -= 7;
-       pTo_texOb = returnPointerToShipTexObBySizeFromList(pTo_list, size_id);
+       texOb = getShipTexObBySizeFromList(pTo_list, size_id);
     }
 
-    if (pTo_texOb == NULL)
+    if (texOb == NULL)
     {
        size_id += 8;
-       pTo_texOb = returnPointerToShipTexObBySizeFromList(pTo_list, size_id);
+       texOb = getShipTexObBySizeFromList(pTo_list, size_id);
     }
 
-    return pTo_texOb;
+    return texOb;
 }
 
 
-TextureOb* TextureManager :: returnPointerToShipTexObBySizeFromList(VEC_pTexOb_type* pTo_list, int _size_id)
+TextureOb* TextureManager :: getShipTexObBySizeFromList(std::vector<TextureOb*>* pTo_list, int _size_id)
 {  
     TextureOb* pTo_texOb = NULL;
 
@@ -336,246 +278,129 @@ TextureOb* TextureManager :: returnPointerToShipTexObBySizeFromList(VEC_pTexOb_t
 }
 
 
-TextureOb* TextureManager :: returnPointerToRandomFaceTexObWithFolloingAttributes(int _race_id)
+TextureOb* TextureManager :: getRandomFaceTexObWithFolloingAttributes(int _race_id)
 {
-       if (_race_id == RACE_0_ID) 
-          return returnPointerToRandomTexObFromList(&face_race0_texOb_pList);
-
-       if (_race_id == RACE_1_ID)
-          return returnPointerToRandomTexObFromList(&face_race1_texOb_pList);
-
-       if (_race_id == RACE_2_ID) 
-          return returnPointerToRandomTexObFromList(&face_race2_texOb_pList);
- 
-       if (_race_id == RACE_3_ID) 
-          return returnPointerToRandomTexObFromList(&face_race3_texOb_pList);
-
-       if (_race_id == RACE_4_ID) 
-          return returnPointerToRandomTexObFromList(&face_race4_texOb_pList);
-
-
-       if (_race_id == RACE_6_ID)
-          return returnPointerToRandomTexObFromList(&face_race6_texOb_pList);
-
-       if (_race_id == RACE_7_ID) 
-          return returnPointerToRandomTexObFromList(&face_race7_texOb_pList);
-
-        return NULL;
+	switch(_race_id)
+	{
+		case RACE_0_ID: { return getRandomTexObFromList(&face_race0_texOb_vec); }
+		case RACE_1_ID: { return getRandomTexObFromList(&face_race1_texOb_vec); }
+		case RACE_2_ID: { return getRandomTexObFromList(&face_race2_texOb_vec); }
+ 		case RACE_3_ID: { return getRandomTexObFromList(&face_race3_texOb_vec); }
+		case RACE_4_ID: { return getRandomTexObFromList(&face_race4_texOb_vec); }
+		
+		case RACE_6_ID: { return getRandomTexObFromList(&face_race6_texOb_vec); }
+		case RACE_7_ID: { return getRandomTexObFromList(&face_race7_texOb_vec); }
+	}
+	
+	return NULL;
 }
 
 
 
-TextureOb* TextureManager :: returnPointerToRandomShipTexObWithFollowingAtrributes(int _race_id, int _subtype_id, int _size_id)
+TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race_id, int _subtype_id, int _size_id)
 {
-        TextureOb* _texOb; 
+        switch(_race_id)
+        {	
+        	case RACE_0_ID:
+        	{
+                	switch(_subtype_id)
+                	{
+                		case RANGER_ID:   { return getRandomTexObFromList(&ship_race0_ranger_texOb_vec);   break; }
+				case WARRIOR_ID:  { return getRandomTexObFromList(&ship_race0_warrior_texOb_vec);  break; }
+ 				case TRADER_ID:   { return getRandomTexObFromList(&ship_race0_trader_texOb_vec);   break; }
+				case PIRAT_ID:    { return getRandomTexObFromList(&ship_race0_pirat_texOb_vec);    break; }
+				case DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race0_diplomat_texOb_vec); break; }
+		       }
+		       
+		       break;
+		}
 
-        if (_race_id == RACE_0_ID)
-        {
-                if (_subtype_id == RANGER_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race0_ranger_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == WARRIOR_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race0_warrior_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == TRADER_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race0_trader_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == PIRAT_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race0_pirat_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == DIPLOMAT_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race0_diplomat_texOb_pList);
-                        return _texOb;
-                }
-        }
-
-        if (_race_id == RACE_1_ID)
-        {
-                if (_subtype_id == RANGER_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race1_ranger_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == WARRIOR_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race1_warrior_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == TRADER_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race1_trader_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == PIRAT_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race1_pirat_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == DIPLOMAT_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race1_diplomat_texOb_pList);
-                        return _texOb;
-                }
-        }
-
-        if (_race_id == RACE_2_ID)
-        {
-                if (_subtype_id == RANGER_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race2_ranger_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == WARRIOR_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race2_warrior_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == TRADER_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race2_trader_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == PIRAT_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race2_pirat_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == DIPLOMAT_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race2_diplomat_texOb_pList);
-                        return _texOb;
-                }
-        }
+        	case RACE_1_ID:
+        	{
+                	switch(_subtype_id)
+                	{	
+                		case RANGER_ID:   { return getRandomTexObFromList(&ship_race1_ranger_texOb_vec);   break; }
+				case WARRIOR_ID:  { return getRandomTexObFromList(&ship_race1_warrior_texOb_vec);  break; } 
+				case TRADER_ID:   { return getRandomTexObFromList(&ship_race1_trader_texOb_vec);   break; }
+				case PIRAT_ID:    { return getRandomTexObFromList(&ship_race1_pirat_texOb_vec);    break; }
+				case DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race1_diplomat_texOb_vec); break; }
+			}
+			
+			break;
+		}
+		
+	        case RACE_2_ID:
+        	{
+                	switch(_subtype_id)
+                	{	
+                		case RANGER_ID:   { return getRandomTexObFromList(&ship_race2_ranger_texOb_vec);   break; }
+				case WARRIOR_ID:  { return getRandomTexObFromList(&ship_race2_warrior_texOb_vec);  break; } 
+				case TRADER_ID:   { return getRandomTexObFromList(&ship_race2_trader_texOb_vec);   break; }
+				case PIRAT_ID:    { return getRandomTexObFromList(&ship_race2_pirat_texOb_vec);    break; }
+				case DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race2_diplomat_texOb_vec); break; }
+			}
+			
+			break;
+        	}
       
 
-        if (_race_id == RACE_3_ID)
-        {
-                if (_subtype_id == RANGER_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race3_ranger_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == WARRIOR_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race3_warrior_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == TRADER_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race3_trader_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == PIRAT_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race3_pirat_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == DIPLOMAT_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race3_diplomat_texOb_pList);
-                        return _texOb;
-                }
-        }
+    	        case RACE_3_ID:
+        	{
+                	switch(_subtype_id)
+                	{	
+                		case RANGER_ID:   { return getRandomTexObFromList(&ship_race3_ranger_texOb_vec);   break; }
+				case WARRIOR_ID:  { return getRandomTexObFromList(&ship_race3_warrior_texOb_vec);  break; } 
+				case TRADER_ID:   { return getRandomTexObFromList(&ship_race3_trader_texOb_vec);   break; }
+				case PIRAT_ID:    { return getRandomTexObFromList(&ship_race3_pirat_texOb_vec);    break; }
+				case DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race3_diplomat_texOb_vec); break; }
+			}
+			
+			break;
+        	}
 
 
-        if (_race_id == RACE_4_ID)
-        {
-                if (_subtype_id == RANGER_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race4_ranger_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == WARRIOR_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race4_warrior_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == TRADER_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race4_trader_texOb_pList);
-                        return _texOb;
-                }   
-                if (_subtype_id == PIRAT_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race4_pirat_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == DIPLOMAT_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race4_diplomat_texOb_pList);
-                        return _texOb;
-                }
-        }
+    	        case RACE_4_ID:
+        	{
+                	switch(_subtype_id)
+                	{	
+                		case RANGER_ID:   { return getRandomTexObFromList(&ship_race4_ranger_texOb_vec);   break; }
+				case WARRIOR_ID:  { return getRandomTexObFromList(&ship_race4_warrior_texOb_vec);  break; } 
+				case TRADER_ID:   { return getRandomTexObFromList(&ship_race4_trader_texOb_vec);   break; }
+				case PIRAT_ID:    { return getRandomTexObFromList(&ship_race4_pirat_texOb_vec);    break; }
+				case DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race4_diplomat_texOb_vec); break; }
+			}
+			
+			break;
+        	}
 
 
+	        case RACE_6_ID:
+        	{
+                	switch(_subtype_id)
+                	{	
+                		case RANGER_ID:   { return getRandomTexObFromList(&ship_race6_ranger_texOb_vec);   break; }
+				case WARRIOR_ID:  { return getRandomTexObFromList(&ship_race6_warrior_texOb_vec);  break; } 
+				case TRADER_ID:   { return getRandomTexObFromList(&ship_race6_trader_texOb_vec);   break; }
+				case PIRAT_ID:    { return getRandomTexObFromList(&ship_race6_pirat_texOb_vec);    break; }
+				case DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race6_diplomat_texOb_vec); break; }
+			}
+			
+			break;
+        	}
 
-
-        if (_race_id == RACE_6_ID)
-        {
-                if (_subtype_id == RANGER_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race6_ranger_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == WARRIOR_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race6_warrior_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == TRADER_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race6_trader_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == PIRAT_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race6_pirat_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == DIPLOMAT_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race6_diplomat_texOb_pList);
-                        return _texOb;
-                }
-        }
-
-
-        if (_race_id == RACE_7_ID)
-        {
-                if (_subtype_id == RANGER_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race7_ranger_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == WARRIOR_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race7_warrior_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == TRADER_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race7_trader_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == PIRAT_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race7_pirat_texOb_pList);
-                        return _texOb;
-                }
-                if (_subtype_id == DIPLOMAT_ID)
-                {
-                        _texOb = returnPointerToRandomTexObFromList(&ship_race7_diplomat_texOb_pList);
-                        return _texOb;
-                }
+       	        case RACE_7_ID:
+        	{
+                	switch(_subtype_id)
+                	{	
+                		case RANGER_ID:   { return getRandomTexObFromList(&ship_race7_ranger_texOb_vec);   break; }
+				case WARRIOR_ID:  { return getRandomTexObFromList(&ship_race7_warrior_texOb_vec);  break; } 
+				case TRADER_ID:   { return getRandomTexObFromList(&ship_race7_trader_texOb_vec);   break; }
+				case PIRAT_ID:    { return getRandomTexObFromList(&ship_race7_pirat_texOb_vec);    break; }
+				case DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race7_diplomat_texOb_vec); break; }
+			}
+			
+			break;
+        	}
         }
        
         return NULL;
@@ -586,14 +411,16 @@ TextureOb* TextureManager :: returnPointerToRandomShipTexObWithFollowingAtrribut
 
 
 
-TextureOb* TextureManager :: returnParticleTexObByColorId(int _color_id)
+TextureOb* TextureManager :: getParticleTexObByColorId(int _color_id)
 {
 	//printf("searching color id = %i\n", _color_id);
-     	for(unsigned int i = 0; i < particles_texOb_pList.size(); i++)
+     	for(unsigned int i = 0; i < particles_texOb_vec.size(); i++)
      	{
-            	//printf("current color id = %i\n", particles_texOb_pList[i]->color_id);  
-         	if (particles_texOb_pList[i]->color_id == _color_id)
-            		return particles_texOb_pList[i]; 
+            	//printf("current color id = %i\n", particles_texOb_vec[i]->color_id);  
+         	if (particles_texOb_vec[i]->color_id == _color_id)
+         	{
+            		return particles_texOb_vec[i]; 
+            	}
         
 	}
 	
@@ -602,6 +429,51 @@ TextureOb* TextureManager :: returnParticleTexObByColorId(int _color_id)
 }
 
 
+TextureOb* TextureManager :: getRandomTexOb(int texture_type_id)
+{
+	switch(texture_type_id)
+	{
+		case SLOT_TEXTURE_ID:             { return getRandomTexObFromList(&slot_texOb_vec);                 break; }
+		case CONTAINER_TEXTURE_ID:        { return getRandomTexObFromList(&container_texOb_vec);            break; }
+		case STAR_TEXTURE_ID:             { return getRandomTexObFromList(&star_texOb_vec);                 break; }
+		case PLANET_TEXTURE_ID:           { return getRandomTexObFromList(&planet_texOb_vec);               break; }
+		case ATMOSPHERE_TEXTURE_ID:       { return getRandomTexObFromList(&atmosphere_texOb_vec);           break; }
+		case ASTEROID_TEXTURE_ID:         { return getRandomTexObFromList(&asteroid_texOb_vec);             break; }
+		case MINERAL_TEXTURE_ID:          { return getRandomTexObFromList(&mineral_texOb_vec);              break; }
+		case BOMB_TEXTURE_ID:             { return getRandomTexObFromList(&bomb_texOb_vec);                 break; }
+		case BLACKHOLE_TEXTURE_ID:        { return getRandomTexObFromList(&blackhole_texOb_vec);            break; }
+		case ROCKET_BULLET_TEXTURE_ID:    { return getRandomTexObFromList(&rocketBullet_texOb_vec);         break; }
+
+		case ROCKET_ITEM_TEXTURE_ID:      { return getRandomTexObFromList(&rocketEquipment_texOb_vec);      break; }
+		case LAZER_ITEM_TEXTURE_ID:       { return getRandomTexObFromList(&lazerEquipment_texOb_vec);       break; }
+		case RADAR_ITEM_TEXTURE_ID:       { return getRandomTexObFromList(&radarEquipment_texOb_vec);       break; }
+		case DRIVE_ITEM_TEXTURE_ID:       { return getRandomTexObFromList(&driveEquipment_texOb_vec);       break; }
+		case BAK_ITEM_TEXTURE_ID:         { return getRandomTexObFromList(&bakEquipment_texOb_vec);         break; }
+		case ENERGYBLOCK_ITEM_TEXTURE_ID: { return getRandomTexObFromList(&energyBlockEquipment_texOb_vec); break; }
+		case PROTECTOR_ITEM_TEXTURE_ID:   { return getRandomTexObFromList(&protectorEquipment_texOb_vec);   break; }
+		case DROID_ITEM_TEXTURE_ID:       { return getRandomTexObFromList(&droidEquipment_texOb_vec);       break; }
+		case FREEZER_ITEM_TEXTURE_ID:     { return getRandomTexObFromList(&freezerEquipment_texOb_vec);     break; }
+		case SCANER_ITEM_TEXTURE_ID:      { return getRandomTexObFromList(&scanerEquipment_texOb_vec);      break; }
+		case GRAPPLE_ITEM_TEXTURE_ID:     { return getRandomTexObFromList(&grappleEquipment_texOb_vec);     break; }
+																		
+		case TURREL_TEXTURE_ID:           { return getRandomTexObFromList(&turrel_texOb_vec);               break; }
+		case LAZER_EFFECT_TEXTURE_ID:     { return getRandomTexObFromList(&lazerEffect_texOb_vec);          break; }
+		case LANDINGAREA_TEXTURE_ID:      { return getRandomTexObFromList(&landingArea_texOb_vec);          break; }
+				
+		case ANGAR_BG_TEXTURE_ID:         { return getRandomTexObFromList(&angarBg_texOb_vec);              break; }				
+		case STORE_BG_TEXTURE_ID:         { return getRandomTexObFromList(&storeBg_texOb_vec);              break; }	
+		case SHOP_BG_TEXTURE_ID:          { return getRandomTexObFromList(&shopBg_texOb_vec);               break; }	
+		case GOVERMENT_BG_TEXTURE_ID:     { return getRandomTexObFromList(&govermentBg_texOb_vec);          break; }	
+
+		case TEXT_BACKGROUND_TEXTURE_ID:  { return getRandomTexObFromList(&textBackground_texOb_vec);       break; }			
+
+		case SHIELD_EFFECT_TEXTURE_ID:    { return getRandomTexObFromList(&shieldEffect_texOb_vec);         break; }	
+		case NEBULA_TEXTURE_ID:           { return getRandomTexObFromList(&nebulaBgEffect_texOb_vec);       break; }
+				
+				
+	}
+}
+		
 
 
 
@@ -634,84 +506,48 @@ TextureOb* TextureManager :: returnParticleTexObByColorId(int _color_id)
 
 void TextureManager :: DEBUG_CheckShipTexOb()
 {
-     if (ship_race0_ranger_texOb_pList.size() == 0)
-        printf("ship_race0_ranger_texOb_pList.size() = 0\n"); 
-     if (ship_race0_warrior_texOb_pList.size() == 0)
-        printf("ship_race0_warrior_texOb_pList.size() = 0\n"); 
-     if (ship_race0_trader_texOb_pList.size() == 0)
-        printf("ship_race0_trader_texOb_pList.size() = 0\n"); 
-     if (ship_race0_pirat_texOb_pList.size() == 0)
-        printf("ship_race0_pirat_texOb_pList.size() = 0\n"); 
-     if (ship_race0_diplomat_texOb_pList.size() == 0)
-        printf("ship_race0_diplomat_texOb_pList.size() = 0\n"); 
+     if (ship_race0_ranger_texOb_vec.size() == 0)   printf("ship_race0_ranger_texOb_vec.size() = 0\n"); 
+     if (ship_race0_warrior_texOb_vec.size() == 0)  printf("ship_race0_warrior_texOb_vec.size() = 0\n"); 
+     if (ship_race0_trader_texOb_vec.size() == 0)   printf("ship_race0_trader_texOb_vec.size() = 0\n"); 
+     if (ship_race0_pirat_texOb_vec.size() == 0)    printf("ship_race0_pirat_texOb_vec.size() = 0\n"); 
+     if (ship_race0_diplomat_texOb_vec.size() == 0) printf("ship_race0_diplomat_texOb_vec.size() = 0\n"); 
 
-     if (ship_race1_ranger_texOb_pList.size() == 0)
-        printf("ship_race1_ranger_texOb_pList.size() = 0\n"); 
-     if (ship_race1_warrior_texOb_pList.size() == 0)
-        printf("ship_race1_warrior_texOb_pList.size() = 0\n"); 
-     if (ship_race1_trader_texOb_pList.size() == 0)
-        printf("ship_race1_trader_texOb_pList.size() = 0\n"); 
-     if (ship_race1_pirat_texOb_pList.size() == 0)
-        printf("ship_race1_pirat_texOb_pList.size() = 0\n"); 
-     if (ship_race1_diplomat_texOb_pList.size() == 0)
-        printf("ship_race1_diplomat_texOb_pList.size() = 0\n"); 
+     if (ship_race1_ranger_texOb_vec.size() == 0)   printf("ship_race1_ranger_texOb_vec.size() = 0\n"); 
+     if (ship_race1_warrior_texOb_vec.size() == 0)  printf("ship_race1_warrior_texOb_vec.size() = 0\n"); 
+     if (ship_race1_trader_texOb_vec.size() == 0)   printf("ship_race1_trader_texOb_vec.size() = 0\n"); 
+     if (ship_race1_pirat_texOb_vec.size() == 0)    printf("ship_race1_pirat_texOb_vec.size() = 0\n"); 
+     if (ship_race1_diplomat_texOb_vec.size() == 0) printf("ship_race1_diplomat_texOb_vec.size() = 0\n"); 
 
-     if (ship_race2_ranger_texOb_pList.size() == 0)
-        printf("ship_race2_ranger_texOb_pList.size() = 0\n"); 
-     if (ship_race2_warrior_texOb_pList.size() == 0)
-        printf("ship_race2_warrior_texOb_pList.size() = 0\n"); 
-     if (ship_race2_trader_texOb_pList.size() == 0)
-        printf("ship_race2_trader_texOb_pList.size() = 0\n"); 
-     if (ship_race2_pirat_texOb_pList.size() == 0)
-        printf("ship_race2_pirat_texOb_pList.size() = 0\n"); 
-     if (ship_race2_diplomat_texOb_pList.size() == 0)
-        printf("ship_race2_diplomat_texOb_pList.size() = 0\n"); 
+     if (ship_race2_ranger_texOb_vec.size() == 0)   printf("ship_race2_ranger_texOb_vec.size() = 0\n"); 
+     if (ship_race2_warrior_texOb_vec.size() == 0)  printf("ship_race2_warrior_texOb_vec.size() = 0\n"); 
+     if (ship_race2_trader_texOb_vec.size() == 0)   printf("ship_race2_trader_texOb_vec.size() = 0\n"); 
+     if (ship_race2_pirat_texOb_vec.size() == 0)    printf("ship_race2_pirat_texOb_vec.size() = 0\n"); 
+     if (ship_race2_diplomat_texOb_vec.size() == 0) printf("ship_race2_diplomat_texOb_vec.size() = 0\n"); 
      
+     if (ship_race3_ranger_texOb_vec.size() == 0)   printf("ship_race3_ranger_texOb_vec.size() = 0\n"); 
+     if (ship_race3_warrior_texOb_vec.size() == 0)  printf("ship_race3_warrior_texOb_vec.size() = 0\n"); 
+     if (ship_race3_trader_texOb_vec.size() == 0)   printf("ship_race3_trader_texOb_vec.size() = 0\n"); 
+     if (ship_race3_pirat_texOb_vec.size() == 0)    printf("ship_race3_pirat_texOb_vec.size() = 0\n"); 
+     if (ship_race3_diplomat_texOb_vec.size() == 0) printf("ship_race3_diplomat_texOb_vec.size() = 0\n"); 
 
-     if (ship_race3_ranger_texOb_pList.size() == 0)
-        printf("ship_race3_ranger_texOb_pList.size() = 0\n"); 
-     if (ship_race3_warrior_texOb_pList.size() == 0)
-        printf("ship_race3_warrior_texOb_pList.size() = 0\n"); 
-     if (ship_race3_trader_texOb_pList.size() == 0)
-        printf("ship_race3_trader_texOb_pList.size() = 0\n"); 
-     if (ship_race3_pirat_texOb_pList.size() == 0)
-        printf("ship_race3_pirat_texOb_pList.size() = 0\n"); 
-     if (ship_race3_diplomat_texOb_pList.size() == 0)
-        printf("ship_race3_diplomat_texOb_pList.size() = 0\n"); 
+     if (ship_race4_ranger_texOb_vec.size() == 0)   printf("ship_race4_ranger_texOb_vec.size() = 0\n"); 
+     if (ship_race4_warrior_texOb_vec.size() == 0)  printf("ship_race4_warrior_texOb_vec.size() = 0\n"); 
+     if (ship_race4_trader_texOb_vec.size() == 0)   printf("ship_race4_trader_texOb_vec.size() = 0\n"); 
+     if (ship_race4_pirat_texOb_vec.size() == 0)    printf("ship_race4_pirat_texOb_vec.size() = 0\n"); 
+     if (ship_race4_diplomat_texOb_vec.size() == 0) printf("ship_race4_diplomat_texOb_vec.size() = 0\n"); 
 
-     if (ship_race4_ranger_texOb_pList.size() == 0)
-        printf("ship_race4_ranger_texOb_pList.size() = 0\n"); 
-     if (ship_race4_warrior_texOb_pList.size() == 0)
-        printf("ship_race4_warrior_texOb_pList.size() = 0\n"); 
-     if (ship_race4_trader_texOb_pList.size() == 0)
-        printf("ship_race4_trader_texOb_pList.size() = 0\n"); 
-     if (ship_race4_pirat_texOb_pList.size() == 0)
-        printf("ship_race4_pirat_texOb_pList.size() = 0\n"); 
-     if (ship_race4_diplomat_texOb_pList.size() == 0)
-        printf("ship_race4_diplomat_texOb_pList.size() = 0\n"); 
-
-     if (ship_race6_ranger_texOb_pList.size() == 0)
-        printf("ship_race6_ranger_texOb_pList.size() = 0\n"); 
-     if (ship_race6_warrior_texOb_pList.size() == 0)
-        printf("ship_race6_warrior_texOb_pList.size() = 0\n"); 
-     if (ship_race6_trader_texOb_pList.size() == 0)
-        printf("ship_race6_trader_texOb_pList.size() = 0\n"); 
-     if (ship_race6_pirat_texOb_pList.size() == 0)
-        printf("ship_race6_pirat_texOb_pList.size() = 0\n"); 
-     if (ship_race6_diplomat_texOb_pList.size() == 0)
-        printf("ship_race6_diplomat_texOb_pList.size() = 0\n"); 
+     if (ship_race6_ranger_texOb_vec.size() == 0)   printf("ship_race6_ranger_texOb_vec.size() = 0\n"); 
+     if (ship_race6_warrior_texOb_vec.size() == 0)  printf("ship_race6_warrior_texOb_vec.size() = 0\n"); 
+     if (ship_race6_trader_texOb_vec.size() == 0)   printf("ship_race6_trader_texOb_vec.size() = 0\n"); 
+     if (ship_race6_pirat_texOb_vec.size() == 0)    printf("ship_race6_pirat_texOb_vec.size() = 0\n"); 
+     if (ship_race6_diplomat_texOb_vec.size() == 0) printf("ship_race6_diplomat_texOb_vec.size() = 0\n"); 
 
 
-     if (ship_race7_ranger_texOb_pList.size() == 0)
-        printf("ship_race7_ranger_texOb_pList.size() = 0\n"); 
-     if (ship_race7_warrior_texOb_pList.size() == 0)
-        printf("ship_race7_warrior_texOb_pList.size() = 0\n"); 
-     if (ship_race7_trader_texOb_pList.size() == 0)
-        printf("ship_race7_trader_texOb_pList.size() = 0\n"); 
-     if (ship_race7_pirat_texOb_pList.size() == 0)
-        printf("ship_race7_pirat_texOb_pList.size() = 0\n"); 
-     if (ship_race7_diplomat_texOb_pList.size() == 0)
-        printf("ship_race7_diplomat_texOb_pList.size() = 0\n"); 
+     if (ship_race7_ranger_texOb_vec.size() == 0)   printf("ship_race7_ranger_texOb_vec.size() = 0\n"); 
+     if (ship_race7_warrior_texOb_vec.size() == 0)  printf("ship_race7_warrior_texOb_vec.size() = 0\n"); 
+     if (ship_race7_trader_texOb_vec.size() == 0)   printf("ship_race7_trader_texOb_vec.size() = 0\n"); 
+     if (ship_race7_pirat_texOb_vec.size() == 0)    printf("ship_race7_pirat_texOb_vec.size() = 0\n"); 
+     if (ship_race7_diplomat_texOb_vec.size() == 0) printf("ship_race7_diplomat_texOb_vec.size() = 0\n"); 
 }
 
 

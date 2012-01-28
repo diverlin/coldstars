@@ -47,11 +47,9 @@ class Store
                 std::vector<ItemSlot*> slot_vec;
                 
                 void mouseControl();
-                void resetSlotsRenderInfoFlag();
         
                 void renderBackground() const;
                 void renderInternals() const;
-                void renderItemInfo() const;
 };
            
            

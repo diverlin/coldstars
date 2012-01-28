@@ -43,7 +43,7 @@ void BakModule :: addUniqueInfo()
 
 BakModule* bakModuleGenerator()
 {
-    	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);     	
+    	TextureOb* texOb = g_TEXTURE_MANAGER.getParticleTexObByColorId(RED_COLOR_ID);     	
     	int fuel_max_add = getRandInt(BAK_MODULE_FUEL_MIN, BAK_MODULE_FUEL_MAX);
     	
     	BakModule* bak_module = new BakModule(texOb, fuel_max_add);

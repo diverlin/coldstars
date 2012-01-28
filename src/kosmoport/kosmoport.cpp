@@ -24,14 +24,15 @@ Kosmoport :: Kosmoport(int _race_id)
 	id = 0;
 	type_id = KOSMOPORT_ID;
 
-        TextureOb* _texOb_slot = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.slot_texOb_pList);
+        TextureOb* _texOb_slot = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID);
+        TextureOb* _texOb_landingArea = g_TEXTURE_MANAGER.getRandomTexOb(LANDINGAREA_TEXTURE_ID);
+        
+        TextureOb* _texOb_angarBackground  = g_TEXTURE_MANAGER.getRandomTexOb(ANGAR_BG_TEXTURE_ID);   
+        TextureOb* _texOb_storeBackground  = g_TEXTURE_MANAGER.getRandomTexOb(STORE_BG_TEXTURE_ID);    
+        TextureOb* _texOb_shopBackground   = g_TEXTURE_MANAGER.getRandomTexOb(SHOP_BG_TEXTURE_ID);    
+        TextureOb* _texOb_govermentBackground = g_TEXTURE_MANAGER.getRandomTexOb(GOVERMENT_BG_TEXTURE_ID);    
 
-        TextureOb* _texOb_angarBackground  = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.angarBg_texOb_pList);   
-        TextureOb* _texOb_storeBackground  = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.storeBg_texOb_pList);    
-        TextureOb* _texOb_shopBackground   = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.shopBg_texOb_pList);    
-        TextureOb* _texOb_govermentBackground = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.govermentBg_texOb_pList);    
-
-        angar     = new Angar(_texOb_angarBackground, _texOb_slot);
+        angar     = new Angar(_texOb_angarBackground, _texOb_landingArea);
         store     = new Store(_texOb_storeBackground, _texOb_slot);
         shop      = new Shop(_texOb_shopBackground);
         goverment = new Goverment(_texOb_govermentBackground, _texOb_slot);

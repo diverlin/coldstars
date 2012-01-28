@@ -25,7 +25,15 @@ class CommonForSpaceItems
 {   
 	public:
         	CommonForSpaceItems();
-        	void CommonForSpaceItems_init(IdData, LifeData, TextureOb*, vec2f _start_pos);
+        	void CommonForSpaceItems_init(IdData, LifeData, TextureOb*);
+        	        	
+        	void setPlaceTypeId(int);
+        	//void setStarSystem(StarSystem*);
+        	
+    		//void setPosition(vec2f);
+    		//void setTargetPosition(vec2f);
+    		void moveToSpace(StarSystem*, vec2f);
+    
     
                 int getId() const;
                 int getTypeId() const;
@@ -33,10 +41,9 @@ class CommonForSpaceItems
                 bool getGarbageReady() const;
     		bool getAlive() const;
     		bool* getpAlive();
+    		int getPlaceTypeId() const;
                 int* getpPlaceTypeId();
         	Points* getPoints();
-        	void setPlaceTypeId(int);
-        	void setStarSystem(StarSystem*);
             	StarSystem* getStarSystem();
             	int getCollisionRadius() const;
             	int getMass() const;
@@ -44,6 +51,9 @@ class CommonForSpaceItems
             	void moveExternalyToPosition(vec2f);
         	void update_inSpace_inDynamic_TRUE();
         	void update_inSpace_inDynamic_FALSE();
+        	
+        	void updateDyingEffect_TRUE();
+        	void updateDyingEffect_FALSE();
 
 		void silentKill();
         	void hit_TRUE(int damage);

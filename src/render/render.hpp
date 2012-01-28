@@ -36,77 +36,44 @@ void enable_POINTSPRITE();
 void disable_POINTSPRITE();
 
 
-void drawFlatQuadPerVertexIn2D(vec2f bottomLeft, 
+void drawFlatQuadPerVertexIn2D(TextureOb* texOb,
+			       vec2f bottomLeft, 
 			       vec2f bottomRight, 
 			       vec2f topRight, 
 			       vec2f topLeft, 
-			       float z_pos, 
-			       float texCoord_bottomLeft_x = 0, 
-			       float texCoord_bottomLeft_y = 0, 
-			       float texCoord_bottomRight_x = 1, 
-			       float texCoord_bottomRight_y = 0, 
-			       float texCoord_topRight_x = 1, 
-			       float texCoord_topRight_y = 1, 
-			       float texCoord_topLeft_x = 0,
-			       float texCoord_topLeft_y = 1);
+			       float z_pos);
 			       
 
-void drawDynamic(float center_x, 
-		 float center_y, 
+void drawDynamic(TextureOb* texOb, 
+		 vec2f center, 
 		 float angleInDegree, 
 		 int minus_half_w, 
 		 int minus_half_h, 
 		 int plus_half_w, 
 		 int plus_half_h, 
-		 float pos_z, 
-		 float texCoord_bottomLeft_x = 0, 
-		 float texCoord_bottomLeft_y = 0, 
-		 float texCoord_bottomRight_x = 1, 
-		 float texCoord_bottomRight_y = 0, 
-		 float texCoord_topRight_x = 1, 
-		 float texCoord_topRight_y = 1, 
-		 float texCoord_topLeft_x = 0, 
-		 float texCoord_topLeft_y = 1);
+		 float pos_z);
 
 
 
 
-void drawRect(Rect rect, 
-	      float z_pos, 
-	      float texCoord_bottomLeft_x = 0, 
-	      float texCoord_bottomLeft_y = 0, 
-	      float texCoord_bottomRight_x = 1, 
-	      float texCoord_bottomRight_y = 0, 
-	      float texCoord_topRight_x = 1, 
-	      float texCoord_topRight_y = 1, 
-	      float texCoord_topLeft_x = 0, 
-	      float texCoord_topLeft_y = 1); // the drawrect function was inverted by Y axis
 
-
-void drawTexturedRect(GLuint tex, Rect rect, float z_pos);   //# z_pos = -1
+void drawRect(Rect rect, float z_pos); // the drawrect function was inverted by Y axis
+void drawTexturedRect(TextureOb* texOb, Rect rect, float z_pos);   
 
 
 void drawTexturedPoint(GLuint texture, vec2f _center, float size, float pos_z);
 
 
-void drawLine(GLuint texture, 
-              float start_pos_x, 
-              float start_pos_y, 
+
+void drawLine(TextureOb* texOb, 
+              vec2f start_pos, 
               float z_pos, 
               float len, 
               float angle_inD, 
-              int half_h, 
-              float texCoord_bottomLeft_x = 0, 
-              float texCoord_bottomLeft_y = 0, 
-              float texCoord_bottomRight_x = 1, 
-              float texCoord_bottomRight_y = 0, 
-              float texCoord_topRight_x = 1, 
-              float texCoord_topRight_y = 1, 
-              float texCoord_topLeft_x = 0, 
-              float texCoord_topLeft_y = 1);
+              int half_h);
 
 
-
+             
 void drawSimpleColoredText(std::string str, 
 			   vec2f pos, 
 			   Color4i color,

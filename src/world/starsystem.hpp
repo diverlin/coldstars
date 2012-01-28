@@ -31,9 +31,10 @@ class StarSystem
     		std::vector<Planet*>       PLANET_vec;
     		std::vector<Asteroid*>     ASTEROID_vec;
     		std::vector<Mineral*>      MINERAL_vec;
+    		std::vector<Bomb*>         BOMB_vec;
     		std::vector<Container*>    CONTAINER_vec;
     		std::vector<RocketBullet*> ROCKET_vec;
-
+    		std::vector<BlackHole*>    BLACKHOLE_vec;
 
 		std::vector<Ship*> SHIP_inSPACE_vec;
     		std::vector<Npc*>  NPC_inSPACE_vec;
@@ -51,11 +52,10 @@ class StarSystem
    		float getCollisionRadius() const;
    		
     
-    		StarSystem();
+    		StarSystem(int);
     		~StarSystem();
     
     		void setPosition(vec2f);
-		//void setDetailedSimulationFlag(bool);
 		
 		int getId() const;
                 int getTypeId() const;
@@ -73,13 +73,12 @@ class StarSystem
                 Npc* getRandomNpcExcludingRaceId(int);
                 Npc* getRandNpcByRaceId(int) const;
 		Npc* getRandNpc(std::vector<int>*) const;
-
     		// 
 
 		void update_TRUE(int timer);
 		void update_FALSE(int timer);
 
-	        void render(bool, bool);      
+	        void render(bool, bool, bool);      
    		    		
     		void mouseControl();
 
@@ -93,15 +92,13 @@ class StarSystem
                 void add(Star*);
                 void add(Planet*);
     		void add(Asteroid*);
-    		void add(Mineral*);
-    		void add(Container*);
+    		void add(Mineral*, vec2f);
+    		void add(Bomb*, vec2f);
+    		void add(Container*, vec2f);
     		void add(RocketBullet*);
-    		
-    		
-    		void killMineralById(int _id);
-    		void removeContainer(int _id);
+    		void add(BlackHole*, vec2f);
     		    		
-    		// effects
+     		// effects
     		void add(ExplosionEffect*);
     		void add(ShockWaveEffect*);
     		void add(LazerTraceEffect*);
@@ -114,8 +111,12 @@ class StarSystem
                 
     		bool removeShip(int _id);    
     		bool removeNpc(int _id, int _subtype_id);  
-   		//// 
-    		
+   		////
+   		
+   		//void addToRemoveFromOuterSpaceQueue(Mineral*);
+   		void addToRemoveFromOuterSpaceQueue(Bomb*);
+   		void addToRemoveFromOuterSpaceQueue(Ship*);
+   		    		
     	private:
                 int id, type_id;
                 int race_id, conqueror_race_id;
@@ -148,19 +149,26 @@ class StarSystem
     		std::vector<Planet*>       visible_PLANET_vec;
     		std::vector<Asteroid*>     visible_ASTEROID_vec;
     		std::vector<Mineral*>      visible_MINERAL_vec;
+    		std::vector<Bomb*>         visible_BOMB_vec;
     		std::vector<Container*>    visible_CONTAINER_vec;
     		std::vector<RocketBullet*> visible_ROCKET_vec;
-
+    		std::vector<BlackHole*>    visible_BLACKHOLE_vec;
+    		
     		std::vector<Ship*>      visible_SHIP_vec;
     		//  
-    		    	    	
+    		    	
+    		std::vector<Bomb*>         remove_BOMB_queue;
+    		std::vector<Mineral*>      remove_MINERAL_queue;
+    		std::vector<Ship*>         remove_SHIP_queue;
+    		    		    		    	    	
     		Garbage garbage;
                 
                 void postHyperJumpEvent();
                 void launchingEvent() const;
 
     		void asteroidManager(unsigned int num);
-    		    		
+
+   		void manageUnavaliableObjects();
     		void manageDeadObjects();
    		
                 void rocketCollision_TRUE();
@@ -169,19 +177,20 @@ class StarSystem
     		void asteroidCollision_TRUE();
     		void asteroidCollision_FALSE();
 
-    		void updateEntities_inDynamic_TRUE();
-    		void updateEntities_inDynamic_FALSE();
+    		void updateEntities_common_TRUE();
+    		void updateEntities_common_FALSE();
     		
     		void updateEntities_inStatic();
-    		
-    		void updateEffects();
+    		    		
+    		void updateEntities_inDynamic_TRUE();
+    		void updateEntities_inDynamic_FALSE();
     		
     		void fireEvents_TRUE(int timer);
     		void fireEvents_FALSE(int timer);
     		
     		
-		void findVisibleEntities();    
-    		void renderEntities_NEW();
+		void findVisibleEntities();  
+		void renderEntities_NEW();
     		void renderEntities_OLD();
     		        void restoreDefaultColor();
     			void restoreSceneColor();
@@ -192,6 +201,8 @@ class StarSystem
                 bool removeFromTheListById(std::vector<Npc*>* _pTo_npc_vec, int _id);
     		
     		void updateStates();
+    		
+    		void bombExplosionEvent(Bomb*);
     		
     		void debug__();    	
 };

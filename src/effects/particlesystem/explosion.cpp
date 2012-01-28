@@ -17,9 +17,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "explosion.hpp"
-
-           
 ExplosionEffect :: ExplosionEffect(TextureOb* _texOb, vec2f _center_pos, ParticleData _data_particle, int _num_particles)
 {  
     	is_alive = true;
@@ -76,31 +73,33 @@ void ExplosionEffect :: render()
 
 void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 {
-	//obSize = getRandInt(1, 9);  	// DEBUG
+	//obSize = getRandInt(1,9); // DEBUG
 	ExplosionEffect* explosion;
 	
 	TextureOb* texOb_particle; 
 	ParticleData  data_particle;
 	int particles_num;
-   
-	data_particle.velocity_start = getRandInt(13,17) * 0.1;
+
+	//data_particle.velocity_start = getRandInt(13,17) * 0.1;   
+	data_particle.velocity_start = (float)obSize*0.1f + getRandInt(40,90) * 0.01;
 	data_particle.velocity_end   = data_particle.velocity_start;
 	data_particle.d_velocity     = 0;
 
 	data_particle.alpha_start    = 1.0;
-	data_particle.alpha_end      = 0.1;
+	data_particle.alpha_end      = 0.0;
 	data_particle.d_alpha        = getRandInt(5,8) * 0.001;
 	
 	//data_particle.size_start
-	data_particle.size_end 	     = 0.1;
-	data_particle.d_size 	     = getRandInt(60,80) * 0.01; 
+	data_particle.size_end 	     = 0.1;		
+	data_particle.d_size 	     = (float)obSize*0.1f + getRandInt(30,50) * 0.01;  
+	//data_particle.d_size 	     = getRandInt(60,80) * 0.01 * obSize/3;  
         
 	if (obSize < 4)
 	{
 		particles_num = getRandInt(10 * obSize, 15 * obSize);    
 		data_particle.size_start  = 25 * obSize;                                 
 
-		texOb_particle = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
+		texOb_particle = g_TEXTURE_MANAGER.getParticleTexObByColorId(RED_COLOR_ID);
 
 		explosion = new ExplosionEffect(texOb_particle, _center_pos, data_particle, particles_num);
 		_starsystem->add(explosion);
@@ -110,7 +109,7 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 		particles_num = 40;
 		data_particle.size_start  = 25 * obSize;
 
-		texOb_particle = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
+		texOb_particle = g_TEXTURE_MANAGER.getParticleTexObByColorId(RED_COLOR_ID);
 		
 		explosion = new ExplosionEffect(texOb_particle, _center_pos, data_particle, particles_num);
 		_starsystem->add(explosion);
@@ -119,7 +118,7 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 		particles_num = 50;
 		data_particle.size_start  = 25 * (obSize-1);
 
-		texOb_particle = g_TEXTURE_MANAGER.returnParticleTexObByColorId(YELLOW_COLOR_ID);
+		texOb_particle = g_TEXTURE_MANAGER.getParticleTexObByColorId(YELLOW_COLOR_ID);
 		
 		explosion = new ExplosionEffect(texOb_particle, _center_pos, data_particle, particles_num);
 		_starsystem->add(explosion);
@@ -127,7 +126,7 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 		particles_num = 100;                              
 		data_particle.size_start  = 25 * (obSize-2);
 
-		texOb_particle = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);
+		texOb_particle = g_TEXTURE_MANAGER.getParticleTexObByColorId(RED_COLOR_ID);
 		
 		explosion = new ExplosionEffect(texOb_particle, _center_pos, data_particle, particles_num);
 		_starsystem->add(explosion);

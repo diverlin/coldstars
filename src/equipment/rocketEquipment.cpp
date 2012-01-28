@@ -44,7 +44,7 @@ RocketEquipment :: RocketEquipment(TextureOb* _texOb_item,
         countPrice();
         updateInfo();
                 
-        data_bullet.texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.rocketBullet_texOb_pList);    
+        data_bullet.texOb = g_TEXTURE_MANAGER.getRandomTexOb(ROCKET_BULLET_TEXTURE_ID);    
         data_bullet.damage        = damage;
         data_bullet.armor         = ROCKET_ARMOR;
         data_bullet.speed_init    = ROCKET_START_SPEED;
@@ -134,23 +134,38 @@ std::string RocketEquipment :: getRadiusStr()
 }
 
 
-void RocketEquipment :: fireEvent()
+void RocketEquipment :: fireEvent_TRUE()
 {
-    	RocketBullet* rocket1 = rocketGenerator(data_bullet, slot);
-          
-    	//r1.points.setCenter(l_owner.points.center[0]+15, l_owner.points.center[1])
+	int num;
+    	RocketBullet* rocket1 = rocketBulletGenerator(data_bullet, slot, 0.0f);
     	slot->getOwnerShip()->getStarSystem()->add(rocket1);
+    	num++;
 
-    	//r2 = rocketBulletInstance(self.bullet_texOb, l_owner, l_target, self.damage,  self.bullet_size, self.bullet_armor, self.bullet_speed_init, self.bullet_speed_max, self.bullet_d_speed, self.bullet_live_time, self.bullet_angular_speed)
-    	//r2.points.setCenter(l_owner.points.center[0]-15, l_owner.points.center[1])
-    	//r2.starsystem.ROCKET_list.append(r2)
+    	//RocketBullet* rocket2 = rocketBulletGenerator(data_bullet, slot, +2);
+    	//slot->getOwnerShip()->getStarSystem()->add(rocket2);
+    	//num++;
+
 
     	//rocketlaunch.play()
-    	ammo -= 2;
+    	ammo -= num;
 
     	deterioration();
 }
 
+
+void RocketEquipment :: fireEvent_FALSE()
+{
+	bool force_center_start = true;
+    	RocketBullet* rocket1 = rocketBulletGenerator(data_bullet, slot, -2, force_center_start);
+    	slot->getOwnerShip()->getStarSystem()->add(rocket1);
+
+    	RocketBullet* rocket2 = rocketBulletGenerator(data_bullet, slot, +2, force_center_start);
+    	slot->getOwnerShip()->getStarSystem()->add(rocket2);
+
+    	ammo -= 2;
+
+    	deterioration();
+}
 
 
 bool RocketEquipment :: insertModule(RocketModule* _rocket_module)
@@ -184,7 +199,7 @@ RocketEquipment* rocketEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.RocketEquipment_texOb_pList);    
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(ROCKET_ITEM_TEXTURE_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(ROCKET_ITEM_TEXTURE_ID, revision_id)   
     
     	int ammo_max_orig = getRandInt(ROCKET_AMMO_MIN, ROCKET_AMMO_MAX);

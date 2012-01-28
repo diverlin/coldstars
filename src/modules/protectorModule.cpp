@@ -43,7 +43,7 @@ void ProtectorModule :: addUniqueInfo()
 
 ProtectorModule* protectorModuleGenerator()
 {
-    	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
+    	TextureOb* texOb = g_TEXTURE_MANAGER.getParticleTexObByColorId(RED_COLOR_ID); 
     	int protection_add = getRandInt(PROTECTOR_MODULE_PROTECTION_MIN, PROTECTOR_MODULE_PROTECTION_MAX);
 
     	ProtectorModule* protector_module = new ProtectorModule(texOb, protection_add);

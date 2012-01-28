@@ -105,8 +105,8 @@ void Asteroid :: death_TRUE()
         
         	for (int i = 0; i<3; i++)
     		{
-                        Mineral* _mineral = createMineral(points.getCenter());
-			starsystem->add(_mineral);			
+                        Mineral* _mineral = createMineral();
+			starsystem->add(_mineral, points.getCenter());			
 			//printf("----%i,%i, %f,%f\n", id, i, _mineral->getPoints()->getCenter().x, _mineral->getPoints()->getCenter().y);
    		}
     	   		
@@ -122,8 +122,8 @@ void Asteroid :: death_FALSE()
      	{  
         	for (int i = 0; i<3; i++)
     		{        		
-        		Mineral* _mineral = createMineral(points.getCenter());
-			starsystem->add(_mineral);
+        		Mineral* _mineral = createMineral();
+			starsystem->add(_mineral, points.getCenter());
     		}
         	data_life.garbage_ready = true;
      	}
@@ -171,7 +171,7 @@ Asteroid* createAsteroid()
     	planet_data.orbit_phi_inD = getRandInt(0, 360);
     	planet_data.speed         = 0.1;
 
-        TextureOb* texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.asteroid_texOb_pList); 
+        TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(ASTEROID_TEXTURE_ID); 
     
         Asteroid* asteroid = new Asteroid(data_id, data_life, texOb, g_DEFORMED_SPHERE_MESH, planet_data);    	
         asteroid->update_inSpace_inDynamic_FALSE();

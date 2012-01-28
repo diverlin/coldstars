@@ -25,7 +25,7 @@ class ItemSlot
 {   
 	public:        
         	ItemSlot();
-		ItemSlot(int _subtype_id, Ship* _ship, TextureOb* _texOb, int _pos_x, int _pos_y);
+		ItemSlot(int _subtype_id, Ship* _ship, TextureOb* _texOb, int _pos_x, int _pos_y, int w, int h);
 		~ItemSlot();
                 
                 void setShipOwner(Ship*);
@@ -70,6 +70,11 @@ class ItemSlot
                 FreezerModule*   getFreezerModule()   const;
                 ScanerModule*    getScanerModule()    const;
                 GrappleModule*   getGrappleModule()   const;
+                
+                Bomb* getBomb() const;
+                //Artefact* getArtefact() const;
+                GoodsPack* getGoodsPack() const;
+                Ship* getShip() const;
 
                 TextureOb* getItemTexOb() const;
 		int getItemMass() const; 
@@ -81,12 +86,12 @@ class ItemSlot
 		template <typename ITEM_TYPE>
 		bool insertItem(ITEM_TYPE*);
 
-		bool insertGoods(GoodsPack* item);
-		                
+		bool insertGoods(GoodsPack*);
+		bool insertContainer(Container*);
+						                
 		void removeItem();
                 
-		void renderFrame(GLuint flash_tex);
-		void renderFrames(GLuint flash_tex);
+		void render(GLuint);
        
 		void renderEquipedItem();
 		void renderItemInfo(float offset_x = 0, float offset_y = 0);
@@ -96,13 +101,17 @@ class ItemSlot
                 void dropItemToSpace();
                 
                 bool SwapItemWith(ItemSlot*);
+                
+                void updateRange(TextureOb*);
+           	void drawRange();
+           	
+           	void targetObValidation(TargetObject*);
         
         private:
                 int type_id, subtype_id;               
                 int item_type_id, item_subtype_id;     
                                                 
                 bool is_EQUIPED;                       // slot is empty or equiped 
-                bool is_CURSORED;                      // cursor position collide with slot rect or not (used for rendering inserted item info) 
                 bool is_FLASHING;                      // flashing the slot to show that item can be inserted in that one 
                 
                 TextureOb* texOb;
@@ -137,6 +146,9 @@ class ItemSlot
 		GrappleModule*   grapple_module;
 		
 		GoodsPack* goods_pack;
+		Bomb*      bomb;
+		Ship* 	   ship;
+		//Artefact   artefact;
 		
 		void insert(RocketEquipment*);
 		void insert(LazerEquipment*);        
@@ -162,7 +174,16 @@ class ItemSlot
 		void insert(ScanerModule*);
 		void insert(GrappleModule*);
 
+		void insert(Bomb*);
+		void insert(Ship*);
+		//void insert(Artefact*);
+				
 		void resetFlags();
+		
+		std::vector<vec2f> range_vec;
+           	PathVisual range_visual;
+           	
+           	bool checkDistance(TargetObject*);
 }; 
 
 #endif

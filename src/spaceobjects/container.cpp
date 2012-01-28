@@ -18,14 +18,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-Container :: Container(IdData _data_id, LifeData _data_life, TextureOb* _texOb, vec2f _start_pos)
+Container :: Container(IdData _data_id, LifeData _data_life, TextureOb* _texOb)
 {
-    	CommonForSpaceItems_init(_data_id, _data_life, _texOb, _start_pos);
+    	CommonForSpaceItems_init(_data_id, _data_life, _texOb);
         
     	mass = 1;
 
-    	TextureOb* pTo_slotTexOb   = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.slot_texOb_pList);
-    	item_slot = new ItemSlot(CARGO_SLOT_ID, NULL, pTo_slotTexOb, 0, 0);
+    	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID);
+    	item_slot = new ItemSlot(CARGO_SLOT_ID, NULL, texOb_slot, 0, 0, 0, 0);
     	
     	velocity = getRandInt(40, 42) / 100.0;
 }
@@ -41,6 +41,7 @@ ItemSlot* Container :: getItemSlot() { return item_slot; }
         	
 void Container :: renderInfo()
 {
+	//printf("id = %i\n", data_id.id);
      	item_slot->getRect().setNewCenter(points.getCenter());	
      	item_slot->renderItemInfo(g_SCROLL_COORD_X, g_SCROLL_COORD_Y);
 }
@@ -48,7 +49,7 @@ void Container :: renderInfo()
  
 
 
-Container* createContainer(vec2f start_pos)
+Container* createContainer()
 {
         IdData data_id;
         data_id.id = g_CONTAINER_ID_GENERATOR.getNextId(); 
@@ -59,8 +60,8 @@ Container* createContainer(vec2f start_pos)
         data_life.dying_time = 30;
         
         
-	TextureOb* texOb_container = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.container_texOb_pList); 
-	Container* container = new Container(data_id, data_life, texOb_container, start_pos);
+	TextureOb* texOb_container = g_TEXTURE_MANAGER.getRandomTexOb(CONTAINER_TEXTURE_ID); 
+	Container* container = new Container(data_id, data_life, texOb_container);
 	
 	return container;
 }

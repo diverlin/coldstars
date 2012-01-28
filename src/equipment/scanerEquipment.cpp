@@ -111,7 +111,7 @@ ScanerEquipment* scanerEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.ScanerEquipment_texOb_pList);   
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(SCANER_ITEM_TEXTURE_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(SCANER_ITEM_TEXTURE_ID, revision_id)
 
 

@@ -44,6 +44,11 @@ void Garbage :: add(Mineral* _mineral)
 	MINERAL_vec.push_back(_mineral);
 }
 
+void Garbage :: add(Bomb* bomb)
+{
+	BOMB_vec.push_back(bomb);
+}
+
 void Garbage :: add(Container* _container)
 {
 	CONTAINER_vec.push_back(_container);
@@ -115,6 +120,12 @@ void Garbage :: clear()
 	        delete MINERAL_vec[mi];
     	}
        	MINERAL_vec.clear();
+       	
+       	for(unsigned int i = 0; i < BOMB_vec.size(); i++)
+   	{
+	        delete BOMB_vec[i];
+    	}
+       	BOMB_vec.clear();
        		
     	for(unsigned int ci = 0; ci < CONTAINER_vec.size(); ci++)
     	{

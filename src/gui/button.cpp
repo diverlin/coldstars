@@ -63,7 +63,7 @@ void Button :: setCenter(int _x, int _y)
    
 void Button :: render() const
 {
-   	drawTexturedRect(texOb->texture, rect, -1);
+   	drawTexturedRect(texOb, rect, -1);
 }
 
 void Button :: renderInfo() const

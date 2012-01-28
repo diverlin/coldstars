@@ -123,7 +123,7 @@ BakEquipment* bakEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.BakEquipment_texOb_pList);    // FAKE TEXTURE OB LIST IS USED HERE
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(BAK_ITEM_TEXTURE_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(RADAR_ITEM_TEXTURE_ID, revision_id) 
     	int fuel_max_orig = getRandInt(BAK_FUEL_MIN, BAK_FUEL_MAX);
 

@@ -46,7 +46,7 @@ GrappleEquipment :: GrappleEquipment(TextureOb* _texOb_item,
         
         for (int i = 0; i < maxNumItem_orig; i++)
         {
-                TargetObject* _targetOb = new TargetObject(NULL);   //!!!!
+                TargetObject* _targetOb = new TargetObject();
                 target_vec.push_back(_targetOb);
         }
 }
@@ -66,25 +66,31 @@ GrappleEquipment :: ~GrappleEquipment()
 
 void GrappleEquipment :: reshapeTargetObSlot(ItemSlot* _slot)
 {
-        for (unsigned int i = 0; i < target_vec.size(); i++)
-        {
-                target_vec[i]->bindSlot(_slot);
-        }
+        //for (unsigned int i = 0; i < target_vec.size(); i++)
+        //{
+        //        target_vec[i]->bindSlot(_slot);
+        //}
 }
 
 template <typename TARGET_TYPE>
 void GrappleEquipment :: add(TARGET_TYPE* _target)
 {
+
+	// avoiding dublicated items in the vector
         for (unsigned int i = 0; i < target_vec.size(); i++)
         {
                 if (target_vec[i]->getValid() == true)
                 {
                         if (target_vec[i]->getObId() == _target->getId() )
                         {
-                        	return;  // avoiding dublicated items in the vector
+                        	return;  
                         }
-                }                
-                else
+                }    
+        }                
+                
+        for (unsigned int i = 0; i < target_vec.size(); i++)
+        {
+                if (target_vec[i]->getValid() == false)
                 {
                         target_vec[i]->setObject(_target);
                         return;
@@ -97,7 +103,7 @@ void GrappleEquipment :: validationTargets()
 {
         for (unsigned int i = 0; i < target_vec.size(); i++)
         {
-                target_vec[i]->validation();
+                slot->targetObValidation(target_vec[i]);
         }
 }
 
@@ -107,9 +113,25 @@ std::string GrappleEquipment :: getTargetStr() const
 	
         for (unsigned int i = 0; i < target_vec.size(); i++)
         {
-        	if (target_vec[i]->getObTypeId() == MINERAL_ID)
+        	switch(target_vec[i]->getObTypeId())
         	{
-        		str += "m" + int2str(target_vec[i]->getObId()) + ", ";
+        		case MINERAL_ID:
+        		{
+        			str += "m" + int2str(target_vec[i]->getObId()) + ", ";
+        			break;
+        		}
+        		
+        		case CONTAINER_ID:
+        		{
+        			str += "c" + int2str(target_vec[i]->getObId()) + ", ";
+        			break;
+        		}
+        		        		
+        		case BOMB_ID:
+        		{
+        			str += "b" + int2str(target_vec[i]->getObId()) + ", ";
+        			break;
+        		}
         	}
         }
         
@@ -232,7 +254,7 @@ GrappleEquipment* grappleEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.GrappleEquipment_texOb_pList);   
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(GRAPPLE_ITEM_TEXTURE_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(GRAPPLE_ITEM_TEXTURE_ID, revision_id) 
 
     	int strength_orig   = getRandInt(GRAPPLE_STRENGTH_MIN, GRAPPLE_STRENGTH_MAX);

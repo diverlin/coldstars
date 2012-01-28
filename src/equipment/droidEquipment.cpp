@@ -101,8 +101,7 @@ bool DroidEquipment :: insertModule(DroidModule* _droid_module)
    	else 
         	return false;    
 }
-
-
+		
 
 DroidEquipment* droidEquipmentGenerator(int race_id, int revision_id)
 {
@@ -114,7 +113,7 @@ DroidEquipment* droidEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.DroidEquipment_texOb_pList);    
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(DROID_ITEM_TEXTURE_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(DROID_ITEM_TEXTURE_ID, revision_id)
 
     	int repair_orig     = getRandInt(DROID_REPAIR_MIN, DROID_REPAIR_MAX);

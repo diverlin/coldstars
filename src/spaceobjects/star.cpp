@@ -126,7 +126,7 @@ Star* createStar()
     	star_data.orbit_phi_inD = 0;
     	star_data.speed         = 1.8;
 
-    	TextureOb* texOb = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.star_texOb_pList);
+    	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(STAR_TEXTURE_ID);
     	Star* star = new Star(data_id, data_life, texOb, g_SPHERE_MESH, star_data);
     
     	return star;

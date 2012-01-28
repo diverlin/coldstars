@@ -38,7 +38,8 @@ class Npc
    		void setScanTarget(Ship*);
    		void setPlaceTypeId(int);
    		void setControlledByPlayer(bool);
-
+   		void setUpperControl(bool);
+   		
    		bool getAlive()    const;
    		bool getGarbageReady() const;
    		int getId()        const;
@@ -63,14 +64,7 @@ class Npc
    		bool* getpAlive();
    		int* getpPlaceTypeId();
    		float getCollisionRadius();
-   		
-   		//MacroTaskHolder* getMacroTaskMain() const;
-   		//MacroTaskHolder* getMacroTaskSelf() const;
-   		//MicroTaskHolder* getMicroTask() const;   		
-
      		
-     		
-   		bool getControlledByPlayer()   const;
                 unsigned long int getCredits() const;   
 
    		void bind(Ship*);
@@ -110,6 +104,7 @@ class Npc
    	private:
      		int race_id;
      		unsigned long int credits; 
+     		bool upper_control;
      		 
      		IdData data_id;
      		LifeData data_life;
@@ -121,9 +116,10 @@ class Npc
    	     	Land* land;
    	     	
    	     	InfoTable info;
-
-   	     	bool controlled_by_player;
-   	     	
+   	     	     		     		
+     		//MacroTaskHolder* macro_task_main;
+   		//MacroTaskHolder* macro_task_self;
+   		//MicroTaskHolder* micro_task;
    	     	Ship* ship;
    	     	
    	     	Skill* skill; 
@@ -143,15 +139,11 @@ class Npc
      		int place_type_id;
      		
      		void updateInfo();     		
-     		     		
-     		//MacroTaskHolder* macro_task_main;
-   		//MacroTaskHolder* macro_task_self;
-   		//MicroTaskHolder* micro_task;
  };
 
 
 
-Npc* generateNpc(int _race_id, int _subtype_id);
+Npc* getNewNpc(int _race_id, int _subtype_id);
 
 
 #endif 

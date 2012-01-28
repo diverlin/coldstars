@@ -41,11 +41,6 @@ void CommonForEquipment :: CommonForEquipment_init(int _subtype_id,
    
     	itemTexOb = _itemTexOb;
 
-    	if (itemTexOb->is_animated == false)
-      		pToFunc_render = &CommonForEquipment::_renderFrame;
-    	else
-       		pToFunc_render = &CommonForEquipment::_renderFrames;
-
     	w = itemTexOb->w;
     	h = itemTexOb->h;
     	race_id = itemTexOb->race_id;
@@ -79,8 +74,10 @@ void CommonForEquipment :: deterioration()
     	if (condition <= 0)
     	{
        		is_DAMAGED = true;
-       		if (slot->getOwnerShip() != NULL)   
+       		if (slot->getOwnerShip() != NULL) 
+       		{  
            		updateOwnerPropetries();
+           	}
     	}
 }
 
@@ -93,7 +90,9 @@ void CommonForEquipment :: repair()
     	{
         	is_DAMAGED = false;
         	if (slot->getOwnerShip() != NULL)   
+        	{
            		updateOwnerPropetries();
+           	}
     	}
 }
 
@@ -128,13 +127,7 @@ void CommonForEquipment :: renderInfo(Rect slot_rect, float offset_x, float offs
 
 void CommonForEquipment :: render(Rect slot_rect)
 {
-     	(this->*pToFunc_render)(slot_rect);
-}
-
-
-void CommonForEquipment :: _renderFrame(Rect slot_rect)
-{
-    	drawTexturedRect(itemTexOb->texture, slot_rect, -1.0);
+    	drawTexturedRect(itemTexOb, slot_rect, -1.0);
     	//if ((subtype == ROCKET_ID) or (subtype == TORPED_ID))
         	//drawSimpleText((slot_rect[0], slot_rect[1] + self.h/2), str(self.ammo_max) + '/' + str(self.ammo))
     
@@ -144,36 +137,7 @@ void CommonForEquipment :: _renderFrame(Rect slot_rect)
         		         slot_rect.getBottomLeft().y + (1.1 * INSERTED_MODULE_SIZE),
         			 INSERTED_MODULE_SIZE, 
         			 INSERTED_MODULE_SIZE);
-        	drawTexturedRect(texOb_modules_pList[mi]->texture, module_rect, -1);
+        	drawTexturedRect(texOb_modules_pList[mi], module_rect, -1);
     	}
-}           
+}
 
-
-void CommonForEquipment :: _renderFrames(Rect slot_rect)
-{
-    	int i = itemTexOb->updateAnimationFrame(); 
-    	glBindTexture(GL_TEXTURE_2D, itemTexOb->texture);
-    	drawRect(slot_rect, 
-    	    	 -1.0, 
-    	    	 itemTexOb->texCoord_bottomLeft_x_list[i], 
-    	    	 itemTexOb->texCoord_bottomLeft_y_list[i], 
-    	    	 itemTexOb->texCoord_bottomRight_x_list[i], 
-    	    	 itemTexOb->texCoord_bottomRight_y_list[i], 
-    	    	 itemTexOb->texCoord_topLeft_x_list[i], 
-    	    	 itemTexOb->texCoord_topLeft_y_list[i], 
-    	    	 itemTexOb->texCoord_topRight_x_list[i], 
-    	    	 itemTexOb->texCoord_topRight_y_list[i]);
-    	    
-    	//if ((subtype == ROCKET_ID) or (subtype == TORPED_ID))
-        	//drawSimpleText((slot_rect[0], slot_rect[1] + self.h/2), str(self.ammo_max) + '/' + str(self.ammo))
-    
-    	for (unsigned int mi = 0; mi < texOb_modules_pList.size(); mi++)
-    	{
-        	Rect module_rect(slot_rect.getBottomLeft().x + (1.1 * INSERTED_MODULE_SIZE) * (mi), 
-        			 slot_rect.getBottomLeft().y + (1.1 * INSERTED_MODULE_SIZE),
-        		         INSERTED_MODULE_SIZE, 
-        		         INSERTED_MODULE_SIZE);
-        		         
-        	drawTexturedRect(texOb_modules_pList[mi]->texture, module_rect, -1);
-    	}
-}      

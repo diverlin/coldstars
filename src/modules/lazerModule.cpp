@@ -52,7 +52,7 @@ void LazerModule :: addUniqueInfo()
 
 LazerModule* lazerModuleGenerator()
 {
-    	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID); 
+    	TextureOb* texOb = g_TEXTURE_MANAGER.getParticleTexObByColorId(RED_COLOR_ID); 
     	int damage_add = getRandInt(LAZER_MODULE_DAMAGE_MIN, LAZER_MODULE_DAMAGE_MAX);
     	int radius_add = getRandInt(LAZER_MODULE_RADIUS_MIN, LAZER_MODULE_RADIUS_MAX);
 

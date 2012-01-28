@@ -143,39 +143,9 @@ void Particle :: render() const
 	{
      		glPointSize(size);
         	
-        	glBegin(GL_POINTS);
-           		
+        	glBegin(GL_POINTS);           		
      			glColor4f(1.0, 1.0, 1.0, alpha);
      			glVertex3f(pos.x, pos.y, -2);
-     	
-     		glEnd();
+       		glEnd();
      	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

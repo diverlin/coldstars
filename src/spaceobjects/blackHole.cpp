@@ -1,4 +1,4 @@
-/*
+	 /*
 Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
 
 This program is free software; you can redistribute it and/or
@@ -18,50 +18,58 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-Mineral :: Mineral(IdData _data_id, LifeData _data_life, TextureOb* _texOb)
+BlackHole :: BlackHole(IdData _data_id, LifeData _data_life, TextureOb* _texOb)
 {        
     	CommonForSpaceItems_init(_data_id, _data_life, _texOb);
 
-    	mass = getRandInt(1, 4);
-    	velocity = getRandInt(40, 42) / 100.0;
+    	mass = getRandInt(100000, 400000);
+    	keep_moving = false;
 }
+
+BlackHole :: ~BlackHole() {}
     
-    
-void Mineral :: updateInfo()
+		
+void BlackHole :: update_inSpace_inDynamic_TRUE()
+{}
+
+void BlackHole :: update_inSpace_inDynamic_FALSE()
+{}
+
+void BlackHole :: updateInfo()
 {
 	info.clear();
 
-    	info.addTitleStr("MINERAL");
+    	info.addTitleStr("BLACKHOLE");
 
-    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->getId()));
-    	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
+    	//info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->getId()));
+    	info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 }
             
 
-void Mineral :: renderInfo()
+void BlackHole :: renderInfo()
 {
      	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y);    
 }
 
 
-Mineral* createMineral()
+BlackHole* getNewBlackHole()
 {
         IdData data_id;
-        data_id.id         = g_MINERAL_ID_GENERATOR.getNextId();
-    	data_id.type_id    = MINERAL_ID;
+        data_id.id         = g_BLACKHOLE_ID_GENERATOR.getNextId();
+    	data_id.type_id    = BLACKHOLE_ID;
     	//data_id.subtype_id = ; 
         
         LifeData data_life;
         data_life.is_alive   = true;
         data_life.garbage_ready = false;
-    	data_life.armor      = getRandInt(1,6);
+    	data_life.armor      = 100000;
         data_life.dying_time = 30;        
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(MINERAL_TEXTURE_ID); 
-	Mineral* mineral = new Mineral(data_id, data_life, texOb);
+	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(BLACKHOLE_TEXTURE_ID); 
+	BlackHole* blackhole = new BlackHole(data_id, data_life, texOb);
 
-	return mineral;
+	return blackhole;
 }
 
 

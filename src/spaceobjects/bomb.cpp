@@ -18,38 +18,62 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-Mineral :: Mineral(IdData _data_id, LifeData _data_life, TextureOb* _texOb)
+Bomb :: Bomb(IdData _data_id, LifeData _data_life, TextureOb* _texOb)
 {        
     	CommonForSpaceItems_init(_data_id, _data_life, _texOb);
 
     	mass = getRandInt(1, 4);
     	velocity = getRandInt(40, 42) / 100.0;
+    	
+    	damage = 300;
+    	radius = 300;
 }
+
+Bomb :: ~Bomb() {}
     
     
-void Mineral :: updateInfo()
+    
+int Bomb :: getFunctionalSlotSubTypeId() const { return NONE_SLOT_ID; }
+TextureOb* Bomb :: getTexOb() const { return texOb; }
+
+int Bomb :: getDamage() const { return damage; }
+int Bomb :: getRadius() const { return radius; }
+        	
+void Bomb :: bindSlot(ItemSlot* slot) {}
+
+void Bomb :: updateOwnerPropetries() {}
+		
+void Bomb :: updateInfo()
 {
 	info.clear();
 
-    	info.addTitleStr("MINERAL");
+    	info.addTitleStr("BOMB");
 
-    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->getId()));
+    	//info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->getId()));
+    	info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
+    	info.addNameStr("damage:");          info.addValueStr(int2str(damage));
     	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 }
             
 
-void Mineral :: renderInfo()
+void Bomb :: renderInfo()
 {
      	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y);    
 }
 
+void Bomb :: renderInfo(Rect slot_rect, float offset_x, float offset_y)
+{
+     	drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.getCenter().x, slot_rect.getCenter().y, offset_x, offset_y);
+}
 
-Mineral* createMineral()
+
+
+Bomb* getNewBomb()
 {
         IdData data_id;
-        data_id.id         = g_MINERAL_ID_GENERATOR.getNextId();
-    	data_id.type_id    = MINERAL_ID;
+        data_id.id         = g_BOMB_ID_GENERATOR.getNextId();
+    	data_id.type_id    = BOMB_ID;
     	//data_id.subtype_id = ; 
         
         LifeData data_life;
@@ -58,10 +82,10 @@ Mineral* createMineral()
     	data_life.armor      = getRandInt(1,6);
         data_life.dying_time = 30;        
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(MINERAL_TEXTURE_ID); 
-	Mineral* mineral = new Mineral(data_id, data_life, texOb);
+	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(BOMB_TEXTURE_ID); 
+	Bomb* bomb = new Bomb(data_id, data_life, texOb);
 
-	return mineral;
+	return bomb;
 }
 
 

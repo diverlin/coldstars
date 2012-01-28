@@ -114,7 +114,7 @@ FreezerEquipment* freezerEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.FreezerEquipment_texOb_pList);    // FAKE TEXTURE OB LIST IS USED HERE
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(FREEZER_ITEM_TEXTURE_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(RADAR_ITEM_TEXTURE_ID, revision_id) 
 
     	int freeze_orig     = getRandInt(FREEZER_FREEZE_MIN, FREEZER_FREEZE_MAX);

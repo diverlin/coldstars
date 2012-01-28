@@ -52,7 +52,7 @@ void EnergizerModule :: addUniqueInfo()
 
 EnergizerModule* energizerModuleGenerator()
 {
-     	TextureOb* texOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(RED_COLOR_ID);      	
+     	TextureOb* texOb = g_TEXTURE_MANAGER.getParticleTexObByColorId(RED_COLOR_ID);      	
      	int energy_max_add  = getRandInt(ENERGIZER_MODULE_ENERGY_MIN, ENERGIZER_MODULE_ENERGY_MAX);
      	int restoration_add = getRandInt(ENERGIZER_MODULE_RESTORATION_MIN, ENERGIZER_MODULE_RESTORATION_MAX);
      	

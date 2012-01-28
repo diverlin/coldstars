@@ -23,7 +23,7 @@ MacroTaskHolder :: MacroTaskHolder()
 	is_valid = false;
 	
 	scenario = NULL;
-	target   = new TargetObject(NULL);
+	target   = new TargetObject();
 }
 
 MacroTaskHolder :: ~MacroTaskHolder()
@@ -49,7 +49,7 @@ void MacroTaskHolder :: reset()
 	is_valid = false;
 	
 	target->reset();
-	//scenario->reset();
+	scenario = NULL;
 }
 
 
@@ -60,7 +60,7 @@ MicroTaskHolder :: MicroTaskHolder()
 	is_valid = false;
 	
 	scenario = NULL;
-	target   = new TargetObject(NULL);
+	target   = new TargetObject();
 }
 
 MicroTaskHolder :: ~MicroTaskHolder()
@@ -77,6 +77,15 @@ void MicroTaskHolder :: set(MicroScenarioBase* _scenario, TARGET_TYPE* _target)
 	scenario = _scenario;
 	target->setObject(_target);
 }
+
+void MicroTaskHolder :: reset()
+{
+	is_valid = false;
+	
+	target->reset();
+	scenario = NULL;
+}
+
 
 
 
@@ -167,7 +176,14 @@ void StateMachine :: setCurrentMicroTask(MicroScenarioBase* _new_state,  TARGET_
 	}
 }
 
+void StateMachine :: reset()
+{
+	current_macroTask->reset();		
+	previous_macroTask->reset();
 
+	current_microTask->reset();		
+	previous_microTask->reset();
+}
 
 
 

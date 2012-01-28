@@ -52,8 +52,9 @@ class RocketEquipment : public CommonForEquipment
 		int getDamage() const;
 		int getRadius() const;
 		
-      		void fireEvent();
-      
+      		void fireEvent_TRUE();
+      		void fireEvent_FALSE();
+      		      
       		bool insertModule(RocketModule*);
       		void virtual updateOwnerPropetries();
       		

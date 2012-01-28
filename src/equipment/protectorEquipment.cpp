@@ -112,7 +112,7 @@ ProtectorEquipment* protectorEquipmentGenerator(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.returnPointerToRandomTexObFromList(&g_TEXTURE_MANAGER.ProtectorEquipment_texOb_pList);   
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(PROTECTOR_ITEM_TEXTURE_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(PROTECTOR_ITEM_TEXTURE_ID, revision_id) 
 
     	int protection_orig = getRandInt(PROTECTOR_PROTECTION_MIN, PROTECTOR_PROTECTION_MAX);

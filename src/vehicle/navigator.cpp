@@ -21,7 +21,7 @@ Navigator :: Navigator(Ship* _ship_owner)
 {      
 	ship_owner = _ship_owner;
    
-        targetOb = new TargetObject(NULL);
+        targetOb = new TargetObject();
         
 	//target_distance = 0.0;
 	
@@ -333,7 +333,7 @@ vec2f Navigator :: calcRoundPath()  // not working yet
         float start_angle_inD = ship_owner->getPoints()->getAngleDegree();
         vec2f start_pos = ship_owner->getPoints()->getCenter();
         
-        float R = 100.0f;
+        float R = 100.0f; //(float)getRandInt(80, 130);
                         
         float gamma1 = (start_angle_inD + 90) / RADIAN_TO_DEGREE_RATE;
         float gamma2 = (start_angle_inD - 90) / RADIAN_TO_DEGREE_RATE;
@@ -555,15 +555,6 @@ vec2f Navigator :: calcRoundPath()  // not working yet
                         new_pos.x = rotation_center_x + R * cos(angle - PI/2);    
                         new_pos.y = rotation_center_y + R * sin(angle - PI/2);
                         
-                        if ((new_pos.x - prev_pos.x) > 20.0f)
-                        {
-                        	printf("AHTUNG (new_pos.x - prev_pos.x) > 20.0f\n");
-                        }
-                        if ((new_pos.y - prev_pos.y) > 20.0f)
-                        {
-                        	printf("AHTUNG (new_pos.y - prev_pos.y) > 20.0f\n");
-                        }
-                                        
             		angleInD = atan2(prev_pos.y - new_pos.y, prev_pos.x - new_pos.x) * RADIAN_TO_DEGREE_RATE;
             		angleInD = atan2(new_pos.y - prev_pos.y, new_pos.x - prev_pos.x) * RADIAN_TO_DEGREE_RATE;
 
@@ -643,7 +634,6 @@ void Navigator :: drawPath()
         if (direction_list_END == false)
         {
                 visual_path.draw();
-
 
         	//visual_c1c2.draw();   // debug
         	//visual_rc.draw();     // debug

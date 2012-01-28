@@ -16,20 +16,18 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "itemSlot.hpp"
-
 
 ItemSlot :: ItemSlot()
 {}
 
 
-ItemSlot :: ItemSlot(int _subtype_id, Ship* _owner_ship, TextureOb* _texOb, int _pos_x, int _pos_y)
+ItemSlot :: ItemSlot(int _subtype_id, Ship* _owner_ship, TextureOb* _texOb, int _pos_x, int _pos_y, int w, int h)
 {
-/* 
+	/* 
         The class provides implementation to insert/hold/remove all game items (equipments, modules and so on)
         Depending on slot subtype there is the rule what items can be used with slot (for example 
         Lazer weapon item cannot be inserted to drive slot and so on).
-*/
+	*/
 
         type_id    = SLOT_ID;
 	subtype_id = _subtype_id;
@@ -38,15 +36,13 @@ ItemSlot :: ItemSlot(int _subtype_id, Ship* _owner_ship, TextureOb* _texOb, int 
 
         texOb = _texOb;
      
-        rect = Rect(_pos_x, _pos_y, texOb->w, texOb->h);         // create rect with size of the texture
+        rect = Rect(_pos_x, _pos_y, w, h);         
 
         item_type_id    = NONE_ID;
         item_subtype_id = NONE_ID;
      
         is_EQUIPED       = false;
         is_FLASHING      = false;
-        is_CURSORED      = false;      
-        
 
         turrel              = NULL;
                 
@@ -75,6 +71,8 @@ ItemSlot :: ItemSlot(int _subtype_id, Ship* _owner_ship, TextureOb* _texOb, int 
 	grapple_module   = NULL;
 		
 	goods_pack = NULL;
+	bomb       = NULL;
+	//artefact   = NULL;
 }
 
 ItemSlot :: ~ItemSlot()
@@ -110,23 +108,32 @@ ItemSlot :: ~ItemSlot()
     	{
 		delete goods_pack;
 	}
+
+    	if (item_type_id == BOMB_ID)
+    	{
+		delete bomb;
+	}
+	
+	//if (item_type_id == ARTEFACT_ID)
+    	//{
+	//	delete artefact;
+	//}
 }
 
 void ItemSlot :: setShipOwner(Ship* _ship_owner) {  owner_ship = _ship_owner; }
+void ItemSlot :: setFlashingStatus(bool new_status) { is_FLASHING = new_status; }
                 
 int ItemSlot :: getTypeId()          const { return type_id; }
 int ItemSlot :: getSubTypeId()       const { return subtype_id; }
-int ItemSlot :: getItemTypeId()    const { return item_type_id; }
-int ItemSlot :: getItemSubTypeId() const { return item_subtype_id; }
+int ItemSlot :: getItemTypeId()      const { return item_type_id; }
+int ItemSlot :: getItemSubTypeId()   const { return item_subtype_id; }
 
 Turrel* ItemSlot :: getTurrel() const { return turrel; }
-void ItemSlot :: bindTurrel( Turrel* _turrel) {turrel = _turrel; }
+void ItemSlot :: bindTurrel( Turrel* turrel) { this->turrel = turrel; }
                                 
 bool ItemSlot :: getEquipedStatus() const  { return is_EQUIPED; }
-bool ItemSlot :: getCursoredStatus()            const { return is_CURSORED; }
-void ItemSlot :: setCursoredStatus(bool new_status) { is_CURSORED = new_status; }
 bool ItemSlot :: getFlashingStatus() const { return is_FLASHING; }
-void ItemSlot :: setFlashingStatus(bool new_status) { is_FLASHING = new_status; }
+
                 
 Rect& ItemSlot :: getRect() { return rect; }
 
@@ -156,7 +163,11 @@ FreezerModule*      ItemSlot :: getFreezerModule()      const { return freezer_m
 ScanerModule*       ItemSlot :: getScanerModule()       const { return scaner_module; }
 GrappleModule*      ItemSlot :: getGrappleModule()      const { return grapple_module; }
 
+Bomb* ItemSlot :: getBomb() const { return bomb; }
+//Artefact* ItemSlot :: getArtefact() const { return artefact; }
 
+GoodsPack* ItemSlot :: getGoodsPack() const { return goods_pack; }
+Ship* ItemSlot :: getShip() const { return ship; }
 
 template<typename ITEM_TYPE>
 bool ItemSlot :: insertItem(ITEM_TYPE* item)
@@ -223,6 +234,10 @@ void ItemSlot :: insert(ScanerModule* item)    	{ scaner_module = item; }
 void ItemSlot :: insert(GrappleModule* item)  	{ grapple_module = item; }
 
 
+void ItemSlot :: insert(Bomb* item)  	{ bomb = item; }
+//void ItemSlot :: insert(Artefact* item) { artefact = item; }
+void ItemSlot :: insert(Ship* item)  	{ ship = item; }
+
 bool ItemSlot :: insertGoods(GoodsPack* item)
 {
      	if (subtype_id == CARGO_SLOT_ID)
@@ -238,226 +253,299 @@ bool ItemSlot :: insertGoods(GoodsPack* item)
 	else
 		return false;
 }
+
+
+bool ItemSlot :: insertContainer(Container* container)
+{
+	return this->SwapItemWith(container->getItemSlot());	
+}
+
+
+//bool ItemSlot :: insertBomb(Bomb* item)
+//{
+     	//if (subtype_id == CARGO_SLOT_ID)
+	//{
+		//insert(item);
+        
+		//item_type_id    = item->getTypeId();
+		//item_subtype_id = item->getSubTypeId();
+		
+		//is_EQUIPED = true; 
+		//return true;
+	//}
+	//else
+		//return false;
+//}
 		
 		
 
 void ItemSlot :: removeItem()
 {
-	switch(item_subtype_id)
+	switch(item_type_id)
 	{
-		case ROCKET_EQUIPMENT_ID:
+		case EQUIPMENT_ID:
 		{
-    			rocket_equipment = NULL;
-    			resetFlags();
-    			if (subtype_id != CARGO_SLOT_ID)
-    				owner_ship->updateFireAbility();
+			switch(item_subtype_id)
+			{
+				case ROCKET_EQUIPMENT_ID:
+				{
+    					rocket_equipment = NULL;
+    					resetFlags();
+    					if (subtype_id != CARGO_SLOT_ID) 
+    					{ 
+    						owner_ship->updateFireAbility(); 
+    					}
     				
-    			break;
-    		}
-    	
-    		case LAZER_EQUIPMENT_ID:
-		{
-    			lazer_equipment = NULL;
-    			resetFlags();
-    			if (subtype_id != CARGO_SLOT_ID)
-    				owner_ship->updateFireAbility();
+    					break;
+    				}
     				
-    			break;
-    		}
-    
-        	case RADAR_EQUIPMENT_ID:
-		{
-    			radar_equipment = NULL;
-    			resetFlags();
+    		    		case LAZER_EQUIPMENT_ID:
+				{
+    					lazer_equipment = NULL;
+    					resetFlags();
+    					if (subtype_id != CARGO_SLOT_ID) 
+    					{ 
+    						owner_ship->updateFireAbility(); 
+    					}
+    				
+    					break;
+    				}
+    			    
+        			case RADAR_EQUIPMENT_ID:
+				{
+    					radar_equipment = NULL;
+    					resetFlags();
     			    			
-    			if (subtype_id != CARGO_SLOT_ID)
-    				owner_ship->updateRadarAbility();
+    					if (subtype_id != CARGO_SLOT_ID) 
+    					{ 
+    						owner_ship->updateRadarAbility(); 
+    					}
     				
-    			break;
-      		}
+    					break;
+      				}
     						
-        	case DRIVE_EQUIPMENT_ID:
-		{
-    			drive_equipment = NULL;
-    			resetFlags();
+        			case DRIVE_EQUIPMENT_ID:
+				{
+    					drive_equipment = NULL;
+    					resetFlags();
     			
-    			if (subtype_id != CARGO_SLOT_ID)
-    			{ 
-    				owner_ship->updateDriveAbility();
-    				owner_ship->updateJumpAbility();
+    					if (subtype_id != CARGO_SLOT_ID)
+    					{ 
+    						owner_ship->updateDriveAbility();
+    						owner_ship->updateJumpAbility();
+    					}
+    			
+    					break;	
+    				}		
+
+        			case BAK_EQUIPMENT_ID:
+				{
+    					bak_equipment = NULL;
+    					resetFlags();
+    					if (subtype_id != CARGO_SLOT_ID)
+    					{ 
+    						owner_ship->updateDriveAbility();
+    						owner_ship->updateJumpAbility();
+    					}
+    			
+    					break;
+		    		}
+
+        			case ENERGIZER_EQUIPMENT_ID:
+				{
+    					energizer_equipment = NULL;
+    					resetFlags();
+    					if (subtype_id != CARGO_SLOT_ID) 
+    					{
+    						owner_ship->updateEnergyAbility();
+    					}
+    				
+    					break;
+    				}
+
+        			case PROTECTOR_EQUIPMENT_ID:
+				{
+    					protector_equipment = NULL;
+    					resetFlags();
+    					if (subtype_id != CARGO_SLOT_ID)
+    					{
+    						owner_ship->updateProtectionAbility();
+    					}
+    				
+    					break;
+    				}
+    	
+        			case DROID_EQUIPMENT_ID:
+				{
+    					droid_equipment = NULL;
+    					resetFlags();
+    					if (subtype_id != CARGO_SLOT_ID)
+    					{
+    						owner_ship->updateRepairAbility();
+    					}
+    				
+    					break;
+    				}
+
+        			case FREEZER_EQUIPMENT_ID:
+				{
+    					freezer_equipment = NULL;
+    					resetFlags();
+    					if (subtype_id != CARGO_SLOT_ID)
+    					{
+    						owner_ship->updateFreezeAbility();
+    					}
+    				
+    					break;
+    				}
+    	
+
+ 	        		case SCANER_EQUIPMENT_ID:
+				{
+    					scaner_equipment = NULL;
+    					resetFlags();
+    					if (subtype_id != CARGO_SLOT_ID)
+    					{
+    						owner_ship->updateScanAbility();
+    					}
+    				
+    					break;
+    				}
+    	
+        			case GRAPPLE_EQUIPMENT_ID:
+				{
+    					grapple_equipment = NULL;
+    					resetFlags();
+    					if (subtype_id != CARGO_SLOT_ID)
+    					{
+    						owner_ship->updateGrabAbility();
+    					}
+    				
+    					break;
+    				}
     			}
-    			
-    			break;	
-    		}
-
-        	case BAK_EQUIPMENT_ID:
-		{
-    			bak_equipment = NULL;
-    			resetFlags();
-    			if (subtype_id != CARGO_SLOT_ID)
-    			{ 
-    				owner_ship->updateDriveAbility();
-    				owner_ship->updateJumpAbility();
-    			}
-    			
-    			break;
-    		}
-
-        	case ENERGIZER_EQUIPMENT_ID:
-		{
-    			energizer_equipment = NULL;
-    			resetFlags();
-    			if (subtype_id != CARGO_SLOT_ID)
-    				owner_ship->updateEnergyAbility();
-    				
-    			break;
-    		}
-
-        	case PROTECTOR_EQUIPMENT_ID:
-		{
-    			protector_equipment = NULL;
-    			resetFlags();
-    			if (subtype_id != CARGO_SLOT_ID)
-    				owner_ship->updateProtectionAbility();
-    				
-    			break;
-    		}
-    	
-        	case DROID_EQUIPMENT_ID:
-		{
-    			droid_equipment = NULL;
-    			resetFlags();
-    			if (subtype_id != CARGO_SLOT_ID)
-    				owner_ship->updateRepairAbility();
-    				
-    			break;
-    		}
-
-        	case FREEZER_EQUIPMENT_ID:
-		{
-    			freezer_equipment = NULL;
-    			resetFlags();
-    			if (subtype_id != CARGO_SLOT_ID)
-    				owner_ship->updateFreezeAbility();
-    				
-    			break;
-    		}
-    	
-
- 	        case SCANER_EQUIPMENT_ID:
-		{
-    			scaner_equipment = NULL;
-    			resetFlags();
-    			if (subtype_id != CARGO_SLOT_ID)
-    				owner_ship->updateScanAbility();
-    				
-    			break;
-    		}
-    	
-        	case GRAPPLE_EQUIPMENT_ID:
-		{
-    			grapple_equipment = NULL;
-    			resetFlags();
-    			if (subtype_id != CARGO_SLOT_ID)
-    				owner_ship->updateGrabAbility();
-    				
-    			break;
-    		}
-
-
-        	case ROCKET_MODULE_ID:
-		{
-    			rocket_module = NULL;
-    			resetFlags();
-    			
-    			break;
-    		}	 
-
-        	case LAZER_MODULE_ID:
-		{
-    			lazer_module = NULL;
-    			resetFlags();
-    			
-    			break;
-    		}	 
-    	
-        	case RADAR_MODULE_ID:
-		{
-    			radar_module = NULL;
-    			resetFlags();
-    			
-    			break;
-    		}	 
-    	
-        	case DRIVE_MODULE_ID:
-		{
-    			drive_module = NULL;
-    			resetFlags();
-    			
-    			break;
-    		}	 
-    		
-        	case BAK_MODULE_ID:
-		{
-    			bak_module = NULL;
-    			resetFlags();
-    			
-    			break;
-    		}
-    	
-        	case ENERGIZER_MODULE_ID:
-		{
-    			energizer_module = NULL;
-    			resetFlags();
-    			
-    			break;
-    		}
-
-       		case PROTECTOR_MODULE_ID:
-		{
-    			protector_module = NULL;
-    			resetFlags();
-    			
-    			break;
-    		}
-
-        	case DROID_MODULE_ID:
-		{
-    			droid_module = NULL;
-    			resetFlags();
-    			
-    			break;
-    		}
-
-        	case FREEZER_MODULE_ID:
-		{
-    			freezer_module = NULL;
-    			resetFlags();
-    			
     			break;
     		}	
-    	
-    		case SCANER_MODULE_ID:
-		{
-    			scaner_module = NULL;
-    			resetFlags();
     			
-    			break;
-    		}
+    		case MODULE_ID:
+    		{
+			switch(item_subtype_id)
+			{
+		       		case ROCKET_MODULE_ID:
+				{			
+    					rocket_module = NULL;
+    					resetFlags();
+    			
+    					break;
+    				}	 
 
-    		case GRAPPLE_MODULE_ID:
-		{
-    			grapple_module = NULL;
-    			resetFlags();
+        			case LAZER_MODULE_ID:
+				{
+    					lazer_module = NULL;
+    					resetFlags();
     			
+    					break;
+    				}	 
+    	
+        			case RADAR_MODULE_ID:
+				{
+    					radar_module = NULL;
+    					resetFlags();
+    			
+    					break;
+    				}	 
+    	
+        			case DRIVE_MODULE_ID:
+				{
+    					drive_module = NULL;
+    					resetFlags();
+    			
+    					break;
+    				}	 
+    		
+        			case BAK_MODULE_ID:
+				{
+    					bak_module = NULL;
+    					resetFlags();
+    			
+    					break;
+    				}
+    	
+        			case ENERGIZER_MODULE_ID:
+				{
+    					energizer_module = NULL;
+    					resetFlags();
+    			
+    					break;
+    				}
+
+       				case PROTECTOR_MODULE_ID:
+				{
+    					protector_module = NULL;
+    					resetFlags();
+    			
+    					break;
+    				}
+
+        			case DROID_MODULE_ID:
+				{
+    					droid_module = NULL;
+    					resetFlags();
+    			
+    					break;
+    				}
+
+        			case FREEZER_MODULE_ID:
+				{
+    					freezer_module = NULL;
+    					resetFlags();
+    			
+    					break;
+    				}	
+    	
+    				case SCANER_MODULE_ID:
+				{
+    					scaner_module = NULL;
+    					resetFlags();
+    			
+    					break;
+    				}
+
+    				case GRAPPLE_MODULE_ID:
+				{
+    					grapple_module = NULL;
+    					resetFlags();
+    			
+    					break;
+    				}
+    			}
     			break;
     		}
-    	}
-    	
-    	if (item_type_id == GOODS_ID)
-	{
-		goods_pack = NULL;
-		resetFlags();
+    		
+    		
+    		case  BOMB_ID:
+		{
+			bomb = NULL;
+			resetFlags();
+			
+			break;
+		}
+	
+    		case GOODS_ID:
+		{
+			goods_pack = NULL;
+			resetFlags();
+			
+			break;
+		}
+		
+		case SHIP_ID:
+		{
+			ship = NULL;
+			resetFlags();
+			
+			break;
+		}
 	}
 }
 
@@ -520,9 +608,9 @@ int ItemSlot :: getItemPrice() const
 }
 
 
-void ItemSlot :: renderFrame(GLuint flash_tex)
+void ItemSlot :: render(GLuint flash_tex)
 {
-	drawTexturedRect(texOb->texture, rect, -1.5);
+	drawTexturedRect(texOb, rect, -1.5);
 
 	//if self.flash == True:
 		//drawTexturedRect(flash_tex, self.rect, -1.0)
@@ -552,6 +640,7 @@ int ItemSlot :: getItemRadius() const
 		case ROCKET_EQUIPMENT_ID:  return rocket_equipment->getRadius();
 		
 		case GRAPPLE_EQUIPMENT_ID: return grapple_equipment->getRadius();
+		case RADAR_EQUIPMENT_ID:   return radar_equipment->getRadius();
         }
         
         return 0;
@@ -578,90 +667,136 @@ int ItemSlot :: getItemCondition() const
 
 void ItemSlot :: renderEquipedItem()
 {
-	switch(item_subtype_id)
+	switch(item_type_id)
 	{
-		case LAZER_EQUIPMENT_ID:     { lazer_equipment->render(rect);     break; }
-		case ROCKET_EQUIPMENT_ID:    { rocket_equipment->render(rect);    break; }
-		case ENERGIZER_EQUIPMENT_ID: { energizer_equipment->render(rect); break; }
-		case FREEZER_EQUIPMENT_ID:   { freezer_equipment->render(rect);   break; }
-		case GRAPPLE_EQUIPMENT_ID:   { grapple_equipment->render(rect);   break; }
-		case RADAR_EQUIPMENT_ID:     { radar_equipment->render(rect);     break; }
-		case DRIVE_EQUIPMENT_ID:     { drive_equipment->render(rect);     break; }
-		case PROTECTOR_EQUIPMENT_ID: { protector_equipment->render(rect); break; }
-		case BAK_EQUIPMENT_ID:       { bak_equipment->render(rect);       break; }
-		case DROID_EQUIPMENT_ID:     { droid_equipment->render(rect);     break; }
-		case SCANER_EQUIPMENT_ID:    { scaner_equipment->render(rect);    break; }    		
-    		
-    		case ROCKET_MODULE_ID:       { rocket_module->render(rect);       break; }	 
-        	case LAZER_MODULE_ID:        { lazer_module->render(rect);        break; }	 
-    	      	case RADAR_MODULE_ID:        { radar_module->render(rect);        break; }	 
-    	       	case DRIVE_MODULE_ID:        { drive_module->render(rect);        break; }	 
-    		case BAK_MODULE_ID:          { bak_module->render(rect);          break; }
-    	      	case ENERGIZER_MODULE_ID:    { energizer_module->render(rect);    break; }
-       		case PROTECTOR_MODULE_ID:    { protector_module->render(rect);    break; }
-        	case DROID_MODULE_ID:        { droid_module->render(rect);        break; }
-        	case FREEZER_MODULE_ID:      { freezer_module->render(rect);      break; }	
-    		case SCANER_MODULE_ID:       { scaner_module->render(rect);       break; }
-   		case GRAPPLE_MODULE_ID:      { grapple_module->render(rect);      break; }
-   	}
-   		
-	if (item_type_id == GOODS_ID)
-	{
-		drawTexturedRect(goods_pack->getTexOb()->texture, rect, -1.0);
+		case EQUIPMENT_ID:
+		{
+			switch(item_subtype_id)
+			{
+				case LAZER_EQUIPMENT_ID:     { lazer_equipment->render(rect);     break; }
+				case ROCKET_EQUIPMENT_ID:    { rocket_equipment->render(rect);    break; }
+				case ENERGIZER_EQUIPMENT_ID: { energizer_equipment->render(rect); break; }
+				case FREEZER_EQUIPMENT_ID:   { freezer_equipment->render(rect);   break; }
+				case GRAPPLE_EQUIPMENT_ID:   { grapple_equipment->render(rect);   break; }
+				case RADAR_EQUIPMENT_ID:     { radar_equipment->render(rect);     break; }
+				case DRIVE_EQUIPMENT_ID:     { drive_equipment->render(rect);     break; }
+				case PROTECTOR_EQUIPMENT_ID: { protector_equipment->render(rect); break; }
+				case BAK_EQUIPMENT_ID:       { bak_equipment->render(rect);       break; }
+				case DROID_EQUIPMENT_ID:     { droid_equipment->render(rect);     break; }
+				case SCANER_EQUIPMENT_ID:    { scaner_equipment->render(rect);    break; }    	
+			}
+			break;
+		}
+		
+		case MODULE_ID:
+		{    		
+			switch(item_subtype_id)
+			{
+    				case ROCKET_MODULE_ID:       { rocket_module->render(rect);       break; }	 
+        			case LAZER_MODULE_ID:        { lazer_module->render(rect);        break; }	 
+    	      			case RADAR_MODULE_ID:        { radar_module->render(rect);        break; }	 
+    	       			case DRIVE_MODULE_ID:        { drive_module->render(rect);        break; }	 
+    				case BAK_MODULE_ID:          { bak_module->render(rect);          break; }
+    	      			case ENERGIZER_MODULE_ID:    { energizer_module->render(rect);    break; }
+       				case PROTECTOR_MODULE_ID:    { protector_module->render(rect);    break; }
+        			case DROID_MODULE_ID:        { droid_module->render(rect);        break; }
+        			case FREEZER_MODULE_ID:      { freezer_module->render(rect);      break; }	
+    				case SCANER_MODULE_ID:       { scaner_module->render(rect);       break; }
+   				case GRAPPLE_MODULE_ID:      { grapple_module->render(rect);      break; }
+   			}
+   			break;
+   		}
+   	
+   		case BOMB_ID:
+   		{
+			drawTexturedRect(bomb->getTexOb(), rect, -1.0);
+			
+			break;
+		}
+	
+   		case GOODS_ID:
+		{
+			drawTexturedRect(goods_pack->getTexOb(), rect, -1.0);
+			
+			break;
+		}
+
+   		case SHIP_ID:
+		{
+			drawTexturedRect(ship->getTexOb(), rect, -1.0);
+			
+			break;
+		}
 	}
+
 }
-
-
-
-
-
-void ItemSlot :: renderFrames(GLuint flash_tex)
-{
-      //def renderFrames(self, flash_tex):
-          //self.renderStaticFramesLoop()
-          //if self.flash == True:
-             //drawTexturedRect(flash_tex, self.rect, -1.0)
-          //if self.item != None:
-             //self.item.renderInSlot(self.rect)
-}
-
 
 
 
 void ItemSlot :: renderItemInfo(float offset_x, float offset_y)
 {
-	switch(item_subtype_id)
+	switch(item_type_id)
 	{
-		case LAZER_EQUIPMENT_ID:     { lazer_equipment->renderInfo(rect, offset_x, offset_y);     break; }
-		case ROCKET_EQUIPMENT_ID:    { rocket_equipment->renderInfo(rect, offset_x, offset_y);    break; }
-		case ENERGIZER_EQUIPMENT_ID: { energizer_equipment->renderInfo(rect, offset_x, offset_y); break; }
-		case FREEZER_EQUIPMENT_ID:   { freezer_equipment->renderInfo(rect, offset_x, offset_y);   break; }
-		case GRAPPLE_EQUIPMENT_ID:   { grapple_equipment->renderInfo(rect, offset_x, offset_y);   break; }
-		case RADAR_EQUIPMENT_ID:     { radar_equipment->renderInfo(rect, offset_x, offset_y);     break; }
-		case DRIVE_EQUIPMENT_ID:     { drive_equipment->renderInfo(rect, offset_x, offset_y);     break; }
-		case PROTECTOR_EQUIPMENT_ID: { protector_equipment->renderInfo(rect, offset_x, offset_y); break; }
-		case BAK_EQUIPMENT_ID:       { bak_equipment->renderInfo(rect, offset_x, offset_y);       break; }
-		case DROID_EQUIPMENT_ID:     { droid_equipment->renderInfo(rect, offset_x, offset_y);     break; }
-		case SCANER_EQUIPMENT_ID:    { scaner_equipment->renderInfo(rect, offset_x, offset_y);    break; }    		
+		case EQUIPMENT_ID:
+		{	
+			switch(item_subtype_id)
+			{
+				case LAZER_EQUIPMENT_ID:     { lazer_equipment->renderInfo(rect, offset_x, offset_y);     break; }
+				case ROCKET_EQUIPMENT_ID:    { rocket_equipment->renderInfo(rect, offset_x, offset_y);    break; }
+				case ENERGIZER_EQUIPMENT_ID: { energizer_equipment->renderInfo(rect, offset_x, offset_y); break; }
+				case FREEZER_EQUIPMENT_ID:   { freezer_equipment->renderInfo(rect, offset_x, offset_y);   break; }
+				case GRAPPLE_EQUIPMENT_ID:   { grapple_equipment->renderInfo(rect, offset_x, offset_y);   break; }
+				case RADAR_EQUIPMENT_ID:     { radar_equipment->renderInfo(rect, offset_x, offset_y);     break; }
+				case DRIVE_EQUIPMENT_ID:     { drive_equipment->renderInfo(rect, offset_x, offset_y);     break; }
+				case PROTECTOR_EQUIPMENT_ID: { protector_equipment->renderInfo(rect, offset_x, offset_y); break; }
+				case BAK_EQUIPMENT_ID:       { bak_equipment->renderInfo(rect, offset_x, offset_y);       break; }
+				case DROID_EQUIPMENT_ID:     { droid_equipment->renderInfo(rect, offset_x, offset_y);     break; }
+				case SCANER_EQUIPMENT_ID:    { scaner_equipment->renderInfo(rect, offset_x, offset_y);    break; }    		
+    			}    			
+    			break;
+    		}
     		
-    		case ROCKET_MODULE_ID:       { rocket_module->renderInfo(rect);       break; }	 
-        	case LAZER_MODULE_ID:        { lazer_module->renderInfo(rect);        break; }	 
-    	      	case RADAR_MODULE_ID:        { radar_module->renderInfo(rect);        break; }	 
-    	       	case DRIVE_MODULE_ID:        { drive_module->renderInfo(rect);        break; }	 
-    		case BAK_MODULE_ID:          { bak_module->renderInfo(rect);          break; }
-    	      	case ENERGIZER_MODULE_ID:    { energizer_module->renderInfo(rect);    break; }
-       		case PROTECTOR_MODULE_ID:    { protector_module->renderInfo(rect);    break; }
-        	case DROID_MODULE_ID:        { droid_module->renderInfo(rect);        break; }
-        	case FREEZER_MODULE_ID:      { freezer_module->renderInfo(rect);      break; }	
-    		case SCANER_MODULE_ID:       { scaner_module->renderInfo(rect);       break; }
-   		case GRAPPLE_MODULE_ID:      { grapple_module->renderInfo(rect);      break; }
-   	}
-
+    		case MODULE_ID:
+    		{
+    			switch(item_subtype_id)
+    			{
+    				case ROCKET_MODULE_ID:       { rocket_module->renderInfo(rect, offset_x, offset_y);       break; }	 
+        			case LAZER_MODULE_ID:        { lazer_module->renderInfo(rect, offset_x, offset_y);        break; }	 
+    	      			case RADAR_MODULE_ID:        { radar_module->renderInfo(rect, offset_x, offset_y);        break; }	 
+    	       			case DRIVE_MODULE_ID:        { drive_module->renderInfo(rect, offset_x, offset_y);        break; }	 
+    				case BAK_MODULE_ID:          { bak_module->renderInfo(rect, offset_x, offset_y);          break; }
+    	      			case ENERGIZER_MODULE_ID:    { energizer_module->renderInfo(rect, offset_x, offset_y);    break; }
+       				case PROTECTOR_MODULE_ID:    { protector_module->renderInfo(rect, offset_x, offset_y);    break; }
+        			case DROID_MODULE_ID:        { droid_module->renderInfo(rect, offset_x, offset_y);        break; }
+        			case FREEZER_MODULE_ID:      { freezer_module->renderInfo(rect, offset_x, offset_y);      break; }	
+    				case SCANER_MODULE_ID:       { scaner_module->renderInfo(rect, offset_x, offset_y);       break; }
+   				case GRAPPLE_MODULE_ID:      { grapple_module->renderInfo(rect, offset_x, offset_y);      break; }
+   			}   			
+   			break;
+   		}
+   	
+		case GOODS_ID:
+		{
+			goods_pack->updateInfo();
+			goods_pack->renderInfo(rect, offset_x, offset_y);
+			
+			break;
+		}
+		
+		case BOMB_ID:
+     		{
+			bomb->updateInfo();
+			bomb->renderInfo(rect, offset_x, offset_y);
+			
+			break;
+		}
 	
-	if (item_type_id == GOODS_ID)
-     	{
-		goods_pack->updateInfo();
-		goods_pack->renderInfo(rect, offset_x, offset_y);
+		case SHIP_ID:
+     		{
+			ship->renderInfo(rect.getCenter().x, rect.getCenter().y, offset_x, offset_y); // updateInfo() is included
+		
+			break;
+		}
 	}
 }
 
@@ -679,13 +814,20 @@ bool ItemSlot :: interaction(int _x, int _y)
 
 void ItemSlot :: dropItemToSpace()
 {
-	Container* _container = createContainer(owner_ship->getPoints()->getCenter());
+	if (item_type_id == BOMB_ID)
+	{
+		owner_ship->getStarSystem()->add(bomb, owner_ship->getPoints()->getCenter());	
+		removeItem();
+		return; 
+	}	
+	
+	Container* _container = createContainer();
 	_container->getItemSlot()->SwapItemWith(this);	
 	
 	// update mass, and abilities if needed !!!!!!!!!!!!!!!!!!!
 
 	removeItem();
-	owner_ship->getStarSystem()->add(_container);	
+	owner_ship->getStarSystem()->add(_container, owner_ship->getPoints()->getCenter());	
 
 	//printf("container was created in ss_id = %i, pos = %f, %f\n", _starsystem->getId(), _container->getPoints()->getCenter().x, _container->getPoints()->getCenter().y );
 }
@@ -698,64 +840,134 @@ void ItemSlot :: dropItemToSpace()
 bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
 {
        	if ( (is_EQUIPED == false) and (_slot->getEquipedStatus() == true) )
-       	{                	                	
-		switch(_slot->getItemSubTypeId())
-		{
-           		case LAZER_EQUIPMENT_ID:     { if (insertItem(_slot->getLazerEquipment())     == true) { _slot->removeItem(); return true; } }                       				
-                	case ROCKET_EQUIPMENT_ID:    { if (insertItem(_slot->getRocketEquipment())    == true) { _slot->removeItem(); return true; } }
-                       	case RADAR_EQUIPMENT_ID:     { if (insertItem(_slot->getRadarEquipment())     == true) { _slot->removeItem(); return true; } }                       				
-                	case DRIVE_EQUIPMENT_ID:     { if (insertItem(_slot->getDriveEquipment())     == true) { _slot->removeItem(); return true; } }
-                        case BAK_EQUIPMENT_ID:       { if (insertItem(_slot->getBakEquipment())       == true) { _slot->removeItem(); return true; } }                  						
-                       	case ENERGIZER_EQUIPMENT_ID: { if (insertItem(_slot->getEnergizerEquipment()) == true) { _slot->removeItem(); return true; } }                     				
-                	case PROTECTOR_EQUIPMENT_ID: { if (insertItem(_slot->getProtectorEquipment()) == true) { _slot->removeItem(); return true; } }
-                        case DROID_EQUIPMENT_ID:     { if (insertItem(_slot->getDroidEquipment())     == true) { _slot->removeItem(); return true; } }
-	                case FREEZER_EQUIPMENT_ID:   { if (insertItem(_slot->getFreezerEquipment())   == true) { _slot->removeItem(); return true; } }
-	                case SCANER_EQUIPMENT_ID:    { if (insertItem(_slot->getScanerEquipment())    == true) { _slot->removeItem(); return true; } }
-			case GRAPPLE_EQUIPMENT_ID:   { if (insertItem(_slot->getGrappleEquipment())   == true) { _slot->removeItem(); return true; } }
+       	{      
+       		switch(_slot->getItemTypeId())  
+       		{        	    
+       			case EQUIPMENT_ID:
+       			{            	
+				switch(_slot->getItemSubTypeId())
+				{
+           				case LAZER_EQUIPMENT_ID:     { if (insertItem(_slot->getLazerEquipment())     == true) { _slot->removeItem(); return true; } else break; }                       				
+                			case ROCKET_EQUIPMENT_ID:    { if (insertItem(_slot->getRocketEquipment())    == true) { _slot->removeItem(); return true; } else break; }
+                       			case RADAR_EQUIPMENT_ID:     { if (insertItem(_slot->getRadarEquipment())     == true) { _slot->removeItem(); return true; } else break; }                       				
+                			case DRIVE_EQUIPMENT_ID:     { if (insertItem(_slot->getDriveEquipment())     == true) { _slot->removeItem(); return true; } else break; }
+                        		case BAK_EQUIPMENT_ID:       { if (insertItem(_slot->getBakEquipment())       == true) { _slot->removeItem(); return true; } else break; }                  						
+                       			case ENERGIZER_EQUIPMENT_ID: { if (insertItem(_slot->getEnergizerEquipment()) == true) { _slot->removeItem(); return true; } else break; }                     				
+                			case PROTECTOR_EQUIPMENT_ID: { if (insertItem(_slot->getProtectorEquipment()) == true) { _slot->removeItem(); return true; } else break; }
+                        		case DROID_EQUIPMENT_ID:     { if (insertItem(_slot->getDroidEquipment())     == true) { _slot->removeItem(); return true; } else break; }
+	                		case FREEZER_EQUIPMENT_ID:   { if (insertItem(_slot->getFreezerEquipment())   == true) { _slot->removeItem(); return true; } else break; }
+	                		case SCANER_EQUIPMENT_ID:    { if (insertItem(_slot->getScanerEquipment())    == true) { _slot->removeItem(); return true; } else break; }
+					case GRAPPLE_EQUIPMENT_ID:   { if (insertItem(_slot->getGrappleEquipment())   == true) { _slot->removeItem(); return true; } else break; }
+				}
+				break;
+			}
 			
-			case ROCKET_MODULE_ID:       { if (insertItem(_slot->getRocketModule())    == true) { _slot->removeItem(); return true; } }	 
-        		case LAZER_MODULE_ID:        { if (insertItem(_slot->getLazerModule())     == true) { _slot->removeItem(); return true; } }	 
-    	      		case RADAR_MODULE_ID:        { if (insertItem(_slot->getRadarModule())     == true) { _slot->removeItem(); return true; } }	 
-    	       		case DRIVE_MODULE_ID:        { if (insertItem(_slot->getDriveModule())     == true) { _slot->removeItem(); return true; } }	 
-    			case BAK_MODULE_ID:          { if (insertItem(_slot->getBakModule())       == true) { _slot->removeItem(); return true; } }
-    	      		case ENERGIZER_MODULE_ID:    { if (insertItem(_slot->getEnergizerModule()) == true) { _slot->removeItem(); return true; } }
-       			case PROTECTOR_MODULE_ID:    { if (insertItem(_slot->getProtectorModule()) == true) { _slot->removeItem(); return true; } }
-        		case DROID_MODULE_ID:        { if (insertItem(_slot->getDroidModule())     == true) { _slot->removeItem(); return true; } }
-        		case FREEZER_MODULE_ID:      { if (insertItem(_slot->getFreezerModule())   == true) { _slot->removeItem(); return true; } }	
-    			case SCANER_MODULE_ID:       { if (insertItem(_slot->getScanerModule())    == true) { _slot->removeItem(); return true; } }
-   			case GRAPPLE_MODULE_ID:      { if (insertItem(_slot->getGrappleModule())   == true) { _slot->removeItem(); return true; } }
+			case MODULE_ID:
+			{
+				switch(_slot->getItemSubTypeId())
+				{
+					case ROCKET_MODULE_ID:       { if (insertItem(_slot->getRocketModule())    == true) { _slot->removeItem(); return true; } else break; }	 
+        				case LAZER_MODULE_ID:        { if (insertItem(_slot->getLazerModule())     == true) { _slot->removeItem(); return true; } else break; }	 
+    	      				case RADAR_MODULE_ID:        { if (insertItem(_slot->getRadarModule())     == true) { _slot->removeItem(); return true; } else break; }	 
+    	       				case DRIVE_MODULE_ID:        { if (insertItem(_slot->getDriveModule())     == true) { _slot->removeItem(); return true; } else break; }	 
+    					case BAK_MODULE_ID:          { if (insertItem(_slot->getBakModule())       == true) { _slot->removeItem(); return true; } else break; }
+    	      				case ENERGIZER_MODULE_ID:    { if (insertItem(_slot->getEnergizerModule()) == true) { _slot->removeItem(); return true; } else break; }
+       					case PROTECTOR_MODULE_ID:    { if (insertItem(_slot->getProtectorModule()) == true) { _slot->removeItem(); return true; } else break; }
+        				case DROID_MODULE_ID:        { if (insertItem(_slot->getDroidModule())     == true) { _slot->removeItem(); return true; } else break; }
+        				case FREEZER_MODULE_ID:      { if (insertItem(_slot->getFreezerModule())   == true) { _slot->removeItem(); return true; } else break; }	
+    					case SCANER_MODULE_ID:       { if (insertItem(_slot->getScanerModule())    == true) { _slot->removeItem(); return true; } else break; }
+   					case GRAPPLE_MODULE_ID:      { if (insertItem(_slot->getGrappleModule())   == true) { _slot->removeItem(); return true; } else break; }		
+				}
+				break;
+			}
 		
+			case BOMB_ID:
+			{
+				if (insertItem(_slot->getBomb()) == true) { _slot->removeItem(); return true; } 
+				
+				break;
+			}
+
+			case GOODS_ID:
+			{
+				if (insertGoods(_slot->getGoodsPack()) == true) { _slot->removeItem(); return true; } 
+				
+				break;
+			}
+
+			case SHIP_ID:
+			{
+				if (insertItem(_slot->getShip()) == true) { _slot->removeItem(); return true; } 
+				
+				break;
+			}
 		}	
 	}
 	
 	
 	if ( (is_EQUIPED == true) and (_slot->getEquipedStatus() == false) )
-       	{                	                	
-		switch(item_subtype_id)
-		{
-           		case LAZER_EQUIPMENT_ID:     { if (_slot->insertItem(getLazerEquipment())     == true)  { removeItem(); return true; } }                       				
-                	case ROCKET_EQUIPMENT_ID:    { if (_slot->insertItem(getRocketEquipment())    == true)  { removeItem(); return true; } }
-                       	case RADAR_EQUIPMENT_ID:     { if (_slot->insertItem(getRadarEquipment())     == true)  { removeItem(); return true; } }                       				
-                	case DRIVE_EQUIPMENT_ID:     { if (_slot->insertItem(getDriveEquipment())     == true)  { removeItem(); return true; } }
-                        case BAK_EQUIPMENT_ID:       { if (_slot->insertItem(getBakEquipment())       == true)  { removeItem(); return true; } }                  						
-                       	case ENERGIZER_EQUIPMENT_ID: { if (_slot->insertItem(getEnergizerEquipment()) == true)  { removeItem(); return true; } }                     				
-                	case PROTECTOR_EQUIPMENT_ID: { if (_slot->insertItem(getProtectorEquipment()) == true)  { removeItem(); return true; } }
-                        case DROID_EQUIPMENT_ID:     { if (_slot->insertItem(getDroidEquipment())     == true)  { removeItem(); return true; } }
-	                case FREEZER_EQUIPMENT_ID:   { if (_slot->insertItem(getFreezerEquipment())   == true)  { removeItem(); return true; } }
-	                case SCANER_EQUIPMENT_ID:    { if (_slot->insertItem(getScanerEquipment())    == true)  { removeItem(); return true; } }
-			case GRAPPLE_EQUIPMENT_ID:   { if (_slot->insertItem(getGrappleEquipment())   == true)  { removeItem(); return true; } }
+       	{ 
+       		switch(item_type_id)
+		{               	     
+			case EQUIPMENT_ID:
+			{           	
+				switch(item_subtype_id)
+				{
+           				case LAZER_EQUIPMENT_ID:     { if (_slot->insertItem(getLazerEquipment())     == true)  { removeItem(); return true; } else break; }                       				
+                			case ROCKET_EQUIPMENT_ID:    { if (_slot->insertItem(getRocketEquipment())    == true)  { removeItem(); return true; } else break; }
+                       			case RADAR_EQUIPMENT_ID:     { if (_slot->insertItem(getRadarEquipment())     == true)  { removeItem(); return true; } else break; }                       				
+                			case DRIVE_EQUIPMENT_ID:     { if (_slot->insertItem(getDriveEquipment())     == true)  { removeItem(); return true; } else break; }
+                        		case BAK_EQUIPMENT_ID:       { if (_slot->insertItem(getBakEquipment())       == true)  { removeItem(); return true; } else break; }                  						
+                       			case ENERGIZER_EQUIPMENT_ID: { if (_slot->insertItem(getEnergizerEquipment()) == true)  { removeItem(); return true; } else break; }                     				
+                			case PROTECTOR_EQUIPMENT_ID: { if (_slot->insertItem(getProtectorEquipment()) == true)  { removeItem(); return true; } else break; }
+                        		case DROID_EQUIPMENT_ID:     { if (_slot->insertItem(getDroidEquipment())     == true)  { removeItem(); return true; } else break; }
+	                		case FREEZER_EQUIPMENT_ID:   { if (_slot->insertItem(getFreezerEquipment())   == true)  { removeItem(); return true; } else break; }
+	                		case SCANER_EQUIPMENT_ID:    { if (_slot->insertItem(getScanerEquipment())    == true)  { removeItem(); return true; } else break; }
+					case GRAPPLE_EQUIPMENT_ID:   { if (_slot->insertItem(getGrappleEquipment())   == true)  { removeItem(); return true; } else break; }
+				}
+				break;
+			}
+			
+			case MODULE_ID:
+			{
+				switch(item_subtype_id)
+				{
+					case ROCKET_MODULE_ID:       { if (_slot->insertItem(getRocketModule())    == true)  { removeItem(); return true; } else break; }	 
+        				case LAZER_MODULE_ID:        { if (_slot->insertItem(getLazerModule())     == true)  { removeItem(); return true; } else break; }	 
+    	      				case RADAR_MODULE_ID:        { if (_slot->insertItem(getRadarModule())     == true)  { removeItem(); return true; } else break; } 
+    	       				case DRIVE_MODULE_ID:        { if (_slot->insertItem(getDriveModule())     == true)  { removeItem(); return true; } else break; } 
+    					case BAK_MODULE_ID:          { if (_slot->insertItem(getBakModule())       == true)  { removeItem(); return true; } else break; }
+    	      				case ENERGIZER_MODULE_ID:    { if (_slot->insertItem(getEnergizerModule()) == true)  { removeItem(); return true; } else break; }
+       					case PROTECTOR_MODULE_ID:    { if (_slot->insertItem(getProtectorModule()) == true)  { removeItem(); return true; } else break; }
+        				case DROID_MODULE_ID:        { if (_slot->insertItem(getDroidModule())     == true)  { removeItem(); return true; } else break; }
+        				case FREEZER_MODULE_ID:      { if (_slot->insertItem(getFreezerModule())   == true)  { removeItem(); return true; } else break; }	
+    					case SCANER_MODULE_ID:       { if (_slot->insertItem(getScanerModule())    == true)  { removeItem(); return true; } else break; }
+   					case GRAPPLE_MODULE_ID:      { if (_slot->insertItem(getGrappleModule())   == true)  { removeItem(); return true; } else break; }	
+				}
+				break;
+			}
+			
 		
-			case ROCKET_MODULE_ID:       { if (_slot->insertItem(getRocketModule())    == true)  { removeItem(); return true; } }	 
-        		case LAZER_MODULE_ID:        { if (_slot->insertItem(getLazerModule())     == true)  { removeItem(); return true; } }	 
-    	      		case RADAR_MODULE_ID:        { if (_slot->insertItem(getRadarModule())     == true)  { removeItem(); return true; } } 
-    	       		case DRIVE_MODULE_ID:        { if (_slot->insertItem(getDriveModule())     == true)  { removeItem(); return true; } } 
-    			case BAK_MODULE_ID:          { if (_slot->insertItem(getBakModule())       == true)  { removeItem(); return true; } }
-    	      		case ENERGIZER_MODULE_ID:    { if (_slot->insertItem(getEnergizerModule()) == true)  { removeItem(); return true; } }
-       			case PROTECTOR_MODULE_ID:    { if (_slot->insertItem(getProtectorModule()) == true)  { removeItem(); return true; } }
-        		case DROID_MODULE_ID:        { if (_slot->insertItem(getDroidModule())     == true)  { removeItem(); return true; } }
-        		case FREEZER_MODULE_ID:      { if (_slot->insertItem(getFreezerModule())   == true)  { removeItem(); return true; } }	
-    			case SCANER_MODULE_ID:       { if (_slot->insertItem(getScanerModule())    == true)  { removeItem(); return true; } }
-   			case GRAPPLE_MODULE_ID:      { if (_slot->insertItem(getGrappleModule())   == true)  { removeItem(); return true; } }	
+			case BOMB_ID: 
+			{
+				if (_slot->insertItem(getBomb()) == true)  { removeItem(); return true; }
+				
+				break;
+			}
+			
+			case GOODS_ID:
+			{
+				if (_slot->insertGoods(getGoodsPack()) == true) { removeItem(); return true; } 
+				
+				break;
+			}
+
+			case SHIP_ID:
+			{
+				if (_slot->insertItem(getShip()) == true) { removeItem(); return true; } 
+				
+				break;
+			}
 		}
 	}
 
@@ -765,17 +977,17 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
        		{
        			switch(item_subtype_id)
        			{
-       				case ROCKET_MODULE_ID:       { if (_slot->getRocketEquipment()->insertModule(rocket_module)       == true)  { removeItem(); return true; } }  
-        			case LAZER_MODULE_ID:        { if (_slot->getLazerEquipment()->insertModule(lazer_module)         == true)  { removeItem(); return true; } }   
-    	      			case RADAR_MODULE_ID:        { if (_slot->getRadarEquipment()->insertModule(radar_module)         == true)  { removeItem(); return true; } }  
-    	       			case DRIVE_MODULE_ID:        { if (_slot->getDriveEquipment()->insertModule(drive_module)         == true)  { removeItem(); return true; } }  
-    				case BAK_MODULE_ID:          { if (_slot->getBakEquipment()->insertModule(bak_module)             == true)  { removeItem(); return true; } }  
-    	      			case ENERGIZER_MODULE_ID:    { if (_slot->getEnergizerEquipment()->insertModule(energizer_module) == true)  { removeItem(); return true; } }  
-       				case PROTECTOR_MODULE_ID:    { if (_slot->getProtectorEquipment()->insertModule(protector_module) == true)  { removeItem(); return true; } }  
-        			case DROID_MODULE_ID:        { if (_slot->getDroidEquipment()->insertModule(droid_module)         == true)  { removeItem(); return true; } }  
-        			case FREEZER_MODULE_ID:      { if (_slot->getFreezerEquipment()->insertModule(freezer_module)     == true)  { removeItem(); return true; } }  
-    				case SCANER_MODULE_ID:       { if (_slot->getScanerEquipment()->insertModule(scaner_module)       == true)  { removeItem(); return true; } }  
-   				case GRAPPLE_MODULE_ID:      { if (_slot->getGrappleEquipment()->insertModule(grapple_module)     == true)  { removeItem(); return true; } }  
+       				case ROCKET_MODULE_ID:       { if (_slot->getRocketEquipment()->insertModule(rocket_module)       == true)  { removeItem(); return true; } else break; }  
+        			case LAZER_MODULE_ID:        { if (_slot->getLazerEquipment()->insertModule(lazer_module)         == true)  { removeItem(); return true; } else break; }   
+    	      			case RADAR_MODULE_ID:        { if (_slot->getRadarEquipment()->insertModule(radar_module)         == true)  { removeItem(); return true; } else break; }  
+    	       			case DRIVE_MODULE_ID:        { if (_slot->getDriveEquipment()->insertModule(drive_module)         == true)  { removeItem(); return true; } else break; }  
+    				case BAK_MODULE_ID:          { if (_slot->getBakEquipment()->insertModule(bak_module)             == true)  { removeItem(); return true; } else break; }  
+    	      			case ENERGIZER_MODULE_ID:    { if (_slot->getEnergizerEquipment()->insertModule(energizer_module) == true)  { removeItem(); return true; } else break; }  
+       				case PROTECTOR_MODULE_ID:    { if (_slot->getProtectorEquipment()->insertModule(protector_module) == true)  { removeItem(); return true; } else break; }  
+        			case DROID_MODULE_ID:        { if (_slot->getDroidEquipment()->insertModule(droid_module)         == true)  { removeItem(); return true; } else break; }  
+        			case FREEZER_MODULE_ID:      { if (_slot->getFreezerEquipment()->insertModule(freezer_module)     == true)  { removeItem(); return true; } else break; }  
+    				case SCANER_MODULE_ID:       { if (_slot->getScanerEquipment()->insertModule(scaner_module)       == true)  { removeItem(); return true; } else break; }  
+   				case GRAPPLE_MODULE_ID:      { if (_slot->getGrappleEquipment()->insertModule(grapple_module)     == true)  { removeItem(); return true; } else break; }  
       			}
        		}
        		
@@ -783,17 +995,17 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
        		{
        			switch(_slot->getItemSubTypeId())
        			{
-       				case ROCKET_MODULE_ID:       { if (rocket_equipment->insertModule(_slot->getRocketModule())       == true)  { _slot->removeItem(); return true; } }  
-        			case LAZER_MODULE_ID:        { if (lazer_equipment->insertModule(_slot->getLazerModule())         == true)  { _slot->removeItem(); return true; } }   
-    	      			case RADAR_MODULE_ID:        { if (radar_equipment->insertModule(_slot->getRadarModule())         == true)  { _slot->removeItem(); return true; } }  
-    	       			case DRIVE_MODULE_ID:        { if (drive_equipment->insertModule(_slot->getDriveModule())         == true)  { _slot->removeItem(); return true; } }  
-    				case BAK_MODULE_ID:          { if (bak_equipment->insertModule(_slot->getBakModule())             == true)  { _slot->removeItem(); return true; } }  
-    	      			case ENERGIZER_MODULE_ID:    { if (energizer_equipment->insertModule(_slot->getEnergizerModule()) == true)  { _slot->removeItem(); return true; } }  
-       				case PROTECTOR_MODULE_ID:    { if (protector_equipment->insertModule(_slot->getProtectorModule()) == true)  { _slot->removeItem(); return true; } }  
-        			case DROID_MODULE_ID:        { if (droid_equipment->insertModule(_slot->getDroidModule())         == true)  { _slot->removeItem(); return true; } }  
-        			case FREEZER_MODULE_ID:      { if (freezer_equipment->insertModule(_slot->getFreezerModule())     == true)  { _slot->removeItem(); return true; } }  
-    				case SCANER_MODULE_ID:       { if (scaner_equipment->insertModule(_slot->getScanerModule())       == true)  { _slot->removeItem(); return true; } }  
-   				case GRAPPLE_MODULE_ID:      { if (grapple_equipment->insertModule(_slot->getGrappleModule())     == true)  { _slot->removeItem(); return true; } }  
+       				case ROCKET_MODULE_ID:       { if (rocket_equipment->insertModule(_slot->getRocketModule())       == true)  { _slot->removeItem(); return true; } else break; }  
+        			case LAZER_MODULE_ID:        { if (lazer_equipment->insertModule(_slot->getLazerModule())         == true)  { _slot->removeItem(); return true; } else break; }   
+    	      			case RADAR_MODULE_ID:        { if (radar_equipment->insertModule(_slot->getRadarModule())         == true)  { _slot->removeItem(); return true; } else break; }  
+    	       			case DRIVE_MODULE_ID:        { if (drive_equipment->insertModule(_slot->getDriveModule())         == true)  { _slot->removeItem(); return true; } else break; }  
+    				case BAK_MODULE_ID:          { if (bak_equipment->insertModule(_slot->getBakModule())             == true)  { _slot->removeItem(); return true; } else break; }  
+    	      			case ENERGIZER_MODULE_ID:    { if (energizer_equipment->insertModule(_slot->getEnergizerModule()) == true)  { _slot->removeItem(); return true; } else break; }  
+       				case PROTECTOR_MODULE_ID:    { if (protector_equipment->insertModule(_slot->getProtectorModule()) == true)  { _slot->removeItem(); return true; } else break; }  
+        			case DROID_MODULE_ID:        { if (droid_equipment->insertModule(_slot->getDroidModule())         == true)  { _slot->removeItem(); return true; } else break; }  
+        			case FREEZER_MODULE_ID:      { if (freezer_equipment->insertModule(_slot->getFreezerModule())     == true)  { _slot->removeItem(); return true; } else break; }  
+    				case SCANER_MODULE_ID:       { if (scaner_equipment->insertModule(_slot->getScanerModule())       == true)  { _slot->removeItem(); return true; } else break; }  
+   				case GRAPPLE_MODULE_ID:      { if (grapple_equipment->insertModule(_slot->getGrappleModule())     == true)  { _slot->removeItem(); return true; } else break; }  
       			}
        		}
        		
@@ -816,7 +1028,60 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
 	}               
 	
 	// artifacts
-	// bomb 
 	
 	return false;
 }
+
+void ItemSlot :: updateRange(TextureOb* _texOb)
+{
+	float radius = this->getItemRadius();
+	float da = 4.0f/RADIAN_TO_DEGREE_RATE;// - radius/1000.0f;
+	
+    	range_vec.clear();
+      	for (float a = 0.0f; a <= 2*PI; a+=da)
+      	{
+      		range_vec.push_back( vec2f(radius * cos(a), radius * sin(a)) );
+      	}
+      	
+	int step = 1;
+	int size = 6;
+        range_visual.fillData(_texOb->texture, &range_vec, step, size);
+}
+
+void ItemSlot :: drawRange()
+{ 
+    	range_visual.draw();
+}
+
+
+void ItemSlot :: targetObValidation(TargetObject* _targetOb)
+{
+	if (_targetOb->validation(getOwnerShip()->getStarSystem()) == true)
+	{
+	       if (checkDistance(_targetOb) == false)
+               {
+               		_targetOb->reset();
+               }
+	}
+}
+
+
+
+bool ItemSlot :: checkDistance(TargetObject* _targetOb)
+{
+	if (_targetOb->getObTypeId() == STARSYSTEM_ID)
+	{
+		return true;
+	}
+	
+        float dist = distBetweenPoints(getOwnerShip()->getPoints()->getCenter(), *_targetOb->getpCenter());                                               
+    	if (dist < getItemRadius())
+        {
+                return true;
+        }
+        else 
+        {	
+        	return false;
+        }
+}
+

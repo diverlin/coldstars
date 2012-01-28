@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 GuiKosmoport :: GuiKosmoport()
 {
-    	TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.returnParticleTexObByColorId(BLUE_COLOR_ID);    // debug
+    	TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.getParticleTexObByColorId(BLUE_COLOR_ID);    // debug
 
     	angar_screen_button     = new Button(pTo_particleTexOb, 
     					     SCREEN_ANGAR_ID,
