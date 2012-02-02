@@ -17,18 +17,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "star.hpp"
    
-Star :: Star(IdData _data_id, LifeData _data_life, TextureOb* _texOb, ObjMeshInstance* _mesh, PlanetData _star_data)
+Star :: Star()
 { 
-      	CommonForPlanet_init(_data_id, _data_life, 
-      			     _texOb, 
-    	   		     _mesh, 
-    	   	             _star_data);
-    	   		       
    	texture_offset1 = 0.0;
     	texture_offset2 = 0.0;
-        
+}
+    
+Star :: ~Star()
+{}
+    
+void Star :: calcColor()
+{
         if (texOb->color_id == YELLOW_COLOR_ID)
 	{
 		color.r = 255/255.0;
@@ -44,16 +44,9 @@ Star :: Star(IdData _data_id, LifeData _data_life, TextureOb* _texOb, ObjMeshIns
 		color.b = 255/255.0;
 		color.a = 1.0;
 	}
-		    
-        points.setCenter(0, 0);
-        center_pos.set(0, 0, -500.0f);
 }
-    
-Star :: ~Star()
-{}
-    
 
-Color4f Star :: getColor() const           { return color; }
+Color4f Star :: getColor() const         { return color; }
 int Star :: getColorId() const 		 { return texOb->color_id; }
 float Star :: getBrightThreshold() const { return texOb->brightThreshold; }
        
@@ -78,7 +71,7 @@ void Star :: render_NEW()
         
 	glUniform2f(glGetUniformLocation(g_MULTITEX_PROGRAM, "displ"), texture_offset1, texture_offset2);
 
-	renderMesh(mesh->glList, center_pos, angle, data.scale);
+	renderMesh(mesh->glList, points.getCenter3f(), angle, data_planet.scale);
 
         glUseProgram(0);
         glActiveTexture(GL_TEXTURE0);
@@ -90,7 +83,7 @@ void Star :: render_OLD()
 	updateRotation();
      	
      	glBindTexture(GL_TEXTURE_2D, texOb->texture);      		
-	renderMesh(mesh->glList, center_pos, angle, data.scale);
+	renderMesh(mesh->glList, points.getCenter3f(), angle, data_planet.scale);
 }
 
 
@@ -127,7 +120,17 @@ Star* createStar()
     	star_data.speed         = 1.8;
 
     	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(STAR_TEXTURE_ID);
-    	Star* star = new Star(data_id, data_life, texOb, g_SPHERE_MESH, star_data);
+    	Star* star = new Star();
+    	
+    	star->setPlanetData(star_data);
+	star->setTextureOb(texOb);
+	star->setIdData(data_id);
+	star->setLifeData(data_life);
+	star->setMesh(g_SPHERE_MESH);	
+        	
+        star->postCreateInit();
+ 
+	star->calcColor();        
     
     	return star;
 }

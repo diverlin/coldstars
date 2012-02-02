@@ -74,7 +74,7 @@ void CommonForEquipment :: deterioration()
     	if (condition <= 0)
     	{
        		is_DAMAGED = true;
-       		if (slot->getOwnerShip() != NULL) 
+       		if (slot->getOwnerVehicle() != NULL) 
        		{  
            		updateOwnerPropetries();
            	}
@@ -89,7 +89,7 @@ void CommonForEquipment :: repair()
     	if (is_DAMAGED == true)
     	{
         	is_DAMAGED = false;
-        	if (slot->getOwnerShip() != NULL)   
+        	if (slot->getOwnerVehicle() != NULL)   
         	{
            		updateOwnerPropetries();
            	}

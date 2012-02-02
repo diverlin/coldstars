@@ -62,7 +62,7 @@ void ProtectorEquipment :: countPrice()
 
 void ProtectorEquipment :: updateOwnerPropetries()
 {
-     	slot->getOwnerShip()->updateProtectionAbility();
+     	slot->getOwnerVehicle()->updateProtectionAbility();
 }
 
 

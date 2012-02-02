@@ -99,7 +99,7 @@ struct AbilitiesStatus
    	bool FREEZE;
    	bool GRAB;
    	bool SCAN;
-   	bool FIRE;
+   	//bool FIRE;
 };
 
 
@@ -114,8 +114,6 @@ struct KorpusData
         unsigned int temperature;   
         
         unsigned int price;
-        
-        float collision_radius;
         
         bool inhibit_GRAPPLE;
         bool render_TURRELS;

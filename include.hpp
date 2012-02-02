@@ -18,6 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 class Ship;      
+class VehicleCommon;    
 class Npc;   
 class Observation;
 class StarSystem;
@@ -74,11 +75,12 @@ class Turrel;
 #include "src/modules/scanerModule.hpp"
 #include "src/modules/grappleModule.hpp"
 
+#include "src/spaceobjects/baseSpaceObject.hpp" 
 #include "src/spaceobjects/commonForSpaceItems.hpp" 
 #include "src/spaceobjects/commonForPlanet.hpp" 
 #include "src/spaceobjects/asteroid.hpp"
 #include "src/spaceobjects/mineral.hpp"
-#include "src/spaceobjects/bomb.hpp"
+#include "src/vehicle/bomb.hpp"
 #include "src/spaceobjects/container.hpp"
 #include "src/spaceobjects/goodsPack.hpp"
 #include "src/spaceobjects/blackHole.hpp"
@@ -130,7 +132,7 @@ class Star;
 
 #include "src/effects/shield.hpp"  
 
-#include "src/spaceobjects/rocketBullet.hpp"
+#include "src/vehicle/rocketBullet.hpp"
 #include "src/effects/lazerTrace.hpp"
 
 
@@ -141,7 +143,12 @@ class Star;
 
 #include "src/vehicle/itemSlot.hpp"
 #include "src/vehicle/navigator.hpp"
+#include "src/vehicle/weaponComplex.hpp"
+#include "src/vehicle/vehicleCommon.hpp"
+#include "src/vehicle/spaceStation.hpp"
+#include "src/vehicle/satellite.hpp"
 #include "src/vehicle/ship.hpp"
+
 
 #include "src/skill/skill.hpp"
 #include "src/obj/questGenerator.hpp" 
@@ -219,11 +226,14 @@ class AiModelBase;
 #include "src/spaceobjects/goodsPack.cpp"   
 #include "src/spaceobjects/star.cpp"  
 #include "src/spaceobjects/planet.cpp"
+#include "src/spaceobjects/baseSpaceObject.cpp" 
 #include "src/spaceobjects/commonForSpaceItems.cpp" 
 #include "src/spaceobjects/commonForPlanet.cpp"
 #include "src/spaceobjects/asteroid.cpp"   
 #include "src/spaceobjects/mineral.cpp" 
-#include "src/spaceobjects/bomb.cpp" 
+#include "src/vehicle/spaceStation.cpp" 
+#include "src/vehicle/satellite.cpp" 
+#include "src/vehicle/bomb.cpp" 
 #include "src/spaceobjects/blackHole.cpp"
 
 #include "src/equipment/commonforequipment.cpp"
@@ -280,6 +290,8 @@ class AiModelBase;
 
 #include "src/vehicle/itemSlot.cpp"
 
+#include "src/vehicle/weaponComplex.cpp"
+#include "src/vehicle/vehicleCommon.cpp"
 #include "src/vehicle/ship.cpp"
 #include "src/vehicle/navigator.cpp"
 #include "src/vehicle/turrel.cpp"
@@ -292,7 +304,7 @@ class AiModelBase;
 #include "src/effects/particlesystem/damage.cpp"
 #include "src/effects/lazerTrace.cpp"
 #include "src/effects/shield.cpp"
-#include "src/spaceobjects/rocketBullet.cpp"
+#include "src/vehicle/rocketBullet.cpp"
 
 #include "src/player/player.cpp"
 #include "src/skill/skill.cpp"

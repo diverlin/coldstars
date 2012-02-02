@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Bomb : public CommonForSpaceItems
 {
     	public:  
-        	Bomb(IdData _data_id, LifeData _data_life, TextureOb* _texOb);
+        	Bomb();
         	~Bomb();
 
         	int getFunctionalSlotSubTypeId() const;

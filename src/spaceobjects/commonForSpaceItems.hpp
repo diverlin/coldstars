@@ -21,34 +21,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define COMMONFORSPACEITEMS_H
 
 
-class CommonForSpaceItems
+class CommonForSpaceItems : public BaseSpaceObject
 {   
 	public:
         	CommonForSpaceItems();
-        	void CommonForSpaceItems_init(IdData, LifeData, TextureOb*);
+        	~CommonForSpaceItems();
         	        	
-        	void setPlaceTypeId(int);
-        	//void setStarSystem(StarSystem*);
+        	void postCreateInit();
         	
-    		//void setPosition(vec2f);
     		//void setTargetPosition(vec2f);
     		void moveToSpace(StarSystem*, vec2f);
-    
-    
-                int getId() const;
-                int getTypeId() const;
-                int getSubTypeId() const;
-                bool getGarbageReady() const;
-    		bool getAlive() const;
-    		bool* getpAlive();
-    		int getPlaceTypeId() const;
-                int* getpPlaceTypeId();
-        	Points* getPoints();
-            	StarSystem* getStarSystem();
-            	int getCollisionRadius() const;
-            	int getMass() const;
             	
             	void moveExternalyToPosition(vec2f);
+            	
         	void update_inSpace_inDynamic_TRUE();
         	void update_inSpace_inDynamic_FALSE();
         	
@@ -56,34 +41,19 @@ class CommonForSpaceItems
         	void updateDyingEffect_FALSE();
 
 		void silentKill();
-        	void hit_TRUE(int damage);
-        	void hit_FALSE(int damage);
+        	void hit_TRUE(int);
+        	void hit_FALSE(int);
 
         	void render2D();
         
         protected:     	
-        	LifeData data_life;
-                IdData data_id; 
-                       
-        	int mass;
-                int place_type_id;
-                                
-        	AngleData data_angle_inD;
-      	
-        	TextureOb* texOb;
-        	int minus_half_w, minus_half_h, plus_half_w, plus_half_h;
-                int collision_radius; 
-                             	
-        	Points points;
-                StarSystem* starsystem;
-
         	vec2f target_pos;        	
         	vec2f d_pos;
         	
         	float velocity;
         	bool keep_moving;
     	
-        	void calcRenderConstants();
+          	void calcCollisionrRadius();
         	        	
         	void death_TRUE();
         	void death_FALSE();

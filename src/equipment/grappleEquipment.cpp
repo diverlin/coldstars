@@ -172,7 +172,7 @@ void GrappleEquipment :: countPrice()
 
 void GrappleEquipment :: updateOwnerPropetries()
 {
-    	slot->getOwnerShip()->updateGrabAbility();
+    	slot->getOwnerVehicle()->updateGrabAbility();
     	reshapeTargetObSlot(slot);
 }
 

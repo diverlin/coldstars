@@ -39,9 +39,9 @@ void MicroScenarioDestroy :: update_inStatic(Npc* _npc) const
 
 		else
 		{
-			_npc->getShip()->weapon_selector.setAll(true);
-			_npc->getShip()->selectWeapons();
-			_npc->getShip()->setWeaponsTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getNpc()->getShip());
+			_npc->getShip()->getWeaponComplex()->weapon_selector.setAll(true);
+			_npc->getShip()->getWeaponComplex()->selectWeapons();
+			_npc->getShip()->getWeaponComplex()->setWeaponsTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getNpc()->getShip());
                       
                              
 			_npc->getShip()->getNavigator()->setTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getNpc()->getShip(), FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID );

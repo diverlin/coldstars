@@ -51,6 +51,7 @@ class Points
                 float getPosZ() const;
                         
                 vec2f getCenter()      const;   
+                vec3f getCenter3f()    const; 
                 vec2f* getpCenter();   // used inturrels(for target)
       
                 vec2f getBottomLeft()  const;  
@@ -109,11 +110,8 @@ class Points
         private:
                 bool is_updated;
                         
-                std::vector<float*> vector_orig_x;
-                std::vector<float*> vector_orig_y;
-                std::vector<float*> vector_x;
-                std::vector<float*> vector_y;
-        
+                std::vector<vec2f*> vector_orig;
+                std::vector<vec2f*> vector;
                                               
                 // Origin entity rect (for rotation only transformation)
                 vec2f center_origin;    

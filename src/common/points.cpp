@@ -37,7 +37,8 @@ float* Points :: getpAngleDegree() { return &angle_inD; }
 float Points :: getPosZ() const { return pos_z; }
                 	
 vec2f Points :: getCenter()      const { return center; }     
-vec2f* Points :: getpCenter()    { return &center; }  
+vec2f* Points :: getpCenter()          { return &center; }  
+vec3f Points :: getCenter3f()    const { return vec3f(center.x, center.y, pos_z); } 
       
 vec2f Points :: getBottomLeft()  const { return bottomLeft; }
 vec2f Points :: getBottomRight() const { return bottomRight; }
@@ -69,11 +70,8 @@ void Points :: initCenterPoint()
 
 void Points :: addCenterPoint()
 { 
-        vector_orig_x.push_back(&center_origin.x);
-        vector_orig_y.push_back(&center_origin.y);
-
-        vector_x.push_back(&center.x);
-        vector_y.push_back(&center.y);
+        vector_orig.push_back(&center_origin);
+        vector.push_back(&center);
 }
      
 
@@ -88,11 +86,8 @@ void Points :: initWeapon1CenterPoint(float _pos_x, float _pos_y)
 
 void Points :: addWeapon1CenterPoint()
 { 
-        vector_orig_x.push_back(&weapon_1_origin_center.x);
-        vector_orig_y.push_back(&weapon_1_origin_center.y);
-
-        vector_x.push_back(&weapon_1_center.x);
-        vector_y.push_back(&weapon_1_center.y);
+        vector_orig.push_back(&weapon_1_origin_center);
+        vector.push_back(&weapon_1_center);
 }
 
 
@@ -106,11 +101,8 @@ void Points :: initWeapon2CenterPoint(float _pos_x, float _pos_y)
 
 void Points :: addWeapon2CenterPoint()
 {
-        vector_orig_x.push_back(&weapon_2_origin_center.x);
-        vector_orig_y.push_back(&weapon_2_origin_center.y);
-
-        vector_x.push_back(&weapon_2_center.x);
-        vector_y.push_back(&weapon_2_center.y);
+        vector_orig.push_back(&weapon_2_origin_center);
+        vector.push_back(&weapon_2_center);
 }
 
 
@@ -126,11 +118,8 @@ void Points :: initWeapon3CenterPoint(float _pos_x, float _pos_y)
   
 void Points :: addWeapon3CenterPoint()
 {
-     	vector_orig_x.push_back(&weapon_3_origin_center.x);
-     	vector_orig_y.push_back(&weapon_3_origin_center.y);
-
-     	vector_x.push_back(&weapon_3_center.x);
-     	vector_y.push_back(&weapon_3_center.y);
+     	vector_orig.push_back(&weapon_3_origin_center);
+     	vector.push_back(&weapon_3_center);
 }
 
 
@@ -144,13 +133,9 @@ void Points :: initWeapon4CenterPoint(float _pos_x, float _pos_y)
 
 void Points :: addWeapon4CenterPoint()
 {
-     	vector_orig_x.push_back(&weapon_4_origin_center.x);
-     	vector_orig_y.push_back(&weapon_4_origin_center.y);
-
-     	vector_x.push_back(&weapon_4_center.x);
-     	vector_y.push_back(&weapon_4_center.y);
+     	vector_orig.push_back(&weapon_4_origin_center);
+     	vector.push_back(&weapon_4_center);
 }
-
 
 
 
@@ -164,11 +149,8 @@ void Points :: initWeapon5CenterPoint(float _pos_x, float _pos_y)
    
 void Points :: addWeapon5CenterPoint()
 {
-     	vector_orig_x.push_back(&weapon_5_origin_center.x);
-     	vector_orig_y.push_back(&weapon_5_origin_center.y);
-
-     	vector_x.push_back(&weapon_5_center.x);
-     	vector_y.push_back(&weapon_5_center.y);
+     	vector_orig.push_back(&weapon_5_origin_center);
+     	vector.push_back(&weapon_5_center);
 }
    
 
@@ -201,31 +183,17 @@ void Points :: addMainQuadPoints()
 { 
       	/////////////////////////////////////////////////////////////
       	////// Origin entity rect (for rotation only transformation)
-      	vector_orig_x.push_back(&bottomLeft_origin.x);
-      	vector_orig_y.push_back(&bottomLeft_origin.y);
-      
-      	vector_orig_x.push_back(&bottomRight_origin.x);
-      	vector_orig_y.push_back(&bottomRight_origin.y);
-      
-      	vector_orig_x.push_back(&topRight_origin.x);
-      	vector_orig_y.push_back(&topRight_origin.y);
-                
-      	vector_orig_x.push_back(&topLeft_origin.x);
-      	vector_orig_y.push_back(&topLeft_origin.y);
+      	vector_orig.push_back(&bottomLeft_origin);
+      	vector_orig.push_back(&bottomRight_origin);
+      	vector_orig.push_back(&topRight_origin);
+      	vector_orig.push_back(&topLeft_origin);
       
       	///////////////////////////////////////////
       	////// Actual entity rect
-      	vector_x.push_back(&bottomLeft.x);
-      	vector_y.push_back(&bottomLeft.y);
-      
-      	vector_x.push_back(&bottomRight.x);
-      	vector_y.push_back(&bottomRight.y);
-      
-      	vector_x.push_back(&topRight.x);
-      	vector_y.push_back(&topRight.y);
-                 
-      	vector_x.push_back(&topLeft.x);
-      	vector_y.push_back(&topLeft.y);
+      	vector.push_back(&bottomLeft);     
+      	vector.push_back(&bottomRight);      
+      	vector.push_back(&topRight);                 
+      	vector.push_back(&topLeft);
 }
 
 
@@ -255,31 +223,16 @@ void Points :: initShieldQuadPoints()
 void Points :: addShieldQuadPoints()
 { 
      	// Origin entity rect (for rotation only transformation)
-     	vector_orig_x.push_back(&bottomLeftShield_origin.x);
-     	vector_orig_y.push_back(&bottomLeftShield_origin.y);
-
-     	vector_orig_x.push_back(&bottomRightShield_origin.x);
-     	vector_orig_y.push_back(&bottomRightShield_origin.y);
-
-     	vector_orig_x.push_back(&topRightShield_origin.x);
-     	vector_orig_y.push_back(&topRightShield_origin.y);
-
-     	vector_orig_x.push_back(&topLeftShield_origin.x);
-     	vector_orig_y.push_back(&topLeftShield_origin.y);
-
+     	vector_orig.push_back(&bottomLeftShield_origin);
+     	vector_orig.push_back(&bottomRightShield_origin);
+     	vector_orig.push_back(&topRightShield_origin);
+     	vector_orig.push_back(&topLeftShield_origin);
 
      	// Actual entity rect
-     	vector_x.push_back(&bottomLeftShield.x);
-     	vector_y.push_back(&bottomLeftShield.y);
-
-     	vector_x.push_back(&bottomRightShield.x);
-     	vector_y.push_back(&bottomRightShield.y);
-
-     	vector_x.push_back(&topRightShield.x);
-     	vector_y.push_back(&topRightShield.y);
-
-     	vector_x.push_back(&topLeftShield.x);
-     	vector_y.push_back(&topLeftShield.y);
+     	vector.push_back(&bottomLeftShield);
+     	vector.push_back(&bottomRightShield);
+     	vector.push_back(&topRightShield);
+     	vector.push_back(&topLeftShield);
 }
 
 
@@ -293,11 +246,8 @@ void Points :: initMidLeftPoint()
 
 void Points :: addMidLeftPoint()
 {
-     	vector_orig_x.push_back(&midLeft_origin.x);
-     	vector_orig_y.push_back(&midLeft_origin.y);
-
-     	vector_x.push_back(&midLeft.x);
-     	vector_y.push_back(&midLeft.y);
+     	vector_orig.push_back(&midLeft_origin);
+     	vector.push_back(&midLeft);
 }
 
 
@@ -311,11 +261,8 @@ void Points :: initMidFarLeftPoint()
 
 void Points :: addMidFarLeftPoint()
 {
-     	vector_orig_x.push_back(&midFarLeft_origin.x);
-     	vector_orig_y.push_back(&midFarLeft_origin.y);
-
-     	vector_x.push_back(&midFarLeft.x);
-     	vector_y.push_back(&midFarLeft.y);
+     	vector_orig.push_back(&midFarLeft_origin);
+     	vector.push_back(&midFarLeft);
 }
 
 
@@ -335,10 +282,9 @@ void Points :: setCenter(float _centerx, float _centery)
     	is_updated = false;       
 }
        
-
 void  Points :: setCenter(vec2f _center)
 {
-    	center.set(_center.x, _center.y);
+    	center = _center;
       
     	is_updated = false;   
 }
@@ -356,23 +302,21 @@ void Points :: update()
 {
     	if (is_updated == false)
     	{   
-        	float pos_x = center.x;
-        	float pos_y = center.y;
+        	vec2f pos = center;
 
-        	float angle_degree = angle_inD;
-       		float angle_radian = angle_degree/57.295779;
+       		float angle_radian = angle_inD/RADIAN_TO_DEGREE_RATE;
          
         	float cosa = cos(angle_radian);
         	float sina = sin(angle_radian);
  
-        	for (unsigned int i = 0; i < vector_x.size(); i++)
+        	for (unsigned int i = 0; i < vector.size(); i++)
         	{   
            		////// rotation around center
-            		(*vector_x[i]) = (*vector_orig_x[i]) * cosa - (*vector_orig_y[i]) * sina;
-            		(*vector_y[i]) = (*vector_orig_x[i]) * sina + (*vector_orig_y[i]) * cosa;  
+            		vector[i]->x = vector_orig[i]->x * cosa - vector_orig[i]->y * sina;
+            		vector[i]->y = vector_orig[i]->x * sina + vector_orig[i]->y * cosa;  
             		////// moving to position
-            		(*vector_x[i]) += pos_x;
-            		(*vector_y[i]) += pos_y;
+            		vector[i]->x += pos.x;
+            		vector[i]->y += pos.y;
         	}   
         	is_updated = true;
     	}

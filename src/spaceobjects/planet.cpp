@@ -17,21 +17,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-Planet :: Planet(IdData _data_id, LifeData _data_life, 
-		 TextureOb* _texOb, TextureOb* _texOb_atmoshere, 
-		 ObjMeshInstance* _mesh, 
-		 PlanetData _planet_data,
-		 unsigned long int _population)
+Planet :: Planet(unsigned long int _population)
 {    
-      	CommonForPlanet_init(_data_id, _data_life, 
-      			     _texOb, 
-    	   		     _mesh, 
-			     _planet_data);
+      	//texOb_atmosphere = _texOb_atmoshere;
+      	population  = _population;
+}
 
-      	texOb_atmosphere = _texOb_atmoshere;
-      	
-      	population = _population;
-      
+    
+Planet :: ~Planet()
+{}
+    
+void Planet :: createInternals()
+{
       	if (data_id.subtype_id == KOSMOPORT_ID)
       	{
       	      	createKosmoport();
@@ -45,12 +42,9 @@ Planet :: Planet(IdData _data_id, LifeData _data_life,
         }
 }
 
-    
-Planet :: ~Planet()
-{}
-    
-
-int Planet :: getDockingRadius() const { return data.scale; }
+//void Planet :: setPlanetData(PlanetData data_planet) { data = data_planet; }
+		
+int Planet :: getDockingRadius() const { return data_planet.scale; }
 Kosmoport* Planet :: getKosmoport()    { return kosmoport; }
 Land* Planet :: getLand()              { return land; }
                 
@@ -224,11 +218,15 @@ Planet* createPlanet(int orbit_radius)
         
         unsigned long int population = getRandInt(1000, 4000);
         
-        Planet* planet = new Planet(data_id, data_life, 
-        			    texOb, texOb_atmosphere, 
-        			    g_SPHERE_MESH, 
-        			    planet_data,
-        			    population);
-	 
+        Planet* planet = new Planet(population);
+        planet->setPlanetData(planet_data);
+	planet->setTextureOb(texOb);
+	planet->setIdData(data_id);
+	planet->setLifeData(data_life);
+	planet->setMesh(g_SPHERE_MESH);	
+      	
+      	planet->postCreateInit();
+        planet->createInternals();
+    			     
         return planet;        
 }

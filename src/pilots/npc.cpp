@@ -149,7 +149,7 @@ void Npc :: thinkCommon_inLand_inStatic()
 
 void Npc :: update_inSpace_inStatic()
 {
-	ship->prepareWeapons();
+	ship->getWeaponComplex()->prepareWeapons();
         ship->grapple_slot.getGrappleEquipment()->validationTargets();
         ship->droidRepair();
         // drive work, energy and so on
@@ -235,13 +235,13 @@ void Npc :: checkNeeds()
 
 void Npc :: asteroidScenario()
 {
-        ship->weapon_selector.setAll(false);
-        ship->selectWeapons();
-        ship->resetDeselectedWeaponTargets();
+        ship->getWeaponComplex()->weapon_selector.setAll(false);
+        ship->getWeaponComplex()->selectWeapons();
+        ship->getWeaponComplex()->resetDeselectedWeaponTargets();
 
-        ship->weapon_selector.setAll(true);
-        ship->selectWeapons();
-        ship->setWeaponsTarget(observation->visible_ASTEROID_vec[0].asteroid);
+        ship->getWeaponComplex()->weapon_selector.setAll(true);
+        ship->getWeaponComplex()->selectWeapons();
+        ship->getWeaponComplex()->setWeaponsTarget(observation->visible_ASTEROID_vec[0].asteroid);
                 
         //printf("TARGET => ship_id, asteroid id = %i/%i\n", ship->getId(), sorted_visible_ASTEROID_pList[0]->getId());
 }

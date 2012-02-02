@@ -47,10 +47,6 @@ void drawFlatQuadPerVertexIn2D(TextureOb* texOb,
 void drawDynamic(TextureOb* texOb, 
 		 vec2f center, 
 		 float angleInDegree, 
-		 int minus_half_w, 
-		 int minus_half_h, 
-		 int plus_half_w, 
-		 int plus_half_h, 
 		 float pos_z);
 
 

@@ -23,14 +23,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Planet : public CommonForPlanet
 {
         public:
-                Planet(IdData, LifeData, 
-                       TextureOb*, TextureOb*, 
-                       ObjMeshInstance*, 
-		       PlanetData _planet_data,
-		       unsigned long int _population);
-    	   
-                ~Planet();
-
+                Planet(unsigned long int _population);
+    	        ~Planet();
+		
                 int getDockingRadius() const;
                 Kosmoport* getKosmoport();
                 Land* getLand();
@@ -51,6 +46,8 @@ class Planet : public CommonForPlanet
                 void renderInfo();
 
                 bool getPermissionToLand() const;
+                
+                void createInternals();
                 
         private:
                 TextureOb* texOb_atmosphere;

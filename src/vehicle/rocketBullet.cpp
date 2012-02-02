@@ -226,7 +226,7 @@ RocketBullet* rocketBulletGenerator(BulletData data_bullet, ItemSlot* slot, floa
         data_life.armor = data_bullet.armor;        
 
     	RocketBullet* rocket; 
-    	if ( (slot->getOwnerShip()->data_korpus.render_TURRELS == true) and (force_center_start == false))
+    	if ( (slot->getOwnerVehicle()->data_korpus.render_TURRELS == true) and (force_center_start == false))
     	{
         	rocket = new RocketBullet(data_id,
         			          data_life,		
@@ -234,7 +234,7 @@ RocketBullet* rocketBulletGenerator(BulletData data_bullet, ItemSlot* slot, floa
         				  slot->getTurrel()->getCenter(), 
                                   	  slot->getTurrel()->getAngle(), 
                                   	  slot->getTurrel()->getTargetOb(), 
-                                  	  slot->getOwnerShip()->getId(),
+                                  	  slot->getOwnerVehicle()->getId(),
                                   	  offset);
         }
     	else
@@ -242,10 +242,10 @@ RocketBullet* rocketBulletGenerator(BulletData data_bullet, ItemSlot* slot, floa
         	rocket = new RocketBullet(data_id,
         			          data_life,		
         				  data_bullet,
-                                  	  slot->getOwnerShip()->getPoints()->getCenter(), 
+                                  	  slot->getOwnerVehicle()->getPoints()->getCenter(), 
                                   	  slot->getTurrel()->getAngle(), 
                                   	  slot->getTurrel()->getTargetOb(), 
-                                  	  slot->getOwnerShip()->getId(),
+                                  	  slot->getOwnerVehicle()->getId(),
                                   	  offset);
          }
          

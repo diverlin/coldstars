@@ -78,7 +78,8 @@ class TextureOb
         	void turrelArgManager(std::vector<int>*);
         	
         	// SPACE OBJECTS
-        	void sputnikArgManager(std::vector<int>*); 
+        	void spacestationArgManager(std::vector<int>*); 
+        	void satelliteArgManager(std::vector<int>*); 
         	void shipArgManager(std::vector<int>*); 
 
         	void nebulaArgManager(std::vector<int>*);

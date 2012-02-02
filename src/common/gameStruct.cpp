@@ -86,7 +86,7 @@ AbilitiesStatus :: AbilitiesStatus()
    	FREEZE   = false;
    	GRAB     = false;
    	SCAN     = false;
-   	FIRE     = false;
+   	//FIRE     = false;
 }
 
 
@@ -98,9 +98,7 @@ KorpusData :: KorpusData()
         temperature = 0;   
         
         price = 0;
-        
-        collision_radius = 0.0;
-        
+       
         inhibit_GRAPPLE = false;
         render_TURRELS = false;
         

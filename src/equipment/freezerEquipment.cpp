@@ -67,7 +67,7 @@ void FreezerEquipment :: countPrice()
 
 void FreezerEquipment :: updateOwnerPropetries()
 {
-    	slot->getOwnerShip()->updateFreezeAbility();
+    	slot->getOwnerVehicle()->updateFreezeAbility();
 }
 
       

@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Mineral : public CommonForSpaceItems
 {
     	public:  
-        	Mineral(IdData _data_id, LifeData _data_life, TextureOb* _texOb);
+        	Mineral();
 
         	void updateInfo();
         
