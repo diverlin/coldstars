@@ -55,10 +55,6 @@ void drawFlatQuadPerVertexIn2D(TextureOb* texOb,
 void drawDynamic(TextureOb* texOb,
 		 vec2f center, 
 		 float angleInDegree, 
-		 int minus_half_w, 
-		 int minus_half_h, 
-		 int plus_half_w, 
-		 int plus_half_h, 
 		 float pos_z)
 {
     	glBindTexture(GL_TEXTURE_2D, texOb->texture);
@@ -69,10 +65,10 @@ void drawDynamic(TextureOb* texOb,
     		glRotatef(angleInDegree, 0.0, 0.0, 1.0);
 
     		glBegin(GL_QUADS);
-    			glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(minus_half_w, minus_half_h, pos_z);
-    			glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f(plus_half_w,  minus_half_h, pos_z);
-   			glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f(plus_half_w,  plus_half_h,  pos_z);
-    			glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(minus_half_w, plus_half_h,  pos_z);
+    			glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-texOb->w/2, -texOb->h/2, pos_z);
+    			glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( texOb->w/2, -texOb->h/2, pos_z);
+   			glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( texOb->w/2,  texOb->h/2,  pos_z);
+    			glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-texOb->w/2,  texOb->h/2,  pos_z);
     		glEnd();
     	glPopMatrix();
 }

@@ -211,14 +211,50 @@ void loadImages()
 
 
 
-//####################################### SPUTNIK_TEXTURE_ID ################################
-//TEXTURE_MANAGER.manage( textureOb(SPUTNIK_TEXTURE_ID, 'data/satellite/sa_001.png', True, [], 48, 49) )
-//TEXTURE_MANAGER.manage( textureOb(SPUTNIK_TEXTURE_ID, 'data/satellite/sa_002.png', True, [], 24, 23) )
-//TEXTURE_MANAGER.manage( textureOb(SPUTNIK_TEXTURE_ID, 'data/satellite/sa_003.png', True, [], 48, 49) )
-//TEXTURE_MANAGER.manage( textureOb(SPUTNIK_TEXTURE_ID, 'data/satellite/sa_004.png', True, []) )
-//TEXTURE_MANAGER.manage( textureOb(SPUTNIK_TEXTURE_ID, 'data/satellite/sa_005.png', True, [], 24, 24) )
-//TEXTURE_MANAGER.manage( textureOb(SPUTNIK_TEXTURE_ID, 'data/satellite/sa_006.png', True, [], 24, 21) )
-//TEXTURE_MANAGER.manage( textureOb(SPUTNIK_TEXTURE_ID, 'data/satellite/sa_007.png', True, [], 24, 20) )
+//####################################### SATELLITE_TEXTURE_ID ################################
+{
+	std::vector<int> arg;   
+	arg.push_back(RACE_0_ID);
+	g_TEXTURE_MANAGER.manage( new TextureOb(SATELLITE_TEXTURE_ID, "data/satellite/sa_001.png", true, &arg, 3, 1, 6) );
+}
+
+{
+	std::vector<int> arg;   
+	arg.push_back(RACE_0_ID);
+	g_TEXTURE_MANAGER.manage( new TextureOb(SATELLITE_TEXTURE_ID, "data/satellite/sa_002.png", true, &arg, 4, 1, 8) );
+}
+
+{
+	std::vector<int> arg;   
+	arg.push_back(RACE_0_ID);
+	g_TEXTURE_MANAGER.manage( new TextureOb(SATELLITE_TEXTURE_ID, "data/satellite/sa_003.png", true, &arg, 3, 1, 6) );
+}
+
+{
+	std::vector<int> arg;   
+	arg.push_back(RACE_0_ID);
+	g_TEXTURE_MANAGER.manage( new TextureOb(SATELLITE_TEXTURE_ID, "data/satellite/sa_004.png", true, &arg) );
+}
+
+{
+	std::vector<int> arg;   
+	arg.push_back(RACE_0_ID);
+	g_TEXTURE_MANAGER.manage( new TextureOb(SATELLITE_TEXTURE_ID, "data/satellite/sa_005.png", true, &arg, 8, 1, 16) );
+}
+
+{
+	std::vector<int> arg;   
+	arg.push_back(RACE_0_ID);
+	g_TEXTURE_MANAGER.manage( new TextureOb(SATELLITE_TEXTURE_ID, "data/satellite/sa_006.png", true, &arg, 8, 1, 16) );
+}
+
+{
+	std::vector<int> arg;   
+	arg.push_back(RACE_0_ID);
+	g_TEXTURE_MANAGER.manage( new TextureOb(SATELLITE_TEXTURE_ID, "data/satellite/sa_006.png", true, &arg, 5, 1, 10) );
+}
+
+// BLACKHOLE
 
 {
 	std::vector<int> arg;   
@@ -501,6 +537,31 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 	std::vector<int> arg; 
 	arg.push_back(BLUE_COLOR_ID); arg.push_back(1925); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(STAR_TEXTURE_ID, "data/star/s_101.png", false, &arg) ); 
+}
+
+// STARBASE_TEXTURE_ID
+{
+	std::vector<int> arg; 
+	arg.push_back(RACE_0_ID);  
+	g_TEXTURE_MANAGER.manage( new TextureOb(SPACESTATION_TEXTURE_ID, "data/starbase/sb_000.png", false, &arg) ); 
+}
+
+{
+	std::vector<int> arg; 
+	arg.push_back(RACE_0_ID); 
+	g_TEXTURE_MANAGER.manage( new TextureOb(SPACESTATION_TEXTURE_ID, "data/starbase/sb_001.png", false, &arg) ); 
+}
+
+{
+	std::vector<int> arg; 
+	arg.push_back(RACE_0_ID); 
+	g_TEXTURE_MANAGER.manage( new TextureOb(SPACESTATION_TEXTURE_ID, "data/starbase/sb_002.png", false, &arg) ); 
+}
+
+{
+	std::vector<int> arg; 
+	arg.push_back(RACE_0_ID); 
+	g_TEXTURE_MANAGER.manage( new TextureOb(SPACESTATION_TEXTURE_ID, "data/starbase/sb_003.png", false, &arg) ); 
 }
 
 

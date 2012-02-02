@@ -26,12 +26,10 @@ class Star : public CommonForPlanet
 	public:
     		float texture_offset1, texture_offset2;    
    		
-    		Star(IdData, LifeData,
-    		     TextureOb*, 
-    		     ObjMeshInstance*,  
-    		     PlanetData);
-    		     
+    		Star();
     		~Star();
+                
+                void calcColor();
                 
                 Color4f getColor() const;
                 int getColorId() const;

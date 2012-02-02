@@ -21,75 +21,40 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define COMMONFORPLANET_H
 
 
-class CommonForPlanet
+class CommonForPlanet : public BaseSpaceObject 
 {
 	public:      
    		CommonForPlanet();
     		~CommonForPlanet();
-                                
+					     
                 // accessors
-                void setStarSystem(StarSystem*);
-                
-                int getId() const;
-                int getTypeId() const;
-                int getSubTypeId() const;
-                int getCollisionRadius() const;
+                void setPlanetData(PlanetData);
                 vec2f getNextTurnPosition() const;
-                Points* getPoints();
-                StarSystem* getStarSystem();
-
-               	bool getGarbageReady() const;               
-               	bool getAlive() const;
-		bool* getpAlive();
-                int* getpPlaceTypeId();
-                
-    		// other methods
-                void CommonForPlanet_init(IdData,
-                			  LifeData,                
-                			  TextureOb*, 
-    	   				  ObjMeshInstance*, 
-    	   				  PlanetData);
-    	   				  
+   	   	//
+   	   	void postCreateInit();
+    		void createOrbit();
+   	   				  
  		void hit_TRUE(int);
  		void hit_FALSE(int);
     		
    		void render_NEW();
     		void render_OLD();
     		void drawOrbit();
-                                
+    		               
         protected:
-                IdData data_id;
-                LifeData data_life;
-                
-                TextureOb* texOb;
                 PathVisual orbit_visual;
-                
-    		Points points;
-    		ObjMeshInstance* mesh; 
-    
-              	StarSystem* starsystem;
-              	
-              	InfoTable info;
-              	
-              	// !!!!
-    		float rate;                                            
-    		int w, h;
-    		int collision_radius; 
-    		// !!!!
-                
-                
-		vec3f center_pos;
-		vec3f angle, d_angle;
+
+      		PlanetData data_planet;
      		
-     		int place_type_id;
-      		PlanetData data;
-     		
-      		std::vector<float> orbit_vector_x, orbit_vector_y;
+      		std::vector<vec2f> orbit_vec;
                 int orbit_len, orbit_it; 
                                 
-                void detailedEllipceOrbitFormation();
     		void updatePosition();
     		void updateRotation();
+    		
+    		void calcCollisionrRadius();
+    		void createEllipceOrbit();
+    		void createOrbitVisual();
 };
 
 #endif 

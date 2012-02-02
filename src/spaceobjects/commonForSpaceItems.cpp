@@ -21,58 +21,36 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 CommonForSpaceItems :: CommonForSpaceItems()
 {}
 
+CommonForSpaceItems :: ~CommonForSpaceItems()
+{}
 
-
-void CommonForSpaceItems :: CommonForSpaceItems_init(IdData _data_id, LifeData _data_life, TextureOb* _texOb)
-{   
-    	data_id   = _data_id;
-    	data_life = _data_life;
-    	
-    	texOb = _texOb;
-    	starsystem = NULL;
-    
-   	this->calcRenderConstants();
-     
-    	collision_radius = (texOb->w + texOb->h)/4;    	
-
-    	//////
-    	points.initCenterPoint();
-    	points.addCenterPoint();
-    	//////
-
-    	data_angle_inD.d_z      = -getRandInt(10, 100)*0.01;    	    	    	
+void CommonForSpaceItems :: postCreateInit()
+{
+   	this->calcCollisionrRadius();
+	this->createCenter();
 }
 
+
+void CommonForSpaceItems :: calcCollisionrRadius()
+{
+        collision_radius = (texOb->w + texOb->h)/4; 
+        
+        points.setWidthHeight(texOb->w, texOb->h);  // needs for finding visible corners
+}
 
 void CommonForSpaceItems :: moveToSpace(StarSystem* starsystem, vec2f start_pos)
 {
 	this->starsystem = starsystem;	
-    	points.setCenter(start_pos.x, start_pos.y);    	
+    	points.setCenter(start_pos);    	
     	target_pos = start_pos + getRandVec(60, 100);
         
         place_type_id = SPACE_ID;
         keep_moving = true;
-        //printf("target_pos = %f,%f\n", target_pos.x, target_pos.y);
 }
 
 
 
-//void CommonForSpaceItems :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
-void CommonForSpaceItems :: setPlaceTypeId(int _place_type_id) { place_type_id = _place_type_id; }
 
-int CommonForSpaceItems :: getId() const { return data_id.id; }
-int CommonForSpaceItems :: getTypeId() const { return data_id.type_id; }
-int CommonForSpaceItems :: getSubTypeId() const { return data_id.subtype_id; }
-bool CommonForSpaceItems :: getGarbageReady() const { return data_life.garbage_ready; }  
-bool CommonForSpaceItems :: getAlive() const { return data_life.is_alive; }  
-bool* CommonForSpaceItems :: getpAlive() { return &data_life.is_alive; }  
-int* CommonForSpaceItems :: getpPlaceTypeId() { return &place_type_id; }
-int CommonForSpaceItems :: getPlaceTypeId() const { return place_type_id; }
-        	
-Points* CommonForSpaceItems :: getPoints() { return &points; } 
-StarSystem* CommonForSpaceItems :: getStarSystem() { return starsystem; }
-int CommonForSpaceItems :: getCollisionRadius() const {return collision_radius; }	
-int CommonForSpaceItems :: getMass() const { return mass; }
 
 void CommonForSpaceItems :: moveExternalyToPosition(vec2f _target)
 {
@@ -161,20 +139,11 @@ void CommonForSpaceItems :: death_FALSE()
 	data_life.garbage_ready = true;
 }
 
-
-void CommonForSpaceItems :: calcRenderConstants()
-{
-    	minus_half_w = -texOb->w/2;
-    	minus_half_h = -texOb->h/2;
-    	plus_half_w  =  texOb->w/2;
-    	plus_half_h  =  texOb->h/2;
-}     
-
-          
+       
 void CommonForSpaceItems :: render2D()
 { 
-    	drawDynamic(texOb, points.getCenter(), data_angle_inD.z, minus_half_w, minus_half_h, plus_half_w, plus_half_h, points.getPosZ());
-    	data_angle_inD.z += data_angle_inD.d_z;
+    	drawDynamic(texOb, points.getCenter(), angle.z, points.getPosZ());
+    	angle.z += d_angle.z;
 }
 
 

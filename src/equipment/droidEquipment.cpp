@@ -66,7 +66,7 @@ void DroidEquipment :: countPrice()
 
 void DroidEquipment :: updateOwnerPropetries()
 {
-     	slot->getOwnerShip()->updateRepairAbility();
+     	slot->getOwnerVehicle()->updateRepairAbility();
 }
 
 

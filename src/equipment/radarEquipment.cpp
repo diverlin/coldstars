@@ -70,7 +70,7 @@ void RadarEquipment :: countPrice()
 
 void RadarEquipment :: updateOwnerPropetries()
 {
-	slot->getOwnerShip()->updateRadarAbility();
+	slot->getOwnerVehicle()->updateRadarAbility();
 }
       
 

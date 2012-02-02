@@ -25,7 +25,7 @@ class ItemSlot
 {   
 	public:        
         	ItemSlot();
-		ItemSlot(int _subtype_id, Ship* _ship, TextureOb* _texOb, int _pos_x, int _pos_y, int w, int h);
+		ItemSlot(int _subtype_id, VehicleCommon* _owner_vehicle, TextureOb* _texOb, int _pos_x, int _pos_y, int w, int h);
 		~ItemSlot();
                 
                 void setShipOwner(Ship*);
@@ -45,7 +45,7 @@ class ItemSlot
                 void setFlashingStatus(bool new_status);
                       
                 Rect& getRect();
-                Ship* getOwnerShip();
+                VehicleCommon* getOwnerVehicle();
                 
                 RocketEquipment*    getRocketEquipment()    const;
                 LazerEquipment*     getLazerEquipment()     const;
@@ -118,7 +118,7 @@ class ItemSlot
                 
                 Rect rect;
                                 
-                Ship* owner_ship;  // reference to the ship_owenr                
+                VehicleCommon* owner_vehicle;  // reference to the ship_owenr                
                 Turrel* turrel;    // only for weapons slot
                 
                 RocketEquipment*    rocket_equipment;

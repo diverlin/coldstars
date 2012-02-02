@@ -18,26 +18,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-BlackHole :: BlackHole()
+Satellite :: Satellite()
 {        
-    	mass = getRandInt(100000, 400000);
+    	mass = getRandInt(SATELLITE_MASS_MIN, SATELLITE_MASS_MAX);
     	keep_moving = false;
 }
 
-BlackHole :: ~BlackHole() {}
+Satellite :: ~Satellite() {}
     
 		
-void BlackHole :: update_inSpace_inDynamic_TRUE()
+void Satellite :: update_inSpace_inDynamic_TRUE()
 {}
 
-void BlackHole :: update_inSpace_inDynamic_FALSE()
+void Satellite :: update_inSpace_inDynamic_FALSE()
 {}
 
-void BlackHole :: updateInfo()
+void Satellite :: updateInfo()
 {
 	info.clear();
 
-    	info.addTitleStr("BLACKHOLE");
+    	info.addTitleStr("SATELLITE");
 
     	//info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->getId()));
     	info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
@@ -45,34 +45,34 @@ void BlackHole :: updateInfo()
 }
             
 
-void BlackHole :: renderInfo()
+void Satellite :: renderInfo()
 {
      	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y);    
 }
 
 
-BlackHole* getNewBlackHole()
+Satellite* getNewSatellite()
 {
         IdData data_id;
-        data_id.id         = g_BLACKHOLE_ID_GENERATOR.getNextId();
-    	data_id.type_id    = BLACKHOLE_ID;
-    	//data_id.subtype_id = ; 
+        data_id.id         = g_SATELLITE_ID_GENERATOR.getNextId();
+    	data_id.type_id    = SATELLITE_ID;
+    	data_id.subtype_id = MILITARY_ID; 
         
         LifeData data_life;
         data_life.is_alive   = true;
         data_life.garbage_ready = false;
-    	data_life.armor      = 100000;
+    	data_life.armor      = 1000;
         data_life.dying_time = 30;        
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(BLACKHOLE_TEXTURE_ID); 
-	BlackHole* blackhole = new BlackHole();
-	blackhole->setIdData(data_id);
-	blackhole->setLifeData(data_life);
-	blackhole->setTextureOb(texOb);
+	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(SATELLITE_TEXTURE_ID);  
+	Satellite* satellite = new Satellite();
+	satellite->setIdData(data_id);
+	satellite->setLifeData(data_life);
+	satellite->setTextureOb(texOb);
 	
-	blackhole->postCreateInit();
+	satellite->postCreateInit();
 	
-	return blackhole;
+	return satellite;
 }
 
 

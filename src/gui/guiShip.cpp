@@ -227,24 +227,24 @@ void GuiShip :: mouseControl()
        		pTo_store = ship->getNpc()->getKosmoport()->getStore();    // this is used only for player
         }
 
-	for(unsigned int i = 0; i < ship->slot_total_pList.size(); i++)
+	for(unsigned int i = 0; i < ship->slot_total_vec.size(); i++)
 	{ 
-		if (ship->slot_total_pList[i]->interaction(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y)) == true)
+		if (ship->slot_total_vec[i]->interaction(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y)) == true)
 		{  
-			pPLAYER->getCursor()->setInfoSlot(ship->slot_total_pList[i]);
+			pPLAYER->getCursor()->setInfoSlot(ship->slot_total_vec[i]);
 			cursor_has_target = true;
 
 			if (lmb == true)
 			{
 				if ( (allow_full_control == true) && (in_store == false) )
 				{				
-					pPLAYER->getCursor()->getSlot()->SwapItemWith(ship->slot_total_pList[i]);                		    
+					pPLAYER->getCursor()->getSlot()->SwapItemWith(ship->slot_total_vec[i]);                		    
             			}          		
 				else if ( in_store == true )
 				{
-					if (pTo_store->buyItemFromSlot(ship->slot_total_pList[i]) == true)\
+					if (pTo_store->buyItemFromSlot(ship->slot_total_vec[i]) == true)\
 					{
-						pPLAYER->getPilot()->increaseCredits(ship->slot_total_pList[i]->getItemPrice());
+						pPLAYER->getPilot()->increaseCredits(ship->slot_total_vec[i]->getItemPrice());
 					}
 				}
 			} 
@@ -279,9 +279,9 @@ void GuiShip :: renderInternaly() const
 {
 	drawTexturedRect(ship->texOb_korpus, ship->kontur_rect, -1.0);
 
-	for(unsigned int i = 0; i < ship->slot_total_pList.size(); i++)
+	for(unsigned int i = 0; i < ship->slot_total_vec.size(); i++)
 	{
-		ship->slot_total_pList[i]->render(-1);
+		ship->slot_total_vec[i]->render(-1);
 	}
 	
 	ship->gate_slot.render(-1);

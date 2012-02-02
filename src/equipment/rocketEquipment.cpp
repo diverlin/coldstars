@@ -95,7 +95,7 @@ void RocketEquipment :: countPrice()
 
 void RocketEquipment :: updateOwnerPropetries()
 {      
-    	slot->getOwnerShip()->updateFireAbility();
+    	slot->getOwnerVehicle()->updateFireAbility();
 }
 
 
@@ -138,7 +138,7 @@ void RocketEquipment :: fireEvent_TRUE()
 {
 	int num;
     	RocketBullet* rocket1 = rocketBulletGenerator(data_bullet, slot, 0.0f);
-    	slot->getOwnerShip()->getStarSystem()->add(rocket1);
+    	slot->getOwnerVehicle()->getStarSystem()->add(rocket1);
     	num++;
 
     	//RocketBullet* rocket2 = rocketBulletGenerator(data_bullet, slot, +2);
@@ -157,10 +157,10 @@ void RocketEquipment :: fireEvent_FALSE()
 {
 	bool force_center_start = true;
     	RocketBullet* rocket1 = rocketBulletGenerator(data_bullet, slot, -2, force_center_start);
-    	slot->getOwnerShip()->getStarSystem()->add(rocket1);
+    	slot->getOwnerVehicle()->getStarSystem()->add(rocket1);
 
     	RocketBullet* rocket2 = rocketBulletGenerator(data_bullet, slot, +2, force_center_start);
-    	slot->getOwnerShip()->getStarSystem()->add(rocket2);
+    	slot->getOwnerVehicle()->getStarSystem()->add(rocket2);
 
     	ammo -= 2;
 

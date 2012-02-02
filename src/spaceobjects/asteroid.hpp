@@ -23,12 +23,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Asteroid : public CommonForPlanet
 {
 	public:
-		Asteroid(IdData, LifeData,
-			 TextureOb*,
-		         ObjMeshInstance*,
-		         PlanetData);
-		     
-        	~Asteroid();
+		Asteroid();
+		~Asteroid();
 
 		int getArmor() const;
 		int getDamage() const;

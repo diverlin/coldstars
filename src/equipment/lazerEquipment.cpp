@@ -78,7 +78,7 @@ void LazerEquipment :: countPrice()
     
 void LazerEquipment :: updateOwnerPropetries()
 { 
-    	slot->getOwnerShip()->updateFireAbility();
+    	slot->getOwnerVehicle()->updateFireAbility();
 }
 
 
@@ -112,7 +112,7 @@ std::string LazerEquipment :: getRadiusStr()
 void LazerEquipment :: fireEvent_TRUE()
 { 
     	LazerTraceEffect* _lazer_trace_effect;
-    	if (slot->getOwnerShip()->data_korpus.render_TURRELS == true)
+    	if (slot->getOwnerVehicle()->data_korpus.render_TURRELS == true)
     	{
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
                                                       	      texOb_particle, 
@@ -125,7 +125,7 @@ void LazerEquipment :: fireEvent_TRUE()
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
                                                               texOb_particle, 
                                                               100, 
-                                                              slot->getOwnerShip()->getPoints()->getpCenter(), 
+                                                              slot->getOwnerVehicle()->getPoints()->getpCenter(), 
                                                               slot->getTurrel()->getTargetOb()->getpCenter());
         }
     
@@ -135,8 +135,8 @@ void LazerEquipment :: fireEvent_TRUE()
     	
     	deterioration();
     	
-    	slot->getOwnerShip()->getStarSystem()->add(_lazer_trace_effect);
-    	slot->getOwnerShip()->getStarSystem()->add(_damage_effect);
+    	slot->getOwnerVehicle()->getStarSystem()->add(_lazer_trace_effect);
+    	slot->getOwnerVehicle()->getStarSystem()->add(_damage_effect);
 } 
 
 

@@ -17,9 +17,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-Navigator :: Navigator(Ship* _ship_owner)
+Navigator :: Navigator(VehicleCommon* owner_vehicle)
 {      
-	ship_owner = _ship_owner;
+	this->owner_vehicle = owner_vehicle;
    
         targetOb = new TargetObject();
         
@@ -245,7 +245,7 @@ bool Navigator :: checkEchievement()
 {
 	if (targetOb->getValid() == true)
 	{
-     		if (collisionBetweenCenters(ship_owner->getPoints(), target_pos, target_distance) == true)
+     		if (collisionBetweenCenters(owner_vehicle->getPoints(), target_pos, target_distance) == true)
      		{
         		return true;
         	}
@@ -277,7 +277,7 @@ void Navigator :: calcPath()
     	    	
 	vec2f mid = calcRoundPath();
 	calcDirectPath(mid);
-		
+
 	if (path_vec.size() > 1)
 	{
 		direction_list_END = false;
@@ -330,8 +330,8 @@ void Navigator :: calcPath()
 vec2f Navigator :: calcRoundPath()  // not working yet
 {
         // vychislenie centrov okruzhnostej traektorij na osnovanii tekuwego polozhenija ob'ekta 
-        float start_angle_inD = ship_owner->getPoints()->getAngleDegree();
-        vec2f start_pos = ship_owner->getPoints()->getCenter();
+        float start_angle_inD = owner_vehicle->getPoints()->getAngleDegree();
+        vec2f start_pos = owner_vehicle->getPoints()->getCenter();
         
         float R = 100.0f; //(float)getRandInt(80, 130);
                         
@@ -388,8 +388,8 @@ vec2f Navigator :: calcRoundPath()  // not working yet
         float yk2 = target_pos.y + k * L1 * cos(a1 + b1);         
 
       
-        float len1 = distBetweenPoints(ship_owner->getPoints()->getCenter(), xk1, yk1);
-        float len2 = distBetweenPoints(ship_owner->getPoints()->getCenter(), xk2, yk2);
+        float len1 = distBetweenPoints(owner_vehicle->getPoints()->getCenter(), xk1, yk1);
+        float len2 = distBetweenPoints(owner_vehicle->getPoints()->getCenter(), xk2, yk2);
            
         
            
@@ -404,14 +404,14 @@ vec2f Navigator :: calcRoundPath()  // not working yet
         //printf("ax = %f \n",  ax);  
         //printf("ay = %f \n",  ay);  
 
-        float bx = target_pos.x                              - ship_owner->getPoints()->getCenter().x;
-        float by = target_pos.y                              - ship_owner->getPoints()->getCenter().y;
+        float bx = target_pos.x                              - owner_vehicle->getPoints()->getCenter().x;
+        float by = target_pos.y                              - owner_vehicle->getPoints()->getCenter().y;
 
         float dax = cos(start_angle_inD/RADIAN_TO_DEGREE_RATE);
         float day = sin(start_angle_inD/RADIAN_TO_DEGREE_RATE);  
                         
-        float dbx = ship_owner->getPoints()->getCenter().x - target_pos.x;
-        float dby = ship_owner->getPoints()->getCenter().y - target_pos.y;
+        float dbx = owner_vehicle->getPoints()->getCenter().x - target_pos.x;
+        float dby = owner_vehicle->getPoints()->getCenter().y - target_pos.y;
 
         float la = sqrt(dax*dax+day*day);
         float lb = sqrt(dbx*dbx+dby*dby);
@@ -538,10 +538,12 @@ vec2f Navigator :: calcRoundPath()  // not working yet
                 
 
         
-        float angle = start_angle_inD/57.295779;
+        float angle = start_angle_inD/RADIAN_TO_DEGREE_RATE;
+        vec2f new_pos = start_pos;
+        
         float d_a = 0.02;
         
-        vec2f new_pos, prev_pos;
+        vec2f prev_pos;
         float angleInD;
 
         if (clockwise == true)
@@ -555,7 +557,6 @@ vec2f Navigator :: calcRoundPath()  // not working yet
                         new_pos.x = rotation_center_x + R * cos(angle - PI/2);    
                         new_pos.y = rotation_center_y + R * sin(angle - PI/2);
                         
-            		angleInD = atan2(prev_pos.y - new_pos.y, prev_pos.x - new_pos.x) * RADIAN_TO_DEGREE_RATE;
             		angleInD = atan2(new_pos.y - prev_pos.y, new_pos.x - prev_pos.x) * RADIAN_TO_DEGREE_RATE;
 
             		path_vec.push_back(new_pos);
@@ -573,7 +574,6 @@ vec2f Navigator :: calcRoundPath()  // not working yet
                         new_pos.x = rotation_center_x + R * cos(angle + PI/2);    
                         new_pos.y = rotation_center_y + R * sin(angle + PI/2);
 
-            		angleInD = atan2(prev_pos.y - new_pos.y, prev_pos.x - new_pos.x) * RADIAN_TO_DEGREE_RATE;
             		angleInD = atan2(new_pos.y - prev_pos.y, new_pos.x - prev_pos.x) * RADIAN_TO_DEGREE_RATE;
             		
             		path_vec.push_back(new_pos);
@@ -591,9 +591,9 @@ void Navigator :: calcDirectPath(vec2f start_pos)
     	vec2f ll = target_pos - start_pos;
     	vec2f new_pos = start_pos;
     	       		
-        if ( (ship_owner->propetries.speed > FLOAT_EPSILON) and (ll.isNull() == false) )
+        if ( (owner_vehicle->propetries.speed > FLOAT_EPSILON) and (ll.isNull() == false) )
     	{
-    		float step = ship_owner->propetries.speed/100.0;  // remove from here    
+    		float step = owner_vehicle->propetries.speed/100.0;  // remove from here    
        		    		
 		vec2f vstep = ll.getNorm() * step;
 
@@ -618,8 +618,8 @@ void Navigator :: updatePosition()
      	{
         	if (move_it < (path_vec.size() - 1))
         	{
-           		ship_owner->getPoints()->setCenter(path_vec[move_it]);
-           		ship_owner->getPoints()->setAngle(angle_inD_vec[move_it]);
+           		owner_vehicle->getPoints()->setCenter(path_vec[move_it]);
+           		owner_vehicle->getPoints()->setAngle(angle_inD_vec[move_it]);
            		move_it++;
         	}
         	else

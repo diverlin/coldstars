@@ -17,21 +17,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef SHIP_H
-#define SHIP_H
+#ifndef SATELLITE_H
+#define SATELLITE_H
 
 
-class Ship : public VehicleCommon
-{   
-    	public:
-                Ship();
-        	~Ship();  
-         
+class Satellite : public CommonForSpaceItems
+{
+    	public:  
+        	Satellite();
+        	~Satellite();
+
+		void update_inSpace_inDynamic_TRUE();
+		void update_inSpace_inDynamic_FALSE();
+		
+        	void updateInfo();
+        
+        	void renderInfo();
+        	
         private:
-
+        	InfoTable info;
 };
 
-void equip(Ship*);
-Ship* shipGenerator(int race_id, int subtype_id, int size_id, int weapons_num);
+Satellite* getNewSatellite();
+
 
 #endif 
+

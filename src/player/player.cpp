@@ -89,7 +89,7 @@ void Player :: update_global()
         		npc->setPlaceTypeId(PLANET_ID);
         	}
         	
-        	npc->getShip()->weapon_selector = weapon_selector;
+        	npc->getShip()->getWeaponComplex()->weapon_selector = weapon_selector;
 	}
 }  
                			

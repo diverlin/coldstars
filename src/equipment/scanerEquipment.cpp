@@ -65,7 +65,7 @@ void ScanerEquipment :: countPrice()
 
 void ScanerEquipment :: updateOwnerPropetries()
 {
-    	slot->getOwnerShip()->updateScanAbility();
+    	slot->getOwnerVehicle()->updateScanAbility();
 }
 
 

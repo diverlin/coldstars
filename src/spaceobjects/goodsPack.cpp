@@ -18,10 +18,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-GoodsPack :: GoodsPack(IdData _data_id, LifeData _data_life, TextureOb* _texOb)
+GoodsPack :: GoodsPack()
 {
-    	CommonForSpaceItems_init(_data_id, _data_life, _texOb);
-        
         mineral  = 0;
         food     = 0;
         medicine = 0;
@@ -96,8 +94,18 @@ GoodsPack* createGoodsPack(unsigned int _subtype_id)
         data_life.armor = getRandInt(1,6);
         data_life.dying_time = 30;        
         
-	TextureOb* texOb_container = g_TEXTURE_MANAGER.getRandomTexOb(CONTAINER_TEXTURE_ID); 
-	GoodsPack* goodsPack = new GoodsPack(data_id, data_life, texOb_container);
+        vec3f d_angle;
+        d_angle.z      = -getRandInt(10, 100)*0.01; 
+        
+	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(CONTAINER_TEXTURE_ID); 
+	
+	GoodsPack* goodsPack = new GoodsPack();
+	goodsPack->setIdData(data_id);
+	goodsPack->setLifeData(data_life);
+	goodsPack->setTextureOb(texOb);
+	goodsPack->setDeltaAngle(d_angle);
+	
+	goodsPack->postCreateInit();
 	
 	return goodsPack;
 }

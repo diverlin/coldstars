@@ -18,10 +18,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-Mineral :: Mineral(IdData _data_id, LifeData _data_life, TextureOb* _texOb)
+Mineral :: Mineral()
 {        
-    	CommonForSpaceItems_init(_data_id, _data_life, _texOb);
-
     	mass = getRandInt(1, 4);
     	velocity = getRandInt(40, 42) / 100.0;
 }
@@ -58,9 +56,19 @@ Mineral* createMineral()
     	data_life.armor      = getRandInt(1,6);
         data_life.dying_time = 30;        
         
+        vec3f d_angle;
+        d_angle.z      = -getRandInt(10, 100)*0.01; 
+        
 	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(MINERAL_TEXTURE_ID); 
-	Mineral* mineral = new Mineral(data_id, data_life, texOb);
-
+	
+	Mineral* mineral = new Mineral();
+	mineral->setIdData(data_id);
+	mineral->setLifeData(data_life);
+	mineral->setTextureOb(texOb);
+	mineral->setDeltaAngle(d_angle);
+		
+	mineral->postCreateInit();
+	
 	return mineral;
 }
 

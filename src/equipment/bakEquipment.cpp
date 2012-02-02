@@ -74,8 +74,8 @@ void BakEquipment :: countPrice()
 
 void BakEquipment :: updateOwnerPropetries()
 {
-    	slot->getOwnerShip()->updateDriveAbility();
-    	slot->getOwnerShip()->updateJumpAbility(); 
+    	slot->getOwnerVehicle()->updateDriveAbility();
+    	slot->getOwnerVehicle()->updateJumpAbility(); 
 }
 
 

@@ -17,12 +17,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "shield.hpp"
 
-
-ShieldEffect :: ShieldEffect(Ship* _ship, TextureOb* _texOb)
+ShieldEffect :: ShieldEffect(VehicleCommon* owner_vehicle, TextureOb* _texOb)
 {
-     ship = _ship;
+     this->owner_vehicle = owner_vehicle;
      texOb = _texOb;
 
      alpha_start = 0.4;
@@ -53,11 +51,11 @@ void ShieldEffect :: render() const
     	setColor(color);
 
     	drawFlatQuadPerVertexIn2D(texOb,
-    				  ship->getPoints()->getBottomLeftShield(), 
-     			     	  ship->getPoints()->getBottomRightShield(), 
-     			      	  ship->getPoints()->getTopRightShield(), 
-     			      	  ship->getPoints()->getTopLeftShield(), 
-     			      	  ship->getPoints()->getPosZ());
+    				  owner_vehicle->getPoints()->getBottomLeftShield(), 
+     			     	  owner_vehicle->getPoints()->getBottomRightShield(), 
+     			      	  owner_vehicle->getPoints()->getTopRightShield(), 
+     			      	  owner_vehicle->getPoints()->getTopLeftShield(), 
+     			      	  owner_vehicle->getPoints()->getPosZ());
 }
 
 

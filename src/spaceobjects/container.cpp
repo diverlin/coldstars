@@ -18,10 +18,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-Container :: Container(IdData _data_id, LifeData _data_life, TextureOb* _texOb)
+Container :: Container()
 {
-    	CommonForSpaceItems_init(_data_id, _data_life, _texOb);
-        
     	mass = 1;
 
     	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID);
@@ -59,9 +57,19 @@ Container* createContainer()
         data_life.armor = getRandInt(1,6);
         data_life.dying_time = 30;
         
+        vec3f d_angle;
+        d_angle.z      = -getRandInt(10, 100)*0.01; 
         
-	TextureOb* texOb_container = g_TEXTURE_MANAGER.getRandomTexOb(CONTAINER_TEXTURE_ID); 
-	Container* container = new Container(data_id, data_life, texOb_container);
+	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(CONTAINER_TEXTURE_ID); 
+	
+	Container* container = new Container();
+	container->setIdData(data_id);
+	container->setLifeData(data_life);
+	container->setTextureOb(texOb);
+	container->setDeltaAngle(d_angle);
+
+	
+	container->postCreateInit();
 	
 	return container;
 }

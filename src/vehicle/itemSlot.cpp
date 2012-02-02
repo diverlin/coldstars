@@ -21,7 +21,7 @@ ItemSlot :: ItemSlot()
 {}
 
 
-ItemSlot :: ItemSlot(int _subtype_id, Ship* _owner_ship, TextureOb* _texOb, int _pos_x, int _pos_y, int w, int h)
+ItemSlot :: ItemSlot(int _subtype_id, VehicleCommon* _owner_vehicle, TextureOb* _texOb, int _pos_x, int _pos_y, int w, int h)
 {
 	/* 
         The class provides implementation to insert/hold/remove all game items (equipments, modules and so on)
@@ -32,7 +32,7 @@ ItemSlot :: ItemSlot(int _subtype_id, Ship* _owner_ship, TextureOb* _texOb, int 
         type_id    = SLOT_ID;
 	subtype_id = _subtype_id;
         
-        owner_ship  = _owner_ship; 
+        owner_vehicle  = _owner_vehicle; 
 
         texOb = _texOb;
      
@@ -120,7 +120,7 @@ ItemSlot :: ~ItemSlot()
 	//}
 }
 
-void ItemSlot :: setShipOwner(Ship* _ship_owner) {  owner_ship = _ship_owner; }
+void ItemSlot :: setShipOwner(Ship* _ship_owner) {  owner_vehicle = _ship_owner; }
 void ItemSlot :: setFlashingStatus(bool new_status) { is_FLASHING = new_status; }
                 
 int ItemSlot :: getTypeId()          const { return type_id; }
@@ -137,7 +137,7 @@ bool ItemSlot :: getFlashingStatus() const { return is_FLASHING; }
                 
 Rect& ItemSlot :: getRect() { return rect; }
 
-Ship* ItemSlot :: getOwnerShip() { return owner_ship; }
+VehicleCommon* ItemSlot :: getOwnerVehicle() { return owner_vehicle; }
                                 
 RocketEquipment*    ItemSlot :: getRocketEquipment()    const { return rocket_equipment; }
 LazerEquipment*     ItemSlot :: getLazerEquipment()     const { return lazer_equipment; }
@@ -217,7 +217,7 @@ void ItemSlot :: insert(ProtectorEquipment* item) 	{ protector_equipment = item;
 void ItemSlot :: insert(DroidEquipment* item)     	{ droid_equipment = item; }      
 void ItemSlot :: insert(FreezerEquipment* item) 	{ freezer_equipment = item; }    
 void ItemSlot :: insert(ScanerEquipment* item)		{ scaner_equipment = item; }     
-void ItemSlot :: insert(GrappleEquipment* item)		{ grapple_equipment = item; }    // owner_ship->updateGrabAbility(); item->reshapeTargetObSlot(this);  GRAPPLE_ID
+void ItemSlot :: insert(GrappleEquipment* item)		{ grapple_equipment = item; }    // owner_vehicle->updateGrabAbility(); item->reshapeTargetObSlot(this);  GRAPPLE_ID
 
 
 		
@@ -293,7 +293,7 @@ void ItemSlot :: removeItem()
     					resetFlags();
     					if (subtype_id != CARGO_SLOT_ID) 
     					{ 
-    						owner_ship->updateFireAbility(); 
+    						owner_vehicle->updateFireAbility(); 
     					}
     				
     					break;
@@ -305,7 +305,7 @@ void ItemSlot :: removeItem()
     					resetFlags();
     					if (subtype_id != CARGO_SLOT_ID) 
     					{ 
-    						owner_ship->updateFireAbility(); 
+    						owner_vehicle->updateFireAbility(); 
     					}
     				
     					break;
@@ -318,7 +318,7 @@ void ItemSlot :: removeItem()
     			    			
     					if (subtype_id != CARGO_SLOT_ID) 
     					{ 
-    						owner_ship->updateRadarAbility(); 
+    						owner_vehicle->updateRadarAbility(); 
     					}
     				
     					break;
@@ -331,8 +331,8 @@ void ItemSlot :: removeItem()
     			
     					if (subtype_id != CARGO_SLOT_ID)
     					{ 
-    						owner_ship->updateDriveAbility();
-    						owner_ship->updateJumpAbility();
+    						owner_vehicle->updateDriveAbility();
+    						owner_vehicle->updateJumpAbility();
     					}
     			
     					break;	
@@ -344,8 +344,8 @@ void ItemSlot :: removeItem()
     					resetFlags();
     					if (subtype_id != CARGO_SLOT_ID)
     					{ 
-    						owner_ship->updateDriveAbility();
-    						owner_ship->updateJumpAbility();
+    						owner_vehicle->updateDriveAbility();
+    						owner_vehicle->updateJumpAbility();
     					}
     			
     					break;
@@ -357,7 +357,7 @@ void ItemSlot :: removeItem()
     					resetFlags();
     					if (subtype_id != CARGO_SLOT_ID) 
     					{
-    						owner_ship->updateEnergyAbility();
+    						owner_vehicle->updateEnergyAbility();
     					}
     				
     					break;
@@ -369,7 +369,7 @@ void ItemSlot :: removeItem()
     					resetFlags();
     					if (subtype_id != CARGO_SLOT_ID)
     					{
-    						owner_ship->updateProtectionAbility();
+    						owner_vehicle->updateProtectionAbility();
     					}
     				
     					break;
@@ -381,7 +381,7 @@ void ItemSlot :: removeItem()
     					resetFlags();
     					if (subtype_id != CARGO_SLOT_ID)
     					{
-    						owner_ship->updateRepairAbility();
+    						owner_vehicle->updateRepairAbility();
     					}
     				
     					break;
@@ -393,7 +393,7 @@ void ItemSlot :: removeItem()
     					resetFlags();
     					if (subtype_id != CARGO_SLOT_ID)
     					{
-    						owner_ship->updateFreezeAbility();
+    						owner_vehicle->updateFreezeAbility();
     					}
     				
     					break;
@@ -406,7 +406,7 @@ void ItemSlot :: removeItem()
     					resetFlags();
     					if (subtype_id != CARGO_SLOT_ID)
     					{
-    						owner_ship->updateScanAbility();
+    						owner_vehicle->updateScanAbility();
     					}
     				
     					break;
@@ -418,7 +418,7 @@ void ItemSlot :: removeItem()
     					resetFlags();
     					if (subtype_id != CARGO_SLOT_ID)
     					{
-    						owner_ship->updateGrabAbility();
+    						owner_vehicle->updateGrabAbility();
     					}
     				
     					break;
@@ -816,7 +816,7 @@ void ItemSlot :: dropItemToSpace()
 {
 	if (item_type_id == BOMB_ID)
 	{
-		owner_ship->getStarSystem()->add(bomb, owner_ship->getPoints()->getCenter());	
+		owner_vehicle->getStarSystem()->add(bomb, owner_vehicle->getPoints()->getCenter());	
 		removeItem();
 		return; 
 	}	
@@ -827,7 +827,7 @@ void ItemSlot :: dropItemToSpace()
 	// update mass, and abilities if needed !!!!!!!!!!!!!!!!!!!
 
 	removeItem();
-	owner_ship->getStarSystem()->add(_container, owner_ship->getPoints()->getCenter());	
+	owner_vehicle->getStarSystem()->add(_container, owner_vehicle->getPoints()->getCenter());	
 
 	//printf("container was created in ss_id = %i, pos = %f, %f\n", _starsystem->getId(), _container->getPoints()->getCenter().x, _container->getPoints()->getCenter().y );
 }
@@ -1056,7 +1056,7 @@ void ItemSlot :: drawRange()
 
 void ItemSlot :: targetObValidation(TargetObject* _targetOb)
 {
-	if (_targetOb->validation(getOwnerShip()->getStarSystem()) == true)
+	if (_targetOb->validation(getOwnerVehicle()->getStarSystem()) == true)
 	{
 	       if (checkDistance(_targetOb) == false)
                {
@@ -1074,7 +1074,7 @@ bool ItemSlot :: checkDistance(TargetObject* _targetOb)
 		return true;
 	}
 	
-        float dist = distBetweenPoints(getOwnerShip()->getPoints()->getCenter(), *_targetOb->getpCenter());                                               
+        float dist = distBetweenPoints(getOwnerVehicle()->getPoints()->getCenter(), *_targetOb->getpCenter());                                               
     	if (dist < getItemRadius())
         {
                 return true;

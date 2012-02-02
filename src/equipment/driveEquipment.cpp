@@ -75,8 +75,8 @@ void DriveEquipment :: countPrice()
 
 void DriveEquipment :: updateOwnerPropetries()
 {
-    	slot->getOwnerShip()->updateDriveAbility();
-    	slot->getOwnerShip()->updateJumpAbility();    	
+    	slot->getOwnerVehicle()->updateDriveAbility();
+    	slot->getOwnerVehicle()->updateJumpAbility();    	
 }
 
 

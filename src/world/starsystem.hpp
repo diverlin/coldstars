@@ -35,7 +35,9 @@ class StarSystem
     		std::vector<Container*>    CONTAINER_vec;
     		std::vector<RocketBullet*> ROCKET_vec;
     		std::vector<BlackHole*>    BLACKHOLE_vec;
-
+    		std::vector<SpaceStation*> SPACESTATION_vec;
+    		std::vector<Satellite*>    SATELLITE_vec;
+    		    		
 		std::vector<Ship*> SHIP_inSPACE_vec;
     		std::vector<Npc*>  NPC_inSPACE_vec;
 		// these 5 list below is needed for AI
@@ -85,7 +87,7 @@ class StarSystem
     		//// TRANSITION
                 void addToHyperJumpQueue(Npc*);
                                 
-    		void moveToSpace(Ship*);
+    		void moveToSpace(VehicleCommon*);
     		void moveToSpace(Npc*);
 
     		
@@ -153,14 +155,22 @@ class StarSystem
     		std::vector<Container*>    visible_CONTAINER_vec;
     		std::vector<RocketBullet*> visible_ROCKET_vec;
     		std::vector<BlackHole*>    visible_BLACKHOLE_vec;
+    		std::vector<SpaceStation*> visible_SPACESTATION_vec;
+    		std::vector<Satellite*>    visible_SATELLITE_vec;
     		
-    		std::vector<Ship*>      visible_SHIP_vec;
+    		std::vector<Ship*>         visible_SHIP_vec;
     		//  
-    		    	
+    		   
+    		// remove queue 	
     		std::vector<Bomb*>         remove_BOMB_queue;
     		std::vector<Mineral*>      remove_MINERAL_queue;
     		std::vector<Ship*>         remove_SHIP_queue;
-    		    		    		    	    	
+    		std::vector<SpaceStation*> remove_SPACESTATION_queue;
+    		std::vector<Satellite*>    remove_SATELLITE_queue;
+    		
+    		//
+    		
+    			    		    	    	
     		Garbage garbage;
                 
                 void postHyperJumpEvent();
@@ -202,7 +212,7 @@ class StarSystem
     		
     		void updateStates();
     		
-    		void bombExplosionEvent(Bomb*);
+    		void bombExplosionEvent_TRUE(Bomb*);
     		
     		void debug__();    	
 };

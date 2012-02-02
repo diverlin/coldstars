@@ -26,14 +26,14 @@ int main()
     	while (g_APP.IsOpened())
     	{    
 		pPLAYER->update_global();
-
+		//printf("player angle = %f\n", pPLAYER->getShip()->getPoints()->getAngleDegree());
        		if (pPLAYER->getPlaceTypeId() == SPACE_ID)
        		{  
            		//////////// in SPACE ///////////////
            		g_KEYEVENTS->update_inSpace();
            		pPLAYER->getCursor()->resetInfoSlot();
 
-			for (int i = 0; i < g_GAMESPEED; i++)  // fakse
+			for (int i = 0; i < g_GAMESPEED; i++)  // fake
 			{
        				g_GALAXY->update(g_TIMER->getTurnTick());
        			}

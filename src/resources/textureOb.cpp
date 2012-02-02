@@ -78,8 +78,9 @@ TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, std::ve
 
     		// other
     		case TEXT_BACKGROUND_TEXTURE_ID: { loadToVRAM(); break; }
-    	
-    		case SPUTNIK_TEXTURE_ID:  { loadToVRAM(); sputnikArgManager(pTo_arg); break; }
+    		
+    		case SPACESTATION_TEXTURE_ID:  { loadToVRAM(); spacestationArgManager(pTo_arg); break; }    	
+    		case SATELLITE_TEXTURE_ID:  { loadToVRAM(); satelliteArgManager(pTo_arg); break; }
 		case SHIP_TEXTURE_ID:     { loadToVRAM(); shipArgManager(pTo_arg); break; }
           	case PARTICLE_TEXTURE_ID: { loadToVRAM(); particleArgManager(pTo_arg); break; }
 
@@ -219,7 +220,10 @@ void TextureOb :: turrelArgManager(std::vector<int>* arg)
    
 
 // SPACE OBJECTS
-void TextureOb :: sputnikArgManager(std::vector<int>* arg)
+void TextureOb :: spacestationArgManager(std::vector<int>* arg)
+{}
+
+void TextureOb :: satelliteArgManager(std::vector<int>* arg)
 {}
    
 void TextureOb :: shipArgManager(std::vector<int>* arg)

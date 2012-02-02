@@ -35,8 +35,6 @@ DistantNebulaBgEffect :: DistantNebulaBgEffect(TextureOb* _texOb, vec3f _center)
     		d_angle_inD = getRandInt(8,12)*0.001 * getRandSign();
     	else
     	     	d_angle_inD = 0;
-    	     	
-    	calcRenderConstants();
 }
    
    
@@ -46,20 +44,9 @@ void DistantNebulaBgEffect :: updateRenderStuff()
 }        
 
 
-void DistantNebulaBgEffect :: calcRenderConstants()
-{
-    	// constants needs for render
-    	// decreases the math during game loop
-    	minus_half_w = -texOb->w/2;
-    	minus_half_h = -texOb->h/2;
-    	plus_half_w  =  texOb->w/2;
-    	plus_half_h  =  texOb->h/2;
-}
-
-
 void DistantNebulaBgEffect :: render(float vx, float vy)
 { 
-   	drawDynamic(texOb, vec2f(center.x - vx*distance_rate, center.y - vy*distance_rate), angle_inD, minus_half_w, minus_half_h, plus_half_w, plus_half_h, center.z);
+   	drawDynamic(texOb, vec2f(center.x - vx*distance_rate, center.y - vy*distance_rate), angle_inD, center.z);
 }
               
 

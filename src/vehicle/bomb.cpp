@@ -1,4 +1,4 @@
-	 /*
+/*
 Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
 
 This program is free software; you can redistribute it and/or
@@ -18,61 +18,82 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-BlackHole :: BlackHole()
+Bomb :: Bomb()
 {        
-    	mass = getRandInt(100000, 400000);
-    	keep_moving = false;
+    	mass = getRandInt(1, 4);
+    	velocity = getRandInt(40, 42) / 100.0;
+    	
+    	damage = 300;
+    	radius = 300;
 }
 
-BlackHole :: ~BlackHole() {}
+Bomb :: ~Bomb() {}
     
+    
+    
+int Bomb :: getFunctionalSlotSubTypeId() const { return NONE_SLOT_ID; }
+TextureOb* Bomb :: getTexOb() const { return texOb; }
+
+int Bomb :: getDamage() const { return damage; }
+int Bomb :: getRadius() const { return radius; }
+        	
+void Bomb :: bindSlot(ItemSlot* slot) {}
+
+void Bomb :: updateOwnerPropetries() {}
 		
-void BlackHole :: update_inSpace_inDynamic_TRUE()
-{}
-
-void BlackHole :: update_inSpace_inDynamic_FALSE()
-{}
-
-void BlackHole :: updateInfo()
+void Bomb :: updateInfo()
 {
 	info.clear();
 
-    	info.addTitleStr("BLACKHOLE");
+    	info.addTitleStr("BOMB");
 
     	//info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->getId()));
     	info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
+    	info.addNameStr("damage:");          info.addValueStr(int2str(damage));
+    	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 }
             
 
-void BlackHole :: renderInfo()
+void Bomb :: renderInfo()
 {
      	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y);    
 }
 
+void Bomb :: renderInfo(Rect slot_rect, float offset_x, float offset_y)
+{
+     	drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.getCenter().x, slot_rect.getCenter().y, offset_x, offset_y);
+}
 
-BlackHole* getNewBlackHole()
+
+
+Bomb* getNewBomb()
 {
         IdData data_id;
-        data_id.id         = g_BLACKHOLE_ID_GENERATOR.getNextId();
-    	data_id.type_id    = BLACKHOLE_ID;
+        data_id.id         = g_BOMB_ID_GENERATOR.getNextId();
+    	data_id.type_id    = BOMB_ID;
     	//data_id.subtype_id = ; 
         
         LifeData data_life;
         data_life.is_alive   = true;
         data_life.garbage_ready = false;
-    	data_life.armor      = 100000;
+    	data_life.armor      = getRandInt(1,6);
         data_life.dying_time = 30;        
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(BLACKHOLE_TEXTURE_ID); 
-	BlackHole* blackhole = new BlackHole();
-	blackhole->setIdData(data_id);
-	blackhole->setLifeData(data_life);
-	blackhole->setTextureOb(texOb);
+        vec3f d_angle;
+        d_angle.z      = -getRandInt(10, 100)*0.01; 
+        
+	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(BOMB_TEXTURE_ID); 
 	
-	blackhole->postCreateInit();
+	Bomb* bomb = new Bomb();
+	bomb->setIdData(data_id);
+	bomb->setLifeData(data_life);
+	bomb->setTextureOb(texOb);
+	bomb->setDeltaAngle(d_angle);
+		
+	bomb->postCreateInit();
 	
-	return blackhole;
+	return bomb;
 }
 
 

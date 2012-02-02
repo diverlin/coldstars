@@ -19,15 +19,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "asteroid.hpp"
 
-Asteroid :: Asteroid(IdData _data_id, LifeData _data_life,	
-		     TextureOb* _texOb,
-		     ObjMeshInstance* _mesh,
-		     PlanetData _planet_data)
+Asteroid :: Asteroid()
 { 
-       CommonForPlanet_init(_data_id, _data_life,
-       			    _texOb, 
-    	   		    _mesh, 
-    	   	            _planet_data);
+       //CommonForPlanet_init(_data_id, _data_life,
+       			    //_texOb, 
+    	   		    //_mesh, 
+    	   	            //_planet_data);
    	   			                 
       	damage = 10 * data_life.armor;
       	mass  = getRandInt(10, 30);
@@ -101,7 +98,7 @@ void Asteroid :: death_TRUE()
 {
      	if (data_life.garbage_ready == false)
      	{   
-        	createExplosion(starsystem, points.getCenter(), data.scale/2);
+        	createExplosion(starsystem, points.getCenter(), data_planet.scale/2);
         
         	for (int i = 0; i<3; i++)
     		{
@@ -140,7 +137,7 @@ void Asteroid :: updateInfo()
     	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->getId()));
     	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
-	info.addNameStr("speed x 100:"); info.addValueStr(int2str(int(data.speed*100)));
+	info.addNameStr("speed x 100:"); info.addValueStr(int2str(int(data_planet.speed*100)));
 }     
 
 
@@ -173,8 +170,15 @@ Asteroid* createAsteroid()
 
         TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(ASTEROID_TEXTURE_ID); 
     
-        Asteroid* asteroid = new Asteroid(data_id, data_life, texOb, g_DEFORMED_SPHERE_MESH, planet_data);    	
-        asteroid->update_inSpace_inDynamic_FALSE();
+        Asteroid* asteroid = new Asteroid(); 
+        
+        asteroid->setPlanetData(planet_data);
+	asteroid->setTextureOb(texOb);
+	asteroid->setIdData(data_id);
+	asteroid->setLifeData(data_life);
+	asteroid->setMesh(g_DEFORMED_SPHERE_MESH);	
+       	
+        asteroid->postCreateInit();
         
         return asteroid;        
 }
