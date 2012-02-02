@@ -34,9 +34,9 @@ void MicroScenarioGrab :: update_inStatic(Npc* _npc) const
               
         for (unsigned int i = 0; i < _npc->observation->visible_MINERAL_vec.size(); i++)
         {                	
-		if ( _npc->observation->visible_MINERAL_vec[i].dist < _npc->getShip()->grapple_slot.getGrappleEquipment()->getRadius() )
+		if ( _npc->observation->visible_MINERAL_vec[i].dist < _npc->getVehicle()->grapple_slot.getGrappleEquipment()->getRadius() )
                 {                                       
-                	_npc->getShip()->grapple_slot.getGrappleEquipment()->add(_npc->observation->visible_MINERAL_vec[i].mineral);
+                	_npc->getVehicle()->grapple_slot.getGrappleEquipment()->add(_npc->observation->visible_MINERAL_vec[i].mineral);
                 }
                 else
                 {
@@ -44,7 +44,7 @@ void MicroScenarioGrab :: update_inStatic(Npc* _npc) const
                 }
         }
         
-        _npc->getShip()->getNavigator()->setTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getNpc()->getShip(), FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID );
+        _npc->getVehicle()->getNavigator()->setTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getNpc()->getVehicle(), FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID );
 }
 
 void MicroScenarioGrab :: update_inDynamic(Npc* _npc) const

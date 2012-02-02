@@ -128,6 +128,8 @@ StarSystem* generateEntireStarSystem()
         else
                 generateNumEnemyNPC(starsystem, getRandInt(ENEMY_SHIP_PER_SYSTEM_MIN, ENEMY_SHIP_PER_SYSTEM_MAX));
                       
+        generateSpaceStations(starsystem, 10);
+                      
         return starsystem; 
 }
 
@@ -192,13 +194,16 @@ void generateNumFriendlyNPC(StarSystem* starsystem, int ship_per_system)
         	int weapons_num = getRandInt(1, 5);
         	Ship* ship = shipGenerator(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
        
-        	equip(ship);            		// improove
+        	equip((Vehicle*)ship);            		// improove
         	ship->updateAllStuff(); 		// improove
         
         	npc->bind(ship);
 
-        	starsystem->moveToSpace(ship);
-        	starsystem->moveToSpace(npc);
+		vec2f center(getRandInt(0, 800), getRandInt(0, 800));
+		float angle = getRandInt(0, 360);  
+		
+        	starsystem->addToSpace(ship, center, angle);
+        	starsystem->addToSpace(npc);
     	}
 }
 
@@ -222,14 +227,47 @@ void generateNumEnemyNPC(StarSystem* starsystem, int ship_per_system)
         	int weapons_num = getRandInt(1, 5);
         	Ship* ship = shipGenerator(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
        
-        	equip(ship);            		// improove
+        	equip((Vehicle*)ship);            // improove
         	ship->updateAllStuff(); 		// improove
         
         	npc->bind(ship);
 
-        	starsystem->moveToSpace(ship);
-        	starsystem->moveToSpace(npc);
+		vec2f center(getRandInt(0, 800), getRandInt(0, 800));
+		float angle = getRandInt(0, 360);  
+		
+        	starsystem->addToSpace(ship, center, angle);
+        	starsystem->addToSpace(npc);
     	}
-
 }
 
+
+void generateSpaceStations(StarSystem* starsystem, int spacestation_per_system)
+{
+	int npc_subtype_id;
+    	int npc_race_id = RACES_EVIL_LIST[getRandInt(0, RACES_EVIL_LIST.size())];
+        
+    	for (int i=0; i<spacestation_per_system; i++)
+    	{     
+       		//npc_subtype_id = SHIP_SUBTYPE_LIST[getRandInt(0, RACES_EVIL_LIST.size())];
+                npc_subtype_id = WARRIOR_ID;
+
+        	Npc* npc = getNewNpc(npc_race_id, npc_subtype_id);
+
+        	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[getRandInt(0, RACES_ALL_LIST.size())];
+        	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
+        	int ship_size_id = getRandInt(1, 9);
+        	int weapons_num = 5;
+        	StarBase* starbase = getNewStarBase();
+       
+        	equip(starbase);            	// improove
+        	starbase->updateAllStuff(); 	// improove
+        
+        	npc->bind(starbase);
+
+		vec2f center(getRandInt(0, 800), getRandInt(0, 800));
+		float angle = getRandInt(0, 360);  
+		
+        	starsystem->addToSpace(starbase, center, angle);
+        	starsystem->addToSpace(npc);
+    	}
+}

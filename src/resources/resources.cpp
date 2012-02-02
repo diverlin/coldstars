@@ -543,25 +543,25 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 {
 	std::vector<int> arg; 
 	arg.push_back(RACE_0_ID);  
-	g_TEXTURE_MANAGER.manage( new TextureOb(SPACESTATION_TEXTURE_ID, "data/starbase/sb_000.png", false, &arg) ); 
+	g_TEXTURE_MANAGER.manage( new TextureOb(STARBASE_TEXTURE_ID, "data/starbase/sb_000.png", false, &arg) ); 
 }
 
 {
 	std::vector<int> arg; 
 	arg.push_back(RACE_0_ID); 
-	g_TEXTURE_MANAGER.manage( new TextureOb(SPACESTATION_TEXTURE_ID, "data/starbase/sb_001.png", false, &arg) ); 
+	g_TEXTURE_MANAGER.manage( new TextureOb(STARBASE_TEXTURE_ID, "data/starbase/sb_001.png", false, &arg) ); 
 }
 
 {
 	std::vector<int> arg; 
 	arg.push_back(RACE_0_ID); 
-	g_TEXTURE_MANAGER.manage( new TextureOb(SPACESTATION_TEXTURE_ID, "data/starbase/sb_002.png", false, &arg) ); 
+	g_TEXTURE_MANAGER.manage( new TextureOb(STARBASE_TEXTURE_ID, "data/starbase/sb_002.png", false, &arg) ); 
 }
 
 {
 	std::vector<int> arg; 
 	arg.push_back(RACE_0_ID); 
-	g_TEXTURE_MANAGER.manage( new TextureOb(SPACESTATION_TEXTURE_ID, "data/starbase/sb_003.png", false, &arg) ); 
+	g_TEXTURE_MANAGER.manage( new TextureOb(STARBASE_TEXTURE_ID, "data/starbase/sb_003.png", false, &arg) ); 
 }
 
 

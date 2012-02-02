@@ -18,26 +18,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-GuiShip :: GuiShip()
+GuiVehicle :: GuiVehicle()
 {
         in_store           = false;
         allow_full_control = false;
         
-        ship = NULL;
+        vehicle = NULL;
         skill = NULL;
 }
 
-GuiShip :: ~GuiShip()
+GuiVehicle :: ~GuiVehicle()
 {}
 
 
-void GuiShip :: bindShip(Ship* _ship)
+void GuiVehicle :: bind(Vehicle* vehicle)
 {
-     	ship =  _ship;
-        skill = ship->getNpc()->getSkill();
+	this->vehicle = vehicle;
+        skill = vehicle->getNpc()->getSkill();
 }
 
-void GuiShip :: createControlSkillButtons()
+void GuiVehicle :: createControlSkillButtons()
 {
      	int x = 10;  //self.korpus.kontur_rect.right
      	int y = 50;  //self.korpus.kontur_rect.centery
@@ -77,7 +77,7 @@ void GuiShip :: createControlSkillButtons()
         button_vec.push_back(decrement_diplomat_button);     
 }
 
-void GuiShip :: manageSkill()
+void GuiVehicle :: manageSkill()
 {
      	int mxvp = g_MOUSE_POS_X;
      	int myvp = g_VIEW_HEIGHT - g_MOUSE_POS_Y;         
@@ -125,7 +125,7 @@ void GuiShip :: manageSkill()
 	}
 }
 
-void GuiShip :: renderSkill() const
+void GuiVehicle :: renderSkill() const
 {
     	int w = button_vec[0]->getRect().getWidth();
      	int h = button_vec[0]->getRect().getHeight();
@@ -214,7 +214,7 @@ void GuiShip :: renderSkill() const
 
 
 
-void GuiShip :: mouseControl()
+void GuiVehicle :: mouseControl()
 {
     	bool lmb = g_MOUSE_LEFT_BUTTON; 
     	//bool rmb = g_MOUSE_RIGHT_BUTTON; 
@@ -224,27 +224,27 @@ void GuiShip :: mouseControl()
     	Store* pTo_store = NULL;     // move to ship class             
     	if (in_store == true)
         { 
-       		pTo_store = ship->getNpc()->getKosmoport()->getStore();    // this is used only for player
+       		pTo_store = vehicle->getNpc()->getKosmoport()->getStore();    // this is used only for player
         }
 
-	for(unsigned int i = 0; i < ship->slot_total_vec.size(); i++)
+	for(unsigned int i = 0; i < vehicle->slot_total_vec.size(); i++)
 	{ 
-		if (ship->slot_total_vec[i]->interaction(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y)) == true)
+		if (vehicle->slot_total_vec[i]->interaction(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y)) == true)
 		{  
-			pPLAYER->getCursor()->setInfoSlot(ship->slot_total_vec[i]);
+			pPLAYER->getCursor()->setInfoSlot(vehicle->slot_total_vec[i]);
 			cursor_has_target = true;
 
 			if (lmb == true)
 			{
 				if ( (allow_full_control == true) && (in_store == false) )
 				{				
-					pPLAYER->getCursor()->getSlot()->SwapItemWith(ship->slot_total_vec[i]);                		    
+					pPLAYER->getCursor()->getSlot()->SwapItemWith(vehicle->slot_total_vec[i]);                		    
             			}          		
 				else if ( in_store == true )
 				{
-					if (pTo_store->buyItemFromSlot(ship->slot_total_vec[i]) == true)\
+					if (pTo_store->buyItemFromSlot(vehicle->slot_total_vec[i]) == true)\
 					{
-						pPLAYER->getPilot()->increaseCredits(ship->slot_total_vec[i]->getItemPrice());
+						pPLAYER->getPilot()->increaseCredits(vehicle->slot_total_vec[i]->getItemPrice());
 					}
 				}
 			} 
@@ -256,7 +256,7 @@ void GuiShip :: mouseControl()
 	// GATE SLOT
 	if (cursor_has_target == false)
 	{
-		if (ship->gate_slot.interaction(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y)) == true)  
+		if (vehicle->gate_slot.interaction(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y)) == true)  
 		{
 			cursor_has_target = true;
 
@@ -275,34 +275,34 @@ void GuiShip :: mouseControl()
 
 
 
-void GuiShip :: renderInternaly() const
+void GuiVehicle :: renderInternaly() const
 {
-	drawTexturedRect(ship->texOb_korpus, ship->kontur_rect, -1.0);
+	drawTexturedRect(vehicle->texOb_korpus, vehicle->kontur_rect, -1.0);
 
-	for(unsigned int i = 0; i < ship->slot_total_vec.size(); i++)
+	for(unsigned int i = 0; i < vehicle->slot_total_vec.size(); i++)
 	{
-		ship->slot_total_vec[i]->render(-1);
+		vehicle->slot_total_vec[i]->render(-1);
 	}
 	
-	ship->gate_slot.render(-1);
+	vehicle->gate_slot.render(-1);
 }
 
 
-void GuiShip :: configure(Ship* _ship, bool _in_store = false, bool _allow_full_control = false)
+void GuiVehicle :: configure(Vehicle* _vehicle, bool _in_store = false, bool _allow_full_control = false)
 {
-        bindShip(_ship);                           
+        bind(_vehicle);                           
 
         in_store = _in_store;
         allow_full_control = _allow_full_control;  
         
-        if ( (pPLAYER->getShip()->getId() == ship->getId()) && (_allow_full_control == false) )
+        if ( (pPLAYER->getVehicle()->getId() == vehicle->getId()) && (_allow_full_control == false) )
     	{
         	allow_full_control = true;  
         }    	// modify full control for friend ships       
 }
 
 
-void GuiShip :: update()
+void GuiVehicle :: update()
 {
         mouseControl();
 
@@ -314,7 +314,7 @@ void GuiShip :: update()
         pPLAYER->getCursor()->update();
 }
 
-void GuiShip :: render() const
+void GuiVehicle :: render() const
 {
 	resetRenderTransformation();
 	enable_BLEND();

@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define SHIP_H
 
 
-class Ship : public VehicleCommon
+class Ship : public Vehicle
 {   
     	public:
                 Ship();
@@ -31,7 +31,7 @@ class Ship : public VehicleCommon
 
 };
 
-void equip(Ship*);
+void equip(Vehicle*);
 Ship* shipGenerator(int race_id, int subtype_id, int size_id, int weapons_num);
 
 #endif 

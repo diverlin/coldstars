@@ -16,9 +16,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
+class Vehicle;   
 class Ship;      
-class VehicleCommon;    
 class Npc;   
 class Observation;
 class StarSystem;
@@ -144,8 +143,8 @@ class Star;
 #include "src/vehicle/itemSlot.hpp"
 #include "src/vehicle/navigator.hpp"
 #include "src/vehicle/weaponComplex.hpp"
-#include "src/vehicle/vehicleCommon.hpp"
-#include "src/vehicle/spaceStation.hpp"
+#include "src/vehicle/vehicle.hpp"
+#include "src/vehicle/starBase.hpp"
 #include "src/vehicle/satellite.hpp"
 #include "src/vehicle/ship.hpp"
 
@@ -186,7 +185,7 @@ class AiModelBase;
 #include "src/gui/button.hpp"
 #include "src/gui/guiSpace.hpp"
 #include "src/gui/guiKosmoport.hpp"
-#include "src/gui/guiShip.hpp"
+#include "src/gui/guiVehicle.hpp"
 #include "src/world/garbage.hpp"  
 #include "src/world/starsystem.hpp"    
 #include "src/effects/lazerTrace.hpp"
@@ -231,7 +230,7 @@ class AiModelBase;
 #include "src/spaceobjects/commonForPlanet.cpp"
 #include "src/spaceobjects/asteroid.cpp"   
 #include "src/spaceobjects/mineral.cpp" 
-#include "src/vehicle/spaceStation.cpp" 
+#include "src/vehicle/starBase.cpp" 
 #include "src/vehicle/satellite.cpp" 
 #include "src/vehicle/bomb.cpp" 
 #include "src/spaceobjects/blackHole.cpp"
@@ -274,7 +273,7 @@ class AiModelBase;
 #include "src/gui/button.cpp"
 #include "src/gui/guiSpace.cpp"
 #include "src/gui/guiKosmoport.cpp"
-#include "src/gui/guiShip.cpp"
+#include "src/gui/guiVehicle.cpp"
 #include "src/gui/guiMap.cpp"
 #include "src/gui/cursor.cpp"   
 
@@ -291,7 +290,7 @@ class AiModelBase;
 #include "src/vehicle/itemSlot.cpp"
 
 #include "src/vehicle/weaponComplex.cpp"
-#include "src/vehicle/vehicleCommon.cpp"
+#include "src/vehicle/vehicle.cpp"
 #include "src/vehicle/ship.cpp"
 #include "src/vehicle/navigator.cpp"
 #include "src/vehicle/turrel.cpp"

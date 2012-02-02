@@ -18,26 +18,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-void VehicleCommon :: setNpc(Npc* _npc)   { npc_owner = _npc; }
-void VehicleCommon :: setKorpusData(KorpusData data_korpus) { this->data_korpus = data_korpus; }
-void VehicleCommon :: add(ItemSlot* slot) { slot_total_vec.push_back(slot); }
+void Vehicle :: setNpc(Npc* _npc)   { npc_owner = _npc; }
+void Vehicle :: setKorpusData(KorpusData data_korpus) { this->data_korpus = data_korpus; }
+void Vehicle :: add(ItemSlot* slot) { slot_total_vec.push_back(slot); }
                 
-WeaponComplex* VehicleCommon :: getWeaponComplex() const { return weapon_complex; }
+WeaponComplex* Vehicle :: getWeaponComplex() const { return weapon_complex; }
                 
 
 
-Navigator* VehicleCommon :: getNavigator()    { return navigator; }
-Npc*  VehicleCommon :: getNpc() 	      { return npc_owner; }
+Navigator* Vehicle :: getNavigator()    { return navigator; }
+Npc*  Vehicle :: getNpc() 	      { return npc_owner; }
 
 // needs for grabbing interface
-int VehicleCommon :: getFunctionalSlotSubTypeId() const { return NONE_SLOT_ID; } 
-void VehicleCommon :: bindSlot(ItemSlot* slot)          { return; }	   	
-void VehicleCommon :: updateOwnerPropetries()	       { return; }	   
+int Vehicle :: getFunctionalSlotSubTypeId() const { return NONE_SLOT_ID; } 
+void Vehicle :: bindSlot(ItemSlot* slot)          { return; }	   	
+void Vehicle :: updateOwnerPropetries()	       { return; }	   
 //
        	        
-float VehicleCommon :: getVisionRadius() const { return propetries.radius; }
+float Vehicle :: getVisionRadius() const { return propetries.radius; }
 
-ItemSlot* VehicleCommon :: getEmptyOtsecSlot()
+ItemSlot* Vehicle :: getEmptyOtsecSlot()
 {
       	for (unsigned int i = 0; i < slot_otsec_vec.size(); i++)
       	{
@@ -51,7 +51,7 @@ ItemSlot* VehicleCommon :: getEmptyOtsecSlot()
 }
 
 
-ItemSlot* VehicleCommon :: getOtsecSlotWithGoods(int requested_goods_subtype_id)
+ItemSlot* Vehicle :: getOtsecSlotWithGoods(int requested_goods_subtype_id)
 {
       	for (unsigned int i = 0; i < slot_otsec_vec.size(); i++)
       	{
@@ -73,10 +73,10 @@ ItemSlot* VehicleCommon :: getOtsecSlotWithGoods(int requested_goods_subtype_id)
 
                 
                 
-VehicleCommon :: VehicleCommon()
+Vehicle :: Vehicle()
 {}
 
-VehicleCommon :: ~VehicleCommon()
+Vehicle :: ~Vehicle()
 {
 	for (unsigned int i = 0; i < slot_otsec_vec.size(); i++)
     	{
@@ -105,7 +105,7 @@ VehicleCommon :: ~VehicleCommon()
 
 
 
-void VehicleCommon :: postCreateInit()
+void Vehicle :: postCreateInit()
 {
 	this->calcCollisionRadius();
 	texOb_korpus = texOb;  
@@ -287,12 +287,12 @@ void VehicleCommon :: postCreateInit()
 }        	
 
 
-void VehicleCommon :: calcCollisionRadius()
+void Vehicle :: calcCollisionRadius()
 {
 	collision_radius = (texOb->w + texOb->h)/3;
 }
         	
-void VehicleCommon :: update_inSpace_inDynamic_TRUE()
+void Vehicle :: update_inSpace_inDynamic_TRUE()
 {   
 	points.update(); 
 
@@ -307,7 +307,7 @@ void VehicleCommon :: update_inSpace_inDynamic_TRUE()
     	}
 }
 
-void VehicleCommon :: update_inSpace_inDynamic_FALSE()
+void Vehicle :: update_inSpace_inDynamic_FALSE()
 {   
     	if (ableTo.DRIVE == true) 
     	{
@@ -317,7 +317,7 @@ void VehicleCommon :: update_inSpace_inDynamic_FALSE()
 
 	
 
-void VehicleCommon :: updateDyingEffect_TRUE()
+void Vehicle :: updateDyingEffect_TRUE()
 {
 	if (data_life.is_alive == false)
      	{
@@ -329,7 +329,7 @@ void VehicleCommon :: updateDyingEffect_TRUE()
      	}  
 }
 
-void VehicleCommon :: updateDyingEffect_FALSE()
+void Vehicle :: updateDyingEffect_FALSE()
 {
 	if (data_life.is_alive == false)
      	{
@@ -339,7 +339,7 @@ void VehicleCommon :: updateDyingEffect_FALSE()
 
 
 //// ******** DOCKING/LAUNCHING ******** 
-bool VehicleCommon :: jumpEvent()
+bool Vehicle :: jumpEvent()
 {
         starsystem->removeShip(data_id.id);  
         starsystem->removeNpc(npc_owner->getId(), npc_owner->getSubTypeId());  
@@ -351,7 +351,7 @@ bool VehicleCommon :: jumpEvent()
 }
                 
                 
-bool VehicleCommon :: dockEvent()
+bool Vehicle :: dockEvent()
 {
      	starsystem->removeShip(data_id.id);
      	starsystem->removeNpc(npc_owner->getId(), npc_owner->getSubTypeId());
@@ -375,12 +375,12 @@ bool VehicleCommon :: dockEvent()
     	return true;
 }
 
-bool VehicleCommon :: launchingEvent()
+bool Vehicle :: launchingEvent()
 {
      	printf("vehicle id = %i, launchingEvent()\n", data_id.id);
 
-     	starsystem->moveToSpace(this);
-     	starsystem->moveToSpace(npc_owner);
+     	starsystem->addToSpace(this, navigator->getTargetPlanet()->getPoints()->getCenter(), 0);
+     	starsystem->addToSpace(npc_owner);
 
      	navigator->getTargetPlanet()->removeShipById(data_id.id);
      	navigator->getTargetPlanet()->removeNpcById(npc_owner->getId());
@@ -393,9 +393,6 @@ bool VehicleCommon :: launchingEvent()
 	//{
 		//npc_owner->setLand(NULL);
 	//}
-		
-	points.setCenter(navigator->getTargetPlanet()->getPoints()->getCenter());
-	points.update();
      	navigator->resetTarget();
      	
     	return true;
@@ -407,7 +404,7 @@ bool VehicleCommon :: launchingEvent()
 
 
 
-void VehicleCommon :: hit_TRUE(unsigned int _damage)
+void Vehicle :: hit_TRUE(unsigned int _damage)
 {
     	data_life.armor -= _damage;
     	if (ableTo.PROTECT == true)
@@ -426,7 +423,7 @@ void VehicleCommon :: hit_TRUE(unsigned int _damage)
        	starsystem->add(_text); 
 }
 
-void VehicleCommon :: hit_FALSE(unsigned int _damage)
+void Vehicle :: hit_FALSE(unsigned int _damage)
 {
     	data_life.armor -= _damage;
 
@@ -438,7 +435,7 @@ void VehicleCommon :: hit_FALSE(unsigned int _damage)
 }
 
 
-void VehicleCommon :: death_TRUE()
+void Vehicle :: death_TRUE()
 {
      	if (data_life.garbage_ready == false)
      	{   
@@ -453,7 +450,7 @@ void VehicleCommon :: death_TRUE()
      	}
 }
 
-void VehicleCommon :: death_FALSE()
+void Vehicle :: death_FALSE()
 {
      	if (data_life.garbage_ready == false)
      	{   
@@ -469,7 +466,7 @@ void VehicleCommon :: death_FALSE()
 
 
 
-void VehicleCommon :: updateAllStuff()
+void Vehicle :: updateAllStuff()
 {
     	// this function set actual ship propretries relying to all equipment placed in slots
     	// used when ship change items in slot
@@ -491,7 +488,7 @@ void VehicleCommon :: updateAllStuff()
 
 
 
-void VehicleCommon :: updateFireAbility()
+void Vehicle :: updateFireAbility()
 {
      	//ableTo.FIRE = 
      	weapon_complex->updateFireAbility();
@@ -502,7 +499,7 @@ void VehicleCommon :: updateFireAbility()
 
 
 
-void VehicleCommon :: calculateMass()
+void Vehicle :: calculateMass()
 {
      	propetries.mass = 0;   
 
@@ -516,7 +513,7 @@ void VehicleCommon :: calculateMass()
 }
 
 
-void VehicleCommon :: updateDriveAbility()
+void Vehicle :: updateDriveAbility()
 {
      	//// calculate mass and then actual ship speed depending on drive power and actual mass
      	//// used each time when ship picked up/bought or drop/sold something.
@@ -546,7 +543,7 @@ void VehicleCommon :: updateDriveAbility()
 }
 
 
-void VehicleCommon :: updateRadarAbility()
+void Vehicle :: updateRadarAbility()
 {
    	if (radar_slot.getEquipedStatus() == true) 
    	{
@@ -570,7 +567,7 @@ void VehicleCommon :: updateRadarAbility()
 
 
 
-void VehicleCommon :: updateJumpAbility()
+void Vehicle :: updateJumpAbility()
 {    
 	propetries.hyper = 0;
      	ableTo.HJUMP = false;
@@ -590,7 +587,7 @@ void VehicleCommon :: updateJumpAbility()
 }
 
 
-void VehicleCommon :: updateEnergyAbility()
+void Vehicle :: updateEnergyAbility()
 {
      	propetries.energy = 0;
      	ableTo.ENERGIZE = false;
@@ -607,7 +604,7 @@ void VehicleCommon :: updateEnergyAbility()
 
 
 
-void VehicleCommon :: updateProtectionAbility()
+void Vehicle :: updateProtectionAbility()
 {
         propetries.protection = data_korpus.protection;
         ableTo.PROTECT = false;
@@ -626,7 +623,7 @@ void VehicleCommon :: updateProtectionAbility()
 
 
 
-void VehicleCommon :: updateRepairAbility()
+void Vehicle :: updateRepairAbility()
 {
      	propetries.repair = 0;
      	ableTo.REPAIR = false;
@@ -641,7 +638,7 @@ void VehicleCommon :: updateRepairAbility()
         }
 }
 
-void VehicleCommon :: droidRepair()
+void Vehicle :: droidRepair()
 {
 	if (ableTo.REPAIR == true)
 	{
@@ -658,7 +655,7 @@ void VehicleCommon :: droidRepair()
 	}
 }
 
-void VehicleCommon :: updateFreezeAbility()
+void Vehicle :: updateFreezeAbility()
 {
      	propetries.freeze = 0;
      	ableTo.FREEZE = false;
@@ -675,7 +672,7 @@ void VehicleCommon :: updateFreezeAbility()
 
 
 
-void VehicleCommon :: updateGrabAbility()
+void Vehicle :: updateGrabAbility()
 {
      	ableTo.GRAB = false;
 
@@ -687,7 +684,7 @@ void VehicleCommon :: updateGrabAbility()
 
 
 
-void VehicleCommon :: updateScanAbility()
+void Vehicle :: updateScanAbility()
 {
      	propetries.scan = 0;
      	ableTo.SCAN = false;
@@ -704,12 +701,12 @@ void VehicleCommon :: updateScanAbility()
 
 
 
-void VehicleCommon :: setMaxArmor()
+void Vehicle :: setMaxArmor()
 {
      	data_life.armor = data_korpus.armor;
 }
 
-void VehicleCommon :: setMaxFuel()
+void Vehicle :: setMaxFuel()
 {
      	if (bak_slot.getEquipedStatus() == true)
      	{
@@ -718,7 +715,7 @@ void VehicleCommon :: setMaxFuel()
 }
 
 
-void VehicleCommon :: updateInfo()
+void Vehicle :: updateInfo()
 {
 	info.clear();
 
@@ -736,7 +733,7 @@ void VehicleCommon :: updateInfo()
 	info.addNameStr("speedx:");       	info.addValueStr(int2str(int(propetries.speed*100)) );
 }
 
-std::string VehicleCommon :: returnProtectionStr()
+std::string Vehicle :: returnProtectionStr()
 {
     	if (ableTo.PROTECT == true)
        		return int2str(protector_slot.getProtectorEquipment()->getProtection()) + '+' + int2str(data_korpus.protection);
@@ -744,7 +741,7 @@ std::string VehicleCommon :: returnProtectionStr()
        		return int2str(data_korpus.protection);
 }
 
-void VehicleCommon :: renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y)
+void Vehicle :: renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y)
 {  
         updateInfo();
      	drawInfoIn2Column(&info.title_list, &info.value_list, _pos_x, _pos_y, _offset_x, _offset_y);
@@ -752,7 +749,7 @@ void VehicleCommon :: renderInfo(float _pos_x, float _pos_y, float _offset_x, fl
      	npc_owner->renderInfo(_pos_x, _pos_y, _offset_x, _offset_y);
 }
 
-void VehicleCommon :: renderInfo()
+void Vehicle :: renderInfo()
 {  
         updateInfo();
      	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y);
@@ -760,7 +757,7 @@ void VehicleCommon :: renderInfo()
 }
 	
 
-void VehicleCommon :: updateRenderStuff()
+void Vehicle :: updateRenderStuff()
 {
     	//points.update(); 
     	shield->update();
@@ -772,7 +769,7 @@ void VehicleCommon :: updateRenderStuff()
 }
 
 
-void VehicleCommon :: render_inSpace() const
+void Vehicle :: render_inSpace() const
 {   
         if (ableTo.GRAB == true)
         {
@@ -798,7 +795,7 @@ void VehicleCommon :: render_inSpace() const
 }
 
 
-void VehicleCommon :: render_atPlanet() const
+void Vehicle :: render_atPlanet() const
 {
 	renderKorpus();
 	
@@ -808,7 +805,7 @@ void VehicleCommon :: render_atPlanet() const
         }
 }		
 
-void VehicleCommon :: renderGrappleTrail() const
+void Vehicle :: renderGrappleTrail() const
 {
         for (unsigned int i = 0; i<grapple_slot.getGrappleEquipment()->target_vec.size(); i++)
         {
@@ -833,7 +830,7 @@ void VehicleCommon :: renderGrappleTrail() const
         }
 }
 		
-void VehicleCommon :: renderKorpus() const
+void Vehicle :: renderKorpus() const
 {
     	drawFlatQuadPerVertexIn2D(texOb,
     				  points.getBottomLeft(), 
@@ -844,18 +841,18 @@ void VehicleCommon :: renderKorpus() const
 }
 
 
-void VehicleCommon :: renderDriveTrail() const
+void Vehicle :: renderDriveTrail() const
 {
 	drive_trail->render();
 }
 
 
-void VehicleCommon :: renderShield() const
+void Vehicle :: renderShield() const
 {
      	shield->render();
 }
 
-void VehicleCommon :: renderRadarRange()
+void Vehicle :: renderRadarRange()
 {
 	glPushMatrix();
 		glTranslatef(points.getCenter().x, points.getCenter().y, 0.0f);
@@ -864,7 +861,7 @@ void VehicleCommon :: renderRadarRange()
 	glPopMatrix();
 }
 
-void VehicleCommon :: renderGrappleRange()
+void Vehicle :: renderGrappleRange()
 {
 	glPushMatrix();
 		glTranslatef(points.getCenter().x, points.getCenter().y, 0.0f);
@@ -874,7 +871,7 @@ void VehicleCommon :: renderGrappleRange()
 }
 
 
-bool VehicleCommon :: repair()
+bool Vehicle :: repair()
 {
         unsigned int _fix = data_korpus.armor - data_life.armor;
         unsigned int _price = _fix/10;
@@ -890,7 +887,7 @@ bool VehicleCommon :: repair()
 }
 
 
-void VehicleCommon :: dropRandomItemToSpace()
+void Vehicle :: dropRandomItemToSpace()
 {
 	std::vector<ItemSlot*> _equiped_slot_vec;
 	
@@ -908,7 +905,7 @@ void VehicleCommon :: dropRandomItemToSpace()
 		
 }
 
-void VehicleCommon :: grappleScenario()
+void Vehicle :: grappleScenario()
 {
         grapple_slot.getGrappleEquipment()->validationTargets();  
                 
@@ -978,8 +975,8 @@ void VehicleCommon :: grappleScenario()
         					ItemSlot* _slot = getEmptyOtsecSlot();
         				        if (_slot != NULL)
         					{
-        						_slot->insertItem(grapple_slot.getGrappleEquipment()->target_vec[i]->getShip());
-        						starsystem->addToRemoveFromOuterSpaceQueue(grapple_slot.getGrappleEquipment()->target_vec[i]->getShip());
+        						_slot->insertItem(grapple_slot.getGrappleEquipment()->target_vec[i]->getVehicle());
+        						starsystem->addToRemoveFromOuterSpaceQueue(grapple_slot.getGrappleEquipment()->target_vec[i]->getVehicle());
         					}
        						grapple_slot.getGrappleEquipment()->target_vec[i]->reset();
         					break;
@@ -994,7 +991,7 @@ void VehicleCommon :: grappleScenario()
 
 
 
-void VehicleCommon :: moveExternalyToPosition(vec2f _target)
+void Vehicle :: moveExternalyToPosition(vec2f _target)
 {
 	vec2f d_pos;
         get_dX_dY_ToPoint(points.getCenter().x, points.getCenter().y, _target.x, _target.y, 10*propetries.speed, &d_pos.x, &d_pos.y);

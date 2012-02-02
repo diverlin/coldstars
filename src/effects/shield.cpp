@@ -18,7 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-ShieldEffect :: ShieldEffect(VehicleCommon* owner_vehicle, TextureOb* _texOb)
+ShieldEffect :: ShieldEffect(Vehicle* owner_vehicle, TextureOb* _texOb)
 {
      this->owner_vehicle = owner_vehicle;
      texOb = _texOb;

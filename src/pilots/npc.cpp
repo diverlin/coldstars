@@ -38,7 +38,7 @@ int Npc :: getRaceId() const	   { return race_id; }
 StarSystem* Npc :: getStarSystem() const { return starsystem; }
 StarSystem* Npc :: getFailBackStarSystem() const { return failback_starsystem; }
 Kosmoport* Npc :: getKosmoport()   { return kosmoport; }
-Ship* Npc :: getShip() 	 	   { return ship; }
+Vehicle* Npc :: getVehicle()       { return vehicle; }
 Skill* Npc :: getSkill() 	   { return skill; }	
 Ship* Npc :: getScanShip()	   { return ship_to_scan; }	
 int Npc :: getPlaceTypeId() const  { return place_type_id; }
@@ -55,16 +55,15 @@ StateMachine* Npc :: getStateMachine() {return state_machine; }
 
 
 
-Points* Npc :: getPoints() const    { return ship->getPoints(); }
-bool* Npc :: getpAlive()       { return &data_life.is_alive; }
-int* Npc :: getpPlaceTypeId()  { return &place_type_id; }
-float Npc :: getCollisionRadius() { return ship->getCollisionRadius(); }
+Points* Npc :: getPoints() const    { return vehicle->getPoints(); }
+bool* Npc :: getpAlive()            { return &data_life.is_alive; }
+int* Npc :: getpPlaceTypeId()       { return &place_type_id; }
+float Npc :: getCollisionRadius()   { return vehicle->getCollisionRadius(); }
    		
-void Npc :: bind(Ship* _ship) 	           
+void Npc :: bind(Vehicle* vehicle) 	           
 { 
-	ship = _ship; 
-	ship->setNpc(this); 
-	ship->setStarSystem(starsystem);  //???	
+	this->vehicle = vehicle; 
+	vehicle->setNpc(this); 
 } 	
 
 void Npc :: increaseCredits(int _credits) { credits += _credits; }
@@ -89,7 +88,7 @@ Npc :: Npc(int _race_id, IdData _data_id, LifeData _data_life, TextureOb* _texOb
 	place_type_id = NONE_ID; 
 
 
-        ship       = NULL;
+        vehicle    = NULL;
     	kosmoport  = NULL;
     	land       = NULL;
     	starsystem = NULL;
@@ -132,13 +131,13 @@ void Npc :: thinkCommon_inKosmoport_inStatic()
 {   		
 	if (needsToDo.REPAIR_KORPUS == true)
 	{
-                ship->repair();
+                vehicle->repair();
 		needsToDo.REPAIR_KORPUS = false;
 	}	
 	
 	
 	// if all things are DONE
-	ship->getNavigator()->getTargetPlanet()->addToLaunchingQueue(this);
+	vehicle->getNavigator()->getTargetPlanet()->addToLaunchingQueue(this);
 }
 
 void Npc :: thinkCommon_inLand_inStatic()
@@ -149,9 +148,9 @@ void Npc :: thinkCommon_inLand_inStatic()
 
 void Npc :: update_inSpace_inStatic()
 {
-	ship->getWeaponComplex()->prepareWeapons();
-        ship->grapple_slot.getGrappleEquipment()->validationTargets();
-        ship->droidRepair();
+	vehicle->getWeaponComplex()->prepareWeapons();
+        vehicle->grapple_slot.getGrappleEquipment()->validationTargets();
+        vehicle->droidRepair();
         // drive work, energy and so on
                	     		
 	if (upper_control == false)
@@ -175,7 +174,7 @@ void Npc :: update_inSpace_inStatic()
        		state_machine->update_inStatic();                 
         }
 
-        ship->getNavigator()->update_inSpace_inStatic();
+        vehicle->getNavigator()->update_inSpace_inStatic();
 }
 
 
@@ -191,7 +190,7 @@ void Npc :: update_inSpace_inDynamic()
 
 void Npc :: checkNeeds()
 {
-        if (ship->getArmor() < 0.5*ship->data_korpus.armor)   // move to ship
+        if (vehicle->getArmor() < 0.5*vehicle->data_korpus.armor)   // move to ship
 	{
 		needsToDo.REPAIR_KORPUS = true;
 		//if (quest_self != g_QUEST_SELF_SAFETY)
@@ -235,13 +234,13 @@ void Npc :: checkNeeds()
 
 void Npc :: asteroidScenario()
 {
-        ship->getWeaponComplex()->weapon_selector.setAll(false);
-        ship->getWeaponComplex()->selectWeapons();
-        ship->getWeaponComplex()->resetDeselectedWeaponTargets();
+        vehicle->getWeaponComplex()->weapon_selector.setAll(false);
+        vehicle->getWeaponComplex()->selectWeapons();
+        vehicle->getWeaponComplex()->resetDeselectedWeaponTargets();
 
-        ship->getWeaponComplex()->weapon_selector.setAll(true);
-        ship->getWeaponComplex()->selectWeapons();
-        ship->getWeaponComplex()->setWeaponsTarget(observation->visible_ASTEROID_vec[0].asteroid);
+        vehicle->getWeaponComplex()->weapon_selector.setAll(true);
+        vehicle->getWeaponComplex()->selectWeapons();
+        vehicle->getWeaponComplex()->setWeaponsTarget(observation->visible_ASTEROID_vec[0].asteroid);
                 
         //printf("TARGET => ship_id, asteroid id = %i/%i\n", ship->getId(), sorted_visible_ASTEROID_pList[0]->getId());
 }
@@ -251,13 +250,13 @@ void Npc :: asteroidScenario()
 
 void Npc:: jumpEvent()
 {
-	ship->jumpEvent();
+	vehicle->jumpEvent();
 }
 
 
 void Npc:: dockEvent()
 {
-	ship->dockEvent();
+	vehicle->dockEvent();
 }
 
 
@@ -269,7 +268,7 @@ void Npc:: dockEvent()
 
 Planet* Npc :: getPlanetForDocking()
 {
-     	Planet* _target_planet = starsystem->getClosestPlanet(ship->getPoints()->getCenter());  // improove
+     	Planet* _target_planet = starsystem->getClosestPlanet(vehicle->getPoints()->getCenter());  // improove
      	return _target_planet;
 }
 
@@ -286,16 +285,16 @@ StarSystem* Npc :: getClosestStarSystem(bool _captured)
 //// *********** SCANNING ***********
 bool Npc :: checkPossibilityToScan(Ship* _ship)
 {
-     	if (ship->getId() == _ship->getId())    // selfscan is possible all time
+     	if (vehicle->getId() == _ship->getId())    // selfscan is possible all time
      	{
         	return true;
         }
  
-     	if (ship->ableTo.SCAN == true) 
+     	if (vehicle->ableTo.SCAN == true) 
      	{
         	if (_ship->protector_slot.getEquipedStatus() == true)
         	{
-           		if (ship->scaner_slot.getScanerEquipment()->getScan() >= _ship->protector_slot.getProtectorEquipment()->getProtection()) 
+           		if (vehicle->scaner_slot.getScanerEquipment()->getScan() >= _ship->protector_slot.getProtectorEquipment()->getProtection()) 
               		{
               			return true;
               		}
@@ -329,9 +328,9 @@ void Npc :: updateInfo()
     	info.addNameStr("id/ss_id:");           info.addValueStr( int2str(data_id.id) + " / "  + int2str(starsystem->getId()) );
     	info.addNameStr("race:");   		info.addValueStr( returnRaceStringByRaceId(texOb->race_id) ); 
 
-	if (ship->ableTo.GRAB == true)
+	if (vehicle->ableTo.GRAB == true)
 	{
-		std::string grab_str = ship->grapple_slot.getGrappleEquipment()->getTargetStr();
+		std::string grab_str = vehicle->grapple_slot.getGrappleEquipment()->getTargetStr();
 		if (grab_str.size() > 0)
 		{
 			info.addNameStr("grab_id:");   		info.addValueStr( grab_str ); 

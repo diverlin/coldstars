@@ -37,7 +37,7 @@ WeaponComplex :: ~WeaponComplex()
         delete turrel5;
 }
   
-void WeaponComplex :: postCreateInit(int weapon_num, Rect kontur_rect, VehicleCommon* vehicle, bool draw_turrels, TextureOb* texOb)
+void WeaponComplex :: postCreateInit(int weapon_num, Rect kontur_rect, Vehicle* vehicle, bool draw_turrels, TextureOb* texOb)
 {
 	this->weapon_num = weapon_num;
 	owner_points = vehicle->getPoints();

@@ -48,7 +48,7 @@ class Player
           	bool getShowRadarRange() const;
           	bool getShowGrappleRange() const;
           	          	
-          	Ship* getShip(); 	     
+          	Vehicle* getVehicle(); 	     
 		Npc* getPilot(); 	     
 		StarSystem* getStarSystem(); 	
 		Cursor* getCursor();         
@@ -63,8 +63,8 @@ class Player
      	     	int type_id, id;
      	     	int place_type_id;
      	     		
-     	     	Ship* ship;
-     	     	Npc* npc;
+     	     	Vehicle* vehicle;
+     	     	Npc*     npc;
      	     	
      	     	StarSystem* starsystem;
      	     	Cursor* cursor;

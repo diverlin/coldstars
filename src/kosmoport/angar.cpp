@@ -110,7 +110,7 @@ void Angar :: mouseControl()
                                 {
                                         pPLAYER->getPilot()->setScanTarget(landingArea_vec[i]->getShip());
                                         pPLAYER->setScanFlag(true);
-                                        g_GUI_SHIP->configure(pPLAYER->getPilot()->getScanShip(), false, false); 
+                                        g_GUI_VEHICLE->configure(pPLAYER->getPilot()->getScanShip(), false, false); 
                                 }
                         }
                 }

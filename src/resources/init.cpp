@@ -65,13 +65,16 @@ void init()
     	Npc* pnpc = getNewNpc(prace_id, psubtype_id);   
     	Ship* pship = shipGenerator(prace_id, psubtype_id, size_id, weapons_num);
 	
-    	equip(pship);            		// improove
+    	equip((Vehicle*)pship);            		// improove
         pship->updateAllStuff(); 		// improove
         
         pnpc->bind(pship);
 
-        pPLAYER->getStarSystem()->moveToSpace(pship);
-        pPLAYER->getStarSystem()->moveToSpace(pnpc);
+	vec2f center(-400, 400);
+	float angle = 0;  
+		
+        pPLAYER->getStarSystem()->addToSpace(pship, center, angle);
+        pPLAYER->getStarSystem()->addToSpace(pnpc);
         	
     	pship->getPoints()->setCenter(-400, -400);
     	pship->getPoints()->setAngle(0);
@@ -80,8 +83,8 @@ void init()
    	pPLAYER->bindNpc(pnpc);
    	    	
     	/* create GUI */
-    	g_GUI_SHIP = new GuiShip();
-        g_GUI_SHIP->createControlSkillButtons();
+    	g_GUI_VEHICLE = new GuiVehicle();
+        g_GUI_VEHICLE->createControlSkillButtons();
         
         g_GUI_SPACE = new GuiSpace();
         g_GUI_KOSMOPORT = new GuiKosmoport();   

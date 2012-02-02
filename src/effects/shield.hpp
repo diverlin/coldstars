@@ -26,7 +26,7 @@ class TextureOb;
 class ShieldEffect
 {  
      	public:
-        	ShieldEffect(VehicleCommon*, TextureOb*);
+        	ShieldEffect(Vehicle*, TextureOb*);
         	~ShieldEffect();
 
 		void setAlpha(float);
@@ -36,7 +36,7 @@ class ShieldEffect
         	void render() const;
         	
         private:
-                VehicleCommon* owner_vehicle;        
+                Vehicle* owner_vehicle;        
         	TextureOb* texOb;
         
         	Color4f color;

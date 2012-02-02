@@ -91,7 +91,7 @@ bool Turrel :: fireEvent_TRUE()
 
 			switch(targetOb->getObTypeId())
 			{
-				case SHIP_ID:      { targetOb->getShip()->hit_TRUE(slot->getLazerEquipment()->getDamage());      return true; break; }
+				case SHIP_ID:      { targetOb->getVehicle()->hit_TRUE(slot->getLazerEquipment()->getDamage());   return true; break; }
        				case ASTEROID_ID:  { targetOb->getAsteroid()->hit_TRUE(slot->getLazerEquipment()->getDamage());  return true; break; }
 				case MINERAL_ID:   { targetOb->getMineral()->hit_TRUE(slot->getLazerEquipment()->getDamage());   return true; break; }
 				case CONTAINER_ID: { targetOb->getContainer()->hit_TRUE(slot->getLazerEquipment()->getDamage()); return true; break; }
@@ -126,11 +126,11 @@ bool Turrel :: fireEvent_FALSE()
 
 			switch(targetOb->getObTypeId())
 			{
-				case SHIP_ID:      { targetOb->getShip()->hit_FALSE(slot->getLazerEquipment()->getDamage());      return true; break; }
+				case SHIP_ID:      { targetOb->getVehicle()->hit_FALSE(slot->getLazerEquipment()->getDamage());   return true; break; }
        				case ASTEROID_ID:  { targetOb->getAsteroid()->hit_FALSE(slot->getLazerEquipment()->getDamage());  return true; break; }
 				case MINERAL_ID:   { targetOb->getMineral()->hit_FALSE(slot->getLazerEquipment()->getDamage());   return true; break; }
 				case CONTAINER_ID: { targetOb->getContainer()->hit_FALSE(slot->getLazerEquipment()->getDamage()); return true; break; }
-				case BOMB_ID:      { targetOb->getBomb()->hit_FALSE(slot->getLazerEquipment()->getDamage());    	 return true; break; }
+				case BOMB_ID:      { targetOb->getBomb()->hit_FALSE(slot->getLazerEquipment()->getDamage());      return true; break; }
        			}
        			
        			break;

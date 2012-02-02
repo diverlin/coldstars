@@ -103,7 +103,7 @@ void Planet :: launchingProcedure()
 {
          for (unsigned int i = 0; i<NPC_launching_vec.size(); i++)
          {
-         	NPC_launching_vec[i]->getShip()->launchingEvent();
+         	NPC_launching_vec[i]->getVehicle()->launchingEvent();
          }
               
          NPC_launching_vec.clear();  

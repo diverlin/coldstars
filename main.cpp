@@ -18,6 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "include.hpp"
 
+
 int main()
 {       
  	init(); 
@@ -51,8 +52,8 @@ int main()
            		//////////// SCAN ///////////////
            		if ( pPLAYER->getScanFlag() == true )
                         {                                
-              			g_GUI_SHIP->update();
-                                g_GUI_SHIP->render();
+              			g_GUI_VEHICLE->update();
+                                g_GUI_VEHICLE->render();
                         }
 
            		/////////// WORLDMAP ///////////
@@ -79,8 +80,8 @@ int main()
 
                                 if (pPLAYER->getScanFlag() == true) 
                                 { 
-                                        g_GUI_SHIP->update();
-                                        g_GUI_SHIP->render();
+                                        g_GUI_VEHICLE->update();
+                                        g_GUI_VEHICLE->render();
                                 }
                			else
                                 {
@@ -93,9 +94,9 @@ int main()
                                 pPLAYER->getPilot()->getKosmoport()->getStore()->update();
                			pPLAYER->getPilot()->getKosmoport()->getStore()->render();                                 
                                                  
-                                g_GUI_SHIP->configure(pPLAYER->getShip(), true);
-               			g_GUI_SHIP->update();
-                                g_GUI_SHIP->render();
+                                g_GUI_VEHICLE->configure(pPLAYER->getVehicle(), true);
+               			g_GUI_VEHICLE->update();
+                                g_GUI_VEHICLE->render();
                         }
 
            		if (g_GUI_KOSMOPORT->getActiveScreenId() == SCREEN_SHOP_ID)

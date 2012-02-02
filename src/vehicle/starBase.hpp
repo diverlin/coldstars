@@ -17,15 +17,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef SPACESTATION_H
-#define SPACESTATION_H
+#ifndef STARBASE_H
+#define STARBASE_H
 
 
-class SpaceStation : public VehicleCommon
+class StarBase : public Vehicle
 {
     	public:  
-        	SpaceStation();
-        	~SpaceStation();
+        	StarBase();
+        	~StarBase();
 
 		void update_inSpace_inDynamic_TRUE();
 		void update_inSpace_inDynamic_FALSE();
@@ -38,7 +38,7 @@ class SpaceStation : public VehicleCommon
         	InfoTable info;
 };
 
-SpaceStation* getNewSpaceStation();
+StarBase* getNewStarBase();
 
 
 #endif 

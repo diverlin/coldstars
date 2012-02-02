@@ -25,7 +25,7 @@ Player :: Player()
 
 	is_alive = true;
     	
-    	ship = NULL;
+    	vehicle = NULL;
     	npc  = NULL;
     	cursor = new Cursor();
     	
@@ -53,7 +53,7 @@ void Player :: setShowGrappleRange(bool show_grapple_range)  { this->show_grappl
 bool Player :: getAlive() const { return is_alive; }
 bool Player :: getWorldMapShowFlag() const { return control.worldmap; }         	
 bool Player :: getScanFlag() const              { return control.scan; }
-Ship* Player :: getShip() 	      { return ship; }
+Vehicle* Player :: getVehicle()       { return vehicle; }
 Npc* Player :: getPilot() 	      { return npc; }
 StarSystem* Player :: getStarSystem() { return starsystem; }	
 Cursor* Player :: getCursor()         { return cursor; }
@@ -84,12 +84,12 @@ void Player :: update_global()
   		
 		place_type_id = getPilot()->getPlaceTypeId();
 		
-		if (ship->getPlaceTypeId() == PLANET_ID)       // FUUUUUUUUUUUUUUUUUUUUUU must be imprroved
+		if (vehicle->getPlaceTypeId() == PLANET_ID)       // FUUUUUUUUUUUUUUUUUUUUUU must be imprroved
 		{
         		npc->setPlaceTypeId(PLANET_ID);
         	}
         	
-        	npc->getShip()->getWeaponComplex()->weapon_selector = weapon_selector;
+        	npc->getVehicle()->getWeaponComplex()->weapon_selector = weapon_selector;
 	}
 }  
                			
@@ -97,9 +97,9 @@ void Player :: bindNpc(Npc* _npc)
 {
     	npc = _npc;
 
-    	ship = npc->getShip();
-    	ship->getNpc()->setUpperControl(true);
-    	cursor->getSlot()->setShipOwner(ship);
+    	vehicle = npc->getVehicle();
+    	vehicle->getNpc()->setUpperControl(true);
+    	cursor->getSlot()->setOwner(vehicle);
 }
 
     

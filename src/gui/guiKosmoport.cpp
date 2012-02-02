@@ -151,17 +151,17 @@ void GuiKosmoport :: mouseInteraction()
        				{	
 		   			if (button_angar_pList[i]->getSubTypeId() == REPAIR_BUTTON_ID)
 		   			{
-		   				pPLAYER->getShip()->setMaxArmor(); 
+		   				pPLAYER->getVehicle()->setMaxArmor(); 
 		   			}
 		   			if (button_angar_pList[i]->getSubTypeId() == FUEL_BUTTON_ID)
 		   			{
-		   		        	pPLAYER->getShip()->setMaxFuel();
+		   		        	pPLAYER->getVehicle()->setMaxFuel();
 		   			}
 		   			if (button_angar_pList[i]->getSubTypeId() == LAUNCH_BUTTON_ID)
 		   			{
        						//pPLAYER->getPilot()->createLaunchingSequence(); 
        						//pPLAYER->getPilot()->setPlaceTypeId(SPACE_ID);
-       						pPLAYER->getShip()->launchingEvent();
+       						pPLAYER->getVehicle()->launchingEvent();
        			   		}
        				}
        				break;

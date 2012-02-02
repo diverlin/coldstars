@@ -38,7 +38,7 @@ Planet* TargetObject :: getPlanet()   	      { return planet; }
 Asteroid* TargetObject :: getAsteroid()       { return asteroid; }
 Mineral* TargetObject :: getMineral()         { return mineral; }
 Container* TargetObject :: getContainer()     { return container; }
-Ship* TargetObject :: getShip()               { return ship; }
+Vehicle* TargetObject :: getVehicle()         { return vehicle; }
 Npc* TargetObject :: getNpc() const           { return npc; }
 StarSystem* TargetObject :: getStarSystem()   { return starsystem; }
 Bomb* TargetObject :: getBomb() const         { return bomb; }
@@ -74,10 +74,10 @@ void TargetObject :: set(Planet* _planet)     	   { planet = _planet; }
 void TargetObject :: set(Asteroid* _asteroid)      { asteroid = _asteroid; }
 void TargetObject :: set(Mineral* _mineral)        { mineral = _mineral; }
 void TargetObject :: set(Container* _container)    { container = _container; }
-void TargetObject :: set(Ship* _ship)              { ship = _ship; }
+void TargetObject :: set(Vehicle* vehicle)         { this->vehicle = vehicle; }
 void TargetObject :: set(Npc* _npc)                { npc = _npc; }
 void TargetObject :: set(StarSystem* _starsystem)  { starsystem = _starsystem; }
-void TargetObject :: set(Bomb* bomb)              { this->bomb = bomb; }
+void TargetObject :: set(Bomb* bomb)               { this->bomb = bomb; }
 
 void TargetObject :: reset()
 {
@@ -86,7 +86,7 @@ void TargetObject :: reset()
         asteroid   = NULL;
         mineral    = NULL;
         container  = NULL;
-	ship       = NULL;
+	vehicle    = NULL;
 	npc        = NULL;
 	bomb       = NULL;
         
@@ -110,7 +110,7 @@ void TargetObject :: copy(TargetObject* tgOb)
         asteroid   = tgOb->getAsteroid();
         mineral    = tgOb->getMineral();
         container  = tgOb->getContainer();
-	ship       = tgOb->getShip();
+	vehicle    = tgOb->getVehicle();
 	npc        = tgOb->getNpc();
 	bomb       = tgOb->getBomb();
         
@@ -152,7 +152,7 @@ void TargetObject :: moveExternalyToPosition(vec2f _target_pos)
 
 		case SHIP_ID:
 		{
-			ship->moveExternalyToPosition(_target_pos);
+			vehicle->moveExternalyToPosition(_target_pos);
 			break;
 		}
 	}
