@@ -21,7 +21,7 @@ ItemSlot :: ItemSlot()
 {}
 
 
-ItemSlot :: ItemSlot(int _subtype_id, VehicleCommon* _owner_vehicle, TextureOb* _texOb, int _pos_x, int _pos_y, int w, int h)
+ItemSlot :: ItemSlot(int _subtype_id, Vehicle* _owner_vehicle, TextureOb* _texOb, int _pos_x, int _pos_y, int w, int h)
 {
 	/* 
         The class provides implementation to insert/hold/remove all game items (equipments, modules and so on)
@@ -120,7 +120,7 @@ ItemSlot :: ~ItemSlot()
 	//}
 }
 
-void ItemSlot :: setShipOwner(Ship* _ship_owner) {  owner_vehicle = _ship_owner; }
+void ItemSlot :: setOwner(Vehicle* owner_vehicle) {  this->owner_vehicle = owner_vehicle; }
 void ItemSlot :: setFlashingStatus(bool new_status) { is_FLASHING = new_status; }
                 
 int ItemSlot :: getTypeId()          const { return type_id; }
@@ -137,7 +137,7 @@ bool ItemSlot :: getFlashingStatus() const { return is_FLASHING; }
                 
 Rect& ItemSlot :: getRect() { return rect; }
 
-VehicleCommon* ItemSlot :: getOwnerVehicle() { return owner_vehicle; }
+Vehicle* ItemSlot :: getOwnerVehicle() { return owner_vehicle; }
                                 
 RocketEquipment*    ItemSlot :: getRocketEquipment()    const { return rocket_equipment; }
 LazerEquipment*     ItemSlot :: getLazerEquipment()     const { return lazer_equipment; }
@@ -167,7 +167,7 @@ Bomb* ItemSlot :: getBomb() const { return bomb; }
 //Artefact* ItemSlot :: getArtefact() const { return artefact; }
 
 GoodsPack* ItemSlot :: getGoodsPack() const { return goods_pack; }
-Ship* ItemSlot :: getShip() const { return ship; }
+Vehicle* ItemSlot :: getVehicle()     const { return vehicle; }
 
 template<typename ITEM_TYPE>
 bool ItemSlot :: insertItem(ITEM_TYPE* item)
@@ -236,7 +236,7 @@ void ItemSlot :: insert(GrappleModule* item)  	{ grapple_module = item; }
 
 void ItemSlot :: insert(Bomb* item)  	{ bomb = item; }
 //void ItemSlot :: insert(Artefact* item) { artefact = item; }
-void ItemSlot :: insert(Ship* item)  	{ ship = item; }
+void ItemSlot :: insert(Vehicle* item)  	{ vehicle = item; }
 
 bool ItemSlot :: insertGoods(GoodsPack* item)
 {
@@ -541,7 +541,7 @@ void ItemSlot :: removeItem()
 		
 		case SHIP_ID:
 		{
-			ship = NULL;
+			vehicle = NULL;
 			resetFlags();
 			
 			break;
@@ -723,7 +723,7 @@ void ItemSlot :: renderEquipedItem()
 
    		case SHIP_ID:
 		{
-			drawTexturedRect(ship->getTexOb(), rect, -1.0);
+			drawTexturedRect(vehicle->getTexOb(), rect, -1.0);
 			
 			break;
 		}
@@ -793,7 +793,7 @@ void ItemSlot :: renderItemInfo(float offset_x, float offset_y)
 	
 		case SHIP_ID:
      		{
-			ship->renderInfo(rect.getCenter().x, rect.getCenter().y, offset_x, offset_y); // updateInfo() is included
+			vehicle->renderInfo(rect.getCenter().x, rect.getCenter().y, offset_x, offset_y); // updateInfo() is included
 		
 			break;
 		}
@@ -897,7 +897,7 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
 
 			case SHIP_ID:
 			{
-				if (insertItem(_slot->getShip()) == true) { _slot->removeItem(); return true; } 
+				if (insertItem(_slot->getVehicle()) == true) { _slot->removeItem(); return true; } 
 				
 				break;
 			}
@@ -964,7 +964,7 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
 
 			case SHIP_ID:
 			{
-				if (_slot->insertItem(getShip()) == true) { removeItem(); return true; } 
+				if (_slot->insertItem(getVehicle()) == true) { removeItem(); return true; } 
 				
 				break;
 			}

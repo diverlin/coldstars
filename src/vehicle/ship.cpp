@@ -56,7 +56,7 @@ Ship* shipGenerator(int race_id, int subtype_id, int size_id, int weapons_num)
         data_life.dying_time = 10*texOb->size_id;
        
         IdData data_id;
-        data_id.id      = g_SHIP_ID_GENERATOR.getNextId(); 
+        data_id.id      = g_VEHICLE_ID_GENERATOR.getNextId(); 
     	data_id.type_id = SHIP_ID;
     	//subtype_id = ;       
 
@@ -73,12 +73,6 @@ Ship* shipGenerator(int race_id, int subtype_id, int size_id, int weapons_num)
 	ship->setLifeData(data_life);
     	
     	ship->postCreateInit();
-    	
-    	ship->getPoints()->setCenter(getRandInt(0, 800), getRandInt(0, 800)); 
-    	ship->getPoints()->setAngle(getRandInt(0, 360));   
-    	ship->getPoints()->update();   
-    	    	 	
-    	ship->getNavigator()->setStaticTargetCoords(vec2f(getRandInt(0, 1200), getRandInt(0, 1200)));    	
     	    
     	return ship;
 }
@@ -86,98 +80,98 @@ Ship* shipGenerator(int race_id, int subtype_id, int size_id, int weapons_num)
 
 
 
-void equip(Ship* ship)
+void equip(Vehicle* vehicle)
 {
-    	if (ship->data_korpus.weapon_slot_num >= 1)
+    	if (vehicle->data_korpus.weapon_slot_num >= 1)
     	{
-       		//LazerEquipment* pTo_lazer1 = lazerEquipmentGenerator(RACE_0_ID);    
-       		//ship->weapon_slot1.insertItem(pTo_lazer1); 
-    	       	RocketEquipment* rocket1 = rocketEquipmentGenerator(RACE_0_ID);    
-       		ship->getWeaponComplex()->weapon_slot1.insertItem(rocket1); 
+       		//LazerEquipment* lazer_equipment = lazerEquipmentGenerator(RACE_0_ID);    
+       		//vehicle->weapon_slot1.insertItem(lazer_equipment); 
+    	       	RocketEquipment* rocket_equipment = rocketEquipmentGenerator(RACE_0_ID);    
+       		vehicle->getWeaponComplex()->weapon_slot1.insertItem(rocket_equipment); 
     	
     	}   
 
-    	if (ship->data_korpus.weapon_slot_num >= 2)
+    	if (vehicle->data_korpus.weapon_slot_num >= 2)
     	{
-       		LazerEquipment* pTo_lazer2 = lazerEquipmentGenerator(RACE_0_ID);    
-       		ship->getWeaponComplex()->weapon_slot2.insertItem(pTo_lazer2); 
+       		LazerEquipment* lazer_equipment = lazerEquipmentGenerator(RACE_0_ID);    
+       		vehicle->getWeaponComplex()->weapon_slot2.insertItem(lazer_equipment); 
     	}   
     
-    	if (ship->data_korpus.weapon_slot_num >= 3)
+    	if (vehicle->data_korpus.weapon_slot_num >= 3)
     	{
-       		LazerEquipment* pTo_lazer3 = lazerEquipmentGenerator(RACE_0_ID);    
-       		ship->getWeaponComplex()->weapon_slot3.insertItem(pTo_lazer3); 
-       		//RocketEquipment* rocket3 = rocketEquipmentGenerator(RACE_0_ID);    
-       		//ship->weapon_slot3.insertItem(rocket3); 
-    	}   
-        
-    	if (ship->data_korpus.weapon_slot_num >= 4)
-    	{
-       		//LazerEquipment* pTo_lazer4 = lazerEquipmentGenerator(RACE_0_ID);    
-       		//ship->weapon_slot4.insertItem(pTo_lazer4);         
-       		RocketEquipment* rocket4 = rocketEquipmentGenerator(RACE_0_ID);    
-       		ship->getWeaponComplex()->weapon_slot4.insertItem(rocket4); 
-    	}   
-    
-    	if (ship->data_korpus.weapon_slot_num >= 5) 
-    	{
-       		//LazerEquipment* pTo_lazer5 = lazerEquipmentGenerator(RACE_0_ID);    
-       		//ship->weapon_slot5.insertItem(pTo_lazer5); 
-       		RocketEquipment* rocket5 = rocketEquipmentGenerator(RACE_0_ID);    
-       		ship->getWeaponComplex()->weapon_slot5.insertItem(rocket5); 
+       		LazerEquipment* lazer_equipment = lazerEquipmentGenerator(RACE_0_ID);    
+       		vehicle->getWeaponComplex()->weapon_slot3.insertItem(lazer_equipment); 
+       		//RocketEquipment* rocket_equipment = rocketEquipmentGenerator(RACE_0_ID);    
+       		//vehicle->weapon_slot3.insertItem(rocket_equipment); 
     	}   
         
+    	if (vehicle->data_korpus.weapon_slot_num >= 4)
+    	{
+       		//LazerEquipment* lazer_equipment = lazerEquipmentGenerator(RACE_0_ID);    
+       		//vehicle->weapon_slot4.insertItem(lazer_equipment);         
+       		RocketEquipment* rocket_equipment = rocketEquipmentGenerator(RACE_0_ID);    
+       		vehicle->getWeaponComplex()->weapon_slot4.insertItem(rocket_equipment); 
+    	}   
+    
+    	if (vehicle->data_korpus.weapon_slot_num >= 5) 
+    	{
+       		//LazerEquipment* lazer_equipment = lazerEquipmentGenerator(RACE_0_ID);    
+       		//vehicle->weapon_slot5.insertItem(lazer_equipment); 
+       		RocketEquipment* rocket_equipment = rocketEquipmentGenerator(RACE_0_ID);    
+       		vehicle->getWeaponComplex()->weapon_slot5.insertItem(rocket_equipment); 
+    	}   
+        
     
     
-    	RadarEquipment* pTo_radar = radarEquipmentGenerator(RACE_0_ID);    
-    	ship->radar_slot.insertItem(pTo_radar); 
+    	RadarEquipment* radar_equipment = radarEquipmentGenerator(RACE_0_ID);    
+    	vehicle->radar_slot.insertItem(radar_equipment); 
     
-   	DriveEquipment* pTo_drive = driveEquipmentGenerator(RACE_0_ID);    
-    	ship->drive_slot.insertItem(pTo_drive); 
+   	DriveEquipment* drive_equipment = driveEquipmentGenerator(RACE_0_ID);    
+    	vehicle->drive_slot.insertItem(drive_equipment); 
 
-    	BakEquipment* pTo_bak = bakEquipmentGenerator(RACE_0_ID);    
-    	ship->bak_slot.insertItem(pTo_bak); 
+    	BakEquipment* bak_equipment = bakEquipmentGenerator(RACE_0_ID);    
+    	vehicle->bak_slot.insertItem(bak_equipment); 
             
-    	EnergizerEquipment* pTo_energizer = energizerEquipmentGenerator(RACE_0_ID);    
-    	ship->energizer_slot.insertItem(pTo_energizer); 
+    	EnergizerEquipment* energizer_equipment = energizerEquipmentGenerator(RACE_0_ID);    
+    	vehicle->energizer_slot.insertItem(energizer_equipment); 
     
-    	ProtectorEquipment* pTo_protector = protectorEquipmentGenerator(RACE_0_ID);    
-    	ship->protector_slot.insertItem(pTo_protector); 
+    	ProtectorEquipment* protector_equipment = protectorEquipmentGenerator(RACE_0_ID);    
+    	vehicle->protector_slot.insertItem(protector_equipment); 
         
-    	DroidEquipment* pTo_droid = droidEquipmentGenerator(RACE_0_ID);    
-    	ship->droid_slot.insertItem(pTo_droid); 
+    	DroidEquipment* droid_equipment = droidEquipmentGenerator(RACE_0_ID);    
+    	vehicle->droid_slot.insertItem(droid_equipment); 
     
     
-    	FreezerEquipment* pTo_freezer = freezerEquipmentGenerator(RACE_0_ID);    
-    	ship->freezer_slot.insertItem(pTo_freezer);     
+    	FreezerEquipment* freezer_equipment = freezerEquipmentGenerator(RACE_0_ID);    
+    	vehicle->freezer_slot.insertItem(freezer_equipment);     
 
-    	ScanerEquipment* pTo_scaner = scanerEquipmentGenerator(RACE_0_ID);    
-    	ship->scaner_slot.insertItem(pTo_scaner); 
+    	ScanerEquipment* scaner_equipment = scanerEquipmentGenerator(RACE_0_ID);    
+    	vehicle->scaner_slot.insertItem(scaner_equipment); 
     
-    	if (ship->data_korpus.inhibit_GRAPPLE == false) 
+    	if (vehicle->data_korpus.inhibit_GRAPPLE == false) 
     	{
-       		GrappleEquipment* pTo_grapple = grappleEquipmentGenerator(RACE_0_ID);    
-       		ship->grapple_slot.insertItem(pTo_grapple); 
+       		GrappleEquipment* grapple_equipment = grappleEquipmentGenerator(RACE_0_ID);    
+       		vehicle->grapple_slot.insertItem(grapple_equipment); 
    	}
     
                              
     	for (unsigned int i = 0; i < 3; i++) 
     	{        
         	LazerEquipment* lazer_equipment = lazerEquipmentGenerator(RACE_0_ID);              
-        	ship->slot_otsec_vec[i]->insertItem(lazer_equipment);
+        	vehicle->slot_otsec_vec[i]->insertItem(lazer_equipment);
     	}
 
 
     	for (unsigned int i = 3; i < 6; i++) 
     	{        
         	RadarModule* radar_module = radarModuleGenerator();              
-        	ship->slot_otsec_vec[i]->insertItem(radar_module);
+        	vehicle->slot_otsec_vec[i]->insertItem(radar_module);
     	}  
     	
     	for (unsigned int i = 6; i < 8; i++) 
     	{        
-        	Bomb* bomb = getNewBomb();              
-        	ship->slot_otsec_vec[i]->insertItem(bomb);
+        	Bomb* bomb_item = getNewBomb();              
+        	vehicle->slot_otsec_vec[i]->insertItem(bomb_item);
     	}   
 }
 

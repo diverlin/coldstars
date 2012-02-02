@@ -54,7 +54,7 @@ void Satellite :: renderInfo()
 Satellite* getNewSatellite()
 {
         IdData data_id;
-        data_id.id         = g_SATELLITE_ID_GENERATOR.getNextId();
+        data_id.id         = g_VEHICLE_ID_GENERATOR.getNextId();
     	data_id.type_id    = SATELLITE_ID;
     	data_id.subtype_id = MILITARY_ID; 
         

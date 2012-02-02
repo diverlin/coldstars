@@ -53,7 +53,7 @@ class Npc
    		StarSystem* getFailBackStarSystem() const;
    		
    		Kosmoport* getKosmoport();
-   		Ship* getShip();
+   		Vehicle* getVehicle();
    		Skill* getSkill();
    		Ship* getScanShip();
    		int getPlaceTypeId() const;
@@ -67,7 +67,7 @@ class Npc
      		
                 unsigned long int getCredits() const;   
 
-   		void bind(Ship*);
+   		void bind(Vehicle*);
 
 		void increaseCredits(int);
 		void decreaseCredits(int);
@@ -120,7 +120,7 @@ class Npc
      		//MacroTaskHolder* macro_task_main;
    		//MacroTaskHolder* macro_task_self;
    		//MicroTaskHolder* micro_task;
-   	     	Ship* ship;
+   	     	Vehicle* vehicle;
    	     	
    	     	Skill* skill; 
 

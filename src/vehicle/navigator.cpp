@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-Navigator :: Navigator(VehicleCommon* owner_vehicle)
+Navigator :: Navigator(Vehicle* owner_vehicle)
 {      
 	this->owner_vehicle = owner_vehicle;
    
@@ -234,7 +234,7 @@ bool Navigator :: updateTargetCoord()
     	     
     	if (targetOb->getObTypeId() == SHIP_ID)
     	{ 
-		target_pos = targetOb->getShip()->getPoints()->getCenter() + target_offset;  
+		target_pos = targetOb->getVehicle()->getPoints()->getCenter() + target_offset;  
 
         	return true;    
     	}      

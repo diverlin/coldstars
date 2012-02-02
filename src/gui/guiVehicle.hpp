@@ -17,19 +17,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef GUISHIP_H
-#define GUISHIP_H
+#ifndef GUIVEHICLE_H
+#define GUIVEHICLE_H
 
-class GuiShip
+class GuiVehicle
 {
    	public:
-      		GuiShip();
-      		~GuiShip();
+      		GuiVehicle();
+      		~GuiVehicle();
 
-      		void bindShip(Ship*);
+      		void bind(Vehicle*);
       		void createControlSkillButtons();
 
-                void configure(Ship* _ship, bool _in_store, bool _allow_full_control);
+                void configure(Vehicle*, bool _in_store, bool _allow_full_control);
      		void update();
       		void render() const;
 
@@ -37,7 +37,7 @@ class GuiShip
                 bool in_store;
                 bool allow_full_control;
                 
-      	      	Ship* ship;
+      	      	Vehicle* vehicle;
       		Skill* skill;
       		
       		std::vector<Button*> button_vec;

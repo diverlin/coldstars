@@ -45,7 +45,7 @@ bool g_MOUSE_RIGHT_BUTTON;
 int TURN_TIME = 150;  //turn time, depends on game fps
 int TURN_COUNT = 0; 
         
-sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.4.29 (SFML/C++)");
+sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.4.30 (SFML/C++)");
 sf::Font g_FONT;
 
 sf::Clock g_CLOCK;
@@ -77,7 +77,7 @@ Galaxy* g_GALAXY;
 Player* pPLAYER;    
 
 /* GUI */
-GuiShip* g_GUI_SHIP;   
+GuiVehicle* g_GUI_VEHICLE;   
 GuiSpace* g_GUI_SPACE;  
 GuiKosmoport* g_GUI_KOSMOPORT;
 GuiMap* g_GUI_MAP;
@@ -96,11 +96,10 @@ SimpleIdGenerator   g_BOMB_ID_GENERATOR  = SimpleIdGenerator();
 SimpleIdGenerator   g_BLACKHOLE_ID_GENERATOR  = SimpleIdGenerator();
 SimpleIdGenerator   g_EQUIPMENT_ID_GENERATOR  = SimpleIdGenerator();
 SimpleIdGenerator   g_MODULE_ID_GENERATOR  = SimpleIdGenerator();
-SimpleIdGenerator   g_SHIP_ID_GENERATOR  = SimpleIdGenerator();
+SimpleIdGenerator   g_VEHICLE_ID_GENERATOR  = SimpleIdGenerator();
 SimpleIdGenerator   g_PLAYER_ID_GENERATOR  = SimpleIdGenerator();
 SimpleIdGenerator   g_NPC_ID_GENERATOR  = SimpleIdGenerator();
-SimpleIdGenerator   g_SPACESTATION_ID_GENERATOR  = SimpleIdGenerator();
-SimpleIdGenerator   g_SATELLITE_ID_GENERATOR  = SimpleIdGenerator();
+
 
 SimpleIdGenerator   g_TEXTURE_ID_GENERATOR = SimpleIdGenerator();
 DetaliedIdGenerator g_TYPE_ID_GENERATOR    = DetaliedIdGenerator(); 

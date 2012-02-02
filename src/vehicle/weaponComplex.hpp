@@ -27,7 +27,7 @@ class WeaponComplex
       		WeaponComplex();
       		~WeaponComplex();
       		
-      		void postCreateInit(int, Rect, VehicleCommon*, bool, TextureOb*);
+      		void postCreateInit(int, Rect, Vehicle*, bool, TextureOb*);
       
       		ItemSlot weapon_slot1;
         	ItemSlot weapon_slot2;

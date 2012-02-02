@@ -50,5 +50,7 @@ void generateNumPlanets(StarSystem* _starsystem, int planet_per_system);
  
 void generateNumFriendlyNPC(StarSystem* _starsystem, int ship_per_system);    
 void generateNumEnemyNPC(StarSystem* _starsystem, int ship_per_system);
+
+void generateSpaceStations(StarSystem* starsystem, int spacestation_per_system);
      		
 #endif 

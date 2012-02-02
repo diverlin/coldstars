@@ -121,7 +121,7 @@ void Store :: mouseControl()
                                 	unsigned int _price = slot_vec[i]->getItemPrice();
                                 	if (pPLAYER->getPilot()->getCredits() >= _price)
                                 	{
-                                		pPLAYER->getShip()->getEmptyOtsecSlot()->SwapItemWith(slot_vec[i]); 
+                                		pPLAYER->getVehicle()->getEmptyOtsecSlot()->SwapItemWith(slot_vec[i]); 
                                 		pPLAYER->getPilot()->decreaseCredits(_price);                     	                                       
                                         }
                                 }

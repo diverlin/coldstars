@@ -82,7 +82,7 @@ class TextureManager
 
 
         	// SPACE OBJECTS
-        	std::vector<TextureOb*> spacestation_texOb_vec;
+        	std::vector<TextureOb*> starbase_texOb_vec;
         	std::vector<TextureOb*> satellite_texOb_vec;
         	std::vector<TextureOb*> star_texOb_vec;
         	std::vector<TextureOb*> planet_texOb_vec;

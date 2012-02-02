@@ -25,10 +25,10 @@ class ItemSlot
 {   
 	public:        
         	ItemSlot();
-		ItemSlot(int _subtype_id, VehicleCommon* _owner_vehicle, TextureOb* _texOb, int _pos_x, int _pos_y, int w, int h);
+		ItemSlot(int _subtype_id, Vehicle* _owner_vehicle, TextureOb* _texOb, int _pos_x, int _pos_y, int w, int h);
 		~ItemSlot();
                 
-                void setShipOwner(Ship*);
+                void setOwner(Vehicle*);
                 void bindTurrel(Turrel*);
                                 
                 int getTypeId()        const;
@@ -45,7 +45,7 @@ class ItemSlot
                 void setFlashingStatus(bool new_status);
                       
                 Rect& getRect();
-                VehicleCommon* getOwnerVehicle();
+                Vehicle* getOwnerVehicle();
                 
                 RocketEquipment*    getRocketEquipment()    const;
                 LazerEquipment*     getLazerEquipment()     const;
@@ -74,7 +74,7 @@ class ItemSlot
                 Bomb* getBomb() const;
                 //Artefact* getArtefact() const;
                 GoodsPack* getGoodsPack() const;
-                Ship* getShip() const;
+                Vehicle* getVehicle() const;
 
                 TextureOb* getItemTexOb() const;
 		int getItemMass() const; 
@@ -118,7 +118,7 @@ class ItemSlot
                 
                 Rect rect;
                                 
-                VehicleCommon* owner_vehicle;  // reference to the ship_owenr                
+                Vehicle* owner_vehicle;  // reference to the ship_owenr                
                 Turrel* turrel;    // only for weapons slot
                 
                 RocketEquipment*    rocket_equipment;
@@ -147,7 +147,7 @@ class ItemSlot
 		
 		GoodsPack* goods_pack;
 		Bomb*      bomb;
-		Ship* 	   ship;
+		Vehicle*   vehicle;
 		//Artefact   artefact;
 		
 		void insert(RocketEquipment*);
@@ -175,7 +175,7 @@ class ItemSlot
 		void insert(GrappleModule*);
 
 		void insert(Bomb*);
-		void insert(Ship*);
+		void insert(Vehicle*);
 		//void insert(Artefact*);
 				
 		void resetFlags();

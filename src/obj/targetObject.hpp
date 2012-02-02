@@ -45,7 +45,7 @@ class TargetObject
 		Asteroid* getAsteroid();                
                 Mineral* getMineral();
                 Container* getContainer();
-                Ship* getShip();
+                Vehicle* getVehicle();
                 Npc* getNpc() const;
                 StarSystem* getStarSystem();
                 Bomb* getBomb() const;
@@ -67,7 +67,7 @@ class TargetObject
                 Asteroid*   asteroid;
                 Mineral*    mineral;
                 Container*  container;
-                Ship*       ship;
+                Vehicle*    vehicle;
                 Npc*	    npc;
                 StarSystem* starsystem;
                 Bomb*       bomb;
@@ -82,7 +82,7 @@ class TargetObject
 		void set(Asteroid*);
 		void set(Mineral*);
 		void set(Container*);
-		void set(Ship*);
+		void set(Vehicle*);
 		void set(Npc*);
 		void set(StarSystem*);
 		void set(Bomb*);

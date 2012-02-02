@@ -28,7 +28,7 @@ void TextureManager :: manage(TextureOb* texOb)
 {
 	switch(texOb->type_id)
 	{
-	  	case SPACESTATION_TEXTURE_ID: { spacestation_texOb_vec.push_back(texOb);    break; }       
+	  	case STARBASE_TEXTURE_ID:     { starbase_texOb_vec.push_back(texOb);    break; }       
 	 	case SATELLITE_TEXTURE_ID:    { satellite_texOb_vec.push_back(texOb);   break; }       
 	  		  		
   		case SLOT_TEXTURE_ID:        { slot_texOb_vec.push_back(texOb);        break; }       
@@ -436,7 +436,7 @@ TextureOb* TextureManager :: getRandomTexOb(int texture_type_id)
 {
 	switch(texture_type_id)
 	{
-		case SPACESTATION_TEXTURE_ID:     { return getRandomTexObFromList(&spacestation_texOb_vec);         break; }
+		case STARBASE_TEXTURE_ID:         { return getRandomTexObFromList(&starbase_texOb_vec);             break; }
 		case SATELLITE_TEXTURE_ID:        { return getRandomTexObFromList(&satellite_texOb_vec);            break; }
 					
 		case SLOT_TEXTURE_ID:             { return getRandomTexObFromList(&slot_texOb_vec);                 break; }

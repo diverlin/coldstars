@@ -17,11 +17,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef VEHICLECOMMON_H
-#define VEHICLECOMMON_H
+#ifndef VEHICLE_H
+#define VEHICLE_H
 
 
-class VehicleCommon : public BaseSpaceObject
+class Vehicle : public BaseSpaceObject
 {   
     	public:
                 void setNpc(Npc*);
@@ -37,8 +37,8 @@ class VehicleCommon : public BaseSpaceObject
        	        ItemSlot* getEmptyOtsecSlot();
        	        ItemSlot* getOtsecSlotWithGoods(int);
        	        
-       	        VehicleCommon();
-        	~VehicleCommon();  
+       	        Vehicle();
+        	~Vehicle();  
         	
         	void postCreateInit();
         	

@@ -35,7 +35,7 @@ class StarSystem
     		std::vector<Container*>    CONTAINER_vec;
     		std::vector<RocketBullet*> ROCKET_vec;
     		std::vector<BlackHole*>    BLACKHOLE_vec;
-    		std::vector<SpaceStation*> SPACESTATION_vec;
+    		std::vector<StarBase*>     STARBASE_vec;
     		std::vector<Satellite*>    SATELLITE_vec;
     		    		
 		std::vector<Ship*> SHIP_inSPACE_vec;
@@ -87,10 +87,9 @@ class StarSystem
     		//// TRANSITION
                 void addToHyperJumpQueue(Npc*);
                                 
-    		void moveToSpace(VehicleCommon*);
-    		void moveToSpace(Npc*);
+    		void addToSpace(Vehicle*, vec2f, float);
+    		void addToSpace(Npc*);
 
-    		
                 void add(Star*);
                 void add(Planet*);
     		void add(Asteroid*);
@@ -117,7 +116,7 @@ class StarSystem
    		
    		//void addToRemoveFromOuterSpaceQueue(Mineral*);
    		void addToRemoveFromOuterSpaceQueue(Bomb*);
-   		void addToRemoveFromOuterSpaceQueue(Ship*);
+   		void addToRemoveFromOuterSpaceQueue(Vehicle*);
    		    		
     	private:
                 int id, type_id;
@@ -155,7 +154,7 @@ class StarSystem
     		std::vector<Container*>    visible_CONTAINER_vec;
     		std::vector<RocketBullet*> visible_ROCKET_vec;
     		std::vector<BlackHole*>    visible_BLACKHOLE_vec;
-    		std::vector<SpaceStation*> visible_SPACESTATION_vec;
+    		std::vector<StarBase*>     visible_STARBASE_vec;
     		std::vector<Satellite*>    visible_SATELLITE_vec;
     		
     		std::vector<Ship*>         visible_SHIP_vec;
@@ -165,7 +164,7 @@ class StarSystem
     		std::vector<Bomb*>         remove_BOMB_queue;
     		std::vector<Mineral*>      remove_MINERAL_queue;
     		std::vector<Ship*>         remove_SHIP_queue;
-    		std::vector<SpaceStation*> remove_SPACESTATION_queue;
+    		std::vector<StarBase*>     remove_STARBASE_queue;
     		std::vector<Satellite*>    remove_SATELLITE_queue;
     		
     		//

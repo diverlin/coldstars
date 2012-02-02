@@ -33,7 +33,7 @@ void GuiMap :: bindGalaxy(Galaxy* _galaxy)
 
 bool GuiMap :: update()
 {
-     	if (pPLAYER->getShip()->ableTo.HJUMP == true)
+     	if (pPLAYER->getVehicle()->ableTo.HJUMP == true)
      	{
         	int mx  = g_MOUSE_POS_X;
         	int my  = g_VIEW_HEIGHT - g_MOUSE_POS_Y; 
@@ -49,12 +49,12 @@ bool GuiMap :: update()
                    			int ss_ss_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->getPosition(), 
                    				       			    pPLAYER->getPilot()->getStarSystem()->getPosition() );
                    				       
-                   			if ( (ss_ss_dist < pPLAYER->getShip()->drive_slot.getDriveEquipment()->getHyper()) && (ss_ss_dist < pPLAYER->getShip()->bak_slot.getBakEquipment()->getFuel()) )
+                   			if ( (ss_ss_dist < pPLAYER->getVehicle()->drive_slot.getDriveEquipment()->getHyper()) && (ss_ss_dist < pPLAYER->getVehicle()->bak_slot.getBakEquipment()->getFuel()) )
                       			{
                       				if (lmb == true)
                       				{ 
                                                         // debug
-                                                        pPLAYER->getStarSystem()->removeShip(pPLAYER->getShip()->getId());  
+                                                        pPLAYER->getStarSystem()->removeShip(pPLAYER->getVehicle()->getId());  
                                                         pPLAYER->getStarSystem()->removeNpc(pPLAYER->getPilot()->getId(), pPLAYER->getPilot()->getSubTypeId());  
                                                         galaxy->STARSYSTEM_vec[si]->addToHyperJumpQueue(pPLAYER->getPilot());    
                           				pPLAYER->setStarSystem(galaxy->STARSYSTEM_vec[si]);                     
