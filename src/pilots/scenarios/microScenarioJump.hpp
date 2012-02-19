@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MICROSCENARIOUMP_H
 #define MICROSCENARIOUMP_H
 
-class MicroScenarioJump : public MicroScenarioBase
+class MicroScenarioJump : public ScenarioBase
 {
 	public:
 		MicroScenarioJump();

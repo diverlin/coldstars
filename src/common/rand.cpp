@@ -16,14 +16,18 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-
-int getRandInt(int range_start, int range_end)
+float getRandFloat(float low, float high)
 {
-    	if (range_start != range_end)
-       		return rand()%(range_end-range_start) + range_start;
+        float precision = 100000.0;
+        return (float)getRandInt((int)precision*low, (int)precision*high)/precision;
+}
+
+int getRandInt(int low, int high)
+{
+    	if (low != high)
+       		return rand()%(high-low) + low;
    	else
-       		return range_start;
+       		return low;
 }
 
 int getRandSign()

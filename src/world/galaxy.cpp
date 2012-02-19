@@ -59,22 +59,19 @@ StarSystem* Galaxy :: getRandomCapturedStarSystem()
 }
      		
 
-void Galaxy :: update(int timer)
+void Galaxy :: update(int time)
 {
-	for (unsigned int si = 0; si < STARSYSTEM_vec.size(); si++)
+	for (unsigned int i = 0; i < STARSYSTEM_vec.size(); i++)
      	{
      		if (g_DEBUG == false)
      		{
-     			if (STARSYSTEM_vec[si]->getDetailedSimulationFlag() == true)
-     				STARSYSTEM_vec[si]->update_TRUE(timer);
-     			else
-     		     		STARSYSTEM_vec[si]->update_FALSE(timer);     		     	
+			STARSYSTEM_vec[i]->update(time, true);  //STARSYSTEM_vec[i]->getDetailedSimulationFlag()
      		}
      	}
      	
 	if (g_DEBUG == true)
 	{
-		pPLAYER->getStarSystem()->update_TRUE(timer);
+		pPLAYER->getStarSystem()->update(time, true);
 	}
 }
 
@@ -108,8 +105,8 @@ StarSystem* generateEntireStarSystem()
         vec2f _center(getRandInt(MAP_OFFSET_X, g_VIEW_WIDTH - 3*MAP_OFFSET_X), g_VIEW_HEIGHT - getRandInt(MAP_OFFSET_Y, g_VIEW_HEIGHT - 2*MAP_OFFSET_Y) );			 
         starsystem->setPosition(_center);
 
-        Star* star = createStar();    
-        starsystem->add(star);
+        Star* star = getNewStar();    
+        starsystem->addToSpace(star);
         
         int distNebula_maxNum = getRandInt(4,7);
         int distStar_maxNum = getRandInt(40, 60);
@@ -117,10 +114,10 @@ StarSystem* generateEntireStarSystem()
           
         generateNumPlanets(starsystem, getRandInt(PLANET_PER_SYSTEM_MIN, PLANET_PER_SYSTEM_MAX));
         
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 0; i++)
         {
         	BlackHole* bh = getNewBlackHole();
-        	starsystem->add(bh, vec2f((float)getRandInt(0, 3000), (float)getRandInt(0, 3000)));
+        	starsystem->addToSpace(bh, vec2f((float)getRandInt(0, 3000), (float)getRandInt(0, 3000)));
         }
 
         if (getRandBool())
@@ -128,7 +125,7 @@ StarSystem* generateEntireStarSystem()
         else
                 generateNumEnemyNPC(starsystem, getRandInt(ENEMY_SHIP_PER_SYSTEM_MIN, ENEMY_SHIP_PER_SYSTEM_MAX));
                       
-        generateSpaceStations(starsystem, 10);
+        generateSpaceStations(starsystem, 3);
                       
         return starsystem; 
 }
@@ -141,13 +138,13 @@ void generateBackground(StarSystem* starsystem, int distNebula_maxNum, int distS
         for(int i = 0; i < distNebula_maxNum; i++)
         { 
 		DistantNebulaBgEffect* dn = createDistantNebula(_color_id);
-                starsystem->add(dn);
+                starsystem->addToSpace(dn);
         } 
 
         for(int i = 0; i < distStar_maxNum; i++)
         { 
 		DistantStarBgEffect* ds = createDistantStar();
-                starsystem->add(ds);
+                starsystem->addToSpace(ds);
         } 
 }
 
@@ -166,8 +163,14 @@ void generateNumPlanets(StarSystem* starsystem, int planet_per_system)
 
                 offset = orbit_radius;
 
-                Planet* planet = createPlanet(orbit_radius);
-                starsystem->add(planet);
+                Planet* planet = getNewPlanet(orbit_radius);
+
+                starsystem->addToSpace(planet);
+                
+                Satellite* satellite = getNewSatellite();
+                equip((VehicleBase*)satellite);           		// improove
+                        	
+                starsystem->addToSpace((VehicleBase*)satellite, vec2f(0, 0), 0, planet);
         }
 }
 
@@ -194,7 +197,7 @@ void generateNumFriendlyNPC(StarSystem* starsystem, int ship_per_system)
         	int weapons_num = getRandInt(1, 5);
         	Ship* ship = shipGenerator(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
        
-        	equip((Vehicle*)ship);            		// improove
+        	equip((VehicleBase*)ship);            	// improove
         	ship->updateAllStuff(); 		// improove
         
         	npc->bind(ship);
@@ -202,7 +205,7 @@ void generateNumFriendlyNPC(StarSystem* starsystem, int ship_per_system)
 		vec2f center(getRandInt(0, 800), getRandInt(0, 800));
 		float angle = getRandInt(0, 360);  
 		
-        	starsystem->addToSpace(ship, center, angle);
+        	starsystem->addToSpace(ship, center, angle, NULL);
         	starsystem->addToSpace(npc);
     	}
 }
@@ -227,16 +230,21 @@ void generateNumEnemyNPC(StarSystem* starsystem, int ship_per_system)
         	int weapons_num = getRandInt(1, 5);
         	Ship* ship = shipGenerator(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
        
-        	equip((Vehicle*)ship);            // improove
-        	ship->updateAllStuff(); 		// improove
+        	equip((VehicleBase*)ship);            // improove
+        	ship->updateAllStuff(); 	  // improove
         
         	npc->bind(ship);
 
 		vec2f center(getRandInt(0, 800), getRandInt(0, 800));
 		float angle = getRandInt(0, 360);  
 		
-        	starsystem->addToSpace(ship, center, angle);
+        	starsystem->addToSpace(ship, center, angle, NULL);
         	starsystem->addToSpace(npc);
+        	
+        	Satellite* satellite = getNewSatellite();
+                equip((VehicleBase*)satellite);           		// improove
+                        	
+                starsystem->addToSpace((VehicleBase*)satellite, vec2f(0, 0), 0, ship);
     	}
 }
 
@@ -266,8 +274,13 @@ void generateSpaceStations(StarSystem* starsystem, int spacestation_per_system)
 
 		vec2f center(getRandInt(0, 800), getRandInt(0, 800));
 		float angle = getRandInt(0, 360);  
-		
-        	starsystem->addToSpace(starbase, center, angle);
+                
+        	starsystem->addToSpace(starbase, center, angle, NULL);
         	starsystem->addToSpace(npc);
+        	
+		Satellite* satellite = getNewSatellite();
+                equip((VehicleBase*)satellite);           		// improove
+                        	
+                starsystem->addToSpace((VehicleBase*)satellite, vec2f(0, 0), 0, starbase);
     	}
 }

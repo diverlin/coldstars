@@ -32,6 +32,7 @@ class TextureOb
         	int size_id;      // counting from wxh of sprite
         
         	int color_id;     // probably color_rgb will be more usefull
+                //std::vector<int> color_id_vec; // used for particles sprite sheet
         	bool is_rotated;
         
         	float brightThreshold;
@@ -41,7 +42,6 @@ class TextureOb
 
         	std::string path;
         	bool use_alpha; 
-
 		
 		std::vector<vec2f> texCoord_bottomLeft_vec;
         	std::vector<vec2f> texCoord_bottomRight_vec;
@@ -49,20 +49,27 @@ class TextureOb
         	std::vector<vec2f> texCoord_topRight_vec;
 
         	GLuint texture;
-        	int w, h;
-        	int w_slice, h_slice;
 
         	bool is_loaded, is_shared;
         
         	TextureOb();
-        	TextureOb(int _type_id, std::string _path, bool _use_alpha, std::vector<int>* arg, int _columns_num = 1, int _rows_num = 1, float _fps = 0);
+        	TextureOb(int _type_id, std::string _path, bool _use_alpha, std::vector<int>* arg, int _columns_num = 1, int _rows_num = 1, int _fps = 0);
 
+        	int getFrameWidth() const;
+        	int getFrameHeight() const;
+        	
         	void loadToVRAM();
         	void removeFromVRAM();
 
         	int updateAnimationFrame();
+        	
+                //int getParticleFrameNumByColorId(int);
+
 
 	private:
+	        int w, h;
+        	int w_slice, h_slice;
+        	
 	        bool is_animated;
         	float fps;
 
@@ -71,7 +78,7 @@ class TextureOb
         	float last_update_time;
         	float delay; 
         	
-        	void createTextureCoords(int _rows_num, int _columns_num, float _fps);
+        	void createTextureCoords(int _rows_num, int _columns_num, int _fps);
              	void addTexCoordQuad(float _w_start, float _h_start, float _w_offset, float _h_offset);
              	        	
         	void slotArgManager(std::vector<int>*);

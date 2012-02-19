@@ -25,7 +25,7 @@ MacroScenarioStarSystemLiberation :: ~MacroScenarioStarSystemLiberation()
 
 void MacroScenarioStarSystemLiberation :: update_inStatic(Npc* _npc) const
 {
-	if ( _npc->getStarSystem()->getId() != _npc->getStateMachine()->getCurrentMacroTask()->getTarget()->getObId() )
+	if ( _npc->getStarSystem()->getId() != _npc->getStateMachine()->getCurrentMacroTask()->getTarget()->getId() )
 	{
 		//if (_npc->getMicroTask()->getTarget()->getObId() != _npc->getMacroTaskMain()->getTarget()->getStarSystem()->getId())
 		{
@@ -34,7 +34,7 @@ void MacroScenarioStarSystemLiberation :: update_inStatic(Npc* _npc) const
 	}
 	else
 	{
-		if (_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getObTypeId() != NPC_ID)
+		if (_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getTypeId() != NPC_ID)
 		{
 			Npc* _target_npc = _npc->getStarSystem()->getRandNpc(&RACES_EVIL_LIST);
 			if (_target_npc != NULL)
@@ -51,5 +51,5 @@ void MacroScenarioStarSystemLiberation :: update_inStatic(Npc* _npc) const
 
 std::string MacroScenarioStarSystemLiberation :: getDescription(Npc* _npc) const
 {
-	return "MacroScenarioStarSystemLiberation: ss_id = " + int2str(_npc->getStateMachine()->getCurrentMacroTask()->getTarget()->getObId());
+	return "MacroScenarioStarSystemLiberation: ss_id = " + int2str(_npc->getStateMachine()->getCurrentMacroTask()->getTarget()->getId());
 }

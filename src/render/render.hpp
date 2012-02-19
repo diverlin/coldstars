@@ -73,8 +73,8 @@ void drawLine(TextureOb* texOb,
 void drawSimpleColoredText(std::string str, 
 			   vec2f pos, 
 			   Color4i color,
-			   float scroll_x = g_SCROLL_COORD_X, 
-			   float scroll_y = g_SCROLL_COORD_Y);
+			   float scroll_x = 0.0, 
+			   float scroll_y = 0.0);
 
 
 
@@ -83,8 +83,8 @@ void drawInfoIn2Column(
                 std::vector<std::string>* pInfo_value_list, 
                 float center_x, 
                 float center_y,
-                float scroll_x = g_SCROLL_COORD_X,
-                float scroll_y = g_SCROLL_COORD_Y);
+                float scroll_x = 0.0,
+                float scroll_y = 0.0);
 
 
 void drawSimpleText(std:: string str, int font_size, float pos_x, float pos_y);

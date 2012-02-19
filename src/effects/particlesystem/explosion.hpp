@@ -21,28 +21,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define EXPLOSION_H
 
 
-
-class ExplosionEffect
+class ExplosionEffect : public BaseParticleSystem
 { 
     	public:
-       		ExplosionEffect(TextureOb* _texOb, vec2f _center_pos, ParticleData _data_particle, int _num_particles);       		       
-       		~ExplosionEffect();
-
-		bool getAlive() const;
+       		ExplosionEffect();       
+       		virtual ~ExplosionEffect();
 		
-       		void update();
-       		void render();
+       		virtual void update();
+       		virtual void render();
        		
+                void createParticles();
        	private:
-       	    	bool is_alive;  
-   
-          	std::vector<Particle*> particles_vec;  
-          	
-       	        TextureOb* texOb;     	
+
 };
 
 
-void createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize);
+void createExplosion(StarSystem*, vec2f, int obSize);
 
 
 #endif 

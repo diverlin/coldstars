@@ -17,109 +17,65 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-
-Particle :: Particle(vec2f _pos_start, ParticleData _data_particle, bool _randomize_life_time)
+Particle :: Particle(ParticleData _data_particle)
 {
 	is_alive = true;
   
 	data_particle = _data_particle;
 
-     	pos   = _pos_start;      	
-      	alpha = _data_particle.alpha_start;
+        color = _data_particle.color_start;
+                
       	size  = _data_particle.size_start;
-
-	if (_randomize_life_time == true)
-	{
-        	float speed_rate = getRandInt(5,8) * 0.1; //???? 
-    		data_particle.d_size         *= speed_rate;
-    		data_particle.velocity_start *= speed_rate;
-    	}
-    		
-        calcRandomVelocity();	
 } 
       
 Particle :: ~Particle()
 {}
 
-      			 
+void Particle :: setPosition(vec2f pos) { this->pos = pos; } 
 void Particle :: setVelocity(vec2f _velocity) { d_pos = _velocity; }
 
-bool Particle :: getAlive() const  { return is_alive; }   
-float Particle :: getAlpha() const { return alpha; }
-float Particle :: getAlphaStart() const { return data_particle.alpha_start; }
-      		
+bool Particle :: getAlive()       const { return is_alive; }   
+float Particle :: getAlpha()      const { return color.a; }
+float Particle :: getAlphaStart() const { return data_particle.color_start.a; }
 
-void Particle :: calcRandomVelocity()
+
+
+void Particle :: randomizeLifeTime(float low, float high)
 {
-     	if (getRandBool() == true)
-     	{
-        	calcFastRandomVelocity();
-        }
-     	else
-     	{
-        	calcAccurateRandomVelocity();
-        }
+        float speed_rate              = getRandFloat(low, high);   // 0.5, 0.8
+        data_particle.d_size         *= speed_rate;
+        data_particle.velocity_start *= speed_rate;
 }
-
 
 void Particle :: randomize_d_alpha(float val1_f, float val2_f)
 {
 	float val1_i = val1_f*10000;
 	float val2_i = val2_f*10000;
 		
-	data_particle.d_alpha = getRandInt(val1_i, val2_i)/1000.0;
+	data_particle.color_delta.a = getRandInt(val1_i, val2_i)/1000.0;
 }            	
       		
-void Particle :: calcFastRandomVelocity()
-{
-    	float dx_n = getRandInt(0, 10)*getRandSign()*0.1;
-    	float dy_n = getRandInt(0, 10)*getRandSign()*0.1;
 
-    	d_pos.x = dx_n * data_particle.velocity_start;
-    	d_pos.y = dy_n * data_particle.velocity_start;
-}
+//void Particle :: reborn(vec2f center)
+//{       	 
+	//is_alive = true;
+       			
+	//alpha = data_particle.alpha_start;
+	//size  = data_particle.size_start;
 
-
-void Particle :: calcAccurateRandomVelocity()
-{
-    	float _len   = getRandInt(50, 100);
-    	float _angle = getRandInt(0, 360)/57.0;
-
-    	float target_x = pos.x + sin(_angle) * _len;
-    	float target_y = pos.y + cos(_angle) * _len;
-
-    	float xl = (target_x - pos.x);
-    	float yl = (target_y - pos.y);
-
-    	float dx_n = xl/_len;
-    	float dy_n = yl/_len;
-
-    	d_pos.x = dx_n * data_particle.velocity_start;
-    	d_pos.y = dy_n * data_particle.velocity_start;
-}  
+       	////calcRandomVelocity(center);
+//}
 
 
-void Particle :: reborn(vec2f _new_pos_start)
+void Particle :: reborn()
 {       	 
 	is_alive = true;
-       	pos = _new_pos_start;  
+       	//pos = _new_pos_start;  
        			
-	alpha = data_particle.alpha_start;
+	color = data_particle.color_start;
 	size  = data_particle.size_start;
 
-       	calcRandomVelocity();
-}
-
-
-void Particle :: reborn(vec2f _new_pos_start, vec2f _d_pos)
-{       	 
-	is_alive = true;
-       	pos = _new_pos_start;  
-       			
-	alpha = data_particle.alpha_start;
-	size  = data_particle.size_start;
-
-       	d_pos = _d_pos;
+       	//d_pos = _d_pos;
 }
       		
 
@@ -128,10 +84,10 @@ void Particle :: update()
     	pos.x += d_pos.x;
     	pos.y += d_pos.y; 
     	
-    	alpha -= data_particle.d_alpha;
+    	color.a -= data_particle.color_delta.a;
     	size  -= data_particle.d_size;
           
-    	if ((alpha < data_particle.alpha_end) or (size < data_particle.size_end))
+    	if ((color.a < data_particle.color_end.a) or (size < data_particle.size_end))
     	{
        	       	is_alive = false;
     	}
@@ -144,7 +100,7 @@ void Particle :: render() const
      		glPointSize(size);
         	
         	glBegin(GL_POINTS);           		
-     			glColor4f(1.0, 1.0, 1.0, alpha);
+     			glColor4f(color.r, color.g, color.b, color.a);
      			glVertex3f(pos.x, pos.y, -2);
        		glEnd();
      	}

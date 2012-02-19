@@ -18,52 +18,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-TrailEffect :: TrailEffect(TextureOb* _texOb, 
-			   vec2f* _pTo_start_pos, 
-			   vec2f* _pTo_target_pos, 
-			   ParticleData _data_particle,
-			   unsigned int _num_particles)
+TrailEffect :: TrailEffect(vec2f* _pTo_start_pos, 
+			   vec2f* _pTo_target_pos)
 {
-     	texOb = _texOb;
-     	data_particle = _data_particle;
- 
-     	pTo_start_pos_x = &_pTo_start_pos->x;       //ob.points.midLeft
-     	pTo_start_pos_y = &_pTo_start_pos->y;
-
-     	pTo_target_pos_x = &_pTo_target_pos->x;     //ob.points.midFarLeft
-     	pTo_target_pos_y = &_pTo_target_pos->y;  
-
-     	particle_offset = (_data_particle.alpha_start - _data_particle.alpha_end) / _num_particles; 
-
-
-     	updateVelocity();
-     	
-	bool _variation = false;
-     	for (unsigned int i = 0; i < _num_particles; i++)
-     	{
-         	Particle* particle = new Particle(*_pTo_start_pos, _data_particle, _variation);  
-         				   
-         	particle->setVelocity(velocity);
-         	particles_vec.push_back(particle);
-     	}
-
-     	putParticlesToInitPos();
+    	pTo_start_pos  = _pTo_start_pos;      //ob.points.midLeft
+     	pTo_target_pos = _pTo_target_pos;     //ob.points.midFarLeft
 }
 
 
 TrailEffect :: ~TrailEffect()
+{}
+
+void TrailEffect :: createParticles()
 {
-	for (unsigned int i = 0; i < particles_vec.size(); i++) 
+     	for (unsigned int i = 0; i < num_particles; i++)
      	{
-  		delete particles_vec[i];
+         	Particle* particle = new Particle(data_particle);  
+                particle->setPosition(*pTo_start_pos);
+         	particle->setVelocity(velocity);
+         	particles_vec.push_back(particle);
      	}
 }
 
 
 void TrailEffect :: updateVelocity()
 {
-     	float xl = ((*pTo_target_pos_x) - (*pTo_start_pos_x));
-     	float yl = ((*pTo_target_pos_y) - (*pTo_start_pos_y));
+     	float xl = (pTo_target_pos->x - pTo_start_pos->x);
+     	float yl = (pTo_target_pos->y - pTo_start_pos->y);
      	float l = sqrt(xl*xl + yl*yl);
 
      	float d_xn = xl / l;
@@ -76,6 +57,8 @@ void TrailEffect :: updateVelocity()
 
 void TrailEffect :: putParticlesToInitPos()
 {
+        float particle_offset = (data_particle.color_start.a - data_particle.color_end.a) / num_particles; 
+        
      	for (unsigned int i = 0; i < particles_vec.size(); i++) 
      	{
          	while ( particles_vec[i]->getAlpha() > ( particles_vec[i]->getAlphaStart() - i * particle_offset) ) 
@@ -98,7 +81,9 @@ void TrailEffect :: update()
             	}
             	else
             	{
-            		particles_vec[i]->reborn(vec2f(*pTo_start_pos_x, *pTo_start_pos_y), velocity);
+                        particles_vec[i]->setPosition(*pTo_start_pos);
+                        particles_vec[i]->setVelocity(velocity);
+            		particles_vec[i]->reborn();
             	}
 	}
 }
@@ -107,8 +92,7 @@ void TrailEffect :: update()
 
 void TrailEffect :: render()
 {
-       	enable_POINTSPRITE();
-       	
+       	enable_POINTSPRITE();       	
      		glBindTexture(GL_TEXTURE_2D, texOb->texture);
      		for (unsigned int i = 0; i < particles_vec.size(); i++) 
      		{
@@ -123,9 +107,8 @@ void TrailEffect :: render()
 
 TrailEffect* createTrailEffect(int size_id, vec2f* pTo_pos, vec2f* pTo_target_pos)
 {
-	TextureOb* texOb_particle = g_TEXTURE_MANAGER.getParticleTexObByColorId(RED_COLOR_ID);
-
-   	ParticleData data_particle;
+   	ParticleData data_particle;        
+                       
    	data_particle.size_start = 15.0 + size_id;
    	data_particle.size_end   = 0.1;
    	data_particle.d_size     = 0.0;
@@ -133,19 +116,38 @@ TrailEffect* createTrailEffect(int size_id, vec2f* pTo_pos, vec2f* pTo_target_po
    	data_particle.velocity_start = 1.2;
    	data_particle.velocity_end   = 1.2;   	
    	data_particle.d_velocity     = 0.0; 
-   	
-   	data_particle.alpha_start = 0.9;
-   	data_particle.alpha_end   = 0.1;
-   	data_particle.d_alpha     = 0.1;  	
+        
+        data_particle.color_start.r    = 1.0;
+	data_particle.color_start.g    = 1.0;
+	data_particle.color_start.b    = 1.0;
+        data_particle.color_start.a    = 0.9;
+
+	data_particle.color_end.r    = 0.0;
+	data_particle.color_end.g    = 0.0;
+	data_particle.color_end.b    = 0.0;
+        data_particle.color_end.a    = 0.1;
+
+	data_particle.color_delta.r    = 0.0;
+	data_particle.color_delta.g    = 0.0;
+	data_particle.color_delta.b    = 0.0;
+        data_particle.color_delta.a    = 0.1;
+        
    	   	
    	int particles_num = 5;
-   	   	
-   	TrailEffect* drive_trail = new TrailEffect(texOb_particle, 
-   					 	   pTo_pos,  
-   					 	   pTo_target_pos, 
-   					 	   data_particle,
-   					 	   particles_num);
-  	return drive_trail;   	
+                        
+                       
+        TextureOb* texOb_particle = g_TEXTURE_MANAGER.getParticleTexObByColorId(RED_COLOR_ID);
+   	TrailEffect* drive_trail = new TrailEffect(pTo_pos, pTo_target_pos);
+        
+        drive_trail->setTextureOb(texOb_particle);                                 
+        drive_trail->setParticleData(data_particle);
+        drive_trail->setParticlesNum(particles_num);
+        
+        drive_trail->updateVelocity();
+     	drive_trail->createParticles();
+     	drive_trail->putParticlesToInitPos();
+                
+  	return drive_trail;
 }
 
 

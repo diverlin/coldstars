@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MICROSCENARIODOCKING_H
 #define MICROSCENARIODOCKING_H
 
-class MicroScenarioDocking : public MicroScenarioBase
+class MicroScenarioDocking : public ScenarioBase
 {
 	public:
 		MicroScenarioDocking();

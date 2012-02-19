@@ -26,10 +26,10 @@ class GuiVehicle
       		GuiVehicle();
       		~GuiVehicle();
 
-      		void bind(Vehicle*);
+      		void bind(VehicleBase*);
       		void createControlSkillButtons();
 
-                void configure(Vehicle*, bool _in_store, bool _allow_full_control);
+                void configure(VehicleBase*, bool _in_store, bool _allow_full_control);
      		void update();
       		void render() const;
 
@@ -37,29 +37,11 @@ class GuiVehicle
                 bool in_store;
                 bool allow_full_control;
                 
-      	      	Vehicle* vehicle;
+      	      	VehicleBase* vehicle;
       		Skill* skill;
       		
       		std::vector<Button*> button_vec;
-      	
-      	      			Button* increment_attack_button;  
-      				Button* decrement_attack_button;  
-                
-      				Button* increment_defence_button;  
-      				Button* decrement_defence_button;  
-        
-      				Button* increment_leader_button;  
-      				Button* decrement_leader_button; 
-      
-      				Button* increment_trader_button;  
-      				Button* decrement_trader_button; 
-    
-      				Button* increment_technic_button;  
-      				Button* decrement_technic_button; 
-     
-      				Button* increment_diplomat_button;  
-     				Button* decrement_diplomat_button;    
-     		
+  		
      		void manageSkill();
      		void mouseControl();
      		

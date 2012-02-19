@@ -17,62 +17,45 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "damage.hpp"
 
-
-DamageEffect :: DamageEffect(TextureOb* _texOb, 
-			     vec2f* _pCenter,
-			     ParticleData _data_particle,
-			     unsigned int _num_particles)
+DamageEffect :: DamageEffect()
 {
-    	is_alive = true;
-    	is_dying = false;
-
-    	pCenter = _pCenter;
-
-    	texOb = _texOb;
-    	
-    	data_particle = _data_particle;
-
-
-	bool _variation = true;
-   	for (unsigned int i = 0; i < _num_particles; i++)
-   	{
-        	Particle* particle = new Particle(*pCenter, _data_particle, _variation);  
-        	particle->randomize_d_alpha(0.003, 0.006);    					  
-        	particles_vec.push_back(particle);
-    	} 
+	//subtype_id = DAMAGE_EFFECT_ID;
 }
 
 DamageEffect :: ~DamageEffect()
+{}
+
+
+void DamageEffect :: createParticles()
 {
-	for (unsigned int i = 0; i < particles_vec.size(); i++) 
-     	{
-  		delete particles_vec[i];
-     	}
+	for(int i = 0; i < num_particles; i++)
+    	{  
+       		Particle* particle = new Particle(data_particle);
+                particle->setPosition(center);
+       		particle->randomize_d_alpha(0.003, 0.006); //   ??
+       		particle->setVelocity(getRandomVelocity());
+       		particles_vec.push_back(particle);
+    	}
 }
-
-
-bool DamageEffect :: getAlive() const { return is_alive; }
-void DamageEffect :: setDying() { is_dying = true; }
-
 
 void DamageEffect :: update()
 {
      	is_alive = false;
 
-        for (unsigned int pi=0; pi < particles_vec.size(); pi++)
+        for (unsigned int i = 0; i < num_particles; i++)
         {
-                if (particles_vec[pi]->getAlive() == true)
+                if (particles_vec[i]->getAlive() == true)
         	{
-            		particles_vec[pi]->update();
+            		particles_vec[i]->update();
             		is_alive = true;
             	}
             	else
             	{
             		if (is_dying == false)
             		{
-            			particles_vec[pi]->reborn(*pCenter);
+                                particles_vec[i]->setPosition(parent->getPoints()->getCenter());
+            			particles_vec[i]->reborn();
             		}
             	}
         }
@@ -81,9 +64,9 @@ void DamageEffect :: update()
 void DamageEffect :: render()
 {
      	glBindTexture(GL_TEXTURE_2D, texOb->texture);
-	for (unsigned int pi=0; pi < particles_vec.size(); pi++)
+	for (unsigned int i = 0; i < num_particles; i++)
 	{
-       		particles_vec[pi]->render();
+       		particles_vec[i]->render();
        	}
 }
 
@@ -91,24 +74,46 @@ void DamageEffect :: render()
 
 
 
-DamageEffect* createDamageEffect(TextureOb* _texOb, vec2f* _pCenter)
+DamageEffect* getNewDamageEffect(int color_id, SpaceObjectBase* parent)
 {
-	int particles_num = 5;
+	int particles_num = 10;
    
     	ParticleData data_particle;
-        data_particle.size_start = 30;
+        data_particle.size_start = 25;
         data_particle.size_end = 0.1;
-        data_particle.d_size = 0.001; 
+        data_particle.d_size = 0.01; 
         
         data_particle.velocity_start = 1.3;
         data_particle.velocity_end   = 1.3;        
         data_particle.d_velocity   = 0.0;
                 
-	data_particle.alpha_start = 1.0; 
-	data_particle.alpha_end = 0.1; 
-	data_particle.d_alpha = 0;   // is modifed iduvidually for each particle                       
+        data_particle.color_start.r    = 1.0;
+	data_particle.color_start.g    = 1.0;
+	data_particle.color_start.b    = 1.0;
+        data_particle.color_start.a    = 1.0;
 
-	DamageEffect* damage = new DamageEffect(_texOb, _pCenter, data_particle, particles_num);
+	data_particle.color_end.r    = 0.0;
+	data_particle.color_end.g    = 0.0;
+	data_particle.color_end.b    = 0.0;
+        data_particle.color_end.a    = 0.1;
+
+	data_particle.color_delta.r    = 0.0;
+	data_particle.color_delta.g    = 0.0;
+	data_particle.color_delta.b    = 0.0;
+        data_particle.color_delta.a    = 0.0; // is modifed iduvidually for each particle  
+        
+        TextureOb* texOb_particle = g_TEXTURE_MANAGER.getParticleTexObByColorId(color_id);
+                
+	DamageEffect* damage = new DamageEffect();
+        
+        damage->setTextureOb(texOb_particle);        
+        damage->setParticleData(data_particle);
+        damage->setParticlesNum(particles_num);
+                
+        damage->setParent(parent);
+                
+        damage->createParticles();
+                
 	return damage;
 }
 

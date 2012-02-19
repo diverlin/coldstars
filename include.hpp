@@ -16,7 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-class Vehicle;   
+class VehicleBase;   
 class Ship;      
 class Npc;   
 class Observation;
@@ -24,7 +24,13 @@ class StarSystem;
 class ItemSlot;   
 class Turrel;       
 
-#include "src/common/global0.hpp" // used as work around
+class DockingStation;
+class Planet;
+class Star;
+
+class StateMachine;
+class ScenarioBase;
+class AiModelBase;
 
 #include "GL/glew.h"   
 
@@ -60,60 +66,64 @@ class Turrel;
 #include "src/common/rect.hpp"
 
 #include "src/gui/keyEvents.hpp"
+#include "src/items/baseItem.hpp"
+#include "src/items/modules/baseModule.hpp"
+#include "src/items/modules/rocketModule.hpp"
+#include "src/items/modules/lazerModule.hpp"
+#include "src/items/modules/radarModule.hpp"
+#include "src/items/modules/driveModule.hpp"
+#include "src/items/modules/bakModule.hpp"
+#include "src/items/modules/energizerModule.hpp"
+#include "src/items/modules/protectorModule.hpp"
+#include "src/items/modules/droidModule.hpp"
+#include "src/items/modules/freezerModule.hpp"
+#include "src/items/modules/scanerModule.hpp"
+#include "src/items/modules/grappleModule.hpp"
 
-#include "src/modules/commonformodules.hpp"
-#include "src/modules/rocketModule.hpp"
-#include "src/modules/lazerModule.hpp"
-#include "src/modules/radarModule.hpp"
-#include "src/modules/driveModule.hpp"
-#include "src/modules/bakModule.hpp"
-#include "src/modules/energizerModule.hpp"
-#include "src/modules/protectorModule.hpp"
-#include "src/modules/droidModule.hpp"
-#include "src/modules/freezerModule.hpp"
-#include "src/modules/scanerModule.hpp"
-#include "src/modules/grappleModule.hpp"
-
-#include "src/spaceobjects/baseSpaceObject.hpp" 
+#include "src/spaceobjects/spaceObjectBase.hpp" 
 #include "src/spaceobjects/commonForSpaceItems.hpp" 
+
+#include "src/spaceobjects/parts/orbit.hpp" 
 #include "src/spaceobjects/commonForPlanet.hpp" 
-#include "src/spaceobjects/asteroid.hpp"
-#include "src/spaceobjects/mineral.hpp"
-#include "src/vehicle/bomb.hpp"
-#include "src/spaceobjects/container.hpp"
-#include "src/spaceobjects/goodsPack.hpp"
-#include "src/spaceobjects/blackHole.hpp"
+#include "src/spaceobjects/natural/asteroid.hpp"
+#include "src/spaceobjects/natural/mineral.hpp"
+#include "src/items/others/bomb.hpp"
+#include "src/spaceobjects/artificial/container.hpp"
+#include "src/items/others/goodsPack.hpp"
 
-class Planet;
-class StarSystem;
-class Star;
-#include "src/obj/targetObject.hpp" 
+#include "src/effects/particlesystem/particle.hpp"
+#include "src/effects/particlesystem/baseParticleSystem.hpp"
+#include "src/effects/particlesystem/blackHoleEffect.hpp"
+#include "src/effects/particlesystem/explosion.hpp"
+#include "src/effects/particlesystem/trail.hpp"
+#include "src/effects/particlesystem/damage.hpp"
+
+#include "src/spaceobjects/natural/blackHole.hpp"
+
+#include "src/items/equipment/baseEquipment.hpp"
+#include "src/items/equipment/rocketEquipment.hpp"
+#include "src/items/equipment/lazerEquipment.hpp"
+#include "src/items/equipment/radarEquipment.hpp"
+#include "src/items/equipment/driveEquipment.hpp"
+#include "src/items/equipment/bakEquipment.hpp"
+#include "src/items/equipment/energizerEquipment.hpp"
+#include "src/items/equipment/protectorEquipment.hpp"
+#include "src/items/equipment/droidEquipment.hpp"
+#include "src/items/equipment/freezerEquipment.hpp"
+#include "src/items/equipment/scanerEquipment.hpp"
+#include "src/items/equipment/grappleEquipment.hpp"
 
 
-#include "src/equipment/commonforequipment.hpp"
-#include "src/equipment/rocketEquipment.hpp"
-#include "src/equipment/lazerEquipment.hpp"
-#include "src/equipment/radarEquipment.hpp"
-#include "src/equipment/driveEquipment.hpp"
-#include "src/equipment/bakEquipment.hpp"
-#include "src/equipment/energizerEquipment.hpp"
-#include "src/equipment/protectorEquipment.hpp"
-#include "src/equipment/droidEquipment.hpp"
-#include "src/equipment/freezerEquipment.hpp"
-#include "src/equipment/scanerEquipment.hpp"
-#include "src/equipment/grappleEquipment.hpp"
-
-
-#include "src/kosmoport/landingarea.hpp"
-#include "src/kosmoport/angar.hpp"
-#include "src/kosmoport/shop.hpp"
-#include "src/kosmoport/goverment.hpp"
-#include "src/kosmoport/store.hpp"
-#include "src/kosmoport/kosmoport.hpp"
-#include "src/land/land.hpp"
+#include "src/docking/parts/kosmoport/landingarea.hpp"
+#include "src/docking/parts/kosmoport/angar.hpp"
+#include "src/docking/parts/kosmoport/shop.hpp"
+#include "src/docking/parts/kosmoport/goverment.hpp"
+#include "src/docking/parts/kosmoport/store.hpp"
+#include "src/docking/parts/kosmoport/kosmoport.hpp"
+#include "src/docking/parts/land/land.hpp"
 
 #include "src/gui/cursor.hpp"  
-#include "src/player/player.hpp"
+#include "src/pilots/player.hpp"
 
 #include "src/render/render.hpp"
 #include "src/render/glsl.hpp"
@@ -124,51 +134,40 @@ class Star;
 
 #include "src/effects/distantNebulaBg.hpp"
 #include "src/effects/distantStarBg.hpp"
-#include "src/effects/particlesystem/particle.hpp"
-#include "src/effects/particlesystem/explosion.hpp"
-#include "src/effects/particlesystem/trail.hpp"
-#include "src/effects/particlesystem/damage.hpp"
+
 
 #include "src/effects/shield.hpp"  
 
-#include "src/vehicle/rocketBullet.hpp"
+
 #include "src/effects/lazerTrace.hpp"
 
 
-#include "src/spaceobjects/star.hpp"  
-#include "src/spaceobjects/planet.hpp"
+#include "src/spaceobjects/natural/star.hpp"  
+#include "src/docking/dockingStation.hpp" 
+#include "src/spaceobjects/natural/planet.hpp"
 
-#include "src/vehicle/turrel.hpp"
+#include "src/spaceobjects/parts/turrel.hpp"
 
-#include "src/vehicle/itemSlot.hpp"
-#include "src/vehicle/navigator.hpp"
-#include "src/vehicle/weaponComplex.hpp"
-#include "src/vehicle/vehicle.hpp"
-#include "src/vehicle/starBase.hpp"
-#include "src/vehicle/satellite.hpp"
-#include "src/vehicle/ship.hpp"
-
+#include "src/spaceobjects/parts/itemSlot.hpp"
+#include "src/spaceobjects/parts/driveComplex.hpp"
+#include "src/spaceobjects/parts/weaponComplex.hpp"
+#include "src/spaceobjects/vehicleBase.hpp"
+#include "src/spaceobjects/artificial/rocketBullet.hpp"
+#include "src/spaceobjects/artificial/starBase.hpp"
+#include "src/spaceobjects/artificial/satellite.hpp"
+#include "src/spaceobjects/artificial/ship.hpp"
 
 #include "src/skill/skill.hpp"
-#include "src/obj/questGenerator.hpp" 
-class StateMachine;
-
-class MicroScenarioBase;
-class MacroScenarioBase;
-
-class AiModelBase;
 #include "src/pilots/npc.hpp"           
 
-
-//
-#include "src/pilots/scenarios/microScenarioBase.hpp" 
-#include "src/pilots/scenarios/macroScenarioBase.hpp" 
+#include "src/pilots/scenarios/scenarioBase.hpp" 
 
 #include "src/pilots/scenarios/microScenarioDestroy.hpp" 
 #include "src/pilots/scenarios/microScenarioGrab.hpp" 
 #include "src/pilots/scenarios/microScenarioJump.hpp" 
 #include "src/pilots/scenarios/microScenarioDocking.hpp"
 
+#include "src/pilots/scenarios/taskHolder.hpp"
 #include "src/pilots/scenarios/stateMachine.hpp"
 
 #include "src/pilots/scenarios/macroScenarioSelfSafety.hpp"
@@ -190,7 +189,6 @@ class AiModelBase;
 #include "src/world/starsystem.hpp"    
 #include "src/effects/lazerTrace.hpp"
 
-#include "src/vehicle/turrel.hpp"
 #include "src/world/galaxy.hpp"
 #include "src/gui/guiMap.hpp"
 
@@ -221,54 +219,57 @@ class AiModelBase;
 #include "src/world/garbage.cpp"  
 #include "src/world/starsystem.cpp"  
 
-#include "src/spaceobjects/container.cpp"    
-#include "src/spaceobjects/goodsPack.cpp"   
-#include "src/spaceobjects/star.cpp"  
-#include "src/spaceobjects/planet.cpp"
-#include "src/spaceobjects/baseSpaceObject.cpp" 
+#include "src/spaceobjects/artificial/container.cpp"    
+#include "src/items/others/goodsPack.cpp"   
+#include "src/spaceobjects/natural/star.cpp"  
+#include "src/docking/dockingStation.cpp" 
+#include "src/spaceobjects/natural/planet.cpp"
+#include "src/spaceobjects/spaceObjectBase.cpp" 
 #include "src/spaceobjects/commonForSpaceItems.cpp" 
+#include "src/spaceobjects/parts/orbit.cpp"
 #include "src/spaceobjects/commonForPlanet.cpp"
-#include "src/spaceobjects/asteroid.cpp"   
-#include "src/spaceobjects/mineral.cpp" 
-#include "src/vehicle/starBase.cpp" 
-#include "src/vehicle/satellite.cpp" 
-#include "src/vehicle/bomb.cpp" 
-#include "src/spaceobjects/blackHole.cpp"
+#include "src/spaceobjects/natural/asteroid.cpp"   
+#include "src/spaceobjects/natural/mineral.cpp" 
+#include "src/spaceobjects/artificial/starBase.cpp" 
+#include "src/spaceobjects/artificial/satellite.cpp" 
+#include "src/items/others/bomb.cpp" 
+#include "src/spaceobjects/natural/blackHole.cpp"
 
-#include "src/equipment/commonforequipment.cpp"
-#include "src/equipment/rocketEquipment.cpp"
-#include "src/equipment/lazerEquipment.cpp"
-#include "src/equipment/radarEquipment.cpp"
-#include "src/equipment/driveEquipment.cpp"
-#include "src/equipment/bakEquipment.cpp"
-#include "src/equipment/energizerEquipment.cpp"
-#include "src/equipment/protectorEquipment.cpp"
-#include "src/equipment/droidEquipment.cpp"
-#include "src/equipment/freezerEquipment.cpp"
-#include "src/equipment/scanerEquipment.cpp"
-#include "src/equipment/grappleEquipment.cpp"
+#include "src/items/baseItem.cpp"
+#include "src/items/equipment/baseEquipment.cpp"
+#include "src/items/equipment/rocketEquipment.cpp"
+#include "src/items/equipment/lazerEquipment.cpp"
+#include "src/items/equipment/radarEquipment.cpp"
+#include "src/items/equipment/driveEquipment.cpp"
+#include "src/items/equipment/bakEquipment.cpp"
+#include "src/items/equipment/energizerEquipment.cpp"
+#include "src/items/equipment/protectorEquipment.cpp"
+#include "src/items/equipment/droidEquipment.cpp"
+#include "src/items/equipment/freezerEquipment.cpp"
+#include "src/items/equipment/scanerEquipment.cpp"
+#include "src/items/equipment/grappleEquipment.cpp"
 
-#include "src/modules/commonformodules.cpp"
-#include "src/modules/rocketModule.cpp"
-#include "src/modules/lazerModule.cpp"
-#include "src/modules/radarModule.cpp"
-#include "src/modules/driveModule.cpp"
-#include "src/modules/bakModule.cpp"
-#include "src/modules/energizerModule.cpp"
-#include "src/modules/protectorModule.cpp"
-#include "src/modules/droidModule.cpp"
-#include "src/modules/freezerModule.cpp"
-#include "src/modules/scanerModule.cpp"
-#include "src/modules/grappleModule.cpp"
+#include "src/items/modules/baseModule.cpp"
+#include "src/items/modules/rocketModule.cpp"
+#include "src/items/modules/lazerModule.cpp"
+#include "src/items/modules/radarModule.cpp"
+#include "src/items/modules/driveModule.cpp"
+#include "src/items/modules/bakModule.cpp"
+#include "src/items/modules/energizerModule.cpp"
+#include "src/items/modules/protectorModule.cpp"
+#include "src/items/modules/droidModule.cpp"
+#include "src/items/modules/freezerModule.cpp"
+#include "src/items/modules/scanerModule.cpp"
+#include "src/items/modules/grappleModule.cpp"
 
-#include "src/kosmoport/landingarea.cpp"
-#include "src/kosmoport/angar.cpp"
-#include "src/kosmoport/store.cpp"
-#include "src/kosmoport/shop.cpp"
-#include "src/kosmoport/goverment.cpp"
-#include "src/kosmoport/kosmoport.cpp"
+#include "src/docking/parts/kosmoport/landingarea.cpp"
+#include "src/docking/parts/kosmoport/angar.cpp"
+#include "src/docking/parts/kosmoport/store.cpp"
+#include "src/docking/parts/kosmoport/shop.cpp"
+#include "src/docking/parts/kosmoport/goverment.cpp"
+#include "src/docking/parts/kosmoport/kosmoport.cpp"
 
-#include "src/land/land.cpp"
+#include "src/docking/parts/land/land.cpp"
 
 #include "src/gui/button.cpp"
 #include "src/gui/guiSpace.cpp"
@@ -287,39 +288,39 @@ class AiModelBase;
 #include "src/common/rect.cpp"
 #include "src/common/points.cpp"
 
-#include "src/vehicle/itemSlot.cpp"
+#include "src/spaceobjects/parts/itemSlot.cpp"
 
-#include "src/vehicle/weaponComplex.cpp"
-#include "src/vehicle/vehicle.cpp"
-#include "src/vehicle/ship.cpp"
-#include "src/vehicle/navigator.cpp"
-#include "src/vehicle/turrel.cpp"
+#include "src/spaceobjects/parts/weaponComplex.cpp"
+#include "src/spaceobjects/vehicleBase.cpp"
+#include "src/spaceobjects/artificial/ship.cpp"
+#include "src/spaceobjects/parts/driveComplex.cpp"
+#include "src/spaceobjects/parts/turrel.cpp"
 
 #include "src/effects/distantNebulaBg.cpp"
 #include "src/effects/distantStarBg.cpp"
 #include "src/effects/particlesystem/particle.cpp"
+#include "src/effects/particlesystem/baseParticleSystem.cpp"
+#include "src/effects/particlesystem/blackHoleEffect.cpp"
 #include "src/effects/particlesystem/explosion.cpp"
 #include "src/effects/particlesystem/trail.cpp"
 #include "src/effects/particlesystem/damage.cpp"
 #include "src/effects/lazerTrace.cpp"
 #include "src/effects/shield.cpp"
-#include "src/vehicle/rocketBullet.cpp"
+#include "src/spaceobjects/artificial/rocketBullet.cpp"
 
-#include "src/player/player.cpp"
+#include "src/pilots/player.cpp"
 #include "src/skill/skill.cpp"
 
-#include "src/obj/targetObject.cpp"  
-#include "src/obj/questGenerator.cpp" 
 #include "src/pilots/npc.cpp"
 //
-#include "src/pilots/scenarios/microScenarioBase.cpp" 
-#include "src/pilots/scenarios/macroScenarioBase.cpp" 
+#include "src/pilots/scenarios/scenarioBase.cpp" 
 
 #include "src/pilots/scenarios/microScenarioDestroy.cpp" 
 #include "src/pilots/scenarios/microScenarioGrab.cpp" 
 #include "src/pilots/scenarios/microScenarioJump.cpp" 
 #include "src/pilots/scenarios/microScenarioDocking.cpp"
 
+#include "src/pilots/scenarios/taskHolder.cpp"
 #include "src/pilots/scenarios/stateMachine.cpp"
 
 #include "src/pilots/scenarios/macroScenarioSelfSafety.cpp"
@@ -329,13 +330,13 @@ class AiModelBase;
 #include "src/pilots/aiModel/aiModelBase.cpp"
 #include "src/pilots/aiModel/aiModelRanger.cpp"
 #include "src/pilots/aiModel/aiModelConqueror.cpp"
-//
+
 #include "src/pilots/observation.cpp" 
 
 #include "src/common/common.cpp"
-//#include "src/resources/model_obj.cpp"
+
 #include "src/render/render.cpp"
-//#include "src/render/camera.cpp"
+
 #include "src/render/glsl.cpp"
 #include "src/render/fbo.cpp"
 #include "src/render/bloom.cpp"

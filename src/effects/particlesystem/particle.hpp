@@ -24,21 +24,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Particle
 {
 	public:
-      		Particle(vec2f _pos_start, ParticleData, bool _randomize_life_time);	 
-      			      
+      		Particle(ParticleData);       
       		~Particle();
-      		
+
+                void setPosition(vec2f);      		
       		void setVelocity(vec2f);
       		
-      		bool getAlive() const;
-      		float getAlpha() const;
+      		bool getAlive()       const;
+      		float getAlpha()      const;
       		float getAlphaStart() const;
-      
-            	void reborn(vec2f);
-            	void reborn(vec2f, vec2f);
-            	
-            	void randomize_d_alpha(float val1_f, float val2_f);
-            	
+                
+            	void reborn();      
+
+            	void randomizeLifeTime(float, float);
+            	void randomize_d_alpha(float, float);
+
       		void update();
       		void render() const;
       		
@@ -47,14 +47,13 @@ class Particle
  		
       		vec2f pos;
       		vec2f d_pos;
-      		float alpha;
+      		
+      		//float alpha;
+                Color4f color;
+                                                
       		float size;
 
      		ParticleData data_particle;
-      	
-      		void calcRandomVelocity();
-      	      		void calcFastRandomVelocity();
-      			void calcAccurateRandomVelocity();		
 };
 
 

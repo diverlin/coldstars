@@ -24,25 +24,31 @@ class Rect
 {  
 	public:
 	    	Rect();
-	    	Rect(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h);
-      		Rect(vec2f _bottomLeft, int _w, int _h);
+	    	Rect(float, float, int, int);
+      		Rect(vec2f, int, int);
       		~Rect();
       		
+      		void set(float, float, int, int);
+
+      		void setCenter(vec2f);
+      		void setCenter(float, float);
+      		void setBottomLeft(vec2f);
+      		void setBottomLeft(float, float);
+      		      		
       		vec2f getCenter() const;
       		vec2f getBottomLeft() const;
       		int getWidth() const;
       		int getHeight() const;
       
-      		void calcCenter();
-      		void setNewCenter(vec2f _center);
-      		void setNewCenter(float _center_x, float _center_y);
-      		void setNewBottomLeftPos(vec2f _bottomLeft);
-      		
+      		void resize(int, int);
+      		      		
       	private:
       		vec2f bottomLeft;    
       		vec2f center;  
-      		int w, h;		
+      		int w, h;	
+
+      		void updateCenter();
 };
 
 
-#endif /* RECT_H */
+#endif 

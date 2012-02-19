@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MICROSCENARIODESTROY_H
 #define MICROSCENARIODESTROY_H
 
-class MicroScenarioDestroy : public MicroScenarioBase
+class MicroScenarioDestroy : public ScenarioBase
 {
 	public:
 		MicroScenarioDestroy();

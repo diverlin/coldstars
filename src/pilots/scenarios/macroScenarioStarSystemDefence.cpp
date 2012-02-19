@@ -25,16 +25,16 @@ MacroScenarioStarSystemDefence :: ~MacroScenarioStarSystemDefence()
 
 void MacroScenarioStarSystemDefence :: update_inStatic(Npc* _npc) const
 {
-	if ( _npc->getStarSystem()->getId() != _npc->getStateMachine()->getCurrentMacroTask()->getTarget()->getObId() )
+	if ( _npc->getStarSystem() != _npc->getStateMachine()->getCurrentMacroTask()->getTarget()->getStarSystem() )
 	{
-		if (_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getObId() != _npc->getStateMachine()->getCurrentMacroTask()->getTarget()->getStarSystem()->getId())
+		if (_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getStarSystem() != _npc->getStateMachine()->getCurrentMacroTask()->getTarget()->getStarSystem())
 		{
 			_npc->getStateMachine()->setCurrentMicroTask(g_MICROSCENARIO_JUMP, _npc->getStateMachine()->getCurrentMacroTask()->getTarget()->getStarSystem());
 		}
 	}
 	else
 	{
-		if ( (_npc->getStateMachine()->getCurrentMicroTask()->getScenario() != g_MICROSCENARIO_DESTROY) or (_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getValid() == false) )
+		if ( (_npc->getStateMachine()->getCurrentMicroTask()->getScenario() != g_MICROSCENARIO_DESTROY) or (_npc->getStateMachine()->getCurrentMicroTask()->getValid() == false) )
 		{
             		_npc->getObservation()->findVisibleNpcs_inSpace_inStatic();
             	
@@ -53,5 +53,5 @@ void MacroScenarioStarSystemDefence :: update_inStatic(Npc* _npc) const
 
 std::string MacroScenarioStarSystemDefence :: getDescription(Npc* _npc) const
 {
-	return "MacroScenarioStarSystemDefence: ss_id = " + int2str(_npc->getStateMachine()->getCurrentMacroTask()->getTarget()->getObId());
+	return "MacroScenarioStarSystemDefence: ss_id = " + int2str(_npc->getStateMachine()->getCurrentMacroTask()->getTarget()->getId());
 }

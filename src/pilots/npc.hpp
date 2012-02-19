@@ -21,69 +21,57 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef NPC_H
 #define NPC_H
 
-class Npc 
+class Npc : public SpaceObjectBase
 {
    	public:
               	Npc(int _race_id, 
               	    IdData, LifeData, 
               	    TextureOb*);
               	    
-     		~Npc();
+     		virtual ~Npc();
                 
    		void setAlive(bool);
    		void setGarbageReady(bool);
-   		void setStarSystem(StarSystem*);
    		void setKosmoport(Kosmoport*);
    		void setLand(Land*);
-   		void setScanTarget(Ship*);
-   		void setPlaceTypeId(int);
+   		void setScanTarget(VehicleBase*);
    		void setControlledByPlayer(bool);
    		void setUpperControl(bool);
    		
-   		bool getAlive()    const;
-   		bool getGarbageReady() const;
-   		int getId()        const;
-   		int getTypeId()    const;
-   		int getSubTypeId() const;
+
    		int getRaceId()    const;
    		
    		Observation* getObservation() const;
    		
-   		StarSystem* getStarSystem() const;
    		StarSystem* getFailBackStarSystem() const;
    		
    		Kosmoport* getKosmoport();
-   		Vehicle* getVehicle();
+   		VehicleBase* getVehicle();
+   		VehicleBase* getScanVehicle();
    		Skill* getSkill();
-   		Ship* getScanShip();
-   		int getPlaceTypeId() const;
+
    		
-   		StateMachine* getStateMachine();
-   		   		
-   		Points* getPoints() const;
-   		bool* getpAlive();
-   		int* getpPlaceTypeId();
-   		float getCollisionRadius();
-     		
+   		StateMachine* getStateMachine();   		   		
+   		     		
                 unsigned long int getCredits() const;   
 
-   		void bind(Vehicle*);
+   		void bind(VehicleBase*);
 
 		void increaseCredits(int);
 		void decreaseCredits(int);
      
      		// AI
      		void update_inSpace_inStatic();     		
-     		void update_inSpace_inDynamic();
+     		void update_inSpace(int, bool);
      		
      		void thinkCommon_inKosmoport_inStatic();
      		void thinkCommon_inLand_inStatic();
 
-     		void update_inDynamic_inSpace();
+     		void update_inDynamic(int, bool);
                 //
 
      		//// scanning
-    		bool checkPossibilityToScan(Ship*);
+    		bool checkPossibilityToScan(VehicleBase*);
      		bool scanProceeding(); 
      		bool removeScanTarget();
      		//// scanning
@@ -94,7 +82,7 @@ class Npc
                 NeedsToDo needsToDo;
                             
                
-                void renderInfo(float _pos_x, float _pos_y, float _offset_x = 0.0, float _offset_y = 0.0);
+                void renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y);
                 
                 Observation* observation;
                 
@@ -105,26 +93,19 @@ class Npc
      		int race_id;
      		unsigned long int credits; 
      		bool upper_control;
-     		 
-     		IdData data_id;
-     		LifeData data_life;
-     		
-   	     	StarSystem* starsystem;
+
    	     	StarSystem* failback_starsystem;
    	     	
    	     	Kosmoport* kosmoport;
    	     	Land* land;
-   	     	
-   	     	InfoTable info;
    	     	     		     		
      		//MacroTaskHolder* macro_task_main;
    		//MacroTaskHolder* macro_task_self;
    		//MicroTaskHolder* micro_task;
-   	     	Vehicle* vehicle;
+   	     	VehicleBase* vehicle;
    	     	
    	     	Skill* skill; 
 
-   	     	TextureOb* texOb;
 
      		AiModelBase* ai_model;
      		StateMachine* state_machine;
@@ -134,11 +115,11 @@ class Npc
                 void checkNeeds();
      		     	
      		 	
-     		Ship* ship_to_scan;
+     		VehicleBase* vehicle_to_scan;
      		
-     		int place_type_id;
-     		
-     		void updateInfo();     		
+    		
+     		void updateInfo();     	
+     		virtual void postDeathUniqueEvent(bool);	
  };
 
 

@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 StarSystem :: StarSystem(int race_id)
 { 
-    	id = g_STARSYSTEM_ID_GENERATOR.getNextId();
+    	id = g_ID_GENERATOR.getNextId();
     	type_id = STARSYSTEM_ID;
     	
     	is_CAPTURED = false;
@@ -32,6 +32,8 @@ StarSystem :: StarSystem(int race_id)
     	calculation_per_turn_allowed_inDynamic = true;
 
     	detalied_simulation = false; // will be changing depending on player presence
+    	
+    	starsystem = this;
 }
 
 StarSystem :: ~StarSystem()
@@ -234,11 +236,14 @@ void StarSystem :: updateStates()
 }
 
 
-void StarSystem :: update_TRUE(int timer)
+void StarSystem :: update(int time, bool detalied_simulation)
 {
-	updateEntities_common_TRUE();
-
-	if (timer > 0)
+        manageUnavaliableObjects();
+        manageDeadObjects();  // no need to update so frequently, pri /6
+                
+	updateEntities(time, detalied_simulation);
+    		
+	if (time > 0)
 	{
 		if (calculation_per_turn_allowed_inDynamic == true)
 		{
@@ -248,24 +253,14 @@ void StarSystem :: update_TRUE(int timer)
 			calculation_per_turn_allowed_inDynamic = false;
 		}
 
-     		asteroidManager(5); 
-     		//debug__();
-
-    		updateEntities_inDynamic_TRUE();
-    		
-
-    		rocketCollision_TRUE(); // pri /2
-    		asteroidCollision_TRUE(); // pri/2
-
-		manageUnavaliableObjects();
-    		manageDeadObjects();  // no need to update so frequently, pri /6
-
-		fireEvents_TRUE(timer); // move to ship update
+    		rocketCollision(detalied_simulation);   // pri/2
+    		asteroidCollision(detalied_simulation); // pri/2
 
 		calculation_per_turn_allowed = true;
 	}
 	else
 	{
+	     	asteroidManager(5); 
 		updateStates();
 	    		
 		if (calculation_per_turn_allowed == true)
@@ -283,25 +278,7 @@ void StarSystem :: update_TRUE(int timer)
 
 
 
-void StarSystem :: update_FALSE(int timer)
-{
-	update_TRUE(timer);
-    	//asteroidManager(10); 
-
-    	//updateEntities_inDynamic_FALSE();
-    	//manageEntities(); 
-
-    	//if (getRandInt(1,10) == 1)
-    	//{
-        	//rocketCollision_FALSE();
-        	//asteroidCollision_FALSE();
-
-        	//fireEvents_FALSE(timer);
-    	//}
-}
-
-
-void StarSystem :: rocketCollision_TRUE()
+void StarSystem :: rocketCollision(bool show_effect)
 {
         bool collide = false;
         for (unsigned int ri = 0; ri < ROCKET_vec.size(); ri++)
@@ -315,7 +292,7 @@ void StarSystem :: rocketCollision_TRUE()
                 		{
                         		if (ROCKET_vec[ri]->getOwnerShipId() != SHIP_inSPACE_vec[ki]->getId())
                         		{                        
-                        			collide = checkCollision_TRUE(ROCKET_vec[ri], SHIP_inSPACE_vec[ki]);
+                        			collide = checkCollision(ROCKET_vec[ri], SHIP_inSPACE_vec[ki], show_effect);
                         			if (collide == true) { break; }                        
                         		}
                 		}
@@ -329,7 +306,7 @@ void StarSystem :: rocketCollision_TRUE()
                 		{
                         		if (ROCKET_vec[ri]->getOwnerShipId() != SATELLITE_vec[si]->getId())
                         		{                        
-                        			collide = checkCollision_TRUE(ROCKET_vec[ri], SATELLITE_vec[si]);
+                        			collide = checkCollision(ROCKET_vec[ri], SATELLITE_vec[si], show_effect);
                         			if (collide == true) { break; }                        
                         		}
                 		}
@@ -342,7 +319,7 @@ void StarSystem :: rocketCollision_TRUE()
                 		{
                         		if (ROCKET_vec[ri]->getOwnerShipId() != STARBASE_vec[si]->getId())
                         		{                        
-                        			collide = checkCollision_TRUE(ROCKET_vec[ri], STARBASE_vec[si]);
+                        			collide = checkCollision(ROCKET_vec[ri], STARBASE_vec[si], show_effect);
                         			if (collide == true) { break; }                        
                         		}
                 		}
@@ -355,7 +332,7 @@ void StarSystem :: rocketCollision_TRUE()
                 	{
                         	for (unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++)
                         	{
-                        		collide = checkCollision_TRUE(ROCKET_vec[ri], ASTEROID_vec[ai]);
+                        		collide = checkCollision(ROCKET_vec[ri], ASTEROID_vec[ai], show_effect);
                         		if (collide == true) { break; }
                         	}
                 	}
@@ -367,7 +344,7 @@ void StarSystem :: rocketCollision_TRUE()
                 	{
                         	for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
                         	{
-                        		collide = checkCollision_TRUE(ROCKET_vec[ri], MINERAL_vec[mi]);
+                        		collide = checkCollision(ROCKET_vec[ri], MINERAL_vec[mi], show_effect);
                         		if (collide == true) { 	break; }
                         	}
                 	}
@@ -378,7 +355,7 @@ void StarSystem :: rocketCollision_TRUE()
                 	{
                         	for (unsigned int bi = 0; bi < BOMB_vec.size(); bi++)
                         	{
-                        		collide = checkCollision_TRUE(ROCKET_vec[ri], BOMB_vec[bi]);
+                        		collide = checkCollision(ROCKET_vec[ri], BOMB_vec[bi], show_effect);
                         		if (collide == true) { 	break; }
                         	}
                 	}
@@ -389,7 +366,7 @@ void StarSystem :: rocketCollision_TRUE()
                 	{
                         	for (unsigned int ci = 0; ci < CONTAINER_vec.size(); ci++)
                         	{
-                        		collide = checkCollision_TRUE(ROCKET_vec[ri], CONTAINER_vec[ci]);
+                        		collide = checkCollision(ROCKET_vec[ri], CONTAINER_vec[ci], show_effect);
                         		if (collide == true) { 	break; }
                         	}
                 	}
@@ -402,15 +379,8 @@ void StarSystem :: rocketCollision_TRUE()
 
 
 
-void StarSystem :: rocketCollision_FALSE()
-{
-	rocketCollision_TRUE();
-	// use hit_FALSE()
-}
 
-
-
-void StarSystem :: asteroidCollision_TRUE()
+void StarSystem :: asteroidCollision(bool show_effect)
 {
 	bool collide = false;
 	
@@ -423,7 +393,7 @@ void StarSystem :: asteroidCollision_TRUE()
                 	{
                         	for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
                         	{
-                                	collide = checkCollision_TRUE(ASTEROID_vec[ai], SHIP_inSPACE_vec[ki]);
+                                	collide = checkCollision(ASTEROID_vec[ai], SHIP_inSPACE_vec[ki], show_effect);
                         		if (collide == true) { break; }
                         	}                        	
                 	}
@@ -433,7 +403,7 @@ void StarSystem :: asteroidCollision_TRUE()
                 	{
                         	for (unsigned int si = 0; si < STARBASE_vec.size(); si++)
                         	{
-                                	collide = checkCollision_TRUE(ASTEROID_vec[ai], STARBASE_vec[si]);
+                                	collide = checkCollision(ASTEROID_vec[ai], STARBASE_vec[si], show_effect);
                         		if (collide == true) { break; }
                         	}                        	
                 	}
@@ -443,7 +413,7 @@ void StarSystem :: asteroidCollision_TRUE()
                 	{
                         	for (unsigned int si = 0; si < SATELLITE_vec.size(); si++)
                         	{
-                                	collide = checkCollision_TRUE(ASTEROID_vec[ai], SATELLITE_vec[si]);
+                                	collide = checkCollision(ASTEROID_vec[ai], SATELLITE_vec[si], show_effect);
                         		if (collide == true) { break; }
                         	}                        	
                 	}
@@ -455,7 +425,7 @@ void StarSystem :: asteroidCollision_TRUE()
                 	{
                         	for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
                         	{
-                                	collide = checkCollision_TRUE(ASTEROID_vec[ai], PLANET_vec[pi]);
+                                	collide = checkCollision(ASTEROID_vec[ai], PLANET_vec[pi], show_effect);
                         		if (collide == true) { break; }
                         	}                        	
                 	}
@@ -467,7 +437,7 @@ void StarSystem :: asteroidCollision_TRUE()
                 	{
                         	for (unsigned int si = 0; si < STAR_vec.size(); si++)
                         	{
-                                	collide = checkCollision_TRUE(ASTEROID_vec[ai], STAR_vec[si]);
+                                	collide = checkCollision(ASTEROID_vec[ai], STAR_vec[si], show_effect);
                         		if (collide == true) { break; }
                         	}                        	
                 	}
@@ -478,132 +448,101 @@ void StarSystem :: asteroidCollision_TRUE()
 
 
 
-void StarSystem :: asteroidCollision_FALSE()
-{
-       asteroidCollision_TRUE();
-       // use hit_FALSE()
-}
 
-
-void StarSystem :: updateEntities_inDynamic_TRUE()
+void StarSystem :: updateEntities(int time, bool show_effect)
 {
         for (unsigned int si = 0; si < STAR_vec.size(); si++)
         {
-                STAR_vec[si]->update_inSpace_inDynamic(); 
+                STAR_vec[si]->update_inSpace(time, show_effect); 
 	}
 	
         for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
         {
-                PLANET_vec[pi]->update_inSpace_inDynamic(); 
+                PLANET_vec[pi]->update_inSpace(time, show_effect); 
     	}
     	
         for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
         {
-                MINERAL_vec[mi]->update_inSpace_inDynamic_TRUE(); 
+                MINERAL_vec[mi]->update_inSpace(time, show_effect); 
      	}
      	
      	for (unsigned int i = 0; i < BOMB_vec.size(); i++)
         {
-                BOMB_vec[i]->update_inSpace_inDynamic_TRUE(); 
+                BOMB_vec[i]->update_inSpace(time, show_effect); 
      	}
      	
      	for (unsigned int i = 0; i < BLACKHOLE_vec.size(); i++)
         {
-                BLACKHOLE_vec[i]->update_inSpace_inDynamic_TRUE(); 
+                BLACKHOLE_vec[i]->update_inSpace(time, show_effect); 
      	}
      	     	     	
      	
      	
         for (unsigned int ci = 0; ci < CONTAINER_vec.size(); ci++)
         {
-                CONTAINER_vec[ci]->update_inSpace_inDynamic_TRUE(); 
+                CONTAINER_vec[ci]->update_inSpace(time, show_effect); 
 	}
 	
         for (unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++) 
         {
-                ASTEROID_vec[ai]->update_inSpace_inDynamic_TRUE(); 
+                ASTEROID_vec[ai]->update_inSpace(time, show_effect); 
     	}
     	
         for (unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
         {
-                NPC_inSPACE_vec[ni]->update_inSpace_inDynamic(); 
+                NPC_inSPACE_vec[ni]->update_inSpace(time, show_effect); 
     	}
     	
     	// vehicle
         for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
         {
-                SHIP_inSPACE_vec[ki]->update_inSpace_inDynamic_TRUE();         
+                SHIP_inSPACE_vec[ki]->update_inSpace(time, show_effect);         
     	}
 
         for (unsigned int si = 0; si < STARBASE_vec.size(); si++)
         {
-                STARBASE_vec[si]->update_inSpace_inDynamic_TRUE(); 
+                STARBASE_vec[si]->update_inSpace(time, show_effect); 
         }
                 
         for (unsigned int si = 0; si < SATELLITE_vec.size(); si++)
         {
-                SATELLITE_vec[si]->update_inSpace_inDynamic_TRUE();         
+                SATELLITE_vec[si]->update_inSpace(time, show_effect);         
     	}        
     	//
     	
         for (unsigned int ri = 0; ri < ROCKET_vec.size(); ri++)
         {
-                ROCKET_vec[ri]->update_inSpace_inDynamic(); 
+                ROCKET_vec[ri]->update_inSpace(time, show_effect); 
         }
+        
+        
+        
+        
+        for(unsigned int i = 0; i<effect_LAZERTRACE_vec.size(); i++)
+	{ 
+		effect_LAZERTRACE_vec[i]->update(); 
+	}
+
+	for(unsigned int i = 0; i < effect_PARTICLESYSTEM_vec.size(); i++)
+	{ 
+		effect_PARTICLESYSTEM_vec[i]->update();
+	}
+
+	
+	for (unsigned int i = 0; i < effect_SHOCKWAVE_vec.size(); i++)
+	{         
+		effect_SHOCKWAVE_vec[i]->update();
+
+	}
+	
+	for(unsigned int i = 0; i<text_DAMAGE_vec.size(); i++)
+    	{ 
+    	        text_DAMAGE_vec[i]->update(); 
+    	}  
 }  
       
      
 
-void StarSystem :: updateEntities_inDynamic_FALSE()
-{
-        for (unsigned int si = 0; si < STAR_vec.size(); si++)
-        {
-                STAR_vec[si]->update_inSpace_inDynamic(); 
-        }
-
-        for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
-        {
-                PLANET_vec[pi]->update_inSpace_inDynamic(); 
-        }
-    
-        for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
-        {
-                MINERAL_vec[mi]->update_inSpace_inDynamic_FALSE(); 
-        }
-     
-        for (unsigned int i = 0; i < BOMB_vec.size(); i++)
-        {
-                BOMB_vec[i]->update_inSpace_inDynamic_FALSE(); 
-        }
-        
-        for (unsigned int ci = 0; ci < CONTAINER_vec.size(); ci++)
-        {
-                CONTAINER_vec[ci]->update_inSpace_inDynamic_FALSE(); 
-        }
-
-        for (unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++) 
-        {
-                ASTEROID_vec[ai]->update_inSpace_inDynamic_FALSE(); 
-        }
-    
-        for (unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
-        {
-                NPC_inSPACE_vec[ni]->update_inSpace_inDynamic(); 
-        }
-
-        for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
-        {
-                SHIP_inSPACE_vec[ki]->update_inSpace_inDynamic_FALSE(); 
-        }
-    
-        for (unsigned int ri = 0; ri < ROCKET_vec.size(); ri++)
-        {
-                ROCKET_vec[ri]->update_inSpace_inDynamic(); 
-        }
-                
-
-}  
-  
 
 void StarSystem :: updateEntities_inStatic()
 {
@@ -628,70 +567,8 @@ void StarSystem :: updateEntities_inStatic()
      	{
          	PLANET_vec[pi]->update_inSpace_inStatic();
      	}
-}
+}      
 
-
-void StarSystem :: updateEntities_common_TRUE()
-{
-        for(unsigned int i = 0; i<effect_LAZERTRACE_vec.size(); i++)
-	{ 
-		effect_LAZERTRACE_vec[i]->update(); 
-	}
-
-	for(unsigned int i = 0; i<effect_EXPLOSION_vec.size(); i++)
-	{ 
-		effect_EXPLOSION_vec[i]->update();
-	}
-
-	for(unsigned int i = 0; i<effect_DAMAGE_vec.size(); i++)
-	{ 
-		effect_DAMAGE_vec[i]->update();
-	}
-	
-	for (unsigned int i = 0; i < effect_SHOCKWAVE_vec.size(); i++)
-	{         
-		effect_SHOCKWAVE_vec[i]->update();
-
-	}
-	
-	for(unsigned int i = 0; i<text_DAMAGE_vec.size(); i++)
-    	{ 
-    	        text_DAMAGE_vec[i]->update(); 
-    	}   
-    	
-    	
-    	for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
-        {
-                MINERAL_vec[mi]->updateDyingEffect_TRUE(); 
-        }
-     
-        for (unsigned int i = 0; i < BOMB_vec.size(); i++)
-        {
-                BOMB_vec[i]->updateDyingEffect_TRUE(); 
-        }
-        
-        for (unsigned int ci = 0; ci < CONTAINER_vec.size(); ci++)
-        {
-                CONTAINER_vec[ci]->updateDyingEffect_TRUE(); 
-        }
-        
-        // vehicle
-        for (unsigned int i = 0; i < SHIP_inSPACE_vec.size(); i++)
-        {
-                SHIP_inSPACE_vec[i]->updateDyingEffect_TRUE(); 
-        }
-
-        for (unsigned int i = 0; i < STARBASE_vec.size(); i++)
-        {
-                STARBASE_vec[i]->updateDyingEffect_TRUE(); 
-        }
-        
-        for (unsigned int i = 0; i < SATELLITE_vec.size(); i++)
-        {
-                SATELLITE_vec[i]->updateDyingEffect_TRUE(); 
-        }
-
-}
     		
       
 
@@ -890,12 +767,12 @@ void StarSystem :: drawOrbits()
 {
         for(unsigned int i = 0; i < PLANET_vec.size(); i++) 
 	{ 
-		PLANET_vec[i]->drawOrbit(); 
+		PLANET_vec[i]->getOrbit()->draw(); 
 	}
 
 	for(unsigned int i = 0; i < ASTEROID_vec.size(); i++)
 	{ 
-		ASTEROID_vec[i]->drawOrbit(); 
+		ASTEROID_vec[i]->getOrbit()->draw(); 
 	}
 }
  
@@ -903,7 +780,7 @@ void StarSystem :: drawPath()
 {
         for(unsigned int i = 0; i < SHIP_inSPACE_vec.size(); i++) 
 	{ 
-		SHIP_inSPACE_vec[i]->getNavigator()->drawPath(); 
+		SHIP_inSPACE_vec[i]->getDriveComplex()->drawPath(); 
 	}
 }
    
@@ -930,7 +807,7 @@ void StarSystem :: render(bool turn_ended, bool forceDraw_orbits, bool forceDraw
         	{
                 	drawPath();
         	}
-       	 	pPLAYER->getVehicle()->getNavigator()->drawPath();
+       	 	pPLAYER->getVehicle()->getDriveComplex()->drawPath();
        		pPLAYER->getVehicle()->getWeaponComplex()->renderWeaponsRange();
        	
         	if (pPLAYER->getShowRadarRange() == true)
@@ -1022,13 +899,6 @@ void StarSystem :: renderEntities_NEW()
 			{ 
         			visible_BLACKHOLE_vec[i]->render2D(); 
     			}  		
-		
-			for(unsigned int i = 0; i < visible_SATELLITE_vec.size(); i++)
-    			{ 
-    				//visible_SATELLITE_vec[i]->updateRenderStuff(); 
-       				visible_SATELLITE_vec[i]->render2D(); 
-        			//restoreSceneColor();
-    			}
     			
     			for(unsigned int i = 0; i < visible_MINERAL_vec.size(); i++)
 			{ 
@@ -1053,6 +923,13 @@ void StarSystem :: renderEntities_NEW()
         			restoreSceneColor();
     			}
 
+			for(unsigned int i = 0; i < visible_SATELLITE_vec.size(); i++)
+    			{ 
+    				visible_SATELLITE_vec[i]->updateRenderStuff(); 
+       				visible_SATELLITE_vec[i]->render_inSpace(); 
+        			restoreSceneColor();
+    			}
+    			
     			for(unsigned int i = 0; i < visible_ROCKET_vec.size(); i++)
     			{ 
     			    	visible_ROCKET_vec[i]->updateRenderStuff();
@@ -1119,14 +996,9 @@ void StarSystem :: renderEntities_NEW()
     		}
 
     		enable_POINTSPRITE();
-    			for(unsigned int i = 0; i<effect_EXPLOSION_vec.size(); i++)
+    			for(unsigned int i = 0; i < effect_PARTICLESYSTEM_vec.size(); i++)
     			{ 
-        			effect_EXPLOSION_vec[i]->render(); 
-    			}
-
-    			for(unsigned int i = 0; i<effect_DAMAGE_vec.size(); i++)
-    			{ 
-        			effect_DAMAGE_vec[i]->render(); 
+        			effect_PARTICLESYSTEM_vec[i]->render(); 
     			}
     		disable_POINTSPRITE();
     		
@@ -1177,6 +1049,13 @@ void StarSystem :: renderEntities_OLD()
         disable_DEPTH();
 
         enable_BLEND();
+                for(unsigned int i = 0; i < visible_STARBASE_vec.size(); i++)
+    		{ 
+    			visible_STARBASE_vec[i]->updateRenderStuff(); 
+       			visible_STARBASE_vec[i]->render_inSpace(); 
+        		restoreSceneColor();
+    		}
+                        
             	for(unsigned int i = 0; i < visible_BLACKHOLE_vec.size(); i++)
 		{ 
         		visible_BLACKHOLE_vec[i]->render2D(); 
@@ -1205,6 +1084,13 @@ void StarSystem :: renderEntities_OLD()
         		restoreSceneColor();
     		}
 
+		for(unsigned int i = 0; i < visible_SATELLITE_vec.size(); i++)
+    		{ 
+    			visible_SATELLITE_vec[i]->updateRenderStuff(); 
+       			visible_SATELLITE_vec[i]->render_inSpace(); 
+        		restoreSceneColor();
+                }
+                        
     		for(unsigned int i = 0; i < visible_ROCKET_vec.size(); i++)
     		{ 
                         visible_ROCKET_vec[i]->updateRenderStuff();
@@ -1220,17 +1106,12 @@ void StarSystem :: renderEntities_OLD()
 
 
 	enable_BLEND();
-        enable_POINTSPRITE();
-    		for(unsigned int i = 0; i<effect_EXPLOSION_vec.size(); i++)
-    		{ 
-        		effect_EXPLOSION_vec[i]->render(); 
-    		}
-
-    		for(unsigned int i = 0; i<effect_DAMAGE_vec.size(); i++)
-    		{ 
-        		effect_DAMAGE_vec[i]->render(); 
-    		}
-        disable_POINTSPRITE();
+        	enable_POINTSPRITE();
+    			for(unsigned int i = 0; i < effect_PARTICLESYSTEM_vec.size(); i++)
+    			{ 
+        			effect_PARTICLESYSTEM_vec[i]->render(); 
+    			}
+        	disable_POINTSPRITE();
         disable_BLEND();
 
         for(unsigned int i = 0; i<text_DAMAGE_vec.size(); i++)
@@ -1248,21 +1129,87 @@ void StarSystem :: asteroidManager(unsigned int num)
 {
         while (ASTEROID_vec.size() < num)
         {
-                Asteroid* _asteroid = createAsteroid();
-                add(_asteroid);
+                Asteroid* _asteroid = getNewAsteroid();
+                addToSpace(_asteroid);
                 break;
         }
 }
 
 
-void StarSystem :: add(Star* star)
+
+void StarSystem :: addToSpace(VehicleBase* vehicle, vec2f center, float angle, SpaceObjectBase* parent)
+{
+     	vehicle->setPlaceTypeId(SPACE_ID);
+     	vehicle->setStarSystem(this);  
+
+	switch(vehicle->getTypeId())
+	{
+		case SHIP_ID:         	
+		{ 	
+			SHIP_inSPACE_vec.push_back((Ship*)vehicle);  
+			 
+		     	vehicle->getPoints()->setCenter(center); 
+    			vehicle->getPoints()->setAngle(angle);   
+    			vehicle->getPoints()->update();  
+    	
+			break; 
+		}
+					
+		case STARBASE_ID:
+		{
+		 	STARBASE_vec.push_back((StarBase*)vehicle);   
+			 	
+			vehicle->getPoints()->setCenter(center); 
+    			vehicle->getPoints()->setAngle(angle);   
+    			vehicle->getPoints()->update();  
+    			
+		 	break; 
+		}
+		
+		case SATELLITE_ID:    	
+		{ 
+			vehicle->setParent(parent);
+			((Satellite*)vehicle)->getOrbit()->calcPath(parent->getCollisionRadius(), 1.0);
+			SATELLITE_vec.push_back((Satellite*)vehicle); 
+		
+			break; 
+		}
+	}
+     	
+     	
+}
+
+void StarSystem :: addToSpace(Npc* _npc)
+{
+     	//int _race_id = _npc->getRaceId();
+     	int _subtype_id = _npc->getSubTypeId();
+
+     	_npc->setPlaceTypeId(SPACE_ID);
+     	_npc->setStarSystem(this);  
+
+     	NPC_inSPACE_vec.push_back(_npc);
+
+     	if (_subtype_id == RANGER_ID)
+         	NPC_RANGER_inSPACE_vec.push_back(_npc);
+     	if (_subtype_id == WARRIOR_ID)
+         	NPC_WARRIOR_inSPACE_vec.push_back(_npc);
+     	if (_subtype_id == TRADER_ID)
+         	NPC_TRADER_inSPACE_vec.push_back(_npc);
+     	if (_subtype_id == PIRAT_ID)
+         	NPC_PIRAT_inSPACE_vec.push_back(_npc);
+     	if (_subtype_id == DIPLOMAT_ID)
+         	NPC_DIPLOMAT_inSPACE_vec.push_back(_npc);
+}
+
+
+void StarSystem :: addToSpace(Star* star)
 {
         star->setStarSystem(this);
         star->setPlaceTypeId(SPACE_ID);
         STAR_vec.push_back(star);
 }
 
-void StarSystem :: add(Planet* planet)
+void StarSystem :: addToSpace(Planet* planet)
 {
 	planet->createOrbit();
         
@@ -1271,81 +1218,79 @@ void StarSystem :: add(Planet* planet)
         PLANET_vec.push_back(planet);
 }
                 
-void StarSystem :: add(Asteroid* asteroid)
+void StarSystem :: addToSpace(Asteroid* asteroid)
 {   
 	asteroid->createOrbit();
+	asteroid->update_inSpace(1, true);
 	
         asteroid->setStarSystem(this);
         asteroid->setPlaceTypeId(SPACE_ID);
         ASTEROID_vec.push_back(asteroid);
 }
 
-void StarSystem :: add(Mineral* _mineral, vec2f pos)
+void StarSystem :: addToSpace(Mineral* _mineral, vec2f pos)
 {
 	_mineral->moveToSpace(this, pos);
         MINERAL_vec.push_back(_mineral);
 }
 
-void StarSystem :: add(Bomb* bomb, vec2f pos)
-{
-	bomb->moveToSpace(this, pos);
-        BOMB_vec.push_back(bomb);
-}
+//void StarSystem :: addToSpace(Bomb* bomb, vec2f pos)
+//{
+	//bomb->moveToSpace(this, pos);
+        //BOMB_vec.push_back(bomb);
+//}
 
-void StarSystem :: add(Container* _container, vec2f pos)
+void StarSystem :: addToSpace(Container* _container, vec2f pos)
 {
 	_container->moveToSpace(this, pos);
         CONTAINER_vec.push_back(_container);
 }
 
 
-void StarSystem :: add(RocketBullet* _rocket)
+void StarSystem :: addToSpace(RocketBullet* _rocket)
 {
 	_rocket->setStarSystem(this);
 	ROCKET_vec.push_back(_rocket);
 }    
 
-void StarSystem :: add(BlackHole* blackhole, vec2f pos)
+void StarSystem :: addToSpace(BlackHole* blackhole, vec2f pos)
 {
 	blackhole->moveToSpace(this, pos);
+	//blackhole->setEffect(getNewBlackHoleEffect(this, pos, 8));
+	getNewBlackHoleEffect(this, pos, 8);
 	BLACKHOLE_vec.push_back(blackhole);
 }    
     		
 	
 
 
-void StarSystem :: add(ShockWaveEffect* _shockWave)
+void StarSystem :: addToSpace(ShockWaveEffect* _shockWave)
 {
 	effect_SHOCKWAVE_vec.push_back(_shockWave);
 }
 
-void StarSystem :: add(LazerTraceEffect* _lazerTraceEffect)
+void StarSystem :: addToSpace(LazerTraceEffect* _lazerTraceEffect)
 {
 	effect_LAZERTRACE_vec.push_back(_lazerTraceEffect);
 }
 
-void StarSystem :: add(ExplosionEffect* _explosionEffect)
+void StarSystem :: addToSpace(BaseParticleSystem* _ps)
 {
-	effect_EXPLOSION_vec.push_back(_explosionEffect);
+	effect_PARTICLESYSTEM_vec.push_back(_ps);
 }
 
-void StarSystem :: add(DamageEffect* _damageEffect)
-{
-	effect_DAMAGE_vec.push_back(_damageEffect);
-}
-    
-void StarSystem :: add(VerticalFlowText* _text)
+void StarSystem :: addToSpace(VerticalFlowText* _text)
 {
 	text_DAMAGE_vec.push_back(_text);
 }
     	
     		
-void StarSystem :: add(DistantNebulaBgEffect* dn)
+void StarSystem :: addToSpace(DistantNebulaBgEffect* dn)
 {
 	distantNebulaBgEffect_vec.push_back(dn);
 }
 
-void StarSystem :: add(DistantStarBgEffect* ds)
+void StarSystem :: addToSpace(DistantStarBgEffect* ds)
 {
 	distantStarBgEffect_vec.push_back(ds);
 }
@@ -1357,12 +1302,12 @@ void StarSystem :: add(DistantStarBgEffect* ds)
 	//remove_MINERAL_queue.push_back(mineral);
 //}
 
-void StarSystem :: addToRemoveFromOuterSpaceQueue(Bomb* bomb)
+void StarSystem :: addToRemoveFromOuterSpaceQueue(Container* bomb)
 {
 	remove_BOMB_queue.push_back(bomb);
 }
 
-void StarSystem :: addToRemoveFromOuterSpaceQueue(Vehicle* vehicle)
+void StarSystem :: addToRemoveFromOuterSpaceQueue(VehicleBase* vehicle)
 {
 	switch(vehicle->getTypeId())
 	{
@@ -1567,21 +1512,12 @@ void StarSystem :: manageDeadObjects()
     	}
 
 
-    	for(unsigned int i = 0; i<effect_EXPLOSION_vec.size(); i++)  
+    	for(unsigned int i = 0; i<effect_PARTICLESYSTEM_vec.size(); i++)  
     	{
-        	if (effect_EXPLOSION_vec[i]->getAlive() == false)
+        	if (effect_PARTICLESYSTEM_vec[i]->getAlive() == false)
         	{   
-            		garbage.add(effect_EXPLOSION_vec[i]);
-            		effect_EXPLOSION_vec.erase(effect_EXPLOSION_vec.begin() + i );
-        	} 
-    	}
-
-    	for(unsigned int edi = 0; edi < effect_DAMAGE_vec.size(); edi++)    
-    	{
-        	if (effect_DAMAGE_vec[edi]->getAlive() == false)
-        	{   
-            		garbage.add(effect_DAMAGE_vec[edi]);
-            		effect_DAMAGE_vec.erase(effect_DAMAGE_vec.begin() + edi);
+            		garbage.add(effect_PARTICLESYSTEM_vec[i]);
+            		effect_PARTICLESYSTEM_vec.erase(effect_PARTICLESYSTEM_vec.begin() + i );
         	} 
     	}
 
@@ -1631,22 +1567,21 @@ void StarSystem :: mouseControl()
             		{   
                			cursor_has_target = true;
 
-               			visible_MINERAL_vec[mi]->updateInfo(); 
-               			visible_MINERAL_vec[mi]->renderInfo(); 
+               			visible_MINERAL_vec[mi]->renderInfo_inSpace(); 
 
 				if ( (pPLAYER->getAlive() == true) and (pPLAYER->getVehicle() != NULL) )
 				{
                				if (mlb == true)
                				{
                    				pPLAYER->getVehicle()->getWeaponComplex()->selectWeapons();
-                   				pPLAYER->getVehicle()->getWeaponComplex()->setWeaponsTarget(visible_MINERAL_vec[mi]);
+                   				pPLAYER->getVehicle()->getWeaponComplex()->setTarget(visible_MINERAL_vec[mi]);
 	       				}
 	       				if (mrb == true)
 	       				{
 	       					if (pPLAYER->getVehicle()->ableTo.GRAB == true)
 	       					{
-	       						pPLAYER->getVehicle()->grapple_slot.getGrappleEquipment()->add(visible_MINERAL_vec[mi]);
-	       						pPLAYER->getVehicle()->grapple_slot.getGrappleEquipment()->validationTargets();	       						
+	       						pPLAYER->getVehicle()->getGrappleSlot()->getGrappleEquipment()->addTarget(visible_MINERAL_vec[mi]);
+	       						pPLAYER->getVehicle()->getGrappleSlot()->getGrappleEquipment()->validateTargets();	       						
 	       					}
 	       				}
 	       			}
@@ -1667,22 +1602,21 @@ void StarSystem :: mouseControl()
             		{   
                			cursor_has_target = true;
 
-               			visible_BOMB_vec[i]->updateInfo(); 
-               			visible_BOMB_vec[i]->renderInfo(); 
+               			visible_BOMB_vec[i]->renderInfo_inSpace();
 
 				if ( (pPLAYER->getAlive() == true) and (pPLAYER->getVehicle() != NULL) )
 				{
                				if (mlb == true)
                				{
                    				pPLAYER->getVehicle()->getWeaponComplex()->selectWeapons();
-                   				pPLAYER->getVehicle()->getWeaponComplex()->setWeaponsTarget(visible_BOMB_vec[i]);
+                   				pPLAYER->getVehicle()->getWeaponComplex()->setTarget(visible_BOMB_vec[i]);
 	       				}
 	       				if (mrb == true)
 	       				{
 	       					if (pPLAYER->getVehicle()->ableTo.GRAB == true)
 	       					{
-	       						pPLAYER->getVehicle()->grapple_slot.getGrappleEquipment()->add(visible_BOMB_vec[i]);
-	       						pPLAYER->getVehicle()->grapple_slot.getGrappleEquipment()->validationTargets();	       						
+	       						pPLAYER->getVehicle()->getGrappleSlot()->getGrappleEquipment()->addTarget(visible_BOMB_vec[i]);
+	       						pPLAYER->getVehicle()->getGrappleSlot()->getGrappleEquipment()->validateTargets();	       						
 	       					}
 	       				}
 	       			}
@@ -1702,8 +1636,7 @@ void StarSystem :: mouseControl()
             		{   
                			cursor_has_target = true;
 
-               			visible_BLACKHOLE_vec[i]->updateInfo(); 
-               			visible_BLACKHOLE_vec[i]->renderInfo(); 
+               			visible_BLACKHOLE_vec[i]->renderInfo_inSpace(); 
 
                			break; 
             		}
@@ -1720,21 +1653,21 @@ void StarSystem :: mouseControl()
             		{   
                			cursor_has_target = true;
 
-               			visible_CONTAINER_vec[ci]->renderInfo(); 
+               			visible_CONTAINER_vec[ci]->renderInfo_inSpace(); 
 
 				if ( (pPLAYER->getAlive() == true) and (pPLAYER->getVehicle() != NULL) )
 				{
                				if (mlb == true)
                				{
                    				pPLAYER->getVehicle()->getWeaponComplex()->selectWeapons();                   					    
-                   				pPLAYER->getVehicle()->getWeaponComplex()->setWeaponsTarget(visible_CONTAINER_vec[ci]);
+                   				pPLAYER->getVehicle()->getWeaponComplex()->setTarget(visible_CONTAINER_vec[ci]);
                				}
                				if (mrb == true)
 	       				{
 	       					if (pPLAYER->getVehicle()->ableTo.GRAB == true)
 	       					{
-	       						pPLAYER->getVehicle()->grapple_slot.getGrappleEquipment()->add(visible_CONTAINER_vec[ci]);
-	       						pPLAYER->getVehicle()->grapple_slot.getGrappleEquipment()->validationTargets();
+	       						pPLAYER->getVehicle()->getGrappleSlot()->getGrappleEquipment()->addTarget(visible_CONTAINER_vec[ci]);
+	       						pPLAYER->getVehicle()->getGrappleSlot()->getGrappleEquipment()->validateTargets();
 	       						printf("CONTAINER with id = %i HAS BEEN MARKED\n", visible_CONTAINER_vec[ci]->getId());	       						
 	       					}
 	       				}
@@ -1756,10 +1689,9 @@ void StarSystem :: mouseControl()
             		{   
                 		cursor_has_target = true;
 
-                		visible_ASTEROID_vec[ai]->updateInfo(); 
-                		visible_ASTEROID_vec[ai]->renderInfo(); 
+                		visible_ASTEROID_vec[ai]->renderInfo_inSpace(); 
                                 
-                                visible_ASTEROID_vec[ai]->drawOrbit();
+                                visible_ASTEROID_vec[ai]->getOrbit()->draw();
 
 				if ( (pPLAYER->getAlive() == true) and (pPLAYER->getVehicle() != NULL) )
 				{
@@ -1769,12 +1701,12 @@ void StarSystem :: mouseControl()
                 			        if (pPLAYER->getVehicle()->getWeaponComplex()->isAnyWeaponSelected() == true)
                 				{
                    					pPLAYER->getVehicle()->getWeaponComplex()->selectWeapons();
-                   					pPLAYER->getVehicle()->getWeaponComplex()->setWeaponsTarget(visible_ASTEROID_vec[ai]);
+                   					pPLAYER->getVehicle()->getWeaponComplex()->setTarget(visible_ASTEROID_vec[ai]);
                    				}
                    				else
                    				{
-                   					pPLAYER->getVehicle()->getNavigator()->setTarget(visible_ASTEROID_vec[ai], FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID);  
-                   					pPLAYER->getVehicle()->getNavigator()->update_inSpace_inStatic();
+                   					pPLAYER->getVehicle()->getDriveComplex()->setTarget(visible_ASTEROID_vec[ai], FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID);  
+                   					pPLAYER->getVehicle()->getDriveComplex()->update_inSpace_inStatic();
                    				}
                    			}
                 		}
@@ -1793,13 +1725,13 @@ void StarSystem :: mouseControl()
             		{ 
             			cursor_has_target = true;
 
-                		visible_SHIP_vec[ki]->renderInfo(); 
+                		visible_SHIP_vec[ki]->renderInfo_inSpace(); 
                 		visible_SHIP_vec[ki]->getWeaponComplex()->renderWeaponIcons();
 
                 		visible_SHIP_vec[ki]->renderRadarRange(); 
                 		visible_SHIP_vec[ki]->getWeaponComplex()->renderWeaponsRange(); 
                 		                                
-                                visible_SHIP_vec[ki]->getNavigator()->drawPath(); 
+                                visible_SHIP_vec[ki]->getDriveComplex()->drawPath(); 
                 
 				if ( (pPLAYER->getAlive() == true) and (pPLAYER->getVehicle() != NULL) )
 				{
@@ -1808,12 +1740,12 @@ void StarSystem :: mouseControl()
                 				if (pPLAYER->getVehicle()->getWeaponComplex()->isAnyWeaponSelected() == true)
                 				{
                    					pPLAYER->getVehicle()->getWeaponComplex()->selectWeapons();
-                   					pPLAYER->getVehicle()->getWeaponComplex()->setWeaponsTarget(visible_SHIP_vec[ki]);
+                   					pPLAYER->getVehicle()->getWeaponComplex()->setTarget(visible_SHIP_vec[ki]);
                    				}
                    				else
                    				{
-                   					pPLAYER->getVehicle()->getNavigator()->setTarget(visible_SHIP_vec[ki], FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID);  
-                   					pPLAYER->getVehicle()->getNavigator()->update_inSpace_inStatic();
+                   					pPLAYER->getVehicle()->getDriveComplex()->setTarget(visible_SHIP_vec[ki], FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID);  
+                   					pPLAYER->getVehicle()->getDriveComplex()->update_inSpace_inStatic();
                    				}
 					}
 
@@ -1823,8 +1755,8 @@ void StarSystem :: mouseControl()
                 				{
 	       						if (pPLAYER->getVehicle()->ableTo.GRAB == true)
 	       						{
-	       							pPLAYER->getVehicle()->grapple_slot.getGrappleEquipment()->add(visible_SHIP_vec[ki]);
-	       							pPLAYER->getVehicle()->grapple_slot.getGrappleEquipment()->validationTargets();	       						
+	       							pPLAYER->getVehicle()->getGrappleSlot()->getGrappleEquipment()->addTarget(visible_SHIP_vec[ki]);
+	       							pPLAYER->getVehicle()->getGrappleSlot()->getGrappleEquipment()->validateTargets();	       						
 	       						}
                    				}
                    				else
@@ -1833,7 +1765,7 @@ void StarSystem :: mouseControl()
                    					{
                         					pPLAYER->getPilot()->setScanTarget(visible_SHIP_vec[ki]);
                         					pPLAYER->setScanFlag(true);
-                        					g_GUI_VEHICLE->configure(pPLAYER->getPilot()->getScanShip(), false, false);   
+                        					g_GUI_VEHICLE->configure(pPLAYER->getPilot()->getScanVehicle(), false, false);   
                    					}
 
 	       					}
@@ -1859,13 +1791,13 @@ void StarSystem :: mouseControl()
             		{ 
             			cursor_has_target = true;
 
-                		//visible_STARBASE_vec[i]->renderInfo(); 
+                		visible_STARBASE_vec[i]->renderInfo_inSpace(); 
                 		visible_STARBASE_vec[i]->getWeaponComplex()->renderWeaponIcons();
 
                 		visible_STARBASE_vec[i]->renderRadarRange(); 
                 		visible_STARBASE_vec[i]->getWeaponComplex()->renderWeaponsRange(); 
                 		                                
-                                visible_STARBASE_vec[i]->getNavigator()->drawPath(); 
+                                visible_STARBASE_vec[i]->getDriveComplex()->drawPath(); 
                 
 				if ( (pPLAYER->getAlive() == true) and (pPLAYER->getVehicle() != NULL) )
 				{
@@ -1874,12 +1806,11 @@ void StarSystem :: mouseControl()
                 				if (pPLAYER->getVehicle()->getWeaponComplex()->isAnyWeaponSelected() == true)
                 				{
                    					pPLAYER->getVehicle()->getWeaponComplex()->selectWeapons();
-                   					pPLAYER->getVehicle()->getWeaponComplex()->setWeaponsTarget(visible_STARBASE_vec[i]);
+                   					pPLAYER->getVehicle()->getWeaponComplex()->setTarget(visible_STARBASE_vec[i]);
                    				}
                    				else
                    				{
-                   					pPLAYER->getVehicle()->getNavigator()->setTarget(visible_STARBASE_vec[i], FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID);  
-                   					pPLAYER->getVehicle()->getNavigator()->update_inSpace_inStatic();
+                   					pPLAYER->getPilot()->getStateMachine()->setCurrentMicroTask(g_MICROSCENARIO_DOCKING, visible_STARBASE_vec[i]);
                    				}
 					}
 
@@ -1887,19 +1818,19 @@ void StarSystem :: mouseControl()
                 			{
                 				if (pPLAYER->getShowGrappleRange() == true)
                 				{
-	       						if (pPLAYER->getVehicle()->ableTo.GRAB == true)
-	       						{
-	       							pPLAYER->getVehicle()->grapple_slot.getGrappleEquipment()->add(visible_STARBASE_vec[i]);
-	       							pPLAYER->getVehicle()->grapple_slot.getGrappleEquipment()->validationTargets();	       						
-	       						}
+	       						//if (pPLAYER->getVehicle()->ableTo.GRAB == true)
+	       						//{
+	       							//pPLAYER->getVehicle()->grapple_slot.getGrappleEquipment()->add(visible_STARBASE_vec[i]);
+	       							//pPLAYER->getVehicle()->grapple_slot.getGrappleEquipment()->validationTargets();	       						
+	       						//}
                    				}
                    				else
                    				{
-                   				        //if ( pPLAYER->getPilot()->checkPossibilityToScan(visible_SPACESTATION_vec[i]) == true )
+                   				        if ( pPLAYER->getPilot()->checkPossibilityToScan(visible_STARBASE_vec[i]) == true )
                    					{
-                        					//pPLAYER->getPilot()->setScanTarget(visible_SPACESTATION_vec[i]);
-                        					//pPLAYER->setScanFlag(true);
-                        					//g_GUI_VEHICLE->configure(pPLAYER->getPilot()->getScanShip(), false, false);   
+                        					pPLAYER->getPilot()->setScanTarget(visible_STARBASE_vec[i]);
+                        					pPLAYER->setScanFlag(true);
+                        					g_GUI_VEHICLE->configure(pPLAYER->getPilot()->getScanVehicle(), false, false);   
                    					}
 
 	       					}
@@ -1915,6 +1846,70 @@ void StarSystem :: mouseControl()
 
 
 
+	if (cursor_has_target == false) 
+    	{
+       		for (unsigned int i = 0; i < visible_SATELLITE_vec.size(); i++)
+       		{ 
+            		float ship_cursor_dist = distBetweenPoints(visible_SATELLITE_vec[i]->getPoints()->getCenter(), mxvp, myvp);
+            		if (ship_cursor_dist < visible_SATELLITE_vec[i]->getCollisionRadius())
+            		{ 
+            			cursor_has_target = true;
+
+                		visible_SATELLITE_vec[i]->renderInfo_inSpace(); 
+                		visible_SATELLITE_vec[i]->getWeaponComplex()->renderWeaponIcons();
+
+                		visible_SATELLITE_vec[i]->renderRadarRange(); 
+                		visible_SATELLITE_vec[i]->getWeaponComplex()->renderWeaponsRange(); 
+                		                                
+                                visible_SATELLITE_vec[i]->getDriveComplex()->drawPath(); 
+                
+				if ( (pPLAYER->getAlive() == true) and (pPLAYER->getVehicle() != NULL) )
+				{
+                			if (mlb == true)
+                			{
+                				if (pPLAYER->getVehicle()->getWeaponComplex()->isAnyWeaponSelected() == true)
+                				{
+                   					pPLAYER->getVehicle()->getWeaponComplex()->selectWeapons();
+                   					pPLAYER->getVehicle()->getWeaponComplex()->setTarget(visible_SATELLITE_vec[i]);
+                   				}
+                   				else
+                   				{
+                   					pPLAYER->getVehicle()->getDriveComplex()->setTarget(visible_SATELLITE_vec[i], FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID);   // make it like a ai scenario (follow obj)
+                   					pPLAYER->getVehicle()->getDriveComplex()->update_inSpace_inStatic();
+                   					//pPLAYER->getPilot()->getStateMachine()->setCurrentMicroTask(g_MICROSCENARIO_DOCKING, visible_SATELLITE_vec[i]);
+                   				}
+					}
+
+                			if (mrb == true)
+                			{
+                				if (pPLAYER->getShowGrappleRange() == true)
+                				{
+	       						//if (pPLAYER->getVehicle()->ableTo.GRAB == true)
+	       						//{
+	       							//pPLAYER->getVehicle()->grapple_slot.getGrappleEquipment()->add(visible_SATELLITE_vec[i]);
+	       							//pPLAYER->getVehicle()->grapple_slot.getGrappleEquipment()->validationTargets();	       						
+	       						//}
+                   				}
+                   				else
+                   				{
+                   				        if ( pPLAYER->getPilot()->checkPossibilityToScan(visible_SATELLITE_vec[i]) == true )
+                   					{
+                        					pPLAYER->getPilot()->setScanTarget(visible_SATELLITE_vec[i]);
+                        					pPLAYER->setScanFlag(true);
+                        					g_GUI_VEHICLE->configure(pPLAYER->getPilot()->getScanVehicle(), false, false);   
+                   					}
+
+	       					}
+	       				}
+				}
+				
+                		break; 
+            		}
+        	}
+    	}
+
+
+
 
 
     	if (cursor_has_target == false) 
@@ -1927,10 +1922,9 @@ void StarSystem :: mouseControl()
             		{   
                 		cursor_has_target = true;
 
-                		visible_PLANET_vec[pi]->updateInfo(); 
-                		visible_PLANET_vec[pi]->renderInfo(); 
+                		visible_PLANET_vec[pi]->renderInfo_inSpace(); 
 
-                                visible_PLANET_vec[pi]->drawOrbit();
+                                visible_PLANET_vec[pi]->getOrbit()->draw();
           
 				if ( (pPLAYER->getAlive() == true) and (pPLAYER->getVehicle() != NULL) )
 				{
@@ -1959,8 +1953,7 @@ void StarSystem :: mouseControl()
             		{   
                			cursor_has_target = true;
 
-               			visible_STAR_vec[si]->updateInfo(); 
-               			visible_STAR_vec[si]->renderInfo(); 
+               			visible_STAR_vec[si]->renderInfo_inSpace(); 
 
                			break; 
             		}
@@ -1975,51 +1968,11 @@ void StarSystem :: mouseControl()
 		{
         		if (mlb == true)
         		{
-            			pPLAYER->getVehicle()->getNavigator()->setStaticTargetCoords(vec2f(mxvp, myvp));  
+            			pPLAYER->getVehicle()->getDriveComplex()->setStaticTargetCoords(vec2f(mxvp, myvp));  
             			pPLAYER->getPilot()->getStateMachine()->reset();
         		}
         	}
    	}     
-}
-
-
-
-
-
-void StarSystem :: fireEvents_TRUE(int timer)
-{
-     	for (unsigned int i = 0; i < SHIP_inSPACE_vec.size(); i++)
-     	{
-         	SHIP_inSPACE_vec[i]->getWeaponComplex()->weaponsFire_TRUE(timer);
-     	}
-     
-     	for (unsigned int i = 0; i < STARBASE_vec.size(); i++)
-     	{
-         	//STARBASE_vec[i]->weaponsFire_TRUE(timer);
-     	}
-     
-    	for (unsigned int i = 0; i < SATELLITE_vec.size(); i++)
-     	{
-         	//SATELLITE_vec[i]->weaponsFire_TRUE(timer);
-     	}
-}
-
-void StarSystem :: fireEvents_FALSE(int timer)
-{
-     	for (unsigned int i = 0; i < SHIP_inSPACE_vec.size(); i++)
-     	{
-        	SHIP_inSPACE_vec[i]->getWeaponComplex()->weaponsFire_FALSE(timer);
-     	}
-     	
-     	for (unsigned int i = 0; i < STARBASE_vec.size(); i++)
-     	{
-         	//SPACESTATION_vec[i]->weaponsFire_FALSE(timer);
-     	}
-     
-    	for (unsigned int i = 0; i < STARBASE_vec.size(); i++)
-     	{
-         	//SATELLITE_vec[i]->weaponsFire_FALSE(timer);
-     	}
 }
 
 
@@ -2041,7 +1994,7 @@ void StarSystem :: postHyperJumpEvent()
         	vec2f center(getRandInt(700, 1200), getRandInt(700, 1200));
 		float angle = getRandInt(0, 360);  
 		
-                addToSpace(NPC_appear_vec[i]->getVehicle(), center, angle);  
+                addToSpace(NPC_appear_vec[i]->getVehicle(), center, angle, NPC_appear_vec[i]->getVehicle()->getParent());  
                 addToSpace(NPC_appear_vec[i]);
         }
               
@@ -2052,48 +2005,10 @@ void StarSystem :: launchingEvent() const
 {
 	for (unsigned int i=0; i<PLANET_vec.size(); i++)
 	{
-		PLANET_vec[i]->launchingProcedure();
+		PLANET_vec[i]->getDockingStation()->launchingProcedure();
 	}
 }		
 
-void StarSystem :: addToSpace(Vehicle* vehicle, vec2f center, float angle)
-{
-     	vehicle->setPlaceTypeId(SPACE_ID);
-     	vehicle->setStarSystem(this);  
-
-	switch(vehicle->getTypeId())
-	{
-		case SHIP_ID:         { SHIP_inSPACE_vec.push_back((Ship*)vehicle);   break; }
-		case STARBASE_ID:     { STARBASE_vec.push_back((StarBase*)vehicle);   break; }
-		case SATELLITE_ID:    { SATELLITE_vec.push_back((Satellite*)vehicle); break; }
-	}
-     	
-     	vehicle->getPoints()->setCenter(center); 
-    	vehicle->getPoints()->setAngle(angle);   
-    	vehicle->getPoints()->update();       	
-}
-
-void StarSystem :: addToSpace(Npc* _npc)
-{
-     	//int _race_id = _npc->getRaceId();
-     	int _subtype_id = _npc->getSubTypeId();
-
-     	_npc->setPlaceTypeId(SPACE_ID);
-     	_npc->setStarSystem(this);  
-
-     	NPC_inSPACE_vec.push_back(_npc);
-
-     	if (_subtype_id == RANGER_ID)
-         	NPC_RANGER_inSPACE_vec.push_back(_npc);
-     	if (_subtype_id == WARRIOR_ID)
-         	NPC_WARRIOR_inSPACE_vec.push_back(_npc);
-     	if (_subtype_id == TRADER_ID)
-         	NPC_TRADER_inSPACE_vec.push_back(_npc);
-     	if (_subtype_id == PIRAT_ID)
-         	NPC_PIRAT_inSPACE_vec.push_back(_npc);
-     	if (_subtype_id == DIPLOMAT_ID)
-         	NPC_DIPLOMAT_inSPACE_vec.push_back(_npc);
-}
 
 bool StarSystem :: removeShip(int _id)
 {       
@@ -2142,10 +2057,10 @@ bool StarSystem :: removeFromTheListById(std::vector<Npc*>* _pTo_npc_vec, int _i
 //// ******* TRANSITION ******* 
 
 
-void StarSystem :: bombExplosionEvent_TRUE(Bomb* bomb)
+void StarSystem :: bombExplosionEvent_TRUE(Container* bomb)
 {
-	float radius = bomb->getRadius();
-	float damage = bomb->getDamage(); 
+	float radius = ((Bomb*)bomb->getItemSlot()->getItem())->getRadius();
+	float damage = ((Bomb*)bomb->getItemSlot()->getItem())->getDamage(); 
 	
 	createExplosion(this, bomb->getPoints()->getCenter(), 9);
 	
@@ -2153,7 +2068,7 @@ void StarSystem :: bombExplosionEvent_TRUE(Bomb* bomb)
     	{
        	        if ( distBetweenPoints(SHIP_inSPACE_vec[i]->getPoints()->getCenter(), bomb->getPoints()->getCenter()) < radius )
                	{
-       			SHIP_inSPACE_vec[i]->hit_TRUE(damage); 
+       			SHIP_inSPACE_vec[i]->hit(damage, true); 
        		}
     	}
     	
@@ -2161,7 +2076,7 @@ void StarSystem :: bombExplosionEvent_TRUE(Bomb* bomb)
     	{
        	        if ( distBetweenPoints(STARBASE_vec[i]->getPoints()->getCenter(), bomb->getPoints()->getCenter()) < radius )
                	{
-       			STARBASE_vec[i]->hit_TRUE(damage); 
+       			STARBASE_vec[i]->hit(damage, true); 
        		}
     	}
     	
@@ -2169,7 +2084,7 @@ void StarSystem :: bombExplosionEvent_TRUE(Bomb* bomb)
     	{
        	        if ( distBetweenPoints(SATELLITE_vec[i]->getPoints()->getCenter(), bomb->getPoints()->getCenter()) < radius )
                	{
-       			SATELLITE_vec[i]->hit_TRUE(damage); 
+       			SATELLITE_vec[i]->hit(damage, true); 
        		}
     	}
 }
@@ -2181,22 +2096,25 @@ void StarSystem :: debug__()
         {
                 for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
                 {
-                        MINERAL_vec[mi]->hit_TRUE(1000);
+                        MINERAL_vec[mi]->hit(1000, false);
                 }
         }
 }
 
 
+void StarSystem :: postDeathUniqueEvent(bool) /*virtual */
+{}
+
 
 
 
 template <typename AGRESSOR, typename VICTIM>
-bool checkCollision_TRUE(AGRESSOR* agressor,  VICTIM* victim)
+bool checkCollision(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
 {
 	if (collisionBetweenCenters(agressor->getPoints(), victim->getPoints(), victim->getCollisionRadius()) == true)
         {
-        	victim->hit_TRUE(agressor->getDamage());
-                agressor->collisionEvent_TRUE();
+        	victim->hit(agressor->getDamage(), show_effect);
+                agressor->collisionEvent(show_effect);
                 
                 return true;
         }

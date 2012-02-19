@@ -17,32 +17,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "rect.hpp"
 
 Rect :: Rect()
-{}
+{
+	set(0, 0, 0, 0);
+}
 
 
 Rect :: Rect(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h)
 {
-    	bottomLeft.x = _bottomLeft_x;
-    	bottomLeft.y = _bottomLeft_y;
-    	
-    	w = _w;
-    	h = _h;
-
-    	calcCenter();
+	set(_bottomLeft_x, _bottomLeft_y, _w, _h);
 }
 
 
 Rect :: Rect(vec2f _bottomLeft, int _w, int _h)
 {
-    	bottomLeft = _bottomLeft;
-
-    	w = _w;
-    	h = _h;
-
-    	calcCenter();
+	set(_bottomLeft.x, _bottomLeft.y, _w, _h);
 }
 
 
@@ -50,31 +40,23 @@ Rect :: ~Rect()
 {}
 
 
-vec2f Rect :: getCenter() const     { return center; }
-vec2f Rect :: getBottomLeft() const { return bottomLeft; }
-int Rect :: getWidth() const 	    { return w; }
-int Rect :: getHeight() const 	    { return h; }   		
-      		
-void Rect :: calcCenter()
+void Rect :: set(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h)
 {
-    	center.x = bottomLeft.x + w/2;
-    	center.y = bottomLeft.y + h/2;
+    	bottomLeft.x = _bottomLeft_x;
+    	bottomLeft.y = _bottomLeft_y;
+    	
+    	w = _w;
+    	h = _h;
+
+    	updateCenter();
 }
 
-
-void Rect :: setNewCenter(vec2f _center)
+void Rect :: setCenter(vec2f _center)
 {
-    	float dx = center.x - _center.x;
-    	float dy = center.y - _center.y;
-
-    	bottomLeft.x -= dx;
-    	bottomLeft.y -= dy; 
-
-    	center = _center;
+	setCenter(_center.x, _center.y);
 }
 
-
-void Rect :: setNewCenter(float _center_x, float _center_y)
+void Rect :: setCenter(float _center_x, float _center_y)
 {
     	float dx = center.x - _center_x;
     	float dy = center.y - _center_y;
@@ -88,10 +70,38 @@ void Rect :: setNewCenter(float _center_x, float _center_y)
 
 
 
-void Rect ::  setNewBottomLeftPos(vec2f _bottomLeft)
+void Rect ::  setBottomLeft(vec2f _bottomLeft)
 {
-    	bottomLeft.x = _bottomLeft.x;
-    	bottomLeft.y = _bottomLeft.y;
-
-    	calcCenter();
+	setBottomLeft(_bottomLeft.x, _bottomLeft.y);
 }
+
+void Rect ::  setBottomLeft(float _pos_x, float _pos_y)
+{
+    	bottomLeft.x = _pos_x;
+    	bottomLeft.y = _pos_y;
+
+    	updateCenter();
+}
+
+
+void Rect ::  resize(int _w, int _h)
+{
+    	w = _w;
+    	h = _h;
+
+    	bottomLeft.x = center.x - w/2;
+    	bottomLeft.y = center.y - h/2;
+}
+
+
+vec2f Rect :: getCenter() const     { return center; }
+vec2f Rect :: getBottomLeft() const { return bottomLeft; }
+int Rect :: getWidth() const 	    { return w; }
+int Rect :: getHeight() const 	    { return h; }   		
+      		
+void Rect :: updateCenter()
+{
+    	center.x = bottomLeft.x + w/2;
+    	center.y = bottomLeft.y + h/2;
+}
+

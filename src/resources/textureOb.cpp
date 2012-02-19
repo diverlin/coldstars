@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 TextureOb :: TextureOb()
 {}
 
-TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, std::vector<int>* pTo_arg, int _columns_num, int _rows_num, float _fps)
+TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, std::vector<int>* pTo_arg, int _columns_num, int _rows_num, int _fps)
 {
     	// TexOb attributes INIT
     	race_id = -1;
@@ -38,7 +38,7 @@ TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, std::ve
     	use_alpha = _use_alpha;
     
     
-    	if ((_columns_num == 1) and (_rows_num == 1))
+    	if ( ((_columns_num == 1) and (_rows_num == 1)) or (_fps == 0) )
     	{
         	is_animated = false;
     	}
@@ -115,6 +115,9 @@ TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, std::ve
 	}
 }  
 
+int TextureOb :: getFrameWidth() const  { return w_slice; }
+int TextureOb :: getFrameHeight() const { return h_slice;}
+        	
 void TextureOb :: loadToVRAM()
 {
      	sf::Image Image;
@@ -134,7 +137,7 @@ void TextureOb :: removeFromVRAM()
 {}         
 
 
-void TextureOb :: createTextureCoords(int _columns_num, int _rows_num, float _fps)
+void TextureOb :: createTextureCoords(int _columns_num, int _rows_num, int _fps)
 {
 	frame = 0;
      	frames_total_num = 0;
@@ -369,8 +372,21 @@ void TextureOb :: torpedBulletArgManager(std::vector<int>* arg)
 
 void TextureOb :: particleArgManager(std::vector<int>* arg)
 {
-   	color_id = (*arg)[0];
+        color_id = (*arg)[0];
 }
+
+//int TextureOb :: getParticleFrameNumByColorId(int _color_id)
+//{
+        //for(unsigned int i = 0; i < color_id_vec.size(); i++)
+        //{
+                //if (color_id_vec[i] == _color_id)
+                //{
+                        //return i;
+                //}                
+        //}
+        
+        //return 0;           
+//}
 
 void TextureOb :: distStarArgManager(std::vector<int>* arg)
 {}

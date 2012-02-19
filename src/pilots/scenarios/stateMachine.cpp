@@ -18,85 +18,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-MacroTaskHolder :: MacroTaskHolder()
-{
-	is_valid = false;
-	
-	scenario = NULL;
-	target   = new TargetObject();
-}
-
-MacroTaskHolder :: ~MacroTaskHolder()
-{
-	delete target;
-}
-
-template <typename TARGET_TYPE>
-void MacroTaskHolder :: set(MacroScenarioBase* _scenario, TARGET_TYPE* _target)
-{
-	is_valid = true;
-	
-	scenario = _scenario;
-	target->setObject(_target);
-}
-
-bool MacroTaskHolder :: getValid() const { return is_valid; }
-MacroScenarioBase* MacroTaskHolder :: getScenario()   const { return scenario; }
-TargetObject*  MacroTaskHolder :: getTarget() const { return target; }	
-	
-void MacroTaskHolder :: reset()
-{
-	is_valid = false;
-	
-	target->reset();
-	scenario = NULL;
-}
-
-
-
-
-MicroTaskHolder :: MicroTaskHolder()
-{
-	is_valid = false;
-	
-	scenario = NULL;
-	target   = new TargetObject();
-}
-
-MicroTaskHolder :: ~MicroTaskHolder()
-{
-	delete target;
-}
-
-MicroScenarioBase* MicroTaskHolder :: getScenario()   const { return scenario; }
-TargetObject*  MicroTaskHolder :: getTarget() const { return target; }	
-	
-template <typename TARGET_TYPE>
-void MicroTaskHolder :: set(MicroScenarioBase* _scenario, TARGET_TYPE* _target)
-{
-	scenario = _scenario;
-	target->setObject(_target);
-}
-
-void MicroTaskHolder :: reset()
-{
-	is_valid = false;
-	
-	target->reset();
-	scenario = NULL;
-}
-
-
-
-
-
 StateMachine :: StateMachine(Npc* _npc) 
 {
-	current_macroTask  = new MacroTaskHolder();		
-	previous_macroTask = new MacroTaskHolder();
+	current_macroTask  = new TaskHolder();		
+	previous_macroTask = new TaskHolder();
 
-	current_microTask  = new MicroTaskHolder();		
-	previous_microTask = new MicroTaskHolder();
+	current_microTask  = new TaskHolder();		
+	previous_microTask = new TaskHolder();
 	
 	npc_owner = _npc;
 }
@@ -111,11 +39,11 @@ StateMachine :: ~StateMachine()
 }
 
 
-MacroTaskHolder* StateMachine :: getCurrentMacroTask() const  { return current_macroTask; }
-MacroTaskHolder* StateMachine :: getPreviousMacroTask() const { return previous_macroTask; }	
+TaskHolder* StateMachine :: getCurrentMacroTask() const  { return current_macroTask; }
+TaskHolder* StateMachine :: getPreviousMacroTask() const { return previous_macroTask; }	
 		
-MicroTaskHolder* StateMachine :: getCurrentMicroTask() const  { return current_microTask; }
-MicroTaskHolder* StateMachine :: getPreviousMicroTask() const { return previous_microTask; }	
+TaskHolder* StateMachine :: getCurrentMicroTask() const  { return current_microTask; }
+TaskHolder* StateMachine :: getPreviousMicroTask() const { return previous_microTask; }	
 		
 		
 void StateMachine :: update_inStatic()
@@ -138,11 +66,9 @@ void StateMachine :: update_inDynamic()
 	 	current_microTask->getScenario()->update_inDynamic(npc_owner);
 	}
 }
-
-
+	
 		
-template <typename TARGET_TYPE>					
-void StateMachine :: setCurrentMacroTask(MacroScenarioBase* _new_state,  TARGET_TYPE* _target)
+void StateMachine :: setCurrentMacroTask(ScenarioBase* _new_state,  SpaceObjectBase* _target)
 {
 	if (previous_macroTask->getScenario() != NULL)
 	{
@@ -158,9 +84,8 @@ void StateMachine :: setCurrentMacroTask(MacroScenarioBase* _new_state,  TARGET_
 	}
 }
 
-		
-template <typename TARGET_TYPE>					
-void StateMachine :: setCurrentMicroTask(MicroScenarioBase* _new_state,  TARGET_TYPE* _target)
+				
+void StateMachine :: setCurrentMicroTask(ScenarioBase* _new_state,  SpaceObjectBase* _target)
 {
 	if (previous_microTask->getScenario() != NULL)
 	{

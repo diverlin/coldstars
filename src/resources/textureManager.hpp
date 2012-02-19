@@ -34,11 +34,13 @@ struct UniqueTextureCollector
 	TextureOb* texOb_icon_map;
         TextureOb* texOb_grapple_trail;	
 
-        TextureOb* texOb_dot_blue;	
+        TextureOb* texOb_dot_blue;
         TextureOb* texOb_dot_red;
         TextureOb* texOb_dot_green;
         TextureOb* texOb_dot_black;
         TextureOb* texOb_dot_yellow;
+        
+        //TextureOb* texOb_particles_sheet;
 };
 
 class TextureManager
@@ -53,15 +55,17 @@ class TextureManager
         	TextureOb* getRandomShipTexObWithFollowingAtrributes(int _race_id, int _subtype_id, int _size_id);
 
         	TextureOb* getParticleTexObByColorId(int _color_id);
-        	
+                        	
 		TextureOb* getRandomTexOb(int);
 
         	void DEBUG_CheckShipTexOb();
-        	
+
         private:
         	std::vector<TextureOb*> slot_texOb_vec;
         	std::vector<TextureOb*> landingArea_texOb_vec;
         	std::vector<TextureOb*> turrel_texOb_vec;
+                
+                std::vector<TextureOb*> particles_texOb_vec;
 
         	// BACKGROUND 
         	std::vector<TextureOb*> nebulaBgEffect_texOb_vec;
@@ -74,8 +78,7 @@ class TextureManager
           	std::vector<TextureOb*> govermentBg_texOb_vec;
           	std::vector<TextureOb*> landBg_texOb_vec;
 
-        	// PARTICLES
-        	std::vector<TextureOb*> particles_texOb_vec;
+        	// EFFECTS
         	std::vector<TextureOb*> rocketBullet_texOb_vec;
         	std::vector<TextureOb*> lazerEffect_texOb_vec;
         	std::vector<TextureOb*> shieldEffect_texOb_vec;

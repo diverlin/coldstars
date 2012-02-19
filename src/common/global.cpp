@@ -22,7 +22,7 @@ bool g_USE_MODERN_HW = true;
 				const bool g_AUTOTURN_ENABLE = false;  // debug
 const int g_GAMESPEED = 1;
 
-const int g_VIEW_WIDTH = 1024;
+const int g_VIEW_WIDTH = 640;
 const int g_VIEW_HEIGHT = g_VIEW_WIDTH*600/800;
 const int g_BPP = 32;
 const int g_FPS_LIMIT = 60;
@@ -35,6 +35,9 @@ const bool g_VERT_SYNC = true;
 int g_SCROLL_VELOCITY_MAX = 20;
 int g_SCROLL_VELOCITY_STEP = 1;
 
+int g_SCROLL_COORD_X = 0;
+int g_SCROLL_COORD_Y = 0;
+
 unsigned int g_MOUSE_POS_X;
 unsigned int g_MOUSE_POS_Y;
 
@@ -45,7 +48,7 @@ bool g_MOUSE_RIGHT_BUTTON;
 int TURN_TIME = 150;  //turn time, depends on game fps
 int TURN_COUNT = 0; 
         
-sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.4.30 (SFML/C++)");
+sf::RenderWindow g_APP(sf::VideoMode(g_VIEW_WIDTH, g_VIEW_HEIGHT, g_BPP), "cold star V0.0.4.39 (SFML/C++)");
 sf::Font g_FONT;
 
 sf::Clock g_CLOCK;
@@ -86,26 +89,12 @@ KeyEvents* g_KEYEVENTS;
 Fps* g_FPS;
 GameTimer* g_TIMER;
 
-SimpleIdGenerator   g_STARSYSTEM_ID_GENERATOR  = SimpleIdGenerator();
-SimpleIdGenerator   g_CONTAINER_ID_GENERATOR  = SimpleIdGenerator();
-SimpleIdGenerator   g_ASTEROID_ID_GENERATOR  = SimpleIdGenerator();
-SimpleIdGenerator   g_STAR_ID_GENERATOR  = SimpleIdGenerator();
-SimpleIdGenerator   g_PLANET_ID_GENERATOR  = SimpleIdGenerator();
-SimpleIdGenerator   g_MINERAL_ID_GENERATOR  = SimpleIdGenerator();
-SimpleIdGenerator   g_BOMB_ID_GENERATOR  = SimpleIdGenerator();
-SimpleIdGenerator   g_BLACKHOLE_ID_GENERATOR  = SimpleIdGenerator();
-SimpleIdGenerator   g_EQUIPMENT_ID_GENERATOR  = SimpleIdGenerator();
-SimpleIdGenerator   g_MODULE_ID_GENERATOR  = SimpleIdGenerator();
-SimpleIdGenerator   g_VEHICLE_ID_GENERATOR  = SimpleIdGenerator();
-SimpleIdGenerator   g_PLAYER_ID_GENERATOR  = SimpleIdGenerator();
-SimpleIdGenerator   g_NPC_ID_GENERATOR  = SimpleIdGenerator();
-
+SimpleIdGenerator   g_ID_GENERATOR  = SimpleIdGenerator();
 
 SimpleIdGenerator   g_TEXTURE_ID_GENERATOR = SimpleIdGenerator();
 DetaliedIdGenerator g_TYPE_ID_GENERATOR    = DetaliedIdGenerator(); 
 
 UniqueTextureCollector g_UNIQUE_TEXTURE_COLLECTOR;
-
 TextureManager g_TEXTURE_MANAGER;
 
 

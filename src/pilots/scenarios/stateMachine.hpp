@@ -21,68 +21,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define STATEMACHINE_H
 
 
-class MacroTaskHolder
-{
-	public:
-		MacroTaskHolder();
-		~MacroTaskHolder();
-		
-		template <typename TARGET_TYPE>
-		void set(MacroScenarioBase*, TARGET_TYPE*);
-
-		bool getValid() const;		
-		MacroScenarioBase* getScenario() const;
-		TargetObject*      getTarget() const;	
-		
-		void reset();
-				
-	private:
-		MacroScenarioBase*     scenario;
-		TargetObject* target;	
-		
-		bool is_valid;
-};
-
-
-class MicroTaskHolder
-{
-	public:
-		MicroTaskHolder();
-		~MicroTaskHolder();
-	
-		template <typename TARGET_TYPE>
-		void set(MicroScenarioBase*, TARGET_TYPE*);
-	
-		bool getValid() const;
-		MicroScenarioBase*  getScenario() const;
-		TargetObject*       getTarget() const;
-		
-		void reset();
-			
-	private:
-		MicroScenarioBase*     scenario;
-		TargetObject* target;	
-		
-		bool is_valid;
-};
-
-
 class StateMachine
 {
 	public:
 		StateMachine(Npc*);
 		~StateMachine();
 
-		template <typename TARGET_TYPE>
-		void setCurrentMicroTask(MicroScenarioBase*, TARGET_TYPE*);
-		template <typename TARGET_TYPE>
-		void setCurrentMacroTask(MacroScenarioBase*, TARGET_TYPE*);
+		void setCurrentMicroTask(ScenarioBase*, SpaceObjectBase*);
+		void setCurrentMacroTask(ScenarioBase*, SpaceObjectBase*);
 		
-		MacroTaskHolder* getCurrentMacroTask() const;
-		MacroTaskHolder* getPreviousMacroTask() const;	
+		TaskHolder* getCurrentMacroTask() const;
+		TaskHolder* getPreviousMacroTask() const;	
 		
-		MicroTaskHolder* getCurrentMicroTask() const;
-		MicroTaskHolder* getPreviousMicroTask() const;		
+		TaskHolder* getCurrentMicroTask() const;
+		TaskHolder* getPreviousMicroTask() const;		
 				
 		void update_inDynamic();			
 		void update_inStatic();	
@@ -92,11 +44,11 @@ class StateMachine
 	private:
 		Npc* npc_owner;
 		
-		MacroTaskHolder* current_macroTask;		
-		MacroTaskHolder* previous_macroTask;
+		TaskHolder* current_macroTask;		
+		TaskHolder* previous_macroTask;
 
-		MicroTaskHolder* current_microTask;		
-		MicroTaskHolder* previous_microTask;
+		TaskHolder* current_microTask;		
+		TaskHolder* previous_microTask;
 }; 
 
 

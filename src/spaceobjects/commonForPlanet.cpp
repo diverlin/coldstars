@@ -20,21 +20,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 CommonForPlanet :: CommonForPlanet()
 {}
 
-CommonForPlanet :: ~CommonForPlanet()
-{}
+CommonForPlanet :: ~CommonForPlanet() /* virtual */
+{
+	delete orbit;
+}
 
 void CommonForPlanet :: setPlanetData(PlanetData data_planet) { this->data_planet = data_planet;  }
+
+Orbit* CommonForPlanet :: getOrbit() const { return orbit; }
+
 
 void CommonForPlanet :: postCreateInit()
 {
         this->calcCollisionrRadius();           
         this->createCenter();
+        
+        orbit = new Orbit();
 }
 
 void CommonForPlanet :: createOrbit()
 {
-       	this->createEllipceOrbit(); 
-        this->createOrbitVisual();  
+	orbit->calcPath(data_planet.radius_A, data_planet.radius_B, data_planet.speed, data_planet.orbit_phi_inD);
 }
     		
 void CommonForPlanet :: calcCollisionrRadius()
@@ -47,75 +53,11 @@ void CommonForPlanet :: calcCollisionrRadius()
         points.setWidthHeight(scale_factor*data_planet.scale, scale_factor*data_planet.scale);  // needs for finding visible corners
 }
 
-void CommonForPlanet :: createOrbitVisual()
-{
-	orbit_visual.fillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue->texture, &orbit_vec, 50, 10);
-}
-       
-vec2f CommonForPlanet :: getNextTurnPosition() const 
-{ 
-        if (orbit_it + TURN_TIME < orbit_len)
-        {
-                return orbit_vec[orbit_it+TURN_TIME]; 
-        }
-        else
-        {
-                int d_orbit = orbit_len-orbit_it;
-                return orbit_vec[TURN_TIME - d_orbit]; 
-        }
-}
-
-void CommonForPlanet :: createEllipceOrbit()
-{   
-     	float d_angleInRad  = data_planet.speed / 57.295779;
-     	float orbitPhiInRad = data_planet.orbit_phi_inD * PI/180;
-     	
-     	for(float angleInRad = 0; angleInRad < 2*PI; angleInRad += d_angleInRad) 
-     	{ 
-         	float new_coord_x = data_planet.orbit_center.x + data_planet.radius_A * cos(angleInRad) * cos(orbitPhiInRad) - data_planet.radius_B * sin(angleInRad) * sin(orbitPhiInRad);
-         	float new_coord_y = data_planet.orbit_center.y + data_planet.radius_A * cos(angleInRad) * sin(orbitPhiInRad) + data_planet.radius_B * sin(angleInRad) * cos(orbitPhiInRad);
-         	orbit_vec.push_back(vec2f(new_coord_x, new_coord_y));
-     	}
-        orbit_len = orbit_vec.size();
-        orbit_it = getRandInt(1, orbit_len);
-        
-        updatePosition(); // place object to a right position
-}    
-
-
-void CommonForPlanet :: updatePosition()
-{   
-     	if (orbit_it < orbit_len)
-     	{ 
-        	points.setCenter(orbit_vec[orbit_it]);
-        	//center_pos.set(orbit_vec[orbit_it].x, orbit_vec[orbit_it].y, -500.0f);
-        	orbit_it++;
-     	}
-     	else
-        	orbit_it = 0;
-}    
-
-
-void CommonForPlanet :: updateRotation()
-{
-	angle.x += d_angle.x;  
-     	angle.y += d_angle.y;  
-     	angle.z += d_angle.z; 
-}
-
-
-void CommonForPlanet :: hit_TRUE(int) 
-{}
-
-
-void CommonForPlanet :: hit_FALSE(int) 
-{}
- 		
- 		 		
+void CommonForPlanet :: postDeathUniqueEvent(bool)  /* virtual */
+{}		
+		 		
 void CommonForPlanet :: render_NEW()
 {     	
-	updateRotation();
-
      	glUseProgram(g_LIGHT_PROGRAM);
      	//printProgramInfoLog(g_LIGHT_PROGRAM);
 
@@ -152,15 +94,8 @@ void CommonForPlanet :: render_NEW()
 
 void CommonForPlanet :: render_OLD()
 {   	
-	updateRotation();
-
 	glBindTexture(GL_TEXTURE_2D, texOb->texture);
 	renderMesh(mesh->glList, points.getCenter3f(), angle, data_planet.scale);
-}
-
-void CommonForPlanet :: drawOrbit()
-{   
-        orbit_visual.draw();
 }
 
 

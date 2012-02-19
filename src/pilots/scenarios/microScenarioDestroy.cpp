@@ -30,21 +30,19 @@ void MicroScenarioDestroy :: enter(Npc* _npc) const
 
 void MicroScenarioDestroy :: update_inStatic(Npc* _npc) const
 {
-	if (_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getValid() == true)
+	if (_npc->getStateMachine()->getCurrentMicroTask()->getValid() == true)
 	{
-		if ( (*_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getpAlive() == false) or ( _npc->getStarSystem()->getId() != _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getStarSystem()->getId()) )
-		{
-			_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->reset();
-		}
-
-		else
+		if ( (_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getAlive() == true) or ( _npc->getStarSystem() == _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getStarSystem()) )
 		{
 			_npc->getVehicle()->getWeaponComplex()->weapon_selector.setAll(true);
 			_npc->getVehicle()->getWeaponComplex()->selectWeapons();
-			_npc->getVehicle()->getWeaponComplex()->setWeaponsTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getNpc()->getVehicle());
-                      
-                             
-			_npc->getVehicle()->getNavigator()->setTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getNpc()->getVehicle(), FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID ); 
+			//_npc->getVehicle()->getWeaponComplex()->setTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getNpc()->getVehicle());
+                                                   
+			//_npc->getVehicle()->getDriveComplex()->setTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getNpc()->getVehicle(), FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID ); 
+		}
+		else
+		{
+			_npc->getStateMachine()->getCurrentMicroTask()->reset();
 		}
 	}
 }
@@ -60,5 +58,5 @@ void MicroScenarioDestroy :: exit(Npc* _npc) const
 
 std::string MicroScenarioDestroy :: getDescription(Npc* _npc) const
 {
-	return "DESTROY to ob_id" + int2str( _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getObId()) ;
+	return "DESTROY to ob_id" + int2str( _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getId()) ;
 }
