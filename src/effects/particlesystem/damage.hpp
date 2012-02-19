@@ -21,35 +21,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define DAMAGE_H
 
 
-
-class DamageEffect
+class DamageEffect : public BaseParticleSystem
 {
    	public: 
-       		DamageEffect(TextureOb* _texOb, 
-       		    	     vec2f* _pCenter, 
-       		    	     ParticleData _data_particle,
-       		    	     unsigned int _num_particles);
-       		    
-       		~DamageEffect();
+       		DamageEffect();   
+       		virtual ~DamageEffect();
+                
+                void createParticles(); 
+                                
+       		virtual void update();
+       		virtual void render();
 
-      		bool getAlive() const;
-      		void setDying();
-      		      		
-       		void update();
-       		void render();
-       		
-       	private:       	
-       	       	bool is_alive;
-       		bool is_dying;
+       	private:    
 
-       		vec2f* pCenter;
-
-		TextureOb* texOb;
-		ParticleData data_particle;
-
-       		std::vector<Particle*> particles_vec;       		       	
 };
 
-DamageEffect* createDamageEffect(TextureOb* _texOb, vec2f* _pCenter);
+DamageEffect* getNewDamageEffect(int, SpaceObjectBase*);
 
 #endif 

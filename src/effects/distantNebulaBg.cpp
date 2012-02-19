@@ -25,7 +25,7 @@ DistantNebulaBgEffect :: DistantNebulaBgEffect(TextureOb* _texOb, vec3f _center)
     	texOb = _texOb;
         center = _center; 
 
-    	if(texOb->w * texOb->h > 300000)
+    	if(texOb->getFrameWidth() * texOb->getFrameHeight() > 300000)
      		distance_rate =  1/60.0; 
     	else
       		distance_rate =  1/40.0;

@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define STARSYSTEM_H
 
 
-class StarSystem
+class StarSystem : public SpaceObjectBase
 {
 	public:
     	    	// ENTITY VECTORS
@@ -31,7 +31,7 @@ class StarSystem
     		std::vector<Planet*>       PLANET_vec;
     		std::vector<Asteroid*>     ASTEROID_vec;
     		std::vector<Mineral*>      MINERAL_vec;
-    		std::vector<Bomb*>         BOMB_vec;
+    		std::vector<Container*>    BOMB_vec;
     		std::vector<Container*>    CONTAINER_vec;
     		std::vector<RocketBullet*> ROCKET_vec;
     		std::vector<BlackHole*>    BLACKHOLE_vec;
@@ -77,8 +77,7 @@ class StarSystem
 		Npc* getRandNpc(std::vector<int>*) const;
     		// 
 
-		void update_TRUE(int timer);
-		void update_FALSE(int timer);
+		void update(int, bool);
 
 	        void render(bool, bool, bool);      
    		    		
@@ -87,36 +86,35 @@ class StarSystem
     		//// TRANSITION
                 void addToHyperJumpQueue(Npc*);
                                 
-    		void addToSpace(Vehicle*, vec2f, float);
+    		void addToSpace(VehicleBase*, vec2f, float, SpaceObjectBase*);
     		void addToSpace(Npc*);
 
-                void add(Star*);
-                void add(Planet*);
-    		void add(Asteroid*);
-    		void add(Mineral*, vec2f);
-    		void add(Bomb*, vec2f);
-    		void add(Container*, vec2f);
-    		void add(RocketBullet*);
-    		void add(BlackHole*, vec2f);
+                void addToSpace(Star*);
+                void addToSpace(Planet*);
+    		void addToSpace(Asteroid*);
+    		void addToSpace(Mineral*, vec2f);
+    		void addToSpace(Bomb*, vec2f);
+    		void addToSpace(Container*, vec2f);
+    		void addToSpace(RocketBullet*);
+    		void addToSpace(BlackHole*, vec2f);
     		    		
      		// effects
-    		void add(ExplosionEffect*);
-    		void add(ShockWaveEffect*);
-    		void add(LazerTraceEffect*);
-    		void add(DamageEffect*);
+    		void addToSpace(BaseParticleSystem*);
+    		void addToSpace(ShockWaveEffect*);
+    		void addToSpace(LazerTraceEffect*);
     		
-    		void add(VerticalFlowText*);
+    		void addToSpace(VerticalFlowText*);
    		
-    		void add(DistantNebulaBgEffect*);
-    		void add(DistantStarBgEffect*);
+    		void addToSpace(DistantNebulaBgEffect*);
+    		void addToSpace(DistantStarBgEffect*);
                 
     		bool removeShip(int _id);    
     		bool removeNpc(int _id, int _subtype_id);  
    		////
    		
    		//void addToRemoveFromOuterSpaceQueue(Mineral*);
-   		void addToRemoveFromOuterSpaceQueue(Bomb*);
-   		void addToRemoveFromOuterSpaceQueue(Vehicle*);
+   		void addToRemoveFromOuterSpaceQueue(Container*);
+   		void addToRemoveFromOuterSpaceQueue(VehicleBase*);
    		    		
     	private:
                 int id, type_id;
@@ -138,8 +136,7 @@ class StarSystem
     		
     		// effects
     		std::vector<LazerTraceEffect*> effect_LAZERTRACE_vec;
-    		std::vector<ExplosionEffect*>  effect_EXPLOSION_vec;
-    		std::vector<DamageEffect*>     effect_DAMAGE_vec;
+    		std::vector<BaseParticleSystem*>  effect_PARTICLESYSTEM_vec;
     		std::vector<ShockWaveEffect*>  effect_SHOCKWAVE_vec;
     		
     		std::vector<VerticalFlowText*> text_DAMAGE_vec;
@@ -150,7 +147,7 @@ class StarSystem
     		std::vector<Planet*>       visible_PLANET_vec;
     		std::vector<Asteroid*>     visible_ASTEROID_vec;
     		std::vector<Mineral*>      visible_MINERAL_vec;
-    		std::vector<Bomb*>         visible_BOMB_vec;
+    		std::vector<Container*>    visible_BOMB_vec;
     		std::vector<Container*>    visible_CONTAINER_vec;
     		std::vector<RocketBullet*> visible_ROCKET_vec;
     		std::vector<BlackHole*>    visible_BLACKHOLE_vec;
@@ -161,15 +158,13 @@ class StarSystem
     		//  
     		   
     		// remove queue 	
-    		std::vector<Bomb*>         remove_BOMB_queue;
+    		std::vector<Container*>         remove_BOMB_queue;
     		std::vector<Mineral*>      remove_MINERAL_queue;
     		std::vector<Ship*>         remove_SHIP_queue;
     		std::vector<StarBase*>     remove_STARBASE_queue;
     		std::vector<Satellite*>    remove_SATELLITE_queue;
     		
-    		//
-    		
-    			    		    	    	
+    		//    			    		    	    	
     		Garbage garbage;
                 
                 void postHyperJumpEvent();
@@ -180,24 +175,15 @@ class StarSystem
    		void manageUnavaliableObjects();
     		void manageDeadObjects();
    		
-                void rocketCollision_TRUE();
-    		void rocketCollision_FALSE();
+                void rocketCollision(bool);
+    		void asteroidCollision(bool);
 
-    		void asteroidCollision_TRUE();
-    		void asteroidCollision_FALSE();
-
-    		void updateEntities_common_TRUE();
-    		void updateEntities_common_FALSE();
     		
     		void updateEntities_inStatic();
-    		    		
-    		void updateEntities_inDynamic_TRUE();
-    		void updateEntities_inDynamic_FALSE();
+
+    		void updateEntities(int, bool);    		    		
     		
-    		void fireEvents_TRUE(int timer);
-    		void fireEvents_FALSE(int timer);
-    		
-    		
+   		
 		void findVisibleEntities();  
 		void renderEntities_NEW();
     		void renderEntities_OLD();
@@ -211,13 +197,15 @@ class StarSystem
     		
     		void updateStates();
     		
-    		void bombExplosionEvent_TRUE(Bomb*);
+    		void bombExplosionEvent_TRUE(Container*);
     		
     		void debug__();    	
+    		
+    		void postDeathUniqueEvent(bool);
 };
 
 template <typename AGRESSOR, typename VICTIM>
-bool checkCollision_TRUE(AGRESSOR*,  VICTIM*);
+bool checkCollision(AGRESSOR*,  VICTIM*, bool);
 
 bool collisionBetweenCenters(Points* points1, Points* points2, float collision_radius);
 bool collisionBetweenCenters(Points* points1, vec2f point2, float collision_radius);

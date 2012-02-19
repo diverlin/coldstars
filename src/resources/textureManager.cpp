@@ -146,11 +146,11 @@ void TextureManager :: manage(TextureOb* texOb)
     		break;
     		}
     		
-    		case PARTICLE_TEXTURE_ID:      { particles_texOb_vec.push_back(texOb);    break; }
 		case ROCKET_BULLET_TEXTURE_ID: { rocketBullet_texOb_vec.push_back(texOb); break; }
 		case LAZER_EFFECT_TEXTURE_ID:  { lazerEffect_texOb_vec.push_back(texOb);  break; }
 		case SHIELD_EFFECT_TEXTURE_ID: { shieldEffect_texOb_vec.push_back(texOb); break; }
 		case DISTANTSTAR_TEXTURE_ID:   { starBgEffect_texOb_vec.push_back(texOb); break; }
+                case PARTICLE_TEXTURE_ID:      { particles_texOb_vec.push_back(texOb); break; } 
 
     		// ASTEROIDS/MINERALS
     		case ASTEROID_TEXTURE_ID:  { asteroid_texOb_vec.push_back(texOb);  break; } 
@@ -431,7 +431,7 @@ TextureOb* TextureManager :: getParticleTexObByColorId(int _color_id)
      	return NULL;
 }
 
-
+                
 TextureOb* TextureManager :: getRandomTexOb(int texture_type_id)
 {
 	switch(texture_type_id)

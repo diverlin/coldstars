@@ -17,7 +17,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "distantStarBg.hpp"
 
 DistantStarBgEffect :: DistantStarBgEffect(TextureOb* _texOb, vec2f _center, float _particleSize)
 {
@@ -45,7 +44,9 @@ void DistantStarBgEffect :: render(float vx, float vy)
    
 DistantStarBgEffect* createDistantStar()
 {
-	TextureOb* texOb_distantStar = g_TEXTURE_MANAGER.getParticleTexObByColorId(YELLOW_COLOR_ID);
+	//TextureOb* texOb_distantStar = g_TEXTURE_MANAGER.getParticleTexObByColorId(YELLOW_COLOR_ID);
+        TextureOb* texOb_distantStar	  = g_TEXTURE_MANAGER.getRandomTexOb(TURREL_TEXTURE_ID);  // fake
+        
         vec2f _center(getRandInt(0, 1000), getRandInt(0, 1000));
         float size = (float)getRandInt(DISTANTSTAR_SIZE_MIN, DISTANTSTAR_SIZE_MAX);
         

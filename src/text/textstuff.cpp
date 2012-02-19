@@ -78,7 +78,7 @@ void VerticalFlowText :: render() const
 {
         if (is_alive == true)
         {
-                drawSimpleColoredText(str, pos, color);
+                drawSimpleColoredText(str, pos, color, g_SCROLL_COORD_X, g_SCROLL_COORD_Y);
         }
 }
  

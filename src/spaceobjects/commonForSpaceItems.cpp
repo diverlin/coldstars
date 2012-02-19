@@ -33,9 +33,9 @@ void CommonForSpaceItems :: postCreateInit()
 
 void CommonForSpaceItems :: calcCollisionrRadius()
 {
-        collision_radius = (texOb->w + texOb->h)/4; 
+        collision_radius = (texOb->getFrameWidth() + texOb->getFrameHeight())/4; 
         
-        points.setWidthHeight(texOb->w, texOb->h);  // needs for finding visible corners
+        points.setWidthHeight(texOb->getFrameWidth(), texOb->getFrameHeight());  // needs for finding visible corners
 }
 
 void CommonForSpaceItems :: moveToSpace(StarSystem* starsystem, vec2f start_pos)
@@ -49,101 +49,41 @@ void CommonForSpaceItems :: moveToSpace(StarSystem* starsystem, vec2f start_pos)
 }
 
 
+           	
 
-
-
-void CommonForSpaceItems :: moveExternalyToPosition(vec2f _target)
+void CommonForSpaceItems :: update_inSpace(int time, bool show_effect)
 {
-        get_dX_dY_ToPoint(points.getCenter().x, points.getCenter().y, _target.x, _target.y, 10*velocity, &d_pos.x, &d_pos.y);
-        points.setCenter(points.getCenter().x + d_pos.x, points.getCenter().y + d_pos.y);
-        //points.setCenter(points.getCenter() + d_pos);
-}
-            	
-
-void CommonForSpaceItems :: update_inSpace_inDynamic_TRUE()
-{
-     	if (keep_moving == true)
-     	{
-        	keep_moving = get_dX_dY_ToPoint(points.getCenter().x, points.getCenter().y, target_pos.x, target_pos.y, velocity, &d_pos.x, &d_pos.y);
-        	points.setCenter(points.getCenter().x + d_pos.x, points.getCenter().y + d_pos.y);
-     	}  
+	checkDeath(show_effect);
+	updateRotation();
+		
+	if (time > 0)
+	{
+     		if (keep_moving == true)
+     		{
+        		keep_moving = get_dX_dY_ToPoint(points.getCenter().x, points.getCenter().y, target_pos.x, target_pos.y, velocity, &d_pos.x, &d_pos.y);
+        		points.setCenter(points.getCenter().x + d_pos.x, points.getCenter().y + d_pos.y);
+     		}  
+     	}
 }
 
-void CommonForSpaceItems :: update_inSpace_inDynamic_FALSE()
-{
-	points.setCenter(target_pos.x, target_pos.y);
-       	keep_moving = false;
-}
-
-void CommonForSpaceItems :: updateDyingEffect_TRUE()
-{
-	if (data_life.is_alive == false)
-     	{
-        	data_life.dying_time--;
-        	if (data_life.dying_time < 0)
-        	{
-           		death_TRUE();
-           	}
-     	}  
-}
-
-void CommonForSpaceItems :: updateDyingEffect_FALSE()
-{
-	if (data_life.is_alive == false)
-     	{
-       		death_FALSE();
-     	}  
-}
-
-void CommonForSpaceItems :: hit_TRUE(int _damage)
-{
-    	data_life.armor -= _damage;
-    	if (data_life.armor <= 0)
-    	{
-       		data_life.is_alive = false;
-       	}
-       	
-       	// improove
-       	Color4i color;     		
-       	VerticalFlowText* _text = new VerticalFlowText(int2str(_damage), points.getCenter(), color, collision_radius);
-       	starsystem->add(_text); 
-}
-
-void CommonForSpaceItems :: hit_FALSE(int damage)
-{
-    	data_life.armor -= damage;
-    	if (data_life.armor <= 0)
-    	{
-    		data_life.is_alive = false;
-       		death_FALSE();
-       	}
-}
 
 void CommonForSpaceItems :: silentKill()
 {
 	data_life.is_alive      = false;  
-	data_life.garbage_ready = true; 
+	data_life.garbage_ready = true;  // ??? death(false);
 }
-
-void CommonForSpaceItems :: death_TRUE()
-{
-     	if (data_life.garbage_ready == false)
-     	{   
-        	createExplosion(starsystem, points.getCenter(), texOb->size_id);
-        	data_life.garbage_ready = true;
-     	}
-}
-   
-void CommonForSpaceItems :: death_FALSE()
-{
-	data_life.garbage_ready = true;
-}
-
        
+void CommonForSpaceItems :: postDeathUniqueEvent(bool show_effect)
+{
+	if (show_effect == true)
+     	{
+        	createExplosion(starsystem, points.getCenter(), texOb->size_id);        		
+        }
+}
+       		
 void CommonForSpaceItems :: render2D()
 { 
     	drawDynamic(texOb, points.getCenter(), angle.z, points.getPosZ());
-    	angle.z += d_angle.z;
 }
 
 

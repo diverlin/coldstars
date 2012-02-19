@@ -66,15 +66,11 @@ void Garbage :: add(LazerTraceEffect* _effect)
 	effect_LAZERTRACE_vec.push_back(_effect);
 }
 
-void Garbage :: add(ExplosionEffect* _effect)
+void Garbage :: add(BaseParticleSystem* _effect)
 {
-	effect_EXPLOSION_vec.push_back(_effect);
+	effect_PARTICLESYSTEM_vec.push_back(_effect);
 }
 		
-void Garbage :: add(DamageEffect* _effect)
-{
-	effect_DAMAGE_vec.push_back(_effect);
-}
 		
 void Garbage :: add(ShockWaveEffect* _effect)
 {
@@ -140,17 +136,11 @@ void Garbage :: clear()
     	}
        	effect_LAZERTRACE_vec.clear();
        		    	
-    	for(unsigned int ei = 0; ei < effect_EXPLOSION_vec.size(); ei++)
+    	for(unsigned int i = 0; i < effect_PARTICLESYSTEM_vec.size(); i++)
     	{
-       		delete effect_EXPLOSION_vec[ei];
+       		delete effect_PARTICLESYSTEM_vec[i];
     	}
-       	effect_EXPLOSION_vec.clear();
-       		    	
-    	for(unsigned int ei = 0; ei < effect_DAMAGE_vec.size(); ei++)
-    	{
-       		delete effect_DAMAGE_vec[ei];
-    	}
-       	effect_DAMAGE_vec.clear();
+       	effect_PARTICLESYSTEM_vec.clear();
        		    	
     	for(unsigned int ei = 0; ei < effect_SHOCKWAVE_vec.size(); ei++)
     	{

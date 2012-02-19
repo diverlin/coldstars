@@ -21,40 +21,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define COMMONFORPLANET_H
 
 
-class CommonForPlanet : public BaseSpaceObject 
+class CommonForPlanet : public SpaceObjectBase 
 {
 	public:      
    		CommonForPlanet();
-    		~CommonForPlanet();
+    		virtual ~CommonForPlanet();
 					     
                 // accessors
                 void setPlanetData(PlanetData);
-                vec2f getNextTurnPosition() const;
+                Orbit* getOrbit() const;
    	   	//
+   	   	
    	   	void postCreateInit();
-    		void createOrbit();
-   	   				  
- 		void hit_TRUE(int);
- 		void hit_FALSE(int);
-    		
+ 		void createOrbit();
+   		
    		void render_NEW();
     		void render_OLD();
-    		void drawOrbit();
     		               
         protected:
-                PathVisual orbit_visual;
-
-      		PlanetData data_planet;
-     		
-      		std::vector<vec2f> orbit_vec;
-                int orbit_len, orbit_it; 
-                                
-    		void updatePosition();
-    		void updateRotation();
+      		PlanetData data_planet;   
+      		Orbit* orbit;  		
     		
     		void calcCollisionrRadius();
-    		void createEllipceOrbit();
-    		void createOrbitVisual();
+    		virtual void postDeathUniqueEvent(bool);
 };
 
 #endif 

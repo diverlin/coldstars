@@ -26,7 +26,7 @@ MicroScenarioGrab :: ~MicroScenarioGrab()
 		
 void MicroScenarioGrab :: Enter(Npc* _npc) const
 {	
-	printf("npc_id = %i, STARTS MicroScenarioGrab item id = %i\n", _npc->getId(), _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getObId());
+	printf("npc_id = %i, STARTS MicroScenarioGrab item id = %i\n", _npc->getId(), _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getId());
 }
 
 void MicroScenarioGrab :: update_inStatic(Npc* _npc) const
@@ -34,9 +34,9 @@ void MicroScenarioGrab :: update_inStatic(Npc* _npc) const
               
         for (unsigned int i = 0; i < _npc->observation->visible_MINERAL_vec.size(); i++)
         {                	
-		if ( _npc->observation->visible_MINERAL_vec[i].dist < _npc->getVehicle()->grapple_slot.getGrappleEquipment()->getRadius() )
+		if ( _npc->observation->visible_MINERAL_vec[i].dist < _npc->getVehicle()->getGrappleSlot()->getGrappleEquipment()->getRadius() )
                 {                                       
-                	_npc->getVehicle()->grapple_slot.getGrappleEquipment()->add(_npc->observation->visible_MINERAL_vec[i].mineral);
+                	_npc->getVehicle()->getGrappleSlot()->getGrappleEquipment()->addTarget(_npc->observation->visible_MINERAL_vec[i].mineral);
                 }
                 else
                 {
@@ -44,7 +44,7 @@ void MicroScenarioGrab :: update_inStatic(Npc* _npc) const
                 }
         }
         
-        _npc->getVehicle()->getNavigator()->setTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getNpc()->getVehicle(), FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID );
+        //_npc->getVehicle()->getDriveComplex()->setTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getNpc()->getVehicle(), FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID );
 }
 
 void MicroScenarioGrab :: update_inDynamic(Npc* _npc) const
@@ -91,5 +91,5 @@ void MicroScenarioGrab :: Exit(Npc* _npc) const
 
 std::string MicroScenarioGrab :: getDescription(Npc* _npc) const 
 {
-	return "GRAB to ob id = %i\n" + int2str( _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getObId());
+	return "GRAB to ob id = %i\n" + int2str( _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getId());
 }

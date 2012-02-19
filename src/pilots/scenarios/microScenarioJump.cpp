@@ -26,8 +26,8 @@ MicroScenarioJump :: ~MicroScenarioJump()
 		
 void MicroScenarioJump :: enter(Npc* _npc) const
 {	
-	_npc->getVehicle()->getNavigator()->setTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getStarSystem(), FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID);
-	printf("npc_id = %i, is GOING to MicroScenarioJump from ss_id = %i to ss_id = %i\n", _npc->getId(), _npc->getStarSystem()->getId(), _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getObId());
+	_npc->getVehicle()->getDriveComplex()->setTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getStarSystem(), FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID);
+	printf("npc_id = %i, is GOING to MicroScenarioJump from ss_id = %i to ss_id = %i\n", _npc->getId(), _npc->getStarSystem()->getId(), _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getId());
 }
 
 void MicroScenarioJump :: update_inStatic(Npc* _npc) const
@@ -37,7 +37,7 @@ void MicroScenarioJump :: update_inStatic(Npc* _npc) const
 
 void MicroScenarioJump :: update_inDynamic(Npc* _npc) const
 {
-     	if (_npc->getVehicle()->getNavigator()->checkEchievement() == true)
+     	if (_npc->getVehicle()->getDriveComplex()->checkEchievement() == true)
      	{
                 _npc->jumpEvent();
      	        printf("npc id = %i, jumpEvent()\n", _npc->getId());
@@ -46,11 +46,11 @@ void MicroScenarioJump :: update_inDynamic(Npc* _npc) const
 
 void MicroScenarioJump :: exit(Npc* _npc) const
 {
-	printf("npc_id = %i, FINISH MicroScenarioJump from ss_id = %i to ss_id = %i\n", _npc->getId(), _npc->getStarSystem()->getId(), _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getObId());
+	printf("npc_id = %i, FINISH MicroScenarioJump from ss_id = %i to ss_id = %i\n", _npc->getId(), _npc->getStarSystem()->getId(), _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getId());
 }
 
 
 std::string MicroScenarioJump :: getDescription(Npc* _npc) const
 {
-	return "JUMP to ss_id = " + int2str( _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getObId());
+	return "JUMP to ss_id = " + int2str( _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getId());
 }

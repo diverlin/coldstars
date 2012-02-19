@@ -171,10 +171,6 @@ struct IdData
 struct ParticleData
 {
 	ParticleData();
-	
-      	float alpha_start;
-      	float alpha_end;
-      	float d_alpha;
       		
       	float size_start;
       	float size_end;
@@ -183,15 +179,21 @@ struct ParticleData
       	float velocity_start;
       	float velocity_end;
 	float d_velocity;
+        
+        Color4f color_start;
+        Color4f color_end;
+        Color4f color_delta;
+        
+        int frame;
 };
 
 
 
 
-struct EquipmentCommonData 
+struct ItemCommonData 
 {
-	EquipmentCommonData();
-	
+	ItemCommonData();
+
 	unsigned int modules_num_max; 
 	unsigned int condition_max; 
 	unsigned int deterioration_rate;
@@ -238,12 +240,8 @@ struct AngleData
 {
 	AngleData();
 	
-	float x;
-	float y;
-	float z;
-	float d_x;
-	float d_y;
-	float d_z;
+	vec3f angle;
+	vec3f d_angle;
 };
 
 #endif

@@ -58,7 +58,7 @@ bool Button :: interaction(int _x, int _y)
     
 void Button :: setCenter(int _x, int _y)
 {        
-     	rect.setNewCenter((float)_x, (float)_y);
+     	rect.setCenter((float)_x, (float)_y);
 }
    
 void Button :: render() const

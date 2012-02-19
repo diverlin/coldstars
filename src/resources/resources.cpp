@@ -248,11 +248,6 @@ void loadImages()
 	g_TEXTURE_MANAGER.manage( new TextureOb(SATELLITE_TEXTURE_ID, "data/satellite/sa_006.png", true, &arg, 8, 1, 16) );
 }
 
-{
-	std::vector<int> arg;   
-	arg.push_back(RACE_0_ID);
-	g_TEXTURE_MANAGER.manage( new TextureOb(SATELLITE_TEXTURE_ID, "data/satellite/sa_006.png", true, &arg, 5, 1, 10) );
-}
 
 // BLACKHOLE
 
@@ -792,11 +787,11 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 	g_TEXTURE_MANAGER.manage( new TextureOb(PARTICLE_TEXTURE_ID, "data/effect/particles/particle3.png", true, &arg) ); 
 }
 
-{
-	std::vector<int> arg;  
-	arg.push_back(TECH_LEVEL_0_ID); arg.push_back(BLUE_COLOR_ID); 
-	g_TEXTURE_MANAGER.manage( new TextureOb(LAZER_EFFECT_TEXTURE_ID, "data/effect/lazer/l_64_26_000.png", true, &arg, 4, 1, 10) );
-}
+//{
+	//std::vector<int> arg;  
+	//arg.push_back(TECH_LEVEL_0_ID); arg.push_back(BLUE_COLOR_ID); 
+	//g_TEXTURE_MANAGER.manage( new TextureOb(LAZER_EFFECT_TEXTURE_ID, "data/effect/lazer/l_64_26_000.png", true, &arg, 4, 1, 10) );
+//}
 
 {
 	std::vector<int> arg;  
@@ -1192,6 +1187,13 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 	std::vector<int> arg;  
 	g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_yellow = new TextureOb(NONE_ID, "data/other/dot_yellow.png", true, &arg);
 }
+
+
+//{
+	//std::vector<int> arg;  
+	//arg.push_back(GREY_COLOR_ID); arg.push_back(BLUE_COLOR_ID); arg.push_back(YELLOW_COLOR_ID); arg.push_back(RED_COLOR_ID);  
+	//g_UNIQUE_TEXTURE_COLLECTOR.texOb_particles_sheet = new TextureOb(PARTICLE_TEXTURE_ID, "data/effect/particles/particles_sheet.png", true, &arg, 4, 1, 0); 
+//}
 
 }
 

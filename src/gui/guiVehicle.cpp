@@ -28,10 +28,15 @@ GuiVehicle :: GuiVehicle()
 }
 
 GuiVehicle :: ~GuiVehicle()
-{}
+{
+	for (unsigned int i = 0; i < button_vec.size(); i++)
+	{
+		delete button_vec[i];
+	}
+}
 
 
-void GuiVehicle :: bind(Vehicle* vehicle)
+void GuiVehicle :: bind(VehicleBase* vehicle)
 {
 	this->vehicle = vehicle;
         skill = vehicle->getNpc()->getSkill();
@@ -46,34 +51,34 @@ void GuiVehicle :: createControlSkillButtons()
      	TextureOb* texOb_icon_plus  = g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_plus;
      	TextureOb* texOb_icon_minus = g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_minus;
      	     	
-     	increment_attack_button   = new Button(texOb_icon_plus, INCREMENT_ATTACK_BUTTON_ID, x, y - w,   w, w, "");  
+     	Button* increment_attack_button   = new Button(texOb_icon_plus, INCREMENT_ATTACK_BUTTON_ID, x, y - w,   w, w, "");  
      	button_vec.push_back(increment_attack_button);
-     	decrement_attack_button   = new Button(texOb_icon_minus, DECREMENT_ATTACK_BUTTON_ID, x, y - 2*w, w, w, "");  
+     	Button* decrement_attack_button   = new Button(texOb_icon_minus, DECREMENT_ATTACK_BUTTON_ID, x, y - 2*w, w, w, "");  
      	button_vec.push_back(decrement_attack_button);
                      
-     	increment_defence_button  = new Button(texOb_icon_plus, INCREMENT_DEFENCE_BUTTON_ID, x + w, y - w,   w, w, "");  
+     	Button* increment_defence_button  = new Button(texOb_icon_plus, INCREMENT_DEFENCE_BUTTON_ID, x + w, y - w,   w, w, "");  
      	button_vec.push_back(increment_defence_button);
-     	decrement_defence_button  = new Button(texOb_icon_minus, DECREMENT_DEFENCE_BUTTON_ID, x + w, y - 2*w, w, w, "");  
+     	Button* decrement_defence_button  = new Button(texOb_icon_minus, DECREMENT_DEFENCE_BUTTON_ID, x + w, y - 2*w, w, w, "");  
      	button_vec.push_back(decrement_defence_button);
      	        
-     	increment_leader_button   = new Button(texOb_icon_plus, INCREMENT_LEADER_BUTTON_ID, x + 2*w, y - w,   w, w, "");  
+     	Button* increment_leader_button   = new Button(texOb_icon_plus, INCREMENT_LEADER_BUTTON_ID, x + 2*w, y - w,   w, w, "");  
      	button_vec.push_back(increment_leader_button);
-     	decrement_leader_button   = new Button(texOb_icon_minus, DECREMENT_LEADER_BUTTON_ID, x + 2*w, y - 2*w, w, w, ""); 
+     	Button* decrement_leader_button   = new Button(texOb_icon_minus, DECREMENT_LEADER_BUTTON_ID, x + 2*w, y - 2*w, w, w, ""); 
      	button_vec.push_back(decrement_leader_button);
      	      
-     	increment_trader_button   = new Button(texOb_icon_plus, INCREMENT_TRADER_BUTTON_ID, x + 3*w, y - w,   w, w, "");  
+     	Button* increment_trader_button   = new Button(texOb_icon_plus, INCREMENT_TRADER_BUTTON_ID, x + 3*w, y - w,   w, w, "");  
      	button_vec.push_back(increment_trader_button);
-     	decrement_trader_button   = new Button(texOb_icon_minus, DECREMENT_TRADER_BUTTON_ID, x + 3*w, y - 2*w, w, w, ""); 
+     	Button* decrement_trader_button   = new Button(texOb_icon_minus, DECREMENT_TRADER_BUTTON_ID, x + 3*w, y - 2*w, w, w, ""); 
      	button_vec.push_back(decrement_trader_button);
     
-     	increment_technic_button  = new Button(texOb_icon_plus, INCREMENT_TECHNIC_BUTTON_ID, x + 4*w, y - w,   w, w, "");  
+     	Button* increment_technic_button  = new Button(texOb_icon_plus, INCREMENT_TECHNIC_BUTTON_ID, x + 4*w, y - w,   w, w, "");  
      	button_vec.push_back(increment_technic_button);
-     	decrement_technic_button  = new Button(texOb_icon_minus, DECREMENT_TECHNIC_BUTTON_ID, x + 4*w, y - 2*w, w, w, ""); 
+     	Button* decrement_technic_button  = new Button(texOb_icon_minus, DECREMENT_TECHNIC_BUTTON_ID, x + 4*w, y - 2*w, w, w, ""); 
      	button_vec.push_back(decrement_technic_button);
      
-     	increment_diplomat_button = new Button(texOb_icon_plus, INCREMENT_DIPLOMAT_BUTTON_ID, x + 5*w, y - w,   w, w, "");  
+     	Button* increment_diplomat_button = new Button(texOb_icon_plus, INCREMENT_DIPLOMAT_BUTTON_ID, x + 5*w, y - w,   w, w, "");  
      	button_vec.push_back(increment_diplomat_button);
-     	decrement_diplomat_button = new Button(texOb_icon_minus, DECREMENT_DIPLOMAT_BUTTON_ID, x + 5*w, y - 2*w, w, w, "");
+     	Button* decrement_diplomat_button = new Button(texOb_icon_minus, DECREMENT_DIPLOMAT_BUTTON_ID, x + 5*w, y - 2*w, w, w, "");
         button_vec.push_back(decrement_diplomat_button);     
 }
 
@@ -89,37 +94,26 @@ void GuiVehicle :: manageSkill()
 		{
 		       	if (lmb == true)
            		{
-           		   	int buttonSubTypeId = button_vec[i]->getSubTypeId();
-           		   	
-           		   	if (buttonSubTypeId == INCREMENT_ATTACK_BUTTON_ID)
-           		   	      	skill->incrementAttack();
-           		        if (buttonSubTypeId == DECREMENT_ATTACK_BUTTON_ID)
-           		   	      	skill->decrementAttack();
+           		   	switch(button_vec[i]->getSubTypeId())
+           		   	{
+           		   	   	case INCREMENT_ATTACK_BUTTON_ID:   { skill->incrementAttack(); break; }
+           		        	case DECREMENT_ATTACK_BUTTON_ID:   { skill->decrementAttack(); break; }
            		   	      	
-           		   	if (buttonSubTypeId == INCREMENT_DEFENCE_BUTTON_ID)
-           		   	      	skill->incrementDefence();
-           		        if (buttonSubTypeId == DECREMENT_DEFENCE_BUTTON_ID)
-           		   	      	skill->decrementDefence();
+           		   		case INCREMENT_DEFENCE_BUTTON_ID:  { skill->incrementDefence(); break; }
+           		        	case DECREMENT_DEFENCE_BUTTON_ID:  { skill->decrementDefence(); break; }
            		   	      	
-           		   	if (buttonSubTypeId == INCREMENT_LEADER_BUTTON_ID)
-           		   	      	skill->incrementLeader();
-           		        if (buttonSubTypeId == DECREMENT_LEADER_BUTTON_ID)
-           		   	      	skill->decrementLeader();
+           		   		case INCREMENT_LEADER_BUTTON_ID:   { skill->incrementLeader(); break; }
+           		        	case DECREMENT_LEADER_BUTTON_ID:   { skill->decrementLeader(); break; }
            		   	      	
-           		   	if (buttonSubTypeId == INCREMENT_TRADER_BUTTON_ID)
-           		   	      	skill->incrementTrader();
-           		        if (buttonSubTypeId == DECREMENT_TRADER_BUTTON_ID)
-           		   	      	skill->decrementTrader();
+           		   		case INCREMENT_TRADER_BUTTON_ID:   { skill->incrementTrader(); break; }
+           		        	case DECREMENT_TRADER_BUTTON_ID:   { skill->decrementTrader(); break; }
            		   	      	
-           		   	if (buttonSubTypeId == INCREMENT_TECHNIC_BUTTON_ID)
-           		   	      	skill->incrementTechnic();
-           		        if (buttonSubTypeId == DECREMENT_TECHNIC_BUTTON_ID)
-           		   	      	skill->decrementTechnic();
+           		   		case INCREMENT_TECHNIC_BUTTON_ID:  { skill->incrementTechnic(); break; }
+           		       		case DECREMENT_TECHNIC_BUTTON_ID:  { skill->decrementTechnic(); break; }
            		   	      	
-           		   	if (buttonSubTypeId == INCREMENT_DIPLOMAT_BUTTON_ID)
-           		   	      	skill->incrementDiplomat();
-           		        if (buttonSubTypeId == DECREMENT_DIPLOMAT_BUTTON_ID)
-           		   	      	skill->decrementDiplomat();           		   	
+           		   		case INCREMENT_DIPLOMAT_BUTTON_ID: { skill->incrementDiplomat(); break; }
+           		        	case DECREMENT_DIPLOMAT_BUTTON_ID: { skill->decrementDiplomat(); break; }        
+           		        }  		   	
            		}
 		}
 	}
@@ -136,78 +130,81 @@ void GuiVehicle :: renderSkill() const
 	{
 		button_vec[bi]->render();
 
-		int buttonSubTypeId = button_vec[bi]->getSubTypeId();		
-
-		if (buttonSubTypeId == INCREMENT_ATTACK_BUTTON_ID)
+		switch(button_vec[bi]->getSubTypeId())		
 		{
-		     	for (int i = 0; i < skill->getAttack(); i++) 
-     			{ 
-         			Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
-         		      			     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
-         		      			     w, h);
+			case INCREMENT_ATTACK_BUTTON_ID:
+			{
+		     		for (int i = 0; i < skill->getAttack(); i++) 
+     				{ 
+         				Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
+         		      				     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
+         		      				     w, h);
          		      			     
-         			drawTexturedRect(texOb_skill, tmp_rect, -1.0);
-     			}
- 
-		}
-          		   	      	
-		if (buttonSubTypeId == INCREMENT_DEFENCE_BUTTON_ID)
-		{
-		     	for (int i = 0; i < skill->getDefence(); i++) 
-     			{ 
-         			Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
-         		      			     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
-         		      			     w, h);
-         			drawTexturedRect(texOb_skill, tmp_rect, -1.0);
-     			}
-		}
+         				drawTexturedRect(texOb_skill, tmp_rect, -1.0);
+     				}
+ 			break;
+			}
+			
+			case INCREMENT_DEFENCE_BUTTON_ID:
+			{
+		     		for (int i = 0; i < skill->getDefence(); i++) 
+     				{		 
+         				Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
+         		      				     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
+         		      				     w, h);
+         				drawTexturedRect(texOb_skill, tmp_rect, -1.0);
+     				}
+			break;
+			}
 
-	   	if (buttonSubTypeId == INCREMENT_LEADER_BUTTON_ID)
-	   	{
-	   	     	for (int i = 0; i < skill->getLeader(); i++) 
-     			{ 
-         			Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
-         		      			     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
-         		      			     w, h);
-         			drawTexturedRect(texOb_skill, tmp_rect, -1.0);
-     			}
-	   	
+			case INCREMENT_LEADER_BUTTON_ID:
+			{
+	   		     	for (int i = 0; i < skill->getLeader(); i++) 
+     				{ 
+         				Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
+         		      				     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
+         		      				     w, h);
+         				drawTexturedRect(texOb_skill, tmp_rect, -1.0);
+     				}
+			break;
+	   		}
+
+	   		case INCREMENT_TRADER_BUTTON_ID:
+	   		{
+	   	     		for (int i = 0; i < skill->getTrader(); i++) 
+     				{ 
+         				Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
+         		     				     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
+         		     				     w, h);
+         				drawTexturedRect(texOb_skill, tmp_rect, -1.0);
+    				}
+			break;
+	   	   	}
+			
+	   		case INCREMENT_TECHNIC_BUTTON_ID:
+	   		{
+	   	     		for (int i = 0; i < skill->getTechnic(); i++) 
+     				{ 
+         				Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
+         		      				     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
+         		      				     w, h);
+         				drawTexturedRect(texOb_skill, tmp_rect, -1.0);
+     				}     
+	   		break;
+	   		}
+
+	   		case INCREMENT_DIPLOMAT_BUTTON_ID:
+	   		{
+	   			for (int i = 0; i < skill->getDiplomat(); i++) 
+     				{ 
+         				Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
+         		      				     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
+         		     				     w, h);
+         				drawTexturedRect(texOb_skill, tmp_rect, -1.0);
+     				}
+	   		break;
+	   		}
 	   	}
-
-	   	if (buttonSubTypeId == INCREMENT_TRADER_BUTTON_ID)
-	   	{
-	   	     	for (int i = 0; i < skill->getTrader(); i++) 
-     			{ 
-         			Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
-         		     			     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
-         		     			     w, h);
-         			drawTexturedRect(texOb_skill, tmp_rect, -1.0);
-    			}
-	   	
-	   	}
-
-	   	if (buttonSubTypeId == INCREMENT_TECHNIC_BUTTON_ID)
-	   	{
-	   	     	for (int i = 0; i < skill->getTechnic(); i++) 
-     			{ 
-         			Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
-         		      			     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
-         		      			     w, h);
-         			drawTexturedRect(texOb_skill, tmp_rect, -1.0);
-     			}     
-	   	}
-
-	   	if (buttonSubTypeId == INCREMENT_DIPLOMAT_BUTTON_ID)
-	   	{
-	   		for (int i = 0; i < skill->getDiplomat(); i++) 
-     			{ 
-         			Rect tmp_rect = Rect(button_vec[bi]->getRect().getCenter().x - w/2, 
-         		      			     button_vec[bi]->getRect().getCenter().y + h/2 + i*h, 
-         		     			     w, h);
-         			drawTexturedRect(texOb_skill, tmp_rect, -1.0);
-     			}
-	   	}
-
 	}
 }
 
@@ -244,7 +241,7 @@ void GuiVehicle :: mouseControl()
 				{
 					if (pTo_store->buyItemFromSlot(vehicle->slot_total_vec[i]) == true)\
 					{
-						pPLAYER->getPilot()->increaseCredits(vehicle->slot_total_vec[i]->getItemPrice());
+						pPLAYER->getPilot()->increaseCredits(vehicle->slot_total_vec[i]->getItem()->getPrice());
 					}
 				}
 			} 
@@ -256,7 +253,7 @@ void GuiVehicle :: mouseControl()
 	// GATE SLOT
 	if (cursor_has_target == false)
 	{
-		if (vehicle->gate_slot.interaction(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y)) == true)  
+		if (vehicle->getGateSlot()->interaction(g_MOUSE_POS_X, (g_VIEW_HEIGHT - g_MOUSE_POS_Y)) == true)  
 		{
 			cursor_has_target = true;
 
@@ -284,11 +281,11 @@ void GuiVehicle :: renderInternaly() const
 		vehicle->slot_total_vec[i]->render(-1);
 	}
 	
-	vehicle->gate_slot.render(-1);
+	vehicle->getGateSlot()->render(-1);
 }
 
 
-void GuiVehicle :: configure(Vehicle* _vehicle, bool _in_store = false, bool _allow_full_control = false)
+void GuiVehicle :: configure(VehicleBase* _vehicle, bool _in_store = false, bool _allow_full_control = false)
 {
         bind(_vehicle);                           
 

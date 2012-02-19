@@ -79,22 +79,22 @@ class Points
                 void initCenterPoint();
                 void addCenterPoint();
 
-                void initMainQuadPoints(int _w, int _h);
+                void initMainQuadPoints(int, int);
                 void addMainQuadPoints();
 
-                void initWeapon1CenterPoint(float _pos_x, float _pos_y);
+                void initWeapon1CenterPoint(float, float);
                 void addWeapon1CenterPoint();
 
-                void initWeapon2CenterPoint(float _pos_x, float _pos_y);
+                void initWeapon2CenterPoint(float, float);
                 void addWeapon2CenterPoint();
 
-                void initWeapon3CenterPoint(float _pos_x, float _pos_y);
+                void initWeapon3CenterPoint(float, float);
                 void addWeapon3CenterPoint();
 
-                void initWeapon4CenterPoint(float _pos_x, float _pos_y);
+                void initWeapon4CenterPoint(float, float);
                 void addWeapon4CenterPoint();
 
-                void initWeapon5CenterPoint(float _pos_x, float _pos_y);
+                void initWeapon5CenterPoint(float, float);
                 void addWeapon5CenterPoint();
 
                 void initShieldQuadPoints();

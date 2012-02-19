@@ -22,45 +22,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 void Npc :: setGarbageReady(bool _garbage_ready)   { data_life.garbage_ready = _garbage_ready; }
 void Npc :: setAlive(bool _alive) 		   { data_life.is_alive = _alive; }
-void Npc :: setStarSystem(StarSystem* _starsystem) { starsystem = _starsystem; }
+
 void Npc :: setKosmoport(Kosmoport* _kosmoport)    { kosmoport = _kosmoport; }
 void Npc :: setLand(Land* _land)   		   { land = _land; }
-void Npc :: setScanTarget(Ship* _ship)             { ship_to_scan = _ship; }
-void Npc :: setPlaceTypeId(int _place_type_id)     { place_type_id = _place_type_id; /*if (ship != NULL) ship->setPlaceTypeId(_place_type_id); */ }
-void Npc :: setUpperControl(bool upper_control) { this->upper_control = upper_control; }
+void Npc :: setScanTarget(VehicleBase* vehicle_to_scan) { this->vehicle_to_scan = vehicle_to_scan; }
+void Npc :: setUpperControl(bool upper_control)     { this->upper_control = upper_control; }
 
-bool Npc :: getGarbageReady() const { return data_life.garbage_ready; }   		
-bool Npc :: getAlive() const 	   { return data_life.is_alive; }
-int Npc :: getId() const	   { return data_id.id; }
-int Npc :: getTypeId() const	   { return data_id.type_id; }
-int  Npc :: getSubTypeId() const   { return data_id.subtype_id; }
+
 int Npc :: getRaceId() const	   { return race_id; }
-StarSystem* Npc :: getStarSystem() const { return starsystem; }
 StarSystem* Npc :: getFailBackStarSystem() const { return failback_starsystem; }
 Kosmoport* Npc :: getKosmoport()   { return kosmoport; }
-Vehicle* Npc :: getVehicle()       { return vehicle; }
+VehicleBase* Npc :: getVehicle()       { return vehicle; }
 Skill* Npc :: getSkill() 	   { return skill; }	
-Ship* Npc :: getScanShip()	   { return ship_to_scan; }	
-int Npc :: getPlaceTypeId() const  { return place_type_id; }
+VehicleBase* Npc :: getScanVehicle()	   { return vehicle_to_scan; }	
 Observation* Npc :: getObservation() const { return observation; }
 
 
-//MacroTaskHolder* Npc :: getMacroTaskMain() const { return macro_task_main; }
-//MacroTaskHolder* Npc :: getMacroTaskSelf() const { return macro_task_self; }
-//MicroTaskHolder* Npc :: getMicroTask() const { return micro_task; }
-   		
-//bool Npc :: getControlledByPlayer() const { return controlled_by_player; }
 unsigned long int Npc :: getCredits() const { return credits; }   
 StateMachine* Npc :: getStateMachine() {return state_machine; }
 
-
-
-Points* Npc :: getPoints() const    { return vehicle->getPoints(); }
-bool* Npc :: getpAlive()            { return &data_life.is_alive; }
-int* Npc :: getpPlaceTypeId()       { return &place_type_id; }
-float Npc :: getCollisionRadius()   { return vehicle->getCollisionRadius(); }
    		
-void Npc :: bind(Vehicle* vehicle) 	           
+void Npc :: bind(VehicleBase* vehicle) 	           
 { 
 	this->vehicle = vehicle; 
 	vehicle->setNpc(this); 
@@ -106,17 +88,18 @@ Npc :: Npc(int _race_id, IdData _data_id, LifeData _data_life, TextureOb* _texOb
         state_machine = new StateMachine(this);        
         
         // depending on type        
+        ai_model = NULL;
         if (( race_id == RACE_6_ID) or ( race_id == RACE_7_ID) )
         {
-                ai_model = g_AIMODEL_CONQUEROR;
+                //ai_model = g_AIMODEL_CONQUEROR;
         }
         else
         {
-       		ai_model = g_AIMODEL_RANGER;        
+       		//ai_model = g_AIMODEL_RANGER;        
         }
 }
     
-Npc :: ~Npc()
+Npc :: ~Npc() /* virtual */
 {
         delete skill;
       
@@ -133,11 +116,10 @@ void Npc :: thinkCommon_inKosmoport_inStatic()
 	{
                 vehicle->repair();
 		needsToDo.REPAIR_KORPUS = false;
-	}	
-	
+	}
 	
 	// if all things are DONE
-	vehicle->getNavigator()->getTargetPlanet()->addToLaunchingQueue(this);
+	((Planet*)vehicle->getDriveComplex()->getTarget())->getDockingStation()->addToLaunchingQueue(this);
 }
 
 void Npc :: thinkCommon_inLand_inStatic()
@@ -149,7 +131,7 @@ void Npc :: thinkCommon_inLand_inStatic()
 void Npc :: update_inSpace_inStatic()
 {
 	vehicle->getWeaponComplex()->prepareWeapons();
-        vehicle->grapple_slot.getGrappleEquipment()->validationTargets();
+        vehicle->getGrappleSlot()->getGrappleEquipment()->validateTargets();
         vehicle->droidRepair();
         // drive work, energy and so on
                	     		
@@ -157,11 +139,13 @@ void Npc :: update_inSpace_inStatic()
 	{
         	checkNeeds();
                 
-		observation->observeAll_inSpace_inStatic();  
-         
+		observation->observeAll_inSpace_inStatic();          
         
         	// place model here
-		ai_model->update_inStatic(this);
+        	if (ai_model)
+        	{
+			ai_model->update_inStatic(this);
+		}
 		//
         
        
@@ -174,14 +158,17 @@ void Npc :: update_inSpace_inStatic()
        		state_machine->update_inStatic();                 
         }
 
-        vehicle->getNavigator()->update_inSpace_inStatic();
+        vehicle->getDriveComplex()->update_inSpace_inStatic();
 }
 
 
-void Npc :: update_inSpace_inDynamic()
+void Npc :: update_inSpace(int time, bool show_effect)
 {
         //	macroTask_stateMachine->update_inDynamic(); // is it needed ?
-       	state_machine->update_inDynamic();
+        if (time > 0)
+        {
+       		state_machine->update_inDynamic();
+       	}
 }     	
 
 
@@ -240,7 +227,7 @@ void Npc :: asteroidScenario()
 
         vehicle->getWeaponComplex()->weapon_selector.setAll(true);
         vehicle->getWeaponComplex()->selectWeapons();
-        vehicle->getWeaponComplex()->setWeaponsTarget(observation->visible_ASTEROID_vec[0].asteroid);
+        vehicle->getWeaponComplex()->setTarget(observation->visible_ASTEROID_vec[0].asteroid);
                 
         //printf("TARGET => ship_id, asteroid id = %i/%i\n", ship->getId(), sorted_visible_ASTEROID_pList[0]->getId());
 }
@@ -283,21 +270,25 @@ StarSystem* Npc :: getClosestStarSystem(bool _captured)
 
 
 //// *********** SCANNING ***********
-bool Npc :: checkPossibilityToScan(Ship* _ship)
+bool Npc :: checkPossibilityToScan(VehicleBase* vehicle)
 {
-     	if (vehicle->getId() == _ship->getId())    // selfscan is possible all time
+     	if (this->vehicle->getId() == vehicle->getId())    // selfscan is possible all time
      	{
         	return true;
         }
  
-     	if (vehicle->ableTo.SCAN == true) 
+     	if (this->vehicle->ableTo.SCAN == true) 
      	{
-        	if (_ship->protector_slot.getEquipedStatus() == true)
+        	if (vehicle->getProtectorSlot()->getEquipedStatus() == true)
         	{
-           		if (vehicle->scaner_slot.getScanerEquipment()->getScan() >= _ship->protector_slot.getProtectorEquipment()->getProtection()) 
+           		if (this->vehicle->getScanerSlot()->getScanerEquipment()->getScan() >= vehicle->getProtectorSlot()->getProtectorEquipment()->getProtection()) 
               		{
               			return true;
               		}
+              	}
+              	else
+              	{
+              		return true;
               	}
         }
 
@@ -312,7 +303,7 @@ bool Npc :: scanProceeding()
 
 bool Npc :: removeScanTarget()
 {
-     	ship_to_scan = NULL;
+     	vehicle_to_scan = NULL;
      	return true;
 }
 //// *********** SCANNING ***********
@@ -330,7 +321,7 @@ void Npc :: updateInfo()
 
 	if (vehicle->ableTo.GRAB == true)
 	{
-		std::string grab_str = vehicle->grapple_slot.getGrappleEquipment()->getTargetStr();
+		std::string grab_str = vehicle->getGrappleSlot()->getGrappleEquipment()->getTargetStr();
 		if (grab_str.size() > 0)
 		{
 			info.addNameStr("grab_id:");   		info.addValueStr( grab_str ); 
@@ -352,16 +343,18 @@ void Npc :: updateInfo()
 void Npc :: renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y)
 {  
         updateInfo();
-     	drawInfoIn2Column(&info.title_list, &info.value_list, _pos_x + 190, _pos_y);
+     	drawInfoIn2Column(&info.title_list, &info.value_list, _pos_x + 190, _pos_y, _offset_x, _offset_y);
 }
      
+void Npc :: postDeathUniqueEvent(bool) /* virtual */
+{}
 
 
 
 Npc* getNewNpc(int _race_id, int _subtype_id)
 {
 	IdData data_id;
-    	data_id.id         = g_NPC_ID_GENERATOR.getNextId(); 
+    	data_id.id         = g_ID_GENERATOR.getNextId(); 
     	data_id.type_id    = NPC_ID;
     	data_id.subtype_id = _subtype_id;
     	

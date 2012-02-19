@@ -49,7 +49,7 @@ bool GuiMap :: update()
                    			int ss_ss_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->getPosition(), 
                    				       			    pPLAYER->getPilot()->getStarSystem()->getPosition() );
                    				       
-                   			if ( (ss_ss_dist < pPLAYER->getVehicle()->drive_slot.getDriveEquipment()->getHyper()) && (ss_ss_dist < pPLAYER->getVehicle()->bak_slot.getBakEquipment()->getFuel()) )
+                   			if ( (ss_ss_dist < pPLAYER->getVehicle()->getDriveComplex()->getDriveSlot()->getDriveEquipment()->getHyper()) && (ss_ss_dist < pPLAYER->getVehicle()->getDriveComplex()->getBakSlot()->getBakEquipment()->getFuel()) )
                       			{
                       				if (lmb == true)
                       				{ 
@@ -100,8 +100,9 @@ void GuiMap :: render(bool _clrscr)
     			for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
     			{
    		
-        			TextureOb* texOb_particle = g_TEXTURE_MANAGER.getParticleTexObByColorId(galaxy->STARSYSTEM_vec[si]->STAR_vec[0]->getColorId()); 
-        		    	
+        			//TextureOb* texOb_particle = g_TEXTURE_MANAGER.getParticleTexObByColorId(galaxy->STARSYSTEM_vec[si]->STAR_vec[0]->getColorId()); 
+                                TextureOb* texOb_particle = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; // fake
+                                        
         			drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[si]->getPosition(), 30.0, -2.0);
         	       
         			if (galaxy->STARSYSTEM_vec[si]->getCaptured() == true)

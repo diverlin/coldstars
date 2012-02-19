@@ -24,23 +24,24 @@ MicroScenarioDocking :: MicroScenarioDocking()
 MicroScenarioDocking :: ~MicroScenarioDocking()
 {}
 		
-void MicroScenarioDocking :: enter(Npc* _npc) const
+void MicroScenarioDocking :: enter(Npc* npc) const
 {	
-	_npc->getVehicle()->getNavigator()->setTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getPlanet(), FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID);
-	_npc->getVehicle()->getNavigator()->update_inSpace_inStatic();
-	printf("npc_id = %i, is going to MicroScenarioDocking to ob id = %i\n", _npc->getId(), _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getObId());
+	npc->getVehicle()->getDriveComplex()->setTarget(npc->getStateMachine()->getCurrentMicroTask()->getTarget(), FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID);
+
+	npc->getVehicle()->getDriveComplex()->update_inSpace_inStatic();
+	printf("npc_id = %i, is going to MicroScenarioDocking to ob id = %i\n", npc->getId(), npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getId());
 }
 
-void MicroScenarioDocking :: update_inStatic(Npc* _npc) const
+void MicroScenarioDocking :: update_inStatic(Npc* npc) const
 {
 
 }
 
 void MicroScenarioDocking :: update_inDynamic(Npc* _npc) const
 {
-     	if (_npc->getVehicle()->getNavigator()->checkEchievement() == true)
+     	if (_npc->getVehicle()->getDriveComplex()->checkEchievement() == true)
      	{
-     		if (_npc->getVehicle()->getNavigator()->getDockingPermission() == true)
+     		if (_npc->getVehicle()->getDriveComplex()->getDockingPermission() == true)
      		{
      		     	_npc->dockEvent();
      		     	printf("npc id = %i, dockEvent()\n", _npc->getId());
@@ -54,11 +55,11 @@ void MicroScenarioDocking :: update_inDynamic(Npc* _npc) const
 
 void MicroScenarioDocking :: exit(Npc* _npc) const 
 {
-	printf("npc_id = %i, finish to MicroScenarioDocking to ob id = %i\n", _npc->getId(), _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getObId());
+	printf("npc_id = %i, finish to MicroScenarioDocking to ob id = %i\n", _npc->getId(), _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getId());
 }
 
 
 std::string MicroScenarioDocking :: getDescription(Npc* _npc) const
 {
-	return "MicroScenarioDocking to ob_id = " + int2str( _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getObId());
+	return "MicroScenarioDocking to ob_id = " + int2str( _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getId());
 }

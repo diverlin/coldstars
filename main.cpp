@@ -1,7 +1,7 @@
 /*
 Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
 
-This program is free software; you can redistribute it and/or
+This prog//////////ram is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
 of the License, or (at your option) any later version.
@@ -16,6 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #include "include.hpp"
 
 
@@ -27,14 +28,13 @@ int main()
     	while (g_APP.IsOpened())
     	{    
 		pPLAYER->update_global();
-		//printf("player angle = %f\n", pPLAYER->getShip()->getPoints()->getAngleDegree());
        		if (pPLAYER->getPlaceTypeId() == SPACE_ID)
        		{  
            		//////////// in SPACE ///////////////
            		g_KEYEVENTS->update_inSpace();
            		pPLAYER->getCursor()->resetInfoSlot();
-
-			for (int i = 0; i < g_GAMESPEED; i++)  // fake
+ 
+			for (int i = 0; i < g_GAMESPEED; i++)  // fake implementation (static ai should not be run several times at once)
 			{
        				g_GALAXY->update(g_TIMER->getTurnTick());
        			}

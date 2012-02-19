@@ -21,39 +21,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define TRAIL_H
 
 
-class TrailEffect
+class TrailEffect : public BaseParticleSystem
 {
    	public:
-       		TrailEffect(TextureOb* _texOb, 
-		    	    vec2f* _pTo_start_pos, 
-			    vec2f* _pTo_target_pos, 
-			    ParticleData _data_particle,
-			    unsigned int _num_particles);
-
-       		~TrailEffect();
+       		TrailEffect(vec2f*, vec2f*);
+       		virtual ~TrailEffect();
        
-       		void update();
-       		void render();
+       		virtual void update();
+       		virtual void render();
        		
+                void createParticles();
+                void updateVelocity();
+       		void putParticlesToInitPos();
+                                
        	private:
-       	       	TextureOb* texOb;
+       		vec2f* pTo_start_pos;      //ob.points.midLeft
+       		vec2f* pTo_target_pos;     //ob.points.midFarLeft
 
-       		float* pTo_start_pos_x;       //ob.points.midLeft
-       		float* pTo_start_pos_y;
-
-       		float* pTo_target_pos_x;     //ob.points.midFarLeft
-       		float* pTo_target_pos_y;  
-
-
-       		ParticleData data_particle;
        		vec2f velocity;
 
-       		float particle_offset;
 
-       		std::vector<Particle*> particles_vec;
-       		
-       		void updateVelocity();
-       		void putParticlesToInitPos();
        	
        	
 };  

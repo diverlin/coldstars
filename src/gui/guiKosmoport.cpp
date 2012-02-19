@@ -20,9 +20,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 GuiKosmoport :: GuiKosmoport()
 {
-    	TextureOb* pTo_particleTexOb = g_TEXTURE_MANAGER.getParticleTexObByColorId(BLUE_COLOR_ID);    // debug
+        TextureOb* texOb_button = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; // fake
 
-    	angar_screen_button     = new Button(pTo_particleTexOb, 
+    	angar_screen_button     = new Button(texOb_button, 
     					     SCREEN_ANGAR_ID,
     					     g_VIEW_WIDTH - 1 * (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE, 
@@ -31,7 +31,7 @@ GuiKosmoport :: GuiKosmoport()
     					     "angar");    					     
     	button_common_pList.push_back(angar_screen_button);
     	
-    	store_screen_button     = new Button(pTo_particleTexOb, 
+    	store_screen_button     = new Button(texOb_button, 
     					     SCREEN_STORE_ID,
     					     g_VIEW_WIDTH - 2 * (INTERFACE_ICON_SIZE + 5),
     					     INTERFACE_ICON_SIZE, 
@@ -40,7 +40,7 @@ GuiKosmoport :: GuiKosmoport()
     					     "store");
 	button_common_pList.push_back(store_screen_button);
     					        	
-    	shop_screen_button      = new Button(pTo_particleTexOb, 
+    	shop_screen_button      = new Button(texOb_button, 
     					     SCREEN_SHOP_ID,
     					     g_VIEW_WIDTH - 3 * (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE, 
@@ -49,7 +49,7 @@ GuiKosmoport :: GuiKosmoport()
     					     "shop");
     	button_common_pList.push_back(shop_screen_button);
     					     
-    	galaxymap_screen_button = new Button(pTo_particleTexOb, 
+    	galaxymap_screen_button = new Button(texOb_button, 
     					     SCREEN_GALAXYMAP_ID,
     					     g_VIEW_WIDTH - 4 * (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE, 
@@ -58,7 +58,7 @@ GuiKosmoport :: GuiKosmoport()
     					     "galaxymap");
         button_common_pList.push_back(galaxymap_screen_button);
     					     
-    	goverment_screen_button = new Button(pTo_particleTexOb, 
+    	goverment_screen_button = new Button(texOb_button, 
     					     SCREEN_GOVERMENT_ID,
     					     g_VIEW_WIDTH - 5 * (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE,
@@ -67,7 +67,7 @@ GuiKosmoport :: GuiKosmoport()
     					     "goverment");
     	button_common_pList.push_back(goverment_screen_button);
 
-    	repair_button = new Button(pTo_particleTexOb, 
+    	repair_button = new Button(texOb_button, 
     	    			   REPAIR_BUTTON_ID,
     				   g_VIEW_WIDTH - 1 * (INTERFACE_ICON_SIZE + 5),
     				   g_VIEW_HEIGHT - 2*INTERFACE_ICON_SIZE, 
@@ -76,7 +76,7 @@ GuiKosmoport :: GuiKosmoport()
     				   "buy_repair");
     	button_angar_pList.push_back(repair_button);
     				   
-    	fuel_button   = new Button(pTo_particleTexOb,
+    	fuel_button   = new Button(texOb_button,
     	 			   FUEL_BUTTON_ID,
     	 			   g_VIEW_WIDTH - 1 * (INTERFACE_ICON_SIZE + 5),
     	 			   g_VIEW_HEIGHT - 3*INTERFACE_ICON_SIZE, 
@@ -85,7 +85,7 @@ GuiKosmoport :: GuiKosmoport()
     	 			   "buy fuel");  
     	button_angar_pList.push_back(fuel_button);
     	 			   
-    	launch_button = new Button(pTo_particleTexOb, 
+    	launch_button = new Button(texOb_button, 
     				   LAUNCH_BUTTON_ID,
     				   g_VIEW_WIDTH - 1 * (INTERFACE_ICON_SIZE + 5), 
     				   g_VIEW_HEIGHT - 4*INTERFACE_ICON_SIZE, 

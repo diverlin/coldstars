@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define COMMONFORSPACEITEMS_H
 
 
-class CommonForSpaceItems : public BaseSpaceObject
+class CommonForSpaceItems : public SpaceObjectBase
 {   
 	public:
         	CommonForSpaceItems();
@@ -30,19 +30,12 @@ class CommonForSpaceItems : public BaseSpaceObject
         	void postCreateInit();
         	
     		//void setTargetPosition(vec2f);
-    		void moveToSpace(StarSystem*, vec2f);
+    		void moveToSpace(StarSystem*, vec2f);   
             	
-            	void moveExternalyToPosition(vec2f);
-            	
-        	void update_inSpace_inDynamic_TRUE();
-        	void update_inSpace_inDynamic_FALSE();
+        	void update_inSpace(int, bool);
         	
-        	void updateDyingEffect_TRUE();
-        	void updateDyingEffect_FALSE();
-
 		void silentKill();
-        	void hit_TRUE(int);
-        	void hit_FALSE(int);
+		void postDeathUniqueEvent(bool);
 
         	void render2D();
         
@@ -54,9 +47,6 @@ class CommonForSpaceItems : public BaseSpaceObject
         	bool keep_moving;
     	
           	void calcCollisionrRadius();
-        	        	
-        	void death_TRUE();
-        	void death_FALSE();
 };     
 
 #endif 

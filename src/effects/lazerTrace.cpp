@@ -16,19 +16,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "lazerTrace.hpp"
 
-
-LazerTraceEffect :: LazerTraceEffect(TextureOb* _texOb, TextureOb* _texOb_particle, float _particle_size, vec2f* _pTo_start_pos, vec2f* _pTo_end_pos)
+LazerTraceEffect :: LazerTraceEffect(TextureOb* _texOb, vec2f* _pTo_start_pos, vec2f* _pTo_end_pos)
 {
         is_alive = true;
         is_alreadyInRemoveQueue = false; 
 
 	texOb = _texOb;
-        texOb_particle = _texOb_particle;
         
-        particle_size = _particle_size;
-
         existance_time = getRandInt(40, 45);
 
         if (getRandInt(1,2) == 1)
@@ -111,7 +106,7 @@ void LazerTraceEffect :: render()
     		 -2, 
     		 len, 
     		 angle_inD, 
-    		 texOb->h/4);	
+    		 texOb->getFrameHeight()/4);	
 	}
 }
 

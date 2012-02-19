@@ -65,7 +65,7 @@ void init()
     	Npc* pnpc = getNewNpc(prace_id, psubtype_id);   
     	Ship* pship = shipGenerator(prace_id, psubtype_id, size_id, weapons_num);
 	
-    	equip((Vehicle*)pship);            		// improove
+    	equip((VehicleBase*)pship);            		// improove
         pship->updateAllStuff(); 		// improove
         
         pnpc->bind(pship);
@@ -73,7 +73,7 @@ void init()
 	vec2f center(-400, 400);
 	float angle = 0;  
 		
-        pPLAYER->getStarSystem()->addToSpace(pship, center, angle);
+        pPLAYER->getStarSystem()->addToSpace(pship, center, angle, NULL);
         pPLAYER->getStarSystem()->addToSpace(pnpc);
         	
     	pship->getPoints()->setCenter(-400, -400);

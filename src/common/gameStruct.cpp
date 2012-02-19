@@ -148,10 +148,6 @@ IdData :: IdData()
 
 ParticleData :: ParticleData()
 {	
-      	alpha_start = 0.0;
-      	alpha_end   = 0.0;
-      	d_alpha     = 0.0;
-      		
       	size_start = 0.0;
       	size_end   = 0.0;
         d_size     = 0.0;
@@ -159,10 +155,12 @@ ParticleData :: ParticleData()
       	velocity_start = 0.0;
       	velocity_end   = 0.0;
 	d_velocity     = 0.0;
+        
+        frame = 0;
 }
 	
 	
-EquipmentCommonData :: EquipmentCommonData()
+ItemCommonData :: ItemCommonData()
 {	
 	modules_num_max    = 0; 
 	condition_max      = 0; 
@@ -217,11 +215,4 @@ ControlWord :: ~ControlWord()
 
 
 AngleData :: AngleData()
-{
-	x = 0.0;
-	y = 0.0;
-	z = 0.0;
-	d_x = 0.0;
-	d_y = 0.0;
-	d_z = 0.0;
-}
+{}

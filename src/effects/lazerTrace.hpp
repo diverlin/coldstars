@@ -23,8 +23,6 @@ class LazerTraceEffect
 { 
     	public:
        		LazerTraceEffect(TextureOb* _texOb, 
-       				 TextureOb* texOb_particle, 
-       				 float _particle_size, 
        				 vec2f* _pTo_start_pos, 
        				 vec2f* _pTo_end_pos);
        		~LazerTraceEffect();
@@ -40,9 +38,6 @@ class LazerTraceEffect
        		bool is_alreadyInRemoveQueue; 
        		
  	       	TextureOb* texOb;
-       		TextureOb* texOb_particle;
-
-       		float particle_size;
 
        		float len; 
        		float angle_inR;
