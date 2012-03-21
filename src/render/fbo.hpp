@@ -20,8 +20,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef FBO_H
 #define FBO_H
 
-
-
 class FBO
 {
 	public:
@@ -30,7 +28,7 @@ class FBO
 
 		GLuint getTexture() const; 
 		
-      		void activate();
+      		void activate(Screen*);
       		void deactivate();
       		
       	private:

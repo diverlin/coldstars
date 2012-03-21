@@ -42,9 +42,9 @@ class BloomEffect
                 BloomEffect(int _screen_w, int _screen_h, GLuint _program_blur, GLuint _program_extractBright, GLuint _program_combine, int _pass_max, int _fbo_max_per_pass);
                 ~BloomEffect();
                 
-                void pass0(GLuint _origin_scene_texture, float brightThreshold);
-                void restPasses();
-                void combine(GLuint _orig_scene_texture);
+                void pass0(Screen*, GLuint, float);
+                void restPasses(Screen*);
+                void combine(Screen*, GLuint);
 };
  
 // HDR http://prideout.net/archive/bloom/  

@@ -1,5 +1,5 @@
 #ifndef MYVECTOR_H
-#define VMYECTOR_H
+#define MYVECTOR_H
 
 class vec2f
 {

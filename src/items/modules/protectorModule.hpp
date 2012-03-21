@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define PROTECTORMODULE_H
 
 
-class ProtectorModule : public BaseModule
+class ProtectorModule : public ModuleBase
 {
    	public:
        		ProtectorModule(int protection_add);

@@ -17,16 +17,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "textstuff.hpp"
-
-
-//TextBoard :: TextBoard()
-//{}
-
-//TextBoard :: ~TextBoard()
-//{}
-
-
 
 VerticalFlowText :: VerticalFlowText(std::string _str, 
                                      vec2f _center, 
@@ -74,11 +64,11 @@ void VerticalFlowText :: update()
         }
 }
                 
-void VerticalFlowText :: render() const
+void VerticalFlowText :: render(vec2f scroll_coords) const
 {
         if (is_alive == true)
         {
-                drawSimpleColoredText(str, pos, color, g_SCROLL_COORD_X, g_SCROLL_COORD_Y);
+                drawSimpleColoredText(str, pos, color, scroll_coords);
         }
 }
  

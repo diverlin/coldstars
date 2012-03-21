@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define FREEZEREQUIPMENT_H
 
 
-class FreezerEquipment : public BaseEquipment
+class FreezerEquipment : public EquipmentBase
 {  
    	public:
       		FreezerEquipment(int freeze_orig);
@@ -29,18 +29,15 @@ class FreezerEquipment : public BaseEquipment
 
 		int getFreeze() const;
   
-      		bool insertModule(FreezerModule*);
-      		void virtual updateOwnerAbilities();
+      		virtual void updateOwnerAbilities();
+      		
+      		void countPrice();
+      		virtual void updatePropetries();  
       		
       	private:
       	      	int freeze_orig;
       		int freeze_add;
       		int freeze;
-      		
-      	      	std::vector<FreezerModule*> modules_vec;
-
-      		void countPrice();
-      		void updatePropetries();      		
       		
       		void virtual addUniqueInfo();      		
        		std::string getFreezeStr();

@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define ROCKETMODULE_H
 
 
-class RocketModule : public BaseModule
+class RocketModule : public ModuleBase
 {
      	public:
        		RocketModule(int ammo_max_add, 

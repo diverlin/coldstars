@@ -140,7 +140,7 @@ void drawLine(TextureOb* texOb,
 
 
 
-void drawSimpleColoredText(std::string str, vec2f pos, Color4i color, float scroll_x, float scroll_y)
+void drawSimpleColoredText(std::string str, vec2f pos, Color4i color, vec2f scroll_coord)
 {
      	 int font_size = 12;
          sf::String s(str, g_FONT, font_size);
@@ -151,7 +151,7 @@ void drawSimpleColoredText(std::string str, vec2f pos, Color4i color, float scro
          //g_APP.Draw(s);
          
          s.SetColor(sf::Color(color.r, color.g, color.b));
-         s.SetPosition(pos.x - scroll_x, (g_VIEW_HEIGHT - pos.y) + scroll_y); 
+         s.SetPosition(pos.x - scroll_coord.x, (g_APP.GetHeight() - pos.y) + scroll_coord.y); 
          g_APP.Draw(s);        
 }
 
@@ -195,14 +195,14 @@ void drawInfoIn2Column(
 
      	sf::String s((*pInfo_title_list)[0], g_FONT, (font_size+1));
      	s.SetColor(sf::Color(255, 255, 255));
-     	s.SetPosition(center_x - scroll_x + info_total_string_w/3, (g_VIEW_HEIGHT - center_y) + scroll_y); 
+     	s.SetPosition(center_x - scroll_x + info_total_string_w/3, (g_APP.GetHeight() - center_y) + scroll_y); 
      	g_APP.Draw(s);
 
      	for (unsigned int i = 1; i < pInfo_title_list->size(); i++)
      	{
          	sf::String s((*pInfo_title_list)[i], g_FONT, font_size);
          	s.SetColor(sf::Color(255, 255, 255));
-         	s.SetPosition(center_x - scroll_x, (g_VIEW_HEIGHT - center_y) + char_h*i + scroll_y); 
+         	s.SetPosition(center_x - scroll_x, (g_APP.GetHeight() - center_y) + char_h*i + scroll_y); 
          	g_APP.Draw(s);
      	}       
 
@@ -211,7 +211,7 @@ void drawInfoIn2Column(
      	{
          	sf::String s((*pInfo_value_list)[i], g_FONT, font_size);
          	s.SetColor(sf::Color(250, 250, 0));
-         	s.SetPosition(center_x - scroll_x + max_info_title_str_size * (char_w - 1.2), (g_VIEW_HEIGHT - center_y) + char_h*i + char_h + scroll_y); 
+         	s.SetPosition(center_x - scroll_x + max_info_title_str_size * (char_w - 1.2), (g_APP.GetHeight() - center_y) + char_h*i + char_h + scroll_y); 
          	g_APP.Draw(s);
      	}  
 }
@@ -229,7 +229,7 @@ void drawSimpleText(std:: string str, int font_size, float pos_x, float pos_y)
 {
      	sf::String s(str, g_FONT, font_size);
      	s.SetColor(sf::Color(255, 255, 255));
-     	s.SetPosition(pos_x, (g_VIEW_HEIGHT - pos_y)); 
+     	s.SetPosition(pos_x, (g_APP.GetHeight() - pos_y)); 
      	g_APP.Draw(s);
 }
 

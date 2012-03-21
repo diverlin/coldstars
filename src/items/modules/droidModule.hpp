@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define DROIDMODULE_H
 
 
-class DroidModule : public BaseModule
+class DroidModule : public ModuleBase
 {
    	public:
       		DroidModule(int repair_add); 

@@ -91,7 +91,7 @@ class Observation
 
  		void observeAll_inSpace_inStatic();
           	
-          	void findEchievableStarSystems_inStatic();
+          	void findEchievableStarSystems_inStatic(Galaxy*);
           	StarSystem* getClosestStarSystem(bool) const;
           	Npc* getClosestNpc(std::vector<int>*) const;
           	          	          	                

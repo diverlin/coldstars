@@ -43,6 +43,6 @@ class DistantNebulaBgEffect
         	void calcRenderConstants();     
 };
 
-DistantNebulaBgEffect* createDistantNebula(int _color_id);
+DistantNebulaBgEffect* createDistantNebula(int _color_id = -1);
 
 #endif 

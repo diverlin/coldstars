@@ -20,51 +20,50 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 DriveEquipment :: DriveEquipment(int speed_orig, 
 				 int hyper_orig)
 {
-     this->speed_orig = speed_orig;
-     this->hyper_orig = hyper_orig;
-     
-     speed_add        = 0;
-     hyper_add        = 0;
-
-     updatePropetries();
-     countPrice();
+     	this->speed_orig = speed_orig;
+     	this->hyper_orig = hyper_orig;
 }
 
 DriveEquipment :: ~DriveEquipment() /* virtual */
-{
-	for (unsigned int i = 0; i < modules_vec.size(); i++)
-	{
-		delete modules_vec[i];
-	}
-}
+{}
 
 
 int DriveEquipment :: getSpeed() const { return speed; }
 int DriveEquipment :: getHyper() const { return hyper; }
 		
-		
+	
+/* virtual */	
 void DriveEquipment :: updatePropetries()
-{
-     speed = speed_orig + speed_add;
-     hyper = hyper_orig + hyper_add;
+{     
+     	speed_add        = 0;
+     	hyper_add        = 0;
+     
+        for (unsigned int i = 0; i < modules_vec.size(); i++)
+    	{
+    		speed_add += ((DriveModule*)modules_vec[i])->getSpeedAdd();
+        	hyper_add += ((DriveModule*)modules_vec[i])->getHyperAdd();  	
+    	}
+    	
+     	speed = speed_orig + speed_add;
+     	hyper = hyper_orig + hyper_add;
 }
 
 
 void DriveEquipment :: countPrice()
 {
-     float speed_rate         = (float)speed_orig / DRIVE_SPEED_MIN;
-     float hyper_rate         = (float)hyper_orig / DRIVE_HYPER_MIN;
-     float modules_num_rate   = (float)common_data.modules_num_max / DRIVE_MODULES_NUM_MAX;
+     	float speed_rate         = (float)speed_orig / DRIVE_SPEED_MIN;
+     	float hyper_rate         = (float)hyper_orig / DRIVE_HYPER_MIN;
+     	float modules_num_rate   = (float)common_data.modules_num_max / DRIVE_MODULES_NUM_MAX;
 
-     float effectiveness_rate = DRIVE_SPEED_WEIGHT * speed_rate + DRIVE_HYPER_WEIGHT * hyper_rate + DRIVE_MODULES_NUM_WEIGHT * modules_num_rate;
+     	float effectiveness_rate = DRIVE_SPEED_WEIGHT * speed_rate + DRIVE_HYPER_WEIGHT * hyper_rate + DRIVE_MODULES_NUM_WEIGHT * modules_num_rate;
 
-     float mass_rate          = (float)common_data.mass / DRIVE_MASS_MIN;
-     float condition_rate     = (float)condition / common_data.condition_max;
+     	float mass_rate          = (float)common_data.mass / DRIVE_MASS_MIN;
+     	float condition_rate     = (float)condition / common_data.condition_max;
 
-     price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-
+/* virtual */
 void DriveEquipment :: updateOwnerAbilities()
 {
     	slot->getOwnerVehicle()->updateDriveAbility();
@@ -81,36 +80,19 @@ void DriveEquipment :: addUniqueInfo()
 
 std::string DriveEquipment :: getSpeedStr()
 {
-     if (speed_add == 0)
-        return int2str(speed_orig);
-     else
-        return int2str(speed_orig) + "+" + int2str(speed_add);
+     	if (speed_add == 0)
+        	return int2str(speed_orig);
+     	else
+        	return int2str(speed_orig) + "+" + int2str(speed_add);
 }
 
 std::string DriveEquipment :: getHyperStr()
 {
-     if (hyper_add == 0)
-         return int2str(hyper_orig);
-     else
-         return int2str(hyper_orig) + "+" + int2str(hyper_add);
+     	if (hyper_add == 0)
+        	return int2str(hyper_orig);
+     	else
+        	return int2str(hyper_orig) + "+" + int2str(hyper_add);
 }
-
-bool DriveEquipment :: insertModule(DriveModule* _drive_module)
-{
-    	if (modules_vec.size() < common_data.modules_num_max)
-    	{
-        	speed_add += _drive_module->getSpeedAdd();
-        	hyper_add += _drive_module->getHyperAdd();
-     
-        	updatePropetries();
-         
-        	texOb_modules_pList.push_back(_drive_module->getTextureOb());
-        	modules_vec.push_back(_drive_module);
-        	return true;
-    	}
-    	else    
-        	return false;
-} 
 
 
 DriveEquipment* getNewDriveEquipment(int race_id, int revision_id)
@@ -147,6 +129,9 @@ DriveEquipment* getNewDriveEquipment(int race_id, int revision_id)
         drive_equipment->setFunctionalSlotSubTypeId(DRIVE_SLOT_ID);
         drive_equipment->setItemCommonData(common_data);
          
+        drive_equipment->updatePropetries();
+     	drive_equipment->countPrice();
+     
         return drive_equipment;
 }
 

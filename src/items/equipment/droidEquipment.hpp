@@ -21,26 +21,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define DROIDEQUIPMENT_H
 
 
-class DroidEquipment : public BaseEquipment
+class DroidEquipment : public EquipmentBase
 {
    	public: 
      		DroidEquipment(int repair_orig);
      		virtual ~DroidEquipment();
 
 		int getRepair() const;
-		
-      		bool insertModule(DroidModule*);
+
       		void virtual updateOwnerAbilities();
-      		
+
+      		void countPrice();
+      		virtual void updatePropetries();
+      		      		
       	private:
       		int repair_orig;
       		int repair_add;
       		int repair;
-
-      	      	std::vector<DroidModule*> modules_vec;
-
-      		void countPrice();
-      		void updatePropetries();
       		
      		void virtual addUniqueInfo();
        		std::string getRepairStr();

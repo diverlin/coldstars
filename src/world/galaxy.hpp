@@ -31,16 +31,13 @@ class Galaxy
      		StarSystem* getRandomStarSystem();
      		StarSystem* getRandomCapturedStarSystem();
      		     
-    		void update(int);
+    		void update_s(int);
 
      	private:
    	     	int starsytem_counter;
      		int star_counter;      
      		int ship_counter;
      		int planet_counter;
-     		
-     		//bool allow_single_calc_inDynamic;
-     		//bool allow_single_calc_inStatic;
 };
 
 

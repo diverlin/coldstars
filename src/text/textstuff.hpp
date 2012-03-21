@@ -43,7 +43,7 @@ class VerticalFlowText
 		bool getAlive() const;
 
                 void update();
-                void render() const;
+                void render(vec2f) const;
  
         private:
                 bool is_alive;

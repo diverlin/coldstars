@@ -21,27 +21,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define PROTECTOREQUIPMENT_H
 
 
-class ProtectorEquipment  : public BaseEquipment
+class ProtectorEquipment  : public EquipmentBase
 {
 	public:
       		ProtectorEquipment(int protection_orig);
       		virtual ~ProtectorEquipment();
 
 		int getProtection() const;
-		
-      		bool insertModule(ProtectorModule*);
+
       		void virtual updateOwnerAbilities();
+      		
+      		void countPrice();
+      		virtual void updatePropetries();
       		
       	private:
       	      	int protection_orig;
       		int protection_add;
       		int protection;
-      		
-      		std::vector<ProtectorModule*> modules_vec;
-      		
-      		void countPrice();
-      		void updatePropetries();
-
 
      		void virtual addUniqueInfo();
            	std::string getProtectionStr();

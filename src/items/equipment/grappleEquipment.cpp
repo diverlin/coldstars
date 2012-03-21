@@ -26,23 +26,11 @@ GrappleEquipment :: GrappleEquipment(int strength_orig,
     	this->radius_orig     = radius_orig;
         this->speed_orig      = speed_orig;
     	this->maxNumItem_orig = maxNumItem_orig;
-                  
-    	strength_add   = 0;
-    	radius_add     = 0;
-   	speed_add      = 0;
-   	maxNumItem_add = 0;
-
-    	updatePropetries();
-    	countPrice();
 }
 
+/* virtual */
 GrappleEquipment :: ~GrappleEquipment()
-{
-	for (unsigned int mi = 0; mi<modules_vec.size(); mi++)
-	{
-		delete modules_vec[mi];
-	}
-}
+{}
 
 //void GrappleEquipment :: reshapeTargetObSlot(ItemSlot* _slot)
 //{
@@ -145,9 +133,22 @@ int GrappleEquipment :: getRadius()     const { return radius; }
 int GrappleEquipment :: getSpeed()      const { return speed; }
 int GrappleEquipment :: getMaxNumItem() const { return maxNumItem; }
  
-
+/* virtual */
 void GrappleEquipment :: updatePropetries()
 {
+    	strength_add   = 0;
+    	radius_add     = 0;
+   	speed_add      = 0;
+   	maxNumItem_add = 0;
+        
+        for (unsigned int i = 0; i < modules_vec.size(); i++)
+    	{
+    		strength_add   += ((GrappleModule*)modules_vec[i])->getStrengthAdd();
+        	radius_add     += ((GrappleModule*)modules_vec[i])->getRadiusAdd();        	
+        	speed_add      += ((GrappleModule*)modules_vec[i])->getSpeedAdd();
+        	maxNumItem_add += ((GrappleModule*)modules_vec[i])->getMaxNumItemAdd();
+    	}
+    		        	
     	strength   = strength_orig   + strength_add;
     	radius     = radius_orig     + radius_add;
     	speed      = speed_orig      + speed_add;
@@ -171,7 +172,7 @@ void GrappleEquipment :: countPrice()
     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-
+/* virtual */
 void GrappleEquipment :: updateOwnerAbilities()
 {
     	slot->getOwnerVehicle()->updateGrabAbility();
@@ -223,27 +224,6 @@ std::string GrappleEquipment :: getMaxNumItemStr()
 }
 
 
-
-bool GrappleEquipment :: insertModule(GrappleModule* _grapple_module)
-{
-    	if (modules_vec.size() < common_data.modules_num_max)
-    	{
-       	 	strength_add   += _grapple_module->getStrengthAdd();
-        	radius_add     += _grapple_module->getRadiusAdd();
-        	speed_add      += _grapple_module->getSpeedAdd();
-        	maxNumItem_add += _grapple_module->getMaxNumItemAdd();
-            
-        	updatePropetries();
-        
-        	texOb_modules_pList.push_back(_grapple_module->getTextureOb());
-        	modules_vec.push_back(_grapple_module);
-        	return true;
-    	}
-    	else
-        	return false;    
-}
-    
-
               
 
 GrappleEquipment* getNewGrappleEquipment(int race_id, int revision_id)
@@ -282,7 +262,10 @@ GrappleEquipment* getNewGrappleEquipment(int race_id, int revision_id)
         grapple_equipment->setIdData(data_id);  
         grapple_equipment->setTextureOb(texOb_item);    	
         grapple_equipment->setFunctionalSlotSubTypeId(GRAPPLE_SLOT_ID);
-        grapple_equipment->setItemCommonData(common_data);
+        grapple_equipment->setItemCommonData(common_data);        
+
+    	grapple_equipment->updatePropetries();
+    	grapple_equipment->countPrice();
 
     	return grapple_equipment;
 }

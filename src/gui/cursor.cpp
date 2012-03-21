@@ -19,54 +19,45 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-Cursor :: Cursor()
+Cursor :: Cursor(Player* player)
 {
+	this->player = player;
+	
      	type_id = CURSOR_ID;
      
-     	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID);
-     	slot = new ItemSlot(CARGO_SLOT_ID, NULL, texOb_slot);
+     	//TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID);
+     	slot = new ItemSlot(CARGO_SLOT_ID, NULL, NULL);
      	slot->setRect(0, 0, CURSOR_SLOT_WIDTH, CURSOR_SLOT_HEIGHT);
-     
+     	
+     	mouse_left_button  = false;
+     	mouse_right_button = false;
 }
 
 
 Cursor :: ~Cursor()
 {}
 
-
+void Cursor :: setLeftMouseButton(bool mouse_left_button) { this->mouse_left_button = mouse_left_button; }
+void Cursor :: setRightMouseButton(bool mouse_right_button) { this->mouse_right_button = mouse_right_button; }
+		
+vec2f Cursor :: getMousePos() const { return mouse_pos; }
+	
+bool Cursor :: getMouseLeftButton() const { return mouse_left_button; }
+bool Cursor :: getMouseRightButton() const { return mouse_right_button; }
+			
 ItemSlot* Cursor :: getSlot() { return slot; }
-ItemSlot* Cursor :: getInfoSlot() { return slot_info; }
-void Cursor :: setInfoSlot(ItemSlot* slot_info) { this->slot_info = slot_info; }
 
-
-void Cursor :: updatePos()
+		
+void Cursor :: updateMousePos()
 {
-     	slot->getRect().setCenter(g_MOUSE_POS_X, g_VIEW_HEIGHT - g_MOUSE_POS_Y);
+        const sf::Input& Input = g_APP.GetInput();
+        mouse_pos.set(Input.GetMouseX(), Input.GetMouseY());
 }
 
-void  Cursor :: resetInfoSlot()
-{
-	slot_info = NULL;
-}
 
 void Cursor :: update()
 {
-	updatePos();
+     	slot->getRect().setCenter(mouse_pos.x, player->getScreen()->getHeight()  - mouse_pos.y);
 }
 
-void Cursor :: render()
-{
-	enable_BLEND();
-                slot->renderEquipedItem();
-	disable_BLEND();
-}
 
-void Cursor :: renderInfoSlot()
-{
-	if (slot_info != NULL)
-	{
-		enable_BLEND();
-			slot_info->renderItemInfo();
-		disable_BLEND();
-	}
-}

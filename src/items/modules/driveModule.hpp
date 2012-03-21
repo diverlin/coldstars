@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define DRIVEMODULE_H
 
 
-class DriveModule : public BaseModule
+class DriveModule : public ModuleBase
 {
    	public: 
       		DriveModule(int speed_add, 

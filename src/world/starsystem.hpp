@@ -24,6 +24,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class StarSystem : public SpaceObjectBase
 {
 	public:
+		Star* getStar() const;
+		
     	    	// ENTITY VECTORS
     	    	std::vector<Player*> 	   PLAYER_vec;
     	    	
@@ -31,11 +33,10 @@ class StarSystem : public SpaceObjectBase
     		std::vector<Planet*>       PLANET_vec;
     		std::vector<Asteroid*>     ASTEROID_vec;
     		std::vector<Mineral*>      MINERAL_vec;
-    		std::vector<Container*>    BOMB_vec;
     		std::vector<Container*>    CONTAINER_vec;
     		std::vector<RocketBullet*> ROCKET_vec;
     		std::vector<BlackHole*>    BLACKHOLE_vec;
-    		std::vector<StarBase*>     STARBASE_vec;
+    		std::vector<SpaceStation*> SPACESTATION_vec;
     		std::vector<Satellite*>    SATELLITE_vec;
     		    		
 		std::vector<Ship*> SHIP_inSPACE_vec;
@@ -53,11 +54,13 @@ class StarSystem : public SpaceObjectBase
    		int* getpPlaceTypeId();
    		float getCollisionRadius() const;
    		
+   		int getShockWaveNum() const;
     
     		StarSystem(int);
     		~StarSystem();
     
     		void setPosition(vec2f);
+		void setGalaxy(Galaxy*);
 		
 		int getId() const;
                 int getTypeId() const;
@@ -65,9 +68,10 @@ class StarSystem : public SpaceObjectBase
 		bool getDetailedSimulationFlag() const;
 		bool getCaptured() const;
 		vec2f getPosition() const;
-		int getShockWaveNum() const;
 		int getRaceId() const;
 		int getConquerorRaceId() const;
+		
+		Galaxy* getGalaxy() const;
 		
 		// poor
     		Planet* getClosestPlanet(vec2f);
@@ -77,11 +81,7 @@ class StarSystem : public SpaceObjectBase
 		Npc* getRandNpc(std::vector<int>*) const;
     		// 
 
-		void update(int, bool);
-
-	        void render(bool, bool, bool);      
-   		    		
-    		void mouseControl();
+		void update_s(int, bool);
 
     		//// TRANSITION
                 void addToHyperJumpQueue(Npc*);
@@ -90,10 +90,9 @@ class StarSystem : public SpaceObjectBase
     		void addToSpace(Npc*);
 
                 void addToSpace(Star*);
-                void addToSpace(Planet*);
+                void addToSpace(Planet*, SpaceObjectBase*);
     		void addToSpace(Asteroid*);
     		void addToSpace(Mineral*, vec2f);
-    		void addToSpace(Bomb*, vec2f);
     		void addToSpace(Container*, vec2f);
     		void addToSpace(RocketBullet*);
     		void addToSpace(BlackHole*, vec2f);
@@ -112,10 +111,20 @@ class StarSystem : public SpaceObjectBase
     		bool removeNpc(int _id, int _subtype_id);  
    		////
    		
-   		//void addToRemoveFromOuterSpaceQueue(Mineral*);
+   		void addToRemoveFromOuterSpaceQueue(Mineral*);
    		void addToRemoveFromOuterSpaceQueue(Container*);
    		void addToRemoveFromOuterSpaceQueue(VehicleBase*);
    		    		
+   		void bombExplosionEvent(Container*, bool);
+   		
+   		void findVisibleEntities_c(Player*);  
+
+    		void restoreDefaultColor();
+    		void restoreSceneColor();
+    		void renderBackground(vec2f);
+                void drawOrbits();
+                void drawPath();
+                           		    		    		
     	private:
                 int id, type_id;
                 int race_id, conqueror_race_id;
@@ -127,77 +136,53 @@ class StarSystem : public SpaceObjectBase
     		bool is_CAPTURED;
     		
     		vec2f center;
+    		
+    		Galaxy* galaxy;
     	
     	    	// ENTITY VECTORS
                 std::vector<Npc*> NPC_appear_vec;
                 
     	    	std::vector<DistantNebulaBgEffect*> distantNebulaBgEffect_vec;
     		std::vector<DistantStarBgEffect*> distantStarBgEffect_vec;
-    		
+    		   
     		// effects
     		std::vector<LazerTraceEffect*> effect_LAZERTRACE_vec;
     		std::vector<BaseParticleSystem*>  effect_PARTICLESYSTEM_vec;
-    		std::vector<ShockWaveEffect*>  effect_SHOCKWAVE_vec;
-    		
+    		std::vector<ShockWaveEffect*>  effect_SHOCKWAVE_vec;    		
     		std::vector<VerticalFlowText*> text_DAMAGE_vec;
-    		// 
     		
-   		// VISIBLE ENTITY LIST
-    		std::vector<Star*>         visible_STAR_vec;
-    		std::vector<Planet*>       visible_PLANET_vec;
-    		std::vector<Asteroid*>     visible_ASTEROID_vec;
-    		std::vector<Mineral*>      visible_MINERAL_vec;
-    		std::vector<Container*>    visible_BOMB_vec;
-    		std::vector<Container*>    visible_CONTAINER_vec;
-    		std::vector<RocketBullet*> visible_ROCKET_vec;
-    		std::vector<BlackHole*>    visible_BLACKHOLE_vec;
-    		std::vector<StarBase*>     visible_STARBASE_vec;
-    		std::vector<Satellite*>    visible_SATELLITE_vec;
-    		
-    		std::vector<Ship*>         visible_SHIP_vec;
-    		//  
-    		   
     		// remove queue 	
-    		std::vector<Container*>         remove_BOMB_queue;
+    		std::vector<Container*>    remove_CONTAINER_queue;
     		std::vector<Mineral*>      remove_MINERAL_queue;
     		std::vector<Ship*>         remove_SHIP_queue;
-    		std::vector<StarBase*>     remove_STARBASE_queue;
-    		std::vector<Satellite*>    remove_SATELLITE_queue;
+    		std::vector<SpaceStation*> remove_SPACESTATION_queue;
+    		std::vector<Satellite*>    remove_SATELLITE_queue;    		
+    		//    			    		    	  
+    		  	
+    		GarbageEntities garbage_entities;
+    		GarbageEffects  garbage_effects;
+    		                
+                void postHyperJumpEvent_s();
+                void launchingEvent_s() const;
+
+    		void asteroidManager_s(unsigned int num);
+
+   		void manageUnavaliableObjects_s();
+    		void manageDeadObjects_s();
+    		   		
+                void rocketCollision_s(bool);
+    		void asteroidCollision_s(bool);
+
     		
-    		//    			    		    	    	
-    		Garbage garbage;
-                
-                void postHyperJumpEvent();
-                void launchingEvent() const;
-
-    		void asteroidManager(unsigned int num);
-
-   		void manageUnavaliableObjects();
-    		void manageDeadObjects();
+    		void updateEntities_inStatic_s();
+    		void updateEntities_s(int, bool);     		
    		
-                void rocketCollision(bool);
-    		void asteroidCollision(bool);
-
+                      
+                bool removeFromTheListById(std::vector<Npc*>*, int _id);
     		
-    		void updateEntities_inStatic();
-
-    		void updateEntities(int, bool);    		    		
+    		void update_s();
     		
-   		
-		void findVisibleEntities();  
-		void renderEntities_NEW();
-    		void renderEntities_OLD();
-    		        void restoreDefaultColor();
-    			void restoreSceneColor();
-    			void renderBackground();
-                        void drawOrbits();
-                        void drawPath();
-                        
-                bool removeFromTheListById(std::vector<Npc*>* _pTo_npc_vec, int _id);
-    		
-    		void updateStates();
-    		
-    		void bombExplosionEvent_TRUE(Container*);
+    		void damageEventInsideCircle(vec2f epicentr, float radius, int damage, bool show_effect);
     		
     		void debug__();    	
     		
@@ -210,9 +195,6 @@ bool checkCollision(AGRESSOR*,  VICTIM*, bool);
 bool collisionBetweenCenters(Points* points1, Points* points2, float collision_radius);
 bool collisionBetweenCenters(Points* points1, vec2f point2, float collision_radius);
 bool collisionBetweenCenters(Points* points1, float center2_x, float center2_y, float collision_radius);
-
-bool isObjectVisible(Points* points, float startViewCoord_x, float startViewCoord_y);
-bool isObjectVisible(float ob_centerx, float ob_centery, int ob_w, int ob_h, float startViewCoord_x, float startViewCoord_y); 
 
 #endif 
 

@@ -17,8 +17,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "bloom.hpp"
-
 BloomEffect :: BloomEffect(int _screen_w, 
 			   int _screen_h, 
 			   GLuint _program_blur, 
@@ -53,11 +51,14 @@ BloomEffect :: BloomEffect(int _screen_w,
 	program_combine =       _program_combine;
 }
 
+BloomEffect :: ~BloomEffect()
+{}
 
-void BloomEffect :: pass0(GLuint _orig_scene_texture, float brightThreshold)
+
+void BloomEffect :: pass0(Screen* screen, GLuint _orig_scene_texture, float brightThreshold)
 {
 	// RENDER TO FBO0
-        (pTo_fbo_pass_pList[0])[0]->activate();
+        (pTo_fbo_pass_pList[0])[0]->activate(screen);
 
 	// render background
 	glUseProgram(program_extractBright);
@@ -75,7 +76,7 @@ void BloomEffect :: pass0(GLuint _orig_scene_texture, float brightThreshold)
         int div = 2;    
 	for(int fbo_num = 1; fbo_num < fbo_max_per_pass; fbo_num++)
 	{
-	        (pTo_fbo_pass_pList[0])[fbo_num]->activate();
+	        (pTo_fbo_pass_pList[0])[fbo_num]->activate(screen);
         	drawFullScreenTexturedQuad((pTo_fbo_pass_pList[0])[0]->getTexture(), screen_w/div, screen_h/div, -999.0);
 		(pTo_fbo_pass_pList[0])[fbo_num]->deactivate();
          
@@ -85,14 +86,14 @@ void BloomEffect :: pass0(GLuint _orig_scene_texture, float brightThreshold)
         
 }       
                 
-void BloomEffect :: restPasses()
+void BloomEffect :: restPasses(Screen* screen)
 {
 	for (int pass_num = 1; pass_num < pass_max; pass_num++) 
         {   
         	int div = 1;    
 		for(int fbo_num = 0; fbo_num < fbo_max_per_pass; fbo_num++)
 		{
-		        (pTo_fbo_pass_pList[pass_num])[fbo_num]->activate();
+		        (pTo_fbo_pass_pList[pass_num])[fbo_num]->activate(screen);
           		drawFullScreenTexturedQuadBlurred((pTo_fbo_pass_pList[pass_num-1])[fbo_num]->getTexture(), screen_w/div, screen_h/div, -999.0, program_blur);
           		(pTo_fbo_pass_pList[pass_num])[fbo_num]->deactivate();
           
@@ -103,10 +104,10 @@ void BloomEffect :: restPasses()
 
 
 
-void BloomEffect :: combine(GLuint _orig_scene_texture)
+void BloomEffect :: combine(Screen* screen, GLuint _orig_scene_texture)
 {
           // RENDER TO final FBO
-          pTo_fbo_final->activate();
+          pTo_fbo_final->activate(screen);
 
           glUseProgram(program_combine);
 

@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define ENERGIZEREQUIPMENT_H
 
 
-class EnergizerEquipment : public BaseEquipment
+class EnergizerEquipment : public EquipmentBase
 {
 	public:
       		EnergizerEquipment(int energy_max_orig, 
@@ -30,9 +30,11 @@ class EnergizerEquipment : public BaseEquipment
       
       		int getEnergy() const;
       		
-      		bool insertModule(EnergizerModule*);
       		void virtual updateOwnerAbilities();
-      		
+
+      		void countPrice();
+      		virtual void updatePropetries();
+      		      		
       	private:
       		int energy_max_orig;
       		int energy_max_add;
@@ -42,11 +44,6 @@ class EnergizerEquipment : public BaseEquipment
       		int restoration_orig;
       		int restoration_add;
       		int restoration;
-
-      	      	std::vector<EnergizerModule*> modules_vec;
-
-      		void countPrice();
-      		void updatePropetries();
       		
      		void virtual addUniqueInfo();
            	std::string getEnergyStr();

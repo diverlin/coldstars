@@ -32,8 +32,7 @@ class Npc : public SpaceObjectBase
                 
    		void setAlive(bool);
    		void setGarbageReady(bool);
-   		void setKosmoport(Kosmoport*);
-   		void setLand(Land*);
+   		void setLand(LandBase*);
    		void setScanTarget(VehicleBase*);
    		void setControlledByPlayer(bool);
    		void setUpperControl(bool);
@@ -47,12 +46,14 @@ class Npc : public SpaceObjectBase
    		
    		Kosmoport* getKosmoport();
    		VehicleBase* getVehicle();
-   		VehicleBase* getScanVehicle();
+   		VehicleBase* getScanTarget();
    		Skill* getSkill();
 
    		
    		StateMachine* getStateMachine();   		   		
-   		     		
+   		
+   		LandBase* getLand() const; 
+   		    		
                 unsigned long int getCredits() const;   
 
    		void bind(VehicleBase*);
@@ -73,7 +74,7 @@ class Npc : public SpaceObjectBase
      		//// scanning
     		bool checkPossibilityToScan(VehicleBase*);
      		bool scanProceeding(); 
-     		bool removeScanTarget();
+     		void resetScanTarget();
      		//// scanning
      		
      		Planet* getPlanetForDocking();
@@ -83,9 +84,7 @@ class Npc : public SpaceObjectBase
                             
                
                 void renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y);
-                
-                Observation* observation;
-                
+               
                 void jumpEvent();
                 void dockEvent();
                                 
@@ -96,12 +95,8 @@ class Npc : public SpaceObjectBase
 
    	     	StarSystem* failback_starsystem;
    	     	
-   	     	Kosmoport* kosmoport;
-   	     	Land* land;
+   	     	LandBase* land;
    	     	     		     		
-     		//MacroTaskHolder* macro_task_main;
-   		//MacroTaskHolder* macro_task_self;
-   		//MicroTaskHolder* micro_task;
    	     	VehicleBase* vehicle;
    	     	
    	     	Skill* skill; 
@@ -109,15 +104,15 @@ class Npc : public SpaceObjectBase
 
      		AiModelBase* ai_model;
      		StateMachine* state_machine;
-
-     		     		
-                void asteroidScenario();
-                void checkNeeds();
-     		     	
+   		     	
      		 	
      		VehicleBase* vehicle_to_scan;
      		
-    		
+                Observation* observation;
+
+                void asteroidScenario();
+                void checkNeeds();
+                                    		
      		void updateInfo();     	
      		virtual void postDeathUniqueEvent(bool);	
  };

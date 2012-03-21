@@ -17,8 +17,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "distantNebulaBg.hpp"
-
 
 DistantNebulaBgEffect :: DistantNebulaBgEffect(TextureOb* _texOb, vec3f _center)
 {
@@ -50,14 +48,12 @@ void DistantNebulaBgEffect :: render(float vx, float vy)
 }
               
 
-DistantNebulaBgEffect* createDistantNebula(int _color_id)
+DistantNebulaBgEffect* createDistantNebula(int color_id)
 {
-	TextureOb* texOb;
-	do 
-	{
-   		texOb = g_TEXTURE_MANAGER.getRandomTexOb(NEBULA_TEXTURE_ID); 
-   	} while (texOb->color_id != _color_id);
-   	
+	TextureOb* texOb = NULL;
+	if (color_id == -1) texOb = g_TEXTURE_MANAGER.getRandomTexOb(NEBULA_TEXTURE_ID);
+	else    	    texOb = g_TEXTURE_MANAGER.getTexObByColorId(NEBULA_TEXTURE_ID, color_id);	
+	   	
    	vec3f center((float)getRandInt(0, 1000), (float)getRandInt(0, 1000), -999.0);
         
         DistantNebulaBgEffect* dn = new DistantNebulaBgEffect(texOb, center);

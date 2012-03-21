@@ -23,19 +23,19 @@ AiModelRanger :: AiModelRanger()
 AiModelRanger :: ~AiModelRanger() 
 {}
 
-void AiModelRanger :: update_inStatic(Npc* _npc) const
+void AiModelRanger :: update_inStatic(Npc* npc) const
 {
-	if (_npc->getStateMachine()->getCurrentMacroTask()->getValid() != true)
+	if (npc->getStateMachine()->getCurrentMacroTask()->getValid() == false)
         {
-        	StarSystem* ss_to_free = _npc->getClosestStarSystem(true);
+        	StarSystem* ss_to_free = npc->getClosestStarSystem(true);
         	if (ss_to_free != NULL)
         	{
-        		_npc->getStateMachine()->setCurrentMacroTask(g_MACROSCENARIO_STARSYSTEMLIBERATION, ss_to_free);        			
+        		npc->getStateMachine()->setCurrentMacroTask(g_MACROSCENARIO_STARSYSTEMLIBERATION, ss_to_free);        			
         	}
         }            
 }
 
-std::string AiModelRanger :: getDescription(Npc* _npc) const
+std::string AiModelRanger :: getDescription(Npc* npc) const
 {
 	return "AiModelRanger";
 }

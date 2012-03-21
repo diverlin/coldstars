@@ -152,7 +152,7 @@ void VehicleBase :: postCreateInit()
     	}               
 
     	kontur_rect = Rect(0, 0, kontur_w, kontur_h); 
-    	kontur_rect.setCenter(g_VIEW_WIDTH/2, g_VIEW_HEIGHT/2); 
+    	kontur_rect.setCenter(SCREEN_WIDTH_MIN/2, SCREEN_HEIGHT_MIN/2); 
     	/////////////////////////////////////////////////
 
 
@@ -302,36 +302,20 @@ void VehicleBase :: dockEvent()
      	{
                 Planet* planet = ((Planet*)drive_complex->getTarget());
                 
-     		planet->getDockingStation()->add((Ship*)this);
-		planet->getDockingStation()->add(npc_owner);
+     		planet->getLand()->add((Ship*)this);
+		planet->getLand()->add(npc_owner);
 		
-		if (planet->getSubTypeId() == KOSMOPORT_ID)
-		{
-			npc_owner->setKosmoport(planet->getDockingStation()->getKosmoport());
-		}
-		
-		if (planet->getSubTypeId() == LAND_ID)
-		{
-			npc_owner->setLand(planet->getDockingStation()->getLand());
-		}
+		npc_owner->setLand(planet->getLand());
 	}
 	
-	if (drive_complex->getTarget()->getTypeId() == STARBASE_ID)
+	if (drive_complex->getTarget()->getTypeId() == SPACESTATION_ID)
 	{
-                StarBase* starbase = ((StarBase*)drive_complex->getTarget());
+                SpaceStation* spacestation = ((SpaceStation*)drive_complex->getTarget());
                                 
-	     	starbase->getDockingStation()->add((Ship*)this);
-		starbase->getDockingStation()->add(npc_owner);
+	     	spacestation->getLand()->add((Ship*)this);
+		spacestation->getLand()->add(npc_owner);
 		
-		if (starbase->getSubTypeId() == KOSMOPORT_ID)
-		{
-			npc_owner->setKosmoport(starbase->getDockingStation()->getKosmoport());
-		}
-		
-		if (starbase->getSubTypeId() == LAND_ID)
-		{
-			npc_owner->setLand(starbase->getDockingStation()->getLand());
-		}
+		npc_owner->setLand(spacestation->getLand());
 	}
 }
 
@@ -344,17 +328,17 @@ void VehicleBase :: launchingEvent()
      		starsystem->addToSpace(this, drive_complex->getTarget()->getPoints()->getCenter(), 0, NULL);
      		starsystem->addToSpace(npc_owner);
 
-     		((Planet*)drive_complex->getTarget())->getDockingStation()->removeShipById(data_id.id);
-     		((Planet*)drive_complex->getTarget())->getDockingStation()->removeNpcById(npc_owner->getId());
+     		((Planet*)drive_complex->getTarget())->getLand()->remove(this);
+     		((Planet*)drive_complex->getTarget())->getLand()->remove(npc_owner);
 	}
 	
-     	if (drive_complex->getTarget()->getTypeId() == STARBASE_ID)
+     	if (drive_complex->getTarget()->getTypeId() == SPACESTATION_ID)
      	{
      		starsystem->addToSpace(this, drive_complex->getTarget()->getPoints()->getCenter(), 0, NULL);
      		starsystem->addToSpace(npc_owner);
 
-     		((StarBase*)drive_complex->getTarget())->getDockingStation()->removeShipById(data_id.id);
-     		((StarBase*)drive_complex->getTarget())->getDockingStation()->removeNpcById(npc_owner->getId());
+     		((SpaceStation*)drive_complex->getTarget())->getLand()->remove(this);
+     		((SpaceStation*)drive_complex->getTarget())->getLand()->remove(npc_owner);
 	}	
 
      	drive_complex->resetTarget();
@@ -673,9 +657,9 @@ void VehicleBase :: renderInfo(float _pos_x, float _pos_y, float _offset_x, floa
      	}
 }
 
-void VehicleBase :: renderInfo_inSpace()
+void VehicleBase :: renderInfo_inSpace(vec2f scroll_coords)
 {  
-	renderInfo(points.getCenter().x, points.getCenter().y, g_SCROLL_COORD_X, g_SCROLL_COORD_Y);
+	renderInfo(points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);
 }
 
 void VehicleBase :: renderGrappleTrail() const
@@ -831,20 +815,7 @@ void VehicleBase :: grappleScenario()
        					}
 					grapple_slot->getGrappleEquipment()->addToRemoveQueue(_container);
        					break;
-       				}
-        			
-       				case BOMB_ID:
-       				{
-       					ItemSlot* _slot = getEmptyOtsecSlot();
-                                        Container* _bomb = (Container*)grapple_slot->getGrappleEquipment()->target_vec[i];
-       				        if (_slot != NULL)
-       					{
-       						//_slot->insertItem(_bomb);
-       						starsystem->addToRemoveFromOuterSpaceQueue(_bomb);
-       					}
-					grapple_slot->getGrappleEquipment()->addToRemoveQueue(_bomb);
-       					break;
-       				}
+       				}        			
         				
        				case SHIP_ID:
        				{

@@ -20,27 +20,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 FreezerEquipment :: FreezerEquipment(int freeze_orig)
 {
     	this->freeze_orig = freeze_orig;
-    	
-        freeze_add  = 0;
-
-    	updatePropetries();
-    	countPrice();
 }
 
 FreezerEquipment :: ~FreezerEquipment() /* virtual */
-{
-	for (unsigned int i = 0; i < modules_vec.size(); i++)
-	{
-		delete modules_vec[i];
-	}
-}
+{}
 
 
 int FreezerEquipment :: getFreeze() const { return freeze; }
 		
-
+/* virtual */
 void FreezerEquipment :: updatePropetries()
 {
+    	freeze_add  = 0;
+        
+        for (unsigned int i = 0; i < modules_vec.size(); i++)
+    	{
+    		freeze_add += ((FreezerModule*)modules_vec[i])->getFreezeAdd();   	
+    	}
+    	
      	freeze = freeze_orig + freeze_add;
 }
 
@@ -58,7 +55,7 @@ void FreezerEquipment :: countPrice()
      	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-
+/* virtual */
 void FreezerEquipment :: updateOwnerAbilities()
 {
     	slot->getOwnerVehicle()->updateFreezeAbility();
@@ -80,22 +77,6 @@ std::string FreezerEquipment :: getFreezeStr()
          	return int2str(freeze_orig) + "+" + int2str(freeze_add);
 }
 
-
-bool FreezerEquipment :: insertModule(FreezerModule* _freezer_module)
-{
-    	if (modules_vec.size() < common_data.modules_num_max)
-    	{
-        	freeze_add += _freezer_module->getFreezeAdd();
-    
-        	updatePropetries();
-        
-        	texOb_modules_pList.push_back(_freezer_module->getTextureOb());
-        	modules_vec.push_back(_freezer_module);
-        	return true;
-    	}
-    	else
-        	return false;    
-}
       
 
 FreezerEquipment* getNewFreezerEquipment(int race_id, int revision_id)
@@ -130,6 +111,9 @@ FreezerEquipment* getNewFreezerEquipment(int race_id, int revision_id)
         freezer_equipment->setTextureOb(texOb_item);    	
         freezer_equipment->setFunctionalSlotSubTypeId(FREEZER_SLOT_ID);
         freezer_equipment->setItemCommonData(common_data);
-                
+  
+      	freezer_equipment->updatePropetries();
+    	freezer_equipment->countPrice();
+    	              
     	return freezer_equipment;
 }

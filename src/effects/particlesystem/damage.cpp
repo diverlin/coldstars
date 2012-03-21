@@ -102,7 +102,7 @@ DamageEffect* getNewDamageEffect(int color_id, SpaceObjectBase* parent)
 	data_particle.color_delta.b    = 0.0;
         data_particle.color_delta.a    = 0.0; // is modifed iduvidually for each particle  
         
-        TextureOb* texOb_particle = g_TEXTURE_MANAGER.getParticleTexObByColorId(color_id);
+        TextureOb* texOb_particle = g_TEXTURE_MANAGER.getTexObByColorId(PARTICLE_TEXTURE_ID, color_id);
                 
 	DamageEffect* damage = new DamageEffect();
         

@@ -104,7 +104,7 @@ class VehicleBase : public SpaceObjectBase
 
 
         	void renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y);
-        	void renderInfo_inSpace();
+        	void renderInfo_inSpace(vec2f);
         	
         	void renderRadarRange();
         	void renderGrappleRange();        	        	

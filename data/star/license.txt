@@ -3,10 +3,10 @@ License:	GNU GPL
 Site:     	-
 
 Additional info:
-Art was created using Gimp, Lava + Emboss/BumpMapping filter.
+Art was created using Gimp.
 
 filenames:       s_000.png, s_001.png, s_002.png, s_100.png
-
+                 s1.png, s2.png, s3.png
 
 
 ###############################################################################################

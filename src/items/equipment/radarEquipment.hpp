@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define RADAREQUIPMENT_H
 
 
-class RadarEquipment : public BaseEquipment
+class RadarEquipment : public EquipmentBase
 {
    	public:
       		RadarEquipment(int radius_orig);
@@ -29,18 +29,15 @@ class RadarEquipment : public BaseEquipment
       		
       		int getRadius() const;
 
-      		bool insertModule(RadarModule*);
       		void virtual updateOwnerAbilities();
-      		
+
+      		virtual void updatePropetries();
+      		void countPrice();
+      		      		
       	private:
       	      	int radius_orig;
      		int radius_add;
       		int radius;
-      		
-      	     	std::vector<RadarModule*> modules_vec;
-      	     	
-      		void updatePropetries();
-      		void countPrice();
 
      		void virtual addUniqueInfo();
        		std::string getRadiusStr();

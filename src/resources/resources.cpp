@@ -24,7 +24,7 @@ void loadGameData()
 
 	load3DModels();
     	loadImages();
-	if (g_USE_MODERN_HW == true)
+    	if (g_USE_MODERN_HW == true)
 	{
 		loadShaders();
 	}
@@ -538,25 +538,25 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 {
 	std::vector<int> arg; 
 	arg.push_back(RACE_0_ID);  
-	g_TEXTURE_MANAGER.manage( new TextureOb(STARBASE_TEXTURE_ID, "data/starbase/sb_000.png", false, &arg) ); 
+	g_TEXTURE_MANAGER.manage( new TextureOb(SPACESTATION_TEXTURE_ID, "data/starbase/sb_000.png", false, &arg) ); 
 }
 
 {
 	std::vector<int> arg; 
 	arg.push_back(RACE_0_ID); 
-	g_TEXTURE_MANAGER.manage( new TextureOb(STARBASE_TEXTURE_ID, "data/starbase/sb_001.png", false, &arg) ); 
+	g_TEXTURE_MANAGER.manage( new TextureOb(SPACESTATION_TEXTURE_ID, "data/starbase/sb_001.png", false, &arg) ); 
 }
 
 {
 	std::vector<int> arg; 
 	arg.push_back(RACE_0_ID); 
-	g_TEXTURE_MANAGER.manage( new TextureOb(STARBASE_TEXTURE_ID, "data/starbase/sb_002.png", false, &arg) ); 
+	g_TEXTURE_MANAGER.manage( new TextureOb(SPACESTATION_TEXTURE_ID, "data/starbase/sb_002.png", false, &arg) ); 
 }
 
 {
 	std::vector<int> arg; 
 	arg.push_back(RACE_0_ID); 
-	g_TEXTURE_MANAGER.manage( new TextureOb(STARBASE_TEXTURE_ID, "data/starbase/sb_003.png", false, &arg) ); 
+	g_TEXTURE_MANAGER.manage( new TextureOb(SPACESTATION_TEXTURE_ID, "data/starbase/sb_003.png", false, &arg) ); 
 }
 
 
@@ -836,10 +836,30 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 }
 
 
-//TEXTURE_MANAGER.manage( textureOb(DISTANTSTAR_TEXTURE_ID, 'data/star/s1.png', True, []) )
-//TEXTURE_MANAGER.manage( textureOb(DISTANTSTAR_TEXTURE_ID, 'data/star/s2.png', True, []) )
+// DISTANTSTAR_TEXTURE_ID
+{
+	std::vector<int> arg;  
+	arg.push_back(YELLOW_COLOR_ID); 
+	g_TEXTURE_MANAGER.manage( new TextureOb(DISTANTSTAR_TEXTURE_ID, "data/star/s1.png", true, &arg) );
+}
 
+{
+	std::vector<int> arg;  
+	arg.push_back(BLUE_COLOR_ID); 
+	g_TEXTURE_MANAGER.manage( new TextureOb(DISTANTSTAR_TEXTURE_ID, "data/star/s2.png", true, &arg) );
+}
 
+{
+	std::vector<int> arg;  
+	arg.push_back(RED_COLOR_ID); 
+	g_TEXTURE_MANAGER.manage( new TextureOb(DISTANTSTAR_TEXTURE_ID, "data/star/s3.png", true, &arg) );
+}
+
+//{
+	//std::vector<int> arg;  
+	//arg.push_back(RED_COLOR_ID); 
+	//g_TEXTURE_MANAGER.manage( new TextureOb(DISTANTSTAR_TEXTURE_ID, "data/star/s4.png", true, &arg) );
+//}
 
 //###################################### ITEM TEXTURE ###################################
 //############################ DRIVE_ITEM
@@ -1239,8 +1259,8 @@ static const char * pTo_blackToAlphaFragSource = {
 "}"
 };       
 
-g_BLACK2ALPHA_PROGRAM = glCreateProgram();
-compile_program(pTo_blackToAlphaVertexSource, pTo_blackToAlphaFragSource, &g_BLACK2ALPHA_PROGRAM);
+g_SHADERS.black2alpha = glCreateProgram();
+compile_program(pTo_blackToAlphaVertexSource, pTo_blackToAlphaFragSource, &g_SHADERS.black2alpha);
 
 
 
@@ -1290,8 +1310,8 @@ static const GLchar * pTo_shockWaveFragSource = {
 "}"
 };
 
-g_SHOCKWAVE_PROGRAM = glCreateProgram();
-compile_program(pTo_shockWaveVertexSource, pTo_shockWaveFragSource, &g_SHOCKWAVE_PROGRAM);
+g_SHADERS.shockwave = glCreateProgram();
+compile_program(pTo_shockWaveVertexSource, pTo_shockWaveFragSource, &g_SHADERS.shockwave);
 
 
 
@@ -1361,8 +1381,8 @@ static const GLchar * pTo_volumetricLightFragSource = {
 "}"
 };
 
-g_VOLUMETRICLIGHT_PROGRAM = glCreateProgram();
-compile_program(pTo_volumetricLightVertexSource, pTo_volumetricLightFragSource, &g_VOLUMETRICLIGHT_PROGRAM);
+g_SHADERS.volumetriclight = glCreateProgram();
+compile_program(pTo_volumetricLightVertexSource, pTo_volumetricLightFragSource, &g_SHADERS.volumetriclight );
 
 
 
@@ -1427,8 +1447,8 @@ static const GLchar * pTo_lightFragSource = {
 "}"
 };       
 
-g_LIGHT_PROGRAM = glCreateProgram();
-compile_program(pTo_lightVertexSource, pTo_lightFragSource, &g_LIGHT_PROGRAM);
+g_SHADERS.light = glCreateProgram();
+compile_program(pTo_lightVertexSource, pTo_lightFragSource, &g_SHADERS.light);
 
 
 
@@ -1480,8 +1500,8 @@ static const GLchar * pTo_blurFragmentSource = {
 "}"
 };  
 
-g_BLUR_PROGRAM = glCreateProgram();
-compile_program(pTo_blurVertexSource, pTo_blurFragmentSource, &g_BLUR_PROGRAM);
+g_SHADERS.blur = glCreateProgram();
+compile_program(pTo_blurVertexSource, pTo_blurFragmentSource, &g_SHADERS.blur);
 
 
 
@@ -1514,8 +1534,8 @@ static const GLchar * pTo_extractBrightFragmentSource = {
 "}"
 };  
 
-g_EXTRACT_BRIGHT_PROGRAM = glCreateProgram();
-compile_program(pTo_extractBrightVertexSource, pTo_extractBrightFragmentSource, &g_EXTRACT_BRIGHT_PROGRAM);
+g_SHADERS.extractbright = glCreateProgram();
+compile_program(pTo_extractBrightVertexSource, pTo_extractBrightFragmentSource, &g_SHADERS.extractbright);
 
 
 
@@ -1577,8 +1597,8 @@ static const GLchar * pTo_combineFragmentSource = {
 "}"
 };  
 
-g_COMBINE_PROGRAM = glCreateProgram();
-compile_program(pTo_combineVertexSource, pTo_combineFragmentSource, &g_COMBINE_PROGRAM);
+g_SHADERS.combine = glCreateProgram();
+compile_program(pTo_combineVertexSource, pTo_combineFragmentSource, &g_SHADERS.combine);
 
 
 
@@ -1622,6 +1642,6 @@ static const GLchar * pTo_multitexFragmentSource = {
 };
 
     
-g_MULTITEX_PROGRAM = glCreateProgram();
-compile_program(pTo_multitexVertexSource, pTo_multitexFragmentSource, &g_MULTITEX_PROGRAM);
+g_SHADERS.multitexturing = glCreateProgram();
+compile_program(pTo_multitexVertexSource, pTo_multitexFragmentSource, &g_SHADERS.multitexturing);
 }

@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define BOMB_H
 
 
-class Bomb : public BaseItem
+class Bomb : public ItemBase
 {
     	public:  
         	Bomb();
