@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define GRAPPLEEQUIPMENT_H
 
 
-class GrappleEquipment : public BaseEquipment
+class GrappleEquipment : public EquipmentBase
 {
    	public:
       		GrappleEquipment(int strength_orig, 
@@ -37,8 +37,7 @@ class GrappleEquipment : public BaseEquipment
 		int getSpeed()      const;
 		int getMaxNumItem() const;
 
-      		bool insertModule(GrappleModule*);
-      		void virtual updateOwnerAbilities();
+      		virtual void updateOwnerAbilities();
                 
                 void addTarget(SpaceObjectBase*);
                 void addToRemoveQueue(SpaceObjectBase*);
@@ -48,6 +47,9 @@ class GrappleEquipment : public BaseEquipment
                 std::vector<SpaceObjectBase*> remove_queue;
                 
 		std::string getTargetStr() const;
+		
+      	      	void countPrice();
+      		virtual void updatePropetries();  
       		
       	private:
       		int strength_orig;
@@ -67,9 +69,6 @@ class GrappleEquipment : public BaseEquipment
       		int maxNumItem;
       		
       	      	std::vector<GrappleModule*> modules_vec; 
-      	      	
-      	      	void countPrice();
-      		void updatePropetries();      		
       		
      		void virtual addUniqueInfo();     		
            	std::string getStrengthStr();

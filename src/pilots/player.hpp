@@ -31,8 +31,6 @@ class Player
     		Player();
      		~Player();
      
-          	void setStarSystem(StarSystem*);
-          	void setScanFlag(bool);
           	void setWorldMapShowFlag(bool);
           	
           	void setShowAllOrbit(bool);
@@ -40,34 +38,51 @@ class Player
           	void setShowRadarRange(bool);
           	void setShowGrappleRange(bool);
           	          	
-          	bool getAlive() const;
           	bool getWorldMapShowFlag() const;
-          	bool getScanFlag() const;
           	bool getShowAllOrbit() const;
           	bool getShowAllPath() const;
           	bool getShowRadarRange() const;
           	bool getShowGrappleRange() const;
-          	          	
-          	VehicleBase* getVehicle(); 	     
-		Npc* getPilot(); 	     
-		StarSystem* getStarSystem(); 	
-		Cursor* getCursor();         
-          	int getPlaceTypeId() const;
-          		
-     		void update_global();     
+          	  
+          	bool getNextTurnReady() const;
+          	  		        	
+		Npc* getNpc() const; 	     
+		Cursor* getCursor() const;    
+		Screen* getScreen() const;     
+   
      		void bindNpc(Npc*);
-     		     	
+     		
+     		void clearVisibleEntities();
+     		
+     		void addIfVisible(Star*);
+     		void addIfVisible(Planet*);
+     		void addIfVisible(Asteroid*);     		
+     		void addIfVisible(Mineral*);
+     		void addIfVisible(Container*);     	
+     		void addIfVisible(RocketBullet*);  
+     		void addIfVisible(BlackHole*);  
+     		void addIfVisible(SpaceStation*);  
+     		void addIfVisible(Satellite*); 
+     		void addIfVisible(Ship*); 
+
+		//effect
+     		void addIfVisible(ShockWaveEffect*);  
+     		void addIfVisible(LazerTraceEffect*);  
+     		void addIfVisible(BaseParticleSystem*); 
+     		void addIfVisible(VerticalFlowText*); 
+     		//	
+
+
+     		
+     		void runSession(GameTimer*); 
+     		     		     		     		     	
      	private:
-     	   	bool is_alive;
-     	   		
      	     	int type_id, id;
-     	     	int place_type_id;
      	     		
-     	     	VehicleBase* vehicle;
      	     	Npc*     npc;
      	     	
-     	     	StarSystem* starsystem;
      	     	Cursor* cursor;
+     	     	Screen* screen;
      	     	
      	     	ControlWord control;  
      	     	
@@ -75,6 +90,44 @@ class Player
      	     	bool show_all_path;
      	     	bool show_radar_range;
      	     	bool show_grapple_range;
+     	     	
+     	     	// VISIBLE ENTITY LIST
+    		std::vector<Star*>         visible_STAR_vec;
+    		std::vector<Planet*>       visible_PLANET_vec;
+    		std::vector<Asteroid*>     visible_ASTEROID_vec;
+    		std::vector<Mineral*>      visible_MINERAL_vec;
+    		std::vector<Container*>    visible_CONTAINER_vec;
+    		std::vector<RocketBullet*> visible_ROCKET_vec;
+    		std::vector<BlackHole*>    visible_BLACKHOLE_vec;
+    		std::vector<SpaceStation*> visible_SPACESTATION_vec;
+    		std::vector<Satellite*>    visible_SATELLITE_vec;    		
+    		std::vector<Ship*>         visible_SHIP_vec;
+    		
+    		//effects
+    		std::vector<ShockWaveEffect*>    visible_effect_SHOCKWAVE_vec;
+    		std::vector<LazerTraceEffect*>   visible_effect_LAZERTRACE_vec;
+    		std::vector<BaseParticleSystem*> visible_effect_PARTICLESYSTEM_vec;  		
+    		std::vector<VerticalFlowText*>   visible_text_DAMAGE_vec;
+    		//  
+    		
+    		GuiManager*   GUI_MANAGER;    
+ 		GuiSpace*     GUI_SPACE;      
+ 		GuiKosmoport* GUI_KOSMOPORT;  
+		GuiMap*       GUI_MAP;         
+		UserInput*    USERINPUT;       
+    		
+    		void render(bool, bool, bool); 
+     			void renderEntities_NEW();
+    			void renderEntities_OLD();
+    		
+    		
+    		void outerspace(GameTimer*);
+    		void kosmoport();
+    		
+    		void mouseControl();
+    		void update_global(); 
+    		
+    		bool isObjectOnScreen(Points*) const;
 };
 
 #endif 

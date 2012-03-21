@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define GRAPPLEMODULE_H
 
 
-class GrappleModule : public BaseModule
+class GrappleModule : public ModuleBase
 {
     	public:     
       		GrappleModule(int strength_add, 

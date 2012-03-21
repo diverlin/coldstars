@@ -22,21 +22,12 @@ BakEquipment :: BakEquipment(int fuel_max_orig)
 {
     	this->fuel_max_orig = fuel_max_orig;
         
-    	fuel_max_add        = 0;
     	fuel_max            = fuel_max_orig;
     	fuel                = fuel_max_orig;
-
-    	updatePropetries();
-    	countPrice();
 }
    
 BakEquipment :: ~BakEquipment() /* virtual */
-{
-	for (unsigned int i = 0; i < modules_vec.size(); i++)
-	{
-		delete modules_vec[i];
-	}
-}
+{}
 
 
 int BakEquipment :: getFuel() const { return fuel; }
@@ -46,10 +37,17 @@ void BakEquipment :: fill()
     	fuel = fuel_max;
 }
 		
-				
+/* virtual */			
 void BakEquipment :: updatePropetries()
 {
-    	fuel_max = fuel_max_orig + fuel_max_add;
+    	fuel_max_add        = 0;
+    	
+    	for (unsigned int i = 0; i<modules_vec.size(); i++)
+    	{
+    		fuel_max_add += ((BakModule*)modules_vec[i])->getFuelMaxAdd();
+    	}
+    	
+    	fuel_max = fuel_max_orig + fuel_max_add;    	
 }
 
 void BakEquipment :: countPrice()
@@ -65,7 +63,7 @@ void BakEquipment :: countPrice()
    	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-
+/* virtual */
 void BakEquipment :: updateOwnerAbilities()
 {
     	slot->getOwnerVehicle()->updateDriveAbility();
@@ -87,23 +85,6 @@ std::string BakEquipment :: getFuelStr()
         	return int2str(fuel_max_orig) + "/" + int2str(fuel);
      	else
         	return int2str(fuel_max_orig) + "+" + int2str(fuel_max_add) + "/" + int2str(fuel);
-}
-
-
-bool BakEquipment :: insertModule(BakModule* _bak_module)
-{
-    	if (modules_vec.size() < common_data.modules_num_max)
-    	{
-        	fuel_max_add += _bak_module->getFuelMaxAdd();
-     
-        	updatePropetries();
-         
-        	texOb_modules_pList.push_back(_bak_module->getTextureOb());
-        	modules_vec.push_back(_bak_module);
-        	return true;
-    	}
-    	else 
-        	return false;      
 }
 
 
@@ -140,5 +121,8 @@ BakEquipment* getNewBakEquipment(int race_id, int revision_id)
         bak_equipment->setFunctionalSlotSubTypeId(BAK_SLOT_ID);
         bak_equipment->setItemCommonData(common_data);
                 
+        bak_equipment->updatePropetries();
+    	bak_equipment->countPrice();
+    	
     	return bak_equipment;
 }

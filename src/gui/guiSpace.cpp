@@ -17,14 +17,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-GuiSpace :: GuiSpace()
+GuiSpace :: GuiSpace(Player* player)
 {
+	this->player = player;
+	
     	TextureOb* texOb_icon_map = g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_map;
     	
     	galaxymap_screen_button = new Button(texOb_icon_map, 
         				     SCREEN_GALAXYMAP_ID,
-    					     g_VIEW_WIDTH - (INTERFACE_ICON_SIZE + 5),
-    					     g_VIEW_HEIGHT - (INTERFACE_ICON_SIZE + 5), 
+    					     SCREEN_WIDTH_MIN  - (INTERFACE_ICON_SIZE + 5),
+    					     SCREEN_HEIGHT_MIN - (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE,  
     					     INTERFACE_ICON_SIZE, 
     					     "galaxy map");
@@ -55,9 +57,9 @@ void GuiSpace :: resetInfoFlags()
 
 void GuiSpace :: mouseInteraction()
 {
-     	int mxvp = g_MOUSE_POS_X;
-     	int myvp = g_VIEW_HEIGHT - g_MOUSE_POS_Y;         
-     	int lmb  = g_MOUSE_LEFT_BUTTON;
+     	int mxvp = player->getCursor()->getMousePos().x;
+     	int myvp = player->getScreen()->getHeight() - player->getCursor()->getMousePos().y;         
+     	int lmb  = player->getCursor()->getMouseLeftButton();
 
 	for (unsigned int i = 0; i < button_vec.size(); i++)
      	{ 
@@ -67,7 +69,7 @@ void GuiSpace :: mouseInteraction()
            		{
            			if (button_vec[i]->getSubTypeId() == SCREEN_GALAXYMAP_ID)
               			{
-              				pPLAYER->setWorldMapShowFlag(!pPLAYER->getWorldMapShowFlag());
+              				player->setWorldMapShowFlag(!player->getWorldMapShowFlag());
                  		}
            		}
         	}
@@ -84,7 +86,7 @@ void GuiSpace :: render()
 		renderInfo();
 	disable_BLEND();
 	
-	renderText();
+	renderText(player->getScreen()->getBottomLeftGlobalCoord());
 }
 
 
@@ -109,13 +111,13 @@ void GuiSpace :: renderInfo() const
         }       
 }
         
-void GuiSpace :: renderText() const
+void GuiSpace :: renderText(vec2f scroll_coords) const
 {
-       	std::string _coord_str = "world coord: " + int2str(g_SCROLL_COORD_X) + "," + int2str(g_SCROLL_COORD_Y);
+       	std::string _coord_str = "world coord: " + int2str(scroll_coords.x) + "," + int2str(scroll_coords.y);
 
        	sf::String _str(_coord_str, g_FONT, 14);
        	_str.SetColor(sf::Color(255, 255, 255));
-       	_str.SetPosition(g_VIEW_WIDTH - 200, 15); 
+       	_str.SetPosition(SCREEN_WIDTH_MIN - 200, 15); 
 
        	g_APP.Draw(_str);    
 }

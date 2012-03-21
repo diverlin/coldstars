@@ -20,29 +20,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 RadarEquipment :: RadarEquipment(int radius_orig)
 {
     	this->radius_orig = radius_orig;
-        
-    	radius_add  = 0;
-
-    	updatePropetries();
-    	countPrice();
 }
 
 
 RadarEquipment :: ~RadarEquipment() /* virtual */
-{
-	for (unsigned int i = 0; i < modules_vec.size(); i++)
-	{
-		delete modules_vec[i];
-	}
-}
+{}
 
 
 int RadarEquipment :: getRadius() const { return radius; }
 
 
-
+/* virtual */
 void RadarEquipment :: updatePropetries()
 {
+    	radius_add  = 0;
+    	
+    	for (unsigned int i = 0; i < modules_vec.size(); i++)
+    	{
+        	radius_add   += ((RadarModule*)modules_vec[i])->getRadiusAdd();        	
+    	}
+    	
     	radius = radius_orig + radius_add;
 }
 
@@ -60,7 +57,7 @@ void RadarEquipment :: countPrice()
     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-
+/* virtual */
 void RadarEquipment :: updateOwnerAbilities()
 {
 	slot->getOwnerVehicle()->updateRadarAbility();
@@ -83,23 +80,6 @@ std::string RadarEquipment :: getRadiusStr()
 }
 
 
-
-bool RadarEquipment :: insertModule(RadarModule* _radar_module)
-{
-    	if (modules_vec.size() < common_data.modules_num_max)
-    	{
-        	radius_add += _radar_module->getRadiusAdd();
-    
-        	updatePropetries();
-        
-        	texOb_modules_pList.push_back(_radar_module->getTextureOb());
-        	modules_vec.push_back(_radar_module);
-        	return true;
-    	}
-    	else
-        	return false;    
-}
-    
     
 
 RadarEquipment* getNewRadarEquipment(int race_id, int revision_id)
@@ -135,6 +115,10 @@ RadarEquipment* getNewRadarEquipment(int race_id, int revision_id)
         radar_equipment->setFunctionalSlotSubTypeId(RADAR_SLOT_ID);
         radar_equipment->setItemCommonData(common_data);
         
+ 
+    	radar_equipment->updatePropetries();
+    	radar_equipment->countPrice();
+    	
     	return radar_equipment;
 }
 

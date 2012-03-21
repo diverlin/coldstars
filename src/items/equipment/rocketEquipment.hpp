@@ -36,7 +36,7 @@ struct BulletData
 
 
 
-class RocketEquipment : public BaseEquipment
+class RocketEquipment : public EquipmentBase
 { 
    	public:
       		RocketEquipment(int ammo_max_orig, 
@@ -50,8 +50,10 @@ class RocketEquipment : public BaseEquipment
 		
       		void fireEvent();
       		      
-      		bool insertModule(RocketModule*);
       		void virtual updateOwnerAbilities();
+      		
+      	      	void countPrice();
+      		virtual void updatePropetries();
       		
       	private:
       	      	int ammo_max_orig;
@@ -69,11 +71,6 @@ class RocketEquipment : public BaseEquipment
      	      	
       	      	BulletData data_bullet;
       		
-      	      	std::vector<RocketModule*> modules_vec;
-      	      	
-      	      	void countPrice();
-      		void updatePropetries();
-
      		void virtual addUniqueInfo();
            	std::string getAmmoStr();
            	std::string getDamageStr();

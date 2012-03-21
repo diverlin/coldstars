@@ -57,16 +57,16 @@ Observation :: ~Observation()
 {}  
     
     
-void Observation :: findEchievableStarSystems_inStatic()
+void Observation :: findEchievableStarSystems_inStatic(Galaxy* galaxy)
 {
         visible_STARSYSTEM_vec.clear();
 
-        for (unsigned int i = 0; i < g_GALAXY->STARSYSTEM_vec.size(); i++)
+        for (unsigned int i = 0; i < galaxy->STARSYSTEM_vec.size(); i++)
         {    
-        	float dist = distBetweenPoints(npc_owner->getVehicle()->getStarSystem()->getPosition(),  g_GALAXY->STARSYSTEM_vec[i]->getPosition());
+        	float dist = distBetweenPoints(npc_owner->getVehicle()->getStarSystem()->getPosition(),  galaxy->STARSYSTEM_vec[i]->getPosition());
                 //if (dist < npc_owner->getShip()->propetries.hyper)
                 {
-                	visible_STARSYSTEM_vec.push_back( StarSystemObservationData(g_GALAXY->STARSYSTEM_vec[i], dist) );
+                	visible_STARSYSTEM_vec.push_back( StarSystemObservationData(galaxy->STARSYSTEM_vec[i], dist) );
                 } 
         }
         

@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define LAZERMODULE_H
 
 
-class LazerModule : public BaseModule
+class LazerModule : public ModuleBase
 {
     	public:
 	       	LazerModule(int damage_add, 

@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define LAZEREQUIPMENT_H
 
 
-class LazerEquipment : public BaseEquipment
+class LazerEquipment : public EquipmentBase
 {
     	public:
       		LazerEquipment(int damage_orig, 
@@ -34,8 +34,10 @@ class LazerEquipment : public BaseEquipment
       		void fireEvent_TRUE();
       		void fireEvent_FALSE();
       		      
-      		bool insertModule(LazerModule*);
       		void virtual updateOwnerAbilities();
+      		
+       	      	virtual void updatePropetries();
+      		void countPrice();
     		
       	private:
       	      	int damage_orig;
@@ -48,11 +50,6 @@ class LazerEquipment : public BaseEquipment
       		
       		TextureOb* texOb_turrel;
       		TextureOb* texOb_lazerEffect;
-                
-                std::vector<LazerModule*> modules_vec;
-      	      	
-      	      	void updatePropetries();
-      		void countPrice();
 
      		void virtual addUniqueInfo();
            	std::string getDamageStr();

@@ -23,24 +23,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 void Npc :: setGarbageReady(bool _garbage_ready)   { data_life.garbage_ready = _garbage_ready; }
 void Npc :: setAlive(bool _alive) 		   { data_life.is_alive = _alive; }
 
-void Npc :: setKosmoport(Kosmoport* _kosmoport)    { kosmoport = _kosmoport; }
-void Npc :: setLand(Land* _land)   		   { land = _land; }
+void Npc :: setLand(LandBase* land)   		        { this->land = land; }
 void Npc :: setScanTarget(VehicleBase* vehicle_to_scan) { this->vehicle_to_scan = vehicle_to_scan; }
-void Npc :: setUpperControl(bool upper_control)     { this->upper_control = upper_control; }
+void Npc :: setUpperControl(bool upper_control)         { this->upper_control = upper_control; }
 
 
 int Npc :: getRaceId() const	   { return race_id; }
 StarSystem* Npc :: getFailBackStarSystem() const { return failback_starsystem; }
-Kosmoport* Npc :: getKosmoport()   { return kosmoport; }
 VehicleBase* Npc :: getVehicle()       { return vehicle; }
 Skill* Npc :: getSkill() 	   { return skill; }	
-VehicleBase* Npc :: getScanVehicle()	   { return vehicle_to_scan; }	
+VehicleBase* Npc :: getScanTarget()	   { return vehicle_to_scan; }	
 Observation* Npc :: getObservation() const { return observation; }
 
 
 unsigned long int Npc :: getCredits() const { return credits; }   
 StateMachine* Npc :: getStateMachine() {return state_machine; }
 
+LandBase* Npc :: getLand() const { return land; }
    		
 void Npc :: bind(VehicleBase* vehicle) 	           
 { 
@@ -71,17 +70,15 @@ Npc :: Npc(int _race_id, IdData _data_id, LifeData _data_life, TextureOb* _texOb
 
 
         vehicle    = NULL;
-    	kosmoport  = NULL;
     	land       = NULL;
     	starsystem = NULL;
+    	
+    	vehicle_to_scan = NULL;
     	
     	failback_starsystem = NULL;
     	    		
 	skill = new Skill();
         
-        //macro_task_main = new MacroTaskHolder();
-   	//macro_task_self = new MacroTaskHolder();
-  	//micro_task = new MicroTaskHolder();
    		
         observation = new Observation(this);
 
@@ -91,11 +88,11 @@ Npc :: Npc(int _race_id, IdData _data_id, LifeData _data_life, TextureOb* _texOb
         ai_model = NULL;
         if (( race_id == RACE_6_ID) or ( race_id == RACE_7_ID) )
         {
-                //ai_model = g_AIMODEL_CONQUEROR;
+                ai_model = g_AIMODEL_CONQUEROR;
         }
         else
         {
-       		//ai_model = g_AIMODEL_RANGER;        
+       		ai_model = g_AIMODEL_RANGER;        
         }
 }
     
@@ -119,7 +116,7 @@ void Npc :: thinkCommon_inKosmoport_inStatic()
 	}
 	
 	// if all things are DONE
-	((Planet*)vehicle->getDriveComplex()->getTarget())->getDockingStation()->addToLaunchingQueue(this);
+	((Planet*)vehicle->getDriveComplex()->getTarget())->getLand()->addToLaunchingQueue(this); // improove by adding spacestation
 }
 
 void Npc :: thinkCommon_inLand_inStatic()
@@ -262,7 +259,7 @@ Planet* Npc :: getPlanetForDocking()
 
 StarSystem* Npc :: getClosestStarSystem(bool _captured)
 {
-       	observation->findEchievableStarSystems_inStatic();
+       	observation->findEchievableStarSystems_inStatic(starsystem->getGalaxy());
         	
        	StarSystem* _target_starsystem = observation->getClosestStarSystem(_captured);   
 	return _target_starsystem;
@@ -301,11 +298,7 @@ bool Npc :: scanProceeding()
      	return true;
 }
 
-bool Npc :: removeScanTarget()
-{
-     	vehicle_to_scan = NULL;
-     	return true;
-}
+void Npc :: resetScanTarget() { vehicle_to_scan = NULL; }
 //// *********** SCANNING ***********
 
 

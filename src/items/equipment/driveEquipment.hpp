@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define DRIVEEQUIPMENT_H
 
 
-class DriveEquipment :  public BaseEquipment
+class DriveEquipment :  public EquipmentBase
 {
 	public:
       		DriveEquipment(int speed_orig, 
@@ -30,10 +30,12 @@ class DriveEquipment :  public BaseEquipment
 
 		int getSpeed() const;
 		int getHyper() const;
-
-      		bool insertModule(DriveModule*);
-      		void virtual updateOwnerAbilities();
       		
+      		void virtual updateOwnerAbilities();
+
+      		void countPrice();
+      		virtual void updatePropetries();
+      		      		
       	private:
       	      	int speed_orig;
       		int speed_add;
@@ -42,11 +44,6 @@ class DriveEquipment :  public BaseEquipment
       		int hyper_orig;
       		int hyper_add;
       		int hyper;
-      		
-      		std::vector<DriveModule*> modules_vec;
-      		
-      		void countPrice();
-      		void updatePropetries();
       		
      		void virtual addUniqueInfo();
            	std::string getSpeedStr();

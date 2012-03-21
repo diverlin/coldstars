@@ -20,27 +20,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 ProtectorEquipment :: ProtectorEquipment(int protection_orig)
 {
     	this->protection_orig = protection_orig;
-    	
-        protection_add  = 0;
-
-    	updatePropetries();
-    	countPrice();
 }
 
 ProtectorEquipment :: ~ProtectorEquipment() /* virtual */
-{
-	for (unsigned int i = 0; i < modules_vec.size(); i++)
-	{
-		delete modules_vec[i];
-	}
-}
+{}
 
 
 int ProtectorEquipment :: getProtection() const { return protection; }
 
-		
+/* virtual */		
 void ProtectorEquipment :: updatePropetries()
-{
+{   	
+        protection_add  = 0;
+        
+       	for (unsigned int i = 0; i < modules_vec.size(); i++)
+    	{
+    		protection_add += ((ProtectorModule*)modules_vec[i])->getProtectionAdd();     	
+    	}
+    	
       	protection = protection_orig + protection_add;
 }
 
@@ -57,6 +54,7 @@ void ProtectorEquipment :: countPrice()
       	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
+/* virtual */
 void ProtectorEquipment :: updateOwnerAbilities()
 {
      	slot->getOwnerVehicle()->updateProtectionAbility();
@@ -79,24 +77,6 @@ std::string ProtectorEquipment :: getProtectionStr()
          	return int2str(protection_orig) + "+" + int2str(protection_add);
 }
 
-
-
-bool ProtectorEquipment :: insertModule(ProtectorModule* _protector_module)
-{
-    	if (modules_vec.size() < common_data.modules_num_max)
-    	{
-        	protection_add += _protector_module->getProtectionAdd();
-    
-        	updatePropetries();
-        
-        	texOb_modules_pList.push_back(_protector_module->getTextureOb());
-        	modules_vec.push_back(_protector_module);
-        	return true;
-    	}
-    	else
-        	return false;    
-}
-    
 
 
 ProtectorEquipment* getNewProtectorEquipment(int race_id, int revision_id)
@@ -132,5 +112,8 @@ ProtectorEquipment* getNewProtectorEquipment(int race_id, int revision_id)
         protector_equipment->setFunctionalSlotSubTypeId(PROTECTOR_SLOT_ID);
         protector_equipment->setItemCommonData(common_data);
         
+        protector_equipment->updatePropetries();
+    	protector_equipment->countPrice();
+    	
     	return protector_equipment;
 }

@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define BAKMODULE_H
 
 
-class BakModule : public BaseModule
+class BakModule : public ModuleBase
 {
    	public:
      		BakModule(int fuel_max_add);

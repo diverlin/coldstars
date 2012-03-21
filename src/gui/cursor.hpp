@@ -25,26 +25,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Cursor
 {
   	public:
-        	Cursor();
+        	Cursor(Player*);
         	~Cursor();
-
-		void setInfoSlot(ItemSlot*);
 		
+		void setLeftMouseButton(bool);
+		void setRightMouseButton(bool);
+				   	
 		ItemSlot* getSlot();
-		ItemSlot* getInfoSlot();
-				
-		void resetInfoSlot();
-						
+		vec2f getMousePos() const;
+
+		bool getMouseLeftButton() const;
+		bool getMouseRightButton() const;
+								
+		void updateMousePos();		
 		void update();
-		void render();
-		void renderInfoSlot();
         	
         private:
                 int type_id;
         	ItemSlot* slot;
-        	ItemSlot* slot_info;  // slot to render item info
         	
-        	void updatePos();
+        	Player* player;
+        	
+        	vec2f mouse_pos;
+        	
+        	bool mouse_left_button;
+        	bool mouse_right_button;
 }; 
 
 #endif 

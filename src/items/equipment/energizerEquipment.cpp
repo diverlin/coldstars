@@ -22,31 +22,28 @@ EnergizerEquipment :: EnergizerEquipment(int energy_max_orig,
 {
     	this->energy_max_orig  = energy_max_orig;
         this->restoration_orig = restoration_orig;
-          
-    	energy_max_add  = 0;
-    	restoration_add  = 0;
 
     	energy = energy_max_orig;
-        
-    	updatePropetries();
-    	countPrice();
-    	updateInfo();
 }
 
 EnergizerEquipment :: ~EnergizerEquipment() /* virtual */
-{
-	for (unsigned int i = 0; i < modules_vec.size(); i++)
-	{
-		delete modules_vec[i];
-	}
-}
+{}
 
 
 int EnergizerEquipment :: getEnergy() const { return energy; }
       		
-
+/* virtual */
 void EnergizerEquipment :: updatePropetries()
 {
+    	energy_max_add  = 0;
+    	restoration_add  = 0;
+    	
+    	for (unsigned int i = 0; i < modules_vec.size(); i++)
+    	{
+    		energy_max_add  += ((EnergizerModule*)modules_vec[i])->getEnergyMaxAdd();
+        	restoration_add += ((EnergizerModule*)modules_vec[i])->getRestorationAdd();    	
+    	}
+    	
     	energy_max  = energy_max_orig + energy_max_add;
     	restoration = restoration_orig + restoration_add;
 }
@@ -96,22 +93,6 @@ std::string EnergizerEquipment :: getRestorationStr()
         	return int2str(restoration_orig) + "+" + int2str(restoration_add);
 }
 
-bool EnergizerEquipment :: insertModule(EnergizerModule* _energizer_module)
-{
-    	if (modules_vec.size() < common_data.modules_num_max)
-    	{
-        	energy_max_add  += _energizer_module->getEnergyMaxAdd();
-        	restoration_add += _energizer_module->getRestorationAdd();
-        
-        	updatePropetries();
-        
-        	texOb_modules_pList.push_back(_energizer_module->getTextureOb());
-        	modules_vec.push_back(_energizer_module);
-        	return true;
-    	}
-    	else
-        	return false;    
-}
 
 
 EnergizerEquipment* getNewEnergizerEquipment(int race_id, int revision_id)
@@ -148,5 +129,8 @@ EnergizerEquipment* getNewEnergizerEquipment(int race_id, int revision_id)
         energizer_equipment->setFunctionalSlotSubTypeId(ENERGIZER_SLOT_ID);
         energizer_equipment->setItemCommonData(common_data);
                 
+        energizer_equipment->updatePropetries();
+    	energizer_equipment->countPrice();
+    	
     	return energizer_equipment;
 }

@@ -1,7 +1,7 @@
 /*
 Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
 
-This prog//////////ram is free software; you can redistribute it and/or
+This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
 of the License, or (at your option) any later version.
@@ -22,117 +22,39 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 int main()
 {       
- 	init(); 
+ 	init();  
+	
+	GameTimer* TIMER = new GameTimer();
+
+	 	
+        Galaxy* galaxy = getNewGalaxy();
+        Player* player = getNewPlayer(galaxy);
+ 	
+ 	player->getScreen()->resize(SCREEN_WIDTH_MIN, SCREEN_HEIGHT_MIN);
+
 
     	// GAME LOOP
     	while (g_APP.IsOpened())
     	{    
-		pPLAYER->update_global();
-       		if (pPLAYER->getPlaceTypeId() == SPACE_ID)
-       		{  
-           		//////////// in SPACE ///////////////
-           		g_KEYEVENTS->update_inSpace();
-           		pPLAYER->getCursor()->resetInfoSlot();
- 
-			for (int i = 0; i < g_GAMESPEED; i++)  // fake implementation (static ai should not be run several times at once)
-			{
-       				g_GALAXY->update(g_TIMER->getTurnTick());
-       			}
-
-           		pPLAYER->getStarSystem()->render(g_TIMER->getTurnEnded(), pPLAYER->getShowAllOrbit(), pPLAYER->getShowAllPath()); 
-                                                
-                        if (g_TIMER->getTurnEnded() == true)  
-                        {
-                                if ( (pPLAYER->getScanFlag() == false) && (pPLAYER->getWorldMapShowFlag() == false) )
-                                {
-                                        pPLAYER->getStarSystem()->mouseControl();  // improove to exclude all render calls
-                                }
-                        }
-
-           		//////////// SCAN ///////////////
-           		if ( pPLAYER->getScanFlag() == true )
-                        {                                
-              			g_GUI_VEHICLE->update();
-                                g_GUI_VEHICLE->render();
-                        }
-
-           		/////////// WORLDMAP ///////////
-           		if ( pPLAYER->getWorldMapShowFlag() == true )  
-           		{
-               			g_GUI_MAP->update();   
-               			g_GUI_MAP->render(false);   
-          		}
-
-           		g_GUI_SPACE->update();    
-           		g_GUI_SPACE->render();
+    		/* server code start */
+    		TIMER->update();    		
+       				
+		for (int i = 0; i < g_GAMESPEED; i++)  // fake implementation (static ai should not be run several times at once)
+		{
+       			galaxy->update_s(TIMER->getTurnTick());
        		}
+       		        
+       		if ((TIMER->getTurnEnded() == true) and (player->getNextTurnReady()))
+              	{
+              	       	TIMER->nextTurn();
+              	}              	
+       		/* server code end */
 
-
-       		if (pPLAYER->getPlaceTypeId() == KOSMOPORT_ID)
-       		{
-           		g_KEYEVENTS->update_inKosmoport();
-           		pPLAYER->getCursor()->resetInfoSlot();
-          
-           		if (g_GUI_KOSMOPORT->getActiveScreenId() == SCREEN_ANGAR_ID)
-           		{
-               			pPLAYER->getPilot()->getKosmoport()->getAngar()->update();                                
-               			pPLAYER->getPilot()->getKosmoport()->getAngar()->render();
-
-                                if (pPLAYER->getScanFlag() == true) 
-                                { 
-                                        g_GUI_VEHICLE->update();
-                                        g_GUI_VEHICLE->render();
-                                }
-               			else
-                                {
-                   			pPLAYER->getPilot()->getKosmoport()->getAngar()->renderItemInfo();
-                                }
-           		}
-
-           		if (g_GUI_KOSMOPORT->getActiveScreenId() == SCREEN_STORE_ID)
-           		{
-                                pPLAYER->getPilot()->getKosmoport()->getStore()->update();
-               			pPLAYER->getPilot()->getKosmoport()->getStore()->render();                                 
-                                                 
-                                g_GUI_VEHICLE->configure(pPLAYER->getVehicle(), true);
-               			g_GUI_VEHICLE->update();
-                                g_GUI_VEHICLE->render();
-                        }
-
-           		if (g_GUI_KOSMOPORT->getActiveScreenId() == SCREEN_SHOP_ID)
-           		{
-                                pPLAYER->getPilot()->getKosmoport()->getShop()->update();
-                                pPLAYER->getPilot()->getKosmoport()->getShop()->render();
-           		}
-
-           		if (g_GUI_KOSMOPORT->getActiveScreenId() == SCREEN_GALAXYMAP_ID)
-           		{
-               			g_GUI_MAP->update();
-                                g_GUI_MAP->render(true);   
-           		}
-
-           		if (g_GUI_KOSMOPORT->getActiveScreenId() == SCREEN_GOVERMENT_ID)
-           		{
-                                pPLAYER->getPilot()->getKosmoport()->getGoverment()->update();
-                                pPLAYER->getPilot()->getKosmoport()->getGoverment()->render();
-           		}
-
-           		g_GUI_KOSMOPORT->update(); 
-           		g_GUI_KOSMOPORT->render(); 
-       		} 
-
-            	
-            	g_FPS->update();
-            	g_FPS->draw();            	
-
-
-		g_TIMER->update();
-		
-       		// Finally, display rendered frame on screen
-       		g_APP.Display();
+		/* client code start */
+		player->runSession(TIMER);
+            	/* client code end */           	
     	}
 
-	printf("EXIT_SUCCESS");
     	return EXIT_SUCCESS;
 }
 

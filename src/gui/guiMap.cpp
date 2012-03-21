@@ -18,26 +18,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-GuiMap :: GuiMap()
+GuiMap :: GuiMap(Player* player)
 { 
-	galaxy = NULL;
-    	rect = Rect(MAP_OFFSET_X, MAP_OFFSET_Y, (g_VIEW_WIDTH - 2 * MAP_OFFSET_X), (g_VIEW_HEIGHT - 2 * MAP_OFFSET_X));
+	this->player = player;
+    	rect = Rect(MAP_OFFSET_X, MAP_OFFSET_Y, (SCREEN_WIDTH_MIN - 2 * MAP_OFFSET_X), (SCREEN_HEIGHT_MIN - 2 * MAP_OFFSET_X));
 }
 
-
-void GuiMap :: bindGalaxy(Galaxy* _galaxy)
-{
-	galaxy = _galaxy;
-}
-
+GuiMap :: ~GuiMap()
+{}
 
 bool GuiMap :: update()
 {
-     	if (pPLAYER->getVehicle()->ableTo.HJUMP == true)
+	Galaxy* galaxy = player->getNpc()->getStarSystem()->getGalaxy();
+
+     	if (player->getNpc()->getVehicle()->ableTo.HJUMP == true)
      	{
-        	int mx  = g_MOUSE_POS_X;
-        	int my  = g_VIEW_HEIGHT - g_MOUSE_POS_Y; 
-        	int lmb = g_MOUSE_LEFT_BUTTON;
+        	int mx  = player->getCursor()->getMousePos().x;
+        	int my  = player->getScreen()->getHeight() - player->getCursor()->getMousePos().y; 
+        	int lmb = player->getCursor()->getMouseLeftButton();
    
         	for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
         	{
@@ -47,17 +45,16 @@ bool GuiMap :: update()
                 		if (ss_cursor_dist < 10)
                 		{ 
                    			int ss_ss_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->getPosition(), 
-                   				       			    pPLAYER->getPilot()->getStarSystem()->getPosition() );
+                   				       			   player->getNpc()->getStarSystem()->getPosition() );
                    				       
-                   			if ( (ss_ss_dist < pPLAYER->getVehicle()->getDriveComplex()->getDriveSlot()->getDriveEquipment()->getHyper()) && (ss_ss_dist < pPLAYER->getVehicle()->getDriveComplex()->getBakSlot()->getBakEquipment()->getFuel()) )
+                   			if ( (ss_ss_dist < player->getNpc()->getVehicle()->getDriveComplex()->getDriveSlot()->getDriveEquipment()->getHyper()) && (ss_ss_dist < player->getNpc()->getVehicle()->getDriveComplex()->getBakSlot()->getBakEquipment()->getFuel()) )
                       			{
                       				if (lmb == true)
                       				{ 
                                                         // debug
-                                                        pPLAYER->getStarSystem()->removeShip(pPLAYER->getVehicle()->getId());  
-                                                        pPLAYER->getStarSystem()->removeNpc(pPLAYER->getPilot()->getId(), pPLAYER->getPilot()->getSubTypeId());  
-                                                        galaxy->STARSYSTEM_vec[si]->addToHyperJumpQueue(pPLAYER->getPilot());    
-                          				pPLAYER->setStarSystem(galaxy->STARSYSTEM_vec[si]);                     
+                                                        player->getNpc()->getStarSystem()->removeShip(player->getNpc()->getVehicle()->getId());  
+                                                        player->getNpc()->getStarSystem()->removeNpc(player->getNpc()->getId(), player->getNpc()->getSubTypeId());  
+                                                        galaxy->STARSYSTEM_vec[si]->addToHyperJumpQueue(player->getNpc());    
                                                         // debug
                                                         
                           				//player.hyperJumpPreparation(ss)
@@ -78,18 +75,12 @@ bool GuiMap :: update()
 
 
 
-void GuiMap :: render(bool _clrscr)
+void GuiMap :: render()
 {
     	TextureOb* texOb_textBg = g_TEXTURE_MANAGER.getRandomTexOb(TEXT_BACKGROUND_TEXTURE_ID);
-    	
-        if (_clrscr)
-        {
-                clearScreen();
-        }
-        
-        
+    	Galaxy* galaxy = player->getNpc()->getStarSystem()->getGalaxy();
+      
         resetRenderTransformation();
-    	        
     	        
         enable_BLEND();                              
 
@@ -100,8 +91,7 @@ void GuiMap :: render(bool _clrscr)
     			for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
     			{
    		
-        			//TextureOb* texOb_particle = g_TEXTURE_MANAGER.getParticleTexObByColorId(galaxy->STARSYSTEM_vec[si]->STAR_vec[0]->getColorId()); 
-                                TextureOb* texOb_particle = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; // fake
+        			TextureOb* texOb_particle = g_TEXTURE_MANAGER.getTexObByColorId(DISTANTSTAR_TEXTURE_ID, galaxy->STARSYSTEM_vec[si]->STAR_vec[0]->getColorId()); 
                                         
         			drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[si]->getPosition(), 30.0, -2.0);
         	       
@@ -111,7 +101,7 @@ void GuiMap :: render(bool _clrscr)
            			}
            	
     			}	 
-           		drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_player_ss->texture, pPLAYER->getStarSystem()->getPosition(), 40.0, -2.0);
+           		drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_player_ss->texture, player->getNpc()->getStarSystem()->getPosition(), 40.0, -2.0);
 
     			//if self.GL_LIST_range_ID != None:
        				//glCallList(self.GL_LIST_range_ID)

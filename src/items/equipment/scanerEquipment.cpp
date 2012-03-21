@@ -20,26 +20,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 ScanerEquipment :: ScanerEquipment(int scan_orig)
 {
     	this->scan_orig = scan_orig;
-    	
-        scan_add = 0;
-
-    	updatePropetries();
-    	countPrice();
 }
 
 ScanerEquipment :: ~ScanerEquipment() /* virtual */
-{
-	for (unsigned int i = 0; i < modules_vec.size(); i++)
-	{
-		delete modules_vec[i];
-	}
-}
+{}
 
 int ScanerEquipment :: getScan() const { return scan; }
 		
-		
+	
+/* virtual */	
 void ScanerEquipment :: updatePropetries()
-{
+{    	
+        scan_add = 0;
+        
+        for (unsigned int i = 0; i < modules_vec.size(); i++)
+    	{
+    		scan_add += ((ScanerModule*)modules_vec[i])->getScanAdd();      	
+    	}
+    	
      	scan = scan_orig + scan_add;
 }
 
@@ -57,6 +55,7 @@ void ScanerEquipment :: countPrice()
      	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
+/* virtual */
 void ScanerEquipment :: updateOwnerAbilities()
 {
     	slot->getOwnerVehicle()->updateScanAbility();
@@ -78,21 +77,6 @@ std::string ScanerEquipment :: getScanStr()
          	return int2str(scan_orig) + "+" + int2str(scan_add);
 }
 
-bool ScanerEquipment :: insertModule(ScanerModule* _scaner_module)
-{
-    	if (modules_vec.size() < common_data.modules_num_max)
-    	{
-        	scan_add += _scaner_module->getScanAdd();
-    
-        	updatePropetries();
-        
-        	texOb_modules_pList.push_back(_scaner_module->getTextureOb());
-        	modules_vec.push_back(_scaner_module);
-        	return true;
-    	}
-    	else
-        	return false;     
-}
 
 
 ScanerEquipment* getNewScanerEquipment(int race_id, int revision_id)
@@ -128,6 +112,9 @@ ScanerEquipment* getNewScanerEquipment(int race_id, int revision_id)
         scaner_equipment->setTextureOb(texOb_item);    	
         scaner_equipment->setFunctionalSlotSubTypeId(SCANER_SLOT_ID);
         scaner_equipment->setItemCommonData(common_data);
-                
+           
+    	scaner_equipment->updatePropetries();
+    	scaner_equipment->countPrice();
+    	     
     	return scaner_equipment;
 }

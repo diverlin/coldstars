@@ -18,13 +18,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-GuiKosmoport :: GuiKosmoport()
+GuiKosmoport :: GuiKosmoport(Player* player)
 {
+	this->player = player;
+	
         TextureOb* texOb_button = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; // fake
 
     	angar_screen_button     = new Button(texOb_button, 
     					     SCREEN_ANGAR_ID,
-    					     g_VIEW_WIDTH - 1 * (INTERFACE_ICON_SIZE + 5), 
+    					     SCREEN_WIDTH_MIN - 1 * (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE, 
     					     INTERFACE_ICON_SIZE,  
     					     INTERFACE_ICON_SIZE, 
@@ -33,7 +35,7 @@ GuiKosmoport :: GuiKosmoport()
     	
     	store_screen_button     = new Button(texOb_button, 
     					     SCREEN_STORE_ID,
-    					     g_VIEW_WIDTH - 2 * (INTERFACE_ICON_SIZE + 5),
+    					     SCREEN_WIDTH_MIN - 2 * (INTERFACE_ICON_SIZE + 5),
     					     INTERFACE_ICON_SIZE, 
     					     INTERFACE_ICON_SIZE,  
     					     INTERFACE_ICON_SIZE, 
@@ -42,7 +44,7 @@ GuiKosmoport :: GuiKosmoport()
     					        	
     	shop_screen_button      = new Button(texOb_button, 
     					     SCREEN_SHOP_ID,
-    					     g_VIEW_WIDTH - 3 * (INTERFACE_ICON_SIZE + 5), 
+    					     SCREEN_WIDTH_MIN - 3 * (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE, 
     					     INTERFACE_ICON_SIZE,  
     					     INTERFACE_ICON_SIZE, 
@@ -51,7 +53,7 @@ GuiKosmoport :: GuiKosmoport()
     					     
     	galaxymap_screen_button = new Button(texOb_button, 
     					     SCREEN_GALAXYMAP_ID,
-    					     g_VIEW_WIDTH - 4 * (INTERFACE_ICON_SIZE + 5), 
+    					     SCREEN_WIDTH_MIN - 4 * (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE, 
     					     INTERFACE_ICON_SIZE,  
     					     INTERFACE_ICON_SIZE, 
@@ -60,7 +62,7 @@ GuiKosmoport :: GuiKosmoport()
     					     
     	goverment_screen_button = new Button(texOb_button, 
     					     SCREEN_GOVERMENT_ID,
-    					     g_VIEW_WIDTH - 5 * (INTERFACE_ICON_SIZE + 5), 
+    					     SCREEN_WIDTH_MIN - 5 * (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE,
     					     INTERFACE_ICON_SIZE,  
     					     INTERFACE_ICON_SIZE, 
@@ -69,8 +71,8 @@ GuiKosmoport :: GuiKosmoport()
 
     	repair_button = new Button(texOb_button, 
     	    			   REPAIR_BUTTON_ID,
-    				   g_VIEW_WIDTH - 1 * (INTERFACE_ICON_SIZE + 5),
-    				   g_VIEW_HEIGHT - 2*INTERFACE_ICON_SIZE, 
+    				   SCREEN_WIDTH_MIN - 1 * (INTERFACE_ICON_SIZE + 5),
+    				   SCREEN_HEIGHT_MIN - 2*INTERFACE_ICON_SIZE, 
     				   INTERFACE_ICON_SIZE,  
     				   INTERFACE_ICON_SIZE, 
     				   "buy_repair");
@@ -78,8 +80,8 @@ GuiKosmoport :: GuiKosmoport()
     				   
     	fuel_button   = new Button(texOb_button,
     	 			   FUEL_BUTTON_ID,
-    	 			   g_VIEW_WIDTH - 1 * (INTERFACE_ICON_SIZE + 5),
-    	 			   g_VIEW_HEIGHT - 3*INTERFACE_ICON_SIZE, 
+    	 			   SCREEN_WIDTH_MIN - 1 * (INTERFACE_ICON_SIZE + 5),
+    	 			   SCREEN_HEIGHT_MIN - 3*INTERFACE_ICON_SIZE, 
     	 			   INTERFACE_ICON_SIZE,  
     	 			   INTERFACE_ICON_SIZE, 
     	 			   "buy fuel");  
@@ -87,8 +89,8 @@ GuiKosmoport :: GuiKosmoport()
     	 			   
     	launch_button = new Button(texOb_button, 
     				   LAUNCH_BUTTON_ID,
-    				   g_VIEW_WIDTH - 1 * (INTERFACE_ICON_SIZE + 5), 
-    				   g_VIEW_HEIGHT - 4*INTERFACE_ICON_SIZE, 
+    				   SCREEN_WIDTH_MIN - 1 * (INTERFACE_ICON_SIZE + 5), 
+    				   SCREEN_HEIGHT_MIN - 4*INTERFACE_ICON_SIZE, 
     				   INTERFACE_ICON_SIZE,  
     				   INTERFACE_ICON_SIZE, 
     				   "launch");
@@ -122,9 +124,9 @@ void GuiKosmoport :: resetInfoFlags()
 		
 void GuiKosmoport :: mouseInteraction()
 {
-     	int mxvp = g_MOUSE_POS_X;
-     	int myvp = g_VIEW_HEIGHT - g_MOUSE_POS_Y;         
-     	int lmb  = g_MOUSE_LEFT_BUTTON;
+     	int mxvp = player->getCursor()->getMousePos().x;
+     	int myvp = player->getScreen()->getHeight() - player->getCursor()->getMousePos().y;         
+     	int lmb  = player->getCursor()->getMouseLeftButton();;
 
     	for (unsigned int i = 0; i< button_common_pList.size(); i++)
 	{
@@ -151,17 +153,15 @@ void GuiKosmoport :: mouseInteraction()
        				{	
 		   			if (button_angar_pList[i]->getSubTypeId() == REPAIR_BUTTON_ID)
 		   			{
-		   				pPLAYER->getVehicle()->setMaxArmor(); 
+		   				player->getNpc()->getVehicle()->setMaxArmor(); 
 		   			}
 		   			if (button_angar_pList[i]->getSubTypeId() == FUEL_BUTTON_ID)
 		   			{
-		   		        	pPLAYER->getVehicle()->setMaxFuel();
+		   		        	player->getNpc()->getVehicle()->setMaxFuel();
 		   			}
 		   			if (button_angar_pList[i]->getSubTypeId() == LAUNCH_BUTTON_ID)
 		   			{
-       						//pPLAYER->getPilot()->createLaunchingSequence(); 
-       						//pPLAYER->getPilot()->setPlaceTypeId(SPACE_ID);
-       						pPLAYER->getVehicle()->launchingEvent();
+       						player->getNpc()->getVehicle()->launchingEvent();
        			   		}
        				}
        				break;

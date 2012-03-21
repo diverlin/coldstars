@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define SCANERMODULE_H
 
 
-class ScanerModule : public BaseModule
+class ScanerModule : public ModuleBase
 {
     	public:
        		ScanerModule(int scan_add);

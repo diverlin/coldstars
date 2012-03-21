@@ -28,12 +28,12 @@ class ShockWaveEffect
           	bool is_alreadyInRemoveQueue;
 
           	vec2f center;
-          	
+          	          	
           	vec3f parameter;
           	vec3f d_parameter;
           	float time, d_time;
 
-      		ShockWaveEffect(vec2f _center_pos, float _x, float _y, float _z, float _time, float _d_x, float _d_y, float _d_z, float d_time);
+      		ShockWaveEffect(vec2f center, float _x, float _y, float _z, float _time, float _d_x, float _d_y, float _d_z, float d_time);
       		~ShockWaveEffect();
       		
       		void update();

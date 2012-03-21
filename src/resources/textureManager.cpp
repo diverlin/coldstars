@@ -28,7 +28,7 @@ void TextureManager :: manage(TextureOb* texOb)
 {
 	switch(texOb->type_id)
 	{
-	  	case STARBASE_TEXTURE_ID:     { starbase_texOb_vec.push_back(texOb);    break; }       
+	  	case SPACESTATION_TEXTURE_ID: { spacestation_texOb_vec.push_back(texOb);    break; }       
 	 	case SATELLITE_TEXTURE_ID:    { satellite_texOb_vec.push_back(texOb);   break; }       
 	  		  		
   		case SLOT_TEXTURE_ID:        { slot_texOb_vec.push_back(texOb);        break; }       
@@ -414,15 +414,24 @@ TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race
 
 
 
-TextureOb* TextureManager :: getParticleTexObByColorId(int _color_id)
+TextureOb* TextureManager :: getTexObByColorId(int _type_id, int _color_id)
 {
+	std::vector<TextureOb*>* requested_vec = NULL;
+	
+	switch(_type_id)
+	{
+		case PARTICLE_TEXTURE_ID:    { requested_vec = &particles_texOb_vec;      break; }
+		case DISTANTSTAR_TEXTURE_ID: { requested_vec = &starBgEffect_texOb_vec;   break; }
+		case NEBULA_TEXTURE_ID:      { requested_vec = &nebulaBgEffect_texOb_vec; break; }
+	}
+	
 	//printf("searching color id = %i\n", _color_id);
-     	for(unsigned int i = 0; i < particles_texOb_vec.size(); i++)
+     	for(unsigned int i = 0; i < requested_vec->size(); i++)
      	{
             	//printf("current color id = %i\n", particles_texOb_vec[i]->color_id);  
-         	if (particles_texOb_vec[i]->color_id == _color_id)
+         	if ((*requested_vec)[i]->color_id == _color_id)
          	{
-            		return particles_texOb_vec[i]; 
+            		return (*requested_vec)[i]; 
             	}
         
 	}
@@ -436,7 +445,7 @@ TextureOb* TextureManager :: getRandomTexOb(int texture_type_id)
 {
 	switch(texture_type_id)
 	{
-		case STARBASE_TEXTURE_ID:         { return getRandomTexObFromList(&starbase_texOb_vec);             break; }
+		case SPACESTATION_TEXTURE_ID:     { return getRandomTexObFromList(&spacestation_texOb_vec);             break; }
 		case SATELLITE_TEXTURE_ID:        { return getRandomTexObFromList(&satellite_texOb_vec);            break; }
 					
 		case SLOT_TEXTURE_ID:             { return getRandomTexObFromList(&slot_texOb_vec);                 break; }
@@ -475,7 +484,7 @@ TextureOb* TextureManager :: getRandomTexOb(int texture_type_id)
 
 		case SHIELD_EFFECT_TEXTURE_ID:    { return getRandomTexObFromList(&shieldEffect_texOb_vec);         break; }	
 		case NEBULA_TEXTURE_ID:           { return getRandomTexObFromList(&nebulaBgEffect_texOb_vec);       break; }
-				
+		case DISTANTSTAR_TEXTURE_ID:      { return getRandomTexObFromList(&starBgEffect_texOb_vec);         break; }				
 				
 	}
 }

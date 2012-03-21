@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define SCANEREQUIPMENT_H
 
 
-class ScanerEquipment : public BaseEquipment
+class ScanerEquipment : public EquipmentBase
 {
   	public:
     		ScanerEquipment(int scan_orig);
@@ -29,18 +29,15 @@ class ScanerEquipment : public BaseEquipment
 
 		int getScan() const;
 
-    		bool insertModule(ScanerModule*);
-    		void virtual updateOwnerAbilities();
+    		virtual void updateOwnerAbilities();
+    		
+    		void countPrice();
+    		virtual void updatePropetries();
     		
     	private:
     		int scan_orig;
     		int scan_add;
     		int scan;
-    		
-    	    	std::vector<ScanerModule*> modules_vec; 
-    	    	
-    	    	void countPrice();
-    		void updatePropetries();
 
      		void virtual addUniqueInfo();
          	std::string getScanStr();

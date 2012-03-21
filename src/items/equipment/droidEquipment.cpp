@@ -20,27 +20,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 DroidEquipment :: DroidEquipment(int repair_orig)
 {
     	this->repair_orig = repair_orig;
-    	
-        repair_add        = 0;
-
-    	updatePropetries();
-    	countPrice();
 }
 
 DroidEquipment :: ~DroidEquipment() /* virtual */
-{
-	for (unsigned int i = 0; i < modules_vec.size(); i++)
-	{
-		delete modules_vec[i];
-	}
-}
+{}
 
 
 int DroidEquipment :: getRepair() const { return repair; }
 		
 
+/* virtual */
 void DroidEquipment :: updatePropetries()
 {
+    	repair_add        = 0;
+        
+        for (unsigned int i = 0; i < modules_vec.size(); i++)
+    	{
+    		repair_add += ((DroidModule*)modules_vec[i])->getRepairAdd();    	
+    	}
+    	
      	repair = repair_orig + repair_add;
 }
 
@@ -57,7 +55,7 @@ void DroidEquipment :: countPrice()
      	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-
+/* virtual */
 void DroidEquipment :: updateOwnerAbilities()
 {
      	slot->getOwnerVehicle()->updateRepairAbility();
@@ -80,21 +78,6 @@ std::string DroidEquipment :: getRepairStr()
 }
 
 
-bool DroidEquipment :: insertModule(DroidModule* _droid_module)
-{
-    	if (modules_vec.size() < common_data.modules_num_max)
-    	{
-        	repair_add += _droid_module->getRepairAdd();
-    
-        	updatePropetries();
-         
-        	texOb_modules_pList.push_back(_droid_module->getTextureOb());
-        	modules_vec.push_back(_droid_module);
-        	return true;
-    	}
-   	else 
-        	return false;    
-}
 		
 
 DroidEquipment* getNewDroidEquipment(int race_id, int revision_id)
@@ -130,6 +113,10 @@ DroidEquipment* getNewDroidEquipment(int race_id, int revision_id)
         droid_equipment->setFunctionalSlotSubTypeId(DROID_SLOT_ID);
         droid_equipment->setItemCommonData(common_data);
                 
+                
+    	droid_equipment->updatePropetries();
+    	droid_equipment->countPrice();
+    	
     	return droid_equipment;
 }
 

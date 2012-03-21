@@ -24,16 +24,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class GuiMap 
 {
   	public:
-     		GuiMap();
+     		GuiMap(Player*);
      		~GuiMap();
-     		     
-     		void bindGalaxy(Galaxy*);
-     
+   
      		bool update();
-     		void render(bool);
+     		void render();
 
      	private:
-     		Galaxy* galaxy;
+     		Player* player;
      		Rect rect;
 };
      		

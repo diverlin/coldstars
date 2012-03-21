@@ -17,13 +17,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "fbo.hpp"
 
-
-FBO :: FBO(int _w, int _h)
+FBO :: FBO(int w, int h)
 {
-	w = _w;
-      	h = _h;
+	this->w = w;
+      	this->h = h;
       	// create a color texture
       	glGenTextures(1, &texture);
       	glBindTexture(GL_TEXTURE_2D, texture);
@@ -49,11 +47,13 @@ FBO :: FBO(int _w, int _h)
       	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }
 
+FBO::~FBO()
+{}
 
 GLuint FBO :: getTexture() const { return texture; }
 		
 		
-void FBO :: activate()
+void FBO :: activate(Screen* screen)
 {
      	glBindTexture(GL_TEXTURE_2D, 0);            // unbind texture
      	glBindFramebuffer(GL_FRAMEBUFFER, fbo);    // putcom // bind fbo
@@ -62,7 +62,7 @@ void FBO :: activate()
      	glLoadIdentity();
 
      	glPushAttrib(GL_VIEWPORT_BIT);               // viewport is shared with the main context
-     	glViewport(0, 0, g_VIEW_WIDTH, g_VIEW_HEIGHT);
+     	glViewport(0, 0, screen->getWidth(), screen->getHeight());
 }
 
 void FBO :: deactivate()

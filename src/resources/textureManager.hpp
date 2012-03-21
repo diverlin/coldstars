@@ -54,7 +54,7 @@ class TextureManager
         	TextureOb* getRandomFaceTexObWithFolloingAttributes(int _race_id);
         	TextureOb* getRandomShipTexObWithFollowingAtrributes(int _race_id, int _subtype_id, int _size_id);
 
-        	TextureOb* getParticleTexObByColorId(int _color_id);
+        	TextureOb* getTexObByColorId(int type_id, int color_id);
                         	
 		TextureOb* getRandomTexOb(int);
 
@@ -85,9 +85,9 @@ class TextureManager
 
 
         	// SPACE OBJECTS
-        	std::vector<TextureOb*> starbase_texOb_vec;
-        	std::vector<TextureOb*> satellite_texOb_vec;
-        	std::vector<TextureOb*> star_texOb_vec;
+        	std::vector<TextureOb*> spacestation_texOb_vec;
+	       	std::vector<TextureOb*> satellite_texOb_vec;
+               	std::vector<TextureOb*> star_texOb_vec;
         	std::vector<TextureOb*> planet_texOb_vec;
         	std::vector<TextureOb*> atmosphere_texOb_vec;
         	std::vector<TextureOb*> asteroid_texOb_vec;  

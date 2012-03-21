@@ -23,30 +23,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class GuiVehicle
 {
    	public:
-      		GuiVehicle();
+      		GuiVehicle(Player*);
       		~GuiVehicle();
 
-      		void bind(VehicleBase*);
-      		void createControlSkillButtons();
-
-                void configure(VehicleBase*, bool _in_store, bool _allow_full_control);
-     		void update();
+     		void update();   
+     				
       		void render() const;
+		void renderFocusedItemInfo() const;
 
-      	private:
-                bool in_store;
-                bool allow_full_control;
-                
-      	      	VehicleBase* vehicle;
-      		Skill* skill;
-      		
-      		std::vector<Button*> button_vec;
-  		
-     		void manageSkill();
-     		void mouseControl();
-     		
-     		void renderInternaly() const;
-      		void renderSkill() const;	
+      	private: 		
+      		Player* player;
+
 };
 
 

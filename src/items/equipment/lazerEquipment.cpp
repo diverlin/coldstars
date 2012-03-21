@@ -22,32 +22,30 @@ LazerEquipment :: LazerEquipment(int damage_orig,
 {
    	this->damage_orig = damage_orig;
    	this->radius_orig = radius_orig;
-        
-   	damage_add  = 0;
-   	radius_add  = 0;
 
    	//TextureOb lazerEffect_texOb   = TEXTURE_MANAGER.returnLazerEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id);
    	texOb_turrel	  = g_TEXTURE_MANAGER.getRandomTexOb(TURREL_TEXTURE_ID); 
    	texOb_lazerEffect = g_TEXTURE_MANAGER.getRandomTexOb(LAZER_EFFECT_TEXTURE_ID);
-   	   
-   	updatePropetries();
-   	countPrice();
 }
 
 LazerEquipment :: ~LazerEquipment() /* virtual */
-{
-	for (unsigned int i = 0; i < modules_vec.size(); i++)
-	{
-		delete modules_vec[i];
-	}
-}
+{}
 
 int LazerEquipment :: getDamage() const { return damage; }
 int LazerEquipment :: getRadius() const { return radius; }
 		
-		
+/* virtual */		
 void LazerEquipment :: updatePropetries()
 {
+   	damage_add  = 0;
+   	radius_add  = 0;
+   	
+   	for (unsigned int i = 0; i < modules_vec.size(); i++)
+    	{
+        	damage_add   += ((LazerModule*)modules_vec[i])->getDamageAdd();
+        	radius_add   += ((LazerModule*)modules_vec[i])->getRadiusAdd();        	
+    	}
+    	
     	damage = damage_orig + damage_add;
     	radius = radius_orig + radius_add;
 } 
@@ -67,7 +65,7 @@ void LazerEquipment :: countPrice()
 }
 
 
-    
+/* virtual */    
 void LazerEquipment :: updateOwnerAbilities()
 { 
     	slot->getOwnerVehicle()->updateFireAbility();
@@ -135,28 +133,6 @@ void LazerEquipment :: fireEvent_FALSE()
 } 
 
 
-
-
-bool LazerEquipment :: insertModule(LazerModule* _lazer_module)
-{
-    	if (modules_vec.size() < common_data.modules_num_max)
-    	{
-       		damage_add += _lazer_module->getDamageAdd();
-       		radius_add += _lazer_module->getRadiusAdd();
-        
-       		updatePropetries();
-    
-       		texOb_modules_pList.push_back(_lazer_module->getTextureOb());
-       		modules_vec.push_back(_lazer_module);
-       		return true;
-    	}
-    	else
-       		return false;   
-}
-    
-
-
-
 LazerEquipment* getNewLazerEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
@@ -192,6 +168,9 @@ LazerEquipment* getNewLazerEquipment(int race_id, int revision_id)
         lazer_equipment->setFunctionalSlotSubTypeId(WEAPON_SLOT_ID);
         lazer_equipment->setItemCommonData(common_data);
         
+   	lazer_equipment->updatePropetries();
+   	lazer_equipment->countPrice();
+   	
     	return lazer_equipment;
 }
 

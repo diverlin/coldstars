@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define BAKEQUIPMENT_H
 
 
-class BakEquipment : public BaseEquipment
+class BakEquipment : public EquipmentBase
 {
 	public:
      		BakEquipment(int fuel_max_orig);     			     
@@ -31,19 +31,16 @@ class BakEquipment : public BaseEquipment
 		
 		void fill();
 
-           	bool insertModule(BakModule*);
      	     	void virtual updateOwnerAbilities();
-     		
+     	
+     	     	void countPrice();
+     	     	virtual void updatePropetries();
+     	     		
      	private:
      	     	int fuel_max_orig;
      		int fuel_max_add;
      		int fuel_max;
      		int fuel;
-     		
-     	     	std::vector<BakModule*> modules_vec; 
-     	     	
-     	     	void countPrice();
-     	     	void updatePropetries();
 
      		void virtual addUniqueInfo();
           	std::string getFuelStr();

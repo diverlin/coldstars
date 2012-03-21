@@ -25,17 +25,9 @@ RocketEquipment :: RocketEquipment(int ammo_max_orig,
         this->damage_orig   = damage_orig;
         this->radius_orig   = radius_orig;
         
-        ammo_max_add = 0;
-        damage_add   = 0;
-        radius_add   = 0;
-        
         ammo   = ammo_max_orig;
         damage = damage_orig;
         radius = radius_orig;
-  
-        updatePropetries();
-        countPrice();
-        updateInfo();
                 
         data_bullet.texOb = g_TEXTURE_MANAGER.getRandomTexOb(ROCKET_BULLET_TEXTURE_ID);    
         data_bullet.damage        = damage;
@@ -49,12 +41,7 @@ RocketEquipment :: RocketEquipment(int ammo_max_orig,
 
 
 RocketEquipment :: ~RocketEquipment() /* virtual */
-{
-	for (unsigned int i = 0; i < modules_vec.size(); i++)
-	{
-		delete modules_vec[i];
-	}
-}
+{}
 
 
 int RocketEquipment :: getAmmo()   const { return ammo; }
@@ -62,8 +49,20 @@ int RocketEquipment :: getDamage() const { return damage; }
 int RocketEquipment :: getRadius() const { return radius; }
 		
 
+/* virtual */
 void RocketEquipment :: updatePropetries()
 {
+        ammo_max_add = 0;
+        damage_add   = 0;
+        radius_add   = 0;
+        
+    	for (unsigned int i = 0; i < modules_vec.size(); i++)
+    	{
+    		ammo_max_add += ((RocketModule*)modules_vec[i])->getAmmoMaxAdd();
+        	damage_add   += ((RocketModule*)modules_vec[i])->getDamageAdd();
+        	radius_add   += ((RocketModule*)modules_vec[i])->getRadiusAdd();        	
+    	}
+        	
     	ammo_max = ammo_max_orig + ammo_max_add;
     	damage   = damage_orig + damage_add;
     	radius   = radius_orig + radius_add;
@@ -146,26 +145,6 @@ void RocketEquipment :: fireEvent()
 }
 
 
-bool RocketEquipment :: insertModule(RocketModule* _rocket_module)
-{
-    	if (modules_vec.size() < common_data.modules_num_max)
-    	{
-        	ammo_max_add += _rocket_module->getAmmoMaxAdd();
-        	damage_add   += _rocket_module->getDamageAdd();
-        	radius_add   += _rocket_module->getRadiusAdd();
-        
-        	updatePropetries();
-        
-        	texOb_modules_pList.push_back(_rocket_module->getTextureOb());
-        	modules_vec.push_back(_rocket_module);
-        	return true;
-    	}
-    	else
-        	return false;     
-}
-    
-
-
 
 RocketEquipment* getNewRocketEquipment(int race_id, int revision_id)
 {
@@ -204,6 +183,9 @@ RocketEquipment* getNewRocketEquipment(int race_id, int revision_id)
         rocket_equipment->setFunctionalSlotSubTypeId(WEAPON_SLOT_ID);
         rocket_equipment->setItemCommonData(common_data);
                 
+        rocket_equipment->updatePropetries();
+        rocket_equipment->countPrice();
+
         return rocket_equipment;
 }
 

@@ -42,14 +42,15 @@ void DistantStarBgEffect :: render(float vx, float vy)
 
    
    
-DistantStarBgEffect* createDistantStar()
+DistantStarBgEffect* getNewDistantStarBgEffect(int color_id)
 {
-	//TextureOb* texOb_distantStar = g_TEXTURE_MANAGER.getParticleTexObByColorId(YELLOW_COLOR_ID);
-        TextureOb* texOb_distantStar	  = g_TEXTURE_MANAGER.getRandomTexOb(TURREL_TEXTURE_ID);  // fake
+	TextureOb* texOb = NULL;
+	if (color_id == -1) texOb = g_TEXTURE_MANAGER.getRandomTexOb(DISTANTSTAR_TEXTURE_ID);
+	else    	    texOb = g_TEXTURE_MANAGER.getTexObByColorId(DISTANTSTAR_TEXTURE_ID, color_id);
         
         vec2f _center(getRandInt(0, 1000), getRandInt(0, 1000));
         float size = (float)getRandInt(DISTANTSTAR_SIZE_MIN, DISTANTSTAR_SIZE_MAX);
         
-        DistantStarBgEffect* ds = new DistantStarBgEffect(texOb_distantStar, _center, size);
+        DistantStarBgEffect* ds = new DistantStarBgEffect(texOb, _center, size);
         return ds;
 }

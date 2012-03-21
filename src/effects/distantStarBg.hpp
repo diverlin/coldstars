@@ -36,7 +36,7 @@ class DistantStarBgEffect
        	
 }; 
 
-DistantStarBgEffect* createDistantStar();
+DistantStarBgEffect* getNewDistantStarBgEffect(int color_id = -1);
 
 
 #endif 

@@ -24,13 +24,26 @@ class StarSystem;
 class ItemSlot;   
 class Turrel;       
 
-class DockingStation;
 class Planet;
 class Star;
 
 class StateMachine;
 class ScenarioBase;
 class AiModelBase;
+
+class Player;
+class FBO;
+class BloomEffect;
+
+class Galaxy;
+
+class GuiManager;
+class GuiSpace;
+class GuiKosmoport;
+class GuiMap;
+
+
+#include "src/common/constants.hpp"
 
 #include "GL/glew.h"   
 
@@ -42,10 +55,15 @@ class AiModelBase;
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp> 
 
-#include "src/gui/fps.hpp"
+#include "src/common/gameTimer.hpp"
 
 #include "src/common/myVector.hpp"
 #include "src/common/myStr.hpp"
+
+#include "src/gui/fps.hpp"
+#include "src/render/screen.hpp"
+
+
 #include "src/resources/objLoader.hpp"
 
 #include "src/common/gameStruct.hpp"
@@ -65,9 +83,9 @@ class AiModelBase;
 
 #include "src/common/rect.hpp"
 
-#include "src/gui/keyEvents.hpp"
-#include "src/items/baseItem.hpp"
-#include "src/items/modules/baseModule.hpp"
+#include "src/gui/userInput.hpp"
+#include "src/items/itemBase.hpp"
+#include "src/items/modules/moduleBase.hpp"
 #include "src/items/modules/rocketModule.hpp"
 #include "src/items/modules/lazerModule.hpp"
 #include "src/items/modules/radarModule.hpp"
@@ -81,14 +99,14 @@ class AiModelBase;
 #include "src/items/modules/grappleModule.hpp"
 
 #include "src/spaceobjects/spaceObjectBase.hpp" 
-#include "src/spaceobjects/commonForSpaceItems.hpp" 
+#include "src/spaceobjects/spaceItemBase.hpp" 
 
-#include "src/spaceobjects/parts/orbit.hpp" 
-#include "src/spaceobjects/commonForPlanet.hpp" 
-#include "src/spaceobjects/natural/asteroid.hpp"
-#include "src/spaceobjects/natural/mineral.hpp"
+#include "src/spaceobjects/orbit.hpp" 
+#include "src/spaceobjects/planetBase.hpp" 
+#include "src/spaceobjects/asteroid.hpp"
+#include "src/spaceobjects/mineral.hpp"
 #include "src/items/others/bomb.hpp"
-#include "src/spaceobjects/artificial/container.hpp"
+#include "src/spaceobjects/container.hpp"
 #include "src/items/others/goodsPack.hpp"
 
 #include "src/effects/particlesystem/particle.hpp"
@@ -98,9 +116,9 @@ class AiModelBase;
 #include "src/effects/particlesystem/trail.hpp"
 #include "src/effects/particlesystem/damage.hpp"
 
-#include "src/spaceobjects/natural/blackHole.hpp"
+#include "src/spaceobjects/blackHole.hpp"
 
-#include "src/items/equipment/baseEquipment.hpp"
+#include "src/items/equipment/equipmentBase.hpp"
 #include "src/items/equipment/rocketEquipment.hpp"
 #include "src/items/equipment/lazerEquipment.hpp"
 #include "src/items/equipment/radarEquipment.hpp"
@@ -114,16 +132,16 @@ class AiModelBase;
 #include "src/items/equipment/grappleEquipment.hpp"
 
 
-#include "src/docking/parts/kosmoport/landingarea.hpp"
-#include "src/docking/parts/kosmoport/angar.hpp"
-#include "src/docking/parts/kosmoport/shop.hpp"
-#include "src/docking/parts/kosmoport/goverment.hpp"
-#include "src/docking/parts/kosmoport/store.hpp"
-#include "src/docking/parts/kosmoport/kosmoport.hpp"
-#include "src/docking/parts/land/land.hpp"
+#include "src/docking/platform.hpp"
+#include "src/docking/angar.hpp"
+#include "src/docking/shop.hpp"
+#include "src/docking/goverment.hpp"
+#include "src/docking/store.hpp"
+#include "src/docking/landBase.hpp"
+#include "src/docking/kosmoport.hpp"
+#include "src/docking/land.hpp"
 
 #include "src/gui/cursor.hpp"  
-#include "src/pilots/player.hpp"
 
 #include "src/render/render.hpp"
 #include "src/render/glsl.hpp"
@@ -142,20 +160,21 @@ class AiModelBase;
 #include "src/effects/lazerTrace.hpp"
 
 
-#include "src/spaceobjects/natural/star.hpp"  
-#include "src/docking/dockingStation.hpp" 
-#include "src/spaceobjects/natural/planet.hpp"
+#include "src/spaceobjects/star.hpp"  
+#include "src/spaceobjects/planet.hpp"
 
-#include "src/spaceobjects/parts/turrel.hpp"
+#include "src/spaceobjects/turrel.hpp"
 
-#include "src/spaceobjects/parts/itemSlot.hpp"
-#include "src/spaceobjects/parts/driveComplex.hpp"
-#include "src/spaceobjects/parts/weaponComplex.hpp"
+#include "src/spaceobjects//itemSlot.hpp"
+#include "src/spaceobjects/driveComplex.hpp"
+#include "src/spaceobjects/weaponComplex.hpp"
 #include "src/spaceobjects/vehicleBase.hpp"
-#include "src/spaceobjects/artificial/rocketBullet.hpp"
-#include "src/spaceobjects/artificial/starBase.hpp"
-#include "src/spaceobjects/artificial/satellite.hpp"
-#include "src/spaceobjects/artificial/ship.hpp"
+#include "src/spaceobjects/rocketBullet.hpp"
+#include "src/spaceobjects/spaceStation.hpp"
+#include "src/spaceobjects/satellite.hpp"
+#include "src/spaceobjects/ship.hpp"
+
+#include "src/pilots/player.hpp"
 
 #include "src/skill/skill.hpp"
 #include "src/pilots/npc.hpp"           
@@ -185,7 +204,12 @@ class AiModelBase;
 #include "src/gui/guiSpace.hpp"
 #include "src/gui/guiKosmoport.hpp"
 #include "src/gui/guiVehicle.hpp"
-#include "src/world/garbage.hpp"  
+#include "src/gui/guiSkill.hpp"
+#include "src/gui/guiStore.hpp"
+#include "src/gui/guiManager.hpp"
+
+#include "src/world/garbageEffects.hpp"  
+#include "src/world/garbageEntities.hpp"  
 #include "src/world/starsystem.hpp"    
 #include "src/effects/lazerTrace.hpp"
 
@@ -193,8 +217,8 @@ class AiModelBase;
 #include "src/gui/guiMap.hpp"
 
 
-#include "src/common/gameTimer.hpp"
 
+#include "src/common/global.hpp"
 
 
 
@@ -211,32 +235,31 @@ class AiModelBase;
 #include "src/common/rand.cpp"
 #include "src/common/gameStruct.cpp"
 #include "src/common/id.cpp"
-#include "src/common/global.cpp"
-#include "src/common/constants.cpp"
+
 #include "src/common/myVector.cpp"
 #include "src/common/myStr.cpp"
 #include "src/world/galaxy.cpp"
-#include "src/world/garbage.cpp"  
+#include "src/world/garbageEffects.cpp"  
+#include "src/world/garbageEntities.cpp"  
 #include "src/world/starsystem.cpp"  
 
-#include "src/spaceobjects/artificial/container.cpp"    
+#include "src/spaceobjects/container.cpp"    
 #include "src/items/others/goodsPack.cpp"   
-#include "src/spaceobjects/natural/star.cpp"  
-#include "src/docking/dockingStation.cpp" 
-#include "src/spaceobjects/natural/planet.cpp"
+#include "src/spaceobjects/star.cpp"  
+#include "src/spaceobjects/planet.cpp"
 #include "src/spaceobjects/spaceObjectBase.cpp" 
-#include "src/spaceobjects/commonForSpaceItems.cpp" 
-#include "src/spaceobjects/parts/orbit.cpp"
-#include "src/spaceobjects/commonForPlanet.cpp"
-#include "src/spaceobjects/natural/asteroid.cpp"   
-#include "src/spaceobjects/natural/mineral.cpp" 
-#include "src/spaceobjects/artificial/starBase.cpp" 
-#include "src/spaceobjects/artificial/satellite.cpp" 
+#include "src/spaceobjects/spaceItemBase.cpp" 
+#include "src/spaceobjects/orbit.cpp"
+#include "src/spaceobjects/planetBase.cpp"
+#include "src/spaceobjects/asteroid.cpp"   
+#include "src/spaceobjects/mineral.cpp" 
+#include "src/spaceobjects/spaceStation.cpp" 
+#include "src/spaceobjects/satellite.cpp" 
 #include "src/items/others/bomb.cpp" 
-#include "src/spaceobjects/natural/blackHole.cpp"
+#include "src/spaceobjects/blackHole.cpp"
 
-#include "src/items/baseItem.cpp"
-#include "src/items/equipment/baseEquipment.cpp"
+#include "src/items/itemBase.cpp"
+#include "src/items/equipment/equipmentBase.cpp"
 #include "src/items/equipment/rocketEquipment.cpp"
 #include "src/items/equipment/lazerEquipment.cpp"
 #include "src/items/equipment/radarEquipment.cpp"
@@ -249,7 +272,7 @@ class AiModelBase;
 #include "src/items/equipment/scanerEquipment.cpp"
 #include "src/items/equipment/grappleEquipment.cpp"
 
-#include "src/items/modules/baseModule.cpp"
+#include "src/items/modules/moduleBase.cpp"
 #include "src/items/modules/rocketModule.cpp"
 #include "src/items/modules/lazerModule.cpp"
 #include "src/items/modules/radarModule.cpp"
@@ -262,23 +285,27 @@ class AiModelBase;
 #include "src/items/modules/scanerModule.cpp"
 #include "src/items/modules/grappleModule.cpp"
 
-#include "src/docking/parts/kosmoport/landingarea.cpp"
-#include "src/docking/parts/kosmoport/angar.cpp"
-#include "src/docking/parts/kosmoport/store.cpp"
-#include "src/docking/parts/kosmoport/shop.cpp"
-#include "src/docking/parts/kosmoport/goverment.cpp"
-#include "src/docking/parts/kosmoport/kosmoport.cpp"
+#include "src/docking/platform.cpp"
+#include "src/docking/angar.cpp"
+#include "src/docking/store.cpp"
+#include "src/docking/shop.cpp"
+#include "src/docking/goverment.cpp"
+#include "src/docking/landBase.cpp"
+#include "src/docking/kosmoport.cpp"
 
-#include "src/docking/parts/land/land.cpp"
+#include "src/docking/land.cpp"
 
 #include "src/gui/button.cpp"
 #include "src/gui/guiSpace.cpp"
 #include "src/gui/guiKosmoport.cpp"
+#include "src/gui/guiStore.cpp"
+#include "src/gui/guiManager.cpp"
 #include "src/gui/guiVehicle.cpp"
+#include "src/gui/guiSkill.cpp"
 #include "src/gui/guiMap.cpp"
 #include "src/gui/cursor.cpp"   
 
-#include "src/gui/keyEvents.cpp"
+#include "src/gui/userInput.cpp"
 
 #include "src/resources/textureOb.cpp"
 #include "src/resources/textureManager.cpp"
@@ -288,13 +315,13 @@ class AiModelBase;
 #include "src/common/rect.cpp"
 #include "src/common/points.cpp"
 
-#include "src/spaceobjects/parts/itemSlot.cpp"
+#include "src/spaceobjects/itemSlot.cpp"
 
-#include "src/spaceobjects/parts/weaponComplex.cpp"
+#include "src/spaceobjects/weaponComplex.cpp"
 #include "src/spaceobjects/vehicleBase.cpp"
-#include "src/spaceobjects/artificial/ship.cpp"
-#include "src/spaceobjects/parts/driveComplex.cpp"
-#include "src/spaceobjects/parts/turrel.cpp"
+#include "src/spaceobjects/ship.cpp"
+#include "src/spaceobjects/driveComplex.cpp"
+#include "src/spaceobjects/turrel.cpp"
 
 #include "src/effects/distantNebulaBg.cpp"
 #include "src/effects/distantStarBg.cpp"
@@ -306,7 +333,7 @@ class AiModelBase;
 #include "src/effects/particlesystem/damage.cpp"
 #include "src/effects/lazerTrace.cpp"
 #include "src/effects/shield.cpp"
-#include "src/spaceobjects/artificial/rocketBullet.cpp"
+#include "src/spaceobjects/rocketBullet.cpp"
 
 #include "src/pilots/player.cpp"
 #include "src/skill/skill.cpp"
@@ -345,6 +372,7 @@ class AiModelBase;
 #include "src/text/textstuff.cpp"
 
 #include "src/gui/fps.cpp"
+#include "src/render/screen.cpp"
 #include "src/common/gameTimer.cpp"
 
 ////////////////////////////////////////////

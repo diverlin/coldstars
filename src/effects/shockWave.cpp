@@ -17,20 +17,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "shockWave.hpp"
 
 
-
-ShockWaveEffect :: ShockWaveEffect(vec2f _center_pos, 
+ShockWaveEffect :: ShockWaveEffect(vec2f center, 
  				   float _x, float _y, float _z, float _time, 
  				   float _d_x, float _d_y, float _d_z, float _d_time)
 {
 	is_alive = true;
         is_alreadyInRemoveQueue = false;
 
-        //starsystem = NULL;
-        center.set(_center_pos.x/float(g_VIEW_WIDTH), _center_pos.y/float(g_VIEW_HEIGHT));
-
+	this->center = center;
+	
         parameter.set(_x, _y, _z);
         time = _time; 
 
@@ -66,10 +63,7 @@ void ShockWaveEffect :: update()
 	}	         
 }
              
-
-
-
-
+        
 void createShockWave(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 {
 	//int w = g_VIEW_WIDTH;

@@ -24,13 +24,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class GuiSpace
 {
     	public:
-      		GuiSpace();
+      		GuiSpace(Player*);
        		~GuiSpace();
 
 		void update();
 		void render();
        		
        	private:
+       		Player* player;
+       		
        		std::vector<Button*> button_vec;
        		
        		Button* galaxymap_screen_button; 
@@ -40,7 +42,7 @@ class GuiSpace
        		
        		void renderInternal() const;
        		void renderInfo() const;
-       		void renderText() const;
+       		void renderText(vec2f) const;
 };
 
 

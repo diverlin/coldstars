@@ -20,6 +20,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef GLSL_H
 #define GLSL_H
 
+struct Shaders
+{
+	GLuint black2alpha;
+	GLuint shockwave;
+	GLuint volumetriclight;
+	GLuint light;
+	GLuint blur;
+	GLuint extractbright;
+	GLuint combine;
+	GLuint multitexturing;
+};
 
 void compile_program(const GLchar *vertex_source, const GLchar* fragment_source, GLuint* pTo_program);
 

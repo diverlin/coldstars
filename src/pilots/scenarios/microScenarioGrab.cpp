@@ -24,19 +24,19 @@ MicroScenarioGrab :: MicroScenarioGrab()
 MicroScenarioGrab :: ~MicroScenarioGrab()
 {}
 		
-void MicroScenarioGrab :: Enter(Npc* _npc) const
+void MicroScenarioGrab :: Enter(Npc* npc) const
 {	
-	printf("npc_id = %i, STARTS MicroScenarioGrab item id = %i\n", _npc->getId(), _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getId());
+	printf("npc_id = %i, STARTS MicroScenarioGrab item id = %i\n", npc->getId(), npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getId());
 }
 
-void MicroScenarioGrab :: update_inStatic(Npc* _npc) const
+void MicroScenarioGrab :: update_inStatic(Npc* npc) const
 {
               
-        for (unsigned int i = 0; i < _npc->observation->visible_MINERAL_vec.size(); i++)
+        for (unsigned int i = 0; i < npc->getObservation()->visible_MINERAL_vec.size(); i++)
         {                	
-		if ( _npc->observation->visible_MINERAL_vec[i].dist < _npc->getVehicle()->getGrappleSlot()->getGrappleEquipment()->getRadius() )
+		if ( npc->getObservation()->visible_MINERAL_vec[i].dist < npc->getVehicle()->getGrappleSlot()->getGrappleEquipment()->getRadius() )
                 {                                       
-                	_npc->getVehicle()->getGrappleSlot()->getGrappleEquipment()->addTarget(_npc->observation->visible_MINERAL_vec[i].mineral);
+                	npc->getVehicle()->getGrappleSlot()->getGrappleEquipment()->addTarget(npc->getObservation()->visible_MINERAL_vec[i].mineral);
                 }
                 else
                 {
@@ -44,52 +44,57 @@ void MicroScenarioGrab :: update_inStatic(Npc* _npc) const
                 }
         }
         
-        //_npc->getVehicle()->getDriveComplex()->setTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getNpc()->getVehicle(), FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID );
+        npc->getVehicle()->getDriveComplex()->setTarget(npc->getStateMachine()->getCurrentMicroTask()->getTarget(), FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID);
 }
 
-void MicroScenarioGrab :: update_inDynamic(Npc* _npc) const
+void MicroScenarioGrab :: update_inDynamic(Npc* npc) const
 {
-        //_npc->getShip()->grapple_slot.getGrappleEquipment()->validationTargets();  
+	GrappleEquipment* grapple_equipment = npc->getVehicle()->getGrappleSlot()->getGrappleEquipment();
+        grapple_equipment->validateTargets();  
                 
-        //for (unsigned int i = 0; i < _npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec.size(); i++)
-        //{	//printf("blablabla\n");
-                //if (_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getValid() == true)
-                //{
-                	////printf("blablabla\n");
-                       	//_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->moveExternalyToPosition(_npc->getShip()->getPoints()->getCenter());        	
+        for (unsigned int i = 0; i < grapple_equipment->target_vec.size(); i++)
+        {	
+               	grapple_equipment->target_vec[i]->movingByExternalForce(npc->getVehicle()->getPoints()->getCenter(), grapple_equipment->getStrength());        	
        	
-        		//float dist = distBetweenPoints(_npc->getShip()->getPoints()->getCenter(), *_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getpCenter() ); 
-        		//if (dist < _npc->getShip()->getCollisionRadius()/10)
-        		//{
-        			//if (_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getObTypeId() == MINERAL_ID)
-        			//{
-        				//GoodsPack* _goodsPack = createGoodsPack(MINERAL_ID, vec2f (0, 0));
-        				//_goodsPack->increase(_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getMineral()->getMass());
-        				//ItemSlot* _slot = _npc->getShip()->getEmptyOtsecSlot();
-        				//if (_slot != NULL)
-        				//{
-        					//_slot->insertGoods(_goodsPack);
-        					//_npc->getStarSystem()->killMineralById(_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getObId());   
-        					//_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->reset();
-        				//}			
-        			//}
+       		float dist = distBetweenPoints(npc->getVehicle()->getPoints()->getCenter(), grapple_equipment->target_vec[i]->getPoints()->getCenter()); 
+       		if (dist < npc->getVehicle()->getCollisionRadius()/10)
+       		{
+       			if (grapple_equipment->target_vec[i]->getTypeId() == MINERAL_ID)
+       			{
+       				GoodsPack* goodsPack = getNewGoodsPack(MINERAL_ID);
+       				goodsPack->increase(grapple_equipment->target_vec[i]->getMass());
+       				ItemSlot* slot = npc->getVehicle()->getEmptyOtsecSlot();
+       				if (slot != NULL)
+       				{
+       					slot->insertItem(goodsPack);
+       					grapple_equipment->addToRemoveQueue(grapple_equipment->target_vec[i]);
+
+       					npc->getStarSystem()->addToRemoveFromOuterSpaceQueue((Mineral*)grapple_equipment->target_vec[i]);  
+       				}			
+       			}
         			
-        			//if (_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getObTypeId() == CONTAINER_ID)
-        			//{
-        				//_npc->getStarSystem()->removeContainer(_npc->getShip()->grapple_slot.getGrappleEquipment()->target_vec[i]->getObId());
-        			//}
-        		//}
-        	//}
-        //}
+       			if (grapple_equipment->target_vec[i]->getTypeId() == CONTAINER_ID)
+       			{
+       				ItemSlot* slot = npc->getVehicle()->getEmptyOtsecSlot();
+       				if (slot != NULL)
+       				{
+       					slot->extractContainer((Container*)grapple_equipment->target_vec[i]);
+       					grapple_equipment->addToRemoveQueue(grapple_equipment->target_vec[i]);
+
+       					npc->getStarSystem()->addToRemoveFromOuterSpaceQueue((Container*)grapple_equipment->target_vec[i]);  
+       				}	
+       			}
+        	}
+        }
 }
 
-void MicroScenarioGrab :: Exit(Npc* _npc) const
+void MicroScenarioGrab :: Exit(Npc* npc) const
 {
-	printf("npc_id = %i, ends MicroScenarioGrab\n", _npc->getId());
+	printf("npc_id = %i, ends MicroScenarioGrab\n", npc->getId());
 }
 
 
-std::string MicroScenarioGrab :: getDescription(Npc* _npc) const 
+std::string MicroScenarioGrab :: getDescription(Npc* npc) const 
 {
-	return "GRAB to ob id = %i\n" + int2str( _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getId());
+	return "GRAB to ob id = %i\n" + int2str(npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getId());
 }
