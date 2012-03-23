@@ -24,10 +24,10 @@ int main()
 {       
  	init();  
 	
-	GameTimer* TIMER = new GameTimer();
+  GameTimer* TIMER = new GameTimer();
 
 	 	
-        Galaxy* galaxy = getNewGalaxy();
+  Galaxy* galaxy = getNewGalaxy();
         Player* player = getNewPlayer(galaxy);
  	
  	player->getScreen()->resize(SCREEN_WIDTH_MIN, SCREEN_HEIGHT_MIN);
