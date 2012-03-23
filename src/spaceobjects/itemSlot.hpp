@@ -96,7 +96,7 @@ class ItemSlot
                 void updateRange(TextureOb*);
            	void drawRange();
            	
-           	bool isTargetOk(SpaceObjectBase*) const;
+           	bool isTargetOk(BaseGameEntity*) const;
         
         private:
                 int type_id, subtype_id;               
@@ -118,8 +118,8 @@ class ItemSlot
            	
            	int getItemRadius() const;
            	                
-                bool isStarSystemOk(SpaceObjectBase*) const;
-           	bool isDistanceOk(SpaceObjectBase*) const;
+                bool isStarSystemOk(BaseGameEntity*) const;
+           	bool isDistanceOk(BaseGameEntity*) const;
 }; 
 
 #endif

@@ -17,22 +17,30 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef GARBAGEENTITIES_H
-#define GARBAGEENTITIES_H
-
-
-class GarbageEntities
+EntityManager& EntityManager::Instance()
 {
-	public:
-		GarbageEntities();
-		~GarbageEntities();
-		
-		void add(BaseGameEntity*);
-		
-		void clear();
-	
-	private:
-		std::vector<BaseGameEntity*> entities_vec;
-};
-     		
-#endif 
+  	static EntityManager instance;
+  	return instance;
+}
+
+void EntityManager::RegisterEntity(BaseGameEntity* new_entity)
+{
+  	entity_map.insert(std::make_pair(new_entity->getId(), new_entity));
+}
+
+BaseGameEntity* EntityManager::GetEntityById(int id) const
+{
+  	std::map<int, BaseGameEntity*>::const_iterator slice = entity_map.find(id);
+
+  	//assert((slice !=  entity_map.end()) && "<EntityManager::getEntityById>: invalid Id");
+
+  	return slice->second;
+}
+
+void EntityManager::RemoveEntity(BaseGameEntity* entity)
+{    
+  	entity_map.erase(entity_map.find(entity->getId()));
+} 
+
+EntityManager& GetEntityManager() { return EntityManager::Instance(); }
+

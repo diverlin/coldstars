@@ -74,7 +74,7 @@ void DamageEffect :: render()
 
 
 
-DamageEffect* getNewDamageEffect(int color_id, SpaceObjectBase* parent)
+DamageEffect* getNewDamageEffect(int color_id, BaseGameEntity* parent)
 {
 	int particles_num = 10;
    
