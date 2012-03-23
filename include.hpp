@@ -60,7 +60,6 @@ class GuiMap;
 #include "src/common/myVector.hpp"
 #include "src/common/myStr.hpp"
 
-#include "src/gui/fps.hpp"
 #include "src/render/screen.hpp"
 
 #include "src/gui/window.hpp"
@@ -373,7 +372,6 @@ class GuiMap;
 
 #include "src/text/textstuff.cpp"
 
-#include "src/gui/fps.cpp"
 #include "src/render/screen.cpp"
 #include "src/common/gameTimer.cpp"
 
