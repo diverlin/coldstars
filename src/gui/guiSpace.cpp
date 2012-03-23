@@ -115,10 +115,10 @@ void GuiSpace :: renderText(vec2f scroll_coords) const
 {
        	std::string _coord_str = "world coord: " + int2str(scroll_coords.x) + "," + int2str(scroll_coords.y);
 
-       	sf::String _str(_coord_str, g_FONT, 14);
+       	sf::String _str(_coord_str, Gui::GetFont(), 14);
        	_str.SetColor(sf::Color(255, 255, 255));
        	_str.SetPosition(SCREEN_WIDTH_MIN - 200, 15); 
 
-       	g_APP.Draw(_str);    
+       	Gui::GetWindow().Draw(_str);    
 }
 

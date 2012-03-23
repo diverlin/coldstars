@@ -53,17 +53,17 @@ void Screen :: resize(int width, int height)
 	this->width  = width;
 	this->height = height;
 	
-	//sf::View newView = g_APP.GetView( );
+	//sf::View newView = Gui::GetWindow().GetView( );
 				
-	g_APP.SetSize(width, height);
+	Gui::GetWindow().SetSize(width, height);
 	//glViewport(0, 0, width, height);
 	
 	//sf::View view(sf::FloatRect(0, 0, width, height));
 	//sf::View view(sf::FloatRect(-500, -500, 500, 500));
-	//g_APP.SetView(view);
+	//Gui::GetWindow().SetView(view);
 		
-	//g_APP.SetView(g_APP.GetDefaultView());
-	//g_APP.Create(sf::VideoMode(width, height, g_BPP), "SFML Window");
+	//Gui::GetWindow().SetView(g_APP.GetDefaultView());
+	//Gui::GetWindow().Create(sf::VideoMode(width, height, g_BPP), "SFML Window");
 	    	
 	resizeGl();
 		
@@ -101,7 +101,7 @@ void Screen :: update()
 void Screen :: display()		
 {
 	fps->draw(); 
-        g_APP.Display();
+        Gui::GetWindow().Display();
 }
 
 

@@ -17,14 +17,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-bool g_USE_MODERN_HW = true;
+bool g_USE_MODERN_HW = false;
 bool g_DEBUG = false;            // debug 
 bool g_AUTOTURN_ENABLE = false;  // debug
 int  g_GAMESPEED = 1;
 
-
-sf::RenderWindow g_APP(sf::VideoMode(SCREEN_WIDTH_MIN, SCREEN_HEIGHT_MIN, g_BPP), "cold star V0.0.4.49 (SFML/C++)");
-sf::Font g_FONT;
 
 sf::Clock g_CLOCK;
 

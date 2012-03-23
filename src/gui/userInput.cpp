@@ -62,11 +62,11 @@ void UserInput :: getSimpleInputs()
 
 	sf::Event event;
 
-	while (g_APP.GetEvent(event))
+	while (Gui::GetWindow().GetEvent(event))
 	{
 	        // Close window : exit
 	        if (event.Type == sf::Event::Closed)
-		    	g_APP.Close();
+		    	Gui::GetWindow().Close();
                           
 	        // Resize event : adjust viewport
 	        if (event.Type == sf::Event::Resized)
@@ -282,7 +282,7 @@ void UserInput :: getSimpleInputs()
 
 void UserInput :: getRealTimeInputs()
 {       
-        const sf::Input& Input = g_APP.GetInput();
+        const sf::Input& Input = Gui::GetWindow().GetInput();
               
         // KEYBOARD input
         keyboardLeftPressed  = Input.IsKeyDown(sf::Key::Left);   
