@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 RocketBullet :: RocketBullet(BulletData _data_bullet, 			     
-                             SpaceObjectBase* target,
+                             BaseGameEntity* target,
 			     int _owner_id)
 {
 	data_bullet = _data_bullet;

@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef NPC_H
 #define NPC_H
 
-class Npc : public SpaceObjectBase
+class Npc : public BaseGameEntity
 {
    	public:
               	Npc(int _race_id, 

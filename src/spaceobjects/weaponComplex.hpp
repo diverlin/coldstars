@@ -39,7 +39,7 @@ class WeaponComplex
         	
                	void prepareWeapons();
                      
-                void setTarget(SpaceObjectBase*);     
+                void setTarget(BaseGameEntity*);     
        
         	void fire(int timer, bool);
 

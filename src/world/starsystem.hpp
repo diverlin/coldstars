@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define STARSYSTEM_H
 
 
-class StarSystem : public SpaceObjectBase
+class StarSystem : public BaseGameEntity
 {
 	public:
 		Star* getStar() const;
@@ -86,11 +86,11 @@ class StarSystem : public SpaceObjectBase
     		//// TRANSITION
                 void addToHyperJumpQueue(Npc*);
                                 
-    		void addToSpace(VehicleBase*, vec2f, float, SpaceObjectBase*);
+    		void addToSpace(VehicleBase*, vec2f, float, BaseGameEntity*);
     		void addToSpace(Npc*);
 
                 void addToSpace(Star*);
-                void addToSpace(Planet*, SpaceObjectBase*);
+                void addToSpace(Planet*, BaseGameEntity*);
     		void addToSpace(Asteroid*);
     		void addToSpace(Mineral*, vec2f);
     		void addToSpace(Container*, vec2f);

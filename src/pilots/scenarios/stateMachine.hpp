@@ -27,8 +27,8 @@ class StateMachine
 		StateMachine(Npc*);
 		~StateMachine();
 
-		void setCurrentMicroTask(ScenarioBase*, SpaceObjectBase*);
-		void setCurrentMacroTask(ScenarioBase*, SpaceObjectBase*);
+		void setCurrentMicroTask(ScenarioBase*, BaseGameEntity*);
+		void setCurrentMacroTask(ScenarioBase*, BaseGameEntity*);
 		
 		TaskHolder* getCurrentMacroTask() const;
 		TaskHolder* getPreviousMacroTask() const;	

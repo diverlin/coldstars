@@ -25,7 +25,7 @@ class RocketBullet : public VehicleBase
 {
         public:
                 RocketBullet(BulletData,  
-                	     SpaceObjectBase*, 
+                	     BaseGameEntity*, 
                 	     int _owner_id);
                 	     
                 ~RocketBullet();
@@ -54,7 +54,7 @@ class RocketBullet : public VehicleBase
                 float dx, dy;
                 float angle_inD;                
                 
-                SpaceObjectBase* target;
+                BaseGameEntity* target;
                
                 void deathEventUnique(bool);
                 

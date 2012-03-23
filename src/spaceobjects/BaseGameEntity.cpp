@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-SpaceObjectBase :: SpaceObjectBase()
+BaseGameEntity :: BaseGameEntity()
 {
         angle.x        = getRandInt(10, 40);
         angle.y        = getRandInt(10, 40);
@@ -37,17 +37,17 @@ SpaceObjectBase :: SpaceObjectBase()
 }
 
 
-SpaceObjectBase :: ~SpaceObjectBase()
+BaseGameEntity :: ~BaseGameEntity()
 {}
                	
                	
-void SpaceObjectBase :: createCenter()
+void BaseGameEntity :: createCenter()
 {
 	points.initCenterPoint();
 	points.addCenterPoint();
 }
 
-void SpaceObjectBase :: updateRotation()
+void BaseGameEntity :: updateRotation()
 {
 	angle.x += d_angle.x;  
      	angle.y += d_angle.y;  
@@ -55,7 +55,7 @@ void SpaceObjectBase :: updateRotation()
      	//printf("1. angle = %f\n", angle.z);
 }
 
-void SpaceObjectBase :: movingByExternalForce(vec2f _target, float force)
+void BaseGameEntity :: movingByExternalForce(vec2f _target, float force)
 {
 	vec2f d_pos;
         get_dX_dY_ToPoint(points.getCenter().x, points.getCenter().y, _target.x, _target.y, force, &d_pos.x, &d_pos.y);
@@ -64,7 +64,7 @@ void SpaceObjectBase :: movingByExternalForce(vec2f _target, float force)
 }
 
 
-void SpaceObjectBase :: hit(int damage, bool show_effect)
+void BaseGameEntity :: hit(int damage, bool show_effect)
 {
      	data_life.armor -= damage;
      	if (data_life.armor <= 0)
@@ -83,7 +83,7 @@ void SpaceObjectBase :: hit(int damage, bool show_effect)
        	
 }
 
-void SpaceObjectBase :: checkDeath(bool show_effect)
+void BaseGameEntity :: checkDeath(bool show_effect)
 {
 	if (data_life.is_alive == false)
      	{

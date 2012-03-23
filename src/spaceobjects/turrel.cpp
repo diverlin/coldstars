@@ -35,7 +35,7 @@ Turrel :: Turrel(ItemSlot* _slot, vec2f* _pCenter)
 Turrel :: ~Turrel()
 {}
 
-void Turrel :: setTarget(SpaceObjectBase* target) { this->target = target; }
+void Turrel :: setTarget(BaseGameEntity* target) { this->target = target; }
 void Turrel :: resetTarget() { target = NULL; }
 
 void Turrel :: setSelectedStatus(bool _selected) { is_SELECTED = _selected; }    
@@ -43,7 +43,7 @@ void Turrel :: setSelectedStatus(bool _selected) { is_SELECTED = _selected; }
 bool Turrel :: getSelectedStatus() const { return is_SELECTED; }
 Points* Turrel :: getPoints()            { return &points; }
   
-SpaceObjectBase* Turrel :: getTarget() const { return target; }
+BaseGameEntity* Turrel :: getTarget() const { return target; }
 
 void Turrel :: setTexOb(TextureOb* _texOb)
 {
