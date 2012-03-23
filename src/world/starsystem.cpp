@@ -686,7 +686,7 @@ void StarSystem :: asteroidManager_s(unsigned int num)
 
 
 
-void StarSystem :: addToSpace(VehicleBase* vehicle, vec2f center, float angle, SpaceObjectBase* parent)
+void StarSystem :: addToSpace(VehicleBase* vehicle, vec2f center, float angle, BaseGameEntity* parent)
 {
      	vehicle->setPlaceTypeId(SPACE_ID);
      	vehicle->setStarSystem(this);  
@@ -753,7 +753,7 @@ void StarSystem :: addToSpace(Star* star)
         STAR_vec.push_back(star);
 }
 
-void StarSystem :: addToSpace(Planet* planet, SpaceObjectBase* parent)
+void StarSystem :: addToSpace(Planet* planet, BaseGameEntity* parent)
 {
 	planet->createOrbit();
         planet->setParent(parent);

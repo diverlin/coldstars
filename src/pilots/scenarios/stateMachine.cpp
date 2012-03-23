@@ -68,7 +68,7 @@ void StateMachine :: update_inDynamic()
 }
 	
 		
-void StateMachine :: setCurrentMacroTask(ScenarioBase* _new_state,  SpaceObjectBase* _target)
+void StateMachine :: setCurrentMacroTask(ScenarioBase* _new_state, BaseGameEntity* _target)
 {
 	if (previous_macroTask->getScenario() != NULL)
 	{
@@ -85,7 +85,7 @@ void StateMachine :: setCurrentMacroTask(ScenarioBase* _new_state,  SpaceObjectB
 }
 
 				
-void StateMachine :: setCurrentMicroTask(ScenarioBase* _new_state,  SpaceObjectBase* _target)
+void StateMachine :: setCurrentMicroTask(ScenarioBase* _new_state,  BaseGameEntity* _target)
 {
 	if (previous_microTask->getScenario() != NULL)
 	{

@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define SPACEITEMBASE_H
 
 
-class SpaceItemBase : public SpaceObjectBase
+class SpaceItemBase : public BaseGameEntity
 {   
 	public:
         	SpaceItemBase();

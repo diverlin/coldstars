@@ -300,7 +300,7 @@ void ItemSlot :: drawRange()
 }
 
 
-bool ItemSlot :: isTargetOk(SpaceObjectBase* _target) const
+bool ItemSlot :: isTargetOk(BaseGameEntity* _target) const
 {
         if (_target->getAlive() == true)
         {
@@ -317,7 +317,7 @@ bool ItemSlot :: isTargetOk(SpaceObjectBase* _target) const
 }
 
 
-bool ItemSlot :: isStarSystemOk(SpaceObjectBase* _target) const
+bool ItemSlot :: isStarSystemOk(BaseGameEntity* _target) const
 {
         if (_target->getStarSystem() == owner_vehicle->getStarSystem())
         {
@@ -327,7 +327,7 @@ bool ItemSlot :: isStarSystemOk(SpaceObjectBase* _target) const
         return false;
 }                
 
-bool ItemSlot :: isDistanceOk(SpaceObjectBase* _target) const
+bool ItemSlot :: isDistanceOk(BaseGameEntity* _target) const
 {
 	if (_target->getTypeId() == STARSYSTEM_ID)
 	{
