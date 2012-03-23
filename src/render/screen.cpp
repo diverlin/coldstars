@@ -53,11 +53,9 @@ void Screen :: resize(int width, int height)
 	this->width  = width;
 	this->height = height;
 			
-
-	view = new sf::View(sf::FloatRect(0, 0, width, height));
-	Gui::GetWindow().SetView(*view);		
+	view.SetFromRect(sf::FloatRect(0, 0, width, height));
+	Gui::GetWindow().SetView(view);		
 	Gui::GetWindow().SetSize(width, height);
-
 	    	
 	resizeGl();
 		

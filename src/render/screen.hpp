@@ -65,7 +65,7 @@ class Screen
       		vec2f topRight_globalCoord;
       		vec2f bottomLeft_globalCoord;
       		
-      		sf::View* view;
+      		sf::View view;
       		
       		void initGl();
       		void resizeGl();

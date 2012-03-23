@@ -31,7 +31,7 @@ int main()
   Galaxy* galaxy = getNewGalaxy();
   Player* player = getNewPlayer(galaxy);
 
-  player->getScreen()->resize(SCREEN_WIDTH_MIN, SCREEN_HEIGHT_MIN);
+  player->getScreen()->resize(SCREEN_WIDTH_MIN*2, SCREEN_HEIGHT_MIN);
 
   // GAME LOOP
   while (Gui::GetWindow().IsOpened())
