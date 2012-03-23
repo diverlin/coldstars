@@ -50,7 +50,6 @@ class Screen
 	private:
       		int width, height;
       		int bpp;
-      		int fps_max;
       		bool vert_sync;
       		
       		FBO* fbo0;
@@ -59,8 +58,6 @@ class Screen
 		FBO* fbo3;
 
 		BloomEffect* bloom;
-      		
-      		Fps* fps;
       		
       		vec2f topRight_globalCoord;
       		vec2f bottomLeft_globalCoord;

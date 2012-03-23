@@ -14,6 +14,7 @@ namespace Gui
       static Window& instanse();
       sf::RenderWindow& GetWindow();
       sf::Font& GetFont();
+      void Update();
     private:
       Window();
       ~Window();
@@ -22,9 +23,13 @@ namespace Gui
 
       sf::RenderWindow general_window;
       sf::Font font;
+
+      //
+      void DrawFsp();
   };
   sf::RenderWindow& GetWindow();
   sf::Font& GetFont();
+  void Update();
 }
 
 #endif // WINDOW_H
