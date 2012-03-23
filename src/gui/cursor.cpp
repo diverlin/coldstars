@@ -50,7 +50,7 @@ ItemSlot* Cursor :: getSlot() { return slot; }
 		
 void Cursor :: updateMousePos()
 {
-        const sf::Input& Input = g_APP.GetInput();
+        const sf::Input& Input = Gui::GetWindow().GetInput();
         mouse_pos.set(Input.GetMouseX(), Input.GetMouseY());
 }
 

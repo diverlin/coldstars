@@ -18,44 +18,44 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 #include "include.hpp"
+#include "iostream"
 
 
 int main()
 {       
- 	init();  
-	
+  init();  
+
   GameTimer* TIMER = new GameTimer();
 
-	 	
+
   Galaxy* galaxy = getNewGalaxy();
-        Player* player = getNewPlayer(galaxy);
- 	
- 	player->getScreen()->resize(SCREEN_WIDTH_MIN, SCREEN_HEIGHT_MIN);
+  Player* player = getNewPlayer(galaxy);
 
+  player->getScreen()->resize(SCREEN_WIDTH_MIN, SCREEN_HEIGHT_MIN);
 
-    	// GAME LOOP
-    	while (g_APP.IsOpened())
-    	{    
-    		/* server code start */
-    		TIMER->update();    		
-       				
-		for (int i = 0; i < g_GAMESPEED; i++)  // fake implementation (static ai should not be run several times at once)
-		{
-       			galaxy->update_s(TIMER->getTurnTick());
-       		}
-       		        
-       		if ((TIMER->getTurnEnded() == true) and (player->getNextTurnReady()))
-              	{
-              	       	TIMER->nextTurn();
-              	}              	
-       		/* server code end */
+  // GAME LOOP
+  while (Gui::GetWindow().IsOpened())
+  {    
+    /* server code start */
+    TIMER->update();    		
 
-		/* client code start */
-		player->runSession(TIMER);
-            	/* client code end */           	
-    	}
+    for (int i = 0; i < g_GAMESPEED; i++)  // fake implementation (static ai should not be run several times at once)
+    {
+      galaxy->update_s(TIMER->getTurnTick());
+    }
 
-    	return EXIT_SUCCESS;
+    if ((TIMER->getTurnEnded() == true) and (player->getNextTurnReady()))
+    {
+      TIMER->nextTurn();
+    }              	
+    /* server code end */
+
+    /* client code start */
+    player->runSession(TIMER);
+    /* client code end */           	
+  }
+
+  return EXIT_SUCCESS;
 }
 
 

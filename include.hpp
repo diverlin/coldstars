@@ -63,6 +63,8 @@ class GuiMap;
 #include "src/gui/fps.hpp"
 #include "src/render/screen.hpp"
 
+#include "src/gui/window.hpp"
+#include "src/gui/window.cpp"
 
 #include "src/resources/objLoader.hpp"
 
