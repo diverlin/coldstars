@@ -1,0 +1,9 @@
+#####################################################################
+# Project: Iron Plague
+# License: see in << /data/license/Iron_Plague.txt >>
+##################################
+filename     << original filename 
+lazer.png
+##################################
+
+

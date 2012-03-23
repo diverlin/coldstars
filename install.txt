@@ -1,0 +1,25 @@
+Draft
+***linux***
+1) install:
+ libsfml-dev (version 1.6)
+ libglew1.5-dev (1.6-dev)
+	This package is needed for compilation.
+
+2) install:
+ libsfml-audio1.6
+ libsfml-graphic1.6
+ libsfml-network1.6
+ libsfml-system1.6
+ libsfml-window1.6
+ libglew1.5 (1.6)
+	These packages is needed for game execution
+
+3) unpack game archive (source code and game data are included)
+
+4) inside game folder run following command in terminal
+make 
+
+5) to run game run terminal command ./main
+
+
+***Windows***
