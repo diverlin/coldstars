@@ -30,10 +30,10 @@ TaskHolder :: ~TaskHolder()
 {}
 
 bool TaskHolder :: getValid() const { return is_valid; }
-SpaceObjectBase*  TaskHolder :: getTarget() const { return target; }	
+BaseGameEntity*  TaskHolder :: getTarget() const { return target; }	
 ScenarioBase* TaskHolder :: getScenario()   const { return scenario; }
 
-void TaskHolder :: set(ScenarioBase* scenario, SpaceObjectBase* target)
+void TaskHolder :: set(ScenarioBase* scenario, BaseGameEntity* target)
 {
 	is_valid = true;
 	

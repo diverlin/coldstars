@@ -40,7 +40,7 @@ GrappleEquipment :: ~GrappleEquipment()
         //}
 //}
 
-void GrappleEquipment :: addTarget(SpaceObjectBase* _target)
+void GrappleEquipment :: addTarget(BaseGameEntity* _target)
 {
         validateTargets();
         
@@ -59,7 +59,7 @@ void GrappleEquipment :: addTarget(SpaceObjectBase* _target)
         }        
 }
 
-void GrappleEquipment :: addToRemoveQueue(SpaceObjectBase* target)
+void GrappleEquipment :: addToRemoveQueue(BaseGameEntity* target)
 {
         remove_queue.push_back(target);
 }
