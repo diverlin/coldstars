@@ -37,7 +37,7 @@ BaseParticleSystem :: ~BaseParticleSystem()
 void BaseParticleSystem :: setTextureOb(TextureOb* texOb) { this->texOb = texOb; }
                 
 void BaseParticleSystem :: setDying()                  { is_dying = true; }
-void BaseParticleSystem :: setParent(SpaceObjectBase* parent) { this->parent = parent; } 
+void BaseParticleSystem :: setParent(BaseGameEntity* parent) { this->parent = parent; } 
 void BaseParticleSystem :: setPosition(vec2f center)          { this->center = center; }
 void BaseParticleSystem :: setParticlesNum(int num_particles) { this->num_particles = num_particles; }
 void BaseParticleSystem :: setParticleData(ParticleData data_particle) { this->data_particle = data_particle; }

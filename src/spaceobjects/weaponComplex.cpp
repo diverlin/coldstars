@@ -232,7 +232,7 @@ bool WeaponComplex :: isAnyWeaponSelected() const
 }
 
 
-void WeaponComplex :: setTarget(SpaceObjectBase* _target)
+void WeaponComplex :: setTarget(BaseGameEntity* _target)
 {                          
         float dist = distBetweenPoints(owner_vehicle->getPoints()->getCenter(), _target->getPoints()->getCenter());
         

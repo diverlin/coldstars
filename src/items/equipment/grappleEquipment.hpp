@@ -39,12 +39,12 @@ class GrappleEquipment : public EquipmentBase
 
       		virtual void updateOwnerAbilities();
                 
-                void addTarget(SpaceObjectBase*);
-                void addToRemoveQueue(SpaceObjectBase*);
+                void addTarget(BaseGameEntity*);
+                void addToRemoveQueue(BaseGameEntity*);
                 
                 void validateTargets();
-                std::vector<SpaceObjectBase*> target_vec;
-                std::vector<SpaceObjectBase*> remove_queue;
+                std::vector<BaseGameEntity*> target_vec;
+                std::vector<BaseGameEntity*> remove_queue;
                 
 		std::string getTargetStr() const;
 		

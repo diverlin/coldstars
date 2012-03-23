@@ -52,18 +52,12 @@ void Screen :: resize(int width, int height)
 {
 	this->width  = width;
 	this->height = height;
-	
-	//sf::View newView = Gui::GetWindow().GetView( );
-				
+			
+
+	view = new sf::View(sf::FloatRect(0, 0, width, height));
+	Gui::GetWindow().SetView(*view);		
 	Gui::GetWindow().SetSize(width, height);
-	//glViewport(0, 0, width, height);
-	
-	//sf::View view(sf::FloatRect(0, 0, width, height));
-	//sf::View view(sf::FloatRect(-500, -500, 500, 500));
-	//Gui::GetWindow().SetView(view);
-		
-	//Gui::GetWindow().SetView(g_APP.GetDefaultView());
-	//Gui::GetWindow().Create(sf::VideoMode(width, height, g_BPP), "SFML Window");
+
 	    	
 	resizeGl();
 		

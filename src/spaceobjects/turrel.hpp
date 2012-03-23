@@ -28,13 +28,13 @@ class Turrel
 
                 void setTexOb(TextureOb*);
                               
-                void setTarget(SpaceObjectBase*);
+                void setTarget(BaseGameEntity*);
                 void setSelectedStatus(bool);
                 
                 bool getSelectedStatus() const;
                 Points* getPoints();
                 
-                SpaceObjectBase* getTarget() const;
+                BaseGameEntity* getTarget() const;
        
                 void resetTarget();
                        
@@ -50,7 +50,7 @@ class Turrel
                 TextureOb* texOb;
                         
                 ItemSlot* slot;
-                SpaceObjectBase* target;
+                BaseGameEntity* target;
                 
                 bool is_SELECTED;                        
                

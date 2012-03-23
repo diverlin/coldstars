@@ -29,7 +29,7 @@ class BaseParticleSystem
 
       		void setDying();
                 void setTextureOb(TextureOb*);
-                void setParent(SpaceObjectBase*);
+                void setParent(BaseGameEntity*);
                 void setPosition(vec2f);
                 void setParticlesNum(int);
                 void setParticleData(ParticleData);
@@ -46,7 +46,7 @@ class BaseParticleSystem
        		TextureOb* texOb;
        		ParticleData data_particle;
        		vec2f center;
-                SpaceObjectBase* parent;
+                BaseGameEntity* parent;
                 
        	    	bool is_alive, is_dying;
    
