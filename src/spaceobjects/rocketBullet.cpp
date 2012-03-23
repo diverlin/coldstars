@@ -1,0 +1,176 @@
+/*
+Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+*/
+
+
+
+RocketBullet :: RocketBullet(BulletData _data_bullet, 			     
+                             SpaceObjectBase* target,
+			     int _owner_id)
+{
+	data_bullet = _data_bullet;
+	
+        owner_ship_id = _owner_id;
+
+        this->target = target;
+
+        speed = _data_bullet.speed_init;
+
+}
+
+RocketBullet :: ~RocketBullet()
+{}
+
+void RocketBullet :: place(vec2f _start_pos, float _angle_inD, float offset)
+{
+	dx = 0;
+        dy = 0;
+
+        points.setCenter(_start_pos.x + offset, _start_pos.y + offset);
+        angle_inD = _angle_inD;
+        points.setAngle(angle_inD);
+}
+
+
+int RocketBullet :: getDamage() const { return data_bullet.damage; }
+int RocketBullet :: getOwnerShipId() const { return owner_ship_id; }
+
+void RocketBullet :: update_inSpace(int time, bool show_effect)
+{
+	checkDeath(show_effect);
+        
+	if (time > 0)
+	{
+                points.update();
+                
+    		if (speed < data_bullet.speed_max)
+    		{
+       			speed += data_bullet.d_speed; 
+    		} 
+                
+		if (target != NULL)
+    		{ 
+        		get_dX_dY_angleInD_ToPoint(points.getCenter().x, points.getCenter().y, target->getPoints()->getCenter().x, target->getPoints()->getCenter().y, speed/100.0, &dx, &dy, &angle_inD);
+    		
+                        if (isTargetOk() == false)
+                        {
+                                target = NULL;
+                        }
+                }      
+    		points.setAngle(angle_inD);
+    		points.setCenter(points.getCenter().x + dx, points.getCenter().y + dy);
+    
+
+    		data_bullet.live_time -= 1;
+    	}
+}
+
+bool RocketBullet :: isTargetOk() const
+{
+        if (target->getAlive() == true)
+        {
+                if (isStarSystemOk() == true)
+                {
+                        return true;
+                }
+        }
+        
+        return false;
+}
+
+bool RocketBullet :: isStarSystemOk() const
+{
+        if (target->getStarSystem() == starsystem)
+        {
+                return true;
+        }
+        
+        return false;
+}  
+
+void RocketBullet :: collisionEvent(bool show_effect)
+{
+	data_life.is_alive = false; 
+	data_life.dying_time = -1;
+}
+
+
+
+
+void RocketBullet :: deathEventUnique(bool show_effect)
+{
+	if (show_effect == true)
+	{
+       		createExplosion(starsystem, points.getCenter(), texOb->size_id);
+       	}
+}
+
+
+void RocketBullet :: updateInfo()
+{}
+
+
+
+void RocketBullet :: updateRenderStuff()
+{
+	//points.update();
+	drive_trail->update();
+}
+
+
+void RocketBullet :: render_inSpace() const
+{
+	renderKorpus();
+	renderDriveTrail();
+}
+
+
+
+
+
+
+RocketBullet* getNewRocketBullet(BulletData data_bullet, ItemSlot* slot, float offset, bool force_center_start)
+{
+	IdData data_id;
+	LifeData data_life;
+	
+	data_id.id = -1;
+	data_id.type_id = ROCKET_BULLET_ID;
+	data_id.subtype_id = -1;
+	
+	data_life.is_alive      = true;
+        data_life.garbage_ready = false;
+        data_life.armor = data_bullet.armor;        
+
+    	RocketBullet* rocket = new RocketBullet(data_bullet, slot->getTurrel()->getTarget(), slot->getOwnerVehicle()->getId());
+         
+        rocket->setIdData(data_id);
+        rocket->setLifeData(data_life);
+        rocket->setTextureOb(data_bullet.texOb);
+         
+        rocket->postCreateInit();
+         
+        if ( (slot->getOwnerVehicle()->data_korpus.render_TURRELS == true) and (force_center_start == false))
+    	{
+        	rocket->place(slot->getTurrel()->getPoints()->getCenter(), slot->getTurrel()->getPoints()->getAngleDegree(), offset);
+        }
+        else
+    	{
+         	rocket->place(slot->getOwnerVehicle()->getPoints()->getCenter(), slot->getOwnerVehicle()->getPoints()->getAngleDegree(), offset);
+    	}
+        return rocket;
+}
