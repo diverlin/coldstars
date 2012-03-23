@@ -22,7 +22,6 @@ Screen :: Screen()
       	width     = SCREEN_WIDTH_MIN; 
       	height    = SCREEN_HEIGHT_MIN;
       	bpp       = 32;
-      	fps_max   = 60;
       	vert_sync = true;
       	
       	initGl();
@@ -34,7 +33,6 @@ Screen :: Screen()
 	fbo3  = NULL;
 	bloom = NULL;
 	
-	fps = new Fps();
 }
 
 Screen :: ~Screen()
@@ -44,8 +42,6 @@ Screen :: ~Screen()
 	delete fbo2;
 	delete fbo3;
 	delete bloom;
-	
-	delete fps;
 }
         
 void Screen :: resize(int width, int height)
@@ -87,13 +83,12 @@ void Screen :: bottomLeftGlobalCoordIncrease(vec2f delta)
 
 void Screen :: update()
 {
-	fps->update(); 
 }
 
 void Screen :: display()		
 {
-	fps->draw(); 
-        Gui::GetWindow().Display();
+  Gui::Update();
+  Gui::GetWindow().Display();
 }
 
 
