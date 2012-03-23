@@ -27,13 +27,13 @@ class DriveComplex
       		DriveComplex(VehicleBase*);
       		~DriveComplex();
 
-      		void setTarget(SpaceObjectBase*, int);       
+      		void setTarget(BaseGameEntity*, int);       
       		void setStaticTargetCoords(vec2f);
       		
       		ItemSlot* getDriveSlot()     const;
         	ItemSlot* getBakSlot()       const;
                   
-                SpaceObjectBase* getTarget() const;                
+                BaseGameEntity* getTarget() const;                
              
       		bool checkEchievement();
       		bool getDockingPermission();               
@@ -50,7 +50,7 @@ class DriveComplex
         	ItemSlot* bak_slot;
         	
       		VehicleBase* owner_vehicle;
-      		SpaceObjectBase* target;
+      		BaseGameEntity* target;
 
 		vec2f target_pos;
 		

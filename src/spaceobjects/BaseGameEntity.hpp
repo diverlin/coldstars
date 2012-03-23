@@ -17,15 +17,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef SPACEOBJECTBASE_H
-#define SPACEOBJECTBASE_H
+#ifndef BASEGAMEENTITY_H
+#define BASEGAMEENTITY_H
 
 
-class SpaceObjectBase
+class BaseGameEntity
 {
 	public:      
-   		SpaceObjectBase();
-    		virtual ~SpaceObjectBase();
+   		BaseGameEntity();
+    		virtual ~BaseGameEntity();
                                                       
                            
 		void setStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
@@ -38,7 +38,7 @@ class SpaceObjectBase
 		void setAngle(vec3f angle)                  { this->angle = angle; }
 		void setDeltaAngle(vec3f d_angle)           { this->d_angle = d_angle; }
 
-		void setParent(SpaceObjectBase* parent)     { this->parent = parent; }
+		void setParent(BaseGameEntity* parent)     { this->parent = parent; }
        	
 		int getId()        const { return data_id.id; }   
 		int getTypeId()    const { return data_id.type_id; }
@@ -56,7 +56,7 @@ class SpaceObjectBase
 		TextureOb* getTexOb() const { return texOb; }
 		int getArmor()        const { return data_life.armor; }
                	
-		SpaceObjectBase* getParent() const { return parent; }
+		BaseGameEntity* getParent() const { return parent; }
                	
                           	
                	void movingByExternalForce(vec2f, float);
@@ -82,7 +82,7 @@ class SpaceObjectBase
               	
               	int mass;
              	        	
-        	SpaceObjectBase* parent;
+        	BaseGameEntity* parent;
 
                	void createCenter();
                	void updateRotation();

@@ -356,6 +356,8 @@ Npc* getNewNpc(int _race_id, int _subtype_id)
        	TextureOb* texOb_face  = g_TEXTURE_MANAGER.getRandomFaceTexObWithFolloingAttributes(_race_id);
 	Npc* npc = new Npc(_race_id, data_id, data_life, texOb_face);
 	
+	GetEntityManager().RegisterEntity(npc);
+	    	
 	return npc;
 }
 

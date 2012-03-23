@@ -53,7 +53,7 @@ DriveComplex :: ~DriveComplex()
 ItemSlot* DriveComplex :: getDriveSlot()     const { return drive_slot; }
 ItemSlot* DriveComplex :: getBakSlot()       const { return bak_slot; }
 
-SpaceObjectBase* DriveComplex :: getTarget() const { return target; }  
+BaseGameEntity* DriveComplex :: getTarget() const { return target; }  
 
 void  DriveComplex :: resetTarget()
 {
@@ -76,7 +76,7 @@ void DriveComplex :: setStaticTargetCoords(vec2f _target_pos)
     
     
           		
-void DriveComplex :: setTarget(SpaceObjectBase* target, int _action_id)
+void DriveComplex :: setTarget(BaseGameEntity* target, int _action_id)
 {
     	resetTarget();
 

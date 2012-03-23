@@ -24,7 +24,7 @@ GarbageEntities :: ~GarbageEntities()
 {}
          
          
-void GarbageEntities :: add(SpaceObjectBase* entitiy) 
+void GarbageEntities :: add(BaseGameEntity* entitiy) 
 {
 	entities_vec.push_back(entitiy);
 }

@@ -27,16 +27,16 @@ class TaskHolder
 		TaskHolder();
 		~TaskHolder();
 		
-		void set(ScenarioBase*, SpaceObjectBase*);
+		void set(ScenarioBase*, BaseGameEntity*);
 				
-		SpaceObjectBase* getTarget() const;	
+		BaseGameEntity* getTarget() const;	
 		ScenarioBase* getScenario() const;
 				
 		bool getValid() const;		
 		void reset();
 				
 	protected:
-		SpaceObjectBase* target;	
+		BaseGameEntity* target;	
 		ScenarioBase* scenario;
 		bool is_valid;
 };

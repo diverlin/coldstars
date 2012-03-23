@@ -23,7 +23,7 @@ bool g_AUTOTURN_ENABLE = false;  // debug
 int  g_GAMESPEED = 1;
 
 
-sf::RenderWindow g_APP(sf::VideoMode(SCREEN_WIDTH_MIN, SCREEN_HEIGHT_MIN, g_BPP), "cold star V0.0.4.49 (SFML/C++)");
+sf::RenderWindow g_APP(sf::VideoMode(SCREEN_WIDTH_MIN, SCREEN_HEIGHT_MIN, g_BPP), "cold star V0.0.4.51 (SFML/C++)");
 sf::Font g_FONT;
 
 sf::Clock g_CLOCK;
