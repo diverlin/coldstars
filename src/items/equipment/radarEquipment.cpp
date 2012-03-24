@@ -60,7 +60,7 @@ void RadarEquipment :: countPrice()
 /* virtual */
 void RadarEquipment :: updateOwnerAbilities()
 {
-	slot->getOwnerVehicle()->updateRadarAbility();
+	slot->getOwnerVehicle()->UpdateRadarAbility();
 }
       
 

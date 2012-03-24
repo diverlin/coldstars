@@ -25,22 +25,22 @@ DriveComplex :: DriveComplex(Vehicle* owner_vehicle)
         
 	resetTarget();
 	
-	drive_slot   = new ItemSlot(DRIVE_SLOT_ID, owner_vehicle, owner_vehicle->getSlotTexOb());
+	drive_slot   = new ItemSlot(DRIVE_SLOT_ID, owner_vehicle, owner_vehicle->GetSlotTexOb());
 			
-	drive_slot->setRect(  owner_vehicle->getKonturRect().getCenter().x - 5*SHIP_SLOT_WIDTH, 
-			      owner_vehicle->getKonturRect().getCenter().y - SHIP_SLOT_HEIGHT/2 + 1.1*SHIP_SLOT_HEIGHT/2,
+	drive_slot->setRect(  owner_vehicle->GetKonturRect().getCenter().x - 5*SHIP_SLOT_WIDTH, 
+			      owner_vehicle->GetKonturRect().getCenter().y - SHIP_SLOT_HEIGHT/2 + 1.1*SHIP_SLOT_HEIGHT/2,
 			      SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
 				  
-	owner_vehicle->add(drive_slot);
+	owner_vehicle->Add(drive_slot);
 	
 	
-	bak_slot     = new ItemSlot(BAK_SLOT_ID, owner_vehicle,  owner_vehicle->getSlotTexOb());
+	bak_slot     = new ItemSlot(BAK_SLOT_ID, owner_vehicle,  owner_vehicle->GetSlotTexOb());
 				    
-	bak_slot->setRect(  owner_vehicle->getKonturRect().getCenter().x - 5*SHIP_SLOT_WIDTH, 
-			    owner_vehicle->getKonturRect().getCenter().y - SHIP_SLOT_HEIGHT/2 - 1.1*SHIP_SLOT_HEIGHT/2,
+	bak_slot->setRect(  owner_vehicle->GetKonturRect().getCenter().x - 5*SHIP_SLOT_WIDTH, 
+			    owner_vehicle->GetKonturRect().getCenter().y - SHIP_SLOT_HEIGHT/2 - 1.1*SHIP_SLOT_HEIGHT/2,
 			    SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
 				    
-	owner_vehicle->add(bak_slot);
+	owner_vehicle->Add(bak_slot);
 }
 
 DriveComplex :: ~DriveComplex()

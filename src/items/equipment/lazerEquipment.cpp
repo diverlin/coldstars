@@ -68,7 +68,7 @@ void LazerEquipment :: countPrice()
 /* virtual */    
 void LazerEquipment :: updateOwnerAbilities()
 { 
-    	slot->getOwnerVehicle()->updateFireAbility();
+    	slot->getOwnerVehicle()->UpdateFireAbility();
 }
 
 

@@ -93,7 +93,7 @@ void Satellite :: render_inSpace() const
                 //renderGrappleTrail();
         //}
         
-    	renderKorpus();
+    	RenderKorpus();
     	
     	if (data_korpus.render_TURRELS == true)
     	{
@@ -107,14 +107,14 @@ void Satellite :: render_inSpace() const
     	
     	if (ableTo.PROTECT == true)
     	{
-        	renderShield(); 
+        	RenderShield(); 
         }
 }
 
 
 void Satellite :: render_atPlanet() const
 {
-	renderKorpus();
+	RenderKorpus();
 	
 	if (data_korpus.render_TURRELS == true)
     	{
@@ -157,12 +157,12 @@ Satellite* getNewSatellite()
 	data_korpus.render_TURRELS = true;       
 
 	Satellite* satellite = new Satellite();
-	satellite->setKorpusData(data_korpus);
+	satellite->SetKorpusData(data_korpus);
 	satellite->setIdData(data_id);
 	satellite->setLifeData(data_life);
 	satellite->setTextureOb(texOb);
 	
-	satellite->postCreateInit();
+	satellite->PostCreateInit();
 	
 	return satellite;
 }

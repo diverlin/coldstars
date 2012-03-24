@@ -65,7 +65,7 @@ void EnergizerEquipment :: countPrice()
 
 void EnergizerEquipment :: updateOwnerAbilities()
 {
-    	slot->getOwnerVehicle()->updateEnergyAbility();
+    	slot->getOwnerVehicle()->UpdateEnergyAbility();
 }
 
 

@@ -116,7 +116,7 @@ void GuiSkill :: update()
 
 void GuiSkill :: render() const
 {
-	Skill* skill = player->getNpc()->getScanTarget()->getNpc()->getSkill();
+	Skill* skill = player->getNpc()->getScanTarget()->GetOwnerNpc()->getSkill();
      	TextureOb* texOb_skill = g_UNIQUE_TEXTURE_COLLECTOR.texOb_skill;
      	
     	int w = button_vec[0]->getRect().getWidth();

@@ -44,7 +44,7 @@ LandBase* Npc :: getLand() const { return land; }
 void Npc :: bind(Vehicle* vehicle) 	           
 { 
 	this->vehicle = vehicle; 
-	vehicle->setNpc(this); 
+	vehicle->SetNpc(this); 
 } 	
 
 void Npc :: increaseCredits(int _credits) { credits += _credits; }
@@ -111,12 +111,12 @@ void Npc :: thinkCommon_inKosmoport_inStatic()
 {   		
 	if (needsToDo.REPAIR_KORPUS == true)
 	{
-                vehicle->repair();
+                vehicle->ExternalRepairEvent();
 		needsToDo.REPAIR_KORPUS = false;
 	}
 	
 	// if all things are DONE
-	((Planet*)vehicle->getDriveComplex()->getTarget())->getLand()->addToLaunchingQueue(this); // improove by adding spacestation
+	((Planet*)vehicle->GetDriveComplex()->getTarget())->getLand()->addToLaunchingQueue(this); // improove by adding spacestation
 }
 
 void Npc :: thinkCommon_inLand_inStatic()
@@ -127,9 +127,9 @@ void Npc :: thinkCommon_inLand_inStatic()
 
 void Npc :: update_inSpace_inStatic()
 {
-	vehicle->getWeaponComplex()->prepareWeapons();
-        vehicle->getGrappleSlot()->getGrappleEquipment()->validateTargets();
-        vehicle->droidRepair();
+	vehicle->GetWeaponComplex()->prepareWeapons();
+        vehicle->GetGrappleSlot()->getGrappleEquipment()->validateTargets();
+        vehicle->SelfRepairEvent();
         // drive work, energy and so on
                	     		
 	if (upper_control == false)
@@ -155,7 +155,7 @@ void Npc :: update_inSpace_inStatic()
        		state_machine->update_inStatic();                 
         }
 
-        vehicle->getDriveComplex()->update_inSpace_inStatic();
+        vehicle->GetDriveComplex()->update_inSpace_inStatic();
 }
 
 
@@ -218,13 +218,13 @@ void Npc :: checkNeeds()
 
 void Npc :: asteroidScenario()
 {
-        vehicle->getWeaponComplex()->weapon_selector.setAll(false);
-        vehicle->getWeaponComplex()->selectWeapons();
-        vehicle->getWeaponComplex()->resetDeselectedWeaponTargets();
+        vehicle->GetWeaponComplex()->weapon_selector.setAll(false);
+        vehicle->GetWeaponComplex()->selectWeapons();
+        vehicle->GetWeaponComplex()->resetDeselectedWeaponTargets();
 
-        vehicle->getWeaponComplex()->weapon_selector.setAll(true);
-        vehicle->getWeaponComplex()->selectWeapons();
-        vehicle->getWeaponComplex()->setTarget(observation->visible_ASTEROID_vec[0].asteroid);
+        vehicle->GetWeaponComplex()->weapon_selector.setAll(true);
+        vehicle->GetWeaponComplex()->selectWeapons();
+        vehicle->GetWeaponComplex()->setTarget(observation->visible_ASTEROID_vec[0].asteroid);
                 
         //printf("TARGET => ship_id, asteroid id = %i/%i\n", ship->getId(), sorted_visible_ASTEROID_pList[0]->getId());
 }
@@ -234,13 +234,13 @@ void Npc :: asteroidScenario()
 
 void Npc:: jumpEvent()
 {
-	vehicle->jumpEvent();
+	vehicle->HyperJumpEvent();
 }
 
 
 void Npc:: dockEvent()
 {
-	vehicle->dockEvent();
+	vehicle->DockingEvent();
 }
 
 
@@ -276,9 +276,9 @@ bool Npc :: checkPossibilityToScan(Vehicle* vehicle)
  
      	if (this->vehicle->ableTo.SCAN == true) 
      	{
-        	if (vehicle->getProtectorSlot()->getEquipedStatus() == true)
+        	if (vehicle->GetProtectorSlot()->getEquipedStatus() == true)
         	{
-           		if (this->vehicle->getScanerSlot()->getScanerEquipment()->getScan() >= vehicle->getProtectorSlot()->getProtectorEquipment()->getProtection()) 
+           		if (this->vehicle->GetScanerSlot()->getScanerEquipment()->getScan() >= vehicle->GetProtectorSlot()->getProtectorEquipment()->getProtection()) 
               		{
               			return true;
               		}
@@ -314,7 +314,7 @@ void Npc :: updateInfo()
 
 	if (vehicle->ableTo.GRAB == true)
 	{
-		std::string grab_str = vehicle->getGrappleSlot()->getGrappleEquipment()->getTargetStr();
+		std::string grab_str = vehicle->GetGrappleSlot()->getGrappleEquipment()->getTargetStr();
 		if (grab_str.size() > 0)
 		{
 			info.addNameStr("grab_id:");   		info.addValueStr( grab_str ); 

@@ -64,7 +64,7 @@ void GuiVehicle :: update()
                         
 
 	// GATE SLOT
-	if (vehicle->getGateSlot()->interaction(player->getCursor()->getMousePos().x, (player->getScreen()->getHeight() - player->getCursor()->getMousePos().y)) == true)  
+	if (vehicle->GetGateSlot()->interaction(player->getCursor()->getMousePos().x, (player->getScreen()->getHeight() - player->getCursor()->getMousePos().y)) == true)  
 	{
 		//// DROP ITEM TO OUTERSPACE ////
 		if ( (lmb == true) and (store == NULL) )
@@ -91,7 +91,7 @@ void GuiVehicle :: render() const
 		vehicle->slot_total_vec[i]->render(-1);
 	}
 	
-	vehicle->getGateSlot()->render(-1);
+	vehicle->GetGateSlot()->render(-1);
 }
 
 

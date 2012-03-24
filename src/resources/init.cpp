@@ -63,7 +63,7 @@ Player* getNewPlayer(Galaxy* galaxy)
     	Ship* pship = shipGenerator(prace_id, psubtype_id, size_id, weapons_num);
 	
     	equip((Vehicle*)pship);   		// improove
-        pship->updateAllStuff(); 		// improove
+        pship->UpdateAllPropertiesAndAbilities(); 		// improove
         
         pnpc->bind(pship);
    	player->bindNpc(pnpc);

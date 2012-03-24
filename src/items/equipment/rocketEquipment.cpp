@@ -87,7 +87,7 @@ void RocketEquipment :: countPrice()
 
 void RocketEquipment :: updateOwnerAbilities()
 {      
-    	slot->getOwnerVehicle()->updateFireAbility();
+    	slot->getOwnerVehicle()->UpdateFireAbility();
 }
 
 

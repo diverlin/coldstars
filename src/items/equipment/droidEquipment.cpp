@@ -58,7 +58,7 @@ void DroidEquipment :: countPrice()
 /* virtual */
 void DroidEquipment :: updateOwnerAbilities()
 {
-     	slot->getOwnerVehicle()->updateRepairAbility();
+     	slot->getOwnerVehicle()->UpdateRepairAbility();
 }
 
 

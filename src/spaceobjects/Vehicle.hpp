@@ -27,111 +27,105 @@ class Vehicle : public BaseGameEntity
        	        Vehicle();
         	virtual ~Vehicle(); 
         	
-                void setNpc(Npc*);
-                void setKorpusData(KorpusData);
+                void SetNpc(Npc*);
+                void SetKorpusData(KorpusData);
         	
-                void add(ItemSlot*);
+                void Add(ItemSlot*);
 
-                float getVisionRadius() const;
+                float GetVisionRadius() const;
                 
-                WeaponComplex* getWeaponComplex() const;
-                DriveComplex* getDriveComplex() const;
+                WeaponComplex* GetWeaponComplex() const;
+                DriveComplex* GetDriveComplex() const;
                 
-        	ItemSlot* getRadarSlot()     const;
-        	ItemSlot* getScanerSlot()    const;
-        	ItemSlot* getEnergizerSlot() const;
-        	ItemSlot* getGrappleSlot()   const;
-        	ItemSlot* getProtectorSlot() const;
-        	ItemSlot* getDroidSlot()     const;
-        	ItemSlot* getFreezerSlot()   const;
-        	ItemSlot* getGateSlot()   const;
+        	ItemSlot* GetRadarSlot()     const;
+        	ItemSlot* GetScanerSlot()    const;
+        	ItemSlot* GetEnergizerSlot() const;
+        	ItemSlot* GetGrappleSlot()   const;
+        	ItemSlot* GetProtectorSlot() const;
+        	ItemSlot* GetDroidSlot()     const;
+        	ItemSlot* GetFreezerSlot()   const;
+        	ItemSlot* GetGateSlot()   const;
         	
-        	TextureOb* getSlotTexOb() const;
-        	Rect getKonturRect() const;
+        	TextureOb* GetSlotTexOb() const;
+        	Rect GetKonturRect() const;
         	                        	
-                Npc* getNpc();
-       	        ItemSlot* getEmptyOtsecSlot();
-       	        ItemSlot* getOtsecSlotWithGoods(int);
+                Npc* GetOwnerNpc() const;
+       	        ItemSlot* GetEmptyOtsecSlot();
+       	        ItemSlot* GetCargoSlotWithGoods(int);
         	
-        	void postCreateInit();
+        	void PostCreateInit();
         	
-                //
-       	        int getFunctionalSlotSubTypeId() const;    // return NONE_ID
-       	        void bindSlot(ItemSlot*);		   // do nothing	
-       	        void updateOwnerPropetries();		   // do nothing
+                // needs when vehicle is grabbed by other vehicle
+       	        //int GetFunctionalSlotSubTypeId() const;    // return NONE_ID
+       	        //void BindSlot(ItemSlot*);		   // do nothing	
+       	        //void UpdateOwnerPropetries();		   // do nothing
        	               	        	
         	//######### KONTUR RECT 
         	int w_kontur, h_kontur;
         	Rect kontur_rect; 
                 TextureOb* texOb_korpus;
 
-        	std::vector<ItemSlot*> slot_total_vec;
+	       	std::vector<ItemSlot*> slot_total_vec;
         	std::vector<ItemSlot*> slot_otsec_vec;
         
-        	ItemSlot* gate_slot;
 
         	AbilitiesStatus ableTo;
                 ShipPropetries propetries;
                 KorpusData data_korpus;
                        	
-        	void droidRepair();
-        	
-        	void hit(int, bool);
+        	void SelfRepairEvent();
+        	bool ExternalRepairEvent();
+        	                
+        	void Hit(int, bool);
 
         	virtual void postDeathUniqueEvent(bool); 
         	
-        	void updateAllStuff();
-             		void calculateMass();
-             		void updateFireAbility();
-             		void updateRadarAbility();
-             		void updateDriveAbility();
-             		void updateJumpAbility();
-             		void updateEnergyAbility();
-             		void updateProtectionAbility();
-             		void updateRepairAbility();
-             		void updateFreezeAbility();
-             		void updateGrabAbility();
-             		void updateScanAbility();
+        	void UpdateAllPropertiesAndAbilities();
+             		void RecalculateMass();
+             		void UpdateFireAbility();
+             		void UpdateRadarAbility();
+             		void UpdateDriveAbility();
+             		void UpdateJumpAbility();
+             		void UpdateEnergyAbility();
+             		void UpdateProtectionAbility();
+             		void UpdateRepairAbility();
+             		void UpdateFreezeAbility();
+             		void UpdateGrabAbility();
+             		void UpdateScanAbility();
 
-        	void setMaxArmor();
-        	void setMaxFuel();
+        	void SetMaxArmor();
+        	void SetMaxFuel();
 
-        	void jumpEvent();
-        	void dockEvent();
-        	void launchingEvent();
+        	void HyperJumpEvent();
+        	void DockingEvent();
+        	void LaunchingEvent();
 
-		void updateRenderStuff();      
-
-
-        	void renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y);
-        	void renderInfo_inSpace(vec2f);
+        	void RenderInfo(float, float, float, float);
+        	void RenderInfo_inSpace(vec2f);
         	
-        	void renderRadarRange();
-        	void renderGrappleRange();        	        	
+        	void RenderRadarRange();
+        	void RenderGrappleRange();        	        	
 
-                
-                bool repair();
-                
-                void grappleScenario();                
+                void GrappleMicroProgramm();                
 
         	
-        	void calcCollisionRadius();
+        	void RecalculateCollisionRadius();
 
 	protected:
 		virtual void updateInfo() = 0;
              	std::string returnProtectionStr();
             	DriveComplex* drive_complex;
      	
-		Npc* npc_owner;
+		Npc* owner_npc;
 		
 		TrailEffect* drive_trail; 
 		ShieldEffect* shield;
              		
-                void renderGrappleTrail() const;
-		void renderKorpus() const;
-             	void renderTurrels() const;
-             	void renderDriveTrail() const;
-          	void renderShield() const;
+                void RenderGrappleTrail() const;
+		void RenderKorpus() const;
+             	void RenderTurrels() const;
+             	void RenderDriveTrail() const;
+          	void RenderShield() const;
              	
         	WeaponComplex* weapon_complex;
         	
@@ -142,10 +136,12 @@ class Vehicle : public BaseGameEntity
         	ItemSlot* protector_slot;
         	ItemSlot* droid_slot;
         	ItemSlot* freezer_slot;
-        	
+        
+                ItemSlot* gate_slot;
+                		
         private:
                	TextureOb* texOb_slot;
-             	void dropRandomItemToSpace();   
+             	void DropRandomItemToSpace();   
              	
 };
 

@@ -18,37 +18,37 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-void Vehicle :: setNpc(Npc* _npc)   { npc_owner = _npc; }
-void Vehicle :: setKorpusData(KorpusData data_korpus) { this->data_korpus = data_korpus; }
-void Vehicle :: add(ItemSlot* slot) { slot_total_vec.push_back(slot); }
+void Vehicle :: SetNpc(Npc* npc)   { owner_npc = npc; }
+void Vehicle :: SetKorpusData(KorpusData data_korpus) { this->data_korpus = data_korpus; }
+void Vehicle :: Add(ItemSlot* slot) { slot_total_vec.push_back(slot); }
                 
-WeaponComplex* Vehicle :: getWeaponComplex() const { return weapon_complex; }
-DriveComplex* Vehicle :: getDriveComplex()   const { return drive_complex; }
+WeaponComplex* Vehicle :: GetWeaponComplex() const { return weapon_complex; }
+DriveComplex* Vehicle :: GetDriveComplex()   const { return drive_complex; }
 
-ItemSlot* Vehicle :: getRadarSlot()     const { return radar_slot; }
-ItemSlot* Vehicle :: getScanerSlot()    const { return scaner_slot; }
-ItemSlot* Vehicle :: getEnergizerSlot() const { return energizer_slot; }
-ItemSlot* Vehicle :: getGrappleSlot()   const { return grapple_slot; }
-ItemSlot* Vehicle :: getProtectorSlot() const { return protector_slot; }
-ItemSlot* Vehicle :: getDroidSlot()     const { return droid_slot; }
-ItemSlot* Vehicle :: getFreezerSlot()   const { return freezer_slot; }
+ItemSlot* Vehicle :: GetRadarSlot()     const { return radar_slot; }
+ItemSlot* Vehicle :: GetScanerSlot()    const { return scaner_slot; }
+ItemSlot* Vehicle :: GetEnergizerSlot() const { return energizer_slot; }
+ItemSlot* Vehicle :: GetGrappleSlot()   const { return grapple_slot; }
+ItemSlot* Vehicle :: GetProtectorSlot() const { return protector_slot; }
+ItemSlot* Vehicle :: GetDroidSlot()     const { return droid_slot; }
+ItemSlot* Vehicle :: GetFreezerSlot()   const { return freezer_slot; }
         	               
-ItemSlot* Vehicle :: getGateSlot()   const { return gate_slot; }
+ItemSlot* Vehicle :: GetGateSlot()   const { return gate_slot; }
 
-Npc* Vehicle :: getNpc() 	        { return npc_owner; }
+Npc* Vehicle :: GetOwnerNpc() 	     const { return owner_npc; }
 
-TextureOb* Vehicle :: getSlotTexOb() const { return texOb_slot; }
-Rect Vehicle :: getKonturRect()      const { return kontur_rect; }
+TextureOb* Vehicle :: GetSlotTexOb() const { return texOb_slot; }
+Rect Vehicle :: GetKonturRect()      const { return kontur_rect; }
         	
-// needs for grabbing interface
-int Vehicle :: getFunctionalSlotSubTypeId() const { return NONE_SLOT_ID; } 
-void Vehicle :: bindSlot(ItemSlot* slot)          { return; }	   	
-void Vehicle :: updateOwnerPropetries()	       { return; }	   
+// needs when vehicle is grabbed by other vehicle
+//int Vehicle :: GetFunctionalSlotSubTypeId() const { return NONE_SLOT_ID; } 
+//void Vehicle :: BindSlot(ItemSlot* slot)          { return; }	   	
+//void Vehicle :: UpdateOwnerPropetries()	       { return; }	   
 //
        	        
-float Vehicle :: getVisionRadius() const { return propetries.radius; }
+float Vehicle :: GetVisionRadius() const { return propetries.radius; }
 
-ItemSlot* Vehicle :: getEmptyOtsecSlot()
+ItemSlot* Vehicle :: GetEmptyOtsecSlot()
 {
       	for (unsigned int i = 0; i < slot_otsec_vec.size(); i++)
       	{
@@ -62,7 +62,7 @@ ItemSlot* Vehicle :: getEmptyOtsecSlot()
 }
 
 
-ItemSlot* Vehicle :: getOtsecSlotWithGoods(int requested_goods_subtype_id)
+ItemSlot* Vehicle :: GetCargoSlotWithGoods(int requested_goods_subtype_id)
 {
       	for (unsigned int i = 0; i < slot_otsec_vec.size(); i++)
       	{
@@ -86,7 +86,7 @@ ItemSlot* Vehicle :: getOtsecSlotWithGoods(int requested_goods_subtype_id)
                 
 Vehicle :: Vehicle()
 {
-	npc_owner = NULL;
+	owner_npc = NULL;
 }
 
 Vehicle :: ~Vehicle()
@@ -116,9 +116,9 @@ Vehicle :: ~Vehicle()
 
 
 
-void Vehicle :: postCreateInit()
+void Vehicle :: PostCreateInit()
 {
-	this->calcCollisionRadius();
+	this->RecalculateCollisionRadius();
 	texOb_korpus = texOb;  
         	
    	////// Points creation
@@ -255,7 +255,7 @@ void Vehicle :: postCreateInit()
 
    
        	starsystem = NULL; 
-    	npc_owner  = NULL;
+    	owner_npc  = NULL;
 
     	drive_complex = new DriveComplex(this);  
     	    	
@@ -269,7 +269,7 @@ void Vehicle :: postCreateInit()
 }        	
 
 
-void Vehicle :: calcCollisionRadius()
+void Vehicle :: RecalculateCollisionRadius()
 {
 	collision_radius = (texOb->getFrameWidth() + texOb->getFrameHeight())/3;
 }
@@ -282,20 +282,20 @@ void Vehicle :: calcCollisionRadius()
 
 
 //// ******** DOCKING/LAUNCHING ******** 
-void Vehicle :: jumpEvent()
+void Vehicle :: HyperJumpEvent()
 {
         starsystem->removeShip(data_id.id);  
-        starsystem->removeNpc(npc_owner->getId(), npc_owner->getSubTypeId());  
+        starsystem->removeNpc(owner_npc->getId(), owner_npc->getSubTypeId());  
                                                         
-        ((StarSystem*)drive_complex->getTarget())->addToHyperJumpQueue(npc_owner);
+        ((StarSystem*)drive_complex->getTarget())->addToHyperJumpQueue(owner_npc);
         drive_complex->resetTarget();        
 }
                 
                 
-void Vehicle :: dockEvent()
+void Vehicle :: DockingEvent()
 {
      	starsystem->removeShip(data_id.id);
-     	starsystem->removeNpc(npc_owner->getId(), npc_owner->getSubTypeId());
+     	starsystem->removeNpc(owner_npc->getId(), owner_npc->getSubTypeId());
         
              	     	     	
      	if (drive_complex->getTarget()->getTypeId() == PLANET_ID)
@@ -303,9 +303,9 @@ void Vehicle :: dockEvent()
                 Planet* planet = ((Planet*)drive_complex->getTarget());
                 
      		planet->getLand()->add((Ship*)this);
-		planet->getLand()->add(npc_owner);
+		planet->getLand()->add(owner_npc);
 		
-		npc_owner->setLand(planet->getLand());
+		owner_npc->setLand(planet->getLand());
 	}
 	
 	if (drive_complex->getTarget()->getTypeId() == SPACESTATION_ID)
@@ -313,32 +313,32 @@ void Vehicle :: dockEvent()
                 SpaceStation* spacestation = ((SpaceStation*)drive_complex->getTarget());
                                 
 	     	spacestation->getLand()->add((Ship*)this);
-		spacestation->getLand()->add(npc_owner);
+		spacestation->getLand()->add(owner_npc);
 		
-		npc_owner->setLand(spacestation->getLand());
+		owner_npc->setLand(spacestation->getLand());
 	}
 }
 
-void Vehicle :: launchingEvent()
+void Vehicle :: LaunchingEvent()
 {
      	printf("vehicle id = %i, launchingEvent()\n", data_id.id);
 
      	if (drive_complex->getTarget()->getTypeId() == PLANET_ID)
      	{
      		starsystem->addToSpace(this, drive_complex->getTarget()->getPoints()->getCenter(), 0, NULL);
-     		starsystem->addToSpace(npc_owner);
+     		starsystem->addToSpace(owner_npc);
 
      		((Planet*)drive_complex->getTarget())->getLand()->remove(this);
-     		((Planet*)drive_complex->getTarget())->getLand()->remove(npc_owner);
+     		((Planet*)drive_complex->getTarget())->getLand()->remove(owner_npc);
 	}
 	
      	if (drive_complex->getTarget()->getTypeId() == SPACESTATION_ID)
      	{
      		starsystem->addToSpace(this, drive_complex->getTarget()->getPoints()->getCenter(), 0, NULL);
-     		starsystem->addToSpace(npc_owner);
+     		starsystem->addToSpace(owner_npc);
 
      		((SpaceStation*)drive_complex->getTarget())->getLand()->remove(this);
-     		((SpaceStation*)drive_complex->getTarget())->getLand()->remove(npc_owner);
+     		((SpaceStation*)drive_complex->getTarget())->getLand()->remove(owner_npc);
 	}	
 
      	drive_complex->resetTarget();
@@ -350,7 +350,7 @@ void Vehicle :: launchingEvent()
 
 
 
-void Vehicle :: hit(int _damage, bool show_effect)
+void Vehicle :: Hit(int _damage, bool show_effect)
 {
     	data_life.armor -= _damage;
 
@@ -378,7 +378,7 @@ void Vehicle :: postDeathUniqueEvent(bool show_effect)  /* virtual */
 	int num_items = getRandInt(0, 3);
 	for (int i = 0; i<num_items; i++)
 	{
-		dropRandomItemToSpace();
+		DropRandomItemToSpace();
 	}
 	
 	if (show_effect == true)
@@ -388,29 +388,29 @@ void Vehicle :: postDeathUniqueEvent(bool show_effect)  /* virtual */
 }
 
 
-void Vehicle :: updateAllStuff()
+void Vehicle :: UpdateAllPropertiesAndAbilities()
 {
     	// this function set actual ship propretries relying to all equipment placed in slots
     	// used when ship change items in slot
     	// !!! all this stuff can be called separately by item deterioration function if item becomes broken !!!
 
-    	updateDriveAbility();
-    	updateRadarAbility();
-    	updateJumpAbility();
-    	updateEnergyAbility();  // make reurtn true, and add below if condition 
-    	updateProtectionAbility(); // because energy shield depends on energy and consume it much
-    	updateFireAbility();
+    	UpdateDriveAbility();
+    	UpdateRadarAbility();
+    	UpdateJumpAbility();
+    	UpdateEnergyAbility();  // make reurtn true, and add below if condition 
+    	UpdateProtectionAbility(); // because energy shield depends on energy and consume it much
+    	UpdateFireAbility();
 
-    	updateRepairAbility();
-    	updateFreezeAbility();
-    	updateGrabAbility();
-    	updateScanAbility();
+    	UpdateRepairAbility();
+    	UpdateFreezeAbility();
+    	UpdateGrabAbility();
+    	UpdateScanAbility();
 }
 
 
 
 
-void Vehicle :: updateFireAbility()
+void Vehicle :: UpdateFireAbility()
 {
      	//ableTo.FIRE = 
      	weapon_complex->updateFireAbility();
@@ -421,7 +421,7 @@ void Vehicle :: updateFireAbility()
 
 
 
-void Vehicle :: calculateMass()
+void Vehicle :: RecalculateMass()
 {
      	propetries.mass = 0;   
 
@@ -435,11 +435,11 @@ void Vehicle :: calculateMass()
 }
 
 
-void Vehicle :: updateDriveAbility()
+void Vehicle :: UpdateDriveAbility()
 {
      	//// calculate mass and then actual ship speed depending on drive power and actual mass
      	//// used each time when ship picked up/bought or drop/sold something.
-     	calculateMass();   	  
+     	RecalculateMass();   	  
 
      	//// speed calculation ////
      	propetries.speed = 0;
@@ -465,7 +465,7 @@ void Vehicle :: updateDriveAbility()
 }
 
 
-void Vehicle :: updateRadarAbility()
+void Vehicle :: UpdateRadarAbility()
 {
    	if (radar_slot->getEquipedStatus() == true) 
    	{
@@ -489,7 +489,7 @@ void Vehicle :: updateRadarAbility()
 
 
 
-void Vehicle :: updateJumpAbility()
+void Vehicle :: UpdateJumpAbility()
 {    
 	propetries.hyper = 0;
      	ableTo.HJUMP = false;
@@ -509,7 +509,7 @@ void Vehicle :: updateJumpAbility()
 }
 
 
-void Vehicle :: updateEnergyAbility()
+void Vehicle :: UpdateEnergyAbility()
 {
      	propetries.energy = 0;
      	ableTo.ENERGIZE = false;
@@ -526,7 +526,7 @@ void Vehicle :: updateEnergyAbility()
 
 
 
-void Vehicle :: updateProtectionAbility()
+void Vehicle :: UpdateProtectionAbility()
 {
         propetries.protection = data_korpus.protection;
         ableTo.PROTECT = false;
@@ -545,7 +545,7 @@ void Vehicle :: updateProtectionAbility()
 
 
 
-void Vehicle :: updateRepairAbility()
+void Vehicle :: UpdateRepairAbility()
 {
      	propetries.repair = 0;
      	ableTo.REPAIR = false;
@@ -560,7 +560,7 @@ void Vehicle :: updateRepairAbility()
         }
 }
 
-void Vehicle :: droidRepair()
+void Vehicle :: SelfRepairEvent()
 {
 	if (ableTo.REPAIR == true)
 	{
@@ -577,7 +577,7 @@ void Vehicle :: droidRepair()
 	}
 }
 
-void Vehicle :: updateFreezeAbility()
+void Vehicle :: UpdateFreezeAbility()
 {
      	propetries.freeze = 0;
      	ableTo.FREEZE = false;
@@ -594,7 +594,7 @@ void Vehicle :: updateFreezeAbility()
 
 
 
-void Vehicle :: updateGrabAbility()
+void Vehicle :: UpdateGrabAbility()
 {
      	ableTo.GRAB = false;
 
@@ -606,7 +606,7 @@ void Vehicle :: updateGrabAbility()
 
 
 
-void Vehicle :: updateScanAbility()
+void Vehicle :: UpdateScanAbility()
 {
      	propetries.scan = 0;
      	ableTo.SCAN = false;
@@ -623,12 +623,12 @@ void Vehicle :: updateScanAbility()
 
 
 
-void Vehicle :: setMaxArmor()
+void Vehicle :: SetMaxArmor()
 {
      	data_life.armor = data_korpus.armor;
 }
 
-void Vehicle :: setMaxFuel()
+void Vehicle :: SetMaxFuel()
 {
      	if (drive_complex->getBakSlot()->getEquipedStatus() == true)
      	{
@@ -646,23 +646,23 @@ std::string Vehicle :: returnProtectionStr()
        		return int2str(data_korpus.protection);
 }
 
-void Vehicle :: renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y)
+void Vehicle :: RenderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y)
 {  
         this->updateInfo(); // virtual, overriding
      	drawInfoIn2Column(&info.title_list, &info.value_list, _pos_x, _pos_y, _offset_x, _offset_y);
      	
-     	if (npc_owner != NULL)
+     	if (owner_npc != NULL)
      	{
-     		npc_owner->renderInfo(_pos_x, _pos_y, _offset_x, _offset_y);
+     		owner_npc->renderInfo(_pos_x, _pos_y, _offset_x, _offset_y);
      	}
 }
 
-void Vehicle :: renderInfo_inSpace(vec2f scroll_coords)
+void Vehicle :: RenderInfo_inSpace(vec2f scroll_coords)
 {  
-	renderInfo(points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);
+	RenderInfo(points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);
 }
 
-void Vehicle :: renderGrappleTrail() const
+void Vehicle :: RenderGrappleTrail() const
 {
         for (unsigned int i = 0; i<grapple_slot->getGrappleEquipment()->target_vec.size(); i++)
         {
@@ -687,7 +687,7 @@ void Vehicle :: renderGrappleTrail() const
         }
 }
 		
-void Vehicle :: renderKorpus() const
+void Vehicle :: RenderKorpus() const
 {
     	drawFlatQuadPerVertexIn2D(texOb,
     				  points.getBottomLeft(), 
@@ -698,18 +698,18 @@ void Vehicle :: renderKorpus() const
 }
 
 
-void Vehicle :: renderDriveTrail() const
+void Vehicle :: RenderDriveTrail() const
 {
 	drive_trail->render();
 }
 
 
-void Vehicle :: renderShield() const
+void Vehicle :: RenderShield() const
 {
      	shield->render();
 }
 
-void Vehicle :: renderRadarRange()
+void Vehicle :: RenderRadarRange()
 {
 	glPushMatrix();
 		glTranslatef(points.getCenter().x, points.getCenter().y, 0.0f);
@@ -718,7 +718,7 @@ void Vehicle :: renderRadarRange()
 	glPopMatrix();
 }
 
-void Vehicle :: renderGrappleRange()
+void Vehicle :: RenderGrappleRange()
 {
 	glPushMatrix();
 		glTranslatef(points.getCenter().x, points.getCenter().y, 0.0f);
@@ -728,15 +728,15 @@ void Vehicle :: renderGrappleRange()
 }
 
 
-bool Vehicle :: repair()
+bool Vehicle :: ExternalRepairEvent()
 {
         unsigned int _fix = data_korpus.armor - data_life.armor;
         unsigned int _price = _fix/10;
         
-        if (npc_owner->getCredits() > _price)
+        if (owner_npc->getCredits() > _price)
         {
                 data_life.armor = data_korpus.armor;
-                npc_owner->decreaseCredits(_price);
+                owner_npc->decreaseCredits(_price);
                 return true;  
         }
         
@@ -744,7 +744,7 @@ bool Vehicle :: repair()
 }
 
 
-void Vehicle :: dropRandomItemToSpace()
+void Vehicle :: DropRandomItemToSpace()
 {
 	std::vector<ItemSlot*> _equiped_slot_vec;
 	
@@ -765,7 +765,7 @@ void Vehicle :: dropRandomItemToSpace()
 		
 }
 
-void Vehicle :: grappleScenario()
+void Vehicle :: GrappleMicroProgramm()
 {
         grapple_slot->getGrappleEquipment()->validateTargets();  
                 
@@ -783,7 +783,7 @@ void Vehicle :: grappleScenario()
        					ItemSlot* _slot;
                                         Mineral* _mineral = (Mineral*)grapple_slot->getGrappleEquipment()->target_vec[i];
                                         
-       					_slot = getOtsecSlotWithGoods(MINERAL_ID);
+       					_slot = GetCargoSlotWithGoods(MINERAL_ID);
        					if (_slot != NULL)
        					{
        						_slot->getGoodsPack()->increase(_mineral->getMass());
@@ -793,7 +793,7 @@ void Vehicle :: grappleScenario()
        					{
        						GoodsPack* _goodsPack = getNewGoodsPack(MINERAL_ID);
        						_goodsPack->increase(_mineral->getMass());
-       						_slot = getEmptyOtsecSlot();
+       						_slot = GetEmptyOtsecSlot();
        						if (_slot != NULL)
        						{
        							_slot->insertItem(_goodsPack);
@@ -806,7 +806,7 @@ void Vehicle :: grappleScenario()
         			
       				case CONTAINER_ID:
        				{
-       					ItemSlot* _slot = getEmptyOtsecSlot();
+       					ItemSlot* _slot = GetEmptyOtsecSlot();
                                         Container* _container = (Container*)grapple_slot->getGrappleEquipment()->target_vec[i];
        				        if (_slot != NULL)
        					{
@@ -819,7 +819,7 @@ void Vehicle :: grappleScenario()
         				
        				case SHIP_ID:
        				{
-       					ItemSlot* _slot = getEmptyOtsecSlot();
+       					ItemSlot* _slot = GetEmptyOtsecSlot();
                                         Vehicle* _vehicle = (Vehicle*)grapple_slot->getGrappleEquipment()->target_vec[i];
        				        if (_slot != NULL)
        					{
@@ -843,45 +843,45 @@ void equip(Vehicle* vehicle)
     	if (vehicle->data_korpus.weapon_slot_num >= 1)
     	{
        		//vehicle->weapon_slot1.insertItem(lazerEquipmentGenerator(RACE_0_ID)); 
-       		vehicle->getWeaponComplex()->getWeaponSlot1()->insertItem(getNewRocketEquipment(RACE_0_ID));     	
+       		vehicle->GetWeaponComplex()->getWeaponSlot1()->insertItem(getNewRocketEquipment(RACE_0_ID));     	
     	}   
 
     	if (vehicle->data_korpus.weapon_slot_num >= 2)
     	{
-       		vehicle->getWeaponComplex()->getWeaponSlot2()->insertItem(getNewLazerEquipment(RACE_0_ID)); 
+       		vehicle->GetWeaponComplex()->getWeaponSlot2()->insertItem(getNewLazerEquipment(RACE_0_ID)); 
     	}   
     
     	if (vehicle->data_korpus.weapon_slot_num >= 3)
     	{
-       		vehicle->getWeaponComplex()->getWeaponSlot3()->insertItem(getNewLazerEquipment(RACE_0_ID)); 
+       		vehicle->GetWeaponComplex()->getWeaponSlot3()->insertItem(getNewLazerEquipment(RACE_0_ID)); 
        		//vehicle->weapon_slot3.insertItem(rocketEquipmentGenerator(RACE_0_ID)); 
     	}   
         
     	if (vehicle->data_korpus.weapon_slot_num >= 4)
     	{
        		//vehicle->weapon_slot4.insertItem(lazerEquipmentGenerator(RACE_0_ID));         
-       		vehicle->getWeaponComplex()->getWeaponSlot4()->insertItem(getNewRocketEquipment(RACE_0_ID)); 
+       		vehicle->GetWeaponComplex()->getWeaponSlot4()->insertItem(getNewRocketEquipment(RACE_0_ID)); 
     	}   
     
     	if (vehicle->data_korpus.weapon_slot_num >= 5) 
     	{
        		//vehicle->weapon_slot5.insertItem(lazerEquipmentGenerator(RACE_0_ID)); 
-       		vehicle->getWeaponComplex()->getWeaponSlot5()->insertItem(getNewRocketEquipment(RACE_0_ID)); 
+       		vehicle->GetWeaponComplex()->getWeaponSlot5()->insertItem(getNewRocketEquipment(RACE_0_ID)); 
     	}   
         
-    	vehicle->getRadarSlot()->insertItem(getNewRadarEquipment(RACE_0_ID)); 
+    	vehicle->GetRadarSlot()->insertItem(getNewRadarEquipment(RACE_0_ID)); 
  
-    	vehicle->getDriveComplex()->getDriveSlot()->insertItem(getNewDriveEquipment(RACE_0_ID)); 
-    	vehicle->getDriveComplex()->getBakSlot()->insertItem(getNewBakEquipment(RACE_0_ID)); 
-    	vehicle->getEnergizerSlot()->insertItem(getNewEnergizerEquipment(RACE_0_ID));     
-    	vehicle->getProtectorSlot()->insertItem(getNewProtectorEquipment(RACE_0_ID)); 
-   	vehicle->getDroidSlot()->insertItem(getNewDroidEquipment(RACE_0_ID)); 
-   	vehicle->getFreezerSlot()->insertItem(getNewFreezerEquipment(RACE_0_ID));  
-   	vehicle->getScanerSlot()->insertItem(getNewScanerEquipment(RACE_0_ID)); 
+    	vehicle->GetDriveComplex()->getDriveSlot()->insertItem(getNewDriveEquipment(RACE_0_ID)); 
+    	vehicle->GetDriveComplex()->getBakSlot()->insertItem(getNewBakEquipment(RACE_0_ID)); 
+    	vehicle->GetEnergizerSlot()->insertItem(getNewEnergizerEquipment(RACE_0_ID));     
+    	vehicle->GetProtectorSlot()->insertItem(getNewProtectorEquipment(RACE_0_ID)); 
+   	vehicle->GetDroidSlot()->insertItem(getNewDroidEquipment(RACE_0_ID)); 
+   	vehicle->GetFreezerSlot()->insertItem(getNewFreezerEquipment(RACE_0_ID));  
+   	vehicle->GetScanerSlot()->insertItem(getNewScanerEquipment(RACE_0_ID)); 
     
     	if (vehicle->data_korpus.inhibit_GRAPPLE == false) 
     	{
-      		vehicle->getGrappleSlot()->insertItem(getNewGrappleEquipment(RACE_0_ID)); 
+      		vehicle->GetGrappleSlot()->insertItem(getNewGrappleEquipment(RACE_0_ID)); 
    	}
     
                              

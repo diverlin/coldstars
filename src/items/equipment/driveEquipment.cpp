@@ -66,8 +66,8 @@ void DriveEquipment :: countPrice()
 /* virtual */
 void DriveEquipment :: updateOwnerAbilities()
 {
-    	slot->getOwnerVehicle()->updateDriveAbility();
-    	slot->getOwnerVehicle()->updateJumpAbility();    	
+    	slot->getOwnerVehicle()->UpdateDriveAbility();
+    	slot->getOwnerVehicle()->UpdateJumpAbility();    	
 }
 
 

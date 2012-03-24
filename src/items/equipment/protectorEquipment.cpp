@@ -57,7 +57,7 @@ void ProtectorEquipment :: countPrice()
 /* virtual */
 void ProtectorEquipment :: updateOwnerAbilities()
 {
-     	slot->getOwnerVehicle()->updateProtectionAbility();
+     	slot->getOwnerVehicle()->UpdateProtectionAbility();
 }
 
 
