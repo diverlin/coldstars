@@ -189,7 +189,7 @@ void generateNumFriendlyNPC(StarSystem* starsystem, int ship_per_system)
         	Ship* ship = shipGenerator(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
        
         	equip((Vehicle*)ship);            	// improove
-        	ship->updateAllStuff(); 		// improove
+        	ship->UpdateAllPropertiesAndAbilities(); 		// improove
         
         	npc->bind(ship);
 
@@ -222,7 +222,7 @@ void generateNumEnemyNPC(StarSystem* starsystem, int ship_per_system)
         	Ship* ship = shipGenerator(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
        
         	equip((Vehicle*)ship);            // improove
-        	ship->updateAllStuff(); 	  // improove
+        	ship->UpdateAllPropertiesAndAbilities(); 	  // improove
         
         	npc->bind(ship);
 
@@ -259,7 +259,7 @@ void generateSpaceStations(StarSystem* starsystem, int spacestation_per_system)
         	SpaceStation* spacestation = getNewSpaceStation();
        
         	equip(spacestation);            	// improove
-        	spacestation->updateAllStuff(); 	// improove
+        	spacestation->UpdateAllPropertiesAndAbilities(); 	// improove
         
         	npc->bind(spacestation);
 

@@ -78,7 +78,7 @@ void SpaceStation :: render_inSpace() const
                 //renderGrappleTrail();
         //}
         
-    	renderKorpus();
+    	RenderKorpus();
     	
     	if (data_korpus.render_TURRELS == true)
     	{
@@ -92,7 +92,7 @@ void SpaceStation :: render_inSpace() const
     	
     	if (ableTo.PROTECT == true)
     	{
-        	renderShield(); 
+        	RenderShield(); 
         }
 }
 
@@ -143,12 +143,12 @@ SpaceStation* getNewSpaceStation()
 	data_korpus.render_TURRELS = true; 
                            
     	SpaceStation* spacestation = new SpaceStation(RACE_0_ID);
-    	spacestation->setKorpusData(data_korpus);
+    	spacestation->SetKorpusData(data_korpus);
 	spacestation->setTextureOb(texOb);
 	spacestation->setIdData(data_id);
 	spacestation->setLifeData(data_life);
     	
-    	spacestation->postCreateInit();
+    	spacestation->PostCreateInit();
     	spacestation->createLand(RACE_0_ID);
     	    
     	return spacestation;

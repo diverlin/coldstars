@@ -26,7 +26,7 @@ MicroScenarioJump :: ~MicroScenarioJump()
 		
 void MicroScenarioJump :: enter(Npc* _npc) const
 {	
-	_npc->getVehicle()->getDriveComplex()->setTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getStarSystem(), FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID);
+	_npc->getVehicle()->GetDriveComplex()->setTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getStarSystem(), FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID);
 	printf("npc_id = %i, is GOING to MicroScenarioJump from ss_id = %i to ss_id = %i\n", _npc->getId(), _npc->getStarSystem()->getId(), _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getId());
 }
 
@@ -37,7 +37,7 @@ void MicroScenarioJump :: update_inStatic(Npc* _npc) const
 
 void MicroScenarioJump :: update_inDynamic(Npc* _npc) const
 {
-     	if (_npc->getVehicle()->getDriveComplex()->checkEchievement() == true)
+     	if (_npc->getVehicle()->GetDriveComplex()->checkEchievement() == true)
      	{
                 _npc->jumpEvent();
      	        printf("npc id = %i, jumpEvent()\n", _npc->getId());

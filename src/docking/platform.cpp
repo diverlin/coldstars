@@ -59,5 +59,5 @@ void Platform :: render() const
 
 void Platform :: renderInfo() const
 {
-	vehicle->renderInfo(rect.getCenter().x, rect.getCenter().y, 0, 0);
+	vehicle->RenderInfo(rect.getCenter().x, rect.getCenter().y, 0, 0);
 }

@@ -654,7 +654,7 @@ void StarSystem :: drawPath()
 {
         for(unsigned int i = 0; i < SHIP_inSPACE_vec.size(); i++) 
 	{ 
-		SHIP_inSPACE_vec[i]->getDriveComplex()->drawPath(); 
+		SHIP_inSPACE_vec[i]->GetDriveComplex()->drawPath(); 
 	}
 }
    
@@ -899,8 +899,8 @@ void StarSystem :: manageDeadObjects_s()
     	{
                	if (SHIP_inSPACE_vec[ki]->getGarbageReady() == true)
         	{           
-            		SHIP_inSPACE_vec[ki]->getNpc()->setAlive(false);
-               		SHIP_inSPACE_vec[ki]->getNpc()->setGarbageReady(true);
+            		SHIP_inSPACE_vec[ki]->GetOwnerNpc()->setAlive(false);
+               		SHIP_inSPACE_vec[ki]->GetOwnerNpc()->setGarbageReady(true);
                
             		garbage_entities.add(SHIP_inSPACE_vec[ki]);
             		SHIP_inSPACE_vec.erase(SHIP_inSPACE_vec.begin() + ki);

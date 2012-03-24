@@ -59,7 +59,7 @@ void Ship :: update_inSpace(int time, bool show_effect)
     
     		if (ableTo.GRAB == true)
     		{
-    			grappleScenario();
+    			GrappleMicroProgramm();
     		}
     	}
 }
@@ -80,10 +80,10 @@ void Ship :: render_inSpace() const
 {   
         if (ableTo.GRAB == true)
         {
-                renderGrappleTrail();
+                RenderGrappleTrail();
         }
         
-    	renderKorpus();
+    	RenderKorpus();
     	
     	if (data_korpus.render_TURRELS == true)
     	{
@@ -92,19 +92,19 @@ void Ship :: render_inSpace() const
 
     	if (ableTo.DRIVE == true)
     	{
-		renderDriveTrail();
+		RenderDriveTrail();
     	}
     	
     	if (ableTo.PROTECT == true)
     	{
-        	renderShield(); 
+        	RenderShield(); 
         }
 }
 
 
 void Ship :: render_atPlanet() const
 {
-	renderKorpus();
+	RenderKorpus();
 	
 	if (data_korpus.render_TURRELS == true)
     	{
@@ -151,12 +151,12 @@ Ship* shipGenerator(int race_id, int subtype_id, int size_id, int weapons_num)
        		data_korpus.render_TURRELS = false; 
                            
     	Ship* ship = new Ship();
-    	ship->setKorpusData(data_korpus);
+    	ship->SetKorpusData(data_korpus);
 	ship->setTextureOb(texOb);
 	ship->setIdData(data_id);
 	ship->setLifeData(data_life);
     	
-    	ship->postCreateInit();
+    	ship->PostCreateInit();
     	    
     	GetEntityManager().RegisterEntity(ship);
     	

@@ -66,8 +66,8 @@ void BakEquipment :: countPrice()
 /* virtual */
 void BakEquipment :: updateOwnerAbilities()
 {
-    	slot->getOwnerVehicle()->updateDriveAbility();
-    	slot->getOwnerVehicle()->updateJumpAbility(); 
+    	slot->getOwnerVehicle()->UpdateDriveAbility();
+    	slot->getOwnerVehicle()->UpdateJumpAbility(); 
 }
 
 

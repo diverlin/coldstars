@@ -153,15 +153,15 @@ void GuiKosmoport :: mouseInteraction()
        				{	
 		   			if (button_angar_pList[i]->getSubTypeId() == REPAIR_BUTTON_ID)
 		   			{
-		   				player->getNpc()->getVehicle()->setMaxArmor(); 
+		   				player->getNpc()->getVehicle()->SetMaxArmor(); 
 		   			}
 		   			if (button_angar_pList[i]->getSubTypeId() == FUEL_BUTTON_ID)
 		   			{
-		   		        	player->getNpc()->getVehicle()->setMaxFuel();
+		   		        	player->getNpc()->getVehicle()->SetMaxFuel();
 		   			}
 		   			if (button_angar_pList[i]->getSubTypeId() == LAUNCH_BUTTON_ID)
 		   			{
-       						player->getNpc()->getVehicle()->launchingEvent();
+       						player->getNpc()->getVehicle()->LaunchingEvent();
        			   		}
        				}
        				break;

@@ -134,8 +134,8 @@ void RocketBullet :: updateRenderStuff()
 
 void RocketBullet :: render_inSpace() const
 {
-	renderKorpus();
-	renderDriveTrail();
+	RenderKorpus();
+	RenderDriveTrail();
 }
 
 
@@ -162,7 +162,7 @@ RocketBullet* getNewRocketBullet(BulletData data_bullet, ItemSlot* slot, float o
         rocket->setLifeData(data_life);
         rocket->setTextureOb(data_bullet.texOb);
          
-        rocket->postCreateInit();
+        rocket->PostCreateInit();
          
         if ( (slot->getOwnerVehicle()->data_korpus.render_TURRELS == true) and (force_center_start == false))
     	{
