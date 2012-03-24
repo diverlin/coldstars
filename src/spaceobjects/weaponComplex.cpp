@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-WeaponComplex :: WeaponComplex(VehicleBase* vehicle)
+WeaponComplex :: WeaponComplex(Vehicle* vehicle)
 {
         weapon_slot1 = NULL;
         weapon_slot2 = NULL;

@@ -16,7 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-ItemSlot :: ItemSlot(int _subtype_id, VehicleBase* _owner_vehicle, TextureOb* _texOb)
+ItemSlot :: ItemSlot(int _subtype_id, Vehicle* _owner_vehicle, TextureOb* _texOb)
 {
 	/* 
         The class provides implementation to insert/hold/remove all game items (equipments, modules and so on)
@@ -45,7 +45,7 @@ ItemSlot :: ~ItemSlot()
         delete item;
 }
 
-void ItemSlot :: setOwner(VehicleBase* owner_vehicle) {  this->owner_vehicle = owner_vehicle; }
+void ItemSlot :: setOwner(Vehicle* owner_vehicle) {  this->owner_vehicle = owner_vehicle; }
 void ItemSlot :: setFlashingStatus(bool new_status) { is_FLASHING = new_status; }
                 
 void ItemSlot :: setRect(int _pos_x, int _pos_y, int w, int h)
@@ -66,7 +66,7 @@ bool ItemSlot :: getFlashingStatus() const { return is_FLASHING; }
                 
 Rect& ItemSlot :: getRect() { return rect; }
 
-VehicleBase* ItemSlot :: getOwnerVehicle() const { return owner_vehicle; }
+Vehicle* ItemSlot :: getOwnerVehicle() const { return owner_vehicle; }
                                 
 RocketEquipment*    ItemSlot :: getRocketEquipment()    const { return (RocketEquipment*)item; }
 LazerEquipment*     ItemSlot :: getLazerEquipment()     const { return (LazerEquipment*)item; }

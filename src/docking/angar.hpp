@@ -27,8 +27,8 @@ class Angar
                 Angar(TextureOb*, TextureOb*);
                 ~Angar();
                 
-                bool add(VehicleBase*);
-                bool remove(VehicleBase*);
+                bool add(Vehicle*);
+                bool remove(Vehicle*);
 
                 void mouseControl(Player*);
 

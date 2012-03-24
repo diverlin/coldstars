@@ -3,4 +3,5 @@ build/
 install/
 .*.swp
 *~
-main
+game
+main.o

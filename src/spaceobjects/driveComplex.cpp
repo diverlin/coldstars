@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-DriveComplex :: DriveComplex(VehicleBase* owner_vehicle)
+DriveComplex :: DriveComplex(Vehicle* owner_vehicle)
 {      
 	this->owner_vehicle = owner_vehicle;
    

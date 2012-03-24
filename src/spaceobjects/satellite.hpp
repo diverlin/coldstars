@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define SATELLITE_H
 
 
-class Satellite : public VehicleBase
+class Satellite : public Vehicle
 {
     	public:  
         	Satellite();

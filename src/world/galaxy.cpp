@@ -159,9 +159,9 @@ void generateNumPlanets(StarSystem* starsystem, int planet_per_system)
                 starsystem->addToSpace(planet, starsystem->getStar());
                 
                 Satellite* satellite = getNewSatellite();
-                equip((VehicleBase*)satellite);           		// improove
+                equip((Vehicle*)satellite);           		// improove
                         	
-                starsystem->addToSpace((VehicleBase*)satellite, vec2f(0, 0), 0, planet);
+                starsystem->addToSpace((Vehicle*)satellite, vec2f(0, 0), 0, planet);
         }
 }
 
@@ -188,7 +188,7 @@ void generateNumFriendlyNPC(StarSystem* starsystem, int ship_per_system)
         	int weapons_num = getRandInt(1, 5);
         	Ship* ship = shipGenerator(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
        
-        	equip((VehicleBase*)ship);            	// improove
+        	equip((Vehicle*)ship);            	// improove
         	ship->updateAllStuff(); 		// improove
         
         	npc->bind(ship);
@@ -221,7 +221,7 @@ void generateNumEnemyNPC(StarSystem* starsystem, int ship_per_system)
         	int weapons_num = getRandInt(1, 5);
         	Ship* ship = shipGenerator(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
        
-        	equip((VehicleBase*)ship);            // improove
+        	equip((Vehicle*)ship);            // improove
         	ship->updateAllStuff(); 	  // improove
         
         	npc->bind(ship);
@@ -233,9 +233,9 @@ void generateNumEnemyNPC(StarSystem* starsystem, int ship_per_system)
         	starsystem->addToSpace(npc);
         	
         	Satellite* satellite = getNewSatellite();
-                equip((VehicleBase*)satellite);           		// improove
+                equip((Vehicle*)satellite);           		// improove
                         	
-                starsystem->addToSpace((VehicleBase*)satellite, vec2f(0, 0), 0, ship);
+                starsystem->addToSpace((Vehicle*)satellite, vec2f(0, 0), 0, ship);
     	}
 }
 
@@ -270,8 +270,8 @@ void generateSpaceStations(StarSystem* starsystem, int spacestation_per_system)
         	starsystem->addToSpace(npc);
         	
 		Satellite* satellite = getNewSatellite();
-                equip((VehicleBase*)satellite);           		// improove
+                equip((Vehicle*)satellite);           		// improove
                         	
-                starsystem->addToSpace((VehicleBase*)satellite, vec2f(0, 0), 0, spacestation);
+                starsystem->addToSpace((Vehicle*)satellite, vec2f(0, 0), 0, spacestation);
     	}
 }

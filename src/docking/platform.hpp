@@ -27,10 +27,10 @@ class Platform
                 Platform(TextureOb*, float _center_x, float _center_y, int _w, int _h);
                 ~Platform();
 
-                VehicleBase* getVehicle();
+                Vehicle* getVehicle();
                 Rect getRect() const;
                 
-                void insert(VehicleBase*);
+                void insert(Vehicle*);
                 void free(); 
         
                 void render() const;
@@ -39,7 +39,7 @@ class Platform
         private:
                 TextureOb* texOb;
                         
-                VehicleBase* vehicle;                
+                Vehicle* vehicle;                
                 Rect rect;        
 }; 
 

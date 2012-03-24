@@ -16,7 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-class VehicleBase;   
+class Vehicle;   
 class Ship;      
 class Npc;   
 class Observation;
@@ -172,7 +172,7 @@ class GuiMap;
 #include "src/spaceobjects//itemSlot.hpp"
 #include "src/spaceobjects/driveComplex.hpp"
 #include "src/spaceobjects/weaponComplex.hpp"
-#include "src/spaceobjects/vehicleBase.hpp"
+#include "src/spaceobjects/Vehicle.hpp"
 #include "src/spaceobjects/rocketBullet.hpp"
 #include "src/spaceobjects/spaceStation.hpp"
 #include "src/spaceobjects/satellite.hpp"
@@ -326,7 +326,7 @@ class GuiMap;
 #include "src/spaceobjects/itemSlot.cpp"
 
 #include "src/spaceobjects/weaponComplex.cpp"
-#include "src/spaceobjects/vehicleBase.cpp"
+#include "src/spaceobjects/Vehicle.cpp"
 #include "src/spaceobjects/ship.cpp"
 #include "src/spaceobjects/driveComplex.cpp"
 #include "src/spaceobjects/turrel.cpp"

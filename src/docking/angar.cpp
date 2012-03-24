@@ -53,7 +53,7 @@ int Angar :: getFreePlatformTotalNum()
         return sum_free; 
 }
 
-bool Angar :: add(VehicleBase* vehicle)
+bool Angar :: add(Vehicle* vehicle)
 {
         for (unsigned int i = 0; i < platform_vec.size(); i++)
         {
@@ -68,7 +68,7 @@ bool Angar :: add(VehicleBase* vehicle)
 }
 
 
-bool Angar :: remove(VehicleBase* vehicle)
+bool Angar :: remove(Vehicle* vehicle)
 {
         for (unsigned int i = 0; i < platform_vec.size(); i++)
         {

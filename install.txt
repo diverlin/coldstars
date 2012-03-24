@@ -16,10 +16,11 @@ Draft
 
 3) unpack game archive (source code and game data are included)
 
-4) inside game folder run following command in terminal
-make 
+4) inside game folder:
+cd build && cmake .. && make 
 
-5) to run game run terminal command ./main
+5) copy game binary from game_folder/build/ to game_folder
+5) to run game run terminal command ./game
 
 
 ***Windows***

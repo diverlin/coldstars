@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class DriveComplex
 {
 	public:
-      		DriveComplex(VehicleBase*);
+      		DriveComplex(Vehicle*);
       		~DriveComplex();
 
       		void setTarget(BaseGameEntity*, int);       
@@ -49,7 +49,7 @@ class DriveComplex
                 ItemSlot* drive_slot;
         	ItemSlot* bak_slot;
         	
-      		VehicleBase* owner_vehicle;
+      		Vehicle* owner_vehicle;
       		BaseGameEntity* target;
 
 		vec2f target_pos;

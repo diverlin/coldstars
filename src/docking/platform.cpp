@@ -26,11 +26,11 @@ Platform :: Platform(TextureOb* _texOb, float _center_x, float _center_y, int _w
 Platform :: ~Platform()
 {}
 
-VehicleBase* Platform :: getVehicle()      { return vehicle; }
+Vehicle* Platform :: getVehicle()      { return vehicle; }
 Rect Platform :: getRect() const { return rect; }
       
                           
-void Platform :: insert(VehicleBase* vehicle)
+void Platform :: insert(Vehicle* vehicle)
 {
         this->vehicle = vehicle;
         

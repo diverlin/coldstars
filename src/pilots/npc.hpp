@@ -33,7 +33,7 @@ class Npc : public BaseGameEntity
    		void setAlive(bool);
    		void setGarbageReady(bool);
    		void setLand(LandBase*);
-   		void setScanTarget(VehicleBase*);
+   		void setScanTarget(Vehicle*);
    		void setControlledByPlayer(bool);
    		void setUpperControl(bool);
    		
@@ -45,8 +45,8 @@ class Npc : public BaseGameEntity
    		StarSystem* getFailBackStarSystem() const;
    		
    		Kosmoport* getKosmoport();
-   		VehicleBase* getVehicle();
-   		VehicleBase* getScanTarget();
+   		Vehicle* getVehicle();
+   		Vehicle* getScanTarget();
    		Skill* getSkill();
 
    		
@@ -56,7 +56,7 @@ class Npc : public BaseGameEntity
    		    		
                 unsigned long int getCredits() const;   
 
-   		void bind(VehicleBase*);
+   		void bind(Vehicle*);
 
 		void increaseCredits(int);
 		void decreaseCredits(int);
@@ -72,7 +72,7 @@ class Npc : public BaseGameEntity
                 //
 
      		//// scanning
-    		bool checkPossibilityToScan(VehicleBase*);
+    		bool checkPossibilityToScan(Vehicle*);
      		bool scanProceeding(); 
      		void resetScanTarget();
      		//// scanning
@@ -97,7 +97,7 @@ class Npc : public BaseGameEntity
    	     	
    	     	LandBase* land;
    	     	     		     		
-   	     	VehicleBase* vehicle;
+   	     	Vehicle* vehicle;
    	     	
    	     	Skill* skill; 
 
@@ -106,7 +106,7 @@ class Npc : public BaseGameEntity
      		StateMachine* state_machine;
    		     	
      		 	
-     		VehicleBase* vehicle_to_scan;
+     		Vehicle* vehicle_to_scan;
      		
                 Observation* observation;
 

@@ -30,9 +30,9 @@ class LandBase
 		
 		virtual bool getPermissionToLand() const = 0;
 		                
-                virtual bool add(VehicleBase*) = 0;
+                virtual bool add(Vehicle*) = 0;
                 virtual bool add(Npc*) = 0;
-                virtual bool remove(VehicleBase*) = 0;
+                virtual bool remove(Vehicle*) = 0;
                 virtual bool remove(Npc*) = 0;
                 
                 virtual void ai() = 0;       
@@ -47,7 +47,7 @@ class LandBase
         	int type_id;
         	
                 std::vector<Npc*>         NPC_vec;
-                std::vector<VehicleBase*> VEHICLE_vec;        
+                std::vector<Vehicle*> VEHICLE_vec;        
                 
                 std::vector<Npc*> NPC_launching_vec;
                 std::vector<Npc*> NPC_docking_vec;

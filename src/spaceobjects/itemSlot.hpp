@@ -24,10 +24,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class ItemSlot
 {   
 	public:        
-		ItemSlot(int _subtype_id, VehicleBase*, TextureOb*);
+		ItemSlot(int _subtype_id, Vehicle*, TextureOb*);
 		~ItemSlot();
                 
-                void setOwner(VehicleBase*);
+                void setOwner(Vehicle*);
                 void bindTurrel(Turrel*);
                 void setRect(int _pos_x, int _pos_y, int w, int h);
                       
@@ -38,7 +38,7 @@ class ItemSlot
                 Turrel* getTurrel()  const;  
                 
                 Rect& getRect();
-                VehicleBase* getOwnerVehicle() const;
+                Vehicle* getOwnerVehicle() const;
 
                 void setCursoredStatus(bool new_status);
                 void setFlashingStatus(bool new_status);                
@@ -74,7 +74,7 @@ class ItemSlot
                 Bomb* getBomb() const;
                 //Artefact* getArtefact() const;
                 GoodsPack* getGoodsPack() const;
-                VehicleBase* getVehicle() const;
+                Vehicle* getVehicle() const;
                 
 		bool insertItem(ItemBase*);
                 
@@ -108,7 +108,7 @@ class ItemSlot
                 
                 Rect rect;
                                 
-                VehicleBase* owner_vehicle;  // reference to the ship_owenr                
+                Vehicle* owner_vehicle;  // reference to the ship_owenr                
                 Turrel* turrel;              // only for weapons slot
                 
                 ItemBase*    item;
