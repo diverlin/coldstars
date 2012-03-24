@@ -30,10 +30,9 @@ class GuiVehicle
      				
       		void render() const;
 		void renderFocusedItemInfo() const;
-
+      		
       	private: 		
       		Player* player;
-
 };
 
 

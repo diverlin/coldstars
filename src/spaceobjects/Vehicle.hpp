@@ -55,19 +55,10 @@ class Vehicle : public BaseGameEntity
         	
         	void PostCreateInit();
         	
-                // needs when vehicle is grabbed by other vehicle
-       	        //int GetFunctionalSlotSubTypeId() const;    // return NONE_ID
+                // needs when vehicle is grabbed by other vehicle 
+       	        //int GetFunctionalSlotSubTypeId() const;  // return NONE_ID
        	        //void BindSlot(ItemSlot*);		   // do nothing	
        	        //void UpdateOwnerPropetries();		   // do nothing
-       	               	        	
-        	//######### KONTUR RECT 
-        	int w_kontur, h_kontur;
-        	Rect kontur_rect; 
-                TextureOb* texOb_korpus;
-
-	       	std::vector<ItemSlot*> slot_total_vec;
-        	std::vector<ItemSlot*> slot_otsec_vec;
-        
 
         	AbilitiesStatus ableTo;
                 ShipPropetries propetries;
@@ -106,7 +97,7 @@ class Vehicle : public BaseGameEntity
         	void RenderRadarRange();
         	void RenderGrappleRange();        	        	
 
-                void GrappleMicroProgramm();                
+                void GrappleMicroProgramm();               
 
         	
         	void RecalculateCollisionRadius();
@@ -138,10 +129,20 @@ class Vehicle : public BaseGameEntity
         	ItemSlot* freezer_slot;
         
                 ItemSlot* gate_slot;
+                
+                std::vector<ItemSlot*> slot_total_vec;
+        	std::vector<ItemSlot*> slot_otsec_vec;
+        	
+        	// KONTUR RECT 
+        	Rect kontur_rect; 
+                TextureOb* texOb_korpus;
+                //                
                 		
         private:
                	TextureOb* texOb_slot;
              	void DropRandomItemToSpace();   
+             	
+        friend class GuiVehicle;
              	
 };
 
