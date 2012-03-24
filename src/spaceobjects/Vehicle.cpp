@@ -887,18 +887,18 @@ void equip(Vehicle* vehicle)
                              
     	for (unsigned int i = 0; i < 3; i++) 
     	{        
-                vehicle->slot_otsec_vec[i]->insertItem(getNewLazerEquipment(RACE_0_ID));
+                //vehicle->slot_otsec_vec[i]->insertItem(getNewLazerEquipment(RACE_0_ID));
     	}
 
 
     	for (unsigned int i = 3; i < 6; i++) 
     	{        
-        	vehicle->slot_otsec_vec[i]->insertItem(getNewRadarModule());
+        	//vehicle->slot_otsec_vec[i]->insertItem(getNewRadarModule());
     	}  
     	
     	for (unsigned int i = 6; i < 8; i++) 
     	{        
-                vehicle->slot_otsec_vec[i]->insertItem(getNewBomb());
+                //vehicle->slot_otsec_vec[i]->insertItem(getNewBomb());
     	}   
 }
 
