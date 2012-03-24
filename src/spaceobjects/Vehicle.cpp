@@ -18,37 +18,37 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-void VehicleBase :: setNpc(Npc* _npc)   { npc_owner = _npc; }
-void VehicleBase :: setKorpusData(KorpusData data_korpus) { this->data_korpus = data_korpus; }
-void VehicleBase :: add(ItemSlot* slot) { slot_total_vec.push_back(slot); }
+void Vehicle :: setNpc(Npc* _npc)   { npc_owner = _npc; }
+void Vehicle :: setKorpusData(KorpusData data_korpus) { this->data_korpus = data_korpus; }
+void Vehicle :: add(ItemSlot* slot) { slot_total_vec.push_back(slot); }
                 
-WeaponComplex* VehicleBase :: getWeaponComplex() const { return weapon_complex; }
-DriveComplex* VehicleBase :: getDriveComplex()   const { return drive_complex; }
+WeaponComplex* Vehicle :: getWeaponComplex() const { return weapon_complex; }
+DriveComplex* Vehicle :: getDriveComplex()   const { return drive_complex; }
 
-ItemSlot* VehicleBase :: getRadarSlot()     const { return radar_slot; }
-ItemSlot* VehicleBase :: getScanerSlot()    const { return scaner_slot; }
-ItemSlot* VehicleBase :: getEnergizerSlot() const { return energizer_slot; }
-ItemSlot* VehicleBase :: getGrappleSlot()   const { return grapple_slot; }
-ItemSlot* VehicleBase :: getProtectorSlot() const { return protector_slot; }
-ItemSlot* VehicleBase :: getDroidSlot()     const { return droid_slot; }
-ItemSlot* VehicleBase :: getFreezerSlot()   const { return freezer_slot; }
+ItemSlot* Vehicle :: getRadarSlot()     const { return radar_slot; }
+ItemSlot* Vehicle :: getScanerSlot()    const { return scaner_slot; }
+ItemSlot* Vehicle :: getEnergizerSlot() const { return energizer_slot; }
+ItemSlot* Vehicle :: getGrappleSlot()   const { return grapple_slot; }
+ItemSlot* Vehicle :: getProtectorSlot() const { return protector_slot; }
+ItemSlot* Vehicle :: getDroidSlot()     const { return droid_slot; }
+ItemSlot* Vehicle :: getFreezerSlot()   const { return freezer_slot; }
         	               
-ItemSlot* VehicleBase :: getGateSlot()   const { return gate_slot; }
+ItemSlot* Vehicle :: getGateSlot()   const { return gate_slot; }
 
-Npc* VehicleBase :: getNpc() 	        { return npc_owner; }
+Npc* Vehicle :: getNpc() 	        { return npc_owner; }
 
-TextureOb* VehicleBase :: getSlotTexOb() const { return texOb_slot; }
-Rect VehicleBase :: getKonturRect()      const { return kontur_rect; }
+TextureOb* Vehicle :: getSlotTexOb() const { return texOb_slot; }
+Rect Vehicle :: getKonturRect()      const { return kontur_rect; }
         	
 // needs for grabbing interface
-int VehicleBase :: getFunctionalSlotSubTypeId() const { return NONE_SLOT_ID; } 
-void VehicleBase :: bindSlot(ItemSlot* slot)          { return; }	   	
-void VehicleBase :: updateOwnerPropetries()	       { return; }	   
+int Vehicle :: getFunctionalSlotSubTypeId() const { return NONE_SLOT_ID; } 
+void Vehicle :: bindSlot(ItemSlot* slot)          { return; }	   	
+void Vehicle :: updateOwnerPropetries()	       { return; }	   
 //
        	        
-float VehicleBase :: getVisionRadius() const { return propetries.radius; }
+float Vehicle :: getVisionRadius() const { return propetries.radius; }
 
-ItemSlot* VehicleBase :: getEmptyOtsecSlot()
+ItemSlot* Vehicle :: getEmptyOtsecSlot()
 {
       	for (unsigned int i = 0; i < slot_otsec_vec.size(); i++)
       	{
@@ -62,7 +62,7 @@ ItemSlot* VehicleBase :: getEmptyOtsecSlot()
 }
 
 
-ItemSlot* VehicleBase :: getOtsecSlotWithGoods(int requested_goods_subtype_id)
+ItemSlot* Vehicle :: getOtsecSlotWithGoods(int requested_goods_subtype_id)
 {
       	for (unsigned int i = 0; i < slot_otsec_vec.size(); i++)
       	{
@@ -84,12 +84,12 @@ ItemSlot* VehicleBase :: getOtsecSlotWithGoods(int requested_goods_subtype_id)
 
                 
                 
-VehicleBase :: VehicleBase()
+Vehicle :: Vehicle()
 {
 	npc_owner = NULL;
 }
 
-VehicleBase :: ~VehicleBase()
+Vehicle :: ~Vehicle()
 {
 	for (unsigned int i = 0; i < slot_otsec_vec.size(); i++)
     	{
@@ -116,7 +116,7 @@ VehicleBase :: ~VehicleBase()
 
 
 
-void VehicleBase :: postCreateInit()
+void Vehicle :: postCreateInit()
 {
 	this->calcCollisionRadius();
 	texOb_korpus = texOb;  
@@ -269,7 +269,7 @@ void VehicleBase :: postCreateInit()
 }        	
 
 
-void VehicleBase :: calcCollisionRadius()
+void Vehicle :: calcCollisionRadius()
 {
 	collision_radius = (texOb->getFrameWidth() + texOb->getFrameHeight())/3;
 }
@@ -282,7 +282,7 @@ void VehicleBase :: calcCollisionRadius()
 
 
 //// ******** DOCKING/LAUNCHING ******** 
-void VehicleBase :: jumpEvent()
+void Vehicle :: jumpEvent()
 {
         starsystem->removeShip(data_id.id);  
         starsystem->removeNpc(npc_owner->getId(), npc_owner->getSubTypeId());  
@@ -292,7 +292,7 @@ void VehicleBase :: jumpEvent()
 }
                 
                 
-void VehicleBase :: dockEvent()
+void Vehicle :: dockEvent()
 {
      	starsystem->removeShip(data_id.id);
      	starsystem->removeNpc(npc_owner->getId(), npc_owner->getSubTypeId());
@@ -319,7 +319,7 @@ void VehicleBase :: dockEvent()
 	}
 }
 
-void VehicleBase :: launchingEvent()
+void Vehicle :: launchingEvent()
 {
      	printf("vehicle id = %i, launchingEvent()\n", data_id.id);
 
@@ -350,7 +350,7 @@ void VehicleBase :: launchingEvent()
 
 
 
-void VehicleBase :: hit(int _damage, bool show_effect)
+void Vehicle :: hit(int _damage, bool show_effect)
 {
     	data_life.armor -= _damage;
 
@@ -373,7 +373,7 @@ void VehicleBase :: hit(int _damage, bool show_effect)
 }
 
 
-void VehicleBase :: postDeathUniqueEvent(bool show_effect)  /* virtual */
+void Vehicle :: postDeathUniqueEvent(bool show_effect)  /* virtual */
 {
 	int num_items = getRandInt(0, 3);
 	for (int i = 0; i<num_items; i++)
@@ -388,7 +388,7 @@ void VehicleBase :: postDeathUniqueEvent(bool show_effect)  /* virtual */
 }
 
 
-void VehicleBase :: updateAllStuff()
+void Vehicle :: updateAllStuff()
 {
     	// this function set actual ship propretries relying to all equipment placed in slots
     	// used when ship change items in slot
@@ -410,7 +410,7 @@ void VehicleBase :: updateAllStuff()
 
 
 
-void VehicleBase :: updateFireAbility()
+void Vehicle :: updateFireAbility()
 {
      	//ableTo.FIRE = 
      	weapon_complex->updateFireAbility();
@@ -421,7 +421,7 @@ void VehicleBase :: updateFireAbility()
 
 
 
-void VehicleBase :: calculateMass()
+void Vehicle :: calculateMass()
 {
      	propetries.mass = 0;   
 
@@ -435,7 +435,7 @@ void VehicleBase :: calculateMass()
 }
 
 
-void VehicleBase :: updateDriveAbility()
+void Vehicle :: updateDriveAbility()
 {
      	//// calculate mass and then actual ship speed depending on drive power and actual mass
      	//// used each time when ship picked up/bought or drop/sold something.
@@ -465,7 +465,7 @@ void VehicleBase :: updateDriveAbility()
 }
 
 
-void VehicleBase :: updateRadarAbility()
+void Vehicle :: updateRadarAbility()
 {
    	if (radar_slot->getEquipedStatus() == true) 
    	{
@@ -489,7 +489,7 @@ void VehicleBase :: updateRadarAbility()
 
 
 
-void VehicleBase :: updateJumpAbility()
+void Vehicle :: updateJumpAbility()
 {    
 	propetries.hyper = 0;
      	ableTo.HJUMP = false;
@@ -509,7 +509,7 @@ void VehicleBase :: updateJumpAbility()
 }
 
 
-void VehicleBase :: updateEnergyAbility()
+void Vehicle :: updateEnergyAbility()
 {
      	propetries.energy = 0;
      	ableTo.ENERGIZE = false;
@@ -526,7 +526,7 @@ void VehicleBase :: updateEnergyAbility()
 
 
 
-void VehicleBase :: updateProtectionAbility()
+void Vehicle :: updateProtectionAbility()
 {
         propetries.protection = data_korpus.protection;
         ableTo.PROTECT = false;
@@ -545,7 +545,7 @@ void VehicleBase :: updateProtectionAbility()
 
 
 
-void VehicleBase :: updateRepairAbility()
+void Vehicle :: updateRepairAbility()
 {
      	propetries.repair = 0;
      	ableTo.REPAIR = false;
@@ -560,7 +560,7 @@ void VehicleBase :: updateRepairAbility()
         }
 }
 
-void VehicleBase :: droidRepair()
+void Vehicle :: droidRepair()
 {
 	if (ableTo.REPAIR == true)
 	{
@@ -577,7 +577,7 @@ void VehicleBase :: droidRepair()
 	}
 }
 
-void VehicleBase :: updateFreezeAbility()
+void Vehicle :: updateFreezeAbility()
 {
      	propetries.freeze = 0;
      	ableTo.FREEZE = false;
@@ -594,7 +594,7 @@ void VehicleBase :: updateFreezeAbility()
 
 
 
-void VehicleBase :: updateGrabAbility()
+void Vehicle :: updateGrabAbility()
 {
      	ableTo.GRAB = false;
 
@@ -606,7 +606,7 @@ void VehicleBase :: updateGrabAbility()
 
 
 
-void VehicleBase :: updateScanAbility()
+void Vehicle :: updateScanAbility()
 {
      	propetries.scan = 0;
      	ableTo.SCAN = false;
@@ -623,12 +623,12 @@ void VehicleBase :: updateScanAbility()
 
 
 
-void VehicleBase :: setMaxArmor()
+void Vehicle :: setMaxArmor()
 {
      	data_life.armor = data_korpus.armor;
 }
 
-void VehicleBase :: setMaxFuel()
+void Vehicle :: setMaxFuel()
 {
      	if (drive_complex->getBakSlot()->getEquipedStatus() == true)
      	{
@@ -638,7 +638,7 @@ void VehicleBase :: setMaxFuel()
 
 
 
-std::string VehicleBase :: returnProtectionStr()
+std::string Vehicle :: returnProtectionStr()
 {
     	if (ableTo.PROTECT == true)
        		return int2str(protector_slot->getProtectorEquipment()->getProtection()) + '+' + int2str(data_korpus.protection);
@@ -646,7 +646,7 @@ std::string VehicleBase :: returnProtectionStr()
        		return int2str(data_korpus.protection);
 }
 
-void VehicleBase :: renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y)
+void Vehicle :: renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y)
 {  
         this->updateInfo(); // virtual, overriding
      	drawInfoIn2Column(&info.title_list, &info.value_list, _pos_x, _pos_y, _offset_x, _offset_y);
@@ -657,12 +657,12 @@ void VehicleBase :: renderInfo(float _pos_x, float _pos_y, float _offset_x, floa
      	}
 }
 
-void VehicleBase :: renderInfo_inSpace(vec2f scroll_coords)
+void Vehicle :: renderInfo_inSpace(vec2f scroll_coords)
 {  
 	renderInfo(points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);
 }
 
-void VehicleBase :: renderGrappleTrail() const
+void Vehicle :: renderGrappleTrail() const
 {
         for (unsigned int i = 0; i<grapple_slot->getGrappleEquipment()->target_vec.size(); i++)
         {
@@ -687,7 +687,7 @@ void VehicleBase :: renderGrappleTrail() const
         }
 }
 		
-void VehicleBase :: renderKorpus() const
+void Vehicle :: renderKorpus() const
 {
     	drawFlatQuadPerVertexIn2D(texOb,
     				  points.getBottomLeft(), 
@@ -698,18 +698,18 @@ void VehicleBase :: renderKorpus() const
 }
 
 
-void VehicleBase :: renderDriveTrail() const
+void Vehicle :: renderDriveTrail() const
 {
 	drive_trail->render();
 }
 
 
-void VehicleBase :: renderShield() const
+void Vehicle :: renderShield() const
 {
      	shield->render();
 }
 
-void VehicleBase :: renderRadarRange()
+void Vehicle :: renderRadarRange()
 {
 	glPushMatrix();
 		glTranslatef(points.getCenter().x, points.getCenter().y, 0.0f);
@@ -718,7 +718,7 @@ void VehicleBase :: renderRadarRange()
 	glPopMatrix();
 }
 
-void VehicleBase :: renderGrappleRange()
+void Vehicle :: renderGrappleRange()
 {
 	glPushMatrix();
 		glTranslatef(points.getCenter().x, points.getCenter().y, 0.0f);
@@ -728,7 +728,7 @@ void VehicleBase :: renderGrappleRange()
 }
 
 
-bool VehicleBase :: repair()
+bool Vehicle :: repair()
 {
         unsigned int _fix = data_korpus.armor - data_life.armor;
         unsigned int _price = _fix/10;
@@ -744,7 +744,7 @@ bool VehicleBase :: repair()
 }
 
 
-void VehicleBase :: dropRandomItemToSpace()
+void Vehicle :: dropRandomItemToSpace()
 {
 	std::vector<ItemSlot*> _equiped_slot_vec;
 	
@@ -765,7 +765,7 @@ void VehicleBase :: dropRandomItemToSpace()
 		
 }
 
-void VehicleBase :: grappleScenario()
+void Vehicle :: grappleScenario()
 {
         grapple_slot->getGrappleEquipment()->validateTargets();  
                 
@@ -820,7 +820,7 @@ void VehicleBase :: grappleScenario()
        				case SHIP_ID:
        				{
        					ItemSlot* _slot = getEmptyOtsecSlot();
-                                        VehicleBase* _vehicle = (VehicleBase*)grapple_slot->getGrappleEquipment()->target_vec[i];
+                                        Vehicle* _vehicle = (Vehicle*)grapple_slot->getGrappleEquipment()->target_vec[i];
        				        if (_slot != NULL)
        					{
        						//_slot->insertItem(_vehicle);
@@ -838,7 +838,7 @@ void VehicleBase :: grappleScenario()
 
 
 
-void equip(VehicleBase* vehicle)
+void equip(Vehicle* vehicle)
 {
     	if (vehicle->data_korpus.weapon_slot_num >= 1)
     	{

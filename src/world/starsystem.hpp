@@ -86,7 +86,7 @@ class StarSystem : public BaseGameEntity
     		//// TRANSITION
                 void addToHyperJumpQueue(Npc*);
                                 
-    		void addToSpace(VehicleBase*, vec2f, float, BaseGameEntity*);
+    		void addToSpace(Vehicle*, vec2f, float, BaseGameEntity*);
     		void addToSpace(Npc*);
 
                 void addToSpace(Star*);
@@ -113,7 +113,7 @@ class StarSystem : public BaseGameEntity
    		
    		void addToRemoveFromOuterSpaceQueue(Mineral*);
    		void addToRemoveFromOuterSpaceQueue(Container*);
-   		void addToRemoveFromOuterSpaceQueue(VehicleBase*);
+   		void addToRemoveFromOuterSpaceQueue(Vehicle*);
    		    		
    		void bombExplosionEvent(Container*, bool);
    		

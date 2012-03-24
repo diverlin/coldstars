@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class WeaponComplex
 {
 	public:
-      		WeaponComplex(VehicleBase*);
+      		WeaponComplex(Vehicle*);
       		~WeaponComplex();
       		
       		ItemSlot* getWeaponSlot1() const;
@@ -56,7 +56,7 @@ class WeaponComplex
         	
       	private:
       		int weapon_num;
-      		VehicleBase* owner_vehicle;
+      		Vehicle* owner_vehicle;
       		
       		int fire_delay, d_fire_delay;
         	std::vector<ItemSlot*> slot_weapon_vec;

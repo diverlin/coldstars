@@ -24,15 +24,15 @@ void Npc :: setGarbageReady(bool _garbage_ready)   { data_life.garbage_ready = _
 void Npc :: setAlive(bool _alive) 		   { data_life.is_alive = _alive; }
 
 void Npc :: setLand(LandBase* land)   		        { this->land = land; }
-void Npc :: setScanTarget(VehicleBase* vehicle_to_scan) { this->vehicle_to_scan = vehicle_to_scan; }
+void Npc :: setScanTarget(Vehicle* vehicle_to_scan)     { this->vehicle_to_scan = vehicle_to_scan; }
 void Npc :: setUpperControl(bool upper_control)         { this->upper_control = upper_control; }
 
 
 int Npc :: getRaceId() const	   { return race_id; }
 StarSystem* Npc :: getFailBackStarSystem() const { return failback_starsystem; }
-VehicleBase* Npc :: getVehicle()       { return vehicle; }
+Vehicle* Npc :: getVehicle()       { return vehicle; }
 Skill* Npc :: getSkill() 	   { return skill; }	
-VehicleBase* Npc :: getScanTarget()	   { return vehicle_to_scan; }	
+Vehicle* Npc :: getScanTarget()	   { return vehicle_to_scan; }	
 Observation* Npc :: getObservation() const { return observation; }
 
 
@@ -41,7 +41,7 @@ StateMachine* Npc :: getStateMachine() {return state_machine; }
 
 LandBase* Npc :: getLand() const { return land; }
    		
-void Npc :: bind(VehicleBase* vehicle) 	           
+void Npc :: bind(Vehicle* vehicle) 	           
 { 
 	this->vehicle = vehicle; 
 	vehicle->setNpc(this); 
@@ -267,7 +267,7 @@ StarSystem* Npc :: getClosestStarSystem(bool _captured)
 
 
 //// *********** SCANNING ***********
-bool Npc :: checkPossibilityToScan(VehicleBase* vehicle)
+bool Npc :: checkPossibilityToScan(Vehicle* vehicle)
 {
      	if (this->vehicle->getId() == vehicle->getId())    // selfscan is possible all time
      	{

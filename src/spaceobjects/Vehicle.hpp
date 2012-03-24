@@ -17,15 +17,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef VEHICLEBASE_H
-#define VEHICLEBASE_H
+#ifndef VEHICLE_H
+#define VEHICLE_H
 
 
-class VehicleBase : public BaseGameEntity
+class Vehicle : public BaseGameEntity
 {   
     	public:
-       	        VehicleBase();
-        	virtual ~VehicleBase(); 
+       	        Vehicle();
+        	virtual ~Vehicle(); 
         	
                 void setNpc(Npc*);
                 void setKorpusData(KorpusData);
@@ -149,6 +149,6 @@ class VehicleBase : public BaseGameEntity
              	
 };
 
-void equip(VehicleBase*);
+void equip(Vehicle*);
 
 #endif 

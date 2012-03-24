@@ -61,7 +61,7 @@ bool Kosmoport :: getPermissionToLand() const
      
                 
 /* virtual */
-bool Kosmoport :: add(VehicleBase* vehicle)
+bool Kosmoport :: add(Vehicle* vehicle)
 {
         vehicle->setPlaceTypeId(type_id);
                 
@@ -83,7 +83,7 @@ bool Kosmoport :: add(Npc* npc)
 }
 
 /* virtual */
-bool Kosmoport :: remove(VehicleBase* vehicle)
+bool Kosmoport :: remove(Vehicle* vehicle)
 {
         bool is_removed_from_list = false;
         for (unsigned int i = 0; i < VEHICLE_vec.size(); i++)

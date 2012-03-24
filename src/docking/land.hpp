@@ -26,9 +26,9 @@ class Land : public LandBase
                 Land();
                 virtual ~Land();
 
-                virtual bool add(VehicleBase*);
+                virtual bool add(Vehicle*);
                 virtual bool add(Npc*);
-                virtual bool remove(VehicleBase*);
+                virtual bool remove(Vehicle*);
                 virtual bool remove(Npc*);
                 
                 virtual bool getPermissionToLand() const;

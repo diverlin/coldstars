@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define ROCKETBULLET_H
 
 
-class RocketBullet : public VehicleBase
+class RocketBullet : public Vehicle
 {
         public:
                 RocketBullet(BulletData,  

@@ -29,7 +29,7 @@ Land :: ~Land()
 
 //// ******* TRANSITION ******* 
 /* virtual */
-bool Land :: add(VehicleBase* vehicle)
+bool Land :: add(Vehicle* vehicle)
 {
         vehicle->setPlaceTypeId(PLANET_ID);
         VEHICLE_vec.push_back(vehicle);
@@ -49,7 +49,7 @@ bool Land :: add(Npc* npc)
 }
 
 /*virtual */
-bool Land :: remove(VehicleBase* vehicle)
+bool Land :: remove(Vehicle* vehicle)
 {
         bool is_removed = false;
         

@@ -686,7 +686,7 @@ void StarSystem :: asteroidManager_s(unsigned int num)
 
 
 
-void StarSystem :: addToSpace(VehicleBase* vehicle, vec2f center, float angle, BaseGameEntity* parent)
+void StarSystem :: addToSpace(Vehicle* vehicle, vec2f center, float angle, BaseGameEntity* parent)
 {
      	vehicle->setPlaceTypeId(SPACE_ID);
      	vehicle->setStarSystem(this);  
@@ -853,7 +853,7 @@ void StarSystem :: addToRemoveFromOuterSpaceQueue(Container* container)
 }
 
 
-void StarSystem :: addToRemoveFromOuterSpaceQueue(VehicleBase* vehicle)
+void StarSystem :: addToRemoveFromOuterSpaceQueue(Vehicle* vehicle)
 {
 	switch(vehicle->getTypeId())
 	{

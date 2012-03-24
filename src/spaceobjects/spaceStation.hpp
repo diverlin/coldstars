@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define SPACESTATION_H
 
 
-class SpaceStation : public VehicleBase
+class SpaceStation : public Vehicle
 {
     	public:  
         	SpaceStation(int);
