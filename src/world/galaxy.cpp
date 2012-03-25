@@ -93,7 +93,7 @@ StarSystem* generateEntireStarSystem()
 {  
         StarSystem* starsystem = new StarSystem(RACE_0_ID);   
         
-        vec2f _center(getRandInt(MAP_OFFSET_X, SCREEN_WIDTH_MIN - 3*MAP_OFFSET_X), SCREEN_HEIGHT_MIN - getRandInt(MAP_OFFSET_Y, SCREEN_HEIGHT_MIN - 2*MAP_OFFSET_Y) );			 
+        vec2f _center(getRandInt(MAP_OFFSET_X, SCREEN_WIDTH_MIN - 2*MAP_OFFSET_X), getRandInt(MAP_OFFSET_Y, SCREEN_HEIGHT_MIN - 2*MAP_OFFSET_Y) );			 
         starsystem->setPosition(_center);
 
         Star* star = getNewStar();    
@@ -159,7 +159,7 @@ void generateNumPlanets(StarSystem* starsystem, int planet_per_system)
                 starsystem->addToSpace(planet, starsystem->getStar());
                 
                 Satellite* satellite = VehicleBuilder::Instance().GetNewSatellite();
-                equip((Vehicle*)satellite);           		// improove
+                VehicleBuilder::Instance().Equip(satellite);           		// improove
                         	
                 starsystem->addToSpace((Vehicle*)satellite, vec2f(0, 0), 0, planet);
         }
@@ -188,7 +188,7 @@ void generateNumFriendlyNPC(StarSystem* starsystem, int ship_per_system)
         	int weapons_num = getRandInt(1, 5);
         	Ship* ship = VehicleBuilder::Instance().GetNewShip(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
        
-        	equip((Vehicle*)ship);            	// improove
+        	VehicleBuilder::Instance().Equip(ship);            	// improove
         	ship->UpdateAllPropertiesAndAbilities(); 		// improove
         
         	npc->bind(ship);
@@ -221,7 +221,7 @@ void generateNumEnemyNPC(StarSystem* starsystem, int ship_per_system)
         	int weapons_num = getRandInt(1, 5);
         	Ship* ship = VehicleBuilder::Instance().GetNewShip(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
        
-        	equip((Vehicle*)ship);            // improove
+        	VehicleBuilder::Instance().Equip(ship);            // improove
         	ship->UpdateAllPropertiesAndAbilities(); 	  // improove
         
         	npc->bind(ship);
@@ -233,7 +233,7 @@ void generateNumEnemyNPC(StarSystem* starsystem, int ship_per_system)
         	starsystem->addToSpace(npc);
         	
         	Satellite* satellite = VehicleBuilder::Instance().GetNewSatellite();
-                equip((Vehicle*)satellite);           		// improove
+                VehicleBuilder::Instance().Equip(satellite);           		// improove
                         	
                 starsystem->addToSpace((Vehicle*)satellite, vec2f(0, 0), 0, ship);
     	}
@@ -258,7 +258,7 @@ void generateSpaceStations(StarSystem* starsystem, int spacestation_per_system)
         	int weapons_num = 5;
         	SpaceStation* spacestation = VehicleBuilder::Instance().GetNewSpaceStation();
        
-        	equip(spacestation);            	// improove
+        	VehicleBuilder::Instance().Equip(spacestation);       	// improove
         	spacestation->UpdateAllPropertiesAndAbilities(); 	// improove
         
         	npc->bind(spacestation);
@@ -270,7 +270,7 @@ void generateSpaceStations(StarSystem* starsystem, int spacestation_per_system)
         	starsystem->addToSpace(npc);
         	
 		Satellite* satellite = VehicleBuilder::Instance().GetNewSatellite();
-                equip((Vehicle*)satellite);           		// improove
+                VehicleBuilder::Instance().Equip(satellite);           		// improove
                         	
                 starsystem->addToSpace((Vehicle*)satellite, vec2f(0, 0), 0, spacestation);
     	}

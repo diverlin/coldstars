@@ -180,3 +180,75 @@ void BaseVehicleBuilder::CreateProtectionComplex(Vehicle* vehicle)
  	vehicle->SetProtectionComplex(protection_complex);
 }
         	
+
+
+void BaseVehicleBuilder::Equip(Vehicle* vehicle)
+{
+    	if (vehicle->data_korpus.weapon_slot_num >= 1)
+    	{
+       		//vehicle->weapon_slot1.insertItem(lazerEquipmentGenerator(RACE_0_ID)); 
+       		vehicle->GetWeaponComplex()->GetWeaponSlot1().insertItem(getNewRocketEquipment(RACE_0_ID));     	
+    	}   
+
+    	if (vehicle->data_korpus.weapon_slot_num >= 2)
+    	{
+       		vehicle->GetWeaponComplex()->GetWeaponSlot2().insertItem(getNewLazerEquipment(RACE_0_ID)); 
+    	}   
+    
+    	if (vehicle->data_korpus.weapon_slot_num >= 3)
+    	{
+       		vehicle->GetWeaponComplex()->GetWeaponSlot3().insertItem(getNewLazerEquipment(RACE_0_ID)); 
+       		//vehicle->weapon_slot3.insertItem(rocketEquipmentGenerator(RACE_0_ID)); 
+    	}   
+        
+    	if (vehicle->data_korpus.weapon_slot_num >= 4)
+    	{
+       		//vehicle->weapon_slot4.insertItem(lazerEquipmentGenerator(RACE_0_ID));         
+       		vehicle->GetWeaponComplex()->GetWeaponSlot4().insertItem(getNewRocketEquipment(RACE_0_ID)); 
+    	}   
+    
+    	if (vehicle->data_korpus.weapon_slot_num >= 5) 
+    	{
+       		//vehicle->weapon_slot5.insertItem(lazerEquipmentGenerator(RACE_0_ID)); 
+       		vehicle->GetWeaponComplex()->GetWeaponSlot5().insertItem(getNewRocketEquipment(RACE_0_ID)); 
+    	}   
+        
+    	vehicle->GetRadarSlot()->insertItem(getNewRadarEquipment(RACE_0_ID)); 
+ 
+    	vehicle->GetDriveComplex()->GetDriveSlot().insertItem(getNewDriveEquipment(RACE_0_ID)); 
+    	vehicle->GetDriveComplex()->GetBakSlot().insertItem(getNewBakEquipment(RACE_0_ID)); 
+    	vehicle->GetEnergizerSlot()->insertItem(getNewEnergizerEquipment(RACE_0_ID));     
+    	vehicle->GetProtectionComplex()->GetProtectorSlot().insertItem(getNewProtectorEquipment(RACE_0_ID)); 
+   	vehicle->GetDroidSlot()->insertItem(getNewDroidEquipment(RACE_0_ID)); 
+   	vehicle->GetFreezerSlot()->insertItem(getNewFreezerEquipment(RACE_0_ID));  
+   	vehicle->GetScanerSlot()->insertItem(getNewScanerEquipment(RACE_0_ID)); 
+    
+    	if (vehicle->data_korpus.inhibit_GRAPPLE == false) 
+    	{
+      		vehicle->GetGrappleSlot()->insertItem(getNewGrappleEquipment(RACE_0_ID)); 
+   	}
+    
+                             
+    	for (unsigned int i = 0; i < 3; i++) 
+    	{        
+                vehicle->AddItemToOtsec(getNewLazerEquipment(RACE_0_ID));
+    	}
+
+
+    	for (unsigned int i = 0; i < 3; i++) 
+    	{        
+        	vehicle->AddItemToOtsec(getNewRadarModule());
+    	}  
+    	
+    	for (unsigned int i = 0; i < 3; i++) 
+    	{        
+                vehicle->AddItemToOtsec(getNewBomb());
+    	}   
+}
+
+
+
+
+
+
+

@@ -41,7 +41,7 @@ StarSystem :: ~StarSystem()
 {}
       
 
-void StarSystem :: setPosition(vec2f _center) { this->center = center; }
+void StarSystem :: setPosition(vec2f center) { this->center = center; }
 void StarSystem :: setGalaxy(Galaxy* galaxy)  { this->galaxy = galaxy;}
 						
 int StarSystem :: getId() const     { return id; }
@@ -53,13 +53,9 @@ vec2f StarSystem :: getPosition() const { return center; }
 Galaxy* StarSystem :: getGalaxy() const { return galaxy; }
       
 int StarSystem :: getRaceId() const 	     { return race_id; }
-int StarSystem :: getConquerorRaceId() const { return conqueror_race_id; }
+int StarSystem :: getConquerorRaceId() const { return conqueror_race_id; }  
      
-     
-Points* StarSystem :: getPoints() const    { return NULL; }
-bool* StarSystem :: getpAlive()            { return NULL; }
-int* StarSystem :: getpPlaceTypeId()       { return NULL; }
-float StarSystem :: getCollisionRadius() const { return 0.0; }
+
    		
 Star* StarSystem :: getStar() const { return STAR_vec[0]; }
 int StarSystem :: getShockWaveNum() const { return effect_SHOCKWAVE_vec.size(); }  
