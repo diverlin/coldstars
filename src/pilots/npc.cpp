@@ -276,9 +276,9 @@ bool Npc :: checkPossibilityToScan(Vehicle* vehicle)
  
      	if (this->vehicle->ableTo.SCAN == true) 
      	{
-        	if (vehicle->GetProtectorSlot()->getEquipedStatus() == true)
+        	if (vehicle->GetProtectionComplex()->GetProtectorSlot().getEquipedStatus() == true)
         	{
-           		if (this->vehicle->GetScanerSlot()->getScanerEquipment()->getScan() >= vehicle->GetProtectorSlot()->getProtectorEquipment()->getProtection()) 
+           		if (this->vehicle->GetScanerSlot()->getScanerEquipment()->getScan() >= vehicle->GetProtectionComplex()->GetProtectorSlot().getProtectorEquipment()->getProtection()) 
               		{
               			return true;
               		}

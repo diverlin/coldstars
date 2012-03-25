@@ -16,6 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 ItemSlot :: ItemSlot(int _subtype_id, Vehicle* _owner_vehicle, TextureOb* _texOb)
 {
 	/* 
@@ -147,7 +148,7 @@ void ItemSlot :: removeItem()
 
 void ItemSlot :: render(GLuint flash_tex)
 {
-	drawTexturedRect(texOb, rect, -1.5);
+       	drawTexturedRect(texOb, rect, -1.5);
 
 	//if self.flash == True:
 		//drawTexturedRect(flash_tex, self.rect, -1.0)
