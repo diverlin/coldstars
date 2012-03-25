@@ -70,9 +70,7 @@ Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int w
 	ship->setLifeData(data_life);
 	
 	CreateKorpusGeometry(ship);
-        CreateShieldGeometry(ship);
-        CreateTrailGeometry(ship);
-        CreateGuiKontur(ship);
+        CreateKorpusGui(ship);
         CreateEquipmentSlots(ship);
         CreateDriveComplex(ship);
         CreateWeaponsComplex(ship);
@@ -123,9 +121,7 @@ Satellite* VehicleBuilder::GetNewSatellite()
 	satellite->setTextureOb(texOb);
 	
 	CreateKorpusGeometry(satellite);
-        CreateShieldGeometry(satellite);
-        CreateTrailGeometry(satellite);
-        CreateGuiKontur(satellite);
+        CreateKorpusGui(satellite);
         CreateEquipmentSlots(satellite);
         CreateDriveComplex(satellite);
         CreateWeaponsComplex(satellite);
@@ -177,9 +173,7 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation()
 	spacestation->setLifeData(data_life);
     	
 	CreateKorpusGeometry(spacestation);
-        CreateShieldGeometry(spacestation);
-        CreateTrailGeometry(spacestation);
-        CreateGuiKontur(spacestation);
+        CreateKorpusGui(spacestation);
         CreateEquipmentSlots(spacestation);
         CreateDriveComplex(spacestation);
         CreateWeaponsComplex(spacestation);
@@ -211,13 +205,12 @@ RocketBullet* VehicleBuilder::GetNewRocket(BulletData data_bullet, ItemSlot* slo
         rocket->setTextureOb(data_bullet.texOb);
          
         CreateKorpusGeometry(rocket);
-        CreateShieldGeometry(rocket);
-        CreateTrailGeometry(rocket);
-        CreateGuiKontur(rocket);
-        CreateEquipmentSlots(rocket);
+        //CreateShieldGeometry(rocket);
+        //CreateGuiKontur(rocket);
+        //CreateEquipmentSlots(rocket);
         CreateDriveComplex(rocket);
-        CreateWeaponsComplex(rocket);
-        CreateProtectionComplex(rocket);	
+        //CreateWeaponsComplex(rocket);
+        //CreateProtectionComplex(rocket);	
          
         if ( (slot->getOwnerVehicle()->data_korpus.render_TURRELS == true) and (force_center_start == false))
     	{

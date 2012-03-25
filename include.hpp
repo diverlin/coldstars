@@ -172,6 +172,7 @@ class GuiMap;
 #include "src/spaceobjects//itemSlot.hpp"
 #include "src/spaceobjects/driveComplex.hpp"
 #include "src/spaceobjects/weaponComplex.hpp"
+#include "src/spaceobjects/ProtectionComplex.hpp"
 #include "src/spaceobjects/Vehicle.hpp"
 #include "src/spaceobjects/rocketBullet.hpp"
 #include "src/spaceobjects/spaceStation.hpp"
@@ -330,6 +331,7 @@ class GuiMap;
 #include "src/spaceobjects/itemSlot.cpp"
 
 #include "src/spaceobjects/weaponComplex.cpp"
+#include "src/spaceobjects/ProtectionComplex.cpp"
 #include "src/spaceobjects/Vehicle.cpp"
 #include "src/spaceobjects/ship.cpp"
 #include "src/spaceobjects/driveComplex.cpp"

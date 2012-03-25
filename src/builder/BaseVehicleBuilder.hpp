@@ -29,9 +29,7 @@ class BaseVehicleBuilder
  		                
         protected:
         	void CreateKorpusGeometry(Vehicle*);
-        	void CreateShieldGeometry(Vehicle*);
-        	void CreateTrailGeometry(Vehicle*);
-        	void CreateGuiKontur(Vehicle*);
+        	void CreateKorpusGui(Vehicle*);
         	void CreateEquipmentSlots(Vehicle*);
         	void CreateDriveComplex(Vehicle*);
         	void CreateWeaponsComplex(Vehicle*);

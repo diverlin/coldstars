@@ -28,9 +28,10 @@ class Vehicle : public BaseGameEntity
         	virtual ~Vehicle(); 
         	
                 void SetNpc(Npc*);
-                void SetDriveComplex(DriveComplex*);
+
                 void SetWeaponComplex(WeaponComplex*);
-                void SetShieldEffect(ShieldEffect*);
+                void SetDriveComplex(DriveComplex*);
+		void SetProtectionComplex(ProtectionComplex*);
                                 
                 void SetKorpusData(KorpusData);
                 void SetGuiTextureOb(TextureOb*);
@@ -42,12 +43,12 @@ class Vehicle : public BaseGameEntity
                 
                 WeaponComplex* GetWeaponComplex() const;
                 DriveComplex* GetDriveComplex() const;
+                ProtectionComplex* GetProtectionComplex() const;
                 
         	ItemSlot* GetRadarSlot()     const;
         	ItemSlot* GetScanerSlot()    const;
         	ItemSlot* GetEnergizerSlot() const;
         	ItemSlot* GetGrappleSlot()   const;
-        	ItemSlot* GetProtectorSlot() const;
         	ItemSlot* GetDroidSlot()     const;
         	ItemSlot* GetFreezerSlot()   const;
         	ItemSlot* GetGateSlot()   const;
@@ -112,25 +113,22 @@ class Vehicle : public BaseGameEntity
 	protected:
 		virtual void updateInfo() = 0;
              	std::string returnProtectionStr();
+            	
             	DriveComplex* drive_complex;
-     	
+        	WeaponComplex* weapon_complex;
+        	ProtectionComplex* protection_complex;     	
 		Npc* owner_npc;
-		
-		ShieldEffect* shield;
              		
                 void RenderGrappleTrail() const;
 		void RenderKorpus() const;
              	void RenderTurrels() const;
              	void RenderDriveTrail() const;
           	void RenderShield() const;
-             	
-        	WeaponComplex* weapon_complex;
         	
         	ItemSlot* radar_slot;
         	ItemSlot* scaner_slot;
         	ItemSlot* energizer_slot;
         	ItemSlot* grapple_slot;
-        	ItemSlot* protector_slot;
         	ItemSlot* droid_slot;
         	ItemSlot* freezer_slot;
         
@@ -145,7 +143,6 @@ class Vehicle : public BaseGameEntity
                 //                
                 		
         private:
-               	TextureOb* texOb_slot;
              	void DropRandomItemToSpace();   
              	
         friend class GuiVehicle;

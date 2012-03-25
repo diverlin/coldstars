@@ -63,7 +63,7 @@ void SpaceStation :: updateInfo()
 void SpaceStation :: updateRenderStuff()
 {
     	//points.update(); 
-    	shield->update();
+    	protection_complex->GetShieldEffect()->update();
     	
     	//if (ableTo.DRIVE == true)
     	//{

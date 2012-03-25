@@ -20,6 +20,19 @@ Vehicle::Vehicle()
 {
 	owner_npc = NULL;
        	starsystem = NULL; 
+       	
+       	radar_slot = NULL;
+        scaner_slot = NULL;
+        energizer_slot = NULL;
+        grapple_slot = NULL;
+        droid_slot = NULL;
+        freezer_slot = NULL;
+                                                
+       	gate_slot = NULL;
+        	
+    	weapon_complex = NULL;
+    	drive_complex = NULL;
+    	protection_complex = NULL;
 }
 
 /*virtual*/
@@ -34,29 +47,27 @@ Vehicle::~Vehicle()
         delete scaner_slot;
         delete energizer_slot;
         delete grapple_slot;
-        delete protector_slot;
         delete droid_slot;
         delete freezer_slot;
                                                 
        	delete gate_slot;
         	
-    	delete drive_complex;
     	delete weapon_complex;
-        
-	delete shield;
+    	delete drive_complex;
+	delete protection_complex;
 } 
 
 
 void Vehicle::SetNpc(Npc* npc)   { owner_npc = npc; }
-void Vehicle::SetDriveComplex(DriveComplex* drive_complex)    { this->drive_complex = drive_complex; }
-void Vehicle::SetWeaponComplex(WeaponComplex* weapon_complex) { this->weapon_complex = weapon_complex; }
+
+void Vehicle::SetWeaponComplex(WeaponComplex* weapon_complex)           { this->weapon_complex     = weapon_complex; }
+void Vehicle::SetDriveComplex(DriveComplex* drive_complex)              { this->drive_complex      = drive_complex; }
+void Vehicle::SetProtectionComplex(ProtectionComplex* protection_complex)    { this->protection_complex = protection_complex; }
                 
 void Vehicle::SetKorpusData(KorpusData data_korpus) { this->data_korpus = data_korpus; }
 void Vehicle::SetGuiTextureOb(TextureOb* texOb) { texOb_korpus = texOb; }
 void Vehicle::SetGuiRect(Rect rect) { kontur_rect = rect; }
         	               
-void Vehicle::SetShieldEffect(ShieldEffect* shield) { this->shield = shield; }
-        	                
 void Vehicle::Add(ItemSlot* slot) 
 { 
 	if (slot->getSubTypeId() != GATE_SLOT_ID)
@@ -75,21 +86,20 @@ void Vehicle::Add(ItemSlot* slot)
 		
 		case ENERGIZER_SLOT_ID: { energizer_slot = slot; break; }
 		case GRAPPLE_SLOT_ID:   { grapple_slot = slot; break; }
-		case PROTECTOR_SLOT_ID: { protector_slot = slot; break; }
 		case DROID_SLOT_ID:     { droid_slot = slot; break; }
 		case FREEZER_SLOT_ID:   { freezer_slot = slot; break; }
 		case GATE_SLOT_ID:      { gate_slot = slot; break; }	
 	}
 }
                 
-WeaponComplex* Vehicle::GetWeaponComplex() const { return weapon_complex; }
-DriveComplex* Vehicle::GetDriveComplex()   const { return drive_complex; }
+WeaponComplex* Vehicle::GetWeaponComplex()           const { return weapon_complex; }
+DriveComplex* Vehicle::GetDriveComplex()             const { return drive_complex; }
+ProtectionComplex* Vehicle::GetProtectionComplex()   const { return protection_complex; }
 
 ItemSlot* Vehicle::GetRadarSlot()     const { return radar_slot; }
 ItemSlot* Vehicle::GetScanerSlot()    const { return scaner_slot; }
 ItemSlot* Vehicle::GetEnergizerSlot() const { return energizer_slot; }
 ItemSlot* Vehicle::GetGrappleSlot()   const { return grapple_slot; }
-ItemSlot* Vehicle::GetProtectorSlot() const { return protector_slot; }
 ItemSlot* Vehicle::GetDroidSlot()     const { return droid_slot; }
 ItemSlot* Vehicle::GetFreezerSlot()   const { return freezer_slot; }
         	               
@@ -97,7 +107,7 @@ ItemSlot* Vehicle::GetGateSlot()      const { return gate_slot; }
 
 Npc* Vehicle::GetOwnerNpc() 	      const { return owner_npc; }
 
-TextureOb* Vehicle::GetSlotTexOb() const { return texOb_slot; }
+TextureOb* Vehicle::GetSlotTexOb() const { TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID); return texOb_slot; }
 const Rect& Vehicle::GetGuiRect() const { return kontur_rect; }
         	      	
 // needs when vehicle is grabbed by other vehicle
@@ -231,7 +241,7 @@ void Vehicle::Hit(int _damage, bool show_effect)
 	{
     		if (ableTo.PROTECT == true)
     		{
-       			shield->setAlpha(1.0);
+       			protection_complex->GetShieldEffect()->setAlpha(1.0);
        		}       	
        		// improove
        		Color4i color;  	       		
@@ -392,11 +402,11 @@ void Vehicle::UpdateProtectionAbility()
         ableTo.PROTECT = false;
 
 
-     	if (protector_slot->getEquipedStatus() == true)
+     	if (protection_complex->GetProtectorSlot().getEquipedStatus() == true)
      	{
-        	if (protector_slot->getProtectorEquipment()->getCondition() > 0)
+        	if (protection_complex->GetProtectorSlot().getProtectorEquipment()->getCondition() > 0)
         	{
-           		propetries.protection += protector_slot->getProtectorEquipment()->getProtection();
+           		propetries.protection += protection_complex->GetProtectorSlot().getProtectorEquipment()->getProtection();
            		ableTo.PROTECT = true;
         	}       
      	}   
@@ -498,7 +508,7 @@ void Vehicle::SetMaxFuel()
 std::string Vehicle::returnProtectionStr()
 {
     	if (ableTo.PROTECT == true)
-       		return int2str(protector_slot->getProtectorEquipment()->getProtection()) + '+' + int2str(data_korpus.protection);
+       		return int2str(protection_complex->GetProtectorSlot().getProtectorEquipment()->getProtection()) + '+' + int2str(data_korpus.protection);
     	else
        		return int2str(data_korpus.protection);
 }
@@ -562,7 +572,7 @@ void Vehicle::RenderDriveTrail() const
 
 void Vehicle::RenderShield() const
 {
-     	shield->render();
+     	protection_complex->GetShieldEffect()->render();
 }
 
 void Vehicle::RenderRadarRange()
@@ -730,7 +740,7 @@ void equip(Vehicle* vehicle)
     	vehicle->GetDriveComplex()->getDriveSlot()->insertItem(getNewDriveEquipment(RACE_0_ID)); 
     	vehicle->GetDriveComplex()->getBakSlot()->insertItem(getNewBakEquipment(RACE_0_ID)); 
     	vehicle->GetEnergizerSlot()->insertItem(getNewEnergizerEquipment(RACE_0_ID));     
-    	vehicle->GetProtectorSlot()->insertItem(getNewProtectorEquipment(RACE_0_ID)); 
+    	vehicle->GetProtectionComplex()->GetProtectorSlot().insertItem(getNewProtectorEquipment(RACE_0_ID)); 
    	vehicle->GetDroidSlot()->insertItem(getNewDroidEquipment(RACE_0_ID)); 
    	vehicle->GetFreezerSlot()->insertItem(getNewFreezerEquipment(RACE_0_ID));  
    	vehicle->GetScanerSlot()->insertItem(getNewScanerEquipment(RACE_0_ID)); 

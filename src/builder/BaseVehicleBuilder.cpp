@@ -33,24 +33,8 @@ void  BaseVehicleBuilder::CreateKorpusGeometry(Vehicle* vehicle)
     	vehicle->GetPoints().addMainQuadPoints();
 }
 
-void BaseVehicleBuilder::CreateShieldGeometry(Vehicle* vehicle)
-{
-    	vehicle->GetPoints().initShieldQuadPoints();
-    	vehicle->GetPoints().addShieldQuadPoints();
-}
-        	
 
-void BaseVehicleBuilder::CreateTrailGeometry(Vehicle* vehicle)
-{
-    	vehicle->GetPoints().initMidLeftPoint();
-    	vehicle->GetPoints().addMidLeftPoint();
-
-    	vehicle->GetPoints().initMidFarLeftPoint();
-    	vehicle->GetPoints().addMidFarLeftPoint();
-}
-        
-
-void BaseVehicleBuilder::CreateGuiKontur(Vehicle* vehicle)
+void BaseVehicleBuilder::CreateKorpusGui(Vehicle* vehicle)
 {
 	vehicle->SetGuiTextureOb(vehicle->getTexOb());         	
 
@@ -114,14 +98,6 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle)
     	}
     	
     	
-	ItemSlot* protector_slot   = new ItemSlot(PROTECTOR_SLOT_ID, vehicle, texOb_slot);
-			
-	protector_slot->setRect(  vehicle->GetGuiRect().getCenter().x - 3*SHIP_SLOT_WIDTH, 
-				  vehicle->GetGuiRect().getCenter().y - SHIP_SLOT_HEIGHT/2 - 1.1*SHIP_SLOT_HEIGHT,
-				  SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
-				    
-    	vehicle->Add(protector_slot); 
-	
 	
 	ItemSlot* droid_slot       = new ItemSlot(DROID_SLOT_ID, vehicle, texOb_slot);
 				    
@@ -169,6 +145,12 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle)
 
 void BaseVehicleBuilder::CreateDriveComplex(Vehicle* vehicle)
 {
+    	vehicle->GetPoints().initMidLeftPoint();
+    	vehicle->GetPoints().addMidLeftPoint();
+
+    	vehicle->GetPoints().initMidFarLeftPoint();
+    	vehicle->GetPoints().addMidFarLeftPoint();
+    	
     	DriveComplex* drive_complex = new DriveComplex(vehicle);  
     	vehicle->SetDriveComplex(drive_complex);
 }
@@ -182,9 +164,10 @@ void BaseVehicleBuilder::CreateWeaponsComplex(Vehicle* vehicle)
 
 void BaseVehicleBuilder::CreateProtectionComplex(Vehicle* vehicle)
 {
-      	TextureOb* texOb_shield = g_TEXTURE_MANAGER.getRandomTexOb(SHIELD_EFFECT_TEXTURE_ID); 
- 	ShieldEffect* shield = new ShieldEffect(vehicle, texOb_shield);
- 	
- 	vehicle->SetShieldEffect(shield);
+    	vehicle->GetPoints().initShieldQuadPoints();
+    	vehicle->GetPoints().addShieldQuadPoints();
+    	
+	ProtectionComplex* protection_complex = new ProtectionComplex(vehicle); 	
+ 	vehicle->SetProtectionComplex(protection_complex);
 }
         	
