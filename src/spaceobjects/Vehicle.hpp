@@ -51,10 +51,8 @@ class Vehicle : public BaseGameEntity
         	ItemSlot* GetGrappleSlot()   const;
         	ItemSlot* GetDroidSlot()     const;
         	ItemSlot* GetFreezerSlot()   const;
-        	ItemSlot* GetGateSlot()   const;
-        	
-        	TextureOb* GetSlotTexOb() const;
-        	                        	
+        	ItemSlot* GetGateSlot()   const;        	
+       	                        	
                 Npc* GetOwnerNpc() const;
        	        ItemSlot* GetEmptyOtsecSlot();
        	        ItemSlot* GetCargoSlotWithGoods(int);

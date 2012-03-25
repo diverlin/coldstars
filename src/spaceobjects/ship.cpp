@@ -50,7 +50,7 @@ void Ship :: update_inSpace(int time, bool show_effect)
 	if (time > 0)
 	{
 		points.update();   
-		weapon_complex->fire(time, show_effect);
+		weapon_complex->Fire(time, show_effect);
 
     		if (ableTo.DRIVE == true) 
     		{ 
@@ -82,7 +82,7 @@ void Ship :: render_inSpace() const
     	
     	if (data_korpus.render_TURRELS == true)
     	{
-        	weapon_complex->renderTurrels();
+        	weapon_complex->RenderTurrels();
         }
 
     	if (ableTo.DRIVE == true)
@@ -103,7 +103,7 @@ void Ship :: render_atPlanet() const
 	
 	if (data_korpus.render_TURRELS == true)
     	{
-        	weapon_complex->renderTurrels();
+        	weapon_complex->RenderTurrels();
         }
 }		
 

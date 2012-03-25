@@ -44,11 +44,13 @@ void Store :: createSlots()
                 int clm_act = 1;
                 while (clm_act <= clm)
                 {
-                        ItemSlot* slot = new ItemSlot(CARGO_SLOT_ID, NULL, texOb_slot);
+                        ItemSlot* slot = new ItemSlot();
+                        slot->SetSubTypeId(CARGO_SLOT_ID);
+                        slot->SetTextureOb(texOb_slot);   
                         slot->setRect(x0 + clm_act * 1.1 * STORE_SLOT_WIDTH, 
                         	      y0 + row_act * 1.1 * STORE_SLOT_HEIGHT,
                         	      STORE_SLOT_WIDTH,
-                                      STORE_SLOT_HEIGHT);      
+                                      STORE_SLOT_HEIGHT);
                                                         
                         slot_vec.push_back(slot);
                         clm_act++;

@@ -86,7 +86,7 @@ void Player :: bindNpc(Npc* npc)
 {
     	this->npc = npc;
     	npc->setUpperControl(true);
-    	cursor->getSlot()->setOwner(npc->getVehicle());
+    	cursor->getSlot()->SetOwnerVehicle(npc->getVehicle());
 }
 
     
@@ -547,7 +547,7 @@ void Player :: render(bool turn_ended, bool forceDraw_orbits, bool forceDraw_pat
                 	npc->getStarSystem()->drawPath();
         	}
        	 	npc->getVehicle()->GetDriveComplex()->drawPath();
-       		npc->getVehicle()->GetWeaponComplex()->renderWeaponsRange();
+       		npc->getVehicle()->GetWeaponComplex()->RenderWeaponsRange();
        	
         	if (getShowRadarRange() == true)
         	{
@@ -575,10 +575,10 @@ void Player :: mouseControl() // all large objects must be cheked by last
 
 	if ( (npc->getAlive() == true) and (npc->getVehicle() != NULL) )
 	{
-    		npc->getVehicle()->GetWeaponComplex()->selectWeapons();                   				       
-    		npc->getVehicle()->GetWeaponComplex()->resetDeselectedWeaponTargets();
+    		npc->getVehicle()->GetWeaponComplex()->SelectWeapons();                   				       
+    		npc->getVehicle()->GetWeaponComplex()->ResetDeselectedWeaponTargets();
 
-        	npc->getVehicle()->GetWeaponComplex()->renderWeaponIcons();
+        	npc->getVehicle()->GetWeaponComplex()->RenderWeaponIcons();
         }
 
 
@@ -600,8 +600,8 @@ void Player :: mouseControl() // all large objects must be cheked by last
 				{
                				if (mlb == true)
                				{
-                   				npc->getVehicle()->GetWeaponComplex()->selectWeapons();
-                   				npc->getVehicle()->GetWeaponComplex()->setTarget(visible_MINERAL_vec[mi]);
+                   				npc->getVehicle()->GetWeaponComplex()->SelectWeapons();
+                   				npc->getVehicle()->GetWeaponComplex()->SetTarget(visible_MINERAL_vec[mi]);
 	       				}
 	       				if (mrb == true)
 	       				{
@@ -634,8 +634,8 @@ void Player :: mouseControl() // all large objects must be cheked by last
 				{
                				if (mlb == true)
                				{
-                   				npc->getVehicle()->GetWeaponComplex()->selectWeapons();                   					    
-                   				npc->getVehicle()->GetWeaponComplex()->setTarget(visible_CONTAINER_vec[ci]);
+                   				npc->getVehicle()->GetWeaponComplex()->SelectWeapons();                   					    
+                   				npc->getVehicle()->GetWeaponComplex()->SetTarget(visible_CONTAINER_vec[ci]);
                				}
                				if (mrb == true)
 	       				{
@@ -664,10 +664,10 @@ void Player :: mouseControl() // all large objects must be cheked by last
             			cursor_has_target = true;
 
                 		visible_SATELLITE_vec[i]->RenderInfo_inSpace(screen->getBottomLeftGlobalCoord()); 
-                		visible_SATELLITE_vec[i]->GetWeaponComplex()->renderWeaponIcons();
+                		visible_SATELLITE_vec[i]->GetWeaponComplex()->RenderWeaponIcons();
 
                 		visible_SATELLITE_vec[i]->RenderRadarRange(); 
-                		visible_SATELLITE_vec[i]->GetWeaponComplex()->renderWeaponsRange(); 
+                		visible_SATELLITE_vec[i]->GetWeaponComplex()->RenderWeaponsRange(); 
                 		                                
                                 visible_SATELLITE_vec[i]->GetDriveComplex()->drawPath(); 
                 
@@ -675,10 +675,10 @@ void Player :: mouseControl() // all large objects must be cheked by last
 				{
                 			if (mlb == true)
                 			{
-                				if (npc->getVehicle()->GetWeaponComplex()->isAnyWeaponSelected() == true)
+                				if (npc->getVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
                 				{
-                   					npc->getVehicle()->GetWeaponComplex()->selectWeapons();
-                   					npc->getVehicle()->GetWeaponComplex()->setTarget(visible_SATELLITE_vec[i]);
+                   					npc->getVehicle()->GetWeaponComplex()->SelectWeapons();
+                   					npc->getVehicle()->GetWeaponComplex()->SetTarget(visible_SATELLITE_vec[i]);
                    				}
                    				else
                    				{
@@ -732,10 +732,10 @@ void Player :: mouseControl() // all large objects must be cheked by last
                 			if (mlb == true)
 					{
                 			
-                			        if (npc->getVehicle()->GetWeaponComplex()->isAnyWeaponSelected() == true)
+                			        if (npc->getVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
                 				{
-                   					npc->getVehicle()->GetWeaponComplex()->selectWeapons();
-                   					npc->getVehicle()->GetWeaponComplex()->setTarget(visible_ASTEROID_vec[ai]);
+                   					npc->getVehicle()->GetWeaponComplex()->SelectWeapons();
+                   					npc->getVehicle()->GetWeaponComplex()->SetTarget(visible_ASTEROID_vec[ai]);
                    				}
                    				else
                    				{
@@ -760,10 +760,10 @@ void Player :: mouseControl() // all large objects must be cheked by last
             			cursor_has_target = true;
 
                 		visible_SHIP_vec[ki]->RenderInfo_inSpace(screen->getBottomLeftGlobalCoord()); 
-                		visible_SHIP_vec[ki]->GetWeaponComplex()->renderWeaponIcons();
+                		visible_SHIP_vec[ki]->GetWeaponComplex()->RenderWeaponIcons();
 
                 		visible_SHIP_vec[ki]->RenderRadarRange(); 
-                		visible_SHIP_vec[ki]->GetWeaponComplex()->renderWeaponsRange(); 
+                		visible_SHIP_vec[ki]->GetWeaponComplex()->RenderWeaponsRange(); 
                 		                                
                                 visible_SHIP_vec[ki]->GetDriveComplex()->drawPath(); 
                 
@@ -771,10 +771,10 @@ void Player :: mouseControl() // all large objects must be cheked by last
 				{
                 			if (mlb == true)
                 			{
-                				if (npc->getVehicle()->GetWeaponComplex()->isAnyWeaponSelected() == true)
+                				if (npc->getVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
                 				{
-                   					npc->getVehicle()->GetWeaponComplex()->selectWeapons();
-                   					npc->getVehicle()->GetWeaponComplex()->setTarget(visible_SHIP_vec[ki]);
+                   					npc->getVehicle()->GetWeaponComplex()->SelectWeapons();
+                   					npc->getVehicle()->GetWeaponComplex()->SetTarget(visible_SHIP_vec[ki]);
                    				}
                    				else
                    				{
@@ -838,10 +838,10 @@ void Player :: mouseControl() // all large objects must be cheked by last
             			cursor_has_target = true;
 
                 		visible_SPACESTATION_vec[i]->RenderInfo_inSpace(screen->getBottomLeftGlobalCoord()); 
-                		visible_SPACESTATION_vec[i]->GetWeaponComplex()->renderWeaponIcons();
+                		visible_SPACESTATION_vec[i]->GetWeaponComplex()->RenderWeaponIcons();
 
                 		visible_SPACESTATION_vec[i]->RenderRadarRange(); 
-                		visible_SPACESTATION_vec[i]->GetWeaponComplex()->renderWeaponsRange(); 
+                		visible_SPACESTATION_vec[i]->GetWeaponComplex()->RenderWeaponsRange(); 
                 		                                
                                 visible_SPACESTATION_vec[i]->GetDriveComplex()->drawPath(); 
                 
@@ -849,10 +849,10 @@ void Player :: mouseControl() // all large objects must be cheked by last
 				{
                 			if (mlb == true)
                 			{
-                				if (npc->getVehicle()->GetWeaponComplex()->isAnyWeaponSelected() == true)
+                				if (npc->getVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
                 				{
-                   					npc->getVehicle()->GetWeaponComplex()->selectWeapons();
-                   					npc->getVehicle()->GetWeaponComplex()->setTarget(visible_SPACESTATION_vec[i]);
+                   					npc->getVehicle()->GetWeaponComplex()->SelectWeapons();
+                   					npc->getVehicle()->GetWeaponComplex()->SetTarget(visible_SPACESTATION_vec[i]);
                    				}
                    				else
                    				{

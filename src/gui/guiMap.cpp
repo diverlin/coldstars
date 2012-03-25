@@ -47,7 +47,7 @@ bool GuiMap :: update()
                    			int ss_ss_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->getPosition(), 
                    				       			   player->getNpc()->getStarSystem()->getPosition() );
                    				       
-                   			if ( (ss_ss_dist < player->getNpc()->getVehicle()->GetDriveComplex()->getDriveSlot()->getDriveEquipment()->getHyper()) && (ss_ss_dist < player->getNpc()->getVehicle()->GetDriveComplex()->getBakSlot()->getBakEquipment()->getFuel()) )
+                   			if ( (ss_ss_dist < player->getNpc()->getVehicle()->GetDriveComplex()->GetDriveSlot().getDriveEquipment()->getHyper()) && (ss_ss_dist < player->getNpc()->getVehicle()->GetDriveComplex()->GetBakSlot().getBakEquipment()->getFuel()) )
                       			{
                       				if (lmb == true)
                       				{ 

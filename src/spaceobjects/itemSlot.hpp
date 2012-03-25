@@ -24,10 +24,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class ItemSlot
 {   
 	public:        
-		ItemSlot(int _subtype_id, Vehicle*, TextureOb*);
+		ItemSlot();
 		~ItemSlot();
                 
-                void setOwner(Vehicle*);
+                void SetSubTypeId(int);
+                void SetTextureOb(TextureOb*);
+                void SetOwnerVehicle(Vehicle*);
                 void bindTurrel(Turrel*);
                 void setRect(int _pos_x, int _pos_y, int w, int h);
                       
