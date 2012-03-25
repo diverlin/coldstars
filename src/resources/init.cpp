@@ -60,7 +60,7 @@ Player* getNewPlayer(Galaxy* galaxy)
       	int size_id = 5;
       	int weapons_num = 5;
     	Npc* pnpc = getNewNpc(prace_id, psubtype_id);   
-    	Ship* pship = shipGenerator(prace_id, psubtype_id, size_id, weapons_num);
+    	Ship* pship = VehicleBuilder::Instance().GetNewShip(prace_id, psubtype_id, size_id, weapons_num);
 	
     	equip((Vehicle*)pship);   		// improove
         pship->UpdateAllPropertiesAndAbilities(); 		// improove

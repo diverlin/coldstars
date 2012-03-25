@@ -51,7 +51,6 @@ int main()
     /* server code end */
 
     /* client code start */
-    //Gui::Update();
     player->runSession(TIMER);
     /* client code end */           	
   }

@@ -177,6 +177,8 @@ class GuiMap;
 #include "src/spaceobjects/spaceStation.hpp"
 #include "src/spaceobjects/satellite.hpp"
 #include "src/spaceobjects/ship.hpp"
+#include "src/builder/BaseVehicleBuilder.hpp"
+#include "src/builder/VehicleBuilder.hpp"
 
 #include "src/pilots/player.hpp"
 
@@ -309,6 +311,8 @@ class GuiMap;
 #include "src/gui/guiStore.cpp"
 #include "src/gui/guiManager.cpp"
 #include "src/gui/guiVehicle.cpp"
+#include "src/builder/BaseVehicleBuilder.cpp"
+#include "src/builder/VehicleBuilder.cpp"
 #include "src/gui/guiSkill.cpp"
 #include "src/gui/guiMap.cpp"
 #include "src/gui/cursor.cpp"   

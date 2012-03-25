@@ -64,6 +64,4 @@ class RocketBullet : public Vehicle
                 bool isStarSystemOk() const;     
 };
 
-RocketBullet* getNewRocketBullet(BulletData, ItemSlot*, float, bool force_center_start = false);
-
 #endif 

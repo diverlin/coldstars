@@ -109,51 +109,5 @@ void SpaceStation :: render_atPlanet() const
 
 
 
-SpaceStation* getNewSpaceStation()
-{
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(SPACESTATION_TEXTURE_ID); 
-       
-       	int protection_rate = 1;
-       	//if (subtype_id == WARRIOR_ID)
-        //{
-        	protection_rate = 5;
-        //}
-        
-        KorpusData data_korpus;
-    	data_korpus.space       = 2500 + getRandInt(0, 1000);
-    	data_korpus.armor       = data_korpus.space;
-    	data_korpus.protection  = 2*protection_rate;
-    	data_korpus.temperature = 100;
-        data_korpus.price       = 10000000;
-
-        data_korpus.inhibit_GRAPPLE = false;
-        data_korpus.weapon_slot_num = 5;
-            
-            
-        LifeData data_life;
-        data_life.armor = data_korpus.armor;
-        data_life.dying_time = 10*texOb->size_id;
-       
-        IdData data_id;
-        data_id.id         = g_ID_GENERATOR.getNextId(); 
-    	data_id.type_id    = SPACESTATION_ID;
-    	data_id.subtype_id = MILITARY_ID;       
-
-        int size_threshold = 2; 
-	data_korpus.render_TURRELS = true; 
-                           
-    	SpaceStation* spacestation = new SpaceStation(RACE_0_ID);
-    	spacestation->SetKorpusData(data_korpus);
-	spacestation->setTextureOb(texOb);
-	spacestation->setIdData(data_id);
-	spacestation->setLifeData(data_life);
-    	
-    	spacestation->PostCreateInit();
-    	spacestation->createLand(RACE_0_ID);
-    	    
-    	return spacestation;
-}
-
-
 
 

@@ -41,7 +41,6 @@ class Satellite : public Vehicle
         	virtual void updateInfo();
 };
 
-Satellite* getNewSatellite();
 
 #endif 
 

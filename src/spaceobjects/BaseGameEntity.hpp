@@ -89,6 +89,8 @@ class BaseGameEntity
                	
         	void checkDeath(bool);
         	virtual void postDeathUniqueEvent(bool) = 0;
+        	
+        friend class BaseVehicleBuilder;
 };
 
 #endif 

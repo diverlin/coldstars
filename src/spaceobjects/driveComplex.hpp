@@ -44,6 +44,7 @@ class DriveComplex
         	void update_inSpace_inDynamic();
                 
                 void drawPath();
+                void renderTrail();
 
       	private:
                 ItemSlot* drive_slot;
@@ -52,6 +53,8 @@ class DriveComplex
       		Vehicle* owner_vehicle;
       		BaseGameEntity* target;
 
+		TrailEffect* drive_trail; 
+		
 		vec2f target_pos;
 		
 		int action_id;

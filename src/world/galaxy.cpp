@@ -158,7 +158,7 @@ void generateNumPlanets(StarSystem* starsystem, int planet_per_system)
 
                 starsystem->addToSpace(planet, starsystem->getStar());
                 
-                Satellite* satellite = getNewSatellite();
+                Satellite* satellite = VehicleBuilder::Instance().GetNewSatellite();
                 equip((Vehicle*)satellite);           		// improove
                         	
                 starsystem->addToSpace((Vehicle*)satellite, vec2f(0, 0), 0, planet);
@@ -186,7 +186,7 @@ void generateNumFriendlyNPC(StarSystem* starsystem, int ship_per_system)
         	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
         	int ship_size_id = getRandInt(1, 9);
         	int weapons_num = getRandInt(1, 5);
-        	Ship* ship = shipGenerator(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
+        	Ship* ship = VehicleBuilder::Instance().GetNewShip(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
        
         	equip((Vehicle*)ship);            	// improove
         	ship->UpdateAllPropertiesAndAbilities(); 		// improove
@@ -219,7 +219,7 @@ void generateNumEnemyNPC(StarSystem* starsystem, int ship_per_system)
         	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
         	int ship_size_id = getRandInt(1, 9);
         	int weapons_num = getRandInt(1, 5);
-        	Ship* ship = shipGenerator(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
+        	Ship* ship = VehicleBuilder::Instance().GetNewShip(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
        
         	equip((Vehicle*)ship);            // improove
         	ship->UpdateAllPropertiesAndAbilities(); 	  // improove
@@ -232,7 +232,7 @@ void generateNumEnemyNPC(StarSystem* starsystem, int ship_per_system)
         	starsystem->addToSpace(ship, center, angle, NULL);
         	starsystem->addToSpace(npc);
         	
-        	Satellite* satellite = getNewSatellite();
+        	Satellite* satellite = VehicleBuilder::Instance().GetNewSatellite();
                 equip((Vehicle*)satellite);           		// improove
                         	
                 starsystem->addToSpace((Vehicle*)satellite, vec2f(0, 0), 0, ship);
@@ -256,7 +256,7 @@ void generateSpaceStations(StarSystem* starsystem, int spacestation_per_system)
         	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
         	int ship_size_id = getRandInt(1, 9);
         	int weapons_num = 5;
-        	SpaceStation* spacestation = getNewSpaceStation();
+        	SpaceStation* spacestation = VehicleBuilder::Instance().GetNewSpaceStation();
        
         	equip(spacestation);            	// improove
         	spacestation->UpdateAllPropertiesAndAbilities(); 	// improove
@@ -269,7 +269,7 @@ void generateSpaceStations(StarSystem* starsystem, int spacestation_per_system)
         	starsystem->addToSpace(spacestation, center, angle, NULL);
         	starsystem->addToSpace(npc);
         	
-		Satellite* satellite = getNewSatellite();
+		Satellite* satellite = VehicleBuilder::Instance().GetNewSatellite();
                 equip((Vehicle*)satellite);           		// improove
                         	
                 starsystem->addToSpace((Vehicle*)satellite, vec2f(0, 0), 0, spacestation);
