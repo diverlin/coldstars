@@ -36,20 +36,21 @@ float* Points :: getpAngleDegree() { return &angle_inD; }
         
 float Points :: getPosZ() const { return pos_z; }
                 	
-vec2f Points :: getCenter()      const { return center; }     
-vec2f* Points :: getpCenter()          { return &center; }  
+const vec2f& Points :: getCenter()      const { return center; }     
 vec3f Points :: getCenter3f()    const { return vec3f(center.x, center.y, pos_z); } 
+
+vec2f* Points :: getpCenter()     { return &center; } 
       
-vec2f Points :: getBottomLeft()  const { return bottomLeft; }
-vec2f Points :: getBottomRight() const { return bottomRight; }
-vec2f Points :: getTopRight()    const { return topRight; }    
-vec2f Points :: getTopLeft()     const { return topLeft; }
+const vec2f& Points :: getBottomLeft()  const { return bottomLeft; }
+const vec2f& Points :: getBottomRight() const { return bottomRight; }
+const vec2f& Points :: getTopRight()    const { return topRight; }    
+const vec2f& Points :: getTopLeft()     const { return topLeft; }
     
     
-vec2f Points :: getBottomLeftShield()  const { return bottomLeftShield; }
-vec2f Points :: getBottomRightShield() const { return bottomRightShield; }
-vec2f Points :: getTopRightShield()    const { return topRightShield; }
-vec2f Points :: getTopLeftShield()     const { return topLeftShield; }
+const vec2f& Points :: getBottomLeftShield()  const { return bottomLeftShield; }
+const vec2f& Points :: getBottomRightShield() const { return bottomRightShield; }
+const vec2f& Points :: getTopRightShield()    const { return topRightShield; }
+const vec2f& Points :: getTopLeftShield()     const { return topLeftShield; }
                 
 vec2f* Points :: getpMidLeft()    { return &midLeft; }
 vec2f* Points :: getpMidFarLeft() { return &midFarLeft; }

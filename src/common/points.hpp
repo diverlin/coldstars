@@ -37,10 +37,10 @@ class Points
         public:
                 void setPosZ(float);
                 
-                void setWidthHeight(int _w, int _h);  
-                void setCenter(float _centerx, float _centery);
-                void setCenter(vec2f _center);
-                void setAngle(float _angle);
+                void setWidthHeight(int, int);  
+                void setCenter(float, float);
+                void setCenter(vec2f);
+                void setAngle(float);
         
         	int getWidth() const;
         	int getHeight() const;
@@ -50,19 +50,19 @@ class Points
                         
                 float getPosZ() const;
                         
-                vec2f getCenter()      const;   
-                vec3f getCenter3f()    const; 
+                const vec2f& getCenter() const;   
+                vec3f getCenter3f() const; 
                 vec2f* getpCenter();   // used inturrels(for target)
       
-                vec2f getBottomLeft()  const;  
-                vec2f getBottomRight() const; 
-                vec2f getTopRight()    const;    
-                vec2f getTopLeft()     const;
+                const vec2f& getBottomLeft()  const;  
+                const vec2f& getBottomRight() const; 
+                const vec2f& getTopRight()    const;    
+                const vec2f& getTopLeft()     const;
                 
-                vec2f getBottomLeftShield()  const;
-                vec2f getBottomRightShield() const;
-                vec2f getTopRightShield()    const;
-                vec2f getTopLeftShield()     const;
+                const vec2f& getBottomLeftShield()  const;
+                const vec2f& getBottomRightShield() const;
+                const vec2f& getTopRightShield()    const;
+                const vec2f& getTopLeftShield()     const;
                 
                 vec2f* getpMidLeft();	     // used in drive jet
                 vec2f* getpMidFarLeft();
