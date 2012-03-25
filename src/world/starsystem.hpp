@@ -48,11 +48,6 @@ class StarSystem : public BaseGameEntity
     		std::vector<Npc*>  NPC_PIRAT_inSPACE_vec;
     		std::vector<Npc*>  NPC_DIPLOMAT_inSPACE_vec;
     	    	//  
-    	    	
-    	    	Points* getPoints() const;
-   		bool* getpAlive();
-   		int* getpPlaceTypeId();
-   		float getCollisionRadius() const;
    		
    		int getShockWaveNum() const;
     

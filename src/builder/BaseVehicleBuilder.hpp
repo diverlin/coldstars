@@ -26,14 +26,16 @@ class BaseVehicleBuilder
 	public:
 		BaseVehicleBuilder();
 		~BaseVehicleBuilder();
- 		                
+
+        	void Equip(Vehicle*); 
+        	 		                
         protected:
         	void CreateKorpusGeometry(Vehicle*);
         	void CreateKorpusGui(Vehicle*);
         	void CreateEquipmentSlots(Vehicle*);
         	void CreateDriveComplex(Vehicle*);
         	void CreateWeaponsComplex(Vehicle*);
-        	void CreateProtectionComplex(Vehicle*);      	     	
+        	void CreateProtectionComplex(Vehicle*);    
 }; 
 
 

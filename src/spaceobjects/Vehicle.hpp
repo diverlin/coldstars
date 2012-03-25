@@ -37,7 +37,8 @@ class Vehicle : public BaseGameEntity
                 void SetGuiTextureOb(TextureOb*);
         	void SetGuiRect(Rect);
         	
-                void Add(ItemSlot*);
+                void Add(ItemSlot*); 
+                bool AddItemToOtsec(ItemBase*);
 
                 float GetVisionRadius() const;
                 
@@ -146,7 +147,5 @@ class Vehicle : public BaseGameEntity
         friend class GuiVehicle;
              	
 };
-
-void equip(Vehicle*);
 
 #endif 
