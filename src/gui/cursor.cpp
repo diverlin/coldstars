@@ -25,8 +25,8 @@ Cursor :: Cursor(Player* player)
 	
      	type_id = CURSOR_ID;
      
-     	//TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID);
-     	slot = new ItemSlot(CARGO_SLOT_ID, NULL, NULL);
+     	slot = new ItemSlot();
+     	slot->SetSubTypeId(CARGO_SLOT_ID);
      	slot->setRect(0, 0, CURSOR_SLOT_WIDTH, CURSOR_SLOT_HEIGHT);
      	
      	mouse_left_button  = false;

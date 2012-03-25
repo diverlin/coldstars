@@ -59,61 +59,67 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle)
 {
     	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID);  
 
-	ItemSlot* radar_slot       = new ItemSlot(RADAR_SLOT_ID, vehicle, texOb_slot);
-				 
+	ItemSlot* radar_slot = new ItemSlot();
+	radar_slot->SetSubTypeId(RADAR_SLOT_ID);
+	radar_slot->SetTextureOb(texOb_slot);
+	radar_slot->SetOwnerVehicle(vehicle);				 
 	radar_slot->setRect( vehicle->GetGuiRect().getCenter().x + 4*SHIP_SLOT_WIDTH, 
 			     vehicle->GetGuiRect().getCenter().y - SHIP_SLOT_HEIGHT/2 + 1.1*SHIP_SLOT_HEIGHT/2,
 			     SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
-				    
 	vehicle->Add(radar_slot);	
 	
 	
-	ItemSlot* scaner_slot      = new ItemSlot(SCANER_SLOT_ID, vehicle, texOb_slot); 
-
+	ItemSlot* scaner_slot = new ItemSlot();
+	scaner_slot->SetSubTypeId(SCANER_SLOT_ID); 
+	scaner_slot->SetTextureOb(texOb_slot);
+	scaner_slot->SetOwnerVehicle(vehicle);
 	scaner_slot->setRect(  vehicle->GetGuiRect().getCenter().x + 4*SHIP_SLOT_WIDTH, 
 			       vehicle->GetGuiRect().getCenter().y - SHIP_SLOT_HEIGHT/2 - 1.1*SHIP_SLOT_HEIGHT/2,
 			       SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
-				    
 	vehicle->Add(scaner_slot);
 	
 	
-	ItemSlot* energizer_slot   = new ItemSlot(ENERGIZER_SLOT_ID, vehicle, texOb_slot);
-	
+	ItemSlot* energizer_slot = new ItemSlot();
+	energizer_slot->SetSubTypeId(ENERGIZER_SLOT_ID); 
+	energizer_slot->SetTextureOb(texOb_slot);
+	energizer_slot->SetOwnerVehicle(vehicle);
 	energizer_slot->setRect(  vehicle->GetGuiRect().getCenter().x - 2*SHIP_SLOT_WIDTH, 
 				  vehicle->GetGuiRect().getCenter().y - SHIP_SLOT_HEIGHT/2,
 				  SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
-				    
-    	vehicle->Add(energizer_slot);
+	vehicle->Add(energizer_slot);
     		
     		
 	if (vehicle->data_korpus.inhibit_GRAPPLE == false)
 	{
-		ItemSlot* grapple_slot  = new ItemSlot(GRAPPLE_SLOT_ID, vehicle, texOb_slot);
-				
+		ItemSlot* grapple_slot = new ItemSlot();
+		grapple_slot->SetSubTypeId(GRAPPLE_SLOT_ID);
+		grapple_slot->SetTextureOb(texOb_slot);
+		grapple_slot->SetOwnerVehicle(vehicle);
 		grapple_slot->setRect(  vehicle->GetGuiRect().getCenter().x - 3*SHIP_SLOT_WIDTH, 
 					vehicle->GetGuiRect().getCenter().y - SHIP_SLOT_HEIGHT/2 + 1.1*SHIP_SLOT_HEIGHT,
-					SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
-					 
+					SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);					 
     		vehicle->Add(grapple_slot); 
     	}
     	
     	
 	
-	ItemSlot* droid_slot       = new ItemSlot(DROID_SLOT_ID, vehicle, texOb_slot);
-				    
+	ItemSlot* droid_slot = new ItemSlot();
+	droid_slot->SetSubTypeId(DROID_SLOT_ID);
+	droid_slot->SetTextureOb(texOb_slot);
+	droid_slot->SetOwnerVehicle(vehicle);			    
 	droid_slot->setRect(  vehicle->GetGuiRect().getCenter().x - 1*SHIP_SLOT_WIDTH, 
 			      vehicle->GetGuiRect().getCenter().y - SHIP_SLOT_HEIGHT/2 + 1.1*SHIP_SLOT_HEIGHT,
-			      SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
-				    
+			      SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);				    
     	vehicle->Add(droid_slot); 
     	
     	
-	ItemSlot* freezer_slot     = new ItemSlot(FREEZER_SLOT_ID, vehicle, texOb_slot);
-				    
+	ItemSlot* freezer_slot     = new ItemSlot();
+	freezer_slot->SetSubTypeId(FREEZER_SLOT_ID);
+	freezer_slot->SetTextureOb(texOb_slot);
+	freezer_slot->SetOwnerVehicle(vehicle);			    
 	freezer_slot->setRect( vehicle->GetGuiRect().getCenter().x - 1*SHIP_SLOT_WIDTH, 
 			       vehicle->GetGuiRect().getCenter().y - SHIP_SLOT_HEIGHT/2 - 1.1*SHIP_SLOT_HEIGHT,
-			       SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
-	
+			       SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);	
 	vehicle->Add(freezer_slot);   
 	////////////////////////////////////////////////////
 
@@ -121,20 +127,23 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle)
     	//////// OTSEC SLOT ////////////////////////////////
     	for (int i = 0; i <= 10; i++)
     	{
-         	ItemSlot* otsec_slot = new ItemSlot(CARGO_SLOT_ID, vehicle, texOb_slot);
-         		
+         	ItemSlot* otsec_slot = new ItemSlot();
+         	otsec_slot->SetSubTypeId(CARGO_SLOT_ID);
+         	otsec_slot->SetTextureOb(texOb_slot);
+         	otsec_slot->SetOwnerVehicle(vehicle);
          	otsec_slot->setRect( vehicle->GetGuiRect().getCenter().x + (i-6) * SHIP_SLOT_WIDTH, 
          			     vehicle->GetGuiRect().getCenter().y - 3*SHIP_SLOT_HEIGHT,
-         			     SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
-         					
+         			     SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);         					
          	vehicle->Add(otsec_slot);         
     	}
     	////////////////////////////////////////////////////
 
 
     	//////////// GATE SLOT /////////////////////////////
-    	ItemSlot* gate_slot = new ItemSlot(GATE_SLOT_ID, vehicle, texOb_slot);
-    			     
+    	ItemSlot* gate_slot = new ItemSlot();
+    	gate_slot->SetSubTypeId(GATE_SLOT_ID);
+    	gate_slot->SetTextureOb(texOb_slot);
+        gate_slot->SetOwnerVehicle(vehicle);    			     
     	gate_slot->setRect(  vehicle->GetGuiRect().getCenter().x - 5*SHIP_SLOT_WIDTH, 
     			     vehicle->GetGuiRect().getCenter().y + 3*SHIP_SLOT_HEIGHT,
     			     SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
@@ -158,7 +167,7 @@ void BaseVehicleBuilder::CreateDriveComplex(Vehicle* vehicle)
 void BaseVehicleBuilder::CreateWeaponsComplex(Vehicle* vehicle)
 {
  	WeaponComplex* weapon_complex = new WeaponComplex(vehicle);
- 	weapon_complex->postCreateInit(vehicle->data_korpus.weapon_slot_num, vehicle->data_korpus.render_TURRELS);
+ 	weapon_complex->PostCreateInit(vehicle->data_korpus.weapon_slot_num, vehicle->data_korpus.render_TURRELS);
  	vehicle->SetWeaponComplex(weapon_complex);
 }
 

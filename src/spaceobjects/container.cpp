@@ -23,7 +23,9 @@ Container :: Container()
     	mass = 1;
 
     	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID);
-    	item_slot = new ItemSlot(CARGO_SLOT_ID, NULL, texOb_slot);
+    	item_slot = new ItemSlot();
+    	item_slot->SetSubTypeId(CARGO_SLOT_ID);
+    	item_slot->SetTextureOb(texOb_slot);
     	
     	velocity = getRandInt(40, 42) / 100.0;
 }

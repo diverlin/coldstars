@@ -27,32 +27,32 @@ class WeaponComplex
       		WeaponComplex(Vehicle*);
       		~WeaponComplex();
       		
-      		ItemSlot* getWeaponSlot1() const;
-      		ItemSlot* getWeaponSlot2() const;
-      		ItemSlot* getWeaponSlot3() const;
-      		ItemSlot* getWeaponSlot4() const;
-      		ItemSlot* getWeaponSlot5() const;
+      		ItemSlot& GetWeaponSlot1();
+      		ItemSlot& GetWeaponSlot2();
+      		ItemSlot& GetWeaponSlot3();
+      		ItemSlot& GetWeaponSlot4();
+      		ItemSlot& GetWeaponSlot5();
         	
-      		void postCreateInit(int, bool);
+      		void PostCreateInit(int, bool);
 
         	WeaponSelector weapon_selector; 
         	
-               	void prepareWeapons();
+               	void PrepareWeapons();
                      
-                void setTarget(BaseGameEntity*);     
+                void SetTarget(BaseGameEntity*);     
        
-        	void fire(int timer, bool);
+        	void Fire(int timer, bool);
 
-     		void selectWeapons();  
-        	void resetDeselectedWeaponTargets();   
-        	bool isAnyWeaponSelected() const; 
+     		void SelectWeapons();  
+        	void ResetDeselectedWeaponTargets();   
+        	bool IsAnyWeaponSelected() const; 
         	
-        	bool updateFireAbility();
+        	bool UpdateFireAbility();
         	
-        	void renderWeaponIcons() const;
-        	void renderWeaponsRange();
+        	void RenderWeaponIcons() const;
+        	void RenderWeaponsRange();
         	
-        	void renderTurrels() const;
+        	void RenderTurrels() const;
         	
       	private:
       		int weapon_num;
@@ -63,11 +63,11 @@ class WeaponComplex
         	std::vector<ItemSlot*> slot_weapon_equiped_vec;
         	std::vector<ItemSlot*> slot_weapon_reloaded_vec;
         	
-        	ItemSlot* weapon_slot1;
-        	ItemSlot* weapon_slot2;
-        	ItemSlot* weapon_slot3;
-        	ItemSlot* weapon_slot4;
-        	ItemSlot* weapon_slot5;
+        	ItemSlot weapon_slot1;
+        	ItemSlot weapon_slot2;
+        	ItemSlot weapon_slot3;
+        	ItemSlot weapon_slot4;
+        	ItemSlot weapon_slot5;
         	
         	Turrel* turrel1;
         	Turrel* turrel2;
@@ -75,8 +75,8 @@ class WeaponComplex
         	Turrel* turrel4;
         	Turrel* turrel5;
         	
-        	void reloadAllWeapons();  
-        	void validateAllReloadedWeaponsTarget();
+        	void ReloadAllWeapons();  
+        	void ValidateAllReloadedWeaponsTarget();
       		
 };
 

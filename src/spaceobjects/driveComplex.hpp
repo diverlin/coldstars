@@ -30,8 +30,8 @@ class DriveComplex
       		void setTarget(BaseGameEntity*, int);       
       		void setStaticTargetCoords(vec2f);
       		
-      		ItemSlot* getDriveSlot()     const;
-        	ItemSlot* getBakSlot()       const;
+      		ItemSlot& GetDriveSlot();
+        	ItemSlot& GetBakSlot();
                   
                 BaseGameEntity* getTarget() const;                
              
@@ -47,8 +47,8 @@ class DriveComplex
                 void renderTrail();
 
       	private:
-                ItemSlot* drive_slot;
-        	ItemSlot* bak_slot;
+                ItemSlot drive_slot;
+        	ItemSlot bak_slot;
         	
       		Vehicle* owner_vehicle;
       		BaseGameEntity* target;

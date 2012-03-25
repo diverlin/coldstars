@@ -20,19 +20,19 @@ Vehicle::Vehicle()
 {
 	owner_npc = NULL;
        	starsystem = NULL; 
-       	
-       	radar_slot = NULL;
+      	
+    	weapon_complex = NULL;
+    	drive_complex = NULL;
+    	protection_complex = NULL;
+    	
+    	radar_slot = NULL;
         scaner_slot = NULL;
         energizer_slot = NULL;
         grapple_slot = NULL;
         droid_slot = NULL;
         freezer_slot = NULL;
-                                                
-       	gate_slot = NULL;
-        	
-    	weapon_complex = NULL;
-    	drive_complex = NULL;
-    	protection_complex = NULL;
+        
+        gate_slot = NULL;
 }
 
 /*virtual*/
@@ -42,19 +42,19 @@ Vehicle::~Vehicle()
     	{
 		delete slot_otsec_vec[i];  
     	}
-    	
-        delete radar_slot;
+       	
+    	delete weapon_complex;
+    	delete drive_complex;
+	delete protection_complex;
+	
+	delete radar_slot;
         delete scaner_slot;
         delete energizer_slot;
         delete grapple_slot;
         delete droid_slot;
         delete freezer_slot;
-                                                
-       	delete gate_slot;
-        	
-    	delete weapon_complex;
-    	delete drive_complex;
-	delete protection_complex;
+        
+        delete gate_slot;
 } 
 
 
@@ -107,7 +107,6 @@ ItemSlot* Vehicle::GetGateSlot()      const { return gate_slot; }
 
 Npc* Vehicle::GetOwnerNpc() 	      const { return owner_npc; }
 
-TextureOb* Vehicle::GetSlotTexOb() const { TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID); return texOb_slot; }
 const Rect& Vehicle::GetGuiRect() const { return kontur_rect; }
         	      	
 // needs when vehicle is grabbed by other vehicle
@@ -288,7 +287,7 @@ void Vehicle::UpdateAllPropertiesAndAbilities()
 void Vehicle::UpdateFireAbility()
 {
      	//ableTo.FIRE = 
-     	weapon_complex->updateFireAbility();
+     	weapon_complex->UpdateFireAbility();
 }
 
 void Vehicle::RecalculateMass()
@@ -315,11 +314,11 @@ void Vehicle::UpdateDriveAbility()
      	propetries.speed = 0;
      	ableTo.DRIVE = false;
 
-     	if (drive_complex->getDriveSlot()->getEquipedStatus() == true) 
+     	if (drive_complex->GetDriveSlot().getEquipedStatus() == true) 
      	{
-        	if (drive_complex->getDriveSlot()->getDriveEquipment()->getCondition() > 0)  
+        	if (drive_complex->GetDriveSlot().getDriveEquipment()->getCondition() > 0)  
         	{
-           		float val = (drive_complex->getDriveSlot()->getDriveEquipment()->getSpeed() - propetries.mass/70);
+           		float val = (drive_complex->GetDriveSlot().getDriveEquipment()->getSpeed() - propetries.mass/70);
            		if (val > 0)
            		{ 
               			propetries.speed = val;
@@ -364,15 +363,15 @@ void Vehicle::UpdateJumpAbility()
 	propetries.hyper = 0;
      	ableTo.HJUMP = false;
 
-     	if (drive_complex->getDriveSlot()->getEquipedStatus() == true)
-        	if (drive_complex->getDriveSlot()->getDriveEquipment()->getCondition() > 0)
-           		if (drive_complex->getBakSlot()->getEquipedStatus() == true)
-              			if (drive_complex->getBakSlot()->getBakEquipment()->getCondition() > 0)
+     	if (drive_complex->GetDriveSlot().getEquipedStatus() == true)
+        	if (drive_complex->GetDriveSlot().getDriveEquipment()->getCondition() > 0)
+           		if (drive_complex->GetBakSlot().getEquipedStatus() == true)
+              			if (drive_complex->GetBakSlot().getBakEquipment()->getCondition() > 0)
               			{
-                 			if (drive_complex->getDriveSlot()->getDriveEquipment()->getHyper() > drive_complex->getBakSlot()->getBakEquipment()->getFuel())
-                    				propetries.hyper = drive_complex->getDriveSlot()->getDriveEquipment()->getHyper();
+                 			if (drive_complex->GetDriveSlot().getDriveEquipment()->getHyper() > drive_complex->GetBakSlot().getBakEquipment()->getFuel())
+                    				propetries.hyper = drive_complex->GetDriveSlot().getDriveEquipment()->getHyper();
                  			else
-                    				propetries.hyper = drive_complex->getBakSlot()->getBakEquipment()->getFuel();
+                    				propetries.hyper = drive_complex->GetBakSlot().getBakEquipment()->getFuel();
 
                  			ableTo.HJUMP = true;
               			}    
@@ -497,9 +496,9 @@ void Vehicle::SetMaxArmor()
 
 void Vehicle::SetMaxFuel()
 {
-     	if (drive_complex->getBakSlot()->getEquipedStatus() == true)
+     	if (drive_complex->GetBakSlot().getEquipedStatus() == true)
      	{
-        	drive_complex->getBakSlot()->getBakEquipment()->fill();
+        	drive_complex->GetBakSlot().getBakEquipment()->fill();
         }
 }
 
@@ -709,36 +708,36 @@ void equip(Vehicle* vehicle)
     	if (vehicle->data_korpus.weapon_slot_num >= 1)
     	{
        		//vehicle->weapon_slot1.insertItem(lazerEquipmentGenerator(RACE_0_ID)); 
-       		vehicle->GetWeaponComplex()->getWeaponSlot1()->insertItem(getNewRocketEquipment(RACE_0_ID));     	
+       		vehicle->GetWeaponComplex()->GetWeaponSlot1().insertItem(getNewRocketEquipment(RACE_0_ID));     	
     	}   
 
     	if (vehicle->data_korpus.weapon_slot_num >= 2)
     	{
-       		vehicle->GetWeaponComplex()->getWeaponSlot2()->insertItem(getNewLazerEquipment(RACE_0_ID)); 
+       		vehicle->GetWeaponComplex()->GetWeaponSlot2().insertItem(getNewLazerEquipment(RACE_0_ID)); 
     	}   
     
     	if (vehicle->data_korpus.weapon_slot_num >= 3)
     	{
-       		vehicle->GetWeaponComplex()->getWeaponSlot3()->insertItem(getNewLazerEquipment(RACE_0_ID)); 
+       		vehicle->GetWeaponComplex()->GetWeaponSlot3().insertItem(getNewLazerEquipment(RACE_0_ID)); 
        		//vehicle->weapon_slot3.insertItem(rocketEquipmentGenerator(RACE_0_ID)); 
     	}   
         
     	if (vehicle->data_korpus.weapon_slot_num >= 4)
     	{
        		//vehicle->weapon_slot4.insertItem(lazerEquipmentGenerator(RACE_0_ID));         
-       		vehicle->GetWeaponComplex()->getWeaponSlot4()->insertItem(getNewRocketEquipment(RACE_0_ID)); 
+       		vehicle->GetWeaponComplex()->GetWeaponSlot4().insertItem(getNewRocketEquipment(RACE_0_ID)); 
     	}   
     
     	if (vehicle->data_korpus.weapon_slot_num >= 5) 
     	{
        		//vehicle->weapon_slot5.insertItem(lazerEquipmentGenerator(RACE_0_ID)); 
-       		vehicle->GetWeaponComplex()->getWeaponSlot5()->insertItem(getNewRocketEquipment(RACE_0_ID)); 
+       		vehicle->GetWeaponComplex()->GetWeaponSlot5().insertItem(getNewRocketEquipment(RACE_0_ID)); 
     	}   
         
     	vehicle->GetRadarSlot()->insertItem(getNewRadarEquipment(RACE_0_ID)); 
  
-    	vehicle->GetDriveComplex()->getDriveSlot()->insertItem(getNewDriveEquipment(RACE_0_ID)); 
-    	vehicle->GetDriveComplex()->getBakSlot()->insertItem(getNewBakEquipment(RACE_0_ID)); 
+    	vehicle->GetDriveComplex()->GetDriveSlot().insertItem(getNewDriveEquipment(RACE_0_ID)); 
+    	vehicle->GetDriveComplex()->GetBakSlot().insertItem(getNewBakEquipment(RACE_0_ID)); 
     	vehicle->GetEnergizerSlot()->insertItem(getNewEnergizerEquipment(RACE_0_ID));     
     	vehicle->GetProtectionComplex()->GetProtectorSlot().insertItem(getNewProtectorEquipment(RACE_0_ID)); 
    	vehicle->GetDroidSlot()->insertItem(getNewDroidEquipment(RACE_0_ID)); 

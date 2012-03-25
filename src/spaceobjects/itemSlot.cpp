@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-ItemSlot :: ItemSlot(int _subtype_id, Vehicle* _owner_vehicle, TextureOb* _texOb)
+ItemSlot :: ItemSlot()
 {
 	/* 
         The class provides implementation to insert/hold/remove all game items (equipments, modules and so on)
@@ -26,19 +26,18 @@ ItemSlot :: ItemSlot(int _subtype_id, Vehicle* _owner_vehicle, TextureOb* _texOb
 	*/
 
         type_id    = SLOT_ID;
-	subtype_id = _subtype_id;
-        
-        owner_vehicle  = _owner_vehicle; 
-
-        texOb = _texOb;
+	subtype_id = -1;
      
         rect = Rect();         
 
         is_EQUIPED       = false;
         is_FLASHING      = false;
 
+        owner_vehicle  = NULL; 
+        
         turrel = NULL;                
         item   = NULL;
+        texOb = NULL;
 }
 
 ItemSlot :: ~ItemSlot()
@@ -46,7 +45,10 @@ ItemSlot :: ~ItemSlot()
         delete item;
 }
 
-void ItemSlot :: setOwner(Vehicle* owner_vehicle) {  this->owner_vehicle = owner_vehicle; }
+void ItemSlot::SetSubTypeId(int subtype_id)   { this->subtype_id = subtype_id; }
+void ItemSlot::SetTextureOb(TextureOb* texOb) { this->texOb = texOb; }
+
+void ItemSlot :: SetOwnerVehicle(Vehicle* owner_vehicle) {  this->owner_vehicle = owner_vehicle; }
 void ItemSlot :: setFlashingStatus(bool new_status) { is_FLASHING = new_status; }
                 
 void ItemSlot :: setRect(int _pos_x, int _pos_y, int w, int h)

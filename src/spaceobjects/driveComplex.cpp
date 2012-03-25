@@ -25,22 +25,26 @@ DriveComplex :: DriveComplex(Vehicle* owner_vehicle)
         
 	resetTarget();
 	
-	drive_slot   = new ItemSlot(DRIVE_SLOT_ID, owner_vehicle, owner_vehicle->GetSlotTexOb());
-			
-	drive_slot->setRect(  owner_vehicle->GetGuiRect().getCenter().x - 5*SHIP_SLOT_WIDTH, 
+	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID); 
+		
+	drive_slot.SetSubTypeId(DRIVE_SLOT_ID); 
+	drive_slot.SetTextureOb(texOb_slot);
+	drive_slot.SetOwnerVehicle(owner_vehicle);
+	drive_slot.setRect(  owner_vehicle->GetGuiRect().getCenter().x - 5*SHIP_SLOT_WIDTH, 
 			      owner_vehicle->GetGuiRect().getCenter().y - SHIP_SLOT_HEIGHT/2 + 1.1*SHIP_SLOT_HEIGHT/2,
 			      SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
 				  
-	owner_vehicle->Add(drive_slot);
+	owner_vehicle->Add(&drive_slot);
 	
 	
-	bak_slot     = new ItemSlot(BAK_SLOT_ID, owner_vehicle,  owner_vehicle->GetSlotTexOb());
-				    
-	bak_slot->setRect(  owner_vehicle->GetGuiRect().getCenter().x - 5*SHIP_SLOT_WIDTH, 
+	bak_slot.SetSubTypeId(BAK_SLOT_ID);
+	bak_slot.SetTextureOb(texOb_slot);
+	bak_slot.SetOwnerVehicle(owner_vehicle);	    
+	bak_slot.setRect(  owner_vehicle->GetGuiRect().getCenter().x - 5*SHIP_SLOT_WIDTH, 
 			    owner_vehicle->GetGuiRect().getCenter().y - SHIP_SLOT_HEIGHT/2 - 1.1*SHIP_SLOT_HEIGHT/2,
 			    SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
 				    
-	owner_vehicle->Add(bak_slot);
+	owner_vehicle->Add(&bak_slot);
 	
 	drive_trail = createTrailEffect(owner_vehicle->getTexOb()->size_id, owner_vehicle->GetPoints().getpMidLeft(), owner_vehicle->GetPoints().getpMidFarLeft());
 	      	
@@ -49,16 +53,13 @@ DriveComplex :: DriveComplex(Vehicle* owner_vehicle)
 
 
 DriveComplex :: ~DriveComplex()
-{
-	delete drive_slot;
-        delete bak_slot;
-        
+{      
         delete drive_trail;
 }
   
   
-ItemSlot* DriveComplex :: getDriveSlot()     const { return drive_slot; }
-ItemSlot* DriveComplex :: getBakSlot()       const { return bak_slot; }
+ItemSlot& DriveComplex::GetDriveSlot()      { return drive_slot; }
+ItemSlot& DriveComplex::GetBakSlot()        { return bak_slot; }
 
 BaseGameEntity* DriveComplex :: getTarget() const { return target; }  
 
