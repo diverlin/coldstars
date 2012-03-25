@@ -129,7 +129,7 @@ std::string RocketEquipment :: getRadiusStr()
 void RocketEquipment :: fireEvent()
 {
 	int num = 0;
-    	RocketBullet* rocket1 = getNewRocketBullet(data_bullet, slot, 0.0f);
+    	RocketBullet* rocket1 = VehicleBuilder::Instance().GetNewRocket(data_bullet, slot, 0.0f);
     	slot->getOwnerVehicle()->getStarSystem()->addToSpace(rocket1);
     	num++;
 

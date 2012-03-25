@@ -39,6 +39,5 @@ class Ship : public Vehicle
 
 };
 
-Ship* shipGenerator(int race_id, int subtype_id, int size_id, int weapons_num);
 
 #endif 

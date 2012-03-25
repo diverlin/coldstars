@@ -69,11 +69,6 @@ void Ship :: updateRenderStuff()
 {
     	//points.update(); 
     	shield->update();
-    	
-    	if (ableTo.DRIVE == true)
-    	{
-       		drive_trail->update();
-    	}
 }
 
 void Ship :: render_inSpace() const
@@ -114,53 +109,6 @@ void Ship :: render_atPlanet() const
 
 
 
-Ship* shipGenerator(int race_id, int subtype_id, int size_id, int weapons_num)
-{
-    	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomShipTexObWithFollowingAtrributes(race_id, subtype_id, size_id); 
-       
-       	int protection_rate = 1;
-       	if (subtype_id == WARRIOR_ID)
-        {
-        	protection_rate = 3;
-        }
-        
-        KorpusData data_korpus;
-    	data_korpus.space       = size_id*150 + getRandInt(0, 100);
-    	data_korpus.armor       = data_korpus.space;
-    	data_korpus.protection  = size_id/2*protection_rate;
-    	data_korpus.temperature = 100;
-        data_korpus.price       = getRandInt(200, 400)*size_id;
 
-        data_korpus.inhibit_GRAPPLE = false;
-        data_korpus.weapon_slot_num = weapons_num;
-            
-            
-        LifeData data_life;
-        data_life.armor = data_korpus.armor;
-        data_life.dying_time = 10*texOb->size_id;
-       
-        IdData data_id;
-        data_id.id      = g_ID_GENERATOR.getNextId(); 
-    	data_id.type_id = SHIP_ID;
-    	//subtype_id = ;       
-
-        int size_threshold = 2; 
-    	if (texOb->size_id > size_threshold)
-       		data_korpus.render_TURRELS = true; 
-    	else
-       		data_korpus.render_TURRELS = false; 
-                           
-    	Ship* ship = new Ship();
-    	ship->SetKorpusData(data_korpus);
-	ship->setTextureOb(texOb);
-	ship->setIdData(data_id);
-	ship->setLifeData(data_life);
-    	
-    	ship->PostCreateInit();
-    	    
-    	GetEntityManager().RegisterEntity(ship);
-    	
-    	return ship;
-}
 
 

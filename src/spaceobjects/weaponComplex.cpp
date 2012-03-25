@@ -67,8 +67,8 @@ void WeaponComplex :: postCreateInit(int weapon_num, bool draw_turrels)
     	{  
        		weapon_slot1 = new ItemSlot(WEAPON_SLOT_ID, owner_vehicle, owner_vehicle->GetSlotTexOb());
        					
-       		weapon_slot1->setRect(  owner_vehicle->GetKonturRect().getCenter().x + 1*WEAPON_SLOT_WIDTH, 
-       				        owner_vehicle->GetKonturRect().getCenter().y - WEAPON_SLOT_HEIGHT/2,
+       		weapon_slot1->setRect(  owner_vehicle->GetGuiRect().getCenter().x + 1*WEAPON_SLOT_WIDTH, 
+       				        owner_vehicle->GetGuiRect().getCenter().y - WEAPON_SLOT_HEIGHT/2,
        				        WEAPON_SLOT_WIDTH, WEAPON_SLOT_HEIGHT);		
        				      	
        		slot_weapon_vec.push_back(weapon_slot1);
@@ -91,8 +91,8 @@ void WeaponComplex :: postCreateInit(int weapon_num, bool draw_turrels)
     	{  
        		weapon_slot2 = new ItemSlot(WEAPON_SLOT_ID, owner_vehicle, owner_vehicle->GetSlotTexOb());
        				
-       		weapon_slot2->setRect(  owner_vehicle->GetKonturRect().getCenter().x + 1*WEAPON_SLOT_WIDTH, 
-       					owner_vehicle->GetKonturRect().getCenter().y - WEAPON_SLOT_HEIGHT/2 + 1.1*WEAPON_SLOT_HEIGHT,
+       		weapon_slot2->setRect(  owner_vehicle->GetGuiRect().getCenter().x + 1*WEAPON_SLOT_WIDTH, 
+       					owner_vehicle->GetGuiRect().getCenter().y - WEAPON_SLOT_HEIGHT/2 + 1.1*WEAPON_SLOT_HEIGHT,
        					WEAPON_SLOT_WIDTH, WEAPON_SLOT_HEIGHT);
        			    
        		slot_weapon_vec.push_back(weapon_slot2);
@@ -115,8 +115,8 @@ void WeaponComplex :: postCreateInit(int weapon_num, bool draw_turrels)
     	{  
        		weapon_slot3 = new ItemSlot(WEAPON_SLOT_ID, owner_vehicle, owner_vehicle->GetSlotTexOb()); 
        			
-       		weapon_slot3->setRect(  owner_vehicle->GetKonturRect().getCenter().x + 1*WEAPON_SLOT_WIDTH, 
-       					owner_vehicle->GetKonturRect().getCenter().y - WEAPON_SLOT_HEIGHT/2 - 1.1*WEAPON_SLOT_HEIGHT,
+       		weapon_slot3->setRect(  owner_vehicle->GetGuiRect().getCenter().x + 1*WEAPON_SLOT_WIDTH, 
+       					owner_vehicle->GetGuiRect().getCenter().y - WEAPON_SLOT_HEIGHT/2 - 1.1*WEAPON_SLOT_HEIGHT,
        					WEAPON_SLOT_WIDTH, WEAPON_SLOT_HEIGHT);
        				
        		slot_weapon_vec.push_back(weapon_slot3);
@@ -138,8 +138,8 @@ void WeaponComplex :: postCreateInit(int weapon_num, bool draw_turrels)
     	{  
        		weapon_slot4 = new ItemSlot(WEAPON_SLOT_ID, owner_vehicle, owner_vehicle->GetSlotTexOb());
        				
-       		weapon_slot4->setRect(  owner_vehicle->GetKonturRect().getCenter().x + 2.2*WEAPON_SLOT_WIDTH, 
-       					owner_vehicle->GetKonturRect().getCenter().y - WEAPON_SLOT_HEIGHT/2 + 1.1*WEAPON_SLOT_HEIGHT/2,
+       		weapon_slot4->setRect(  owner_vehicle->GetGuiRect().getCenter().x + 2.2*WEAPON_SLOT_WIDTH, 
+       					owner_vehicle->GetGuiRect().getCenter().y - WEAPON_SLOT_HEIGHT/2 + 1.1*WEAPON_SLOT_HEIGHT/2,
        					WEAPON_SLOT_WIDTH, WEAPON_SLOT_HEIGHT);	
        			
        		slot_weapon_vec.push_back(weapon_slot4);
@@ -163,8 +163,8 @@ void WeaponComplex :: postCreateInit(int weapon_num, bool draw_turrels)
     	{  
        		weapon_slot5 = new ItemSlot(WEAPON_SLOT_ID, owner_vehicle, owner_vehicle->GetSlotTexOb());
        		
-       		weapon_slot5->setRect(  owner_vehicle->GetKonturRect().getCenter().x + 2.2*WEAPON_SLOT_WIDTH, 
-       					owner_vehicle->GetKonturRect().getCenter().y - WEAPON_SLOT_HEIGHT/2 - 1.1*WEAPON_SLOT_HEIGHT/2,
+       		weapon_slot5->setRect(  owner_vehicle->GetGuiRect().getCenter().x + 2.2*WEAPON_SLOT_WIDTH, 
+       					owner_vehicle->GetGuiRect().getCenter().y - WEAPON_SLOT_HEIGHT/2 - 1.1*WEAPON_SLOT_HEIGHT/2,
        					WEAPON_SLOT_WIDTH, WEAPON_SLOT_HEIGHT);
        					
        		slot_weapon_vec.push_back(weapon_slot5);

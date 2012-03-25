@@ -28,7 +28,13 @@ class Vehicle : public BaseGameEntity
         	virtual ~Vehicle(); 
         	
                 void SetNpc(Npc*);
+                void SetDriveComplex(DriveComplex*);
+                void SetWeaponComplex(WeaponComplex*);
+                void SetShieldEffect(ShieldEffect*);
+                                
                 void SetKorpusData(KorpusData);
+                void SetGuiTextureOb(TextureOb*);
+        	void SetGuiRect(Rect);
         	
                 void Add(ItemSlot*);
 
@@ -47,11 +53,12 @@ class Vehicle : public BaseGameEntity
         	ItemSlot* GetGateSlot()   const;
         	
         	TextureOb* GetSlotTexOb() const;
-        	Rect GetKonturRect() const;
         	                        	
                 Npc* GetOwnerNpc() const;
        	        ItemSlot* GetEmptyOtsecSlot();
        	        ItemSlot* GetCargoSlotWithGoods(int);
+        	
+        	const Rect& GetGuiRect() const;
         	
         	void PostCreateInit();
         	
@@ -109,7 +116,6 @@ class Vehicle : public BaseGameEntity
      	
 		Npc* owner_npc;
 		
-		TrailEffect* drive_trail; 
 		ShieldEffect* shield;
              		
                 void RenderGrappleTrail() const;

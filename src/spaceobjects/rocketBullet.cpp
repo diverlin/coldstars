@@ -128,7 +128,6 @@ void RocketBullet :: updateInfo()
 void RocketBullet :: updateRenderStuff()
 {
 	//points.update();
-	drive_trail->update();
 }
 
 
@@ -142,35 +141,3 @@ void RocketBullet :: render_inSpace() const
 
 
 
-
-RocketBullet* getNewRocketBullet(BulletData data_bullet, ItemSlot* slot, float offset, bool force_center_start)
-{
-	IdData data_id;
-	LifeData data_life;
-	
-	data_id.id = -1;
-	data_id.type_id = ROCKET_BULLET_ID;
-	data_id.subtype_id = -1;
-	
-	data_life.is_alive      = true;
-        data_life.garbage_ready = false;
-        data_life.armor = data_bullet.armor;        
-
-    	RocketBullet* rocket = new RocketBullet(data_bullet, slot->getTurrel()->getTarget(), slot->getOwnerVehicle()->getId());
-         
-        rocket->setIdData(data_id);
-        rocket->setLifeData(data_life);
-        rocket->setTextureOb(data_bullet.texOb);
-         
-        rocket->PostCreateInit();
-         
-        if ( (slot->getOwnerVehicle()->data_korpus.render_TURRELS == true) and (force_center_start == false))
-    	{
-        	rocket->place(slot->getTurrel()->getPoints()->getCenter(), slot->getTurrel()->getPoints()->getAngleDegree(), offset);
-        }
-        else
-    	{
-         	rocket->place(slot->getOwnerVehicle()->getPoints()->getCenter(), slot->getOwnerVehicle()->getPoints()->getAngleDegree(), offset);
-    	}
-        return rocket;
-}

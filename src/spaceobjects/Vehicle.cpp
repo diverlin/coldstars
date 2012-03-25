@@ -19,6 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 Vehicle::Vehicle()
 {
 	owner_npc = NULL;
+       	starsystem = NULL; 
 }
 
 /*virtual*/
@@ -42,14 +43,44 @@ Vehicle::~Vehicle()
     	delete drive_complex;
     	delete weapon_complex;
         
-        delete drive_trail;
 	delete shield;
 } 
 
 
 void Vehicle::SetNpc(Npc* npc)   { owner_npc = npc; }
+void Vehicle::SetDriveComplex(DriveComplex* drive_complex)    { this->drive_complex = drive_complex; }
+void Vehicle::SetWeaponComplex(WeaponComplex* weapon_complex) { this->weapon_complex = weapon_complex; }
+                
 void Vehicle::SetKorpusData(KorpusData data_korpus) { this->data_korpus = data_korpus; }
-void Vehicle::Add(ItemSlot* slot) { slot_total_vec.push_back(slot); }
+void Vehicle::SetGuiTextureOb(TextureOb* texOb) { texOb_korpus = texOb; }
+void Vehicle::SetGuiRect(Rect rect) { kontur_rect = rect; }
+        	               
+void Vehicle::SetShieldEffect(ShieldEffect* shield) { this->shield = shield; }
+        	                
+void Vehicle::Add(ItemSlot* slot) 
+{ 
+	if (slot->getSubTypeId() != GATE_SLOT_ID)
+	{
+		slot_total_vec.push_back(slot); 
+		if (slot->getSubTypeId() == CARGO_SLOT_ID)
+		{
+	      		slot_otsec_vec.push_back(slot); 
+		}
+	}
+	
+	switch(slot->getSubTypeId())
+	{
+		case RADAR_SLOT_ID:  { radar_slot = slot; break; }
+		case SCANER_SLOT_ID: { scaner_slot = slot; break; }	
+		
+		case ENERGIZER_SLOT_ID: { energizer_slot = slot; break; }
+		case GRAPPLE_SLOT_ID:   { grapple_slot = slot; break; }
+		case PROTECTOR_SLOT_ID: { protector_slot = slot; break; }
+		case DROID_SLOT_ID:     { droid_slot = slot; break; }
+		case FREEZER_SLOT_ID:   { freezer_slot = slot; break; }
+		case GATE_SLOT_ID:      { gate_slot = slot; break; }	
+	}
+}
                 
 WeaponComplex* Vehicle::GetWeaponComplex() const { return weapon_complex; }
 DriveComplex* Vehicle::GetDriveComplex()   const { return drive_complex; }
@@ -67,8 +98,8 @@ ItemSlot* Vehicle::GetGateSlot()      const { return gate_slot; }
 Npc* Vehicle::GetOwnerNpc() 	      const { return owner_npc; }
 
 TextureOb* Vehicle::GetSlotTexOb() const { return texOb_slot; }
-Rect Vehicle::GetKonturRect()      const { return kontur_rect; }
-        	
+const Rect& Vehicle::GetGuiRect() const { return kontur_rect; }
+        	      	
 // needs when vehicle is grabbed by other vehicle
 //int Vehicle :: GetFunctionalSlotSubTypeId() const { return NONE_SLOT_ID; } 
 //void Vehicle :: BindSlot(ItemSlot* slot)          { return; }	   	
@@ -111,168 +142,10 @@ ItemSlot* Vehicle::GetCargoSlotWithGoods(int requested_goods_subtype_id)
 }
 
 
-void Vehicle::PostCreateInit()
-{
-	this->RecalculateCollisionRadius();
-	texOb_korpus = texOb;  
-        	
-   	////// Points creation
-	this->createCenter();
-
-    	points.initMainQuadPoints(texOb->getFrameWidth(), texOb->getFrameHeight());
-    	points.addMainQuadPoints();
-
-    	points.initShieldQuadPoints();
-    	points.addShieldQuadPoints();
-
-    	points.initMidLeftPoint();
-    	points.addMidLeftPoint();
-
-    	points.initMidFarLeftPoint();
-    	points.addMidFarLeftPoint();
-    	// 
-
-    	/////////////////////////////////////////////////
-    	///////////////////// KONTUR RECT ///////////////  
-    	float kontur_w, kontur_h;
-    	if (texOb->getFrameWidth() > texOb->getFrameHeight())
-    	{
-        	kontur_w = 500; 
-        	kontur_h = texOb->getFrameHeight() * kontur_w / (float)texOb->getFrameWidth();
-    	}
-    	else
-    	{
-        	kontur_h = 500; 
-        	kontur_w = texOb->getFrameWidth() * kontur_h / (float)texOb->getFrameHeight();
-    	}               
-
-    	kontur_rect = Rect(0, 0, kontur_w, kontur_h); 
-    	kontur_rect.setCenter(SCREEN_WIDTH_MIN/2, SCREEN_HEIGHT_MIN/2); 
-    	/////////////////////////////////////////////////
-
-
-    	/////////////////////////////////////////////////
-    	//////////////////////// WEAPONS SLOT ///////////
-    	texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID);  
-
-	///////////////////////////////////////////////////
-	//////////// EQUPMENT SLOT ////////////////////////
-	radar_slot       = new ItemSlot(RADAR_SLOT_ID, this, texOb_slot);
-				 
-	radar_slot->setRect( kontur_rect.getCenter().x + 4*SHIP_SLOT_WIDTH, 
-			     kontur_rect.getCenter().y - SHIP_SLOT_HEIGHT/2 + 1.1*SHIP_SLOT_HEIGHT/2,
-			     SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
-				    
-	slot_total_vec.push_back(radar_slot);	
-	
-	
-	scaner_slot      = new ItemSlot(SCANER_SLOT_ID, this, texOb_slot); 
-
-	scaner_slot->setRect(  kontur_rect.getCenter().x + 4*SHIP_SLOT_WIDTH, 
-			       kontur_rect.getCenter().y - SHIP_SLOT_HEIGHT/2 - 1.1*SHIP_SLOT_HEIGHT/2,
-			       SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
-				    
-	slot_total_vec.push_back(scaner_slot);
-	
-	
-	energizer_slot   = new ItemSlot(ENERGIZER_SLOT_ID, this, texOb_slot);
-	
-	energizer_slot->setRect(  kontur_rect.getCenter().x - 2*SHIP_SLOT_WIDTH, 
-				  kontur_rect.getCenter().y - SHIP_SLOT_HEIGHT/2,
-				  SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
-				    
-    	slot_total_vec.push_back(energizer_slot);
-    		
-    		
-	if (data_korpus.inhibit_GRAPPLE == false)
-	{
-		grapple_slot  = new ItemSlot(GRAPPLE_SLOT_ID, this, texOb_slot);
-				
-		grapple_slot->setRect(  kontur_rect.getCenter().x - 3*SHIP_SLOT_WIDTH, 
-					kontur_rect.getCenter().y - SHIP_SLOT_HEIGHT/2 + 1.1*SHIP_SLOT_HEIGHT,
-					SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
-					 
-    		slot_total_vec.push_back(grapple_slot); 
-    	}
-    	
-    	
-	protector_slot   = new ItemSlot(PROTECTOR_SLOT_ID, this, texOb_slot);
-			
-	protector_slot->setRect(  kontur_rect.getCenter().x - 3*SHIP_SLOT_WIDTH, 
-				  kontur_rect.getCenter().y - SHIP_SLOT_HEIGHT/2 - 1.1*SHIP_SLOT_HEIGHT,
-				  SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
-				    
-    	slot_total_vec.push_back(protector_slot); 
-	
-	
-	droid_slot       = new ItemSlot(DROID_SLOT_ID, this, texOb_slot);
-				    
-	droid_slot->setRect(  kontur_rect.getCenter().x - 1*SHIP_SLOT_WIDTH, 
-			      kontur_rect.getCenter().y - SHIP_SLOT_HEIGHT/2 + 1.1*SHIP_SLOT_HEIGHT,
-			      SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
-				    
-    	slot_total_vec.push_back(droid_slot); 
-    	
-    	
-	freezer_slot     = new ItemSlot(FREEZER_SLOT_ID, this, texOb_slot);
-				    
-	freezer_slot->setRect(  kontur_rect.getCenter().x - 1*SHIP_SLOT_WIDTH, 
-			       kontur_rect.getCenter().y - SHIP_SLOT_HEIGHT/2 - 1.1*SHIP_SLOT_HEIGHT,
-			       SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
-	
-	slot_total_vec.push_back(freezer_slot);   
-	////////////////////////////////////////////////////
-
-
-    	//////// OTSEC SLOT ////////////////////////////////
-    	for (int i = 0; i <= 10; i++)
-    	{
-         	ItemSlot* otsec_slot = new ItemSlot(CARGO_SLOT_ID, this, texOb_slot);
-         		
-         	otsec_slot->setRect( kontur_rect.getCenter().x + (i-6) * SHIP_SLOT_WIDTH, 
-         			     kontur_rect.getCenter().y - 3*SHIP_SLOT_HEIGHT,
-         			     SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
-         					
-         	slot_otsec_vec.push_back(otsec_slot); 
-         	slot_total_vec.push_back(otsec_slot);         
-    	}
-    	////////////////////////////////////////////////////
-
-
-    	//////////// GATE SLOT /////////////////////////////
-    	gate_slot = new ItemSlot(GATE_SLOT_ID, this, texOb_slot);
-    			     
-    	gate_slot->setRect(  kontur_rect.getCenter().x - 5*SHIP_SLOT_WIDTH, 
-    			     kontur_rect.getCenter().y + 3*SHIP_SLOT_HEIGHT,
-    			     SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
-    	////////////////////////////////////////////////////
- 	   	   	
-
-   
-       	starsystem = NULL; 
-    	owner_npc  = NULL;
-
-    	drive_complex = new DriveComplex(this);  
-    	    	
-      	drive_trail = createTrailEffect(texOb->size_id, points.getpMidLeft(), points.getpMidFarLeft());
-      	 
-      	TextureOb* _texOb_shield = g_TEXTURE_MANAGER.getRandomTexOb(SHIELD_EFFECT_TEXTURE_ID); 
- 	shield = new ShieldEffect(this, _texOb_shield);
- 	
- 	weapon_complex = new WeaponComplex(this);
- 	weapon_complex->postCreateInit(data_korpus.weapon_slot_num, data_korpus.render_TURRELS);
-}        	
-
-
 void Vehicle::RecalculateCollisionRadius()
 {
 	collision_radius = (texOb->getFrameWidth() + texOb->getFrameHeight())/3;
 }
-        	
-
-
-	
-
 
 
 
@@ -683,7 +556,7 @@ void Vehicle::RenderKorpus() const
 
 void Vehicle::RenderDriveTrail() const
 {
-	drive_trail->render();
+	drive_complex->renderTrail();
 }
 
 

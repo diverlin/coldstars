@@ -123,49 +123,6 @@ void Satellite :: render_atPlanet() const
 }		
 
 
-Satellite* getNewSatellite()
-{
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(SATELLITE_TEXTURE_ID);  
-	
-       	int protection_rate = 1;
-       	//if (subtype_id == WARRIOR_ID)
-        //{
-        	protection_rate = 1;
-        //}
-        
-        KorpusData data_korpus;
-    	data_korpus.space       = 60 + getRandInt(0, 20);
-    	data_korpus.armor       = 10*data_korpus.space;
-    	data_korpus.protection  = 2*protection_rate;
-    	data_korpus.temperature = 100;
-        data_korpus.price       = 1000;
-
-        data_korpus.inhibit_GRAPPLE = true;
-        data_korpus.weapon_slot_num = 2;
-            
-            
-        LifeData data_life;
-        data_life.armor = data_korpus.armor;
-        data_life.dying_time = 10*texOb->size_id;
-       
-        IdData data_id;
-        data_id.id         = g_ID_GENERATOR.getNextId(); 
-    	data_id.type_id    = SATELLITE_ID;
-    	//data_id.subtype_id = MILITARY_ID;       
-
-        int size_threshold = 2; 
-	data_korpus.render_TURRELS = true;       
-
-	Satellite* satellite = new Satellite();
-	satellite->SetKorpusData(data_korpus);
-	satellite->setIdData(data_id);
-	satellite->setLifeData(data_life);
-	satellite->setTextureOb(texOb);
-	
-	satellite->PostCreateInit();
-	
-	return satellite;
-}
 
 
 
