@@ -51,11 +51,11 @@ void ShieldEffect :: render() const
     	setColor(color);
 
     	drawFlatQuadPerVertexIn2D(texOb,
-    				  owner_vehicle->getPoints()->getBottomLeftShield(), 
-     			     	  owner_vehicle->getPoints()->getBottomRightShield(), 
-     			      	  owner_vehicle->getPoints()->getTopRightShield(), 
-     			      	  owner_vehicle->getPoints()->getTopLeftShield(), 
-     			      	  owner_vehicle->getPoints()->getPosZ());
+    				  owner_vehicle->GetPoints().getBottomLeftShield(), 
+     			     	  owner_vehicle->GetPoints().getBottomRightShield(), 
+     			      	  owner_vehicle->GetPoints().getTopRightShield(), 
+     			      	  owner_vehicle->GetPoints().getTopLeftShield(), 
+     			      	  owner_vehicle->GetPoints().getPosZ());
 }
 
 

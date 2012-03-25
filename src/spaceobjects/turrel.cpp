@@ -128,8 +128,8 @@ void Turrel :: render(float _tur_angle_inD)
 {        
         if (target != NULL)
         {
-        	float _tur_xl = target->getPoints()->getCenter().x - pCenter->x;
-        	float _tur_yl = target->getPoints()->getCenter().y - pCenter->y;
+        	float _tur_xl = target->GetPoints().getCenter().x - pCenter->x;
+        	float _tur_yl = target->GetPoints().getCenter().y - pCenter->y;
 
         	float _tur_angle_inR = atan2(_tur_yl, _tur_xl);
         	_tur_angle_inD = _tur_angle_inR * RADIAN_TO_DEGREE_RATE;

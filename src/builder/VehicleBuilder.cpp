@@ -225,7 +225,7 @@ RocketBullet* VehicleBuilder::GetNewRocket(BulletData data_bullet, ItemSlot* slo
         }
         else
     	{
-         	rocket->place(slot->getOwnerVehicle()->getPoints()->getCenter(), slot->getOwnerVehicle()->getPoints()->getAngleDegree(), offset);
+         	rocket->place(slot->getOwnerVehicle()->GetPoints().getCenter(), slot->getOwnerVehicle()->GetPoints().getAngleDegree(), offset);
     	}
         return rocket;
 }

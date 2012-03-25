@@ -219,7 +219,7 @@ void ItemSlot :: dropItemToSpace()
 	
 	// update mass
 
-	owner_vehicle->getStarSystem()->addToSpace(_container, owner_vehicle->getPoints()->getCenter());	
+	owner_vehicle->getStarSystem()->addToSpace(_container, owner_vehicle->GetPoints().getCenter());	
 
 	//printf("container was created in ss_id = %i, pos = %f, %f\n", _starsystem->getId(), _container->getPoints()->getCenter().x, _container->getPoints()->getCenter().y );
 }
@@ -334,7 +334,7 @@ bool ItemSlot :: isDistanceOk(BaseGameEntity* _target) const
 		return true;
 	}
 	
-        float dist = distBetweenPoints(getOwnerVehicle()->getPoints()->getCenter(), _target->getPoints()->getCenter());                                               
+        float dist = distBetweenPoints(getOwnerVehicle()->GetPoints().getCenter(), _target->GetPoints().getCenter());                                               
         if (dist < getItemRadius())
         {
                 return true;

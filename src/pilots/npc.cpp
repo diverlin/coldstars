@@ -252,7 +252,7 @@ void Npc:: dockEvent()
 
 Planet* Npc :: getPlanetForDocking()
 {
-     	Planet* _target_planet = starsystem->getClosestPlanet(vehicle->getPoints()->getCenter());  // improove
+     	Planet* _target_planet = starsystem->getClosestPlanet(vehicle->GetPoints().getCenter());  // improove
      	return _target_planet;
 }
 

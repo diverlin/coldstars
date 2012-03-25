@@ -54,9 +54,9 @@ void MicroScenarioGrab :: update_inDynamic(Npc* npc) const
                 
         for (unsigned int i = 0; i < grapple_equipment->target_vec.size(); i++)
         {	
-               	grapple_equipment->target_vec[i]->movingByExternalForce(npc->getVehicle()->getPoints()->getCenter(), grapple_equipment->getStrength());        	
+               	grapple_equipment->target_vec[i]->movingByExternalForce(npc->getVehicle()->GetPoints().getCenter(), grapple_equipment->getStrength());        	
        	
-       		float dist = distBetweenPoints(npc->getVehicle()->getPoints()->getCenter(), grapple_equipment->target_vec[i]->getPoints()->getCenter()); 
+       		float dist = distBetweenPoints(npc->getVehicle()->GetPoints().getCenter(), grapple_equipment->target_vec[i]->GetPoints().getCenter()); 
        		if (dist < npc->getVehicle()->getCollisionRadius()/10)
        		{
        			if (grapple_equipment->target_vec[i]->getTypeId() == MINERAL_ID)

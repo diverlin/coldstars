@@ -42,7 +42,7 @@ DriveComplex :: DriveComplex(Vehicle* owner_vehicle)
 				    
 	owner_vehicle->Add(bak_slot);
 	
-	drive_trail = createTrailEffect(owner_vehicle->getTexOb()->size_id, owner_vehicle->getPoints()->getpMidLeft(), owner_vehicle->getPoints()->getpMidFarLeft());
+	drive_trail = createTrailEffect(owner_vehicle->getTexOb()->size_id, owner_vehicle->GetPoints().getpMidLeft(), owner_vehicle->GetPoints().getpMidFarLeft());
 	      	
 }
 
@@ -198,13 +198,13 @@ bool DriveComplex :: updateTargetCoord()
     	     
     		case SHIP_ID:
     		{ 
-			target_pos = target->getPoints()->getCenter() + target_offset;  
+			target_pos = target->GetPoints().getCenter() + target_offset;  
         		return true; break;    
     		}      
     		
     		case SPACESTATION_ID:
     		{ 
-			target_pos = target->getPoints()->getCenter() + target_offset;  
+			target_pos = target->GetPoints().getCenter() + target_offset;  
         		return true; break;    
     		} 
     	}
@@ -215,7 +215,7 @@ bool DriveComplex :: checkEchievement()
 {
 	if (target != NULL)
 	{
-     		if (collisionBetweenCenters(owner_vehicle->getPoints(), target_pos, target_distance) == true)
+     		if (collisionBetweenCenters(owner_vehicle->GetPoints(), target_pos, target_distance) == true)
      		{
         		return true;
         	}
@@ -298,8 +298,8 @@ void DriveComplex :: calcPath()
 vec2f DriveComplex :: calcRoundPath()  // not working yet
 {
         // vychislenie centrov okruzhnostej traektorij na osnovanii tekuwego polozhenija ob'ekta 
-        float start_angle_inD = owner_vehicle->getPoints()->getAngleDegree();
-        vec2f start_pos = owner_vehicle->getPoints()->getCenter();
+        float start_angle_inD = owner_vehicle->GetPoints().getAngleDegree();
+        vec2f start_pos = owner_vehicle->GetPoints().getCenter();
         
         float R = 100.0f; //(float)getRandInt(80, 130);
                         
@@ -356,8 +356,8 @@ vec2f DriveComplex :: calcRoundPath()  // not working yet
         float yk2 = target_pos.y + k * L1 * cos(a1 + b1);         
 
       
-        float len1 = distBetweenPoints(owner_vehicle->getPoints()->getCenter(), xk1, yk1);
-        float len2 = distBetweenPoints(owner_vehicle->getPoints()->getCenter(), xk2, yk2);
+        float len1 = distBetweenPoints(owner_vehicle->GetPoints().getCenter(), xk1, yk1);
+        float len2 = distBetweenPoints(owner_vehicle->GetPoints().getCenter(), xk2, yk2);
            
         
            
@@ -372,14 +372,14 @@ vec2f DriveComplex :: calcRoundPath()  // not working yet
         //printf("ax = %f \n",  ax);  
         //printf("ay = %f \n",  ay);  
 
-        float bx = target_pos.x                              - owner_vehicle->getPoints()->getCenter().x;
-        float by = target_pos.y                              - owner_vehicle->getPoints()->getCenter().y;
+        float bx = target_pos.x                              - owner_vehicle->GetPoints().getCenter().x;
+        float by = target_pos.y                              - owner_vehicle->GetPoints().getCenter().y;
 
         float dax = cos(start_angle_inD/RADIAN_TO_DEGREE_RATE);
         float day = sin(start_angle_inD/RADIAN_TO_DEGREE_RATE);  
                         
-        float dbx = owner_vehicle->getPoints()->getCenter().x - target_pos.x;
-        float dby = owner_vehicle->getPoints()->getCenter().y - target_pos.y;
+        float dbx = owner_vehicle->GetPoints().getCenter().x - target_pos.x;
+        float dby = owner_vehicle->GetPoints().getCenter().y - target_pos.y;
 
         float la = sqrt(dax*dax+day*day);
         float lb = sqrt(dbx*dbx+dby*dby);
@@ -586,8 +586,8 @@ void DriveComplex :: updatePosition()
      	{
         	if (move_it < (path_vec.size() - 1))
         	{
-           		owner_vehicle->getPoints()->setCenter(path_vec[move_it]);
-           		owner_vehicle->getPoints()->setAngle(angle_inD_vec[move_it]);
+           		owner_vehicle->GetPoints().setCenter(path_vec[move_it]);
+           		owner_vehicle->GetPoints().setAngle(angle_inD_vec[move_it]);
            		move_it++;
         	}
         	else

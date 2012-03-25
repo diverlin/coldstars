@@ -44,8 +44,8 @@ void Satellite :: update_inSpace(int time, bool show_effect)
 		//if (parent != NULL)
 		//{		
 			vec2f new_pos;
-			new_pos.x = parent->getPoints()->getCenter().x + orbit->getPosition().x;
-			new_pos.y = parent->getPoints()->getCenter().y + orbit->getPosition().y;
+			new_pos.x = parent->GetPoints().getCenter().x + orbit->getPosition().x;
+			new_pos.y = parent->GetPoints().getCenter().y + orbit->getPosition().y;
 			points.setCenter(new_pos);
 			points.update();
 		//}

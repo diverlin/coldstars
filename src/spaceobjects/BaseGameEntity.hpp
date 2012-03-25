@@ -46,7 +46,7 @@ class BaseGameEntity
 
 		StarSystem* getStarSystem() const { return starsystem; }           
 		int getPlaceTypeId()        const { return place_type_id; }
-		Points* getPoints()               { return &points; }
+		Points& GetPoints()          { return points; }
 
 		int getCollisionRadius() const { return collision_radius; }   
 		bool getAlive()          const { return data_life.is_alive; }
