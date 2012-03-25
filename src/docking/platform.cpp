@@ -34,9 +34,9 @@ void Platform :: insert(Vehicle* vehicle)
 {
         this->vehicle = vehicle;
         
-        vehicle->getPoints()->setAngle(0);
-       	vehicle->getPoints()->setCenter(rect.getCenter().x, rect.getCenter().y);
-        vehicle->getPoints()->update();
+        vehicle->GetPoints().setAngle(0);
+       	vehicle->GetPoints().setCenter(rect.getCenter().x, rect.getCenter().y);
+        vehicle->GetPoints().update();
 }
 
 void Platform :: free()

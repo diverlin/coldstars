@@ -29,24 +29,24 @@ void  BaseVehicleBuilder::CreateKorpusGeometry(Vehicle* vehicle)
 	vehicle->RecalculateCollisionRadius();
 	vehicle->createCenter();
 
-    	vehicle->getPoints()->initMainQuadPoints(vehicle->getTexOb()->getFrameWidth(), vehicle->getTexOb()->getFrameHeight());
-    	vehicle->getPoints()->addMainQuadPoints();
+    	vehicle->GetPoints().initMainQuadPoints(vehicle->getTexOb()->getFrameWidth(), vehicle->getTexOb()->getFrameHeight());
+    	vehicle->GetPoints().addMainQuadPoints();
 }
 
 void BaseVehicleBuilder::CreateShieldGeometry(Vehicle* vehicle)
 {
-    	vehicle->getPoints()->initShieldQuadPoints();
-    	vehicle->getPoints()->addShieldQuadPoints();
+    	vehicle->GetPoints().initShieldQuadPoints();
+    	vehicle->GetPoints().addShieldQuadPoints();
 }
         	
 
 void BaseVehicleBuilder::CreateTrailGeometry(Vehicle* vehicle)
 {
-    	vehicle->getPoints()->initMidLeftPoint();
-    	vehicle->getPoints()->addMidLeftPoint();
+    	vehicle->GetPoints().initMidLeftPoint();
+    	vehicle->GetPoints().addMidLeftPoint();
 
-    	vehicle->getPoints()->initMidFarLeftPoint();
-    	vehicle->getPoints()->addMidFarLeftPoint();
+    	vehicle->GetPoints().initMidFarLeftPoint();
+    	vehicle->GetPoints().addMidFarLeftPoint();
 }
         
 

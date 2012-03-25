@@ -74,7 +74,7 @@ void WeaponComplex :: postCreateInit(int weapon_num, bool draw_turrels)
        		slot_weapon_vec.push_back(weapon_slot1);
        		owner_vehicle->Add(weapon_slot1); 
 
-       		turrel1 = new Turrel(weapon_slot1, owner_vehicle->getPoints()->getpWeapon1Center());       
+       		turrel1 = new Turrel(weapon_slot1, owner_vehicle->GetPoints().getpWeapon1Center());       
        		turrel1->setTexOb(texOb_turrel); // remove
                 
        		weapon_slot1->bindTurrel(turrel1);
@@ -82,8 +82,8 @@ void WeaponComplex :: postCreateInit(int weapon_num, bool draw_turrels)
        
        		if (draw_turrels == true)
        		{   
-           		owner_vehicle->getPoints()->initWeapon1CenterPoint(0, owner_vehicle->getTexOb()->getFrameHeight()/3);
-           		owner_vehicle->getPoints()->addWeapon1CenterPoint();
+           		owner_vehicle->GetPoints().initWeapon1CenterPoint(0, owner_vehicle->getTexOb()->getFrameHeight()/3);
+           		owner_vehicle->GetPoints().addWeapon1CenterPoint();
        		} 
     	}
    
@@ -98,7 +98,7 @@ void WeaponComplex :: postCreateInit(int weapon_num, bool draw_turrels)
        		slot_weapon_vec.push_back(weapon_slot2);
        		owner_vehicle->Add(weapon_slot2); 
        
-                turrel2 = new Turrel(weapon_slot2, owner_vehicle->getPoints()->getpWeapon2Center()); 
+                turrel2 = new Turrel(weapon_slot2, owner_vehicle->GetPoints().getpWeapon2Center()); 
        		turrel2->setTexOb(texOb_turrel);
                 
               	weapon_slot2->bindTurrel(turrel2);
@@ -106,8 +106,8 @@ void WeaponComplex :: postCreateInit(int weapon_num, bool draw_turrels)
         
        		if (draw_turrels == true)
        		{  
-           		owner_vehicle->getPoints()->initWeapon2CenterPoint(0, -owner_vehicle->getTexOb()->getFrameHeight()/3);
-           		owner_vehicle->getPoints()->addWeapon2CenterPoint();
+           		owner_vehicle->GetPoints().initWeapon2CenterPoint(0, -owner_vehicle->getTexOb()->getFrameHeight()/3);
+           		owner_vehicle->GetPoints().addWeapon2CenterPoint();
        		}
     	}
 
@@ -122,15 +122,15 @@ void WeaponComplex :: postCreateInit(int weapon_num, bool draw_turrels)
        		slot_weapon_vec.push_back(weapon_slot3);
        		owner_vehicle->Add(weapon_slot3); 
               
-       		turrel3 = new Turrel(weapon_slot3, owner_vehicle->getPoints()->getpWeapon3Center()); 
+       		turrel3 = new Turrel(weapon_slot3, owner_vehicle->GetPoints().getpWeapon3Center()); 
        		turrel3->setTexOb(texOb_turrel);
                 
               	weapon_slot3->bindTurrel(turrel3);
        
        		if (draw_turrels == true)
        		{  
-           		owner_vehicle->getPoints()->initWeapon3CenterPoint(-owner_vehicle->getTexOb()->getFrameWidth()/5, owner_vehicle->getTexOb()->getFrameHeight()/3);
-           		owner_vehicle->getPoints()->addWeapon3CenterPoint();
+           		owner_vehicle->GetPoints().initWeapon3CenterPoint(-owner_vehicle->getTexOb()->getFrameWidth()/5, owner_vehicle->getTexOb()->getFrameHeight()/3);
+           		owner_vehicle->GetPoints().addWeapon3CenterPoint();
        		}
     	}
 
@@ -145,7 +145,7 @@ void WeaponComplex :: postCreateInit(int weapon_num, bool draw_turrels)
        		slot_weapon_vec.push_back(weapon_slot4);
        		owner_vehicle->Add(weapon_slot4); 
               
-       		turrel4 = new Turrel(weapon_slot4, owner_vehicle->getPoints()->getpWeapon4Center()); 
+       		turrel4 = new Turrel(weapon_slot4, owner_vehicle->GetPoints().getpWeapon4Center()); 
        		turrel4->setTexOb(texOb_turrel);
                 
               	weapon_slot4->bindTurrel(turrel4);
@@ -153,8 +153,8 @@ void WeaponComplex :: postCreateInit(int weapon_num, bool draw_turrels)
          
        		if (draw_turrels == true)
        		{  
-           		owner_vehicle->getPoints()->initWeapon4CenterPoint(owner_vehicle->getTexOb()->getFrameWidth()/5, -owner_vehicle->getTexOb()->getFrameHeight()/3);
-           		owner_vehicle->getPoints()->addWeapon4CenterPoint();
+           		owner_vehicle->GetPoints().initWeapon4CenterPoint(owner_vehicle->getTexOb()->getFrameWidth()/5, -owner_vehicle->getTexOb()->getFrameHeight()/3);
+           		owner_vehicle->GetPoints().addWeapon4CenterPoint();
        		}
 
     	}   
@@ -170,15 +170,15 @@ void WeaponComplex :: postCreateInit(int weapon_num, bool draw_turrels)
        		slot_weapon_vec.push_back(weapon_slot5);
        		owner_vehicle->Add(weapon_slot5); 
               
-       		turrel5 = new Turrel(weapon_slot5, owner_vehicle->getPoints()->getpWeapon5Center()); 
+       		turrel5 = new Turrel(weapon_slot5, owner_vehicle->GetPoints().getpWeapon5Center()); 
               	turrel5->setTexOb(texOb_turrel);
        
                 weapon_slot5->bindTurrel(turrel5);
        		
        		if (draw_turrels == true)
        		{  
-           		owner_vehicle->getPoints()->initWeapon5CenterPoint(-owner_vehicle->getTexOb()->getFrameWidth()/3, -owner_vehicle->getTexOb()->getFrameHeight()/3);
-           		owner_vehicle->getPoints()->addWeapon5CenterPoint();           		
+           		owner_vehicle->GetPoints().initWeapon5CenterPoint(-owner_vehicle->getTexOb()->getFrameWidth()/3, -owner_vehicle->getTexOb()->getFrameHeight()/3);
+           		owner_vehicle->GetPoints().addWeapon5CenterPoint();           		
        		}
     	} 
 }
@@ -234,7 +234,7 @@ bool WeaponComplex :: isAnyWeaponSelected() const
 
 void WeaponComplex :: setTarget(BaseGameEntity* _target)
 {                          
-        float dist = distBetweenPoints(owner_vehicle->getPoints()->getCenter(), _target->getPoints()->getCenter());
+        float dist = distBetweenPoints(owner_vehicle->GetPoints().getCenter(), _target->GetPoints().getCenter());
         
         for (unsigned int i = 0; i < slot_weapon_equiped_vec.size(); i++)
         {
@@ -348,7 +348,7 @@ void WeaponComplex :: renderTurrels() const
 {
     	for(unsigned int i = 0; i < slot_weapon_equiped_vec.size(); i++)
     	{
-        	slot_weapon_equiped_vec[i]->getTurrel()->render(owner_vehicle->getPoints()->getAngleDegree());        
+        	slot_weapon_equiped_vec[i]->getTurrel()->render(owner_vehicle->GetPoints().getAngleDegree());        
     	} 
 }
 
@@ -357,7 +357,7 @@ void WeaponComplex :: renderTurrels() const
 void WeaponComplex :: renderWeaponsRange()
 {
 	glPushMatrix();
-		glTranslatef(owner_vehicle->getPoints()->getCenter().x, owner_vehicle->getPoints()->getCenter().y, 0.0f);
+		glTranslatef(owner_vehicle->GetPoints().getCenter().x, owner_vehicle->GetPoints().getCenter().y, 0.0f);
 		for (unsigned int i = 0; i < slot_weapon_reloaded_vec.size(); i++)
         	{
          		if (slot_weapon_reloaded_vec[i]->getTurrel()->getSelectedStatus() == true)
@@ -380,7 +380,7 @@ void WeaponComplex :: renderWeaponIcons() const
                 Turrel* _turrel = slot_weapon_vec[wi]->getTurrel();
                 if (_turrel->getTarget() != NULL )
                 {       
-                        Rect _rect(_turrel->getTarget()->getPoints()->getpCenter()->x - 40/2 + 23*offset, _turrel->getTarget()->getPoints()->getpCenter()->y + 40/2, 20, 20);
+                        Rect _rect(_turrel->getTarget()->GetPoints().getpCenter()->x - 40/2 + 23*offset, _turrel->getTarget()->GetPoints().getpCenter()->y + 40/2, 20, 20);
                         drawTexturedRect(slot_weapon_vec[wi]->getItem()->getTextureOb(), _rect, -2.0);
                         offset++;
                 }        

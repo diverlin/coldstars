@@ -116,7 +116,7 @@ void Player :: clearVisibleEntities()
 
 void Player :: addIfVisible(Star* star)
 {
-        if (isObjectOnScreen(star->getPoints()))
+        if (isObjectOnScreen(star->GetPoints()))
         {         
 		visible_STAR_vec.push_back(star);
 	}
@@ -124,7 +124,7 @@ void Player :: addIfVisible(Star* star)
 
 void Player :: addIfVisible(Planet* planet)
 {
-        if (isObjectOnScreen(planet->getPoints()))
+        if (isObjectOnScreen(planet->GetPoints()))
         {  
 		visible_PLANET_vec.push_back(planet);
 	}
@@ -132,7 +132,7 @@ void Player :: addIfVisible(Planet* planet)
 
 void Player :: addIfVisible(Asteroid* asteroid)     		
 {
-	if (isObjectOnScreen(asteroid->getPoints()))
+	if (isObjectOnScreen(asteroid->GetPoints()))
         {   	
                 //if ( distBetweenPoints(asteroid->getPoints()->getCenter(), player_center) < player_vision_radius )
                 {
@@ -143,7 +143,7 @@ void Player :: addIfVisible(Asteroid* asteroid)
 
 void Player :: addIfVisible(Mineral* mineral)
 {
-	if (isObjectOnScreen(mineral->getPoints()))
+	if (isObjectOnScreen(mineral->GetPoints()))
         {   
         	//if ( distBetweenPoints(mineral->getPoints()->getCenter(), player_center) < player_vision_radius )
                 {
@@ -154,7 +154,7 @@ void Player :: addIfVisible(Mineral* mineral)
 
 void Player :: addIfVisible(Container* container)     	
 {
-        if (isObjectOnScreen(container->getPoints()))
+        if (isObjectOnScreen(container->GetPoints()))
         {    
         	//if ( distBetweenPoints(container->getPoints()->getCenter(), player_center) < player_vision_radius )
                 {
@@ -165,7 +165,7 @@ void Player :: addIfVisible(Container* container)
 
 void Player :: addIfVisible(RocketBullet* rocket)  
 {
-        if (isObjectOnScreen(rocket->getPoints()))  
+        if (isObjectOnScreen(rocket->GetPoints()))  
         {  
              	//if ( distBetweenPoints(rocket->getPoints()->getCenter(), player_center) < player_vision_radius )
                 {
@@ -176,7 +176,7 @@ void Player :: addIfVisible(RocketBullet* rocket)
 
 void Player :: addIfVisible(BlackHole* blackhole)  
 {
-        if (isObjectOnScreen(blackhole->getPoints()))  
+        if (isObjectOnScreen(blackhole->GetPoints()))  
         {  
         	//if ( distBetweenPoints(blackhole->getPoints()->getCenter(), player_center) < player_vision_radius )
         	{
@@ -187,7 +187,7 @@ void Player :: addIfVisible(BlackHole* blackhole)
 
 void Player :: addIfVisible(SpaceStation* spacestation)  
 {
-        if (isObjectOnScreen(spacestation->getPoints()))  
+        if (isObjectOnScreen(spacestation->GetPoints()))  
         {	  
                 //if ( distBetweenPoints(spacestation->getPoints()->getCenter(), player_center) < player_vision_radius )
                	{
@@ -198,7 +198,7 @@ void Player :: addIfVisible(SpaceStation* spacestation)
 
 void Player :: addIfVisible(Satellite* satellite) 
 {
-        if (isObjectOnScreen(satellite->getPoints()))  
+        if (isObjectOnScreen(satellite->GetPoints()))  
         {	  
         	//if ( distBetweenPoints(satellite->getPoints()->getCenter(), player_center) < player_vision_radius )
                 {
@@ -209,7 +209,7 @@ void Player :: addIfVisible(Satellite* satellite)
 
 void Player :: addIfVisible(Ship* ship) 
 {
-        if (isObjectOnScreen(ship->getPoints()))
+        if (isObjectOnScreen(ship->GetPoints()))
         {	  
                 //if ( distBetweenPoints(ship->getPoints()->getCenter(), player_center) < player_vision_radius )
                	{
@@ -589,7 +589,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
     	{
         	for (unsigned int mi = 0; mi < visible_MINERAL_vec.size(); mi++)
         	{ 
-            		float mineral_cursor_dist = distBetweenPoints(visible_MINERAL_vec[mi]->getPoints()->getCenter(), mxvp, myvp);
+            		float mineral_cursor_dist = distBetweenPoints(visible_MINERAL_vec[mi]->GetPoints().getCenter(), mxvp, myvp);
             		if (mineral_cursor_dist < visible_MINERAL_vec[mi]->getCollisionRadius())
             		{   
                			cursor_has_target = true;
@@ -623,7 +623,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
     	{
         	for (unsigned int ci = 0; ci < visible_CONTAINER_vec.size(); ci++)
         	{ 
-            		float container_cursor_dist = distBetweenPoints(visible_CONTAINER_vec[ci]->getPoints()->getCenter(), mxvp, myvp);
+            		float container_cursor_dist = distBetweenPoints(visible_CONTAINER_vec[ci]->GetPoints().getCenter(), mxvp, myvp);
             		if (container_cursor_dist < visible_CONTAINER_vec[ci]->getCollisionRadius())
             		{   
                			cursor_has_target = true;
@@ -658,7 +658,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
     	{
        		for (unsigned int i = 0; i < visible_SATELLITE_vec.size(); i++)
        		{ 
-            		float ship_cursor_dist = distBetweenPoints(visible_SATELLITE_vec[i]->getPoints()->getCenter(), mxvp, myvp);
+            		float ship_cursor_dist = distBetweenPoints(visible_SATELLITE_vec[i]->GetPoints().getCenter(), mxvp, myvp);
             		if (ship_cursor_dist < visible_SATELLITE_vec[i]->getCollisionRadius())
             		{ 
             			cursor_has_target = true;
@@ -718,7 +718,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
     	{
         	for (unsigned int ai = 0; ai < visible_ASTEROID_vec.size(); ai++)
         	{ 
-            		float asteroid_cursor_dist = distBetweenPoints(visible_ASTEROID_vec[ai]->getPoints()->getCenter(), mxvp, myvp);
+            		float asteroid_cursor_dist = distBetweenPoints(visible_ASTEROID_vec[ai]->GetPoints().getCenter(), mxvp, myvp);
             		if (asteroid_cursor_dist < visible_ASTEROID_vec[ai]->getCollisionRadius())
             		{   
                 		cursor_has_target = true;
@@ -754,7 +754,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
     	{
        		for (unsigned int ki = 0; ki < visible_SHIP_vec.size(); ki++)
        		{ 
-            		float ship_cursor_dist = distBetweenPoints(visible_SHIP_vec[ki]->getPoints()->getCenter(), mxvp, myvp);
+            		float ship_cursor_dist = distBetweenPoints(visible_SHIP_vec[ki]->GetPoints().getCenter(), mxvp, myvp);
             		if (ship_cursor_dist < visible_SHIP_vec[ki]->getCollisionRadius())
             		{ 
             			cursor_has_target = true;
@@ -815,7 +815,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
     	{
         	for (unsigned int i = 0; i < visible_BLACKHOLE_vec.size(); i++)
         	{ 
-            		float cursor_dist = distBetweenPoints(visible_BLACKHOLE_vec[i]->getPoints()->getCenter(), mxvp, myvp);
+            		float cursor_dist = distBetweenPoints(visible_BLACKHOLE_vec[i]->GetPoints().getCenter(), mxvp, myvp);
             		if (cursor_dist < visible_BLACKHOLE_vec[i]->getCollisionRadius())
             		{   
                			cursor_has_target = true;
@@ -832,7 +832,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
     	{
        		for (unsigned int i = 0; i < visible_SPACESTATION_vec.size(); i++)
        		{ 
-            		float ship_cursor_dist = distBetweenPoints(visible_SPACESTATION_vec[i]->getPoints()->getCenter(), mxvp, myvp);
+            		float ship_cursor_dist = distBetweenPoints(visible_SPACESTATION_vec[i]->GetPoints().getCenter(), mxvp, myvp);
             		if (ship_cursor_dist < visible_SPACESTATION_vec[i]->getCollisionRadius())
             		{ 
             			cursor_has_target = true;
@@ -895,7 +895,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
     	{
         	for (unsigned int pi = 0; pi < visible_PLANET_vec.size(); pi++)
         	{ 
-            		float planet_cursor_dist = distBetweenPoints(visible_PLANET_vec[pi]->getPoints()->getCenter(), mxvp, myvp);
+            		float planet_cursor_dist = distBetweenPoints(visible_PLANET_vec[pi]->GetPoints().getCenter(), mxvp, myvp);
             		//printf("1,2,3 = %f,%f,%f\n", visible_PLANET_vec[pi]->getCollisionRadius(), visible_PLANET_vec[pi]->getPoints()->getCenter().x, visible_PLANET_vec[pi]->getPoints()->getCenter().y);
             		if (planet_cursor_dist < visible_PLANET_vec[pi]->getCollisionRadius())
             		{   
@@ -927,7 +927,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
     	{
         	for (unsigned int si = 0; si < visible_STAR_vec.size(); si++)
         	{ 
-            		float cursor_dist = distBetweenPoints(visible_STAR_vec[si]->getPoints()->getCenter(), mxvp, myvp);
+            		float cursor_dist = distBetweenPoints(visible_STAR_vec[si]->GetPoints().getCenter(), mxvp, myvp);
             		if (cursor_dist < visible_STAR_vec[si]->getCollisionRadius())
             		{   
                			cursor_has_target = true;
@@ -960,13 +960,13 @@ void Player :: mouseControl() // all large objects must be cheked by last
 
 
 
-bool Player :: isObjectOnScreen(Points* points) const
+bool Player :: isObjectOnScreen(const Points& points) const
 {
-        float ob_centerx = points->getCenter().x;
-        float ob_centery = points->getCenter().y;
+        float ob_centerx = points.getCenter().x;
+        float ob_centery = points.getCenter().y;
         
-        int ob_w = points->getWidth();
-        int ob_h = points->getHeight();
+        int ob_w = points.getWidth();
+        int ob_h = points.getHeight();
         
         if (ob_centerx < (screen->getBottomLeftGlobalCoord().x - ob_w))
                 return false;

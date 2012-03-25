@@ -58,7 +58,7 @@ void Planet :: update_inSpace(int time, bool show_effect)
      		}
      		else
      		{
-     			points.setCenter(parent->getPoints()->getCenter() + orbit->getPosition());
+     			points.setCenter(parent->GetPoints().getCenter() + orbit->getPosition());
      		}
      	}
 }

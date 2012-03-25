@@ -64,7 +64,7 @@ void RocketBullet :: update_inSpace(int time, bool show_effect)
                 
 		if (target != NULL)
     		{ 
-        		get_dX_dY_angleInD_ToPoint(points.getCenter().x, points.getCenter().y, target->getPoints()->getCenter().x, target->getPoints()->getCenter().y, speed/100.0, &dx, &dy, &angle_inD);
+        		get_dX_dY_angleInD_ToPoint(points.getCenter().x, points.getCenter().y, target->GetPoints().getCenter().x, target->GetPoints().getCenter().y, speed/100.0, &dx, &dy, &angle_inD);
     		
                         if (isTargetOk() == false)
                         {

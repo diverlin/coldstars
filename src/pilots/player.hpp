@@ -127,7 +127,7 @@ class Player
     		void mouseControl();
     		void update_global(); 
     		
-    		bool isObjectOnScreen(Points*) const;
+    		bool isObjectOnScreen(const Points&) const;
 };
 
 #endif 

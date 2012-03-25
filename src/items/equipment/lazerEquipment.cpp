@@ -106,13 +106,13 @@ void LazerEquipment :: fireEvent_TRUE()
     	{
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
                                                      	      slot->getTurrel()->getPoints()->getpCenter(), 
-                                                              slot->getTurrel()->getTarget()->getPoints()->getpCenter());
+                                                              slot->getTurrel()->getTarget()->GetPoints().getpCenter());
         }
     	else
     	{
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
-                                                              slot->getOwnerVehicle()->getPoints()->getpCenter(), 
-                                                              slot->getTurrel()->getTarget()->getPoints()->getpCenter());
+                                                              slot->getOwnerVehicle()->GetPoints().getpCenter(), 
+                                                              slot->getTurrel()->getTarget()->GetPoints().getpCenter());
         }
     
     	// DAMAGE effect

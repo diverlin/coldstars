@@ -193,7 +193,7 @@ void Vehicle::LaunchingEvent()
 
      	if (drive_complex->getTarget()->getTypeId() == PLANET_ID)
      	{
-     		starsystem->addToSpace(this, drive_complex->getTarget()->getPoints()->getCenter(), 0, NULL);
+     		starsystem->addToSpace(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
      		starsystem->addToSpace(owner_npc);
 
      		((Planet*)drive_complex->getTarget())->getLand()->remove(this);
@@ -202,7 +202,7 @@ void Vehicle::LaunchingEvent()
 	
      	if (drive_complex->getTarget()->getTypeId() == SPACESTATION_ID)
      	{
-     		starsystem->addToSpace(this, drive_complex->getTarget()->getPoints()->getCenter(), 0, NULL);
+     		starsystem->addToSpace(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
      		starsystem->addToSpace(owner_npc);
 
      		((SpaceStation*)drive_complex->getTarget())->getLand()->remove(this);
@@ -525,8 +525,8 @@ void Vehicle::RenderGrappleTrail() const
         {
                 //if (grapple_slot->getGrappleEquipment()->target_vec[i]->getValid() == true)
                 {              
-                    	float xl = grapple_slot->getGrappleEquipment()->target_vec[i]->getPoints()->getpCenter()->x - points.getCenter().x;
-                        float yl = grapple_slot->getGrappleEquipment()->target_vec[i]->getPoints()->getpCenter()->y - points.getCenter().y;
+                    	float xl = grapple_slot->getGrappleEquipment()->target_vec[i]->GetPoints().getpCenter()->x - points.getCenter().x;
+                        float yl = grapple_slot->getGrappleEquipment()->target_vec[i]->GetPoints().getpCenter()->y - points.getCenter().y;
 
                         float len = sqrt((xl*xl) + (yl*yl));
 
@@ -629,7 +629,7 @@ void Vehicle::GrappleMicroProgramm()
         {
                	grapple_slot->getGrappleEquipment()->target_vec[i]->movingByExternalForce(points.getCenter(), grapple_slot->getGrappleEquipment()->getStrength());        	
        	
-       		float dist = distBetweenPoints(points.getCenter(), grapple_slot->getGrappleEquipment()->target_vec[i]->getPoints()->getCenter() ); 
+       		float dist = distBetweenPoints(points.getCenter(), grapple_slot->getGrappleEquipment()->target_vec[i]->GetPoints().getCenter() ); 
        		if (dist < getCollisionRadius()/4.0f)
        		{
        			switch(grapple_slot->getGrappleEquipment()->target_vec[i]->getTypeId())
