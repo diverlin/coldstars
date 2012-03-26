@@ -789,25 +789,25 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 
 //{
 	//std::vector<int> arg;  
-	//arg.push_back(TECH_LEVEL_0_ID); arg.push_back(BLUE_COLOR_ID); 
+	//arg.push_back(TECHLEVEL::L0); arg.push_back(BLUE_COLOR_ID); 
 	//g_TEXTURE_MANAGER.manage( new TextureOb(LAZER_EFFECT_TEXTURE_ID, "data/effect/lazer/l_64_26_000.png", true, &arg, 4, 1, 10) );
 //}
 
 {
 	std::vector<int> arg;  
-	arg.push_back(TECH_LEVEL_0_ID); arg.push_back(RED_COLOR_ID); 
+	arg.push_back(TECHLEVEL::L0); arg.push_back(RED_COLOR_ID); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(LAZER_EFFECT_TEXTURE_ID, "data/effect/lazer/l_001.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;  
-	arg.push_back(TECH_LEVEL_0_ID); arg.push_back(YELLOW_COLOR_ID); 
+	arg.push_back(TECHLEVEL::L0); arg.push_back(YELLOW_COLOR_ID); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(LAZER_EFFECT_TEXTURE_ID, "data/effect/lazer/l_002.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;  
-	arg.push_back(TECH_LEVEL_0_ID); arg.push_back(BLUE_COLOR_ID); 
+	arg.push_back(TECHLEVEL::L0); arg.push_back(BLUE_COLOR_ID); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(LAZER_EFFECT_TEXTURE_ID, "data/effect/lazer/l_003.png", true, &arg) );
 }
 
@@ -867,21 +867,21 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 //####### TECH_LEVEL_0
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_0_ID);  
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L0);  
 	g_TEXTURE_MANAGER.manage( new TextureOb(DRIVE_ITEM_TEXTURE_ID, "data/item/drive/drive_Race0_Tech0.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_1
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_1_ID);  
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L1);  
 	g_TEXTURE_MANAGER.manage( new TextureOb(DRIVE_ITEM_TEXTURE_ID, "data/item/drive/drive_Race0_Tech1.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_2
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_2_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L2); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(DRIVE_ITEM_TEXTURE_ID, "data/item/drive/drive_Race0_Tech2.png", true, &arg) );
 }
 
@@ -900,26 +900,26 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 //####### TECH_LEVEL_0
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_0_ID); arg.push_back(RED_COLOR_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L0); arg.push_back(RED_COLOR_ID); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(LAZER_ITEM_TEXTURE_ID, "data/item/lazer/lazer_Race0_Tech0_Red0.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_0_ID); arg.push_back(YELLOW_COLOR_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L0); arg.push_back(YELLOW_COLOR_ID); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(LAZER_ITEM_TEXTURE_ID, "data/item/lazer/lazer_Race0_Tech0_Yellow0.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_0_ID); arg.push_back(BLUE_COLOR_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L0); arg.push_back(BLUE_COLOR_ID); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(LAZER_ITEM_TEXTURE_ID, "data/item/lazer/lazer_Race0_Tech0_Blue0.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_1
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_1_ID); arg.push_back(BLUE_COLOR_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L1); arg.push_back(BLUE_COLOR_ID); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(LAZER_ITEM_TEXTURE_ID, "data/item/lazer/lazer_Race0_Tech1_Blue0.png", true, &arg) );
 }
 //#################### RACE_1
@@ -937,24 +937,24 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 //####### TECH_LEVEL_0
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_0_ID); arg.push_back(YELLOW_COLOR_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L0); arg.push_back(YELLOW_COLOR_ID); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(ROCKET_ITEM_TEXTURE_ID, "data/item/rocket/rocket_Race0_Tech0.png", true, &arg) );
 }
 //####### TECH_LEVEL_1
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_1_ID); arg.push_back(YELLOW_COLOR_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L1); arg.push_back(YELLOW_COLOR_ID); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(ROCKET_ITEM_TEXTURE_ID, "data/item/rocket/rocket_Race0_Tech1.png", true, &arg) );
 }
 //####### TECH_LEVEL_2
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_1_ID); arg.push_back(YELLOW_COLOR_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L1); arg.push_back(YELLOW_COLOR_ID); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(ROCKET_ITEM_TEXTURE_ID, "data/item/rocket/rocket_Race0_Tech2.png", true, &arg) );
 }
 
-//TEXTURE_MANAGER.manageItem( textureOb(TORPED_ITEM_TEXTURE_ID, 'data/item/torped/tl0.png', True, [ 'torpedo',       TECH_LEVEL_0_ID, 3, 1, RACE::R0, YELLOW_COLOR_ID]) )
-//TEXTURE_MANAGER.manageItem( textureOb(TORPED_ITEM_TEXTURE_ID, 'data/item/torped/tl1.png', True, [ 'torpedo',       TECH_LEVEL_0_ID, 3, 1, RACE::R0, YELLOW_COLOR_ID]) )
+//TEXTURE_MANAGER.manageItem( textureOb(TORPED_ITEM_TEXTURE_ID, 'data/item/torped/tl0.png', True, [ 'torpedo',       TECHLEVEL::L0, 3, 1, RACE::R0, YELLOW_COLOR_ID]) )
+//TEXTURE_MANAGER.manageItem( textureOb(TORPED_ITEM_TEXTURE_ID, 'data/item/torped/tl1.png', True, [ 'torpedo',       TECHLEVEL::L0, 3, 1, RACE::R0, YELLOW_COLOR_ID]) )
 
 {
 	std::vector<int> arg;  
@@ -985,27 +985,27 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 //####### TECH_LEVEL_0
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_0_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L0); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(PROTECTOR_ITEM_TEXTURE_ID, "data/item/protector/protector_Race0_Tech0.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_1
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_1_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L1); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(PROTECTOR_ITEM_TEXTURE_ID, "data/item/protector/protector_Race0_Tech1.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_2
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_2_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L2); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(PROTECTOR_ITEM_TEXTURE_ID, "data/item/protector/protector_Race0_Tech2.png", true, &arg) );
 }
 //####### TECH_LEVEL_3
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_3_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L3); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(PROTECTOR_ITEM_TEXTURE_ID, "data/item/protector/protector_Race0_Tech3.png", true, &arg) );
 }
 
@@ -1014,21 +1014,21 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 //####### TECH_LEVEL_0
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_0_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L0); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(DROID_ITEM_TEXTURE_ID, "data/item/droid/droid_Race0_Tech0.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_1
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_1_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L1); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(DROID_ITEM_TEXTURE_ID, "data/item/droid/droid_Race0_Tech1.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_2
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_2_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L2); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(DROID_ITEM_TEXTURE_ID, "data/item/droid/droid_Race0_Tech2.png", true, &arg) );
 }
 
@@ -1038,14 +1038,14 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 //####### TECH_LEVEL_0
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_0_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L0); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(GRAPPLE_ITEM_TEXTURE_ID, "data/item/grapple/grapple_Race0_Tech0.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_1
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_1_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L1); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(GRAPPLE_ITEM_TEXTURE_ID, "data/item/grapple/grapple_Race0_Tech1.png", true, &arg) );
 }
 
@@ -1056,14 +1056,14 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 //####### TECH_LEVEL_0
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_0_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L0); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(BAK_ITEM_TEXTURE_ID, "data/item/bak/bak_Race0_Tech0.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_1
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_1_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L1); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(BAK_ITEM_TEXTURE_ID, "data/item/bak/bak_Race0_Tech1.png", true, &arg) );
 }
 
@@ -1073,14 +1073,14 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 //####### TECH_LEVEL_0
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_0_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L0); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(ENERGYBLOCK_ITEM_TEXTURE_ID, "data/item/energyBlock/energyBlock_Race0_Tech0.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_1
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_1_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L1); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(ENERGYBLOCK_ITEM_TEXTURE_ID, "data/item/energyBlock/energyBlock_Race0_Tech1.png", true, &arg) );
 }
 
@@ -1090,14 +1090,14 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 //####### TECH_LEVEL_0
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_0_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L0); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(FREEZER_ITEM_TEXTURE_ID, "data/item/freezer/freezer_Race0_Tech0.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_1
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_1_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L1); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(FREEZER_ITEM_TEXTURE_ID, "data/item/freezer/freezer_Race0_Tech1.png", true, &arg) );
 }
 
@@ -1107,13 +1107,13 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 //####### TECH_LEVEL_0
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_0_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L0); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(SCANER_ITEM_TEXTURE_ID, "data/item/scaner/scaner_Race0_Tech0.png", true, &arg, 3, 1) );
 }
 //####### TECH_LEVEL_1
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_1_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L1); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(SCANER_ITEM_TEXTURE_ID, "data/item/scaner/scaner_Race0_Tech1.png", true, &arg, 3, 1) );
 }
 
@@ -1122,14 +1122,14 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 //####### TECH_LEVEL_0
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_0_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L0); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(RADAR_ITEM_TEXTURE_ID, "data/item/radar/radar_Race0_Tech0.png", true, &arg, 3, 1) );
 }
 
 //####### TECH_LEVEL_1
 {
 	std::vector<int> arg;  
-	arg.push_back(RACE::R0); arg.push_back(TECH_LEVEL_1_ID); 
+	arg.push_back(RACE::R0); arg.push_back(TECHLEVEL::L1); 
 	g_TEXTURE_MANAGER.manage( new TextureOb(RADAR_ITEM_TEXTURE_ID, "data/item/radar/radar_Race0_Tech1.png", true, &arg, 3, 1) );
 }
 
