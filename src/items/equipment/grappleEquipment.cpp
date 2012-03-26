@@ -260,7 +260,7 @@ GrappleEquipment* getNewGrappleEquipment(int race_id, int revision_id)
     								   maxNumItem_orig);                                                                   
         grapple_equipment->setIdData(data_id);  
         grapple_equipment->setTextureOb(texOb_item);    	
-        grapple_equipment->setFunctionalSlotSubTypeId(GRAPPLE_SLOT_ID);
+        grapple_equipment->setFunctionalSlotSubTypeId(SLOT::GRAPPLE);
         grapple_equipment->setItemCommonData(common_data);        
 
     	grapple_equipment->updatePropetries();

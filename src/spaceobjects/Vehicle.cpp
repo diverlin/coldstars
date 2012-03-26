@@ -70,10 +70,10 @@ void Vehicle::SetGuiRect(Rect rect) { kontur_rect = rect; }
         	               
 void Vehicle::Add(ItemSlot* slot) 
 { 
-	if (slot->getSubTypeId() != GATE_SLOT_ID)
+	if (slot->getSubTypeId() != SLOT::GATE)
 	{
 		slot_total_vec.push_back(slot); 
-		if (slot->getSubTypeId() == CARGO_SLOT_ID)
+		if (slot->getSubTypeId() == SLOT::CARGO)
 		{
 	      		slot_otsec_vec.push_back(slot); 
 		}
@@ -81,14 +81,14 @@ void Vehicle::Add(ItemSlot* slot)
 	
 	switch(slot->getSubTypeId())
 	{
-		case RADAR_SLOT_ID:  { radar_slot = slot; break; }
-		case SCANER_SLOT_ID: { scaner_slot = slot; break; }	
+		case SLOT::RADAR:  { radar_slot = slot; break; }
+		case SLOT::SCANER: { scaner_slot = slot; break; }	
 		
-		case ENERGIZER_SLOT_ID: { energizer_slot = slot; break; }
-		case GRAPPLE_SLOT_ID:   { grapple_slot = slot; break; }
-		case DROID_SLOT_ID:     { droid_slot = slot; break; }
-		case FREEZER_SLOT_ID:   { freezer_slot = slot; break; }
-		case GATE_SLOT_ID:      { gate_slot = slot; break; }	
+		case SLOT::ENERGIZER: { energizer_slot = slot; break; }
+		case SLOT::GRAPPLE:   { grapple_slot = slot; break; }
+		case SLOT::DROID:     { droid_slot = slot; break; }
+		case SLOT::FREEZER:   { freezer_slot = slot; break; }
+		case SLOT::GATE:      { gate_slot = slot; break; }	
 	}
 }
 
