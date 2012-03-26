@@ -16,6 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "../config/config.hpp"
 
 
 Player :: Player()
@@ -78,7 +79,7 @@ void Player :: update_global()
 {
 	if (npc->getAlive()  == true)
 	{       	
-        	npc->getVehicle()->GetWeaponComplex()->weapon_selector = weapon_selector;
+		npc->getVehicle()->GetWeaponComplex()->weapon_selector = weapon_selector;
 	}
 }  
                			
@@ -526,7 +527,7 @@ void Player :: renderEntities_OLD()
 void Player :: render(bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {
     	
-    	if (g_USE_MODERN_HW == true)
+    	if (Config::instanse().USE_MODERN_HW == true)
     	{
     		renderEntities_NEW();
     	}
@@ -985,56 +986,56 @@ bool Player :: isObjectOnScreen(const Points& points) const
 void Player :: outerspace(GameTimer* TIMER)
 {
 	USERINPUT->update_inSpace();
-             		
-        cursor->updateMousePos();
- 
+
+	cursor->updateMousePos();
+
 	npc->getStarSystem()->findVisibleEntities_c(this);
-        this->render(TIMER->getTurnEnded(), getShowAllOrbit(), getShowAllPath()); 
-                                                
-        if (TIMER->getTurnEnded() == true)  
-        {
-        	if ( (npc->getScanTarget() == NULL) && (getWorldMapShowFlag() == false) )
-                {
-                	mouseControl();  // improove to exclude all render calls
+	this->render(TIMER->getTurnEnded(), getShowAllOrbit(), getShowAllPath()); 
+
+	if (TIMER->getTurnEnded() == true)  
+	{
+		if ( (npc->getScanTarget() == NULL) && (getWorldMapShowFlag() == false) )
+		{
+			mouseControl();  // improove to exclude all render calls
 		}
 	}
 
 	//////////// SCAN ///////////////
-  	if (getNpc()->getScanTarget() != NULL )
-        {         
-               	GUI_MANAGER->updateInScan(false);
-               	GUI_MANAGER->renderInScan();                       
+	if (getNpc()->getScanTarget() != NULL )
+	{         
+		GUI_MANAGER->updateInScan(false);
+		GUI_MANAGER->renderInScan();                       
 	}
 
-        //////////// WORLDMAP ///////////
-        if (getWorldMapShowFlag() == true )  
-        {
-        	GUI_MAP->update();   
-        	GUI_MAP->render();   
-        }
+	//////////// WORLDMAP ///////////
+	if (getWorldMapShowFlag() == true )  
+	{
+		GUI_MAP->update();   
+		GUI_MAP->render();   
+	}
 
-        GUI_SPACE->update();    
-        GUI_SPACE->render();
+	GUI_SPACE->update();    
+	GUI_SPACE->render();
 }
 
 void Player :: kosmoport()
 {
 	USERINPUT->update_inKosmoport();
-         
-        if (GUI_KOSMOPORT->getActiveScreenId() == SCREEN_ANGAR_ID)
-        {
-        	((Kosmoport*)npc->getLand())->getAngar()->mouseControl(this);                                
-               	((Kosmoport*)npc->getLand())->getAngar()->render(this);
 
-                if (npc->getScanTarget() != NULL) 
-                { 
-                	GUI_MANAGER->updateInScan(false);
-                	GUI_MANAGER->renderInScan(); 
-                }
-               	else
-                {
-                	((Kosmoport*)npc->getLand())->getAngar()->renderItemInfo(this);
-                }
+	if (GUI_KOSMOPORT->getActiveScreenId() == SCREEN_ANGAR_ID)
+	{
+		((Kosmoport*)npc->getLand())->getAngar()->mouseControl(this);                                
+		((Kosmoport*)npc->getLand())->getAngar()->render(this);
+
+		if (npc->getScanTarget() != NULL) 
+		{ 
+			GUI_MANAGER->updateInScan(false);
+			GUI_MANAGER->renderInScan(); 
+		}
+		else
+		{
+			((Kosmoport*)npc->getLand())->getAngar()->renderItemInfo(this);
+		}
 	}
 
         if (GUI_KOSMOPORT->getActiveScreenId() == SCREEN_STORE_ID)
@@ -1074,17 +1075,17 @@ void Player :: kosmoport()
 void Player :: runSession(GameTimer* TIMER)
 {
 	this->update_global();     
-       	if (npc->getPlaceTypeId() == SPACE_ID)
-       	{  
-        	this->outerspace(TIMER);
-       	}
+	if (npc->getPlaceTypeId() == SPACE_ID)
+	{  
+		this->outerspace(TIMER);
+	}
 
-		
-       	if (npc->getPlaceTypeId() == KOSMOPORT_ID)
-       	{
-        	this->kosmoport();
-       	} 
-       	
-       	screen->update();           	
-       	screen->display();
+
+	if (npc->getPlaceTypeId() == KOSMOPORT_ID)
+	{
+		this->kosmoport();
+	} 
+
+	screen->update();           	
+	screen->display();
 }     		

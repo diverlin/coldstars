@@ -1,20 +1,20 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+	 Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
+	 This program is free software; you can redistribute it and/or
+	 modify it under the terms of the GNU General Public License
+	 as published by the Free Software Foundation; either version 2
+	 of the License, or (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+	 This program is distributed in the hope that it will be useful,
+	 but WITHOUT ANY WARRANTY; without even the implied warranty of
+	 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	 GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-*/
+	 You should have received a copy of the GNU General Public License
+	 along with this program; if not, write to the Free Software
+	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+	 */
 
 
 
@@ -42,13 +42,13 @@ Rect :: ~Rect()
 
 void Rect :: set(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h)
 {
-    	bottomLeft.x = _bottomLeft_x;
-    	bottomLeft.y = _bottomLeft_y;
-    	
-    	w = _w;
-    	h = _h;
+	bottomLeft.x = _bottomLeft_x;
+	bottomLeft.y = _bottomLeft_y;
 
-    	updateCenter();
+	w = _w;
+	h = _h;
+
+	updateCenter();
 }
 
 void Rect :: setCenter(vec2f _center)
@@ -58,14 +58,14 @@ void Rect :: setCenter(vec2f _center)
 
 void Rect :: setCenter(float _center_x, float _center_y)
 {
-    	float dx = center.x - _center_x;
-    	float dy = center.y - _center_y;
+	float dx = center.x - _center_x;
+	float dy = center.y - _center_y;
 
-    	bottomLeft.x -= dx;
-    	bottomLeft.y -= dy; 
+	bottomLeft.x -= dx;
+	bottomLeft.y -= dy; 
 
-    	center.x = _center_x;
-    	center.y = _center_y;
+	center.x = _center_x;
+	center.y = _center_y;
 }
 
 
@@ -77,20 +77,20 @@ void Rect ::  setBottomLeft(vec2f _bottomLeft)
 
 void Rect ::  setBottomLeft(float _pos_x, float _pos_y)
 {
-    	bottomLeft.x = _pos_x;
-    	bottomLeft.y = _pos_y;
+	bottomLeft.x = _pos_x;
+	bottomLeft.y = _pos_y;
 
-    	updateCenter();
+	updateCenter();
 }
 
 
 void Rect ::  resize(int _w, int _h)
 {
-    	w = _w;
-    	h = _h;
+	w = _w;
+	h = _h;
 
-    	bottomLeft.x = center.x - w/2;
-    	bottomLeft.y = center.y - h/2;
+	bottomLeft.x = center.x - w/2;
+	bottomLeft.y = center.y - h/2;
 }
 
 
@@ -98,10 +98,10 @@ vec2f Rect :: getCenter() const     { return center; }
 vec2f Rect :: getBottomLeft() const { return bottomLeft; }
 int Rect :: getWidth() const 	    { return w; }
 int Rect :: getHeight() const 	    { return h; }   		
-      		
+
 void Rect :: updateCenter()
 {
-    	center.x = bottomLeft.x + w/2;
-    	center.y = bottomLeft.y + h/2;
+	center.x = bottomLeft.x + w/2;
+	center.y = bottomLeft.y + h/2;
 }
 

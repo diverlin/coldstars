@@ -15,6 +15,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
+#ifndef CONSTANTS_HPP
+#define CONSTANTS_HPP
 
 const int SCREEN_WIDTH_MIN  = 800;
 const int SCREEN_HEIGHT_MIN = 600;
@@ -455,3 +457,4 @@ const int ANGAR_SLOT_WIDTH  = 46*2.5;
 const int ANGAR_SLOT_HEIGHT = 49*2.5;
 
 
+#endif //CONSTANTS_HPP
