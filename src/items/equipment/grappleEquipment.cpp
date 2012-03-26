@@ -116,7 +116,7 @@ std::string GrappleEquipment :: getTargetStr() const
         			break;
         		}
         		        		
-        		case BOMB_ID:
+        		case ENTITY::BOMB:
         		{
         			str += "b" + int2str(target_vec[i]->getTypeId()) + ", ";
         			break;

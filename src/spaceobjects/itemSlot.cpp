@@ -177,7 +177,7 @@ int ItemSlot :: getItemRadius() const
                         break;
                 }
                 
-                case BOMB_ID:
+                case ENTITY::BOMB:
                 {
                         return ((Bomb*)item)->getRadius();   break; 
                 }
@@ -257,7 +257,7 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
 
 	if ( (is_EQUIPED == true) and (_slot->getEquipedStatus() == true) )
        	{          
-       		if ( (item->getTypeId() == MODULE_ID) and (_slot->getItem()->getTypeId() == EQUIPMENT::EQUIPMENT) )
+       		if ( (item->getTypeId() == MODULE::MODULE) and (_slot->getItem()->getTypeId() == EQUIPMENT::EQUIPMENT) )
        		{
 			if (((EquipmentBase*)_slot->getItem())->insertModule((ModuleBase*)item) == true)  
 			{ 
@@ -267,7 +267,7 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
         		}
        		}
        		
-       		if ( (item->getTypeId() == EQUIPMENT::EQUIPMENT) and (_slot->getItem()->getTypeId() == MODULE_ID) )
+       		if ( (item->getTypeId() == EQUIPMENT::EQUIPMENT) and (_slot->getItem()->getTypeId() == MODULE::MODULE) )
        		{
 			 if (((EquipmentBase*)item)->insertModule((ModuleBase*)_slot->getItem()) == true)  
 			 { 

@@ -55,8 +55,8 @@ DriveModule* getNewDriveModule()
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = MODULE_ID;
-        data_id.subtype_id = DRIVE_MODULE_ID;  
+        data_id.type_id    = MODULE::MODULE;
+        data_id.subtype_id = MODULE::DRIVE;  
         
     	DriveModule* drive_module = new DriveModule(speed_add, hyper_add);
         drive_module->setTextureOb(texOb);
