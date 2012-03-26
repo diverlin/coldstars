@@ -44,7 +44,7 @@ void SpaceItemBase :: moveToSpace(StarSystem* starsystem, vec2f start_pos)
     	points.setCenter(start_pos);    	
     	target_pos = start_pos + getRandVec(60, 100);
         
-        place_type_id = SPACE_ID;
+        place_type_id = ENTITY::SPACE_ID;
         keep_moving = true;
 }
 

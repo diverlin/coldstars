@@ -163,7 +163,7 @@ bool DriveComplex :: validateTarget() const
 {
         if (target->getAlive() == true)
 	{
-		if (target->getPlaceTypeId() == SPACE_ID)
+		if (target->getPlaceTypeId() == ENTITY::SPACE_ID)
 		{
 			return true;
 		}
