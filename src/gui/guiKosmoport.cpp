@@ -26,73 +26,73 @@ GuiKosmoport :: GuiKosmoport(Player* player)
 
     	angar_screen_button     = new Button(texOb_button, 
     					     GUI::SCREEN::ANGAR_ID,
-    					     SCREEN_WIDTH_MIN - 1 * (INTERFACE_ICON_SIZE + 5), 
-    					     INTERFACE_ICON_SIZE, 
-    					     INTERFACE_ICON_SIZE,  
-    					     INTERFACE_ICON_SIZE, 
+    					     SCREEN_WIDTH_MIN - 1 * (GUI::ICON_SIZE + 5), 
+    					     GUI::ICON_SIZE, 
+    					     GUI::ICON_SIZE,  
+    					     GUI::ICON_SIZE, 
     					     "angar");    					     
     	button_common_pList.push_back(angar_screen_button);
     	
     	store_screen_button     = new Button(texOb_button, 
     					     GUI::SCREEN::STORE_ID,
-    					     SCREEN_WIDTH_MIN - 2 * (INTERFACE_ICON_SIZE + 5),
-    					     INTERFACE_ICON_SIZE, 
-    					     INTERFACE_ICON_SIZE,  
-    					     INTERFACE_ICON_SIZE, 
+    					     SCREEN_WIDTH_MIN - 2 * (GUI::ICON_SIZE + 5),
+    					     GUI::ICON_SIZE, 
+    					     GUI::ICON_SIZE,  
+    					     GUI::ICON_SIZE, 
     					     "store");
 	button_common_pList.push_back(store_screen_button);
     					        	
     	shop_screen_button      = new Button(texOb_button, 
     					     GUI::SCREEN::SHOP_ID,
-    					     SCREEN_WIDTH_MIN - 3 * (INTERFACE_ICON_SIZE + 5), 
-    					     INTERFACE_ICON_SIZE, 
-    					     INTERFACE_ICON_SIZE,  
-    					     INTERFACE_ICON_SIZE, 
+    					     SCREEN_WIDTH_MIN - 3 * (GUI::ICON_SIZE + 5), 
+    					     GUI::ICON_SIZE, 
+    					     GUI::ICON_SIZE,  
+    					     GUI::ICON_SIZE, 
     					     "shop");
     	button_common_pList.push_back(shop_screen_button);
     					     
     	galaxymap_screen_button = new Button(texOb_button, 
     					     GUI::SCREEN::GALAXYMAP_ID,
-    					     SCREEN_WIDTH_MIN - 4 * (INTERFACE_ICON_SIZE + 5), 
-    					     INTERFACE_ICON_SIZE, 
-    					     INTERFACE_ICON_SIZE,  
-    					     INTERFACE_ICON_SIZE, 
+    					     SCREEN_WIDTH_MIN - 4 * (GUI::ICON_SIZE + 5), 
+    					     GUI::ICON_SIZE, 
+    					     GUI::ICON_SIZE,  
+    					     GUI::ICON_SIZE, 
     					     "galaxymap");
         button_common_pList.push_back(galaxymap_screen_button);
     					     
     	goverment_screen_button = new Button(texOb_button, 
     					     GUI::SCREEN::GOVERMENT_ID,
-    					     SCREEN_WIDTH_MIN - 5 * (INTERFACE_ICON_SIZE + 5), 
-    					     INTERFACE_ICON_SIZE,
-    					     INTERFACE_ICON_SIZE,  
-    					     INTERFACE_ICON_SIZE, 
+    					     SCREEN_WIDTH_MIN - 5 * (GUI::ICON_SIZE + 5), 
+    					     GUI::ICON_SIZE,
+    					     GUI::ICON_SIZE,  
+    					     GUI::ICON_SIZE, 
     					     "goverment");
     	button_common_pList.push_back(goverment_screen_button);
 
     	repair_button = new Button(texOb_button, 
     	    			   GUI::BUTTON::GETREPAIR_ID,
-    				   SCREEN_WIDTH_MIN - 1 * (INTERFACE_ICON_SIZE + 5),
-    				   SCREEN_HEIGHT_MIN - 2*INTERFACE_ICON_SIZE, 
-    				   INTERFACE_ICON_SIZE,  
-    				   INTERFACE_ICON_SIZE, 
+    				   SCREEN_WIDTH_MIN - 1 * (GUI::ICON_SIZE + 5),
+    				   SCREEN_HEIGHT_MIN - 2*GUI::ICON_SIZE, 
+    				   GUI::ICON_SIZE,  
+    				   GUI::ICON_SIZE, 
     				   "buy_repair");
     	button_angar_pList.push_back(repair_button);
     				   
     	fuel_button   = new Button(texOb_button,
     	 			   GUI::BUTTON::GETFUEL_ID,
-    	 			   SCREEN_WIDTH_MIN - 1 * (INTERFACE_ICON_SIZE + 5),
-    	 			   SCREEN_HEIGHT_MIN - 3*INTERFACE_ICON_SIZE, 
-    	 			   INTERFACE_ICON_SIZE,  
-    	 			   INTERFACE_ICON_SIZE, 
+    	 			   SCREEN_WIDTH_MIN - 1 * (GUI::ICON_SIZE + 5),
+    	 			   SCREEN_HEIGHT_MIN - 3*GUI::ICON_SIZE, 
+    	 			   GUI::ICON_SIZE,  
+    	 			   GUI::ICON_SIZE, 
     	 			   "buy fuel");  
     	button_angar_pList.push_back(fuel_button);
     	 			   
     	launch_button = new Button(texOb_button, 
     				   GUI::BUTTON::GETLAUNCH_ID,
-    				   SCREEN_WIDTH_MIN - 1 * (INTERFACE_ICON_SIZE + 5), 
-    				   SCREEN_HEIGHT_MIN - 4*INTERFACE_ICON_SIZE, 
-    				   INTERFACE_ICON_SIZE,  
-    				   INTERFACE_ICON_SIZE, 
+    				   SCREEN_WIDTH_MIN - 1 * (GUI::ICON_SIZE + 5), 
+    				   SCREEN_HEIGHT_MIN - 4*GUI::ICON_SIZE, 
+    				   GUI::ICON_SIZE,  
+    				   GUI::ICON_SIZE, 
     				   "launch");
     	button_angar_pList.push_back(launch_button);
 

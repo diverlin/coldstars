@@ -47,10 +47,10 @@ void Store :: createSlots()
                         ItemSlot* slot = new ItemSlot();
                         slot->SetSubTypeId(SLOT::CARGO_ID);
                         slot->SetTextureOb(texOb_slot);   
-                        slot->setRect(x0 + clm_act * 1.1 * STORE_SLOT_WIDTH, 
-                        	      y0 + row_act * 1.1 * STORE_SLOT_HEIGHT,
-                        	      STORE_SLOT_WIDTH,
-                                      STORE_SLOT_HEIGHT);
+                        slot->setRect(x0 + clm_act * 1.1 * GUI::SLOT::WIDTH_FOR_STORE, 
+                        	      y0 + row_act * 1.1 * GUI::SLOT::HEIGHT_FOR_STORE,
+                        	      GUI::SLOT::WIDTH_FOR_STORE,
+                                      GUI::SLOT::HEIGHT_FOR_STORE);
                                                         
                         slot_vec.push_back(slot);
                         clm_act++;
