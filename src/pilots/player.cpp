@@ -1074,7 +1074,7 @@ void Player :: kosmoport()
 void Player :: runSession(GameTimer* TIMER)
 {
 	this->update_global();     
-       	if (npc->getPlaceTypeId() == SPACE_ID)
+       	if (npc->getPlaceTypeId() == ENTITY::SPACE_ID)
        	{  
         	this->outerspace(TIMER);
        	}

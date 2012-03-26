@@ -675,7 +675,7 @@ void StarSystem :: asteroidManager_s(unsigned int num)
 
 void StarSystem :: addToSpace(Vehicle* vehicle, vec2f center, float angle, BaseGameEntity* parent)
 {
-     	vehicle->setPlaceTypeId(SPACE_ID);
+     	vehicle->setPlaceTypeId(ENTITY::SPACE_ID);
      	vehicle->setStarSystem(this);  
 
 	switch(vehicle->getTypeId())
@@ -717,7 +717,7 @@ void StarSystem :: addToSpace(Vehicle* vehicle, vec2f center, float angle, BaseG
 
 void StarSystem :: addToSpace(Npc* npc)
 {
-     	npc->setPlaceTypeId(SPACE_ID);
+     	npc->setPlaceTypeId(ENTITY::SPACE_ID);
      	npc->setStarSystem(this);  
 
      	NPC_inSPACE_vec.push_back(npc);
@@ -736,7 +736,7 @@ void StarSystem :: addToSpace(Npc* npc)
 void StarSystem :: addToSpace(Star* star)
 {
         star->setStarSystem(this);
-        star->setPlaceTypeId(SPACE_ID);
+        star->setPlaceTypeId(ENTITY::SPACE_ID);
         STAR_vec.push_back(star);
 }
 
@@ -746,7 +746,7 @@ void StarSystem :: addToSpace(Planet* planet, BaseGameEntity* parent)
         planet->setParent(parent);
         
         planet->setStarSystem(this);
-        planet->setPlaceTypeId(SPACE_ID);
+        planet->setPlaceTypeId(ENTITY::SPACE_ID);
         PLANET_vec.push_back(planet);
 }
                 
@@ -756,7 +756,7 @@ void StarSystem :: addToSpace(Asteroid* asteroid)
 	asteroid->update_inSpace(1, true);
 	
         asteroid->setStarSystem(this);
-        asteroid->setPlaceTypeId(SPACE_ID);
+        asteroid->setPlaceTypeId(ENTITY::SPACE_ID);
         ASTEROID_vec.push_back(asteroid);
 }
 

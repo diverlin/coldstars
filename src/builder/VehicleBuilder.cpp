@@ -161,7 +161,7 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation()
         IdData data_id;
         data_id.id         = g_ID_GENERATOR.getNextId(); 
     	data_id.type_id    = ENTITY::SPACESTATION_ID;
-    	data_id.subtype_id = MILITARY_ID;       
+    	data_id.subtype_id = SPACESTATION::MILITARY_ID;       
 
         int size_threshold = 2; 
 	data_korpus.render_TURRELS = true; 

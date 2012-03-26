@@ -23,8 +23,6 @@ Cursor :: Cursor(Player* player)
 {
 	this->player = player;
 	
-     	type_id = CURSOR_ID;
-     
      	slot = new ItemSlot();
      	slot->SetSubTypeId(SLOT::CARGO_ID);
      	slot->setRect(0, 0, CURSOR_SLOT_WIDTH, CURSOR_SLOT_HEIGHT);
