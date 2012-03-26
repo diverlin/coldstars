@@ -722,31 +722,31 @@ g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 //################################ PLANET_TEXTURE ####################################
 {
 	std::vector<int> arg; 
-	arg.push_back(PLANET_EARTH_SURFACE_ID); arg.push_back(5);
+	arg.push_back(PLANET::SURFACE::EARTH); arg.push_back(5);
 	g_TEXTURE_MANAGER.manage( new TextureOb(PLANET_TEXTURE_ID, "data/planet/p_0000.png", false, &arg) );
 }
 
 {
 	std::vector<int> arg; 
-	arg.push_back(PLANET_WATER_SURFACE_ID); arg.push_back(5);
+	arg.push_back(PLANET::SURFACE::WATER); arg.push_back(5);
 	g_TEXTURE_MANAGER.manage( new TextureOb(PLANET_TEXTURE_ID, "data/planet/p_1000.png", false, &arg) );
 }
 
 {
 	std::vector<int> arg; 
-	arg.push_back(PLANET_LAVA_SURFACE_ID); arg.push_back(5);
+	arg.push_back(PLANET::SURFACE::LAVA); arg.push_back(5);
 	g_TEXTURE_MANAGER.manage( new TextureOb(PLANET_TEXTURE_ID, "data/planet/p_2000.png", false, &arg) );
 }
 
 {
 	std::vector<int> arg; 
-	arg.push_back(PLANET_ICE_SURFACE_ID); arg.push_back(5);
+	arg.push_back(PLANET::SURFACE::ICE); arg.push_back(5);
 	g_TEXTURE_MANAGER.manage( new TextureOb(PLANET_TEXTURE_ID, "data/planet/p_3000.png", false, &arg) );
 }
 
 {
 	std::vector<int> arg; 
-	arg.push_back(PLANET_GAS_SURFACE_ID); arg.push_back(5);
+	arg.push_back(PLANET::SURFACE::GAS); arg.push_back(5);
 	g_TEXTURE_MANAGER.manage( new TextureOb(PLANET_TEXTURE_ID, "data/planet/p_4000.png", false, &arg) );
 }
 
