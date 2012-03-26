@@ -54,9 +54,9 @@ void WeaponComplex :: PostCreateInit(int weapon_num, bool draw_turrels)
        		weapon_slot1.SetSubTypeId(SLOT::WEAPON_ID);       		
        		weapon_slot1.SetTextureOb(texOb_slot);
        		weapon_slot1.SetOwnerVehicle(owner_vehicle);
-       		weapon_slot1.setRect(  owner_vehicle->GetGuiRect().getCenter().x + 1*WEAPON_SLOT_WIDTH, 
-       				        owner_vehicle->GetGuiRect().getCenter().y - WEAPON_SLOT_HEIGHT/2,
-       				        WEAPON_SLOT_WIDTH, WEAPON_SLOT_HEIGHT);		
+       		weapon_slot1.setRect(  owner_vehicle->GetGuiRect().getCenter().x + 1*GUI::SLOT::WIDTH_FOR_SHIP, 
+       				        owner_vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2,
+       				        GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);		
        				      	
        		slot_weapon_vec.push_back(&weapon_slot1);
        		owner_vehicle->Add(&weapon_slot1); 
@@ -79,9 +79,9 @@ void WeaponComplex :: PostCreateInit(int weapon_num, bool draw_turrels)
        		weapon_slot2.SetSubTypeId(SLOT::WEAPON_ID);      
        		weapon_slot2.SetTextureOb(texOb_slot);
        		weapon_slot2.SetOwnerVehicle(owner_vehicle);
-       		weapon_slot2.setRect( owner_vehicle->GetGuiRect().getCenter().x + 1*WEAPON_SLOT_WIDTH, 
-       				      owner_vehicle->GetGuiRect().getCenter().y - WEAPON_SLOT_HEIGHT/2 + 1.1*WEAPON_SLOT_HEIGHT,
-       				      WEAPON_SLOT_WIDTH, WEAPON_SLOT_HEIGHT);
+       		weapon_slot2.setRect( owner_vehicle->GetGuiRect().getCenter().x + 1*GUI::SLOT::WIDTH_FOR_SHIP, 
+       				      owner_vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
+       				      GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
        			    
        		slot_weapon_vec.push_back(&weapon_slot2);
        		owner_vehicle->Add(&weapon_slot2); 
@@ -104,9 +104,9 @@ void WeaponComplex :: PostCreateInit(int weapon_num, bool draw_turrels)
        		weapon_slot3.SetSubTypeId(SLOT::WEAPON_ID); 
        		weapon_slot3.SetTextureOb(texOb_slot); 
        		weapon_slot3.SetOwnerVehicle(owner_vehicle);	
-       		weapon_slot3.setRect(  owner_vehicle->GetGuiRect().getCenter().x + 1*WEAPON_SLOT_WIDTH, 
-       					owner_vehicle->GetGuiRect().getCenter().y - WEAPON_SLOT_HEIGHT/2 - 1.1*WEAPON_SLOT_HEIGHT,
-       					WEAPON_SLOT_WIDTH, WEAPON_SLOT_HEIGHT);
+       		weapon_slot3.setRect(  owner_vehicle->GetGuiRect().getCenter().x + 1*GUI::SLOT::WIDTH_FOR_SHIP, 
+       					owner_vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
+       					GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
        				
        		slot_weapon_vec.push_back(&weapon_slot3);
        		owner_vehicle->Add(&weapon_slot3); 
@@ -128,9 +128,9 @@ void WeaponComplex :: PostCreateInit(int weapon_num, bool draw_turrels)
        		weapon_slot4.SetSubTypeId(SLOT::WEAPON_ID); 
        		weapon_slot4.SetTextureOb(texOb_slot); 
        		weapon_slot4.SetOwnerVehicle(owner_vehicle);		
-       		weapon_slot4.setRect(  owner_vehicle->GetGuiRect().getCenter().x + 2.2*WEAPON_SLOT_WIDTH, 
-       					owner_vehicle->GetGuiRect().getCenter().y - WEAPON_SLOT_HEIGHT/2 + 1.1*WEAPON_SLOT_HEIGHT/2,
-       					WEAPON_SLOT_WIDTH, WEAPON_SLOT_HEIGHT);	
+       		weapon_slot4.setRect(  owner_vehicle->GetGuiRect().getCenter().x + 2.2*GUI::SLOT::WIDTH_FOR_SHIP, 
+       					owner_vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
+       					GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);	
        			
        		slot_weapon_vec.push_back(&weapon_slot4);
        		owner_vehicle->Add(&weapon_slot4); 
@@ -154,9 +154,9 @@ void WeaponComplex :: PostCreateInit(int weapon_num, bool draw_turrels)
        		weapon_slot5.SetSubTypeId(SLOT::WEAPON_ID); 
        		weapon_slot5.SetTextureOb(texOb_slot); 
        		weapon_slot5.SetOwnerVehicle(owner_vehicle);
-       		weapon_slot5.setRect(  owner_vehicle->GetGuiRect().getCenter().x + 2.2*WEAPON_SLOT_WIDTH, 
-       					owner_vehicle->GetGuiRect().getCenter().y - WEAPON_SLOT_HEIGHT/2 - 1.1*WEAPON_SLOT_HEIGHT/2,
-       					WEAPON_SLOT_WIDTH, WEAPON_SLOT_HEIGHT);
+       		weapon_slot5.setRect(  owner_vehicle->GetGuiRect().getCenter().x + 2.2*GUI::SLOT::WIDTH_FOR_SHIP, 
+       					owner_vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
+       					GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
        					
        		slot_weapon_vec.push_back(&weapon_slot5);
        		owner_vehicle->Add(&weapon_slot5); 

@@ -23,19 +23,19 @@ Angar :: Angar(TextureOb* _texOb_background, TextureOb* _texOb_landingArea)
 
 	Platform* platform;
 	
-        platform = new Platform(_texOb_landingArea, SCREEN_WIDTH_MIN/2,       SCREEN_HEIGHT_MIN/2,       ANGAR_SLOT_WIDTH, ANGAR_SLOT_HEIGHT);
+        platform = new Platform(_texOb_landingArea, SCREEN_WIDTH_MIN/2,       SCREEN_HEIGHT_MIN/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR);
         platform_vec.push_back(platform);
 
-        platform = new Platform(_texOb_landingArea, SCREEN_WIDTH_MIN/2 + 150, SCREEN_HEIGHT_MIN/2,       ANGAR_SLOT_WIDTH, ANGAR_SLOT_HEIGHT);
+        platform = new Platform(_texOb_landingArea, SCREEN_WIDTH_MIN/2 + 150, SCREEN_HEIGHT_MIN/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR);
         platform_vec.push_back(platform);
     
-        platform = new Platform(_texOb_landingArea, SCREEN_WIDTH_MIN/2 - 150, SCREEN_HEIGHT_MIN/2,       ANGAR_SLOT_WIDTH, ANGAR_SLOT_HEIGHT);
+        platform = new Platform(_texOb_landingArea, SCREEN_WIDTH_MIN/2 - 150, SCREEN_HEIGHT_MIN/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR);
         platform_vec.push_back(platform);
 
-        platform = new Platform(_texOb_landingArea, SCREEN_WIDTH_MIN/2,       SCREEN_HEIGHT_MIN/2 + 150, ANGAR_SLOT_WIDTH, ANGAR_SLOT_HEIGHT);
+        platform = new Platform(_texOb_landingArea, SCREEN_WIDTH_MIN/2,       SCREEN_HEIGHT_MIN/2 + 150, GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR);
         platform_vec.push_back(platform);
 
-        platform = new Platform(_texOb_landingArea, SCREEN_WIDTH_MIN/2,       SCREEN_HEIGHT_MIN/2 - 150, ANGAR_SLOT_WIDTH, ANGAR_SLOT_HEIGHT);
+        platform = new Platform(_texOb_landingArea, SCREEN_WIDTH_MIN/2,       SCREEN_HEIGHT_MIN/2 - 150, GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR);
         platform_vec.push_back(platform);
 }
 

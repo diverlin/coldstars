@@ -25,10 +25,10 @@ GuiSpace :: GuiSpace(Player* player)
     	
     	galaxymap_screen_button = new Button(texOb_icon_map, 
         				     GUI::SCREEN::GALAXYMAP_ID,
-    					     SCREEN_WIDTH_MIN  - (INTERFACE_ICON_SIZE + 5),
-    					     SCREEN_HEIGHT_MIN - (INTERFACE_ICON_SIZE + 5), 
-    					     INTERFACE_ICON_SIZE,  
-    					     INTERFACE_ICON_SIZE, 
+    					     SCREEN_WIDTH_MIN  - (GUI::ICON_SIZE + 5),
+    					     SCREEN_HEIGHT_MIN - (GUI::ICON_SIZE + 5), 
+    					     GUI::ICON_SIZE,  
+    					     GUI::ICON_SIZE, 
     					     "galaxy map");
     					     
     	button_vec.push_back(galaxymap_screen_button);

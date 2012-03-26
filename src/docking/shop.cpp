@@ -83,12 +83,12 @@ void Shop :: render(Player* player) const
         //#self.background_tex = bg_texOb.texture
         //self.item_list = []
 
-        //mineral_icon_rect   = pygame.Rect((VIEW_WIDTH - (INTERFACE_ICON_SIZE + 150),  1 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE))
-        //food_icon_rect      = pygame.Rect((VIEW_WIDTH - (INTERFACE_ICON_SIZE + 150),  2 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE))
-        //medicine_icon_rect  = pygame.Rect((VIEW_WIDTH - (INTERFACE_ICON_SIZE + 150),  3 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE))
-        //military_icon_rect  = pygame.Rect((VIEW_WIDTH - (INTERFACE_ICON_SIZE + 150),  4 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE))
-        //drug_icon_rect      = pygame.Rect((VIEW_WIDTH - (INTERFACE_ICON_SIZE + 150),  5 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE))
-        //exclusive_icon_rect = pygame.Rect((VIEW_WIDTH - (INTERFACE_ICON_SIZE + 150),  6 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE))
+        //mineral_icon_rect   = pygame.Rect((VIEW_WIDTH - (GUI::ICON_SIZE + 150),  1 * (GUI::ICON_SIZE + 5)), (GUI::ICON_SIZE,  GUI::ICON_SIZE))
+        //food_icon_rect      = pygame.Rect((VIEW_WIDTH - (GUI::ICON_SIZE + 150),  2 * (GUI::ICON_SIZE + 5)), (GUI::ICON_SIZE,  GUI::ICON_SIZE))
+        //medicine_icon_rect  = pygame.Rect((VIEW_WIDTH - (GUI::ICON_SIZE + 150),  3 * (GUI::ICON_SIZE + 5)), (GUI::ICON_SIZE,  GUI::ICON_SIZE))
+        //military_icon_rect  = pygame.Rect((VIEW_WIDTH - (GUI::ICON_SIZE + 150),  4 * (GUI::ICON_SIZE + 5)), (GUI::ICON_SIZE,  GUI::ICON_SIZE))
+        //drug_icon_rect      = pygame.Rect((VIEW_WIDTH - (GUI::ICON_SIZE + 150),  5 * (GUI::ICON_SIZE + 5)), (GUI::ICON_SIZE,  GUI::ICON_SIZE))
+        //exclusive_icon_rect = pygame.Rect((VIEW_WIDTH - (GUI::ICON_SIZE + 150),  6 * (GUI::ICON_SIZE + 5)), (GUI::ICON_SIZE,  GUI::ICON_SIZE))
 
         //self.minerals = ShopItem(mineral_icon_tex, (mineral_icon_w, mineral_icon_h), mineral_icon_rect )
         //self.item_list.append(self.minerals)
