@@ -126,7 +126,7 @@ DriveEquipment* getNewDriveEquipment(int race_id, int revision_id)
     
         drive_equipment->setIdData(data_id);  
         drive_equipment->setTextureOb(texOb_item);    	
-        drive_equipment->setFunctionalSlotSubTypeId(SLOT::DRIVE);
+        drive_equipment->setFunctionalSlotSubTypeId(SLOT::DRIVE_ID);
         drive_equipment->setItemCommonData(common_data);
          
         drive_equipment->updatePropetries();

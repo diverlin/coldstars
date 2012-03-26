@@ -126,7 +126,7 @@ EnergizerEquipment* getNewEnergizerEquipment(int race_id, int revision_id)
         
         energizer_equipment->setIdData(data_id);  
         energizer_equipment->setTextureOb(texOb_item);    	
-        energizer_equipment->setFunctionalSlotSubTypeId(SLOT::ENERGIZER);
+        energizer_equipment->setFunctionalSlotSubTypeId(SLOT::ENERGIZER_ID);
         energizer_equipment->setItemCommonData(common_data);
                 
         energizer_equipment->updatePropetries();

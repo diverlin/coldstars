@@ -180,7 +180,7 @@ RocketEquipment* getNewRocketEquipment(int race_id, int revision_id)
 
         rocket_equipment->setIdData(data_id);  
         rocket_equipment->setTextureOb(texOb_item);    	
-        rocket_equipment->setFunctionalSlotSubTypeId(SLOT::WEAPON);
+        rocket_equipment->setFunctionalSlotSubTypeId(SLOT::WEAPON_ID);
         rocket_equipment->setItemCommonData(common_data);
                 
         rocket_equipment->updatePropetries();

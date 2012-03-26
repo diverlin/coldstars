@@ -81,13 +81,13 @@ void Vehicle::Add(ItemSlot* slot)
 	
 	switch(slot->getSubTypeId())
 	{
-		case SLOT::RADAR:  { radar_slot = slot; break; }
-		case SLOT::SCANER: { scaner_slot = slot; break; }	
+		case SLOT::RADAR_ID:  { radar_slot = slot; break; }
+		case SLOT::SCANER_ID: { scaner_slot = slot; break; }	
 		
-		case SLOT::ENERGIZER: { energizer_slot = slot; break; }
-		case SLOT::GRAPPLE:   { grapple_slot = slot; break; }
-		case SLOT::DROID:     { droid_slot = slot; break; }
-		case SLOT::FREEZER:   { freezer_slot = slot; break; }
+		case SLOT::ENERGIZER_ID: { energizer_slot = slot; break; }
+		case SLOT::GRAPPLE_ID:   { grapple_slot = slot; break; }
+		case SLOT::DROID_ID:     { droid_slot = slot; break; }
+		case SLOT::FREEZER_ID:   { freezer_slot = slot; break; }
 		case SLOT::GATE_ID:      { gate_slot = slot; break; }	
 	}
 }

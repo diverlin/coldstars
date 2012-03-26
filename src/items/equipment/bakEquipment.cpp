@@ -118,7 +118,7 @@ BakEquipment* getNewBakEquipment(int race_id, int revision_id)
         
         bak_equipment->setIdData(data_id);  
         bak_equipment->setTextureOb(texOb_item);    	
-        bak_equipment->setFunctionalSlotSubTypeId(SLOT::BAK);
+        bak_equipment->setFunctionalSlotSubTypeId(SLOT::BAK_ID);
         bak_equipment->setItemCommonData(common_data);
                 
         bak_equipment->updatePropetries();

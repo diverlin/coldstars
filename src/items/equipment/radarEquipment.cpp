@@ -112,7 +112,7 @@ RadarEquipment* getNewRadarEquipment(int race_id, int revision_id)
                         
         radar_equipment->setIdData(data_id);  
         radar_equipment->setTextureOb(texOb_item);    	
-        radar_equipment->setFunctionalSlotSubTypeId(SLOT::RADAR);
+        radar_equipment->setFunctionalSlotSubTypeId(SLOT::RADAR_ID);
         radar_equipment->setItemCommonData(common_data);
         
  

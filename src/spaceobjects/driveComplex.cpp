@@ -27,7 +27,7 @@ DriveComplex :: DriveComplex(Vehicle* owner_vehicle)
 	
 	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID); 
 		
-	drive_slot.SetSubTypeId(SLOT::DRIVE); 
+	drive_slot.SetSubTypeId(SLOT::DRIVE_ID); 
 	drive_slot.SetTextureOb(texOb_slot);
 	drive_slot.SetOwnerVehicle(owner_vehicle);
 	drive_slot.setRect(  owner_vehicle->GetGuiRect().getCenter().x - 5*SHIP_SLOT_WIDTH, 
@@ -37,7 +37,7 @@ DriveComplex :: DriveComplex(Vehicle* owner_vehicle)
 	owner_vehicle->Add(&drive_slot);
 	
 	
-	bak_slot.SetSubTypeId(SLOT::BAK);
+	bak_slot.SetSubTypeId(SLOT::BAK_ID);
 	bak_slot.SetTextureOb(texOb_slot);
 	bak_slot.SetOwnerVehicle(owner_vehicle);	    
 	bak_slot.setRect(  owner_vehicle->GetGuiRect().getCenter().x - 5*SHIP_SLOT_WIDTH, 

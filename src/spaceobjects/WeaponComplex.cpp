@@ -51,7 +51,7 @@ void WeaponComplex :: PostCreateInit(int weapon_num, bool draw_turrels)
     	
         if (weapon_num >= 1)
     	{  
-       		weapon_slot1.SetSubTypeId(SLOT::WEAPON);       		
+       		weapon_slot1.SetSubTypeId(SLOT::WEAPON_ID);       		
        		weapon_slot1.SetTextureOb(texOb_slot);
        		weapon_slot1.SetOwnerVehicle(owner_vehicle);
        		weapon_slot1.setRect(  owner_vehicle->GetGuiRect().getCenter().x + 1*WEAPON_SLOT_WIDTH, 
@@ -76,7 +76,7 @@ void WeaponComplex :: PostCreateInit(int weapon_num, bool draw_turrels)
    
     	if (weapon_num >= 2)
     	{  
-       		weapon_slot2.SetSubTypeId(SLOT::WEAPON);      
+       		weapon_slot2.SetSubTypeId(SLOT::WEAPON_ID);      
        		weapon_slot2.SetTextureOb(texOb_slot);
        		weapon_slot2.SetOwnerVehicle(owner_vehicle);
        		weapon_slot2.setRect( owner_vehicle->GetGuiRect().getCenter().x + 1*WEAPON_SLOT_WIDTH, 
@@ -101,7 +101,7 @@ void WeaponComplex :: PostCreateInit(int weapon_num, bool draw_turrels)
 
     	if (weapon_num >= 3)
     	{  
-       		weapon_slot3.SetSubTypeId(SLOT::WEAPON); 
+       		weapon_slot3.SetSubTypeId(SLOT::WEAPON_ID); 
        		weapon_slot3.SetTextureOb(texOb_slot); 
        		weapon_slot3.SetOwnerVehicle(owner_vehicle);	
        		weapon_slot3.setRect(  owner_vehicle->GetGuiRect().getCenter().x + 1*WEAPON_SLOT_WIDTH, 
@@ -125,7 +125,7 @@ void WeaponComplex :: PostCreateInit(int weapon_num, bool draw_turrels)
 
     	if (weapon_num >= 4)
     	{  
-       		weapon_slot4.SetSubTypeId(SLOT::WEAPON); 
+       		weapon_slot4.SetSubTypeId(SLOT::WEAPON_ID); 
        		weapon_slot4.SetTextureOb(texOb_slot); 
        		weapon_slot4.SetOwnerVehicle(owner_vehicle);		
        		weapon_slot4.setRect(  owner_vehicle->GetGuiRect().getCenter().x + 2.2*WEAPON_SLOT_WIDTH, 
@@ -151,7 +151,7 @@ void WeaponComplex :: PostCreateInit(int weapon_num, bool draw_turrels)
 
     	if (weapon_num >= 5)
     	{  
-       		weapon_slot5.SetSubTypeId(SLOT::WEAPON); 
+       		weapon_slot5.SetSubTypeId(SLOT::WEAPON_ID); 
        		weapon_slot5.SetTextureOb(texOb_slot); 
        		weapon_slot5.SetOwnerVehicle(owner_vehicle);
        		weapon_slot5.setRect(  owner_vehicle->GetGuiRect().getCenter().x + 2.2*WEAPON_SLOT_WIDTH, 

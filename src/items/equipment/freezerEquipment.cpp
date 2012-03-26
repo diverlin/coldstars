@@ -109,7 +109,7 @@ FreezerEquipment* getNewFreezerEquipment(int race_id, int revision_id)
         
         freezer_equipment->setIdData(data_id);  
         freezer_equipment->setTextureOb(texOb_item);    	
-        freezer_equipment->setFunctionalSlotSubTypeId(SLOT::FREEZER);
+        freezer_equipment->setFunctionalSlotSubTypeId(SLOT::FREEZER_ID);
         freezer_equipment->setItemCommonData(common_data);
   
       	freezer_equipment->updatePropetries();
