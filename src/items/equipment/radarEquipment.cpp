@@ -105,8 +105,8 @@ RadarEquipment* getNewRadarEquipment(int race_id, int revision_id)
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT_ID;
-        data_id.subtype_id = RADAR_EQUIPMENT_ID;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT;
+        data_id.subtype_id = EQUIPMENT::RADAR;
         
     	RadarEquipment* radar_equipment = new RadarEquipment(radius_orig);
                         

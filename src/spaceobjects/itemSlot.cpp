@@ -163,15 +163,15 @@ int ItemSlot :: getItemRadius() const
 {       
         switch(item->getTypeId())
         {
-                case EQUIPMENT_ID:
+                case EQUIPMENT::EQUIPMENT:
                 {
                         switch (item->getSubTypeId())
                         {
-                                case LAZER_EQUIPMENT_ID:   { return ((LazerEquipment*)item)->getRadius();  break; };
-                                case ROCKET_EQUIPMENT_ID:  { return ((RocketEquipment*)item)->getRadius(); break; };
+                                case EQUIPMENT::LAZER:   { return ((LazerEquipment*)item)->getRadius();  break; };
+                                case EQUIPMENT::ROCKET:  { return ((RocketEquipment*)item)->getRadius(); break; };
 		
-                                case GRAPPLE_EQUIPMENT_ID: { return ((GrappleEquipment*)item)->getRadius(); break; };
-                                case RADAR_EQUIPMENT_ID:   { return ((RadarEquipment*)item)->getRadius();   break; };
+                                case EQUIPMENT::GRAPPLE: { return ((GrappleEquipment*)item)->getRadius(); break; };
+                                case EQUIPMENT::RADAR:   { return ((RadarEquipment*)item)->getRadius();   break; };
                         }
                         
                         break;
@@ -257,7 +257,7 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
 
 	if ( (is_EQUIPED == true) and (_slot->getEquipedStatus() == true) )
        	{          
-       		if ( (item->getTypeId() == MODULE_ID) and (_slot->getItem()->getTypeId() == EQUIPMENT_ID) )
+       		if ( (item->getTypeId() == MODULE_ID) and (_slot->getItem()->getTypeId() == EQUIPMENT::EQUIPMENT) )
        		{
 			if (((EquipmentBase*)_slot->getItem())->insertModule((ModuleBase*)item) == true)  
 			{ 
@@ -267,7 +267,7 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
         		}
        		}
        		
-       		if ( (item->getTypeId() == EQUIPMENT_ID) and (_slot->getItem()->getTypeId() == MODULE_ID) )
+       		if ( (item->getTypeId() == EQUIPMENT::EQUIPMENT) and (_slot->getItem()->getTypeId() == MODULE_ID) )
        		{
 			 if (((EquipmentBase*)item)->insertModule((ModuleBase*)_slot->getItem()) == true)  
 			 { 
