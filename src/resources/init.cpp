@@ -56,7 +56,7 @@ Player* getNewPlayer(Galaxy* galaxy)
 	Player* player   = new Player();
 
       	int prace_id = RACE::R7;
-      	int psubtype_id = CLASS::WARRIOR;
+      	int psubtype_id = CLASS::WARRIOR_ID;
       	int size_id = 5;
       	int weapons_num = 5;
     	Npc* pnpc = getNewNpc(prace_id, psubtype_id);   
@@ -99,15 +99,15 @@ void prepearGlobalVecs()
     	RACES_EVIL_LIST.push_back(RACE::R6);
     	RACES_EVIL_LIST.push_back(RACE::R7);
 
-    	SHIP_SUBTYPE_LIST.push_back(CLASS::RANGER);
-    	SHIP_SUBTYPE_LIST.push_back(CLASS::WARRIOR);
-    	SHIP_SUBTYPE_LIST.push_back(CLASS::PIRAT);
-    	SHIP_SUBTYPE_LIST.push_back(CLASS::TRADER);
-   	SHIP_SUBTYPE_LIST.push_back(CLASS::DIPLOMAT);
+    	SHIP_SUBTYPE_LIST.push_back(CLASS::RANGER_ID);
+    	SHIP_SUBTYPE_LIST.push_back(CLASS::WARRIOR_ID);
+    	SHIP_SUBTYPE_LIST.push_back(CLASS::PIRAT_ID);
+    	SHIP_SUBTYPE_LIST.push_back(CLASS::TRADER_ID);
+   	SHIP_SUBTYPE_LIST.push_back(CLASS::DIPLOMAT_ID);
             
-    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(CLASS::WARRIOR);
-    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(CLASS::TRADER);
-    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(CLASS::DIPLOMAT);    	
+    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(CLASS::WARRIOR_ID);
+    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(CLASS::TRADER_ID);
+    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(CLASS::DIPLOMAT_ID);    	
 }
 
 

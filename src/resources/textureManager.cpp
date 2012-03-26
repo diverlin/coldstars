@@ -47,11 +47,11 @@ void TextureManager :: manage(TextureOb* texOb)
         			{
         				switch(texOb->subtype_id)
         				{
-        					case CLASS::RANGER:   { ship_race0_ranger_texOb_vec.push_back(texOb);   break; }
-        					case CLASS::WARRIOR:  { ship_race0_warrior_texOb_vec.push_back(texOb);  break; }
-           					case CLASS::TRADER:   { ship_race0_trader_texOb_vec.push_back(texOb);   break; }
-           					case CLASS::PIRAT:    { ship_race0_pirat_texOb_vec.push_back(texOb);    break; }
-           					case CLASS::DIPLOMAT: { ship_race0_diplomat_texOb_vec.push_back(texOb); break; }
+        					case CLASS::RANGER_ID:   { ship_race0_ranger_texOb_vec.push_back(texOb);   break; }
+        					case CLASS::WARRIOR_ID:  { ship_race0_warrior_texOb_vec.push_back(texOb);  break; }
+           					case CLASS::TRADER_ID:   { ship_race0_trader_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::PIRAT_ID:    { ship_race0_pirat_texOb_vec.push_back(texOb);    break; }
+           					case CLASS::DIPLOMAT_ID: { ship_race0_diplomat_texOb_vec.push_back(texOb); break; }
         				}
         				
         				break;
@@ -62,11 +62,11 @@ void TextureManager :: manage(TextureOb* texOb)
         			{
         			         switch(texOb->subtype_id)
         			         {
-        			         	case CLASS::RANGER:   { ship_race1_ranger_texOb_vec.push_back(texOb);   break; }
-           					case CLASS::WARRIOR:  { ship_race1_warrior_texOb_vec.push_back(texOb);  break; }
-           					case CLASS::TRADER:   { ship_race1_trader_texOb_vec.push_back(texOb);   break; }
-           					case CLASS::PIRAT:    { ship_race1_pirat_texOb_vec.push_back(texOb);    break; }
-           					case CLASS::DIPLOMAT: { ship_race1_diplomat_texOb_vec.push_back(texOb); break; }
+        			         	case CLASS::RANGER_ID:   { ship_race1_ranger_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::WARRIOR_ID:  { ship_race1_warrior_texOb_vec.push_back(texOb);  break; }
+           					case CLASS::TRADER_ID:   { ship_race1_trader_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::PIRAT_ID:    { ship_race1_pirat_texOb_vec.push_back(texOb);    break; }
+           					case CLASS::DIPLOMAT_ID: { ship_race1_diplomat_texOb_vec.push_back(texOb); break; }
         				 }
         				 
         				 break;
@@ -76,11 +76,11 @@ void TextureManager :: manage(TextureOb* texOb)
         			{
         			         switch(texOb->subtype_id)
         			         {
-        			         	case CLASS::RANGER: { ship_race2_ranger_texOb_vec.push_back(texOb); break; }
-           					case CLASS::WARRIOR: { ship_race2_warrior_texOb_vec.push_back(texOb); break; }
-           					case CLASS::TRADER: { ship_race2_trader_texOb_vec.push_back(texOb); break; }
-           					case CLASS::PIRAT:  { ship_race2_pirat_texOb_vec.push_back(texOb);  break; }
-           					case CLASS::DIPLOMAT: { ship_race2_diplomat_texOb_vec.push_back(texOb); break; }
+        			         	case CLASS::RANGER_ID: { ship_race2_ranger_texOb_vec.push_back(texOb); break; }
+           					case CLASS::WARRIOR_ID: { ship_race2_warrior_texOb_vec.push_back(texOb); break; }
+           					case CLASS::TRADER_ID: { ship_race2_trader_texOb_vec.push_back(texOb); break; }
+           					case CLASS::PIRAT_ID:  { ship_race2_pirat_texOb_vec.push_back(texOb);  break; }
+           					case CLASS::DIPLOMAT_ID: { ship_race2_diplomat_texOb_vec.push_back(texOb); break; }
         				 }
         				 
         				 break;
@@ -91,11 +91,11 @@ void TextureManager :: manage(TextureOb* texOb)
 				{
 					switch(texOb->subtype_id)
 					{
-						case CLASS::RANGER:  { ship_race3_ranger_texOb_vec.push_back(texOb);    break; }
-           					case CLASS::WARRIOR: { ship_race3_warrior_texOb_vec.push_back(texOb);   break; }
-           					case CLASS::TRADER:  { ship_race3_trader_texOb_vec.push_back(texOb);    break; }
-           					case CLASS::PIRAT:   { ship_race3_pirat_texOb_vec.push_back(texOb);     break; }
-           					case CLASS::DIPLOMAT: { ship_race3_diplomat_texOb_vec.push_back(texOb); break; }
+						case CLASS::RANGER_ID:  { ship_race3_ranger_texOb_vec.push_back(texOb);    break; }
+           					case CLASS::WARRIOR_ID: { ship_race3_warrior_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::TRADER_ID:  { ship_race3_trader_texOb_vec.push_back(texOb);    break; }
+           					case CLASS::PIRAT_ID:   { ship_race3_pirat_texOb_vec.push_back(texOb);     break; }
+           					case CLASS::DIPLOMAT_ID: { ship_race3_diplomat_texOb_vec.push_back(texOb); break; }
         				}
         				
         				break;
@@ -105,11 +105,11 @@ void TextureManager :: manage(TextureOb* texOb)
         			{
         				switch(texOb->subtype_id)
         				{	
-        					case CLASS::RANGER:   { ship_race4_ranger_texOb_vec.push_back(texOb);   break; }
-           					case CLASS::WARRIOR:  { ship_race4_warrior_texOb_vec.push_back(texOb);  break; }
-           					case CLASS::TRADER:   { ship_race4_trader_texOb_vec.push_back(texOb);   break; }
-           					case CLASS::PIRAT:    { ship_race4_pirat_texOb_vec.push_back(texOb);    break; } 
-           					case CLASS::DIPLOMAT: { ship_race4_diplomat_texOb_vec.push_back(texOb); break; }
+        					case CLASS::RANGER_ID:   { ship_race4_ranger_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::WARRIOR_ID:  { ship_race4_warrior_texOb_vec.push_back(texOb);  break; }
+           					case CLASS::TRADER_ID:   { ship_race4_trader_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::PIRAT_ID:    { ship_race4_pirat_texOb_vec.push_back(texOb);    break; } 
+           					case CLASS::DIPLOMAT_ID: { ship_race4_diplomat_texOb_vec.push_back(texOb); break; }
            				}
            				
            				break;
@@ -119,11 +119,11 @@ void TextureManager :: manage(TextureOb* texOb)
 				{	
 					switch(texOb->subtype_id)
 					{
-						case CLASS::RANGER:   { ship_race6_ranger_texOb_vec.push_back(texOb);   break; }
-           					case CLASS::WARRIOR:  { ship_race6_warrior_texOb_vec.push_back(texOb);  break; }
-           					case CLASS::TRADER:   { ship_race6_trader_texOb_vec.push_back(texOb);   break; }
-           					case CLASS::PIRAT:    { ship_race6_pirat_texOb_vec.push_back(texOb);    break; }
-           					case CLASS::DIPLOMAT: { ship_race6_diplomat_texOb_vec.push_back(texOb); break; }
+						case CLASS::RANGER_ID:   { ship_race6_ranger_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::WARRIOR_ID:  { ship_race6_warrior_texOb_vec.push_back(texOb);  break; }
+           					case CLASS::TRADER_ID:   { ship_race6_trader_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::PIRAT_ID:    { ship_race6_pirat_texOb_vec.push_back(texOb);    break; }
+           					case CLASS::DIPLOMAT_ID: { ship_race6_diplomat_texOb_vec.push_back(texOb); break; }
         				}
         				
         				break;
@@ -133,11 +133,11 @@ void TextureManager :: manage(TextureOb* texOb)
 				{	
 					switch(texOb->subtype_id)
 					{
-						case CLASS::RANGER:   { ship_race7_ranger_texOb_vec.push_back(texOb);   break; }
-           					case CLASS::WARRIOR:  { ship_race7_warrior_texOb_vec.push_back(texOb);  break; }
-           					case CLASS::TRADER:   { ship_race7_trader_texOb_vec.push_back(texOb);   break; }
-           					case CLASS::PIRAT:    { ship_race7_pirat_texOb_vec.push_back(texOb);    break; }
-           					case CLASS::DIPLOMAT: { ship_race7_diplomat_texOb_vec.push_back(texOb); break; }
+						case CLASS::RANGER_ID:   { ship_race7_ranger_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::WARRIOR_ID:  { ship_race7_warrior_texOb_vec.push_back(texOb);  break; }
+           					case CLASS::TRADER_ID:   { ship_race7_trader_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::PIRAT_ID:    { ship_race7_pirat_texOb_vec.push_back(texOb);    break; }
+           					case CLASS::DIPLOMAT_ID: { ship_race7_diplomat_texOb_vec.push_back(texOb); break; }
         				}
         				
         				break;
@@ -308,11 +308,11 @@ TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race
         	{
                 	switch(_subtype_id)
                 	{
-                		case CLASS::RANGER:   { return getRandomTexObFromList(&ship_race0_ranger_texOb_vec);   break; }
-				case CLASS::WARRIOR:  { return getRandomTexObFromList(&ship_race0_warrior_texOb_vec);  break; }
- 				case CLASS::TRADER:   { return getRandomTexObFromList(&ship_race0_trader_texOb_vec);   break; }
-				case CLASS::PIRAT:    { return getRandomTexObFromList(&ship_race0_pirat_texOb_vec);    break; }
-				case CLASS::DIPLOMAT: { return getRandomTexObFromList(&ship_race0_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race0_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race0_warrior_texOb_vec);  break; }
+ 				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race0_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race0_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race0_diplomat_texOb_vec); break; }
 		       }
 		       
 		       break;
@@ -322,11 +322,11 @@ TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race
         	{
                 	switch(_subtype_id)
                 	{	
-                		case CLASS::RANGER:   { return getRandomTexObFromList(&ship_race1_ranger_texOb_vec);   break; }
-				case CLASS::WARRIOR:  { return getRandomTexObFromList(&ship_race1_warrior_texOb_vec);  break; } 
-				case CLASS::TRADER:   { return getRandomTexObFromList(&ship_race1_trader_texOb_vec);   break; }
-				case CLASS::PIRAT:    { return getRandomTexObFromList(&ship_race1_pirat_texOb_vec);    break; }
-				case CLASS::DIPLOMAT: { return getRandomTexObFromList(&ship_race1_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race1_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race1_warrior_texOb_vec);  break; } 
+				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race1_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race1_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race1_diplomat_texOb_vec); break; }
 			}
 			
 			break;
@@ -336,11 +336,11 @@ TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race
         	{
                 	switch(_subtype_id)
                 	{	
-                		case CLASS::RANGER:   { return getRandomTexObFromList(&ship_race2_ranger_texOb_vec);   break; }
-				case CLASS::WARRIOR:  { return getRandomTexObFromList(&ship_race2_warrior_texOb_vec);  break; } 
-				case CLASS::TRADER:   { return getRandomTexObFromList(&ship_race2_trader_texOb_vec);   break; }
-				case CLASS::PIRAT:    { return getRandomTexObFromList(&ship_race2_pirat_texOb_vec);    break; }
-				case CLASS::DIPLOMAT: { return getRandomTexObFromList(&ship_race2_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race2_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race2_warrior_texOb_vec);  break; } 
+				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race2_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race2_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race2_diplomat_texOb_vec); break; }
 			}
 			
 			break;
@@ -351,11 +351,11 @@ TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race
         	{
                 	switch(_subtype_id)
                 	{	
-                		case CLASS::RANGER:   { return getRandomTexObFromList(&ship_race3_ranger_texOb_vec);   break; }
-				case CLASS::WARRIOR:  { return getRandomTexObFromList(&ship_race3_warrior_texOb_vec);  break; } 
-				case CLASS::TRADER:   { return getRandomTexObFromList(&ship_race3_trader_texOb_vec);   break; }
-				case CLASS::PIRAT:    { return getRandomTexObFromList(&ship_race3_pirat_texOb_vec);    break; }
-				case CLASS::DIPLOMAT: { return getRandomTexObFromList(&ship_race3_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race3_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race3_warrior_texOb_vec);  break; } 
+				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race3_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race3_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race3_diplomat_texOb_vec); break; }
 			}
 			
 			break;
@@ -366,11 +366,11 @@ TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race
         	{
                 	switch(_subtype_id)
                 	{	
-                		case CLASS::RANGER:   { return getRandomTexObFromList(&ship_race4_ranger_texOb_vec);   break; }
-				case CLASS::WARRIOR:  { return getRandomTexObFromList(&ship_race4_warrior_texOb_vec);  break; } 
-				case CLASS::TRADER:   { return getRandomTexObFromList(&ship_race4_trader_texOb_vec);   break; }
-				case CLASS::PIRAT:    { return getRandomTexObFromList(&ship_race4_pirat_texOb_vec);    break; }
-				case CLASS::DIPLOMAT: { return getRandomTexObFromList(&ship_race4_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race4_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race4_warrior_texOb_vec);  break; } 
+				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race4_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race4_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race4_diplomat_texOb_vec); break; }
 			}
 			
 			break;
@@ -381,11 +381,11 @@ TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race
         	{
                 	switch(_subtype_id)
                 	{	
-                		case CLASS::RANGER:   { return getRandomTexObFromList(&ship_race6_ranger_texOb_vec);   break; }
-				case CLASS::WARRIOR:  { return getRandomTexObFromList(&ship_race6_warrior_texOb_vec);  break; } 
-				case CLASS::TRADER:   { return getRandomTexObFromList(&ship_race6_trader_texOb_vec);   break; }
-				case CLASS::PIRAT:    { return getRandomTexObFromList(&ship_race6_pirat_texOb_vec);    break; }
-				case CLASS::DIPLOMAT: { return getRandomTexObFromList(&ship_race6_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race6_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race6_warrior_texOb_vec);  break; } 
+				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race6_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race6_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race6_diplomat_texOb_vec); break; }
 			}
 			
 			break;
@@ -395,11 +395,11 @@ TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race
         	{
                 	switch(_subtype_id)
                 	{	
-                		case CLASS::RANGER:   { return getRandomTexObFromList(&ship_race7_ranger_texOb_vec);   break; }
-				case CLASS::WARRIOR:  { return getRandomTexObFromList(&ship_race7_warrior_texOb_vec);  break; } 
-				case CLASS::TRADER:   { return getRandomTexObFromList(&ship_race7_trader_texOb_vec);   break; }
-				case CLASS::PIRAT:    { return getRandomTexObFromList(&ship_race7_pirat_texOb_vec);    break; }
-				case CLASS::DIPLOMAT: { return getRandomTexObFromList(&ship_race7_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race7_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race7_warrior_texOb_vec);  break; } 
+				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race7_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race7_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race7_diplomat_texOb_vec); break; }
 			}
 			
 			break;

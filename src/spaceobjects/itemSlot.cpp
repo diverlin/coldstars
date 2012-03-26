@@ -25,7 +25,7 @@ ItemSlot :: ItemSlot()
         Lazer weapon item cannot be inserted to drive slot and so on).
 	*/
 
-        type_id    = SLOT::SLOT;
+        type_id    = SLOT::SLOT_ID;
 	subtype_id = -1;
      
         rect = Rect();         
@@ -104,7 +104,7 @@ bool ItemSlot :: insertItem(ItemBase* item)
 {
 	if (item != NULL)
 	{
-		if (subtype_id == SLOT::CARGO) 
+		if (subtype_id == SLOT::CARGO_ID) 
 		{
                 	this->item = item;
                 	is_EQUIPED = true; 
@@ -141,7 +141,7 @@ void ItemSlot :: removeItem()
         item = NULL;
     	is_EQUIPED = false;  
         
-    	if (subtype_id != SLOT::CARGO) 
+    	if (subtype_id != SLOT::CARGO_ID) 
     	{ 
     		tmp_item->updateOwnerAbilities(); 
     	}                     
@@ -163,15 +163,15 @@ int ItemSlot :: getItemRadius() const
 {       
         switch(item->getTypeId())
         {
-                case EQUIPMENT::EQUIPMENT:
+                case EQUIPMENT::EQUIPMENT_ID:
                 {
                         switch (item->getSubTypeId())
                         {
-                                case EQUIPMENT::LAZER:   { return ((LazerEquipment*)item)->getRadius();  break; };
-                                case EQUIPMENT::ROCKET:  { return ((RocketEquipment*)item)->getRadius(); break; };
+                                case EQUIPMENT::LAZER_ID:   { return ((LazerEquipment*)item)->getRadius();  break; };
+                                case EQUIPMENT::ROCKET_ID:  { return ((RocketEquipment*)item)->getRadius(); break; };
 		
-                                case EQUIPMENT::GRAPPLE: { return ((GrappleEquipment*)item)->getRadius(); break; };
-                                case EQUIPMENT::RADAR:   { return ((RadarEquipment*)item)->getRadius();   break; };
+                                case EQUIPMENT::GRAPPLE_ID: { return ((GrappleEquipment*)item)->getRadius(); break; };
+                                case EQUIPMENT::RADAR_ID:   { return ((RadarEquipment*)item)->getRadius();   break; };
                         }
                         
                         break;
@@ -257,7 +257,7 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
 
 	if ( (is_EQUIPED == true) and (_slot->getEquipedStatus() == true) )
        	{          
-       		if ( (item->getTypeId() == MODULE::MODULE) and (_slot->getItem()->getTypeId() == EQUIPMENT::EQUIPMENT) )
+       		if ( (item->getTypeId() == MODULE::MODULE_ID) and (_slot->getItem()->getTypeId() == EQUIPMENT::EQUIPMENT_ID) )
        		{
 			if (((EquipmentBase*)_slot->getItem())->insertModule((ModuleBase*)item) == true)  
 			{ 
@@ -267,7 +267,7 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
         		}
        		}
        		
-       		if ( (item->getTypeId() == EQUIPMENT::EQUIPMENT) and (_slot->getItem()->getTypeId() == MODULE::MODULE) )
+       		if ( (item->getTypeId() == EQUIPMENT::EQUIPMENT_ID) and (_slot->getItem()->getTypeId() == MODULE::MODULE_ID) )
        		{
 			 if (((EquipmentBase*)item)->insertModule((ModuleBase*)_slot->getItem()) == true)  
 			 { 

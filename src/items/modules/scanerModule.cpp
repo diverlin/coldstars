@@ -45,8 +45,8 @@ ScanerModule* scanerModuleGenerator()
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = MODULE::MODULE;
-        data_id.subtype_id = MODULE::SCANER;  
+        data_id.type_id    = MODULE::MODULE_ID;
+        data_id.subtype_id = MODULE::SCANER_ID;  
         
     	ScanerModule* scaner_module = new ScanerModule(scan_add);
         scaner_module->setTextureOb(texOb);

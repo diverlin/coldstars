@@ -68,8 +68,8 @@ GrappleModule* getNewGrappleModule()
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = MODULE::MODULE;
-        data_id.subtype_id = MODULE::GRAPPLE;  
+        data_id.type_id    = MODULE::MODULE_ID;
+        data_id.subtype_id = MODULE::GRAPPLE_ID;  
         
     	GrappleModule* grapple_module = new GrappleModule(strength_add, radius_add, speed_add, maxNumItem_add);    	
     	grapple_module->setTextureOb(texOb);

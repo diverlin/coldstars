@@ -24,7 +24,7 @@ GuiSpace :: GuiSpace(Player* player)
     	TextureOb* texOb_icon_map = g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_map;
     	
     	galaxymap_screen_button = new Button(texOb_icon_map, 
-        				     SCREEN_GALAXYMAP_ID,
+        				     GUI::SCREEN::GALAXYMAP_ID,
     					     SCREEN_WIDTH_MIN  - (INTERFACE_ICON_SIZE + 5),
     					     SCREEN_HEIGHT_MIN - (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE,  
@@ -67,7 +67,7 @@ void GuiSpace :: mouseInteraction()
         	{
            		if (lmb == true)
            		{
-           			if (button_vec[i]->getSubTypeId() == SCREEN_GALAXYMAP_ID)
+           			if (button_vec[i]->getSubTypeId() == GUI::SCREEN::GALAXYMAP_ID)
               			{
               				player->setWorldMapShowFlag(!player->getWorldMapShowFlag());
                  		}

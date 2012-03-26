@@ -231,7 +231,7 @@ GrappleEquipment* getNewGrappleEquipment(int race_id, int revision_id)
        		race_id = RACE::R0; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
     	if (revision_id == -1)
-       		revision_id = TECHLEVEL::L0; 
+       		revision_id = TECHLEVEL::L0_ID; 
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
@@ -251,8 +251,8 @@ GrappleEquipment* getNewGrappleEquipment(int race_id, int revision_id)
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT::EQUIPMENT;
-        data_id.subtype_id = EQUIPMENT::GRAPPLE;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::GRAPPLE_ID;
         
     	GrappleEquipment* grapple_equipment = new GrappleEquipment(strength_orig, 
     								   radius_orig, 

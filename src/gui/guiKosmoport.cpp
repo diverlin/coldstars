@@ -25,7 +25,7 @@ GuiKosmoport :: GuiKosmoport(Player* player)
         TextureOb* texOb_button = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; // fake
 
     	angar_screen_button     = new Button(texOb_button, 
-    					     SCREEN_ANGAR_ID,
+    					     GUI::SCREEN::ANGAR_ID,
     					     SCREEN_WIDTH_MIN - 1 * (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE, 
     					     INTERFACE_ICON_SIZE,  
@@ -34,7 +34,7 @@ GuiKosmoport :: GuiKosmoport(Player* player)
     	button_common_pList.push_back(angar_screen_button);
     	
     	store_screen_button     = new Button(texOb_button, 
-    					     SCREEN_STORE_ID,
+    					     GUI::SCREEN::STORE_ID,
     					     SCREEN_WIDTH_MIN - 2 * (INTERFACE_ICON_SIZE + 5),
     					     INTERFACE_ICON_SIZE, 
     					     INTERFACE_ICON_SIZE,  
@@ -43,7 +43,7 @@ GuiKosmoport :: GuiKosmoport(Player* player)
 	button_common_pList.push_back(store_screen_button);
     					        	
     	shop_screen_button      = new Button(texOb_button, 
-    					     SCREEN_SHOP_ID,
+    					     GUI::SCREEN::SHOP_ID,
     					     SCREEN_WIDTH_MIN - 3 * (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE, 
     					     INTERFACE_ICON_SIZE,  
@@ -52,7 +52,7 @@ GuiKosmoport :: GuiKosmoport(Player* player)
     	button_common_pList.push_back(shop_screen_button);
     					     
     	galaxymap_screen_button = new Button(texOb_button, 
-    					     SCREEN_GALAXYMAP_ID,
+    					     GUI::SCREEN::GALAXYMAP_ID,
     					     SCREEN_WIDTH_MIN - 4 * (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE, 
     					     INTERFACE_ICON_SIZE,  
@@ -61,7 +61,7 @@ GuiKosmoport :: GuiKosmoport(Player* player)
         button_common_pList.push_back(galaxymap_screen_button);
     					     
     	goverment_screen_button = new Button(texOb_button, 
-    					     SCREEN_GOVERMENT_ID,
+    					     GUI::SCREEN::GOVERMENT_ID,
     					     SCREEN_WIDTH_MIN - 5 * (INTERFACE_ICON_SIZE + 5), 
     					     INTERFACE_ICON_SIZE,
     					     INTERFACE_ICON_SIZE,  
@@ -96,7 +96,7 @@ GuiKosmoport :: GuiKosmoport(Player* player)
     				   "launch");
     	button_angar_pList.push_back(launch_button);
 
-	active_screen_id = SCREEN_ANGAR_ID;
+	active_screen_id = GUI::SCREEN::ANGAR_ID;
 }
 
 
@@ -142,7 +142,7 @@ void GuiKosmoport :: mouseInteraction()
         }
         
 
-     	if (active_screen_id == SCREEN_ANGAR_ID)
+     	if (active_screen_id == GUI::SCREEN::ANGAR_ID)
     	{
      		for (unsigned int i = 0; i< button_angar_pList.size(); i++)
 		{
@@ -180,7 +180,7 @@ void GuiKosmoport :: renderInternal() const
        		button_common_pList[i]->render();
         }
 
-    	if (active_screen_id == SCREEN_ANGAR_ID)
+    	if (active_screen_id == GUI::SCREEN::ANGAR_ID)
     	{
     		for (unsigned int i = 0; i< button_angar_pList.size(); i++)
 		{
@@ -202,7 +202,7 @@ void GuiKosmoport :: renderInfo() const
         	}
         }       
 
-    	if (active_screen_id == SCREEN_ANGAR_ID)
+    	if (active_screen_id == GUI::SCREEN::ANGAR_ID)
     	{
     		for (unsigned int i = 0; i< button_angar_pList.size(); i++)
 		{

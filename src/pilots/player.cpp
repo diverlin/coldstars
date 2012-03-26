@@ -1021,7 +1021,7 @@ void Player :: kosmoport()
 {
 	USERINPUT->update_inKosmoport();
          
-        if (GUI_KOSMOPORT->getActiveScreenId() == SCREEN_ANGAR_ID)
+        if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::ANGAR_ID)
         {
         	((Kosmoport*)npc->getLand())->getAngar()->mouseControl(this);                                
                	((Kosmoport*)npc->getLand())->getAngar()->render(this);
@@ -1037,7 +1037,7 @@ void Player :: kosmoport()
                 }
 	}
 
-        if (GUI_KOSMOPORT->getActiveScreenId() == SCREEN_STORE_ID)
+        if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::STORE_ID)
         {
         	if (npc->getScanTarget() != npc->getVehicle())
         	{
@@ -1048,20 +1048,20 @@ void Player :: kosmoport()
                 GUI_MANAGER->renderInStore(); 
 	}
 
-        if (GUI_KOSMOPORT->getActiveScreenId() == SCREEN_SHOP_ID)
+        if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::SHOP_ID)
         {
         	((Kosmoport*)npc->getLand())->getShop()->update();
                 ((Kosmoport*)npc->getLand())->getShop()->render(this);
 	}
 
-        if (GUI_KOSMOPORT->getActiveScreenId() == SCREEN_GALAXYMAP_ID)
+        if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::GALAXYMAP_ID)
         {
         	GUI_MAP->update();
         	clearScreen();
                 GUI_MAP->render();   
          }
 
-         if (GUI_KOSMOPORT->getActiveScreenId() == SCREEN_GOVERMENT_ID)
+         if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::GOVERMENT_ID)
          {
          	((Kosmoport*)npc->getLand())->getGoverment()->update();
                 ((Kosmoport*)npc->getLand())->getGoverment()->render(this);
