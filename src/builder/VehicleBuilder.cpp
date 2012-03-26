@@ -32,7 +32,7 @@ Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int w
     	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomShipTexObWithFollowingAtrributes(race_id, subtype_id, size_id); 
        
        	int protection_rate = 1;
-       	if (subtype_id == WARRIOR_ID)
+       	if (subtype_id == CLASS::WARRIOR)
         {
         	protection_rate = 3;
         }
@@ -86,7 +86,7 @@ Satellite* VehicleBuilder::GetNewSatellite()
 	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(SATELLITE_TEXTURE_ID);  
 	
        	int protection_rate = 1;
-       	//if (subtype_id == WARRIOR_ID)
+       	//if (subtype_id == CLASS::WARRIOR)
         //{
         	protection_rate = 1;
         //}
@@ -138,7 +138,7 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation()
 	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(SPACESTATION_TEXTURE_ID); 
        
        	int protection_rate = 1;
-       	//if (subtype_id == WARRIOR_ID)
+       	//if (subtype_id == CLASS::WARRIOR)
         //{
         	protection_rate = 5;
         //}

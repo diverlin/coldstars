@@ -724,11 +724,11 @@ void StarSystem :: addToSpace(Npc* npc)
 
 	switch(npc->getSubTypeId())
 	{
-     	 	case RANGER_ID:     { NPC_RANGER_inSPACE_vec.push_back(npc);    break; }
-     		case WARRIOR_ID:    { NPC_WARRIOR_inSPACE_vec.push_back(npc);   break; }
-     		case TRADER_ID:     { NPC_TRADER_inSPACE_vec.push_back(npc);    break; }
-     		case PIRAT_ID:      { NPC_PIRAT_inSPACE_vec.push_back(npc);    break; }
-     		case DIPLOMAT_ID:   { NPC_DIPLOMAT_inSPACE_vec.push_back(npc); break; }
+     	 	case CLASS::RANGER:     { NPC_RANGER_inSPACE_vec.push_back(npc);    break; }
+     		case CLASS::WARRIOR:    { NPC_WARRIOR_inSPACE_vec.push_back(npc);   break; }
+     		case CLASS::TRADER:     { NPC_TRADER_inSPACE_vec.push_back(npc);    break; }
+     		case CLASS::PIRAT:      { NPC_PIRAT_inSPACE_vec.push_back(npc);    break; }
+     		case CLASS::DIPLOMAT:   { NPC_DIPLOMAT_inSPACE_vec.push_back(npc); break; }
      	}
 }
 
@@ -1110,11 +1110,11 @@ bool StarSystem :: removeNpc(int _id, int _subtype_id)
 
 	switch(_subtype_id)
 	{
-        	case RANGER_ID:   { return removeFromTheListById(&NPC_RANGER_inSPACE_vec, _id);   break; }
-        	case WARRIOR_ID:  { return removeFromTheListById(&NPC_WARRIOR_inSPACE_vec, _id);  break; }
-        	case TRADER_ID:   { return removeFromTheListById(&NPC_TRADER_inSPACE_vec, _id);   break; }
-        	case PIRAT_ID:    { return removeFromTheListById(&NPC_PIRAT_inSPACE_vec, _id);    break; } 
-        	case DIPLOMAT_ID: { return removeFromTheListById(&NPC_DIPLOMAT_inSPACE_vec, _id); break; }
+        	case CLASS::RANGER:   { return removeFromTheListById(&NPC_RANGER_inSPACE_vec, _id);   break; }
+        	case CLASS::WARRIOR:  { return removeFromTheListById(&NPC_WARRIOR_inSPACE_vec, _id);  break; }
+        	case CLASS::TRADER:   { return removeFromTheListById(&NPC_TRADER_inSPACE_vec, _id);   break; }
+        	case CLASS::PIRAT:    { return removeFromTheListById(&NPC_PIRAT_inSPACE_vec, _id);    break; } 
+        	case CLASS::DIPLOMAT: { return removeFromTheListById(&NPC_DIPLOMAT_inSPACE_vec, _id); break; }
 	}
 	
         return false;
