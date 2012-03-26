@@ -25,7 +25,7 @@ ItemSlot :: ItemSlot()
         Lazer weapon item cannot be inserted to drive slot and so on).
 	*/
 
-        type_id    = SLOT_ID;
+        type_id    = SLOT::SLOT;
 	subtype_id = -1;
      
         rect = Rect();         
@@ -104,7 +104,7 @@ bool ItemSlot :: insertItem(ItemBase* item)
 {
 	if (item != NULL)
 	{
-		if (subtype_id == CARGO_SLOT_ID) 
+		if (subtype_id == SLOT::CARGO) 
 		{
                 	this->item = item;
                 	is_EQUIPED = true; 
@@ -141,7 +141,7 @@ void ItemSlot :: removeItem()
         item = NULL;
     	is_EQUIPED = false;  
         
-    	if (subtype_id != CARGO_SLOT_ID) 
+    	if (subtype_id != SLOT::CARGO) 
     	{ 
     		tmp_item->updateOwnerAbilities(); 
     	}                     

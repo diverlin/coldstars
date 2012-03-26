@@ -26,7 +26,7 @@ Cursor :: Cursor(Player* player)
      	type_id = CURSOR_ID;
      
      	slot = new ItemSlot();
-     	slot->SetSubTypeId(CARGO_SLOT_ID);
+     	slot->SetSubTypeId(SLOT::CARGO);
      	slot->setRect(0, 0, CURSOR_SLOT_WIDTH, CURSOR_SLOT_HEIGHT);
      	
      	mouse_left_button  = false;

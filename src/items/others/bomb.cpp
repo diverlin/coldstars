@@ -70,7 +70,7 @@ Bomb* getNewBomb()
 	Bomb* bomb = new Bomb();
 	bomb->setIdData(data_id);
 	bomb->setTextureOb(texOb);
-	bomb->setFunctionalSlotSubTypeId(NONE_SLOT_ID);
+	bomb->setFunctionalSlotSubTypeId(SLOT::CARGO);
 	
 	return bomb;
 }

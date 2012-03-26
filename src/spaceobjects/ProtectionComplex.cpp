@@ -26,7 +26,7 @@ ProtectionComplex::ProtectionComplex(Vehicle* vehicle)
  
      	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID); 
 
- 	protector_slot.SetSubTypeId(PROTECTOR_SLOT_ID); 
+ 	protector_slot.SetSubTypeId(SLOT::PROTECTOR); 
  	protector_slot.SetTextureOb(texOb_slot);
 	protector_slot.SetOwnerVehicle(vehicle);
 	protector_slot.setRect(vehicle->GetGuiRect().getCenter().x - 3*SHIP_SLOT_WIDTH, 

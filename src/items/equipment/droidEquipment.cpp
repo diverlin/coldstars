@@ -110,7 +110,7 @@ DroidEquipment* getNewDroidEquipment(int race_id, int revision_id)
         
         droid_equipment->setIdData(data_id);  
         droid_equipment->setTextureOb(texOb_item);    	
-        droid_equipment->setFunctionalSlotSubTypeId(DROID_SLOT_ID);
+        droid_equipment->setFunctionalSlotSubTypeId(SLOT::DROID);
         droid_equipment->setItemCommonData(common_data);
                 
                 
