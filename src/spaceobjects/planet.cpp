@@ -93,7 +93,7 @@ Planet* getNewPlanet(int orbit_radius)
 	IdData data_id;
 	data_id.id         = g_ID_GENERATOR.getNextId();
       	data_id.type_id    = ENTITY::PLANET;
-      	data_id.subtype_id = KOSMOPORT_ID;
+      	data_id.subtype_id = ENTITY::KOSMOPORT;
         
         LifeData data_life;
         
