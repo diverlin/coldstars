@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 StarSystem :: StarSystem(int race_id)
 { 
     	data_id.id = g_ID_GENERATOR.getNextId();
-    	data_id.type_id = STARSYSTEM_ID;
+    	data_id.type_id = ENTITY::STARSYSTEM;
     	
     	is_CAPTURED = false;
     	
@@ -204,14 +204,14 @@ void StarSystem :: update_s()
 			else
 			{
 				is_CAPTURED = true;
-				if (getRandNpcByRaceId(RACE_6_ID) != NULL)
+				if (getRandNpcByRaceId(RACE::R6) != NULL)
 				{
-					conqueror_race_id = RACE_6_ID;
+					conqueror_race_id = RACE::R6;
 				}
 				
-				if (getRandNpcByRaceId(RACE_7_ID) != NULL)
+				if (getRandNpcByRaceId(RACE::R7) != NULL)
 				{
-					conqueror_race_id = RACE_7_ID;
+					conqueror_race_id = RACE::R7;
 				}
 			}
 		}
@@ -680,7 +680,7 @@ void StarSystem :: addToSpace(Vehicle* vehicle, vec2f center, float angle, BaseG
 
 	switch(vehicle->getTypeId())
 	{
-		case SHIP_ID:         	
+		case ENTITY::SHIP:         	
 		{ 	
 			SHIP_inSPACE_vec.push_back((Ship*)vehicle);  
 			 
@@ -691,7 +691,7 @@ void StarSystem :: addToSpace(Vehicle* vehicle, vec2f center, float angle, BaseG
 			break; 
 		}
 					
-		case SPACESTATION_ID:
+		case ENTITY::SPACESTATION:
 		{
 		 	SPACESTATION_vec.push_back((SpaceStation*)vehicle);   
 			 	
@@ -702,7 +702,7 @@ void StarSystem :: addToSpace(Vehicle* vehicle, vec2f center, float angle, BaseG
 		 	break; 
 		}
 		
-		case SATELLITE_ID:    	
+		case ENTITY::SATELLITE:    	
 		{ 
 			vehicle->setParent(parent);
 			((Satellite*)vehicle)->getOrbit()->calcPath(parent->getCollisionRadius(), 1.0);
@@ -844,7 +844,7 @@ void StarSystem :: addToRemoveFromOuterSpaceQueue(Vehicle* vehicle)
 {
 	switch(vehicle->getTypeId())
 	{
-		case SHIP_ID: { remove_SHIP_queue.push_back((Ship*)vehicle); break; }
+		case ENTITY::SHIP: { remove_SHIP_queue.push_back((Ship*)vehicle); break; }
 	}
 	
 }   		

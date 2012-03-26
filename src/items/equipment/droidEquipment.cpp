@@ -83,7 +83,7 @@ std::string DroidEquipment :: getRepairStr()
 DroidEquipment* getNewDroidEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
-       		race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+       		race_id = RACE::R0; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
     	if (revision_id == -1)
        		revision_id = TECH_LEVEL_0_ID; 

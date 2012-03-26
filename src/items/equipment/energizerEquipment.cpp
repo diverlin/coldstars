@@ -98,7 +98,7 @@ std::string EnergizerEquipment :: getRestorationStr()
 EnergizerEquipment* getNewEnergizerEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
-       		race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+       		race_id = RACE::R0; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
     	if (revision_id == -1)
        		revision_id = TECH_LEVEL_0_ID; 
@@ -126,7 +126,7 @@ EnergizerEquipment* getNewEnergizerEquipment(int race_id, int revision_id)
         
         energizer_equipment->setIdData(data_id);  
         energizer_equipment->setTextureOb(texOb_item);    	
-        energizer_equipment->setFunctionalSlotSubTypeId(ENERGIZER_SLOT_ID);
+        energizer_equipment->setFunctionalSlotSubTypeId(SLOT::ENERGIZER);
         energizer_equipment->setItemCommonData(common_data);
                 
         energizer_equipment->updatePropetries();

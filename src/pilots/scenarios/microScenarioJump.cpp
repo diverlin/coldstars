@@ -26,7 +26,7 @@ MicroScenarioJump :: ~MicroScenarioJump()
 		
 void MicroScenarioJump :: enter(Npc* _npc) const
 {	
-	_npc->getVehicle()->GetDriveComplex()->setTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getStarSystem(), FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID);
+	_npc->getVehicle()->GetDriveComplex()->setTarget(_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getStarSystem(), NAVIGATOR_ACTION::KEEP_CLOSE);
 	printf("npc_id = %i, is GOING to MicroScenarioJump from ss_id = %i to ss_id = %i\n", _npc->getId(), _npc->getStarSystem()->getId(), _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getId());
 }
 

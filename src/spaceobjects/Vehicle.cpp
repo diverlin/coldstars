@@ -189,7 +189,7 @@ void Vehicle::DockingEvent()
      	starsystem->removeNpc(owner_npc->getId(), owner_npc->getSubTypeId());
         
              	     	     	
-     	if (drive_complex->getTarget()->getTypeId() == PLANET_ID)
+     	if (drive_complex->getTarget()->getTypeId() == ENTITY::PLANET)
      	{
                 Planet* planet = ((Planet*)drive_complex->getTarget());
                 
@@ -199,7 +199,7 @@ void Vehicle::DockingEvent()
 		owner_npc->setLand(planet->getLand());
 	}
 	
-	if (drive_complex->getTarget()->getTypeId() == SPACESTATION_ID)
+	if (drive_complex->getTarget()->getTypeId() == ENTITY::SPACESTATION)
 	{
                 SpaceStation* spacestation = ((SpaceStation*)drive_complex->getTarget());
                                 
@@ -214,7 +214,7 @@ void Vehicle::LaunchingEvent()
 {
      	printf("vehicle id = %i, launchingEvent()\n", data_id.id);
 
-     	if (drive_complex->getTarget()->getTypeId() == PLANET_ID)
+     	if (drive_complex->getTarget()->getTypeId() == ENTITY::PLANET)
      	{
      		starsystem->addToSpace(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
      		starsystem->addToSpace(owner_npc);
@@ -223,7 +223,7 @@ void Vehicle::LaunchingEvent()
      		((Planet*)drive_complex->getTarget())->getLand()->remove(owner_npc);
 	}
 	
-     	if (drive_complex->getTarget()->getTypeId() == SPACESTATION_ID)
+     	if (drive_complex->getTarget()->getTypeId() == ENTITY::SPACESTATION)
      	{
      		starsystem->addToSpace(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
      		starsystem->addToSpace(owner_npc);
@@ -657,12 +657,12 @@ void Vehicle::GrappleMicroProgramm()
        		{
        			switch(grapple_slot->getGrappleEquipment()->target_vec[i]->getTypeId())
        			{
-       				case MINERAL_ID:
+       				case ENTITY::MINERAL:
        				{
        					ItemSlot* _slot;
                                         Mineral* _mineral = (Mineral*)grapple_slot->getGrappleEquipment()->target_vec[i];
                                         
-       					_slot = GetCargoSlotWithGoods(MINERAL_ID);
+       					_slot = GetCargoSlotWithGoods(ENTITY::MINERAL);
        					if (_slot != NULL)
        					{
        						_slot->getGoodsPack()->increase(_mineral->getMass());
@@ -670,7 +670,7 @@ void Vehicle::GrappleMicroProgramm()
        					}
        					else
        					{
-       						GoodsPack* _goodsPack = getNewGoodsPack(MINERAL_ID);
+       						GoodsPack* _goodsPack = getNewGoodsPack(ENTITY::MINERAL);
        						_goodsPack->increase(_mineral->getMass());
        						_slot = GetEmptyOtsecSlot();
        						if (_slot != NULL)
@@ -683,7 +683,7 @@ void Vehicle::GrappleMicroProgramm()
        					break;			
        				}
         			
-      				case CONTAINER_ID:
+      				case ENTITY::CONTAINER:
        				{
        					ItemSlot* _slot = GetEmptyOtsecSlot();
                                         Container* _container = (Container*)grapple_slot->getGrappleEquipment()->target_vec[i];
@@ -696,7 +696,7 @@ void Vehicle::GrappleMicroProgramm()
        					break;
        				}        			
         				
-       				case SHIP_ID:
+       				case ENTITY::SHIP:
        				{
        					ItemSlot* _slot = GetEmptyOtsecSlot();
                                         Vehicle* _vehicle = (Vehicle*)grapple_slot->getGrappleEquipment()->target_vec[i];

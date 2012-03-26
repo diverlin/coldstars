@@ -91,7 +91,7 @@ std::string BakEquipment :: getFuelStr()
 BakEquipment* getNewBakEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
-       		race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+       		race_id = RACE::R0; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
     	if (revision_id == -1)
        		revision_id = TECH_LEVEL_0_ID; 
@@ -118,7 +118,7 @@ BakEquipment* getNewBakEquipment(int race_id, int revision_id)
         
         bak_equipment->setIdData(data_id);  
         bak_equipment->setTextureOb(texOb_item);    	
-        bak_equipment->setFunctionalSlotSubTypeId(BAK_SLOT_ID);
+        bak_equipment->setFunctionalSlotSubTypeId(SLOT::BAK);
         bak_equipment->setItemCommonData(common_data);
                 
         bak_equipment->updatePropetries();

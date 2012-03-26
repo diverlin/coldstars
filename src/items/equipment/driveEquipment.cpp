@@ -98,7 +98,7 @@ std::string DriveEquipment :: getHyperStr()
 DriveEquipment* getNewDriveEquipment(int race_id, int revision_id)
 {
         if (race_id == -1)
-                race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+                race_id = RACE::R0; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
         if (revision_id == -1)
                 revision_id = TECH_LEVEL_0_ID; 
@@ -126,7 +126,7 @@ DriveEquipment* getNewDriveEquipment(int race_id, int revision_id)
     
         drive_equipment->setIdData(data_id);  
         drive_equipment->setTextureOb(texOb_item);    	
-        drive_equipment->setFunctionalSlotSubTypeId(DRIVE_SLOT_ID);
+        drive_equipment->setFunctionalSlotSubTypeId(SLOT::DRIVE);
         drive_equipment->setItemCommonData(common_data);
          
         drive_equipment->updatePropetries();

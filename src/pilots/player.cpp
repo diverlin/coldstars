@@ -682,7 +682,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
                    				}
                    				else
                    				{
-                   					npc->getVehicle()->GetDriveComplex()->setTarget(visible_SATELLITE_vec[i], FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID);   // make it like a ai scenario (follow obj)
+                   					npc->getVehicle()->GetDriveComplex()->setTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE);   // make it like a ai scenario (follow obj)
                    					npc->getVehicle()->GetDriveComplex()->update_inSpace_inStatic();
                    				}
 					}
@@ -739,7 +739,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
                    				}
                    				else
                    				{
-                   					npc->getVehicle()->GetDriveComplex()->setTarget(visible_ASTEROID_vec[ai], FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID);  
+                   					npc->getVehicle()->GetDriveComplex()->setTarget(visible_ASTEROID_vec[ai], NAVIGATOR_ACTION::KEEP_MIDDLE);  
                    					npc->getVehicle()->GetDriveComplex()->update_inSpace_inStatic();
                    				}
                    			}
@@ -778,7 +778,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
                    				}
                    				else
                    				{
-                   					npc->getVehicle()->GetDriveComplex()->setTarget(visible_SHIP_vec[ki], FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID);  
+                   					npc->getVehicle()->GetDriveComplex()->setTarget(visible_SHIP_vec[ki], NAVIGATOR_ACTION::KEEP_MIDDLE);  
                    					npc->getVehicle()->GetDriveComplex()->update_inSpace_inStatic();
                    				}
 					}

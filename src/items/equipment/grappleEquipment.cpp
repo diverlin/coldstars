@@ -104,13 +104,13 @@ std::string GrappleEquipment :: getTargetStr() const
         	{
         	switch(target_vec[i]->getTypeId())
         	{
-        		case MINERAL_ID:
+        		case ENTITY::MINERAL:
         		{
         			str += "m" + int2str(target_vec[i]->getTypeId()) + ", ";
         			break;
         		}
         		
-        		case CONTAINER_ID:
+        		case ENTITY::CONTAINER:
         		{
         			str += "c" + int2str(target_vec[i]->getTypeId()) + ", ";
         			break;
@@ -228,7 +228,7 @@ std::string GrappleEquipment :: getMaxNumItemStr()
 GrappleEquipment* getNewGrappleEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
-       		race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+       		race_id = RACE::R0; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
     	if (revision_id == -1)
        		revision_id = TECH_LEVEL_0_ID; 
