@@ -56,8 +56,8 @@ EnergizerModule* getNewEnergizerModule()
      	
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = MODULE_ID;
-        data_id.subtype_id = ENERGIZER_MODULE_ID;  
+        data_id.type_id    = MODULE::MODULE;
+        data_id.subtype_id = MODULE::ENERGIZER;  
         
      	EnergizerModule* energizer_module = new EnergizerModule(energy_max_add, restoration_add);
         energizer_module->setTextureOb(texOb);

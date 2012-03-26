@@ -42,8 +42,8 @@ FreezerModule* getNewFreezerModule()
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = MODULE_ID;
-        data_id.subtype_id = FREEZER_MODULE_ID; 
+        data_id.type_id    = MODULE::MODULE;
+        data_id.subtype_id = MODULE::FREEZER; 
         
         FreezerModule* freezer_module = new FreezerModule(freeze_add);
         freezer_module->setTextureOb(texOb);

@@ -53,7 +53,7 @@ void Container :: renderInfo_inSpace(vec2f scroll_coords)
  /* virtual */    
 void Container :: postDeathUniqueEvent(bool show_effect)
 {
-        if (item_slot->getItem()->getTypeId() == BOMB_ID)
+        if (item_slot->getItem()->getTypeId() == ENTITY::BOMB)
         {
         	starsystem->bombExplosionEvent(this, show_effect);  
         }
