@@ -1,0 +1,11 @@
+#####################################################################
+# Project:      freeorion
+# License:	see in << /data/license/freeorion_info.txt >>
+##################################
+filename     << original filename 
+grapple_Race0_Tech0.png,
+grapple_Race0_Tech1.png    << mass_driver.png
+
+##################################
+
+
