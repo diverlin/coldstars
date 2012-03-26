@@ -20,8 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 StarSystem :: StarSystem(int race_id)
 { 
-    	id = g_ID_GENERATOR.getNextId();
-    	type_id = STARSYSTEM_ID;
+    	data_id.id = g_ID_GENERATOR.getNextId();
+    	data_id.type_id = STARSYSTEM_ID;
     	
     	is_CAPTURED = false;
     	
@@ -32,9 +32,9 @@ StarSystem :: StarSystem(int race_id)
     	calculation_per_turn_allowed_inDynamic = true;
 
     	detalied_simulation = false; // will be changing depending on player presence
-    	
-    	starsystem = this;
-    	galaxy = NULL;
+
+    	galaxy = NULL;    	
+    	this->setStarSystem(this);
 }
 
 StarSystem :: ~StarSystem()
@@ -44,9 +44,6 @@ StarSystem :: ~StarSystem()
 void StarSystem :: setPosition(vec2f center) { this->center = center; }
 void StarSystem :: setGalaxy(Galaxy* galaxy)  { this->galaxy = galaxy;}
 						
-int StarSystem :: getId() const     { return id; }
-int StarSystem :: getTypeId() const { return type_id; }
-StarSystem* StarSystem :: getStarSystem() { return this; }
 bool StarSystem :: getDetailedSimulationFlag() const { return detalied_simulation; }
 bool StarSystem :: getCaptured() const { return is_CAPTURED; }    
 vec2f StarSystem :: getPosition() const { return center; }  
@@ -1179,17 +1176,6 @@ void StarSystem :: damageEventInsideCircle(vec2f epicentr, float radius, int dam
     	}
 }
 
-
-void StarSystem :: debug__()
-{
-        if (MINERAL_vec.size() > 1000)
-        {
-                for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
-                {
-                        MINERAL_vec[mi]->hit(1000, false);
-                }
-        }
-}
 
 
 void StarSystem :: postDeathUniqueEvent(bool) /*virtual */

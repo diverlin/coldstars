@@ -379,6 +379,11 @@ const int SATELLITE_MASS_MAX = 200;
 //const int SELL_GOODS_task_id             = g_TYPE_ID_GENERATOR.getNextId("SELL_GOODS_task_id");
 ////// END AI ssection
 
+namespace ENTITY 
+{
+
+}
+
 enum ENTITY_TYPE
 {
 	LIBERATION_STARSYSTEM_QUEST_ID, SELFCARE_TASK_ID, LANDING_TASK_ID, GRABBING_TASK_ID, DESTROY_SHIP_QUEST_ID,
@@ -412,7 +417,6 @@ enum ENTITY_TYPE
 	
 	CURSOR_ID	
 };
-
 
 enum TEXTURE_TYPE
 { 

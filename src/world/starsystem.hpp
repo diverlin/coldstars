@@ -57,9 +57,6 @@ class StarSystem : public BaseGameEntity
     		void setPosition(vec2f);
 		void setGalaxy(Galaxy*);
 		
-		int getId() const;
-                int getTypeId() const;
-                StarSystem* getStarSystem();
 		bool getDetailedSimulationFlag() const;
 		bool getCaptured() const;
 		vec2f getPosition() const;
@@ -121,7 +118,6 @@ class StarSystem : public BaseGameEntity
                 void drawPath();
                            		    		    		
     	private:
-                int id, type_id;
                 int race_id, conqueror_race_id;
                 
     		bool detalied_simulation;
@@ -178,8 +174,6 @@ class StarSystem : public BaseGameEntity
     		void update_s();
     		
     		void damageEventInsideCircle(vec2f epicentr, float radius, int damage, bool show_effect);
-    		
-    		void debug__();    	
     		
     		void postDeathUniqueEvent(bool);
 };
