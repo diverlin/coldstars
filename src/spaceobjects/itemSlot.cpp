@@ -177,7 +177,7 @@ int ItemSlot :: getItemRadius() const
                         break;
                 }
                 
-                case ENTITY::BOMB:
+                case ENTITY::BOMB_ID:
                 {
                         return ((Bomb*)item)->getRadius();   break; 
                 }
@@ -332,7 +332,7 @@ bool ItemSlot :: isStarSystemOk(BaseGameEntity* _target) const
 
 bool ItemSlot :: isDistanceOk(BaseGameEntity* _target) const
 {
-	if (_target->getTypeId() == ENTITY::STARSYSTEM)
+	if (_target->getTypeId() == ENTITY::STARSYSTEM_ID)
 	{
 		return true;
 	}

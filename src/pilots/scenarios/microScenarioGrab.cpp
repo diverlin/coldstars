@@ -44,7 +44,7 @@ void MicroScenarioGrab :: update_inStatic(Npc* npc) const
                 }
         }
         
-        npc->getVehicle()->GetDriveComplex()->setTarget(npc->getStateMachine()->getCurrentMicroTask()->getTarget(), NAVIGATOR_ACTION::KEEP_CLOSE);
+        npc->getVehicle()->GetDriveComplex()->setTarget(npc->getStateMachine()->getCurrentMicroTask()->getTarget(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
 }
 
 void MicroScenarioGrab :: update_inDynamic(Npc* npc) const
@@ -59,9 +59,9 @@ void MicroScenarioGrab :: update_inDynamic(Npc* npc) const
        		float dist = distBetweenPoints(npc->getVehicle()->GetPoints().getCenter(), grapple_equipment->target_vec[i]->GetPoints().getCenter()); 
        		if (dist < npc->getVehicle()->getCollisionRadius()/10)
        		{
-       			if (grapple_equipment->target_vec[i]->getTypeId() == ENTITY::MINERAL)
+       			if (grapple_equipment->target_vec[i]->getTypeId() == ENTITY::MINERAL_ID)
        			{
-       				GoodsPack* goodsPack = getNewGoodsPack(ENTITY::MINERAL);
+       				GoodsPack* goodsPack = getNewGoodsPack(ENTITY::MINERAL_ID);
        				goodsPack->increase(grapple_equipment->target_vec[i]->getMass());
        				ItemSlot* slot = npc->getVehicle()->GetEmptyOtsecSlot();
        				if (slot != NULL)
@@ -73,7 +73,7 @@ void MicroScenarioGrab :: update_inDynamic(Npc* npc) const
        				}			
        			}
         			
-       			if (grapple_equipment->target_vec[i]->getTypeId() == ENTITY::CONTAINER)
+       			if (grapple_equipment->target_vec[i]->getTypeId() == ENTITY::CONTAINER_ID)
        			{
        				ItemSlot* slot = npc->getVehicle()->GetEmptyOtsecSlot();
        				if (slot != NULL)

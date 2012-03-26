@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 Player :: Player()
 { 
     	id = g_ID_GENERATOR.getNextId(); 
-    	type_id = ENTITY::PLAYER;
+    	type_id = ENTITY::PLAYER_ID;
    	
     	npc  = NULL;
     	cursor = new Cursor(this);
@@ -682,7 +682,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
                    				}
                    				else
                    				{
-                   					npc->getVehicle()->GetDriveComplex()->setTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE);   // make it like a ai scenario (follow obj)
+                   					npc->getVehicle()->GetDriveComplex()->setTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);   // make it like a ai scenario (follow obj)
                    					npc->getVehicle()->GetDriveComplex()->update_inSpace_inStatic();
                    				}
 					}
@@ -739,7 +739,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
                    				}
                    				else
                    				{
-                   					npc->getVehicle()->GetDriveComplex()->setTarget(visible_ASTEROID_vec[ai], NAVIGATOR_ACTION::KEEP_MIDDLE);  
+                   					npc->getVehicle()->GetDriveComplex()->setTarget(visible_ASTEROID_vec[ai], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
                    					npc->getVehicle()->GetDriveComplex()->update_inSpace_inStatic();
                    				}
                    			}
@@ -778,7 +778,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
                    				}
                    				else
                    				{
-                   					npc->getVehicle()->GetDriveComplex()->setTarget(visible_SHIP_vec[ki], NAVIGATOR_ACTION::KEEP_MIDDLE);  
+                   					npc->getVehicle()->GetDriveComplex()->setTarget(visible_SHIP_vec[ki], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
                    					npc->getVehicle()->GetDriveComplex()->update_inSpace_inStatic();
                    				}
 					}
@@ -1080,7 +1080,7 @@ void Player :: runSession(GameTimer* TIMER)
        	}
 
 		
-       	if (npc->getPlaceTypeId() == ENTITY::KOSMOPORT)
+       	if (npc->getPlaceTypeId() == ENTITY::KOSMOPORT_ID)
        	{
         	this->kosmoport();
        	} 

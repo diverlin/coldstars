@@ -33,7 +33,7 @@ void GuiVehicle :: update()
 	Vehicle* vehicle = player->getNpc()->getScanTarget();
 
 	Store* store = NULL;
-	if (player->getNpc()->getPlaceTypeId() == ENTITY::KOSMOPORT)
+	if (player->getNpc()->getPlaceTypeId() == ENTITY::KOSMOPORT_ID)
 	{
 		store = ((Kosmoport*)player->getNpc()->getLand())->getStore();
 	}
