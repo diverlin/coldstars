@@ -70,7 +70,7 @@ GuiKosmoport :: GuiKosmoport(Player* player)
     	button_common_pList.push_back(goverment_screen_button);
 
     	repair_button = new Button(texOb_button, 
-    	    			   REPAIR_BUTTON_ID,
+    	    			   GUI::BUTTON::GETREPAIR_ID,
     				   SCREEN_WIDTH_MIN - 1 * (INTERFACE_ICON_SIZE + 5),
     				   SCREEN_HEIGHT_MIN - 2*INTERFACE_ICON_SIZE, 
     				   INTERFACE_ICON_SIZE,  
@@ -79,7 +79,7 @@ GuiKosmoport :: GuiKosmoport(Player* player)
     	button_angar_pList.push_back(repair_button);
     				   
     	fuel_button   = new Button(texOb_button,
-    	 			   FUEL_BUTTON_ID,
+    	 			   GUI::BUTTON::GETFUEL_ID,
     	 			   SCREEN_WIDTH_MIN - 1 * (INTERFACE_ICON_SIZE + 5),
     	 			   SCREEN_HEIGHT_MIN - 3*INTERFACE_ICON_SIZE, 
     	 			   INTERFACE_ICON_SIZE,  
@@ -88,7 +88,7 @@ GuiKosmoport :: GuiKosmoport(Player* player)
     	button_angar_pList.push_back(fuel_button);
     	 			   
     	launch_button = new Button(texOb_button, 
-    				   LAUNCH_BUTTON_ID,
+    				   GUI::BUTTON::GETLAUNCH_ID,
     				   SCREEN_WIDTH_MIN - 1 * (INTERFACE_ICON_SIZE + 5), 
     				   SCREEN_HEIGHT_MIN - 4*INTERFACE_ICON_SIZE, 
     				   INTERFACE_ICON_SIZE,  
@@ -151,15 +151,15 @@ void GuiKosmoport :: mouseInteraction()
        		        	button_angar_pList[i]->setShowInfoFlag(true);
        				if (lmb == true)
        				{	
-		   			if (button_angar_pList[i]->getSubTypeId() == REPAIR_BUTTON_ID)
+		   			if (button_angar_pList[i]->getSubTypeId() == GUI::BUTTON::GETREPAIR_ID)
 		   			{
 		   				player->getNpc()->getVehicle()->SetMaxArmor(); 
 		   			}
-		   			if (button_angar_pList[i]->getSubTypeId() == FUEL_BUTTON_ID)
+		   			if (button_angar_pList[i]->getSubTypeId() == GUI::BUTTON::GETFUEL_ID)
 		   			{
 		   		        	player->getNpc()->getVehicle()->SetMaxFuel();
 		   			}
-		   			if (button_angar_pList[i]->getSubTypeId() == LAUNCH_BUTTON_ID)
+		   			if (button_angar_pList[i]->getSubTypeId() == GUI::BUTTON::GETLAUNCH_ID)
 		   			{
        						player->getNpc()->getVehicle()->LaunchingEvent();
        			   		}
