@@ -102,10 +102,10 @@ bool Turrel :: fireEvent(bool show_effect)
 
 			switch(target->getTypeId())
 			{
-				case SHIP_ID:      { ((Vehicle*)target)->hit(slot->getLazerEquipment()->getDamage(), show_effect);   return true; break; }
-       				case ASTEROID_ID:  { ((Asteroid*)target)->hit(slot->getLazerEquipment()->getDamage(), show_effect);  return true; break; }
-				case MINERAL_ID:   { ((Mineral*)target)->hit(slot->getLazerEquipment()->getDamage(), show_effect);   return true; break; }
-				case CONTAINER_ID: { ((Container*)target)->hit(slot->getLazerEquipment()->getDamage(), show_effect); return true; break; }
+				case ENTITY::SHIP:      { ((Vehicle*)target)->hit(slot->getLazerEquipment()->getDamage(), show_effect);   return true; break; }
+       				case ENTITY::ASTEROID:  { ((Asteroid*)target)->hit(slot->getLazerEquipment()->getDamage(), show_effect);  return true; break; }
+				case ENTITY::MINERAL:   { ((Mineral*)target)->hit(slot->getLazerEquipment()->getDamage(), show_effect);   return true; break; }
+				case ENTITY::CONTAINER: { ((Container*)target)->hit(slot->getLazerEquipment()->getDamage(), show_effect); return true; break; }
 				case BOMB_ID:      { ((Container*)target)->hit(slot->getLazerEquipment()->getDamage(), show_effect);      return true; break; }
        			}
        			

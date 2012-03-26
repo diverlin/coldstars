@@ -73,7 +73,7 @@ Container* getNewContainer()
 {
         IdData data_id;
         data_id.id = g_ID_GENERATOR.getNextId(); 
-        data_id.type_id = CONTAINER_ID;
+        data_id.type_id = ENTITY::CONTAINER;
         
         LifeData data_life;
         data_life.armor = getRandInt(1,6);

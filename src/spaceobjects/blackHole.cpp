@@ -64,7 +64,7 @@ BlackHole* getNewBlackHole()
 {
         IdData data_id;
         data_id.id         = g_ID_GENERATOR.getNextId();
-    	data_id.type_id    = BLACKHOLE_ID;
+    	data_id.type_id    = ENTITY::BLACKHOLE;
     	//data_id.subtype_id = ; 
         
         LifeData data_life;

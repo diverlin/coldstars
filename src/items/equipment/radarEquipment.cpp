@@ -85,7 +85,7 @@ std::string RadarEquipment :: getRadiusStr()
 RadarEquipment* getNewRadarEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
-       		race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+       		race_id = RACE::R0; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
     	if (revision_id == -1)
        		revision_id = TECH_LEVEL_0_ID; 
@@ -112,7 +112,7 @@ RadarEquipment* getNewRadarEquipment(int race_id, int revision_id)
                         
         radar_equipment->setIdData(data_id);  
         radar_equipment->setTextureOb(texOb_item);    	
-        radar_equipment->setFunctionalSlotSubTypeId(RADAR_SLOT_ID);
+        radar_equipment->setFunctionalSlotSubTypeId(SLOT::RADAR);
         radar_equipment->setItemCommonData(common_data);
         
  

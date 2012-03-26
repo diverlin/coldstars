@@ -332,7 +332,7 @@ bool ItemSlot :: isStarSystemOk(BaseGameEntity* _target) const
 
 bool ItemSlot :: isDistanceOk(BaseGameEntity* _target) const
 {
-	if (_target->getTypeId() == STARSYSTEM_ID)
+	if (_target->getTypeId() == ENTITY::STARSYSTEM)
 	{
 		return true;
 	}

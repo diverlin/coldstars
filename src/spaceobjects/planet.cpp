@@ -38,7 +38,7 @@ void Planet :: createLand()
 {
       	if (population > 0) 
       	{ 
-      		land = new Kosmoport(RACE_0_ID); 
+      		land = new Kosmoport(RACE::R0); 
       	}
         else
         { 
@@ -92,7 +92,7 @@ Planet* getNewPlanet(int orbit_radius)
 {
 	IdData data_id;
 	data_id.id         = g_ID_GENERATOR.getNextId();
-      	data_id.type_id    = PLANET_ID;
+      	data_id.type_id    = ENTITY::PLANET;
       	data_id.subtype_id = KOSMOPORT_ID;
         
         LifeData data_life;
@@ -112,7 +112,7 @@ Planet* getNewPlanet(int orbit_radius)
         
         unsigned long int population = getRandInt(1000, 4000);
         
-        Planet* planet = new Planet(RACE_0_ID, population);
+        Planet* planet = new Planet(RACE::R0, population);
         planet->setPlanetData(planet_data);
 	planet->setTextureOb(texOb);
 	planet->setIdData(data_id);

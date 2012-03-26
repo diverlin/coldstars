@@ -91,7 +91,7 @@ void Galaxy :: update_s(int time)
 
 StarSystem* generateEntireStarSystem()
 {  
-        StarSystem* starsystem = new StarSystem(RACE_0_ID);   
+        StarSystem* starsystem = new StarSystem(RACE::R0);   
         
         vec2f _center(getRandInt(MAP_OFFSET_X, SCREEN_WIDTH_MIN - 2*MAP_OFFSET_X), getRandInt(MAP_OFFSET_Y, SCREEN_HEIGHT_MIN - 2*MAP_OFFSET_Y) );			 
         starsystem->setPosition(_center);
@@ -175,7 +175,7 @@ void generateNumFriendlyNPC(StarSystem* starsystem, int ship_per_system)
 
     	for (int i=0; i<ship_per_system; i++)
     	{     
-        	if (npc_race_id != RACE_4_ID)
+        	if (npc_race_id != RACE::R4)
            		npc_subtype_id = SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
         	else
            		npc_subtype_id = RACE4_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE4_ALLOWED_SUBTYPE_LIST.size())];

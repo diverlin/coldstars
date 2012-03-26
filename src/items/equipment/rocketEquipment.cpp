@@ -149,7 +149,7 @@ void RocketEquipment :: fireEvent()
 RocketEquipment* getNewRocketEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
-       		race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+       		race_id = RACE::R0; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
     	if (revision_id == -1)
        		revision_id = TECH_LEVEL_0_ID; 
@@ -180,7 +180,7 @@ RocketEquipment* getNewRocketEquipment(int race_id, int revision_id)
 
         rocket_equipment->setIdData(data_id);  
         rocket_equipment->setTextureOb(texOb_item);    	
-        rocket_equipment->setFunctionalSlotSubTypeId(WEAPON_SLOT_ID);
+        rocket_equipment->setFunctionalSlotSubTypeId(SLOT::WEAPON);
         rocket_equipment->setItemCommonData(common_data);
                 
         rocket_equipment->updatePropetries();

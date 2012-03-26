@@ -69,7 +69,7 @@ void  DriveComplex :: resetTarget()
     		
 	target_distance = 0.0;
 	target_offset.set(0, 0);
-	action_id = NONE_NAVIGATOR_ACTION_ID;
+	action_id = NAVIGATOR_ACTION::NONE;
 	
 	direction_list_END = true;
 }
@@ -100,7 +100,7 @@ void DriveComplex :: defineDistance(int _action_id)
     	
     	switch(action_id)
     	{	
-    		case DOCKING_NAVIGATOR_ACTION_ID:
+    		case NAVIGATOR_ACTION::DOCKING:
     		{
     			target_distance = target->getCollisionRadius()/4;
     			target_offset = getRandVec(target->getCollisionRadius()/15, target->getCollisionRadius()/10); 
@@ -108,7 +108,7 @@ void DriveComplex :: defineDistance(int _action_id)
     			break;   
     		}
     		
-    		case COLLECTING_NAVIGATOR_ACTION_ID:
+    		case NAVIGATOR_ACTION::COLLECTING:
     		{
     		    	target_distance = target->getCollisionRadius()*1.2;
     			target_offset = getRandVec(target->getCollisionRadius()/10, target->getCollisionRadius()/5); 
@@ -116,7 +116,7 @@ void DriveComplex :: defineDistance(int _action_id)
     			break;    		
     		}
     		
-    		case FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID:
+    		case NAVIGATOR_ACTION::KEEP_CLOSE:
     		{
     		    	target_distance = target->getCollisionRadius()*1.2;
     			target_offset = getRandVec(target->getCollisionRadius()/10, target->getCollisionRadius()/5); 
@@ -124,7 +124,7 @@ void DriveComplex :: defineDistance(int _action_id)
     			break;    		
     		}
 
-    		case FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID:
+    		case NAVIGATOR_ACTION::KEEP_MIDDLE:
     		{
     		    	target_distance = target->getCollisionRadius()*2.5;
     			target_offset = getRandVec(target->getCollisionRadius()/10, target->getCollisionRadius()/5); 
@@ -132,7 +132,7 @@ void DriveComplex :: defineDistance(int _action_id)
     			break;    		
     		}
     		
-    		case FOLLOWING_FAR_NAVIGATOR_ACTION_ID:
+    		case NAVIGATOR_ACTION::KEEP_FAR:
     		{
     		    	target_distance = target->getCollisionRadius()*4;
     			target_offset = getRandVec(target->getCollisionRadius()/10, target->getCollisionRadius()/5); 
@@ -178,32 +178,32 @@ bool DriveComplex :: updateTargetCoord()
 {		
 	switch(target->getTypeId())
 	{
-    		case STARSYSTEM_ID:
+    		case ENTITY::STARSYSTEM:
     		{
     	 	    	target_pos.set(800, 800);  // get correct coords
     			target_distance = 100;  // ??      		
         		return false; break;        			
 		}
 
-    		case PLANET_ID:
+    		case ENTITY::PLANET:
     		{ 
         		target_pos = ((Planet*)target)->getOrbit()->getNextTurnPosition() + target_offset;         	
 		       	return true; break;		       	
     		} 
 
-    		case ASTEROID_ID:
+    		case ENTITY::ASTEROID:
     		{ 
         		target_pos = ((Asteroid*)target)->getOrbit()->getNextTurnPosition() + target_offset;         	
         		return true; break;
     		} 
     	     
-    		case SHIP_ID:
+    		case ENTITY::SHIP:
     		{ 
 			target_pos = target->GetPoints().getCenter() + target_offset;  
         		return true; break;    
     		}      
     		
-    		case SPACESTATION_ID:
+    		case ENTITY::SPACESTATION:
     		{ 
 			target_pos = target->GetPoints().getCenter() + target_offset;  
         		return true; break;    
@@ -230,8 +230,8 @@ bool DriveComplex :: getDockingPermission()
 {
 	switch(target->getTypeId())
 	{
-		case PLANET_ID:       { return ((Planet*)target)->getLand()->getPermissionToLand(); break; }
-		case SPACESTATION_ID: { return ((SpaceStation*)target)->getLand()->getPermissionToLand(); break; }
+		case ENTITY::PLANET:       { return ((Planet*)target)->getLand()->getPermissionToLand(); break; }
+		case ENTITY::SPACESTATION: { return ((SpaceStation*)target)->getLand()->getPermissionToLand(); break; }
 		//case SHIP_ID:   { return targetOb->getVehicle()->getPermissionToLand(); break; }
 	}
 	
