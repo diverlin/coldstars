@@ -110,7 +110,7 @@ ScanerEquipment* getNewScanerEquipment(int race_id, int revision_id)
         
         scaner_equipment->setIdData(data_id);  
         scaner_equipment->setTextureOb(texOb_item);    	
-        scaner_equipment->setFunctionalSlotSubTypeId(SLOT::SCANER);
+        scaner_equipment->setFunctionalSlotSubTypeId(SLOT::SCANER_ID);
         scaner_equipment->setItemCommonData(common_data);
            
     	scaner_equipment->updatePropetries();

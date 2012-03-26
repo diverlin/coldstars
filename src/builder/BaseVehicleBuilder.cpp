@@ -60,7 +60,7 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle)
     	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID);  
 
 	ItemSlot* radar_slot = new ItemSlot();
-	radar_slot->SetSubTypeId(SLOT::RADAR);
+	radar_slot->SetSubTypeId(SLOT::RADAR_ID);
 	radar_slot->SetTextureOb(texOb_slot);
 	radar_slot->SetOwnerVehicle(vehicle);				 
 	radar_slot->setRect( vehicle->GetGuiRect().getCenter().x + 4*SHIP_SLOT_WIDTH, 
@@ -70,7 +70,7 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle)
 	
 	
 	ItemSlot* scaner_slot = new ItemSlot();
-	scaner_slot->SetSubTypeId(SLOT::SCANER); 
+	scaner_slot->SetSubTypeId(SLOT::SCANER_ID); 
 	scaner_slot->SetTextureOb(texOb_slot);
 	scaner_slot->SetOwnerVehicle(vehicle);
 	scaner_slot->setRect(  vehicle->GetGuiRect().getCenter().x + 4*SHIP_SLOT_WIDTH, 
@@ -80,7 +80,7 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle)
 	
 	
 	ItemSlot* energizer_slot = new ItemSlot();
-	energizer_slot->SetSubTypeId(SLOT::ENERGIZER); 
+	energizer_slot->SetSubTypeId(SLOT::ENERGIZER_ID); 
 	energizer_slot->SetTextureOb(texOb_slot);
 	energizer_slot->SetOwnerVehicle(vehicle);
 	energizer_slot->setRect(  vehicle->GetGuiRect().getCenter().x - 2*SHIP_SLOT_WIDTH, 
@@ -92,7 +92,7 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle)
 	if (vehicle->data_korpus.inhibit_GRAPPLE == false)
 	{
 		ItemSlot* grapple_slot = new ItemSlot();
-		grapple_slot->SetSubTypeId(SLOT::GRAPPLE);
+		grapple_slot->SetSubTypeId(SLOT::GRAPPLE_ID);
 		grapple_slot->SetTextureOb(texOb_slot);
 		grapple_slot->SetOwnerVehicle(vehicle);
 		grapple_slot->setRect(  vehicle->GetGuiRect().getCenter().x - 3*SHIP_SLOT_WIDTH, 
@@ -104,7 +104,7 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle)
     	
 	
 	ItemSlot* droid_slot = new ItemSlot();
-	droid_slot->SetSubTypeId(SLOT::DROID);
+	droid_slot->SetSubTypeId(SLOT::DROID_ID);
 	droid_slot->SetTextureOb(texOb_slot);
 	droid_slot->SetOwnerVehicle(vehicle);			    
 	droid_slot->setRect(  vehicle->GetGuiRect().getCenter().x - 1*SHIP_SLOT_WIDTH, 
@@ -114,7 +114,7 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle)
     	
     	
 	ItemSlot* freezer_slot     = new ItemSlot();
-	freezer_slot->SetSubTypeId(SLOT::FREEZER);
+	freezer_slot->SetSubTypeId(SLOT::FREEZER_ID);
 	freezer_slot->SetTextureOb(texOb_slot);
 	freezer_slot->SetOwnerVehicle(vehicle);			    
 	freezer_slot->setRect( vehicle->GetGuiRect().getCenter().x - 1*SHIP_SLOT_WIDTH, 

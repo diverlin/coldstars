@@ -109,7 +109,7 @@ ProtectorEquipment* getNewProtectorEquipment(int race_id, int revision_id)
 
         protector_equipment->setIdData(data_id);  
         protector_equipment->setTextureOb(texOb_item);    	
-        protector_equipment->setFunctionalSlotSubTypeId(SLOT::PROTECTOR);
+        protector_equipment->setFunctionalSlotSubTypeId(SLOT::PROTECTOR_ID);
         protector_equipment->setItemCommonData(common_data);
         
         protector_equipment->updatePropetries();

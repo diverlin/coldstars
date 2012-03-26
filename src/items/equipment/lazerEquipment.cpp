@@ -165,7 +165,7 @@ LazerEquipment* getNewLazerEquipment(int race_id, int revision_id)
                                                              
         lazer_equipment->setIdData(data_id);  
         lazer_equipment->setTextureOb(texOb_item);    	
-        lazer_equipment->setFunctionalSlotSubTypeId(SLOT::WEAPON);
+        lazer_equipment->setFunctionalSlotSubTypeId(SLOT::WEAPON_ID);
         lazer_equipment->setItemCommonData(common_data);
         
    	lazer_equipment->updatePropetries();
