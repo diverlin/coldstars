@@ -128,7 +128,7 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle)
     	for (int i = 0; i <= 10; i++)
     	{
          	ItemSlot* otsec_slot = new ItemSlot();
-         	otsec_slot->SetSubTypeId(SLOT::CARGO);
+         	otsec_slot->SetSubTypeId(SLOT::CARGO_ID);
          	otsec_slot->SetTextureOb(texOb_slot);
          	otsec_slot->SetOwnerVehicle(vehicle);
          	otsec_slot->setRect( vehicle->GetGuiRect().getCenter().x + (i-6) * SHIP_SLOT_WIDTH, 
@@ -141,7 +141,7 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle)
 
     	//////////// GATE SLOT /////////////////////////////
     	ItemSlot* gate_slot = new ItemSlot();
-    	gate_slot->SetSubTypeId(SLOT::GATE);
+    	gate_slot->SetSubTypeId(SLOT::GATE_ID);
     	gate_slot->SetTextureOb(texOb_slot);
         gate_slot->SetOwnerVehicle(vehicle);    			     
     	gate_slot->setRect(  vehicle->GetGuiRect().getCenter().x - 5*SHIP_SLOT_WIDTH, 

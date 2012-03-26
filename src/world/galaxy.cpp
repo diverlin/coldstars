@@ -211,7 +211,7 @@ void generateNumEnemyNPC(StarSystem* starsystem, int ship_per_system)
     	for (int i=0; i<ship_per_system; i++)
     	{     
        		//npc_subtype_id = SHIP_SUBTYPE_LIST[getRandInt(0, RACES_EVIL_LIST.size())];
-                npc_subtype_id = CLASS::WARRIOR;
+                npc_subtype_id = CLASS::WARRIOR_ID;
 
         	Npc* npc = getNewNpc(npc_race_id, npc_subtype_id);
 
@@ -248,7 +248,7 @@ void generateSpaceStations(StarSystem* starsystem, int spacestation_per_system)
     	for (int i=0; i<spacestation_per_system; i++)
     	{     
        		//npc_subtype_id = SHIP_SUBTYPE_LIST[getRandInt(0, RACES_EVIL_LIST.size())];
-                npc_subtype_id = CLASS::WARRIOR;
+                npc_subtype_id = CLASS::WARRIOR_ID;
 
         	Npc* npc = getNewNpc(npc_race_id, npc_subtype_id);
 

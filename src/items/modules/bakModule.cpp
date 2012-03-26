@@ -44,8 +44,8 @@ BakModule* getNewBakModule()
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = MODULE::MODULE;
-        data_id.subtype_id = MODULE::BAK;  
+        data_id.type_id    = MODULE::MODULE_ID;
+        data_id.subtype_id = MODULE::BAK_ID;  
         
     	BakModule* bak_module = new BakModule(fuel_max_add);
         bak_module->setTextureOb(texOb);
