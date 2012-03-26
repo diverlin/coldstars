@@ -136,7 +136,7 @@ TrailEffect* createTrailEffect(int size_id, vec2f* pTo_pos, vec2f* pTo_target_po
    	int particles_num = 5;
                         
                        
-        TextureOb* texOb_particle = g_TEXTURE_MANAGER.getTexObByColorId(PARTICLE_TEXTURE_ID, RED_COLOR_ID);
+        TextureOb* texOb_particle = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, RED_COLOR_ID);
    	TrailEffect* drive_trail = new TrailEffect(pTo_pos, pTo_target_pos);
         
         drive_trail->setTextureOb(texOb_particle);                                 

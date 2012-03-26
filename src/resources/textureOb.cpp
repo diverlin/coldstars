@@ -58,60 +58,58 @@ TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, std::ve
 
 	switch(type_id)
 	{
-    		case SLOT_TEXTURE_ID:   { slotArgManager(pTo_arg);   break; }
-    		case TURREL_TEXTURE_ID: { turrelArgManager(pTo_arg); break; }
+    		case TEXTURE::SLOT_ID:   { slotArgManager(pTo_arg);   break; }
+    		case TEXTURE::TURREL_ID: { turrelArgManager(pTo_arg); break; }
 
-    		case NEBULA_TEXTURE_ID: { nebulaArgManager(pTo_arg); break; }          
-    		case STAR_TEXTURE_ID:   { starArgManager(pTo_arg); break; } 
- 		case PLANET_TEXTURE_ID: { planetArgManager(pTo_arg); break; }
+    		case TEXTURE::NEBULA_BACKGROUND_ID: { nebulaArgManager(pTo_arg); break; }          
+    		case TEXTURE::STAR_ID:   { starArgManager(pTo_arg); break; } 
+ 		case TEXTURE::PLANET_ID: { planetArgManager(pTo_arg); break; }
          
-    		case ATMOSPHERE_TEXTURE_ID: { atmosphereArgManager(pTo_arg); break; }
+    		case TEXTURE::ATMOSPHERE_ID: { atmosphereArgManager(pTo_arg); break; }
  
-    		case LAND_BG_TEXTURE_ID: { landBgArgManager(pTo_arg); break; }
+    		case TEXTURE::LAND_BACKGROUND_ID: { landBgArgManager(pTo_arg); break; }
     		
     		// KOSMOPORT
-    		case ANGAR_BG_TEXTURE_ID: { angarBgArgManager(pTo_arg); break; }
-   		case STORE_BG_TEXTURE_ID: { storeBgArgManager(pTo_arg); break; }
-		case SHOP_BG_TEXTURE_ID:  { shopBgArgManager(pTo_arg);  break; }
-    		case GOVERMENT_BG_TEXTURE_ID: { govermentBgArgManager(pTo_arg); break; }
-    		case FACE_TEXTURE_ID:         { loadToVRAM(); faceArgManager(pTo_arg); break; }
+    		case TEXTURE::ANGAR_BACKGROUND_ID: { angarBgArgManager(pTo_arg); break; }
+   		case TEXTURE::STORE_BACKGROUND_ID: { storeBgArgManager(pTo_arg); break; }
+		case TEXTURE::SHOP_BACKGROUND_ID:  { shopBgArgManager(pTo_arg);  break; }
+    		case TEXTURE::GOVERMENT_BACKGROUND_ID: { govermentBgArgManager(pTo_arg); break; }
+    		case TEXTURE::FACE_ID:         { loadToVRAM(); faceArgManager(pTo_arg); break; }
 
     		// other
-    		case TEXT_BACKGROUND_TEXTURE_ID: { loadToVRAM(); break; }
+    		case TEXTURE::TEXT_BACKGROUND_ID: { loadToVRAM(); break; }
     		
-    		case SPACESTATION_TEXTURE_ID:   { loadToVRAM(); spacestationArgManager(pTo_arg); break; }    	
-    		case SATELLITE_TEXTURE_ID:  { loadToVRAM(); satelliteArgManager(pTo_arg); break; }
-		case SHIP_TEXTURE_ID:     { loadToVRAM(); shipArgManager(pTo_arg); break; }
-          	case PARTICLE_TEXTURE_ID: { loadToVRAM(); particleArgManager(pTo_arg); break; }
+    		case TEXTURE::SPACESTATION_ID:   { loadToVRAM(); spacestationArgManager(pTo_arg); break; }    	
+    		case TEXTURE::SATELLITE_ID:  { loadToVRAM(); satelliteArgManager(pTo_arg); break; }
+		case TEXTURE::SHIP_ID:     { loadToVRAM(); shipArgManager(pTo_arg); break; }
+          	case TEXTURE::PARTICLE_EFFECT_ID: { loadToVRAM(); particleArgManager(pTo_arg); break; }
 
-		case DISTANTSTAR_TEXTURE_ID:   { loadToVRAM(); distStarArgManager(pTo_arg); break; }
-    		case SHIELD_EFFECT_TEXTURE_ID: { loadToVRAM(); shieldEffectArgManager(pTo_arg); break; }
+		case TEXTURE::DISTANTSTAR_ID:   { loadToVRAM(); distStarArgManager(pTo_arg); break; }
+    		case TEXTURE::SHIELD_EFFECT_ID: { loadToVRAM(); shieldEffectArgManager(pTo_arg); break; }
 
     		// ITEMS
-    		case DRIVE_ITEM_TEXTURE_ID:  { loadToVRAM(); DriveEquipmentArgManager(pTo_arg); break; }
-		case LAZER_ITEM_TEXTURE_ID:  { loadToVRAM(); LazerEquipmentArgManager(pTo_arg); break; }
-    		case ROCKET_ITEM_TEXTURE_ID: { loadToVRAM(); RocketEquipmentArgManager(pTo_arg); break; }
-    		case TORPED_ITEM_TEXTURE_ID: { loadToVRAM(); RocketEquipmentArgManager(pTo_arg); break; }
-		case PROTECTOR_ITEM_TEXTURE_ID: { loadToVRAM(); ProtectorEquipmentArgManager(pTo_arg); break; }
-   		case DROID_ITEM_TEXTURE_ID:  { loadToVRAM(); DroidEquipmentArgManager(pTo_arg); break; }
-		case GRAPPLE_ITEM_TEXTURE_ID: { loadToVRAM(); GrappleEquipmentArgManager(pTo_arg); break; }
-		case BAK_ITEM_TEXTURE_ID:     { loadToVRAM(); BakEquipmentArgManager(pTo_arg); break; }
-		case ENERGYBLOCK_ITEM_TEXTURE_ID: { loadToVRAM(); energyBlockItemArgManager(pTo_arg); break; }
-     		case FREEZER_ITEM_TEXTURE_ID: { loadToVRAM(); FreezerEquipmentArgManager(pTo_arg);  break; }
-    		case RADAR_ITEM_TEXTURE_ID:   { loadToVRAM(); RadarEquipmentArgManager(pTo_arg); break; }
-		case SCANER_ITEM_TEXTURE_ID:  { loadToVRAM(); ScanerEquipmentArgManager(pTo_arg); break; }
+    		case TEXTURE::DRIVE_EQUIPMENT_ID:  { loadToVRAM(); DriveEquipmentArgManager(pTo_arg); break; }
+		case TEXTURE::LAZER_EQUIPMENT_ID:  { loadToVRAM(); LazerEquipmentArgManager(pTo_arg); break; }
+    		case TEXTURE::ROCKET_EQUIPMENT_ID: { loadToVRAM(); RocketEquipmentArgManager(pTo_arg); break; }
+		case TEXTURE::PROTECTOR_EQUIPMENT_ID: { loadToVRAM(); ProtectorEquipmentArgManager(pTo_arg); break; }
+   		case TEXTURE::DROID_EQUIPMENT_ID:  { loadToVRAM(); DroidEquipmentArgManager(pTo_arg); break; }
+		case TEXTURE::GRAPPLE_EQUIPMENT_ID: { loadToVRAM(); GrappleEquipmentArgManager(pTo_arg); break; }
+		case TEXTURE::BAK_EQUIPMENT_ID:     { loadToVRAM(); BakEquipmentArgManager(pTo_arg); break; }
+		case TEXTURE::ENERGIZER_EQUIPMENT_ID: { loadToVRAM(); energyBlockItemArgManager(pTo_arg); break; }
+     		case TEXTURE::FREEZER_EQUIPMENT_ID: { loadToVRAM(); FreezerEquipmentArgManager(pTo_arg);  break; }
+    		case TEXTURE::RADAR_EQUIPMENT_ID:   { loadToVRAM(); RadarEquipmentArgManager(pTo_arg); break; }
+		case TEXTURE::SCANER_EQUIPMENT_ID:  { loadToVRAM(); ScanerEquipmentArgManager(pTo_arg); break; }
 		
 		// BULLETS
-    		case ROCKET_BULLET_TEXTURE_ID: { loadToVRAM(); rocketBulletArgManager(pTo_arg); break; }
-    		case TORPED_BULLET_TEXTURE_ID: { loadToVRAM(); torpedBulletArgManager(pTo_arg); break; }
-    		case LAZER_EFFECT_TEXTURE_ID:  { loadToVRAM(); lazerEffectArgManager(pTo_arg); break; }
+    		case TEXTURE::ROCKET_BULLET_ID: { loadToVRAM(); rocketBulletArgManager(pTo_arg); break; }
+    		case TEXTURE::LAZER_EFFECT_ID:  { loadToVRAM(); lazerEffectArgManager(pTo_arg); break; }
 
 		// ASTEROIDS/MINERALS
-    		case ASTEROID_TEXTURE_ID: { loadToVRAM(); asteroidArgManager(pTo_arg); break; }
-		case MINERAL_TEXTURE_ID:  { loadToVRAM(); mineralArgManager(pTo_arg); break; }
-    		case CONTAINER_TEXTURE_ID: { loadToVRAM(); containerArgManager(pTo_arg); break; }
-		case BOMB_TEXTURE_ID: { loadToVRAM(); bombArgManager(pTo_arg); break; }
-		case BLACKHOLE_TEXTURE_ID: { loadToVRAM(); blackholeArgManager(pTo_arg); break; }
+    		case TEXTURE::ASTEROID_ID: { loadToVRAM(); asteroidArgManager(pTo_arg); break; }
+		case TEXTURE::MINERAL_ID:  { loadToVRAM(); mineralArgManager(pTo_arg); break; }
+    		case TEXTURE::CONTAINER_ID: { loadToVRAM(); containerArgManager(pTo_arg); break; }
+		case TEXTURE::BOMB_ID: { loadToVRAM(); bombArgManager(pTo_arg); break; }
+		case TEXTURE::BLACKHOLE_ID: { loadToVRAM(); blackholeArgManager(pTo_arg); break; }
 	}
 }  
 

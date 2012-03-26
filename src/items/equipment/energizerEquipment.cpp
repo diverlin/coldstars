@@ -105,7 +105,7 @@ EnergizerEquipment* getNewEnergizerEquipment(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(ENERGYBLOCK_ITEM_TEXTURE_ID);   
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::ENERGIZER_EQUIPMENT_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(ENERGIZER_ITEM_TEXTURE_ID, revision_id)
 
     	int energy_max_orig  = getRandInt(ENERGIZER_ENERGY_MIN, ENERGIZER_ENERGY_MAX);

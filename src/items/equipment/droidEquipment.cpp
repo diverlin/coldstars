@@ -90,8 +90,8 @@ DroidEquipment* getNewDroidEquipment(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(DROID_ITEM_TEXTURE_ID);    
-    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(DROID_ITEM_TEXTURE_ID, revision_id)
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::DROID_EQUIPMENT_ID);    
+    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::DROID_EQUIPMENT_ID, revision_id)
 
     	int repair_orig     = getRandInt(DROID_REPAIR_MIN, DROID_REPAIR_MAX);
     	

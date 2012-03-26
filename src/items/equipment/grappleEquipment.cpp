@@ -235,8 +235,8 @@ GrappleEquipment* getNewGrappleEquipment(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(GRAPPLE_ITEM_TEXTURE_ID);   
-    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(GRAPPLE_ITEM_TEXTURE_ID, revision_id) 
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::GRAPPLE_EQUIPMENT_ID);   
+    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::GRAPPLE_EQUIPMENT_ID, revision_id) 
 
     	int strength_orig   = getRandInt(GRAPPLE_STRENGTH_MIN, GRAPPLE_STRENGTH_MAX);
     	int radius_orig     = getRandInt(GRAPPLE_RADIUS_MIN, GRAPPLE_RADIUS_MAX);

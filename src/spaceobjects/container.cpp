@@ -22,7 +22,7 @@ Container :: Container()
 {
     	mass = 1;
 
-    	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID);
+    	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SLOT_ID);
     	item_slot = new ItemSlot();
     	item_slot->SetSubTypeId(SLOT::CARGO_ID);
     	item_slot->SetTextureOb(texOb_slot);
@@ -82,7 +82,7 @@ Container* getNewContainer()
         vec3f d_angle;
         d_angle.z      = -getRandInt(10, 100)*0.01; 
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(CONTAINER_TEXTURE_ID); 
+	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::CONTAINER_ID); 
 	
 	Container* container = new Container();
 	container->setIdData(data_id);

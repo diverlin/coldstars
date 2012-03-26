@@ -24,8 +24,8 @@ LazerEquipment :: LazerEquipment(int damage_orig,
    	this->radius_orig = radius_orig;
 
    	//TextureOb lazerEffect_texOb   = TEXTURE_MANAGER.returnLazerEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id);
-   	texOb_turrel	  = g_TEXTURE_MANAGER.getRandomTexOb(TURREL_TEXTURE_ID); 
-   	texOb_lazerEffect = g_TEXTURE_MANAGER.getRandomTexOb(LAZER_EFFECT_TEXTURE_ID);
+   	texOb_turrel	  = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::TURREL_ID); 
+   	texOb_lazerEffect = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::LAZER_EFFECT_ID);
 }
 
 LazerEquipment :: ~LazerEquipment() /* virtual */
@@ -143,8 +143,8 @@ LazerEquipment* getNewLazerEquipment(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(LAZER_ITEM_TEXTURE_ID, revision_id)
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(LAZER_ITEM_TEXTURE_ID);     
+    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::LAZER_EQUIPMENT_ID, revision_id)
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::LAZER_EQUIPMENT_ID);     
 
     	int damage_orig     = getRandInt(LAZER_DAMAGE_MIN, LAZER_DAMAGE_MAX);
     	int radius_orig     = getRandInt(LAZER_RADIUS_MIN, LAZER_RADIUS_MAX);

@@ -46,8 +46,8 @@ ItemSlot& WeaponComplex :: GetWeaponSlot5() { return weapon_slot5; }
 void WeaponComplex :: PostCreateInit(int weapon_num, bool draw_turrels)
 {
 	this->weapon_num = weapon_num;
-	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID); 
-	TextureOb* texOb_turrel = g_TEXTURE_MANAGER.getRandomTexOb(TURREL_TEXTURE_ID); 
+	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SLOT_ID); 
+	TextureOb* texOb_turrel = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::TURREL_ID); 
     	
         if (weapon_num >= 1)
     	{  

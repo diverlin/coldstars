@@ -73,7 +73,7 @@ BlackHole* getNewBlackHole()
     	data_life.armor      = 100000;
         data_life.dying_time = 30;        
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(BLACKHOLE_TEXTURE_ID); 
+	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::BLACKHOLE_ID); 
 	BlackHole* blackhole = new BlackHole();
 	blackhole->setIdData(data_id);
 	blackhole->setLifeData(data_life);
