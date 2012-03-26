@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 Player :: Player()
 { 
     	id = g_ID_GENERATOR.getNextId(); 
-    	type_id = PLAYER_ID;
+    	type_id = ENTITY::PLAYER;
    	
     	npc  = NULL;
     	cursor = new Cursor(this);
@@ -1080,7 +1080,7 @@ void Player :: runSession(GameTimer* TIMER)
        	}
 
 		
-       	if (npc->getPlaceTypeId() == KOSMOPORT_ID)
+       	if (npc->getPlaceTypeId() == ENTITY::KOSMOPORT)
        	{
         	this->kosmoport();
        	} 

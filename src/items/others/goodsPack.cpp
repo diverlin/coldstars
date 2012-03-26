@@ -81,7 +81,7 @@ GoodsPack* getNewGoodsPack(unsigned int _subtype_id)
 {
         IdData data_id;
         data_id.id = g_ID_GENERATOR.getNextId(); 
-        data_id.type_id = GOODS_ID;
+        data_id.type_id = ENTITY::GOODS;
         data_id.subtype_id = _subtype_id;
                 
         LifeData data_life;

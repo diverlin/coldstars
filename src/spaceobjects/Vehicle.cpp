@@ -151,7 +151,7 @@ ItemSlot* Vehicle::GetCargoSlotWithGoods(int requested_goods_subtype_id)
       	{
           	if (slot_otsec_vec[i]->getEquipedStatus() == true)
           	{
-          		if (slot_otsec_vec[i]->getItem()->getTypeId() == GOODS_ID)
+          		if (slot_otsec_vec[i]->getItem()->getTypeId() == ENTITY::GOODS)
           		{
           			if (slot_otsec_vec[i]->getItem()->getSubTypeId() == requested_goods_subtype_id)
           			{
