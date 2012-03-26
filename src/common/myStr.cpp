@@ -21,19 +21,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 std :: string returnRaceStringByRaceId(int id)  // replace by generator class
 {
-     	if (id == RACE::R0)
+     	if (id == RACE::R0_ID)
         	return "RACE0";
-     	if (id == RACE::R1)
+     	if (id == RACE::R1_ID)
         	return "RACE1";
-     	if (id == RACE::R2)
+     	if (id == RACE::R2_ID)
         	return "RACE2";
-     	if (id == RACE::R3)
+     	if (id == RACE::R3_ID)
         	return "RACE3";
-     	if (id == RACE::R4)
+     	if (id == RACE::R4_ID)
         	return "RACE4";
-     	if (id == RACE::R6)
+     	if (id == RACE::R6_ID)
         	return "RACE6";
-     	if (id == RACE::R7)
+     	if (id == RACE::R7_ID)
         	return "RACE7";        
      	else
         	return "____";   

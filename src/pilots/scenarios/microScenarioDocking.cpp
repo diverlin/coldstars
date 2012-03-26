@@ -26,7 +26,7 @@ MicroScenarioDocking :: ~MicroScenarioDocking()
 		
 void MicroScenarioDocking :: enter(Npc* npc) const
 {	
-	npc->getVehicle()->GetDriveComplex()->setTarget(npc->getStateMachine()->getCurrentMicroTask()->getTarget(), NAVIGATOR_ACTION::KEEP_CLOSE);
+	npc->getVehicle()->GetDriveComplex()->setTarget(npc->getStateMachine()->getCurrentMicroTask()->getTarget(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
 
 	npc->getVehicle()->GetDriveComplex()->update_inSpace_inStatic();
 	printf("npc_id = %i, is going to MicroScenarioDocking to ob id = %i\n", npc->getId(), npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getId());

@@ -108,7 +108,7 @@ Star* getNewStar()
 {
 	IdData data_id;
 	data_id.id         = g_ID_GENERATOR.getNextId();
-      	data_id.type_id    = ENTITY::STAR;
+      	data_id.type_id    = ENTITY::STAR_ID;
         
         LifeData data_life;
 

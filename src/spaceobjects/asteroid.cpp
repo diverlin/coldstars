@@ -94,7 +94,7 @@ Asteroid* getNewAsteroid()
 {
 	IdData data_id;
 	data_id.id      = g_ID_GENERATOR.getNextId();
-      	data_id.type_id = ENTITY::ASTEROID;
+      	data_id.type_id = ENTITY::ASTEROID_ID;
       	
 	LifeData data_life;   
 	data_life.armor      = 10;

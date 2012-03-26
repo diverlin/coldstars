@@ -33,7 +33,7 @@ GoodsPack :: ~GoodsPack()  /* virtual */
         	
 void GoodsPack :: increase(unsigned int _ammount)
 {
-	if (getSubTypeId() == ENTITY::MINERAL)
+	if (getSubTypeId() == ENTITY::MINERAL_ID)
 	{
 		mineral += _ammount;
 		mass = mineral;
@@ -42,7 +42,7 @@ void GoodsPack :: increase(unsigned int _ammount)
     
 void GoodsPack :: decrease(unsigned int _ammount)
 {
-	if (getSubTypeId() == ENTITY::MINERAL)
+	if (getSubTypeId() == ENTITY::MINERAL_ID)
 	{
 		mineral -= _ammount;
 		mass = mineral;
@@ -56,7 +56,7 @@ void GoodsPack :: updateInfo()
 	
     	info.addTitleStr("GOODS");
     	
-    	if (getSubTypeId() == ENTITY::MINERAL)
+    	if (getSubTypeId() == ENTITY::MINERAL_ID)
     	{
     		info.addNameStr("mineral:");   info.addValueStr( int2str(mineral) );
     		info.addNameStr("mass:");   info.addValueStr( int2str(mass) );
@@ -81,7 +81,7 @@ GoodsPack* getNewGoodsPack(unsigned int _subtype_id)
 {
         IdData data_id;
         data_id.id = g_ID_GENERATOR.getNextId(); 
-        data_id.type_id = ENTITY::GOODS;
+        data_id.type_id = ENTITY::GOODS_ID;
         data_id.subtype_id = _subtype_id;
                 
         LifeData data_life;

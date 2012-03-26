@@ -55,7 +55,7 @@ Player* getNewPlayer(Galaxy* galaxy)
 {
 	Player* player   = new Player();
 
-      	int prace_id = RACE::R7;
+      	int prace_id = RACE::R7_ID;
       	int psubtype_id = CLASS::WARRIOR_ID;
       	int size_id = 5;
       	int weapons_num = 5;
@@ -82,22 +82,22 @@ Player* getNewPlayer(Galaxy* galaxy)
 
 void prepearGlobalVecs()
 {
-    	RACES_ALL_LIST.push_back(RACE::R0);
-    	RACES_ALL_LIST.push_back(RACE::R1);
-    	RACES_ALL_LIST.push_back(RACE::R2);
-    	RACES_ALL_LIST.push_back(RACE::R3);
-    	RACES_ALL_LIST.push_back(RACE::R4);
-   	RACES_ALL_LIST.push_back(RACE::R6);
-    	RACES_ALL_LIST.push_back(RACE::R7);
+    	RACES_ALL_LIST.push_back(RACE::R0_ID);
+    	RACES_ALL_LIST.push_back(RACE::R1_ID);
+    	RACES_ALL_LIST.push_back(RACE::R2_ID);
+    	RACES_ALL_LIST.push_back(RACE::R3_ID);
+    	RACES_ALL_LIST.push_back(RACE::R4_ID);
+   	RACES_ALL_LIST.push_back(RACE::R6_ID);
+    	RACES_ALL_LIST.push_back(RACE::R7_ID);
 
-    	RACES_GOOD_LIST.push_back(RACE::R0);
-    	RACES_GOOD_LIST.push_back(RACE::R1);
-   	RACES_GOOD_LIST.push_back(RACE::R2);
-    	RACES_GOOD_LIST.push_back(RACE::R3);
-    	RACES_GOOD_LIST.push_back(RACE::R4);
+    	RACES_GOOD_LIST.push_back(RACE::R0_ID);
+    	RACES_GOOD_LIST.push_back(RACE::R1_ID);
+   	RACES_GOOD_LIST.push_back(RACE::R2_ID);
+    	RACES_GOOD_LIST.push_back(RACE::R3_ID);
+    	RACES_GOOD_LIST.push_back(RACE::R4_ID);
 
-    	RACES_EVIL_LIST.push_back(RACE::R6);
-    	RACES_EVIL_LIST.push_back(RACE::R7);
+    	RACES_EVIL_LIST.push_back(RACE::R6_ID);
+    	RACES_EVIL_LIST.push_back(RACE::R7_ID);
 
     	SHIP_SUBTYPE_LIST.push_back(CLASS::RANGER_ID);
     	SHIP_SUBTYPE_LIST.push_back(CLASS::WARRIOR_ID);

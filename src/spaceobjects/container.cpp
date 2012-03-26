@@ -53,7 +53,7 @@ void Container :: renderInfo_inSpace(vec2f scroll_coords)
  /* virtual */    
 void Container :: postDeathUniqueEvent(bool show_effect)
 {
-        if (item_slot->getItem()->getTypeId() == ENTITY::BOMB)
+        if (item_slot->getItem()->getTypeId() == ENTITY::BOMB_ID)
         {
         	starsystem->bombExplosionEvent(this, show_effect);  
         }
@@ -73,7 +73,7 @@ Container* getNewContainer()
 {
         IdData data_id;
         data_id.id = g_ID_GENERATOR.getNextId(); 
-        data_id.type_id = ENTITY::CONTAINER;
+        data_id.type_id = ENTITY::CONTAINER_ID;
         
         LifeData data_life;
         data_life.armor = getRandInt(1,6);

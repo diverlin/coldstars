@@ -149,7 +149,7 @@ void RocketEquipment :: fireEvent()
 RocketEquipment* getNewRocketEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
-       		race_id = RACE::R0; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
     	if (revision_id == -1)
        		revision_id = TECHLEVEL::L0_ID; 
