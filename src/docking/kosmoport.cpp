@@ -21,13 +21,13 @@ Kosmoport :: Kosmoport(int _race_id)
 {
 	type_id = ENTITY::KOSMOPORT_ID;
 
-        TextureOb* _texOb_slot = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID);
-        TextureOb* _texOb_landingArea = g_TEXTURE_MANAGER.getRandomTexOb(LANDINGAREA_TEXTURE_ID);
+        TextureOb* _texOb_slot = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SLOT_ID);
+        TextureOb* _texOb_landingArea = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::LANDINGAREA_ID);
         
-        TextureOb* _texOb_angarBackground  = g_TEXTURE_MANAGER.getRandomTexOb(ANGAR_BG_TEXTURE_ID);   
-        TextureOb* _texOb_storeBackground  = g_TEXTURE_MANAGER.getRandomTexOb(STORE_BG_TEXTURE_ID);    
-        TextureOb* _texOb_shopBackground   = g_TEXTURE_MANAGER.getRandomTexOb(SHOP_BG_TEXTURE_ID);    
-        TextureOb* _texOb_govermentBackground = g_TEXTURE_MANAGER.getRandomTexOb(GOVERMENT_BG_TEXTURE_ID);    
+        TextureOb* _texOb_angarBackground  = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::ANGAR_BACKGROUND_ID);   
+        TextureOb* _texOb_storeBackground  = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::STORE_BACKGROUND_ID);    
+        TextureOb* _texOb_shopBackground   = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SHOP_BACKGROUND_ID);    
+        TextureOb* _texOb_govermentBackground = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::GOVERMENT_BACKGROUND_ID);    
 
         angar     = new Angar(_texOb_angarBackground, _texOb_landingArea);
         store     = new Store(_texOb_storeBackground, _texOb_slot);

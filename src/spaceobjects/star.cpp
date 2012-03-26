@@ -121,7 +121,7 @@ Star* getNewStar()
     	star_data.orbit_phi_inD = 0;
     	star_data.speed         = 1.8;
 
-    	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(STAR_TEXTURE_ID);
+    	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::STAR_ID);
     	Star* star = new Star();
     	
     	star->setPlanetData(star_data);

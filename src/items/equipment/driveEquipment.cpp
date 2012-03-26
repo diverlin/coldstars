@@ -105,8 +105,8 @@ DriveEquipment* getNewDriveEquipment(int race_id, int revision_id)
 
         int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-        TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(DRIVE_ITEM_TEXTURE_ID);   
-        //item_texOb = TEXTURE_MANAGER.returnItemTexOb(DRIVE_ITEM_TEXTURE_ID, revision_id) 
+        TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::DRIVE_EQUIPMENT_ID);   
+        //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::DRIVE_EQUIPMENT_ID, revision_id) 
 
         int speed_orig      = getRandInt(DRIVE_SPEED_MIN, DRIVE_SPEED_MAX);
         int hyper_orig      = getRandInt(DRIVE_HYPER_MIN, DRIVE_HYPER_MAX);

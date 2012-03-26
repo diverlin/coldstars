@@ -109,7 +109,7 @@ Asteroid* getNewAsteroid()
     	planet_data.orbit_phi_inD = getRandInt(0, 360);
     	planet_data.speed         = 0.1;
 
-        TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(ASTEROID_TEXTURE_ID); 
+        TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::ASTEROID_ID); 
     
         Asteroid* asteroid = new Asteroid(); 
         

@@ -25,7 +25,7 @@ DriveComplex :: DriveComplex(Vehicle* owner_vehicle)
         
 	resetTarget();
 	
-	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID); 
+	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SLOT_ID); 
 		
 	drive_slot.SetSubTypeId(SLOT::DRIVE_ID); 
 	drive_slot.SetTextureOb(texOb_slot);

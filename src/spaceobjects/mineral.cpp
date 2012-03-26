@@ -60,7 +60,7 @@ Mineral* getNewMineral()
         vec3f d_angle;
         d_angle.z      = -getRandInt(10, 100)*0.01; 
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(MINERAL_TEXTURE_ID); 
+	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::MINERAL_ID); 
 	
 	Mineral* mineral = new Mineral();
 	mineral->setIdData(data_id);

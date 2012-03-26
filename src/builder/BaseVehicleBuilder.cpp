@@ -57,7 +57,7 @@ void BaseVehicleBuilder::CreateKorpusGui(Vehicle* vehicle)
         
 void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle)
 {
-    	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID);  
+    	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SLOT_ID);  
 
 	ItemSlot* radar_slot = new ItemSlot();
 	radar_slot->SetSubTypeId(SLOT::RADAR_ID);

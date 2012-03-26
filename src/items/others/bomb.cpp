@@ -65,7 +65,7 @@ Bomb* getNewBomb()
     	data_id.type_id    = ENTITY::BOMB_ID;
     	//data_id.subtype_id = ;   
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(BOMB_TEXTURE_ID); 
+	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::BOMB_ID); 
 	
 	Bomb* bomb = new Bomb();
 	bomb->setIdData(data_id);
