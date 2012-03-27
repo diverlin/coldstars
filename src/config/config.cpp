@@ -19,8 +19,11 @@ MODERN_EFFECTS(false),
 DEBUG_MODE(false),
 
 AUTOTURN_MODE(false),
-GAMESPEED(1)
+GAMESPEED(1),
 
+SCROLL_VELOCITY_MAX(20),
+SCROLL_VELOCITY_STEP(1)
+		
 {
 	boost::property_tree::info_parser::read_info("config.info", ptree);
 
@@ -36,6 +39,9 @@ GAMESPEED(1)
 	
 	AUTOTURN_MODE = ptree.get<bool>("Gameplay.AUTOTURN_MODE");
 	GAMESPEED = ptree.get<int>("Gameplay.GAMESPEED");
+	
+	SCROLL_VELOCITY_MAX = ptree.get<int>("Control.SCROLL_VELOCITY_MAX");
+	SCROLL_VELOCITY_STEP = ptree.get<int>("Control.SCROLL_VELOCITY_STEP");
 }
 
 Config::~Config(){}

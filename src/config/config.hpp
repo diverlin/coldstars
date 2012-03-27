@@ -20,6 +20,9 @@ struct Config
 		
 		bool AUTOTURN_MODE;
 		int GAMESPEED;
+		
+		int SCROLL_VELOCITY_MAX;
+		int SCROLL_VELOCITY_STEP;
 							
 	private:
 		Config();

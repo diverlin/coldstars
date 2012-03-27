@@ -42,7 +42,8 @@ class GuiSpace;
 class GuiKosmoport;
 class GuiMap;
 
-
+#include "src/common/myVector.hpp"
+#include "src/common/gameStruct.hpp"
 #include "src/common/constants.hpp"
 #include "src/config/config.hpp"
 #include "GL/glew.h"   
@@ -57,14 +58,14 @@ class GuiMap;
 
 #include "src/common/gameTimer.hpp"
 
-#include "src/common/myVector.hpp"
+
 #include "src/common/myStr.hpp"
 
 #include "src/render/screen.hpp"
 
 #include "src/resources/objLoader.hpp"
 
-#include "src/common/gameStruct.hpp"
+//#include "src/common/gameStruct.hpp"
 #include "src/common/rand.hpp"
 #include "src/common/id.hpp"
 #include "src/common/points.hpp"

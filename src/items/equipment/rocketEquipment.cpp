@@ -31,12 +31,12 @@ RocketEquipment :: RocketEquipment(int ammo_max_orig,
                 
         data_bullet.texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::ROCKET_BULLET_ID);    
         data_bullet.damage        = damage;
-        data_bullet.armor         = ROCKET_ARMOR;
-        data_bullet.speed_init    = ROCKET_START_SPEED;
-        data_bullet.speed_max     = ROCKET_SPEED_MAX;
-        data_bullet.d_speed       = ROCKET_DELTA_SPEED;
-        data_bullet.live_time     = ROCKET_EXISTANCE_TIME;
-        data_bullet.angular_speed = ROCKET_ANGULAR_SPEED;
+        data_bullet.armor         = ENTITY::ROCKET::ARMOR;
+        data_bullet.speed_init    = ENTITY::ROCKET::START_SPEED;
+        data_bullet.speed_max     = ENTITY::ROCKET::SPEED_MAX;
+        data_bullet.d_speed       = ENTITY::ROCKET::DELTA_SPEED;
+        data_bullet.live_time     = ENTITY::ROCKET::LIFE_TIME;
+        data_bullet.angular_speed = ENTITY::ROCKET::ANGULAR_SPEED;
 }
 
 
@@ -71,14 +71,17 @@ void RocketEquipment :: updatePropetries()
 
 void RocketEquipment :: countPrice()
 {
-    	float ammo_rate     = (float)ammo_max_orig / ROCKET_AMMO_MIN;
-    	float damage_rate   = (float)damage_orig / ROCKET_DAMAGE_MIN;
-    	float radius_rate   = (float)radius_orig / ROCKET_RADIUS_MIN;
-    	float modules_num_rate   = (float)common_data.modules_num_max / ROCKET_MODULES_NUM_MAX;
+    	float ammo_rate     = (float)ammo_max_orig / EQUIPMENT::ROCKET::AMMO_MIN;
+    	float damage_rate   = (float)damage_orig / EQUIPMENT::ROCKET::DAMAGE_MIN;
+    	float radius_rate   = (float)radius_orig / EQUIPMENT::ROCKET::RADIUS_MIN;
+    	float modules_num_rate   = (float)common_data.modules_num_max / EQUIPMENT::ROCKET::MODULES_NUM_MAX;
 
-    	float effectiveness_rate = ROCKET_AMMO_WEIGHT * ammo_rate + ROCKET_DAMAGE_WEIGHT * damage_rate + ROCKET_RADIUS_WEIGHT * radius_rate + ROCKET_MODULES_NUM_WEIGHT * modules_num_rate;
+    	float effectiveness_rate = EQUIPMENT::ROCKET::AMMO_WEIGHT * ammo_rate + 
+    				   EQUIPMENT::ROCKET::DAMAGE_WEIGHT * damage_rate + 
+    				   EQUIPMENT::ROCKET::RADIUS_WEIGHT * radius_rate + 
+    				   EQUIPMENT::ROCKET::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    	float mass_rate          = (float)common_data.mass / ROCKET_MASS_MIN;
+    	float mass_rate          = (float)common_data.mass / EQUIPMENT::ROCKET::MASS_MIN;
     	float condition_rate     = (float)condition / common_data.condition_max;
 
     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
@@ -159,15 +162,15 @@ RocketEquipment* getNewRocketEquipment(int race_id, int revision_id)
     	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::ROCKET_EQUIPMENT_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::ROCKET_EQUIPMENT_ID, revision_id)   
     
-    	int ammo_max_orig = getRandInt(ROCKET_AMMO_MIN, ROCKET_AMMO_MAX);
-    	int damage_orig   = getRandInt(ROCKET_DAMAGE_MIN, ROCKET_DAMAGE_MAX);
-    	int radius_orig   = getRandInt(ROCKET_RADIUS_MIN, ROCKET_RADIUS_MAX);
+    	int ammo_max_orig = getRandInt(EQUIPMENT::ROCKET::AMMO_MIN, EQUIPMENT::ROCKET::AMMO_MAX);
+    	int damage_orig   = getRandInt(EQUIPMENT::ROCKET::DAMAGE_MIN, EQUIPMENT::ROCKET::DAMAGE_MAX);
+    	int radius_orig   = getRandInt(EQUIPMENT::ROCKET::RADIUS_MIN, EQUIPMENT::ROCKET::RADIUS_MAX);
 
 	ItemCommonData common_data;
-    	common_data.modules_num_max = getRandInt(ROCKET_MODULES_NUM_MIN, ROCKET_MODULES_NUM_MAX);
+    	common_data.modules_num_max = getRandInt(EQUIPMENT::ROCKET::MODULES_NUM_MIN, EQUIPMENT::ROCKET::MODULES_NUM_MAX);
 
-    	common_data.mass = getRandInt(ROCKET_MASS_MIN, ROCKET_MASS_MAX);
-    	common_data.condition_max = getRandInt(ROCKET_CONDITION_MIN, ROCKET_CONDITION_MAX) * tech_rate;
+    	common_data.mass = getRandInt(EQUIPMENT::ROCKET::MASS_MIN, EQUIPMENT::ROCKET::MASS_MAX);
+    	common_data.condition_max = getRandInt(EQUIPMENT::ROCKET::CONDITION_MIN, EQUIPMENT::ROCKET::CONDITION_MAX) * tech_rate;
 
     	common_data.deterioration_rate = 1;
         

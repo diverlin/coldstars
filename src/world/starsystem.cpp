@@ -587,8 +587,7 @@ void StarSystem :: restoreSceneColor()
 
 void StarSystem :: restoreDefaultColor()
 {
-	Color4f _color;
-	setColor(_color);
+	setColor(COLOR::DEFAULT);
 }
 
 

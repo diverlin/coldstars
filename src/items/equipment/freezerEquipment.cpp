@@ -44,12 +44,12 @@ void FreezerEquipment :: updatePropetries()
 
 void FreezerEquipment :: countPrice()
 {
-     	float freeze_rate          = (float)freeze_orig / FREEZER_FREEZE_MIN;
-     	float modules_num_rate     = (float)common_data.modules_num_max / FREEZER_MODULES_NUM_MAX;
+     	float freeze_rate          = (float)freeze_orig / EQUIPMENT::FREEZER::FREEZE_MIN;
+     	float modules_num_rate     = (float)common_data.modules_num_max / EQUIPMENT::FREEZER::MODULES_NUM_MAX;
 
-     	float effectiveness_rate = FREEZER_FREEZE_WEIGHT * freeze_rate + FREEZER_MODULES_NUM_WEIGHT * modules_num_rate;
+     	float effectiveness_rate = EQUIPMENT::FREEZER::FREEZE_WEIGHT * freeze_rate + EQUIPMENT::FREEZER::MODULES_NUM_WEIGHT * modules_num_rate;
 
-     	float mass_rate          = (float)common_data.mass / FREEZER_MASS_MIN;
+     	float mass_rate          = (float)common_data.mass / EQUIPMENT::FREEZER::MASS_MIN;
      	float condition_rate     = (float)condition / common_data.condition_max;
 
      	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
@@ -92,12 +92,12 @@ FreezerEquipment* getNewFreezerEquipment(int race_id, int revision_id)
     	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::FREEZER_EQUIPMENT_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
 
-    	int freeze_orig     = getRandInt(FREEZER_FREEZE_MIN, FREEZER_FREEZE_MAX);
+    	int freeze_orig     = getRandInt(EQUIPMENT::FREEZER::FREEZE_MIN, EQUIPMENT::FREEZER::FREEZE_MAX);
     	
     	ItemCommonData common_data;
-    	common_data.modules_num_max = getRandInt(FREEZER_MODULES_NUM_MIN, FREEZER_MODULES_NUM_MAX);
-    	common_data.mass            = getRandInt(FREEZER_MASS_MIN, FREEZER_MASS_MAX);
-    	common_data.condition_max   = getRandInt(FREEZER_CONDITION_MIN, FREEZER_CONDITION_MAX) * tech_rate;
+    	common_data.modules_num_max = getRandInt(EQUIPMENT::FREEZER::MODULES_NUM_MIN, EQUIPMENT::FREEZER::MODULES_NUM_MAX);
+    	common_data.mass            = getRandInt(EQUIPMENT::FREEZER::MASS_MIN, EQUIPMENT::FREEZER::MASS_MAX);
+    	common_data.condition_max   = getRandInt(EQUIPMENT::FREEZER::CONDITION_MIN, EQUIPMENT::FREEZER::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
         IdData data_id;

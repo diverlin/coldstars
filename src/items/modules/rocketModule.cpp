@@ -57,9 +57,9 @@ RocketModule* getNewRocketModule()
 {
     	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
         
-    	int ammo_max_add = getRandInt(ROCKET_MODULE_AMMO_MIN, ROCKET_MODULE_AMMO_MAX);
-    	int damage_add = getRandInt(ROCKET_MODULE_DAMAGE_MIN, ROCKET_MODULE_DAMAGE_MAX);
-    	int radius_add = getRandInt(ROCKET_MODULE_RADIUS_MIN, ROCKET_MODULE_RADIUS_MAX);
+    	int ammo_max_add = getRandInt(MODULE::ROCKET::AMMO_MIN, MODULE::ROCKET::AMMO_MAX);
+    	int damage_add = getRandInt(MODULE::ROCKET::DAMAGE_MIN, MODULE::ROCKET::DAMAGE_MAX);
+    	int radius_add = getRandInt(MODULE::ROCKET::RADIUS_MIN, MODULE::ROCKET::RADIUS_MAX);
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();

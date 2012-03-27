@@ -41,7 +41,7 @@ ScanerModule* scanerModuleGenerator()
 {
     	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
          
-    	int scan_add = getRandInt(SCANER_MODULE_SCAN_MIN, SCANER_MODULE_SCAN_MAX);
+    	int scan_add = getRandInt(MODULE::SCANER::SCAN_MIN, MODULE::SCANER::SCAN_MAX);
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();

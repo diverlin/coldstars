@@ -106,7 +106,7 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 		particles_num = getRandInt(10 * obSize, 15 * obSize);    
 		data_particle.size_start  = 25 * obSize;                                 
 
-                texOb_particle = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, RED_COLOR_ID);
+                texOb_particle = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
 
 		explosion = new ExplosionEffect();
                 explosion->setTextureOb(texOb_particle);
@@ -124,7 +124,7 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 		particles_num = 40;
 		data_particle.size_start  = 25 * obSize;
 
-                texOb_particle = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, RED_COLOR_ID);
+                texOb_particle = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
 		
 		explosion = new ExplosionEffect();
                 explosion->setTextureOb(texOb_particle);
@@ -141,7 +141,7 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 		particles_num = 50;
 		data_particle.size_start  = 25 * (obSize-1);
 
-                texOb_particle = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, YELLOW_COLOR_ID);
+                texOb_particle = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::YELLOW_ID);
 
 		explosion = new ExplosionEffect();
                 explosion->setTextureOb(texOb_particle);
@@ -158,7 +158,7 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 		particles_num = 100;                              
 		data_particle.size_start  = 25 * (obSize-2);
 
-                texOb_particle = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, RED_COLOR_ID);
+                texOb_particle = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
 		
 		explosion = new ExplosionEffect();
                 explosion->setTextureOb(texOb_particle);

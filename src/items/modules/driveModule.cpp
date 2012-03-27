@@ -50,8 +50,8 @@ DriveModule* getNewDriveModule()
 {
     	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
            	
-    	int speed_add = getRandInt(DRIVE_MODULE_SPEED_MIN, DRIVE_MODULE_SPEED_MAX);
-    	int hyper_add = getRandInt(DRIVE_MODULE_HYPER_MIN, DRIVE_MODULE_HYPER_MAX);
+    	int speed_add = getRandInt(MODULE::DRIVE::SPEED_MIN, MODULE::DRIVE::SPEED_MAX);
+    	int hyper_add = getRandInt(MODULE::DRIVE::HYPER_MIN, MODULE::DRIVE::HYPER_MAX);
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();

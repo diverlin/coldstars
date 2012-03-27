@@ -100,12 +100,12 @@ Planet* getNewPlanet(int orbit_radius)
 
 	PlanetData planet_data;
 
-	planet_data.scale         = getRandInt(PLANET::SIZE_MINN, PLANET::SIZE_MAXX);  
+	planet_data.scale         = getRandInt(ENTITY::PLANET::SIZE_MIN_, ENTITY::PLANET::SIZE_MAX_);  
 	planet_data.orbit_center  = vec2f(0, 0); 
 	planet_data.radius_A      = orbit_radius;
 	planet_data.radius_B      = orbit_radius; 
 	planet_data.orbit_phi_inD = 0;
-	planet_data.speed         = (float)getRandInt(PLANET::SPEED_MIN, PLANET::SPEED_MAX) / (float)orbit_radius;
+	planet_data.speed         = (float)getRandInt(ENTITY::PLANET::SPEED_MIN, ENTITY::PLANET::SPEED_MAX) / (float)orbit_radius;
 
 
         TextureOb* texOb 	    = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::PLANET_ID); 

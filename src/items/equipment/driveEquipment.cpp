@@ -51,13 +51,15 @@ void DriveEquipment :: updatePropetries()
 
 void DriveEquipment :: countPrice()
 {
-     	float speed_rate         = (float)speed_orig / DRIVE_SPEED_MIN;
-     	float hyper_rate         = (float)hyper_orig / DRIVE_HYPER_MIN;
-     	float modules_num_rate   = (float)common_data.modules_num_max / DRIVE_MODULES_NUM_MAX;
+     	float speed_rate         = (float)speed_orig / EQUIPMENT::DRIVE::SPEED_MIN;
+     	float hyper_rate         = (float)hyper_orig / EQUIPMENT::DRIVE::HYPER_MIN;
+     	float modules_num_rate   = (float)common_data.modules_num_max / EQUIPMENT::DRIVE::MODULES_NUM_MAX;
 
-     	float effectiveness_rate = DRIVE_SPEED_WEIGHT * speed_rate + DRIVE_HYPER_WEIGHT * hyper_rate + DRIVE_MODULES_NUM_WEIGHT * modules_num_rate;
+     	float effectiveness_rate = EQUIPMENT::DRIVE::SPEED_WEIGHT * speed_rate + 
+     				   EQUIPMENT::DRIVE::HYPER_WEIGHT * hyper_rate + 
+     				   EQUIPMENT::DRIVE::MODULES_NUM_WEIGHT * modules_num_rate;
 
-     	float mass_rate          = (float)common_data.mass / DRIVE_MASS_MIN;
+     	float mass_rate          = (float)common_data.mass / EQUIPMENT::DRIVE::MASS_MIN;
      	float condition_rate     = (float)condition / common_data.condition_max;
 
      	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
@@ -108,13 +110,13 @@ DriveEquipment* getNewDriveEquipment(int race_id, int revision_id)
         TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::DRIVE_EQUIPMENT_ID);   
         //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::DRIVE_EQUIPMENT_ID, revision_id) 
 
-        int speed_orig      = getRandInt(DRIVE_SPEED_MIN, DRIVE_SPEED_MAX);
-        int hyper_orig      = getRandInt(DRIVE_HYPER_MIN, DRIVE_HYPER_MAX);
+        int speed_orig      = getRandInt(EQUIPMENT::DRIVE::SPEED_MIN, EQUIPMENT::DRIVE::SPEED_MAX);
+        int hyper_orig      = getRandInt(EQUIPMENT::DRIVE::HYPER_MIN, EQUIPMENT::DRIVE::HYPER_MAX);
     
         ItemCommonData common_data;
-        common_data.modules_num_max = getRandInt(DRIVE_MODULES_NUM_MIN, DRIVE_MODULES_NUM_MAX);
-        common_data.mass            = getRandInt(DRIVE_MASS_MIN, DRIVE_MASS_MAX);
-        common_data.condition_max   = getRandInt(DRIVE_CONDITION_MIN, DRIVE_CONDITION_MAX) * tech_rate;
+        common_data.modules_num_max = getRandInt(EQUIPMENT::DRIVE::MODULES_NUM_MIN, EQUIPMENT::DRIVE::MODULES_NUM_MAX);
+        common_data.mass            = getRandInt(EQUIPMENT::DRIVE::MASS_MIN, EQUIPMENT::DRIVE::MASS_MAX);
+        common_data.condition_max   = getRandInt(EQUIPMENT::DRIVE::CONDITION_MIN, EQUIPMENT::DRIVE::CONDITION_MAX) * tech_rate;
         common_data.deterioration_rate = 1;
 
         IdData data_id;

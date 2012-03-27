@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 SpaceStation :: SpaceStation(int race_id)
 {        
-    	mass = getRandInt(STARBASE_MASS_MIN, STARBASE_MASS_MAX);
+    	mass = getRandInt(ENTITY::SPACESTATION::MASS_MIN, ENTITY::SPACESTATION::MASS_MAX);
 	land = NULL;
 }
 

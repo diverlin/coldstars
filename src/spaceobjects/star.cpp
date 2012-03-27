@@ -29,7 +29,7 @@ Star :: ~Star()
     
 void Star :: calcColor()
 {
-        if (texOb->color_id == YELLOW_COLOR_ID)
+        if (texOb->color_id == COLOR::YELLOW_ID)
 	{
 		color.r = 255/255.0;
 		color.g = 255/255.0;
@@ -37,7 +37,7 @@ void Star :: calcColor()
 		color.a = 1.0;
 	}
 	
-	if (texOb->color_id == BLUE_COLOR_ID)
+	if (texOb->color_id == COLOR::BLUE_ID)
 	{
 		color.r = 220/255.0;
 		color.g = 255/255.0;
@@ -114,7 +114,7 @@ Star* getNewStar()
 
  	PlanetData star_data;
 
-	star_data.scale         = getRandInt(STAR_SIZE_MIN, STAR_SIZE_MAX);  
+	star_data.scale         = getRandInt(ENTITY::STAR::SIZE_MIN_, ENTITY::STAR::SIZE_MAX_);  
     	star_data.orbit_center  = vec2f(0, 0); 
     	star_data.radius_A      = 50;
     	star_data.radius_B      = 50; 

@@ -52,13 +52,15 @@ void LazerEquipment :: updatePropetries()
 
 void LazerEquipment :: countPrice()
 {
-   	float damage_rate        = (float)damage_orig / LAZER_DAMAGE_MIN;
-   	float radius_rate        = (float)radius_orig / LAZER_RADIUS_MIN;
-   	float modules_num_rate   = (float)common_data.modules_num_max / LAZER_MODULES_NUM_MAX;
+   	float damage_rate        = (float)damage_orig / EQUIPMENT::LAZER::DAMAGE_MIN;
+   	float radius_rate        = (float)radius_orig / EQUIPMENT::LAZER::RADIUS_MIN;
+   	float modules_num_rate   = (float)common_data.modules_num_max / EQUIPMENT::LAZER::MODULES_NUM_MAX;
 
-   	float effectiveness_rate = LAZER_DAMAGE_WEIGHT * damage_rate + LAZER_RADIUS_WEIGHT * radius_rate + LAZER_MODULES_NUM_WEIGHT * modules_num_rate;
+   	float effectiveness_rate = EQUIPMENT::LAZER::DAMAGE_WEIGHT * damage_rate + 
+   				   EQUIPMENT::LAZER::RADIUS_WEIGHT * radius_rate + 
+   				   EQUIPMENT::LAZER::MODULES_NUM_WEIGHT * modules_num_rate;
 
-   	float mass_rate          = (float)common_data.mass / LAZER_MASS_MIN;
+   	float mass_rate          = (float)common_data.mass / EQUIPMENT::LAZER::MASS_MIN;
    	float condition_rate     = (float)condition / common_data.condition_max;
 
    	price                    = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
@@ -146,13 +148,13 @@ LazerEquipment* getNewLazerEquipment(int race_id, int revision_id)
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::LAZER_EQUIPMENT_ID, revision_id)
     	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::LAZER_EQUIPMENT_ID);     
 
-    	int damage_orig     = getRandInt(LAZER_DAMAGE_MIN, LAZER_DAMAGE_MAX);
-    	int radius_orig     = getRandInt(LAZER_RADIUS_MIN, LAZER_RADIUS_MAX);
+    	int damage_orig     = getRandInt(EQUIPMENT::LAZER::DAMAGE_MIN, EQUIPMENT::LAZER::DAMAGE_MAX);
+    	int radius_orig     = getRandInt(EQUIPMENT::LAZER::RADIUS_MIN, EQUIPMENT::LAZER::RADIUS_MAX);
     	
     	ItemCommonData common_data;
-    	common_data.modules_num_max = getRandInt(LAZER_MODULES_NUM_MIN, LAZER_MODULES_NUM_MAX);
-    	common_data.mass            = getRandInt(LAZER_MASS_MIN, LAZER_MASS_MAX);
-    	common_data.condition_max   = getRandInt(LAZER_CONDITION_MIN, LAZER_CONDITION_MAX) * tech_rate;
+    	common_data.modules_num_max = getRandInt(EQUIPMENT::LAZER::MODULES_NUM_MIN, EQUIPMENT::LAZER::MODULES_NUM_MAX);
+    	common_data.mass            = getRandInt(EQUIPMENT::LAZER::MASS_MIN, EQUIPMENT::LAZER::MASS_MAX);
+    	common_data.condition_max   = getRandInt(EQUIPMENT::LAZER::CONDITION_MIN, EQUIPMENT::LAZER::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
         IdData data_id;

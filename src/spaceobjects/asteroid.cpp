@@ -102,7 +102,7 @@ Asteroid* getNewAsteroid()
       	
     	PlanetData planet_data;
 	
-	planet_data.scale         = getRandInt(ASTEROID_SIZE_MIN, ASTEROID_SIZE_MAX);  
+	planet_data.scale         = getRandInt(ENTITY::ASTEROID::SIZE_MIN_, ENTITY::ASTEROID::SIZE_MAX_);  
     	planet_data.orbit_center  = vec2f(0, 0); 
     	planet_data.radius_A      = getRandInt(300, 1200);
     	planet_data.radius_B      = getRandInt(300, 1200); 
