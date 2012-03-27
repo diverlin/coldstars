@@ -10,9 +10,17 @@ struct Config
 
 		int SCREEN_WIDTH_MIN;
 		int SCREEN_HEIGHT_MIN;
-
+		int BPP;
+		int FPS_LIMIT;
+		
+		bool VSYNC;
 		bool MODERN_EFFECTS;
-					
+
+		bool DEBUG_MODE;
+		
+		bool AUTOTURN_MODE;
+		int GAMESPEED;
+							
 	private:
 		Config();
 		Config(const Config&);

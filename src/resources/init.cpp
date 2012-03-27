@@ -19,10 +19,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 void init()
 {
-    	Gui::GetWindow().SetFramerateLimit(g_FPS_LIMIT); 
-    	Gui::GetWindow().PreserveOpenGLStates(true);
-    	Gui::GetWindow().UseVerticalSync(g_VERT_SYNC);
-
 	prepearGlobalVecs();    	
     	loadGameData();
     	

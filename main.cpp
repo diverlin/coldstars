@@ -39,7 +39,7 @@ int main()
 		/* server code start */
 		TIMER->update();    		
 
-		for (int i = 0; i < g_GAMESPEED; i++)  // fake implementation (static ai should not be run several times at once)
+		for (int i = 0; i < Config::Instance().GAMESPEED; i++)  // fake implementation (static ai should not be run several times at once)
 		{
 			galaxy->update_s(TIMER->getTurnTick());
 		}

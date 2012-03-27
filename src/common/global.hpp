@@ -16,21 +16,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-bool g_DEBUG = false;            // debug 
-bool g_AUTOTURN_ENABLE = false;  // debug
-int  g_GAMESPEED = 1;
-
-
 sf::Clock g_CLOCK;
 
 ObjMeshInstance* g_SPHERE_MESH; 
 ObjMeshInstance* g_DEFORMED_SPHERE_MESH;
 
 
-class Shaders;
-Shaders g_SHADERS;
-
+class Shaders; Shaders g_SHADERS;
 
 SimpleIdGenerator   g_ID_GENERATOR  = SimpleIdGenerator();
 
