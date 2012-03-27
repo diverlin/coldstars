@@ -5,14 +5,21 @@
 
 struct Config
 {
-	static Config& instanse();
-	bool USE_MODERN_HW;
+	public:
+		static Config& Instance();
+
+		int SCREEN_WIDTH_MIN;
+		int SCREEN_HEIGHT_MIN;
+
+		bool MODERN_EFFECTS;
+					
 	private:
-	Config();
-	Config(const Config&);
-	~Config();
-	Config& operator=(const Config&);
-	boost::property_tree::ptree ptree;
+		Config();
+		Config(const Config&);
+		~Config();
+		Config& operator=(const Config&);
+		
+		boost::property_tree::ptree ptree;
 };
 
 #endif //CONFIG_HPP

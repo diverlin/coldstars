@@ -18,8 +18,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef CONSTANTS_HPP
 #define CONSTANTS_HPP
 
-const int SCREEN_WIDTH_MIN  = 800;
-const int SCREEN_HEIGHT_MIN = 600;
+//const int SCREEN_WIDTH_MIN  = 800;
+//const int SCREEN_HEIGHT_MIN = 600;
 
 const int g_BPP = 32;
 const int g_FPS_LIMIT = 60;

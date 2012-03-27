@@ -51,7 +51,7 @@ void BaseVehicleBuilder::CreateKorpusGui(Vehicle* vehicle)
     	}               
 
     	Rect kontur_rect(0, 0, kontur_w, kontur_h); 
-    	kontur_rect.setCenter(SCREEN_WIDTH_MIN/2, SCREEN_HEIGHT_MIN/2); 
+    	kontur_rect.setCenter(Config::Instance().SCREEN_WIDTH_MIN/2, Config::Instance().SCREEN_HEIGHT_MIN/2); 
 	vehicle->SetGuiRect(kontur_rect);
 }
         

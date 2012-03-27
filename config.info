@@ -1,0 +1,14 @@
+Screen
+{
+WIDTH_MIN  800;
+HEIGHT_MIN 600;
+}
+
+
+Graphic
+{
+
+MODERN_EFFECTS false
+
+
+}

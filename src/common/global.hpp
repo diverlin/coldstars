@@ -17,7 +17,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-bool g_USE_MODERN_HW = false;
 bool g_DEBUG = false;            // debug 
 bool g_AUTOTURN_ENABLE = false;  // debug
 int  g_GAMESPEED = 1;

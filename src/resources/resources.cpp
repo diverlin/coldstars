@@ -25,7 +25,7 @@ void loadGameData()
 
 	load3DModels();
     	loadImages();
-    	if (g_USE_MODERN_HW == true)
+    	if (Config::Instance().MODERN_EFFECTS == true)
 	{
 		loadShaders();
 	}
