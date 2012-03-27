@@ -45,13 +45,13 @@ void RadarEquipment :: updatePropetries()
 
 void RadarEquipment :: countPrice()
 {
-    	float radius_rate         = (float)radius_orig / RADAR_RADIUS_MIN;
+    	float radius_rate         = (float)radius_orig / EQUIPMENT::RADAR::RADIUS_MIN;
 
-    	float modules_num_rate    = (float)common_data.modules_num_max / RADAR_MODULES_NUM_MAX;
+    	float modules_num_rate    = (float)common_data.modules_num_max / EQUIPMENT::RADAR::MODULES_NUM_MAX;
 
-    	float effectiveness_rate  = RADAR_RADIUS_WEIGHT * radius_rate +  RADAR_MODULES_NUM_WEIGHT * modules_num_rate;
+    	float effectiveness_rate  = EQUIPMENT::RADAR::RADIUS_WEIGHT * radius_rate + EQUIPMENT::RADAR::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    	float mass_rate           = (float)common_data.mass / RADAR_MASS_MIN;
+    	float mass_rate           = (float)common_data.mass / EQUIPMENT::RADAR::MASS_MIN;
     	float condition_rate      = (float)condition / common_data.condition_max;
 
     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
@@ -95,12 +95,12 @@ RadarEquipment* getNewRadarEquipment(int race_id, int revision_id)
     	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::RADAR_EQUIPMENT_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
 
-    	int radius_orig     = getRandInt(RADAR_RADIUS_MIN, RADAR_RADIUS_MAX);
+    	int radius_orig     = getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX);
     	
     	ItemCommonData common_data;
-    	common_data.modules_num_max = getRandInt(RADAR_MODULES_NUM_MIN, RADAR_MODULES_NUM_MAX);
-    	common_data.mass            = getRandInt(RADAR_MASS_MIN, RADAR_MASS_MAX);
-    	common_data.condition_max   = getRandInt(RADAR_CONDITION_MIN, RADAR_CONDITION_MAX) * tech_rate;
+    	common_data.modules_num_max = getRandInt(EQUIPMENT::RADAR::MODULES_NUM_MIN, EQUIPMENT::RADAR::MODULES_NUM_MAX);
+    	common_data.mass            = getRandInt(EQUIPMENT::RADAR::MASS_MIN, EQUIPMENT::RADAR::MASS_MAX);
+    	common_data.condition_max   = getRandInt(EQUIPMENT::RADAR::CONDITION_MIN, EQUIPMENT::RADAR::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
         IdData data_id;

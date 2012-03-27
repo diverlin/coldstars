@@ -39,7 +39,7 @@ void RadarModule :: addUniqueInfo()
 RadarModule* getNewRadarModule()
 {
     	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
-    	int radius_add  = getRandInt(RADAR_MODULE_RADIUS_MIN, RADAR_MODULE_RADIUS_MAX);
+    	int radius_add  = getRandInt(MODULE::RADAR::RADIUS_MIN, MODULE::RADAR::RADIUS_MAX);
     
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();

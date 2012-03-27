@@ -295,6 +295,9 @@ void UserInput :: getRealTimeInputs()
 
 void UserInput :: scrollCamera()
 {
+	int SCROLL_VELOCITY_STEP = Config::Instance().SCROLL_VELOCITY_STEP;
+	int SCROLL_VELOCITY_MAX = Config::Instance().SCROLL_VELOCITY_MAX;	
+	
         // SCROLLING X AXIS         
         if(keyboardLeftPressed)
         {

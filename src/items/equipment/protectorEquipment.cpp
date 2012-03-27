@@ -43,12 +43,13 @@ void ProtectorEquipment :: updatePropetries()
 
 void ProtectorEquipment :: countPrice()
 {
-      	float protection_rate    = (float)protection_orig / PROTECTOR_PROTECTION_MIN;
-      	float modules_num_rate   = (float)common_data.modules_num_max / PROTECTOR_MODULES_NUM_MAX;
+      	float protection_rate    = (float)protection_orig / EQUIPMENT::PROTECTOR::PROTECTION_MIN;
+      	float modules_num_rate   = (float)common_data.modules_num_max / EQUIPMENT::PROTECTOR::MODULES_NUM_MAX;
 
-      	float effectiveness_rate = PROTECTOR_PROTECTION_WEIGHT * protection_rate + PROTECTOR_MODULES_NUM_WEIGHT * modules_num_rate;
+      	float effectiveness_rate = EQUIPMENT::PROTECTOR::PROTECTION_WEIGHT * protection_rate + 
+      				   EQUIPMENT::PROTECTOR::MODULES_NUM_WEIGHT * modules_num_rate;
 
-      	float mass_rate          = (float)common_data.mass / PROTECTOR_MASS_MIN;
+      	float mass_rate          = (float)common_data.mass / EQUIPMENT::PROTECTOR::MASS_MIN;
       	float condition_rate     = (float)condition / common_data.condition_max;
 
       	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
@@ -92,12 +93,12 @@ ProtectorEquipment* getNewProtectorEquipment(int race_id, int revision_id)
     	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::PROTECTOR_EQUIPMENT_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::PROTECTOR_EQUIPMENT_ID, revision_id) 
 
-    	int protection_orig = getRandInt(PROTECTOR_PROTECTION_MIN, PROTECTOR_PROTECTION_MAX);
+    	int protection_orig = getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX);
     	
     	ItemCommonData common_data;
-    	common_data.modules_num_max = getRandInt(PROTECTOR_MODULES_NUM_MIN, PROTECTOR_MODULES_NUM_MAX);
-    	common_data.mass            = getRandInt(PROTECTOR_MASS_MIN, PROTECTOR_MASS_MAX);
-    	common_data.condition_max   = getRandInt(PROTECTOR_CONDITION_MIN, PROTECTOR_CONDITION_MAX) * tech_rate;
+    	common_data.modules_num_max = getRandInt(EQUIPMENT::PROTECTOR::MODULES_NUM_MIN, EQUIPMENT::PROTECTOR::MODULES_NUM_MAX);
+    	common_data.mass            = getRandInt(EQUIPMENT::PROTECTOR::MASS_MIN, EQUIPMENT::PROTECTOR::MASS_MAX);
+    	common_data.condition_max   = getRandInt(EQUIPMENT::PROTECTOR::CONDITION_MIN, EQUIPMENT::PROTECTOR::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
         IdData data_id;

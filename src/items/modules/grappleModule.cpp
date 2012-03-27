@@ -61,10 +61,10 @@ GrappleModule* getNewGrappleModule()
 {
     	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
         
-    	int strength_add   = getRandInt(GRAPPLE_MODULE_STRENGTH_MIN, GRAPPLE_MODULE_STRENGTH_MAX);
-    	int radius_add     = getRandInt(GRAPPLE_MODULE_RADIUS_MIN, GRAPPLE_MODULE_RADIUS_MAX);
-    	int speed_add      = getRandInt(GRAPPLE_MODULE_SPEED_MIN, GRAPPLE_MODULE_SPEED_MAX);
-    	int maxNumItem_add = getRandInt(GRAPPLE_MODULE_MAXNUMITEM_MIN, GRAPPLE_MODULE_MAXNUMITEM_MAX);
+    	int strength_add   = getRandInt(MODULE::GRAPPLE::STRENGTH_MIN, MODULE::GRAPPLE::STRENGTH_MAX);
+    	int radius_add     = getRandInt(MODULE::GRAPPLE::RADIUS_MIN, MODULE::GRAPPLE::RADIUS_MAX);
+    	int speed_add      = getRandInt(MODULE::GRAPPLE::SPEED_MIN, MODULE::GRAPPLE::SPEED_MAX);
+    	int maxNumItem_add = getRandInt(MODULE::GRAPPLE::MAXNUMITEM_MIN, MODULE::GRAPPLE::MAXNUMITEM_MAX);
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();

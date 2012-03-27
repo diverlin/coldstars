@@ -38,7 +38,7 @@ DroidModule* getNewDroidModule()
 {
     	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
          
-    	int repair_add = getRandInt(DROID_MODULE_REPAIR_MIN, DROID_MODULE_REPAIR_MAX);
+    	int repair_add = getRandInt(MODULE::DROID::REPAIR_MIN, MODULE::DROID::REPAIR_MAX);
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();

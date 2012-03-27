@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Satellite :: Satellite()
 {        
-    	mass = getRandInt(SATELLITE_MASS_MIN, SATELLITE_MASS_MAX);
+    	mass = getRandInt(ENTITY::SATELLITE::MASS_MIN, ENTITY::SATELLITE::MASS_MAX);
     	orbit = new Orbit();
     	
     	d_angle.z = 1.0f;

@@ -44,12 +44,13 @@ void DroidEquipment :: updatePropetries()
 
 void DroidEquipment :: countPrice()
 {
-     	float repair_rate        = (float)repair_orig / DROID_REPAIR_MIN;
-     	float modules_num_rate   = (float)common_data.modules_num_max / DROID_MODULES_NUM_MAX;
+     	float repair_rate        = (float)repair_orig / EQUIPMENT::DROID::REPAIR_MIN;
+     	float modules_num_rate   = (float)common_data.modules_num_max / EQUIPMENT::DROID::MODULES_NUM_MAX;
 
-     	float effectiveness_rate = DROID_REPAIR_WEIGHT * repair_rate + DROID_MODULES_NUM_WEIGHT * modules_num_rate;
+     	float effectiveness_rate = EQUIPMENT::DROID::REPAIR_WEIGHT * repair_rate + 
+     				   EQUIPMENT::DROID::MODULES_NUM_WEIGHT * modules_num_rate;
 
-     	float mass_rate          = (float)common_data.mass / DROID_MASS_MIN;
+     	float mass_rate          = (float)common_data.mass / EQUIPMENT::DROID::MASS_MIN;
      	float condition_rate     = (float)condition / common_data.condition_max;
 
      	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
@@ -93,12 +94,12 @@ DroidEquipment* getNewDroidEquipment(int race_id, int revision_id)
     	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::DROID_EQUIPMENT_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::DROID_EQUIPMENT_ID, revision_id)
 
-    	int repair_orig     = getRandInt(DROID_REPAIR_MIN, DROID_REPAIR_MAX);
+    	int repair_orig     = getRandInt(EQUIPMENT::DROID::REPAIR_MIN, EQUIPMENT::DROID::REPAIR_MAX);
     	
     	ItemCommonData common_data;
-    	common_data.modules_num_max = getRandInt(DROID_MODULES_NUM_MIN, DROID_MODULES_NUM_MAX);
-    	common_data.mass          = getRandInt(DROID_MASS_MIN, DROID_MASS_MAX);
-    	common_data.condition_max = getRandInt(DROID_CONDITION_MIN, DROID_CONDITION_MAX) * tech_rate;
+    	common_data.modules_num_max = getRandInt(EQUIPMENT::DROID::MODULES_NUM_MIN, EQUIPMENT::DROID::MODULES_NUM_MAX);
+    	common_data.mass          = getRandInt(EQUIPMENT::DROID::MASS_MIN, EQUIPMENT::DROID::MASS_MAX);
+    	common_data.condition_max = getRandInt(EQUIPMENT::DROID::CONDITION_MIN, EQUIPMENT::DROID::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
         IdData data_id;

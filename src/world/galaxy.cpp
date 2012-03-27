@@ -25,7 +25,8 @@ Galaxy :: Galaxy()
     	ship_counter      = 0;
     	planet_counter    = 0;
     		
-    	while(starsytem_counter < STARSYSTEM_TOTAL_NUM)
+    	int starsystem_total_num = getRandInt(ENTITY::GALAXY::STARSYSTEM_NUM_MIN, ENTITY::GALAXY::STARSYSTEM_NUM_MAX);
+    	while(starsytem_counter < starsystem_total_num)
     	{  
         	StarSystem* starsystem = generateEntireStarSystem();
         	starsystem->setGalaxy(this);
@@ -94,7 +95,8 @@ StarSystem* generateEntireStarSystem()
 {  
         StarSystem* starsystem = new StarSystem(RACE::R0_ID);   
         
-        vec2f _center(getRandInt(MAP_OFFSET_X, Config::Instance().SCREEN_WIDTH_MIN - 2*MAP_OFFSET_X), getRandInt(MAP_OFFSET_Y, Config::Instance().SCREEN_HEIGHT_MIN - 2*MAP_OFFSET_Y) );			 
+        vec2f _center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH_MIN - 2*GUI::MAP::BORDER_X), 
+        	      getRandInt(GUI::MAP::BORDER_Y, Config::Instance().SCREEN_HEIGHT_MIN - 2*GUI::MAP::BORDER_Y) );			 
         starsystem->setPosition(_center);
 
         Star* star = getNewStar();    
@@ -104,7 +106,7 @@ StarSystem* generateEntireStarSystem()
         int distStar_maxNum = getRandInt(40, 60);
         generateBackground(starsystem, distNebula_maxNum, distStar_maxNum, star->getColorId());
           
-        generateNumPlanets(starsystem, getRandInt(STARSYSTEM::PLANET_MIN, STARSYSTEM::PLANET_MAX));
+        generateNumPlanets(starsystem, getRandInt(ENTITY::STARSYSTEM::PLANET_MIN, ENTITY::STARSYSTEM::PLANET_MAX));
         
         for (int i = 0; i < 0; i++)
         {
@@ -113,9 +115,9 @@ StarSystem* generateEntireStarSystem()
         }
 
         if (getRandBool())
-                generateNumFriendlyNPC(starsystem, getRandInt(SHIP_PER_SYSTEM_MIN, SHIP_PER_SYSTEM_MAX));
+                generateNumFriendlyNPC(starsystem, getRandInt(ENTITY::STARSYSTEM::SHIP_INIT_MIN, ENTITY::STARSYSTEM::SHIP_INIT_MAX));
         else
-                generateNumEnemyNPC(starsystem, getRandInt(ENEMY_SHIP_PER_SYSTEM_MIN, ENEMY_SHIP_PER_SYSTEM_MAX));
+                generateNumEnemyNPC(starsystem, getRandInt(ENTITY::STARSYSTEM::ENEMYSHIP_INIT_MIN, ENTITY::STARSYSTEM::ENEMYSHIP_INIT_MAX));
                       
         generateSpaceStations(starsystem, 3);
                       
@@ -149,9 +151,9 @@ void generateNumPlanets(StarSystem* starsystem, int planet_per_system)
         for(int pi = 0; pi < planet_per_system; pi++)
         {             
                 if (pi == 0)
-                        orbit_radius = getRandInt(2 * PLANET::DISTANCE_MIN, 2 * PLANET::DISTANCE_MAX);
+                        orbit_radius = getRandInt(2 * ENTITY::PLANET::DISTANCE_MIN, 2 * ENTITY::PLANET::DISTANCE_MAX);
                 else
-                        orbit_radius = offset + getRandInt(PLANET::DISTANCE_MIN, PLANET::DISTANCE_MAX);
+                        orbit_radius = offset + getRandInt(ENTITY::PLANET::DISTANCE_MIN, ENTITY::PLANET::DISTANCE_MAX);
 
                 offset = orbit_radius;
 

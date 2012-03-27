@@ -50,8 +50,8 @@ LazerModule* getNewLazerModule()
 {
     	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
         
-    	int damage_add = getRandInt(LAZER_MODULE_DAMAGE_MIN, LAZER_MODULE_DAMAGE_MAX);
-    	int radius_add = getRandInt(LAZER_MODULE_RADIUS_MIN, LAZER_MODULE_RADIUS_MAX);
+    	int damage_add = getRandInt(MODULE::LAZER::DAMAGE_MIN, MODULE::LAZER::DAMAGE_MAX);
+    	int radius_add = getRandInt(MODULE::LAZER::RADIUS_MIN, MODULE::LAZER::RADIUS_MAX);
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();

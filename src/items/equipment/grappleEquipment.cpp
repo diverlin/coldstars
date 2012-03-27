@@ -157,16 +157,20 @@ void GrappleEquipment :: updatePropetries()
 
 void GrappleEquipment :: countPrice()
 {
-    	float strength_rate      = (float)strength_orig / GRAPPLE_STRENGTH_MIN;
-    	float radius_rate        = (float)radius_orig / GRAPPLE_RADIUS_MIN;
-    	float speed_rate         = (float)speed_orig / GRAPPLE_SPEED_MIN;
-    	float maxNumItem_rate    = (float)maxNumItem_orig / GRAPPLE_MAXNUMITEM_MIN;
+    	float strength_rate      = (float)strength_orig / EQUIPMENT::GRAPPLE::STRENGTH_MIN;
+    	float radius_rate        = (float)radius_orig / EQUIPMENT::GRAPPLE::RADIUS_MIN;
+    	float speed_rate         = (float)speed_orig / EQUIPMENT::GRAPPLE::SPEED_MIN;
+    	float maxNumItem_rate    = (float)maxNumItem_orig / EQUIPMENT::GRAPPLE::MAXNUMITEM_MIN;
 
-    	float modules_num_rate   = (float)common_data.modules_num_max / GRAPPLE_MODULES_NUM_MAX;
+    	float modules_num_rate   = (float)common_data.modules_num_max / EQUIPMENT::GRAPPLE::MODULES_NUM_MAX;
 
-    	float effectiveness_rate = GRAPPLE_STRENGTH_WEIGHT * strength_rate + GRAPPLE_RADIUS_WEIGHT * radius_rate + GRAPPLE_SPEED_WEIGHT * speed_rate + GRAPPLE_MAXNUMITEM_WEIGHT * maxNumItem_rate + GRAPPLE_MODULES_NUM_WEIGHT * modules_num_rate;
+    	float effectiveness_rate = EQUIPMENT::GRAPPLE::STRENGTH_WEIGHT * strength_rate + 
+    				   EQUIPMENT::GRAPPLE::RADIUS_WEIGHT * radius_rate + 
+    				   EQUIPMENT::GRAPPLE::SPEED_WEIGHT * speed_rate + 
+    				   EQUIPMENT::GRAPPLE::MAXNUMITEM_WEIGHT * maxNumItem_rate + 
+    				   EQUIPMENT::GRAPPLE::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    	float mass_rate          = (float)common_data.mass / GRAPPLE_MASS_MIN;
+    	float mass_rate          = (float)common_data.mass / EQUIPMENT::GRAPPLE::MASS_MIN;
     	float condition_rate     = (float)condition / common_data.condition_max;
 
     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
@@ -238,15 +242,15 @@ GrappleEquipment* getNewGrappleEquipment(int race_id, int revision_id)
     	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::GRAPPLE_EQUIPMENT_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::GRAPPLE_EQUIPMENT_ID, revision_id) 
 
-    	int strength_orig   = getRandInt(GRAPPLE_STRENGTH_MIN, GRAPPLE_STRENGTH_MAX);
-    	int radius_orig     = getRandInt(GRAPPLE_RADIUS_MIN, GRAPPLE_RADIUS_MAX);
-    	int speed_orig      = getRandInt(GRAPPLE_SPEED_MIN, GRAPPLE_SPEED_MAX);
-    	int maxNumItem_orig = getRandInt(GRAPPLE_MAXNUMITEM_MIN, GRAPPLE_MAXNUMITEM_MAX);
+    	int strength_orig   = getRandInt(EQUIPMENT::GRAPPLE::STRENGTH_MIN, EQUIPMENT::GRAPPLE::STRENGTH_MAX);
+    	int radius_orig     = getRandInt(EQUIPMENT::GRAPPLE::RADIUS_MIN, EQUIPMENT::GRAPPLE::RADIUS_MAX);
+    	int speed_orig      = getRandInt(EQUIPMENT::GRAPPLE::SPEED_MIN, EQUIPMENT::GRAPPLE::SPEED_MAX);
+    	int maxNumItem_orig = getRandInt(EQUIPMENT::GRAPPLE::MAXNUMITEM_MIN, EQUIPMENT::GRAPPLE::MAXNUMITEM_MAX);
     	
     	ItemCommonData common_data;
-    	common_data.modules_num_max = getRandInt(GRAPPLE_MODULES_NUM_MIN, GRAPPLE_MODULES_NUM_MAX);
-    	common_data.mass            = getRandInt(GRAPPLE_MASS_MIN, GRAPPLE_MASS_MAX);
-    	common_data.condition_max   = getRandInt(GRAPPLE_CONDITION_MIN, GRAPPLE_CONDITION_MAX) * tech_rate;
+    	common_data.modules_num_max = getRandInt(EQUIPMENT::GRAPPLE::MODULES_NUM_MIN, EQUIPMENT::GRAPPLE::MODULES_NUM_MAX);
+    	common_data.mass            = getRandInt(EQUIPMENT::GRAPPLE::MASS_MIN, EQUIPMENT::GRAPPLE::MASS_MAX);
+    	common_data.condition_max   = getRandInt(EQUIPMENT::GRAPPLE::CONDITION_MIN, EQUIPMENT::GRAPPLE::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
         IdData data_id;

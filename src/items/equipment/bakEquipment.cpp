@@ -52,12 +52,13 @@ void BakEquipment :: updatePropetries()
 
 void BakEquipment :: countPrice()
 {
-    	float fuel_rate          = (float)fuel_max_orig / BAK_FUEL_MIN;
-    	float modules_num_rate   = (float)common_data.modules_num_max / BAK_MODULES_NUM_MAX;
+    	float fuel_rate          = (float)fuel_max_orig / EQUIPMENT::BAK::FUEL_MIN;
+    	float modules_num_rate   = (float)common_data.modules_num_max / EQUIPMENT::BAK::MODULES_NUM_MAX;
 
-    	float effectiveness_rate = BAK_FUEL_WEIGHT * fuel_rate + BAK_MODULES_NUM_WEIGHT * modules_num_rate;
+    	float effectiveness_rate = EQUIPMENT::BAK::FUEL_WEIGHT * fuel_rate + 
+    				   EQUIPMENT::BAK::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    	float mass_rate          = (float)common_data.mass / BAK_MASS_MIN;
+    	float mass_rate          = (float)common_data.mass / EQUIPMENT::BAK::MASS_MIN;
     	float condition_rate     = (float)condition / common_data.condition_max;
 
    	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
@@ -100,13 +101,13 @@ BakEquipment* getNewBakEquipment(int race_id, int revision_id)
 
     	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::BAK_EQUIPMENT_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
-    	int fuel_max_orig = getRandInt(BAK_FUEL_MIN, BAK_FUEL_MAX);
+    	int fuel_max_orig = getRandInt(EQUIPMENT::BAK::FUEL_MIN, EQUIPMENT::BAK::FUEL_MAX);
 
       	ItemCommonData common_data;
 
-    	common_data.modules_num_max = getRandInt(BAK_MODULES_NUM_MIN, BAK_MODULES_NUM_MAX);
-    	common_data.mass = getRandInt(BAK_MASS_MIN, BAK_MASS_MAX);
-    	common_data.condition_max = getRandInt(BAK_CONDITION_MIN, BAK_CONDITION_MAX) * tech_rate;
+    	common_data.modules_num_max = getRandInt(EQUIPMENT::BAK::MODULES_NUM_MIN, EQUIPMENT::BAK::MODULES_NUM_MAX);
+    	common_data.mass = getRandInt(EQUIPMENT::BAK::MASS_MIN, EQUIPMENT::BAK::MASS_MAX);
+    	common_data.condition_max = getRandInt(EQUIPMENT::BAK::CONDITION_MIN, EQUIPMENT::BAK::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
         IdData data_id;

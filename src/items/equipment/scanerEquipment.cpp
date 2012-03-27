@@ -44,12 +44,13 @@ void ScanerEquipment :: updatePropetries()
 
 void ScanerEquipment :: countPrice()
 {
-     	float scan_rate          = (float)scan_orig / SCANER_SCAN_MIN;
-     	float modules_num_rate   = (float)common_data.modules_num_max / SCANER_MODULES_NUM_MAX;
+     	float scan_rate          = (float)scan_orig / EQUIPMENT::SCANER::SCAN_MIN;
+     	float modules_num_rate   = (float)common_data.modules_num_max / EQUIPMENT::SCANER::MODULES_NUM_MAX;
 
-     	float effectiveness_rate = SCANER_SCAN_WEIGHT * scan_rate + SCANER_MODULES_NUM_WEIGHT * modules_num_rate;
+     	float effectiveness_rate = EQUIPMENT::SCANER::SCAN_WEIGHT * scan_rate + 
+     				   EQUIPMENT::SCANER::MODULES_NUM_WEIGHT * modules_num_rate;
 
-     	float mass_rate          = (float)common_data.mass / SCANER_MASS_MIN;
+     	float mass_rate          = (float)common_data.mass / EQUIPMENT::SCANER::MASS_MIN;
      	float condition_rate     = (float)condition / common_data.condition_max;
 
      	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
@@ -93,12 +94,12 @@ ScanerEquipment* getNewScanerEquipment(int race_id, int revision_id)
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::SCANER_EQUIPMENT_ID, revision_id)
 
 
-    	int scan_orig       = getRandInt(SCANER_SCAN_MIN, SCANER_SCAN_MAX);
+    	int scan_orig       = getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX);
     	
     	ItemCommonData common_data;
-    	common_data.modules_num_max = getRandInt(SCANER_MODULES_NUM_MIN, SCANER_MODULES_NUM_MAX);
-    	common_data.mass            = getRandInt(SCANER_MASS_MIN, SCANER_MASS_MAX);
-    	common_data.condition_max   = getRandInt(SCANER_CONDITION_MIN, SCANER_CONDITION_MAX) * tech_rate;
+    	common_data.modules_num_max = getRandInt(EQUIPMENT::SCANER::MODULES_NUM_MIN, EQUIPMENT::SCANER::MODULES_NUM_MAX);
+    	common_data.mass            = getRandInt(EQUIPMENT::SCANER::MASS_MIN, EQUIPMENT::SCANER::MASS_MAX);
+    	common_data.condition_max   = getRandInt(EQUIPMENT::SCANER::CONDITION_MIN, EQUIPMENT::SCANER::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
         IdData data_id;

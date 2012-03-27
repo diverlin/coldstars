@@ -40,7 +40,7 @@ ProtectorModule* getNewProtectorModule()
 {
     	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
         
-    	int protection_add = getRandInt(PROTECTOR_MODULE_PROTECTION_MIN, PROTECTOR_MODULE_PROTECTION_MAX);
+    	int protection_add = getRandInt(MODULE::PROTECTOR::PROTECTION_MIN, MODULE::PROTECTOR::PROTECTION_MAX);
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();

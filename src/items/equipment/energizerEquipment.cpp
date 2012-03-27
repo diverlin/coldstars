@@ -50,13 +50,13 @@ void EnergizerEquipment :: updatePropetries()
 
 void EnergizerEquipment :: countPrice()
 {
-    	float energy_rate          = (float)energy_max_orig / ENERGIZER_ENERGY_MIN;
-    	float restoration_rate     = (float)restoration_orig / ENERGIZER_RESTORATION_MIN;
-    	float modules_num_rate     = (float)common_data.modules_num_max / ENERGIZER_MODULES_NUM_MAX;
+    	float energy_rate          = (float)energy_max_orig / EQUIPMENT::ENERGIZER::ENERGY_MIN;
+    	float restoration_rate     = (float)restoration_orig / EQUIPMENT::ENERGIZER::RESTORATION_MIN;
+    	float modules_num_rate     = (float)common_data.modules_num_max / EQUIPMENT::ENERGIZER::MODULES_NUM_MAX;
 
-    	float effectiveness_rate = ENERGIZER_ENERGY_WEIGHT * energy_rate + ENERGIZER_RESTORATION_WEIGHT * restoration_rate + ENERGIZER_MODULES_NUM * modules_num_rate;
+    	float effectiveness_rate = EQUIPMENT::ENERGIZER::ENERGY_WEIGHT * energy_rate + EQUIPMENT::ENERGIZER::RESTORATION_WEIGHT * restoration_rate + EQUIPMENT::ENERGIZER::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    	float mass_rate          = (float)common_data.mass / ENERGIZER_MASS_MIN;
+    	float mass_rate          = (float)common_data.mass / EQUIPMENT::ENERGIZER::MASS_MIN;
     	float condition_rate     = (float)condition / common_data.condition_max;
 
     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
@@ -108,13 +108,13 @@ EnergizerEquipment* getNewEnergizerEquipment(int race_id, int revision_id)
     	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::ENERGIZER_EQUIPMENT_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(ENERGIZER_ITEM_TEXTURE_ID, revision_id)
 
-    	int energy_max_orig  = getRandInt(ENERGIZER_ENERGY_MIN, ENERGIZER_ENERGY_MAX);
-    	int restoration_orig = getRandInt(ENERGIZER_RESTORATION_MIN, ENERGIZER_RESTORATION_MAX);
+    	int energy_max_orig  = getRandInt(EQUIPMENT::ENERGIZER::ENERGY_MIN, EQUIPMENT::ENERGIZER::ENERGY_MAX);
+    	int restoration_orig = getRandInt(EQUIPMENT::ENERGIZER::RESTORATION_MIN, EQUIPMENT::ENERGIZER::RESTORATION_MAX);
     	
     	ItemCommonData common_data;
-    	common_data.modules_num_max  = getRandInt(ENERGIZER_MODULES_NUM_MIN, ENERGIZER_MODULES_NUM_MAX);
-    	common_data.mass             = getRandInt(ENERGIZER_MASS_MIN, ENERGIZER_MASS_MAX);
-    	common_data.condition_max    = getRandInt(ENERGIZER_CONDITION_MIN, ENERGIZER_CONDITION_MAX) * tech_rate;
+    	common_data.modules_num_max  = getRandInt(EQUIPMENT::ENERGIZER::MODULES_NUM_MIN, EQUIPMENT::ENERGIZER::MODULES_NUM_MAX);
+    	common_data.mass             = getRandInt(EQUIPMENT::ENERGIZER::MASS_MIN, EQUIPMENT::ENERGIZER::MASS_MAX);
+    	common_data.condition_max    = getRandInt(EQUIPMENT::ENERGIZER::CONDITION_MIN, EQUIPMENT::ENERGIZER::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
         IdData data_id;

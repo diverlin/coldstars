@@ -38,7 +38,7 @@ void FreezerModule :: addUniqueInfo()
 FreezerModule* getNewFreezerModule()
 {
     	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
-        int freeze_add = getRandInt(FREEZER_MODULE_FREEZE_MIN, FREEZER_MODULE_FREEZE_MAX);
+        int freeze_add = getRandInt(MODULE::FREEZER::FREEZE_MIN, MODULE::FREEZER::FREEZE_MAX);
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();

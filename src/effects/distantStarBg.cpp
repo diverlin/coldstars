@@ -49,7 +49,7 @@ DistantStarBgEffect* getNewDistantStarBgEffect(int color_id)
 	else    	    texOb = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::DISTANTSTAR_ID, color_id);
         
         vec2f _center(getRandInt(0, 1000), getRandInt(0, 1000));
-        float size = (float)getRandInt(DISTANTSTAR_SIZE_MIN, DISTANTSTAR_SIZE_MAX);
+        float size = (float)getRandInt(ENTITY::GALAXY::DISTANTSTAR_SIZE_MIN, ENTITY::GALAXY::DISTANTSTAR_SIZE_MAX);
         
         DistantStarBgEffect* ds = new DistantStarBgEffect(texOb, _center, size);
         return ds;
