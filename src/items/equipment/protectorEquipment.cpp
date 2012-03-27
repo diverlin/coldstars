@@ -82,15 +82,15 @@ std::string ProtectorEquipment :: getProtectionStr()
 ProtectorEquipment* getNewProtectorEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
-       		race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
     	if (revision_id == -1)
-       		revision_id = TECH_LEVEL_0_ID; 
+       		revision_id = TECHLEVEL::L0_ID; 
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(PROTECTOR_ITEM_TEXTURE_ID);   
-    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(PROTECTOR_ITEM_TEXTURE_ID, revision_id) 
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::PROTECTOR_EQUIPMENT_ID);   
+    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::PROTECTOR_EQUIPMENT_ID, revision_id) 
 
     	int protection_orig = getRandInt(PROTECTOR_PROTECTION_MIN, PROTECTOR_PROTECTION_MAX);
     	
@@ -102,14 +102,14 @@ ProtectorEquipment* getNewProtectorEquipment(int race_id, int revision_id)
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT_ID;
-        data_id.subtype_id = PROTECTOR_EQUIPMENT_ID;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::PROTECTOR_ID;
         
     	ProtectorEquipment* protector_equipment = new ProtectorEquipment(protection_orig);
 
         protector_equipment->setIdData(data_id);  
         protector_equipment->setTextureOb(texOb_item);    	
-        protector_equipment->setFunctionalSlotSubTypeId(PROTECTOR_SLOT_ID);
+        protector_equipment->setFunctionalSlotSubTypeId(SLOT::PROTECTOR_ID);
         protector_equipment->setItemCommonData(common_data);
         
         protector_equipment->updatePropetries();

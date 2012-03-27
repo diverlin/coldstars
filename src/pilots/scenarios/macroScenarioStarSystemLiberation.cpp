@@ -34,7 +34,7 @@ void MacroScenarioStarSystemLiberation :: update_inStatic(Npc* _npc) const
 	}
 	else
 	{
-		if (_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getTypeId() != NPC_ID)
+		if (_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getTypeId() != ENTITY::NPC_ID)
 		{
 			Npc* _target_npc = _npc->getStarSystem()->getRandNpc(&RACES_EVIL_LIST);
 			if (_target_npc != NULL)

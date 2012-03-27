@@ -98,15 +98,15 @@ std::string DriveEquipment :: getHyperStr()
 DriveEquipment* getNewDriveEquipment(int race_id, int revision_id)
 {
         if (race_id == -1)
-                race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+                race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
         if (revision_id == -1)
-                revision_id = TECH_LEVEL_0_ID; 
+                revision_id = TECHLEVEL::L0_ID; 
 
         int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-        TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(DRIVE_ITEM_TEXTURE_ID);   
-        //item_texOb = TEXTURE_MANAGER.returnItemTexOb(DRIVE_ITEM_TEXTURE_ID, revision_id) 
+        TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::DRIVE_EQUIPMENT_ID);   
+        //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::DRIVE_EQUIPMENT_ID, revision_id) 
 
         int speed_orig      = getRandInt(DRIVE_SPEED_MIN, DRIVE_SPEED_MAX);
         int hyper_orig      = getRandInt(DRIVE_HYPER_MIN, DRIVE_HYPER_MAX);
@@ -119,14 +119,14 @@ DriveEquipment* getNewDriveEquipment(int race_id, int revision_id)
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT_ID;
-        data_id.subtype_id = DRIVE_EQUIPMENT_ID;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::DRIVE_ID;
         
         DriveEquipment* drive_equipment = new DriveEquipment(speed_orig, hyper_orig);
     
         drive_equipment->setIdData(data_id);  
         drive_equipment->setTextureOb(texOb_item);    	
-        drive_equipment->setFunctionalSlotSubTypeId(DRIVE_SLOT_ID);
+        drive_equipment->setFunctionalSlotSubTypeId(SLOT::DRIVE_ID);
         drive_equipment->setItemCommonData(common_data);
          
         drive_equipment->updatePropetries();

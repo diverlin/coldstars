@@ -44,8 +44,8 @@ ProtectorModule* getNewProtectorModule()
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = MODULE_ID;
-        data_id.subtype_id = PROTECTOR_MODULE_ID;  
+        data_id.type_id    = MODULE::MODULE_ID;
+        data_id.subtype_id = MODULE::PROTECTOR_ID;  
         
     	ProtectorModule* protector_module = new ProtectorModule(protection_add);
         protector_module->setTextureOb(texOb);

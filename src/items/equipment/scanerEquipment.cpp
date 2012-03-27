@@ -82,15 +82,15 @@ std::string ScanerEquipment :: getScanStr()
 ScanerEquipment* getNewScanerEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
-       		race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
     	if (revision_id == -1)
-       		revision_id = TECH_LEVEL_0_ID; 
+       		revision_id = TECHLEVEL::L0_ID; 
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(SCANER_ITEM_TEXTURE_ID);   
-    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(SCANER_ITEM_TEXTURE_ID, revision_id)
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SCANER_EQUIPMENT_ID);   
+    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::SCANER_EQUIPMENT_ID, revision_id)
 
 
     	int scan_orig       = getRandInt(SCANER_SCAN_MIN, SCANER_SCAN_MAX);
@@ -103,14 +103,14 @@ ScanerEquipment* getNewScanerEquipment(int race_id, int revision_id)
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT_ID;
-        data_id.subtype_id = SCANER_EQUIPMENT_ID; 
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::SCANER_ID; 
         
     	ScanerEquipment* scaner_equipment = new ScanerEquipment(scan_orig);
         
         scaner_equipment->setIdData(data_id);  
         scaner_equipment->setTextureOb(texOb_item);    	
-        scaner_equipment->setFunctionalSlotSubTypeId(SCANER_SLOT_ID);
+        scaner_equipment->setFunctionalSlotSubTypeId(SLOT::SCANER_ID);
         scaner_equipment->setItemCommonData(common_data);
            
     	scaner_equipment->updatePropetries();

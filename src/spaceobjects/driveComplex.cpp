@@ -25,24 +25,24 @@ DriveComplex :: DriveComplex(Vehicle* owner_vehicle)
         
 	resetTarget();
 	
-	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID); 
+	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SLOT_ID); 
 		
-	drive_slot.SetSubTypeId(DRIVE_SLOT_ID); 
+	drive_slot.SetSubTypeId(SLOT::DRIVE_ID); 
 	drive_slot.SetTextureOb(texOb_slot);
 	drive_slot.SetOwnerVehicle(owner_vehicle);
-	drive_slot.setRect(  owner_vehicle->GetGuiRect().getCenter().x - 5*SHIP_SLOT_WIDTH, 
-			      owner_vehicle->GetGuiRect().getCenter().y - SHIP_SLOT_HEIGHT/2 + 1.1*SHIP_SLOT_HEIGHT/2,
-			      SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
+	drive_slot.setRect(  owner_vehicle->GetGuiRect().getCenter().x - 5*GUI::SLOT::WIDTH_FOR_SHIP, 
+			      owner_vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
+			      GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
 				  
 	owner_vehicle->Add(&drive_slot);
 	
 	
-	bak_slot.SetSubTypeId(BAK_SLOT_ID);
+	bak_slot.SetSubTypeId(SLOT::BAK_ID);
 	bak_slot.SetTextureOb(texOb_slot);
 	bak_slot.SetOwnerVehicle(owner_vehicle);	    
-	bak_slot.setRect(  owner_vehicle->GetGuiRect().getCenter().x - 5*SHIP_SLOT_WIDTH, 
-			    owner_vehicle->GetGuiRect().getCenter().y - SHIP_SLOT_HEIGHT/2 - 1.1*SHIP_SLOT_HEIGHT/2,
-			    SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
+	bak_slot.setRect(  owner_vehicle->GetGuiRect().getCenter().x - 5*GUI::SLOT::WIDTH_FOR_SHIP, 
+			    owner_vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
+			    GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
 				    
 	owner_vehicle->Add(&bak_slot);
 	
@@ -69,7 +69,7 @@ void  DriveComplex :: resetTarget()
     		
 	target_distance = 0.0;
 	target_offset.set(0, 0);
-	action_id = NONE_NAVIGATOR_ACTION_ID;
+	action_id = NAVIGATOR_ACTION::NONE_ID;
 	
 	direction_list_END = true;
 }
@@ -100,7 +100,7 @@ void DriveComplex :: defineDistance(int _action_id)
     	
     	switch(action_id)
     	{	
-    		case DOCKING_NAVIGATOR_ACTION_ID:
+    		case NAVIGATOR_ACTION::DOCKING_ID:
     		{
     			target_distance = target->getCollisionRadius()/4;
     			target_offset = getRandVec(target->getCollisionRadius()/15, target->getCollisionRadius()/10); 
@@ -108,7 +108,7 @@ void DriveComplex :: defineDistance(int _action_id)
     			break;   
     		}
     		
-    		case COLLECTING_NAVIGATOR_ACTION_ID:
+    		case NAVIGATOR_ACTION::COLLECTING_ID:
     		{
     		    	target_distance = target->getCollisionRadius()*1.2;
     			target_offset = getRandVec(target->getCollisionRadius()/10, target->getCollisionRadius()/5); 
@@ -116,7 +116,7 @@ void DriveComplex :: defineDistance(int _action_id)
     			break;    		
     		}
     		
-    		case FOLLOWING_CLOSE_NAVIGATOR_ACTION_ID:
+    		case NAVIGATOR_ACTION::KEEP_CLOSE_ID:
     		{
     		    	target_distance = target->getCollisionRadius()*1.2;
     			target_offset = getRandVec(target->getCollisionRadius()/10, target->getCollisionRadius()/5); 
@@ -124,7 +124,7 @@ void DriveComplex :: defineDistance(int _action_id)
     			break;    		
     		}
 
-    		case FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID:
+    		case NAVIGATOR_ACTION::KEEP_MIDDLE_ID:
     		{
     		    	target_distance = target->getCollisionRadius()*2.5;
     			target_offset = getRandVec(target->getCollisionRadius()/10, target->getCollisionRadius()/5); 
@@ -132,7 +132,7 @@ void DriveComplex :: defineDistance(int _action_id)
     			break;    		
     		}
     		
-    		case FOLLOWING_FAR_NAVIGATOR_ACTION_ID:
+    		case NAVIGATOR_ACTION::KEEP_FAR_ID:
     		{
     		    	target_distance = target->getCollisionRadius()*4;
     			target_offset = getRandVec(target->getCollisionRadius()/10, target->getCollisionRadius()/5); 
@@ -163,7 +163,7 @@ bool DriveComplex :: validateTarget() const
 {
         if (target->getAlive() == true)
 	{
-		if (target->getPlaceTypeId() == SPACE_ID)
+		if (target->getPlaceTypeId() == ENTITY::SPACE_ID)
 		{
 			return true;
 		}
@@ -178,32 +178,32 @@ bool DriveComplex :: updateTargetCoord()
 {		
 	switch(target->getTypeId())
 	{
-    		case STARSYSTEM_ID:
+    		case ENTITY::STARSYSTEM_ID:
     		{
     	 	    	target_pos.set(800, 800);  // get correct coords
     			target_distance = 100;  // ??      		
         		return false; break;        			
 		}
 
-    		case PLANET_ID:
+    		case ENTITY::PLANET_ID:
     		{ 
         		target_pos = ((Planet*)target)->getOrbit()->getNextTurnPosition() + target_offset;         	
 		       	return true; break;		       	
     		} 
 
-    		case ASTEROID_ID:
+    		case ENTITY::ASTEROID_ID:
     		{ 
         		target_pos = ((Asteroid*)target)->getOrbit()->getNextTurnPosition() + target_offset;         	
         		return true; break;
     		} 
     	     
-    		case SHIP_ID:
+    		case ENTITY::SHIP_ID:
     		{ 
 			target_pos = target->GetPoints().getCenter() + target_offset;  
         		return true; break;    
     		}      
     		
-    		case SPACESTATION_ID:
+    		case ENTITY::SPACESTATION_ID:
     		{ 
 			target_pos = target->GetPoints().getCenter() + target_offset;  
         		return true; break;    
@@ -230,8 +230,8 @@ bool DriveComplex :: getDockingPermission()
 {
 	switch(target->getTypeId())
 	{
-		case PLANET_ID:       { return ((Planet*)target)->getLand()->getPermissionToLand(); break; }
-		case SPACESTATION_ID: { return ((SpaceStation*)target)->getLand()->getPermissionToLand(); break; }
+		case ENTITY::PLANET_ID:       { return ((Planet*)target)->getLand()->getPermissionToLand(); break; }
+		case ENTITY::SPACESTATION_ID: { return ((SpaceStation*)target)->getLand()->getPermissionToLand(); break; }
 		//case SHIP_ID:   { return targetOb->getVehicle()->getPermissionToLand(); break; }
 	}
 	

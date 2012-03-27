@@ -29,116 +29,116 @@ void TextureManager :: manage(TextureOb* texOb)
 {
 	switch(texOb->type_id)
 	{
-	  	case SPACESTATION_TEXTURE_ID: { spacestation_texOb_vec.push_back(texOb);    break; }       
-	 	case SATELLITE_TEXTURE_ID:    { satellite_texOb_vec.push_back(texOb);   break; }       
+	  	case TEXTURE::SPACESTATION_ID: { spacestation_texOb_vec.push_back(texOb);    break; }       
+	 	case TEXTURE::SATELLITE_ID:    { satellite_texOb_vec.push_back(texOb);   break; }       
 	  		  		
-  		case SLOT_TEXTURE_ID:        { slot_texOb_vec.push_back(texOb);        break; }       
-    		case LANDINGAREA_TEXTURE_ID: { landingArea_texOb_vec.push_back(texOb); break; }
-       		case TURREL_TEXTURE_ID:      { turrel_texOb_vec.push_back(texOb);      break; }
+  		case TEXTURE::SLOT_ID:        { slot_texOb_vec.push_back(texOb);        break; }       
+    		case TEXTURE::LANDINGAREA_ID: { landingArea_texOb_vec.push_back(texOb); break; }
+       		case TEXTURE::TURREL_ID:      { turrel_texOb_vec.push_back(texOb);      break; }
 
-    		case NEBULA_TEXTURE_ID:      { nebulaBgEffect_texOb_vec.push_back(texOb); break; }
-    		case STAR_TEXTURE_ID:        { star_texOb_vec.push_back(texOb);           break; } 
-		case PLANET_TEXTURE_ID:      { planet_texOb_vec.push_back(texOb);         break; }
-		case ATMOSPHERE_TEXTURE_ID:  { atmosphere_texOb_vec.push_back(texOb);     break; }
-		case SHIP_TEXTURE_ID:        
+    		case TEXTURE::NEBULA_BACKGROUND_ID:      { nebulaBgEffect_texOb_vec.push_back(texOb); break; }
+    		case TEXTURE::STAR_ID:        { star_texOb_vec.push_back(texOb);           break; } 
+		case TEXTURE::PLANET_ID:      { planet_texOb_vec.push_back(texOb);         break; }
+		case TEXTURE::ATMOSPHERE_ID:  { atmosphere_texOb_vec.push_back(texOb);     break; }
+		case TEXTURE::SHIP_ID:        
 		{  
 			switch(texOb->race_id) 
 			{
-        			case RACE_0_ID:
+        			case RACE::R0_ID:
         			{
         				switch(texOb->subtype_id)
         				{
-        					case RANGER_ID:   { ship_race0_ranger_texOb_vec.push_back(texOb);   break; }
-        					case WARRIOR_ID:  { ship_race0_warrior_texOb_vec.push_back(texOb);  break; }
-           					case TRADER_ID:   { ship_race0_trader_texOb_vec.push_back(texOb);   break; }
-           					case PIRAT_ID:    { ship_race0_pirat_texOb_vec.push_back(texOb);    break; }
-           					case DIPLOMAT_ID: { ship_race0_diplomat_texOb_vec.push_back(texOb); break; }
+        					case CLASS::RANGER_ID:   { ship_race0_ranger_texOb_vec.push_back(texOb);   break; }
+        					case CLASS::WARRIOR_ID:  { ship_race0_warrior_texOb_vec.push_back(texOb);  break; }
+           					case CLASS::TRADER_ID:   { ship_race0_trader_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::PIRAT_ID:    { ship_race0_pirat_texOb_vec.push_back(texOb);    break; }
+           					case CLASS::DIPLOMAT_ID: { ship_race0_diplomat_texOb_vec.push_back(texOb); break; }
         				}
         				
         				break;
         			}
         			
 
-        			case RACE_1_ID:
+        			case RACE::R1_ID:
         			{
         			         switch(texOb->subtype_id)
         			         {
-        			         	case RANGER_ID:   { ship_race1_ranger_texOb_vec.push_back(texOb);   break; }
-           					case WARRIOR_ID:  { ship_race1_warrior_texOb_vec.push_back(texOb);  break; }
-           					case TRADER_ID:   { ship_race1_trader_texOb_vec.push_back(texOb);   break; }
-           					case PIRAT_ID:    { ship_race1_pirat_texOb_vec.push_back(texOb);    break; }
-           					case DIPLOMAT_ID: { ship_race1_diplomat_texOb_vec.push_back(texOb); break; }
+        			         	case CLASS::RANGER_ID:   { ship_race1_ranger_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::WARRIOR_ID:  { ship_race1_warrior_texOb_vec.push_back(texOb);  break; }
+           					case CLASS::TRADER_ID:   { ship_race1_trader_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::PIRAT_ID:    { ship_race1_pirat_texOb_vec.push_back(texOb);    break; }
+           					case CLASS::DIPLOMAT_ID: { ship_race1_diplomat_texOb_vec.push_back(texOb); break; }
         				 }
         				 
         				 break;
         			}
 
-        			case RACE_2_ID:
+        			case RACE::R2_ID:
         			{
         			         switch(texOb->subtype_id)
         			         {
-        			         	case RANGER_ID: { ship_race2_ranger_texOb_vec.push_back(texOb); break; }
-           					case WARRIOR_ID: { ship_race2_warrior_texOb_vec.push_back(texOb); break; }
-           					case TRADER_ID: { ship_race2_trader_texOb_vec.push_back(texOb); break; }
-           					case PIRAT_ID:  { ship_race2_pirat_texOb_vec.push_back(texOb);  break; }
-           					case DIPLOMAT_ID: { ship_race2_diplomat_texOb_vec.push_back(texOb); break; }
+        			         	case CLASS::RANGER_ID: { ship_race2_ranger_texOb_vec.push_back(texOb); break; }
+           					case CLASS::WARRIOR_ID: { ship_race2_warrior_texOb_vec.push_back(texOb); break; }
+           					case CLASS::TRADER_ID: { ship_race2_trader_texOb_vec.push_back(texOb); break; }
+           					case CLASS::PIRAT_ID:  { ship_race2_pirat_texOb_vec.push_back(texOb);  break; }
+           					case CLASS::DIPLOMAT_ID: { ship_race2_diplomat_texOb_vec.push_back(texOb); break; }
         				 }
         				 
         				 break;
         			}
         			
         			
-				case RACE_3_ID:
+				case RACE::R3_ID:
 				{
 					switch(texOb->subtype_id)
 					{
-						case RANGER_ID:  { ship_race3_ranger_texOb_vec.push_back(texOb);    break; }
-           					case WARRIOR_ID: { ship_race3_warrior_texOb_vec.push_back(texOb);   break; }
-           					case TRADER_ID:  { ship_race3_trader_texOb_vec.push_back(texOb);    break; }
-           					case PIRAT_ID:   { ship_race3_pirat_texOb_vec.push_back(texOb);     break; }
-           					case DIPLOMAT_ID: { ship_race3_diplomat_texOb_vec.push_back(texOb); break; }
+						case CLASS::RANGER_ID:  { ship_race3_ranger_texOb_vec.push_back(texOb);    break; }
+           					case CLASS::WARRIOR_ID: { ship_race3_warrior_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::TRADER_ID:  { ship_race3_trader_texOb_vec.push_back(texOb);    break; }
+           					case CLASS::PIRAT_ID:   { ship_race3_pirat_texOb_vec.push_back(texOb);     break; }
+           					case CLASS::DIPLOMAT_ID: { ship_race3_diplomat_texOb_vec.push_back(texOb); break; }
         				}
         				
         				break;
         			}
 
-        			case RACE_4_ID:
+        			case RACE::R4_ID:
         			{
         				switch(texOb->subtype_id)
         				{	
-        					case RANGER_ID:   { ship_race4_ranger_texOb_vec.push_back(texOb);   break; }
-           					case WARRIOR_ID:  { ship_race4_warrior_texOb_vec.push_back(texOb);  break; }
-           					case TRADER_ID:   { ship_race4_trader_texOb_vec.push_back(texOb);   break; }
-           					case PIRAT_ID:    { ship_race4_pirat_texOb_vec.push_back(texOb);    break; } 
-           					case DIPLOMAT_ID: { ship_race4_diplomat_texOb_vec.push_back(texOb); break; }
+        					case CLASS::RANGER_ID:   { ship_race4_ranger_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::WARRIOR_ID:  { ship_race4_warrior_texOb_vec.push_back(texOb);  break; }
+           					case CLASS::TRADER_ID:   { ship_race4_trader_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::PIRAT_ID:    { ship_race4_pirat_texOb_vec.push_back(texOb);    break; } 
+           					case CLASS::DIPLOMAT_ID: { ship_race4_diplomat_texOb_vec.push_back(texOb); break; }
            				}
            				
            				break;
            			}
 			
-				case RACE_6_ID:
+				case RACE::R6_ID:
 				{	
 					switch(texOb->subtype_id)
 					{
-						case RANGER_ID:   { ship_race6_ranger_texOb_vec.push_back(texOb);   break; }
-           					case WARRIOR_ID:  { ship_race6_warrior_texOb_vec.push_back(texOb);  break; }
-           					case TRADER_ID:   { ship_race6_trader_texOb_vec.push_back(texOb);   break; }
-           					case PIRAT_ID:    { ship_race6_pirat_texOb_vec.push_back(texOb);    break; }
-           					case DIPLOMAT_ID: { ship_race6_diplomat_texOb_vec.push_back(texOb); break; }
+						case CLASS::RANGER_ID:   { ship_race6_ranger_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::WARRIOR_ID:  { ship_race6_warrior_texOb_vec.push_back(texOb);  break; }
+           					case CLASS::TRADER_ID:   { ship_race6_trader_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::PIRAT_ID:    { ship_race6_pirat_texOb_vec.push_back(texOb);    break; }
+           					case CLASS::DIPLOMAT_ID: { ship_race6_diplomat_texOb_vec.push_back(texOb); break; }
         				}
         				
         				break;
         			}
 
-				case RACE_7_ID:
+				case RACE::R7_ID:
 				{	
 					switch(texOb->subtype_id)
 					{
-						case RANGER_ID:   { ship_race7_ranger_texOb_vec.push_back(texOb);   break; }
-           					case WARRIOR_ID:  { ship_race7_warrior_texOb_vec.push_back(texOb);  break; }
-           					case TRADER_ID:   { ship_race7_trader_texOb_vec.push_back(texOb);   break; }
-           					case PIRAT_ID:    { ship_race7_pirat_texOb_vec.push_back(texOb);    break; }
-           					case DIPLOMAT_ID: { ship_race7_diplomat_texOb_vec.push_back(texOb); break; }
+						case CLASS::RANGER_ID:   { ship_race7_ranger_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::WARRIOR_ID:  { ship_race7_warrior_texOb_vec.push_back(texOb);  break; }
+           					case CLASS::TRADER_ID:   { ship_race7_trader_texOb_vec.push_back(texOb);   break; }
+           					case CLASS::PIRAT_ID:    { ship_race7_pirat_texOb_vec.push_back(texOb);    break; }
+           					case CLASS::DIPLOMAT_ID: { ship_race7_diplomat_texOb_vec.push_back(texOb); break; }
         				}
         				
         				break;
@@ -147,56 +147,56 @@ void TextureManager :: manage(TextureOb* texOb)
     		break;
     		}
     		
-		case ROCKET_BULLET_TEXTURE_ID: { rocketBullet_texOb_vec.push_back(texOb); break; }
-		case LAZER_EFFECT_TEXTURE_ID:  { lazerEffect_texOb_vec.push_back(texOb);  break; }
-		case SHIELD_EFFECT_TEXTURE_ID: { shieldEffect_texOb_vec.push_back(texOb); break; }
-		case DISTANTSTAR_TEXTURE_ID:   { starBgEffect_texOb_vec.push_back(texOb); break; }
-                case PARTICLE_TEXTURE_ID:      { particles_texOb_vec.push_back(texOb); break; } 
+		case TEXTURE::ROCKET_BULLET_ID: { rocketBullet_texOb_vec.push_back(texOb); break; }
+		case TEXTURE::LAZER_EFFECT_ID:  { lazerEffect_texOb_vec.push_back(texOb);  break; }
+		case TEXTURE::SHIELD_EFFECT_ID: { shieldEffect_texOb_vec.push_back(texOb); break; }
+		case TEXTURE::DISTANTSTAR_ID:   { starBgEffect_texOb_vec.push_back(texOb); break; }
+                case TEXTURE::PARTICLE_EFFECT_ID:      { particles_texOb_vec.push_back(texOb); break; } 
 
     		// ASTEROIDS/MINERALS
-    		case ASTEROID_TEXTURE_ID:  { asteroid_texOb_vec.push_back(texOb);  break; } 
-		case MINERAL_TEXTURE_ID:   { mineral_texOb_vec.push_back(texOb);   break; } 
-		case CONTAINER_TEXTURE_ID: { container_texOb_vec.push_back(texOb); break; }
-		case BOMB_TEXTURE_ID:      { bomb_texOb_vec.push_back(texOb);      break; }
+    		case TEXTURE::ASTEROID_ID:  { asteroid_texOb_vec.push_back(texOb);  break; } 
+		case TEXTURE::MINERAL_ID:   { mineral_texOb_vec.push_back(texOb);   break; } 
+		case TEXTURE::CONTAINER_ID: { container_texOb_vec.push_back(texOb); break; }
+		case TEXTURE::BOMB_ID:      { bomb_texOb_vec.push_back(texOb);      break; }
 
-    		case BLACKHOLE_TEXTURE_ID: { blackhole_texOb_vec.push_back(texOb); break; }
-       		case TEXT_BACKGROUND_TEXTURE_ID: { textBackground_texOb_vec.push_back(texOb); break; } 
+    		case TEXTURE::BLACKHOLE_ID: { blackhole_texOb_vec.push_back(texOb); break; }
+       		case TEXTURE::TEXT_BACKGROUND_ID: { textBackground_texOb_vec.push_back(texOb); break; } 
 
 		// LAND
-    		case LAND_BG_TEXTURE_ID: { landBg_texOb_vec.push_back(texOb); break; }
+    		case TEXTURE::LAND_BACKGROUND_ID: { landBg_texOb_vec.push_back(texOb); break; }
 
 		// IN KOSMOPORT
-    		case ANGAR_BG_TEXTURE_ID: { angarBg_texOb_vec.push_back(texOb); break; }
-		case STORE_BG_TEXTURE_ID: { storeBg_texOb_vec.push_back(texOb); break; }
-		case SHOP_BG_TEXTURE_ID:  { shopBg_texOb_vec.push_back(texOb); break; }
-		case GOVERMENT_BG_TEXTURE_ID: { govermentBg_texOb_vec.push_back(texOb); break; }
+    		case TEXTURE::ANGAR_BACKGROUND_ID: { angarBg_texOb_vec.push_back(texOb); break; }
+		case TEXTURE::STORE_BACKGROUND_ID: { storeBg_texOb_vec.push_back(texOb); break; }
+		case TEXTURE::SHOP_BACKGROUND_ID:  { shopBg_texOb_vec.push_back(texOb); break; }
+		case TEXTURE::GOVERMENT_BACKGROUND_ID: { govermentBg_texOb_vec.push_back(texOb); break; }
 		
 		
 		// ITEMS
-		case ROCKET_ITEM_TEXTURE_ID:      { rocketEquipment_texOb_vec.push_back(texOb);      break; } 
-		case LAZER_ITEM_TEXTURE_ID:       { lazerEquipment_texOb_vec.push_back(texOb);       break; } 
-		case DRIVE_ITEM_TEXTURE_ID:       { driveEquipment_texOb_vec.push_back(texOb);       break; } 
-		case PROTECTOR_ITEM_TEXTURE_ID:   { protectorEquipment_texOb_vec.push_back(texOb);   break; } 
-		case DROID_ITEM_TEXTURE_ID:       { droidEquipment_texOb_vec.push_back(texOb);       break; } 
-		case GRAPPLE_ITEM_TEXTURE_ID:     { grappleEquipment_texOb_vec.push_back(texOb);     break; } 
-		case BAK_ITEM_TEXTURE_ID:         { bakEquipment_texOb_vec.push_back(texOb);         break; } 
-		case ENERGYBLOCK_ITEM_TEXTURE_ID: { energyBlockEquipment_texOb_vec.push_back(texOb); break; } 
-		case FREEZER_ITEM_TEXTURE_ID:     { freezerEquipment_texOb_vec.push_back(texOb);     break; } 
-		case RADAR_ITEM_TEXTURE_ID:       { radarEquipment_texOb_vec.push_back(texOb);       break; } 
-		case SCANER_ITEM_TEXTURE_ID:      { scanerEquipment_texOb_vec.push_back(texOb);      break; } 
+		case TEXTURE::ROCKET_EQUIPMENT_ID:      { rocketEquipment_texOb_vec.push_back(texOb);      break; } 
+		case TEXTURE::LAZER_EQUIPMENT_ID:       { lazerEquipment_texOb_vec.push_back(texOb);       break; } 
+		case TEXTURE::DRIVE_EQUIPMENT_ID:       { driveEquipment_texOb_vec.push_back(texOb);       break; } 
+		case TEXTURE::PROTECTOR_EQUIPMENT_ID:   { protectorEquipment_texOb_vec.push_back(texOb);   break; } 
+		case TEXTURE::DROID_EQUIPMENT_ID:       { droidEquipment_texOb_vec.push_back(texOb);       break; } 
+		case TEXTURE::GRAPPLE_EQUIPMENT_ID:     { grappleEquipment_texOb_vec.push_back(texOb);     break; } 
+		case TEXTURE::BAK_EQUIPMENT_ID:         { bakEquipment_texOb_vec.push_back(texOb);         break; } 
+		case TEXTURE::ENERGIZER_EQUIPMENT_ID: { energyBlockEquipment_texOb_vec.push_back(texOb); break; } 
+		case TEXTURE::FREEZER_EQUIPMENT_ID:     { freezerEquipment_texOb_vec.push_back(texOb);     break; } 
+		case TEXTURE::RADAR_EQUIPMENT_ID:       { radarEquipment_texOb_vec.push_back(texOb);       break; } 
+		case TEXTURE::SCANER_EQUIPMENT_ID:      { scanerEquipment_texOb_vec.push_back(texOb);      break; } 
 		
-		case FACE_TEXTURE_ID:
+		case TEXTURE::FACE_ID:
 		{
 			switch(texOb->race_id)
 			{
-			       	case RACE_0_ID: { face_race0_texOb_vec.push_back(texOb); break; } 
-       				case RACE_1_ID: { face_race1_texOb_vec.push_back(texOb); break; } 
-       				case RACE_2_ID: { face_race2_texOb_vec.push_back(texOb); break; } 
-       				case RACE_3_ID: { face_race3_texOb_vec.push_back(texOb); break; } 
-       				case RACE_4_ID: { face_race4_texOb_vec.push_back(texOb); break; } 
+			       	case RACE::R0_ID: { face_race0_texOb_vec.push_back(texOb); break; } 
+       				case RACE::R1_ID: { face_race1_texOb_vec.push_back(texOb); break; } 
+       				case RACE::R2_ID: { face_race2_texOb_vec.push_back(texOb); break; } 
+       				case RACE::R3_ID: { face_race3_texOb_vec.push_back(texOb); break; } 
+       				case RACE::R4_ID: { face_race4_texOb_vec.push_back(texOb); break; } 
 
-       				case RACE_6_ID: { face_race6_texOb_vec.push_back(texOb); break; } 
-       				case RACE_7_ID: { face_race7_texOb_vec.push_back(texOb); break; }   
+       				case RACE::R6_ID: { face_race6_texOb_vec.push_back(texOb); break; } 
+       				case RACE::R7_ID: { face_race7_texOb_vec.push_back(texOb); break; }   
 			}
 			break;
 		}
@@ -286,14 +286,14 @@ TextureOb* TextureManager :: getRandomFaceTexObWithFolloingAttributes(int _race_
 {
 	switch(_race_id)
 	{
-		case RACE_0_ID: { return getRandomTexObFromList(&face_race0_texOb_vec); }
-		case RACE_1_ID: { return getRandomTexObFromList(&face_race1_texOb_vec); }
-		case RACE_2_ID: { return getRandomTexObFromList(&face_race2_texOb_vec); }
- 		case RACE_3_ID: { return getRandomTexObFromList(&face_race3_texOb_vec); }
-		case RACE_4_ID: { return getRandomTexObFromList(&face_race4_texOb_vec); }
+		case RACE::R0_ID: { return getRandomTexObFromList(&face_race0_texOb_vec); }
+		case RACE::R1_ID: { return getRandomTexObFromList(&face_race1_texOb_vec); }
+		case RACE::R2_ID: { return getRandomTexObFromList(&face_race2_texOb_vec); }
+ 		case RACE::R3_ID: { return getRandomTexObFromList(&face_race3_texOb_vec); }
+		case RACE::R4_ID: { return getRandomTexObFromList(&face_race4_texOb_vec); }
 		
-		case RACE_6_ID: { return getRandomTexObFromList(&face_race6_texOb_vec); }
-		case RACE_7_ID: { return getRandomTexObFromList(&face_race7_texOb_vec); }
+		case RACE::R6_ID: { return getRandomTexObFromList(&face_race6_texOb_vec); }
+		case RACE::R7_ID: { return getRandomTexObFromList(&face_race7_texOb_vec); }
 	}
 	
 	return NULL;
@@ -305,102 +305,102 @@ TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race
 {
         switch(_race_id)
         {	
-        	case RACE_0_ID:
+        	case RACE::R0_ID:
         	{
                 	switch(_subtype_id)
                 	{
-                		case RANGER_ID:   { return getRandomTexObFromList(&ship_race0_ranger_texOb_vec);   break; }
-				case WARRIOR_ID:  { return getRandomTexObFromList(&ship_race0_warrior_texOb_vec);  break; }
- 				case TRADER_ID:   { return getRandomTexObFromList(&ship_race0_trader_texOb_vec);   break; }
-				case PIRAT_ID:    { return getRandomTexObFromList(&ship_race0_pirat_texOb_vec);    break; }
-				case DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race0_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race0_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race0_warrior_texOb_vec);  break; }
+ 				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race0_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race0_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race0_diplomat_texOb_vec); break; }
 		       }
 		       
 		       break;
 		}
 
-        	case RACE_1_ID:
+        	case RACE::R1_ID:
         	{
                 	switch(_subtype_id)
                 	{	
-                		case RANGER_ID:   { return getRandomTexObFromList(&ship_race1_ranger_texOb_vec);   break; }
-				case WARRIOR_ID:  { return getRandomTexObFromList(&ship_race1_warrior_texOb_vec);  break; } 
-				case TRADER_ID:   { return getRandomTexObFromList(&ship_race1_trader_texOb_vec);   break; }
-				case PIRAT_ID:    { return getRandomTexObFromList(&ship_race1_pirat_texOb_vec);    break; }
-				case DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race1_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race1_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race1_warrior_texOb_vec);  break; } 
+				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race1_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race1_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race1_diplomat_texOb_vec); break; }
 			}
 			
 			break;
 		}
 		
-	        case RACE_2_ID:
+	        case RACE::R2_ID:
         	{
                 	switch(_subtype_id)
                 	{	
-                		case RANGER_ID:   { return getRandomTexObFromList(&ship_race2_ranger_texOb_vec);   break; }
-				case WARRIOR_ID:  { return getRandomTexObFromList(&ship_race2_warrior_texOb_vec);  break; } 
-				case TRADER_ID:   { return getRandomTexObFromList(&ship_race2_trader_texOb_vec);   break; }
-				case PIRAT_ID:    { return getRandomTexObFromList(&ship_race2_pirat_texOb_vec);    break; }
-				case DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race2_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race2_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race2_warrior_texOb_vec);  break; } 
+				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race2_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race2_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race2_diplomat_texOb_vec); break; }
 			}
 			
 			break;
         	}
       
 
-    	        case RACE_3_ID:
+    	        case RACE::R3_ID:
         	{
                 	switch(_subtype_id)
                 	{	
-                		case RANGER_ID:   { return getRandomTexObFromList(&ship_race3_ranger_texOb_vec);   break; }
-				case WARRIOR_ID:  { return getRandomTexObFromList(&ship_race3_warrior_texOb_vec);  break; } 
-				case TRADER_ID:   { return getRandomTexObFromList(&ship_race3_trader_texOb_vec);   break; }
-				case PIRAT_ID:    { return getRandomTexObFromList(&ship_race3_pirat_texOb_vec);    break; }
-				case DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race3_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race3_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race3_warrior_texOb_vec);  break; } 
+				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race3_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race3_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race3_diplomat_texOb_vec); break; }
 			}
 			
 			break;
         	}
 
 
-    	        case RACE_4_ID:
+    	        case RACE::R4_ID:
         	{
                 	switch(_subtype_id)
                 	{	
-                		case RANGER_ID:   { return getRandomTexObFromList(&ship_race4_ranger_texOb_vec);   break; }
-				case WARRIOR_ID:  { return getRandomTexObFromList(&ship_race4_warrior_texOb_vec);  break; } 
-				case TRADER_ID:   { return getRandomTexObFromList(&ship_race4_trader_texOb_vec);   break; }
-				case PIRAT_ID:    { return getRandomTexObFromList(&ship_race4_pirat_texOb_vec);    break; }
-				case DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race4_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race4_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race4_warrior_texOb_vec);  break; } 
+				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race4_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race4_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race4_diplomat_texOb_vec); break; }
 			}
 			
 			break;
         	}
 
 
-	        case RACE_6_ID:
+	        case RACE::R6_ID:
         	{
                 	switch(_subtype_id)
                 	{	
-                		case RANGER_ID:   { return getRandomTexObFromList(&ship_race6_ranger_texOb_vec);   break; }
-				case WARRIOR_ID:  { return getRandomTexObFromList(&ship_race6_warrior_texOb_vec);  break; } 
-				case TRADER_ID:   { return getRandomTexObFromList(&ship_race6_trader_texOb_vec);   break; }
-				case PIRAT_ID:    { return getRandomTexObFromList(&ship_race6_pirat_texOb_vec);    break; }
-				case DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race6_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race6_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race6_warrior_texOb_vec);  break; } 
+				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race6_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race6_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race6_diplomat_texOb_vec); break; }
 			}
 			
 			break;
         	}
 
-       	        case RACE_7_ID:
+       	        case RACE::R7_ID:
         	{
                 	switch(_subtype_id)
                 	{	
-                		case RANGER_ID:   { return getRandomTexObFromList(&ship_race7_ranger_texOb_vec);   break; }
-				case WARRIOR_ID:  { return getRandomTexObFromList(&ship_race7_warrior_texOb_vec);  break; } 
-				case TRADER_ID:   { return getRandomTexObFromList(&ship_race7_trader_texOb_vec);   break; }
-				case PIRAT_ID:    { return getRandomTexObFromList(&ship_race7_pirat_texOb_vec);    break; }
-				case DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race7_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race7_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race7_warrior_texOb_vec);  break; } 
+				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race7_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race7_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race7_diplomat_texOb_vec); break; }
 			}
 			
 			break;
@@ -421,9 +421,9 @@ TextureOb* TextureManager :: getTexObByColorId(int _type_id, int _color_id)
 	
 	switch(_type_id)
 	{
-		case PARTICLE_TEXTURE_ID:    { requested_vec = &particles_texOb_vec;      break; }
-		case DISTANTSTAR_TEXTURE_ID: { requested_vec = &starBgEffect_texOb_vec;   break; }
-		case NEBULA_TEXTURE_ID:      { requested_vec = &nebulaBgEffect_texOb_vec; break; }
+		case TEXTURE::PARTICLE_EFFECT_ID:    { requested_vec = &particles_texOb_vec;      break; }
+		case TEXTURE::DISTANTSTAR_ID: { requested_vec = &starBgEffect_texOb_vec;   break; }
+		case TEXTURE::NEBULA_BACKGROUND_ID:      { requested_vec = &nebulaBgEffect_texOb_vec; break; }
 	}
 	
 	//printf("searching color id = %i\n", _color_id);
@@ -446,46 +446,46 @@ TextureOb* TextureManager :: getRandomTexOb(int texture_type_id)
 {
 	switch(texture_type_id)
 	{
-		case SPACESTATION_TEXTURE_ID:     { return getRandomTexObFromList(&spacestation_texOb_vec);             break; }
-		case SATELLITE_TEXTURE_ID:        { return getRandomTexObFromList(&satellite_texOb_vec);            break; }
+		case TEXTURE::SPACESTATION_ID:     { return getRandomTexObFromList(&spacestation_texOb_vec);             break; }
+		case TEXTURE::SATELLITE_ID:        { return getRandomTexObFromList(&satellite_texOb_vec);            break; }
 					
-		case SLOT_TEXTURE_ID:             { return getRandomTexObFromList(&slot_texOb_vec);                 break; }
-		case CONTAINER_TEXTURE_ID:        { return getRandomTexObFromList(&container_texOb_vec);            break; }
-		case STAR_TEXTURE_ID:             { return getRandomTexObFromList(&star_texOb_vec);                 break; }
-		case PLANET_TEXTURE_ID:           { return getRandomTexObFromList(&planet_texOb_vec);               break; }
-		case ATMOSPHERE_TEXTURE_ID:       { return getRandomTexObFromList(&atmosphere_texOb_vec);           break; }
-		case ASTEROID_TEXTURE_ID:         { return getRandomTexObFromList(&asteroid_texOb_vec);             break; }
-		case MINERAL_TEXTURE_ID:          { return getRandomTexObFromList(&mineral_texOb_vec);              break; }
-		case BOMB_TEXTURE_ID:             { return getRandomTexObFromList(&bomb_texOb_vec);                 break; }
-		case BLACKHOLE_TEXTURE_ID:        { return getRandomTexObFromList(&blackhole_texOb_vec);            break; }
-		case ROCKET_BULLET_TEXTURE_ID:    { return getRandomTexObFromList(&rocketBullet_texOb_vec);         break; }
+		case TEXTURE::SLOT_ID:             { return getRandomTexObFromList(&slot_texOb_vec);                 break; }
+		case TEXTURE::CONTAINER_ID:        { return getRandomTexObFromList(&container_texOb_vec);            break; }
+		case TEXTURE::STAR_ID:             { return getRandomTexObFromList(&star_texOb_vec);                 break; }
+		case TEXTURE::PLANET_ID:           { return getRandomTexObFromList(&planet_texOb_vec);               break; }
+		case TEXTURE::ATMOSPHERE_ID:       { return getRandomTexObFromList(&atmosphere_texOb_vec);           break; }
+		case TEXTURE::ASTEROID_ID:         { return getRandomTexObFromList(&asteroid_texOb_vec);             break; }
+		case TEXTURE::MINERAL_ID:          { return getRandomTexObFromList(&mineral_texOb_vec);              break; }
+		case TEXTURE::BOMB_ID:             { return getRandomTexObFromList(&bomb_texOb_vec);                 break; }
+		case TEXTURE::BLACKHOLE_ID:        { return getRandomTexObFromList(&blackhole_texOb_vec);            break; }
+		case TEXTURE::ROCKET_BULLET_ID:    { return getRandomTexObFromList(&rocketBullet_texOb_vec);         break; }
 
-		case ROCKET_ITEM_TEXTURE_ID:      { return getRandomTexObFromList(&rocketEquipment_texOb_vec);      break; }
-		case LAZER_ITEM_TEXTURE_ID:       { return getRandomTexObFromList(&lazerEquipment_texOb_vec);       break; }
-		case RADAR_ITEM_TEXTURE_ID:       { return getRandomTexObFromList(&radarEquipment_texOb_vec);       break; }
-		case DRIVE_ITEM_TEXTURE_ID:       { return getRandomTexObFromList(&driveEquipment_texOb_vec);       break; }
-		case BAK_ITEM_TEXTURE_ID:         { return getRandomTexObFromList(&bakEquipment_texOb_vec);         break; }
-		case ENERGYBLOCK_ITEM_TEXTURE_ID: { return getRandomTexObFromList(&energyBlockEquipment_texOb_vec); break; }
-		case PROTECTOR_ITEM_TEXTURE_ID:   { return getRandomTexObFromList(&protectorEquipment_texOb_vec);   break; }
-		case DROID_ITEM_TEXTURE_ID:       { return getRandomTexObFromList(&droidEquipment_texOb_vec);       break; }
-		case FREEZER_ITEM_TEXTURE_ID:     { return getRandomTexObFromList(&freezerEquipment_texOb_vec);     break; }
-		case SCANER_ITEM_TEXTURE_ID:      { return getRandomTexObFromList(&scanerEquipment_texOb_vec);      break; }
-		case GRAPPLE_ITEM_TEXTURE_ID:     { return getRandomTexObFromList(&grappleEquipment_texOb_vec);     break; }
+		case TEXTURE::ROCKET_EQUIPMENT_ID:      { return getRandomTexObFromList(&rocketEquipment_texOb_vec);      break; }
+		case TEXTURE::LAZER_EQUIPMENT_ID:       { return getRandomTexObFromList(&lazerEquipment_texOb_vec);       break; }
+		case TEXTURE::RADAR_EQUIPMENT_ID:       { return getRandomTexObFromList(&radarEquipment_texOb_vec);       break; }
+		case TEXTURE::DRIVE_EQUIPMENT_ID:       { return getRandomTexObFromList(&driveEquipment_texOb_vec);       break; }
+		case TEXTURE::BAK_EQUIPMENT_ID:         { return getRandomTexObFromList(&bakEquipment_texOb_vec);         break; }
+		case TEXTURE::ENERGIZER_EQUIPMENT_ID: { return getRandomTexObFromList(&energyBlockEquipment_texOb_vec); break; }
+		case TEXTURE::PROTECTOR_EQUIPMENT_ID:   { return getRandomTexObFromList(&protectorEquipment_texOb_vec);   break; }
+		case TEXTURE::DROID_EQUIPMENT_ID:       { return getRandomTexObFromList(&droidEquipment_texOb_vec);       break; }
+		case TEXTURE::FREEZER_EQUIPMENT_ID:     { return getRandomTexObFromList(&freezerEquipment_texOb_vec);     break; }
+		case TEXTURE::SCANER_EQUIPMENT_ID:      { return getRandomTexObFromList(&scanerEquipment_texOb_vec);      break; }
+		case TEXTURE::GRAPPLE_EQUIPMENT_ID:     { return getRandomTexObFromList(&grappleEquipment_texOb_vec);     break; }
 																		
-		case TURREL_TEXTURE_ID:           { return getRandomTexObFromList(&turrel_texOb_vec);               break; }
-		case LAZER_EFFECT_TEXTURE_ID:     { return getRandomTexObFromList(&lazerEffect_texOb_vec);          break; }
-		case LANDINGAREA_TEXTURE_ID:      { return getRandomTexObFromList(&landingArea_texOb_vec);          break; }
+		case TEXTURE::TURREL_ID:           { return getRandomTexObFromList(&turrel_texOb_vec);               break; }
+		case TEXTURE::LAZER_EFFECT_ID:     { return getRandomTexObFromList(&lazerEffect_texOb_vec);          break; }
+		case TEXTURE::LANDINGAREA_ID:      { return getRandomTexObFromList(&landingArea_texOb_vec);          break; }
 				
-		case ANGAR_BG_TEXTURE_ID:         { return getRandomTexObFromList(&angarBg_texOb_vec);              break; }				
-		case STORE_BG_TEXTURE_ID:         { return getRandomTexObFromList(&storeBg_texOb_vec);              break; }	
-		case SHOP_BG_TEXTURE_ID:          { return getRandomTexObFromList(&shopBg_texOb_vec);               break; }	
-		case GOVERMENT_BG_TEXTURE_ID:     { return getRandomTexObFromList(&govermentBg_texOb_vec);          break; }	
+		case TEXTURE::ANGAR_BACKGROUND_ID:         { return getRandomTexObFromList(&angarBg_texOb_vec);              break; }				
+		case TEXTURE::STORE_BACKGROUND_ID:         { return getRandomTexObFromList(&storeBg_texOb_vec);              break; }	
+		case TEXTURE::SHOP_BACKGROUND_ID:          { return getRandomTexObFromList(&shopBg_texOb_vec);               break; }	
+		case TEXTURE::GOVERMENT_BACKGROUND_ID:     { return getRandomTexObFromList(&govermentBg_texOb_vec);          break; }	
 
-		case TEXT_BACKGROUND_TEXTURE_ID:  { return getRandomTexObFromList(&textBackground_texOb_vec);       break; }			
+		case TEXTURE::TEXT_BACKGROUND_ID:  { return getRandomTexObFromList(&textBackground_texOb_vec);       break; }			
 
-		case SHIELD_EFFECT_TEXTURE_ID:    { return getRandomTexObFromList(&shieldEffect_texOb_vec);         break; }	
-		case NEBULA_TEXTURE_ID:           { return getRandomTexObFromList(&nebulaBgEffect_texOb_vec);       break; }
-		case DISTANTSTAR_TEXTURE_ID:      { return getRandomTexObFromList(&starBgEffect_texOb_vec);         break; }				
+		case TEXTURE::SHIELD_EFFECT_ID:    { return getRandomTexObFromList(&shieldEffect_texOb_vec);         break; }	
+		case TEXTURE::NEBULA_BACKGROUND_ID:           { return getRandomTexObFromList(&nebulaBgEffect_texOb_vec);       break; }
+		case TEXTURE::DISTANTSTAR_ID:      { return getRandomTexObFromList(&starBgEffect_texOb_vec);         break; }				
 				
 	}
 }

@@ -36,14 +36,14 @@ LandBase* Planet :: getLand() const { return land; }
 
 void Planet :: createLand()
 {
-	if (population > 0) 
-	{ 
-		land = new Kosmoport(RACE_0_ID); 
-	}
-	else
-	{ 
-		land = new Land();
-	}
+      	if (population > 0) 
+      	{ 
+      		land = new Kosmoport(RACE::R0_ID); 
+      	}
+        else
+        { 
+        	land = new Land();
+        }
 }              
 
 void Planet :: update_inSpace(int time, bool show_effect)
@@ -92,10 +92,11 @@ Planet* getNewPlanet(int orbit_radius)
 {
 	IdData data_id;
 	data_id.id         = g_ID_GENERATOR.getNextId();
-	data_id.type_id    = PLANET_ID;
-	data_id.subtype_id = KOSMOPORT_ID;
 
-	LifeData data_life;
+      	data_id.type_id    = ENTITY::PLANET_ID;
+      	data_id.subtype_id = ENTITY::KOSMOPORT_ID;
+        
+        LifeData data_life;
 
 	PlanetData planet_data;
 
@@ -107,13 +108,14 @@ Planet* getNewPlanet(int orbit_radius)
 	planet_data.speed         = (float)getRandInt(PLANET_SPEED_MIN, PLANET_SPEED_MAX) / (float)orbit_radius;
 
 
-	TextureOb* texOb 	    = g_TEXTURE_MANAGER.getRandomTexOb(PLANET_TEXTURE_ID); 
-	TextureOb* texOb_atmosphere = g_TEXTURE_MANAGER.getRandomTexOb(ATMOSPHERE_TEXTURE_ID); 
+        TextureOb* texOb 	    = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::PLANET_ID); 
+        TextureOb* texOb_atmosphere = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::ATMOSPHERE_ID); 
+        
+        unsigned long int population = getRandInt(1000, 4000);
+        
+        Planet* planet = new Planet(RACE::R0_ID, population);
+        planet->setPlanetData(planet_data);
 
-	unsigned long int population = getRandInt(1000, 4000);
-
-	Planet* planet = new Planet(RACE_0_ID, population);
-	planet->setPlanetData(planet_data);
 	planet->setTextureOb(texOb);
 	planet->setIdData(data_id);
 	planet->setLifeData(data_life);

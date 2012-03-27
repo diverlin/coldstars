@@ -29,7 +29,7 @@ RocketEquipment :: RocketEquipment(int ammo_max_orig,
         damage = damage_orig;
         radius = radius_orig;
                 
-        data_bullet.texOb = g_TEXTURE_MANAGER.getRandomTexOb(ROCKET_BULLET_TEXTURE_ID);    
+        data_bullet.texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::ROCKET_BULLET_ID);    
         data_bullet.damage        = damage;
         data_bullet.armor         = ROCKET_ARMOR;
         data_bullet.speed_init    = ROCKET_START_SPEED;
@@ -149,15 +149,15 @@ void RocketEquipment :: fireEvent()
 RocketEquipment* getNewRocketEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
-       		race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
     	if (revision_id == -1)
-       		revision_id = TECH_LEVEL_0_ID; 
+       		revision_id = TECHLEVEL::L0_ID; 
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(ROCKET_ITEM_TEXTURE_ID);    
-    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(ROCKET_ITEM_TEXTURE_ID, revision_id)   
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::ROCKET_EQUIPMENT_ID);    
+    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::ROCKET_EQUIPMENT_ID, revision_id)   
     
     	int ammo_max_orig = getRandInt(ROCKET_AMMO_MIN, ROCKET_AMMO_MAX);
     	int damage_orig   = getRandInt(ROCKET_DAMAGE_MIN, ROCKET_DAMAGE_MAX);
@@ -173,14 +173,14 @@ RocketEquipment* getNewRocketEquipment(int race_id, int revision_id)
         
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT_ID;
-        data_id.subtype_id = ROCKET_EQUIPMENT_ID;        
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::ROCKET_ID;        
 
     	RocketEquipment* rocket_equipment = new RocketEquipment(ammo_max_orig, damage_orig, radius_orig);
 
         rocket_equipment->setIdData(data_id);  
         rocket_equipment->setTextureOb(texOb_item);    	
-        rocket_equipment->setFunctionalSlotSubTypeId(WEAPON_SLOT_ID);
+        rocket_equipment->setFunctionalSlotSubTypeId(SLOT::WEAPON_ID);
         rocket_equipment->setItemCommonData(common_data);
                 
         rocket_equipment->updatePropetries();

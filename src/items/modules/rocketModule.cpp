@@ -63,8 +63,8 @@ RocketModule* getNewRocketModule()
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = MODULE_ID;
-        data_id.subtype_id = ROCKET_MODULE_ID;  
+        data_id.type_id    = MODULE::MODULE_ID;
+        data_id.subtype_id = MODULE::ROCKET_ID;  
         
     	RocketModule* rocket_module = new RocketModule(ammo_max_add, damage_add, radius_add);
         rocket_module->setTextureOb(texOb);

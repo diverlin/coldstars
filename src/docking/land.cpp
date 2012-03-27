@@ -31,7 +31,7 @@ Land :: ~Land()
 /* virtual */
 bool Land :: add(Vehicle* vehicle)
 {
-        vehicle->setPlaceTypeId(PLANET_ID);
+        vehicle->setPlaceTypeId(ENTITY::PLANET_ID);
         VEHICLE_vec.push_back(vehicle);
         
         return true;
@@ -40,7 +40,7 @@ bool Land :: add(Vehicle* vehicle)
 /* virtual */
 bool Land :: add(Npc* npc)
 {
-        npc->setPlaceTypeId(LAND_ID);        
+        npc->setPlaceTypeId(ENTITY::LAND_ID);        
         NPC_vec.push_back(npc);
 
         npc->setLand(this);

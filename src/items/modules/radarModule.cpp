@@ -43,8 +43,8 @@ RadarModule* getNewRadarModule()
     
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = MODULE_ID;
-        data_id.subtype_id = RADAR_MODULE_ID; 
+        data_id.type_id    = MODULE::MODULE_ID;
+        data_id.subtype_id = MODULE::RADAR_ID; 
         
     	RadarModule* radar_module = new RadarModule(radius_add);    
         radar_module->setTextureOb(texOb);

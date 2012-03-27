@@ -57,69 +57,69 @@ void BaseVehicleBuilder::CreateKorpusGui(Vehicle* vehicle)
         
 void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle)
 {
-    	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID);  
+    	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SLOT_ID);  
 
 	ItemSlot* radar_slot = new ItemSlot();
-	radar_slot->SetSubTypeId(RADAR_SLOT_ID);
+	radar_slot->SetSubTypeId(SLOT::RADAR_ID);
 	radar_slot->SetTextureOb(texOb_slot);
 	radar_slot->SetOwnerVehicle(vehicle);				 
-	radar_slot->setRect( vehicle->GetGuiRect().getCenter().x + 4*SHIP_SLOT_WIDTH, 
-			     vehicle->GetGuiRect().getCenter().y - SHIP_SLOT_HEIGHT/2 + 1.1*SHIP_SLOT_HEIGHT/2,
-			     SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
+	radar_slot->setRect( vehicle->GetGuiRect().getCenter().x + 4*GUI::SLOT::WIDTH_FOR_SHIP, 
+			     vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
+			     GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
 	vehicle->Add(radar_slot);	
 	
 	
 	ItemSlot* scaner_slot = new ItemSlot();
-	scaner_slot->SetSubTypeId(SCANER_SLOT_ID); 
+	scaner_slot->SetSubTypeId(SLOT::SCANER_ID); 
 	scaner_slot->SetTextureOb(texOb_slot);
 	scaner_slot->SetOwnerVehicle(vehicle);
-	scaner_slot->setRect(  vehicle->GetGuiRect().getCenter().x + 4*SHIP_SLOT_WIDTH, 
-			       vehicle->GetGuiRect().getCenter().y - SHIP_SLOT_HEIGHT/2 - 1.1*SHIP_SLOT_HEIGHT/2,
-			       SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
+	scaner_slot->setRect(  vehicle->GetGuiRect().getCenter().x + 4*GUI::SLOT::WIDTH_FOR_SHIP, 
+			       vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
+			       GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
 	vehicle->Add(scaner_slot);
 	
 	
 	ItemSlot* energizer_slot = new ItemSlot();
-	energizer_slot->SetSubTypeId(ENERGIZER_SLOT_ID); 
+	energizer_slot->SetSubTypeId(SLOT::ENERGIZER_ID); 
 	energizer_slot->SetTextureOb(texOb_slot);
 	energizer_slot->SetOwnerVehicle(vehicle);
-	energizer_slot->setRect(  vehicle->GetGuiRect().getCenter().x - 2*SHIP_SLOT_WIDTH, 
-				  vehicle->GetGuiRect().getCenter().y - SHIP_SLOT_HEIGHT/2,
-				  SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
+	energizer_slot->setRect(  vehicle->GetGuiRect().getCenter().x - 2*GUI::SLOT::WIDTH_FOR_SHIP, 
+				  vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2,
+				  GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
 	vehicle->Add(energizer_slot);
     		
     		
 	if (vehicle->data_korpus.inhibit_GRAPPLE == false)
 	{
 		ItemSlot* grapple_slot = new ItemSlot();
-		grapple_slot->SetSubTypeId(GRAPPLE_SLOT_ID);
+		grapple_slot->SetSubTypeId(SLOT::GRAPPLE_ID);
 		grapple_slot->SetTextureOb(texOb_slot);
 		grapple_slot->SetOwnerVehicle(vehicle);
-		grapple_slot->setRect(  vehicle->GetGuiRect().getCenter().x - 3*SHIP_SLOT_WIDTH, 
-					vehicle->GetGuiRect().getCenter().y - SHIP_SLOT_HEIGHT/2 + 1.1*SHIP_SLOT_HEIGHT,
-					SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);					 
+		grapple_slot->setRect(  vehicle->GetGuiRect().getCenter().x - 3*GUI::SLOT::WIDTH_FOR_SHIP, 
+					vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
+					GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);					 
     		vehicle->Add(grapple_slot); 
     	}
     	
     	
 	
 	ItemSlot* droid_slot = new ItemSlot();
-	droid_slot->SetSubTypeId(DROID_SLOT_ID);
+	droid_slot->SetSubTypeId(SLOT::DROID_ID);
 	droid_slot->SetTextureOb(texOb_slot);
 	droid_slot->SetOwnerVehicle(vehicle);			    
-	droid_slot->setRect(  vehicle->GetGuiRect().getCenter().x - 1*SHIP_SLOT_WIDTH, 
-			      vehicle->GetGuiRect().getCenter().y - SHIP_SLOT_HEIGHT/2 + 1.1*SHIP_SLOT_HEIGHT,
-			      SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);				    
+	droid_slot->setRect(  vehicle->GetGuiRect().getCenter().x - 1*GUI::SLOT::WIDTH_FOR_SHIP, 
+			      vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
+			      GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);				    
     	vehicle->Add(droid_slot); 
     	
     	
 	ItemSlot* freezer_slot     = new ItemSlot();
-	freezer_slot->SetSubTypeId(FREEZER_SLOT_ID);
+	freezer_slot->SetSubTypeId(SLOT::FREEZER_ID);
 	freezer_slot->SetTextureOb(texOb_slot);
 	freezer_slot->SetOwnerVehicle(vehicle);			    
-	freezer_slot->setRect( vehicle->GetGuiRect().getCenter().x - 1*SHIP_SLOT_WIDTH, 
-			       vehicle->GetGuiRect().getCenter().y - SHIP_SLOT_HEIGHT/2 - 1.1*SHIP_SLOT_HEIGHT,
-			       SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);	
+	freezer_slot->setRect( vehicle->GetGuiRect().getCenter().x - 1*GUI::SLOT::WIDTH_FOR_SHIP, 
+			       vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
+			       GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);	
 	vehicle->Add(freezer_slot);   
 	////////////////////////////////////////////////////
 
@@ -128,12 +128,12 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle)
     	for (int i = 0; i <= 10; i++)
     	{
          	ItemSlot* otsec_slot = new ItemSlot();
-         	otsec_slot->SetSubTypeId(CARGO_SLOT_ID);
+         	otsec_slot->SetSubTypeId(SLOT::CARGO_ID);
          	otsec_slot->SetTextureOb(texOb_slot);
          	otsec_slot->SetOwnerVehicle(vehicle);
-         	otsec_slot->setRect( vehicle->GetGuiRect().getCenter().x + (i-6) * SHIP_SLOT_WIDTH, 
-         			     vehicle->GetGuiRect().getCenter().y - 3*SHIP_SLOT_HEIGHT,
-         			     SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);         					
+         	otsec_slot->setRect( vehicle->GetGuiRect().getCenter().x + (i-6) * GUI::SLOT::WIDTH_FOR_SHIP, 
+         			     vehicle->GetGuiRect().getCenter().y - 3*GUI::SLOT::HEIGHT_FOR_SHIP,
+         			     GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);         					
          	vehicle->Add(otsec_slot);         
     	}
     	////////////////////////////////////////////////////
@@ -141,12 +141,12 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle)
 
     	//////////// GATE SLOT /////////////////////////////
     	ItemSlot* gate_slot = new ItemSlot();
-    	gate_slot->SetSubTypeId(GATE_SLOT_ID);
+    	gate_slot->SetSubTypeId(SLOT::GATE_ID);
     	gate_slot->SetTextureOb(texOb_slot);
         gate_slot->SetOwnerVehicle(vehicle);    			     
-    	gate_slot->setRect(  vehicle->GetGuiRect().getCenter().x - 5*SHIP_SLOT_WIDTH, 
-    			     vehicle->GetGuiRect().getCenter().y + 3*SHIP_SLOT_HEIGHT,
-    			     SHIP_SLOT_WIDTH, SHIP_SLOT_HEIGHT);
+    	gate_slot->setRect(  vehicle->GetGuiRect().getCenter().x - 5*GUI::SLOT::WIDTH_FOR_SHIP, 
+    			     vehicle->GetGuiRect().getCenter().y + 3*GUI::SLOT::HEIGHT_FOR_SHIP,
+    			     GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
     			
     	vehicle->Add(gate_slot);
 }	
@@ -187,51 +187,51 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle)
     	if (vehicle->data_korpus.weapon_slot_num >= 1)
     	{
        		//vehicle->weapon_slot1.insertItem(lazerEquipmentGenerator(RACE_0_ID)); 
-       		vehicle->GetWeaponComplex()->GetWeaponSlot1().insertItem(getNewRocketEquipment(RACE_0_ID));     	
+       		vehicle->GetWeaponComplex()->GetWeaponSlot1().insertItem(getNewRocketEquipment(RACE::R0_ID));     	
     	}   
 
     	if (vehicle->data_korpus.weapon_slot_num >= 2)
     	{
-       		vehicle->GetWeaponComplex()->GetWeaponSlot2().insertItem(getNewLazerEquipment(RACE_0_ID)); 
+       		vehicle->GetWeaponComplex()->GetWeaponSlot2().insertItem(getNewLazerEquipment(RACE::R0_ID)); 
     	}   
     
     	if (vehicle->data_korpus.weapon_slot_num >= 3)
     	{
-       		vehicle->GetWeaponComplex()->GetWeaponSlot3().insertItem(getNewLazerEquipment(RACE_0_ID)); 
+       		vehicle->GetWeaponComplex()->GetWeaponSlot3().insertItem(getNewLazerEquipment(RACE::R0_ID)); 
        		//vehicle->weapon_slot3.insertItem(rocketEquipmentGenerator(RACE_0_ID)); 
     	}   
         
     	if (vehicle->data_korpus.weapon_slot_num >= 4)
     	{
        		//vehicle->weapon_slot4.insertItem(lazerEquipmentGenerator(RACE_0_ID));         
-       		vehicle->GetWeaponComplex()->GetWeaponSlot4().insertItem(getNewRocketEquipment(RACE_0_ID)); 
+       		vehicle->GetWeaponComplex()->GetWeaponSlot4().insertItem(getNewRocketEquipment(RACE::R0_ID)); 
     	}   
     
     	if (vehicle->data_korpus.weapon_slot_num >= 5) 
     	{
        		//vehicle->weapon_slot5.insertItem(lazerEquipmentGenerator(RACE_0_ID)); 
-       		vehicle->GetWeaponComplex()->GetWeaponSlot5().insertItem(getNewRocketEquipment(RACE_0_ID)); 
+       		vehicle->GetWeaponComplex()->GetWeaponSlot5().insertItem(getNewRocketEquipment(RACE::R0_ID)); 
     	}   
         
-    	vehicle->GetRadarSlot()->insertItem(getNewRadarEquipment(RACE_0_ID)); 
+    	vehicle->GetRadarSlot()->insertItem(getNewRadarEquipment(RACE::R0_ID)); 
  
-    	vehicle->GetDriveComplex()->GetDriveSlot().insertItem(getNewDriveEquipment(RACE_0_ID)); 
-    	vehicle->GetDriveComplex()->GetBakSlot().insertItem(getNewBakEquipment(RACE_0_ID)); 
-    	vehicle->GetEnergizerSlot()->insertItem(getNewEnergizerEquipment(RACE_0_ID));     
-    	vehicle->GetProtectionComplex()->GetProtectorSlot().insertItem(getNewProtectorEquipment(RACE_0_ID)); 
-   	vehicle->GetDroidSlot()->insertItem(getNewDroidEquipment(RACE_0_ID)); 
-   	vehicle->GetFreezerSlot()->insertItem(getNewFreezerEquipment(RACE_0_ID));  
-   	vehicle->GetScanerSlot()->insertItem(getNewScanerEquipment(RACE_0_ID)); 
+    	vehicle->GetDriveComplex()->GetDriveSlot().insertItem(getNewDriveEquipment(RACE::R0_ID)); 
+    	vehicle->GetDriveComplex()->GetBakSlot().insertItem(getNewBakEquipment(RACE::R0_ID)); 
+    	vehicle->GetEnergizerSlot()->insertItem(getNewEnergizerEquipment(RACE::R0_ID));     
+    	vehicle->GetProtectionComplex()->GetProtectorSlot().insertItem(getNewProtectorEquipment(RACE::R0_ID)); 
+   	vehicle->GetDroidSlot()->insertItem(getNewDroidEquipment(RACE::R0_ID)); 
+   	vehicle->GetFreezerSlot()->insertItem(getNewFreezerEquipment(RACE::R0_ID));  
+   	vehicle->GetScanerSlot()->insertItem(getNewScanerEquipment(RACE::R0_ID)); 
     
     	if (vehicle->data_korpus.inhibit_GRAPPLE == false) 
     	{
-      		vehicle->GetGrappleSlot()->insertItem(getNewGrappleEquipment(RACE_0_ID)); 
+      		vehicle->GetGrappleSlot()->insertItem(getNewGrappleEquipment(RACE::R0_ID)); 
    	}
     
                              
     	for (unsigned int i = 0; i < 3; i++) 
     	{        
-                vehicle->AddItemToOtsec(getNewLazerEquipment(RACE_0_ID));
+                vehicle->AddItemToOtsec(getNewLazerEquipment(RACE::R0_ID));
     	}
 
 

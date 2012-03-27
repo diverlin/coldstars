@@ -86,7 +86,7 @@ Npc :: Npc(int _race_id, IdData _data_id, LifeData _data_life, TextureOb* _texOb
         
         // depending on type        
         ai_model = NULL;
-        if (( race_id == RACE_6_ID) or ( race_id == RACE_7_ID) )
+        if (( race_id == RACE::R6_ID) or ( race_id == RACE::R7_ID) )
         {
                 ai_model = g_AIMODEL_CONQUEROR;
         }
@@ -348,7 +348,7 @@ Npc* getNewNpc(int _race_id, int _subtype_id)
 {
 	IdData data_id;
     	data_id.id         = g_ID_GENERATOR.getNextId(); 
-    	data_id.type_id    = NPC_ID;
+    	data_id.type_id    = ENTITY::NPC_ID;
     	data_id.subtype_id = _subtype_id;
     	
     	LifeData data_life;

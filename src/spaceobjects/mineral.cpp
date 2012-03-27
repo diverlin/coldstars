@@ -48,7 +48,7 @@ Mineral* getNewMineral()
 {
         IdData data_id;
         data_id.id         = g_ID_GENERATOR.getNextId();
-    	data_id.type_id    = MINERAL_ID;
+    	data_id.type_id    = ENTITY::MINERAL_ID;
     	//data_id.subtype_id = ; 
         
         LifeData data_life;
@@ -60,7 +60,7 @@ Mineral* getNewMineral()
         vec3f d_angle;
         d_angle.z      = -getRandInt(10, 100)*0.01; 
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(MINERAL_TEXTURE_ID); 
+	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::MINERAL_ID); 
 	
 	Mineral* mineral = new Mineral();
 	mineral->setIdData(data_id);

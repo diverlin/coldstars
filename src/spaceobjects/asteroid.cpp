@@ -94,7 +94,7 @@ Asteroid* getNewAsteroid()
 {
 	IdData data_id;
 	data_id.id      = g_ID_GENERATOR.getNextId();
-      	data_id.type_id = ASTEROID_ID;
+      	data_id.type_id = ENTITY::ASTEROID_ID;
       	
 	LifeData data_life;   
 	data_life.armor      = 10;
@@ -109,7 +109,7 @@ Asteroid* getNewAsteroid()
     	planet_data.orbit_phi_inD = getRandInt(0, 360);
     	planet_data.speed         = 0.1;
 
-        TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(ASTEROID_TEXTURE_ID); 
+        TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::ASTEROID_ID); 
     
         Asteroid* asteroid = new Asteroid(); 
         

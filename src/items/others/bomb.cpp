@@ -62,15 +62,15 @@ Bomb* getNewBomb()
 {
         IdData data_id;
         data_id.id         = g_ID_GENERATOR.getNextId();
-    	data_id.type_id    = BOMB_ID;
+    	data_id.type_id    = ENTITY::BOMB_ID;
     	//data_id.subtype_id = ;   
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(BOMB_TEXTURE_ID); 
+	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::BOMB_ID); 
 	
 	Bomb* bomb = new Bomb();
 	bomb->setIdData(data_id);
 	bomb->setTextureOb(texOb);
-	bomb->setFunctionalSlotSubTypeId(NONE_SLOT_ID);
+	bomb->setFunctionalSlotSubTypeId(SLOT::CARGO_ID);
 	
 	return bomb;
 }

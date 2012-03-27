@@ -45,12 +45,12 @@ void Store :: createSlots()
                 while (clm_act <= clm)
                 {
                         ItemSlot* slot = new ItemSlot();
-                        slot->SetSubTypeId(CARGO_SLOT_ID);
+                        slot->SetSubTypeId(SLOT::CARGO_ID);
                         slot->SetTextureOb(texOb_slot);   
-                        slot->setRect(x0 + clm_act * 1.1 * STORE_SLOT_WIDTH, 
-                        	      y0 + row_act * 1.1 * STORE_SLOT_HEIGHT,
-                        	      STORE_SLOT_WIDTH,
-                                      STORE_SLOT_HEIGHT);
+                        slot->setRect(x0 + clm_act * 1.1 * GUI::SLOT::WIDTH_FOR_STORE, 
+                        	      y0 + row_act * 1.1 * GUI::SLOT::HEIGHT_FOR_STORE,
+                        	      GUI::SLOT::WIDTH_FOR_STORE,
+                                      GUI::SLOT::HEIGHT_FOR_STORE);
                                                         
                         slot_vec.push_back(slot);
                         clm_act++;
@@ -134,57 +134,57 @@ void equipStore(Store* store)
         
         for (unsigned int lii = 0; lii < lazer_num; lii++)
         { 
-                store->add(getNewLazerEquipment(RACE_0_ID));
+                store->add(getNewLazerEquipment(RACE::R0_ID));
         }
 
         for (unsigned int rii = 0; rii < rocket_num; rii++)
         { 
-                store->add(getNewRocketEquipment(RACE_0_ID));
+                store->add(getNewRocketEquipment(RACE::R0_ID));
         }
 
         for (unsigned int rii = 0; rii < radar_num; rii++)
         { 
-                store->add(getNewRadarEquipment(RACE_0_ID));
+                store->add(getNewRadarEquipment(RACE::R0_ID));
         }
 
         for (unsigned int gii = 0; gii < grapple_num; gii++)
         { 
-                store->add(getNewGrappleEquipment(RACE_0_ID));
+                store->add(getNewGrappleEquipment(RACE::R0_ID));
         }
 
         for (unsigned int dii = 0; dii < drive_num; dii++)
         { 
-                store->add(getNewDriveEquipment(RACE_0_ID));
+                store->add(getNewDriveEquipment(RACE::R0_ID));
         }
 
         for (unsigned int pii = 0; pii < protector_num; pii++)
         { 
-                store->add(getNewProtectorEquipment(RACE_0_ID));
+                store->add(getNewProtectorEquipment(RACE::R0_ID));
         }
 
         for (unsigned int bii = 0; bii < bak_num; bii++)
         { 
-                store->add(getNewBakEquipment(RACE_0_ID));
+                store->add(getNewBakEquipment(RACE::R0_ID));
         }
 
         for (unsigned int dii = 0; dii < droid_num; dii++)
         { 
-                store->add(getNewDroidEquipment(RACE_0_ID));
+                store->add(getNewDroidEquipment(RACE::R0_ID));
         }
 
         for (unsigned int sii = 0; sii < scaner_num; sii++)
         { 
-                store->add(getNewScanerEquipment(RACE_0_ID));
+                store->add(getNewScanerEquipment(RACE::R0_ID));
         }
 
         for (unsigned int fii = 0; fii < freezer_num; fii++)
         { 
-                store->add(getNewFreezerEquipment(RACE_0_ID));
+                store->add(getNewFreezerEquipment(RACE::R0_ID));
         }
 
         for (unsigned int ebi = 0; ebi < energyBlock_num; ebi++) 
         { 
-                store->add(getNewEnergizerEquipment(RACE_0_ID));
+                store->add(getNewEnergizerEquipment(RACE::R0_ID));
         }
 }
 

@@ -108,7 +108,7 @@ Star* getNewStar()
 {
 	IdData data_id;
 	data_id.id         = g_ID_GENERATOR.getNextId();
-      	data_id.type_id    = STAR_ID;
+      	data_id.type_id    = ENTITY::STAR_ID;
         
         LifeData data_life;
 
@@ -121,7 +121,7 @@ Star* getNewStar()
     	star_data.orbit_phi_inD = 0;
     	star_data.speed         = 1.8;
 
-    	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(STAR_TEXTURE_ID);
+    	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::STAR_ID);
     	Star* star = new Star();
     	
     	star->setPlanetData(star_data);
