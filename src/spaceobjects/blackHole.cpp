@@ -64,7 +64,7 @@ BlackHole* getNewBlackHole()
 {
         IdData data_id;
         data_id.id         = g_ID_GENERATOR.getNextId();
-    	data_id.type_id    = BLACKHOLE_ID;
+    	data_id.type_id    = ENTITY::BLACKHOLE_ID;
     	//data_id.subtype_id = ; 
         
         LifeData data_life;
@@ -73,7 +73,7 @@ BlackHole* getNewBlackHole()
     	data_life.armor      = 100000;
         data_life.dying_time = 30;        
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(BLACKHOLE_TEXTURE_ID); 
+	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::BLACKHOLE_ID); 
 	BlackHole* blackhole = new BlackHole();
 	blackhole->setIdData(data_id);
 	blackhole->setLifeData(data_life);

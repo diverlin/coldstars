@@ -98,14 +98,14 @@ std::string EnergizerEquipment :: getRestorationStr()
 EnergizerEquipment* getNewEnergizerEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
-       		race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
     	if (revision_id == -1)
-       		revision_id = TECH_LEVEL_0_ID; 
+       		revision_id = TECHLEVEL::L0_ID; 
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(ENERGYBLOCK_ITEM_TEXTURE_ID);   
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::ENERGIZER_EQUIPMENT_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(ENERGIZER_ITEM_TEXTURE_ID, revision_id)
 
     	int energy_max_orig  = getRandInt(ENERGIZER_ENERGY_MIN, ENERGIZER_ENERGY_MAX);
@@ -119,14 +119,14 @@ EnergizerEquipment* getNewEnergizerEquipment(int race_id, int revision_id)
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT_ID;
-        data_id.subtype_id = ENERGIZER_EQUIPMENT_ID;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::ENERGIZER_ID;
         
     	EnergizerEquipment* energizer_equipment = new EnergizerEquipment(energy_max_orig, restoration_orig);
         
         energizer_equipment->setIdData(data_id);  
         energizer_equipment->setTextureOb(texOb_item);    	
-        energizer_equipment->setFunctionalSlotSubTypeId(ENERGIZER_SLOT_ID);
+        energizer_equipment->setFunctionalSlotSubTypeId(SLOT::ENERGIZER_ID);
         energizer_equipment->setItemCommonData(common_data);
                 
         energizer_equipment->updatePropetries();

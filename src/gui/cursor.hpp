@@ -41,7 +41,6 @@ class Cursor
 		void update();
         	
         private:
-                int type_id;
         	ItemSlot* slot;
         	
         	Player* player;

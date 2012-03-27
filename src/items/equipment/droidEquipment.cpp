@@ -83,15 +83,15 @@ std::string DroidEquipment :: getRepairStr()
 DroidEquipment* getNewDroidEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
-       		race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
     	if (revision_id == -1)
-       		revision_id = TECH_LEVEL_0_ID; 
+       		revision_id = TECHLEVEL::L0_ID; 
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(DROID_ITEM_TEXTURE_ID);    
-    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(DROID_ITEM_TEXTURE_ID, revision_id)
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::DROID_EQUIPMENT_ID);    
+    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::DROID_EQUIPMENT_ID, revision_id)
 
     	int repair_orig     = getRandInt(DROID_REPAIR_MIN, DROID_REPAIR_MAX);
     	
@@ -103,14 +103,14 @@ DroidEquipment* getNewDroidEquipment(int race_id, int revision_id)
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT_ID;
-        data_id.subtype_id = DROID_EQUIPMENT_ID;  
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::DROID_ID;  
         
     	DroidEquipment* droid_equipment = new DroidEquipment(repair_orig);
         
         droid_equipment->setIdData(data_id);  
         droid_equipment->setTextureOb(texOb_item);    	
-        droid_equipment->setFunctionalSlotSubTypeId(DROID_SLOT_ID);
+        droid_equipment->setFunctionalSlotSubTypeId(SLOT::DROID_ID);
         droid_equipment->setItemCommonData(common_data);
                 
                 

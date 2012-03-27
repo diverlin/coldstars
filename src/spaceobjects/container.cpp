@@ -22,9 +22,9 @@ Container :: Container()
 {
     	mass = 1;
 
-    	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(SLOT_TEXTURE_ID);
+    	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SLOT_ID);
     	item_slot = new ItemSlot();
-    	item_slot->SetSubTypeId(CARGO_SLOT_ID);
+    	item_slot->SetSubTypeId(SLOT::CARGO_ID);
     	item_slot->SetTextureOb(texOb_slot);
     	
     	velocity = getRandInt(40, 42) / 100.0;
@@ -53,7 +53,7 @@ void Container :: renderInfo_inSpace(vec2f scroll_coords)
  /* virtual */    
 void Container :: postDeathUniqueEvent(bool show_effect)
 {
-        if (item_slot->getItem()->getTypeId() == BOMB_ID)
+        if (item_slot->getItem()->getTypeId() == ENTITY::BOMB_ID)
         {
         	starsystem->bombExplosionEvent(this, show_effect);  
         }
@@ -73,7 +73,7 @@ Container* getNewContainer()
 {
         IdData data_id;
         data_id.id = g_ID_GENERATOR.getNextId(); 
-        data_id.type_id = CONTAINER_ID;
+        data_id.type_id = ENTITY::CONTAINER_ID;
         
         LifeData data_life;
         data_life.armor = getRandInt(1,6);
@@ -82,7 +82,7 @@ Container* getNewContainer()
         vec3f d_angle;
         d_angle.z      = -getRandInt(10, 100)*0.01; 
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(CONTAINER_TEXTURE_ID); 
+	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::CONTAINER_ID); 
 	
 	Container* container = new Container();
 	container->setIdData(data_id);

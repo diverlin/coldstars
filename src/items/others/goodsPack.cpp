@@ -33,7 +33,7 @@ GoodsPack :: ~GoodsPack()  /* virtual */
         	
 void GoodsPack :: increase(unsigned int _ammount)
 {
-	if (getSubTypeId() == MINERAL_ID)
+	if (getSubTypeId() == ENTITY::MINERAL_ID)
 	{
 		mineral += _ammount;
 		mass = mineral;
@@ -42,7 +42,7 @@ void GoodsPack :: increase(unsigned int _ammount)
     
 void GoodsPack :: decrease(unsigned int _ammount)
 {
-	if (getSubTypeId() == MINERAL_ID)
+	if (getSubTypeId() == ENTITY::MINERAL_ID)
 	{
 		mineral -= _ammount;
 		mass = mineral;
@@ -56,7 +56,7 @@ void GoodsPack :: updateInfo()
 	
     	info.addTitleStr("GOODS");
     	
-    	if (getSubTypeId() == MINERAL_ID)
+    	if (getSubTypeId() == ENTITY::MINERAL_ID)
     	{
     		info.addNameStr("mineral:");   info.addValueStr( int2str(mineral) );
     		info.addNameStr("mass:");   info.addValueStr( int2str(mass) );
@@ -81,7 +81,7 @@ GoodsPack* getNewGoodsPack(unsigned int _subtype_id)
 {
         IdData data_id;
         data_id.id = g_ID_GENERATOR.getNextId(); 
-        data_id.type_id = GOODS_ID;
+        data_id.type_id = ENTITY::GOODS_ID;
         data_id.subtype_id = _subtype_id;
                 
         LifeData data_life;
@@ -91,7 +91,7 @@ GoodsPack* getNewGoodsPack(unsigned int _subtype_id)
         vec3f d_angle;
         d_angle.z      = -getRandInt(10, 100)*0.01; 
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(CONTAINER_TEXTURE_ID); 
+	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::CONTAINER_ID); 
 	
 	GoodsPack* goodsPack = new GoodsPack();
 	goodsPack->setIdData(data_id);

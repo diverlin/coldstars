@@ -43,34 +43,34 @@ void GuiSkill :: createControlSkillButtons()
      	TextureOb* texOb_icon_plus  = g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_plus;
      	TextureOb* texOb_icon_minus = g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_minus;
      	     	
-     	Button* increment_attack_button   = new Button(texOb_icon_plus, INCREMENT_ATTACK_BUTTON_ID, x, y - w,   w, w, "");  
+     	Button* increment_attack_button   = new Button(texOb_icon_plus, GUI::BUTTON::SKILL::INCREMENT_ATTACK_ID, x, y - w,   w, w, "");  
      	button_vec.push_back(increment_attack_button);
-     	Button* decrement_attack_button   = new Button(texOb_icon_minus, DECREMENT_ATTACK_BUTTON_ID, x, y - 2*w, w, w, "");  
+     	Button* decrement_attack_button   = new Button(texOb_icon_minus, GUI::BUTTON::SKILL::DECREMENT_ATTACK_ID, x, y - 2*w, w, w, "");  
      	button_vec.push_back(decrement_attack_button);
                      
-     	Button* increment_defence_button  = new Button(texOb_icon_plus, INCREMENT_DEFENCE_BUTTON_ID, x + w, y - w,   w, w, "");  
+     	Button* increment_defence_button  = new Button(texOb_icon_plus, GUI::BUTTON::SKILL::INCREMENT_DEFENCE_ID, x + w, y - w,   w, w, "");  
      	button_vec.push_back(increment_defence_button);
-     	Button* decrement_defence_button  = new Button(texOb_icon_minus, DECREMENT_DEFENCE_BUTTON_ID, x + w, y - 2*w, w, w, "");  
+     	Button* decrement_defence_button  = new Button(texOb_icon_minus, GUI::BUTTON::SKILL::DECREMENT_DEFENCE_ID, x + w, y - 2*w, w, w, "");  
      	button_vec.push_back(decrement_defence_button);
      	        
-     	Button* increment_leader_button   = new Button(texOb_icon_plus, INCREMENT_LEADER_BUTTON_ID, x + 2*w, y - w,   w, w, "");  
+     	Button* increment_leader_button   = new Button(texOb_icon_plus, GUI::BUTTON::SKILL::INCREMENT_LEADER_ID, x + 2*w, y - w,   w, w, "");  
      	button_vec.push_back(increment_leader_button);
-     	Button* decrement_leader_button   = new Button(texOb_icon_minus, DECREMENT_LEADER_BUTTON_ID, x + 2*w, y - 2*w, w, w, ""); 
+     	Button* decrement_leader_button   = new Button(texOb_icon_minus, GUI::BUTTON::SKILL::DECREMENT_LEADER_ID, x + 2*w, y - 2*w, w, w, ""); 
      	button_vec.push_back(decrement_leader_button);
      	      
-     	Button* increment_trader_button   = new Button(texOb_icon_plus, INCREMENT_TRADER_BUTTON_ID, x + 3*w, y - w,   w, w, "");  
+     	Button* increment_trader_button   = new Button(texOb_icon_plus, GUI::BUTTON::SKILL::INCREMENT_TRADER_ID, x + 3*w, y - w,   w, w, "");  
      	button_vec.push_back(increment_trader_button);
-     	Button* decrement_trader_button   = new Button(texOb_icon_minus, DECREMENT_TRADER_BUTTON_ID, x + 3*w, y - 2*w, w, w, ""); 
+     	Button* decrement_trader_button   = new Button(texOb_icon_minus, GUI::BUTTON::SKILL::DECREMENT_TRADER_ID, x + 3*w, y - 2*w, w, w, ""); 
      	button_vec.push_back(decrement_trader_button);
     
-     	Button* increment_technic_button  = new Button(texOb_icon_plus, INCREMENT_TECHNIC_BUTTON_ID, x + 4*w, y - w,   w, w, "");  
+     	Button* increment_technic_button  = new Button(texOb_icon_plus, GUI::BUTTON::SKILL::INCREMENT_TECHNIC_ID, x + 4*w, y - w,   w, w, "");  
      	button_vec.push_back(increment_technic_button);
-     	Button* decrement_technic_button  = new Button(texOb_icon_minus, DECREMENT_TECHNIC_BUTTON_ID, x + 4*w, y - 2*w, w, w, ""); 
+     	Button* decrement_technic_button  = new Button(texOb_icon_minus, GUI::BUTTON::SKILL::DECREMENT_TECHNIC_ID, x + 4*w, y - 2*w, w, w, ""); 
      	button_vec.push_back(decrement_technic_button);
      
-     	Button* increment_diplomat_button = new Button(texOb_icon_plus, INCREMENT_DIPLOMAT_BUTTON_ID, x + 5*w, y - w,   w, w, "");  
+     	Button* increment_diplomat_button = new Button(texOb_icon_plus, GUI::BUTTON::SKILL::INCREMENT_DIPLOMAT_ID, x + 5*w, y - w,   w, w, "");  
      	button_vec.push_back(increment_diplomat_button);
-     	Button* decrement_diplomat_button = new Button(texOb_icon_minus, DECREMENT_DIPLOMAT_BUTTON_ID, x + 5*w, y - 2*w, w, w, "");
+     	Button* decrement_diplomat_button = new Button(texOb_icon_minus, GUI::BUTTON::SKILL::DECREMENT_DIPLOMAT_ID, x + 5*w, y - 2*w, w, w, "");
         button_vec.push_back(decrement_diplomat_button);     
 }
 
@@ -90,23 +90,23 @@ void GuiSkill :: update()
         		{
         	   		switch(button_vec[i]->getSubTypeId())
         	   		{
-        	   	   		case INCREMENT_ATTACK_BUTTON_ID:   { skill->incrementAttack(); break; }
-        	        		case DECREMENT_ATTACK_BUTTON_ID:   { skill->decrementAttack(); break; }
+        	   	   		case GUI::BUTTON::SKILL::INCREMENT_ATTACK_ID:   { skill->incrementAttack(); break; }
+        	        		case GUI::BUTTON::SKILL::DECREMENT_ATTACK_ID:   { skill->decrementAttack(); break; }
            		   	      	
-        	   			case INCREMENT_DEFENCE_BUTTON_ID:  { skill->incrementDefence(); break; }
-        	        		case DECREMENT_DEFENCE_BUTTON_ID:  { skill->decrementDefence(); break; }
+        	   			case GUI::BUTTON::SKILL::INCREMENT_DEFENCE_ID:  { skill->incrementDefence(); break; }
+        	        		case GUI::BUTTON::SKILL::DECREMENT_DEFENCE_ID:  { skill->decrementDefence(); break; }
           		   	      	
-        	   			case INCREMENT_LEADER_BUTTON_ID:   { skill->incrementLeader(); break; }
-        	        		case DECREMENT_LEADER_BUTTON_ID:   { skill->decrementLeader(); break; }
+        	   			case GUI::BUTTON::SKILL::INCREMENT_LEADER_ID:   { skill->incrementLeader(); break; }
+        	        		case GUI::BUTTON::SKILL::DECREMENT_LEADER_ID:   { skill->decrementLeader(); break; }
            		   	      	
-        	   			case INCREMENT_TRADER_BUTTON_ID:   { skill->incrementTrader(); break; }
-        	        		case DECREMENT_TRADER_BUTTON_ID:   { skill->decrementTrader(); break; }
+        	   			case GUI::BUTTON::SKILL::INCREMENT_TRADER_ID:   { skill->incrementTrader(); break; }
+        	        		case GUI::BUTTON::SKILL::DECREMENT_TRADER_ID:   { skill->decrementTrader(); break; }
            		   	      	
-        	   			case INCREMENT_TECHNIC_BUTTON_ID:  { skill->incrementTechnic(); break; }
-        	       			case DECREMENT_TECHNIC_BUTTON_ID:  { skill->decrementTechnic(); break; }
+        	   			case GUI::BUTTON::SKILL::INCREMENT_TECHNIC_ID:  { skill->incrementTechnic(); break; }
+        	       			case GUI::BUTTON::SKILL::DECREMENT_TECHNIC_ID:  { skill->decrementTechnic(); break; }
            		   	      	
-        	   			case INCREMENT_DIPLOMAT_BUTTON_ID: { skill->incrementDiplomat(); break; }
-        	        		case DECREMENT_DIPLOMAT_BUTTON_ID: { skill->decrementDiplomat(); break; }        
+        	   			case GUI::BUTTON::SKILL::INCREMENT_DIPLOMAT_ID: { skill->incrementDiplomat(); break; }
+        	        		case GUI::BUTTON::SKILL::DECREMENT_DIPLOMAT_ID: { skill->decrementDiplomat(); break; }        
            	        	}  		   	
            		}
 		}
@@ -128,7 +128,7 @@ void GuiSkill :: render() const
 
 		switch(button_vec[bi]->getSubTypeId())		
 		{
-			case INCREMENT_ATTACK_BUTTON_ID:
+			case GUI::BUTTON::SKILL::INCREMENT_ATTACK_ID:
 			{
 		     		for (int i = 0; i < skill->getAttack(); i++) 
      				{ 
@@ -141,7 +141,7 @@ void GuiSkill :: render() const
  			break;
 			}
 			
-			case INCREMENT_DEFENCE_BUTTON_ID:
+			case GUI::BUTTON::SKILL::INCREMENT_DEFENCE_ID:
 			{
 		     		for (int i = 0; i < skill->getDefence(); i++) 
      				{		 
@@ -153,7 +153,7 @@ void GuiSkill :: render() const
 			break;
 			}
 
-			case INCREMENT_LEADER_BUTTON_ID:
+			case GUI::BUTTON::SKILL::INCREMENT_LEADER_ID:
 			{
 	   		     	for (int i = 0; i < skill->getLeader(); i++) 
      				{ 
@@ -165,7 +165,7 @@ void GuiSkill :: render() const
 			break;
 	   		}
 
-	   		case INCREMENT_TRADER_BUTTON_ID:
+	   		case GUI::BUTTON::SKILL::INCREMENT_TRADER_ID:
 	   		{
 	   	     		for (int i = 0; i < skill->getTrader(); i++) 
      				{ 
@@ -177,7 +177,7 @@ void GuiSkill :: render() const
 			break;
 	   	   	}
 			
-	   		case INCREMENT_TECHNIC_BUTTON_ID:
+	   		case GUI::BUTTON::SKILL::INCREMENT_TECHNIC_ID:
 	   		{
 	   	     		for (int i = 0; i < skill->getTechnic(); i++) 
      				{ 
@@ -189,7 +189,7 @@ void GuiSkill :: render() const
 	   		break;
 	   		}
 
-	   		case INCREMENT_DIPLOMAT_BUTTON_ID:
+	   		case GUI::BUTTON::SKILL::INCREMENT_DIPLOMAT_ID:
 	   		{
 	   			for (int i = 0; i < skill->getDiplomat(); i++) 
      				{ 

@@ -21,18 +21,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 GuiSpace :: GuiSpace(Player* player)
 {
 	this->player = player;
-
-	TextureOb* texOb_icon_map = g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_map;
-
-	galaxymap_screen_button = new Button(texOb_icon_map, 
-			SCREEN_GALAXYMAP_ID,
-			SCREEN_WIDTH_MIN  - (INTERFACE_ICON_SIZE + 5),
-			SCREEN_HEIGHT_MIN - (INTERFACE_ICON_SIZE + 5), 
-			INTERFACE_ICON_SIZE,  
-			INTERFACE_ICON_SIZE, 
-			"galaxy map");
-
-	button_vec.push_back(galaxymap_screen_button);
+	
+    	TextureOb* texOb_icon_map = g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_map;
+    	
+    	galaxymap_screen_button = new Button(texOb_icon_map, 
+        				     GUI::SCREEN::GALAXYMAP_ID,
+    					     SCREEN_WIDTH_MIN  - (GUI::ICON_SIZE + 5),
+    					     SCREEN_HEIGHT_MIN - (GUI::ICON_SIZE + 5), 
+    					     GUI::ICON_SIZE,  
+    					     GUI::ICON_SIZE, 
+    					     "galaxy map");
+    					     
+    	button_vec.push_back(galaxymap_screen_button);
 }
 
 
@@ -63,18 +63,18 @@ void GuiSpace :: mouseInteraction()
 	int lmb  = player->getCursor()->getMouseLeftButton();
 
 	for (unsigned int i = 0; i < button_vec.size(); i++)
-	{ 
-		if (button_vec[i]->interaction(mxvp, myvp) == true)
-		{
-			if (lmb == true)
-			{
-				if (button_vec[i]->getSubTypeId() == SCREEN_GALAXYMAP_ID)
-				{
-					player->setWorldMapShowFlag(!player->getWorldMapShowFlag());
-				}
-			}
-		}
-	}
+     	{ 
+        	if (button_vec[i]->interaction(mxvp, myvp) == true)
+        	{
+           		if (lmb == true)
+           		{
+           			if (button_vec[i]->getSubTypeId() == GUI::SCREEN::GALAXYMAP_ID)
+              			{
+              				player->setWorldMapShowFlag(!player->getWorldMapShowFlag());
+                 		}
+           		}
+        	}
+     	}
 }
 
 

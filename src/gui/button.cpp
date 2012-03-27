@@ -27,7 +27,7 @@ Button :: Button(TextureOb* _texOb,
 		 int _h, 
 		 std::string _info_str)
 {
-	type_id = BUTTON_ID;
+	type_id = GUI::BUTTON::BUTTON_ID;
 	subtype_id = _subtype_id;
 	
     	texOb = _texOb;

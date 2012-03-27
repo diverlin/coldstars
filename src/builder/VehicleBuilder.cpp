@@ -32,7 +32,7 @@ Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int w
     	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomShipTexObWithFollowingAtrributes(race_id, subtype_id, size_id); 
        
        	int protection_rate = 1;
-       	if (subtype_id == WARRIOR_ID)
+       	if (subtype_id == CLASS::WARRIOR_ID)
         {
         	protection_rate = 3;
         }
@@ -54,7 +54,7 @@ Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int w
        
         IdData data_id;
         data_id.id      = g_ID_GENERATOR.getNextId(); 
-    	data_id.type_id = SHIP_ID;
+    	data_id.type_id = ENTITY::SHIP_ID;
     	data_id.subtype_id = subtype_id;       
 
         int size_threshold = 2; 
@@ -83,10 +83,10 @@ Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int w
 
 Satellite* VehicleBuilder::GetNewSatellite()
 {
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(SATELLITE_TEXTURE_ID);  
+	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SATELLITE_ID);  
 	
        	int protection_rate = 1;
-       	//if (subtype_id == WARRIOR_ID)
+       	//if (subtype_id == CLASS::WARRIOR_ID)
         //{
         	protection_rate = 1;
         //}
@@ -108,7 +108,7 @@ Satellite* VehicleBuilder::GetNewSatellite()
        
         IdData data_id;
         data_id.id         = g_ID_GENERATOR.getNextId(); 
-    	data_id.type_id    = SATELLITE_ID;
+    	data_id.type_id    = ENTITY::SATELLITE_ID;
     	//data_id.subtype_id = MILITARY_ID;       
 
         int size_threshold = 2; 
@@ -135,10 +135,10 @@ Satellite* VehicleBuilder::GetNewSatellite()
 
 SpaceStation* VehicleBuilder::GetNewSpaceStation()
 {
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(SPACESTATION_TEXTURE_ID); 
+	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SPACESTATION_ID); 
        
        	int protection_rate = 1;
-       	//if (subtype_id == WARRIOR_ID)
+       	//if (subtype_id == CLASS::WARRIOR_ID)
         //{
         	protection_rate = 5;
         //}
@@ -160,13 +160,13 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation()
        
         IdData data_id;
         data_id.id         = g_ID_GENERATOR.getNextId(); 
-    	data_id.type_id    = SPACESTATION_ID;
-    	data_id.subtype_id = MILITARY_ID;       
+    	data_id.type_id    = ENTITY::SPACESTATION_ID;
+    	data_id.subtype_id = SPACESTATION::MILITARY_ID;       
 
         int size_threshold = 2; 
 	data_korpus.render_TURRELS = true; 
                            
-    	SpaceStation* spacestation = new SpaceStation(RACE_0_ID);
+    	SpaceStation* spacestation = new SpaceStation(RACE::R0_ID);
     	spacestation->SetKorpusData(data_korpus);
 	spacestation->setTextureOb(texOb);
 	spacestation->setIdData(data_id);
@@ -179,7 +179,7 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation()
         CreateWeaponsComplex(spacestation);
         CreateProtectionComplex(spacestation);	
         
-    	spacestation->createLand(RACE_0_ID);
+    	spacestation->createLand(RACE::R0_ID);
     	    
     	return spacestation;
 }
@@ -191,7 +191,7 @@ RocketBullet* VehicleBuilder::GetNewRocket(BulletData data_bullet, ItemSlot* slo
 	LifeData data_life;
 	
 	data_id.id = -1;
-	data_id.type_id = ROCKET_BULLET_ID;
+	data_id.type_id = ENTITY::ROCKET_ID;
 	data_id.subtype_id = -1;
 	
 	data_life.is_alive      = true;

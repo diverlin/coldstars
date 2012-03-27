@@ -42,8 +42,8 @@ DroidModule* getNewDroidModule()
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = MODULE_ID;
-        data_id.subtype_id = DROID_MODULE_ID; 
+        data_id.type_id    = MODULE::MODULE_ID;
+        data_id.subtype_id = MODULE::DROID_ID; 
         
     	DroidModule* droid_module = new DroidModule(repair_add);
         droid_module->setTextureOb(texOb);

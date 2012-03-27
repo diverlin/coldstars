@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 EquipmentBase :: EquipmentBase()
 {
-        race_id = RACE_0_ID;
+        race_id = RACE::R0_ID;
           
     	is_DAMAGED = false;
 
@@ -68,10 +68,10 @@ void EquipmentBase :: render(Rect slot_rect)
     
     	for (unsigned int i = 0; i < modules_vec.size(); i++)
     	{
-        	Rect module_rect(slot_rect.getBottomLeft().x + (1.1 * INSERTED_MODULE_SIZE) * (i), 
-        		         slot_rect.getBottomLeft().y + (1.1 * INSERTED_MODULE_SIZE),
-        			 INSERTED_MODULE_SIZE, 
-        			 INSERTED_MODULE_SIZE);
+        	Rect module_rect(slot_rect.getBottomLeft().x + (1.1 * GUI::INSERTED_MODULE_SIZE) * (i), 
+        		         slot_rect.getBottomLeft().y + (1.1 * GUI::INSERTED_MODULE_SIZE),
+        			 GUI::INSERTED_MODULE_SIZE, 
+        			 GUI::INSERTED_MODULE_SIZE);
         	drawTexturedRect(modules_vec[i]->getTextureOb(), module_rect, -1);
     	}
 }

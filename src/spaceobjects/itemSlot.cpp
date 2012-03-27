@@ -25,7 +25,7 @@ ItemSlot :: ItemSlot()
         Lazer weapon item cannot be inserted to drive slot and so on).
 	*/
 
-        type_id    = SLOT_ID;
+        type_id    = SLOT::SLOT_ID;
 	subtype_id = -1;
      
         rect = Rect();         
@@ -104,7 +104,7 @@ bool ItemSlot :: insertItem(ItemBase* item)
 {
 	if (item != NULL)
 	{
-		if (subtype_id == CARGO_SLOT_ID) 
+		if (subtype_id == SLOT::CARGO_ID) 
 		{
                 	this->item = item;
                 	is_EQUIPED = true; 
@@ -141,7 +141,7 @@ void ItemSlot :: removeItem()
         item = NULL;
     	is_EQUIPED = false;  
         
-    	if (subtype_id != CARGO_SLOT_ID) 
+    	if (subtype_id != SLOT::CARGO_ID) 
     	{ 
     		tmp_item->updateOwnerAbilities(); 
     	}                     
@@ -163,21 +163,21 @@ int ItemSlot :: getItemRadius() const
 {       
         switch(item->getTypeId())
         {
-                case EQUIPMENT_ID:
+                case EQUIPMENT::EQUIPMENT_ID:
                 {
                         switch (item->getSubTypeId())
                         {
-                                case LAZER_EQUIPMENT_ID:   { return ((LazerEquipment*)item)->getRadius();  break; };
-                                case ROCKET_EQUIPMENT_ID:  { return ((RocketEquipment*)item)->getRadius(); break; };
+                                case EQUIPMENT::LAZER_ID:   { return ((LazerEquipment*)item)->getRadius();  break; };
+                                case EQUIPMENT::ROCKET_ID:  { return ((RocketEquipment*)item)->getRadius(); break; };
 		
-                                case GRAPPLE_EQUIPMENT_ID: { return ((GrappleEquipment*)item)->getRadius(); break; };
-                                case RADAR_EQUIPMENT_ID:   { return ((RadarEquipment*)item)->getRadius();   break; };
+                                case EQUIPMENT::GRAPPLE_ID: { return ((GrappleEquipment*)item)->getRadius(); break; };
+                                case EQUIPMENT::RADAR_ID:   { return ((RadarEquipment*)item)->getRadius();   break; };
                         }
                         
                         break;
                 }
                 
-                case BOMB_ID:
+                case ENTITY::BOMB_ID:
                 {
                         return ((Bomb*)item)->getRadius();   break; 
                 }
@@ -257,7 +257,7 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
 
 	if ( (is_EQUIPED == true) and (_slot->getEquipedStatus() == true) )
        	{          
-       		if ( (item->getTypeId() == MODULE_ID) and (_slot->getItem()->getTypeId() == EQUIPMENT_ID) )
+       		if ( (item->getTypeId() == MODULE::MODULE_ID) and (_slot->getItem()->getTypeId() == EQUIPMENT::EQUIPMENT_ID) )
        		{
 			if (((EquipmentBase*)_slot->getItem())->insertModule((ModuleBase*)item) == true)  
 			{ 
@@ -267,7 +267,7 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
         		}
        		}
        		
-       		if ( (item->getTypeId() == EQUIPMENT_ID) and (_slot->getItem()->getTypeId() == MODULE_ID) )
+       		if ( (item->getTypeId() == EQUIPMENT::EQUIPMENT_ID) and (_slot->getItem()->getTypeId() == MODULE::MODULE_ID) )
        		{
 			 if (((EquipmentBase*)item)->insertModule((ModuleBase*)_slot->getItem()) == true)  
 			 { 
@@ -332,7 +332,7 @@ bool ItemSlot :: isStarSystemOk(BaseGameEntity* _target) const
 
 bool ItemSlot :: isDistanceOk(BaseGameEntity* _target) const
 {
-	if (_target->getTypeId() == STARSYSTEM_ID)
+	if (_target->getTypeId() == ENTITY::STARSYSTEM_ID)
 	{
 		return true;
 	}

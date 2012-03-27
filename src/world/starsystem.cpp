@@ -20,8 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 StarSystem :: StarSystem(int race_id)
 { 
-    	id = g_ID_GENERATOR.getNextId();
-    	type_id = STARSYSTEM_ID;
+    	data_id.id = g_ID_GENERATOR.getNextId();
+    	data_id.type_id = ENTITY::STARSYSTEM_ID;
     	
     	is_CAPTURED = false;
     	
@@ -32,9 +32,9 @@ StarSystem :: StarSystem(int race_id)
     	calculation_per_turn_allowed_inDynamic = true;
 
     	detalied_simulation = false; // will be changing depending on player presence
-    	
-    	starsystem = this;
-    	galaxy = NULL;
+
+    	galaxy = NULL;    	
+    	this->setStarSystem(this);
 }
 
 StarSystem :: ~StarSystem()
@@ -44,9 +44,6 @@ StarSystem :: ~StarSystem()
 void StarSystem :: setPosition(vec2f center) { this->center = center; }
 void StarSystem :: setGalaxy(Galaxy* galaxy)  { this->galaxy = galaxy;}
 						
-int StarSystem :: getId() const     { return id; }
-int StarSystem :: getTypeId() const { return type_id; }
-StarSystem* StarSystem :: getStarSystem() { return this; }
 bool StarSystem :: getDetailedSimulationFlag() const { return detalied_simulation; }
 bool StarSystem :: getCaptured() const { return is_CAPTURED; }    
 vec2f StarSystem :: getPosition() const { return center; }  
@@ -207,14 +204,14 @@ void StarSystem :: update_s()
 			else
 			{
 				is_CAPTURED = true;
-				if (getRandNpcByRaceId(RACE_6_ID) != NULL)
+				if (getRandNpcByRaceId(RACE::R6_ID) != NULL)
 				{
-					conqueror_race_id = RACE_6_ID;
+					conqueror_race_id = RACE::R6_ID;
 				}
 				
-				if (getRandNpcByRaceId(RACE_7_ID) != NULL)
+				if (getRandNpcByRaceId(RACE::R7_ID) != NULL)
 				{
-					conqueror_race_id = RACE_7_ID;
+					conqueror_race_id = RACE::R7_ID;
 				}
 			}
 		}
@@ -678,12 +675,12 @@ void StarSystem :: asteroidManager_s(unsigned int num)
 
 void StarSystem :: addToSpace(Vehicle* vehicle, vec2f center, float angle, BaseGameEntity* parent)
 {
-     	vehicle->setPlaceTypeId(SPACE_ID);
+     	vehicle->setPlaceTypeId(ENTITY::SPACE_ID);
      	vehicle->setStarSystem(this);  
 
 	switch(vehicle->getTypeId())
 	{
-		case SHIP_ID:         	
+		case ENTITY::SHIP_ID:         	
 		{ 	
 			SHIP_inSPACE_vec.push_back((Ship*)vehicle);  
 			 
@@ -694,7 +691,7 @@ void StarSystem :: addToSpace(Vehicle* vehicle, vec2f center, float angle, BaseG
 			break; 
 		}
 					
-		case SPACESTATION_ID:
+		case ENTITY::SPACESTATION_ID:
 		{
 		 	SPACESTATION_vec.push_back((SpaceStation*)vehicle);   
 			 	
@@ -705,7 +702,7 @@ void StarSystem :: addToSpace(Vehicle* vehicle, vec2f center, float angle, BaseG
 		 	break; 
 		}
 		
-		case SATELLITE_ID:    	
+		case ENTITY::SATELLITE_ID:    	
 		{ 
 			vehicle->setParent(parent);
 			((Satellite*)vehicle)->getOrbit()->calcPath(parent->getCollisionRadius(), 1.0);
@@ -720,18 +717,18 @@ void StarSystem :: addToSpace(Vehicle* vehicle, vec2f center, float angle, BaseG
 
 void StarSystem :: addToSpace(Npc* npc)
 {
-     	npc->setPlaceTypeId(SPACE_ID);
+     	npc->setPlaceTypeId(ENTITY::SPACE_ID);
      	npc->setStarSystem(this);  
 
      	NPC_inSPACE_vec.push_back(npc);
 
 	switch(npc->getSubTypeId())
 	{
-     	 	case RANGER_ID:     { NPC_RANGER_inSPACE_vec.push_back(npc);    break; }
-     		case WARRIOR_ID:    { NPC_WARRIOR_inSPACE_vec.push_back(npc);   break; }
-     		case TRADER_ID:     { NPC_TRADER_inSPACE_vec.push_back(npc);    break; }
-     		case PIRAT_ID:      { NPC_PIRAT_inSPACE_vec.push_back(npc);    break; }
-     		case DIPLOMAT_ID:   { NPC_DIPLOMAT_inSPACE_vec.push_back(npc); break; }
+     	 	case CLASS::RANGER_ID:     { NPC_RANGER_inSPACE_vec.push_back(npc);    break; }
+     		case CLASS::WARRIOR_ID:    { NPC_WARRIOR_inSPACE_vec.push_back(npc);   break; }
+     		case CLASS::TRADER_ID:     { NPC_TRADER_inSPACE_vec.push_back(npc);    break; }
+     		case CLASS::PIRAT_ID:      { NPC_PIRAT_inSPACE_vec.push_back(npc);    break; }
+     		case CLASS::DIPLOMAT_ID:   { NPC_DIPLOMAT_inSPACE_vec.push_back(npc); break; }
      	}
 }
 
@@ -739,7 +736,7 @@ void StarSystem :: addToSpace(Npc* npc)
 void StarSystem :: addToSpace(Star* star)
 {
         star->setStarSystem(this);
-        star->setPlaceTypeId(SPACE_ID);
+        star->setPlaceTypeId(ENTITY::SPACE_ID);
         STAR_vec.push_back(star);
 }
 
@@ -749,7 +746,7 @@ void StarSystem :: addToSpace(Planet* planet, BaseGameEntity* parent)
         planet->setParent(parent);
         
         planet->setStarSystem(this);
-        planet->setPlaceTypeId(SPACE_ID);
+        planet->setPlaceTypeId(ENTITY::SPACE_ID);
         PLANET_vec.push_back(planet);
 }
                 
@@ -759,7 +756,7 @@ void StarSystem :: addToSpace(Asteroid* asteroid)
 	asteroid->update_inSpace(1, true);
 	
         asteroid->setStarSystem(this);
-        asteroid->setPlaceTypeId(SPACE_ID);
+        asteroid->setPlaceTypeId(ENTITY::SPACE_ID);
         ASTEROID_vec.push_back(asteroid);
 }
 
@@ -847,7 +844,7 @@ void StarSystem :: addToRemoveFromOuterSpaceQueue(Vehicle* vehicle)
 {
 	switch(vehicle->getTypeId())
 	{
-		case SHIP_ID: { remove_SHIP_queue.push_back((Ship*)vehicle); break; }
+		case ENTITY::SHIP_ID: { remove_SHIP_queue.push_back((Ship*)vehicle); break; }
 	}
 	
 }   		
@@ -1113,11 +1110,11 @@ bool StarSystem :: removeNpc(int _id, int _subtype_id)
 
 	switch(_subtype_id)
 	{
-        	case RANGER_ID:   { return removeFromTheListById(&NPC_RANGER_inSPACE_vec, _id);   break; }
-        	case WARRIOR_ID:  { return removeFromTheListById(&NPC_WARRIOR_inSPACE_vec, _id);  break; }
-        	case TRADER_ID:   { return removeFromTheListById(&NPC_TRADER_inSPACE_vec, _id);   break; }
-        	case PIRAT_ID:    { return removeFromTheListById(&NPC_PIRAT_inSPACE_vec, _id);    break; } 
-        	case DIPLOMAT_ID: { return removeFromTheListById(&NPC_DIPLOMAT_inSPACE_vec, _id); break; }
+        	case CLASS::RANGER_ID:   { return removeFromTheListById(&NPC_RANGER_inSPACE_vec, _id);   break; }
+        	case CLASS::WARRIOR_ID:  { return removeFromTheListById(&NPC_WARRIOR_inSPACE_vec, _id);  break; }
+        	case CLASS::TRADER_ID:   { return removeFromTheListById(&NPC_TRADER_inSPACE_vec, _id);   break; }
+        	case CLASS::PIRAT_ID:    { return removeFromTheListById(&NPC_PIRAT_inSPACE_vec, _id);    break; } 
+        	case CLASS::DIPLOMAT_ID: { return removeFromTheListById(&NPC_DIPLOMAT_inSPACE_vec, _id); break; }
 	}
 	
         return false;
@@ -1179,17 +1176,6 @@ void StarSystem :: damageEventInsideCircle(vec2f epicentr, float radius, int dam
     	}
 }
 
-
-void StarSystem :: debug__()
-{
-        if (MINERAL_vec.size() > 1000)
-        {
-                for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
-                {
-                        MINERAL_vec[mi]->hit(1000, false);
-                }
-        }
-}
 
 
 void StarSystem :: postDeathUniqueEvent(bool) /*virtual */

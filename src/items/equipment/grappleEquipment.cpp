@@ -104,19 +104,19 @@ std::string GrappleEquipment :: getTargetStr() const
         	{
         	switch(target_vec[i]->getTypeId())
         	{
-        		case MINERAL_ID:
+        		case ENTITY::MINERAL_ID:
         		{
         			str += "m" + int2str(target_vec[i]->getTypeId()) + ", ";
         			break;
         		}
         		
-        		case CONTAINER_ID:
+        		case ENTITY::CONTAINER_ID:
         		{
         			str += "c" + int2str(target_vec[i]->getTypeId()) + ", ";
         			break;
         		}
         		        		
-        		case BOMB_ID:
+        		case ENTITY::BOMB_ID:
         		{
         			str += "b" + int2str(target_vec[i]->getTypeId()) + ", ";
         			break;
@@ -228,15 +228,15 @@ std::string GrappleEquipment :: getMaxNumItemStr()
 GrappleEquipment* getNewGrappleEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
-       		race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
     	if (revision_id == -1)
-       		revision_id = TECH_LEVEL_0_ID; 
+       		revision_id = TECHLEVEL::L0_ID; 
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(GRAPPLE_ITEM_TEXTURE_ID);   
-    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(GRAPPLE_ITEM_TEXTURE_ID, revision_id) 
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::GRAPPLE_EQUIPMENT_ID);   
+    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::GRAPPLE_EQUIPMENT_ID, revision_id) 
 
     	int strength_orig   = getRandInt(GRAPPLE_STRENGTH_MIN, GRAPPLE_STRENGTH_MAX);
     	int radius_orig     = getRandInt(GRAPPLE_RADIUS_MIN, GRAPPLE_RADIUS_MAX);
@@ -251,8 +251,8 @@ GrappleEquipment* getNewGrappleEquipment(int race_id, int revision_id)
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT_ID;
-        data_id.subtype_id = GRAPPLE_EQUIPMENT_ID;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::GRAPPLE_ID;
         
     	GrappleEquipment* grapple_equipment = new GrappleEquipment(strength_orig, 
     								   radius_orig, 
@@ -260,7 +260,7 @@ GrappleEquipment* getNewGrappleEquipment(int race_id, int revision_id)
     								   maxNumItem_orig);                                                                   
         grapple_equipment->setIdData(data_id);  
         grapple_equipment->setTextureOb(texOb_item);    	
-        grapple_equipment->setFunctionalSlotSubTypeId(GRAPPLE_SLOT_ID);
+        grapple_equipment->setFunctionalSlotSubTypeId(SLOT::GRAPPLE_ID);
         grapple_equipment->setItemCommonData(common_data);        
 
     	grapple_equipment->updatePropetries();

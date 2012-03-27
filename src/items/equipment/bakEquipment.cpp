@@ -91,15 +91,15 @@ std::string BakEquipment :: getFuelStr()
 BakEquipment* getNewBakEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
-       		race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
     	if (revision_id == -1)
-       		revision_id = TECH_LEVEL_0_ID; 
+       		revision_id = TECHLEVEL::L0_ID; 
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(BAK_ITEM_TEXTURE_ID);    
-    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(RADAR_ITEM_TEXTURE_ID, revision_id) 
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::BAK_EQUIPMENT_ID);    
+    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
     	int fuel_max_orig = getRandInt(BAK_FUEL_MIN, BAK_FUEL_MAX);
 
       	ItemCommonData common_data;
@@ -111,14 +111,14 @@ BakEquipment* getNewBakEquipment(int race_id, int revision_id)
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT_ID;
-        data_id.subtype_id = BAK_EQUIPMENT_ID;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::BAK_ID;
         
     	BakEquipment* bak_equipment = new BakEquipment(fuel_max_orig);
         
         bak_equipment->setIdData(data_id);  
         bak_equipment->setTextureOb(texOb_item);    	
-        bak_equipment->setFunctionalSlotSubTypeId(BAK_SLOT_ID);
+        bak_equipment->setFunctionalSlotSubTypeId(SLOT::BAK_ID);
         bak_equipment->setItemCommonData(common_data);
                 
         bak_equipment->updatePropetries();

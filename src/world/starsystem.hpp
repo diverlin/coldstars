@@ -44,6 +44,9 @@ class StarSystem : public BaseGameEntity
 	public:
 		Star* getStar() const;
 
+		StarSystem(int);
+		~StarSystem();
+		
 		// ENTITY VECTORS
 		std::vector<Player*> 	   PLAYER_vec;
 
@@ -67,17 +70,42 @@ class StarSystem : public BaseGameEntity
 		std::vector<Npc*>  NPC_DIPLOMAT_inSPACE_vec;
 		//  
 
-		int getShockWaveNum() const;
+		void addToSpace(Star*);
+		void addToSpace(Planet*, BaseGameEntity*);
+		void addToSpace(Asteroid*);
+		void addToSpace(Mineral*, vec2f);
+		void addToSpace(Container*, vec2f);
+		void addToSpace(RocketBullet*);
+		void addToSpace(BlackHole*, vec2f);
 
-		StarSystem(int);
-		~StarSystem();
+		// effects
+		void addToSpace(BaseParticleSystem*);
+		void addToSpace(ShockWaveEffect*);
+		void addToSpace(LazerTraceEffect*);
+
+		void addToSpace(DistantNebulaBgEffect*);
+		void addToSpace(DistantStarBgEffect*);
+		
+		void addToSpace(VerticalFlowText*);
+		
+		bool removeShip(int _id);    
+		bool removeNpc(int _id, int _subtype_id); 
+		
+		void bombExplosionEvent(Container*, bool);
+				
+		int getShockWaveNum() const;
+		
+		void addToRemoveFromOuterSpaceQueue(Mineral*);
+		void addToRemoveFromOuterSpaceQueue(Container*);
+		void addToRemoveFromOuterSpaceQueue(Vehicle*);
+
+
+		void findVisibleEntities_c(Player*);  
+		
 
 		void setPosition(vec2f);
 		void setGalaxy(Galaxy*);
 
-		int getId() const;
-		int getTypeId() const;
-		StarSystem* getStarSystem();
 		bool getDetailedSimulationFlag() const;
 		bool getCaptured() const;
 		vec2f getPosition() const;
@@ -102,81 +130,65 @@ class StarSystem : public BaseGameEntity
 		void addToSpace(Vehicle*, vec2f, float, BaseGameEntity*);
 		void addToSpace(Npc*);
 
-		void addToSpace(Star*);
-		void addToSpace(Planet*, BaseGameEntity*);
-		void addToSpace(Asteroid*);
-		void addToSpace(Mineral*, vec2f);
-		void addToSpace(Container*, vec2f);
-		void addToSpace(RocketBullet*);
-		void addToSpace(BlackHole*, vec2f);
 
-		// effects
-		void addToSpace(BaseParticleSystem*);
-		void addToSpace(ShockWaveEffect*);
-		void addToSpace(LazerTraceEffect*);
+    		void restoreDefaultColor();
+    		void restoreSceneColor();
+    		void renderBackground(vec2f);
+                void drawOrbits();
+                void drawPath();
+                           		    		    		
+    	private:
+                int race_id, conqueror_race_id;
+                
+    		bool detalied_simulation;
+    		bool calculation_per_turn_allowed; 
+    		bool calculation_per_turn_allowed_inDynamic; 
+    		    		
+    		bool is_CAPTURED;
+    		
+    		vec2f center;
+    		
+    		Galaxy* galaxy;
+    	
+    	    	// ENTITY VECTORS
+                std::vector<Npc*> NPC_appear_vec;
+                
+    	    	std::vector<DistantNebulaBgEffect*> distantNebulaBgEffect_vec;
+    		std::vector<DistantStarBgEffect*> distantStarBgEffect_vec;
+    		   
+    		// effects
+    		std::vector<LazerTraceEffect*> effect_LAZERTRACE_vec;
+    		std::vector<BaseParticleSystem*>  effect_PARTICLESYSTEM_vec;
+    		std::vector<ShockWaveEffect*>  effect_SHOCKWAVE_vec;    		
+    		std::vector<VerticalFlowText*> text_DAMAGE_vec;
+    		
+    		// remove queue 	
+    		std::vector<Container*>    remove_CONTAINER_queue;
+    		std::vector<Mineral*>      remove_MINERAL_queue;
+    		std::vector<Ship*>         remove_SHIP_queue;
+    		std::vector<SpaceStation*> remove_SPACESTATION_queue;
+    		std::vector<Satellite*>    remove_SATELLITE_queue;    		
+    		//    			    		    	  
+    		  	
+    		GarbageEntities garbage_entities;
+    		GarbageEffects  garbage_effects;
+    		                
+                void postHyperJumpEvent_s();
+                void launchingEvent_s() const;
 
-		void addToSpace(VerticalFlowText*);
+    		
+    		void updateEntities_inStatic_s();
+    		void updateEntities_s(int, bool);     		
+   		
+                      
+                bool removeFromTheListById(std::vector<Npc*>*, int _id);
+    		
+    		void update_s();
+    		
+    		void damageEventInsideCircle(vec2f epicentr, float radius, int damage, bool show_effect);
+    		
+    		void postDeathUniqueEvent(bool);
 
-		void addToSpace(DistantNebulaBgEffect*);
-		void addToSpace(DistantStarBgEffect*);
-
-		bool removeShip(int _id);    
-		bool removeNpc(int _id, int _subtype_id);  
-		////
-
-		void addToRemoveFromOuterSpaceQueue(Mineral*);
-		void addToRemoveFromOuterSpaceQueue(Container*);
-		void addToRemoveFromOuterSpaceQueue(Vehicle*);
-
-		void bombExplosionEvent(Container*, bool);
-
-		void findVisibleEntities_c(Player*);  
-
-		void restoreDefaultColor();
-		void restoreSceneColor();
-		void renderBackground(vec2f);
-		void drawOrbits();
-		void drawPath();
-
-	private:
-		int id, type_id;
-		int race_id, conqueror_race_id;
-
-		bool detalied_simulation;
-		bool calculation_per_turn_allowed; 
-		bool calculation_per_turn_allowed_inDynamic; 
-
-		bool is_CAPTURED;
-
-		vec2f center;
-
-		Galaxy* galaxy;
-
-		// ENTITY VECTORS
-		std::vector<Npc*> NPC_appear_vec;
-
-		std::vector<DistantNebulaBgEffect*> distantNebulaBgEffect_vec;
-		std::vector<DistantStarBgEffect*> distantStarBgEffect_vec;
-
-		// effects
-		std::vector<LazerTraceEffect*> effect_LAZERTRACE_vec;
-		std::vector<BaseParticleSystem*>  effect_PARTICLESYSTEM_vec;
-		std::vector<ShockWaveEffect*>  effect_SHOCKWAVE_vec;    		
-		std::vector<VerticalFlowText*> text_DAMAGE_vec;
-
-		// remove queue 	
-		std::vector<Container*>    remove_CONTAINER_queue;
-		std::vector<Mineral*>      remove_MINERAL_queue;
-		std::vector<Ship*>         remove_SHIP_queue;
-		std::vector<SpaceStation*> remove_SPACESTATION_queue;
-		std::vector<Satellite*>    remove_SATELLITE_queue;    		
-		//    			    		    	  
-
-		GarbageEntities garbage_entities;
-		GarbageEffects  garbage_effects;
-
-		void postHyperJumpEvent_s();
-		void launchingEvent_s() const;
 
 		void asteroidManager_s(unsigned int num);
 
@@ -186,7 +198,7 @@ class StarSystem : public BaseGameEntity
 		void rocketCollision_s(bool);
 		void asteroidCollision_s(bool);
 
-
+		/*
 		void updateEntities_inStatic_s();
 		void updateEntities_s(int, bool);     		
 
@@ -197,9 +209,7 @@ class StarSystem : public BaseGameEntity
 
 		void damageEventInsideCircle(vec2f epicentr, float radius, int damage, bool show_effect);
 
-		void debug__();    	
-
-		void postDeathUniqueEvent(bool);
+		void postDeathUniqueEvent(bool); */
 };
 
 template <typename AGRESSOR, typename VICTIM>

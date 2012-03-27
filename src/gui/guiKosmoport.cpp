@@ -25,78 +25,78 @@ GuiKosmoport :: GuiKosmoport(Player* player)
         TextureOb* texOb_button = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; // fake
 
     	angar_screen_button     = new Button(texOb_button, 
-    					     SCREEN_ANGAR_ID,
-    					     SCREEN_WIDTH_MIN - 1 * (INTERFACE_ICON_SIZE + 5), 
-    					     INTERFACE_ICON_SIZE, 
-    					     INTERFACE_ICON_SIZE,  
-    					     INTERFACE_ICON_SIZE, 
+    					     GUI::SCREEN::ANGAR_ID,
+    					     SCREEN_WIDTH_MIN - 1 * (GUI::ICON_SIZE + 5), 
+    					     GUI::ICON_SIZE, 
+    					     GUI::ICON_SIZE,  
+    					     GUI::ICON_SIZE, 
     					     "angar");    					     
     	button_common_pList.push_back(angar_screen_button);
     	
     	store_screen_button     = new Button(texOb_button, 
-    					     SCREEN_STORE_ID,
-    					     SCREEN_WIDTH_MIN - 2 * (INTERFACE_ICON_SIZE + 5),
-    					     INTERFACE_ICON_SIZE, 
-    					     INTERFACE_ICON_SIZE,  
-    					     INTERFACE_ICON_SIZE, 
+    					     GUI::SCREEN::STORE_ID,
+    					     SCREEN_WIDTH_MIN - 2 * (GUI::ICON_SIZE + 5),
+    					     GUI::ICON_SIZE, 
+    					     GUI::ICON_SIZE,  
+    					     GUI::ICON_SIZE, 
     					     "store");
 	button_common_pList.push_back(store_screen_button);
     					        	
     	shop_screen_button      = new Button(texOb_button, 
-    					     SCREEN_SHOP_ID,
-    					     SCREEN_WIDTH_MIN - 3 * (INTERFACE_ICON_SIZE + 5), 
-    					     INTERFACE_ICON_SIZE, 
-    					     INTERFACE_ICON_SIZE,  
-    					     INTERFACE_ICON_SIZE, 
+    					     GUI::SCREEN::SHOP_ID,
+    					     SCREEN_WIDTH_MIN - 3 * (GUI::ICON_SIZE + 5), 
+    					     GUI::ICON_SIZE, 
+    					     GUI::ICON_SIZE,  
+    					     GUI::ICON_SIZE, 
     					     "shop");
     	button_common_pList.push_back(shop_screen_button);
     					     
     	galaxymap_screen_button = new Button(texOb_button, 
-    					     SCREEN_GALAXYMAP_ID,
-    					     SCREEN_WIDTH_MIN - 4 * (INTERFACE_ICON_SIZE + 5), 
-    					     INTERFACE_ICON_SIZE, 
-    					     INTERFACE_ICON_SIZE,  
-    					     INTERFACE_ICON_SIZE, 
+    					     GUI::SCREEN::GALAXYMAP_ID,
+    					     SCREEN_WIDTH_MIN - 4 * (GUI::ICON_SIZE + 5), 
+    					     GUI::ICON_SIZE, 
+    					     GUI::ICON_SIZE,  
+    					     GUI::ICON_SIZE, 
     					     "galaxymap");
         button_common_pList.push_back(galaxymap_screen_button);
     					     
     	goverment_screen_button = new Button(texOb_button, 
-    					     SCREEN_GOVERMENT_ID,
-    					     SCREEN_WIDTH_MIN - 5 * (INTERFACE_ICON_SIZE + 5), 
-    					     INTERFACE_ICON_SIZE,
-    					     INTERFACE_ICON_SIZE,  
-    					     INTERFACE_ICON_SIZE, 
+    					     GUI::SCREEN::GOVERMENT_ID,
+    					     SCREEN_WIDTH_MIN - 5 * (GUI::ICON_SIZE + 5), 
+    					     GUI::ICON_SIZE,
+    					     GUI::ICON_SIZE,  
+    					     GUI::ICON_SIZE, 
     					     "goverment");
     	button_common_pList.push_back(goverment_screen_button);
 
     	repair_button = new Button(texOb_button, 
-    	    			   REPAIR_BUTTON_ID,
-    				   SCREEN_WIDTH_MIN - 1 * (INTERFACE_ICON_SIZE + 5),
-    				   SCREEN_HEIGHT_MIN - 2*INTERFACE_ICON_SIZE, 
-    				   INTERFACE_ICON_SIZE,  
-    				   INTERFACE_ICON_SIZE, 
+    	    			   GUI::BUTTON::GETREPAIR_ID,
+    				   SCREEN_WIDTH_MIN - 1 * (GUI::ICON_SIZE + 5),
+    				   SCREEN_HEIGHT_MIN - 2*GUI::ICON_SIZE, 
+    				   GUI::ICON_SIZE,  
+    				   GUI::ICON_SIZE, 
     				   "buy_repair");
     	button_angar_pList.push_back(repair_button);
     				   
     	fuel_button   = new Button(texOb_button,
-    	 			   FUEL_BUTTON_ID,
-    	 			   SCREEN_WIDTH_MIN - 1 * (INTERFACE_ICON_SIZE + 5),
-    	 			   SCREEN_HEIGHT_MIN - 3*INTERFACE_ICON_SIZE, 
-    	 			   INTERFACE_ICON_SIZE,  
-    	 			   INTERFACE_ICON_SIZE, 
+    	 			   GUI::BUTTON::GETFUEL_ID,
+    	 			   SCREEN_WIDTH_MIN - 1 * (GUI::ICON_SIZE + 5),
+    	 			   SCREEN_HEIGHT_MIN - 3*GUI::ICON_SIZE, 
+    	 			   GUI::ICON_SIZE,  
+    	 			   GUI::ICON_SIZE, 
     	 			   "buy fuel");  
     	button_angar_pList.push_back(fuel_button);
     	 			   
     	launch_button = new Button(texOb_button, 
-    				   LAUNCH_BUTTON_ID,
-    				   SCREEN_WIDTH_MIN - 1 * (INTERFACE_ICON_SIZE + 5), 
-    				   SCREEN_HEIGHT_MIN - 4*INTERFACE_ICON_SIZE, 
-    				   INTERFACE_ICON_SIZE,  
-    				   INTERFACE_ICON_SIZE, 
+    				   GUI::BUTTON::GETLAUNCH_ID,
+    				   SCREEN_WIDTH_MIN - 1 * (GUI::ICON_SIZE + 5), 
+    				   SCREEN_HEIGHT_MIN - 4*GUI::ICON_SIZE, 
+    				   GUI::ICON_SIZE,  
+    				   GUI::ICON_SIZE, 
     				   "launch");
     	button_angar_pList.push_back(launch_button);
 
-	active_screen_id = SCREEN_ANGAR_ID;
+	active_screen_id = GUI::SCREEN::ANGAR_ID;
 }
 
 
@@ -142,7 +142,7 @@ void GuiKosmoport :: mouseInteraction()
         }
         
 
-     	if (active_screen_id == SCREEN_ANGAR_ID)
+     	if (active_screen_id == GUI::SCREEN::ANGAR_ID)
     	{
      		for (unsigned int i = 0; i< button_angar_pList.size(); i++)
 		{
@@ -151,15 +151,15 @@ void GuiKosmoport :: mouseInteraction()
        		        	button_angar_pList[i]->setShowInfoFlag(true);
        				if (lmb == true)
        				{	
-		   			if (button_angar_pList[i]->getSubTypeId() == REPAIR_BUTTON_ID)
+		   			if (button_angar_pList[i]->getSubTypeId() == GUI::BUTTON::GETREPAIR_ID)
 		   			{
 		   				player->getNpc()->getVehicle()->SetMaxArmor(); 
 		   			}
-		   			if (button_angar_pList[i]->getSubTypeId() == FUEL_BUTTON_ID)
+		   			if (button_angar_pList[i]->getSubTypeId() == GUI::BUTTON::GETFUEL_ID)
 		   			{
 		   		        	player->getNpc()->getVehicle()->SetMaxFuel();
 		   			}
-		   			if (button_angar_pList[i]->getSubTypeId() == LAUNCH_BUTTON_ID)
+		   			if (button_angar_pList[i]->getSubTypeId() == GUI::BUTTON::GETLAUNCH_ID)
 		   			{
        						player->getNpc()->getVehicle()->LaunchingEvent();
        			   		}
@@ -180,7 +180,7 @@ void GuiKosmoport :: renderInternal() const
        		button_common_pList[i]->render();
         }
 
-    	if (active_screen_id == SCREEN_ANGAR_ID)
+    	if (active_screen_id == GUI::SCREEN::ANGAR_ID)
     	{
     		for (unsigned int i = 0; i< button_angar_pList.size(); i++)
 		{
@@ -202,7 +202,7 @@ void GuiKosmoport :: renderInfo() const
         	}
         }       
 
-    	if (active_screen_id == SCREEN_ANGAR_ID)
+    	if (active_screen_id == GUI::SCREEN::ANGAR_ID)
     	{
     		for (unsigned int i = 0; i< button_angar_pList.size(); i++)
 		{

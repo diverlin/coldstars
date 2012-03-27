@@ -85,15 +85,15 @@ std::string RadarEquipment :: getRadiusStr()
 RadarEquipment* getNewRadarEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
-       		race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
     	if (revision_id == -1)
-       		revision_id = TECH_LEVEL_0_ID; 
+       		revision_id = TECHLEVEL::L0_ID; 
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(RADAR_ITEM_TEXTURE_ID);   
-    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(RADAR_ITEM_TEXTURE_ID, revision_id) 
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::RADAR_EQUIPMENT_ID);   
+    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
 
     	int radius_orig     = getRandInt(RADAR_RADIUS_MIN, RADAR_RADIUS_MAX);
     	
@@ -105,14 +105,14 @@ RadarEquipment* getNewRadarEquipment(int race_id, int revision_id)
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT_ID;
-        data_id.subtype_id = RADAR_EQUIPMENT_ID;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::RADAR_ID;
         
     	RadarEquipment* radar_equipment = new RadarEquipment(radius_orig);
                         
         radar_equipment->setIdData(data_id);  
         radar_equipment->setTextureOb(texOb_item);    	
-        radar_equipment->setFunctionalSlotSubTypeId(RADAR_SLOT_ID);
+        radar_equipment->setFunctionalSlotSubTypeId(SLOT::RADAR_ID);
         radar_equipment->setItemCommonData(common_data);
         
  

@@ -24,8 +24,8 @@ LazerEquipment :: LazerEquipment(int damage_orig,
    	this->radius_orig = radius_orig;
 
    	//TextureOb lazerEffect_texOb   = TEXTURE_MANAGER.returnLazerEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id);
-   	texOb_turrel	  = g_TEXTURE_MANAGER.getRandomTexOb(TURREL_TEXTURE_ID); 
-   	texOb_lazerEffect = g_TEXTURE_MANAGER.getRandomTexOb(LAZER_EFFECT_TEXTURE_ID);
+   	texOb_turrel	  = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::TURREL_ID); 
+   	texOb_lazerEffect = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::LAZER_EFFECT_ID);
 }
 
 LazerEquipment :: ~LazerEquipment() /* virtual */
@@ -136,15 +136,15 @@ void LazerEquipment :: fireEvent_FALSE()
 LazerEquipment* getNewLazerEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
-       		race_id = RACE_0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
 
    	if (revision_id == -1)
-       		revision_id = TECH_LEVEL_0_ID; 
+       		revision_id = TECHLEVEL::L0_ID; 
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(LAZER_ITEM_TEXTURE_ID, revision_id)
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(LAZER_ITEM_TEXTURE_ID);     
+    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::LAZER_EQUIPMENT_ID, revision_id)
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::LAZER_EQUIPMENT_ID);     
 
     	int damage_orig     = getRandInt(LAZER_DAMAGE_MIN, LAZER_DAMAGE_MAX);
     	int radius_orig     = getRandInt(LAZER_RADIUS_MIN, LAZER_RADIUS_MAX);
@@ -157,15 +157,15 @@ LazerEquipment* getNewLazerEquipment(int race_id, int revision_id)
 
         IdData data_id;
         data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT_ID;
-        data_id.subtype_id = LAZER_EQUIPMENT_ID;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::LAZER_ID;
         
     	LazerEquipment* lazer_equipment = new LazerEquipment(damage_orig, 
     							     radius_orig);
                                                              
         lazer_equipment->setIdData(data_id);  
         lazer_equipment->setTextureOb(texOb_item);    	
-        lazer_equipment->setFunctionalSlotSubTypeId(WEAPON_SLOT_ID);
+        lazer_equipment->setFunctionalSlotSubTypeId(SLOT::WEAPON_ID);
         lazer_equipment->setItemCommonData(common_data);
         
    	lazer_equipment->updatePropetries();
