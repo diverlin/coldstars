@@ -18,13 +18,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef CONSTANTS_HPP
 #define CONSTANTS_HPP
 
-//const int SCREEN_WIDTH_MIN  = 800;
-//const int SCREEN_HEIGHT_MIN = 600;
-
-const int g_BPP = 32;
-const int g_FPS_LIMIT = 60;
-const bool g_VERT_SYNC = true;
-
 
 const int SCROLL_VELOCITY_MAX = 20;
 const int SCROLL_VELOCITY_STEP = 1;
@@ -61,17 +54,33 @@ const int STARSYSTEM_TOTAL_NUM = 10;
 const int ASTEROID_SIZE_MIN = 6;
 const int ASTEROID_SIZE_MAX = 12;
 
-// PLANET 
-const int PLANET_PER_SYSTEM_MIN = 3;
-const int PLANET_PER_SYSTEM_MAX = 5;
-const int PLANET_DISTANCE_MIN = 400;
-const int PLANET_DISTANCE_MAX = 500;
-const int PLANET_SIZE_MIN = 40;
-const int PLANET_SIZE_MAX = 60;
-const int PLANET_SPEED_MIN = 40;
-const int PLANET_SPEED_MAX = 50;
-const int PLANET_POPULATION_MIN = 6000;
-const int PLANET_POPULATION_MAX = 20000;
+
+namespace STARSYSTEM
+{
+const int PLANET_MIN = 3;
+const int PLANET_MAX = 5;
+}
+
+
+namespace PLANET
+{
+namespace SURFACE
+{
+	enum TYPE
+	{
+		EARTH_ID, WATER_ID, LAVA_ID, ICE_ID, GAS_ID, ROCK_ID		
+	};
+}
+
+const int DISTANCE_MIN = 400;
+const int DISTANCE_MAX = 500;
+const int SIZE_MINN = 40;
+const int SIZE_MAXX = 60;
+const int SPEED_MIN = 40;
+const int SPEED_MAX = 50;
+const int POPULATION_MIN = 6000;
+const int POPULATION_MAX = 20000;
+}
 
 // STAR 
 const int STAR_SIZE_MIN = 80;
@@ -422,16 +431,7 @@ namespace TASK
 }
 */
 
-namespace PLANET
-{
-	namespace SURFACE
-	{
-		enum TYPE
-		{
-			EARTH_ID, WATER_ID, LAVA_ID, ICE_ID, GAS_ID, ROCK_ID		
-		};
-	}
-}
+
 
 
 namespace TECHLEVEL

@@ -27,8 +27,8 @@ Screen :: Screen()
 	
 	width     = Config::Instance().SCREEN_WIDTH_MIN; 
       	height    = Config::Instance().SCREEN_HEIGHT_MIN;
-      	bpp       = 32;
-      	vert_sync = true;
+      	bpp       = Config::Instance().BPP;
+      	vert_sync = Config::Instance().VSYNC;
       	
       	initGl();
       	resize(width, height);
@@ -47,7 +47,11 @@ void Screen :: resize(int width, int height)
 {
 	this->width  = width;
 	this->height = height;
-			
+	
+	Gui::GetWindow().SetFramerateLimit(Config::Instance().FPS_LIMIT); 
+    	Gui::GetWindow().PreserveOpenGLStates(true);
+    	Gui::GetWindow().UseVerticalSync(Config::Instance().VSYNC);
+    			
 	view.SetFromRect(sf::FloatRect(0, 0, width, height));
 	Gui::GetWindow().SetView(view);		
 	Gui::GetWindow().SetSize(width, height);

@@ -36,11 +36,11 @@ void GameTimer :: nextTurn()
 						
 void GameTimer :: update()
 {
-        turn_tick -= g_GAMESPEED;
+        turn_tick -= Config::Instance().GAMESPEED;
         
         
        	/////////// AUTO-TURN /////////////
-       	if ( (turn_tick < -50) and (g_AUTOTURN_ENABLE == true) )
+       	if ( (turn_tick < -50) and (Config::Instance().AUTOTURN_MODE == true) )
        	{  
        		turn_tick = TURN_TIME;
         	day++;

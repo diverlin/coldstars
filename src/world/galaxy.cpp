@@ -104,7 +104,7 @@ StarSystem* generateEntireStarSystem()
         int distStar_maxNum = getRandInt(40, 60);
         generateBackground(starsystem, distNebula_maxNum, distStar_maxNum, star->getColorId());
           
-        generateNumPlanets(starsystem, getRandInt(PLANET_PER_SYSTEM_MIN, PLANET_PER_SYSTEM_MAX));
+        generateNumPlanets(starsystem, getRandInt(STARSYSTEM::PLANET_MIN, STARSYSTEM::PLANET_MAX));
         
         for (int i = 0; i < 0; i++)
         {
@@ -149,9 +149,9 @@ void generateNumPlanets(StarSystem* starsystem, int planet_per_system)
         for(int pi = 0; pi < planet_per_system; pi++)
         {             
                 if (pi == 0)
-                        orbit_radius = getRandInt(2 * PLANET_DISTANCE_MIN, 2 * PLANET_DISTANCE_MAX);
+                        orbit_radius = getRandInt(2 * PLANET::DISTANCE_MIN, 2 * PLANET::DISTANCE_MAX);
                 else
-                        orbit_radius = offset + getRandInt(PLANET_DISTANCE_MIN, PLANET_DISTANCE_MAX);
+                        orbit_radius = offset + getRandInt(PLANET::DISTANCE_MIN, PLANET::DISTANCE_MAX);
 
                 offset = orbit_radius;
 

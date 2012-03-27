@@ -1,14 +1,21 @@
-Screen
-{
-WIDTH_MIN  800;
-HEIGHT_MIN 600;
-}
-
-
 Graphic
 {
+WIDTH_MIN  800
+HEIGHT_MIN 600
+BPP 32
 
-MODERN_EFFECTS false
+VSYNC 1
+FPS_LIMIT 60
+MODERN_EFFECTS 1
+}
 
+General
+{
+DEBUG_MODE 0
+}
 
+Gameplay
+{
+AUTOTURN_MODE false
+GAMESPEED 6    # use 1-6
 }
