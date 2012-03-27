@@ -527,7 +527,7 @@ void Player :: renderEntities_OLD()
 void Player :: render(bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {
     	
-    	if (Config::instanse().USE_MODERN_HW == true)
+    	if (Config::Instance().MODERN_EFFECTS == true)
     	{
     		renderEntities_NEW();
     	}

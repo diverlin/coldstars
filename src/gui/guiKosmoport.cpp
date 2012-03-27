@@ -22,11 +22,14 @@ GuiKosmoport :: GuiKosmoport(Player* player)
 {
 	this->player = player;
 	
+	int screen_w = Config::Instance().SCREEN_WIDTH_MIN;
+	int screen_h = Config::Instance().SCREEN_HEIGHT_MIN;
+	
         TextureOb* texOb_button = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; // fake
 
     	angar_screen_button     = new Button(texOb_button, 
     					     GUI::SCREEN::ANGAR_ID,
-    					     SCREEN_WIDTH_MIN - 1 * (GUI::ICON_SIZE + 5), 
+    					     screen_w - 1 * (GUI::ICON_SIZE + 5), 
     					     GUI::ICON_SIZE, 
     					     GUI::ICON_SIZE,  
     					     GUI::ICON_SIZE, 
@@ -35,7 +38,7 @@ GuiKosmoport :: GuiKosmoport(Player* player)
     	
     	store_screen_button     = new Button(texOb_button, 
     					     GUI::SCREEN::STORE_ID,
-    					     SCREEN_WIDTH_MIN - 2 * (GUI::ICON_SIZE + 5),
+    					     screen_w - 2 * (GUI::ICON_SIZE + 5),
     					     GUI::ICON_SIZE, 
     					     GUI::ICON_SIZE,  
     					     GUI::ICON_SIZE, 
@@ -44,7 +47,7 @@ GuiKosmoport :: GuiKosmoport(Player* player)
     					        	
     	shop_screen_button      = new Button(texOb_button, 
     					     GUI::SCREEN::SHOP_ID,
-    					     SCREEN_WIDTH_MIN - 3 * (GUI::ICON_SIZE + 5), 
+    					     screen_w - 3 * (GUI::ICON_SIZE + 5), 
     					     GUI::ICON_SIZE, 
     					     GUI::ICON_SIZE,  
     					     GUI::ICON_SIZE, 
@@ -53,7 +56,7 @@ GuiKosmoport :: GuiKosmoport(Player* player)
     					     
     	galaxymap_screen_button = new Button(texOb_button, 
     					     GUI::SCREEN::GALAXYMAP_ID,
-    					     SCREEN_WIDTH_MIN - 4 * (GUI::ICON_SIZE + 5), 
+    					     screen_w - 4 * (GUI::ICON_SIZE + 5), 
     					     GUI::ICON_SIZE, 
     					     GUI::ICON_SIZE,  
     					     GUI::ICON_SIZE, 
@@ -62,7 +65,7 @@ GuiKosmoport :: GuiKosmoport(Player* player)
     					     
     	goverment_screen_button = new Button(texOb_button, 
     					     GUI::SCREEN::GOVERMENT_ID,
-    					     SCREEN_WIDTH_MIN - 5 * (GUI::ICON_SIZE + 5), 
+    					     screen_w - 5 * (GUI::ICON_SIZE + 5), 
     					     GUI::ICON_SIZE,
     					     GUI::ICON_SIZE,  
     					     GUI::ICON_SIZE, 
@@ -71,8 +74,8 @@ GuiKosmoport :: GuiKosmoport(Player* player)
 
     	repair_button = new Button(texOb_button, 
     	    			   GUI::BUTTON::GETREPAIR_ID,
-    				   SCREEN_WIDTH_MIN - 1 * (GUI::ICON_SIZE + 5),
-    				   SCREEN_HEIGHT_MIN - 2*GUI::ICON_SIZE, 
+    				   screen_w - 1 * (GUI::ICON_SIZE + 5),
+    				   screen_h - 2*GUI::ICON_SIZE, 
     				   GUI::ICON_SIZE,  
     				   GUI::ICON_SIZE, 
     				   "buy_repair");
@@ -80,8 +83,8 @@ GuiKosmoport :: GuiKosmoport(Player* player)
     				   
     	fuel_button   = new Button(texOb_button,
     	 			   GUI::BUTTON::GETFUEL_ID,
-    	 			   SCREEN_WIDTH_MIN - 1 * (GUI::ICON_SIZE + 5),
-    	 			   SCREEN_HEIGHT_MIN - 3*GUI::ICON_SIZE, 
+    	 			   screen_w - 1 * (GUI::ICON_SIZE + 5),
+    	 			   screen_h - 3*GUI::ICON_SIZE, 
     	 			   GUI::ICON_SIZE,  
     	 			   GUI::ICON_SIZE, 
     	 			   "buy fuel");  
@@ -89,8 +92,8 @@ GuiKosmoport :: GuiKosmoport(Player* player)
     	 			   
     	launch_button = new Button(texOb_button, 
     				   GUI::BUTTON::GETLAUNCH_ID,
-    				   SCREEN_WIDTH_MIN - 1 * (GUI::ICON_SIZE + 5), 
-    				   SCREEN_HEIGHT_MIN - 4*GUI::ICON_SIZE, 
+    				   screen_w - 1 * (GUI::ICON_SIZE + 5), 
+    				   screen_h - 4*GUI::ICON_SIZE, 
     				   GUI::ICON_SIZE,  
     				   GUI::ICON_SIZE, 
     				   "launch");

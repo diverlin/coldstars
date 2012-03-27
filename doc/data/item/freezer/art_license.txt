@@ -1,0 +1,10 @@
+#####################################################################
+# Project:      freeorion
+# License:	see in << /data/license/freeorion_info.txt >>
+##################################
+filename     << original filename 
+freezer_Race0_Tech0.png,
+freezer_Race0_Tech1.png << cryonic_colony_pod.png
+##################################
+
+

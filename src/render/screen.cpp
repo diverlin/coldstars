@@ -19,20 +19,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Screen :: Screen()
 {
-      	width     = SCREEN_WIDTH_MIN; 
-      	height    = SCREEN_HEIGHT_MIN;
-      	bpp       = 32;
-      	vert_sync = true;
-      	
-      	initGl();
-      	resizeGl();
-      	
       	fbo0  = NULL;
 	fbo1  = NULL;	
 	fbo2  = NULL;
 	fbo3  = NULL;
 	bloom = NULL;
 	
+	width     = Config::Instance().SCREEN_WIDTH_MIN; 
+      	height    = Config::Instance().SCREEN_HEIGHT_MIN;
+      	bpp       = 32;
+      	vert_sync = true;
+      	
+      	initGl();
+      	resize(width, height);
 }
 
 Screen :: ~Screen()
@@ -55,7 +54,7 @@ void Screen :: resize(int width, int height)
 	    	
 	resizeGl();
 		
-	if (g_USE_MODERN_HW == true)
+	if (Config::Instance().MODERN_EFFECTS == true)
 	{
 		resizePostProcess();
 	}

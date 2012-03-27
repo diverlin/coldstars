@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 GuiMap :: GuiMap(Player* player)
 { 
 	this->player = player;
-    	rect = Rect(MAP_OFFSET_X, MAP_OFFSET_Y, (SCREEN_WIDTH_MIN - 2 * MAP_OFFSET_X), (SCREEN_HEIGHT_MIN - 2 * MAP_OFFSET_X));
+    	rect = Rect(MAP_OFFSET_X, MAP_OFFSET_Y, (Config::Instance().SCREEN_WIDTH_MIN - 2 * MAP_OFFSET_X), (Config::Instance().SCREEN_HEIGHT_MIN - 2 * MAP_OFFSET_X));
 }
 
 GuiMap :: ~GuiMap()

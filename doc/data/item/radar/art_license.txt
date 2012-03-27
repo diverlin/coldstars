@@ -1,0 +1,10 @@
+#####################################################################
+# Project: Iron Plague
+# License: see in << /data/license/Iron_Plague.txt >>
+##################################
+filename     << original filename 
+radar_Race0_Tech0.png,
+radar_Race0_Tech1.png        << Warp.bmp
+##################################
+
+

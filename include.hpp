@@ -44,7 +44,7 @@ class GuiMap;
 
 
 #include "src/common/constants.hpp"
-
+#include "src/config/config.hpp"
 #include "GL/glew.h"   
 
 #include <stdio.h>

@@ -36,7 +36,7 @@ void Store :: createSlots()
         int row = 3;
         int clm = 10;
         int x0 = 120;
-        int y0 = SCREEN_HEIGHT_MIN - (row + 2) * texOb_slot->getFrameHeight();
+        int y0 = Config::Instance().SCREEN_HEIGHT_MIN - (row + 2) * texOb_slot->getFrameHeight();
 
         int row_act = 1;
         while (row_act <= row)

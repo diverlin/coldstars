@@ -26,8 +26,8 @@ GuiSpace :: GuiSpace(Player* player)
     	
     	galaxymap_screen_button = new Button(texOb_icon_map, 
         				     GUI::SCREEN::GALAXYMAP_ID,
-    					     SCREEN_WIDTH_MIN  - (GUI::ICON_SIZE + 5),
-    					     SCREEN_HEIGHT_MIN - (GUI::ICON_SIZE + 5), 
+    					     Config::Instance().SCREEN_WIDTH_MIN  - (GUI::ICON_SIZE + 5),
+    					     Config::Instance().SCREEN_HEIGHT_MIN - (GUI::ICON_SIZE + 5), 
     					     GUI::ICON_SIZE,  
     					     GUI::ICON_SIZE, 
     					     "galaxy map");
@@ -118,7 +118,7 @@ void GuiSpace :: renderText(vec2f scroll_coords) const
 
 	sf::String _str(_coord_str, Gui::GetFont(), 14);
 	_str.SetColor(sf::Color(255, 255, 255));
-	_str.SetPosition(SCREEN_WIDTH_MIN - 200, 15); 
+	_str.SetPosition(Config::Instance().SCREEN_WIDTH_MIN - 200, 15); 
 
 	Gui::GetWindow().Draw(_str);    
 }
