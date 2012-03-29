@@ -72,6 +72,6 @@ void EquipmentBase :: render(Rect slot_rect)
         		         slot_rect.getBottomLeft().y + (1.1 * GUI::INSERTED_MODULE_SIZE),
         			 GUI::INSERTED_MODULE_SIZE, 
         			 GUI::INSERTED_MODULE_SIZE);
-        	drawTexturedRect(modules_vec[i]->getTextureOb(), module_rect, -1);
+        	drawTexturedRect(modules_vec[i]->GetTextureOb(), module_rect, -1);
     	}
 }

@@ -650,7 +650,7 @@ void Vehicle::GrappleMicroProgramm()
                 
         for (unsigned int i = 0; i < grapple_slot->getGrappleEquipment()->target_vec.size(); i++)
         {
-               	grapple_slot->getGrappleEquipment()->target_vec[i]->movingByExternalForce(points.getCenter(), grapple_slot->getGrappleEquipment()->getStrength());        	
+               	grapple_slot->getGrappleEquipment()->target_vec[i]->MovingByExternalForce(points.getCenter(), grapple_slot->getGrappleEquipment()->getStrength());        	
        	
        		float dist = distBetweenPoints(points.getCenter(), grapple_slot->getGrappleEquipment()->target_vec[i]->GetPoints().getCenter() ); 
        		if (dist < GetCollisionRadius()/4.0f)

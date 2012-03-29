@@ -56,7 +56,7 @@ void BaseGameEntity :: updateRotation()
 	//printf("1. angle = %f\n", angle.z);
 }
 
-void BaseGameEntity :: movingByExternalForce(vec2f _target, float force)
+void BaseGameEntity :: MovingByExternalForce(vec2f _target, float force)
 {
 	vec2f d_pos;
 	get_dX_dY_ToPoint(points.getCenter().x, points.getCenter().y, _target.x, _target.y, force, &d_pos.x, &d_pos.y);

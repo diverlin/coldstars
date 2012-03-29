@@ -174,7 +174,7 @@ void Npc :: update_inSpace(int time, bool show_effect)
 
 void Npc :: checkNeeds()
 {
-        if (vehicle->getArmor() < 0.5*vehicle->data_korpus.armor)   // move to ship
+        if (vehicle->GetArmor() < 0.5*vehicle->data_korpus.armor)   // move to ship
 	{
 		needsToDo.REPAIR_KORPUS = true;
 		//if (quest_self != g_QUEST_SELF_SAFETY)

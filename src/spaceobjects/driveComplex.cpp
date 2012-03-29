@@ -46,7 +46,7 @@ DriveComplex :: DriveComplex(Vehicle* owner_vehicle)
 				    
 	owner_vehicle->Add(&bak_slot);
 	
-	drive_trail = createTrailEffect(owner_vehicle->getTexOb()->size_id, owner_vehicle->GetPoints().getpMidLeft(), owner_vehicle->GetPoints().getpMidFarLeft());
+	drive_trail = createTrailEffect(owner_vehicle->GetTextureOb()->size_id, owner_vehicle->GetPoints().getpMidLeft(), owner_vehicle->GetPoints().getpMidFarLeft());
 	      	
 }
 
