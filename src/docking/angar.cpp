@@ -23,8 +23,8 @@ Angar :: Angar(TextureOb* _texOb_background, TextureOb* _texOb_landingArea)
 
 	Platform* platform;
 	
-	int screen_w = Config::Instance().SCREEN_WIDTH_MIN;
-	int screen_h = Config::Instance().SCREEN_HEIGHT_MIN;	
+	int screen_w = Config::Instance().SCREEN_WIDTH;
+	int screen_h = Config::Instance().SCREEN_HEIGHT;	
 	
         platform = new Platform(_texOb_landingArea, screen_w/2,       screen_h/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR);
         platform_vec.push_back(platform);

@@ -30,31 +30,31 @@ class BaseGameEntity
 		virtual ~BaseGameEntity();
 
 
-		void setStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
-		void setIdData(IdData data_id)              { this->data_id = data_id; }
-		void setLifeData(LifeData data_life)        { this->data_life = data_life; }
-		void setMesh(ObjMeshInstance* mesh)         { this->mesh = mesh; }
-		void setTextureOb(TextureOb* texOb)         { this->texOb = texOb; }
-		void setPlaceTypeId(int place_type_id)      { this->place_type_id = place_type_id;  }
+		void SetStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
+		void SetIdData(IdData data_id)              { this->data_id = data_id; }
+		void SetLifeData(LifeData data_life)        { this->data_life = data_life; }
+		void SetMesh(ObjMeshInstance* mesh)         { this->mesh = mesh; }
+		void SetTextureOb(TextureOb* texOb)         { this->texOb = texOb; }
+		void SetPlaceTypeId(int place_type_id)      { this->place_type_id = place_type_id;  }
 
-		void setAngle(vec3f angle)                  { this->angle = angle; }
-		void setDeltaAngle(vec3f d_angle)           { this->d_angle = d_angle; }
+		void SetAngle(vec3f angle)                  { this->angle = angle; }
+		void SetDeltaAngle(vec3f d_angle)           { this->d_angle = d_angle; }
 
-		void setParent(BaseGameEntity* parent)     { this->parent = parent; }
+		void SetParent(BaseGameEntity* parent)     { this->parent = parent; }
 
-		int getId()        const { return data_id.id; }   
-		int getTypeId()    const { return data_id.type_id; }
-		int getSubTypeId() const { return data_id.subtype_id; }
+		int GetId()        const { return data_id.id; }   
+		int GetTypeId()    const { return data_id.type_id; }
+		int GetSubTypeId() const { return data_id.subtype_id; }
 
-		StarSystem* getStarSystem() const { return starsystem; }           
-		int getPlaceTypeId()        const { return place_type_id; }
+		StarSystem* GetStarSystem() const { return starsystem; }           
+		int GetPlaceTypeId()        const { return place_type_id; }
 		Points& GetPoints()          { return points; }
 
-		int getCollisionRadius() const { return collision_radius; }   
-		bool getAlive()          const { return data_life.is_alive; }
-		bool getGarbageReady()   const { return data_life.garbage_ready; }             
+		int GetCollisionRadius() const { return collision_radius; }   
+		bool GetAlive()          const { return data_life.is_alive; }
+		bool GetGarbageReady()   const { return data_life.garbage_ready; }             
 
-		int getMass()         const { return mass; }
+		int GetMass()         const { return mass; }
 		TextureOb* getTexOb() const { return texOb; }
 		int getArmor()        const { return data_life.armor; }
 

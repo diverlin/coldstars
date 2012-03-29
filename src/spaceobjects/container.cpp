@@ -53,7 +53,7 @@ void Container :: renderInfo_inSpace(vec2f scroll_coords)
  /* virtual */    
 void Container :: postDeathUniqueEvent(bool show_effect)
 {
-        if (item_slot->getItem()->getTypeId() == ENTITY::BOMB_ID)
+        if (item_slot->getItem()->GetTypeId() == ENTITY::BOMB_ID)
         {
         	starsystem->bombExplosionEvent(this, show_effect);  
         }
@@ -85,10 +85,10 @@ Container* getNewContainer()
 	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::CONTAINER_ID); 
 	
 	Container* container = new Container();
-	container->setIdData(data_id);
-	container->setLifeData(data_life);
-	container->setTextureOb(texOb);
-	container->setDeltaAngle(d_angle);
+	container->SetIdData(data_id);
+	container->SetLifeData(data_life);
+	container->SetTextureOb(texOb);
+	container->SetDeltaAngle(d_angle);
 
 	
 	container->postCreateInit();

@@ -9,7 +9,8 @@ namespace Gui
       return display_;
     }
     
-    Window::Window():general_window(sf::VideoMode(800, 600, 32), "cold star V0.0.4.50 (SFML/C++)"){}
+    //Window::Window():general_window(sf::VideoMode(Config::Instance().SCREEN_WIDTH, Config::Instance().SCREEN_HEIGHT, Config::Instance().BPP), GAME_TITLE){}
+    Window::Window():general_window(sf::VideoMode(800, 600, 32), "init"){}
     Window::~Window(){}
     
     sf::RenderWindow& Window::GetWindow(){ return general_window;}

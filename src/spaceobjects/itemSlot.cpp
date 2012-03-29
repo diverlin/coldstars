@@ -56,8 +56,8 @@ void ItemSlot :: setRect(int _pos_x, int _pos_y, int w, int h)
 	rect.set(_pos_x, _pos_y, w, h);
 }
                                 
-int ItemSlot :: getTypeId()          const { return type_id; }
-int ItemSlot :: getSubTypeId()       const { return subtype_id; }
+int ItemSlot :: GetTypeId()          const { return type_id; }
+int ItemSlot :: GetSubTypeId()       const { return subtype_id; }
 ItemBase* ItemSlot :: getItem()      const { return item; }
 
 Turrel* ItemSlot :: getTurrel() const { return turrel; }
@@ -161,11 +161,11 @@ void ItemSlot :: render(GLuint flash_tex)
               
 int ItemSlot :: getItemRadius() const
 {       
-        switch(item->getTypeId())
+        switch(item->GetTypeId())
         {
                 case EQUIPMENT::EQUIPMENT_ID:
                 {
-                        switch (item->getSubTypeId())
+                        switch (item->GetSubTypeId())
                         {
                                 case EQUIPMENT::LAZER_ID:   { return ((LazerEquipment*)item)->getRadius();  break; };
                                 case EQUIPMENT::ROCKET_ID:  { return ((RocketEquipment*)item)->getRadius(); break; };
@@ -222,9 +222,9 @@ void ItemSlot :: dropItemToSpace()
 	
 	// update mass
 
-	owner_vehicle->getStarSystem()->addToSpace(_container, owner_vehicle->GetPoints().getCenter());	
+	owner_vehicle->GetStarSystem()->addToSpace(_container, owner_vehicle->GetPoints().getCenter());	
 
-	//printf("container was created in ss_id = %i, pos = %f, %f\n", _starsystem->getId(), _container->getPoints()->getCenter().x, _container->getPoints()->getCenter().y );
+	//printf("container was created in ss_id = %i, pos = %f, %f\n", _starsystem->GetId(), _container->getPoints()->getCenter().x, _container->getPoints()->getCenter().y );
 }
 
 
@@ -257,7 +257,7 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
 
 	if ( (is_EQUIPED == true) and (_slot->getEquipedStatus() == true) )
        	{          
-       		if ( (item->getTypeId() == MODULE::MODULE_ID) and (_slot->getItem()->getTypeId() == EQUIPMENT::EQUIPMENT_ID) )
+       		if ( (item->GetTypeId() == MODULE::MODULE_ID) and (_slot->getItem()->GetTypeId() == EQUIPMENT::EQUIPMENT_ID) )
        		{
 			if (((EquipmentBase*)_slot->getItem())->insertModule((ModuleBase*)item) == true)  
 			{ 
@@ -267,7 +267,7 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
         		}
        		}
        		
-       		if ( (item->getTypeId() == EQUIPMENT::EQUIPMENT_ID) and (_slot->getItem()->getTypeId() == MODULE::MODULE_ID) )
+       		if ( (item->GetTypeId() == EQUIPMENT::EQUIPMENT_ID) and (_slot->getItem()->GetTypeId() == MODULE::MODULE_ID) )
        		{
 			 if (((EquipmentBase*)item)->insertModule((ModuleBase*)_slot->getItem()) == true)  
 			 { 
@@ -305,7 +305,7 @@ void ItemSlot :: drawRange()
 
 bool ItemSlot :: isTargetOk(BaseGameEntity* _target) const
 {
-        if (_target->getAlive() == true)
+        if (_target->GetAlive() == true)
         {
                 if (isStarSystemOk(_target) == true)
                 {
@@ -322,7 +322,7 @@ bool ItemSlot :: isTargetOk(BaseGameEntity* _target) const
 
 bool ItemSlot :: isStarSystemOk(BaseGameEntity* _target) const
 {
-        if (_target->getStarSystem() == owner_vehicle->getStarSystem())
+        if (_target->GetStarSystem() == owner_vehicle->GetStarSystem())
         {
                 return true;
         }
@@ -332,7 +332,7 @@ bool ItemSlot :: isStarSystemOk(BaseGameEntity* _target) const
 
 bool ItemSlot :: isDistanceOk(BaseGameEntity* _target) const
 {
-	if (_target->getTypeId() == ENTITY::STARSYSTEM_ID)
+	if (_target->GetTypeId() == ENTITY::STARSYSTEM_ID)
 	{
 		return true;
 	}

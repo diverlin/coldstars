@@ -44,8 +44,8 @@ void Button :: setShowInfoFlag(bool _show_info)   { show_info = _show_info; }
 bool Button :: getShowInfoFlag() const { return show_info; }
 Rect Button :: getRect() const         { return rect; }
 TextureOb* Button :: getTexOb()        { return texOb; }
-int Button :: getTypeId() const        { return subtype_id; }
-int Button :: getSubTypeId() const     { return subtype_id; }
+int Button :: GetTypeId() const        { return subtype_id; }
+int Button :: GetSubTypeId() const     { return subtype_id; }
 
 bool Button :: interaction(int _x, int _y)
 {        

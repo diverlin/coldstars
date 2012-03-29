@@ -29,7 +29,7 @@ LandBase :: ~LandBase()
 	//delete NPC_vec/VEHICLE_vec;
 }
 
-int LandBase :: getTypeId() const { return type_id; }
+int LandBase :: GetTypeId() const { return type_id; }
 
 
 

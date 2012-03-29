@@ -74,7 +74,7 @@ void Asteroid :: updateInfo()
 	info.clear();
 
     	info.addTitleStr("ASTEROID");
-    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->getId()));
+    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
     	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 	info.addNameStr("speed x 100:"); info.addValueStr(int2str(int(data_planet.speed*100)));
@@ -114,10 +114,10 @@ Asteroid* getNewAsteroid()
         Asteroid* asteroid = new Asteroid(); 
         
         asteroid->setPlanetData(planet_data);
-	asteroid->setTextureOb(texOb);
-	asteroid->setIdData(data_id);
-	asteroid->setLifeData(data_life);
-	asteroid->setMesh(g_DEFORMED_SPHERE_MESH);	
+	asteroid->SetTextureOb(texOb);
+	asteroid->SetIdData(data_id);
+	asteroid->SetLifeData(data_life);
+	asteroid->SetMesh(g_DEFORMED_SPHERE_MESH);	
        	
         asteroid->postCreateInit();
         

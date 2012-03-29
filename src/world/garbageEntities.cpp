@@ -44,7 +44,7 @@ void GarbageEntities :: clear()
 //{  
     	//for(unsigned int i = 0; i < entities_vec.size(); i++)
     	//{ 
-    		//switch(entities_vec[i]->getTypeId())
+    		//switch(entities_vec[i]->GetTypeId())
     		//{
     			//case SHIP_ID:      { delete (Ship*)entities_vec[i]; break; }
     			//case NPC_ID:       { delete (Npc*)entities_vec[i]; break; }

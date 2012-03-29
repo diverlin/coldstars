@@ -25,8 +25,8 @@ Screen :: Screen()
 	fbo3  = NULL;
 	bloom = NULL;
 	
-	width     = Config::Instance().SCREEN_WIDTH_MIN; 
-      	height    = Config::Instance().SCREEN_HEIGHT_MIN;
+	width     = Config::Instance().SCREEN_WIDTH; 
+      	height    = Config::Instance().SCREEN_HEIGHT;
       	bpp       = Config::Instance().BPP;
       	vert_sync = Config::Instance().VSYNC;
       	
@@ -51,10 +51,12 @@ void Screen :: resize(int width, int height)
 	Gui::GetWindow().SetFramerateLimit(Config::Instance().FPS_LIMIT); 
     	Gui::GetWindow().PreserveOpenGLStates(true);
     	Gui::GetWindow().UseVerticalSync(Config::Instance().VSYNC);
-    			
+
 	view.SetFromRect(sf::FloatRect(0, 0, width, height));
 	Gui::GetWindow().SetView(view);		
 	Gui::GetWindow().SetSize(width, height);
+	
+	//view.SetTitle(GAME_TITLE);	
 	    	
 	resizeGl();
 		

@@ -25,21 +25,21 @@ MacroScenarioStarSystemLiberation :: ~MacroScenarioStarSystemLiberation()
 
 void MacroScenarioStarSystemLiberation :: update_inStatic(Npc* _npc) const
 {
-	if ( _npc->getStarSystem()->getId() != _npc->getStateMachine()->getCurrentMacroTask()->getTarget()->getId() )
+	if ( _npc->GetStarSystem()->GetId() != _npc->getStateMachine()->getCurrentMacroTask()->getTarget()->GetId() )
 	{
-		//if (_npc->getMicroTask()->getTarget()->getObId() != _npc->getMacroTaskMain()->getTarget()->getStarSystem()->getId())
+		//if (_npc->getMicroTask()->getTarget()->getObId() != _npc->getMacroTaskMain()->getTarget()->GetStarSystem()->GetId())
 		{
-			_npc->getStateMachine()->setCurrentMicroTask(g_MICROSCENARIO_JUMP, _npc->getStateMachine()->getCurrentMacroTask()->getTarget()->getStarSystem());
+			_npc->getStateMachine()->setCurrentMicroTask(MICROSCENARIO_JUMP, _npc->getStateMachine()->getCurrentMacroTask()->getTarget()->GetStarSystem());
 		}
 	}
 	else
 	{
-		if (_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getTypeId() != ENTITY::NPC_ID)
+		if (_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->GetTypeId() != ENTITY::NPC_ID)
 		{
-			Npc* _target_npc = _npc->getStarSystem()->getRandNpc(&RACES_EVIL_LIST);
+			Npc* _target_npc = _npc->GetStarSystem()->getRandNpc(&RACES_EVIL_LIST);
 			if (_target_npc != NULL)
 			{
-				_npc->getStateMachine()->setCurrentMicroTask(g_MICROSCENARIO_DESTROY, _target_npc);
+				_npc->getStateMachine()->setCurrentMicroTask(MICROSCENARIO_DESTROY, _target_npc);
 			}
 			else
 			{
@@ -51,5 +51,5 @@ void MacroScenarioStarSystemLiberation :: update_inStatic(Npc* _npc) const
 
 std::string MacroScenarioStarSystemLiberation :: getDescription(Npc* _npc) const
 {
-	return "MacroScenarioStarSystemLiberation: ss_id = " + int2str(_npc->getStateMachine()->getCurrentMacroTask()->getTarget()->getId());
+	return "MacroScenarioStarSystemLiberation: ss_id = " + int2str(_npc->getStateMachine()->getCurrentMacroTask()->getTarget()->GetId());
 }

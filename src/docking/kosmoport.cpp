@@ -63,7 +63,7 @@ bool Kosmoport :: getPermissionToLand() const
 /* virtual */
 bool Kosmoport :: add(Vehicle* vehicle)
 {
-        vehicle->setPlaceTypeId(type_id);
+        vehicle->SetPlaceTypeId(type_id);
                 
         VEHICLE_vec.push_back(vehicle);
         angar->add(vehicle);
@@ -74,7 +74,7 @@ bool Kosmoport :: add(Vehicle* vehicle)
 /* virtual */
 bool Kosmoport :: add(Npc* npc)
 {
-        npc->setPlaceTypeId(type_id);
+        npc->SetPlaceTypeId(type_id);
         NPC_vec.push_back(npc);
         
         npc->setLand(this);

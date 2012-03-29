@@ -81,7 +81,7 @@ void RocketBullet :: update_inSpace(int time, bool show_effect)
 
 bool RocketBullet :: isTargetOk() const
 {
-        if (target->getAlive() == true)
+        if (target->GetAlive() == true)
         {
                 if (isStarSystemOk() == true)
                 {
@@ -94,7 +94,7 @@ bool RocketBullet :: isTargetOk() const
 
 bool RocketBullet :: isStarSystemOk() const
 {
-        if (target->getStarSystem() == starsystem)
+        if (target->GetStarSystem() == starsystem)
         {
                 return true;
         }

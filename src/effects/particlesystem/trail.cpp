@@ -75,7 +75,7 @@ void TrailEffect :: update()
 
      	for (unsigned int i = 0; i < particles_vec.size(); i++) 
      	{
-     		if (particles_vec[i]->getAlive() == true)
+     		if (particles_vec[i]->GetAlive() == true)
      		{
             		particles_vec[i]->update();
             	}

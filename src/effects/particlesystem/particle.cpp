@@ -34,7 +34,7 @@ Particle :: ~Particle()
 void Particle :: setPosition(vec2f pos) { this->pos = pos; } 
 void Particle :: setVelocity(vec2f _velocity) { d_pos = _velocity; }
 
-bool Particle :: getAlive()       const { return is_alive; }   
+bool Particle :: GetAlive()       const { return is_alive; }   
 float Particle :: getAlpha()      const { return color.a; }
 float Particle :: getAlphaStart() const { return data_particle.color_start.a; }
 

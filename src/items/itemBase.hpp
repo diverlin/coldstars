@@ -34,10 +34,10 @@ class ItemBase
                 void bindSlot(ItemSlot*);
 
     		TextureOb* getTextureOb() const;                
-      		unsigned int getId()        const;
-    		unsigned int getTypeId()    const;
-    		unsigned int getSubTypeId() const;
-    		unsigned int getMass() const;
+      		unsigned int GetId()        const;
+    		unsigned int GetTypeId()    const;
+    		unsigned int GetSubTypeId() const;
+    		unsigned int GetMass() const;
 
         	unsigned int getCondition() const; 
         	int getPrice() const; 

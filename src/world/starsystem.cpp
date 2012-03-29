@@ -34,7 +34,7 @@ StarSystem :: StarSystem(int race_id)
     	detalied_simulation = false; // will be changing depending on player presence
 
     	galaxy = NULL;    	
-    	this->setStarSystem(this);
+    	this->SetStarSystem(this);
 }
 
 StarSystem :: ~StarSystem()
@@ -282,14 +282,14 @@ void StarSystem :: rocketCollision_s(bool show_effect)
         bool collide = false;
         for (unsigned int ri = 0; ri < ROCKET_vec.size(); ri++)
         {
-                if (ROCKET_vec[ri]->getAlive() == true) 
+                if (ROCKET_vec[ri]->GetAlive() == true) 
                 {
                 	// vehicle
                 	if (collide == false)
                 	{
                 		for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
                 		{
-                        		if (ROCKET_vec[ri]->getOwnerShipId() != SHIP_inSPACE_vec[ki]->getId())
+                        		if (ROCKET_vec[ri]->getOwnerShipId() != SHIP_inSPACE_vec[ki]->GetId())
                         		{                        
                         			collide = checkCollision(ROCKET_vec[ri], SHIP_inSPACE_vec[ki], show_effect);
                         			if (collide == true) { break; }                        
@@ -303,7 +303,7 @@ void StarSystem :: rocketCollision_s(bool show_effect)
                 	{
                 		for (unsigned int si = 0; si < SATELLITE_vec.size(); si++)
                 		{
-                        		if (ROCKET_vec[ri]->getOwnerShipId() != SATELLITE_vec[si]->getId())
+                        		if (ROCKET_vec[ri]->getOwnerShipId() != SATELLITE_vec[si]->GetId())
                         		{                        
                         			collide = checkCollision(ROCKET_vec[ri], SATELLITE_vec[si], show_effect);
                         			if (collide == true) { break; }                        
@@ -316,7 +316,7 @@ void StarSystem :: rocketCollision_s(bool show_effect)
                 	{
                 		for (unsigned int si = 0; si < SPACESTATION_vec.size(); si++)
                 		{
-                        		if (ROCKET_vec[ri]->getOwnerShipId() != SPACESTATION_vec[si]->getId())
+                        		if (ROCKET_vec[ri]->getOwnerShipId() != SPACESTATION_vec[si]->GetId())
                         		{                        
                         			collide = checkCollision(ROCKET_vec[ri], SPACESTATION_vec[si], show_effect);
                         			if (collide == true) { break; }                        
@@ -374,7 +374,7 @@ void StarSystem :: asteroidCollision_s(bool show_effect)
 	
         for(unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++)
         {
-                if (ASTEROID_vec[ai]->getAlive() == true) 
+                if (ASTEROID_vec[ai]->GetAlive() == true) 
                 {
                 	// vehicle
                 	if (collide == false)
@@ -674,10 +674,10 @@ void StarSystem :: asteroidManager_s(unsigned int num)
 
 void StarSystem :: addToSpace(Vehicle* vehicle, vec2f center, float angle, BaseGameEntity* parent)
 {
-     	vehicle->setPlaceTypeId(ENTITY::SPACE_ID);
-     	vehicle->setStarSystem(this);  
+     	vehicle->SetPlaceTypeId(ENTITY::SPACE_ID);
+     	vehicle->SetStarSystem(this);  
 
-	switch(vehicle->getTypeId())
+	switch(vehicle->GetTypeId())
 	{
 		case ENTITY::SHIP_ID:         	
 		{ 	
@@ -703,8 +703,8 @@ void StarSystem :: addToSpace(Vehicle* vehicle, vec2f center, float angle, BaseG
 		
 		case ENTITY::SATELLITE_ID:    	
 		{ 
-			vehicle->setParent(parent);
-			((Satellite*)vehicle)->getOrbit()->calcPath(parent->getCollisionRadius(), 1.0);
+			vehicle->SetParent(parent);
+			((Satellite*)vehicle)->getOrbit()->calcPath(parent->GetCollisionRadius(), 1.0);
 			SATELLITE_vec.push_back((Satellite*)vehicle); 
 		
 			break; 
@@ -716,12 +716,12 @@ void StarSystem :: addToSpace(Vehicle* vehicle, vec2f center, float angle, BaseG
 
 void StarSystem :: addToSpace(Npc* npc)
 {
-     	npc->setPlaceTypeId(ENTITY::SPACE_ID);
-     	npc->setStarSystem(this);  
+     	npc->SetPlaceTypeId(ENTITY::SPACE_ID);
+     	npc->SetStarSystem(this);  
 
      	NPC_inSPACE_vec.push_back(npc);
 
-	switch(npc->getSubTypeId())
+	switch(npc->GetSubTypeId())
 	{
      	 	case CLASS::RANGER_ID:     { NPC_RANGER_inSPACE_vec.push_back(npc);    break; }
      		case CLASS::WARRIOR_ID:    { NPC_WARRIOR_inSPACE_vec.push_back(npc);   break; }
@@ -734,18 +734,18 @@ void StarSystem :: addToSpace(Npc* npc)
 
 void StarSystem :: addToSpace(Star* star)
 {
-        star->setStarSystem(this);
-        star->setPlaceTypeId(ENTITY::SPACE_ID);
+        star->SetStarSystem(this);
+        star->SetPlaceTypeId(ENTITY::SPACE_ID);
         STAR_vec.push_back(star);
 }
 
 void StarSystem :: addToSpace(Planet* planet, BaseGameEntity* parent)
 {
 	planet->createOrbit();
-        planet->setParent(parent);
+        planet->SetParent(parent);
         
-        planet->setStarSystem(this);
-        planet->setPlaceTypeId(ENTITY::SPACE_ID);
+        planet->SetStarSystem(this);
+        planet->SetPlaceTypeId(ENTITY::SPACE_ID);
         PLANET_vec.push_back(planet);
 }
                 
@@ -754,8 +754,8 @@ void StarSystem :: addToSpace(Asteroid* asteroid)
 	asteroid->createOrbit();
 	asteroid->update_inSpace(1, true);
 	
-        asteroid->setStarSystem(this);
-        asteroid->setPlaceTypeId(ENTITY::SPACE_ID);
+        asteroid->SetStarSystem(this);
+        asteroid->SetPlaceTypeId(ENTITY::SPACE_ID);
         ASTEROID_vec.push_back(asteroid);
 }
 
@@ -780,7 +780,7 @@ void StarSystem :: addToSpace(Container* _container, vec2f pos)
 
 void StarSystem :: addToSpace(RocketBullet* _rocket)
 {
-	_rocket->setStarSystem(this);
+	_rocket->SetStarSystem(this);
 	ROCKET_vec.push_back(_rocket);
 }    
 
@@ -841,7 +841,7 @@ void StarSystem :: addToRemoveFromOuterSpaceQueue(Container* container)
 
 void StarSystem :: addToRemoveFromOuterSpaceQueue(Vehicle* vehicle)
 {
-	switch(vehicle->getTypeId())
+	switch(vehicle->GetTypeId())
 	{
 		case ENTITY::SHIP_ID: { remove_SHIP_queue.push_back((Ship*)vehicle); break; }
 	}
@@ -854,7 +854,7 @@ void StarSystem :: manageUnavaliableObjects_s()
     	{
     		for (unsigned int j = 0; j < MINERAL_vec.size(); j++)
     		{
-    			if (MINERAL_vec[j]->getId() == remove_MINERAL_queue[i]->getId())
+    			if (MINERAL_vec[j]->GetId() == remove_MINERAL_queue[i]->GetId())
     			{
     				MINERAL_vec.erase(MINERAL_vec.begin() + j );
     				continue;
@@ -867,7 +867,7 @@ void StarSystem :: manageUnavaliableObjects_s()
     	{
     		for (unsigned int j = 0; j < CONTAINER_vec.size(); j++)
     		{
-    			if (CONTAINER_vec[j]->getId() == remove_CONTAINER_queue[i]->getId())
+    			if (CONTAINER_vec[j]->GetId() == remove_CONTAINER_queue[i]->GetId())
     			{
     				CONTAINER_vec.erase(CONTAINER_vec.begin() + j );
     				continue;
@@ -883,7 +883,7 @@ void StarSystem :: manageDeadObjects_s()
 	
    	for(unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
     	{
-               	if (SHIP_inSPACE_vec[ki]->getGarbageReady() == true)
+               	if (SHIP_inSPACE_vec[ki]->GetGarbageReady() == true)
         	{           
             		SHIP_inSPACE_vec[ki]->GetOwnerNpc()->setAlive(false);
                		SHIP_inSPACE_vec[ki]->GetOwnerNpc()->setGarbageReady(true);
@@ -894,7 +894,7 @@ void StarSystem :: manageDeadObjects_s()
     	}
     	for(unsigned int ni = 0; ni < NPC_inSPACE_vec.size(); ni++)
     	{
-	        if (NPC_inSPACE_vec[ni]->getGarbageReady() == true)
+	        if (NPC_inSPACE_vec[ni]->GetGarbageReady() == true)
         	{   
             		garbage_entities.add(NPC_inSPACE_vec[ni]);
             		NPC_inSPACE_vec.erase(NPC_inSPACE_vec.begin() + ni);
@@ -905,7 +905,7 @@ void StarSystem :: manageDeadObjects_s()
     	//
     	for(unsigned int i = 0; i < SPACESTATION_vec.size(); i++)
     	{
-	        if (SPACESTATION_vec[i]->getGarbageReady() == true)
+	        if (SPACESTATION_vec[i]->GetGarbageReady() == true)
         	{   
             		SPACESTATION_vec.erase(SPACESTATION_vec.begin() + i);            		
         	} 
@@ -913,7 +913,7 @@ void StarSystem :: manageDeadObjects_s()
 
     	for(unsigned int i = 0; i < SATELLITE_vec.size(); i++)
     	{
-	        if (SATELLITE_vec[i]->getGarbageReady() == true)
+	        if (SATELLITE_vec[i]->GetGarbageReady() == true)
         	{   
             		SATELLITE_vec.erase(SATELLITE_vec.begin() + i);            		
         	} 
@@ -921,7 +921,7 @@ void StarSystem :: manageDeadObjects_s()
     	    	
     	for(unsigned int ni = 0; ni < NPC_RANGER_inSPACE_vec.size(); ni++)
     	{
-	        if (NPC_RANGER_inSPACE_vec[ni]->getGarbageReady() == true)
+	        if (NPC_RANGER_inSPACE_vec[ni]->GetGarbageReady() == true)
         	{   
             		NPC_RANGER_inSPACE_vec.erase(NPC_RANGER_inSPACE_vec.begin() + ni);
             		
@@ -930,7 +930,7 @@ void StarSystem :: manageDeadObjects_s()
     	
     	for(unsigned int ni = 0; ni < NPC_WARRIOR_inSPACE_vec.size(); ni++)
     	{
-	        if (NPC_WARRIOR_inSPACE_vec[ni]->getGarbageReady() == true)
+	        if (NPC_WARRIOR_inSPACE_vec[ni]->GetGarbageReady() == true)
         	{   
             		NPC_WARRIOR_inSPACE_vec.erase(NPC_WARRIOR_inSPACE_vec.begin() + ni);
             		
@@ -939,7 +939,7 @@ void StarSystem :: manageDeadObjects_s()
     	    	
     	for(unsigned int ni = 0; ni < NPC_TRADER_inSPACE_vec.size(); ni++)
     	{
-	        if (NPC_TRADER_inSPACE_vec[ni]->getGarbageReady() == true)
+	        if (NPC_TRADER_inSPACE_vec[ni]->GetGarbageReady() == true)
         	{   
             		NPC_TRADER_inSPACE_vec.erase(NPC_TRADER_inSPACE_vec.begin() + ni);
             		
@@ -948,7 +948,7 @@ void StarSystem :: manageDeadObjects_s()
     	
     	for(unsigned int ni = 0; ni < NPC_PIRAT_inSPACE_vec.size(); ni++)
     	{
-	        if (NPC_PIRAT_inSPACE_vec[ni]->getGarbageReady() == true)
+	        if (NPC_PIRAT_inSPACE_vec[ni]->GetGarbageReady() == true)
         	{   
             		NPC_PIRAT_inSPACE_vec.erase(NPC_PIRAT_inSPACE_vec.begin() + ni);
             		
@@ -957,7 +957,7 @@ void StarSystem :: manageDeadObjects_s()
     	
     	for(unsigned int ni = 0; ni < NPC_DIPLOMAT_inSPACE_vec.size(); ni++)
     	{
-	        if (NPC_DIPLOMAT_inSPACE_vec[ni]->getGarbageReady() == true)
+	        if (NPC_DIPLOMAT_inSPACE_vec[ni]->GetGarbageReady() == true)
         	{   
             		NPC_DIPLOMAT_inSPACE_vec.erase(NPC_DIPLOMAT_inSPACE_vec.begin() + ni);
             		
@@ -972,7 +972,7 @@ void StarSystem :: manageDeadObjects_s()
 
     	for(unsigned int i = 0; i < ASTEROID_vec.size(); i++)
     	{
-        	if (ASTEROID_vec[i]->getGarbageReady() == true)
+        	if (ASTEROID_vec[i]->GetGarbageReady() == true)
         	{
             		garbage_entities.add(ASTEROID_vec[i]);
             		ASTEROID_vec.erase(ASTEROID_vec.begin() + i );
@@ -982,7 +982,7 @@ void StarSystem :: manageDeadObjects_s()
 
     	for(unsigned int i = 0; i < MINERAL_vec.size(); i++)
     	{
-        	if ( (MINERAL_vec[i]->getGarbageReady() == true) or (MINERAL_vec[i]->getPlaceTypeId() == NONE_ID) )
+        	if ( (MINERAL_vec[i]->GetGarbageReady() == true) or (MINERAL_vec[i]->GetPlaceTypeId() == NONE_ID) )
         	{  
             		garbage_entities.add(MINERAL_vec[i]);
             		MINERAL_vec.erase(MINERAL_vec.begin() + i );
@@ -991,7 +991,7 @@ void StarSystem :: manageDeadObjects_s()
     	    
     	for(unsigned int i = 0; i < CONTAINER_vec.size(); i++)
     	{
-        	if ( (CONTAINER_vec[i]->getGarbageReady() == true) or (CONTAINER_vec[i]->getPlaceTypeId() == NONE_ID) )
+        	if ( (CONTAINER_vec[i]->GetGarbageReady() == true) or (CONTAINER_vec[i]->GetPlaceTypeId() == NONE_ID) )
         	{   
             		garbage_entities.add(CONTAINER_vec[i]);
             		CONTAINER_vec.erase(CONTAINER_vec.begin() + i );
@@ -1000,7 +1000,7 @@ void StarSystem :: manageDeadObjects_s()
 
     	for(unsigned int ri = 0; ri < ROCKET_vec.size(); ri++)
     	{
-        	if (ROCKET_vec[ri]->getGarbageReady() == true)
+        	if (ROCKET_vec[ri]->GetGarbageReady() == true)
         	{   
             		garbage_entities.add(ROCKET_vec[ri]);
             		ROCKET_vec.erase(ROCKET_vec.begin() + ri );
@@ -1021,7 +1021,7 @@ void StarSystem :: manageDeadObjects_s()
 
     	for (unsigned int lei = 0; lei < effect_LAZERTRACE_vec.size(); lei++)
     	{
-         	if (effect_LAZERTRACE_vec[lei]->getAlive() == false)
+         	if (effect_LAZERTRACE_vec[lei]->GetAlive() == false)
          	{   
            		garbage_effects.add(effect_LAZERTRACE_vec[lei]);
             		effect_LAZERTRACE_vec.erase(effect_LAZERTRACE_vec.begin() + lei);
@@ -1031,7 +1031,7 @@ void StarSystem :: manageDeadObjects_s()
 
     	for(unsigned int i = 0; i<effect_PARTICLESYSTEM_vec.size(); i++)  
     	{
-        	if (effect_PARTICLESYSTEM_vec[i]->getAlive() == false)
+        	if (effect_PARTICLESYSTEM_vec[i]->GetAlive() == false)
         	{   
             		garbage_effects.add(effect_PARTICLESYSTEM_vec[i]);
             		effect_PARTICLESYSTEM_vec.erase(effect_PARTICLESYSTEM_vec.begin() + i );
@@ -1040,7 +1040,7 @@ void StarSystem :: manageDeadObjects_s()
 
     	for(unsigned int ti = 0; ti < text_DAMAGE_vec.size(); ti++)    
     	{
-        	if (text_DAMAGE_vec[ti]->getAlive() == false)
+        	if (text_DAMAGE_vec[ti]->GetAlive() == false)
         	{   
             		garbage_effects.add(text_DAMAGE_vec[ti]);
             		text_DAMAGE_vec.erase(text_DAMAGE_vec.begin() + ti);
@@ -1092,7 +1092,7 @@ bool StarSystem :: removeShip(int _id)
 {       
         for (unsigned int ki = 0; ki < SHIP_inSPACE_vec.size(); ki++)
         {
-                if (SHIP_inSPACE_vec[ki]->getId() == _id)
+                if (SHIP_inSPACE_vec[ki]->GetId() == _id)
                 {
                         SHIP_inSPACE_vec.erase(SHIP_inSPACE_vec.begin() + ki);
                         return true; 
@@ -1123,7 +1123,7 @@ bool StarSystem :: removeNpc(int _id, int _subtype_id)
 bool StarSystem :: removeFromTheListById(std::vector<Npc*>* _pTo_npc_vec, int _id)
 {
       	for (unsigned int ni = 0; ni < _pTo_npc_vec->size(); ni++)
-      	if ((*_pTo_npc_vec)[ni]->getId() == _id)
+      	if ((*_pTo_npc_vec)[ni]->GetId() == _id)
         {
         	_pTo_npc_vec->erase(_pTo_npc_vec->begin() + ni);
                 return true;
@@ -1186,7 +1186,7 @@ void StarSystem :: postDeathUniqueEvent(bool) /*virtual */
 template <typename AGRESSOR, typename VICTIM>
 bool checkCollision(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
 {
-	if (collisionBetweenCenters(agressor->GetPoints(), victim->GetPoints(), victim->getCollisionRadius()) == true)
+	if (collisionBetweenCenters(agressor->GetPoints(), victim->GetPoints(), victim->GetCollisionRadius()) == true)
         {
         	victim->hit(agressor->getDamage(), show_effect);
                 agressor->collisionEvent(show_effect);

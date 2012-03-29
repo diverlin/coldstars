@@ -77,7 +77,7 @@ bool Player :: getNextTurnReady() const { return USERINPUT->getNextTurnReady(); 
           
 void Player :: update_global()
 {
-	if (npc->getAlive()  == true)
+	if (npc->GetAlive()  == true)
 	{       	
 		npc->getVehicle()->GetWeaponComplex()->weapon_selector = weapon_selector;
 	}
@@ -248,18 +248,18 @@ void Player :: renderEntities_NEW()
 
 	screen->getFbo0()->activate(screen);
    
-        	npc->getStarSystem()->renderBackground(screen->getBottomLeftGlobalCoord());           
+        	npc->GetStarSystem()->renderBackground(screen->getBottomLeftGlobalCoord());           
 		camera(screen->getBottomLeftGlobalCoord().x, screen->getBottomLeftGlobalCoord().y);    
 	        
 
-		npc->getStarSystem()->restoreDefaultColor();
+		npc->GetStarSystem()->restoreDefaultColor();
 		enable_BLEND();
 			for(unsigned int i = 0; i < visible_STAR_vec.size(); i++) 
 			{ 
         			visible_STAR_vec[i]->render_NEW(); 
     			}
     		disable_BLEND();
-		npc->getStarSystem()->restoreSceneColor();
+		npc->GetStarSystem()->restoreSceneColor();
 	screen->getFbo0()->deactivate();
 
 	// POST PROCESS BLOOM (many FBO)
@@ -310,7 +310,7 @@ void Player :: renderEntities_NEW()
     			{ 
     				visible_SPACESTATION_vec[i]->updateRenderStuff(); 
        				visible_SPACESTATION_vec[i]->render_inSpace(); 
-        			npc->getStarSystem()->restoreSceneColor();
+        			npc->GetStarSystem()->restoreSceneColor();
     			}
     			
     			for(unsigned int i = 0; i < visible_BLACKHOLE_vec.size(); i++)
@@ -333,21 +333,21 @@ void Player :: renderEntities_NEW()
     			{ 
     				visible_SHIP_vec[i]->updateRenderStuff(); 
        				visible_SHIP_vec[i]->render_inSpace(); 
-        			npc->getStarSystem()->restoreSceneColor();
+        			npc->GetStarSystem()->restoreSceneColor();
     			}
 
 			for(unsigned int i = 0; i < visible_SATELLITE_vec.size(); i++)
     			{ 
     				visible_SATELLITE_vec[i]->updateRenderStuff(); 
        				visible_SATELLITE_vec[i]->render_inSpace(); 
-        			npc->getStarSystem()->restoreSceneColor();
+        			npc->GetStarSystem()->restoreSceneColor();
     			}
     			
     			for(unsigned int i = 0; i < visible_ROCKET_vec.size(); i++)
     			{ 
     			    	visible_ROCKET_vec[i]->updateRenderStuff();
        				visible_ROCKET_vec[i]->render_inSpace(); 
-       				npc->getStarSystem()->restoreSceneColor();
+       				npc->GetStarSystem()->restoreSceneColor();
     			}    	
 		disable_BLEND();
 		
@@ -422,7 +422,7 @@ void Player :: renderEntities_NEW()
     		
     	disable_BLEND();
     	
-    	npc->getStarSystem()->restoreSceneColor();    	          
+    	npc->GetStarSystem()->restoreSceneColor();    	          
 }
     
 
@@ -431,7 +431,7 @@ void Player :: renderEntities_NEW()
 void Player :: renderEntities_OLD()
 {   
 	glLoadIdentity();
-        npc->getStarSystem()->renderBackground(screen->getBottomLeftGlobalCoord());
+        npc->GetStarSystem()->renderBackground(screen->getBottomLeftGlobalCoord());
 	
         camera(screen->getBottomLeftGlobalCoord().x, screen->getBottomLeftGlobalCoord().y);
         
@@ -458,7 +458,7 @@ void Player :: renderEntities_OLD()
     		{ 
     			visible_SPACESTATION_vec[i]->updateRenderStuff(); 
        			visible_SPACESTATION_vec[i]->render_inSpace(); 
-        		npc->getStarSystem()->restoreSceneColor();
+        		npc->GetStarSystem()->restoreSceneColor();
     		}
                         
             	for(unsigned int i = 0; i < visible_BLACKHOLE_vec.size(); i++)
@@ -480,21 +480,21 @@ void Player :: renderEntities_OLD()
     		{ 
     		    	visible_SHIP_vec[i]->updateRenderStuff();
        			visible_SHIP_vec[i]->render_inSpace(); 
-        		npc->getStarSystem()->restoreSceneColor();
+        		npc->GetStarSystem()->restoreSceneColor();
     		}
 
 		for(unsigned int i = 0; i < visible_SATELLITE_vec.size(); i++)
     		{ 
     			visible_SATELLITE_vec[i]->updateRenderStuff(); 
        			visible_SATELLITE_vec[i]->render_inSpace(); 
-        		npc->getStarSystem()->restoreSceneColor();
+        		npc->GetStarSystem()->restoreSceneColor();
                 }
                         
     		for(unsigned int i = 0; i < visible_ROCKET_vec.size(); i++)
     		{ 
                         visible_ROCKET_vec[i]->updateRenderStuff();
        			visible_ROCKET_vec[i]->render_inSpace(); 
-                        npc->getStarSystem()->restoreSceneColor();
+                        npc->GetStarSystem()->restoreSceneColor();
     		}
 
     		for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
@@ -519,7 +519,7 @@ void Player :: renderEntities_OLD()
     	}    		
     		
                 
-    	npc->getStarSystem()->restoreSceneColor();
+    	npc->GetStarSystem()->restoreSceneColor();
 }
 
 
@@ -540,12 +540,12 @@ void Player :: render(bool turn_ended, bool forceDraw_orbits, bool forceDraw_pat
         {
         	if (forceDraw_orbits == true)
         	{
-                	npc->getStarSystem()->drawOrbits();
+                	npc->GetStarSystem()->drawOrbits();
         	}
         
         	if (forceDraw_path == true)
         	{
-                	npc->getStarSystem()->drawPath();
+                	npc->GetStarSystem()->drawPath();
         	}
        	 	npc->getVehicle()->GetDriveComplex()->drawPath();
        		npc->getVehicle()->GetWeaponComplex()->RenderWeaponsRange();
@@ -574,7 +574,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
     	bool mlb = cursor->getMouseLeftButton();
     	bool mrb = cursor->getMouseRightButton();
 
-	if ( (npc->getAlive() == true) and (npc->getVehicle() != NULL) )
+	if ( (npc->GetAlive() == true) and (npc->getVehicle() != NULL) )
 	{
     		npc->getVehicle()->GetWeaponComplex()->SelectWeapons();                   				       
     		npc->getVehicle()->GetWeaponComplex()->ResetDeselectedWeaponTargets();
@@ -591,13 +591,13 @@ void Player :: mouseControl() // all large objects must be cheked by last
         	for (unsigned int mi = 0; mi < visible_MINERAL_vec.size(); mi++)
         	{ 
             		float mineral_cursor_dist = distBetweenPoints(visible_MINERAL_vec[mi]->GetPoints().getCenter(), mxvp, myvp);
-            		if (mineral_cursor_dist < visible_MINERAL_vec[mi]->getCollisionRadius())
+            		if (mineral_cursor_dist < visible_MINERAL_vec[mi]->GetCollisionRadius())
             		{   
                			cursor_has_target = true;
 
                			visible_MINERAL_vec[mi]->renderInfo_inSpace(screen->getBottomLeftGlobalCoord()); 
 
-				if ( (npc->getAlive() == true) and (npc->getVehicle() != NULL) )
+				if ( (npc->GetAlive() == true) and (npc->getVehicle() != NULL) )
 				{
                				if (mlb == true)
                				{
@@ -625,13 +625,13 @@ void Player :: mouseControl() // all large objects must be cheked by last
         	for (unsigned int ci = 0; ci < visible_CONTAINER_vec.size(); ci++)
         	{ 
             		float container_cursor_dist = distBetweenPoints(visible_CONTAINER_vec[ci]->GetPoints().getCenter(), mxvp, myvp);
-            		if (container_cursor_dist < visible_CONTAINER_vec[ci]->getCollisionRadius())
+            		if (container_cursor_dist < visible_CONTAINER_vec[ci]->GetCollisionRadius())
             		{   
                			cursor_has_target = true;
 
                			visible_CONTAINER_vec[ci]->renderInfo_inSpace(screen->getBottomLeftGlobalCoord()); 
 
-				if ( (npc->getAlive() == true) and (npc->getVehicle() != NULL) )
+				if ( (npc->GetAlive() == true) and (npc->getVehicle() != NULL) )
 				{
                				if (mlb == true)
                				{
@@ -644,7 +644,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
 	       					{
 	       						npc->getVehicle()->GetGrappleSlot()->getGrappleEquipment()->addTarget(visible_CONTAINER_vec[ci]);
 	       						npc->getVehicle()->GetGrappleSlot()->getGrappleEquipment()->validateTargets();
-	       						printf("CONTAINER with id = %i HAS BEEN MARKED\n", visible_CONTAINER_vec[ci]->getId());	       						
+	       						printf("CONTAINER with id = %i HAS BEEN MARKED\n", visible_CONTAINER_vec[ci]->GetId());	       						
 	       					}
 	       				}
  				}
@@ -660,7 +660,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
        		for (unsigned int i = 0; i < visible_SATELLITE_vec.size(); i++)
        		{ 
             		float ship_cursor_dist = distBetweenPoints(visible_SATELLITE_vec[i]->GetPoints().getCenter(), mxvp, myvp);
-            		if (ship_cursor_dist < visible_SATELLITE_vec[i]->getCollisionRadius())
+            		if (ship_cursor_dist < visible_SATELLITE_vec[i]->GetCollisionRadius())
             		{ 
             			cursor_has_target = true;
 
@@ -672,7 +672,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
                 		                                
                                 visible_SATELLITE_vec[i]->GetDriveComplex()->drawPath(); 
                 
-				if ( (npc->getAlive() == true) and (npc->getVehicle() != NULL) )
+				if ( (npc->GetAlive() == true) and (npc->getVehicle() != NULL) )
 				{
                 			if (mlb == true)
                 			{
@@ -720,7 +720,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
         	for (unsigned int ai = 0; ai < visible_ASTEROID_vec.size(); ai++)
         	{ 
             		float asteroid_cursor_dist = distBetweenPoints(visible_ASTEROID_vec[ai]->GetPoints().getCenter(), mxvp, myvp);
-            		if (asteroid_cursor_dist < visible_ASTEROID_vec[ai]->getCollisionRadius())
+            		if (asteroid_cursor_dist < visible_ASTEROID_vec[ai]->GetCollisionRadius())
             		{   
                 		cursor_has_target = true;
 
@@ -728,7 +728,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
                                 
                                 visible_ASTEROID_vec[ai]->getOrbit()->draw();
 
-				if ( (npc->getAlive() == true) and (npc->getVehicle() != NULL) )
+				if ( (npc->GetAlive() == true) and (npc->getVehicle() != NULL) )
 				{
                 			if (mlb == true)
 					{
@@ -756,7 +756,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
        		for (unsigned int ki = 0; ki < visible_SHIP_vec.size(); ki++)
        		{ 
             		float ship_cursor_dist = distBetweenPoints(visible_SHIP_vec[ki]->GetPoints().getCenter(), mxvp, myvp);
-            		if (ship_cursor_dist < visible_SHIP_vec[ki]->getCollisionRadius())
+            		if (ship_cursor_dist < visible_SHIP_vec[ki]->GetCollisionRadius())
             		{ 
             			cursor_has_target = true;
 
@@ -768,7 +768,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
                 		                                
                                 visible_SHIP_vec[ki]->GetDriveComplex()->drawPath(); 
                 
-				if ( (npc->getAlive() == true) and (npc->getVehicle() != NULL) )
+				if ( (npc->GetAlive() == true) and (npc->getVehicle() != NULL) )
 				{
                 			if (mlb == true)
                 			{
@@ -817,7 +817,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
         	for (unsigned int i = 0; i < visible_BLACKHOLE_vec.size(); i++)
         	{ 
             		float cursor_dist = distBetweenPoints(visible_BLACKHOLE_vec[i]->GetPoints().getCenter(), mxvp, myvp);
-            		if (cursor_dist < visible_BLACKHOLE_vec[i]->getCollisionRadius())
+            		if (cursor_dist < visible_BLACKHOLE_vec[i]->GetCollisionRadius())
             		{   
                			cursor_has_target = true;
 
@@ -834,7 +834,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
        		for (unsigned int i = 0; i < visible_SPACESTATION_vec.size(); i++)
        		{ 
             		float ship_cursor_dist = distBetweenPoints(visible_SPACESTATION_vec[i]->GetPoints().getCenter(), mxvp, myvp);
-            		if (ship_cursor_dist < visible_SPACESTATION_vec[i]->getCollisionRadius())
+            		if (ship_cursor_dist < visible_SPACESTATION_vec[i]->GetCollisionRadius())
             		{ 
             			cursor_has_target = true;
 
@@ -846,7 +846,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
                 		                                
                                 visible_SPACESTATION_vec[i]->GetDriveComplex()->drawPath(); 
                 
-				if ( (npc->getAlive() == true) and (npc->getVehicle() != NULL) )
+				if ( (npc->GetAlive() == true) and (npc->getVehicle() != NULL) )
 				{
                 			if (mlb == true)
                 			{
@@ -857,7 +857,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
                    				}
                    				else
                    				{
-                   					npc->getStateMachine()->setCurrentMicroTask(g_MICROSCENARIO_DOCKING, visible_SPACESTATION_vec[i]);
+                   					npc->getStateMachine()->setCurrentMicroTask(MICROSCENARIO_DOCKING, visible_SPACESTATION_vec[i]);
                    				}
 					}
 
@@ -897,8 +897,8 @@ void Player :: mouseControl() // all large objects must be cheked by last
         	for (unsigned int pi = 0; pi < visible_PLANET_vec.size(); pi++)
         	{ 
             		float planet_cursor_dist = distBetweenPoints(visible_PLANET_vec[pi]->GetPoints().getCenter(), mxvp, myvp);
-            		//printf("1,2,3 = %f,%f,%f\n", visible_PLANET_vec[pi]->getCollisionRadius(), visible_PLANET_vec[pi]->getPoints()->getCenter().x, visible_PLANET_vec[pi]->getPoints()->getCenter().y);
-            		if (planet_cursor_dist < visible_PLANET_vec[pi]->getCollisionRadius())
+            		//printf("1,2,3 = %f,%f,%f\n", visible_PLANET_vec[pi]->GetCollisionRadius(), visible_PLANET_vec[pi]->getPoints()->getCenter().x, visible_PLANET_vec[pi]->getPoints()->getCenter().y);
+            		if (planet_cursor_dist < visible_PLANET_vec[pi]->GetCollisionRadius())
             		{   
                 		cursor_has_target = true;
 
@@ -906,13 +906,13 @@ void Player :: mouseControl() // all large objects must be cheked by last
 
                                 visible_PLANET_vec[pi]->getOrbit()->draw();
           
-				if ( (npc->getAlive() == true) and (npc->getVehicle() != NULL) )
+				if ( (npc->GetAlive() == true) and (npc->getVehicle() != NULL) )
 				{
                 			if (mlb == true)
                 			{
                     				//pPLAYER->getVehicle()->getNavigator()->setTarget(visible_PLANET_vec[pi], DOCKING_NAVIGATOR_ACTION_ID);
                     				//pPLAYER->getVehicle()->getNavigator()->update_inSpace_inStatic();  
-                    				npc->getStateMachine()->setCurrentMicroTask(g_MICROSCENARIO_DOCKING, visible_PLANET_vec[pi]);
+                    				npc->getStateMachine()->setCurrentMicroTask(MICROSCENARIO_DOCKING, visible_PLANET_vec[pi]);
                 			}   
 				}
 				
@@ -929,7 +929,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
         	for (unsigned int si = 0; si < visible_STAR_vec.size(); si++)
         	{ 
             		float cursor_dist = distBetweenPoints(visible_STAR_vec[si]->GetPoints().getCenter(), mxvp, myvp);
-            		if (cursor_dist < visible_STAR_vec[si]->getCollisionRadius())
+            		if (cursor_dist < visible_STAR_vec[si]->GetCollisionRadius())
             		{   
                			cursor_has_target = true;
 
@@ -944,7 +944,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
 
     	if (cursor_has_target == false) 
     	{
-		if ( (npc->getAlive() == true) and (npc->getVehicle() != NULL) )
+		if ( (npc->GetAlive() == true) and (npc->getVehicle() != NULL) )
 		{
         		if (mlb == true)
         		{
@@ -989,7 +989,7 @@ void Player :: outerspace(GameTimer* TIMER)
 
 	cursor->updateMousePos();
 
-	npc->getStarSystem()->findVisibleEntities_c(this);
+	npc->GetStarSystem()->findVisibleEntities_c(this);
 	this->render(TIMER->getTurnEnded(), getShowAllOrbit(), getShowAllPath()); 
 
 	if (TIMER->getTurnEnded() == true)  
@@ -1076,13 +1076,13 @@ void Player :: runSession(GameTimer* TIMER)
 {
 	this->update_global();     
 
-       	if (npc->getPlaceTypeId() == ENTITY::SPACE_ID)
+       	if (npc->GetPlaceTypeId() == ENTITY::SPACE_ID)
        	{  
         	this->outerspace(TIMER);
        	}
 
 		
-       	if (npc->getPlaceTypeId() == ENTITY::KOSMOPORT_ID)
+       	if (npc->GetPlaceTypeId() == ENTITY::KOSMOPORT_ID)
        	{
         	this->kosmoport();
        	} 

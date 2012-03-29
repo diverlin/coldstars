@@ -43,7 +43,7 @@ VerticalFlowText :: ~VerticalFlowText()
 {}
 
 
-bool VerticalFlowText :: getAlive() const { return is_alive; }
+bool VerticalFlowText :: GetAlive() const { return is_alive; }
 		
 
 void VerticalFlowText :: update()

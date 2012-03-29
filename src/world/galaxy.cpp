@@ -95,8 +95,8 @@ StarSystem* generateEntireStarSystem()
 {  
         StarSystem* starsystem = new StarSystem(RACE::R0_ID);   
         
-        vec2f _center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH_MIN - 2*GUI::MAP::BORDER_X), 
-        	      getRandInt(GUI::MAP::BORDER_Y, Config::Instance().SCREEN_HEIGHT_MIN - 2*GUI::MAP::BORDER_Y) );			 
+        vec2f _center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH - 2*GUI::MAP::BORDER_X), 
+        	      getRandInt(GUI::MAP::BORDER_Y, Config::Instance().SCREEN_HEIGHT - 2*GUI::MAP::BORDER_Y) );			 
         starsystem->setPosition(_center);
 
         Star* star = getNewStar();    

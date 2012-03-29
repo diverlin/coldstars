@@ -31,7 +31,7 @@ void Mineral :: updateInfo()
 
     	info.addTitleStr("MINERAL");
 
-    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->getId()));
+    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
     	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 }
@@ -63,10 +63,10 @@ Mineral* getNewMineral()
 	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::MINERAL_ID); 
 	
 	Mineral* mineral = new Mineral();
-	mineral->setIdData(data_id);
-	mineral->setLifeData(data_life);
-	mineral->setTextureOb(texOb);
-	mineral->setDeltaAngle(d_angle);
+	mineral->SetIdData(data_id);
+	mineral->SetLifeData(data_life);
+	mineral->SetTextureOb(texOb);
+	mineral->SetDeltaAngle(d_angle);
 		
 	mineral->postCreateInit();
 	

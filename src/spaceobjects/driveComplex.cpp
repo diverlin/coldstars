@@ -102,40 +102,40 @@ void DriveComplex :: defineDistance(int _action_id)
     	{	
     		case NAVIGATOR_ACTION::DOCKING_ID:
     		{
-    			target_distance = target->getCollisionRadius()/4;
-    			target_offset = getRandVec(target->getCollisionRadius()/15, target->getCollisionRadius()/10); 
+    			target_distance = target->GetCollisionRadius()/4;
+    			target_offset = getRandVec(target->GetCollisionRadius()/15, target->GetCollisionRadius()/10); 
     			
     			break;   
     		}
     		
     		case NAVIGATOR_ACTION::COLLECTING_ID:
     		{
-    		    	target_distance = target->getCollisionRadius()*1.2;
-    			target_offset = getRandVec(target->getCollisionRadius()/10, target->getCollisionRadius()/5); 
+    		    	target_distance = target->GetCollisionRadius()*1.2;
+    			target_offset = getRandVec(target->GetCollisionRadius()/10, target->GetCollisionRadius()/5); 
     			
     			break;    		
     		}
     		
     		case NAVIGATOR_ACTION::KEEP_CLOSE_ID:
     		{
-    		    	target_distance = target->getCollisionRadius()*1.2;
-    			target_offset = getRandVec(target->getCollisionRadius()/10, target->getCollisionRadius()/5); 
+    		    	target_distance = target->GetCollisionRadius()*1.2;
+    			target_offset = getRandVec(target->GetCollisionRadius()/10, target->GetCollisionRadius()/5); 
     			
     			break;    		
     		}
 
     		case NAVIGATOR_ACTION::KEEP_MIDDLE_ID:
     		{
-    		    	target_distance = target->getCollisionRadius()*2.5;
-    			target_offset = getRandVec(target->getCollisionRadius()/10, target->getCollisionRadius()/5); 
+    		    	target_distance = target->GetCollisionRadius()*2.5;
+    			target_offset = getRandVec(target->GetCollisionRadius()/10, target->GetCollisionRadius()/5); 
     			
     			break;    		
     		}
     		
     		case NAVIGATOR_ACTION::KEEP_FAR_ID:
     		{
-    		    	target_distance = target->getCollisionRadius()*4;
-    			target_offset = getRandVec(target->getCollisionRadius()/10, target->getCollisionRadius()/5); 
+    		    	target_distance = target->GetCollisionRadius()*4;
+    			target_offset = getRandVec(target->GetCollisionRadius()/10, target->GetCollisionRadius()/5); 
     			
     			break;    
     		}
@@ -161,9 +161,9 @@ void DriveComplex :: update_inSpace_inDynamic()
 
 bool DriveComplex :: validateTarget() const
 {
-        if (target->getAlive() == true)
+        if (target->GetAlive() == true)
 	{
-		if (target->getPlaceTypeId() == ENTITY::SPACE_ID)
+		if (target->GetPlaceTypeId() == ENTITY::SPACE_ID)
 		{
 			return true;
 		}
@@ -176,7 +176,7 @@ bool DriveComplex :: validateTarget() const
 
 bool DriveComplex :: updateTargetCoord()
 {		
-	switch(target->getTypeId())
+	switch(target->GetTypeId())
 	{
     		case ENTITY::STARSYSTEM_ID:
     		{
@@ -228,7 +228,7 @@ bool DriveComplex :: checkEchievement()
 
 bool DriveComplex :: getDockingPermission()
 {
-	switch(target->getTypeId())
+	switch(target->GetTypeId())
 	{
 		case ENTITY::PLANET_ID:       { return ((Planet*)target)->getLand()->getPermissionToLand(); break; }
 		case ENTITY::SPACESTATION_ID: { return ((SpaceStation*)target)->getLand()->getPermissionToLand(); break; }

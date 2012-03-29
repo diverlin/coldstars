@@ -73,7 +73,7 @@ void Planet :: updateInfo()
 	info.clear();
 
 	info.addTitleStr("PLANET");
-	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->getId()));
+	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
 	info.addNameStr("population:");  info.addValueStr(int2str(population));
 }
 
@@ -116,10 +116,10 @@ Planet* getNewPlanet(int orbit_radius)
         Planet* planet = new Planet(RACE::R0_ID, population);
         planet->setPlanetData(planet_data);
 
-	planet->setTextureOb(texOb);
-	planet->setIdData(data_id);
-	planet->setLifeData(data_life);
-	planet->setMesh(g_SPHERE_MESH);	
+	planet->SetTextureOb(texOb);
+	planet->SetIdData(data_id);
+	planet->SetLifeData(data_life);
+	planet->SetMesh(g_SPHERE_MESH);	
 
 	planet->postCreateInit();
 	planet->createLand();

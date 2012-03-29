@@ -32,17 +32,17 @@ DetaliedIdGenerator g_TYPE_ID_GENERATOR    = DetaliedIdGenerator();
 UniqueTextureCollector g_UNIQUE_TEXTURE_COLLECTOR;
 TextureManager g_TEXTURE_MANAGER;
 
+class MacroScenarioStarSystemLiberation; MacroScenarioStarSystemLiberation* MACROSCENARIO_STARSYSTEMLIBERATION;
+class MacroScenarioStarSystemDefence;    MacroScenarioStarSystemDefence*    MACROSCENARIO_STARSYSTEMDEFENCE;
+class MacroScenarioSelfSafety;           MacroScenarioSelfSafety*           MACROSCENARIO_SELFSAFETY;
 
-class MacroScenarioStarSystemLiberation; MacroScenarioStarSystemLiberation* g_MACROSCENARIO_STARSYSTEMLIBERATION;
-class MacroScenarioStarSystemDefence;    MacroScenarioStarSystemDefence*    g_MACROSCENARIO_STARSYSTEMDEFENCE;
-class MacroScenarioSelfSafety;           MacroScenarioSelfSafety*           g_MACROSCENARIO_SELFSAFETY;
+class MicroScenarioDocking;              MicroScenarioDocking* MICROSCENARIO_DOCKING;
+class MicroScenarioJump;                 MicroScenarioJump*    MICROSCENARIO_JUMP;
+class MicroScenarioDestroy;              MicroScenarioDestroy* MICROSCENARIO_DESTROY;
 
-class MicroScenarioDocking;              MicroScenarioDocking* g_MICROSCENARIO_DOCKING;
-class MicroScenarioJump;                 MicroScenarioJump*    g_MICROSCENARIO_JUMP;
-class MicroScenarioDestroy;              MicroScenarioDestroy* g_MICROSCENARIO_DESTROY;
+class AiModelRanger;       		 AiModelRanger*      AIMODEL_RANGER;
+class AiModelConqueror;    		 AiModelConqueror*   AIMODEL_CONQUEROR;
 
-class AiModelRanger;       AiModelRanger*      g_AIMODEL_RANGER;
-class AiModelConqueror;    AiModelConqueror*   g_AIMODEL_CONQUEROR;
 
 std::vector<int> SHIP_SUBTYPE_LIST;
 

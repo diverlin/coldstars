@@ -8,8 +8,8 @@ Config& Config::Instance()
 
 Config::Config():	
 
-SCREEN_WIDTH_MIN(800),
-SCREEN_HEIGHT_MIN(600),
+SCREEN_WIDTH(800),
+SCREEN_HEIGHT(600),
 BPP(32),
 VSYNC(true),
 FPS_LIMIT(60),
@@ -27,13 +27,13 @@ SCROLL_VELOCITY_STEP(1)
 {
 	boost::property_tree::info_parser::read_info("config.info", ptree);
 
-	SCREEN_WIDTH_MIN = ptree.get<int>("Graphic.WIDTH_MIN");
-	SCREEN_HEIGHT_MIN = ptree.get<int>("Graphic.HEIGHT_MIN");
-	BPP = ptree.get<int>("Graphic.BPP");
-	FPS_LIMIT = ptree.get<int>("Graphic.FPS_LIMIT");
+	SCREEN_WIDTH = ptree.get<int>("Window.WIDTH");
+	SCREEN_HEIGHT = ptree.get<int>("Window.HEIGHT");
+	BPP = ptree.get<int>("Window.BPP");
+	FPS_LIMIT = ptree.get<int>("Window.FPS_LIMIT");
 		
-	VSYNC = ptree.get<bool>("Graphic.VSYNC");
-	MODERN_EFFECTS = ptree.get<bool>("Graphic.MODERN_EFFECTS");
+	VSYNC = ptree.get<bool>("Window.VSYNC");
+	MODERN_EFFECTS = ptree.get<bool>("Window.MODERN_EFFECTS");
 
 	DEBUG_MODE = ptree.get<bool>("General.DEBUG_MODE");
 	
@@ -42,6 +42,8 @@ SCROLL_VELOCITY_STEP(1)
 	
 	SCROLL_VELOCITY_MAX = ptree.get<int>("Control.SCROLL_VELOCITY_MAX");
 	SCROLL_VELOCITY_STEP = ptree.get<int>("Control.SCROLL_VELOCITY_STEP");
+	
+	write_info("save.info", ptree);
 }
 
 Config::~Config(){}

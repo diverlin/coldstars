@@ -45,7 +45,7 @@ void BlackHoleEffect :: update()
 
         for (unsigned int i = 0; i < num_particles; i++)
         {
-                if (particles_vec[i]->getAlive() == true)
+                if (particles_vec[i]->GetAlive() == true)
         	{
             		particles_vec[i]->update();
             		is_alive = true;

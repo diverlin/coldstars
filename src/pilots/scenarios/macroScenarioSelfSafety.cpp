@@ -25,18 +25,18 @@ MacroScenarioSelfSafety :: ~MacroScenarioSelfSafety()
 
 void MacroScenarioSelfSafety :: update_inStatic(Npc* _npc) const
 {
-	if (_npc->getStarSystem()->getCaptured() == false)
+	if (_npc->GetStarSystem()->getCaptured() == false)
 	{
-		if (_npc->getStateMachine()->getCurrentMacroTask()->getTarget()->getTypeId() != ENTITY::PLANET_ID)
+		if (_npc->getStateMachine()->getCurrentMacroTask()->getTarget()->GetTypeId() != ENTITY::PLANET_ID)
 		{ 
-			_npc->getStateMachine()->setCurrentMicroTask(g_MICROSCENARIO_DOCKING, _npc->getPlanetForDocking());
+			_npc->getStateMachine()->setCurrentMicroTask(MICROSCENARIO_DOCKING, _npc->getPlanetForDocking());
 		}
 	}
 	else
 	{
-		if (_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getTypeId() != ENTITY::STARSYSTEM_ID)
+		if (_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->GetTypeId() != ENTITY::STARSYSTEM_ID)
 		{
-			_npc->getStateMachine()->setCurrentMicroTask(g_MICROSCENARIO_JUMP, _npc->getFailBackStarSystem());
+			_npc->getStateMachine()->setCurrentMicroTask(MICROSCENARIO_JUMP, _npc->getFailBackStarSystem());
 		}
 	}        
 }

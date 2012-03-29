@@ -65,9 +65,9 @@ Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int w
        		
 	Ship* ship = new Ship();
 	ship->SetKorpusData(data_korpus);
-	ship->setTextureOb(texOb);
-	ship->setIdData(data_id);
-	ship->setLifeData(data_life);
+	ship->SetTextureOb(texOb);
+	ship->SetIdData(data_id);
+	ship->SetLifeData(data_life);
 	
 	CreateKorpusGeometry(ship);
         CreateKorpusGui(ship);
@@ -116,9 +116,9 @@ Satellite* VehicleBuilder::GetNewSatellite()
 
 	Satellite* satellite = new Satellite();
 	satellite->SetKorpusData(data_korpus);
-	satellite->setIdData(data_id);
-	satellite->setLifeData(data_life);
-	satellite->setTextureOb(texOb);
+	satellite->SetIdData(data_id);
+	satellite->SetLifeData(data_life);
+	satellite->SetTextureOb(texOb);
 	
 	CreateKorpusGeometry(satellite);
         CreateKorpusGui(satellite);
@@ -168,9 +168,9 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation()
                            
     	SpaceStation* spacestation = new SpaceStation(RACE::R0_ID);
     	spacestation->SetKorpusData(data_korpus);
-	spacestation->setTextureOb(texOb);
-	spacestation->setIdData(data_id);
-	spacestation->setLifeData(data_life);
+	spacestation->SetTextureOb(texOb);
+	spacestation->SetIdData(data_id);
+	spacestation->SetLifeData(data_life);
     	
 	CreateKorpusGeometry(spacestation);
         CreateKorpusGui(spacestation);
@@ -198,11 +198,11 @@ RocketBullet* VehicleBuilder::GetNewRocket(BulletData data_bullet, ItemSlot* slo
         data_life.garbage_ready = false;
         data_life.armor = data_bullet.armor;        
 
-    	RocketBullet* rocket = new RocketBullet(data_bullet, slot->getTurrel()->getTarget(), slot->getOwnerVehicle()->getId());
+    	RocketBullet* rocket = new RocketBullet(data_bullet, slot->getTurrel()->getTarget(), slot->getOwnerVehicle()->GetId());
          
-        rocket->setIdData(data_id);
-        rocket->setLifeData(data_life);
-        rocket->setTextureOb(data_bullet.texOb);
+        rocket->SetIdData(data_id);
+        rocket->SetLifeData(data_life);
+        rocket->SetTextureOb(data_bullet.texOb);
          
         CreateKorpusGeometry(rocket);
         //CreateShieldGeometry(rocket);

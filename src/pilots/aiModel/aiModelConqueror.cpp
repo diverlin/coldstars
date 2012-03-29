@@ -23,15 +23,15 @@ AiModelConqueror :: AiModelConqueror()
 AiModelConqueror :: ~AiModelConqueror() 
 {}
 
-void AiModelConqueror :: update_inStatic(Npc* _npc) const
+void AiModelConqueror :: update_inStatic(Npc* npc) const
 {
-	if ( _npc->getStateMachine()->getCurrentMacroTask()->getValid() == false) 
+	if ( npc->getStateMachine()->getCurrentMacroTask()->getValid() == false) 
 	{
-	        _npc->getStateMachine()->setCurrentMacroTask(g_MACROSCENARIO_STARSYSTEMDEFENCE, _npc->getStarSystem());
+	        npc->getStateMachine()->setCurrentMacroTask(MACROSCENARIO_STARSYSTEMDEFENCE, npc->GetStarSystem());
 	}
 }
 
-std::string AiModelConqueror :: getDescription(Npc* _npc) const
+std::string AiModelConqueror :: getDescription(Npc* npc) const
 {
 	return "AiModelConqueror";
 }
