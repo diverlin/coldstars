@@ -32,7 +32,7 @@ class RadarModule : public ModuleBase
       	private:
       		int radius_add;
       		
-      		void virtual addUniqueInfo();
+      		void virtual AddUniqueInfo();
 };
 
 RadarModule* getNewRadarModule();

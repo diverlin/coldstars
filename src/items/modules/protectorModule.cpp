@@ -29,7 +29,7 @@ ProtectorModule :: ~ProtectorModule () /* virtual */
 int ProtectorModule :: getProtectionAdd() const { return protection_add; }
 		
 		
-void ProtectorModule :: addUniqueInfo()
+void ProtectorModule :: AddUniqueInfo()
 {
     	info.addTitleStr("protector module");
     	info.addNameStr("protection_add:");  info.addValueStr( int2str(protection_add) );
@@ -48,8 +48,8 @@ ProtectorModule* getNewProtectorModule()
         data_id.subtype_id = MODULE::PROTECTOR_ID;  
         
     	ProtectorModule* protector_module = new ProtectorModule(protection_add);
-        protector_module->setTextureOb(texOb);
-        protector_module->setIdData(data_id);
+        protector_module->SetTextureOb(texOb);
+        protector_module->SetIdData(data_id);
         
     	return protector_module;
 }

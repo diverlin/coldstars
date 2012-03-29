@@ -29,7 +29,7 @@ class ProtectorEquipment  : public EquipmentBase
 
 		int getProtection() const;
 
-      		void virtual updateOwnerAbilities();
+      		void virtual UpdateOwnerAbilities();
       		
       		void countPrice();
       		virtual void updatePropetries();
@@ -39,7 +39,7 @@ class ProtectorEquipment  : public EquipmentBase
       		int protection_add;
       		int protection;
 
-     		void virtual addUniqueInfo();
+     		void virtual AddUniqueInfo();
            	std::string getProtectionStr();
 };
 

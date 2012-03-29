@@ -112,13 +112,13 @@ bool ItemSlot :: insertItem(BaseItem* item)
 			return true;
    		}
    	
-		if (subtype_id == item->getFunctionalSlotSubTypeId())
+		if (subtype_id == item->GetFunctionalSlotSubTypeId())
 		{
 		        this->item = item;
                 	is_EQUIPED = true; 
                 
-			item->bindSlot(this);
-			item->updateOwnerAbilities();
+			item->BindSlot(this);
+			item->UpdateOwnerAbilities();
 		
 			return true;
 		}
@@ -143,7 +143,7 @@ void ItemSlot :: removeItem()
         
     	if (subtype_id != SLOT::CARGO_ID) 
     	{ 
-    		tmp_item->updateOwnerAbilities(); 
+    		tmp_item->UpdateOwnerAbilities(); 
     	}                     
 }
 
@@ -191,7 +191,7 @@ void ItemSlot :: renderEquipedItem()
 {
         if (is_EQUIPED == true)
         {
-                item->render(rect);
+                item->Render(rect);
         }
 }
 
@@ -199,7 +199,7 @@ void ItemSlot :: renderItemInfo(float offset_x, float offset_y)
 {
         if (is_EQUIPED == true)
         {
-                item->renderInfo(rect, offset_x, offset_y);
+                item->RenderInfo(rect, offset_x, offset_y);
         }
 }
 

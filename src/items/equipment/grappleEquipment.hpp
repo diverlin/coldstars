@@ -37,7 +37,7 @@ class GrappleEquipment : public EquipmentBase
 		int getSpeed()      const;
 		int getMaxNumItem() const;
 
-      		virtual void updateOwnerAbilities();
+      		virtual void UpdateOwnerAbilities();
                 
                 void addTarget(BaseGameEntity*);
                 void addToRemoveQueue(BaseGameEntity*);
@@ -70,7 +70,7 @@ class GrappleEquipment : public EquipmentBase
       		
       	      	std::vector<GrappleModule*> modules_vec; 
       		
-     		void virtual addUniqueInfo();     		
+     		void virtual AddUniqueInfo();     		
            	std::string getStrengthStr();
            	std::string getRadiusStr();
            	std::string getSpeedStr();

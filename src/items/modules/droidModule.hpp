@@ -32,7 +32,7 @@ class DroidModule : public ModuleBase
      	private:
       	      	int repair_add;
       	      	
-      	      	void virtual addUniqueInfo();
+      	      	void virtual AddUniqueInfo();
 };
 
 DroidModule* getNewDroidModule();

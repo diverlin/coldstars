@@ -34,7 +34,7 @@ class LazerEquipment : public EquipmentBase
       		void fireEvent_TRUE();
       		void fireEvent_FALSE();
       		      
-      		void virtual updateOwnerAbilities();
+      		void virtual UpdateOwnerAbilities();
       		
        	      	virtual void updatePropetries();
       		void countPrice();
@@ -51,7 +51,7 @@ class LazerEquipment : public EquipmentBase
       		TextureOb* texOb_turrel;
       		TextureOb* texOb_lazerEffect;
 
-     		void virtual addUniqueInfo();
+     		void virtual AddUniqueInfo();
            	std::string getDamageStr();
            	std::string getRadiusStr();      	
 };

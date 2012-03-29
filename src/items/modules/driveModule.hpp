@@ -35,7 +35,7 @@ class DriveModule : public ModuleBase
       		int speed_add;
       		int hyper_add;
 
-      		void virtual addUniqueInfo();
+      		void virtual AddUniqueInfo();
 };
 
 DriveModule* getNewDriveModule();

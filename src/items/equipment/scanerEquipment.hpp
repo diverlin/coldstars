@@ -29,7 +29,7 @@ class ScanerEquipment : public EquipmentBase
 
 		int getScan() const;
 
-    		virtual void updateOwnerAbilities();
+    		virtual void UpdateOwnerAbilities();
     		
     		void countPrice();
     		virtual void updatePropetries();
@@ -39,7 +39,7 @@ class ScanerEquipment : public EquipmentBase
     		int scan_add;
     		int scan;
 
-     		void virtual addUniqueInfo();
+     		void virtual AddUniqueInfo();
          	std::string getScanStr();
 };
 

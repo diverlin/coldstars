@@ -68,13 +68,13 @@ void LazerEquipment :: countPrice()
 
 
 /* virtual */    
-void LazerEquipment :: updateOwnerAbilities()
+void LazerEquipment :: UpdateOwnerAbilities()
 { 
     	slot->getOwnerVehicle()->UpdateFireAbility();
 }
 
 
-void LazerEquipment :: addUniqueInfo()
+void LazerEquipment :: AddUniqueInfo()
 {
     	info.addTitleStr("LAZER");
 
@@ -121,7 +121,7 @@ void LazerEquipment :: fireEvent_TRUE()
 	DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, slot->getTurrel()->getTarget());
     	_lazer_trace_effect->setDamageEffect(_damage_effect);
     	
-    	deterioration();
+    	Deterioration();
     	
     	slot->getOwnerVehicle()->GetStarSystem()->addToSpace(_lazer_trace_effect);
     	slot->getOwnerVehicle()->GetStarSystem()->addToSpace(_damage_effect);
@@ -131,7 +131,7 @@ void LazerEquipment :: fireEvent_TRUE()
 
 void LazerEquipment :: fireEvent_FALSE()
 { 
-    	deterioration();
+    	Deterioration();
 } 
 
 
@@ -165,10 +165,10 @@ LazerEquipment* getNewLazerEquipment(int race_id, int revision_id)
     	LazerEquipment* lazer_equipment = new LazerEquipment(damage_orig, 
     							     radius_orig);
                                                              
-        lazer_equipment->setIdData(data_id);  
-        lazer_equipment->setTextureOb(texOb_item);    	
-        lazer_equipment->setFunctionalSlotSubTypeId(SLOT::WEAPON_ID);
-        lazer_equipment->setItemCommonData(common_data);
+        lazer_equipment->SetIdData(data_id);  
+        lazer_equipment->SetTextureOb(texOb_item);    	
+        lazer_equipment->SetFunctionalSlotSubTypeId(SLOT::WEAPON_ID);
+        lazer_equipment->SetItemCommonData(common_data);
         
    	lazer_equipment->updatePropetries();
    	lazer_equipment->countPrice();

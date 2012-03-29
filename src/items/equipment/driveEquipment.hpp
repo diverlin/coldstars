@@ -31,7 +31,7 @@ class DriveEquipment :  public EquipmentBase
 		int getSpeed() const;
 		int getHyper() const;
       		
-      		void virtual updateOwnerAbilities();
+      		void virtual UpdateOwnerAbilities();
 
       		void countPrice();
       		virtual void updatePropetries();
@@ -45,7 +45,7 @@ class DriveEquipment :  public EquipmentBase
       		int hyper_add;
       		int hyper;
       		
-     		void virtual addUniqueInfo();
+     		void virtual AddUniqueInfo();
            	std::string getSpeedStr();
            	std::string getHyperStr();      	
 };

@@ -26,9 +26,9 @@ ModuleBase :: ~ModuleBase ()
 
 
 /* virtual */
-void ModuleBase :: updateOwnerAbilities()     { /* do nothing*/ } 
+void ModuleBase :: UpdateOwnerAbilities()     { /* do nothing*/ } 
 
-void ModuleBase :: addCommonInfo()
+void ModuleBase :: AddCommonInfo()
 {
     	//info.addNameStr("modules:");   info.addValueStr( int2str(common_data.modules_num_max) );
     	//info.addNameStr("race:");      info.addValueStr( returnRaceStringByRaceId(race_id) );
@@ -37,13 +37,13 @@ void ModuleBase :: addCommonInfo()
     	//info.addNameStr("price:");     info.addValueStr( int2str(price) );
 }
 
-//void ModuleBase :: renderInfo(Rect slot_rect, float offset_x, float offset_y)
+//void ModuleBase :: RenderInfo(Rect slot_rect, float offset_x, float offset_y)
 //{  
-	//updateInfo();
+	//UpdateInfo();
         //drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.getCenter().x, slot_rect.getCenter().y, offset_x, offset_y);
 //}
 
-//void ModuleBase :: render(Rect slot_rect)
+//void ModuleBase :: Render(Rect slot_rect)
 //{
         //drawTexturedRect(texOb, slot_rect, -1);   
 //}

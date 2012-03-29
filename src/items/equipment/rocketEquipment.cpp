@@ -88,13 +88,13 @@ void RocketEquipment :: countPrice()
 }
 
 
-void RocketEquipment :: updateOwnerAbilities()
+void RocketEquipment :: UpdateOwnerAbilities()
 {      
     	slot->getOwnerVehicle()->UpdateFireAbility();
 }
 
 
-void RocketEquipment :: addUniqueInfo()
+void RocketEquipment :: AddUniqueInfo()
 {
     	info.addTitleStr("ROCKET");
     	
@@ -144,7 +144,7 @@ void RocketEquipment :: fireEvent()
     	//rocketlaunch.play()
     	ammo -= num;
 
-    	deterioration();
+    	Deterioration();
 }
 
 
@@ -181,10 +181,10 @@ RocketEquipment* getNewRocketEquipment(int race_id, int revision_id)
 
     	RocketEquipment* rocket_equipment = new RocketEquipment(ammo_max_orig, damage_orig, radius_orig);
 
-        rocket_equipment->setIdData(data_id);  
-        rocket_equipment->setTextureOb(texOb_item);    	
-        rocket_equipment->setFunctionalSlotSubTypeId(SLOT::WEAPON_ID);
-        rocket_equipment->setItemCommonData(common_data);
+        rocket_equipment->SetIdData(data_id);  
+        rocket_equipment->SetTextureOb(texOb_item);    	
+        rocket_equipment->SetFunctionalSlotSubTypeId(SLOT::WEAPON_ID);
+        rocket_equipment->SetItemCommonData(common_data);
                 
         rocket_equipment->updatePropetries();
         rocket_equipment->countPrice();

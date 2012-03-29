@@ -32,7 +32,7 @@ class ScanerModule : public ModuleBase
        	private:
        		int scan_add;
        		
-       		void virtual addUniqueInfo();
+       		void virtual AddUniqueInfo();
 };
 
 ScanerModule* scanerModuleGenerator();

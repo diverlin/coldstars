@@ -28,7 +28,7 @@ BakModule :: ~BakModule() /* virtual */
 int BakModule :: getFuelMaxAdd() const { return fuel_max_add; }
  	
 
-void BakModule :: addUniqueInfo()
+void BakModule :: AddUniqueInfo()
 {
     	info.addTitleStr("bak module");
     	info.addNameStr("fuel_max_add:"); info.addValueStr( int2str(fuel_max_add) );
@@ -48,8 +48,8 @@ BakModule* getNewBakModule()
         data_id.subtype_id = MODULE::BAK_ID;  
         
     	BakModule* bak_module = new BakModule(fuel_max_add);
-        bak_module->setTextureOb(texOb);
-        bak_module->setIdData(data_id);
+        bak_module->SetTextureOb(texOb);
+        bak_module->SetIdData(data_id);
         
     	return bak_module;
 }

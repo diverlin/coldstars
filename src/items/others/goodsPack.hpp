@@ -31,7 +31,7 @@ class GoodsPack : public BaseItem
         	void increase(unsigned int);       
                 void decrease(unsigned int);
 
-                virtual void updateOwnerAbilities();
+                virtual void UpdateOwnerAbilities();
         	
         private:
         	unsigned int mineral;
@@ -40,8 +40,8 @@ class GoodsPack : public BaseItem
         	unsigned int military;
         	unsigned int drug;
         	
-        	virtual void addCommonInfo();
- 		virtual void addUniqueInfo();   
+        	virtual void AddCommonInfo();
+ 		virtual void AddUniqueInfo();   
 };
 
 GoodsPack* getNewGoodsPack(unsigned int _subtype_id, vec2f);

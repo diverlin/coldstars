@@ -28,7 +28,7 @@ DroidModule :: ~DroidModule() /* virtual */
 int DroidModule :: getRepairAdd() const { return repair_add; }
 		
 		
-void DroidModule :: addUniqueInfo()
+void DroidModule :: AddUniqueInfo()
 {
     	info.addTitleStr("droid module");
     	info.addNameStr("repair_add:");   info.addValueStr( int2str(repair_add) );
@@ -46,8 +46,8 @@ DroidModule* getNewDroidModule()
         data_id.subtype_id = MODULE::DROID_ID; 
         
     	DroidModule* droid_module = new DroidModule(repair_add);
-        droid_module->setTextureOb(texOb);
-        droid_module->setIdData(data_id);
+        droid_module->SetTextureOb(texOb);
+        droid_module->SetIdData(data_id);
         
     	return droid_module;
 }

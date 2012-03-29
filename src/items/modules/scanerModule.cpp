@@ -30,7 +30,7 @@ ScanerModule :: ~ScanerModule() /* virtual */
 int ScanerModule :: getScanAdd() const { return scan_add; }
 		
 		
-void ScanerModule :: addUniqueInfo()
+void ScanerModule :: AddUniqueInfo()
 {
     	info.addTitleStr("scaner module");
     	info.addNameStr("scan_add:");      info.addValueStr( int2str(scan_add) );
@@ -49,8 +49,8 @@ ScanerModule* scanerModuleGenerator()
         data_id.subtype_id = MODULE::SCANER_ID;  
         
     	ScanerModule* scaner_module = new ScanerModule(scan_add);
-        scaner_module->setTextureOb(texOb);
-        scaner_module->setIdData(data_id);
+        scaner_module->SetTextureOb(texOb);
+        scaner_module->SetIdData(data_id);
         
     	return scaner_module;
 }

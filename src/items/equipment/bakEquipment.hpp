@@ -31,7 +31,7 @@ class BakEquipment : public EquipmentBase
 		
 		void fill();
 
-     	     	void virtual updateOwnerAbilities();
+     	     	void virtual UpdateOwnerAbilities();
      	
      	     	void countPrice();
      	     	virtual void updatePropetries();
@@ -42,7 +42,7 @@ class BakEquipment : public EquipmentBase
      		int fuel_max;
      		int fuel;
 
-     		void virtual addUniqueInfo();
+     		void virtual AddUniqueInfo();
           	std::string getFuelStr();
 };
 

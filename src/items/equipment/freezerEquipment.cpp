@@ -56,13 +56,13 @@ void FreezerEquipment :: countPrice()
 }
 
 /* virtual */
-void FreezerEquipment :: updateOwnerAbilities()
+void FreezerEquipment :: UpdateOwnerAbilities()
 {
     	slot->getOwnerVehicle()->UpdateFreezeAbility();
 }
 
       
-void FreezerEquipment :: addUniqueInfo()
+void FreezerEquipment :: AddUniqueInfo()
 {
     	info.addTitleStr("FREEZER");
     	info.addNameStr("freeze:");     info.addValueStr( getFreezeStr() );
@@ -107,10 +107,10 @@ FreezerEquipment* getNewFreezerEquipment(int race_id, int revision_id)
         
     	FreezerEquipment* freezer_equipment = new FreezerEquipment(freeze_orig);
         
-        freezer_equipment->setIdData(data_id);  
-        freezer_equipment->setTextureOb(texOb_item);    	
-        freezer_equipment->setFunctionalSlotSubTypeId(SLOT::FREEZER_ID);
-        freezer_equipment->setItemCommonData(common_data);
+        freezer_equipment->SetIdData(data_id);  
+        freezer_equipment->SetTextureOb(texOb_item);    	
+        freezer_equipment->SetFunctionalSlotSubTypeId(SLOT::FREEZER_ID);
+        freezer_equipment->SetItemCommonData(common_data);
   
       	freezer_equipment->updatePropetries();
     	freezer_equipment->countPrice();

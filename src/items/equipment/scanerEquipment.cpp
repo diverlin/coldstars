@@ -57,13 +57,13 @@ void ScanerEquipment :: countPrice()
 }
 
 /* virtual */
-void ScanerEquipment :: updateOwnerAbilities()
+void ScanerEquipment :: UpdateOwnerAbilities()
 {
     	slot->getOwnerVehicle()->UpdateScanAbility();
 }
 
 
-void ScanerEquipment :: addUniqueInfo()
+void ScanerEquipment :: AddUniqueInfo()
 {
     	info.addTitleStr("SCANER");
     	info.addNameStr("scan:");     info.addValueStr( getScanStr() );
@@ -109,10 +109,10 @@ ScanerEquipment* getNewScanerEquipment(int race_id, int revision_id)
         
     	ScanerEquipment* scaner_equipment = new ScanerEquipment(scan_orig);
         
-        scaner_equipment->setIdData(data_id);  
-        scaner_equipment->setTextureOb(texOb_item);    	
-        scaner_equipment->setFunctionalSlotSubTypeId(SLOT::SCANER_ID);
-        scaner_equipment->setItemCommonData(common_data);
+        scaner_equipment->SetIdData(data_id);  
+        scaner_equipment->SetTextureOb(texOb_item);    	
+        scaner_equipment->SetFunctionalSlotSubTypeId(SLOT::SCANER_ID);
+        scaner_equipment->SetItemCommonData(common_data);
            
     	scaner_equipment->updatePropetries();
     	scaner_equipment->countPrice();

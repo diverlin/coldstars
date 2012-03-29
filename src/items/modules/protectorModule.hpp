@@ -32,7 +32,7 @@ class ProtectorModule : public ModuleBase
        	private:
        	     	int protection_add;
        	     	
-       		void virtual addUniqueInfo();
+       		void virtual AddUniqueInfo();
 };
 
 ProtectorModule* getNewProtectorModule();

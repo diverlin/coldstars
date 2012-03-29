@@ -28,10 +28,10 @@ BaseItem::BaseItem()
 BaseItem::~BaseItem ()
 {}
 
-void BaseItem::bindSlot(ItemSlot* slot)    { this->slot = slot; }
+void BaseItem::BindSlot(ItemSlot* slot)    { this->slot = slot; }
 
 
-void BaseItem::deterioration()
+void BaseItem::Deterioration()
 {
     	condition -= data_item.deterioration_rate;
     	if (condition <= 0)
@@ -39,13 +39,12 @@ void BaseItem::deterioration()
        		is_DAMAGED = true;
        		if (slot->getOwnerVehicle() != NULL) 
        		{  
-           		updateOwnerAbilities();
+           		UpdateOwnerAbilities();
            	}
     	}
 }
 
-
-void BaseItem::repair()
+void BaseItem::Repair()
 {
     	condition = data_item.condition_max;
     	if (is_DAMAGED == true)
@@ -53,31 +52,27 @@ void BaseItem::repair()
         	is_DAMAGED = false;
         	if (slot->getOwnerVehicle() != NULL)   
         	{
-           		updateOwnerAbilities();
+           		UpdateOwnerAbilities();
            	}
     	}
 }
 
-
-void BaseItem::updateInfo()
+void BaseItem::UpdateInfo()
 {
 	info.clear();
 
-	addUniqueInfo();
-    	addCommonInfo();
+	AddUniqueInfo();
+    	AddCommonInfo();
 }
 
-
-
-
-void BaseItem::renderInfo(Rect slot_rect, float offset_x, float offset_y)
+void BaseItem::RenderInfo(Rect slot_rect, float offset_x, float offset_y)
 {  
-	updateInfo();
+	UpdateInfo();
      	drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.getCenter().x, slot_rect.getCenter().y, offset_x, offset_y);
 }
 
 /* virtual */
-void BaseItem::render(Rect slot_rect)
+void BaseItem::Render(Rect slot_rect)
 {
     	drawTexturedRect(texOb, slot_rect, -1.0);
 }

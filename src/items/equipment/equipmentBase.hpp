@@ -29,12 +29,12 @@ class EquipmentBase : public BaseItem
       		bool insertModule(ModuleBase*);
       		virtual void updatePropetries() = 0;
       		
-      		virtual void render(Rect);
+      		virtual void Render(Rect);
       		      		
      	protected:
 		std::vector<ModuleBase*> modules_vec;    // needs for inserted modules drawing
                 
-                virtual void addCommonInfo();
+                virtual void AddCommonInfo();
 };
 
 #endif 

@@ -66,14 +66,14 @@ void DriveEquipment :: countPrice()
 }
 
 /* virtual */
-void DriveEquipment :: updateOwnerAbilities()
+void DriveEquipment :: UpdateOwnerAbilities()
 {
     	slot->getOwnerVehicle()->UpdateDriveAbility();
     	slot->getOwnerVehicle()->UpdateJumpAbility();    	
 }
 
 
-void DriveEquipment :: addUniqueInfo()
+void DriveEquipment :: AddUniqueInfo()
 {
     	info.addTitleStr("DRIVE");
     	info.addNameStr("speed:");     info.addValueStr( getSpeedStr() );
@@ -126,10 +126,10 @@ DriveEquipment* getNewDriveEquipment(int race_id, int revision_id)
         
         DriveEquipment* drive_equipment = new DriveEquipment(speed_orig, hyper_orig);
     
-        drive_equipment->setIdData(data_id);  
-        drive_equipment->setTextureOb(texOb_item);    	
-        drive_equipment->setFunctionalSlotSubTypeId(SLOT::DRIVE_ID);
-        drive_equipment->setItemCommonData(common_data);
+        drive_equipment->SetIdData(data_id);  
+        drive_equipment->SetTextureOb(texOb_item);    	
+        drive_equipment->SetFunctionalSlotSubTypeId(SLOT::DRIVE_ID);
+        drive_equipment->SetItemCommonData(common_data);
          
         drive_equipment->updatePropetries();
      	drive_equipment->countPrice();

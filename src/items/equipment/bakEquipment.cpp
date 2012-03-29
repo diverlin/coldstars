@@ -65,7 +65,7 @@ void BakEquipment :: countPrice()
 }
 
 /* virtual */
-void BakEquipment :: updateOwnerAbilities()
+void BakEquipment :: UpdateOwnerAbilities()
 {
     	slot->getOwnerVehicle()->UpdateDriveAbility();
     	slot->getOwnerVehicle()->UpdateJumpAbility(); 
@@ -73,7 +73,7 @@ void BakEquipment :: updateOwnerAbilities()
 
 
 
-void BakEquipment :: addUniqueInfo()
+void BakEquipment :: AddUniqueInfo()
 {
     	info.addTitleStr("BAK");
     	info.addNameStr("fuel:");      info.addValueStr( getFuelStr() );
@@ -117,10 +117,10 @@ BakEquipment* getNewBakEquipment(int race_id, int revision_id)
         
     	BakEquipment* bak_equipment = new BakEquipment(fuel_max_orig);
         
-        bak_equipment->setIdData(data_id);  
-        bak_equipment->setTextureOb(texOb_item);    	
-        bak_equipment->setFunctionalSlotSubTypeId(SLOT::BAK_ID);
-        bak_equipment->setItemCommonData(common_data);
+        bak_equipment->SetIdData(data_id);  
+        bak_equipment->SetTextureOb(texOb_item);    	
+        bak_equipment->SetFunctionalSlotSubTypeId(SLOT::BAK_ID);
+        bak_equipment->SetItemCommonData(common_data);
                 
         bak_equipment->updatePropetries();
     	bak_equipment->countPrice();

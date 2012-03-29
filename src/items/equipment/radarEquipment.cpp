@@ -58,13 +58,13 @@ void RadarEquipment :: countPrice()
 }
 
 /* virtual */
-void RadarEquipment :: updateOwnerAbilities()
+void RadarEquipment :: UpdateOwnerAbilities()
 {
 	slot->getOwnerVehicle()->UpdateRadarAbility();
 }
       
 
-void RadarEquipment :: addUniqueInfo()
+void RadarEquipment :: AddUniqueInfo()
 {
     	info.addTitleStr("RADAR");
     	info.addNameStr("radius:");     info.addValueStr( getRadiusStr() );
@@ -110,10 +110,10 @@ RadarEquipment* getNewRadarEquipment(int race_id, int revision_id)
         
     	RadarEquipment* radar_equipment = new RadarEquipment(radius_orig);
                         
-        radar_equipment->setIdData(data_id);  
-        radar_equipment->setTextureOb(texOb_item);    	
-        radar_equipment->setFunctionalSlotSubTypeId(SLOT::RADAR_ID);
-        radar_equipment->setItemCommonData(common_data);
+        radar_equipment->SetIdData(data_id);  
+        radar_equipment->SetTextureOb(texOb_item);    	
+        radar_equipment->SetFunctionalSlotSubTypeId(SLOT::RADAR_ID);
+        radar_equipment->SetItemCommonData(common_data);
         
  
     	radar_equipment->updatePropetries();

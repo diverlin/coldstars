@@ -35,7 +35,7 @@ int RocketModule :: getDamageAdd()  const { return damage_add; }
 int RocketModule :: getRadiusAdd()  const { return radius_add; }
 		
 
-void RocketModule :: addUniqueInfo()
+void RocketModule :: AddUniqueInfo()
 {
     	info.addTitleStr("rocket module"); 
     	if (ammo_max_add != 0)
@@ -67,8 +67,8 @@ RocketModule* getNewRocketModule()
         data_id.subtype_id = MODULE::ROCKET_ID;  
         
     	RocketModule* rocket_module = new RocketModule(ammo_max_add, damage_add, radius_add);
-        rocket_module->setTextureOb(texOb);
-        rocket_module->setIdData(data_id);
+        rocket_module->SetTextureOb(texOb);
+        rocket_module->SetIdData(data_id);
                 
     	return rocket_module;
 }

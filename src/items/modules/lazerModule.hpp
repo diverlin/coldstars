@@ -35,7 +35,7 @@ class LazerModule : public ModuleBase
                 int damage_add;
         	int radius_add; 
         	
-        	void virtual addUniqueInfo();       
+        	void virtual AddUniqueInfo();       
 };
 
 

@@ -38,7 +38,7 @@ class RocketModule : public ModuleBase
        		int damage_add;
        		int radius_add;
        		
-       		void virtual addUniqueInfo();
+       		void virtual AddUniqueInfo();
 };
 
 RocketModule* getNewRocketModule();

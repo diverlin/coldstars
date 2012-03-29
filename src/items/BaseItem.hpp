@@ -27,32 +27,32 @@ class BaseItem
       		BaseItem();
       		virtual ~BaseItem();
       		
-		void setIdData(IdData data_id)       { this->data_id = data_id; };
-		void setTextureOb(TextureOb* texOb)  { this->texOb = texOb; };
-		void setFunctionalSlotSubTypeId(int functional_slot_subtype_id) { this->functional_slot_subtype_id = functional_slot_subtype_id; };
-		void setItemCommonData(ItemCommonData data_item) { this->data_item = data_item; };
+		void SetIdData(IdData data_id)       { this->data_id = data_id; };
+		void SetTextureOb(TextureOb* texOb)  { this->texOb = texOb; };
+		void SetFunctionalSlotSubTypeId(int functional_slot_subtype_id) { this->functional_slot_subtype_id = functional_slot_subtype_id; };
+		void SetItemCommonData(ItemCommonData data_item) { this->data_item = data_item; };
                 
-            	TextureOb* GetTextureOb()     const { return texOb; };
+            	TextureOb* GetTextureOb()   const { return texOb; };
 		unsigned int GetId()        const { return data_id.id; };
 		unsigned int GetTypeId()    const { return data_id.type_id; };
 		unsigned int GetSubTypeId() const { return data_id.subtype_id; };
-		unsigned int GetMass()    const { return data_item.mass; };
-		unsigned int getCondition() const { return condition; };
-		int getPrice()     const { return price; };
-		int getFunctionalSlotSubTypeId() const { return functional_slot_subtype_id; };
+		unsigned int GetMass()      const { return data_item.mass; };
+		unsigned int GetCondition() const { return condition; };
+		int GetPrice()              const { return price; };
+		int GetFunctionalSlotSubTypeId() const { return functional_slot_subtype_id; };
     
-                void bindSlot(ItemSlot*);
+                void BindSlot(ItemSlot*);
  
-     		void repair();
+     		void Repair();
 
-     		void deterioration(); 
+     		void Deterioration(); 
                 
-		void updateInfo();
+		void UpdateInfo();
 			
-      		virtual void render(Rect);
-      		void renderInfo(Rect, float, float); 
+      		virtual void Render(Rect);
+      		void RenderInfo(Rect, float, float); 
      		
-     		void virtual updateOwnerAbilities() = 0;
+     		void virtual UpdateOwnerAbilities()=0;
 
 	protected:
       	      	IdData data_id;
@@ -72,8 +72,8 @@ class BaseItem
                 
                 InfoTable info;  
      		
-     		virtual void addCommonInfo()=0;
- 		virtual void addUniqueInfo()=0;                      
+     		virtual void AddCommonInfo()=0;
+ 		virtual void AddUniqueInfo()=0;                      
 };
 
 #endif
