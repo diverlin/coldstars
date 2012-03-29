@@ -40,7 +40,7 @@ void SpaceStation :: createLand(int race_id)
 		
 void SpaceStation :: update_inSpace(int time, bool show_effect)
 {
-	checkDeath(show_effect);
+	CheckDeath(show_effect);
 	if (time > 0)
 	{}
 }

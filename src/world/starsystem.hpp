@@ -187,7 +187,7 @@ class StarSystem : public BaseGameEntity
     		
     		void damageEventInsideCircle(vec2f epicentr, float radius, int damage, bool show_effect);
     		
-    		void postDeathUniqueEvent(bool);
+    		void PostDeathUniqueEvent(bool);
 
 
 		void asteroidManager_s(unsigned int num);
@@ -209,7 +209,7 @@ class StarSystem : public BaseGameEntity
 
 		void damageEventInsideCircle(vec2f epicentr, float radius, int damage, bool show_effect);
 
-		void postDeathUniqueEvent(bool); */
+		void PostDeathUniqueEvent(bool); */
 };
 
 template <typename AGRESSOR, typename VICTIM>

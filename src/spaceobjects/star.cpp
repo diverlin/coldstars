@@ -80,7 +80,7 @@ void Star :: render_NEW()
     
 void Star :: render_OLD()
 {    
-	updateRotation();
+	UpdateRotation();
      	
      	glBindTexture(GL_TEXTURE_2D, texOb->texture);      		
 	renderMesh(mesh->glList, points.getCenter3f(), angle, data_planet.scale);
@@ -100,7 +100,7 @@ void Star :: renderInfo_inSpace(vec2f scroll_coords)
      	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);
 }
 
-void Star :: postDeathUniqueEvent(bool)
+void Star :: PostDeathUniqueEvent(bool)
 {}
 
     

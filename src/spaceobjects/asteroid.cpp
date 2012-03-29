@@ -34,8 +34,8 @@ int Asteroid :: getDamage() const { return mass*10; }
 
 void Asteroid :: update_inSpace(int time, bool show_effect)
 {    
-	checkDeath(show_effect);
-	updateRotation();
+	CheckDeath(show_effect);
+	UpdateRotation();
 	if (time > 0)
 	{	
      		orbit->updatePosition();  
@@ -50,7 +50,7 @@ void Asteroid :: collisionEvent(bool show_effect)
 }
 
     
-void Asteroid :: postDeathUniqueEvent(bool show_effect)
+void Asteroid :: PostDeathUniqueEvent(bool show_effect)
 {
        	for (int i = 0; i<3; i++)
 	{

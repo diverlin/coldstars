@@ -27,7 +27,7 @@ SpaceItemBase :: ~SpaceItemBase()
 void SpaceItemBase :: postCreateInit()
 {
    	this->calcCollisionrRadius();
-	this->createCenter();
+	this->CreateCenter();
 }
 
 
@@ -53,8 +53,8 @@ void SpaceItemBase :: moveToSpace(StarSystem* starsystem, vec2f start_pos)
 
 void SpaceItemBase :: update_inSpace(int time, bool show_effect)
 {
-	checkDeath(show_effect);
-	updateRotation();
+	CheckDeath(show_effect);
+	UpdateRotation();
 		
 	if (time > 0)
 	{
@@ -74,7 +74,7 @@ void SpaceItemBase :: silentKill()
 }
    
 /* virtual */    
-void SpaceItemBase :: postDeathUniqueEvent(bool show_effect)
+void SpaceItemBase :: PostDeathUniqueEvent(bool show_effect)
 {
 	if (show_effect == true)
      	{

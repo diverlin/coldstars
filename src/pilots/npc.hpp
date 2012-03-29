@@ -114,7 +114,7 @@ class Npc : public BaseGameEntity
                 void checkNeeds();
                                     		
      		void updateInfo();     	
-     		virtual void postDeathUniqueEvent(bool);	
+     		virtual void PostDeathUniqueEvent(bool);	
  };
 
 

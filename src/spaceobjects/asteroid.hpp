@@ -34,7 +34,7 @@ class Asteroid : public PlanetBase
 		void renderInfo_inSpace(vec2f);
 
 	private:      	
-		void postDeathUniqueEvent(bool);
+		void PostDeathUniqueEvent(bool);
 
 		void updateInfo();
 }; 

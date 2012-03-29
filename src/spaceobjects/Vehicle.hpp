@@ -76,7 +76,7 @@ class Vehicle : public BaseGameEntity
         	                
         	void Hit(int, bool);
 
-        	virtual void postDeathUniqueEvent(bool); 
+        	virtual void PostDeathUniqueEvent(bool); 
         	
         	void UpdateAllPropertiesAndAbilities();
              		void RecalculateMass();

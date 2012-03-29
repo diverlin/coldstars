@@ -32,7 +32,7 @@ class Container : public SpaceItemBase
 
         	void renderInfo_inSpace(vec2f);
         	
-        	virtual void postDeathUniqueEvent(bool);
+        	virtual void PostDeathUniqueEvent(bool);
         
         private:
                 ItemSlot* item_slot;        

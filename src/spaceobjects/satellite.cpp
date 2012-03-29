@@ -35,7 +35,7 @@ Orbit* Satellite :: getOrbit() const { return orbit; }
     				
 void Satellite :: update_inSpace(int time, bool show_effect)
 {
-	checkDeath(show_effect);
+	CheckDeath(show_effect);
 	if (time > 0)
 	{
 		orbit->updatePosition();
@@ -75,7 +75,7 @@ void Satellite :: updateRenderStuff()
     	//points.update(); 
     	protection_complex->GetShieldEffect()->update();
     	
-    	this->updateRotation();
+    	this->UpdateRotation();
 	points.setAngle(angle.z);
     	//printf("3. angle = %f\n", angle.z);
     	points.update();

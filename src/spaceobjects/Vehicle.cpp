@@ -264,7 +264,7 @@ void Vehicle::Hit(int _damage, bool show_effect)
 }
 
 
-void Vehicle::postDeathUniqueEvent(bool show_effect)  /* virtual */
+void Vehicle::PostDeathUniqueEvent(bool show_effect)  /* virtual */
 {
 	int num_items = getRandInt(0, 3);
 	for (int i = 0; i<num_items; i++)
