@@ -61,12 +61,12 @@ class ItemBase
                 int race_id;
 		unsigned int condition;
      		int price;
-                int mass;   
+
                 int functional_slot_subtype_id;
 
      		bool is_DAMAGED;
                 
-                ItemCommonData common_data;
+                ItemCommonData data_item;
                 
                 ItemSlot* slot;
                 

@@ -42,7 +42,7 @@ void Bomb :: updateInfo()
     	info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
     	info.addNameStr("damage:");      info.addValueStr(int2str(damage));
     	//info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
-    	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
+    	info.addNameStr("mass:");        info.addValueStr(int2str(data_item.mass));
 }
             
 

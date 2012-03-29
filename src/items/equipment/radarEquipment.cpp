@@ -47,12 +47,12 @@ void RadarEquipment :: countPrice()
 {
     	float radius_rate         = (float)radius_orig / EQUIPMENT::RADAR::RADIUS_MIN;
 
-    	float modules_num_rate    = (float)common_data.modules_num_max / EQUIPMENT::RADAR::MODULES_NUM_MAX;
+    	float modules_num_rate    = (float)data_item.modules_num_max / EQUIPMENT::RADAR::MODULES_NUM_MAX;
 
     	float effectiveness_rate  = EQUIPMENT::RADAR::RADIUS_WEIGHT * radius_rate + EQUIPMENT::RADAR::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    	float mass_rate           = (float)common_data.mass / EQUIPMENT::RADAR::MASS_MIN;
-    	float condition_rate      = (float)condition / common_data.condition_max;
+    	float mass_rate           = (float)data_item.mass / EQUIPMENT::RADAR::MASS_MIN;
+    	float condition_rate      = (float)condition / data_item.condition_max;
 
     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }

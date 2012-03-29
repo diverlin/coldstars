@@ -53,13 +53,13 @@ void BakEquipment :: updatePropetries()
 void BakEquipment :: countPrice()
 {
     	float fuel_rate          = (float)fuel_max_orig / EQUIPMENT::BAK::FUEL_MIN;
-    	float modules_num_rate   = (float)common_data.modules_num_max / EQUIPMENT::BAK::MODULES_NUM_MAX;
+    	float modules_num_rate   = (float)data_item.modules_num_max / EQUIPMENT::BAK::MODULES_NUM_MAX;
 
     	float effectiveness_rate = EQUIPMENT::BAK::FUEL_WEIGHT * fuel_rate + 
     				   EQUIPMENT::BAK::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    	float mass_rate          = (float)common_data.mass / EQUIPMENT::BAK::MASS_MIN;
-    	float condition_rate     = (float)condition / common_data.condition_max;
+    	float mass_rate          = (float)data_item.mass / EQUIPMENT::BAK::MASS_MIN;
+    	float condition_rate     = (float)condition / data_item.condition_max;
 
    	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }

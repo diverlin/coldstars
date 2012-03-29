@@ -34,8 +34,8 @@ void Ship :: updateInfo()
     	info.addNameStr("race:");   		info.addValueStr( returnRaceStringByRaceId(texOb->race_id) ); 
     	info.addNameStr("armor/max:");     	info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) );
     	info.addNameStr("size id:");     	info.addValueStr( int2str(texOb->size_id) );
-    	info.addNameStr("space/free:");   	info.addValueStr( int2str(data_korpus.space) + "/" + int2str(data_korpus.space - propetries.mass) );
-    	info.addNameStr("mass:");   		info.addValueStr( int2str(propetries.mass) );
+    	info.addNameStr("space/free:");   	info.addValueStr( int2str(data_korpus.space) + "/" + int2str(data_korpus.space - mass) );
+    	info.addNameStr("mass:");   		info.addValueStr( int2str(mass) );
     	info.addNameStr("energy:");            	info.addValueStr( int2str(propetries.energy) );
 	info.addNameStr("temp.:");       	info.addValueStr( int2str(data_korpus.temperature) );
         info.addNameStr("radius:");    		info.addValueStr( int2str(propetries.radius) );

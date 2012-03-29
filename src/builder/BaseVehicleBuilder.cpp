@@ -244,6 +244,8 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle)
     	{        
                 vehicle->AddItemToOtsec(getNewBomb());
     	}   
+    	
+    	//vehicle->UpdateAllPropertiesAndAbilities(); // not good place for this
 }
 
 

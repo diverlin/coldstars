@@ -306,13 +306,13 @@ void Vehicle::UpdateFireAbility()
 
 void Vehicle::RecalculateMass()
 {
-     	propetries.mass = 0;   
+     	mass = 0;   
 
     	for (unsigned int i = 0; i < slot_total_vec.size(); i++)
     	{
         	if (slot_total_vec[i]->getEquipedStatus() == true)
         	{
-           		propetries.mass += slot_total_vec[i]->getItem()->GetMass();  
+           		mass += slot_total_vec[i]->getItem()->GetMass();  
            	}    
     	}
 }
@@ -332,7 +332,7 @@ void Vehicle::UpdateDriveAbility()
      	{
         	if (drive_complex->GetDriveSlot().getDriveEquipment()->getCondition() > 0)  
         	{
-           		float val = (drive_complex->GetDriveSlot().getDriveEquipment()->getSpeed() - propetries.mass/70);
+           		float val = (drive_complex->GetDriveSlot().getDriveEquipment()->getSpeed() - mass/70);
            		if (val > 0)
            		{ 
               			propetries.speed = val;

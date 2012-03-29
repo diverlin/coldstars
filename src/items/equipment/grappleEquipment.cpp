@@ -162,7 +162,7 @@ void GrappleEquipment :: countPrice()
     	float speed_rate         = (float)speed_orig / EQUIPMENT::GRAPPLE::SPEED_MIN;
     	float maxNumItem_rate    = (float)maxNumItem_orig / EQUIPMENT::GRAPPLE::MAXNUMITEM_MIN;
 
-    	float modules_num_rate   = (float)common_data.modules_num_max / EQUIPMENT::GRAPPLE::MODULES_NUM_MAX;
+    	float modules_num_rate   = (float)data_item.modules_num_max / EQUIPMENT::GRAPPLE::MODULES_NUM_MAX;
 
     	float effectiveness_rate = EQUIPMENT::GRAPPLE::STRENGTH_WEIGHT * strength_rate + 
     				   EQUIPMENT::GRAPPLE::RADIUS_WEIGHT * radius_rate + 
@@ -170,8 +170,8 @@ void GrappleEquipment :: countPrice()
     				   EQUIPMENT::GRAPPLE::MAXNUMITEM_WEIGHT * maxNumItem_rate + 
     				   EQUIPMENT::GRAPPLE::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    	float mass_rate          = (float)common_data.mass / EQUIPMENT::GRAPPLE::MASS_MIN;
-    	float condition_rate     = (float)condition / common_data.condition_max;
+    	float mass_rate          = (float)data_item.mass / EQUIPMENT::GRAPPLE::MASS_MIN;
+    	float condition_rate     = (float)condition / data_item.condition_max;
 
     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }

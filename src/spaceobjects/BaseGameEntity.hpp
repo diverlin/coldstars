@@ -29,12 +29,11 @@ class BaseGameEntity
 		BaseGameEntity();
 		virtual ~BaseGameEntity();
 
-
-		void SetStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
 		void SetIdData(IdData data_id)              { this->data_id = data_id; }
 		void SetLifeData(LifeData data_life)        { this->data_life = data_life; }
 		void SetMesh(ObjMeshInstance* mesh)         { this->mesh = mesh; }
 		void SetTextureOb(TextureOb* texOb)         { this->texOb = texOb; }
+		void SetStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
 		void SetPlaceTypeId(int place_type_id)      { this->place_type_id = place_type_id;  }
 
 		void SetAngle(vec3f angle)                  { this->angle = angle; }
@@ -66,12 +65,12 @@ class BaseGameEntity
 		void Hit(int, bool);
 
 	protected:
+		IdData data_id;
+		LifeData data_life;
+		
 		vec3f angle, d_angle;
 
 		float collision_radius;
-
-		IdData data_id;
-		LifeData data_life;
 
 		TextureOb* texOb;
 		ObjMeshInstance* mesh; 

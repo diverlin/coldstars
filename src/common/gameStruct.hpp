@@ -129,7 +129,6 @@ struct ShipPropetries
 
 	int protection;
 	int radius;
-	int mass;   // depends on all items mass
 	int speed;  // depends on mass and drive
 
 	int hyper;  // depends on drive and bak

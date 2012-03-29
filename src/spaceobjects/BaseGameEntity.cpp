@@ -100,10 +100,33 @@ void BaseGameEntity::CheckDeath(bool show_effect)
 
 void BaseGameEntity::SaveUniqueBaseGameEntity(const std::string& root) const
 {
-	SaveManager::Instance().Put(root+"id",         data_id.id);
-	SaveManager::Instance().Put(root+"type_id",    data_id.type_id);
-	SaveManager::Instance().Put(root+"subtype_id", data_id.subtype_id);
+	SaveManager::Instance().Put(root+"data_id.id",         data_id.id);
+	SaveManager::Instance().Put(root+"data_id.type_id",    data_id.type_id);
+	SaveManager::Instance().Put(root+"data_id.subtype_id", data_id.subtype_id);
+
+	SaveManager::Instance().Put(root+"data_life.is_alive",   data_life.is_alive);
+	SaveManager::Instance().Put(root+"data_life.armor",      data_life.armor);
+	SaveManager::Instance().Put(root+"data_life.dying_time", data_life.dying_time);
+
+	//SaveManager::Instance().Put(root+"mesh_id",      mesh);
+	//SaveManager::Instance().Put(root+"textureOb_id", textureOb);
+	SaveManager::Instance().Put(root+"starsystem_id", starsystem->GetId());
+	SaveManager::Instance().Put(root+"place_type_id", place_type_id);		
+
+	SaveManager::Instance().Put(root+"angle.x", angle.x);
+	SaveManager::Instance().Put(root+"angle.y", angle.y);
+	SaveManager::Instance().Put(root+"angle.z", angle.z);
+
+	SaveManager::Instance().Put(root+"d_angle.x", d_angle.x);
+	SaveManager::Instance().Put(root+"d_angle.y", d_angle.y);
+	SaveManager::Instance().Put(root+"d_angle.z", d_angle.z);
+
+	SaveManager::Instance().Put(root+"collision_radius", collision_radius);
+
+	SaveManager::Instance().Put(root+"mass", mass);
 	
+	if (parent) SaveManager::Instance().Put(root+"parent_id", parent->GetId());
+								
 	SaveManager::Instance().DumpToFile();
 	
 }

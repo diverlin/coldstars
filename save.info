@@ -4,468 +4,2758 @@
     {
         ship_109
         {
-            id 109
-            type_id 0
-            subtype_id 4
+            data_id
+            {
+                id 109
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 847
+                dying_time 40
+            }
+            starsystem_id 1
+            place_type_id 17
+            angle
+            {
+                x 31
+                y 24
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.45
+            }
+            collision_radius 46
+            mass 485
         }
         ship_133
         {
-            id 133
-            type_id 0
-            subtype_id 0
+            data_id
+            {
+                id 133
+                type_id 0
+                subtype_id 2
+            }
+            data_life
+            {
+                is_alive true
+                armor 190
+                dying_time 20
+            }
+            starsystem_id 1
+            place_type_id 17
+            angle
+            {
+                x 14
+                y 19
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.98
+            }
+            collision_radius 24
+            mass 477
         }
-        ship_157
+        ship_156
         {
-            id 157
-            type_id 0
-            subtype_id 1
+            data_id
+            {
+                id 156
+                type_id 0
+                subtype_id 3
+            }
+            data_life
+            {
+                is_alive true
+                armor 613
+                dying_time 30
+            }
+            starsystem_id 1
+            place_type_id 17
+            angle
+            {
+                x 13
+                y 31
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.88
+            }
+            collision_radius 32
+            mass 376
+        }
+        ship_179
+        {
+            data_id
+            {
+                id 179
+                type_id 0
+                subtype_id 2
+            }
+            data_life
+            {
+                is_alive true
+                armor 1227
+                dying_time 20
+            }
+            starsystem_id 1
+            place_type_id 17
+            angle
+            {
+                x 11
+                y 33
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.66
+            }
+            collision_radius 24
+            mass 409
         }
     }
-    starsystem_357
+    starsystem_376
     {
-        ship_500
+        ship_519
         {
-            id 500
-            type_id 0
-            subtype_id 1
+            data_id
+            {
+                id 519
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 697
+                dying_time 70
+            }
+            starsystem_id 376
+            place_type_id 17
+            angle
+            {
+                x 19
+                y 10
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.11
+            }
+            collision_radius 91
+            mass 455
         }
-        ship_522
+        ship_542
         {
-            id 522
-            type_id 0
-            subtype_id 1
+            data_id
+            {
+                id 542
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 193
+                dying_time 70
+            }
+            starsystem_id 376
+            place_type_id 17
+            angle
+            {
+                x 11
+                y 23
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.1
+            }
+            collision_radius 91
+            mass 426
         }
-        ship_546
+        ship_563
         {
-            id 546
-            type_id 0
-            subtype_id 3
+            data_id
+            {
+                id 563
+                type_id 0
+                subtype_id 2
+            }
+            data_life
+            {
+                is_alive true
+                armor 515
+                dying_time 70
+            }
+            starsystem_id 376
+            place_type_id 17
+            angle
+            {
+                x 14
+                y 37
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.79
+            }
+            collision_radius 102
+            mass 552
         }
-        ship_568
+        ship_587
         {
-            id 568
-            type_id 0
-            subtype_id 1
+            data_id
+            {
+                id 587
+                type_id 0
+                subtype_id 2
+            }
+            data_life
+            {
+                is_alive true
+                armor 792
+                dying_time 70
+            }
+            starsystem_id 376
+            place_type_id 17
+            angle
+            {
+                x 26
+                y 30
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.88
+            }
+            collision_radius 102
+            mass 453
         }
     }
-    starsystem_767
+    starsystem_786
     {
-        ship_875
+        ship_894
         {
-            id 875
-            type_id 0
-            subtype_id 3
+            data_id
+            {
+                id 894
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 500
+                dying_time 30
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 36
+                y 11
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.6
+            }
+            collision_radius 37
+            mass 503
         }
-        ship_899
+        ship_937
         {
-            id 899
-            type_id 0
-            subtype_id 2
+            data_id
+            {
+                id 937
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 1079
+                dying_time 30
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 25
+                y 36
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.2
+            }
+            collision_radius 37
+            mass 551
         }
-        ship_920
+        ship_981
         {
-            id 920
-            type_id 0
-            subtype_id 2
+            data_id
+            {
+                id 981
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 239
+                dying_time 30
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 36
+                y 14
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.72
+            }
+            collision_radius 37
+            mass 441
+        }
+        ship_1022
+        {
+            data_id
+            {
+                id 1022
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 373
+                dying_time 20
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 34
+                y 29
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.27
+            }
+            collision_radius 16
+            mass 417
+        }
+        ship_1064
+        {
+            data_id
+            {
+                id 1064
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 913
+                dying_time 30
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 31
+                y 16
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.74
+            }
+            collision_radius 37
+            mass 540
+        }
+        ship_1108
+        {
+            data_id
+            {
+                id 1108
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 1221
+                dying_time 30
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 31
+                y 28
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.12
+            }
+            collision_radius 37
+            mass 470
+        }
+        ship_1152
+        {
+            data_id
+            {
+                id 1152
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 155
+                dying_time 20
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 18
+                y 28
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.23
+            }
+            collision_radius 16
+            mass 430
+        }
+        ship_1194
+        {
+            data_id
+            {
+                id 1194
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 1121
+                dying_time 30
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 25
+                y 10
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.58
+            }
+            collision_radius 37
+            mass 411
+        }
+        ship_1238
+        {
+            data_id
+            {
+                id 1238
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 821
+                dying_time 30
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 15
+                y 17
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.69
+            }
+            collision_radius 37
+            mass 424
+        }
+        ship_1281
+        {
+            data_id
+            {
+                id 1281
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 535
+                dying_time 30
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 10
+                y 25
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.23
+            }
+            collision_radius 37
+            mass 356
+        }
+        ship_1324
+        {
+            data_id
+            {
+                id 1324
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 305
+                dying_time 60
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 16
+                y 28
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.39
+            }
+            collision_radius 74
+            mass 413
+        }
+        ship_2115
+        {
+            data_id
+            {
+                id 2115
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 508
+                dying_time 30
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 14
+                y 14
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.82
+            }
+            collision_radius 39
+            mass 395
+        }
+        ship_2455
+        {
+            data_id
+            {
+                id 2455
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 527
+                dying_time 20
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 10
+                y 27
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.97
+            }
+            collision_radius 18
+            mass 507
+        }
+        ship_2478
+        {
+            data_id
+            {
+                id 2478
+                type_id 0
+                subtype_id 3
+            }
+            data_life
+            {
+                is_alive true
+                armor 469
+                dying_time 30
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 37
+                y 27
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.9
+            }
+            collision_radius 32
+            mass 385
+        }
+        ship_2070
+        {
+            data_id
+            {
+                id 2070
+                type_id 0
+                subtype_id 2
+            }
+            data_life
+            {
+                is_alive true
+                armor 194
+                dying_time 30
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 12
+                y 35
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.45
+            }
+            collision_radius 39
+            mass 431
+        }
+        ship_1707
+        {
+            data_id
+            {
+                id 1707
+                type_id 0
+                subtype_id 3
+            }
+            data_life
+            {
+                is_alive true
+                armor 338
+                dying_time 70
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 14
+                y 33
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.17
+            }
+            collision_radius 102
+            mass 447
+        }
+        ship_2521
+        {
+            data_id
+            {
+                id 2521
+                type_id 0
+                subtype_id 2
+            }
+            data_life
+            {
+                is_alive true
+                armor 1059
+                dying_time 20
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 16
+                y 11
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.9
+            }
+            collision_radius 24
+            mass 438
+        }
+        ship_2500
+        {
+            data_id
+            {
+                id 2500
+                type_id 0
+                subtype_id 3
+            }
+            data_life
+            {
+                is_alive true
+                armor 1251
+                dying_time 30
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 29
+                y 33
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.15
+            }
+            collision_radius 32
+            mass 437
+        }
+        ship_2091
+        {
+            data_id
+            {
+                id 2091
+                type_id 0
+                subtype_id 4
+            }
+            data_life
+            {
+                is_alive true
+                armor 826
+                dying_time 20
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 23
+                y 23
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.86
+            }
+            collision_radius 18
+            mass 531
+        }
+        ship_1730
+        {
+            data_id
+            {
+                id 1730
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 896
+                dying_time 70
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 25
+                y 30
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.29
+            }
+            collision_radius 91
+            mass 443
+        }
+        ship_1684
+        {
+            data_id
+            {
+                id 1684
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 815
+                dying_time 70
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 12
+                y 22
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.85
+            }
+            collision_radius 91
+            mass 492
+        }
+        ship_587
+        {
+            data_id
+            {
+                id 587
+                type_id 0
+                subtype_id 2
+            }
+            data_life
+            {
+                is_alive true
+                armor 792
+                dying_time 70
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 26
+                y 30
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.88
+            }
+            collision_radius 102
+            mass 453
+        }
+        ship_542
+        {
+            data_id
+            {
+                id 542
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 193
+                dying_time 70
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 11
+                y 23
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.1
+            }
+            collision_radius 91
+            mass 426
+        }
+        ship_519
+        {
+            data_id
+            {
+                id 519
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 697
+                dying_time 70
+            }
+            starsystem_id 786
+            place_type_id 17
+            angle
+            {
+                x 19
+                y 10
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.11
+            }
+            collision_radius 91
+            mass 455
         }
     }
-    starsystem_1117
+    starsystem_1541
     {
-        ship_1225
+        ship_1684
         {
-            id 1225
-            type_id 0
-            subtype_id 1
+            data_id
+            {
+                id 1684
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 815
+                dying_time 70
+            }
+            starsystem_id 1541
+            place_type_id 17
+            angle
+            {
+                x 12
+                y 22
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.85
+            }
+            collision_radius 91
+            mass 492
         }
-        ship_1267
+        ship_1707
         {
-            id 1267
-            type_id 0
-            subtype_id 1
+            data_id
+            {
+                id 1707
+                type_id 0
+                subtype_id 3
+            }
+            data_life
+            {
+                is_alive true
+                armor 338
+                dying_time 70
+            }
+            starsystem_id 1541
+            place_type_id 17
+            angle
+            {
+                x 14
+                y 33
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.17
+            }
+            collision_radius 102
+            mass 447
         }
-        ship_1309
+        ship_1730
         {
-            id 1309
-            type_id 0
-            subtype_id 1
-        }
-        ship_1350
-        {
-            id 1350
-            type_id 0
-            subtype_id 1
-        }
-        ship_1394
-        {
-            id 1394
-            type_id 0
-            subtype_id 1
-        }
-        ship_1437
-        {
-            id 1437
-            type_id 0
-            subtype_id 1
-        }
-        ship_1480
-        {
-            id 1480
-            type_id 0
-            subtype_id 1
-        }
-        ship_1523
-        {
-            id 1523
-            type_id 0
-            subtype_id 1
-        }
-        ship_1564
-        {
-            id 1564
-            type_id 0
-            subtype_id 1
-        }
-        ship_1608
-        {
-            id 1608
-            type_id 0
-            subtype_id 1
-        }
-        ship_1649
-        {
-            id 1649
-            type_id 0
-            subtype_id 1
-        }
-        ship_1693
-        {
-            id 1693
-            type_id 0
-            subtype_id 1
-        }
-        ship_1734
-        {
-            id 1734
-            type_id 0
-            subtype_id 1
-        }
-        ship_1778
-        {
-            id 1778
-            type_id 0
-            subtype_id 1
-        }
-        ship_1822
-        {
-            id 1822
-            type_id 0
-            subtype_id 1
-        }
-        ship_1865
-        {
-            id 1865
-            type_id 0
-            subtype_id 1
-        }
-        ship_1906
-        {
-            id 1906
-            type_id 0
-            subtype_id 1
-        }
-        ship_1947
-        {
-            id 1947
-            type_id 0
-            subtype_id 1
+            data_id
+            {
+                id 1730
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 886
+                dying_time 70
+            }
+            starsystem_id 1541
+            place_type_id 17
+            angle
+            {
+                x 25
+                y 30
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.29
+            }
+            collision_radius 91
+            mass 443
         }
     }
-    starsystem_2164
+    starsystem_1927
     {
-        ship_2307
+        ship_2070
         {
-            id 2307
-            type_id 0
-            subtype_id 1
+            data_id
+            {
+                id 2070
+                type_id 0
+                subtype_id 2
+            }
+            data_life
+            {
+                is_alive true
+                armor 194
+                dying_time 30
+            }
+            starsystem_id 1927
+            place_type_id 17
+            angle
+            {
+                x 12
+                y 35
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.45
+            }
+            collision_radius 39
+            mass 431
         }
-        ship_2350
+        ship_2091
         {
-            id 2350
-            type_id 0
-            subtype_id 1
+            data_id
+            {
+                id 2091
+                type_id 0
+                subtype_id 4
+            }
+            data_life
+            {
+                is_alive true
+                armor 826
+                dying_time 20
+            }
+            starsystem_id 1927
+            place_type_id 17
+            angle
+            {
+                x 23
+                y 23
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.86
+            }
+            collision_radius 18
+            mass 531
         }
-        ship_2393
+        ship_2115
         {
-            id 2393
-            type_id 0
-            subtype_id 1
-        }
-        ship_2434
-        {
-            id 2434
-            type_id 0
-            subtype_id 1
-        }
-        ship_2476
-        {
-            id 2476
-            type_id 0
-            subtype_id 1
-        }
-        ship_2517
-        {
-            id 2517
-            type_id 0
-            subtype_id 1
-        }
-        ship_2560
-        {
-            id 2560
-            type_id 0
-            subtype_id 1
-        }
-        ship_2603
-        {
-            id 2603
-            type_id 0
-            subtype_id 1
-        }
-        ship_2645
-        {
-            id 2645
-            type_id 0
-            subtype_id 1
-        }
-        ship_2686
-        {
-            id 2686
-            type_id 0
-            subtype_id 1
+            data_id
+            {
+                id 2115
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 508
+                dying_time 30
+            }
+            starsystem_id 1927
+            place_type_id 17
+            angle
+            {
+                x 14
+                y 14
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.82
+            }
+            collision_radius 39
+            mass 395
         }
     }
-    starsystem_2903
+    starsystem_2312
     {
-        ship_3046
+        ship_2455
         {
-            id 3046
-            type_id 0
-            subtype_id 4
+            data_id
+            {
+                id 2455
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 527
+                dying_time 20
+            }
+            starsystem_id 2312
+            place_type_id 17
+            angle
+            {
+                x 10
+                y 27
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.97
+            }
+            collision_radius 18
+            mass 507
         }
-        ship_3067
+        ship_2478
         {
-            id 3067
-            type_id 0
-            subtype_id 2
+            data_id
+            {
+                id 2478
+                type_id 0
+                subtype_id 3
+            }
+            data_life
+            {
+                is_alive true
+                armor 469
+                dying_time 30
+            }
+            starsystem_id 2312
+            place_type_id 17
+            angle
+            {
+                x 37
+                y 27
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.9
+            }
+            collision_radius 32
+            mass 385
         }
-        ship_3090
+        ship_2500
         {
-            id 3090
-            type_id 0
-            subtype_id 1
+            data_id
+            {
+                id 2500
+                type_id 0
+                subtype_id 3
+            }
+            data_life
+            {
+                is_alive true
+                armor 1251
+                dying_time 30
+            }
+            starsystem_id 2312
+            place_type_id 17
+            angle
+            {
+                x 29
+                y 33
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.15
+            }
+            collision_radius 32
+            mass 437
         }
-        ship_3113
+        ship_2521
         {
-            id 3113
-            type_id 0
-            subtype_id 0
-        }
-        ship_5520
-        {
-            id 5520
-            type_id 0
-            subtype_id 1
+            data_id
+            {
+                id 2521
+                type_id 0
+                subtype_id 2
+            }
+            data_life
+            {
+                is_alive true
+                armor 1059
+                dying_time 20
+            }
+            starsystem_id 2312
+            place_type_id 17
+            angle
+            {
+                x 16
+                y 11
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.9
+            }
+            collision_radius 24
+            mass 438
         }
     }
-    starsystem_3310
+    starsystem_2719
     {
+        ship_2862
+        {
+            data_id
+            {
+                id 2862
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 664
+                dying_time 50
+            }
+            starsystem_id 2719
+            place_type_id 17
+            angle
+            {
+                x 18
+                y 32
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.22
+            }
+            collision_radius 58
+            mass 509
+        }
+        ship_2906
+        {
+            data_id
+            {
+                id 2906
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 628
+                dying_time 50
+            }
+            starsystem_id 2719
+            place_type_id 17
+            angle
+            {
+                x 17
+                y 39
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.23
+            }
+            collision_radius 58
+            mass 452
+        }
+        ship_2949
+        {
+            data_id
+            {
+                id 2949
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 965
+                dying_time 70
+            }
+            starsystem_id 2719
+            place_type_id 17
+            angle
+            {
+                x 21
+                y 33
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.16
+            }
+            collision_radius 90
+            mass 445
+        }
+        ship_2990
+        {
+            data_id
+            {
+                id 2990
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 349
+                dying_time 70
+            }
+            starsystem_id 2719
+            place_type_id 17
+            angle
+            {
+                x 25
+                y 24
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.27
+            }
+            collision_radius 90
+            mass 562
+        }
+        ship_3034
+        {
+            data_id
+            {
+                id 3034
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 604
+                dying_time 50
+            }
+            starsystem_id 2719
+            place_type_id 17
+            angle
+            {
+                x 28
+                y 25
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.8
+            }
+            collision_radius 58
+            mass 486
+        }
+        ship_3077
+        {
+            data_id
+            {
+                id 3077
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 1107
+                dying_time 70
+            }
+            starsystem_id 2719
+            place_type_id 17
+            angle
+            {
+                x 21
+                y 20
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.61
+            }
+            collision_radius 90
+            mass 379
+        }
+        ship_3118
+        {
+            data_id
+            {
+                id 3118
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 939
+                dying_time 50
+            }
+            starsystem_id 2719
+            place_type_id 17
+            angle
+            {
+                x 27
+                y 18
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.14
+            }
+            collision_radius 58
+            mass 516
+        }
+        ship_3162
+        {
+            data_id
+            {
+                id 3162
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 377
+                dying_time 50
+            }
+            starsystem_id 2719
+            place_type_id 17
+            angle
+            {
+                x 35
+                y 12
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.77
+            }
+            collision_radius 58
+            mass 383
+        }
+        ship_3203
+        {
+            data_id
+            {
+                id 3203
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 702
+                dying_time 50
+            }
+            starsystem_id 2719
+            place_type_id 17
+            angle
+            {
+                x 34
+                y 39
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.86
+            }
+            collision_radius 58
+            mass 518
+        }
+        ship_3247
+        {
+            data_id
+            {
+                id 3247
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 823
+                dying_time 70
+            }
+            starsystem_id 2719
+            place_type_id 17
+            angle
+            {
+                x 32
+                y 10
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.68
+            }
+            collision_radius 90
+            mass 473
+        }
+        ship_3290
+        {
+            data_id
+            {
+                id 3290
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 152
+                dying_time 50
+            }
+            starsystem_id 2719
+            place_type_id 17
+            angle
+            {
+                x 36
+                y 39
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.67
+            }
+            collision_radius 58
+            mass 499
+        }
+        ship_3333
+        {
+            data_id
+            {
+                id 3333
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 1237
+                dying_time 50
+            }
+            starsystem_id 2719
+            place_type_id 17
+            angle
+            {
+                x 11
+                y 32
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.2
+            }
+            collision_radius 58
+            mass 459
+        }
+        ship_3376
+        {
+            data_id
+            {
+                id 3376
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 829
+                dying_time 70
+            }
+            starsystem_id 2719
+            place_type_id 17
+            angle
+            {
+                x 16
+                y 35
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.46
+            }
+            collision_radius 90
+            mass 426
+        }
         ship_3418
         {
-            id 3418
-            type_id 0
-            subtype_id 1
+            data_id
+            {
+                id 3418
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 1287
+                dying_time 70
+            }
+            starsystem_id 2719
+            place_type_id 17
+            angle
+            {
+                x 13
+                y 13
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.45
+            }
+            collision_radius 90
+            mass 368
         }
-        ship_3439
+        ship_3811
         {
-            id 3439
-            type_id 0
-            subtype_id 0
+            data_id
+            {
+                id 3811
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 507
+                dying_time 30
+            }
+            starsystem_id 2719
+            place_type_id 17
+            angle
+            {
+                x 11
+                y 28
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.61
+            }
+            collision_radius 39
+            mass 423
         }
-        ship_3463
+        ship_3765
         {
-            id 3463
-            type_id 0
-            subtype_id 0
+            data_id
+            {
+                id 3765
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 932
+                dying_time 30
+            }
+            starsystem_id 2719
+            place_type_id 17
+            angle
+            {
+                x 22
+                y 23
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.13
+            }
+            collision_radius 39
+            mass 405
         }
-        ship_3485
+        ship_3743
         {
-            id 3485
-            type_id 0
-            subtype_id 2
+            data_id
+            {
+                id 3743
+                type_id 0
+                subtype_id 3
+            }
+            data_life
+            {
+                is_alive true
+                armor 187
+                dying_time 70
+            }
+            starsystem_id 2719
+            place_type_id 17
+            angle
+            {
+                x 34
+                y 15
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.32
+            }
+            collision_radius 102
+            mass 326
         }
-    }
-    starsystem_3684
-    {
-        ship_3792
+        ship_3788
         {
-            id 3792
-            type_id 0
-            subtype_id 1
-        }
-        ship_3836
-        {
-            id 3836
-            type_id 0
-            subtype_id 1
-        }
-        ship_3878
-        {
-            id 3878
-            type_id 0
-            subtype_id 1
-        }
-        ship_3920
-        {
-            id 3920
-            type_id 0
-            subtype_id 1
-        }
-        ship_3962
-        {
-            id 3962
-            type_id 0
-            subtype_id 1
-        }
-        ship_4003
-        {
-            id 4003
-            type_id 0
-            subtype_id 1
-        }
-        ship_4046
-        {
-            id 4046
-            type_id 0
-            subtype_id 1
-        }
-        ship_4090
-        {
-            id 4090
-            type_id 0
-            subtype_id 1
-        }
-        ship_4133
-        {
-            id 4133
-            type_id 0
-            subtype_id 1
-        }
-        ship_4176
-        {
-            id 4176
-            type_id 0
-            subtype_id 1
-        }
-        ship_4220
-        {
-            id 4220
-            type_id 0
-            subtype_id 1
-        }
-        ship_4263
-        {
-            id 4263
-            type_id 0
-            subtype_id 1
-        }
-        ship_4307
-        {
-            id 4307
-            type_id 0
-            subtype_id 1
-        }
-        ship_4350
-        {
-            id 4350
-            type_id 0
-            subtype_id 1
-        }
-        ship_4394
-        {
-            id 4394
-            type_id 0
-            subtype_id 1
-        }
-        ship_4436
-        {
-            id 4436
-            type_id 0
-            subtype_id 1
-        }
-        ship_4477
-        {
-            id 4477
-            type_id 0
-            subtype_id 1
-        }
-        ship_4520
-        {
-            id 4520
-            type_id 0
-            subtype_id 1
-        }
-    }
-    starsystem_4737
-    {
-        ship_4845
-        {
-            id 4845
-            type_id 0
-            subtype_id 0
-        }
-        ship_4869
-        {
-            id 4869
-            type_id 0
-            subtype_id 2
-        }
-        ship_4890
-        {
-            id 4890
-            type_id 0
-            subtype_id 3
-        }
-        ship_4912
-        {
-            id 4912
-            type_id 0
-            subtype_id 1
+            data_id
+            {
+                id 3788
+                type_id 0
+                subtype_id 4
+            }
+            data_life
+            {
+                is_alive true
+                armor 983
+                dying_time 20
+            }
+            starsystem_id 2719
+            place_type_id 17
+            angle
+            {
+                x 16
+                y 27
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.9
+            }
+            collision_radius 13
+            mass 490
         }
     }
-    starsystem_5112
+    starsystem_3635
     {
-        ship_5255
+        ship_3743
         {
-            id 5255
-            type_id 0
-            subtype_id 1
+            data_id
+            {
+                id 3743
+                type_id 0
+                subtype_id 3
+            }
+            data_life
+            {
+                is_alive true
+                armor 179
+                dying_time 70
+            }
+            starsystem_id 3635
+            place_type_id 17
+            angle
+            {
+                x 34
+                y 15
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.32
+            }
+            collision_radius 102
+            mass 326
         }
-        ship_5276
+        ship_3765
         {
-            id 5276
-            type_id 0
-            subtype_id 3
+            data_id
+            {
+                id 3765
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 932
+                dying_time 30
+            }
+            starsystem_id 3635
+            place_type_id 17
+            angle
+            {
+                x 22
+                y 23
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.13
+            }
+            collision_radius 39
+            mass 405
         }
-        ship_5299
+        ship_3788
         {
-            id 5299
-            type_id 0
-            subtype_id 3
+            data_id
+            {
+                id 3788
+                type_id 0
+                subtype_id 4
+            }
+            data_life
+            {
+                is_alive true
+                armor 983
+                dying_time 20
+            }
+            starsystem_id 3635
+            place_type_id 17
+            angle
+            {
+                x 16
+                y 27
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.9
+            }
+            collision_radius 13
+            mass 490
         }
-        ship_5320
+        ship_3811
         {
-            id 5320
-            type_id 0
-            subtype_id 3
+            data_id
+            {
+                id 3811
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 507
+                dying_time 30
+            }
+            starsystem_id 3635
+            place_type_id 17
+            angle
+            {
+                x 11
+                y 28
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.61
+            }
+            collision_radius 39
+            mass 423
+        }
+        ship_5537
+        {
+            data_id
+            {
+                id 5537
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 590
+                dying_time 50
+            }
+            starsystem_id 3635
+            place_type_id 17
+            angle
+            {
+                x 35
+                y 24
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.56
+            }
+            collision_radius 58
+            mass 503
+        }
+    }
+    starsystem_4010
+    {
+        ship_4153
+        {
+            data_id
+            {
+                id 4153
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 955
+                dying_time 70
+            }
+            starsystem_id 4010
+            place_type_id 17
+            angle
+            {
+                x 14
+                y 26
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.47
+            }
+            collision_radius 90
+            mass 460
+        }
+        ship_4195
+        {
+            data_id
+            {
+                id 4195
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 155
+                dying_time 50
+            }
+            starsystem_id 4010
+            place_type_id 17
+            angle
+            {
+                x 34
+                y 20
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.38
+            }
+            collision_radius 58
+            mass 351
+        }
+        ship_4236
+        {
+            data_id
+            {
+                id 4236
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 648
+                dying_time 50
+            }
+            starsystem_id 4010
+            place_type_id 17
+            angle
+            {
+                x 12
+                y 25
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.59
+            }
+            collision_radius 58
+            mass 385
+        }
+        ship_4278
+        {
+            data_id
+            {
+                id 4278
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 460
+                dying_time 70
+            }
+            starsystem_id 4010
+            place_type_id 17
+            angle
+            {
+                x 23
+                y 13
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.85
+            }
+            collision_radius 90
+            mass 454
+        }
+        ship_4320
+        {
+            data_id
+            {
+                id 4320
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 841
+                dying_time 70
+            }
+            starsystem_id 4010
+            place_type_id 17
+            angle
+            {
+                x 16
+                y 26
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.85
+            }
+            collision_radius 90
+            mass 468
+        }
+        ship_4361
+        {
+            data_id
+            {
+                id 4361
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 1277
+                dying_time 50
+            }
+            starsystem_id 4010
+            place_type_id 17
+            angle
+            {
+                x 16
+                y 24
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.37
+            }
+            collision_radius 58
+            mass 519
+        }
+        ship_4405
+        {
+            data_id
+            {
+                id 4405
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 937
+                dying_time 50
+            }
+            starsystem_id 4010
+            place_type_id 17
+            angle
+            {
+                x 30
+                y 13
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.64
+            }
+            collision_radius 58
+            mass 454
+        }
+        ship_4448
+        {
+            data_id
+            {
+                id 4448
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 170
+                dying_time 50
+            }
+            starsystem_id 4010
+            place_type_id 17
+            angle
+            {
+                x 32
+                y 37
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.5
+            }
+            collision_radius 58
+            mass 522
+        }
+        ship_4490
+        {
+            data_id
+            {
+                id 4490
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 656
+                dying_time 70
+            }
+            starsystem_id 4010
+            place_type_id 17
+            angle
+            {
+                x 32
+                y 33
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.63
+            }
+            collision_radius 90
+            mass 472
+        }
+        ship_4532
+        {
+            data_id
+            {
+                id 4532
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 923
+                dying_time 70
+            }
+            starsystem_id 4010
+            place_type_id 17
+            angle
+            {
+                x 27
+                y 39
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.81
+            }
+            collision_radius 90
+            mass 509
+        }
+        ship_156
+        {
+            data_id
+            {
+                id 156
+                type_id 0
+                subtype_id 3
+            }
+            data_life
+            {
+                is_alive true
+                armor 613
+                dying_time 30
+            }
+            starsystem_id 4010
+            place_type_id 17
+            angle
+            {
+                x 13
+                y 31
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.88
+            }
+            collision_radius 32
+            mass 376
+        }
+        ship_109
+        {
+            data_id
+            {
+                id 109
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 847
+                dying_time 40
+            }
+            starsystem_id 4010
+            place_type_id 17
+            angle
+            {
+                x 31
+                y 24
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.45
+            }
+            collision_radius 46
+            mass 485
+        }
+    }
+    starsystem_4752
+    {
+        ship_4895
+        {
+            data_id
+            {
+                id 4895
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 802
+                dying_time 50
+            }
+            starsystem_id 4752
+            place_type_id 17
+            angle
+            {
+                x 39
+                y 33
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.55
+            }
+            collision_radius 58
+            mass 499
+        }
+        ship_4938
+        {
+            data_id
+            {
+                id 4938
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 1265
+                dying_time 70
+            }
+            starsystem_id 4752
+            place_type_id 17
+            angle
+            {
+                x 39
+                y 32
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.86
+            }
+            collision_radius 90
+            mass 431
+        }
+        ship_4979
+        {
+            data_id
+            {
+                id 4979
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 1238
+                dying_time 70
+            }
+            starsystem_id 4752
+            place_type_id 17
+            angle
+            {
+                x 21
+                y 37
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.7
+            }
+            collision_radius 90
+            mass 367
+        }
+        ship_5021
+        {
+            data_id
+            {
+                id 5021
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 1102
+                dying_time 70
+            }
+            starsystem_id 4752
+            place_type_id 17
+            angle
+            {
+                x 12
+                y 10
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.37
+            }
+            collision_radius 90
+            mass 451
+        }
+        ship_5064
+        {
+            data_id
+            {
+                id 5064
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 192
+                dying_time 50
+            }
+            starsystem_id 4752
+            place_type_id 17
+            angle
+            {
+                x 24
+                y 14
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.41
+            }
+            collision_radius 58
+            mass 478
+        }
+        ship_5108
+        {
+            data_id
+            {
+                id 5108
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 1127
+                dying_time 70
+            }
+            starsystem_id 4752
+            place_type_id 17
+            angle
+            {
+                x 31
+                y 11
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.83
+            }
+            collision_radius 90
+            mass 474
+        }
+        ship_5149
+        {
+            data_id
+            {
+                id 5149
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 173
+                dying_time 50
+            }
+            starsystem_id 4752
+            place_type_id 17
+            angle
+            {
+                x 12
+                y 11
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.49
+            }
+            collision_radius 58
+            mass 408
+        }
+        ship_5191
+        {
+            data_id
+            {
+                id 5191
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 315
+                dying_time 70
+            }
+            starsystem_id 4752
+            place_type_id 17
+            angle
+            {
+                x 30
+                y 33
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.93
+            }
+            collision_radius 90
+            mass 417
+        }
+        ship_5233
+        {
+            data_id
+            {
+                id 5233
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 499
+                dying_time 70
+            }
+            starsystem_id 4752
+            place_type_id 17
+            angle
+            {
+                x 20
+                y 26
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.21
+            }
+            collision_radius 90
+            mass 470
+        }
+        ship_5275
+        {
+            data_id
+            {
+                id 5275
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 961
+                dying_time 50
+            }
+            starsystem_id 4752
+            place_type_id 17
+            angle
+            {
+                x 33
+                y 21
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.35
+            }
+            collision_radius 58
+            mass 414
+        }
+        ship_5318
+        {
+            data_id
+            {
+                id 5318
+                type_id 0
+                subtype_id 1
+            }
+            data_life
+            {
+                is_alive true
+                armor 244
+                dying_time 50
+            }
+            starsystem_id 4752
+            place_type_id 17
+            angle
+            {
+                x 15
+                y 36
+                z 0
+            }
+            d_angle
+            {
+                x 0
+                y 0
+                z 0.71
+            }
+            collision_radius 58
+            mass 379
         }
     }
 }
