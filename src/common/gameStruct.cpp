@@ -112,7 +112,6 @@ ShipPropetries :: ShipPropetries()
 {       
         protection   = 0;
         radius       = 0;
-        mass         = 0;   // depends on all items mass
         speed        = 0;  // depends on mass and drive
 
         hyper        = 0;  // depends on drive and bak

@@ -33,7 +33,7 @@ void ModuleBase :: addCommonInfo()
     	//info.addNameStr("modules:");   info.addValueStr( int2str(common_data.modules_num_max) );
     	//info.addNameStr("race:");      info.addValueStr( returnRaceStringByRaceId(race_id) );
     	//info.addNameStr("condition:"); info.addValueStr( int2str(condition) + "/" + int2str(common_data.condition_max) );
-    	info.addNameStr("mass:");      info.addValueStr( int2str(mass) );
+    	info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
     	//info.addNameStr("price:");     info.addValueStr( int2str(price) );
 }
 

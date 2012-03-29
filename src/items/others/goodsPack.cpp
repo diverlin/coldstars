@@ -36,7 +36,7 @@ void GoodsPack :: increase(unsigned int _ammount)
 	if (GetSubTypeId() == ENTITY::MINERAL_ID)
 	{
 		mineral += _ammount;
-		mass = mineral;
+		data_item.mass = mineral;
 	}
 }
     
@@ -45,7 +45,7 @@ void GoodsPack :: decrease(unsigned int _ammount)
 	if (GetSubTypeId() == ENTITY::MINERAL_ID)
 	{
 		mineral -= _ammount;
-		mass = mineral;
+		data_item.mass = mineral;
 	}
 }
                 
@@ -59,7 +59,7 @@ void GoodsPack :: updateInfo()
     	if (GetSubTypeId() == ENTITY::MINERAL_ID)
     	{
     		info.addNameStr("mineral:");   info.addValueStr( int2str(mineral) );
-    		info.addNameStr("mass:");   info.addValueStr( int2str(mass) );
+    		info.addNameStr("mass:");   info.addValueStr( int2str(data_item.mass) );
     	}
 	else
 	{

@@ -45,13 +45,13 @@ void ScanerEquipment :: updatePropetries()
 void ScanerEquipment :: countPrice()
 {
      	float scan_rate          = (float)scan_orig / EQUIPMENT::SCANER::SCAN_MIN;
-     	float modules_num_rate   = (float)common_data.modules_num_max / EQUIPMENT::SCANER::MODULES_NUM_MAX;
+     	float modules_num_rate   = (float)data_item.modules_num_max / EQUIPMENT::SCANER::MODULES_NUM_MAX;
 
      	float effectiveness_rate = EQUIPMENT::SCANER::SCAN_WEIGHT * scan_rate + 
      				   EQUIPMENT::SCANER::MODULES_NUM_WEIGHT * modules_num_rate;
 
-     	float mass_rate          = (float)common_data.mass / EQUIPMENT::SCANER::MASS_MIN;
-     	float condition_rate     = (float)condition / common_data.condition_max;
+     	float mass_rate          = (float)data_item.mass / EQUIPMENT::SCANER::MASS_MIN;
+     	float condition_rate     = (float)condition / data_item.condition_max;
 
      	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }

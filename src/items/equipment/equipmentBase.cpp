@@ -39,16 +39,16 @@ EquipmentBase :: ~EquipmentBase()
 /* virtual */
 void EquipmentBase :: addCommonInfo()
 {
-    	info.addNameStr("modules:");   info.addValueStr( int2str(common_data.modules_num_max) );
+    	info.addNameStr("modules:");   info.addValueStr( int2str(data_item.modules_num_max) );
     	info.addNameStr("race:");      info.addValueStr( returnRaceStringByRaceId(race_id) );
-    	info.addNameStr("condition:"); info.addValueStr( int2str(condition) + "/" + int2str(common_data.condition_max) );
-    	info.addNameStr("mass:");      info.addValueStr( int2str(common_data.mass) );
+    	info.addNameStr("condition:"); info.addValueStr( int2str(condition) + "/" + int2str(data_item.condition_max) );
+    	info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
     	info.addNameStr("price:");     info.addValueStr( int2str(price) );
 }
 
 bool EquipmentBase :: insertModule(ModuleBase* module)
 {
-	if (modules_vec.size() < common_data.modules_num_max)
+	if (modules_vec.size() < data_item.modules_num_max)
     	{
 	       	modules_vec.push_back(module);
         	updatePropetries();

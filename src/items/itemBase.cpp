@@ -21,7 +21,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 ItemBase :: ItemBase()
 {
         slot = NULL;
-        mass  = 0;
         price = 0;
 }
 
@@ -32,7 +31,7 @@ ItemBase :: ~ItemBase ()
 void ItemBase :: setIdData(IdData data_id)       { this->data_id = data_id; }
 void ItemBase :: setTextureOb(TextureOb* texOb)  { this->texOb = texOb; }
 void ItemBase :: setFunctionalSlotSubTypeId(int functional_slot_subtype_id) { this->functional_slot_subtype_id = functional_slot_subtype_id; }
-void ItemBase :: setItemCommonData(ItemCommonData common_data) { this->common_data = common_data; }
+void ItemBase :: setItemCommonData(ItemCommonData data_item) { this->data_item = data_item; }
 void ItemBase :: bindSlot(ItemSlot* slot)    { this->slot = slot; }
 
 
@@ -40,14 +39,14 @@ TextureOb* ItemBase :: GetTextureOb()     const { return texOb; }
 unsigned int ItemBase :: GetId()        const { return data_id.id; }
 unsigned int ItemBase :: GetTypeId()    const { return data_id.type_id; }
 unsigned int ItemBase :: GetSubTypeId() const { return data_id.subtype_id; }
-unsigned int ItemBase :: GetMass()    const { return mass; }
+unsigned int ItemBase :: GetMass()    const { return data_item.mass; }
 unsigned int ItemBase :: getCondition() const { return condition; }
 int ItemBase :: getPrice()     const { return price; } 
 int ItemBase :: getFunctionalSlotSubTypeId() const { return functional_slot_subtype_id; }
 
 void ItemBase :: deterioration()
 {
-    	condition -= common_data.deterioration_rate;
+    	condition -= data_item.deterioration_rate;
     	if (condition <= 0)
     	{
        		is_DAMAGED = true;
@@ -61,7 +60,7 @@ void ItemBase :: deterioration()
 
 void ItemBase :: repair()
 {
-    	condition = common_data.condition_max;
+    	condition = data_item.condition_max;
     	if (is_DAMAGED == true)
     	{
         	is_DAMAGED = false;
@@ -88,7 +87,7 @@ void ItemBase :: addCommonInfo()
     	//info.addNameStr("modules:");   info.addValueStr( int2str(common_data.modules_num_max) );
     	//info.addNameStr("race:");      info.addValueStr( returnRaceStringByRaceId(race_id) );
     	//info.addNameStr("condition:"); info.addValueStr( int2str(condition) + "/" + int2str(common_data.condition_max) );
-    	info.addNameStr("mass:");      info.addValueStr( int2str(mass) );
+    	info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
     	//info.addNameStr("price:");     info.addValueStr( int2str(price) );
 }
 

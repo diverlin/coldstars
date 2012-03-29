@@ -52,12 +52,12 @@ void EnergizerEquipment :: countPrice()
 {
     	float energy_rate          = (float)energy_max_orig / EQUIPMENT::ENERGIZER::ENERGY_MIN;
     	float restoration_rate     = (float)restoration_orig / EQUIPMENT::ENERGIZER::RESTORATION_MIN;
-    	float modules_num_rate     = (float)common_data.modules_num_max / EQUIPMENT::ENERGIZER::MODULES_NUM_MAX;
+    	float modules_num_rate     = (float)data_item.modules_num_max / EQUIPMENT::ENERGIZER::MODULES_NUM_MAX;
 
     	float effectiveness_rate = EQUIPMENT::ENERGIZER::ENERGY_WEIGHT * energy_rate + EQUIPMENT::ENERGIZER::RESTORATION_WEIGHT * restoration_rate + EQUIPMENT::ENERGIZER::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    	float mass_rate          = (float)common_data.mass / EQUIPMENT::ENERGIZER::MASS_MIN;
-    	float condition_rate     = (float)condition / common_data.condition_max;
+    	float mass_rate          = (float)data_item.mass / EQUIPMENT::ENERGIZER::MASS_MIN;
+    	float condition_rate     = (float)condition / data_item.condition_max;
 
     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }

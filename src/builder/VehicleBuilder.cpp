@@ -46,17 +46,16 @@ Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int w
 
         data_korpus.inhibit_GRAPPLE = false;
         data_korpus.weapon_slot_num = weapons_num;
-            
-            
-        LifeData data_life;
-        data_life.armor = data_korpus.armor;
-        data_life.dying_time = 10*texOb->size_id;
        
         IdData data_id;
-        data_id.id      = g_ID_GENERATOR.getNextId(); 
-    	data_id.type_id = ENTITY::SHIP_ID;
+        data_id.id         = g_ID_GENERATOR.getNextId(); 
+    	data_id.type_id    = ENTITY::SHIP_ID;
     	data_id.subtype_id = subtype_id;       
 
+        LifeData data_life;
+        data_life.armor      = data_korpus.armor;
+        data_life.dying_time = 10*texOb->size_id;
+        
         int size_threshold = 2; 
     	if (texOb->size_id > size_threshold)
        		data_korpus.render_TURRELS = true; 
@@ -100,17 +99,16 @@ Satellite* VehicleBuilder::GetNewSatellite()
 
         data_korpus.inhibit_GRAPPLE = true;
         data_korpus.weapon_slot_num = 2;
-            
-            
-        LifeData data_life;
-        data_life.armor = data_korpus.armor;
-        data_life.dying_time = 10*texOb->size_id;
        
         IdData data_id;
         data_id.id         = g_ID_GENERATOR.getNextId(); 
     	data_id.type_id    = ENTITY::SATELLITE_ID;
-    	//data_id.subtype_id = MILITARY_ID;       
+    	data_id.subtype_id = NONE_ID;       
 
+        LifeData data_life;
+        data_life.armor      = data_korpus.armor;
+        data_life.dying_time = 10*texOb->size_id;
+        
         int size_threshold = 2; 
 	data_korpus.render_TURRELS = true;       
 
@@ -152,17 +150,16 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation()
 
         data_korpus.inhibit_GRAPPLE = false;
         data_korpus.weapon_slot_num = 5;
-            
-            
-        LifeData data_life;
-        data_life.armor = data_korpus.armor;
-        data_life.dying_time = 10*texOb->size_id;
        
         IdData data_id;
         data_id.id         = g_ID_GENERATOR.getNextId(); 
     	data_id.type_id    = ENTITY::SPACESTATION_ID;
     	data_id.subtype_id = SPACESTATION::MILITARY_ID;       
 
+        LifeData data_life;
+        data_life.armor      = data_korpus.armor;
+        data_life.dying_time = 10*texOb->size_id;
+        
         int size_threshold = 2; 
 	data_korpus.render_TURRELS = true; 
                            
@@ -188,12 +185,11 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation()
 RocketBullet* VehicleBuilder::GetNewRocket(BulletData data_bullet, ItemSlot* slot, float offset, bool force_center_start)
 {
 	IdData data_id;
-	LifeData data_life;
-	
-	data_id.id = -1;
-	data_id.type_id = ENTITY::ROCKET_ID;
-	data_id.subtype_id = -1;
-	
+	data_id.id         = g_ID_GENERATOR.getNextId(); 
+	data_id.type_id    = ENTITY::ROCKET_ID;
+	data_id.subtype_id = NONE_ID;
+
+	LifeData data_life;	
 	data_life.is_alive      = true;
         data_life.garbage_ready = false;
         data_life.armor = data_bullet.armor;        
