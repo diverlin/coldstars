@@ -37,10 +37,10 @@ void ItemBase :: bindSlot(ItemSlot* slot)    { this->slot = slot; }
 
 
 TextureOb* ItemBase :: getTextureOb()     const { return texOb; }
-unsigned int ItemBase :: getId()        const { return data_id.id; }
-unsigned int ItemBase :: getTypeId()    const { return data_id.type_id; }
-unsigned int ItemBase :: getSubTypeId() const { return data_id.subtype_id; }
-unsigned int ItemBase :: getMass()    const { return mass; }
+unsigned int ItemBase :: GetId()        const { return data_id.id; }
+unsigned int ItemBase :: GetTypeId()    const { return data_id.type_id; }
+unsigned int ItemBase :: GetSubTypeId() const { return data_id.subtype_id; }
+unsigned int ItemBase :: GetMass()    const { return mass; }
 unsigned int ItemBase :: getCondition() const { return condition; }
 int ItemBase :: getPrice()     const { return price; } 
 int ItemBase :: getFunctionalSlotSubTypeId() const { return functional_slot_subtype_id; }

@@ -22,8 +22,8 @@ GuiKosmoport :: GuiKosmoport(Player* player)
 {
 	this->player = player;
 	
-	int screen_w = Config::Instance().SCREEN_WIDTH_MIN;
-	int screen_h = Config::Instance().SCREEN_HEIGHT_MIN;
+	int screen_w = Config::Instance().SCREEN_WIDTH;
+	int screen_h = Config::Instance().SCREEN_HEIGHT;
 	
         TextureOb* texOb_button = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; // fake
 
@@ -138,7 +138,7 @@ void GuiKosmoport :: mouseInteraction()
        		        button_common_pList[i]->setShowInfoFlag(true);
        			if (lmb == true)
        			{	
-       			   	active_screen_id = button_common_pList[i]->getSubTypeId();       			   	
+       			   	active_screen_id = button_common_pList[i]->GetSubTypeId();       			   	
        			}
        			break;
        		}
@@ -154,15 +154,15 @@ void GuiKosmoport :: mouseInteraction()
        		        	button_angar_pList[i]->setShowInfoFlag(true);
        				if (lmb == true)
        				{	
-		   			if (button_angar_pList[i]->getSubTypeId() == GUI::BUTTON::GETREPAIR_ID)
+		   			if (button_angar_pList[i]->GetSubTypeId() == GUI::BUTTON::GETREPAIR_ID)
 		   			{
 		   				player->getNpc()->getVehicle()->SetMaxArmor(); 
 		   			}
-		   			if (button_angar_pList[i]->getSubTypeId() == GUI::BUTTON::GETFUEL_ID)
+		   			if (button_angar_pList[i]->GetSubTypeId() == GUI::BUTTON::GETFUEL_ID)
 		   			{
 		   		        	player->getNpc()->getVehicle()->SetMaxFuel();
 		   			}
-		   			if (button_angar_pList[i]->getSubTypeId() == GUI::BUTTON::GETLAUNCH_ID)
+		   			if (button_angar_pList[i]->GetSubTypeId() == GUI::BUTTON::GETLAUNCH_ID)
 		   			{
        						player->getNpc()->getVehicle()->LaunchingEvent();
        			   		}

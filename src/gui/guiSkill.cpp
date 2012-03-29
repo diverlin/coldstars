@@ -88,7 +88,7 @@ void GuiSkill :: update()
 		{
 	       		if (lmb == true)
         		{
-        	   		switch(button_vec[i]->getSubTypeId())
+        	   		switch(button_vec[i]->GetSubTypeId())
         	   		{
         	   	   		case GUI::BUTTON::SKILL::INCREMENT_ATTACK_ID:   { skill->incrementAttack(); break; }
         	        		case GUI::BUTTON::SKILL::DECREMENT_ATTACK_ID:   { skill->decrementAttack(); break; }
@@ -126,7 +126,7 @@ void GuiSkill :: render() const
 	{
 		button_vec[bi]->render();
 
-		switch(button_vec[bi]->getSubTypeId())		
+		switch(button_vec[bi]->GetSubTypeId())		
 		{
 			case GUI::BUTTON::SKILL::INCREMENT_ATTACK_ID:
 			{

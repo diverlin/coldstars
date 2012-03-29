@@ -30,7 +30,7 @@ void AiModelRanger :: update_inStatic(Npc* npc) const
         	StarSystem* ss_to_free = npc->getClosestStarSystem(true);
         	if (ss_to_free != NULL)
         	{
-        		npc->getStateMachine()->setCurrentMacroTask(g_MACROSCENARIO_STARSYSTEMLIBERATION, ss_to_free);        			
+        		npc->getStateMachine()->setCurrentMacroTask(MACROSCENARIO_STARSYSTEMLIBERATION, ss_to_free);        			
         	}
         }            
 }

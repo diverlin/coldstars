@@ -1,5 +1,6 @@
 #ifndef CONFIG_HPP
 #define CONFIG_HPP
+
 #include <boost/property_tree/info_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 
@@ -8,8 +9,8 @@ struct Config
 	public:
 		static Config& Instance();
 
-		int SCREEN_WIDTH_MIN;
-		int SCREEN_HEIGHT_MIN;
+		int SCREEN_WIDTH;
+		int SCREEN_HEIGHT;
 		int BPP;
 		int FPS_LIMIT;
 		

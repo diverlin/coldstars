@@ -26,7 +26,7 @@ class LandBase
                 LandBase();
                 virtual ~LandBase();
 
-		int getTypeId() const;
+		int GetTypeId() const;
 		
 		virtual bool getPermissionToLand() const = 0;
 		                

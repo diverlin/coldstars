@@ -28,7 +28,7 @@ class LazerTraceEffect
        		~LazerTraceEffect();
 
 		void setDamageEffect(DamageEffect*);
-		bool getAlive() const;
+		bool GetAlive() const;
 		
        		void update();
        		void render();

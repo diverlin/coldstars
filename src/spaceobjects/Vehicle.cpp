@@ -70,16 +70,16 @@ void Vehicle::SetGuiRect(Rect rect) { kontur_rect = rect; }
         	               
 void Vehicle::Add(ItemSlot* slot) 
 { 
-	if (slot->getSubTypeId() != SLOT::GATE_ID)
+	if (slot->GetSubTypeId() != SLOT::GATE_ID)
 	{
 		slot_total_vec.push_back(slot); 
-		if (slot->getSubTypeId() == SLOT::CARGO_ID)
+		if (slot->GetSubTypeId() == SLOT::CARGO_ID)
 		{
 	      		slot_otsec_vec.push_back(slot); 
 		}
 	}
 	
-	switch(slot->getSubTypeId())
+	switch(slot->GetSubTypeId())
 	{
 		case SLOT::RADAR_ID:  { radar_slot = slot; break; }
 		case SLOT::SCANER_ID: { scaner_slot = slot; break; }	
@@ -151,9 +151,9 @@ ItemSlot* Vehicle::GetCargoSlotWithGoods(int requested_goods_subtype_id)
       	{
           	if (slot_otsec_vec[i]->getEquipedStatus() == true)
           	{
-          		if (slot_otsec_vec[i]->getItem()->getTypeId() == ENTITY::GOODS_ID)
+          		if (slot_otsec_vec[i]->getItem()->GetTypeId() == ENTITY::GOODS_ID)
           		{
-          			if (slot_otsec_vec[i]->getItem()->getSubTypeId() == requested_goods_subtype_id)
+          			if (slot_otsec_vec[i]->getItem()->GetSubTypeId() == requested_goods_subtype_id)
           			{
           				return slot_otsec_vec[i];
           			}
@@ -176,7 +176,7 @@ void Vehicle::RecalculateCollisionRadius()
 void Vehicle::HyperJumpEvent()
 {
         starsystem->removeShip(data_id.id);  
-        starsystem->removeNpc(owner_npc->getId(), owner_npc->getSubTypeId());  
+        starsystem->removeNpc(owner_npc->GetId(), owner_npc->GetSubTypeId());  
                                                         
         ((StarSystem*)drive_complex->getTarget())->addToHyperJumpQueue(owner_npc);
         drive_complex->resetTarget();        
@@ -186,10 +186,10 @@ void Vehicle::HyperJumpEvent()
 void Vehicle::DockingEvent()
 {
      	starsystem->removeShip(data_id.id);
-     	starsystem->removeNpc(owner_npc->getId(), owner_npc->getSubTypeId());
+     	starsystem->removeNpc(owner_npc->GetId(), owner_npc->GetSubTypeId());
         
              	     	     	
-     	if (drive_complex->getTarget()->getTypeId() == ENTITY::PLANET_ID)
+     	if (drive_complex->getTarget()->GetTypeId() == ENTITY::PLANET_ID)
      	{
                 Planet* planet = ((Planet*)drive_complex->getTarget());
                 
@@ -199,7 +199,7 @@ void Vehicle::DockingEvent()
 		owner_npc->setLand(planet->getLand());
 	}
 	
-	if (drive_complex->getTarget()->getTypeId() == ENTITY::SPACESTATION_ID)
+	if (drive_complex->getTarget()->GetTypeId() == ENTITY::SPACESTATION_ID)
 	{
                 SpaceStation* spacestation = ((SpaceStation*)drive_complex->getTarget());
                                 
@@ -214,7 +214,7 @@ void Vehicle::LaunchingEvent()
 {
      	printf("vehicle id = %i, launchingEvent()\n", data_id.id);
 
-     	if (drive_complex->getTarget()->getTypeId() == ENTITY::PLANET_ID)
+     	if (drive_complex->getTarget()->GetTypeId() == ENTITY::PLANET_ID)
      	{
      		starsystem->addToSpace(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
      		starsystem->addToSpace(owner_npc);
@@ -223,7 +223,7 @@ void Vehicle::LaunchingEvent()
      		((Planet*)drive_complex->getTarget())->getLand()->remove(owner_npc);
 	}
 	
-     	if (drive_complex->getTarget()->getTypeId() == ENTITY::SPACESTATION_ID)
+     	if (drive_complex->getTarget()->GetTypeId() == ENTITY::SPACESTATION_ID)
      	{
      		starsystem->addToSpace(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
      		starsystem->addToSpace(owner_npc);
@@ -312,7 +312,7 @@ void Vehicle::RecalculateMass()
     	{
         	if (slot_total_vec[i]->getEquipedStatus() == true)
         	{
-           		propetries.mass += slot_total_vec[i]->getItem()->getMass();  
+           		propetries.mass += slot_total_vec[i]->getItem()->GetMass();  
            	}    
     	}
 }
@@ -653,9 +653,9 @@ void Vehicle::GrappleMicroProgramm()
                	grapple_slot->getGrappleEquipment()->target_vec[i]->movingByExternalForce(points.getCenter(), grapple_slot->getGrappleEquipment()->getStrength());        	
        	
        		float dist = distBetweenPoints(points.getCenter(), grapple_slot->getGrappleEquipment()->target_vec[i]->GetPoints().getCenter() ); 
-       		if (dist < getCollisionRadius()/4.0f)
+       		if (dist < GetCollisionRadius()/4.0f)
        		{
-       			switch(grapple_slot->getGrappleEquipment()->target_vec[i]->getTypeId())
+       			switch(grapple_slot->getGrappleEquipment()->target_vec[i]->GetTypeId())
        			{
        				case ENTITY::MINERAL_ID:
        				{
@@ -665,18 +665,18 @@ void Vehicle::GrappleMicroProgramm()
        					_slot = GetCargoSlotWithGoods(ENTITY::MINERAL_ID);
        					if (_slot != NULL)
        					{
-       						_slot->getGoodsPack()->increase(_mineral->getMass());
-       						_mineral->setPlaceTypeId(NONE_ID);
+       						_slot->getGoodsPack()->increase(_mineral->GetMass());
+       						_mineral->SetPlaceTypeId(NONE_ID);
        					}
        					else
        					{
        						GoodsPack* _goodsPack = getNewGoodsPack(ENTITY::MINERAL_ID);
-       						_goodsPack->increase(_mineral->getMass());
+       						_goodsPack->increase(_mineral->GetMass());
        						_slot = GetEmptyOtsecSlot();
        						if (_slot != NULL)
        						{
        							_slot->insertItem(_goodsPack);
-       							_mineral->setPlaceTypeId(NONE_ID);
+       							_mineral->SetPlaceTypeId(NONE_ID);
        						}
        					}
        					grapple_slot->getGrappleEquipment()->addToRemoveQueue(_mineral);
@@ -690,7 +690,7 @@ void Vehicle::GrappleMicroProgramm()
        				        if (_slot != NULL)
        					{
        						_slot->extractContainer(_container);
-       						_container->setPlaceTypeId(NONE_ID);
+       						_container->SetPlaceTypeId(NONE_ID);
        					}
 					grapple_slot->getGrappleEquipment()->addToRemoveQueue(_container);
        					break;

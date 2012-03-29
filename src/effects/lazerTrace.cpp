@@ -47,7 +47,7 @@ LazerTraceEffect :: ~LazerTraceEffect()
 
 
 void LazerTraceEffect :: setDamageEffect(DamageEffect* _damage_effect) { damage_effect = _damage_effect; }
-bool LazerTraceEffect :: getAlive() const { return is_alive; }
+bool LazerTraceEffect :: GetAlive() const { return is_alive; }
 		
 		
 

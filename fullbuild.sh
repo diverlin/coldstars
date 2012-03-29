@@ -1,5 +1,5 @@
 #!/bin/bash 
-rm build
+rm -Rf build
 mkdir build
 cd build
 cmake ..

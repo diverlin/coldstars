@@ -41,7 +41,7 @@ class VerticalFlowText
                                    
                 ~VerticalFlowText();
 
-		bool getAlive() const;
+		bool GetAlive() const;
 
                 void update();
                 void render(vec2f) const;

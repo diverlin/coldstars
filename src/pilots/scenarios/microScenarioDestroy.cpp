@@ -25,14 +25,14 @@ MicroScenarioDestroy :: ~MicroScenarioDestroy()
 		
 void MicroScenarioDestroy :: enter(Npc* _npc) const
 {	
-	printf("npc_id = %i, enter MicroScenarioDestroy\n", _npc->getId());
+	printf("npc_id = %i, enter MicroScenarioDestroy\n", _npc->GetId());
 }
 
 void MicroScenarioDestroy :: update_inStatic(Npc* _npc) const
 {
 	if (_npc->getStateMachine()->getCurrentMicroTask()->getValid() == true)
 	{
-		if ( (_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getAlive() == true) or ( _npc->getStarSystem() == _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getStarSystem()) )
+		if ( (_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->GetAlive() == true) or ( _npc->GetStarSystem() == _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->GetStarSystem()) )
 		{
 			_npc->getVehicle()->GetWeaponComplex()->weapon_selector.setAll(true);
 			_npc->getVehicle()->GetWeaponComplex()->SelectWeapons();
@@ -52,11 +52,11 @@ void MicroScenarioDestroy :: update_inDynamic(Npc* _npc) const
 
 void MicroScenarioDestroy :: exit(Npc* _npc) const
 {
-	printf("npc_id = %i, exit MicroScenarioDestroy\n", _npc->getId());
+	printf("npc_id = %i, exit MicroScenarioDestroy\n", _npc->GetId());
 }
 
 
 std::string MicroScenarioDestroy :: getDescription(Npc* _npc) const
 {
-	return "DESTROY to ob_id" + int2str( _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->getId()) ;
+	return "DESTROY to ob_id" + int2str( _npc->getStateMachine()->getCurrentMicroTask()->getTarget()->GetId()) ;
 }

@@ -91,7 +91,7 @@ void Star :: updateInfo()
 { 
 	info.clear();
     	info.addTitleStr("STAR");
-    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->getId()));
+    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
 }
 
 void Star :: renderInfo_inSpace(vec2f scroll_coords)
@@ -125,10 +125,10 @@ Star* getNewStar()
     	Star* star = new Star();
     	
     	star->setPlanetData(star_data);
-	star->setTextureOb(texOb);
-	star->setIdData(data_id);
-	star->setLifeData(data_life);
-	star->setMesh(g_SPHERE_MESH);	
+	star->SetTextureOb(texOb);
+	star->SetIdData(data_id);
+	star->SetLifeData(data_life);
+	star->SetMesh(g_SPHERE_MESH);	
         	
         star->postCreateInit();
  

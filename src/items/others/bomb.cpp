@@ -38,7 +38,7 @@ void Bomb :: updateInfo()
 
     	info.addTitleStr("BOMB");
 
-    	//info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->getId()));
+    	//info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
     	info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
     	info.addNameStr("damage:");      info.addValueStr(int2str(damage));
     	//info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));

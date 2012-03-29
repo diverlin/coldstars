@@ -53,7 +53,7 @@ void SpaceStation :: updateInfo()
 
     	info.addTitleStr("StarBase" + int2str(data_id.subtype_id));
 
-    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->getId()));
+    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
     	info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 } 

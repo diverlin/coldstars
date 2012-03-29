@@ -34,7 +34,7 @@ class BaseParticleSystem
                 void setParticlesNum(int);
                 void setParticleData(ParticleData);
                 
-		bool getAlive() const;
+		bool GetAlive() const;
 		
        		virtual void update() = 0;
        		virtual void render() = 0;

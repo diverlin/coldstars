@@ -42,7 +42,7 @@ void BaseParticleSystem :: setPosition(vec2f center)          { this->center = c
 void BaseParticleSystem :: setParticlesNum(int num_particles) { this->num_particles = num_particles; }
 void BaseParticleSystem :: setParticleData(ParticleData data_particle) { this->data_particle = data_particle; }
                 
-bool BaseParticleSystem :: getAlive() const { return is_alive; }
+bool BaseParticleSystem :: GetAlive() const { return is_alive; }
 
 
 //void BaseParticleSystem :: update()

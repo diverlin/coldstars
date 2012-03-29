@@ -30,7 +30,7 @@ class Particle
                 void setPosition(vec2f);      		
       		void setVelocity(vec2f);
       		
-      		bool getAlive()       const;
+      		bool GetAlive()       const;
       		float getAlpha()      const;
       		float getAlphaStart() const;
                 

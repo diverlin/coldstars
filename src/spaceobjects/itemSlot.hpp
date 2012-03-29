@@ -33,8 +33,8 @@ class ItemSlot
                 void bindTurrel(Turrel*);
                 void setRect(int _pos_x, int _pos_y, int w, int h);
                       
-                int getTypeId()        const;
-                int getSubTypeId()     const;
+                int GetTypeId()        const;
+                int GetSubTypeId()     const;
                 ItemBase* getItem()    const;
                 
                 Turrel* getTurrel()  const;  

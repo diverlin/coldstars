@@ -46,6 +46,7 @@ class GuiMap;
 #include "src/common/gameStruct.hpp"
 #include "src/common/constants.hpp"
 #include "src/config/config.hpp"
+#include "src/config/SaveManager.hpp"
 #include "GL/glew.h"   
 
 #include <stdio.h>

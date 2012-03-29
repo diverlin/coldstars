@@ -1,7 +1,7 @@
-Graphic
+Window
 {
-WIDTH_MIN  800
-HEIGHT_MIN 600
+WIDTH  800
+HEIGHT 600
 BPP 32
 
 VSYNC 1
@@ -17,7 +17,7 @@ DEBUG_MODE 0
 Gameplay
 {
 AUTOTURN_MODE false
-GAMESPEED 6    # use 1-6
+GAMESPEED 6    
 }
 
 Control

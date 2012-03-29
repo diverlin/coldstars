@@ -88,11 +88,11 @@ Npc :: Npc(int _race_id, IdData _data_id, LifeData _data_life, TextureOb* _texOb
         ai_model = NULL;
         if (( race_id == RACE::R6_ID) or ( race_id == RACE::R7_ID) )
         {
-                ai_model = g_AIMODEL_CONQUEROR;
+                ai_model = AIMODEL_CONQUEROR;
         }
         else
         {
-       		ai_model = g_AIMODEL_RANGER;        
+       		ai_model = AIMODEL_RANGER;        
         }
 }
     
@@ -226,7 +226,7 @@ void Npc :: asteroidScenario()
         vehicle->GetWeaponComplex()->SelectWeapons();
         vehicle->GetWeaponComplex()->SetTarget(observation->visible_ASTEROID_vec[0].asteroid);
                 
-        //printf("TARGET => ship_id, asteroid id = %i/%i\n", ship->getId(), sorted_visible_ASTEROID_pList[0]->getId());
+        //printf("TARGET => ship_id, asteroid id = %i/%i\n", ship->GetId(), sorted_visible_ASTEROID_pList[0]->GetId());
 }
 
 
@@ -269,7 +269,7 @@ StarSystem* Npc :: getClosestStarSystem(bool _captured)
 //// *********** SCANNING ***********
 bool Npc :: checkPossibilityToScan(Vehicle* vehicle)
 {
-     	if (this->vehicle->getId() == vehicle->getId())    // selfscan is possible all time
+     	if (this->vehicle->GetId() == vehicle->GetId())    // selfscan is possible all time
      	{
         	return true;
         }
@@ -309,7 +309,7 @@ void Npc :: updateInfo()
 	info.clear();
 
     	info.addTitleStr("NPC");
-    	info.addNameStr("id/ss_id:");           info.addValueStr( int2str(data_id.id) + " / "  + int2str(starsystem->getId()) );
+    	info.addNameStr("id/ss_id:");           info.addValueStr( int2str(data_id.id) + " / "  + int2str(starsystem->GetId()) );
     	info.addNameStr("race:");   		info.addValueStr( returnRaceStringByRaceId(texOb->race_id) ); 
 
 	if (vehicle->ableTo.GRAB == true)

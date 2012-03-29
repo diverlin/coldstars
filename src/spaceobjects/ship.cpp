@@ -30,7 +30,7 @@ void Ship :: updateInfo()
 	info.clear();
 
     	info.addTitleStr("SHIP");
-    	info.addNameStr("id/ss_id:");          	info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->getId()) );
+    	info.addNameStr("id/ss_id:");          	info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->GetId()) );
     	info.addNameStr("race:");   		info.addValueStr( returnRaceStringByRaceId(texOb->race_id) ); 
     	info.addNameStr("armor/max:");     	info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) );
     	info.addNameStr("size id:");     	info.addValueStr( int2str(texOb->size_id) );

@@ -47,7 +47,7 @@ void GrappleEquipment :: addTarget(BaseGameEntity* _target)
 	// avoiding dublicated items in the vector
         for (unsigned int i = 0; i < target_vec.size(); i++)
         {
-                if (target_vec[i]->getId() == _target->getId() )
+                if (target_vec[i]->GetId() == _target->GetId() )
                 {
                        	return;  
                 }    
@@ -102,23 +102,23 @@ std::string GrappleEquipment :: getTargetStr() const
         {
         	if (target_vec[i]) // hack, validator should be deal this
         	{
-        	switch(target_vec[i]->getTypeId())
+        	switch(target_vec[i]->GetTypeId())
         	{
         		case ENTITY::MINERAL_ID:
         		{
-        			str += "m" + int2str(target_vec[i]->getTypeId()) + ", ";
+        			str += "m" + int2str(target_vec[i]->GetTypeId()) + ", ";
         			break;
         		}
         		
         		case ENTITY::CONTAINER_ID:
         		{
-        			str += "c" + int2str(target_vec[i]->getTypeId()) + ", ";
+        			str += "c" + int2str(target_vec[i]->GetTypeId()) + ", ";
         			break;
         		}
         		        		
         		case ENTITY::BOMB_ID:
         		{
-        			str += "b" + int2str(target_vec[i]->getTypeId()) + ", ";
+        			str += "b" + int2str(target_vec[i]->GetTypeId()) + ", ";
         			break;
         		}
         	}

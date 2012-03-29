@@ -37,8 +37,8 @@ class Button
        		bool getShowInfoFlag() const;
        		Rect getRect() const;
        		TextureOb* getTexOb();
-       		int getTypeId() const;
-       		int getSubTypeId() const;
+       		int GetTypeId() const;
+       		int GetSubTypeId() const;
        		       
        		bool interaction(int _x, int _y);
 
