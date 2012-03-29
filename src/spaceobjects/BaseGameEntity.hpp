@@ -55,15 +55,15 @@ class BaseGameEntity
 		bool GetGarbageReady()   const { return data_life.garbage_ready; }             
 
 		int GetMass()         const { return mass; }
-		TextureOb* getTexOb() const { return texOb; }
-		int getArmor()        const { return data_life.armor; }
+		TextureOb* GetTextureOb() const { return texOb; }
+		int GetArmor()        const { return data_life.armor; }
 
-		BaseGameEntity* getParent() const { return parent; }
+		BaseGameEntity* GetParent() const { return parent; }
 
 
-		void movingByExternalForce(vec2f, float);
+		void MovingByExternalForce(vec2f, float);
 
-		void hit(int, bool);
+		void Hit(int, bool);
 
 	protected:
 		vec3f angle, d_angle;

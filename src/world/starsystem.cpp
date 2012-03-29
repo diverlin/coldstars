@@ -1072,7 +1072,7 @@ void StarSystem :: postHyperJumpEvent_s()
         	vec2f center(getRandInt(700, 1200), getRandInt(700, 1200));
 		float angle = getRandInt(0, 360);  
 		
-                addToSpace(NPC_appear_vec[i]->getVehicle(), center, angle, NPC_appear_vec[i]->getVehicle()->getParent());  
+                addToSpace(NPC_appear_vec[i]->getVehicle(), center, angle, NPC_appear_vec[i]->getVehicle()->GetParent());  
                 addToSpace(NPC_appear_vec[i]);
         }
               

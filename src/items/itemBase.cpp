@@ -36,7 +36,7 @@ void ItemBase :: setItemCommonData(ItemCommonData common_data) { this->common_da
 void ItemBase :: bindSlot(ItemSlot* slot)    { this->slot = slot; }
 
 
-TextureOb* ItemBase :: getTextureOb()     const { return texOb; }
+TextureOb* ItemBase :: GetTextureOb()     const { return texOb; }
 unsigned int ItemBase :: GetId()        const { return data_id.id; }
 unsigned int ItemBase :: GetTypeId()    const { return data_id.type_id; }
 unsigned int ItemBase :: GetSubTypeId() const { return data_id.subtype_id; }

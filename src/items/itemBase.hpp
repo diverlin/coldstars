@@ -33,7 +33,7 @@ class ItemBase
                 void setItemCommonData(ItemCommonData);
                 void bindSlot(ItemSlot*);
 
-    		TextureOb* getTextureOb() const;                
+    		TextureOb* GetTextureOb() const;                
       		unsigned int GetId()        const;
     		unsigned int GetTypeId()    const;
     		unsigned int GetSubTypeId() const;
