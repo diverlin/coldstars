@@ -75,7 +75,7 @@ ItemSlot* Store :: getEmptySlot()
         
 
 
-bool Store :: add(ItemBase* item)
+bool Store::add(BaseItem* item)
 {
 	getEmptySlot()->insertItem(item);
 	return true;

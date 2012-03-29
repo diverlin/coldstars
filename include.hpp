@@ -84,7 +84,7 @@ class GuiMap;
 #include "src/common/rect.hpp"
 
 #include "src/gui/userInput.hpp"
-#include "src/items/itemBase.hpp"
+#include "src/items/BaseItem.hpp"
 #include "src/items/modules/moduleBase.hpp"
 #include "src/items/modules/rocketModule.hpp"
 #include "src/items/modules/lazerModule.hpp"
@@ -268,7 +268,7 @@ class GuiMap;
 #include "src/items/others/bomb.cpp" 
 #include "src/spaceobjects/blackHole.cpp"
 
-#include "src/items/itemBase.cpp"
+#include "src/items/BaseItem.cpp"
 #include "src/items/equipment/equipmentBase.cpp"
 #include "src/items/equipment/rocketEquipment.cpp"
 #include "src/items/equipment/lazerEquipment.cpp"

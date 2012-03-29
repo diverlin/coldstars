@@ -24,38 +24,34 @@ Bomb :: Bomb()
     	radius = 300;
 }
 
-Bomb :: ~Bomb() {} /* virtual */
+ /* virtual */
+Bomb :: ~Bomb() {}
     
 
 int Bomb :: getDamage() const { return damage; }
 int Bomb :: getRadius() const { return radius; }
-        	
-void Bomb :: updateOwnerAbilities() {} /* virtual */
+        
+/* virtual */	
+void Bomb :: updateOwnerAbilities() {} 
 		
-void Bomb :: updateInfo()
-{
-	info.clear();
 
+       
+/* virtual */	     
+void Bomb::addCommonInfo()
+{
+    	info.addNameStr("mass:");        info.addValueStr(int2str(data_item.mass));
+}
+
+/* virtual */	
+void Bomb::addUniqueInfo()
+{
     	info.addTitleStr("BOMB");
 
     	//info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
     	info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
     	info.addNameStr("damage:");      info.addValueStr(int2str(damage));
     	//info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
-    	info.addNameStr("mass:");        info.addValueStr(int2str(data_item.mass));
-}
-            
-
-//void Bomb :: renderInfo()
-//{
-     	//drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y);    
-//}
-
-//void Bomb :: renderInfo(Rect slot_rect, float offset_x, float offset_y)
-//{
-     	//drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.getCenter().x, slot_rect.getCenter().y, offset_x, offset_y);
-//}
-
+} 		
 
 
 Bomb* getNewBomb()

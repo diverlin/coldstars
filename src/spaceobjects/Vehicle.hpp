@@ -38,7 +38,7 @@ class Vehicle : public BaseGameEntity
         	void SetGuiRect(Rect);
         	
                 void Add(ItemSlot*); 
-                bool AddItemToOtsec(ItemBase*);
+                bool AddItemToOtsec(BaseItem*);
 
                 float GetVisionRadius() const;
                 

@@ -49,30 +49,29 @@ void GoodsPack :: decrease(unsigned int _ammount)
 	}
 }
                 
-                
-void GoodsPack :: updateInfo()
+                    	
+      
+ /* virtual */
+void GoodsPack :: updateOwnerAbilities() { /* do nothing*/ }
+                    
+
+/* virtual */
+void GoodsPack::addUniqueInfo() 
 {
-	info.clear();
-	
     	info.addTitleStr("GOODS");
     	
     	if (GetSubTypeId() == ENTITY::MINERAL_ID)
     	{
     		info.addNameStr("mineral:");   info.addValueStr( int2str(mineral) );
-    		info.addNameStr("mass:");   info.addValueStr( int2str(data_item.mass) );
+
     	}
-	else
-	{
-	    	info.addNameStr("UNKNOWN:");   info.addValueStr( "---" );
-	}
-}                        	
-      
-void GoodsPack :: updateOwnerAbilities() { /* do nothing*/ } /* virtual */
-                    
-//void GoodsPack :: renderInfo(Rect slot_rect, float offset_x, float offset_y)
-//{
-     	//drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.getCenter().x, slot_rect.getCenter().y, offset_x, offset_y);
-//}
+}
+ 	
+/* virtual */	
+void GoodsPack::addCommonInfo()
+{
+    	info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
+}
 
  
 

@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define MODULEBASE_H
 
 
-class ModuleBase : public ItemBase
+class ModuleBase : public BaseItem
 {
     	public:
       		ModuleBase();
