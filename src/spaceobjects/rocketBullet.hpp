@@ -60,8 +60,8 @@ class RocketBullet : public Vehicle
                 
                 virtual void updateInfo(); 
                 
-                bool isTargetOk() const;
-                bool isStarSystemOk() const;     
+                bool CheckTarget() const;
+                bool CheckStarSystem() const;     
 };
 
 #endif 

@@ -66,7 +66,7 @@ void RocketBullet :: update_inSpace(int time, bool show_effect)
     		{ 
         		get_dX_dY_angleInD_ToPoint(points.getCenter().x, points.getCenter().y, target->GetPoints().getCenter().x, target->GetPoints().getCenter().y, speed/100.0, &dx, &dy, &angle_inD);
     		
-                        if (isTargetOk() == false)
+                        if (CheckTarget() == false)
                         {
                                 target = NULL;
                         }
@@ -79,11 +79,11 @@ void RocketBullet :: update_inSpace(int time, bool show_effect)
     	}
 }
 
-bool RocketBullet :: isTargetOk() const
+bool RocketBullet :: CheckTarget() const
 {
         if (target->GetAlive() == true)
         {
-                if (isStarSystemOk() == true)
+                if (CheckStarSystem() == true)
                 {
                         return true;
                 }
@@ -92,7 +92,7 @@ bool RocketBullet :: isTargetOk() const
         return false;
 }
 
-bool RocketBullet :: isStarSystemOk() const
+bool RocketBullet :: CheckStarSystem() const
 {
         if (target->GetStarSystem() == starsystem)
         {

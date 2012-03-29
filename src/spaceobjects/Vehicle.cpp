@@ -592,8 +592,8 @@ void Vehicle::RenderRadarRange()
 {
 	glPushMatrix();
 		glTranslatef(points.getCenter().x, points.getCenter().y, 0.0f);
-		radar_slot->updateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_yellow);
-             	radar_slot->drawRange();
+		radar_slot->UpdateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_yellow);
+             	radar_slot->DrawRange();
 	glPopMatrix();
 }
 
@@ -601,8 +601,8 @@ void Vehicle::RenderGrappleRange()
 {
 	glPushMatrix();
 		glTranslatef(points.getCenter().x, points.getCenter().y, 0.0f);
-		grapple_slot->updateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue);
-             	grapple_slot->drawRange();
+		grapple_slot->UpdateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue);
+             	grapple_slot->DrawRange();
 	glPopMatrix();
 }
 

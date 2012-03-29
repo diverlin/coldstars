@@ -84,7 +84,7 @@ void GuiSkill :: update()
 
 	for (unsigned int i = 0; i < button_vec.size(); i++)
 	{
-		if (button_vec[i]->InteractionCheck(mxvp, myvp) == true)
+		if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
 		{
 	       		if (lmb == true)
         		{

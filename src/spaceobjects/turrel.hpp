@@ -39,7 +39,7 @@ class Turrel
                 void resetTarget();
                        
                 void validateTarget();
-                bool isTargetOk() const;                
+                bool CheckTarget() const;                
                 bool isAmmoOk() const;
                 
                 bool fireEvent(bool);
