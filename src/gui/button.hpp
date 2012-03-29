@@ -40,7 +40,7 @@ class Button
        		int GetTypeId() const;
        		int GetSubTypeId() const;
        		       
-       		bool InteractionCheck(int _x, int _y);
+       		bool CheckInteraction(int _x, int _y);
 
        		void setCenter(int _x, int _y);
 

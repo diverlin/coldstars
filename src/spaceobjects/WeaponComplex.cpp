@@ -247,7 +247,7 @@ void WeaponComplex :: Fire(int timer, bool show_effect)
      	{
         	for (unsigned int i = 0; i < slot_weapon_reloaded_vec.size(); i++)
         	{	
-           		if ( slot_weapon_reloaded_vec[i]->GetTurrel()->isTargetOk() == true )
+           		if ( slot_weapon_reloaded_vec[i]->GetTurrel()->CheckTarget() == true )
            		{	
                			if ( slot_weapon_reloaded_vec[i]->GetTurrel()->fireEvent(show_effect) == true )
                			{
@@ -351,8 +351,8 @@ void WeaponComplex :: RenderWeaponsRange()
         	{
          		if (slot_weapon_reloaded_vec[i]->GetTurrel()->getSelectedStatus() == true)
                 	{
-                		slot_weapon_reloaded_vec[i]->updateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_red);
-             			slot_weapon_reloaded_vec[i]->drawRange();
+                		slot_weapon_reloaded_vec[i]->UpdateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_red);
+             			slot_weapon_reloaded_vec[i]->DrawRange();
              		}
 
         	}

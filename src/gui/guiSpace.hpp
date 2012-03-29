@@ -39,7 +39,7 @@ class GuiSpace
        		Button* galaxymap_screen_button; 
        		
        		void resetInfoFlags();
-       		void mouseInteractionCheck();
+       		void mouseCheckInteraction();
        		
        		void renderInternal() const;
        		void renderInfo() const;

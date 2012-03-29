@@ -125,7 +125,7 @@ void GuiKosmoport :: resetInfoFlags()
 }
        			
 		
-void GuiKosmoport :: mouseInteractionCheck()
+void GuiKosmoport :: mouseCheckInteraction()
 {
      	int mxvp = player->getCursor()->getMousePos().x;
      	int myvp = player->getScreen()->getHeight() - player->getCursor()->getMousePos().y;         
@@ -133,7 +133,7 @@ void GuiKosmoport :: mouseInteractionCheck()
 
     	for (unsigned int i = 0; i< button_common_pList.size(); i++)
 	{
-       		if (button_common_pList[i]->InteractionCheck(mxvp, myvp) == true)
+       		if (button_common_pList[i]->CheckInteraction(mxvp, myvp) == true)
        		{
        		        button_common_pList[i]->setShowInfoFlag(true);
        			if (lmb == true)
@@ -149,7 +149,7 @@ void GuiKosmoport :: mouseInteractionCheck()
     	{
      		for (unsigned int i = 0; i< button_angar_pList.size(); i++)
 		{
-       			if (button_angar_pList[i]->InteractionCheck(mxvp, myvp) == true)
+       			if (button_angar_pList[i]->CheckInteraction(mxvp, myvp) == true)
        			{
        		        	button_angar_pList[i]->setShowInfoFlag(true);
        				if (lmb == true)
@@ -223,7 +223,7 @@ void GuiKosmoport :: renderInfo() const
 void GuiKosmoport :: update()
 {
         resetInfoFlags(); 
-        mouseInteractionCheck(); 
+        mouseCheckInteraction(); 
 }
                 
                 

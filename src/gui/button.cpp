@@ -47,7 +47,7 @@ TextureOb* Button :: GetTextureOb()        { return texOb; }
 int Button :: GetTypeId() const        { return subtype_id; }
 int Button :: GetSubTypeId() const     { return subtype_id; }
 
-bool Button :: InteractionCheck(int _x, int _y)
+bool Button :: CheckInteraction(int _x, int _y)
 {        
     	float dist = distBetweenPoints(rect.getCenter().x, rect.getCenter().y, _x, _y);
     	if (dist < rect.getWidth()/2)

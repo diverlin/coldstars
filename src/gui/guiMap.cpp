@@ -129,7 +129,7 @@ void GuiMap :: Render()
 
 
 
-      //def updateRange(self, k):
+      //def UpdateRange(self, k):
           //if k.korpus.drive_slot.item != None and k.korpus.bak_slot.item != None:
              //radius_min = min(k.korpus.drive_slot.item.hyper , k.korpus.bak_slot.item.fuel)
              //self.range_list_x, self.range_list_y = getCircleCoordinateRangeLowPrecision(k.starsystem.rectOnMap.centerx, k.starsystem.rectOnMap.centery, radius_min)

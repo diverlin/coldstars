@@ -56,11 +56,11 @@ void Turrel :: setTexOb(TextureOb* _texOb)
 }
 
 
-bool Turrel :: isTargetOk() const
+bool Turrel :: CheckTarget() const
 {
         if (target != NULL)
         {
-                if (slot->isTargetOk(target) == true)
+                if (slot->CheckTarget(target) == true)
                 {
                         return true;
                 }
@@ -71,7 +71,7 @@ bool Turrel :: isTargetOk() const
 
 void Turrel :: validateTarget()
 {
-        if (isTargetOk() == false)
+        if (CheckTarget() == false)
         {
                 resetTarget();
         }

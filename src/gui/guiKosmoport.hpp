@@ -52,7 +52,7 @@ class GuiKosmoport
         	Button* launch_button;       	
                 
                 void resetInfoFlags();
-       		void mouseInteractionCheck();
+       		void mouseCheckInteraction();
 
        		void renderInternal() const;
        		void renderInfo() const;

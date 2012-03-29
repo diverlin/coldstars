@@ -85,16 +85,16 @@ class ItemSlot
 		void RenderEquipedItem();
 		void RenderItemInfo(float offset_x = 0, float offset_y = 0);
                 
-                bool InteractionCheck(int _x, int _y);
+                bool CheckInteraction(int _x, int _y);
                 
                 void DropItemToSpace();
                 
                 bool SwapItemWith(ItemSlot*);
                 
-                void updateRange(TextureOb*);
-           	void drawRange();
+                void UpdateRange(TextureOb*);
+           	void DrawRange();
            	
-           	bool isTargetOk(BaseGameEntity*) const;
+           	bool CheckTarget(BaseGameEntity*) const;
         
         private:
                 int type_id, subtype_id;               
@@ -114,10 +114,10 @@ class ItemSlot
 		std::vector<vec2f> range_vec;
            	PathVisual range_visual;
            	
-           	int getItemRadius() const;
+           	int GetItemRadius() const;
            	                
-                bool isStarSystemOk(BaseGameEntity*) const;
-           	bool isDistanceOk(BaseGameEntity*) const;
+                bool CheckStarSystem(BaseGameEntity*) const;
+           	bool CheckDistance(BaseGameEntity*) const;
 }; 
 
 #endif

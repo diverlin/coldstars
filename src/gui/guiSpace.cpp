@@ -43,7 +43,7 @@ GuiSpace :: ~GuiSpace()
 void GuiSpace :: update()
 {
 	resetInfoFlags();
-	mouseInteractionCheck();
+	mouseCheckInteraction();
 }
 
 
@@ -56,7 +56,7 @@ void GuiSpace :: resetInfoFlags()
 }
 
 
-void GuiSpace :: mouseInteractionCheck()
+void GuiSpace :: mouseCheckInteraction()
 {
 	int mxvp = player->getCursor()->getMousePos().x;
 	int myvp = player->getScreen()->getHeight() - player->getCursor()->getMousePos().y;         
@@ -64,7 +64,7 @@ void GuiSpace :: mouseInteractionCheck()
 
 	for (unsigned int i = 0; i < button_vec.size(); i++)
      	{ 
-        	if (button_vec[i]->InteractionCheck(mxvp, myvp) == true)
+        	if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
         	{
            		if (lmb == true)
            		{

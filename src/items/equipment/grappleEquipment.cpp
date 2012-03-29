@@ -68,7 +68,7 @@ void GrappleEquipment :: validateTargets()
 {
         for (unsigned int i = 0; i < target_vec.size(); i++)
         {
-                if (slot->isTargetOk(target_vec[i]) == false)
+                if (slot->CheckTarget(target_vec[i]) == false)
                 {
                         remove_queue.push_back(target_vec[i]);
                 }                

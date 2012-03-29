@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-ItemSlot :: ItemSlot()
+ItemSlot::ItemSlot()
 {
 	/* 
         The class provides implementation to insert/hold/remove all game items (equipments, modules and so on)
@@ -40,21 +40,17 @@ ItemSlot :: ItemSlot()
         texOb = NULL;
 }
 
-ItemSlot :: ~ItemSlot()
+ItemSlot::~ItemSlot()
 {
         delete item;
 }
-
-
                 
-void ItemSlot :: SetRect(int _pos_x, int _pos_y, int w, int h) 
+void ItemSlot::SetRect(int _pos_x, int _pos_y, int w, int h) 
 {
 	rect.set(_pos_x, _pos_y, w, h);
 }
 
-
-
-bool ItemSlot :: InsertItem(BaseItem* item)
+bool ItemSlot::InsertItem(BaseItem* item)
 {
 	if (item != NULL)
 	{
@@ -81,14 +77,12 @@ bool ItemSlot :: InsertItem(BaseItem* item)
 	return false;
 }
 
-
-bool ItemSlot :: ExtractItemFromContainer(Container* container)
+bool ItemSlot::ExtractItemFromContainer(Container* container)
 {
 	return this->SwapItemWith(container->getItemSlot());
 }
 
-
-void ItemSlot :: RemoveItem()
+void ItemSlot::RemoveItem()
 {
         BaseItem* tmp_item = item;
         
@@ -101,8 +95,7 @@ void ItemSlot :: RemoveItem()
     	}                     
 }
 
-
-void ItemSlot :: Render(GLuint flash_tex)
+void ItemSlot::Render(GLuint flash_tex)
 {
        	drawTexturedRect(texOb, rect, -1.5);
 
@@ -111,9 +104,8 @@ void ItemSlot :: Render(GLuint flash_tex)
                 
         RenderEquipedItem();     
 }
-
               
-int ItemSlot :: getItemRadius() const
+int ItemSlot::GetItemRadius() const
 {       
         switch(item->GetTypeId())
         {
@@ -141,7 +133,7 @@ int ItemSlot :: getItemRadius() const
 }
 
 
-void ItemSlot :: RenderEquipedItem()
+void ItemSlot::RenderEquipedItem()
 {
         if (is_EQUIPED == true)
         {
@@ -149,7 +141,7 @@ void ItemSlot :: RenderEquipedItem()
         }
 }
 
-void ItemSlot :: RenderItemInfo(float offset_x, float offset_y)
+void ItemSlot::RenderItemInfo(float offset_x, float offset_y)
 {
         if (is_EQUIPED == true)
         {
@@ -157,9 +149,7 @@ void ItemSlot :: RenderItemInfo(float offset_x, float offset_y)
         }
 }
 
-
-
-bool ItemSlot :: InteractionCheck(int _x, int _y)
+bool ItemSlot::CheckInteraction(int _x, int _y)
 {        
         float dist = distBetweenPoints(rect.getCenter().x, rect.getCenter().y, _x, _y);
         if (dist < rect.getWidth()/2)
@@ -168,8 +158,7 @@ bool ItemSlot :: InteractionCheck(int _x, int _y)
                 return false;    
 }
 
-
-void ItemSlot :: DropItemToSpace()
+void ItemSlot::DropItemToSpace()
 {
 	Container* _container = getNewContainer();
 	_container->getItemSlot()->SwapItemWith(this);
@@ -180,13 +169,8 @@ void ItemSlot :: DropItemToSpace()
 
 	//printf("container was created in ss_id = %i, pos = %f, %f\n", _starsystem->GetId(), _container->getPoints()->getCenter().x, _container->getPoints()->getCenter().y );
 }
-
-
-
-
-         
-
-bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
+        
+bool ItemSlot::SwapItemWith(ItemSlot* _slot)
 {
        	if ( (is_EQUIPED == false) and (_slot->GetEquipedStatus() == true) )
        	{      
@@ -197,7 +181,6 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
        			return true; 
        		}             
 	}
-	
 	
 	if ( (is_EQUIPED == true) and (_slot->GetEquipedStatus() == false) )
        	{ 
@@ -235,9 +218,9 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
 	return false;
 }
 
-void ItemSlot :: updateRange(TextureOb* _texOb)
+void ItemSlot::UpdateRange(TextureOb* _texOb)
 {
-	float radius = this->getItemRadius();
+	float radius = this->GetItemRadius();
 	float da = 4.0f/RADIAN_TO_DEGREE_RATE;// - radius/1000.0f;
 	
     	range_vec.clear();
@@ -251,19 +234,18 @@ void ItemSlot :: updateRange(TextureOb* _texOb)
         range_visual.fillData(_texOb->texture, &range_vec, step, size);
 }
 
-void ItemSlot :: drawRange()
+void ItemSlot::DrawRange()
 { 
     	range_visual.draw();
 }
 
-
-bool ItemSlot :: isTargetOk(BaseGameEntity* _target) const
+bool ItemSlot::CheckTarget(BaseGameEntity* _target) const
 {
         if (_target->GetAlive() == true)
         {
-                if (isStarSystemOk(_target) == true)
+                if (CheckStarSystem(_target) == true)
                 {
-                        if (isDistanceOk(_target) == true)
+                        if (CheckDistance(_target) == true)
                         {
                                 return true;
                         }
@@ -273,8 +255,7 @@ bool ItemSlot :: isTargetOk(BaseGameEntity* _target) const
         return false;
 }
 
-
-bool ItemSlot :: isStarSystemOk(BaseGameEntity* _target) const
+bool ItemSlot::CheckStarSystem(BaseGameEntity* _target) const
 {
         if (_target->GetStarSystem() == owner_vehicle->GetStarSystem())
         {
@@ -284,7 +265,7 @@ bool ItemSlot :: isStarSystemOk(BaseGameEntity* _target) const
         return false;
 }                
 
-bool ItemSlot :: isDistanceOk(BaseGameEntity* _target) const
+bool ItemSlot::CheckDistance(BaseGameEntity* _target) const
 {
 	if (_target->GetTypeId() == ENTITY::STARSYSTEM_ID)
 	{
@@ -292,7 +273,7 @@ bool ItemSlot :: isDistanceOk(BaseGameEntity* _target) const
 	}
 	
         float dist = distBetweenPoints(GetOwnerVehicle()->GetPoints().getCenter(), _target->GetPoints().getCenter());                                               
-        if (dist < getItemRadius())
+        if (dist < GetItemRadius())
         {
                 return true;
         }
