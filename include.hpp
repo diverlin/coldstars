@@ -386,5 +386,6 @@ class GuiMap;
 
 #include "src/render/screen.cpp"
 #include "src/common/gameTimer.cpp"
+#include "src/config/SaveManager.cpp" 
 
 ////////////////////////////////////////////

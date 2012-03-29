@@ -68,7 +68,14 @@ void Galaxy :: update_s(int time)
      	}
 }
 
-
+void Galaxy::SaveEvent() const
+{
+	std::string galaxy_root = "Galaxy 1.";
+	for (unsigned int i = 0; i < STARSYSTEM_vec.size(); i++)
+     	{
+		STARSYSTEM_vec[i]->SaveEvent(galaxy_root); 
+     	}
+}
 
 
 

@@ -1,23 +1,471 @@
-Window
+"Galaxy 1"
 {
-    WIDTH 800
-    HEIGHT 600
-    BPP 32
-    VSYNC 1
-    FPS_LIMIT 60
-    MODERN_EFFECTS 1
-}
-General
-{
-    DEBUG_MODE 0
-}
-Gameplay
-{
-    AUTOTURN_MODE false
-    GAMESPEED 6
-}
-Control
-{
-    SCROLL_VELOCITY_MAX 20
-    SCROLL_VELOCITY_STEP 1
+    starsystem_1
+    {
+        ship_109
+        {
+            id 109
+            type_id 0
+            subtype_id 4
+        }
+        ship_133
+        {
+            id 133
+            type_id 0
+            subtype_id 0
+        }
+        ship_157
+        {
+            id 157
+            type_id 0
+            subtype_id 1
+        }
+    }
+    starsystem_357
+    {
+        ship_500
+        {
+            id 500
+            type_id 0
+            subtype_id 1
+        }
+        ship_522
+        {
+            id 522
+            type_id 0
+            subtype_id 1
+        }
+        ship_546
+        {
+            id 546
+            type_id 0
+            subtype_id 3
+        }
+        ship_568
+        {
+            id 568
+            type_id 0
+            subtype_id 1
+        }
+    }
+    starsystem_767
+    {
+        ship_875
+        {
+            id 875
+            type_id 0
+            subtype_id 3
+        }
+        ship_899
+        {
+            id 899
+            type_id 0
+            subtype_id 2
+        }
+        ship_920
+        {
+            id 920
+            type_id 0
+            subtype_id 2
+        }
+    }
+    starsystem_1117
+    {
+        ship_1225
+        {
+            id 1225
+            type_id 0
+            subtype_id 1
+        }
+        ship_1267
+        {
+            id 1267
+            type_id 0
+            subtype_id 1
+        }
+        ship_1309
+        {
+            id 1309
+            type_id 0
+            subtype_id 1
+        }
+        ship_1350
+        {
+            id 1350
+            type_id 0
+            subtype_id 1
+        }
+        ship_1394
+        {
+            id 1394
+            type_id 0
+            subtype_id 1
+        }
+        ship_1437
+        {
+            id 1437
+            type_id 0
+            subtype_id 1
+        }
+        ship_1480
+        {
+            id 1480
+            type_id 0
+            subtype_id 1
+        }
+        ship_1523
+        {
+            id 1523
+            type_id 0
+            subtype_id 1
+        }
+        ship_1564
+        {
+            id 1564
+            type_id 0
+            subtype_id 1
+        }
+        ship_1608
+        {
+            id 1608
+            type_id 0
+            subtype_id 1
+        }
+        ship_1649
+        {
+            id 1649
+            type_id 0
+            subtype_id 1
+        }
+        ship_1693
+        {
+            id 1693
+            type_id 0
+            subtype_id 1
+        }
+        ship_1734
+        {
+            id 1734
+            type_id 0
+            subtype_id 1
+        }
+        ship_1778
+        {
+            id 1778
+            type_id 0
+            subtype_id 1
+        }
+        ship_1822
+        {
+            id 1822
+            type_id 0
+            subtype_id 1
+        }
+        ship_1865
+        {
+            id 1865
+            type_id 0
+            subtype_id 1
+        }
+        ship_1906
+        {
+            id 1906
+            type_id 0
+            subtype_id 1
+        }
+        ship_1947
+        {
+            id 1947
+            type_id 0
+            subtype_id 1
+        }
+    }
+    starsystem_2164
+    {
+        ship_2307
+        {
+            id 2307
+            type_id 0
+            subtype_id 1
+        }
+        ship_2350
+        {
+            id 2350
+            type_id 0
+            subtype_id 1
+        }
+        ship_2393
+        {
+            id 2393
+            type_id 0
+            subtype_id 1
+        }
+        ship_2434
+        {
+            id 2434
+            type_id 0
+            subtype_id 1
+        }
+        ship_2476
+        {
+            id 2476
+            type_id 0
+            subtype_id 1
+        }
+        ship_2517
+        {
+            id 2517
+            type_id 0
+            subtype_id 1
+        }
+        ship_2560
+        {
+            id 2560
+            type_id 0
+            subtype_id 1
+        }
+        ship_2603
+        {
+            id 2603
+            type_id 0
+            subtype_id 1
+        }
+        ship_2645
+        {
+            id 2645
+            type_id 0
+            subtype_id 1
+        }
+        ship_2686
+        {
+            id 2686
+            type_id 0
+            subtype_id 1
+        }
+    }
+    starsystem_2903
+    {
+        ship_3046
+        {
+            id 3046
+            type_id 0
+            subtype_id 4
+        }
+        ship_3067
+        {
+            id 3067
+            type_id 0
+            subtype_id 2
+        }
+        ship_3090
+        {
+            id 3090
+            type_id 0
+            subtype_id 1
+        }
+        ship_3113
+        {
+            id 3113
+            type_id 0
+            subtype_id 0
+        }
+        ship_5520
+        {
+            id 5520
+            type_id 0
+            subtype_id 1
+        }
+    }
+    starsystem_3310
+    {
+        ship_3418
+        {
+            id 3418
+            type_id 0
+            subtype_id 1
+        }
+        ship_3439
+        {
+            id 3439
+            type_id 0
+            subtype_id 0
+        }
+        ship_3463
+        {
+            id 3463
+            type_id 0
+            subtype_id 0
+        }
+        ship_3485
+        {
+            id 3485
+            type_id 0
+            subtype_id 2
+        }
+    }
+    starsystem_3684
+    {
+        ship_3792
+        {
+            id 3792
+            type_id 0
+            subtype_id 1
+        }
+        ship_3836
+        {
+            id 3836
+            type_id 0
+            subtype_id 1
+        }
+        ship_3878
+        {
+            id 3878
+            type_id 0
+            subtype_id 1
+        }
+        ship_3920
+        {
+            id 3920
+            type_id 0
+            subtype_id 1
+        }
+        ship_3962
+        {
+            id 3962
+            type_id 0
+            subtype_id 1
+        }
+        ship_4003
+        {
+            id 4003
+            type_id 0
+            subtype_id 1
+        }
+        ship_4046
+        {
+            id 4046
+            type_id 0
+            subtype_id 1
+        }
+        ship_4090
+        {
+            id 4090
+            type_id 0
+            subtype_id 1
+        }
+        ship_4133
+        {
+            id 4133
+            type_id 0
+            subtype_id 1
+        }
+        ship_4176
+        {
+            id 4176
+            type_id 0
+            subtype_id 1
+        }
+        ship_4220
+        {
+            id 4220
+            type_id 0
+            subtype_id 1
+        }
+        ship_4263
+        {
+            id 4263
+            type_id 0
+            subtype_id 1
+        }
+        ship_4307
+        {
+            id 4307
+            type_id 0
+            subtype_id 1
+        }
+        ship_4350
+        {
+            id 4350
+            type_id 0
+            subtype_id 1
+        }
+        ship_4394
+        {
+            id 4394
+            type_id 0
+            subtype_id 1
+        }
+        ship_4436
+        {
+            id 4436
+            type_id 0
+            subtype_id 1
+        }
+        ship_4477
+        {
+            id 4477
+            type_id 0
+            subtype_id 1
+        }
+        ship_4520
+        {
+            id 4520
+            type_id 0
+            subtype_id 1
+        }
+    }
+    starsystem_4737
+    {
+        ship_4845
+        {
+            id 4845
+            type_id 0
+            subtype_id 0
+        }
+        ship_4869
+        {
+            id 4869
+            type_id 0
+            subtype_id 2
+        }
+        ship_4890
+        {
+            id 4890
+            type_id 0
+            subtype_id 3
+        }
+        ship_4912
+        {
+            id 4912
+            type_id 0
+            subtype_id 1
+        }
+    }
+    starsystem_5112
+    {
+        ship_5255
+        {
+            id 5255
+            type_id 0
+            subtype_id 1
+        }
+        ship_5276
+        {
+            id 5276
+            type_id 0
+            subtype_id 3
+        }
+        ship_5299
+        {
+            id 5299
+            type_id 0
+            subtype_id 3
+        }
+        ship_5320
+        {
+            id 5320
+            type_id 0
+            subtype_id 3
+        }
+    }
 }

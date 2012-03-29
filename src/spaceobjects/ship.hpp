@@ -34,6 +34,8 @@ class Ship : public Vehicle
         	void updateRenderStuff();
         	void render_inSpace() const;
 		void render_atPlanet() const;       
+		
+		void SaveEvent(const std::string&) const;
          
         private:
 

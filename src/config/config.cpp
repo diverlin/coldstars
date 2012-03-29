@@ -42,8 +42,6 @@ SCROLL_VELOCITY_STEP(1)
 	
 	SCROLL_VELOCITY_MAX = ptree.get<int>("Control.SCROLL_VELOCITY_MAX");
 	SCROLL_VELOCITY_STEP = ptree.get<int>("Control.SCROLL_VELOCITY_STEP");
-	
-	write_info("save.info", ptree);
 }
 
 Config::~Config(){}

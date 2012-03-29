@@ -109,6 +109,11 @@ void Ship :: render_atPlanet() const
 
 
 
-
-
+void Ship::SaveEvent(const std::string& root) const
+{
+	const std::string ship_root = root+"ship_"+int2str(data_id.id)+".";
+	this->SaveUniqueBaseGameEntity(ship_root);
+	//this->SaveUniqueVehicle(root);
+	//this->SaveUniqueShip(root);
+}
 

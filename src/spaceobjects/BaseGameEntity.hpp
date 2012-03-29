@@ -91,6 +91,8 @@ class BaseGameEntity
 
 		void CheckDeath(bool);
 		virtual void PostDeathUniqueEvent(bool) = 0;
+		
+		void SaveUniqueBaseGameEntity(const std::string&) const;
 
 		friend class BaseVehicleBuilder;
 };

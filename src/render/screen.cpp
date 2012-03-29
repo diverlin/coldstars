@@ -87,13 +87,12 @@ void Screen :: bottomLeftGlobalCoordIncrease(vec2f delta)
 }
 
 void Screen :: update()
-{
-}
+{}
 
 void Screen :: display()		
 {
-  Gui::Update();
-  Gui::GetWindow().Display();
+  	Gui::Update();
+  	Gui::GetWindow().Display();
 }
 
 

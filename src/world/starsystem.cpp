@@ -1182,6 +1182,17 @@ void StarSystem :: PostDeathUniqueEvent(bool) /*virtual */
 
 
 
+void StarSystem::SaveEvent(const std::string& root) const
+{
+	std::string starsystem_root = root+"starsystem_"+int2str(data_id.id)+".";
+	for (unsigned int i = 0; i < SHIP_inSPACE_vec.size(); i++) 
+	{ 
+		SHIP_inSPACE_vec[i]->SaveEvent(starsystem_root); 
+	} 
+}
+
+
+
 
 template <typename AGRESSOR, typename VICTIM>
 bool checkCollision(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
@@ -1232,6 +1243,7 @@ bool collisionBetweenCenters(Points& points1, float center2_x, float center2_y, 
 
     return true;
 }
+
 
 
 
