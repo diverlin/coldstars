@@ -51,7 +51,7 @@ int RocketBullet :: getOwnerShipId() const { return owner_ship_id; }
 
 void RocketBullet :: update_inSpace(int time, bool show_effect)
 {
-	checkDeath(show_effect);
+	CheckDeath(show_effect);
         
 	if (time > 0)
 	{

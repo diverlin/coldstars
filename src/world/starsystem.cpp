@@ -1154,7 +1154,7 @@ void StarSystem :: damageEventInsideCircle(vec2f epicentr, float radius, int dam
     	{
        	        if ( distBetweenPoints(SHIP_inSPACE_vec[i]->GetPoints().getCenter(), epicentr) < radius )
                	{
-       			SHIP_inSPACE_vec[i]->hit(damage, show_effect); 
+       			SHIP_inSPACE_vec[i]->Hit(damage, show_effect); 
        		}
     	}
     	
@@ -1162,7 +1162,7 @@ void StarSystem :: damageEventInsideCircle(vec2f epicentr, float radius, int dam
     	{
        	        if ( distBetweenPoints(SPACESTATION_vec[i]->GetPoints().getCenter(), epicentr) < radius )
                	{
-       			SPACESTATION_vec[i]->hit(damage, show_effect); 
+       			SPACESTATION_vec[i]->Hit(damage, show_effect); 
        		}
     	}
     	
@@ -1170,14 +1170,14 @@ void StarSystem :: damageEventInsideCircle(vec2f epicentr, float radius, int dam
     	{
        	        if ( distBetweenPoints(SATELLITE_vec[i]->GetPoints().getCenter(), epicentr) < radius )
                	{
-       			SATELLITE_vec[i]->hit(damage, show_effect); 
+       			SATELLITE_vec[i]->Hit(damage, show_effect); 
        		}
     	}
 }
 
 
 
-void StarSystem :: postDeathUniqueEvent(bool) /*virtual */
+void StarSystem :: PostDeathUniqueEvent(bool) /*virtual */
 {}
 
 
@@ -1188,7 +1188,7 @@ bool checkCollision(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
 {
 	if (collisionBetweenCenters(agressor->GetPoints(), victim->GetPoints(), victim->GetCollisionRadius()) == true)
         {
-        	victim->hit(agressor->getDamage(), show_effect);
+        	victim->Hit(agressor->getDamage(), show_effect);
                 agressor->collisionEvent(show_effect);
                 
                 return true;

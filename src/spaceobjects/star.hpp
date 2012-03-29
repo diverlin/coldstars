@@ -46,7 +46,7 @@ class Star : public PlanetBase
         	Color4f color;
         	
     		void updateInfo();
-    		void postDeathUniqueEvent(bool);
+    		void PostDeathUniqueEvent(bool);
 }; 
 
 

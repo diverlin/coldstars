@@ -86,11 +86,11 @@ class BaseGameEntity
 
 		BaseGameEntity* parent;
 
-		void createCenter();
-		void updateRotation();
+		void CreateCenter();
+		void UpdateRotation();
 
-		void checkDeath(bool);
-		virtual void postDeathUniqueEvent(bool) = 0;
+		void CheckDeath(bool);
+		virtual void PostDeathUniqueEvent(bool) = 0;
 
 		friend class BaseVehicleBuilder;
 };

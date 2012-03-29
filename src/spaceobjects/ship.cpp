@@ -46,7 +46,7 @@ void Ship :: updateInfo()
 
 void Ship :: update_inSpace(int time, bool show_effect)
 {   
-	checkDeath(show_effect);
+	CheckDeath(show_effect);
 	if (time > 0)
 	{
 		points.update();   

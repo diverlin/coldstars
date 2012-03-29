@@ -47,7 +47,7 @@ class PlanetBase : public BaseGameEntity
 		Orbit* orbit;  		
 
 		void calcCollisionrRadius();
-		virtual void postDeathUniqueEvent(bool);
+		virtual void PostDeathUniqueEvent(bool);
 };
 
 #endif 

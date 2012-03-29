@@ -34,7 +34,7 @@ class SpaceItemBase : public BaseGameEntity
         	void update_inSpace(int, bool);
         	
 		void silentKill();
-		virtual void postDeathUniqueEvent(bool);
+		virtual void PostDeathUniqueEvent(bool);
 
         	void render2D();
         

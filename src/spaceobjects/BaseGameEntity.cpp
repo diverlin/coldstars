@@ -18,7 +18,7 @@
 
 //#include "BaseGameEntity.hpp"
 
-BaseGameEntity :: BaseGameEntity()
+BaseGameEntity::BaseGameEntity()
 {
 	angle.x        = getRandInt(10, 40);
 	angle.y        = getRandInt(10, 40);
@@ -37,18 +37,17 @@ BaseGameEntity :: BaseGameEntity()
 	parent = NULL;
 }
 
-
-BaseGameEntity :: ~BaseGameEntity()
+BaseGameEntity::~BaseGameEntity()
 {}
 
 
-void BaseGameEntity :: createCenter()
+void BaseGameEntity: CreateCenter()
 {
 	points.initCenterPoint();
 	points.addCenterPoint();
 }
 
-void BaseGameEntity :: updateRotation()
+void BaseGameEntity::UpdateRotation()
 {
 	angle.x += d_angle.x;  
 	angle.y += d_angle.y;  
@@ -56,7 +55,7 @@ void BaseGameEntity :: updateRotation()
 	//printf("1. angle = %f\n", angle.z);
 }
 
-void BaseGameEntity :: MovingByExternalForce(vec2f _target, float force)
+void BaseGameEntity::MovingByExternalForce(vec2f _target, float force)
 {
 	vec2f d_pos;
 	get_dX_dY_ToPoint(points.getCenter().x, points.getCenter().y, _target.x, _target.y, force, &d_pos.x, &d_pos.y);
@@ -64,8 +63,7 @@ void BaseGameEntity :: MovingByExternalForce(vec2f _target, float force)
 	//points.setCenter(points.getCenter() + d_pos);
 }
 
-
-void BaseGameEntity :: hit(int damage, bool show_effect)
+void BaseGameEntity::Hit(int damage, bool show_effect)
 {
 	data_life.armor -= damage;
 	if (data_life.armor <= 0)
@@ -84,7 +82,7 @@ void BaseGameEntity :: hit(int damage, bool show_effect)
 
 }
 
-void BaseGameEntity :: checkDeath(bool show_effect)
+void BaseGameEntity::CheckDeath(bool show_effect)
 {
 	if (data_life.is_alive == false)
 	{
@@ -93,7 +91,7 @@ void BaseGameEntity :: checkDeath(bool show_effect)
 		{
 			if (data_life.garbage_ready == false)
 			{   
-				postDeathUniqueEvent(show_effect);
+				PostDeathUniqueEvent(show_effect);
 				data_life.garbage_ready = true;
 			}
 		}

@@ -27,7 +27,7 @@ BaseVehicleBuilder::~BaseVehicleBuilder() {}
 void  BaseVehicleBuilder::CreateKorpusGeometry(Vehicle* vehicle)
 {
 	vehicle->RecalculateCollisionRadius();
-	vehicle->createCenter();
+	vehicle->CreateCenter();
 
     	vehicle->GetPoints().initMainQuadPoints(vehicle->GetTextureOb()->getFrameWidth(), vehicle->GetTextureOb()->getFrameHeight());
     	vehicle->GetPoints().addMainQuadPoints();

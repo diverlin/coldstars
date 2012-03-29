@@ -48,7 +48,7 @@ void Planet :: createLand()
 
 void Planet :: update_inSpace(int time, bool show_effect)
 {      
-	updateRotation();
+	UpdateRotation();
 	if (time > 0)
 	{
 		orbit->updatePosition();  
@@ -84,7 +84,7 @@ void Planet :: renderInfo_inSpace(vec2f scroll_coords)
 	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);
 }
 
-void Planet :: postDeathUniqueEvent(bool)
+void Planet :: PostDeathUniqueEvent(bool)
 {}
 
 

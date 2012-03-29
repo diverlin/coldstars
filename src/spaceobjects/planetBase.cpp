@@ -33,7 +33,7 @@ Orbit* PlanetBase :: getOrbit() const { return orbit; }
 void PlanetBase :: postCreateInit()
 {
         this->calcCollisionrRadius();           
-        this->createCenter();
+        this->CreateCenter();
         
         orbit = new Orbit();
 }
@@ -53,7 +53,7 @@ void PlanetBase :: calcCollisionrRadius()
         points.setWidthHeight(scale_factor*data_planet.scale, scale_factor*data_planet.scale);  // needs for finding visible corners
 }
 
-void PlanetBase :: postDeathUniqueEvent(bool)  /* virtual */
+void PlanetBase :: PostDeathUniqueEvent(bool)  /* virtual */
 {}		
 		 		
 void PlanetBase :: render_NEW(vec2f scroll_coords)

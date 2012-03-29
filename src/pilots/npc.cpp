@@ -339,7 +339,7 @@ void Npc :: renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offse
      	drawInfoIn2Column(&info.title_list, &info.value_list, _pos_x + 190, _pos_y, _offset_x, _offset_y);
 }
      
-void Npc :: postDeathUniqueEvent(bool) /* virtual */
+void Npc :: PostDeathUniqueEvent(bool) /* virtual */
 {}
 
 

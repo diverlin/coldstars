@@ -46,7 +46,7 @@ class Planet : public PlanetBase
 		unsigned long int population;
 		void updateInfo();
 
-		void postDeathUniqueEvent(bool);
+		void PostDeathUniqueEvent(bool);
 }; 
 
 
