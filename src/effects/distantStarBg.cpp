@@ -29,7 +29,7 @@ DistantStarBgEffect :: DistantStarBgEffect(TextureOb* _texOb, vec2f _center, flo
 }
 
 
-void DistantStarBgEffect :: render(float vx, float vy)
+void DistantStarBgEffect :: Render(float vx, float vy)
 {   
     	glPointSize(particleSize);
     	//glColor4f(1.0f, 1.0f, 1.0f, 1.0f);

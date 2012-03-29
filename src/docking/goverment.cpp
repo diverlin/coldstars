@@ -40,7 +40,7 @@ void Goverment :: renderBackground(Player* player) const
 void Goverment :: renderInternals() const
 {}
             
-void Goverment :: render(Player* player) const
+void Goverment :: Render(Player* player) const
 {
         clearScreen();
         resetRenderTransformation();

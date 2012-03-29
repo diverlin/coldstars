@@ -595,7 +595,7 @@ void StarSystem :: renderBackground(vec2f scroll_coords)
 {   
 	// HACK for point sprites
     	enable_POINTSPRITE();
-    		distantStarBgEffect_vec[0]->render(scroll_coords.x, scroll_coords.y); 
+    		distantStarBgEffect_vec[0]->Render(scroll_coords.x, scroll_coords.y); 
     	disable_POINTSPRITE();
     	// HACK for point sprites
 
@@ -609,13 +609,13 @@ void StarSystem :: renderBackground(vec2f scroll_coords)
     		for(unsigned int i = 0; i<distantNebulaBgEffect_vec.size(); i++)
     		{ 
        			distantNebulaBgEffect_vec[i]->updateRenderStuff(); 
-        		distantNebulaBgEffect_vec[i]->render(scroll_coords.x, scroll_coords.y); 
+        		distantNebulaBgEffect_vec[i]->Render(scroll_coords.x, scroll_coords.y); 
     		}
 
     		enable_POINTSPRITE();
     			for(unsigned int i = 0; i<distantStarBgEffect_vec.size(); i++)
     			{ 
-       				distantStarBgEffect_vec[i]->render(scroll_coords.x, scroll_coords.y); 
+       				distantStarBgEffect_vec[i]->Render(scroll_coords.x, scroll_coords.y); 
     			}
     		disable_POINTSPRITE();
     	

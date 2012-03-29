@@ -33,7 +33,7 @@ class Platform
                 void insert(Vehicle*);
                 void free(); 
         
-                void render() const;
+                void Render() const;
                 void renderInfo() const;
                 
         private:

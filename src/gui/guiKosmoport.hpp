@@ -31,7 +31,7 @@ class GuiKosmoport
 		int getActiveScreenId() const;
 		
        		void update();
-                void render() const;
+                void Render() const;
                 
        	private:
        		int active_screen_id; 
@@ -52,7 +52,7 @@ class GuiKosmoport
         	Button* launch_button;       	
                 
                 void resetInfoFlags();
-       		void mouseInteraction();
+       		void mouseInteractionCheck();
 
        		void renderInternal() const;
        		void renderInfo() const;

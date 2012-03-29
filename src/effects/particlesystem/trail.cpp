@@ -90,13 +90,13 @@ void TrailEffect :: update()
 
 
 
-void TrailEffect :: render()
+void TrailEffect :: Render()
 {
        	enable_POINTSPRITE();       	
      		glBindTexture(GL_TEXTURE_2D, texOb->texture);
      		for (unsigned int i = 0; i < particles_vec.size(); i++) 
      		{
-         		particles_vec[i]->render();
+         		particles_vec[i]->Render();
      		}
 	disable_POINTSPRITE();
 }

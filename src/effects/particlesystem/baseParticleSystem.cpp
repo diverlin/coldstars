@@ -48,7 +48,7 @@ bool BaseParticleSystem :: GetAlive() const { return is_alive; }
 //void BaseParticleSystem :: update()
 //{}         
 
-//void BaseParticleSystem :: render()
+//void BaseParticleSystem :: Render()
 //{}                   
 
 

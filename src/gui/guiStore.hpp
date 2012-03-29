@@ -28,7 +28,7 @@ class GuiStore
                 ~GuiStore();
 
                 void update();
-                void render() const;
+                void Render() const;
                 
                 void renderFocusedItemInfo();
                 

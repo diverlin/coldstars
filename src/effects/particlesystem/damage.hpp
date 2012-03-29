@@ -30,7 +30,7 @@ class DamageEffect : public BaseParticleSystem
                 void createParticles(); 
                                 
        		virtual void update();
-       		virtual void render();
+       		virtual void Render();
 
        	private:    
 

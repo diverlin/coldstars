@@ -33,7 +33,7 @@ class ShieldEffect
 		
         	//void renderDynamicFramesLoopRot();
         	void update();
-        	void render() const;
+        	void Render() const;
         	
         private:
                 Vehicle* owner_vehicle;        

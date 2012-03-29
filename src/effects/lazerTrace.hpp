@@ -31,7 +31,7 @@ class LazerTraceEffect
 		bool GetAlive() const;
 		
        		void update();
-       		void render();
+       		void Render();
             		
  	private:
  	       	bool is_alive;

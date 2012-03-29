@@ -74,20 +74,20 @@ class ItemSlot
 
                 void SetRect(int _pos_x, int _pos_y, int w, int h);
                                 
-		bool insertItem(BaseItem*);
+		bool InsertItem(BaseItem*);
                 
-		bool extractContainer(Container*);
+		bool ExtractItemFromContainer(Container*);
 						                
-		void removeItem();
+		void RemoveItem();
                 
-		void render(GLuint);
+		void Render(GLuint);
        
-		void renderEquipedItem();
-		void renderItemInfo(float offset_x = 0, float offset_y = 0);
+		void RenderEquipedItem();
+		void RenderItemInfo(float offset_x = 0, float offset_y = 0);
                 
-                bool interaction(int _x, int _y);
+                bool InteractionCheck(int _x, int _y);
                 
-                void dropItemToSpace();
+                void DropItemToSpace();
                 
                 bool SwapItemWith(ItemSlot*);
                 

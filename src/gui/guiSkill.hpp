@@ -29,7 +29,7 @@ class GuiSkill
       		void createControlSkillButtons();
   		
      		void update();
-      		void render() const;
+      		void Render() const;
 
       	private:     		
       		std::vector<Button*> button_vec;

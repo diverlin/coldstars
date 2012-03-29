@@ -27,7 +27,7 @@ class BlackHoleEffect : public BaseParticleSystem
        		virtual ~BlackHoleEffect();
 		
        		virtual void update();
-       		virtual void render();
+       		virtual void Render();
        		
        	private:
        		void createParticles();

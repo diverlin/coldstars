@@ -28,7 +28,7 @@ class DistantNebulaBgEffect
 	        DistantNebulaBgEffect(TextureOb* _texOb, vec3f _center);
 	        
         	void updateRenderStuff();
-        	void render(float vx, float vy);
+        	void Render(float vx, float vy);
         	
         private:
                 TextureOb* texOb;

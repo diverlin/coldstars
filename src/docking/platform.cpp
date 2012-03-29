@@ -47,7 +47,7 @@ void Platform :: free()
 
 
 
-void Platform :: render() const
+void Platform :: Render() const
 {
      	drawTexturedRect(texOb, rect, -1);
      	if (vehicle != NULL)

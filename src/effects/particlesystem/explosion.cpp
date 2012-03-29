@@ -54,12 +54,12 @@ void ExplosionEffect :: update()
 }     
     
 
-void ExplosionEffect :: render()
+void ExplosionEffect :: Render()
 {
 	glBindTexture(GL_TEXTURE_2D, texOb->texture);
     	for(unsigned int i = 0; i < num_particles; i++)
     	{
-		particles_vec[i]->render();
+		particles_vec[i]->Render();
     	}            
 }  
 

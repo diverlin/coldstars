@@ -337,7 +337,7 @@ void WeaponComplex :: RenderTurrels() const
 {
     	for(unsigned int i = 0; i < slot_weapon_equiped_vec.size(); i++)
     	{
-        	slot_weapon_equiped_vec[i]->GetTurrel()->render(owner_vehicle->GetPoints().getAngleDegree());        
+        	slot_weapon_equiped_vec[i]->GetTurrel()->Render(owner_vehicle->GetPoints().getAngleDegree());        
     	} 
 }
 

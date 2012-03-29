@@ -1283,7 +1283,7 @@ bool ModelOBJ::importMaterials(const char *pszFilename)
 }
 
 
-void ModelOBJ :: render()
+void ModelOBJ :: Render()
 {
         if (hasPositions())
         {

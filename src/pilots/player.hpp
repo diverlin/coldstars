@@ -116,7 +116,7 @@ class Player
 		GuiMap*       GUI_MAP;         
 		UserInput*    USERINPUT;       
     		
-    		void render(bool, bool, bool); 
+    		void Render(bool, bool, bool); 
      			void renderEntities_NEW();
     			void renderEntities_OLD();
     		

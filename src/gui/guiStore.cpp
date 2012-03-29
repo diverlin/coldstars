@@ -54,13 +54,13 @@ void GuiStore :: update()
 }
 
 
-void GuiStore :: render() const
+void GuiStore :: Render() const
 {            
 	Store* store = ((Kosmoport*)player->getNpc()->getLand())->getStore();
 	         
         for (unsigned int i = 0; i < store->slot_vec.size(); i ++)
         {
-                store->slot_vec[i]->render(-1);
+                store->slot_vec[i]->Render(-1);
         }
 }
 
@@ -74,7 +74,7 @@ void GuiStore :: renderFocusedItemInfo()
                                                        				
                 if (dist < store->slot_vec[i]->GetRect().getWidth()/2)
                 {
-                        store->slot_vec[i]->renderItemInfo();                    
+                        store->slot_vec[i]->RenderItemInfo();                    
                 } 
         }
 }

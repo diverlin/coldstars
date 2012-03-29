@@ -54,7 +54,7 @@ void ItemSlot :: SetRect(int _pos_x, int _pos_y, int w, int h)
 
 
 
-bool ItemSlot :: insertItem(BaseItem* item)
+bool ItemSlot :: InsertItem(BaseItem* item)
 {
 	if (item != NULL)
 	{
@@ -82,13 +82,13 @@ bool ItemSlot :: insertItem(BaseItem* item)
 }
 
 
-bool ItemSlot :: extractContainer(Container* container)
+bool ItemSlot :: ExtractItemFromContainer(Container* container)
 {
 	return this->SwapItemWith(container->getItemSlot());
 }
 
 
-void ItemSlot :: removeItem()
+void ItemSlot :: RemoveItem()
 {
         BaseItem* tmp_item = item;
         
@@ -102,14 +102,14 @@ void ItemSlot :: removeItem()
 }
 
 
-void ItemSlot :: render(GLuint flash_tex)
+void ItemSlot :: Render(GLuint flash_tex)
 {
        	drawTexturedRect(texOb, rect, -1.5);
 
 	//if self.flash == True:
 		//drawTexturedRect(flash_tex, self.rect, -1.0)
                 
-        renderEquipedItem();     
+        RenderEquipedItem();     
 }
 
               
@@ -141,7 +141,7 @@ int ItemSlot :: getItemRadius() const
 }
 
 
-void ItemSlot :: renderEquipedItem()
+void ItemSlot :: RenderEquipedItem()
 {
         if (is_EQUIPED == true)
         {
@@ -149,7 +149,7 @@ void ItemSlot :: renderEquipedItem()
         }
 }
 
-void ItemSlot :: renderItemInfo(float offset_x, float offset_y)
+void ItemSlot :: RenderItemInfo(float offset_x, float offset_y)
 {
         if (is_EQUIPED == true)
         {
@@ -159,7 +159,7 @@ void ItemSlot :: renderItemInfo(float offset_x, float offset_y)
 
 
 
-bool ItemSlot :: interaction(int _x, int _y)
+bool ItemSlot :: InteractionCheck(int _x, int _y)
 {        
         float dist = distBetweenPoints(rect.getCenter().x, rect.getCenter().y, _x, _y);
         if (dist < rect.getWidth()/2)
@@ -169,7 +169,7 @@ bool ItemSlot :: interaction(int _x, int _y)
 }
 
 
-void ItemSlot :: dropItemToSpace()
+void ItemSlot :: DropItemToSpace()
 {
 	Container* _container = getNewContainer();
 	_container->getItemSlot()->SwapItemWith(this);
@@ -190,9 +190,9 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
 {
        	if ( (is_EQUIPED == false) and (_slot->GetEquipedStatus() == true) )
        	{      
-       		if (insertItem(_slot->GetItem()) == true) 
+       		if (InsertItem(_slot->GetItem()) == true) 
        		{
-       			_slot->removeItem(); 
+       			_slot->RemoveItem(); 
        			
        			return true; 
        		}             
@@ -201,9 +201,9 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
 	
 	if ( (is_EQUIPED == true) and (_slot->GetEquipedStatus() == false) )
        	{ 
-		if (_slot->insertItem(GetItem())     == true)
+		if (_slot->InsertItem(GetItem())     == true)
 		{ 
-			removeItem(); 
+			RemoveItem(); 
 			
 			return true; 			
 		}                     				
@@ -215,7 +215,7 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
        		{
 			if (((EquipmentBase*)_slot->GetItem())->insertModule((ModuleBase*)item) == true)  
 			{ 
-				removeItem(); 
+				RemoveItem(); 
 				
 				return true;       		
         		}
@@ -225,7 +225,7 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
        		{
 			 if (((EquipmentBase*)item)->insertModule((ModuleBase*)_slot->GetItem()) == true)  
 			 { 
-			 	_slot->removeItem(); 
+			 	_slot->RemoveItem(); 
 			 	
 			 	return true; 
 			 }       		        		

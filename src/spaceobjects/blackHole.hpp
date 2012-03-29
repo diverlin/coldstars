@@ -32,7 +32,7 @@ class BlackHole : public SpaceItemBase
 		
         	void renderInfo_inSpace(vec2f);
         	
-        	void render() const;
+        	void Render() const;
         	
         private:
         	BlackHoleEffect* effect;

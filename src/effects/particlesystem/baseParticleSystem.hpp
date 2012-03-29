@@ -37,7 +37,7 @@ class BaseParticleSystem
 		bool GetAlive() const;
 		
        		virtual void update() = 0;
-       		virtual void render() = 0;
+       		virtual void Render() = 0;
        		
        	protected:
        		int subtype_id;

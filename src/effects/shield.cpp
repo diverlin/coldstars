@@ -46,7 +46,7 @@ void ShieldEffect :: update()
        		color.a = alpha_start;
 }
 
-void ShieldEffect :: render() const
+void ShieldEffect :: Render() const
 {
     	setColor(color);
 

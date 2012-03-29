@@ -40,7 +40,7 @@ class Particle
             	void randomize_d_alpha(float, float);
 
       		void update();
-      		void render() const;
+      		void Render() const;
       		
       	private:
       	      	bool is_alive;

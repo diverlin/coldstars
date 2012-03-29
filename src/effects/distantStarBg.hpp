@@ -25,7 +25,7 @@ class DistantStarBgEffect
 {   
     	public:
        		DistantStarBgEffect(TextureOb* _texOb, vec2f _center, float _particleSize);
-       		void render(float vx, float vy);
+       		void Render(float vx, float vy);
        		
        	private:
        	       	TextureOb* texOb;

@@ -124,7 +124,7 @@ bool Turrel :: fireEvent(bool show_effect)
 }
 
 
-void Turrel :: render(float _tur_angle_inD)
+void Turrel :: Render(float _tur_angle_inD)
 {        
         if (target != NULL)
         {

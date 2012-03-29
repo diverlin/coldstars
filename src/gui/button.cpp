@@ -47,7 +47,7 @@ TextureOb* Button :: GetTextureOb()        { return texOb; }
 int Button :: GetTypeId() const        { return subtype_id; }
 int Button :: GetSubTypeId() const     { return subtype_id; }
 
-bool Button :: interaction(int _x, int _y)
+bool Button :: InteractionCheck(int _x, int _y)
 {        
     	float dist = distBetweenPoints(rect.getCenter().x, rect.getCenter().y, _x, _y);
     	if (dist < rect.getWidth()/2)
@@ -61,7 +61,7 @@ void Button :: setCenter(int _x, int _y)
      	rect.setCenter((float)_x, (float)_y);
 }
    
-void Button :: render() const
+void Button :: Render() const
 {
    	drawTexturedRect(texOb, rect, -1);
 }

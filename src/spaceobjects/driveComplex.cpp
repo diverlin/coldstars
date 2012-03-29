@@ -616,5 +616,5 @@ void DriveComplex :: drawPath()
 void DriveComplex::renderTrail()
 {
 	drive_trail->update();
-	drive_trail->render();
+	drive_trail->Render();
 }

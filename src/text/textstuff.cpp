@@ -64,7 +64,7 @@ void VerticalFlowText :: update()
         }
 }
                 
-void VerticalFlowText :: render(vec2f scroll_coords) const
+void VerticalFlowText :: Render(vec2f scroll_coords) const
 {
         if (is_alive == true)
         {
