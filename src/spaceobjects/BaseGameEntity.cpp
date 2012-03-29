@@ -98,4 +98,12 @@ void BaseGameEntity::CheckDeath(bool show_effect)
 	}  
 }
 
-
+void BaseGameEntity::SaveUniqueBaseGameEntity(const std::string& root) const
+{
+	SaveManager::Instance().Put(root+"id",         data_id.id);
+	SaveManager::Instance().Put(root+"type_id",    data_id.type_id);
+	SaveManager::Instance().Put(root+"subtype_id", data_id.subtype_id);
+	
+	SaveManager::Instance().DumpToFile();
+	
+}

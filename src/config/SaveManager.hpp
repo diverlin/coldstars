@@ -10,7 +10,7 @@ struct SaveManager
 		static SaveManager& Instance();
 		
 		template <typename T>
-		void PutPair(std::string, T);
+		void Put(std::string, T);
 		void DumpToFile();
 								
 	private:

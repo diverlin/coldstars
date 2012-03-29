@@ -10,12 +10,12 @@ SaveManager::SaveManager() {}
 SaveManager::~SaveManager(){}
 
 template <typename T>
-void SaveManager::PutPair(std::string , T val)
+void SaveManager::Put(std::string key, T val)
 {
-	ptree.put();
+	ptree.put(key, val);
 }
 
-SaveManager Save::DumpToFile()
+void SaveManager::DumpToFile()
 {		
 	write_info("save.info", ptree);
 }

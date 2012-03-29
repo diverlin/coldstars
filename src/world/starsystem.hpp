@@ -136,6 +136,8 @@ class StarSystem : public BaseGameEntity
     		void renderBackground(vec2f);
                 void drawOrbits();
                 void drawPath();
+                
+                void SaveEvent(const std::string&) const;
                            		    		    		
     	private:
                 int race_id, conqueror_race_id;
