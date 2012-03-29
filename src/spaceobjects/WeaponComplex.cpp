@@ -302,7 +302,7 @@ bool WeaponComplex :: UpdateFireAbility()
      	{ 
         	if (slot_weapon_vec[i]->getEquipedStatus() == true)
         	{
-           		if (slot_weapon_vec[i]->getItem()->getCondition() > 0)
+           		if (slot_weapon_vec[i]->getItem()->GetCondition() > 0)
            		{
               			slot_weapon_equiped_vec.push_back(slot_weapon_vec[i]);
               			//sum_damage      += slot_weapon_vec[i]->getItemDamage(); 

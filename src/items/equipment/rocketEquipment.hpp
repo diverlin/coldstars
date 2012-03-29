@@ -50,7 +50,7 @@ class RocketEquipment : public EquipmentBase
 		
       		void fireEvent();
       		      
-      		void virtual updateOwnerAbilities();
+      		void virtual UpdateOwnerAbilities();
       		
       	      	void countPrice();
       		virtual void updatePropetries();
@@ -71,7 +71,7 @@ class RocketEquipment : public EquipmentBase
      	      	
       	      	BulletData data_bullet;
       		
-     		void virtual addUniqueInfo();
+     		void virtual AddUniqueInfo();
            	std::string getAmmoStr();
            	std::string getDamageStr();
            	std::string getRadiusStr();

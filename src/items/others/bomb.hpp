@@ -30,14 +30,14 @@ class Bomb : public BaseItem
         	int getDamage() const;
         	int getRadius() const;
         	
-		virtual void updateOwnerAbilities();
+		virtual void UpdateOwnerAbilities();
         	
         private:
         	int damage;
         	int radius;
         	
-        	virtual void addCommonInfo();
- 		virtual void addUniqueInfo(); 
+        	virtual void AddCommonInfo();
+ 		virtual void AddUniqueInfo(); 
 };
 
 Bomb* getNewBomb();

@@ -29,7 +29,7 @@ class DroidEquipment : public EquipmentBase
 
 		int getRepair() const;
 
-      		void virtual updateOwnerAbilities();
+      		void virtual UpdateOwnerAbilities();
 
       		void countPrice();
       		virtual void updatePropetries();
@@ -39,7 +39,7 @@ class DroidEquipment : public EquipmentBase
       		int repair_add;
       		int repair;
       		
-     		void virtual addUniqueInfo();
+     		void virtual AddUniqueInfo();
        		std::string getRepairStr();
 };
 

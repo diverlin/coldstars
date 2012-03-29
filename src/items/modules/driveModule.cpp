@@ -31,7 +31,7 @@ int DriveModule :: getSpeedAdd() const { return speed_add; }
 int DriveModule :: getHyperAdd() const { return hyper_add; }
 		
 		
-void DriveModule :: addUniqueInfo()
+void DriveModule :: AddUniqueInfo()
 { 
     	info.addTitleStr("drive module"); 
     	if (speed_add != 0)
@@ -59,8 +59,8 @@ DriveModule* getNewDriveModule()
         data_id.subtype_id = MODULE::DRIVE_ID;  
         
     	DriveModule* drive_module = new DriveModule(speed_add, hyper_add);
-        drive_module->setTextureOb(texOb);
-        drive_module->setIdData(data_id);
+        drive_module->SetTextureOb(texOb);
+        drive_module->SetIdData(data_id);
         
     	return drive_module;
 }

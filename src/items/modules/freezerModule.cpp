@@ -28,7 +28,7 @@ FreezerModule :: ~FreezerModule() /* virtual */
 int FreezerModule :: getFreezeAdd() const { return freeze_add; }
 
 
-void FreezerModule :: addUniqueInfo()
+void FreezerModule :: AddUniqueInfo()
 {
     	info.addTitleStr("freezer module");
     	info.addNameStr("freeze_add:");     info.addValueStr( int2str(freeze_add) );
@@ -46,8 +46,8 @@ FreezerModule* getNewFreezerModule()
         data_id.subtype_id = MODULE::FREEZER_ID; 
         
         FreezerModule* freezer_module = new FreezerModule(freeze_add);
-        freezer_module->setTextureOb(texOb);
-        freezer_module->setIdData(data_id);
+        freezer_module->SetTextureOb(texOb);
+        freezer_module->SetIdData(data_id);
         
         return freezer_module;
 }

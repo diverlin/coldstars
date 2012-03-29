@@ -33,7 +33,7 @@ int EnergizerModule :: getEnergyMaxAdd()   const { return energy_max_add; }
 int EnergizerModule :: getRestorationAdd() const { return restoration_add; }
 
 
-void EnergizerModule :: addUniqueInfo()
+void EnergizerModule :: AddUniqueInfo()
 {
     	info.addTitleStr("energizer module");
     	if (energy_max_add != 0)
@@ -60,8 +60,8 @@ EnergizerModule* getNewEnergizerModule()
         data_id.subtype_id = MODULE::ENERGIZER_ID;  
         
      	EnergizerModule* energizer_module = new EnergizerModule(energy_max_add, restoration_add);
-        energizer_module->setTextureOb(texOb);
-        energizer_module->setIdData(data_id);
+        energizer_module->SetTextureOb(texOb);
+        energizer_module->SetIdData(data_id);
         
         return energizer_module; 
 }

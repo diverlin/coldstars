@@ -32,18 +32,18 @@ int Bomb :: getDamage() const { return damage; }
 int Bomb :: getRadius() const { return radius; }
         
 /* virtual */	
-void Bomb :: updateOwnerAbilities() {} 
+void Bomb :: UpdateOwnerAbilities() {} 
 		
 
        
 /* virtual */	     
-void Bomb::addCommonInfo()
+void Bomb::AddCommonInfo()
 {
     	info.addNameStr("mass:");        info.addValueStr(int2str(data_item.mass));
 }
 
 /* virtual */	
-void Bomb::addUniqueInfo()
+void Bomb::AddUniqueInfo()
 {
     	info.addTitleStr("BOMB");
 
@@ -64,9 +64,9 @@ Bomb* getNewBomb()
 	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::BOMB_ID); 
 	
 	Bomb* bomb = new Bomb();
-	bomb->setIdData(data_id);
-	bomb->setTextureOb(texOb);
-	bomb->setFunctionalSlotSubTypeId(SLOT::CARGO_ID);
+	bomb->SetIdData(data_id);
+	bomb->SetTextureOb(texOb);
+	bomb->SetFunctionalSlotSubTypeId(SLOT::CARGO_ID);
 	
 	return bomb;
 }

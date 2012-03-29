@@ -56,14 +56,14 @@ void ProtectorEquipment :: countPrice()
 }
 
 /* virtual */
-void ProtectorEquipment :: updateOwnerAbilities()
+void ProtectorEquipment :: UpdateOwnerAbilities()
 {
      	slot->getOwnerVehicle()->UpdateProtectionAbility();
 }
 
 
 
-void ProtectorEquipment :: addUniqueInfo()
+void ProtectorEquipment :: AddUniqueInfo()
 {
     	info.addTitleStr("PROTECTOR");
     	info.addNameStr("protection:");     info.addValueStr( getProtectionStr() );
@@ -108,10 +108,10 @@ ProtectorEquipment* getNewProtectorEquipment(int race_id, int revision_id)
         
     	ProtectorEquipment* protector_equipment = new ProtectorEquipment(protection_orig);
 
-        protector_equipment->setIdData(data_id);  
-        protector_equipment->setTextureOb(texOb_item);    	
-        protector_equipment->setFunctionalSlotSubTypeId(SLOT::PROTECTOR_ID);
-        protector_equipment->setItemCommonData(common_data);
+        protector_equipment->SetIdData(data_id);  
+        protector_equipment->SetTextureOb(texOb_item);    	
+        protector_equipment->SetFunctionalSlotSubTypeId(SLOT::PROTECTOR_ID);
+        protector_equipment->SetItemCommonData(common_data);
         
         protector_equipment->updatePropetries();
     	protector_equipment->countPrice();

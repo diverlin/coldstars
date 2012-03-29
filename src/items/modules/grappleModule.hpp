@@ -41,7 +41,7 @@ class GrappleModule : public ModuleBase
        		int speed_add;
        		int maxNumItem_add;
        		
-       		void virtual addUniqueInfo();
+       		void virtual AddUniqueInfo();
 };
 
 GrappleModule* getNewGrappleModule();

@@ -63,13 +63,13 @@ void EnergizerEquipment :: countPrice()
 }
 
 
-void EnergizerEquipment :: updateOwnerAbilities()
+void EnergizerEquipment :: UpdateOwnerAbilities()
 {
     	slot->getOwnerVehicle()->UpdateEnergyAbility();
 }
 
 
-void EnergizerEquipment :: addUniqueInfo()
+void EnergizerEquipment :: AddUniqueInfo()
 {
     	info.addTitleStr("ENERGYBLOCK");
     	info.addNameStr("energy:");      info.addValueStr( getEnergyStr() );
@@ -124,10 +124,10 @@ EnergizerEquipment* getNewEnergizerEquipment(int race_id, int revision_id)
         
     	EnergizerEquipment* energizer_equipment = new EnergizerEquipment(energy_max_orig, restoration_orig);
         
-        energizer_equipment->setIdData(data_id);  
-        energizer_equipment->setTextureOb(texOb_item);    	
-        energizer_equipment->setFunctionalSlotSubTypeId(SLOT::ENERGIZER_ID);
-        energizer_equipment->setItemCommonData(common_data);
+        energizer_equipment->SetIdData(data_id);  
+        energizer_equipment->SetTextureOb(texOb_item);    	
+        energizer_equipment->SetFunctionalSlotSubTypeId(SLOT::ENERGIZER_ID);
+        energizer_equipment->SetItemCommonData(common_data);
                 
         energizer_equipment->updatePropetries();
     	energizer_equipment->countPrice();

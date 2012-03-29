@@ -32,7 +32,7 @@ int LazerModule :: getDamageAdd() const { return damage_add; }
 int LazerModule :: getRadiusAdd() const { return radius_add; }
 
 
-void LazerModule :: addUniqueInfo()
+void LazerModule :: AddUniqueInfo()
 {
     	info.addTitleStr("lazer module");
     	if (damage_add != 0) 
@@ -59,8 +59,8 @@ LazerModule* getNewLazerModule()
         data_id.subtype_id = MODULE::LAZER_ID;  
         
     	LazerModule* lazer_module = new LazerModule(damage_add, radius_add);
-        lazer_module->setTextureOb(texOb);
-        lazer_module->setIdData(data_id);
+        lazer_module->SetTextureOb(texOb);
+        lazer_module->SetIdData(data_id);
                 
     	return lazer_module;
 }

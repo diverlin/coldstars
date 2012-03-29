@@ -29,7 +29,7 @@ class RadarEquipment : public EquipmentBase
       		
       		int getRadius() const;
 
-      		void virtual updateOwnerAbilities();
+      		void virtual UpdateOwnerAbilities();
 
       		virtual void updatePropetries();
       		void countPrice();
@@ -39,7 +39,7 @@ class RadarEquipment : public EquipmentBase
      		int radius_add;
       		int radius;
 
-     		void virtual addUniqueInfo();
+     		void virtual AddUniqueInfo();
        		std::string getRadiusStr();
 };
 

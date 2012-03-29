@@ -36,7 +36,7 @@ GrappleEquipment :: ~GrappleEquipment()
 //{
         //for (unsigned int i = 0; i < target_vec.size(); i++)
         //{
-        //        target_vec[i]->bindSlot(_slot);
+        //        target_vec[i]->BindSlot(_slot);
         //}
 //}
 
@@ -177,13 +177,13 @@ void GrappleEquipment :: countPrice()
 }
 
 /* virtual */
-void GrappleEquipment :: updateOwnerAbilities()
+void GrappleEquipment :: UpdateOwnerAbilities()
 {
     	slot->getOwnerVehicle()->UpdateGrabAbility();
 }
 
 
-void GrappleEquipment :: addUniqueInfo()
+void GrappleEquipment :: AddUniqueInfo()
 {    	
 	info.addTitleStr("GRAPPLE");
 
@@ -262,10 +262,10 @@ GrappleEquipment* getNewGrappleEquipment(int race_id, int revision_id)
     								   radius_orig, 
     								   speed_orig, 
     								   maxNumItem_orig);                                                                   
-        grapple_equipment->setIdData(data_id);  
-        grapple_equipment->setTextureOb(texOb_item);    	
-        grapple_equipment->setFunctionalSlotSubTypeId(SLOT::GRAPPLE_ID);
-        grapple_equipment->setItemCommonData(common_data);        
+        grapple_equipment->SetIdData(data_id);  
+        grapple_equipment->SetTextureOb(texOb_item);    	
+        grapple_equipment->SetFunctionalSlotSubTypeId(SLOT::GRAPPLE_ID);
+        grapple_equipment->SetItemCommonData(common_data);        
 
     	grapple_equipment->updatePropetries();
     	grapple_equipment->countPrice();

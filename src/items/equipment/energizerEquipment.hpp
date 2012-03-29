@@ -30,7 +30,7 @@ class EnergizerEquipment : public EquipmentBase
       
       		int getEnergy() const;
       		
-      		void virtual updateOwnerAbilities();
+      		void virtual UpdateOwnerAbilities();
 
       		void countPrice();
       		virtual void updatePropetries();
@@ -45,7 +45,7 @@ class EnergizerEquipment : public EquipmentBase
       		int restoration_add;
       		int restoration;
       		
-     		void virtual addUniqueInfo();
+     		void virtual AddUniqueInfo();
            	std::string getEnergyStr();
            	std::string getRestorationStr();
 };

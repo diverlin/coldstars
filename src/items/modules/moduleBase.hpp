@@ -27,10 +27,10 @@ class ModuleBase : public BaseItem
       		ModuleBase();
       		virtual ~ModuleBase();
       		
-      		virtual void updateOwnerAbilities();
+      		virtual void UpdateOwnerAbilities();
 
 	protected:     		
-     		void addCommonInfo();                   
+     		void AddCommonInfo();                   
 };
 
 #endif

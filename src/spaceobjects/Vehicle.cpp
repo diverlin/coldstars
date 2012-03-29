@@ -330,7 +330,7 @@ void Vehicle::UpdateDriveAbility()
 
      	if (drive_complex->GetDriveSlot().getEquipedStatus() == true) 
      	{
-        	if (drive_complex->GetDriveSlot().getDriveEquipment()->getCondition() > 0)  
+        	if (drive_complex->GetDriveSlot().getDriveEquipment()->GetCondition() > 0)  
         	{
            		float val = (drive_complex->GetDriveSlot().getDriveEquipment()->getSpeed() - mass/70);
            		if (val > 0)
@@ -352,7 +352,7 @@ void Vehicle::UpdateRadarAbility()
 {
    	if (radar_slot->getEquipedStatus() == true) 
    	{
-      		if (radar_slot->getRadarEquipment()->getCondition() > 0)  
+      		if (radar_slot->getRadarEquipment()->GetCondition() > 0)  
       		{
           		propetries.radius = radar_slot->getRadarEquipment()->getRadius();
           		ableTo.RADAR = true;
@@ -378,9 +378,9 @@ void Vehicle::UpdateJumpAbility()
      	ableTo.HJUMP = false;
 
      	if (drive_complex->GetDriveSlot().getEquipedStatus() == true)
-        	if (drive_complex->GetDriveSlot().getDriveEquipment()->getCondition() > 0)
+        	if (drive_complex->GetDriveSlot().getDriveEquipment()->GetCondition() > 0)
            		if (drive_complex->GetBakSlot().getEquipedStatus() == true)
-              			if (drive_complex->GetBakSlot().getBakEquipment()->getCondition() > 0)
+              			if (drive_complex->GetBakSlot().getBakEquipment()->GetCondition() > 0)
               			{
                  			if (drive_complex->GetDriveSlot().getDriveEquipment()->getHyper() > drive_complex->GetBakSlot().getBakEquipment()->getFuel())
                     				propetries.hyper = drive_complex->GetDriveSlot().getDriveEquipment()->getHyper();
@@ -399,7 +399,7 @@ void Vehicle::UpdateEnergyAbility()
 
      	if (energizer_slot->getEquipedStatus() == true)
      	{
-        	if (energizer_slot->getEnergizerEquipment()->getCondition() > 0)
+        	if (energizer_slot->getEnergizerEquipment()->GetCondition() > 0)
         	{
            		propetries.energy = energizer_slot->getEnergizerEquipment()->getEnergy();
            		ableTo.ENERGIZE = true;
@@ -417,7 +417,7 @@ void Vehicle::UpdateProtectionAbility()
 
      	if (protection_complex->GetProtectorSlot().getEquipedStatus() == true)
      	{
-        	if (protection_complex->GetProtectorSlot().getProtectorEquipment()->getCondition() > 0)
+        	if (protection_complex->GetProtectorSlot().getProtectorEquipment()->GetCondition() > 0)
         	{
            		propetries.protection += protection_complex->GetProtectorSlot().getProtectorEquipment()->getProtection();
            		ableTo.PROTECT = true;
@@ -435,7 +435,7 @@ void Vehicle::UpdateRepairAbility()
 
      	if (droid_slot->getEquipedStatus() == true)
      	{
-        	if (droid_slot->getDroidEquipment()->getCondition() > 0)
+        	if (droid_slot->getDroidEquipment()->GetCondition() > 0)
         	{
             		propetries.repair = droid_slot->getDroidEquipment()->getRepair();
             		ableTo.REPAIR = true;
@@ -450,7 +450,7 @@ void Vehicle::SelfRepairEvent()
 		if (data_life.armor < data_korpus.armor)
 		{
 			data_life.armor += propetries.repair;
-			droid_slot->getDroidEquipment()->deterioration();
+			droid_slot->getDroidEquipment()->Deterioration();
 		}
 		
 		if (data_life.armor > data_korpus.armor)
@@ -467,7 +467,7 @@ void Vehicle::UpdateFreezeAbility()
 
      	if (freezer_slot->getEquipedStatus() == true)
      	{
-        	if (freezer_slot->getFreezerEquipment()->getCondition() > 0)
+        	if (freezer_slot->getFreezerEquipment()->GetCondition() > 0)
         	{
            		propetries.freeze = freezer_slot->getFreezerEquipment()->getFreeze();
            		ableTo.FREEZE = true;
@@ -482,7 +482,7 @@ void Vehicle::UpdateGrabAbility()
 
      	if (data_korpus.inhibit_GRAPPLE == false)
         	if (grapple_slot->getEquipedStatus() == true)
-           		if (grapple_slot->getGrappleEquipment()->getCondition() > 0)
+           		if (grapple_slot->getGrappleEquipment()->GetCondition() > 0)
               			ableTo.GRAB = true;
 }
 
@@ -494,7 +494,7 @@ void Vehicle::UpdateScanAbility()
 
      	if (scaner_slot->getEquipedStatus() == true)
      	{
-        	if (scaner_slot->getScanerEquipment()->getCondition() > 0)
+        	if (scaner_slot->getScanerEquipment()->GetCondition() > 0)
         	{
            		propetries.scan = scaner_slot->getScanerEquipment()->getScan();
            		ableTo.SCAN = true;

@@ -32,7 +32,7 @@ class BakModule : public ModuleBase
      	private:
       		int fuel_max_add;
       		
-      		void virtual addUniqueInfo();
+      		void virtual AddUniqueInfo();
 };
 
 BakModule* getNewBakModule();

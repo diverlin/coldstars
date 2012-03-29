@@ -29,7 +29,7 @@ RadarModule :: ~RadarModule() /* virtual */
 int RadarModule :: getRadiusAdd() const { return radius_add; }
 
 
-void RadarModule :: addUniqueInfo()
+void RadarModule :: AddUniqueInfo()
 {
     	info.addTitleStr("radar module");
     	info.addNameStr("radius_add:");   info.addValueStr(int2str(radius_add));
@@ -47,8 +47,8 @@ RadarModule* getNewRadarModule()
         data_id.subtype_id = MODULE::RADAR_ID; 
         
     	RadarModule* radar_module = new RadarModule(radius_add);    
-        radar_module->setTextureOb(texOb);
-        radar_module->setIdData(data_id);
+        radar_module->SetTextureOb(texOb);
+        radar_module->SetIdData(data_id);
                 
     	return radar_module;
 }

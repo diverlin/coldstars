@@ -37,7 +37,7 @@ EquipmentBase :: ~EquipmentBase()
 }
 
 /* virtual */
-void EquipmentBase :: addCommonInfo()
+void EquipmentBase :: AddCommonInfo()
 {
     	info.addNameStr("modules:");   info.addValueStr( int2str(data_item.modules_num_max) );
     	info.addNameStr("race:");      info.addValueStr( returnRaceStringByRaceId(race_id) );
@@ -60,7 +60,7 @@ bool EquipmentBase :: insertModule(ModuleBase* module)
 } 
 
 /* virtual */
-void EquipmentBase :: render(Rect slot_rect)
+void EquipmentBase :: Render(Rect slot_rect)
 {
     	drawTexturedRect(texOb, slot_rect, -1.0);
     	//if ((subtype == ROCKET_ID) or (subtype == TORPED_ID))

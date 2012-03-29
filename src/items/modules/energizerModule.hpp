@@ -35,7 +35,7 @@ class EnergizerModule : public ModuleBase
       	      	int energy_max_add;
       		int restoration_add;
       		
-      		void virtual addUniqueInfo();
+      		void virtual AddUniqueInfo();
 };
 
 EnergizerModule* getNewEnergizerModule();

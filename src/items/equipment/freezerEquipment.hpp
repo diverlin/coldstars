@@ -29,7 +29,7 @@ class FreezerEquipment : public EquipmentBase
 
 		int getFreeze() const;
   
-      		virtual void updateOwnerAbilities();
+      		virtual void UpdateOwnerAbilities();
       		
       		void countPrice();
       		virtual void updatePropetries();  
@@ -39,7 +39,7 @@ class FreezerEquipment : public EquipmentBase
       		int freeze_add;
       		int freeze;
       		
-      		void virtual addUniqueInfo();      		
+      		void virtual AddUniqueInfo();      		
        		std::string getFreezeStr();
 };
 

@@ -32,7 +32,7 @@ class FreezerModule : public ModuleBase
       	private:
       	      	int freeze_add;
       	      	
-      	      	void virtual addUniqueInfo();
+      	      	void virtual AddUniqueInfo();
 };
 
 FreezerModule* getNewFreezerModule();

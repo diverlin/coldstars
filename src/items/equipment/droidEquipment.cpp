@@ -57,13 +57,13 @@ void DroidEquipment :: countPrice()
 }
 
 /* virtual */
-void DroidEquipment :: updateOwnerAbilities()
+void DroidEquipment :: UpdateOwnerAbilities()
 {
      	slot->getOwnerVehicle()->UpdateRepairAbility();
 }
 
 
-void DroidEquipment :: addUniqueInfo()
+void DroidEquipment :: AddUniqueInfo()
 {
     	info.addTitleStr("DROID");
    	info.addNameStr("repair:");     info.addValueStr( getRepairStr() );
@@ -109,10 +109,10 @@ DroidEquipment* getNewDroidEquipment(int race_id, int revision_id)
         
     	DroidEquipment* droid_equipment = new DroidEquipment(repair_orig);
         
-        droid_equipment->setIdData(data_id);  
-        droid_equipment->setTextureOb(texOb_item);    	
-        droid_equipment->setFunctionalSlotSubTypeId(SLOT::DROID_ID);
-        droid_equipment->setItemCommonData(common_data);
+        droid_equipment->SetIdData(data_id);  
+        droid_equipment->SetTextureOb(texOb_item);    	
+        droid_equipment->SetFunctionalSlotSubTypeId(SLOT::DROID_ID);
+        droid_equipment->SetItemCommonData(common_data);
                 
                 
     	droid_equipment->updatePropetries();

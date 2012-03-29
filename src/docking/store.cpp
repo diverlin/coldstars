@@ -84,7 +84,7 @@ bool Store::add(BaseItem* item)
 
 bool Store :: sellItemFromSlot(Npc* npc, ItemSlot* slot)
 {
-	unsigned int price = slot->getItem()->getPrice();
+	unsigned int price = slot->getItem()->GetPrice();
         if (npc->getCredits() >= price)
         {
         	npc->getVehicle()->GetEmptyOtsecSlot()->SwapItemWith(slot); 
@@ -98,7 +98,7 @@ bool Store :: sellItemFromSlot(Npc* npc, ItemSlot* slot)
 
 bool Store :: buyItemFromSlot(Npc* npc, ItemSlot* slot)
 {
-	unsigned int price = slot->getItem()->getPrice();
+	unsigned int price = slot->getItem()->GetPrice();
 	
 	ItemSlot* free_slot = getEmptySlot();
 	

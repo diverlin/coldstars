@@ -52,11 +52,11 @@ void GoodsPack :: decrease(unsigned int _ammount)
                     	
       
  /* virtual */
-void GoodsPack :: updateOwnerAbilities() { /* do nothing*/ }
+void GoodsPack :: UpdateOwnerAbilities() { /* do nothing*/ }
                     
 
 /* virtual */
-void GoodsPack::addUniqueInfo() 
+void GoodsPack::AddUniqueInfo() 
 {
     	info.addTitleStr("GOODS");
     	
@@ -68,7 +68,7 @@ void GoodsPack::addUniqueInfo()
 }
  	
 /* virtual */	
-void GoodsPack::addCommonInfo()
+void GoodsPack::AddCommonInfo()
 {
     	info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
 }
@@ -93,8 +93,8 @@ GoodsPack* getNewGoodsPack(unsigned int _subtype_id)
 	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::CONTAINER_ID); 
 	
 	GoodsPack* goodsPack = new GoodsPack();
-	goodsPack->setIdData(data_id);
-	goodsPack->setTextureOb(texOb);
+	goodsPack->SetIdData(data_id);
+	goodsPack->SetTextureOb(texOb);
 	
 	return goodsPack;
 }

@@ -35,7 +35,7 @@ int GrappleModule :: getSpeedAdd()      const { return speed_add; }
 int GrappleModule :: getMaxNumItemAdd() const { return maxNumItem_add; }
 		
 
-void GrappleModule :: addUniqueInfo()
+void GrappleModule :: AddUniqueInfo()
 {
     	info.addTitleStr("grapple module");
     	if (strength_add != 0)
@@ -72,8 +72,8 @@ GrappleModule* getNewGrappleModule()
         data_id.subtype_id = MODULE::GRAPPLE_ID;  
         
     	GrappleModule* grapple_module = new GrappleModule(strength_add, radius_add, speed_add, maxNumItem_add);    	
-    	grapple_module->setTextureOb(texOb);
-        grapple_module->setIdData(data_id);
+    	grapple_module->SetTextureOb(texOb);
+        grapple_module->SetIdData(data_id);
         
         return grapple_module;
 }
