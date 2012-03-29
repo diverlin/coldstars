@@ -608,8 +608,8 @@ void Player :: mouseControl() // all large objects must be cheked by last
 	       				{
 	       					if (npc->getVehicle()->ableTo.GRAB == true)
 	       					{
-	       						npc->getVehicle()->GetGrappleSlot()->getGrappleEquipment()->addTarget(visible_MINERAL_vec[mi]);
-	       						npc->getVehicle()->GetGrappleSlot()->getGrappleEquipment()->validateTargets();	       						
+	       						npc->getVehicle()->GetGrappleSlot()->GetGrappleEquipment()->addTarget(visible_MINERAL_vec[mi]);
+	       						npc->getVehicle()->GetGrappleSlot()->GetGrappleEquipment()->validateTargets();	       						
 	       					}
 	       				}
 	       			}
@@ -642,8 +642,8 @@ void Player :: mouseControl() // all large objects must be cheked by last
 	       				{
 	       					if (npc->getVehicle()->ableTo.GRAB == true)
 	       					{
-	       						npc->getVehicle()->GetGrappleSlot()->getGrappleEquipment()->addTarget(visible_CONTAINER_vec[ci]);
-	       						npc->getVehicle()->GetGrappleSlot()->getGrappleEquipment()->validateTargets();
+	       						npc->getVehicle()->GetGrappleSlot()->GetGrappleEquipment()->addTarget(visible_CONTAINER_vec[ci]);
+	       						npc->getVehicle()->GetGrappleSlot()->GetGrappleEquipment()->validateTargets();
 	       						printf("CONTAINER with id = %i HAS BEEN MARKED\n", visible_CONTAINER_vec[ci]->GetId());	       						
 	       					}
 	       				}
@@ -694,8 +694,8 @@ void Player :: mouseControl() // all large objects must be cheked by last
                 				{
 	       						//if (pPLAYER->getVehicle()->ableTo.GRAB == true)
 	       						//{
-	       							//pPLAYER->getVehicle()->grapple_slot.getGrappleEquipment()->add(visible_SATELLITE_vec[i]);
-	       							//pPLAYER->getVehicle()->grapple_slot.getGrappleEquipment()->validationTargets();	       						
+	       							//pPLAYER->getVehicle()->grapple_slot.GetGrappleEquipment()->add(visible_SATELLITE_vec[i]);
+	       							//pPLAYER->getVehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();	       						
 	       						//}
                    				}
                    				else
@@ -790,8 +790,8 @@ void Player :: mouseControl() // all large objects must be cheked by last
                 				{
 	       						if (npc->getVehicle()->ableTo.GRAB == true)
 	       						{
-	       							npc->getVehicle()->GetGrappleSlot()->getGrappleEquipment()->addTarget(visible_SHIP_vec[ki]);
-	       							npc->getVehicle()->GetGrappleSlot()->getGrappleEquipment()->validateTargets();	       						
+	       							npc->getVehicle()->GetGrappleSlot()->GetGrappleEquipment()->addTarget(visible_SHIP_vec[ki]);
+	       							npc->getVehicle()->GetGrappleSlot()->GetGrappleEquipment()->validateTargets();	       						
 	       						}
                    				}
                    				else
@@ -867,8 +867,8 @@ void Player :: mouseControl() // all large objects must be cheked by last
                 				{
 	       						//if (pPLAYER->getVehicle()->ableTo.GRAB == true)
 	       						//{
-	       							//pPLAYER->getVehicle()->grapple_slot.getGrappleEquipment()->add(visible_STARBASE_vec[i]);
-	       							//pPLAYER->getVehicle()->grapple_slot.getGrappleEquipment()->validationTargets();	       						
+	       							//pPLAYER->getVehicle()->grapple_slot.GetGrappleEquipment()->add(visible_STARBASE_vec[i]);
+	       							//pPLAYER->getVehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();	       						
 	       						//}
                    				}
                    				else

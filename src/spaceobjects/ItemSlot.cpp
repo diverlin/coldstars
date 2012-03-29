@@ -45,60 +45,14 @@ ItemSlot :: ~ItemSlot()
         delete item;
 }
 
-void ItemSlot::SetSubTypeId(int subtype_id)   { this->subtype_id = subtype_id; }
-void ItemSlot::SetTextureOb(TextureOb* texOb) { this->texOb = texOb; }
 
-void ItemSlot :: SetOwnerVehicle(Vehicle* owner_vehicle) {  this->owner_vehicle = owner_vehicle; }
-void ItemSlot :: setFlashingStatus(bool new_status) { is_FLASHING = new_status; }
                 
-void ItemSlot :: setRect(int _pos_x, int _pos_y, int w, int h)
+void ItemSlot :: SetRect(int _pos_x, int _pos_y, int w, int h) 
 {
 	rect.set(_pos_x, _pos_y, w, h);
 }
-                                
-int ItemSlot :: GetTypeId()          const { return type_id; }
-int ItemSlot :: GetSubTypeId()       const { return subtype_id; }
-BaseItem* ItemSlot :: getItem()      const { return item; }
 
-Turrel* ItemSlot :: getTurrel() const { return turrel; }
-void ItemSlot :: bindTurrel( Turrel* turrel) { this->turrel = turrel; }
-                                
-bool ItemSlot :: getEquipedStatus() const  { return is_EQUIPED; }
-bool ItemSlot :: getFlashingStatus() const { return is_FLASHING; }
 
-                
-Rect& ItemSlot :: getRect() { return rect; }
-
-Vehicle* ItemSlot :: getOwnerVehicle() const { return owner_vehicle; }
-                                
-RocketEquipment*    ItemSlot :: getRocketEquipment()    const { return (RocketEquipment*)item; }
-LazerEquipment*     ItemSlot :: getLazerEquipment()     const { return (LazerEquipment*)item; }
-RadarEquipment*     ItemSlot :: getRadarEquipment()     const { return (RadarEquipment*)item; }
-DriveEquipment*     ItemSlot :: getDriveEquipment()     const { return (DriveEquipment*)item; }
-BakEquipment*       ItemSlot :: getBakEquipment()       const { return (BakEquipment*)item; }
-EnergizerEquipment* ItemSlot :: getEnergizerEquipment() const { return (EnergizerEquipment*)item; }
-ProtectorEquipment* ItemSlot :: getProtectorEquipment() const { return (ProtectorEquipment*)item; }
-DroidEquipment*     ItemSlot :: getDroidEquipment()     const { return (DroidEquipment*)item; }
-FreezerEquipment*   ItemSlot :: getFreezerEquipment()   const { return (FreezerEquipment*)item; }
-ScanerEquipment*    ItemSlot :: getScanerEquipment()    const { return (ScanerEquipment*)item; }
-GrappleEquipment*   ItemSlot :: getGrappleEquipment()   const { return (GrappleEquipment*)item; }
-
-RocketModule*       ItemSlot :: getRocketModule()       const { return (RocketModule*)item; }
-LazerModule*        ItemSlot :: getLazerModule()        const { return (LazerModule*)item; }
-RadarModule*        ItemSlot :: getRadarModule()        const { return (RadarModule*)item; }
-DriveModule*        ItemSlot :: getDriveModule()        const { return (DriveModule*)item; }
-BakModule*          ItemSlot :: getBakModule()          const { return (BakModule*)item; }
-EnergizerModule*    ItemSlot :: getEnergizerModule()    const { return (EnergizerModule*)item; }
-ProtectorModule*    ItemSlot :: getProtectorModule()    const { return (ProtectorModule*)item; }
-DroidModule*        ItemSlot :: getDroidModule()        const { return (DroidModule*)item; }
-FreezerModule*      ItemSlot :: getFreezerModule()      const { return (FreezerModule*)item; }
-ScanerModule*       ItemSlot :: getScanerModule()       const { return (ScanerModule*)item; }
-GrappleModule*      ItemSlot :: getGrappleModule()      const { return (GrappleModule*)item; }
-
-Bomb* ItemSlot :: getBomb() const { return (Bomb*)item; }
-//Artefact* ItemSlot :: getArtefact() const { return artefact; }
-GoodsPack* ItemSlot :: getGoodsPack() const { return (GoodsPack*)item; }
-//Vehicle* ItemSlot :: getVehicle()     const { return vehicle; }
 
 bool ItemSlot :: insertItem(BaseItem* item)
 {
@@ -234,9 +188,9 @@ void ItemSlot :: dropItemToSpace()
 
 bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
 {
-       	if ( (is_EQUIPED == false) and (_slot->getEquipedStatus() == true) )
+       	if ( (is_EQUIPED == false) and (_slot->GetEquipedStatus() == true) )
        	{      
-       		if (insertItem(_slot->getItem()) == true) 
+       		if (insertItem(_slot->GetItem()) == true) 
        		{
        			_slot->removeItem(); 
        			
@@ -245,9 +199,9 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
 	}
 	
 	
-	if ( (is_EQUIPED == true) and (_slot->getEquipedStatus() == false) )
+	if ( (is_EQUIPED == true) and (_slot->GetEquipedStatus() == false) )
        	{ 
-		if (_slot->insertItem(getItem())     == true)
+		if (_slot->insertItem(GetItem())     == true)
 		{ 
 			removeItem(); 
 			
@@ -255,11 +209,11 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
 		}                     				
 	}
 
-	if ( (is_EQUIPED == true) and (_slot->getEquipedStatus() == true) )
+	if ( (is_EQUIPED == true) and (_slot->GetEquipedStatus() == true) )
        	{          
-       		if ( (item->GetTypeId() == MODULE::MODULE_ID) and (_slot->getItem()->GetTypeId() == EQUIPMENT::EQUIPMENT_ID) )
+       		if ( (item->GetTypeId() == MODULE::MODULE_ID) and (_slot->GetItem()->GetTypeId() == EQUIPMENT::EQUIPMENT_ID) )
        		{
-			if (((EquipmentBase*)_slot->getItem())->insertModule((ModuleBase*)item) == true)  
+			if (((EquipmentBase*)_slot->GetItem())->insertModule((ModuleBase*)item) == true)  
 			{ 
 				removeItem(); 
 				
@@ -267,9 +221,9 @@ bool ItemSlot :: SwapItemWith(ItemSlot* _slot)
         		}
        		}
        		
-       		if ( (item->GetTypeId() == EQUIPMENT::EQUIPMENT_ID) and (_slot->getItem()->GetTypeId() == MODULE::MODULE_ID) )
+       		if ( (item->GetTypeId() == EQUIPMENT::EQUIPMENT_ID) and (_slot->GetItem()->GetTypeId() == MODULE::MODULE_ID) )
        		{
-			 if (((EquipmentBase*)item)->insertModule((ModuleBase*)_slot->getItem()) == true)  
+			 if (((EquipmentBase*)item)->insertModule((ModuleBase*)_slot->GetItem()) == true)  
 			 { 
 			 	_slot->removeItem(); 
 			 	
@@ -337,7 +291,7 @@ bool ItemSlot :: isDistanceOk(BaseGameEntity* _target) const
 		return true;
 	}
 	
-        float dist = distBetweenPoints(getOwnerVehicle()->GetPoints().getCenter(), _target->GetPoints().getCenter());                                               
+        float dist = distBetweenPoints(GetOwnerVehicle()->GetPoints().getCenter(), _target->GetPoints().getCenter());                                               
         if (dist < getItemRadius())
         {
                 return true;

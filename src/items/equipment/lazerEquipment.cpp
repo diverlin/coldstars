@@ -70,7 +70,7 @@ void LazerEquipment :: countPrice()
 /* virtual */    
 void LazerEquipment :: UpdateOwnerAbilities()
 { 
-    	slot->getOwnerVehicle()->UpdateFireAbility();
+    	slot->GetOwnerVehicle()->UpdateFireAbility();
 }
 
 
@@ -104,27 +104,27 @@ std::string LazerEquipment :: getRadiusStr()
 void LazerEquipment :: fireEvent_TRUE()
 { 
     	LazerTraceEffect* _lazer_trace_effect;
-    	if (slot->getOwnerVehicle()->data_korpus.render_TURRELS == true)
+    	if (slot->GetOwnerVehicle()->data_korpus.render_TURRELS == true)
     	{
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
-                                                     	      slot->getTurrel()->getPoints()->getpCenter(), 
-                                                              slot->getTurrel()->getTarget()->GetPoints().getpCenter());
+                                                     	      slot->GetTurrel()->getPoints()->getpCenter(), 
+                                                              slot->GetTurrel()->getTarget()->GetPoints().getpCenter());
         }
     	else
     	{
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
-                                                              slot->getOwnerVehicle()->GetPoints().getpCenter(), 
-                                                              slot->getTurrel()->getTarget()->GetPoints().getpCenter());
+                                                              slot->GetOwnerVehicle()->GetPoints().getpCenter(), 
+                                                              slot->GetTurrel()->getTarget()->GetPoints().getpCenter());
         }
     
     	// DAMAGE effect
-	DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, slot->getTurrel()->getTarget());
+	DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, slot->GetTurrel()->getTarget());
     	_lazer_trace_effect->setDamageEffect(_damage_effect);
     	
     	Deterioration();
     	
-    	slot->getOwnerVehicle()->GetStarSystem()->addToSpace(_lazer_trace_effect);
-    	slot->getOwnerVehicle()->GetStarSystem()->addToSpace(_damage_effect);
+    	slot->GetOwnerVehicle()->GetStarSystem()->addToSpace(_lazer_trace_effect);
+    	slot->GetOwnerVehicle()->GetStarSystem()->addToSpace(_damage_effect);
 } 
 
 

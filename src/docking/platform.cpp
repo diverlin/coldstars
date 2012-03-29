@@ -27,7 +27,7 @@ Platform :: ~Platform()
 {}
 
 Vehicle* Platform :: getVehicle()      { return vehicle; }
-Rect Platform :: getRect() const { return rect; }
+Rect Platform :: GetRect() const { return rect; }
       
                           
 void Platform :: insert(Vehicle* vehicle)

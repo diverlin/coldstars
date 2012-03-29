@@ -42,7 +42,7 @@ Button :: ~Button()
 
 void Button :: setShowInfoFlag(bool _show_info)   { show_info = _show_info; }
 bool Button :: getShowInfoFlag() const { return show_info; }
-Rect Button :: getRect() const         { return rect; }
+Rect Button :: GetRect() const         { return rect; }
 TextureOb* Button :: GetTextureOb()        { return texOb; }
 int Button :: GetTypeId() const        { return subtype_id; }
 int Button :: GetSubTypeId() const     { return subtype_id; }

@@ -1135,8 +1135,8 @@ bool StarSystem :: removeFromTheListById(std::vector<Npc*>* _pTo_npc_vec, int _i
 
 void StarSystem :: bombExplosionEvent(Container* container, bool show_effect)
 {
-	float radius = ((Bomb*)container->getItemSlot()->getItem())->getRadius();
-	float damage = ((Bomb*)container->getItemSlot()->getItem())->getDamage(); 
+	float radius = ((Bomb*)container->getItemSlot()->GetItem())->getRadius();
+	float damage = ((Bomb*)container->getItemSlot()->GetItem())->getDamage(); 
 	vec2f epicentr = container->GetPoints().getCenter();
 	
 	damageEventInsideCircle(epicentr, radius, damage, show_effect);

@@ -46,14 +46,14 @@ void Container :: updateInfo()
 void Container :: renderInfo_inSpace(vec2f scroll_coords)
 {
 	updateInfo();
-     	item_slot->getRect().setCenter(points.getCenter());	
+     	item_slot->GetRect().setCenter(points.getCenter());	
      	item_slot->renderItemInfo(scroll_coords.x, scroll_coords.y);
 }
  
  /* virtual */    
 void Container :: PostDeathUniqueEvent(bool show_effect)
 {
-        if (item_slot->getItem()->GetTypeId() == ENTITY::BOMB_ID)
+        if (item_slot->GetItem()->GetTypeId() == ENTITY::BOMB_ID)
         {
         	starsystem->bombExplosionEvent(this, show_effect);  
         }

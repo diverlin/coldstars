@@ -168,7 +168,7 @@ class GuiMap;
 
 #include "src/spaceobjects/turrel.hpp"
 
-#include "src/spaceobjects//itemSlot.hpp"
+#include "src/spaceobjects//ItemSlot.hpp"
 #include "src/spaceobjects/driveComplex.hpp"
 #include "src/spaceobjects/WeaponComplex.hpp"
 #include "src/spaceobjects/ProtectionComplex.hpp"
@@ -327,7 +327,7 @@ class GuiMap;
 #include "src/common/rect.cpp"
 #include "src/common/points.cpp"
 
-#include "src/spaceobjects/itemSlot.cpp"
+#include "src/spaceobjects/ItemSlot.cpp"
 
 #include "src/spaceobjects/WeaponComplex.cpp"
 #include "src/spaceobjects/ProtectionComplex.cpp"

@@ -28,7 +28,7 @@ class Platform
                 ~Platform();
 
                 Vehicle* getVehicle();
-                Rect getRect() const;
+                Rect GetRect() const;
                 
                 void insert(Vehicle*);
                 void free(); 

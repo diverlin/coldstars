@@ -34,9 +34,9 @@ void MicroScenarioGrab :: update_inStatic(Npc* npc) const
               
         for (unsigned int i = 0; i < npc->getObservation()->visible_MINERAL_vec.size(); i++)
         {                	
-		if ( npc->getObservation()->visible_MINERAL_vec[i].dist < npc->getVehicle()->GetGrappleSlot()->getGrappleEquipment()->getRadius() )
+		if ( npc->getObservation()->visible_MINERAL_vec[i].dist < npc->getVehicle()->GetGrappleSlot()->GetGrappleEquipment()->getRadius() )
                 {                                       
-                	npc->getVehicle()->GetGrappleSlot()->getGrappleEquipment()->addTarget(npc->getObservation()->visible_MINERAL_vec[i].mineral);
+                	npc->getVehicle()->GetGrappleSlot()->GetGrappleEquipment()->addTarget(npc->getObservation()->visible_MINERAL_vec[i].mineral);
                 }
                 else
                 {
@@ -49,7 +49,7 @@ void MicroScenarioGrab :: update_inStatic(Npc* npc) const
 
 void MicroScenarioGrab :: update_inDynamic(Npc* npc) const
 {
-	GrappleEquipment* grapple_equipment = npc->getVehicle()->GetGrappleSlot()->getGrappleEquipment();
+	GrappleEquipment* grapple_equipment = npc->getVehicle()->GetGrappleSlot()->GetGrappleEquipment();
         grapple_equipment->validateTargets();  
                 
         for (unsigned int i = 0; i < grapple_equipment->target_vec.size(); i++)

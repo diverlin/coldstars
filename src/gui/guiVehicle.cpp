@@ -49,7 +49,7 @@ void GuiVehicle :: update()
 			{
 				if (store != NULL)
 				{	
-					if (vehicle->slot_total_vec[i]->getEquipedStatus() == true)
+					if (vehicle->slot_total_vec[i]->GetEquipedStatus() == true)
 					{
 						store->buyItemFromSlot(player->getNpc(), vehicle->slot_total_vec[i]);
 					}
@@ -69,7 +69,7 @@ void GuiVehicle :: update()
 		//// DROP ITEM TO OUTERSPACE ////
 		if ( (lmb == true) and (store == NULL) )
 		{
-			if (player->getCursor()->getSlot()->getEquipedStatus() == true)
+			if (player->getCursor()->getSlot()->GetEquipedStatus() == true)
 			{
 				player->getCursor()->getSlot()->dropItemToSpace();	
 			} 
