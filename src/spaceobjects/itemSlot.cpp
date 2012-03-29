@@ -58,7 +58,7 @@ void ItemSlot :: setRect(int _pos_x, int _pos_y, int w, int h)
                                 
 int ItemSlot :: GetTypeId()          const { return type_id; }
 int ItemSlot :: GetSubTypeId()       const { return subtype_id; }
-ItemBase* ItemSlot :: getItem()      const { return item; }
+BaseItem* ItemSlot :: getItem()      const { return item; }
 
 Turrel* ItemSlot :: getTurrel() const { return turrel; }
 void ItemSlot :: bindTurrel( Turrel* turrel) { this->turrel = turrel; }
@@ -100,7 +100,7 @@ Bomb* ItemSlot :: getBomb() const { return (Bomb*)item; }
 GoodsPack* ItemSlot :: getGoodsPack() const { return (GoodsPack*)item; }
 //Vehicle* ItemSlot :: getVehicle()     const { return vehicle; }
 
-bool ItemSlot :: insertItem(ItemBase* item)
+bool ItemSlot :: insertItem(BaseItem* item)
 {
 	if (item != NULL)
 	{
@@ -136,7 +136,7 @@ bool ItemSlot :: extractContainer(Container* container)
 
 void ItemSlot :: removeItem()
 {
-        ItemBase* tmp_item = item;
+        BaseItem* tmp_item = item;
         
         item = NULL;
     	is_EQUIPED = false;  

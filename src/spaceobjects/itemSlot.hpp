@@ -35,7 +35,7 @@ class ItemSlot
                       
                 int GetTypeId()        const;
                 int GetSubTypeId()     const;
-                ItemBase* getItem()    const;
+                BaseItem* getItem()    const;
                 
                 Turrel* getTurrel()  const;  
                 
@@ -78,7 +78,7 @@ class ItemSlot
                 GoodsPack* getGoodsPack() const;
                 Vehicle* getVehicle() const;
                 
-		bool insertItem(ItemBase*);
+		bool insertItem(BaseItem*);
                 
 		bool extractContainer(Container*);
 						                
@@ -113,7 +113,7 @@ class ItemSlot
                 Vehicle* owner_vehicle;  // reference to the ship_owenr                
                 Turrel* turrel;              // only for weapons slot
                 
-                ItemBase*    item;
+                BaseItem*    item;
 
 		std::vector<vec2f> range_vec;
            	PathVisual range_visual;

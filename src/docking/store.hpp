@@ -29,7 +29,7 @@ class Store
 
                 ItemSlot* getEmptySlot();
                 
-                bool add(ItemBase*);
+                bool add(BaseItem*);
                                                         void createSlots();                                                        
                      	
                 bool sellItemFromSlot(Npc*, ItemSlot*);		

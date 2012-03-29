@@ -17,32 +17,32 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef ITEMBASE_H
-#define ITEMBASE_H
+#ifndef BASEITEM_H
+#define BASEITEM_H
 
 
-class ItemBase
+class BaseItem
 {
     	public:    				
-      		ItemBase();
-      		virtual ~ItemBase();
+      		BaseItem();
+      		virtual ~BaseItem();
       		
-                void setIdData(IdData);
-                void setTextureOb(TextureOb*);
-                void setFunctionalSlotSubTypeId(int);
-                void setItemCommonData(ItemCommonData);
+		void setIdData(IdData data_id)       { this->data_id = data_id; };
+		void setTextureOb(TextureOb* texOb)  { this->texOb = texOb; };
+		void setFunctionalSlotSubTypeId(int functional_slot_subtype_id) { this->functional_slot_subtype_id = functional_slot_subtype_id; };
+		void setItemCommonData(ItemCommonData data_item) { this->data_item = data_item; };
+                
+            	TextureOb* GetTextureOb()     const { return texOb; };
+		unsigned int GetId()        const { return data_id.id; };
+		unsigned int GetTypeId()    const { return data_id.type_id; };
+		unsigned int GetSubTypeId() const { return data_id.subtype_id; };
+		unsigned int GetMass()    const { return data_item.mass; };
+		unsigned int getCondition() const { return condition; };
+		int getPrice()     const { return price; };
+		int getFunctionalSlotSubTypeId() const { return functional_slot_subtype_id; };
+    
                 void bindSlot(ItemSlot*);
-
-    		TextureOb* GetTextureOb() const;                
-      		unsigned int GetId()        const;
-    		unsigned int GetTypeId()    const;
-    		unsigned int GetSubTypeId() const;
-    		unsigned int GetMass() const;
-
-        	unsigned int getCondition() const; 
-        	int getPrice() const; 
-                int getFunctionalSlotSubTypeId() const;
-     
+ 
      		void repair();
 
      		void deterioration(); 
@@ -72,8 +72,8 @@ class ItemBase
                 
                 InfoTable info;  
      		
-     		virtual void addCommonInfo();
- 		virtual void addUniqueInfo();                      
+     		virtual void addCommonInfo()=0;
+ 		virtual void addUniqueInfo()=0;                      
 };
 
 #endif

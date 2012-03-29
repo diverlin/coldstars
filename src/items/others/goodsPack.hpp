@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define GOODSPACK_H
 
 
-class GoodsPack : public ItemBase
+class GoodsPack : public BaseItem
 {
     	public:                  
         	GoodsPack();
@@ -30,8 +30,7 @@ class GoodsPack : public ItemBase
         	
         	void increase(unsigned int);       
                 void decrease(unsigned int);
-                
-                void updateInfo();
+
                 virtual void updateOwnerAbilities();
         	
         private:
@@ -40,6 +39,9 @@ class GoodsPack : public ItemBase
         	unsigned int medicine;
         	unsigned int military;
         	unsigned int drug;
+        	
+        	virtual void addCommonInfo();
+ 		virtual void addUniqueInfo();   
 };
 
 GoodsPack* getNewGoodsPack(unsigned int _subtype_id, vec2f);

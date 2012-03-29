@@ -92,7 +92,7 @@ void Vehicle::Add(ItemSlot* slot)
 	}
 }
 
-bool Vehicle::AddItemToOtsec(ItemBase* item)
+bool Vehicle::AddItemToOtsec(BaseItem* item)
 {
 	for (unsigned int i=0; i<slot_otsec_vec.size(); i++)
 	{
