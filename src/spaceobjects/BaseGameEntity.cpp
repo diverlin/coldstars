@@ -41,7 +41,7 @@ BaseGameEntity::~BaseGameEntity()
 {}
 
 
-void BaseGameEntity: CreateCenter()
+void BaseGameEntity::CreateCenter()
 {
 	points.initCenterPoint();
 	points.addCenterPoint();
