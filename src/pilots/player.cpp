@@ -405,19 +405,19 @@ void Player :: renderEntities_NEW()
 	enable_BLEND();
 		for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
     		{ 
-        		visible_effect_LAZERTRACE_vec[i]->render(); 
+        		visible_effect_LAZERTRACE_vec[i]->Render(); 
     		}
 
     		enable_POINTSPRITE();
     			for(unsigned int i = 0; i < visible_effect_PARTICLESYSTEM_vec.size(); i++)
     			{ 
-        			visible_effect_PARTICLESYSTEM_vec[i]->render(); 
+        			visible_effect_PARTICLESYSTEM_vec[i]->Render(); 
     			}
     		disable_POINTSPRITE();
     		
     		for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
     		{ 
-        		visible_text_DAMAGE_vec[i]->render(screen->getBottomLeftGlobalCoord()); 
+        		visible_text_DAMAGE_vec[i]->Render(screen->getBottomLeftGlobalCoord()); 
     		}    		
     		
     	disable_BLEND();
@@ -499,7 +499,7 @@ void Player :: renderEntities_OLD()
 
     		for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
     		{ 
-        		visible_effect_LAZERTRACE_vec[i]->render(); 
+        		visible_effect_LAZERTRACE_vec[i]->Render(); 
     		}
     	disable_BLEND();
 
@@ -508,14 +508,14 @@ void Player :: renderEntities_OLD()
         	enable_POINTSPRITE();
     			for(unsigned int i = 0; i < visible_effect_PARTICLESYSTEM_vec.size(); i++)
     			{ 
-        			visible_effect_PARTICLESYSTEM_vec[i]->render(); 
+        			visible_effect_PARTICLESYSTEM_vec[i]->Render(); 
     			}
         	disable_POINTSPRITE();
         disable_BLEND();
 
         for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
     	{ 
-        	visible_text_DAMAGE_vec[i]->render(screen->getBottomLeftGlobalCoord()); 
+        	visible_text_DAMAGE_vec[i]->Render(screen->getBottomLeftGlobalCoord()); 
     	}    		
     		
                 
@@ -524,7 +524,7 @@ void Player :: renderEntities_OLD()
 
 
 
-void Player :: render(bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
+void Player :: Render(bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {
     	
     	if (Config::Instance().MODERN_EFFECTS == true)
@@ -990,7 +990,7 @@ void Player :: outerspace(GameTimer* TIMER)
 	cursor->updateMousePos();
 
 	npc->GetStarSystem()->findVisibleEntities_c(this);
-	this->render(TIMER->getTurnEnded(), getShowAllOrbit(), getShowAllPath()); 
+	this->Render(TIMER->getTurnEnded(), getShowAllOrbit(), getShowAllPath()); 
 
 	if (TIMER->getTurnEnded() == true)  
 	{
@@ -1011,11 +1011,11 @@ void Player :: outerspace(GameTimer* TIMER)
 	if (getWorldMapShowFlag() == true )  
 	{
 		GUI_MAP->update();   
-		GUI_MAP->render();   
+		GUI_MAP->Render();   
 	}
 
 	GUI_SPACE->update();    
-	GUI_SPACE->render();
+	GUI_SPACE->Render();
 }
 
 void Player :: kosmoport()
@@ -1025,7 +1025,7 @@ void Player :: kosmoport()
         if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::ANGAR_ID)
         {
         	((Kosmoport*)npc->getLand())->getAngar()->mouseControl(this);                                
-               	((Kosmoport*)npc->getLand())->getAngar()->render(this);
+               	((Kosmoport*)npc->getLand())->getAngar()->Render(this);
 
 		if (npc->getScanTarget() != NULL) 
 		{ 
@@ -1034,7 +1034,7 @@ void Player :: kosmoport()
 		}
 		else
 		{
-			((Kosmoport*)npc->getLand())->getAngar()->renderItemInfo(this);
+			((Kosmoport*)npc->getLand())->getAngar()->RenderItemInfo(this);
 		}
 	}
 
@@ -1052,24 +1052,24 @@ void Player :: kosmoport()
         if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::SHOP_ID)
         {
         	((Kosmoport*)npc->getLand())->getShop()->update();
-                ((Kosmoport*)npc->getLand())->getShop()->render(this);
+                ((Kosmoport*)npc->getLand())->getShop()->Render(this);
 	}
 
         if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::GALAXYMAP_ID)
         {
         	GUI_MAP->update();
         	clearScreen();
-                GUI_MAP->render();   
+                GUI_MAP->Render();   
          }
 
          if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::GOVERMENT_ID)
          {
          	((Kosmoport*)npc->getLand())->getGoverment()->update();
-                ((Kosmoport*)npc->getLand())->getGoverment()->render(this);
+                ((Kosmoport*)npc->getLand())->getGoverment()->Render(this);
          }
 
          GUI_KOSMOPORT->update(); 
-         GUI_KOSMOPORT->render(); 
+         GUI_KOSMOPORT->Render(); 
 }
 
 void Player :: runSession(GameTimer* TIMER)

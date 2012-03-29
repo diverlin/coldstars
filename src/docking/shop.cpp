@@ -40,7 +40,7 @@ void Shop :: update()
 {
 }
             
-void Shop :: render(Player* player) const
+void Shop :: Render(Player* player) const
 {
         clearScreen();
         resetRenderTransformation();

@@ -28,7 +28,7 @@ class ExplosionEffect : public BaseParticleSystem
        		virtual ~ExplosionEffect();
 		
        		virtual void update();
-       		virtual void render();
+       		virtual void Render();
        		
                 void createParticles();
        	private:

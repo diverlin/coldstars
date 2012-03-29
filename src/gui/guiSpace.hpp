@@ -29,7 +29,7 @@ class GuiSpace
        		~GuiSpace();
 
 		void update();
-		void render();
+		void Render();
        		
        	private:
        		Player* player;
@@ -39,7 +39,7 @@ class GuiSpace
        		Button* galaxymap_screen_button; 
        		
        		void resetInfoFlags();
-       		void mouseInteraction();
+       		void mouseInteractionCheck();
        		
        		void renderInternal() const;
        		void renderInfo() const;

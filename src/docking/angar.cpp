@@ -117,7 +117,7 @@ void Angar :: mouseControl(Player* player)
 
 
 
-void Angar :: render(Player* player) const
+void Angar :: Render(Player* player) const
 {
         clearScreen();
         resetRenderTransformation();
@@ -127,7 +127,7 @@ void Angar :: render(Player* player) const
 	enable_BLEND();
         
         renderInternals();
-        //renderItemInfo();
+        //RenderItemInfo();
         
 }
 
@@ -141,11 +141,11 @@ void Angar :: renderInternals() const
 {
         for (unsigned int i = 0; i < platform_vec.size(); i++)
         {
-                platform_vec[i]->render();
+                platform_vec[i]->Render();
         }
 }
 
-void Angar :: renderItemInfo(Player* player) const
+void Angar :: RenderItemInfo(Player* player) const
 {
         for (unsigned int i = 0; i < platform_vec.size(); i++)
         { 

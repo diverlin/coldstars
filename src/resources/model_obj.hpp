@@ -45,7 +45,7 @@
 class ModelOBJ
 {
 public:
-void render();
+void Render();
 
 
     struct Material

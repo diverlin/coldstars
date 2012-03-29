@@ -28,7 +28,7 @@ class GuiVehicle
 
      		void update();   
      				
-      		void render() const;
+      		void Render() const;
 		void renderFocusedItemInfo() const;
       		
       	private: 		

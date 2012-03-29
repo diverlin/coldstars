@@ -66,7 +66,7 @@ void MicroScenarioGrab :: update_inDynamic(Npc* npc) const
        				ItemSlot* slot = npc->getVehicle()->GetEmptyOtsecSlot();
        				if (slot != NULL)
        				{
-       					slot->insertItem(goodsPack);
+       					slot->InsertItem(goodsPack);
        					grapple_equipment->addToRemoveQueue(grapple_equipment->target_vec[i]);
 
        					npc->GetStarSystem()->addToRemoveFromOuterSpaceQueue((Mineral*)grapple_equipment->target_vec[i]);  
@@ -78,7 +78,7 @@ void MicroScenarioGrab :: update_inDynamic(Npc* npc) const
        				ItemSlot* slot = npc->getVehicle()->GetEmptyOtsecSlot();
        				if (slot != NULL)
        				{
-       					slot->extractContainer((Container*)grapple_equipment->target_vec[i]);
+       					slot->ExtractItemFromContainer((Container*)grapple_equipment->target_vec[i]);
        					grapple_equipment->addToRemoveQueue(grapple_equipment->target_vec[i]);
 
        					npc->GetStarSystem()->addToRemoveFromOuterSpaceQueue((Container*)grapple_equipment->target_vec[i]);  

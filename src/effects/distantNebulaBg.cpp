@@ -42,7 +42,7 @@ void DistantNebulaBgEffect :: updateRenderStuff()
 }        
 
 
-void DistantNebulaBgEffect :: render(float vx, float vy)
+void DistantNebulaBgEffect :: Render(float vx, float vy)
 { 
    	drawDynamic(texOb, vec2f(center.x - vx*distance_rate, center.y - vy*distance_rate), angle_inD, center.z);
 }

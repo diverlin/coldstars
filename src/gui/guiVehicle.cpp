@@ -43,7 +43,7 @@ void GuiVehicle :: update()
 
 	for(unsigned int i = 0; i < vehicle->slot_total_vec.size(); i++)
 	{ 
-		if (vehicle->slot_total_vec[i]->interaction(player->getCursor()->getMousePos().x, (player->getScreen()->getHeight() - player->getCursor()->getMousePos().y)) == true)
+		if (vehicle->slot_total_vec[i]->InteractionCheck(player->getCursor()->getMousePos().x, (player->getScreen()->getHeight() - player->getCursor()->getMousePos().y)) == true)
 		{  
 			if (lmb == true)
 			{
@@ -64,14 +64,14 @@ void GuiVehicle :: update()
                         
 
 	// GATE SLOT
-	if (vehicle->GetGateSlot()->interaction(player->getCursor()->getMousePos().x, (player->getScreen()->getHeight() - player->getCursor()->getMousePos().y)) == true)  
+	if (vehicle->GetGateSlot()->InteractionCheck(player->getCursor()->getMousePos().x, (player->getScreen()->getHeight() - player->getCursor()->getMousePos().y)) == true)  
 	{
 		//// DROP ITEM TO OUTERSPACE ////
 		if ( (lmb == true) and (store == NULL) )
 		{
 			if (player->getCursor()->getSlot()->GetEquipedStatus() == true)
 			{
-				player->getCursor()->getSlot()->dropItemToSpace();	
+				player->getCursor()->getSlot()->DropItemToSpace();	
 			} 
 		}
 	}
@@ -80,7 +80,7 @@ void GuiVehicle :: update()
 
 
 
-void GuiVehicle :: render() const
+void GuiVehicle :: Render() const
 {
 	Vehicle* vehicle = player->getNpc()->getScanTarget();
 
@@ -88,10 +88,10 @@ void GuiVehicle :: render() const
 
 	for(unsigned int i = 0; i < vehicle->slot_total_vec.size(); i++)
 	{
-		vehicle->slot_total_vec[i]->render(-1);
+		vehicle->slot_total_vec[i]->Render(-1);
 	}
 	
-	vehicle->GetGateSlot()->render(-1);
+	vehicle->GetGateSlot()->Render(-1);
 }
 
 
@@ -101,9 +101,9 @@ void GuiVehicle :: renderFocusedItemInfo() const
 
 	for(unsigned int i = 0; i < vehicle->slot_total_vec.size(); i++)
 	{ 
-		if (vehicle->slot_total_vec[i]->interaction(player->getCursor()->getMousePos().x, (player->getScreen()->getHeight()  - player->getCursor()->getMousePos().y)) == true)
+		if (vehicle->slot_total_vec[i]->InteractionCheck(player->getCursor()->getMousePos().x, (player->getScreen()->getHeight()  - player->getCursor()->getMousePos().y)) == true)
 		{  
-			vehicle->slot_total_vec[i]->renderItemInfo();
+			vehicle->slot_total_vec[i]->RenderItemInfo();
 		}
 	}
 }

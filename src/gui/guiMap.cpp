@@ -75,7 +75,7 @@ bool GuiMap :: update()
 
 
 
-void GuiMap :: render()
+void GuiMap :: Render()
 {
     	TextureOb* texOb_textBg = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::TEXT_BACKGROUND_ID);
     	Galaxy* galaxy = player->getNpc()->GetStarSystem()->getGalaxy();

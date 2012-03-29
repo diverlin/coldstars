@@ -28,7 +28,7 @@ class Goverment
                 ~Goverment();
                 
                 void update();
-                void render(Player*) const;
+                void Render(Player*) const;
         
         private:
                 TextureOb* texOb_background;

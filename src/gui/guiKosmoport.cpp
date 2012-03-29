@@ -125,7 +125,7 @@ void GuiKosmoport :: resetInfoFlags()
 }
        			
 		
-void GuiKosmoport :: mouseInteraction()
+void GuiKosmoport :: mouseInteractionCheck()
 {
      	int mxvp = player->getCursor()->getMousePos().x;
      	int myvp = player->getScreen()->getHeight() - player->getCursor()->getMousePos().y;         
@@ -133,7 +133,7 @@ void GuiKosmoport :: mouseInteraction()
 
     	for (unsigned int i = 0; i< button_common_pList.size(); i++)
 	{
-       		if (button_common_pList[i]->interaction(mxvp, myvp) == true)
+       		if (button_common_pList[i]->InteractionCheck(mxvp, myvp) == true)
        		{
        		        button_common_pList[i]->setShowInfoFlag(true);
        			if (lmb == true)
@@ -149,7 +149,7 @@ void GuiKosmoport :: mouseInteraction()
     	{
      		for (unsigned int i = 0; i< button_angar_pList.size(); i++)
 		{
-       			if (button_angar_pList[i]->interaction(mxvp, myvp) == true)
+       			if (button_angar_pList[i]->InteractionCheck(mxvp, myvp) == true)
        			{
        		        	button_angar_pList[i]->setShowInfoFlag(true);
        				if (lmb == true)
@@ -180,14 +180,14 @@ void GuiKosmoport :: renderInternal() const
    
     	for (unsigned int i = 0; i< button_common_pList.size(); i++)
 	{
-       		button_common_pList[i]->render();
+       		button_common_pList[i]->Render();
         }
 
     	if (active_screen_id == GUI::SCREEN::ANGAR_ID)
     	{
     		for (unsigned int i = 0; i< button_angar_pList.size(); i++)
 		{
-       			button_angar_pList[i]->render();
+       			button_angar_pList[i]->Render();
         	}
     	} 
 }
@@ -223,11 +223,11 @@ void GuiKosmoport :: renderInfo() const
 void GuiKosmoport :: update()
 {
         resetInfoFlags(); 
-        mouseInteraction(); 
+        mouseInteractionCheck(); 
 }
                 
                 
-void GuiKosmoport :: render() const
+void GuiKosmoport :: Render() const
 {
         resetRenderTransformation();
         

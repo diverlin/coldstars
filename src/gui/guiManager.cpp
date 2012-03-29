@@ -71,10 +71,10 @@ void GuiManager :: renderInStore() const
 	
 	enable_BLEND();
 
-		gui_vehicle->render();
-		gui_store->render();
+		gui_vehicle->Render();
+		gui_store->Render();
 		
-		player->getCursor()->getSlot()->renderEquipedItem();	
+		player->getCursor()->getSlot()->RenderEquipedItem();	
 
 		gui_store->renderFocusedItemInfo();	
 		if (player->getCursor()->getSlot()->GetEquipedStatus() == false)
@@ -91,10 +91,10 @@ void GuiManager :: renderInScan() const
 	resetRenderTransformation();
 	enable_BLEND();
 
-		gui_vehicle->render();
-		gui_skill->render();
+		gui_vehicle->Render();
+		gui_skill->Render();
 		
-		player->getCursor()->getSlot()->renderEquipedItem();		
+		player->getCursor()->getSlot()->RenderEquipedItem();		
 	
 		if (player->getCursor()->getSlot()->GetEquipedStatus() == false)
 		{

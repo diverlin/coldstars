@@ -84,7 +84,7 @@ void GuiSkill :: update()
 
 	for (unsigned int i = 0; i < button_vec.size(); i++)
 	{
-		if (button_vec[i]->interaction(mxvp, myvp) == true)
+		if (button_vec[i]->InteractionCheck(mxvp, myvp) == true)
 		{
 	       		if (lmb == true)
         		{
@@ -114,7 +114,7 @@ void GuiSkill :: update()
 }
 
 
-void GuiSkill :: render() const
+void GuiSkill :: Render() const
 {
 	Skill* skill = player->getNpc()->getScanTarget()->GetOwnerNpc()->getSkill();
      	TextureOb* texOb_skill = g_UNIQUE_TEXTURE_COLLECTOR.texOb_skill;
@@ -124,7 +124,7 @@ void GuiSkill :: render() const
 
  	for (unsigned int bi = 0; bi < button_vec.size(); bi++)
 	{
-		button_vec[bi]->render();
+		button_vec[bi]->Render();
 
 		switch(button_vec[bi]->GetSubTypeId())		
 		{

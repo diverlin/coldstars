@@ -93,7 +93,7 @@ void Particle :: update()
     	}
 }
 
-void Particle :: render() const
+void Particle :: Render() const
 {
 	if (is_alive == true)
 	{

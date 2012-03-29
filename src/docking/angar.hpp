@@ -32,8 +32,8 @@ class Angar
 
                 void mouseControl(Player*);
 
-                void render(Player*) const;
-                void renderItemInfo(Player*) const;
+                void Render(Player*) const;
+                void RenderItemInfo(Player*) const;
 
                 int getFreePlatformTotalNum();
                 

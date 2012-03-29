@@ -28,7 +28,7 @@ class GuiMap
      		~GuiMap();
    
      		bool update();
-     		void render();
+     		void Render();
 
      	private:
      		Player* player;

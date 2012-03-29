@@ -35,7 +35,7 @@ class Store
                 bool sellItemFromSlot(Npc*, ItemSlot*);		
                 bool buyItemFromSlot(Npc*, ItemSlot*); 
 
-                void render() const;
+                void Render() const;
                 
         public:
                 TextureOb* texOb_background; 

@@ -98,7 +98,7 @@ bool Vehicle::AddItemToOtsec(BaseItem* item)
 	{
 		if (!slot_otsec_vec[i]->GetEquipedStatus())
 		{
-			slot_otsec_vec[i]->insertItem(item);
+			slot_otsec_vec[i]->InsertItem(item);
 			return true;
 		}
 	}
@@ -585,7 +585,7 @@ void Vehicle::RenderDriveTrail() const
 
 void Vehicle::RenderShield() const
 {
-     	protection_complex->GetShieldEffect()->render();
+     	protection_complex->GetShieldEffect()->Render();
 }
 
 void Vehicle::RenderRadarRange()
@@ -639,7 +639,7 @@ void Vehicle::DropRandomItemToSpace()
 	{
 		unsigned int _rand = getRandInt(0, _equiped_slot_vec.size());
 	
-		_equiped_slot_vec[_rand]->dropItemToSpace();
+		_equiped_slot_vec[_rand]->DropItemToSpace();
 	}
 		
 }
@@ -675,7 +675,7 @@ void Vehicle::GrappleMicroProgramm()
        						_slot = GetEmptyOtsecSlot();
        						if (_slot != NULL)
        						{
-       							_slot->insertItem(_goodsPack);
+       							_slot->InsertItem(_goodsPack);
        							_mineral->SetPlaceTypeId(NONE_ID);
        						}
        					}
@@ -689,7 +689,7 @@ void Vehicle::GrappleMicroProgramm()
                                         Container* _container = (Container*)grapple_slot->GetGrappleEquipment()->target_vec[i];
        				        if (_slot != NULL)
        					{
-       						_slot->extractContainer(_container);
+       						_slot->ExtractItemFromContainer(_container);
        						_container->SetPlaceTypeId(NONE_ID);
        					}
 					grapple_slot->GetGrappleEquipment()->addToRemoveQueue(_container);
@@ -702,7 +702,7 @@ void Vehicle::GrappleMicroProgramm()
                                         Vehicle* _vehicle = (Vehicle*)grapple_slot->GetGrappleEquipment()->target_vec[i];
        				        if (_slot != NULL)
        					{
-       						//_slot->insertItem(_vehicle);
+       						//_slot->InsertItem(_vehicle);
        						starsystem->addToRemoveFromOuterSpaceQueue(_vehicle);
        					}
 					grapple_slot->GetGrappleEquipment()->addToRemoveQueue(_vehicle);

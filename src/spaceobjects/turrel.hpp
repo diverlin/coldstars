@@ -44,7 +44,7 @@ class Turrel
                 
                 bool fireEvent(bool);
 
-                void render(float);                 
+                void Render(float);                 
                
         private:
                 TextureOb* texOb;

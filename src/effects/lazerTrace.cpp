@@ -97,7 +97,7 @@ void LazerTraceEffect :: updateAngleAndLen()
 }
 
 
-void LazerTraceEffect :: render()
+void LazerTraceEffect :: Render()
 {
 	if (is_alive == true)
 	{

@@ -28,7 +28,7 @@ class TrailEffect : public BaseParticleSystem
        		virtual ~TrailEffect();
        
        		virtual void update();
-       		virtual void render();
+       		virtual void Render();
        		
                 void createParticles();
                 void updateVelocity();

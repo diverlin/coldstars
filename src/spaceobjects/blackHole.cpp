@@ -55,9 +55,9 @@ void BlackHole :: renderInfo_inSpace(vec2f scroll_coords)
 }
 
 
-void BlackHole :: render() const
+void BlackHole :: Render() const
 {
-	//effect->render();
+	//effect->Render();
 }
 
 BlackHole* getNewBlackHole()
