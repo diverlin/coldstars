@@ -47,7 +47,7 @@ void Store :: createSlots()
                         ItemSlot* slot = new ItemSlot();
                         slot->SetSubTypeId(SLOT::CARGO_ID);
                         slot->SetTextureOb(texOb_slot);   
-                        slot->setRect(x0 + clm_act * 1.1 * GUI::SLOT::WIDTH_FOR_STORE, 
+                        slot->SetRect(x0 + clm_act * 1.1 * GUI::SLOT::WIDTH_FOR_STORE, 
                         	      y0 + row_act * 1.1 * GUI::SLOT::HEIGHT_FOR_STORE,
                         	      GUI::SLOT::WIDTH_FOR_STORE,
                                       GUI::SLOT::HEIGHT_FOR_STORE);
@@ -65,7 +65,7 @@ ItemSlot* Store :: getEmptySlot()
 {
         for (unsigned int si = 0; si < slot_vec.size(); si++)
         {
-                if (slot_vec[si]->getEquipedStatus() == false)
+                if (slot_vec[si]->GetEquipedStatus() == false)
                         return slot_vec[si];
         }
       
@@ -84,7 +84,7 @@ bool Store::add(BaseItem* item)
 
 bool Store :: sellItemFromSlot(Npc* npc, ItemSlot* slot)
 {
-	unsigned int price = slot->getItem()->GetPrice();
+	unsigned int price = slot->GetItem()->GetPrice();
         if (npc->getCredits() >= price)
         {
         	npc->getVehicle()->GetEmptyOtsecSlot()->SwapItemWith(slot); 
@@ -98,7 +98,7 @@ bool Store :: sellItemFromSlot(Npc* npc, ItemSlot* slot)
 
 bool Store :: buyItemFromSlot(Npc* npc, ItemSlot* slot)
 {
-	unsigned int price = slot->getItem()->GetPrice();
+	unsigned int price = slot->GetItem()->GetPrice();
 	
 	ItemSlot* free_slot = getEmptySlot();
 	

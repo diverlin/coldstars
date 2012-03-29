@@ -194,7 +194,7 @@ RocketBullet* VehicleBuilder::GetNewRocket(BulletData data_bullet, ItemSlot* slo
         data_life.garbage_ready = false;
         data_life.armor = data_bullet.armor;        
 
-    	RocketBullet* rocket = new RocketBullet(data_bullet, slot->getTurrel()->getTarget(), slot->getOwnerVehicle()->GetId());
+    	RocketBullet* rocket = new RocketBullet(data_bullet, slot->GetTurrel()->getTarget(), slot->GetOwnerVehicle()->GetId());
          
         rocket->SetIdData(data_id);
         rocket->SetLifeData(data_life);
@@ -208,13 +208,13 @@ RocketBullet* VehicleBuilder::GetNewRocket(BulletData data_bullet, ItemSlot* slo
         //CreateWeaponsComplex(rocket);
         //CreateProtectionComplex(rocket);	
          
-        if ( (slot->getOwnerVehicle()->data_korpus.render_TURRELS == true) and (force_center_start == false))
+        if ( (slot->GetOwnerVehicle()->data_korpus.render_TURRELS == true) and (force_center_start == false))
     	{
-        	rocket->place(slot->getTurrel()->getPoints()->getCenter(), slot->getTurrel()->getPoints()->getAngleDegree(), offset);
+        	rocket->place(slot->GetTurrel()->getPoints()->getCenter(), slot->GetTurrel()->getPoints()->getAngleDegree(), offset);
         }
         else
     	{
-         	rocket->place(slot->getOwnerVehicle()->GetPoints().getCenter(), slot->getOwnerVehicle()->GetPoints().getAngleDegree(), offset);
+         	rocket->place(slot->GetOwnerVehicle()->GetPoints().getCenter(), slot->GetOwnerVehicle()->GetPoints().getAngleDegree(), offset);
     	}
         return rocket;
 }

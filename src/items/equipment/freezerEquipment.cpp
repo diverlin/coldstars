@@ -58,7 +58,7 @@ void FreezerEquipment :: countPrice()
 /* virtual */
 void FreezerEquipment :: UpdateOwnerAbilities()
 {
-    	slot->getOwnerVehicle()->UpdateFreezeAbility();
+    	slot->GetOwnerVehicle()->UpdateFreezeAbility();
 }
 
       

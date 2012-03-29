@@ -35,7 +35,7 @@ class Button
        		
        		void setShowInfoFlag(bool);       		       		
        		bool getShowInfoFlag() const;
-       		Rect getRect() const;
+       		Rect GetRect() const;
        		TextureOb* GetTextureOb();
        		int GetTypeId() const;
        		int GetSubTypeId() const;

@@ -77,7 +77,7 @@ void GuiManager :: renderInStore() const
 		player->getCursor()->getSlot()->renderEquipedItem();	
 
 		gui_store->renderFocusedItemInfo();	
-		if (player->getCursor()->getSlot()->getEquipedStatus() == false)
+		if (player->getCursor()->getSlot()->GetEquipedStatus() == false)
 		{
 			gui_vehicle->renderFocusedItemInfo();
 		}
@@ -96,7 +96,7 @@ void GuiManager :: renderInScan() const
 		
 		player->getCursor()->getSlot()->renderEquipedItem();		
 	
-		if (player->getCursor()->getSlot()->getEquipedStatus() == false)
+		if (player->getCursor()->getSlot()->GetEquipedStatus() == false)
 		{
 			gui_vehicle->renderFocusedItemInfo();
 		}

@@ -80,10 +80,10 @@ void Turrel :: validateTarget()
 
 bool Turrel :: isAmmoOk() const
 {
-	switch(slot->getItem()->GetSubTypeId())
+	switch(slot->GetItem()->GetSubTypeId())
 	{
     		case EQUIPMENT::LAZER_ID:  { /*if check energy */  return true; break; }
-    		case EQUIPMENT::ROCKET_ID: { if (slot->getRocketEquipment()->getAmmo() > 0) return true; break; }
+    		case EQUIPMENT::ROCKET_ID: { if (slot->GetRocketEquipment()->getAmmo() > 0) return true; break; }
 	}
 	
     	return false;           
@@ -94,19 +94,19 @@ bool Turrel :: isAmmoOk() const
 
 bool Turrel :: fireEvent(bool show_effect)
 {
-	switch(slot->getItem()->GetSubTypeId())
+	switch(slot->GetItem()->GetSubTypeId())
 	{
     		case EQUIPMENT::LAZER_ID:
     		{   
-       			slot->getLazerEquipment()->fireEvent_TRUE();
+       			slot->GetLazerEquipment()->fireEvent_TRUE();
 
 			switch(target->GetTypeId())
 			{
-				case ENTITY::SHIP_ID:      { ((Vehicle*)target)->Hit(slot->getLazerEquipment()->getDamage(), show_effect);   return true; break; }
-       				case ENTITY::ASTEROID_ID:  { ((Asteroid*)target)->Hit(slot->getLazerEquipment()->getDamage(), show_effect);  return true; break; }
-				case ENTITY::MINERAL_ID:   { ((Mineral*)target)->Hit(slot->getLazerEquipment()->getDamage(), show_effect);   return true; break; }
-				case ENTITY::CONTAINER_ID: { ((Container*)target)->Hit(slot->getLazerEquipment()->getDamage(), show_effect); return true; break; }
-				case ENTITY::BOMB_ID:      { ((Container*)target)->Hit(slot->getLazerEquipment()->getDamage(), show_effect);      return true; break; }
+				case ENTITY::SHIP_ID:      { ((Vehicle*)target)->Hit(slot->GetLazerEquipment()->getDamage(), show_effect);   return true; break; }
+       				case ENTITY::ASTEROID_ID:  { ((Asteroid*)target)->Hit(slot->GetLazerEquipment()->getDamage(), show_effect);  return true; break; }
+				case ENTITY::MINERAL_ID:   { ((Mineral*)target)->Hit(slot->GetLazerEquipment()->getDamage(), show_effect);   return true; break; }
+				case ENTITY::CONTAINER_ID: { ((Container*)target)->Hit(slot->GetLazerEquipment()->getDamage(), show_effect); return true; break; }
+				case ENTITY::BOMB_ID:      { ((Container*)target)->Hit(slot->GetLazerEquipment()->getDamage(), show_effect);      return true; break; }
        			}
        			
        			break;
@@ -114,7 +114,7 @@ bool Turrel :: fireEvent(bool show_effect)
 
     		case EQUIPMENT::ROCKET_ID:
     		{       
-                	slot->getRocketEquipment()->fireEvent();
+                	slot->GetRocketEquipment()->fireEvent();
                 	return true; break;              
     		}
 

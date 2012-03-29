@@ -90,7 +90,7 @@ void RocketEquipment :: countPrice()
 
 void RocketEquipment :: UpdateOwnerAbilities()
 {      
-    	slot->getOwnerVehicle()->UpdateFireAbility();
+    	slot->GetOwnerVehicle()->UpdateFireAbility();
 }
 
 
@@ -133,7 +133,7 @@ void RocketEquipment :: fireEvent()
 {
 	int num = 0;
     	RocketBullet* rocket1 = VehicleBuilder::Instance().GetNewRocket(data_bullet, slot, 0.0f);
-    	slot->getOwnerVehicle()->GetStarSystem()->addToSpace(rocket1);
+    	slot->GetOwnerVehicle()->GetStarSystem()->addToSpace(rocket1);
     	num++;
 
     	//RocketBullet* rocket2 = getNewRocketBullet(data_bullet, slot, +2);

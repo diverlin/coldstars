@@ -37,7 +37,7 @@ void BaseItem::Deterioration()
     	if (condition <= 0)
     	{
        		is_DAMAGED = true;
-       		if (slot->getOwnerVehicle() != NULL) 
+       		if (slot->GetOwnerVehicle() != NULL) 
        		{  
            		UpdateOwnerAbilities();
            	}
@@ -50,7 +50,7 @@ void BaseItem::Repair()
     	if (is_DAMAGED == true)
     	{
         	is_DAMAGED = false;
-        	if (slot->getOwnerVehicle() != NULL)   
+        	if (slot->GetOwnerVehicle() != NULL)   
         	{
            		UpdateOwnerAbilities();
            	}

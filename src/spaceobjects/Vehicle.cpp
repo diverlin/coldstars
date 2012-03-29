@@ -96,7 +96,7 @@ bool Vehicle::AddItemToOtsec(BaseItem* item)
 {
 	for (unsigned int i=0; i<slot_otsec_vec.size(); i++)
 	{
-		if (!slot_otsec_vec[i]->getEquipedStatus())
+		if (!slot_otsec_vec[i]->GetEquipedStatus())
 		{
 			slot_otsec_vec[i]->insertItem(item);
 			return true;
@@ -135,7 +135,7 @@ ItemSlot* Vehicle::GetEmptyOtsecSlot()
 {
       	for (unsigned int i = 0; i < slot_otsec_vec.size(); i++)
       	{
-          	if (slot_otsec_vec[i]->getEquipedStatus() == false)
+          	if (slot_otsec_vec[i]->GetEquipedStatus() == false)
           	{
              		return slot_otsec_vec[i];
              	}
@@ -149,11 +149,11 @@ ItemSlot* Vehicle::GetCargoSlotWithGoods(int requested_goods_subtype_id)
 {
       	for (unsigned int i = 0; i < slot_otsec_vec.size(); i++)
       	{
-          	if (slot_otsec_vec[i]->getEquipedStatus() == true)
+          	if (slot_otsec_vec[i]->GetEquipedStatus() == true)
           	{
-          		if (slot_otsec_vec[i]->getItem()->GetTypeId() == ENTITY::GOODS_ID)
+          		if (slot_otsec_vec[i]->GetItem()->GetTypeId() == ENTITY::GOODS_ID)
           		{
-          			if (slot_otsec_vec[i]->getItem()->GetSubTypeId() == requested_goods_subtype_id)
+          			if (slot_otsec_vec[i]->GetItem()->GetSubTypeId() == requested_goods_subtype_id)
           			{
           				return slot_otsec_vec[i];
           			}
@@ -310,9 +310,9 @@ void Vehicle::RecalculateMass()
 
     	for (unsigned int i = 0; i < slot_total_vec.size(); i++)
     	{
-        	if (slot_total_vec[i]->getEquipedStatus() == true)
+        	if (slot_total_vec[i]->GetEquipedStatus() == true)
         	{
-           		mass += slot_total_vec[i]->getItem()->GetMass();  
+           		mass += slot_total_vec[i]->GetItem()->GetMass();  
            	}    
     	}
 }
@@ -328,11 +328,11 @@ void Vehicle::UpdateDriveAbility()
      	propetries.speed = 0;
      	ableTo.DRIVE = false;
 
-     	if (drive_complex->GetDriveSlot().getEquipedStatus() == true) 
+     	if (drive_complex->GetDriveSlot().GetEquipedStatus() == true) 
      	{
-        	if (drive_complex->GetDriveSlot().getDriveEquipment()->GetCondition() > 0)  
+        	if (drive_complex->GetDriveSlot().GetDriveEquipment()->GetCondition() > 0)  
         	{
-           		float val = (drive_complex->GetDriveSlot().getDriveEquipment()->getSpeed() - mass/70);
+           		float val = (drive_complex->GetDriveSlot().GetDriveEquipment()->getSpeed() - mass/70);
            		if (val > 0)
            		{ 
               			propetries.speed = val;
@@ -350,11 +350,11 @@ void Vehicle::UpdateDriveAbility()
 
 void Vehicle::UpdateRadarAbility()
 {
-   	if (radar_slot->getEquipedStatus() == true) 
+   	if (radar_slot->GetEquipedStatus() == true) 
    	{
-      		if (radar_slot->getRadarEquipment()->GetCondition() > 0)  
+      		if (radar_slot->GetRadarEquipment()->GetCondition() > 0)  
       		{
-          		propetries.radius = radar_slot->getRadarEquipment()->getRadius();
+          		propetries.radius = radar_slot->GetRadarEquipment()->getRadius();
           		ableTo.RADAR = true;
       		}
        		else
@@ -377,15 +377,15 @@ void Vehicle::UpdateJumpAbility()
 	propetries.hyper = 0;
      	ableTo.HJUMP = false;
 
-     	if (drive_complex->GetDriveSlot().getEquipedStatus() == true)
-        	if (drive_complex->GetDriveSlot().getDriveEquipment()->GetCondition() > 0)
-           		if (drive_complex->GetBakSlot().getEquipedStatus() == true)
-              			if (drive_complex->GetBakSlot().getBakEquipment()->GetCondition() > 0)
+     	if (drive_complex->GetDriveSlot().GetEquipedStatus() == true)
+        	if (drive_complex->GetDriveSlot().GetDriveEquipment()->GetCondition() > 0)
+           		if (drive_complex->GetBakSlot().GetEquipedStatus() == true)
+              			if (drive_complex->GetBakSlot().GetBakEquipment()->GetCondition() > 0)
               			{
-                 			if (drive_complex->GetDriveSlot().getDriveEquipment()->getHyper() > drive_complex->GetBakSlot().getBakEquipment()->getFuel())
-                    				propetries.hyper = drive_complex->GetDriveSlot().getDriveEquipment()->getHyper();
+                 			if (drive_complex->GetDriveSlot().GetDriveEquipment()->getHyper() > drive_complex->GetBakSlot().GetBakEquipment()->getFuel())
+                    				propetries.hyper = drive_complex->GetDriveSlot().GetDriveEquipment()->getHyper();
                  			else
-                    				propetries.hyper = drive_complex->GetBakSlot().getBakEquipment()->getFuel();
+                    				propetries.hyper = drive_complex->GetBakSlot().GetBakEquipment()->getFuel();
 
                  			ableTo.HJUMP = true;
               			}    
@@ -397,11 +397,11 @@ void Vehicle::UpdateEnergyAbility()
      	propetries.energy = 0;
      	ableTo.ENERGIZE = false;
 
-     	if (energizer_slot->getEquipedStatus() == true)
+     	if (energizer_slot->GetEquipedStatus() == true)
      	{
-        	if (energizer_slot->getEnergizerEquipment()->GetCondition() > 0)
+        	if (energizer_slot->GetEnergizerEquipment()->GetCondition() > 0)
         	{
-           		propetries.energy = energizer_slot->getEnergizerEquipment()->getEnergy();
+           		propetries.energy = energizer_slot->GetEnergizerEquipment()->getEnergy();
            		ableTo.ENERGIZE = true;
         	}
         }
@@ -415,11 +415,11 @@ void Vehicle::UpdateProtectionAbility()
         ableTo.PROTECT = false;
 
 
-     	if (protection_complex->GetProtectorSlot().getEquipedStatus() == true)
+     	if (protection_complex->GetProtectorSlot().GetEquipedStatus() == true)
      	{
-        	if (protection_complex->GetProtectorSlot().getProtectorEquipment()->GetCondition() > 0)
+        	if (protection_complex->GetProtectorSlot().GetProtectorEquipment()->GetCondition() > 0)
         	{
-           		propetries.protection += protection_complex->GetProtectorSlot().getProtectorEquipment()->getProtection();
+           		propetries.protection += protection_complex->GetProtectorSlot().GetProtectorEquipment()->getProtection();
            		ableTo.PROTECT = true;
         	}       
      	}   
@@ -433,11 +433,11 @@ void Vehicle::UpdateRepairAbility()
      	propetries.repair = 0;
      	ableTo.REPAIR = false;
 
-     	if (droid_slot->getEquipedStatus() == true)
+     	if (droid_slot->GetEquipedStatus() == true)
      	{
-        	if (droid_slot->getDroidEquipment()->GetCondition() > 0)
+        	if (droid_slot->GetDroidEquipment()->GetCondition() > 0)
         	{
-            		propetries.repair = droid_slot->getDroidEquipment()->getRepair();
+            		propetries.repair = droid_slot->GetDroidEquipment()->getRepair();
             		ableTo.REPAIR = true;
         	}
         }
@@ -450,7 +450,7 @@ void Vehicle::SelfRepairEvent()
 		if (data_life.armor < data_korpus.armor)
 		{
 			data_life.armor += propetries.repair;
-			droid_slot->getDroidEquipment()->Deterioration();
+			droid_slot->GetDroidEquipment()->Deterioration();
 		}
 		
 		if (data_life.armor > data_korpus.armor)
@@ -465,11 +465,11 @@ void Vehicle::UpdateFreezeAbility()
      	propetries.freeze = 0;
      	ableTo.FREEZE = false;
 
-     	if (freezer_slot->getEquipedStatus() == true)
+     	if (freezer_slot->GetEquipedStatus() == true)
      	{
-        	if (freezer_slot->getFreezerEquipment()->GetCondition() > 0)
+        	if (freezer_slot->GetFreezerEquipment()->GetCondition() > 0)
         	{
-           		propetries.freeze = freezer_slot->getFreezerEquipment()->getFreeze();
+           		propetries.freeze = freezer_slot->GetFreezerEquipment()->getFreeze();
            		ableTo.FREEZE = true;
         	}
         }
@@ -481,8 +481,8 @@ void Vehicle::UpdateGrabAbility()
      	ableTo.GRAB = false;
 
      	if (data_korpus.inhibit_GRAPPLE == false)
-        	if (grapple_slot->getEquipedStatus() == true)
-           		if (grapple_slot->getGrappleEquipment()->GetCondition() > 0)
+        	if (grapple_slot->GetEquipedStatus() == true)
+           		if (grapple_slot->GetGrappleEquipment()->GetCondition() > 0)
               			ableTo.GRAB = true;
 }
 
@@ -492,11 +492,11 @@ void Vehicle::UpdateScanAbility()
      	propetries.scan = 0;
      	ableTo.SCAN = false;
 
-     	if (scaner_slot->getEquipedStatus() == true)
+     	if (scaner_slot->GetEquipedStatus() == true)
      	{
-        	if (scaner_slot->getScanerEquipment()->GetCondition() > 0)
+        	if (scaner_slot->GetScanerEquipment()->GetCondition() > 0)
         	{
-           		propetries.scan = scaner_slot->getScanerEquipment()->getScan();
+           		propetries.scan = scaner_slot->GetScanerEquipment()->getScan();
            		ableTo.SCAN = true;
         	}
         }
@@ -510,9 +510,9 @@ void Vehicle::SetMaxArmor()
 
 void Vehicle::SetMaxFuel()
 {
-     	if (drive_complex->GetBakSlot().getEquipedStatus() == true)
+     	if (drive_complex->GetBakSlot().GetEquipedStatus() == true)
      	{
-        	drive_complex->GetBakSlot().getBakEquipment()->fill();
+        	drive_complex->GetBakSlot().GetBakEquipment()->fill();
         }
 }
 
@@ -521,7 +521,7 @@ void Vehicle::SetMaxFuel()
 std::string Vehicle::returnProtectionStr()
 {
     	if (ableTo.PROTECT == true)
-       		return int2str(protection_complex->GetProtectorSlot().getProtectorEquipment()->getProtection()) + '+' + int2str(data_korpus.protection);
+       		return int2str(protection_complex->GetProtectorSlot().GetProtectorEquipment()->getProtection()) + '+' + int2str(data_korpus.protection);
     	else
        		return int2str(data_korpus.protection);
 }
@@ -544,12 +544,12 @@ void Vehicle::RenderInfo_inSpace(vec2f scroll_coords)
 
 void Vehicle::RenderGrappleTrail() const
 {
-        for (unsigned int i = 0; i<grapple_slot->getGrappleEquipment()->target_vec.size(); i++)
+        for (unsigned int i = 0; i<grapple_slot->GetGrappleEquipment()->target_vec.size(); i++)
         {
-                //if (grapple_slot->getGrappleEquipment()->target_vec[i]->getValid() == true)
+                //if (grapple_slot->GetGrappleEquipment()->target_vec[i]->getValid() == true)
                 {              
-                    	float xl = grapple_slot->getGrappleEquipment()->target_vec[i]->GetPoints().getpCenter()->x - points.getCenter().x;
-                        float yl = grapple_slot->getGrappleEquipment()->target_vec[i]->GetPoints().getpCenter()->y - points.getCenter().y;
+                    	float xl = grapple_slot->GetGrappleEquipment()->target_vec[i]->GetPoints().getpCenter()->x - points.getCenter().x;
+                        float yl = grapple_slot->GetGrappleEquipment()->target_vec[i]->GetPoints().getpCenter()->y - points.getCenter().y;
 
                         float len = sqrt((xl*xl) + (yl*yl));
 
@@ -629,7 +629,7 @@ void Vehicle::DropRandomItemToSpace()
 	
 	for (unsigned int i = 0; i<slot_total_vec.size(); i++)
 	{
-		if (slot_total_vec[i]->getEquipedStatus() == true)
+		if (slot_total_vec[i]->GetEquipedStatus() == true)
 		{
 			_equiped_slot_vec.push_back(slot_total_vec[i]);
 		}
@@ -646,26 +646,26 @@ void Vehicle::DropRandomItemToSpace()
 
 void Vehicle::GrappleMicroProgramm()
 {
-        grapple_slot->getGrappleEquipment()->validateTargets();  
+        grapple_slot->GetGrappleEquipment()->validateTargets();  
                 
-        for (unsigned int i = 0; i < grapple_slot->getGrappleEquipment()->target_vec.size(); i++)
+        for (unsigned int i = 0; i < grapple_slot->GetGrappleEquipment()->target_vec.size(); i++)
         {
-               	grapple_slot->getGrappleEquipment()->target_vec[i]->MovingByExternalForce(points.getCenter(), grapple_slot->getGrappleEquipment()->getStrength());        	
+               	grapple_slot->GetGrappleEquipment()->target_vec[i]->MovingByExternalForce(points.getCenter(), grapple_slot->GetGrappleEquipment()->getStrength());        	
        	
-       		float dist = distBetweenPoints(points.getCenter(), grapple_slot->getGrappleEquipment()->target_vec[i]->GetPoints().getCenter() ); 
+       		float dist = distBetweenPoints(points.getCenter(), grapple_slot->GetGrappleEquipment()->target_vec[i]->GetPoints().getCenter() ); 
        		if (dist < GetCollisionRadius()/4.0f)
        		{
-       			switch(grapple_slot->getGrappleEquipment()->target_vec[i]->GetTypeId())
+       			switch(grapple_slot->GetGrappleEquipment()->target_vec[i]->GetTypeId())
        			{
        				case ENTITY::MINERAL_ID:
        				{
        					ItemSlot* _slot;
-                                        Mineral* _mineral = (Mineral*)grapple_slot->getGrappleEquipment()->target_vec[i];
+                                        Mineral* _mineral = (Mineral*)grapple_slot->GetGrappleEquipment()->target_vec[i];
                                         
        					_slot = GetCargoSlotWithGoods(ENTITY::MINERAL_ID);
        					if (_slot != NULL)
        					{
-       						_slot->getGoodsPack()->increase(_mineral->GetMass());
+       						_slot->GetGoodsPack()->increase(_mineral->GetMass());
        						_mineral->SetPlaceTypeId(NONE_ID);
        					}
        					else
@@ -679,33 +679,33 @@ void Vehicle::GrappleMicroProgramm()
        							_mineral->SetPlaceTypeId(NONE_ID);
        						}
        					}
-       					grapple_slot->getGrappleEquipment()->addToRemoveQueue(_mineral);
+       					grapple_slot->GetGrappleEquipment()->addToRemoveQueue(_mineral);
        					break;			
        				}
         			
       				case ENTITY::CONTAINER_ID:
        				{
        					ItemSlot* _slot = GetEmptyOtsecSlot();
-                                        Container* _container = (Container*)grapple_slot->getGrappleEquipment()->target_vec[i];
+                                        Container* _container = (Container*)grapple_slot->GetGrappleEquipment()->target_vec[i];
        				        if (_slot != NULL)
        					{
        						_slot->extractContainer(_container);
        						_container->SetPlaceTypeId(NONE_ID);
        					}
-					grapple_slot->getGrappleEquipment()->addToRemoveQueue(_container);
+					grapple_slot->GetGrappleEquipment()->addToRemoveQueue(_container);
        					break;
        				}        			
         				
        				case ENTITY::SHIP_ID:
        				{
        					ItemSlot* _slot = GetEmptyOtsecSlot();
-                                        Vehicle* _vehicle = (Vehicle*)grapple_slot->getGrappleEquipment()->target_vec[i];
+                                        Vehicle* _vehicle = (Vehicle*)grapple_slot->GetGrappleEquipment()->target_vec[i];
        				        if (_slot != NULL)
        					{
        						//_slot->insertItem(_vehicle);
        						starsystem->addToRemoveFromOuterSpaceQueue(_vehicle);
        					}
-					grapple_slot->getGrappleEquipment()->addToRemoveQueue(_vehicle);
+					grapple_slot->GetGrappleEquipment()->addToRemoveQueue(_vehicle);
        					break;
        				}
        			}

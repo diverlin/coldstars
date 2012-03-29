@@ -29,7 +29,7 @@ ProtectionComplex::ProtectionComplex(Vehicle* vehicle)
  	protector_slot.SetSubTypeId(SLOT::PROTECTOR_ID); 
  	protector_slot.SetTextureOb(texOb_slot);
 	protector_slot.SetOwnerVehicle(vehicle);
-	protector_slot.setRect(vehicle->GetGuiRect().getCenter().x - 3*GUI::SLOT::WIDTH_FOR_SHIP, 
+	protector_slot.SetRect(vehicle->GetGuiRect().getCenter().x - 3*GUI::SLOT::WIDTH_FOR_SHIP, 
 			       vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
 			       GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
 				    

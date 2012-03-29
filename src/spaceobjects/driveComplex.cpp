@@ -30,7 +30,7 @@ DriveComplex :: DriveComplex(Vehicle* owner_vehicle)
 	drive_slot.SetSubTypeId(SLOT::DRIVE_ID); 
 	drive_slot.SetTextureOb(texOb_slot);
 	drive_slot.SetOwnerVehicle(owner_vehicle);
-	drive_slot.setRect(  owner_vehicle->GetGuiRect().getCenter().x - 5*GUI::SLOT::WIDTH_FOR_SHIP, 
+	drive_slot.SetRect(  owner_vehicle->GetGuiRect().getCenter().x - 5*GUI::SLOT::WIDTH_FOR_SHIP, 
 			      owner_vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
 			      GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
 				  
@@ -40,7 +40,7 @@ DriveComplex :: DriveComplex(Vehicle* owner_vehicle)
 	bak_slot.SetSubTypeId(SLOT::BAK_ID);
 	bak_slot.SetTextureOb(texOb_slot);
 	bak_slot.SetOwnerVehicle(owner_vehicle);	    
-	bak_slot.setRect(  owner_vehicle->GetGuiRect().getCenter().x - 5*GUI::SLOT::WIDTH_FOR_SHIP, 
+	bak_slot.SetRect(  owner_vehicle->GetGuiRect().getCenter().x - 5*GUI::SLOT::WIDTH_FOR_SHIP, 
 			    owner_vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
 			    GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
 				    

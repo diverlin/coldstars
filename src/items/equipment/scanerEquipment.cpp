@@ -59,7 +59,7 @@ void ScanerEquipment :: countPrice()
 /* virtual */
 void ScanerEquipment :: UpdateOwnerAbilities()
 {
-    	slot->getOwnerVehicle()->UpdateScanAbility();
+    	slot->GetOwnerVehicle()->UpdateScanAbility();
 }
 
 

@@ -179,7 +179,7 @@ void GrappleEquipment :: countPrice()
 /* virtual */
 void GrappleEquipment :: UpdateOwnerAbilities()
 {
-    	slot->getOwnerVehicle()->UpdateGrabAbility();
+    	slot->GetOwnerVehicle()->UpdateGrabAbility();
 }
 
 
