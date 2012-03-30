@@ -66,7 +66,7 @@ Player* getNewPlayer(Galaxy* galaxy)
 	vec2f center(-400, 400);
 	float angle = 0;  
 		
-	StarSystem* starsystem = galaxy->getRandomStarSystem();
+	StarSystem* starsystem = galaxy->GetRandomStarSystem();
 	starsystem->addToSpace(pship, center, angle, NULL);
         starsystem->addToSpace(pnpc);
         

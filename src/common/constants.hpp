@@ -55,8 +55,8 @@ namespace COLOR
 		RED_ID, GREEN_ID, BLUE_ID, YELLOW_ID, GREY_ID
 	};
 	
-	const Color4f DEFAULT;
-	
+	const Color4f DEFAULT4f;
+	const Color4i DEFAULT4i;	
 }
 
 

@@ -18,8 +18,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "../common/constants.hpp"
 
-Galaxy :: Galaxy()
+Galaxy::Galaxy()
 { 
+	id = g_ID_GENERATOR.getNextId();
+	
     	starsytem_counter = 0;
     	star_counter      = 0;
     	ship_counter      = 0;
@@ -38,13 +40,13 @@ Galaxy :: Galaxy()
 
 
 
-StarSystem* Galaxy :: getRandomStarSystem()
+StarSystem* Galaxy::GetRandomStarSystem()
 {
 	return STARSYSTEM_vec[getRandInt(0, STARSYSTEM_vec.size())];
 }
 
 
-StarSystem* Galaxy :: getRandomCapturedStarSystem()
+StarSystem* Galaxy::GetRandomCapturedStarSystem()
 {
 	std::vector<StarSystem*> ss_vec;
 	
@@ -70,7 +72,7 @@ void Galaxy::Update(int time)
 
 void Galaxy::SaveEvent() const
 {
-	std::string galaxy_root = "Galaxy 1.";
+	std::string galaxy_root = "Galaxy."+int2str(id);
 	for (unsigned int i = 0; i < STARSYSTEM_vec.size(); i++)
      	{
 		STARSYSTEM_vec[i]->SaveEvent(galaxy_root); 
@@ -79,7 +81,7 @@ void Galaxy::SaveEvent() const
 
 void Galaxy::LoadEvent() const
 {
-	std::string galaxy_root = "Galaxy 1.";
+	std::string galaxy_root = "Galaxy."+int2str(id);
 	//for (unsigned int i = 0; i < STARSYSTEM_vec.size(); i++)
      	//{
 		//STARSYSTEM_vec[i]->LoadEvent(galaxy_root); 
