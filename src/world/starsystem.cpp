@@ -587,7 +587,7 @@ void StarSystem :: restoreSceneColor()
 
 void StarSystem :: restoreDefaultColor()
 {
-	setColor(COLOR::DEFAULT);
+	setColor(COLOR::DEFAULT4f);
 }
 
 
@@ -1180,12 +1180,16 @@ void StarSystem :: damageEventInsideCircle(vec2f epicentr, float radius, int dam
 void StarSystem :: PostDeathUniqueEvent(bool) /*virtual */
 {}
 
-
+void StarSystem::SaveUniqueStarSystem(const std::string& root) const
+{
+	SaveManager::Instance().Put(root+"galaxy_id", galaxy->GetId());
+}
 
 void StarSystem::SaveEvent(const std::string& root) const
 {
 	std::string starsystem_root = root+"starsystem."+int2str(data_id.id)+".";
 	SaveUniqueBaseGameEntity(starsystem_root);
+	SaveUniqueStarSystem(starsystem_root);
 	//for (unsigned int i = 0; i < SHIP_inSPACE_vec.size(); i++) 
 	{ 
 	//	SHIP_inSPACE_vec[i]->SaveEvent(starsystem_root); 

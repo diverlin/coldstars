@@ -195,6 +195,8 @@ class StarSystem : public BaseGameEntity
 
 		void rocketCollision_s(bool);
 		void asteroidCollision_s(bool);
+		
+		void SaveUniqueStarSystem(const std::string&) const;
 };
 
 template <typename AGRESSOR, typename VICTIM>
