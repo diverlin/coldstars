@@ -41,13 +41,14 @@ int main()
 
 		for (int i = 0; i < Config::Instance().GAMESPEED; i++)  // fake implementation (static ai should not be run several times at once)
 		{
-			galaxy->update_s(TIMER->getTurnTick());
+			galaxy->Update(TIMER->getTurnTick());
 		}
 
 		if ((TIMER->getTurnEnded() == true) and (player->getNextTurnReady()))
 		{
 			TIMER->nextTurn();
 			galaxy->SaveEvent();
+			galaxy->LoadEvent();
 		}              	
 		/* server code end */
 

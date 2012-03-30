@@ -5,4 +5,4 @@ install/
 *~
 game
 *.o
-*.info
+save*.info
