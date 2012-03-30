@@ -11,8 +11,12 @@ struct SaveManager
 		
 		template <typename T>
 		void Put(std::string, T);
-		void DumpToFile();
-								
+		template <typename T>
+		T Get(std::string);
+		
+		void SaveFile(const std::string&);
+		void LoadFile(const std::string&);
+										
 	private:
 		SaveManager();
 		SaveManager(const SaveManager&);

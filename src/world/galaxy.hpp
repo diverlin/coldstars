@@ -31,8 +31,9 @@ class Galaxy
      		StarSystem* getRandomStarSystem();
      		StarSystem* getRandomCapturedStarSystem();
      		     
-    		void update_s(int);
+    		void Update(int);
     		void SaveEvent() const;
+    		void LoadEvent() const;
 
      	private:
    	     	int starsytem_counter;

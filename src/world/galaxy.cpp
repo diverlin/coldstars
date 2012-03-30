@@ -60,7 +60,7 @@ StarSystem* Galaxy :: getRandomCapturedStarSystem()
 }
      		
 
-void Galaxy :: update_s(int time)
+void Galaxy::Update(int time)
 {
 	for (unsigned int i = 0; i < STARSYSTEM_vec.size(); i++)
      	{
@@ -77,8 +77,14 @@ void Galaxy::SaveEvent() const
      	}
 }
 
-
-
+void Galaxy::LoadEvent() const
+{
+	std::string galaxy_root = "Galaxy 1.";
+	//for (unsigned int i = 0; i < STARSYSTEM_vec.size(); i++)
+     	//{
+		//STARSYSTEM_vec[i]->LoadEvent(galaxy_root); 
+     	//}
+}
 
 
 
@@ -104,7 +110,7 @@ StarSystem* generateEntireStarSystem()
         
         vec2f _center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH - 2*GUI::MAP::BORDER_X), 
         	      getRandInt(GUI::MAP::BORDER_Y, Config::Instance().SCREEN_HEIGHT - 2*GUI::MAP::BORDER_Y) );			 
-        starsystem->setPosition(_center);
+        starsystem->GetPoints().setCenter(_center);
 
         Star* star = getNewStar();    
         starsystem->addToSpace(star);

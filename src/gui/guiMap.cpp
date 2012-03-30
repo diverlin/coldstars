@@ -41,11 +41,11 @@ bool GuiMap :: update()
         	{
             		//if (STARSYSTEM_pList[si]->id != pTo_PLAYER->pTo_starsystem->id)
             		{
-                		float ss_cursor_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->getPosition(), mx, my);
+                		float ss_cursor_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->GetPoints().getCenter(), mx, my);
                 		if (ss_cursor_dist < 10)
                 		{ 
-                   			int ss_ss_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->getPosition(), 
-                   				       			   player->getNpc()->GetStarSystem()->getPosition() );
+                   			int ss_ss_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->GetPoints().getCenter(), 
+                   				       			   player->getNpc()->GetStarSystem()->GetPoints().getCenter() );
                    				       
                    			if ( (ss_ss_dist < player->getNpc()->getVehicle()->GetDriveComplex()->GetDriveSlot().GetDriveEquipment()->getHyper()) && (ss_ss_dist < player->getNpc()->getVehicle()->GetDriveComplex()->GetBakSlot().GetBakEquipment()->getFuel()) )
                       			{
@@ -93,15 +93,15 @@ void GuiMap :: Render()
    		
         			TextureOb* texOb_particle = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::DISTANTSTAR_ID, galaxy->STARSYSTEM_vec[si]->STAR_vec[0]->getColorId()); 
                                         
-        			drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[si]->getPosition(), 30.0, -2.0);
+        			drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[si]->GetPoints().getCenter(), 30.0, -2.0);
         	       
         			if (galaxy->STARSYSTEM_vec[si]->getCaptured() == true)
         			{
-        				drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_enemy_ss->texture, galaxy->STARSYSTEM_vec[si]->getPosition(), 40.0, -2.0);
+        				drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_enemy_ss->texture, galaxy->STARSYSTEM_vec[si]->GetPoints().getCenter(), 40.0, -2.0);
            			}
            	
     			}	 
-           		drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_player_ss->texture, player->getNpc()->GetStarSystem()->getPosition(), 40.0, -2.0);
+           		drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_player_ss->texture, player->getNpc()->GetStarSystem()->GetPoints().getCenter(), 40.0, -2.0);
 
     			//if self.GL_LIST_range_ID != None:
        				//glCallList(self.GL_LIST_range_ID)
@@ -113,8 +113,8 @@ void GuiMap :: Render()
     		{
 	  		drawSimpleText(int2str(galaxy->STARSYSTEM_vec[si]->GetId()), 
         	       	      		 font_size, 
-        	       	       		 galaxy->STARSYSTEM_vec[si]->getPosition().x - 20, 
-        	       	       		 galaxy->STARSYSTEM_vec[si]->getPosition().y - 20);
+        	       	       		 galaxy->STARSYSTEM_vec[si]->GetPoints().getCenter().x - 20, 
+        	       	       		 galaxy->STARSYSTEM_vec[si]->GetPoints().getCenter().y - 20);
     		} 
     		
     	disable_BLEND();  

@@ -41,12 +41,12 @@ StarSystem :: ~StarSystem()
 {}
       
 
-void StarSystem :: setPosition(vec2f center) { this->center = center; }
+//void StarSystem :: setPosition(vec2f center) { this->center = center; }
 void StarSystem :: setGalaxy(Galaxy* galaxy)  { this->galaxy = galaxy;}
 						
 bool StarSystem :: getDetailedSimulationFlag() const { return detalied_simulation; }
 bool StarSystem :: getCaptured() const { return is_CAPTURED; }    
-vec2f StarSystem :: getPosition() const { return center; }  
+//vec2f StarSystem :: getPosition() const { return center; }  
 Galaxy* StarSystem :: getGalaxy() const { return galaxy; }
       
 int StarSystem :: getRaceId() const 	     { return race_id; }
@@ -1184,14 +1184,22 @@ void StarSystem :: PostDeathUniqueEvent(bool) /*virtual */
 
 void StarSystem::SaveEvent(const std::string& root) const
 {
-	std::string starsystem_root = root+"starsystem_"+int2str(data_id.id)+".";
-	for (unsigned int i = 0; i < SHIP_inSPACE_vec.size(); i++) 
+	std::string starsystem_root = root+"starsystem."+int2str(data_id.id)+".";
+	SaveUniqueBaseGameEntity(starsystem_root);
+	//for (unsigned int i = 0; i < SHIP_inSPACE_vec.size(); i++) 
 	{ 
-		SHIP_inSPACE_vec[i]->SaveEvent(starsystem_root); 
+	//	SHIP_inSPACE_vec[i]->SaveEvent(starsystem_root); 
 	} 
 }
 
-
+void StarSystem::LoadEvent(const std::string& root) const
+{
+	std::string starsystem_root = root+"starsystem."+int2str(data_id.id)+".";
+	//for (unsigned int i = 0; i < SHIP_inSPACE_vec.size(); i++) 
+	//{ 
+		//SHIP_inSPACE_vec[i]->LoadEvent(starsystem_root); 
+	//} 
+}
 
 
 template <typename AGRESSOR, typename VICTIM>

@@ -101,14 +101,11 @@ class StarSystem : public BaseGameEntity
 
 
 		void findVisibleEntities_c(Player*);  
-		
 
-		void setPosition(vec2f);
 		void setGalaxy(Galaxy*);
 
 		bool getDetailedSimulationFlag() const;
 		bool getCaptured() const;
-		vec2f getPosition() const;
 		int getRaceId() const;
 		int getConquerorRaceId() const;
 
@@ -138,7 +135,8 @@ class StarSystem : public BaseGameEntity
                 void drawPath();
                 
                 void SaveEvent(const std::string&) const;
-                           		    		    		
+                void LoadEvent(const std::string&) const;
+                                           		    		    		
     	private:
                 int race_id, conqueror_race_id;
                 
@@ -147,8 +145,6 @@ class StarSystem : public BaseGameEntity
     		bool calculation_per_turn_allowed_inDynamic; 
     		    		
     		bool is_CAPTURED;
-    		
-    		vec2f center;
     		
     		Galaxy* galaxy;
     	
@@ -199,19 +195,6 @@ class StarSystem : public BaseGameEntity
 
 		void rocketCollision_s(bool);
 		void asteroidCollision_s(bool);
-
-		/*
-		void updateEntities_inStatic_s();
-		void updateEntities_s(int, bool);     		
-
-
-		bool removeFromTheListById(std::vector<Npc*>*, int _id);
-
-		void update_s();
-
-		void damageEventInsideCircle(vec2f epicentr, float radius, int damage, bool show_effect);
-
-		void PostDeathUniqueEvent(bool); */
 };
 
 template <typename AGRESSOR, typename VICTIM>

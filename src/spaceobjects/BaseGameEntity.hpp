@@ -59,7 +59,6 @@ class BaseGameEntity
 
 		BaseGameEntity* GetParent() const { return parent; }
 
-
 		void MovingByExternalForce(vec2f, float);
 
 		void Hit(int, bool);
@@ -92,7 +91,8 @@ class BaseGameEntity
 		virtual void PostDeathUniqueEvent(bool) = 0;
 		
 		void SaveUniqueBaseGameEntity(const std::string&) const;
-
+		void LoadUniqueBaseGameEntity(const std::string&);
+		
 		friend class BaseVehicleBuilder;
 };
 
