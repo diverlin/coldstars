@@ -48,7 +48,7 @@ int Angar :: getFreePlatformTotalNum()
         int sum_free = 0;
         for (unsigned int i = 0; i < platform_vec.size(); i++)
         {
-                if (platform_vec[i]->getVehicle() == NULL)
+                if (platform_vec[i]->GetVehicle() == NULL)
                 {
                         sum_free++;
                 }
@@ -60,7 +60,7 @@ bool Angar :: add(Vehicle* vehicle)
 {
         for (unsigned int i = 0; i < platform_vec.size(); i++)
         {
-                if (platform_vec[i]->getVehicle() == NULL)
+                if (platform_vec[i]->GetVehicle() == NULL)
                 {
                         platform_vec[i]->insert(vehicle);
                         return true;
@@ -75,9 +75,9 @@ bool Angar :: remove(Vehicle* vehicle)
 {
         for (unsigned int i = 0; i < platform_vec.size(); i++)
         {
-                if (platform_vec[i]->getVehicle() != NULL)
+                if (platform_vec[i]->GetVehicle() != NULL)
                 {
-                        if (platform_vec[i]->getVehicle() == vehicle)
+                        if (platform_vec[i]->GetVehicle() == vehicle)
                         {
                                 platform_vec[i]->free();
                                 return true;
@@ -106,9 +106,9 @@ void Angar :: mouseControl(Player* player)
                 {
                         if (rmb == true)
                         {
-                                if (platform_vec[i]->getVehicle() != NULL)
+                                if (platform_vec[i]->GetVehicle() != NULL)
                                 {
-                                        player->getNpc()->setScanTarget(platform_vec[i]->getVehicle());
+                                        player->getNpc()->SetScanTarget(platform_vec[i]->GetVehicle());
                                 }
                         }
                 }
@@ -149,7 +149,7 @@ void Angar :: RenderItemInfo(Player* player) const
 {
         for (unsigned int i = 0; i < platform_vec.size(); i++)
         { 
-		if (platform_vec[i]->getVehicle() != NULL)
+		if (platform_vec[i]->GetVehicle() != NULL)
                 {
 
                 	float dist = distBetweenPoints(player->getCursor()->getMousePos().x, 

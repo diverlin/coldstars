@@ -27,7 +27,7 @@ class Platform
                 Platform(TextureOb*, float _center_x, float _center_y, int _w, int _h);
                 ~Platform();
 
-                Vehicle* getVehicle();
+                Vehicle* GetVehicle();
                 Rect GetRect() const;
                 
                 void insert(Vehicle*);

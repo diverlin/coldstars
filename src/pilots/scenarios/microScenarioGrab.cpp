@@ -26,17 +26,17 @@ MicroScenarioGrab :: ~MicroScenarioGrab()
 		
 void MicroScenarioGrab :: Enter(Npc* npc) const
 {	
-	printf("npc_id = %i, STARTS MicroScenarioGrab item id = %i\n", npc->GetId(), npc->getStateMachine()->getCurrentMicroTask()->getTarget()->GetId());
+	printf("npc_id = %i, STARTS MicroScenarioGrab item id = %i\n", npc->GetId(), npc->GetStateMachine()->getCurrentMicroTask()->getTarget()->GetId());
 }
 
 void MicroScenarioGrab :: update_inStatic(Npc* npc) const
 {
               
-        for (unsigned int i = 0; i < npc->getObservation()->visible_MINERAL_vec.size(); i++)
+        for (unsigned int i = 0; i < npc->GetObservation()->visible_MINERAL_vec.size(); i++)
         {                	
-		if ( npc->getObservation()->visible_MINERAL_vec[i].dist < npc->getVehicle()->GetGrappleSlot()->GetGrappleEquipment()->getRadius() )
+		if ( npc->GetObservation()->visible_MINERAL_vec[i].dist < npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->getRadius() )
                 {                                       
-                	npc->getVehicle()->GetGrappleSlot()->GetGrappleEquipment()->addTarget(npc->getObservation()->visible_MINERAL_vec[i].mineral);
+                	npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->addTarget(npc->GetObservation()->visible_MINERAL_vec[i].mineral);
                 }
                 else
                 {
@@ -44,44 +44,44 @@ void MicroScenarioGrab :: update_inStatic(Npc* npc) const
                 }
         }
         
-        npc->getVehicle()->GetDriveComplex()->setTarget(npc->getStateMachine()->getCurrentMicroTask()->getTarget(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
+        npc->GetVehicle()->GetDriveComplex()->setTarget(npc->GetStateMachine()->getCurrentMicroTask()->getTarget(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
 }
 
 void MicroScenarioGrab :: update_inDynamic(Npc* npc) const
 {
-	GrappleEquipment* grapple_equipment = npc->getVehicle()->GetGrappleSlot()->GetGrappleEquipment();
+	GrappleEquipment* grapple_equipment = npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment();
         grapple_equipment->validateTargets();  
                 
         for (unsigned int i = 0; i < grapple_equipment->target_vec.size(); i++)
         {	
-               	grapple_equipment->target_vec[i]->MovingByExternalForce(npc->getVehicle()->GetPoints().getCenter(), grapple_equipment->getStrength());        	
+               	grapple_equipment->target_vec[i]->MovingByExternalForce(npc->GetVehicle()->GetPoints().getCenter(), grapple_equipment->getStrength());        	
        	
-       		float dist = distBetweenPoints(npc->getVehicle()->GetPoints().getCenter(), grapple_equipment->target_vec[i]->GetPoints().getCenter()); 
-       		if (dist < npc->getVehicle()->GetCollisionRadius()/10)
+       		float dist = distBetweenPoints(npc->GetVehicle()->GetPoints().getCenter(), grapple_equipment->target_vec[i]->GetPoints().getCenter()); 
+       		if (dist < npc->GetVehicle()->GetCollisionRadius()/10)
        		{
        			if (grapple_equipment->target_vec[i]->GetTypeId() == ENTITY::MINERAL_ID)
        			{
        				GoodsPack* goodsPack = getNewGoodsPack(ENTITY::MINERAL_ID);
        				goodsPack->increase(grapple_equipment->target_vec[i]->GetMass());
-       				ItemSlot* slot = npc->getVehicle()->GetEmptyOtsecSlot();
+       				ItemSlot* slot = npc->GetVehicle()->GetEmptyOtsecSlot();
        				if (slot != NULL)
        				{
        					slot->InsertItem(goodsPack);
        					grapple_equipment->addToRemoveQueue(grapple_equipment->target_vec[i]);
 
-       					npc->GetStarSystem()->addToRemoveFromOuterSpaceQueue((Mineral*)grapple_equipment->target_vec[i]);  
+       					npc->GetStarSystem()->AddToRemoveFromOuterSpaceQueue((Mineral*)grapple_equipment->target_vec[i]);  
        				}			
        			}
         			
        			if (grapple_equipment->target_vec[i]->GetTypeId() == ENTITY::CONTAINER_ID)
        			{
-       				ItemSlot* slot = npc->getVehicle()->GetEmptyOtsecSlot();
+       				ItemSlot* slot = npc->GetVehicle()->GetEmptyOtsecSlot();
        				if (slot != NULL)
        				{
        					slot->ExtractItemFromContainer((Container*)grapple_equipment->target_vec[i]);
        					grapple_equipment->addToRemoveQueue(grapple_equipment->target_vec[i]);
 
-       					npc->GetStarSystem()->addToRemoveFromOuterSpaceQueue((Container*)grapple_equipment->target_vec[i]);  
+       					npc->GetStarSystem()->AddToRemoveFromOuterSpaceQueue((Container*)grapple_equipment->target_vec[i]);  
        				}	
        			}
         	}
@@ -96,5 +96,5 @@ void MicroScenarioGrab :: Exit(Npc* npc) const
 
 std::string MicroScenarioGrab :: getDescription(Npc* npc) const 
 {
-	return "GRAB to ob id = %i\n" + int2str(npc->getStateMachine()->getCurrentMicroTask()->getTarget()->GetId());
+	return "GRAB to ob id = %i\n" + int2str(npc->GetStateMachine()->getCurrentMicroTask()->getTarget()->GetId());
 }

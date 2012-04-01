@@ -55,7 +55,7 @@ void Asteroid :: PostDeathUniqueEvent(bool show_effect)
        	for (int i = 0; i<3; i++)
 	{
 		Mineral* _mineral = getNewMineral();
-		starsystem->addToSpace(_mineral, points.getCenter());			
+		starsystem->AddToSpace(_mineral, points.getCenter());			
    	}
    	
    	if (show_effect == true)
@@ -69,7 +69,7 @@ void Asteroid :: PostDeathUniqueEvent(bool show_effect)
 
 
 
-void Asteroid :: updateInfo()
+void Asteroid :: UpdateInfo()
 {   
 	info.clear();
 
@@ -83,7 +83,7 @@ void Asteroid :: updateInfo()
 
 void Asteroid :: renderInfo_inSpace(vec2f scroll_coords) 
 {  
-	updateInfo();
+	UpdateInfo();
      	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);
 }
 

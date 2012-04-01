@@ -120,7 +120,7 @@ void RocketBullet :: deathEventUnique(bool show_effect)
 }
 
 
-void RocketBullet :: updateInfo()
+void RocketBullet :: UpdateInfo()
 {}
 
 

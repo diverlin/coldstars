@@ -42,12 +42,85 @@
 class StarSystem : public BaseGameEntity
 {
 	public:
-		Star* getStar() const;
-
 		StarSystem(int);
 		~StarSystem();
+
+		void SetGalaxy(Galaxy* galaxy)  { this->galaxy = galaxy; };
+						
+		bool GetDetailedSimulationFlag() const { return detalied_simulation; };
+		bool GetCaptured()       const { return is_CAPTURED; };  
+		int GetRaceId()          const { return race_id; };
+		int GetConquerorRaceId() const { return conqueror_race_id; };  
+		Star* GetStar()          const { return STAR_vec[0]; };		
+		Galaxy* GetGalaxy()      const { return galaxy; };
+		int GetShockWaveNum()    const { return effect_SHOCKWAVE_vec.size(); };
 		
-		// ENTITY VECTORS
+		//// TRANSITION
+		void AddToHyperJumpQueue(Npc*);
+
+		void AddToSpace(Vehicle*, vec2f, float, BaseGameEntity*);
+		void AddToSpace(Npc*);
+						
+		void AddToSpace(Star*);
+		void AddToSpace(Planet*, BaseGameEntity*);
+		void AddToSpace(Asteroid*);
+		void AddToSpace(Mineral*, vec2f);
+		void AddToSpace(Container*, vec2f);
+		void AddToSpace(RocketBullet*);
+		void AddToSpace(BlackHole*, vec2f);
+
+		// effects
+		void AddToSpace(BaseParticleSystem*);
+		void AddToSpace(ShockWaveEffect*);
+		void AddToSpace(LazerTraceEffect*);
+
+		void AddToSpace(DistantNebulaBgEffect*);
+		void AddToSpace(DistantStarBgEffect*);
+		
+		void AddToSpace(VerticalFlowText*);
+		//
+
+		void AddToRemoveFromOuterSpaceQueue(Mineral*);
+		void AddToRemoveFromOuterSpaceQueue(Container*);
+		void AddToRemoveFromOuterSpaceQueue(Vehicle*);
+				
+		bool RemoveShip(int);    
+		bool RemoveNpc(int, int); 
+		
+		void BombExplosionEvent(Container*, bool);
+		
+		void FindVisibleEntities_c(Player*);  
+
+		void Update(int, bool);
+
+    		void RestoreDefaultColor();
+    		void RestoreSceneColor();
+    		void DrawBackground(vec2f);
+                void DrawOrbits();
+                void DrawPath();
+                
+                void SaveEvent(const std::string&) const;
+                void LoadEvent(const std::string&) const;
+                                           		    		    		
+		// poor
+		Planet* GetClosestPlanet(vec2f);
+		Npc* GetRandomNpc();
+		Npc* GetRandomNpcExcludingRaceId(int);
+		Npc* GetRandNpcByRaceId(int) const;
+		Npc* GetRandNpc(std::vector<int>*) const;
+		// 
+    	private:
+                int race_id, conqueror_race_id;
+                
+    		bool detalied_simulation;
+    		bool calculation_per_turn_allowed; 
+    		bool calculation_per_turn_allowed_inDynamic; 
+    		    		
+    		bool is_CAPTURED;
+    		
+    		Galaxy* galaxy;
+    	
+    		// ENTITY VECTORS
 		std::vector<Player*> 	   PLAYER_vec;
 
 		std::vector<Star*>         STAR_vec;
@@ -69,85 +142,8 @@ class StarSystem : public BaseGameEntity
 		std::vector<Npc*>  NPC_PIRAT_inSPACE_vec;
 		std::vector<Npc*>  NPC_DIPLOMAT_inSPACE_vec;
 		//  
-
-		void addToSpace(Star*);
-		void addToSpace(Planet*, BaseGameEntity*);
-		void addToSpace(Asteroid*);
-		void addToSpace(Mineral*, vec2f);
-		void addToSpace(Container*, vec2f);
-		void addToSpace(RocketBullet*);
-		void addToSpace(BlackHole*, vec2f);
-
-		// effects
-		void addToSpace(BaseParticleSystem*);
-		void addToSpace(ShockWaveEffect*);
-		void addToSpace(LazerTraceEffect*);
-
-		void addToSpace(DistantNebulaBgEffect*);
-		void addToSpace(DistantStarBgEffect*);
 		
-		void addToSpace(VerticalFlowText*);
 		
-		bool removeShip(int _id);    
-		bool removeNpc(int _id, int _subtype_id); 
-		
-		void bombExplosionEvent(Container*, bool);
-				
-		int getShockWaveNum() const;
-		
-		void addToRemoveFromOuterSpaceQueue(Mineral*);
-		void addToRemoveFromOuterSpaceQueue(Container*);
-		void addToRemoveFromOuterSpaceQueue(Vehicle*);
-
-
-		void findVisibleEntities_c(Player*);  
-
-		void setGalaxy(Galaxy*);
-
-		bool getDetailedSimulationFlag() const;
-		bool getCaptured() const;
-		int getRaceId() const;
-		int getConquerorRaceId() const;
-
-		Galaxy* getGalaxy() const;
-
-		// poor
-		Planet* getClosestPlanet(vec2f);
-		Npc* getRandomNpc();
-		Npc* getRandomNpcExcludingRaceId(int);
-		Npc* getRandNpcByRaceId(int) const;
-		Npc* getRandNpc(std::vector<int>*) const;
-		// 
-
-		void update_s(int, bool);
-
-		//// TRANSITION
-		void addToHyperJumpQueue(Npc*);
-
-		void addToSpace(Vehicle*, vec2f, float, BaseGameEntity*);
-		void addToSpace(Npc*);
-
-
-    		void restoreDefaultColor();
-    		void restoreSceneColor();
-    		void renderBackground(vec2f);
-                void drawOrbits();
-                void drawPath();
-                
-                void SaveEvent(const std::string&) const;
-                void LoadEvent(const std::string&) const;
-                                           		    		    		
-    	private:
-                int race_id, conqueror_race_id;
-                
-    		bool detalied_simulation;
-    		bool calculation_per_turn_allowed; 
-    		bool calculation_per_turn_allowed_inDynamic; 
-    		    		
-    		bool is_CAPTURED;
-    		
-    		Galaxy* galaxy;
-    	
     	    	// ENTITY VECTORS
                 std::vector<Npc*> NPC_appear_vec;
                 
@@ -171,17 +167,15 @@ class StarSystem : public BaseGameEntity
     		GarbageEntities garbage_entities;
     		GarbageEffects  garbage_effects;
     		                
-                void postHyperJumpEvent_s();
-                void launchingEvent_s() const;
-
+                void PostHyperJumpEvent();
+                void LaunchingEvent() const;
     		
     		void updateEntities_inStatic_s();
-    		void updateEntities_s(int, bool);     		
-   		
+    		void updateEntities_s(int, bool);   		
                       
-                bool removeFromTheListById(std::vector<Npc*>*, int _id);
+                bool RemoveFromTheListById(std::vector<Npc*>*, int);
     		
-    		void update_s();
+    		void updateStates();
     		
     		void damageEventInsideCircle(vec2f epicentr, float radius, int damage, bool show_effect);
     		
@@ -197,6 +191,10 @@ class StarSystem : public BaseGameEntity
 		void asteroidCollision_s(bool);
 		
 		void SaveUniqueStarSystem(const std::string&) const;
+		
+		friend class GuiMap;
+		friend class Observation;
+		friend class Player;
 };
 
 template <typename AGRESSOR, typename VICTIM>

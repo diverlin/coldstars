@@ -36,7 +36,7 @@ class Container : public SpaceItemBase
         
         private:
                 ItemSlot* item_slot;        
-        	void updateInfo();  
+        	void UpdateInfo();  
 };
 
 Container* getNewContainer();

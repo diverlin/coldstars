@@ -67,7 +67,7 @@ void BaseGameEntity::Hit(int damage, bool show_effect)
 	if (show_effect == true)
 	{	
 		VerticalFlowText* _text = new VerticalFlowText(int2str(damage), points.getCenter(), COLOR::DEFAULT4i, collision_radius);
-		starsystem->addToSpace(_text); 
+		starsystem->AddToSpace(_text); 
 	}
 
 }

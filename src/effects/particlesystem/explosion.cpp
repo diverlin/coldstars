@@ -116,7 +116,7 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
                 
                 explosion->createParticles();
                 
-		_starsystem->addToSpace(explosion);
+		_starsystem->AddToSpace(explosion);
 	}
     	else    
 	{
@@ -134,7 +134,7 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
                 
                 explosion->createParticles();
                 
-		_starsystem->addToSpace(explosion);
+		_starsystem->AddToSpace(explosion);
                 }
 
                 {
@@ -151,7 +151,7 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
                 
                 explosion->createParticles();
                 
-		_starsystem->addToSpace(explosion);
+		_starsystem->AddToSpace(explosion);
                 }
         
                 {
@@ -168,11 +168,11 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
                 
                 explosion->createParticles();
                 
-		_starsystem->addToSpace(explosion);
+		_starsystem->AddToSpace(explosion);
                 }
 	} 	       
  
- 	if ( (obSize > 3) && (_starsystem->getShockWaveNum() < 10) )
+ 	if ( (obSize > 3) && (_starsystem->GetShockWaveNum() < 10) )
 	{
 		createShockWave(_starsystem, _center_pos, obSize);
 	}

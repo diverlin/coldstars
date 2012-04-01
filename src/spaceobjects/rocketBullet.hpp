@@ -58,7 +58,7 @@ class RocketBullet : public Vehicle
                
                 void deathEventUnique(bool);
                 
-                virtual void updateInfo(); 
+                virtual void UpdateInfo(); 
                 
                 bool CheckTarget() const;
                 bool CheckStarSystem() const;     

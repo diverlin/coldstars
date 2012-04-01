@@ -25,7 +25,7 @@ Ship :: ~Ship()
 
 
 //overriding
-void Ship :: updateInfo()
+void Ship :: UpdateInfo()
 {
 	info.clear();
 

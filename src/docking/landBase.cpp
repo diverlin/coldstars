@@ -37,7 +37,7 @@ void LandBase :: manageLaunchingQueue()
 {
          for (unsigned int i = 0; i<NPC_launching_vec.size(); i++)
          {
-         	NPC_launching_vec[i]->getVehicle()->LaunchingEvent();
+         	NPC_launching_vec[i]->GetVehicle()->LaunchingEvent();
          }
               
          NPC_launching_vec.clear();  

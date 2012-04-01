@@ -77,7 +77,7 @@ bool Kosmoport :: add(Npc* npc)
         npc->SetPlaceTypeId(type_id);
         NPC_vec.push_back(npc);
         
-        npc->setLand(this);
+        npc->SetLand(this);
  
         return true;
 }
@@ -124,7 +124,7 @@ void Kosmoport :: ai()
 {
         for (unsigned int i = 0; i < NPC_vec.size(); i++)
         {
-                NPC_vec[i]->thinkCommon_inKosmoport_inStatic();
+                NPC_vec[i]->ThinkCommon_inKosmoport_inStatic();
 	}
 }
 

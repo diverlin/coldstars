@@ -15,43 +15,18 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-
-
-
-
-
-void Npc :: setGarbageReady(bool _garbage_ready)   { data_life.garbage_ready = _garbage_ready; }
-void Npc :: setAlive(bool _alive) 		   { data_life.is_alive = _alive; }
-
-void Npc :: setLand(LandBase* land)   		        { this->land = land; }
-void Npc :: setScanTarget(Vehicle* vehicle_to_scan)     { this->vehicle_to_scan = vehicle_to_scan; }
-void Npc :: setUpperControl(bool upper_control)         { this->upper_control = upper_control; }
-
-
-int Npc :: getRaceId() const	   { return race_id; }
-StarSystem* Npc :: getFailBackStarSystem() const { return failback_starsystem; }
-Vehicle* Npc :: getVehicle()       { return vehicle; }
-Skill* Npc :: getSkill() 	   { return skill; }	
-Vehicle* Npc :: getScanTarget()	   { return vehicle_to_scan; }	
-Observation* Npc :: getObservation() const { return observation; }
-
-
-unsigned long int Npc :: getCredits() const { return credits; }   
-StateMachine* Npc :: getStateMachine() {return state_machine; }
-
-LandBase* Npc :: getLand() const { return land; }
    		
-void Npc :: bind(Vehicle* vehicle) 	           
+void Npc::Bind(Vehicle* vehicle) 	           
 { 
 	this->vehicle = vehicle; 
 	vehicle->SetNpc(this); 
 } 	
 
-void Npc :: increaseCredits(int _credits) { credits += _credits; }
-void Npc :: decreaseCredits(int _credits) { credits -= _credits; }
+void Npc::IncreaseCredits(int credits) { this->credits += credits; }
+void Npc::DecreaseCredits(int credits) { this->credits -= credits; }
 
 		
-Npc :: Npc(int _race_id, IdData _data_id, LifeData _data_life, TextureOb* _texOb)
+Npc::Npc(int _race_id, IdData _data_id, LifeData _data_life, TextureOb* _texOb)
 { 
    	data_id = _data_id;
    	data_life = _data_life;	
@@ -105,9 +80,7 @@ Npc :: ~Npc() /* virtual */
         delete state_machine;        
 }  
     
-
-
-void Npc :: thinkCommon_inKosmoport_inStatic()
+void Npc::ThinkCommon_inKosmoport_inStatic()
 {   		
 	if (needsToDo.REPAIR_KORPUS == true)
 	{
@@ -116,16 +89,13 @@ void Npc :: thinkCommon_inKosmoport_inStatic()
 	}
 	
 	// if all things are DONE
-	((Planet*)vehicle->GetDriveComplex()->getTarget())->getLand()->addToLaunchingQueue(this); // improove by adding spacestation
+	((Planet*)vehicle->GetDriveComplex()->getTarget())->GetLand()->addToLaunchingQueue(this); // improove by adding spacestation
 }
 
-void Npc :: thinkCommon_inLand_inStatic()
+void Npc::ThinkCommon_inLand_inStatic()
 {}
 
-
-
-
-void Npc :: update_inSpace_inStatic()
+void Npc::Update_inSpace_inStatic()
 {
 	vehicle->GetWeaponComplex()->PrepareWeapons();
         vehicle->GetGrappleSlot()->GetGrappleEquipment()->validateTargets();
@@ -134,7 +104,7 @@ void Npc :: update_inSpace_inStatic()
                	     		
 	if (upper_control == false)
 	{
-        	checkNeeds();
+        	CheckNeeds();
                 
 		observation->observeAll_inSpace_inStatic();          
         
@@ -148,18 +118,17 @@ void Npc :: update_inSpace_inStatic()
        
 		if (observation->see.ASTEROID == true)
 		{
-                	asteroidScenario();
+                	AsteroidScenario();
 		}
              
 
        		state_machine->update_inStatic();                 
         }
 
-        vehicle->GetDriveComplex()->update_inSpace_inStatic();
+        vehicle->GetDriveComplex()->Update_inSpace_inStatic();
 }
 
-
-void Npc :: update_inSpace(int time, bool show_effect)
+void Npc::Update_inSpace(int time, bool show_effect)
 {
         //	macroTask_stateMachine->update_inDynamic(); // is it needed ?
         if (time > 0)
@@ -168,11 +137,7 @@ void Npc :: update_inSpace(int time, bool show_effect)
        	}
 }     	
 
-
-
-
-
-void Npc :: checkNeeds()
+void Npc::CheckNeeds()
 {
         if (vehicle->GetArmor() < 0.5*vehicle->data_korpus.armor)   // move to ship
 	{
@@ -191,7 +156,7 @@ void Npc :: checkNeeds()
         needsToDo.REPAIR_EQUIPMENT = false;
         
         // checkhjump
-        failback_starsystem = getClosestStarSystem(false);
+        failback_starsystem = GetClosestStarSystem(false);
         if (failback_starsystem != NULL)
         {
    		needsToDo.GET_FUEL = false;
@@ -214,9 +179,7 @@ void Npc :: checkNeeds()
    	needsToDo.SELL = false;        
 }
 
-
-
-void Npc :: asteroidScenario()
+void Npc::AsteroidScenario()
 {
         vehicle->GetWeaponComplex()->weapon_selector.setAll(false);
         vehicle->GetWeaponComplex()->SelectWeapons();
@@ -230,36 +193,15 @@ void Npc :: asteroidScenario()
 }
 
 
-
-
-void Npc:: jumpEvent()
+Planet* Npc::GetPlanetForDocking()
 {
-	vehicle->HyperJumpEvent();
-}
-
-
-void Npc:: dockEvent()
-{
-	vehicle->DockingEvent();
-}
-
-
-
-
-
-
-
-
-Planet* Npc :: getPlanetForDocking()
-{
-     	Planet* _target_planet = starsystem->getClosestPlanet(vehicle->GetPoints().getCenter());  // improove
+     	Planet* _target_planet = starsystem->GetClosestPlanet(vehicle->GetPoints().getCenter());  // improove
      	return _target_planet;
 }
 
-
-StarSystem* Npc :: getClosestStarSystem(bool _captured)
+StarSystem* Npc::GetClosestStarSystem(bool _captured)
 {
-       	observation->findEchievableStarSystems_inStatic(starsystem->getGalaxy());
+       	observation->findEchievableStarSystems_inStatic(starsystem->GetGalaxy());
         	
        	StarSystem* _target_starsystem = observation->getClosestStarSystem(_captured);   
 	return _target_starsystem;
@@ -267,7 +209,7 @@ StarSystem* Npc :: getClosestStarSystem(bool _captured)
 
 
 //// *********** SCANNING ***********
-bool Npc :: checkPossibilityToScan(Vehicle* vehicle)
+bool Npc::CheckPossibilityToScan(Vehicle* vehicle)
 {
      	if (this->vehicle->GetId() == vehicle->GetId())    // selfscan is possible all time
      	{
@@ -293,18 +235,11 @@ bool Npc :: checkPossibilityToScan(Vehicle* vehicle)
 }
 
 
-bool Npc :: scanProceeding()
-{
-     	return true;
-}
-
-void Npc :: resetScanTarget() { vehicle_to_scan = NULL; }
+void Npc::ResetScanTarget() { vehicle_to_scan = NULL; }
 //// *********** SCANNING ***********
 
 
-
-
-void Npc :: updateInfo()
+void Npc::UpdateInfo()
 {
 	info.clear();
 
@@ -333,15 +268,14 @@ void Npc :: updateInfo()
 
 
 
-void Npc :: renderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y)
+void Npc::RenderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y)
 {  
-        updateInfo();
+        UpdateInfo();
      	drawInfoIn2Column(&info.title_list, &info.value_list, _pos_x + 190, _pos_y, _offset_x, _offset_y);
 }
      
 void Npc :: PostDeathUniqueEvent(bool) /* virtual */
 {}
-
 
 
 Npc* getNewNpc(int _race_id, int _subtype_id)

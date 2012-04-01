@@ -36,7 +36,7 @@ void BlackHole :: update_inSpace(int time, bool show_effect)
 	{}
 }
 
-void BlackHole :: updateInfo()
+void BlackHole :: UpdateInfo()
 {
 	info.clear();
 
@@ -50,7 +50,7 @@ void BlackHole :: updateInfo()
 
 void BlackHole :: renderInfo_inSpace(vec2f scroll_coords)
 {
-	updateInfo();
+	UpdateInfo();
      	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);    
 }
 

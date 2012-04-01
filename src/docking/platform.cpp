@@ -26,7 +26,7 @@ Platform :: Platform(TextureOb* _texOb, float _center_x, float _center_y, int _w
 Platform :: ~Platform()
 {}
 
-Vehicle* Platform :: getVehicle()      { return vehicle; }
+Vehicle* Platform :: GetVehicle()      { return vehicle; }
 Rect Platform :: GetRect() const { return rect; }
       
                           

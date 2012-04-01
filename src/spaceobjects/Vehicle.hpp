@@ -110,7 +110,7 @@ class Vehicle : public BaseGameEntity
         	void RecalculateCollisionRadius();
 
 	protected:
-		virtual void updateInfo() = 0;
+		virtual void UpdateInfo() = 0;
              	std::string returnProtectionStr();
             	
             	DriveComplex* drive_complex;

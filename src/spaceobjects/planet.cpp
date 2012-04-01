@@ -32,7 +32,7 @@ Planet :: ~Planet()
 
 
 int Planet :: getDockingRadius() const              { return data_planet.scale; }
-LandBase* Planet :: getLand() const { return land; }
+LandBase* Planet :: GetLand() const { return land; }
 
 void Planet :: createLand()
 {
@@ -63,12 +63,12 @@ void Planet :: update_inSpace(int time, bool show_effect)
 	}
 }
 
-void Planet :: update_inSpace_inStatic()
+void Planet :: Update_inSpace_inStatic()
 {}
 
 
 
-void Planet :: updateInfo()
+void Planet :: UpdateInfo()
 {
 	info.clear();
 
@@ -80,7 +80,7 @@ void Planet :: updateInfo()
 
 void Planet :: renderInfo_inSpace(vec2f scroll_coords)
 {  
-	updateInfo();
+	UpdateInfo();
 	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);
 }
 

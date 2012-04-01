@@ -57,7 +57,7 @@ void Satellite :: update_inSpace(int time, bool show_effect)
 }
 
 
-void Satellite :: updateInfo()
+void Satellite :: UpdateInfo()
 {
 	info.clear();
 

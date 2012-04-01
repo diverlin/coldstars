@@ -60,15 +60,15 @@ Player* getNewPlayer(Galaxy* galaxy)
 	VehicleBuilder::Instance().Equip(pship);   		// improove
         pship->UpdateAllPropertiesAndAbilities(); 		// improove
         
-        pnpc->bind(pship);
+        pnpc->Bind(pship);
    	player->bindNpc(pnpc);
    	
 	vec2f center(-400, 400);
 	float angle = 0;  
 		
 	StarSystem* starsystem = galaxy->GetRandomStarSystem();
-	starsystem->addToSpace(pship, center, angle, NULL);
-        starsystem->addToSpace(pnpc);
+	starsystem->AddToSpace(pship, center, angle, NULL);
+        starsystem->AddToSpace(pnpc);
         
     	return player;
 }

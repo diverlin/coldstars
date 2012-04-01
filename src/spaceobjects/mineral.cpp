@@ -25,7 +25,7 @@ Mineral :: Mineral()
 }
     
     
-void Mineral :: updateInfo()
+void Mineral :: UpdateInfo()
 {
 	info.clear();
 
@@ -39,7 +39,7 @@ void Mineral :: updateInfo()
 
 void Mineral :: renderInfo_inSpace(vec2f scroll_coords)
 {
-	updateInfo();
+	UpdateInfo();
      	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);    
 }
 

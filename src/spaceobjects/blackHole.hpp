@@ -38,7 +38,7 @@ class BlackHole : public SpaceItemBase
         	BlackHoleEffect* effect;
         	
         	InfoTable info;
-        	void updateInfo();    
+        	void UpdateInfo();    
 };
 
 BlackHole* getNewBlackHole();

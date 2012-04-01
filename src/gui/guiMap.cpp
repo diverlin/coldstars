@@ -29,9 +29,9 @@ GuiMap :: ~GuiMap()
 
 bool GuiMap :: update()
 {
-	Galaxy* galaxy = player->getNpc()->GetStarSystem()->getGalaxy();
+	Galaxy* galaxy = player->getNpc()->GetStarSystem()->GetGalaxy();
 
-     	if (player->getNpc()->getVehicle()->ableTo.HJUMP == true)
+     	if (player->getNpc()->GetVehicle()->ableTo.HJUMP == true)
      	{
         	int mx  = player->getCursor()->getMousePos().x;
         	int my  = player->getScreen()->getHeight() - player->getCursor()->getMousePos().y; 
@@ -47,14 +47,14 @@ bool GuiMap :: update()
                    			int ss_ss_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->GetPoints().getCenter(), 
                    				       			   player->getNpc()->GetStarSystem()->GetPoints().getCenter() );
                    				       
-                   			if ( (ss_ss_dist < player->getNpc()->getVehicle()->GetDriveComplex()->GetDriveSlot().GetDriveEquipment()->getHyper()) && (ss_ss_dist < player->getNpc()->getVehicle()->GetDriveComplex()->GetBakSlot().GetBakEquipment()->getFuel()) )
+                   			if ( (ss_ss_dist < player->getNpc()->GetVehicle()->GetDriveComplex()->GetDriveSlot().GetDriveEquipment()->getHyper()) && (ss_ss_dist < player->getNpc()->GetVehicle()->GetDriveComplex()->GetBakSlot().GetBakEquipment()->getFuel()) )
                       			{
                       				if (lmb == true)
                       				{ 
                                                         // debug
-                                                        player->getNpc()->GetStarSystem()->removeShip(player->getNpc()->getVehicle()->GetId());  
-                                                        player->getNpc()->GetStarSystem()->removeNpc(player->getNpc()->GetId(), player->getNpc()->GetSubTypeId());  
-                                                        galaxy->STARSYSTEM_vec[si]->addToHyperJumpQueue(player->getNpc());    
+                                                        player->getNpc()->GetStarSystem()->RemoveShip(player->getNpc()->GetVehicle()->GetId());  
+                                                        player->getNpc()->GetStarSystem()->RemoveNpc(player->getNpc()->GetId(), player->getNpc()->GetSubTypeId());  
+                                                        galaxy->STARSYSTEM_vec[si]->AddToHyperJumpQueue(player->getNpc());    
                                                         // debug
                                                         
                           				//player.hyperJumpPreparation(ss)
@@ -78,7 +78,7 @@ bool GuiMap :: update()
 void GuiMap :: Render()
 {
     	TextureOb* texOb_textBg = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::TEXT_BACKGROUND_ID);
-    	Galaxy* galaxy = player->getNpc()->GetStarSystem()->getGalaxy();
+    	Galaxy* galaxy = player->getNpc()->GetStarSystem()->GetGalaxy();
       
         resetRenderTransformation();
     	        
@@ -95,7 +95,7 @@ void GuiMap :: Render()
                                         
         			drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[si]->GetPoints().getCenter(), 30.0, -2.0);
         	       
-        			if (galaxy->STARSYSTEM_vec[si]->getCaptured() == true)
+        			if (galaxy->STARSYSTEM_vec[si]->GetCaptured() == true)
         			{
         				drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_enemy_ss->texture, galaxy->STARSYSTEM_vec[si]->GetPoints().getCenter(), 40.0, -2.0);
            			}

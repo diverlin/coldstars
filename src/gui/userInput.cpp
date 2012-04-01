@@ -40,7 +40,7 @@ UserInput :: ~UserInput()
 
 bool UserInput :: getNextTurnReady() const { return next_turn_ready; }
 		
-void UserInput :: update_inSpace()
+void UserInput :: Update_inSpace()
 {
 	getSimpleInputs();
         getRealTimeInputs();
@@ -78,9 +78,9 @@ void UserInput :: getSimpleInputs()
            		{
            			case sf::Key::Escape:
                			{
-              				if (player->getNpc()->getScanTarget() != NULL)
+              				if (player->getNpc()->GetScanTarget() != NULL)
               				{
-                		  		player->getNpc()->resetScanTarget();
+                		  		player->getNpc()->ResetScanTarget();
               				}
               				break;
                 		}
@@ -252,6 +252,18 @@ void UserInput :: getSimpleInputs()
 	                			player->setShowAllPath(false);
 	             			}
 	                 	      	break;
+				}
+				
+				case sf::Key::F5:
+				{
+					player->getNpc()->GetStarSystem()->GetGalaxy()->SaveEvent();
+					break;
+				}
+				
+				case sf::Key::F9:
+				{
+					player->getNpc()->GetStarSystem()->GetGalaxy()->LoadEvent();
+					break;
 				}
 				
 	        	} // end switch      

@@ -80,5 +80,5 @@ void createShockWave(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 	//float dtime = -(0.0001*obSize + obSize * 0.0003);     // 10, 1.8, 0.13, 0.0,  0,  0.02, 0.0005, -0.004 
 		        
 	ShockWaveEffect* shockWave = new ShockWaveEffect(_center_pos, x, y, z, time, dx, dy, dz, dtime);  
-	_starsystem->addToSpace(shockWave);
+	_starsystem->AddToSpace(shockWave);
 }

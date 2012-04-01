@@ -30,12 +30,12 @@ GuiVehicle :: ~GuiVehicle()
 
 void GuiVehicle :: update()
 {
-	Vehicle* vehicle = player->getNpc()->getScanTarget();
+	Vehicle* vehicle = player->getNpc()->GetScanTarget();
 
 	Store* store = NULL;
 	if (player->getNpc()->GetPlaceTypeId() == ENTITY::KOSMOPORT_ID)
 	{
-		store = ((Kosmoport*)player->getNpc()->getLand())->getStore();
+		store = ((Kosmoport*)player->getNpc()->GetLand())->getStore();
 	}
 	
     	bool lmb = player->getCursor()->getMouseLeftButton();; 
@@ -82,7 +82,7 @@ void GuiVehicle :: update()
 
 void GuiVehicle :: Render() const
 {
-	Vehicle* vehicle = player->getNpc()->getScanTarget();
+	Vehicle* vehicle = player->getNpc()->GetScanTarget();
 
 	drawTexturedRect(vehicle->texOb_korpus, vehicle->kontur_rect, -1.0);
 
@@ -97,7 +97,7 @@ void GuiVehicle :: Render() const
 
 void GuiVehicle :: renderFocusedItemInfo() const
 {
-	Vehicle* vehicle = player->getNpc()->getScanTarget();
+	Vehicle* vehicle = player->getNpc()->GetScanTarget();
 
 	for(unsigned int i = 0; i < vehicle->slot_total_vec.size(); i++)
 	{ 

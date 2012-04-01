@@ -29,7 +29,7 @@ class Ship : public Vehicle
         	
         	void update_inSpace(int, bool);
         	
-        	virtual void updateInfo();  
+        	virtual void UpdateInfo();  
         	
         	void updateRenderStuff();
         	void render_inSpace() const;

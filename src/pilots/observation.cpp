@@ -63,7 +63,7 @@ void Observation :: findEchievableStarSystems_inStatic(Galaxy* galaxy)
 
         for (unsigned int i = 0; i < galaxy->STARSYSTEM_vec.size(); i++)
         {    
-        	float dist = distBetweenPoints(npc_owner->getVehicle()->GetStarSystem()->GetPoints().getCenter(),  galaxy->STARSYSTEM_vec[i]->GetPoints().getCenter());
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetStarSystem()->GetPoints().getCenter(),  galaxy->STARSYSTEM_vec[i]->GetPoints().getCenter());
                 //if (dist < npc_owner->getShip()->propetries.hyper)
                 {
                 	visible_STARSYSTEM_vec.push_back( StarSystemObservationData(galaxy->STARSYSTEM_vec[i], dist) );
@@ -80,7 +80,7 @@ StarSystem* Observation :: getClosestStarSystem(bool _captured) const
 	
  	for (unsigned int i = 0; i<visible_STARSYSTEM_vec.size(); i++)
  	{
- 		if (visible_STARSYSTEM_vec[i].starsystem->getCaptured() == _captured)
+ 		if (visible_STARSYSTEM_vec[i].starsystem->GetCaptured() == _captured)
  		{
  			_target_starsystem = visible_STARSYSTEM_vec[i].starsystem;
  			break;
@@ -97,7 +97,7 @@ Npc* Observation :: getClosestNpc(std::vector<int>* _pVec_race_id) const
         {
         	for (unsigned int j = 0; j < _pVec_race_id->size(); j++)
         	{
-        		if ( visible_NPC_vec[i].npc->getRaceId() == (*_pVec_race_id)[j] )
+        		if ( visible_NPC_vec[i].npc->GetRaceId() == (*_pVec_race_id)[j] )
         		{
         			return visible_NPC_vec[i].npc;
 
@@ -125,8 +125,8 @@ void Observation :: findVisibleAsteroids_inSpace_inStatic()
 
         for (unsigned int ai = 0; ai < npc_owner->GetStarSystem()->ASTEROID_vec.size(); ai++)
         {    
-        	float dist = distBetweenPoints(npc_owner->getVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->ASTEROID_vec[ai]->GetPoints().getCenter());
-                if (dist < npc_owner->getVehicle()->propetries.radius)
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->ASTEROID_vec[ai]->GetPoints().getCenter());
+                if (dist < npc_owner->GetVehicle()->propetries.radius)
                 {
                 	visible_ASTEROID_vec.push_back( AsteroidObservationData(npc_owner->GetStarSystem()->ASTEROID_vec[ai], dist) );
                       	see.ASTEROID = true;
@@ -145,8 +145,8 @@ void Observation :: findVisibleMinerals_inSpace_inStatic()
 
         for (unsigned int mi = 0; mi < npc_owner->GetStarSystem()->MINERAL_vec.size(); mi++)
         {    
-         	float dist = distBetweenPoints(npc_owner->getVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->MINERAL_vec[mi]->GetPoints().getCenter());
-               	if (dist < npc_owner->getVehicle()->propetries.radius)
+         	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->MINERAL_vec[mi]->GetPoints().getCenter());
+               	if (dist < npc_owner->GetVehicle()->propetries.radius)
               	{              		
                		visible_MINERAL_vec.push_back(MineralObservationData(npc_owner->GetStarSystem()->MINERAL_vec[mi], dist));
               		see.MINERAL = true;
@@ -188,8 +188,8 @@ void Observation :: findVisibleContainers_inSpace_inStatic()
 
         for (unsigned int ci = 0; ci < npc_owner->GetStarSystem()->CONTAINER_vec.size(); ci++)
         {    
-        	float dist = distBetweenPoints(npc_owner->getVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->CONTAINER_vec[ci]->GetPoints().getCenter());
-                if (dist < npc_owner->getVehicle()->propetries.radius)
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->CONTAINER_vec[ci]->GetPoints().getCenter());
+                if (dist < npc_owner->GetVehicle()->propetries.radius)
                 {
                 	visible_CONTAINER_vec.push_back( ContainerObservationData(npc_owner->GetStarSystem()->CONTAINER_vec[ci], dist) );
                 	see.CONTAINER = true;
@@ -205,8 +205,8 @@ void Observation ::findVisibleNpcs_inSpace_inStatic()
 
         for (unsigned int i = 0; i < npc_owner->GetStarSystem()->NPC_inSPACE_vec.size(); i++)
         {    
-        	float dist = distBetweenPoints(npc_owner->getVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->NPC_inSPACE_vec[i]->getVehicle()->GetPoints().getCenter());
-                if (dist < npc_owner->getVehicle()->propetries.radius)
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->NPC_inSPACE_vec[i]->GetVehicle()->GetPoints().getCenter());
+                if (dist < npc_owner->GetVehicle()->propetries.radius)
                 {
                 	visible_NPC_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_inSPACE_vec[i], dist) );
                	} 
@@ -228,8 +228,8 @@ void Observation :: findVisibleRangerNpcs_inSpace_inStatic()
 
         for (unsigned int nri = 0; nri < npc_owner->GetStarSystem()->NPC_RANGER_inSPACE_vec.size(); nri++)
         {    
-        	float dist = distBetweenPoints(npc_owner->getVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->NPC_RANGER_inSPACE_vec[nri]->getVehicle()->GetPoints().getCenter());
-                if (dist < npc_owner->getVehicle()->propetries.radius)
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->NPC_RANGER_inSPACE_vec[nri]->GetVehicle()->GetPoints().getCenter());
+                if (dist < npc_owner->GetVehicle()->propetries.radius)
                 {
                 	visible_NPC_RANGER_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_RANGER_inSPACE_vec[nri], dist) );
                         see.RANGER = true;
@@ -247,8 +247,8 @@ void Observation :: findVisibleWarriorNpcs_inSpace_inStatic()
 
         for (unsigned int nwi = 0; nwi < npc_owner->GetStarSystem()->NPC_WARRIOR_inSPACE_vec.size(); nwi++)
         {    
-        	float dist = distBetweenPoints(npc_owner->getVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->NPC_WARRIOR_inSPACE_vec[nwi]->getVehicle()->GetPoints().getCenter());
-               	if (dist < npc_owner->getVehicle()->propetries.radius)
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->NPC_WARRIOR_inSPACE_vec[nwi]->GetVehicle()->GetPoints().getCenter());
+               	if (dist < npc_owner->GetVehicle()->propetries.radius)
               	{
                		visible_NPC_WARRIOR_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_WARRIOR_inSPACE_vec[nwi], dist) );
                		see.WARRIOR = true;
@@ -266,8 +266,8 @@ void Observation :: findVisibleTraderNpcs_inSpace_inStatic()
 
        	for (unsigned int nti = 0; nti < npc_owner->GetStarSystem()->NPC_TRADER_inSPACE_vec.size(); nti++)
        	{    
-       		float dist = distBetweenPoints(npc_owner->getVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->NPC_TRADER_inSPACE_vec[nti]->getVehicle()->GetPoints().getCenter());
-               	if (dist < npc_owner->getVehicle()->propetries.radius)
+       		float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->NPC_TRADER_inSPACE_vec[nti]->GetVehicle()->GetPoints().getCenter());
+               	if (dist < npc_owner->GetVehicle()->propetries.radius)
                	{
                		visible_NPC_TRADER_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_TRADER_inSPACE_vec[nti], dist) );
                		see.TRADER = true;
@@ -285,8 +285,8 @@ void Observation :: findVisiblePiratNpcs_inSpace_inStatic()
 
         for (unsigned int npi = 0; npi < npc_owner->GetStarSystem()->NPC_PIRAT_inSPACE_vec.size(); npi++)
         {    
-       		float dist = distBetweenPoints(npc_owner->getVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->NPC_PIRAT_inSPACE_vec[npi]->getVehicle()->GetPoints().getCenter());
-               	if (dist < npc_owner->getVehicle()->propetries.radius)
+       		float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->NPC_PIRAT_inSPACE_vec[npi]->GetVehicle()->GetPoints().getCenter());
+               	if (dist < npc_owner->GetVehicle()->propetries.radius)
                	{
                		visible_NPC_PIRAT_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_PIRAT_inSPACE_vec[npi], dist) );
                		see.PIRAT = true;
@@ -304,8 +304,8 @@ void Observation :: findVisibleDiplomatNpcs_inSpace_inStatic()
 
         for (unsigned int ndi = 0; ndi < npc_owner->GetStarSystem()->NPC_DIPLOMAT_inSPACE_vec.size(); ndi++)
         {    
-         	float dist = distBetweenPoints(npc_owner->getVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->NPC_DIPLOMAT_inSPACE_vec[ndi]->getVehicle()->GetPoints().getCenter());
-               	if (dist < npc_owner->getVehicle()->propetries.radius)
+         	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->NPC_DIPLOMAT_inSPACE_vec[ndi]->GetVehicle()->GetPoints().getCenter());
+               	if (dist < npc_owner->GetVehicle()->propetries.radius)
                	{
                		visible_NPC_DIPLOMAT_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_DIPLOMAT_inSPACE_vec[ndi], dist) );
                		see.DIPLOMAT = true;

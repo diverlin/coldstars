@@ -28,7 +28,7 @@ class UserInput
 
 		bool getNextTurnReady() const;
 
-		void update_inSpace();
+		void Update_inSpace();
 		void update_inKosmoport();
 
 	private:
