@@ -50,8 +50,7 @@ Player::~Player()
  	delete GUI_SPACE;
  	delete GUI_KOSMOPORT;
 	delete GUI_MAP;
-	delete USERINPUT; 
-	
+	delete USERINPUT; 	
 }  
             
 void Player::Update_global()
