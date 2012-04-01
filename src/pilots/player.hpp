@@ -26,8 +26,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Player 
 {
    	public:
-     		WeaponSelector weapon_selector;
-     		
     		Player();
      		~Player();
    
@@ -84,7 +82,8 @@ class Player
      	     	Screen* screen;
      	     	
      	     	ControlWord control;  
-     	     	
+     		WeaponSelector weapon_selector;
+     		     	     	
      	     	bool show_all_orbit;
      	     	bool show_all_path;
      	     	bool show_radar_range;
@@ -127,6 +126,8 @@ class Player
     		void Update_global(); 
     		
     		bool IsObjectOnScreen(const Points&) const;
+    		
+    		friend class UserInput;
 };
 
 #endif 
