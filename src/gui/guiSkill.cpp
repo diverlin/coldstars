@@ -76,11 +76,11 @@ void GuiSkill :: createControlSkillButtons()
 
 void GuiSkill :: update()
 {
-	int mxvp = player->getCursor()->getMousePos().x;
-     	int myvp = player->getScreen()->getHeight()  - player->getCursor()->getMousePos().y;         
-     	int lmb  = player->getCursor()->getMouseLeftButton();;
+	int mxvp = player->GetCursor()->getMousePos().x;
+     	int myvp = player->GetScreen()->getHeight()  - player->GetCursor()->getMousePos().y;         
+     	int lmb  = player->GetCursor()->getMouseLeftButton();;
 
-	Skill* skill = player->getNpc()->GetSkill();
+	Skill* skill = player->GetNpc()->GetSkill();
 
 	for (unsigned int i = 0; i < button_vec.size(); i++)
 	{
@@ -116,7 +116,7 @@ void GuiSkill :: update()
 
 void GuiSkill :: Render() const
 {
-	Skill* skill = player->getNpc()->GetScanTarget()->GetOwnerNpc()->GetSkill();
+	Skill* skill = player->GetNpc()->GetScanTarget()->GetOwnerNpc()->GetSkill();
      	TextureOb* texOb_skill = g_UNIQUE_TEXTURE_COLLECTOR.texOb_skill;
      	
     	int w = button_vec[0]->GetRect().getWidth();

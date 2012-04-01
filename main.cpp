@@ -31,7 +31,7 @@ int main()
 	Galaxy* galaxy = getNewGalaxy();
 	Player* player = getNewPlayer(galaxy);
 
-	player->getScreen()->resize(Config::Instance().SCREEN_WIDTH*2, Config::Instance().SCREEN_HEIGHT);
+	player->GetScreen()->resize(Config::Instance().SCREEN_WIDTH*2, Config::Instance().SCREEN_HEIGHT);
 
 	// GAME LOOP
 	while (Gui::GetWindow().IsOpened())
@@ -44,14 +44,14 @@ int main()
 			galaxy->Update(TIMER->getTurnTick());
 		}
 
-		if ((TIMER->getTurnEnded() == true) and (player->getNextTurnReady()))
+		if ((TIMER->getTurnEnded() == true) and (player->GetNextTurnReady()))
 		{
 			TIMER->nextTurn();
 		}              	
 		/* server code end */
 
 		/* client code start */
-		player->runSession(TIMER);
+		player->RunSession(TIMER);
 		/* client code end */           	
 	}
 

@@ -55,8 +55,8 @@ void UserInput :: update_inKosmoport()
 
 void UserInput :: getSimpleInputs()
 {
-   	player->getCursor()->setLeftMouseButton(false);
-   	player->getCursor()->setRightMouseButton(false);
+   	player->GetCursor()->setLeftMouseButton(false);
+   	player->GetCursor()->setRightMouseButton(false);
 
 	next_turn_ready = false;
 
@@ -78,9 +78,9 @@ void UserInput :: getSimpleInputs()
            		{
            			case sf::Key::Escape:
                			{
-              				if (player->getNpc()->GetScanTarget() != NULL)
+              				if (player->GetNpc()->GetScanTarget() != NULL)
               				{
-                		  		player->getNpc()->ResetScanTarget();
+                		  		player->GetNpc()->ResetScanTarget();
               				}
               				break;
                 		}
@@ -203,13 +203,13 @@ void UserInput :: getSimpleInputs()
           	
 	           		case sf::Key::G:   // Grapple
 	               	 	{
-	                	        if (player->getShowGrappleRange() == false)
+	                	        if (player->GetShowGrappleRange() == false)
 	            			{
-	                 			player->setShowGrappleRange(true);
+	                 			player->SetShowGrappleRange(true);
 	              			}   
 	              			else
 	              			{
-	                 			player->setShowGrappleRange(false);
+	                 			player->SetShowGrappleRange(false);
 	              			}
 	                       		break;
 	 			}
@@ -217,52 +217,52 @@ void UserInput :: getSimpleInputs()
 
 	           		case sf::Key::R: // RADAR
 	                	{
-	              			if (player->getShowRadarRange() == false)
+	              			if (player->GetShowRadarRange() == false)
 	              			{
-	                			player->setShowRadarRange(true);
+	                			player->SetShowRadarRange(true);
 	             			}
 	              			else
 	              			{
-	                			player->setShowRadarRange(false);
+	                			player->SetShowRadarRange(false);
 	             			}
 	                 	      	break;
 				}
 
 	           		case sf::Key::O: // Orbits
 	                	{
-	              			if (player->getShowAllOrbit() == false)
+	              			if (player->GetShowAllOrbit() == false)
 	              			{
-	                			player->setShowAllOrbit(true);
+	                			player->SetShowAllOrbit(true);
 	             			}
 	              			else
 	              			{
-	                			player->setShowAllOrbit(false);
+	                			player->SetShowAllOrbit(false);
 	             			}
 	                 	      	break;
 				}
 
 	           		case sf::Key::P: // Path
 	                	{
-	              			if (player->getShowAllPath() == false)
+	              			if (player->GetShowAllPath() == false)
 	              			{
-	                			player->setShowAllPath(true);
+	                			player->SetShowAllPath(true);
 	             			}
 	              			else
 	              			{
-	                			player->setShowAllPath(false);
+	                			player->SetShowAllPath(false);
 	             			}
 	                 	      	break;
 				}
 				
 				case sf::Key::F5:
 				{
-					player->getNpc()->GetStarSystem()->GetGalaxy()->SaveEvent();
+					player->GetNpc()->GetStarSystem()->GetGalaxy()->SaveEvent();
 					break;
 				}
 				
 				case sf::Key::F9:
 				{
-					player->getNpc()->GetStarSystem()->GetGalaxy()->LoadEvent();
+					player->GetNpc()->GetStarSystem()->GetGalaxy()->LoadEvent();
 					break;
 				}
 				
@@ -276,13 +276,13 @@ void UserInput :: getSimpleInputs()
 	                { 
 	           		case sf::Mouse::Left:
 	           		{              
-	              			player->getCursor()->setLeftMouseButton(true);
+	              			player->GetCursor()->setLeftMouseButton(true);
 	              			break;
 	              		} 
 	
 	           		case sf::Mouse::Right:
 	           		{
-	              			player->getCursor()->setRightMouseButton(true);
+	              			player->GetCursor()->setRightMouseButton(true);
 	              			break;
 	              		}
 	              	}
@@ -382,5 +382,5 @@ void UserInput :: scrollCamera()
             	}
         }
       
-      	player->getScreen()->bottomLeftGlobalCoordIncrease(vec2f(scroll_accel_x, scroll_accel_y));
+      	player->GetScreen()->bottomLeftGlobalCoordIncrease(vec2f(scroll_accel_x, scroll_accel_y));
 }

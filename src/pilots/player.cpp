@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../config/config.hpp"
 
 
-Player :: Player()
+Player::Player()
 { 
     	id = g_ID_GENERATOR.getNextId(); 
     	type_id = ENTITY::PLAYER_ID;
@@ -41,7 +41,7 @@ Player :: Player()
      	show_grapple_range = false;
 }
     
-Player :: ~Player()
+Player::~Player()
 {
 	delete cursor;
 	delete screen;
@@ -53,29 +53,8 @@ Player :: ~Player()
 	delete USERINPUT; 
 	
 }  
-    
-    
-void Player :: setWorldMapShowFlag(bool _show_worldmap) { control.worldmap = _show_worldmap; }
-          	
-void Player :: setShowAllOrbit(bool show_all_orbit)     { this->show_all_orbit = show_all_orbit; }
-void Player :: setShowAllPath(bool show_all_path)       { this->show_all_path = show_all_path; }
-void Player :: setShowRadarRange(bool show_radar_range) { this->show_radar_range = show_radar_range; }
-void Player :: setShowGrappleRange(bool show_grapple_range)  { this->show_grapple_range = show_grapple_range; }
-          	
-bool Player :: getWorldMapShowFlag() const { return control.worldmap; }         	
-Npc* Player :: getNpc() const       { return npc; }
-Cursor* Player :: getCursor() const { return cursor; }
-Screen* Player :: getScreen() const { return screen; }
-         
-bool Player :: getShowAllOrbit() const     { return show_all_orbit; }
-bool Player :: getShowAllPath() const      { return show_all_path; }
-bool Player :: getShowRadarRange() const   { return show_radar_range; }
-bool Player :: getShowGrappleRange() const { return show_grapple_range; }          	 
-   
-bool Player :: getNextTurnReady() const { return USERINPUT->getNextTurnReady(); }    
-   
-          
-void Player :: update_global()
+            
+void Player::Update_global()
 {
 	if (npc->GetAlive()  == true)
 	{       	
@@ -83,17 +62,14 @@ void Player :: update_global()
 	}
 }  
                			
-void Player :: bindNpc(Npc* npc)
+void Player::BindNpc(Npc* npc)
 {
     	this->npc = npc;
     	npc->SetUpperControl(true);
     	cursor->getSlot()->SetOwnerVehicle(npc->GetVehicle());
 }
 
-    
-
-
-void Player :: clearVisibleEntities()
+void Player::ClearVisibleEntities()
 {
         visible_STAR_vec.clear();
         visible_PLANET_vec.clear();
@@ -114,26 +90,25 @@ void Player :: clearVisibleEntities()
     	visible_text_DAMAGE_vec.clear();
 }
     		
-
-void Player :: addIfVisible(Star* star)
+void Player::AddIfVisible(Star* star)
 {
-        if (isObjectOnScreen(star->GetPoints()))
+        if (IsObjectOnScreen(star->GetPoints()))
         {         
 		visible_STAR_vec.push_back(star);
 	}
 }
 
-void Player :: addIfVisible(Planet* planet)
+void Player::AddIfVisible(Planet* planet)
 {
-        if (isObjectOnScreen(planet->GetPoints()))
+        if (IsObjectOnScreen(planet->GetPoints()))
         {  
 		visible_PLANET_vec.push_back(planet);
 	}
 }
 
-void Player :: addIfVisible(Asteroid* asteroid)     		
+void Player::AddIfVisible(Asteroid* asteroid)     		
 {
-	if (isObjectOnScreen(asteroid->GetPoints()))
+	if (IsObjectOnScreen(asteroid->GetPoints()))
         {   	
                 //if ( distBetweenPoints(asteroid->getPoints()->getCenter(), player_center) < player_vision_radius )
                 {
@@ -142,9 +117,9 @@ void Player :: addIfVisible(Asteroid* asteroid)
         }
 }
 
-void Player :: addIfVisible(Mineral* mineral)
+void Player::AddIfVisible(Mineral* mineral)
 {
-	if (isObjectOnScreen(mineral->GetPoints()))
+	if (IsObjectOnScreen(mineral->GetPoints()))
         {   
         	//if ( distBetweenPoints(mineral->getPoints()->getCenter(), player_center) < player_vision_radius )
                 {
@@ -153,9 +128,9 @@ void Player :: addIfVisible(Mineral* mineral)
 	}
 }
 
-void Player :: addIfVisible(Container* container)     	
+void Player::AddIfVisible(Container* container)     	
 {
-        if (isObjectOnScreen(container->GetPoints()))
+        if (IsObjectOnScreen(container->GetPoints()))
         {    
         	//if ( distBetweenPoints(container->getPoints()->getCenter(), player_center) < player_vision_radius )
                 {
@@ -164,9 +139,9 @@ void Player :: addIfVisible(Container* container)
 	}
 }
 
-void Player :: addIfVisible(RocketBullet* rocket)  
+void Player::AddIfVisible(RocketBullet* rocket)  
 {
-        if (isObjectOnScreen(rocket->GetPoints()))  
+        if (IsObjectOnScreen(rocket->GetPoints()))  
         {  
              	//if ( distBetweenPoints(rocket->getPoints()->getCenter(), player_center) < player_vision_radius )
                 {
@@ -175,9 +150,9 @@ void Player :: addIfVisible(RocketBullet* rocket)
         }
 }
 
-void Player :: addIfVisible(BlackHole* blackhole)  
+void Player::AddIfVisible(BlackHole* blackhole)  
 {
-        if (isObjectOnScreen(blackhole->GetPoints()))  
+        if (IsObjectOnScreen(blackhole->GetPoints()))  
         {  
         	//if ( distBetweenPoints(blackhole->getPoints()->getCenter(), player_center) < player_vision_radius )
         	{
@@ -186,9 +161,9 @@ void Player :: addIfVisible(BlackHole* blackhole)
 	}
 }
 
-void Player :: addIfVisible(SpaceStation* spacestation)  
+void Player::AddIfVisible(SpaceStation* spacestation)  
 {
-        if (isObjectOnScreen(spacestation->GetPoints()))  
+        if (IsObjectOnScreen(spacestation->GetPoints()))  
         {	  
                 //if ( distBetweenPoints(spacestation->getPoints()->getCenter(), player_center) < player_vision_radius )
                	{
@@ -197,9 +172,9 @@ void Player :: addIfVisible(SpaceStation* spacestation)
         }
 }
 
-void Player :: addIfVisible(Satellite* satellite) 
+void Player::AddIfVisible(Satellite* satellite) 
 {
-        if (isObjectOnScreen(satellite->GetPoints()))  
+        if (IsObjectOnScreen(satellite->GetPoints()))  
         {	  
         	//if ( distBetweenPoints(satellite->getPoints()->getCenter(), player_center) < player_vision_radius )
                 {
@@ -208,9 +183,9 @@ void Player :: addIfVisible(Satellite* satellite)
         }
 }
 
-void Player :: addIfVisible(Ship* ship) 
+void Player::AddIfVisible(Ship* ship) 
 {
-        if (isObjectOnScreen(ship->GetPoints()))
+        if (IsObjectOnScreen(ship->GetPoints()))
         {	  
                 //if ( distBetweenPoints(ship->getPoints()->getCenter(), player_center) < player_vision_radius )
                	{
@@ -219,29 +194,28 @@ void Player :: addIfVisible(Ship* ship)
 	}
 }     		
         
-void Player :: addIfVisible(ShockWaveEffect* effect)
+void Player::AddIfVisible(ShockWaveEffect* effect)
 {
 	visible_effect_SHOCKWAVE_vec.push_back(effect);
 }
 
-void Player :: addIfVisible(LazerTraceEffect* effect)
+void Player::AddIfVisible(LazerTraceEffect* effect)
 {
 	visible_effect_LAZERTRACE_vec.push_back(effect);
 }
  
-void Player :: addIfVisible(BaseParticleSystem* effect)
+void Player::AddIfVisible(BaseParticleSystem* effect)
 {
 	visible_effect_PARTICLESYSTEM_vec.push_back(effect);
 }
 
-void Player :: addIfVisible(VerticalFlowText* effect)
+void Player::AddIfVisible(VerticalFlowText* effect)
 {
 	visible_text_DAMAGE_vec.push_back(effect);
 }     		
 
-
-   
-void Player :: renderEntities_NEW()
+  
+void Player::RenderEntities_NEW()
 {   
 	int w = screen->getWidth();
 	int h = screen->getHeight();
@@ -428,7 +402,7 @@ void Player :: renderEntities_NEW()
 
 	
   
-void Player :: renderEntities_OLD()
+void Player::RenderEntities_OLD()
 {   
 	glLoadIdentity();
         npc->GetStarSystem()->DrawBackground(screen->getBottomLeftGlobalCoord());
@@ -523,17 +497,16 @@ void Player :: renderEntities_OLD()
 }
 
 
-
-void Player :: Render(bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
+void Player::Render(bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {
     	
     	if (Config::Instance().MODERN_EFFECTS == true)
     	{
-    		renderEntities_NEW();
+    		RenderEntities_NEW();
     	}
     	else
     	{
-        	renderEntities_OLD(); 
+        	RenderEntities_OLD(); 
         }
                 
         if (turn_ended == true)
@@ -550,21 +523,19 @@ void Player :: Render(bool turn_ended, bool forceDraw_orbits, bool forceDraw_pat
        	 	npc->GetVehicle()->GetDriveComplex()->drawPath();
        		npc->GetVehicle()->GetWeaponComplex()->RenderWeaponsRange();
        	
-        	if (getShowRadarRange() == true)
+        	if (GetShowRadarRange() == true)
         	{
         		npc->GetVehicle()->RenderRadarRange();
         	}
 
-        	if (getShowGrappleRange() == true)
+        	if (GetShowGrappleRange() == true)
         	{
         		npc->GetVehicle()->RenderGrappleRange();
         	}
 	}
 } 
 
-
-
-void Player :: mouseControl() // all large objects must be cheked by last
+void Player::MouseInteraction_inOuterSpace() // all large objects must be cheked by last
 {   
     	bool cursor_has_target = false;   
  
@@ -690,7 +661,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
 
                 			if (mrb == true)
                 			{
-                				if (getShowGrappleRange() == true)
+                				if (GetShowGrappleRange() == true)
                 				{
 	       						//if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
 	       						//{
@@ -786,7 +757,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
 
                 			if (mrb == true)
                 			{
-                				if (getShowGrappleRange() == true)
+                				if (GetShowGrappleRange() == true)
                 				{
 	       						if (npc->GetVehicle()->ableTo.GRAB == true)
 	       						{
@@ -863,7 +834,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
 
                 			if (mrb == true)
                 			{
-                				if (getShowGrappleRange() == true)
+                				if (GetShowGrappleRange() == true)
                 				{
 	       						//if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
 	       						//{
@@ -956,12 +927,7 @@ void Player :: mouseControl() // all large objects must be cheked by last
 }
 
 
-
-
-
-
-
-bool Player :: isObjectOnScreen(const Points& points) const
+bool Player::IsObjectOnScreen(const Points& points) const
 {
         float ob_centerx = points.getCenter().x;
         float ob_centery = points.getCenter().y;
@@ -982,33 +948,32 @@ bool Player :: isObjectOnScreen(const Points& points) const
 }
 
 
-
-void Player :: outerspace(GameTimer* TIMER)
+void Player :: InOuterspace(GameTimer* TIMER)
 {
 	USERINPUT->Update_inSpace();
 
 	cursor->updateMousePos();
 
 	npc->GetStarSystem()->FindVisibleEntities_c(this);
-	this->Render(TIMER->getTurnEnded(), getShowAllOrbit(), getShowAllPath()); 
+	this->Render(TIMER->getTurnEnded(), GetShowAllOrbit(), GetShowAllPath()); 
 
 	if (TIMER->getTurnEnded() == true)  
 	{
-		if ( (npc->GetScanTarget() == NULL) && (getWorldMapShowFlag() == false) )
+		if ( (npc->GetScanTarget() == NULL) && (GetWorldMapShowFlag() == false) )
 		{
-			mouseControl();  // improove to exclude all render calls
+			MouseInteraction_inOuterSpace();  // improove to exclude all render calls
 		}
 	}
 
 	//////////// SCAN ///////////////
-	if (getNpc()->GetScanTarget() != NULL )
+	if (GetNpc()->GetScanTarget() != NULL )
 	{         
 		GUI_MANAGER->updateInScan(false);
 		GUI_MANAGER->renderInScan();                       
 	}
 
 	//////////// WORLDMAP ///////////
-	if (getWorldMapShowFlag() == true )  
+	if (GetWorldMapShowFlag() == true )  
 	{
 		GUI_MAP->update();   
 		GUI_MAP->Render();   
@@ -1018,7 +983,8 @@ void Player :: outerspace(GameTimer* TIMER)
 	GUI_SPACE->Render();
 }
 
-void Player :: kosmoport()
+
+void Player::InKosmoport()
 {
 	USERINPUT->update_inKosmoport();
          
@@ -1042,7 +1008,7 @@ void Player :: kosmoport()
         {
         	if (npc->GetScanTarget() != npc->GetVehicle())
         	{
-        		getNpc()->SetScanTarget(npc->GetVehicle());
+        		GetNpc()->SetScanTarget(npc->GetVehicle());
         	}
                                     
         	GUI_MANAGER->updateInStore();
@@ -1072,19 +1038,19 @@ void Player :: kosmoport()
          GUI_KOSMOPORT->Render(); 
 }
 
-void Player :: runSession(GameTimer* TIMER)
+void Player::RunSession(GameTimer* TIMER)
 {
-	this->update_global();     
+	this->Update_global();     
 
        	if (npc->GetPlaceTypeId() == ENTITY::SPACE_ID)
        	{  
-        	this->outerspace(TIMER);
+        	this->InOuterspace(TIMER);
        	}
 
 		
        	if (npc->GetPlaceTypeId() == ENTITY::KOSMOPORT_ID)
        	{
-        	this->kosmoport();
+        	this->InKosmoport();
        	} 
        	
        	screen->update();           	

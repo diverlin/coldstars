@@ -92,13 +92,13 @@ bool Angar :: remove(Vehicle* vehicle)
 
 void Angar :: mouseControl(Player* player)
 {
-        //bool lmb = player->getCursor()->getMouseLeftButton(); 
-        bool rmb = player->getCursor()->getMouseRightButton(); 
+        //bool lmb = player->GetCursor()->getMouseLeftButton(); 
+        bool rmb = player->GetCursor()->getMouseRightButton(); 
 
         for (unsigned int i = 0; i < platform_vec.size(); i++)
         { 
-                float dist = distBetweenPoints(player->getCursor()->getMousePos().x, 
-                                               player->getScreen()->getHeight() - player->getCursor()->getMousePos().y, 
+                float dist = distBetweenPoints(player->GetCursor()->getMousePos().x, 
+                                               player->GetScreen()->getHeight() - player->GetCursor()->getMousePos().y, 
                                                platform_vec[i]->GetRect().getCenter().x, 
                                                platform_vec[i]->GetRect().getCenter().y);
         				
@@ -108,7 +108,7 @@ void Angar :: mouseControl(Player* player)
                         {
                                 if (platform_vec[i]->GetVehicle() != NULL)
                                 {
-                                        player->getNpc()->SetScanTarget(platform_vec[i]->GetVehicle());
+                                        player->GetNpc()->SetScanTarget(platform_vec[i]->GetVehicle());
                                 }
                         }
                 }
@@ -133,7 +133,7 @@ void Angar :: Render(Player* player) const
 
 void Angar :: renderBackground(Player* player) const
 {
-     	Rect screen_rect = Rect(0, 0, player->getScreen()->getWidth(), player->getScreen()->getHeight());
+     	Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());
      	drawTexturedRect(texOb_background, screen_rect, -2);  
 }
 
@@ -152,8 +152,8 @@ void Angar :: RenderItemInfo(Player* player) const
 		if (platform_vec[i]->GetVehicle() != NULL)
                 {
 
-                	float dist = distBetweenPoints(player->getCursor()->getMousePos().x, 
-                        	                       player->getScreen()->getHeight() - player->getCursor()->getMousePos().y, 
+                	float dist = distBetweenPoints(player->GetCursor()->getMousePos().x, 
+                        	                       player->GetScreen()->getHeight() - player->GetCursor()->getMousePos().y, 
                                 	               platform_vec[i]->GetRect().getCenter().x, 
                                         	       platform_vec[i]->GetRect().getCenter().y);
         				
