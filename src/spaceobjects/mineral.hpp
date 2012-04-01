@@ -30,7 +30,7 @@ class Mineral : public SpaceItemBase
         	
         private:
         	InfoTable info;
-        	void updateInfo();
+        	void UpdateInfo();
 };
 
 Mineral* getNewMineral();

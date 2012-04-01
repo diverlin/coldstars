@@ -175,38 +175,38 @@ void Vehicle::RecalculateCollisionRadius()
 //// ******** DOCKING/LAUNCHING ******** 
 void Vehicle::HyperJumpEvent()
 {
-        starsystem->removeShip(data_id.id);  
-        starsystem->removeNpc(owner_npc->GetId(), owner_npc->GetSubTypeId());  
+        starsystem->RemoveShip(data_id.id);  
+        starsystem->RemoveNpc(owner_npc->GetId(), owner_npc->GetSubTypeId());  
                                                         
-        ((StarSystem*)drive_complex->getTarget())->addToHyperJumpQueue(owner_npc);
+        ((StarSystem*)drive_complex->getTarget())->AddToHyperJumpQueue(owner_npc);
         drive_complex->resetTarget();        
 }
                 
                 
 void Vehicle::DockingEvent()
 {
-     	starsystem->removeShip(data_id.id);
-     	starsystem->removeNpc(owner_npc->GetId(), owner_npc->GetSubTypeId());
+     	starsystem->RemoveShip(data_id.id);
+     	starsystem->RemoveNpc(owner_npc->GetId(), owner_npc->GetSubTypeId());
         
              	     	     	
      	if (drive_complex->getTarget()->GetTypeId() == ENTITY::PLANET_ID)
      	{
                 Planet* planet = ((Planet*)drive_complex->getTarget());
                 
-     		planet->getLand()->add((Ship*)this);
-		planet->getLand()->add(owner_npc);
+     		planet->GetLand()->add((Ship*)this);
+		planet->GetLand()->add(owner_npc);
 		
-		owner_npc->setLand(planet->getLand());
+		owner_npc->SetLand(planet->GetLand());
 	}
 	
 	if (drive_complex->getTarget()->GetTypeId() == ENTITY::SPACESTATION_ID)
 	{
                 SpaceStation* spacestation = ((SpaceStation*)drive_complex->getTarget());
                                 
-	     	spacestation->getLand()->add((Ship*)this);
-		spacestation->getLand()->add(owner_npc);
+	     	spacestation->GetLand()->add((Ship*)this);
+		spacestation->GetLand()->add(owner_npc);
 		
-		owner_npc->setLand(spacestation->getLand());
+		owner_npc->SetLand(spacestation->GetLand());
 	}
 }
 
@@ -216,20 +216,20 @@ void Vehicle::LaunchingEvent()
 
      	if (drive_complex->getTarget()->GetTypeId() == ENTITY::PLANET_ID)
      	{
-     		starsystem->addToSpace(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
-     		starsystem->addToSpace(owner_npc);
+     		starsystem->AddToSpace(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
+     		starsystem->AddToSpace(owner_npc);
 
-     		((Planet*)drive_complex->getTarget())->getLand()->remove(this);
-     		((Planet*)drive_complex->getTarget())->getLand()->remove(owner_npc);
+     		((Planet*)drive_complex->getTarget())->GetLand()->remove(this);
+     		((Planet*)drive_complex->getTarget())->GetLand()->remove(owner_npc);
 	}
 	
      	if (drive_complex->getTarget()->GetTypeId() == ENTITY::SPACESTATION_ID)
      	{
-     		starsystem->addToSpace(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
-     		starsystem->addToSpace(owner_npc);
+     		starsystem->AddToSpace(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
+     		starsystem->AddToSpace(owner_npc);
 
-     		((SpaceStation*)drive_complex->getTarget())->getLand()->remove(this);
-     		((SpaceStation*)drive_complex->getTarget())->getLand()->remove(owner_npc);
+     		((SpaceStation*)drive_complex->getTarget())->GetLand()->remove(this);
+     		((SpaceStation*)drive_complex->getTarget())->GetLand()->remove(owner_npc);
 	}	
 
      	drive_complex->resetTarget();
@@ -259,7 +259,7 @@ void Vehicle::Hit(int _damage, bool show_effect)
        		// improove
        		Color4i color;  	       		
        		VerticalFlowText* _text = new VerticalFlowText(int2str(_damage), points.getCenter(), color, collision_radius);
-       		starsystem->addToSpace(_text); 
+       		starsystem->AddToSpace(_text); 
        	}
 }
 
@@ -528,12 +528,12 @@ std::string Vehicle::returnProtectionStr()
 
 void Vehicle::RenderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y)
 {  
-        this->updateInfo(); // virtual, overriding
+        this->UpdateInfo(); // virtual, overriding
      	drawInfoIn2Column(&info.title_list, &info.value_list, _pos_x, _pos_y, _offset_x, _offset_y);
      	
      	if (owner_npc != NULL)
      	{
-     		owner_npc->renderInfo(_pos_x, _pos_y, _offset_x, _offset_y);
+     		owner_npc->RenderInfo(_pos_x, _pos_y, _offset_x, _offset_y);
      	}
 }
 
@@ -612,10 +612,10 @@ bool Vehicle::ExternalRepairEvent()
         unsigned int _fix = data_korpus.armor - data_life.armor;
         unsigned int _price = _fix/10;
         
-        if (owner_npc->getCredits() > _price)
+        if (owner_npc->GetCredits() > _price)
         {
                 data_life.armor = data_korpus.armor;
-                owner_npc->decreaseCredits(_price);
+                owner_npc->DecreaseCredits(_price);
                 return true;  
         }
         
@@ -703,7 +703,7 @@ void Vehicle::GrappleMicroProgramm()
        				        if (_slot != NULL)
        					{
        						//_slot->InsertItem(_vehicle);
-       						starsystem->addToRemoveFromOuterSpaceQueue(_vehicle);
+       						starsystem->AddToRemoveFromOuterSpaceQueue(_vehicle);
        					}
 					grapple_slot->GetGrappleEquipment()->addToRemoveQueue(_vehicle);
        					break;

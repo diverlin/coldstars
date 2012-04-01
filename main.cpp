@@ -47,8 +47,6 @@ int main()
 		if ((TIMER->getTurnEnded() == true) and (player->getNextTurnReady()))
 		{
 			TIMER->nextTurn();
-			galaxy->SaveEvent();
-			galaxy->LoadEvent();
 		}              	
 		/* server code end */
 

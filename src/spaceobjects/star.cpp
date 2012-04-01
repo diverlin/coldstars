@@ -87,7 +87,7 @@ void Star :: render_OLD()
 }
 
 
-void Star :: updateInfo()
+void Star :: UpdateInfo()
 { 
 	info.clear();
     	info.addTitleStr("STAR");
@@ -96,7 +96,7 @@ void Star :: updateInfo()
 
 void Star :: renderInfo_inSpace(vec2f scroll_coords)
 { 
-	updateInfo();
+	UpdateInfo();
      	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);
 }
 

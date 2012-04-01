@@ -165,7 +165,7 @@ void ItemSlot::DropItemToSpace()
 	
 	// update mass
 
-	owner_vehicle->GetStarSystem()->addToSpace(_container, owner_vehicle->GetPoints().getCenter());	
+	owner_vehicle->GetStarSystem()->AddToSpace(_container, owner_vehicle->GetPoints().getCenter());	
 
 	//printf("container was created in ss_id = %i, pos = %f, %f\n", _starsystem->GetId(), _container->getPoints()->getCenter().x, _container->getPoints()->getCenter().y );
 }

@@ -38,7 +38,7 @@ class Satellite : public Vehicle
         private:
         	Orbit* orbit;
 
-        	virtual void updateInfo();
+        	virtual void UpdateInfo();
 };
 
 

@@ -23,26 +23,26 @@ MacroScenarioSelfSafety :: MacroScenarioSelfSafety()
 MacroScenarioSelfSafety :: ~MacroScenarioSelfSafety() 
 {}
 
-void MacroScenarioSelfSafety :: update_inStatic(Npc* _npc) const
+void MacroScenarioSelfSafety :: update_inStatic(Npc* npc) const
 {
-	if (_npc->GetStarSystem()->getCaptured() == false)
+	if (npc->GetStarSystem()->GetCaptured() == false)
 	{
-		if (_npc->getStateMachine()->getCurrentMacroTask()->getTarget()->GetTypeId() != ENTITY::PLANET_ID)
+		if (npc->GetStateMachine()->getCurrentMacroTask()->getTarget()->GetTypeId() != ENTITY::PLANET_ID)
 		{ 
-			_npc->getStateMachine()->setCurrentMicroTask(MICROSCENARIO_DOCKING, _npc->getPlanetForDocking());
+			npc->GetStateMachine()->setCurrentMicroTask(MICROSCENARIO_DOCKING, npc->GetPlanetForDocking());
 		}
 	}
 	else
 	{
-		if (_npc->getStateMachine()->getCurrentMicroTask()->getTarget()->GetTypeId() != ENTITY::STARSYSTEM_ID)
+		if (npc->GetStateMachine()->getCurrentMicroTask()->getTarget()->GetTypeId() != ENTITY::STARSYSTEM_ID)
 		{
-			_npc->getStateMachine()->setCurrentMicroTask(MICROSCENARIO_JUMP, _npc->getFailBackStarSystem());
+			npc->GetStateMachine()->setCurrentMicroTask(MICROSCENARIO_JUMP, npc->GetFailBackStarSystem());
 		}
 	}        
 }
 
 
-std::string MacroScenarioSelfSafety :: getDescription(Npc* _npc) const
+std::string MacroScenarioSelfSafety :: getDescription(Npc* npc) const
 {
 	return "MacroScenarioSelfSafety";
 }

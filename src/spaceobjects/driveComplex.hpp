@@ -40,7 +40,7 @@ class DriveComplex
        	
         	void resetTarget();
         	
-        	void update_inSpace_inStatic();
+        	void Update_inSpace_inStatic();
         	void update_inSpace_inDynamic();
                 
                 void drawPath();

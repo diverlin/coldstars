@@ -123,8 +123,8 @@ void LazerEquipment :: fireEvent_TRUE()
     	
     	Deterioration();
     	
-    	slot->GetOwnerVehicle()->GetStarSystem()->addToSpace(_lazer_trace_effect);
-    	slot->GetOwnerVehicle()->GetStarSystem()->addToSpace(_damage_effect);
+    	slot->GetOwnerVehicle()->GetStarSystem()->AddToSpace(_lazer_trace_effect);
+    	slot->GetOwnerVehicle()->GetStarSystem()->AddToSpace(_damage_effect);
 } 
 
 

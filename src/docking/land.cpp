@@ -43,7 +43,7 @@ bool Land :: add(Npc* npc)
         npc->SetPlaceTypeId(ENTITY::LAND_ID);        
         NPC_vec.push_back(npc);
 
-        npc->setLand(this);
+        npc->SetLand(this);
  
         return true;
 }
@@ -97,6 +97,6 @@ void Land :: ai()
 {
         for (unsigned int i = 0; i < NPC_vec.size(); i++)
         {
-           	NPC_vec[i]->thinkCommon_inLand_inStatic();      
+           	NPC_vec[i]->ThinkCommon_inLand_inStatic();      
 	}
 }  

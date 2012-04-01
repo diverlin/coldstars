@@ -46,7 +46,7 @@ void GuiManager :: updateInStore()
 
 void GuiManager :: updateInScan(bool allow_full_control)
 {
-        if ( (player->getNpc()->getVehicle() == player->getNpc()->getScanTarget()) and (allow_full_control == false) )
+        if ( (player->getNpc()->GetVehicle() == player->getNpc()->GetScanTarget()) and (allow_full_control == false) )
     	{
         	allow_full_control = true;  
         }    	// modify full control for friend ships         

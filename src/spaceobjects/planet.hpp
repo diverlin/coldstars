@@ -29,10 +29,10 @@ class Planet : public PlanetBase
 		~Planet();
 
 		int getDockingRadius() const;
-		LandBase* getLand() const;
+		LandBase* GetLand() const;
 
 		void update_inSpace(int, bool);
-		void update_inSpace_inStatic();
+		void Update_inSpace_inStatic();
 
 		void renderInfo_inSpace(vec2f);
 
@@ -44,7 +44,7 @@ class Planet : public PlanetBase
 		LandBase* land;
 
 		unsigned long int population;
-		void updateInfo();
+		void UpdateInfo();
 
 		void PostDeathUniqueEvent(bool);
 }; 

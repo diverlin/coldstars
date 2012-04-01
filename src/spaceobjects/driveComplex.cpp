@@ -144,7 +144,7 @@ void DriveComplex :: defineDistance(int _action_id)
 }
                       
 
-void DriveComplex :: update_inSpace_inStatic()
+void DriveComplex :: Update_inSpace_inStatic()
 {
 	if (target != NULL)
 	{
@@ -230,9 +230,9 @@ bool DriveComplex :: getDockingPermission()
 {
 	switch(target->GetTypeId())
 	{
-		case ENTITY::PLANET_ID:       { return ((Planet*)target)->getLand()->getPermissionToLand(); break; }
-		case ENTITY::SPACESTATION_ID: { return ((SpaceStation*)target)->getLand()->getPermissionToLand(); break; }
-		//case SHIP_ID:   { return targetOb->getVehicle()->getPermissionToLand(); break; }
+		case ENTITY::PLANET_ID:       { return ((Planet*)target)->GetLand()->getPermissionToLand(); break; }
+		case ENTITY::SPACESTATION_ID: { return ((SpaceStation*)target)->GetLand()->getPermissionToLand(); break; }
+		//case SHIP_ID:   { return targetOb->GetVehicle()->getPermissionToLand(); break; }
 	}
 	
         return false;

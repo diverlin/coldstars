@@ -36,7 +36,7 @@ class Asteroid : public PlanetBase
 	private:      	
 		void PostDeathUniqueEvent(bool);
 
-		void updateInfo();
+		void UpdateInfo();
 }; 
 
 

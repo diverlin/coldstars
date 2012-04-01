@@ -29,7 +29,7 @@ SpaceStation :: ~SpaceStation()
 	delete land;
 }    
     
-LandBase* SpaceStation :: getLand() const { return land; }
+LandBase* SpaceStation :: GetLand() const { return land; }
 	
 	      
 void SpaceStation :: createLand(int race_id)
@@ -47,7 +47,7 @@ void SpaceStation :: update_inSpace(int time, bool show_effect)
 
 
 //overriding
-void SpaceStation :: updateInfo()
+void SpaceStation :: UpdateInfo()
 {
 	info.clear();
 

@@ -27,13 +27,13 @@ class SpaceStation : public Vehicle
         	SpaceStation(int);
         	~SpaceStation();
         	
-        	LandBase* getLand() const;
+        	LandBase* GetLand() const;
 
 		void createLand(int);
 
 		void update_inSpace(int, bool);
 		
-        	virtual void updateInfo(); 
+        	virtual void UpdateInfo(); 
         	
         	void updateRenderStuff();
         	void render_inSpace() const;
