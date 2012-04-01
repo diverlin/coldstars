@@ -80,6 +80,10 @@ void StarSystem::AddToSpace(Vehicle* vehicle, vec2f center, float angle, BaseGam
 		}
 	}
      	
+     	if (vehicle->GetOwnerNpc())
+     	{
+     		AddToSpace(vehicle->GetOwnerNpc());
+     	}
      	
 }
 
@@ -159,7 +163,7 @@ void StarSystem::AddToSpace(BaseParticleSystem* _ps)                  { effect_P
 void StarSystem::AddToSpace(VerticalFlowText* _text)                  { text_DAMAGE_vec.push_back(_text); }
 void StarSystem::AddToSpace(DistantNebulaBgEffect* dn)                { distantNebulaBgEffect_vec.push_back(dn); }
 void StarSystem::AddToSpace(DistantStarBgEffect* ds)                  { distantStarBgEffect_vec.push_back(ds); }
-void StarSystem::AddToHyperJumpQueue(Npc* npc)                        { NPC_appear_vec.push_back(npc); }	
+void StarSystem::AddToHyperJumpQueue(Vehicle* vehicle)                { appear_VEHICLE_queue.push_back(vehicle); }	
 void StarSystem::AddToRemoveFromOuterSpaceQueue(Mineral* mineral)     { remove_MINERAL_queue.push_back(mineral); }
 void StarSystem::AddToRemoveFromOuterSpaceQueue(Container* container) { remove_CONTAINER_queue.push_back(container); }
 
@@ -993,16 +997,15 @@ void StarSystem :: manageDeadObjects_s()
 
 void StarSystem::PostHyperJumpEvent()
 {
-        for (unsigned int i = 0; i<NPC_appear_vec.size(); i++)
+        for (unsigned int i = 0; i<appear_VEHICLE_queue.size(); i++)
         {               
         	vec2f center(getRandInt(700, 1200), getRandInt(700, 1200));
 		float angle = getRandInt(0, 360);  
 		
-                AddToSpace(NPC_appear_vec[i]->GetVehicle(), center, angle, NPC_appear_vec[i]->GetVehicle()->GetParent());  
-                AddToSpace(NPC_appear_vec[i]);
+                AddToSpace(appear_VEHICLE_queue[i], center, angle, appear_VEHICLE_queue[i]->GetParent());  
         }
               
-        NPC_appear_vec.clear();  
+        appear_VEHICLE_queue.clear();  
 }
 
 void StarSystem::LaunchingEvent() const
@@ -1065,14 +1068,15 @@ void StarSystem::SaveUniqueStarSystem(const std::string& root) const
 	SaveManager::Instance().Put(root+"galaxy_id", galaxy->GetId());
 }
 
-void StarSystem::SaveEvent(const std::string& root) const
+void StarSystem::SaveEvent() const
 {
-	std::string starsystem_root = root+"starsystem."+int2str(data_id.id)+".";
+	std::string starsystem_root = "starsystem."+int2str(data_id.id)+".";
 	SaveUniqueBaseGameEntity(starsystem_root);
 	SaveUniqueStarSystem(starsystem_root);
-	//for (unsigned int i = 0; i < SHIP_inSPACE_vec.size(); i++) 
-	{ 
-	//	SHIP_inSPACE_vec[i]->SaveEvent(starsystem_root); 
+
+	for (unsigned int i = 0; i < SHIP_inSPACE_vec.size(); i++) 
+	{
+		SHIP_inSPACE_vec[i]->SaveEvent(); 
 	} 
 }
 

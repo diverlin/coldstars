@@ -20,31 +20,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Galaxy::Galaxy()
 { 
-	id = g_ID_GENERATOR.getNextId();
-	
-    	starsytem_counter = 0;
-    	star_counter      = 0;
-    	ship_counter      = 0;
-    	planet_counter    = 0;
-    		
+	data_id.id         = g_ID_GENERATOR.getNextId();
+    	data_id.type_id    = ENTITY::GALAXY_ID;
+    	data_id.subtype_id = NONE_ID;
+    	
     	int starsystem_total_num = getRandInt(ENTITY::GALAXY::STARSYSTEM_NUM_MIN, ENTITY::GALAXY::STARSYSTEM_NUM_MAX);
-    	while(starsytem_counter < starsystem_total_num)
+    	int counter_starsytem = 0;
+    	while(counter_starsytem < starsystem_total_num)
     	{  
         	StarSystem* starsystem = generateEntireStarSystem();
         	starsystem->SetGalaxy(this);
         	STARSYSTEM_vec.push_back(starsystem);
         	
-        	starsytem_counter++;
+        	counter_starsytem++;
     	}
 }
 
-
-
+////ugly
 StarSystem* Galaxy::GetRandomStarSystem()
 {
 	return STARSYSTEM_vec[getRandInt(0, STARSYSTEM_vec.size())];
 }
-
 
 StarSystem* Galaxy::GetRandomCapturedStarSystem()
 {
@@ -60,8 +56,8 @@ StarSystem* Galaxy::GetRandomCapturedStarSystem()
 	
 	return ss_vec[getRandInt(0, ss_vec.size())];
 }
+//ugly
      		
-
 void Galaxy::Update(int time)
 {
 	for (unsigned int i = 0; i < STARSYSTEM_vec.size(); i++)
@@ -72,24 +68,23 @@ void Galaxy::Update(int time)
 
 void Galaxy::SaveEvent() const
 {
-	std::string galaxy_root = "Galaxy."+int2str(id);
 	for (unsigned int i = 0; i < STARSYSTEM_vec.size(); i++)
      	{
-		STARSYSTEM_vec[i]->SaveEvent(galaxy_root); 
+		STARSYSTEM_vec[i]->SaveEvent(); 
      	}
 }
 
 void Galaxy::LoadEvent() const
+{}
+
+
+
+
+
+Galaxy* GetNewGalaxy()
 {
-	std::string galaxy_root = "Galaxy."+int2str(id);
-	//for (unsigned int i = 0; i < STARSYSTEM_vec.size(); i++)
-     	//{
-		//STARSYSTEM_vec[i]->LoadEvent(galaxy_root); 
-     	//}
+	return new Galaxy();
 }
-
-
-
 
 
 
@@ -215,7 +210,6 @@ void generateNumFriendlyNPC(StarSystem* starsystem, int ship_per_system)
 		float angle = getRandInt(0, 360);  
 		
         	starsystem->AddToSpace(ship, center, angle, NULL);
-        	starsystem->AddToSpace(npc);
     	}
 }
 
@@ -248,7 +242,6 @@ void generateNumEnemyNPC(StarSystem* starsystem, int ship_per_system)
 		float angle = getRandInt(0, 360);  
 		
         	starsystem->AddToSpace(ship, center, angle, NULL);
-        	starsystem->AddToSpace(npc);
         	
         	Satellite* satellite = VehicleBuilder::Instance().GetNewSatellite();
                 VehicleBuilder::Instance().Equip(satellite);           		// improove
@@ -285,7 +278,6 @@ void generateSpaceStations(StarSystem* starsystem, int spacestation_per_system)
 		float angle = getRandInt(0, 360);  
                 
         	starsystem->AddToSpace(spacestation, center, angle, NULL);
-        	starsystem->AddToSpace(npc);
         	
 		Satellite* satellite = VehicleBuilder::Instance().GetNewSatellite();
                 VehicleBuilder::Instance().Equip(satellite);           		// improove

@@ -54,7 +54,7 @@ bool GuiMap :: update()
                                                         // debug
                                                         player->GetNpc()->GetStarSystem()->RemoveShip(player->GetNpc()->GetVehicle()->GetId());  
                                                         player->GetNpc()->GetStarSystem()->RemoveNpc(player->GetNpc()->GetId(), player->GetNpc()->GetSubTypeId());  
-                                                        galaxy->STARSYSTEM_vec[si]->AddToHyperJumpQueue(player->GetNpc());    
+                                                        galaxy->STARSYSTEM_vec[si]->AddToHyperJumpQueue(player->GetNpc()->GetVehicle());    
                                                         // debug
                                                         
                           				//player.hyperJumpPreparation(ss)

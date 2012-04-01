@@ -21,8 +21,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define INIT_H
 
 void init();
-Galaxy* getNewGalaxy();
-Player* getNewPlayer(Galaxy*);
 void prepearGlobalVecs();
 
 #endif
