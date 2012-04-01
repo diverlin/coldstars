@@ -16,7 +16,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #ifndef GALAXY_H
 #define GALAXY_H
 
@@ -27,7 +26,7 @@ class Galaxy
      		Galaxy();
      		~Galaxy();
      		     		
-     		int GetId() { return id; };
+     		int GetId() { return data_id.id; };
      		StarSystem* GetRandomStarSystem();
      		StarSystem* GetRandomCapturedStarSystem();
      		     
@@ -36,12 +35,7 @@ class Galaxy
     		void LoadEvent() const;
 
      	private:
-     		int id;
-     		
-   	     	int starsytem_counter;
-     		int star_counter;      
-     		int ship_counter;
-     		int planet_counter;
+     		IdData data_id;
 
   	     	std::vector<StarSystem*> STARSYSTEM_vec;
   	     	
@@ -49,14 +43,15 @@ class Galaxy
   	     	friend class Observation;
 };
 
+Galaxy* GetNewGalaxy(int id);
 
 StarSystem* generateEntireStarSystem();
-void generateBackground(StarSystem* _starsystem, int distNebula_maxNum, int distStar_maxNum, int _color_id);
-void generateNumPlanets(StarSystem* _starsystem, int planet_per_system);
+void generateBackground(StarSystem*, int distNebula_maxNum, int distStar_maxNum, int _color_id);
+void generateNumPlanets(StarSystem*, int planet_per_system);
  
-void generateNumFriendlyNPC(StarSystem* _starsystem, int ship_per_system);    
-void generateNumEnemyNPC(StarSystem* _starsystem, int ship_per_system);
+void generateNumFriendlyNPC(StarSystem*, int ship_per_system);    
+void generateNumEnemyNPC(StarSystem*, int ship_per_system);
 
-void generateSpaceStations(StarSystem* starsystem, int spacestation_per_system);
+void generateSpaceStations(StarSystem*, int spacestation_per_system);
      		
 #endif 

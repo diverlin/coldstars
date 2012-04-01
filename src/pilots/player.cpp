@@ -1055,3 +1055,12 @@ void Player::RunSession(GameTimer* TIMER)
        	screen->update();           	
        	screen->display();
 }     		
+
+
+
+
+
+Player* GetNewPlayer()
+{
+	return new Player();
+}

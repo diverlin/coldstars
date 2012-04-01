@@ -178,7 +178,7 @@ void Vehicle::HyperJumpEvent()
         starsystem->RemoveShip(data_id.id);  
         starsystem->RemoveNpc(owner_npc->GetId(), owner_npc->GetSubTypeId());  
                                                         
-        ((StarSystem*)drive_complex->getTarget())->AddToHyperJumpQueue(owner_npc);
+        ((StarSystem*)drive_complex->getTarget())->AddToHyperJumpQueue(this);
         drive_complex->resetTarget();        
 }
                 
@@ -217,7 +217,6 @@ void Vehicle::LaunchingEvent()
      	if (drive_complex->getTarget()->GetTypeId() == ENTITY::PLANET_ID)
      	{
      		starsystem->AddToSpace(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
-     		starsystem->AddToSpace(owner_npc);
 
      		((Planet*)drive_complex->getTarget())->GetLand()->remove(this);
      		((Planet*)drive_complex->getTarget())->GetLand()->remove(owner_npc);
@@ -226,7 +225,6 @@ void Vehicle::LaunchingEvent()
      	if (drive_complex->getTarget()->GetTypeId() == ENTITY::SPACESTATION_ID)
      	{
      		starsystem->AddToSpace(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
-     		starsystem->AddToSpace(owner_npc);
 
      		((SpaceStation*)drive_complex->getTarget())->GetLand()->remove(this);
      		((SpaceStation*)drive_complex->getTarget())->GetLand()->remove(owner_npc);

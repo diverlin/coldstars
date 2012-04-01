@@ -39,42 +39,6 @@ void init()
 }
 
 
-Galaxy* getNewGalaxy()
-{
-	Galaxy* galaxy = new Galaxy();
-    	return galaxy;
-}
-
-
-
-Player* getNewPlayer(Galaxy* galaxy)
-{
-	Player* player   = new Player();
-
-      	int prace_id = RACE::R7_ID;
-      	int psubtype_id = CLASS::WARRIOR_ID;
-      	int size_id = 5;
-      	int weapons_num = 5;
-    	Npc* pnpc = getNewNpc(prace_id, psubtype_id);   
-    	Ship* pship = VehicleBuilder::Instance().GetNewShip(prace_id, psubtype_id, size_id, weapons_num);
-	VehicleBuilder::Instance().Equip(pship);   		// improove
-        pship->UpdateAllPropertiesAndAbilities(); 		// improove
-        
-        pnpc->Bind(pship);
-   	player->BindNpc(pnpc);
-   	
-	vec2f center(-400, 400);
-	float angle = 0;  
-		
-	StarSystem* starsystem = galaxy->GetRandomStarSystem();
-	starsystem->AddToSpace(pship, center, angle, NULL);
-        starsystem->AddToSpace(pnpc);
-        
-    	return player;
-}
-
-
-
 
 void prepearGlobalVecs()
 {

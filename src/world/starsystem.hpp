@@ -56,10 +56,9 @@ class StarSystem : public BaseGameEntity
 		int GetShockWaveNum()    const { return effect_SHOCKWAVE_vec.size(); };
 		
 		//// TRANSITION
-		void AddToHyperJumpQueue(Npc*);
+		void AddToHyperJumpQueue(Vehicle*);
 
 		void AddToSpace(Vehicle*, vec2f, float, BaseGameEntity*);
-		void AddToSpace(Npc*);
 						
 		void AddToSpace(Star*);
 		void AddToSpace(Planet*, BaseGameEntity*);
@@ -99,7 +98,7 @@ class StarSystem : public BaseGameEntity
                 void DrawOrbits();
                 void DrawPath();
                 
-                void SaveEvent(const std::string&) const;
+                void SaveEvent() const;
                 void LoadEvent(const std::string&) const;
                                            		    		    		
 		// poor
@@ -145,15 +144,15 @@ class StarSystem : public BaseGameEntity
 		
 		
     	    	// ENTITY VECTORS
-                std::vector<Npc*> NPC_appear_vec;
+                std::vector<Vehicle*> appear_VEHICLE_queue;
                 
     	    	std::vector<DistantNebulaBgEffect*> distantNebulaBgEffect_vec;
-    		std::vector<DistantStarBgEffect*> distantStarBgEffect_vec;
+    		std::vector<DistantStarBgEffect*>   distantStarBgEffect_vec;
     		   
     		// effects
-    		std::vector<LazerTraceEffect*> effect_LAZERTRACE_vec;
+    		std::vector<LazerTraceEffect*>    effect_LAZERTRACE_vec;
     		std::vector<BaseParticleSystem*>  effect_PARTICLESYSTEM_vec;
-    		std::vector<ShockWaveEffect*>  effect_SHOCKWAVE_vec;    		
+    		std::vector<ShockWaveEffect*>     effect_SHOCKWAVE_vec;    		
     		std::vector<VerticalFlowText*> text_DAMAGE_vec;
     		
     		// remove queue 	
@@ -166,7 +165,9 @@ class StarSystem : public BaseGameEntity
     		  	
     		GarbageEntities garbage_entities;
     		GarbageEffects  garbage_effects;
-    		                
+    		            
+    		void AddToSpace(Npc*);
+    		            		    
                 void PostHyperJumpEvent();
                 void LaunchingEvent() const;
     		

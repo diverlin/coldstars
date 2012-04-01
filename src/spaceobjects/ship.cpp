@@ -25,7 +25,7 @@ Ship :: ~Ship()
 
 
 //overriding
-void Ship :: UpdateInfo()
+void Ship::UpdateInfo()
 {
 	info.clear();
 
@@ -44,7 +44,7 @@ void Ship :: UpdateInfo()
 }
 
 
-void Ship :: update_inSpace(int time, bool show_effect)
+void Ship::update_inSpace(int time, bool show_effect)
 {   
 	CheckDeath(show_effect);
 	if (time > 0)
@@ -64,14 +64,13 @@ void Ship :: update_inSpace(int time, bool show_effect)
     	}
 }
 
-
-void Ship :: updateRenderStuff()
+void Ship::updateRenderStuff()
 {
     	//points.update(); 
     	protection_complex->GetShieldEffect()->update();
 }
 
-void Ship :: render_inSpace() const
+void Ship::render_inSpace() const
 {   
         if (ableTo.GRAB == true)
         {
@@ -97,7 +96,7 @@ void Ship :: render_inSpace() const
 }
 
 
-void Ship :: render_atPlanet() const
+void Ship::render_atPlanet() const
 {
 	RenderKorpus();
 	
@@ -108,10 +107,9 @@ void Ship :: render_atPlanet() const
 }		
 
 
-
-void Ship::SaveEvent(const std::string& root) const
+void Ship::SaveEvent() const
 {
-	const std::string ship_root = root+"ship."+int2str(data_id.id)+".";
+	const std::string ship_root = "ship."+int2str(data_id.id)+".";
 	this->SaveUniqueBaseGameEntity(ship_root);
 	//this->SaveUniqueVehicle(root);
 	//this->SaveUniqueShip(root);
