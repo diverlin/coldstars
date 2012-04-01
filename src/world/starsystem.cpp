@@ -691,25 +691,25 @@ void StarSystem :: updateEntities_inStatic_s()
 
 void StarSystem::FindVisibleEntities_c(Player* player)
 {
-	player->clearVisibleEntities();
+	player->ClearVisibleEntities();
 	
-        for (unsigned int i = 0; i < STAR_vec.size(); i++)         { player->addIfVisible(STAR_vec[i]); }    
-        for (unsigned int i = 0; i < PLANET_vec.size(); i++)       { player->addIfVisible(PLANET_vec[i]); }
-        for (unsigned int i = 0; i < ASTEROID_vec.size(); i++)     { player->addIfVisible(ASTEROID_vec[i]); } 
-        for (unsigned int i = 0; i < MINERAL_vec.size(); i++)      { player->addIfVisible(MINERAL_vec[i]); }
-        for (unsigned int i = 0; i < CONTAINER_vec.size(); i++)    { player->addIfVisible(CONTAINER_vec[i]); }
-    	for (unsigned int i = 0; i < SHIP_inSPACE_vec.size(); i++) { player->addIfVisible(SHIP_inSPACE_vec[i]); } 
-    	for (unsigned int i = 0; i < SPACESTATION_vec.size(); i++) { player->addIfVisible(SPACESTATION_vec[i]); } 
-    	for (unsigned int i = 0; i < SATELLITE_vec.size(); i++)    { player->addIfVisible(SATELLITE_vec[i]); } 
-    	for (unsigned int i = 0; i < ROCKET_vec.size(); i++)       { player->addIfVisible(ROCKET_vec[i]); }
-    	for (unsigned int i = 0; i < BLACKHOLE_vec.size(); i++)    { player->addIfVisible(BLACKHOLE_vec[i]); } 
+        for (unsigned int i = 0; i < STAR_vec.size(); i++)         { player->AddIfVisible(STAR_vec[i]); }    
+        for (unsigned int i = 0; i < PLANET_vec.size(); i++)       { player->AddIfVisible(PLANET_vec[i]); }
+        for (unsigned int i = 0; i < ASTEROID_vec.size(); i++)     { player->AddIfVisible(ASTEROID_vec[i]); } 
+        for (unsigned int i = 0; i < MINERAL_vec.size(); i++)      { player->AddIfVisible(MINERAL_vec[i]); }
+        for (unsigned int i = 0; i < CONTAINER_vec.size(); i++)    { player->AddIfVisible(CONTAINER_vec[i]); }
+    	for (unsigned int i = 0; i < SHIP_inSPACE_vec.size(); i++) { player->AddIfVisible(SHIP_inSPACE_vec[i]); } 
+    	for (unsigned int i = 0; i < SPACESTATION_vec.size(); i++) { player->AddIfVisible(SPACESTATION_vec[i]); } 
+    	for (unsigned int i = 0; i < SATELLITE_vec.size(); i++)    { player->AddIfVisible(SATELLITE_vec[i]); } 
+    	for (unsigned int i = 0; i < ROCKET_vec.size(); i++)       { player->AddIfVisible(ROCKET_vec[i]); }
+    	for (unsigned int i = 0; i < BLACKHOLE_vec.size(); i++)    { player->AddIfVisible(BLACKHOLE_vec[i]); } 
            		
     	
     	//effects
-	for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)      { player->addIfVisible(effect_SHOCKWAVE_vec[i]); }
-	for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)     { player->addIfVisible(effect_LAZERTRACE_vec[i]); }
-	for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { player->addIfVisible(effect_PARTICLESYSTEM_vec[i]); }
-	for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)		{ player->addIfVisible(text_DAMAGE_vec[i]); }
+	for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)      { player->AddIfVisible(effect_SHOCKWAVE_vec[i]); }
+	for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)     { player->AddIfVisible(effect_LAZERTRACE_vec[i]); }
+	for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { player->AddIfVisible(effect_PARTICLESYSTEM_vec[i]); }
+	for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)		{ player->AddIfVisible(text_DAMAGE_vec[i]); }
 }
 
       

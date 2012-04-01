@@ -61,7 +61,7 @@ Player* getNewPlayer(Galaxy* galaxy)
         pship->UpdateAllPropertiesAndAbilities(); 		// improove
         
         pnpc->Bind(pship);
-   	player->bindNpc(pnpc);
+   	player->BindNpc(pnpc);
    	
 	vec2f center(-400, 400);
 	float angle = 0;  

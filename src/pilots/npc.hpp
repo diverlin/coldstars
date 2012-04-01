@@ -26,8 +26,7 @@ class Npc : public BaseGameEntity
               	    IdData, LifeData, 
               	    TextureOb*);
               	    
-     		virtual ~Npc();
-     		
+     		virtual ~Npc();    		
      		
 		void SetGarbageReady(bool garbage_ready)      { data_life.garbage_ready = garbage_ready; }
 		void SetAlive(bool alive) 		      { data_life.is_alive = alive; }

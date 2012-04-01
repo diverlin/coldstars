@@ -127,9 +127,9 @@ void GuiKosmoport :: resetInfoFlags()
 		
 void GuiKosmoport :: mouseCheckInteraction()
 {
-     	int mxvp = player->getCursor()->getMousePos().x;
-     	int myvp = player->getScreen()->getHeight() - player->getCursor()->getMousePos().y;         
-     	int lmb  = player->getCursor()->getMouseLeftButton();;
+     	int mxvp = player->GetCursor()->getMousePos().x;
+     	int myvp = player->GetScreen()->getHeight() - player->GetCursor()->getMousePos().y;         
+     	int lmb  = player->GetCursor()->getMouseLeftButton();;
 
     	for (unsigned int i = 0; i< button_common_pList.size(); i++)
 	{
@@ -156,15 +156,15 @@ void GuiKosmoport :: mouseCheckInteraction()
        				{	
 		   			if (button_angar_pList[i]->GetSubTypeId() == GUI::BUTTON::GETREPAIR_ID)
 		   			{
-		   				player->getNpc()->GetVehicle()->SetMaxArmor(); 
+		   				player->GetNpc()->GetVehicle()->SetMaxArmor(); 
 		   			}
 		   			if (button_angar_pList[i]->GetSubTypeId() == GUI::BUTTON::GETFUEL_ID)
 		   			{
-		   		        	player->getNpc()->GetVehicle()->SetMaxFuel();
+		   		        	player->GetNpc()->GetVehicle()->SetMaxFuel();
 		   			}
 		   			if (button_angar_pList[i]->GetSubTypeId() == GUI::BUTTON::GETLAUNCH_ID)
 		   			{
-       						player->getNpc()->GetVehicle()->LaunchingEvent();
+       						player->GetNpc()->GetVehicle()->LaunchingEvent();
        			   		}
        				}
        				break;

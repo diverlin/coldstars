@@ -30,20 +30,20 @@ GuiVehicle :: ~GuiVehicle()
 
 void GuiVehicle :: update()
 {
-	Vehicle* vehicle = player->getNpc()->GetScanTarget();
+	Vehicle* vehicle = player->GetNpc()->GetScanTarget();
 
 	Store* store = NULL;
-	if (player->getNpc()->GetPlaceTypeId() == ENTITY::KOSMOPORT_ID)
+	if (player->GetNpc()->GetPlaceTypeId() == ENTITY::KOSMOPORT_ID)
 	{
-		store = ((Kosmoport*)player->getNpc()->GetLand())->getStore();
+		store = ((Kosmoport*)player->GetNpc()->GetLand())->getStore();
 	}
 	
-    	bool lmb = player->getCursor()->getMouseLeftButton();; 
-    	//bool rmb = player->getCursor()->getMouseRightButton();; 
+    	bool lmb = player->GetCursor()->getMouseLeftButton();; 
+    	//bool rmb = player->GetCursor()->getMouseRightButton();; 
 
 	for(unsigned int i = 0; i < vehicle->slot_total_vec.size(); i++)
 	{ 
-		if (vehicle->slot_total_vec[i]->CheckInteraction(player->getCursor()->getMousePos().x, (player->getScreen()->getHeight() - player->getCursor()->getMousePos().y)) == true)
+		if (vehicle->slot_total_vec[i]->CheckInteraction(player->GetCursor()->getMousePos().x, (player->GetScreen()->getHeight() - player->GetCursor()->getMousePos().y)) == true)
 		{  
 			if (lmb == true)
 			{
@@ -51,12 +51,12 @@ void GuiVehicle :: update()
 				{	
 					if (vehicle->slot_total_vec[i]->GetEquipedStatus() == true)
 					{
-						store->buyItemFromSlot(player->getNpc(), vehicle->slot_total_vec[i]);
+						store->buyItemFromSlot(player->GetNpc(), vehicle->slot_total_vec[i]);
 					}
             			}          		
 				else 
 				{
-					player->getCursor()->getSlot()->SwapItemWith(vehicle->slot_total_vec[i]);     
+					player->GetCursor()->getSlot()->SwapItemWith(vehicle->slot_total_vec[i]);     
 				}
 			} 
        		}        	
@@ -64,14 +64,14 @@ void GuiVehicle :: update()
                         
 
 	// GATE SLOT
-	if (vehicle->GetGateSlot()->CheckInteraction(player->getCursor()->getMousePos().x, (player->getScreen()->getHeight() - player->getCursor()->getMousePos().y)) == true)  
+	if (vehicle->GetGateSlot()->CheckInteraction(player->GetCursor()->getMousePos().x, (player->GetScreen()->getHeight() - player->GetCursor()->getMousePos().y)) == true)  
 	{
 		//// DROP ITEM TO OUTERSPACE ////
 		if ( (lmb == true) and (store == NULL) )
 		{
-			if (player->getCursor()->getSlot()->GetEquipedStatus() == true)
+			if (player->GetCursor()->getSlot()->GetEquipedStatus() == true)
 			{
-				player->getCursor()->getSlot()->DropItemToSpace();	
+				player->GetCursor()->getSlot()->DropItemToSpace();	
 			} 
 		}
 	}
@@ -82,7 +82,7 @@ void GuiVehicle :: update()
 
 void GuiVehicle :: Render() const
 {
-	Vehicle* vehicle = player->getNpc()->GetScanTarget();
+	Vehicle* vehicle = player->GetNpc()->GetScanTarget();
 
 	drawTexturedRect(vehicle->texOb_korpus, vehicle->kontur_rect, -1.0);
 
@@ -97,11 +97,11 @@ void GuiVehicle :: Render() const
 
 void GuiVehicle :: renderFocusedItemInfo() const
 {
-	Vehicle* vehicle = player->getNpc()->GetScanTarget();
+	Vehicle* vehicle = player->GetNpc()->GetScanTarget();
 
 	for(unsigned int i = 0; i < vehicle->slot_total_vec.size(); i++)
 	{ 
-		if (vehicle->slot_total_vec[i]->CheckInteraction(player->getCursor()->getMousePos().x, (player->getScreen()->getHeight()  - player->getCursor()->getMousePos().y)) == true)
+		if (vehicle->slot_total_vec[i]->CheckInteraction(player->GetCursor()->getMousePos().x, (player->GetScreen()->getHeight()  - player->GetCursor()->getMousePos().y)) == true)
 		{  
 			vehicle->slot_total_vec[i]->RenderItemInfo();
 		}

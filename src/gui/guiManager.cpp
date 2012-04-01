@@ -41,12 +41,12 @@ void GuiManager :: updateInStore()
 	gui_store->update();
 	gui_vehicle->update();
 	
-	player->getCursor()->update();
+	player->GetCursor()->update();
 }
 
 void GuiManager :: updateInScan(bool allow_full_control)
 {
-        if ( (player->getNpc()->GetVehicle() == player->getNpc()->GetScanTarget()) and (allow_full_control == false) )
+        if ( (player->GetNpc()->GetVehicle() == player->GetNpc()->GetScanTarget()) and (allow_full_control == false) )
     	{
         	allow_full_control = true;  
         }    	// modify full control for friend ships         
@@ -58,7 +58,7 @@ void GuiManager :: updateInScan(bool allow_full_control)
 		gui_skill->update();
 	}
 	
-	player->getCursor()->update();
+	player->GetCursor()->update();
 }
 
 
@@ -74,10 +74,10 @@ void GuiManager :: renderInStore() const
 		gui_vehicle->Render();
 		gui_store->Render();
 		
-		player->getCursor()->getSlot()->RenderEquipedItem();	
+		player->GetCursor()->getSlot()->RenderEquipedItem();	
 
 		gui_store->renderFocusedItemInfo();	
-		if (player->getCursor()->getSlot()->GetEquipedStatus() == false)
+		if (player->GetCursor()->getSlot()->GetEquipedStatus() == false)
 		{
 			gui_vehicle->renderFocusedItemInfo();
 		}
@@ -94,9 +94,9 @@ void GuiManager :: renderInScan() const
 		gui_vehicle->Render();
 		gui_skill->Render();
 		
-		player->getCursor()->getSlot()->RenderEquipedItem();		
+		player->GetCursor()->getSlot()->RenderEquipedItem();		
 	
-		if (player->getCursor()->getSlot()->GetEquipedStatus() == false)
+		if (player->GetCursor()->getSlot()->GetEquipedStatus() == false)
 		{
 			gui_vehicle->renderFocusedItemInfo();
 		}

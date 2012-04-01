@@ -30,51 +30,50 @@ class Player
      		
     		Player();
      		~Player();
-     
-          	void setWorldMapShowFlag(bool);
-          	
-          	void setShowAllOrbit(bool);
-          	void setShowAllPath(bool);
-          	void setShowRadarRange(bool);
-          	void setShowGrappleRange(bool);
-          	          	
-          	bool getWorldMapShowFlag() const;
-          	bool getShowAllOrbit() const;
-          	bool getShowAllPath() const;
-          	bool getShowRadarRange() const;
-          	bool getShowGrappleRange() const;
-          	  
-          	bool getNextTurnReady() const;
-          	  		        	
-		Npc* getNpc() const; 	     
-		Cursor* getCursor() const;    
-		Screen* getScreen() const;     
    
-     		void bindNpc(Npc*);
+   		void SetWorldMapShowFlag(bool _show_worldmap) { control.worldmap = _show_worldmap; }
+          	
+		void SetShowAllOrbit(bool show_all_orbit)     { this->show_all_orbit = show_all_orbit; }
+		void SetShowAllPath(bool show_all_path)       { this->show_all_path = show_all_path; }
+		void SetShowRadarRange(bool show_radar_range) { this->show_radar_range = show_radar_range; }
+		void SetShowGrappleRange(bool show_grapple_range)  { this->show_grapple_range = show_grapple_range; }
+          	
+		bool GetWorldMapShowFlag() const { return control.worldmap; }         	
+		Npc* GetNpc()       const { return npc; }
+		Cursor* GetCursor() const { return cursor; }
+		Screen* GetScreen() const { return screen; }
+         
+		bool GetShowAllOrbit()     const { return show_all_orbit; }
+		bool GetShowAllPath()      const { return show_all_path; }
+		bool GetShowRadarRange()   const { return show_radar_range; }
+		bool GetShowGrappleRange() const { return show_grapple_range; }          	 
+   
+		bool GetNextTurnReady() const { return USERINPUT->getNextTurnReady(); }   
+
+
+     		void BindNpc(Npc*);
      		
-     		void clearVisibleEntities();
+     		void ClearVisibleEntities();
      		
-     		void addIfVisible(Star*);
-     		void addIfVisible(Planet*);
-     		void addIfVisible(Asteroid*);     		
-     		void addIfVisible(Mineral*);
-     		void addIfVisible(Container*);     	
-     		void addIfVisible(RocketBullet*);  
-     		void addIfVisible(BlackHole*);  
-     		void addIfVisible(SpaceStation*);  
-     		void addIfVisible(Satellite*); 
-     		void addIfVisible(Ship*); 
+     		void AddIfVisible(Star*);
+     		void AddIfVisible(Planet*);
+     		void AddIfVisible(Asteroid*);     		
+     		void AddIfVisible(Mineral*);
+     		void AddIfVisible(Container*);     	
+     		void AddIfVisible(RocketBullet*);  
+     		void AddIfVisible(BlackHole*);  
+     		void AddIfVisible(SpaceStation*);  
+     		void AddIfVisible(Satellite*); 
+     		void AddIfVisible(Ship*); 
 
 		//effect
-     		void addIfVisible(ShockWaveEffect*);  
-     		void addIfVisible(LazerTraceEffect*);  
-     		void addIfVisible(BaseParticleSystem*); 
-     		void addIfVisible(VerticalFlowText*); 
+     		void AddIfVisible(ShockWaveEffect*);  
+     		void AddIfVisible(LazerTraceEffect*);  
+     		void AddIfVisible(BaseParticleSystem*); 
+     		void AddIfVisible(VerticalFlowText*); 
      		//	
-
-
-     		
-     		void runSession(GameTimer*); 
+  		
+     		void RunSession(GameTimer*); 
      		     		     		     		     	
      	private:
      	     	int type_id, id;
@@ -117,17 +116,17 @@ class Player
 		UserInput*    USERINPUT;       
     		
     		void Render(bool, bool, bool); 
-     			void renderEntities_NEW();
-    			void renderEntities_OLD();
+     			void RenderEntities_NEW();
+    			void RenderEntities_OLD();
     		
     		
-    		void outerspace(GameTimer*);
-    		void kosmoport();
+    		void InOuterspace(GameTimer*);
+    		void InKosmoport();
     		
-    		void mouseControl();
-    		void update_global(); 
+    		void MouseInteraction_inOuterSpace();
+    		void Update_global(); 
     		
-    		bool isObjectOnScreen(const Points&) const;
+    		bool IsObjectOnScreen(const Points&) const;
 };
 
 #endif 

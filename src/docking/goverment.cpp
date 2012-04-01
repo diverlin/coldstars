@@ -33,7 +33,7 @@ void Goverment :: update()
 
 void Goverment :: renderBackground(Player* player) const
 {
-     	Rect screen_rect = Rect(0, 0, player->getScreen()->getWidth(), player->getScreen()->getHeight());
+     	Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());
      	drawTexturedRect(texOb_background, screen_rect, -1);  
 }
 

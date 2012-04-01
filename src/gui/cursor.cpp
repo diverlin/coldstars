@@ -55,7 +55,7 @@ void Cursor :: updateMousePos()
 
 void Cursor :: update()
 {
-     	slot->GetRect().setCenter(mouse_pos.x, player->getScreen()->getHeight()  - mouse_pos.y);
+     	slot->GetRect().setCenter(mouse_pos.x, player->GetScreen()->getHeight()  - mouse_pos.y);
 }
 
 

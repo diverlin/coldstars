@@ -58,9 +58,9 @@ void GuiSpace :: resetInfoFlags()
 
 void GuiSpace :: mouseCheckInteraction()
 {
-	int mxvp = player->getCursor()->getMousePos().x;
-	int myvp = player->getScreen()->getHeight() - player->getCursor()->getMousePos().y;         
-	int lmb  = player->getCursor()->getMouseLeftButton();
+	int mxvp = player->GetCursor()->getMousePos().x;
+	int myvp = player->GetScreen()->getHeight() - player->GetCursor()->getMousePos().y;         
+	int lmb  = player->GetCursor()->getMouseLeftButton();
 
 	for (unsigned int i = 0; i < button_vec.size(); i++)
      	{ 
@@ -70,7 +70,7 @@ void GuiSpace :: mouseCheckInteraction()
            		{
            			if (button_vec[i]->GetSubTypeId() == GUI::SCREEN::GALAXYMAP_ID)
               			{
-              				player->setWorldMapShowFlag(!player->getWorldMapShowFlag());
+              				player->SetWorldMapShowFlag(!player->GetWorldMapShowFlag());
                  		}
            		}
         	}
@@ -87,7 +87,7 @@ void GuiSpace :: Render()
 	renderInfo();
 	disable_BLEND();
 
-	renderText(player->getScreen()->getBottomLeftGlobalCoord());
+	renderText(player->GetScreen()->getBottomLeftGlobalCoord());
 }
 
 
