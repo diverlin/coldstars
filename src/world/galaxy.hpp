@@ -26,6 +26,8 @@ class Galaxy
      		Galaxy();
      		~Galaxy();
      		     		
+     		void Add(StarSystem* starsystem) { STARSYSTEM_vec.push_back(starsystem); };
+     		
      		int GetId() { return data_id.id; };
      		StarSystem* GetRandomStarSystem();
      		StarSystem* GetRandomCapturedStarSystem();

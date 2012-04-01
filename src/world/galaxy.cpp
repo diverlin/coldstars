@@ -103,7 +103,7 @@ Galaxy* GetNewGalaxy()
 
 StarSystem* generateEntireStarSystem()
 {  
-        StarSystem* starsystem = new StarSystem(RACE::R0_ID);   
+        StarSystem* starsystem = new StarSystem();   
         
         vec2f _center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH - 2*GUI::MAP::BORDER_X), 
         	      getRandInt(GUI::MAP::BORDER_Y, Config::Instance().SCREEN_HEIGHT - 2*GUI::MAP::BORDER_Y) );			 

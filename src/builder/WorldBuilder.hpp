@@ -17,26 +17,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef VEHICLEBUILDER_H
-#define VEHICLEBUILDER_H
+#ifndef WORLDBUILDER_H
+#define WORLDBUILDER_H
 
 
-class VehicleBuilder : public BaseVehicleBuilder
+class WorldBuilder
 {
 	public:
-		static VehicleBuilder& Instance();
-		~VehicleBuilder();
+		static WorldBuilder& Instance();
+		~WorldBuilder();
+
+        	void Born(StarSystem*); 
+        	 		                
+        protected:
+		WorldBuilder() {};
 		
-		Ship* GetNewShip(int, int, int, int) const;
-		Satellite* GetNewSatellite() const;
-		SpaceStation* GetNewSpaceStation() const;    	
-		RocketBullet* GetNewRocket(BulletData, ItemSlot*, float, bool force_center_start = false) const;	                
-       
-        private:
-        	VehicleBuilder() {};   	
-        	VehicleBuilder(const VehicleBuilder&); 
-        	VehicleBuilder operator=(const VehicleBuilder&);
+        	void CreateStar(StarSystem*);
+        	void CreatePlanets(StarSystem*);
+        	void CreateSattelite(StarSystem*);
+        	void CreateSpaceStation(StarSystem*);
+        	void CreateShips(StarSystem*);
+   
 }; 
+
 
 
 #endif 

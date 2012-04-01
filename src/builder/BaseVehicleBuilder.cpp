@@ -17,14 +17,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-BaseVehicleBuilder::BaseVehicleBuilder() {}
-
-
 BaseVehicleBuilder::~BaseVehicleBuilder() {}
 
 	
 
-void  BaseVehicleBuilder::CreateKorpusGeometry(Vehicle* vehicle)
+void  BaseVehicleBuilder::CreateKorpusGeometry(Vehicle* vehicle) const
 {
 	vehicle->RecalculateCollisionRadius();
 	vehicle->CreateCenter();
@@ -34,7 +31,7 @@ void  BaseVehicleBuilder::CreateKorpusGeometry(Vehicle* vehicle)
 }
 
 
-void BaseVehicleBuilder::CreateKorpusGui(Vehicle* vehicle)
+void BaseVehicleBuilder::CreateKorpusGui(Vehicle* vehicle) const
 {
 	vehicle->SetGuiTextureOb(vehicle->GetTextureOb());         	
 
@@ -55,7 +52,7 @@ void BaseVehicleBuilder::CreateKorpusGui(Vehicle* vehicle)
 	vehicle->SetGuiRect(kontur_rect);
 }
         
-void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle)
+void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
 {
     	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SLOT_ID);  
 
@@ -152,7 +149,7 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle)
 }	
 
 
-void BaseVehicleBuilder::CreateDriveComplex(Vehicle* vehicle)
+void BaseVehicleBuilder::CreateDriveComplex(Vehicle* vehicle) const
 {
     	vehicle->GetPoints().initMidLeftPoint();
     	vehicle->GetPoints().addMidLeftPoint();
@@ -164,14 +161,14 @@ void BaseVehicleBuilder::CreateDriveComplex(Vehicle* vehicle)
     	vehicle->SetDriveComplex(drive_complex);
 }
 
-void BaseVehicleBuilder::CreateWeaponsComplex(Vehicle* vehicle)
+void BaseVehicleBuilder::CreateWeaponsComplex(Vehicle* vehicle) const
 {
  	WeaponComplex* weapon_complex = new WeaponComplex(vehicle);
  	weapon_complex->PostCreateInit(vehicle->data_korpus.weapon_slot_num, vehicle->data_korpus.render_TURRELS);
  	vehicle->SetWeaponComplex(weapon_complex);
 }
 
-void BaseVehicleBuilder::CreateProtectionComplex(Vehicle* vehicle)
+void BaseVehicleBuilder::CreateProtectionComplex(Vehicle* vehicle) const
 {
     	vehicle->GetPoints().initShieldQuadPoints();
     	vehicle->GetPoints().addShieldQuadPoints();
@@ -182,7 +179,7 @@ void BaseVehicleBuilder::CreateProtectionComplex(Vehicle* vehicle)
         	
 
 
-void BaseVehicleBuilder::Equip(Vehicle* vehicle)
+void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
 {
     	if (vehicle->data_korpus.weapon_slot_num >= 1)
     	{
