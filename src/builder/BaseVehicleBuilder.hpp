@@ -24,18 +24,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class BaseVehicleBuilder
 {
 	public:
-		BaseVehicleBuilder();
 		~BaseVehicleBuilder();
 
-        	void Equip(Vehicle*); 
+        	void Equip(Vehicle*) const; 
         	 		                
         protected:
-        	void CreateKorpusGeometry(Vehicle*);
-        	void CreateKorpusGui(Vehicle*);
-        	void CreateEquipmentSlots(Vehicle*);
-        	void CreateDriveComplex(Vehicle*);
-        	void CreateWeaponsComplex(Vehicle*);
-        	void CreateProtectionComplex(Vehicle*);    
+		BaseVehicleBuilder() {}
+		
+        	void CreateKorpusGeometry(Vehicle*) const;
+        	void CreateKorpusGui(Vehicle*) const;
+        	void CreateEquipmentSlots(Vehicle*) const;
+        	void CreateDriveComplex(Vehicle*) const;
+        	void CreateWeaponsComplex(Vehicle*) const;
+        	void CreateProtectionComplex(Vehicle*) const;    
 }; 
 
 

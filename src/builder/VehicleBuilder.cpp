@@ -27,7 +27,7 @@ VehicleBuilder& VehicleBuilder::Instance()
 VehicleBuilder::~VehicleBuilder() {}
 
 
-Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int weapons_num)
+Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int weapons_num) const
 {
     	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomShipTexObWithFollowingAtrributes(race_id, subtype_id, size_id); 
        
@@ -80,7 +80,7 @@ Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int w
         return ship;
 }
 
-Satellite* VehicleBuilder::GetNewSatellite()
+Satellite* VehicleBuilder::GetNewSatellite() const
 {
 	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SATELLITE_ID);  
 	
@@ -131,7 +131,7 @@ Satellite* VehicleBuilder::GetNewSatellite()
 
 }
 
-SpaceStation* VehicleBuilder::GetNewSpaceStation()
+SpaceStation* VehicleBuilder::GetNewSpaceStation() const
 {
 	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SPACESTATION_ID); 
        
@@ -182,7 +182,7 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation()
 }
 
 
-RocketBullet* VehicleBuilder::GetNewRocket(BulletData data_bullet, ItemSlot* slot, float offset, bool force_center_start)
+RocketBullet* VehicleBuilder::GetNewRocket(BulletData data_bullet, ItemSlot* slot, float offset, bool force_center_start) const
 {
 	IdData data_id;
 	data_id.id         = g_ID_GENERATOR.getNextId(); 

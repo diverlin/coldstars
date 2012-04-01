@@ -42,7 +42,7 @@
 class StarSystem : public BaseGameEntity
 {
 	public:
-		StarSystem(int);
+		StarSystem();
 		~StarSystem();
 
 		void SetGalaxy(Galaxy* galaxy)  { this->galaxy = galaxy; };
@@ -197,6 +197,8 @@ class StarSystem : public BaseGameEntity
 		friend class Observation;
 		friend class Player;
 };
+
+StarSystem* GetNewStarSystem();
 
 template <typename AGRESSOR, typename VICTIM>
 bool checkCollision(AGRESSOR*,  VICTIM*, bool);

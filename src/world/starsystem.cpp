@@ -18,14 +18,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-StarSystem::StarSystem(int race_id)
+StarSystem::StarSystem()
 { 
     	data_id.id = g_ID_GENERATOR.getNextId();
     	data_id.type_id = ENTITY::STARSYSTEM_ID;
     	
     	is_CAPTURED = false;
     	
-    	this->race_id = race_id;
+    	this->race_id = RACE::R0_ID;
     	conqueror_race_id = NONE_ID;
 
     	calculation_per_turn_allowed = true;
@@ -1089,6 +1089,16 @@ void StarSystem::LoadEvent(const std::string& root) const
 	//} 
 }
 
+
+
+
+
+StarSystem* GetNewStarSystem()
+{
+	StarSystem* starsystem = new StarSystem();
+	
+	return starsystem;
+}
 
 template <typename AGRESSOR, typename VICTIM>
 bool checkCollision(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
