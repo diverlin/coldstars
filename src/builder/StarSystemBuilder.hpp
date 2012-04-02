@@ -17,33 +17,39 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-WorldBuilder& WorldBuilder::Instance()
+#ifndef STARSYSTEMBUILDER_H
+#define STARSYSTEMBUILDER_H
+
+
+class StarSystemBuilder
 {
-	static WorldBuilder instance;
-	return instance;	
-}
+	public:
+		static StarSystemBuilder& Instance();
+		~StarSystemBuilder();
 
-WorldBuilder::~WorldBuilder()
-{}
-
-void WorldBuilder::Born(StarSystem* starsystem)
-{
-
-} 
+        	void CreateNewStarSystem(); 
+                void CreateInternals();
+                StarSystem* GetStarSystem() const { return starsystem; };
         	 		                
-void CreateStar(StarSystem* starsystem)
-{}
+        protected:
+                StarSystem* starsystem;
+                
+		StarSystemBuilder() {};
+		
+                void CreateBackground(int, int, int);
+        	void CreateStar();
+        	void CreatePlanets(int);
+        	void CreateSattelites();
+        	void CreateSpaceStations(int);
+        	void CreateShips(int, int);
+   
+}; 
 
-void CreatePlanets(StarSystem* starsystem)
-{}
 
-void CreateSattelite(StarSystem* starsystem)
-{}
 
-void CreateSpaceStation(StarSystem* starsystem)
-{}
+#endif 
+    
 
-void CreateShips(StarSystem* starsystem)
-{}
+        
 
 
