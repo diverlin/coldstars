@@ -16,6 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef GALAXY_H
 #define GALAXY_H
 
@@ -47,13 +48,5 @@ class Galaxy
 
 Galaxy* GetNewGalaxy(int id);
 
-StarSystem* generateEntireStarSystem();
-void generateBackground(StarSystem*, int distNebula_maxNum, int distStar_maxNum, int _color_id);
-void generateNumPlanets(StarSystem*, int planet_per_system);
- 
-void generateNumFriendlyNPC(StarSystem*, int ship_per_system);    
-void generateNumEnemyNPC(StarSystem*, int ship_per_system);
 
-void generateSpaceStations(StarSystem*, int spacestation_per_system);
-     		
 #endif 

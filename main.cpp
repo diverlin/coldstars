@@ -50,7 +50,7 @@ int main()
 	starsystem->AddToSpace(pship, center, angle, NULL);
 	
 
-	player->GetScreen()->resize(Config::Instance().SCREEN_WIDTH*2, Config::Instance().SCREEN_HEIGHT);
+	//player->GetScreen()->resize(Config::Instance().SCREEN_WIDTH*2, Config::Instance().SCREEN_HEIGHT);
 
 	// GAME LOOP
 	while (Gui::GetWindow().IsOpened())
