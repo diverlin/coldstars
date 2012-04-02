@@ -39,8 +39,6 @@ struct UniqueTextureCollector
         TextureOb* texOb_dot_green;
         TextureOb* texOb_dot_black;
         TextureOb* texOb_dot_yellow;
-        
-        //TextureOb* texOb_particles_sheet;
 };
 
 class TextureManager
@@ -57,8 +55,8 @@ class TextureManager
         	TextureOb* getTexObByColorId(int type_id, int color_id);
                         	
 		TextureOb* getRandomTexOb(int);
-
-        	void DEBUG_CheckShipTexOb();
+               
+                void FillShipSubTypeList();
 
         private:
         	std::vector<TextureOb*> slot_texOb_vec;
@@ -139,8 +137,6 @@ class TextureManager
         	std::vector<TextureOb*> ship_race7_pirat_texOb_vec;
         	std::vector<TextureOb*> ship_race7_diplomat_texOb_vec;
 
-
-
         	// ITEMS
         	std::vector<TextureOb*> lazerEquipment_texOb_vec;
         	std::vector<TextureOb*> rocketEquipment_texOb_vec;
@@ -166,29 +162,10 @@ class TextureManager
         	std::vector<TextureOb*> textBackground_texOb_vec;
         	
         	TextureOb* getRandomTexObFromList(std::vector<TextureOb*>*);
-       		TextureOb* getShipTexObByClosestSizeFromList(std::vector<TextureOb*>* pTo_list, int _size_id);
-        	TextureOb* getShipTexObBySizeFromList(std::vector<TextureOb*>* pTo_list, int _size_id);
+       		TextureOb* getShipTexObByClosestSizeFromList(std::vector<TextureOb*>*, int);
+        	TextureOb* getShipTexObBySizeFromList(std::vector<TextureOb*>*, int);
 
 };
 
-        
-
-
-      //def loadAllTexturesInStarSystem(self, starsystem):
-          //for n in starsystem.NEBULA_static_effect_list:
-              //n.texOb.loadToVRAM()
-              //n.linkTexture()
-
-          //for n in starsystem.NEBULA_rotated_effect_list:
-              //n.texOb.loadToVRAM()
-              //n.linkTexture()
-
-          //for s in starsystem.STAR_list:
-              //s.texOb.loadToVRAM()
-              //s.linkTexture()
-
-          //for p in starsystem.PLANET_list:
-              //p.texOb.loadToVRAM()
-              //p.linkTexture()
 
 #endif 
