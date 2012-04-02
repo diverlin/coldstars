@@ -24,8 +24,8 @@ namespace Gui
     {
       float fps = 1.f / general_window.GetFrameTime();
       sf::String _str(std::string("FPS:" + 
-						boost::lexical_cast<std::string>( (int)fps) )
-					, font, 14);
+                                  boost::lexical_cast<std::string>( (int)fps) ),
+                                  font, 14);
       _str.SetColor(sf::Color(255, 255, 255));
       _str.SetPosition(100, 15);
       general_window.Draw(_str);

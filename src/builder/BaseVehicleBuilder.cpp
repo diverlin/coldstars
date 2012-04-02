@@ -242,7 +242,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
                 vehicle->AddItemToOtsec(getNewBomb());
     	}   
     	
-    	//vehicle->UpdateAllPropertiesAndAbilities(); // not good place for this
+    	vehicle->UpdateAllPropertiesAndAbilities(); 
 }
 
 

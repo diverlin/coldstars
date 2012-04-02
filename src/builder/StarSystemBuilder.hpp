@@ -27,8 +27,8 @@ class StarSystemBuilder
 		static StarSystemBuilder& Instance();
 		~StarSystemBuilder();
 
-        	void CreateNewStarSystem(); 
-                void CreateInternals();
+        	void CreateNewStarSystem(int); 
+                void CreateNewInternals();
                 StarSystem* GetStarSystem() const { return starsystem; };
         	 		                
         protected:
@@ -39,10 +39,8 @@ class StarSystemBuilder
                 void CreateBackground(int, int, int);
         	void CreateStar();
         	void CreatePlanets(int);
-        	void CreateSattelites();
         	void CreateSpaceStations(int);
-        	void CreateShips(int, int);
-   
+        	void CreateShips(int, int);   
 }; 
 
 
