@@ -26,14 +26,14 @@ StarSystemBuilder& StarSystemBuilder::Instance()
 StarSystemBuilder::~StarSystemBuilder()
 {}
 
-void StarSystemBuilder::CreateNewStarSystem()
+void StarSystemBuilder::CreateNewStarSystem(int id)
 {
-        starsystem = new StarSystem();
+        starsystem = new StarSystem(id);
 } 
         	
-void StarSystemBuilder::CreateInternals()
+void StarSystemBuilder::CreateNewInternals()
 {
-        vec2f center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH - 2*GUI::MAP::BORDER_X), 
+        vec2f center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH -  2*GUI::MAP::BORDER_X), 
         	     getRandInt(GUI::MAP::BORDER_Y, Config::Instance().SCREEN_HEIGHT - 2*GUI::MAP::BORDER_Y) );			 
         starsystem->GetPoints().setCenter(center);
 
@@ -115,9 +115,6 @@ void StarSystemBuilder::CreatePlanets(int planet_per_system)
         
 }
 
-void StarSystemBuilder::CreateSattelites()
-{}
-
 void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
 {
         int npc_subtype_id;
@@ -179,7 +176,6 @@ void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num)
         	Ship* ship = VehicleBuilder::Instance().GetNewShip(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
        
         	VehicleBuilder::Instance().Equip(ship);            	// improove
-        	ship->UpdateAllPropertiesAndAbilities(); 		// improove
         
         	npc->Bind(ship);
 

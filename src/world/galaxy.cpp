@@ -23,19 +23,20 @@ Galaxy::Galaxy()
 	data_id.id         = g_ID_GENERATOR.getNextId();
     	data_id.type_id    = ENTITY::GALAXY_ID;
     	data_id.subtype_id = NONE_ID;
-    	
-    	int starsystem_total_num = getRandInt(ENTITY::GALAXY::STARSYSTEM_NUM_MIN, ENTITY::GALAXY::STARSYSTEM_NUM_MAX);
-    	int counter_starsytem = 0;
-    	while(counter_starsytem < starsystem_total_num)
+}
+
+void Galaxy::CreateNewInternals()
+{
+    	int starsystem_num = getRandInt(ENTITY::GALAXY::STARSYSTEM_NUM_MIN, ENTITY::GALAXY::STARSYSTEM_NUM_MAX);
+    	for(int i = 0; i < starsystem_num; i++)
     	{  
-                StarSystemBuilder::Instance().CreateNewStarSystem();
-                StarSystemBuilder::Instance().CreateInternals();
+                int id = g_ID_GENERATOR.getNextId();
+                StarSystemBuilder::Instance().CreateNewStarSystem(id);
+                StarSystemBuilder::Instance().CreateNewInternals();
                 
         	StarSystem* starsystem = StarSystemBuilder::Instance().GetStarSystem();
         	starsystem->SetGalaxy(this);
-        	STARSYSTEM_vec.push_back(starsystem);
-        	
-        	counter_starsytem++;
+        	this->Add(starsystem);
     	}
 }
 

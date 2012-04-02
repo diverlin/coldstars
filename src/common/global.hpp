@@ -44,8 +44,6 @@ class AiModelRanger;       		 AiModelRanger*      AIMODEL_RANGER;
 class AiModelConqueror;    		 AiModelConqueror*   AIMODEL_CONQUEROR;
 
 
-std::vector<int> SHIP_SUBTYPE_LIST;
-
 std::vector<int> RACES_ALL_LIST;
 std::vector<int> RACES_GOOD_LIST;
 std::vector<int> RACES_EVIL_LIST;
@@ -55,6 +53,5 @@ std::vector<int> RACE1_ALLOWED_SUBTYPE_LIST;
 std::vector<int> RACE2_ALLOWED_SUBTYPE_LIST;
 std::vector<int> RACE3_ALLOWED_SUBTYPE_LIST; 
 std::vector<int> RACE4_ALLOWED_SUBTYPE_LIST;
-
 std::vector<int> RACE6_ALLOWED_SUBTYPE_LIST;
 std::vector<int> RACE7_ALLOWED_SUBTYPE_LIST;

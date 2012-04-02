@@ -53,10 +53,8 @@ void Screen :: resize(int width, int height)
     	Gui::GetWindow().UseVerticalSync(Config::Instance().VSYNC);
 
 	view.SetFromRect(sf::FloatRect(0, 0, width, height));
-	Gui::GetWindow().SetView(view);		
+	Gui::GetWindow().SetView(view);	
 	Gui::GetWindow().SetSize(width, height);
-	
-	//view.SetTitle(GAME_TITLE);	
 	    	
 	resizeGl();
 		
@@ -89,7 +87,7 @@ void Screen :: bottomLeftGlobalCoordIncrease(vec2f delta)
 void Screen :: update()
 {}
 
-void Screen :: display()		
+void Screen :: display()
 {
   	Gui::Update();
   	Gui::GetWindow().Display();

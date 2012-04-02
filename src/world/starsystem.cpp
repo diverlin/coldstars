@@ -18,9 +18,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-StarSystem::StarSystem()
+StarSystem::StarSystem(int id)
 { 
-    	data_id.id = g_ID_GENERATOR.getNextId();
+    	data_id.id = id;
     	data_id.type_id = ENTITY::STARSYSTEM_ID;
     	
     	is_CAPTURED = false;
@@ -1093,9 +1093,9 @@ void StarSystem::LoadEvent(const std::string& root) const
 
 
 
-StarSystem* GetNewStarSystem()
+StarSystem* GetNewStarSystem(int id)
 {
-	StarSystem* starsystem = new StarSystem();
+	StarSystem* starsystem = new StarSystem(id);
 	
 	return starsystem;
 }

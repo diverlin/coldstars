@@ -26,7 +26,8 @@ class Galaxy
   	public:
      		Galaxy();
      		~Galaxy();
-     		     		
+                
+                void CreateNewInternals();
      		void Add(StarSystem* starsystem) { STARSYSTEM_vec.push_back(starsystem); };
      		
      		int GetId() { return data_id.id; };
