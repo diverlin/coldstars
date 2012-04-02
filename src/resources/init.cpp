@@ -19,8 +19,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 void init()
 {
-	prepearGlobalVecs();    	
-    	loadGameData();
+        RACES_ALL_LIST.push_back(RACE::R0_ID);
+    	RACES_ALL_LIST.push_back(RACE::R1_ID);
+    	RACES_ALL_LIST.push_back(RACE::R2_ID);
+    	RACES_ALL_LIST.push_back(RACE::R3_ID);
+    	RACES_ALL_LIST.push_back(RACE::R4_ID);
+   	RACES_ALL_LIST.push_back(RACE::R6_ID);
+    	RACES_ALL_LIST.push_back(RACE::R7_ID);
+
+    	RACES_GOOD_LIST.push_back(RACE::R0_ID);
+    	RACES_GOOD_LIST.push_back(RACE::R1_ID);
+   	RACES_GOOD_LIST.push_back(RACE::R2_ID);
+    	RACES_GOOD_LIST.push_back(RACE::R3_ID);
+    	RACES_GOOD_LIST.push_back(RACE::R4_ID);
+
+    	RACES_EVIL_LIST.push_back(RACE::R6_ID);
+    	RACES_EVIL_LIST.push_back(RACE::R7_ID);  
+        
+    	loadGameData();           
+        g_TEXTURE_MANAGER.FillShipSubTypeList();        
     	
 	/* create Macro Scenaries */
 	MACROSCENARIO_STARSYSTEMLIBERATION = new MacroScenarioStarSystemLiberation();    // make as singlenton
@@ -38,36 +55,5 @@ void init()
 	AIMODEL_CONQUEROR = new AiModelConqueror();  // make as singlenton
 }
 
-
-
-void prepearGlobalVecs()
-{
-    	RACES_ALL_LIST.push_back(RACE::R0_ID);
-    	RACES_ALL_LIST.push_back(RACE::R1_ID);
-    	RACES_ALL_LIST.push_back(RACE::R2_ID);
-    	RACES_ALL_LIST.push_back(RACE::R3_ID);
-    	RACES_ALL_LIST.push_back(RACE::R4_ID);
-   	RACES_ALL_LIST.push_back(RACE::R6_ID);
-    	RACES_ALL_LIST.push_back(RACE::R7_ID);
-
-    	RACES_GOOD_LIST.push_back(RACE::R0_ID);
-    	RACES_GOOD_LIST.push_back(RACE::R1_ID);
-   	RACES_GOOD_LIST.push_back(RACE::R2_ID);
-    	RACES_GOOD_LIST.push_back(RACE::R3_ID);
-    	RACES_GOOD_LIST.push_back(RACE::R4_ID);
-
-    	RACES_EVIL_LIST.push_back(RACE::R6_ID);
-    	RACES_EVIL_LIST.push_back(RACE::R7_ID);
-
-    	SHIP_SUBTYPE_LIST.push_back(CLASS::RANGER_ID);
-    	SHIP_SUBTYPE_LIST.push_back(CLASS::WARRIOR_ID);
-    	SHIP_SUBTYPE_LIST.push_back(CLASS::PIRAT_ID);
-    	SHIP_SUBTYPE_LIST.push_back(CLASS::TRADER_ID);
-   	SHIP_SUBTYPE_LIST.push_back(CLASS::DIPLOMAT_ID);
-            
-    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(CLASS::WARRIOR_ID);
-    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(CLASS::TRADER_ID);
-    	RACE4_ALLOWED_SUBTYPE_LIST.push_back(CLASS::DIPLOMAT_ID);    	
-}
 
 

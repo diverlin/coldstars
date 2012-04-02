@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 StarSystemBuilder& StarSystemBuilder::Instance()
 {
 	static StarSystemBuilder instance;
-	return instance;	
+	return instance;
 }
 
 StarSystemBuilder::~StarSystemBuilder()
@@ -159,11 +159,17 @@ void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num)
 
     	for (int i=0; i<ship_num; i++)
     	{     
-        	if (npc_race_id != RACE::R4_ID)
-           		npc_subtype_id = SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
-        	else
-           		npc_subtype_id = RACE4_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE4_ALLOWED_SUBTYPE_LIST.size())];
-
+                switch(npc_race_id)
+                {
+                        case RACE::R0_ID: { npc_subtype_id = RACE0_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE0_ALLOWED_SUBTYPE_LIST.size())];  break; }
+                        case RACE::R1_ID: { npc_subtype_id = RACE1_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE1_ALLOWED_SUBTYPE_LIST.size())];  break; }
+                        case RACE::R2_ID: { npc_subtype_id = RACE2_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE2_ALLOWED_SUBTYPE_LIST.size())];  break; }
+                        case RACE::R3_ID: { npc_subtype_id = RACE3_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE3_ALLOWED_SUBTYPE_LIST.size())];  break; }
+                        case RACE::R4_ID: { npc_subtype_id = RACE4_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE4_ALLOWED_SUBTYPE_LIST.size())];  break; }
+                        case RACE::R6_ID: { npc_subtype_id = RACE6_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE6_ALLOWED_SUBTYPE_LIST.size())];  break; }
+                        case RACE::R7_ID: { npc_subtype_id = RACE7_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE7_ALLOWED_SUBTYPE_LIST.size())];  break; }
+                }   
+           		
         	Npc* npc = getNewNpc(npc_race_id, npc_subtype_id);
 
         	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[getRandInt(0, RACES_ALL_LIST.size())];

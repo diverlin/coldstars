@@ -508,7 +508,6 @@ void loadImages()
 	arg.push_back(RACE::R7_ID); arg.push_back(CLASS::WARRIOR_ID); //COLOR_GOLDENROD
 	g_TEXTURE_MANAGER.manage( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_71_0_1e.png", true, &arg) );
 }
-g_TEXTURE_MANAGER.DEBUG_CheckShipTexOb();
 
 //################################# TEXTURE::STAR_ID ###############################
 {
