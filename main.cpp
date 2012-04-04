@@ -27,27 +27,19 @@ int main()
 
 	GameTimer* TIMER = new GameTimer();
 
-	Galaxy* galaxy = GetNewGalaxy();
-        galaxy->CreateNewInternals();
+        GalaxyBuilder::Instance().CreateNewGalaxy();
+        GalaxyBuilder::Instance().CreateNewInternals();
+        Galaxy* galaxy = GalaxyBuilder::Instance().GetGalaxy();
         
-	Player* player = GetNewPlayer();
-	
-	int prace_id    = RACE::R7_ID;
-      	int psubtype_id = CLASS::WARRIOR_ID;
-      	int size_id     = SIZE_5;
-      	int weapons_num = 5;
-    	Npc* pnpc = getNewNpc(prace_id, psubtype_id);   
-    	Ship* pship = VehicleBuilder::Instance().GetNewShip(prace_id, psubtype_id, size_id, weapons_num);
-	VehicleBuilder::Instance().Equip(pship);   // improove
-        
-        pnpc->Bind(pship);
-   	player->BindNpc(pnpc);
-   	
+	PlayerBuilder::Instance().CreateNewPlayer();
+	PlayerBuilder::Instance().CreateNewInternals();
+	Player* player = PlayerBuilder::Instance().GetPlayer();
+
 	vec2f center(-400, 400);
 	float angle = 0;  
-		
+
 	StarSystem* starsystem = galaxy->GetRandomStarSystem();
-	starsystem->AddToSpace(pship, center, angle, NULL);
+	starsystem->AddToSpace(player->GetNpc()->GetVehicle(), center, angle, NULL);
 	
 	//player->GetScreen()->resize(Config::Instance().SCREEN_WIDTH*2, Config::Instance().SCREEN_HEIGHT);
 

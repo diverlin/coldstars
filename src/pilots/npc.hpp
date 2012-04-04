@@ -22,10 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Npc : public BaseGameEntity
 {
    	public:
-              	Npc(int _race_id, 
-              	    IdData, LifeData, 
-              	    TextureOb*);
-              	    
+              	Npc(int);              	    
      		virtual ~Npc();    		
      		
 		void SetGarbageReady(bool garbage_ready)      { data_life.garbage_ready = garbage_ready; }
@@ -100,10 +97,6 @@ class Npc : public BaseGameEntity
      		void UpdateInfo();     	
      		virtual void PostDeathUniqueEvent(bool);	
  };
-
-
-
-Npc* getNewNpc(int _race_id, int _subtype_id);
 
 
 #endif 

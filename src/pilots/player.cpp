@@ -19,10 +19,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../config/config.hpp"
 
 
-Player::Player()
+Player::Player(int id)
 { 
-    	id = g_ID_GENERATOR.getNextId(); 
-    	type_id = ENTITY::PLAYER_ID;
+    	data_id.id = id;
+    	data_id.type_id = ENTITY::PLAYER_ID;
+        data_id.subtype_id = NONE_ID;
    	
     	npc  = NULL;
     	cursor = new Cursor(this);
@@ -32,8 +33,7 @@ Player::Player()
  	GUI_SPACE      = new GuiSpace(this);
  	GUI_KOSMOPORT  = new GuiKosmoport(this);
 	GUI_MAP        = new GuiMap(this); 
-	USERINPUT      = new UserInput(this); 
-	
+	USERINPUT      = new UserInput(this); 	
     	
     	show_all_orbit     = false;
      	show_all_path      = false;
@@ -50,7 +50,7 @@ Player::~Player()
  	delete GUI_SPACE;
  	delete GUI_KOSMOPORT;
 	delete GUI_MAP;
-	delete USERINPUT; 	
+	delete USERINPUT;
 }  
             
 void Player::Update_global()
@@ -1057,10 +1057,19 @@ void Player::RunSession(GameTimer* TIMER)
 }     		
 
 
-
-
-
-Player* GetNewPlayer()
+void Player::SaveEvent() const
 {
-	return new Player();
+	std::string root = "player."+int2str(data_id.id)+".";
+        SaveManager::Instance().Put(root+"npc_id", npc->GetId());
+        SaveManager::Instance().Put(root+"vehicle_id", npc->GetVehicle()->GetId());
+}
+
+void Player::LoadEvent()
+{
+	std::string root = "player."+int2str(data_id.id)+".";
+        int npc_id = SaveManager::Instance().Get<int>(root+"npc_id");
+        int vehicle_id = SaveManager::Instance().Get<int>(root+"vehicle_id");    
+        
+        npc = (Npc*)EntityManager::Instance().GetEntityById(npc_id);
+        Vehicle* vehicle = (Vehicle*)EntityManager::Instance().GetEntityById(vehicle_id);
 }

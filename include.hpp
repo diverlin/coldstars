@@ -180,6 +180,9 @@ class GuiMap;
 #include "src/builder/BaseVehicleBuilder.hpp"
 #include "src/builder/VehicleBuilder.hpp"
 #include "src/builder/StarSystemBuilder.hpp"
+#include "src/builder/GalaxyBuilder.hpp"
+#include "src/builder/PlayerBuilder.hpp"
+#include "src/builder/NpcBuilder.hpp"
 
 #include "src/pilots/player.hpp"
 
@@ -315,6 +318,9 @@ class GuiMap;
 #include "src/builder/BaseVehicleBuilder.cpp"
 #include "src/builder/VehicleBuilder.cpp"
 #include "src/builder/StarSystemBuilder.cpp"
+#include "src/builder/GalaxyBuilder.cpp"
+#include "src/builder/PlayerBuilder.cpp"
+#include "src/builder/NpcBuilder.cpp"
 #include "src/gui/guiSkill.cpp"
 #include "src/gui/guiMap.cpp"
 #include "src/gui/cursor.cpp"   

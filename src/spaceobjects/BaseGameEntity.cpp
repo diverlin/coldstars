@@ -165,7 +165,4 @@ void BaseGameEntity::LoadUniqueBaseGameEntity(const std::string& root)
 	mass = SaveManager::Instance().Get<int>(root+"mass");
 	
 	//if (parent) SaveManager::Instance().Get(root+"parent_id", parent->GetId());
-								
-	//SaveManager::Instance().SaveFile("save.info");
-	
 }

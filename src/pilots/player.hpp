@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Player 
 {
    	public:
-    		Player();
+    		Player(int);
      		~Player();
    
    		void SetWorldMapShowFlag(bool _show_worldmap) { control.worldmap = _show_worldmap; }
@@ -70,9 +70,12 @@ class Player
      		//	
   		
      		void RunSession(GameTimer*); 
-     		     		     		     		     	
+                
+                void SaveEvent() const;
+                void LoadEvent();
+
      	private:
-     	     	int type_id, id;
+     	     	IdData data_id;
      	     		
      	     	Npc*     npc;
      	     	
@@ -127,8 +130,6 @@ class Player
     		
     		friend class UserInput;
 };
-
-Player* GetNewPlayer();
 
 #endif 
 

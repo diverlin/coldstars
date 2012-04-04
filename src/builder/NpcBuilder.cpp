@@ -17,34 +17,34 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef GALAXY_H
-#define GALAXY_H
-
-
-class Galaxy 
+NpcBuilder& NpcBuilder::Instance()
 {
-  	public:
-     		Galaxy(int);
-     		~Galaxy();
-                
-     		void Add(StarSystem* starsystem) { STARSYSTEM_vec.push_back(starsystem); };
-     		
-     		int GetId() { return data_id.id; };
-     		StarSystem* GetRandomStarSystem();
-     		StarSystem* GetRandomCapturedStarSystem();
-     		     
-    		void Update(int);
-    		void SaveEvent() const;
-    		void LoadEvent() const;
+	static NpcBuilder instance;
+	return instance;
+}
 
-     	private:
-     		IdData data_id;
+NpcBuilder::~NpcBuilder()
+{}
 
-  	     	std::vector<StarSystem*> STARSYSTEM_vec;
-  	     	
-  	     	friend class GuiMap;
-  	     	friend class Observation;
-};
+void NpcBuilder::CreateNewNpc(int race_id, int subtype_id)
+{
+        IdData data_id;
+    	data_id.id         = g_ID_GENERATOR.getNextId(); 
+    	data_id.type_id    = ENTITY::NPC_ID;
+    	data_id.subtype_id = subtype_id;
+    	
+    	LifeData data_life;
+    	
+       	TextureOb* texOb_face  = g_TEXTURE_MANAGER.getRandomFaceTexObWithFolloingAttributes(race_id);
+	npc = new Npc(race_id);
+        npc->SetTextureOb(texOb_face);
+        npc->SetIdData(data_id);
+        npc->SetLifeData(data_life);        
+	
+	GetEntityManager().RegisterEntity(npc);
+} 
+        	
+void NpcBuilder::CreateNewInternals()
+{    
 
-
-#endif 
+}
