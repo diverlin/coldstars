@@ -26,9 +26,12 @@ StarSystemBuilder& StarSystemBuilder::Instance()
 StarSystemBuilder::~StarSystemBuilder()
 {}
 
-void StarSystemBuilder::CreateNewStarSystem(int id)
+void StarSystemBuilder::CreateNewStarSystem()
 {
+        int id = g_ID_GENERATOR.getNextId();
         starsystem = new StarSystem(id);
+        
+        GetEntityManager().RegisterEntity(starsystem);
 } 
         	
 void StarSystemBuilder::CreateNewInternals()
@@ -125,7 +128,8 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
        		//npc_subtype_id = SHIP_SUBTYPE_LIST[getRandInt(0, RACES_EVIL_LIST.size())];
                 npc_subtype_id = CLASS::WARRIOR_ID;
 
-        	Npc* npc = getNewNpc(npc_race_id, npc_subtype_id);
+        	NpcBuilder::Instance().CreateNewNpc(npc_race_id, npc_subtype_id);
+                Npc* npc = NpcBuilder::Instance().GetNpc();
 
         	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[getRandInt(0, RACES_ALL_LIST.size())];
         	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
@@ -167,7 +171,8 @@ void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num)
                         case RACE::R7_ID: { npc_subtype_id = RACE7_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE7_ALLOWED_SUBTYPE_LIST.size())];  break; }
                 }   
            		
-        	Npc* npc = getNewNpc(npc_race_id, npc_subtype_id);
+        	NpcBuilder::Instance().CreateNewNpc(npc_race_id, npc_subtype_id);
+                Npc* npc = NpcBuilder::Instance().GetNpc();
 
         	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[getRandInt(0, RACES_ALL_LIST.size())];
         	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];

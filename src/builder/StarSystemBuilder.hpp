@@ -27,7 +27,7 @@ class StarSystemBuilder
 		static StarSystemBuilder& Instance();
 		~StarSystemBuilder();
 
-        	void CreateNewStarSystem(int); 
+        	void CreateNewStarSystem(); 
                 void CreateNewInternals();
                 StarSystem* GetStarSystem() const { return starsystem; };
         	 		                

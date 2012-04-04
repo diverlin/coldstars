@@ -15,31 +15,15 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-   		
-void Npc::Bind(Vehicle* vehicle) 	           
+
+
+Npc::Npc(int race_id)
 { 
-	this->vehicle = vehicle; 
-	vehicle->SetNpc(this); 
-} 	
-
-void Npc::IncreaseCredits(int credits) { this->credits += credits; }
-void Npc::DecreaseCredits(int credits) { this->credits -= credits; }
-
-		
-Npc::Npc(int _race_id, IdData _data_id, LifeData _data_life, TextureOb* _texOb)
-{ 
-   	data_id = _data_id;
-   	data_life = _data_life;	
-
-      
-    	texOb = _texOb;
-
-    	race_id = _race_id;
+    	this->race_id = race_id;
     	
     	upper_control = false;
 
-    	credits = 1000;
-   	
+    	credits = 1000;   	
    	
 	place_type_id = NONE_ID; 
 
@@ -79,6 +63,15 @@ Npc :: ~Npc() /* virtual */
 
         delete state_machine;        
 }  
+
+void Npc::Bind(Vehicle* vehicle) 	           
+{ 
+	this->vehicle = vehicle; 
+	vehicle->SetNpc(this); 
+} 	
+
+void Npc::IncreaseCredits(int credits) { this->credits += credits; }
+void Npc::DecreaseCredits(int credits) { this->credits -= credits; }
     
 void Npc::ThinkCommon_inKosmoport_inStatic()
 {   		
@@ -276,23 +269,3 @@ void Npc::RenderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_
      
 void Npc :: PostDeathUniqueEvent(bool) /* virtual */
 {}
-
-
-Npc* getNewNpc(int _race_id, int _subtype_id)
-{
-	IdData data_id;
-    	data_id.id         = g_ID_GENERATOR.getNextId(); 
-    	data_id.type_id    = ENTITY::NPC_ID;
-    	data_id.subtype_id = _subtype_id;
-    	
-    	LifeData data_life;
-    	
-       	TextureOb* texOb_face  = g_TEXTURE_MANAGER.getRandomFaceTexObWithFolloingAttributes(_race_id);
-	Npc* npc = new Npc(_race_id, data_id, data_life, texOb_face);
-	
-	GetEntityManager().RegisterEntity(npc);
-	    	
-	return npc;
-}
-
-

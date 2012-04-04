@@ -262,7 +262,15 @@ void UserInput :: getSimpleInputs()
 				
 				case sf::Key::F9:
 				{
-					player->GetNpc()->GetStarSystem()->GetGalaxy()->LoadEvent();
+                                        delete player->GetNpc()->GetStarSystem()->GetGalaxy();
+                                        delete player;
+                                        
+                                        PlayerBuilder::Instance().CreateNewPlayer();
+                                        player = PlayerBuilder::Instance().GetPlayer();
+                                        
+                                        SaveManager::Instance().LoadFile("save.info");
+                                        //player->LoadEvent();                                        
+					//player->GetNpc()->GetStarSystem()->GetGalaxy()->LoadEvent();
 					break;
 				}
 				

@@ -198,8 +198,6 @@ class StarSystem : public BaseGameEntity
 		friend class Player;
 };
 
-StarSystem* GetNewStarSystem(int);
-
 template <typename AGRESSOR, typename VICTIM>
 bool checkCollision(AGRESSOR*,  VICTIM*, bool);
 

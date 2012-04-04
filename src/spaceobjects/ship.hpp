@@ -38,7 +38,6 @@ class Ship : public Vehicle
 		void SaveEvent() const;
          
         private:
-
 };
 
 

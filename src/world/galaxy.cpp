@@ -18,26 +18,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "../common/constants.hpp"
 
-Galaxy::Galaxy()
+Galaxy::Galaxy(int id)
 { 
-	data_id.id         = g_ID_GENERATOR.getNextId();
+	data_id.id         = id;
     	data_id.type_id    = ENTITY::GALAXY_ID;
     	data_id.subtype_id = NONE_ID;
 }
 
-void Galaxy::CreateNewInternals()
+Galaxy::~Galaxy()
 {
-    	int starsystem_num = getRandInt(ENTITY::GALAXY::STARSYSTEM_NUM_MIN, ENTITY::GALAXY::STARSYSTEM_NUM_MAX);
-    	for(int i = 0; i < starsystem_num; i++)
-    	{  
-                int id = g_ID_GENERATOR.getNextId();
-                StarSystemBuilder::Instance().CreateNewStarSystem(id);
-                StarSystemBuilder::Instance().CreateNewInternals();
-                
-        	StarSystem* starsystem = StarSystemBuilder::Instance().GetStarSystem();
-        	starsystem->SetGalaxy(this);
-        	this->Add(starsystem);
-    	}
+        for (unsigned int i = 0; i<STARSYSTEM_vec.size(); i++)
+	{
+                delete STARSYSTEM_vec[i];
+        }
 }
 
 ////ugly
@@ -82,48 +75,6 @@ void Galaxy::LoadEvent() const
 {}
 
 
-Galaxy* GetNewGalaxy()
-{
-        Galaxy* galaxy = new Galaxy();
-	return galaxy;
-}
 
   
-         
-/*
-void generateNumEnemyNPC(StarSystem* starsystem, int ship_per_system)
-{
-	int npc_subtype_id;
-    	int npc_race_id = RACES_EVIL_LIST[getRandInt(0, RACES_EVIL_LIST.size())];
-        
-    	for (int i=0; i<ship_per_system; i++)
-    	{     
-       		//npc_subtype_id = SHIP_SUBTYPE_LIST[getRandInt(0, RACES_EVIL_LIST.size())];
-                npc_subtype_id = CLASS::WARRIOR_ID;
-
-        	Npc* npc = getNewNpc(npc_race_id, npc_subtype_id);
-
-        	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[getRandInt(0, RACES_ALL_LIST.size())];
-        	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
-        	int ship_size_id = getRandInt(1, 9);
-        	int weapons_num = getRandInt(1, 5);
-        	Ship* ship = VehicleBuilder::Instance().GetNewShip(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
-       
-        	VehicleBuilder::Instance().Equip(ship);            // improove
-        	ship->UpdateAllPropertiesAndAbilities(); 	  // improove
-        
-        	npc->Bind(ship);
-
-		vec2f center(getRandInt(0, 800), getRandInt(0, 800));
-		float angle = getRandInt(0, 360);  
-		
-        	starsystem->AddToSpace(ship, center, angle, NULL);
-        	
-        	Satellite* satellite = VehicleBuilder::Instance().GetNewSatellite();
-                VehicleBuilder::Instance().Equip(satellite);           		// improove
-                        	
-                starsystem->AddToSpace((Vehicle*)satellite, vec2f(0, 0), 0, ship);
-    	}
-}
-*/
 

@@ -17,34 +17,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef GALAXY_H
-#define GALAXY_H
+#ifndef PLAYERBUILDER_H
+#define PLAYERBUILDER_H
 
 
-class Galaxy 
+class PlayerBuilder
 {
-  	public:
-     		Galaxy(int);
-     		~Galaxy();
+	public:
+		static PlayerBuilder& Instance();
+		~PlayerBuilder();
+
+        	void CreateNewPlayer(); 
+                void CreateNewInternals();
+                Player* GetPlayer() const { return player; };
+        	 		                
+        protected:
+                Player* player;
                 
-     		void Add(StarSystem* starsystem) { STARSYSTEM_vec.push_back(starsystem); };
-     		
-     		int GetId() { return data_id.id; };
-     		StarSystem* GetRandomStarSystem();
-     		StarSystem* GetRandomCapturedStarSystem();
-     		     
-    		void Update(int);
-    		void SaveEvent() const;
-    		void LoadEvent() const;
+		PlayerBuilder() {};
+}; 
 
-     	private:
-     		IdData data_id;
-
-  	     	std::vector<StarSystem*> STARSYSTEM_vec;
-  	     	
-  	     	friend class GuiMap;
-  	     	friend class Observation;
-};
 
 
 #endif 
+    
+
+        
+
+

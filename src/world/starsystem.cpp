@@ -38,7 +38,118 @@ StarSystem::StarSystem(int id)
 }
 
 StarSystem::~StarSystem()
-{}
+{
+        for(unsigned int i=0; i<STAR_vec.size(); i++)
+        {
+                delete STAR_vec[i];
+        }
+
+        for(unsigned int i=0; i<PLANET_vec.size(); i++)
+        {
+                delete PLANET_vec[i];
+        }
+
+        for(unsigned int i=0; i<ASTEROID_vec.size(); i++)
+        {
+                delete ASTEROID_vec[i];
+        }
+
+        for(unsigned int i=0; i<MINERAL_vec.size(); i++)
+        {
+                delete MINERAL_vec[i];
+        }
+       
+        for(unsigned int i=0; i<CONTAINER_vec.size(); i++)
+        {
+                delete CONTAINER_vec[i];
+        } 
+
+        for(unsigned int i=0; i<ROCKET_vec.size(); i++)
+        {
+                delete ROCKET_vec[i];
+        } 
+
+        for(unsigned int i=0; i<BLACKHOLE_vec.size(); i++)
+        {
+                delete BLACKHOLE_vec[i];
+        } 
+
+        for(unsigned int i=0; i<SPACESTATION_vec.size(); i++)
+        {
+                delete SPACESTATION_vec[i];
+        } 
+
+        for(unsigned int i=0; i<SATELLITE_vec.size(); i++)
+        {
+                delete SATELLITE_vec[i];
+        } 
+        
+        for(unsigned int i=0; i<SHIP_inSPACE_vec.size(); i++)
+        {
+                delete SHIP_inSPACE_vec[i];
+        } 
+        
+        for(unsigned int i=0; i<NPC_inSPACE_vec.size(); i++)
+        {
+                delete NPC_inSPACE_vec[i];
+        } 
+        
+        for(unsigned int i=0; i<NPC_RANGER_inSPACE_vec.size(); i++)
+        {
+                delete NPC_RANGER_inSPACE_vec[i];
+        } 
+
+        for(unsigned int i=0; i<NPC_WARRIOR_inSPACE_vec.size(); i++)
+        {
+                delete NPC_WARRIOR_inSPACE_vec[i];
+        } 
+
+        for(unsigned int i=0; i<NPC_TRADER_inSPACE_vec.size(); i++)
+        {
+                delete NPC_TRADER_inSPACE_vec[i];
+        } 
+        
+        for(unsigned int i=0; i<NPC_PIRAT_inSPACE_vec.size(); i++)
+        {
+                delete NPC_PIRAT_inSPACE_vec[i];
+        } 
+
+        for(unsigned int i=0; i<NPC_DIPLOMAT_inSPACE_vec.size(); i++)
+        {
+                delete NPC_DIPLOMAT_inSPACE_vec[i];
+        } 
+        
+        for(unsigned int i=0; i<distantNebulaBgEffect_vec.size(); i++)
+        {
+                delete distantNebulaBgEffect_vec[i];
+        } 
+        
+        for(unsigned int i=0; i<distantStarBgEffect_vec.size(); i++)
+        {
+                delete distantStarBgEffect_vec[i];
+        } 
+    		   
+    	// effects
+        for(unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)
+        {
+                delete effect_LAZERTRACE_vec[i];
+        } 
+        
+        for(unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++)
+        {
+                delete effect_PARTICLESYSTEM_vec[i];
+        } 
+        
+        for(unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)
+        {
+                delete effect_SHOCKWAVE_vec[i];
+        } 
+
+        for(unsigned int i=0; i<text_DAMAGE_vec.size(); i++)
+        {
+                delete text_DAMAGE_vec[i];
+        } 
+}
       
 
 void StarSystem::AddToSpace(Vehicle* vehicle, vec2f center, float angle, BaseGameEntity* parent)
@@ -1090,16 +1201,6 @@ void StarSystem::LoadEvent(const std::string& root) const
 }
 
 
-
-
-
-StarSystem* GetNewStarSystem(int id)
-{
-	StarSystem* starsystem = new StarSystem(id);
-	
-	return starsystem;
-}
-
 template <typename AGRESSOR, typename VICTIM>
 bool checkCollision(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
 {
@@ -1149,16 +1250,4 @@ bool collisionBetweenCenters(Points& points1, float center2_x, float center2_y, 
 
     return true;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
