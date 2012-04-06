@@ -24,7 +24,7 @@ BaseVehicleBuilder::~BaseVehicleBuilder() {}
 void  BaseVehicleBuilder::CreateKorpusGeometry(Vehicle* vehicle) const
 {
 	vehicle->RecalculateCollisionRadius();
-	vehicle->CreateCenter();
+	vehicle->GetPoints().CreateCenter();
 
     	vehicle->GetPoints().initMainQuadPoints(vehicle->GetTextureOb()->getFrameWidth(), vehicle->GetTextureOb()->getFrameHeight());
     	vehicle->GetPoints().addMainQuadPoints();
@@ -54,7 +54,7 @@ void BaseVehicleBuilder::CreateKorpusGui(Vehicle* vehicle) const
         
 void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
 {
-    	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SLOT_ID);  
+    	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID);  
 
 	ItemSlot* radar_slot = new ItemSlot();
 	radar_slot->SetSubTypeId(SLOT::RADAR_ID);

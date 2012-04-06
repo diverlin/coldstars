@@ -21,13 +21,13 @@ Kosmoport :: Kosmoport(int _race_id)
 {
 	type_id = ENTITY::KOSMOPORT_ID;
 
-        TextureOb* _texOb_slot = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SLOT_ID);
-        TextureOb* _texOb_landingArea = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::LANDINGAREA_ID);
+        TextureOb* _texOb_slot = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID);
+        TextureOb* _texOb_landingArea = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::LANDINGAREA_ID);
         
-        TextureOb* _texOb_angarBackground  = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::ANGAR_BACKGROUND_ID);   
-        TextureOb* _texOb_storeBackground  = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::STORE_BACKGROUND_ID);    
-        TextureOb* _texOb_shopBackground   = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SHOP_BACKGROUND_ID);    
-        TextureOb* _texOb_govermentBackground = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::GOVERMENT_BACKGROUND_ID);    
+        TextureOb* _texOb_angarBackground  = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ANGAR_BACKGROUND_ID);   
+        TextureOb* _texOb_storeBackground  = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::STORE_BACKGROUND_ID);    
+        TextureOb* _texOb_shopBackground   = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SHOP_BACKGROUND_ID);    
+        TextureOb* _texOb_govermentBackground = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::GOVERMENT_BACKGROUND_ID);    
 
         angar     = new Angar(_texOb_angarBackground, _texOb_landingArea);
         store     = new Store(_texOb_storeBackground, _texOb_slot);
@@ -40,15 +40,9 @@ Kosmoport :: Kosmoport(int _race_id)
 /* virtual */
 Kosmoport :: ~Kosmoport()
 {}
-
-Angar* Kosmoport :: getAngar()         { return angar; }
-Store* Kosmoport :: getStore()         { return store; }
-Shop*  Kosmoport :: getShop()          { return shop; }
-Goverment* Kosmoport :: getGoverment() { return goverment; }
-      
            
 /* virtual */
-bool Kosmoport :: getPermissionToLand() const
+bool Kosmoport::GetPermissionToLand() const
 {
       	if (angar->getFreePlatformTotalNum() > 0) 
         { 
@@ -57,11 +51,9 @@ bool Kosmoport :: getPermissionToLand() const
         
         return false;
 }
-
-     
                 
 /* virtual */
-bool Kosmoport :: add(Vehicle* vehicle)
+bool Kosmoport::Add(Vehicle* vehicle)
 {
         vehicle->SetPlaceTypeId(type_id);
                 
@@ -72,7 +64,7 @@ bool Kosmoport :: add(Vehicle* vehicle)
 }
 
 /* virtual */
-bool Kosmoport :: add(Npc* npc)
+bool Kosmoport::Add(Npc* npc)
 {
         npc->SetPlaceTypeId(type_id);
         NPC_vec.push_back(npc);
@@ -83,7 +75,7 @@ bool Kosmoport :: add(Npc* npc)
 }
 
 /* virtual */
-bool Kosmoport :: remove(Vehicle* vehicle)
+bool Kosmoport::Remove(Vehicle* vehicle)
 {
         bool is_removed_from_list = false;
         for (unsigned int i = 0; i < VEHICLE_vec.size(); i++)
@@ -104,7 +96,7 @@ bool Kosmoport :: remove(Vehicle* vehicle)
 }
 
 /* virtual */
-bool Kosmoport :: remove(Npc* npc)
+bool Kosmoport::Remove(Npc* npc)
 {
         bool is_removed = false;
         for (unsigned int i = 0; i < NPC_vec.size(); i++)
@@ -120,7 +112,7 @@ bool Kosmoport :: remove(Npc* npc)
 }
 
 /* virtual */
-void Kosmoport :: ai()
+void Kosmoport::Ai()
 {
         for (unsigned int i = 0; i < NPC_vec.size(); i++)
         {

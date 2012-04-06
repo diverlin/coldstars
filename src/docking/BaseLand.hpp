@@ -17,31 +17,31 @@
    */
 
 
-#ifndef LANDBASE_H
-#define LANDBASE_H
+#ifndef BASELAND_H
+#define BASELAND_H
 
-class LandBase
+class BaseLand
 {
         public:
-                LandBase();
-                virtual ~LandBase();
+                BaseLand();
+                virtual ~BaseLand();
 
-		int GetTypeId() const;
+		int GetTypeId() const { return type_id; };
 		
-		virtual bool getPermissionToLand() const = 0;
+		virtual bool GetPermissionToLand() const = 0;
 		                
-                virtual bool add(Vehicle*) = 0;
-                virtual bool add(Npc*) = 0;
-                virtual bool remove(Vehicle*) = 0;
-                virtual bool remove(Npc*) = 0;
+                virtual bool Add(Vehicle*) = 0;
+                virtual bool Add(Npc*) = 0;
+                virtual bool Remove(Vehicle*) = 0;
+                virtual bool Remove(Npc*) = 0;
                 
-                virtual void ai() = 0;       
+                virtual void Ai() = 0;       
                 
-                void addToLaunchingQueue(Npc*);                
-		void addToDockingQueue(Npc*);  
+                void AddToLaunchingQueue(Npc*);                
+		void AddToDockingQueue(Npc*);  
 		
-		void manageDockingQueue();
-                void manageLaunchingQueue();
+		void ManageDockingQueue();
+                void ManageLaunchingQueue();
                          
         protected:
         	int type_id;

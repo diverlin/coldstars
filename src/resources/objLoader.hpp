@@ -82,6 +82,8 @@ class ObjMeshInstance
   std::vector<_ObjMeshFaceIndex>  faces;
   GLuint glList; 
   
+  std::string path;
+  
   /*
    * Load file, parse it
    * Lines beginning with:
@@ -96,6 +98,7 @@ class ObjMeshInstance
       
   ObjMeshInstance(std::string filename)
   {
+  	path = filename;
     std::ifstream filestream;
     filestream.open(filename.c_str());
  

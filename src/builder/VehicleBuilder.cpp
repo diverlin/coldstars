@@ -47,11 +47,8 @@ Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int w
         data_korpus.inhibit_GRAPPLE = false;
         data_korpus.weapon_slot_num = weapons_num;
        
-        IdData data_id;
-        data_id.id         = g_ID_GENERATOR.getNextId(); 
-    	data_id.type_id    = ENTITY::SHIP_ID;
-    	data_id.subtype_id = subtype_id;       
-
+        int id         = g_ID_GENERATOR.getNextId(); 
+    	
         LifeData data_life;
         data_life.armor      = data_korpus.armor;
         data_life.dying_time = 10*texOb->size_id;
@@ -62,10 +59,11 @@ Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int w
     	else
        		data_korpus.render_TURRELS = false; 
        		
-	Ship* ship = new Ship();
+	Ship* ship = new Ship(id);
+	
+	ship->SetSubTypeId(subtype_id);
 	ship->SetKorpusData(data_korpus);
 	ship->SetTextureOb(texOb);
-	ship->SetIdData(data_id);
 	ship->SetLifeData(data_life);
 	
 	CreateKorpusGeometry(ship);
@@ -75,14 +73,14 @@ Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int w
         CreateWeaponsComplex(ship);
         CreateProtectionComplex(ship);	
         
-        GetEntityManager().RegisterEntity(ship);
+        EntityManager::Instance().RegisterEntity(ship);
         
         return ship;
 }
 
 Satellite* VehicleBuilder::GetNewSatellite() const
 {
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SATELLITE_ID);  
+	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SATELLITE_ID);  
 	
        	int protection_rate = 1;
        	//if (subtype_id == CLASS::WARRIOR_ID)
@@ -100,11 +98,8 @@ Satellite* VehicleBuilder::GetNewSatellite() const
         data_korpus.inhibit_GRAPPLE = true;
         data_korpus.weapon_slot_num = 2;
        
-        IdData data_id;
-        data_id.id         = g_ID_GENERATOR.getNextId(); 
-    	data_id.type_id    = ENTITY::SATELLITE_ID;
-    	data_id.subtype_id = NONE_ID;       
-
+        int id         = g_ID_GENERATOR.getNextId(); 
+ 
         LifeData data_life;
         data_life.armor      = data_korpus.armor;
         data_life.dying_time = 10*texOb->size_id;
@@ -112,9 +107,9 @@ Satellite* VehicleBuilder::GetNewSatellite() const
         int size_threshold = 2; 
 	data_korpus.render_TURRELS = true;       
 
-	Satellite* satellite = new Satellite();
+	Satellite* satellite = new Satellite(id);
+	
 	satellite->SetKorpusData(data_korpus);
-	satellite->SetIdData(data_id);
 	satellite->SetLifeData(data_life);
 	satellite->SetTextureOb(texOb);
 	
@@ -125,7 +120,7 @@ Satellite* VehicleBuilder::GetNewSatellite() const
         CreateWeaponsComplex(satellite);
         CreateProtectionComplex(satellite);	
         
-        GetEntityManager().RegisterEntity(satellite);
+        EntityManager::Instance().RegisterEntity(satellite);
 	
 	return satellite;
 
@@ -133,7 +128,7 @@ Satellite* VehicleBuilder::GetNewSatellite() const
 
 SpaceStation* VehicleBuilder::GetNewSpaceStation() const
 {
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SPACESTATION_ID); 
+	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SPACESTATION_ID); 
        
        	int protection_rate = 1;
        	//if (subtype_id == CLASS::WARRIOR_ID)
@@ -151,10 +146,7 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation() const
         data_korpus.inhibit_GRAPPLE = false;
         data_korpus.weapon_slot_num = 5;
        
-        IdData data_id;
-        data_id.id         = g_ID_GENERATOR.getNextId(); 
-    	data_id.type_id    = ENTITY::SPACESTATION_ID;
-    	data_id.subtype_id = SPACESTATION::MILITARY_ID;       
+        int id         = g_ID_GENERATOR.getNextId(); 
 
         LifeData data_life;
         data_life.armor      = data_korpus.armor;
@@ -163,10 +155,10 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation() const
         int size_threshold = 2; 
 	data_korpus.render_TURRELS = true; 
                            
-    	SpaceStation* spacestation = new SpaceStation(RACE::R0_ID);
+    	SpaceStation* spacestation = new SpaceStation(id, RACE::R0_ID);
+    	spacestation->SetSubTypeId(SPACESTATION::MILITARY_ID);
     	spacestation->SetKorpusData(data_korpus);
 	spacestation->SetTextureOb(texOb);
-	spacestation->SetIdData(data_id);
 	spacestation->SetLifeData(data_life);
     	
 	CreateKorpusGeometry(spacestation);
@@ -185,18 +177,15 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation() const
 RocketBullet* VehicleBuilder::GetNewRocket(BulletData data_bullet, ItemSlot* slot, float offset, bool force_center_start) const
 {
 	IdData data_id;
-	data_id.id         = g_ID_GENERATOR.getNextId(); 
-	data_id.type_id    = ENTITY::ROCKET_ID;
-	data_id.subtype_id = NONE_ID;
+	int id         = g_ID_GENERATOR.getNextId(); 
 
 	LifeData data_life;	
 	data_life.is_alive      = true;
         data_life.garbage_ready = false;
         data_life.armor = data_bullet.armor;        
 
-    	RocketBullet* rocket = new RocketBullet(data_bullet, slot->GetTurrel()->getTarget(), slot->GetOwnerVehicle()->GetId());
+    	RocketBullet* rocket = new RocketBullet(id, data_bullet, slot->GetTurrel()->getTarget(), slot->GetOwnerVehicle()->GetId());
          
-        rocket->SetIdData(data_id);
         rocket->SetLifeData(data_life);
         rocket->SetTextureOb(data_bullet.texOb);
          

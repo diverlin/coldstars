@@ -18,8 +18,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-Satellite :: Satellite()
+Satellite :: Satellite(int id)
 {        
+	data_id.id = id;
+	data_id.type_id = ENTITY::SATELLITE_ID;
+	
     	mass = getRandInt(ENTITY::SATELLITE::MASS_MIN, ENTITY::SATELLITE::MASS_MAX);
     	orbit = new Orbit();
     	
@@ -38,14 +41,14 @@ void Satellite :: update_inSpace(int time, bool show_effect)
 	CheckDeath(show_effect);
 	if (time > 0)
 	{
-		orbit->updatePosition();
+		orbit->UpdatePosition();
 
 		//printf("sat orbit =%f,%f\n", orbit->getPosition().x, orbit->getPosition().y);
 		//if (parent != NULL)
 		//{		
 			vec2f new_pos;
-			new_pos.x = parent->GetPoints().getCenter().x + orbit->getPosition().x;
-			new_pos.y = parent->GetPoints().getCenter().y + orbit->getPosition().y;
+			new_pos.x = parent->GetPoints().getCenter().x + orbit->GetPosition().x;
+			new_pos.y = parent->GetPoints().getCenter().y + orbit->GetPosition().y;
 			points.setCenter(new_pos);
 			points.update();
 		//}

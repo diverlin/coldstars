@@ -18,18 +18,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-Land :: Land()
+NatureLand::NatureLand()
 {}
 
 /* virtual */
-Land :: ~Land()
+NatureLand::~NatureLand()
 {}
-
 
 
 //// ******* TRANSITION ******* 
 /* virtual */
-bool Land :: add(Vehicle* vehicle)
+bool NatureLand::Add(Vehicle* vehicle)
 {
         vehicle->SetPlaceTypeId(ENTITY::PLANET_ID);
         VEHICLE_vec.push_back(vehicle);
@@ -38,7 +37,7 @@ bool Land :: add(Vehicle* vehicle)
 }
 
 /* virtual */
-bool Land :: add(Npc* npc)
+bool NatureLand::Add(Npc* npc)
 {
         npc->SetPlaceTypeId(ENTITY::LAND_ID);        
         NPC_vec.push_back(npc);
@@ -49,7 +48,7 @@ bool Land :: add(Npc* npc)
 }
 
 /*virtual */
-bool Land :: remove(Vehicle* vehicle)
+bool NatureLand::Remove(Vehicle* vehicle)
 {
         bool is_removed = false;
         
@@ -66,7 +65,7 @@ bool Land :: remove(Vehicle* vehicle)
 }
 
 /* virtual */
-bool Land :: remove(Npc* npc)
+bool NatureLand::Remove(Npc* npc)
 {
         bool is_removed = false;
     
@@ -82,18 +81,14 @@ bool Land :: remove(Npc* npc)
         return is_removed;
 }
 
-
-
 /* virtual */
-bool Land :: getPermissionToLand() const
+bool NatureLand::GetPermissionToLand() const
 {
        	return true;
 }
 
-
-
 /* virtual */
-void Land :: ai()
+void NatureLand::Ai()
 {
         for (unsigned int i = 0; i < NPC_vec.size(); i++)
         {

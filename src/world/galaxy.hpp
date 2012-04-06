@@ -34,8 +34,8 @@ class Galaxy
      		StarSystem* GetRandomCapturedStarSystem();
      		     
     		void Update(int);
+
     		void SaveEvent() const;
-    		void LoadEvent() const;
 
      	private:
      		IdData data_id;
@@ -44,6 +44,7 @@ class Galaxy
   	     	
   	     	friend class GuiMap;
   	     	friend class Observation;
+  	     	friend class GalaxyBuilder;
 };
 
 

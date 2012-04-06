@@ -18,11 +18,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-Container :: Container()
+Container :: Container(int id)
 {
+	data_id.id = id;
+	data_id.type_id = ENTITY::CONTAINER_ID;
+	
     	mass = 1;
 
-    	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SLOT_ID);
+    	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID);
     	item_slot = new ItemSlot();
     	item_slot->SetSubTypeId(SLOT::CARGO_ID);
     	item_slot->SetTextureOb(texOb_slot);
@@ -61,7 +64,7 @@ void Container :: PostDeathUniqueEvent(bool show_effect)
         {
         	if (show_effect == true)
         	{
-        		createExplosion(starsystem, points.getCenter(), texOb->size_id);  
+        		createExplosion(starsystem, points.getCenter(), textureOb->size_id);  
         	}
         }
 }
@@ -71,9 +74,7 @@ void Container :: PostDeathUniqueEvent(bool show_effect)
 
 Container* getNewContainer()
 {
-        IdData data_id;
-        data_id.id = g_ID_GENERATOR.getNextId(); 
-        data_id.type_id = ENTITY::CONTAINER_ID;
+	int id = g_ID_GENERATOR.getNextId(); 
         
         LifeData data_life;
         data_life.armor = getRandInt(1,6);
@@ -82,10 +83,9 @@ Container* getNewContainer()
         vec3f d_angle;
         d_angle.z      = -getRandInt(10, 100)*0.01; 
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::CONTAINER_ID); 
+	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::CONTAINER_ID); 
 	
-	Container* container = new Container();
-	container->SetIdData(data_id);
+	Container* container = new Container(id);
 	container->SetLifeData(data_life);
 	container->SetTextureOb(texOb);
 	container->SetDeltaAngle(d_angle);

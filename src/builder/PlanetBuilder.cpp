@@ -1,0 +1,93 @@
+/*
+Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+*/
+
+
+PlanetBuilder& PlanetBuilder::Instance()
+{
+	static PlanetBuilder instance;
+	return instance;
+}
+
+PlanetBuilder::~PlanetBuilder()
+{}
+
+void PlanetBuilder::CreateNewPlanet(int id)
+{
+	if (id == NONE_ID)
+	{
+		id = g_ID_GENERATOR.getNextId();
+	}
+        planet = new Planet(id, RACE::R0_ID, 1000000);
+        EntityManager::Instance().RegisterEntity(planet);
+} 
+        	
+void PlanetBuilder::CreateNewInternals(float orbit_radius)
+{           
+        LifeData data_life;
+
+	PlanetData planet_data;
+
+	planet_data.scale         = getRandInt(ENTITY::PLANET::SIZE_MIN_, ENTITY::PLANET::SIZE_MAX_);  
+	planet_data.orbit_center  = vec2f(0, 0); 
+	planet_data.radius_A      = orbit_radius;
+	planet_data.radius_B      = orbit_radius; 
+	planet_data.orbit_phi_inD = 0;
+	planet_data.speed         = (float)getRandInt(ENTITY::PLANET::SPEED_MIN, ENTITY::PLANET::SPEED_MAX) / (float)orbit_radius;
+
+
+        TextureOb* textureOb 	        = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::PLANET_ID); 
+        TextureOb* textureOb_atmosphere = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ATMOSPHERE_ID); 
+        
+        unsigned long int population = getRandInt(1000, 4000);
+        
+        planet->SetPlanetData(planet_data);
+
+	planet->SetTextureOb(textureOb);
+	planet->SetSubTypeId(ENTITY::KOSMOPORT_ID);
+	planet->SetLifeData(data_life);
+	planet->SetMesh(g_SPHERE_MESH);	
+
+	planet->PostCreateInit();
+	planet->CreateLand();
+}
+
+void PlanetBuilder::Save(Planet* planet) const
+{
+	std::string root = "planet." + int2str(planet->GetId())+".";
+	planet->SaveUniqueBaseGameEntity(root);
+	planet->SaveUniqueBasePlanet(root);
+	planet->SaveUniquePlanet(root);
+}
+
+void PlanetBuilder::LoadPass0(const std::string& root)
+{
+	int id = SaveManager::Instance().Get<int>(root+"data_id.id");	
+	this->CreateNewPlanet(id);
+	
+	planet->LoadUniqueBaseGameEntity(root);
+	planet->LoadUniqueBasePlanet(root);
+	planet->LoadUniquePlanet(root);
+}
+
+void PlanetBuilder::LoadPass1()
+{
+	planet->ResolveUniqueBaseGameEntity();
+	planet->ResolveUniqueBasePlanet();
+	planet->ResolveUniquePlanet();
+}
+

@@ -17,32 +17,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef BLACKHOLE_H
-#define BLACKHOLE_H
-
-
-class BlackHole : public SpaceItemBase
+BaseLand::BaseLand()
 {
-    	public:  
-        	BlackHole(int);
-        	~BlackHole();
+	type_id = NONE_ID;
+}
 
-		void setEffect(BlackHoleEffect*);
-		void update_inSpace(int, bool);
-		
-        	void renderInfo_inSpace(vec2f);
-        	
-        	void Render() const;
-        	
-        private:
-        	BlackHoleEffect* effect;
-        	
-        	InfoTable info;
-        	void UpdateInfo();    
-};
+/* virtual */
+BaseLand::~BaseLand()
+{
+	//delete NPC_vec/VEHICLE_vec;
+}
 
-BlackHole* getNewBlackHole();
+void BaseLand::ManageLaunchingQueue()
+{
+         for (unsigned int i = 0; i<NPC_launching_vec.size(); i++)
+         {
+         	NPC_launching_vec[i]->GetVehicle()->LaunchingEvent();
+         }
+              
+         NPC_launching_vec.clear();  
+}
 
-
-#endif 
-
+void BaseLand::AddToLaunchingQueue(Npc* npc)
+{
+         NPC_launching_vec.push_back(npc);
+}

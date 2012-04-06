@@ -25,7 +25,7 @@ DriveComplex :: DriveComplex(Vehicle* owner_vehicle)
         
 	resetTarget();
 	
-	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SLOT_ID); 
+	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID); 
 		
 	drive_slot.SetSubTypeId(SLOT::DRIVE_ID); 
 	drive_slot.SetTextureOb(texOb_slot);
@@ -187,13 +187,13 @@ bool DriveComplex :: updateTargetCoord()
 
     		case ENTITY::PLANET_ID:
     		{ 
-        		target_pos = ((Planet*)target)->getOrbit()->getNextTurnPosition() + target_offset;         	
+        		target_pos = ((Planet*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;         	
 		       	return true; break;		       	
     		} 
 
     		case ENTITY::ASTEROID_ID:
     		{ 
-        		target_pos = ((Asteroid*)target)->getOrbit()->getNextTurnPosition() + target_offset;         	
+        		target_pos = ((Asteroid*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;         	
         		return true; break;
     		} 
     	     
@@ -230,8 +230,8 @@ bool DriveComplex :: getDockingPermission()
 {
 	switch(target->GetTypeId())
 	{
-		case ENTITY::PLANET_ID:       { return ((Planet*)target)->GetLand()->getPermissionToLand(); break; }
-		case ENTITY::SPACESTATION_ID: { return ((SpaceStation*)target)->GetLand()->getPermissionToLand(); break; }
+		case ENTITY::PLANET_ID:       { return ((Planet*)target)->GetLand()->GetPermissionToLand(); break; }
+		case ENTITY::SPACESTATION_ID: { return ((SpaceStation*)target)->GetLand()->GetPermissionToLand(); break; }
 		//case SHIP_ID:   { return targetOb->GetVehicle()->getPermissionToLand(); break; }
 	}
 	

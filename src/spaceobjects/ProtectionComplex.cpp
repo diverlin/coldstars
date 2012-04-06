@@ -21,10 +21,10 @@ ProtectionComplex::ProtectionComplex(Vehicle* vehicle)
 {        
         this->owner_vehicle = vehicle;
         
-        TextureOb* texOb_shield = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SHIELD_EFFECT_ID); 
+        TextureOb* texOb_shield = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SHIELD_EFFECT_ID); 
  	shield_effect = new ShieldEffect(vehicle, texOb_shield);
  
-     	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::SLOT_ID); 
+     	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID); 
 
  	protector_slot.SetSubTypeId(SLOT::PROTECTOR_ID); 
  	protector_slot.SetTextureOb(texOb_slot);

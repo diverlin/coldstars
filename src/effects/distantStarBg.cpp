@@ -45,7 +45,7 @@ void DistantStarBgEffect :: Render(float vx, float vy)
 DistantStarBgEffect* getNewDistantStarBgEffect(int color_id)
 {
 	TextureOb* texOb = NULL;
-	if (color_id == -1) texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::DISTANTSTAR_ID);
+	if (color_id == -1) texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::DISTANTSTAR_ID);
 	else    	    texOb = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::DISTANTSTAR_ID, color_id);
         
         vec2f _center(getRandInt(0, 1000), getRandInt(0, 1000));

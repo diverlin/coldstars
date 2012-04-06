@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Mineral : public SpaceItemBase
 {
     	public:  
-        	Mineral();
+        	Mineral(int);
         
         	void renderInfo_inSpace(vec2f);
         	

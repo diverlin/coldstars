@@ -17,31 +17,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-Orbit :: Orbit()
+Orbit::Orbit()
 {}
 
-Orbit :: ~Orbit()
+Orbit::~Orbit()
 {}
-
-vec2f Orbit :: getPosition() const { return orbit_vec[orbit_it]; }
-   
-vec2f Orbit :: getNextTurnPosition() const 
+ 
+vec2f Orbit::GetNextTurnPosition() const 
 { 
-        if (orbit_it + TURN_TIME < orbit_len)
+        if (it + TURN_TIME < len)
         {
-                return orbit_vec[orbit_it+TURN_TIME]; 
+                return coords_vec[it+TURN_TIME]; 
         }
         else
         {
-                int d_orbit = orbit_len-orbit_it;
-                return orbit_vec[TURN_TIME - d_orbit]; 
+                int d_orbit = len-it;
+                return coords_vec[TURN_TIME - d_orbit]; 
         }
 }
 
 
-void Orbit :: calcPath(float radius_A, float radius_B, float speed, float orbit_phi_inD)
+void Orbit::CalcPath(float radius_A, float radius_B, float speed, float orbit_phi_inD)
 {   
-	orbit_vec.clear();
+	coords_vec.clear();
 	
      	float d_angleInRad  = speed / RADIAN_TO_DEGREE_RATE;
      	float orbitPhiInRad = orbit_phi_inD / RADIAN_TO_DEGREE_RATE;
@@ -51,15 +49,15 @@ void Orbit :: calcPath(float radius_A, float radius_B, float speed, float orbit_
      	{ 
          	new_coord.x = radius_A * cos(angleInRad) * cos(orbitPhiInRad) - radius_B * sin(angleInRad) * sin(orbitPhiInRad);
          	new_coord.y = radius_A * cos(angleInRad) * sin(orbitPhiInRad) + radius_B * sin(angleInRad) * cos(orbitPhiInRad);
-         	orbit_vec.push_back(new_coord);
+         	coords_vec.push_back(new_coord);
      	}
-        orbit_len = orbit_vec.size();
-        orbit_it = getRandInt(1, orbit_len);
+        len = coords_vec.size();
+        it = getRandInt(1, len);
 }    
 
-void Orbit :: calcPath(float radius, float speed)
+void Orbit::CalcPath(float radius, float speed)
 {   	
-	orbit_vec.clear();
+	coords_vec.clear();
 	
      	float d_angleInRad  = speed / RADIAN_TO_DEGREE_RATE;
      	
@@ -68,34 +66,32 @@ void Orbit :: calcPath(float radius, float speed)
      	{ 
          	new_coord.x = radius * cos(angleInRad)  - radius * sin(angleInRad);
          	new_coord.y = radius * cos(angleInRad)  + radius * sin(angleInRad);
-         	orbit_vec.push_back(new_coord);
+         	coords_vec.push_back(new_coord);
      	}
-        orbit_len = orbit_vec.size();
-        orbit_it = getRandInt(1, orbit_len);
+        len = coords_vec.size();
+        it = getRandInt(1, len);
 }    
 
-
-
-void Orbit :: updatePosition()
+void Orbit::UpdatePosition()
 {   
-     	if (orbit_it < orbit_len-1)
+     	if (it < len-1)
      	{ 
-        	orbit_it++;
+        	it++;
      	}
      	else
      	{
-        	orbit_it = 0;
+        	it = 0;
         }
 }    
 
-void Orbit :: updateVisual()
+void Orbit::UpdateVisual()
 {
-	orbit_visual.fillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue->texture, &orbit_vec, 50, 10);
+	orbit_visual.fillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue->texture, &coords_vec, 50, 10);
 }
 
-void Orbit :: draw()
+void Orbit::Draw()
 {   
-	this->updateVisual();   // TOO SLOW
+	this->UpdateVisual();   // TOO SLOW
         orbit_visual.draw();
 }
 

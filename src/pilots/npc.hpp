@@ -25,9 +25,11 @@ class Npc : public BaseGameEntity
               	Npc(int);              	    
      		virtual ~Npc();    		
      		
+     		void SetRaceId(int race_id) { this->race_id = race_id; };
+     		void SetModelAi(AiModelBase* ai_model) { this->ai_model = ai_model; };
 		void SetGarbageReady(bool garbage_ready)      { data_life.garbage_ready = garbage_ready; }
 		void SetAlive(bool alive) 		      { data_life.is_alive = alive; }
-		void SetLand(LandBase* land)   		      { this->land = land; };
+		void SetLand(BaseLand* land)   		      { this->land = land; };
 		void SetScanTarget(Vehicle* vehicle_to_scan)  { this->vehicle_to_scan = vehicle_to_scan; };
 		void SetUpperControl(bool upper_control)      { this->upper_control = upper_control; };
 
@@ -39,7 +41,7 @@ class Npc : public BaseGameEntity
 		Observation* GetObservation()   const { return observation; };
 		unsigned long int GetCredits()  const { return credits; };   
 		StateMachine* GetStateMachine() const { return state_machine; };
-		LandBase* GetLand()             const { return land; };
+		BaseLand* GetLand()             const { return land; };
 
    		void Bind(Vehicle*);
 
@@ -76,7 +78,7 @@ class Npc : public BaseGameEntity
 
    	     	StarSystem* failback_starsystem;
    	     	
-   	     	LandBase* land;
+   	     	BaseLand* land;
    	     	     		     		
    	     	Vehicle* vehicle;
    	     	

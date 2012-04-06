@@ -27,14 +27,16 @@ class NpcBuilder
 		static NpcBuilder& Instance();
 		~NpcBuilder();
 
-        	void CreateNewNpc(int, int); 
-                void CreateNewInternals();
+        	void CreateNewNpc(); 
+                void CreateNewInternals(int, int);
                 Npc* GetNpc() const { return npc; };
         	 		                
-        protected:
+        private:
                 Npc* npc;
                 
 		NpcBuilder() {};
+		NpcBuilder(const NpcBuilder&) {};
+		NpcBuilder& operator=(const NpcBuilder&) {};
 }; 
 
 

@@ -35,7 +35,7 @@ void GuiVehicle :: update()
 	Store* store = NULL;
 	if (player->GetNpc()->GetPlaceTypeId() == ENTITY::KOSMOPORT_ID)
 	{
-		store = ((Kosmoport*)player->GetNpc()->GetLand())->getStore();
+		store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
 	}
 	
     	bool lmb = player->GetCursor()->getMouseLeftButton();; 

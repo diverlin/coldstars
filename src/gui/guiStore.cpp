@@ -30,7 +30,7 @@ GuiStore :: ~GuiStore()
         
 void GuiStore :: update()
 {
- 	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->getStore();
+ 	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
  
         bool lmb = player->GetCursor()->getMouseLeftButton();; 
         //bool rmb = player->GetCursor()->getMouseRightButton();; 
@@ -56,7 +56,7 @@ void GuiStore :: update()
 
 void GuiStore :: Render() const
 {            
-	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->getStore();
+	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
 	         
         for (unsigned int i = 0; i < store->slot_vec.size(); i ++)
         {
@@ -67,7 +67,7 @@ void GuiStore :: Render() const
 
 void GuiStore :: renderFocusedItemInfo()
 {
-	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->getStore();
+	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
         for (unsigned int i = 0; i < store->slot_vec.size(); i++)
         { 
                 float dist = distBetweenPoints(store->slot_vec[i]->GetRect().getCenter(), player->GetCursor()->getMousePos().x, player->GetScreen()->getHeight() - player->GetCursor()->getMousePos().y);
@@ -82,7 +82,7 @@ void GuiStore :: renderFocusedItemInfo()
 
 void GuiStore :: renderBackground() const
 {
-	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->getStore();
+	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
 
      	Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());
      	drawTexturedRect(store->texOb_background, screen_rect, -1);  

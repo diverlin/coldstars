@@ -22,6 +22,16 @@
 //#include "../world/starsystem.hpp"
 //#include "../common/gameStruct.hpp"
 
+struct PostLoaUnresolvedData
+{
+	std::string mesh_path;
+	std::string textureOb_path;
+	int parent_id;
+	int starsystem_id;
+	vec2f center;
+	float angle;
+};
+
 
 class BaseGameEntity
 {
@@ -29,10 +39,10 @@ class BaseGameEntity
 		BaseGameEntity();
 		virtual ~BaseGameEntity();
 
-		void SetIdData(IdData data_id)              { this->data_id = data_id; }
+		void SetSubTypeId(int subtype_id)           { data_id.subtype_id = subtype_id; }
 		void SetLifeData(LifeData data_life)        { this->data_life = data_life; }
 		void SetMesh(ObjMeshInstance* mesh)         { this->mesh = mesh; }
-		void SetTextureOb(TextureOb* texOb)         { this->texOb = texOb; }
+		void SetTextureOb(TextureOb* textureOb)     { this->textureOb = textureOb; }
 		void SetStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
 		void SetPlaceTypeId(int place_type_id)      { this->place_type_id = place_type_id;  }
 
@@ -54,7 +64,7 @@ class BaseGameEntity
 		bool GetGarbageReady()   const { return data_life.garbage_ready; }             
 
 		int GetMass()         const { return mass; }
-		TextureOb* GetTextureOb() const { return texOb; }
+		TextureOb* GetTextureOb() const { return textureOb; }
 		int GetArmor()        const { return data_life.armor; }
 
 		BaseGameEntity* GetParent() const { return parent; }
@@ -63,15 +73,21 @@ class BaseGameEntity
 
 		void Hit(int, bool);
 
+		void SaveUniqueBaseGameEntity(const std::string&) const;
+		void LoadUniqueBaseGameEntity(const std::string&);
+		void ResolveUniqueBaseGameEntity();
+				
 	protected:
 		IdData data_id;
 		LifeData data_life;
+		
+		PostLoaUnresolvedData data_unresolved;
 		
 		vec3f angle, d_angle;
 
 		float collision_radius;
 
-		TextureOb* texOb;
+		TextureOb* textureOb;
 		ObjMeshInstance* mesh; 
 
 		StarSystem* starsystem;
@@ -84,14 +100,10 @@ class BaseGameEntity
 
 		BaseGameEntity* parent;
 
-		void CreateCenter();
 		void UpdateRotation();
 
 		void CheckDeath(bool);
 		virtual void PostDeathUniqueEvent(bool) = 0;
-		
-		void SaveUniqueBaseGameEntity(const std::string&) const;
-		void LoadUniqueBaseGameEntity(const std::string&);
 		
 		friend class BaseVehicleBuilder;
 };

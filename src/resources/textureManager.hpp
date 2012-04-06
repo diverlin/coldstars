@@ -54,11 +54,15 @@ class TextureManager
 
         	TextureOb* getTexObByColorId(int type_id, int color_id);
                         	
-		TextureOb* getRandomTexOb(int);
+		TextureOb* GetRandomTextureOb(int);
+		
+		TextureOb* GetTextureObByPath(const std::string&);
                
                 void FillShipSubTypeList();
 
         private:
+        	std::vector<TextureOb*> textureOb_total_vec;
+        	
         	std::vector<TextureOb*> slot_texOb_vec;
         	std::vector<TextureOb*> landingArea_texOb_vec;
         	std::vector<TextureOb*> turrel_texOb_vec;
@@ -161,7 +165,7 @@ class TextureManager
         	
         	std::vector<TextureOb*> textBackground_texOb_vec;
         	
-        	TextureOb* getRandomTexObFromList(std::vector<TextureOb*>*);
+        	TextureOb* GetRandomTextureObFromList(std::vector<TextureOb*>*);
        		TextureOb* getShipTexObByClosestSizeFromList(std::vector<TextureOb*>*, int);
         	TextureOb* getShipTexObBySizeFromList(std::vector<TextureOb*>*, int);
 

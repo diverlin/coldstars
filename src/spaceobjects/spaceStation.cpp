@@ -18,8 +18,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-SpaceStation :: SpaceStation(int race_id)
-{        
+SpaceStation :: SpaceStation(int id, int race_id)
+{      
+	data_id.id = id;
+	data_id.type_id = ENTITY::SPACESTATION_ID;  
+	
     	mass = getRandInt(ENTITY::SPACESTATION::MASS_MIN, ENTITY::SPACESTATION::MASS_MAX);
 	land = NULL;
 }
@@ -29,7 +32,7 @@ SpaceStation :: ~SpaceStation()
 	delete land;
 }    
     
-LandBase* SpaceStation :: GetLand() const { return land; }
+BaseLand* SpaceStation :: GetLand() const { return land; }
 	
 	      
 void SpaceStation :: createLand(int race_id)

@@ -23,7 +23,7 @@ TextureOb :: TextureOb()
 
 TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, std::vector<int>* pTo_arg, int _columns_num, int _rows_num, int _fps)
 {
-    	// TexOb attributes INIT
+    	// textureOb attributes INIT
     	race_id = -1;
     	tech_level_id = -1;
 

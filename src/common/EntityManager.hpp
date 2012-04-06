@@ -37,6 +37,8 @@ class EntityManager
 
 		BaseGameEntity* GetEntityById(int) const;
 		void RemoveEntity(BaseGameEntity*);
+		
+		void SaveEvent();
 
 	private:
 		EntityManager(){}
@@ -45,8 +47,6 @@ class EntityManager
 
 		std::map<int, BaseGameEntity*> entity_map;
 };
-
-EntityManager& GetEntityManager();
 
 
 #endif

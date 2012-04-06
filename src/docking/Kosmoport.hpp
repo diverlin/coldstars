@@ -21,25 +21,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define KOSMOPORT_H
 
 
-class Kosmoport : public LandBase
+class Kosmoport : public BaseLand
 {
         public:
                 Kosmoport(int);
                 virtual ~Kosmoport();
 
-                Angar*     getAngar();
-                Store*     getStore();
-                Shop*      getShop();
-                Goverment* getGoverment(); 
+                Angar*     GetAngar() const { return angar; };
+                Store*     GetStore() const { return store; };
+                Shop*      GetShop() const { return shop; };
+                Goverment* GetGoverment() const { return goverment; }; 
                 
-                virtual bool getPermissionToLand() const;
+                virtual bool GetPermissionToLand() const;
                                 
-                virtual bool add(Vehicle*);
-                virtual bool add(Npc*);
-                virtual bool remove(Vehicle*);
-                virtual bool remove(Npc*);
+                virtual bool Add(Vehicle*);
+                virtual bool Add(Npc*);
+                virtual bool Remove(Vehicle*);
+                virtual bool Remove(Npc*);
                 
-                virtual void ai();
+                virtual void Ai();
                 
         private:
                 Angar*     angar;

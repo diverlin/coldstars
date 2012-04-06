@@ -18,8 +18,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-Asteroid :: Asteroid()
+Asteroid :: Asteroid(int id)
 {   
+	data_id.id = id;
+	data_id.type_id = ENTITY::ASTEROID_ID;
+	
       	mass  = getRandInt(10, 30);
 }
     
@@ -38,8 +41,8 @@ void Asteroid :: update_inSpace(int time, bool show_effect)
 	UpdateRotation();
 	if (time > 0)
 	{	
-     		orbit->updatePosition();  
-     		points.setCenter(orbit->getPosition());
+     		orbit->UpdatePosition();  
+     		points.setCenter(orbit->GetPosition());
      	}     	
 }
 
@@ -92,10 +95,8 @@ void Asteroid :: renderInfo_inSpace(vec2f scroll_coords)
 
 Asteroid* getNewAsteroid()
 {
-	IdData data_id;
-	data_id.id      = g_ID_GENERATOR.getNextId();
-      	data_id.type_id = ENTITY::ASTEROID_ID;
-      	
+	int id      = g_ID_GENERATOR.getNextId();
+        	
 	LifeData data_life;   
 	data_life.armor      = 10;
       	data_life.dying_time = 50;
@@ -109,17 +110,16 @@ Asteroid* getNewAsteroid()
     	planet_data.orbit_phi_inD = getRandInt(0, 360);
     	planet_data.speed         = 0.1;
 
-        TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::ASTEROID_ID); 
+        TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ASTEROID_ID); 
     
-        Asteroid* asteroid = new Asteroid(); 
+        Asteroid* asteroid = new Asteroid(id); 
         
-        asteroid->setPlanetData(planet_data);
+        asteroid->SetPlanetData(planet_data);
 	asteroid->SetTextureOb(texOb);
-	asteroid->SetIdData(data_id);
 	asteroid->SetLifeData(data_life);
 	asteroid->SetMesh(g_DEFORMED_SPHERE_MESH);	
        	
-        asteroid->postCreateInit();
+        asteroid->PostCreateInit();
         
         return asteroid;        
 }

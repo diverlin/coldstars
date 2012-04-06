@@ -73,7 +73,7 @@ class Player
                 
                 void SaveEvent() const;
                 void LoadEvent();
-
+                
      	private:
      	     	IdData data_id;
      	     		

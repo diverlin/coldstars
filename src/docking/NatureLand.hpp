@@ -17,23 +17,23 @@
    */
 
 
-#ifndef LAND_H
-#define LAND_H
+#ifndef NATURELAND_H
+#define NATURELAND_H
 
-class Land : public LandBase
+class NatureLand : public BaseLand
 {
         public:
-                Land();
-                virtual ~Land();
+                NatureLand();
+                virtual ~NatureLand();
 
-                virtual bool add(Vehicle*);
-                virtual bool add(Npc*);
-                virtual bool remove(Vehicle*);
-                virtual bool remove(Npc*);
+                virtual bool Add(Vehicle*);
+                virtual bool Add(Npc*);
+                virtual bool Remove(Vehicle*);
+                virtual bool Remove(Npc*);
                 
-                virtual bool getPermissionToLand() const;
+                virtual bool GetPermissionToLand() const;
                                 
-                virtual void ai();       
+                virtual void Ai();       
 };
 
 #endif

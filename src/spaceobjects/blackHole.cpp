@@ -18,8 +18,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-BlackHole :: BlackHole()
+BlackHole :: BlackHole(int id)
 {        
+	data_id.id = id;
+	data_id.type_id = ENTITY::BLACKHOLE_ID;
+	
     	mass = getRandInt(1000, 4000);
     	keep_moving = false;
 }
@@ -62,10 +65,7 @@ void BlackHole :: Render() const
 
 BlackHole* getNewBlackHole()
 {
-        IdData data_id;
-        data_id.id         = g_ID_GENERATOR.getNextId();
-    	data_id.type_id    = ENTITY::BLACKHOLE_ID;
-    	//data_id.subtype_id = ; 
+        int id         = g_ID_GENERATOR.getNextId();
         
         LifeData data_life;
         data_life.is_alive   = true;
@@ -73,9 +73,10 @@ BlackHole* getNewBlackHole()
     	data_life.armor      = 100000;
         data_life.dying_time = 30;        
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::BLACKHOLE_ID); 
-	BlackHole* blackhole = new BlackHole();
-	blackhole->SetIdData(data_id);
+	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::BLACKHOLE_ID); 
+	
+	BlackHole* blackhole = new BlackHole(id);
+
 	blackhole->SetLifeData(data_life);
 	blackhole->SetTextureOb(texOb);
 	

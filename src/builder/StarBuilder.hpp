@@ -17,40 +17,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef STAR_H
-#define STAR_H
+#ifndef STARBUILDER_H
+#define STARBUILDER_H
 
 
-class Star : public PlanetBase
+class StarBuilder
 {
 	public:
-    		float texture_offset1, texture_offset2;    
-   		
-    		Star();
-    		~Star();
-                
-                void calcColor();
-                
-                Color4f getColor() const;
-                int getColorId() const;
-                float getBrightThreshold() const;
-    		
-    		void update_inSpace(int, bool);
-    		
-    		void render_NEW();
-    		void render_OLD();
+		static StarBuilder& Instance();
+		~StarBuilder();
 
-    		void renderInfo_inSpace(vec2f);
+        	void CreateNewStar(int id = NONE_ID); 
+                void CreateNewInternals();
+                Star* GetStar() const { return star; };
                 
+                void Save(Star*) const;
+                void LoadPass0(const std::string&);
+                void LoadPass1();
+        	 		                
         private:
-        	Color4f color;
-        	
-    		void UpdateInfo();
-    		void PostDeathUniqueEvent(bool);
+                Star* star;
+                
+		StarBuilder() {};
+		StarBuilder(const StarBuilder&) {};
+		StarBuilder& operator=(const StarBuilder&) {};
 }; 
 
 
-Star* getNewStar();
 
 #endif 
     

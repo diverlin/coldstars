@@ -28,12 +28,12 @@ GalaxyBuilder::~GalaxyBuilder()
 
 void GalaxyBuilder::CreateNewGalaxy()
 {
-        int id = g_ID_GENERATOR.getNextId();
+	int id = g_ID_GENERATOR.getNextId();
         galaxy = new Galaxy(id);
 } 
         	
 void GalaxyBuilder::CreateNewInternals()
-{    
+{     	
     	int starsystem_num = getRandInt(ENTITY::GALAXY::STARSYSTEM_NUM_MIN, ENTITY::GALAXY::STARSYSTEM_NUM_MAX);
     	for(int i = 0; i < starsystem_num; i++)
     	{  
@@ -45,3 +45,10 @@ void GalaxyBuilder::CreateNewInternals()
         	galaxy->Add(starsystem);
  	}
 }
+
+void GalaxyBuilder::LoadGalaxy(const std::string& root)
+{
+	int id = SaveManager::Instance().Get<int>(root+"data_id.id");
+	
+}
+
