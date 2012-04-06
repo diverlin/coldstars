@@ -51,7 +51,7 @@ void DistantNebulaBgEffect :: Render(float vx, float vy)
 DistantNebulaBgEffect* createDistantNebula(int color_id)
 {
 	TextureOb* texOb = NULL;
-	if (color_id == -1) texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::NEBULA_BACKGROUND_ID);
+	if (color_id == -1) texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::NEBULA_BACKGROUND_ID);
 	else    	    texOb = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::NEBULA_BACKGROUND_ID, color_id);	
 	   	
    	vec3f center((float)getRandInt(0, 1000), (float)getRandInt(0, 1000), -999.0);

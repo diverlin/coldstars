@@ -256,19 +256,26 @@ void UserInput :: getSimpleInputs()
 				
 				case sf::Key::F5:
 				{
-					player->GetNpc()->GetStarSystem()->GetGalaxy()->SaveEvent();
+					//GalaxyBuilder::Instance().SaveEvent(player->GetNpc()->GetStarSystem()->GetGalaxy());
+					EntityManager::Instance().SaveEvent();
 					break;
 				}
 				
 				case sf::Key::F9:
 				{
-                                        delete player->GetNpc()->GetStarSystem()->GetGalaxy();
-                                        delete player;
-                                        
-                                        PlayerBuilder::Instance().CreateNewPlayer();
-                                        player = PlayerBuilder::Instance().GetPlayer();
-                                        
+                                        //delete player->GetNpc()->GetStarSystem()->GetGalaxy();
+                                        //delete player;
+
                                         SaveManager::Instance().LoadFile("save.info");
+                                                                                
+                                        GalaxyBuilder::Instance().CreateNewGalaxy();
+                                        GalaxyBuilder::Instance().LoadGalaxy("galaxy.");
+                                        Galaxy* galaxy = GalaxyBuilder::Instance().GetGalaxy();
+                                        
+                                        //PlayerBuilder::Instance().CreateNewPlayer();
+                                        //player = PlayerBuilder::Instance().GetPlayer();
+                                        
+
                                         //player->LoadEvent();                                        
 					//player->GetNpc()->GetStarSystem()->GetGalaxy()->LoadEvent();
 					break;

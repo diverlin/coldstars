@@ -229,14 +229,14 @@ void Player::RenderEntities_NEW()
 		enable_BLEND();
 			for(unsigned int i = 0; i < visible_STAR_vec.size(); i++) 
 			{ 
-        			visible_STAR_vec[i]->render_NEW(); 
+        			visible_STAR_vec[i]->Render_NEW(); 
     			}
     		disable_BLEND();
 		npc->GetStarSystem()->RestoreSceneColor();
 	screen->getFbo0()->deactivate();
 
 	// POST PROCESS BLOOM (many FBO)
-	screen->getBloom()->pass0(screen, screen->getFbo0()->getTexture(), visible_STAR_vec[0]->getBrightThreshold());
+	screen->getBloom()->pass0(screen, screen->getFbo0()->getTexture(), visible_STAR_vec[0]->GetBrightThreshold());
 	screen->getBloom()->restPasses(screen);
 	screen->getBloom()->combine(screen, screen->getFbo0()->getTexture());
 
@@ -268,12 +268,12 @@ void Player::RenderEntities_NEW()
 		enable_DEPTH();  
     			for(unsigned int i = 0; i < visible_PLANET_vec.size(); i++) 
     			{ 
-       				visible_PLANET_vec[i]->render_NEW(screen->getBottomLeftGlobalCoord()); 
+       				visible_PLANET_vec[i]->Render_NEW(screen->getBottomLeftGlobalCoord()); 
     			}
     		
     			for(unsigned int i = 0; i < visible_ASTEROID_vec.size(); i++)
     			{ 
-       				visible_ASTEROID_vec[i]->render_NEW(screen->getBottomLeftGlobalCoord()); 
+       				visible_ASTEROID_vec[i]->Render_NEW(screen->getBottomLeftGlobalCoord()); 
     			}
     		disable_DEPTH();
 
@@ -412,17 +412,17 @@ void Player::RenderEntities_OLD()
         enable_DEPTH();
 		for(unsigned int i = 0; i < visible_STAR_vec.size(); i++) 
 		{ 
-        		visible_STAR_vec[i]->render_OLD(); 
+        		visible_STAR_vec[i]->Render_OLD(); 
     		}
 
     		for(unsigned int i = 0; i < visible_PLANET_vec.size(); i++) 
     		{ 
-       			visible_PLANET_vec[i]->render_OLD(); 
+       			visible_PLANET_vec[i]->Render_OLD(); 
     		}
 
     		for(unsigned int i = 0; i < visible_ASTEROID_vec.size(); i++)
     		{ 
-       			visible_ASTEROID_vec[i]->render_OLD(); 
+       			visible_ASTEROID_vec[i]->Render_OLD(); 
     		}
         disable_DEPTH();
 
@@ -696,7 +696,7 @@ void Player::MouseInteraction_inOuterSpace() // all large objects must be cheked
 
                 		visible_ASTEROID_vec[ai]->renderInfo_inSpace(screen->getBottomLeftGlobalCoord()); 
                                 
-                                visible_ASTEROID_vec[ai]->getOrbit()->draw();
+                                visible_ASTEROID_vec[ai]->GetOrbit()->Draw();
 
 				if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 				{
@@ -874,7 +874,7 @@ void Player::MouseInteraction_inOuterSpace() // all large objects must be cheked
 
                 		visible_PLANET_vec[pi]->renderInfo_inSpace(screen->getBottomLeftGlobalCoord()); 
 
-                                visible_PLANET_vec[pi]->getOrbit()->draw();
+                                visible_PLANET_vec[pi]->GetOrbit()->Draw();
           
 				if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 				{
@@ -903,7 +903,7 @@ void Player::MouseInteraction_inOuterSpace() // all large objects must be cheked
             		{   
                			cursor_has_target = true;
 
-               			visible_STAR_vec[si]->renderInfo_inSpace(screen->getBottomLeftGlobalCoord()); 
+               			visible_STAR_vec[si]->RenderInfo_inSpace(screen->getBottomLeftGlobalCoord()); 
 
                			break; 
             		}
@@ -989,8 +989,8 @@ void Player::InKosmoport()
          
         if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::ANGAR_ID)
         {
-        	((Kosmoport*)npc->GetLand())->getAngar()->mouseControl(this);                                
-               	((Kosmoport*)npc->GetLand())->getAngar()->Render(this);
+        	((Kosmoport*)npc->GetLand())->GetAngar()->mouseControl(this);                                
+               	((Kosmoport*)npc->GetLand())->GetAngar()->Render(this);
 
 		if (npc->GetScanTarget() != NULL) 
 		{ 
@@ -999,7 +999,7 @@ void Player::InKosmoport()
 		}
 		else
 		{
-			((Kosmoport*)npc->GetLand())->getAngar()->RenderItemInfo(this);
+			((Kosmoport*)npc->GetLand())->GetAngar()->RenderItemInfo(this);
 		}
 	}
 
@@ -1016,8 +1016,8 @@ void Player::InKosmoport()
 
         if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::SHOP_ID)
         {
-        	((Kosmoport*)npc->GetLand())->getShop()->update();
-                ((Kosmoport*)npc->GetLand())->getShop()->Render(this);
+        	((Kosmoport*)npc->GetLand())->GetShop()->update();
+                ((Kosmoport*)npc->GetLand())->GetShop()->Render(this);
 	}
 
         if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::GALAXYMAP_ID)
@@ -1029,8 +1029,8 @@ void Player::InKosmoport()
 
          if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::GOVERMENT_ID)
          {
-         	((Kosmoport*)npc->GetLand())->getGoverment()->update();
-                ((Kosmoport*)npc->GetLand())->getGoverment()->Render(this);
+         	((Kosmoport*)npc->GetLand())->GetGoverment()->update();
+                ((Kosmoport*)npc->GetLand())->GetGoverment()->Render(this);
          }
 
          GUI_KOSMOPORT->update(); 
@@ -1072,4 +1072,6 @@ void Player::LoadEvent()
         
         npc = (Npc*)EntityManager::Instance().GetEntityById(npc_id);
         Vehicle* vehicle = (Vehicle*)EntityManager::Instance().GetEntityById(vehicle_id);
+        npc->Bind(vehicle);
 }
+

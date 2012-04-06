@@ -186,7 +186,7 @@ void drawInfoIn2Column(
      	float info_total_string_w = char_w * max_info_total_str_size;
      	float info_total_string_h = char_h * pInfo_title_list->size();
 
-     	TextureOb* texOb_textBg = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::TEXT_BACKGROUND_ID);
+     	TextureOb* texOb_textBg = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::TEXT_BACKGROUND_ID);
      	Rect rect = Rect(center_x - char_w, center_y - info_total_string_h, info_total_string_w, info_total_string_h + char_h/2);
 
      	glEnable(GL_BLEND);

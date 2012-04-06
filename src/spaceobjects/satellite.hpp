@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Satellite : public Vehicle
 {
     	public:  
-        	Satellite();
+        	Satellite(int);
         	~Satellite();
 
     		Orbit* getOrbit() const;

@@ -24,10 +24,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class SpaceStation : public Vehicle
 {
     	public:  
-        	SpaceStation(int);
+        	SpaceStation(int, int);
         	~SpaceStation();
         	
-        	LandBase* GetLand() const;
+        	BaseLand* GetLand() const;
 
 		void createLand(int);
 
@@ -40,7 +40,7 @@ class SpaceStation : public Vehicle
 		void render_atPlanet() const; 
         	
         private:
-                LandBase* land;
+                BaseLand* land;
 };
 
 

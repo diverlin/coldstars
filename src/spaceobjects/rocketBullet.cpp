@@ -18,10 +18,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-RocketBullet :: RocketBullet(BulletData _data_bullet, 			     
+RocketBullet :: RocketBullet(int id, BulletData _data_bullet, 			     
                              BaseGameEntity* target,
 			     int _owner_id)
 {
+	data_id.id = id;
+	data_id.type_id = ENTITY::ROCKET_ID;
+	
 	data_bullet = _data_bullet;
 	
         owner_ship_id = _owner_id;
@@ -115,7 +118,7 @@ void RocketBullet :: deathEventUnique(bool show_effect)
 {
 	if (show_effect == true)
 	{
-       		createExplosion(starsystem, points.getCenter(), texOb->size_id);
+       		createExplosion(starsystem, points.getCenter(), textureOb->size_id);
        	}
 }
 

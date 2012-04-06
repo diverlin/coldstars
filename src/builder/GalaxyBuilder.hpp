@@ -30,11 +30,15 @@ class GalaxyBuilder
         	void CreateNewGalaxy(); 
                 void CreateNewInternals();
                 Galaxy* GetGalaxy() const { return galaxy; };
+                
+                void LoadGalaxy(const std::string&);
         	 		                
-        protected:
+        private:
                 Galaxy* galaxy;
                 
 		GalaxyBuilder() {};
+		GalaxyBuilder(const GalaxyBuilder&) {};
+		GalaxyBuilder& operator=(const GalaxyBuilder&) {};
 }; 
 
 

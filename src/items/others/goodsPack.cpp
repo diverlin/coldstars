@@ -90,7 +90,7 @@ GoodsPack* getNewGoodsPack(unsigned int _subtype_id)
         vec3f d_angle;
         d_angle.z      = -getRandInt(10, 100)*0.01; 
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::CONTAINER_ID); 
+	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::CONTAINER_ID); 
 	
 	GoodsPack* goodsPack = new GoodsPack();
 	goodsPack->SetIdData(data_id);

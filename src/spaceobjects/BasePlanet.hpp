@@ -17,36 +17,38 @@
 	 */
 
 
-#ifndef PLANETBASE_H
-#define PLANETBASE_H
+#ifndef BASEPLANET_H
+#define BASEPLANET_H
 //#include "BaseGameEntity.hpp"
 //#include "../common/myVector.hpp"
 //#include "../common/gameStruct.hpp"
 //#include "orbit.hpp"
 
 
-class PlanetBase : public BaseGameEntity 
+class BasePlanet : public BaseGameEntity 
 {
 	public:      
-		PlanetBase();
-		virtual ~PlanetBase();
+		BasePlanet();
+		virtual ~BasePlanet();
 
-		// accessors
-		void setPlanetData(PlanetData);
-		Orbit* getOrbit() const;
-		//
+		void SetPlanetData(PlanetData data_planet) { this->data_planet = data_planet; };
+		Orbit* GetOrbit() const { return orbit; };
 
-		void postCreateInit();
-		void createOrbit();
+		void PostCreateInit();
+		void CreateOrbit();
 
-		void render_NEW(vec2f);
-		void render_OLD();
+		void Render_NEW(vec2f);
+		void Render_OLD();
 
+		void SaveUniqueBasePlanet(const std::string&) const;
+		void LoadUniqueBasePlanet(const std::string&);
+		void ResolveUniqueBasePlanet();
+				
 	protected:
 		PlanetData data_planet;   
 		Orbit* orbit;  		
-
-		void calcCollisionrRadius();
+		
+		void CalcCollisionrRadius();
 		virtual void PostDeathUniqueEvent(bool);
 };
 

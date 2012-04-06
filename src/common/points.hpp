@@ -107,6 +107,8 @@ class Points
 
                 void update();
                 
+                void CreateCenter();
+                
         private:
                 bool is_updated;
                         

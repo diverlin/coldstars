@@ -31,10 +31,13 @@ class PlayerBuilder
                 void CreateNewInternals();
                 Player* GetPlayer() const { return player; };
         	 		                
-        protected:
+        private:
                 Player* player;
                 
 		PlayerBuilder() {};
+		PlayerBuilder(const PlayerBuilder&) {};
+		PlayerBuilder& operator=(const PlayerBuilder&) {};
+		
 }; 
 
 

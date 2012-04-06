@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class RocketBullet : public Vehicle
 {
         public:
-                RocketBullet(BulletData,  
+                RocketBullet(int, BulletData,  
                 	     BaseGameEntity*, 
                 	     int _owner_id);
                 	     

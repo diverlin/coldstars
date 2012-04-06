@@ -17,33 +17,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-PlanetBase :: PlanetBase()
+BasePlanet::BasePlanet()
 {}
 
-PlanetBase :: ~PlanetBase() /* virtual */
+/* virtual */
+BasePlanet::~BasePlanet()
 {
 	delete orbit;
 }
 
-void PlanetBase :: setPlanetData(PlanetData data_planet) { this->data_planet = data_planet;  }
-
-Orbit* PlanetBase :: getOrbit() const { return orbit; }
-
-
-void PlanetBase :: postCreateInit()
+void BasePlanet::PostCreateInit()
 {
-        this->calcCollisionrRadius();           
-        this->CreateCenter();
+        this->CalcCollisionrRadius();           
+        points.CreateCenter();
         
         orbit = new Orbit();
 }
 
-void PlanetBase :: createOrbit()
+void BasePlanet::CreateOrbit()
 {
-	orbit->calcPath(data_planet.radius_A, data_planet.radius_B, data_planet.speed, data_planet.orbit_phi_inD);
+	orbit->CalcPath(data_planet.radius_A, data_planet.radius_B, data_planet.speed, data_planet.orbit_phi_inD);
 }
     		
-void PlanetBase :: calcCollisionrRadius()
+void BasePlanet::CalcCollisionrRadius()
 {
         float scale_factor = 5.4;                                            
         int w = scale_factor * data_planet.scale;
@@ -53,10 +49,10 @@ void PlanetBase :: calcCollisionrRadius()
         points.setWidthHeight(scale_factor*data_planet.scale, scale_factor*data_planet.scale);  // needs for finding visible corners
 }
 
-void PlanetBase :: PostDeathUniqueEvent(bool)  /* virtual */
+void BasePlanet::PostDeathUniqueEvent(bool)  /* virtual */
 {}		
 		 		
-void PlanetBase :: render_NEW(vec2f scroll_coords)
+void BasePlanet::Render_NEW(vec2f scroll_coords)
 {     	
      	glUseProgram(g_SHADERS.light);
      	//printProgramInfoLog(g_LIGHT_PROGRAM);
@@ -72,7 +68,7 @@ void PlanetBase :: render_NEW(vec2f scroll_coords)
      	glUniform4f(glGetUniformLocation(g_SHADERS.light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
 
      	glActiveTexture(GL_TEXTURE0);
-     	glBindTexture(GL_TEXTURE_2D, texOb->texture);
+     	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
      	glUniform1i(glGetUniformLocation(g_SHADERS.light, "Texture_0"), 0);
       
 	renderMesh(mesh->glList, points.getCenter3f(), angle, data_planet.scale);
@@ -92,13 +88,38 @@ void PlanetBase :: render_NEW(vec2f scroll_coords)
      	glActiveTexture(GL_TEXTURE0);
 }
 
-void PlanetBase :: render_OLD()
+void BasePlanet::Render_OLD()
 {   	
-	glBindTexture(GL_TEXTURE_2D, texOb->texture);
+	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
 	renderMesh(mesh->glList, points.getCenter3f(), angle, data_planet.scale);
 }
 
 
+void BasePlanet::SaveUniqueBasePlanet(const std::string& root) const
+{
+	SaveManager::Instance().Put(root+"orbit.it", orbit->GetIt());
+	
+	SaveManager::Instance().Put(root+"data.scale", data_planet.scale);
+	SaveManager::Instance().Put(root+"data.orbit_center.x", data_planet.orbit_center.x);	
+	SaveManager::Instance().Put(root+"data.orbit_center.y", data_planet.orbit_center.y);	
+	SaveManager::Instance().Put(root+"data.radius_A", data_planet.radius_A);	
+	SaveManager::Instance().Put(root+"data.radius_B", data_planet.radius_B);
+	SaveManager::Instance().Put(root+"data.orbit_phi_inD", data_planet.orbit_phi_inD);		
+	SaveManager::Instance().Put(root+"data.speed", data_planet.speed);
+}
 
+void BasePlanet::LoadUniqueBasePlanet(const std::string& root)
+{
+	data_planet.scale = SaveManager::Instance().Get<int>(root+"data.scale");
+	data_planet.orbit_center.x = SaveManager::Instance().Get<float>(root+"data.orbit_center.x");	
+	data_planet.orbit_center.y = SaveManager::Instance().Get<float>(root+"data.orbit_center.y");	
+	data_planet.radius_A = SaveManager::Instance().Get<float>(root+"data.radius_A");	
+	data_planet.radius_B = SaveManager::Instance().Get<float>(root+"data.radius_B");
+	data_planet.orbit_phi_inD = SaveManager::Instance().Get<float>(root+"data.orbit_phi_inD");		
+	data_planet.speed = SaveManager::Instance().Get<float>(root+"data.speed");
+}
+
+void BasePlanet::ResolveUniqueBasePlanet()
+{}
 
 

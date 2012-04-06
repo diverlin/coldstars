@@ -105,7 +105,7 @@ class GuiMap;
 #include "src/common/MessageManager.hpp"
 
 #include "src/spaceobjects/orbit.hpp" 
-#include "src/spaceobjects/planetBase.hpp" 
+#include "src/spaceobjects/BasePlanet.hpp" 
 #include "src/spaceobjects/asteroid.hpp"
 #include "src/spaceobjects/mineral.hpp"
 #include "src/items/others/bomb.hpp"
@@ -140,9 +140,9 @@ class GuiMap;
 #include "src/docking/shop.hpp"
 #include "src/docking/goverment.hpp"
 #include "src/docking/store.hpp"
-#include "src/docking/landBase.hpp"
-#include "src/docking/kosmoport.hpp"
-#include "src/docking/land.hpp"
+#include "src/docking/BaseLand.hpp"
+#include "src/docking/Kosmoport.hpp"
+#include "src/docking/NatureLand.hpp"
 
 #include "src/gui/cursor.hpp"  
 
@@ -163,8 +163,8 @@ class GuiMap;
 #include "src/effects/lazerTrace.hpp"
 
 
-#include "src/spaceobjects/star.hpp"  
-#include "src/spaceobjects/planet.hpp"
+#include "src/spaceobjects/Star.hpp"  
+#include "src/spaceobjects/Planet.hpp"
 
 #include "src/spaceobjects/turrel.hpp"
 
@@ -180,6 +180,8 @@ class GuiMap;
 #include "src/builder/BaseVehicleBuilder.hpp"
 #include "src/builder/VehicleBuilder.hpp"
 #include "src/builder/StarSystemBuilder.hpp"
+#include "src/builder/StarBuilder.hpp"
+#include "src/builder/PlanetBuilder.hpp"
 #include "src/builder/GalaxyBuilder.hpp"
 #include "src/builder/PlayerBuilder.hpp"
 #include "src/builder/NpcBuilder.hpp"
@@ -255,8 +257,8 @@ class GuiMap;
 
 #include "src/spaceobjects/container.cpp"    
 #include "src/items/others/goodsPack.cpp"   
-#include "src/spaceobjects/star.cpp"  
-#include "src/spaceobjects/planet.cpp"
+#include "src/spaceobjects/Star.cpp"  
+#include "src/spaceobjects/Planet.cpp"
 #include "src/spaceobjects/BaseGameEntity.cpp" 
 #include "src/spaceobjects/spaceItemBase.cpp" 
 #include "src/common/EntityManager.cpp"
@@ -264,7 +266,7 @@ class GuiMap;
 #include "src/common/MessageManager.cpp"
 
 #include "src/spaceobjects/orbit.cpp"
-#include "src/spaceobjects/planetBase.cpp"
+#include "src/spaceobjects/BasePlanet.cpp"
 #include "src/spaceobjects/asteroid.cpp"   
 #include "src/spaceobjects/mineral.cpp" 
 #include "src/spaceobjects/spaceStation.cpp" 
@@ -304,10 +306,10 @@ class GuiMap;
 #include "src/docking/store.cpp"
 #include "src/docking/shop.cpp"
 #include "src/docking/goverment.cpp"
-#include "src/docking/landBase.cpp"
-#include "src/docking/kosmoport.cpp"
+#include "src/docking/BaseLand.cpp"
+#include "src/docking/Kosmoport.cpp"
 
-#include "src/docking/land.cpp"
+#include "src/docking/NatureLand.cpp"
 
 #include "src/gui/button.cpp"
 #include "src/gui/guiSpace.cpp"
@@ -318,6 +320,8 @@ class GuiMap;
 #include "src/builder/BaseVehicleBuilder.cpp"
 #include "src/builder/VehicleBuilder.cpp"
 #include "src/builder/StarSystemBuilder.cpp"
+#include "src/builder/StarBuilder.cpp"
+#include "src/builder/PlanetBuilder.cpp"
 #include "src/builder/GalaxyBuilder.cpp"
 #include "src/builder/PlayerBuilder.cpp"
 #include "src/builder/NpcBuilder.cpp"

@@ -29,7 +29,7 @@ RocketEquipment :: RocketEquipment(int ammo_max_orig,
         damage = damage_orig;
         radius = radius_orig;
                 
-        data_bullet.texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::ROCKET_BULLET_ID);    
+        data_bullet.texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ROCKET_BULLET_ID);    
         data_bullet.damage        = damage;
         data_bullet.armor         = ENTITY::ROCKET::ARMOR;
         data_bullet.speed_init    = ENTITY::ROCKET::START_SPEED;
@@ -159,7 +159,7 @@ RocketEquipment* getNewRocketEquipment(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::ROCKET_EQUIPMENT_ID);    
+    	TextureOb* texOb_item = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ROCKET_EQUIPMENT_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::ROCKET_EQUIPMENT_ID, revision_id)   
     
     	int ammo_max_orig = getRandInt(EQUIPMENT::ROCKET::AMMO_MIN, EQUIPMENT::ROCKET::AMMO_MAX);

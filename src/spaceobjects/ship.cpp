@@ -17,10 +17,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-Ship :: Ship()
-{}
+Ship::Ship(int id)
+{
+	data_id.id = id;
+	data_id.type_id = ENTITY::SHIP_ID;
+}
 
-Ship :: ~Ship()
+Ship::~Ship()
 {} 
 
 
@@ -31,9 +34,9 @@ void Ship::UpdateInfo()
 
     	info.addTitleStr("SHIP");
     	info.addNameStr("id/ss_id:");          	info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->GetId()) );
-    	info.addNameStr("race:");   		info.addValueStr( returnRaceStringByRaceId(texOb->race_id) ); 
+    	info.addNameStr("race:");   		info.addValueStr( returnRaceStringByRaceId(textureOb->race_id) ); 
     	info.addNameStr("armor/max:");     	info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) );
-    	info.addNameStr("size id:");     	info.addValueStr( int2str(texOb->size_id) );
+    	info.addNameStr("size id:");     	info.addValueStr( int2str(textureOb->size_id) );
     	info.addNameStr("space/free:");   	info.addValueStr( int2str(data_korpus.space) + "/" + int2str(data_korpus.space - mass) );
     	info.addNameStr("mass:");   		info.addValueStr( int2str(mass) );
     	info.addNameStr("energy:");            	info.addValueStr( int2str(propetries.energy) );

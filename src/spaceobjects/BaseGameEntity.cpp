@@ -18,7 +18,7 @@
 
 //#include "BaseGameEntity.hpp"
 
-BaseGameEntity::BaseGameEntity():starsystem(NULL), mesh(NULL), texOb(NULL), parent(NULL),
+BaseGameEntity::BaseGameEntity():starsystem(NULL), mesh(NULL), textureOb(NULL), parent(NULL),
 				 place_type_id(NONE_ID), collision_radius(0), mass(0)
 {
 	angle.x        = getRandInt(10, 40);
@@ -33,12 +33,6 @@ BaseGameEntity::BaseGameEntity():starsystem(NULL), mesh(NULL), texOb(NULL), pare
 BaseGameEntity::~BaseGameEntity()
 {}
 
-
-void BaseGameEntity::CreateCenter()
-{
-	points.initCenterPoint();
-	points.addCenterPoint();
-}
 
 void BaseGameEntity::UpdateRotation()
 {
@@ -98,15 +92,6 @@ void BaseGameEntity::SaveUniqueBaseGameEntity(const std::string& root) const
 	SaveManager::Instance().Put(root+"data_life.armor",      data_life.armor);
 	SaveManager::Instance().Put(root+"data_life.dying_time", data_life.dying_time);
 
-	//SaveManager::Instance().Put(root+"mesh_id",      mesh);
-	//SaveManager::Instance().Put(root+"textureOb_id", textureOb);
-	SaveManager::Instance().Put(root+"center.x", points.getCenter().x);
-	SaveManager::Instance().Put(root+"center.y", points.getCenter().y);
-	SaveManager::Instance().Put(root+"angle_2D", points.getAngleDegree());
-			
-	SaveManager::Instance().Put(root+"starsystem_id", starsystem->GetId());
-	SaveManager::Instance().Put(root+"place_type_id", place_type_id);		
-
 	SaveManager::Instance().Put(root+"angle.x", angle.x);
 	SaveManager::Instance().Put(root+"angle.y", angle.y);
 	SaveManager::Instance().Put(root+"angle.z", angle.z);
@@ -118,11 +103,24 @@ void BaseGameEntity::SaveUniqueBaseGameEntity(const std::string& root) const
 	SaveManager::Instance().Put(root+"collision_radius", collision_radius);
 
 	SaveManager::Instance().Put(root+"mass", mass);
+
+	if (mesh) 	SaveManager::Instance().Put(root+"mesh_path", mesh->path);
+	else            SaveManager::Instance().Put(root+"mesh_path", "none");
 	
+	if (textureOb) 	SaveManager::Instance().Put(root+"textureOb_path", textureOb->path);
+	else            SaveManager::Instance().Put(root+"textureOb_path", "none");	
+
 	if (parent) SaveManager::Instance().Put(root+"parent_id", parent->GetId());
+	else        SaveManager::Instance().Put(root+"parent_id", -1);
+
+	SaveManager::Instance().Put(root+"starsystem_id", starsystem->GetId());
+	SaveManager::Instance().Put(root+"place_type_id", place_type_id);
+			
+	SaveManager::Instance().Put(root+"center.x", points.getCenter().x);
+	SaveManager::Instance().Put(root+"center.y", points.getCenter().y);
+	SaveManager::Instance().Put(root+"angle_2D", points.getAngleDegree());	
 								
-	SaveManager::Instance().SaveFile("save.info");
-	
+	SaveManager::Instance().SaveFile("save.info");	
 }
 
 
@@ -136,22 +134,7 @@ void BaseGameEntity::LoadUniqueBaseGameEntity(const std::string& root)
 	data_life.is_alive   = SaveManager::Instance().Get<bool>(root+"data_life.is_alive");
 	data_life.armor      = SaveManager::Instance().Get<int>(root+"data_life.armor");
 	data_life.dying_time = SaveManager::Instance().Get<int>(root+"data_life.dying_time");
-
-	//SaveManager::Instance().Get(root+"mesh_id",      mesh);
-	//SaveManager::Instance().Get(root+"textureOb_id", textureOb);
 	
-	float _pos_x = SaveManager::Instance().Get<float>(root+"center.x");
-	float _pos_y = SaveManager::Instance().Get<float>(root+"center.y");
-	float _angle = SaveManager::Instance().Get<float>(root+"angle_2D");
-	// RECONSTRUCT POINTS here
-	//this->CreateCenter();
-	points.setCenter(_pos_x, _pos_y);
-	points.setAngle(_angle);
-		
-	//SaveManager::Instance().Put(root+"starsystem_id", starsystem->GetId());
-	place_type_id = SaveManager::Instance().Get<int>(root+"place_type_id");		
-	
-
 	angle.x = SaveManager::Instance().Get<float>(root+"angle.x");
 	angle.y = SaveManager::Instance().Get<float>(root+"angle.y");
 	angle.z = SaveManager::Instance().Get<float>(root+"angle.z");
@@ -163,6 +146,31 @@ void BaseGameEntity::LoadUniqueBaseGameEntity(const std::string& root)
 	collision_radius = SaveManager::Instance().Get<float>(root+"collision_radius");
 
 	mass = SaveManager::Instance().Get<int>(root+"mass");
+
+	place_type_id = SaveManager::Instance().Get<int>(root+"place_type_id");	
+
+
+
+
+	data_unresolved.mesh_path      = SaveManager::Instance().Get<std::string>(root+"mesh_path");
+	data_unresolved.textureOb_path = SaveManager::Instance().Get<std::string>(root+"textureOb_path");
 	
-	//if (parent) SaveManager::Instance().Get(root+"parent_id", parent->GetId());
+	data_unresolved.parent_id = SaveManager::Instance().Get<int>(root+"parent_id");			
+	data_unresolved.starsystem_id = SaveManager::Instance().Get<int>(root+"starsystem_id");
+			
+	data_unresolved.center.x = SaveManager::Instance().Get<float>(root+"center.x");
+	data_unresolved.center.y = SaveManager::Instance().Get<float>(root+"center.y");
+	data_unresolved.angle    = SaveManager::Instance().Get<float>(root+"angle_2D");
+}
+
+void BaseGameEntity::ResolveUniqueBaseGameEntity()
+{
+	points.setCenter(data_unresolved.center.x, data_unresolved.center.y);
+	points.setAngle(data_unresolved.angle);
+	
+	mesh = g_DEFORMED_SPHERE_MESH; //data_unresolved.mesh_path; 
+	textureOb = g_TEXTURE_MANAGER.GetTextureObByPath(data_unresolved.textureOb_path);
+	
+	parent = EntityManager::Instance().GetEntityById(data_unresolved.parent_id);
+	starsystem = (StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved.starsystem_id);
 }

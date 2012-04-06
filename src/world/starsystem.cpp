@@ -184,7 +184,7 @@ void StarSystem::AddToSpace(Vehicle* vehicle, vec2f center, float angle, BaseGam
 		case ENTITY::SATELLITE_ID:    	
 		{ 
 			vehicle->SetParent(parent);
-			((Satellite*)vehicle)->getOrbit()->calcPath(parent->GetCollisionRadius(), 1.0);
+			((Satellite*)vehicle)->getOrbit()->CalcPath(parent->GetCollisionRadius(), 1.0);
 			SATELLITE_vec.push_back((Satellite*)vehicle); 
 		
 			break; 
@@ -224,7 +224,7 @@ void StarSystem::AddToSpace(Star* star)
 
 void StarSystem::AddToSpace(Planet* planet, BaseGameEntity* parent)
 {
-	planet->createOrbit();
+	planet->CreateOrbit();
         planet->SetParent(parent);
         
         planet->SetStarSystem(this);
@@ -234,7 +234,7 @@ void StarSystem::AddToSpace(Planet* planet, BaseGameEntity* parent)
                 
 void StarSystem::AddToSpace(Asteroid* asteroid)
 {   
-	asteroid->createOrbit();
+	asteroid->CreateOrbit();
 	asteroid->update_inSpace(1, true);
 	
         asteroid->SetStarSystem(this);
@@ -692,12 +692,12 @@ void StarSystem :: updateEntities_s(int time, bool show_effect)
 {
         for (unsigned int si = 0; si < STAR_vec.size(); si++)
         {
-                STAR_vec[si]->update_inSpace(time, show_effect); 
+                STAR_vec[si]->Update_inSpace(time, show_effect); 
 	}
 	
         for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
         {
-                PLANET_vec[pi]->update_inSpace(time, show_effect); 
+                PLANET_vec[pi]->Update_inSpace(time, show_effect); 
     	}
     	
         for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
@@ -830,7 +830,7 @@ void StarSystem::FindVisibleEntities_c(Player* player)
       
 void StarSystem::RestoreSceneColor()
 {
-        setColor(STAR_vec[0]->getColor());
+        setColor(STAR_vec[0]->GetColor());
 }     
 
 void StarSystem::RestoreDefaultColor()
@@ -874,12 +874,12 @@ void StarSystem::DrawOrbits()
 {
         for(unsigned int i = 0; i < PLANET_vec.size(); i++) 
 	{ 
-		PLANET_vec[i]->getOrbit()->draw(); 
+		PLANET_vec[i]->GetOrbit()->Draw(); 
 	}
 
 	for(unsigned int i = 0; i < ASTEROID_vec.size(); i++)
 	{ 
-		ASTEROID_vec[i]->getOrbit()->draw(); 
+		ASTEROID_vec[i]->GetOrbit()->Draw(); 
 	}
 }
  
@@ -1123,7 +1123,7 @@ void StarSystem::LaunchingEvent() const
 {
 	for (unsigned int i=0; i<PLANET_vec.size(); i++)
 	{
-		PLANET_vec[i]->GetLand()->manageLaunchingQueue();
+		PLANET_vec[i]->GetLand()->ManageLaunchingQueue();
 	}
 }		
 
@@ -1179,27 +1179,15 @@ void StarSystem::SaveUniqueStarSystem(const std::string& root) const
 	SaveManager::Instance().Put(root+"galaxy_id", galaxy->GetId());
 }
 
-void StarSystem::SaveEvent() const
+void StarSystem::LoadUniqueStarSystem(const std::string& root)
 {
-	std::string starsystem_root = "starsystem."+int2str(data_id.id)+".";
-	SaveUniqueBaseGameEntity(starsystem_root);
-	SaveUniqueStarSystem(starsystem_root);
-
-	for (unsigned int i = 0; i < SHIP_inSPACE_vec.size(); i++) 
-	{
-		SHIP_inSPACE_vec[i]->SaveEvent(); 
-	} 
+	//std::string starsystem_root = root+"starsystem."+int2str(data_id.id)+".";
 }
 
-void StarSystem::LoadEvent(const std::string& root) const
+void StarSystem::ResolveUniqueStarSystem()
 {
-	std::string starsystem_root = root+"starsystem."+int2str(data_id.id)+".";
-	//for (unsigned int i = 0; i < SHIP_inSPACE_vec.size(); i++) 
-	//{ 
-		//SHIP_inSPACE_vec[i]->LoadEvent(starsystem_root); 
-	//} 
+	// will put galaxy definition here
 }
-
 
 template <typename AGRESSOR, typename VICTIM>
 bool checkCollision(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)

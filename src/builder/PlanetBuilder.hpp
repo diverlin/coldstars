@@ -17,34 +17,37 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
+#ifndef PLANETBUILDER_H
+#define PLANETBUILDER_H
 
-LandBase :: LandBase()
+
+class PlanetBuilder
 {
-	type_id = NONE_ID;
-}
+	public:
+		static PlanetBuilder& Instance();
+		~PlanetBuilder();
 
-/* virtual */
-LandBase :: ~LandBase()
-{
-	//delete NPC_vec/VEHICLE_vec;
-}
+        	void CreateNewPlanet(int id = NONE_ID); 
+                void CreateNewInternals(float);
+                Planet* GetPlanet() const { return planet; };
+                
+                void Save(Planet*) const;
+                void LoadPass0(const std::string&);
+                void LoadPass1();
+        	 		                
+        private:
+                Planet* planet;
+                
+		PlanetBuilder() {};
+		PlanetBuilder(const PlanetBuilder&) {};
+		PlanetBuilder& operator=(const PlanetBuilder&) {};
+}; 
 
-int LandBase :: GetTypeId() const { return type_id; }
 
 
+#endif 
+    
 
-void LandBase :: manageLaunchingQueue()
-{
-         for (unsigned int i = 0; i<NPC_launching_vec.size(); i++)
-         {
-         	NPC_launching_vec[i]->GetVehicle()->LaunchingEvent();
-         }
-              
-         NPC_launching_vec.clear();  
-}
+        
 
-void LandBase :: addToLaunchingQueue(Npc* npc)
-{
-         NPC_launching_vec.push_back(npc);
-}
 

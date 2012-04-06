@@ -167,7 +167,7 @@ ItemSlot* Vehicle::GetCargoSlotWithGoods(int requested_goods_subtype_id)
 
 void Vehicle::RecalculateCollisionRadius()
 {
-	collision_radius = (texOb->getFrameWidth() + texOb->getFrameHeight())/3;
+	collision_radius = (textureOb->getFrameWidth() + textureOb->getFrameHeight())/3;
 }
 
 
@@ -193,8 +193,8 @@ void Vehicle::DockingEvent()
      	{
                 Planet* planet = ((Planet*)drive_complex->getTarget());
                 
-     		planet->GetLand()->add((Ship*)this);
-		planet->GetLand()->add(owner_npc);
+     		planet->GetLand()->Add((Ship*)this);
+		planet->GetLand()->Add(owner_npc);
 		
 		owner_npc->SetLand(planet->GetLand());
 	}
@@ -203,8 +203,8 @@ void Vehicle::DockingEvent()
 	{
                 SpaceStation* spacestation = ((SpaceStation*)drive_complex->getTarget());
                                 
-	     	spacestation->GetLand()->add((Ship*)this);
-		spacestation->GetLand()->add(owner_npc);
+	     	spacestation->GetLand()->Add((Ship*)this);
+		spacestation->GetLand()->Add(owner_npc);
 		
 		owner_npc->SetLand(spacestation->GetLand());
 	}
@@ -218,16 +218,16 @@ void Vehicle::LaunchingEvent()
      	{
      		starsystem->AddToSpace(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
 
-     		((Planet*)drive_complex->getTarget())->GetLand()->remove(this);
-     		((Planet*)drive_complex->getTarget())->GetLand()->remove(owner_npc);
+     		((Planet*)drive_complex->getTarget())->GetLand()->Remove(this);
+     		((Planet*)drive_complex->getTarget())->GetLand()->Remove(owner_npc);
 	}
 	
      	if (drive_complex->getTarget()->GetTypeId() == ENTITY::SPACESTATION_ID)
      	{
      		starsystem->AddToSpace(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
 
-     		((SpaceStation*)drive_complex->getTarget())->GetLand()->remove(this);
-     		((SpaceStation*)drive_complex->getTarget())->GetLand()->remove(owner_npc);
+     		((SpaceStation*)drive_complex->getTarget())->GetLand()->Remove(this);
+     		((SpaceStation*)drive_complex->getTarget())->GetLand()->Remove(owner_npc);
 	}	
 
      	drive_complex->resetTarget();
@@ -272,7 +272,7 @@ void Vehicle::PostDeathUniqueEvent(bool show_effect)  /* virtual */
 	
 	if (show_effect == true)
      	{
-        	createExplosion(starsystem, points.getCenter(), texOb->size_id);        		
+        	createExplosion(starsystem, points.getCenter(), textureOb->size_id);        		
         }
 }
 
@@ -567,7 +567,7 @@ void Vehicle::RenderGrappleTrail() const
 		
 void Vehicle::RenderKorpus() const
 {
-    	drawFlatQuadPerVertexIn2D(texOb,
+    	drawFlatQuadPerVertexIn2D(textureOb,
     				  points.getBottomLeft(), 
                                   points.getBottomRight(), 
                                   points.getTopRight(), 

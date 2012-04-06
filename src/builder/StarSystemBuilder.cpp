@@ -26,12 +26,16 @@ StarSystemBuilder& StarSystemBuilder::Instance()
 StarSystemBuilder::~StarSystemBuilder()
 {}
 
-void StarSystemBuilder::CreateNewStarSystem()
+void StarSystemBuilder::CreateNewStarSystem(int id)
 {
-        int id = g_ID_GENERATOR.getNextId();
+	if (id == NONE_ID)
+	{
+		id = g_ID_GENERATOR.getNextId();
+	}
         starsystem = new StarSystem(id);
+        starsystem->GetPoints().CreateCenter();
+        EntityManager::Instance().RegisterEntity(starsystem);
         
-        GetEntityManager().RegisterEntity(starsystem);
 } 
         	
 void StarSystemBuilder::CreateNewInternals()
@@ -44,7 +48,7 @@ void StarSystemBuilder::CreateNewInternals()
         
         int distNebula_num = getRandInt(4,7);
         int distStar_num = getRandInt(40, 60);
-        this->CreateBackground(distNebula_num, distStar_num, starsystem->GetStar()->getColorId());
+        this->CreateBackground(distNebula_num, distStar_num, starsystem->GetStar()->GetColorId());
           
         int planet_num = getRandInt(ENTITY::STARSYSTEM::PLANET_MIN, ENTITY::STARSYSTEM::PLANET_MAX);
         this->CreatePlanets(planet_num);
@@ -88,7 +92,9 @@ void StarSystemBuilder::CreateBackground(int distNebula_num, int distStar_num, i
                         	                
 void StarSystemBuilder::CreateStar()
 {
-        Star* star = getNewStar();    
+	StarBuilder::Instance().CreateNewStar();
+	StarBuilder::Instance().CreateNewInternals();	
+        Star* star = StarBuilder::Instance().GetStar();    
         starsystem->AddToSpace(star);
 }
 
@@ -106,7 +112,9 @@ void StarSystemBuilder::CreatePlanets(int planet_per_system)
 
                 offset = orbit_radius;
 
-                Planet* planet = getNewPlanet(orbit_radius);
+                PlanetBuilder::Instance().CreateNewPlanet();
+                PlanetBuilder::Instance().CreateNewInternals(orbit_radius);
+                Planet* planet = PlanetBuilder::Instance().GetPlanet();
 
                 starsystem->AddToSpace(planet, starsystem->GetStar());
                 
@@ -128,7 +136,8 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
        		//npc_subtype_id = SHIP_SUBTYPE_LIST[getRandInt(0, RACES_EVIL_LIST.size())];
                 npc_subtype_id = CLASS::WARRIOR_ID;
 
-        	NpcBuilder::Instance().CreateNewNpc(npc_race_id, npc_subtype_id);
+        	NpcBuilder::Instance().CreateNewNpc();
+                NpcBuilder::Instance().CreateNewInternals(npc_race_id, npc_subtype_id);
                 Npc* npc = NpcBuilder::Instance().GetNpc();
 
         	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[getRandInt(0, RACES_ALL_LIST.size())];
@@ -171,7 +180,8 @@ void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num)
                         case RACE::R7_ID: { npc_subtype_id = RACE7_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE7_ALLOWED_SUBTYPE_LIST.size())];  break; }
                 }   
            		
-        	NpcBuilder::Instance().CreateNewNpc(npc_race_id, npc_subtype_id);
+        	NpcBuilder::Instance().CreateNewNpc();
+        	NpcBuilder::Instance().CreateNewInternals(npc_race_id, npc_subtype_id);
                 Npc* npc = NpcBuilder::Instance().GetNpc();
 
         	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[getRandInt(0, RACES_ALL_LIST.size())];
@@ -191,4 +201,25 @@ void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num)
     	}
 }
 
+void StarSystemBuilder::Save(StarSystem* starsystem) const
+{
+	std::string root = "starsystem." + int2str(starsystem->GetId())+".";
+	starsystem->SaveUniqueBaseGameEntity(root);
+	starsystem->SaveUniqueStarSystem(root);
+}
+
+void StarSystemBuilder::LoadPass0(const std::string& root)
+{
+	int id = SaveManager::Instance().Get<int>(root+"data_id.id");	
+	this->CreateNewStarSystem(id);
+	
+	starsystem->LoadUniqueBaseGameEntity(root);
+	starsystem->LoadUniqueStarSystem(root);
+}
+
+void StarSystemBuilder::LoadPass1()
+{
+	starsystem->ResolveUniqueBaseGameEntity();
+	starsystem->ResolveUniqueStarSystem();
+}
 

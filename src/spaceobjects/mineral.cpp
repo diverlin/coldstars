@@ -18,8 +18,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-Mineral :: Mineral()
+Mineral :: Mineral(int id)
 {        
+	data_id.id = id;
+	data_id.type_id = ENTITY::MINERAL_ID;
+	
     	mass = getRandInt(1, 4);
     	velocity = getRandInt(40, 42) / 100.0;
 }
@@ -46,11 +49,8 @@ void Mineral :: renderInfo_inSpace(vec2f scroll_coords)
 
 Mineral* getNewMineral()
 {
-        IdData data_id;
-        data_id.id         = g_ID_GENERATOR.getNextId();
-    	data_id.type_id    = ENTITY::MINERAL_ID;
-    	//data_id.subtype_id = ; 
-        
+        int id         = g_ID_GENERATOR.getNextId();
+    	        
         LifeData data_life;
         data_life.is_alive   = true;
         data_life.garbage_ready = false;
@@ -60,10 +60,10 @@ Mineral* getNewMineral()
         vec3f d_angle;
         d_angle.z      = -getRandInt(10, 100)*0.01; 
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::MINERAL_ID); 
+	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MINERAL_ID); 
 	
-	Mineral* mineral = new Mineral();
-	mineral->SetIdData(data_id);
+	Mineral* mineral = new Mineral(id);
+
 	mineral->SetLifeData(data_life);
 	mineral->SetTextureOb(texOb);
 	mineral->SetDeltaAngle(d_angle);

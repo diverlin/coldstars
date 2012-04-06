@@ -98,9 +98,10 @@ class StarSystem : public BaseGameEntity
                 void DrawOrbits();
                 void DrawPath();
                 
-                void SaveEvent() const;
-                void LoadEvent(const std::string&) const;
-                                           		    		    		
+		void SaveUniqueStarSystem(const std::string&) const;
+		void LoadUniqueStarSystem(const std::string&);
+		void ResolveUniqueStarSystem();
+				                                           		    		    		
 		// poor
 		Planet* GetClosestPlanet(vec2f);
 		Npc* GetRandomNpc();
@@ -190,8 +191,6 @@ class StarSystem : public BaseGameEntity
 
 		void rocketCollision_s(bool);
 		void asteroidCollision_s(bool);
-		
-		void SaveUniqueStarSystem(const std::string&) const;
 		
 		friend class GuiMap;
 		friend class Observation;

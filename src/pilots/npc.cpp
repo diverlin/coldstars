@@ -17,9 +17,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-Npc::Npc(int race_id)
+Npc::Npc(int id)
 { 
-    	this->race_id = race_id;
+	data_id.id = id;
+    	data_id.type_id    = ENTITY::NPC_ID;
+    	race_id = NONE_ID;
     	
     	upper_control = false;
 
@@ -41,18 +43,9 @@ Npc::Npc(int race_id)
    		
         observation = new Observation(this);
 
-        state_machine = new StateMachine(this);        
+        state_machine = new StateMachine(this);   
         
-        // depending on type        
-        ai_model = NULL;
-        if (( race_id == RACE::R6_ID) or ( race_id == RACE::R7_ID) )
-        {
-                ai_model = AIMODEL_CONQUEROR;
-        }
-        else
-        {
-       		ai_model = AIMODEL_RANGER;        
-        }
+        ai_model = NULL;     
 }
     
 Npc :: ~Npc() /* virtual */
@@ -82,7 +75,7 @@ void Npc::ThinkCommon_inKosmoport_inStatic()
 	}
 	
 	// if all things are DONE
-	((Planet*)vehicle->GetDriveComplex()->getTarget())->GetLand()->addToLaunchingQueue(this); // improove by adding spacestation
+	((Planet*)vehicle->GetDriveComplex()->getTarget())->GetLand()->AddToLaunchingQueue(this); // improove by adding spacestation
 }
 
 void Npc::ThinkCommon_inLand_inStatic()
@@ -238,7 +231,7 @@ void Npc::UpdateInfo()
 
     	info.addTitleStr("NPC");
     	info.addNameStr("id/ss_id:");           info.addValueStr( int2str(data_id.id) + " / "  + int2str(starsystem->GetId()) );
-    	info.addNameStr("race:");   		info.addValueStr( returnRaceStringByRaceId(texOb->race_id) ); 
+    	info.addNameStr("race:");   		info.addValueStr( returnRaceStringByRaceId(textureOb->race_id) ); 
 
 	if (vehicle->ableTo.GRAB == true)
 	{

@@ -27,6 +27,8 @@ TextureManager :: ~TextureManager()
 
 void TextureManager :: manage(TextureOb* texOb)
 {
+	textureOb_total_vec.push_back(texOb);
+
 	switch(texOb->type_id)
 	{
 	  	case TEXTURE::SPACESTATION_ID: { spacestation_texOb_vec.push_back(texOb);    break; }       
@@ -205,7 +207,7 @@ void TextureManager :: manage(TextureOb* texOb)
 
 
 
-TextureOb* TextureManager :: getRandomTexObFromList(std::vector<TextureOb*>* pTo_list)
+TextureOb* TextureManager :: GetRandomTextureObFromList(std::vector<TextureOb*>* pTo_list)
 {  
      if (pTo_list->size() > 1)
          return (*pTo_list)[getRandInt(0, pTo_list->size() )];
@@ -286,14 +288,14 @@ TextureOb* TextureManager :: getRandomFaceTexObWithFolloingAttributes(int _race_
 {
 	switch(_race_id)
 	{
-		case RACE::R0_ID: { return getRandomTexObFromList(&face_race0_texOb_vec); }
-		case RACE::R1_ID: { return getRandomTexObFromList(&face_race1_texOb_vec); }
-		case RACE::R2_ID: { return getRandomTexObFromList(&face_race2_texOb_vec); }
- 		case RACE::R3_ID: { return getRandomTexObFromList(&face_race3_texOb_vec); }
-		case RACE::R4_ID: { return getRandomTexObFromList(&face_race4_texOb_vec); }
+		case RACE::R0_ID: { return GetRandomTextureObFromList(&face_race0_texOb_vec); }
+		case RACE::R1_ID: { return GetRandomTextureObFromList(&face_race1_texOb_vec); }
+		case RACE::R2_ID: { return GetRandomTextureObFromList(&face_race2_texOb_vec); }
+ 		case RACE::R3_ID: { return GetRandomTextureObFromList(&face_race3_texOb_vec); }
+		case RACE::R4_ID: { return GetRandomTextureObFromList(&face_race4_texOb_vec); }
 		
-		case RACE::R6_ID: { return getRandomTexObFromList(&face_race6_texOb_vec); }
-		case RACE::R7_ID: { return getRandomTexObFromList(&face_race7_texOb_vec); }
+		case RACE::R6_ID: { return GetRandomTextureObFromList(&face_race6_texOb_vec); }
+		case RACE::R7_ID: { return GetRandomTextureObFromList(&face_race7_texOb_vec); }
 	}
 	
 	return NULL;
@@ -309,11 +311,11 @@ TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race
         	{
                 	switch(_subtype_id)
                 	{
-                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race0_ranger_texOb_vec);   break; }
-				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race0_warrior_texOb_vec);  break; }
- 				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race0_trader_texOb_vec);   break; }
-				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race0_pirat_texOb_vec);    break; }
-				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race0_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return GetRandomTextureObFromList(&ship_race0_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return GetRandomTextureObFromList(&ship_race0_warrior_texOb_vec);  break; }
+ 				case CLASS::TRADER_ID:   { return GetRandomTextureObFromList(&ship_race0_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return GetRandomTextureObFromList(&ship_race0_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return GetRandomTextureObFromList(&ship_race0_diplomat_texOb_vec); break; }
 		       }
 		       
 		       break;
@@ -323,11 +325,11 @@ TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race
         	{
                 	switch(_subtype_id)
                 	{	
-                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race1_ranger_texOb_vec);   break; }
-				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race1_warrior_texOb_vec);  break; } 
-				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race1_trader_texOb_vec);   break; }
-				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race1_pirat_texOb_vec);    break; }
-				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race1_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return GetRandomTextureObFromList(&ship_race1_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return GetRandomTextureObFromList(&ship_race1_warrior_texOb_vec);  break; } 
+				case CLASS::TRADER_ID:   { return GetRandomTextureObFromList(&ship_race1_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return GetRandomTextureObFromList(&ship_race1_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return GetRandomTextureObFromList(&ship_race1_diplomat_texOb_vec); break; }
 			}
 			
 			break;
@@ -337,11 +339,11 @@ TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race
         	{
                 	switch(_subtype_id)
                 	{	
-                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race2_ranger_texOb_vec);   break; }
-				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race2_warrior_texOb_vec);  break; } 
-				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race2_trader_texOb_vec);   break; }
-				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race2_pirat_texOb_vec);    break; }
-				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race2_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return GetRandomTextureObFromList(&ship_race2_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return GetRandomTextureObFromList(&ship_race2_warrior_texOb_vec);  break; } 
+				case CLASS::TRADER_ID:   { return GetRandomTextureObFromList(&ship_race2_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return GetRandomTextureObFromList(&ship_race2_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return GetRandomTextureObFromList(&ship_race2_diplomat_texOb_vec); break; }
 			}
 			
 			break;
@@ -352,11 +354,11 @@ TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race
         	{
                 	switch(_subtype_id)
                 	{	
-                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race3_ranger_texOb_vec);   break; }
-				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race3_warrior_texOb_vec);  break; } 
-				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race3_trader_texOb_vec);   break; }
-				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race3_pirat_texOb_vec);    break; }
-				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race3_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return GetRandomTextureObFromList(&ship_race3_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return GetRandomTextureObFromList(&ship_race3_warrior_texOb_vec);  break; } 
+				case CLASS::TRADER_ID:   { return GetRandomTextureObFromList(&ship_race3_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return GetRandomTextureObFromList(&ship_race3_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return GetRandomTextureObFromList(&ship_race3_diplomat_texOb_vec); break; }
 			}
 			
 			break;
@@ -367,11 +369,11 @@ TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race
         	{
                 	switch(_subtype_id)
                 	{	
-                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race4_ranger_texOb_vec);   break; }
-				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race4_warrior_texOb_vec);  break; } 
-				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race4_trader_texOb_vec);   break; }
-				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race4_pirat_texOb_vec);    break; }
-				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race4_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return GetRandomTextureObFromList(&ship_race4_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return GetRandomTextureObFromList(&ship_race4_warrior_texOb_vec);  break; } 
+				case CLASS::TRADER_ID:   { return GetRandomTextureObFromList(&ship_race4_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return GetRandomTextureObFromList(&ship_race4_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return GetRandomTextureObFromList(&ship_race4_diplomat_texOb_vec); break; }
 			}
 			
 			break;
@@ -382,11 +384,11 @@ TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race
         	{
                 	switch(_subtype_id)
                 	{	
-                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race6_ranger_texOb_vec);   break; }
-				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race6_warrior_texOb_vec);  break; } 
-				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race6_trader_texOb_vec);   break; }
-				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race6_pirat_texOb_vec);    break; }
-				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race6_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return GetRandomTextureObFromList(&ship_race6_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return GetRandomTextureObFromList(&ship_race6_warrior_texOb_vec);  break; } 
+				case CLASS::TRADER_ID:   { return GetRandomTextureObFromList(&ship_race6_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return GetRandomTextureObFromList(&ship_race6_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return GetRandomTextureObFromList(&ship_race6_diplomat_texOb_vec); break; }
 			}
 			
 			break;
@@ -396,11 +398,11 @@ TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race
         	{
                 	switch(_subtype_id)
                 	{	
-                		case CLASS::RANGER_ID:   { return getRandomTexObFromList(&ship_race7_ranger_texOb_vec);   break; }
-				case CLASS::WARRIOR_ID:  { return getRandomTexObFromList(&ship_race7_warrior_texOb_vec);  break; } 
-				case CLASS::TRADER_ID:   { return getRandomTexObFromList(&ship_race7_trader_texOb_vec);   break; }
-				case CLASS::PIRAT_ID:    { return getRandomTexObFromList(&ship_race7_pirat_texOb_vec);    break; }
-				case CLASS::DIPLOMAT_ID: { return getRandomTexObFromList(&ship_race7_diplomat_texOb_vec); break; }
+                		case CLASS::RANGER_ID:   { return GetRandomTextureObFromList(&ship_race7_ranger_texOb_vec);   break; }
+				case CLASS::WARRIOR_ID:  { return GetRandomTextureObFromList(&ship_race7_warrior_texOb_vec);  break; } 
+				case CLASS::TRADER_ID:   { return GetRandomTextureObFromList(&ship_race7_trader_texOb_vec);   break; }
+				case CLASS::PIRAT_ID:    { return GetRandomTextureObFromList(&ship_race7_pirat_texOb_vec);    break; }
+				case CLASS::DIPLOMAT_ID: { return GetRandomTextureObFromList(&ship_race7_diplomat_texOb_vec); break; }
 			}
 			
 			break;
@@ -442,50 +444,50 @@ TextureOb* TextureManager :: getTexObByColorId(int _type_id, int _color_id)
 }
 
                 
-TextureOb* TextureManager :: getRandomTexOb(int texture_type_id)
+TextureOb* TextureManager :: GetRandomTextureOb(int texture_type_id)
 {
 	switch(texture_type_id)
 	{
-		case TEXTURE::SPACESTATION_ID:     { return getRandomTexObFromList(&spacestation_texOb_vec);             break; }
-		case TEXTURE::SATELLITE_ID:        { return getRandomTexObFromList(&satellite_texOb_vec);            break; }
+		case TEXTURE::SPACESTATION_ID:     { return GetRandomTextureObFromList(&spacestation_texOb_vec);             break; }
+		case TEXTURE::SATELLITE_ID:        { return GetRandomTextureObFromList(&satellite_texOb_vec);            break; }
 					
-		case TEXTURE::SLOT_ID:             { return getRandomTexObFromList(&slot_texOb_vec);                 break; }
-		case TEXTURE::CONTAINER_ID:        { return getRandomTexObFromList(&container_texOb_vec);            break; }
-		case TEXTURE::STAR_ID:             { return getRandomTexObFromList(&star_texOb_vec);                 break; }
-		case TEXTURE::PLANET_ID:           { return getRandomTexObFromList(&planet_texOb_vec);               break; }
-		case TEXTURE::ATMOSPHERE_ID:       { return getRandomTexObFromList(&atmosphere_texOb_vec);           break; }
-		case TEXTURE::ASTEROID_ID:         { return getRandomTexObFromList(&asteroid_texOb_vec);             break; }
-		case TEXTURE::MINERAL_ID:          { return getRandomTexObFromList(&mineral_texOb_vec);              break; }
-		case TEXTURE::BOMB_ID:             { return getRandomTexObFromList(&bomb_texOb_vec);                 break; }
-		case TEXTURE::BLACKHOLE_ID:        { return getRandomTexObFromList(&blackhole_texOb_vec);            break; }
-		case TEXTURE::ROCKET_BULLET_ID:    { return getRandomTexObFromList(&rocketBullet_texOb_vec);         break; }
+		case TEXTURE::SLOT_ID:             { return GetRandomTextureObFromList(&slot_texOb_vec);                 break; }
+		case TEXTURE::CONTAINER_ID:        { return GetRandomTextureObFromList(&container_texOb_vec);            break; }
+		case TEXTURE::STAR_ID:             { return GetRandomTextureObFromList(&star_texOb_vec);                 break; }
+		case TEXTURE::PLANET_ID:           { return GetRandomTextureObFromList(&planet_texOb_vec);               break; }
+		case TEXTURE::ATMOSPHERE_ID:       { return GetRandomTextureObFromList(&atmosphere_texOb_vec);           break; }
+		case TEXTURE::ASTEROID_ID:         { return GetRandomTextureObFromList(&asteroid_texOb_vec);             break; }
+		case TEXTURE::MINERAL_ID:          { return GetRandomTextureObFromList(&mineral_texOb_vec);              break; }
+		case TEXTURE::BOMB_ID:             { return GetRandomTextureObFromList(&bomb_texOb_vec);                 break; }
+		case TEXTURE::BLACKHOLE_ID:        { return GetRandomTextureObFromList(&blackhole_texOb_vec);            break; }
+		case TEXTURE::ROCKET_BULLET_ID:    { return GetRandomTextureObFromList(&rocketBullet_texOb_vec);         break; }
 
-		case TEXTURE::ROCKET_EQUIPMENT_ID:      { return getRandomTexObFromList(&rocketEquipment_texOb_vec);      break; }
-		case TEXTURE::LAZER_EQUIPMENT_ID:       { return getRandomTexObFromList(&lazerEquipment_texOb_vec);       break; }
-		case TEXTURE::RADAR_EQUIPMENT_ID:       { return getRandomTexObFromList(&radarEquipment_texOb_vec);       break; }
-		case TEXTURE::DRIVE_EQUIPMENT_ID:       { return getRandomTexObFromList(&driveEquipment_texOb_vec);       break; }
-		case TEXTURE::BAK_EQUIPMENT_ID:         { return getRandomTexObFromList(&bakEquipment_texOb_vec);         break; }
-		case TEXTURE::ENERGIZER_EQUIPMENT_ID: { return getRandomTexObFromList(&energyBlockEquipment_texOb_vec); break; }
-		case TEXTURE::PROTECTOR_EQUIPMENT_ID:   { return getRandomTexObFromList(&protectorEquipment_texOb_vec);   break; }
-		case TEXTURE::DROID_EQUIPMENT_ID:       { return getRandomTexObFromList(&droidEquipment_texOb_vec);       break; }
-		case TEXTURE::FREEZER_EQUIPMENT_ID:     { return getRandomTexObFromList(&freezerEquipment_texOb_vec);     break; }
-		case TEXTURE::SCANER_EQUIPMENT_ID:      { return getRandomTexObFromList(&scanerEquipment_texOb_vec);      break; }
-		case TEXTURE::GRAPPLE_EQUIPMENT_ID:     { return getRandomTexObFromList(&grappleEquipment_texOb_vec);     break; }
+		case TEXTURE::ROCKET_EQUIPMENT_ID:      { return GetRandomTextureObFromList(&rocketEquipment_texOb_vec);      break; }
+		case TEXTURE::LAZER_EQUIPMENT_ID:       { return GetRandomTextureObFromList(&lazerEquipment_texOb_vec);       break; }
+		case TEXTURE::RADAR_EQUIPMENT_ID:       { return GetRandomTextureObFromList(&radarEquipment_texOb_vec);       break; }
+		case TEXTURE::DRIVE_EQUIPMENT_ID:       { return GetRandomTextureObFromList(&driveEquipment_texOb_vec);       break; }
+		case TEXTURE::BAK_EQUIPMENT_ID:         { return GetRandomTextureObFromList(&bakEquipment_texOb_vec);         break; }
+		case TEXTURE::ENERGIZER_EQUIPMENT_ID: { return GetRandomTextureObFromList(&energyBlockEquipment_texOb_vec); break; }
+		case TEXTURE::PROTECTOR_EQUIPMENT_ID:   { return GetRandomTextureObFromList(&protectorEquipment_texOb_vec);   break; }
+		case TEXTURE::DROID_EQUIPMENT_ID:       { return GetRandomTextureObFromList(&droidEquipment_texOb_vec);       break; }
+		case TEXTURE::FREEZER_EQUIPMENT_ID:     { return GetRandomTextureObFromList(&freezerEquipment_texOb_vec);     break; }
+		case TEXTURE::SCANER_EQUIPMENT_ID:      { return GetRandomTextureObFromList(&scanerEquipment_texOb_vec);      break; }
+		case TEXTURE::GRAPPLE_EQUIPMENT_ID:     { return GetRandomTextureObFromList(&grappleEquipment_texOb_vec);     break; }
 																		
-		case TEXTURE::TURREL_ID:           { return getRandomTexObFromList(&turrel_texOb_vec);               break; }
-		case TEXTURE::LAZER_EFFECT_ID:     { return getRandomTexObFromList(&lazerEffect_texOb_vec);          break; }
-		case TEXTURE::LANDINGAREA_ID:      { return getRandomTexObFromList(&landingArea_texOb_vec);          break; }
+		case TEXTURE::TURREL_ID:           { return GetRandomTextureObFromList(&turrel_texOb_vec);               break; }
+		case TEXTURE::LAZER_EFFECT_ID:     { return GetRandomTextureObFromList(&lazerEffect_texOb_vec);          break; }
+		case TEXTURE::LANDINGAREA_ID:      { return GetRandomTextureObFromList(&landingArea_texOb_vec);          break; }
 				
-		case TEXTURE::ANGAR_BACKGROUND_ID:         { return getRandomTexObFromList(&angarBg_texOb_vec);              break; }				
-		case TEXTURE::STORE_BACKGROUND_ID:         { return getRandomTexObFromList(&storeBg_texOb_vec);              break; }	
-		case TEXTURE::SHOP_BACKGROUND_ID:          { return getRandomTexObFromList(&shopBg_texOb_vec);               break; }	
-		case TEXTURE::GOVERMENT_BACKGROUND_ID:     { return getRandomTexObFromList(&govermentBg_texOb_vec);          break; }	
+		case TEXTURE::ANGAR_BACKGROUND_ID:         { return GetRandomTextureObFromList(&angarBg_texOb_vec);              break; }				
+		case TEXTURE::STORE_BACKGROUND_ID:         { return GetRandomTextureObFromList(&storeBg_texOb_vec);              break; }	
+		case TEXTURE::SHOP_BACKGROUND_ID:          { return GetRandomTextureObFromList(&shopBg_texOb_vec);               break; }	
+		case TEXTURE::GOVERMENT_BACKGROUND_ID:     { return GetRandomTextureObFromList(&govermentBg_texOb_vec);          break; }	
 
-		case TEXTURE::TEXT_BACKGROUND_ID:  { return getRandomTexObFromList(&textBackground_texOb_vec);       break; }			
+		case TEXTURE::TEXT_BACKGROUND_ID:  { return GetRandomTextureObFromList(&textBackground_texOb_vec);       break; }			
 
-		case TEXTURE::SHIELD_EFFECT_ID:    { return getRandomTexObFromList(&shieldEffect_texOb_vec);         break; }	
-		case TEXTURE::NEBULA_BACKGROUND_ID:           { return getRandomTexObFromList(&nebulaBgEffect_texOb_vec);       break; }
-		case TEXTURE::DISTANTSTAR_ID:      { return getRandomTexObFromList(&starBgEffect_texOb_vec);         break; }				
+		case TEXTURE::SHIELD_EFFECT_ID:    { return GetRandomTextureObFromList(&shieldEffect_texOb_vec);         break; }	
+		case TEXTURE::NEBULA_BACKGROUND_ID:           { return GetRandomTextureObFromList(&nebulaBgEffect_texOb_vec);       break; }
+		case TEXTURE::DISTANTSTAR_ID:      { return GetRandomTextureObFromList(&starBgEffect_texOb_vec);         break; }				
 				
 	}
 }
@@ -534,3 +536,17 @@ void TextureManager::FillShipSubTypeList()
         if (ship_race7_pirat_texOb_vec.size() != 0)    RACE7_ALLOWED_SUBTYPE_LIST.push_back(CLASS::PIRAT_ID); 
         if (ship_race7_diplomat_texOb_vec.size() != 0) RACE7_ALLOWED_SUBTYPE_LIST.push_back(CLASS::DIPLOMAT_ID);                      
 }
+
+TextureOb* TextureManager::GetTextureObByPath(const std::string& path)
+{
+	for (unsigned int i = 0; i<textureOb_total_vec.size(); i++)
+	{
+		if (textureOb_total_vec[i]->path == path)
+		{
+			return textureOb_total_vec[i];
+		}
+	}
+	
+	return NULL;
+}
+		

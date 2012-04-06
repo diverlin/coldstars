@@ -28,22 +28,24 @@ class Orbit
 		Orbit();
 		~Orbit();
 
-		void calcPath(float, float, float, float);
-		void calcPath(float, float);
-		vec2f getPosition() const;
-		vec2f getNextTurnPosition() const; 
+		int GetIt() const { return it; };
+		vec2f GetPosition() const { return coords_vec[it]; };
+		vec2f GetNextTurnPosition() const; 
 
-		void updatePosition();
+		void CalcPath(float, float, float, float);
+		void CalcPath(float, float);
+		
+		void UpdatePosition();
 
-		void draw();
+		void Draw();
 
 	protected:
 		PathVisual orbit_visual;
 
-		std::vector<vec2f> orbit_vec;
-		int orbit_len, orbit_it; 
+		std::vector<vec2f> coords_vec;
+		int len, it; 
 
-		void updateVisual();
+		void UpdateVisual();
 };
 
 #endif 

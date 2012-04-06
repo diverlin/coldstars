@@ -27,14 +27,20 @@ class StarSystemBuilder
 		static StarSystemBuilder& Instance();
 		~StarSystemBuilder();
 
-        	void CreateNewStarSystem(); 
+        	void CreateNewStarSystem(int id = NONE_ID); 
                 void CreateNewInternals();
                 StarSystem* GetStarSystem() const { return starsystem; };
-        	 		                
-        protected:
+                
+                void Save(StarSystem*) const;
+                void LoadPass0(const std::string&);
+                void LoadPass1();
+                        	 		                
+        private:
                 StarSystem* starsystem;
                 
 		StarSystemBuilder() {};
+		StarSystemBuilder(const StarSystemBuilder&) {};
+		StarSystemBuilder& operator=(const StarSystemBuilder&) {};
 		
                 void CreateBackground(int, int, int);
         	void CreateStar();

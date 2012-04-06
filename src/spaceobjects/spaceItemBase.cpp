@@ -27,15 +27,15 @@ SpaceItemBase :: ~SpaceItemBase()
 void SpaceItemBase :: postCreateInit()
 {
    	this->calcCollisionrRadius();
-	this->CreateCenter();
+	points.CreateCenter();
 }
 
 
 void SpaceItemBase :: calcCollisionrRadius()
 {
-        collision_radius = (texOb->getFrameWidth() + texOb->getFrameHeight())/4; 
+        collision_radius = (textureOb->getFrameWidth() + textureOb->getFrameHeight())/4; 
         
-        points.setWidthHeight(texOb->getFrameWidth(), texOb->getFrameHeight());  // needs for finding visible corners
+        points.setWidthHeight(textureOb->getFrameWidth(), textureOb->getFrameHeight());  // needs for finding visible corners
 }
 
 void SpaceItemBase :: moveToSpace(StarSystem* starsystem, vec2f start_pos)
@@ -78,13 +78,13 @@ void SpaceItemBase :: PostDeathUniqueEvent(bool show_effect)
 {
 	if (show_effect == true)
      	{
-        	createExplosion(starsystem, points.getCenter(), texOb->size_id);        		
+        	createExplosion(starsystem, points.getCenter(), textureOb->size_id);        		
         }
 }
        		
 void SpaceItemBase :: render2D()
 { 
-    	drawDynamic(texOb, points.getCenter(), angle.z, points.getPosZ());
+    	drawDynamic(textureOb, points.getCenter(), angle.z, points.getPosZ());
 }
 
 

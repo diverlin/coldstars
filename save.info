@@ -1,11 +1,11 @@
-starsystem
+star
 {
-    2
+    3
     {
         data_id
         {
-            id 2
-            type_id 8
+            id 3
+            type_id 9
             subtype_id -1
         }
         data_life
@@ -14,919 +14,10 @@ starsystem
             armor 1
             dying_time 0
         }
-        center
-        {
-            x 134
-            y 268
-        }
-        angle_2D 0
-        starsystem_id 2
-        place_type_id -1
         angle
         {
-            x 20
-            y 12
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.83
-        }
-        collision_radius 0
-        mass 0
-        galaxy_id 1
-    }
-    400
-    {
-        data_id
-        {
-            id 400
-            type_id 8
-            subtype_id -1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1
-            dying_time 0
-        }
-        center
-        {
-            x 423
-            y 229
-        }
-        angle_2D 0
-        starsystem_id 400
-        place_type_id -1
-        angle
-        {
-            x 39
-            y 31
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.13
-        }
-        collision_radius 0
-        mass 0
-        galaxy_id 1
-    }
-    787
-    {
-        data_id
-        {
-            id 787
-            type_id 8
-            subtype_id -1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1
-            dying_time 0
-        }
-        center
-        {
-            x 434
-            y 267
-        }
-        angle_2D 0
-        starsystem_id 787
-        place_type_id -1
-        angle
-        {
-            x 37
+            x 38
             y 37
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.67
-        }
-        collision_radius 0
-        mass 0
-        galaxy_id 1
-    }
-    1184
-    {
-        data_id
-        {
-            id 1184
-            type_id 8
-            subtype_id -1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1
-            dying_time 0
-        }
-        center
-        {
-            x 446
-            y 252
-        }
-        angle_2D 0
-        starsystem_id 1184
-        place_type_id -1
-        angle
-        {
-            x 11
-            y 13
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.94
-        }
-        collision_radius 0
-        mass 0
-        galaxy_id 1
-    }
-    1571
-    {
-        data_id
-        {
-            id 1571
-            type_id 8
-            subtype_id -1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1
-            dying_time 0
-        }
-        center
-        {
-            x 335
-            y 66
-        }
-        angle_2D 0
-        starsystem_id 1571
-        place_type_id -1
-        angle
-        {
-            x 34
-            y 15
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.28
-        }
-        collision_radius 0
-        mass 0
-        galaxy_id 1
-    }
-    1969
-    {
-        data_id
-        {
-            id 1969
-            type_id 8
-            subtype_id -1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1
-            dying_time 0
-        }
-        center
-        {
-            x 184
-            y 214
-        }
-        angle_2D 0
-        starsystem_id 1969
-        place_type_id -1
-        angle
-        {
-            x 39
-            y 35
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.33
-        }
-        collision_radius 0
-        mass 0
-        galaxy_id 1
-    }
-    2387
-    {
-        data_id
-        {
-            id 2387
-            type_id 8
-            subtype_id -1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1
-            dying_time 0
-        }
-        center
-        {
-            x 179
-            y 242
-        }
-        angle_2D 0
-        starsystem_id 2387
-        place_type_id -1
-        angle
-        {
-            x 30
-            y 15
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.99
-        }
-        collision_radius 0
-        mass 0
-        galaxy_id 1
-    }
-    2749
-    {
-        data_id
-        {
-            id 2749
-            type_id 8
-            subtype_id -1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1
-            dying_time 0
-        }
-        center
-        {
-            x 306
-            y 127
-        }
-        angle_2D 0
-        starsystem_id 2749
-        place_type_id -1
-        angle
-        {
-            x 35
-            y 38
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.86
-        }
-        collision_radius 0
-        mass 0
-        galaxy_id 1
-    }
-    3108
-    {
-        data_id
-        {
-            id 3108
-            type_id 8
-            subtype_id -1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1
-            dying_time 0
-        }
-        center
-        {
-            x 148
-            y 128
-        }
-        angle_2D 0
-        starsystem_id 3108
-        place_type_id -1
-        angle
-        {
-            x 16
-            y 24
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.21
-        }
-        collision_radius 0
-        mass 0
-        galaxy_id 1
-    }
-    3506
-    {
-        data_id
-        {
-            id 3506
-            type_id 8
-            subtype_id -1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1
-            dying_time 0
-        }
-        center
-        {
-            x 516
-            y 61
-        }
-        angle_2D 0
-        starsystem_id 3506
-        place_type_id -1
-        angle
-        {
-            x 33
-            y 30
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.63
-        }
-        collision_radius 0
-        mass 0
-        galaxy_id 1
-    }
-}
-ship
-{
-    155
-    {
-        data_id
-        {
-            id 155
-            type_id 0
-            subtype_id 0
-        }
-        data_life
-        {
-            is_alive true
-            armor 1295
-            dying_time 40
-        }
-        center
-        {
-            x 456
-            y 604
-        }
-        angle_2D 97
-        starsystem_id 2
-        place_type_id 18
-        angle
-        {
-            x 39
-            y 32
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.96
-        }
-        collision_radius 51
-        mass 447
-    }
-    179
-    {
-        data_id
-        {
-            id 179
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1051
-            dying_time 20
-        }
-        center
-        {
-            x 265
-            y 463
-        }
-        angle_2D 218
-        starsystem_id 2
-        place_type_id 18
-        angle
-        {
-            x 36
-            y 35
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.13
-        }
-        collision_radius 26
-        mass 483
-    }
-    201
-    {
-        data_id
-        {
-            id 201
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1100
-            dying_time 20
-        }
-        center
-        {
-            x 237
-            y 521
-        }
-        angle_2D 261
-        starsystem_id 2
-        place_type_id 18
-        angle
-        {
-            x 39
-            y 12
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.73
-        }
-        collision_radius 26
-        mass 476
-    }
-    518
-    {
-        data_id
-        {
-            id 518
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 191
-            dying_time 30
-        }
-        center
-        {
-            x 200
-            y 587
-        }
-        angle_2D 59
-        starsystem_id 400
-        place_type_id 18
-        angle
-        {
-            x 18
-            y 33
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.17
-        }
-        collision_radius 39
-        mass 423
-    }
-    541
-    {
-        data_id
-        {
-            id 541
-            type_id 0
-            subtype_id 4
-        }
-        data_life
-        {
-            is_alive true
-            armor 627
-            dying_time 20
-        }
-        center
-        {
-            x 96
-            y 596
-        }
-        angle_2D 243
-        starsystem_id 400
-        place_type_id 18
-        angle
-        {
-            x 13
-            y 19
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.15
-        }
-        collision_radius 18
-        mass 471
-    }
-    564
-    {
-        data_id
-        {
-            id 564
-            type_id 0
-            subtype_id 3
-        }
-        data_life
-        {
-            is_alive true
-            armor 695
-            dying_time 30
-        }
-        center
-        {
-            x 499
-            y 771
-        }
-        angle_2D 290
-        starsystem_id 400
-        place_type_id 18
-        angle
-        {
-            x 31
-            y 17
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.77
-        }
-        collision_radius 39
-        mass 450
-    }
-    587
-    {
-        data_id
-        {
-            id 587
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1064
-            dying_time 30
-        }
-        center
-        {
-            x 329
-            y 263
-        }
-        angle_2D 306
-        starsystem_id 400
-        place_type_id 18
-        angle
-        {
-            x 25
-            y 31
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.34
-        }
-        collision_radius 39
-        mass 489
-    }
-    940
-    {
-        data_id
-        {
-            id 940
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1075
-            dying_time 20
-        }
-        center
-        {
-            x 796
-            y 626
-        }
-        angle_2D 127
-        starsystem_id 787
-        place_type_id 18
-        angle
-        {
-            x 10
-            y 32
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.34
-        }
-        collision_radius 16
-        mass 426
-    }
-    962
-    {
-        data_id
-        {
-            id 962
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1081
-            dying_time 30
-        }
-        center
-        {
-            x 269
-            y 83
-        }
-        angle_2D 289
-        starsystem_id 787
-        place_type_id 18
-        angle
-        {
-            x 30
-            y 15
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.25
-        }
-        collision_radius 37
-        mass 498
-    }
-    985
-    {
-        data_id
-        {
-            id 985
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 843
-            dying_time 60
-        }
-        center
-        {
-            x 585
-            y 104
-        }
-        angle_2D 99
-        starsystem_id 787
-        place_type_id 18
-        angle
-        {
-            x 16
-            y 38
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.88
-        }
-        collision_radius 74
-        mass 482
-    }
-    1302
-    {
-        data_id
-        {
-            id 1302
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1279
-            dying_time 20
-        }
-        center
-        {
-            x 208
-            y 40
-        }
-        angle_2D 65
-        starsystem_id 1184
-        place_type_id 18
-        angle
-        {
-            x 16
-            y 13
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.25
-        }
-        collision_radius 16
-        mass 567
-    }
-    1326
-    {
-        data_id
-        {
-            id 1326
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 689
-            dying_time 30
-        }
-        center
-        {
-            x 740
-            y 260
-        }
-        angle_2D 67
-        starsystem_id 1184
-        place_type_id 18
-        angle
-        {
-            x 19
-            y 29
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.21
-        }
-        collision_radius 37
-        mass 525
-    }
-    1350
-    {
-        data_id
-        {
-            id 1350
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1069
-            dying_time 20
-        }
-        center
-        {
-            x 683
-            y 741
-        }
-        angle_2D 1
-        starsystem_id 1184
-        place_type_id 18
-        angle
-        {
-            x 36
-            y 10
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.67
-        }
-        collision_radius 16
-        mass 485
-    }
-    1373
-    {
-        data_id
-        {
-            id 1373
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 989
-            dying_time 60
-        }
-        center
-        {
-            x 418
-            y 537
-        }
-        angle_2D 55
-        starsystem_id 1184
-        place_type_id 18
-        angle
-        {
-            x 13
-            y 20
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.18
-        }
-        collision_radius 74
-        mass 373
-    }
-    1724
-    {
-        data_id
-        {
-            id 1724
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 344
-            dying_time 30
-        }
-        center
-        {
-            x 210
-            y 241
-        }
-        angle_2D 341
-        starsystem_id 1571
-        place_type_id 18
-        angle
-        {
-            x 13
-            y 13
             z 0
         }
         d_angle
@@ -935,220 +26,55 @@ ship
             y 0
             z 0.36
         }
-        collision_radius 37
-        mass 504
-    }
-    1748
-    {
-        data_id
-        {
-            id 1748
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1058
-            dying_time 30
-        }
-        center
-        {
-            x 578
-            y 22
-        }
-        angle_2D 142
-        starsystem_id 1571
+        collision_radius 278
+        mass 0
+        mesh_path data/obj/sphere/planet.obj
+        textureOb_path data/star/s_101.png
+        parent_id -1
+        starsystem_id 2
         place_type_id 18
-        angle
-        {
-            x 13
-            y 35
-            z 0
-        }
-        d_angle
+        center
         {
             x 0
             y 0
-            z 0.3
         }
-        collision_radius 37
-        mass 365
+        angle_2D 0
+        orbit
+        {
+            it 0
+        }
+        data
+        {
+            scale 103
+            orbit_center
+            {
+                x 0
+                y 0
+            }
+            radius_A 50
+            radius_B 50
+            orbit_phi_inD 0
+            speed 1.8
+        }
     }
-    1769
+    366
     {
         data_id
         {
-            id 1769
-            type_id 0
-            subtype_id 1
+            id 366
+            type_id 9
+            subtype_id -1
         }
         data_life
         {
             is_alive true
-            armor 482
-            dying_time 20
+            armor 1
+            dying_time 0
         }
-        center
-        {
-            x 148
-            y 706
-        }
-        angle_2D 154
-        starsystem_id 1571
-        place_type_id 18
         angle
         {
-            x 11
-            y 36
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.2
-        }
-        collision_radius 16
-        mass 510
-    }
-    2122
-    {
-        data_id
-        {
-            id 2122
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 773
-            dying_time 20
-        }
-        center
-        {
-            x 35
-            y 456
-        }
-        angle_2D 99
-        starsystem_id 1969
-        place_type_id 18
-        angle
-        {
-            x 30
-            y 25
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.7
-        }
-        collision_radius 16
-        mass 349
-    }
-    2143
-    {
-        data_id
-        {
-            id 2143
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 627
-            dying_time 60
-        }
-        center
-        {
-            x 677
-            y 46
-        }
-        angle_2D 223
-        starsystem_id 1969
-        place_type_id 18
-        angle
-        {
-            x 37
-            y 24
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.14
-        }
-        collision_radius 74
-        mass 508
-    }
-    2167
-    {
-        data_id
-        {
-            id 2167
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1288
-            dying_time 20
-        }
-        center
-        {
-            x 104
-            y 548
-        }
-        angle_2D 119
-        starsystem_id 1969
-        place_type_id 18
-        angle
-        {
-            x 37
-            y 24
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.65
-        }
-        collision_radius 16
-        mass 456
-    }
-    2190
-    {
-        data_id
-        {
-            id 2190
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1298
-            dying_time 60
-        }
-        center
-        {
-            x 584
-            y 717
-        }
-        angle_2D 53
-        starsystem_id 1969
-        place_type_id 18
-        angle
-        {
-            x 22
-            y 13
+            x 14
+            y 10
             z 0
         }
         d_angle
@@ -1157,256 +83,282 @@ ship
             y 0
             z 0.66
         }
-        collision_radius 74
-        mass 404
-    }
-    2505
-    {
-        data_id
-        {
-            id 2505
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 991
-            dying_time 20
-        }
-        center
-        {
-            x 16
-            y 742
-        }
-        angle_2D 238
-        starsystem_id 2387
+        collision_radius 234
+        mass 0
+        mesh_path data/obj/sphere/planet.obj
+        textureOb_path data/star/s_101.png
+        parent_id -1
+        starsystem_id 365
         place_type_id 18
-        angle
-        {
-            x 19
-            y 14
-            z 0
-        }
-        d_angle
+        center
         {
             x 0
             y 0
-            z 0.83
         }
-        collision_radius 16
-        mass 396
+        angle_2D 0
+        orbit
+        {
+            it 1127749970
+        }
+        data
+        {
+            scale 87
+            orbit_center
+            {
+                x 0
+                y 0
+            }
+            radius_A 50
+            radius_B 50
+            orbit_phi_inD 0
+            speed 1.8
+        }
     }
-    2526
+    725
     {
         data_id
         {
-            id 2526
-            type_id 0
-            subtype_id 1
+            id 725
+            type_id 9
+            subtype_id -1
         }
         data_life
         {
             is_alive true
-            armor 1215
-            dying_time 20
+            armor 1
+            dying_time 0
         }
-        center
-        {
-            x 2
-            y 387
-        }
-        angle_2D 339
-        starsystem_id 2387
-        place_type_id 18
-        angle
-        {
-            x 11
-            y 36
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.13
-        }
-        collision_radius 16
-        mass 485
-    }
-    2550
-    {
-        data_id
-        {
-            id 2550
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 680
-            dying_time 30
-        }
-        center
-        {
-            x 681
-            y 484
-        }
-        angle_2D 291
-        starsystem_id 2387
-        place_type_id 18
-        angle
-        {
-            x 28
-            y 21
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.4
-        }
-        collision_radius 37
-        mass 451
-    }
-    2867
-    {
-        data_id
-        {
-            id 2867
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 490
-            dying_time 60
-        }
-        center
-        {
-            x 46
-            y 753
-        }
-        angle_2D 20
-        starsystem_id 2749
-        place_type_id 18
-        angle
-        {
-            x 32
-            y 32
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.4
-        }
-        collision_radius 74
-        mass 423
-    }
-    2888
-    {
-        data_id
-        {
-            id 2888
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 248
-            dying_time 30
-        }
-        center
-        {
-            x 183
-            y 201
-        }
-        angle_2D 97
-        starsystem_id 2749
-        place_type_id 18
-        angle
-        {
-            x 37
-            y 34
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.44
-        }
-        collision_radius 37
-        mass 456
-    }
-    2909
-    {
-        data_id
-        {
-            id 2909
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 945
-            dying_time 20
-        }
-        center
-        {
-            x 702
-            y 631
-        }
-        angle_2D 228
-        starsystem_id 2749
-        place_type_id 18
-        angle
-        {
-            x 11
-            y 15
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.23
-        }
-        collision_radius 16
-        mass 467
-    }
-    3261
-    {
-        data_id
-        {
-            id 3261
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 228
-            dying_time 60
-        }
-        center
-        {
-            x 617
-            y 348
-        }
-        angle_2D 218
-        starsystem_id 3108
-        place_type_id 18
         angle
         {
             x 10
+            y 39
+            z 0
+        }
+        d_angle
+        {
+            x 0
+            y 0
+            z 0.68
+        }
+        collision_radius 270
+        mass 0
+        mesh_path data/obj/sphere/planet.obj
+        textureOb_path data/star/s_000.jpg
+        parent_id -1
+        starsystem_id 724
+        place_type_id 18
+        center
+        {
+            x 0
+            y 0
+        }
+        angle_2D 0
+        orbit
+        {
+            it 1128354786
+        }
+        data
+        {
+            scale 100
+            orbit_center
+            {
+                x 0
+                y 0
+            }
+            radius_A 50
+            radius_B 50
+            orbit_phi_inD 0
+            speed 1.8
+        }
+    }
+    1145
+    {
+        data_id
+        {
+            id 1145
+            type_id 9
+            subtype_id -1
+        }
+        data_life
+        {
+            is_alive true
+            armor 1
+            dying_time 0
+        }
+        angle
+        {
+            x 27
+            y 20
+            z 0
+        }
+        d_angle
+        {
+            x 0
+            y 0
+            z 0.69
+        }
+        collision_radius 216
+        mass 0
+        mesh_path data/obj/sphere/planet.obj
+        textureOb_path data/star/s_000.jpg
+        parent_id -1
+        starsystem_id 1144
+        place_type_id 18
+        center
+        {
+            x 0
+            y 0
+        }
+        angle_2D 0
+        orbit
+        {
+            it 1128732532
+        }
+        data
+        {
+            scale 80
+            orbit_center
+            {
+                x 0
+                y 0
+            }
+            radius_A 50
+            radius_B 50
+            orbit_phi_inD 0
+            speed 1.8
+        }
+    }
+    1562
+    {
+        data_id
+        {
+            id 1562
+            type_id 9
+            subtype_id -1
+        }
+        data_life
+        {
+            is_alive true
+            armor 1
+            dying_time 0
+        }
+        angle
+        {
+            x 21
+            y 28
+            z 0
+        }
+        d_angle
+        {
+            x 0
+            y 0
+            z 0.1
+        }
+        collision_radius 226
+        mass 0
+        mesh_path data/obj/sphere/planet.obj
+        textureOb_path data/star/s_101.png
+        parent_id -1
+        starsystem_id 1561
+        place_type_id 18
+        center
+        {
+            x 0
+            y 0
+        }
+        angle_2D 0
+        orbit
+        {
+            it 1130194858
+        }
+        data
+        {
+            scale 84
+            orbit_center
+            {
+                x 0
+                y 0
+            }
+            radius_A 50
+            radius_B 50
+            orbit_phi_inD 0
+            speed 1.8
+        }
+    }
+    1960
+    {
+        data_id
+        {
+            id 1960
+            type_id 9
+            subtype_id -1
+        }
+        data_life
+        {
+            is_alive true
+            armor 1
+            dying_time 0
+        }
+        angle
+        {
+            x 14
+            y 31
+            z 0
+        }
+        d_angle
+        {
+            x 0
+            y 0
+            z 0.29
+        }
+        collision_radius 240
+        mass 0
+        mesh_path data/obj/sphere/planet.obj
+        textureOb_path data/star/s_000.jpg
+        parent_id -1
+        starsystem_id 1959
+        place_type_id 18
+        center
+        {
+            x 0
+            y 0
+        }
+        angle_2D 0
+        orbit
+        {
+            it 0
+        }
+        data
+        {
+            scale 89
+            orbit_center
+            {
+                x 0
+                y 0
+            }
+            radius_A 50
+            radius_B 50
+            orbit_phi_inD 0
+            speed 1.8
+        }
+    }
+    2355
+    {
+        data_id
+        {
+            id 2355
+            type_id 9
+            subtype_id -1
+        }
+        data_life
+        {
+            is_alive true
+            armor 1
+            dying_time 0
+        }
+        angle
+        {
+            x 16
             y 24
             z 0
         }
@@ -1414,221 +366,113 @@ ship
         {
             x 0
             y 0
-            z 0.97
+            z 0.28
         }
-        collision_radius 74
-        mass 423
-    }
-    3284
-    {
-        data_id
-        {
-            id 3284
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 1225
-            dying_time 30
-        }
-        center
-        {
-            x 193
-            y 443
-        }
-        angle_2D 22
-        starsystem_id 3108
+        collision_radius 278
+        mass 0
+        mesh_path data/obj/sphere/planet.obj
+        textureOb_path data/star/s_100.jpg
+        parent_id -1
+        starsystem_id 2354
         place_type_id 18
-        angle
-        {
-            x 32
-            y 10
-            z 0
-        }
-        d_angle
+        center
         {
             x 0
             y 0
-            z 0.75
-        }
-        collision_radius 37
-        mass 438
-    }
-    3306
-    {
-        data_id
-        {
-            id 3306
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 606
-            dying_time 60
-        }
-        center
-        {
-            x 73
-            y 253
-        }
-        angle_2D 107
-        starsystem_id 3108
-        place_type_id 18
-        angle
-        {
-            x 33
-            y 29
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.5
-        }
-        collision_radius 74
-        mass 523
-    }
-    3867
-    {
-        data_id
-        {
-            id 3867
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 15052
-            dying_time 50
-        }
-        center
-        {
-            x -400
-            y 400
         }
         angle_2D 0
-        starsystem_id 3108
-        place_type_id 18
-        angle
+        orbit
         {
-            x 14
-            y 12
-            z 0
+            it 1128897875
         }
-        d_angle
+        data
         {
-            x 0
-            y 0
-            z 0.31
+            scale 103
+            orbit_center
+            {
+                x 0
+                y 0
+            }
+            radius_A 50
+            radius_B 50
+            orbit_phi_inD 0
+            speed 1.8
         }
-        collision_radius 58
-        mass 638
     }
-    3624
+    2755
     {
         data_id
         {
-            id 3624
-            type_id 0
-            subtype_id 1
+            id 2755
+            type_id 9
+            subtype_id -1
         }
         data_life
         {
             is_alive true
-            armor 1106
-            dying_time 30
+            armor 1
+            dying_time 0
         }
-        center
-        {
-            x 622
-            y 408
-        }
-        angle_2D 191
-        starsystem_id 3506
-        place_type_id 18
-        angle
-        {
-            x 37
-            y 21
-            z 0
-        }
-        d_angle
-        {
-            x 0
-            y 0
-            z 0.14
-        }
-        collision_radius 37
-        mass 423
-    }
-    3645
-    {
-        data_id
-        {
-            id 3645
-            type_id 0
-            subtype_id 1
-        }
-        data_life
-        {
-            is_alive true
-            armor 997
-            dying_time 60
-        }
-        center
-        {
-            x 177
-            y 459
-        }
-        angle_2D 329
-        starsystem_id 3506
-        place_type_id 18
         angle
         {
             x 10
-            y 32
+            y 14
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.64
+            z 0.49
         }
-        collision_radius 74
-        mass 473
+        collision_radius 288
+        mass 0
+        mesh_path data/obj/sphere/planet.obj
+        textureOb_path data/star/s_100.jpg
+        parent_id -1
+        starsystem_id 2754
+        place_type_id 18
+        center
+        {
+            x 0
+            y 0
+        }
+        angle_2D 0
+        orbit
+        {
+            it 1130519104
+        }
+        data
+        {
+            scale 107
+            orbit_center
+            {
+                x 0
+                y 0
+            }
+            radius_A 50
+            radius_B 50
+            orbit_phi_inD 0
+            speed 1.8
+        }
     }
-    3668
+    3139
     {
         data_id
         {
-            id 3668
-            type_id 0
-            subtype_id 1
+            id 3139
+            type_id 9
+            subtype_id -1
         }
         data_life
         {
             is_alive true
-            armor 601
-            dying_time 30
+            armor 1
+            dying_time 0
         }
-        center
-        {
-            x 504
-            y 331
-        }
-        angle_2D 100
-        starsystem_id 3506
-        place_type_id 18
         angle
         {
-            x 12
+            x 14
             y 35
             z 0
         }
@@ -1636,9 +480,77 @@ ship
         {
             x 0
             y 0
-            z 0.38
+            z 0.78
         }
-        collision_radius 37
-        mass 417
+        collision_radius 259
+        mass 0
+        mesh_path data/obj/sphere/planet.obj
+        textureOb_path data/star/s_001.png
+        parent_id -1
+        starsystem_id 3138
+        place_type_id 18
+        center
+        {
+            x 0
+            y 0
+        }
+        angle_2D 0
+        orbit
+        {
+            it 1129598460
+        }
+        data
+        {
+            scale 96
+            orbit_center
+            {
+                x 0
+                y 0
+            }
+            radius_A 50
+            radius_B 50
+            orbit_phi_inD 0
+            speed 1.8
+        }
+    }
+    3557
+    {
+        data_id
+        {
+            id 3557
+            type_id 9
+            subtype_id -1
+        }
+        data_life
+        {
+            is_alive true
+            armor 1
+            dying_time 0
+        }
+        angle
+        {
+            x 17
+            y 28
+            z 0
+        }
+        d_angle
+        {
+            x 0
+            y 0
+            z 0.66
+        }
+        collision_radius 275
+        mass 0
+        mesh_path data/obj/sphere/planet.obj
+        textureOb_path data/star/s_001.png
+        parent_id -1
+        starsystem_id 3556
+        place_type_id 18
+        center
+        {
+            x 0
+            y 0
+        }
+        angle_2D 0
     }
 }

@@ -18,18 +18,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
    
-Star :: Star()
+Star::Star(int id)
 { 
+	data_id.id = id;
+	data_id.type_id = ENTITY::STAR_ID;
+	
    	texture_offset1 = 0.0;
     	texture_offset2 = 0.0;
 }
     
-Star :: ~Star()
+Star::~Star()
 {}
     
-void Star :: calcColor()
+void Star::CalcColor()
 {
-        if (texOb->color_id == COLOR::YELLOW_ID)
+        if (textureOb->color_id == COLOR::YELLOW_ID)
 	{
 		color.r = 255/255.0;
 		color.g = 255/255.0;
@@ -37,7 +40,7 @@ void Star :: calcColor()
 		color.a = 1.0;
 	}
 	
-	if (texOb->color_id == COLOR::BLUE_ID)
+	if (textureOb->color_id == COLOR::BLUE_ID)
 	{
 		color.r = 220/255.0;
 		color.g = 255/255.0;
@@ -45,16 +48,12 @@ void Star :: calcColor()
 		color.a = 1.0;
 	}
 }
-
-Color4f Star :: getColor() const         { return color; }
-int Star :: getColorId() const 		 { return texOb->color_id; }
-float Star :: getBrightThreshold() const { return texOb->brightThreshold; }
        
-void Star :: update_inSpace(int time, bool show_effect)
+void Star::Update_inSpace(int time, bool show_effect)
 {}
     
     
-void Star :: render_NEW()
+void Star::Render_NEW()
 {
         texture_offset1 += 0.0002;
         texture_offset2 += 0.0003;
@@ -62,11 +61,11 @@ void Star :: render_NEW()
         glUseProgram(g_SHADERS.multitexturing);
 
         glActiveTexture(GL_TEXTURE0);                                
-        glBindTexture(GL_TEXTURE_2D, texOb->texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb->texture);
         glUniform1i(glGetUniformLocation(g_SHADERS.multitexturing, "Texture_0"), 0);
 
         glActiveTexture(GL_TEXTURE1);                                
-        glBindTexture(GL_TEXTURE_2D, texOb->texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb->texture);
         glUniform1i(glGetUniformLocation(g_SHADERS.multitexturing, "Texture_1"), 1);
         
 	glUniform2f(glGetUniformLocation(g_SHADERS.multitexturing, "displ"), texture_offset1, texture_offset2);
@@ -76,66 +75,37 @@ void Star :: render_NEW()
         glUseProgram(0);
         glActiveTexture(GL_TEXTURE0);
 }
-    
-    
-void Star :: render_OLD()
+        
+void Star::Render_OLD()
 {    
 	UpdateRotation();
      	
-     	glBindTexture(GL_TEXTURE_2D, texOb->texture);      		
+     	glBindTexture(GL_TEXTURE_2D, textureOb->texture);      		
 	renderMesh(mesh->glList, points.getCenter3f(), angle, data_planet.scale);
 }
 
-
-void Star :: UpdateInfo()
+void Star::UpdateInfo()
 { 
 	info.clear();
     	info.addTitleStr("STAR");
     	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
 }
 
-void Star :: renderInfo_inSpace(vec2f scroll_coords)
+void Star::RenderInfo_inSpace(vec2f scroll_coords)
 { 
 	UpdateInfo();
      	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);
 }
 
-void Star :: PostDeathUniqueEvent(bool)
+void Star::PostDeathUniqueEvent(bool)
 {}
 
-    
-Star* getNewStar()
-{
-	IdData data_id;
-	data_id.id         = g_ID_GENERATOR.getNextId();
-      	data_id.type_id    = ENTITY::STAR_ID;
-        
-        LifeData data_life;
+   
+void Star::SaveUniqueStar(const std::string& root) const
+{}
 
- 	PlanetData star_data;
+void Star::LoadUniqueStar(const std::string& root)
+{}
 
-	star_data.scale         = getRandInt(ENTITY::STAR::SIZE_MIN_, ENTITY::STAR::SIZE_MAX_);  
-    	star_data.orbit_center  = vec2f(0, 0); 
-    	star_data.radius_A      = 50;
-    	star_data.radius_B      = 50; 
-    	star_data.orbit_phi_inD = 0;
-    	star_data.speed         = 1.8;
-
-    	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::STAR_ID);
-    	Star* star = new Star();
-    	
-    	star->setPlanetData(star_data);
-	star->SetTextureOb(texOb);
-	star->SetIdData(data_id);
-	star->SetLifeData(data_life);
-	star->SetMesh(g_SPHERE_MESH);	
-        	
-        star->postCreateInit();
- 
-	star->calcColor();        
-    
-    	return star;
-}
-        
-
-
+void Star::ResolveUniqueStar()
+{}

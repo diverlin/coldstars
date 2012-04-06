@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Ship : public Vehicle
 {   
     	public:
-                Ship();
+                Ship(int);
         	~Ship();
         	
         	void update_inSpace(int, bool);

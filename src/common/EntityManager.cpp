@@ -42,5 +42,18 @@ void EntityManager::RemoveEntity(BaseGameEntity* entity)
 	entity_map.erase(entity_map.find(entity->GetId()));
 } 
 
-EntityManager& GetEntityManager() { return EntityManager::Instance(); }
+void EntityManager::SaveEvent()
+{
+	for (std::map<int, BaseGameEntity*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
+	{
+		switch(iterator->second->GetTypeId())
+		{	
+			//case ENTITY::STARSYSTEM_ID: { StarSystemBuilder::Instance().Save((StarSystem*)iterator->second); break; }
+			case ENTITY::STAR_ID:       { StarBuilder::Instance().Save((Star*)iterator->second);             break; }
+			//case ENTITY::PLANET_ID:     { PlanetBuilder::Instance().Save((Planet*)iterator->second);         break; }
+		}
+	}
+}
+		
+
 

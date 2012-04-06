@@ -7,7 +7,7 @@ SaveManager& SaveManager::Instance()
 }
 
 SaveManager::SaveManager() {}	
-SaveManager::~SaveManager(){}
+SaveManager::~SaveManager() {}
 
 template <typename T>
 void SaveManager::Put(std::string key, T val)

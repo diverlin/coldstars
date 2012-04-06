@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class TextureOb
 {
     	public:
-        	// TexOb attributes
+        	// textureOb attributes
         	int type_id;
         	int subtype_id;   //# warrior/trader and so on
         	int mod_id;       // is not used for now

@@ -77,7 +77,7 @@ bool GuiMap :: update()
 
 void GuiMap :: Render()
 {
-    	TextureOb* texOb_textBg = g_TEXTURE_MANAGER.getRandomTexOb(TEXTURE::TEXT_BACKGROUND_ID);
+    	TextureOb* texOb_textBg = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::TEXT_BACKGROUND_ID);
     	Galaxy* galaxy = player->GetNpc()->GetStarSystem()->GetGalaxy();
       
         resetRenderTransformation();
@@ -91,7 +91,7 @@ void GuiMap :: Render()
     			for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
     			{
    		
-        			TextureOb* texOb_particle = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::DISTANTSTAR_ID, galaxy->STARSYSTEM_vec[si]->STAR_vec[0]->getColorId()); 
+        			TextureOb* texOb_particle = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::DISTANTSTAR_ID, galaxy->STARSYSTEM_vec[si]->STAR_vec[0]->GetColorId()); 
                                         
         			drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[si]->GetPoints().getCenter(), 30.0, -2.0);
         	       

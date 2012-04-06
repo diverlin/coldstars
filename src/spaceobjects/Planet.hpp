@@ -22,35 +22,36 @@
 //#include "planetBase.hpp"
 //#include "../common/myVector.hpp"
 
-class Planet : public PlanetBase
+class Planet : public BasePlanet
 {
 	public:
-		Planet(int _race_id, unsigned long int _population);
+		Planet(int, int, unsigned long int);
 		~Planet();
 
-		int getDockingRadius() const;
-		LandBase* GetLand() const;
+		int GetDockingRadius() const;
+		BaseLand* GetLand() const { return land; };
 
-		void update_inSpace(int, bool);
+		void Update_inSpace(int, bool);
 		void Update_inSpace_inStatic();
 
 		void renderInfo_inSpace(vec2f);
 
-		void createLand();
+		void CreateLand();
+
+		void SaveUniquePlanet(const std::string&) const;		
+		void LoadUniquePlanet(const std::string&);
+		void ResolveUniquePlanet();
 
 	private:
-		TextureOb* texOb_atmosphere;
+		TextureOb* textureOb_atmosphere;
 
-		LandBase* land;
+		BaseLand* land;
 
 		unsigned long int population;
 		void UpdateInfo();
 
 		void PostDeathUniqueEvent(bool);
 }; 
-
-
-Planet* getNewPlanet(int orbit_radius);
 
 
 #endif 

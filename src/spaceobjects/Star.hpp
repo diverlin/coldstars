@@ -17,30 +17,40 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef BASEVEHICLEBUILDER_H
-#define BASEVEHICLEBUILDER_H
+#ifndef STAR_H
+#define STAR_H
 
 
-class BaseVehicleBuilder
+class Star : public BasePlanet
 {
 	public:
-		~BaseVehicleBuilder();
+    		float texture_offset1, texture_offset2;    
+   		
+    		Star(int);
+    		~Star();
+                
+		Color4f GetColor()         const { return color; }
+		int GetColorId()           const { return textureOb->color_id; }
+		float GetBrightThreshold() const { return textureOb->brightThreshold; }
 
-        	void Equip(Vehicle*) const; 
-        	 		                
-        protected:
-		BaseVehicleBuilder() {}
-		BaseVehicleBuilder(const BaseVehicleBuilder&) {};
-		BaseVehicleBuilder& operator=(const BaseVehicleBuilder&) {};
-		
-        	void CreateKorpusGeometry(Vehicle*) const;
-        	void CreateKorpusGui(Vehicle*) const;
-        	void CreateEquipmentSlots(Vehicle*) const;
-        	void CreateDriveComplex(Vehicle*) const;
-        	void CreateWeaponsComplex(Vehicle*) const;
-        	void CreateProtectionComplex(Vehicle*) const;    
+                void CalcColor();    		
+    		void Update_inSpace(int, bool);
+    		
+    		void Render_NEW();
+    		void Render_OLD();
+
+    		void RenderInfo_inSpace(vec2f);
+    		
+    		void SaveUniqueStar(const std::string&) const;		
+		void LoadUniqueStar(const std::string&);
+		void ResolveUniqueStar();
+                
+        private:
+        	Color4f color;
+        	
+    		void UpdateInfo();
+    		void PostDeathUniqueEvent(bool);
 }; 
-
 
 
 #endif 

@@ -322,11 +322,12 @@ void Points :: update()
         	is_updated = true;
     	}
 }        
-
-
- 
-          
-
+         
+void Points::CreateCenter()
+{
+	initCenterPoint();
+	addCenterPoint();
+}
 
 
 

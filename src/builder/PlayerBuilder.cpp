@@ -39,7 +39,8 @@ void PlayerBuilder::CreateNewInternals()
       	int size_id     = SIZE_5;
       	int weapons_num = 5;
         
-        NpcBuilder::Instance().CreateNewNpc(prace_id, psubtype_id);
+        NpcBuilder::Instance().CreateNewNpc();
+        NpcBuilder::Instance().CreateNewInternals(prace_id, psubtype_id);
         Npc* pnpc = NpcBuilder::Instance().GetNpc();
                    
     	Ship* pship = VehicleBuilder::Instance().GetNewShip(prace_id, psubtype_id, size_id, weapons_num);

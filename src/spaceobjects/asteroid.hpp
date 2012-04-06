@@ -20,10 +20,10 @@
 #ifndef ASTEROID_H
 #define ASTEROID_H
 
-class Asteroid : public PlanetBase
+class Asteroid : public BasePlanet
 {
 	public:
-		Asteroid();
+		Asteroid(int);
 		~Asteroid();
 
 		int getDamage() const;

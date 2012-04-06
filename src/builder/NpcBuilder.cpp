@@ -26,25 +26,31 @@ NpcBuilder& NpcBuilder::Instance()
 NpcBuilder::~NpcBuilder()
 {}
 
-void NpcBuilder::CreateNewNpc(int race_id, int subtype_id)
+void NpcBuilder::CreateNewNpc()
 {
-        IdData data_id;
-    	data_id.id         = g_ID_GENERATOR.getNextId(); 
-    	data_id.type_id    = ENTITY::NPC_ID;
-    	data_id.subtype_id = subtype_id;
-    	
+    	int id = g_ID_GENERATOR.getNextId(); 
+	npc = new Npc(id);
+	EntityManager::Instance().RegisterEntity(npc);
+} 
+        	
+void NpcBuilder::CreateNewInternals(int race_id, int subtype_id)
+{    	
     	LifeData data_life;
     	
        	TextureOb* texOb_face  = g_TEXTURE_MANAGER.getRandomFaceTexObWithFolloingAttributes(race_id);
-	npc = new Npc(race_id);
+       	    
+       	npc->SetRaceId(race_id);
         npc->SetTextureOb(texOb_face);
-        npc->SetIdData(data_id);
-        npc->SetLifeData(data_life);        
-	
-	GetEntityManager().RegisterEntity(npc);
-} 
-        	
-void NpcBuilder::CreateNewInternals()
-{    
-
+        npc->SetSubTypeId(subtype_id);
+        npc->SetLifeData(data_life);
+        
+   
+        if (( race_id == RACE::R6_ID) or ( race_id == RACE::R7_ID) )
+        {
+                npc->SetModelAi(AIMODEL_CONQUEROR);
+        }
+        else
+        {
+       		npc->SetModelAi(AIMODEL_RANGER);        
+        }
 }

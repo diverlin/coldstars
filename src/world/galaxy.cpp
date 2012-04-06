@@ -19,10 +19,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../common/constants.hpp"
 
 Galaxy::Galaxy(int id)
-{ 
-	data_id.id         = id;
-    	data_id.type_id    = ENTITY::GALAXY_ID;
-    	data_id.subtype_id = NONE_ID;
+{
+	data_id.id = id;
+	data_id.type_id =  ENTITY::GALAXY_ID;
 }
 
 Galaxy::~Galaxy()
@@ -65,14 +64,12 @@ void Galaxy::Update(int time)
 
 void Galaxy::SaveEvent() const
 {
-	for (unsigned int i = 0; i < STARSYSTEM_vec.size(); i++)
-     	{
-		STARSYSTEM_vec[i]->SaveEvent(); 
-     	}
+	SaveManager::Instance().Put("galaxy.data_id.id", data_id.id);
+	//for (unsigned int i = 0; i < STARSYSTEM_vec.size(); i++)
+     	//{
+	//	STARSYSTEM_vec.size()->SaveEvent();
+     	//}
 }
-
-void Galaxy::LoadEvent() const
-{}
 
 
 
