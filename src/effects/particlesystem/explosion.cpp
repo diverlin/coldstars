@@ -116,7 +116,7 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
                 
                 explosion->createParticles();
                 
-		_starsystem->AddToSpace(explosion);
+		_starsystem->Add(explosion);
 	}
     	else    
 	{
@@ -134,7 +134,7 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
                 
                 explosion->createParticles();
                 
-		_starsystem->AddToSpace(explosion);
+		_starsystem->Add(explosion);
                 }
 
                 {
@@ -151,7 +151,7 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
                 
                 explosion->createParticles();
                 
-		_starsystem->AddToSpace(explosion);
+		_starsystem->Add(explosion);
                 }
         
                 {
@@ -168,7 +168,7 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
                 
                 explosion->createParticles();
                 
-		_starsystem->AddToSpace(explosion);
+		_starsystem->Add(explosion);
                 }
 	} 	       
  

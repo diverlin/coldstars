@@ -74,21 +74,9 @@ class Observation
       		Observation(Npc*);
      		~Observation();
 
-     		std::vector<StarSystemObservationData> visible_STARSYSTEM_vec; 
-     		                                
-     		std::vector<AsteroidObservationData>  visible_ASTEROID_vec; 		
      		std::vector<MineralObservationData>   visible_MINERAL_vec;                
      		std::vector<ContainerObservationData> visible_CONTAINER_vec;
-
-     		std::vector<NpcObservationData> visible_NPC_vec;                
-     		std::vector<NpcObservationData> visible_NPC_RANGER_vec;
-     		std::vector<NpcObservationData> visible_NPC_WARRIOR_vec;
-     		std::vector<NpcObservationData> visible_NPC_TRADER_vec;
-     		std::vector<NpcObservationData> visible_NPC_PIRAT_vec;
-     		std::vector<NpcObservationData> visible_NPC_DIPLOMAT_vec;
-
-     		VisionStatus see;
-
+     		
  		void observeAll_inSpace_inStatic();
           	
           	void findEchievableStarSystems_inStatic(Galaxy*);
@@ -99,11 +87,6 @@ class Observation
           	void findVisibleMinerals_inSpace_inStatic();
           	void findVisibleContainers_inSpace_inStatic();
           	void findVisibleNpcs_inSpace_inStatic();
-               	void findVisibleRangerNpcs_inSpace_inStatic();
-               	void findVisibleWarriorNpcs_inSpace_inStatic();
-               	void findVisibleTraderNpcs_inSpace_inStatic();
-               	void findVisiblePiratNpcs_inSpace_inStatic();
-               	void findVisibleDiplomatNpcs_inSpace_inStatic();
 
                 template <typename OBSERVED_DATA_TYPE>
 		void sort(std::vector<OBSERVED_DATA_TYPE>*);
@@ -113,6 +96,21 @@ class Observation
                	
 	private:
                 Npc* npc_owner;	
+
+     		std::vector<StarSystemObservationData> visible_STARSYSTEM_vec; 
+     		                                
+     		std::vector<AsteroidObservationData>  visible_ASTEROID_vec; 		
+
+     		std::vector<NpcObservationData> visible_NPC_vec;                
+     		std::vector<NpcObservationData> visible_NPC_RANGER_vec;
+     		std::vector<NpcObservationData> visible_NPC_WARRIOR_vec;
+     		std::vector<NpcObservationData> visible_NPC_TRADER_vec;
+     		std::vector<NpcObservationData> visible_NPC_PIRAT_vec;
+     		std::vector<NpcObservationData> visible_NPC_DIPLOMAT_vec;
+
+     		VisionStatus see;
+     		
+     		friend class Npc;
 };
 
 #endif 

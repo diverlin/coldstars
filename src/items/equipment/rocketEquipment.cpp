@@ -133,7 +133,7 @@ void RocketEquipment :: fireEvent()
 {
 	int num = 0;
     	RocketBullet* rocket1 = VehicleBuilder::Instance().GetNewRocket(data_bullet, slot, 0.0f);
-    	slot->GetOwnerVehicle()->GetStarSystem()->AddToSpace(rocket1);
+    	slot->GetOwnerVehicle()->GetStarSystem()->Add(rocket1);
     	num++;
 
     	//RocketBullet* rocket2 = getNewRocketBullet(data_bullet, slot, +2);

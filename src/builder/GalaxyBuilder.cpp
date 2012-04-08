@@ -26,10 +26,14 @@ GalaxyBuilder& GalaxyBuilder::Instance()
 GalaxyBuilder::~GalaxyBuilder()
 {}
 
-void GalaxyBuilder::CreateNewGalaxy()
+void GalaxyBuilder::CreateNewGalaxy(int id)
 {
-	int id = g_ID_GENERATOR.getNextId();
+	if (id == NONE_ID)
+	{
+		id = g_ID_GENERATOR.getNextId();
+	}
         galaxy = new Galaxy(id);
+        EntityManager::Instance().RegisterEntity(galaxy);
 } 
         	
 void GalaxyBuilder::CreateNewInternals()
@@ -38,7 +42,7 @@ void GalaxyBuilder::CreateNewInternals()
     	for(int i = 0; i < starsystem_num; i++)
     	{  
                 StarSystemBuilder::Instance().CreateNewStarSystem();
-                StarSystemBuilder::Instance().CreateNewInternals();
+                StarSystemBuilder::Instance().CreateNewInternals2();
                 
         	StarSystem* starsystem = StarSystemBuilder::Instance().GetStarSystem();
         	starsystem->SetGalaxy(galaxy);
@@ -46,9 +50,18 @@ void GalaxyBuilder::CreateNewInternals()
  	}
 }
 
-void GalaxyBuilder::LoadGalaxy(const std::string& root)
+void GalaxyBuilder::Save(Galaxy* galaxy) const
 {
-	int id = SaveManager::Instance().Get<int>(root+"data_id.id");
-	
+	std::string root = "galaxy." + int2str(galaxy->GetId())+".";
+	//galaxy->SaveDataUniqueBaseGameEntity(root);
+	galaxy->SaveDataUniqueGalaxy(root);
 }
+
+void GalaxyBuilder::LoadPass0(const boost::property_tree::ptree&)
+{}
+
+void GalaxyBuilder::LoadPass1()
+{}
+                
+
 

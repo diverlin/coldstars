@@ -32,7 +32,7 @@ void PlanetBuilder::CreateNewPlanet(int id)
 	{
 		id = g_ID_GENERATOR.getNextId();
 	}
-        planet = new Planet(id, RACE::R0_ID, 1000000);
+        planet = new Planet(id);
         EntityManager::Instance().RegisterEntity(planet);
 } 
         	
@@ -53,9 +53,14 @@ void PlanetBuilder::CreateNewInternals(float orbit_radius)
         TextureOb* textureOb 	        = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::PLANET_ID); 
         TextureOb* textureOb_atmosphere = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ATMOSPHERE_ID); 
         
-        unsigned long int population = getRandInt(1000, 4000);
-        
         planet->SetPlanetData(planet_data);
+
+        //unsigned long int population = getRandInt(1000, 4000);
+	unsigned long int population = 0;
+	BaseLand* land;
+	if (population > 0) { land = new Kosmoport(RACE::R0_ID); }
+        else                { land = new NatureLand(); }
+	planet->SetLand(land);
 
 	planet->SetTextureOb(textureOb);
 	planet->SetSubTypeId(ENTITY::KOSMOPORT_ID);
@@ -63,31 +68,27 @@ void PlanetBuilder::CreateNewInternals(float orbit_radius)
 	planet->SetMesh(g_SPHERE_MESH);	
 
 	planet->PostCreateInit();
-	planet->CreateLand();
 }
 
 void PlanetBuilder::Save(Planet* planet) const
 {
 	std::string root = "planet." + int2str(planet->GetId())+".";
-	planet->SaveUniqueBaseGameEntity(root);
-	planet->SaveUniqueBasePlanet(root);
-	planet->SaveUniquePlanet(root);
+	planet->SaveDataUniqueBaseGameEntity(root);
+	planet->SaveDataUniqueBasePlanet(root);
+	planet->SaveDataUniquePlanet(root);
 }
 
-void PlanetBuilder::LoadPass0(const std::string& root)
+void PlanetBuilder::LoadPass0(const boost::property_tree::ptree& ptree)
 {
-	int id = SaveManager::Instance().Get<int>(root+"data_id.id");	
-	this->CreateNewPlanet(id);
-	
-	planet->LoadUniqueBaseGameEntity(root);
-	planet->LoadUniqueBasePlanet(root);
-	planet->LoadUniquePlanet(root);
+	planet->LoadDataUniqueBaseGameEntity(ptree);
+	planet->LoadDataUniqueBasePlanet(ptree);
+	planet->LoadDataUniquePlanet(ptree);
 }
 
 void PlanetBuilder::LoadPass1()
 {
-	planet->ResolveUniqueBaseGameEntity();
-	planet->ResolveUniqueBasePlanet();
-	planet->ResolveUniquePlanet();
+	planet->ResolveDataUniqueBaseGameEntity();
+	planet->ResolveDataUniqueBasePlanet();
+	planet->ResolveDataUniquePlanet();
 }
 

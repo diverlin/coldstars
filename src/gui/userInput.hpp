@@ -26,10 +26,10 @@ class UserInput
 	       	UserInput(Player*);
         	~UserInput();
 
-		bool getNextTurnReady() const;
+		bool GetNextTurnReady() const;
 
-		void Update_inSpace();
-		void update_inKosmoport();
+		void UpdateInSpace();
+		void UpdateInKosmoport();
 
 	private:
 		Player* player;
@@ -44,9 +44,9 @@ class UserInput
         	
         	bool next_turn_ready;
         	
-        	void getSimpleInputs();
-        	void getRealTimeInputs();
-        	void scrollCamera();
+        	void GetSimpleInputs();
+        	void GetRealTimeInputs();
+        	void ScrollCamera();
 	
 };
 

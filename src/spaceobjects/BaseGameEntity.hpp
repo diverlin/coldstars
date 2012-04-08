@@ -22,7 +22,7 @@
 //#include "../world/starsystem.hpp"
 //#include "../common/gameStruct.hpp"
 
-struct PostLoaUnresolvedData
+struct UnresolvedDataUniqueBaseGameEntity
 {
 	std::string mesh_path;
 	std::string textureOb_path;
@@ -73,15 +73,15 @@ class BaseGameEntity
 
 		void Hit(int, bool);
 
-		void SaveUniqueBaseGameEntity(const std::string&) const;
-		void LoadUniqueBaseGameEntity(const std::string&);
-		void ResolveUniqueBaseGameEntity();
+		void SaveDataUniqueBaseGameEntity(const std::string&) const;
+		void LoadDataUniqueBaseGameEntity(const boost::property_tree::ptree&);
+		void ResolveDataUniqueBaseGameEntity();
 				
 	protected:
 		IdData data_id;
 		LifeData data_life;
 		
-		PostLoaUnresolvedData data_unresolved;
+		UnresolvedDataUniqueBaseGameEntity data_unresolved_bge;
 		
 		vec3f angle, d_angle;
 

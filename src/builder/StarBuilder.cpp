@@ -63,25 +63,15 @@ void StarBuilder::CreateNewInternals()
 void StarBuilder::Save(Star* star) const
 {
 	std::string root = "star." + int2str(star->GetId())+".";
-	star->SaveUniqueBaseGameEntity(root);
-	star->SaveUniqueBasePlanet(root);
-	star->SaveUniqueStar(root);
+	star->SaveDataUniqueBaseGameEntity(root);
+	star->SaveDataUniqueBasePlanet(root);
+	star->SaveDataUniqueStar(root);
 }
 
-void StarBuilder::LoadPass0(const std::string& root)
+void StarBuilder::Load(const boost::property_tree::ptree& ptree)
 {
-	int id = SaveManager::Instance().Get<int>(root+"data_id.id");	
-	this->CreateNewStar(id);
-	
-	star->LoadUniqueBaseGameEntity(root);
-	star->LoadUniqueBasePlanet(root);
-	star->LoadUniqueStar(root);
-}
-
-void StarBuilder::LoadPass1()
-{
-	star->ResolveUniqueBaseGameEntity();
-	star->ResolveUniqueBasePlanet();
-	star->ResolveUniqueStar();
+	star->LoadDataUniqueBaseGameEntity(ptree);
+	star->LoadDataUniqueBasePlanet(ptree);
+	star->LoadDataUniqueStar(ptree);
 }
 

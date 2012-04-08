@@ -25,9 +25,11 @@
 class Planet : public BasePlanet
 {
 	public:
-		Planet(int, int, unsigned long int);
+		Planet(int);
 		~Planet();
 
+		void SetLand(BaseLand* land)       { this->land = land; };
+		void SetPopulation(unsigned long int population) { this->population = population; };
 		int GetDockingRadius() const;
 		BaseLand* GetLand() const { return land; };
 
@@ -36,11 +38,9 @@ class Planet : public BasePlanet
 
 		void renderInfo_inSpace(vec2f);
 
-		void CreateLand();
-
-		void SaveUniquePlanet(const std::string&) const;		
-		void LoadUniquePlanet(const std::string&);
-		void ResolveUniquePlanet();
+		void SaveDataUniquePlanet(const std::string&) const;		
+		void LoadDataUniquePlanet(const boost::property_tree::ptree&);
+		void ResolveDataUniquePlanet();
 
 	private:
 		TextureOb* textureOb_atmosphere;

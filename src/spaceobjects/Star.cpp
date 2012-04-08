@@ -101,11 +101,11 @@ void Star::PostDeathUniqueEvent(bool)
 {}
 
    
-void Star::SaveUniqueStar(const std::string& root) const
+void Star::SaveDataUniqueStar(const std::string& root) const
 {}
 
-void Star::LoadUniqueStar(const std::string& root)
+void Star::LoadDataUniqueStar(const boost::property_tree::ptree& ptree)
 {}
 
-void Star::ResolveUniqueStar()
+void Star::ResolveDataUniqueStar()
 {}

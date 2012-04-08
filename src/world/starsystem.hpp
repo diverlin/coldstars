@@ -39,6 +39,12 @@
 //#include "../gui/guiVehicle.hpp"
 
 
+struct UnresolvedDataUniqueStarSystem
+{
+	int galaxy_id;
+};
+
+
 class StarSystem : public BaseGameEntity
 {
 	public:
@@ -58,25 +64,25 @@ class StarSystem : public BaseGameEntity
 		//// TRANSITION
 		void AddToHyperJumpQueue(Vehicle*);
 
-		void AddToSpace(Vehicle*, vec2f, float, BaseGameEntity*);
+		void Add(Vehicle*, vec2f, float, BaseGameEntity*);
 						
-		void AddToSpace(Star*);
-		void AddToSpace(Planet*, BaseGameEntity*);
-		void AddToSpace(Asteroid*);
-		void AddToSpace(Mineral*, vec2f);
-		void AddToSpace(Container*, vec2f);
-		void AddToSpace(RocketBullet*);
-		void AddToSpace(BlackHole*, vec2f);
+		void Add(Star*);
+		void Add(Planet*, BaseGameEntity*);
+		void Add(Asteroid*);
+		void Add(Mineral*, vec2f);
+		void Add(Container*, vec2f);
+		void Add(RocketBullet*);
+		void Add(BlackHole*, vec2f);
 
 		// effects
-		void AddToSpace(BaseParticleSystem*);
-		void AddToSpace(ShockWaveEffect*);
-		void AddToSpace(LazerTraceEffect*);
+		void Add(BaseParticleSystem*);
+		void Add(ShockWaveEffect*);
+		void Add(LazerTraceEffect*);
 
-		void AddToSpace(DistantNebulaBgEffect*);
-		void AddToSpace(DistantStarBgEffect*);
+		void Add(DistantNebulaBgEffect*);
+		void Add(DistantStarBgEffect*);
 		
-		void AddToSpace(VerticalFlowText*);
+		void Add(VerticalFlowText*);
 		//
 
 		void AddToRemoveFromOuterSpaceQueue(Mineral*);
@@ -98,9 +104,9 @@ class StarSystem : public BaseGameEntity
                 void DrawOrbits();
                 void DrawPath();
                 
-		void SaveUniqueStarSystem(const std::string&) const;
-		void LoadUniqueStarSystem(const std::string&);
-		void ResolveUniqueStarSystem();
+		void SaveDataUniqueStarSystem(const std::string&) const;
+		void LoadDataUniqueStarSystem(const boost::property_tree::ptree&);
+		void ResolveDataUniqueStarSystem();
 				                                           		    		    		
 		// poor
 		Planet* GetClosestPlanet(vec2f);
@@ -133,16 +139,9 @@ class StarSystem : public BaseGameEntity
 		std::vector<SpaceStation*> SPACESTATION_vec;
 		std::vector<Satellite*>    SATELLITE_vec;
 
-		std::vector<Ship*> SHIP_inSPACE_vec;
-		std::vector<Npc*>  NPC_inSPACE_vec;
-		// these 5 list below is needed for AI
-		std::vector<Npc*>  NPC_RANGER_inSPACE_vec;  
-		std::vector<Npc*>  NPC_WARRIOR_inSPACE_vec;
-		std::vector<Npc*>  NPC_TRADER_inSPACE_vec;
-		std::vector<Npc*>  NPC_PIRAT_inSPACE_vec;
-		std::vector<Npc*>  NPC_DIPLOMAT_inSPACE_vec;
-		//  
-		
+		std::vector<Ship*> SHIP_vec;
+		std::vector<Npc*>  NPC_vec;
+	
 		
     	    	// ENTITY VECTORS
                 std::vector<Vehicle*> appear_VEHICLE_queue;
@@ -167,7 +166,9 @@ class StarSystem : public BaseGameEntity
     		GarbageEntities garbage_entities;
     		GarbageEffects  garbage_effects;
     		            
-    		void AddToSpace(Npc*);
+    		UnresolvedDataUniqueStarSystem data_unresolved_ss;
+    		            
+    		void Add(Npc*);
     		            		    
                 void PostHyperJumpEvent();
                 void LaunchingEvent() const;

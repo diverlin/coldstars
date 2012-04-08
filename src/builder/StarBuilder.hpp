@@ -32,8 +32,7 @@ class StarBuilder
                 Star* GetStar() const { return star; };
                 
                 void Save(Star*) const;
-                void LoadPass0(const std::string&);
-                void LoadPass1();
+                void Load(const boost::property_tree::ptree&);
         	 		                
         private:
                 Star* star;
