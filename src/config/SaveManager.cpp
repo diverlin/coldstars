@@ -31,3 +31,9 @@ void SaveManager::LoadFile(const std::string& filename)
 {
 	read_info(filename, ptree);
 }
+
+
+void SaveManager::SaveDebug(const std::string& filename, const boost::property_tree::ptree& lptree) const
+{		
+	write_info(filename, lptree);
+}

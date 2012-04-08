@@ -20,7 +20,6 @@
 #include "include.hpp"
 #include "iostream"
 
-
 int main()
 {       
 	init();  
@@ -39,7 +38,7 @@ int main()
 	float angle = 0;  
 
 	StarSystem* starsystem = galaxy->GetRandomStarSystem();
-	starsystem->AddToSpace(player->GetNpc()->GetVehicle(), center, angle, NULL);
+	starsystem->Add(player->GetNpc()->GetVehicle(), center, angle, NULL);
 	
 	//player->GetScreen()->resize(Config::Instance().SCREEN_WIDTH*2, Config::Instance().SCREEN_HEIGHT);
 

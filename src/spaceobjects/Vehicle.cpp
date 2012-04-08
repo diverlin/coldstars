@@ -216,7 +216,7 @@ void Vehicle::LaunchingEvent()
 
      	if (drive_complex->getTarget()->GetTypeId() == ENTITY::PLANET_ID)
      	{
-     		starsystem->AddToSpace(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
+     		starsystem->Add(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
 
      		((Planet*)drive_complex->getTarget())->GetLand()->Remove(this);
      		((Planet*)drive_complex->getTarget())->GetLand()->Remove(owner_npc);
@@ -224,7 +224,7 @@ void Vehicle::LaunchingEvent()
 	
      	if (drive_complex->getTarget()->GetTypeId() == ENTITY::SPACESTATION_ID)
      	{
-     		starsystem->AddToSpace(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
+     		starsystem->Add(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
 
      		((SpaceStation*)drive_complex->getTarget())->GetLand()->Remove(this);
      		((SpaceStation*)drive_complex->getTarget())->GetLand()->Remove(owner_npc);
@@ -256,8 +256,8 @@ void Vehicle::Hit(int _damage, bool show_effect)
        		}       	
        		// improove
        		Color4i color;  	       		
-       		VerticalFlowText* _text = new VerticalFlowText(int2str(_damage), points.getCenter(), color, collision_radius);
-       		starsystem->AddToSpace(_text); 
+       		VerticalFlowText* text = new VerticalFlowText(int2str(_damage), points.getCenter(), color, collision_radius);
+       		starsystem->Add(text); 
        	}
 }
 

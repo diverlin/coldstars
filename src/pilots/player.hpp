@@ -44,7 +44,7 @@ class Player
 		bool GetShowRadarRange()   const { return show_radar_range; }
 		bool GetShowGrappleRange() const { return show_grapple_range; }          	 
    
-		bool GetNextTurnReady() const { return USERINPUT->getNextTurnReady(); }   
+		bool GetNextTurnReady() const { return USERINPUT->GetNextTurnReady(); }   
 
 
      		void BindNpc(Npc*);
@@ -120,10 +120,10 @@ class Player
     			void RenderEntities_OLD();
     		
     		
-    		void InOuterspace(GameTimer*);
-    		void InKosmoport();
+    		void SessionInSpace(GameTimer*);
+    		void SessionInKosmoport();
     		
-    		void MouseInteraction_inOuterSpace();
+    		void MouseInteraction_inSpace();
     		void Update_global(); 
     		
     		bool IsObjectOnScreen(const Points&) const;

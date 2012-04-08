@@ -534,7 +534,7 @@ void Player::Render(bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 	}
 } 
 
-void Player::MouseInteraction_inOuterSpace() // all large objects must be cheked by last
+void Player::MouseInteraction_inSpace() // all large objects must be cheked by last
 {   
     	bool cursor_has_target = false;   
  
@@ -947,9 +947,9 @@ bool Player::IsObjectOnScreen(const Points& points) const
 }
 
 
-void Player :: InOuterspace(GameTimer* TIMER)
+void Player::SessionInSpace(GameTimer* TIMER)
 {
-	USERINPUT->Update_inSpace();
+	USERINPUT->UpdateInSpace();
 
 	cursor->updateMousePos();
 
@@ -960,7 +960,7 @@ void Player :: InOuterspace(GameTimer* TIMER)
 	{
 		if ( (npc->GetScanTarget() == NULL) && (GetWorldMapShowFlag() == false) )
 		{
-			MouseInteraction_inOuterSpace();  // improove to exclude all render calls
+			MouseInteraction_inSpace();  // improove to exclude all render calls
 		}
 	}
 
@@ -983,9 +983,9 @@ void Player :: InOuterspace(GameTimer* TIMER)
 }
 
 
-void Player::InKosmoport()
+void Player::SessionInKosmoport()
 {
-	USERINPUT->update_inKosmoport();
+	USERINPUT->UpdateInKosmoport();
          
         if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::ANGAR_ID)
         {
@@ -1043,13 +1043,13 @@ void Player::RunSession(GameTimer* TIMER)
 
        	if (npc->GetPlaceTypeId() == ENTITY::SPACE_ID)
        	{  
-        	this->InOuterspace(TIMER);
+        	this->SessionInSpace(TIMER);
        	}
 
 		
        	if (npc->GetPlaceTypeId() == ENTITY::KOSMOPORT_ID)
        	{
-        	this->InKosmoport();
+        	this->SessionInKosmoport();
        	} 
        	
        	screen->update();           	

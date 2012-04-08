@@ -95,7 +95,7 @@ void BasePlanet::Render_OLD()
 }
 
 
-void BasePlanet::SaveUniqueBasePlanet(const std::string& root) const
+void BasePlanet::SaveDataUniqueBasePlanet(const std::string& root) const
 {
 	SaveManager::Instance().Put(root+"orbit.it", orbit->GetIt());
 	
@@ -108,18 +108,18 @@ void BasePlanet::SaveUniqueBasePlanet(const std::string& root) const
 	SaveManager::Instance().Put(root+"data.speed", data_planet.speed);
 }
 
-void BasePlanet::LoadUniqueBasePlanet(const std::string& root)
+void BasePlanet::LoadDataUniqueBasePlanet(const boost::property_tree::ptree& ptree)
 {
-	data_planet.scale = SaveManager::Instance().Get<int>(root+"data.scale");
-	data_planet.orbit_center.x = SaveManager::Instance().Get<float>(root+"data.orbit_center.x");	
-	data_planet.orbit_center.y = SaveManager::Instance().Get<float>(root+"data.orbit_center.y");	
-	data_planet.radius_A = SaveManager::Instance().Get<float>(root+"data.radius_A");	
-	data_planet.radius_B = SaveManager::Instance().Get<float>(root+"data.radius_B");
-	data_planet.orbit_phi_inD = SaveManager::Instance().Get<float>(root+"data.orbit_phi_inD");		
-	data_planet.speed = SaveManager::Instance().Get<float>(root+"data.speed");
+	data_planet.scale = ptree.get<int>("data.scale");
+	data_planet.orbit_center.x = ptree.get<float>("data.orbit_center.x");	
+	data_planet.orbit_center.y = ptree.get<float>("data.orbit_center.y");	
+	data_planet.radius_A = ptree.get<float>("data.radius_A");	
+	data_planet.radius_B = ptree.get<float>("data.radius_B");
+	data_planet.orbit_phi_inD = ptree.get<float>("data.orbit_phi_inD");		
+	data_planet.speed = ptree.get<float>("data.speed");
 }
 
-void BasePlanet::ResolveUniqueBasePlanet()
+void BasePlanet::ResolveDataUniqueBasePlanet()
 {}
 
 

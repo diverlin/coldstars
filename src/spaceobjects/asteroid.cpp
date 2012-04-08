@@ -57,8 +57,8 @@ void Asteroid :: PostDeathUniqueEvent(bool show_effect)
 {
        	for (int i = 0; i<3; i++)
 	{
-		Mineral* _mineral = getNewMineral();
-		starsystem->AddToSpace(_mineral, points.getCenter());			
+		Mineral* mineral = getNewMineral();
+		starsystem->Add(mineral, points.getCenter());			
    	}
    	
    	if (show_effect == true)

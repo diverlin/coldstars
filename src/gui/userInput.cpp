@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-UserInput :: UserInput(Player* player)
+UserInput::UserInput(Player* player)
 {
 	this->player = player;
 	
@@ -32,28 +32,25 @@ UserInput :: UserInput(Player* player)
 	next_turn_ready = false;
 }
 
-
-
-UserInput :: ~UserInput()
+UserInput::~UserInput()
 {}
 
-
-bool UserInput :: getNextTurnReady() const { return next_turn_ready; }
+bool UserInput::GetNextTurnReady() const { return next_turn_ready; }
 		
-void UserInput :: Update_inSpace()
+void UserInput::UpdateInSpace()
 {
-	getSimpleInputs();
-        getRealTimeInputs();
-        scrollCamera();
+	GetSimpleInputs();
+        GetRealTimeInputs();
+        ScrollCamera();
 }
 
-void UserInput :: update_inKosmoport()
+void UserInput::UpdateInKosmoport()
 {
-	getSimpleInputs();
-        getRealTimeInputs();
+	GetSimpleInputs();
+        GetRealTimeInputs();
 }
 
-void UserInput :: getSimpleInputs()
+void UserInput::GetSimpleInputs()
 {
    	player->GetCursor()->setLeftMouseButton(false);
    	player->GetCursor()->setRightMouseButton(false);
@@ -255,29 +252,24 @@ void UserInput :: getSimpleInputs()
 				}
 				
 				case sf::Key::F5:
-				{
-					//GalaxyBuilder::Instance().SaveEvent(player->GetNpc()->GetStarSystem()->GetGalaxy());
+				{					
 					EntityManager::Instance().SaveEvent();
 					break;
 				}
 				
 				case sf::Key::F9:
 				{
-                                        //delete player->GetNpc()->GetStarSystem()->GetGalaxy();
-                                        //delete player;
+					int galaxy_id = player->GetNpc()->GetStarSystem()->GetGalaxy()->GetId();
+					EntityManager::Instance().LoadPass0();
+					EntityManager::Instance().LoadPass1();
+					
+					vec2f center(400, 400);
+					float angle = 0;  
 
-                                        SaveManager::Instance().LoadFile("save.info");
-                                                                                
-                                        GalaxyBuilder::Instance().CreateNewGalaxy();
-                                        GalaxyBuilder::Instance().LoadGalaxy("galaxy.");
-                                        Galaxy* galaxy = GalaxyBuilder::Instance().GetGalaxy();
-                                        
-                                        //PlayerBuilder::Instance().CreateNewPlayer();
-                                        //player = PlayerBuilder::Instance().GetPlayer();
-                                        
-
-                                        //player->LoadEvent();                                        
-					//player->GetNpc()->GetStarSystem()->GetGalaxy()->LoadEvent();
+					Galaxy* galaxy = (Galaxy*)EntityManager::Instance().GetEntityById(galaxy_id);
+					StarSystem* starsystem = galaxy->GetRandomStarSystem();
+					starsystem->Add(player->GetNpc()->GetVehicle(), center, angle, NULL);
+			
 					break;
 				}
 				
@@ -307,7 +299,7 @@ void UserInput :: getSimpleInputs()
 	 } // endwhile
 }
 
-void UserInput :: getRealTimeInputs()
+void UserInput::GetRealTimeInputs()
 {       
         const sf::Input& Input = Gui::GetWindow().GetInput();
               
@@ -319,8 +311,7 @@ void UserInput :: getRealTimeInputs()
         keyboardDownPressed  = Input.IsKeyDown(sf::Key::Down);  
 }
 
-
-void UserInput :: scrollCamera()
+void UserInput::ScrollCamera()
 {
 	int SCROLL_VELOCITY_STEP = Config::Instance().SCROLL_VELOCITY_STEP;
 	int SCROLL_VELOCITY_MAX = Config::Instance().SCROLL_VELOCITY_MAX;	

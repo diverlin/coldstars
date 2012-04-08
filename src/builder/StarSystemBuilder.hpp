@@ -29,12 +29,12 @@ class StarSystemBuilder
 
         	void CreateNewStarSystem(int id = NONE_ID); 
                 void CreateNewInternals();
+                void CreateNewInternals2();
                 StarSystem* GetStarSystem() const { return starsystem; };
                 
                 void Save(StarSystem*) const;
-                void LoadPass0(const std::string&);
-                void LoadPass1();
-                        	 		                
+                void Load(const boost::property_tree::ptree&);
+                       	 		                
         private:
                 StarSystem* starsystem;
                 

@@ -17,13 +17,13 @@
 */
 
 
-Planet::Planet(int id, int race_id, unsigned long int _population)
+Planet::Planet(int id)
 {    
 	data_id.id = id;
 	data_id.type_id = ENTITY::PLANET_ID;
 	
 	//textureOb_atmosphere = _textureOb_atmoshere;
-	population  = _population;      	
+	population  = 0;      	
 	land = NULL;
 }
 
@@ -33,19 +33,8 @@ Planet::~Planet()
 	delete land;
 }
 
-int Planet::GetDockingRadius() const              { return data_planet.scale; }
+int Planet::GetDockingRadius() const { return data_planet.scale; }
 
-void Planet::CreateLand()
-{
-      	if (population > 0) 
-      	{ 
-      		land = new Kosmoport(RACE::R0_ID); 
-      	}
-        else
-        { 
-        	land = new NatureLand();
-        }
-}              
 
 void Planet::Update_inSpace(int time, bool show_effect)
 {      
@@ -85,7 +74,7 @@ void Planet::renderInfo_inSpace(vec2f scroll_coords)
 void Planet::PostDeathUniqueEvent(bool)
 {}
 
-void Planet::SaveUniquePlanet(const std::string& root) const
+void Planet::SaveDataUniquePlanet(const std::string& root) const
 {
 	//SaveManager::Instance().Put(root+"race_id", race_id);
 	SaveManager::Instance().Put(root+"population", population);
@@ -93,12 +82,12 @@ void Planet::SaveUniquePlanet(const std::string& root) const
 	//else      SaveManager::Instance().Put(root+"land_id", -1);
 }
 
-void Planet::LoadUniquePlanet(const std::string& root)
+void Planet::LoadDataUniquePlanet(const boost::property_tree::ptree& ptree)
 {
 	//race_id = SaveManager::Instance().Get<int>(root+"race_id");
-	population = SaveManager::Instance().Get<int>(root+"population");
+	population = ptree.get<int>("population");
 }
 
-void Planet::ResolveUniquePlanet()
+void Planet::ResolveDataUniquePlanet()
 {}
 		

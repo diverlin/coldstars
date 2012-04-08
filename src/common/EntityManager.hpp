@@ -39,6 +39,8 @@ class EntityManager
 		void RemoveEntity(BaseGameEntity*);
 		
 		void SaveEvent();
+		void LoadPass0();
+		void LoadPass1();
 
 	private:
 		EntityManager(){}
@@ -46,6 +48,8 @@ class EntityManager
 		EntityManager& operator=(const EntityManager&);
 
 		std::map<int, BaseGameEntity*> entity_map;
+		
+		void Clear();
 };
 
 

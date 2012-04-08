@@ -40,9 +40,9 @@ class BasePlanet : public BaseGameEntity
 		void Render_NEW(vec2f);
 		void Render_OLD();
 
-		void SaveUniqueBasePlanet(const std::string&) const;
-		void LoadUniqueBasePlanet(const std::string&);
-		void ResolveUniqueBasePlanet();
+		void SaveDataUniqueBasePlanet(const std::string&) const;
+		void LoadDataUniqueBasePlanet(const boost::property_tree::ptree&);
+		void ResolveDataUniqueBasePlanet();
 				
 	protected:
 		PlanetData data_planet;   

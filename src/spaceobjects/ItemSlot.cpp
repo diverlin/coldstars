@@ -160,12 +160,12 @@ bool ItemSlot::CheckInteraction(int _x, int _y)
 
 void ItemSlot::DropItemToSpace()
 {
-	Container* _container = getNewContainer();
-	_container->getItemSlot()->SwapItemWith(this);
+	Container* container = getNewContainer();
+	container->getItemSlot()->SwapItemWith(this);
 	
 	// update mass
 
-	owner_vehicle->GetStarSystem()->AddToSpace(_container, owner_vehicle->GetPoints().getCenter());	
+	owner_vehicle->GetStarSystem()->Add(container, owner_vehicle->GetPoints().getCenter());	
 
 	//printf("container was created in ss_id = %i, pos = %f, %f\n", _starsystem->GetId(), _container->getPoints()->getCenter().x, _container->getPoints()->getCenter().y );
 }

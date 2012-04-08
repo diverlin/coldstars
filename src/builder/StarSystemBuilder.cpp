@@ -35,7 +35,6 @@ void StarSystemBuilder::CreateNewStarSystem(int id)
         starsystem = new StarSystem(id);
         starsystem->GetPoints().CreateCenter();
         EntityManager::Instance().RegisterEntity(starsystem);
-        
 } 
         	
 void StarSystemBuilder::CreateNewInternals()
@@ -56,7 +55,7 @@ void StarSystemBuilder::CreateNewInternals()
         for (int i = 0; i < 10; i++)
         {
         	BlackHole* bh = getNewBlackHole();
-        	starsystem->AddToSpace(bh, vec2f((float)getRandInt(0, 3000), (float)getRandInt(0, 3000)));
+        	starsystem->Add(bh, vec2f((float)getRandInt(0, 3000), (float)getRandInt(0, 3000)));
         }
 
         if (getRandBool())
@@ -75,18 +74,31 @@ void StarSystemBuilder::CreateNewInternals()
         this->CreateSpaceStations(3);
 }
 
+  	
+void StarSystemBuilder::CreateNewInternals2()
+{
+        vec2f center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH -  2*GUI::MAP::BORDER_X), 
+        	     getRandInt(GUI::MAP::BORDER_Y, Config::Instance().SCREEN_HEIGHT - 2*GUI::MAP::BORDER_Y) );			 
+        starsystem->GetPoints().setCenter(center);
+
+        this->CreateStar();
+          
+        int planet_num = getRandInt(ENTITY::STARSYSTEM::PLANET_MIN, ENTITY::STARSYSTEM::PLANET_MAX);
+        this->CreatePlanets(planet_num);
+}
+
 void StarSystemBuilder::CreateBackground(int distNebula_num, int distStar_num, int color_id)
 {
         for(int i = 0; i < distNebula_num; i++)
         { 
 		DistantNebulaBgEffect* dn = createDistantNebula(color_id);
-                starsystem->AddToSpace(dn);
+                starsystem->Add(dn);
         } 
 
         for(int i = 0; i < distStar_num; i++)
         { 
 		DistantStarBgEffect* ds = getNewDistantStarBgEffect();
-                starsystem->AddToSpace(ds);
+                starsystem->Add(ds);
         } 
 }
                         	                
@@ -95,7 +107,7 @@ void StarSystemBuilder::CreateStar()
 	StarBuilder::Instance().CreateNewStar();
 	StarBuilder::Instance().CreateNewInternals();	
         Star* star = StarBuilder::Instance().GetStar();    
-        starsystem->AddToSpace(star);
+        starsystem->Add(star);
 }
 
 void StarSystemBuilder::CreatePlanets(int planet_per_system)
@@ -116,12 +128,12 @@ void StarSystemBuilder::CreatePlanets(int planet_per_system)
                 PlanetBuilder::Instance().CreateNewInternals(orbit_radius);
                 Planet* planet = PlanetBuilder::Instance().GetPlanet();
 
-                starsystem->AddToSpace(planet, starsystem->GetStar());
+                starsystem->Add(planet, starsystem->GetStar());
                 
                 Satellite* satellite = VehicleBuilder::Instance().GetNewSatellite();
                 VehicleBuilder::Instance().Equip(satellite);           		// improove
                         	
-                starsystem->AddToSpace((Vehicle*)satellite, vec2f(0, 0), 0, planet);
+                starsystem->Add((Vehicle*)satellite, vec2f(0, 0), 0, planet);
         }
         
 }
@@ -154,12 +166,12 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
 		vec2f center(getRandInt(0, 800), getRandInt(0, 800));
 		float angle = getRandInt(0, 360);  
                 
-        	starsystem->AddToSpace(spacestation, center, angle, NULL);
+        	starsystem->Add(spacestation, center, angle, NULL);
         	
 		Satellite* satellite = VehicleBuilder::Instance().GetNewSatellite();
                 VehicleBuilder::Instance().Equip(satellite);           		// improove
                         	
-                starsystem->AddToSpace((Vehicle*)satellite, vec2f(0, 0), 0, spacestation);
+                starsystem->Add((Vehicle*)satellite, vec2f(0, 0), 0, spacestation);
     	}        
 }
 
@@ -197,29 +209,20 @@ void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num)
 		vec2f center(getRandInt(0, 800), getRandInt(0, 800));
 		float angle = getRandInt(0, 360);  
 		
-        	starsystem->AddToSpace(ship, center, angle, NULL);
+        	starsystem->Add(ship, center, angle, NULL);
     	}
 }
 
 void StarSystemBuilder::Save(StarSystem* starsystem) const
 {
 	std::string root = "starsystem." + int2str(starsystem->GetId())+".";
-	starsystem->SaveUniqueBaseGameEntity(root);
-	starsystem->SaveUniqueStarSystem(root);
+	starsystem->SaveDataUniqueBaseGameEntity(root);
+	starsystem->SaveDataUniqueStarSystem(root);
 }
 
-void StarSystemBuilder::LoadPass0(const std::string& root)
+void StarSystemBuilder::Load(const boost::property_tree::ptree& ptree)
 {
-	int id = SaveManager::Instance().Get<int>(root+"data_id.id");	
-	this->CreateNewStarSystem(id);
-	
-	starsystem->LoadUniqueBaseGameEntity(root);
-	starsystem->LoadUniqueStarSystem(root);
-}
-
-void StarSystemBuilder::LoadPass1()
-{
-	starsystem->ResolveUniqueBaseGameEntity();
-	starsystem->ResolveUniqueStarSystem();
+	starsystem->LoadDataUniqueBaseGameEntity(ptree);
+	starsystem->LoadDataUniqueStarSystem(ptree);
 }
 

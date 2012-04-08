@@ -25,13 +25,14 @@ Galaxy::Galaxy(int id)
 }
 
 Galaxy::~Galaxy()
-{
-        for (unsigned int i = 0; i<STARSYSTEM_vec.size(); i++)
-	{
-                delete STARSYSTEM_vec[i];
-        }
-}
+{}
 
+void Galaxy::Add(StarSystem* starsystem) 
+{ 
+	starsystem->SetGalaxy(this);
+	STARSYSTEM_vec.push_back(starsystem); 
+}
+     		
 ////ugly
 StarSystem* Galaxy::GetRandomStarSystem()
 {
@@ -62,16 +63,25 @@ void Galaxy::Update(int time)
      	}
 }
 
-void Galaxy::SaveEvent() const
+void Galaxy::SaveDataUniqueGalaxy(const std::string& root) const
 {
-	SaveManager::Instance().Put("galaxy.data_id.id", data_id.id);
-	//for (unsigned int i = 0; i < STARSYSTEM_vec.size(); i++)
-     	//{
-	//	STARSYSTEM_vec.size()->SaveEvent();
-     	//}
+	SaveManager::Instance().Put(root+"data_id.id",         data_id.id);
+	SaveManager::Instance().Put(root+"data_id.type_id",    data_id.type_id);
+	SaveManager::Instance().Put(root+"data_id.subtype_id", data_id.subtype_id);
 }
 
+void Galaxy::LoadDataUniqueGalaxy(const boost::property_tree::ptree& ptree)
+{
+	data_id.id           = ptree.get<int>("data_id.id");
+	data_id.type_id      = ptree.get<int>("data_id.type_id");
+	data_id.subtype_id   = ptree.get<int>("data_id.subtype_id");
+}
 
+void Galaxy::ResolveDataUniqueGalaxy()
+{}
 
+/* virtual */  		
+void Galaxy::PostDeathUniqueEvent(bool) 
+{}
   
 

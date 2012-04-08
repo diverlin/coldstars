@@ -41,9 +41,9 @@ class Star : public BasePlanet
 
     		void RenderInfo_inSpace(vec2f);
     		
-    		void SaveUniqueStar(const std::string&) const;		
-		void LoadUniqueStar(const std::string&);
-		void ResolveUniqueStar();
+    		void SaveDataUniqueStar(const std::string&) const;		
+		void LoadDataUniqueStar(const boost::property_tree::ptree&);
+		void ResolveDataUniqueStar();
                 
         private:
         	Color4f color;
