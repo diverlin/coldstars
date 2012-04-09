@@ -34,15 +34,19 @@ class Galaxy : public BaseGameEntity
      		     
     		void Update(int);
 
-    		void SaveDataUniqueGalaxy(const std::string&) const;
-    		void LoadDataUniqueGalaxy(const boost::property_tree::ptree&);
-    		void ResolveDataUniqueGalaxy();
+    		void SaveData(boost::property_tree::ptree&) const;
+    		void LoadData(const boost::property_tree::ptree&);
+    		void ResolveData();
     		    		
      	private:
   	     	std::vector<StarSystem*> STARSYSTEM_vec;
   	     	
   	     	virtual void PostDeathUniqueEvent(bool);
-  	     	
+
+    		void SaveDataUniqueGalaxy(const std::string&, boost::property_tree::ptree&) const;
+    		void LoadDataUniqueGalaxy(const boost::property_tree::ptree&);
+    		void ResolveDataUniqueGalaxy();
+    		  	     	
   	     	friend class GuiMap;
   	     	friend class Observation;
   	     	friend class GalaxyBuilder;

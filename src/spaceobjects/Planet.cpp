@@ -74,10 +74,10 @@ void Planet::renderInfo_inSpace(vec2f scroll_coords)
 void Planet::PostDeathUniqueEvent(bool)
 {}
 
-void Planet::SaveDataUniquePlanet(const std::string& root) const
+void Planet::SaveDataUniquePlanet(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	//SaveManager::Instance().Put(root+"race_id", race_id);
-	SaveManager::Instance().Put(root+"population", population);
+	save_ptree.put(root+"population", population);
 	//if (land) SaveManager::Instance().Put(root+"land_id", land->GetId());
 	//else      SaveManager::Instance().Put(root+"land_id", -1);
 }
@@ -90,4 +90,25 @@ void Planet::LoadDataUniquePlanet(const boost::property_tree::ptree& ptree)
 
 void Planet::ResolveDataUniquePlanet()
 {}
-		
+	
+void Planet::SaveData(boost::property_tree::ptree& save_ptree) const		
+{
+	std::string root = "planet." + int2str(GetId())+".";
+	SaveDataUniqueBaseGameEntity(save_ptree, root);
+	SaveDataUniqueBasePlanet(save_ptree, root);
+	SaveDataUniquePlanet(save_ptree, root);
+}
+
+void Planet::LoadData(const boost::property_tree::ptree& load_ptree)
+{
+	LoadDataUniqueBaseGameEntity(load_ptree);
+	LoadDataUniqueBasePlanet(load_ptree);
+	LoadDataUniquePlanet(load_ptree);
+}
+
+void Planet::ResolveData()
+{
+	ResolveDataUniqueBaseGameEntity();
+	ResolveDataUniqueBasePlanet();
+	ResolveDataUniquePlanet();
+}	

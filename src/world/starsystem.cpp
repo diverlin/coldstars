@@ -1031,9 +1031,9 @@ void StarSystem :: damageEventInsideCircle(vec2f epicentr, float radius, int dam
 void StarSystem :: PostDeathUniqueEvent(bool) /*virtual */
 {}
 
-void StarSystem::SaveDataUniqueStarSystem(const std::string& root) const
+void StarSystem::SaveDataUniqueStarSystem(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-	SaveManager::Instance().Put(root+"galaxy_id", galaxy->GetId());
+	save_ptree.put(root+"galaxy_id", galaxy->GetId());
 }
 
 void StarSystem::LoadDataUniqueStarSystem(const boost::property_tree::ptree& ptree)
@@ -1045,6 +1045,25 @@ void StarSystem::ResolveDataUniqueStarSystem()
 {
 	galaxy = (Galaxy*)EntityManager::Instance().GetEntityById(data_unresolved_ss.galaxy_id);
 }
+
+void StarSystem::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	std::string root = "starsystem." + int2str(starsystem->GetId())+".";
+	SaveDataUniqueBaseGameEntity(save_ptree, root);
+	SaveDataUniqueStarSystem(save_ptree, root);
+}
+
+void StarSystem::LoadData(const boost::property_tree::ptree& load_ptree)
+{
+	LoadDataUniqueBaseGameEntity(load_ptree);
+	LoadDataUniqueStarSystem(load_ptree);
+}
+
+void StarSystem::ResolveData()
+{
+	ResolveDataUniqueBaseGameEntity(); 
+	ResolveDataUniqueStarSystem(); 
+}		
 
 template <typename AGRESSOR, typename VICTIM>
 bool checkCollision(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)

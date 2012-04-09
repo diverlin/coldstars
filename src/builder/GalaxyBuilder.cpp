@@ -50,13 +50,6 @@ void GalaxyBuilder::CreateNewInternals()
  	}
 }
 
-void GalaxyBuilder::Save(Galaxy* galaxy) const
-{
-	std::string root = "galaxy." + int2str(galaxy->GetId())+".";
-	//galaxy->SaveDataUniqueBaseGameEntity(root);
-	galaxy->SaveDataUniqueGalaxy(root);
-}
-
 void GalaxyBuilder::LoadPass0(const boost::property_tree::ptree&)
 {}
 

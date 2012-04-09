@@ -60,18 +60,8 @@ void StarBuilder::CreateNewInternals()
 	star->CalcColor();
 }
 
-void StarBuilder::Save(Star* star) const
+void StarBuilder::Load(const boost::property_tree::ptree& load_ptree)
 {
-	std::string root = "star." + int2str(star->GetId())+".";
-	star->SaveDataUniqueBaseGameEntity(root);
-	star->SaveDataUniqueBasePlanet(root);
-	star->SaveDataUniqueStar(root);
-}
-
-void StarBuilder::Load(const boost::property_tree::ptree& ptree)
-{
-	star->LoadDataUniqueBaseGameEntity(ptree);
-	star->LoadDataUniqueBasePlanet(ptree);
-	star->LoadDataUniqueStar(ptree);
+	star->LoadData(load_ptree);
 }
 

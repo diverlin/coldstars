@@ -104,9 +104,9 @@ class StarSystem : public BaseGameEntity
                 void DrawOrbits();
                 void DrawPath();
                 
-		void SaveDataUniqueStarSystem(const std::string&) const;
-		void LoadDataUniqueStarSystem(const boost::property_tree::ptree&);
-		void ResolveDataUniqueStarSystem();
+		void SaveData(boost::property_tree::ptree&) const;
+		void LoadData(const boost::property_tree::ptree&);
+		void ResolveData();
 				                                           		    		    		
 		// poor
 		Planet* GetClosestPlanet(vec2f);
@@ -192,6 +192,10 @@ class StarSystem : public BaseGameEntity
 
 		void rocketCollision_s(bool);
 		void asteroidCollision_s(bool);
+		
+		void SaveDataUniqueStarSystem(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueStarSystem(const boost::property_tree::ptree&);
+		void ResolveDataUniqueStarSystem();
 		
 		friend class GuiMap;
 		friend class Observation;

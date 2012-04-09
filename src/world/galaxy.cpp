@@ -63,23 +63,40 @@ void Galaxy::Update(int time)
      	}
 }
 
-void Galaxy::SaveDataUniqueGalaxy(const std::string& root) const
+void Galaxy::SaveDataUniqueGalaxy(const std::string& root, boost::property_tree::ptree& save_ptree) const
 {
-	SaveManager::Instance().Put(root+"data_id.id",         data_id.id);
-	SaveManager::Instance().Put(root+"data_id.type_id",    data_id.type_id);
-	SaveManager::Instance().Put(root+"data_id.subtype_id", data_id.subtype_id);
+	save_ptree.put(root+"data_id.id",         data_id.id);
+	save_ptree.put(root+"data_id.type_id",    data_id.type_id);
+	save_ptree.put(root+"data_id.subtype_id", data_id.subtype_id);
 }
 
-void Galaxy::LoadDataUniqueGalaxy(const boost::property_tree::ptree& ptree)
+void Galaxy::LoadDataUniqueGalaxy(const boost::property_tree::ptree& load_ptree)
 {
-	data_id.id           = ptree.get<int>("data_id.id");
-	data_id.type_id      = ptree.get<int>("data_id.type_id");
-	data_id.subtype_id   = ptree.get<int>("data_id.subtype_id");
+	data_id.id           = load_ptree.get<int>("data_id.id");
+	data_id.type_id      = load_ptree.get<int>("data_id.type_id");
+	data_id.subtype_id   = load_ptree.get<int>("data_id.subtype_id");
 }
 
 void Galaxy::ResolveDataUniqueGalaxy()
 {}
 
+void Galaxy::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	std::string root = "galaxy." + int2str(GetId())+".";
+	SaveDataUniqueGalaxy(root, save_ptree); 
+}
+
+void Galaxy::LoadData(const boost::property_tree::ptree&)
+{
+
+}
+
+void Galaxy::ResolveData()
+{
+	ResolveDataUniqueGalaxy();  
+}
+    		
+    		
 /* virtual */  		
 void Galaxy::PostDeathUniqueEvent(bool) 
 {}

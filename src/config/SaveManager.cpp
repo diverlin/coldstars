@@ -9,31 +9,13 @@ SaveManager& SaveManager::Instance()
 SaveManager::SaveManager() {}	
 SaveManager::~SaveManager() {}
 
-template <typename T>
-void SaveManager::Put(std::string key, T val)
-{
-	ptree.put(key, val);
-}
-
-template <typename T>
-T SaveManager::Get(std::string key)
-{
-	T val = ptree.get<T>(key);
-	return val;
-}
-
-void SaveManager::SaveFile(const std::string& filename)
+void SaveManager::SaveFile(const std::string& filename, boost::property_tree::ptree& ptree) const
 {		
 	write_info(filename, ptree);
 }
 
-void SaveManager::LoadFile(const std::string& filename)
+void SaveManager::LoadFile(const std::string& filename, boost::property_tree::ptree& ptree) const
 {
 	read_info(filename, ptree);
 }
 
-
-void SaveManager::SaveDebug(const std::string& filename, const boost::property_tree::ptree& lptree) const
-{		
-	write_info(filename, lptree);
-}
