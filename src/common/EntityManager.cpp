@@ -28,28 +28,28 @@ EntityManager& EntityManager::Instance()
 	return instance;
 }
 
-void EntityManager::RegisterEntity(BaseGameEntity* new_entity)
+void EntityManager::RegisterEntity(Base* new_entity)
 {
 	entity_map.insert(std::make_pair(new_entity->GetId(), new_entity));
 }
 
-BaseGameEntity* EntityManager::GetEntityById(int id) const
+Base* EntityManager::GetEntityById(int id) const
 {
-	std::map<int, BaseGameEntity*>::const_iterator slice = entity_map.find(id);
+	std::map<int, Base*>::const_iterator slice = entity_map.find(id);
 
 	//assert((slice !=  entity_map.end()) && "<EntityManager::getEntityById>: invalid Id");
 
 	return slice->second;
 }
 
-void EntityManager::RemoveEntity(BaseGameEntity* entity)
+void EntityManager::RemoveEntity(Base* entity)
 {    
 	entity_map.erase(entity_map.find(entity->GetId()));
 } 
 
 void EntityManager::Clear()
 {
-	for (std::map<int, BaseGameEntity*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
+	for (std::map<int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
 	{
 		delete iterator->second;
 	}
@@ -60,7 +60,7 @@ void EntityManager::SaveEvent()
 {
 	boost::property_tree::ptree save_ptree;
 	
-	for (std::map<int, BaseGameEntity*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
+	for (std::map<int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
 	{
 		switch(iterator->second->GetTypeId())
 		{	
@@ -108,7 +108,7 @@ void EntityManager::LoadPass0()
 
 void EntityManager::LoadPass1()
 {
-	for (std::map<int, BaseGameEntity*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
+	for (std::map<int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
 	{
 		switch(iterator->second->GetTypeId())
 		{	

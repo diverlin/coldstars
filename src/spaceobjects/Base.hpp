@@ -1,4 +1,3 @@
-
 /*
 	 Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
 
@@ -17,40 +16,28 @@
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	 */
 
-#ifndef ENTITYMANAGER_H
-#define ENTITYMANAGER_H
 
-#include <map>
-#include <cassert>
-#include <string>
-//#include "../spaceobjects/BaseGameEntity.hpp"
-//#include "../spaceobjects/planetBase.hpp"
-//#include "../spaceobjects/planet.hpp"
+#ifndef BASE_H
+#define BASE_H
 
-
-class EntityManager
+class Base
 {
-	public:
-		static EntityManager& Instance();
+	public:      
+		Base();
+		virtual ~Base();
 
-		void RegisterEntity(Base*);
+		void SetSubTypeId(int subtype_id) { data_id.subtype_id = subtype_id; }
+
+		int GetId()        const { return data_id.id; }   
+		int GetTypeId()    const { return data_id.type_id; }
+		int GetSubTypeId() const { return data_id.subtype_id; }
+				
+	protected:
+		IdData data_id;
 		
-		Base* GetEntityById(int) const;
-		void RemoveEntity(Base*);
-		
-		void SaveEvent();
-		void LoadPass0();
-		void LoadPass1();
-
-	private:
-		EntityManager(){}
-		EntityManager(const EntityManager&);
-		EntityManager& operator=(const EntityManager&);
-
-		std::map<int, Base*> entity_map;
-						
-		void Clear();
+		void SaveDataUniqueBase(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueBase(const boost::property_tree::ptree&);
+		void ResolveDataUniqueBase();
 };
 
-
-#endif
+#endif 

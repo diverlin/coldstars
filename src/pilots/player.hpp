@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define PLAYER_H
 
 
-class Player 
+class Player : public Base
 {
    	public:
     		Player(int);
@@ -75,9 +75,7 @@ class Player
                 void LoadEvent();
                 
      	private:
-     	     	IdData data_id;
-     	     		
-     	     	Npc*     npc;
+    	     	Npc*     npc;
      	     	
      	     	Cursor* cursor;
      	     	Screen* screen;

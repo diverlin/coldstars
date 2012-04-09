@@ -98,6 +98,7 @@ class GuiMap;
 #include "src/items/modules/scanerModule.hpp"
 #include "src/items/modules/grappleModule.hpp"
 
+#include "src/spaceobjects/Base.hpp"
 #include "src/spaceobjects/BaseGameEntity.hpp"
 #include "src/spaceobjects/spaceItemBase.hpp" 
 #include "src/common/EntityManager.hpp"
@@ -259,6 +260,7 @@ class GuiMap;
 #include "src/items/others/goodsPack.cpp"   
 #include "src/spaceobjects/Star.cpp"  
 #include "src/spaceobjects/Planet.cpp"
+#include "src/spaceobjects/Base.cpp" 
 #include "src/spaceobjects/BaseGameEntity.cpp" 
 #include "src/spaceobjects/spaceItemBase.cpp" 
 #include "src/common/EntityManager.cpp"

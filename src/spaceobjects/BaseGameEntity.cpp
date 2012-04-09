@@ -84,10 +84,6 @@ void BaseGameEntity::CheckDeath(bool show_effect)
 
 void BaseGameEntity::SaveDataUniqueBaseGameEntity(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-	save_ptree.put(root+"data_id.id",         data_id.id);
-	save_ptree.put(root+"data_id.type_id",    data_id.type_id);
-	save_ptree.put(root+"data_id.subtype_id", data_id.subtype_id);
-
 	save_ptree.put(root+"data_life.is_alive",   data_life.is_alive);
 	save_ptree.put(root+"data_life.armor",      data_life.armor);
 	save_ptree.put(root+"data_life.dying_time", data_life.dying_time);
@@ -125,10 +121,6 @@ void BaseGameEntity::SaveDataUniqueBaseGameEntity(boost::property_tree::ptree& s
 
 void BaseGameEntity::LoadDataUniqueBaseGameEntity(const boost::property_tree::ptree& load_ptree)
 {
-	data_id.id           = load_ptree.get<int>("data_id.id");
-	data_id.type_id      = load_ptree.get<int>("data_id.type_id");
-	data_id.subtype_id   = load_ptree.get<int>("data_id.subtype_id");
-
 	data_life.is_alive   = load_ptree.get<bool>("data_life.is_alive");
 	data_life.armor      = load_ptree.get<int>("data_life.armor");
 	data_life.dying_time = load_ptree.get<int>("data_life.dying_time");
@@ -167,6 +159,6 @@ void BaseGameEntity::ResolveDataUniqueBaseGameEntity()
 	mesh = g_DEFORMED_SPHERE_MESH; //data_unresolved_bge.mesh_path; 
 	textureOb = g_TEXTURE_MANAGER.GetTextureObByPath(data_unresolved_bge.textureOb_path);
 	
-	parent = EntityManager::Instance().GetEntityById(data_unresolved_bge.parent_id);
+	parent = (BaseGameEntity*)EntityManager::Instance().GetEntityById(data_unresolved_bge.parent_id);
 	starsystem = (StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_bge.starsystem_id);
 }

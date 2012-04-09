@@ -114,6 +114,7 @@ void Star::ResolveDataUniqueStar()
 void Star::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "star." + int2str(GetId())+".";
+	SaveDataUniqueBase(save_ptree, root);
 	SaveDataUniqueBaseGameEntity(save_ptree, root);
 	SaveDataUniqueBasePlanet(save_ptree, root);
 	SaveDataUniqueStar(save_ptree, root);
@@ -121,6 +122,7 @@ void Star::SaveData(boost::property_tree::ptree& save_ptree) const
 
 void Star::LoadData(const boost::property_tree::ptree& load_ptree)
 {
+	LoadDataUniqueBase(load_ptree);
 	LoadDataUniqueBaseGameEntity(load_ptree);
 	LoadDataUniqueBasePlanet(load_ptree);
 	LoadDataUniqueStar(load_ptree);
@@ -128,6 +130,7 @@ void Star::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Star::ResolveData()
 {
+	ResolveDataUniqueBase();
 	ResolveDataUniqueBaseGameEntity();
 	ResolveDataUniqueBasePlanet();
 	ResolveDataUniqueStar();

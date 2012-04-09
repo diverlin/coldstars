@@ -18,8 +18,8 @@ void MessageManager::NewMessage(double delay,
                        		int    type_id,
                        		void*  extra)
 {
-  	BaseGameEntity* sender   = EntityManager::Instance().GetEntityById(sender_id);
-  	BaseGameEntity* receiver = EntityManager::Instance().GetEntityById(receiver_id);
+  	BaseGameEntity* sender   = (BaseGameEntity*)EntityManager::Instance().GetEntityById(sender_id);
+  	BaseGameEntity* receiver = (BaseGameEntity*)EntityManager::Instance().GetEntityById(receiver_id);
 
   	if (receiver == NULL)
   	{
@@ -51,7 +51,7 @@ void MessageManager::UpdateQueue()
   	{
   		const Message& message = *messages_queue.begin();
   	
-    		BaseGameEntity* receiver = EntityManager::Instance().GetEntityById(message.receiver_id);
+    		BaseGameEntity* receiver = (BaseGameEntity*)EntityManager::Instance().GetEntityById(message.receiver_id);
     		SendEvent(receiver, message);
 
     		messages_queue.erase(messages_queue.begin());

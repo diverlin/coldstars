@@ -1049,18 +1049,21 @@ void StarSystem::ResolveDataUniqueStarSystem()
 void StarSystem::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "starsystem." + int2str(starsystem->GetId())+".";
+	SaveDataUniqueBase(save_ptree, root);
 	SaveDataUniqueBaseGameEntity(save_ptree, root);
 	SaveDataUniqueStarSystem(save_ptree, root);
 }
 
 void StarSystem::LoadData(const boost::property_tree::ptree& load_ptree)
 {
+	LoadDataUniqueBase(load_ptree);
 	LoadDataUniqueBaseGameEntity(load_ptree);
 	LoadDataUniqueStarSystem(load_ptree);
 }
 
 void StarSystem::ResolveData()
 {
+	ResolveDataUniqueBase(); 
 	ResolveDataUniqueBaseGameEntity(); 
 	ResolveDataUniqueStarSystem(); 
 }		
