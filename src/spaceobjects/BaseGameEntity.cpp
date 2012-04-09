@@ -82,85 +82,81 @@ void BaseGameEntity::CheckDeath(bool show_effect)
 	}  
 }
 
-void BaseGameEntity::SaveDataUniqueBaseGameEntity(const std::string& root) const
+void BaseGameEntity::SaveDataUniqueBaseGameEntity(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-	SaveManager::Instance().Put(root+"data_id.id",         data_id.id);
-	SaveManager::Instance().Put(root+"data_id.type_id",    data_id.type_id);
-	SaveManager::Instance().Put(root+"data_id.subtype_id", data_id.subtype_id);
+	save_ptree.put(root+"data_id.id",         data_id.id);
+	save_ptree.put(root+"data_id.type_id",    data_id.type_id);
+	save_ptree.put(root+"data_id.subtype_id", data_id.subtype_id);
 
-	SaveManager::Instance().Put(root+"data_life.is_alive",   data_life.is_alive);
-	SaveManager::Instance().Put(root+"data_life.armor",      data_life.armor);
-	SaveManager::Instance().Put(root+"data_life.dying_time", data_life.dying_time);
+	save_ptree.put(root+"data_life.is_alive",   data_life.is_alive);
+	save_ptree.put(root+"data_life.armor",      data_life.armor);
+	save_ptree.put(root+"data_life.dying_time", data_life.dying_time);
 
-	SaveManager::Instance().Put(root+"angle.x", angle.x);
-	SaveManager::Instance().Put(root+"angle.y", angle.y);
-	SaveManager::Instance().Put(root+"angle.z", angle.z);
+	save_ptree.put(root+"angle.x", angle.x);
+	save_ptree.put(root+"angle.y", angle.y);
+	save_ptree.put(root+"angle.z", angle.z);
 
-	SaveManager::Instance().Put(root+"d_angle.x", d_angle.x);
-	SaveManager::Instance().Put(root+"d_angle.y", d_angle.y);
-	SaveManager::Instance().Put(root+"d_angle.z", d_angle.z);
+	save_ptree.put(root+"d_angle.x", d_angle.x);
+	save_ptree.put(root+"d_angle.y", d_angle.y);
+	save_ptree.put(root+"d_angle.z", d_angle.z);
 
-	SaveManager::Instance().Put(root+"collision_radius", collision_radius);
+	save_ptree.put(root+"collision_radius", collision_radius);
 
-	SaveManager::Instance().Put(root+"mass", mass);
+	save_ptree.put(root+"mass", mass);
 
-	if (mesh) 	SaveManager::Instance().Put(root+"mesh_path", mesh->path);
-	else            SaveManager::Instance().Put(root+"mesh_path", "none");
+	if (mesh) 	save_ptree.put(root+"mesh_path", mesh->path);
+	else           save_ptree.put(root+"mesh_path", "none");
 	
-	if (textureOb) 	SaveManager::Instance().Put(root+"textureOb_path", textureOb->path);
-	else            SaveManager::Instance().Put(root+"textureOb_path", "none");	
+	if (textureOb) 	save_ptree.put(root+"textureOb_path", textureOb->path);
+	else            save_ptree.put(root+"textureOb_path", "none");	
 
-	if (parent) SaveManager::Instance().Put(root+"parent_id", parent->GetId());
-	else        SaveManager::Instance().Put(root+"parent_id", -1);
+	if (parent) save_ptree.put(root+"parent_id", parent->GetId());
+	else        save_ptree.put(root+"parent_id", -1);
 
-	SaveManager::Instance().Put(root+"starsystem_id", starsystem->GetId());
-	SaveManager::Instance().Put(root+"place_type_id", place_type_id);
+	save_ptree.put(root+"starsystem_id", starsystem->GetId());
+	save_ptree.put(root+"place_type_id", place_type_id);
 			
-	SaveManager::Instance().Put(root+"center.x", points.getCenter().x);
-	SaveManager::Instance().Put(root+"center.y", points.getCenter().y);
-	SaveManager::Instance().Put(root+"angle_2D", points.getAngleDegree());	
-								
-	SaveManager::Instance().SaveFile("save.info");	
+	save_ptree.put(root+"center.x", points.getCenter().x);
+	save_ptree.put(root+"center.y", points.getCenter().y);
+	save_ptree.put(root+"angle_2D", points.getAngleDegree());	
 }
 
 
 
-void BaseGameEntity::LoadDataUniqueBaseGameEntity(const boost::property_tree::ptree& ptree)
+void BaseGameEntity::LoadDataUniqueBaseGameEntity(const boost::property_tree::ptree& load_ptree)
 {
-	data_id.id           = ptree.get<int>("data_id.id");
-	data_id.type_id      = ptree.get<int>("data_id.type_id");
-	data_id.subtype_id   = ptree.get<int>("data_id.subtype_id");
+	data_id.id           = load_ptree.get<int>("data_id.id");
+	data_id.type_id      = load_ptree.get<int>("data_id.type_id");
+	data_id.subtype_id   = load_ptree.get<int>("data_id.subtype_id");
 
-	data_life.is_alive   = ptree.get<bool>("data_life.is_alive");
-	data_life.armor      = ptree.get<int>("data_life.armor");
-	data_life.dying_time = ptree.get<int>("data_life.dying_time");
+	data_life.is_alive   = load_ptree.get<bool>("data_life.is_alive");
+	data_life.armor      = load_ptree.get<int>("data_life.armor");
+	data_life.dying_time = load_ptree.get<int>("data_life.dying_time");
 	
-	angle.x = ptree.get<float>("angle.x");
-	angle.y = ptree.get<float>("angle.y");
-	angle.z = ptree.get<float>("angle.z");
+	angle.x = load_ptree.get<float>("angle.x");
+	angle.y = load_ptree.get<float>("angle.y");
+	angle.z = load_ptree.get<float>("angle.z");
 
-	d_angle.x = ptree.get<float>("d_angle.x");
-	d_angle.y = ptree.get<float>("d_angle.y");
-	d_angle.z = ptree.get<float>("d_angle.z");
+	d_angle.x = load_ptree.get<float>("d_angle.x");
+	d_angle.y = load_ptree.get<float>("d_angle.y");
+	d_angle.z = load_ptree.get<float>("d_angle.z");
 
-	collision_radius = ptree.get<float>("collision_radius");
+	collision_radius = load_ptree.get<float>("collision_radius");
 
-	mass = ptree.get<int>("mass");
+	mass = load_ptree.get<int>("mass");
 
-	place_type_id = ptree.get<int>("place_type_id");	
-
-
+	place_type_id = load_ptree.get<int>("place_type_id");	
 
 
-	data_unresolved_bge.mesh_path      = ptree.get<std::string>("mesh_path");
-	data_unresolved_bge.textureOb_path = ptree.get<std::string>("textureOb_path");
+	data_unresolved_bge.mesh_path      = load_ptree.get<std::string>("mesh_path");
+	data_unresolved_bge.textureOb_path = load_ptree.get<std::string>("textureOb_path");
 	
-	data_unresolved_bge.parent_id = ptree.get<int>("parent_id");			
-	data_unresolved_bge.starsystem_id = ptree.get<int>("starsystem_id");
+	data_unresolved_bge.parent_id = load_ptree.get<int>("parent_id");			
+	data_unresolved_bge.starsystem_id = load_ptree.get<int>("starsystem_id");
 			
-	data_unresolved_bge.center.x = ptree.get<float>("center.x");
-	data_unresolved_bge.center.y = ptree.get<float>("center.y");
-	data_unresolved_bge.angle    = ptree.get<float>("angle_2D");
+	data_unresolved_bge.center.x = load_ptree.get<float>("center.x");
+	data_unresolved_bge.center.y = load_ptree.get<float>("center.y");
+	data_unresolved_bge.angle    = load_ptree.get<float>("angle_2D");
 }
 
 void BaseGameEntity::ResolveDataUniqueBaseGameEntity()

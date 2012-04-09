@@ -70,25 +70,11 @@ void PlanetBuilder::CreateNewInternals(float orbit_radius)
 	planet->PostCreateInit();
 }
 
-void PlanetBuilder::Save(Planet* planet) const
+
+void PlanetBuilder::LoadPass0(const boost::property_tree::ptree& load_ptree)
 {
-	std::string root = "planet." + int2str(planet->GetId())+".";
-	planet->SaveDataUniqueBaseGameEntity(root);
-	planet->SaveDataUniqueBasePlanet(root);
-	planet->SaveDataUniquePlanet(root);
+	planet->LoadData(load_ptree);
 }
 
-void PlanetBuilder::LoadPass0(const boost::property_tree::ptree& ptree)
-{
-	planet->LoadDataUniqueBaseGameEntity(ptree);
-	planet->LoadDataUniqueBasePlanet(ptree);
-	planet->LoadDataUniquePlanet(ptree);
-}
 
-void PlanetBuilder::LoadPass1()
-{
-	planet->ResolveDataUniqueBaseGameEntity();
-	planet->ResolveDataUniqueBasePlanet();
-	planet->ResolveDataUniquePlanet();
-}
 

@@ -31,7 +31,6 @@ class StarBuilder
                 void CreateNewInternals();
                 Star* GetStar() const { return star; };
                 
-                void Save(Star*) const;
                 void Load(const boost::property_tree::ptree&);
         	 		                
         private:

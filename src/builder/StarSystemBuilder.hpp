@@ -32,7 +32,6 @@ class StarSystemBuilder
                 void CreateNewInternals2();
                 StarSystem* GetStarSystem() const { return starsystem; };
                 
-                void Save(StarSystem*) const;
                 void Load(const boost::property_tree::ptree&);
                        	 		                
         private:

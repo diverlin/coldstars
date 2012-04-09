@@ -72,10 +72,6 @@ class BaseGameEntity
 		void MovingByExternalForce(vec2f, float);
 
 		void Hit(int, bool);
-
-		void SaveDataUniqueBaseGameEntity(const std::string&) const;
-		void LoadDataUniqueBaseGameEntity(const boost::property_tree::ptree&);
-		void ResolveDataUniqueBaseGameEntity();
 				
 	protected:
 		IdData data_id;
@@ -104,7 +100,11 @@ class BaseGameEntity
 
 		void CheckDeath(bool);
 		virtual void PostDeathUniqueEvent(bool) = 0;
-		
+
+		void SaveDataUniqueBaseGameEntity(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueBaseGameEntity(const boost::property_tree::ptree&);
+		void ResolveDataUniqueBaseGameEntity();
+				
 		friend class BaseVehicleBuilder;
 };
 

@@ -101,11 +101,34 @@ void Star::PostDeathUniqueEvent(bool)
 {}
 
    
-void Star::SaveDataUniqueStar(const std::string& root) const
+void Star::SaveDataUniqueStar(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {}
 
-void Star::LoadDataUniqueStar(const boost::property_tree::ptree& ptree)
+void Star::LoadDataUniqueStar(const boost::property_tree::ptree& load_ptree)
 {}
 
 void Star::ResolveDataUniqueStar()
 {}
+
+
+void Star::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	std::string root = "star." + int2str(GetId())+".";
+	SaveDataUniqueBaseGameEntity(save_ptree, root);
+	SaveDataUniqueBasePlanet(save_ptree, root);
+	SaveDataUniqueStar(save_ptree, root);
+}
+
+void Star::LoadData(const boost::property_tree::ptree& load_ptree)
+{
+	LoadDataUniqueBaseGameEntity(load_ptree);
+	LoadDataUniqueBasePlanet(load_ptree);
+	LoadDataUniqueStar(load_ptree);
+}
+
+void Star::ResolveData()
+{
+	ResolveDataUniqueBaseGameEntity();
+	ResolveDataUniqueBasePlanet();
+	ResolveDataUniqueStar();
+}

@@ -40,16 +40,20 @@ class Star : public BasePlanet
     		void Render_OLD();
 
     		void RenderInfo_inSpace(vec2f);
-    		
-    		void SaveDataUniqueStar(const std::string&) const;		
-		void LoadDataUniqueStar(const boost::property_tree::ptree&);
-		void ResolveDataUniqueStar();
                 
+                void SaveData(boost::property_tree::ptree&) const;		
+		void LoadData(const boost::property_tree::ptree&);
+		void ResolveData();
+		
         private:
         	Color4f color;
         	
     		void UpdateInfo();
     		void PostDeathUniqueEvent(bool);
+
+    		void SaveDataUniqueStar(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadDataUniqueStar(const boost::property_tree::ptree&);
+		void ResolveDataUniqueStar();
 }; 
 
 

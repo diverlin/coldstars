@@ -39,10 +39,6 @@ class BasePlanet : public BaseGameEntity
 
 		void Render_NEW(vec2f);
 		void Render_OLD();
-
-		void SaveDataUniqueBasePlanet(const std::string&) const;
-		void LoadDataUniqueBasePlanet(const boost::property_tree::ptree&);
-		void ResolveDataUniqueBasePlanet();
 				
 	protected:
 		PlanetData data_planet;   
@@ -50,6 +46,10 @@ class BasePlanet : public BaseGameEntity
 		
 		void CalcCollisionrRadius();
 		virtual void PostDeathUniqueEvent(bool);
+		
+		void SaveDataUniqueBasePlanet(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueBasePlanet(const boost::property_tree::ptree&);
+		void ResolveDataUniqueBasePlanet();
 };
 
 #endif 

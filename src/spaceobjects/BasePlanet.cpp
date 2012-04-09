@@ -95,28 +95,28 @@ void BasePlanet::Render_OLD()
 }
 
 
-void BasePlanet::SaveDataUniqueBasePlanet(const std::string& root) const
+void BasePlanet::SaveDataUniqueBasePlanet(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-	SaveManager::Instance().Put(root+"orbit.it", orbit->GetIt());
+	save_ptree.put(root+"orbit.it", orbit->GetIt());
 	
-	SaveManager::Instance().Put(root+"data.scale", data_planet.scale);
-	SaveManager::Instance().Put(root+"data.orbit_center.x", data_planet.orbit_center.x);	
-	SaveManager::Instance().Put(root+"data.orbit_center.y", data_planet.orbit_center.y);	
-	SaveManager::Instance().Put(root+"data.radius_A", data_planet.radius_A);	
-	SaveManager::Instance().Put(root+"data.radius_B", data_planet.radius_B);
-	SaveManager::Instance().Put(root+"data.orbit_phi_inD", data_planet.orbit_phi_inD);		
-	SaveManager::Instance().Put(root+"data.speed", data_planet.speed);
+	save_ptree.put(root+"data.scale", data_planet.scale);
+	save_ptree.put(root+"data.orbit_center.x", data_planet.orbit_center.x);	
+	save_ptree.put(root+"data.orbit_center.y", data_planet.orbit_center.y);	
+	save_ptree.put(root+"data.radius_A", data_planet.radius_A);	
+	save_ptree.put(root+"data.radius_B", data_planet.radius_B);
+	save_ptree.put(root+"data.orbit_phi_inD", data_planet.orbit_phi_inD);		
+	save_ptree.put(root+"data.speed", data_planet.speed);
 }
 
-void BasePlanet::LoadDataUniqueBasePlanet(const boost::property_tree::ptree& ptree)
+void BasePlanet::LoadDataUniqueBasePlanet(const boost::property_tree::ptree& load_ptree)
 {
-	data_planet.scale = ptree.get<int>("data.scale");
-	data_planet.orbit_center.x = ptree.get<float>("data.orbit_center.x");	
-	data_planet.orbit_center.y = ptree.get<float>("data.orbit_center.y");	
-	data_planet.radius_A = ptree.get<float>("data.radius_A");	
-	data_planet.radius_B = ptree.get<float>("data.radius_B");
-	data_planet.orbit_phi_inD = ptree.get<float>("data.orbit_phi_inD");		
-	data_planet.speed = ptree.get<float>("data.speed");
+	data_planet.scale = load_ptree.get<int>("data.scale");
+	data_planet.orbit_center.x = load_ptree.get<float>("data.orbit_center.x");	
+	data_planet.orbit_center.y = load_ptree.get<float>("data.orbit_center.y");	
+	data_planet.radius_A = load_ptree.get<float>("data.radius_A");	
+	data_planet.radius_B = load_ptree.get<float>("data.radius_B");
+	data_planet.orbit_phi_inD = load_ptree.get<float>("data.orbit_phi_inD");		
+	data_planet.speed = load_ptree.get<float>("data.speed");
 }
 
 void BasePlanet::ResolveDataUniqueBasePlanet()

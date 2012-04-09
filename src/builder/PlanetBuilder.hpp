@@ -31,9 +31,7 @@ class PlanetBuilder
                 void CreateNewInternals(float);
                 Planet* GetPlanet() const { return planet; };
                 
-                void Save(Planet*) const;
                 void LoadPass0(const boost::property_tree::ptree&);
-                void LoadPass1();
         	 		                
         private:
                 Planet* planet;

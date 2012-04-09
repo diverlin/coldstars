@@ -213,16 +213,8 @@ void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num)
     	}
 }
 
-void StarSystemBuilder::Save(StarSystem* starsystem) const
-{
-	std::string root = "starsystem." + int2str(starsystem->GetId())+".";
-	starsystem->SaveDataUniqueBaseGameEntity(root);
-	starsystem->SaveDataUniqueStarSystem(root);
-}
-
 void StarSystemBuilder::Load(const boost::property_tree::ptree& ptree)
 {
-	starsystem->LoadDataUniqueBaseGameEntity(ptree);
-	starsystem->LoadDataUniqueStarSystem(ptree);
+	starsystem->LoadData(ptree);
 }
 

@@ -1060,18 +1060,18 @@ void Player::RunSession(GameTimer* TIMER)
 void Player::SaveEvent() const
 {
 	std::string root = "player."+int2str(data_id.id)+".";
-        SaveManager::Instance().Put(root+"npc_id", npc->GetId());
-        SaveManager::Instance().Put(root+"vehicle_id", npc->GetVehicle()->GetId());
+        //SaveManager::Instance().Put(root+"npc_id", npc->GetId());
+        //SaveManager::Instance().Put(root+"vehicle_id", npc->GetVehicle()->GetId());
 }
 
 void Player::LoadEvent()
 {
 	std::string root = "player."+int2str(data_id.id)+".";
-        int npc_id = SaveManager::Instance().Get<int>(root+"npc_id");
-        int vehicle_id = SaveManager::Instance().Get<int>(root+"vehicle_id");    
+        //int npc_id = SaveManager::Instance().Get<int>(root+"npc_id");
+        //int vehicle_id = SaveManager::Instance().Get<int>(root+"vehicle_id");    
         
-        npc = (Npc*)EntityManager::Instance().GetEntityById(npc_id);
-        Vehicle* vehicle = (Vehicle*)EntityManager::Instance().GetEntityById(vehicle_id);
-        npc->Bind(vehicle);
+        //npc = (Npc*)EntityManager::Instance().GetEntityById(npc_id);
+        //Vehicle* vehicle = (Vehicle*)EntityManager::Instance().GetEntityById(vehicle_id);
+        //npc->Bind(vehicle);
 }
 

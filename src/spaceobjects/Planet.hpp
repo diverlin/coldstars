@@ -38,10 +38,10 @@ class Planet : public BasePlanet
 
 		void renderInfo_inSpace(vec2f);
 
-		void SaveDataUniquePlanet(const std::string&) const;		
-		void LoadDataUniquePlanet(const boost::property_tree::ptree&);
-		void ResolveDataUniquePlanet();
-
+		void SaveData(boost::property_tree::ptree&) const;		
+		void LoadData(const boost::property_tree::ptree&);
+		void ResolveData();
+		
 	private:
 		TextureOb* textureOb_atmosphere;
 
@@ -51,6 +51,10 @@ class Planet : public BasePlanet
 		void UpdateInfo();
 
 		void PostDeathUniqueEvent(bool);
+
+		void SaveDataUniquePlanet(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadDataUniquePlanet(const boost::property_tree::ptree&);
+		void ResolveDataUniquePlanet();
 }; 
 
 
