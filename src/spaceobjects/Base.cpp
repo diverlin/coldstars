@@ -1,4 +1,3 @@
-
 /*
 	 Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
 
@@ -17,40 +16,27 @@
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	 */
 
-#ifndef ENTITYMANAGER_H
-#define ENTITYMANAGER_H
+//#include "Base.hpp"
 
-#include <map>
-#include <cassert>
-#include <string>
-//#include "../spaceobjects/BaseGameEntity.hpp"
-//#include "../spaceobjects/planetBase.hpp"
-//#include "../spaceobjects/planet.hpp"
+Base::Base()
+{}
 
+Base::~Base()
+{}
 
-class EntityManager
+void Base::SaveDataUniqueBase(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-	public:
-		static EntityManager& Instance();
+	save_ptree.put(root+"data_id.id",         data_id.id);
+	save_ptree.put(root+"data_id.type_id",    data_id.type_id);
+	save_ptree.put(root+"data_id.subtype_id", data_id.subtype_id);
+}
 
-		void RegisterEntity(Base*);
-		
-		Base* GetEntityById(int) const;
-		void RemoveEntity(Base*);
-		
-		void SaveEvent();
-		void LoadPass0();
-		void LoadPass1();
+void Base::LoadDataUniqueBase(const boost::property_tree::ptree& load_ptree)
+{
+	data_id.id           = load_ptree.get<int>("data_id.id");
+	data_id.type_id      = load_ptree.get<int>("data_id.type_id");
+	data_id.subtype_id   = load_ptree.get<int>("data_id.subtype_id");
+}
 
-	private:
-		EntityManager(){}
-		EntityManager(const EntityManager&);
-		EntityManager& operator=(const EntityManager&);
-
-		std::map<int, Base*> entity_map;
-						
-		void Clear();
-};
-
-
-#endif
+void Base::ResolveDataUniqueBase()
+{}

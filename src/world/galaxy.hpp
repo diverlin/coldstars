@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define GALAXY_H
 
 
-class Galaxy : public BaseGameEntity
+class Galaxy : public Base
 {
   	public:
      		Galaxy(int);
@@ -40,10 +40,8 @@ class Galaxy : public BaseGameEntity
     		    		
      	private:
   	     	std::vector<StarSystem*> STARSYSTEM_vec;
-  	     	
-  	     	virtual void PostDeathUniqueEvent(bool);
 
-    		void SaveDataUniqueGalaxy(const std::string&, boost::property_tree::ptree&) const;
+    		void SaveDataUniqueGalaxy(boost::property_tree::ptree&, const std::string&) const;
     		void LoadDataUniqueGalaxy(const boost::property_tree::ptree&);
     		void ResolveDataUniqueGalaxy();
     		  	     	

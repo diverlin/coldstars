@@ -33,13 +33,12 @@ struct UnresolvedDataUniqueBaseGameEntity
 };
 
 
-class BaseGameEntity
+class BaseGameEntity : public Base
 {
 	public:      
 		BaseGameEntity();
 		virtual ~BaseGameEntity();
 
-		void SetSubTypeId(int subtype_id)           { data_id.subtype_id = subtype_id; }
 		void SetLifeData(LifeData data_life)        { this->data_life = data_life; }
 		void SetMesh(ObjMeshInstance* mesh)         { this->mesh = mesh; }
 		void SetTextureOb(TextureOb* textureOb)     { this->textureOb = textureOb; }
@@ -50,10 +49,6 @@ class BaseGameEntity
 		void SetDeltaAngle(vec3f d_angle)           { this->d_angle = d_angle; }
 
 		void SetParent(BaseGameEntity* parent)     { this->parent = parent; }
-
-		int GetId()        const { return data_id.id; }   
-		int GetTypeId()    const { return data_id.type_id; }
-		int GetSubTypeId() const { return data_id.subtype_id; }
 
 		StarSystem* GetStarSystem() const { return starsystem; }           
 		int GetPlaceTypeId()        const { return place_type_id; }
@@ -74,7 +69,6 @@ class BaseGameEntity
 		void Hit(int, bool);
 				
 	protected:
-		IdData data_id;
 		LifeData data_life;
 		
 		UnresolvedDataUniqueBaseGameEntity data_unresolved_bge;
@@ -99,7 +93,7 @@ class BaseGameEntity
 		void UpdateRotation();
 
 		void CheckDeath(bool);
-		virtual void PostDeathUniqueEvent(bool) = 0;
+		virtual void PostDeathUniqueEvent(bool) {};
 
 		void SaveDataUniqueBaseGameEntity(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueBaseGameEntity(const boost::property_tree::ptree&);
