@@ -71,10 +71,6 @@ void PlanetBuilder::CreateNewInternals(float orbit_radius)
 }
 
 
-void PlanetBuilder::LoadPass0(const boost::property_tree::ptree& load_ptree)
-{
-	planet->LoadData(load_ptree);
-}
 
 
 

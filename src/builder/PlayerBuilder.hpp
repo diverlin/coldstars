@@ -27,7 +27,7 @@ class PlayerBuilder
 		static PlayerBuilder& Instance();
 		~PlayerBuilder();
 
-        	void CreateNewPlayer(); 
+        	void CreateNewPlayer(int id = NONE_ID); 
                 void CreateNewInternals();
                 Player* GetPlayer() const { return player; };
         	 		                

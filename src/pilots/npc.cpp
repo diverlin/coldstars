@@ -259,6 +259,41 @@ void Npc::RenderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_
         UpdateInfo();
      	drawInfoIn2Column(&info.title_list, &info.value_list, _pos_x + 190, _pos_y, _offset_x, _offset_y);
 }
-     
-void Npc :: PostDeathUniqueEvent(bool) /* virtual */
-{}
+   
+   
+void Npc::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	std::string root = "npc."+int2str(data_id.id)+".";
+	SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueBaseGameEntity(save_ptree, root);	
+	SaveDataUniqueNpc(save_ptree, root);	
+}		
+
+void Npc::LoadData(const boost::property_tree::ptree& load_ptree)
+{
+	LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueBaseGameEntity(load_ptree);
+	LoadDataUniqueNpc(load_ptree);	   
+}        
+
+void Npc::ResolveData()
+{
+	ResolveDataUniqueBase();
+	ResolveDataUniqueBaseGameEntity();	
+	ResolveDataUniqueNpc();	
+}
+  
+void Npc::SaveDataUniqueNpc(boost::property_tree::ptree& save_ptree, const std::string& root) const	
+{
+        save_ptree.put(root+"unresolved.vehicle_id", vehicle->GetId());
+}
+
+void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
+{
+	data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresoved.vehicle_id");
+}
+
+void Npc::ResolveDataUniqueNpc()
+{
+        vehicle = (Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_npc.vehicle_id);
+}		

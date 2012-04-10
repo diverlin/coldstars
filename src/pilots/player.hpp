@@ -16,10 +16,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #ifndef PLAYER_H
 #define PLAYER_H
 
+struct UnresolvedDataUniquePlayer
+{
+	int npc_id;	
+};
 
 class Player : public Base
 {
@@ -71,9 +74,10 @@ class Player : public Base
   		
      		void RunSession(GameTimer*); 
                 
-                void SaveEvent() const;
-                void LoadEvent();
-                
+                void SaveData(boost::property_tree::ptree&) const;		
+		void LoadData(const boost::property_tree::ptree&);
+		void ResolveData();
+		 
      	private:
     	     	Npc*     npc;
      	     	
@@ -107,6 +111,8 @@ class Player : public Base
     		std::vector<VerticalFlowText*>   visible_text_DAMAGE_vec;
     		//  
     		
+    		UnresolvedDataUniquePlayer data_unresolved_player;
+    		
     		GuiManager*   GUI_MANAGER;    
  		GuiSpace*     GUI_SPACE;      
  		GuiKosmoport* GUI_KOSMOPORT;  
@@ -126,6 +132,10 @@ class Player : public Base
     		
     		bool IsObjectOnScreen(const Points&) const;
     		
+    		void SaveDataUniquePlayer(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadDataUniquePlayer(const boost::property_tree::ptree&);
+		void ResolveDataUniquePlayer();
+		
     		friend class UserInput;
 };
 

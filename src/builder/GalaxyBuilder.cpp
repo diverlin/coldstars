@@ -50,11 +50,6 @@ void GalaxyBuilder::CreateNewInternals()
  	}
 }
 
-void GalaxyBuilder::LoadPass0(const boost::property_tree::ptree&)
-{}
-
-void GalaxyBuilder::LoadPass1()
-{}
                 
 
 

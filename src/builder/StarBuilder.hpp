@@ -30,8 +30,6 @@ class StarBuilder
         	void CreateNewStar(int id = NONE_ID); 
                 void CreateNewInternals();
                 Star* GetStar() const { return star; };
-                
-                void Load(const boost::property_tree::ptree&);
         	 		                
         private:
                 Star* star;

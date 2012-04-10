@@ -1056,22 +1056,38 @@ void Player::RunSession(GameTimer* TIMER)
        	screen->display();
 }     		
 
-
-void Player::SaveEvent() const
+void Player::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "player."+int2str(data_id.id)+".";
-        //SaveManager::Instance().Put(root+"npc_id", npc->GetId());
-        //SaveManager::Instance().Put(root+"vehicle_id", npc->GetVehicle()->GetId());
+	
+	SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniquePlayer(save_ptree, root);	
+}		
+
+void Player::LoadData(const boost::property_tree::ptree& load_ptree)
+{
+	LoadDataUniqueBase(load_ptree);
+	LoadDataUniquePlayer(load_ptree);	   
+}        
+
+void Player::ResolveData()
+{
+	ResolveDataUniqueBase();
+	ResolveDataUniquePlayer();	
+}
+		
+void Player::SaveDataUniquePlayer(boost::property_tree::ptree& save_ptree, const std::string& root) const	
+{
+        save_ptree.put(root+"unresolved.npc_id", npc->GetId());
 }
 
-void Player::LoadEvent()
+void Player::LoadDataUniquePlayer(const boost::property_tree::ptree& load_ptree)
 {
-	std::string root = "player."+int2str(data_id.id)+".";
-        //int npc_id = SaveManager::Instance().Get<int>(root+"npc_id");
-        //int vehicle_id = SaveManager::Instance().Get<int>(root+"vehicle_id");    
-        
-        //npc = (Npc*)EntityManager::Instance().GetEntityById(npc_id);
-        //Vehicle* vehicle = (Vehicle*)EntityManager::Instance().GetEntityById(vehicle_id);
-        //npc->Bind(vehicle);
+	data_unresolved_player.npc_id = load_ptree.get<int>("unresolved.npc_id");
 }
+
+void Player::ResolveDataUniquePlayer()
+{
+        npc = (Npc*)EntityManager::Instance().GetEntityById(data_unresolved_player.npc_id );
+}		
 
