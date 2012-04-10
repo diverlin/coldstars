@@ -26,9 +26,12 @@ NpcBuilder& NpcBuilder::Instance()
 NpcBuilder::~NpcBuilder()
 {}
 
-void NpcBuilder::CreateNewNpc()
+void NpcBuilder::CreateNewNpc(int id)
 {
-    	int id = g_ID_GENERATOR.getNextId(); 
+	if (id == NONE_ID)
+	{
+		id = g_ID_GENERATOR.getNextId();
+	}
 	npc = new Npc(id);
 	EntityManager::Instance().RegisterEntity(npc);
 } 

@@ -60,8 +60,4 @@ void StarBuilder::CreateNewInternals()
 	star->CalcColor();
 }
 
-void StarBuilder::Load(const boost::property_tree::ptree& load_ptree)
-{
-	star->LoadData(load_ptree);
-}
 

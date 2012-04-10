@@ -26,10 +26,14 @@ PlayerBuilder& PlayerBuilder::Instance()
 PlayerBuilder::~PlayerBuilder()
 {}
 
-void PlayerBuilder::CreateNewPlayer()
+void PlayerBuilder::CreateNewPlayer(int id)
 {
-        int id = g_ID_GENERATOR.getNextId(); 
-        player = new Player(id);
+	if (id == NONE_ID)
+	{
+		id = g_ID_GENERATOR.getNextId();
+	}
+	player = new Player(id);
+	EntityManager::Instance().RegisterEntity(player);        
 } 
         	
 void PlayerBuilder::CreateNewInternals()
@@ -49,3 +53,4 @@ void PlayerBuilder::CreateNewInternals()
         pnpc->Bind(pship);
    	player->BindNpc(pnpc);
 }
+

@@ -213,8 +213,4 @@ void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num)
     	}
 }
 
-void StarSystemBuilder::Load(const boost::property_tree::ptree& ptree)
-{
-	starsystem->LoadData(ptree);
-}
 

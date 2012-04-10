@@ -30,9 +30,6 @@ class GalaxyBuilder
         	void CreateNewGalaxy(int id = NONE_ID); 
                 void CreateNewInternals();
                 Galaxy* GetGalaxy() const { return galaxy; };
-                
-                void LoadPass0(const boost::property_tree::ptree&);
-                void LoadPass1();
         	 		                
         private:
                 Galaxy* galaxy;

@@ -63,11 +63,13 @@ void EntityManager::SaveEvent()
 	for (std::map<int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
 	{
 		switch(iterator->second->GetTypeId())
-		{	
-			case ENTITY::GALAXY_ID:     { ((Galaxy*)iterator->second)->SaveData(save_ptree); break; } 
+		{
+			case ENTITY::PLAYER_ID:     { ((Player*)iterator->second)->SaveData(save_ptree);    break; } 	
+			case ENTITY::GALAXY_ID:     { ((Galaxy*)iterator->second)->SaveData(save_ptree);     break; } 
 			case ENTITY::STARSYSTEM_ID: { ((StarSystem*)iterator->second)->SaveData(save_ptree); break; }
-			case ENTITY::STAR_ID:       { ((Star*)iterator->second)->SaveData(save_ptree);   break; }
-			case ENTITY::PLANET_ID:     { ((Planet*)iterator->second)->SaveData(save_ptree); break; }  
+			case ENTITY::STAR_ID:       { ((Star*)iterator->second)->SaveData(save_ptree);       break; }
+			case ENTITY::PLANET_ID:     { ((Planet*)iterator->second)->SaveData(save_ptree);     break; }  
+			case ENTITY::NPC_ID:        { ((Npc*)iterator->second)->SaveData(save_ptree);        break; }  
 		}
 	}
 	
@@ -80,29 +82,41 @@ void EntityManager::LoadPass0()
 
 	boost::property_tree::ptree load_ptree;
 	SaveManager::Instance().LoadFile("save.info", load_ptree);
-			
+
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("player"))
+	{
+		PlayerBuilder::Instance().CreateNewPlayer(v.second.get<int>("data_id.id"));
+		PlayerBuilder::Instance().GetPlayer()->LoadData(v.second);
+	}
+				
 	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("galaxy"))
 	{
 		GalaxyBuilder::Instance().CreateNewGalaxy(v.second.get<int>("data_id.id"));
-		GalaxyBuilder::Instance().LoadPass0(v.second);
+		GalaxyBuilder::Instance().GetGalaxy()->LoadData(v.second);
 	}
 		
 	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("starsystem"))
 	{
 		StarSystemBuilder::Instance().CreateNewStarSystem(v.second.get<int>("data_id.id"));
-		StarSystemBuilder::Instance().Load(v.second);
+		StarSystemBuilder::Instance().GetStarSystem()->LoadData(v.second);
 	}
 
 	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("star"))
 	{
 		StarBuilder::Instance().CreateNewStar(v.second.get<int>("data_id.id"));
-		StarBuilder::Instance().Load(v.second);
+		StarBuilder::Instance().GetStar()->LoadData(v.second);
 	}
 	
 	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("planet"))
 	{
 		PlanetBuilder::Instance().CreateNewPlanet(v.second.get<int>("data_id.id"));
-		PlanetBuilder::Instance().LoadPass0(v.second);
+		PlanetBuilder::Instance().GetPlanet()->LoadData(v.second);
+	}
+	
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("npc"))
+	{
+		NpcBuilder::Instance().CreateNewNpc(v.second.get<int>("data_id.id"));
+		NpcBuilder::Instance().GetNpc()->LoadData(v.second);
 	}
 }
 

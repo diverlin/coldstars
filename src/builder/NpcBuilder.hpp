@@ -27,7 +27,7 @@ class NpcBuilder
 		static NpcBuilder& Instance();
 		~NpcBuilder();
 
-        	void CreateNewNpc(); 
+        	void CreateNewNpc(int id = NONE_ID); 
                 void CreateNewInternals(int, int);
                 Npc* GetNpc() const { return npc; };
         	 		                

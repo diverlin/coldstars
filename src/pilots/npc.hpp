@@ -19,6 +19,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef NPC_H
 #define NPC_H
 
+struct UnresolvedDataUniqueNpc
+{
+	int vehicle_id;	
+};
+
 class Npc : public BaseGameEntity
 {
    	public:
@@ -71,6 +76,10 @@ class Npc : public BaseGameEntity
                
                 void RenderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y);
                                
+                void SaveData(boost::property_tree::ptree&) const;		
+		void LoadData(const boost::property_tree::ptree&);
+		void ResolveData();
+		
    	private:
      		int race_id;
      		unsigned long int credits; 
@@ -93,11 +102,16 @@ class Npc : public BaseGameEntity
      		
                 Observation* observation;
 
+		UnresolvedDataUniqueNpc data_unresolved_npc;
+
                 void AsteroidScenario();
                 void CheckNeeds();
                                     		
      		void UpdateInfo();     	
-     		virtual void PostDeathUniqueEvent(bool);	
+    		
+     		void SaveDataUniqueNpc(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadDataUniqueNpc(const boost::property_tree::ptree&);
+		void ResolveDataUniqueNpc();
  };
 
 
