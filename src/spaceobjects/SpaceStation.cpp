@@ -17,8 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-
-SpaceStation :: SpaceStation(int id, int race_id)
+SpaceStation::SpaceStation(int id, int race_id)
 {      
 	data_id.id = id;
 	data_id.type_id = ENTITY::SPACESTATION_ID;  
@@ -27,30 +26,27 @@ SpaceStation :: SpaceStation(int id, int race_id)
 	land = NULL;
 }
 
-SpaceStation :: ~SpaceStation() 
+SpaceStation::~SpaceStation() 
 {
 	delete land;
 }    
-    
-BaseLand* SpaceStation :: GetLand() const { return land; }
-	
-	      
-void SpaceStation :: createLand(int race_id)
+ 
+void SpaceStation::CreateLand(int race_id)
 {
-	land = new Kosmoport(race_id);
+	KosmoportBuilder::Instance().CreateNewKosmoport();
+	KosmoportBuilder::Instance().CreateNewInternals();
+	land = KosmoportBuilder::Instance().GetKosmoport();
 }
 	        	
-		
-void SpaceStation :: update_inSpace(int time, bool show_effect)
+void SpaceStation::UpdateInSpace(int time, bool show_effect)
 {
 	CheckDeath(show_effect);
 	if (time > 0)
 	{}
 }
 
-
 //overriding
-void SpaceStation :: UpdateInfo()
+void SpaceStation::UpdateInfo()
 {
 	info.clear();
 
@@ -61,9 +57,7 @@ void SpaceStation :: UpdateInfo()
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 } 
 
-
-
-void SpaceStation :: updateRenderStuff()
+void SpaceStation::UpdateRenderStuff()
 {
     	//points.update(); 
     	protection_complex->GetShieldEffect()->update();
@@ -74,7 +68,7 @@ void SpaceStation :: updateRenderStuff()
     	//}
 }
 
-void SpaceStation :: render_inSpace() const
+void SpaceStation::RenderInSpace() const
 {   
         //if (ableTo.GRAB == true)
         //{
@@ -99,8 +93,7 @@ void SpaceStation :: render_inSpace() const
         }
 }
 
-
-void SpaceStation :: render_atPlanet() const
+void SpaceStation::RenderAtPlanet() const
 {
 	//renderKorpus();
 	

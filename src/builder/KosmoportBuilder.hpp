@@ -17,33 +17,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef STARSYSTEMBUILDER_H
-#define STARSYSTEMBUILDER_H
+#ifndef KOSMOPORTBUILDER_H
+#define KOSMOPORTBUILDER_H
 
 
-class StarSystemBuilder
+class KosmoportBuilder
 {
 	public:
-		static StarSystemBuilder& Instance();
-		~StarSystemBuilder();
+		static KosmoportBuilder& Instance();
+		~KosmoportBuilder();
 
-        	void CreateNewStarSystem(int id = NONE_ID); 
+        	void CreateNewKosmoport(int id = NONE_ID); 
                 void CreateNewInternals();
-                //void CreateNewInternals2();
-                StarSystem* GetStarSystem() const { return starsystem; };
+                Kosmoport* GetKosmoport() const { return kosmoport; };
                        	 		                
         private:
-                StarSystem* starsystem;
+                Kosmoport* kosmoport;
                 
-		StarSystemBuilder() {};
-		StarSystemBuilder(const StarSystemBuilder&) {};
-		StarSystemBuilder& operator=(const StarSystemBuilder&) {};
-		
-                void CreateBackground(int, int, int);
-        	void CreateStar();
-        	void CreatePlanets(int);
-        	void CreateSpaceStations(int);
-        	void CreateShips(int, int);   
+		KosmoportBuilder() {};
+		KosmoportBuilder(const KosmoportBuilder&) {};
+		KosmoportBuilder& operator=(const KosmoportBuilder&) {};
 }; 
 
 

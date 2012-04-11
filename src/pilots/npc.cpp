@@ -286,14 +286,19 @@ void Npc::ResolveData()
 void Npc::SaveDataUniqueNpc(boost::property_tree::ptree& save_ptree, const std::string& root) const	
 {
         save_ptree.put(root+"unresolved.vehicle_id", vehicle->GetId());
+        if (land) save_ptree.put(root+"unresolved.land_id", land->GetId());
+	else      save_ptree.put(root+"unresolved.land_id", NONE_ID);
 }
 
 void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
 {
 	data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresoved.vehicle_id");
+	data_unresolved_npc.land_id = load_ptree.get<int>("unresoved.land_id");
 }
 
 void Npc::ResolveDataUniqueNpc()
 {
         vehicle = (Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_npc.vehicle_id);
+        if (data_unresolved_npc.land_id != NONE_ID) (BaseLand*)EntityManager::Instance().GetEntityById(data_unresolved_npc.land_id);
+        else land = NULL;
 }		

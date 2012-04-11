@@ -638,7 +638,7 @@ void StarSystem :: updateEntities_s(int time, bool show_effect)
 
         for (unsigned int si = 0; si < SPACESTATION_vec.size(); si++)
         {
-                SPACESTATION_vec[si]->update_inSpace(time, show_effect); 
+                SPACESTATION_vec[si]->UpdateInSpace(time, show_effect); 
         }
                 
         for (unsigned int si = 0; si < SATELLITE_vec.size(); si++)

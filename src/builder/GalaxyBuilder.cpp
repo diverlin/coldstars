@@ -42,7 +42,7 @@ void GalaxyBuilder::CreateNewInternals()
     	for(int i = 0; i < starsystem_num; i++)
     	{  
                 StarSystemBuilder::Instance().CreateNewStarSystem();
-                StarSystemBuilder::Instance().CreateNewInternals2();
+                StarSystemBuilder::Instance().CreateNewInternals();
                 
         	StarSystem* starsystem = StarSystemBuilder::Instance().GetStarSystem();
         	starsystem->SetGalaxy(galaxy);

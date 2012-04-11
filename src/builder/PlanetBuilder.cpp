@@ -58,8 +58,17 @@ void PlanetBuilder::CreateNewInternals(float orbit_radius)
         //unsigned long int population = getRandInt(1000, 4000);
 	unsigned long int population = 0;
 	BaseLand* land;
-	if (population > 0) { land = new Kosmoport(RACE::R0_ID); }
-        else                { land = new NatureLand(); }
+	if (population > 0) 
+	{ 
+		KosmoportBuilder::Instance().CreateNewKosmoport();
+		KosmoportBuilder::Instance().CreateNewInternals();
+		land = KosmoportBuilder::Instance().GetKosmoport();
+	}
+        else                
+        { 
+        	land = new NatureLand(); 
+        }
+        	
 	planet->SetLand(land);
 
 	planet->SetTextureOb(textureOb);

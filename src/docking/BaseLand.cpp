@@ -18,9 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 BaseLand::BaseLand()
-{
-	type_id = NONE_ID;
-}
+{}
 
 /* virtual */
 BaseLand::~BaseLand()

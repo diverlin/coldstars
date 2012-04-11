@@ -281,8 +281,8 @@ void Player::RenderEntities_NEW()
 		enable_BLEND();		
 		    	for(unsigned int i = 0; i < visible_SPACESTATION_vec.size(); i++)
     			{ 
-    				visible_SPACESTATION_vec[i]->updateRenderStuff(); 
-       				visible_SPACESTATION_vec[i]->render_inSpace(); 
+    				visible_SPACESTATION_vec[i]->UpdateRenderStuff(); 
+       				visible_SPACESTATION_vec[i]->RenderInSpace(); 
         			npc->GetStarSystem()->RestoreSceneColor();
     			}
     			
@@ -429,8 +429,8 @@ void Player::RenderEntities_OLD()
         enable_BLEND();
                 for(unsigned int i = 0; i < visible_SPACESTATION_vec.size(); i++)
     		{ 
-    			visible_SPACESTATION_vec[i]->updateRenderStuff(); 
-       			visible_SPACESTATION_vec[i]->render_inSpace(); 
+    			visible_SPACESTATION_vec[i]->UpdateRenderStuff(); 
+       			visible_SPACESTATION_vec[i]->RenderInSpace(); 
         		npc->GetStarSystem()->RestoreSceneColor();
     		}
                         
