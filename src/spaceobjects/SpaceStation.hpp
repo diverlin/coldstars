@@ -27,17 +27,17 @@ class SpaceStation : public Vehicle
         	SpaceStation(int, int);
         	~SpaceStation();
         	
-        	BaseLand* GetLand() const;
+		BaseLand* GetLand() const { return land; };
 
-		void createLand(int);
+		void CreateLand(int);
 
-		void update_inSpace(int, bool);
+		void UpdateInSpace(int, bool);
 		
         	virtual void UpdateInfo(); 
         	
-        	void updateRenderStuff();
-        	void render_inSpace() const;
-		void render_atPlanet() const; 
+        	void UpdateRenderStuff();
+        	void RenderInSpace() const;
+		void RenderAtPlanet() const; 
         	
         private:
                 BaseLand* land;

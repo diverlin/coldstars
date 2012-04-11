@@ -175,7 +175,7 @@ class GuiMap;
 #include "src/spaceobjects/ProtectionComplex.hpp"
 #include "src/spaceobjects/Vehicle.hpp"
 #include "src/spaceobjects/rocketBullet.hpp"
-#include "src/spaceobjects/spaceStation.hpp"
+#include "src/spaceobjects/SpaceStation.hpp"
 #include "src/spaceobjects/satellite.hpp"
 #include "src/spaceobjects/ship.hpp"
 #include "src/builder/BaseVehicleBuilder.hpp"
@@ -186,6 +186,7 @@ class GuiMap;
 #include "src/builder/GalaxyBuilder.hpp"
 #include "src/builder/PlayerBuilder.hpp"
 #include "src/builder/NpcBuilder.hpp"
+#include "src/builder/KosmoportBuilder.hpp"
 
 #include "src/pilots/player.hpp"
 
@@ -271,7 +272,7 @@ class GuiMap;
 #include "src/spaceobjects/BasePlanet.cpp"
 #include "src/spaceobjects/asteroid.cpp"   
 #include "src/spaceobjects/mineral.cpp" 
-#include "src/spaceobjects/spaceStation.cpp" 
+#include "src/spaceobjects/SpaceStation.cpp" 
 #include "src/spaceobjects/satellite.cpp" 
 #include "src/items/others/bomb.cpp" 
 #include "src/spaceobjects/blackHole.cpp"
@@ -327,6 +328,8 @@ class GuiMap;
 #include "src/builder/GalaxyBuilder.cpp"
 #include "src/builder/PlayerBuilder.cpp"
 #include "src/builder/NpcBuilder.cpp"
+#include "src/builder/KosmoportBuilder.cpp"
+
 #include "src/gui/guiSkill.cpp"
 #include "src/gui/guiMap.cpp"
 #include "src/gui/cursor.cpp"   

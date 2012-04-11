@@ -17,24 +17,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-Kosmoport :: Kosmoport(int _race_id) 
+Kosmoport :: Kosmoport(int id) 
 {
-	type_id = ENTITY::KOSMOPORT_ID;
-
-        TextureOb* _texOb_slot = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID);
-        TextureOb* _texOb_landingArea = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::LANDINGAREA_ID);
-        
-        TextureOb* _texOb_angarBackground  = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ANGAR_BACKGROUND_ID);   
-        TextureOb* _texOb_storeBackground  = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::STORE_BACKGROUND_ID);    
-        TextureOb* _texOb_shopBackground   = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SHOP_BACKGROUND_ID);    
-        TextureOb* _texOb_govermentBackground = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::GOVERMENT_BACKGROUND_ID);    
-
-        angar     = new Angar(_texOb_angarBackground, _texOb_landingArea);
-        store     = new Store(_texOb_storeBackground, _texOb_slot);
-        shop      = new Shop(_texOb_shopBackground);
-        goverment = new Goverment(_texOb_govermentBackground, _texOb_slot);
-        
-        equipStore(store);
+	data_id.id = id;
+	data_id.type_id = ENTITY::KOSMOPORT_ID;
+	race_id = RACE::R0_ID;
+	
+	angar     = NULL;
+        store     = NULL;
+        shop      = NULL;
+        goverment = NULL;
 }
 
 /* virtual */
@@ -55,7 +47,7 @@ bool Kosmoport::GetPermissionToLand() const
 /* virtual */
 bool Kosmoport::Add(Vehicle* vehicle)
 {
-        vehicle->SetPlaceTypeId(type_id);
+        vehicle->SetPlaceTypeId(data_id.type_id);
                 
         VEHICLE_vec.push_back(vehicle);
         angar->add(vehicle);
@@ -66,7 +58,7 @@ bool Kosmoport::Add(Vehicle* vehicle)
 /* virtual */
 bool Kosmoport::Add(Npc* npc)
 {
-        npc->SetPlaceTypeId(type_id);
+        npc->SetPlaceTypeId(data_id.type_id);
         NPC_vec.push_back(npc);
         
         npc->SetLand(this);

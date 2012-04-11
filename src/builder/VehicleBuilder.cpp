@@ -168,7 +168,7 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation() const
         CreateWeaponsComplex(spacestation);
         CreateProtectionComplex(spacestation);	
         
-    	spacestation->createLand(RACE::R0_ID);
+    	spacestation->CreateLand(RACE::R0_ID);
     	    
     	return spacestation;
 }

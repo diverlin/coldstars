@@ -20,14 +20,12 @@
 #ifndef BASELAND_H
 #define BASELAND_H
 
-class BaseLand
+class BaseLand : public Base
 {
         public:
                 BaseLand();
                 virtual ~BaseLand();
 
-		int GetTypeId() const { return type_id; };
-		
 		virtual bool GetPermissionToLand() const = 0;
 		                
                 virtual bool Add(Vehicle*) = 0;
@@ -44,8 +42,6 @@ class BaseLand
                 void ManageLaunchingQueue();
                          
         protected:
-        	int type_id;
-        	
                 std::vector<Npc*>         NPC_vec;
                 std::vector<Vehicle*> VEHICLE_vec;        
                 
