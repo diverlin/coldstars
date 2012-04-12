@@ -17,48 +17,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "shop.hpp"
+#ifndef SHOP_H
+#define SHOP_H
 
 
-Shop :: Shop(TextureOb* _texOb_background)
+class Shop : public Base
 {
-        texOb_background  = _texOb_background;
-}
-
-
-void Shop :: renderBackground(Player* player) const
-{
-     	Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());
-     	drawTexturedRect(texOb_background, screen_rect, -1);  
-}
-
-void Shop :: renderInternals() const
-{
-}
-      
-void Shop :: update()
-{
-}
-            
-void Shop :: Render(Player* player) const
-{
-        clearScreen();
-        resetRenderTransformation();
+        public: 
+                Shop(int id);
+                ~Shop();
+                
+                void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
+                                
+                void Update();
+                void Render(Player*) const;
+                
+        private:
+                TextureOb* textureOb_background;
+                
+                void RenderBackground(Player*) const;
+                void RenderInternals() const;
         
-        renderBackground(player);
-        
-        enable_BLEND();
-                renderInternals();
-        disable_BLEND();
-}
+};
 
+#endif
 
-
-
-
-//from constants import *
-//from render import *
-//from resources import *
 
 //class ShopItem():
     //def __init__(self, item_icon_tex, (item_icon_w, item_icon_h), rect):
@@ -83,12 +66,12 @@ void Shop :: Render(Player* player) const
         //#self.background_tex = bg_texOb.texture
         //self.item_list = []
 
-        //mineral_icon_rect   = pygame.Rect((VIEW_WIDTH - (GUI::ICON_SIZE + 150),  1 * (GUI::ICON_SIZE + 5)), (GUI::ICON_SIZE,  GUI::ICON_SIZE))
-        //food_icon_rect      = pygame.Rect((VIEW_WIDTH - (GUI::ICON_SIZE + 150),  2 * (GUI::ICON_SIZE + 5)), (GUI::ICON_SIZE,  GUI::ICON_SIZE))
-        //medicine_icon_rect  = pygame.Rect((VIEW_WIDTH - (GUI::ICON_SIZE + 150),  3 * (GUI::ICON_SIZE + 5)), (GUI::ICON_SIZE,  GUI::ICON_SIZE))
-        //military_icon_rect  = pygame.Rect((VIEW_WIDTH - (GUI::ICON_SIZE + 150),  4 * (GUI::ICON_SIZE + 5)), (GUI::ICON_SIZE,  GUI::ICON_SIZE))
-        //drug_icon_rect      = pygame.Rect((VIEW_WIDTH - (GUI::ICON_SIZE + 150),  5 * (GUI::ICON_SIZE + 5)), (GUI::ICON_SIZE,  GUI::ICON_SIZE))
-        //exclusive_icon_rect = pygame.Rect((VIEW_WIDTH - (GUI::ICON_SIZE + 150),  6 * (GUI::ICON_SIZE + 5)), (GUI::ICON_SIZE,  GUI::ICON_SIZE))
+        //mineral_icon_rect   = pygame.Rect((VIEW_WIDTH - (INTERFACE_ICON_SIZE + 150),  1 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE))
+        //food_icon_rect      = pygame.Rect((VIEW_WIDTH - (INTERFACE_ICON_SIZE + 150),  2 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE))
+        //medicine_icon_rect  = pygame.Rect((VIEW_WIDTH - (INTERFACE_ICON_SIZE + 150),  3 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE))
+        //military_icon_rect  = pygame.Rect((VIEW_WIDTH - (INTERFACE_ICON_SIZE + 150),  4 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE))
+        //drug_icon_rect      = pygame.Rect((VIEW_WIDTH - (INTERFACE_ICON_SIZE + 150),  5 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE))
+        //exclusive_icon_rect = pygame.Rect((VIEW_WIDTH - (INTERFACE_ICON_SIZE + 150),  6 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE))
 
         //self.minerals = ShopItem(mineral_icon_tex, (mineral_icon_w, mineral_icon_h), mineral_icon_rect )
         //self.item_list.append(self.minerals)

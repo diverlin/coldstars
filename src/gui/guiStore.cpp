@@ -45,7 +45,7 @@ void GuiStore :: update()
                 	{
                         	if (lmb == true)
                         	{
-                        		store->sellItemFromSlot(player->GetNpc(), store->slot_vec[i]);
+                        		store->SellItemFromSlot(player->GetNpc(), store->slot_vec[i]);
                         	} 
                         	break;
                 	} 
@@ -85,5 +85,5 @@ void GuiStore :: renderBackground() const
 	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
 
      	Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());
-     	drawTexturedRect(store->texOb_background, screen_rect, -1);  
+     	drawTexturedRect(store->textureOb_background, screen_rect, -1);  
 }

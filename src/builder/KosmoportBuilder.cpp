@@ -38,25 +38,22 @@ void KosmoportBuilder::CreateNewKosmoport(int id)
         	
 void KosmoportBuilder::CreateNewInternals()
 {
-        TextureOb* _texOb_slot = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID);
-        TextureOb* _texOb_landingArea = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::LANDINGAREA_ID);
-        
-        TextureOb* _texOb_angarBackground  = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ANGAR_BACKGROUND_ID);   
-        TextureOb* _texOb_storeBackground  = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::STORE_BACKGROUND_ID);    
-        TextureOb* _texOb_shopBackground   = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SHOP_BACKGROUND_ID);    
-        TextureOb* _texOb_govermentBackground = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::GOVERMENT_BACKGROUND_ID);    
+	AngarBuilder::Instance().CreateNewAngar();
+	AngarBuilder::Instance().CreateNewInternals();	
+	kosmoport->SetAngar(AngarBuilder::Instance().GetAngar());
 
-        Angar* angar         = new Angar(_texOb_angarBackground, _texOb_landingArea);
-        Store* store         = new Store(_texOb_storeBackground, _texOb_slot);
-        Shop* shop           = new Shop(_texOb_shopBackground);
-        Goverment* goverment = new Goverment(_texOb_govermentBackground, _texOb_slot);
-        
-        equipStore(store);
-        
-        kosmoport->SetAngar(angar);
-        kosmoport->SetStore(store);
-        kosmoport->SetShop(shop);
-        kosmoport->SetGoverment(goverment);
+	StoreBuilder::Instance().CreateNewStore();
+	StoreBuilder::Instance().CreateNewInternals();	
+	StoreBuilder::Instance().PutRandomEquipment();	
+	kosmoport->SetStore(StoreBuilder::Instance().GetStore());
+
+	ShopBuilder::Instance().CreateNewShop();
+	ShopBuilder::Instance().CreateNewInternals();	
+	kosmoport->SetShop(ShopBuilder::Instance().GetShop());
+		        	
+	GovermentBuilder::Instance().CreateNewGoverment();
+	GovermentBuilder::Instance().CreateNewInternals();	
+	kosmoport->SetGoverment(GovermentBuilder::Instance().GetGoverment());
 }
 
   	

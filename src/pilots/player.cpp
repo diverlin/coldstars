@@ -989,7 +989,7 @@ void Player::SessionInKosmoport()
          
         if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::ANGAR_ID)
         {
-        	((Kosmoport*)npc->GetLand())->GetAngar()->mouseControl(this);                                
+        	((Kosmoport*)npc->GetLand())->GetAngar()->MouseControl(this);                                
                	((Kosmoport*)npc->GetLand())->GetAngar()->Render(this);
 
 		if (npc->GetScanTarget() != NULL) 
@@ -1016,7 +1016,7 @@ void Player::SessionInKosmoport()
 
         if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::SHOP_ID)
         {
-        	((Kosmoport*)npc->GetLand())->GetShop()->update();
+        	((Kosmoport*)npc->GetLand())->GetShop()->Update();
                 ((Kosmoport*)npc->GetLand())->GetShop()->Render(this);
 	}
 
@@ -1029,7 +1029,7 @@ void Player::SessionInKosmoport()
 
          if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::GOVERMENT_ID)
          {
-         	((Kosmoport*)npc->GetLand())->GetGoverment()->update();
+         	((Kosmoport*)npc->GetLand())->GetGoverment()->Update();
                 ((Kosmoport*)npc->GetLand())->GetGoverment()->Render(this);
          }
 

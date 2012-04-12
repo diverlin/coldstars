@@ -51,7 +51,7 @@ void GuiVehicle :: update()
 				{	
 					if (vehicle->slot_total_vec[i]->GetEquipedStatus() == true)
 					{
-						store->buyItemFromSlot(player->GetNpc(), vehicle->slot_total_vec[i]);
+						store->BuyItemFromSlot(player->GetNpc(), vehicle->slot_total_vec[i]);
 					}
             			}          		
 				else 

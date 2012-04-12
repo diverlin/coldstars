@@ -21,21 +21,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define GOVERMENT_H
 
 
-class Goverment
+class Goverment : public Base
 {
         public: 
-                Goverment(TextureOb*, TextureOb*);
+                Goverment(int);
                 ~Goverment();
                 
-                void update();
+                void SetTextureObFace(TextureOb* textureOb_face) { this->textureOb_face = textureOb_face; };
+                void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
+                
+                void Update();
                 void Render(Player*) const;
         
         private:
-                TextureOb* texOb_background;
-                TextureOb* texOb_face;
+                TextureOb* textureOb_background;
+                TextureOb* textureOb_face;
                 
-                void renderBackground(Player*) const;
-                void renderInternals() const;
+                void RenderBackground(Player*) const;
+                void RenderInternals() const;
 };
 
 #endif

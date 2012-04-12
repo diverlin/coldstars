@@ -21,25 +21,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define STORE_H
 
 
-class Store
+class Store : public Base
 {
         public:
-                Store(TextureOb*, TextureOb*);                      
+                Store(int);                      
                 ~Store();
 
-                ItemSlot* getEmptySlot();
-                
-                bool add(BaseItem*);
-                                                        void createSlots();                                                        
-                     	
-                bool sellItemFromSlot(Npc*, ItemSlot*);		
-                bool buyItemFromSlot(Npc*, ItemSlot*); 
+        	void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
+		
+		void Add(ItemSlot* slot) { slot_vec.push_back(slot); };                
+                bool Add(BaseItem*);
+
+                ItemSlot* GetEmptySlot();
+                                     	
+                bool SellItemFromSlot(Npc*, ItemSlot*);		
+                bool BuyItemFromSlot(Npc*, ItemSlot*); 
 
                 void Render() const;
                 
         public:
-                TextureOb* texOb_background; 
-                TextureOb* texOb_slot;                 
+                TextureOb* textureOb_background; 
               
                 std::vector<ItemSlot*> slot_vec;
 };

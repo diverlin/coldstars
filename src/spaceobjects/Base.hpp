@@ -24,7 +24,7 @@ class Base
 {
 	public:      
 		Base();
-		virtual ~Base();
+		~Base();
 
 		void SetSubTypeId(int subtype_id) { data_id.subtype_id = subtype_id; }
 

@@ -17,38 +17,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-Angar :: Angar(TextureOb* _texOb_background, TextureOb* _texOb_landingArea)
+Angar::Angar(int id)
 {
-        texOb_background = _texOb_background;
-
-	Platform* platform;
-	
-	int screen_w = Config::Instance().SCREEN_WIDTH;
-	int screen_h = Config::Instance().SCREEN_HEIGHT;	
-	
-        platform = new Platform(_texOb_landingArea, screen_w/2,       screen_h/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR);
-        platform_vec.push_back(platform);
-
-        platform = new Platform(_texOb_landingArea, screen_w/2 + 150, screen_h/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR);
-        platform_vec.push_back(platform);
-    
-        platform = new Platform(_texOb_landingArea, screen_w/2 - 150, screen_h/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR);
-        platform_vec.push_back(platform);
-
-        platform = new Platform(_texOb_landingArea, screen_w/2,       screen_h/2 + 150, GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR);
-        platform_vec.push_back(platform);
-
-        platform = new Platform(_texOb_landingArea, screen_w/2,       screen_h/2 - 150, GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR);
-        platform_vec.push_back(platform);
+	data_id.id = id;
+	data_id.type_id = ENTITY::ANGAR_ID;
+	data_id.subtype_id = NONE_ID;
+		
+        textureOb_background = NULL;
 }
 
-
-int Angar :: getFreePlatformTotalNum()
+Angar::~Angar()
+{}
+                
+int Angar::GetFreePlatformTotalNum() const
 {
         int sum_free = 0;
         for (unsigned int i = 0; i < platform_vec.size(); i++)
         {
-                if (platform_vec[i]->GetVehicle() == NULL)
+                //if (platform_vec[i]->GetVehicle() == NULL)
                 {
                         sum_free++;
                 }
@@ -56,13 +42,13 @@ int Angar :: getFreePlatformTotalNum()
         return sum_free; 
 }
 
-bool Angar :: add(Vehicle* vehicle)
+bool Angar::Add(Vehicle* vehicle)
 {
         for (unsigned int i = 0; i < platform_vec.size(); i++)
         {
                 if (platform_vec[i]->GetVehicle() == NULL)
                 {
-                        platform_vec[i]->insert(vehicle);
+                        platform_vec[i]->Insert(vehicle);
                         return true;
                 }
         }
@@ -71,7 +57,7 @@ bool Angar :: add(Vehicle* vehicle)
 }
 
 
-bool Angar :: remove(Vehicle* vehicle)
+bool Angar::Remove(Vehicle* vehicle)
 {
         for (unsigned int i = 0; i < platform_vec.size(); i++)
         {
@@ -79,7 +65,7 @@ bool Angar :: remove(Vehicle* vehicle)
                 {
                         if (platform_vec[i]->GetVehicle() == vehicle)
                         {
-                                platform_vec[i]->free();
+                                platform_vec[i]->Free();
                                 return true;
                         }
                 }
@@ -90,7 +76,7 @@ bool Angar :: remove(Vehicle* vehicle)
 
 
 
-void Angar :: mouseControl(Player* player)
+void Angar::MouseControl(Player* player)
 {
         //bool lmb = player->GetCursor()->getMouseLeftButton(); 
         bool rmb = player->GetCursor()->getMouseRightButton(); 
@@ -116,28 +102,27 @@ void Angar :: mouseControl(Player* player)
 }
 
 
-
-void Angar :: Render(Player* player) const
+void Angar::Render(Player* player) const
 {
         clearScreen();
         resetRenderTransformation();
                         
-        renderBackground(player);
+        RenderBackground(player);
                 
 	enable_BLEND();
         
-        renderInternals();
+        RenderInternals();
         //RenderItemInfo();
         
 }
 
-void Angar :: renderBackground(Player* player) const
+void Angar::RenderBackground(Player* player) const
 {
      	Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());
-     	drawTexturedRect(texOb_background, screen_rect, -2);  
+     	drawTexturedRect(textureOb_background, screen_rect, -2);  
 }
 
-void Angar :: renderInternals() const
+void Angar::RenderInternals() const
 {
         for (unsigned int i = 0; i < platform_vec.size(); i++)
         {
@@ -145,7 +130,7 @@ void Angar :: renderInternals() const
         }
 }
 
-void Angar :: RenderItemInfo(Player* player) const
+void Angar::RenderItemInfo(Player* player) const
 {
         for (unsigned int i = 0; i < platform_vec.size(); i++)
         { 
@@ -159,7 +144,7 @@ void Angar :: RenderItemInfo(Player* player) const
         				
                 	if (dist < platform_vec[i]->GetRect().getWidth()/2)
                 	{
-		                platform_vec[i]->renderInfo();
+		                platform_vec[i]->RenderInfo();
                 	}
                 }
         }

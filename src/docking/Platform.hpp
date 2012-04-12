@@ -17,8 +17,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef LANDINGAREA_H
-#define LANDINGAREA_H
+#ifndef PLATFORM_H
+#define PLATFORM_H
 
 
 class Platform
@@ -27,14 +27,14 @@ class Platform
                 Platform(TextureOb*, float _center_x, float _center_y, int _w, int _h);
                 ~Platform();
 
-                Vehicle* GetVehicle();
-                Rect GetRect() const;
+                Vehicle* GetVehicle() const { return vehicle; };
+                const Rect& GetRect() const { return rect; };
                 
-                void insert(Vehicle*);
-                void free(); 
+                void Insert(Vehicle*);
+                void Free(); 
         
                 void Render() const;
-                void renderInfo() const;
+                void RenderInfo() const;
                 
         private:
                 TextureOb* texOb;
