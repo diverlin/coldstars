@@ -28,7 +28,7 @@ class Angar : public Base
                 ~Angar();
                 
                 void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
-                void Add(Platform* platform) { platform_vec.size(); /*platform_vec.push_back(platform);*/ };
+                void Add(Platform* platform) { platform_vec.push_back(platform); };
                 
                 bool Add(Vehicle*);
                 bool Remove(Vehicle*);
