@@ -17,33 +17,42 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef ANGAR_H
-#define ANGAR_H
+#include "Shop.hpp"
 
 
-class Angar
+Shop::Shop(int id)
 {
-        public: 
-                Angar(TextureOb*, TextureOb*);
-                ~Angar();
-                
-                bool add(Vehicle*);
-                bool remove(Vehicle*);
+	data_id.id = id;
+	data_id.type_id = ENTITY::SHOP_ID;
+	data_id.subtype_id = ENTITY::SHOP_ID;
+		
+        textureOb_background  = NULL;
+}
 
-                void mouseControl(Player*);
 
-                void Render(Player*) const;
-                void RenderItemInfo(Player*) const;
+void Shop::RenderBackground(Player* player) const
+{
+     	Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());
+     	drawTexturedRect(textureOb_background, screen_rect, -1);  
+}
 
-                int getFreePlatformTotalNum();
-                
-        private:
-                TextureOb* texOb_background;
-                
-                std::vector<Platform*> platform_vec;
+void Shop::RenderInternals() const
+{}
+      
+void Shop::Update()
+{}
+            
+void Shop::Render(Player* player) const
+{
+        clearScreen();
+        resetRenderTransformation();
+        
+        RenderBackground(player);
+        
+        enable_BLEND();
+                RenderInternals();
+        disable_BLEND();
+}
 
-                void renderBackground(Player*) const;
-                void renderInternals() const;
-};
 
-#endif 
+

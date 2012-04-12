@@ -16,38 +16,33 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-Platform :: Platform(TextureOb* _texOb, float _center_x, float _center_y, int _w, int _h)
+Platform::Platform(TextureOb* _texOb, float _center_x, float _center_y, int _w, int _h)
 {   
     	texOb = _texOb;
 
     	rect = Rect(_center_x - _w/2, _center_y - _h/2, _w, _h);
+    	
+    	vehicle = NULL;
 }
    
-Platform :: ~Platform()
+Platform::~Platform()
 {}
-
-Vehicle* Platform :: GetVehicle()      { return vehicle; }
-Rect Platform :: GetRect() const { return rect; }
       
-                          
-void Platform :: insert(Vehicle* vehicle)
+void Platform::Insert(Vehicle* vehicle)
 {
         this->vehicle = vehicle;
         
         vehicle->GetPoints().setAngle(0);
-       	vehicle->GetPoints().setCenter(rect.getCenter().x, rect.getCenter().y);
+       	vehicle->GetPoints().setCenter(rect.getCenter());
         vehicle->GetPoints().update();
 }
 
-void Platform :: free()
+void Platform::Free()
 {
         vehicle = NULL;
 } 
 
-
-
-
-void Platform :: Render() const
+void Platform::Render() const
 {
      	drawTexturedRect(texOb, rect, -1);
      	if (vehicle != NULL)
@@ -57,7 +52,7 @@ void Platform :: Render() const
 }
 
 
-void Platform :: renderInfo() const
+void Platform::RenderInfo() const
 {
 	vehicle->RenderInfo(rect.getCenter().x, rect.getCenter().y, 0, 0);
 }

@@ -36,7 +36,7 @@ Kosmoport :: ~Kosmoport()
 /* virtual */
 bool Kosmoport::GetPermissionToLand() const
 {
-      	if (angar->getFreePlatformTotalNum() > 0) 
+      	if (angar->GetFreePlatformTotalNum() > 0) 
         { 
         	return true; 
         }
@@ -50,7 +50,7 @@ bool Kosmoport::Add(Vehicle* vehicle)
         vehicle->SetPlaceTypeId(data_id.type_id);
                 
         VEHICLE_vec.push_back(vehicle);
-        angar->add(vehicle);
+        angar->Add(vehicle);
         
         return true;
 }
@@ -79,7 +79,7 @@ bool Kosmoport::Remove(Vehicle* vehicle)
                 }
         }
         
-        bool is_removed_from_landing_area = angar->remove(vehicle); 
+        bool is_removed_from_landing_area = angar->Remove(vehicle); 
     
         if (is_removed_from_list && is_removed_from_landing_area)
                 return true;

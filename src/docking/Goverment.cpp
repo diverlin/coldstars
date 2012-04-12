@@ -17,35 +17,40 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#include "goverment.hpp"
+#include "Goverment.hpp"
 
 
-Goverment :: Goverment(TextureOb* _texOb_background, TextureOb* _texOb_face)
+Goverment::Goverment(int id)
 {
-        texOb_background   = _texOb_background;
-        texOb_face         = _texOb_face;   
+	data_id.id = id;
+	data_id.type_id = ENTITY::GOVERMENT_ID;
+	data_id.subtype_id = NONE_ID;
+			
+        textureOb_background   = NULL;
+        textureOb_face         = NULL;   
 }
 
-
-void Goverment :: update()
+Goverment::~Goverment()
 {}
 
+void Goverment::Update()
+{}
 
-void Goverment :: renderBackground(Player* player) const
+void Goverment::RenderBackground(Player* player) const
 {
      	Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());
-     	drawTexturedRect(texOb_background, screen_rect, -1);  
+     	drawTexturedRect(textureOb_background, screen_rect, -1);  
 }
 
-void Goverment :: renderInternals() const
+void Goverment::RenderInternals() const
 {}
             
-void Goverment :: Render(Player* player) const
+void Goverment::Render(Player* player) const
 {
         clearScreen();
         resetRenderTransformation();
                                                         
-        renderBackground(player);
-        renderInternals();
+        RenderBackground(player);
+        RenderInternals();
 }
 

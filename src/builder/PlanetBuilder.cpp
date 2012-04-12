@@ -55,8 +55,8 @@ void PlanetBuilder::CreateNewInternals(float orbit_radius)
         
         planet->SetPlanetData(planet_data);
 
-        //unsigned long int population = getRandInt(1000, 4000);
-	unsigned long int population = 0;
+        unsigned long int population = getRandInt(1000, 4000);
+	//unsigned long int population = 0;
 	BaseLand* land;
 	if (population > 0) 
 	{ 

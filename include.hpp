@@ -136,11 +136,11 @@ class GuiMap;
 #include "src/items/equipment/grappleEquipment.hpp"
 
 
-#include "src/docking/platform.hpp"
-#include "src/docking/angar.hpp"
-#include "src/docking/shop.hpp"
-#include "src/docking/goverment.hpp"
-#include "src/docking/store.hpp"
+#include "src/docking/Platform.hpp"
+#include "src/docking/Angar.hpp"
+#include "src/docking/Shop.hpp"
+#include "src/docking/Goverment.hpp"
+#include "src/docking/Store.hpp"
 #include "src/docking/BaseLand.hpp"
 #include "src/docking/Kosmoport.hpp"
 #include "src/docking/NatureLand.hpp"
@@ -186,7 +186,12 @@ class GuiMap;
 #include "src/builder/GalaxyBuilder.hpp"
 #include "src/builder/PlayerBuilder.hpp"
 #include "src/builder/NpcBuilder.hpp"
+#include "src/builder/AngarBuilder.hpp"
+#include "src/builder/ShopBuilder.hpp"
+#include "src/builder/StoreBuilder.hpp"
+#include "src/builder/GovermentBuilder.hpp"
 #include "src/builder/KosmoportBuilder.hpp"
+
 
 #include "src/pilots/player.hpp"
 
@@ -304,11 +309,11 @@ class GuiMap;
 #include "src/items/modules/scanerModule.cpp"
 #include "src/items/modules/grappleModule.cpp"
 
-#include "src/docking/platform.cpp"
-#include "src/docking/angar.cpp"
-#include "src/docking/store.cpp"
-#include "src/docking/shop.cpp"
-#include "src/docking/goverment.cpp"
+#include "src/docking/Platform.cpp"
+#include "src/docking/Angar.cpp"
+#include "src/docking/Store.cpp"
+#include "src/docking/Shop.cpp"
+#include "src/docking/Goverment.cpp"
 #include "src/docking/BaseLand.cpp"
 #include "src/docking/Kosmoport.cpp"
 
@@ -321,6 +326,8 @@ class GuiMap;
 #include "src/gui/guiManager.cpp"
 #include "src/gui/guiVehicle.cpp"
 #include "src/builder/BaseVehicleBuilder.cpp"
+#include "src/builder/AngarBuilder.cpp"
+#include "src/builder/StoreBuilder.cpp"
 #include "src/builder/VehicleBuilder.cpp"
 #include "src/builder/StarSystemBuilder.cpp"
 #include "src/builder/StarBuilder.cpp"
@@ -328,6 +335,8 @@ class GuiMap;
 #include "src/builder/GalaxyBuilder.cpp"
 #include "src/builder/PlayerBuilder.cpp"
 #include "src/builder/NpcBuilder.cpp"
+#include "src/builder/GovermentBuilder.cpp"
+#include "src/builder/ShopBuilder.cpp"
 #include "src/builder/KosmoportBuilder.cpp"
 
 #include "src/gui/guiSkill.cpp"
