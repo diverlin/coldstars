@@ -1,0 +1,48 @@
+/*
+Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+*/
+
+
+#ifndef SHOPBUILDER_H
+#define SHOPBUILDER_H
+
+
+class ShopBuilder
+{
+	public:
+		static ShopBuilder& Instance();
+		~ShopBuilder();
+
+        	void CreateNewShop(int id = NONE_ID); 
+                void CreateNewInternals();
+                Shop* GetShop() const { return shop; };
+                       	 		                
+        private:
+                Shop* shop;
+                
+		ShopBuilder() {};
+		ShopBuilder(const ShopBuilder&) {};
+		ShopBuilder& operator=(const ShopBuilder&) {};
+}; 
+
+
+#endif 
+    
+
+        
+
+

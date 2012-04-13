@@ -24,7 +24,7 @@ class Base
 {
 	public:      
 		Base();
-		~Base();
+		virtual ~Base();
 
 		void SetSubTypeId(int subtype_id) { data_id.subtype_id = subtype_id; }
 
@@ -32,6 +32,10 @@ class Base
 		int GetTypeId()    const { return data_id.type_id; }
 		int GetSubTypeId() const { return data_id.subtype_id; }
 				
+		virtual void SaveData(boost::property_tree::ptree&) const = 0;
+		virtual void LoadData(boost::property_tree::ptree&) = 0;
+		virtual void ResolveData() = 0;
+		
 	protected:
 		IdData data_id;
 		
