@@ -106,4 +106,21 @@ void SpaceStation::RenderAtPlanet() const
 
 
 
+/*virtual*/
+void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	//const std::string root = "rocket."+int2str(data_id.id)+".";
+}
+
+/*virtual*/
+void SpaceStation::LoadData(boost::property_tree::ptree& load_ptree)
+{
+
+}
+
+/*virtual*/
+void SpaceStation::ResolveData()
+{
+
+}
 

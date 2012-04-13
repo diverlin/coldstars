@@ -269,7 +269,7 @@ void Npc::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniqueNpc(save_ptree, root);	
 }		
 
-void Npc::LoadData(const boost::property_tree::ptree& load_ptree)
+void Npc::LoadData(boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
 	LoadDataUniqueBaseGameEntity(load_ptree);

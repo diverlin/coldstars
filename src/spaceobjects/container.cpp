@@ -25,10 +25,9 @@ Container :: Container(int id)
 	
     	mass = 1;
 
-    	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID);
-    	item_slot = new ItemSlot();
-    	item_slot->SetSubTypeId(SLOT::CARGO_ID);
-    	item_slot->SetTextureOb(texOb_slot);
+	ItemSlotBuilder::Instance().CreateNewItemSlot();
+	ItemSlotBuilder::Instance().CreateNewInternals(SLOT::CARGO_ID);
+   	item_slot = ItemSlotBuilder::Instance().GetItemSlot();
     	
     	velocity = getRandInt(40, 42) / 100.0;
 }
@@ -69,6 +68,23 @@ void Container :: PostDeathUniqueEvent(bool show_effect)
         }
 }
 
+/*virtual*/
+void Container::SaveData(boost::property_tree::ptree&) const
+{
+
+}
+
+/*virtual*/		
+void Container::LoadData(boost::property_tree::ptree&)
+{
+
+}
+	
+/*virtual*/	
+void Container::ResolveData()
+{
+
+}
 
 
 

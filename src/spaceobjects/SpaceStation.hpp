@@ -39,6 +39,10 @@ class SpaceStation : public Vehicle
         	void RenderInSpace() const;
 		void RenderAtPlanet() const; 
         	
+        	void SaveData(boost::property_tree::ptree&) const;
+    		void LoadData(boost::property_tree::ptree&);
+    		void ResolveData();
+    		
         private:
                 BaseLand* land;
 };

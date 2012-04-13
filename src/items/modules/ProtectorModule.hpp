@@ -17,34 +17,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef GRAPPLEMODULE_H
-#define GRAPPLEMODULE_H
+#ifndef PROTECTORMODULE_H
+#define PROTECTORMODULE_H
 
 
-class GrappleModule : public ModuleBase
+class ProtectorModule : public BaseModule
 {
-    	public:     
-      		GrappleModule(int strength_add, 
-                              int radius_add, 
-                              int speed_add, 
-                              int maxNumItem_add);
-      		virtual ~GrappleModule();
+   	public:
+       		ProtectorModule(int protection_add);
+       		virtual ~ProtectorModule();
 
-		int getStrengthAdd()   const;
-		int getRadiusAdd()     const;
-		int getSpeedAdd()      const;
-		int getMaxNumItemAdd() const;
-      		
-      	private: 
-      	       	int strength_add;
-       		int radius_add;
-       		int speed_add;
-       		int maxNumItem_add;
+		int GetProtectionAdd() const { return protection_add; };
        		
+       		virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
+		
+       	private:
+       	     	int protection_add;
+       	     	
        		void virtual AddUniqueInfo();
+       		
+        	void SaveDataUniqueProtectorModule(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueProtectorModule(const boost::property_tree::ptree&);
+		void ResolveDataUniqueProtectorModule();    
 };
 
-GrappleModule* getNewGrappleModule();
+ProtectorModule* GetNewProtectorModule();
 
 
 #endif

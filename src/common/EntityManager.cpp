@@ -62,15 +62,22 @@ void EntityManager::SaveEvent()
 	
 	for (std::map<int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
 	{
-		switch(iterator->second->GetTypeId())
-		{
-			case ENTITY::PLAYER_ID:     { ((Player*)iterator->second)->SaveData(save_ptree);    break; } 	
-			case ENTITY::GALAXY_ID:     { ((Galaxy*)iterator->second)->SaveData(save_ptree);     break; } 
-			case ENTITY::STARSYSTEM_ID: { ((StarSystem*)iterator->second)->SaveData(save_ptree); break; }
-			case ENTITY::STAR_ID:       { ((Star*)iterator->second)->SaveData(save_ptree);       break; }
-			case ENTITY::PLANET_ID:     { ((Planet*)iterator->second)->SaveData(save_ptree);     break; }  
-			case ENTITY::NPC_ID:        { ((Npc*)iterator->second)->SaveData(save_ptree);        break; }  
-		}
+		iterator->second->SaveData(save_ptree);
+	
+		//switch(iterator->second->GetTypeId())
+		//{
+			//case ENTITY::PLAYER_ID:     { ((Player*)iterator->second)->SaveData(save_ptree);    break; } 	
+			//case ENTITY::GALAXY_ID:     { ((Galaxy*)iterator->second)->SaveData(save_ptree);     break; } 
+			//case ENTITY::STARSYSTEM_ID: { ((StarSystem*)iterator->second)->SaveData(save_ptree); break; }
+			//case ENTITY::STAR_ID:       { ((Star*)iterator->second)->SaveData(save_ptree);       break; }
+			//case ENTITY::PLANET_ID:     { ((Planet*)iterator->second)->SaveData(save_ptree);     break; }  
+			//case ENTITY::NPC_ID:        { ((Npc*)iterator->second)->SaveData(save_ptree);        break; }  
+			//case ENTITY::KOSMOPORT_ID:  { ((Kosmoport*)iterator->second)->SaveData(save_ptree); break; }  
+			//case ENTITY::ANGAR_ID:      { ((Angar*)iterator->second)->SaveData(save_ptree);      break; }  
+			//case ENTITY::STORE_ID:      { ((Store*)iterator->second)->SaveData(save_ptree);     break; }  
+			//case ENTITY::SHOP_ID:       { ((Shop*)iterator->second)->SaveData(save_ptree);       break; }  
+			//case ENTITY::GOVERMENT_ID:  { ((Goverment*)iterator->second)->SaveData(save_ptree);  break; }  
+		//}
 	}
 	
 	SaveManager::Instance().SaveFile("save.info", save_ptree);
@@ -117,6 +124,36 @@ void EntityManager::LoadPass0()
 	{
 		NpcBuilder::Instance().CreateNewNpc(v.second.get<int>("data_id.id"));
 		NpcBuilder::Instance().GetNpc()->LoadData(v.second);
+	}
+
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("kosmoport"))
+	{
+		KosmoportBuilder::Instance().CreateNewKosmoport(v.second.get<int>("data_id.id"));
+		KosmoportBuilder::Instance().GetKosmoport()->LoadData(v.second);
+	}
+
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("angar"))
+	{
+		AngarBuilder::Instance().CreateNewAngar(v.second.get<int>("data_id.id"));
+		AngarBuilder::Instance().GetAngar()->LoadData(v.second);
+	}
+
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("store"))
+	{
+		StoreBuilder::Instance().CreateNewStore(v.second.get<int>("data_id.id"));
+		StoreBuilder::Instance().GetStore()->LoadData(v.second);
+	}
+
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("shop"))
+	{
+		ShopBuilder::Instance().CreateNewShop(v.second.get<int>("data_id.id"));
+		ShopBuilder::Instance().GetShop()->LoadData(v.second);
+	}
+
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("goverment"))
+	{
+		GovermentBuilder::Instance().CreateNewGoverment(v.second.get<int>("data_id.id"));
+		GovermentBuilder::Instance().GetGoverment()->LoadData(v.second);
 	}
 }
 

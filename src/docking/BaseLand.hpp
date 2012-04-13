@@ -20,6 +20,14 @@
 #ifndef BASELAND_H
 #define BASELAND_H
 
+struct UnresolvedDataUniqueBaseLand
+{
+	std::vector<int> npc_vec ;
+	std::vector<int> vehicle_vec;
+	std::vector<int> npc_launching_vec;
+	std::vector<int> npc_docking_vec;
+};
+
 class BaseLand : public Base
 {
         public:
@@ -40,13 +48,18 @@ class BaseLand : public Base
 		
 		void ManageDockingQueue();
                 void ManageLaunchingQueue();
-                         
+		  
         protected:
                 std::vector<Npc*>         NPC_vec;
                 std::vector<Vehicle*> VEHICLE_vec;        
                 
                 std::vector<Npc*> NPC_launching_vec;
                 std::vector<Npc*> NPC_docking_vec;
+                
+                UnresolvedDataUniqueBaseLand data_unresolved_BaseLand;
+                void SaveDataUniqueBaseLand(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadDataUniqueBaseLand(boost::property_tree::ptree&);
+		void ResolveDataUniqueBaseLand();
 };
 
 #endif

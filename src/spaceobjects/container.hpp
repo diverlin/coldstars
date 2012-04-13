@@ -34,6 +34,10 @@ class Container : public SpaceItemBase
         	
         	virtual void PostDeathUniqueEvent(bool);
         
+        	virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
+		
         private:
                 ItemSlot* item_slot;        
         	void UpdateInfo();  

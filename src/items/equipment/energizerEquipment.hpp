@@ -35,6 +35,10 @@ class EnergizerEquipment : public EquipmentBase
       		void countPrice();
       		virtual void updatePropetries();
       		      		
+      		virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
+		
       	private:
       		int energy_max_orig;
       		int energy_max_add;

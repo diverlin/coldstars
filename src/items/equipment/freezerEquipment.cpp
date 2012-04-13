@@ -35,7 +35,7 @@ void FreezerEquipment :: updatePropetries()
         
         for (unsigned int i = 0; i < modules_vec.size(); i++)
     	{
-    		freeze_add += ((FreezerModule*)modules_vec[i])->getFreezeAdd();   	
+    		freeze_add += ((FreezerModule*)modules_vec[i])->GetFreezeAdd();   	
     	}
     	
      	freeze = freeze_orig + freeze_add;
@@ -77,7 +77,24 @@ std::string FreezerEquipment :: getFreezeStr()
          	return int2str(freeze_orig) + "+" + int2str(freeze_add);
 }
 
-      
+/*virtual*/
+void FreezerEquipment::SaveData(boost::property_tree::ptree&) const
+{
+
+}
+
+/*virtual*/		
+void FreezerEquipment::LoadData(boost::property_tree::ptree&)
+{
+
+}
+	
+/*virtual*/	
+void FreezerEquipment::ResolveData()
+{
+
+}
+
 
 FreezerEquipment* getNewFreezerEquipment(int race_id, int revision_id)
 {

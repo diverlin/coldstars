@@ -34,6 +34,10 @@ class FreezerEquipment : public EquipmentBase
       		void countPrice();
       		virtual void updatePropetries();  
       		
+    		virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
+      		
       	private:
       	      	int freeze_orig;
       		int freeze_add;

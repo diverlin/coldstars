@@ -1054,7 +1054,7 @@ void StarSystem::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniqueStarSystem(save_ptree, root);
 }
 
-void StarSystem::LoadData(const boost::property_tree::ptree& load_ptree)
+void StarSystem::LoadData(boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
 	LoadDataUniqueBaseGameEntity(load_ptree);

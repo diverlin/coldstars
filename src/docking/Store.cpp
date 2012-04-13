@@ -82,3 +82,41 @@ bool Store::BuyItemFromSlot(Npc* npc, ItemSlot* slot)
 		return false;
 	}
 }
+
+
+void Store::SaveDataUniqueStore(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+	//save_ptree.put(root+"unresolved.angar_id",     angar->GetId());
+
+}
+
+void Store::LoadDataUniqueStore(const boost::property_tree::ptree& load_ptree)
+{
+	//data_unresolved_Kosmoport.angar_id = load_ptree.get<int>("unresolved.angar_id");
+
+}
+
+void Store::ResolveDataUniqueStore()
+{
+	//angar     = (Angar*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.angar_id); 
+
+}
+
+void Store::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	std::string root = "goverment." + int2str(GetId())+".";
+	SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueStore(save_ptree, root);
+}
+
+void Store::LoadData(boost::property_tree::ptree& load_ptree)
+{
+	LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueStore(load_ptree);
+}
+
+void Store::ResolveData()
+{
+	ResolveDataUniqueBase();
+	ResolveDataUniqueStore();
+}

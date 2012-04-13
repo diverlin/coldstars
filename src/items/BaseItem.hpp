@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define BASEITEM_H
 
 
-class BaseItem
+class BaseItem : public Base
 {
     	public:    				
       		BaseItem();
@@ -33,9 +33,6 @@ class BaseItem
 		void SetItemCommonData(ItemCommonData data_item) { this->data_item = data_item; };
                 
             	TextureOb* GetTextureOb()   const { return texOb; };
-		unsigned int GetId()        const { return data_id.id; };
-		unsigned int GetTypeId()    const { return data_id.type_id; };
-		unsigned int GetSubTypeId() const { return data_id.subtype_id; };
 		unsigned int GetMass()      const { return data_item.mass; };
 		unsigned int GetCondition() const { return condition; };
 		int GetPrice()              const { return price; };
@@ -55,7 +52,6 @@ class BaseItem
      		void virtual UpdateOwnerAbilities()=0;
 
 	protected:
-      	      	IdData data_id;
      		TextureOb* texOb;
                 
                 int race_id;

@@ -40,6 +40,10 @@ class Angar : public Base
 
                 int GetFreePlatformTotalNum() const;
                 
+                void SaveData(boost::property_tree::ptree&) const;		
+		void LoadData(boost::property_tree::ptree&);
+		void ResolveData();
+		
         private:
                 TextureOb* textureOb_background;
                 
@@ -47,6 +51,10 @@ class Angar : public Base
 
                 void RenderBackground(Player*) const;
                 void RenderInternals() const;
+                
+                void SaveDataUniqueAngar(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadDataUniqueAngar(const boost::property_tree::ptree&);
+		void ResolveDataUniqueAngar();
 };
 
 #endif 

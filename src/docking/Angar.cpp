@@ -151,3 +151,41 @@ void Angar::RenderItemInfo(Player* player) const
 }
             
 
+void Angar::SaveDataUniqueAngar(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+	//save_ptree.put(root+"unresolved.angar_id",     angar->GetId());
+
+}
+
+void Angar::LoadDataUniqueAngar(const boost::property_tree::ptree& load_ptree)
+{
+	//data_unresolved_Kosmoport.angar_id = load_ptree.get<int>("unresolved.angar_id");
+
+}
+
+void Angar::ResolveDataUniqueAngar()
+{
+	//angar     = (Angar*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.angar_id); 
+
+}
+
+
+void Angar::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	std::string root = "angar." + int2str(GetId())+".";
+	SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueAngar(save_ptree, root);
+}
+
+void Angar::LoadData(boost::property_tree::ptree& load_ptree)
+{
+	LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueAngar(load_ptree);
+}
+
+void Angar::ResolveData()
+{
+	ResolveDataUniqueBase();
+	ResolveDataUniqueAngar();
+}
+

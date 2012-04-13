@@ -55,6 +55,10 @@ class RocketEquipment : public EquipmentBase
       	      	void countPrice();
       		virtual void updatePropetries();
       		
+      		virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
+      		
       	private:
       	      	int ammo_max_orig;
       		int ammo_max_add;

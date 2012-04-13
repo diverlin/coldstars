@@ -35,6 +35,10 @@ class Satellite : public Vehicle
         	void render_inSpace() const;
 		void render_atPlanet() const; 
 		
+		void SaveData(boost::property_tree::ptree&) const;
+    		void LoadData(boost::property_tree::ptree&);
+    		void ResolveData();
+    		
         private:
         	Orbit* orbit;
 

@@ -17,18 +17,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-ModuleBase :: ModuleBase()
+BaseModule::BaseModule()
 {}
 
 /* virtual */
-ModuleBase :: ~ModuleBase ()
+BaseModule::~BaseModule ()
 {}
 
-
 /* virtual */
-void ModuleBase :: UpdateOwnerAbilities()     { /* do nothing*/ } 
+void BaseModule::UpdateOwnerAbilities()     { /* do nothing*/ } 
 
-void ModuleBase :: AddCommonInfo()
+void BaseModule::AddCommonInfo()
 {
     	//info.addNameStr("modules:");   info.addValueStr( int2str(common_data.modules_num_max) );
     	//info.addNameStr("race:");      info.addValueStr( returnRaceStringByRaceId(race_id) );
@@ -49,3 +48,11 @@ void ModuleBase :: AddCommonInfo()
 //}
 
 
+void BaseModule::SaveDataUniqueBaseModule(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{}
+
+void BaseModule::LoadDataUniqueBaseModule(const boost::property_tree::ptree& load_ptree)
+{}
+
+void BaseModule::ResolveDataUniqueBaseModule()
+{}

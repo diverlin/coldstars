@@ -40,8 +40,8 @@ void DriveEquipment :: updatePropetries()
      
         for (unsigned int i = 0; i < modules_vec.size(); i++)
     	{
-    		speed_add += ((DriveModule*)modules_vec[i])->getSpeedAdd();
-        	hyper_add += ((DriveModule*)modules_vec[i])->getHyperAdd();  	
+    		speed_add += ((DriveModule*)modules_vec[i])->GetSpeedAdd();
+        	hyper_add += ((DriveModule*)modules_vec[i])->GetHyperAdd();  	
     	}
     	
      	speed = speed_orig + speed_add;
@@ -94,6 +94,24 @@ std::string DriveEquipment :: getHyperStr()
         	return int2str(hyper_orig);
      	else
         	return int2str(hyper_orig) + "+" + int2str(hyper_add);
+}
+
+/*virtual*/
+void DriveEquipment::SaveData(boost::property_tree::ptree&) const
+{
+
+}
+
+/*virtual*/		
+void DriveEquipment::LoadData(boost::property_tree::ptree&)
+{
+
+}
+	
+/*virtual*/	
+void DriveEquipment::ResolveData()
+{
+
 }
 
 

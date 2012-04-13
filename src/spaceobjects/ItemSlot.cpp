@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-ItemSlot::ItemSlot()
+ItemSlot::ItemSlot(int id)
 {
 	/* 
         The class provides implementation to insert/hold/remove all game items (equipments, modules and so on)
@@ -25,8 +25,9 @@ ItemSlot::ItemSlot()
         Lazer weapon item cannot be inserted to drive slot and so on).
 	*/
 
-        type_id    = SLOT::SLOT_ID;
-	subtype_id = -1;
+	data_id.id = id;
+        data_id.type_id    = SLOT::SLOT_ID;
+	data_id.subtype_id = NONE_ID;
      
         rect = Rect();         
 
@@ -54,7 +55,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 {
 	if (item != NULL)
 	{
-		if (subtype_id == SLOT::CARGO_ID) 
+		if (data_id.subtype_id == SLOT::CARGO_ID) 
 		{
                 	this->item = item;
                 	is_EQUIPED = true; 
@@ -62,7 +63,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 			return true;
    		}
    	
-		if (subtype_id == item->GetFunctionalSlotSubTypeId())
+		if (data_id.subtype_id == item->GetFunctionalSlotSubTypeId())
 		{
 		        this->item = item;
                 	is_EQUIPED = true; 
@@ -89,7 +90,7 @@ void ItemSlot::RemoveItem()
         item = NULL;
     	is_EQUIPED = false;  
         
-    	if (subtype_id != SLOT::CARGO_ID) 
+    	if (data_id.subtype_id != SLOT::CARGO_ID) 
     	{ 
     		tmp_item->UpdateOwnerAbilities(); 
     	}                     
@@ -196,7 +197,7 @@ bool ItemSlot::SwapItemWith(ItemSlot* _slot)
        	{          
        		if ( (item->GetTypeId() == MODULE::MODULE_ID) and (_slot->GetItem()->GetTypeId() == EQUIPMENT::EQUIPMENT_ID) )
        		{
-			if (((EquipmentBase*)_slot->GetItem())->insertModule((ModuleBase*)item) == true)  
+			if (((EquipmentBase*)_slot->GetItem())->insertModule((BaseModule*)item) == true)  
 			{ 
 				RemoveItem(); 
 				
@@ -206,7 +207,7 @@ bool ItemSlot::SwapItemWith(ItemSlot* _slot)
        		
        		if ( (item->GetTypeId() == EQUIPMENT::EQUIPMENT_ID) and (_slot->GetItem()->GetTypeId() == MODULE::MODULE_ID) )
        		{
-			 if (((EquipmentBase*)item)->insertModule((ModuleBase*)_slot->GetItem()) == true)  
+			 if (((EquipmentBase*)item)->insertModule((BaseModule*)_slot->GetItem()) == true)  
 			 { 
 			 	_slot->RemoveItem(); 
 			 	
@@ -281,3 +282,21 @@ bool ItemSlot::CheckDistance(BaseGameEntity* _target) const
        	return false;
 }
 
+/*virtual*/
+void ItemSlot::SaveData(boost::property_tree::ptree&) const
+{
+
+}
+
+/*virtual*/		
+void ItemSlot::LoadData(boost::property_tree::ptree&)
+{
+
+}
+	
+/*virtual*/	
+void ItemSlot::ResolveData()
+{
+
+}
+		

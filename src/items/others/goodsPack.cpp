@@ -74,7 +74,23 @@ void GoodsPack::AddCommonInfo()
 }
 
  
+/*virtual*/
+void GoodsPack::SaveData(boost::property_tree::ptree&) const
+{
 
+}
+
+/*virtual*/		
+void GoodsPack::LoadData(boost::property_tree::ptree&)
+{
+
+}
+	
+/*virtual*/	
+void GoodsPack::ResolveData()
+{
+
+}
 
 GoodsPack* getNewGoodsPack(unsigned int _subtype_id)
 {

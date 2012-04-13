@@ -17,28 +17,38 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef ENERGIZERMODULE_H
-#define ENERGIZERMODULE_H
+#ifndef DRIVEMODULE_H
+#define DRIVEMODULE_H
 
 
-class EnergizerModule : public ModuleBase
+class DriveModule : public BaseModule
 {
-   	public:   
-      		EnergizerModule(int energy_max_add, 
-                                int restoration_add);
-      		virtual ~EnergizerModule();
+   	public: 
+      		DriveModule(int);
+      		virtual ~DriveModule();
 
-		int getEnergyMaxAdd()   const;
-		int getRestorationAdd() const;
-      		
+		void SetSpeedAdd(int speed_add) { this->speed_add = speed_add; };
+		void SetHyperAdd(int hyper_add) { this->hyper_add = hyper_add; };
+		
+		int GetSpeedAdd() const { return speed_add; };
+		int GetHyperAdd() const { return hyper_add; };
+
+		virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
+		
       	private:
-      	      	int energy_max_add;
-      		int restoration_add;
-      		
+      		int speed_add;
+      		int hyper_add;
+
       		void virtual AddUniqueInfo();
+      		
+      		void SaveDataUniqueDriveModule(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueDriveModule(const boost::property_tree::ptree&);
+		void ResolveDataUniqueDriveModule();
 };
 
-EnergizerModule* getNewEnergizerModule();
+DriveModule* GetNewDriveModule();
 
 
 #endif

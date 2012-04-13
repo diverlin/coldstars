@@ -95,3 +95,21 @@ void NatureLand::Ai()
            	NPC_vec[i]->ThinkCommon_inLand_inStatic();      
 	}
 }  
+
+/*virtual*/
+void NatureLand::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	//const std::string root = "rocket."+int2str(data_id.id)+".";
+}
+
+/*virtual*/
+void NatureLand::LoadData(boost::property_tree::ptree& load_ptree)
+{
+
+}
+
+/*virtual*/
+void NatureLand::ResolveData()
+{
+
+}

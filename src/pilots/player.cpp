@@ -1064,7 +1064,7 @@ void Player::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniquePlayer(save_ptree, root);	
 }		
 
-void Player::LoadData(const boost::property_tree::ptree& load_ptree)
+void Player::LoadData(boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
 	LoadDataUniquePlayer(load_ptree);	   

@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-GrappleModule :: GrappleModule(int strength_add, int radius_add, int speed_add, int maxNumItem_add)
+GrappleModule::GrappleModule(int strength_add, int radius_add, int speed_add, int maxNumItem_add)
 {
        this->strength_add   = strength_add;
        this->radius_add     = radius_add;
@@ -25,17 +25,12 @@ GrappleModule :: GrappleModule(int strength_add, int radius_add, int speed_add, 
        this->maxNumItem_add = maxNumItem_add;
 }
 
-GrappleModule :: ~GrappleModule() /* virtual */
+/* virtual */
+GrappleModule::~GrappleModule() 
 {}
 
-
-int GrappleModule :: getStrengthAdd()   const { return strength_add; }
-int GrappleModule :: getRadiusAdd()     const { return radius_add; }
-int GrappleModule :: getSpeedAdd()      const { return speed_add; }
-int GrappleModule :: getMaxNumItemAdd() const { return maxNumItem_add; }
-		
-
-void GrappleModule :: AddUniqueInfo()
+/* virtual */
+void GrappleModule::AddUniqueInfo()
 {
     	info.addTitleStr("grapple module");
     	if (strength_add != 0)
@@ -56,8 +51,48 @@ void GrappleModule :: AddUniqueInfo()
     	}
 }
 
+/*virtual*/
+void GrappleModule::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	std::string root = "grapple_module." + int2str(GetId()) + ".";
+	SaveDataUniqueBaseModule(save_ptree, root);
+	SaveDataUniqueGrappleModule(save_ptree, root);
+}
 
-GrappleModule* getNewGrappleModule()
+/*virtual*/		
+void GrappleModule::LoadData(boost::property_tree::ptree& load_ptree)
+{
+	LoadDataUniqueBaseModule(load_ptree);
+	LoadDataUniqueGrappleModule(load_ptree);
+}
+	
+/*virtual*/	
+void GrappleModule::ResolveData()
+{
+	ResolveDataUniqueBaseModule();
+	ResolveDataUniqueGrappleModule();
+}
+
+void GrappleModule::SaveDataUniqueGrappleModule(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+	save_ptree.put(root+"strength_add", strength_add);
+	save_ptree.put(root+"radius_add", radius_add);
+	save_ptree.put(root+"speed_add", speed_add);
+	save_ptree.put(root+"maxNumItem_add", maxNumItem_add);
+}
+
+void GrappleModule::LoadDataUniqueGrappleModule(const boost::property_tree::ptree& load_ptree)
+{
+	strength_add = load_ptree.get<int>("strength_add");
+	radius_add = load_ptree.get<int>("radius_add");
+	speed_add = load_ptree.get<int>("speed_add");
+	maxNumItem_add = load_ptree.get<int>("maxNumItem_add");
+}
+
+void GrappleModule::ResolveDataUniqueGrappleModule()
+{}
+
+GrappleModule* GetNewGrappleModule()
 {
     	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
         
@@ -75,6 +110,8 @@ GrappleModule* getNewGrappleModule()
     	grapple_module->SetTextureOb(texOb);
         grapple_module->SetIdData(data_id);
         
+        EntityManager::Instance().RegisterEntity(grapple_module);
+                
         return grapple_module;
 }
 

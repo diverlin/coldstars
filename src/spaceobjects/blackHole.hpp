@@ -34,6 +34,10 @@ class BlackHole : public SpaceItemBase
         	
         	void Render() const;
         	
+        	virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
+		
         private:
         	BlackHoleEffect* effect;
         	

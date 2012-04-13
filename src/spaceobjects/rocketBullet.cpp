@@ -142,5 +142,21 @@ void RocketBullet :: render_inSpace() const
 
 
 
+/*virtual*/
+void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	//const std::string root = "rocket."+int2str(data_id.id)+".";
+}
 
+/*virtual*/
+void RocketBullet::LoadData(boost::property_tree::ptree& load_ptree)
+{
+
+}
+
+/*virtual*/
+void RocketBullet::ResolveData()
+{
+
+}
 

@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define DRIVEEQUIPMENT_H
 
 
-class DriveEquipment :  public EquipmentBase
+class DriveEquipment : public EquipmentBase
 {
 	public:
       		DriveEquipment(int speed_orig, 
@@ -36,6 +36,10 @@ class DriveEquipment :  public EquipmentBase
       		void countPrice();
       		virtual void updatePropetries();
       		      		
+      		virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
+		
       	private:
       	      	int speed_orig;
       		int speed_add;

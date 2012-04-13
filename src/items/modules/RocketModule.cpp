@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-RocketModule :: RocketModule(int ammo_max_add, 
+RocketModule::RocketModule(int ammo_max_add, 
                              int damage_add, 
                              int radius_add)
 {
@@ -26,16 +26,12 @@ RocketModule :: RocketModule(int ammo_max_add,
      	this->radius_add   = radius_add;
 }
        
-RocketModule :: ~RocketModule() /* virtual */
+/* virtual */
+RocketModule::~RocketModule() 
 {}
 
-
-int RocketModule :: getAmmoMaxAdd() const { return ammo_max_add; }
-int RocketModule :: getDamageAdd()  const { return damage_add; }
-int RocketModule :: getRadiusAdd()  const { return radius_add; }
-		
-
-void RocketModule :: AddUniqueInfo()
+/* virtual */
+void RocketModule::AddUniqueInfo()
 {
     	info.addTitleStr("rocket module"); 
     	if (ammo_max_add != 0)
@@ -53,7 +49,48 @@ void RocketModule :: AddUniqueInfo()
 }
 
 
-RocketModule* getNewRocketModule()
+/*virtual*/
+void RocketModule::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	std::string root = "rocket_module." + int2str(GetId()) + ".";
+	SaveDataUniqueBaseModule(save_ptree, root);
+	SaveDataUniqueRocketModule(save_ptree, root);
+}
+
+/*virtual*/		
+void RocketModule::LoadData(boost::property_tree::ptree& load_ptree)
+{
+	LoadDataUniqueBaseModule(load_ptree);
+	LoadDataUniqueRocketModule(load_ptree);
+}
+	
+/*virtual*/	
+void RocketModule::ResolveData()
+{
+	ResolveDataUniqueBaseModule();
+	ResolveDataUniqueRocketModule();
+}
+
+void RocketModule::SaveDataUniqueRocketModule(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+	save_ptree.put(root+"ammo_max_add", ammo_max_add);
+	save_ptree.put(root+"damage_add", damage_add);
+	save_ptree.put(root+"radius_add", radius_add);
+}
+
+void RocketModule::LoadDataUniqueRocketModule(const boost::property_tree::ptree& load_ptree)
+{
+	ammo_max_add = load_ptree.get<int>("ammo_max_add");
+	damage_add = load_ptree.get<int>("damage_add");
+	radius_add = load_ptree.get<int>("radius_add");
+}
+
+void RocketModule::ResolveDataUniqueRocketModule()
+{}
+
+
+
+RocketModule* GetNewRocketModule()
 {
     	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
         
@@ -69,6 +106,8 @@ RocketModule* getNewRocketModule()
     	RocketModule* rocket_module = new RocketModule(ammo_max_add, damage_add, radius_add);
         rocket_module->SetTextureOb(texOb);
         rocket_module->SetIdData(data_id);
-                
+         
+        EntityManager::Instance().RegisterEntity(rocket_module);
+                        
     	return rocket_module;
 }
