@@ -21,6 +21,7 @@
 Base::Base()
 {}
 
+/*virtual*/
 Base::~Base()
 {}
 
