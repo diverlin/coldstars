@@ -100,7 +100,7 @@ void Planet::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniquePlanet(save_ptree, root);
 }
 
-void Planet::LoadData(const boost::property_tree::ptree& load_ptree)
+void Planet::LoadData(boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
 	LoadDataUniqueBaseGameEntity(load_ptree);

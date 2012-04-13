@@ -17,23 +17,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-EnergizerModule :: EnergizerModule(int energy_max_add, 
+EnergizerModule::EnergizerModule(int energy_max_add, 
                                    int restoration_add)
 {
      	this->energy_max_add  = energy_max_add;
      	this->restoration_add = restoration_add;
 }
 
-
-EnergizerModule :: ~EnergizerModule() /* virtual */
+/* virtual */
+EnergizerModule::~EnergizerModule()
 {}
 
-
-int EnergizerModule :: getEnergyMaxAdd()   const { return energy_max_add; }
-int EnergizerModule :: getRestorationAdd() const { return restoration_add; }
-
-
-void EnergizerModule :: AddUniqueInfo()
+/* virtual */
+void EnergizerModule::AddUniqueInfo()
 {
     	info.addTitleStr("energizer module");
     	if (energy_max_add != 0)
@@ -46,8 +42,44 @@ void EnergizerModule :: AddUniqueInfo()
     	} 
 }
 
+/*virtual*/
+void EnergizerModule::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	std::string root = "energizer_module." + int2str(GetId()) + ".";
+	SaveDataUniqueBaseModule(save_ptree, root);
+	SaveDataUniqueEnergizerModule(save_ptree, root);
+}
 
-EnergizerModule* getNewEnergizerModule()
+/*virtual*/		
+void EnergizerModule::LoadData(boost::property_tree::ptree& load_ptree)
+{
+	LoadDataUniqueBaseModule(load_ptree);
+	LoadDataUniqueEnergizerModule(load_ptree);
+}
+	
+/*virtual*/	
+void EnergizerModule::ResolveData()
+{
+	ResolveDataUniqueBaseModule();
+	ResolveDataUniqueEnergizerModule();
+}
+
+void EnergizerModule::SaveDataUniqueEnergizerModule(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+	save_ptree.put(root+"energy_max_add", energy_max_add);
+	save_ptree.put(root+"restoration_add", restoration_add);
+}
+
+void EnergizerModule::LoadDataUniqueEnergizerModule(const boost::property_tree::ptree& load_ptree)
+{
+	energy_max_add = load_ptree.get<int>("energy_max_add");
+	restoration_add = load_ptree.get<int>("restoration_add");
+}
+
+void EnergizerModule::ResolveDataUniqueEnergizerModule()
+{}
+
+EnergizerModule* GetNewEnergizerModule()
 {
     	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
         	
@@ -63,5 +95,7 @@ EnergizerModule* getNewEnergizerModule()
         energizer_module->SetTextureOb(texOb);
         energizer_module->SetIdData(data_id);
         
+        EntityManager::Instance().RegisterEntity(energizer_module);
+                
         return energizer_module; 
 }

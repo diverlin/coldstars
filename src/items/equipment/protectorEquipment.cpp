@@ -35,7 +35,7 @@ void ProtectorEquipment :: updatePropetries()
         
        	for (unsigned int i = 0; i < modules_vec.size(); i++)
     	{
-    		protection_add += ((ProtectorModule*)modules_vec[i])->getProtectionAdd();     	
+    		protection_add += ((ProtectorModule*)modules_vec[i])->GetProtectionAdd();     	
     	}
     	
       	protection = protection_orig + protection_add;
@@ -76,6 +76,24 @@ std::string ProtectorEquipment :: getProtectionStr()
          	return int2str(protection_orig);
      	else
          	return int2str(protection_orig) + "+" + int2str(protection_add);
+}
+
+/*virtual*/
+void ProtectorEquipment::SaveData(boost::property_tree::ptree&) const
+{
+
+}
+
+/*virtual*/		
+void ProtectorEquipment::LoadData(boost::property_tree::ptree&)
+{
+
+}
+	
+/*virtual*/	
+void ProtectorEquipment::ResolveData()
+{
+
 }
 
 

@@ -32,13 +32,21 @@ class Goverment : public Base
                 
                 void Update();
                 void Render(Player*) const;
-        
+                
+                void SaveData(boost::property_tree::ptree&) const;		
+		void LoadData(boost::property_tree::ptree&);
+		void ResolveData();
+		
         private:
                 TextureOb* textureOb_background;
                 TextureOb* textureOb_face;
                 
                 void RenderBackground(Player*) const;
                 void RenderInternals() const;
+                
+                void SaveDataUniqueGoverment(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadDataUniqueGoverment(const boost::property_tree::ptree&);
+		void ResolveDataUniqueGoverment();
 };
 
 #endif

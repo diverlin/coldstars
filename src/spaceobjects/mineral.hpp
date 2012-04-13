@@ -28,6 +28,10 @@ class Mineral : public SpaceItemBase
         
         	void renderInfo_inSpace(vec2f);
         	
+        	virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
+		
         private:
         	InfoTable info;
         	void UpdateInfo();

@@ -17,25 +17,36 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef RADARMODULE_H
-#define RADARMODULE_H
+#ifndef ENERGIZERMODULE_H
+#define ENERGIZERMODULE_H
 
 
-class RadarModule : public ModuleBase
+class EnergizerModule : public BaseModule
 {
-   	public:
-      		RadarModule(int radius_add);
-      		virtual ~RadarModule();
-      		
-      		int getRadiusAdd() const;
+   	public:   
+      		EnergizerModule(int energy_max_add, 
+                                int restoration_add);
+      		virtual ~EnergizerModule();
 
+		int GetEnergyMaxAdd()   const { return energy_max_add; };
+		int GetRestorationAdd() const { return restoration_add; };
+      		
+      		virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
+		
       	private:
-      		int radius_add;
+      	      	int energy_max_add;
+      		int restoration_add;
       		
       		void virtual AddUniqueInfo();
+      		
+      		void SaveDataUniqueEnergizerModule(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueEnergizerModule(const boost::property_tree::ptree&);
+		void ResolveDataUniqueEnergizerModule();
 };
 
-RadarModule* getNewRadarModule();
+EnergizerModule* GetNewEnergizerModule();
 
 
 #endif

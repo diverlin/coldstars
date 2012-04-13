@@ -17,25 +17,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef FREEZERMODULE_H
-#define FREEZERMODULE_H
+#ifndef RADARMODULE_H
+#define RADARMODULE_H
 
 
-class FreezerModule : public ModuleBase
+class RadarModule : public BaseModule
 {
-  	public:
-      		FreezerModule(int freeze_add);
-      		virtual ~FreezerModule();
-
-		int getFreezeAdd() const;
+   	public:
+      		RadarModule(int radius_add);
+      		virtual ~RadarModule();
       		
+      		int GetRadiusAdd() const { return radius_add; };
+
+		virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
+		
       	private:
-      	      	int freeze_add;
-      	      	
-      	      	void virtual AddUniqueInfo();
+      		int radius_add;
+      		
+      		void virtual AddUniqueInfo();
+      		
+        	void SaveDataUniqueRadarModule(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueRadarModule(const boost::property_tree::ptree&);
+		void ResolveDataUniqueRadarModule(); 
 };
 
-FreezerModule* getNewFreezerModule();
+RadarModule* GetNewRadarModule();
 
 
 #endif

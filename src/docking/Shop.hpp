@@ -32,11 +32,19 @@ class Shop : public Base
                 void Update();
                 void Render(Player*) const;
                 
+                void SaveData(boost::property_tree::ptree&) const;		
+		void LoadData(boost::property_tree::ptree&);
+		void ResolveData();
+		
         private:
                 TextureOb* textureOb_background;
                 
                 void RenderBackground(Player*) const;
                 void RenderInternals() const;
+                
+                void SaveDataUniqueShop(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadDataUniqueShop(const boost::property_tree::ptree&);
+		void ResolveDataUniqueShop();
         
 };
 

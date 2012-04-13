@@ -42,8 +42,8 @@ void LazerEquipment :: updatePropetries()
    	
    	for (unsigned int i = 0; i < modules_vec.size(); i++)
     	{
-        	damage_add   += ((LazerModule*)modules_vec[i])->getDamageAdd();
-        	radius_add   += ((LazerModule*)modules_vec[i])->getRadiusAdd();        	
+        	damage_add   += ((LazerModule*)modules_vec[i])->GetDamageAdd();
+        	radius_add   += ((LazerModule*)modules_vec[i])->GetRadiusAdd();        	
     	}
     	
     	damage = damage_orig + damage_add;
@@ -133,6 +133,24 @@ void LazerEquipment :: fireEvent_FALSE()
 { 
     	Deterioration();
 } 
+
+/*virtual*/
+void LazerEquipment::SaveData(boost::property_tree::ptree&) const
+{
+
+}
+
+/*virtual*/		
+void LazerEquipment::LoadData(boost::property_tree::ptree&)
+{
+
+}
+	
+/*virtual*/	
+void LazerEquipment::ResolveData()
+{
+
+}
 
 
 LazerEquipment* getNewLazerEquipment(int race_id, int revision_id)

@@ -21,21 +21,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define SCANERMODULE_H
 
 
-class ScanerModule : public ModuleBase
+class ScanerModule : public BaseModule
 {
     	public:
        		ScanerModule(int scan_add);
        		virtual ~ScanerModule();
 
-		int getScanAdd() const;
+		int GetScanAdd() const { return scan_add; };
      		
+     		virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
+		
        	private:
        		int scan_add;
        		
        		void virtual AddUniqueInfo();
+       		
+       		void SaveDataUniqueScanerModule(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueScanerModule(const boost::property_tree::ptree&);
+		void ResolveDataUniqueScanerModule();      
 };
 
-ScanerModule* scanerModuleGenerator();
+ScanerModule* GetNewScanerModule();
 
 
 #endif

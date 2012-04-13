@@ -105,7 +105,7 @@ class StarSystem : public BaseGameEntity
                 void DrawPath();
                 
 		void SaveData(boost::property_tree::ptree&) const;
-		void LoadData(const boost::property_tree::ptree&);
+		void LoadData(boost::property_tree::ptree&);
 		void ResolveData();
 				                                           		    		    		
 		// poor

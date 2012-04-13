@@ -90,6 +90,23 @@ void Asteroid :: renderInfo_inSpace(vec2f scroll_coords)
      	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);
 }
 
+/*virtual*/
+void Asteroid::SaveData(boost::property_tree::ptree&) const
+{
+
+}
+
+/*virtual*/		
+void Asteroid::LoadData(boost::property_tree::ptree&)
+{
+
+}
+	
+/*virtual*/	
+void Asteroid::ResolveData()
+{
+
+}
         
 
 

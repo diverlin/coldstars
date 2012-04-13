@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define ROCKETMODULE_H
 
 
-class RocketModule : public ModuleBase
+class RocketModule : public BaseModule
 {
      	public:
        		RocketModule(int ammo_max_add, 
@@ -29,9 +29,13 @@ class RocketModule : public ModuleBase
                              int radius_add);
        		virtual ~RocketModule();
 
-		int getAmmoMaxAdd() const;
-		int getDamageAdd()  const;
-		int getRadiusAdd()  const;
+		int GetAmmoMaxAdd() const { return ammo_max_add; };
+		int GetDamageAdd()  const { return damage_add; };
+		int GetRadiusAdd()  const { return radius_add; } ;
+		
+		virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
        		
        	private:
        		int ammo_max_add;
@@ -39,9 +43,13 @@ class RocketModule : public ModuleBase
        		int radius_add;
        		
        		void virtual AddUniqueInfo();
+       		
+       		void SaveDataUniqueRocketModule(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueRocketModule(const boost::property_tree::ptree&);
+		void ResolveDataUniqueRocketModule(); 
 };
 
-RocketModule* getNewRocketModule();
+RocketModule* GetNewRocketModule();
 
 
 #endif

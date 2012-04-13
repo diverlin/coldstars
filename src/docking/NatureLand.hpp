@@ -33,7 +33,11 @@ class NatureLand : public BaseLand
                 
                 virtual bool GetPermissionToLand() const;
                                 
-                virtual void Ai();       
+                virtual void Ai();      
+                
+                void SaveData(boost::property_tree::ptree&) const;
+    		void LoadData(boost::property_tree::ptree&);
+    		void ResolveData(); 
 };
 
 #endif

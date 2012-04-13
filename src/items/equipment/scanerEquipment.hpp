@@ -34,6 +34,10 @@ class ScanerEquipment : public EquipmentBase
     		void countPrice();
     		virtual void updatePropetries();
     		
+    		virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
+		
     	private:
     		int scan_orig;
     		int scan_add;

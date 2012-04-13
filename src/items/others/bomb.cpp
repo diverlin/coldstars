@@ -53,6 +53,24 @@ void Bomb::AddUniqueInfo()
     	//info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
 } 		
 
+/*virtual*/
+void Bomb::SaveData(boost::property_tree::ptree&) const
+{
+
+}
+
+/*virtual*/		
+void Bomb::LoadData(boost::property_tree::ptree&)
+{
+
+}
+	
+/*virtual*/	
+void Bomb::ResolveData()
+{
+
+}
+
 
 Bomb* getNewBomb()
 {

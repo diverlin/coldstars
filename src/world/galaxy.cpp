@@ -79,7 +79,7 @@ void Galaxy::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniqueGalaxy(save_ptree, root); 
 }
 
-void Galaxy::LoadData(const boost::property_tree::ptree& load_ptree)
+void Galaxy::LoadData(boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree); 
 	LoadDataUniqueGalaxy(load_ptree); 

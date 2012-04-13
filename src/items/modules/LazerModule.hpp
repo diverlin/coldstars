@@ -21,25 +21,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define LAZERMODULE_H
 
 
-class LazerModule : public ModuleBase
+class LazerModule : public BaseModule
 {
     	public:
 	       	LazerModule(int damage_add, 
                             int radius_add);
         	virtual ~LazerModule();
 
-		int getDamageAdd() const;
-		int getRadiusAdd() const;
+		int GetDamageAdd() const { return damage_add; };
+		int GetRadiusAdd() const { return radius_add; };
+		
+		virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
 		
         private:
                 int damage_add;
         	int radius_add; 
         	
-        	void virtual AddUniqueInfo();       
+        	void virtual AddUniqueInfo();   
+        	
+        	void SaveDataUniqueLazerModule(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueLazerModule(const boost::property_tree::ptree&);
+		void ResolveDataUniqueLazerModule();    
 };
 
 
-LazerModule* getNewLazerModule();
+LazerModule* GetNewLazerModule();
 
 #endif
 

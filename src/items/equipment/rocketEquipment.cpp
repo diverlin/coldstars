@@ -58,9 +58,9 @@ void RocketEquipment :: updatePropetries()
         
     	for (unsigned int i = 0; i < modules_vec.size(); i++)
     	{
-    		ammo_max_add += ((RocketModule*)modules_vec[i])->getAmmoMaxAdd();
-        	damage_add   += ((RocketModule*)modules_vec[i])->getDamageAdd();
-        	radius_add   += ((RocketModule*)modules_vec[i])->getRadiusAdd();        	
+    		ammo_max_add += ((RocketModule*)modules_vec[i])->GetAmmoMaxAdd();
+        	damage_add   += ((RocketModule*)modules_vec[i])->GetDamageAdd();
+        	radius_add   += ((RocketModule*)modules_vec[i])->GetRadiusAdd();        	
     	}
         	
     	ammo_max = ammo_max_orig + ammo_max_add;
@@ -147,6 +147,23 @@ void RocketEquipment :: fireEvent()
     	Deterioration();
 }
 
+/*virtual*/
+void RocketEquipment::SaveData(boost::property_tree::ptree&) const
+{
+
+}
+
+/*virtual*/		
+void RocketEquipment::LoadData(boost::property_tree::ptree&)
+{
+
+}
+	
+/*virtual*/	
+void RocketEquipment::ResolveData()
+{
+
+}
 
 
 RocketEquipment* getNewRocketEquipment(int race_id, int revision_id)

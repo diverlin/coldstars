@@ -46,7 +46,7 @@ void EquipmentBase :: AddCommonInfo()
     	info.addNameStr("price:");     info.addValueStr( int2str(price) );
 }
 
-bool EquipmentBase :: insertModule(ModuleBase* module)
+bool EquipmentBase :: insertModule(BaseModule* module)
 {
 	if (modules_vec.size() < data_item.modules_num_max)
     	{

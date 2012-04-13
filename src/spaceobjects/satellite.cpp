@@ -127,6 +127,22 @@ void Satellite :: render_atPlanet() const
 
 
 
+/*virtual*/
+void Satellite::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	//const std::string root = "rocket."+int2str(data_id.id)+".";
+}
 
+/*virtual*/
+void Satellite::LoadData(boost::property_tree::ptree& load_ptree)
+{
+
+}
+
+/*virtual*/
+void Satellite::ResolveData()
+{
+
+}
 
 

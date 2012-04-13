@@ -39,17 +39,20 @@ class Store : public Base
 
                 void Render() const;
                 
+                void SaveData(boost::property_tree::ptree&) const;		
+		void LoadData(boost::property_tree::ptree&);
+		void ResolveData();
+		
         public:
                 TextureOb* textureOb_background; 
               
                 std::vector<ItemSlot*> slot_vec;
+                
+                void SaveDataUniqueStore(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadDataUniqueStore(const boost::property_tree::ptree&);
+		void ResolveDataUniqueStore();
 };
-           
-           
-           
-void equipStore(Store* store);
-//Store* createStore(int race_id);
-
+        
 #endif
 
 

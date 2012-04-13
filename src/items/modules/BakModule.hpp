@@ -21,21 +21,30 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define BAKMODULE_H
 
 
-class BakModule : public ModuleBase
+class BakModule : public BaseModule
 {
    	public:
-     		BakModule(int fuel_max_add);
+     		BakModule(int);
       		virtual ~BakModule();
  
- 		int getFuelMaxAdd() const;
+ 		void SetFuelMaxAdd(int fuel_max_add) { this->fuel_max_add = fuel_max_add; };
+ 		int GetFuelMaxAdd() const { return fuel_max_add; };
 
+		virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
+		
      	private:
       		int fuel_max_add;
       		
       		void virtual AddUniqueInfo();
+
+		void SaveDataUniqueBakModule(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueBakModule(const boost::property_tree::ptree&);
+		void ResolveDataUniqueBakModule();
 };
 
-BakModule* getNewBakModule();
+BakModule* GetNewBakModule();
 
 
 #endif

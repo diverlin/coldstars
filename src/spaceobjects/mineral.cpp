@@ -47,6 +47,24 @@ void Mineral :: renderInfo_inSpace(vec2f scroll_coords)
 }
 
 
+/*virtual*/
+void Mineral::SaveData(boost::property_tree::ptree&) const
+{
+
+}
+
+/*virtual*/		
+void Mineral::LoadData(boost::property_tree::ptree&)
+{
+
+}
+	
+/*virtual*/	
+void Mineral::ResolveData()
+{
+
+}
+
 Mineral* getNewMineral()
 {
         int id         = g_ID_GENERATOR.getNextId();

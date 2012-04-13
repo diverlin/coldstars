@@ -35,7 +35,9 @@ class Ship : public Vehicle
         	void render_inSpace() const;
 		void render_atPlanet() const;       
 		
-		void SaveEvent() const;
+    		virtual void SaveData(boost::property_tree::ptree&) const;
+    		virtual void LoadData(boost::property_tree::ptree&);
+    		virtual void ResolveData();
          
         private:
 };

@@ -21,20 +21,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define ITEMSLOT_H
 
 
-class ItemSlot
+class ItemSlot : public Base
 {   
 	public:        
-		ItemSlot();
+		ItemSlot(int id = NONE_ID);
 		~ItemSlot();
                 
-                void SetSubTypeId(int subtype_id)   { this->subtype_id = subtype_id; };
 		void SetTextureOb(TextureOb* texOb) { this->texOb = texOb; };
 		void SetOwnerVehicle(Vehicle* owner_vehicle) {  this->owner_vehicle = owner_vehicle; };
 
                 void SetTurrel( Turrel* turrel) { this->turrel = turrel; };
                                 
-		int GetTypeId()          const { return type_id; };
-		int GetSubTypeId()       const { return subtype_id; };
 		Turrel* GetTurrel() const { return turrel; };
 		bool GetEquipedStatus() const  { return is_EQUIPED; };
 
@@ -96,9 +93,11 @@ class ItemSlot
            	
            	bool CheckTarget(BaseGameEntity*) const;
         
+        	virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
+		
         private:
-                int type_id, subtype_id;               
-                                                
                 bool is_EQUIPED;                       // slot is empty or equiped 
                 bool is_FLASHING;                      // flashing the slot to show that item can be inserted in that one 
                 

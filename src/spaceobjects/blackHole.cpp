@@ -63,6 +63,24 @@ void BlackHole :: Render() const
 	//effect->Render();
 }
 
+/*virtual*/
+void BlackHole::SaveData(boost::property_tree::ptree&) const
+{
+
+}
+
+/*virtual*/		
+void BlackHole::LoadData(boost::property_tree::ptree&)
+{
+
+}
+	
+/*virtual*/	
+void BlackHole::ResolveData()
+{
+
+}
+
 BlackHole* getNewBlackHole()
 {
         int id         = g_ID_GENERATOR.getNextId();

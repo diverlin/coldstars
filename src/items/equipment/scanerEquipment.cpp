@@ -35,7 +35,7 @@ void ScanerEquipment :: updatePropetries()
         
         for (unsigned int i = 0; i < modules_vec.size(); i++)
     	{
-    		scan_add += ((ScanerModule*)modules_vec[i])->getScanAdd();      	
+    		scan_add += ((ScanerModule*)modules_vec[i])->GetScanAdd();      	
     	}
     	
      	scan = scan_orig + scan_add;
@@ -78,6 +78,23 @@ std::string ScanerEquipment :: getScanStr()
          	return int2str(scan_orig) + "+" + int2str(scan_add);
 }
 
+/*virtual*/
+void ScanerEquipment::SaveData(boost::property_tree::ptree&) const
+{
+
+}
+
+/*virtual*/		
+void ScanerEquipment::LoadData(boost::property_tree::ptree&)
+{
+
+}
+	
+/*virtual*/	
+void ScanerEquipment::ResolveData()
+{
+
+}
 
 
 ScanerEquipment* getNewScanerEquipment(int race_id, int revision_id)

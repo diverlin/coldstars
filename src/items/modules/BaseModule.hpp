@@ -17,28 +17,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef DRIVEMODULE_H
-#define DRIVEMODULE_H
+#ifndef MODULEBASE_H
+#define MODULEBASE_H
 
 
-class DriveModule : public ModuleBase
+class BaseModule : public BaseItem
 {
-   	public: 
-      		DriveModule(int speed_add, 
-                            int hyper_add);
-      		virtual ~DriveModule();
+    	public:
+      		BaseModule();
+      		virtual ~BaseModule();
+      		
+      		virtual void UpdateOwnerAbilities();
 
-		int getSpeedAdd() const;
-		int getHyperAdd() const;
-
-      	private:
-      		int speed_add;
-      		int hyper_add;
-
-      		void virtual AddUniqueInfo();
+	protected:     		
+     		void AddCommonInfo();   
+     		
+     		void SaveDataUniqueBaseModule(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueBaseModule(const boost::property_tree::ptree&);
+		void ResolveDataUniqueBaseModule();                
 };
-
-DriveModule* getNewDriveModule();
-
 
 #endif

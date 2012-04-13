@@ -37,7 +37,7 @@ void RadarEquipment :: updatePropetries()
     	
     	for (unsigned int i = 0; i < modules_vec.size(); i++)
     	{
-        	radius_add   += ((RadarModule*)modules_vec[i])->getRadiusAdd();        	
+        	radius_add   += ((RadarModule*)modules_vec[i])->GetRadiusAdd();        	
     	}
     	
     	radius = radius_orig + radius_add;
@@ -79,6 +79,23 @@ std::string RadarEquipment :: getRadiusStr()
         	return int2str(radius_orig) + "+" + int2str(radius_add);
 }
 
+/*virtual*/
+void RadarEquipment::SaveData(boost::property_tree::ptree&) const
+{
+
+}
+
+/*virtual*/		
+void RadarEquipment::LoadData(boost::property_tree::ptree&)
+{
+
+}
+	
+/*virtual*/	
+void RadarEquipment::ResolveData()
+{
+
+}
 
     
 

@@ -36,7 +36,7 @@ void DroidEquipment :: updatePropetries()
         
         for (unsigned int i = 0; i < modules_vec.size(); i++)
     	{
-    		repair_add += ((DroidModule*)modules_vec[i])->getRepairAdd();    	
+    		repair_add += ((DroidModule*)modules_vec[i])->GetRepairAdd();    	
     	}
     	
      	repair = repair_orig + repair_add;
@@ -78,6 +78,24 @@ std::string DroidEquipment :: getRepairStr()
         	return int2str(repair_orig) + "+" + int2str(repair_add);
 }
 
+
+/*virtual*/
+void DroidEquipment::SaveData(boost::property_tree::ptree&) const
+{
+
+}
+
+/*virtual*/		
+void DroidEquipment::LoadData(boost::property_tree::ptree&)
+{
+
+}
+	
+/*virtual*/	
+void DroidEquipment::ResolveData()
+{
+
+}
 
 		
 

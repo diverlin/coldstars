@@ -17,26 +17,58 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-ProtectorModule :: ProtectorModule(int protection_add)
+ProtectorModule::ProtectorModule(int protection_add)
 {
      	this->protection_add = protection_add;
 }
 
-ProtectorModule :: ~ProtectorModule () /* virtual */
+/* virtual */
+ProtectorModule::~ProtectorModule () 
 {}
-
-
-int ProtectorModule :: getProtectionAdd() const { return protection_add; }
 		
-		
-void ProtectorModule :: AddUniqueInfo()
+/* virtual */		
+void ProtectorModule::AddUniqueInfo()
 {
     	info.addTitleStr("protector module");
     	info.addNameStr("protection_add:");  info.addValueStr( int2str(protection_add) );
 }
 
+/*virtual*/
+void ProtectorModule::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	std::string root = "protector_module." + int2str(GetId()) + ".";
+	SaveDataUniqueBaseModule(save_ptree, root);
+	SaveDataUniqueProtectorModule(save_ptree, root);
+}
 
-ProtectorModule* getNewProtectorModule()
+/*virtual*/		
+void ProtectorModule::LoadData(boost::property_tree::ptree& load_ptree)
+{
+	LoadDataUniqueBaseModule(load_ptree);
+	LoadDataUniqueProtectorModule(load_ptree);
+}
+	
+/*virtual*/	
+void ProtectorModule::ResolveData()
+{
+	ResolveDataUniqueBaseModule();
+	ResolveDataUniqueProtectorModule();
+}
+
+void ProtectorModule::SaveDataUniqueProtectorModule(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+	save_ptree.put(root+"protection_add", protection_add);
+}
+
+void ProtectorModule::LoadDataUniqueProtectorModule(const boost::property_tree::ptree& load_ptree)
+{
+	protection_add = load_ptree.get<int>("protection_add");
+}
+
+void ProtectorModule::ResolveDataUniqueProtectorModule()
+{}
+
+ProtectorModule* GetNewProtectorModule()
 {
     	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
         
@@ -51,5 +83,7 @@ ProtectorModule* getNewProtectorModule()
         protector_module->SetTextureOb(texOb);
         protector_module->SetIdData(data_id);
         
+        EntityManager::Instance().RegisterEntity(protector_module);
+                
     	return protector_module;
 }

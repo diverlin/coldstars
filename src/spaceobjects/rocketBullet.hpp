@@ -44,6 +44,10 @@ class RocketBullet : public Vehicle
              	void updateRenderStuff();
                 void render_inSpace() const;
                 
+                void SaveData(boost::property_tree::ptree&) const;
+    		void LoadData(boost::property_tree::ptree&);
+    		void ResolveData();
+    		
         private:
                 BulletData data_bullet;
 

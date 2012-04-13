@@ -17,26 +17,58 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-RadarModule :: RadarModule(int radius_add)
+RadarModule::RadarModule(int radius_add)
 {
      	this->radius_add = radius_add;
 }
 
-RadarModule :: ~RadarModule() /* virtual */
+/* virtual */
+RadarModule::~RadarModule() 
 {}
 
-
-int RadarModule :: getRadiusAdd() const { return radius_add; }
-
-
-void RadarModule :: AddUniqueInfo()
+/* virtual */
+void RadarModule::AddUniqueInfo()
 {
     	info.addTitleStr("radar module");
     	info.addNameStr("radius_add:");   info.addValueStr(int2str(radius_add));
 }
 
+/*virtual*/
+void RadarModule::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	std::string root = "radar_module." + int2str(GetId()) + ".";
+	SaveDataUniqueBaseModule(save_ptree, root);
+	SaveDataUniqueRadarModule(save_ptree, root);
+}
 
-RadarModule* getNewRadarModule()
+/*virtual*/		
+void RadarModule::LoadData(boost::property_tree::ptree& load_ptree)
+{
+	LoadDataUniqueBaseModule(load_ptree);
+	LoadDataUniqueRadarModule(load_ptree);
+}
+	
+/*virtual*/	
+void RadarModule::ResolveData()
+{
+	ResolveDataUniqueBaseModule();
+	ResolveDataUniqueRadarModule();
+}
+
+void RadarModule::SaveDataUniqueRadarModule(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+	save_ptree.put(root+"radius_add", radius_add);
+}
+
+void RadarModule::LoadDataUniqueRadarModule(const boost::property_tree::ptree& load_ptree)
+{
+	radius_add = load_ptree.get<int>("radius_add");
+}
+
+void RadarModule::ResolveDataUniqueRadarModule()
+{}
+
+RadarModule* GetNewRadarModule()
 {
     	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
     	int radius_add  = getRandInt(MODULE::RADAR::RADIUS_MIN, MODULE::RADAR::RADIUS_MAX);
@@ -50,6 +82,8 @@ RadarModule* getNewRadarModule()
         radar_module->SetTextureOb(texOb);
         radar_module->SetIdData(data_id);
                 
+        EntityManager::Instance().RegisterEntity(radar_module);
+                        
     	return radar_module;
 }
 

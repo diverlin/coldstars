@@ -40,8 +40,8 @@ void EnergizerEquipment :: updatePropetries()
     	
     	for (unsigned int i = 0; i < modules_vec.size(); i++)
     	{
-    		energy_max_add  += ((EnergizerModule*)modules_vec[i])->getEnergyMaxAdd();
-        	restoration_add += ((EnergizerModule*)modules_vec[i])->getRestorationAdd();    	
+    		energy_max_add  += ((EnergizerModule*)modules_vec[i])->GetEnergyMaxAdd();
+        	restoration_add += ((EnergizerModule*)modules_vec[i])->GetRestorationAdd();    	
     	}
     	
     	energy_max  = energy_max_orig + energy_max_add;
@@ -93,6 +93,23 @@ std::string EnergizerEquipment :: getRestorationStr()
         	return int2str(restoration_orig) + "+" + int2str(restoration_add);
 }
 
+/*virtual*/
+void EnergizerEquipment::SaveData(boost::property_tree::ptree&) const
+{
+
+}
+
+/*virtual*/		
+void EnergizerEquipment::LoadData(boost::property_tree::ptree&)
+{
+
+}
+	
+/*virtual*/	
+void EnergizerEquipment::ResolveData()
+{
+
+}
 
 
 EnergizerEquipment* getNewEnergizerEquipment(int race_id, int revision_id)

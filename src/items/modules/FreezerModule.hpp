@@ -17,20 +17,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MODULEBASE_H
-#define MODULEBASE_H
+#ifndef FREEZERMODULE_H
+#define FREEZERMODULE_H
 
 
-class ModuleBase : public BaseItem
+class FreezerModule : public BaseModule
 {
-    	public:
-      		ModuleBase();
-      		virtual ~ModuleBase();
-      		
-      		virtual void UpdateOwnerAbilities();
+  	public:
+      		FreezerModule(int freeze_add);
+      		virtual ~FreezerModule();
 
-	protected:     		
-     		void AddCommonInfo();                   
+		int GetFreezeAdd() const { return freeze_add; };
+      		
+      		virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
+		
+      	private:
+      	      	int freeze_add;
+      	      	
+      	      	void virtual AddUniqueInfo();
+      	      	
+      		void SaveDataUniqueFreezerModule(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueFreezerModule(const boost::property_tree::ptree&);
+		void ResolveDataUniqueFreezerModule();
 };
+
+FreezerModule* GetNewFreezerModule();
+
 
 #endif

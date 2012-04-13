@@ -234,7 +234,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
 
     	for (unsigned int i = 0; i < 3; i++) 
     	{        
-        	vehicle->AddItemToOtsec(getNewRadarModule());
+        	vehicle->AddItemToOtsec(GetNewRadarModule());
     	}  
     	
     	for (unsigned int i = 0; i < 3; i++) 

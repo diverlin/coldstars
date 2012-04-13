@@ -39,6 +39,10 @@ class LazerEquipment : public EquipmentBase
        	      	virtual void updatePropetries();
       		void countPrice();
     		
+    		virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
+		
       	private:
       	      	int damage_orig;
       		int damage_add;

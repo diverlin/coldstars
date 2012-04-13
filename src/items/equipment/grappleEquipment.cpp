@@ -143,10 +143,10 @@ void GrappleEquipment :: updatePropetries()
         
         for (unsigned int i = 0; i < modules_vec.size(); i++)
     	{
-    		strength_add   += ((GrappleModule*)modules_vec[i])->getStrengthAdd();
-        	radius_add     += ((GrappleModule*)modules_vec[i])->getRadiusAdd();        	
-        	speed_add      += ((GrappleModule*)modules_vec[i])->getSpeedAdd();
-        	maxNumItem_add += ((GrappleModule*)modules_vec[i])->getMaxNumItemAdd();
+    		strength_add   += ((GrappleModule*)modules_vec[i])->GetStrengthAdd();
+        	radius_add     += ((GrappleModule*)modules_vec[i])->GetRadiusAdd();        	
+        	speed_add      += ((GrappleModule*)modules_vec[i])->GetSpeedAdd();
+        	maxNumItem_add += ((GrappleModule*)modules_vec[i])->GetMaxNumItemAdd();
     	}
     		        	
     	strength   = strength_orig   + strength_add;
@@ -226,6 +226,24 @@ std::string GrappleEquipment :: getMaxNumItemStr()
         	return int2str(maxNumItem_orig) + "+" + int2str(maxNumItem_add);
 }
 
+
+/*virtual*/
+void GrappleEquipment::SaveData(boost::property_tree::ptree&) const
+{
+
+}
+
+/*virtual*/		
+void GrappleEquipment::LoadData(boost::property_tree::ptree&)
+{
+
+}
+	
+/*virtual*/	
+void GrappleEquipment::ResolveData()
+{
+
+}
 
               
 

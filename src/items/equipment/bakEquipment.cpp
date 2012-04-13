@@ -44,7 +44,7 @@ void BakEquipment :: updatePropetries()
     	
     	for (unsigned int i = 0; i<modules_vec.size(); i++)
     	{
-    		fuel_max_add += ((BakModule*)modules_vec[i])->getFuelMaxAdd();
+    		fuel_max_add += ((BakModule*)modules_vec[i])->GetFuelMaxAdd();
     	}
     	
     	fuel_max = fuel_max_orig + fuel_max_add;    	
@@ -86,6 +86,24 @@ std::string BakEquipment :: getFuelStr()
         	return int2str(fuel_max_orig) + "/" + int2str(fuel);
      	else
         	return int2str(fuel_max_orig) + "+" + int2str(fuel_max_add) + "/" + int2str(fuel);
+}
+
+/*virtual*/
+void BakEquipment::SaveData(boost::property_tree::ptree&) const
+{
+
+}
+
+/*virtual*/		
+void BakEquipment::LoadData(boost::property_tree::ptree&)
+{
+
+}
+	
+/*virtual*/	
+void BakEquipment::ResolveData()
+{
+
 }
 
 
