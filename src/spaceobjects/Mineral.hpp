@@ -17,32 +17,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
+#ifndef MINERAL_H
+#define MINERAL_H
 
-#ifndef CONTAINER_H
-#define CONTAINER_H
 
-
-class Container : public SpaceItemBase
+class Mineral : public SpaceItemBase
 {
-    	public:                  
-        	Container(int);
-        	~Container();
-        	
-        	ItemSlot* getItemSlot();
-
-        	void renderInfo_inSpace(vec2f);
-        	
-        	virtual void PostDeathUniqueEvent(bool);
+    	public:  
+        	Mineral(int);
         
+        	void RenderInfoInSpace(vec2f);
+        	
         	virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(boost::property_tree::ptree&);
 		virtual void ResolveData();
 		
         private:
-                ItemSlot* item_slot;        
-        	void UpdateInfo();  
+        	InfoTable info;
+        	void UpdateInfo();
 };
 
-Container* getNewContainer();
+Mineral* GetNewMineral();
+
 
 #endif 
+

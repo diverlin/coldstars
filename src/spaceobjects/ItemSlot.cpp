@@ -80,7 +80,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 
 bool ItemSlot::ExtractItemFromContainer(Container* container)
 {
-	return this->SwapItemWith(container->getItemSlot());
+	return this->SwapItemWith(container->GetItemSlot());
 }
 
 void ItemSlot::RemoveItem()
@@ -161,8 +161,8 @@ bool ItemSlot::CheckInteraction(int _x, int _y)
 
 void ItemSlot::DropItemToSpace()
 {
-	Container* container = getNewContainer();
-	container->getItemSlot()->SwapItemWith(this);
+	Container* container = GetNewContainer();
+	container->GetItemSlot()->SwapItemWith(this);
 	
 	// update mass
 
