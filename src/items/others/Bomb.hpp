@@ -24,11 +24,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Bomb : public BaseItem
 {
     	public:  
-        	Bomb();
+        	Bomb(int);
         	virtual ~Bomb();
-        	
-        	int getDamage() const;
-        	int getRadius() const;
+
+        	void SetDamage(int damage) { this->damage = damage; };
+        	void SetRadius(int radius) { this->radius = radius; };
+                        	
+        	int GetDamage() const { return damage; };
+        	int GetRadius() const { return radius; };
         	
 		virtual void UpdateOwnerAbilities();
         	
@@ -44,7 +47,7 @@ class Bomb : public BaseItem
  		virtual void AddUniqueInfo(); 
 };
 
-Bomb* getNewBomb();
+Bomb* GetNewBomb();
 
 
 #endif 

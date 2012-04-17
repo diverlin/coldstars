@@ -986,8 +986,8 @@ void StarSystem::LaunchingEvent() const
 
 void StarSystem::BombExplosionEvent(Container* container, bool show_effect)
 {
-	float radius = ((Bomb*)container->getItemSlot()->GetItem())->getRadius();
-	float damage = ((Bomb*)container->getItemSlot()->GetItem())->getDamage(); 
+	float radius = ((Bomb*)container->getItemSlot()->GetItem())->GetRadius();
+	float damage = ((Bomb*)container->getItemSlot()->GetItem())->GetDamage(); 
 	vec2f epicentr = container->GetPoints().getCenter();
 	
 	damageEventInsideCircle(epicentr, radius, damage, show_effect);

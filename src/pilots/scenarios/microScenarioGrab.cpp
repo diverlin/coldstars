@@ -61,8 +61,8 @@ void MicroScenarioGrab :: update_inDynamic(Npc* npc) const
        		{
        			if (grapple_equipment->target_vec[i]->GetTypeId() == ENTITY::MINERAL_ID)
        			{
-       				GoodsPack* goodsPack = getNewGoodsPack(ENTITY::MINERAL_ID);
-       				goodsPack->increase(grapple_equipment->target_vec[i]->GetMass());
+       				GoodsPack* goodsPack = GetNewGoodsPack(ENTITY::MINERAL_ID);
+       				goodsPack->Increase(grapple_equipment->target_vec[i]->GetMass());
        				ItemSlot* slot = npc->GetVehicle()->GetEmptyOtsecSlot();
        				if (slot != NULL)
        				{

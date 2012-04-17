@@ -110,9 +110,9 @@ class GuiMap;
 #include "src/spaceobjects/BasePlanet.hpp" 
 #include "src/spaceobjects/asteroid.hpp"
 #include "src/spaceobjects/mineral.hpp"
-#include "src/items/others/bomb.hpp"
+#include "src/items/others/Bomb.hpp"
 #include "src/spaceobjects/container.hpp"
-#include "src/items/others/goodsPack.hpp"
+#include "src/items/others/GoodsPack.hpp"
 
 #include "src/effects/particlesystem/particle.hpp"
 #include "src/effects/particlesystem/baseParticleSystem.hpp"
@@ -265,7 +265,7 @@ class GuiMap;
 #include "src/world/starsystem.cpp"  
 
 #include "src/spaceobjects/container.cpp"    
-#include "src/items/others/goodsPack.cpp"   
+#include "src/items/others/GoodsPack.cpp"   
 #include "src/spaceobjects/Star.cpp"  
 #include "src/spaceobjects/Planet.cpp"
 #include "src/Base.cpp" 
@@ -281,7 +281,7 @@ class GuiMap;
 #include "src/spaceobjects/mineral.cpp" 
 #include "src/spaceobjects/SpaceStation.cpp" 
 #include "src/spaceobjects/satellite.cpp" 
-#include "src/items/others/bomb.cpp" 
+#include "src/items/others/Bomb.cpp" 
 #include "src/spaceobjects/blackHole.cpp"
 
 #include "src/items/BaseItem.cpp"

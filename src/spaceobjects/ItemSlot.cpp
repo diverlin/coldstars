@@ -126,7 +126,7 @@ int ItemSlot::GetItemRadius() const
                 
                 case ENTITY::BOMB_ID:
                 {
-                        return ((Bomb*)item)->getRadius();   break; 
+                        return ((Bomb*)item)->GetRadius();   break; 
                 }
         }
         
