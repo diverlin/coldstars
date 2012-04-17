@@ -21,20 +21,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define DRIVEEQUIPMENT_H
 
 
-class DriveEquipment : public EquipmentBase
+class DriveEquipment : public BaseEquipment
 {
 	public:
-      		DriveEquipment(int speed_orig, 
-      			       int hyper_orig);      			       
+      		DriveEquipment(int);      			       
       		virtual ~DriveEquipment();
 
-		int getSpeed() const;
-		int getHyper() const;
+		void SetSpeedOrig(int speed_orig) { this->speed_orig = speed_orig; };
+		void SetHyperOrig(int hyper_orig) { this->hyper_orig = hyper_orig; };
+
+		int GetSpeed() const { return speed; };
+		int GetHyper() const { return hyper; };
       		
       		void virtual UpdateOwnerAbilities();
 
-      		void countPrice();
-      		virtual void updatePropetries();
+      		void CountPrice();
+      		virtual void UpdatePropetries();
       		      		
       		virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(boost::property_tree::ptree&);
@@ -50,11 +52,15 @@ class DriveEquipment : public EquipmentBase
       		int hyper;
       		
      		void virtual AddUniqueInfo();
-           	std::string getSpeedStr();
-           	std::string getHyperStr();      	
+           	std::string GetSpeedStr();
+           	std::string GetHyperStr();   
+                
+                void SaveDataUniqueDriveEquipment(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueDriveEquipment(const boost::property_tree::ptree&);
+		void ResolveDataUniqueDriveEquipment();  
 };
 
-DriveEquipment* getNewDriveEquipment(int race_id, int revision_id = -1);
+DriveEquipment* GetNewDriveEquipment(int race_id, int revision_id = -1);
 
 #endif 
 

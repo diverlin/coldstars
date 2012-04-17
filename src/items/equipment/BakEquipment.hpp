@@ -21,20 +21,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define BAKEQUIPMENT_H
 
 
-class BakEquipment : public EquipmentBase
+class BakEquipment : public BaseEquipment
 {
 	public:
-     		BakEquipment(int fuel_max_orig);     			     
+     		BakEquipment(int);
      		virtual ~BakEquipment();
-
-		int getFuel() const;
 		
-		void fill();
+                void SetFuelMaxOrig(int fuel_max_orig) { this->fuel_max_orig = fuel_max_orig; };
+                void SetFuel(int fuel)                 { this->fuel = fuel; };
+                                
+		int GetFuel() const    { return fuel; };
+		int GetFuelMax() const { return fuel_max; };
 
      	     	void virtual UpdateOwnerAbilities();
      	
-     	     	void countPrice();
-     	     	virtual void updatePropetries();
+     	     	void CountPrice();
+     	     	virtual void UpdatePropetries();
      	     		
      	     	virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(boost::property_tree::ptree&);
@@ -47,9 +49,13 @@ class BakEquipment : public EquipmentBase
      		int fuel;
 
      		void virtual AddUniqueInfo();
-          	std::string getFuelStr();
+          	std::string GetFuelStr();
+                
+                void SaveDataUniqueBakEquipment(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueBakEquipment(const boost::property_tree::ptree&);
+		void ResolveDataUniqueBakEquipment();
 };
 
-BakEquipment* getNewBakEquipment(int race_id, int revision_id = -1);
+BakEquipment* GetNewBakEquipment(int race_id, int revision_id = -1);
 
 #endif 

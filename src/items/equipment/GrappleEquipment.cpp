@@ -17,32 +17,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-GrappleEquipment :: GrappleEquipment(int strength_orig, 
-				     int radius_orig, 
-				     int speed_orig, 
-				     int maxNumItem_orig)   // joun strength and speed attributes into one
+GrappleEquipment::GrappleEquipment(int id)
 {
-    	this->strength_orig   = strength_orig;
-    	this->radius_orig     = radius_orig;
-        this->speed_orig      = speed_orig;
-    	this->maxNumItem_orig = maxNumItem_orig;
+        data_id.id         = id;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::GRAPPLE_ID;
+        
+    	strength_orig   = 0;
+    	radius_orig     = 0;
+        speed_orig      = 0;
+    	maxNumItem_orig = 0;
 }
 
 /* virtual */
-GrappleEquipment :: ~GrappleEquipment()
+GrappleEquipment::~GrappleEquipment()
 {}
 
-//void GrappleEquipment :: reshapeTargetObSlot(ItemSlot* _slot)
-//{
-        //for (unsigned int i = 0; i < target_vec.size(); i++)
-        //{
-        //        target_vec[i]->BindSlot(_slot);
-        //}
-//}
-
-void GrappleEquipment :: addTarget(BaseGameEntity* _target)
+void GrappleEquipment::AddTarget(BaseGameEntity* _target)
 {
-        validateTargets();
+        ValidateTargets();
         
 	// avoiding dublicated items in the vector
         for (unsigned int i = 0; i < target_vec.size(); i++)
@@ -59,12 +52,12 @@ void GrappleEquipment :: addTarget(BaseGameEntity* _target)
         }        
 }
 
-void GrappleEquipment :: addToRemoveQueue(BaseGameEntity* target)
+void GrappleEquipment::AddToRemoveQueue(BaseGameEntity* target)
 {
         remove_queue.push_back(target);
 }
 
-void GrappleEquipment :: validateTargets()
+void GrappleEquipment::ValidateTargets()
 {
         for (unsigned int i = 0; i < target_vec.size(); i++)
         {
@@ -74,11 +67,10 @@ void GrappleEquipment :: validateTargets()
                 }                
         }
         
-        clearRemoveQueue();        
+        ClearRemoveQueue();        
 }
 
-
-void GrappleEquipment :: clearRemoveQueue()
+void GrappleEquipment::ClearRemoveQueue()
 {
         for (unsigned int i = 0; i < remove_queue.size(); i++)
         {
@@ -92,9 +84,8 @@ void GrappleEquipment :: clearRemoveQueue()
                 }
         }
 }
-
                 
-std::string GrappleEquipment :: getTargetStr() const
+std::string GrappleEquipment::GetTargetStr() const
 {
 	std::string str = "";
 	
@@ -127,14 +118,9 @@ std::string GrappleEquipment :: getTargetStr() const
         
         return str;
 }
-                
-int GrappleEquipment :: getStrength()   const { return strength; }
-int GrappleEquipment :: getRadius()     const { return radius; }
-int GrappleEquipment :: getSpeed()      const { return speed; }
-int GrappleEquipment :: getMaxNumItem() const { return maxNumItem; }
  
 /* virtual */
-void GrappleEquipment :: updatePropetries()
+void GrappleEquipment::UpdatePropetries()
 {
     	strength_add   = 0;
     	radius_add     = 0;
@@ -155,7 +141,7 @@ void GrappleEquipment :: updatePropetries()
     	maxNumItem = maxNumItem_orig + maxNumItem_add;
 }
 
-void GrappleEquipment :: countPrice()
+void GrappleEquipment::CountPrice()
 {
     	float strength_rate      = (float)strength_orig / EQUIPMENT::GRAPPLE::STRENGTH_MIN;
     	float radius_rate        = (float)radius_orig / EQUIPMENT::GRAPPLE::RADIUS_MIN;
@@ -177,24 +163,23 @@ void GrappleEquipment :: countPrice()
 }
 
 /* virtual */
-void GrappleEquipment :: UpdateOwnerAbilities()
+void GrappleEquipment::UpdateOwnerAbilities()
 {
     	slot->GetOwnerVehicle()->UpdateGrabAbility();
 }
 
 
-void GrappleEquipment :: AddUniqueInfo()
+void GrappleEquipment::AddUniqueInfo()
 {    	
 	info.addTitleStr("GRAPPLE");
 
-    	info.addNameStr("strength:");    info.addValueStr( getStrengthStr() );
-    	info.addNameStr("radius:");      info.addValueStr( getRadiusStr() );
-    	info.addNameStr("speed:");       info.addValueStr( getSpeedStr() );
-    	info.addNameStr("maxNumItem:");  info.addValueStr( getMaxNumItemStr() );
+    	info.addNameStr("strength:");    info.addValueStr(GetStrengthStr());
+    	info.addNameStr("radius:");      info.addValueStr(GetRadiusStr());
+    	info.addNameStr("speed:");       info.addValueStr(GetSpeedStr());
+    	info.addNameStr("maxNumItem:");  info.addValueStr(GetMaxNumItemStr());
 }
 
-
-std::string GrappleEquipment :: getStrengthStr()
+std::string GrappleEquipment::GetStrengthStr()
 {
      	if (strength_add == 0)
         	return int2str(strength_orig);
@@ -202,7 +187,7 @@ std::string GrappleEquipment :: getStrengthStr()
         	return int2str(strength_orig) + "+" + int2str(strength_add);
 }
 
-std::string GrappleEquipment :: getRadiusStr()
+std::string GrappleEquipment::GetRadiusStr()
 {
      	if (radius_add == 0)
         	return int2str(radius_orig);
@@ -210,7 +195,7 @@ std::string GrappleEquipment :: getRadiusStr()
         	return int2str(radius_orig) + "+" + int2str(radius_add);
 }
 
-std::string GrappleEquipment :: getSpeedStr()
+std::string GrappleEquipment::GetSpeedStr()
 {
      	if (speed_add == 0)
         	return int2str(speed_orig);
@@ -218,7 +203,7 @@ std::string GrappleEquipment :: getSpeedStr()
         	return int2str(speed_orig) + "+" + int2str(speed_add);
 }
 
-std::string GrappleEquipment :: getMaxNumItemStr()
+std::string GrappleEquipment::GetMaxNumItemStr()
 {
      	if (maxNumItem_add == 0)
         	return int2str(maxNumItem_orig);
@@ -227,27 +212,58 @@ std::string GrappleEquipment :: getMaxNumItemStr()
 }
 
 
+
 /*virtual*/
-void GrappleEquipment::SaveData(boost::property_tree::ptree&) const
+void GrappleEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-
+	std::string root = "grapple_equipment." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
+	SaveDataUniqueBaseEquipment(save_ptree, root);
+	SaveDataUniqueGrappleEquipment(save_ptree, root);
 }
 
-/*virtual*/		
-void GrappleEquipment::LoadData(boost::property_tree::ptree&)
+/*virtual*/
+void GrappleEquipment::LoadData(boost::property_tree::ptree& load_ptree)
 {
-
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
+	LoadDataUniqueBaseEquipment(load_ptree);
+	LoadDataUniqueGrappleEquipment(load_ptree);
 }
-	
-/*virtual*/	
+
+/*virtual*/
 void GrappleEquipment::ResolveData()
 {
-
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
+	ResolveDataUniqueBaseEquipment();
+	ResolveDataUniqueGrappleEquipment();
 }
+
+void GrappleEquipment::SaveDataUniqueGrappleEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+        save_ptree.put(root+"strength_orig", strength_orig);
+        save_ptree.put(root+"radius_orig", radius_orig);
+        save_ptree.put(root+"speed_orig", speed_orig);
+        save_ptree.put(root+"maxNumItem_orig", maxNumItem_orig);
+}
+                
+void GrappleEquipment::LoadDataUniqueGrappleEquipment(const boost::property_tree::ptree& load_ptree)
+{
+        strength_orig = load_ptree.get<int>("strength_orig");     
+        radius_orig = load_ptree.get<int>("radius_orig");   
+        speed_orig = load_ptree.get<int>("speed_orig");           
+        maxNumItem_orig = load_ptree.get<int>("maxNumItem_orig");   
+}                
+
+void GrappleEquipment::ResolveDataUniqueGrappleEquipment()
+{}
+
 
               
 
-GrappleEquipment* getNewGrappleEquipment(int race_id, int revision_id)
+GrappleEquipment* GetNewGrappleEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
        		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
@@ -271,22 +287,22 @@ GrappleEquipment* getNewGrappleEquipment(int race_id, int revision_id)
     	common_data.condition_max   = getRandInt(EQUIPMENT::GRAPPLE::CONDITION_MIN, EQUIPMENT::GRAPPLE::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
-        IdData data_id;
-        data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::GRAPPLE_ID;
+        int id = g_ID_GENERATOR.getNextId();
         
-    	GrappleEquipment* grapple_equipment = new GrappleEquipment(strength_orig, 
-    								   radius_orig, 
-    								   speed_orig, 
-    								   maxNumItem_orig);                                                                   
-        grapple_equipment->SetIdData(data_id);  
-        grapple_equipment->SetTextureOb(texOb_item);    	
+    	GrappleEquipment* grapple_equipment = new GrappleEquipment(id);                                                                   
+        grapple_equipment->SetStrengthOrig(strength_orig);
+        grapple_equipment->SetRadiusOrig(radius_orig);
+        grapple_equipment->SetSpeedOrig(speed_orig);
+        grapple_equipment->SetMaxNumItemOrig(maxNumItem_orig);
+
+        grapple_equipment->SetTextureOb(texOb_item);    
         grapple_equipment->SetFunctionalSlotSubTypeId(SLOT::GRAPPLE_ID);
         grapple_equipment->SetItemCommonData(common_data);        
 
-    	grapple_equipment->updatePropetries();
-    	grapple_equipment->countPrice();
+    	grapple_equipment->UpdatePropetries();
+    	grapple_equipment->CountPrice();
 
+        EntityManager::Instance().RegisterEntity(grapple_equipment);
+        
     	return grapple_equipment;
 }

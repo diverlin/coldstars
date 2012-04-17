@@ -17,9 +17,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-ScanerModule::ScanerModule(int scan_add)
+ScanerModule::ScanerModule(int id)
 {
-    	this->scan_add = scan_add;
+        data_id.id         = id;
+        data_id.type_id    = MODULE::MODULE_ID;
+        data_id.subtype_id = MODULE::SCANER_ID;
+        
+    	scan_add = 0;
 }
 
 /* virtual */
@@ -37,6 +41,8 @@ void ScanerModule::AddUniqueInfo()
 void ScanerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "scaner_module." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
 	SaveDataUniqueBaseModule(save_ptree, root);
 	SaveDataUniqueScanerModule(save_ptree, root);
 }
@@ -44,6 +50,8 @@ void ScanerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/		
 void ScanerModule::LoadData(boost::property_tree::ptree& load_ptree)
 {
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
 	LoadDataUniqueBaseModule(load_ptree);
 	LoadDataUniqueScanerModule(load_ptree);
 }
@@ -51,6 +59,8 @@ void ScanerModule::LoadData(boost::property_tree::ptree& load_ptree)
 /*virtual*/	
 void ScanerModule::ResolveData()
 {
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
 	ResolveDataUniqueBaseModule();
 	ResolveDataUniqueScanerModule();
 }
@@ -74,14 +84,11 @@ ScanerModule* GetNewScanerModule()
          
     	int scan_add = getRandInt(MODULE::SCANER::SCAN_MIN, MODULE::SCANER::SCAN_MAX);
 
-        IdData data_id;
-        data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = MODULE::MODULE_ID;
-        data_id.subtype_id = MODULE::SCANER_ID;  
+        int id = g_ID_GENERATOR.getNextId();
         
     	ScanerModule* scaner_module = new ScanerModule(scan_add);
         scaner_module->SetTextureOb(texOb);
-        scaner_module->SetIdData(data_id);
+        scaner_module->SetScanAdd(scan_add);
         
         EntityManager::Instance().RegisterEntity(scaner_module);
                 

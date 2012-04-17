@@ -20,6 +20,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef BASEITEM_H
 #define BASEITEM_H
 
+struct ItemCommonData 
+{
+	ItemCommonData();
+
+	unsigned int modules_num_max; 
+	unsigned int condition_max; 
+	unsigned int deterioration_rate;
+	unsigned int mass; 
+};
+
+struct UnresolvedDataUniqueBaseItem
+{
+        std::string textureOb_path;
+        int slot_id;
+};
 
 class BaseItem : public Base
 {
@@ -27,12 +42,12 @@ class BaseItem : public Base
       		BaseItem();
       		virtual ~BaseItem();
       		
-		void SetIdData(IdData data_id)       { this->data_id = data_id; };
-		void SetTextureOb(TextureOb* texOb)  { this->texOb = texOb; };
+                                void SetIdData(IdData data_id)       { this->data_id = data_id; };
+		void SetTextureOb(TextureOb* textureOb)  { this->textureOb = textureOb; };
 		void SetFunctionalSlotSubTypeId(int functional_slot_subtype_id) { this->functional_slot_subtype_id = functional_slot_subtype_id; };
 		void SetItemCommonData(ItemCommonData data_item) { this->data_item = data_item; };
                 
-            	TextureOb* GetTextureOb()   const { return texOb; };
+            	TextureOb* GetTextureOb()   const { return textureOb; };
 		unsigned int GetMass()      const { return data_item.mass; };
 		unsigned int GetCondition() const { return condition; };
 		int GetPrice()              const { return price; };
@@ -52,7 +67,7 @@ class BaseItem : public Base
      		void virtual UpdateOwnerAbilities()=0;
 
 	protected:
-     		TextureOb* texOb;
+     		TextureOb* textureOb;
                 
                 int race_id;
 		unsigned int condition;
@@ -68,8 +83,14 @@ class BaseItem : public Base
                 
                 InfoTable info;  
      		
+                UnresolvedDataUniqueBaseItem data_unresolved_BaseItem;
+                
      		virtual void AddCommonInfo()=0;
- 		virtual void AddUniqueInfo()=0;                      
+ 		virtual void AddUniqueInfo()=0;   
+                
+                void SaveDataUniqueBaseItem(boost::property_tree::ptree&, const std::string&) const; 
+                void LoadDataUniqueBaseItem(const boost::property_tree::ptree&); 
+                void ResolveDataUniqueBaseItem();                   
 };
 
 #endif

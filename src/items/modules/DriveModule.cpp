@@ -51,6 +51,8 @@ void DriveModule::AddUniqueInfo()
 void DriveModule::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "drive_module." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
 	SaveDataUniqueBaseModule(save_ptree, root);
 	SaveDataUniqueDriveModule(save_ptree, root);
 }
@@ -58,6 +60,8 @@ void DriveModule::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/		
 void DriveModule::LoadData(boost::property_tree::ptree& load_ptree)
 {
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
 	LoadDataUniqueBaseModule(load_ptree);
 	LoadDataUniqueDriveModule(load_ptree);
 }
@@ -65,6 +69,8 @@ void DriveModule::LoadData(boost::property_tree::ptree& load_ptree)
 /*virtual*/	
 void DriveModule::ResolveData()
 {
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
 	ResolveDataUniqueBaseModule();
 	ResolveDataUniqueDriveModule();
 }

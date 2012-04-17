@@ -95,57 +95,57 @@ void StoreBuilder::PutRandomEquipment()
         
         for (unsigned int lii = 0; lii < lazer_num; lii++)
         { 
-                store->Add(getNewLazerEquipment(RACE::R0_ID));
+                store->Add(GetNewLazerEquipment(RACE::R0_ID));
         }
 
         for (unsigned int rii = 0; rii < rocket_num; rii++)
         { 
-                store->Add(getNewRocketEquipment(RACE::R0_ID));
+                store->Add(GetNewRocketEquipment(RACE::R0_ID));
         }
 
         for (unsigned int rii = 0; rii < radar_num; rii++)
         { 
-                store->Add(getNewRadarEquipment(RACE::R0_ID));
+                store->Add(GetNewRadarEquipment(RACE::R0_ID));
         }
 
         for (unsigned int gii = 0; gii < grapple_num; gii++)
         { 
-                store->Add(getNewGrappleEquipment(RACE::R0_ID));
+                store->Add(GetNewGrappleEquipment(RACE::R0_ID));
         }
 
         for (unsigned int dii = 0; dii < drive_num; dii++)
         { 
-                store->Add(getNewDriveEquipment(RACE::R0_ID));
+                store->Add(GetNewDriveEquipment(RACE::R0_ID));
         }
 
         for (unsigned int pii = 0; pii < protector_num; pii++)
         { 
-                store->Add(getNewProtectorEquipment(RACE::R0_ID));
+                store->Add(GetNewProtectorEquipment(RACE::R0_ID));
         }
 
         for (unsigned int bii = 0; bii < bak_num; bii++)
         { 
-                store->Add(getNewBakEquipment(RACE::R0_ID));
+                store->Add(GetNewBakEquipment(RACE::R0_ID));
         }
 
         for (unsigned int dii = 0; dii < droid_num; dii++)
         { 
-                store->Add(getNewDroidEquipment(RACE::R0_ID));
+                store->Add(GetNewDroidEquipment(RACE::R0_ID));
         }
 
         for (unsigned int sii = 0; sii < scaner_num; sii++)
         { 
-                store->Add(getNewScanerEquipment(RACE::R0_ID));
+                store->Add(GetNewScanerEquipment(RACE::R0_ID));
         }
 
         for (unsigned int fii = 0; fii < freezer_num; fii++)
         { 
-                store->Add(getNewFreezerEquipment(RACE::R0_ID));
+                store->Add(GetNewFreezerEquipment(RACE::R0_ID));
         }
 
         for (unsigned int ebi = 0; ebi < energyBlock_num; ebi++) 
         { 
-                store->Add(getNewEnergizerEquipment(RACE::R0_ID));
+                store->Add(GetNewEnergizerEquipment(RACE::R0_ID));
         }
 }
 

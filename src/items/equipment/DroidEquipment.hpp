@@ -21,18 +21,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define DROIDEQUIPMENT_H
 
 
-class DroidEquipment : public EquipmentBase
+class DroidEquipment : public BaseEquipment
 {
    	public: 
-     		DroidEquipment(int repair_orig);
+     		DroidEquipment(int);
      		virtual ~DroidEquipment();
 
-		int getRepair() const;
+		int SetRepairOrig(int repair_orig) { this->repair_orig = repair_orig; };
+		int GetRepair() const { return repair; };
 
       		void virtual UpdateOwnerAbilities();
 
-      		void countPrice();
-      		virtual void updatePropetries();
+      		void CountPrice();
+      		virtual void UpdatePropetries();
       		      		
       		virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(boost::property_tree::ptree&);
@@ -44,9 +45,13 @@ class DroidEquipment : public EquipmentBase
       		int repair;
       		
      		void virtual AddUniqueInfo();
-       		std::string getRepairStr();
+       		std::string GetRepairStr();
+                
+                void SaveDataUniqueDroidEquipment(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueDroidEquipment(const boost::property_tree::ptree&);
+		void ResolveDataUniqueDroidEquipment();  
 };
 
-DroidEquipment* getNewDroidEquipment(int race_id, int revision_id = -1);
+DroidEquipment* GetNewDroidEquipment(int race_id, int revision_id = -1);
 
 #endif 

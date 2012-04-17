@@ -17,23 +17,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-DriveEquipment :: DriveEquipment(int speed_orig, 
-				 int hyper_orig)
+DriveEquipment::DriveEquipment(int id)
 {
-     	this->speed_orig = speed_orig;
-     	this->hyper_orig = hyper_orig;
+        data_id.id         = id;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::DRIVE_ID;
+        
+     	speed_orig = 0;
+     	hyper_orig = 0;
 }
 
-DriveEquipment :: ~DriveEquipment() /* virtual */
+/* virtual */
+DriveEquipment::~DriveEquipment() 
 {}
 
-
-int DriveEquipment :: getSpeed() const { return speed; }
-int DriveEquipment :: getHyper() const { return hyper; }
-		
-	
-/* virtual */	
-void DriveEquipment :: updatePropetries()
+/* virtual */
+void DriveEquipment::UpdatePropetries()
 {     
      	speed_add        = 0;
      	hyper_add        = 0;
@@ -48,8 +47,7 @@ void DriveEquipment :: updatePropetries()
      	hyper = hyper_orig + hyper_add;
 }
 
-
-void DriveEquipment :: countPrice()
+void DriveEquipment::CountPrice()
 {
      	float speed_rate         = (float)speed_orig / EQUIPMENT::DRIVE::SPEED_MIN;
      	float hyper_rate         = (float)hyper_orig / EQUIPMENT::DRIVE::HYPER_MIN;
@@ -66,21 +64,21 @@ void DriveEquipment :: countPrice()
 }
 
 /* virtual */
-void DriveEquipment :: UpdateOwnerAbilities()
+void DriveEquipment::UpdateOwnerAbilities()
 {
     	slot->GetOwnerVehicle()->UpdateDriveAbility();
     	slot->GetOwnerVehicle()->UpdateJumpAbility();    	
 }
 
 
-void DriveEquipment :: AddUniqueInfo()
+void DriveEquipment::AddUniqueInfo()
 {
     	info.addTitleStr("DRIVE");
-    	info.addNameStr("speed:");     info.addValueStr( getSpeedStr() );
-    	info.addNameStr("hyper:");     info.addValueStr( getHyperStr() );
+    	info.addNameStr("speed:");     info.addValueStr(GetSpeedStr());
+    	info.addNameStr("hyper:");     info.addValueStr(GetHyperStr());
 }     		
 
-std::string DriveEquipment :: getSpeedStr()
+std::string DriveEquipment::GetSpeedStr()
 {
      	if (speed_add == 0)
         	return int2str(speed_orig);
@@ -88,7 +86,7 @@ std::string DriveEquipment :: getSpeedStr()
         	return int2str(speed_orig) + "+" + int2str(speed_add);
 }
 
-std::string DriveEquipment :: getHyperStr()
+std::string DriveEquipment::GetHyperStr()
 {
      	if (hyper_add == 0)
         	return int2str(hyper_orig);
@@ -96,26 +94,53 @@ std::string DriveEquipment :: getHyperStr()
         	return int2str(hyper_orig) + "+" + int2str(hyper_add);
 }
 
+
 /*virtual*/
-void DriveEquipment::SaveData(boost::property_tree::ptree&) const
+void DriveEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-
+	std::string root = "drive_equipment." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
+	SaveDataUniqueBaseEquipment(save_ptree, root);
+	SaveDataUniqueDriveEquipment(save_ptree, root);
 }
 
-/*virtual*/		
-void DriveEquipment::LoadData(boost::property_tree::ptree&)
+/*virtual*/
+void DriveEquipment::LoadData(boost::property_tree::ptree& load_ptree)
 {
-
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
+	LoadDataUniqueBaseEquipment(load_ptree);
+	LoadDataUniqueDriveEquipment(load_ptree);
 }
-	
+
 /*virtual*/	
 void DriveEquipment::ResolveData()
 {
-
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
+	ResolveDataUniqueBaseEquipment();
+	ResolveDataUniqueDriveEquipment();
 }
 
+void DriveEquipment::SaveDataUniqueDriveEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+        save_ptree.put(root+"speed_orig", speed_orig);
+        save_ptree.put(root+"hyper_orig", hyper_orig);
+}
+                
+void DriveEquipment::LoadDataUniqueDriveEquipment(const boost::property_tree::ptree& load_ptree)
+{
+        speed_orig = load_ptree.get<int>("speed_orig");
+        hyper_orig = load_ptree.get<int>("hyper_orig");
+}                
 
-DriveEquipment* getNewDriveEquipment(int race_id, int revision_id)
+void DriveEquipment::ResolveDataUniqueDriveEquipment()
+{}
+
+
+
+DriveEquipment* GetNewDriveEquipment(int race_id, int revision_id)
 {
         if (race_id == -1)
                 race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
@@ -137,21 +162,21 @@ DriveEquipment* getNewDriveEquipment(int race_id, int revision_id)
         common_data.condition_max   = getRandInt(EQUIPMENT::DRIVE::CONDITION_MIN, EQUIPMENT::DRIVE::CONDITION_MAX) * tech_rate;
         common_data.deterioration_rate = 1;
 
-        IdData data_id;
-        data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::DRIVE_ID;
+        int id = g_ID_GENERATOR.getNextId();
         
-        DriveEquipment* drive_equipment = new DriveEquipment(speed_orig, hyper_orig);
+        DriveEquipment* drive_equipment = new DriveEquipment(id);
     
-        drive_equipment->SetIdData(data_id);  
+        drive_equipment->SetSpeedOrig(speed_orig);  
+        drive_equipment->SetHyperOrig(hyper_orig);
         drive_equipment->SetTextureOb(texOb_item);    	
         drive_equipment->SetFunctionalSlotSubTypeId(SLOT::DRIVE_ID);
         drive_equipment->SetItemCommonData(common_data);
          
-        drive_equipment->updatePropetries();
-     	drive_equipment->countPrice();
+        drive_equipment->UpdatePropetries();
+     	drive_equipment->CountPrice();
      
+        EntityManager::Instance().RegisterEntity(drive_equipment);
+             
         return drive_equipment;
 }
 

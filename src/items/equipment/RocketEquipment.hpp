@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef ROCKETEQUIPMENT_H
 #define ROCKETEQUIPMENT_H
 
+
 struct BulletData
 {
 	TextureOb* texOb;
@@ -35,25 +36,29 @@ struct BulletData
 };
 
 
-
-class RocketEquipment : public EquipmentBase
+class RocketEquipment : public BaseEquipment
 { 
    	public:
-      		RocketEquipment(int ammo_max_orig, 
-      				int damage_orig, 
-      				int radius_orig);
+      		RocketEquipment(int);
       		virtual ~RocketEquipment();
 
-		int getAmmo()   const;
-		int getDamage() const;
-		int getRadius() const;
+		void SetAmmoMaxOrig(int ammo_max_orig) { this->ammo_max_orig = ammo_max_orig; };
+		void SetDamageOrig(int damage_orig)    { this->damage_orig   = damage_orig; };
+		void SetRadiusOrig(int radius_orig)    { this->radius_orig   = radius_orig; };
+                void SetBulletData(BulletData data_bullet) { this->data_bullet = data_bullet; };
+                
+    		void SetAmmo(int ammo) { this->ammo = ammo; };
+                            
+		int GetAmmo()   const { return ammo; };
+		int GetDamage() const { return damage; };
+		int GetRadius() const { return radius; };
 		
-      		void fireEvent();
+      		void FireEvent();
       		      
       		void virtual UpdateOwnerAbilities();
       		
-      	      	void countPrice();
-      		virtual void updatePropetries();
+      	      	void CountPrice();
+      		virtual void UpdatePropetries();
       		
       		virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(boost::property_tree::ptree&);
@@ -76,11 +81,15 @@ class RocketEquipment : public EquipmentBase
       	      	BulletData data_bullet;
       		
      		void virtual AddUniqueInfo();
-           	std::string getAmmoStr();
-           	std::string getDamageStr();
-           	std::string getRadiusStr();
+           	std::string GetAmmoStr();
+           	std::string GetDamageStr();
+           	std::string GetRadiusStr();
+                
+                void SaveDataUniqueRocketEquipment(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueRocketEquipment(const boost::property_tree::ptree&);
+		void ResolveDataUniqueRocketEquipment();  
 };
 
-RocketEquipment* getNewRocketEquipment(int race_id, int revision_id = -1);
+RocketEquipment* GetNewRocketEquipment(int race_id, int revision_id = -1);
 
 #endif 

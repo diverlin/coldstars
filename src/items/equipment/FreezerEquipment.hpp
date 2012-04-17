@@ -17,49 +17,41 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef LAZEREQUIPMENT_H
-#define LAZEREQUIPMENT_H
+#ifndef FREEZEREQUIPMENT_H
+#define FREEZEREQUIPMENT_H
 
 
-class LazerEquipment : public EquipmentBase
-{
-    	public:
-      		LazerEquipment(int damage_orig, 
-      			       int radius_orig);      			       
-      		virtual ~LazerEquipment();
+class FreezerEquipment : public BaseEquipment
+{  
+   	public:
+      		FreezerEquipment(int);
+      		virtual ~FreezerEquipment();
 
-		int getDamage() const;
-		int getRadius() const;
-		
-      		void fireEvent_TRUE();
-      		void fireEvent_FALSE();
-      		      
-      		void virtual UpdateOwnerAbilities();
+		void SetFreezeOrig(int freeze_orig) { this->freeze_orig = freeze_orig; };
+                int GetFreeze() const { return freeze; };
+  
+      		virtual void UpdateOwnerAbilities();
       		
-       	      	virtual void updatePropetries();
-      		void countPrice();
-    		
+      		void CountPrice();
+      		virtual void UpdatePropetries();  
+      		
     		virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(boost::property_tree::ptree&);
 		virtual void ResolveData();
-		
-      	private:
-      	      	int damage_orig;
-      		int damage_add;
-      		int damage;
-
-      		int radius_orig;
-      		int radius_add;
-      		int radius;
       		
-      		TextureOb* texOb_turrel;
-      		TextureOb* texOb_lazerEffect;
-
-     		void virtual AddUniqueInfo();
-           	std::string getDamageStr();
-           	std::string getRadiusStr();      	
+      	private:
+      	      	int freeze_orig;
+      		int freeze_add;
+      		int freeze;
+      		
+      		void virtual AddUniqueInfo();
+       		std::string GetFreezeStr();
+                
+                void SaveDataUniqueFreezerEquipment(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueFreezerEquipment(const boost::property_tree::ptree&);
+		void ResolveDataUniqueFreezerEquipment(); 
 };
 
-LazerEquipment* getNewLazerEquipment(int race_id, int revision_id = -1);
+FreezerEquipment* GetNewFreezerEquipment(int race_id, int revision_id = -1);
 
 #endif 

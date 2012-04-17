@@ -34,9 +34,9 @@ void MicroScenarioGrab :: update_inStatic(Npc* npc) const
               
         for (unsigned int i = 0; i < npc->GetObservation()->visible_MINERAL_vec.size(); i++)
         {                	
-		if ( npc->GetObservation()->visible_MINERAL_vec[i].dist < npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->getRadius() )
+		if ( npc->GetObservation()->visible_MINERAL_vec[i].dist < npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->GetRadius() )
                 {                                       
-                	npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->addTarget(npc->GetObservation()->visible_MINERAL_vec[i].mineral);
+                	npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(npc->GetObservation()->visible_MINERAL_vec[i].mineral);
                 }
                 else
                 {
@@ -50,11 +50,11 @@ void MicroScenarioGrab :: update_inStatic(Npc* npc) const
 void MicroScenarioGrab :: update_inDynamic(Npc* npc) const
 {
 	GrappleEquipment* grapple_equipment = npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment();
-        grapple_equipment->validateTargets();  
+        grapple_equipment->ValidateTargets();  
                 
         for (unsigned int i = 0; i < grapple_equipment->target_vec.size(); i++)
         {	
-               	grapple_equipment->target_vec[i]->MovingByExternalForce(npc->GetVehicle()->GetPoints().getCenter(), grapple_equipment->getStrength());        	
+               	grapple_equipment->target_vec[i]->MovingByExternalForce(npc->GetVehicle()->GetPoints().getCenter(), grapple_equipment->GetStrength());        	
        	
        		float dist = distBetweenPoints(npc->GetVehicle()->GetPoints().getCenter(), grapple_equipment->target_vec[i]->GetPoints().getCenter()); 
        		if (dist < npc->GetVehicle()->GetCollisionRadius()/10)
@@ -67,7 +67,7 @@ void MicroScenarioGrab :: update_inDynamic(Npc* npc) const
        				if (slot != NULL)
        				{
        					slot->InsertItem(goodsPack);
-       					grapple_equipment->addToRemoveQueue(grapple_equipment->target_vec[i]);
+       					grapple_equipment->AddToRemoveQueue(grapple_equipment->target_vec[i]);
 
        					npc->GetStarSystem()->AddToRemoveFromOuterSpaceQueue((Mineral*)grapple_equipment->target_vec[i]);  
        				}			
@@ -79,7 +79,7 @@ void MicroScenarioGrab :: update_inDynamic(Npc* npc) const
        				if (slot != NULL)
        				{
        					slot->ExtractItemFromContainer((Container*)grapple_equipment->target_vec[i]);
-       					grapple_equipment->addToRemoveQueue(grapple_equipment->target_vec[i]);
+       					grapple_equipment->AddToRemoveQueue(grapple_equipment->target_vec[i]);
 
        					npc->GetStarSystem()->AddToRemoveFromOuterSpaceQueue((Container*)grapple_equipment->target_vec[i]);  
        				}	

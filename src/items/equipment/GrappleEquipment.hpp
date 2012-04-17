@@ -21,35 +21,35 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define GRAPPLEEQUIPMENT_H
 
 
-class GrappleEquipment : public EquipmentBase
+class GrappleEquipment : public BaseEquipment
 {
    	public:
-      		GrappleEquipment(int strength_orig, 
-      				 int radius_orig, 
-      				 int speed_orig, 
-      				 int maxNumItem_orig);   // joun strength and speed attributes into one
+      		GrappleEquipment(int);   
       		virtual ~GrappleEquipment();
 
-                //void reshapeTargetObSlot(ItemSlot*);
-                
-		int getStrength()   const;
-		int getRadius()     const;
-		int getSpeed()      const;
-		int getMaxNumItem() const;
+		void SetStrengthOrig(int strength_orig)     { this->strength_orig   = strength_orig; };
+		void SetRadiusOrig(int radius_orig)         { this->radius_orig     = radius_orig; };
+		void SetSpeedOrig(int speed_orig)           { this->speed_orig      = speed_orig; };
+		void SetMaxNumItemOrig(int maxNumItem_orig) { this->maxNumItem_orig = maxNumItem_orig; };
+                                
+		int GetStrength()   const { return strength; };
+		int GetRadius()     const { return radius; };
+		int GetSpeed()      const { return speed; };
+		int GetMaxNumItem() const { return maxNumItem; };
 
       		virtual void UpdateOwnerAbilities();
                 
-                void addTarget(BaseGameEntity*);
-                void addToRemoveQueue(BaseGameEntity*);
+                void AddTarget(BaseGameEntity*);
+                void AddToRemoveQueue(BaseGameEntity*);
                 
-                void validateTargets();
+                void ValidateTargets();
                 std::vector<BaseGameEntity*> target_vec;
                 std::vector<BaseGameEntity*> remove_queue;
                 
-		std::string getTargetStr() const;
+		std::string GetTargetStr() const;
 		
-      	      	void countPrice();
-      		virtual void updatePropetries();  
+      	      	void CountPrice();
+      		virtual void UpdatePropetries();  
       		
       		virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(boost::property_tree::ptree&);
@@ -74,15 +74,19 @@ class GrappleEquipment : public EquipmentBase
       		
       	      	std::vector<GrappleModule*> modules_vec; 
       		
-     		void virtual AddUniqueInfo();     		
-           	std::string getStrengthStr();
-           	std::string getRadiusStr();
-           	std::string getSpeedStr();
-           	std::string getMaxNumItemStr();
+     		void virtual AddUniqueInfo();
+           	std::string GetStrengthStr();
+           	std::string GetRadiusStr();
+           	std::string GetSpeedStr();
+           	std::string GetMaxNumItemStr();
                 
-                void clearRemoveQueue();
+                void ClearRemoveQueue();
+                
+                void SaveDataUniqueGrappleEquipment(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueGrappleEquipment(const boost::property_tree::ptree&);
+		void ResolveDataUniqueGrappleEquipment(); 
 };
 
-GrappleEquipment* getNewGrappleEquipment(int race_id, int revision_id = -1);
+GrappleEquipment* GetNewGrappleEquipment(int race_id, int revision_id = -1);
 
 #endif 

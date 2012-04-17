@@ -18,29 +18,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-BakEquipment :: BakEquipment(int fuel_max_orig)
+BakEquipment::BakEquipment(int id)
 {
-    	this->fuel_max_orig = fuel_max_orig;
+        data_id.type_id    = id;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::BAK_ID;
         
-    	fuel_max            = fuel_max_orig;
-    	fuel                = fuel_max_orig;
+    	fuel_max_orig = 0;  
+    	fuel          = 0;
 }
    
-BakEquipment :: ~BakEquipment() /* virtual */
+/* virtual */
+BakEquipment::~BakEquipment() 
 {}
-
-
-int BakEquipment :: getFuel() const { return fuel; }
-
-void BakEquipment :: fill()
-{
-    	fuel = fuel_max;
-}
 		
 /* virtual */			
-void BakEquipment :: updatePropetries()
+void BakEquipment::UpdatePropetries()
 {
-    	fuel_max_add        = 0;
+    	fuel_max_add = 0;
     	
     	for (unsigned int i = 0; i<modules_vec.size(); i++)
     	{
@@ -50,7 +45,7 @@ void BakEquipment :: updatePropetries()
     	fuel_max = fuel_max_orig + fuel_max_add;    	
 }
 
-void BakEquipment :: countPrice()
+void BakEquipment::CountPrice()
 {
     	float fuel_rate          = (float)fuel_max_orig / EQUIPMENT::BAK::FUEL_MIN;
     	float modules_num_rate   = (float)data_item.modules_num_max / EQUIPMENT::BAK::MODULES_NUM_MAX;
@@ -65,22 +60,20 @@ void BakEquipment :: countPrice()
 }
 
 /* virtual */
-void BakEquipment :: UpdateOwnerAbilities()
+void BakEquipment::UpdateOwnerAbilities()
 {
     	slot->GetOwnerVehicle()->UpdateDriveAbility();
     	slot->GetOwnerVehicle()->UpdateJumpAbility(); 
 }
 
-
-
-void BakEquipment :: AddUniqueInfo()
+void BakEquipment::AddUniqueInfo()
 {
     	info.addTitleStr("BAK");
-    	info.addNameStr("fuel:");      info.addValueStr( getFuelStr() );
+    	info.addNameStr("fuel:");      info.addValueStr( GetFuelStr() );
 }
 
 
-std::string BakEquipment :: getFuelStr()
+std::string BakEquipment::GetFuelStr()
 {
      	if (fuel_max_add == 0)
         	return int2str(fuel_max_orig) + "/" + int2str(fuel);
@@ -89,25 +82,49 @@ std::string BakEquipment :: getFuelStr()
 }
 
 /*virtual*/
-void BakEquipment::SaveData(boost::property_tree::ptree&) const
+void BakEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-
+	std::string root = "bak_equipment." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
+	SaveDataUniqueBaseEquipment(save_ptree, root);
+	SaveDataUniqueBakEquipment(save_ptree, root);
 }
 
-/*virtual*/		
-void BakEquipment::LoadData(boost::property_tree::ptree&)
+/*virtual*/
+void BakEquipment::LoadData(boost::property_tree::ptree& load_ptree)
 {
-
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
+	LoadDataUniqueBaseEquipment(load_ptree);
+	LoadDataUniqueBakEquipment(load_ptree);
 }
-	
+
 /*virtual*/	
 void BakEquipment::ResolveData()
 {
-
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
+	ResolveDataUniqueBaseEquipment();
+	ResolveDataUniqueBakEquipment();
 }
 
+void BakEquipment::SaveDataUniqueBakEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+        save_ptree.put(root+"fuel_max_orig", fuel_max_orig);
+        save_ptree.put(root+"fuel", fuel);
+}
+                
+void BakEquipment::LoadDataUniqueBakEquipment(const boost::property_tree::ptree& load_ptree)
+{
+        fuel_max_orig = load_ptree.get<int>("fuel_max_orig");
+        fuel = load_ptree.get<int>("fuel");
+}                
 
-BakEquipment* getNewBakEquipment(int race_id, int revision_id)
+void BakEquipment::ResolveDataUniqueBakEquipment()
+{}
+
+BakEquipment* GetNewBakEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
        		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
@@ -128,20 +145,19 @@ BakEquipment* getNewBakEquipment(int race_id, int revision_id)
     	common_data.condition_max = getRandInt(EQUIPMENT::BAK::CONDITION_MIN, EQUIPMENT::BAK::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
-        IdData data_id;
-        data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::BAK_ID;
+        int id = g_ID_GENERATOR.getNextId();
         
-    	BakEquipment* bak_equipment = new BakEquipment(fuel_max_orig);
-        
-        bak_equipment->SetIdData(data_id);  
+    	BakEquipment* bak_equipment = new BakEquipment(id);
+        bak_equipment->SetFuelMaxOrig(fuel_max_orig);
+        bak_equipment->SetFuel(fuel_max_orig);
         bak_equipment->SetTextureOb(texOb_item);    	
         bak_equipment->SetFunctionalSlotSubTypeId(SLOT::BAK_ID);
         bak_equipment->SetItemCommonData(common_data);
-                
-        bak_equipment->updatePropetries();
-    	bak_equipment->countPrice();
+                                
+        bak_equipment->UpdatePropetries();
+    	bak_equipment->CountPrice();
     	
+        EntityManager::Instance().RegisterEntity(bak_equipment);
+        
     	return bak_equipment;
 }

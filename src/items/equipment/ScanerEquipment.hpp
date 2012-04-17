@@ -17,36 +17,41 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef FREEZEREQUIPMENT_H
-#define FREEZEREQUIPMENT_H
+#ifndef SCANEREQUIPMENT_H
+#define SCANEREQUIPMENT_H
 
 
-class FreezerEquipment : public EquipmentBase
-{  
-   	public:
-      		FreezerEquipment(int freeze_orig);
-      		virtual ~FreezerEquipment();
+class ScanerEquipment : public BaseEquipment
+{
+  	public:
+    		ScanerEquipment(int);
+    		virtual ~ScanerEquipment();
 
-		int getFreeze() const;
-  
-      		virtual void UpdateOwnerAbilities();
-      		
-      		void countPrice();
-      		virtual void updatePropetries();  
-      		
+                void SetScanOrig(int scan_orig)  { this->scan_orig = scan_orig; };
+		int GetScan() const { return scan; };
+
+    		virtual void UpdateOwnerAbilities();
+    		
+    		void CountPrice();
+    		virtual void UpdatePropetries();
+    		
     		virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(boost::property_tree::ptree&);
 		virtual void ResolveData();
-      		
-      	private:
-      	      	int freeze_orig;
-      		int freeze_add;
-      		int freeze;
-      		
-      		void virtual AddUniqueInfo();      		
-       		std::string getFreezeStr();
+		
+    	private:
+    		int scan_orig;
+    		int scan_add;
+    		int scan;
+
+     		void virtual AddUniqueInfo();
+         	std::string GetScanStr();
+                
+                void SaveDataUniqueScanerEquipment(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueScanerEquipment(const boost::property_tree::ptree&);
+		void ResolveDataUniqueScanerEquipment();  
 };
 
-FreezerEquipment* getNewFreezerEquipment(int race_id, int revision_id = -1);
+ScanerEquipment* GetNewScanerEquipment(int race_id, int revision_id = -1);
 
 #endif 

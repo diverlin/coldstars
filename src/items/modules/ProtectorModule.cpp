@@ -17,9 +17,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-ProtectorModule::ProtectorModule(int protection_add)
+ProtectorModule::ProtectorModule(int id)
 {
-     	this->protection_add = protection_add;
+        data_id.type_id    = id;
+        data_id.type_id    = MODULE::MODULE_ID;
+        data_id.subtype_id = MODULE::PROTECTOR_ID;
+        
+     	protection_add = 0;
 }
 
 /* virtual */
@@ -37,20 +41,26 @@ void ProtectorModule::AddUniqueInfo()
 void ProtectorModule::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "protector_module." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
 	SaveDataUniqueBaseModule(save_ptree, root);
 	SaveDataUniqueProtectorModule(save_ptree, root);
 }
 
-/*virtual*/		
+/*virtual*/
 void ProtectorModule::LoadData(boost::property_tree::ptree& load_ptree)
 {
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
 	LoadDataUniqueBaseModule(load_ptree);
 	LoadDataUniqueProtectorModule(load_ptree);
 }
-	
-/*virtual*/	
+
+/*virtual*/
 void ProtectorModule::ResolveData()
 {
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
 	ResolveDataUniqueBaseModule();
 	ResolveDataUniqueProtectorModule();
 }
@@ -74,14 +84,11 @@ ProtectorModule* GetNewProtectorModule()
         
     	int protection_add = getRandInt(MODULE::PROTECTOR::PROTECTION_MIN, MODULE::PROTECTOR::PROTECTION_MAX);
 
-        IdData data_id;
-        data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = MODULE::MODULE_ID;
-        data_id.subtype_id = MODULE::PROTECTOR_ID;  
+        int id = g_ID_GENERATOR.getNextId();
         
-    	ProtectorModule* protector_module = new ProtectorModule(protection_add);
+    	ProtectorModule* protector_module = new ProtectorModule(id);
         protector_module->SetTextureOb(texOb);
-        protector_module->SetIdData(data_id);
+        protector_module->SetProtectionAdd(protection_add);
         
         EntityManager::Instance().RegisterEntity(protector_module);
                 

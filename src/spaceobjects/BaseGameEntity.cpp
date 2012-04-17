@@ -100,21 +100,21 @@ void BaseGameEntity::SaveDataUniqueBaseGameEntity(boost::property_tree::ptree& s
 
 	save_ptree.put(root+"mass", mass);
 
-	if (mesh) 	save_ptree.put(root+"mesh_path", mesh->path);
-	else           save_ptree.put(root+"mesh_path", "none");
+	if (mesh) 	save_ptree.put(root+"unresolved.mesh_path", mesh->path);
+	else           save_ptree.put(root+"unresolved.mesh_path", "none");
 	
-	if (textureOb) 	save_ptree.put(root+"textureOb_path", textureOb->path);
-	else            save_ptree.put(root+"textureOb_path", "none");	
+	if (textureOb) 	save_ptree.put(root+"unresolved.textureOb_path", textureOb->path);
+	else            save_ptree.put(root+"unresolved.textureOb_path", "none");
 
-	if (parent) save_ptree.put(root+"parent_id", parent->GetId());
-	else        save_ptree.put(root+"parent_id", -1);
+	if (parent) save_ptree.put(root+"unresolved.parent_id", parent->GetId());
+	else        save_ptree.put(root+"unresolved.parent_id", -1);
 
-	save_ptree.put(root+"starsystem_id", starsystem->GetId());
+	save_ptree.put(root+"unresolved.starsystem_id", starsystem->GetId());
 	save_ptree.put(root+"place_type_id", place_type_id);
 			
-	save_ptree.put(root+"center.x", points.getCenter().x);
-	save_ptree.put(root+"center.y", points.getCenter().y);
-	save_ptree.put(root+"angle_2D", points.getAngleDegree());	
+	save_ptree.put(root+"unresolved.center.x", points.getCenter().x);
+	save_ptree.put(root+"unresolved.center.y", points.getCenter().y);
+	save_ptree.put(root+"unresolved.angle_2D", points.getAngleDegree());	
 }
 
 
@@ -140,15 +140,15 @@ void BaseGameEntity::LoadDataUniqueBaseGameEntity(const boost::property_tree::pt
 	place_type_id = load_ptree.get<int>("place_type_id");	
 
 
-	data_unresolved_bge.mesh_path      = load_ptree.get<std::string>("mesh_path");
-	data_unresolved_bge.textureOb_path = load_ptree.get<std::string>("textureOb_path");
+	data_unresolved_bge.mesh_path      = load_ptree.get<std::string>("unresolved.mesh_path");
+	data_unresolved_bge.textureOb_path = load_ptree.get<std::string>("unresolved.textureOb_path");
 	
-	data_unresolved_bge.parent_id = load_ptree.get<int>("parent_id");			
-	data_unresolved_bge.starsystem_id = load_ptree.get<int>("starsystem_id");
+	data_unresolved_bge.parent_id = load_ptree.get<int>("unresolved.parent_id");			
+	data_unresolved_bge.starsystem_id = load_ptree.get<int>("unresolved.starsystem_id");
 			
-	data_unresolved_bge.center.x = load_ptree.get<float>("center.x");
-	data_unresolved_bge.center.y = load_ptree.get<float>("center.y");
-	data_unresolved_bge.angle    = load_ptree.get<float>("angle_2D");
+	data_unresolved_bge.center.x = load_ptree.get<float>("unresolved.center.x");
+	data_unresolved_bge.center.y = load_ptree.get<float>("unresolved.center.y");
+	data_unresolved_bge.angle    = load_ptree.get<float>("unresolved.angle_2D");
 }
 
 void BaseGameEntity::ResolveDataUniqueBaseGameEntity()

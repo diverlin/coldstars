@@ -578,8 +578,8 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
 	       				{
 	       					if (npc->GetVehicle()->ableTo.GRAB == true)
 	       					{
-	       						npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->addTarget(visible_MINERAL_vec[mi]);
-	       						npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->validateTargets();	       						
+	       						npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(visible_MINERAL_vec[mi]);
+	       						npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets();	       						
 	       					}
 	       				}
 	       			}
@@ -612,8 +612,8 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
 	       				{
 	       					if (npc->GetVehicle()->ableTo.GRAB == true)
 	       					{
-	       						npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->addTarget(visible_CONTAINER_vec[ci]);
-	       						npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->validateTargets();
+	       						npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(visible_CONTAINER_vec[ci]);
+	       						npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets();
 	       						printf("CONTAINER with id = %i HAS BEEN MARKED\n", visible_CONTAINER_vec[ci]->GetId());	       						
 	       					}
 	       				}
@@ -760,8 +760,8 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
                 				{
 	       						if (npc->GetVehicle()->ableTo.GRAB == true)
 	       						{
-	       							npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->addTarget(visible_SHIP_vec[ki]);
-	       							npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->validateTargets();	       						
+	       							npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(visible_SHIP_vec[ki]);
+	       							npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets();	       						
 	       						}
                    				}
                    				else

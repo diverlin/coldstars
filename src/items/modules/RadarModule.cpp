@@ -17,9 +17,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-RadarModule::RadarModule(int radius_add)
+RadarModule::RadarModule(int id)
 {
-     	this->radius_add = radius_add;
+        data_id.type_id    = id;
+        data_id.type_id    = MODULE::MODULE_ID;
+        data_id.subtype_id = MODULE::RADAR_ID; 
+        
+     	radius_add = 0;
 }
 
 /* virtual */
@@ -37,6 +41,8 @@ void RadarModule::AddUniqueInfo()
 void RadarModule::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "radar_module." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
 	SaveDataUniqueBaseModule(save_ptree, root);
 	SaveDataUniqueRadarModule(save_ptree, root);
 }
@@ -44,6 +50,8 @@ void RadarModule::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/		
 void RadarModule::LoadData(boost::property_tree::ptree& load_ptree)
 {
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
 	LoadDataUniqueBaseModule(load_ptree);
 	LoadDataUniqueRadarModule(load_ptree);
 }
@@ -51,6 +59,8 @@ void RadarModule::LoadData(boost::property_tree::ptree& load_ptree)
 /*virtual*/	
 void RadarModule::ResolveData()
 {
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
 	ResolveDataUniqueBaseModule();
 	ResolveDataUniqueRadarModule();
 }
@@ -73,30 +83,13 @@ RadarModule* GetNewRadarModule()
     	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
     	int radius_add  = getRandInt(MODULE::RADAR::RADIUS_MIN, MODULE::RADAR::RADIUS_MAX);
     
-        IdData data_id;
-        data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = MODULE::MODULE_ID;
-        data_id.subtype_id = MODULE::RADAR_ID; 
+        int id = g_ID_GENERATOR.getNextId();
         
-    	RadarModule* radar_module = new RadarModule(radius_add);    
+    	RadarModule* radar_module = new RadarModule(id);    
         radar_module->SetTextureOb(texOb);
-        radar_module->SetIdData(data_id);
+        radar_module->SetRadiusAdd(radius_add);
                 
         EntityManager::Instance().RegisterEntity(radar_module);
                         
     	return radar_module;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

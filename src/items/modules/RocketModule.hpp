@@ -24,14 +24,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class RocketModule : public BaseModule
 {
      	public:
-       		RocketModule(int ammo_max_add, 
-                             int damage_add, 
-                             int radius_add);
+       		RocketModule(int);
        		virtual ~RocketModule();
 
+		void SetAmmoMaxAdd(int ammo_max_add) { this->ammo_max_add = ammo_max_add; };
+		void SetDamageAdd(int damage_add)    { this->damage_add = damage_add; };
+		void SetRadiusAdd(int radius_add)    { this->radius_add = radius_add; };
+                
 		int GetAmmoMaxAdd() const { return ammo_max_add; };
 		int GetDamageAdd()  const { return damage_add; };
-		int GetRadiusAdd()  const { return radius_add; } ;
+		int GetRadiusAdd()  const { return radius_add; };
 		
 		virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(boost::property_tree::ptree&);

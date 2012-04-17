@@ -24,10 +24,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class LazerModule : public BaseModule
 {
     	public:
-	       	LazerModule(int damage_add, 
-                            int radius_add);
+	       	LazerModule(int);
         	virtual ~LazerModule();
 
+		void SetDamageAdd(int damage_add) { this->damage_add = damage_add; };
+		void SetRadiusAdd(int radius_add) { this->radius_add = radius_add; };
+                
 		int GetDamageAdd() const { return damage_add; };
 		int GetRadiusAdd() const { return radius_add; };
 		
@@ -45,7 +47,6 @@ class LazerModule : public BaseModule
 		void LoadDataUniqueLazerModule(const boost::property_tree::ptree&);
 		void ResolveDataUniqueLazerModule();    
 };
-
 
 LazerModule* GetNewLazerModule();
 

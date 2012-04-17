@@ -17,19 +17,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-FreezerEquipment :: FreezerEquipment(int freeze_orig)
+FreezerEquipment::FreezerEquipment(int id)
 {
-    	this->freeze_orig = freeze_orig;
+        data_id.id         = id;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::FREEZER_ID; 
+         
+    	freeze_orig = 0;
 }
 
-FreezerEquipment :: ~FreezerEquipment() /* virtual */
+/* virtual */
+FreezerEquipment::~FreezerEquipment() 
 {}
 
-
-int FreezerEquipment :: getFreeze() const { return freeze; }
-		
 /* virtual */
-void FreezerEquipment :: updatePropetries()
+void FreezerEquipment::UpdatePropetries()
 {
     	freeze_add  = 0;
         
@@ -41,8 +43,7 @@ void FreezerEquipment :: updatePropetries()
      	freeze = freeze_orig + freeze_add;
 }
 
-
-void FreezerEquipment :: countPrice()
+void FreezerEquipment::CountPrice()
 {
      	float freeze_rate          = (float)freeze_orig / EQUIPMENT::FREEZER::FREEZE_MIN;
      	float modules_num_rate     = (float)data_item.modules_num_max / EQUIPMENT::FREEZER::MODULES_NUM_MAX;
@@ -56,20 +57,18 @@ void FreezerEquipment :: countPrice()
 }
 
 /* virtual */
-void FreezerEquipment :: UpdateOwnerAbilities()
+void FreezerEquipment::UpdateOwnerAbilities()
 {
     	slot->GetOwnerVehicle()->UpdateFreezeAbility();
 }
-
       
-void FreezerEquipment :: AddUniqueInfo()
+void FreezerEquipment::AddUniqueInfo()
 {
     	info.addTitleStr("FREEZER");
-    	info.addNameStr("freeze:");     info.addValueStr( getFreezeStr() );
+    	info.addNameStr("freeze:");     info.addValueStr(GetFreezeStr());
 }
-           		
-           		
-std::string FreezerEquipment :: getFreezeStr()
+
+std::string FreezerEquipment::GetFreezeStr()
 {
      	if (freeze_add == 0)
          	return int2str(freeze_orig);
@@ -77,26 +76,51 @@ std::string FreezerEquipment :: getFreezeStr()
          	return int2str(freeze_orig) + "+" + int2str(freeze_add);
 }
 
+
 /*virtual*/
-void FreezerEquipment::SaveData(boost::property_tree::ptree&) const
+void FreezerEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-
+	std::string root = "freezer_equipment." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
+	SaveDataUniqueBaseEquipment(save_ptree, root);
+	SaveDataUniqueFreezerEquipment(save_ptree, root);
 }
 
-/*virtual*/		
-void FreezerEquipment::LoadData(boost::property_tree::ptree&)
+/*virtual*/
+void FreezerEquipment::LoadData(boost::property_tree::ptree& load_ptree)
 {
-
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
+	LoadDataUniqueBaseEquipment(load_ptree);
+	LoadDataUniqueFreezerEquipment(load_ptree);
 }
-	
-/*virtual*/	
+
+/*virtual*/
 void FreezerEquipment::ResolveData()
 {
-
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
+	ResolveDataUniqueBaseEquipment();
+	ResolveDataUniqueFreezerEquipment();
 }
 
+void FreezerEquipment::SaveDataUniqueFreezerEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+        save_ptree.put(root+"freeze_orig", freeze_orig);
+}
+                
+void FreezerEquipment::LoadDataUniqueFreezerEquipment(const boost::property_tree::ptree& load_ptree)
+{
+        freeze_orig = load_ptree.get<int>("freeze_orig");     
+}                
 
-FreezerEquipment* getNewFreezerEquipment(int race_id, int revision_id)
+void FreezerEquipment::ResolveDataUniqueFreezerEquipment()
+{}
+
+
+
+FreezerEquipment* GetNewFreezerEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
        		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
@@ -117,20 +141,19 @@ FreezerEquipment* getNewFreezerEquipment(int race_id, int revision_id)
     	common_data.condition_max   = getRandInt(EQUIPMENT::FREEZER::CONDITION_MIN, EQUIPMENT::FREEZER::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
-        IdData data_id;
-        data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::FREEZER_ID;   
+        int id = g_ID_GENERATOR.getNextId();
         
-    	FreezerEquipment* freezer_equipment = new FreezerEquipment(freeze_orig);
+    	FreezerEquipment* freezer_equipment = new FreezerEquipment(id);
         
-        freezer_equipment->SetIdData(data_id);  
+        freezer_equipment->SetFreezeOrig(freeze_orig);  
         freezer_equipment->SetTextureOb(texOb_item);    	
         freezer_equipment->SetFunctionalSlotSubTypeId(SLOT::FREEZER_ID);
         freezer_equipment->SetItemCommonData(common_data);
   
-      	freezer_equipment->updatePropetries();
-    	freezer_equipment->countPrice();
-    	              
+      	freezer_equipment->UpdatePropetries();
+    	freezer_equipment->CountPrice();
+    	     
+        EntityManager::Instance().RegisterEntity(freezer_equipment);
+                              
     	return freezer_equipment;
 }
