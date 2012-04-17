@@ -159,17 +159,6 @@ ParticleData :: ParticleData()
         frame = 0;
 }
 	
-	
-ItemCommonData :: ItemCommonData()
-{	
-	modules_num_max    = 0; 
-	condition_max      = 0; 
-	deterioration_rate = 0;
-	mass               = 0; 
-}	
-
-
-
 
 WeaponSelector :: WeaponSelector()
 {

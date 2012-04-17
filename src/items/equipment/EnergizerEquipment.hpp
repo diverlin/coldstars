@@ -21,19 +21,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define ENERGIZEREQUIPMENT_H
 
 
-class EnergizerEquipment : public EquipmentBase
+class EnergizerEquipment : public BaseEquipment
 {
 	public:
-      		EnergizerEquipment(int energy_max_orig, 
-      				   int restoration_orig);         
+      		EnergizerEquipment(int);         
       		virtual ~EnergizerEquipment();
-      
-      		int getEnergy() const;
+
+      		void SetEnergyMaxOrig(int energy_max_orig)    { this->energy_max_orig  = energy_max_orig; };
+                void SetRestorationOrig(int restoration_orig) { this->restoration_orig = restoration_orig; };
+      		void SetEnergy(int energy) { this->energy  = energy; };
+                                                      
+      		int GetEnergy() const { return energy; };
       		
       		void virtual UpdateOwnerAbilities();
 
-      		void countPrice();
-      		virtual void updatePropetries();
+      		void CountPrice();
+      		virtual void UpdatePropetries();
       		      		
       		virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(boost::property_tree::ptree&);
@@ -50,10 +53,14 @@ class EnergizerEquipment : public EquipmentBase
       		int restoration;
       		
      		void virtual AddUniqueInfo();
-           	std::string getEnergyStr();
-           	std::string getRestorationStr();
+           	std::string GetEnergyStr();
+           	std::string GetRestorationStr();
+                
+                void SaveDataUniqueEnergizerEquipment(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueEnergizerEquipment(const boost::property_tree::ptree&);
+		void ResolveDataUniqueEnergizerEquipment(); 
 };
 
-EnergizerEquipment* getNewEnergizerEquipment(int race_id, int revision_id = -1);
+EnergizerEquipment* GetNewEnergizerEquipment(int race_id, int revision_id = -1);
 
 #endif 

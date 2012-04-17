@@ -17,21 +17,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-RadarEquipment :: RadarEquipment(int radius_orig)
+RadarEquipment::RadarEquipment(int id)
 {
-    	this->radius_orig = radius_orig;
+        data_id.id         = id;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::RADAR_ID;
+        
+    	radius_orig = 0;
 }
 
-
-RadarEquipment :: ~RadarEquipment() /* virtual */
+/* virtual */
+RadarEquipment::~RadarEquipment() 
 {}
 
-
-int RadarEquipment :: getRadius() const { return radius; }
-
-
 /* virtual */
-void RadarEquipment :: updatePropetries()
+void RadarEquipment::UpdatePropetries()
 {
     	radius_add  = 0;
     	
@@ -43,7 +43,7 @@ void RadarEquipment :: updatePropetries()
     	radius = radius_orig + radius_add;
 }
 
-void RadarEquipment :: countPrice()
+void RadarEquipment::CountPrice()
 {
     	float radius_rate         = (float)radius_orig / EQUIPMENT::RADAR::RADIUS_MIN;
 
@@ -58,20 +58,18 @@ void RadarEquipment :: countPrice()
 }
 
 /* virtual */
-void RadarEquipment :: UpdateOwnerAbilities()
+void RadarEquipment::UpdateOwnerAbilities()
 {
 	slot->GetOwnerVehicle()->UpdateRadarAbility();
 }
       
-
-void RadarEquipment :: AddUniqueInfo()
+void RadarEquipment::AddUniqueInfo()
 {
     	info.addTitleStr("RADAR");
-    	info.addNameStr("radius:");     info.addValueStr( getRadiusStr() );
+    	info.addNameStr("radius:");     info.addValueStr(GetRadiusStr());
 }
-     		
-     		
-std::string RadarEquipment :: getRadiusStr()
+
+std::string RadarEquipment::GetRadiusStr()
 {
     	if (radius_add == 0)
         	return int2str(radius_orig);
@@ -80,26 +78,49 @@ std::string RadarEquipment :: getRadiusStr()
 }
 
 /*virtual*/
-void RadarEquipment::SaveData(boost::property_tree::ptree&) const
+void RadarEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-
+	std::string root = "radar_equipment." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
+	SaveDataUniqueBaseEquipment(save_ptree, root);
+	SaveDataUniqueRadarEquipment(save_ptree, root);
 }
 
-/*virtual*/		
-void RadarEquipment::LoadData(boost::property_tree::ptree&)
+/*virtual*/
+void RadarEquipment::LoadData(boost::property_tree::ptree& load_ptree)
 {
-
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
+	LoadDataUniqueBaseEquipment(load_ptree);
+	LoadDataUniqueRadarEquipment(load_ptree);
 }
-	
-/*virtual*/	
+
+/*virtual*/
 void RadarEquipment::ResolveData()
 {
-
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
+	ResolveDataUniqueBaseEquipment();
+	ResolveDataUniqueRadarEquipment();
 }
+
+void RadarEquipment::SaveDataUniqueRadarEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+        save_ptree.put(root+"radius_orig", radius_orig);
+}
+                
+void RadarEquipment::LoadDataUniqueRadarEquipment(const boost::property_tree::ptree& load_ptree)
+{
+        radius_orig = load_ptree.get<int>("radius_orig");   
+}                
+
+void RadarEquipment::ResolveDataUniqueRadarEquipment()
+{}
 
     
 
-RadarEquipment* getNewRadarEquipment(int race_id, int revision_id)
+RadarEquipment* GetNewRadarEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
        		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
@@ -120,22 +141,20 @@ RadarEquipment* getNewRadarEquipment(int race_id, int revision_id)
     	common_data.condition_max   = getRandInt(EQUIPMENT::RADAR::CONDITION_MIN, EQUIPMENT::RADAR::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
-        IdData data_id;
-        data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::RADAR_ID;
+        int id    = g_ID_GENERATOR.getNextId();
         
-    	RadarEquipment* radar_equipment = new RadarEquipment(radius_orig);
-                        
-        radar_equipment->SetIdData(data_id);  
-        radar_equipment->SetTextureOb(texOb_item);    	
+    	RadarEquipment* radar_equipment = new RadarEquipment(id);
+        radar_equipment->SetRadiusOrig(radius_orig);
+        radar_equipment->SetTextureOb(texOb_item);
         radar_equipment->SetFunctionalSlotSubTypeId(SLOT::RADAR_ID);
         radar_equipment->SetItemCommonData(common_data);
         
  
-    	radar_equipment->updatePropetries();
-    	radar_equipment->countPrice();
-    	
+    	radar_equipment->UpdatePropetries();
+    	radar_equipment->CountPrice();
+
+        EntityManager::Instance().RegisterEntity(radar_equipment);
+        
     	return radar_equipment;
 }
 

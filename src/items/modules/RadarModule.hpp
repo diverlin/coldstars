@@ -24,9 +24,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class RadarModule : public BaseModule
 {
    	public:
-      		RadarModule(int radius_add);
+      		RadarModule(int);
       		virtual ~RadarModule();
-      		
+
+      		void SetRadiusAdd(int radius_add) { this->radius_add = radius_add; };
       		int GetRadiusAdd() const { return radius_add; };
 
 		virtual void SaveData(boost::property_tree::ptree&) const;

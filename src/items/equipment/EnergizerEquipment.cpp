@@ -17,25 +17,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-EnergizerEquipment :: EnergizerEquipment(int energy_max_orig, 
-					 int restoration_orig)
+EnergizerEquipment::EnergizerEquipment(int id)
 {
-    	this->energy_max_orig  = energy_max_orig;
-        this->restoration_orig = restoration_orig;
+        data_id.id         = id;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::ENERGIZER_ID;
+               
+    	energy_max_orig  = 0;
+        restoration_orig = 0;
 
-    	energy = energy_max_orig;
+    	energy = 0;
 }
 
-EnergizerEquipment :: ~EnergizerEquipment() /* virtual */
+/* virtual */
+EnergizerEquipment::~EnergizerEquipment() 
 {}
 
-
-int EnergizerEquipment :: getEnergy() const { return energy; }
-      		
 /* virtual */
-void EnergizerEquipment :: updatePropetries()
+void EnergizerEquipment::UpdatePropetries()
 {
-    	energy_max_add  = 0;
+    	energy_max_add   = 0;
     	restoration_add  = 0;
     	
     	for (unsigned int i = 0; i < modules_vec.size(); i++)
@@ -44,11 +45,11 @@ void EnergizerEquipment :: updatePropetries()
         	restoration_add += ((EnergizerModule*)modules_vec[i])->GetRestorationAdd();    	
     	}
     	
-    	energy_max  = energy_max_orig + energy_max_add;
+    	energy_max  = energy_max_orig  + energy_max_add;
     	restoration = restoration_orig + restoration_add;
 }
 
-void EnergizerEquipment :: countPrice()
+void EnergizerEquipment::CountPrice()
 {
     	float energy_rate          = (float)energy_max_orig / EQUIPMENT::ENERGIZER::ENERGY_MIN;
     	float restoration_rate     = (float)restoration_orig / EQUIPMENT::ENERGIZER::RESTORATION_MIN;
@@ -62,22 +63,19 @@ void EnergizerEquipment :: countPrice()
     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-
-void EnergizerEquipment :: UpdateOwnerAbilities()
+void EnergizerEquipment::UpdateOwnerAbilities()
 {
     	slot->GetOwnerVehicle()->UpdateEnergyAbility();
 }
 
-
-void EnergizerEquipment :: AddUniqueInfo()
+void EnergizerEquipment::AddUniqueInfo()
 {
     	info.addTitleStr("ENERGYBLOCK");
-    	info.addNameStr("energy:");      info.addValueStr( getEnergyStr() );
-    	info.addNameStr("restoration:"); info.addValueStr( getRestorationStr() );
+    	info.addNameStr("energy:");      info.addValueStr(GetEnergyStr());
+    	info.addNameStr("restoration:"); info.addValueStr(GetRestorationStr());
 }
-     		
 
-std::string EnergizerEquipment :: getEnergyStr()
+std::string EnergizerEquipment::GetEnergyStr()
 {
     	if (energy_max_add == 0)
         	return int2str(energy_max_orig) + "/" + int2str(energy);
@@ -85,7 +83,7 @@ std::string EnergizerEquipment :: getEnergyStr()
         	return int2str(energy_max_orig) + "+" + int2str(energy_max_add) + "/" + int2str(energy);
 }
 
-std::string EnergizerEquipment :: getRestorationStr()
+std::string EnergizerEquipment::GetRestorationStr()
 {
     	if (restoration_add == 0)
         	return int2str(restoration_orig);
@@ -94,25 +92,50 @@ std::string EnergizerEquipment :: getRestorationStr()
 }
 
 /*virtual*/
-void EnergizerEquipment::SaveData(boost::property_tree::ptree&) const
+void EnergizerEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-
+	std::string root = "energizer_equipment." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
+	SaveDataUniqueBaseEquipment(save_ptree, root);
+	SaveDataUniqueEnergizerEquipment(save_ptree, root);
 }
 
-/*virtual*/		
-void EnergizerEquipment::LoadData(boost::property_tree::ptree&)
+/*virtual*/
+void EnergizerEquipment::LoadData(boost::property_tree::ptree& load_ptree)
 {
-
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
+	LoadDataUniqueBaseEquipment(load_ptree);
+	LoadDataUniqueEnergizerEquipment(load_ptree);
 }
-	
-/*virtual*/	
+
+/*virtual*/
 void EnergizerEquipment::ResolveData()
 {
-
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
+	ResolveDataUniqueBaseEquipment();
+	ResolveDataUniqueEnergizerEquipment();
 }
 
+void EnergizerEquipment::SaveDataUniqueEnergizerEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+        save_ptree.put(root+"energy_max_orig", energy_max_orig);
+        save_ptree.put(root+"restoration_orig", restoration_orig);
+}
+                
+void EnergizerEquipment::LoadDataUniqueEnergizerEquipment(const boost::property_tree::ptree& load_ptree)
+{
+        energy_max_orig = load_ptree.get<int>("energy_max_orig");
+        restoration_orig = load_ptree.get<int>("restoration_orig");        
+}                
 
-EnergizerEquipment* getNewEnergizerEquipment(int race_id, int revision_id)
+void EnergizerEquipment::ResolveDataUniqueEnergizerEquipment()
+{}
+
+
+EnergizerEquipment* GetNewEnergizerEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
        		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
@@ -134,20 +157,20 @@ EnergizerEquipment* getNewEnergizerEquipment(int race_id, int revision_id)
     	common_data.condition_max    = getRandInt(EQUIPMENT::ENERGIZER::CONDITION_MIN, EQUIPMENT::ENERGIZER::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
-        IdData data_id;
-        data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::ENERGIZER_ID;
-        
-    	EnergizerEquipment* energizer_equipment = new EnergizerEquipment(energy_max_orig, restoration_orig);
-        
-        energizer_equipment->SetIdData(data_id);  
+        int id = g_ID_GENERATOR.getNextId();
+       
+    	EnergizerEquipment* energizer_equipment = new EnergizerEquipment(id);
+        energizer_equipment->SetEnergyMaxOrig(energy_max_orig);
+        energizer_equipment->SetRestorationOrig(restoration_orig);
+        energizer_equipment->SetEnergy(energy_max_orig);
         energizer_equipment->SetTextureOb(texOb_item);    	
         energizer_equipment->SetFunctionalSlotSubTypeId(SLOT::ENERGIZER_ID);
         energizer_equipment->SetItemCommonData(common_data);
                 
-        energizer_equipment->updatePropetries();
-    	energizer_equipment->countPrice();
-    	
+        energizer_equipment->UpdatePropetries();
+    	energizer_equipment->CountPrice();
+
+        EntityManager::Instance().RegisterEntity(energizer_equipment);
+        
     	return energizer_equipment;
 }

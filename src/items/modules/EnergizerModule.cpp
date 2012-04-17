@@ -17,11 +17,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-EnergizerModule::EnergizerModule(int energy_max_add, 
-                                   int restoration_add)
+EnergizerModule::EnergizerModule(int id)
 {
-     	this->energy_max_add  = energy_max_add;
-     	this->restoration_add = restoration_add;
+        data_id.id = id;
+	data_id.type_id    = MODULE::MODULE_ID;
+	data_id.subtype_id = MODULE::ENERGIZER_ID;
+        
+     	energy_max_add  = 0;
+     	restoration_add = 0;
 }
 
 /* virtual */
@@ -46,6 +49,8 @@ void EnergizerModule::AddUniqueInfo()
 void EnergizerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "energizer_module." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
 	SaveDataUniqueBaseModule(save_ptree, root);
 	SaveDataUniqueEnergizerModule(save_ptree, root);
 }
@@ -53,6 +58,8 @@ void EnergizerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/		
 void EnergizerModule::LoadData(boost::property_tree::ptree& load_ptree)
 {
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
 	LoadDataUniqueBaseModule(load_ptree);
 	LoadDataUniqueEnergizerModule(load_ptree);
 }
@@ -60,6 +67,8 @@ void EnergizerModule::LoadData(boost::property_tree::ptree& load_ptree)
 /*virtual*/	
 void EnergizerModule::ResolveData()
 {
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
 	ResolveDataUniqueBaseModule();
 	ResolveDataUniqueEnergizerModule();
 }
@@ -86,14 +95,12 @@ EnergizerModule* GetNewEnergizerModule()
      	int energy_max_add  = getRandInt(MODULE::ENERGIZER::ENERGY_MIN, MODULE::ENERGIZER::ENERGY_MAX);
      	int restoration_add = getRandInt(MODULE::ENERGIZER::RESTORATION_MIN, MODULE::ENERGIZER::RESTORATION_MAX);
      	
-        IdData data_id;
-        data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = MODULE::MODULE_ID;
-        data_id.subtype_id = MODULE::ENERGIZER_ID;  
+        int id = g_ID_GENERATOR.getNextId();
         
-     	EnergizerModule* energizer_module = new EnergizerModule(energy_max_add, restoration_add);
+     	EnergizerModule* energizer_module = new EnergizerModule(id);
         energizer_module->SetTextureOb(texOb);
-        energizer_module->SetIdData(data_id);
+        energizer_module->SetEnergyMaxAdd(energy_max_add);
+        energizer_module->SetRestorationAdd(restoration_add);
         
         EntityManager::Instance().RegisterEntity(energizer_module);
                 

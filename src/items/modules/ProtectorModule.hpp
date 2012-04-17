@@ -24,9 +24,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class ProtectorModule : public BaseModule
 {
    	public:
-       		ProtectorModule(int protection_add);
+       		ProtectorModule(int);
        		virtual ~ProtectorModule();
 
+		void SetProtectionAdd(int protection_add) { this->protection_add = protection_add; };
+                
 		int GetProtectionAdd() const { return protection_add; };
        		
        		virtual void SaveData(boost::property_tree::ptree&) const;

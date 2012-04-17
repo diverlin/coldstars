@@ -17,40 +17,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-RocketEquipment :: RocketEquipment(int ammo_max_orig, 
-				   int damage_orig, 
-				   int radius_orig)
+RocketEquipment::RocketEquipment(int id)
 {
-        this->ammo_max_orig = ammo_max_orig;
-        this->damage_orig   = damage_orig;
-        this->radius_orig   = radius_orig;
+        data_id.id         = id;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::ROCKET_ID;     
         
-        ammo   = ammo_max_orig;
-        damage = damage_orig;
-        radius = radius_orig;
-                
-        data_bullet.texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ROCKET_BULLET_ID);    
-        data_bullet.damage        = damage;
-        data_bullet.armor         = ENTITY::ROCKET::ARMOR;
-        data_bullet.speed_init    = ENTITY::ROCKET::START_SPEED;
-        data_bullet.speed_max     = ENTITY::ROCKET::SPEED_MAX;
-        data_bullet.d_speed       = ENTITY::ROCKET::DELTA_SPEED;
-        data_bullet.live_time     = ENTITY::ROCKET::LIFE_TIME;
-        data_bullet.angular_speed = ENTITY::ROCKET::ANGULAR_SPEED;
+        ammo_max_orig = 0;
+        damage_orig   = 0;
+        radius_orig   = 0;
+        
+        ammo   = 0;
 }
 
-
-RocketEquipment :: ~RocketEquipment() /* virtual */
+/* virtual */
+RocketEquipment::~RocketEquipment() 
 {}
 
-
-int RocketEquipment :: getAmmo()   const { return ammo; }
-int RocketEquipment :: getDamage() const { return damage; }
-int RocketEquipment :: getRadius() const { return radius; }
-		
-
 /* virtual */
-void RocketEquipment :: updatePropetries()
+void RocketEquipment::UpdatePropetries()
 {
         ammo_max_add = 0;
         damage_add   = 0;
@@ -68,8 +53,7 @@ void RocketEquipment :: updatePropetries()
     	radius   = radius_orig + radius_add;
 }
 
-
-void RocketEquipment :: countPrice()
+void RocketEquipment::CountPrice()
 {
     	float ammo_rate     = (float)ammo_max_orig / EQUIPMENT::ROCKET::AMMO_MIN;
     	float damage_rate   = (float)damage_orig / EQUIPMENT::ROCKET::DAMAGE_MIN;
@@ -87,24 +71,21 @@ void RocketEquipment :: countPrice()
     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-
-void RocketEquipment :: UpdateOwnerAbilities()
+void RocketEquipment::UpdateOwnerAbilities()
 {      
     	slot->GetOwnerVehicle()->UpdateFireAbility();
 }
 
-
-void RocketEquipment :: AddUniqueInfo()
+void RocketEquipment::AddUniqueInfo()
 {
     	info.addTitleStr("ROCKET");
     	
-    	info.addNameStr("ammo:");      info.addValueStr( getAmmoStr() );
-    	info.addNameStr("damage:");    info.addValueStr( getDamageStr() );
-    	info.addNameStr("radius:");    info.addValueStr( getRadiusStr() );
+    	info.addNameStr("ammo:");      info.addValueStr(GetAmmoStr());
+    	info.addNameStr("damage:");    info.addValueStr(GetDamageStr());
+    	info.addNameStr("radius:");    info.addValueStr(GetRadiusStr());
 }
-     		
 
-std::string RocketEquipment :: getAmmoStr()
+std::string RocketEquipment::GetAmmoStr()
 {
     	if (ammo_max_add == 0)
        		return int2str(ammo_max_orig) + "/" + int2str(ammo);
@@ -112,7 +93,7 @@ std::string RocketEquipment :: getAmmoStr()
        		return int2str(ammo_max_orig) + "+" + int2str(ammo_max_add) + "/" + int2str(ammo);
 }
 
-std::string RocketEquipment :: getDamageStr()
+std::string RocketEquipment::GetDamageStr()
 {
     	if (damage_add == 0)
        		return int2str(damage_orig);
@@ -120,7 +101,7 @@ std::string RocketEquipment :: getDamageStr()
        		return int2str(damage_orig) + "+" + int2str(damage_add);
 }
 
-std::string RocketEquipment :: getRadiusStr()
+std::string RocketEquipment::GetRadiusStr()
 {
     	if (radius_add == 0)
        		return int2str(radius_orig);
@@ -128,8 +109,7 @@ std::string RocketEquipment :: getRadiusStr()
        		return int2str(radius_orig) + "+" + int2str(radius_add);
 }
 
-
-void RocketEquipment :: fireEvent()
+void RocketEquipment::FireEvent()
 {
 	int num = 0;
     	RocketBullet* rocket1 = VehicleBuilder::Instance().GetNewRocket(data_bullet, slot, 0.0f);
@@ -148,25 +128,55 @@ void RocketEquipment :: fireEvent()
 }
 
 /*virtual*/
-void RocketEquipment::SaveData(boost::property_tree::ptree&) const
+void RocketEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-
+	std::string root = "rocket_equipment." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
+	SaveDataUniqueBaseEquipment(save_ptree, root);
+	SaveDataUniqueRocketEquipment(save_ptree, root);
 }
 
-/*virtual*/		
-void RocketEquipment::LoadData(boost::property_tree::ptree&)
+/*virtual*/
+void RocketEquipment::LoadData(boost::property_tree::ptree& load_ptree)
 {
-
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
+	LoadDataUniqueBaseEquipment(load_ptree);
+	LoadDataUniqueRocketEquipment(load_ptree);
 }
-	
-/*virtual*/	
+
+/*virtual*/
 void RocketEquipment::ResolveData()
 {
-
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
+	ResolveDataUniqueBaseEquipment();
+	ResolveDataUniqueRocketEquipment();
 }
 
+void RocketEquipment::SaveDataUniqueRocketEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+        save_ptree.put(root+"ammo_max_orig", ammo_max_orig);
+        save_ptree.put(root+"ammo", ammo);
+        save_ptree.put(root+"damage_orig", damage_orig);
+        save_ptree.put(root+"radius_orig", radius_orig);
+}
+                
+void RocketEquipment::LoadDataUniqueRocketEquipment(const boost::property_tree::ptree& load_ptree)
+{
+        ammo_max_orig = load_ptree.get<int>("ammo_max_orig"); 
+        ammo = load_ptree.get<int>("ammo"); 
+        damage_orig = load_ptree.get<int>("damage_orig");  
+        radius_orig = load_ptree.get<int>("radius_orig");   
+}                
 
-RocketEquipment* getNewRocketEquipment(int race_id, int revision_id)
+void RocketEquipment::ResolveDataUniqueRocketEquipment()
+{}
+
+
+
+RocketEquipment* GetNewRocketEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
        		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
@@ -175,7 +185,7 @@ RocketEquipment* getNewRocketEquipment(int race_id, int revision_id)
        		revision_id = TECHLEVEL::L0_ID; 
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
-
+        
     	TextureOb* texOb_item = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ROCKET_EQUIPMENT_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::ROCKET_EQUIPMENT_ID, revision_id)   
     
@@ -190,22 +200,34 @@ RocketEquipment* getNewRocketEquipment(int race_id, int revision_id)
     	common_data.condition_max = getRandInt(EQUIPMENT::ROCKET::CONDITION_MIN, EQUIPMENT::ROCKET::CONDITION_MAX) * tech_rate;
 
     	common_data.deterioration_rate = 1;
+
+        int id = g_ID_GENERATOR.getNextId(); 
+
+        BulletData data_bullet;
+        data_bullet.texOb         = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ROCKET_BULLET_ID);    
+        data_bullet.damage        = damage_orig;
+        data_bullet.armor         = ENTITY::ROCKET::ARMOR;
+        data_bullet.speed_init    = ENTITY::ROCKET::START_SPEED;
+        data_bullet.speed_max     = ENTITY::ROCKET::SPEED_MAX;
+        data_bullet.d_speed       = ENTITY::ROCKET::DELTA_SPEED;
+        data_bullet.live_time     = ENTITY::ROCKET::LIFE_TIME;
+        data_bullet.angular_speed = ENTITY::ROCKET::ANGULAR_SPEED;
         
-        IdData data_id;
-        data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::ROCKET_ID;        
-
-    	RocketEquipment* rocket_equipment = new RocketEquipment(ammo_max_orig, damage_orig, radius_orig);
-
-        rocket_equipment->SetIdData(data_id);  
+    	RocketEquipment* rocket_equipment = new RocketEquipment(id);
+        rocket_equipment->SetAmmoMaxOrig(ammo_max_orig);
+	rocket_equipment->SetDamageOrig(damage_orig);
+	rocket_equipment->SetRadiusOrig(radius_orig);   
+        rocket_equipment->SetBulletData(data_bullet); 
+    	rocket_equipment->SetAmmo(ammo_max_orig);                
         rocket_equipment->SetTextureOb(texOb_item);    	
         rocket_equipment->SetFunctionalSlotSubTypeId(SLOT::WEAPON_ID);
         rocket_equipment->SetItemCommonData(common_data);
                 
-        rocket_equipment->updatePropetries();
-        rocket_equipment->countPrice();
+        rocket_equipment->UpdatePropetries();
+        rocket_equipment->CountPrice();
 
+        EntityManager::Instance().RegisterEntity(rocket_equipment);
+        
         return rocket_equipment;
 }
 

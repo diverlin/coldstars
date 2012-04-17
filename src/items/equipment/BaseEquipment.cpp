@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-EquipmentBase :: EquipmentBase()
+BaseEquipment::BaseEquipment()
 {
         race_id = RACE::R0_ID;
           
@@ -28,7 +28,7 @@ EquipmentBase :: EquipmentBase()
 }
 
 
-EquipmentBase :: ~EquipmentBase()
+BaseEquipment::~BaseEquipment()
 {
 	for (unsigned int i = 0; i < modules_vec.size(); i++)
 	{
@@ -37,7 +37,7 @@ EquipmentBase :: ~EquipmentBase()
 }
 
 /* virtual */
-void EquipmentBase :: AddCommonInfo()
+void BaseEquipment::AddCommonInfo()
 {
     	info.addNameStr("modules:");   info.addValueStr( int2str(data_item.modules_num_max) );
     	info.addNameStr("race:");      info.addValueStr( returnRaceStringByRaceId(race_id) );
@@ -46,12 +46,12 @@ void EquipmentBase :: AddCommonInfo()
     	info.addNameStr("price:");     info.addValueStr( int2str(price) );
 }
 
-bool EquipmentBase :: insertModule(BaseModule* module)
+bool BaseEquipment::InsertModule(BaseModule* module)
 {
 	if (modules_vec.size() < data_item.modules_num_max)
     	{
 	       	modules_vec.push_back(module);
-        	updatePropetries();
+        	UpdatePropetries();
         	
         	return true;
     	}
@@ -60,9 +60,9 @@ bool EquipmentBase :: insertModule(BaseModule* module)
 } 
 
 /* virtual */
-void EquipmentBase :: Render(Rect slot_rect)
+void BaseEquipment::Render(Rect slot_rect)
 {
-    	drawTexturedRect(texOb, slot_rect, -1.0);
+    	drawTexturedRect(textureOb, slot_rect, -1.0);
     	//if ((subtype == ROCKET_ID) or (subtype == TORPED_ID))
         	//drawSimpleText((slot_rect[0], slot_rect[1] + self.h/2), str(self.ammo_max) + '/' + str(self.ammo))
     
@@ -75,3 +75,13 @@ void EquipmentBase :: Render(Rect slot_rect)
         	drawTexturedRect(modules_vec[i]->GetTextureOb(), module_rect, -1);
     	}
 }
+
+
+void BaseEquipment::SaveDataUniqueBaseEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{}
+
+void BaseEquipment::LoadDataUniqueBaseEquipment(const boost::property_tree::ptree& load_ptree)
+{}
+
+void BaseEquipment::ResolveDataUniqueBaseEquipment()
+{}

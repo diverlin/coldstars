@@ -114,11 +114,11 @@ int ItemSlot::GetItemRadius() const
                 {
                         switch (item->GetSubTypeId())
                         {
-                                case EQUIPMENT::LAZER_ID:   { return ((LazerEquipment*)item)->getRadius();  break; };
-                                case EQUIPMENT::ROCKET_ID:  { return ((RocketEquipment*)item)->getRadius(); break; };
+                                case EQUIPMENT::LAZER_ID:   { return ((LazerEquipment*)item)->GetRadius();  break; };
+                                case EQUIPMENT::ROCKET_ID:  { return ((RocketEquipment*)item)->GetRadius(); break; };
 		
-                                case EQUIPMENT::GRAPPLE_ID: { return ((GrappleEquipment*)item)->getRadius(); break; };
-                                case EQUIPMENT::RADAR_ID:   { return ((RadarEquipment*)item)->getRadius();   break; };
+                                case EQUIPMENT::GRAPPLE_ID: { return ((GrappleEquipment*)item)->GetRadius(); break; };
+                                case EQUIPMENT::RADAR_ID:   { return ((RadarEquipment*)item)->GetRadius();   break; };
                         }
                         
                         break;
@@ -197,7 +197,7 @@ bool ItemSlot::SwapItemWith(ItemSlot* _slot)
        	{          
        		if ( (item->GetTypeId() == MODULE::MODULE_ID) and (_slot->GetItem()->GetTypeId() == EQUIPMENT::EQUIPMENT_ID) )
        		{
-			if (((EquipmentBase*)_slot->GetItem())->insertModule((BaseModule*)item) == true)  
+			if (((BaseEquipment*)_slot->GetItem())->InsertModule((BaseModule*)item) == true)  
 			{ 
 				RemoveItem(); 
 				
@@ -207,7 +207,7 @@ bool ItemSlot::SwapItemWith(ItemSlot* _slot)
        		
        		if ( (item->GetTypeId() == EQUIPMENT::EQUIPMENT_ID) and (_slot->GetItem()->GetTypeId() == MODULE::MODULE_ID) )
        		{
-			 if (((EquipmentBase*)item)->insertModule((BaseModule*)_slot->GetItem()) == true)  
+			 if (((BaseEquipment*)item)->InsertModule((BaseModule*)_slot->GetItem()) == true)  
 			 { 
 			 	_slot->RemoveItem(); 
 			 	

@@ -17,9 +17,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-FreezerModule::FreezerModule(int freeze_add)
+FreezerModule::FreezerModule(int id)
 {
-     	this->freeze_add = freeze_add;
+        data_id.type_id    = id;
+        data_id.type_id    = MODULE::MODULE_ID;
+        data_id.subtype_id = MODULE::FREEZER_ID; 
+        
+     	freeze_add = 0;
 }
 
 /* virtual */
@@ -37,6 +41,8 @@ void FreezerModule::AddUniqueInfo()
 void FreezerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "freezer_module." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
 	SaveDataUniqueBaseModule(save_ptree, root);
 	SaveDataUniqueFreezerModule(save_ptree, root);
 }
@@ -44,6 +50,8 @@ void FreezerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/		
 void FreezerModule::LoadData(boost::property_tree::ptree& load_ptree)
 {
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
 	LoadDataUniqueBaseModule(load_ptree);
 	LoadDataUniqueFreezerModule(load_ptree);
 }
@@ -51,6 +59,8 @@ void FreezerModule::LoadData(boost::property_tree::ptree& load_ptree)
 /*virtual*/	
 void FreezerModule::ResolveData()
 {
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
 	ResolveDataUniqueBaseModule();
 	ResolveDataUniqueFreezerModule();
 }
@@ -74,14 +84,11 @@ FreezerModule* GetNewFreezerModule()
     	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
         int freeze_add = getRandInt(MODULE::FREEZER::FREEZE_MIN, MODULE::FREEZER::FREEZE_MAX);
 
-        IdData data_id;
-        data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = MODULE::MODULE_ID;
-        data_id.subtype_id = MODULE::FREEZER_ID; 
+        int id = g_ID_GENERATOR.getNextId();
         
         FreezerModule* freezer_module = new FreezerModule(freeze_add);
         freezer_module->SetTextureOb(texOb);
-        freezer_module->SetIdData(data_id);
+        freezer_module->SetFreezeAdd(freeze_add);
         
         EntityManager::Instance().RegisterEntity(freezer_module);
                 

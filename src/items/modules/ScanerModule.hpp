@@ -24,9 +24,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class ScanerModule : public BaseModule
 {
     	public:
-       		ScanerModule(int scan_add);
+       		ScanerModule(int);
        		virtual ~ScanerModule();
-
+                
+		void SetScanAdd(int scan_add) { this->scan_add = scan_add; };                
 		int GetScanAdd() const { return scan_add; };
      		
      		virtual void SaveData(boost::property_tree::ptree&) const;

@@ -190,15 +190,6 @@ struct ParticleData
 
 
 
-struct ItemCommonData 
-{
-	ItemCommonData();
-
-	unsigned int modules_num_max; 
-	unsigned int condition_max; 
-	unsigned int deterioration_rate;
-	unsigned int mass; 
-};
 
 
 

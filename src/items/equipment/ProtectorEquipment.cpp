@@ -17,20 +17,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-ProtectorEquipment :: ProtectorEquipment(int protection_orig)
+ProtectorEquipment::ProtectorEquipment(int id)
 {
-    	this->protection_orig = protection_orig;
+        data_id.id         = id;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::PROTECTOR_ID;
+        
+    	protection_orig = 0;
 }
 
-ProtectorEquipment :: ~ProtectorEquipment() /* virtual */
+/* virtual */
+ProtectorEquipment::~ProtectorEquipment() 
 {}
 
-
-int ProtectorEquipment :: getProtection() const { return protection; }
-
-/* virtual */		
-void ProtectorEquipment :: updatePropetries()
-{   	
+/* virtual */
+void ProtectorEquipment::UpdatePropetries()
+{   
         protection_add  = 0;
         
        	for (unsigned int i = 0; i < modules_vec.size(); i++)
@@ -41,7 +43,7 @@ void ProtectorEquipment :: updatePropetries()
       	protection = protection_orig + protection_add;
 }
 
-void ProtectorEquipment :: countPrice()
+void ProtectorEquipment::CountPrice()
 {
       	float protection_rate    = (float)protection_orig / EQUIPMENT::PROTECTOR::PROTECTION_MIN;
       	float modules_num_rate   = (float)data_item.modules_num_max / EQUIPMENT::PROTECTOR::MODULES_NUM_MAX;
@@ -56,21 +58,18 @@ void ProtectorEquipment :: countPrice()
 }
 
 /* virtual */
-void ProtectorEquipment :: UpdateOwnerAbilities()
+void ProtectorEquipment::UpdateOwnerAbilities()
 {
      	slot->GetOwnerVehicle()->UpdateProtectionAbility();
 }
 
-
-
-void ProtectorEquipment :: AddUniqueInfo()
+void ProtectorEquipment::AddUniqueInfo()
 {
     	info.addTitleStr("PROTECTOR");
-    	info.addNameStr("protection:");     info.addValueStr( getProtectionStr() );
+    	info.addNameStr("protection:");     info.addValueStr(GetProtectionStr());
 }
-     		
 
-std::string ProtectorEquipment :: getProtectionStr()
+std::string ProtectorEquipment::GetProtectionStr()
 {
      	if (protection_add == 0)
          	return int2str(protection_orig);
@@ -79,26 +78,49 @@ std::string ProtectorEquipment :: getProtectionStr()
 }
 
 /*virtual*/
-void ProtectorEquipment::SaveData(boost::property_tree::ptree&) const
+void ProtectorEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-
+	std::string root = "protector_equipment." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
+	SaveDataUniqueBaseEquipment(save_ptree, root);
+	SaveDataUniqueProtectorEquipment(save_ptree, root);
 }
 
-/*virtual*/		
-void ProtectorEquipment::LoadData(boost::property_tree::ptree&)
+/*virtual*/
+void ProtectorEquipment::LoadData(boost::property_tree::ptree& load_ptree)
 {
-
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
+	LoadDataUniqueBaseEquipment(load_ptree);
+	LoadDataUniqueProtectorEquipment(load_ptree);
 }
-	
-/*virtual*/	
+
+/*virtual*/
 void ProtectorEquipment::ResolveData()
 {
-
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
+	ResolveDataUniqueBaseEquipment();
+	ResolveDataUniqueProtectorEquipment();
 }
 
+void ProtectorEquipment::SaveDataUniqueProtectorEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+        save_ptree.put(root+"protection_orig", protection_orig);
+}
+                
+void ProtectorEquipment::LoadDataUniqueProtectorEquipment(const boost::property_tree::ptree& load_ptree)
+{
+        protection_orig = load_ptree.get<int>("protection_orig");     
+}                
+
+void ProtectorEquipment::ResolveDataUniqueProtectorEquipment()
+{}
 
 
-ProtectorEquipment* getNewProtectorEquipment(int race_id, int revision_id)
+
+ProtectorEquipment* GetNewProtectorEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
        		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
@@ -119,20 +141,19 @@ ProtectorEquipment* getNewProtectorEquipment(int race_id, int revision_id)
     	common_data.condition_max   = getRandInt(EQUIPMENT::PROTECTOR::CONDITION_MIN, EQUIPMENT::PROTECTOR::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
-        IdData data_id;
-        data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::PROTECTOR_ID;
+        int id = g_ID_GENERATOR.getNextId();
         
-    	ProtectorEquipment* protector_equipment = new ProtectorEquipment(protection_orig);
+    	ProtectorEquipment* protector_equipment = new ProtectorEquipment(id);
 
-        protector_equipment->SetIdData(data_id);  
-        protector_equipment->SetTextureOb(texOb_item);    	
+        protector_equipment->SetProtectionOrig(protection_orig);  
+        protector_equipment->SetTextureOb(texOb_item);
         protector_equipment->SetFunctionalSlotSubTypeId(SLOT::PROTECTOR_ID);
         protector_equipment->SetItemCommonData(common_data);
         
-        protector_equipment->updatePropetries();
-    	protector_equipment->countPrice();
-    	
+        protector_equipment->UpdatePropetries();
+    	protector_equipment->CountPrice();
+
+        EntityManager::Instance().RegisterEntity(protector_equipment);
+        
     	return protector_equipment;
 }

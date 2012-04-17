@@ -83,7 +83,7 @@ bool Turrel :: isAmmoOk() const
 	switch(slot->GetItem()->GetSubTypeId())
 	{
     		case EQUIPMENT::LAZER_ID:  { /*if check energy */  return true; break; }
-    		case EQUIPMENT::ROCKET_ID: { if (slot->GetRocketEquipment()->getAmmo() > 0) return true; break; }
+    		case EQUIPMENT::ROCKET_ID: { if (slot->GetRocketEquipment()->GetAmmo() > 0) return true; break; }
 	}
 	
     	return false;           
@@ -98,15 +98,15 @@ bool Turrel :: fireEvent(bool show_effect)
 	{
     		case EQUIPMENT::LAZER_ID:
     		{   
-       			slot->GetLazerEquipment()->fireEvent_TRUE();
+       			slot->GetLazerEquipment()->FireEvent_TRUE();
 
 			switch(target->GetTypeId())
 			{
-				case ENTITY::SHIP_ID:      { ((Vehicle*)target)->Hit(slot->GetLazerEquipment()->getDamage(), show_effect);   return true; break; }
-       				case ENTITY::ASTEROID_ID:  { ((Asteroid*)target)->Hit(slot->GetLazerEquipment()->getDamage(), show_effect);  return true; break; }
-				case ENTITY::MINERAL_ID:   { ((Mineral*)target)->Hit(slot->GetLazerEquipment()->getDamage(), show_effect);   return true; break; }
-				case ENTITY::CONTAINER_ID: { ((Container*)target)->Hit(slot->GetLazerEquipment()->getDamage(), show_effect); return true; break; }
-				case ENTITY::BOMB_ID:      { ((Container*)target)->Hit(slot->GetLazerEquipment()->getDamage(), show_effect);      return true; break; }
+				case ENTITY::SHIP_ID:      { ((Vehicle*)target)->Hit(slot->GetLazerEquipment()->GetDamage(), show_effect);   return true; break; }
+       				case ENTITY::ASTEROID_ID:  { ((Asteroid*)target)->Hit(slot->GetLazerEquipment()->GetDamage(), show_effect);  return true; break; }
+				case ENTITY::MINERAL_ID:   { ((Mineral*)target)->Hit(slot->GetLazerEquipment()->GetDamage(), show_effect);   return true; break; }
+				case ENTITY::CONTAINER_ID: { ((Container*)target)->Hit(slot->GetLazerEquipment()->GetDamage(), show_effect); return true; break; }
+				case ENTITY::BOMB_ID:      { ((Container*)target)->Hit(slot->GetLazerEquipment()->GetDamage(), show_effect);      return true; break; }
        			}
        			
        			break;
@@ -114,7 +114,7 @@ bool Turrel :: fireEvent(bool show_effect)
 
     		case EQUIPMENT::ROCKET_ID:
     		{       
-                	slot->GetRocketEquipment()->fireEvent();
+                	slot->GetRocketEquipment()->FireEvent();
                 	return true; break;              
     		}
 

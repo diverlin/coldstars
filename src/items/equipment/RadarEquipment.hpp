@@ -21,18 +21,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define RADAREQUIPMENT_H
 
 
-class RadarEquipment : public EquipmentBase
+class RadarEquipment : public BaseEquipment
 {
    	public:
-      		RadarEquipment(int radius_orig);
+      		RadarEquipment(int);
   		virtual ~RadarEquipment();
-      		
-      		int getRadius() const;
+
+      		int SetRadiusOrig(int radius_orig)   { this->radius_orig = radius_orig; }; 
+      		int GetRadius() const { return radius; };
 
       		void virtual UpdateOwnerAbilities();
 
-      		virtual void updatePropetries();
-      		void countPrice();
+      		virtual void UpdatePropetries();
+      		void CountPrice();
       		   
       		virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(boost::property_tree::ptree&);
@@ -44,10 +45,14 @@ class RadarEquipment : public EquipmentBase
       		int radius;
 
      		void virtual AddUniqueInfo();
-       		std::string getRadiusStr();
+       		std::string GetRadiusStr();
+                
+                void SaveDataUniqueRadarEquipment(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueRadarEquipment(const boost::property_tree::ptree&);
+		void ResolveDataUniqueRadarEquipment();  
 };
 
-RadarEquipment* getNewRadarEquipment(int race_id, int revision_id = -1);
+RadarEquipment* GetNewRadarEquipment(int race_id, int revision_id = -1);
 
 #endif 
 

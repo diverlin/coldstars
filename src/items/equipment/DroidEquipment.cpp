@@ -17,22 +17,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-DroidEquipment :: DroidEquipment(int repair_orig)
+DroidEquipment::DroidEquipment(int id)
 {
-    	this->repair_orig = repair_orig;
+        data_id.id         = id;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::DROID_ID; 
+        
+    	repair_orig = 0;
 }
 
-DroidEquipment :: ~DroidEquipment() /* virtual */
+/* virtual */
+DroidEquipment::~DroidEquipment() 
 {}
 
-
-int DroidEquipment :: getRepair() const { return repair; }
-		
-
 /* virtual */
-void DroidEquipment :: updatePropetries()
+void DroidEquipment::UpdatePropetries()
 {
-    	repair_add        = 0;
+    	repair_add = 0;
         
         for (unsigned int i = 0; i < modules_vec.size(); i++)
     	{
@@ -42,7 +43,7 @@ void DroidEquipment :: updatePropetries()
      	repair = repair_orig + repair_add;
 }
 
-void DroidEquipment :: countPrice()
+void DroidEquipment::CountPrice()
 {
      	float repair_rate        = (float)repair_orig / EQUIPMENT::DROID::REPAIR_MIN;
      	float modules_num_rate   = (float)data_item.modules_num_max / EQUIPMENT::DROID::MODULES_NUM_MAX;
@@ -57,20 +58,20 @@ void DroidEquipment :: countPrice()
 }
 
 /* virtual */
-void DroidEquipment :: UpdateOwnerAbilities()
+void DroidEquipment::UpdateOwnerAbilities()
 {
      	slot->GetOwnerVehicle()->UpdateRepairAbility();
 }
 
 
-void DroidEquipment :: AddUniqueInfo()
+void DroidEquipment::AddUniqueInfo()
 {
     	info.addTitleStr("DROID");
-   	info.addNameStr("repair:");     info.addValueStr( getRepairStr() );
+   	info.addNameStr("repair:");     info.addValueStr(GetRepairStr());
 }
      		
      		
-std::string DroidEquipment :: getRepairStr()
+std::string DroidEquipment::GetRepairStr()
 {
     	if (repair_add == 0)
         	return int2str(repair_orig);
@@ -78,28 +79,49 @@ std::string DroidEquipment :: getRepairStr()
         	return int2str(repair_orig) + "+" + int2str(repair_add);
 }
 
+/*virtual*/
+void DroidEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	std::string root = "droid_equipment." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
+	SaveDataUniqueBaseEquipment(save_ptree, root);
+	SaveDataUniqueDroidEquipment(save_ptree, root);
+}
 
 /*virtual*/
-void DroidEquipment::SaveData(boost::property_tree::ptree&) const
+void DroidEquipment::LoadData(boost::property_tree::ptree& load_ptree)
 {
-
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
+	LoadDataUniqueBaseEquipment(load_ptree);
+	LoadDataUniqueDroidEquipment(load_ptree);
 }
 
-/*virtual*/		
-void DroidEquipment::LoadData(boost::property_tree::ptree&)
-{
-
-}
-	
-/*virtual*/	
+/*virtual*/
 void DroidEquipment::ResolveData()
 {
-
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
+	ResolveDataUniqueBaseEquipment();
+	ResolveDataUniqueDroidEquipment();
 }
 
-		
+void DroidEquipment::SaveDataUniqueDroidEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+        save_ptree.put(root+"repair_orig", repair_orig);
+}
+                
+void DroidEquipment::LoadDataUniqueDroidEquipment(const boost::property_tree::ptree& load_ptree)
+{
+        repair_orig = load_ptree.get<int>("repair_orig");
+}                
 
-DroidEquipment* getNewDroidEquipment(int race_id, int revision_id)
+void DroidEquipment::ResolveDataUniqueDroidEquipment()
+{}
+
+
+DroidEquipment* GetNewDroidEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
        		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
@@ -120,22 +142,21 @@ DroidEquipment* getNewDroidEquipment(int race_id, int revision_id)
     	common_data.condition_max = getRandInt(EQUIPMENT::DROID::CONDITION_MIN, EQUIPMENT::DROID::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
-        IdData data_id;
-        data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::DROID_ID;  
+        int id    = g_ID_GENERATOR.getNextId();
         
-    	DroidEquipment* droid_equipment = new DroidEquipment(repair_orig);
+    	DroidEquipment* droid_equipment = new DroidEquipment(id);
         
-        droid_equipment->SetIdData(data_id);  
+        droid_equipment->SetRepairOrig(repair_orig);  
         droid_equipment->SetTextureOb(texOb_item);    	
         droid_equipment->SetFunctionalSlotSubTypeId(SLOT::DROID_ID);
         droid_equipment->SetItemCommonData(common_data);
                 
                 
-    	droid_equipment->updatePropetries();
-    	droid_equipment->countPrice();
+    	droid_equipment->UpdatePropetries();
+    	droid_equipment->CountPrice();
     	
+        EntityManager::Instance().RegisterEntity(droid_equipment);
+                
     	return droid_equipment;
 }
 

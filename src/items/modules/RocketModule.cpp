@@ -17,13 +17,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-RocketModule::RocketModule(int ammo_max_add, 
-                             int damage_add, 
-                             int radius_add)
+RocketModule::RocketModule(int id)
 {
-     	this->ammo_max_add = ammo_max_add;
-     	this->damage_add   = damage_add;
-     	this->radius_add   = radius_add;
+        data_id.type_id    = id;
+        data_id.type_id    = MODULE::MODULE_ID;
+        data_id.subtype_id = MODULE::ROCKET_ID;  
+        
+     	ammo_max_add = 0;
+     	damage_add   = 0;
+     	radius_add   = 0;
 }
        
 /* virtual */
@@ -53,6 +55,8 @@ void RocketModule::AddUniqueInfo()
 void RocketModule::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "rocket_module." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
 	SaveDataUniqueBaseModule(save_ptree, root);
 	SaveDataUniqueRocketModule(save_ptree, root);
 }
@@ -60,6 +64,8 @@ void RocketModule::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/		
 void RocketModule::LoadData(boost::property_tree::ptree& load_ptree)
 {
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
 	LoadDataUniqueBaseModule(load_ptree);
 	LoadDataUniqueRocketModule(load_ptree);
 }
@@ -67,6 +73,8 @@ void RocketModule::LoadData(boost::property_tree::ptree& load_ptree)
 /*virtual*/	
 void RocketModule::ResolveData()
 {
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
 	ResolveDataUniqueBaseModule();
 	ResolveDataUniqueRocketModule();
 }
@@ -98,15 +106,14 @@ RocketModule* GetNewRocketModule()
     	int damage_add = getRandInt(MODULE::ROCKET::DAMAGE_MIN, MODULE::ROCKET::DAMAGE_MAX);
     	int radius_add = getRandInt(MODULE::ROCKET::RADIUS_MIN, MODULE::ROCKET::RADIUS_MAX);
 
-        IdData data_id;
-        data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = MODULE::MODULE_ID;
-        data_id.subtype_id = MODULE::ROCKET_ID;  
+        int id    = g_ID_GENERATOR.getNextId();
         
-    	RocketModule* rocket_module = new RocketModule(ammo_max_add, damage_add, radius_add);
+    	RocketModule* rocket_module = new RocketModule(id);
         rocket_module->SetTextureOb(texOb);
-        rocket_module->SetIdData(data_id);
-         
+        rocket_module->SetAmmoMaxAdd(ammo_max_add);
+        rocket_module->SetDamageAdd(damage_add);
+        rocket_module->SetRadiusAdd(radius_add);
+                         
         EntityManager::Instance().RegisterEntity(rocket_module);
                         
     	return rocket_module;

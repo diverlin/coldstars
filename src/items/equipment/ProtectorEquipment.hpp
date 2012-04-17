@@ -21,18 +21,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define PROTECTOREQUIPMENT_H
 
 
-class ProtectorEquipment  : public EquipmentBase
+class ProtectorEquipment  : public BaseEquipment
 {
 	public:
-      		ProtectorEquipment(int protection_orig);
+      		ProtectorEquipment(int);
       		virtual ~ProtectorEquipment();
 
-		int getProtection() const;
+                void SetProtectionOrig(int rotection_orig) { this->protection_orig = protection_orig; };
+		int GetProtection() const { return protection; };
 
       		void virtual UpdateOwnerAbilities();
       		
-      		void countPrice();
-      		virtual void updatePropetries();
+      		void CountPrice();
+      		virtual void UpdatePropetries();
       		
       		virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(boost::property_tree::ptree&);
@@ -44,9 +45,14 @@ class ProtectorEquipment  : public EquipmentBase
       		int protection;
 
      		void virtual AddUniqueInfo();
-           	std::string getProtectionStr();
+           	std::string GetProtectionStr();
+                
+                void SaveDataUniqueProtectorEquipment(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueProtectorEquipment(const boost::property_tree::ptree&);
+		void ResolveDataUniqueProtectorEquipment();  
+                
 };
 
-ProtectorEquipment* getNewProtectorEquipment(int race_id, int revision_id = -1);
+ProtectorEquipment* GetNewProtectorEquipment(int race_id, int revision_id = -1);
 
 #endif 

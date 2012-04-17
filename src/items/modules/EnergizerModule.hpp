@@ -24,10 +24,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class EnergizerModule : public BaseModule
 {
    	public:   
-      		EnergizerModule(int energy_max_add, 
-                                int restoration_add);
+      		EnergizerModule(int);
       		virtual ~EnergizerModule();
 
+		void SetEnergyMaxAdd(int energy_max_add)    { this->energy_max_add = energy_max_add; };
+		void SetRestorationAdd(int restoration_add) { this->restoration_add = restoration_add; };
+                
 		int GetEnergyMaxAdd()   const { return energy_max_add; };
 		int GetRestorationAdd() const { return restoration_add; };
       		

@@ -16,37 +16,29 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#ifndef BASEEQUIPMENT_H
+#define BASEEQUIPMENT_H
 
-#ifndef SCANEREQUIPMENT_H
-#define SCANEREQUIPMENT_H
 
-
-class ScanerEquipment : public EquipmentBase
+class BaseEquipment : public BaseItem
 {
-  	public:
-    		ScanerEquipment(int scan_orig);
-    		virtual ~ScanerEquipment();
+        public:
+     		BaseEquipment();
+     		virtual ~BaseEquipment();
 
-		int getScan() const;
-
-    		virtual void UpdateOwnerAbilities();
-    		
-    		void countPrice();
-    		virtual void updatePropetries();
-    		
-    		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-    	private:
-    		int scan_orig;
-    		int scan_add;
-    		int scan;
-
-     		void virtual AddUniqueInfo();
-         	std::string getScanStr();
+      		bool InsertModule(BaseModule*);
+      		virtual void UpdatePropetries() = 0;
+      		
+      		virtual void Render(Rect);
+      		      		
+     	protected:
+		std::vector<BaseModule*> modules_vec;    // needs for inserted modules drawing
+                
+                virtual void AddCommonInfo();
+                
+                void SaveDataUniqueBaseEquipment(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueBaseEquipment(const boost::property_tree::ptree&);
+		void ResolveDataUniqueBaseEquipment();   
 };
-
-ScanerEquipment* getNewScanerEquipment(int race_id, int revision_id = -1);
 
 #endif 

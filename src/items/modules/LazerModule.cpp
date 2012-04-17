@@ -17,11 +17,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-LazerModule::LazerModule(int damage_add, 
-                           int radius_add)
+LazerModule::LazerModule(int id)
 {
-     	this->damage_add = damage_add;
-     	this->radius_add = radius_add;
+        data_id.type_id    = id;
+        data_id.type_id    = MODULE::MODULE_ID;
+        data_id.subtype_id = MODULE::LAZER_ID;  
+        
+     	damage_add = 0;
+     	radius_add = 0;
 }
 
 /* virtual */
@@ -46,6 +49,8 @@ void LazerModule::AddUniqueInfo()
 void LazerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "lazer_module." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
 	SaveDataUniqueBaseModule(save_ptree, root);
 	SaveDataUniqueLazerModule(save_ptree, root);
 }
@@ -53,6 +58,8 @@ void LazerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/		
 void LazerModule::LoadData(boost::property_tree::ptree& load_ptree)
 {
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
 	LoadDataUniqueBaseModule(load_ptree);
 	LoadDataUniqueLazerModule(load_ptree);
 }
@@ -60,6 +67,8 @@ void LazerModule::LoadData(boost::property_tree::ptree& load_ptree)
 /*virtual*/	
 void LazerModule::ResolveData()
 {
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
 	ResolveDataUniqueBaseModule();
 	ResolveDataUniqueLazerModule();
 }
@@ -86,15 +95,13 @@ LazerModule* GetNewLazerModule()
     	int damage_add = getRandInt(MODULE::LAZER::DAMAGE_MIN, MODULE::LAZER::DAMAGE_MAX);
     	int radius_add = getRandInt(MODULE::LAZER::RADIUS_MIN, MODULE::LAZER::RADIUS_MAX);
 
-        IdData data_id;
-        data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = MODULE::MODULE_ID;
-        data_id.subtype_id = MODULE::LAZER_ID;  
+        int id = g_ID_GENERATOR.getNextId();
         
-    	LazerModule* lazer_module = new LazerModule(damage_add, radius_add);
+    	LazerModule* lazer_module = new LazerModule(id);
         lazer_module->SetTextureOb(texOb);
-        lazer_module->SetIdData(data_id);
-                
+        lazer_module->SetDamageAdd(damage_add);
+        lazer_module->SetRadiusAdd(radius_add);
+        
         EntityManager::Instance().RegisterEntity(lazer_module);
                         
     	return lazer_module;

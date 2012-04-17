@@ -41,6 +41,8 @@ void DroidModule::AddUniqueInfo()
 void DroidModule::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "droid_module." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
 	SaveDataUniqueBaseModule(save_ptree, root);
 	SaveDataUniqueDroidModule(save_ptree, root);
 }
@@ -48,6 +50,8 @@ void DroidModule::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/		
 void DroidModule::LoadData(boost::property_tree::ptree& load_ptree)
 {
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
 	LoadDataUniqueBaseModule(load_ptree);
 	LoadDataUniqueDroidModule(load_ptree);
 }
@@ -55,6 +59,8 @@ void DroidModule::LoadData(boost::property_tree::ptree& load_ptree)
 /*virtual*/	
 void DroidModule::ResolveData()
 {
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
 	ResolveDataUniqueBaseModule();
 	ResolveDataUniqueDroidModule();
 }

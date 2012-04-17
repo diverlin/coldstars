@@ -17,25 +17,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-LazerEquipment :: LazerEquipment(int damage_orig, 
-				 int radius_orig)
+LazerEquipment::LazerEquipment(int id)
 {
-   	this->damage_orig = damage_orig;
-   	this->radius_orig = radius_orig;
+        data_id.id         = id;
+        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
+        data_id.subtype_id = EQUIPMENT::LAZER_ID;
+        
+   	damage_orig = 0;
+   	radius_orig = 0;
 
    	//TextureOb lazerEffect_texOb   = TEXTURE_MANAGER.returnLazerEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id);
    	texOb_turrel	  = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::TURREL_ID); 
    	texOb_lazerEffect = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::LAZER_EFFECT_ID);
 }
 
-LazerEquipment :: ~LazerEquipment() /* virtual */
+/* virtual */
+LazerEquipment::~LazerEquipment() 
 {}
 
-int LazerEquipment :: getDamage() const { return damage; }
-int LazerEquipment :: getRadius() const { return radius; }
-		
-/* virtual */		
-void LazerEquipment :: updatePropetries()
+/* virtual */
+void LazerEquipment::UpdatePropetries()
 {
    	damage_add  = 0;
    	radius_add  = 0;
@@ -50,7 +51,7 @@ void LazerEquipment :: updatePropetries()
     	radius = radius_orig + radius_add;
 } 
 
-void LazerEquipment :: countPrice()
+void LazerEquipment::CountPrice()
 {
    	float damage_rate        = (float)damage_orig / EQUIPMENT::LAZER::DAMAGE_MIN;
    	float radius_rate        = (float)radius_orig / EQUIPMENT::LAZER::RADIUS_MIN;
@@ -68,22 +69,20 @@ void LazerEquipment :: countPrice()
 
 
 /* virtual */    
-void LazerEquipment :: UpdateOwnerAbilities()
+void LazerEquipment::UpdateOwnerAbilities()
 { 
     	slot->GetOwnerVehicle()->UpdateFireAbility();
 }
 
-
-void LazerEquipment :: AddUniqueInfo()
+void LazerEquipment::AddUniqueInfo()
 {
     	info.addTitleStr("LAZER");
 
-    	info.addNameStr("damage:");     info.addValueStr( getDamageStr() );
-    	info.addNameStr("radius:");     info.addValueStr( getRadiusStr() );
+    	info.addNameStr("damage:");     info.addValueStr(GetDamageStr());
+    	info.addNameStr("radius:");     info.addValueStr(GetRadiusStr());
 }
-     		
 
-std::string LazerEquipment :: getDamageStr()
+std::string LazerEquipment::GetDamageStr()
 {
       	if (damage_add == 0)
          	return int2str(damage_orig);
@@ -91,7 +90,7 @@ std::string LazerEquipment :: getDamageStr()
          	return int2str(damage_orig) + "+" + int2str(damage_add);
 }
 
-std::string LazerEquipment :: getRadiusStr()
+std::string LazerEquipment::GetRadiusStr()
 {
        	if (radius_add == 0)
           	return int2str(radius_orig);
@@ -99,9 +98,7 @@ std::string LazerEquipment :: getRadiusStr()
           	return int2str(radius_orig) + "+" + int2str(radius_add);
 }
 
-
-
-void LazerEquipment :: fireEvent_TRUE()
+void LazerEquipment::FireEvent_TRUE()
 { 
     	LazerTraceEffect* _lazer_trace_effect;
     	if (slot->GetOwnerVehicle()->data_korpus.render_TURRELS == true)
@@ -127,33 +124,56 @@ void LazerEquipment :: fireEvent_TRUE()
     	slot->GetOwnerVehicle()->GetStarSystem()->Add(_damage_effect);
 } 
 
-
-
-void LazerEquipment :: fireEvent_FALSE()
+void LazerEquipment::FireEvent_FALSE()
 { 
     	Deterioration();
 } 
 
 /*virtual*/
-void LazerEquipment::SaveData(boost::property_tree::ptree&) const
+void LazerEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-
+	std::string root = "lazer_equipment." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
+	SaveDataUniqueBaseEquipment(save_ptree, root);
+	SaveDataUniqueLazerEquipment(save_ptree, root);
 }
 
-/*virtual*/		
-void LazerEquipment::LoadData(boost::property_tree::ptree&)
+/*virtual*/
+void LazerEquipment::LoadData(boost::property_tree::ptree& load_ptree)
 {
-
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
+	LoadDataUniqueBaseEquipment(load_ptree);
+	LoadDataUniqueLazerEquipment(load_ptree);
 }
-	
-/*virtual*/	
+
+/*virtual*/
 void LazerEquipment::ResolveData()
 {
-
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
+	ResolveDataUniqueBaseEquipment();
+	ResolveDataUniqueLazerEquipment();
 }
 
+void LazerEquipment::SaveDataUniqueLazerEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+        save_ptree.put(root+"damage_orig", damage_orig);
+        save_ptree.put(root+"radius_orig", radius_orig);
+}
+                
+void LazerEquipment::LoadDataUniqueLazerEquipment(const boost::property_tree::ptree& load_ptree)
+{
+        damage_orig = load_ptree.get<int>("damage_orig");     
+        radius_orig = load_ptree.get<int>("radius_orig");   
+}                
 
-LazerEquipment* getNewLazerEquipment(int race_id, int revision_id)
+void LazerEquipment::ResolveDataUniqueLazerEquipment()
+{}
+
+
+LazerEquipment* GetNewLazerEquipment(int race_id, int revision_id)
 {
     	if (race_id == -1)
        		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
@@ -175,31 +195,19 @@ LazerEquipment* getNewLazerEquipment(int race_id, int revision_id)
     	common_data.condition_max   = getRandInt(EQUIPMENT::LAZER::CONDITION_MIN, EQUIPMENT::LAZER::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
-        IdData data_id;
-        data_id.type_id    = g_ID_GENERATOR.getNextId();
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::LAZER_ID;
+        int id = g_ID_GENERATOR.getNextId();
         
-    	LazerEquipment* lazer_equipment = new LazerEquipment(damage_orig, 
-    							     radius_orig);
-                                                             
-        lazer_equipment->SetIdData(data_id);  
+    	LazerEquipment* lazer_equipment = new LazerEquipment(id);                                                             
+        lazer_equipment->SetDamageOrig(damage_orig);  
+        lazer_equipment->SetRadiusOrig(radius_orig);  
         lazer_equipment->SetTextureOb(texOb_item);    	
         lazer_equipment->SetFunctionalSlotSubTypeId(SLOT::WEAPON_ID);
         lazer_equipment->SetItemCommonData(common_data);
         
-   	lazer_equipment->updatePropetries();
-   	lazer_equipment->countPrice();
-   	
+   	lazer_equipment->UpdatePropetries();
+   	lazer_equipment->CountPrice();
+
+        EntityManager::Instance().RegisterEntity(lazer_equipment);
+        
     	return lazer_equipment;
 }
-
-
-
-
-
-
-
-
-
-

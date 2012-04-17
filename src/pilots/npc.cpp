@@ -84,7 +84,7 @@ void Npc::ThinkCommon_inLand_inStatic()
 void Npc::Update_inSpace_inStatic()
 {
 	vehicle->GetWeaponComplex()->PrepareWeapons();
-        vehicle->GetGrappleSlot()->GetGrappleEquipment()->validateTargets();
+        vehicle->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets();
         vehicle->SelfRepairEvent();
         // drive work, energy and so on
                	     		
@@ -206,7 +206,7 @@ bool Npc::CheckPossibilityToScan(Vehicle* vehicle)
      	{
         	if (vehicle->GetProtectionComplex()->GetProtectorSlot().GetEquipedStatus() == true)
         	{
-           		if (this->vehicle->GetScanerSlot()->GetScanerEquipment()->getScan() >= vehicle->GetProtectionComplex()->GetProtectorSlot().GetProtectorEquipment()->getProtection()) 
+           		if (this->vehicle->GetScanerSlot()->GetScanerEquipment()->GetScan() >= vehicle->GetProtectionComplex()->GetProtectorSlot().GetProtectorEquipment()->GetProtection()) 
               		{
               			return true;
               		}
@@ -235,7 +235,7 @@ void Npc::UpdateInfo()
 
 	if (vehicle->ableTo.GRAB == true)
 	{
-		std::string grab_str = vehicle->GetGrappleSlot()->GetGrappleEquipment()->getTargetStr();
+		std::string grab_str = vehicle->GetGrappleSlot()->GetGrappleEquipment()->GetTargetStr();
 		if (grab_str.size() > 0)
 		{
 			info.addNameStr("grab_id:");   		info.addValueStr( grab_str ); 
