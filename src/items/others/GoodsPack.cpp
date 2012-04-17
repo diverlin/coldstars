@@ -16,9 +16,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-GoodsPack :: GoodsPack()
+GoodsPack::GoodsPack(int id)
 {
+        data_id.id         = id; 
+        data_id.type_id    = ENTITY::GOODS_ID;
+        data_id.subtype_id = NONE_ID;
+        
         mineral  = 0;
         food     = 0;
         medicine = 0;
@@ -26,12 +29,11 @@ GoodsPack :: GoodsPack()
         drug     = 0;
 }
 
-GoodsPack :: ~GoodsPack()  /* virtual */
+/* virtual */
+GoodsPack::~GoodsPack() 
 {}
 
-
-        	
-void GoodsPack :: increase(unsigned int _ammount)
+void GoodsPack::Increase(unsigned int _ammount)
 {
 	if (GetSubTypeId() == ENTITY::MINERAL_ID)
 	{
@@ -40,7 +42,7 @@ void GoodsPack :: increase(unsigned int _ammount)
 	}
 }
     
-void GoodsPack :: decrease(unsigned int _ammount)
+void GoodsPack::Decrease(unsigned int _ammount)
 {
 	if (GetSubTypeId() == ENTITY::MINERAL_ID)
 	{
@@ -49,10 +51,8 @@ void GoodsPack :: decrease(unsigned int _ammount)
 	}
 }
                 
-                    	
-      
- /* virtual */
-void GoodsPack :: UpdateOwnerAbilities() { /* do nothing*/ }
+/* virtual */
+void GoodsPack::UpdateOwnerAbilities() { /* do nothing*/ }
                     
 
 /* virtual */
@@ -92,24 +92,14 @@ void GoodsPack::ResolveData()
 
 }
 
-GoodsPack* getNewGoodsPack(unsigned int _subtype_id)
+GoodsPack* GetNewGoodsPack(unsigned int subtype_id)
 {
-        IdData data_id;
-        data_id.id = g_ID_GENERATOR.getNextId(); 
-        data_id.type_id = ENTITY::GOODS_ID;
-        data_id.subtype_id = _subtype_id;
-                
-        LifeData data_life;
-        data_life.armor = getRandInt(1,6);
-        data_life.dying_time = 30;        
-        
-        vec3f d_angle;
-        d_angle.z      = -getRandInt(10, 100)*0.01; 
+        int id = g_ID_GENERATOR.getNextId();   
         
 	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::CONTAINER_ID); 
 	
-	GoodsPack* goodsPack = new GoodsPack();
-	goodsPack->SetIdData(data_id);
+	GoodsPack* goodsPack = new GoodsPack(id);
+	goodsPack->SetSubTypeId(subtype_id);
 	goodsPack->SetTextureOb(texOb);
 	
 	return goodsPack;

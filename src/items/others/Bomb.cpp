@@ -18,22 +18,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-Bomb :: Bomb()
+Bomb::Bomb(int id)
 { 
-        damage = 300;
-    	radius = 300;
+        data_id.id         = id;
+    	data_id.type_id    = ENTITY::BOMB_ID;
+    	data_id.subtype_id = NONE_ID;   
+        
+        damage = 0;
+    	radius = 0;
 }
 
  /* virtual */
-Bomb :: ~Bomb() {}
-    
+Bomb::~Bomb() 
+{}
 
-int Bomb :: getDamage() const { return damage; }
-int Bomb :: getRadius() const { return radius; }
-        
 /* virtual */	
-void Bomb :: UpdateOwnerAbilities() {} 
-		
+void Bomb::UpdateOwnerAbilities() {} 
 
        
 /* virtual */	     
@@ -42,7 +42,7 @@ void Bomb::AddCommonInfo()
     	info.addNameStr("mass:");        info.addValueStr(int2str(data_item.mass));
 }
 
-/* virtual */	
+/* virtual */
 void Bomb::AddUniqueInfo()
 {
     	info.addTitleStr("BOMB");
@@ -59,31 +59,31 @@ void Bomb::SaveData(boost::property_tree::ptree&) const
 
 }
 
-/*virtual*/		
+/*virtual*/
 void Bomb::LoadData(boost::property_tree::ptree&)
 {
 
 }
 	
-/*virtual*/	
+/*virtual*/
 void Bomb::ResolveData()
 {
 
 }
 
 
-Bomb* getNewBomb()
+Bomb* GetNewBomb()
 {
-        IdData data_id;
-        data_id.id         = g_ID_GENERATOR.getNextId();
-    	data_id.type_id    = ENTITY::BOMB_ID;
-    	//data_id.subtype_id = ;   
+        int id = g_ID_GENERATOR.getNextId();
         
 	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::BOMB_ID); 
-	
-	Bomb* bomb = new Bomb();
-	bomb->SetIdData(data_id);
+	int damage = 300;
+        int radius = 300;
+        
+	Bomb* bomb = new Bomb(id);
 	bomb->SetTextureOb(texOb);
+	bomb->SetDamage(damage);
+	bomb->SetRadius(radius);
 	bomb->SetFunctionalSlotSubTypeId(SLOT::CARGO_ID);
 	
 	return bomb;

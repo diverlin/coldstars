@@ -41,8 +41,7 @@ class BaseItem : public Base
     	public:    				
       		BaseItem();
       		virtual ~BaseItem();
-      		
-                                void SetIdData(IdData data_id)       { this->data_id = data_id; };
+
 		void SetTextureOb(TextureOb* textureOb)  { this->textureOb = textureOb; };
 		void SetFunctionalSlotSubTypeId(int functional_slot_subtype_id) { this->functional_slot_subtype_id = functional_slot_subtype_id; };
 		void SetItemCommonData(ItemCommonData data_item) { this->data_item = data_item; };

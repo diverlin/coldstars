@@ -25,11 +25,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class GoodsPack : public BaseItem
 {
     	public:                  
-        	GoodsPack();
+        	GoodsPack(int);
         	virtual ~GoodsPack();
         	
-        	void increase(unsigned int);       
-                void decrease(unsigned int);
+        	void Increase(unsigned int);       
+                void Decrease(unsigned int);
 
                 virtual void UpdateOwnerAbilities();
         	
@@ -48,6 +48,6 @@ class GoodsPack : public BaseItem
  		virtual void AddUniqueInfo();   
 };
 
-GoodsPack* getNewGoodsPack(unsigned int _subtype_id, vec2f);
+GoodsPack* GetNewGoodsPack(unsigned int _subtype_id, vec2f);
 
 #endif 

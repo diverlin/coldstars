@@ -663,13 +663,13 @@ void Vehicle::GrappleMicroProgramm()
        					_slot = GetCargoSlotWithGoods(ENTITY::MINERAL_ID);
        					if (_slot != NULL)
        					{
-       						_slot->GetGoodsPack()->increase(_mineral->GetMass());
+       						_slot->GetGoodsPack()->Increase(_mineral->GetMass());
        						_mineral->SetPlaceTypeId(NONE_ID);
        					}
        					else
        					{
-       						GoodsPack* _goodsPack = getNewGoodsPack(ENTITY::MINERAL_ID);
-       						_goodsPack->increase(_mineral->GetMass());
+       						GoodsPack* _goodsPack = GetNewGoodsPack(ENTITY::MINERAL_ID);
+       						_goodsPack->Increase(_mineral->GetMass());
        						_slot = GetEmptyOtsecSlot();
        						if (_slot != NULL)
        						{

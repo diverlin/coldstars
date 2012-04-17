@@ -239,7 +239,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
     	
     	for (unsigned int i = 0; i < 3; i++) 
     	{        
-                vehicle->AddItemToOtsec(getNewBomb());
+                vehicle->AddItemToOtsec(GetNewBomb());
     	}   
     	
     	vehicle->UpdateAllPropertiesAndAbilities(); 
