@@ -18,10 +18,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-Container :: Container(int id)
+Container::Container(int id)
 {
-	data_id.id = id;
-	data_id.type_id = ENTITY::CONTAINER_ID;
+	data_id.id         = id;
+	data_id.type_id    = ENTITY::CONTAINER_ID;
+        data_id.subtype_id = NONE_ID;
 	
     	mass = 1;
 
@@ -32,28 +33,24 @@ Container :: Container(int id)
     	velocity = getRandInt(40, 42) / 100.0;
 }
 
-
-Container :: ~Container()
+/* virtual */   
+Container::~Container()
 {
 	delete item_slot;
 }
 
-
-ItemSlot* Container :: getItemSlot() { return item_slot; }
-        	
-        	
-void Container :: UpdateInfo()  
-{}        	 
+void Container::UpdateInfo()  
+{}        
        	
-void Container :: renderInfo_inSpace(vec2f scroll_coords)
+void Container::RenderInfoInSpace(vec2f scroll_coords)
 {
 	UpdateInfo();
      	item_slot->GetRect().setCenter(points.getCenter());	
      	item_slot->RenderItemInfo(scroll_coords.x, scroll_coords.y);
 }
  
- /* virtual */    
-void Container :: PostDeathUniqueEvent(bool show_effect)
+/* virtual */    
+void Container::PostDeathUniqueEvent(bool show_effect)
 {
         if (item_slot->GetItem()->GetTypeId() == ENTITY::BOMB_ID)
         {
@@ -88,7 +85,7 @@ void Container::ResolveData()
 
 
 
-Container* getNewContainer()
+Container* GetNewContainer()
 {
 	int id = g_ID_GENERATOR.getNextId(); 
         

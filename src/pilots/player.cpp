@@ -565,7 +565,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
             		{   
                			cursor_has_target = true;
 
-               			visible_MINERAL_vec[mi]->renderInfo_inSpace(screen->getBottomLeftGlobalCoord()); 
+               			visible_MINERAL_vec[mi]->RenderInfoInSpace(screen->getBottomLeftGlobalCoord()); 
 
 				if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 				{
@@ -599,7 +599,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
             		{   
                			cursor_has_target = true;
 
-               			visible_CONTAINER_vec[ci]->renderInfo_inSpace(screen->getBottomLeftGlobalCoord()); 
+               			visible_CONTAINER_vec[ci]->RenderInfoInSpace(screen->getBottomLeftGlobalCoord()); 
 
 				if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 				{

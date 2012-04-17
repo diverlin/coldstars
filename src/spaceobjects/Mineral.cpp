@@ -18,17 +18,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-Mineral :: Mineral(int id)
+Mineral::Mineral(int id)
 {        
-	data_id.id = id;
-	data_id.type_id = ENTITY::MINERAL_ID;
-	
+	data_id.id         = id;
+	data_id.type_id    = ENTITY::MINERAL_ID;
+	data_id.subtype_id = NONE_ID;
+        
     	mass = getRandInt(1, 4);
     	velocity = getRandInt(40, 42) / 100.0;
 }
     
     
-void Mineral :: UpdateInfo()
+void Mineral::UpdateInfo()
 {
 	info.clear();
 
@@ -40,7 +41,7 @@ void Mineral :: UpdateInfo()
 }
             
 
-void Mineral :: renderInfo_inSpace(vec2f scroll_coords)
+void Mineral::RenderInfoInSpace(vec2f scroll_coords)
 {
 	UpdateInfo();
      	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);    
@@ -65,9 +66,9 @@ void Mineral::ResolveData()
 
 }
 
-Mineral* getNewMineral()
+Mineral* GetNewMineral()
 {
-        int id         = g_ID_GENERATOR.getNextId();
+        int id = g_ID_GENERATOR.getNextId();
     	        
         LifeData data_life;
         data_life.is_alive   = true;
