@@ -17,68 +17,43 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-Turrel :: Turrel(ItemSlot* _slot, vec2f* _pCenter)
+Turrel::Turrel(ItemSlot* _slot, vec2f* _pCenter)
 {
         slot = _slot;
-        
-    	//////
-    	points.addCenterPoint();
-    	points.addMainQuadPoints();
-    	//////   
                  
         pCenter  = _pCenter;
         
         target = NULL;
 }
 
-
-Turrel :: ~Turrel()
+Turrel::~Turrel()
 {}
 
-void Turrel :: setTarget(BaseGameEntity* target) { this->target = target; }
-void Turrel :: resetTarget() { target = NULL; }
-
-void Turrel :: setSelectedStatus(bool _selected) { is_SELECTED = _selected; }    
-            
-bool Turrel :: getSelectedStatus() const { return is_SELECTED; }
-Points* Turrel :: getPoints()            { return &points; }
-  
-BaseGameEntity* Turrel :: getTarget() const { return target; }
-
-void Turrel :: setTexOb(TextureOb* _texOb)
-{
-    	texOb = _texOb;
-
-    	//////
-    	points.initCenterPoint();
-    	points.initMainQuadPoints(texOb->getFrameWidth(), texOb->getFrameHeight());
-    	//////
-}
-
-
-bool Turrel :: CheckTarget() const
+void Turrel::CheckTarget()
 {
         if (target != NULL)
         {
                 if (slot->CheckTarget(target) == true)
                 {
-                        return true;
+                        return;
+                }
+                else
+                {
+                        ResetTarget();
                 }
         }
-        
-        return false;
 }
 
-void Turrel :: validateTarget()
-{
-        if (CheckTarget() == false)
-        {
-                resetTarget();
-        }
-}
+//void Turrel::ValidateTarget()
+//{
+        //if (CheckTarget() == false)
+        //{
+                //ResetTarget();
+        //}
+//}
 
 
-bool Turrel :: isAmmoOk() const
+bool Turrel::CheckAmmo() const
 {
 	switch(slot->GetItem()->GetSubTypeId())
 	{
@@ -89,10 +64,7 @@ bool Turrel :: isAmmoOk() const
     	return false;           
 }
 
-
-
-
-bool Turrel :: fireEvent(bool show_effect)
+bool Turrel::FireEvent(bool show_effect)
 {
 	switch(slot->GetItem()->GetSubTypeId())
 	{
@@ -123,7 +95,7 @@ bool Turrel :: fireEvent(bool show_effect)
 }
 
 
-void Turrel :: Render(float _tur_angle_inD)
+void Turrel::Render(float _tur_angle_inD)
 {        
         if (target != NULL)
         {
@@ -134,14 +106,11 @@ void Turrel :: Render(float _tur_angle_inD)
         	_tur_angle_inD = _tur_angle_inR * RADIAN_TO_DEGREE_RATE;
         }
 
-	//printf("xy target =%f,%f\n", turrel_center_pList[i]->x, turrel_center_pList[i]->y);
-                    	
-        points.setCenter(pCenter->x, pCenter->y);
+        points.setCenter(*pCenter);
     	points.setAngle(_tur_angle_inD);
-    	points.update();
-        
+    	points.update();        
 
-    	drawFlatQuadPerVertexIn2D(texOb,
+    	drawFlatQuadPerVertexIn2D(textureOb,
     				  points.getBottomLeft(), 
                                   points.getBottomRight(), 
                                   points.getTopRight(), 

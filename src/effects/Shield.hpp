@@ -20,25 +20,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef SHIELD_H
 #define SHIELD_H
 
-class ShieldEffect : public BaseGameEntity
+class ShieldEffect
 {  
      	public:
         	ShieldEffect();
         	~ShieldEffect();
 
+                void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
 		void SetAlpha(float alpha) { color.a = alpha; };
+                void SetParent(BaseGameEntity* parent) { this->parent = parent; };
 		
+                Points& GetPoints() { return points; };
         	void Update();
-        	void Render() const;
-                
-                virtual void SaveData(boost::property_tree::ptree&) const {};
-		virtual void LoadData(boost::property_tree::ptree&) {};
-		virtual void ResolveData() {};
-        	
+        	void Render() const;            
+
         private:       
         	Color4f color;
         	float alpha_start;
         	float d_alpha;
+                
+                Points points;
+                TextureOb* textureOb;
+                BaseGameEntity* parent;
+                
 };
 
 #endif 

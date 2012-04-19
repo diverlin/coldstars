@@ -184,7 +184,7 @@ RocketBullet* VehicleBuilder::GetNewRocket(BulletData data_bullet, ItemSlot* slo
         data_life.garbage_ready = false;
         data_life.armor = data_bullet.armor;        
 
-    	RocketBullet* rocket = new RocketBullet(id, data_bullet, slot->GetTurrel()->getTarget(), slot->GetOwnerVehicle()->GetId());
+    	RocketBullet* rocket = new RocketBullet(id, data_bullet, slot->GetTurrel()->GetTarget(), slot->GetOwnerVehicle()->GetId());
          
         rocket->SetLifeData(data_life);
         rocket->SetTextureOb(data_bullet.texOb);
@@ -199,7 +199,7 @@ RocketBullet* VehicleBuilder::GetNewRocket(BulletData data_bullet, ItemSlot* slo
          
         if ( (slot->GetOwnerVehicle()->data_korpus.render_TURRELS == true) and (force_center_start == false))
     	{
-        	rocket->place(slot->GetTurrel()->getPoints()->getCenter(), slot->GetTurrel()->getPoints()->getAngleDegree(), offset);
+        	rocket->place(slot->GetTurrel()->GetPoints().getCenter(), slot->GetTurrel()->GetPoints().getAngleDegree(), offset);
         }
         else
     	{

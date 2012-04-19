@@ -158,7 +158,7 @@ class GuiMap;
 #include "src/effects/distantStarBg.hpp"
 
 
-#include "src/effects/shield.hpp"  
+#include "src/effects/Shield.hpp"  
 
 
 #include "src/effects/lazerTrace.hpp"
@@ -167,7 +167,7 @@ class GuiMap;
 #include "src/spaceobjects/Star.hpp"  
 #include "src/spaceobjects/Planet.hpp"
 
-#include "src/spaceobjects/turrel.hpp"
+#include "src/spaceobjects/Turrel.hpp"
 
 #include "src/spaceobjects//ItemSlot.hpp"
 #include "src/spaceobjects/driveComplex.hpp"
@@ -363,7 +363,7 @@ class GuiMap;
 #include "src/spaceobjects/Vehicle.cpp"
 #include "src/spaceobjects/ship.cpp"
 #include "src/spaceobjects/driveComplex.cpp"
-#include "src/spaceobjects/turrel.cpp"
+#include "src/spaceobjects/Turrel.cpp"
 
 #include "src/effects/distantNebulaBg.cpp"
 #include "src/effects/distantStarBg.cpp"
@@ -374,7 +374,7 @@ class GuiMap;
 #include "src/effects/particlesystem/trail.cpp"
 #include "src/effects/particlesystem/damage.cpp"
 #include "src/effects/lazerTrace.cpp"
-#include "src/effects/shield.cpp"
+#include "src/effects/Shield.cpp"
 #include "src/spaceobjects/rocketBullet.cpp"
 
 #include "src/pilots/player.cpp"

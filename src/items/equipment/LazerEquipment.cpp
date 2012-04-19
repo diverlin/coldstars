@@ -104,18 +104,18 @@ void LazerEquipment::FireEvent_TRUE()
     	if (slot->GetOwnerVehicle()->data_korpus.render_TURRELS == true)
     	{
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
-                                                     	      slot->GetTurrel()->getPoints()->getpCenter(), 
-                                                              slot->GetTurrel()->getTarget()->GetPoints().getpCenter());
+                                                     	      slot->GetTurrel()->GetPoints().getpCenter(), 
+                                                              slot->GetTurrel()->GetTarget()->GetPoints().getpCenter());
         }
     	else
     	{
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
                                                               slot->GetOwnerVehicle()->GetPoints().getpCenter(), 
-                                                              slot->GetTurrel()->getTarget()->GetPoints().getpCenter());
+                                                              slot->GetTurrel()->GetTarget()->GetPoints().getpCenter());
         }
     
     	// DAMAGE effect
-	DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, slot->GetTurrel()->getTarget());
+	DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, slot->GetTurrel()->GetTarget());
     	_lazer_trace_effect->setDamageEffect(_damage_effect);
     	
     	Deterioration();
