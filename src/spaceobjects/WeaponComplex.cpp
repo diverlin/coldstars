@@ -66,8 +66,10 @@ void WeaponComplex::PostCreateInit(int weapon_num, bool draw_turrels)
        		slot_weapon_vec.push_back(weapon_slot1);
        		owner_vehicle->Add(weapon_slot1); 
 
-       		turrel1 = new Turrel(weapon_slot1, owner_vehicle->GetPoints().getpWeapon1Center());       
-       		turrel1->setTexOb(texOb_turrel); // remove
+       		turrel1 = new Turrel(weapon_slot1, owner_vehicle->GetPoints().getpWeapon1Center()); 
+                turrel1->SetTextureOb(texOb_turrel);       
+                turrel1->GetPoints().addMainQuadPoints();
+                turrel1->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
                 
        		weapon_slot1->SetTurrel(turrel1);
 
@@ -91,7 +93,9 @@ void WeaponComplex::PostCreateInit(int weapon_num, bool draw_turrels)
        		owner_vehicle->Add(weapon_slot2); 
        
                 turrel2 = new Turrel(weapon_slot2, owner_vehicle->GetPoints().getpWeapon2Center()); 
-       		turrel2->setTexOb(texOb_turrel);
+       		turrel2->SetTextureOb(texOb_turrel);
+                turrel2->GetPoints().addMainQuadPoints();
+                turrel2->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
                 
               	weapon_slot2->SetTurrel(turrel2);
 
@@ -115,7 +119,10 @@ void WeaponComplex::PostCreateInit(int weapon_num, bool draw_turrels)
        		owner_vehicle->Add(weapon_slot3); 
               
        		turrel3 = new Turrel(weapon_slot3, owner_vehicle->GetPoints().getpWeapon3Center()); 
-       		turrel3->setTexOb(texOb_turrel);
+       		turrel3->SetTextureOb(texOb_turrel);
+                turrel3->GetPoints().addMainQuadPoints();
+                turrel3->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
+                
                 
               	weapon_slot3->SetTurrel(turrel3);
        
@@ -138,7 +145,10 @@ void WeaponComplex::PostCreateInit(int weapon_num, bool draw_turrels)
        		owner_vehicle->Add(weapon_slot4); 
               
        		turrel4 = new Turrel(weapon_slot4, owner_vehicle->GetPoints().getpWeapon4Center()); 
-       		turrel4->setTexOb(texOb_turrel);
+       		turrel4->SetTextureOb(texOb_turrel);
+                turrel4->GetPoints().addMainQuadPoints();
+                turrel4->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
+                
                 
               	weapon_slot4->SetTurrel(turrel4);
 
@@ -163,8 +173,11 @@ void WeaponComplex::PostCreateInit(int weapon_num, bool draw_turrels)
        		owner_vehicle->Add(weapon_slot5); 
               
        		turrel5 = new Turrel(weapon_slot5, owner_vehicle->GetPoints().getpWeapon5Center()); 
-              	turrel5->setTexOb(texOb_turrel);
-       
+              	turrel5->SetTextureOb(texOb_turrel);
+                turrel5->GetPoints().addMainQuadPoints();
+                turrel5->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
+                
+                
                 weapon_slot5->SetTurrel(turrel5);
        		
        		if (draw_turrels == true)
@@ -187,7 +200,7 @@ void WeaponComplex::ReloadAllWeapons()
      	slot_weapon_reloaded_vec.clear();
      	for (unsigned int i = 0; i < slot_weapon_equiped_vec.size(); i++)
         {
-         	if (slot_weapon_equiped_vec[i]->GetTurrel()->isAmmoOk() == true)
+         	if (slot_weapon_equiped_vec[i]->GetTurrel()->CheckAmmo() == true)
                 {
              		slot_weapon_reloaded_vec.push_back(slot_weapon_equiped_vec[i]);
                 }
@@ -200,15 +213,15 @@ void WeaponComplex::ReloadAllWeapons()
 void WeaponComplex::SelectWeapons()
 {
         if (weapon_num >= 1)
-                weapon_slot1->GetTurrel()->setSelectedStatus(weapon_selector.slot_1);
+                weapon_slot1->GetTurrel()->SetSelectedStatus(weapon_selector.slot_1);
         if (weapon_num >= 2)
-                weapon_slot2->GetTurrel()->setSelectedStatus(weapon_selector.slot_2);
+                weapon_slot2->GetTurrel()->SetSelectedStatus(weapon_selector.slot_2);
         if (weapon_num >= 3)
-                weapon_slot3->GetTurrel()->setSelectedStatus(weapon_selector.slot_3);
+                weapon_slot3->GetTurrel()->SetSelectedStatus(weapon_selector.slot_3);
         if (weapon_num >= 4)
-                weapon_slot4->GetTurrel()->setSelectedStatus(weapon_selector.slot_4);
+                weapon_slot4->GetTurrel()->SetSelectedStatus(weapon_selector.slot_4);
         if (weapon_num >= 5)
-                weapon_slot5->GetTurrel()->setSelectedStatus(weapon_selector.slot_5);
+                weapon_slot5->GetTurrel()->SetSelectedStatus(weapon_selector.slot_5);
 }
 
 bool WeaponComplex::IsAnyWeaponSelected() const
@@ -222,12 +235,12 @@ void WeaponComplex::SetTarget(BaseGameEntity* _target)
         
         for (unsigned int i = 0; i < slot_weapon_equiped_vec.size(); i++)
         {
-        	if ( slot_weapon_equiped_vec[i]->GetTurrel()->getSelectedStatus() == true )
+        	if ( slot_weapon_equiped_vec[i]->GetTurrel()->GetSelectedStatus() == true )
         	{
-           		if ( slot_weapon_equiped_vec[i]->GetTurrel()->getTarget() == NULL )
+           		if ( slot_weapon_equiped_vec[i]->GetTurrel()->GetTarget() == NULL )
            		{
-         			slot_weapon_equiped_vec[i]->GetTurrel()->setTarget(_target);
-                                slot_weapon_equiped_vec[i]->GetTurrel()->validateTarget();                                        
+         			slot_weapon_equiped_vec[i]->GetTurrel()->SetTarget(_target);
+                                slot_weapon_equiped_vec[i]->GetTurrel()->CheckTarget();                                        
                         }
                 } 
         }               
@@ -240,9 +253,10 @@ void WeaponComplex::Fire(int timer, bool show_effect)
      	{
         	for (unsigned int i = 0; i < slot_weapon_reloaded_vec.size(); i++)
         	{	
-           		if ( slot_weapon_reloaded_vec[i]->GetTurrel()->CheckTarget() == true )
-           		{	
-               			if ( slot_weapon_reloaded_vec[i]->GetTurrel()->fireEvent(show_effect) == true )
+                        slot_weapon_reloaded_vec[i]->GetTurrel()->CheckTarget();
+                        if (slot_weapon_reloaded_vec[i]->GetTurrel()->GetTarget())
+           		{
+               			if ( slot_weapon_reloaded_vec[i]->GetTurrel()->FireEvent(show_effect) == true )
                			{
                    			slot_weapon_reloaded_vec.erase(slot_weapon_reloaded_vec.begin() + i);
                    			fire_delay += d_fire_delay;
@@ -263,7 +277,7 @@ void WeaponComplex::ValidateAllReloadedWeaponsTarget()
 	// in STATIC after weapons reloaded
         for (unsigned int i = 0; i < slot_weapon_reloaded_vec.size(); i++)
         {	
-        	slot_weapon_reloaded_vec[i]->GetTurrel()->validateTarget();
+        	slot_weapon_reloaded_vec[i]->GetTurrel()->CheckTarget();
 	}
 }
 
@@ -273,9 +287,9 @@ void WeaponComplex::ResetDeselectedWeaponTargets()
 {
         for (unsigned int i = 0; i < slot_weapon_equiped_vec.size(); i++)
         {
-            	if (slot_weapon_equiped_vec[i]->GetTurrel()->getSelectedStatus() == false)
+            	if (slot_weapon_equiped_vec[i]->GetTurrel()->GetSelectedStatus() == false)
             	{
-                	slot_weapon_equiped_vec[i]->GetTurrel()->resetTarget();
+                	slot_weapon_equiped_vec[i]->GetTurrel()->ResetTarget();
                 }
         }
 }
@@ -339,7 +353,7 @@ void WeaponComplex::RenderWeaponsRange()
 		glTranslatef(owner_vehicle->GetPoints().getCenter().x, owner_vehicle->GetPoints().getCenter().y, 0.0f);
 		for (unsigned int i = 0; i < slot_weapon_reloaded_vec.size(); i++)
         	{
-         		if (slot_weapon_reloaded_vec[i]->GetTurrel()->getSelectedStatus() == true)
+         		if (slot_weapon_reloaded_vec[i]->GetTurrel()->GetSelectedStatus() == true)
                 	{
                 		slot_weapon_reloaded_vec[i]->UpdateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_red);
              			slot_weapon_reloaded_vec[i]->DrawRange();
@@ -357,9 +371,9 @@ void WeaponComplex::RenderWeaponIcons() const
         for (unsigned int i = 0; i < slot_weapon_vec.size(); i++)
         {
                 Turrel* _turrel = slot_weapon_vec[i]->GetTurrel();
-                if (_turrel->getTarget() != NULL )
+                if (_turrel->GetTarget() != NULL )
                 {       
-                        Rect _rect(_turrel->getTarget()->GetPoints().getpCenter()->x - 40/2 + 23*offset, _turrel->getTarget()->GetPoints().getpCenter()->y + 40/2, 20, 20);
+                        Rect _rect(_turrel->GetTarget()->GetPoints().getpCenter()->x - 40/2 + 23*offset, _turrel->GetTarget()->GetPoints().getpCenter()->y + 40/2, 20, 20);
                         drawTexturedRect(slot_weapon_vec[i]->GetItem()->GetTextureOb(), _rect, -2.0);
                         offset++;
                 }        

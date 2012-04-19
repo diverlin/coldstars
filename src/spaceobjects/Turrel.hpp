@@ -19,35 +19,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef TURREL_H
 #define TURREL_H
 
-
 class Turrel
 {
         public:
                 Turrel(ItemSlot*, vec2f*);
                 ~Turrel();
 
-                void setTexOb(TextureOb*);
+                void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
                               
-                void setTarget(BaseGameEntity*);
-                void setSelectedStatus(bool);
+                void SetTarget(BaseGameEntity* target) { this->target = target; };
+                void SetSelectedStatus(bool selected)   { is_SELECTED = selected; };
                 
-                bool getSelectedStatus() const;
-                Points* getPoints();
+                bool GetSelectedStatus() const { return is_SELECTED; };
+                Points& GetPoints() { return points; };
                 
-                BaseGameEntity* getTarget() const;
+                BaseGameEntity* GetTarget() const { return target; };
        
-                void resetTarget();
+                void ResetTarget() { target = NULL; };
                        
-                void validateTarget();
-                bool CheckTarget() const;                
-                bool isAmmoOk() const;
+                void CheckTarget();                
+                bool CheckAmmo() const;
                 
-                bool fireEvent(bool);
+                bool FireEvent(bool);
 
                 void Render(float);                 
                
         private:
-                TextureOb* texOb;
+                TextureOb* textureOb;
                         
                 ItemSlot* slot;
                 BaseGameEntity* target;

@@ -26,6 +26,9 @@ ShieldEffect::ShieldEffect()
         color.g = 1.0;
         color.b = 1.0;
         color.a = alpha_start;
+        
+        textureOb = NULL;
+        parent = NULL;
 }
 
 ShieldEffect::~ShieldEffect()
