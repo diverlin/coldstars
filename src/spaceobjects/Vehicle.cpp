@@ -237,10 +237,6 @@ void Vehicle::LaunchingEvent()
 //// 
 
 
-
-
-
-
 void Vehicle::Hit(int _damage, bool show_effect)
 {
     	data_life.armor -= _damage;
@@ -254,7 +250,7 @@ void Vehicle::Hit(int _damage, bool show_effect)
 	{
     		if (ableTo.PROTECT == true)
     		{
-       			protection_complex->GetShieldEffect()->setAlpha(1.0);
+       			protection_complex->GetShieldEffect()->SetAlpha(1.0);
        		}       	
        		// improove
        		Color4i color;  	       		

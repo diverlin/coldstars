@@ -60,7 +60,7 @@ void SpaceStation::UpdateInfo()
 void SpaceStation::UpdateRenderStuff()
 {
     	//points.update(); 
-    	protection_complex->GetShieldEffect()->update();
+    	protection_complex->GetShieldEffect()->Update();
     	
     	//if (ableTo.DRIVE == true)
     	//{

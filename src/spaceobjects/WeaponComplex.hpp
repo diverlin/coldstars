@@ -57,6 +57,7 @@ class WeaponComplex
       	private:
       		int weapon_num;
       		Vehicle* owner_vehicle;
+                //Points points;
       		
       		int fire_delay, d_fire_delay;
         	std::vector<ItemSlot*> slot_weapon_vec;

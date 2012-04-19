@@ -152,8 +152,8 @@ void BaseVehicleBuilder::CreateWeaponsComplex(Vehicle* vehicle) const
 
 void BaseVehicleBuilder::CreateProtectionComplex(Vehicle* vehicle) const
 {
-    	vehicle->GetPoints().initShieldQuadPoints();
-    	vehicle->GetPoints().addShieldQuadPoints();
+    	//vehicle->GetPoints().initShieldQuadPoints();
+    	//vehicle->GetPoints().addShieldQuadPoints();
     	
 	ProtectionComplex* protection_complex = new ProtectionComplex(vehicle); 	
  	vehicle->SetProtectionComplex(protection_complex);

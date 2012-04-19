@@ -76,7 +76,7 @@ void Satellite :: UpdateInfo()
 void Satellite :: updateRenderStuff()
 {
     	//points.update(); 
-    	protection_complex->GetShieldEffect()->update();
+    	protection_complex->GetShieldEffect()->Update();
     	
     	this->UpdateRotation();
 	points.setAngle(angle.z);

@@ -70,7 +70,7 @@ void Ship::update_inSpace(int time, bool show_effect)
 void Ship::updateRenderStuff()
 {
     	//points.update(); 
-    	protection_complex->GetShieldEffect()->update();
+    	protection_complex->GetShieldEffect()->Update();
 }
 
 void Ship::render_inSpace() const
