@@ -34,31 +34,3 @@ ItemSlot* GetNewItemSlot(int subtype_id, int id)
         return item_slot;
 }
 
-
-//ItemSlotBuilder& ItemSlotBuilder::Instance()
-//{
-	//static ItemSlotBuilder instance;
-	//return instance;
-//}
-
-//ItemSlotBuilder::~ItemSlotBuilder()
-//{}
-
-//void ItemSlotBuilder::CreateNewItemSlot(int id)
-//{
-	//if (id == NONE_ID)
-	//{
-		//id = g_ID_GENERATOR.getNextId();
-	//}
-        //item_slot = new ItemSlot(id);
-        //EntityManager::Instance().RegisterEntity(item_slot);
-//} 
-        	
-//void ItemSlotBuilder::CreateNewInternals(int subtype_id)
-//{
-	//TextureOb* texOb_slot = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID);
-	//item_slot->SetSubTypeId(subtype_id);
-    	//item_slot->SetTextureOb(texOb_slot);
-//}
-
-  	

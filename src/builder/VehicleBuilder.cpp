@@ -27,8 +27,15 @@ VehicleBuilder& VehicleBuilder::Instance()
 VehicleBuilder::~VehicleBuilder() {}
 
 
-Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int weapons_num) const
+Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int weapons_num, int id) const
 {
+	if (id == NONE_ID)
+	{
+		id = g_ID_GENERATOR.getNextId();
+	}
+        Ship* ship = new Ship(id);
+        EntityManager::Instance().RegisterEntity(ship);
+                
     	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomShipTexObWithFollowingAtrributes(race_id, subtype_id, size_id); 
        
        	int protection_rate = 1;
@@ -47,7 +54,7 @@ Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int w
         data_korpus.inhibit_GRAPPLE = false;
         data_korpus.weapon_slot_num = weapons_num;
        
-        int id = g_ID_GENERATOR.getNextId(); 
+
     	
         LifeData data_life;
         data_life.armor      = data_korpus.armor;
@@ -58,8 +65,6 @@ Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int w
        		data_korpus.render_TURRELS = true; 
     	else
        		data_korpus.render_TURRELS = false; 
-       		
-	Ship* ship = new Ship(id);
 	
 	ship->SetSubTypeId(subtype_id);
 	ship->SetKorpusData(data_korpus);
@@ -73,13 +78,18 @@ Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int w
         CreateWeaponsComplex(ship);
         CreateProtectionComplex(ship);
         
-        EntityManager::Instance().RegisterEntity(ship);
-        
         return ship;
 }
 
-Satellite* VehicleBuilder::GetNewSatellite() const
+Satellite* VehicleBuilder::GetNewSatellite(int id) const
 {
+        if (id == NONE_ID)
+	{
+		id = g_ID_GENERATOR.getNextId();
+	}
+        Satellite* satellite = new Satellite(id);
+        EntityManager::Instance().RegisterEntity(satellite);
+        
 	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SATELLITE_ID);  
 	
        	int protection_rate = 1;
@@ -97,8 +107,6 @@ Satellite* VehicleBuilder::GetNewSatellite() const
 
         data_korpus.inhibit_GRAPPLE = true;
         data_korpus.weapon_slot_num = 2;
-       
-        int id         = g_ID_GENERATOR.getNextId(); 
  
         LifeData data_life;
         data_life.armor      = data_korpus.armor;
@@ -106,8 +114,6 @@ Satellite* VehicleBuilder::GetNewSatellite() const
         
         int size_threshold = 2; 
 	data_korpus.render_TURRELS = true;       
-
-	Satellite* satellite = new Satellite(id);
 	
 	satellite->SetKorpusData(data_korpus);
 	satellite->SetLifeData(data_life);
@@ -119,15 +125,20 @@ Satellite* VehicleBuilder::GetNewSatellite() const
         CreateDriveComplex(satellite);
         CreateWeaponsComplex(satellite);
         CreateProtectionComplex(satellite);	
-        
-        EntityManager::Instance().RegisterEntity(satellite);
 	
 	return satellite;
 
 }
 
-SpaceStation* VehicleBuilder::GetNewSpaceStation() const
-{
+SpaceStation* VehicleBuilder::GetNewSpaceStation(int id) const
+{	
+        if (id == NONE_ID)
+	{
+		id = g_ID_GENERATOR.getNextId();
+	}
+        SpaceStation* spacestation = new SpaceStation(id, RACE::R0_ID);
+        EntityManager::Instance().RegisterEntity(spacestation);
+                        
 	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SPACESTATION_ID); 
        
        	int protection_rate = 1;
@@ -146,8 +157,6 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation() const
         data_korpus.inhibit_GRAPPLE = false;
         data_korpus.weapon_slot_num = 5;
        
-        int id         = g_ID_GENERATOR.getNextId(); 
-
         LifeData data_life;
         data_life.armor      = data_korpus.armor;
         data_life.dying_time = 10*texOb->size_id;
@@ -155,7 +164,6 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation() const
         int size_threshold = 2; 
 	data_korpus.render_TURRELS = true; 
                            
-    	SpaceStation* spacestation = new SpaceStation(id, RACE::R0_ID);
     	spacestation->SetSubTypeId(SPACESTATION::MILITARY_ID);
     	spacestation->SetKorpusData(data_korpus);
 	spacestation->SetTextureOb(texOb);

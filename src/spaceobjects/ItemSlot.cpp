@@ -37,7 +37,7 @@ ItemSlot::ItemSlot(int id)
         
         turrel = NULL;                
         item   = NULL;
-        texOb  = NULL;
+        textureOb  = NULL;
 }
 
 ItemSlot::~ItemSlot()
@@ -89,7 +89,7 @@ void ItemSlot::RemoveItem()
 
 void ItemSlot::Render(GLuint flash_tex)
 {
-       	drawTexturedRect(texOb, rect, -1.5);
+       	drawTexturedRect(textureOb, rect, -1.5);
 
 	//if self.flash == True:
 		//drawTexturedRect(flash_tex, self.rect, -1.0)

@@ -22,25 +22,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 ItemSlot* GetNewItemSlot(int subtype_id, int id = NONE_ID);
 
-//class ItemSlotBuilder
-//{
-	//public:
-		//static ItemSlotBuilder& Instance();
-		//~ItemSlotBuilder();
-
-        	//void CreateNewItemSlot(int id = NONE_ID); 
-                //void CreateNewInternals(int);
-                //ItemSlot* GetItemSlot() const { return item_slot; };
-                       	 		                
-        //private:
-                //ItemSlot* item_slot;
-                
-		//ItemSlotBuilder() {};
-		//ItemSlotBuilder(const ItemSlotBuilder&) {};
-		//ItemSlotBuilder& operator=(const ItemSlotBuilder&) {};
-//}; 
-
-
 #endif 
     
 
