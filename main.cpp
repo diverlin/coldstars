@@ -46,7 +46,7 @@ int main()
 	while (Gui::GetWindow().IsOpened())
 	{    
 		/* server code start */
-		TIMER->update();    		
+		TIMER->update();
 
 		for (int i = 0; i < Config::Instance().GAMESPEED; i++)  // fake implementation (static ai should not be run several times at once)
 		{

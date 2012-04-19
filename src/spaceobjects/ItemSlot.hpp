@@ -20,20 +20,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef ITEMSLOT_H
 #define ITEMSLOT_H
 
+struct UnresolvedDataUniqueItemSlot
+{
+	int item_id;
+};
 
 class ItemSlot : public Base
 {   
 	public:        
-		ItemSlot(int id = NONE_ID);
+		ItemSlot(int id);
 		~ItemSlot();
                 
-		void SetTextureOb(TextureOb* texOb) { this->texOb = texOb; };
-		void SetOwnerVehicle(Vehicle* owner_vehicle) {  this->owner_vehicle = owner_vehicle; };
-
-                void SetTurrel( Turrel* turrel) { this->turrel = turrel; };
+		void SetTextureOb(TextureOb* texOb)          { this->texOb = texOb; };
+		void SetOwnerVehicle(Vehicle* owner_vehicle) { this->owner_vehicle = owner_vehicle; };
+                void SetTurrel(Turrel* turrel)               { this->turrel = turrel; };
                                 
-		Turrel* GetTurrel() const { return turrel; };
-		bool GetEquipedStatus() const  { return is_EQUIPED; };
+		Turrel* GetTurrel()     const { return turrel; };
+		bool GetEquipedStatus() const { return is_EQUIPED; };
 
                 Rect& GetRect() { return rect; };
 		Vehicle* GetOwnerVehicle() const { return owner_vehicle; };
@@ -63,13 +66,12 @@ class ItemSlot : public Base
 		ScanerModule*       GetScanerModule()       const { return (ScanerModule*)item; }
 		GrappleModule*      GetGrappleModule()      const { return (GrappleModule*)item; }
 
-		Bomb* GetBomb() const { return (Bomb*)item; }
+		Bomb* GetBomb()           const { return (Bomb*)item; }
 		//Artefact* GetArtefact() const { return artefact; }
 		GoodsPack* GetGoodsPack() const { return (GoodsPack*)item; }
-		//Vehicle* GetVehicle()     const { return vehicle; }
+		//Vehicle* GetVehicle()   const { return vehicle; }
 
-
-                void SetRect(int _pos_x, int _pos_y, int w, int h);
+                void SetRect(int, int, int, int);
                                 
 		bool InsertItem(BaseItem*);
             
@@ -96,15 +98,14 @@ class ItemSlot : public Base
 		virtual void ResolveData();
 		
         private:
-                bool is_EQUIPED;                       // slot is empty or equiped 
-                bool is_FLASHING;                      // flashing the slot to show that item can be inserted in that one 
+                bool is_EQUIPED;                       
                 
                 TextureOb* texOb;
                 
                 Rect rect;
                                 
-                Vehicle* owner_vehicle;  // reference to the ship_owenr                
-                Turrel* turrel;              // only for weapons slot
+                Vehicle* owner_vehicle;              
+                Turrel* turrel;          // only for weapons slot
                 
                 BaseItem*    item;
 
@@ -115,6 +116,11 @@ class ItemSlot : public Base
            	                
                 bool CheckStarSystem(BaseGameEntity*) const;
            	bool CheckDistance(BaseGameEntity*) const;
+                
+                UnresolvedDataUniqueItemSlot data_unresolved_ItemSlot;
+                void SaveDataUniqueItemSlot(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueItemSlot(const boost::property_tree::ptree&);
+		void ResolveDataUniqueItemSlot();
 }; 
 
 #endif

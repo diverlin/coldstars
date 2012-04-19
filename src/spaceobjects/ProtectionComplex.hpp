@@ -27,13 +27,13 @@ class ProtectionComplex
       		ProtectionComplex(Vehicle*);
       		~ProtectionComplex();
       		
-      		ItemSlot& GetProtectorSlot();
-        	ShieldEffect* GetShieldEffect() const;        	
+      		ItemSlot* GetProtectorSlot()    const { return protector_slot; };
+        	ShieldEffect* GetShieldEffect() const { return shield_effect; }; 
         	
       	private:
       		Vehicle* owner_vehicle;
         	
-        	ItemSlot protector_slot;
+        	ItemSlot* protector_slot;
         	ShieldEffect* shield_effect;
     		
 };

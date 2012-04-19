@@ -23,8 +23,7 @@ Cursor :: Cursor(Player* player)
 {
 	this->player = player;
 	
-     	slot = new ItemSlot();
-     	slot->SetSubTypeId(SLOT::CARGO_ID);
+     	slot = GetNewItemSlot(SLOT::CARGO_ID);
      	slot->SetRect(0, 0, GUI::SLOT::WIDTH_FOR_CURSOR, GUI::SLOT::HEIGHT_FOR_CURSOR);
      	
      	mouse_left_button  = false;

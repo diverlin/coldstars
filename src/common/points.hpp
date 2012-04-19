@@ -35,43 +35,43 @@ class Points
         ******************************************/
         
         public:
-                void setPosZ(float);
+                void setPosZ(float pos_z) { this->pos_z = pos_z; }
                 
                 void setWidthHeight(int, int);  
                 void setCenter(float, float);
                 void setCenter(vec2f);
                 void setAngle(float);
         
-        	int getWidth() const;
-        	int getHeight() const;
+        	int getWidth() const  { return w; };
+        	int getHeight() const { return h; };
         
-                float getAngleDegree() const;
-                float* getpAngleDegree();
+                float getAngleDegree() const { return angle_inD; }  ;
+                float* getpAngleDegree() { return &angle_inD; };
                         
-                float getPosZ() const;
+                float getPosZ() const { return pos_z; };
                         
-                const vec2f& getCenter() const;   
-                vec3f getCenter3f() const; 
-                vec2f* getpCenter();   // used inturrels(for target)
+                const vec2f& getCenter()  const { return center; };   
+                const vec3f getCenter3f() const { return vec3f(center.x, center.y, pos_z); }; 
+                vec2f* getpCenter() { return &center; };   // used inturrels(for target)
       
-                const vec2f& getBottomLeft()  const;  
-                const vec2f& getBottomRight() const; 
-                const vec2f& getTopRight()    const;    
-                const vec2f& getTopLeft()     const;
+                const vec2f& getBottomLeft()  const { return bottomLeft; };  
+                const vec2f& getBottomRight() const { return bottomRight; }; 
+                const vec2f& getTopRight()    const { return topRight; };    
+                const vec2f& getTopLeft()     const { return topLeft; };
                 
-                const vec2f& getBottomLeftShield()  const;
-                const vec2f& getBottomRightShield() const;
-                const vec2f& getTopRightShield()    const;
-                const vec2f& getTopLeftShield()     const;
+                const vec2f& getBottomLeftShield()  const { return bottomLeftShield; };
+                const vec2f& getBottomRightShield() const { return bottomRightShield; };
+                const vec2f& getTopRightShield()    const { return topRightShield; };
+                const vec2f& getTopLeftShield()     const { return topLeftShield; };
                 
-                vec2f* getpMidLeft();	     // used in drive jet
-                vec2f* getpMidFarLeft();
+                vec2f* getpMidLeft()    { return &midLeft; };	     // used in drive jet
+                vec2f* getpMidFarLeft() { return &midFarLeft; };
                 
-                vec2f* getpWeapon1Center();  // used in turrels
-        	vec2f* getpWeapon2Center();
-        	vec2f* getpWeapon3Center();
-        	vec2f* getpWeapon4Center();
-        	vec2f* getpWeapon5Center();
+                vec2f* getpWeapon1Center() { return &weapon_1_center; };  // used in turrels
+        	vec2f* getpWeapon2Center() { return &weapon_2_center; };
+        	vec2f* getpWeapon3Center() { return &weapon_3_center; };
+        	vec2f* getpWeapon4Center() { return &weapon_4_center; };
+        	vec2f* getpWeapon5Center() { return &weapon_5_center; };
     
                 Points();
                 ~Points();
