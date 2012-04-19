@@ -687,7 +687,9 @@ void Vehicle::GrappleMicroProgramm()
                                         Container* _container = (Container*)grapple_slot->GetGrappleEquipment()->target_vec[i];
        				        if (_slot != NULL)
        					{
-       						_slot->ExtractItemFromContainer(_container);
+                                                _slot->InsertItem(_container->GetItemSlot()->GetItem());
+                                                _container->GetItemSlot()->RemoveItem();    
+       						//_slot->ExtractItemFromContainer(_container);
        						_container->SetPlaceTypeId(NONE_ID);
        					}
 					grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(_container);

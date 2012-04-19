@@ -48,6 +48,6 @@ class GoodsPack : public BaseItem
  		virtual void AddUniqueInfo();   
 };
 
-GoodsPack* GetNewGoodsPack(unsigned int _subtype_id, vec2f);
+GoodsPack* GetNewGoodsPack(unsigned int);
 
 #endif 

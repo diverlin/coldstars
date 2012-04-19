@@ -78,11 +78,6 @@ bool ItemSlot::InsertItem(BaseItem* item)
 	return false;
 }
 
-bool ItemSlot::ExtractItemFromContainer(Container* container)
-{
-	return this->SwapItemWith(container->GetItemSlot());
-}
-
 void ItemSlot::RemoveItem()
 {
         BaseItem* tmp_item = item;
@@ -186,8 +181,8 @@ bool ItemSlot::SwapItemWith(ItemSlot* _slot)
 		{ 
 			RemoveItem(); 
 			
-			return true; 			
-		}                     				
+			return true; 
+		}
 	}
 
 	if ( (is_EQUIPED == true) and (_slot->GetEquipedStatus() == true) )

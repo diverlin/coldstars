@@ -22,24 +22,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Container* GetNewContainer(TextureOb* textureOb, BaseItem* item, int id = NONE_ID);
 
-//class ContainerBuilder
-//{
-	//public:
-		//static ContainerBuilder& Instance();
-		//~ContainerBuilder();
-
-        	//void CreateNewContainer(int id = NONE_ID); 
-                //void CreateNewInternals();
-                //Container* GetContainer() const { return container; };
-                       	 		                
-        //private:
-                //Container* container;
-                
-		//ContainerBuilder() {};
-		//ContainerBuilder(const ContainerBuilder&) {};
-		//ContainerBuilder& operator=(const ContainerBuilder&) {};
-//}; 
-
 #endif 
     
 

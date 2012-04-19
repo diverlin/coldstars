@@ -24,7 +24,6 @@ BaseVehicleBuilder::~BaseVehicleBuilder() {}
 void  BaseVehicleBuilder::CreateKorpusGeometry(Vehicle* vehicle) const
 {
 	vehicle->RecalculateCollisionRadius();
-	vehicle->GetPoints().CreateCenter();
 
     	vehicle->GetPoints().initMainQuadPoints(vehicle->GetTextureOb()->getFrameWidth(), vehicle->GetTextureOb()->getFrameHeight());
     	vehicle->GetPoints().addMainQuadPoints();

@@ -72,9 +72,7 @@ class ItemSlot : public Base
                 void SetRect(int _pos_x, int _pos_y, int w, int h);
                                 
 		bool InsertItem(BaseItem*);
-                
-		bool ExtractItemFromContainer(Container*);
-						                
+            
 		void RemoveItem();
                 
 		void Render(GLuint);

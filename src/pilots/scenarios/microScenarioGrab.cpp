@@ -50,6 +50,7 @@ void MicroScenarioGrab :: update_inStatic(Npc* npc) const
 
 void MicroScenarioGrab :: update_inDynamic(Npc* npc) const
 {
+        /*
 	GrappleEquipment* grapple_equipment = npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment();
         grapple_equipment->ValidateTargets();  
                 
@@ -74,19 +75,20 @@ void MicroScenarioGrab :: update_inDynamic(Npc* npc) const
        				//}			
        			//}
         			
-       			if (grapple_equipment->target_vec[i]->GetTypeId() == ENTITY::CONTAINER_ID)
-       			{
-       				ItemSlot* slot = npc->GetVehicle()->GetEmptyOtsecSlot();
-       				if (slot != NULL)
-       				{
-       					slot->ExtractItemFromContainer((Container*)grapple_equipment->target_vec[i]);
-       					grapple_equipment->AddToRemoveQueue(grapple_equipment->target_vec[i]);
+       			//if (grapple_equipment->target_vec[i]->GetTypeId() == ENTITY::CONTAINER_ID)
+       			//{
+       				//ItemSlot* slot = npc->GetVehicle()->GetEmptyOtsecSlot();
+       				//if (slot != NULL)
+       				//{
+       					//slot->ExtractItemFromContainer((Container*)grapple_equipment->target_vec[i]);
+       					//grapple_equipment->AddToRemoveQueue(grapple_equipment->target_vec[i]);
 
-       					npc->GetStarSystem()->AddToRemoveFromOuterSpaceQueue((Container*)grapple_equipment->target_vec[i]);  
-       				}	
-       			}
+       					//npc->GetStarSystem()->AddToRemoveFromOuterSpaceQueue((Container*)grapple_equipment->target_vec[i]);  
+       				//}	
+       			//}
         	}
         }
+        */
 }
 
 void MicroScenarioGrab :: Exit(Npc* npc) const

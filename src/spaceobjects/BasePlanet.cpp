@@ -29,7 +29,6 @@ BasePlanet::~BasePlanet()
 void BasePlanet::PostCreateInit()
 {
         this->CalcCollisionrRadius();           
-        points.CreateCenter();
         
         orbit = new Orbit();
 }

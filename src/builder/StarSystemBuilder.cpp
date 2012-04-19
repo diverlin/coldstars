@@ -33,7 +33,6 @@ void StarSystemBuilder::CreateNewStarSystem(int id)
 		id = g_ID_GENERATOR.getNextId();
 	}
         starsystem = new StarSystem(id);
-        starsystem->GetPoints().CreateCenter();
         EntityManager::Instance().RegisterEntity(starsystem);
 } 
         	
