@@ -82,7 +82,7 @@ class ItemSlot : public Base
 		void RenderEquipedItem();
 		void RenderItemInfo(float offset_x = 0, float offset_y = 0);
                 
-                bool CheckInteraction(int _x, int _y);
+                bool CheckInteraction(int, int);
                 
                 void DropItemToSpace();
                 

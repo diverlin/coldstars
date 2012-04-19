@@ -76,7 +76,6 @@ void Player::ClearVisibleEntities()
         visible_SATELLITE_vec.clear();
         
         visible_ASTEROID_vec.clear();
-        visible_MINERAL_vec.clear();
         visible_CONTAINER_vec.clear();
 
         visible_SHIP_vec.clear();
@@ -114,17 +113,6 @@ void Player::AddIfVisible(Asteroid* asteroid)
                 	visible_ASTEROID_vec.push_back(asteroid);
                 }
         }
-}
-
-void Player::AddIfVisible(Mineral* mineral)
-{
-	if (IsObjectOnScreen(mineral->GetPoints()))
-        {   
-        	//if ( distBetweenPoints(mineral->getPoints()->getCenter(), player_center) < player_vision_radius )
-                {
-                	visible_MINERAL_vec.push_back(mineral);
-		}
-	}
 }
 
 void Player::AddIfVisible(Container* container)     	
@@ -288,17 +276,12 @@ void Player::RenderEntities_NEW()
     			
     			for(unsigned int i = 0; i < visible_BLACKHOLE_vec.size(); i++)
 			{ 
-        			visible_BLACKHOLE_vec[i]->render2D(); 
+        			visible_BLACKHOLE_vec[i]->Render2D(); 
     			}  		
-    			
-    			for(unsigned int i = 0; i < visible_MINERAL_vec.size(); i++)
-			{ 
-        			visible_MINERAL_vec[i]->render2D(); 
-    			}  
-  			           
+   
     			for(unsigned int i = 0; i < visible_CONTAINER_vec.size(); i++)
     			{ 
-        			visible_CONTAINER_vec[i]->render2D(); 
+        			visible_CONTAINER_vec[i]->Render2D(); 
     			} 	 
            
 
@@ -436,17 +419,12 @@ void Player::RenderEntities_OLD()
                         
             	for(unsigned int i = 0; i < visible_BLACKHOLE_vec.size(); i++)
 		{ 
-        		visible_BLACKHOLE_vec[i]->render2D(); 
+        		visible_BLACKHOLE_vec[i]->Render2D(); 
     		}  	
-    			    			
-    		for(unsigned int i = 0; i < visible_MINERAL_vec.size(); i++)
-		{ 
-        		visible_MINERAL_vec[i]->render2D(); 
-    		}         
            
     		for(unsigned int i = 0; i < visible_CONTAINER_vec.size(); i++)
     		{ 
-        		visible_CONTAINER_vec[i]->render2D(); 
+        		visible_CONTAINER_vec[i]->Render2D(); 
     		} 	 
            
     		for(unsigned int i = 0; i < visible_SHIP_vec.size(); i++)
@@ -555,41 +533,6 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
 
 	/* NOTE: the intersection must be checked in order from small objects to huge */
 	
-
-    	if (cursor_has_target == false) 
-    	{
-        	for (unsigned int mi = 0; mi < visible_MINERAL_vec.size(); mi++)
-        	{ 
-            		float mineral_cursor_dist = distBetweenPoints(visible_MINERAL_vec[mi]->GetPoints().getCenter(), mxvp, myvp);
-            		if (mineral_cursor_dist < visible_MINERAL_vec[mi]->GetCollisionRadius())
-            		{   
-               			cursor_has_target = true;
-
-               			visible_MINERAL_vec[mi]->RenderInfoInSpace(screen->getBottomLeftGlobalCoord()); 
-
-				if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
-				{
-               				if (mlb == true)
-               				{
-                   				npc->GetVehicle()->GetWeaponComplex()->SelectWeapons();
-                   				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_MINERAL_vec[mi]);
-	       				}
-	       				if (mrb == true)
-	       				{
-	       					if (npc->GetVehicle()->ableTo.GRAB == true)
-	       					{
-	       						npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(visible_MINERAL_vec[mi]);
-	       						npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets();	       						
-	       					}
-	       				}
-	       			}
-	       			
-               			break; 
-            		}
-       		}
-    	}
-
-
     	if (cursor_has_target == false) 
     	{
         	for (unsigned int ci = 0; ci < visible_CONTAINER_vec.size(); ci++)
@@ -791,7 +734,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
             		{   
                			cursor_has_target = true;
 
-               			visible_BLACKHOLE_vec[i]->renderInfo_inSpace(screen->getBottomLeftGlobalCoord()); 
+               			visible_BLACKHOLE_vec[i]->RenderInfoInSpace(screen->getBottomLeftGlobalCoord()); 
 
                			break; 
             		}

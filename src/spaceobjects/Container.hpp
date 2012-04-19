@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define CONTAINER_H
 
 
-class Container : public SpaceItemBase
+class Container : public BaseGameEntity
 {
     	public:                  
         	Container(int);
@@ -33,7 +33,13 @@ class Container : public SpaceItemBase
         	void RenderInfoInSpace(vec2f);
         	
         	virtual void PostDeathUniqueEvent(bool);
-        
+            	
+        	void UpdateInSpace(int, bool);
+        	
+		void SilentKill();
+          	void CalcCollisionrRadius();
+        	void Render2D();
+                                
         	virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(boost::property_tree::ptree&);
 		virtual void ResolveData();
@@ -41,8 +47,12 @@ class Container : public SpaceItemBase
         private:
                 ItemSlot* item_slot;        
         	void UpdateInfo();  
+                
+                vec2f target_pos;
+        	vec2f d_pos;
+        	
+        	float velocity;
+        	bool keep_moving;
 };
-
-Container* GetNewContainer();
 
 #endif 

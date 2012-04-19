@@ -153,16 +153,15 @@ void StarSystem::Add(Asteroid* asteroid)
         ASTEROID_vec.push_back(asteroid);
 }
 
-void StarSystem::Add(Mineral* _mineral, vec2f pos)
+void StarSystem::Add(Container* container, vec2f pos)
 {
-	_mineral->moveToSpace(this, pos);
-        MINERAL_vec.push_back(_mineral);
-}
-
-void StarSystem::Add(Container* _container, vec2f pos)
-{
-	_container->moveToSpace(this, pos);
-        CONTAINER_vec.push_back(_container);
+	container->SetStarSystem(this);
+        container->SetPlaceTypeId(ENTITY::SPACE_ID);
+    	container->GetPoints().setCenter(pos);
+    	//target_pos = start_pos + getRandVec(60, 100);
+        //keep_moving = true;
+        
+        CONTAINER_vec.push_back(container);
 }
 
 void StarSystem::Add(RocketBullet* _rocket)
@@ -173,10 +172,10 @@ void StarSystem::Add(RocketBullet* _rocket)
 
 void StarSystem::Add(BlackHole* blackhole, vec2f pos)
 {
-	blackhole->moveToSpace(this, pos);
+	//blackhole->moveToSpace(this, pos);
 	//blackhole->setEffect(getNewBlackHoleEffect(this, pos, 8));
-	getNewBlackHoleEffect(this, pos, 8);
-	BLACKHOLE_vec.push_back(blackhole);
+	//getNewBlackHoleEffect(this, pos, 8);
+	//BLACKHOLE_vec.push_back(blackhole);
 }    
     		
 void StarSystem::Add(ShockWaveEffect* _shockWave)              { effect_SHOCKWAVE_vec.push_back(_shockWave); }
@@ -186,7 +185,6 @@ void StarSystem::Add(VerticalFlowText* _text)                  { text_DAMAGE_vec
 void StarSystem::Add(DistantNebulaBgEffect* dn)                { distantNebulaBgEffect_vec.push_back(dn); }
 void StarSystem::Add(DistantStarBgEffect* ds)                  { distantStarBgEffect_vec.push_back(ds); }
 void StarSystem::AddToHyperJumpQueue(Vehicle* vehicle)                { appear_VEHICLE_queue.push_back(vehicle); }	
-void StarSystem::AddToRemoveFromOuterSpaceQueue(Mineral* mineral)     { remove_MINERAL_queue.push_back(mineral); }
 void StarSystem::AddToRemoveFromOuterSpaceQueue(Container* container) { remove_CONTAINER_queue.push_back(container); }
 
 void StarSystem::AddToRemoveFromOuterSpaceQueue(Vehicle* vehicle) 
@@ -489,19 +487,7 @@ void StarSystem::rocketCollision_s(bool show_effect)
                         	}
                 	}
                 	else  { continue; }
-
-
-
-                	if (collide == false)
-                	{
-                        	for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
-                        	{
-                        		collide = checkCollision(ROCKET_vec[ri], MINERAL_vec[mi], show_effect);
-                        		if (collide == true) { 	break; }
-                        	}
-                	}
-                	else  { continue; }
-               	
+                	
                 	
                 	if (collide == false)
                 	{
@@ -602,22 +588,16 @@ void StarSystem :: updateEntities_s(int time, bool show_effect)
                 PLANET_vec[pi]->Update_inSpace(time, show_effect); 
     	}
     	
-        for (unsigned int mi = 0; mi < MINERAL_vec.size(); mi++)
-        {
-                MINERAL_vec[mi]->update_inSpace(time, show_effect); 
-     	}
-     	
-     	
      	for (unsigned int i = 0; i < BLACKHOLE_vec.size(); i++)
         {
-                BLACKHOLE_vec[i]->update_inSpace(time, show_effect); 
+                BLACKHOLE_vec[i]->UpdateInSpace(time, show_effect); 
      	}
      	     	     	
      	
      	
         for (unsigned int ci = 0; ci < CONTAINER_vec.size(); ci++)
         {
-                CONTAINER_vec[ci]->update_inSpace(time, show_effect); 
+                CONTAINER_vec[ci]->UpdateInSpace(time, show_effect); 
 	}
 	
         for (unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++) 
@@ -713,7 +693,6 @@ void StarSystem::FindVisibleEntities_c(Player* player)
         for (unsigned int i = 0; i < STAR_vec.size(); i++)         { player->AddIfVisible(STAR_vec[i]); }    
         for (unsigned int i = 0; i < PLANET_vec.size(); i++)       { player->AddIfVisible(PLANET_vec[i]); }
         for (unsigned int i = 0; i < ASTEROID_vec.size(); i++)     { player->AddIfVisible(ASTEROID_vec[i]); } 
-        for (unsigned int i = 0; i < MINERAL_vec.size(); i++)      { player->AddIfVisible(MINERAL_vec[i]); }
         for (unsigned int i = 0; i < CONTAINER_vec.size(); i++)    { player->AddIfVisible(CONTAINER_vec[i]); }
     	for (unsigned int i = 0; i < SHIP_vec.size(); i++) { player->AddIfVisible(SHIP_vec[i]); } 
     	for (unsigned int i = 0; i < SPACESTATION_vec.size(); i++) { player->AddIfVisible(SPACESTATION_vec[i]); } 
@@ -809,19 +788,6 @@ void StarSystem :: asteroidManager_s(unsigned int num)
 
 void StarSystem :: manageUnavaliableObjects_s()
 {
-	for(unsigned int i = 0; i < remove_MINERAL_queue.size(); i++)
-    	{
-    		for (unsigned int j = 0; j < MINERAL_vec.size(); j++)
-    		{
-    			if (MINERAL_vec[j]->GetId() == remove_MINERAL_queue[i]->GetId())
-    			{
-    				MINERAL_vec.erase(MINERAL_vec.begin() + j );
-    				continue;
-    			}
-    		}
-    	}
-    	remove_MINERAL_queue.clear();  
-    	
     	for(unsigned int i = 0; i < remove_CONTAINER_queue.size(); i++)
     	{
     		for (unsigned int j = 0; j < CONTAINER_vec.size(); j++)
@@ -891,18 +857,8 @@ void StarSystem :: manageDeadObjects_s()
             		garbage_entities.add(ASTEROID_vec[i]);
             		ASTEROID_vec.erase(ASTEROID_vec.begin() + i );
             	}
-        } 
-    
+        }  
 
-    	for(unsigned int i = 0; i < MINERAL_vec.size(); i++)
-    	{
-        	if ( (MINERAL_vec[i]->GetGarbageReady() == true) or (MINERAL_vec[i]->GetPlaceTypeId() == NONE_ID) )
-        	{  
-            		garbage_entities.add(MINERAL_vec[i]);
-            		MINERAL_vec.erase(MINERAL_vec.begin() + i );
-        	} 
-    	}
-    	    
     	for(unsigned int i = 0; i < CONTAINER_vec.size(); i++)
     	{
         	if ( (CONTAINER_vec[i]->GetGarbageReady() == true) or (CONTAINER_vec[i]->GetPlaceTypeId() == NONE_ID) )

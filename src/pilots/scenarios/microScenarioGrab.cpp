@@ -32,19 +32,20 @@ void MicroScenarioGrab :: Enter(Npc* npc) const
 void MicroScenarioGrab :: update_inStatic(Npc* npc) const
 {
               
-        for (unsigned int i = 0; i < npc->GetObservation()->visible_MINERAL_vec.size(); i++)
-        {                	
-		if ( npc->GetObservation()->visible_MINERAL_vec[i].dist < npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->GetRadius() )
-                {                                       
-                	npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(npc->GetObservation()->visible_MINERAL_vec[i].mineral);
-                }
-                else
-                {
-                	break;
-                }
-        }
+        //for (unsigned int i = 0; i < npc->GetObservation()->visible_MINERAL_vec.size(); i++)
+        //{                	
+		//if ( npc->GetObservation()->visible_MINERAL_vec[i].dist < npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->GetRadius() )
+                //{                                       
+                	//npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(npc->GetObservation()->visible_MINERAL_vec[i].mineral);
+                //}
+                //else
+                //{
+                	//break;
+                //}
+        //}
         
-        npc->GetVehicle()->GetDriveComplex()->setTarget(npc->GetStateMachine()->getCurrentMicroTask()->getTarget(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
+        //npc->GetVehicle()->GetDriveComplex()->setTarget(npc->GetStateMachine()->getCurrentMicroTask()->getTarget(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
+
 }
 
 void MicroScenarioGrab :: update_inDynamic(Npc* npc) const
@@ -59,19 +60,19 @@ void MicroScenarioGrab :: update_inDynamic(Npc* npc) const
        		float dist = distBetweenPoints(npc->GetVehicle()->GetPoints().getCenter(), grapple_equipment->target_vec[i]->GetPoints().getCenter()); 
        		if (dist < npc->GetVehicle()->GetCollisionRadius()/10)
        		{
-       			if (grapple_equipment->target_vec[i]->GetTypeId() == ENTITY::MINERAL_ID)
-       			{
-       				GoodsPack* goodsPack = GetNewGoodsPack(ENTITY::MINERAL_ID);
-       				goodsPack->Increase(grapple_equipment->target_vec[i]->GetMass());
-       				ItemSlot* slot = npc->GetVehicle()->GetEmptyOtsecSlot();
-       				if (slot != NULL)
-       				{
-       					slot->InsertItem(goodsPack);
-       					grapple_equipment->AddToRemoveQueue(grapple_equipment->target_vec[i]);
+       			//if (grapple_equipment->target_vec[i]->GetTypeId() == ENTITY::MINERAL_ID)
+       			//{
+       				//GoodsPack* goodsPack = GetNewGoodsPack(ENTITY::MINERAL_ID);
+       				//goodsPack->Increase(grapple_equipment->target_vec[i]->GetMass());
+       				//ItemSlot* slot = npc->GetVehicle()->GetEmptyOtsecSlot();
+       				//if (slot != NULL)
+       				//{
+       					//slot->InsertItem(goodsPack);
+       					//grapple_equipment->AddToRemoveQueue(grapple_equipment->target_vec[i]);
 
-       					npc->GetStarSystem()->AddToRemoveFromOuterSpaceQueue((Mineral*)grapple_equipment->target_vec[i]);  
-       				}			
-       			}
+       					//npc->GetStarSystem()->AddToRemoveFromOuterSpaceQueue((Mineral*)grapple_equipment->target_vec[i]);  
+       				//}			
+       			//}
         			
        			if (grapple_equipment->target_vec[i]->GetTypeId() == ENTITY::CONTAINER_ID)
        			{

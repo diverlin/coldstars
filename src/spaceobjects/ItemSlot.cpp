@@ -46,9 +46,9 @@ ItemSlot::~ItemSlot()
         delete item;
 }
                 
-void ItemSlot::SetRect(int _pos_x, int _pos_y, int w, int h) 
+void ItemSlot::SetRect(int pos_x, int pos_y, int w, int h) 
 {
-	rect.set(_pos_x, _pos_y, w, h);
+	rect.set(pos_x, pos_y, w, h);
 }
 
 bool ItemSlot::InsertItem(BaseItem* item)
@@ -161,14 +161,11 @@ bool ItemSlot::CheckInteraction(int _x, int _y)
 
 void ItemSlot::DropItemToSpace()
 {
-	Container* container = GetNewContainer();
-	container->GetItemSlot()->SwapItemWith(this);
-	
-	// update mass
-
+        TextureOb* textureOb_ = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::CONTAINER_ID);    
+        Container* container = GetNewContainer(textureOb_, item);
+        RemoveItem();
+        
 	owner_vehicle->GetStarSystem()->Add(container, owner_vehicle->GetPoints().getCenter());	
-
-	//printf("container was created in ss_id = %i, pos = %f, %f\n", _starsystem->GetId(), _container->getPoints()->getCenter().x, _container->getPoints()->getCenter().y );
 }
         
 bool ItemSlot::SwapItemWith(ItemSlot* _slot)

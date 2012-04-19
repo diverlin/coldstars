@@ -53,12 +53,13 @@ void Asteroid :: collisionEvent(bool show_effect)
 }
 
     
-void Asteroid :: PostDeathUniqueEvent(bool show_effect)
+void Asteroid::PostDeathUniqueEvent(bool show_effect)
 {
        	for (int i = 0; i<3; i++)
-	{
-		Mineral* mineral = GetNewMineral();
-		starsystem->Add(mineral, points.getCenter());			
+	{      
+                //TextureOb* textureOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MINERAL_ID);   
+		//Container* container = GetNewContainer(textureOb, );
+		//starsystem->Add(container, points.getCenter());			
    	}
    	
    	if (show_effect == true)

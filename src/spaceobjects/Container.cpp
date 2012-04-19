@@ -65,6 +65,44 @@ void Container::PostDeathUniqueEvent(bool show_effect)
         }
 }
 
+void Container::CalcCollisionrRadius()
+{
+        collision_radius = (textureOb->getFrameWidth() + textureOb->getFrameHeight())/4; 
+        
+        points.setWidthHeight(textureOb->getFrameWidth(), textureOb->getFrameHeight());  // needs for finding visible corners
+}
+
+void Container::UpdateInSpace(int time, bool show_effect)
+{
+	CheckDeath(show_effect);
+	UpdateRotation();
+		
+	if (time > 0)
+	{
+     		if (keep_moving == true)
+     		{
+        		keep_moving = get_dX_dY_ToPoint(points.getCenter().x, points.getCenter().y, target_pos.x, target_pos.y, velocity, &d_pos.x, &d_pos.y);
+        		points.setCenter(points.getCenter().x + d_pos.x, points.getCenter().y + d_pos.y);
+     		}  
+     	}
+}
+
+
+void Container::SilentKill()
+{
+	data_life.is_alive      = false;  
+	data_life.garbage_ready = true;  // ??? death(false);
+}
+   
+       		
+void Container::Render2D()
+{ 
+    	drawDynamic(textureOb, points.getCenter(), angle.z, points.getPosZ());
+}
+
+
+
+
 /*virtual*/
 void Container::SaveData(boost::property_tree::ptree&) const
 {
@@ -81,30 +119,4 @@ void Container::LoadData(boost::property_tree::ptree&)
 void Container::ResolveData()
 {
 
-}
-
-
-
-Container* GetNewContainer()
-{
-	int id = g_ID_GENERATOR.getNextId(); 
-        
-        LifeData data_life;
-        data_life.armor = getRandInt(1,6);
-        data_life.dying_time = 30;
-        
-        vec3f d_angle;
-        d_angle.z      = -getRandInt(10, 100)*0.01; 
-        
-	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::CONTAINER_ID); 
-	
-	Container* container = new Container(id);
-	container->SetLifeData(data_life);
-	container->SetTextureOb(texOb);
-	container->SetDeltaAngle(d_angle);
-
-	
-	container->postCreateInit();
-	
-	return container;
 }

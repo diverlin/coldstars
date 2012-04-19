@@ -21,23 +21,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define MINERAL_H
 
 
-class Mineral : public SpaceItemBase
-{
-    	public:  
-        	Mineral(int);
+//class Mineral : public SpaceItemBase
+//{
+    	//public:  
+        	//Mineral(int);
         
-        	void RenderInfoInSpace(vec2f);
+        	//void RenderInfoInSpace(vec2f);
         	
-        	virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(boost::property_tree::ptree&);
-		virtual void ResolveData();
+        	//virtual void SaveData(boost::property_tree::ptree&) const;
+		//virtual void LoadData(boost::property_tree::ptree&);
+		//virtual void ResolveData();
 		
-        private:
-        	InfoTable info;
-        	void UpdateInfo();
-};
+        //private:
+        	//InfoTable info;
+        	//void UpdateInfo();
+//};
 
-Mineral* GetNewMineral();
+//Container* GetNewMineral();
 
 
 #endif 

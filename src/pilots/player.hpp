@@ -57,7 +57,6 @@ class Player : public Base
      		void AddIfVisible(Star*);
      		void AddIfVisible(Planet*);
      		void AddIfVisible(Asteroid*);     		
-     		void AddIfVisible(Mineral*);
      		void AddIfVisible(Container*);     	
      		void AddIfVisible(RocketBullet*);  
      		void AddIfVisible(BlackHole*);  
@@ -96,7 +95,6 @@ class Player : public Base
     		std::vector<Star*>         visible_STAR_vec;
     		std::vector<Planet*>       visible_PLANET_vec;
     		std::vector<Asteroid*>     visible_ASTEROID_vec;
-    		std::vector<Mineral*>      visible_MINERAL_vec;
     		std::vector<Container*>    visible_CONTAINER_vec;
     		std::vector<RocketBullet*> visible_ROCKET_vec;
     		std::vector<BlackHole*>    visible_BLACKHOLE_vec;
