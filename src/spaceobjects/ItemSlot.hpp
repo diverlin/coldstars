@@ -31,7 +31,7 @@ class ItemSlot : public Base
 		ItemSlot(int id);
 		~ItemSlot();
                 
-		void SetTextureOb(TextureOb* texOb)          { this->texOb = texOb; };
+		void SetTextureOb(TextureOb* textureOb)          { this->textureOb = textureOb; };
 		void SetOwnerVehicle(Vehicle* owner_vehicle) { this->owner_vehicle = owner_vehicle; };
                 void SetTurrel(Turrel* turrel)               { this->turrel = turrel; };
                                 
@@ -100,7 +100,7 @@ class ItemSlot : public Base
         private:
                 bool is_EQUIPED;                       
                 
-                TextureOb* texOb;
+                TextureOb* textureOb;
                 
                 Rect rect;
                                 
