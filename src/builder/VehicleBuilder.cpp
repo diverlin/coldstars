@@ -47,7 +47,7 @@ Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int w
         data_korpus.inhibit_GRAPPLE = false;
         data_korpus.weapon_slot_num = weapons_num;
        
-        int id         = g_ID_GENERATOR.getNextId(); 
+        int id = g_ID_GENERATOR.getNextId(); 
     	
         LifeData data_life;
         data_life.armor      = data_korpus.armor;
@@ -71,7 +71,7 @@ Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int w
         CreateEquipmentSlots(ship);
         CreateDriveComplex(ship);
         CreateWeaponsComplex(ship);
-        CreateProtectionComplex(ship);	
+        CreateProtectionComplex(ship);
         
         EntityManager::Instance().RegisterEntity(ship);
         

@@ -35,7 +35,6 @@ class ProtectionComplex
         	
         	ItemSlot* protector_slot;
         	ShieldEffect* shield_effect;
-    		
 };
 
 

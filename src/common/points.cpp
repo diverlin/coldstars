@@ -141,10 +141,6 @@ void Points :: initMainQuadPoints(int _w, int _h)
         topLeft.set(-w/2, +h/2);
 }
 
-
-
-
-
           
 void Points :: addMainQuadPoints()
 { 
@@ -162,48 +158,6 @@ void Points :: addMainQuadPoints()
       	vector.push_back(&topRight);                 
       	vector.push_back(&topLeft);
 }
-
-
-
-void Points :: initShieldQuadPoints()
-{ 
-     	float factor = 1.6;
-     
-     	// Origin entity rect (for rotation only transformation)
-     	bottomLeftShield_origin.set(-w/factor, -h/factor);
-     	bottomRightShield_origin.set(+w/factor, -h/factor);
-     	topRightShield_origin.set(+w/factor, +h/factor);
-     	topLeftShield_origin.set(-w/factor, +h/factor);
-
-
-     	// Actual entity rect
-     	bottomLeftShield.set(-w/factor, -h/factor);
-     	bottomRightShield.set(+w/factor, -h/factor);
-     	topRightShield.set(+w/factor, +h/factor);
-     	topLeftShield.set(-w/factor, +h/factor);
-}
-
-
-
-
-
-void Points :: addShieldQuadPoints()
-{ 
-     	// Origin entity rect (for rotation only transformation)
-     	vector_orig.push_back(&bottomLeftShield_origin);
-     	vector_orig.push_back(&bottomRightShield_origin);
-     	vector_orig.push_back(&topRightShield_origin);
-     	vector_orig.push_back(&topLeftShield_origin);
-
-     	// Actual entity rect
-     	vector.push_back(&bottomLeftShield);
-     	vector.push_back(&bottomRightShield);
-     	vector.push_back(&topRightShield);
-     	vector.push_back(&topLeftShield);
-}
-
-
-
 
 void Points :: initMidLeftPoint()
 {

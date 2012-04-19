@@ -17,59 +17,42 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
+ShieldEffect::ShieldEffect()
+{       
+        alpha_start = 0.4;
+        d_alpha = 0.01;
 
-ShieldEffect :: ShieldEffect(Vehicle* owner_vehicle, TextureOb* _texOb)
-{
-     this->owner_vehicle = owner_vehicle;
-     texOb = _texOb;
-
-     alpha_start = 0.4;
-     d_alpha = 0.01;
-
-     color.r = 1.0;
-     color.g = 1.0;
-     color.b = 1.0;
-     color.a = alpha_start;
+        color.r = 1.0;
+        color.g = 1.0;
+        color.b = 1.0;
+        color.a = alpha_start;
 }
 
-ShieldEffect :: ~ShieldEffect()
+ShieldEffect::~ShieldEffect()
 {}
 
-
-void ShieldEffect :: setAlpha(float _alpha)	{ color.a = _alpha; }
-
-void ShieldEffect :: update()
+void ShieldEffect::Update()
 {
+        points.setCenter(parent->GetPoints().getCenter());
+        points.setAngle(parent->GetPoints().getAngleDegree());
+        points.update();
+       
     	if (color.a > alpha_start)
        		color.a -= d_alpha;
     	else
        		color.a = alpha_start;
 }
 
-void ShieldEffect :: Render() const
+void ShieldEffect::Render() const
 {
     	setColor(color);
 
-    	drawFlatQuadPerVertexIn2D(texOb,
-    				  owner_vehicle->GetPoints().getBottomLeftShield(), 
-     			     	  owner_vehicle->GetPoints().getBottomRightShield(), 
-     			      	  owner_vehicle->GetPoints().getTopRightShield(), 
-     			      	  owner_vehicle->GetPoints().getTopLeftShield(), 
-     			      	  owner_vehicle->GetPoints().getPosZ());
+    	drawFlatQuadPerVertexIn2D(textureOb,
+    				  points.getBottomLeft(), 
+     			     	  points.getBottomRight(), 
+     			      	  points.getTopRight(), 
+     			      	  points.getTopLeft(), 
+     			      	  points.getPosZ());
 }
 
 
-
-
-    //def _renderDynamicFramesLoopRot(self):
-    //    if self.alpha > self.alpha_init:
-    //       self.alpha -= self.d_alpha
-    //    else:
-    //       self.alpha = self.alpha_init
-
-    //    glColor4f(1.0, 1.0, 1.0, self.alpha)
-
-
-    //    self.updateAnimationFrameLoop()
-    //    glBindTexture(GL_TEXTURE_2D, self.texture_ID[self._tex_frame]) 
-    //    drawQuadPer2DVertex(self.ob.points.bottomFarLeft, self.ob.points.bottomFarRight, self.ob.points.topFarRight, self.ob.points.topFarLeft, -2)

@@ -20,25 +20,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef SHIELD_H
 #define SHIELD_H
 
-class ProtectorEquipment;
-class TextureOb;
-
-class ShieldEffect
+class ShieldEffect : public BaseGameEntity
 {  
      	public:
-        	ShieldEffect(Vehicle*, TextureOb*);
+        	ShieldEffect();
         	~ShieldEffect();
 
-		void setAlpha(float);
+		void SetAlpha(float alpha) { color.a = alpha; };
 		
-        	//void renderDynamicFramesLoopRot();
-        	void update();
+        	void Update();
         	void Render() const;
+                
+                virtual void SaveData(boost::property_tree::ptree&) const {};
+		virtual void LoadData(boost::property_tree::ptree&) {};
+		virtual void ResolveData() {};
         	
-        private:
-                Vehicle* owner_vehicle;        
-        	TextureOb* texOb;
-        
+        private:       
         	Color4f color;
         	float alpha_start;
         	float d_alpha;

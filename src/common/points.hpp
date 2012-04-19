@@ -59,11 +59,6 @@ class Points
                 const vec2f& getTopRight()    const { return topRight; };    
                 const vec2f& getTopLeft()     const { return topLeft; };
                 
-                const vec2f& getBottomLeftShield()  const { return bottomLeftShield; };
-                const vec2f& getBottomRightShield() const { return bottomRightShield; };
-                const vec2f& getTopRightShield()    const { return topRightShield; };
-                const vec2f& getTopLeftShield()     const { return topLeftShield; };
-                
                 vec2f* getpMidLeft()    { return &midLeft; };	     // used in drive jet
                 vec2f* getpMidFarLeft() { return &midFarLeft; };
                 
@@ -96,9 +91,6 @@ class Points
 
                 void initWeapon5CenterPoint(float, float);
                 void addWeapon5CenterPoint();
-
-                void initShieldQuadPoints();
-                void addShieldQuadPoints();
 
                 void initMidLeftPoint();
                 void addMidLeftPoint();
@@ -139,13 +131,6 @@ class Points
                 vec2f bottomRightShield_origin;
                 vec2f topRightShield_origin;
                 vec2f topLeftShield_origin;
-                
-                // Actual shield quad
-                vec2f bottomLeftShield;
-                vec2f bottomRightShield;
-                vec2f topRightShield;
-                vec2f topLeftShield;
-                
                       
                 // jet origin
                 vec2f midLeft_origin;
