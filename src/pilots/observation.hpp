@@ -20,15 +20,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef OBSERVATION_H
 #define OBSERVATION_H
 
-class MineralObservationData
-{
-	public:
-		Mineral* mineral;
-		float dist;
-		
-		MineralObservationData(Mineral*, float);
-};
-
 class ContainerObservationData
 {
 	public:
@@ -73,8 +64,7 @@ class Observation
    	public:
       		Observation(Npc*);
      		~Observation();
-
-     		std::vector<MineralObservationData>   visible_MINERAL_vec;                
+            
      		std::vector<ContainerObservationData> visible_CONTAINER_vec;
      		
  		void observeAll_inSpace_inStatic();

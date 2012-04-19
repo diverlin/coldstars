@@ -655,31 +655,31 @@ void Vehicle::GrappleMicroProgramm()
        		{
        			switch(grapple_slot->GetGrappleEquipment()->target_vec[i]->GetTypeId())
        			{
-       				case ENTITY::MINERAL_ID:
-       				{
-       					ItemSlot* _slot;
-                                        Mineral* _mineral = (Mineral*)grapple_slot->GetGrappleEquipment()->target_vec[i];
+       				//case ENTITY::MINERAL_ID:
+       				//{
+       					//ItemSlot* _slot;
+                                        //Mineral* _mineral = (Mineral*)grapple_slot->GetGrappleEquipment()->target_vec[i];
                                         
-       					_slot = GetCargoSlotWithGoods(ENTITY::MINERAL_ID);
-       					if (_slot != NULL)
-       					{
-       						_slot->GetGoodsPack()->Increase(_mineral->GetMass());
-       						_mineral->SetPlaceTypeId(NONE_ID);
-       					}
-       					else
-       					{
-       						GoodsPack* _goodsPack = GetNewGoodsPack(ENTITY::MINERAL_ID);
-       						_goodsPack->Increase(_mineral->GetMass());
-       						_slot = GetEmptyOtsecSlot();
-       						if (_slot != NULL)
-       						{
-       							_slot->InsertItem(_goodsPack);
-       							_mineral->SetPlaceTypeId(NONE_ID);
-       						}
-       					}
-       					grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(_mineral);
-       					break;			
-       				}
+       					//_slot = GetCargoSlotWithGoods(ENTITY::MINERAL_ID);
+       					//if (_slot != NULL)
+       					//{
+       						//_slot->GetGoodsPack()->Increase(_mineral->GetMass());
+       						//_mineral->SetPlaceTypeId(NONE_ID);
+       					//}
+       					//else
+       					//{
+       						//GoodsPack* _goodsPack = GetNewGoodsPack(ENTITY::MINERAL_ID);
+       						//_goodsPack->Increase(_mineral->GetMass());
+       						//_slot = GetEmptyOtsecSlot();
+       						//if (_slot != NULL)
+       						//{
+       							//_slot->InsertItem(_goodsPack);
+       							//_mineral->SetPlaceTypeId(NONE_ID);
+       						//}
+       					//}
+       					//grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(_mineral);
+       					//break;			
+       				//}
         			
       				case ENTITY::CONTAINER_ID:
        				{

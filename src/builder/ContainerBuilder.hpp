@@ -17,36 +17,32 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef BLACKHOLE_H
-#define BLACKHOLE_H
+#ifndef CONTAINERBUILDER_H
+#define CONTAINERBUILDER_H
 
+Container* GetNewContainer(TextureOb* textureOb, BaseItem* item, int id = NONE_ID);
 
-class BlackHole : public BaseGameEntity
-{
-    	public:  
-        	BlackHole(int);
-        	~BlackHole();
+//class ContainerBuilder
+//{
+	//public:
+		//static ContainerBuilder& Instance();
+		//~ContainerBuilder();
 
-		void SetEffect(BlackHoleEffect*);
-		void UpdateInSpace(int, bool);
-		
-        	void RenderInfoInSpace(vec2f);
-        	
-        	void Render2D() const;
-        	
-        	virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-        private:
-        	BlackHoleEffect* effect;
-        	
-        	InfoTable info;
-        	void UpdateInfo();    
-};
-
-BlackHole* GetNewBlackHole();
-
+        	//void CreateNewContainer(int id = NONE_ID); 
+                //void CreateNewInternals();
+                //Container* GetContainer() const { return container; };
+                       	 		                
+        //private:
+                //Container* container;
+                
+		//ContainerBuilder() {};
+		//ContainerBuilder(const ContainerBuilder&) {};
+		//ContainerBuilder& operator=(const ContainerBuilder&) {};
+//}; 
 
 #endif 
+    
+
+        
+
 

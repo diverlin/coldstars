@@ -16,12 +16,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-MineralObservationData :: MineralObservationData(Mineral* _mineral, float _dist)
-{
-	mineral = _mineral;
-	dist = _dist;
-}		
-
 ContainerObservationData :: ContainerObservationData(Container* _container, float _dist)
 {
 	container = _container;
@@ -140,20 +134,20 @@ void Observation :: findVisibleAsteroids_inSpace_inStatic()
 
 void Observation :: findVisibleMinerals_inSpace_inStatic()
 {
-	see.MINERAL   = false;
-        visible_MINERAL_vec.clear();
+	//see.MINERAL   = false;
+        //visible_MINERAL_vec.clear();
 
-        for (unsigned int mi = 0; mi < npc_owner->GetStarSystem()->MINERAL_vec.size(); mi++)
-        {    
-         	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->MINERAL_vec[mi]->GetPoints().getCenter());
-               	if (dist < npc_owner->GetVehicle()->propetries.radius)
-              	{              		
-               		visible_MINERAL_vec.push_back(MineralObservationData(npc_owner->GetStarSystem()->MINERAL_vec[mi], dist));
-              		see.MINERAL = true;
-               	} 
-        }
+        //for (unsigned int mi = 0; mi < npc_owner->GetStarSystem()->MINERAL_vec.size(); mi++)
+        //{    
+         	//float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->MINERAL_vec[mi]->GetPoints().getCenter());
+               	//if (dist < npc_owner->GetVehicle()->propetries.radius)
+              	//{              		
+               		//visible_MINERAL_vec.push_back(MineralObservationData(npc_owner->GetStarSystem()->MINERAL_vec[mi], dist));
+              		//see.MINERAL = true;
+               	//} 
+        //}
         
-        sort(&visible_MINERAL_vec);
+        //sort(&visible_MINERAL_vec);
 }
 
 template <typename OBSERVED_DATA_TYPE>
@@ -283,18 +277,18 @@ void Observation ::findVisibleNpcs_inSpace_inStatic()
 
 void Observation :: printVisibleMineralInformation() const
 {
-	printf("visible_MINERAL_vec for npc_id = %i\n", npc_owner->GetId());
-	for (unsigned int i = 0; i < visible_MINERAL_vec.size(); i++)
-        {                   
-        	printf("%i ", visible_MINERAL_vec[i].mineral->GetId());                                              
-	}
-	printf("\n");
+	//printf("visible_MINERAL_vec for npc_id = %i\n", npc_owner->GetId());
+	//for (unsigned int i = 0; i < visible_MINERAL_vec.size(); i++)
+        //{                   
+        	//printf("%i ", visible_MINERAL_vec[i].mineral->GetId());                                              
+	//}
+	//printf("\n");
 	
-	for (unsigned int i = 0; i < visible_MINERAL_vec.size(); i++)
-        {                   
-        	printf("%f ", visible_MINERAL_vec[i].dist);                                              
-	}
-	printf("\n");
+	//for (unsigned int i = 0; i < visible_MINERAL_vec.size(); i++)
+        //{                   
+        	//printf("%f ", visible_MINERAL_vec[i].dist);                                              
+	//}
+	//printf("\n");
 }
                	
 

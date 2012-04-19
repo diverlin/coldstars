@@ -54,7 +54,7 @@ void StarSystemBuilder::CreateNewInternals()
         
         for (int i = 0; i < 10; i++)
         {
-        	BlackHole* bh = getNewBlackHole();
+        	BlackHole* bh = GetNewBlackHole();
         	starsystem->Add(bh, vec2f((float)getRandInt(0, 3000), (float)getRandInt(0, 3000)));
         }
 

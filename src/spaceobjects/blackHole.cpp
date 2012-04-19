@@ -18,20 +18,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-BlackHole :: BlackHole(int id)
+BlackHole::BlackHole(int id)
 {        
 	data_id.id = id;
 	data_id.type_id = ENTITY::BLACKHOLE_ID;
 	
     	mass = getRandInt(1000, 4000);
-    	keep_moving = false;
 }
 
-BlackHole :: ~BlackHole() {}
+BlackHole::~BlackHole() {}
    
-void BlackHole :: setEffect(BlackHoleEffect* effect) { this->effect = effect; } 
+void BlackHole::SetEffect(BlackHoleEffect* effect) { this->effect = effect; } 
 		
-void BlackHole :: update_inSpace(int time, bool show_effect)
+void BlackHole::UpdateInSpace(int time, bool show_effect)
 {
 	//updateRotation();
 	//effect->update();
@@ -39,7 +38,7 @@ void BlackHole :: update_inSpace(int time, bool show_effect)
 	{}
 }
 
-void BlackHole :: UpdateInfo()
+void BlackHole::UpdateInfo()
 {
 	info.clear();
 
@@ -50,15 +49,13 @@ void BlackHole :: UpdateInfo()
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 }
             
-
-void BlackHole :: renderInfo_inSpace(vec2f scroll_coords)
+void BlackHole::RenderInfoInSpace(vec2f scroll_coords)
 {
 	UpdateInfo();
      	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);    
 }
 
-
-void BlackHole :: Render() const
+void BlackHole::Render2D() const
 {
 	//effect->Render();
 }
@@ -81,7 +78,7 @@ void BlackHole::ResolveData()
 
 }
 
-BlackHole* getNewBlackHole()
+BlackHole* GetNewBlackHole()
 {
         int id         = g_ID_GENERATOR.getNextId();
         
@@ -98,7 +95,8 @@ BlackHole* getNewBlackHole()
 	blackhole->SetLifeData(data_life);
 	blackhole->SetTextureOb(texOb);
 	
-	blackhole->postCreateInit();
+   	//blackhole->CalcCollisionrRadius();
+	blackhole->GetPoints().CreateCenter();
 	
 	return blackhole;
 }

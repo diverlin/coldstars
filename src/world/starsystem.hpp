@@ -69,7 +69,6 @@ class StarSystem : public BaseGameEntity
 		void Add(Star*);
 		void Add(Planet*, BaseGameEntity*);
 		void Add(Asteroid*);
-		void Add(Mineral*, vec2f);
 		void Add(Container*, vec2f);
 		void Add(RocketBullet*);
 		void Add(BlackHole*, vec2f);
@@ -85,7 +84,6 @@ class StarSystem : public BaseGameEntity
 		void Add(VerticalFlowText*);
 		//
 
-		void AddToRemoveFromOuterSpaceQueue(Mineral*);
 		void AddToRemoveFromOuterSpaceQueue(Container*);
 		void AddToRemoveFromOuterSpaceQueue(Vehicle*);
 				
@@ -132,7 +130,6 @@ class StarSystem : public BaseGameEntity
 		std::vector<Star*>         STAR_vec;
 		std::vector<Planet*>       PLANET_vec;
 		std::vector<Asteroid*>     ASTEROID_vec;
-		std::vector<Mineral*>      MINERAL_vec;
 		std::vector<Container*>    CONTAINER_vec;
 		std::vector<RocketBullet*> ROCKET_vec;
 		std::vector<BlackHole*>    BLACKHOLE_vec;
@@ -157,7 +154,6 @@ class StarSystem : public BaseGameEntity
     		
     		// remove queue 	
     		std::vector<Container*>    remove_CONTAINER_queue;
-    		std::vector<Mineral*>      remove_MINERAL_queue;
     		std::vector<Ship*>         remove_SHIP_queue;
     		std::vector<SpaceStation*> remove_SPACESTATION_queue;
     		std::vector<Satellite*>    remove_SATELLITE_queue;    		
