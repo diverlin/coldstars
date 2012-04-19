@@ -25,20 +25,19 @@ ItemSlot::ItemSlot(int id)
         Lazer weapon item cannot be inserted to drive slot and so on).
 	*/
 
-	data_id.id = id;
+	data_id.id         = id;
         data_id.type_id    = SLOT::SLOT_ID;
 	data_id.subtype_id = NONE_ID;
      
         rect = Rect();         
 
-        is_EQUIPED       = false;
-        is_FLASHING      = false;
+        is_EQUIPED = false;
 
-        owner_vehicle  = NULL; 
+        owner_vehicle = NULL; 
         
         turrel = NULL;                
         item   = NULL;
-        texOb = NULL;
+        texOb  = NULL;
 }
 
 ItemSlot::~ItemSlot()
@@ -55,19 +54,16 @@ bool ItemSlot::InsertItem(BaseItem* item)
 {
 	if (item != NULL)
 	{
+                this->item = item;
+                is_EQUIPED = true; 
+                        
 		if (data_id.subtype_id == SLOT::CARGO_ID) 
-		{
-                	this->item = item;
-                	is_EQUIPED = true; 
-                
+		{                
 			return true;
    		}
    	
 		if (data_id.subtype_id == item->GetFunctionalSlotSubTypeId())
-		{
-		        this->item = item;
-                	is_EQUIPED = true; 
-                
+		{              
 			item->BindSlot(this);
 			item->UpdateOwnerAbilities();
 		
@@ -275,20 +271,51 @@ bool ItemSlot::CheckDistance(BaseGameEntity* _target) const
 }
 
 /*virtual*/
-void ItemSlot::SaveData(boost::property_tree::ptree&) const
+void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-
+	const std::string root = "item_slot." + int2str(GetId())+".";
+	SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueItemSlot(save_ptree, root);
 }
 
 /*virtual*/		
-void ItemSlot::LoadData(boost::property_tree::ptree&)
+void ItemSlot::LoadData(boost::property_tree::ptree& load_ptree)
 {
-
+	LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueItemSlot(load_ptree);
 }
 	
 /*virtual*/	
 void ItemSlot::ResolveData()
 {
-
+	ResolveDataUniqueBase();
+	ResolveDataUniqueItemSlot();
 }
-		
+
+void ItemSlot::SaveDataUniqueItemSlot(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+        if (GetEquipedStatus()) save_ptree.put(root+"unresolved.item_id", item->GetId()); 
+        else                    save_ptree.put(root+"unresolved.item_id", NONE_ID); 
+        save_ptree.put(root+"rect.BottomLeft.x", rect.getBottomLeft().x);
+        save_ptree.put(root+"rect.BottomLeft.y", rect.getBottomLeft().y); 
+        save_ptree.put(root+"rect.width", rect.getWidth());
+        save_ptree.put(root+"rect.height", rect.getHeight()); 
+}
+
+void ItemSlot::LoadDataUniqueItemSlot(const boost::property_tree::ptree& load_ptree)
+{
+        data_unresolved_ItemSlot.item_id = load_ptree.get<int>("unresolved.item_id");
+        int rect_blx = load_ptree.get<int>("rect.BottomLeft.x");
+        int rect_bly = load_ptree.get<int>("rect.BottomLeft.y");
+        int rect_w   = load_ptree.get<int>("rect.width"); 
+        int rect_h   = load_ptree.get<int>("rect.height"); 
+        SetRect(rect_blx, rect_bly, rect_w, rect_h);           
+}
+
+void ItemSlot::ResolveDataUniqueItemSlot()
+{
+        if (data_unresolved_ItemSlot.item_id != NONE_ID)
+        {
+                InsertItem((BaseItem*)EntityManager::Instance().GetEntityById(data_unresolved_ItemSlot.item_id));
+        }
+}

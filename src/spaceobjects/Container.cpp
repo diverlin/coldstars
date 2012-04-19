@@ -26,9 +26,7 @@ Container::Container(int id)
 	
     	mass = 1;
 
-	ItemSlotBuilder::Instance().CreateNewItemSlot();
-	ItemSlotBuilder::Instance().CreateNewInternals(SLOT::CARGO_ID);
-   	item_slot = ItemSlotBuilder::Instance().GetItemSlot();
+   	item_slot = GetNewItemSlot(SLOT::CARGO_ID);
     	
     	velocity = getRandInt(40, 42) / 100.0;
 }

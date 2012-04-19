@@ -1002,7 +1002,7 @@ void StarSystem::ResolveDataUniqueStarSystem()
 
 void StarSystem::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	std::string root = "starsystem." + int2str(starsystem->GetId())+".";
+	const std::string root = "starsystem." + int2str(starsystem->GetId())+".";
 	SaveDataUniqueBase(save_ptree, root);
 	SaveDataUniqueBaseGameEntity(save_ptree, root);
 	SaveDataUniqueStarSystem(save_ptree, root);

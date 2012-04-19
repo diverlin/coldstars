@@ -45,7 +45,7 @@ class Rect
       	private:
       		vec2f bottomLeft;    
       		vec2f center;  
-      		int w, h;	
+      		int w, h;
 
       		void updateCenter();
 };

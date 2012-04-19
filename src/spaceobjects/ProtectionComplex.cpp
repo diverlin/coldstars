@@ -26,17 +26,18 @@ ProtectionComplex::ProtectionComplex(Vehicle* vehicle)
  
      	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID); 
 
- 	protector_slot.SetSubTypeId(SLOT::PROTECTOR_ID); 
- 	protector_slot.SetTextureOb(texOb_slot);
-	protector_slot.SetOwnerVehicle(vehicle);
-	protector_slot.SetRect(vehicle->GetGuiRect().getCenter().x - 3*GUI::SLOT::WIDTH_FOR_SHIP, 
-			       vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
-			       GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
+ 	protector_slot = GetNewItemSlot(SLOT::PROTECTOR_ID); 
+
+	protector_slot->SetRect(owner_vehicle->GetGuiRect().getCenter().x-3*GUI::SLOT::WIDTH_FOR_SHIP, 
+			        owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
+			        GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
 				    
-    	vehicle->Add(&protector_slot); 
+    	vehicle->Add(protector_slot); 
 }
 
-ProtectionComplex::~ProtectionComplex() { delete shield_effect; }
-   		      		
-ItemSlot& ProtectionComplex::GetProtectorSlot() { return protector_slot; }
-ShieldEffect* ProtectionComplex::GetShieldEffect() const { return shield_effect; }  
+ProtectionComplex::~ProtectionComplex() 
+{ 
+        delete protector_slot;
+        delete shield_effect; 
+}
+

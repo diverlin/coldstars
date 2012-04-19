@@ -53,9 +53,8 @@ void StoreBuilder::CreateNewInternals()
                 int clm_act = 1;
                 while (clm_act <= clm)
                 {
-                        ItemSlot* slot = new ItemSlot();
-                        slot->SetSubTypeId(SLOT::CARGO_ID);
-                        slot->SetTextureOb(texOb_slot);   
+                        ItemSlot* slot = GetNewItemSlot(SLOT::CARGO_ID);
+ 
                         slot->SetRect(x0 + clm_act * 1.1 * GUI::SLOT::WIDTH_FOR_STORE, 
                         	      y0 + row_act * 1.1 * GUI::SLOT::HEIGHT_FOR_STORE,
                         	      GUI::SLOT::WIDTH_FOR_STORE,

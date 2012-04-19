@@ -81,15 +81,17 @@ void Vehicle::Add(ItemSlot* slot)
 	
 	switch(slot->GetSubTypeId())
 	{
-		case SLOT::RADAR_ID:  { radar_slot = slot; break; }
-		case SLOT::SCANER_ID: { scaner_slot = slot; break; }	
+		case SLOT::RADAR_ID:  { radar_slot  = slot; break; }
+		case SLOT::SCANER_ID: { scaner_slot = slot; break; }
 		
 		case SLOT::ENERGIZER_ID: { energizer_slot = slot; break; }
-		case SLOT::GRAPPLE_ID:   { grapple_slot = slot; break; }
-		case SLOT::DROID_ID:     { droid_slot = slot; break; }
-		case SLOT::FREEZER_ID:   { freezer_slot = slot; break; }
-		case SLOT::GATE_ID:      { gate_slot = slot; break; }	
+		case SLOT::GRAPPLE_ID:   { grapple_slot   = slot; break; }
+		case SLOT::DROID_ID:     { droid_slot     = slot; break; }
+		case SLOT::FREEZER_ID:   { freezer_slot   = slot; break; }
+		case SLOT::GATE_ID:      { gate_slot      = slot; break; }
 	}
+        
+        slot->SetOwnerVehicle(this); 
 }
 
 bool Vehicle::AddItemToOtsec(BaseItem* item)
@@ -326,11 +328,11 @@ void Vehicle::UpdateDriveAbility()
      	propetries.speed = 0;
      	ableTo.DRIVE = false;
 
-     	if (drive_complex->GetDriveSlot().GetEquipedStatus() == true) 
+     	if (drive_complex->GetDriveSlot()->GetEquipedStatus() == true) 
      	{
-        	if (drive_complex->GetDriveSlot().GetDriveEquipment()->GetCondition() > 0)  
+        	if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetCondition() > 0)  
         	{
-           		float val = (drive_complex->GetDriveSlot().GetDriveEquipment()->GetSpeed() - mass/70);
+           		float val = (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetSpeed() - mass/70);
            		if (val > 0)
            		{ 
               			propetries.speed = val;
@@ -375,15 +377,15 @@ void Vehicle::UpdateJumpAbility()
 	propetries.hyper = 0;
      	ableTo.HJUMP = false;
 
-     	if (drive_complex->GetDriveSlot().GetEquipedStatus() == true)
-        	if (drive_complex->GetDriveSlot().GetDriveEquipment()->GetCondition() > 0)
-           		if (drive_complex->GetBakSlot().GetEquipedStatus() == true)
-              			if (drive_complex->GetBakSlot().GetBakEquipment()->GetCondition() > 0)
+     	if (drive_complex->GetDriveSlot()->GetEquipedStatus() == true)
+        	if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetCondition() > 0)
+           		if (drive_complex->GetBakSlot()->GetEquipedStatus() == true)
+              			if (drive_complex->GetBakSlot()->GetBakEquipment()->GetCondition() > 0)
               			{
-                 			if (drive_complex->GetDriveSlot().GetDriveEquipment()->GetHyper() > drive_complex->GetBakSlot().GetBakEquipment()->GetFuel())
-                    				propetries.hyper = drive_complex->GetDriveSlot().GetDriveEquipment()->GetHyper();
+                 			if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetHyper() > drive_complex->GetBakSlot()->GetBakEquipment()->GetFuel())
+                    				propetries.hyper = drive_complex->GetDriveSlot()->GetDriveEquipment()->GetHyper();
                  			else
-                    				propetries.hyper = drive_complex->GetBakSlot().GetBakEquipment()->GetFuel();
+                    				propetries.hyper = drive_complex->GetBakSlot()->GetBakEquipment()->GetFuel();
 
                  			ableTo.HJUMP = true;
               			}    
@@ -413,11 +415,11 @@ void Vehicle::UpdateProtectionAbility()
         ableTo.PROTECT = false;
 
 
-     	if (protection_complex->GetProtectorSlot().GetEquipedStatus() == true)
+     	if (protection_complex->GetProtectorSlot()->GetEquipedStatus() == true)
      	{
-        	if (protection_complex->GetProtectorSlot().GetProtectorEquipment()->GetCondition() > 0)
+        	if (protection_complex->GetProtectorSlot()->GetProtectorEquipment()->GetCondition() > 0)
         	{
-           		propetries.protection += protection_complex->GetProtectorSlot().GetProtectorEquipment()->GetProtection();
+           		propetries.protection += protection_complex->GetProtectorSlot()->GetProtectorEquipment()->GetProtection();
            		ableTo.PROTECT = true;
         	}       
      	}   
@@ -508,9 +510,9 @@ void Vehicle::SetMaxArmor()
 
 void Vehicle::SetMaxFuel()
 {
-     	if (drive_complex->GetBakSlot().GetEquipedStatus() == true)
+     	if (drive_complex->GetBakSlot()->GetEquipedStatus() == true)
      	{
-        	drive_complex->GetBakSlot().GetBakEquipment()->SetFuel(drive_complex->GetBakSlot().GetBakEquipment()->GetFuelMax());
+        	drive_complex->GetBakSlot()->GetBakEquipment()->SetFuel(drive_complex->GetBakSlot()->GetBakEquipment()->GetFuelMax());
         }
 }
 
@@ -519,7 +521,7 @@ void Vehicle::SetMaxFuel()
 std::string Vehicle::returnProtectionStr()
 {
     	if (ableTo.PROTECT == true)
-       		return int2str(protection_complex->GetProtectorSlot().GetProtectorEquipment()->GetProtection()) + '+' + int2str(data_korpus.protection);
+       		return int2str(protection_complex->GetProtectorSlot()->GetProtectorEquipment()->GetProtection()) + '+' + int2str(data_korpus.protection);
     	else
        		return int2str(data_korpus.protection);
 }

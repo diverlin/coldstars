@@ -27,11 +27,11 @@ class WeaponComplex
       		WeaponComplex(Vehicle*);
       		~WeaponComplex();
       		
-      		ItemSlot& GetWeaponSlot1();
-      		ItemSlot& GetWeaponSlot2();
-      		ItemSlot& GetWeaponSlot3();
-      		ItemSlot& GetWeaponSlot4();
-      		ItemSlot& GetWeaponSlot5();
+                ItemSlot* GetWeaponSlot1() { return weapon_slot1; };
+                ItemSlot* GetWeaponSlot2() { return weapon_slot2; };
+                ItemSlot* GetWeaponSlot3() { return weapon_slot3; };
+                ItemSlot* GetWeaponSlot4() { return weapon_slot4; };
+                ItemSlot* GetWeaponSlot5() { return weapon_slot5; };
         	
       		void PostCreateInit(int, bool);
 
@@ -63,11 +63,11 @@ class WeaponComplex
         	std::vector<ItemSlot*> slot_weapon_equiped_vec;
         	std::vector<ItemSlot*> slot_weapon_reloaded_vec;
         	
-        	ItemSlot weapon_slot1;
-        	ItemSlot weapon_slot2;
-        	ItemSlot weapon_slot3;
-        	ItemSlot weapon_slot4;
-        	ItemSlot weapon_slot5;
+        	ItemSlot* weapon_slot1;
+        	ItemSlot* weapon_slot2;
+        	ItemSlot* weapon_slot3;
+        	ItemSlot* weapon_slot4;
+        	ItemSlot* weapon_slot5;
         	
         	Turrel* turrel1;
         	Turrel* turrel2;

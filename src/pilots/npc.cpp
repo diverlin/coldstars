@@ -204,9 +204,9 @@ bool Npc::CheckPossibilityToScan(Vehicle* vehicle)
  
      	if (this->vehicle->ableTo.SCAN == true) 
      	{
-        	if (vehicle->GetProtectionComplex()->GetProtectorSlot().GetEquipedStatus() == true)
+        	if (vehicle->GetProtectionComplex()->GetProtectorSlot()->GetEquipedStatus() == true)
         	{
-           		if (this->vehicle->GetScanerSlot()->GetScanerEquipment()->GetScan() >= vehicle->GetProtectionComplex()->GetProtectorSlot().GetProtectorEquipment()->GetProtection()) 
+           		if (this->vehicle->GetScanerSlot()->GetScanerEquipment()->GetScan() >= vehicle->GetProtectionComplex()->GetProtectorSlot()->GetProtectorEquipment()->GetProtection()) 
               		{
               			return true;
               		}

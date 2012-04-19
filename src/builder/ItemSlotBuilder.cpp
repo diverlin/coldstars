@@ -18,30 +18,47 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "ItemSlotBuilder.hpp"
 
-ItemSlotBuilder& ItemSlotBuilder::Instance()
+ItemSlot* GetNewItemSlot(int subtype_id, int id)
 {
-	static ItemSlotBuilder instance;
-	return instance;
-}
-
-ItemSlotBuilder::~ItemSlotBuilder()
-{}
-
-void ItemSlotBuilder::CreateNewItemSlot(int id)
-{
-	if (id == NONE_ID)
+       	if (id == NONE_ID)
 	{
 		id = g_ID_GENERATOR.getNextId();
-	}
-        item_slot = new ItemSlot(id);
+	} 
+        ItemSlot* item_slot = new ItemSlot(id);
         EntityManager::Instance().RegisterEntity(item_slot);
-} 
-        	
-void ItemSlotBuilder::CreateNewInternals(int subtype_id)
-{
-	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID);
+      
+        TextureOb* texOb_slot = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID);
 	item_slot->SetSubTypeId(subtype_id);
     	item_slot->SetTextureOb(texOb_slot);
+        
+        return item_slot;
 }
+
+
+//ItemSlotBuilder& ItemSlotBuilder::Instance()
+//{
+	//static ItemSlotBuilder instance;
+	//return instance;
+//}
+
+//ItemSlotBuilder::~ItemSlotBuilder()
+//{}
+
+//void ItemSlotBuilder::CreateNewItemSlot(int id)
+//{
+	//if (id == NONE_ID)
+	//{
+		//id = g_ID_GENERATOR.getNextId();
+	//}
+        //item_slot = new ItemSlot(id);
+        //EntityManager::Instance().RegisterEntity(item_slot);
+//} 
+        	
+//void ItemSlotBuilder::CreateNewInternals(int subtype_id)
+//{
+	//TextureOb* texOb_slot = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID);
+	//item_slot->SetSubTypeId(subtype_id);
+    	//item_slot->SetTextureOb(texOb_slot);
+//}
 
   	

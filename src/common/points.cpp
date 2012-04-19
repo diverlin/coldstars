@@ -26,43 +26,7 @@ Points :: Points()
 }
 
 Points :: ~Points()
-{}
-  
-void Points :: setPosZ(float _pos_z) { pos_z = _pos_z; }
-    
-int Points :: getWidth()  const { return w; }
-int Points :: getHeight() const { return h; }
-                
-float Points :: getAngleDegree() const { return angle_inD; }   	
-float* Points :: getpAngleDegree() { return &angle_inD; }
-        
-float Points :: getPosZ() const { return pos_z; }
-                	
-const vec2f& Points :: getCenter()      const { return center; }     
-vec3f Points :: getCenter3f()    const { return vec3f(center.x, center.y, pos_z); } 
-
-vec2f* Points :: getpCenter()     { return &center; } 
-      
-const vec2f& Points :: getBottomLeft()  const { return bottomLeft; }
-const vec2f& Points :: getBottomRight() const { return bottomRight; }
-const vec2f& Points :: getTopRight()    const { return topRight; }    
-const vec2f& Points :: getTopLeft()     const { return topLeft; }
-    
-    
-const vec2f& Points :: getBottomLeftShield()  const { return bottomLeftShield; }
-const vec2f& Points :: getBottomRightShield() const { return bottomRightShield; }
-const vec2f& Points :: getTopRightShield()    const { return topRightShield; }
-const vec2f& Points :: getTopLeftShield()     const { return topLeftShield; }
-                
-vec2f* Points :: getpMidLeft()    { return &midLeft; }
-vec2f* Points :: getpMidFarLeft() { return &midFarLeft; }
-          
-vec2f* Points :: getpWeapon1Center() { return &weapon_1_center; }
-vec2f* Points :: getpWeapon2Center() { return &weapon_2_center; }
-vec2f* Points :: getpWeapon3Center() { return &weapon_3_center; }
-vec2f* Points :: getpWeapon4Center() { return &weapon_4_center; }
-vec2f* Points :: getpWeapon5Center() { return &weapon_5_center; }
-                   
+{}              
                 
 
 void Points :: initCenterPoint()

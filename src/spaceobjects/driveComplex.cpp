@@ -27,24 +27,22 @@ DriveComplex :: DriveComplex(Vehicle* owner_vehicle)
 	
 	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID); 
 		
-	drive_slot.SetSubTypeId(SLOT::DRIVE_ID); 
-	drive_slot.SetTextureOb(texOb_slot);
-	drive_slot.SetOwnerVehicle(owner_vehicle);
-	drive_slot.SetRect(  owner_vehicle->GetGuiRect().getCenter().x - 5*GUI::SLOT::WIDTH_FOR_SHIP, 
-			      owner_vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
-			      GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
+        drive_slot = GetNewItemSlot(SLOT::DRIVE_ID); 
+
+	drive_slot->SetRect(owner_vehicle->GetGuiRect().getCenter().x-5*GUI::SLOT::WIDTH_FOR_SHIP, 
+			    owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
+                            GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
 				  
-	owner_vehicle->Add(&drive_slot);
+	owner_vehicle->Add(drive_slot);
 	
 	
-	bak_slot.SetSubTypeId(SLOT::BAK_ID);
-	bak_slot.SetTextureOb(texOb_slot);
-	bak_slot.SetOwnerVehicle(owner_vehicle);	    
-	bak_slot.SetRect(  owner_vehicle->GetGuiRect().getCenter().x - 5*GUI::SLOT::WIDTH_FOR_SHIP, 
-			    owner_vehicle->GetGuiRect().getCenter().y - GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
-			    GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
+        bak_slot = GetNewItemSlot(SLOT::BAK_ID); 
+ 
+	bak_slot->SetRect(owner_vehicle->GetGuiRect().getCenter().x-5*GUI::SLOT::WIDTH_FOR_SHIP, 
+			  owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
+			  GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
 				    
-	owner_vehicle->Add(&bak_slot);
+	owner_vehicle->Add(bak_slot);
 	
 	drive_trail = createTrailEffect(owner_vehicle->GetTextureOb()->size_id, owner_vehicle->GetPoints().getpMidLeft(), owner_vehicle->GetPoints().getpMidFarLeft());
 	      	
@@ -54,14 +52,10 @@ DriveComplex :: DriveComplex(Vehicle* owner_vehicle)
 
 DriveComplex :: ~DriveComplex()
 {      
+        delete drive_slot;
+        delete bak_slot;
         delete drive_trail;
 }
-  
-  
-ItemSlot& DriveComplex::GetDriveSlot()      { return drive_slot; }
-ItemSlot& DriveComplex::GetBakSlot()        { return bak_slot; }
-
-BaseGameEntity* DriveComplex :: getTarget() const { return target; }  
 
 void  DriveComplex :: resetTarget()
 {

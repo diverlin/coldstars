@@ -30,10 +30,10 @@ class DriveComplex
       		void setTarget(BaseGameEntity*, int);       
       		void setStaticTargetCoords(vec2f);
       		
-      		ItemSlot& GetDriveSlot();
-        	ItemSlot& GetBakSlot();
+      		ItemSlot* GetDriveSlot() const { return drive_slot; };
+        	ItemSlot* GetBakSlot()   const { return bak_slot; };
                   
-                BaseGameEntity* getTarget() const;                
+                BaseGameEntity* getTarget() const { return target; };                
              
       		bool checkEchievement();
       		bool getDockingPermission();               
@@ -47,8 +47,8 @@ class DriveComplex
                 void renderTrail();
 
       	private:
-                ItemSlot drive_slot;
-        	ItemSlot bak_slot;
+                ItemSlot* drive_slot;
+        	ItemSlot* bak_slot;
         	
       		Vehicle* owner_vehicle;
       		BaseGameEntity* target;
