@@ -96,7 +96,6 @@ BlackHole* GetNewBlackHole()
 	blackhole->SetTextureOb(texOb);
 	
    	//blackhole->CalcCollisionrRadius();
-	blackhole->GetPoints().CreateCenter();
 	
 	return blackhole;
 }

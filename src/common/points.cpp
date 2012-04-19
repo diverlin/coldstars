@@ -20,7 +20,9 @@ Points :: Points()
 {
         is_updated = false;  
         angle_inD = 0;
-        pos_z = -500.0;           
+        pos_z = -500.0; 
+        
+        CreateCenter();          
 }
 
 Points :: ~Points()

@@ -105,9 +105,7 @@ class Points
                 void initMidFarLeftPoint();
                 void addMidFarLeftPoint();
 
-                void update();
-                
-                void CreateCenter();
+                void update();                
                 
         private:
                 bool is_updated;
@@ -180,6 +178,8 @@ class Points
                 vec2f weapon_5_origin_center;      
                 vec2f weapon_5_center;    
                 ////////////////////////////////////
+                
+                void CreateCenter();
                  
 };
 

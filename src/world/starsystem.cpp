@@ -592,8 +592,6 @@ void StarSystem :: updateEntities_s(int time, bool show_effect)
         {
                 BLACKHOLE_vec[i]->UpdateInSpace(time, show_effect); 
      	}
-     	     	     	
-     	
      	
         for (unsigned int ci = 0; ci < CONTAINER_vec.size(); ci++)
         {

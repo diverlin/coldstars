@@ -45,7 +45,7 @@ void Container::UpdateInfo()
 void Container::RenderInfoInSpace(vec2f scroll_coords)
 {
 	UpdateInfo();
-     	item_slot->GetRect().setCenter(points.getCenter());	
+     	item_slot->GetRect().setCenter(points.getCenter());
      	item_slot->RenderItemInfo(scroll_coords.x, scroll_coords.y);
 }
  
