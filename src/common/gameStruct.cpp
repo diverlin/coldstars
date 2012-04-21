@@ -91,21 +91,6 @@ AbilitiesStatus :: AbilitiesStatus()
 }
 
 
-KorpusData :: KorpusData()
-{        
-        space       = 0;
-        armor       = 0;
-        protection  = 0; 
-        temperature = 0;   
-        
-        price = 0;
-       
-        inhibit_GRAPPLE = false;
-        render_TURRELS = false;
-        
-        weapon_slot_num = 0;
-}
-
 
 
 ShipPropetries :: ShipPropetries()

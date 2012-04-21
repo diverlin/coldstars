@@ -16,21 +16,43 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
+KorpusData :: KorpusData()
+{        
+        space       = 0;
+        armor       = 0;
+        protection  = 0; 
+        temperature = 0;   
+        
+        price = 0;
+       
+        render_TURRELS = false;
+        
+        slot_grapple_num   = 0;
+        slot_drive_num     = 0;
+        slot_protector_num = 0;
+        slot_radar_num     = 0;
+        slot_scaner_num    = 0;
+        slot_freezer_num   = 0;
+	slot_weapon_num    = 0;
+}
+
+
 Vehicle::Vehicle()
 {
 	owner_npc = NULL;
        	starsystem = NULL; 
       	
-    	weapon_complex = NULL;
-    	drive_complex = NULL;
+    	weapon_complex     = NULL;
+    	drive_complex      = NULL;
     	protection_complex = NULL;
     	
-    	radar_slot = NULL;
-        scaner_slot = NULL;
+    	radar_slot     = NULL;
+        scaner_slot    = NULL;
         energizer_slot = NULL;
-        grapple_slot = NULL;
-        droid_slot = NULL;
-        freezer_slot = NULL;
+        grapple_slot   = NULL;
+        droid_slot     = NULL;
+        freezer_slot   = NULL;
         
         gate_slot = NULL;
 }
@@ -56,18 +78,7 @@ Vehicle::~Vehicle()
         
         delete gate_slot;
 } 
-
-
-void Vehicle::SetNpc(Npc* npc)   { owner_npc = npc; }
-
-void Vehicle::SetWeaponComplex(WeaponComplex* weapon_complex)           { this->weapon_complex     = weapon_complex; }
-void Vehicle::SetDriveComplex(DriveComplex* drive_complex)              { this->drive_complex      = drive_complex; }
-void Vehicle::SetProtectionComplex(ProtectionComplex* protection_complex)    { this->protection_complex = protection_complex; }
-                
-void Vehicle::SetKorpusData(KorpusData data_korpus) { this->data_korpus = data_korpus; }
-void Vehicle::SetGuiTextureOb(TextureOb* texOb) { texOb_korpus = texOb; }
-void Vehicle::SetGuiRect(Rect rect) { kontur_rect = rect; }
-        	               
+           
 void Vehicle::Add(ItemSlot* slot) 
 { 
 	if (slot->GetSubTypeId() != SLOT::GATE_ID)
@@ -81,8 +92,8 @@ void Vehicle::Add(ItemSlot* slot)
 	
 	switch(slot->GetSubTypeId())
 	{
-		case SLOT::RADAR_ID:  { radar_slot  = slot; break; }
-		case SLOT::SCANER_ID: { scaner_slot = slot; break; }
+		case SLOT::RADAR_ID:     { radar_slot  = slot; break; }
+		case SLOT::SCANER_ID:    { scaner_slot = slot; break; }
 		
 		case SLOT::ENERGIZER_ID: { energizer_slot = slot; break; }
 		case SLOT::GRAPPLE_ID:   { grapple_slot   = slot; break; }
@@ -106,32 +117,7 @@ bool Vehicle::AddItemToOtsec(BaseItem* item)
 	}
 	
 	return false;                
-}
-                
-WeaponComplex* Vehicle::GetWeaponComplex()           const { return weapon_complex; }
-DriveComplex* Vehicle::GetDriveComplex()             const { return drive_complex; }
-ProtectionComplex* Vehicle::GetProtectionComplex()   const { return protection_complex; }
-
-ItemSlot* Vehicle::GetRadarSlot()     const { return radar_slot; }
-ItemSlot* Vehicle::GetScanerSlot()    const { return scaner_slot; }
-ItemSlot* Vehicle::GetEnergizerSlot() const { return energizer_slot; }
-ItemSlot* Vehicle::GetGrappleSlot()   const { return grapple_slot; }
-ItemSlot* Vehicle::GetDroidSlot()     const { return droid_slot; }
-ItemSlot* Vehicle::GetFreezerSlot()   const { return freezer_slot; }
-        	               
-ItemSlot* Vehicle::GetGateSlot()      const { return gate_slot; }
-
-Npc* Vehicle::GetOwnerNpc() 	      const { return owner_npc; }
-
-const Rect& Vehicle::GetGuiRect() const { return kontur_rect; }
-        	      	
-// needs when vehicle is grabbed by other vehicle
-//int Vehicle :: GetFunctionalSlotSubTypeId() const { return NONE_SLOT_ID; } 
-//void Vehicle :: BindSlot(ItemSlot* slot)          { return; }	   	
-//void Vehicle :: UpdateOwnerPropetries()	       { return; }	   
-//
-       	        
-float Vehicle::GetVisionRadius() const { return propetries.radius; }
+} 
 
 ItemSlot* Vehicle::GetEmptyOtsecSlot()
 {
@@ -145,7 +131,6 @@ ItemSlot* Vehicle::GetEmptyOtsecSlot()
         
       	return NULL;
 }
-
 
 ItemSlot* Vehicle::GetCargoSlotWithGoods(int requested_goods_subtype_id)
 {
@@ -476,7 +461,7 @@ void Vehicle::UpdateGrabAbility()
 {
      	ableTo.GRAB = false;
 
-     	if (data_korpus.inhibit_GRAPPLE == false)
+     	if (data_korpus.slot_grapple_num != 0)
         	if (grapple_slot->GetEquipedStatus() == true)
            		if (grapple_slot->GetGrappleEquipment()->GetCondition() > 0)
               			ableTo.GRAB = true;
@@ -498,7 +483,6 @@ void Vehicle::UpdateScanAbility()
         }
 }
 
-
 void Vehicle::SetMaxArmor()
 {
      	data_life.armor = data_korpus.armor;
@@ -511,8 +495,6 @@ void Vehicle::SetMaxFuel()
         	drive_complex->GetBakSlot()->GetBakEquipment()->SetFuel(drive_complex->GetBakSlot()->GetBakEquipment()->GetFuelMax());
         }
 }
-
-
 
 std::string Vehicle::returnProtectionStr()
 {
@@ -533,7 +515,7 @@ void Vehicle::RenderInfo(float _pos_x, float _pos_y, float _offset_x, float _off
      	}
 }
 
-void Vehicle::RenderInfo_inSpace(vec2f scroll_coords)
+void Vehicle::RenderInfoInSpace(vec2f scroll_coords)
 {  
 	RenderInfo(points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);
 }
@@ -554,11 +536,11 @@ void Vehicle::RenderGrappleTrail() const
                         float angle_inD = angle_inR * RADIAN_TO_DEGREE_RATE;
         
                         drawLine(g_UNIQUE_TEXTURE_COLLECTOR.texOb_grapple_trail, 
-                                points.getCenter(), 
-                                points.getPosZ(), 
-                                len, 
-                                angle_inD, 
-                                8);
+                                 points.getCenter(), 
+                                 points.getPosZ(), 
+                                 len, 
+                                 angle_inD, 
+                                 8);
                 }
         }
 }
@@ -653,32 +635,6 @@ void Vehicle::GrappleMicroProgramm()
        		{
        			switch(grapple_slot->GetGrappleEquipment()->target_vec[i]->GetTypeId())
        			{
-       				//case ENTITY::MINERAL_ID:
-       				//{
-       					//ItemSlot* _slot;
-                                        //Mineral* _mineral = (Mineral*)grapple_slot->GetGrappleEquipment()->target_vec[i];
-                                        
-       					//_slot = GetCargoSlotWithGoods(ENTITY::MINERAL_ID);
-       					//if (_slot != NULL)
-       					//{
-       						//_slot->GetGoodsPack()->Increase(_mineral->GetMass());
-       						//_mineral->SetPlaceTypeId(NONE_ID);
-       					//}
-       					//else
-       					//{
-       						//GoodsPack* _goodsPack = GetNewGoodsPack(ENTITY::MINERAL_ID);
-       						//_goodsPack->Increase(_mineral->GetMass());
-       						//_slot = GetEmptyOtsecSlot();
-       						//if (_slot != NULL)
-       						//{
-       							//_slot->InsertItem(_goodsPack);
-       							//_mineral->SetPlaceTypeId(NONE_ID);
-       						//}
-       					//}
-       					//grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(_mineral);
-       					//break;			
-       				//}
-        			
       				case ENTITY::CONTAINER_ID:
        				{
        					ItemSlot* _slot = GetEmptyOtsecSlot();
@@ -687,7 +643,6 @@ void Vehicle::GrappleMicroProgramm()
        					{
                                                 _slot->InsertItem(_container->GetItemSlot()->GetItem());
                                                 _container->GetItemSlot()->RemoveItem();    
-       						//_slot->ExtractItemFromContainer(_container);
        						_container->SetPlaceTypeId(NONE_ID);
        					}
 					grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(_container);
@@ -712,4 +667,18 @@ void Vehicle::GrappleMicroProgramm()
        	}
 }
 
+void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree&, const std::string&) const
+{
+        
+}
 
+void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree&)
+{
+        
+}
+
+void Vehicle::ResolveDataUniqueVehicle()
+{
+        
+}
+                

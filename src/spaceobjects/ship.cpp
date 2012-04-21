@@ -113,22 +113,37 @@ void Ship::render_atPlanet() const
 void Ship::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	const std::string root = "ship."+int2str(data_id.id)+".";
+        SaveDataUniqueBase(save_ptree, root);
 	SaveDataUniqueBaseGameEntity(save_ptree, root);
-	//SaveUniqueVehicle(save_ptree, root);
-	//SaveUniqueShip(save_ptree, root);
+	SaveDataUniqueVehicle(save_ptree, root);
+	SaveDataUniqueShip(save_ptree, root);
 }
 
 /*virtual*/
 void Ship::LoadData(boost::property_tree::ptree& load_ptree)
 {
-
+        LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueBaseGameEntity(load_ptree);
+	LoadDataUniqueVehicle(load_ptree);
+	LoadDataUniqueShip(load_ptree);
 }
 
 /*virtual*/
 void Ship::ResolveData()
 {
-
+        ResolveDataUniqueBase();
+	ResolveDataUniqueBaseGameEntity();
+	ResolveDataUniqueVehicle();
+	ResolveDataUniqueShip();
 }
 
+void Ship::SaveDataUniqueShip(boost::property_tree::ptree&, const std::string&) const
+{}
+
+void Ship::LoadDataUniqueShip(const boost::property_tree::ptree&)
+{}
+
+void Ship::ResolveDataUniqueShip()
+{}
 
 

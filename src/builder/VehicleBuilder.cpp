@@ -51,8 +51,8 @@ Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int w
     	data_korpus.temperature = 100;
         data_korpus.price       = getRandInt(200, 400)*size_id;
 
-        data_korpus.inhibit_GRAPPLE = false;
-        data_korpus.weapon_slot_num = weapons_num;
+        data_korpus.slot_grapple_num = 1;
+        data_korpus.slot_weapon_num  = weapons_num;
        
 
     	
@@ -105,8 +105,8 @@ Satellite* VehicleBuilder::GetNewSatellite(int id) const
     	data_korpus.temperature = 100;
         data_korpus.price       = 1000;
 
-        data_korpus.inhibit_GRAPPLE = true;
-        data_korpus.weapon_slot_num = 2;
+        data_korpus.slot_grapple_num = 0;
+        data_korpus.slot_weapon_num  = 2;
  
         LifeData data_life;
         data_life.armor      = data_korpus.armor;
@@ -154,8 +154,8 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation(int id) const
     	data_korpus.temperature = 100;
         data_korpus.price       = 10000000;
 
-        data_korpus.inhibit_GRAPPLE = false;
-        data_korpus.weapon_slot_num = 5;
+        data_korpus.slot_grapple_num = 0;
+        data_korpus.slot_weapon_num  = 5;
        
         LifeData data_life;
         data_life.armor      = data_korpus.armor;

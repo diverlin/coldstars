@@ -39,7 +39,10 @@ class Ship : public Vehicle
     		virtual void LoadData(boost::property_tree::ptree&);
     		virtual void ResolveData();
          
-        private:
+        private:        
+                void SaveDataUniqueShip(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadDataUniqueShip(const boost::property_tree::ptree&);
+		void ResolveDataUniqueShip();
 };
 
 

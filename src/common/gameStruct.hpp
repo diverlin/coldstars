@@ -104,24 +104,6 @@ struct AbilitiesStatus
 };
 
 
-struct KorpusData
-{
-	/* this data depends only on korpus and cannot be changed by artefacts/items */        
-	KorpusData();
-
-	unsigned int space;
-	unsigned int armor;
-	unsigned int protection; 
-	unsigned int temperature;   
-
-	unsigned int price;
-
-	bool inhibit_GRAPPLE;
-	bool render_TURRELS;
-
-	unsigned int weapon_slot_num;
-};
-
 struct ShipPropetries
 {       
 	/* this data is changed during game play, the propetries depends on many factors */
