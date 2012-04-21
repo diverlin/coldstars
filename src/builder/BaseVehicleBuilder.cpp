@@ -80,7 +80,7 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
 	vehicle->Add(energizer_slot);
     		
     		
-	if (vehicle->data_korpus.inhibit_GRAPPLE == false)
+	if (vehicle->data_korpus.slot_grapple_num != 0)
 	{
 		ItemSlot* grapple_slot = GetNewItemSlot(SLOT::GRAPPLE_ID);
 
@@ -146,7 +146,7 @@ void BaseVehicleBuilder::CreateDriveComplex(Vehicle* vehicle) const
 void BaseVehicleBuilder::CreateWeaponsComplex(Vehicle* vehicle) const
 {
  	WeaponComplex* weapon_complex = new WeaponComplex(vehicle);
- 	weapon_complex->PostCreateInit(vehicle->data_korpus.weapon_slot_num, vehicle->data_korpus.render_TURRELS);
+ 	weapon_complex->PostCreateInit(vehicle->data_korpus.slot_weapon_num, vehicle->data_korpus.render_TURRELS);
  	vehicle->SetWeaponComplex(weapon_complex);
 }
 
@@ -163,30 +163,30 @@ void BaseVehicleBuilder::CreateProtectionComplex(Vehicle* vehicle) const
 
 void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
 {
-    	if (vehicle->data_korpus.weapon_slot_num >= 1)
+    	if (vehicle->data_korpus.slot_weapon_num >= 1)
     	{
        		//vehicle->weapon_slot1.InsertItem(lazerEquipmentGenerator(RACE_0_ID)); 
        		vehicle->GetWeaponComplex()->GetWeaponSlot1()->InsertItem(GetNewRocketEquipment(RACE::R0_ID));     	
     	}   
 
-    	if (vehicle->data_korpus.weapon_slot_num >= 2)
+    	if (vehicle->data_korpus.slot_weapon_num >= 2)
     	{
        		vehicle->GetWeaponComplex()->GetWeaponSlot2()->InsertItem(GetNewLazerEquipment(RACE::R0_ID)); 
     	}   
     
-    	if (vehicle->data_korpus.weapon_slot_num >= 3)
+    	if (vehicle->data_korpus.slot_weapon_num >= 3)
     	{
        		vehicle->GetWeaponComplex()->GetWeaponSlot3()->InsertItem(GetNewLazerEquipment(RACE::R0_ID)); 
        		//vehicle->weapon_slot3.InsertItem(rocketEquipmentGenerator(RACE_0_ID)); 
     	}   
         
-    	if (vehicle->data_korpus.weapon_slot_num >= 4)
+    	if (vehicle->data_korpus.slot_weapon_num >= 4)
     	{
        		//vehicle->weapon_slot4.InsertItem(lazerEquipmentGenerator(RACE_0_ID));         
        		vehicle->GetWeaponComplex()->GetWeaponSlot4()->InsertItem(GetNewRocketEquipment(RACE::R0_ID)); 
     	}   
     
-    	if (vehicle->data_korpus.weapon_slot_num >= 5) 
+    	if (vehicle->data_korpus.slot_weapon_num >= 5) 
     	{
        		//vehicle->weapon_slot5.InsertItem(lazerEquipmentGenerator(RACE_0_ID)); 
        		vehicle->GetWeaponComplex()->GetWeaponSlot5()->InsertItem(GetNewRocketEquipment(RACE::R0_ID)); 
@@ -202,7 +202,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
    	vehicle->GetFreezerSlot()->InsertItem(GetNewFreezerEquipment(RACE::R0_ID));  
    	vehicle->GetScanerSlot()->InsertItem(GetNewScanerEquipment(RACE::R0_ID)); 
     
-    	if (vehicle->data_korpus.inhibit_GRAPPLE == false) 
+    	if (vehicle->data_korpus.slot_grapple_num != 0) 
     	{
       		vehicle->GetGrappleSlot()->InsertItem(GetNewGrappleEquipment(RACE::R0_ID)); 
    	}

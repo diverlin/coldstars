@@ -21,52 +21,71 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define VEHICLE_H
 
 
+struct KorpusData
+{
+	/* this data depends only on korpus and cannot be changed by artefacts/items */        
+	KorpusData();
+
+	unsigned int space;
+	unsigned int armor;
+	unsigned int protection; 
+	unsigned int temperature;   
+
+	unsigned int price;
+
+	bool render_TURRELS;
+
+        int slot_grapple_num;
+        int slot_drive_num;
+        int slot_protector_num;
+        int slot_radar_num;
+        int slot_scaner_num;
+        int slot_freezer_num;
+	int slot_weapon_num;
+};
+
+
 class Vehicle : public BaseGameEntity
 {   
     	public:
        	        Vehicle();
         	virtual ~Vehicle(); 
         	
-                void SetNpc(Npc*);
+                void SetNpc(Npc* owner_npc) { this->owner_npc = owner_npc; };
 
-                void SetWeaponComplex(WeaponComplex*);
-                void SetDriveComplex(DriveComplex*);
-		void SetProtectionComplex(ProtectionComplex*);
+                void SetWeaponComplex(WeaponComplex* weapon_complex) { this->weapon_complex = weapon_complex; };
+                void SetDriveComplex(DriveComplex* drive_complex)    { this->drive_complex  = drive_complex; };
+		void SetProtectionComplex(ProtectionComplex* protection_complex) { this->protection_complex = protection_complex; };
                                 
-                void SetKorpusData(KorpusData);
-                void SetGuiTextureOb(TextureOb*);
-        	void SetGuiRect(Rect);
+                void SetKorpusData(KorpusData data_korpus) { this->data_korpus = data_korpus; };
+                void SetGuiTextureOb(TextureOb* textureOb) { texOb_korpus = textureOb; };
+        	void SetGuiRect(Rect rect) { kontur_rect = rect; };
         	
                 void Add(ItemSlot*); 
                 bool AddItemToOtsec(BaseItem*);
 
-                float GetVisionRadius() const;
+                float GetVisionRadius() const { return propetries.radius; };
                 
-                WeaponComplex* GetWeaponComplex() const;
-                DriveComplex* GetDriveComplex() const;
-                ProtectionComplex* GetProtectionComplex() const;
+                WeaponComplex* GetWeaponComplex()         const { return weapon_complex; };
+                DriveComplex* GetDriveComplex()           const { return drive_complex; };
+                ProtectionComplex* GetProtectionComplex() const { return protection_complex; };
                 
-        	ItemSlot* GetRadarSlot()     const;
-        	ItemSlot* GetScanerSlot()    const;
-        	ItemSlot* GetEnergizerSlot() const;
-        	ItemSlot* GetGrappleSlot()   const;
-        	ItemSlot* GetDroidSlot()     const;
-        	ItemSlot* GetFreezerSlot()   const;
-        	ItemSlot* GetGateSlot()   const;        	
-       	                        	
-                Npc* GetOwnerNpc() const;
+        	ItemSlot* GetRadarSlot()     const { return radar_slot; };
+        	ItemSlot* GetScanerSlot()    const { return scaner_slot; };
+        	ItemSlot* GetEnergizerSlot() const { return energizer_slot; };
+        	ItemSlot* GetGrappleSlot()   const { return grapple_slot; };
+        	ItemSlot* GetDroidSlot()     const { return droid_slot; };
+        	ItemSlot* GetFreezerSlot()   const { return freezer_slot; };
+        	ItemSlot* GetGateSlot()      const { return gate_slot; };
+
+                Npc* GetOwnerNpc() const { return owner_npc; };
        	        ItemSlot* GetEmptyOtsecSlot();
        	        ItemSlot* GetCargoSlotWithGoods(int);
         	
-        	const Rect& GetGuiRect() const;
+        	const Rect& GetGuiRect() const { return kontur_rect; };
         	
         	void PostCreateInit();
         	
-                // needs when vehicle is grabbed by other vehicle 
-       	        //int GetFunctionalSlotSubTypeId() const;  // return NONE_ID
-       	        //void BindSlot(ItemSlot*);		   // do nothing	
-       	        //void UpdateOwnerPropetries();		   // do nothing
-
         	AbilitiesStatus ableTo;
                 ShipPropetries propetries;
                 KorpusData data_korpus;
@@ -99,10 +118,10 @@ class Vehicle : public BaseGameEntity
         	void LaunchingEvent();
 
         	void RenderInfo(float, float, float, float);
-        	void RenderInfo_inSpace(vec2f);
+        	void RenderInfoInSpace(vec2f);
         	
         	void RenderRadarRange();
-        	void RenderGrappleRange();        	        	
+        	void RenderGrappleRange();        
 
                 void GrappleMicroProgramm();               
 
@@ -112,10 +131,11 @@ class Vehicle : public BaseGameEntity
 	protected:
 		virtual void UpdateInfo() = 0;
              	std::string returnProtectionStr();
-            	
-            	DriveComplex* drive_complex;
-        	WeaponComplex* weapon_complex;
-        	ProtectionComplex* protection_complex;     	
+
+        	WeaponComplex*     weapon_complex;
+            	DriveComplex*      drive_complex;
+        	ProtectionComplex* protection_complex;
+                
 		Npc* owner_npc;
              		
                 void RenderGrappleTrail() const;
@@ -140,7 +160,11 @@ class Vehicle : public BaseGameEntity
         	Rect kontur_rect; 
                 TextureOb* texOb_korpus;
                 //                
-                		
+                
+                void SaveDataUniqueVehicle(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadDataUniqueVehicle(const boost::property_tree::ptree&);
+		void ResolveDataUniqueVehicle();
+
         private:
              	void DropRandomItemToSpace();   
              	

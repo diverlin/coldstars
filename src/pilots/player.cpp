@@ -577,7 +577,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
             		{ 
             			cursor_has_target = true;
 
-                		visible_SATELLITE_vec[i]->RenderInfo_inSpace(screen->getBottomLeftGlobalCoord()); 
+                		visible_SATELLITE_vec[i]->RenderInfoInSpace(screen->getBottomLeftGlobalCoord()); 
                 		visible_SATELLITE_vec[i]->GetWeaponComplex()->RenderWeaponIcons();
 
                 		visible_SATELLITE_vec[i]->RenderRadarRange(); 
@@ -673,7 +673,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
             		{ 
             			cursor_has_target = true;
 
-                		visible_SHIP_vec[ki]->RenderInfo_inSpace(screen->getBottomLeftGlobalCoord()); 
+                		visible_SHIP_vec[ki]->RenderInfoInSpace(screen->getBottomLeftGlobalCoord()); 
                 		visible_SHIP_vec[ki]->GetWeaponComplex()->RenderWeaponIcons();
 
                 		visible_SHIP_vec[ki]->RenderRadarRange(); 
@@ -751,7 +751,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
             		{ 
             			cursor_has_target = true;
 
-                		visible_SPACESTATION_vec[i]->RenderInfo_inSpace(screen->getBottomLeftGlobalCoord()); 
+                		visible_SPACESTATION_vec[i]->RenderInfoInSpace(screen->getBottomLeftGlobalCoord()); 
                 		visible_SPACESTATION_vec[i]->GetWeaponComplex()->RenderWeaponIcons();
 
                 		visible_SPACESTATION_vec[i]->RenderRadarRange(); 
