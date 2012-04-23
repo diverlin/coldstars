@@ -667,18 +667,58 @@ void Vehicle::GrappleMicroProgramm()
        	}
 }
 
-void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree&, const std::string&) const
+void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-        
+       	save_ptree.put(root+"data_korpus.space", data_korpus.space);       	
+       	save_ptree.put(root+"data_korpus.armor", data_korpus.armor);  
+       	save_ptree.put(root+"data_korpus.protection", data_korpus.protection); 
+       	save_ptree.put(root+"data_korpus.temperature", data_korpus.temperature); 
+   
+       	save_ptree.put(root+"data_korpus.price", data_korpus.price); 
+       	save_ptree.put(root+"data_korpus.draw_turrels", data_korpus.draw_turrels);        	
+
+       	save_ptree.put(root+"data_korpus.slot_grapple_num", data_korpus.slot_grapple_num);  
+       	save_ptree.put(root+"data_korpus.slot_drive_num", data_korpus.slot_drive_num);
+       	save_ptree.put(root+"data_korpus.slot_protector_num", data_korpus.slot_protector_num);       	
+       	save_ptree.put(root+"data_korpus.slot_radar_num", data_korpus.slot_radar_num);
+       	save_ptree.put(root+"data_korpus.slot_scaner_num", data_korpus.slot_scaner_num);
+       	save_ptree.put(root+"data_korpus.slot_freezer_num", data_korpus.slot_freezer_num);
+       	save_ptree.put(root+"data_korpus.slot_weapon_num", data_korpus.slot_weapon_num);       	
+       	
+       	save_ptree.put(root+"data_unresolved_Vehicle.npc_id", owner_npc->GetId());       	
+       	save_ptree.put(root+"data_unresolved_Vehicle.texOb_korpus_path", texOb_korpus->path);       	
 }
 
-void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree&)
+void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptree)
 {
-        
+   	data_korpus.space = load_ptree.get<int>("data_korpus.space");     
+   	data_korpus.armor = load_ptree.get<int>("data_korpus.armor");   
+   	data_korpus.protection = load_ptree.get<int>("data_korpus.protection"); 
+   	data_korpus.temperature = load_ptree.get<int>("data_korpus.temperature"); 
+
+   	data_korpus.price = load_ptree.get<int>("data_korpus.price"); 
+   	data_korpus.draw_turrels = load_ptree.get<bool>("data_korpus.draw_turrels"); 
+
+   	data_korpus.slot_grapple_num = load_ptree.get<int>("data_korpus.slot_grapple_num"); 
+   	data_korpus.slot_drive_num = load_ptree.get<int>("data_korpus.slot_drive_num"); 
+   	data_korpus.slot_protector_num = load_ptree.get<int>("data_korpus.slot_protector_num"); 
+   	data_korpus.slot_radar_num = load_ptree.get<int>("data_korpus.slot_radar_num"); 
+   	data_korpus.slot_scaner_num = load_ptree.get<int>("data_korpus.slot_scaner_num"); 
+   	data_korpus.slot_freezer_num = load_ptree.get<int>("data_korpus.slot_freezer_num"); 
+   	data_korpus.slot_weapon_num = load_ptree.get<int>("data_korpus.slot_weapon_num"); 
+
+   	data_unresolved_Vehicle.npc_id = load_ptree.get<int>("data_unresolved_Vehicle.npc_id"); 
+   	data_unresolved_Vehicle.texOb_korpus_path = load_ptree.get<std::string>("data_unresolved_Vehicle.texOb_korpus_path"); 
+   	   	
 }
 
 void Vehicle::ResolveDataUniqueVehicle()
 {
-        
+        //create_internals (slot, complex)
+        texOb_korpus = g_TEXTURE_MANAGER.GetTextureObByPath(data_unresolved_Vehicle.texOb_korpus_path);
+	
+	owner_npc = (Npc*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.npc_id);
+	
+        //find and bind npc
 }
                 

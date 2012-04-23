@@ -44,6 +44,11 @@ struct KorpusData
 	int slot_weapon_num;
 };
 
+struct UnresolvedDataUniqueVehicle
+{
+	int npc_id;
+	std::string texOb_korpus_path; 	
+};
 
 class Vehicle : public BaseGameEntity
 {   
@@ -160,6 +165,8 @@ class Vehicle : public BaseGameEntity
         	Rect kontur_rect; 
                 TextureOb* texOb_korpus;
                 //                
+                
+                UnresolvedDataUniqueVehicle data_unresolved_Vehicle;
                 
                 void SaveDataUniqueVehicle(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueVehicle(const boost::property_tree::ptree&);

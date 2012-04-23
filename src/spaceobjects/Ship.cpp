@@ -47,7 +47,7 @@ void Ship::UpdateInfo()
 }
 
 
-void Ship::update_inSpace(int time, bool show_effect)
+void Ship::UpdateInSpace(int time, bool show_effect)
 {   
 	CheckDeath(show_effect);
 	if (time > 0)
@@ -67,13 +67,13 @@ void Ship::update_inSpace(int time, bool show_effect)
     	}
 }
 
-void Ship::updateRenderStuff()
+void Ship::UpdateRenderStuff()
 {
     	//points.update(); 
     	protection_complex->GetShieldEffect()->Update();
 }
 
-void Ship::render_inSpace() const
+void Ship::RenderInSpace() const
 {   
         if (ableTo.GRAB == true)
         {
@@ -99,7 +99,7 @@ void Ship::render_inSpace() const
 }
 
 
-void Ship::render_atPlanet() const
+void Ship::RenderAtPlanet() const
 {
 	RenderKorpus();
 	

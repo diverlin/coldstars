@@ -71,8 +71,6 @@ class BaseGameEntity : public Base
 	protected:
 		LifeData data_life;
 		
-		UnresolvedDataUniqueBaseGameEntity data_unresolved_bge;
-		
 		vec3f angle, d_angle;
 
 		float collision_radius;
@@ -95,6 +93,7 @@ class BaseGameEntity : public Base
 		void CheckDeath(bool);
 		virtual void PostDeathUniqueEvent(bool) {};
 
+		UnresolvedDataUniqueBaseGameEntity data_unresolved_BaseGameEntity;
 		void SaveDataUniqueBaseGameEntity(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueBaseGameEntity(const boost::property_tree::ptree&);
 		void ResolveDataUniqueBaseGameEntity();

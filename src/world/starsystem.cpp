@@ -611,7 +611,7 @@ void StarSystem :: updateEntities_s(int time, bool show_effect)
     	// vehicle
         for (unsigned int ki = 0; ki < SHIP_vec.size(); ki++)
         {
-                SHIP_vec[ki]->update_inSpace(time, show_effect);         
+                SHIP_vec[ki]->UpdateInSpace(time, show_effect);         
     	}
 
         for (unsigned int si = 0; si < SPACESTATION_vec.size(); si++)

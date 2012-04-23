@@ -287,8 +287,8 @@ void Player::RenderEntities_NEW()
 
     			for(unsigned int i = 0; i < visible_SHIP_vec.size(); i++)
     			{ 
-    				visible_SHIP_vec[i]->updateRenderStuff(); 
-       				visible_SHIP_vec[i]->render_inSpace(); 
+    				visible_SHIP_vec[i]->UpdateRenderStuff(); 
+       				visible_SHIP_vec[i]->RenderInSpace(); 
         			npc->GetStarSystem()->RestoreSceneColor();
     			}
 
@@ -429,8 +429,8 @@ void Player::RenderEntities_OLD()
            
     		for(unsigned int i = 0; i < visible_SHIP_vec.size(); i++)
     		{ 
-    		    	visible_SHIP_vec[i]->updateRenderStuff();
-       			visible_SHIP_vec[i]->render_inSpace(); 
+    		    	visible_SHIP_vec[i]->UpdateRenderStuff();
+       			visible_SHIP_vec[i]->RenderInSpace(); 
         		npc->GetStarSystem()->RestoreSceneColor();
     		}
 
