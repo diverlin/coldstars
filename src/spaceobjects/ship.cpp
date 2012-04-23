@@ -82,7 +82,7 @@ void Ship::render_inSpace() const
         
     	RenderKorpus();
     	
-    	if (data_korpus.render_TURRELS == true)
+    	if (data_korpus.draw_turrels == true)
     	{
         	weapon_complex->RenderTurrels();
         }
@@ -103,7 +103,7 @@ void Ship::render_atPlanet() const
 {
 	RenderKorpus();
 	
-	if (data_korpus.render_TURRELS == true)
+	if (data_korpus.draw_turrels == true)
     	{
         	weapon_complex->RenderTurrels();
         }

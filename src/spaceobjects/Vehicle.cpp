@@ -26,7 +26,7 @@ KorpusData :: KorpusData()
         
         price = 0;
        
-        render_TURRELS = false;
+        draw_turrels = false;
         
         slot_grapple_num   = 0;
         slot_drive_num     = 0;

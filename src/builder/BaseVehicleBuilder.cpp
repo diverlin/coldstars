@@ -17,11 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-BaseVehicleBuilder::~BaseVehicleBuilder() {}
-
-	
-
-void  BaseVehicleBuilder::CreateKorpusGeometry(Vehicle* vehicle) const
+void BaseVehicleBuilder::CreateKorpusGeometry(Vehicle* vehicle) const
 {
 	vehicle->RecalculateCollisionRadius();
 
@@ -146,7 +142,7 @@ void BaseVehicleBuilder::CreateDriveComplex(Vehicle* vehicle) const
 void BaseVehicleBuilder::CreateWeaponsComplex(Vehicle* vehicle) const
 {
  	WeaponComplex* weapon_complex = new WeaponComplex(vehicle);
- 	weapon_complex->PostCreateInit(vehicle->data_korpus.slot_weapon_num, vehicle->data_korpus.render_TURRELS);
+ 	weapon_complex->PostCreateInit(vehicle->data_korpus.slot_weapon_num, vehicle->data_korpus.draw_turrels);
  	vehicle->SetWeaponComplex(weapon_complex);
 }
 

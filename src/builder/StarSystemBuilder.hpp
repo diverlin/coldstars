@@ -36,8 +36,8 @@ class StarSystemBuilder
                 StarSystem* starsystem;
                 
 		StarSystemBuilder() {};
-		StarSystemBuilder(const StarSystemBuilder&) {};
-		StarSystemBuilder& operator=(const StarSystemBuilder&) {};
+		StarSystemBuilder(const StarSystemBuilder&) = delete;
+		StarSystemBuilder& operator=(const StarSystemBuilder&) = delete;
 		
                 void CreateBackground(int, int, int);
         	void CreateStar();

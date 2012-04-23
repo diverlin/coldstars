@@ -35,8 +35,8 @@ class PlayerBuilder
                 Player* player;
                 
 		PlayerBuilder() {};
-		PlayerBuilder(const PlayerBuilder&) {};
-		PlayerBuilder& operator=(const PlayerBuilder&) {};
+		PlayerBuilder(const PlayerBuilder&) = delete;
+		PlayerBuilder& operator=(const PlayerBuilder&) = delete;
 		
 }; 
 

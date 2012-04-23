@@ -35,8 +35,8 @@ class GalaxyBuilder
                 Galaxy* galaxy;
                 
 		GalaxyBuilder() {};
-		GalaxyBuilder(const GalaxyBuilder&) {};
-		GalaxyBuilder& operator=(const GalaxyBuilder&) {};
+		GalaxyBuilder(const GalaxyBuilder&) = delete;
+		GalaxyBuilder& operator=(const GalaxyBuilder&) = delete;
 }; 
 
 

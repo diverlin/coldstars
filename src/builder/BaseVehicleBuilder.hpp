@@ -24,14 +24,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class BaseVehicleBuilder
 {
 	public:
-		~BaseVehicleBuilder();
+		virtual ~BaseVehicleBuilder() {};
 
         	void Equip(Vehicle*) const; 
         	 		                
         protected:
-		BaseVehicleBuilder() {}
-		BaseVehicleBuilder(const BaseVehicleBuilder&) {};
-		BaseVehicleBuilder& operator=(const BaseVehicleBuilder&) {};
+		BaseVehicleBuilder() {};
+		BaseVehicleBuilder(const BaseVehicleBuilder&) = delete;
+		BaseVehicleBuilder& operator=(const BaseVehicleBuilder&) = delete;
 		
         	void CreateKorpusGeometry(Vehicle*) const;
         	void CreateKorpusGui(Vehicle*) const;

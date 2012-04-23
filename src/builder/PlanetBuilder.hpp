@@ -35,8 +35,8 @@ class PlanetBuilder
                 Planet* planet;
                 
 		PlanetBuilder() {};
-		PlanetBuilder(const PlanetBuilder&) {};
-		PlanetBuilder& operator=(const PlanetBuilder&) {};
+		PlanetBuilder(const PlanetBuilder&) = delete;
+		PlanetBuilder& operator=(const PlanetBuilder&) = delete;
 }; 
 
 

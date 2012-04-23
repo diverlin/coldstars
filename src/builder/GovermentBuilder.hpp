@@ -35,8 +35,8 @@ class GovermentBuilder
                 Goverment* goverment;
                 
 		GovermentBuilder() {};
-		GovermentBuilder(const GovermentBuilder&) {};
-		GovermentBuilder& operator=(const GovermentBuilder&) {};
+		GovermentBuilder(const GovermentBuilder&) = delete;
+		GovermentBuilder& operator=(const GovermentBuilder&) = delete;
 }; 
 
 

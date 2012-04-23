@@ -35,8 +35,8 @@ class KosmoportBuilder
                 Kosmoport* kosmoport;
                 
 		KosmoportBuilder() {};
-		KosmoportBuilder(const KosmoportBuilder&) {};
-		KosmoportBuilder& operator=(const KosmoportBuilder&) {};
+		KosmoportBuilder(const KosmoportBuilder&) = delete;
+		KosmoportBuilder& operator=(const KosmoportBuilder&) = delete;
 }; 
 
 

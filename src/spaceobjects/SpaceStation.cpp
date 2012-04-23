@@ -77,7 +77,7 @@ void SpaceStation::RenderInSpace() const
         
     	RenderKorpus();
     	
-    	if (data_korpus.render_TURRELS == true)
+    	if (data_korpus.draw_turrels == true)
     	{
         	weapon_complex->RenderTurrels();
         }
