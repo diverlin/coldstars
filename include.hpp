@@ -177,7 +177,7 @@ class GuiMap;
 #include "src/spaceobjects/rocketBullet.hpp"
 #include "src/spaceobjects/SpaceStation.hpp"
 #include "src/spaceobjects/satellite.hpp"
-#include "src/spaceobjects/ship.hpp"
+#include "src/spaceobjects/Ship.hpp"
 #include "src/builder/ContainerBuilder.hpp"
 #include "src/builder/BaseVehicleBuilder.hpp"
 #include "src/builder/ShipBuilder.hpp"
@@ -364,7 +364,7 @@ class GuiMap;
 #include "src/spaceobjects/WeaponComplex.cpp"
 #include "src/spaceobjects/ProtectionComplex.cpp"
 #include "src/spaceobjects/Vehicle.cpp"
-#include "src/spaceobjects/ship.cpp"
+#include "src/spaceobjects/Ship.cpp"
 #include "src/spaceobjects/driveComplex.cpp"
 #include "src/spaceobjects/Turrel.cpp"
 
