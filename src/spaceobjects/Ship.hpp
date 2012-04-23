@@ -27,13 +27,13 @@ class Ship : public Vehicle
                 Ship(int);
         	~Ship();
         	
-        	void update_inSpace(int, bool);
+        	void UpdateInSpace(int, bool);
         	
         	virtual void UpdateInfo();  
         	
-        	void updateRenderStuff();
-        	void render_inSpace() const;
-		void render_atPlanet() const;       
+        	void UpdateRenderStuff();
+        	void RenderInSpace() const;
+		void RenderAtPlanet() const;       
 		
     		virtual void SaveData(boost::property_tree::ptree&) const;
     		virtual void LoadData(boost::property_tree::ptree&);

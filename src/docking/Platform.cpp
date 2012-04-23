@@ -47,7 +47,7 @@ void Platform::Render() const
      	drawTexturedRect(texOb, rect, -1);
      	if (vehicle != NULL)
      	{
-     	       	((Ship*)vehicle)->render_atPlanet();
+     	       	((Ship*)vehicle)->RenderAtPlanet();
 	}
 }
 

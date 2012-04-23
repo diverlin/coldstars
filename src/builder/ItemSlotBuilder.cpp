@@ -25,7 +25,7 @@ ItemSlot* GetNewItemSlot(int subtype_id, int id)
 		id = g_ID_GENERATOR.getNextId();
 	} 
         ItemSlot* item_slot = new ItemSlot(id);
-        EntityManager::Instance().RegisterEntity(item_slot);
+        //EntityManager::Instance().RegisterEntity(item_slot);
       
         TextureOb* texOb_slot = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID);
 	item_slot->SetSubTypeId(subtype_id);
