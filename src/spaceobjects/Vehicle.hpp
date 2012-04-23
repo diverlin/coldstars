@@ -33,7 +33,7 @@ struct KorpusData
 
 	unsigned int price;
 
-	bool render_TURRELS;
+	bool draw_turrels;
 
         int slot_grapple_num;
         int slot_drive_num;

@@ -21,18 +21,15 @@ ProtectionComplex::ProtectionComplex(Vehicle* vehicle)
 {        
         this->owner_vehicle = vehicle;
         
-        TextureOb* texOb_shield = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SHIELD_EFFECT_ID); 
  	shield_effect = new ShieldEffect();
+        TextureOb* texOb_shield = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SHIELD_EFFECT_ID); 
         shield_effect->SetTextureOb(texOb_shield);
         shield_effect->SetParent(vehicle);
         
         shield_effect->GetPoints().initMainQuadPoints(1.2*vehicle->GetTextureOb()->getFrameWidth(), 1.2*vehicle->GetTextureOb()->getFrameHeight());
     	shield_effect->GetPoints().addMainQuadPoints();
  
-     	TextureOb* texOb_slot = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID); 
-
  	protector_slot = GetNewItemSlot(SLOT::PROTECTOR_ID); 
-
 	protector_slot->SetRect(owner_vehicle->GetGuiRect().getCenter().x-3*GUI::SLOT::WIDTH_FOR_SHIP, 
 			        owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
 			        GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);

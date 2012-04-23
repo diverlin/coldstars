@@ -14,9 +14,9 @@ struct SaveManager
 					
 	private:
 		SaveManager();
-		SaveManager(const SaveManager&);
+		SaveManager(const SaveManager&) = delete;
 		~SaveManager();
-		SaveManager& operator=(const SaveManager&);
+		SaveManager& operator=(const SaveManager&) = delete;
 };
 
 #endif //SAVEMANAGER_HPP

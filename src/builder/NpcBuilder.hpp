@@ -35,8 +35,8 @@ class NpcBuilder
                 Npc* npc;
                 
 		NpcBuilder() {};
-		NpcBuilder(const NpcBuilder&) {};
-		NpcBuilder& operator=(const NpcBuilder&) {};
+		NpcBuilder(const NpcBuilder&) = delete;
+		NpcBuilder& operator=(const NpcBuilder&) = delete;
 }; 
 
 

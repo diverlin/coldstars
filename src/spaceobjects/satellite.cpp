@@ -98,7 +98,7 @@ void Satellite :: render_inSpace() const
         
     	RenderKorpus();
     	
-    	if (data_korpus.render_TURRELS == true)
+    	if (data_korpus.draw_turrels == true)
     	{
         	weapon_complex->RenderTurrels();
         }
@@ -119,7 +119,7 @@ void Satellite :: render_atPlanet() const
 {
 	RenderKorpus();
 	
-	if (data_korpus.render_TURRELS == true)
+	if (data_korpus.draw_turrels == true)
     	{
         	weapon_complex->RenderTurrels();
         }

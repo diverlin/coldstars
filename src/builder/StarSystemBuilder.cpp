@@ -199,7 +199,9 @@ void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num)
         	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
         	int ship_size_id = getRandInt(1, 9);
         	int weapons_num = getRandInt(1, 5);
-        	Ship* ship = VehicleBuilder::Instance().GetNewShip(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
+        	ShipBuilder::Instance().CreateNewShip();
+        	ShipBuilder::Instance().CreateNewInternals(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
+        	Ship* ship = ShipBuilder::Instance().GetShip();
        
         	VehicleBuilder::Instance().Equip(ship);            	// improove
         

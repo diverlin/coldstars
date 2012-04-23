@@ -27,15 +27,15 @@ class VehicleBuilder : public BaseVehicleBuilder
 		static VehicleBuilder& Instance();
 		~VehicleBuilder();
 		
-		Ship* GetNewShip(int, int, int, int, int id = NONE_ID) const;
+		//Ship* GetNewShip(int, int, int, int, int id = NONE_ID) const;
 		Satellite* GetNewSatellite(int id = NONE_ID) const;
 		SpaceStation* GetNewSpaceStation(int id = NONE_ID) const;    	
 		RocketBullet* GetNewRocket(BulletData, ItemSlot*, float, bool force_center_start = false) const;                
        
         private:
         	VehicleBuilder() {};   	
-        	VehicleBuilder(const VehicleBuilder&); 
-        	VehicleBuilder operator=(const VehicleBuilder&);
+        	VehicleBuilder(const VehicleBuilder&) = delete; 
+        	VehicleBuilder operator=(const VehicleBuilder&) = delete;
 }; 
 
 

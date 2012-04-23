@@ -35,8 +35,8 @@ class StarBuilder
                 Star* star;
                 
 		StarBuilder() {};
-		StarBuilder(const StarBuilder&) {};
-		StarBuilder& operator=(const StarBuilder&) {};
+		StarBuilder(const StarBuilder&) = delete;
+		StarBuilder& operator=(const StarBuilder&) = delete;
 }; 
 
 

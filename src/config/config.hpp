@@ -27,9 +27,9 @@ struct Config
 							
 	private:
 		Config();
-		Config(const Config&);
+		Config(const Config&) = delete;
 		~Config();
-		Config& operator=(const Config&);
+		Config& operator=(const Config&) = delete;
 		
 		boost::property_tree::ptree ptree;
 };

@@ -180,6 +180,7 @@ class GuiMap;
 #include "src/spaceobjects/ship.hpp"
 #include "src/builder/ContainerBuilder.hpp"
 #include "src/builder/BaseVehicleBuilder.hpp"
+#include "src/builder/ShipBuilder.hpp"
 #include "src/builder/ItemSlotBuilder.hpp"
 #include "src/builder/VehicleBuilder.hpp"
 #include "src/builder/StarSystemBuilder.hpp"
@@ -328,6 +329,8 @@ class GuiMap;
 #include "src/gui/guiVehicle.cpp"
 #include "src/builder/ContainerBuilder.cpp"
 #include "src/builder/BaseVehicleBuilder.cpp"
+#include "src/builder/ShipBuilder.cpp"
+
 #include "src/builder/ItemSlotBuilder.cpp"
 #include "src/builder/AngarBuilder.cpp"
 #include "src/builder/StoreBuilder.cpp"

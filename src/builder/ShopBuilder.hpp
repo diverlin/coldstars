@@ -35,8 +35,8 @@ class ShopBuilder
                 Shop* shop;
                 
 		ShopBuilder() {};
-		ShopBuilder(const ShopBuilder&) {};
-		ShopBuilder& operator=(const ShopBuilder&) {};
+		ShopBuilder(const ShopBuilder&) = delete;
+		ShopBuilder& operator=(const ShopBuilder&) = delete;
 }; 
 
 

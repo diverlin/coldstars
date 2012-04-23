@@ -27,59 +27,59 @@ VehicleBuilder& VehicleBuilder::Instance()
 VehicleBuilder::~VehicleBuilder() {}
 
 
-Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int weapons_num, int id) const
-{
-	if (id == NONE_ID)
-	{
-		id = g_ID_GENERATOR.getNextId();
-	}
-        Ship* ship = new Ship(id);
-        EntityManager::Instance().RegisterEntity(ship);
+//Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int weapons_num, int id) const
+//{
+	//if (id == NONE_ID)
+	//{
+		//id = g_ID_GENERATOR.getNextId();
+	//}
+        //Ship* ship = new Ship(id);
+        //EntityManager::Instance().RegisterEntity(ship);
                 
-    	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomShipTexObWithFollowingAtrributes(race_id, subtype_id, size_id); 
+    	//TextureOb* texOb = g_TEXTURE_MANAGER.getRandomShipTexObWithFollowingAtrributes(race_id, subtype_id, size_id); 
        
-       	int protection_rate = 1;
-       	if (subtype_id == CLASS::WARRIOR_ID)
-        {
-        	protection_rate = 3;
-        }
+       	//int protection_rate = 1;
+       	//if (subtype_id == CLASS::WARRIOR_ID)
+        //{
+        	//protection_rate = 3;
+        //}
         
-        KorpusData data_korpus;
-    	data_korpus.space       = size_id*150 + getRandInt(0, 100);
-    	data_korpus.armor       = data_korpus.space;
-    	data_korpus.protection  = size_id/2*protection_rate;
-    	data_korpus.temperature = 100;
-        data_korpus.price       = getRandInt(200, 400)*size_id;
+        //KorpusData data_korpus;
+    	//data_korpus.space       = size_id*150 + getRandInt(0, 100);
+    	//data_korpus.armor       = data_korpus.space;
+    	//data_korpus.protection  = size_id/2*protection_rate;
+    	//data_korpus.temperature = 100;
+        //data_korpus.price       = getRandInt(200, 400)*size_id;
 
-        data_korpus.slot_grapple_num = 1;
-        data_korpus.slot_weapon_num  = weapons_num;
+        //data_korpus.slot_grapple_num = 1;
+        //data_korpus.slot_weapon_num  = weapons_num;
        
 
     	
-        LifeData data_life;
-        data_life.armor      = data_korpus.armor;
-        data_life.dying_time = 10*texOb->size_id;
+        //LifeData data_life;
+        //data_life.armor      = data_korpus.armor;
+        //data_life.dying_time = 10*texOb->size_id;
         
-        int size_threshold = 2; 
-    	if (texOb->size_id > size_threshold)
-       		data_korpus.render_TURRELS = true; 
-    	else
-       		data_korpus.render_TURRELS = false; 
+        //int size_threshold = 2; 
+    	//if (texOb->size_id > size_threshold)
+       		//data_korpus.render_TURRELS = true; 
+    	//else
+       		//data_korpus.render_TURRELS = false; 
 	
-	ship->SetSubTypeId(subtype_id);
-	ship->SetKorpusData(data_korpus);
-	ship->SetTextureOb(texOb);
-	ship->SetLifeData(data_life);
+	//ship->SetSubTypeId(subtype_id);
+	//ship->SetKorpusData(data_korpus);
+	//ship->SetTextureOb(texOb);
+	//ship->SetLifeData(data_life);
 	
-	CreateKorpusGeometry(ship);
-        CreateKorpusGui(ship);
-        CreateEquipmentSlots(ship);
-        CreateDriveComplex(ship);
-        CreateWeaponsComplex(ship);
-        CreateProtectionComplex(ship);
+	//CreateKorpusGeometry(ship);
+        //CreateKorpusGui(ship);
+        //CreateEquipmentSlots(ship);
+        //CreateDriveComplex(ship);
+        //CreateWeaponsComplex(ship);
+        //CreateProtectionComplex(ship);
         
-        return ship;
-}
+        //return ship;
+//}
 
 Satellite* VehicleBuilder::GetNewSatellite(int id) const
 {
@@ -105,7 +105,7 @@ Satellite* VehicleBuilder::GetNewSatellite(int id) const
     	data_korpus.temperature = 100;
         data_korpus.price       = 1000;
 
-        data_korpus.slot_grapple_num = 0;
+        data_korpus.slot_grapple_num = 1;
         data_korpus.slot_weapon_num  = 2;
  
         LifeData data_life;
@@ -113,7 +113,7 @@ Satellite* VehicleBuilder::GetNewSatellite(int id) const
         data_life.dying_time = 10*texOb->size_id;
         
         int size_threshold = 2; 
-	data_korpus.render_TURRELS = true;       
+	data_korpus.draw_turrels = true;       
 	
 	satellite->SetKorpusData(data_korpus);
 	satellite->SetLifeData(data_life);
@@ -154,7 +154,7 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation(int id) const
     	data_korpus.temperature = 100;
         data_korpus.price       = 10000000;
 
-        data_korpus.slot_grapple_num = 0;
+        data_korpus.slot_grapple_num = 1;
         data_korpus.slot_weapon_num  = 5;
        
         LifeData data_life;
@@ -162,7 +162,7 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation(int id) const
         data_life.dying_time = 10*texOb->size_id;
         
         int size_threshold = 2; 
-	data_korpus.render_TURRELS = true; 
+	data_korpus.draw_turrels = true; 
                            
     	spacestation->SetSubTypeId(SPACESTATION::MILITARY_ID);
     	spacestation->SetKorpusData(data_korpus);
@@ -205,7 +205,7 @@ RocketBullet* VehicleBuilder::GetNewRocket(BulletData data_bullet, ItemSlot* slo
         //CreateWeaponsComplex(rocket);
         //CreateProtectionComplex(rocket);	
          
-        if ( (slot->GetOwnerVehicle()->data_korpus.render_TURRELS == true) and (force_center_start == false))
+        if ( (slot->GetOwnerVehicle()->data_korpus.draw_turrels == true) and (force_center_start == false))
     	{
         	rocket->place(slot->GetTurrel()->GetPoints().getCenter(), slot->GetTurrel()->GetPoints().getAngleDegree(), offset);
         }
