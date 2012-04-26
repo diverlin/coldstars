@@ -16,11 +16,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-UserInput::UserInput(Player* player)
+UserInput& UserInput::Instance()
 {
-	this->player = player;
-	
+	static UserInput instance;
+	return instance;
+}
+
+UserInput::UserInput()
+{
     	keyboardLeftPressed  = false;
     	keyboardRightPressed = false;    
     	keyboardUpPressed    = false;    
@@ -34,23 +37,18 @@ UserInput::UserInput(Player* player)
 
 UserInput::~UserInput()
 {}
-
-bool UserInput::GetNextTurnReady() const { return next_turn_ready; }
 		
-void UserInput::UpdateInSpace()
+void UserInput::Update(Player* player)
 {
-	GetSimpleInputs();
+	GetSimpleInputs(player);
         GetRealTimeInputs();
-        ScrollCamera();
+        if (player->GetNpc()->GetPlaceTypeId() == ENTITY::SPACE_ID)
+        {
+        	ScrollCamera(player);
+        }
 }
 
-void UserInput::UpdateInKosmoport()
-{
-	GetSimpleInputs();
-        GetRealTimeInputs();
-}
-
-void UserInput::GetSimpleInputs()
+void UserInput::GetSimpleInputs(Player* player)
 {
    	player->GetCursor()->setLeftMouseButton(false);
    	player->GetCursor()->setRightMouseButton(false);
@@ -58,7 +56,10 @@ void UserInput::GetSimpleInputs()
 	next_turn_ready = false;
 
 	sf::Event event;
-
+	
+	save = false;
+	load = false;
+			
 	while (Gui::GetWindow().GetEvent(event))
 	{
 	        // Close window : exit
@@ -252,24 +253,14 @@ void UserInput::GetSimpleInputs()
 				}
 				
 				case sf::Key::F5:
-				{					
-					EntityManager::Instance().SaveEvent();
+				{		
+					save = true;			
 					break;
 				}
 				
 				case sf::Key::F9:
 				{
-					int galaxy_id = player->GetNpc()->GetStarSystem()->GetGalaxy()->GetId();
-					EntityManager::Instance().LoadPass0();
-					EntityManager::Instance().LoadPass1();
-					
-					vec2f center(400, 400);
-					float angle = 0;  
-
-					Galaxy* galaxy = (Galaxy*)EntityManager::Instance().GetEntityById(galaxy_id);
-					StarSystem* starsystem = galaxy->GetRandomStarSystem();
-					starsystem->Add(player->GetNpc()->GetVehicle(), center, angle, NULL);
-			
+					load = true;
 					break;
 				}
 				
@@ -311,10 +302,10 @@ void UserInput::GetRealTimeInputs()
         keyboardDownPressed  = Input.IsKeyDown(sf::Key::Down);  
 }
 
-void UserInput::ScrollCamera()
+void UserInput::ScrollCamera(Player* player)
 {
 	int SCROLL_VELOCITY_STEP = Config::Instance().SCROLL_VELOCITY_STEP;
-	int SCROLL_VELOCITY_MAX = Config::Instance().SCROLL_VELOCITY_MAX;	
+	int SCROLL_VELOCITY_MAX  = Config::Instance().SCROLL_VELOCITY_MAX;	
 	
         // SCROLLING X AXIS         
         if(keyboardLeftPressed)

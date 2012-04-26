@@ -153,12 +153,8 @@ void BaseGameEntity::LoadDataUniqueBaseGameEntity(const boost::property_tree::pt
 
 void BaseGameEntity::ResolveDataUniqueBaseGameEntity()
 {
-	points.setCenter(data_unresolved_BaseGameEntity.center);
-	points.setAngle(data_unresolved_BaseGameEntity.angle);
-	
 	mesh = g_DEFORMED_SPHERE_MESH; //data_unresolved_bge.mesh_path; 
 	textureOb = g_TEXTURE_MANAGER.GetTextureObByPath(data_unresolved_BaseGameEntity.textureOb_path);
 	
 	parent = (BaseGameEntity*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.parent_id);
-	starsystem = (StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id);
 }

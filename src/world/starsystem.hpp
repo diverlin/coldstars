@@ -64,6 +64,7 @@ class StarSystem : public BaseGameEntity
 		//// TRANSITION
 		void AddToHyperJumpQueue(Vehicle*);
 
+    		void Add(Npc*);
 		void Add(Vehicle*, vec2f, float, BaseGameEntity*);
 						
 		void Add(Star*);
@@ -163,8 +164,6 @@ class StarSystem : public BaseGameEntity
     		GarbageEffects  garbage_effects;
     		            
     		UnresolvedDataUniqueStarSystem data_unresolved_ss;
-    		            
-    		void Add(Npc*);
     		            		    
                 void PostHyperJumpEvent();
                 void LaunchingEvent() const;

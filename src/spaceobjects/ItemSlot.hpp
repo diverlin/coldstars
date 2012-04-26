@@ -20,10 +20,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef ITEMSLOT_H
 #define ITEMSLOT_H
 
-//struct UnresolvedDataUniqueItemSlot
-//{
-	//int item_id;
-//};
 
 class ItemSlot : public Base
 {   
@@ -93,9 +89,9 @@ class ItemSlot : public Base
            	
            	bool CheckTarget(BaseGameEntity*) const;
         
-        	virtual void SaveData(boost::property_tree::ptree&) const {};
-		virtual void LoadData(boost::property_tree::ptree&) {};
-		virtual void ResolveData() {};
+        	virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void ResolveData();
 		
         private:
                 bool is_EQUIPED;                       
@@ -117,10 +113,9 @@ class ItemSlot : public Base
                 bool CheckStarSystem(BaseGameEntity*) const;
            	bool CheckDistance(BaseGameEntity*) const;
                 
-                //UnresolvedDataUniqueItemSlot data_unresolved_ItemSlot;
-                //void SaveDataUniqueItemSlot(boost::property_tree::ptree&, const std::string&) const;
-		//void LoadDataUniqueItemSlot(const boost::property_tree::ptree&);
-		//void ResolveDataUniqueItemSlot();
+                void SaveDataUniqueItemSlot(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueItemSlot(const boost::property_tree::ptree&);
+		void ResolveDataUniqueItemSlot();
 }; 
 
 #endif

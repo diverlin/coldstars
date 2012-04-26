@@ -78,7 +78,8 @@ Vehicle::~Vehicle()
         
         delete gate_slot;
 } 
-           
+
+                				      
 void Vehicle::Add(ItemSlot* slot) 
 { 
 	if (slot->GetSubTypeId() != SLOT::GATE_ID)
@@ -666,7 +667,7 @@ void Vehicle::GrappleMicroProgramm()
        		}
        	}
 }
-
+		
 void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
        	save_ptree.put(root+"data_korpus.space", data_korpus.space);       	
@@ -714,11 +715,8 @@ void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptre
 
 void Vehicle::ResolveDataUniqueVehicle()
 {
-        //create_internals (slot, complex)
         texOb_korpus = g_TEXTURE_MANAGER.GetTextureObByPath(data_unresolved_Vehicle.texOb_korpus_path);
-	
-	owner_npc = (Npc*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.npc_id);
-	
-        //find and bind npc
+
+        //create_internals (slot, complex)
 }
                 

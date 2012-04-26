@@ -23,17 +23,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class UserInput
 {
     	public:
-	       	UserInput(Player*);
+		static UserInput& Instance();
         	~UserInput();
 
-		bool GetNextTurnReady() const;
+		bool GetSaveCommand() const { return save; };
+		bool GetLoadCommand() const { return load; };
+		
+		bool GetNextTurnReady() const { return next_turn_ready; };
 
-		void UpdateInSpace();
-		void UpdateInKosmoport();
+		void Update(Player*);
 
 	private:
-		Player* player;
+		UserInput();
+		UserInput(const UserInput&) = delete;
+		UserInput& operator=(const UserInput&) = delete;
 		
+		bool save, load;
 	        bool keyboardLeftPressed;
         	bool keyboardRightPressed;    
         	bool keyboardUpPressed;    
@@ -44,9 +49,9 @@ class UserInput
         	
         	bool next_turn_ready;
         	
-        	void GetSimpleInputs();
+        	void GetSimpleInputs(Player*);
         	void GetRealTimeInputs();
-        	void ScrollCamera();
+        	void ScrollCamera(Player*);
 	
 };
 

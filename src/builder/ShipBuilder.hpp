@@ -17,31 +17,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef BASEVEHICLEBUILDER_H
-#define BASEVEHICLEBUILDER_H
+#ifndef SHIPBUILDER_H
+#define SHIPBUILDER_H
 
 
-class BaseVehicleBuilder
+class ShipBuilder : public BaseVehicleBuilder
 {
 	public:
-		virtual ~BaseVehicleBuilder() {};
-
-		void CreateAllComplexes(Vehicle*) const; 
-        	void Equip(Vehicle*) const; 
-        	 		                
-        protected:
-		BaseVehicleBuilder() {};
-		BaseVehicleBuilder(const BaseVehicleBuilder&) = delete;
-		BaseVehicleBuilder& operator=(const BaseVehicleBuilder&) = delete;
-				
-        	void CreateKorpusGeometry(Vehicle*) const;
-        	void CreateKorpusGui(Vehicle*) const;
-        	void CreateEquipmentSlots(Vehicle*) const;
-        	void CreateDriveComplex(Vehicle*) const;
-        	void CreateWeaponsComplex(Vehicle*) const;
-        	void CreateProtectionComplex(Vehicle*) const;    
+		static ShipBuilder& Instance();
+		~ShipBuilder();
+		
+		void CreateNewShip(int id = NONE_ID);							
+		void CreateNewInternals(int, int, int, int);   
+		Ship* GetShip() const { return ship; };         
+       
+        private:
+        	ShipBuilder():ship(NULL) {};   	
+        	ShipBuilder(const ShipBuilder&) = delete; 
+        	ShipBuilder& operator=(const ShipBuilder&) = delete;
+        	
+        	Ship* ship;
 }; 
-
 
 
 #endif 

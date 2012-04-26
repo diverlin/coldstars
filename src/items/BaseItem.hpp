@@ -45,14 +45,13 @@ class BaseItem : public Base
 		void SetTextureOb(TextureOb* textureOb)  { this->textureOb = textureOb; };
 		void SetFunctionalSlotSubTypeId(int functional_slot_subtype_id) { this->functional_slot_subtype_id = functional_slot_subtype_id; };
 		void SetItemCommonData(ItemCommonData data_item) { this->data_item = data_item; };
-                
-            	TextureOb* GetTextureOb()   const { return textureOb; };
-		unsigned int GetMass()      const { return data_item.mass; };
-		unsigned int GetCondition() const { return condition; };
-		int GetPrice()              const { return price; };
+                void SetSlot(ItemSlot* slot)  { this->slot = slot; };
+                                
+            	TextureOb* GetTextureOb()   	const { return textureOb; };
+		unsigned int GetMass()      	const { return data_item.mass; };
+		unsigned int GetCondition() 	const { return condition; };
+		int GetPrice()              	const { return price; };
 		int GetFunctionalSlotSubTypeId() const { return functional_slot_subtype_id; };
-    
-                void BindSlot(ItemSlot*);
  
      		void Repair();
 
