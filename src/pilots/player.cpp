@@ -21,8 +21,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Player::Player(int id)
 { 
-    	data_id.id = id;
-    	data_id.type_id = ENTITY::PLAYER_ID;
+    	data_id.id         = id;
+    	data_id.type_id    = ENTITY::PLAYER_ID;
         data_id.subtype_id = NONE_ID;
    	
     	npc  = NULL;
@@ -33,7 +33,6 @@ Player::Player(int id)
  	GUI_SPACE      = new GuiSpace(this);
  	GUI_KOSMOPORT  = new GuiKosmoport(this);
 	GUI_MAP        = new GuiMap(this); 
-	USERINPUT      = new UserInput(this); 	
     	
     	show_all_orbit     = false;
      	show_all_path      = false;
@@ -50,7 +49,6 @@ Player::~Player()
  	delete GUI_SPACE;
  	delete GUI_KOSMOPORT;
 	delete GUI_MAP;
-	delete USERINPUT;
 }  
             
 void Player::Update_global()
@@ -892,12 +890,10 @@ bool Player::IsObjectOnScreen(const Points& points) const
 
 void Player::SessionInSpace(GameTimer* TIMER)
 {
-	USERINPUT->UpdateInSpace();
-
 	cursor->updateMousePos();
 
 	npc->GetStarSystem()->FindVisibleEntities_c(this);
-	this->Render(TIMER->getTurnEnded(), GetShowAllOrbit(), GetShowAllPath()); 
+	Render(TIMER->getTurnEnded(), GetShowAllOrbit(), GetShowAllPath()); 
 
 	if (TIMER->getTurnEnded() == true)  
 	{
@@ -928,8 +924,6 @@ void Player::SessionInSpace(GameTimer* TIMER)
 
 void Player::SessionInKosmoport()
 {
-	USERINPUT->UpdateInKosmoport();
-         
         if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::ANGAR_ID)
         {
         	((Kosmoport*)npc->GetLand())->GetAngar()->MouseControl(this);                                
@@ -1031,6 +1025,6 @@ void Player::LoadDataUniquePlayer(const boost::property_tree::ptree& load_ptree)
 
 void Player::ResolveDataUniquePlayer()
 {
-        npc = (Npc*)EntityManager::Instance().GetEntityById(data_unresolved_player.npc_id );
+        BindNpc((Npc*)EntityManager::Instance().GetEntityById(data_unresolved_player.npc_id));
 }		
 

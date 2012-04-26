@@ -57,7 +57,7 @@ Npc :: ~Npc() /* virtual */
         delete state_machine;        
 }  
 
-void Npc::Bind(Vehicle* vehicle) 	           
+void Npc::BindVehicle(Vehicle* vehicle) 	           
 { 
 	this->vehicle = vehicle; 
 	vehicle->SetNpc(this); 
@@ -84,7 +84,10 @@ void Npc::ThinkCommon_inLand_inStatic()
 void Npc::Update_inSpace_inStatic()
 {
 	vehicle->GetWeaponComplex()->PrepareWeapons();
-        vehicle->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets();
+	if (vehicle->GetGrappleSlot()->GetGrappleEquipment())
+	{
+        	vehicle->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets();
+        }
         vehicle->SelfRepairEvent();
         // drive work, energy and so on
                	     		
@@ -292,13 +295,16 @@ void Npc::SaveDataUniqueNpc(boost::property_tree::ptree& save_ptree, const std::
 
 void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
 {
-	data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresoved.vehicle_id");
-	data_unresolved_npc.land_id = load_ptree.get<int>("unresoved.land_id");
+	data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresolved.vehicle_id");
+	data_unresolved_npc.land_id = load_ptree.get<int>("unresolved.land_id");
 }
 
 void Npc::ResolveDataUniqueNpc()
 {
-        vehicle = (Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_npc.vehicle_id);
+        BindVehicle( (Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_npc.vehicle_id) );
         if (data_unresolved_npc.land_id != NONE_ID) (BaseLand*)EntityManager::Instance().GetEntityById(data_unresolved_npc.land_id);
         else land = NULL;
+
+	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this); 
+	
 }		

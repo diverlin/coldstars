@@ -42,7 +42,7 @@ ItemSlot::ItemSlot(int id)
 
 ItemSlot::~ItemSlot()
 {
-        delete item;
+        //delete item;
 }
                 
 void ItemSlot::SetRect(int pos_x, int pos_y, int w, int h) 
@@ -64,7 +64,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
    	
 		if (data_id.subtype_id == item->GetFunctionalSlotSubTypeId())
 		{              
-			item->BindSlot(this);
+			item->SetSlot(this);
 			item->UpdateOwnerAbilities();
 		
 			return true;
@@ -270,52 +270,44 @@ bool ItemSlot::CheckDistance(BaseGameEntity* _target) const
        	return false;
 }
 
-///*virtual*/
-//void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree) const
-//{
-	//const std::string root = "item_slot." + int2str(GetId())+".";
-	//SaveDataUniqueBase(save_ptree, root);
-	//SaveDataUniqueItemSlot(save_ptree, root);
-//}
+/*virtual*/
+void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	const std::string root = "item_slot." + int2str(GetId())+".";
+	SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueItemSlot(save_ptree, root);
+}
 
-///*virtual*/		
-//void ItemSlot::LoadData(boost::property_tree::ptree& load_ptree)
-//{
-	//LoadDataUniqueBase(load_ptree);
-	//LoadDataUniqueItemSlot(load_ptree);
-//}
+/*virtual*/		
+void ItemSlot::LoadData(boost::property_tree::ptree& load_ptree)
+{
+	LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueItemSlot(load_ptree);
+}
 	
-///*virtual*/	
-//void ItemSlot::ResolveData()
-//{
-	//ResolveDataUniqueBase();
-	//ResolveDataUniqueItemSlot();
-//}
+/*virtual*/	
+void ItemSlot::ResolveData()
+{
+	ResolveDataUniqueBase();
+	ResolveDataUniqueItemSlot();
+}
 
-//void ItemSlot::SaveDataUniqueItemSlot(boost::property_tree::ptree& save_ptree, const std::string& root) const
-//{
-        //if (GetEquipedStatus()) save_ptree.put(root+"unresolved.item_id", item->GetId()); 
-        //else                    save_ptree.put(root+"unresolved.item_id", NONE_ID); 
-        //save_ptree.put(root+"rect.BottomLeft.x", rect.getBottomLeft().x);
-        //save_ptree.put(root+"rect.BottomLeft.y", rect.getBottomLeft().y); 
-        //save_ptree.put(root+"rect.width", rect.getWidth());
-        //save_ptree.put(root+"rect.height", rect.getHeight()); 
-//}
+void ItemSlot::SaveDataUniqueItemSlot(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+        save_ptree.put(root+"rect.BottomLeft.x", rect.getBottomLeft().x);
+        save_ptree.put(root+"rect.BottomLeft.y", rect.getBottomLeft().y); 
+        save_ptree.put(root+"rect.width", rect.getWidth());
+        save_ptree.put(root+"rect.height", rect.getHeight()); 
+}
 
-//void ItemSlot::LoadDataUniqueItemSlot(const boost::property_tree::ptree& load_ptree)
-//{
-        //data_unresolved_ItemSlot.item_id = load_ptree.get<int>("unresolved.item_id");
-        //int rect_blx = load_ptree.get<int>("rect.BottomLeft.x");
-        //int rect_bly = load_ptree.get<int>("rect.BottomLeft.y");
-        //int rect_w   = load_ptree.get<int>("rect.width"); 
-        //int rect_h   = load_ptree.get<int>("rect.height"); 
-        //SetRect(rect_blx, rect_bly, rect_w, rect_h);           
-//}
+void ItemSlot::LoadDataUniqueItemSlot(const boost::property_tree::ptree& load_ptree)
+{
+        int rect_blx = load_ptree.get<int>("rect.BottomLeft.x");
+        int rect_bly = load_ptree.get<int>("rect.BottomLeft.y");
+        int rect_w   = load_ptree.get<int>("rect.width"); 
+        int rect_h   = load_ptree.get<int>("rect.height"); 
+        SetRect(rect_blx, rect_bly, rect_w, rect_h);           
+}
 
-//void ItemSlot::ResolveDataUniqueItemSlot()
-//{
-        //if (data_unresolved_ItemSlot.item_id != NONE_ID)
-        //{
-                //InsertItem((BaseItem*)EntityManager::Instance().GetEntityById(data_unresolved_ItemSlot.item_id));
-        //}
-//}
+void ItemSlot::ResolveDataUniqueItemSlot()
+{}

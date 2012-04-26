@@ -47,9 +47,6 @@ class Player : public Base
 		bool GetShowRadarRange()   const { return show_radar_range; }
 		bool GetShowGrappleRange() const { return show_grapple_range; }          	 
    
-		bool GetNextTurnReady() const { return USERINPUT->GetNextTurnReady(); }   
-
-
      		void BindNpc(Npc*);
      		
      		void ClearVisibleEntities();
@@ -115,7 +112,6 @@ class Player : public Base
  		GuiSpace*     GUI_SPACE;      
  		GuiKosmoport* GUI_KOSMOPORT;  
 		GuiMap*       GUI_MAP;         
-		UserInput*    USERINPUT;       
     		
     		void Render(bool, bool, bool); 
      			void RenderEntities_NEW();

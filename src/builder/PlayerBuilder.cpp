@@ -53,7 +53,7 @@ void PlayerBuilder::CreateNewInternals()
         	
 	VehicleBuilder::Instance().Equip(pship);   // improove
         
-        pnpc->Bind(pship);
+        pnpc->BindVehicle(pship);
    	player->BindNpc(pnpc);
 }
 

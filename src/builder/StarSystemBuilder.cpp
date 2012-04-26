@@ -74,17 +74,17 @@ void StarSystemBuilder::CreateNewInternals()
 }
 
   	
-//void StarSystemBuilder::CreateNewInternals2()
-//{
-        //vec2f center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH -  2*GUI::MAP::BORDER_X), 
-        	     //getRandInt(GUI::MAP::BORDER_Y, Config::Instance().SCREEN_HEIGHT - 2*GUI::MAP::BORDER_Y) );			 
-        //starsystem->GetPoints().setCenter(center);
+void StarSystemBuilder::CreateNewInternals2()
+{
+        vec2f center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH -  2*GUI::MAP::BORDER_X), 
+        	     getRandInt(GUI::MAP::BORDER_Y, Config::Instance().SCREEN_HEIGHT - 2*GUI::MAP::BORDER_Y) );			 
+        starsystem->GetPoints().setCenter(center);
 
-        //this->CreateStar();
+        this->CreateStar();
           
         //int planet_num = getRandInt(ENTITY::STARSYSTEM::PLANET_MIN, ENTITY::STARSYSTEM::PLANET_MAX);
         //this->CreatePlanets(planet_num);
-//}
+}
 
 void StarSystemBuilder::CreateBackground(int distNebula_num, int distStar_num, int color_id)
 {
@@ -160,7 +160,7 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
         	VehicleBuilder::Instance().Equip(spacestation);       	// improove
         	spacestation->UpdateAllPropertiesAndAbilities(); 	// improove
         
-        	npc->Bind(spacestation);
+        	npc->BindVehicle(spacestation);
 
 		vec2f center(getRandInt(0, 800), getRandInt(0, 800));
 		float angle = getRandInt(0, 360);  
@@ -205,7 +205,7 @@ void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num)
        
         	VehicleBuilder::Instance().Equip(ship);            	// improove
         
-        	npc->Bind(ship);
+        	npc->BindVehicle(ship);
 
 		vec2f center(getRandInt(0, 800), getRandInt(0, 800));
 		float angle = getRandInt(0, 360);  

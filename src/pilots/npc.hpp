@@ -31,25 +31,25 @@ class Npc : public BaseGameEntity
               	Npc(int);              	    
      		virtual ~Npc();    		
      		
-     		void SetRaceId(int race_id) { this->race_id = race_id; };
-     		void SetModelAi(AiModelBase* ai_model) { this->ai_model = ai_model; };
-		void SetGarbageReady(bool garbage_ready)      { data_life.garbage_ready = garbage_ready; }
-		void SetAlive(bool alive) 		      { data_life.is_alive = alive; }
-		void SetLand(BaseLand* land)   		      { this->land = land; };
-		void SetScanTarget(Vehicle* vehicle_to_scan)  { this->vehicle_to_scan = vehicle_to_scan; };
-		void SetUpperControl(bool upper_control)      { this->upper_control = upper_control; };
+     		void SetRaceId(int race_id)			{ this->race_id = race_id; };
+     		void SetModelAi(AiModelBase* ai_model)		{ this->ai_model = ai_model; };
+		void SetGarbageReady(bool garbage_ready)	{ data_life.garbage_ready = garbage_ready; }
+		void SetAlive(bool alive)			{ data_life.is_alive = alive; }
+		void SetLand(BaseLand* land)			{ this->land = land; };
+		void SetScanTarget(Vehicle* vehicle_to_scan)	{ this->vehicle_to_scan = vehicle_to_scan; };
+		void SetUpperControl(bool upper_control)       { this->upper_control = upper_control; };
 
-		int GetRaceId() 		const { return race_id; };
-		StarSystem* GetFailBackStarSystem() const { return failback_starsystem; };
-		Vehicle* GetVehicle()           const { return vehicle; };
-		Skill* GetSkill() 	        const { return skill; };
-		Vehicle* GetScanTarget()        const { return vehicle_to_scan; };	
-		Observation* GetObservation()   const { return observation; };
-		unsigned long int GetCredits()  const { return credits; };   
-		StateMachine* GetStateMachine() const { return state_machine; };
-		BaseLand* GetLand()             const { return land; };
+		int GetRaceId()				const { return race_id; };
+		StarSystem* GetFailBackStarSystem() 	const { return failback_starsystem; };
+		Vehicle* GetVehicle()           	const { return vehicle; };
+		Skill* GetSkill() 	        	const { return skill; };
+		Vehicle* GetScanTarget()        	const { return vehicle_to_scan; };	
+		Observation* GetObservation()   	const { return observation; };
+		unsigned long int GetCredits()  	const { return credits; };   
+		StateMachine* GetStateMachine() 	const { return state_machine; };
+		BaseLand* GetLand()             	const { return land; };
 
-   		void Bind(Vehicle*);
+   		void BindVehicle(Vehicle*);
 
 		void IncreaseCredits(int);
 		void DecreaseCredits(int);

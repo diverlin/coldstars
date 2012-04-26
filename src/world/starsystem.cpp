@@ -997,7 +997,7 @@ void StarSystem::LoadDataUniqueStarSystem(const boost::property_tree::ptree& ptr
 
 void StarSystem::ResolveDataUniqueStarSystem()
 {
-	galaxy = (Galaxy*)EntityManager::Instance().GetEntityById(data_unresolved_ss.galaxy_id);
+	((Galaxy*)EntityManager::Instance().GetEntityById(data_unresolved_ss.galaxy_id))->Add(this);
 }
 
 void StarSystem::SaveData(boost::property_tree::ptree& save_ptree) const

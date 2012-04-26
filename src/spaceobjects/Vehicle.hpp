@@ -160,7 +160,7 @@ class Vehicle : public BaseGameEntity
                 
                 std::vector<ItemSlot*> slot_total_vec;
         	std::vector<ItemSlot*> slot_otsec_vec;
-        	
+		        	
         	// KONTUR RECT 
         	Rect kontur_rect; 
                 TextureOb* texOb_korpus;

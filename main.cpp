@@ -27,7 +27,7 @@ int main()
 
         GalaxyBuilder::Instance().CreateNewGalaxy();
         GalaxyBuilder::Instance().CreateNewInternals();
-        Galaxy* galaxy = GalaxyBuilder::Instance().GetGalaxy();
+        //Galaxy* galaxy = GalaxyBuilder::Instance().GetGalaxy();
         
 	PlayerBuilder::Instance().CreateNewPlayer();
 	PlayerBuilder::Instance().CreateNewInternals();
@@ -36,8 +36,7 @@ int main()
 	vec2f center(-400, 400);
 	float angle = 0;  
 
-	StarSystem* starsystem = galaxy->GetRandomStarSystem();
-	starsystem->Add(player->GetNpc()->GetVehicle(), center, angle, NULL);
+	GalaxyBuilder::Instance().GetGalaxy()->GetRandomStarSystem()->Add(player->GetNpc()->GetVehicle(), center, angle, NULL);
 	
 	//player->GetScreen()->resize(Config::Instance().SCREEN_WIDTH*2, Config::Instance().SCREEN_HEIGHT);
 
@@ -49,16 +48,32 @@ int main()
 
 		for (int i = 0; i < Config::Instance().GAMESPEED; i++)  // fake implementation (static ai should not be run several times at once)
 		{
-			galaxy->Update(TIMER->getTurnTick());
+			GalaxyBuilder::Instance().GetGalaxy()->Update(TIMER->getTurnTick());
 		}
 
-		if ((TIMER->getTurnEnded() == true) and (player->GetNextTurnReady()))
+		if ((TIMER->getTurnEnded() == true) and (UserInput::Instance().GetNextTurnReady()))
 		{
 			TIMER->nextTurn();
 		}              	
 		/* server code end */
 
 		/* client code start */
+		UserInput::Instance().Update(player);
+		
+		if (UserInput::Instance().GetSaveCommand())
+		{
+			EntityManager::Instance().SaveEvent();
+		}
+
+		if (UserInput::Instance().GetLoadCommand())
+		{
+			int _player_id = player->GetId();
+			EntityManager::Instance().LoadPass0();
+			EntityManager::Instance().LoadPass1();
+					
+			player = (Player*)EntityManager::Instance().GetEntityById(_player_id);
+		}
+				
 		player->RunSession(TIMER);
 		/* client code end */           	
 	}

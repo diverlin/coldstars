@@ -144,6 +144,11 @@ void Ship::LoadDataUniqueShip(const boost::property_tree::ptree&)
 {}
 
 void Ship::ResolveDataUniqueShip()
-{}
+{
+	ShipBuilder::Instance().CreateAllComplexes(this);
+	
+	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this, data_unresolved_BaseGameEntity.center, data_unresolved_BaseGameEntity.angle, parent); 
+		
+}
 
 

@@ -108,7 +108,9 @@ void Star::LoadDataUniqueStar(const boost::property_tree::ptree& load_ptree)
 {}
 
 void Star::ResolveDataUniqueStar()
-{}
+{
+	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this); 	
+}
 
 
 void Star::SaveData(boost::property_tree::ptree& save_ptree) const

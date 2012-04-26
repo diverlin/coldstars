@@ -85,7 +85,7 @@ class GuiMap;
 
 #include "src/Base.hpp"
 
-#include "src/gui/userInput.hpp"
+#include "src/gui/UserInput.hpp"
 #include "src/items/BaseItem.hpp"
 #include "src/items/modules/BaseModule.hpp"
 #include "src/items/modules/RocketModule.hpp"
@@ -349,7 +349,7 @@ class GuiMap;
 #include "src/gui/guiMap.cpp"
 #include "src/gui/cursor.cpp"   
 
-#include "src/gui/userInput.cpp"
+#include "src/gui/UserInput.cpp"
 
 #include "src/resources/textureOb.cpp"
 #include "src/resources/textureManager.cpp"

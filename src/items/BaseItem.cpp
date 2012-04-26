@@ -35,9 +35,6 @@ BaseItem::BaseItem()
 BaseItem::~BaseItem ()
 {}
 
-void BaseItem::BindSlot(ItemSlot* slot)    { this->slot = slot; }
-
-
 void BaseItem::Deterioration()
 {
     	condition -= data_item.deterioration_rate;
@@ -122,5 +119,5 @@ void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_pt
 void BaseItem::ResolveDataUniqueBaseItem()
 {
 	textureOb = g_TEXTURE_MANAGER.GetTextureObByPath(data_unresolved_BaseItem.textureOb_path);
-	slot      = (ItemSlot*)EntityManager::Instance().GetEntityById(data_unresolved_BaseItem.slot_id);
+	((ItemSlot*)EntityManager::Instance().GetEntityById(data_unresolved_BaseItem.slot_id))->InsertItem(this);
 }
