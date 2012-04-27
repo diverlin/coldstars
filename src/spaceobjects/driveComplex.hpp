@@ -30,6 +30,9 @@ class DriveComplex
       		void setTarget(BaseGameEntity*, int);       
       		void setStaticTargetCoords(vec2f);
       		
+                void SetDriveSlot(ItemSlot* drive_slot) { this->drive_slot = drive_slot; };
+                void SetBakSlot(ItemSlot* bak_slot)     { this->bak_slot = bak_slot; };
+                
       		ItemSlot* GetDriveSlot() const { return drive_slot; };
         	ItemSlot* GetBakSlot()   const { return bak_slot; };
                   
@@ -39,7 +42,7 @@ class DriveComplex
       		bool getDockingPermission();               
        	
         	void resetTarget();
-        	
+
         	void Update_inSpace_inStatic();
         	void update_inSpace_inDynamic();
                 
@@ -49,14 +52,14 @@ class DriveComplex
       	private:
                 ItemSlot* drive_slot;
         	ItemSlot* bak_slot;
-        	
+
       		Vehicle* owner_vehicle;
       		BaseGameEntity* target;
 
 		TrailEffect* drive_trail; 
-		
+
 		vec2f target_pos;
-		
+
 		int action_id;
 		float target_distance;   
 		vec2f target_offset;
@@ -87,7 +90,7 @@ class DriveComplex
 	        void calcPath();
 			vec2f calcRoundPath();
 			void calcDirectPath(vec2f);
-		                				
+
 		void defineDistance(int);
 };
 

@@ -26,7 +26,13 @@ class WeaponComplex
 	public:
       		WeaponComplex(Vehicle*);
       		~WeaponComplex();
-      		
+
+                void SetWeaponSlot1(ItemSlot* weapon_slot1) { this->weapon_slot1 = weapon_slot1; };
+                void SetWeaponSlot2(ItemSlot* weapon_slot2) { this->weapon_slot2 = weapon_slot2; };
+                void SetWeaponSlot3(ItemSlot* weapon_slot3) { this->weapon_slot3 = weapon_slot3; };
+                void SetWeaponSlot4(ItemSlot* weapon_slot4) { this->weapon_slot4 = weapon_slot4; };
+                void SetWeaponSlot5(ItemSlot* weapon_slot5) { this->weapon_slot5 = weapon_slot5; };
+                
                 ItemSlot* GetWeaponSlot1() { return weapon_slot1; };
                 ItemSlot* GetWeaponSlot2() { return weapon_slot2; };
                 ItemSlot* GetWeaponSlot3() { return weapon_slot3; };
