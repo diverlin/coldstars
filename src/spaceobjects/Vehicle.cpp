@@ -60,23 +60,23 @@ Vehicle::Vehicle()
 /*virtual*/
 Vehicle::~Vehicle()
 {
-	for (unsigned int i = 0; i < slot_otsec_vec.size(); i++)
-    	{
-		delete slot_otsec_vec[i];  
-    	}
+	//for (unsigned int i = 0; i < slot_otsec_vec.size(); i++)
+    	//{
+		//delete slot_otsec_vec[i];  
+    	//}
        	
     	delete weapon_complex;
     	delete drive_complex;
 	delete protection_complex;
 	
-	delete radar_slot;
-        delete scaner_slot;
-        delete energizer_slot;
-        delete grapple_slot;
-        delete droid_slot;
-        delete freezer_slot;
+	//delete radar_slot;
+        //delete scaner_slot;
+        //delete energizer_slot;
+        //delete grapple_slot;
+        //delete droid_slot;
+        //delete freezer_slot;
         
-        delete gate_slot;
+        //delete gate_slot;
 } 
 
                 				      
@@ -93,6 +93,9 @@ void Vehicle::Add(ItemSlot* slot)
 	
 	switch(slot->GetSubTypeId())
 	{
+                case SLOT::DRIVE_ID:     { drive_complex->SetDriveSlot(slot); break; }
+                case SLOT::BAK_ID:       { drive_complex->SetBakSlot(slot); break; }
+                case SLOT::PROTECTOR_ID: { protection_complex->SetProtectorSlot(slot); break; }
 		case SLOT::RADAR_ID:     { radar_slot  = slot; break; }
 		case SLOT::SCANER_ID:    { scaner_slot = slot; break; }
 		

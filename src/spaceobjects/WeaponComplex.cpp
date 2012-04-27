@@ -36,11 +36,11 @@ WeaponComplex::WeaponComplex(Vehicle* vehicle)
 
 WeaponComplex::~WeaponComplex()
 {        
-        delete weapon_slot1;
-        delete weapon_slot2;
-        delete weapon_slot3;
-        delete weapon_slot4;
-        delete weapon_slot5;
+        //delete weapon_slot1;
+        //delete weapon_slot2;
+        //delete weapon_slot3;
+        //delete weapon_slot4;
+        //delete weapon_slot5;
         
     	delete turrel1;
         delete turrel2;

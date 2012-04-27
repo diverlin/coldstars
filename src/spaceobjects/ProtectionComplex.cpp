@@ -28,18 +28,13 @@ ProtectionComplex::ProtectionComplex(Vehicle* vehicle)
         
         shield_effect->GetPoints().initMainQuadPoints(1.2*vehicle->GetTextureOb()->getFrameWidth(), 1.2*vehicle->GetTextureOb()->getFrameHeight());
     	shield_effect->GetPoints().addMainQuadPoints();
- 
- 	protector_slot = GetNewItemSlot(SLOT::PROTECTOR_ID); 
-	protector_slot->SetRect(owner_vehicle->GetGuiRect().getCenter().x-3*GUI::SLOT::WIDTH_FOR_SHIP, 
-			        owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
-			        GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
-				    
-    	vehicle->Add(protector_slot); 
+        
+        protector_slot = NULL;
 }
 
 ProtectionComplex::~ProtectionComplex() 
 { 
-        delete protector_slot;
+        //delete protector_slot;
         delete shield_effect; 
 }
 

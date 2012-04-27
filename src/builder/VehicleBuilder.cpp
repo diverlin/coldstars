@@ -26,61 +26,6 @@ VehicleBuilder& VehicleBuilder::Instance()
 
 VehicleBuilder::~VehicleBuilder() {}
 
-
-//Ship* VehicleBuilder::GetNewShip(int race_id, int subtype_id, int size_id, int weapons_num, int id) const
-//{
-	//if (id == NONE_ID)
-	//{
-		//id = g_ID_GENERATOR.getNextId();
-	//}
-        //Ship* ship = new Ship(id);
-        //EntityManager::Instance().RegisterEntity(ship);
-                
-    	//TextureOb* texOb = g_TEXTURE_MANAGER.getRandomShipTexObWithFollowingAtrributes(race_id, subtype_id, size_id); 
-       
-       	//int protection_rate = 1;
-       	//if (subtype_id == CLASS::WARRIOR_ID)
-        //{
-        	//protection_rate = 3;
-        //}
-        
-        //KorpusData data_korpus;
-    	//data_korpus.space       = size_id*150 + getRandInt(0, 100);
-    	//data_korpus.armor       = data_korpus.space;
-    	//data_korpus.protection  = size_id/2*protection_rate;
-    	//data_korpus.temperature = 100;
-        //data_korpus.price       = getRandInt(200, 400)*size_id;
-
-        //data_korpus.slot_grapple_num = 1;
-        //data_korpus.slot_weapon_num  = weapons_num;
-       
-
-    	
-        //LifeData data_life;
-        //data_life.armor      = data_korpus.armor;
-        //data_life.dying_time = 10*texOb->size_id;
-        
-        //int size_threshold = 2; 
-    	//if (texOb->size_id > size_threshold)
-       		//data_korpus.render_TURRELS = true; 
-    	//else
-       		//data_korpus.render_TURRELS = false; 
-	
-	//ship->SetSubTypeId(subtype_id);
-	//ship->SetKorpusData(data_korpus);
-	//ship->SetTextureOb(texOb);
-	//ship->SetLifeData(data_life);
-	
-	//CreateKorpusGeometry(ship);
-        //CreateKorpusGui(ship);
-        //CreateEquipmentSlots(ship);
-        //CreateDriveComplex(ship);
-        //CreateWeaponsComplex(ship);
-        //CreateProtectionComplex(ship);
-        
-        //return ship;
-//}
-
 Satellite* VehicleBuilder::GetNewSatellite(int id) const
 {
         if (id == NONE_ID)
@@ -121,11 +66,12 @@ Satellite* VehicleBuilder::GetNewSatellite(int id) const
 	
 	CreateKorpusGeometry(satellite);
         CreateKorpusGui(satellite);
-        CreateEquipmentSlots(satellite);
         CreateDriveComplex(satellite);
         CreateWeaponsComplex(satellite);
-        CreateProtectionComplex(satellite);	
-	
+        CreateProtectionComplex(satellite);
+        
+        CreateEquipmentSlots(satellite);
+
 	return satellite;
 
 }
@@ -171,11 +117,11 @@ SpaceStation* VehicleBuilder::GetNewSpaceStation(int id) const
     	
 	CreateKorpusGeometry(spacestation);
         CreateKorpusGui(spacestation);
-        CreateEquipmentSlots(spacestation);
         CreateDriveComplex(spacestation);
         CreateWeaponsComplex(spacestation);
         CreateProtectionComplex(spacestation);	
-        
+        CreateEquipmentSlots(spacestation);
+                
     	spacestation->CreateLand(RACE::R0_ID);
     	    
     	return spacestation;
@@ -200,11 +146,11 @@ RocketBullet* VehicleBuilder::GetNewRocket(BulletData data_bullet, ItemSlot* slo
         CreateKorpusGeometry(rocket);
         //CreateShieldGeometry(rocket);
         //CreateGuiKontur(rocket);
-        //CreateEquipmentSlots(rocket);
         CreateDriveComplex(rocket);
         //CreateWeaponsComplex(rocket);
-        //CreateProtectionComplex(rocket);	
-         
+        //CreateProtectionComplex(rocket);
+        //CreateEquipmentSlots(rocket);
+                 
         if ( (slot->GetOwnerVehicle()->data_korpus.draw_turrels == true) and (force_center_start == false))
     	{
         	rocket->place(slot->GetTurrel()->GetPoints().getCenter(), slot->GetTurrel()->GetPoints().getAngleDegree(), offset);

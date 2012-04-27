@@ -1,3 +1,33 @@
+bak_equipment
+{
+    -1
+    {
+        data_id
+        {
+            id -1
+            type_id 0
+            subtype_id 5
+        }
+        price -1062
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 6
+        data_item
+        {
+            modules_num_max 0
+            condition_max 66
+            deterioration_rate 1
+            mass 38
+        }
+        unresolved
+        {
+            textureOb_path data/item/bak/bak_Race0_Tech1.png
+            slot_id 39
+        }
+        fuel_max_orig 7932
+        fuel 7932
+    }
+}
 galaxy
 {
     1
@@ -28,15 +58,15 @@ starsystem
         }
         angle
         {
-            x 30
-            y 13
+            x 33
+            y 34
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.78
+            z 0.11
         }
         collision_radius 0
         mass 0
@@ -48,8 +78,8 @@ starsystem
             starsystem_id 2
             center
             {
-                x 477
-                y 90
+                x 136
+                y 75
             }
             angle_2D 0
         }
@@ -72,15 +102,15 @@ starsystem
         }
         angle
         {
-            x 14
-            y 24
+            x 25
+            y 25
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.14
+            z 0.95
         }
         collision_radius 0
         mass 0
@@ -92,8 +122,8 @@ starsystem
             starsystem_id 4
             center
             {
-                x 486
-                y 312
+                x 345
+                y 198
             }
             angle_2D 0
         }
@@ -116,15 +146,15 @@ starsystem
         }
         angle
         {
-            x 18
-            y 15
+            x 29
+            y 11
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.11
+            z 0.23
         }
         collision_radius 0
         mass 0
@@ -136,8 +166,8 @@ starsystem
             starsystem_id 6
             center
             {
-                x 385
-                y 171
+                x 226
+                y 164
             }
             angle_2D 0
         }
@@ -160,15 +190,15 @@ starsystem
         }
         angle
         {
-            x 33
-            y 22
+            x 20
+            y 33
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.41
+            z 0.21
         }
         collision_radius 0
         mass 0
@@ -180,8 +210,8 @@ starsystem
             starsystem_id 8
             center
             {
-                x 92
-                y 61
+                x 108
+                y 101
             }
             angle_2D 0
         }
@@ -204,15 +234,15 @@ starsystem
         }
         angle
         {
-            x 13
-            y 26
+            x 32
+            y 25
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.49
+            z 0.64
         }
         collision_radius 0
         mass 0
@@ -224,8 +254,8 @@ starsystem
             starsystem_id 10
             center
             {
-                x 160
-                y 307
+                x 243
+                y 69
             }
             angle_2D 0
         }
@@ -248,15 +278,15 @@ starsystem
         }
         angle
         {
-            x 18
-            y 33
+            x 20
+            y 14
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.21
+            z 0.26
         }
         collision_radius 0
         mass 0
@@ -268,8 +298,8 @@ starsystem
             starsystem_id 12
             center
             {
-                x 104
-                y 121
+                x 128
+                y 346
             }
             angle_2D 0
         }
@@ -292,15 +322,15 @@ starsystem
         }
         angle
         {
-            x 31
-            y 15
+            x 10
+            y 12
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.36
+            z 0.83
         }
         collision_radius 0
         mass 0
@@ -312,8 +342,8 @@ starsystem
             starsystem_id 14
             center
             {
-                x 398
-                y 202
+                x 216
+                y 154
             }
             angle_2D 0
         }
@@ -336,15 +366,15 @@ starsystem
         }
         angle
         {
-            x 19
-            y 33
+            x 10
+            y 19
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.12
+            z 0.18
         }
         collision_radius 0
         mass 0
@@ -356,8 +386,8 @@ starsystem
             starsystem_id 16
             center
             {
-                x 172
-                y 101
+                x 68
+                y 227
             }
             angle_2D 0
         }
@@ -380,15 +410,15 @@ starsystem
         }
         angle
         {
-            x 34
-            y 24
+            x 16
+            y 33
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.57
+            z 0.15
         }
         collision_radius 0
         mass 0
@@ -400,8 +430,8 @@ starsystem
             starsystem_id 18
             center
             {
-                x 475
-                y 335
+                x 169
+                y 173
             }
             angle_2D 0
         }
@@ -424,15 +454,15 @@ starsystem
         }
         angle
         {
-            x 16
-            y 11
+            x 22
+            y 31
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.51
+            z 0.95
         }
         collision_radius 0
         mass 0
@@ -444,8 +474,8 @@ starsystem
             starsystem_id 20
             center
             {
-                x 365
-                y 114
+                x 425
+                y 107
             }
             angle_2D 0
         }
@@ -471,17 +501,17 @@ star
         }
         angle
         {
-            x 10
-            y 33
+            x 21
+            y 20
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.53
+            z 0.65
         }
-        collision_radius 240
+        collision_radius 280
         mass 0
         data_unresolved_BaseGameEntity
         {
@@ -499,11 +529,11 @@ star
         place_type_id 18
         orbit
         {
-            it -13706531
+            it 269
         }
         data
         {
-            scale 89
+            scale 104
             orbit_center
             {
                 x 0
@@ -531,22 +561,22 @@ star
         }
         angle
         {
-            x 36
-            y 26
+            x 11
+            y 24
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.14
+            z 0.11
         }
-        collision_radius 216
+        collision_radius 251
         mass 0
         data_unresolved_BaseGameEntity
         {
             mesh_path data/obj/sphere/planet.obj
-            textureOb_path data/star/s_000.jpg
+            textureOb_path data/star/s_001.png
             parent_id -1
             starsystem_id 4
             center
@@ -559,11 +589,11 @@ star
         place_type_id 18
         orbit
         {
-            it -997948284
+            it 137
         }
         data
         {
-            scale 80
+            scale 93
             orbit_center
             {
                 x 0
@@ -591,22 +621,22 @@ star
         }
         angle
         {
-            x 31
-            y 19
+            x 14
+            y 34
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.33
+            z 0.77
         }
-        collision_radius 272
+        collision_radius 264
         mass 0
         data_unresolved_BaseGameEntity
         {
             mesh_path data/obj/sphere/planet.obj
-            textureOb_path data/star/s_000.jpg
+            textureOb_path data/star/s_001.png
             parent_id -1
             starsystem_id 6
             center
@@ -619,11 +649,11 @@ star
         place_type_id 18
         orbit
         {
-            it 0
+            it 19
         }
         data
         {
-            scale 101
+            scale 98
             orbit_center
             {
                 x 0
@@ -651,17 +681,17 @@ star
         }
         angle
         {
-            x 38
-            y 34
+            x 30
+            y 33
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.37
+            z 0.8
         }
-        collision_radius 299
+        collision_radius 261
         mass 0
         data_unresolved_BaseGameEntity
         {
@@ -679,11 +709,11 @@ star
         place_type_id 18
         orbit
         {
-            it 1654304430
+            it -906526632
         }
         data
         {
-            scale 111
+            scale 97
             orbit_center
             {
                 x 0
@@ -711,22 +741,22 @@ star
         }
         angle
         {
-            x 37
-            y 13
+            x 39
+            y 20
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.38
+            z 0.57
         }
-        collision_radius 251
+        collision_radius 221
         mass 0
         data_unresolved_BaseGameEntity
         {
             mesh_path data/obj/sphere/planet.obj
-            textureOb_path data/star/s_000.jpg
+            textureOb_path data/star/s_101.png
             parent_id -1
             starsystem_id 10
             center
@@ -739,11 +769,11 @@ star
         place_type_id 18
         orbit
         {
-            it -2136819783
+            it -1646158970
         }
         data
         {
-            scale 93
+            scale 82
             orbit_center
             {
                 x 0
@@ -771,15 +801,15 @@ star
         }
         angle
         {
-            x 37
-            y 32
+            x 25
+            y 30
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.55
+            z 0.53
         }
         collision_radius 221
         mass 0
@@ -799,7 +829,7 @@ star
         place_type_id 18
         orbit
         {
-            it -1851666488
+            it 16777216
         }
         data
         {
@@ -831,22 +861,22 @@ star
         }
         angle
         {
-            x 10
-            y 23
-            z 0
+            x 24
+            y 34
+            z 41.85003
         }
         d_angle
         {
             x 0
             y 0
-            z 0.84
+            z 0.31
         }
-        collision_radius 294
+        collision_radius 313
         mass 0
         data_unresolved_BaseGameEntity
         {
             mesh_path data/obj/sphere/planet.obj
-            textureOb_path data/star/s_000.jpg
+            textureOb_path data/star/s_101.png
             parent_id -1
             starsystem_id 14
             center
@@ -859,11 +889,11 @@ star
         place_type_id 18
         orbit
         {
-            it -1364793634
+            it -788556704
         }
         data
         {
-            scale 109
+            scale 116
             orbit_center
             {
                 x 0
@@ -891,7 +921,7 @@ star
         }
         angle
         {
-            x 25
+            x 21
             y 18
             z 0
         }
@@ -899,14 +929,14 @@ star
         {
             x 0
             y 0
-            z 0.28
+            z 0.91
         }
-        collision_radius 278
+        collision_radius 243
         mass 0
         data_unresolved_BaseGameEntity
         {
             mesh_path data/obj/sphere/planet.obj
-            textureOb_path data/star/s_100.jpg
+            textureOb_path data/star/s_101.png
             parent_id -1
             starsystem_id 16
             center
@@ -919,11 +949,11 @@ star
         place_type_id 18
         orbit
         {
-            it -1767654714
+            it 889192448
         }
         data
         {
-            scale 103
+            scale 90
             orbit_center
             {
                 x 0
@@ -951,22 +981,22 @@ star
         }
         angle
         {
-            x 12
-            y 12
+            x 25
+            y 18
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.7
+            z 0.91
         }
-        collision_radius 294
+        collision_radius 291
         mass 0
         data_unresolved_BaseGameEntity
         {
             mesh_path data/obj/sphere/planet.obj
-            textureOb_path data/star/s_100.jpg
+            textureOb_path data/star/s_000.jpg
             parent_id -1
             starsystem_id 18
             center
@@ -979,11 +1009,11 @@ star
         place_type_id 18
         orbit
         {
-            it -1266305078
+            it 0
         }
         data
         {
-            scale 109
+            scale 108
             orbit_center
             {
                 x 0
@@ -1011,22 +1041,22 @@ star
         }
         angle
         {
-            x 12
-            y 34
-            z 216.2207
+            x 11
+            y 11
+            z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.38
+            z 0.81
         }
-        collision_radius 232
+        collision_radius 221
         mass 0
         data_unresolved_BaseGameEntity
         {
             mesh_path data/obj/sphere/planet.obj
-            textureOb_path data/star/s_101.png
+            textureOb_path data/star/s_000.jpg
             parent_id -1
             starsystem_id 20
             center
@@ -1039,11 +1069,11 @@ star
         place_type_id 18
         orbit
         {
-            it -1666401089
+            it -4737097
         }
         data
         {
-            scale 86
+            scale 82
             orbit_center
             {
                 x 0
@@ -1090,15 +1120,15 @@ npc
         }
         angle
         {
-            x 25
-            y 36
+            x 14
+            y 24
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.98
+            z 0.89
         }
         collision_radius 0
         mass 0
@@ -1107,7 +1137,7 @@ npc
             mesh_path none
             textureOb_path data/race/7001.png
             parent_id -1
-            starsystem_id 20
+            starsystem_id 14
             center
             {
                 x 0
@@ -1136,12 +1166,12 @@ ship
         data_life
         {
             is_alive true
-            armor 15089
+            armor 15065
             dying_time 50
         }
         angle
         {
-            x 35
+            x 37
             y 24
             z 0
         }
@@ -1149,16 +1179,16 @@ ship
         {
             x 0
             y 0
-            z 0.89
+            z 0.18
         }
         collision_radius 58
-        mass 0
+        mass 512
         data_unresolved_BaseGameEntity
         {
             mesh_path none
             textureOb_path data/ship/k_71_0_0.png
             parent_id -1
-            starsystem_id 20
+            starsystem_id 14
             center
             {
                 x -400
@@ -1169,11 +1199,11 @@ ship
         place_type_id 18
         data_korpus
         {
-            space 15089
-            armor 15089
+            space 15065
+            armor 15065
             protection 150
             temperature 100
-            price 37300
+            price 25300
             draw_turrels true
             slot_grapple_num 1
             slot_drive_num 0
@@ -1188,5 +1218,470 @@ ship
             npc_id 24
             texOb_korpus_path data/ship/k_71_0_0.png
         }
+    }
+}
+rocket_equipment
+{
+    52
+    {
+        data_id
+        {
+            id 52
+            type_id 0
+            subtype_id 2
+        }
+        price 220
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 3
+        data_item
+        {
+            modules_num_max 2
+            condition_max 778
+            deterioration_rate 1
+            mass 37
+        }
+        unresolved
+        {
+            textureOb_path data/item/rocket/rocket_Race0_Tech0.png
+            slot_id 26
+        }
+        ammo_max_orig 34
+        ammo 34
+        damage_orig 4
+        radius_orig 580
+    }
+    55
+    {
+        data_id
+        {
+            id 55
+            type_id 0
+            subtype_id 2
+        }
+        price 220
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 3
+        data_item
+        {
+            modules_num_max 2
+            condition_max 871
+            deterioration_rate 1
+            mass 33
+        }
+        unresolved
+        {
+            textureOb_path data/item/rocket/rocket_Race0_Tech0.png
+            slot_id 29
+        }
+        ammo_max_orig 35
+        ammo 35
+        damage_orig 3
+        radius_orig 656
+    }
+    56
+    {
+        data_id
+        {
+            id 56
+            type_id 0
+            subtype_id 2
+        }
+        price 15
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 3
+        data_item
+        {
+            modules_num_max 2
+            condition_max 225
+            deterioration_rate 1
+            mass 40
+        }
+        unresolved
+        {
+            textureOb_path data/item/rocket/rocket_Race0_Tech2.png
+            slot_id 30
+        }
+        ammo_max_orig 29
+        ammo 29
+        damage_orig 7
+        radius_orig 628
+    }
+}
+lazer_equipment
+{
+    53
+    {
+        data_id
+        {
+            id 53
+            type_id 0
+            subtype_id 1
+        }
+        price 15
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 3
+        data_item
+        {
+            modules_num_max 2
+            condition_max 287
+            deterioration_rate 1
+            mass 11
+        }
+        unresolved
+        {
+            textureOb_path data/item/lazer/lazer_Race0_Tech0_Blue0.png
+            slot_id 27
+        }
+        damage_orig 5
+        radius_orig 473
+    }
+    54
+    {
+        data_id
+        {
+            id 54
+            type_id 0
+            subtype_id 1
+        }
+        price 376
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 3
+        data_item
+        {
+            modules_num_max 0
+            condition_max 672
+            deterioration_rate 1
+            mass 31
+        }
+        unresolved
+        {
+            textureOb_path data/item/lazer/lazer_Race0_Tech0_Red0.png
+            slot_id 28
+        }
+        damage_orig 18
+        radius_orig 492
+    }
+    66
+    {
+        data_id
+        {
+            id 66
+            type_id 0
+            subtype_id 1
+        }
+        price 79
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 3
+        data_item
+        {
+            modules_num_max 0
+            condition_max 763
+            deterioration_rate 1
+            mass 13
+        }
+        unresolved
+        {
+            textureOb_path data/item/lazer/lazer_Race0_Tech0_Blue0.png
+            slot_id -1
+        }
+        damage_orig 6
+        radius_orig 267
+    }
+    67
+    {
+        data_id
+        {
+            id 67
+            type_id 0
+            subtype_id 1
+        }
+        price 87
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 3
+        data_item
+        {
+            modules_num_max 2
+            condition_max 655
+            deterioration_rate 1
+            mass 24
+        }
+        unresolved
+        {
+            textureOb_path data/item/lazer/lazer_Race0_Tech0_Yellow0.png
+            slot_id -1
+        }
+        damage_orig 8
+        radius_orig 333
+    }
+    68
+    {
+        data_id
+        {
+            id 68
+            type_id 0
+            subtype_id 1
+        }
+        price 107
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 3
+        data_item
+        {
+            modules_num_max 0
+            condition_max 620
+            deterioration_rate 1
+            mass 10
+        }
+        unresolved
+        {
+            textureOb_path data/item/lazer/lazer_Race0_Tech0_Red0.png
+            slot_id -1
+        }
+        damage_orig 5
+        radius_orig 364
+    }
+}
+radar_equipment
+{
+    57
+    {
+        data_id
+        {
+            id 57
+            type_id 0
+            subtype_id 4
+        }
+        price 188
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 5
+        data_item
+        {
+            modules_num_max 2
+            condition_max 9540
+            deterioration_rate 1
+            mass 15
+        }
+        unresolved
+        {
+            textureOb_path data/item/radar/radar_Race0_Tech0.png
+            slot_id 31
+        }
+        radius_orig 1496
+    }
+}
+drive_equipment
+{
+    58
+    {
+        data_id
+        {
+            id 58
+            type_id 0
+            subtype_id 3
+        }
+        price 156
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 4
+        data_item
+        {
+            modules_num_max 2
+            condition_max 1494
+            deterioration_rate 1
+            mass 39
+        }
+        unresolved
+        {
+            textureOb_path data/item/drive/drive_Race0_Tech2.png
+            slot_id 38
+        }
+        speed_orig 234
+        hyper_orig 2701
+    }
+}
+energizer_equipment
+{
+    60
+    {
+        data_id
+        {
+            id 60
+            type_id 0
+            subtype_id 6
+        }
+        price 153
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 7
+        data_item
+        {
+            modules_num_max 2
+            condition_max 3447
+            deterioration_rate 1
+            mass 65
+        }
+        unresolved
+        {
+            textureOb_path data/item/energyBlock/energyBlock_Race0_Tech0.png
+            slot_id 33
+        }
+        energy_max_orig 5399
+        restoration_orig 24
+    }
+}
+protector_equipment
+{
+    61
+    {
+        data_id
+        {
+            id 61
+            type_id 0
+            subtype_id 7
+        }
+        price -209
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 8
+        data_item
+        {
+            modules_num_max 2
+            condition_max 6788
+            deterioration_rate 1
+            mass 47
+        }
+        unresolved
+        {
+            textureOb_path data/item/protector/protector_Race0_Tech2.png
+            slot_id 37
+        }
+        protection_orig 0
+    }
+}
+droid_equipment
+{
+    62
+    {
+        data_id
+        {
+            id 62
+            type_id 0
+            subtype_id 8
+        }
+        price 549
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 9
+        data_item
+        {
+            modules_num_max 1
+            condition_max 101
+            deterioration_rate 1
+            mass 40
+        }
+        unresolved
+        {
+            textureOb_path data/item/droid/droid_Race0_Tech2.png
+            slot_id 35
+        }
+        repair_orig 8
+    }
+}
+freezer_equipment
+{
+    63
+    {
+        data_id
+        {
+            id 63
+            type_id 0
+            subtype_id 9
+        }
+        price 326
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 10
+        data_item
+        {
+            modules_num_max 1
+            condition_max 3023
+            deterioration_rate 1
+            mass 14
+        }
+        unresolved
+        {
+            textureOb_path data/item/freezer/freezer_Race0_Tech0.png
+            slot_id 36
+        }
+        freeze_orig 3
+    }
+}
+scaner_equipment
+{
+    64
+    {
+        data_id
+        {
+            id 64
+            type_id 0
+            subtype_id 11
+        }
+        price -134
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 12
+        data_item
+        {
+            modules_num_max 1
+            condition_max 32
+            deterioration_rate 1
+            mass 28
+        }
+        unresolved
+        {
+            textureOb_path data/item/scaner/scaner_Race0_Tech1.png
+            slot_id 32
+        }
+        scan_orig 32
+    }
+}
+grapple_equipment
+{
+    65
+    {
+        data_id
+        {
+            id 65
+            type_id 0
+            subtype_id 10
+        }
+        price 155
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 11
+        data_item
+        {
+            modules_num_max 2
+            condition_max 420
+            deterioration_rate 1
+            mass 27
+        }
+        unresolved
+        {
+            textureOb_path data/item/grapple/grapple_Race0_Tech0.png
+            slot_id 34
+        }
+        strength_orig 16
+        radius_orig 172
+        speed_orig 196
+        maxNumItem_orig 3
     }
 }

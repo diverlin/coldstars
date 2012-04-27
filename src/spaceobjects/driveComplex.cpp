@@ -17,47 +17,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-DriveComplex :: DriveComplex(Vehicle* owner_vehicle)
+DriveComplex::DriveComplex(Vehicle* owner_vehicle)
 {      
 	this->owner_vehicle = owner_vehicle;
    
         target = NULL;
         
 	resetTarget();
-	
-	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID); 
-		
-        drive_slot = GetNewItemSlot(SLOT::DRIVE_ID); 
 
-	drive_slot->SetRect(owner_vehicle->GetGuiRect().getCenter().x-5*GUI::SLOT::WIDTH_FOR_SHIP, 
-			    owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
-                            GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
-				  
-	owner_vehicle->Add(drive_slot);
-	
-	
-        bak_slot = GetNewItemSlot(SLOT::BAK_ID); 
- 
-	bak_slot->SetRect(owner_vehicle->GetGuiRect().getCenter().x-5*GUI::SLOT::WIDTH_FOR_SHIP, 
-			  owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
-			  GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
-				    
-	owner_vehicle->Add(bak_slot);
-	
 	drive_trail = createTrailEffect(owner_vehicle->GetTextureOb()->size_id, owner_vehicle->GetPoints().getpMidLeft(), owner_vehicle->GetPoints().getpMidFarLeft());
-	      	
 }
 
-
-
-DriveComplex :: ~DriveComplex()
+DriveComplex::~DriveComplex()
 {      
-        delete drive_slot;
-        delete bak_slot;
+        //delete drive_slot;
+        //delete bak_slot;
         delete drive_trail;
 }
 
-void  DriveComplex :: resetTarget()
+void DriveComplex :: resetTarget()
 {
 	target = NULL;
     		

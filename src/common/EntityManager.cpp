@@ -153,6 +153,6 @@ void EntityManager::LoadPass1()
 {
 	for (std::map<int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
 	{
-		iterator->second->ResolveData();  			
+		iterator->second->ResolveData();
 	}
 }
