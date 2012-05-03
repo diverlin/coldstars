@@ -56,6 +56,8 @@ bool ItemSlot::InsertItem(BaseItem* item)
 	{
                 this->item = item;
                 is_EQUIPED = true; 
+                item->SetSlot(this);
+                                        
                         
 		if (data_id.subtype_id == SLOT::CARGO_ID) 
 		{                
@@ -64,9 +66,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
    	
 		if (data_id.subtype_id == item->GetFunctionalSlotSubTypeId())
 		{              
-			item->SetSlot(this);
-			item->UpdateOwnerAbilities();
-		
+			item->UpdateOwnerAbilities();		
 			return true;
 		}
 	}
@@ -298,6 +298,9 @@ void ItemSlot::SaveDataUniqueItemSlot(boost::property_tree::ptree& save_ptree, c
         save_ptree.put(root+"rect.BottomLeft.y", rect.getBottomLeft().y); 
         save_ptree.put(root+"rect.width", rect.getWidth());
         save_ptree.put(root+"rect.height", rect.getHeight()); 
+        
+        if (owner_vehicle) save_ptree.put(root+"unresolved.owner_vehicle_id", owner_vehicle->GetId());
+        else               save_ptree.put(root+"unresolved.owner_vehicle_id", NONE_ID);
 }
 
 void ItemSlot::LoadDataUniqueItemSlot(const boost::property_tree::ptree& load_ptree)
@@ -307,7 +310,12 @@ void ItemSlot::LoadDataUniqueItemSlot(const boost::property_tree::ptree& load_pt
         int rect_w   = load_ptree.get<int>("rect.width"); 
         int rect_h   = load_ptree.get<int>("rect.height"); 
         SetRect(rect_blx, rect_bly, rect_w, rect_h);           
+
+        unresolved_ItemSlot.owner_vehicle_id = load_ptree.get<int>("unresolved.owner_vehicle_id"); 
 }
 
 void ItemSlot::ResolveDataUniqueItemSlot()
-{}
+{
+        if (unresolved_ItemSlot.owner_vehicle_id != NONE_ID)
+                ((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.owner_vehicle_id))->Add(this);
+}

@@ -17,7 +17,6 @@
 */
 
 #include "include.hpp"
-#include "iostream"
 
 int main()
 {       
@@ -27,7 +26,6 @@ int main()
 
         GalaxyBuilder::Instance().CreateNewGalaxy();
         GalaxyBuilder::Instance().CreateNewInternals();
-        //Galaxy* galaxy = GalaxyBuilder::Instance().GetGalaxy();
         
 	PlayerBuilder::Instance().CreateNewPlayer();
 	PlayerBuilder::Instance().CreateNewInternals();
@@ -37,7 +35,7 @@ int main()
 	float angle = 0;  
 
 	GalaxyBuilder::Instance().GetGalaxy()->GetRandomStarSystem()->Add(player->GetNpc()->GetVehicle(), center, angle, NULL);
-	
+
 	//player->GetScreen()->resize(Config::Instance().SCREEN_WIDTH*2, Config::Instance().SCREEN_HEIGHT);
 
 	// GAME LOOP

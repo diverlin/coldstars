@@ -79,9 +79,10 @@ Vehicle::~Vehicle()
         //delete gate_slot;
 } 
 
-                				      
 void Vehicle::Add(ItemSlot* slot) 
 { 
+        std::cout<<"slot_type_id="<<slot->GetSubTypeId()<<", id="<<slot->GetId()<<std::endl;
+                
 	if (slot->GetSubTypeId() != SLOT::GATE_ID)
 	{
 		slot_total_vec.push_back(slot); 
@@ -90,7 +91,7 @@ void Vehicle::Add(ItemSlot* slot)
 	      		slot_otsec_vec.push_back(slot); 
 		}
 	}
-	
+
 	switch(slot->GetSubTypeId())
 	{
                 case SLOT::DRIVE_ID:     { drive_complex->SetDriveSlot(slot); break; }

@@ -42,6 +42,7 @@ class GuiSpace;
 class GuiKosmoport;
 class GuiMap;
 
+#include <iostream>
 #include "src/common/myVector.hpp"
 #include "src/common/gameStruct.hpp"
 #include "src/common/constants.hpp"
@@ -179,6 +180,7 @@ class GuiMap;
 #include "src/spaceobjects/satellite.hpp"
 #include "src/spaceobjects/Ship.hpp"
 #include "src/builder/ContainerBuilder.hpp"
+#include "src/builder/BakEquipmentBuilder.hpp"
 #include "src/builder/BaseVehicleBuilder.hpp"
 #include "src/builder/ShipBuilder.hpp"
 #include "src/builder/ItemSlotBuilder.hpp"
@@ -419,5 +421,7 @@ class GuiMap;
 #include "src/render/screen.cpp"
 #include "src/common/gameTimer.cpp"
 #include "src/config/SaveManager.cpp" 
+
+#include "src/builder/BakEquipmentBuilder.cpp"
 
 ////////////////////////////////////////////

@@ -145,10 +145,15 @@ void Ship::LoadDataUniqueShip(const boost::property_tree::ptree&)
 
 void Ship::ResolveDataUniqueShip()
 {
-	ShipBuilder::Instance().CreateAllComplexes(this);
-	
+        ShipBuilder::Instance().CreateKorpusGeometry(this);
+        ShipBuilder::Instance().CreateKorpusGui(this);
+        
+        ShipBuilder::Instance().CreateProtectionComplex(this);
+        ShipBuilder::Instance().CreateDriveComplex(this);
+        ShipBuilder::Instance().CreateWeaponsComplex(this);
+        
+        //ShipBuilder::Instance().CreateEquipmentSlots(this);
+        //ShipBuilder::Instance().Equip(this);
+                        
 	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this, data_unresolved_BaseGameEntity.center, data_unresolved_BaseGameEntity.angle, parent); 
-		
 }
-
-

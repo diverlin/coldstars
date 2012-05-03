@@ -56,6 +56,4 @@ class BakEquipment : public BaseEquipment
 		void ResolveDataUniqueBakEquipment();
 };
 
-BakEquipment* GetNewBakEquipment(int race_id, int revision_id = -1);
-
 #endif 

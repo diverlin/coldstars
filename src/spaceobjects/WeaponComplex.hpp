@@ -33,11 +33,11 @@ class WeaponComplex
                 void SetWeaponSlot4(ItemSlot* weapon_slot4) { this->weapon_slot4 = weapon_slot4; };
                 void SetWeaponSlot5(ItemSlot* weapon_slot5) { this->weapon_slot5 = weapon_slot5; };
                 
-                ItemSlot* GetWeaponSlot1() { return weapon_slot1; };
-                ItemSlot* GetWeaponSlot2() { return weapon_slot2; };
-                ItemSlot* GetWeaponSlot3() { return weapon_slot3; };
-                ItemSlot* GetWeaponSlot4() { return weapon_slot4; };
-                ItemSlot* GetWeaponSlot5() { return weapon_slot5; };
+                //ItemSlot* GetWeaponSlot1() { return weapon_slot1; };
+                //ItemSlot* GetWeaponSlot2() { return weapon_slot2; };
+                //ItemSlot* GetWeaponSlot3() { return weapon_slot3; };
+                //ItemSlot* GetWeaponSlot4() { return weapon_slot4; };
+                //ItemSlot* GetWeaponSlot5() { return weapon_slot5; };
         	
       		void PostCreateInit(int, bool);
 

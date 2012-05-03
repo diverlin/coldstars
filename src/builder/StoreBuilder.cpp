@@ -124,7 +124,10 @@ void StoreBuilder::PutRandomEquipment()
 
         for (unsigned int bii = 0; bii < bak_num; bii++)
         { 
-                store->Add(GetNewBakEquipment(RACE::R0_ID));
+                BakEquipmentBuilder::Instance().CreateNewBakEquipment();
+                BakEquipmentBuilder::Instance().CreateNewInternals();
+        
+                store->Add(BakEquipmentBuilder::Instance().GetBakEquipment());
         }
 
         for (unsigned int dii = 0; dii < droid_num; dii++)
