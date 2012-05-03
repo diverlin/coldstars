@@ -57,135 +57,135 @@ void WeaponComplex::PostCreateInit(int weapon_num, bool draw_turrels)
     	
         if (weapon_num >= 1)
     	{  
-                weapon_slot1 = GetNewItemSlot(SLOT::WEAPON_ID);       		
+                weapon_slot1 = GetNewItemSlot(SLOT::WEAPON_ID);
 
        		weapon_slot1->SetRect(owner_vehicle->GetGuiRect().getCenter().x + 1*GUI::SLOT::WIDTH_FOR_SHIP, 
        				      owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
-       				        GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);		
+       				      GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);		
        				      	
        		slot_weapon_vec.push_back(weapon_slot1);
        		owner_vehicle->Add(weapon_slot1); 
 
-       		turrel1 = new Turrel(weapon_slot1, owner_vehicle->GetPoints().getpWeapon1Center()); 
-                turrel1->SetTextureOb(texOb_turrel);       
-                turrel1->GetPoints().addMainQuadPoints();
-                turrel1->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
-                
-       		weapon_slot1->SetTurrel(turrel1);
-
        
        		if (draw_turrels == true)
        		{   
+                        turrel1 = new Turrel(weapon_slot1, owner_vehicle->GetPoints().getpWeapon1Center()); 
+                        turrel1->SetTextureOb(texOb_turrel);       
+                        turrel1->GetPoints().addMainQuadPoints();
+                        turrel1->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
+                
+                        weapon_slot1->SetTurrel(turrel1);
+                
            		owner_vehicle->GetPoints().initWeapon1CenterPoint(0, owner_vehicle->GetTextureOb()->getFrameHeight()/3);
            		owner_vehicle->GetPoints().addWeapon1CenterPoint();
        		} 
     	}
    
-    	if (weapon_num >= 2)
-    	{  
-                weapon_slot2 = GetNewItemSlot(SLOT::WEAPON_ID); 
+    	//if (weapon_num >= 2)
+    	//{  
+                //weapon_slot2 = GetNewItemSlot(SLOT::WEAPON_ID); 
                 
-       		weapon_slot2->SetRect(owner_vehicle->GetGuiRect().getCenter().x+1*GUI::SLOT::WIDTH_FOR_SHIP, 
-       				      owner_vehicle->GetGuiRect().getCenter().y+-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
-       				      GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
+       		//weapon_slot2->SetRect(owner_vehicle->GetGuiRect().getCenter().x+1*GUI::SLOT::WIDTH_FOR_SHIP, 
+       				      //owner_vehicle->GetGuiRect().getCenter().y+-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
+       				      //GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
        			    
-       		slot_weapon_vec.push_back(weapon_slot2);
-       		owner_vehicle->Add(weapon_slot2); 
+       		//slot_weapon_vec.push_back(weapon_slot2);
+       		//owner_vehicle->Add(weapon_slot2); 
        
-                turrel2 = new Turrel(weapon_slot2, owner_vehicle->GetPoints().getpWeapon2Center()); 
-       		turrel2->SetTextureOb(texOb_turrel);
-                turrel2->GetPoints().addMainQuadPoints();
-                turrel2->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
+                //turrel2 = new Turrel(weapon_slot2, owner_vehicle->GetPoints().getpWeapon2Center()); 
+       		//turrel2->SetTextureOb(texOb_turrel);
+                //turrel2->GetPoints().addMainQuadPoints();
+                //turrel2->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
                 
-              	weapon_slot2->SetTurrel(turrel2);
+              	//weapon_slot2->SetTurrel(turrel2);
 
         
-       		if (draw_turrels == true)
-       		{  
-           		owner_vehicle->GetPoints().initWeapon2CenterPoint(0, -owner_vehicle->GetTextureOb()->getFrameHeight()/3);
-           		owner_vehicle->GetPoints().addWeapon2CenterPoint();
-       		}
-    	}
+       		//if (draw_turrels == true)
+       		//{  
+           		//owner_vehicle->GetPoints().initWeapon2CenterPoint(0, -owner_vehicle->GetTextureOb()->getFrameHeight()/3);
+           		//owner_vehicle->GetPoints().addWeapon2CenterPoint();
+       		//}
+    	//}
 
-    	if (weapon_num >= 3)
-    	{  
-                weapon_slot3 = GetNewItemSlot(SLOT::WEAPON_ID); 
+    	//if (weapon_num >= 3)
+    	//{  
+                //weapon_slot3 = GetNewItemSlot(SLOT::WEAPON_ID); 
                 	
-       		weapon_slot3->SetRect(owner_vehicle->GetGuiRect().getCenter().x+1*GUI::SLOT::WIDTH_FOR_SHIP, 
-                                      owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
-       					GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
+       		//weapon_slot3->SetRect(owner_vehicle->GetGuiRect().getCenter().x+1*GUI::SLOT::WIDTH_FOR_SHIP, 
+                                      //owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
+       					//GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
        				
-       		slot_weapon_vec.push_back(weapon_slot3);
-       		owner_vehicle->Add(weapon_slot3); 
+       		//slot_weapon_vec.push_back(weapon_slot3);
+       		//owner_vehicle->Add(weapon_slot3); 
               
-       		turrel3 = new Turrel(weapon_slot3, owner_vehicle->GetPoints().getpWeapon3Center()); 
-       		turrel3->SetTextureOb(texOb_turrel);
-                turrel3->GetPoints().addMainQuadPoints();
-                turrel3->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
+       		//turrel3 = new Turrel(weapon_slot3, owner_vehicle->GetPoints().getpWeapon3Center()); 
+       		//turrel3->SetTextureOb(texOb_turrel);
+                //turrel3->GetPoints().addMainQuadPoints();
+                //turrel3->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
                 
                 
-              	weapon_slot3->SetTurrel(turrel3);
+              	//weapon_slot3->SetTurrel(turrel3);
        
-       		if (draw_turrels == true)
-       		{  
-           		owner_vehicle->GetPoints().initWeapon3CenterPoint(-owner_vehicle->GetTextureOb()->getFrameWidth()/5, owner_vehicle->GetTextureOb()->getFrameHeight()/3);
-           		owner_vehicle->GetPoints().addWeapon3CenterPoint();
-       		}
-    	}
+       		//if (draw_turrels == true)
+       		//{  
+           		//owner_vehicle->GetPoints().initWeapon3CenterPoint(-owner_vehicle->GetTextureOb()->getFrameWidth()/5, owner_vehicle->GetTextureOb()->getFrameHeight()/3);
+           		//owner_vehicle->GetPoints().addWeapon3CenterPoint();
+       		//}
+    	//}
 
-    	if (weapon_num >= 4)
-    	{  
-                weapon_slot4 = GetNewItemSlot(SLOT::WEAPON_ID); 
+    	//if (weapon_num >= 4)
+    	//{  
+                //weapon_slot4 = GetNewItemSlot(SLOT::WEAPON_ID); 
                 
-       		weapon_slot4->SetRect(owner_vehicle->GetGuiRect().getCenter().x+2.2*GUI::SLOT::WIDTH_FOR_SHIP, 
-                                      owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
-                                      GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);	
+       		//weapon_slot4->SetRect(owner_vehicle->GetGuiRect().getCenter().x+2.2*GUI::SLOT::WIDTH_FOR_SHIP, 
+                                      //owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
+                                      //GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);	
        			
-       		slot_weapon_vec.push_back(weapon_slot4);
-       		owner_vehicle->Add(weapon_slot4); 
+       		//slot_weapon_vec.push_back(weapon_slot4);
+       		//owner_vehicle->Add(weapon_slot4); 
               
-       		turrel4 = new Turrel(weapon_slot4, owner_vehicle->GetPoints().getpWeapon4Center()); 
-       		turrel4->SetTextureOb(texOb_turrel);
-                turrel4->GetPoints().addMainQuadPoints();
-                turrel4->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
+       		//turrel4 = new Turrel(weapon_slot4, owner_vehicle->GetPoints().getpWeapon4Center()); 
+       		//turrel4->SetTextureOb(texOb_turrel);
+                //turrel4->GetPoints().addMainQuadPoints();
+                //turrel4->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
                 
                 
-              	weapon_slot4->SetTurrel(turrel4);
+              	//weapon_slot4->SetTurrel(turrel4);
 
          
-       		if (draw_turrels == true)
-       		{  
-           		owner_vehicle->GetPoints().initWeapon4CenterPoint(owner_vehicle->GetTextureOb()->getFrameWidth()/5, -owner_vehicle->GetTextureOb()->getFrameHeight()/3);
-           		owner_vehicle->GetPoints().addWeapon4CenterPoint();
-       		}
+       		//if (draw_turrels == true)
+       		//{  
+           		//owner_vehicle->GetPoints().initWeapon4CenterPoint(owner_vehicle->GetTextureOb()->getFrameWidth()/5, -owner_vehicle->GetTextureOb()->getFrameHeight()/3);
+           		//owner_vehicle->GetPoints().addWeapon4CenterPoint();
+       		//}
 
-    	}   
+    	//}   
 
-    	if (weapon_num >= 5)
-    	{  
-                weapon_slot5 = GetNewItemSlot(SLOT::WEAPON_ID); 
+    	//if (weapon_num >= 5)
+    	//{  
+                //weapon_slot5 = GetNewItemSlot(SLOT::WEAPON_ID); 
                 
-       		weapon_slot5->SetRect(owner_vehicle->GetGuiRect().getCenter().x+2.2*GUI::SLOT::WIDTH_FOR_SHIP, 
-                                      owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
-                                      GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
+       		//weapon_slot5->SetRect(owner_vehicle->GetGuiRect().getCenter().x+2.2*GUI::SLOT::WIDTH_FOR_SHIP, 
+                                      //owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
+                                      //GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
        					
-       		slot_weapon_vec.push_back(weapon_slot5);
-       		owner_vehicle->Add(weapon_slot5); 
+       		//slot_weapon_vec.push_back(weapon_slot5);
+       		//owner_vehicle->Add(weapon_slot5); 
               
-       		turrel5 = new Turrel(weapon_slot5, owner_vehicle->GetPoints().getpWeapon5Center()); 
-              	turrel5->SetTextureOb(texOb_turrel);
-                turrel5->GetPoints().addMainQuadPoints();
-                turrel5->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
+       		//turrel5 = new Turrel(weapon_slot5, owner_vehicle->GetPoints().getpWeapon5Center()); 
+              	//turrel5->SetTextureOb(texOb_turrel);
+                //turrel5->GetPoints().addMainQuadPoints();
+                //turrel5->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
                 
                 
-                weapon_slot5->SetTurrel(turrel5);
+                //weapon_slot5->SetTurrel(turrel5);
        		
-       		if (draw_turrels == true)
-       		{  
-           		owner_vehicle->GetPoints().initWeapon5CenterPoint(-owner_vehicle->GetTextureOb()->getFrameWidth()/3, -owner_vehicle->GetTextureOb()->getFrameHeight()/3);
-           		owner_vehicle->GetPoints().addWeapon5CenterPoint();
-       		}
-    	} 
+       		//if (draw_turrels == true)
+       		//{  
+           		//owner_vehicle->GetPoints().initWeapon5CenterPoint(-owner_vehicle->GetTextureOb()->getFrameWidth()/3, -owner_vehicle->GetTextureOb()->getFrameHeight()/3);
+           		//owner_vehicle->GetPoints().addWeapon5CenterPoint();
+       		//}
+    	//} 
 }
 
 void WeaponComplex::PrepareWeapons()

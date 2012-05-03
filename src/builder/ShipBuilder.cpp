@@ -73,5 +73,12 @@ void ShipBuilder::CreateNewInternals(int race_id, int subtype_id, int size_id, i
 	ship->SetTextureOb(texOb);
 	ship->SetLifeData(data_life);
 	
-	CreateAllComplexes(ship);
+	CreateKorpusGeometry(ship);
+        CreateKorpusGui(ship);
+        
+        CreateProtectionComplex(ship);
+        CreateDriveComplex(ship);
+        CreateWeaponsComplex(ship);
+                                
+        CreateEquipmentSlots(ship);
 }

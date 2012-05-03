@@ -26,15 +26,9 @@ class BaseVehicleBuilder
 	public:
 		virtual ~BaseVehicleBuilder() {};
 
-		void CreateAllComplexes(Vehicle*) const; 
         	void Equip(Vehicle*) const; 
-        	 		                
-        protected:
-		BaseVehicleBuilder() {};
-		BaseVehicleBuilder(const BaseVehicleBuilder&) = delete;
-		BaseVehicleBuilder& operator=(const BaseVehicleBuilder&) = delete;
-				
-        	void CreateKorpusGeometry(Vehicle*) const;
+                
+                void CreateKorpusGeometry(Vehicle*) const;
         	void CreateKorpusGui(Vehicle*) const;
                 
                 void CreateDriveComplex(Vehicle*) const;
@@ -42,6 +36,11 @@ class BaseVehicleBuilder
         	void CreateProtectionComplex(Vehicle*) const; 
                 
                 void CreateEquipmentSlots(Vehicle*) const;
+                
+        protected:
+		BaseVehicleBuilder() {};
+		BaseVehicleBuilder(const BaseVehicleBuilder&) = delete;
+		BaseVehicleBuilder& operator=(const BaseVehicleBuilder&) = delete;
 }; 
 
 

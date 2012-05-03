@@ -20,6 +20,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef ITEMSLOT_H
 #define ITEMSLOT_H
 
+struct UnresolvedDataUniqueItemSlot
+{
+	int owner_vehicle_id;
+};
+
 
 class ItemSlot : public Base
 {   
@@ -113,6 +118,7 @@ class ItemSlot : public Base
                 bool CheckStarSystem(BaseGameEntity*) const;
            	bool CheckDistance(BaseGameEntity*) const;
                 
+                UnresolvedDataUniqueItemSlot unresolved_ItemSlot;
                 void SaveDataUniqueItemSlot(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueItemSlot(const boost::property_tree::ptree&);
 		void ResolveDataUniqueItemSlot();

@@ -71,6 +71,8 @@ void EntityManager::SaveEvent()
 		
 void EntityManager::LoadPass0()
 {
+        std::cout<<std::endl<<"load started"<<std::endl;
+        
 	this->Clear();
 
 	boost::property_tree::ptree load_ptree;
@@ -146,6 +148,19 @@ void EntityManager::LoadPass0()
 	//{
 		//GovermentBuilder::Instance().CreateNewGoverment(v.second.get<int>("data_id.id"));
 		//GovermentBuilder::Instance().GetGoverment()->LoadData(v.second);
+	//}
+        
+        BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("item_slot"))
+	{
+		ItemSlot* slot = GetNewItemSlot(v.second.get<int>("data_id.subtype_id"), v.second.get<int>("data_id.id"));
+		slot->LoadData(v.second);
+	}
+        
+	//BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("bak_equipment"))
+	//{
+		//BakEquipmentBuilder::Instance().CreateNewBakEquipment(v.second.get<int>("data_id.id"));
+		//BakEquipment* bak_equipment = BakEquipmentBuilder::Instance().GetBakEquipment();
+                //bak_equipment->LoadData(v.second);
 	//}
 }
 
