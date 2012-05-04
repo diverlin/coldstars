@@ -20,8 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 RocketEquipment::RocketEquipment(int id)
 {
         data_id.id         = id;
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::ROCKET_ID;     
+        data_id.subtype_id = SUBTYPE::ROCKET_ID;     
         
         ammo_max_orig = 0;
         damage_orig   = 0;

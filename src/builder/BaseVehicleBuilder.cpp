@@ -49,14 +49,32 @@ void BaseVehicleBuilder::CreateKorpusGui(Vehicle* vehicle) const
         
 void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
 {
-    	TextureOb* texOb_slot = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID);  
+    	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID);  
+	TextureOb* texOb_turrel = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::TURREL_ID); 
+        
+        //
+        ItemSlot* weapon_slot1 = GetNewItemSlot(SLOT::WEAPON_ID);
 
+        weapon_slot1->SetRect(vehicle->GetGuiRect().getCenter().x + 1*GUI::SLOT::WIDTH_FOR_SHIP, 
+                              vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
+       			      GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
+           
+        vehicle->GetPoints().initWeapon1CenterPoint(0, vehicle->GetTextureOb()->getFrameHeight()/3);
+        vehicle->GetPoints().addWeapon1CenterPoint();
+                                                   
+        Turrel* turrel1 = new Turrel(weapon_slot1, vehicle->GetPoints().getpWeapon1Center()); 
+        turrel1->SetTextureOb(texOb_turrel);       
+        turrel1->GetPoints().addMainQuadPoints();
+        turrel1->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
+        weapon_slot1->SetTurrel(turrel1);
+                        
+        vehicle->Add(weapon_slot1);
+        //
+                
 	ItemSlot* radar_slot = GetNewItemSlot(SLOT::RADAR_ID);
-
         radar_slot->SetRect(vehicle->GetGuiRect().getCenter().x+4*GUI::SLOT::WIDTH_FOR_SHIP, 
 			    vehicle->GetGuiRect().getCenter().y+1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
 			    GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
-
 	vehicle->Add(radar_slot);
 	
 	
@@ -69,7 +87,7 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
 	
 	
 	ItemSlot* energizer_slot = GetNewItemSlot(SLOT::ENERGIZER_ID); 
-	energizer_slot->SetRect(vehicle->GetGuiRect().getCenter().x-1*GUI::SLOT::WIDTH_FOR_SHIP, 
+	energizer_slot->SetRect(vehicle->GetGuiRect().getCenter().x-2*GUI::SLOT::WIDTH_FOR_SHIP, 
 				vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
 				GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
 	vehicle->Add(energizer_slot);
@@ -87,7 +105,7 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
     	
 	ItemSlot* droid_slot = GetNewItemSlot(SLOT::DROID_ID);
 
-	droid_slot->SetRect(vehicle->GetGuiRect().getCenter().x+1*GUI::SLOT::WIDTH_FOR_SHIP, 
+	droid_slot->SetRect(vehicle->GetGuiRect().getCenter().x-1*GUI::SLOT::WIDTH_FOR_SHIP, 
 			    vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
 			    GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);				    
     	vehicle->Add(droid_slot); 
@@ -170,33 +188,32 @@ void BaseVehicleBuilder::CreateProtectionComplex(Vehicle* vehicle) const
 	ProtectionComplex* protection_complex = new ProtectionComplex(vehicle); 	
  	vehicle->SetProtectionComplex(protection_complex);
 }
-        	
 
 void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
 {
     	if (vehicle->data_korpus.slot_weapon_num >= 1)
     	{
-       		vehicle->GetWeaponComplex()->GetWeaponSlot1()->InsertItem(GetNewRocketEquipment(RACE::R0_ID));     	
+       		vehicle->GetWeaponComplex()->Add(GetNewRocketEquipment(RACE::R0_ID));
     	}   
 
     	if (vehicle->data_korpus.slot_weapon_num >= 2)
     	{
-       		vehicle->GetWeaponComplex()->GetWeaponSlot2()->InsertItem(GetNewLazerEquipment(RACE::R0_ID)); 
+       		vehicle->GetWeaponComplex()->Add(GetNewLazerEquipment(RACE::R0_ID)); 
     	}   
     
     	if (vehicle->data_korpus.slot_weapon_num >= 3)
     	{
-       		vehicle->GetWeaponComplex()->GetWeaponSlot3()->InsertItem(GetNewLazerEquipment(RACE::R0_ID)); 
+       		vehicle->GetWeaponComplex()->Add(GetNewLazerEquipment(RACE::R0_ID)); 
     	}   
         
     	if (vehicle->data_korpus.slot_weapon_num >= 4)
     	{
-       		vehicle->GetWeaponComplex()->GetWeaponSlot4()->InsertItem(GetNewRocketEquipment(RACE::R0_ID)); 
+       		vehicle->GetWeaponComplex()->Add(GetNewRocketEquipment(RACE::R0_ID)); 
     	}   
     
     	if (vehicle->data_korpus.slot_weapon_num >= 5) 
     	{
-       		vehicle->GetWeaponComplex()->GetWeaponSlot5()->InsertItem(GetNewRocketEquipment(RACE::R0_ID)); 
+       		vehicle->GetWeaponComplex()->Add(GetNewRocketEquipment(RACE::R0_ID)); 
     	}   
         
     	vehicle->GetRadarSlot()->InsertItem(GetNewRadarEquipment(RACE::R0_ID)); 

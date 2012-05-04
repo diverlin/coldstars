@@ -19,9 +19,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 EnergizerModule::EnergizerModule(int id)
 {
-        data_id.id = id;
-	data_id.type_id    = MODULE::MODULE_ID;
-	data_id.subtype_id = MODULE::ENERGIZER_ID;
+        data_id.id         = id;
+	data_id.subtype_id = SUBTYPE::ENERGIZER_ID;
         
      	energy_max_add  = 0;
      	restoration_add = 0;

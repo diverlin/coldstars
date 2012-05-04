@@ -20,8 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 RadarEquipment::RadarEquipment(int id)
 {
         data_id.id         = id;
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::RADAR_ID;
+        data_id.subtype_id = SUBTYPE::RADAR_ID;
         
     	radius_orig = 0;
 }
@@ -137,8 +136,8 @@ RadarEquipment* GetNewRadarEquipment(int race_id, int revision_id)
     	
     	ItemCommonData common_data;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::RADAR::MODULES_NUM_MIN, EQUIPMENT::RADAR::MODULES_NUM_MAX);
-    	common_data.mass            = getRandInt(EQUIPMENT::RADAR::MASS_MIN, EQUIPMENT::RADAR::MASS_MAX);
-    	common_data.condition_max   = getRandInt(EQUIPMENT::RADAR::CONDITION_MIN, EQUIPMENT::RADAR::CONDITION_MAX) * tech_rate;
+    	common_data.mass            = getRandInt(EQUIPMENT::RADAR::MASS_MIN,        EQUIPMENT::RADAR::MASS_MAX);
+    	common_data.condition_max   = getRandInt(EQUIPMENT::RADAR::CONDITION_MIN,   EQUIPMENT::RADAR::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
         int id    = g_ID_GENERATOR.getNextId();

@@ -19,7 +19,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 BaseEquipment::BaseEquipment()
 {
-        race_id = RACE::R0_ID;
+        data_id.type_id = TYPE::EQUIPMENT_ID;
+        race_id         = RACE::R0_ID;
           
     	is_DAMAGED = false;
 

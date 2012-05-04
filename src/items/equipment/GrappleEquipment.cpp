@@ -20,8 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 GrappleEquipment::GrappleEquipment(int id)
 {
         data_id.id         = id;
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::GRAPPLE_ID;
+        data_id.subtype_id = SUBTYPE::GRAPPLE_ID;
         
     	strength_orig   = 0;
     	radius_orig     = 0;
@@ -276,15 +275,15 @@ GrappleEquipment* GetNewGrappleEquipment(int race_id, int revision_id)
     	TextureOb* texOb_item = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::GRAPPLE_EQUIPMENT_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::GRAPPLE_EQUIPMENT_ID, revision_id) 
 
-    	int strength_orig   = getRandInt(EQUIPMENT::GRAPPLE::STRENGTH_MIN, EQUIPMENT::GRAPPLE::STRENGTH_MAX);
-    	int radius_orig     = getRandInt(EQUIPMENT::GRAPPLE::RADIUS_MIN, EQUIPMENT::GRAPPLE::RADIUS_MAX);
-    	int speed_orig      = getRandInt(EQUIPMENT::GRAPPLE::SPEED_MIN, EQUIPMENT::GRAPPLE::SPEED_MAX);
+    	int strength_orig   = getRandInt(EQUIPMENT::GRAPPLE::STRENGTH_MIN,   EQUIPMENT::GRAPPLE::STRENGTH_MAX);
+    	int radius_orig     = getRandInt(EQUIPMENT::GRAPPLE::RADIUS_MIN,     EQUIPMENT::GRAPPLE::RADIUS_MAX);
+    	int speed_orig      = getRandInt(EQUIPMENT::GRAPPLE::SPEED_MIN,      EQUIPMENT::GRAPPLE::SPEED_MAX);
     	int maxNumItem_orig = getRandInt(EQUIPMENT::GRAPPLE::MAXNUMITEM_MIN, EQUIPMENT::GRAPPLE::MAXNUMITEM_MAX);
     	
     	ItemCommonData common_data;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::GRAPPLE::MODULES_NUM_MIN, EQUIPMENT::GRAPPLE::MODULES_NUM_MAX);
-    	common_data.mass            = getRandInt(EQUIPMENT::GRAPPLE::MASS_MIN, EQUIPMENT::GRAPPLE::MASS_MAX);
-    	common_data.condition_max   = getRandInt(EQUIPMENT::GRAPPLE::CONDITION_MIN, EQUIPMENT::GRAPPLE::CONDITION_MAX) * tech_rate;
+    	common_data.mass            = getRandInt(EQUIPMENT::GRAPPLE::MASS_MIN,        EQUIPMENT::GRAPPLE::MASS_MAX);
+    	common_data.condition_max   = getRandInt(EQUIPMENT::GRAPPLE::CONDITION_MIN,   EQUIPMENT::GRAPPLE::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
         int id = g_ID_GENERATOR.getNextId();

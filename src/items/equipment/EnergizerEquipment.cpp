@@ -20,8 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 EnergizerEquipment::EnergizerEquipment(int id)
 {
         data_id.id         = id;
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::ENERGIZER_ID;
+        data_id.subtype_id = SUBTYPE::ENERGIZER_ID;
                
     	energy_max_orig  = 0;
         restoration_orig = 0;
@@ -148,13 +147,13 @@ EnergizerEquipment* GetNewEnergizerEquipment(int race_id, int revision_id)
     	TextureOb* texOb_item = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ENERGIZER_EQUIPMENT_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(ENERGIZER_ITEM_TEXTURE_ID, revision_id)
 
-    	int energy_max_orig  = getRandInt(EQUIPMENT::ENERGIZER::ENERGY_MIN, EQUIPMENT::ENERGIZER::ENERGY_MAX);
+    	int energy_max_orig  = getRandInt(EQUIPMENT::ENERGIZER::ENERGY_MIN,      EQUIPMENT::ENERGIZER::ENERGY_MAX);
     	int restoration_orig = getRandInt(EQUIPMENT::ENERGIZER::RESTORATION_MIN, EQUIPMENT::ENERGIZER::RESTORATION_MAX);
     	
     	ItemCommonData common_data;
     	common_data.modules_num_max  = getRandInt(EQUIPMENT::ENERGIZER::MODULES_NUM_MIN, EQUIPMENT::ENERGIZER::MODULES_NUM_MAX);
-    	common_data.mass             = getRandInt(EQUIPMENT::ENERGIZER::MASS_MIN, EQUIPMENT::ENERGIZER::MASS_MAX);
-    	common_data.condition_max    = getRandInt(EQUIPMENT::ENERGIZER::CONDITION_MIN, EQUIPMENT::ENERGIZER::CONDITION_MAX) * tech_rate;
+    	common_data.mass             = getRandInt(EQUIPMENT::ENERGIZER::MASS_MIN,        EQUIPMENT::ENERGIZER::MASS_MAX);
+    	common_data.condition_max    = getRandInt(EQUIPMENT::ENERGIZER::CONDITION_MIN,   EQUIPMENT::ENERGIZER::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
         int id = g_ID_GENERATOR.getNextId();

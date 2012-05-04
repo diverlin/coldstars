@@ -20,8 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 ProtectorEquipment::ProtectorEquipment(int id)
 {
         data_id.id         = id;
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::PROTECTOR_ID;
+        data_id.subtype_id = SUBTYPE::PROTECTOR_ID;
         
     	protection_orig = 0;
 }
@@ -137,8 +136,8 @@ ProtectorEquipment* GetNewProtectorEquipment(int race_id, int revision_id)
     	
     	ItemCommonData common_data;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::PROTECTOR::MODULES_NUM_MIN, EQUIPMENT::PROTECTOR::MODULES_NUM_MAX);
-    	common_data.mass            = getRandInt(EQUIPMENT::PROTECTOR::MASS_MIN, EQUIPMENT::PROTECTOR::MASS_MAX);
-    	common_data.condition_max   = getRandInt(EQUIPMENT::PROTECTOR::CONDITION_MIN, EQUIPMENT::PROTECTOR::CONDITION_MAX) * tech_rate;
+    	common_data.mass            = getRandInt(EQUIPMENT::PROTECTOR::MASS_MIN,        EQUIPMENT::PROTECTOR::MASS_MAX);
+    	common_data.condition_max   = getRandInt(EQUIPMENT::PROTECTOR::CONDITION_MIN,   EQUIPMENT::PROTECTOR::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
         int id = g_ID_GENERATOR.getNextId();

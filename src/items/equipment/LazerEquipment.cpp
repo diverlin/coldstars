@@ -20,8 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 LazerEquipment::LazerEquipment(int id)
 {
         data_id.id         = id;
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::LAZER_ID;
+        data_id.subtype_id = SUBTYPE::LAZER_ID;
         
    	damage_orig = 0;
    	radius_orig = 0;

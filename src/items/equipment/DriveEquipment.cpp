@@ -20,8 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 DriveEquipment::DriveEquipment(int id)
 {
         data_id.id         = id;
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::DRIVE_ID;
+        data_id.subtype_id = SUBTYPE::DRIVE_ID;
         
      	speed_orig = 0;
      	hyper_orig = 0;
@@ -158,8 +157,8 @@ DriveEquipment* GetNewDriveEquipment(int race_id, int revision_id)
     
         ItemCommonData common_data;
         common_data.modules_num_max = getRandInt(EQUIPMENT::DRIVE::MODULES_NUM_MIN, EQUIPMENT::DRIVE::MODULES_NUM_MAX);
-        common_data.mass            = getRandInt(EQUIPMENT::DRIVE::MASS_MIN, EQUIPMENT::DRIVE::MASS_MAX);
-        common_data.condition_max   = getRandInt(EQUIPMENT::DRIVE::CONDITION_MIN, EQUIPMENT::DRIVE::CONDITION_MAX) * tech_rate;
+        common_data.mass            = getRandInt(EQUIPMENT::DRIVE::MASS_MIN,        EQUIPMENT::DRIVE::MASS_MAX);
+        common_data.condition_max   = getRandInt(EQUIPMENT::DRIVE::CONDITION_MIN,   EQUIPMENT::DRIVE::CONDITION_MAX) * tech_rate;
         common_data.deterioration_rate = 1;
 
         int id = g_ID_GENERATOR.getNextId();

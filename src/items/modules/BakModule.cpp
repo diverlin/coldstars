@@ -19,9 +19,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 BakModule::BakModule(int id)
 {
-	data_id.id = id;
-	data_id.type_id    = MODULE::MODULE_ID;
-	data_id.subtype_id = MODULE::BAK_ID;
+	data_id.id         = id;
+	data_id.subtype_id = SUBTYPE::BAK_ID;
 	
     	fuel_max_add = 0;
 }
