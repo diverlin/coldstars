@@ -22,16 +22,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Turrel
 {
         public:
-                Turrel(ItemSlot*, vec2f*);
+                Turrel(ItemSlot*);
                 ~Turrel();
 
                 void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
+                void SetCenter(vec2f* pCenter) { this->pCenter = pCenter; };
                               
-                void SetTarget(BaseGameEntity* target) { this->target = target; };
+                void SetTarget(BaseGameEntity* target)  { this->target = target; };
                 void SetSelectedStatus(bool selected)   { is_SELECTED = selected; };
                 
-                bool GetSelectedStatus() const { return is_SELECTED; };
-                Points& GetPoints() { return points; };
+                bool GetSelectedStatus() const  { return is_SELECTED; };
+                Points& GetPoints()             { return points; };
                 
                 BaseGameEntity* GetTarget() const { return target; };
        
