@@ -62,10 +62,11 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
         vehicle->GetPoints().initWeapon1CenterPoint(0, vehicle->GetTextureOb()->getFrameHeight()/3);
         vehicle->GetPoints().addWeapon1CenterPoint();
                                                    
-        Turrel* turrel1 = new Turrel(weapon_slot1, vehicle->GetPoints().getpWeapon1Center()); 
+        Turrel* turrel1 = new Turrel(weapon_slot1); 
         turrel1->SetTextureOb(texOb_turrel);       
         turrel1->GetPoints().addMainQuadPoints();
         turrel1->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
+        turrel1->SetCenter(vehicle->GetPoints().getpWeapon1Center());
         weapon_slot1->SetTurrel(turrel1);
                         
         vehicle->Add(weapon_slot1);

@@ -17,13 +17,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-Turrel::Turrel(ItemSlot* _slot, vec2f* _pCenter)
+Turrel::Turrel(ItemSlot* _slot)
 {
         slot = _slot;
                  
-        pCenter  = _pCenter;
-        
-        target = NULL;
+        pCenter = NULL;        
+        target  = NULL;
 }
 
 Turrel::~Turrel()
