@@ -20,8 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 ScanerEquipment::ScanerEquipment(int id)
 {
         data_id.id         = id;
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::SCANER_ID; 
+        data_id.subtype_id = SUBTYPE::SCANER_ID; 
         
     	scan_orig = 0;
 }
@@ -141,8 +140,8 @@ ScanerEquipment* GetNewScanerEquipment(int race_id, int revision_id)
     	
     	ItemCommonData common_data;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::SCANER::MODULES_NUM_MIN, EQUIPMENT::SCANER::MODULES_NUM_MAX);
-    	common_data.mass            = getRandInt(EQUIPMENT::SCANER::MASS_MIN, EQUIPMENT::SCANER::MASS_MAX);
-    	common_data.condition_max   = getRandInt(EQUIPMENT::SCANER::CONDITION_MIN, EQUIPMENT::SCANER::CONDITION_MAX) * tech_rate;
+    	common_data.mass            = getRandInt(EQUIPMENT::SCANER::MASS_MIN,        EQUIPMENT::SCANER::MASS_MAX);
+    	common_data.condition_max   = getRandInt(EQUIPMENT::SCANER::CONDITION_MIN,   EQUIPMENT::SCANER::CONDITION_MAX) * tech_rate;
     	common_data.deterioration_rate = 1;
 
         int id = g_ID_GENERATOR.getNextId();

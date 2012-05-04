@@ -69,7 +69,7 @@ enum TYPE
 	SPACE_ID,
 	GOVERMENT_ID, STORE_ID, SHOP_ID, ANGAR_ID
 };
-	
+
 namespace GALAXY
 {
 const int STARSYSTEM_NUM_MIN = 10;
@@ -144,14 +144,28 @@ const float ANGULAR_SPEED  = 1.0;
 const int LIFE_TIME = 3 * TURN_TIME;
 }
 
-};
+}
 
 
+namespace TYPE
+{       
+        enum TYPE
+	{
+                EQUIPMENT_ID, MODULE_ID
+	};        
+}
 
+namespace SUBTYPE
+{
+        enum SUBTYPE
+        {
+                LAZER_ID, ROCKET_ID, DRIVE_ID, RADAR_ID, BAK_ID, ENERGIZER_ID, PROTECTOR_ID, DROID_ID, FREEZER_ID, GRAPPLE_ID, SCANER_ID  
+        };
+}
 
 
 namespace EQUIPMENT
-{
+{       
 namespace ENERGIZER
 {
 const int ENERGY_MIN = 2000;
@@ -463,24 +477,6 @@ namespace SLOT
 		SLOT_ID, 
 		CARGO_ID, GATE_ID, WEAPON_ID, DRIVE_ID, RADAR_ID, BAK_ID, ENERGIZER_ID, PROTECTOR_ID, DROID_ID, FREEZER_ID, GRAPPLE_ID, SCANER_ID 
 	};
-}
-
-namespace EQUIPMENT
-{
-	enum TYPE
-	{
-		EQUIPMENT_ID, 
-		LAZER_ID, ROCKET_ID, DRIVE_ID, RADAR_ID, BAK_ID, ENERGIZER_ID, PROTECTOR_ID, DROID_ID, FREEZER_ID, GRAPPLE_ID, SCANER_ID
-	};	
-}
-
-namespace MODULE
-{
-	enum TYPE
-	{
-		MODULE_ID, 
-		LAZER_ID, ROCKET_ID, DRIVE_ID, RADAR_ID, BAK_ID, ENERGIZER_ID, PROTECTOR_ID, DROID_ID, FREEZER_ID, GRAPPLE_ID, SCANER_ID
-	};	
 }
 
 namespace CLASS

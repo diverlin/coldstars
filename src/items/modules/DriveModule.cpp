@@ -19,9 +19,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 DriveModule::DriveModule(int id)
 {
-	data_id.id = id;
-	data_id.type_id    = MODULE::MODULE_ID;
-	data_id.subtype_id = MODULE::DRIVE_ID;
+	data_id.id         = id;
+	data_id.subtype_id = SUBTYPE::DRIVE_ID;
 	
      	speed_add = 0;
      	hyper_add = 0;

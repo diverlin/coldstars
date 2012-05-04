@@ -20,8 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 GrappleModule::GrappleModule(int id)
 {
         data_id.type_id    = id;
-        data_id.type_id    = MODULE::MODULE_ID;
-        data_id.subtype_id = MODULE::GRAPPLE_ID;  
+        data_id.subtype_id = SUBTYPE::GRAPPLE_ID;  
         
         strength_add   = 0;
         radius_add     = 0;

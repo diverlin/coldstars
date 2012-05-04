@@ -20,8 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 RadarModule::RadarModule(int id)
 {
         data_id.id         = id;
-        data_id.type_id    = MODULE::MODULE_ID;
-        data_id.subtype_id = MODULE::RADAR_ID; 
+        data_id.subtype_id = SUBTYPE::RADAR_ID; 
         
      	radius_add = 0;
 }

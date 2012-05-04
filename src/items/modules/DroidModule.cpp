@@ -19,9 +19,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 DroidModule::DroidModule(int id)
 {
-	data_id.id = id;
-	data_id.type_id    = MODULE::MODULE_ID;
-	data_id.subtype_id = MODULE::DROID_ID;
+	data_id.id         = id;
+	data_id.subtype_id = SUBTYPE::DROID_ID;
 	
      	repair_add = 0;
 }

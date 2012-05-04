@@ -18,72 +18,55 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 WeaponComplex::WeaponComplex(Vehicle* vehicle)
-{
-        weapon_slot1 = NULL;
-        weapon_slot2 = NULL;
-        weapon_slot3 = NULL;
-        weapon_slot4 = NULL;
-        weapon_slot5 = NULL;
-                
-        turrel1 = NULL;
-        turrel2 = NULL;
-        turrel3 = NULL;
-        turrel4 = NULL;
-        turrel5 = NULL;       
-        
+{ 
         this->owner_vehicle = vehicle;
 }
 
 WeaponComplex::~WeaponComplex()
-{        
-        //delete weapon_slot1;
-        //delete weapon_slot2;
-        //delete weapon_slot3;
-        //delete weapon_slot4;
-        //delete weapon_slot5;
-        
-    	delete turrel1;
-        delete turrel2;
-        delete turrel3;
-        delete turrel4;
-        delete turrel5;
-}
+{}
 
+bool WeaponComplex::AddSlot(ItemSlot* slot)
+{
+        slot_weapon_vec.push_back(slot); 
+}
+        
+bool WeaponComplex::Add(BaseItem* item)
+{
+        for(unsigned int i = 0; i<slot_weapon_vec.size(); i++)
+        {
+                if (slot_weapon_vec[i]->GetEquipedStatus() == false)
+                {
+                     slot_weapon_vec[i]->InsertItem(item);
+                     return true;   
+                }
+        }
+        
+        return false;
+}
+                
 void WeaponComplex::PostCreateInit(int weapon_num, bool draw_turrels)
 {
 	this->weapon_num = weapon_num;
-	TextureOb* texOb_slot   = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID); 
-	TextureOb* texOb_turrel = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::TURREL_ID); 
     	
         if (weapon_num >= 1)
-    	{  
-                weapon_slot1 = GetNewItemSlot(SLOT::WEAPON_ID);
-
-       		weapon_slot1->SetRect(owner_vehicle->GetGuiRect().getCenter().x + 1*GUI::SLOT::WIDTH_FOR_SHIP, 
-       				      owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
-       				      GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);		
-       				      	
-       		slot_weapon_vec.push_back(weapon_slot1);
-       		owner_vehicle->Add(weapon_slot1); 
-
-       
+    	{         
        		if (draw_turrels == true)
        		{   
-                        turrel1 = new Turrel(weapon_slot1, owner_vehicle->GetPoints().getpWeapon1Center()); 
-                        turrel1->SetTextureOb(texOb_turrel);       
-                        turrel1->GetPoints().addMainQuadPoints();
-                        turrel1->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
+                        //turrel1 = new Turrel(weapon_slot1, owner_vehicle->GetPoints().getpWeapon1Center()); 
+                        //turrel1->SetTextureOb(texOb_turrel);       
+                        //turrel1->GetPoints().addMainQuadPoints();
+                        //turrel1->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
                 
-                        weapon_slot1->SetTurrel(turrel1);
+                        //weapon_slot1->SetTurrel(turrel1);
                 
-           		owner_vehicle->GetPoints().initWeapon1CenterPoint(0, owner_vehicle->GetTextureOb()->getFrameHeight()/3);
-           		owner_vehicle->GetPoints().addWeapon1CenterPoint();
+           		//owner_vehicle->GetPoints().initWeapon1CenterPoint(0, owner_vehicle->GetTextureOb()->getFrameHeight()/3);
+           		//owner_vehicle->GetPoints().addWeapon1CenterPoint();
        		} 
     	}
    
     	//if (weapon_num >= 2)
     	//{  
-                //weapon_slot2 = GetNewItemSlot(SLOT::WEAPON_ID); 
+                //ItemSlot* weapon_slot2 = GetNewItemSlot(SLOT::WEAPON_ID); 
                 
        		//weapon_slot2->SetRect(owner_vehicle->GetGuiRect().getCenter().x+1*GUI::SLOT::WIDTH_FOR_SHIP, 
        				      //owner_vehicle->GetGuiRect().getCenter().y+-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
@@ -109,7 +92,7 @@ void WeaponComplex::PostCreateInit(int weapon_num, bool draw_turrels)
 
     	//if (weapon_num >= 3)
     	//{  
-                //weapon_slot3 = GetNewItemSlot(SLOT::WEAPON_ID); 
+                //ItemSlot* weapon_slot3 = GetNewItemSlot(SLOT::WEAPON_ID); 
                 	
        		//weapon_slot3->SetRect(owner_vehicle->GetGuiRect().getCenter().x+1*GUI::SLOT::WIDTH_FOR_SHIP, 
                                       //owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
@@ -135,7 +118,7 @@ void WeaponComplex::PostCreateInit(int weapon_num, bool draw_turrels)
 
     	//if (weapon_num >= 4)
     	//{  
-                //weapon_slot4 = GetNewItemSlot(SLOT::WEAPON_ID); 
+                //ItemSlot* weapon_slot4 = GetNewItemSlot(SLOT::WEAPON_ID); 
                 
        		//weapon_slot4->SetRect(owner_vehicle->GetGuiRect().getCenter().x+2.2*GUI::SLOT::WIDTH_FOR_SHIP, 
                                       //owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
@@ -163,7 +146,7 @@ void WeaponComplex::PostCreateInit(int weapon_num, bool draw_turrels)
 
     	//if (weapon_num >= 5)
     	//{  
-                //weapon_slot5 = GetNewItemSlot(SLOT::WEAPON_ID); 
+                //ItemSlot* weapon_slot5 = GetNewItemSlot(SLOT::WEAPON_ID); 
                 
        		//weapon_slot5->SetRect(owner_vehicle->GetGuiRect().getCenter().x+2.2*GUI::SLOT::WIDTH_FOR_SHIP, 
                                       //owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
@@ -212,16 +195,16 @@ void WeaponComplex::ReloadAllWeapons()
   
 void WeaponComplex::SelectWeapons()
 {
-        if (weapon_num >= 1)
-                weapon_slot1->GetTurrel()->SetSelectedStatus(weapon_selector.slot_1);
-        if (weapon_num >= 2)
-                weapon_slot2->GetTurrel()->SetSelectedStatus(weapon_selector.slot_2);
-        if (weapon_num >= 3)
-                weapon_slot3->GetTurrel()->SetSelectedStatus(weapon_selector.slot_3);
-        if (weapon_num >= 4)
-                weapon_slot4->GetTurrel()->SetSelectedStatus(weapon_selector.slot_4);
-        if (weapon_num >= 5)
-                weapon_slot5->GetTurrel()->SetSelectedStatus(weapon_selector.slot_5);
+        //if (weapon_num >= 1)
+                //weapon_slot1->GetTurrel()->SetSelectedStatus(weapon_selector.slot_1);
+        //if (weapon_num >= 2)
+                //weapon_slot2->GetTurrel()->SetSelectedStatus(weapon_selector.slot_2);
+        //if (weapon_num >= 3)
+                //weapon_slot3->GetTurrel()->SetSelectedStatus(weapon_selector.slot_3);
+        //if (weapon_num >= 4)
+                //weapon_slot4->GetTurrel()->SetSelectedStatus(weapon_selector.slot_4);
+        //if (weapon_num >= 5)
+                //weapon_slot5->GetTurrel()->SetSelectedStatus(weapon_selector.slot_5);
 }
 
 bool WeaponComplex::IsAnyWeaponSelected() const

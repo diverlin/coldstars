@@ -60,23 +60,9 @@ Vehicle::Vehicle()
 /*virtual*/
 Vehicle::~Vehicle()
 {
-	//for (unsigned int i = 0; i < slot_otsec_vec.size(); i++)
-    	//{
-		//delete slot_otsec_vec[i];  
-    	//}
-       	
     	delete weapon_complex;
     	delete drive_complex;
 	delete protection_complex;
-	
-	//delete radar_slot;
-        //delete scaner_slot;
-        //delete energizer_slot;
-        //delete grapple_slot;
-        //delete droid_slot;
-        //delete freezer_slot;
-        
-        //delete gate_slot;
 } 
 
 void Vehicle::Add(ItemSlot* slot) 
@@ -86,14 +72,16 @@ void Vehicle::Add(ItemSlot* slot)
 	if (slot->GetSubTypeId() != SLOT::GATE_ID)
 	{
 		slot_total_vec.push_back(slot); 
-		if (slot->GetSubTypeId() == SLOT::CARGO_ID)
-		{
-	      		slot_otsec_vec.push_back(slot); 
-		}
 	}
+        
+        if (slot->GetSubTypeId() == SLOT::CARGO_ID)
+        {
+                slot_otsec_vec.push_back(slot); 
+        }
 
 	switch(slot->GetSubTypeId())
 	{
+                case SLOT::WEAPON_ID:    { weapon_complex->AddSlot(slot); break; }
                 case SLOT::DRIVE_ID:     { drive_complex->SetDriveSlot(slot); break; }
                 case SLOT::BAK_ID:       { drive_complex->SetBakSlot(slot); break; }
                 case SLOT::PROTECTOR_ID: { protection_complex->SetProtectorSlot(slot); break; }
@@ -667,7 +655,6 @@ void Vehicle::GrappleMicroProgramm()
        					break;
        				}
        			}
-
        		}
        	}
 }
@@ -696,23 +683,23 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
 
 void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptree)
 {
-   	data_korpus.space = load_ptree.get<int>("data_korpus.space");     
-   	data_korpus.armor = load_ptree.get<int>("data_korpus.armor");   
-   	data_korpus.protection = load_ptree.get<int>("data_korpus.protection"); 
+   	data_korpus.space       = load_ptree.get<int>("data_korpus.space");     
+   	data_korpus.armor       = load_ptree.get<int>("data_korpus.armor");   
+   	data_korpus.protection  = load_ptree.get<int>("data_korpus.protection"); 
    	data_korpus.temperature = load_ptree.get<int>("data_korpus.temperature"); 
 
-   	data_korpus.price = load_ptree.get<int>("data_korpus.price"); 
+   	data_korpus.price        = load_ptree.get<int>("data_korpus.price"); 
    	data_korpus.draw_turrels = load_ptree.get<bool>("data_korpus.draw_turrels"); 
 
-   	data_korpus.slot_grapple_num = load_ptree.get<int>("data_korpus.slot_grapple_num"); 
-   	data_korpus.slot_drive_num = load_ptree.get<int>("data_korpus.slot_drive_num"); 
+   	data_korpus.slot_grapple_num   = load_ptree.get<int>("data_korpus.slot_grapple_num"); 
+   	data_korpus.slot_drive_num     = load_ptree.get<int>("data_korpus.slot_drive_num"); 
    	data_korpus.slot_protector_num = load_ptree.get<int>("data_korpus.slot_protector_num"); 
-   	data_korpus.slot_radar_num = load_ptree.get<int>("data_korpus.slot_radar_num"); 
-   	data_korpus.slot_scaner_num = load_ptree.get<int>("data_korpus.slot_scaner_num"); 
-   	data_korpus.slot_freezer_num = load_ptree.get<int>("data_korpus.slot_freezer_num"); 
-   	data_korpus.slot_weapon_num = load_ptree.get<int>("data_korpus.slot_weapon_num"); 
+   	data_korpus.slot_radar_num     = load_ptree.get<int>("data_korpus.slot_radar_num"); 
+   	data_korpus.slot_scaner_num    = load_ptree.get<int>("data_korpus.slot_scaner_num"); 
+   	data_korpus.slot_freezer_num   = load_ptree.get<int>("data_korpus.slot_freezer_num"); 
+   	data_korpus.slot_weapon_num    = load_ptree.get<int>("data_korpus.slot_weapon_num"); 
 
-   	data_unresolved_Vehicle.npc_id = load_ptree.get<int>("data_unresolved_Vehicle.npc_id"); 
+   	data_unresolved_Vehicle.npc_id            = load_ptree.get<int>("data_unresolved_Vehicle.npc_id"); 
    	data_unresolved_Vehicle.texOb_korpus_path = load_ptree.get<std::string>("data_unresolved_Vehicle.texOb_korpus_path"); 
    	   	
 }

@@ -20,8 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 ProtectorModule::ProtectorModule(int id)
 {
         data_id.type_id    = id;
-        data_id.type_id    = MODULE::MODULE_ID;
-        data_id.subtype_id = MODULE::PROTECTOR_ID;
+        data_id.subtype_id = SUBTYPE::PROTECTOR_ID;
         
      	protection_add = 0;
 }

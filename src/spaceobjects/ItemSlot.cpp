@@ -41,9 +41,7 @@ ItemSlot::ItemSlot(int id)
 }
 
 ItemSlot::~ItemSlot()
-{
-        //delete item;
-}
+{}
                 
 void ItemSlot::SetRect(int pos_x, int pos_y, int w, int h) 
 {
@@ -54,19 +52,22 @@ bool ItemSlot::InsertItem(BaseItem* item)
 {
 	if (item != NULL)
 	{
-                this->item = item;
-                is_EQUIPED = true; 
-                item->SetSlot(this);
-                                        
-                        
 		if (data_id.subtype_id == SLOT::CARGO_ID) 
-		{                
+		{           
+                        this->item = item;
+                        is_EQUIPED = true; 
+                        item->SetSlot(this);
+                     
 			return true;
    		}
    	
 		if (data_id.subtype_id == item->GetFunctionalSlotSubTypeId())
 		{              
-			item->UpdateOwnerAbilities();		
+                        this->item = item;
+                        is_EQUIPED = true; 
+                        item->SetSlot(this);
+                
+			item->UpdateOwnerAbilities();
 			return true;
 		}
 	}
@@ -101,15 +102,15 @@ int ItemSlot::GetItemRadius() const
 {       
         switch(item->GetTypeId())
         {
-                case EQUIPMENT::EQUIPMENT_ID:
+                case TYPE::EQUIPMENT_ID:
                 {
                         switch (item->GetSubTypeId())
                         {
-                                case EQUIPMENT::LAZER_ID:   { return ((LazerEquipment*)item)->GetRadius();  break; };
-                                case EQUIPMENT::ROCKET_ID:  { return ((RocketEquipment*)item)->GetRadius(); break; };
+                                case SUBTYPE::LAZER_ID:   { return ((LazerEquipment*)item)->GetRadius();  break; };
+                                case SUBTYPE::ROCKET_ID:  { return ((RocketEquipment*)item)->GetRadius(); break; };
 		
-                                case EQUIPMENT::GRAPPLE_ID: { return ((GrappleEquipment*)item)->GetRadius(); break; };
-                                case EQUIPMENT::RADAR_ID:   { return ((RadarEquipment*)item)->GetRadius();   break; };
+                                case SUBTYPE::GRAPPLE_ID: { return ((GrappleEquipment*)item)->GetRadius(); break; };
+                                case SUBTYPE::RADAR_ID:   { return ((RadarEquipment*)item)->GetRadius();   break; };
                         }
                         
                         break;
@@ -183,20 +184,22 @@ bool ItemSlot::SwapItemWith(ItemSlot* _slot)
 
 	if ( (is_EQUIPED == true) and (_slot->GetEquipedStatus() == true) )
        	{          
-       		if ( (item->GetTypeId() == MODULE::MODULE_ID) and (_slot->GetItem()->GetTypeId() == EQUIPMENT::EQUIPMENT_ID) )
+       		if ( (item->GetTypeId() == TYPE::MODULE_ID) and (_slot->GetItem()->GetTypeId() == TYPE::EQUIPMENT_ID) )
        		{
 			if (((BaseEquipment*)_slot->GetItem())->InsertModule((BaseModule*)item) == true)  
 			{ 
+                                std::cout<<"__1"<<item->GetTypeId()<<_slot->GetItem()->GetTypeId()<<std::endl;
 				RemoveItem(); 
 				
-				return true;       		
+				return true;
         		}
        		}
        		
-       		if ( (item->GetTypeId() == EQUIPMENT::EQUIPMENT_ID) and (_slot->GetItem()->GetTypeId() == MODULE::MODULE_ID) )
+       		if ( (item->GetTypeId() == TYPE::EQUIPMENT_ID) and (_slot->GetItem()->GetTypeId() == TYPE::MODULE_ID) )
        		{
 			 if (((BaseEquipment*)item)->InsertModule((BaseModule*)_slot->GetItem()) == true)  
 			 { 
+                                std::cout<<"__2"<<item->GetTypeId()<<_slot->GetItem()->GetTypeId()<<std::endl;
 			 	_slot->RemoveItem(); 
 			 	
 			 	return true; 

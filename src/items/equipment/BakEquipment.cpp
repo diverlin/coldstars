@@ -21,8 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 BakEquipment::BakEquipment(int id)
 {
         data_id.id         = id;
-        data_id.type_id    = EQUIPMENT::EQUIPMENT_ID;
-        data_id.subtype_id = EQUIPMENT::BAK_ID;
+        data_id.subtype_id = SUBTYPE::BAK_ID;
         
     	fuel_max_orig = 0;  
     	fuel          = 0;
