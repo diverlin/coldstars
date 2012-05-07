@@ -153,11 +153,11 @@ RocketBullet* VehicleBuilder::GetNewRocket(BulletData data_bullet, ItemSlot* slo
                  
         if ( (slot->GetOwnerVehicle()->data_korpus.draw_turrels == true) and (force_center_start == false))
     	{
-        	rocket->place(slot->GetTurrel()->GetPoints().getCenter(), slot->GetTurrel()->GetPoints().getAngleDegree(), offset);
+        	rocket->place(slot->GetTurrel()->GetPoints().GetCenter(), slot->GetTurrel()->GetPoints().GetAngleDegree(), offset);
         }
         else
     	{
-         	rocket->place(slot->GetOwnerVehicle()->GetPoints().getCenter(), slot->GetOwnerVehicle()->GetPoints().getAngleDegree(), offset);
+         	rocket->place(slot->GetOwnerVehicle()->GetPoints().GetCenter(), slot->GetOwnerVehicle()->GetPoints().GetAngleDegree(), offset);
     	}
         return rocket;
 }

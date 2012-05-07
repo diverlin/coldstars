@@ -7,17 +7,21 @@ class vec2f
                 float x; 
                 float y;
                 
-                vec2f();
-                vec2f(float _x, float _y);
+                vec2f():x(0), y(0) {};
+                vec2f(float x, float y) { this->x = x; this->y = y; };
+                vec2f(const vec2f& v) { *this = v; } ;
+                                
+                bool IsNull() const;
                 
-                bool isNull() const;
+                float GetLen() const;
+                vec2f GetNorm() const;
                 
-                float getLen() const;
-                vec2f getNorm() const;
+		void Set(float x, float y) 	{ this->x = x; this->y = y; }
+                void Set(const vec2f& v)    	{ *this = v; };
                 
-                void set(float _x, float _y);
-
                 vec2f operator+=(const vec2f&);                
+                vec2f operator+=(float);  
+                
                 vec2f operator+(const vec2f&) const;
                 vec2f operator-(const vec2f&) const;
                 vec2f operator*(const float) const;

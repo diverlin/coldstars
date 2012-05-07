@@ -48,13 +48,13 @@ ItemSlot* Cursor :: getSlot() { return slot; }
 void Cursor :: updateMousePos()
 {
         const sf::Input& Input = Gui::GetWindow().GetInput();
-        mouse_pos.set(Input.GetMouseX(), Input.GetMouseY());
+        mouse_pos.Set(Input.GetMouseX(), Input.GetMouseY());
 }
 
 
 void Cursor :: update()
 {
-     	slot->GetRect().setCenter(mouse_pos.x, player->GetScreen()->getHeight()  - mouse_pos.y);
+     	slot->GetRect().SetCenter(mouse_pos.x, player->GetScreen()->getHeight()  - mouse_pos.y);
 }
 
 

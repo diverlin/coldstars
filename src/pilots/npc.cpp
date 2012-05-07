@@ -184,7 +184,7 @@ void Npc::AsteroidScenario()
 
 Planet* Npc::GetPlanetForDocking()
 {
-     	Planet* _target_planet = starsystem->GetClosestPlanet(vehicle->GetPoints().getCenter());  // improove
+     	Planet* _target_planet = starsystem->GetClosestPlanet(vehicle->GetPoints().GetCenter());  // improove
      	return _target_planet;
 }
 

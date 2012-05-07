@@ -25,7 +25,7 @@ DriveComplex::DriveComplex(Vehicle* owner_vehicle)
         
 	resetTarget();
 
-	drive_trail = createTrailEffect(owner_vehicle->GetTextureOb()->size_id, owner_vehicle->GetPoints().getpMidLeft(), owner_vehicle->GetPoints().getpMidFarLeft());
+	drive_trail = createTrailEffect(owner_vehicle->GetTextureOb()->size_id, owner_vehicle->GetPoints().GetpMidLeft(), owner_vehicle->GetPoints().GetpMidFarLeft());
 }
 
 DriveComplex::~DriveComplex()
@@ -40,7 +40,7 @@ void DriveComplex :: resetTarget()
 	target = NULL;
     		
 	target_distance = 0.0;
-	target_offset.set(0, 0);
+	target_offset.Set(0, 0);
 	action_id = NAVIGATOR_ACTION::NONE_ID;
 	
 	direction_list_END = true;
@@ -152,7 +152,7 @@ bool DriveComplex :: updateTargetCoord()
 	{
     		case ENTITY::STARSYSTEM_ID:
     		{
-    	 	    	target_pos.set(800, 800);  // get correct coords
+    	 	    	target_pos.Set(800, 800);  // get correct coords
     			target_distance = 100;  // ??      		
         		return false; break;        			
 		}
@@ -171,13 +171,13 @@ bool DriveComplex :: updateTargetCoord()
     	     
     		case ENTITY::SHIP_ID:
     		{ 
-			target_pos = target->GetPoints().getCenter() + target_offset;  
+			target_pos = target->GetPoints().GetCenter() + target_offset;  
         		return true; break;    
     		}      
     		
     		case ENTITY::SPACESTATION_ID:
     		{ 
-			target_pos = target->GetPoints().getCenter() + target_offset;  
+			target_pos = target->GetPoints().GetCenter() + target_offset;  
         		return true; break;    
     		} 
     	}
@@ -271,8 +271,8 @@ void DriveComplex :: calcPath()
 vec2f DriveComplex :: calcRoundPath()  // not working yet
 {
         // vychislenie centrov okruzhnostej traektorij na osnovanii tekuwego polozhenija ob'ekta 
-        float start_angle_inD = owner_vehicle->GetPoints().getAngleDegree();
-        vec2f start_pos = owner_vehicle->GetPoints().getCenter();
+        float start_angle_inD = owner_vehicle->GetPoints().GetAngleDegree();
+        vec2f start_pos = owner_vehicle->GetPoints().GetCenter();
         
         float R = 100.0f; //(float)getRandInt(80, 130);
                         
@@ -329,8 +329,8 @@ vec2f DriveComplex :: calcRoundPath()  // not working yet
         float yk2 = target_pos.y + k * L1 * cos(a1 + b1);         
 
       
-        float len1 = distBetweenPoints(owner_vehicle->GetPoints().getCenter(), xk1, yk1);
-        float len2 = distBetweenPoints(owner_vehicle->GetPoints().getCenter(), xk2, yk2);
+        float len1 = distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), xk1, yk1);
+        float len2 = distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), xk2, yk2);
            
         
            
@@ -345,14 +345,14 @@ vec2f DriveComplex :: calcRoundPath()  // not working yet
         //printf("ax = %f \n",  ax);  
         //printf("ay = %f \n",  ay);  
 
-        float bx = target_pos.x                              - owner_vehicle->GetPoints().getCenter().x;
-        float by = target_pos.y                              - owner_vehicle->GetPoints().getCenter().y;
+        float bx = target_pos.x                              - owner_vehicle->GetPoints().GetCenter().x;
+        float by = target_pos.y                              - owner_vehicle->GetPoints().GetCenter().y;
 
         float dax = cos(start_angle_inD/RADIAN_TO_DEGREE_RATE);
         float day = sin(start_angle_inD/RADIAN_TO_DEGREE_RATE);  
                         
-        float dbx = owner_vehicle->GetPoints().getCenter().x - target_pos.x;
-        float dby = owner_vehicle->GetPoints().getCenter().y - target_pos.y;
+        float dbx = owner_vehicle->GetPoints().GetCenter().x - target_pos.x;
+        float dby = owner_vehicle->GetPoints().GetCenter().y - target_pos.y;
 
         float la = sqrt(dax*dax+day*day);
         float lb = sqrt(dbx*dbx+dby*dby);
@@ -532,13 +532,13 @@ void DriveComplex :: calcDirectPath(vec2f start_pos)
     	vec2f ll = target_pos - start_pos;
     	vec2f new_pos = start_pos;
     	       		
-        if ( (owner_vehicle->propetries.speed > FLOAT_EPSILON) and (ll.isNull() == false) )
+        if ( (owner_vehicle->propetries.speed > FLOAT_EPSILON) and (ll.IsNull() == false) )
     	{
     		float step = owner_vehicle->propetries.speed/100.0;  // remove from here    
        		    		
-		vec2f vstep = ll.getNorm() * step;
+		vec2f vstep = ll.GetNorm() * step;
 
-       		unsigned int it = ll.getLen() / step;
+       		unsigned int it = ll.GetLen() / step;
        		for(unsigned int i = 0; i < it; i++)
        		{
             		new_pos += vstep;
@@ -559,8 +559,8 @@ void DriveComplex :: updatePosition()
      	{
         	if (move_it < (path_vec.size() - 1))
         	{
-           		owner_vehicle->GetPoints().setCenter(path_vec[move_it]);
-           		owner_vehicle->GetPoints().setAngle(angle_inD_vec[move_it]);
+           		owner_vehicle->GetPoints().SetCenter(path_vec[move_it]);
+           		owner_vehicle->GetPoints().SetAngle(angle_inD_vec[move_it]);
            		move_it++;
         	}
         	else

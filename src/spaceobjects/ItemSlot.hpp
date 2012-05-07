@@ -32,13 +32,15 @@ class ItemSlot : public Base
 		ItemSlot(int id);
 		~ItemSlot();
                 
-		void SetTextureOb(TextureOb* textureOb)       { this->textureOb = textureOb; };
-		void SetOwnerVehicle(Vehicle* owner_vehicle) { this->owner_vehicle = owner_vehicle; };
-                void SetTurrel(Turrel* turrel)                { this->turrel = turrel; };
+		void SetTextureOb(TextureOb* textureOb)       	{ this->textureOb = textureOb; };
+		void SetOwnerVehicle(Vehicle* owner_vehicle) 	{ this->owner_vehicle = owner_vehicle; };
+                void SetTurrel(Turrel* turrel)                	{ this->turrel = turrel; };
                                 
 		Turrel* GetTurrel()     const { return turrel; };
 		bool GetEquipedStatus() const { return is_EQUIPED; };
 
+		Points& GetPoints() { return points; };
+		
                 Rect& GetRect() { return rect; };
 		Vehicle* GetOwnerVehicle() const { return owner_vehicle; };
 
@@ -102,6 +104,8 @@ class ItemSlot : public Base
                 bool is_EQUIPED;                       
                 
                 TextureOb* textureOb;
+                
+                Points points;
                 
                 Rect rect;
                                 

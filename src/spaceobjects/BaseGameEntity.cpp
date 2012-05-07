@@ -44,9 +44,9 @@ void BaseGameEntity::UpdateRotation()
 void BaseGameEntity::MovingByExternalForce(vec2f _target, float force)
 {
 	vec2f d_pos;
-	get_dX_dY_ToPoint(points.getCenter().x, points.getCenter().y, _target.x, _target.y, force, &d_pos.x, &d_pos.y);
-	//points.setCenter(points.getCenter().x + d_pos.x, points.getCenter().y + d_pos.y);
-	points.setCenter(points.getCenter() + d_pos);
+	get_dX_dY_ToPoint(points.GetCenter().x, points.GetCenter().y, _target.x, _target.y, force, &d_pos.x, &d_pos.y);
+	//points.SetCenter(points.GetCenter().x + d_pos.x, points.GetCenter().y + d_pos.y);
+	points.SetCenter(points.GetCenter() + d_pos);
 }
 
 void BaseGameEntity::Hit(int damage, bool show_effect)
@@ -60,7 +60,7 @@ void BaseGameEntity::Hit(int damage, bool show_effect)
 
 	if (show_effect == true)
 	{	
-		VerticalFlowText* text = new VerticalFlowText(int2str(damage), points.getCenter(), COLOR::DEFAULT4i, collision_radius);
+		VerticalFlowText* text = new VerticalFlowText(int2str(damage), points.GetCenter(), COLOR::DEFAULT4i, collision_radius);
 		starsystem->Add(text); 
 	}
 
@@ -112,9 +112,9 @@ void BaseGameEntity::SaveDataUniqueBaseGameEntity(boost::property_tree::ptree& s
 	save_ptree.put(root+"data_unresolved_BaseGameEntity.starsystem_id", starsystem->GetId());
 	save_ptree.put(root+"place_type_id", place_type_id);
 			
-	save_ptree.put(root+"data_unresolved_BaseGameEntity.center.x", points.getCenter().x);
-	save_ptree.put(root+"data_unresolved_BaseGameEntity.center.y", points.getCenter().y);
-	save_ptree.put(root+"data_unresolved_BaseGameEntity.angle_2D", points.getAngleDegree());	
+	save_ptree.put(root+"data_unresolved_BaseGameEntity.center.x", points.GetCenter().x);
+	save_ptree.put(root+"data_unresolved_BaseGameEntity.center.y", points.GetCenter().y);
+	save_ptree.put(root+"data_unresolved_BaseGameEntity.angle_2D", points.GetAngleDegree());	
 }
 
 

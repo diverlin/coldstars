@@ -70,7 +70,7 @@ void Star::Render_NEW()
         
 	glUniform2f(glGetUniformLocation(g_SHADERS.multitexturing, "displ"), texture_offset1, texture_offset2);
 
-	renderMesh(mesh->glList, points.getCenter3f(), angle, data_planet.scale);
+	renderMesh(mesh->glList, points.GetCenter3f(), angle, data_planet.scale);
 
         glUseProgram(0);
         glActiveTexture(GL_TEXTURE0);
@@ -81,7 +81,7 @@ void Star::Render_OLD()
 	UpdateRotation();
      	
      	glBindTexture(GL_TEXTURE_2D, textureOb->texture);      		
-	renderMesh(mesh->glList, points.getCenter3f(), angle, data_planet.scale);
+	renderMesh(mesh->glList, points.GetCenter3f(), angle, data_planet.scale);
 }
 
 void Star::UpdateInfo()
@@ -94,7 +94,7 @@ void Star::UpdateInfo()
 void Star::RenderInfo_inSpace(vec2f scroll_coords)
 { 
 	UpdateInfo();
-     	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);
+     	drawInfoIn2Column(&info.title_list, &info.value_list, points.GetCenter().x, points.GetCenter().y, scroll_coords.x, scroll_coords.y);
 }
 
 void Star::PostDeathUniqueEvent(bool)

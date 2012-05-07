@@ -43,14 +43,6 @@ void Turrel::CheckTarget()
         }
 }
 
-//void Turrel::ValidateTarget()
-//{
-        //if (CheckTarget() == false)
-        //{
-                //ResetTarget();
-        //}
-//}
-
 
 bool Turrel::CheckAmmo() const
 {
@@ -98,22 +90,22 @@ void Turrel::Render(float _tur_angle_inD)
 {        
         if (target != NULL)
         {
-        	float _tur_xl = target->GetPoints().getCenter().x - pCenter->x;
-        	float _tur_yl = target->GetPoints().getCenter().y - pCenter->y;
+        	float _tur_xl = target->GetPoints().GetCenter().x - pCenter->x;
+        	float _tur_yl = target->GetPoints().GetCenter().y - pCenter->y;
 
         	float _tur_angle_inR = atan2(_tur_yl, _tur_xl);
         	_tur_angle_inD = _tur_angle_inR * RADIAN_TO_DEGREE_RATE;
         }
 
-        points.setCenter(*pCenter);
-    	points.setAngle(_tur_angle_inD);
-    	points.update();        
+        points.SetCenter(*pCenter);
+    	points.SetAngle(_tur_angle_inD);
+    	points.Update();        
 
     	drawFlatQuadPerVertexIn2D(textureOb,
-    				  points.getBottomLeft(), 
-                                  points.getBottomRight(), 
-                                  points.getTopRight(), 
-                                  points.getTopLeft(), 
-                                  points.getPosZ());
+    				  points.GetBottomLeft(), 
+                                  points.GetBottomRight(), 
+                                  points.GetTopRight(), 
+                                  points.GetTopLeft(), 
+                                  points.GetPosZ());
 }        
                 

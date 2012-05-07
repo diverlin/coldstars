@@ -16,133 +16,41 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-Points :: Points()
+Points::Points():is_updated(false), angle_inD(0.0), pos_z(-500.0)
 {
-        is_updated = false;  
-        angle_inD = 0;
-        pos_z = -500.0; 
-        
-        CreateCenter();          
+        center.Set(0, 0);
+        parent_center.Set(0, 0);       
 }
 
-Points :: ~Points()
+Points::~Points()
 {}              
                 
-
-void Points :: initCenterPoint()
+void Points::Add(vec2f* point, vec2f* point_orig)
 { 
-        center_origin.set(0, 0);
-        center.set(0, 0);
-}  
+        vector_orig.push_back(point_orig);
+        vector.push_back(point);
+}
 
-void Points :: addCenterPoint()
+void Points::initMainQuadPoints(int _w, int _h)
 { 
-        vector_orig.push_back(&center_origin);
-        vector.push_back(&center);
-}
-     
-
-
-
-
-void Points :: initWeapon1CenterPoint(float _pos_x, float _pos_y)
-{ 
-        weapon_1_origin_center.set(_pos_x, _pos_y);
-        weapon_1_center.set(_pos_x, _pos_y);
-}
-
-void Points :: addWeapon1CenterPoint()
-{ 
-        vector_orig.push_back(&weapon_1_origin_center);
-        vector.push_back(&weapon_1_center);
-}
-
-
-
-
-void Points :: initWeapon2CenterPoint(float _pos_x, float _pos_y)
-{
-        weapon_2_origin_center.set(_pos_x, _pos_y);
-        weapon_2_center.set(_pos_x, _pos_y);
-}
-
-void Points :: addWeapon2CenterPoint()
-{
-        vector_orig.push_back(&weapon_2_origin_center);
-        vector.push_back(&weapon_2_center);
-}
-
-
-
-
-
-
-void Points :: initWeapon3CenterPoint(float _pos_x, float _pos_y)
-{
-     	weapon_3_origin_center.set(_pos_x, _pos_y);
-     	weapon_3_center.set(_pos_x, _pos_y);
-}
-  
-void Points :: addWeapon3CenterPoint()
-{
-     	vector_orig.push_back(&weapon_3_origin_center);
-     	vector.push_back(&weapon_3_center);
-}
-
-
-
-
-void Points :: initWeapon4CenterPoint(float _pos_x, float _pos_y)
-{
-     	weapon_4_origin_center.set(_pos_x, _pos_y);
-     	weapon_4_center.set(_pos_x, _pos_y);
-}
-
-void Points :: addWeapon4CenterPoint()
-{
-     	vector_orig.push_back(&weapon_4_origin_center);
-     	vector.push_back(&weapon_4_center);
-}
-
-
-
-
-    
-void Points :: initWeapon5CenterPoint(float _pos_x, float _pos_y)
-{
-     	weapon_5_origin_center.set(_pos_x, _pos_y);
-     	weapon_5_center.set(_pos_x, _pos_y);
-}
-   
-void Points :: addWeapon5CenterPoint()
-{
-     	vector_orig.push_back(&weapon_5_origin_center);
-     	vector.push_back(&weapon_5_center);
-}
-   
-
-
-
-void Points :: initMainQuadPoints(int _w, int _h)
-{ 
-        setWidthHeight(_w, _h);  
+        SetWidthHeight(_w, _h);  
 
         ////// Origin entity rect (for rotation only transformation)
-        bottomLeft_origin.set(-w/2, -h/2);
-        bottomRight_origin.set(+w/2, -h/2);
-        topRight_origin.set(+w/2, +h/2);
-        topLeft_origin.set(-w/2, +h/2);
+        bottomLeft_origin.Set(-w/2, -h/2);
+        bottomRight_origin.Set(+w/2, -h/2);
+        topRight_origin.Set(+w/2, +h/2);
+        topLeft_origin.Set(-w/2, +h/2);
       
         ///////////////////////////////////////////
         ////// Actual entity rect
-        bottomLeft.set(-w/2, -h/2);
-        bottomRight.set(+w/2, -h/2);
-        topRight.set(+w/2, +h/2);
-        topLeft.set(-w/2, +h/2);
+        bottomLeft.Set(-w/2, -h/2);
+        bottomRight.Set(+w/2, -h/2);
+        topRight.Set(+w/2, +h/2);
+        topLeft.Set(-w/2, +h/2);
 }
 
           
-void Points :: addMainQuadPoints()
+void Points::addMainQuadPoints()
 { 
       	/////////////////////////////////////////////////////////////
       	////// Origin entity rect (for rotation only transformation)
@@ -159,10 +67,10 @@ void Points :: addMainQuadPoints()
       	vector.push_back(&topLeft);
 }
 
-void Points :: initMidLeftPoint()
+void Points::initMidLeftPoint()
 {
-     	midLeft_origin.set(-w/2, 0);
-     	midLeft.set(-w/2, 0);
+     	midLeft_origin.Set(-w/2, 0);
+     	midLeft.Set(-w/2, 0);
 }
 
 void Points :: addMidLeftPoint()
@@ -171,55 +79,20 @@ void Points :: addMidLeftPoint()
      	vector.push_back(&midLeft);
 }
 
-
-
-
-void Points :: initMidFarLeftPoint()
+void Points::initMidFarLeftPoint()
 {
-     	midFarLeft_origin.set(-w, 0);
-     	midFarLeft.set(-w, 0);
+     	midFarLeft_origin.Set(-w, 0);
+     	midFarLeft.Set(-w, 0);
 }
 
-void Points :: addMidFarLeftPoint()
+void Points::addMidFarLeftPoint()
 {
      	vector_orig.push_back(&midFarLeft_origin);
      	vector.push_back(&midFarLeft);
 }
 
 
-
-void Points :: setWidthHeight(int _w, int _h)
-{
-        w = _w;
-        h = _h;
-}  
-
-
-
-void Points :: setCenter(float _centerx, float _centery) 
-{
-    	center.set(_centerx, _centery);
-      
-    	is_updated = false;       
-}
-       
-void  Points :: setCenter(vec2f _center)
-{
-    	center = _center;
-      
-    	is_updated = false;   
-}
-                       
-    
-void Points :: setAngle(float _angle_inD)
-{ 
-    	angle_inD = _angle_inD;
-    
-    	is_updated = false; 
-}  
-
-
-void Points :: update()
+void Points::Update()
 {
     	if (is_updated == false)
     	{   
@@ -243,11 +116,6 @@ void Points :: update()
     	}
 }        
          
-void Points::CreateCenter()
-{
-	initCenterPoint();
-	addCenterPoint();
-}
 
 
 

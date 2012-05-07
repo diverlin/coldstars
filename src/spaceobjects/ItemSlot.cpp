@@ -144,7 +144,7 @@ void ItemSlot::RenderItemInfo(float offset_x, float offset_y)
 
 bool ItemSlot::CheckInteraction(int _x, int _y)
 {        
-        float dist = distBetweenPoints(rect.getCenter().x, rect.getCenter().y, _x, _y);
+        float dist = distBetweenPoints(rect.GetCenter().x, rect.GetCenter().y, _x, _y);
         if (dist < rect.getWidth()/2)
                 return true;
         else
@@ -157,7 +157,7 @@ void ItemSlot::DropItemToSpace()
         Container* container = GetNewContainer(textureOb_, item);
         RemoveItem();
         
-	owner_vehicle->GetStarSystem()->Add(container, owner_vehicle->GetPoints().getCenter());	
+	owner_vehicle->GetStarSystem()->Add(container, owner_vehicle->GetPoints().GetCenter());	
 }
         
 bool ItemSlot::SwapItemWith(ItemSlot* _slot)
@@ -264,7 +264,7 @@ bool ItemSlot::CheckDistance(BaseGameEntity* _target) const
 		return true;
 	}
 	
-        float dist = distBetweenPoints(GetOwnerVehicle()->GetPoints().getCenter(), _target->GetPoints().getCenter());                                               
+        float dist = distBetweenPoints(GetOwnerVehicle()->GetPoints().GetCenter(), _target->GetPoints().GetCenter());                                               
         if (dist < GetItemRadius())
         {
                 return true;

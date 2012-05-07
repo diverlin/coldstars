@@ -28,15 +28,15 @@ starsystem
         }
         angle
         {
-            x 25
-            y 37
+            x 32
+            y 35
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.13
+            z 0.58
         }
         collision_radius 0
         mass 0
@@ -48,8 +48,8 @@ starsystem
             starsystem_id 2
             center
             {
-                x 386
-                y 124
+                x 290
+                y 308
             }
             angle_2D 0
         }
@@ -72,15 +72,15 @@ starsystem
         }
         angle
         {
-            x 34
-            y 19
+            x 28
+            y 18
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.59
+            z 0.69
         }
         collision_radius 0
         mass 0
@@ -92,8 +92,8 @@ starsystem
             starsystem_id 4
             center
             {
-                x 308
-                y 241
+                x 230
+                y 124
             }
             angle_2D 0
         }
@@ -116,15 +116,15 @@ starsystem
         }
         angle
         {
-            x 14
-            y 15
+            x 11
+            y 29
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.5
+            z 0.87
         }
         collision_radius 0
         mass 0
@@ -136,8 +136,8 @@ starsystem
             starsystem_id 6
             center
             {
-                x 138
-                y 223
+                x 257
+                y 220
             }
             angle_2D 0
         }
@@ -160,15 +160,15 @@ starsystem
         }
         angle
         {
-            x 27
-            y 20
+            x 22
+            y 27
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.47
+            z 0.23
         }
         collision_radius 0
         mass 0
@@ -180,8 +180,8 @@ starsystem
             starsystem_id 8
             center
             {
-                x 84
-                y 342
+                x 118
+                y 173
             }
             angle_2D 0
         }
@@ -204,15 +204,15 @@ starsystem
         }
         angle
         {
-            x 30
-            y 13
+            x 33
+            y 31
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.17
+            z 0.24
         }
         collision_radius 0
         mass 0
@@ -224,8 +224,8 @@ starsystem
             starsystem_id 10
             center
             {
-                x 496
-                y 279
+                x 405
+                y 352
             }
             angle_2D 0
         }
@@ -248,15 +248,15 @@ starsystem
         }
         angle
         {
-            x 38
-            y 22
+            x 30
+            y 33
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.4
+            z 0.51
         }
         collision_radius 0
         mass 0
@@ -268,8 +268,8 @@ starsystem
             starsystem_id 12
             center
             {
-                x 96
-                y 279
+                x 166
+                y 218
             }
             angle_2D 0
         }
@@ -292,15 +292,15 @@ starsystem
         }
         angle
         {
-            x 36
-            y 34
+            x 18
+            y 36
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.25
+            z 0.2
         }
         collision_radius 0
         mass 0
@@ -312,8 +312,8 @@ starsystem
             starsystem_id 14
             center
             {
-                x 308
-                y 205
+                x 359
+                y 223
             }
             angle_2D 0
         }
@@ -336,15 +336,15 @@ starsystem
         }
         angle
         {
-            x 15
-            y 39
+            x 34
+            y 35
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.51
+            z 0.71
         }
         collision_radius 0
         mass 0
@@ -356,8 +356,8 @@ starsystem
             starsystem_id 16
             center
             {
-                x 320
-                y 305
+                x 150
+                y 300
             }
             angle_2D 0
         }
@@ -380,15 +380,15 @@ starsystem
         }
         angle
         {
-            x 37
-            y 20
+            x 33
+            y 35
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.87
+            z 0.92
         }
         collision_radius 0
         mass 0
@@ -400,8 +400,8 @@ starsystem
             starsystem_id 18
             center
             {
-                x 251
-                y 297
+                x 305
+                y 206
             }
             angle_2D 0
         }
@@ -424,7 +424,7 @@ starsystem
         }
         angle
         {
-            x 20
+            x 11
             y 11
             z 0
         }
@@ -432,7 +432,7 @@ starsystem
         {
             x 0
             y 0
-            z 0.41
+            z 0.87
         }
         collision_radius 0
         mass 0
@@ -444,8 +444,8 @@ starsystem
             starsystem_id 20
             center
             {
-                x 246
-                y 347
+                x 235
+                y 221
             }
             angle_2D 0
         }
@@ -471,22 +471,22 @@ star
         }
         angle
         {
-            x 14
-            y 29
-            z 1016.656
+            x 24
+            y 34
+            z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.21
+            z 0.87
         }
-        collision_radius 264
+        collision_radius 259
         mass 0
         data_unresolved_BaseGameEntity
         {
             mesh_path data/obj/sphere/planet.obj
-            textureOb_path data/star/s_001.png
+            textureOb_path data/star/s_101.png
             parent_id -1
             starsystem_id 2
             center
@@ -499,11 +499,11 @@ star
         place_type_id 18
         orbit
         {
-            it 269
+            it 1
         }
         data
         {
-            scale 98
+            scale 96
             orbit_center
             {
                 x 0
@@ -531,17 +531,17 @@ star
         }
         angle
         {
-            x 10
-            y 34
-            z 0
+            x 17
+            y 31
+            z 218.6105
         }
         d_angle
         {
             x 0
             y 0
-            z 0.18
+            z 0.63
         }
-        collision_radius 245
+        collision_radius 243
         mass 0
         data_unresolved_BaseGameEntity
         {
@@ -559,11 +559,11 @@ star
         place_type_id 18
         orbit
         {
-            it 41
+            it 169
         }
         data
         {
-            scale 91
+            scale 90
             orbit_center
             {
                 x 0
@@ -591,17 +591,17 @@ star
         }
         angle
         {
-            x 11
-            y 30
+            x 15
+            y 26
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.14
+            z 0.29
         }
-        collision_radius 278
+        collision_radius 229
         mass 0
         data_unresolved_BaseGameEntity
         {
@@ -619,11 +619,11 @@ star
         place_type_id 18
         orbit
         {
-            it -2017738316
+            it 188
         }
         data
         {
-            scale 103
+            scale 85
             orbit_center
             {
                 x 0
@@ -651,22 +651,22 @@ star
         }
         angle
         {
-            x 15
-            y 18
+            x 33
+            y 17
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.95
+            z 0.82
         }
-        collision_radius 232
+        collision_radius 299
         mass 0
         data_unresolved_BaseGameEntity
         {
             mesh_path data/obj/sphere/planet.obj
-            textureOb_path data/star/s_000.jpg
+            textureOb_path data/star/s_001.png
             parent_id -1
             starsystem_id 8
             center
@@ -679,11 +679,11 @@ star
         place_type_id 18
         orbit
         {
-            it -1058503580
+            it -906526632
         }
         data
         {
-            scale 86
+            scale 111
             orbit_center
             {
                 x 0
@@ -711,22 +711,22 @@ star
         }
         angle
         {
-            x 17
-            y 12
+            x 16
+            y 39
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.22
+            z 0.26
         }
-        collision_radius 318
+        collision_radius 297
         mass 0
         data_unresolved_BaseGameEntity
         {
             mesh_path data/obj/sphere/planet.obj
-            textureOb_path data/star/s_001.png
+            textureOb_path data/star/s_000.jpg
             parent_id -1
             starsystem_id 10
             center
@@ -739,11 +739,11 @@ star
         place_type_id 18
         orbit
         {
-            it -1546219138
+            it -1646158970
         }
         data
         {
-            scale 118
+            scale 110
             orbit_center
             {
                 x 0
@@ -772,21 +772,21 @@ star
         angle
         {
             x 20
-            y 12
+            y 15
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.56
+            z 0.82
         }
-        collision_radius 288
+        collision_radius 302
         mass 0
         data_unresolved_BaseGameEntity
         {
             mesh_path data/obj/sphere/planet.obj
-            textureOb_path data/star/s_001.png
+            textureOb_path data/star/s_100.jpg
             parent_id -1
             starsystem_id 12
             center
@@ -803,7 +803,7 @@ star
         }
         data
         {
-            scale 107
+            scale 112
             orbit_center
             {
                 x 0
@@ -831,17 +831,17 @@ star
         }
         angle
         {
-            x 31
-            y 10
+            x 38
+            y 17
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.47
+            z 0.89
         }
-        collision_radius 237
+        collision_radius 297
         mass 0
         data_unresolved_BaseGameEntity
         {
@@ -859,11 +859,11 @@ star
         place_type_id 18
         orbit
         {
-            it -570444673
+            it -788556704
         }
         data
         {
-            scale 88
+            scale 110
             orbit_center
             {
                 x 0
@@ -891,22 +891,22 @@ star
         }
         angle
         {
-            x 39
-            y 14
+            x 36
+            y 17
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.12
+            z 0.11
         }
-        collision_radius 272
+        collision_radius 275
         mass 0
         data_unresolved_BaseGameEntity
         {
             mesh_path data/obj/sphere/planet.obj
-            textureOb_path data/star/s_000.jpg
+            textureOb_path data/star/s_101.png
             parent_id -1
             starsystem_id 16
             center
@@ -919,11 +919,11 @@ star
         place_type_id 18
         orbit
         {
-            it -1155590637
+            it 889192448
         }
         data
         {
-            scale 101
+            scale 102
             orbit_center
             {
                 x 0
@@ -951,22 +951,22 @@ star
         }
         angle
         {
-            x 15
-            y 10
+            x 28
+            y 39
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.23
+            z 0.7
         }
-        collision_radius 278
+        collision_radius 299
         mass 0
         data_unresolved_BaseGameEntity
         {
             mesh_path data/obj/sphere/planet.obj
-            textureOb_path data/star/s_001.png
+            textureOb_path data/star/s_101.png
             parent_id -1
             starsystem_id 18
             center
@@ -983,7 +983,7 @@ star
         }
         data
         {
-            scale 103
+            scale 111
             orbit_center
             {
                 x 0
@@ -1011,22 +1011,22 @@ star
         }
         angle
         {
-            x 31
-            y 10
+            x 39
+            y 19
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.36
+            z 0.24
         }
-        collision_radius 264
+        collision_radius 318
         mass 0
         data_unresolved_BaseGameEntity
         {
             mesh_path data/obj/sphere/planet.obj
-            textureOb_path data/star/s_000.jpg
+            textureOb_path data/star/s_001.png
             parent_id -1
             starsystem_id 20
             center
@@ -1039,11 +1039,11 @@ star
         place_type_id 18
         orbit
         {
-            it -975587670
+            it -4737097
         }
         data
         {
-            scale 98
+            scale 118
             orbit_center
             {
                 x 0
@@ -1126,98 +1126,6 @@ item_slot
         {
             id 27
             type_id 0
-            subtype_id 3
-        }
-        rect
-        {
-            BottomLeft
-            {
-                x 366
-                y 269
-            }
-            width 46
-            height 49
-        }
-        unresolved
-        {
-            owner_vehicle_id 25
-        }
-    }
-    28
-    {
-        data_id
-        {
-            id 28
-            type_id 0
-            subtype_id 3
-        }
-        rect
-        {
-            BottomLeft
-            {
-                x 366
-                y 162
-            }
-            width 46
-            height 49
-        }
-        unresolved
-        {
-            owner_vehicle_id 25
-        }
-    }
-    29
-    {
-        data_id
-        {
-            id 29
-            type_id 0
-            subtype_id 3
-        }
-        rect
-        {
-            BottomLeft
-            {
-                x 421
-                y 242
-            }
-            width 46
-            height 49
-        }
-        unresolved
-        {
-            owner_vehicle_id 25
-        }
-    }
-    30
-    {
-        data_id
-        {
-            id 30
-            type_id 0
-            subtype_id 3
-        }
-        rect
-        {
-            BottomLeft
-            {
-                x 421
-                y 189
-            }
-            width 46
-            height 49
-        }
-        unresolved
-        {
-            owner_vehicle_id 25
-        }
-    }
-    31
-    {
-        data_id
-        {
-            id 31
-            type_id 0
             subtype_id 5
         }
         rect
@@ -1235,11 +1143,11 @@ item_slot
             owner_vehicle_id 25
         }
     }
-    32
+    28
     {
         data_id
         {
-            id 32
+            id 28
             type_id 0
             subtype_id 12
         }
@@ -1258,11 +1166,11 @@ item_slot
             owner_vehicle_id 25
         }
     }
-    33
+    29
     {
         data_id
         {
-            id 33
+            id 29
             type_id 0
             subtype_id 7
         }
@@ -1270,7 +1178,7 @@ item_slot
         {
             BottomLeft
             {
-                x 274
+                x 228
                 y 216
             }
             width 46
@@ -1281,11 +1189,11 @@ item_slot
             owner_vehicle_id 25
         }
     }
-    34
+    30
     {
         data_id
         {
-            id 34
+            id 30
             type_id 0
             subtype_id 11
         }
@@ -1304,11 +1212,11 @@ item_slot
             owner_vehicle_id 25
         }
     }
-    35
+    31
     {
         data_id
         {
-            id 35
+            id 31
             type_id 0
             subtype_id 9
         }
@@ -1316,7 +1224,7 @@ item_slot
         {
             BottomLeft
             {
-                x 366
+                x 274
                 y 269
             }
             width 46
@@ -1327,11 +1235,11 @@ item_slot
             owner_vehicle_id 25
         }
     }
-    36
+    32
     {
         data_id
         {
-            id 36
+            id 32
             type_id 0
             subtype_id 10
         }
@@ -1350,11 +1258,11 @@ item_slot
             owner_vehicle_id 25
         }
     }
-    37
+    33
     {
         data_id
         {
-            id 37
+            id 33
             type_id 0
             subtype_id 8
         }
@@ -1373,11 +1281,11 @@ item_slot
             owner_vehicle_id 25
         }
     }
-    38
+    34
     {
         data_id
         {
-            id 38
+            id 34
             type_id 0
             subtype_id 4
         }
@@ -1396,11 +1304,11 @@ item_slot
             owner_vehicle_id 25
         }
     }
-    39
+    35
     {
         data_id
         {
-            id 39
+            id 35
             type_id 0
             subtype_id 6
         }
@@ -1410,6 +1318,98 @@ item_slot
             {
                 x 90
                 y 189
+            }
+            width 46
+            height 49
+        }
+        unresolved
+        {
+            owner_vehicle_id 25
+        }
+    }
+    36
+    {
+        data_id
+        {
+            id 36
+            type_id 0
+            subtype_id 1
+        }
+        rect
+        {
+            BottomLeft
+            {
+                x 44
+                y 93
+            }
+            width 46
+            height 49
+        }
+        unresolved
+        {
+            owner_vehicle_id 25
+        }
+    }
+    37
+    {
+        data_id
+        {
+            id 37
+            type_id 0
+            subtype_id 1
+        }
+        rect
+        {
+            BottomLeft
+            {
+                x 90
+                y 93
+            }
+            width 46
+            height 49
+        }
+        unresolved
+        {
+            owner_vehicle_id 25
+        }
+    }
+    38
+    {
+        data_id
+        {
+            id 38
+            type_id 0
+            subtype_id 1
+        }
+        rect
+        {
+            BottomLeft
+            {
+                x 136
+                y 93
+            }
+            width 46
+            height 49
+        }
+        unresolved
+        {
+            owner_vehicle_id 25
+        }
+    }
+    39
+    {
+        data_id
+        {
+            id 39
+            type_id 0
+            subtype_id 1
+        }
+        rect
+        {
+            BottomLeft
+            {
+                x 182
+                y 93
             }
             width 46
             height 49
@@ -1431,7 +1431,7 @@ item_slot
         {
             BottomLeft
             {
-                x 44
+                x 228
                 y 93
             }
             width 46
@@ -1454,7 +1454,7 @@ item_slot
         {
             BottomLeft
             {
-                x 90
+                x 274
                 y 93
             }
             width 46
@@ -1477,7 +1477,7 @@ item_slot
         {
             BottomLeft
             {
-                x 136
+                x 320
                 y 93
             }
             width 46
@@ -1500,7 +1500,7 @@ item_slot
         {
             BottomLeft
             {
-                x 182
+                x 366
                 y 93
             }
             width 46
@@ -1523,7 +1523,7 @@ item_slot
         {
             BottomLeft
             {
-                x 228
+                x 412
                 y 93
             }
             width 46
@@ -1546,7 +1546,7 @@ item_slot
         {
             BottomLeft
             {
-                x 274
+                x 458
                 y 93
             }
             width 46
@@ -1569,7 +1569,7 @@ item_slot
         {
             BottomLeft
             {
-                x 320
+                x 504
                 y 93
             }
             width 46
@@ -1585,98 +1585,6 @@ item_slot
         data_id
         {
             id 47
-            type_id 0
-            subtype_id 1
-        }
-        rect
-        {
-            BottomLeft
-            {
-                x 366
-                y 93
-            }
-            width 46
-            height 49
-        }
-        unresolved
-        {
-            owner_vehicle_id 25
-        }
-    }
-    48
-    {
-        data_id
-        {
-            id 48
-            type_id 0
-            subtype_id 1
-        }
-        rect
-        {
-            BottomLeft
-            {
-                x 412
-                y 93
-            }
-            width 46
-            height 49
-        }
-        unresolved
-        {
-            owner_vehicle_id 25
-        }
-    }
-    49
-    {
-        data_id
-        {
-            id 49
-            type_id 0
-            subtype_id 1
-        }
-        rect
-        {
-            BottomLeft
-            {
-                x 458
-                y 93
-            }
-            width 46
-            height 49
-        }
-        unresolved
-        {
-            owner_vehicle_id 25
-        }
-    }
-    50
-    {
-        data_id
-        {
-            id 50
-            type_id 0
-            subtype_id 1
-        }
-        rect
-        {
-            BottomLeft
-            {
-                x 504
-                y 93
-            }
-            width 46
-            height 49
-        }
-        unresolved
-        {
-            owner_vehicle_id 25
-        }
-    }
-    51
-    {
-        data_id
-        {
-            id 51
             type_id 0
             subtype_id 2
         }
@@ -1714,24 +1622,24 @@ npc
         }
         angle
         {
-            x 14
-            y 36
+            x 34
+            y 14
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.47
+            z 0.38
         }
         collision_radius 0
         mass 0
         data_unresolved_BaseGameEntity
         {
             mesh_path none
-            textureOb_path data/race/7000.png
+            textureOb_path data/race/7001.png
             parent_id -1
-            starsystem_id 2
+            starsystem_id 4
             center
             {
                 x 0
@@ -1760,29 +1668,29 @@ ship
         data_life
         {
             is_alive true
-            armor 15032
-            dying_time 70
+            armor 15017
+            dying_time 50
         }
         angle
         {
-            x 10
-            y 39
+            x 27
+            y 22
             z 0
         }
         d_angle
         {
             x 0
             y 0
-            z 0.81
+            z 0.65
         }
-        collision_radius 90
-        mass 583
+        collision_radius 58
+        mass 436
         data_unresolved_BaseGameEntity
         {
             mesh_path none
-            textureOb_path data/ship/k_71_0_1e.png
+            textureOb_path data/ship/k_71_0_0.png
             parent_id -1
-            starsystem_id 2
+            starsystem_id 4
             center
             {
                 x -400
@@ -1793,11 +1701,11 @@ ship
         place_type_id 18
         data_korpus
         {
-            space 15032
-            armor 15032
+            space 15017
+            armor 15017
             protection 150
             temperature 100
-            price 21600
+            price 32400
             draw_turrels true
             slot_grapple_num 1
             slot_drive_num 0
@@ -1805,16 +1713,137 @@ ship
             slot_radar_num 0
             slot_scaner_num 0
             slot_freezer_num 0
-            slot_weapon_num 5
+            slot_weapon_num 1
         }
         data_unresolved_Vehicle
         {
             npc_id 24
-            texOb_korpus_path data/ship/k_71_0_1e.png
+            texOb_korpus_path data/ship/k_71_0_0.png
         }
     }
 }
 rocket_equipment
+{
+    48
+    {
+        data_id
+        {
+            id 48
+            type_id 0
+            subtype_id 1
+        }
+        price -61
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 3
+        data_item
+        {
+            modules_num_max 0
+            condition_max 254
+            deterioration_rate 1
+            mass 43
+        }
+        unresolved
+        {
+            textureOb_path data/item/rocket/rocket_Race0_Tech0.png
+            slot_id 26
+        }
+        ammo_max_orig 27
+        ammo 27
+        damage_orig 6
+        radius_orig 491
+    }
+}
+radar_equipment
+{
+    49
+    {
+        data_id
+        {
+            id 49
+            type_id 0
+            subtype_id 3
+        }
+        price -172
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 5
+        data_item
+        {
+            modules_num_max 2
+            condition_max 6966
+            deterioration_rate 1
+            mass 42
+        }
+        unresolved
+        {
+            textureOb_path data/item/radar/radar_Race0_Tech0.png
+            slot_id 27
+        }
+        radius_orig 1013
+    }
+}
+drive_equipment
+{
+    50
+    {
+        data_id
+        {
+            id 50
+            type_id 0
+            subtype_id 2
+        }
+        price 218
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 4
+        data_item
+        {
+            modules_num_max 2
+            condition_max 545
+            deterioration_rate 1
+            mass 54
+        }
+        unresolved
+        {
+            textureOb_path data/item/drive/drive_Race0_Tech0.png
+            slot_id 34
+        }
+        speed_orig 279
+        hyper_orig 6244
+    }
+}
+bak_equipment
+{
+    51
+    {
+        data_id
+        {
+            id 51
+            type_id 0
+            subtype_id 4
+        }
+        price -1933
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 6
+        data_item
+        {
+            modules_num_max 0
+            condition_max 41
+            deterioration_rate 1
+            mass 13
+        }
+        unresolved
+        {
+            textureOb_path data/item/bak/bak_Race0_Tech1.png
+            slot_id 35
+        }
+        fuel_max_orig 6048
+        fuel 6048
+    }
+}
+energizer_equipment
 {
     52
     {
@@ -1822,89 +1851,29 @@ rocket_equipment
         {
             id 52
             type_id 0
-            subtype_id 2
+            subtype_id 5
         }
-        price -323
+        price 399
         condition 1000
         race_id 0
-        functional_slot_subtype_id 3
-        data_item
-        {
-            modules_num_max 0
-            condition_max 114
-            deterioration_rate 1
-            mass 41
-        }
-        unresolved
-        {
-            textureOb_path data/item/rocket/rocket_Race0_Tech1.png
-            slot_id 26
-        }
-        ammo_max_orig 39
-        ammo 39
-        damage_orig 10
-        radius_orig 377
-    }
-    55
-    {
-        data_id
-        {
-            id 55
-            type_id 0
-            subtype_id 2
-        }
-        price 273
-        condition 1000
-        race_id 0
-        functional_slot_subtype_id 3
+        functional_slot_subtype_id 7
         data_item
         {
             modules_num_max 1
-            condition_max 852
+            condition_max 3102
             deterioration_rate 1
-            mass 56
+            mass 57
         }
         unresolved
         {
-            textureOb_path data/item/rocket/rocket_Race0_Tech2.png
+            textureOb_path data/item/energyBlock/energyBlock_Race0_Tech0.png
             slot_id 29
         }
-        ammo_max_orig 26
-        ammo 26
-        damage_orig 8
-        radius_orig 470
-    }
-    56
-    {
-        data_id
-        {
-            id 56
-            type_id 0
-            subtype_id 2
-        }
-        price 293
-        condition 1000
-        race_id 0
-        functional_slot_subtype_id 3
-        data_item
-        {
-            modules_num_max 2
-            condition_max 827
-            deterioration_rate 1
-            mass 44
-        }
-        unresolved
-        {
-            textureOb_path data/item/rocket/rocket_Race0_Tech1.png
-            slot_id 30
-        }
-        ammo_max_orig 29
-        ammo 29
-        damage_orig 6
-        radius_orig 706
+        energy_max_orig 7007
+        restoration_orig 46
     }
 }
-lazer_equipment
+protector_equipment
 {
     53
     {
@@ -1912,137 +1881,115 @@ lazer_equipment
         {
             id 53
             type_id 0
-            subtype_id 1
+            subtype_id 6
         }
-        price 87
+        price -212
         condition 1000
         race_id 0
-        functional_slot_subtype_id 3
+        functional_slot_subtype_id 8
         data_item
         {
-            modules_num_max 2
-            condition_max 830
+            modules_num_max 0
+            condition_max 5598
             deterioration_rate 1
-            mass 14
+            mass 39
         }
         unresolved
         {
-            textureOb_path data/item/lazer/lazer_Race0_Tech1_Blue0.png
-            slot_id 27
+            textureOb_path data/item/protector/protector_Race0_Tech3.png
+            slot_id 33
         }
-        damage_orig 6
-        radius_orig 214
+        protection_orig 0
     }
+}
+droid_equipment
+{
     54
     {
         data_id
         {
             id 54
             type_id 0
-            subtype_id 1
+            subtype_id 7
         }
-        price -91
+        price 1473
         condition 1000
         race_id 0
-        functional_slot_subtype_id 3
+        functional_slot_subtype_id 9
         data_item
         {
             modules_num_max 0
-            condition_max 732
+            condition_max 219
             deterioration_rate 1
-            mass 28
+            mass 47
         }
         unresolved
         {
-            textureOb_path data/item/lazer/lazer_Race0_Tech0_Red0.png
-            slot_id 28
+            textureOb_path data/item/droid/droid_Race0_Tech1.png
+            slot_id 31
         }
-        damage_orig 6
-        radius_orig 242
+        repair_orig 10
     }
-    66
+}
+freezer_equipment
+{
+    55
     {
         data_id
         {
-            id 66
+            id 55
             type_id 0
-            subtype_id 1
+            subtype_id 8
         }
-        price -282
+        price 471
         condition 1000
         race_id 0
-        functional_slot_subtype_id 3
+        functional_slot_subtype_id 10
         data_item
         {
-            modules_num_max 2
-            condition_max 175
+            modules_num_max 1
+            condition_max 3464
+            deterioration_rate 1
+            mass 15
+        }
+        unresolved
+        {
+            textureOb_path data/item/freezer/freezer_Race0_Tech1.png
+            slot_id 32
+        }
+        freeze_orig 4
+    }
+}
+scaner_equipment
+{
+    56
+    {
+        data_id
+        {
+            id 56
+            type_id 0
+            subtype_id 10
+        }
+        price -459
+        condition 1000
+        race_id 0
+        functional_slot_subtype_id 12
+        data_item
+        {
+            modules_num_max 1
+            condition_max 86
             deterioration_rate 1
             mass 19
         }
         unresolved
         {
-            textureOb_path data/item/lazer/lazer_Race0_Tech1_Blue0.png
-            slot_id 40
+            textureOb_path data/item/scaner/scaner_Race0_Tech1.png
+            slot_id 28
         }
-        damage_orig 8
-        radius_orig 332
-    }
-    67
-    {
-        data_id
-        {
-            id 67
-            type_id 0
-            subtype_id 1
-        }
-        price 40
-        condition 1000
-        race_id 0
-        functional_slot_subtype_id 3
-        data_item
-        {
-            modules_num_max 0
-            condition_max 861
-            deterioration_rate 1
-            mass 35
-        }
-        unresolved
-        {
-            textureOb_path data/item/lazer/lazer_Race0_Tech0_Blue0.png
-            slot_id 41
-        }
-        damage_orig 10
-        radius_orig 345
-    }
-    68
-    {
-        data_id
-        {
-            id 68
-            type_id 0
-            subtype_id 1
-        }
-        price -180
-        condition 1000
-        race_id 0
-        functional_slot_subtype_id 3
-        data_item
-        {
-            modules_num_max 0
-            condition_max 507
-            deterioration_rate 1
-            mass 34
-        }
-        unresolved
-        {
-            textureOb_path data/item/lazer/lazer_Race0_Tech0_Red0.png
-            slot_id 42
-        }
-        damage_orig 5
-        radius_orig 345
+        scan_orig 9
     }
 }
-radar_equipment
+grapple_equipment
 {
     57
     {
@@ -2050,28 +1997,31 @@ radar_equipment
         {
             id 57
             type_id 0
-            subtype_id 4
+            subtype_id 9
         }
-        price 23
+        price 657
         condition 1000
         race_id 0
-        functional_slot_subtype_id 5
+        functional_slot_subtype_id 11
         data_item
         {
-            modules_num_max 0
-            condition_max 7536
+            modules_num_max 2
+            condition_max 414
             deterioration_rate 1
-            mass 18
+            mass 39
         }
         unresolved
         {
-            textureOb_path data/item/radar/radar_Race0_Tech0.png
-            slot_id 31
+            textureOb_path data/item/grapple/grapple_Race0_Tech0.png
+            slot_id 30
         }
-        radius_orig 1202
+        strength_orig 49
+        radius_orig 177
+        speed_orig 249
+        maxNumItem_orig 1
     }
 }
-drive_equipment
+lazer_equipment
 {
     58
     {
@@ -2079,250 +2029,148 @@ drive_equipment
         {
             id 58
             type_id 0
-            subtype_id 3
+            subtype_id 0
         }
-        price 299
+        price 368
         condition 1000
         race_id 0
-        functional_slot_subtype_id 4
+        functional_slot_subtype_id 3
         data_item
         {
             modules_num_max 1
-            condition_max 1870
+            condition_max 898
             deterioration_rate 1
-            mass 51
+            mass 15
         }
         unresolved
         {
-            textureOb_path data/item/drive/drive_Race0_Tech1.png
-            slot_id 38
+            textureOb_path data/item/lazer/lazer_Race0_Tech0_Red0.png
+            slot_id 36
         }
-        speed_orig 190
-        hyper_orig 6875
+        damage_orig 16
+        radius_orig 217
     }
-}
-bak_equipment
-{
     59
     {
         data_id
         {
             id 59
             type_id 0
-            subtype_id 5
+            subtype_id 0
         }
-        price -1489
+        price 378
         condition 1000
         race_id 0
-        functional_slot_subtype_id 6
+        functional_slot_subtype_id 3
         data_item
         {
             modules_num_max 0
-            condition_max 60
+            condition_max 768
             deterioration_rate 1
-            mass 15
+            mass 18
         }
         unresolved
         {
-            textureOb_path data/item/bak/bak_Race0_Tech0.png
-            slot_id 39
+            textureOb_path data/item/lazer/lazer_Race0_Tech1_Blue0.png
+            slot_id 37
         }
-        fuel_max_orig 3119
-        fuel 3119
+        damage_orig 14
+        radius_orig 448
     }
-}
-energizer_equipment
-{
     60
     {
         data_id
         {
             id 60
             type_id 0
-            subtype_id 6
+            subtype_id 0
         }
-        price 617
+        price 91
         condition 1000
         race_id 0
-        functional_slot_subtype_id 7
+        functional_slot_subtype_id 3
         data_item
         {
-            modules_num_max 2
-            condition_max 1582
+            modules_num_max 1
+            condition_max 834
             deterioration_rate 1
-            mass 49
+            mass 35
         }
         unresolved
         {
-            textureOb_path data/item/energyBlock/energyBlock_Race0_Tech0.png
-            slot_id 33
+            textureOb_path data/item/lazer/lazer_Race0_Tech1_Blue0.png
+            slot_id 38
         }
-        energy_max_orig 5761
-        restoration_orig 90
+        damage_orig 12
+        radius_orig 303
     }
 }
-protector_equipment
+radar_module
 {
     61
     {
         data_id
         {
             id 61
-            type_id 0
-            subtype_id 7
+            type_id 1
+            subtype_id 3
         }
-        price -348
-        condition 1000
-        race_id 0
-        functional_slot_subtype_id 8
+        price 0
+        condition 2141312201
+        race_id -2120166198
+        functional_slot_subtype_id 2091045833
         data_item
         {
             modules_num_max 0
-            condition_max 5365
-            deterioration_rate 1
-            mass 66
+            condition_max 0
+            deterioration_rate 0
+            mass 0
         }
         unresolved
         {
-            textureOb_path data/item/protector/protector_Race0_Tech2.png
-            slot_id 37
+            textureOb_path data/item/module.png
+            slot_id 39
         }
-        protection_orig 0
+        radius_add 784
     }
-}
-droid_equipment
-{
     62
     {
         data_id
         {
             id 62
-            type_id 0
-            subtype_id 8
+            type_id 1
+            subtype_id 3
         }
-        price -592
-        condition 1000
-        race_id 0
-        functional_slot_subtype_id 9
+        price 0
+        condition 2090642874
+        race_id 2090248372
+        functional_slot_subtype_id 2106960053
         data_item
         {
             modules_num_max 0
-            condition_max 276
-            deterioration_rate 1
-            mass 47
+            condition_max 0
+            deterioration_rate 0
+            mass 0
         }
         unresolved
         {
-            textureOb_path data/item/droid/droid_Race0_Tech2.png
-            slot_id 35
+            textureOb_path data/item/module.png
+            slot_id 40
         }
-        repair_orig 1
+        radius_add 463
     }
-}
-freezer_equipment
-{
     63
     {
         data_id
         {
             id 63
-            type_id 0
-            subtype_id 9
-        }
-        price 141
-        condition 1000
-        race_id 0
-        functional_slot_subtype_id 10
-        data_item
-        {
-            modules_num_max 0
-            condition_max 3451
-            deterioration_rate 1
-            mass 13
-        }
-        unresolved
-        {
-            textureOb_path data/item/freezer/freezer_Race0_Tech1.png
-            slot_id 36
-        }
-        freeze_orig 2
-    }
-}
-scaner_equipment
-{
-    64
-    {
-        data_id
-        {
-            id 64
-            type_id 0
-            subtype_id 11
-        }
-        price 1227
-        condition 1000
-        race_id 0
-        functional_slot_subtype_id 12
-        data_item
-        {
-            modules_num_max 2
-            condition_max 82
-            deterioration_rate 1
-            mass 24
-        }
-        unresolved
-        {
-            textureOb_path data/item/scaner/scaner_Race0_Tech0.png
-            slot_id 32
-        }
-        scan_orig 26
-    }
-}
-grapple_equipment
-{
-    65
-    {
-        data_id
-        {
-            id 65
-            type_id 0
-            subtype_id 10
-        }
-        price 520
-        condition 1000
-        race_id 0
-        functional_slot_subtype_id 11
-        data_item
-        {
-            modules_num_max 0
-            condition_max 498
-            deterioration_rate 1
-            mass 29
-        }
-        unresolved
-        {
-            textureOb_path data/item/grapple/grapple_Race0_Tech0.png
-            slot_id 34
-        }
-        strength_orig 36
-        radius_orig 186
-        speed_orig 235
-        maxNumItem_orig 1
-    }
-}
-radar_module
-{
-    69
-    {
-        data_id
-        {
-            id 69
-            type_id 0
-            subtype_id 4
+            type_id 1
+            subtype_id 3
         }
         price 0
-        condition 1064450265
-        race_id -304292069
-        functional_slot_subtype_id -1936104944
+        condition 2175384513
+        race_id -2103068739
+        functional_slot_subtype_id -2119385405
         data_item
         {
             modules_num_max 0
@@ -2333,60 +2181,8 @@ radar_module
         unresolved
         {
             textureOb_path data/item/module.png
-            slot_id 43
+            slot_id 41
         }
-        radius_add 751
-    }
-    70
-    {
-        data_id
-        {
-            id 70
-            type_id 0
-            subtype_id 4
-        }
-        price 0
-        condition 10569592
-        race_id 19601
-        functional_slot_subtype_id 166656128
-        data_item
-        {
-            modules_num_max 0
-            condition_max 0
-            deterioration_rate 0
-            mass 0
-        }
-        unresolved
-        {
-            textureOb_path data/item/module.png
-            slot_id 44
-        }
-        radius_add 540
-    }
-    71
-    {
-        data_id
-        {
-            id 71
-            type_id 0
-            subtype_id 4
-        }
-        price 0
-        condition 213339099
-        race_id 1816137913
-        functional_slot_subtype_id -1900379335
-        data_item
-        {
-            modules_num_max 0
-            condition_max 0
-            deterioration_rate 0
-            mass 0
-        }
-        unresolved
-        {
-            textureOb_path data/item/module.png
-            slot_id 45
-        }
-        radius_add 876
+        radius_add 511
     }
 }

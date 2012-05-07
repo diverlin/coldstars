@@ -30,15 +30,15 @@ class Rect
       		
       		void set(float, float, int, int);
 
-      		void setCenter(vec2f);
-      		void setCenter(float, float);
+      		void SetCenter(vec2f);
+      		void SetCenter(float, float);
       		void setBottomLeft(vec2f);
       		void setBottomLeft(float, float);
       		      		
-      		vec2f getCenter() const;
-      		vec2f getBottomLeft() const;
-      		int getWidth() const;
-      		int getHeight() const;
+		vec2f GetCenter() const     { return center; }
+		vec2f getBottomLeft() const { return bottomLeft; }
+		int getWidth() const 	    { return w; }
+		int getHeight() const 	    { return h; }  
       
       		void resize(int, int);
       		      		

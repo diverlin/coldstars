@@ -57,7 +57,7 @@ void Observation :: findEchievableStarSystems_inStatic(Galaxy* galaxy)
 
         for (unsigned int i = 0; i < galaxy->STARSYSTEM_vec.size(); i++)
         {    
-        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetStarSystem()->GetPoints().getCenter(),  galaxy->STARSYSTEM_vec[i]->GetPoints().getCenter());
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetStarSystem()->GetPoints().GetCenter(),  galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter());
                 //if (dist < npc_owner->getShip()->propetries.hyper)
                 {
                 	visible_STARSYSTEM_vec.push_back( StarSystemObservationData(galaxy->STARSYSTEM_vec[i], dist) );
@@ -119,7 +119,7 @@ void Observation :: findVisibleAsteroids_inSpace_inStatic()
 
         for (unsigned int ai = 0; ai < npc_owner->GetStarSystem()->ASTEROID_vec.size(); ai++)
         {    
-        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->ASTEROID_vec[ai]->GetPoints().getCenter());
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), npc_owner->GetStarSystem()->ASTEROID_vec[ai]->GetPoints().GetCenter());
                 if (dist < npc_owner->GetVehicle()->propetries.radius)
                 {
                 	visible_ASTEROID_vec.push_back( AsteroidObservationData(npc_owner->GetStarSystem()->ASTEROID_vec[ai], dist) );
@@ -139,7 +139,7 @@ void Observation :: findVisibleMinerals_inSpace_inStatic()
 
         //for (unsigned int mi = 0; mi < npc_owner->GetStarSystem()->MINERAL_vec.size(); mi++)
         //{    
-         	//float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->MINERAL_vec[mi]->GetPoints().getCenter());
+         	//float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), npc_owner->GetStarSystem()->MINERAL_vec[mi]->GetPoints().GetCenter());
                	//if (dist < npc_owner->GetVehicle()->propetries.radius)
               	//{              		
                		//visible_MINERAL_vec.push_back(MineralObservationData(npc_owner->GetStarSystem()->MINERAL_vec[mi], dist));
@@ -182,7 +182,7 @@ void Observation :: findVisibleContainers_inSpace_inStatic()
 
         for (unsigned int ci = 0; ci < npc_owner->GetStarSystem()->CONTAINER_vec.size(); ci++)
         {    
-        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->CONTAINER_vec[ci]->GetPoints().getCenter());
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), npc_owner->GetStarSystem()->CONTAINER_vec[ci]->GetPoints().GetCenter());
                 if (dist < npc_owner->GetVehicle()->propetries.radius)
                 {
                 	visible_CONTAINER_vec.push_back( ContainerObservationData(npc_owner->GetStarSystem()->CONTAINER_vec[ci], dist) );
@@ -199,7 +199,7 @@ void Observation ::findVisibleNpcs_inSpace_inStatic()
 
         for (unsigned int i = 0; i < npc_owner->GetStarSystem()->NPC_vec.size(); i++)
         {    
-        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->NPC_vec[i]->GetVehicle()->GetPoints().getCenter());
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), npc_owner->GetStarSystem()->NPC_vec[i]->GetVehicle()->GetPoints().GetCenter());
                 if (dist < npc_owner->GetVehicle()->propetries.radius)
                 {
                 	visible_NPC_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_vec[i], dist) );
@@ -222,7 +222,7 @@ void Observation ::findVisibleNpcs_inSpace_inStatic()
        	       	       	
         for (unsigned int i = 0; i < npc_owner->GetStarSystem()->NPC_vec.size(); i++)
         {    
-        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().getCenter(), npc_owner->GetStarSystem()->NPC_vec[i]->GetVehicle()->GetPoints().getCenter());
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), npc_owner->GetStarSystem()->NPC_vec[i]->GetVehicle()->GetPoints().GetCenter());
                 if (dist < npc_owner->GetVehicle()->propetries.radius)
                 {
                 	switch(npc_owner->GetStarSystem()->NPC_vec[i]->GetSubTypeId())

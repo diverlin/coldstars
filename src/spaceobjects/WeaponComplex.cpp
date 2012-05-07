@@ -68,8 +68,8 @@ void WeaponComplex::PostCreateInit(int weapon_num, bool draw_turrels)
     	//{  
                 //ItemSlot* weapon_slot2 = GetNewItemSlot(SLOT::WEAPON_ID); 
                 
-       		//weapon_slot2->SetRect(owner_vehicle->GetGuiRect().getCenter().x+1*GUI::SLOT::WIDTH_FOR_SHIP, 
-       				      //owner_vehicle->GetGuiRect().getCenter().y+-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
+       		//weapon_slot2->SetRect(owner_vehicle->GetGuiRect().GetCenter().x+1*GUI::SLOT::WIDTH_FOR_SHIP, 
+       				      //owner_vehicle->GetGuiRect().GetCenter().y+-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
        				      //GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
        			    
        		//slot_weapon_vec.push_back(weapon_slot2);
@@ -94,8 +94,8 @@ void WeaponComplex::PostCreateInit(int weapon_num, bool draw_turrels)
     	//{  
                 //ItemSlot* weapon_slot3 = GetNewItemSlot(SLOT::WEAPON_ID); 
                 	
-       		//weapon_slot3->SetRect(owner_vehicle->GetGuiRect().getCenter().x+1*GUI::SLOT::WIDTH_FOR_SHIP, 
-                                      //owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
+       		//weapon_slot3->SetRect(owner_vehicle->GetGuiRect().GetCenter().x+1*GUI::SLOT::WIDTH_FOR_SHIP, 
+                                      //owner_vehicle->GetGuiRect().GetCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
        					//GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
        				
        		//slot_weapon_vec.push_back(weapon_slot3);
@@ -120,8 +120,8 @@ void WeaponComplex::PostCreateInit(int weapon_num, bool draw_turrels)
     	//{  
                 //ItemSlot* weapon_slot4 = GetNewItemSlot(SLOT::WEAPON_ID); 
                 
-       		//weapon_slot4->SetRect(owner_vehicle->GetGuiRect().getCenter().x+2.2*GUI::SLOT::WIDTH_FOR_SHIP, 
-                                      //owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
+       		//weapon_slot4->SetRect(owner_vehicle->GetGuiRect().GetCenter().x+2.2*GUI::SLOT::WIDTH_FOR_SHIP, 
+                                      //owner_vehicle->GetGuiRect().GetCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
                                       //GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);	
        			
        		//slot_weapon_vec.push_back(weapon_slot4);
@@ -148,8 +148,8 @@ void WeaponComplex::PostCreateInit(int weapon_num, bool draw_turrels)
     	//{  
                 //ItemSlot* weapon_slot5 = GetNewItemSlot(SLOT::WEAPON_ID); 
                 
-       		//weapon_slot5->SetRect(owner_vehicle->GetGuiRect().getCenter().x+2.2*GUI::SLOT::WIDTH_FOR_SHIP, 
-                                      //owner_vehicle->GetGuiRect().getCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
+       		//weapon_slot5->SetRect(owner_vehicle->GetGuiRect().GetCenter().x+2.2*GUI::SLOT::WIDTH_FOR_SHIP, 
+                                      //owner_vehicle->GetGuiRect().GetCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
                                       //GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
        					
        		//slot_weapon_vec.push_back(weapon_slot5);
@@ -214,7 +214,7 @@ bool WeaponComplex::IsAnyWeaponSelected() const
 
 void WeaponComplex::SetTarget(BaseGameEntity* _target)
 {                          
-        float dist = distBetweenPoints(owner_vehicle->GetPoints().getCenter(), _target->GetPoints().getCenter());
+        float dist = distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), _target->GetPoints().GetCenter());
         
         for (unsigned int i = 0; i < slot_weapon_equiped_vec.size(); i++)
         {
@@ -326,14 +326,14 @@ void WeaponComplex::RenderTurrels() const
 {
     	for(unsigned int i = 0; i < slot_weapon_equiped_vec.size(); i++)
     	{
-        	slot_weapon_equiped_vec[i]->GetTurrel()->Render(owner_vehicle->GetPoints().getAngleDegree());        
+        	slot_weapon_equiped_vec[i]->GetTurrel()->Render(owner_vehicle->GetPoints().GetAngleDegree());        
     	} 
 }
 
 void WeaponComplex::RenderWeaponsRange()
 {
 	glPushMatrix();
-		glTranslatef(owner_vehicle->GetPoints().getCenter().x, owner_vehicle->GetPoints().getCenter().y, 0.0f);
+		glTranslatef(owner_vehicle->GetPoints().GetCenter().x, owner_vehicle->GetPoints().GetCenter().y, 0.0f);
 		for (unsigned int i = 0; i < slot_weapon_reloaded_vec.size(); i++)
         	{
          		if (slot_weapon_reloaded_vec[i]->GetTurrel()->GetSelectedStatus() == true)
@@ -356,7 +356,7 @@ void WeaponComplex::RenderWeaponIcons() const
                 Turrel* _turrel = slot_weapon_vec[i]->GetTurrel();
                 if (_turrel->GetTarget() != NULL )
                 {       
-                        Rect _rect(_turrel->GetTarget()->GetPoints().getpCenter()->x - 40/2 + 23*offset, _turrel->GetTarget()->GetPoints().getpCenter()->y + 40/2, 20, 20);
+                        Rect _rect(_turrel->GetTarget()->GetPoints().GetpCenter()->x - 40/2 + 23*offset, _turrel->GetTarget()->GetPoints().GetpCenter()->y + 40/2, 20, 20);
                         drawTexturedRect(slot_weapon_vec[i]->GetItem()->GetTextureOb(), _rect, -2.0);
                         offset++;
                 }        

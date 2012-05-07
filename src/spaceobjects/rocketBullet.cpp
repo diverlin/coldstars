@@ -43,9 +43,9 @@ void RocketBullet :: place(vec2f _start_pos, float _angle_inD, float offset)
 	dx = 0;
         dy = 0;
 
-        points.setCenter(_start_pos.x + offset, _start_pos.y + offset);
+        points.SetCenter(_start_pos.x + offset, _start_pos.y + offset);
         angle_inD = _angle_inD;
-        points.setAngle(angle_inD);
+        points.SetAngle(angle_inD);
 }
 
 
@@ -58,7 +58,7 @@ void RocketBullet :: update_inSpace(int time, bool show_effect)
         
 	if (time > 0)
 	{
-                points.update();
+                points.Update();
                 
     		if (speed < data_bullet.speed_max)
     		{
@@ -67,15 +67,15 @@ void RocketBullet :: update_inSpace(int time, bool show_effect)
                 
 		if (target != NULL)
     		{ 
-        		get_dX_dY_angleInD_ToPoint(points.getCenter().x, points.getCenter().y, target->GetPoints().getCenter().x, target->GetPoints().getCenter().y, speed/100.0, &dx, &dy, &angle_inD);
+        		get_dX_dY_angleInD_ToPoint(points.GetCenter().x, points.GetCenter().y, target->GetPoints().GetCenter().x, target->GetPoints().GetCenter().y, speed/100.0, &dx, &dy, &angle_inD);
     		
                         if (CheckTarget() == false)
                         {
                                 target = NULL;
                         }
                 }      
-    		points.setAngle(angle_inD);
-    		points.setCenter(points.getCenter().x + dx, points.getCenter().y + dy);
+    		points.SetAngle(angle_inD);
+    		points.SetCenter(points.GetCenter().x + dx, points.GetCenter().y + dy);
     
 
     		data_bullet.live_time -= 1;
@@ -118,7 +118,7 @@ void RocketBullet :: deathEventUnique(bool show_effect)
 {
 	if (show_effect == true)
 	{
-       		createExplosion(starsystem, points.getCenter(), textureOb->size_id);
+       		createExplosion(starsystem, points.GetCenter(), textureOb->size_id);
        	}
 }
 

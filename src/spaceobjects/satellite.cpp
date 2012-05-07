@@ -47,14 +47,14 @@ void Satellite :: update_inSpace(int time, bool show_effect)
 		//if (parent != NULL)
 		//{		
 			vec2f new_pos;
-			new_pos.x = parent->GetPoints().getCenter().x + orbit->GetPosition().x;
-			new_pos.y = parent->GetPoints().getCenter().y + orbit->GetPosition().y;
-			points.setCenter(new_pos);
-			points.update();
+			new_pos.x = parent->GetPoints().GetCenter().x + orbit->GetPosition().x;
+			new_pos.y = parent->GetPoints().GetCenter().y + orbit->GetPosition().y;
+			points.SetCenter(new_pos);
+			points.Update();
 		//}
 		//else
 		//{
-			//points.setCenter(orbit->getPosition());
+			//points.SetCenter(orbit->getPosition());
 		//}
 	}
 }
@@ -79,9 +79,9 @@ void Satellite :: updateRenderStuff()
     	protection_complex->GetShieldEffect()->Update();
     	
     	this->UpdateRotation();
-	points.setAngle(angle.z);
+	points.SetAngle(angle.z);
     	//printf("3. angle = %f\n", angle.z);
-    	points.update();
+    	points.Update();
     		
     	//if (ableTo.DRIVE == true)
     	//{
