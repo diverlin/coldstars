@@ -1,56 +1,43 @@
-                
-vec2f :: vec2f()
-{
-        x = 0;
-        y = 0;
-}
-    
-vec2f :: vec2f(float _x, float _y)
-{
-        x = _x; 
-        y = _y; 
-}
           
        
-bool vec2f :: isNull() const
+bool vec2f::IsNull() const
 {
 	if ( (x == 0) and ( y == 0 ) )
 		return true;
 	else
 		return false;
 }
-
   
-float vec2f :: getLen() const
+float vec2f::GetLen() const
 {
 	return sqrt(x*x+y*y);
 }                
          
-vec2f vec2f :: getNorm() const
+vec2f vec2f::GetNorm() const
 {
-	float len = getLen();
-
+	float len = GetLen();
 	return vec2f(x/len, y/len);
 }	
                 
-                         
-void vec2f :: set(float _x, float _y) 
-{ 
-        x = _x; 
-        y = _y; 
+
+vec2f vec2f::operator+=(const vec2f& vec_add)
+{
+	x += vec_add.x;
+	y += vec_add.y;
+	
+	return *this;
 }
 
-
-vec2f vec2f :: operator+=(const vec2f& _vec_add)
+vec2f vec2f::operator+=(float offset)
 {
-	x += _vec_add.x;
-	y += _vec_add.y;
+	x += offset;
+	y += offset;
 	
 	return *this;
 }
 
 
-vec2f vec2f :: operator+(const vec2f& _vec_add) const
+vec2f vec2f::operator+(const vec2f& _vec_add) const
 {
 	vec2f result;
 	
@@ -60,7 +47,7 @@ vec2f vec2f :: operator+(const vec2f& _vec_add) const
 	return result;
 }
 
-vec2f vec2f :: operator-(const vec2f& _vec_add) const
+vec2f vec2f::operator-(const vec2f& _vec_add) const
 {
 	vec2f result;
 	
@@ -70,7 +57,7 @@ vec2f vec2f :: operator-(const vec2f& _vec_add) const
 	return result;
 }
 
-vec2f vec2f :: operator*(const float _val) const
+vec2f vec2f::operator*(const float _val) const
 {
 	vec2f result;
 	
@@ -80,7 +67,7 @@ vec2f vec2f :: operator*(const float _val) const
 	return result;
 }
 
-vec2f vec2f :: operator/(const float _val) const
+vec2f vec2f::operator/(const float _val) const
 {
 	vec2f result;
 	

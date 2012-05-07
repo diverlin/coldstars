@@ -41,7 +41,7 @@ void BaseModule::AddCommonInfo()
 //void ModuleBase :: RenderInfo(Rect slot_rect, float offset_x, float offset_y)
 //{  
 	//UpdateInfo();
-        //drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.getCenter().x, slot_rect.getCenter().y, offset_x, offset_y);
+        //drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.GetCenter().x, slot_rect.GetCenter().y, offset_x, offset_y);
 //}
 
 //void ModuleBase :: Render(Rect slot_rect)

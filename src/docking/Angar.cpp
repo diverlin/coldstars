@@ -85,8 +85,8 @@ void Angar::MouseControl(Player* player)
         { 
                 float dist = distBetweenPoints(player->GetCursor()->getMousePos().x, 
                                                player->GetScreen()->getHeight() - player->GetCursor()->getMousePos().y, 
-                                               platform_vec[i]->GetRect().getCenter().x, 
-                                               platform_vec[i]->GetRect().getCenter().y);
+                                               platform_vec[i]->GetRect().GetCenter().x, 
+                                               platform_vec[i]->GetRect().GetCenter().y);
         				
                 if (dist < platform_vec[i]->GetRect().getWidth()/2)
                 {
@@ -139,8 +139,8 @@ void Angar::RenderItemInfo(Player* player) const
 
                 	float dist = distBetweenPoints(player->GetCursor()->getMousePos().x, 
                         	                       player->GetScreen()->getHeight() - player->GetCursor()->getMousePos().y, 
-                                	               platform_vec[i]->GetRect().getCenter().x, 
-                                        	       platform_vec[i]->GetRect().getCenter().y);
+                                	               platform_vec[i]->GetRect().GetCenter().x, 
+                                        	       platform_vec[i]->GetRect().GetCenter().y);
         				
                 	if (dist < platform_vec[i]->GetRect().getWidth()/2)
                 	{

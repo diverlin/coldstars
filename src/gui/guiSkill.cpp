@@ -132,8 +132,8 @@ void GuiSkill :: Render() const
 			{
 		     		for (int i = 0; i < skill->getAttack(); i++) 
      				{ 
-         				Rect tmp_rect = Rect(button_vec[bi]->GetRect().getCenter().x - w/2, 
-         		      				     button_vec[bi]->GetRect().getCenter().y + h/2 + i*h, 
+         				Rect tmp_rect = Rect(button_vec[bi]->GetRect().GetCenter().x - w/2, 
+         		      				     button_vec[bi]->GetRect().GetCenter().y + h/2 + i*h, 
          		      				     w, h);
          		      			     
          				drawTexturedRect(texOb_skill, tmp_rect, -1.0);
@@ -145,8 +145,8 @@ void GuiSkill :: Render() const
 			{
 		     		for (int i = 0; i < skill->getDefence(); i++) 
      				{		 
-         				Rect tmp_rect = Rect(button_vec[bi]->GetRect().getCenter().x - w/2, 
-         		      				     button_vec[bi]->GetRect().getCenter().y + h/2 + i*h, 
+         				Rect tmp_rect = Rect(button_vec[bi]->GetRect().GetCenter().x - w/2, 
+         		      				     button_vec[bi]->GetRect().GetCenter().y + h/2 + i*h, 
          		      				     w, h);
          				drawTexturedRect(texOb_skill, tmp_rect, -1.0);
      				}
@@ -157,8 +157,8 @@ void GuiSkill :: Render() const
 			{
 	   		     	for (int i = 0; i < skill->getLeader(); i++) 
      				{ 
-         				Rect tmp_rect = Rect(button_vec[bi]->GetRect().getCenter().x - w/2, 
-         		      				     button_vec[bi]->GetRect().getCenter().y + h/2 + i*h, 
+         				Rect tmp_rect = Rect(button_vec[bi]->GetRect().GetCenter().x - w/2, 
+         		      				     button_vec[bi]->GetRect().GetCenter().y + h/2 + i*h, 
          		      				     w, h);
          				drawTexturedRect(texOb_skill, tmp_rect, -1.0);
      				}
@@ -169,8 +169,8 @@ void GuiSkill :: Render() const
 	   		{
 	   	     		for (int i = 0; i < skill->getTrader(); i++) 
      				{ 
-         				Rect tmp_rect = Rect(button_vec[bi]->GetRect().getCenter().x - w/2, 
-         		     				     button_vec[bi]->GetRect().getCenter().y + h/2 + i*h, 
+         				Rect tmp_rect = Rect(button_vec[bi]->GetRect().GetCenter().x - w/2, 
+         		     				     button_vec[bi]->GetRect().GetCenter().y + h/2 + i*h, 
          		     				     w, h);
          				drawTexturedRect(texOb_skill, tmp_rect, -1.0);
     				}
@@ -181,8 +181,8 @@ void GuiSkill :: Render() const
 	   		{
 	   	     		for (int i = 0; i < skill->getTechnic(); i++) 
      				{ 
-         				Rect tmp_rect = Rect(button_vec[bi]->GetRect().getCenter().x - w/2, 
-         		      				     button_vec[bi]->GetRect().getCenter().y + h/2 + i*h, 
+         				Rect tmp_rect = Rect(button_vec[bi]->GetRect().GetCenter().x - w/2, 
+         		      				     button_vec[bi]->GetRect().GetCenter().y + h/2 + i*h, 
          		      				     w, h);
          				drawTexturedRect(texOb_skill, tmp_rect, -1.0);
      				}     
@@ -193,8 +193,8 @@ void GuiSkill :: Render() const
 	   		{
 	   			for (int i = 0; i < skill->getDiplomat(); i++) 
      				{ 
-         				Rect tmp_rect = Rect(button_vec[bi]->GetRect().getCenter().x - w/2, 
-         		      				     button_vec[bi]->GetRect().getCenter().y + h/2 + i*h, 
+         				Rect tmp_rect = Rect(button_vec[bi]->GetRect().GetCenter().x - w/2, 
+         		      				     button_vec[bi]->GetRect().GetCenter().y + h/2 + i*h, 
          		     				     w, h);
          				drawTexturedRect(texOb_skill, tmp_rect, -1.0);
      				}

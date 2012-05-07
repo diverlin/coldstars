@@ -52,7 +52,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 	CheckDeath(show_effect);
 	if (time > 0)
 	{
-		points.update();   
+		points.Update();   
 		weapon_complex->Fire(time, show_effect);
 
     		if (ableTo.DRIVE == true) 

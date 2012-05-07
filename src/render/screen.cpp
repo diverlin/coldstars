@@ -81,7 +81,7 @@ BloomEffect* Screen :: getBloom() const { return bloom; }
 void Screen :: bottomLeftGlobalCoordIncrease(vec2f delta)
 {
 	bottomLeft_globalCoord += delta;
-	topRight_globalCoord.set(bottomLeft_globalCoord.x + width, bottomLeft_globalCoord.y + height);
+	topRight_globalCoord.Set(bottomLeft_globalCoord.x + width, bottomLeft_globalCoord.y + height);
 }
 
 void Screen :: update()
@@ -92,7 +92,6 @@ void Screen :: display()
   	Gui::Update();
   	Gui::GetWindow().Display();
 }
-
 
 void Screen :: initGl()
 {   

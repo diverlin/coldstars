@@ -43,7 +43,7 @@ void Container::UpdateInfo()
 void Container::RenderInfoInSpace(vec2f scroll_coords)
 {
 	UpdateInfo();
-     	item_slot->GetRect().setCenter(points.getCenter());
+     	item_slot->GetRect().SetCenter(points.GetCenter());
      	item_slot->RenderItemInfo(scroll_coords.x, scroll_coords.y);
 }
  
@@ -58,7 +58,7 @@ void Container::PostDeathUniqueEvent(bool show_effect)
         {
         	if (show_effect == true)
         	{
-        		createExplosion(starsystem, points.getCenter(), textureOb->size_id);  
+        		createExplosion(starsystem, points.GetCenter(), textureOb->size_id);  
         	}
         }
 }
@@ -67,7 +67,7 @@ void Container::CalcCollisionrRadius()
 {
         collision_radius = (textureOb->getFrameWidth() + textureOb->getFrameHeight())/4; 
         
-        points.setWidthHeight(textureOb->getFrameWidth(), textureOb->getFrameHeight());  // needs for finding visible corners
+        points.SetWidthHeight(textureOb->getFrameWidth(), textureOb->getFrameHeight());  // needs for finding visible corners
 }
 
 void Container::UpdateInSpace(int time, bool show_effect)
@@ -79,8 +79,8 @@ void Container::UpdateInSpace(int time, bool show_effect)
 	{
      		if (keep_moving == true)
      		{
-        		keep_moving = get_dX_dY_ToPoint(points.getCenter().x, points.getCenter().y, target_pos.x, target_pos.y, velocity, &d_pos.x, &d_pos.y);
-        		points.setCenter(points.getCenter().x + d_pos.x, points.getCenter().y + d_pos.y);
+        		keep_moving = get_dX_dY_ToPoint(points.GetCenter().x, points.GetCenter().y, target_pos.x, target_pos.y, velocity, &d_pos.x, &d_pos.y);
+        		points.SetCenter(points.GetCenter().x + d_pos.x, points.GetCenter().y + d_pos.y);
      		}  
      	}
 }
@@ -95,7 +95,7 @@ void Container::SilentKill()
        		
 void Container::Render2D()
 { 
-    	drawDynamic(textureOb, points.getCenter(), angle.z, points.getPosZ());
+    	drawDynamic(textureOb, points.GetCenter(), angle.z, points.GetPosZ());
 }
 
 

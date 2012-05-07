@@ -54,7 +54,7 @@ void DamageEffect :: update()
             	{
             		if (is_dying == false)
             		{
-                                particles_vec[i]->setPosition(parent->GetPoints().getCenter());
+                                particles_vec[i]->setPosition(parent->GetPoints().GetCenter());
             			particles_vec[i]->reborn();
             		}
             	}

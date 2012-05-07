@@ -535,7 +535,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
     	{
         	for (unsigned int ci = 0; ci < visible_CONTAINER_vec.size(); ci++)
         	{ 
-            		float container_cursor_dist = distBetweenPoints(visible_CONTAINER_vec[ci]->GetPoints().getCenter(), mxvp, myvp);
+            		float container_cursor_dist = distBetweenPoints(visible_CONTAINER_vec[ci]->GetPoints().GetCenter(), mxvp, myvp);
             		if (container_cursor_dist < visible_CONTAINER_vec[ci]->GetCollisionRadius())
             		{   
                			cursor_has_target = true;
@@ -570,7 +570,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
     	{
        		for (unsigned int i = 0; i < visible_SATELLITE_vec.size(); i++)
        		{ 
-            		float ship_cursor_dist = distBetweenPoints(visible_SATELLITE_vec[i]->GetPoints().getCenter(), mxvp, myvp);
+            		float ship_cursor_dist = distBetweenPoints(visible_SATELLITE_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
             		if (ship_cursor_dist < visible_SATELLITE_vec[i]->GetCollisionRadius())
             		{ 
             			cursor_has_target = true;
@@ -630,7 +630,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
     	{
         	for (unsigned int ai = 0; ai < visible_ASTEROID_vec.size(); ai++)
         	{ 
-            		float asteroid_cursor_dist = distBetweenPoints(visible_ASTEROID_vec[ai]->GetPoints().getCenter(), mxvp, myvp);
+            		float asteroid_cursor_dist = distBetweenPoints(visible_ASTEROID_vec[ai]->GetPoints().GetCenter(), mxvp, myvp);
             		if (asteroid_cursor_dist < visible_ASTEROID_vec[ai]->GetCollisionRadius())
             		{   
                 		cursor_has_target = true;
@@ -666,7 +666,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
     	{
        		for (unsigned int ki = 0; ki < visible_SHIP_vec.size(); ki++)
        		{ 
-            		float ship_cursor_dist = distBetweenPoints(visible_SHIP_vec[ki]->GetPoints().getCenter(), mxvp, myvp);
+            		float ship_cursor_dist = distBetweenPoints(visible_SHIP_vec[ki]->GetPoints().GetCenter(), mxvp, myvp);
             		if (ship_cursor_dist < visible_SHIP_vec[ki]->GetCollisionRadius())
             		{ 
             			cursor_has_target = true;
@@ -727,7 +727,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
     	{
         	for (unsigned int i = 0; i < visible_BLACKHOLE_vec.size(); i++)
         	{ 
-            		float cursor_dist = distBetweenPoints(visible_BLACKHOLE_vec[i]->GetPoints().getCenter(), mxvp, myvp);
+            		float cursor_dist = distBetweenPoints(visible_BLACKHOLE_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
             		if (cursor_dist < visible_BLACKHOLE_vec[i]->GetCollisionRadius())
             		{   
                			cursor_has_target = true;
@@ -744,7 +744,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
     	{
        		for (unsigned int i = 0; i < visible_SPACESTATION_vec.size(); i++)
        		{ 
-            		float ship_cursor_dist = distBetweenPoints(visible_SPACESTATION_vec[i]->GetPoints().getCenter(), mxvp, myvp);
+            		float ship_cursor_dist = distBetweenPoints(visible_SPACESTATION_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
             		if (ship_cursor_dist < visible_SPACESTATION_vec[i]->GetCollisionRadius())
             		{ 
             			cursor_has_target = true;
@@ -807,7 +807,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
     	{
         	for (unsigned int pi = 0; pi < visible_PLANET_vec.size(); pi++)
         	{ 
-            		float planet_cursor_dist = distBetweenPoints(visible_PLANET_vec[pi]->GetPoints().getCenter(), mxvp, myvp);
+            		float planet_cursor_dist = distBetweenPoints(visible_PLANET_vec[pi]->GetPoints().GetCenter(), mxvp, myvp);
             		//printf("1,2,3 = %f,%f,%f\n", visible_PLANET_vec[pi]->GetCollisionRadius(), visible_PLANET_vec[pi]->getPoints()->getCenter().x, visible_PLANET_vec[pi]->getPoints()->getCenter().y);
             		if (planet_cursor_dist < visible_PLANET_vec[pi]->GetCollisionRadius())
             		{   
@@ -839,7 +839,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
     	{
         	for (unsigned int si = 0; si < visible_STAR_vec.size(); si++)
         	{ 
-            		float cursor_dist = distBetweenPoints(visible_STAR_vec[si]->GetPoints().getCenter(), mxvp, myvp);
+            		float cursor_dist = distBetweenPoints(visible_STAR_vec[si]->GetPoints().GetCenter(), mxvp, myvp);
             		if (cursor_dist < visible_STAR_vec[si]->GetCollisionRadius())
             		{   
                			cursor_has_target = true;
@@ -869,11 +869,11 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
 
 bool Player::IsObjectOnScreen(const Points& points) const
 {
-        float ob_centerx = points.getCenter().x;
-        float ob_centery = points.getCenter().y;
+        float ob_centerx = points.GetCenter().x;
+        float ob_centery = points.GetCenter().y;
         
-        int ob_w = points.getWidth();
-        int ob_h = points.getHeight();
+        int ob_w = points.GetWidth();
+        int ob_h = points.GetHeight();
         
         if (ob_centerx < (screen->getBottomLeftGlobalCoord().x - ob_w))
                 return false;

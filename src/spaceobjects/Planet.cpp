@@ -44,11 +44,11 @@ void Planet::Update_inSpace(int time, bool show_effect)
 		orbit->UpdatePosition();  
 		if (parent == NULL)
 		{
-			points.setCenter(orbit->GetPosition());
+			points.SetCenter(orbit->GetPosition());
 		}
 		else
 		{
-			points.setCenter(parent->GetPoints().getCenter() + orbit->GetPosition());
+			points.SetCenter(parent->GetPoints().GetCenter() + orbit->GetPosition());
 		}
 	}
 }
@@ -68,7 +68,7 @@ void Planet::UpdateInfo()
 void Planet::renderInfo_inSpace(vec2f scroll_coords)
 {  
 	UpdateInfo();
-	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);
+	drawInfoIn2Column(&info.title_list, &info.value_list, points.GetCenter().x, points.GetCenter().y, scroll_coords.x, scroll_coords.y);
 }
 
 void Planet::PostDeathUniqueEvent(bool)

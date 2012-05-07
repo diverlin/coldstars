@@ -79,6 +79,13 @@ void Vehicle::Add(ItemSlot* slot)
                 slot_otsec_vec.push_back(slot); 
         }
 
+        if (slot->GetSubTypeId() == SLOT::WEAPON_ID)
+        {
+        	//vec2f* offset = new vec2f(0, textureOb->getFrameHeight()/3);
+                points.Add(slot->GetPoints().GetpCenter(), slot->GetPoints().GetpParentCenter());                                
+                slot->GetTurrel()->SetCenter(slot->GetPoints().GetpCenter());
+        }
+        
 	switch(slot->GetSubTypeId())
 	{
                 case SLOT::WEAPON_ID:    { weapon_complex->AddSlot(slot); break; }
@@ -196,7 +203,7 @@ void Vehicle::LaunchingEvent()
 
      	if (drive_complex->getTarget()->GetTypeId() == ENTITY::PLANET_ID)
      	{
-     		starsystem->Add(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
+     		starsystem->Add(this, drive_complex->getTarget()->GetPoints().GetCenter(), 0, NULL);
 
      		((Planet*)drive_complex->getTarget())->GetLand()->Remove(this);
      		((Planet*)drive_complex->getTarget())->GetLand()->Remove(owner_npc);
@@ -204,7 +211,7 @@ void Vehicle::LaunchingEvent()
 	
      	if (drive_complex->getTarget()->GetTypeId() == ENTITY::SPACESTATION_ID)
      	{
-     		starsystem->Add(this, drive_complex->getTarget()->GetPoints().getCenter(), 0, NULL);
+     		starsystem->Add(this, drive_complex->getTarget()->GetPoints().GetCenter(), 0, NULL);
 
      		((SpaceStation*)drive_complex->getTarget())->GetLand()->Remove(this);
      		((SpaceStation*)drive_complex->getTarget())->GetLand()->Remove(owner_npc);
@@ -232,7 +239,7 @@ void Vehicle::Hit(int _damage, bool show_effect)
        		}       	
        		// improove
        		Color4i color;  	       		
-       		VerticalFlowText* text = new VerticalFlowText(int2str(_damage), points.getCenter(), color, collision_radius);
+       		VerticalFlowText* text = new VerticalFlowText(int2str(_damage), points.GetCenter(), color, collision_radius);
        		starsystem->Add(text); 
        	}
 }
@@ -248,7 +255,7 @@ void Vehicle::PostDeathUniqueEvent(bool show_effect)  /* virtual */
 	
 	if (show_effect == true)
      	{
-        	createExplosion(starsystem, points.getCenter(), textureOb->size_id);        		
+        	createExplosion(starsystem, points.GetCenter(), textureOb->size_id);        		
         }
 }
 
@@ -510,7 +517,7 @@ void Vehicle::RenderInfo(float _pos_x, float _pos_y, float _offset_x, float _off
 
 void Vehicle::RenderInfoInSpace(vec2f scroll_coords)
 {  
-	RenderInfo(points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);
+	RenderInfo(points.GetCenter().x, points.GetCenter().y, scroll_coords.x, scroll_coords.y);
 }
 
 void Vehicle::RenderGrappleTrail() const
@@ -519,8 +526,8 @@ void Vehicle::RenderGrappleTrail() const
         {
                 //if (grapple_slot->GetGrappleEquipment()->target_vec[i]->getValid() == true)
                 {              
-                    	float xl = grapple_slot->GetGrappleEquipment()->target_vec[i]->GetPoints().getpCenter()->x - points.getCenter().x;
-                        float yl = grapple_slot->GetGrappleEquipment()->target_vec[i]->GetPoints().getpCenter()->y - points.getCenter().y;
+                    	float xl = grapple_slot->GetGrappleEquipment()->target_vec[i]->GetPoints().GetpCenter()->x - points.GetCenter().x;
+                        float yl = grapple_slot->GetGrappleEquipment()->target_vec[i]->GetPoints().GetpCenter()->y - points.GetCenter().y;
 
                         float len = sqrt((xl*xl) + (yl*yl));
 
@@ -529,8 +536,8 @@ void Vehicle::RenderGrappleTrail() const
                         float angle_inD = angle_inR * RADIAN_TO_DEGREE_RATE;
         
                         drawLine(g_UNIQUE_TEXTURE_COLLECTOR.texOb_grapple_trail, 
-                                 points.getCenter(), 
-                                 points.getPosZ(), 
+                                 points.GetCenter(), 
+                                 points.GetPosZ(), 
                                  len, 
                                  angle_inD, 
                                  8);
@@ -541,11 +548,11 @@ void Vehicle::RenderGrappleTrail() const
 void Vehicle::RenderKorpus() const
 {
     	drawFlatQuadPerVertexIn2D(textureOb,
-    				  points.getBottomLeft(), 
-                                  points.getBottomRight(), 
-                                  points.getTopRight(), 
-                                  points.getTopLeft(), 
-				  points.getPosZ());
+    				  points.GetBottomLeft(), 
+                                  points.GetBottomRight(), 
+                                  points.GetTopRight(), 
+                                  points.GetTopLeft(), 
+				  points.GetPosZ());
 }
 
 void Vehicle::RenderDriveTrail() const
@@ -562,7 +569,7 @@ void Vehicle::RenderShield() const
 void Vehicle::RenderRadarRange()
 {
 	glPushMatrix();
-		glTranslatef(points.getCenter().x, points.getCenter().y, 0.0f);
+		glTranslatef(points.GetCenter().x, points.GetCenter().y, 0.0f);
 		radar_slot->UpdateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_yellow);
              	radar_slot->DrawRange();
 	glPopMatrix();
@@ -571,7 +578,7 @@ void Vehicle::RenderRadarRange()
 void Vehicle::RenderGrappleRange()
 {
 	glPushMatrix();
-		glTranslatef(points.getCenter().x, points.getCenter().y, 0.0f);
+		glTranslatef(points.GetCenter().x, points.GetCenter().y, 0.0f);
 		grapple_slot->UpdateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue);
              	grapple_slot->DrawRange();
 	glPopMatrix();
@@ -621,9 +628,9 @@ void Vehicle::GrappleMicroProgramm()
                 
         for (unsigned int i = 0; i < grapple_slot->GetGrappleEquipment()->target_vec.size(); i++)
         {
-               	grapple_slot->GetGrappleEquipment()->target_vec[i]->MovingByExternalForce(points.getCenter(), grapple_slot->GetGrappleEquipment()->GetStrength());        	
+               	grapple_slot->GetGrappleEquipment()->target_vec[i]->MovingByExternalForce(points.GetCenter(), grapple_slot->GetGrappleEquipment()->GetStrength());        	
        	
-       		float dist = distBetweenPoints(points.getCenter(), grapple_slot->GetGrappleEquipment()->target_vec[i]->GetPoints().getCenter() ); 
+       		float dist = distBetweenPoints(points.GetCenter(), grapple_slot->GetGrappleEquipment()->target_vec[i]->GetPoints().GetCenter() ); 
        		if (dist < GetCollisionRadius()/4.0f)
        		{
        			switch(grapple_slot->GetGrappleEquipment()->target_vec[i]->GetTypeId())
@@ -701,7 +708,6 @@ void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptre
 
    	data_unresolved_Vehicle.npc_id            = load_ptree.get<int>("data_unresolved_Vehicle.npc_id"); 
    	data_unresolved_Vehicle.texOb_korpus_path = load_ptree.get<std::string>("data_unresolved_Vehicle.texOb_korpus_path"); 
-   	   	
 }
 
 void Vehicle::ResolveDataUniqueVehicle()

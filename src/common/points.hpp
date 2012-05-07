@@ -35,69 +35,51 @@ class Points
         ******************************************/
         
         public:
-                void setPosZ(float pos_z) { this->pos_z = pos_z; }
+                void SetParentCenter(vec2f& parent_center) { this->parent_center.Set(parent_center); };
                 
-                void setWidthHeight(int, int);  
-                void setCenter(float, float);
-                void setCenter(vec2f);
-                void setAngle(float);
-        
-        	int getWidth() const  { return w; };
-        	int getHeight() const { return h; };
-        
-                float getAngleDegree() const { return angle_inD; }  ;
-                float* getpAngleDegree() { return &angle_inD; };
+                void SetCenter(float x, float y)	{ center.Set(x, y); 		is_updated = false; };
+                void SetCenter(vec2f center)		{ this->center = center;  	is_updated = false; };
+                void SetAngle(float angle_inD) 	{ this->angle_inD = angle_inD; 	is_updated = false; };
+
+                void SetPosZ(float pos_z) { this->pos_z = pos_z; }
+                
+                void SetWidthHeight(int w, int h) { this->w = w; this->h = h; };
                         
-                float getPosZ() const { return pos_z; };
+        	int GetWidth() const  { return w; };
+        	int GetHeight() const { return h; };
+        
+                float GetAngleDegree() const { return angle_inD; }  ;
+                float* GetpAngleDegree() { return &angle_inD; };
                         
-                const vec2f& getCenter()  const { return center; };   
-                const vec3f getCenter3f() const { return vec3f(center.x, center.y, pos_z); }; 
-                vec2f* getpCenter() { return &center; };   // used inturrels(for target)
-      
-                const vec2f& getBottomLeft()  const { return bottomLeft; };  
-                const vec2f& getBottomRight() const { return bottomRight; }; 
-                const vec2f& getTopRight()    const { return topRight; };    
-                const vec2f& getTopLeft()     const { return topLeft; };
+                float GetPosZ() const { return pos_z; };
+                        
+                const vec2f& GetCenter()  const { return center; };   
+                const vec3f GetCenter3f() const { return vec3f(center.x, center.y, pos_z); }; 
+                vec2f* GetpCenter() { return &center; };   // used inturrels(for target)
+                vec2f* GetpParentCenter() { return &parent_center; };   
+                      
+                const vec2f& GetBottomLeft()  const { return bottomLeft; };  
+                const vec2f& GetBottomRight() const { return bottomRight; }; 
+                const vec2f& GetTopRight()    const { return topRight; };    
+                const vec2f& GetTopLeft()     const { return topLeft; };
                 
-                vec2f* getpMidLeft()    { return &midLeft; };	     // used in drive jet
-                vec2f* getpMidFarLeft() { return &midFarLeft; };
-                
-                vec2f* getpWeapon1Center() { return &weapon_1_center; };  // used in turrels
-        	vec2f* getpWeapon2Center() { return &weapon_2_center; };
-        	vec2f* getpWeapon3Center() { return &weapon_3_center; };
-        	vec2f* getpWeapon4Center() { return &weapon_4_center; };
-        	vec2f* getpWeapon5Center() { return &weapon_5_center; };
-    
+                vec2f* GetpMidLeft()    { return &midLeft; };	     // used in drive jet
+                vec2f* GetpMidFarLeft() { return &midFarLeft; };
+                   
                 Points();
                 ~Points();
-
-                void initCenterPoint();
-                void addCenterPoint();
 
                 void initMainQuadPoints(int, int);
                 void addMainQuadPoints();
 
-                void initWeapon1CenterPoint(float, float);
-                void addWeapon1CenterPoint();
-
-                void initWeapon2CenterPoint(float, float);
-                void addWeapon2CenterPoint();
-
-                void initWeapon3CenterPoint(float, float);
-                void addWeapon3CenterPoint();
-
-                void initWeapon4CenterPoint(float, float);
-                void addWeapon4CenterPoint();
-
-                void initWeapon5CenterPoint(float, float);
-                void addWeapon5CenterPoint();
+                void Add(vec2f*, vec2f*);
 
                 void initMidLeftPoint();
                 void addMidLeftPoint();
                 void initMidFarLeftPoint();
                 void addMidFarLeftPoint();
 
-                void update();                
+                void Update();                
                 
         private:
                 bool is_updated;
@@ -106,8 +88,6 @@ class Points
                 std::vector<vec2f*> vector;
                                               
                 // Origin entity rect (for rotation only transformation)
-                vec2f center_origin;    
-     
                 vec2f bottomLeft_origin;  
                 vec2f bottomRight_origin; 
                 vec2f topRight_origin;    
@@ -119,7 +99,8 @@ class Points
                 float pos_z;
                 
                 vec2f center;     
-      
+                vec2f parent_center; 
+                    
                 vec2f bottomLeft;  
                 vec2f bottomRight; 
                 vec2f topRight;    
@@ -138,34 +119,6 @@ class Points
                 // jet actual
                 vec2f midLeft;
                 vec2f midFarLeft;
-                
-                
-                //////////////////////////////////
-                // center coordinates for weapons
-                /////////////////////////////////
-                // weapon 1
-                vec2f weapon_1_origin_center;      
-                vec2f weapon_1_center;      
-
-                // weapon 2
-                vec2f weapon_2_origin_center;
-                vec2f weapon_2_center;      
-                
-                // weapon 3
-                vec2f weapon_3_origin_center;      
-                vec2f weapon_3_center;      
-                
-                // weapon 4
-                vec2f weapon_4_origin_center;      
-                vec2f weapon_4_center;      
-                
-                // weapon 5
-                vec2f weapon_5_origin_center;      
-                vec2f weapon_5_center;    
-                ////////////////////////////////////
-                
-                void CreateCenter();
-                 
 };
 
 #endif 

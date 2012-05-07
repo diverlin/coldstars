@@ -44,7 +44,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //void Mineral::RenderInfoInSpace(vec2f scroll_coords)
 //{
 	//UpdateInfo();
-     	//drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);    
+     	//drawInfoIn2Column(&info.title_list, &info.value_list, points.GetCenter().x, points.GetCenter().y, scroll_coords.x, scroll_coords.y);    
 //}
 
 

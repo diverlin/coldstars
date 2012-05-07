@@ -103,14 +103,14 @@ void LazerEquipment::FireEvent_TRUE()
     	if (slot->GetOwnerVehicle()->data_korpus.draw_turrels == true)
     	{
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
-                                                     	      slot->GetTurrel()->GetPoints().getpCenter(), 
-                                                              slot->GetTurrel()->GetTarget()->GetPoints().getpCenter());
+                                                     	      slot->GetTurrel()->GetPoints().GetpCenter(), 
+                                                              slot->GetTurrel()->GetTarget()->GetPoints().GetpCenter());
         }
     	else
     	{
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
-                                                              slot->GetOwnerVehicle()->GetPoints().getpCenter(), 
-                                                              slot->GetTurrel()->GetTarget()->GetPoints().getpCenter());
+                                                              slot->GetOwnerVehicle()->GetPoints().GetpCenter(), 
+                                                              slot->GetTurrel()->GetTarget()->GetPoints().GetpCenter());
         }
     
     	// DAMAGE effect

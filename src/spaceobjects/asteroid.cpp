@@ -42,7 +42,7 @@ void Asteroid :: update_inSpace(int time, bool show_effect)
 	if (time > 0)
 	{	
      		orbit->UpdatePosition();  
-     		points.setCenter(orbit->GetPosition());
+     		points.SetCenter(orbit->GetPosition());
      	}     	
 }
 
@@ -61,12 +61,12 @@ void Asteroid::PostDeathUniqueEvent(bool show_effect)
                 GoodsPack* goods_pack = GetNewGoodsPack(ENTITY::MINERAL_ID);
                 goods_pack->Increase(4);
 		Container* container = GetNewContainer(textureOb, goods_pack);
-		starsystem->Add(container, points.getCenter());
+		starsystem->Add(container, points.GetCenter());
    	}
    	
    	if (show_effect == true)
      	{
-        	createExplosion(starsystem, points.getCenter(), data_planet.scale/2);        		
+        	createExplosion(starsystem, points.GetCenter(), data_planet.scale/2);        		
         }
         			
 }    
@@ -90,7 +90,7 @@ void Asteroid :: UpdateInfo()
 void Asteroid :: renderInfo_inSpace(vec2f scroll_coords) 
 {  
 	UpdateInfo();
-     	drawInfoIn2Column(&info.title_list, &info.value_list, points.getCenter().x, points.getCenter().y, scroll_coords.x, scroll_coords.y);
+     	drawInfoIn2Column(&info.title_list, &info.value_list, points.GetCenter().x, points.GetCenter().y, scroll_coords.x, scroll_coords.y);
 }
 
 /*virtual*/

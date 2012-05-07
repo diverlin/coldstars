@@ -45,7 +45,7 @@ void BasePlanet::CalcCollisionrRadius()
         int h = scale_factor * data_planet.scale;
         collision_radius = (w + h)/4; 
         
-        points.setWidthHeight(scale_factor*data_planet.scale, scale_factor*data_planet.scale);  // needs for finding visible corners
+        points.SetWidthHeight(scale_factor*data_planet.scale, scale_factor*data_planet.scale);  // needs for finding visible corners
 }
 
 void BasePlanet::PostDeathUniqueEvent(bool)  /* virtual */
@@ -70,7 +70,7 @@ void BasePlanet::Render_NEW(vec2f scroll_coords)
      	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
      	glUniform1i(glGetUniformLocation(g_SHADERS.light, "Texture_0"), 0);
       
-	renderMesh(mesh->glList, points.getCenter3f(), angle, data_planet.scale);
+	renderMesh(mesh->glList, points.GetCenter3f(), angle, data_planet.scale);
 
      	//// render atmosphere
      	//glEnable(GL_BLEND);
@@ -90,7 +90,7 @@ void BasePlanet::Render_NEW(vec2f scroll_coords)
 void BasePlanet::Render_OLD()
 {   	
 	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-	renderMesh(mesh->glList, points.getCenter3f(), angle, data_planet.scale);
+	renderMesh(mesh->glList, points.GetCenter3f(), angle, data_planet.scale);
 }
 
 

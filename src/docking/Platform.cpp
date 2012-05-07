@@ -32,9 +32,9 @@ void Platform::Insert(Vehicle* vehicle)
 {
         this->vehicle = vehicle;
         
-        vehicle->GetPoints().setAngle(0);
-       	vehicle->GetPoints().setCenter(rect.getCenter());
-        vehicle->GetPoints().update();
+       	vehicle->GetPoints().SetCenter(rect.GetCenter());
+        vehicle->GetPoints().SetAngle(0);
+        vehicle->GetPoints().Update();
 }
 
 void Platform::Free()
@@ -54,5 +54,5 @@ void Platform::Render() const
 
 void Platform::RenderInfo() const
 {
-	vehicle->RenderInfo(rect.getCenter().x, rect.getCenter().y, 0, 0);
+	vehicle->RenderInfo(rect.GetCenter().x, rect.GetCenter().y, 0, 0);
 }

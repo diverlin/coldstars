@@ -31,6 +31,17 @@ ItemSlot* GetNewItemSlot(int subtype_id, int id)
 	item_slot->SetSubTypeId(subtype_id);
     	item_slot->SetTextureOb(texOb_slot);
         
+        if (subtype_id == SLOT::WEAPON_ID)
+        {
+                TextureOb* texOb_turrel = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::TURREL_ID); 
+                        
+                Turrel* turrel = new Turrel(item_slot); 
+                turrel->SetTextureOb(texOb_turrel);       
+                turrel->GetPoints().addMainQuadPoints();
+                turrel->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
+                item_slot->SetTurrel(turrel);
+        }
+        
         return item_slot;
 }
 

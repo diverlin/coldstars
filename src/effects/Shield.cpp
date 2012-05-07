@@ -36,9 +36,9 @@ ShieldEffect::~ShieldEffect()
 
 void ShieldEffect::Update()
 {
-        points.setCenter(parent->GetPoints().getCenter());
-        points.setAngle(parent->GetPoints().getAngleDegree());
-        points.update();
+        points.SetCenter(parent->GetPoints().GetCenter());
+        points.SetAngle(parent->GetPoints().GetAngleDegree());
+        points.Update();
        
     	if (color.a > alpha_start)
        		color.a -= d_alpha;
@@ -51,11 +51,11 @@ void ShieldEffect::Render() const
     	setColor(color);
 
     	drawFlatQuadPerVertexIn2D(textureOb,
-    				  points.getBottomLeft(), 
-     			     	  points.getBottomRight(), 
-     			      	  points.getTopRight(), 
-     			      	  points.getTopLeft(), 
-     			      	  points.getPosZ());
+    				  points.GetBottomLeft(), 
+     			     	  points.GetBottomRight(), 
+     			      	  points.GetTopRight(), 
+     			      	  points.GetTopLeft(), 
+     			      	  points.GetPosZ());
 }
 
 

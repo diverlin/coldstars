@@ -51,12 +51,12 @@ void Rect :: set(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h)
 	updateCenter();
 }
 
-void Rect :: setCenter(vec2f _center)
+void Rect::SetCenter(vec2f _center)
 {
-	setCenter(_center.x, _center.y);
+	SetCenter(_center.x, _center.y);
 }
 
-void Rect :: setCenter(float _center_x, float _center_y)
+void Rect::SetCenter(float _center_x, float _center_y)
 {
 	float dx = center.x - _center_x;
 	float dy = center.y - _center_y;
@@ -92,12 +92,6 @@ void Rect ::  resize(int _w, int _h)
 	bottomLeft.x = center.x - w/2;
 	bottomLeft.y = center.y - h/2;
 }
-
-
-vec2f Rect :: getCenter() const     { return center; }
-vec2f Rect :: getBottomLeft() const { return bottomLeft; }
-int Rect :: getWidth() const 	    { return w; }
-int Rect :: getHeight() const 	    { return h; }   		
 
 void Rect :: updateCenter()
 {

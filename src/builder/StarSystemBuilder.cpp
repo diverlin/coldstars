@@ -40,7 +40,7 @@ void StarSystemBuilder::CreateNewInternals()
 {
         vec2f center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH -  2*GUI::MAP::BORDER_X), 
         	     getRandInt(GUI::MAP::BORDER_Y, Config::Instance().SCREEN_HEIGHT - 2*GUI::MAP::BORDER_Y) );			 
-        starsystem->GetPoints().setCenter(center);
+        starsystem->GetPoints().SetCenter(center);
 
         this->CreateStar();
         
@@ -78,7 +78,7 @@ void StarSystemBuilder::CreateNewInternals2()
 {
         vec2f center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH -  2*GUI::MAP::BORDER_X), 
         	     getRandInt(GUI::MAP::BORDER_Y, Config::Instance().SCREEN_HEIGHT - 2*GUI::MAP::BORDER_Y) );			 
-        starsystem->GetPoints().setCenter(center);
+        starsystem->GetPoints().SetCenter(center);
 
         this->CreateStar();
           

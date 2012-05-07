@@ -83,9 +83,9 @@ void StarSystem::Add(Vehicle* vehicle, vec2f center, float angle, BaseGameEntity
 		{ 	
 			SHIP_vec.push_back((Ship*)vehicle);  
 			 
-		     	vehicle->GetPoints().setCenter(center); 
-    			vehicle->GetPoints().setAngle(angle);   
-    			vehicle->GetPoints().update();  
+		     	vehicle->GetPoints().SetCenter(center); 
+    			vehicle->GetPoints().SetAngle(angle);   
+    			vehicle->GetPoints().Update();  
     	
 			break; 
 		}
@@ -94,9 +94,9 @@ void StarSystem::Add(Vehicle* vehicle, vec2f center, float angle, BaseGameEntity
 		{
 		 	SPACESTATION_vec.push_back((SpaceStation*)vehicle);   
 			 	
-			vehicle->GetPoints().setCenter(center); 
-    			vehicle->GetPoints().setAngle(angle);   
-    			vehicle->GetPoints().update();  
+			vehicle->GetPoints().SetCenter(center); 
+    			vehicle->GetPoints().SetAngle(angle);   
+    			vehicle->GetPoints().Update();  
     			
 		 	break; 
 		}
@@ -157,7 +157,7 @@ void StarSystem::Add(Container* container, vec2f pos)
 {
 	container->SetStarSystem(this);
         container->SetPlaceTypeId(ENTITY::SPACE_ID);
-    	container->GetPoints().setCenter(pos);
+    	container->GetPoints().SetCenter(pos);
     	//target_pos = start_pos + getRandVec(60, 100);
         //keep_moving = true;
         
@@ -942,13 +942,13 @@ void StarSystem::BombExplosionEvent(Container* container, bool show_effect)
 {
 	float radius = ((Bomb*)container->GetItemSlot()->GetItem())->GetRadius();
 	float damage = ((Bomb*)container->GetItemSlot()->GetItem())->GetDamage(); 
-	vec2f epicentr = container->GetPoints().getCenter();
+	vec2f epicentr = container->GetPoints().GetCenter();
 	
 	damageEventInsideCircle(epicentr, radius, damage, show_effect);
 		
 	if (show_effect == true)
 	{
-		createExplosion(this, container->GetPoints().getCenter(), 9);
+		createExplosion(this, container->GetPoints().GetCenter(), 9);
 	}
 }
 
@@ -957,7 +957,7 @@ void StarSystem :: damageEventInsideCircle(vec2f epicentr, float radius, int dam
 {
 	for (unsigned int i = 0; i < SHIP_vec.size(); i++)
     	{
-       	        if ( distBetweenPoints(SHIP_vec[i]->GetPoints().getCenter(), epicentr) < radius )
+       	        if ( distBetweenPoints(SHIP_vec[i]->GetPoints().GetCenter(), epicentr) < radius )
                	{
        			SHIP_vec[i]->Hit(damage, show_effect); 
        		}
@@ -965,7 +965,7 @@ void StarSystem :: damageEventInsideCircle(vec2f epicentr, float radius, int dam
     	
     	for (unsigned int i = 0; i < SPACESTATION_vec.size(); i++)
     	{
-       	        if ( distBetweenPoints(SPACESTATION_vec[i]->GetPoints().getCenter(), epicentr) < radius )
+       	        if ( distBetweenPoints(SPACESTATION_vec[i]->GetPoints().GetCenter(), epicentr) < radius )
                	{
        			SPACESTATION_vec[i]->Hit(damage, show_effect); 
        		}
@@ -973,7 +973,7 @@ void StarSystem :: damageEventInsideCircle(vec2f epicentr, float radius, int dam
     	
     	for (unsigned int i = 0; i < SATELLITE_vec.size(); i++)
     	{
-       	        if ( distBetweenPoints(SATELLITE_vec[i]->GetPoints().getCenter(), epicentr) < radius )
+       	        if ( distBetweenPoints(SATELLITE_vec[i]->GetPoints().GetCenter(), epicentr) < radius )
                	{
        			SATELLITE_vec[i]->Hit(damage, show_effect); 
        		}
@@ -1044,9 +1044,9 @@ bool checkCollision(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
 
 bool collisionBetweenCenters(Points& points1, Points& points2, float collision_radius)
 {
-    if(abs(points1.getCenter().x - points2.getCenter().x) > collision_radius)
+    if(abs(points1.GetCenter().x - points2.GetCenter().x) > collision_radius)
        return false;
-    if(abs(points1.getCenter().y - points2.getCenter().y) > collision_radius)
+    if(abs(points1.GetCenter().y - points2.GetCenter().y) > collision_radius)
        return false;
 
     return true;
@@ -1054,9 +1054,9 @@ bool collisionBetweenCenters(Points& points1, Points& points2, float collision_r
 
 bool collisionBetweenCenters(Points& points1, vec2f point2, float collision_radius)
 {
-    if(abs(points1.getCenter().x - point2.x) > collision_radius)
+    if(abs(points1.GetCenter().x - point2.x) > collision_radius)
        return false;
-    if(abs(points1.getCenter().y - point2.y) > collision_radius)
+    if(abs(points1.GetCenter().y - point2.y) > collision_radius)
        return false;
 
     return true;
@@ -1064,9 +1064,9 @@ bool collisionBetweenCenters(Points& points1, vec2f point2, float collision_radi
 
 bool collisionBetweenCenters(Points& points1, float center2_x, float center2_y, float collision_radius)
 {
-    if(abs(points1.getCenter().x - center2_x) > collision_radius)
+    if(abs(points1.GetCenter().x - center2_x) > collision_radius)
        return false;
-    if(abs(points1.getCenter().y - center2_y) > collision_radius)
+    if(abs(points1.GetCenter().y - center2_y) > collision_radius)
        return false;
 
     return true;

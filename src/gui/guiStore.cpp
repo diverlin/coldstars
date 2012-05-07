@@ -39,7 +39,7 @@ void GuiStore :: update()
         { 
                 if (store->slot_vec[i]->GetEquipedStatus() == true)
                 {                                
-                	float dist = distBetweenPoints(store->slot_vec[i]->GetRect().getCenter(), player->GetCursor()->getMousePos().x, player->GetScreen()->getHeight() - player->GetCursor()->getMousePos().y);
+                	float dist = distBetweenPoints(store->slot_vec[i]->GetRect().GetCenter(), player->GetCursor()->getMousePos().x, player->GetScreen()->getHeight() - player->GetCursor()->getMousePos().y);
                                                        				
                 	if (dist < store->slot_vec[i]->GetRect().getWidth()/2)
                 	{
@@ -70,7 +70,7 @@ void GuiStore :: renderFocusedItemInfo()
 	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
         for (unsigned int i = 0; i < store->slot_vec.size(); i++)
         { 
-                float dist = distBetweenPoints(store->slot_vec[i]->GetRect().getCenter(), player->GetCursor()->getMousePos().x, player->GetScreen()->getHeight() - player->GetCursor()->getMousePos().y);
+                float dist = distBetweenPoints(store->slot_vec[i]->GetRect().GetCenter(), player->GetCursor()->getMousePos().x, player->GetScreen()->getHeight() - player->GetCursor()->getMousePos().y);
                                                        				
                 if (dist < store->slot_vec[i]->GetRect().getWidth()/2)
                 {
