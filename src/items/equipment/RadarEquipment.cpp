@@ -110,44 +110,5 @@ void RadarEquipment::LoadDataUniqueRadarEquipment(const boost::property_tree::pt
 
 void RadarEquipment::ResolveDataUniqueRadarEquipment()
 {}
-
-    
-
-RadarEquipment* GetNewRadarEquipment(int race_id, int revision_id)
-{
-    	if (race_id == -1)
-       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
-
-    	if (revision_id == -1)
-       		revision_id = TECHLEVEL::L0_ID; 
-
-    	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
-
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::RADAR_EQUIPMENT_ID);   
-    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
-
-    	int radius_orig     = getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX);
-    	
-    	ItemCommonData common_data;
-    	common_data.modules_num_max = getRandInt(EQUIPMENT::RADAR::MODULES_NUM_MIN, EQUIPMENT::RADAR::MODULES_NUM_MAX);
-    	common_data.mass            = getRandInt(EQUIPMENT::RADAR::MASS_MIN,        EQUIPMENT::RADAR::MASS_MAX);
-    	common_data.condition_max   = getRandInt(EQUIPMENT::RADAR::CONDITION_MIN,   EQUIPMENT::RADAR::CONDITION_MAX) * tech_rate;
-    	common_data.deterioration_rate = 1;
-
-        int id    = g_ID_GENERATOR.getNextId();
-        
-    	RadarEquipment* radar_equipment = new RadarEquipment(id);
-        radar_equipment->SetRadiusOrig(radius_orig);
-        radar_equipment->SetTextureOb(texOb_item);
-        radar_equipment->SetFunctionalSlotSubTypeId(SLOT::RADAR_ID);
-        radar_equipment->SetItemCommonData(common_data);
-        
- 
-    	radar_equipment->UpdatePropetries();
-    	radar_equipment->CountPrice();
-
-        EntityManager::Instance().RegisterEntity(radar_equipment);
-        
-    	return radar_equipment;
-}
+   
 

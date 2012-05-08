@@ -64,6 +64,4 @@ class LazerEquipment : public BaseEquipment
 		void ResolveDataUniqueLazerEquipment();  	
 };
 
-LazerEquipment* GetNewLazerEquipment(int race_id, int revision_id = -1);
-
 #endif 

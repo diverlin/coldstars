@@ -17,37 +17,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
+#ifndef SCANEREQUIPMENTBUILDER_H
+#define SCANEREQUIPMENTBUILDER_H
 
-#ifndef CURSOR_H
-#define CURSOR_H
 
-
-class Cursor
+class ScanerEquipmentBuilder
 {
-  	public:
-        	Cursor(Player*);
-        	~Cursor();
-		
-		void SetLeftMouseButton(bool mouse_left_button) 	{ this->mouse_left_button = mouse_left_button; };
-		void SetRightMouseButton(bool mouse_right_button) 	{ this->mouse_right_button = mouse_right_button; };
-		
-		vec2f GetMousePos() const { return mouse_pos; };
-		bool GetMouseLeftButton() const { return mouse_left_button; };
-		bool GetMouseRightButton() const { return mouse_right_button; };
-			
-		ItemSlot* GetItemSlot() const { return slot; };
-								
-		void UpdateMousePos();		
-		void Update();
-        	
+	public:
+		static ScanerEquipmentBuilder& Instance();
+		~ScanerEquipmentBuilder();
+
+        	void CreateNewScanerEquipment(int id = NONE_ID); 
+                void CreateNewInternals(int race_id, int revision_id = -1);
+                ScanerEquipment* GetScanerEquipment() const { return scaner_equipment; };
+        	 		                
         private:
-        	ItemSlot* slot;        	
-        	Player* player;
-        	
-        	vec2f mouse_pos;
-        	
-        	bool mouse_left_button;
-        	bool mouse_right_button;
+                ScanerEquipment* scaner_equipment;
+                
+		ScanerEquipmentBuilder() {};
+		ScanerEquipmentBuilder(const ScanerEquipmentBuilder&) = delete;
+		ScanerEquipmentBuilder& operator=(const ScanerEquipmentBuilder&) = delete;
 }; 
 
 #endif 
+    
+
+        
+
+

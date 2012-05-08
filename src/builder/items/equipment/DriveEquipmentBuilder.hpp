@@ -17,37 +17,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
+#ifndef DRIVEEQUIPMENTBUILDER_H
+#define DRIVEEQUIPMENTBUILDER_H
 
-#ifndef CURSOR_H
-#define CURSOR_H
 
-
-class Cursor
+class DriveEquipmentBuilder
 {
-  	public:
-        	Cursor(Player*);
-        	~Cursor();
-		
-		void SetLeftMouseButton(bool mouse_left_button) 	{ this->mouse_left_button = mouse_left_button; };
-		void SetRightMouseButton(bool mouse_right_button) 	{ this->mouse_right_button = mouse_right_button; };
-		
-		vec2f GetMousePos() const { return mouse_pos; };
-		bool GetMouseLeftButton() const { return mouse_left_button; };
-		bool GetMouseRightButton() const { return mouse_right_button; };
-			
-		ItemSlot* GetItemSlot() const { return slot; };
-								
-		void UpdateMousePos();		
-		void Update();
-        	
+	public:
+		static DriveEquipmentBuilder& Instance();
+		~DriveEquipmentBuilder();
+
+        	void CreateNewDriveEquipment(int id = NONE_ID); 
+                void CreateNewInternals(int race_id, int revision_id = -1);
+                DriveEquipment* GetDriveEquipment() const { return drive_equipment; };
+        	 		                
         private:
-        	ItemSlot* slot;        	
-        	Player* player;
-        	
-        	vec2f mouse_pos;
-        	
-        	bool mouse_left_button;
-        	bool mouse_right_button;
+                DriveEquipment* drive_equipment;
+                
+		DriveEquipmentBuilder() {};
+		DriveEquipmentBuilder(const DriveEquipmentBuilder&) = delete;
+		DriveEquipmentBuilder& operator=(const DriveEquipmentBuilder&) = delete;
 }; 
 
 #endif 
+    
+
+        
+
+

@@ -94,60 +94,80 @@ void StoreBuilder::PutRandomEquipment()
         
         for (unsigned int lii = 0; lii < lazer_num; lii++)
         { 
-                store->Add(GetNewLazerEquipment(RACE::R0_ID));
+    	        LazerEquipmentBuilder::Instance().CreateNewLazerEquipment();
+        	LazerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
+       		store->Add(LazerEquipmentBuilder::Instance().GetLazerEquipment()); 
         }
 
         for (unsigned int rii = 0; rii < rocket_num; rii++)
         { 
-                store->Add(GetNewRocketEquipment(RACE::R0_ID));
+    	    	RocketEquipmentBuilder::Instance().CreateNewRocketEquipment();
+        	RocketEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
+       		store->Add(RocketEquipmentBuilder::Instance().GetRocketEquipment());
         }
 
         for (unsigned int rii = 0; rii < radar_num; rii++)
         { 
-                store->Add(GetNewRadarEquipment(RACE::R0_ID));
+        	RadarEquipmentBuilder::Instance().CreateNewRadarEquipment();
+        	RadarEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
+    		store->Add(RadarEquipmentBuilder::Instance().GetRadarEquipment()); 
         }
 
         for (unsigned int gii = 0; gii < grapple_num; gii++)
         { 
-                store->Add(GetNewGrappleEquipment(RACE::R0_ID));
+    	   	GrappleEquipmentBuilder::Instance().CreateNewGrappleEquipment();
+        	GrappleEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
+      		store->Add(GrappleEquipmentBuilder::Instance().GetGrappleEquipment()); 
         }
 
         for (unsigned int dii = 0; dii < drive_num; dii++)
         { 
-                store->Add(GetNewDriveEquipment(RACE::R0_ID));
+                DriveEquipmentBuilder::Instance().CreateNewDriveEquipment();
+                DriveEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
+        
+                store->Add(DriveEquipmentBuilder::Instance().GetDriveEquipment());
         }
 
         for (unsigned int pii = 0; pii < protector_num; pii++)
         { 
-                store->Add(GetNewProtectorEquipment(RACE::R0_ID));
+   		ProtectorEquipmentBuilder::Instance().CreateNewProtectorEquipment();
+       		ProtectorEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
+   		store->Add(ProtectorEquipmentBuilder::Instance().GetProtectorEquipment()); 
         }
 
         for (unsigned int bii = 0; bii < bak_num; bii++)
         { 
                 BakEquipmentBuilder::Instance().CreateNewBakEquipment();
                 BakEquipmentBuilder::Instance().CreateNewInternals();
-        
                 store->Add(BakEquipmentBuilder::Instance().GetBakEquipment());
         }
 
         for (unsigned int dii = 0; dii < droid_num; dii++)
         { 
-                store->Add(GetNewDroidEquipment(RACE::R0_ID));
+   		DroidEquipmentBuilder::Instance().CreateNewDroidEquipment();
+        	DroidEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
+   		store->Add(DroidEquipmentBuilder::Instance().GetDroidEquipment()); 
         }
 
         for (unsigned int sii = 0; sii < scaner_num; sii++)
         { 
-                store->Add(GetNewScanerEquipment(RACE::R0_ID));
+   		ScanerEquipmentBuilder::Instance().CreateNewScanerEquipment();
+        	ScanerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
+   		store->Add(ScanerEquipmentBuilder::Instance().GetScanerEquipment()); 
         }
 
         for (unsigned int fii = 0; fii < freezer_num; fii++)
         { 
-                store->Add(GetNewFreezerEquipment(RACE::R0_ID));
+   		FreezerEquipmentBuilder::Instance().CreateNewFreezerEquipment();
+        	FreezerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
+   		store->Add(FreezerEquipmentBuilder::Instance().GetFreezerEquipment()); 
         }
 
         for (unsigned int ebi = 0; ebi < energyBlock_num; ebi++) 
         { 
-                store->Add(GetNewEnergizerEquipment(RACE::R0_ID));
+        	EnergizerEquipmentBuilder::Instance().CreateNewEnergizerEquipment();
+        	EnergizerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
+    		store->Add(EnergizerEquipmentBuilder::Instance().GetEnergizerEquipment());  
         }
 }
 

@@ -63,7 +63,6 @@ void Player::BindNpc(Npc* npc)
 {
     	this->npc = npc;
     	npc->SetUpperControl(true);
-    	//cursor->GetItemSlot()->SetOwnerVehicle(npc->GetVehicle());
 }
 
 void Player::ClearVisibleEntities()

@@ -59,6 +59,5 @@ class EnergizerEquipment : public BaseEquipment
 		void ResolveDataUniqueEnergizerEquipment(); 
 };
 
-EnergizerEquipment* GetNewEnergizerEquipment(int race_id, int revision_id = -1);
 
 #endif 

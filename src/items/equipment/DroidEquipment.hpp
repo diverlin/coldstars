@@ -50,6 +50,4 @@ class DroidEquipment : public BaseEquipment
 		void ResolveDataUniqueDroidEquipment();  
 };
 
-DroidEquipment* GetNewDroidEquipment(int race_id, int revision_id = -1);
-
 #endif 

@@ -17,37 +17,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
+#ifndef ROCKETEQUIPMENTBUILDER_H
+#define ROCKETEQUIPMENTBUILDER_H
 
-#ifndef CURSOR_H
-#define CURSOR_H
 
-
-class Cursor
+class RocketEquipmentBuilder
 {
-  	public:
-        	Cursor(Player*);
-        	~Cursor();
-		
-		void SetLeftMouseButton(bool mouse_left_button) 	{ this->mouse_left_button = mouse_left_button; };
-		void SetRightMouseButton(bool mouse_right_button) 	{ this->mouse_right_button = mouse_right_button; };
-		
-		vec2f GetMousePos() const { return mouse_pos; };
-		bool GetMouseLeftButton() const { return mouse_left_button; };
-		bool GetMouseRightButton() const { return mouse_right_button; };
-			
-		ItemSlot* GetItemSlot() const { return slot; };
-								
-		void UpdateMousePos();		
-		void Update();
-        	
+	public:
+		static RocketEquipmentBuilder& Instance();
+		~RocketEquipmentBuilder();
+
+        	void CreateNewRocketEquipment(int id = NONE_ID); 
+                void CreateNewInternals(int race_id, int revision_id = -1);
+                RocketEquipment* GetRocketEquipment() const { return rocket_equipment; };
+        	 		                
         private:
-        	ItemSlot* slot;        	
-        	Player* player;
-        	
-        	vec2f mouse_pos;
-        	
-        	bool mouse_left_button;
-        	bool mouse_right_button;
+                RocketEquipment* rocket_equipment;
+                
+		RocketEquipmentBuilder() {};
+		RocketEquipmentBuilder(const RocketEquipmentBuilder&) = delete;
+		RocketEquipmentBuilder& operator=(const RocketEquipmentBuilder&) = delete;
 }; 
 
 #endif 
+    
+
+        
+
+

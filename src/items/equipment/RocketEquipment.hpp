@@ -88,6 +88,4 @@ class RocketEquipment : public BaseEquipment
 		void ResolveDataUniqueRocketEquipment();  
 };
 
-RocketEquipment* GetNewRocketEquipment(int race_id, int revision_id = -1);
-
 #endif 

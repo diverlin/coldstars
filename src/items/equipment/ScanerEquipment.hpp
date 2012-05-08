@@ -50,6 +50,4 @@ class ScanerEquipment : public BaseEquipment
 		void ResolveDataUniqueScanerEquipment();  
 };
 
-ScanerEquipment* GetNewScanerEquipment(int race_id, int revision_id = -1);
-
 #endif 

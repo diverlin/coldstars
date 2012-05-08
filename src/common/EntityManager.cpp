@@ -156,12 +156,83 @@ void EntityManager::LoadPass0()
 		slot->LoadData(v.second);
 	}
         
-	//BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("bak_equipment"))
-	//{
-		//BakEquipmentBuilder::Instance().CreateNewBakEquipment(v.second.get<int>("data_id.id"));
-		//BakEquipment* bak_equipment = BakEquipmentBuilder::Instance().GetBakEquipment();
-                //bak_equipment->LoadData(v.second);
-	//}
+        // equipment
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("bak_equipment"))
+	{
+		BakEquipmentBuilder::Instance().CreateNewBakEquipment(v.second.get<int>("data_id.id"));
+		BakEquipment* bak_equipment = BakEquipmentBuilder::Instance().GetBakEquipment();
+                bak_equipment->LoadData(v.second);
+	}
+
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("drive_equipment"))
+	{
+		DriveEquipmentBuilder::Instance().CreateNewDriveEquipment(v.second.get<int>("data_id.id"));
+		DriveEquipment* drive_equipment = DriveEquipmentBuilder::Instance().GetDriveEquipment();
+                drive_equipment->LoadData(v.second);
+	}
+
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("droid_equipment"))
+	{
+		DroidEquipmentBuilder::Instance().CreateNewDroidEquipment(v.second.get<int>("data_id.id"));
+		DroidEquipment* droid_equipment = DroidEquipmentBuilder::Instance().GetDroidEquipment();
+                droid_equipment->LoadData(v.second);
+	}
+
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("energizer_equipment"))
+	{
+		EnergizerEquipmentBuilder::Instance().CreateNewEnergizerEquipment(v.second.get<int>("data_id.id"));
+		EnergizerEquipment* energizer_equipment = EnergizerEquipmentBuilder::Instance().GetEnergizerEquipment();
+                energizer_equipment->LoadData(v.second);
+	}
+
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("freezer_equipment"))
+	{
+		FreezerEquipmentBuilder::Instance().CreateNewFreezerEquipment(v.second.get<int>("data_id.id"));
+		FreezerEquipment* freezer_equipment = FreezerEquipmentBuilder::Instance().GetFreezerEquipment();
+                freezer_equipment->LoadData(v.second);
+	}
+
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("grapple_equipment"))
+	{
+		GrappleEquipmentBuilder::Instance().CreateNewGrappleEquipment(v.second.get<int>("data_id.id"));
+		GrappleEquipment* grapple_equipment = GrappleEquipmentBuilder::Instance().GetGrappleEquipment();
+                grapple_equipment->LoadData(v.second);
+	}
+	
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("lazer_equipment"))
+	{
+		LazerEquipmentBuilder::Instance().CreateNewLazerEquipment(v.second.get<int>("data_id.id"));
+		LazerEquipment* lazer_equipment = LazerEquipmentBuilder::Instance().GetLazerEquipment();
+                lazer_equipment->LoadData(v.second);
+	}
+
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("protector_equipment"))
+	{
+		ProtectorEquipmentBuilder::Instance().CreateNewProtectorEquipment(v.second.get<int>("data_id.id"));
+		ProtectorEquipment* protector_equipment = ProtectorEquipmentBuilder::Instance().GetProtectorEquipment();
+                protector_equipment->LoadData(v.second);
+	}
+
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("radar_equipment"))
+	{
+		RadarEquipmentBuilder::Instance().CreateNewRadarEquipment(v.second.get<int>("data_id.id"));
+		RadarEquipment* radar_equipment = RadarEquipmentBuilder::Instance().GetRadarEquipment();
+                radar_equipment->LoadData(v.second);
+	}
+
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("rocket_equipment"))
+	{
+		RocketEquipmentBuilder::Instance().CreateNewRocketEquipment(v.second.get<int>("data_id.id"));
+		RocketEquipment* rocket_equipment = RocketEquipmentBuilder::Instance().GetRocketEquipment();
+                rocket_equipment->LoadData(v.second);
+	}
+
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("scaner_equipment"))
+	{
+		ScanerEquipmentBuilder::Instance().CreateNewScanerEquipment(v.second.get<int>("data_id.id"));
+		ScanerEquipment* scaner_equipment = ScanerEquipmentBuilder::Instance().GetScanerEquipment();
+                scaner_equipment->LoadData(v.second);
+	}
 }
 
 void EntityManager::LoadPass1()
