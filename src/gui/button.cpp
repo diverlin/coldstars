@@ -50,7 +50,7 @@ int Button :: GetSubTypeId() const     { return subtype_id; }
 bool Button :: CheckInteraction(int _x, int _y)
 {        
     	float dist = distBetweenPoints(rect.GetCenter().x, rect.GetCenter().y, _x, _y);
-    	if (dist < rect.getWidth()/2)
+    	if (dist < rect.GetWidth()/2)
         	return true;
     	else
         	return false;    
@@ -68,5 +68,5 @@ void Button :: Render() const
 
 void Button :: renderInfo() const
 {
-     	drawSimpleText(info_str, 12, rect.getBottomLeft().x - 50, rect.getBottomLeft().y + 30);
+     	drawSimpleText(info_str, 12, rect.GetBottomLeft().x - 50, rect.GetBottomLeft().y + 30);
 }

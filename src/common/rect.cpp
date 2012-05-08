@@ -18,29 +18,25 @@
 
 
 
-Rect :: Rect()
+Rect::Rect()
 {
-	set(0, 0, 0, 0);
+	Set(0, 0, 0, 0);
 }
 
-
-Rect :: Rect(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h)
+Rect::Rect(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h)
 {
-	set(_bottomLeft_x, _bottomLeft_y, _w, _h);
+	Set(_bottomLeft_x, _bottomLeft_y, _w, _h);
 }
 
-
-Rect :: Rect(vec2f _bottomLeft, int _w, int _h)
+Rect::Rect(vec2f _bottomLeft, int _w, int _h)
 {
-	set(_bottomLeft.x, _bottomLeft.y, _w, _h);
+	Set(_bottomLeft.x, _bottomLeft.y, _w, _h);
 }
 
-
-Rect :: ~Rect()
+Rect::~Rect()
 {}
 
-
-void Rect :: set(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h)
+void Rect::Set(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h)
 {
 	bottomLeft.x = _bottomLeft_x;
 	bottomLeft.y = _bottomLeft_y;
@@ -48,7 +44,7 @@ void Rect :: set(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h)
 	w = _w;
 	h = _h;
 
-	updateCenter();
+	UpdateCenter();
 }
 
 void Rect::SetCenter(vec2f _center)
@@ -68,23 +64,20 @@ void Rect::SetCenter(float _center_x, float _center_y)
 	center.y = _center_y;
 }
 
-
-
-void Rect ::  setBottomLeft(vec2f _bottomLeft)
+void Rect::SetBottomLeft(vec2f _bottomLeft)
 {
-	setBottomLeft(_bottomLeft.x, _bottomLeft.y);
+	SetBottomLeft(_bottomLeft.x, _bottomLeft.y);
 }
 
-void Rect ::  setBottomLeft(float _pos_x, float _pos_y)
+void Rect::SetBottomLeft(float _pos_x, float _pos_y)
 {
 	bottomLeft.x = _pos_x;
 	bottomLeft.y = _pos_y;
 
-	updateCenter();
+	UpdateCenter();
 }
 
-
-void Rect ::  resize(int _w, int _h)
+void Rect::Resize(int _w, int _h)
 {
 	w = _w;
 	h = _h;
@@ -93,7 +86,7 @@ void Rect ::  resize(int _w, int _h)
 	bottomLeft.y = center.y - h/2;
 }
 
-void Rect :: updateCenter()
+void Rect::UpdateCenter()
 {
 	center.x = bottomLeft.x + w/2;
 	center.y = bottomLeft.y + h/2;
