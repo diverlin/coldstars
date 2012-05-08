@@ -62,14 +62,6 @@ void DriveEquipment::CountPrice()
      	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-/* virtual */
-void DriveEquipment::UpdateOwnerAbilities()
-{
-    	slot->GetOwnerVehicle()->UpdateDriveAbility();
-    	slot->GetOwnerVehicle()->UpdateJumpAbility();    	
-}
-
-
 void DriveEquipment::AddUniqueInfo()
 {
     	info.addTitleStr("DRIVE");

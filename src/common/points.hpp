@@ -35,7 +35,7 @@ class Points
         ******************************************/
         
         public:
-                void SetParentCenter(vec2f& parent_center) { this->parent_center.Set(parent_center); };
+                void SetParentCenter(vec2f parent_center) { this->parent_center.Set(parent_center); };
                 
                 void SetCenter(float x, float y)	{ center.Set(x, y); 		is_updated = false; };
                 void SetCenter(vec2f center)		{ this->center = center;  	is_updated = false; };
@@ -55,7 +55,7 @@ class Points
                         
                 const vec2f& GetCenter()  const { return center; };   
                 const vec3f GetCenter3f() const { return vec3f(center.x, center.y, pos_z); }; 
-                vec2f* GetpCenter() { return &center; };   // used inturrels(for target)
+                vec2f* GetpCenter() { return &center; };  
                 vec2f* GetpParentCenter() { return &parent_center; };   
                       
                 const vec2f& GetBottomLeft()  const { return bottomLeft; };  

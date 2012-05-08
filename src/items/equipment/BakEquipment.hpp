@@ -32,8 +32,6 @@ class BakEquipment : public BaseEquipment
                                 
 		int GetFuel() const    { return fuel; };
 		int GetFuelMax() const { return fuel_max; };
-
-     	     	void virtual UpdateOwnerAbilities();
      	
      	     	void CountPrice();
      	     	virtual void UpdatePropetries();

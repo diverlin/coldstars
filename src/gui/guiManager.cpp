@@ -41,7 +41,7 @@ void GuiManager :: updateInStore()
 	gui_store->update();
 	gui_vehicle->update();
 	
-	player->GetCursor()->update();
+	player->GetCursor()->Update();
 }
 
 void GuiManager :: updateInScan(bool allow_full_control)
@@ -58,7 +58,7 @@ void GuiManager :: updateInScan(bool allow_full_control)
 		gui_skill->update();
 	}
 	
-	player->GetCursor()->update();
+	player->GetCursor()->Update();
 }
 
 
@@ -74,10 +74,10 @@ void GuiManager :: renderInStore() const
 		gui_vehicle->Render();
 		gui_store->Render();
 		
-		player->GetCursor()->getSlot()->RenderEquipedItem();	
+		player->GetCursor()->GetItemSlot()->RenderEquipedItem();	
 
 		gui_store->renderFocusedItemInfo();	
-		if (player->GetCursor()->getSlot()->GetEquipedStatus() == false)
+		if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == false)
 		{
 			gui_vehicle->renderFocusedItemInfo();
 		}
@@ -94,9 +94,9 @@ void GuiManager :: renderInScan() const
 		gui_vehicle->Render();
 		gui_skill->Render();
 		
-		player->GetCursor()->getSlot()->RenderEquipedItem();		
+		player->GetCursor()->GetItemSlot()->RenderEquipedItem();		
 	
-		if (player->GetCursor()->getSlot()->GetEquipedStatus() == false)
+		if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == false)
 		{
 			gui_vehicle->renderFocusedItemInfo();
 		}

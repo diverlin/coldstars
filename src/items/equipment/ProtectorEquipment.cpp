@@ -56,12 +56,6 @@ void ProtectorEquipment::CountPrice()
       	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-/* virtual */
-void ProtectorEquipment::UpdateOwnerAbilities()
-{
-     	slot->GetOwnerVehicle()->UpdateProtectionAbility();
-}
-
 void ProtectorEquipment::AddUniqueInfo()
 {
     	info.addTitleStr("PROTECTOR");

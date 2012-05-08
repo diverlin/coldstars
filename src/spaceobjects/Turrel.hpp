@@ -25,14 +25,14 @@ class Turrel
                 Turrel(ItemSlot*);
                 ~Turrel();
 
-                void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
-                void SetCenter(vec2f* pCenter) { this->pCenter = pCenter; };
+                void SetTextureOb(TextureOb* textureOb)	{ this->textureOb = textureOb; };
+                //void SetCenter(vec2f* pCenter) 		{ this->pCenter = pCenter; };
                               
-                void SetTarget(BaseGameEntity* target)  { this->target = target; };
-                void SetSelectedStatus(bool selected)   { is_SELECTED = selected; };
+                void SetTarget(BaseGameEntity* target) 	{ this->target = target; };
+                void SetSelectedStatus(bool selected) 	{ is_SELECTED = selected; };
                 
-                bool GetSelectedStatus() const  { return is_SELECTED; };
-                Points& GetPoints()             { return points; };
+                bool GetSelectedStatus() const	{ return is_SELECTED; };
+                Points& GetPoints()		{ return points; };
                 
                 BaseGameEntity* GetTarget() const { return target; };
        
@@ -52,8 +52,6 @@ class Turrel
                 BaseGameEntity* target;
                 
                 bool is_SELECTED;                        
-               
-                vec2f* pCenter; 
                
                 Points points;         
 }; 

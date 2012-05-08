@@ -58,13 +58,6 @@ void BakEquipment::CountPrice()
    	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-/* virtual */
-void BakEquipment::UpdateOwnerAbilities()
-{
-    	slot->GetOwnerVehicle()->UpdateDriveAbility();
-    	slot->GetOwnerVehicle()->UpdateJumpAbility(); 
-}
-
 void BakEquipment::AddUniqueInfo()
 {
     	info.addTitleStr("BAK");

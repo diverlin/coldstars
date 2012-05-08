@@ -66,13 +66,6 @@ void LazerEquipment::CountPrice()
    	price                    = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-
-/* virtual */    
-void LazerEquipment::UpdateOwnerAbilities()
-{ 
-    	slot->GetOwnerVehicle()->UpdateFireAbility();
-}
-
 void LazerEquipment::AddUniqueInfo()
 {
     	info.addTitleStr("LAZER");

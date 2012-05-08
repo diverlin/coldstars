@@ -35,8 +35,6 @@ class LazerEquipment : public BaseEquipment
 		
       		void FireEvent_TRUE();
       		void FireEvent_FALSE();
-      		      
-      		void virtual UpdateOwnerAbilities();
       		
        	      	virtual void UpdatePropetries();
       		void CountPrice();

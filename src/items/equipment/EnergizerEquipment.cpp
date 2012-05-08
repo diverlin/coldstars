@@ -62,11 +62,6 @@ void EnergizerEquipment::CountPrice()
     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-void EnergizerEquipment::UpdateOwnerAbilities()
-{
-    	slot->GetOwnerVehicle()->UpdateEnergyAbility();
-}
-
 void EnergizerEquipment::AddUniqueInfo()
 {
     	info.addTitleStr("ENERGYBLOCK");

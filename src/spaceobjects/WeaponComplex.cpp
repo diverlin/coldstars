@@ -356,7 +356,7 @@ void WeaponComplex::RenderWeaponIcons() const
                 Turrel* _turrel = slot_weapon_vec[i]->GetTurrel();
                 if (_turrel->GetTarget() != NULL )
                 {       
-                        Rect _rect(_turrel->GetTarget()->GetPoints().GetpCenter()->x - 40/2 + 23*offset, _turrel->GetTarget()->GetPoints().GetpCenter()->y + 40/2, 20, 20);
+                        Rect _rect(_turrel->GetTarget()->GetPoints().GetCenter().x - 40/2 + 23*offset, _turrel->GetTarget()->GetPoints().GetCenter().y + 40/2, 20, 20);
                         drawTexturedRect(slot_weapon_vec[i]->GetItem()->GetTextureOb(), _rect, -2.0);
                         offset++;
                 }        

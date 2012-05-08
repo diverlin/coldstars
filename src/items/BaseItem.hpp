@@ -61,8 +61,6 @@ class BaseItem : public Base
 			
       		virtual void Render(Rect);
       		void RenderInfo(Rect, float, float); 
-     		
-     		void virtual UpdateOwnerAbilities()=0;
 
 	protected:
      		TextureOb* textureOb;

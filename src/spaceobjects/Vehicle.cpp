@@ -27,6 +27,7 @@ KorpusData :: KorpusData()
         price = 0;
        
         draw_turrels = false;
+        gui_scale = 1.0;
         
         slot_grapple_num   = 0;
         slot_drive_num     = 0;
@@ -65,29 +66,20 @@ Vehicle::~Vehicle()
 	delete protection_complex;
 } 
 
-void Vehicle::Add(ItemSlot* slot) 
+void Vehicle::AddSlot(ItemSlot* slot, Rect rect) 
 { 
         std::cout<<"slot_type_id="<<slot->GetSubTypeId()<<", id="<<slot->GetId()<<std::endl;
-                
-	if (slot->GetSubTypeId() != SLOT::GATE_ID)
-	{
-		slot_total_vec.push_back(slot); 
-	}
-        
-        if (slot->GetSubTypeId() == SLOT::CARGO_ID)
-        {
-                slot_otsec_vec.push_back(slot); 
-        }
 
-        if (slot->GetSubTypeId() == SLOT::WEAPON_ID)
-        {
-                points.Add(slot->GetPoints().GetpCenter(), slot->GetPoints().GetpParentCenter());                                
-                slot->GetTurrel()->SetCenter(slot->GetPoints().GetpCenter());
-        }
+        slot->SetOwnerVehicle(this); 
+        slot->SetRect(rect.GetBottomLeft().x, rect.GetBottomLeft().y, rect.GetWidth(), rect.GetHeight());        
         
 	switch(slot->GetSubTypeId())
 	{
-                case SLOT::WEAPON_ID:    { weapon_complex->AddSlot(slot); break; }
+                case SLOT::WEAPON_ID:    
+                {
+                 	points.Add(slot->GetTurrel()->GetPoints().GetpCenter(), slot->GetTurrel()->GetPoints().GetpParentCenter());  
+                	weapon_complex->AddSlot(slot); break; 
+                }
                 case SLOT::DRIVE_ID:     { drive_complex->SetDriveSlot(slot); break; }
                 case SLOT::BAK_ID:       { drive_complex->SetBakSlot(slot); break; }
                 case SLOT::PROTECTOR_ID: { protection_complex->SetProtectorSlot(slot); break; }
@@ -98,10 +90,15 @@ void Vehicle::Add(ItemSlot* slot)
 		case SLOT::GRAPPLE_ID:   { grapple_slot   = slot; break; }
 		case SLOT::DROID_ID:     { droid_slot     = slot; break; }
 		case SLOT::FREEZER_ID:   { freezer_slot   = slot; break; }
+		
+		case SLOT::CARGO_ID:     { slot_otsec_vec.push_back(slot); break; }
 		case SLOT::GATE_ID:      { gate_slot      = slot; break; }
 	}
         
-        slot->SetOwnerVehicle(this); 
+	if (slot->GetSubTypeId() != SLOT::GATE_ID)
+	{
+		slot_total_vec.push_back(slot); 
+	}
 }
 
 bool Vehicle::AddItemToOtsec(BaseItem* item)
@@ -525,8 +522,8 @@ void Vehicle::RenderGrappleTrail() const
         {
                 //if (grapple_slot->GetGrappleEquipment()->target_vec[i]->getValid() == true)
                 {              
-                    	float xl = grapple_slot->GetGrappleEquipment()->target_vec[i]->GetPoints().GetpCenter()->x - points.GetCenter().x;
-                        float yl = grapple_slot->GetGrappleEquipment()->target_vec[i]->GetPoints().GetpCenter()->y - points.GetCenter().y;
+                    	float xl = grapple_slot->GetGrappleEquipment()->target_vec[i]->GetPoints().GetCenter().x - points.GetCenter().x;
+                        float yl = grapple_slot->GetGrappleEquipment()->target_vec[i]->GetPoints().GetCenter().y - points.GetCenter().y;
 
                         float len = sqrt((xl*xl) + (yl*yl));
 
