@@ -28,8 +28,6 @@ ItemSlot::ItemSlot(int id)
 	data_id.id         = id;
         data_id.type_id    = SLOT::SLOT_ID;
 	data_id.subtype_id = NONE_ID;
-     
-        rect = Rect();         
 
         is_EQUIPED = false;
 
@@ -354,6 +352,6 @@ void ItemSlot::ResolveDataUniqueItemSlot()
         if (unresolved_ItemSlot.owner_vehicle_id != NONE_ID)
         {
         	Rect tmp_rect(unresolved_ItemSlot.rect_blx, unresolved_ItemSlot.rect_bly, unresolved_ItemSlot.rect_w, unresolved_ItemSlot.rect_h);
-                ((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.owner_vehicle_id))->AddSlot(this, tmp_rect);
+                //((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.owner_vehicle_id))->AddSlot(this, tmp_rect);
 	}
 }

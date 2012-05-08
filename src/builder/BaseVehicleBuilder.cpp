@@ -179,52 +179,84 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
 {
     	if (vehicle->data_korpus.slot_weapon_num >= 1)
     	{
-       		vehicle->GetWeaponComplex()->Add(GetNewRocketEquipment(RACE::R0_ID));
+    	    	RocketEquipmentBuilder::Instance().CreateNewRocketEquipment();
+        	RocketEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
+       		vehicle->GetWeaponComplex()->Add(RocketEquipmentBuilder::Instance().GetRocketEquipment());
     	}   
 
     	if (vehicle->data_korpus.slot_weapon_num >= 2)
     	{
-       		vehicle->GetWeaponComplex()->Add(GetNewLazerEquipment(RACE::R0_ID)); 
+    	        LazerEquipmentBuilder::Instance().CreateNewLazerEquipment();
+        	LazerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
+       		vehicle->GetWeaponComplex()->Add(LazerEquipmentBuilder::Instance().GetLazerEquipment()); 
     	}   
     
     	if (vehicle->data_korpus.slot_weapon_num >= 3)
     	{
-       		vehicle->GetWeaponComplex()->Add(GetNewLazerEquipment(RACE::R0_ID)); 
+    	        LazerEquipmentBuilder::Instance().CreateNewLazerEquipment();
+        	LazerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
+       		vehicle->GetWeaponComplex()->Add(LazerEquipmentBuilder::Instance().GetLazerEquipment()); 
     	}   
         
     	if (vehicle->data_korpus.slot_weapon_num >= 4)
     	{
-       		vehicle->GetWeaponComplex()->Add(GetNewRocketEquipment(RACE::R0_ID)); 
+    	    	RocketEquipmentBuilder::Instance().CreateNewRocketEquipment();
+        	RocketEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
+       		vehicle->GetWeaponComplex()->Add(RocketEquipmentBuilder::Instance().GetRocketEquipment());
     	}   
     
     	if (vehicle->data_korpus.slot_weapon_num >= 5) 
     	{
-       		vehicle->GetWeaponComplex()->Add(GetNewRocketEquipment(RACE::R0_ID)); 
+    	    	RocketEquipmentBuilder::Instance().CreateNewRocketEquipment();
+        	RocketEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
+       		vehicle->GetWeaponComplex()->Add(RocketEquipmentBuilder::Instance().GetRocketEquipment());
     	}   
         
-    	vehicle->GetRadarSlot()->InsertItem(GetNewRadarEquipment(RACE::R0_ID)); 
- 
-    	vehicle->GetDriveComplex()->GetDriveSlot()->InsertItem(GetNewDriveEquipment(RACE::R0_ID)); 
+        RadarEquipmentBuilder::Instance().CreateNewRadarEquipment();
+        RadarEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
+    	vehicle->GetRadarSlot()->InsertItem(RadarEquipmentBuilder::Instance().GetRadarEquipment()); 
+
+        DriveEquipmentBuilder::Instance().CreateNewDriveEquipment();
+        DriveEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
+    	vehicle->GetDriveComplex()->GetDriveSlot()->InsertItem(DriveEquipmentBuilder::Instance().GetDriveEquipment()); 
         
         BakEquipmentBuilder::Instance().CreateNewBakEquipment();
         BakEquipmentBuilder::Instance().CreateNewInternals();
     	vehicle->GetDriveComplex()->GetBakSlot()->InsertItem(BakEquipmentBuilder::Instance().GetBakEquipment()); 
         
-    	vehicle->GetEnergizerSlot()->InsertItem(GetNewEnergizerEquipment(RACE::R0_ID));     
-    	vehicle->GetProtectionComplex()->GetProtectorSlot()->InsertItem(GetNewProtectorEquipment(RACE::R0_ID)); 
-   	vehicle->GetDroidSlot()->InsertItem(GetNewDroidEquipment(RACE::R0_ID)); 
-   	vehicle->GetFreezerSlot()->InsertItem(GetNewFreezerEquipment(RACE::R0_ID));  
-   	vehicle->GetScanerSlot()->InsertItem(GetNewScanerEquipment(RACE::R0_ID)); 
+        EnergizerEquipmentBuilder::Instance().CreateNewEnergizerEquipment();
+        EnergizerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
+    	vehicle->GetEnergizerSlot()->InsertItem(EnergizerEquipmentBuilder::Instance().GetEnergizerEquipment());     
+
+   	ProtectorEquipmentBuilder::Instance().CreateNewProtectorEquipment();
+        ProtectorEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
+   	vehicle->GetProtectionComplex()->GetProtectorSlot()->InsertItem(ProtectorEquipmentBuilder::Instance().GetProtectorEquipment()); 
+   	
+   	DroidEquipmentBuilder::Instance().CreateNewDroidEquipment();
+        DroidEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
+   	vehicle->GetDroidSlot()->InsertItem(DroidEquipmentBuilder::Instance().GetDroidEquipment()); 
+
+   	FreezerEquipmentBuilder::Instance().CreateNewFreezerEquipment();
+        FreezerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
+   	vehicle->GetFreezerSlot()->InsertItem(FreezerEquipmentBuilder::Instance().GetFreezerEquipment());  
+
+   	ScanerEquipmentBuilder::Instance().CreateNewScanerEquipment();
+        ScanerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
+   	vehicle->GetScanerSlot()->InsertItem(ScanerEquipmentBuilder::Instance().GetScanerEquipment()); 
     
     	if (vehicle->data_korpus.slot_grapple_num != 0) 
     	{
-      		vehicle->GetGrappleSlot()->InsertItem(GetNewGrappleEquipment(RACE::R0_ID)); 
+    	   	GrappleEquipmentBuilder::Instance().CreateNewGrappleEquipment();
+        	GrappleEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
+      		vehicle->GetGrappleSlot()->InsertItem(GrappleEquipmentBuilder::Instance().GetGrappleEquipment()); 
    	}
     
                              
     	for (unsigned int i = 0; i < 3; i++) 
     	{        
-                vehicle->AddItemToOtsec(GetNewLazerEquipment(RACE::R0_ID));
+    	        LazerEquipmentBuilder::Instance().CreateNewLazerEquipment();
+        	LazerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
+       		vehicle->GetWeaponComplex()->Add(LazerEquipmentBuilder::Instance().GetLazerEquipment()); 
     	}
 
 

@@ -50,8 +50,6 @@ class RadarEquipment : public BaseEquipment
 		void ResolveDataUniqueRadarEquipment();  
 };
 
-RadarEquipment* GetNewRadarEquipment(int race_id, int revision_id = -1);
-
 #endif 
 
 

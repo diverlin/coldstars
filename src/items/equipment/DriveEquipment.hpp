@@ -58,7 +58,6 @@ class DriveEquipment : public BaseEquipment
 		void ResolveDataUniqueDriveEquipment();  
 };
 
-DriveEquipment* GetNewDriveEquipment(int race_id, int revision_id = -1);
 
 #endif 
 

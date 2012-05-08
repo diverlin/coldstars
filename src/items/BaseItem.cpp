@@ -93,8 +93,7 @@ void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, c
 	if (textureOb) 	save_ptree.put(root+"unresolved.textureOb_path", textureOb->path);
 	else            save_ptree.put(root+"unresolved.textureOb_path", "none");
         
-        if (slot) 	save_ptree.put(root+"unresolved.slot_id", slot->GetId());
-	else            save_ptree.put(root+"unresolved.slot_id", NONE_ID);
+        save_ptree.put(root+"unresolved.slot_id", slot->GetId());
 }
 
 void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_ptree)
@@ -116,5 +115,5 @@ void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_pt
 void BaseItem::ResolveDataUniqueBaseItem()
 {
 	textureOb = g_TEXTURE_MANAGER.GetTextureObByPath(data_unresolved_BaseItem.textureOb_path);
-	//((ItemSlot*)EntityManager::Instance().GetEntityById(data_unresolved_BaseItem.slot_id))->InsertItem(this);
+	((ItemSlot*)EntityManager::Instance().GetEntityById(data_unresolved_BaseItem.slot_id))->InsertItem(this);
 }

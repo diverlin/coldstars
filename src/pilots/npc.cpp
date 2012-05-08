@@ -84,13 +84,13 @@ void Npc::ThinkCommon_inLand_inStatic()
 void Npc::Update_inSpace_inStatic()
 {
 	vehicle->GetWeaponComplex()->PrepareWeapons();
-	if (vehicle->GetGrappleSlot()->GetGrappleEquipment())
+	if (vehicle->ableTo.GRAB == true)
 	{
         	vehicle->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets();
         }
         vehicle->SelfRepairEvent();
         // drive work, energy and so on
-               	     		
+        
 	if (upper_control == false)
 	{
         	CheckNeeds();

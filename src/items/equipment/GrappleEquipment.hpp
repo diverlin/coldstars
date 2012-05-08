@@ -85,6 +85,4 @@ class GrappleEquipment : public BaseEquipment
 		void ResolveDataUniqueGrappleEquipment(); 
 };
 
-GrappleEquipment* GetNewGrappleEquipment(int race_id, int revision_id = -1);
-
 #endif 

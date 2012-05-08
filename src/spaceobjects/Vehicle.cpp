@@ -68,8 +68,6 @@ Vehicle::~Vehicle()
 
 void Vehicle::AddSlot(ItemSlot* slot, Rect rect) 
 { 
-        std::cout<<"slot_type_id="<<slot->GetSubTypeId()<<", id="<<slot->GetId()<<std::endl;
-
         slot->SetOwnerVehicle(this); 
         slot->SetRect(rect.GetBottomLeft().x, rect.GetBottomLeft().y, rect.GetWidth(), rect.GetHeight());        
         

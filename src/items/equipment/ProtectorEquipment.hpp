@@ -47,10 +47,7 @@ class ProtectorEquipment  : public BaseEquipment
                 
                 void SaveDataUniqueProtectorEquipment(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueProtectorEquipment(const boost::property_tree::ptree&);
-		void ResolveDataUniqueProtectorEquipment();  
-                
+		void ResolveDataUniqueProtectorEquipment();                  
 };
-
-ProtectorEquipment* GetNewProtectorEquipment(int race_id, int revision_id = -1);
 
 #endif 

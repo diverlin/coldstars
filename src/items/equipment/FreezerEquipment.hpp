@@ -50,6 +50,5 @@ class FreezerEquipment : public BaseEquipment
 		void ResolveDataUniqueFreezerEquipment(); 
 };
 
-FreezerEquipment* GetNewFreezerEquipment(int race_id, int revision_id = -1);
 
 #endif 

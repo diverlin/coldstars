@@ -180,7 +180,19 @@ class GuiMap;
 #include "src/spaceobjects/satellite.hpp"
 #include "src/spaceobjects/Ship.hpp"
 #include "src/builder/ContainerBuilder.hpp"
-#include "src/builder/BakEquipmentBuilder.hpp"
+#include "src/builder/items/equipment/BakEquipmentBuilder.hpp"
+#include "src/builder/items/equipment/DriveEquipmentBuilder.hpp"
+#include "src/builder/items/equipment/DroidEquipmentBuilder.hpp"
+#include "src/builder/items/equipment/EnergizerEquipmentBuilder.hpp"
+#include "src/builder/items/equipment/FreezerEquipmentBuilder.hpp"
+#include "src/builder/items/equipment/GrappleEquipmentBuilder.hpp"
+#include "src/builder/items/equipment/LazerEquipmentBuilder.hpp"
+#include "src/builder/items/equipment/ProtectorEquipmentBuilder.hpp"
+#include "src/builder/items/equipment/RadarEquipmentBuilder.hpp"
+#include "src/builder/items/equipment/RocketEquipmentBuilder.hpp"
+#include "src/builder/items/equipment/ScanerEquipmentBuilder.hpp"
+///
+
 #include "src/builder/BaseVehicleBuilder.hpp"
 #include "src/builder/ShipBuilder.hpp"
 #include "src/builder/ItemSlotBuilder.hpp"
@@ -422,6 +434,15 @@ class GuiMap;
 #include "src/common/gameTimer.cpp"
 #include "src/config/SaveManager.cpp" 
 
-#include "src/builder/BakEquipmentBuilder.cpp"
-
+#include "src/builder/items/equipment/BakEquipmentBuilder.cpp"
+#include "src/builder/items/equipment/DriveEquipmentBuilder.cpp"
+#include "src/builder/items/equipment/DroidEquipmentBuilder.cpp"
+#include "src/builder/items/equipment/EnergizerEquipmentBuilder.cpp"
+#include "src/builder/items/equipment/FreezerEquipmentBuilder.cpp"
+#include "src/builder/items/equipment/GrappleEquipmentBuilder.cpp"
+#include "src/builder/items/equipment/LazerEquipmentBuilder.cpp"
+#include "src/builder/items/equipment/ProtectorEquipmentBuilder.cpp"
+#include "src/builder/items/equipment/RadarEquipmentBuilder.cpp"
+#include "src/builder/items/equipment/RocketEquipmentBuilder.cpp"
+#include "src/builder/items/equipment/ScanerEquipmentBuilder.cpp"
 ////////////////////////////////////////////

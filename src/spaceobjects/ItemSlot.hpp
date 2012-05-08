@@ -22,6 +22,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 struct UnresolvedDataUniqueItemSlot
 {
+	UnresolvedDataUniqueItemSlot()
+	{
+		owner_vehicle_id = NONE_ID;
+	
+		rect_blx = 0.0;
+        	rect_bly = 0.0;
+        	rect_w = 0; 
+        	rect_h = 0;  
+	};
+	
 	int owner_vehicle_id;
 	
 	float rect_blx;

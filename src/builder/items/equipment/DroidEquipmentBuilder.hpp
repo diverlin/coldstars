@@ -17,37 +17,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
+#ifndef DROIDEQUIPMENTBUILDER_H
+#define DROIDEQUIPMENTBUILDER_H
 
-#ifndef CURSOR_H
-#define CURSOR_H
 
-
-class Cursor
+class DroidEquipmentBuilder
 {
-  	public:
-        	Cursor(Player*);
-        	~Cursor();
-		
-		void SetLeftMouseButton(bool mouse_left_button) 	{ this->mouse_left_button = mouse_left_button; };
-		void SetRightMouseButton(bool mouse_right_button) 	{ this->mouse_right_button = mouse_right_button; };
-		
-		vec2f GetMousePos() const { return mouse_pos; };
-		bool GetMouseLeftButton() const { return mouse_left_button; };
-		bool GetMouseRightButton() const { return mouse_right_button; };
-			
-		ItemSlot* GetItemSlot() const { return slot; };
-								
-		void UpdateMousePos();		
-		void Update();
-        	
+	public:
+		static DroidEquipmentBuilder& Instance();
+		~DroidEquipmentBuilder();
+
+        	void CreateNewDroidEquipment(int id = NONE_ID); 
+                void CreateNewInternals(int race_id, int revision_id = -1);
+                DroidEquipment* GetDroidEquipment() const { return droid_equipment; };
+        	 		                
         private:
-        	ItemSlot* slot;        	
-        	Player* player;
-        	
-        	vec2f mouse_pos;
-        	
-        	bool mouse_left_button;
-        	bool mouse_right_button;
+                DroidEquipment* droid_equipment;
+                
+		DroidEquipmentBuilder() {};
+		DroidEquipmentBuilder(const DroidEquipmentBuilder&) = delete;
+		DroidEquipmentBuilder& operator=(const DroidEquipmentBuilder&) = delete;
 }; 
 
 #endif 
+    
+
+        
+
+
