@@ -81,7 +81,6 @@ void Vehicle::Add(ItemSlot* slot)
 
         if (slot->GetSubTypeId() == SLOT::WEAPON_ID)
         {
-        	//vec2f* offset = new vec2f(0, textureOb->getFrameHeight()/3);
                 points.Add(slot->GetPoints().GetpCenter(), slot->GetPoints().GetpParentCenter());                                
                 slot->GetTurrel()->SetCenter(slot->GetPoints().GetpCenter());
         }

@@ -41,7 +41,7 @@ void GuiStore :: update()
                 {                                
                 	float dist = distBetweenPoints(store->slot_vec[i]->GetRect().GetCenter(), player->GetCursor()->getMousePos().x, player->GetScreen()->getHeight() - player->GetCursor()->getMousePos().y);
                                                        				
-                	if (dist < store->slot_vec[i]->GetRect().getWidth()/2)
+                	if (dist < store->slot_vec[i]->GetRect().GetWidth()/2)
                 	{
                         	if (lmb == true)
                         	{
@@ -72,7 +72,7 @@ void GuiStore :: renderFocusedItemInfo()
         { 
                 float dist = distBetweenPoints(store->slot_vec[i]->GetRect().GetCenter(), player->GetCursor()->getMousePos().x, player->GetScreen()->getHeight() - player->GetCursor()->getMousePos().y);
                                                        				
-                if (dist < store->slot_vec[i]->GetRect().getWidth()/2)
+                if (dist < store->slot_vec[i]->GetRect().GetWidth()/2)
                 {
                         store->slot_vec[i]->RenderItemInfo();                    
                 } 

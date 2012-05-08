@@ -28,26 +28,26 @@ class Rect
       		Rect(vec2f, int, int);
       		~Rect();
       		
-      		void set(float, float, int, int);
+      		void Set(float, float, int, int);
 
       		void SetCenter(vec2f);
       		void SetCenter(float, float);
-      		void setBottomLeft(vec2f);
-      		void setBottomLeft(float, float);
+      		void SetBottomLeft(vec2f);
+      		void SetBottomLeft(float, float);
       		      		
 		vec2f GetCenter() const     { return center; }
-		vec2f getBottomLeft() const { return bottomLeft; }
-		int getWidth() const 	    { return w; }
-		int getHeight() const 	    { return h; }  
+		vec2f GetBottomLeft() const { return bottomLeft; }
+		int GetWidth() const 	    { return w; }
+		int GetHeight() const 	    { return h; }  
       
-      		void resize(int, int);
+      		void Resize(int, int);
       		      		
       	private:
       		vec2f bottomLeft;    
       		vec2f center;  
       		int w, h;
 
-      		void updateCenter();
+      		void UpdateCenter();
 };
 
 

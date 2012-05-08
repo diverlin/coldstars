@@ -88,7 +88,7 @@ void Angar::MouseControl(Player* player)
                                                platform_vec[i]->GetRect().GetCenter().x, 
                                                platform_vec[i]->GetRect().GetCenter().y);
         				
-                if (dist < platform_vec[i]->GetRect().getWidth()/2)
+                if (dist < platform_vec[i]->GetRect().GetWidth()/2)
                 {
                         if (rmb == true)
                         {
@@ -142,7 +142,7 @@ void Angar::RenderItemInfo(Player* player) const
                                 	               platform_vec[i]->GetRect().GetCenter().x, 
                                         	       platform_vec[i]->GetRect().GetCenter().y);
         				
-                	if (dist < platform_vec[i]->GetRect().getWidth()/2)
+                	if (dist < platform_vec[i]->GetRect().GetWidth()/2)
                 	{
 		                platform_vec[i]->RenderInfo();
                 	}

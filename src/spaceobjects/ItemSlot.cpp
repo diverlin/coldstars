@@ -35,8 +35,8 @@ ItemSlot::ItemSlot(int id)
 
         owner_vehicle = NULL; 
         
-        turrel = NULL;                
-        item   = NULL;
+        turrel     = NULL;                
+        item   	   = NULL;
         textureOb  = NULL;
 }
 
@@ -45,7 +45,8 @@ ItemSlot::~ItemSlot()
                 
 void ItemSlot::SetRect(int pos_x, int pos_y, int w, int h) 
 {
-	rect.set(pos_x, pos_y, w, h);
+	rect.Set(pos_x, pos_y, w, h);
+	
 }
 
 bool ItemSlot::InsertItem(BaseItem* item)
@@ -145,7 +146,7 @@ void ItemSlot::RenderItemInfo(float offset_x, float offset_y)
 bool ItemSlot::CheckInteraction(int _x, int _y)
 {        
         float dist = distBetweenPoints(rect.GetCenter().x, rect.GetCenter().y, _x, _y);
-        if (dist < rect.getWidth()/2)
+        if (dist < rect.GetWidth()/2)
                 return true;
         else
                 return false;    
@@ -297,10 +298,10 @@ void ItemSlot::ResolveData()
 
 void ItemSlot::SaveDataUniqueItemSlot(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-        save_ptree.put(root+"rect.BottomLeft.x", rect.getBottomLeft().x);
-        save_ptree.put(root+"rect.BottomLeft.y", rect.getBottomLeft().y); 
-        save_ptree.put(root+"rect.width", rect.getWidth());
-        save_ptree.put(root+"rect.height", rect.getHeight()); 
+        save_ptree.put(root+"rect.BottomLeft.x", rect.GetBottomLeft().x);
+        save_ptree.put(root+"rect.BottomLeft.y", rect.GetBottomLeft().y); 
+        save_ptree.put(root+"rect.width", rect.GetWidth());
+        save_ptree.put(root+"rect.height", rect.GetHeight()); 
         
         if (owner_vehicle) save_ptree.put(root+"unresolved.owner_vehicle_id", owner_vehicle->GetId());
         else               save_ptree.put(root+"unresolved.owner_vehicle_id", NONE_ID);

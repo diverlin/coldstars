@@ -119,8 +119,8 @@ void GuiSkill :: Render() const
 	Skill* skill = player->GetNpc()->GetScanTarget()->GetOwnerNpc()->GetSkill();
      	TextureOb* texOb_skill = g_UNIQUE_TEXTURE_COLLECTOR.texOb_skill;
      	
-    	int w = button_vec[0]->GetRect().getWidth();
-     	int h = button_vec[0]->GetRect().getHeight();
+    	int w = button_vec[0]->GetRect().GetWidth();
+     	int h = button_vec[0]->GetRect().GetHeight();
 
  	for (unsigned int bi = 0; bi < button_vec.size(); bi++)
 	{
