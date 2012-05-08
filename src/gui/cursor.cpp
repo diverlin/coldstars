@@ -17,42 +17,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-
-
-Cursor :: Cursor(Player* player)
+Cursor::Cursor(Player* player):
+mouse_left_button(false), 
+mouse_right_button(false)
 {
 	this->player = player;
 	
      	slot = GetNewItemSlot(SLOT::CARGO_ID);
      	slot->SetRect(0, 0, GUI::SLOT::WIDTH_FOR_CURSOR, GUI::SLOT::HEIGHT_FOR_CURSOR);
-     	
-     	mouse_left_button  = false;
-     	mouse_right_button = false;
 }
 
-
-Cursor :: ~Cursor()
+Cursor::~Cursor()
 {}
 
-void Cursor :: setLeftMouseButton(bool mouse_left_button) { this->mouse_left_button = mouse_left_button; }
-void Cursor :: setRightMouseButton(bool mouse_right_button) { this->mouse_right_button = mouse_right_button; }
-		
-vec2f Cursor :: getMousePos() const { return mouse_pos; }
-	
-bool Cursor :: getMouseLeftButton() const { return mouse_left_button; }
-bool Cursor :: getMouseRightButton() const { return mouse_right_button; }
-			
-ItemSlot* Cursor :: getSlot() { return slot; }
-
-		
-void Cursor :: updateMousePos()
+void Cursor::UpdateMousePos()
 {
         const sf::Input& Input = Gui::GetWindow().GetInput();
         mouse_pos.Set(Input.GetMouseX(), Input.GetMouseY());
 }
 
-
-void Cursor :: update()
+void Cursor::Update()
 {
      	slot->GetRect().SetCenter(mouse_pos.x, player->GetScreen()->getHeight()  - mouse_pos.y);
 }

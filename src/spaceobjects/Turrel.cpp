@@ -17,11 +17,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-Turrel::Turrel(ItemSlot* _slot)
+Turrel::Turrel(ItemSlot* slot)
 {
-        slot = _slot;
-                 
-        pCenter = NULL;        
+        this->slot = slot;
+      
         target  = NULL;
 }
 
@@ -90,14 +89,13 @@ void Turrel::Render(float _tur_angle_inD)
 {        
         if (target != NULL)
         {
-        	float _tur_xl = target->GetPoints().GetCenter().x - pCenter->x;
-        	float _tur_yl = target->GetPoints().GetCenter().y - pCenter->y;
+        	float _tur_xl = target->GetPoints().GetCenter().x - points.GetCenter().x;
+        	float _tur_yl = target->GetPoints().GetCenter().y - points.GetCenter().y;
 
         	float _tur_angle_inR = atan2(_tur_yl, _tur_xl);
         	_tur_angle_inD = _tur_angle_inR * RADIAN_TO_DEGREE_RATE;
         }
 
-        points.SetCenter(*pCenter);
     	points.SetAngle(_tur_angle_inD);
     	points.Update();        
 

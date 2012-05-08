@@ -54,6 +54,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 	       	modules_vec.push_back(module);
         	UpdatePropetries();
         	
+        	slot->UpdateOwnerAbilities();
         	return true;
     	}
 

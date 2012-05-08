@@ -23,6 +23,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 struct UnresolvedDataUniqueItemSlot
 {
 	int owner_vehicle_id;
+	
+	float rect_blx;
+        float rect_bly;
+        int rect_w; 
+        int rect_h;         
 };
 
 
@@ -38,8 +43,6 @@ class ItemSlot : public Base
                                 
 		Turrel* GetTurrel()     const { return turrel; };
 		bool GetEquipedStatus() const { return is_EQUIPED; };
-
-		Points& GetPoints() { return points; };
 		
                 Rect& GetRect() { return rect; };
 		Vehicle* GetOwnerVehicle() const { return owner_vehicle; };
@@ -74,7 +77,7 @@ class ItemSlot : public Base
 		GoodsPack* GetGoodsPack() const { return (GoodsPack*)item; }
 		//Vehicle* GetVehicle()   const { return vehicle; }
 
-                void SetRect(int, int, int, int);
+                void SetRect(float, float, int, int);
                                 
 		bool InsertItem(BaseItem*);
             
@@ -95,6 +98,8 @@ class ItemSlot : public Base
            	void DrawRange();
            	
            	bool CheckTarget(BaseGameEntity*) const;
+           	
+           	void UpdateOwnerAbilities();
         
         	virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(boost::property_tree::ptree&);
@@ -104,8 +109,6 @@ class ItemSlot : public Base
                 bool is_EQUIPED;                       
                 
                 TextureOb* textureOb;
-                
-                Points points;
                 
                 Rect rect;
                                 

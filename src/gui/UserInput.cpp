@@ -50,8 +50,8 @@ void UserInput::Update(Player* player)
 
 void UserInput::GetSimpleInputs(Player* player)
 {
-   	player->GetCursor()->setLeftMouseButton(false);
-   	player->GetCursor()->setRightMouseButton(false);
+   	player->GetCursor()->SetLeftMouseButton(false);
+   	player->GetCursor()->SetRightMouseButton(false);
 
 	next_turn_ready = false;
 
@@ -274,13 +274,13 @@ void UserInput::GetSimpleInputs(Player* player)
 	                { 
 	           		case sf::Mouse::Left:
 	           		{              
-	              			player->GetCursor()->setLeftMouseButton(true);
+	              			player->GetCursor()->SetLeftMouseButton(true);
 	              			break;
 	              		} 
 	
 	           		case sf::Mouse::Right:
 	           		{
-	              			player->GetCursor()->setRightMouseButton(true);
+	              			player->GetCursor()->SetRightMouseButton(true);
 	              			break;
 	              		}
 	              	}

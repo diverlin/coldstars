@@ -70,11 +70,6 @@ void RocketEquipment::CountPrice()
     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-void RocketEquipment::UpdateOwnerAbilities()
-{      
-    	slot->GetOwnerVehicle()->UpdateFireAbility();
-}
-
 void RocketEquipment::AddUniqueInfo()
 {
     	info.addTitleStr("ROCKET");

@@ -28,17 +28,17 @@ class Cursor
         	Cursor(Player*);
         	~Cursor();
 		
-		void setLeftMouseButton(bool);
-		void setRightMouseButton(bool);
-				   	
-		ItemSlot* getSlot();
-		vec2f getMousePos() const;
-
-		bool getMouseLeftButton() const;
-		bool getMouseRightButton() const;
+		void SetLeftMouseButton(bool mouse_left_button) { this->mouse_left_button = mouse_left_button; };
+		void SetRightMouseButton(bool mouse_right_button) { this->mouse_right_button = mouse_right_button; };
+		
+		vec2f GetMousePos() const { return mouse_pos; };
+		bool GetMouseLeftButton() const { return mouse_left_button; };
+		bool GetMouseRightButton() const { return mouse_right_button; };
+			
+		ItemSlot* GetItemSlot() const { return slot; };
 								
-		void updateMousePos();		
-		void update();
+		void UpdateMousePos();		
+		void Update();
         	
         private:
         	ItemSlot* slot;

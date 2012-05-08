@@ -161,13 +161,6 @@ void GrappleEquipment::CountPrice()
     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-/* virtual */
-void GrappleEquipment::UpdateOwnerAbilities()
-{
-    	slot->GetOwnerVehicle()->UpdateGrabAbility();
-}
-
-
 void GrappleEquipment::AddUniqueInfo()
 {    	
 	info.addTitleStr("GRAPPLE");

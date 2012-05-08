@@ -57,12 +57,6 @@ void ScanerEquipment::CountPrice()
      	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-/* virtual */
-void ScanerEquipment::UpdateOwnerAbilities()
-{
-    	slot->GetOwnerVehicle()->UpdateScanAbility();
-}
-
 
 void ScanerEquipment::AddUniqueInfo()
 {

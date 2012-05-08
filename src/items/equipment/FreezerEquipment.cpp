@@ -55,12 +55,6 @@ void FreezerEquipment::CountPrice()
      	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-/* virtual */
-void FreezerEquipment::UpdateOwnerAbilities()
-{
-    	slot->GetOwnerVehicle()->UpdateFreezeAbility();
-}
-      
 void FreezerEquipment::AddUniqueInfo()
 {
     	info.addTitleStr("FREEZER");

@@ -29,9 +29,7 @@ class FreezerEquipment : public BaseEquipment
 
 		void SetFreezeOrig(int freeze_orig) { this->freeze_orig = freeze_orig; };
                 int GetFreeze() const { return freeze; };
-  
-      		virtual void UpdateOwnerAbilities();
-      		
+    		
       		void CountPrice();
       		virtual void UpdatePropetries();  
       		

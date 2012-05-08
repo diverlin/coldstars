@@ -63,7 +63,7 @@ void Player::BindNpc(Npc* npc)
 {
     	this->npc = npc;
     	npc->SetUpperControl(true);
-    	cursor->getSlot()->SetOwnerVehicle(npc->GetVehicle());
+    	//cursor->GetItemSlot()->SetOwnerVehicle(npc->GetVehicle());
 }
 
 void Player::ClearVisibleEntities()
@@ -514,11 +514,11 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
 {   
     	bool cursor_has_target = false;   
  
-    	int mxvp = cursor->getMousePos().x                       + screen->getBottomLeftGlobalCoord().x;
-    	int myvp = screen->getHeight() - cursor->getMousePos().y + screen->getBottomLeftGlobalCoord().y;
+    	int mxvp = cursor->GetMousePos().x                       + screen->getBottomLeftGlobalCoord().x;
+    	int myvp = screen->getHeight() - cursor->GetMousePos().y + screen->getBottomLeftGlobalCoord().y;
 
-    	bool mlb = cursor->getMouseLeftButton();
-    	bool mrb = cursor->getMouseRightButton();
+    	bool mlb = cursor->GetMouseLeftButton();
+    	bool mrb = cursor->GetMouseRightButton();
 
 	if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 	{
@@ -890,7 +890,7 @@ bool Player::IsObjectOnScreen(const Points& points) const
 
 void Player::SessionInSpace(GameTimer* TIMER)
 {
-	cursor->updateMousePos();
+	cursor->UpdateMousePos();
 
 	npc->GetStarSystem()->FindVisibleEntities_c(this);
 	Render(TIMER->getTurnEnded(), GetShowAllOrbit(), GetShowAllPath()); 

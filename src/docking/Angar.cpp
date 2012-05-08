@@ -79,12 +79,12 @@ bool Angar::Remove(Vehicle* vehicle)
 void Angar::MouseControl(Player* player)
 {
         //bool lmb = player->GetCursor()->getMouseLeftButton(); 
-        bool rmb = player->GetCursor()->getMouseRightButton(); 
+        bool rmb = player->GetCursor()->GetMouseRightButton(); 
 
         for (unsigned int i = 0; i < platform_vec.size(); i++)
         { 
-                float dist = distBetweenPoints(player->GetCursor()->getMousePos().x, 
-                                               player->GetScreen()->getHeight() - player->GetCursor()->getMousePos().y, 
+                float dist = distBetweenPoints(player->GetCursor()->GetMousePos().x, 
+                                               player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y, 
                                                platform_vec[i]->GetRect().GetCenter().x, 
                                                platform_vec[i]->GetRect().GetCenter().y);
         				
@@ -137,8 +137,8 @@ void Angar::RenderItemInfo(Player* player) const
 		if (platform_vec[i]->GetVehicle() != NULL)
                 {
 
-                	float dist = distBetweenPoints(player->GetCursor()->getMousePos().x, 
-                        	                       player->GetScreen()->getHeight() - player->GetCursor()->getMousePos().y, 
+                	float dist = distBetweenPoints(player->GetCursor()->GetMousePos().x, 
+                        	                       player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y, 
                                 	               platform_vec[i]->GetRect().GetCenter().x, 
                                         	       platform_vec[i]->GetRect().GetCenter().y);
         				

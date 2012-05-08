@@ -37,14 +37,14 @@ BaseItem::~BaseItem ()
 
 void BaseItem::Deterioration()
 {
-    	condition -= data_item.deterioration_rate;
-    	if (condition <= 0)
-    	{
-       		is_DAMAGED = true;
-       		if (slot->GetOwnerVehicle() != NULL) 
-       		{  
-           		UpdateOwnerAbilities();
-           	}
+	if (is_DAMAGED == false)
+	{
+	    	condition -= data_item.deterioration_rate;
+    		if (condition <= 0)
+    		{
+       			is_DAMAGED = true;
+       			slot->UpdateOwnerAbilities(); 
+       		}
     	}
 }
 
@@ -54,10 +54,7 @@ void BaseItem::Repair()
     	if (is_DAMAGED == true)
     	{
         	is_DAMAGED = false;
-        	if (slot->GetOwnerVehicle() != NULL)   
-        	{
-           		UpdateOwnerAbilities();
-           	}
+        	slot->UpdateOwnerAbilities();   
     	}
 }
 

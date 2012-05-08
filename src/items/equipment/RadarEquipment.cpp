@@ -55,13 +55,7 @@ void RadarEquipment::CountPrice()
 
     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
-
-/* virtual */
-void RadarEquipment::UpdateOwnerAbilities()
-{
-	slot->GetOwnerVehicle()->UpdateRadarAbility();
-}
-      
+ 
 void RadarEquipment::AddUniqueInfo()
 {
     	info.addTitleStr("RADAR");

@@ -34,6 +34,7 @@ struct KorpusData
 	unsigned int price;
 
 	bool draw_turrels;
+	float gui_scale;
 
         int slot_grapple_num;
         int slot_drive_num;
@@ -66,7 +67,7 @@ class Vehicle : public BaseGameEntity
                 void SetGuiTextureOb(TextureOb* textureOb) { texOb_korpus = textureOb; };
         	void SetGuiRect(Rect rect) { kontur_rect = rect; };
         	
-                void Add(ItemSlot*); 
+                void AddSlot(ItemSlot*, Rect); 
                 bool AddItemToOtsec(BaseItem*);
 
                 float GetVisionRadius() const { return propetries.radius; };

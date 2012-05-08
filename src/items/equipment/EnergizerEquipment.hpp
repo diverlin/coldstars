@@ -32,8 +32,6 @@ class EnergizerEquipment : public BaseEquipment
       		void SetEnergy(int energy) { this->energy  = energy; };
                                                       
       		int GetEnergy() const { return energy; };
-      		
-      		void virtual UpdateOwnerAbilities();
 
       		void CountPrice();
       		virtual void UpdatePropetries();

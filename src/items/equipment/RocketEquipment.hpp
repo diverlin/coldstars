@@ -54,8 +54,6 @@ class RocketEquipment : public BaseEquipment
 		int GetRadius() const { return radius; };
 		
       		void FireEvent();
-      		      
-      		void virtual UpdateOwnerAbilities();
       		
       	      	void CountPrice();
       		virtual void UpdatePropetries();

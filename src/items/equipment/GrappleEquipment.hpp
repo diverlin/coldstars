@@ -36,8 +36,6 @@ class GrappleEquipment : public BaseEquipment
 		int GetRadius()     const { return radius; };
 		int GetSpeed()      const { return speed; };
 		int GetMaxNumItem() const { return maxNumItem; };
-
-      		virtual void UpdateOwnerAbilities();
                 
                 void AddTarget(BaseGameEntity*);
                 void AddToRemoveQueue(BaseGameEntity*);
