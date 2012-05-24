@@ -27,16 +27,21 @@ class Shop : public Base
                 Shop(int id);
                 ~Shop();
                 
+                void SetOwnerKosmoport(Kosmoport* owner_kosmoport) { this->owner_kosmoport = owner_kosmoport; }
                 void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
-                                
+                
+                Kosmoport* GetOwnerKosmoport() { return owner_kosmoport; }
+                                                
                 void Update();
                 void Render(Player*) const;
                 
                 void SaveData(boost::property_tree::ptree&) const;		
-		void LoadData(boost::property_tree::ptree&);
+		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 		
         private:
+                Kosmoport* owner_kosmoport;
+                
                 TextureOb* textureOb_background;
                 
                 void RenderBackground(Player*) const;

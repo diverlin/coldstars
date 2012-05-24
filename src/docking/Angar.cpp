@@ -23,6 +23,7 @@ Angar::Angar(int id)
 	data_id.type_id = ENTITY::ANGAR_ID;
 	data_id.subtype_id = NONE_ID;
 		
+	owner_kosmoport = NULL;
         textureOb_background = NULL;
 }
 
@@ -42,7 +43,7 @@ int Angar::GetFreePlatformTotalNum() const
         return sum_free; 
 }
 
-bool Angar::Add(Vehicle* vehicle)
+bool Angar::AddVehicle(Vehicle* vehicle)
 {
         for (unsigned int i = 0; i < platform_vec.size(); i++)
         {
@@ -57,7 +58,7 @@ bool Angar::Add(Vehicle* vehicle)
 }
 
 
-bool Angar::Remove(Vehicle* vehicle)
+bool Angar::RemoveVehicle(Vehicle* vehicle)
 {
         for (unsigned int i = 0; i < platform_vec.size(); i++)
         {
@@ -177,7 +178,7 @@ void Angar::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniqueAngar(save_ptree, root);
 }
 
-void Angar::LoadData(boost::property_tree::ptree& load_ptree)
+void Angar::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
 	LoadDataUniqueAngar(load_ptree);

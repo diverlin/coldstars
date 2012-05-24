@@ -34,7 +34,7 @@ class AngarBuilder
         private:
                 Angar* angar;
                 
-		AngarBuilder() {};
+		AngarBuilder():angar(NULL) {};
 		AngarBuilder(const AngarBuilder&) = delete;
 		AngarBuilder& operator=(const AngarBuilder&) = delete;
 }; 

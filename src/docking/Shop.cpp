@@ -26,6 +26,7 @@ Shop::Shop(int id)
 	data_id.type_id = ENTITY::SHOP_ID;
 	data_id.subtype_id = ENTITY::SHOP_ID;
 		
+	owner_kosmoport = NULL;
         textureOb_background  = NULL;
 }
 
@@ -83,7 +84,7 @@ void Shop::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniqueShop(save_ptree, root);
 }
 
-void Shop::LoadData(boost::property_tree::ptree& load_ptree)
+void Shop::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
 	LoadDataUniqueShop(load_ptree);

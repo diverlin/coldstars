@@ -67,7 +67,7 @@ void BlackHole::SaveData(boost::property_tree::ptree&) const
 }
 
 /*virtual*/		
-void BlackHole::LoadData(boost::property_tree::ptree&)
+void BlackHole::LoadData(const boost::property_tree::ptree&)
 {
 
 }

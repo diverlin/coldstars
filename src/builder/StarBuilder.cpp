@@ -55,7 +55,7 @@ void StarBuilder::CreateNewInternals()
 	star->SetLifeData(data_life);
 	star->SetMesh(g_SPHERE_MESH);	
         	
-        star->PostCreateInit();
+        star->CalcCollisionrRadius();
  
 	star->CalcColor();
 }

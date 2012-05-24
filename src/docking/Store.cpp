@@ -24,13 +24,22 @@ Store::Store(int id)
 	data_id.type_id  = ENTITY::STORE_ID;
 	data_id.subtype_id  = NONE_ID;
 		
+	owner_kosmoport = NULL;
         textureOb_background = NULL; 
 }
 
 Store::~Store()
 {}
 
-bool Store::Add(BaseItem* item)
+void Store::AddSlot(ItemSlot* slot, const Rect& rect) 
+{ 
+	slot->SetOwnerStore(this);
+	slot->SetRect(rect.GetBottomLeft().x, rect.GetBottomLeft().y, rect.GetWidth(), rect.GetHeight()); 
+	        
+	slot_vec.push_back(slot); 
+};     
+		
+bool Store::AddItem(BaseItem* item)
 {
 	ItemSlot* empty_slot = GetEmptySlot();
 	if (empty_slot) 
@@ -104,12 +113,12 @@ void Store::ResolveDataUniqueStore()
 
 void Store::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	std::string root = "goverment." + int2str(GetId())+".";
+	std::string root = "store." + int2str(GetId())+".";
 	SaveDataUniqueBase(save_ptree, root);
 	SaveDataUniqueStore(save_ptree, root);
 }
 
-void Store::LoadData(boost::property_tree::ptree& load_ptree)
+void Store::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
 	LoadDataUniqueStore(load_ptree);

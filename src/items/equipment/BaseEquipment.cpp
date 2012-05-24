@@ -86,4 +86,6 @@ void BaseEquipment::LoadDataUniqueBaseEquipment(const boost::property_tree::ptre
 {}
 
 void BaseEquipment::ResolveDataUniqueBaseEquipment()
-{}
+{
+	UpdatePropetries();
+}

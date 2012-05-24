@@ -27,10 +27,13 @@ class Store : public Base
                 Store(int);                      
                 ~Store();
 
+                void SetOwnerKosmoport(Kosmoport* owner_kosmoport) { this->owner_kosmoport = owner_kosmoport; }
         	void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
 		
-		void Add(ItemSlot* slot) { slot_vec.push_back(slot); };                
-                bool Add(BaseItem*);
+		Kosmoport* GetOwnerKosmoport() { return owner_kosmoport; }
+		                
+		void AddSlot(ItemSlot* slot, const Rect& rect);                
+                bool AddItem(BaseItem*);
 
                 ItemSlot* GetEmptySlot();
                                      	
@@ -40,10 +43,12 @@ class Store : public Base
                 void Render() const;
                 
                 void SaveData(boost::property_tree::ptree&) const;		
-		void LoadData(boost::property_tree::ptree&);
+		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 		
         public:
+                Kosmoport* owner_kosmoport;
+                        
                 TextureOb* textureOb_background; 
               
                 std::vector<ItemSlot*> slot_vec;

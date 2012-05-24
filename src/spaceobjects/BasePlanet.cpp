@@ -18,19 +18,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 BasePlanet::BasePlanet()
-{}
+{
+	orbit = new Orbit();
+}
 
 /* virtual */
 BasePlanet::~BasePlanet()
 {
 	delete orbit;
-}
-
-void BasePlanet::PostCreateInit()
-{
-        this->CalcCollisionrRadius();           
-        
-        orbit = new Orbit();
 }
 
 void BasePlanet::CreateOrbit()
@@ -50,7 +45,20 @@ void BasePlanet::CalcCollisionrRadius()
 
 void BasePlanet::PostDeathUniqueEvent(bool)  /* virtual */
 {}		
-		 		
+	
+void BasePlanet::UpdatePosition()
+{
+	orbit->UpdatePosition();  
+	if (parent == NULL)
+	{
+		points.SetCenter(orbit->GetPosition());
+	}
+	else
+	{
+		points.SetCenter(parent->GetPoints().GetCenter() + orbit->GetPosition());
+	}
+}
+				 		
 void BasePlanet::Render_NEW(vec2f scroll_coords)
 {     	
      	glUseProgram(g_SHADERS.light);
@@ -96,8 +104,6 @@ void BasePlanet::Render_OLD()
 
 void BasePlanet::SaveDataUniqueBasePlanet(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-	save_ptree.put(root+"orbit.it", orbit->GetIt());
-	
 	save_ptree.put(root+"data.scale", data_planet.scale);
 	save_ptree.put(root+"data.orbit_center.x", data_planet.orbit_center.x);	
 	save_ptree.put(root+"data.orbit_center.y", data_planet.orbit_center.y);	
@@ -105,6 +111,8 @@ void BasePlanet::SaveDataUniqueBasePlanet(boost::property_tree::ptree& save_ptre
 	save_ptree.put(root+"data.radius_B", data_planet.radius_B);
 	save_ptree.put(root+"data.orbit_phi_inD", data_planet.orbit_phi_inD);		
 	save_ptree.put(root+"data.speed", data_planet.speed);
+
+	save_ptree.put(root+"unresolved.orbit_it", orbit->GetIt());
 }
 
 void BasePlanet::LoadDataUniqueBasePlanet(const boost::property_tree::ptree& load_ptree)
@@ -116,9 +124,14 @@ void BasePlanet::LoadDataUniqueBasePlanet(const boost::property_tree::ptree& loa
 	data_planet.radius_B = load_ptree.get<float>("data.radius_B");
 	data_planet.orbit_phi_inD = load_ptree.get<float>("data.orbit_phi_inD");		
 	data_planet.speed = load_ptree.get<float>("data.speed");
+
+	data_unresolved_BasePlanet.orbit_it = load_ptree.get<int>("unresolved.orbit_it");
 }
 
 void BasePlanet::ResolveDataUniqueBasePlanet()
-{}
+{
+	CalcCollisionrRadius();
+	//orbit->SetIt(data_unresolved_BasePlanet.orbit_it); // moved into planet/asteroid class
+}
 
 

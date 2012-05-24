@@ -47,7 +47,7 @@ void ScanerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 }
 
 /*virtual*/		
-void ScanerModule::LoadData(boost::property_tree::ptree& load_ptree)
+void ScanerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
@@ -79,7 +79,7 @@ void ScanerModule::ResolveDataUniqueScanerModule()
 
 ScanerModule* GetNewScanerModule()
 {
-    	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
+    	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MODULE_ID);   
          
     	int scan_add = getRandInt(MODULE::SCANER::SCAN_MIN, MODULE::SCANER::SCAN_MAX);
 

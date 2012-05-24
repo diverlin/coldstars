@@ -108,7 +108,7 @@ void Container::SaveData(boost::property_tree::ptree&) const
 }
 
 /*virtual*/		
-void Container::LoadData(boost::property_tree::ptree&)
+void Container::LoadData(const boost::property_tree::ptree&)
 {
 
 }

@@ -47,7 +47,7 @@ void FreezerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 }
 
 /*virtual*/		
-void FreezerModule::LoadData(boost::property_tree::ptree& load_ptree)
+void FreezerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
@@ -80,7 +80,7 @@ void FreezerModule::ResolveDataUniqueFreezerModule()
 
 FreezerModule* GetNewFreezerModule()
 {
-    	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
+    	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MODULE_ID);   
         int freeze_add = getRandInt(MODULE::FREEZER::FREEZE_MIN, MODULE::FREEZER::FREEZE_MAX);
 
         int id = g_ID_GENERATOR.getNextId();

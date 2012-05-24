@@ -27,11 +27,14 @@ class Angar : public Base
                 Angar(int id);
                 ~Angar();
                 
+                void SetOwnerKosmoport(Kosmoport* owner_kosmoport) { this->owner_kosmoport = owner_kosmoport; }
                 void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
-                void Add(Platform* platform) { platform_vec.push_back(platform); };
+                void AddPlatform(Platform* platform) { platform_vec.push_back(platform); };
                 
-                bool Add(Vehicle*);
-                bool Remove(Vehicle*);
+                Kosmoport* GetOwnerKosmoport() { return owner_kosmoport; }
+                
+                bool AddVehicle(Vehicle*);
+                bool RemoveVehicle(Vehicle*);
 
                 void MouseControl(Player*);
 
@@ -41,10 +44,11 @@ class Angar : public Base
                 int GetFreePlatformTotalNum() const;
                 
                 void SaveData(boost::property_tree::ptree&) const;		
-		void LoadData(boost::property_tree::ptree&);
+		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 		
         private:
+        	Kosmoport* owner_kosmoport;
                 TextureOb* textureOb_background;
                 
                 std::vector<Platform*> platform_vec;

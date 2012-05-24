@@ -55,7 +55,7 @@ void EnergizerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 }
 
 /*virtual*/		
-void EnergizerModule::LoadData(boost::property_tree::ptree& load_ptree)
+void EnergizerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
@@ -89,7 +89,7 @@ void EnergizerModule::ResolveDataUniqueEnergizerModule()
 
 EnergizerModule* GetNewEnergizerModule()
 {
-    	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
+    	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MODULE_ID);   
         	
      	int energy_max_add  = getRandInt(MODULE::ENERGIZER::ENERGY_MIN, MODULE::ENERGIZER::ENERGY_MAX);
      	int restoration_add = getRandInt(MODULE::ENERGIZER::RESTORATION_MIN, MODULE::ENERGIZER::RESTORATION_MAX);

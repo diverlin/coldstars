@@ -42,6 +42,8 @@ class GuiSpace;
 class GuiKosmoport;
 class GuiMap;
 
+class Kosmoport;
+
 #include <iostream>
 #include "src/common/myVector.hpp"
 #include "src/common/gameStruct.hpp"
@@ -108,7 +110,7 @@ class GuiMap;
 
 #include "src/spaceobjects/orbit.hpp" 
 #include "src/spaceobjects/BasePlanet.hpp" 
-#include "src/spaceobjects/asteroid.hpp"
+#include "src/spaceobjects/Asteroid.hpp"
 #include "src/spaceobjects/Mineral.hpp"
 #include "src/items/others/Bomb.hpp"
 #include "src/spaceobjects/Container.hpp"
@@ -191,6 +193,8 @@ class GuiMap;
 #include "src/builder/items/equipment/RadarEquipmentBuilder.hpp"
 #include "src/builder/items/equipment/RocketEquipmentBuilder.hpp"
 #include "src/builder/items/equipment/ScanerEquipmentBuilder.hpp"
+
+#include "src/builder/items/module/RadarModuleBuilder.hpp"
 ///
 
 #include "src/builder/BaseVehicleBuilder.hpp"
@@ -199,6 +203,7 @@ class GuiMap;
 #include "src/builder/VehicleBuilder.hpp"
 #include "src/builder/StarSystemBuilder.hpp"
 #include "src/builder/StarBuilder.hpp"
+#include "src/builder/AsteroidBuilder.hpp"
 #include "src/builder/PlanetBuilder.hpp"
 #include "src/builder/GalaxyBuilder.hpp"
 #include "src/builder/PlayerBuilder.hpp"
@@ -291,7 +296,7 @@ class GuiMap;
 
 #include "src/spaceobjects/orbit.cpp"
 #include "src/spaceobjects/BasePlanet.cpp"
-#include "src/spaceobjects/asteroid.cpp"   
+#include "src/spaceobjects/Asteroid.cpp"   
 #include "src/spaceobjects/Mineral.cpp" 
 #include "src/spaceobjects/SpaceStation.cpp" 
 #include "src/spaceobjects/satellite.cpp" 
@@ -351,6 +356,7 @@ class GuiMap;
 #include "src/builder/VehicleBuilder.cpp"
 #include "src/builder/StarSystemBuilder.cpp"
 #include "src/builder/StarBuilder.cpp"
+#include "src/builder/AsteroidBuilder.cpp"
 #include "src/builder/PlanetBuilder.cpp"
 #include "src/builder/GalaxyBuilder.cpp"
 #include "src/builder/PlayerBuilder.cpp"
@@ -445,4 +451,7 @@ class GuiMap;
 #include "src/builder/items/equipment/RadarEquipmentBuilder.cpp"
 #include "src/builder/items/equipment/RocketEquipmentBuilder.cpp"
 #include "src/builder/items/equipment/ScanerEquipmentBuilder.cpp"
+
+
+#include "src/builder/items/module/RadarModuleBuilder.cpp"
 ////////////////////////////////////////////

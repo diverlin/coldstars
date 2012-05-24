@@ -34,18 +34,18 @@ class RocketBullet : public Vehicle
 		void place(vec2f, float, float);
 
         
-        	int getDamage() const;
-        	int getOwnerShipId() const;
+		int GetDamage() const { return data_bullet.damage; };
+		int getOwnerShipId() const { return owner_ship_id; };
         
                 void update_inSpace(int, bool);
 
-		void collisionEvent(bool);
+		void CollisionEvent(bool);
 
              	void updateRenderStuff();
                 void render_inSpace() const;
                 
                 void SaveData(boost::property_tree::ptree&) const;
-    		void LoadData(boost::property_tree::ptree&);
+    		void LoadData(const boost::property_tree::ptree&);
     		void ResolveData();
     		
         private:

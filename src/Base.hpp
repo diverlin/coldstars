@@ -33,7 +33,7 @@ class Base
 		int GetSubTypeId() const { return data_id.subtype_id; }
 				
 		virtual void SaveData(boost::property_tree::ptree&) const = 0;
-		virtual void LoadData(boost::property_tree::ptree&) = 0;
+		virtual void LoadData(const boost::property_tree::ptree&) = 0;
 		virtual void ResolveData() = 0;
 		
 	protected:

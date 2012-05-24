@@ -120,7 +120,7 @@ void Ship::SaveData(boost::property_tree::ptree& save_ptree) const
 }
 
 /*virtual*/
-void Ship::LoadData(boost::property_tree::ptree& load_ptree)
+void Ship::LoadData(const boost::property_tree::ptree& load_ptree)
 {
         LoadDataUniqueBase(load_ptree);
 	LoadDataUniqueBaseGameEntity(load_ptree);

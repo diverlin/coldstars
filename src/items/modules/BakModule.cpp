@@ -47,7 +47,7 @@ void BakModule::SaveData(boost::property_tree::ptree& save_ptree) const
 }
 
 /*virtual*/		
-void BakModule::LoadData(boost::property_tree::ptree& load_ptree)
+void BakModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
         LoadDataUniqueBase(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
@@ -82,7 +82,7 @@ void BakModule::ResolveDataUniqueBakModule()
 
 BakModule* GetNewBakModule()
 {
-    	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module;           	
+    	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MODULE_ID);             	
     	int fuel_max_add = getRandInt(MODULE::BAK::FUEL_MIN, MODULE::BAK::FUEL_MAX);
         int id = g_ID_GENERATOR.getNextId();
         

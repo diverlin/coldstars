@@ -26,6 +26,8 @@ Goverment::Goverment(int id)
 	data_id.type_id = ENTITY::GOVERMENT_ID;
 	data_id.subtype_id = NONE_ID;
 			
+	owner_kosmoport = NULL;
+				
         textureOb_background   = NULL;
         textureOb_face         = NULL;   
 }
@@ -81,7 +83,7 @@ void Goverment::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniqueGoverment(save_ptree, root);
 }
 
-void Goverment::LoadData(boost::property_tree::ptree& load_ptree)
+void Goverment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
 	LoadDataUniqueGoverment(load_ptree);

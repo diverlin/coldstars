@@ -22,24 +22,31 @@
 //#include "planetBase.hpp"
 //#include "../common/myVector.hpp"
 
+struct UnresolvedDataUniquePlanet
+{
+	int land_id;
+};
+
+
 class Planet : public BasePlanet
 {
 	public:
 		Planet(int);
 		~Planet();
 
-		void SetLand(BaseLand* land)       { this->land = land; };
-		void SetPopulation(unsigned long int population) { this->population = population; };
-		int GetDockingRadius() const;
+		void SetLand(BaseLand* land)       			{ this->land = land; };
+		void SetPopulation(unsigned long int population) 	{ this->population = population; };
+		
+		int GetDockingRadius() const { return data_planet.scale; };
 		BaseLand* GetLand() const { return land; };
 
-		void Update_inSpace(int, bool);
-		void Update_inSpace_inStatic();
+		void UpdateInSpace(int, bool);
+		void UpdateInSpaceInStatic();
 
-		void renderInfo_inSpace(vec2f);
+		void RenderInfoInSpace(vec2f);
 
 		void SaveData(boost::property_tree::ptree&) const;		
-		void LoadData(boost::property_tree::ptree&);
+		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 		
 	private:
@@ -51,6 +58,8 @@ class Planet : public BasePlanet
 		void UpdateInfo();
 
 		void PostDeathUniqueEvent(bool);
+
+		UnresolvedDataUniquePlanet data_unresolved_Planet;
 
 		void SaveDataUniquePlanet(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniquePlanet(const boost::property_tree::ptree&);

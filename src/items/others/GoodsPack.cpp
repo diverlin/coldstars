@@ -81,7 +81,7 @@ void GoodsPack::SaveData(boost::property_tree::ptree&) const
 }
 
 /*virtual*/		
-void GoodsPack::LoadData(boost::property_tree::ptree&)
+void GoodsPack::LoadData(const boost::property_tree::ptree&)
 {
 
 }

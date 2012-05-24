@@ -26,24 +26,25 @@ class Asteroid : public BasePlanet
 		Asteroid(int);
 		~Asteroid();
 
-		int getDamage() const;
+		int GetDamage() const { return mass*10; };
 
-		void update_inSpace(int, bool);        	
-		void collisionEvent(bool);
+		void UpdateInSpace(int, bool);        	
+		void CollisionEvent(bool);
 
-		void renderInfo_inSpace(vec2f);
+		void RenderInfoInSpace(vec2f);
 
         	virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void LoadData(const boost::property_tree::ptree&);
 		virtual void ResolveData();
 		
 	private:      	
 		void PostDeathUniqueEvent(bool);
 
 		void UpdateInfo();
+		
+		void SaveDataUniqueAsteroid(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadDataUniqueAsteroid(const boost::property_tree::ptree&);
+		void ResolveDataUniqueAsteroid();
 }; 
-
-
-Asteroid* getNewAsteroid();
 
 #endif 

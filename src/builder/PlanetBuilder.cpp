@@ -70,13 +70,14 @@ void PlanetBuilder::CreateNewInternals(float orbit_radius)
         }
         	
 	planet->SetLand(land);
-
+	land->SetOwner(planet);
+	
 	planet->SetTextureOb(textureOb);
 	planet->SetSubTypeId(ENTITY::KOSMOPORT_ID);
 	planet->SetLifeData(data_life);
 	planet->SetMesh(g_SPHERE_MESH);	
 
-	planet->PostCreateInit();
+	planet->CalcCollisionrRadius();
 }
 
 

@@ -87,6 +87,7 @@ void drawRect(Rect rect, float z_pos) // the drawrect function was inverted by Y
 
 void drawTexturedRect(TextureOb* texOb, Rect rect, float z_pos)
 {
+	assert(texOb);
     	glBindTexture(GL_TEXTURE_2D, texOb->texture);
 	int frame = texOb->updateAnimationFrame();
 	

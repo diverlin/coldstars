@@ -18,7 +18,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 BaseLand::BaseLand()
-{}
+{
+	owner = NULL;
+}
 
 /* virtual */
 BaseLand::~BaseLand()
@@ -66,45 +68,58 @@ void BaseLand::SaveDataUniqueBaseLand(boost::property_tree::ptree& save_ptree, c
 	}
 }
 
-void BaseLand::LoadDataUniqueBaseLand(boost::property_tree::ptree& load_ptree)
+void BaseLand::LoadDataUniqueBaseLand(const boost::property_tree::ptree& load_ptree)
 {
-	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("unresolved.npc_vec"))
-	{
-		data_unresolved_BaseLand.npc_vec.push_back(v.second.get<int>("id"));
+	boost::property_tree::ptree _load_ptree = load_ptree;
+	if (load_ptree.get_child_optional("unresolved.npc_vec"))
+	{ 
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, _load_ptree.get_child("unresolved.npc_vec"))
+		{
+			data_unresolved_BaseLand.npc_vec.push_back(v.second.get<int>("id"));
+		}
 	}
-	
-	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("unresolved.vehicle_vec"))
-	{
-		data_unresolved_BaseLand.vehicle_vec.push_back(v.second.get<int>("id"));
+
+	if (load_ptree.get_child_optional("unresolved.vehicle_vec"))
+	{ 
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, _load_ptree.get_child("unresolved.vehicle_vec"))
+		{
+			data_unresolved_BaseLand.vehicle_vec.push_back(v.second.get<int>("id"));
+		}
 	}
-	
-	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("npc_docking_vec"))
-	{
-		data_unresolved_BaseLand.npc_vec.push_back(v.second.get<int>("id"));
+
+	if (load_ptree.get_child_optional("unresolved.npc_docking_vec"))
+	{ 	
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, _load_ptree.get_child("unresolved.npc_docking_vec"))
+		{
+			data_unresolved_BaseLand.npc_vec.push_back(v.second.get<int>("id"));
+		}
 	}
-	
-	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("npc_docking_vec"))
-	{
-		data_unresolved_BaseLand.npc_vec.push_back(v.second.get<int>("id"));
+
+	if (load_ptree.get_child_optional("unresolved.npc_docking_vec"))
+	{ 		
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, _load_ptree.get_child("unresolved.npc_docking_vec"))
+		{
+			data_unresolved_BaseLand.npc_vec.push_back(v.second.get<int>("id"));
+		}
 	}
 }
 
 void BaseLand::ResolveDataUniqueBaseLand()
 {
-	for (unsigned int i=0; i<data_unresolved_BaseLand.npc_vec.size(); i++)
-	{
-		NPC_vec.push_back((Npc*)EntityManager::Instance().GetEntityById(data_unresolved_BaseLand.npc_vec[i]));
-	}
-	for (unsigned int i=0; i<data_unresolved_BaseLand.vehicle_vec.size(); i++)
-	{
-		VEHICLE_vec.push_back((Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_BaseLand.vehicle_vec[i]));
-	}
-	for (unsigned int i=0; i<data_unresolved_BaseLand.npc_docking_vec.size(); i++)
-	{
-		NPC_docking_vec.push_back((Npc*)EntityManager::Instance().GetEntityById(data_unresolved_BaseLand.npc_docking_vec[i]));
-	}
-	for (unsigned int i=0; i<data_unresolved_BaseLand.npc_launching_vec.size(); i++)
-	{
-		NPC_launching_vec.push_back((Npc*)EntityManager::Instance().GetEntityById(data_unresolved_BaseLand.npc_launching_vec[i]));
-	}
+	//for (unsigned int i=0; i<data_unresolved_BaseLand.npc_vec.size(); i++)
+	//{
+		//NPC_vec.push_back((Npc*)EntityManager::Instance().GetEntityById(data_unresolved_BaseLand.npc_vec[i]));
+	//}
+	//for (unsigned int i=0; i<data_unresolved_BaseLand.vehicle_vec.size(); i++)
+	//{
+		//VEHICLE_vec.push_back((Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_BaseLand.vehicle_vec[i]));
+	//}
+	//for (unsigned int i=0; i<data_unresolved_BaseLand.npc_docking_vec.size(); i++)
+	//{
+		//NPC_docking_vec.push_back((Npc*)EntityManager::Instance().GetEntityById(data_unresolved_BaseLand.npc_docking_vec[i]));
+	//}
+	//for (unsigned int i=0; i<data_unresolved_BaseLand.npc_launching_vec.size(); i++)
+	//{
+		//NPC_launching_vec.push_back((Npc*)EntityManager::Instance().GetEntityById(data_unresolved_BaseLand.npc_launching_vec[i]));
+	//}
 }

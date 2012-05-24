@@ -67,7 +67,7 @@ class Vehicle : public BaseGameEntity
                 void SetGuiTextureOb(TextureOb* textureOb) { texOb_korpus = textureOb; };
         	void SetGuiRect(Rect rect) { kontur_rect = rect; };
         	
-                void AddSlot(ItemSlot*, Rect); 
+                void AddSlot(ItemSlot*, const Rect&); 
                 bool AddItemToOtsec(BaseItem*);
 
                 float GetVisionRadius() const { return propetries.radius; };

@@ -82,8 +82,8 @@ void StarSystemBuilder::CreateNewInternals2()
 
         this->CreateStar();
           
-        //int planet_num = getRandInt(ENTITY::STARSYSTEM::PLANET_MIN, ENTITY::STARSYSTEM::PLANET_MAX);
-        //this->CreatePlanets(planet_num);
+        int planet_num = 1;//getRandInt(ENTITY::STARSYSTEM::PLANET_MIN, ENTITY::STARSYSTEM::PLANET_MAX);
+        this->CreatePlanets(planet_num);
 }
 
 void StarSystemBuilder::CreateBackground(int distNebula_num, int distStar_num, int color_id)
@@ -129,10 +129,10 @@ void StarSystemBuilder::CreatePlanets(int planet_per_system)
 
                 starsystem->Add(planet, starsystem->GetStar());
                 
-                Satellite* satellite = VehicleBuilder::Instance().GetNewSatellite();
-                VehicleBuilder::Instance().Equip(satellite);           		// improove
+                //Satellite* satellite = VehicleBuilder::Instance().GetNewSatellite();
+                //VehicleBuilder::Instance().Equip(satellite);           		// improove
                         	
-                starsystem->Add((Vehicle*)satellite, vec2f(0, 0), 0, planet);
+                //starsystem->Add((Vehicle*)satellite, vec2f(0, 0), 0, planet);
         }
         
 }

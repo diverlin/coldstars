@@ -34,6 +34,8 @@ class BaseLand : public Base
                 BaseLand();
                 virtual ~BaseLand();
 
+		void SetOwner(Base* owner)  { this->owner = owner; } 
+		
 		virtual bool GetPermissionToLand() const = 0;
 		                
                 virtual bool Add(Vehicle*) = 0;
@@ -50,7 +52,9 @@ class BaseLand : public Base
                 void ManageLaunchingQueue();
 		  
         protected:
-                std::vector<Npc*>         NPC_vec;
+                Base* owner;
+                
+                std::vector<Npc*>     NPC_vec;
                 std::vector<Vehicle*> VEHICLE_vec;        
                 
                 std::vector<Npc*> NPC_launching_vec;
@@ -58,7 +62,7 @@ class BaseLand : public Base
                 
                 UnresolvedDataUniqueBaseLand data_unresolved_BaseLand;
                 void SaveDataUniqueBaseLand(boost::property_tree::ptree&, const std::string&) const;		
-		void LoadDataUniqueBaseLand(boost::property_tree::ptree&);
+		void LoadDataUniqueBaseLand(const boost::property_tree::ptree&);
 		void ResolveDataUniqueBaseLand();
 };
 

@@ -43,28 +43,13 @@ void AngarBuilder::CreateNewInternals()
 	int screen_h = Config::Instance().SCREEN_HEIGHT;	
 	
 	TextureOb* texOb_platform = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::LANDINGAREA_ID);
- 	/*
-	Platform* platform;
-	        
-	platform = new Platform(texOb_platform, screen_w/2,       screen_h/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR);
-        angar->Add(platform);
-        platform = new Platform(texOb_platform, screen_w/2 + 150, screen_h/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR);
-        angar->Add(platform);
-        platform = new Platform(texOb_platform, screen_w/2 - 150, screen_h/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR);
-        angar->Add(platform);
-        platform = new Platform(texOb_platform, screen_w/2,       screen_h/2 + 150, GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR);
-        angar->Add(platform);
-	platform = new Platform(texOb_platform, screen_w/2,       screen_h/2 - 150, GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR);
-	angar->Add(platform);
-	*/
-	
-        angar->Add(new Platform(texOb_platform, screen_w/2,       screen_h/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR));
-        angar->Add(new Platform(texOb_platform, screen_w/2 + 150, screen_h/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR));
-        angar->Add(new Platform(texOb_platform, screen_w/2 - 150, screen_h/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR));
-        angar->Add(new Platform(texOb_platform, screen_w/2,       screen_h/2 + 150, GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR));
-	angar->Add(new Platform(texOb_platform, screen_w/2,       screen_h/2 - 150, GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR));
-	
-	
+ 	
+        angar->AddPlatform(new Platform(texOb_platform, screen_w/2,       screen_h/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR));
+        angar->AddPlatform(new Platform(texOb_platform, screen_w/2 + 150, screen_h/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR));
+        angar->AddPlatform(new Platform(texOb_platform, screen_w/2 - 150, screen_h/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR));
+        angar->AddPlatform(new Platform(texOb_platform, screen_w/2,       screen_h/2 + 150, GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR));
+	angar->AddPlatform(new Platform(texOb_platform, screen_w/2,       screen_h/2 - 150, GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR));
+		
 	TextureOb* texOb_bg  = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ANGAR_BACKGROUND_ID); 
 	angar->SetTextureObBackground(texOb_bg);
 }

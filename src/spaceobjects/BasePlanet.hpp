@@ -24,6 +24,11 @@
 //#include "../common/gameStruct.hpp"
 //#include "orbit.hpp"
 
+struct UnresolvedDataBasePlanet
+{
+	int orbit_it;
+};
+
 
 class BasePlanet : public BaseGameEntity 
 {
@@ -34,9 +39,10 @@ class BasePlanet : public BaseGameEntity
 		void SetPlanetData(PlanetData data_planet) { this->data_planet = data_planet; };
 		Orbit* GetOrbit() const { return orbit; };
 
-		void PostCreateInit();
 		void CreateOrbit();
 
+		void CalcCollisionrRadius();
+		
 		void Render_NEW(vec2f);
 		void Render_OLD();
 				
@@ -44,12 +50,15 @@ class BasePlanet : public BaseGameEntity
 		PlanetData data_planet;   
 		Orbit* orbit;  		
 		
-		void CalcCollisionrRadius();
 		virtual void PostDeathUniqueEvent(bool);
-		
+		void UpdatePosition();
+				
+		UnresolvedDataBasePlanet data_unresolved_BasePlanet;
 		void SaveDataUniqueBasePlanet(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueBasePlanet(const boost::property_tree::ptree&);
 		void ResolveDataUniqueBasePlanet();
+		
+	friend class StarSystem;
 };
 
 #endif 

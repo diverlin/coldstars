@@ -156,5 +156,8 @@ void BaseGameEntity::ResolveDataUniqueBaseGameEntity()
 	mesh = g_DEFORMED_SPHERE_MESH; //data_unresolved_bge.mesh_path; 
 	textureOb = g_TEXTURE_MANAGER.GetTextureObByPath(data_unresolved_BaseGameEntity.textureOb_path);
 	
-	parent = (BaseGameEntity*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.parent_id);
+	if (data_unresolved_BaseGameEntity.parent_id != NONE_ID)
+	{
+		parent = (BaseGameEntity*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.parent_id);
+	}
 }

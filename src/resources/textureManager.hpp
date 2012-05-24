@@ -23,7 +23,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 struct UniqueTextureCollector
 {
-	TextureOb* texOb_module;
 	TextureOb* texOb_mark_enemy_ss;	
 	TextureOb* texOb_mark_player_ss;
 	
@@ -47,7 +46,7 @@ class TextureManager
         	TextureManager();
         	~TextureManager();
         	
-        	void manage(TextureOb*);
+        	void Add(TextureOb*);
 
         	TextureOb* getRandomFaceTexObWithFolloingAttributes(int _race_id);
         	TextureOb* getRandomShipTexObWithFollowingAtrributes(int _race_id, int _subtype_id, int _size_id);
@@ -153,6 +152,8 @@ class TextureManager
         	std::vector<TextureOb*> freezerEquipment_texOb_vec;
         	std::vector<TextureOb*> radarEquipment_texOb_vec;
         	std::vector<TextureOb*> scanerEquipment_texOb_vec;
+        	
+        	std::vector<TextureOb*> module_texOb_vec;        	
 
         	// FACE
         	std::vector<TextureOb*> face_race0_texOb_vec;

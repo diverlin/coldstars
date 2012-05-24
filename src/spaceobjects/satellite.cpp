@@ -134,7 +134,7 @@ void Satellite::SaveData(boost::property_tree::ptree& save_ptree) const
 }
 
 /*virtual*/
-void Satellite::LoadData(boost::property_tree::ptree& load_ptree)
+void Satellite::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 
 }
