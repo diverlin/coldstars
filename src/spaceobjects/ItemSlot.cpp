@@ -32,7 +32,9 @@ ItemSlot::ItemSlot(int id)
         is_EQUIPED = false;
 
         owner_vehicle = NULL; 
-        
+        owner_angar   = NULL; 
+        owner_store   = NULL; 
+                        
         turrel     = NULL;                
         item   	   = NULL;
         textureOb  = NULL;
@@ -69,7 +71,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
                         is_EQUIPED = true; 
                         item->SetSlot(this);
                 
-			this->UpdateOwnerAbilities();
+			UpdateOwnerAbilities();
 			return true;
 		}
 	}
@@ -313,7 +315,7 @@ void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree) const
 }
 
 /*virtual*/		
-void ItemSlot::LoadData(boost::property_tree::ptree& load_ptree)
+void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
 	LoadDataUniqueItemSlot(load_ptree);
@@ -335,6 +337,12 @@ void ItemSlot::SaveDataUniqueItemSlot(boost::property_tree::ptree& save_ptree, c
         
         if (owner_vehicle) save_ptree.put(root+"unresolved.owner_vehicle_id", owner_vehicle->GetId());
         else               save_ptree.put(root+"unresolved.owner_vehicle_id", NONE_ID);
+
+        if (owner_angar) save_ptree.put(root+"unresolved.owner_angar_id", owner_angar->GetId());
+        else             save_ptree.put(root+"unresolved.owner_angar_id", NONE_ID);
+        
+        if (owner_store) save_ptree.put(root+"unresolved.owner_store_id", owner_store->GetId());
+        else             save_ptree.put(root+"unresolved.owner_store_id", NONE_ID);
 }
 
 void ItemSlot::LoadDataUniqueItemSlot(const boost::property_tree::ptree& load_ptree)
@@ -345,13 +353,25 @@ void ItemSlot::LoadDataUniqueItemSlot(const boost::property_tree::ptree& load_pt
         unresolved_ItemSlot.rect_h   = load_ptree.get<int>("unresolved.rect.height"); 
      
         unresolved_ItemSlot.owner_vehicle_id = load_ptree.get<int>("unresolved.owner_vehicle_id"); 
+        unresolved_ItemSlot.owner_angar_id   = load_ptree.get<int>("unresolved.owner_angar_id"); 
+        unresolved_ItemSlot.owner_store_id   = load_ptree.get<int>("unresolved.owner_store_id"); 
 }
 
 void ItemSlot::ResolveDataUniqueItemSlot()
 {
+        Rect tmp_rect(unresolved_ItemSlot.rect_blx, unresolved_ItemSlot.rect_bly, unresolved_ItemSlot.rect_w, unresolved_ItemSlot.rect_h);
         if (unresolved_ItemSlot.owner_vehicle_id != NONE_ID)
+        {	std::cout<<"slot id ="<<data_id.id<<" added to vehicle!!!!"<<std::endl;
+                ((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.owner_vehicle_id))->AddSlot(this, tmp_rect);
+	}
+
+        if (unresolved_ItemSlot.owner_angar_id != NONE_ID)
         {
-        	Rect tmp_rect(unresolved_ItemSlot.rect_blx, unresolved_ItemSlot.rect_bly, unresolved_ItemSlot.rect_w, unresolved_ItemSlot.rect_h);
-                //((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.owner_vehicle_id))->AddSlot(this, tmp_rect);
+                //((Angar*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.owner_angar_id))->AddSlot(this, tmp_rect);
+	}
+	
+	if (unresolved_ItemSlot.owner_store_id != NONE_ID)
+        {     	std::cout<<"slot id ="<<data_id.id<<" added to store!!!!"<<std::endl;
+                ((Store*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.owner_store_id))->AddSlot(this, tmp_rect);
 	}
 }

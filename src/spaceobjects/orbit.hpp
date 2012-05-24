@@ -28,6 +28,8 @@ class Orbit
 		Orbit();
 		~Orbit();
 
+		void SetIt(int it) { this->it = it; };
+
 		int GetIt() const { return it; };
 		vec2f GetPosition() const { return coords_vec[it]; };
 		vec2f GetNextTurnPosition() const; 

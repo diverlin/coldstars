@@ -17,34 +17,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef BAKMODULE_H
-#define BAKMODULE_H
+#ifndef RADARMODULEBUILDER_H
+#define RADARMODULEBUILDER_H
 
 
-class BakModule : public BaseModule
+class RadarModuleBuilder
 {
-   	public:
-     		BakModule(int);
-      		virtual ~BakModule();
- 
- 		void SetFuelMaxAdd(int fuel_max_add) { this->fuel_max_add = fuel_max_add; };
- 		int GetFuelMaxAdd() const { return fuel_max_add; };
+	public:
+		static RadarModuleBuilder& Instance();
+		~RadarModuleBuilder();
 
-		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-     	private:
-      		int fuel_max_add;
-      		
-      		void virtual AddUniqueInfo();
+        	void CreateNewRadarModule(int id = NONE_ID); 
+                void CreateNewInternals();
+                RadarModule* GetRadarModule() const { return radar_module; };
+        	 		                
+        private:
+                RadarModule* radar_module;
+                
+		RadarModuleBuilder() {};
+		RadarModuleBuilder(const RadarModuleBuilder&) = delete;
+		RadarModuleBuilder& operator=(const RadarModuleBuilder&) = delete;
+}; 
 
-		void SaveDataUniqueBakModule(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueBakModule(const boost::property_tree::ptree&);
-		void ResolveDataUniqueBakModule();
-};
+#endif 
+    
 
-BakModule* GetNewBakModule();
+        
 
 
-#endif

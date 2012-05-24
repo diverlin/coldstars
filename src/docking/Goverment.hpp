@@ -27,17 +27,22 @@ class Goverment : public Base
                 Goverment(int);
                 ~Goverment();
                 
+                void SetOwnerKosmoport(Kosmoport* owner_kosmoport) { this->owner_kosmoport = owner_kosmoport; }
                 void SetTextureObFace(TextureOb* textureOb_face) { this->textureOb_face = textureOb_face; };
                 void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
                 
+                Kosmoport* GetOwnerKosmoport() { return owner_kosmoport; }
+                                
                 void Update();
                 void Render(Player*) const;
                 
                 void SaveData(boost::property_tree::ptree&) const;		
-		void LoadData(boost::property_tree::ptree&);
+		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 		
         private:
+                Kosmoport* owner_kosmoport;
+                	
                 TextureOb* textureOb_background;
                 TextureOb* textureOb_face;
                 

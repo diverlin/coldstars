@@ -25,7 +25,9 @@ struct UnresolvedDataUniqueItemSlot
 	UnresolvedDataUniqueItemSlot()
 	{
 		owner_vehicle_id = NONE_ID;
-	
+		owner_angar_id   = NONE_ID;
+		owner_store_id   = NONE_ID;
+			
 		rect_blx = 0.0;
         	rect_bly = 0.0;
         	rect_w = 0; 
@@ -33,6 +35,8 @@ struct UnresolvedDataUniqueItemSlot
 	};
 	
 	int owner_vehicle_id;
+	int owner_angar_id;
+	int owner_store_id;
 	
 	float rect_blx;
         float rect_bly;
@@ -49,7 +53,9 @@ class ItemSlot : public Base
                 
 		void SetTextureOb(TextureOb* textureOb)       	{ this->textureOb = textureOb; };
 		void SetOwnerVehicle(Vehicle* owner_vehicle) 	{ this->owner_vehicle = owner_vehicle; };
-                void SetTurrel(Turrel* turrel)                	{ this->turrel = turrel; };
+		void SetOwnerAngar(Angar* owner_angar) 		{ this->owner_angar = owner_angar; };
+		void SetOwnerStore(Store* owner_store) 	{ this->owner_store = owner_store; };
+		void SetTurrel(Turrel* turrel)                	{ this->turrel = turrel; };
                                 
 		Turrel* GetTurrel()     const { return turrel; };
 		bool GetEquipedStatus() const { return is_EQUIPED; };
@@ -112,7 +118,7 @@ class ItemSlot : public Base
            	void UpdateOwnerAbilities();
         
         	virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void LoadData(const boost::property_tree::ptree&);
 		virtual void ResolveData();
 		
         private:
@@ -123,6 +129,9 @@ class ItemSlot : public Base
                 Rect rect;
                                 
                 Vehicle* owner_vehicle;              
+                Angar*   owner_angar;
+                Store*   owner_store;
+                                
                 Turrel* turrel;          // only for weapons slot
                 
                 BaseItem*    item;

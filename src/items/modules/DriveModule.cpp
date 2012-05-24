@@ -57,7 +57,7 @@ void DriveModule::SaveData(boost::property_tree::ptree& save_ptree) const
 }
 
 /*virtual*/		
-void DriveModule::LoadData(boost::property_tree::ptree& load_ptree)
+void DriveModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
@@ -92,7 +92,7 @@ void DriveModule::ResolveDataUniqueDriveModule()
 
 DriveModule* GetNewDriveModule()
 {
-    	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
+    	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MODULE_ID);   
            	
     	int speed_add = getRandInt(MODULE::DRIVE::SPEED_MIN, MODULE::DRIVE::SPEED_MAX);
     	int hyper_add = getRandInt(MODULE::DRIVE::HYPER_MIN, MODULE::DRIVE::HYPER_MAX);

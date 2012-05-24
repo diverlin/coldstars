@@ -113,7 +113,7 @@ void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree) const
 }
 
 /*virtual*/
-void SpaceStation::LoadData(boost::property_tree::ptree& load_ptree)
+void SpaceStation::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 
 }

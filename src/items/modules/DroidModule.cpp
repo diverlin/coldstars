@@ -47,7 +47,7 @@ void DroidModule::SaveData(boost::property_tree::ptree& save_ptree) const
 }
 
 /*virtual*/		
-void DroidModule::LoadData(boost::property_tree::ptree& load_ptree)
+void DroidModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
@@ -79,7 +79,7 @@ void DroidModule::ResolveDataUniqueDroidModule()
 
 DroidModule* GetNewDroidModule()
 {
-    	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
+    	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MODULE_ID);    
          
     	int repair_add = getRandInt(MODULE::DROID::REPAIR_MIN, MODULE::DROID::REPAIR_MAX);
 

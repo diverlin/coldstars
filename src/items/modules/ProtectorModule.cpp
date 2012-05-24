@@ -47,7 +47,7 @@ void ProtectorModule::SaveData(boost::property_tree::ptree& save_ptree) const
 }
 
 /*virtual*/
-void ProtectorModule::LoadData(boost::property_tree::ptree& load_ptree)
+void ProtectorModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
@@ -79,7 +79,7 @@ void ProtectorModule::ResolveDataUniqueProtectorModule()
 
 ProtectorModule* GetNewProtectorModule()
 {
-    	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
+    	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MODULE_ID);   
         
     	int protection_add = getRandInt(MODULE::PROTECTOR::PROTECTION_MIN, MODULE::PROTECTOR::PROTECTION_MAX);
 

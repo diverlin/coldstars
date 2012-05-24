@@ -126,33 +126,40 @@ void StarSystem::Add(Npc* npc)
      	NPC_vec.push_back(npc);
 }
 
-void StarSystem::Add(Star* star)
-{
-        star->SetStarSystem(this);
-        star->SetPlaceTypeId(ENTITY::SPACE_ID);
-        STAR_vec.push_back(star);
-}
 
-void StarSystem::Add(Planet* planet, BaseGameEntity* parent)
+void StarSystem::Add(BasePlanet* object, BaseGameEntity* parent, int it)
 {
-	planet->CreateOrbit();
-        planet->SetParent(parent);
+	object->CreateOrbit();
+        object->SetParent(parent);
         
-        planet->SetStarSystem(this);
-        planet->SetPlaceTypeId(ENTITY::SPACE_ID);
-        PLANET_vec.push_back(planet);
+        object->SetStarSystem(this);
+        object->SetPlaceTypeId(ENTITY::SPACE_ID);
+        
+        object->GetOrbit()->SetIt(it);
+        object->UpdatePosition();
+        
+	switch(object->GetTypeId())
+	{
+		case ENTITY::STAR_ID:
+		{
+			STAR_vec.push_back((Star*)object);
+			break;
+		}
+		
+		case ENTITY::PLANET_ID:
+		{
+			PLANET_vec.push_back((Planet*)object);
+			break;
+		}
+		
+		case ENTITY::ASTEROID_ID:
+		{
+			ASTEROID_vec.push_back((Asteroid*)object);
+			break;
+		}
+	}
 }
                 
-void StarSystem::Add(Asteroid* asteroid)
-{   
-	asteroid->CreateOrbit();
-	asteroid->update_inSpace(1, true);
-	
-        asteroid->SetStarSystem(this);
-        asteroid->SetPlaceTypeId(ENTITY::SPACE_ID);
-        ASTEROID_vec.push_back(asteroid);
-}
-
 void StarSystem::Add(Container* container, vec2f pos)
 {
 	container->SetStarSystem(this);
@@ -585,7 +592,7 @@ void StarSystem :: updateEntities_s(int time, bool show_effect)
 	
         for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
         {
-                PLANET_vec[pi]->Update_inSpace(time, show_effect); 
+                PLANET_vec[pi]->UpdateInSpace(time, show_effect); 
     	}
     	
      	for (unsigned int i = 0; i < BLACKHOLE_vec.size(); i++)
@@ -600,7 +607,7 @@ void StarSystem :: updateEntities_s(int time, bool show_effect)
 	
         for (unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++) 
         {
-                ASTEROID_vec[ai]->update_inSpace(time, show_effect); 
+                ASTEROID_vec[ai]->UpdateInSpace(time, show_effect); 
     	}
     	
         for (unsigned int ni = 0; ni < NPC_vec.size(); ni++)
@@ -680,7 +687,7 @@ void StarSystem :: updateEntities_inStatic_s()
     	
      	for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
      	{
-         	PLANET_vec[pi]->Update_inSpace_inStatic();
+         	PLANET_vec[pi]->UpdateInSpaceInStatic();
      	}
 }      
 
@@ -777,8 +784,10 @@ void StarSystem :: asteroidManager_s(unsigned int num)
 {
         while (ASTEROID_vec.size() < num)
         {
-                Asteroid* asteroid = getNewAsteroid();
-                Add(asteroid);
+        	AsteroidBuilder::Instance().CreateNewAsteroid();
+        	AsteroidBuilder::Instance().CreateNewInternals();        	        	
+
+                Add(AsteroidBuilder::Instance().GetAsteroid());
                 break;
         }
 }
@@ -1008,7 +1017,7 @@ void StarSystem::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniqueStarSystem(save_ptree, root);
 }
 
-void StarSystem::LoadData(boost::property_tree::ptree& load_ptree)
+void StarSystem::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
 	LoadDataUniqueBaseGameEntity(load_ptree);
@@ -1027,8 +1036,8 @@ bool checkCollision(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
 {
 	if (collisionBetweenCenters(agressor->GetPoints(), victim->GetPoints(), victim->GetCollisionRadius()) == true)
         {
-        	victim->Hit(agressor->getDamage(), show_effect);
-                agressor->collisionEvent(show_effect);
+        	victim->Hit(agressor->GetDamage(), show_effect);
+                agressor->CollisionEvent(show_effect);
                 
                 return true;
         }

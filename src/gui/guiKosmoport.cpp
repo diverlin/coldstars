@@ -18,14 +18,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-GuiKosmoport :: GuiKosmoport(Player* player)
+GuiKosmoport::GuiKosmoport(Player* player)
 {
 	this->player = player;
 	
 	int screen_w = Config::Instance().SCREEN_WIDTH;
 	int screen_h = Config::Instance().SCREEN_HEIGHT;
 	
-        TextureOb* texOb_button = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; // fake
+        TextureOb* texOb_button = g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_green; // fake
 
     	angar_screen_button     = new Button(texOb_button, 
     					     GUI::SCREEN::ANGAR_ID,
@@ -103,15 +103,10 @@ GuiKosmoport :: GuiKosmoport(Player* player)
 }
 
 
-GuiKosmoport :: ~GuiKosmoport()
+GuiKosmoport::~GuiKosmoport()
 {}
-
-
-int GuiKosmoport :: getActiveScreenId() const { return active_screen_id; }
 	
-	
-
-void GuiKosmoport :: resetInfoFlags()
+void GuiKosmoport::ResetInfoFlags()
 {
     	for (unsigned int i = 0; i< button_common_pList.size(); i++)
 	{
@@ -125,7 +120,7 @@ void GuiKosmoport :: resetInfoFlags()
 }
        			
 		
-void GuiKosmoport :: mouseCheckInteraction()
+void GuiKosmoport::MouseCheckInteraction()
 {
      	int mxvp = player->GetCursor()->GetMousePos().x;
      	int myvp = player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y;         
@@ -174,8 +169,7 @@ void GuiKosmoport :: mouseCheckInteraction()
 
 }
 
-
-void GuiKosmoport :: renderInternal() const
+void GuiKosmoport::RenderInternal() const
 {
    
     	for (unsigned int i = 0; i< button_common_pList.size(); i++)
@@ -192,8 +186,7 @@ void GuiKosmoport :: renderInternal() const
     	} 
 }
 
-
-void GuiKosmoport :: renderInfo() const
+void GuiKosmoport::RenderInfo() const
 {
 
 	for (unsigned int i = 0; i< button_common_pList.size(); i++)
@@ -220,19 +213,19 @@ void GuiKosmoport :: renderInfo() const
         
 }
 
-void GuiKosmoport :: update()
+void GuiKosmoport::Update()
 {
-        resetInfoFlags(); 
-        mouseCheckInteraction(); 
+        ResetInfoFlags(); 
+        MouseCheckInteraction(); 
 }
                 
                 
-void GuiKosmoport :: Render() const
+void GuiKosmoport::Render() const
 {
         resetRenderTransformation();
         
         enable_BLEND();   
-                renderInternal(); 
-                renderInfo();    
+                RenderInternal(); 
+                RenderInfo();    
         disable_BLEND(); 
 }

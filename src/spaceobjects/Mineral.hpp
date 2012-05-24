@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
         	//void RenderInfoInSpace(vec2f);
         	
         	//virtual void SaveData(boost::property_tree::ptree&) const;
-		//virtual void LoadData(boost::property_tree::ptree&);
+		//virtual void LoadData(const boost::property_tree::ptree&);
 		//virtual void ResolveData();
 		
         //private:

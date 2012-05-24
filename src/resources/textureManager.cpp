@@ -25,7 +25,7 @@ TextureManager :: TextureManager()
 TextureManager :: ~TextureManager()
 {}
 
-void TextureManager :: manage(TextureOb* texOb)
+void TextureManager::Add(TextureOb* texOb)
 {
 	textureOb_total_vec.push_back(texOb);
 
@@ -186,7 +186,9 @@ void TextureManager :: manage(TextureOb* texOb)
 		case TEXTURE::FREEZER_EQUIPMENT_ID:     { freezerEquipment_texOb_vec.push_back(texOb);     break; } 
 		case TEXTURE::RADAR_EQUIPMENT_ID:       { radarEquipment_texOb_vec.push_back(texOb);       break; } 
 		case TEXTURE::SCANER_EQUIPMENT_ID:      { scanerEquipment_texOb_vec.push_back(texOb);      break; } 
-		
+
+		case TEXTURE::MODULE_ID: { module_texOb_vec.push_back(texOb);      break; } 
+				
 		case TEXTURE::FACE_ID:
 		{
 			switch(texOb->race_id)
@@ -209,10 +211,12 @@ void TextureManager :: manage(TextureOb* texOb)
 
 TextureOb* TextureManager :: GetRandomTextureObFromList(std::vector<TextureOb*>* pTo_list)
 {  
-     if (pTo_list->size() > 1)
-         return (*pTo_list)[getRandInt(0, pTo_list->size() )];
-     else 
-         return (*pTo_list)[0];
+     	if (pTo_list->size() > 1)
+		return (*pTo_list)[getRandInt(0, pTo_list->size() )];
+     	else 
+        	return (*pTo_list)[0];
+	
+	assert(NULL);
 }
 
 TextureOb* TextureManager :: getShipTexObByClosestSizeFromList(std::vector<TextureOb*>* pTo_list, int _size_id)
@@ -444,7 +448,7 @@ TextureOb* TextureManager :: getTexObByColorId(int _type_id, int _color_id)
 }
 
                 
-TextureOb* TextureManager :: GetRandomTextureOb(int texture_type_id)
+TextureOb* TextureManager::GetRandomTextureOb(int texture_type_id)
 {
 	switch(texture_type_id)
 	{
@@ -473,7 +477,9 @@ TextureOb* TextureManager :: GetRandomTextureOb(int texture_type_id)
 		case TEXTURE::FREEZER_EQUIPMENT_ID:     { return GetRandomTextureObFromList(&freezerEquipment_texOb_vec);     break; }
 		case TEXTURE::SCANER_EQUIPMENT_ID:      { return GetRandomTextureObFromList(&scanerEquipment_texOb_vec);      break; }
 		case TEXTURE::GRAPPLE_EQUIPMENT_ID:     { return GetRandomTextureObFromList(&grappleEquipment_texOb_vec);     break; }
-																		
+
+		case TEXTURE::MODULE_ID: { return GetRandomTextureObFromList(&module_texOb_vec);     break; }
+																				
 		case TEXTURE::TURREL_ID:           { return GetRandomTextureObFromList(&turrel_texOb_vec);               break; }
 		case TEXTURE::LAZER_EFFECT_ID:     { return GetRandomTextureObFromList(&lazerEffect_texOb_vec);          break; }
 		case TEXTURE::LANDINGAREA_ID:      { return GetRandomTextureObFromList(&landingArea_texOb_vec);          break; }

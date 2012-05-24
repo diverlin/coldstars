@@ -49,9 +49,6 @@ void RocketBullet :: place(vec2f _start_pos, float _angle_inD, float offset)
 }
 
 
-int RocketBullet :: getDamage() const { return data_bullet.damage; }
-int RocketBullet :: getOwnerShipId() const { return owner_ship_id; }
-
 void RocketBullet :: update_inSpace(int time, bool show_effect)
 {
 	CheckDeath(show_effect);
@@ -105,7 +102,7 @@ bool RocketBullet :: CheckStarSystem() const
         return false;
 }  
 
-void RocketBullet :: collisionEvent(bool show_effect)
+void RocketBullet::CollisionEvent(bool show_effect)
 {
 	data_life.is_alive = false; 
 	data_life.dying_time = -1;
@@ -149,7 +146,7 @@ void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree) const
 }
 
 /*virtual*/
-void RocketBullet::LoadData(boost::property_tree::ptree& load_ptree)
+void RocketBullet::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 
 }

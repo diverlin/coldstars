@@ -61,7 +61,7 @@ void RocketModule::SaveData(boost::property_tree::ptree& save_ptree) const
 }
 
 /*virtual*/		
-void RocketModule::LoadData(boost::property_tree::ptree& load_ptree)
+void RocketModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
@@ -99,7 +99,7 @@ void RocketModule::ResolveDataUniqueRocketModule()
 
 RocketModule* GetNewRocketModule()
 {
-    	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
+    	TextureOb* texOb =  g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MODULE_ID);   
         
     	int ammo_max_add = getRandInt(MODULE::ROCKET::AMMO_MIN, MODULE::ROCKET::AMMO_MAX);
     	int damage_add = getRandInt(MODULE::ROCKET::DAMAGE_MIN, MODULE::ROCKET::DAMAGE_MAX);

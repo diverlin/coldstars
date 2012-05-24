@@ -28,9 +28,9 @@ class GuiKosmoport
        		GuiKosmoport(Player*);
        		~GuiKosmoport();
 
-		int getActiveScreenId() const;
+		int GetActiveScreenId() const { return active_screen_id; };
 		
-       		void update();
+       		void Update();
                 void Render() const;
                 
        	private:
@@ -51,11 +51,11 @@ class GuiKosmoport
         	Button* fuel_button;  
         	Button* launch_button;       	
                 
-                void resetInfoFlags();
-       		void mouseCheckInteraction();
+                void ResetInfoFlags();
+       		void MouseCheckInteraction();
 
-       		void renderInternal() const;
-       		void renderInfo() const;
+       		void RenderInternal() const;
+       		void RenderInfo() const;
 };
 
 

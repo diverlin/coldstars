@@ -50,7 +50,7 @@ bool Kosmoport::Add(Vehicle* vehicle)
         vehicle->SetPlaceTypeId(data_id.type_id);
                 
         VEHICLE_vec.push_back(vehicle);
-        angar->Add(vehicle);
+        angar->AddVehicle(vehicle);
         
         return true;
 }
@@ -79,7 +79,7 @@ bool Kosmoport::Remove(Vehicle* vehicle)
                 }
         }
         
-        bool is_removed_from_landing_area = angar->Remove(vehicle); 
+        bool is_removed_from_landing_area = angar->RemoveVehicle(vehicle); 
     
         if (is_removed_from_list && is_removed_from_landing_area)
                 return true;
@@ -117,7 +117,7 @@ void Kosmoport::Ai()
 
 void Kosmoport::SaveDataUniqueKosmoport(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-	//save_ptree.put(root+"unresolved.angar_id",     angar->GetId());
+	save_ptree.put(root+"unresolved.angar_id",     angar->GetId());
 	save_ptree.put(root+"unresolved.store_id",     store->GetId());
         save_ptree.put(root+"unresolved.shop_id",      shop->GetId());
 	save_ptree.put(root+"unresolved.goverment_id", goverment->GetId());
@@ -133,10 +133,10 @@ void Kosmoport::LoadDataUniqueKosmoport(const boost::property_tree::ptree& load_
 
 void Kosmoport::ResolveDataUniqueKosmoport()
 {
-	angar     = (Angar*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.angar_id); 
-	store     = (Store*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.store_id); 
-	shop      = (Shop*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.shop_id); 
-	goverment = (Goverment*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.goverment_id); 
+	SetAngar( (Angar*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.angar_id) ); 
+	SetStore( (Store*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.store_id) ); 
+	SetShop( (Shop*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.shop_id) ); 
+	SetGoverment( (Goverment*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.goverment_id) ); 
 }
 
 
@@ -148,7 +148,7 @@ void Kosmoport::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniqueKosmoport(save_ptree, root);
 }
 
-void Kosmoport::LoadData(boost::property_tree::ptree& load_ptree)
+void Kosmoport::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
 	LoadDataUniqueBaseLand(load_ptree);

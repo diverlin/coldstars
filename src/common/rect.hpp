@@ -35,8 +35,8 @@ class Rect
       		void SetBottomLeft(vec2f);
       		void SetBottomLeft(float, float);
       		      		
-		vec2f GetCenter() const     { return center; }
-		vec2f GetBottomLeft() const { return bottomLeft; }
+		const vec2f& GetCenter() const     { return center; }
+		const vec2f& GetBottomLeft() const { return bottomLeft; }
 		int GetWidth() const 	    { return w; }
 		int GetHeight() const 	    { return h; }  
       

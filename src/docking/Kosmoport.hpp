@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 struct UnresolvedDataUniqueKosmoport
 {
-	int angar_id ;
+	int angar_id;
 	int store_id;
 	int shop_id;
 	int goverment_id;
@@ -36,15 +36,15 @@ class Kosmoport : public BaseLand
                 Kosmoport(int);
                 virtual ~Kosmoport();
 
-                void SetAngar(Angar* anagar) 		{ this->angar     = angar; };
-                void SetStore(Store* store) 		{ this->store     = store; };
-                void SetShop(Shop* shop)                { this->shop      = shop; };
-                void SetGoverment(Goverment* goverment) { this->goverment = goverment; }; 
+                void SetAngar(Angar* angar) 			{ this->angar     = angar; };
+                void SetStore(Store* store) 			{ this->store     = store; };
+                void SetShop(Shop* shop)                	{ this->shop      = shop; };
+                void SetGoverment(Goverment* goverment) 	{ this->goverment = goverment; }; 
 
-                Angar*     GetAngar()     const { return angar; };
-                Store*     GetStore()    const { return store; };
-                Shop*      GetShop()      const { return shop; };
-                Goverment* GetGoverment() const { return goverment; }; 
+                Angar*     	GetAngar()    	const { return angar; };
+                Store*    	GetStore()    	const { return store; };
+                Shop*      	GetShop()      	const { return shop; };
+                Goverment* 	GetGoverment() 	const { return goverment; }; 
                 
                 virtual bool GetPermissionToLand() const;
                                 
@@ -56,7 +56,7 @@ class Kosmoport : public BaseLand
                 virtual void Ai();
                 
                 void SaveData(boost::property_tree::ptree&) const;		
-		void LoadData(boost::property_tree::ptree&);
+		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 		
         private:

@@ -103,7 +103,7 @@ void NatureLand::SaveData(boost::property_tree::ptree& save_ptree) const
 }
 
 /*virtual*/
-void NatureLand::LoadData(boost::property_tree::ptree& load_ptree)
+void NatureLand::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 
 }

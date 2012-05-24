@@ -18,7 +18,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 Orbit::Orbit()
-{}
+{
+	it = 0;
+}
 
 Orbit::~Orbit()
 {}
@@ -52,7 +54,7 @@ void Orbit::CalcPath(float radius_A, float radius_B, float speed, float orbit_ph
          	coords_vec.push_back(new_coord);
      	}
         len = coords_vec.size();
-        it = getRandInt(1, len);
+        //it = getRandInt(1, len);
 }    
 
 void Orbit::CalcPath(float radius, float speed)
@@ -69,7 +71,7 @@ void Orbit::CalcPath(float radius, float speed)
          	coords_vec.push_back(new_coord);
      	}
         len = coords_vec.size();
-        it = getRandInt(1, len);
+        //it = getRandInt(1, len);
 }    
 
 void Orbit::UpdatePosition()

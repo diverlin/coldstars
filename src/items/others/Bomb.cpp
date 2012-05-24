@@ -60,7 +60,7 @@ void Bomb::SaveData(boost::property_tree::ptree&) const
 }
 
 /*virtual*/
-void Bomb::LoadData(boost::property_tree::ptree&)
+void Bomb::LoadData(const boost::property_tree::ptree&)
 {
 
 }

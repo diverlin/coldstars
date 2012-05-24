@@ -36,7 +36,7 @@ class Bomb : public BaseItem
 		virtual void UpdateOwnerAbilities();
         	
         	virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void LoadData(const boost::property_tree::ptree&);
 		virtual void ResolveData();
 		
         private:

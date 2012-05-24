@@ -18,7 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-Asteroid :: Asteroid(int id)
+Asteroid::Asteroid(int id)
 {   
 	data_id.id = id;
 	data_id.type_id = ENTITY::ASTEROID_ID;
@@ -27,31 +27,24 @@ Asteroid :: Asteroid(int id)
 }
     
  
-Asteroid :: ~Asteroid()
+Asteroid::~Asteroid()
 {}
-    
 
-int Asteroid :: getDamage() const { return mass*10; }
-		
-
-
-void Asteroid :: update_inSpace(int time, bool show_effect)
+void Asteroid::UpdateInSpace(int time, bool show_effect)
 {    
 	CheckDeath(show_effect);
 	UpdateRotation();
 	if (time > 0)
 	{	
-     		orbit->UpdatePosition();  
-     		points.SetCenter(orbit->GetPosition());
+     		UpdatePosition();
      	}     	
 }
 
-void Asteroid :: collisionEvent(bool show_effect)
+void Asteroid::CollisionEvent(bool show_effect)
 {
 	data_life.is_alive = false;
 	data_life.dying_time = -1;
 }
-
     
 void Asteroid::PostDeathUniqueEvent(bool show_effect)
 {
@@ -72,10 +65,7 @@ void Asteroid::PostDeathUniqueEvent(bool show_effect)
 }    
 
 
-
-
-
-void Asteroid :: UpdateInfo()
+void Asteroid::UpdateInfo()
 {   
 	info.clear();
 
@@ -86,62 +76,49 @@ void Asteroid :: UpdateInfo()
 	info.addNameStr("speed x 100:"); info.addValueStr(int2str(int(data_planet.speed*100)));
 }     
 
-
-void Asteroid :: renderInfo_inSpace(vec2f scroll_coords) 
+void Asteroid::RenderInfoInSpace(vec2f scroll_coords) 
 {  
 	UpdateInfo();
      	drawInfoIn2Column(&info.title_list, &info.value_list, points.GetCenter().x, points.GetCenter().y, scroll_coords.x, scroll_coords.y);
 }
 
-/*virtual*/
-void Asteroid::SaveData(boost::property_tree::ptree&) const
+void Asteroid::SaveDataUniqueAsteroid(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{}
+
+void Asteroid::LoadDataUniqueAsteroid(const boost::property_tree::ptree& ptree)
+{}
+
+void Asteroid::ResolveDataUniqueAsteroid()
 {
-
-}
-
-/*virtual*/		
-void Asteroid::LoadData(boost::property_tree::ptree&)
-{
-
+	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this, parent, data_unresolved_BasePlanet.orbit_it); 
 }
 	
-/*virtual*/	
+void Asteroid::SaveData(boost::property_tree::ptree& save_ptree) const		
+{
+	std::string root = "asteroid." + int2str(GetId())+".";
+	SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueBaseGameEntity(save_ptree, root);
+	SaveDataUniqueBasePlanet(save_ptree, root);
+	SaveDataUniqueAsteroid(save_ptree, root);
+}
+
+void Asteroid::LoadData(const boost::property_tree::ptree& load_ptree)
+{
+	LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueBaseGameEntity(load_ptree);
+	LoadDataUniqueBasePlanet(load_ptree);
+	LoadDataUniqueAsteroid(load_ptree);
+}
+
 void Asteroid::ResolveData()
 {
-
-}
+	ResolveDataUniqueBase();
+	ResolveDataUniqueBaseGameEntity();
+	ResolveDataUniqueBasePlanet();
+	ResolveDataUniqueAsteroid();
+}	
         
 
 
-Asteroid* getNewAsteroid()
-{
-	int id      = g_ID_GENERATOR.getNextId();
-        	
-	LifeData data_life;   
-	data_life.armor      = 10;
-      	data_life.dying_time = 50;
-      	
-    	PlanetData planet_data;
-	
-	planet_data.scale         = getRandInt(ENTITY::ASTEROID::SIZE_MIN_, ENTITY::ASTEROID::SIZE_MAX_);  
-    	planet_data.orbit_center  = vec2f(0, 0); 
-    	planet_data.radius_A      = getRandInt(300, 1200);
-    	planet_data.radius_B      = getRandInt(300, 1200); 
-    	planet_data.orbit_phi_inD = getRandInt(0, 360);
-    	planet_data.speed         = 0.1;
-
-        TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ASTEROID_ID); 
-    
-        Asteroid* asteroid = new Asteroid(id); 
-        
-        asteroid->SetPlanetData(planet_data);
-	asteroid->SetTextureOb(texOb);
-	asteroid->SetLifeData(data_life);
-	asteroid->SetMesh(g_DEFORMED_SPHERE_MESH);	
-       	
-        asteroid->PostCreateInit();
-        
-        return asteroid;        
-}
 
 

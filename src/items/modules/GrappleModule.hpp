@@ -38,7 +38,7 @@ class GrappleModule : public BaseModule
 		int GetMaxNumItemAdd() const { return maxNumItem_add; };
       		
       		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(boost::property_tree::ptree&);
+		virtual void LoadData(const boost::property_tree::ptree&);
 		virtual void ResolveData();
 		
       	private: 

@@ -66,11 +66,12 @@ Vehicle::~Vehicle()
 	delete protection_complex;
 } 
 
-void Vehicle::AddSlot(ItemSlot* slot, Rect rect) 
+void Vehicle::AddSlot(ItemSlot* slot, const Rect& rect) 
 { 
+	assert(slot);
         slot->SetOwnerVehicle(this); 
         slot->SetRect(rect.GetBottomLeft().x, rect.GetBottomLeft().y, rect.GetWidth(), rect.GetHeight());        
-        
+                
 	switch(slot->GetSubTypeId())
 	{
                 case SLOT::WEAPON_ID:    
@@ -562,20 +563,26 @@ void Vehicle::RenderShield() const
 
 void Vehicle::RenderRadarRange()
 {
-	glPushMatrix();
-		glTranslatef(points.GetCenter().x, points.GetCenter().y, 0.0f);
-		radar_slot->UpdateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_yellow);
-             	radar_slot->DrawRange();
-	glPopMatrix();
+	if (ableTo.RADAR)
+	{
+		glPushMatrix();
+			glTranslatef(points.GetCenter().x, points.GetCenter().y, 0.0f);
+			radar_slot->UpdateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_yellow);
+             		radar_slot->DrawRange();
+		glPopMatrix();
+	}
 }
 
 void Vehicle::RenderGrappleRange()
 {
-	glPushMatrix();
-		glTranslatef(points.GetCenter().x, points.GetCenter().y, 0.0f);
-		grapple_slot->UpdateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue);
-             	grapple_slot->DrawRange();
-	glPopMatrix();
+	if (ableTo.GRAB)
+	{
+		glPushMatrix();
+			glTranslatef(points.GetCenter().x, points.GetCenter().y, 0.0f);
+			grapple_slot->UpdateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue);
+             		grapple_slot->DrawRange();
+		glPopMatrix();
+	}
 }
 
 

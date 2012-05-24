@@ -84,7 +84,7 @@ void ScanerEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 }
 
 /*virtual*/
-void ScanerEquipment::LoadData(boost::property_tree::ptree& load_ptree)
+void ScanerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);

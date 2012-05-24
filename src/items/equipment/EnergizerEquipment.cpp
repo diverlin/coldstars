@@ -96,7 +96,7 @@ void EnergizerEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 }
 
 /*virtual*/
-void EnergizerEquipment::LoadData(boost::property_tree::ptree& load_ptree)
+void EnergizerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);

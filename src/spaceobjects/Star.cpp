@@ -122,7 +122,7 @@ void Star::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniqueStar(save_ptree, root);
 }
 
-void Star::LoadData(boost::property_tree::ptree& load_ptree)
+void Star::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
 	LoadDataUniqueBaseGameEntity(load_ptree);

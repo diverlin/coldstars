@@ -17,34 +17,32 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef BAKMODULE_H
-#define BAKMODULE_H
-
-
-class BakModule : public BaseModule
+RadarModuleBuilder& RadarModuleBuilder::Instance()
 {
-   	public:
-     		BakModule(int);
-      		virtual ~BakModule();
- 
- 		void SetFuelMaxAdd(int fuel_max_add) { this->fuel_max_add = fuel_max_add; };
- 		int GetFuelMaxAdd() const { return fuel_max_add; };
+	static RadarModuleBuilder instance;
+	return instance;
+}
 
-		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-     	private:
-      		int fuel_max_add;
-      		
-      		void virtual AddUniqueInfo();
+RadarModuleBuilder::~RadarModuleBuilder()
+{}
 
-		void SaveDataUniqueBakModule(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueBakModule(const boost::property_tree::ptree&);
-		void ResolveDataUniqueBakModule();
-};
+void RadarModuleBuilder::CreateNewRadarModule(int id)
+{
+	if (id == NONE_ID)
+	{
+		id = g_ID_GENERATOR.getNextId();
+	}
+        radar_module = new RadarModule(id);
+        EntityManager::Instance().RegisterEntity(radar_module);
+} 
+        	
+void RadarModuleBuilder::CreateNewInternals()
+{     
+    	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MODULE_ID);   
+    	int radius_add  = getRandInt(MODULE::RADAR::RADIUS_MIN, MODULE::RADAR::RADIUS_MAX);
+    
+        radar_module->SetTextureOb(texOb);
+        radar_module->SetRadiusAdd(radius_add);
+}
 
-BakModule* GetNewBakModule();
 
-
-#endif

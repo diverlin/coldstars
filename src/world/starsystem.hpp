@@ -67,9 +67,7 @@ class StarSystem : public BaseGameEntity
     		void Add(Npc*);
 		void Add(Vehicle*, vec2f, float, BaseGameEntity*);
 						
-		void Add(Star*);
-		void Add(Planet*, BaseGameEntity*);
-		void Add(Asteroid*);
+		void Add(BasePlanet*, BaseGameEntity* parent = NULL, int it = 0);
 		void Add(Container*, vec2f);
 		void Add(RocketBullet*);
 		void Add(BlackHole*, vec2f);
@@ -104,7 +102,7 @@ class StarSystem : public BaseGameEntity
                 void DrawPath();
                 
 		void SaveData(boost::property_tree::ptree&) const;
-		void LoadData(boost::property_tree::ptree&);
+		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 				                                           		    		    		
 		// poor

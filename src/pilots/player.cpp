@@ -634,7 +634,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
             		{   
                 		cursor_has_target = true;
 
-                		visible_ASTEROID_vec[ai]->renderInfo_inSpace(screen->getBottomLeftGlobalCoord()); 
+                		visible_ASTEROID_vec[ai]->RenderInfoInSpace(screen->getBottomLeftGlobalCoord()); 
                                 
                                 visible_ASTEROID_vec[ai]->GetOrbit()->Draw();
 
@@ -812,7 +812,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
             		{   
                 		cursor_has_target = true;
 
-                		visible_PLANET_vec[pi]->renderInfo_inSpace(screen->getBottomLeftGlobalCoord()); 
+                		visible_PLANET_vec[pi]->RenderInfoInSpace(screen->getBottomLeftGlobalCoord()); 
 
                                 visible_PLANET_vec[pi]->GetOrbit()->Draw();
           
@@ -923,54 +923,72 @@ void Player::SessionInSpace(GameTimer* TIMER)
 
 void Player::SessionInKosmoport()
 {
-        if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::ANGAR_ID)
+	cursor->UpdateMousePos();
+	
+	switch(GUI_KOSMOPORT->GetActiveScreenId())
         {
-        	((Kosmoport*)npc->GetLand())->GetAngar()->MouseControl(this);                                
-               	((Kosmoport*)npc->GetLand())->GetAngar()->Render(this);
-
-		if (npc->GetScanTarget() != NULL) 
-		{ 
-			GUI_MANAGER->updateInScan(false);
-			GUI_MANAGER->renderInScan(); 
-		}
-		else
-		{
-			((Kosmoport*)npc->GetLand())->GetAngar()->RenderItemInfo(this);
-		}
-	}
-
-        if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::STORE_ID)
-        {
-        	if (npc->GetScanTarget() != npc->GetVehicle())
+        	case GUI::SCREEN::ANGAR_ID:
         	{
-        		GetNpc()->SetScanTarget(npc->GetVehicle());
-        	}
+        		((Kosmoport*)npc->GetLand())->GetAngar()->MouseControl(this);                                
+               		((Kosmoport*)npc->GetLand())->GetAngar()->Render(this);
+
+			if (npc->GetScanTarget() != NULL) 
+			{ 
+				GUI_MANAGER->updateInScan(false);
+				GUI_MANAGER->renderInScan(); 
+			}
+			else
+			{
+				((Kosmoport*)npc->GetLand())->GetAngar()->RenderItemInfo(this);
+			}
+			
+			break;
+		}
+		
+		case GUI::SCREEN::STORE_ID:
+        	{
+        		//if (npc->GetScanTarget() != npc->GetVehicle())
+        		{
+        			GetNpc()->SetScanTarget(npc->GetVehicle());
+        		}
                                     
-        	GUI_MANAGER->updateInStore();
-                GUI_MANAGER->renderInStore(); 
+        		GUI_MANAGER->updateInStore();
+                	GUI_MANAGER->renderInStore(); 
+		
+			GetNpc()->ResetScanTarget();
+		
+			break;
+		}
+
+        	case GUI::SCREEN::SHOP_ID:
+        	{
+        		((Kosmoport*)npc->GetLand())->GetShop()->Update();
+                	((Kosmoport*)npc->GetLand())->GetShop()->Render(this);
+		
+			break;
+		}
+
+        	case GUI::SCREEN::GALAXYMAP_ID:
+        	{
+        		clearScreen();
+        		GUI_MAP->update();
+                	GUI_MAP->Render();   
+         	
+         		break;
+         	}
+
+         	case GUI::SCREEN::GOVERMENT_ID:
+         	{
+         		((Kosmoport*)npc->GetLand())->GetGoverment()->Update();
+                	((Kosmoport*)npc->GetLand())->GetGoverment()->Render(this);
+         	
+         		break;
+         	}
 	}
-
-        if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::SHOP_ID)
-        {
-        	((Kosmoport*)npc->GetLand())->GetShop()->Update();
-                ((Kosmoport*)npc->GetLand())->GetShop()->Render(this);
-	}
-
-        if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::GALAXYMAP_ID)
-        {
-        	GUI_MAP->update();
-        	clearScreen();
-                GUI_MAP->Render();   
-         }
-
-         if (GUI_KOSMOPORT->getActiveScreenId() == GUI::SCREEN::GOVERMENT_ID)
-         {
-         	((Kosmoport*)npc->GetLand())->GetGoverment()->Update();
-                ((Kosmoport*)npc->GetLand())->GetGoverment()->Render(this);
-         }
-
-         GUI_KOSMOPORT->update(); 
-         GUI_KOSMOPORT->Render(); 
+	
+        GUI_KOSMOPORT->Update(); 
+        GUI_KOSMOPORT->Render(); 
+         
 }
 
 void Player::RunSession(GameTimer* TIMER)
@@ -981,7 +999,6 @@ void Player::RunSession(GameTimer* TIMER)
        	{  
         	this->SessionInSpace(TIMER);
        	}
-
 		
        	if (npc->GetPlaceTypeId() == ENTITY::KOSMOPORT_ID)
        	{
@@ -1000,7 +1017,7 @@ void Player::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniquePlayer(save_ptree, root);	
 }		
 
-void Player::LoadData(boost::property_tree::ptree& load_ptree)
+void Player::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
 	LoadDataUniquePlayer(load_ptree);	   

@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 RadarModule::RadarModule(int id)
 {
-        data_id.id         = id;
+        data_id.id = id;
         data_id.subtype_id = SUBTYPE::RADAR_ID; 
         
      	radius_add = 0;
@@ -47,7 +47,7 @@ void RadarModule::SaveData(boost::property_tree::ptree& save_ptree) const
 }
 
 /*virtual*/		
-void RadarModule::LoadData(boost::property_tree::ptree& load_ptree)
+void RadarModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
@@ -77,18 +77,3 @@ void RadarModule::LoadDataUniqueRadarModule(const boost::property_tree::ptree& l
 void RadarModule::ResolveDataUniqueRadarModule()
 {}
 
-RadarModule* GetNewRadarModule()
-{
-    	TextureOb* texOb = g_UNIQUE_TEXTURE_COLLECTOR.texOb_module; 
-    	int radius_add  = getRandInt(MODULE::RADAR::RADIUS_MIN, MODULE::RADAR::RADIUS_MAX);
-    
-        int id = g_ID_GENERATOR.getNextId();
-        
-    	RadarModule* radar_module = new RadarModule(id);    
-        radar_module->SetTextureOb(texOb);
-        radar_module->SetRadiusAdd(radius_add);
-                
-        EntityManager::Instance().RegisterEntity(radar_module);
-                        
-    	return radar_module;
-}
