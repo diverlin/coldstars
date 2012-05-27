@@ -150,10 +150,7 @@ void Ship::ResolveDataUniqueShip()
         
         ShipBuilder::Instance().CreateProtectionComplex(this);
         ShipBuilder::Instance().CreateDriveComplex(this);
-        ShipBuilder::Instance().CreateWeaponsComplex(this);
-        
-        //ShipBuilder::Instance().CreateEquipmentSlots(this);
-        //ShipBuilder::Instance().Equip(this);
-                        
+        ShipBuilder::Instance().CreateWeaponsComplex(this);        
+                       
 	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this, data_unresolved_BaseGameEntity.center, data_unresolved_BaseGameEntity.angle, parent); 
 }

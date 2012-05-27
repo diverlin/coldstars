@@ -28,6 +28,7 @@ class Container : public BaseGameEntity
         	Container(int);
         	virtual ~Container();
         	
+        	void BindItemSlot(ItemSlot*);
         	ItemSlot* GetItemSlot() const { return item_slot; };
 
         	void RenderInfoInSpace(vec2f);
@@ -53,6 +54,10 @@ class Container : public BaseGameEntity
         	
         	float velocity;
         	bool keep_moving;
+        	
+        	void SaveDataUniqueContainer(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadDataUniqueContainer(const boost::property_tree::ptree&);
+		void ResolveDataUniqueContainer();
 };
 
 #endif 

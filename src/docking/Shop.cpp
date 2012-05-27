@@ -31,7 +31,9 @@ Shop::Shop(int id)
 }
 
 Shop::~Shop()
-{}                
+{
+	EntityManager::Instance().RemoveEntity(this);
+}                
 
 void Shop::RenderBackground(Player* player) const
 {

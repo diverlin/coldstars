@@ -17,33 +17,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef CONTAINERBUILDER_H
-#define CONTAINERBUILDER_H
+#ifndef GUIMANAGER_H
+#define GUIMANAGER_H
 
-
-class ContainerBuilder
+class GuiManager
 {
-	public:
-		static ContainerBuilder& Instance();
-		~ContainerBuilder();
+   	public:
+      		GuiManager(Player*);
+      		~GuiManager();
 
-        	void CreateNewContainer(int id = NONE_ID); 
-                void CreateNewInternals(TextureOb*, BaseItem*);
-                Container* GetContainer() const { return container; };
-        	 		                
-        private:
-                Container* container;
-                
-		ContainerBuilder() {};
-		ContainerBuilder(const ContainerBuilder&) = delete;
-		ContainerBuilder& operator=(const ContainerBuilder&) = delete;
-}; 
+		void UpdateInAngar();
+     		void UpdateInStore();
+     		void UpdateInSpace();
+     		
+     		void RenderInStore() const;
+     		void RenderInScan() const;  		
+
+      		
+      	private:
+      		Player* player;
+      		
+      		GuiVehicle* gui_vehicle;
+      		GuiSkill*   gui_skill;
+      		GuiStore*   gui_store;
+
+     		void UpdateInScan(bool allow_full_control = false);
+};
 
 
 
-#endif 
-    
-
-        
-
-
+#endif

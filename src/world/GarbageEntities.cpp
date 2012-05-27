@@ -24,36 +24,17 @@ GarbageEntities :: ~GarbageEntities()
 {}
          
          
-void GarbageEntities :: add(BaseGameEntity* entitiy) 
+void GarbageEntities::Add(BaseGameEntity* entitiy) 
 {
 	entities_vec.push_back(entitiy);
 }
 
-	
-void GarbageEntities :: clear()
+void GarbageEntities::Clear()
 {  
     	for(unsigned int i = 0; i < entities_vec.size(); i++)
     	{ 
 		delete entities_vec[i];
-		entities_vec[i] = NULL; 
-    	}
+	}
     	entities_vec.clear();
 }
 
-//void GarbageEntities :: clear()
-//{  
-    	//for(unsigned int i = 0; i < entities_vec.size(); i++)
-    	//{ 
-    		//switch(entities_vec[i]->GetTypeId())
-    		//{
-    			//case SHIP_ID:      { delete (Ship*)entities_vec[i]; break; }
-    			//case NPC_ID:       { delete (Npc*)entities_vec[i]; break; }
-    			//case ROCKET_BULLET_ID:    { delete (RocketBullet*)entities_vec[i]; break; }
-    			//case ASTEROID_ID:  { delete (Asteroid*)entities_vec[i]; break; }
-    			//case MINERAL_ID:   { delete (Mineral*)entities_vec[i]; break; }
-    			//case CONTAINER_ID: { delete (Container*)entities_vec[i]; break; }
-    		//}
-       		
-    	//}
-    	//entities_vec.clear();
-//}

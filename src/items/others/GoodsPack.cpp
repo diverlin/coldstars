@@ -21,36 +21,13 @@ GoodsPack::GoodsPack(int id)
         data_id.id         = id; 
         data_id.type_id    = ENTITY::GOODS_ID;
         data_id.subtype_id = NONE_ID;
-        
-        mineral  = 0;
-        food     = 0;
-        medicine = 0;
-        military = 0;
-        drug     = 0;
 }
 
 /* virtual */
 GoodsPack::~GoodsPack() 
 {}
 
-void GoodsPack::Increase(unsigned int _ammount)
-{
-	if (GetSubTypeId() == ENTITY::MINERAL_ID)
-	{
-		mineral += _ammount;
-		data_item.mass = mineral;
-	}
-}
-    
-void GoodsPack::Decrease(unsigned int _ammount)
-{
-	if (GetSubTypeId() == ENTITY::MINERAL_ID)
-	{
-		mineral -= _ammount;
-		data_item.mass = mineral;
-	}
-}
-                
+           
 /* virtual */
 void GoodsPack::UpdateOwnerAbilities() { /* do nothing*/ }
                     
@@ -60,41 +37,61 @@ void GoodsPack::AddUniqueInfo()
 {
     	info.addTitleStr("GOODS");
     	
-    	if (GetSubTypeId() == ENTITY::MINERAL_ID)
+    	switch(GetSubTypeId())
     	{
-    		info.addNameStr("mineral:");   info.addValueStr( int2str(mineral) );
-
+    		case ENTITY::MINERAL_ID: { info.addNameStr("mineral:"); info.addValueStr(int2str(data_item.mass)); break; }\
+		//case
     	}
 }
  	
 /* virtual */	
 void GoodsPack::AddCommonInfo()
 {
-    	info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
+    	//info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
 }
 
  
 /*virtual*/
-void GoodsPack::SaveData(boost::property_tree::ptree&) const
+void GoodsPack::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-
+	std::string root = "goods_pack." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
+	SaveDataUniqueGoodsPack(save_ptree, root);
 }
 
-/*virtual*/		
-void GoodsPack::LoadData(const boost::property_tree::ptree&)
+/*virtual*/
+void GoodsPack::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
+	LoadDataUniqueGoodsPack(load_ptree);
 }
 	
-/*virtual*/	
+/*virtual*/
 void GoodsPack::ResolveData()
 {
-
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
+	ResolveDataUniqueGoodsPack();
 }
 
-GoodsPack* GetNewGoodsPack(unsigned int subtype_id)
+void GoodsPack::SaveDataUniqueGoodsPack(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{}
+ 		
+void GoodsPack::LoadDataUniqueGoodsPack(const boost::property_tree::ptree& load_ptree)
+{}
+
+void GoodsPack::ResolveDataUniqueGoodsPack()
+{}
+
+
+GoodsPack* GetNewGoodsPack(int subtype_id, int id)
 {
-        int id = g_ID_GENERATOR.getNextId();   
+        if (id == NONE_ID)
+	{
+		id = g_ID_GENERATOR.getNextId();
+	}
         
 	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::CONTAINER_ID); 
 	
@@ -102,5 +99,7 @@ GoodsPack* GetNewGoodsPack(unsigned int subtype_id)
 	goodsPack->SetSubTypeId(subtype_id);
 	goodsPack->SetTextureOb(texOb);
 	
+	EntityManager::Instance().RegisterEntity(goodsPack);
+	        
 	return goodsPack;
 }

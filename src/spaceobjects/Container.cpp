@@ -26,7 +26,7 @@ Container::Container(int id)
 	
     	mass = 1;
 
-   	item_slot = GetNewItemSlot(SLOT::CARGO_ID);
+   	item_slot = NULL;
     	
     	velocity = getRandInt(40, 42) / 100.0;
 }
@@ -34,8 +34,17 @@ Container::Container(int id)
 /* virtual */   
 Container::~Container()
 {
+	EntityManager::Instance().RemoveEntity(this);
 	delete item_slot;
+	item_slot = NULL;
 }
+
+void Container::BindItemSlot(ItemSlot* item_slot) 
+{ 
+	this->item_slot = item_slot; 
+	item_slot->SetOwnerContainer(this); 
+}
+
 
 void Container::UpdateInfo()  
 {}        
@@ -99,22 +108,48 @@ void Container::Render2D()
 }
 
 
+void Container::SaveDataUniqueContainer(boost::property_tree::ptree& save_ptree, const std::string& root) const	
+{
+	save_ptree.put(root+"target_pos.x",   target_pos.x);
+	save_ptree.put(root+"target_pos.y",   target_pos.y);
 
+	save_ptree.put(root+"velocity",   velocity);
+}
+
+void Container::LoadDataUniqueContainer(const boost::property_tree::ptree& load_ptree)
+{
+	target_pos.x   = load_ptree.get<float>("target_pos.x");
+	target_pos.y   = load_ptree.get<float>("target_pos.y");
+	
+	velocity   = load_ptree.get<float>("velocity");
+}
+
+void Container::ResolveDataUniqueContainer()
+{
+	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this, vec2f(data_unresolved_BaseGameEntity.center.x, data_unresolved_BaseGameEntity.center.y)); 
+}		
 
 /*virtual*/
-void Container::SaveData(boost::property_tree::ptree&) const
+void Container::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-
+	const std::string root = "container." + int2str(GetId()) + ".";
+        SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueBaseGameEntity(save_ptree, root);
+	SaveDataUniqueContainer(save_ptree, root);
 }
 
 /*virtual*/		
-void Container::LoadData(const boost::property_tree::ptree&)
+void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-
+        LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueBaseGameEntity(load_ptree);
+	LoadDataUniqueContainer(load_ptree);
 }
 	
 /*virtual*/	
 void Container::ResolveData()
 {
-
+        ResolveDataUniqueBase();
+	ResolveDataUniqueBaseGameEntity();
+	ResolveDataUniqueContainer();
 }

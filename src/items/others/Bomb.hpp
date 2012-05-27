@@ -35,7 +35,7 @@ class Bomb : public BaseItem
         	
 		virtual void UpdateOwnerAbilities();
         	
-        	virtual void SaveData(boost::property_tree::ptree&) const;
+     	     	virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);
 		virtual void ResolveData();
 		
@@ -45,10 +45,11 @@ class Bomb : public BaseItem
         	
         	virtual void AddCommonInfo();
  		virtual void AddUniqueInfo(); 
+ 		
+ 		void SaveDataUniqueBomb(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueBomb(const boost::property_tree::ptree&);
+		void ResolveDataUniqueBomb();
 };
-
-Bomb* GetNewBomb();
-
 
 #endif 
 

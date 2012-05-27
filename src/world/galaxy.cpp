@@ -22,10 +22,19 @@ Galaxy::Galaxy(int id)
 {
 	data_id.id = id;
 	data_id.type_id =  ENTITY::GALAXY_ID;
+	data_id.subtype_id = NONE_ID;
 }
 
 Galaxy::~Galaxy()
-{}
+{
+	EntityManager::Instance().RemoveEntity(this);
+
+	for (unsigned int i = 0; i<STARSYSTEM_vec.size(); i++)
+	{	
+		delete STARSYSTEM_vec[i];
+	}
+	STARSYSTEM_vec.clear();
+}
 
 void Galaxy::Add(StarSystem* starsystem) 
 { 
