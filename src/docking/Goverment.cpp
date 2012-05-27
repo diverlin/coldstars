@@ -33,7 +33,9 @@ Goverment::Goverment(int id)
 }
 
 Goverment::~Goverment()
-{}
+{
+	EntityManager::Instance().RemoveEntity(this);
+}
 
 void Goverment::Update()
 {}

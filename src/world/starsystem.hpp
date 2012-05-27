@@ -137,15 +137,11 @@ class StarSystem : public BaseGameEntity
 
 		std::vector<Ship*> SHIP_vec;
 		std::vector<Npc*>  NPC_vec;
-	
-		
-    	    	// ENTITY VECTORS
-                std::vector<Vehicle*> appear_VEHICLE_queue;
-                
-    	    	std::vector<DistantNebulaBgEffect*> distantNebulaBgEffect_vec;
-    		std::vector<DistantStarBgEffect*>   distantStarBgEffect_vec;
     		   
     		// effects
+    	    	std::vector<DistantNebulaBgEffect*> distantNebulaBgEffect_vec;
+    		std::vector<DistantStarBgEffect*>   distantStarBgEffect_vec;
+    		
     		std::vector<LazerTraceEffect*>    effect_LAZERTRACE_vec;
     		std::vector<BaseParticleSystem*>  effect_PARTICLESYSTEM_vec;
     		std::vector<ShockWaveEffect*>     effect_SHOCKWAVE_vec;    		
@@ -157,7 +153,10 @@ class StarSystem : public BaseGameEntity
     		std::vector<SpaceStation*> remove_SPACESTATION_queue;
     		std::vector<Satellite*>    remove_SATELLITE_queue;    		
     		//    			    		    	  
-    		  	
+
+    	    	// ENTITY VECTORS
+                std::vector<Vehicle*> appear_VEHICLE_queue;
+                    		  	
     		GarbageEntities garbage_entities;
     		GarbageEffects  garbage_effects;
     		            

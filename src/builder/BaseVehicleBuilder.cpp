@@ -236,7 +236,9 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
     	
     	for (unsigned int i = 0; i < 3; i++) 
     	{        
-                vehicle->AddItemToOtsec(GetNewBomb());
+    	    	BombBuilder::Instance().CreateNewBomb();
+        	BombBuilder::Instance().CreateNewInternals();
+        	vehicle->AddItemToOtsec(BombBuilder::Instance().GetBomb());
     	}   
     	
     	vehicle->UpdateAllPropertiesAndAbilities(); 

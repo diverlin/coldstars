@@ -905,8 +905,8 @@ void Player::SessionInSpace(GameTimer* TIMER)
 	//////////// SCAN ///////////////
 	if (GetNpc()->GetScanTarget() != NULL )
 	{         
-		GUI_MANAGER->updateInScan(false);
-		GUI_MANAGER->renderInScan();                       
+		GUI_MANAGER->UpdateInSpace();
+		GUI_MANAGER->RenderInScan();                       
 	}
 
 	//////////// WORLDMAP ///////////
@@ -934,8 +934,8 @@ void Player::SessionInKosmoport()
 
 			if (npc->GetScanTarget() != NULL) 
 			{ 
-				GUI_MANAGER->updateInScan(false);
-				GUI_MANAGER->renderInScan(); 
+				GUI_MANAGER->UpdateInAngar();
+				GUI_MANAGER->RenderInScan(); 
 			}
 			else
 			{
@@ -952,8 +952,8 @@ void Player::SessionInKosmoport()
         			GetNpc()->SetScanTarget(npc->GetVehicle());
         		}
                                     
-        		GUI_MANAGER->updateInStore();
-                	GUI_MANAGER->renderInStore(); 
+        		GUI_MANAGER->UpdateInStore();
+                	GUI_MANAGER->RenderInStore(); 
 		
 			GetNpc()->ResetScanTarget();
 		

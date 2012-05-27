@@ -27,17 +27,8 @@ GuiVehicle :: ~GuiVehicle()
 {}
 
 
-
-void GuiVehicle :: update()
+void GuiVehicle::Update(Vehicle* vehicle, Store* store)
 {
-	Vehicle* vehicle = player->GetNpc()->GetScanTarget();
-
-	Store* store = NULL;
-	if (player->GetNpc()->GetPlaceTypeId() == ENTITY::KOSMOPORT_ID)
-	{
-		store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
-	}
-	
     	bool lmb = player->GetCursor()->GetMouseLeftButton();; 
     	//bool rmb = player->GetCursor()->GetMouseRightButton();; 
 
@@ -64,15 +55,14 @@ void GuiVehicle :: update()
                         
 
 	// GATE SLOT
-	if (vehicle->GetGateSlot()->CheckInteraction(player->GetCursor()->GetMousePos().x, (player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y)) == true)  
+	if ((player->GetCursor()->GetItemSlot()->GetEquipedStatus() == true) and (store == NULL))
 	{
-		//// DROP ITEM TO OUTERSPACE ////
-		if ( (lmb == true) and (store == NULL) )
+		if (vehicle->GetGateSlot()->CheckInteraction(player->GetCursor()->GetMousePos().x, (player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y)) == true)  
 		{
-			if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == true)
+			if (lmb == true)
 			{
-				player->GetCursor()->GetItemSlot()->DropItemToSpace();	
-			} 
+				player->GetCursor()->GetItemSlot()->DropItemToSpace(player->GetNpc()->GetVehicle());	
+			}
 		}
 	}
 }
@@ -80,7 +70,7 @@ void GuiVehicle :: update()
 
 
 
-void GuiVehicle :: Render() const
+void GuiVehicle::Render() const
 {
 	Vehicle* vehicle = player->GetNpc()->GetScanTarget();
 
@@ -95,7 +85,7 @@ void GuiVehicle :: Render() const
 }
 
 
-void GuiVehicle :: renderFocusedItemInfo() const
+void GuiVehicle::RenderFocusedItemInfo() const
 {
 	Vehicle* vehicle = player->GetNpc()->GetScanTarget();
 

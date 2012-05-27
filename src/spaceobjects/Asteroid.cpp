@@ -22,13 +22,16 @@ Asteroid::Asteroid(int id)
 {   
 	data_id.id = id;
 	data_id.type_id = ENTITY::ASTEROID_ID;
+	data_id.subtype_id = NONE_ID;
 	
       	mass  = getRandInt(10, 30);
 }
     
  
 Asteroid::~Asteroid()
-{}
+{
+	EntityManager::Instance().RemoveEntity(this);
+}
 
 void Asteroid::UpdateInSpace(int time, bool show_effect)
 {    
@@ -53,8 +56,9 @@ void Asteroid::PostDeathUniqueEvent(bool show_effect)
                 TextureOb* textureOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MINERAL_ID);   
                 GoodsPack* goods_pack = GetNewGoodsPack(ENTITY::MINERAL_ID);
                 goods_pack->Increase(4);
-		Container* container = GetNewContainer(textureOb, goods_pack);
-		starsystem->Add(container, points.GetCenter());
+                ContainerBuilder::Instance().CreateNewContainer();
+                ContainerBuilder::Instance().CreateNewInternals(textureOb, goods_pack);
+		starsystem->Add(ContainerBuilder::Instance().GetContainer(), points.GetCenter());
    	}
    	
    	if (show_effect == true)

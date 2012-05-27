@@ -17,30 +17,35 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef GUIMANAGER_H
-#define GUIMANAGER_H
-
-class GuiManager
+BombBuilder& BombBuilder::Instance()
 {
-   	public:
-      		GuiManager(Player*);
-      		~GuiManager();
+	static BombBuilder instance;
+	return instance;
+}
 
-     		void updateInStore();
-     		void updateInScan(bool);
-     		
-     		void renderInStore() const;
-     		void renderInScan() const;  		
+BombBuilder::~BombBuilder()
+{}
 
-      		
-      	private:
-      		Player* player;
-      		
-      		GuiVehicle* gui_vehicle;
-      		GuiSkill*   gui_skill;
-      		GuiStore*   gui_store;
-};
+void BombBuilder::CreateNewBomb(int id)
+{
+	if (id == NONE_ID)
+	{
+		id = g_ID_GENERATOR.getNextId();
+	}
+        bomb = new Bomb(id);
+        EntityManager::Instance().RegisterEntity(bomb);
+} 
+        	
+void BombBuilder::CreateNewInternals()
+{     
+	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::BOMB_ID); 
+	int damage = 300;
+        int radius = 300;
+        
+	bomb->SetTextureOb(texOb);
+	bomb->SetDamage(damage);
+	bomb->SetRadius(radius);
+	bomb->SetFunctionalSlotSubTypeId(SLOT::CARGO_ID);
+}
 
 
-
-#endif

@@ -28,7 +28,9 @@ Star::Star(int id)
 }
     
 Star::~Star()
-{}
+{
+	EntityManager::Instance().RemoveEntity(this);
+}
     
 void Star::CalcColor()
 {

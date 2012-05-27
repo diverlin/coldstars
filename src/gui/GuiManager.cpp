@@ -34,36 +34,45 @@ GuiManager :: ~GuiManager()
 	delete gui_store;
 }
 
+void GuiManager::UpdateInAngar()
+{
+	UpdateInScan();
+}
 
+void GuiManager::UpdateInSpace()
+{
+	UpdateInScan();
+}
 
-void GuiManager :: updateInStore()
+void GuiManager::UpdateInStore()
 {        	
 	gui_store->update();
-	gui_vehicle->update();
+	gui_vehicle->Update(player->GetNpc()->GetVehicle(), ((Kosmoport*)player->GetNpc()->GetLand())->GetStore());
 	
 	player->GetCursor()->Update();
 }
 
-void GuiManager :: updateInScan(bool allow_full_control)
+void GuiManager::UpdateInScan(bool allow_full_control)
 {
-        if ( (player->GetNpc()->GetVehicle() == player->GetNpc()->GetScanTarget()) and (allow_full_control == false) )
-    	{
-        	allow_full_control = true;  
-        }    	// modify full control for friend ships         
-        	
+	if (allow_full_control == false)
+	{
+        	if (player->GetNpc()->GetVehicle() == player->GetNpc()->GetScanTarget())
+    		{
+        		allow_full_control = true;  
+        	    	// modify full control for friend ships         
+        	}
+        }
                
 	if (allow_full_control == true)
 	{
-		gui_vehicle->update();
+		gui_vehicle->Update(player->GetNpc()->GetScanTarget());
 		gui_skill->update();
 	}
 	
 	player->GetCursor()->Update();
 }
 
-
-
-void GuiManager :: renderInStore() const
+void GuiManager::RenderInStore() const
 {
 	resetRenderTransformation();
 
@@ -79,14 +88,14 @@ void GuiManager :: renderInStore() const
 		gui_store->renderFocusedItemInfo();	
 		if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == false)
 		{
-			gui_vehicle->renderFocusedItemInfo();
+			gui_vehicle->RenderFocusedItemInfo();
 		}
 
 	disable_BLEND();
 }
 
 
-void GuiManager :: renderInScan() const
+void GuiManager::RenderInScan() const
 {
 	resetRenderTransformation();
 	enable_BLEND();
@@ -98,7 +107,7 @@ void GuiManager :: renderInScan() const
 	
 		if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == false)
 		{
-			gui_vehicle->renderFocusedItemInfo();
+			gui_vehicle->RenderFocusedItemInfo();
 		}
 	disable_BLEND();
 }

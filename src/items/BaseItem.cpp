@@ -28,12 +28,19 @@ ItemCommonData :: ItemCommonData()
 BaseItem::BaseItem()
 {
         slot = NULL;
+        
+        functional_slot_subtype_id = NONE_ID;
+        race_id = NONE_ID;
+        
+        condition = 0;
         price = 0;
 }
 
 /* virtual */
-BaseItem::~BaseItem ()
-{}
+BaseItem::~BaseItem()
+{
+	EntityManager::Instance().RemoveEntity(this);
+}
 
 void BaseItem::Deterioration()
 {
@@ -93,7 +100,8 @@ void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, c
 	if (textureOb) 	save_ptree.put(root+"unresolved.textureOb_path", textureOb->path);
 	else            save_ptree.put(root+"unresolved.textureOb_path", "none");
         
-        save_ptree.put(root+"unresolved.slot_id", slot->GetId());
+        if (slot) 	{ save_ptree.put(root+"unresolved.slot_id", slot->GetId()); }
+	else           	{ save_ptree.put(root+"unresolved.slot_id", NONE_ID); }
 }
 
 void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_ptree)
@@ -115,5 +123,6 @@ void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_pt
 void BaseItem::ResolveDataUniqueBaseItem()
 {
 	textureOb = g_TEXTURE_MANAGER.GetTextureObByPath(data_unresolved_BaseItem.textureOb_path);
-	((ItemSlot*)EntityManager::Instance().GetEntityById(data_unresolved_BaseItem.slot_id))->InsertItem(this);
+	if(data_unresolved_BaseItem.slot_id != NONE_ID)
+		((ItemSlot*)EntityManager::Instance().GetEntityById(data_unresolved_BaseItem.slot_id))->InsertItem(this);
 }

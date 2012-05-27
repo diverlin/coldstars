@@ -30,7 +30,9 @@ Planet::Planet(int id)
 
 Planet::~Planet()
 {
-	//delete land;
+	EntityManager::Instance().RemoveEntity(this);
+	
+	delete land;
 }
 
 void Planet::UpdateInSpace(int time, bool show_effect)

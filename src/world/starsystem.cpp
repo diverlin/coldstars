@@ -39,38 +39,33 @@ StarSystem::StarSystem(int id)
 
 StarSystem::~StarSystem()
 {       
-        for(unsigned int i=0; i<distantNebulaBgEffect_vec.size(); i++)
-        {
-                delete distantNebulaBgEffect_vec[i];
-        } 
-        
-        for(unsigned int i=0; i<distantStarBgEffect_vec.size(); i++)
-        {
-                delete distantStarBgEffect_vec[i];
-        } 
-    		   
-    	// effects
-        for(unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)
-        {
-                delete effect_LAZERTRACE_vec[i];
-        } 
-        
-        for(unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++)
-        {
-                delete effect_PARTICLESYSTEM_vec[i];
-        } 
-        
-        for(unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)
-        {
-                delete effect_SHOCKWAVE_vec[i];
-        } 
+	EntityManager::Instance().RemoveEntity(this);
+	
+	
+	//std::vector<Player*> 	   PLAYER_vec;
 
-        for(unsigned int i=0; i<text_DAMAGE_vec.size(); i++)
-        {
-                delete text_DAMAGE_vec[i];
-        } 
-}
-      
+	for(unsigned int i=0; i<STAR_vec.size(); i++) { delete STAR_vec[i]; } 
+	for(unsigned int i=0; i<PLANET_vec.size(); i++) { delete PLANET_vec[i]; } 
+
+	for(unsigned int i=0; i<ASTEROID_vec.size(); i++) { delete ASTEROID_vec[i]; } 
+	for(unsigned int i=0; i<CONTAINER_vec.size(); i++) { delete CONTAINER_vec[i]; } 
+
+	for(unsigned int i=0; i<ROCKET_vec.size(); i++) { delete ROCKET_vec[i]; } 
+	for(unsigned int i=0; i<BLACKHOLE_vec.size(); i++) { delete BLACKHOLE_vec[i]; } 
+
+	for(unsigned int i=0; i<SPACESTATION_vec.size(); i++) { delete SPACESTATION_vec[i]; } 
+	for(unsigned int i=0; i<SATELLITE_vec.size(); i++) { delete SATELLITE_vec[i]; } 
+	for(unsigned int i=0; i<SHIP_vec.size(); i++) { delete SHIP_vec[i]; } 
+	for(unsigned int i=0; i<NPC_vec.size(); i++) { delete NPC_vec[i]; } 
+	
+    	// effects	
+        for(unsigned int i=0; i<distantNebulaBgEffect_vec.size(); i++) { delete distantNebulaBgEffect_vec[i]; } 
+        for(unsigned int i=0; i<distantStarBgEffect_vec.size(); i++)   { delete distantStarBgEffect_vec[i];   } 
+        for(unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)     { delete effect_LAZERTRACE_vec[i]; } 
+        for(unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { delete effect_PARTICLESYSTEM_vec[i]; } 
+        for(unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)      { delete effect_SHOCKWAVE_vec[i]; } 
+        for(unsigned int i=0; i<text_DAMAGE_vec.size(); i++)           { delete text_DAMAGE_vec[i]; } 
+}      
 
 void StarSystem::Add(Vehicle* vehicle, vec2f center, float angle, BaseGameEntity* parent)
 {
@@ -426,7 +421,7 @@ void StarSystem::Update(int time, bool detalied_simulation)
     			calculation_per_turn_allowed = false;
     			calculation_per_turn_allowed_inDynamic = true;
 
-			garbage_entities.clear();
+			garbage_entities.Clear();
 			garbage_effects.clear(); 
     		}    		
 	}
@@ -820,7 +815,7 @@ void StarSystem :: manageDeadObjects_s()
             		SHIP_vec[ki]->GetOwnerNpc()->SetAlive(false);
                		SHIP_vec[ki]->GetOwnerNpc()->SetGarbageReady(true);
                
-            		garbage_entities.add(SHIP_vec[ki]);
+            		garbage_entities.Add(SHIP_vec[ki]);
             		SHIP_vec.erase(SHIP_vec.begin() + ki);
         	} 
     	}
@@ -828,7 +823,7 @@ void StarSystem :: manageDeadObjects_s()
     	{
 	        if (NPC_vec[ni]->GetGarbageReady() == true)
         	{   
-            		garbage_entities.add(NPC_vec[ni]);
+            		garbage_entities.Add(NPC_vec[ni]);
             		NPC_vec.erase(NPC_vec.begin() + ni);
             		
         	} 
@@ -861,7 +856,7 @@ void StarSystem :: manageDeadObjects_s()
     	{
         	if (ASTEROID_vec[i]->GetGarbageReady() == true)
         	{
-            		garbage_entities.add(ASTEROID_vec[i]);
+            		garbage_entities.Add(ASTEROID_vec[i]);
             		ASTEROID_vec.erase(ASTEROID_vec.begin() + i );
             	}
         }  
@@ -870,7 +865,7 @@ void StarSystem :: manageDeadObjects_s()
     	{
         	if ( (CONTAINER_vec[i]->GetGarbageReady() == true) or (CONTAINER_vec[i]->GetPlaceTypeId() == NONE_ID) )
         	{   
-            		garbage_entities.add(CONTAINER_vec[i]);
+            		garbage_entities.Add(CONTAINER_vec[i]);
             		CONTAINER_vec.erase(CONTAINER_vec.begin() + i );
         	}	 
     	}
@@ -879,7 +874,7 @@ void StarSystem :: manageDeadObjects_s()
     	{
         	if (ROCKET_vec[ri]->GetGarbageReady() == true)
         	{   
-            		garbage_entities.add(ROCKET_vec[ri]);
+            		garbage_entities.Add(ROCKET_vec[ri]);
             		ROCKET_vec.erase(ROCKET_vec.begin() + ri );
         	} 
     	}

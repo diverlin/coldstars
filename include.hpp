@@ -111,7 +111,6 @@ class Kosmoport;
 #include "src/spaceobjects/orbit.hpp" 
 #include "src/spaceobjects/BasePlanet.hpp" 
 #include "src/spaceobjects/Asteroid.hpp"
-#include "src/spaceobjects/Mineral.hpp"
 #include "src/items/others/Bomb.hpp"
 #include "src/spaceobjects/Container.hpp"
 #include "src/items/others/GoodsPack.hpp"
@@ -195,6 +194,8 @@ class Kosmoport;
 #include "src/builder/items/equipment/ScanerEquipmentBuilder.hpp"
 
 #include "src/builder/items/module/RadarModuleBuilder.hpp"
+
+#include "src/builder/items/other/BombBuilder.hpp"
 ///
 
 #include "src/builder/BaseVehicleBuilder.hpp"
@@ -243,14 +244,14 @@ class Kosmoport;
 
 #include "src/gui/button.hpp"
 #include "src/gui/guiSpace.hpp"
-#include "src/gui/guiKosmoport.hpp"
-#include "src/gui/guiVehicle.hpp"
+#include "src/gui/GuiKosmoport.hpp"
+#include "src/gui/GuiVehicle.hpp"
 #include "src/gui/guiSkill.hpp"
 #include "src/gui/guiStore.hpp"
-#include "src/gui/guiManager.hpp"
+#include "src/gui/GuiManager.hpp"
 
 #include "src/world/garbageEffects.hpp"  
-#include "src/world/garbageEntities.hpp"  
+#include "src/world/GarbageEntities.hpp"  
 #include "src/world/starsystem.hpp"    
 #include "src/effects/lazerTrace.hpp"
 
@@ -281,7 +282,7 @@ class Kosmoport;
 #include "src/common/myStr.cpp"
 #include "src/world/galaxy.cpp"
 #include "src/world/garbageEffects.cpp"  
-#include "src/world/garbageEntities.cpp"  
+#include "src/world/GarbageEntities.cpp"  
 #include "src/world/starsystem.cpp"  
 
 #include "src/spaceobjects/Container.cpp"    
@@ -297,7 +298,6 @@ class Kosmoport;
 #include "src/spaceobjects/orbit.cpp"
 #include "src/spaceobjects/BasePlanet.cpp"
 #include "src/spaceobjects/Asteroid.cpp"   
-#include "src/spaceobjects/Mineral.cpp" 
 #include "src/spaceobjects/SpaceStation.cpp" 
 #include "src/spaceobjects/satellite.cpp" 
 #include "src/items/others/Bomb.cpp" 
@@ -342,10 +342,10 @@ class Kosmoport;
 
 #include "src/gui/button.cpp"
 #include "src/gui/guiSpace.cpp"
-#include "src/gui/guiKosmoport.cpp"
+#include "src/gui/GuiKosmoport.cpp"
 #include "src/gui/guiStore.cpp"
-#include "src/gui/guiManager.cpp"
-#include "src/gui/guiVehicle.cpp"
+#include "src/gui/GuiManager.cpp"
+#include "src/gui/GuiVehicle.cpp"
 #include "src/builder/ContainerBuilder.cpp"
 #include "src/builder/BaseVehicleBuilder.cpp"
 #include "src/builder/ShipBuilder.cpp"
@@ -454,4 +454,6 @@ class Kosmoport;
 
 
 #include "src/builder/items/module/RadarModuleBuilder.cpp"
+
+#include "src/builder/items/other/BombBuilder.cpp"
 ////////////////////////////////////////////

@@ -28,7 +28,9 @@ Angar::Angar(int id)
 }
 
 Angar::~Angar()
-{}
+{
+	EntityManager::Instance().RemoveEntity(this);
+}
                 
 int Angar::GetFreePlatformTotalNum() const
 {

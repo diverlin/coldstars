@@ -51,7 +51,7 @@ class Store : public Base
                         
                 TextureOb* textureOb_background; 
               
-                std::vector<ItemSlot*> slot_vec;
+                std::vector<ItemSlot*> slot_total_vec;
                 
                 void SaveDataUniqueStore(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueStore(const boost::property_tree::ptree&);

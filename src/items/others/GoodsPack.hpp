@@ -28,8 +28,8 @@ class GoodsPack : public BaseItem
         	GoodsPack(int);
         	virtual ~GoodsPack();
         	
-        	void Increase(unsigned int);       
-                void Decrease(unsigned int);
+        	void Increase(unsigned int ammount) { data_item.mass += ammount; };       
+                void Decrease(unsigned int ammount) { data_item.mass -= ammount; }; 
 
                 virtual void UpdateOwnerAbilities();
         	
@@ -38,16 +38,15 @@ class GoodsPack : public BaseItem
 		virtual void ResolveData();
 		
         private:
-        	unsigned int mineral;
-        	unsigned int food;
-        	unsigned int medicine;
-        	unsigned int military;
-        	unsigned int drug;
-        	
         	virtual void AddCommonInfo();
  		virtual void AddUniqueInfo();   
+ 		
+ 		void SaveDataUniqueGoodsPack(boost::property_tree::ptree&, const std::string&) const;
+ 		void LoadDataUniqueGoodsPack(const boost::property_tree::ptree& load_ptree);
+ 		void ResolveDataUniqueGoodsPack();
+ 		
 };
 
-GoodsPack* GetNewGoodsPack(unsigned int);
+GoodsPack* GetNewGoodsPack(int, int id = NONE_ID);
 
 #endif 

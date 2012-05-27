@@ -27,9 +27,9 @@ class GarbageEntities
 		GarbageEntities();
 		~GarbageEntities();
 		
-		void add(BaseGameEntity*);
+		void Add(BaseGameEntity*);
 		
-		void clear();
+		void Clear();
 	
 	private:
 		std::vector<BaseGameEntity*> entities_vec;

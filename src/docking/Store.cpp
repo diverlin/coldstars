@@ -29,14 +29,22 @@ Store::Store(int id)
 }
 
 Store::~Store()
-{}
+{
+	EntityManager::Instance().RemoveEntity(this);
+			
+	for(unsigned int i=0; i<slot_total_vec.size(); i++)
+	{
+		delete slot_total_vec[i];
+	}
+	slot_total_vec.clear();
+}
 
 void Store::AddSlot(ItemSlot* slot, const Rect& rect) 
 { 
 	slot->SetOwnerStore(this);
 	slot->SetRect(rect.GetBottomLeft().x, rect.GetBottomLeft().y, rect.GetWidth(), rect.GetHeight()); 
 	        
-	slot_vec.push_back(slot); 
+	slot_total_vec.push_back(slot); 
 };     
 		
 bool Store::AddItem(BaseItem* item)
@@ -53,10 +61,12 @@ bool Store::AddItem(BaseItem* item)
 
 ItemSlot* Store::GetEmptySlot()
 {
-        for (unsigned int si = 0; si < slot_vec.size(); si++)
+        for (unsigned int i = 0; i < slot_total_vec.size(); i++)
         {
-                if (slot_vec[si]->GetEquipedStatus() == false)
-                        return slot_vec[si];
+                if (slot_total_vec[i]->GetEquipedStatus() == false)
+                {
+                        return slot_total_vec[i];
+        	}
         }
       
         return NULL;

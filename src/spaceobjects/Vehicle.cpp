@@ -61,9 +61,17 @@ Vehicle::Vehicle()
 /*virtual*/
 Vehicle::~Vehicle()
 {
-    	delete weapon_complex;
-    	delete drive_complex;
-	delete protection_complex;
+	EntityManager::Instance().RemoveEntity(this);
+	
+    	delete weapon_complex; weapon_complex = NULL;
+    	delete drive_complex;  drive_complex = NULL;
+	delete protection_complex; protection_complex = NULL;
+	
+	for(unsigned int i=0; i<slot_total_vec.size(); i++)
+	{
+		delete slot_total_vec[i];
+	}
+	slot_total_vec.clear();
 } 
 
 void Vehicle::AddSlot(ItemSlot* slot, const Rect& rect) 
@@ -618,7 +626,7 @@ void Vehicle::DropRandomItemToSpace()
 	{
 		unsigned int _rand = getRandInt(0, _equiped_slot_vec.size());
 	
-		_equiped_slot_vec[_rand]->DropItemToSpace();
+		_equiped_slot_vec[_rand]->DropItemToSpace(this);
 	}
 		
 }

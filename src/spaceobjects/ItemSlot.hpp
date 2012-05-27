@@ -25,6 +25,7 @@ struct UnresolvedDataUniqueItemSlot
 	UnresolvedDataUniqueItemSlot()
 	{
 		owner_vehicle_id = NONE_ID;
+		owner_container_id = NONE_ID;
 		owner_angar_id   = NONE_ID;
 		owner_store_id   = NONE_ID;
 			
@@ -35,6 +36,7 @@ struct UnresolvedDataUniqueItemSlot
 	};
 	
 	int owner_vehicle_id;
+	int owner_container_id;
 	int owner_angar_id;
 	int owner_store_id;
 	
@@ -53,8 +55,10 @@ class ItemSlot : public Base
                 
 		void SetTextureOb(TextureOb* textureOb)       	{ this->textureOb = textureOb; };
 		void SetOwnerVehicle(Vehicle* owner_vehicle) 	{ this->owner_vehicle = owner_vehicle; };
+		void SetOwnerContainer(Container* owner_container) { this->owner_container = owner_container; };
 		void SetOwnerAngar(Angar* owner_angar) 		{ this->owner_angar = owner_angar; };
 		void SetOwnerStore(Store* owner_store) 	{ this->owner_store = owner_store; };
+		
 		void SetTurrel(Turrel* turrel)                	{ this->turrel = turrel; };
                                 
 		Turrel* GetTurrel()     const { return turrel; };
@@ -106,8 +110,8 @@ class ItemSlot : public Base
                 
                 bool CheckInteraction(int, int);
                 
-                void DropItemToSpace();
-                
+                void DropItemToSpace(Vehicle*);
+                                                
                 bool SwapItemWith(ItemSlot*);
                 
                 void UpdateRange(TextureOb*);
@@ -128,7 +132,8 @@ class ItemSlot : public Base
                 
                 Rect rect;
                                 
-                Vehicle* owner_vehicle;              
+                Vehicle* owner_vehicle; 
+                Container* owner_container;
                 Angar*   owner_angar;
                 Store*   owner_store;
                                 

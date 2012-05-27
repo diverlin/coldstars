@@ -35,17 +35,17 @@ void GuiStore :: update()
         bool lmb = player->GetCursor()->GetMouseLeftButton();; 
         //bool rmb = player->GetCursor()->GetMouseRightButton();; 
 
-        for (unsigned int i = 0; i < store->slot_vec.size(); i++)
+        for (unsigned int i = 0; i < store->slot_total_vec.size(); i++)
         { 
-                if (store->slot_vec[i]->GetEquipedStatus() == true)
+                if (store->slot_total_vec[i]->GetEquipedStatus() == true)
                 {                                
-                	float dist = distBetweenPoints(store->slot_vec[i]->GetRect().GetCenter(), player->GetCursor()->GetMousePos().x, player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y);
+                	float dist = distBetweenPoints(store->slot_total_vec[i]->GetRect().GetCenter(), player->GetCursor()->GetMousePos().x, player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y);
                                                        				
-                	if (dist < store->slot_vec[i]->GetRect().GetWidth()/2)
+                	if (dist < store->slot_total_vec[i]->GetRect().GetWidth()/2)
                 	{
                         	if (lmb == true)
                         	{
-                        		store->SellItemFromSlot(player->GetNpc(), store->slot_vec[i]);
+                        		store->SellItemFromSlot(player->GetNpc(), store->slot_total_vec[i]);
                         	} 
                         	break;
                 	} 
@@ -58,9 +58,9 @@ void GuiStore :: Render() const
 {            
 	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
 	         
-        for (unsigned int i = 0; i < store->slot_vec.size(); i ++)
+        for (unsigned int i = 0; i < store->slot_total_vec.size(); i ++)
         {
-                store->slot_vec[i]->Render(-1);
+                store->slot_total_vec[i]->Render(-1);
         }
 }
 
@@ -68,13 +68,13 @@ void GuiStore :: Render() const
 void GuiStore :: renderFocusedItemInfo()
 {
 	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
-        for (unsigned int i = 0; i < store->slot_vec.size(); i++)
+        for (unsigned int i = 0; i < store->slot_total_vec.size(); i++)
         { 
-                float dist = distBetweenPoints(store->slot_vec[i]->GetRect().GetCenter(), player->GetCursor()->GetMousePos().x, player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y);
+                float dist = distBetweenPoints(store->slot_total_vec[i]->GetRect().GetCenter(), player->GetCursor()->GetMousePos().x, player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y);
                                                        				
-                if (dist < store->slot_vec[i]->GetRect().GetWidth()/2)
+                if (dist < store->slot_total_vec[i]->GetRect().GetWidth()/2)
                 {
-                        store->slot_vec[i]->RenderItemInfo();                    
+                        store->slot_total_vec[i]->RenderItemInfo();                    
                 } 
         }
 }

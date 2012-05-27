@@ -66,6 +66,7 @@ int main()
 		if (UserInput::Instance().GetLoadCommand())
 		{
 			int _player_id = player->GetId();
+			delete player->GetNpc()->GetStarSystem()->GetGalaxy();
 			EntityManager::Instance().LoadPass0();
 			EntityManager::Instance().LoadPass1();
 					

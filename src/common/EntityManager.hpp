@@ -34,9 +34,9 @@ class EntityManager
 		static EntityManager& Instance();
 
 		void RegisterEntity(Base*);
-		
+	
 		Base* GetEntityById(int) const;
-		
+
 		void RemoveEntity(Base*);
 		
 		void SaveEvent();
@@ -49,8 +49,6 @@ class EntityManager
 		EntityManager& operator=(const EntityManager&);
 
 		std::map<int, Base*> entity_map;
-						
-		void Clear();
 };
 
 

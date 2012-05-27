@@ -25,6 +25,8 @@ BaseLand::BaseLand()
 /* virtual */
 BaseLand::~BaseLand()
 {
+	EntityManager::Instance().RemoveEntity(this);
+	
 	//delete NPC_vec/VEHICLE_vec;
 }
 

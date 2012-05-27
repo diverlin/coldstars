@@ -28,16 +28,15 @@ EntityManager& EntityManager::Instance()
 	return instance;
 }
 
-void EntityManager::RegisterEntity(Base* new_entity)
+void EntityManager::RegisterEntity(Base* entity)
 {
-	entity_map.insert(std::make_pair(new_entity->GetId(), new_entity));
+	entity_map.insert(std::make_pair(entity->GetId(), entity));
 }
-
+	
 Base* EntityManager::GetEntityById(int id) const
 {
 	std::map<int, Base*>::const_iterator slice = entity_map.find(id);
 
-	//assert((slice != entity_map.end()) && "<EntityManager::getEntityById>: invalid Id");
 	assert(slice->second);
 	return slice->second;
 }
@@ -48,14 +47,6 @@ void EntityManager::RemoveEntity(Base* entity)
 	entity_map.erase(entity_map.find(entity->GetId()));
 } 
 
-void EntityManager::Clear()
-{
-	for (std::map<int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
-	{
-		delete iterator->second;
-	}
-	entity_map.clear();
-}
 		
 void EntityManager::SaveEvent()
 {
@@ -74,7 +65,7 @@ void EntityManager::LoadPass0()
 	//TODO: check each section presence
         std::cout<<std::endl<<"load started"<<std::endl;
         
-	this->Clear();
+	entity_map.clear();
 
 	boost::property_tree::ptree load_ptree;
 	SaveManager::Instance().LoadFile("save.info", load_ptree);
@@ -204,10 +195,21 @@ void EntityManager::LoadPass0()
 			slot->LoadData(v.second);
 		}
 	}
+	
+	if (load_ptree.get_child_optional("container"))
+	{
+		//std::cout<<"container loading...."<< std::endl;
+        	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("container"))
+		{
+			ContainerBuilder::Instance().CreateNewContainer(v.second.get<int>("data_id.id"));
+			ContainerBuilder::Instance().GetContainer()->LoadData(v.second);
+		}
+	}
         
         // equipment
 	if (load_ptree.get_child_optional("bak_equipment"))
 	{
+		//std::cout<<"bak_equipment loading...."<< std::endl;
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("bak_equipment"))
 		{
 			BakEquipmentBuilder::Instance().CreateNewBakEquipment(v.second.get<int>("data_id.id"));
@@ -326,6 +328,27 @@ void EntityManager::LoadPass0()
                 	radar_module->LoadData(v.second);
 		}
 	}
+	
+	// other
+	if (load_ptree.get_child_optional("bomb"))
+	{
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("bomb"))
+		{
+			BombBuilder::Instance().CreateNewBomb(v.second.get<int>("data_id.id"));
+			Bomb* bomb = BombBuilder::Instance().GetBomb();
+                	bomb->LoadData(v.second);
+		}
+	}
+
+	if (load_ptree.get_child_optional("goods_pack"))
+	{
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("goods_pack"))
+		{
+			GoodsPack* goods_pack = GetNewGoodsPack(v.second.get<int>("data_id.subtype_id"), v.second.get<int>("data_id.id"));
+                	goods_pack->LoadData(v.second);
+		}
+	}
+
 }
 
 void EntityManager::LoadPass1()

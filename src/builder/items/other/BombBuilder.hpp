@@ -17,24 +17,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef GUIVEHICLE_H
-#define GUIVEHICLE_H
+#ifndef BOMBBUILDER_H
+#define BOMBBUILDER_H
 
-class GuiVehicle
+
+class BombBuilder
 {
-   	public:
-      		GuiVehicle(Player*);
-      		~GuiVehicle();
+	public:
+		static BombBuilder& Instance();
+		~BombBuilder();
 
-     		void update();   
-     				
-      		void Render() const;
-		void renderFocusedItemInfo() const;
-      		
-      	private: 		
-      		Player* player;
-};
+        	void CreateNewBomb(int id = NONE_ID); 
+                void CreateNewInternals();
+                Bomb* GetBomb() const { return bomb; };
+        	 		                
+        private:
+                Bomb* bomb;
+                
+		BombBuilder() {};
+		BombBuilder(const BombBuilder&) = delete;
+		BombBuilder& operator=(const BombBuilder&) = delete;
+}; 
+
+#endif 
+    
+
+        
 
 
-
-#endif

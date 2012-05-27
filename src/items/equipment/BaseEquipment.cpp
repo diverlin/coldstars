@@ -31,10 +31,10 @@ BaseEquipment::BaseEquipment()
 
 BaseEquipment::~BaseEquipment()
 {
-	for (unsigned int i = 0; i < modules_vec.size(); i++)
-	{
-		delete modules_vec[i];
-	}
+	//for (unsigned int i = 0; i < modules_vec.size(); i++)
+	//{
+		//delete modules_vec[i];
+	//}
 }
 
 /* virtual */
@@ -51,10 +51,12 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 {
 	if (modules_vec.size() < data_item.modules_num_max)
     	{
+    		module->SetSlot(NULL);
 	       	modules_vec.push_back(module);
         	UpdatePropetries();
         	
         	slot->UpdateOwnerAbilities();
+
         	return true;
     	}
 
@@ -80,12 +82,30 @@ void BaseEquipment::Render(Rect slot_rect)
 
 
 void BaseEquipment::SaveDataUniqueBaseEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{}
+{
+	for (unsigned int i = 0; i < modules_vec.size(); i++)
+	{
+	        save_ptree.put(root+"unresolved.inserted_module."+int2str(modules_vec[i]->GetId())+".id", modules_vec[i]->GetId());
+	}
+}
 
 void BaseEquipment::LoadDataUniqueBaseEquipment(const boost::property_tree::ptree& load_ptree)
-{}
+{
+	boost::property_tree::ptree tmp_ptree = load_ptree;
+	if (tmp_ptree.get_child_optional("unresolved.inserted_module"))
+	{
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, tmp_ptree.get_child("unresolved.inserted_module"))
+		{
+			data_unresolved_BaseEquipment.modules_id.push_back(v.second.get<int>("id"));
+		}
+	}
+}
 
 void BaseEquipment::ResolveDataUniqueBaseEquipment()
 {
 	UpdatePropetries();
+	for (unsigned int i = 0; i<data_unresolved_BaseEquipment.modules_id.size(); i++)
+	{
+		InsertModule((BaseModule*)EntityManager::Instance().GetEntityById(data_unresolved_BaseEquipment.modules_id[i]));
+	}
 }

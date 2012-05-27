@@ -54,41 +54,43 @@ void Bomb::AddUniqueInfo()
 } 		
 
 /*virtual*/
-void Bomb::SaveData(boost::property_tree::ptree&) const
+void Bomb::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-
+	std::string root = "bomb." + int2str(GetId()) + ".";
+	SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueBaseItem(save_ptree, root);
+	SaveDataUniqueBomb(save_ptree, root);
 }
 
 /*virtual*/
-void Bomb::LoadData(const boost::property_tree::ptree&)
+void Bomb::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-
+	LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueBaseItem(load_ptree);
+	LoadDataUniqueBomb(load_ptree);
 }
 	
 /*virtual*/
 void Bomb::ResolveData()
 {
-
+	ResolveDataUniqueBase();
+        ResolveDataUniqueBaseItem();
+	ResolveDataUniqueBomb();
 }
 
-
-Bomb* GetNewBomb()
+void Bomb::SaveDataUniqueBomb(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-        int id = g_ID_GENERATOR.getNextId();
-        
-	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::BOMB_ID); 
-	int damage = 300;
-        int radius = 300;
-        
-	Bomb* bomb = new Bomb(id);
-	bomb->SetTextureOb(texOb);
-	bomb->SetDamage(damage);
-	bomb->SetRadius(radius);
-	bomb->SetFunctionalSlotSubTypeId(SLOT::CARGO_ID);
-	
-	return bomb;
+        save_ptree.put(root+"damage", damage);
+        save_ptree.put(root+"radius", radius);
+}
+ 		
+void Bomb::LoadDataUniqueBomb(const boost::property_tree::ptree& load_ptree)
+{
+        damage = load_ptree.get<int>("damage");
+        radius = load_ptree.get<int>("radius");
 }
 
-
+void Bomb::ResolveDataUniqueBomb()
+{}
 
 
