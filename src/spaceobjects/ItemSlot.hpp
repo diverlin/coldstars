@@ -20,47 +20,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef ITEMSLOT_H
 #define ITEMSLOT_H
 
-struct UnresolvedDataUniqueItemSlot
-{
-	UnresolvedDataUniqueItemSlot()
-	{
-		owner_type_id = NONE_ID;
-		owner_id = NONE_ID;
-			
-		rect_blx = 0.0;
-        	rect_bly = 0.0;
-        	rect_w = 0; 
-        	rect_h = 0;  
-	};
-	
-	int owner_type_id;
-	int owner_id;
-	
-	float rect_blx;
-        float rect_bly;
-        int rect_w; 
-        int rect_h;         
-};
 
-
-class ItemSlot : public Base
+class ItemSlot : public BaseSlot
 {   
 	public:        
 		ItemSlot(int id);
-		~ItemSlot();
-                
-		void SetTextureOb(TextureOb* textureOb)       	{ this->textureOb = textureOb; };
-		void SetOwner(Base* owner) { this->owner = owner; };
-		
+		~ItemSlot();                
+	
 		void SetTurrel(Turrel* turrel)                	{ this->turrel = turrel; };
                                 
-		Turrel* GetTurrel()     const { return turrel; };
-		bool GetEquipedStatus() const { return is_EQUIPED; };
+		Turrel* GetTurrel() const { return turrel; };
 		
-                Rect& GetRect() { return rect; };
-		Vehicle* GetOwnerVehicle() const { return (Vehicle*)owner; };
-
-		BaseItem* GetItem()                        const { return item; };                
+		BaseItem* GetItem()                         const { return item; };                
              	RocketEquipment*    GetRocketEquipment()    const { return (RocketEquipment*)item; }
  		LazerEquipment*     GetLazerEquipment()     const { return (LazerEquipment*)item; }
 		RadarEquipment*     GetRadarEquipment()     const { return (RadarEquipment*)item; }
@@ -88,7 +59,6 @@ class ItemSlot : public Base
 		Bomb* GetBomb()           const { return (Bomb*)item; }
 		//Artefact* GetArtefact() const { return artefact; }
 		GoodsPack* GetGoodsPack() const { return (GoodsPack*)item; }
-		//Vehicle* GetVehicle()   const { return vehicle; }
 
                 void SetRect(float, float, int, int);
                                 
@@ -100,8 +70,6 @@ class ItemSlot : public Base
        
 		void RenderEquipedItem();
 		void RenderItemInfo(float offset_x = 0, float offset_y = 0);
-                
-                bool CheckInteraction(int, int);
                 
                 void DropItemToSpace(Vehicle*);
                                                 
@@ -118,18 +86,10 @@ class ItemSlot : public Base
 		virtual void LoadData(const boost::property_tree::ptree&);
 		virtual void ResolveData();
 		
-        private:
-                bool is_EQUIPED;                       
-                
-                TextureOb* textureOb;
-                
-                Rect rect;
-                                
-                Base* owner; 
-                                
+        private:                               
                 Turrel* turrel;          // only for weapons slot
                 
-                BaseItem*    item;
+                BaseItem* item;
 
 		std::vector<vec2f> range_vec;
            	PathVisual range_visual;
@@ -139,7 +99,6 @@ class ItemSlot : public Base
                 bool CheckStarSystem(BaseGameEntity*) const;
            	bool CheckDistance(BaseGameEntity*) const;
                 
-                UnresolvedDataUniqueItemSlot unresolved_ItemSlot;
                 void SaveDataUniqueItemSlot(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueItemSlot(const boost::property_tree::ptree&);
 		void ResolveDataUniqueItemSlot();

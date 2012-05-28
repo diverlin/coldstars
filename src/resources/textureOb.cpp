@@ -58,7 +58,8 @@ TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, std::ve
 
 	switch(type_id)
 	{
-    		case TEXTURE::SLOT_ID:   { slotArgManager(pTo_arg);   break; }
+    		case TEXTURE::ITEMSLOT_ID:   { itemslotArgManager(pTo_arg);   break; }
+    		case TEXTURE::VEHICLESLOT_ID: { vehicleslotArgManager(pTo_arg);   break; }
     		case TEXTURE::TURREL_ID: { turrelArgManager(pTo_arg); break; }
 
     		case TEXTURE::NEBULA_BACKGROUND_ID: { nebulaArgManager(pTo_arg); break; }          
@@ -213,7 +214,10 @@ int TextureOb :: updateAnimationFrame()
 }
 
 
-void TextureOb :: slotArgManager(std::vector<int>* arg)
+void TextureOb :: itemslotArgManager(std::vector<int>* arg)
+{}
+
+void TextureOb :: vehicleslotArgManager(std::vector<int>* arg)
 {}
    
 void TextureOb :: turrelArgManager(std::vector<int>* arg)

@@ -65,13 +65,13 @@ void loadImages()
 {
 	std::vector<int> arg;   
 	arg.push_back(RACE::R0_ID);
-	g_TEXTURE_MANAGER.Add( new TextureOb(TEXTURE::SLOT_ID, "data/other/slot.png", true, &arg) );
+	g_TEXTURE_MANAGER.Add( new TextureOb(TEXTURE::ITEMSLOT_ID, "data/other/slot.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
 	arg.push_back(RACE::R0_ID);
-	g_TEXTURE_MANAGER.Add( new TextureOb(TEXTURE::LANDINGAREA_ID, "data/other/H.png", true, &arg, 3, 2, 3) );
+	g_TEXTURE_MANAGER.Add( new TextureOb(TEXTURE::VEHICLESLOT_ID, "data/other/H.png", true, &arg, 3, 2, 3) );
 }
 
 //####################################### TEXTURE::FACE_ID ################################

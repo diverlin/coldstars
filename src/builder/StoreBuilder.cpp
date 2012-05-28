@@ -40,7 +40,7 @@ void StoreBuilder::CreateNewStore(int id)
 void StoreBuilder::CreateNewInternals()
 {
 	// create slots
-	TextureOb* texOb_slot = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SLOT_ID);
+	TextureOb* texOb_slot = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ITEMSLOT_ID);
 	        
  	int row = 3;
         int clm = 10;

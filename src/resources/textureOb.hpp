@@ -81,7 +81,8 @@ class TextureOb
         	void createTextureCoords(int _rows_num, int _columns_num, int _fps);
              	void addTexCoordQuad(float _w_start, float _h_start, float _w_offset, float _h_offset);
              	        	
-        	void slotArgManager(std::vector<int>*);
+        	void itemslotArgManager(std::vector<int>*);
+        	void vehicleslotArgManager(std::vector<int>*);
         	void turrelArgManager(std::vector<int>*);
         	
         	// SPACE OBJECTS

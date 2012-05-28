@@ -22,6 +22,7 @@ class Npc;
 class Observation;
 class StarSystem;
 class ItemSlot;   
+class VehicleSlot;  
 class Turrel;       
 
 class Planet;
@@ -138,7 +139,7 @@ class Kosmoport;
 #include "src/items/equipment/GrappleEquipment.hpp"
 
 
-#include "src/docking/VehicleSlot.hpp"
+
 #include "src/docking/Angar.hpp"
 #include "src/docking/Shop.hpp"
 #include "src/docking/Goverment.hpp"
@@ -171,7 +172,9 @@ class Kosmoport;
 
 #include "src/spaceobjects/Turrel.hpp"
 
-#include "src/spaceobjects//ItemSlot.hpp"
+#include "src/spaceobjects/BaseSlot.hpp"
+#include "src/docking/VehicleSlot.hpp"
+#include "src/spaceobjects/ItemSlot.hpp"
 #include "src/spaceobjects/driveComplex.hpp"
 #include "src/spaceobjects/WeaponComplex.hpp"
 #include "src/spaceobjects/ProtectionComplex.hpp"
@@ -381,6 +384,7 @@ class Kosmoport;
 #include "src/common/rect.cpp"
 #include "src/common/points.cpp"
 
+#include "src/spaceobjects/BaseSlot.cpp"
 #include "src/spaceobjects/ItemSlot.cpp"
 
 #include "src/spaceobjects/WeaponComplex.cpp"
