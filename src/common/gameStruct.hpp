@@ -146,6 +146,7 @@ struct IdData
 	int id;
 	int type_id;
 	int subtype_id;
+	int subsubtype_id;
 };
 
 

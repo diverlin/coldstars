@@ -53,12 +53,12 @@ void StoreBuilder::CreateNewInternals()
                 int clm_act = 1;
                 while (clm_act <= clm)
                 {
-                        ItemSlot* slot = GetNewItemSlot(SLOT::CARGO_ID);
+                        ItemSlot* slot = GetNewItemSlot(ITEMSLOT::CARGO_ID);
  
-                        Rect rect(x0 + clm_act * 1.1 * GUI::SLOT::WIDTH_FOR_STORE, 
-                        	  y0 + row_act * 1.1 * GUI::SLOT::HEIGHT_FOR_STORE,
-                        	  GUI::SLOT::WIDTH_FOR_STORE,
-                                  GUI::SLOT::HEIGHT_FOR_STORE);
+                        Rect rect(x0 + clm_act * 1.1 * GUI::ITEMSLOT::WIDTH_FOR_STORE, 
+                        	  y0 + row_act * 1.1 * GUI::ITEMSLOT::HEIGHT_FOR_STORE,
+                        	  GUI::ITEMSLOT::WIDTH_FOR_STORE,
+                                  GUI::ITEMSLOT::HEIGHT_FOR_STORE);
                                                         
                         store->AddSlot(slot, rect);
                         clm_act++;

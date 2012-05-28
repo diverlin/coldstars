@@ -29,7 +29,7 @@ class Angar : public Base
                 
                 void SetOwnerKosmoport(Kosmoport* owner_kosmoport) { this->owner_kosmoport = owner_kosmoport; }
                 void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
-                void AddPlatform(Platform* platform) { platform_vec.push_back(platform); };
+                void AddVehicleSlot(VehicleSlot* platform, const Rect&);
                 
                 Kosmoport* GetOwnerKosmoport() { return owner_kosmoport; }
                 
@@ -41,7 +41,7 @@ class Angar : public Base
                 void Render(Player*) const;
                 void RenderItemInfo(Player*) const;
 
-                int GetFreePlatformTotalNum() const;
+                int GetFreeVehicleSlotTotalNum() const;
                 
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
@@ -51,7 +51,7 @@ class Angar : public Base
         	Kosmoport* owner_kosmoport;
                 TextureOb* textureOb_background;
                 
-                std::vector<Platform*> platform_vec;
+                std::vector<VehicleSlot*> platform_vec;
 
                 void RenderBackground(Player*) const;
                 void RenderInternals() const;

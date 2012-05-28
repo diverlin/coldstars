@@ -56,76 +56,76 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
         // WEAPON SLOTS
         for (unsigned int i = 0; i<vehicle->data_korpus.slot_weapon_num; i++)
         {
-        	ItemSlot* weapon_slot = GetNewItemSlot(SLOT::WEAPON_ID);
-        	rect = Rect(vehicle->GetGuiRect().GetBottomLeft().x + 1.1*i*GUI::SLOT::WIDTH_FOR_SHIP, 
-                             	  vehicle->GetGuiRect().GetBottomLeft().y -1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
-       			     	  GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);        
+        	ItemSlot* weapon_slot = GetNewItemSlot(ITEMSLOT::WEAPON_ID);
+        	rect = Rect(vehicle->GetGuiRect().GetBottomLeft().x + 1.1*i*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+                             	  vehicle->GetGuiRect().GetBottomLeft().y -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
+       			     	  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);        
         	vehicle->AddSlot(weapon_slot, rect);
         }
         //
                 
-	ItemSlot* radar_slot = GetNewItemSlot(SLOT::RADAR_ID);
-        rect = Rect(vehicle->GetGuiRect().GetCenter().x+4*GUI::SLOT::WIDTH_FOR_SHIP, 
-			  vehicle->GetGuiRect().GetCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
-			  GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
+	ItemSlot* radar_slot = GetNewItemSlot(ITEMSLOT::RADAR_ID);
+        rect = Rect(vehicle->GetGuiRect().GetCenter().x+4*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+			  vehicle->GetGuiRect().GetCenter().y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
+			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 	vehicle->AddSlot(radar_slot, rect);
 	
 	
-	ItemSlot* scaner_slot = GetNewItemSlot(SLOT::SCANER_ID); 
-	rect = Rect(vehicle->GetGuiRect().GetCenter().x+4*GUI::SLOT::WIDTH_FOR_SHIP, 
-			  vehicle->GetGuiRect().GetCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
-			  GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
+	ItemSlot* scaner_slot = GetNewItemSlot(ITEMSLOT::SCANER_ID); 
+	rect = Rect(vehicle->GetGuiRect().GetCenter().x+4*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+			  vehicle->GetGuiRect().GetCenter().y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
+			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 	vehicle->AddSlot(scaner_slot, rect);
 	
 	
-	ItemSlot* energizer_slot = GetNewItemSlot(SLOT::ENERGIZER_ID); 
-	rect = Rect(vehicle->GetGuiRect().GetCenter().x-2*GUI::SLOT::WIDTH_FOR_SHIP, 
-			  vehicle->GetGuiRect().GetCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
-			  GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
+	ItemSlot* energizer_slot = GetNewItemSlot(ITEMSLOT::ENERGIZER_ID); 
+	rect = Rect(vehicle->GetGuiRect().GetCenter().x-2*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+			  vehicle->GetGuiRect().GetCenter().y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
+			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 	vehicle->AddSlot(energizer_slot, rect);
     		
     		
 	if (vehicle->data_korpus.slot_grapple_num != 0)
 	{
-		ItemSlot* grapple_slot = GetNewItemSlot(SLOT::GRAPPLE_ID);
-		rect = Rect(vehicle->GetGuiRect().GetCenter().x-3*GUI::SLOT::WIDTH_FOR_SHIP, 
-                                  vehicle->GetGuiRect().GetCenter().y-GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
-                                  GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);					 
+		ItemSlot* grapple_slot = GetNewItemSlot(ITEMSLOT::GRAPPLE_ID);
+		rect = Rect(vehicle->GetGuiRect().GetCenter().x-3*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+                                  vehicle->GetGuiRect().GetCenter().y-GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+                                  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);					 
     		vehicle->AddSlot(grapple_slot, rect); 
     	}
     	
-	ItemSlot* droid_slot = GetNewItemSlot(SLOT::DROID_ID);
-	rect = Rect(vehicle->GetGuiRect().GetCenter().x-1*GUI::SLOT::WIDTH_FOR_SHIP, 
-			  vehicle->GetGuiRect().GetCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
-			  GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);				    
+	ItemSlot* droid_slot = GetNewItemSlot(ITEMSLOT::DROID_ID);
+	rect = Rect(vehicle->GetGuiRect().GetCenter().x-1*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+			  vehicle->GetGuiRect().GetCenter().y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);				    
     	vehicle->AddSlot(droid_slot, rect); 
     	
     	
-	ItemSlot* freezer_slot = GetNewItemSlot(SLOT::FREEZER_ID);
-	rect = Rect(vehicle->GetGuiRect().GetCenter().x-1*GUI::SLOT::WIDTH_FOR_SHIP, 
-			  vehicle->GetGuiRect().GetCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
-			  GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);	
+	ItemSlot* freezer_slot = GetNewItemSlot(ITEMSLOT::FREEZER_ID);
+	rect = Rect(vehicle->GetGuiRect().GetCenter().x-1*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+			  vehicle->GetGuiRect().GetCenter().y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);	
 	vehicle->AddSlot(freezer_slot, rect);   
         
         
-        ItemSlot* protector_slot = GetNewItemSlot(SLOT::PROTECTOR_ID); 
-	rect = Rect(vehicle->GetGuiRect().GetCenter().x-3*GUI::SLOT::WIDTH_FOR_SHIP, 
-			  vehicle->GetGuiRect().GetCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
-			  GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);	    
+        ItemSlot* protector_slot = GetNewItemSlot(ITEMSLOT::PROTECTOR_ID); 
+	rect = Rect(vehicle->GetGuiRect().GetCenter().x-3*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+			  vehicle->GetGuiRect().GetCenter().y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);	    
     	vehicle->AddSlot(protector_slot, rect); 
         
         
-        ItemSlot* drive_slot = GetNewItemSlot(SLOT::DRIVE_ID); 
-	rect = Rect(vehicle->GetGuiRect().GetCenter().x-5*GUI::SLOT::WIDTH_FOR_SHIP, 
-			  vehicle->GetGuiRect().GetCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
-                          GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
+        ItemSlot* drive_slot = GetNewItemSlot(ITEMSLOT::DRIVE_ID); 
+	rect = Rect(vehicle->GetGuiRect().GetCenter().x-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+			  vehicle->GetGuiRect().GetCenter().y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
+                          GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 	vehicle->AddSlot(drive_slot, rect);
 	
 	
-        ItemSlot* bak_slot = GetNewItemSlot(SLOT::BAK_ID);  
-	rect = Rect(vehicle->GetGuiRect().GetCenter().x-5*GUI::SLOT::WIDTH_FOR_SHIP, 
-			  vehicle->GetGuiRect().GetCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
-			  GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
+        ItemSlot* bak_slot = GetNewItemSlot(ITEMSLOT::BAK_ID);  
+	rect = Rect(vehicle->GetGuiRect().GetCenter().x-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+			  vehicle->GetGuiRect().GetCenter().y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
+			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 	vehicle->AddSlot(bak_slot, rect);
 	////////////////////////////////////////////////////
 
@@ -133,20 +133,20 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
     	//////// OTSEC SLOT ////////////////////////////////
     	for (int i = 0; i <= 10; i++)
     	{
-         	ItemSlot* otsec_slot = GetNewItemSlot(SLOT::CARGO_ID);
-         	rect = Rect(vehicle->GetGuiRect().GetCenter().x+(i-6)*GUI::SLOT::WIDTH_FOR_SHIP, 
-         			  vehicle->GetGuiRect().GetCenter().y    -3*GUI::SLOT::HEIGHT_FOR_SHIP,
-         			  GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);         					
+         	ItemSlot* otsec_slot = GetNewItemSlot(ITEMSLOT::CARGO_ID);
+         	rect = Rect(vehicle->GetGuiRect().GetCenter().x+(i-6)*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+         			  vehicle->GetGuiRect().GetCenter().y    -3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+         			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);         					
          	vehicle->AddSlot(otsec_slot, rect);         
     	}
     	////////////////////////////////////////////////////
 
 
     	//////////// GATE SLOT /////////////////////////////
-    	ItemSlot* gate_slot = GetNewItemSlot(SLOT::GATE_ID);
-   	rect = Rect(vehicle->GetGuiRect().GetCenter().x-5*GUI::SLOT::WIDTH_FOR_SHIP, 
-    			  vehicle->GetGuiRect().GetCenter().y+3*GUI::SLOT::HEIGHT_FOR_SHIP,
-    			  GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
+    	ItemSlot* gate_slot = GetNewItemSlot(ITEMSLOT::GATE_ID);
+   	rect = Rect(vehicle->GetGuiRect().GetCenter().x-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+    			  vehicle->GetGuiRect().GetCenter().y+3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+    			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
     	vehicle->AddSlot(gate_slot, rect);
 }	
 

@@ -31,7 +31,7 @@ ItemSlot* GetNewItemSlot(int subtype_id, int id)
 	item_slot->SetSubTypeId(subtype_id);
     	item_slot->SetTextureOb(texOb_slot);
         
-        if (subtype_id == SLOT::WEAPON_ID)
+        if (subtype_id == ITEMSLOT::WEAPON_ID)
         {
                 TextureOb* texOb_turrel = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::TURREL_ID); 
                         

@@ -125,9 +125,10 @@ LifeData :: LifeData()
 
 IdData :: IdData()
 {
-	id         = -1;
-	type_id    = -1;
-	subtype_id = -1;
+	id            = NONE_ID;
+	type_id       = NONE_ID;
+	subtype_id    = NONE_ID;
+	subsubtype_id = NONE_ID;
 }
 
 

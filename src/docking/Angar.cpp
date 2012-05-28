@@ -31,8 +31,14 @@ Angar::~Angar()
 {
 	EntityManager::Instance().RemoveEntity(this);
 }
-                
-int Angar::GetFreePlatformTotalNum() const
+       
+void Angar::AddVehicleSlot(VehicleSlot* vehicle_slot, const Rect& rect) 
+{ 
+	vehicle_slot->SetRect(rect.GetBottomLeft().x, rect.GetBottomLeft().y, rect.GetWidth(), rect.GetHeight());
+	platform_vec.push_back(vehicle_slot); 
+};
+                                
+int Angar::GetFreeVehicleSlotTotalNum() const
 {
         int sum_free = 0;
         for (unsigned int i = 0; i < platform_vec.size(); i++)

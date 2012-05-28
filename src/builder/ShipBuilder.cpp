@@ -37,12 +37,12 @@ void ShipBuilder::CreateNewShip(int id)
         EntityManager::Instance().RegisterEntity(ship);
 }
 
-void ShipBuilder::CreateNewInternals(int race_id, int subtype_id, int size_id, int weapons_num) 
+void ShipBuilder::CreateNewInternals(int race_id, int subsubtype_id, int size_id, int weapons_num) 
 {
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomShipTexObWithFollowingAtrributes(race_id, subtype_id, size_id); 
+	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id); 
        
        	int protection_rate = 1;
-       	if (subtype_id == CLASS::WARRIOR_ID)
+       	if (subsubtype_id == CLASS::WARRIOR_ID)
         {
         	protection_rate = 3;
         }
@@ -68,7 +68,7 @@ void ShipBuilder::CreateNewInternals(int race_id, int subtype_id, int size_id, i
     	else
        		data_korpus.draw_turrels = false; 
 	
-	ship->SetSubTypeId(subtype_id);
+	ship->SetSubSubTypeId(subsubtype_id);
 	ship->SetKorpusData(data_korpus);
 	ship->SetTextureOb(texOb);
 	ship->SetLifeData(data_life);

@@ -77,32 +77,32 @@ Vehicle::~Vehicle()
 void Vehicle::AddSlot(ItemSlot* slot, const Rect& rect) 
 { 
 	assert(slot);
-        slot->SetOwnerVehicle(this); 
+        slot->SetOwner(this); 
         slot->SetRect(rect.GetBottomLeft().x, rect.GetBottomLeft().y, rect.GetWidth(), rect.GetHeight());        
                 
 	switch(slot->GetSubTypeId())
 	{
-                case SLOT::WEAPON_ID:    
+                case ITEMSLOT::WEAPON_ID:    
                 {
                  	points.Add(slot->GetTurrel()->GetPoints().GetpCenter(), slot->GetTurrel()->GetPoints().GetpParentCenter());  
                 	weapon_complex->AddSlot(slot); break; 
                 }
-                case SLOT::DRIVE_ID:     { drive_complex->SetDriveSlot(slot); break; }
-                case SLOT::BAK_ID:       { drive_complex->SetBakSlot(slot); break; }
-                case SLOT::PROTECTOR_ID: { protection_complex->SetProtectorSlot(slot); break; }
-		case SLOT::RADAR_ID:     { radar_slot  = slot; break; }
-		case SLOT::SCANER_ID:    { scaner_slot = slot; break; }
+                case ITEMSLOT::DRIVE_ID:     { drive_complex->SetDriveSlot(slot); break; }
+                case ITEMSLOT::BAK_ID:       { drive_complex->SetBakSlot(slot); break; }
+                case ITEMSLOT::PROTECTOR_ID: { protection_complex->SetProtectorSlot(slot); break; }
+		case ITEMSLOT::RADAR_ID:     { radar_slot  = slot; break; }
+		case ITEMSLOT::SCANER_ID:    { scaner_slot = slot; break; }
 		
-		case SLOT::ENERGIZER_ID: { energizer_slot = slot; break; }
-		case SLOT::GRAPPLE_ID:   { grapple_slot   = slot; break; }
-		case SLOT::DROID_ID:     { droid_slot     = slot; break; }
-		case SLOT::FREEZER_ID:   { freezer_slot   = slot; break; }
+		case ITEMSLOT::ENERGIZER_ID: { energizer_slot = slot; break; }
+		case ITEMSLOT::GRAPPLE_ID:   { grapple_slot   = slot; break; }
+		case ITEMSLOT::DROID_ID:     { droid_slot     = slot; break; }
+		case ITEMSLOT::FREEZER_ID:   { freezer_slot   = slot; break; }
 		
-		case SLOT::CARGO_ID:     { slot_otsec_vec.push_back(slot); break; }
-		case SLOT::GATE_ID:      { gate_slot      = slot; break; }
+		case ITEMSLOT::CARGO_ID:     { slot_otsec_vec.push_back(slot); break; }
+		case ITEMSLOT::GATE_ID:      { gate_slot      = slot; break; }
 	}
         
-	if (slot->GetSubTypeId() != SLOT::GATE_ID)
+	if (slot->GetSubTypeId() != ITEMSLOT::GATE_ID)
 	{
 		slot_total_vec.push_back(slot); 
 	}
@@ -189,14 +189,18 @@ void Vehicle::DockingEvent()
 		owner_npc->SetLand(planet->GetLand());
 	}
 	
-	if (drive_complex->getTarget()->GetTypeId() == ENTITY::SPACESTATION_ID)
+	if (drive_complex->getTarget()->GetTypeId() == ENTITY::VEHICLE_ID)
 	{
-                SpaceStation* spacestation = ((SpaceStation*)drive_complex->getTarget());
+		if (drive_complex->getTarget()->GetSubTypeId() == ENTITY::SPACESTATION_ID)
+		{
+                	SpaceStation* spacestation = ((SpaceStation*)drive_complex->getTarget());
                                 
-	     	spacestation->GetLand()->Add((Ship*)this);
-		spacestation->GetLand()->Add(owner_npc);
+	     		spacestation->GetLand()->Add((Ship*)this);
+			spacestation->GetLand()->Add(owner_npc);
 		
-		owner_npc->SetLand(spacestation->GetLand());
+			owner_npc->SetLand(spacestation->GetLand());
+		}
+		
 	}
 }
 
@@ -212,12 +216,15 @@ void Vehicle::LaunchingEvent()
      		((Planet*)drive_complex->getTarget())->GetLand()->Remove(owner_npc);
 	}
 	
-     	if (drive_complex->getTarget()->GetTypeId() == ENTITY::SPACESTATION_ID)
-     	{
-     		starsystem->Add(this, drive_complex->getTarget()->GetPoints().GetCenter(), 0, NULL);
+     	if (drive_complex->getTarget()->GetTypeId() == ENTITY::VEHICLE_ID)
+     	{	
+     		if (drive_complex->getTarget()->GetSubTypeId() == ENTITY::SPACESTATION_ID)
+     		{
+     			starsystem->Add(this, drive_complex->getTarget()->GetPoints().GetCenter(), 0, NULL);
 
-     		((SpaceStation*)drive_complex->getTarget())->GetLand()->Remove(this);
-     		((SpaceStation*)drive_complex->getTarget())->GetLand()->Remove(owner_npc);
+     			((SpaceStation*)drive_complex->getTarget())->GetLand()->Remove(this);
+     			((SpaceStation*)drive_complex->getTarget())->GetLand()->Remove(owner_npc);
+     		}
 	}	
 
      	drive_complex->resetTarget();
@@ -658,7 +665,7 @@ void Vehicle::GrappleMicroProgramm()
        					break;
        				}        			
         				
-       				case ENTITY::SHIP_ID:
+       				case ENTITY::VEHICLE_ID:
        				{
        					ItemSlot* _slot = GetEmptyOtsecSlot();
                                         Vehicle* _vehicle = (Vehicle*)grapple_slot->GetGrappleEquipment()->target_vec[i];

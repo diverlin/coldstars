@@ -61,7 +61,7 @@ void DriveEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
         drive_equipment->SetSpeedOrig(speed_orig);  
         drive_equipment->SetHyperOrig(hyper_orig);
         drive_equipment->SetTextureOb(texOb_item);    	
-        drive_equipment->SetFunctionalSlotSubTypeId(SLOT::DRIVE_ID);
+        drive_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::DRIVE_ID);
         drive_equipment->SetItemCommonData(common_data);
          
         drive_equipment->UpdatePropetries();

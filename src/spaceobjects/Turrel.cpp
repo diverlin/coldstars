@@ -64,10 +64,10 @@ bool Turrel::FireEvent(bool show_effect)
 
 			switch(target->GetTypeId())
 			{
-				case ENTITY::SHIP_ID:      { ((Vehicle*)target)->Hit(slot->GetLazerEquipment()->GetDamage(), show_effect);   return true; break; }
+				case ENTITY::VEHICLE_ID:   { ((Vehicle*)target)->Hit(slot->GetLazerEquipment()->GetDamage(), show_effect);   return true; break; }
        				case ENTITY::ASTEROID_ID:  { ((Asteroid*)target)->Hit(slot->GetLazerEquipment()->GetDamage(), show_effect);  return true; break; }
 				case ENTITY::CONTAINER_ID: { ((Container*)target)->Hit(slot->GetLazerEquipment()->GetDamage(), show_effect); return true; break; }
-				case ENTITY::BOMB_ID:      { ((Container*)target)->Hit(slot->GetLazerEquipment()->GetDamage(), show_effect);      return true; break; }
+				case ENTITY::BOMB_ID:      { ((Container*)target)->Hit(slot->GetLazerEquipment()->GetDamage(), show_effect); return true; break; }
        			}
        			
        			break;

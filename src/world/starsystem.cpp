@@ -72,7 +72,7 @@ void StarSystem::Add(Vehicle* vehicle, vec2f center, float angle, BaseGameEntity
      	vehicle->SetPlaceTypeId(ENTITY::SPACE_ID);
      	vehicle->SetStarSystem(this);  
 
-	switch(vehicle->GetTypeId())
+	switch(vehicle->GetSubTypeId())
 	{
 		case ENTITY::SHIP_ID:         	
 		{ 	
@@ -191,7 +191,7 @@ void StarSystem::AddToRemoveFromOuterSpaceQueue(Container* container) { remove_C
 
 void StarSystem::AddToRemoveFromOuterSpaceQueue(Vehicle* vehicle) 
 {
-	switch(vehicle->GetTypeId())
+	switch(vehicle->GetSubTypeId())
 	{
 		case ENTITY::SHIP_ID: { remove_SHIP_queue.push_back((Ship*)vehicle); break; }
 	}

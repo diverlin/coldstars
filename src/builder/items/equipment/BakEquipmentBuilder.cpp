@@ -61,7 +61,7 @@ void BakEquipmentBuilder::CreateNewInternals()
         bak_equipment->SetFuelMaxOrig(fuel_max_orig);
         bak_equipment->SetFuel(fuel_max_orig);
         bak_equipment->SetTextureOb(texOb_item);    	
-        bak_equipment->SetFunctionalSlotSubTypeId(SLOT::BAK_ID);
+        bak_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::BAK_ID);
         bak_equipment->SetItemCommonData(common_data);
                                 
         bak_equipment->UpdatePropetries();

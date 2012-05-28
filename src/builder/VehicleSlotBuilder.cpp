@@ -16,29 +16,20 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "VehicleSlotBuilder.hpp"
 
-Cursor::Cursor(Player* player):
-mouse_left_button(false), 
-mouse_right_button(false)
+VehicleSlot* GetNewVehicleSlot(int id)
 {
-	this->player = player;
-	
-     	slot = GetNewItemSlot(ITEMSLOT::CARGO_ID);
-     	slot->SetRect(0, 0, GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
+       	if (id == NONE_ID)
+	{
+		id = g_ID_GENERATOR.getNextId();
+	} 
+        VehicleSlot* vehicle_slot = new VehicleSlot(id);
+        //EntityManager::Instance().RegisterEntity(vehicle_slot);
+      
+	TextureOb* texOb_slot = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::LANDINGAREA_ID);
+    	vehicle_slot->SetTextureOb(texOb_slot);
+              
+        return vehicle_slot;
 }
-
-Cursor::~Cursor()
-{}
-
-void Cursor::UpdateMousePos()
-{
-        const sf::Input& Input = Gui::GetWindow().GetInput();
-        mouse_pos.Set(Input.GetMouseX(), Input.GetMouseY());
-}
-
-void Cursor::Update()
-{
-     	slot->GetRect().SetCenter(mouse_pos.x, player->GetScreen()->getHeight()  - mouse_pos.y);
-}
-
 
