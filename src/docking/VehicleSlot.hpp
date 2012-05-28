@@ -20,42 +20,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef VEHICLESLOT_H
 #define VEHICLESLOT_H
 
-struct UnresolvedDataUniqueVehicleSlot
-{
-	UnresolvedDataUniqueVehicleSlot()
-	{
-		owner_type_id = NONE_ID;
-		owner_id = NONE_ID;
-		
-		rect_blx = 0.0;
-        	rect_bly = 0.0;
-        	rect_w = 0; 
-        	rect_h = 0;  
-	};
-	
-	int owner_type_id;
-	int owner_id;
-	
-	float rect_blx;
-        float rect_bly;
-        int rect_w; 
-        int rect_h;         
-};
 
-class VehicleSlot : public Base
+class VehicleSlot : public BaseSlot
 {
         public:
                 VehicleSlot(int);
-                ~VehicleSlot();
-
-		void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; }
-		void SetOwner(Base* owner) { this->owner = owner; };
-		
+                ~VehicleSlot();	
+                
                 Vehicle* GetVehicle() const { return vehicle; };
-                const Rect& GetRect() const { return rect; };
-                
-                void SetRect(float, float, int, int);
-                
                 void Insert(Vehicle*);
                 void Free(); 
         
@@ -67,14 +39,8 @@ class VehicleSlot : public Base
 		virtual void ResolveData();
 		
         private:
-                TextureOb* textureOb;
-                        
-                Base* owner;
-                
-                Vehicle* vehicle;                
-                Rect rect;   
-                
-                UnresolvedDataUniqueVehicleSlot unresolved_VehicleSlot;
+        	Vehicle* vehicle;
+        
                 void SaveDataUniqueVehicleSlot(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueVehicleSlot(const boost::property_tree::ptree&);
 		void ResolveDataUniqueVehicleSlot();     

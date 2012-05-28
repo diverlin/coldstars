@@ -28,14 +28,9 @@ ItemSlot::ItemSlot(int id)
 	data_id.id         = id;
         data_id.type_id    = ENTITY::ITEMSLOT_ID;
 	data_id.subtype_id = NONE_ID;
-
-        is_EQUIPED = false;
-
-        owner   = NULL; 
                         
         turrel     = NULL;                
         item   	   = NULL;
-        textureOb  = NULL;
 }
 
 ItemSlot::~ItemSlot()
@@ -180,15 +175,6 @@ void ItemSlot::RenderItemInfo(float offset_x, float offset_y)
         }
 }
 
-bool ItemSlot::CheckInteraction(int _x, int _y)
-{        
-        float dist = distBetweenPoints(rect.GetCenter().x, rect.GetCenter().y, _x, _y);
-        if (dist < rect.GetWidth()/2)
-                return true;
-        else
-                return false;    
-}
-
 void ItemSlot::DropItemToSpace(Vehicle* vehicle)
 {
         TextureOb* textureOb_ = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::CONTAINER_ID);   
@@ -319,6 +305,7 @@ void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	const std::string root = "item_slot." + int2str(GetId()) + ".";
 	SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueBaseSlot(save_ptree, root);
 	SaveDataUniqueItemSlot(save_ptree, root);
 }
 
@@ -326,6 +313,7 @@ void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree) const
 void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueBaseSlot(load_ptree);
 	LoadDataUniqueItemSlot(load_ptree);
 }
 	
@@ -333,48 +321,24 @@ void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 void ItemSlot::ResolveData()
 {
 	ResolveDataUniqueBase();
+	ResolveDataUniqueBaseSlot();
 	ResolveDataUniqueItemSlot();
 }
 
 void ItemSlot::SaveDataUniqueItemSlot(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-        save_ptree.put(root+"unresolved.rect.BottomLeft.x", rect.GetBottomLeft().x);
-        save_ptree.put(root+"unresolved.rect.BottomLeft.y", rect.GetBottomLeft().y); 
-        save_ptree.put(root+"unresolved.rect.width", rect.GetWidth());
-        save_ptree.put(root+"unresolved.rect.height", rect.GetHeight()); 
-        
-        if (owner) 
-        {
-        	save_ptree.put(root+"unresolved.owner_type_id", owner->GetTypeId());        	
-        	save_ptree.put(root+"unresolved.owner_id", owner->GetId());
-        }
-        else
-        {
-                save_ptree.put(root+"unresolved.owner_type_id", NONE_ID);
-                save_ptree.put(root+"unresolved.owner_id", NONE_ID);	
-	}
-
-}
+{}
 
 void ItemSlot::LoadDataUniqueItemSlot(const boost::property_tree::ptree& load_ptree)
-{
-        unresolved_ItemSlot.rect_blx = load_ptree.get<float>("unresolved.rect.BottomLeft.x");
-        unresolved_ItemSlot.rect_bly = load_ptree.get<float>("unresolved.rect.BottomLeft.y");
-        unresolved_ItemSlot.rect_w   = load_ptree.get<int>("unresolved.rect.width"); 
-        unresolved_ItemSlot.rect_h   = load_ptree.get<int>("unresolved.rect.height"); 
-     
-        unresolved_ItemSlot.owner_type_id = load_ptree.get<int>("unresolved.owner_type_id"); 
-        unresolved_ItemSlot.owner_id = load_ptree.get<int>("unresolved.owner_id"); 
-}
+{}
 
 void ItemSlot::ResolveDataUniqueItemSlot()
 {
-        Rect tmp_rect(unresolved_ItemSlot.rect_blx, unresolved_ItemSlot.rect_bly, unresolved_ItemSlot.rect_w, unresolved_ItemSlot.rect_h);
-        switch(unresolved_ItemSlot.owner_type_id)
+        Rect tmp_rect(unresolved_BaseSlot.rect_blx, unresolved_BaseSlot.rect_bly, unresolved_BaseSlot.rect_w, unresolved_BaseSlot.rect_h);
+        switch(unresolved_BaseSlot.owner_type_id)
         {
-	       case ENTITY::VEHICLE_ID: 	{	((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.owner_id))->AddSlot(this, tmp_rect); break; }
-	       case ENTITY::CONTAINER_ID:     	{	((Container*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.owner_id))->BindItemSlot(this); break; }
-	       case ENTITY::STORE_ID:         	{ 	((Store*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.owner_id))->AddSlot(this, tmp_rect); break; }
-	       case ENTITY::ANGAR_ID:         	{ 	}//((Store*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.owner_id))->AddSlot(this, tmp_rect); break; }
+	       case ENTITY::VEHICLE_ID: 	{	((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddSlot(this, tmp_rect); break; }
+	       case ENTITY::CONTAINER_ID:     	{	((Container*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }
+	       case ENTITY::STORE_ID:         	{ 	((Store*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddSlot(this, tmp_rect); break; }
+	       case ENTITY::ANGAR_ID:         	{ 	}//((Store*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddSlot(this, tmp_rect); break; }
 	}
 }

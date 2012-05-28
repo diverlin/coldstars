@@ -62,8 +62,8 @@ class TextureManager
         private:
         	std::vector<TextureOb*> textureOb_total_vec;
         	
-        	std::vector<TextureOb*> slot_texOb_vec;
-        	std::vector<TextureOb*> landingArea_texOb_vec;
+        	std::vector<TextureOb*> itemslot_texOb_vec;
+        	std::vector<TextureOb*> vehicleslot_texOb_vec;
         	std::vector<TextureOb*> turrel_texOb_vec;
                 
                 std::vector<TextureOb*> particles_texOb_vec;

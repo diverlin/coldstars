@@ -19,22 +19,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 VehicleSlot::VehicleSlot(int id)
 {   
 	data_id.id = id;
-	data_id.type_id = ENTITY::VEHICLEPLATFORM_ID;
+	data_id.type_id = ENTITY::VEHICLESLOT_ID;
 	data_id.subtype_id = NONE_ID;
 	
-    	textureOb = NULL;
-    	
-    	owner = NULL;
     	vehicle = NULL;
 }
    
 VehicleSlot::~VehicleSlot()
 {}
       
-void VehicleSlot::SetRect(float pos_x, float pos_y, int w, int h) 
-{
-	rect.Set(pos_x, pos_y, w, h);
-}
+
 
 void VehicleSlot::Insert(Vehicle* vehicle)
 {
@@ -69,8 +63,9 @@ void VehicleSlot::RenderInfo() const
 /*virtual*/
 void VehicleSlot::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	const std::string root = "item_slot." + int2str(GetId()) + ".";
+	const std::string root = "vehicle_slot." + int2str(GetId()) + ".";
 	SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueBaseSlot(save_ptree, root);
 	SaveDataUniqueVehicleSlot(save_ptree, root);
 }
 
@@ -78,6 +73,7 @@ void VehicleSlot::SaveData(boost::property_tree::ptree& save_ptree) const
 void VehicleSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueBaseSlot(load_ptree);
 	LoadDataUniqueVehicleSlot(load_ptree);
 }
 	
@@ -85,6 +81,7 @@ void VehicleSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 void VehicleSlot::ResolveData()
 {
 	ResolveDataUniqueBase();
+	ResolveDataUniqueBaseSlot();
 	ResolveDataUniqueVehicleSlot();
 }
 

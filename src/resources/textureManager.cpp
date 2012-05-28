@@ -34,8 +34,8 @@ void TextureManager::Add(TextureOb* texOb)
 	  	case TEXTURE::SPACESTATION_ID: { spacestation_texOb_vec.push_back(texOb);    break; }       
 	 	case TEXTURE::SATELLITE_ID:    { satellite_texOb_vec.push_back(texOb);   break; }       
 	  		  		
-  		case TEXTURE::SLOT_ID:        { slot_texOb_vec.push_back(texOb);        break; }       
-    		case TEXTURE::LANDINGAREA_ID: { landingArea_texOb_vec.push_back(texOb); break; }
+  		case TEXTURE::ITEMSLOT_ID:    { itemslot_texOb_vec.push_back(texOb);        break; }       
+    		case TEXTURE::VEHICLESLOT_ID: { vehicleslot_texOb_vec.push_back(texOb); break; }
        		case TEXTURE::TURREL_ID:      { turrel_texOb_vec.push_back(texOb);      break; }
 
     		case TEXTURE::NEBULA_BACKGROUND_ID:      { nebulaBgEffect_texOb_vec.push_back(texOb); break; }
@@ -455,7 +455,8 @@ TextureOb* TextureManager::GetRandomTextureOb(int texture_type_id)
 		case TEXTURE::SPACESTATION_ID:     { return GetRandomTextureObFromList(&spacestation_texOb_vec);             break; }
 		case TEXTURE::SATELLITE_ID:        { return GetRandomTextureObFromList(&satellite_texOb_vec);            break; }
 					
-		case TEXTURE::SLOT_ID:             { return GetRandomTextureObFromList(&slot_texOb_vec);                 break; }
+		case TEXTURE::ITEMSLOT_ID:         { return GetRandomTextureObFromList(&itemslot_texOb_vec);             break; }
+		case TEXTURE::VEHICLESLOT_ID:      { return GetRandomTextureObFromList(&vehicleslot_texOb_vec);          break; }
 		case TEXTURE::CONTAINER_ID:        { return GetRandomTextureObFromList(&container_texOb_vec);            break; }
 		case TEXTURE::STAR_ID:             { return GetRandomTextureObFromList(&star_texOb_vec);                 break; }
 		case TEXTURE::PLANET_ID:           { return GetRandomTextureObFromList(&planet_texOb_vec);               break; }
@@ -482,7 +483,6 @@ TextureOb* TextureManager::GetRandomTextureOb(int texture_type_id)
 																				
 		case TEXTURE::TURREL_ID:           { return GetRandomTextureObFromList(&turrel_texOb_vec);               break; }
 		case TEXTURE::LAZER_EFFECT_ID:     { return GetRandomTextureObFromList(&lazerEffect_texOb_vec);          break; }
-		case TEXTURE::LANDINGAREA_ID:      { return GetRandomTextureObFromList(&landingArea_texOb_vec);          break; }
 				
 		case TEXTURE::ANGAR_BACKGROUND_ID:         { return GetRandomTextureObFromList(&angarBg_texOb_vec);              break; }				
 		case TEXTURE::STORE_BACKGROUND_ID:         { return GetRandomTextureObFromList(&storeBg_texOb_vec);              break; }	
