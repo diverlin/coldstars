@@ -17,28 +17,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-Cursor::Cursor(Player* player):
-mouse_left_button(false), 
-mouse_right_button(false)
-{
-	this->player = player;
-	
-     	slot = GetNewItemSlot(ITEMSLOT::CARGO_ID);
-     	slot->SetRect(0, 0, GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
-}
+#ifndef VEHICLESLOTBUILDER_H
+#define VEHICLESLOTBUILDER_H
 
-Cursor::~Cursor()
-{}
+VehicleSlot* GetNewVehicleSlot(int id = NONE_ID);
 
-void Cursor::UpdateMousePos()
-{
-        const sf::Input& Input = Gui::GetWindow().GetInput();
-        mouse_pos.Set(Input.GetMouseX(), Input.GetMouseY());
-}
+#endif 
+    
 
-void Cursor::Update()
-{
-     	slot->GetRect().SetCenter(mouse_pos.x, player->GetScreen()->getHeight()  - mouse_pos.y);
-}
+        
 
 

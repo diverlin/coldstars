@@ -42,7 +42,7 @@ Container::~Container()
 void Container::BindItemSlot(ItemSlot* item_slot) 
 { 
 	this->item_slot = item_slot; 
-	item_slot->SetOwnerContainer(this); 
+	item_slot->SetOwner(this); 
 }
 
 

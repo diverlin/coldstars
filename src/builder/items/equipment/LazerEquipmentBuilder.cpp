@@ -61,7 +61,7 @@ void LazerEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
         lazer_equipment->SetDamageOrig(damage_orig);  
         lazer_equipment->SetRadiusOrig(radius_orig);  
         lazer_equipment->SetTextureOb(texOb_item);    	
-        lazer_equipment->SetFunctionalSlotSubTypeId(SLOT::WEAPON_ID);
+        lazer_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::WEAPON_ID);
         lazer_equipment->SetItemCommonData(common_data);
         
    	lazer_equipment->UpdatePropetries();

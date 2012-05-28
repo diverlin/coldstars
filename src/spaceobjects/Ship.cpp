@@ -20,7 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 Ship::Ship(int id)
 {
 	data_id.id = id;
-	data_id.type_id = ENTITY::SHIP_ID;
+	data_id.type_id = ENTITY::VEHICLE_ID;
+	data_id.subtype_id = ENTITY::SHIP_ID;
 }
 
 Ship::~Ship()

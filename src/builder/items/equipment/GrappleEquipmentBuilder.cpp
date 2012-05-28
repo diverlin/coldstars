@@ -66,7 +66,7 @@ void GrappleEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
         grapple_equipment->SetMaxNumItemOrig(maxNumItem_orig);
 
         grapple_equipment->SetTextureOb(texOb_item);    
-        grapple_equipment->SetFunctionalSlotSubTypeId(SLOT::GRAPPLE_ID);
+        grapple_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::GRAPPLE_ID);
         grapple_equipment->SetItemCommonData(common_data);        
 
     	grapple_equipment->UpdatePropetries();

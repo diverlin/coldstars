@@ -169,17 +169,11 @@ bool DriveComplex :: updateTargetCoord()
         		return true; break;
     		} 
     	     
-    		case ENTITY::SHIP_ID:
+    		case ENTITY::VEHICLE_ID:
     		{ 
 			target_pos = target->GetPoints().GetCenter() + target_offset;  
         		return true; break;    
-    		}      
-    		
-    		case ENTITY::SPACESTATION_ID:
-    		{ 
-			target_pos = target->GetPoints().GetCenter() + target_offset;  
-        		return true; break;    
-    		} 
+    		}
     	}
 }
 
@@ -203,8 +197,15 @@ bool DriveComplex :: getDockingPermission()
 	switch(target->GetTypeId())
 	{
 		case ENTITY::PLANET_ID:       { return ((Planet*)target)->GetLand()->GetPermissionToLand(); break; }
-		case ENTITY::SPACESTATION_ID: { return ((SpaceStation*)target)->GetLand()->GetPermissionToLand(); break; }
-		//case SHIP_ID:   { return targetOb->GetVehicle()->getPermissionToLand(); break; }
+		case ENTITY::VEHICLE_ID: 
+		{ 
+			switch(target->GetSubTypeId())
+			{
+				case ENTITY::SPACESTATION_ID: { return ((SpaceStation*)target)->GetLand()->GetPermissionToLand(); break; }
+				//case SHIP_ID:   { return targetOb->GetVehicle()->getPermissionToLand(); break; }
+			}
+			break;
+		}
 	}
 	
         return false;

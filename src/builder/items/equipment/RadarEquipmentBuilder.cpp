@@ -59,7 +59,7 @@ void RadarEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
 
         radar_equipment->SetRadiusOrig(radius_orig);
         radar_equipment->SetTextureOb(texOb_item);
-        radar_equipment->SetFunctionalSlotSubTypeId(SLOT::RADAR_ID);
+        radar_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::RADAR_ID);
         radar_equipment->SetItemCommonData(common_data);
         
  

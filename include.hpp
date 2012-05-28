@@ -138,7 +138,7 @@ class Kosmoport;
 #include "src/items/equipment/GrappleEquipment.hpp"
 
 
-#include "src/docking/Platform.hpp"
+#include "src/docking/VehicleSlot.hpp"
 #include "src/docking/Angar.hpp"
 #include "src/docking/Shop.hpp"
 #include "src/docking/Goverment.hpp"
@@ -201,6 +201,7 @@ class Kosmoport;
 #include "src/builder/BaseVehicleBuilder.hpp"
 #include "src/builder/ShipBuilder.hpp"
 #include "src/builder/ItemSlotBuilder.hpp"
+#include "src/builder/VehicleSlotBuilder.hpp"
 #include "src/builder/VehicleBuilder.hpp"
 #include "src/builder/StarSystemBuilder.hpp"
 #include "src/builder/StarBuilder.hpp"
@@ -330,7 +331,7 @@ class Kosmoport;
 #include "src/items/modules/ScanerModule.cpp"
 #include "src/items/modules/GrappleModule.cpp"
 
-#include "src/docking/Platform.cpp"
+#include "src/docking/VehicleSlot.cpp"
 #include "src/docking/Angar.cpp"
 #include "src/docking/Store.cpp"
 #include "src/docking/Shop.cpp"
@@ -351,6 +352,7 @@ class Kosmoport;
 #include "src/builder/ShipBuilder.cpp"
 
 #include "src/builder/ItemSlotBuilder.cpp"
+#include "src/builder/VehicleSlotBuilder.cpp"
 #include "src/builder/AngarBuilder.cpp"
 #include "src/builder/StoreBuilder.cpp"
 #include "src/builder/VehicleBuilder.cpp"

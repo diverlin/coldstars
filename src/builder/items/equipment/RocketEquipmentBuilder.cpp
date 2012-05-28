@@ -77,7 +77,7 @@ void RocketEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
         rocket_equipment->SetBulletData(data_bullet); 
     	rocket_equipment->SetAmmo(ammo_max_orig);                
         rocket_equipment->SetTextureOb(texOb_item);    	
-        rocket_equipment->SetFunctionalSlotSubTypeId(SLOT::WEAPON_ID);
+        rocket_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::WEAPON_ID);
         rocket_equipment->SetItemCommonData(common_data);
                 
         rocket_equipment->UpdatePropetries();

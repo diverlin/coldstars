@@ -36,7 +36,7 @@ Kosmoport :: ~Kosmoport()
 /* virtual */
 bool Kosmoport::GetPermissionToLand() const
 {
-      	if (angar->GetFreePlatformTotalNum() > 0) 
+      	if (angar->GetFreeVehicleSlotTotalNum() > 0) 
         { 
         	return true; 
         }

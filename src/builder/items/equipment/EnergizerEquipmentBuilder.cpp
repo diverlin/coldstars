@@ -62,7 +62,7 @@ void EnergizerEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
         energizer_equipment->SetRestorationOrig(restoration_orig);
         energizer_equipment->SetEnergy(energy_max_orig);
         energizer_equipment->SetTextureOb(texOb_item);    	
-        energizer_equipment->SetFunctionalSlotSubTypeId(SLOT::ENERGIZER_ID);
+        energizer_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::ENERGIZER_ID);
         energizer_equipment->SetItemCommonData(common_data);
                 
         energizer_equipment->UpdatePropetries();

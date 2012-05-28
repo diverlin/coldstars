@@ -24,10 +24,8 @@ struct UnresolvedDataUniqueItemSlot
 {
 	UnresolvedDataUniqueItemSlot()
 	{
-		owner_vehicle_id = NONE_ID;
-		owner_container_id = NONE_ID;
-		owner_angar_id   = NONE_ID;
-		owner_store_id   = NONE_ID;
+		owner_type_id = NONE_ID;
+		owner_id = NONE_ID;
 			
 		rect_blx = 0.0;
         	rect_bly = 0.0;
@@ -35,10 +33,8 @@ struct UnresolvedDataUniqueItemSlot
         	rect_h = 0;  
 	};
 	
-	int owner_vehicle_id;
-	int owner_container_id;
-	int owner_angar_id;
-	int owner_store_id;
+	int owner_type_id;
+	int owner_id;
 	
 	float rect_blx;
         float rect_bly;
@@ -54,10 +50,7 @@ class ItemSlot : public Base
 		~ItemSlot();
                 
 		void SetTextureOb(TextureOb* textureOb)       	{ this->textureOb = textureOb; };
-		void SetOwnerVehicle(Vehicle* owner_vehicle) 	{ this->owner_vehicle = owner_vehicle; };
-		void SetOwnerContainer(Container* owner_container) { this->owner_container = owner_container; };
-		void SetOwnerAngar(Angar* owner_angar) 		{ this->owner_angar = owner_angar; };
-		void SetOwnerStore(Store* owner_store) 	{ this->owner_store = owner_store; };
+		void SetOwner(Base* owner) { this->owner = owner; };
 		
 		void SetTurrel(Turrel* turrel)                	{ this->turrel = turrel; };
                                 
@@ -65,9 +58,9 @@ class ItemSlot : public Base
 		bool GetEquipedStatus() const { return is_EQUIPED; };
 		
                 Rect& GetRect() { return rect; };
-		Vehicle* GetOwnerVehicle() const { return owner_vehicle; };
+		Vehicle* GetOwnerVehicle() const { return (Vehicle*)owner; };
 
-		BaseItem* GetItem()                         const { return item; };                
+		BaseItem* GetItem()                        const { return item; };                
              	RocketEquipment*    GetRocketEquipment()    const { return (RocketEquipment*)item; }
  		LazerEquipment*     GetLazerEquipment()     const { return (LazerEquipment*)item; }
 		RadarEquipment*     GetRadarEquipment()     const { return (RadarEquipment*)item; }
@@ -132,10 +125,7 @@ class ItemSlot : public Base
                 
                 Rect rect;
                                 
-                Vehicle* owner_vehicle; 
-                Container* owner_container;
-                Angar*   owner_angar;
-                Store*   owner_store;
+                Base* owner; 
                                 
                 Turrel* turrel;          // only for weapons slot
                 

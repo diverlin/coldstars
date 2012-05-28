@@ -59,7 +59,7 @@ void DroidEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
        
         droid_equipment->SetRepairOrig(repair_orig);  
         droid_equipment->SetTextureOb(texOb_item);    	
-        droid_equipment->SetFunctionalSlotSubTypeId(SLOT::DROID_ID);
+        droid_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::DROID_ID);
         droid_equipment->SetItemCommonData(common_data);
                 
                 

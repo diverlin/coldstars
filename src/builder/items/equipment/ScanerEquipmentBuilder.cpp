@@ -59,7 +59,7 @@ void ScanerEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
         
         scaner_equipment->SetScanOrig(scan_orig);  
         scaner_equipment->SetTextureOb(texOb_item);    	
-        scaner_equipment->SetFunctionalSlotSubTypeId(SLOT::SCANER_ID);
+        scaner_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::SCANER_ID);
         scaner_equipment->SetItemCommonData(common_data);
            
     	scaner_equipment->UpdatePropetries();

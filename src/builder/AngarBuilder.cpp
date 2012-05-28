@@ -41,14 +41,15 @@ void AngarBuilder::CreateNewInternals()
 {
 	int screen_w = Config::Instance().SCREEN_WIDTH;
 	int screen_h = Config::Instance().SCREEN_HEIGHT;	
-	
-	TextureOb* texOb_platform = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::LANDINGAREA_ID);
  	
-        angar->AddPlatform(new Platform(texOb_platform, screen_w/2,       screen_h/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR));
-        angar->AddPlatform(new Platform(texOb_platform, screen_w/2 + 150, screen_h/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR));
-        angar->AddPlatform(new Platform(texOb_platform, screen_w/2 - 150, screen_h/2,       GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR));
-        angar->AddPlatform(new Platform(texOb_platform, screen_w/2,       screen_h/2 + 150, GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR));
-	angar->AddPlatform(new Platform(texOb_platform, screen_w/2,       screen_h/2 - 150, GUI::SLOT::WIDTH_FOR_ANGAR, GUI::SLOT::HEIGHT_FOR_ANGAR));
+ 	VehicleSlot* vehicle_slot = GetNewVehicleSlot();
+ 	
+ 	Rect tmp_rect(screen_w/2,       screen_h/2,       GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
+        angar->AddVehicleSlot(vehicle_slot, tmp_rect);
+        //angar->AddVehicleSlot(new VehicleSlot(texOb_platform, screen_w/2 + 150, screen_h/2,       GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR));
+        //angar->AddVehicleSlot(new VehicleSlot(texOb_platform, screen_w/2 - 150, screen_h/2,       GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR));
+        //angar->AddVehicleSlot(new VehicleSlot(texOb_platform, screen_w/2,       screen_h/2 + 150, GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR));
+	//angar->AddVehicleSlot(new VehicleSlot(texOb_platform, screen_w/2,       screen_h/2 - 150, GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR));
 		
 	TextureOb* texOb_bg  = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ANGAR_BACKGROUND_ID); 
 	angar->SetTextureObBackground(texOb_bg);
