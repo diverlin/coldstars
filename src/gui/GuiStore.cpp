@@ -18,17 +18,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-GuiStore :: GuiStore(Player* player)
+GuiStore::GuiStore(Player* player)
 {
 	this->player = player;
 }
 
-
-GuiStore :: ~GuiStore()
+GuiStore::~GuiStore()
 {}
 
         
-void GuiStore :: update()
+void GuiStore::Update()
 {
  	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
  
@@ -53,19 +52,22 @@ void GuiStore :: update()
         }
 }
 
+void GuiStore::RenderBackground()
+{
+	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();	  
+	store->RenderBackground(player);                
+}
 
-void GuiStore :: Render() const
+void GuiStore::RenderSlots() const
 {            
-	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
-	         
+	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();	         
         for (unsigned int i = 0; i < store->slot_total_vec.size(); i ++)
         {
                 store->slot_total_vec[i]->Render(-1);
         }
 }
 
-
-void GuiStore :: renderFocusedItemInfo()
+void GuiStore::RenderFocusedItemInfo()
 {
 	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
         for (unsigned int i = 0; i < store->slot_total_vec.size(); i++)
@@ -80,10 +82,3 @@ void GuiStore :: renderFocusedItemInfo()
 }
 
 
-void GuiStore :: renderBackground() const
-{
-	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
-
-     	Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());
-     	drawTexturedRect(store->textureOb_background, screen_rect, -1);  
-}

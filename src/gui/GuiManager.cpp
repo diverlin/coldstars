@@ -46,7 +46,7 @@ void GuiManager::UpdateInSpace()
 
 void GuiManager::UpdateInStore()
 {        	
-	gui_store->update();
+	gui_store->Update();
 	gui_vehicle->Update(player->GetNpc()->GetVehicle(), ((Kosmoport*)player->GetNpc()->GetLand())->GetStore());
 	
 	player->GetCursor()->Update();
@@ -76,16 +76,16 @@ void GuiManager::RenderInStore() const
 {
 	resetRenderTransformation();
 
-	gui_store->renderBackground();
+	gui_store->RenderBackground();
 	
 	enable_BLEND();
 
 		gui_vehicle->Render();
-		gui_store->Render();
+		gui_store->RenderSlots();
 		
 		player->GetCursor()->GetItemSlot()->RenderEquipedItem();	
 
-		gui_store->renderFocusedItemInfo();	
+		gui_store->RenderFocusedItemInfo();	
 		if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == false)
 		{
 			gui_vehicle->RenderFocusedItemInfo();

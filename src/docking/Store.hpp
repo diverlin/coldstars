@@ -21,36 +21,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define STORE_H
 
 
-class Store : public Base
+class Store : public Room
 {
         public:
                 Store(int);                      
                 ~Store();
-
-                void SetOwnerKosmoport(Kosmoport* owner_kosmoport) { this->owner_kosmoport = owner_kosmoport; }
-        	void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
-		
-		Kosmoport* GetOwnerKosmoport() { return owner_kosmoport; }
-		                
-		void AddSlot(ItemSlot* slot, const Rect& rect);                
+                
+		void AddItemSlot(ItemSlot* slot, const Rect& rect);                
                 bool AddItem(BaseItem*);
 
                 ItemSlot* GetEmptySlot();
                                      	
                 bool SellItemFromSlot(Npc*, ItemSlot*);		
                 bool BuyItemFromSlot(Npc*, ItemSlot*); 
-
-                void Render() const;
                 
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 		
-        public:
-                Kosmoport* owner_kosmoport;
-                        
-                TextureOb* textureOb_background; 
-              
+        public:             
                 std::vector<ItemSlot*> slot_total_vec;
                 
                 void SaveDataUniqueStore(boost::property_tree::ptree&, const std::string&) const;		

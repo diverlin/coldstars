@@ -47,69 +47,26 @@ bool Kosmoport::GetPermissionToLand() const
 /* virtual */
 bool Kosmoport::Add(Vehicle* vehicle)
 {
-        vehicle->SetPlaceTypeId(data_id.type_id);
-                
-        VEHICLE_vec.push_back(vehicle);
-        angar->AddVehicle(vehicle);
-        
-        return true;
-}
-
-/* virtual */
-bool Kosmoport::Add(Npc* npc)
-{
-        npc->SetPlaceTypeId(data_id.type_id);
-        NPC_vec.push_back(npc);
-        
-        npc->SetLand(this);
- 
+        angar->AddVehicle(vehicle);        
+        if (vehicle->GetOwnerNpc()) 
+        { 
+        	vehicle->GetOwnerNpc()->SetPlaceTypeId(data_id.type_id); 
+        	vehicle->GetOwnerNpc()->SetLand(this);
+        }
         return true;
 }
 
 /* virtual */
 bool Kosmoport::Remove(Vehicle* vehicle)
-{
-        bool is_removed_from_list = false;
-        for (unsigned int i = 0; i < VEHICLE_vec.size(); i++)
-        { 
-                if (VEHICLE_vec[i] == vehicle)
-                {
-                        VEHICLE_vec.erase(VEHICLE_vec.begin() + i);
-                        is_removed_from_list = true;
-                }
-        }
-        
-        bool is_removed_from_landing_area = angar->RemoveVehicle(vehicle); 
-    
-        if (is_removed_from_list && is_removed_from_landing_area)
-                return true;
-        else
-                return false;
+{        
+    	return angar->RemoveVehicle(vehicle);
 }
 
-/* virtual */
-bool Kosmoport::Remove(Npc* npc)
-{
-        bool is_removed = false;
-        for (unsigned int i = 0; i < NPC_vec.size(); i++)
-        { 
-                if (NPC_vec[i] == npc)
-                {
-                        NPC_vec.erase(NPC_vec.begin() + i);
-                        is_removed = true;
-                }
-        }
-    
-        return is_removed;
-}
 
 /* virtual */
 void Kosmoport::Ai()
 {
-        for (unsigned int i = 0; i < NPC_vec.size(); i++)
-        {
-                NPC_vec[i]->ThinkCommon_inKosmoport_inStatic();
-	}
+	angar->Ai();	
 }
 
 

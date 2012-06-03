@@ -995,14 +995,10 @@ void Player::RunSession(GameTimer* TIMER)
 {
 	this->Update_global();     
 
-       	if (npc->GetPlaceTypeId() == ENTITY::SPACE_ID)
-       	{  
-        	this->SessionInSpace(TIMER);
-       	}
-		
-       	if (npc->GetPlaceTypeId() == ENTITY::KOSMOPORT_ID)
+       	switch(npc->GetPlaceTypeId())
        	{
-        	this->SessionInKosmoport();
+       		case ENTITY::SPACE_ID: 	    	{ this->SessionInSpace(TIMER); break; }
+       		case ENTITY::KOSMOPORT_ID:  	{ this->SessionInKosmoport(); break; }
        	} 
        	
        	screen->update();           	

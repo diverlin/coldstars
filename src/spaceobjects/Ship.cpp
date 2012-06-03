@@ -153,5 +153,20 @@ void Ship::ResolveDataUniqueShip()
         ShipBuilder::Instance().CreateDriveComplex(this);
         ShipBuilder::Instance().CreateWeaponsComplex(this);        
                        
-	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this, data_unresolved_BaseGameEntity.center, data_unresolved_BaseGameEntity.angle, parent); 
+        switch(place_type_id)
+        {
+        	case ENTITY::SPACE_ID: 
+        	{
+			((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this, data_unresolved_BaseGameEntity.center, data_unresolved_BaseGameEntity.angle, parent); 
+			break;
+		}
+		
+		case ENTITY::VEHICLESLOT_ID:
+		{
+			((VehicleSlot*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->InsertVehicle(this); 
+			break;
+		}
+	}
+
+
 }

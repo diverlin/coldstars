@@ -21,17 +21,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define GOVERMENT_H
 
 
-class Goverment : public Base
+class Goverment : public Room
 {
         public: 
                 Goverment(int);
                 ~Goverment();
                 
-                void SetOwnerKosmoport(Kosmoport* owner_kosmoport) { this->owner_kosmoport = owner_kosmoport; }
                 void SetTextureObFace(TextureOb* textureOb_face) { this->textureOb_face = textureOb_face; };
-                void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
-                
-                Kosmoport* GetOwnerKosmoport() { return owner_kosmoport; }
                                 
                 void Update();
                 void Render(Player*) const;
@@ -41,12 +37,8 @@ class Goverment : public Base
 		void ResolveData();
 		
         private:
-                Kosmoport* owner_kosmoport;
-                	
-                TextureOb* textureOb_background;
                 TextureOb* textureOb_face;
                 
-                void RenderBackground(Player*) const;
                 void RenderInternals() const;
                 
                 void SaveDataUniqueGoverment(boost::property_tree::ptree&, const std::string&) const;		

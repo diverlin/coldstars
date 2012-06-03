@@ -49,9 +49,7 @@ class Kosmoport : public BaseLand
                 virtual bool GetPermissionToLand() const;
                                 
                 virtual bool Add(Vehicle*);
-                virtual bool Add(Npc*);
                 virtual bool Remove(Vehicle*);
-                virtual bool Remove(Npc*);
                 
                 virtual void Ai();
                 

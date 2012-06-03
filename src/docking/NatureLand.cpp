@@ -31,7 +31,7 @@ NatureLand::~NatureLand()
 bool NatureLand::Add(Vehicle* vehicle)
 {
         vehicle->SetPlaceTypeId(ENTITY::PLANET_ID);
-        VEHICLE_vec.push_back(vehicle);
+        //VEHICLE_vec.push_back(vehicle);
         
         return true;
 }
@@ -40,7 +40,7 @@ bool NatureLand::Add(Vehicle* vehicle)
 bool NatureLand::Add(Npc* npc)
 {
         npc->SetPlaceTypeId(ENTITY::LAND_ID);        
-        NPC_vec.push_back(npc);
+        //NPC_vec.push_back(npc);
 
         npc->SetLand(this);
  
@@ -50,35 +50,35 @@ bool NatureLand::Add(Npc* npc)
 /*virtual */
 bool NatureLand::Remove(Vehicle* vehicle)
 {
-        bool is_removed = false;
+        //bool is_removed = false;
         
-        for (unsigned int i = 0; i < VEHICLE_vec.size(); i++) 
-        {
-                if (VEHICLE_vec[i] == vehicle)
-                {
-                        VEHICLE_vec.erase(VEHICLE_vec.begin() + i);
-                        is_removed = true;
-                }
-        }
+        //for (unsigned int i = 0; i < VEHICLE_vec.size(); i++) 
+        //{
+                //if (VEHICLE_vec[i] == vehicle)
+                //{
+                        //VEHICLE_vec.erase(VEHICLE_vec.begin() + i);
+                        //is_removed = true;
+                //}
+        //}
         
-        return is_removed;
+        //return is_removed;
 }
 
 /* virtual */
 bool NatureLand::Remove(Npc* npc)
 {
-        bool is_removed = false;
+        //bool is_removed = false;
     
-        for (unsigned int i = 0; i < NPC_vec.size(); i++)
-        { 
-                if (NPC_vec[i] == npc)
-                {
-                        NPC_vec.erase(NPC_vec.begin() + i);
-                        is_removed = true;
-                }
-        }
+        //for (unsigned int i = 0; i < NPC_vec.size(); i++)
+        //{ 
+                //if (NPC_vec[i] == npc)
+                //{
+                        //NPC_vec.erase(NPC_vec.begin() + i);
+                        //is_removed = true;
+                //}
+        //}
         
-        return is_removed;
+        //return is_removed;
 }
 
 /* virtual */
@@ -90,10 +90,10 @@ bool NatureLand::GetPermissionToLand() const
 /* virtual */
 void NatureLand::Ai()
 {
-        for (unsigned int i = 0; i < NPC_vec.size(); i++)
-        {
-           	NPC_vec[i]->ThinkCommon_inLand_inStatic();      
-	}
+        //for (unsigned int i = 0; i < NPC_vec.size(); i++)
+        //{
+           	//NPC_vec[i]->ThinkCommon_inLand_inStatic();      
+	//}
 }  
 
 /*virtual*/

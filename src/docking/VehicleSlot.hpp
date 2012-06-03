@@ -28,7 +28,7 @@ class VehicleSlot : public BaseSlot
                 ~VehicleSlot();	
                 
                 Vehicle* GetVehicle() const { return vehicle; };
-                void Insert(Vehicle*);
+                void InsertVehicle(Vehicle*);
                 void Free(); 
         
                 void Render() const;

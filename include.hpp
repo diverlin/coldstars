@@ -139,7 +139,7 @@ class Kosmoport;
 #include "src/items/equipment/GrappleEquipment.hpp"
 
 
-
+#include "src/docking/Room.hpp"
 #include "src/docking/Angar.hpp"
 #include "src/docking/Shop.hpp"
 #include "src/docking/Goverment.hpp"
@@ -251,7 +251,7 @@ class Kosmoport;
 #include "src/gui/GuiKosmoport.hpp"
 #include "src/gui/GuiVehicle.hpp"
 #include "src/gui/guiSkill.hpp"
-#include "src/gui/guiStore.hpp"
+#include "src/gui/GuiStore.hpp"
 #include "src/gui/GuiManager.hpp"
 
 #include "src/world/garbageEffects.hpp"  
@@ -335,6 +335,7 @@ class Kosmoport;
 #include "src/items/modules/GrappleModule.cpp"
 
 #include "src/docking/VehicleSlot.cpp"
+#include "src/docking/Room.cpp"
 #include "src/docking/Angar.cpp"
 #include "src/docking/Store.cpp"
 #include "src/docking/Shop.cpp"
@@ -347,7 +348,7 @@ class Kosmoport;
 #include "src/gui/button.cpp"
 #include "src/gui/guiSpace.cpp"
 #include "src/gui/GuiKosmoport.cpp"
-#include "src/gui/guiStore.cpp"
+#include "src/gui/GuiStore.cpp"
 #include "src/gui/GuiManager.cpp"
 #include "src/gui/GuiVehicle.cpp"
 #include "src/builder/ContainerBuilder.cpp"

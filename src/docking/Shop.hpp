@@ -21,17 +21,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define SHOP_H
 
 
-class Shop : public Base
+class Shop : public Room
 {
         public: 
                 Shop(int id);
-                ~Shop();
-                
-                void SetOwnerKosmoport(Kosmoport* owner_kosmoport) { this->owner_kosmoport = owner_kosmoport; }
-                void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
-                
-                Kosmoport* GetOwnerKosmoport() { return owner_kosmoport; }
-                                                
+                ~Shop();                
+                                       
                 void Update();
                 void Render(Player*) const;
                 
@@ -40,11 +35,6 @@ class Shop : public Base
 		void ResolveData();
 		
         private:
-                Kosmoport* owner_kosmoport;
-                
-                TextureOb* textureOb_background;
-                
-                void RenderBackground(Player*) const;
                 void RenderInternals() const;
                 
                 void SaveDataUniqueShop(boost::property_tree::ptree&, const std::string&) const;		

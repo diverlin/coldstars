@@ -23,9 +23,6 @@ Store::Store(int id)
 	data_id.id = id;
 	data_id.type_id  = ENTITY::STORE_ID;
 	data_id.subtype_id  = NONE_ID;
-		
-	owner_kosmoport = NULL;
-        textureOb_background = NULL; 
 }
 
 Store::~Store()
@@ -39,7 +36,7 @@ Store::~Store()
 	slot_total_vec.clear();
 }
 
-void Store::AddSlot(ItemSlot* slot, const Rect& rect) 
+void Store::AddItemSlot(ItemSlot* slot, const Rect& rect) 
 { 
 	slot->SetOwner(this);
 	slot->SetRect(rect.GetBottomLeft().x, rect.GetBottomLeft().y, rect.GetWidth(), rect.GetHeight()); 
@@ -102,40 +99,39 @@ bool Store::BuyItemFromSlot(Npc* npc, ItemSlot* slot)
 	}
 }
 
-
 void Store::SaveDataUniqueStore(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	//save_ptree.put(root+"unresolved.angar_id",     angar->GetId());
-
 }
 
 void Store::LoadDataUniqueStore(const boost::property_tree::ptree& load_ptree)
 {
 	//data_unresolved_Kosmoport.angar_id = load_ptree.get<int>("unresolved.angar_id");
-
 }
 
 void Store::ResolveDataUniqueStore()
 {
 	//angar     = (Angar*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.angar_id); 
-
 }
 
 void Store::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "store." + int2str(GetId())+".";
 	SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueRoom(save_ptree, root);
 	SaveDataUniqueStore(save_ptree, root);
 }
 
 void Store::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueRoom(load_ptree);
 	LoadDataUniqueStore(load_ptree);
 }
 
 void Store::ResolveData()
 {
 	ResolveDataUniqueBase();
+	ResolveDataUniqueRoom();
 	ResolveDataUniqueStore();
 }
