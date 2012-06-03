@@ -25,9 +25,6 @@ Shop::Shop(int id)
 	data_id.id = id;
 	data_id.type_id = ENTITY::SHOP_ID;
 	data_id.subtype_id = ENTITY::SHOP_ID;
-		
-	owner_kosmoport = NULL;
-        textureOb_background  = NULL;
 }
 
 Shop::~Shop()
@@ -35,11 +32,6 @@ Shop::~Shop()
 	EntityManager::Instance().RemoveEntity(this);
 }                
 
-void Shop::RenderBackground(Player* player) const
-{
-     	Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());
-     	drawTexturedRect(textureOb_background, screen_rect, -1);  
-}
 
 void Shop::RenderInternals() const
 {}
@@ -81,20 +73,23 @@ void Shop::ResolveDataUniqueShop()
 
 void Shop::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	std::string root = "goverment." + int2str(GetId())+".";
+	std::string root = "shop." + int2str(GetId())+".";
 	SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueRoom(save_ptree, root);
 	SaveDataUniqueShop(save_ptree, root);
 }
 
 void Shop::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueRoom(load_ptree);
 	LoadDataUniqueShop(load_ptree);
 }
 
 void Shop::ResolveData()
 {
 	ResolveDataUniqueBase();
+	ResolveDataUniqueRoom();
 	ResolveDataUniqueShop();
 }
 

@@ -938,7 +938,7 @@ void StarSystem::LaunchingEvent() const
 {
 	for (unsigned int i=0; i<PLANET_vec.size(); i++)
 	{
-		PLANET_vec[i]->GetLand()->ManageLaunchingQueue();
+		//PLANET_vec[i]->GetLand()->ManageLaunching();
 	}
 }		
 

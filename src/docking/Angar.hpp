@@ -21,17 +21,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define ANGAR_H
 
 
-class Angar : public Base
+class Angar : public Room
 {
         public: 
                 Angar(int id);
                 ~Angar();
                 
-                void SetOwnerKosmoport(Kosmoport* owner_kosmoport) { this->owner_kosmoport = owner_kosmoport; }
-                void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
-                void AddVehicleSlot(VehicleSlot* platform, const Rect&);
-                
-                Kosmoport* GetOwnerKosmoport() { return owner_kosmoport; }
+                void AddVehicleSlot(VehicleSlot*, const Rect&);
+                void Ai() const;
                 
                 bool AddVehicle(Vehicle*);
                 bool RemoveVehicle(Vehicle*);
@@ -47,13 +44,9 @@ class Angar : public Base
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 		
-        private:
-        	Kosmoport* owner_kosmoport;
-                TextureOb* textureOb_background;
-                
-                std::vector<VehicleSlot*> platform_vec;
+        private:               
+                std::vector<VehicleSlot*> vehicleslot_vec;
 
-                void RenderBackground(Player*) const;
                 void RenderInternals() const;
                 
                 void SaveDataUniqueAngar(boost::property_tree::ptree&, const std::string&) const;		

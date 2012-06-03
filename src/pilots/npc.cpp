@@ -75,7 +75,7 @@ void Npc::ThinkCommon_inKosmoport_inStatic()
 	}
 	
 	// if all things are DONE
-	((Planet*)vehicle->GetDriveComplex()->getTarget())->GetLand()->AddToLaunchingQueue(this); // improove by adding spacestation
+	//((Planet*)vehicle->GetDriveComplex()->getTarget())->GetLand()->AddToLaunchingQueue(this); // improove by adding spacestation
 }
 
 void Npc::ThinkCommon_inLand_inStatic()
@@ -290,7 +290,8 @@ void Npc::SaveDataUniqueNpc(boost::property_tree::ptree& save_ptree, const std::
 {
         save_ptree.put(root+"unresolved.vehicle_id", vehicle->GetId());
         if (land) save_ptree.put(root+"unresolved.land_id", land->GetId());
-	else      save_ptree.put(root+"unresolved.land_id", NONE_ID);
+	else save_ptree.put(root+"unresolved.land_id", NONE_ID);
+	
 }
 
 void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
@@ -302,9 +303,9 @@ void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
 void Npc::ResolveDataUniqueNpc()
 {
         BindVehicle( (Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_npc.vehicle_id) );
-        if (data_unresolved_npc.land_id != NONE_ID) (BaseLand*)EntityManager::Instance().GetEntityById(data_unresolved_npc.land_id);
-        else land = NULL;
-
-	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this); 
+        if (data_unresolved_npc.land_id != NONE_ID) 
+        { 
+        	SetLand( (BaseLand*)EntityManager::Instance().GetEntityById(data_unresolved_npc.land_id) ); 
+        }
 	
 }		

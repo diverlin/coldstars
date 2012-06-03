@@ -74,7 +74,7 @@ Vehicle::~Vehicle()
 	slot_total_vec.clear();
 } 
 
-void Vehicle::AddSlot(ItemSlot* slot, const Rect& rect) 
+void Vehicle::AddItemSlot(ItemSlot* slot, const Rect& rect) 
 { 
 	assert(slot);
         slot->SetOwner(this); 
@@ -181,12 +181,8 @@ void Vehicle::DockingEvent()
              	     	     	
      	if (drive_complex->getTarget()->GetTypeId() == ENTITY::PLANET_ID)
      	{
-                Planet* planet = ((Planet*)drive_complex->getTarget());
-                
+                Planet* planet = ((Planet*)drive_complex->getTarget());                
      		planet->GetLand()->Add((Ship*)this);
-		planet->GetLand()->Add(owner_npc);
-		
-		owner_npc->SetLand(planet->GetLand());
 	}
 	
 	if (drive_complex->getTarget()->GetTypeId() == ENTITY::VEHICLE_ID)
@@ -194,11 +190,7 @@ void Vehicle::DockingEvent()
 		if (drive_complex->getTarget()->GetSubTypeId() == ENTITY::SPACESTATION_ID)
 		{
                 	SpaceStation* spacestation = ((SpaceStation*)drive_complex->getTarget());
-                                
-	     		spacestation->GetLand()->Add((Ship*)this);
-			spacestation->GetLand()->Add(owner_npc);
-		
-			owner_npc->SetLand(spacestation->GetLand());
+                        spacestation->GetLand()->Add((Ship*)this);
 		}
 		
 	}
@@ -213,7 +205,6 @@ void Vehicle::LaunchingEvent()
      		starsystem->Add(this, drive_complex->getTarget()->GetPoints().GetCenter(), 0, NULL);
 
      		((Planet*)drive_complex->getTarget())->GetLand()->Remove(this);
-     		((Planet*)drive_complex->getTarget())->GetLand()->Remove(owner_npc);
 	}
 	
      	if (drive_complex->getTarget()->GetTypeId() == ENTITY::VEHICLE_ID)
@@ -223,7 +214,6 @@ void Vehicle::LaunchingEvent()
      			starsystem->Add(this, drive_complex->getTarget()->GetPoints().GetCenter(), 0, NULL);
 
      			((SpaceStation*)drive_complex->getTarget())->GetLand()->Remove(this);
-     			((SpaceStation*)drive_complex->getTarget())->GetLand()->Remove(owner_npc);
      		}
 	}	
 
@@ -729,7 +719,5 @@ void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptre
 void Vehicle::ResolveDataUniqueVehicle()
 {
         texOb_korpus = g_TEXTURE_MANAGER.GetTextureObByPath(data_unresolved_Vehicle.texOb_korpus_path);
-
-        //create_internals (slot, complex)
 }
                 

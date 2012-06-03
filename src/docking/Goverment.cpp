@@ -25,10 +25,7 @@ Goverment::Goverment(int id)
 	data_id.id = id;
 	data_id.type_id = ENTITY::GOVERMENT_ID;
 	data_id.subtype_id = NONE_ID;
-			
-	owner_kosmoport = NULL;
-				
-        textureOb_background   = NULL;
+
         textureOb_face         = NULL;   
 }
 
@@ -39,12 +36,6 @@ Goverment::~Goverment()
 
 void Goverment::Update()
 {}
-
-void Goverment::RenderBackground(Player* player) const
-{
-     	Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());
-     	drawTexturedRect(textureOb_background, screen_rect, -1);  
-}
 
 void Goverment::RenderInternals() const
 {}
@@ -59,7 +50,6 @@ void Goverment::Render(Player* player) const
 }
 
 
-
 void Goverment::SaveDataUniqueGoverment(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	//save_ptree.put(root+"unresolved.angar_id",     angar->GetId());
@@ -69,31 +59,32 @@ void Goverment::SaveDataUniqueGoverment(boost::property_tree::ptree& save_ptree,
 void Goverment::LoadDataUniqueGoverment(const boost::property_tree::ptree& load_ptree)
 {
 	//data_unresolved_Kosmoport.angar_id = load_ptree.get<int>("unresolved.angar_id");
-
 }
 
 void Goverment::ResolveDataUniqueGoverment()
 {
 	//angar     = (Angar*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.angar_id); 
-
 }
 
 void Goverment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "goverment." + int2str(GetId())+".";
 	SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueRoom(save_ptree, root);
 	SaveDataUniqueGoverment(save_ptree, root);
 }
 
 void Goverment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueRoom(load_ptree);
 	LoadDataUniqueGoverment(load_ptree);
 }
 
 void Goverment::ResolveData()
 {
 	ResolveDataUniqueBase();
+	ResolveDataUniqueRoom();
 	ResolveDataUniqueGoverment();
 }
 

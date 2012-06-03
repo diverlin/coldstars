@@ -22,9 +22,6 @@ Angar::Angar(int id)
 	data_id.id = id;
 	data_id.type_id = ENTITY::ANGAR_ID;
 	data_id.subtype_id = NONE_ID;
-		
-	owner_kosmoport = NULL;
-        textureOb_background = NULL;
 }
 
 Angar::~Angar()
@@ -35,15 +32,32 @@ Angar::~Angar()
 void Angar::AddVehicleSlot(VehicleSlot* vehicle_slot, const Rect& rect) 
 { 
 	vehicle_slot->SetRect(rect.GetBottomLeft().x, rect.GetBottomLeft().y, rect.GetWidth(), rect.GetHeight());
-	platform_vec.push_back(vehicle_slot); 
+	vehicle_slot->SetOwner(this);
+	vehicleslot_vec.push_back(vehicle_slot); 
 };
-                                
+                         
+                         
+void Angar::Ai() const
+{
+        for (unsigned int i = 0; i < vehicleslot_vec.size(); i++)
+        {
+                if (vehicleslot_vec[i]->GetVehicle() != NULL)
+                {
+                	if (vehicleslot_vec[i]->GetVehicle()->GetOwnerNpc() != NULL)
+                	{
+                        	vehicleslot_vec[i]->GetVehicle()->GetOwnerNpc()->ThinkCommon_inKosmoport_inStatic();
+                	}
+               	}
+        }
+}
+
+                                                
 int Angar::GetFreeVehicleSlotTotalNum() const
 {
         int sum_free = 0;
-        for (unsigned int i = 0; i < platform_vec.size(); i++)
+        for (unsigned int i = 0; i < vehicleslot_vec.size(); i++)
         {
-                //if (platform_vec[i]->GetVehicle() == NULL)
+                if (vehicleslot_vec[i]->GetVehicle() == NULL)
                 {
                         sum_free++;
                 }
@@ -53,28 +67,27 @@ int Angar::GetFreeVehicleSlotTotalNum() const
 
 bool Angar::AddVehicle(Vehicle* vehicle)
 {
-        for (unsigned int i = 0; i < platform_vec.size(); i++)
+        for (unsigned int i = 0; i < vehicleslot_vec.size(); i++)
         {
-                if (platform_vec[i]->GetVehicle() == NULL)
+                if (vehicleslot_vec[i]->GetVehicle() == NULL)
                 {
-                        platform_vec[i]->Insert(vehicle);
+                        vehicleslot_vec[i]->InsertVehicle(vehicle);
                         return true;
                 }
-        }
-        
+        }        
         return false;        
 }
 
 
 bool Angar::RemoveVehicle(Vehicle* vehicle)
 {
-        for (unsigned int i = 0; i < platform_vec.size(); i++)
+        for (unsigned int i = 0; i < vehicleslot_vec.size(); i++)
         {
-                if (platform_vec[i]->GetVehicle() != NULL)
+                if (vehicleslot_vec[i]->GetVehicle() != NULL)
                 {
-                        if (platform_vec[i]->GetVehicle() == vehicle)
+                        if (vehicleslot_vec[i]->GetVehicle() == vehicle)
                         {
-                                platform_vec[i]->Free();
+                                vehicleslot_vec[i]->Free();
                                 return true;
                         }
                 }
@@ -90,20 +103,20 @@ void Angar::MouseControl(Player* player)
         //bool lmb = player->GetCursor()->getMouseLeftButton(); 
         bool rmb = player->GetCursor()->GetMouseRightButton(); 
 
-        for (unsigned int i = 0; i < platform_vec.size(); i++)
+        for (unsigned int i = 0; i < vehicleslot_vec.size(); i++)
         { 
                 float dist = distBetweenPoints(player->GetCursor()->GetMousePos().x, 
                                                player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y, 
-                                               platform_vec[i]->GetRect().GetCenter().x, 
-                                               platform_vec[i]->GetRect().GetCenter().y);
+                                               vehicleslot_vec[i]->GetRect().GetCenter().x, 
+                                               vehicleslot_vec[i]->GetRect().GetCenter().y);
         				
-                if (dist < platform_vec[i]->GetRect().GetWidth()/2)
+                if (dist < vehicleslot_vec[i]->GetRect().GetWidth()/2)
                 {
                         if (rmb == true)
                         {
-                                if (platform_vec[i]->GetVehicle() != NULL)
+                                if (vehicleslot_vec[i]->GetVehicle() != NULL)
                                 {
-                                        player->GetNpc()->SetScanTarget(platform_vec[i]->GetVehicle());
+                                        player->GetNpc()->SetScanTarget(vehicleslot_vec[i]->GetVehicle());
                                 }
                         }
                 }
@@ -125,35 +138,29 @@ void Angar::Render(Player* player) const
         
 }
 
-void Angar::RenderBackground(Player* player) const
-{
-     	Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());
-     	drawTexturedRect(textureOb_background, screen_rect, -2);  
-}
-
 void Angar::RenderInternals() const
 {
-        for (unsigned int i = 0; i < platform_vec.size(); i++)
+        for (unsigned int i = 0; i < vehicleslot_vec.size(); i++)
         {
-                platform_vec[i]->Render();
+                vehicleslot_vec[i]->Render();
         }
 }
 
 void Angar::RenderItemInfo(Player* player) const
 {
-        for (unsigned int i = 0; i < platform_vec.size(); i++)
+        for (unsigned int i = 0; i < vehicleslot_vec.size(); i++)
         { 
-		if (platform_vec[i]->GetVehicle() != NULL)
+		if (vehicleslot_vec[i]->GetVehicle() != NULL)
                 {
 
                 	float dist = distBetweenPoints(player->GetCursor()->GetMousePos().x, 
                         	                       player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y, 
-                                	               platform_vec[i]->GetRect().GetCenter().x, 
-                                        	       platform_vec[i]->GetRect().GetCenter().y);
+                                	               vehicleslot_vec[i]->GetRect().GetCenter().x, 
+                                        	       vehicleslot_vec[i]->GetRect().GetCenter().y);
         				
-                	if (dist < platform_vec[i]->GetRect().GetWidth()/2)
+                	if (dist < vehicleslot_vec[i]->GetRect().GetWidth()/2)
                 	{
-		                platform_vec[i]->RenderInfo();
+		                vehicleslot_vec[i]->RenderInfo();
                 	}
                 }
         }
@@ -161,40 +168,34 @@ void Angar::RenderItemInfo(Player* player) const
             
 
 void Angar::SaveDataUniqueAngar(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-	//save_ptree.put(root+"unresolved.angar_id",     angar->GetId());
-
-}
+{}
 
 void Angar::LoadDataUniqueAngar(const boost::property_tree::ptree& load_ptree)
-{
-	//data_unresolved_Kosmoport.angar_id = load_ptree.get<int>("unresolved.angar_id");
-
-}
+{}
 
 void Angar::ResolveDataUniqueAngar()
-{
-	//angar     = (Angar*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.angar_id); 
-
-}
+{}
 
 
 void Angar::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "angar." + int2str(GetId())+".";
 	SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueRoom(save_ptree, root);
 	SaveDataUniqueAngar(save_ptree, root);
 }
 
 void Angar::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueRoom(load_ptree);
 	LoadDataUniqueAngar(load_ptree);
 }
 
 void Angar::ResolveData()
 {
 	ResolveDataUniqueBase();
+	ResolveDataUniqueRoom();
 	ResolveDataUniqueAngar();
 }
 

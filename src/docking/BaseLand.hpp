@@ -39,27 +39,13 @@ class BaseLand : public Base
 		virtual bool GetPermissionToLand() const = 0;
 		                
                 virtual bool Add(Vehicle*) = 0;
-                virtual bool Add(Npc*) = 0;
                 virtual bool Remove(Vehicle*) = 0;
-                virtual bool Remove(Npc*) = 0;
                 
-                virtual void Ai() = 0;       
-                
-                void AddToLaunchingQueue(Npc*);                
-		void AddToDockingQueue(Npc*);  
-		
-		void ManageDockingQueue();
-                void ManageLaunchingQueue();
+                virtual void Ai() = 0;  
 		  
         protected:
                 Base* owner;
-                
-                std::vector<Npc*>     NPC_vec;
-                std::vector<Vehicle*> VEHICLE_vec;        
-                
-                std::vector<Npc*> NPC_launching_vec;
-                std::vector<Npc*> NPC_docking_vec;
-                
+             
                 UnresolvedDataUniqueBaseLand data_unresolved_BaseLand;
                 void SaveDataUniqueBaseLand(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueBaseLand(const boost::property_tree::ptree&);
