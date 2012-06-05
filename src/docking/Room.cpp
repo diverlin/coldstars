@@ -26,18 +26,11 @@ Room::Room()
 
 Room::~Room()
 {}      
-                
+               
 
-void Room::RenderBackground(Player* player) const
+void Room::RenderBackground(const Rect& rect) const
 {
-     	Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());
-     	drawTexturedRect(textureOb_background, screen_rect, -2);  
-}
-
-void Room::RenderBackground(Player* player) const
-{
-     	Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());
-     	drawTexturedRect(textureOb_background, screen_rect, -2);  
+     	drawTexturedRect(textureOb_background, rect, -2);  
 }
            
 
@@ -56,6 +49,6 @@ void Room::LoadDataUniqueRoom(const boost::property_tree::ptree& load_ptree)
 
 void Room::ResolveDataUniqueRoom()
 {
-	//angar     = (Room*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.angar_id); 
+	textureOb_background = g_TEXTURE_MANAGER.GetTextureObByPath(data_unresolved_Room.textureOb_background_path);
 }
 

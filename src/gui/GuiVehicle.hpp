@@ -28,8 +28,8 @@ class GuiVehicle
 
      		void Update(Vehicle*, Store* store = NULL);   
      				
-      		void Render() const;
-		void RenderFocusedItemInfo() const;
+      		void Render(Vehicle*) const;
+		void RenderFocusedItemInfo(Vehicle*) const;
       		
       	private: 		
       		Player* player;

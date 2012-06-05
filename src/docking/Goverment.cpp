@@ -40,12 +40,14 @@ void Goverment::Update()
 void Goverment::RenderInternals() const
 {}
             
-void Goverment::Render(Player* player) const
+void Goverment::Render(Player* player) const // move to GuiGoverment
 {
         clearScreen();
         resetRenderTransformation();
                                                         
-        RenderBackground(player);
+        Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());    
+        RenderBackground(screen_rect);
+        
         RenderInternals();
 }
 
@@ -63,7 +65,7 @@ void Goverment::LoadDataUniqueGoverment(const boost::property_tree::ptree& load_
 
 void Goverment::ResolveDataUniqueGoverment()
 {
-	//angar     = (Angar*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.angar_id); 
+	((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindGoverment(this); 
 }
 
 void Goverment::SaveData(boost::property_tree::ptree& save_ptree) const

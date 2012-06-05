@@ -156,9 +156,9 @@ class Kosmoport;
 #include "src/render/bloom.hpp"
 #include "src/effects/shockWave.hpp"
 
-
-#include "src/effects/distantNebulaBg.hpp"
-#include "src/effects/distantStarBg.hpp"
+#include "src/effects/BaseBackGroundEffect.hpp"
+#include "src/effects/DistantNebulaEffect.hpp"
+#include "src/effects/DistantStarEffect.hpp"
 
 
 #include "src/effects/Shield.hpp"  
@@ -395,8 +395,10 @@ class Kosmoport;
 #include "src/spaceobjects/driveComplex.cpp"
 #include "src/spaceobjects/Turrel.cpp"
 
-#include "src/effects/distantNebulaBg.cpp"
-#include "src/effects/distantStarBg.cpp"
+
+#include "src/effects/BaseBackGroundEffect.cpp"
+#include "src/effects/DistantNebulaEffect.cpp"
+#include "src/effects/DistantStarEffect.cpp"
 #include "src/effects/particlesystem/particle.cpp"
 #include "src/effects/particlesystem/baseParticleSystem.cpp"
 #include "src/effects/particlesystem/blackHoleEffect.cpp"

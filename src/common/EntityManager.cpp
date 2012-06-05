@@ -191,8 +191,17 @@ void EntityManager::LoadPass0()
 	{
         	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("item_slot"))
 		{
-			ItemSlot* slot = GetNewItemSlot(v.second.get<int>("data_id.subtype_id"), v.second.get<int>("data_id.id"));
-			slot->LoadData(v.second);
+			ItemSlot* itemslot = GetNewItemSlot(v.second.get<int>("data_id.subtype_id"), v.second.get<int>("data_id.id"));
+			itemslot->LoadData(v.second);
+		}
+	}
+	
+	if (load_ptree.get_child_optional("vehicle_slot"))
+	{
+        	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("vehicle_slot"))
+		{
+			VehicleSlot* vehicleslot = GetNewVehicleSlot(v.second.get<int>("data_id.id"));
+			vehicleslot->LoadData(v.second);
 		}
 	}
 	

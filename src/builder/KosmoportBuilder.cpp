@@ -40,20 +40,20 @@ void KosmoportBuilder::CreateNewInternals()
 {
 	AngarBuilder::Instance().CreateNewAngar();
 	AngarBuilder::Instance().CreateNewInternals();	
-	kosmoport->SetAngar(AngarBuilder::Instance().GetAngar());
+	kosmoport->BindAngar(AngarBuilder::Instance().GetAngar());
 
 	StoreBuilder::Instance().CreateNewStore();
 	StoreBuilder::Instance().CreateNewInternals();	
 	StoreBuilder::Instance().PutRandomEquipment();	
-	kosmoport->SetStore(StoreBuilder::Instance().GetStore());
+	kosmoport->BindStore(StoreBuilder::Instance().GetStore());
 
 	ShopBuilder::Instance().CreateNewShop();
 	ShopBuilder::Instance().CreateNewInternals();	
-	kosmoport->SetShop(ShopBuilder::Instance().GetShop());
+	kosmoport->BindShop(ShopBuilder::Instance().GetShop());
 		        	
 	GovermentBuilder::Instance().CreateNewGoverment();
 	GovermentBuilder::Instance().CreateNewInternals();	
-	kosmoport->SetGoverment(GovermentBuilder::Instance().GetGoverment());
+	kosmoport->BindGoverment(GovermentBuilder::Instance().GetGoverment());
 }
 
   	

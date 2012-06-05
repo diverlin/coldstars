@@ -39,12 +39,14 @@ class Store : public Room
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 		
-        public:             
+        private:             
                 std::vector<ItemSlot*> slot_total_vec;
                 
                 void SaveDataUniqueStore(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueStore(const boost::property_tree::ptree&);
 		void ResolveDataUniqueStore();
+		
+	friend class GuiStore;
 };
         
 #endif

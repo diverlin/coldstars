@@ -31,7 +31,7 @@ class Angar : public Room
                 void Ai() const;
                 
                 bool AddVehicle(Vehicle*);
-                bool RemoveVehicle(Vehicle*);
+                //bool RemoveVehicle(Vehicle*);
 
                 void MouseControl(Player*);
 

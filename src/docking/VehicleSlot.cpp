@@ -35,13 +35,14 @@ void VehicleSlot::InsertVehicle(Vehicle* vehicle)
         this->vehicle = vehicle;
         
         vehicle->SetPlaceTypeId(data_id.type_id);
-        
+        vehicle->SetParentVehicleSlot(this);
+                
        	vehicle->GetPoints().SetCenter(rect.GetCenter());
         vehicle->GetPoints().SetAngle(0);
         vehicle->GetPoints().Update();
 }
 
-void VehicleSlot::Free()
+void VehicleSlot::Release()
 {
         vehicle = NULL;
 } 

@@ -20,7 +20,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
-
 struct KorpusData
 {
 	/* this data depends only on korpus and cannot be changed by artefacts/items */        
@@ -48,6 +47,7 @@ struct KorpusData
 struct UnresolvedDataUniqueVehicle
 {
 	int npc_id;
+	int parent_vehicleslot_id;
 	std::string texOb_korpus_path; 	
 };
 
@@ -58,7 +58,8 @@ class Vehicle : public BaseGameEntity
         	virtual ~Vehicle(); 
         	
                 void SetNpc(Npc* owner_npc) { this->owner_npc = owner_npc; };
-
+		void SetParentVehicleSlot(VehicleSlot* parent_vehicleslot) { this->parent_vehicleslot = parent_vehicleslot; };
+		
                 void SetWeaponComplex(WeaponComplex* weapon_complex) { this->weapon_complex = weapon_complex; };
                 void SetDriveComplex(DriveComplex* drive_complex)    { this->drive_complex  = drive_complex; };
 		void SetProtectionComplex(ProtectionComplex* protection_complex) { this->protection_complex = protection_complex; };
@@ -167,6 +168,7 @@ class Vehicle : public BaseGameEntity
                 TextureOb* texOb_korpus;
                 //                
                 
+                VehicleSlot* parent_vehicleslot;
                 UnresolvedDataUniqueVehicle data_unresolved_Vehicle;
                 
                 void SaveDataUniqueVehicle(boost::property_tree::ptree&, const std::string&) const;		

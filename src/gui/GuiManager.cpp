@@ -46,8 +46,11 @@ void GuiManager::UpdateInSpace()
 
 void GuiManager::UpdateInStore()
 {        	
-	gui_store->Update();
-	gui_vehicle->Update(player->GetNpc()->GetVehicle(), ((Kosmoport*)player->GetNpc()->GetLand())->GetStore());
+	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
+	Vehicle* vehicle = player->GetNpc()->GetScanTarget();
+	
+	gui_store->Update(store);
+	gui_vehicle->Update(vehicle, store);
 	
 	player->GetCursor()->Update();
 }
@@ -74,21 +77,25 @@ void GuiManager::UpdateInScan(bool allow_full_control)
 
 void GuiManager::RenderInStore() const
 {
+	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
+	Vehicle* vehicle = player->GetNpc()->GetScanTarget();
+		
 	resetRenderTransformation();
 
-	gui_store->RenderBackground();
+        Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight()); 
+	gui_store->RenderBackground(store, screen_rect);
 	
 	enable_BLEND();
 
-		gui_vehicle->Render();
-		gui_store->RenderSlots();
+		gui_vehicle->Render(vehicle);
+		gui_store->RenderSlots(store);
 		
 		player->GetCursor()->GetItemSlot()->RenderEquipedItem();	
 
-		gui_store->RenderFocusedItemInfo();	
+		gui_store->RenderFocusedItemInfo(store);	
 		if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == false)
 		{
-			gui_vehicle->RenderFocusedItemInfo();
+			gui_vehicle->RenderFocusedItemInfo(vehicle);
 		}
 
 	disable_BLEND();
@@ -97,17 +104,19 @@ void GuiManager::RenderInStore() const
 
 void GuiManager::RenderInScan() const
 {
+	Vehicle* vehicle = player->GetNpc()->GetScanTarget();
+	
 	resetRenderTransformation();
 	enable_BLEND();
 
-		gui_vehicle->Render();
+		gui_vehicle->Render(vehicle);
 		gui_skill->Render();
 		
 		player->GetCursor()->GetItemSlot()->RenderEquipedItem();		
 	
 		if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == false)
 		{
-			gui_vehicle->RenderFocusedItemInfo();
+			gui_vehicle->RenderFocusedItemInfo(vehicle);
 		}
 	disable_BLEND();
 }

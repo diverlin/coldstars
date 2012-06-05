@@ -111,7 +111,7 @@ void Store::LoadDataUniqueStore(const boost::property_tree::ptree& load_ptree)
 
 void Store::ResolveDataUniqueStore()
 {
-	//angar     = (Angar*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.angar_id); 
+	((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindStore(this); 
 }
 
 void Store::SaveData(boost::property_tree::ptree& save_ptree) const

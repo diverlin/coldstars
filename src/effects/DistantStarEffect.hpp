@@ -17,26 +17,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef DISTANTSTARBG_H
-#define DISTANTSTARBG_H
+#ifndef DISTANTSTAREFFECT_H
+#define DISTANTSTAREFFECT_H
 
 
-class DistantStarBgEffect
+class DistantStarEffect : public BaseBackGroundEffect
 {   
     	public:
-       		DistantStarBgEffect(TextureOb* _texOb, vec2f _center, float _particleSize);
-       		void Render(float vx, float vy);
+       		DistantStarEffect();
+       		~DistantStarEffect();
        		
+       		void Render(float, float);
+       		
+                void SaveData(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadData(const boost::property_tree::ptree&);
+		void ResolveData();
+		
        	private:
-       	       	TextureOb* texOb;
+     		void SaveDataUniqueDistantStarEffect(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadDataUniqueDistantStarEffect(const boost::property_tree::ptree&);
+		void ResolveDataUniqueDistantStarEffect();
 
-       		vec2f center; 
-       		float particleSize;
-       		float distance_rate;
        	
 }; 
 
-DistantStarBgEffect* getNewDistantStarBgEffect(int color_id = -1);
+DistantStarEffect* GetNewDistantStarEffect(int color_id = -1);
 
 
 #endif 

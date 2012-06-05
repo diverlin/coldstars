@@ -70,10 +70,8 @@ void GuiVehicle::Update(Vehicle* vehicle, Store* store)
 
 
 
-void GuiVehicle::Render() const
+void GuiVehicle::Render(Vehicle* vehicle) const
 {
-	Vehicle* vehicle = player->GetNpc()->GetScanTarget();
-
 	drawTexturedRect(vehicle->texOb_korpus, vehicle->kontur_rect, -1.0);
 
 	for(unsigned int i = 0; i < vehicle->slot_total_vec.size(); i++)
@@ -85,10 +83,8 @@ void GuiVehicle::Render() const
 }
 
 
-void GuiVehicle::RenderFocusedItemInfo() const
+void GuiVehicle::RenderFocusedItemInfo(Vehicle* vehicle) const
 {
-	Vehicle* vehicle = player->GetNpc()->GetScanTarget();
-
 	for(unsigned int i = 0; i < vehicle->slot_total_vec.size(); i++)
 	{ 
 		if (vehicle->slot_total_vec[i]->CheckInteraction(player->GetCursor()->GetMousePos().x, (player->GetScreen()->getHeight()  - player->GetCursor()->GetMousePos().y)) == true)

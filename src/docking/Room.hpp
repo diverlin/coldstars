@@ -37,7 +37,6 @@ class Room : public Base
                 
                 Kosmoport* GetOwnerKosmoport() { return owner_kosmoport; }  
 
-                void RenderBackground(Player*) const;
                 void RenderBackground(const Rect&) const;
                 		
         protected:

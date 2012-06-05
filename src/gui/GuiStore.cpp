@@ -27,11 +27,9 @@ GuiStore::~GuiStore()
 {}
 
         
-void GuiStore::Update()
+void GuiStore::Update(Store* store)
 {
- 	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
- 
-        bool lmb = player->GetCursor()->GetMouseLeftButton();; 
+         bool lmb = player->GetCursor()->GetMouseLeftButton();; 
         //bool rmb = player->GetCursor()->GetMouseRightButton();; 
 
         for (unsigned int i = 0; i < store->slot_total_vec.size(); i++)
@@ -52,24 +50,21 @@ void GuiStore::Update()
         }
 }
 
-void GuiStore::RenderBackground()
+void GuiStore::RenderBackground(Store* store, const Rect& rect)
 {
-	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();	  
-	store->RenderBackground(player);                
+	store->RenderBackground(rect);                
 }
 
-void GuiStore::RenderSlots() const
-{            
-	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();	         
+void GuiStore::RenderSlots(Store* store) const
+{      
         for (unsigned int i = 0; i < store->slot_total_vec.size(); i ++)
         {
                 store->slot_total_vec[i]->Render(-1);
         }
 }
 
-void GuiStore::RenderFocusedItemInfo()
-{
-	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
+void GuiStore::RenderFocusedItemInfo(Store* store)
+{	
         for (unsigned int i = 0; i < store->slot_total_vec.size(); i++)
         { 
                 float dist = distBetweenPoints(store->slot_total_vec[i]->GetRect().GetCenter(), player->GetCursor()->GetMousePos().x, player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y);

@@ -17,32 +17,40 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef DISTANTNEBULABG_H
-#define DISTANTNEBULABG_H
+#ifndef DISTANTNEBULAEFFECT_H
+#define DISTANTNEBULAEFFECT_H
 
     
 
-class DistantNebulaBgEffect
+class DistantNebulaEffect : public BaseBackGroundEffect
 {
     	public:
-	        DistantNebulaBgEffect(TextureOb* _texOb, vec3f _center);
-	        
-        	void updateRenderStuff();
+	        DistantNebulaEffect();
+	        ~DistantNebulaEffect();
+
+	      	void SetAngle(float angle_inD) 	{ this->angle_inD = angle_inD; };	        	        
+	      	void SetDAngle(float d_angle_inD) 	{ this->d_angle_inD = d_angle_inD; };
+
+        	void UpdateRenderStuff();
         	void Render(float vx, float vy);
         	
+        	void SaveData(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadData(const boost::property_tree::ptree&);
+		void ResolveData();
+		
         private:
-                TextureOb* texOb;
         	int minus_half_w, minus_half_h, plus_half_w, plus_half_h;   
         	
         	float angle_inD;
         	float d_angle_inD;
-
-        	float distance_rate;
-        	vec3f center;
+      	
+        	void CalcRenderConstants();   
         	
-        	void calcRenderConstants();     
+        	void SaveDataUniqueDistantNebulaEffect(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadDataUniqueDistantNebulaEffect(const boost::property_tree::ptree&);
+		void ResolveDataUniqueDistantNebulaEffect();  
 };
 
-DistantNebulaBgEffect* createDistantNebula(int _color_id = -1);
+DistantNebulaEffect* GetNewDistantNebulaEffect(int _color_id = -1);
 
 #endif 

@@ -16,6 +16,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include <boost/property_tree/ptree.hpp>
+#include <boost/foreach.hpp>
 
 
 StarSystem::StarSystem(int id)
@@ -59,8 +61,8 @@ StarSystem::~StarSystem()
 	for(unsigned int i=0; i<NPC_vec.size(); i++) { delete NPC_vec[i]; } 
 	
     	// effects	
-        for(unsigned int i=0; i<distantNebulaBgEffect_vec.size(); i++) { delete distantNebulaBgEffect_vec[i]; } 
-        for(unsigned int i=0; i<distantStarBgEffect_vec.size(); i++)   { delete distantStarBgEffect_vec[i];   } 
+        for(unsigned int i=0; i<distantNebulaEffect_vec.size(); i++) { delete distantNebulaEffect_vec[i]; } 
+        for(unsigned int i=0; i<distantStarEffect_vec.size(); i++)   { delete distantStarEffect_vec[i];   } 
         for(unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)     { delete effect_LAZERTRACE_vec[i]; } 
         for(unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { delete effect_PARTICLESYSTEM_vec[i]; } 
         for(unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)      { delete effect_SHOCKWAVE_vec[i]; } 
@@ -184,8 +186,8 @@ void StarSystem::Add(ShockWaveEffect* _shockWave)              { effect_SHOCKWAV
 void StarSystem::Add(LazerTraceEffect* _lazerTraceEffect)      { effect_LAZERTRACE_vec.push_back(_lazerTraceEffect); }
 void StarSystem::Add(BaseParticleSystem* _ps)                  { effect_PARTICLESYSTEM_vec.push_back(_ps); }
 void StarSystem::Add(VerticalFlowText* _text)                  { text_DAMAGE_vec.push_back(_text); }
-void StarSystem::Add(DistantNebulaBgEffect* dn)                { distantNebulaBgEffect_vec.push_back(dn); }
-void StarSystem::Add(DistantStarBgEffect* ds)                  { distantStarBgEffect_vec.push_back(ds); }
+void StarSystem::Add(DistantNebulaEffect* dn)                { distantNebulaEffect_vec.push_back(dn); }
+void StarSystem::Add(DistantStarEffect* ds)                  { distantStarEffect_vec.push_back(ds); }
 void StarSystem::AddToHyperJumpQueue(Vehicle* vehicle)                { appear_VEHICLE_queue.push_back(vehicle); }	
 void StarSystem::AddToRemoveFromOuterSpaceQueue(Container* container) { remove_CONTAINER_queue.push_back(container); }
 
@@ -723,7 +725,7 @@ void StarSystem::DrawBackground(vec2f scroll_coords)
 {   
 	// HACK for point sprites
     	enable_POINTSPRITE();
-    		//distantStarBgEffect_vec[0]->Render(scroll_coords.x, scroll_coords.y); 
+    		if (distantStarEffect_vec.size()>0) distantStarEffect_vec[0]->Render(scroll_coords.x, scroll_coords.y); 
     	disable_POINTSPRITE();
     	// HACK for point sprites
 
@@ -734,16 +736,16 @@ void StarSystem::DrawBackground(vec2f scroll_coords)
     	enable_BLEND();
 		glDepthMask(false);
 
-    		for(unsigned int i = 0; i<distantNebulaBgEffect_vec.size(); i++)
+    		for(unsigned int i = 0; i<distantNebulaEffect_vec.size(); i++)
     		{ 
-       			distantNebulaBgEffect_vec[i]->updateRenderStuff(); 
-        		distantNebulaBgEffect_vec[i]->Render(scroll_coords.x, scroll_coords.y); 
+       			distantNebulaEffect_vec[i]->UpdateRenderStuff(); 
+        		distantNebulaEffect_vec[i]->Render(scroll_coords.x, scroll_coords.y); 
     		}
 
     		enable_POINTSPRITE();
-    			for(unsigned int i = 0; i<distantStarBgEffect_vec.size(); i++)
+    			for(unsigned int i = 0; i<distantStarEffect_vec.size(); i++)
     			{ 
-       				distantStarBgEffect_vec[i]->Render(scroll_coords.x, scroll_coords.y); 
+       				distantStarEffect_vec[i]->Render(scroll_coords.x, scroll_coords.y); 
     			}
     		disable_POINTSPRITE();
     	
@@ -992,11 +994,44 @@ void StarSystem :: PostDeathUniqueEvent(bool) /*virtual */
 void StarSystem::SaveDataUniqueStarSystem(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	save_ptree.put(root+"galaxy_id", galaxy->GetId());
+	for (unsigned int i = 0; i<distantStarEffect_vec.size(); i++)
+	{
+		distantStarEffect_vec[i]->SaveData(save_ptree, root);
+	}
+
+	for (unsigned int i = 0; i<distantNebulaEffect_vec.size(); i++)
+	{
+		distantNebulaEffect_vec[i]->SaveData(save_ptree, root);
+	}
+
 }
 
-void StarSystem::LoadDataUniqueStarSystem(const boost::property_tree::ptree& ptree)
+void StarSystem::LoadDataUniqueStarSystem(const boost::property_tree::ptree& load_ptree)
 {
-	data_unresolved_ss.galaxy_id = ptree.get<int>("galaxy_id");
+	data_unresolved_ss.galaxy_id = load_ptree.get<int>("galaxy_id");
+	
+	boost::property_tree::ptree tmp_ptree = load_ptree;
+	if (tmp_ptree.get_child_optional("distant_nebula_effect"))
+	{	
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, tmp_ptree.get_child("distant_nebula_effect"))
+		{
+			DistantNebulaEffect* dn = GetNewDistantNebulaEffect(NONE_ID);
+			dn->LoadData(v.second);
+			dn->ResolveData();
+                	Add(dn);
+		}
+	}
+	
+	if (tmp_ptree.get_child_optional("distant_star_effect"))
+	{	
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, tmp_ptree.get_child("distant_star_effect"))
+		{
+			DistantStarEffect* ds = GetNewDistantStarEffect(NONE_ID);
+			ds->LoadData(v.second);
+			ds->ResolveData();
+                	Add(ds);
+		}
+	}
 }
 
 void StarSystem::ResolveDataUniqueStarSystem()

@@ -32,7 +32,32 @@ Kosmoport :: Kosmoport(int id)
 /* virtual */
 Kosmoport :: ~Kosmoport()
 {}
-           
+       
+void Kosmoport::BindAngar(Angar* angar) 			
+{ 
+	this->angar= angar; 
+	this->angar->SetOwnerKosmoport(this);
+	
+}
+
+void Kosmoport::BindStore(Store* store) 			
+{ 
+	this->store = store; 
+	this->store->SetOwnerKosmoport(this);	
+}
+
+void Kosmoport::BindShop(Shop* shop)                	
+{ 
+	this->shop = shop; 
+	this->shop->SetOwnerKosmoport(this);
+}
+
+void Kosmoport::BindGoverment(Goverment* goverment) 	
+{ 
+	this->goverment= goverment; 
+	this->goverment->SetOwnerKosmoport(this);
+}
+                    
 /* virtual */
 bool Kosmoport::GetPermissionToLand() const
 {
@@ -57,10 +82,10 @@ bool Kosmoport::Add(Vehicle* vehicle)
 }
 
 /* virtual */
-bool Kosmoport::Remove(Vehicle* vehicle)
-{        
-    	return angar->RemoveVehicle(vehicle);
-}
+//bool Kosmoport::Remove(Vehicle* vehicle)
+//{        
+    	//return angar->RemoveVehicle(vehicle);
+//}
 
 
 /* virtual */
@@ -73,28 +98,13 @@ void Kosmoport::Ai()
 
 
 void Kosmoport::SaveDataUniqueKosmoport(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-	save_ptree.put(root+"unresolved.angar_id",     angar->GetId());
-	save_ptree.put(root+"unresolved.store_id",     store->GetId());
-        save_ptree.put(root+"unresolved.shop_id",      shop->GetId());
-	save_ptree.put(root+"unresolved.goverment_id", goverment->GetId());
-}
+{}
 
 void Kosmoport::LoadDataUniqueKosmoport(const boost::property_tree::ptree& load_ptree)
-{
-	data_unresolved_Kosmoport.angar_id = load_ptree.get<int>("unresolved.angar_id");
-	data_unresolved_Kosmoport.store_id = load_ptree.get<int>("unresolved.store_id");
-	data_unresolved_Kosmoport.shop_id = load_ptree.get<int>("unresolved.shop_id");
-	data_unresolved_Kosmoport.goverment_id = load_ptree.get<int>("unresolved.goverment_id");
-}
+{}
 
 void Kosmoport::ResolveDataUniqueKosmoport()
-{
-	SetAngar( (Angar*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.angar_id) ); 
-	SetStore( (Store*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.store_id) ); 
-	SetShop( (Shop*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.shop_id) ); 
-	SetGoverment( (Goverment*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.goverment_id) ); 
-}
+{}
 
 
 void Kosmoport::SaveData(boost::property_tree::ptree& save_ptree) const
