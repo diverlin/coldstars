@@ -21,35 +21,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define KOSMOPORT_H
 
 
-struct UnresolvedDataUniqueKosmoport
-{
-	int angar_id;
-	int store_id;
-	int shop_id;
-	int goverment_id;
-};
-
-
 class Kosmoport : public BaseLand
 {
         public:
                 Kosmoport(int);
                 virtual ~Kosmoport();
 
-                void SetAngar(Angar* angar) 			{ this->angar     = angar; };
-                void SetStore(Store* store) 			{ this->store     = store; };
-                void SetShop(Shop* shop)                	{ this->shop      = shop; };
-                void SetGoverment(Goverment* goverment) 	{ this->goverment = goverment; }; 
-
                 Angar*     	GetAngar()    	const { return angar; };
                 Store*    	GetStore()    	const { return store; };
                 Shop*      	GetShop()      	const { return shop; };
                 Goverment* 	GetGoverment() 	const { return goverment; }; 
-                
+
+                void BindAngar(Angar* angar);
+                void BindStore(Store* store);
+                void BindShop(Shop* shop);
+                void BindGoverment(Goverment* goverment);
+                                
                 virtual bool GetPermissionToLand() const;
                                 
                 virtual bool Add(Vehicle*);
-                virtual bool Remove(Vehicle*);
+                //virtual bool Remove(Vehicle*);
                 
                 virtual void Ai();
                 
@@ -64,9 +55,7 @@ class Kosmoport : public BaseLand
                 Store*     store;
                 Shop*      shop;
                 Goverment* goverment; 
-                
-                UnresolvedDataUniqueKosmoport data_unresolved_Kosmoport;
-                
+              
                 void SaveDataUniqueKosmoport(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueKosmoport(const boost::property_tree::ptree&);
 		void ResolveDataUniqueKosmoport();

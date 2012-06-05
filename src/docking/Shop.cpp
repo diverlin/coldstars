@@ -39,12 +39,13 @@ void Shop::RenderInternals() const
 void Shop::Update()
 {}
             
-void Shop::Render(Player* player) const
+void Shop::Render(Player* player) const // move to GuiShop
 {
         clearScreen();
         resetRenderTransformation();
         
-        RenderBackground(player);
+        Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());    
+        RenderBackground(screen_rect);
         
         enable_BLEND();
                 RenderInternals();
@@ -67,8 +68,7 @@ void Shop::LoadDataUniqueShop(const boost::property_tree::ptree& load_ptree)
 
 void Shop::ResolveDataUniqueShop()
 {
-	//angar     = (Angar*)EntityManager::Instance().GetEntityById(data_unresolved_Kosmoport.angar_id); 
-
+	((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindShop(this); 
 }
 
 void Shop::SaveData(boost::property_tree::ptree& save_ptree) const

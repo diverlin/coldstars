@@ -69,8 +69,7 @@ void PlanetBuilder::CreateNewInternals(float orbit_radius)
         	land = new NatureLand(); 
         }
         	
-	planet->SetLand(land);
-	land->SetOwner(planet);
+	planet->BindLand(land);
 	
 	planet->SetTextureOb(textureOb);
 	planet->SetSubTypeId(ENTITY::KOSMOPORT_ID);

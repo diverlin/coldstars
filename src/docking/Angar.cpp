@@ -79,22 +79,22 @@ bool Angar::AddVehicle(Vehicle* vehicle)
 }
 
 
-bool Angar::RemoveVehicle(Vehicle* vehicle)
-{
-        for (unsigned int i = 0; i < vehicleslot_vec.size(); i++)
-        {
-                if (vehicleslot_vec[i]->GetVehicle() != NULL)
-                {
-                        if (vehicleslot_vec[i]->GetVehicle() == vehicle)
-                        {
-                                vehicleslot_vec[i]->Free();
-                                return true;
-                        }
-                }
-        }
+//bool Angar::RemoveVehicle(Vehicle* vehicle)
+//{
+        //for (unsigned int i = 0; i < vehicleslot_vec.size(); i++)
+        //{
+                //if (vehicleslot_vec[i]->GetVehicle() != NULL)
+                //{
+                        //if (vehicleslot_vec[i]->GetVehicle() == vehicle)
+                        //{
+                                //vehicleslot_vec[i]->Release();
+                                //return true;
+                        //}
+                //}
+        //}
     
-        return false;       
-}
+        //return false;       
+//}
 
 
 
@@ -124,12 +124,13 @@ void Angar::MouseControl(Player* player)
 }
 
 
-void Angar::Render(Player* player) const
+void Angar::Render(Player* player) const // move to GuiAngar
 {
         clearScreen();
         resetRenderTransformation();
-                        
-        RenderBackground(player);
+                    
+        Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());    
+        RenderBackground(screen_rect);
                 
 	enable_BLEND();
         
@@ -174,7 +175,9 @@ void Angar::LoadDataUniqueAngar(const boost::property_tree::ptree& load_ptree)
 {}
 
 void Angar::ResolveDataUniqueAngar()
-{}
+{
+	((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindAngar(this); 
+}
 
 
 void Angar::SaveData(boost::property_tree::ptree& save_ptree) const

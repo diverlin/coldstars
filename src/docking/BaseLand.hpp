@@ -36,10 +36,11 @@ class BaseLand : public Base
 
 		void SetOwner(Base* owner)  { this->owner = owner; } 
 		
+		Base* GetOwner() const { return owner; };
 		virtual bool GetPermissionToLand() const = 0;
 		                
                 virtual bool Add(Vehicle*) = 0;
-                virtual bool Remove(Vehicle*) = 0;
+                //virtual bool Remove(Vehicle*) = 0;
                 
                 virtual void Ai() = 0;  
 		  

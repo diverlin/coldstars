@@ -81,6 +81,10 @@ void StarSystemBuilder::CreateNewInternals2()
         starsystem->GetPoints().SetCenter(center);
 
         this->CreateStar();
+        
+        int distNebula_num = getRandInt(4,7);
+        int distStar_num = getRandInt(40, 60);
+        this->CreateBackground(distNebula_num, distStar_num, starsystem->GetStar()->GetColorId());
           
         int planet_num = 1;//getRandInt(ENTITY::STARSYSTEM::PLANET_MIN, ENTITY::STARSYSTEM::PLANET_MAX);
         this->CreatePlanets(planet_num);
@@ -90,13 +94,13 @@ void StarSystemBuilder::CreateBackground(int distNebula_num, int distStar_num, i
 {
         for(int i = 0; i < distNebula_num; i++)
         { 
-		DistantNebulaBgEffect* dn = createDistantNebula(color_id);
+		DistantNebulaEffect* dn = GetNewDistantNebulaEffect(color_id);
                 starsystem->Add(dn);
         } 
 
         for(int i = 0; i < distStar_num; i++)
         { 
-		DistantStarBgEffect* ds = getNewDistantStarBgEffect();
+		DistantStarEffect* ds = GetNewDistantStarEffect();
                 starsystem->Add(ds);
         } 
 }

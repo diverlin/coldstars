@@ -35,6 +35,12 @@ Planet::~Planet()
 	delete land;
 }
 
+void Planet::BindLand(BaseLand* land)       		
+{
+	this->land = land;
+	this->land->SetOwner(this);
+}
+		
 void Planet::UpdateInSpace(int time, bool show_effect)
 {      
 	UpdateRotation();
@@ -81,7 +87,7 @@ void Planet::LoadDataUniquePlanet(const boost::property_tree::ptree& ptree)
 
 void Planet::ResolveDataUniquePlanet()
 {
-	SetLand((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Planet.land_id));	
+	BindLand((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Planet.land_id));	
 	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this, parent, data_unresolved_BasePlanet.orbit_it); 
 }
 	

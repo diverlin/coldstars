@@ -56,7 +56,8 @@ class BaseSlot : public Base
 		
                 Rect& GetRect() { return rect; };
 		Vehicle* GetOwnerVehicle() const { return (Vehicle*)owner; };
-	
+		Base* GetOwner() const { return owner; };
+			
                 void SetRect(float, float, int, int);
                 
                 bool CheckInteraction(int, int);

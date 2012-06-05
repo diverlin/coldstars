@@ -76,8 +76,8 @@ class StarSystem : public BaseGameEntity
 		void Add(ShockWaveEffect*);
 		void Add(LazerTraceEffect*);
 
-		void Add(DistantNebulaBgEffect*);
-		void Add(DistantStarBgEffect*);
+		void Add(DistantNebulaEffect*);
+		void Add(DistantStarEffect*);
 		
 		void Add(VerticalFlowText*);
 		//
@@ -138,8 +138,8 @@ class StarSystem : public BaseGameEntity
 		std::vector<Npc*>  NPC_vec;
     		   
     		// effects
-    	    	std::vector<DistantNebulaBgEffect*> distantNebulaBgEffect_vec;
-    		std::vector<DistantStarBgEffect*>   distantStarBgEffect_vec;
+    	    	std::vector<DistantNebulaEffect*> distantNebulaEffect_vec;
+    		std::vector<DistantStarEffect*>   distantStarEffect_vec;
     		
     		std::vector<LazerTraceEffect*>    effect_LAZERTRACE_vec;
     		std::vector<BaseParticleSystem*>  effect_PARTICLESYSTEM_vec;

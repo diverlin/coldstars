@@ -29,7 +29,7 @@ class VehicleSlot : public BaseSlot
                 
                 Vehicle* GetVehicle() const { return vehicle; };
                 void InsertVehicle(Vehicle*);
-                void Free(); 
+                void Release(); 
         
                 void Render() const;
                 void RenderInfo() const;

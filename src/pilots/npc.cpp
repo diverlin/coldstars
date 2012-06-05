@@ -303,9 +303,9 @@ void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
 void Npc::ResolveDataUniqueNpc()
 {
         BindVehicle( (Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_npc.vehicle_id) );
+        SetStarSystem( (StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id) );        
         if (data_unresolved_npc.land_id != NONE_ID) 
         { 
         	SetLand( (BaseLand*)EntityManager::Instance().GetEntityById(data_unresolved_npc.land_id) ); 
-        }
-	
+        }	
 }		

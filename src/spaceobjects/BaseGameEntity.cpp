@@ -160,4 +160,6 @@ void BaseGameEntity::ResolveDataUniqueBaseGameEntity()
 	{
 		parent = (BaseGameEntity*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.parent_id);
 	}
+
+	starsystem = (StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id);
 }

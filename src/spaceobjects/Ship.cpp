@@ -162,8 +162,8 @@ void Ship::ResolveDataUniqueShip()
 		}
 		
 		case ENTITY::VEHICLESLOT_ID:
-		{
-			((VehicleSlot*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->InsertVehicle(this); 
+		{	
+			((VehicleSlot*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this); 
 			break;
 		}
 	}

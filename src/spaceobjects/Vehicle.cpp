@@ -177,47 +177,60 @@ void Vehicle::DockingEvent()
 {
      	starsystem->RemoveShip(data_id.id);
      	starsystem->RemoveNpc(owner_npc->GetId(), owner_npc->GetSubTypeId());
-        
-             	     	     	
-     	if (drive_complex->getTarget()->GetTypeId() == ENTITY::PLANET_ID)
+            
+        switch(drive_complex->getTarget()->GetTypeId())         	     	     	
      	{
-                Planet* planet = ((Planet*)drive_complex->getTarget());                
-     		planet->GetLand()->Add((Ship*)this);
-	}
-	
-	if (drive_complex->getTarget()->GetTypeId() == ENTITY::VEHICLE_ID)
-	{
-		if (drive_complex->getTarget()->GetSubTypeId() == ENTITY::SPACESTATION_ID)
-		{
-                	SpaceStation* spacestation = ((SpaceStation*)drive_complex->getTarget());
-                        spacestation->GetLand()->Add((Ship*)this);
+     		case ENTITY::PLANET_ID:
+     		{
+                	Planet* planet = ((Planet*)drive_complex->getTarget());                
+     			planet->GetLand()->Add((Ship*)this);
+			break;
 		}
-		
+	
+		case ENTITY::VEHICLE_ID:
+		{	 
+			switch(drive_complex->getTarget()->GetSubTypeId())
+			{
+				case ENTITY::SPACESTATION_ID:
+				{
+                			SpaceStation* spacestation = ((SpaceStation*)drive_complex->getTarget());
+                        		spacestation->GetLand()->Add((Ship*)this);
+					break;
+				}
+				
+				case ENTITY::SHIP_ID:
+				{
+					//..
+					break;
+				}
+			}
+			
+			break;
+		}                          		
 	}
+        
+        GetDriveComplex()->resetTarget();
 }
 
 void Vehicle::LaunchingEvent()
 {
      	printf("vehicle id = %i, launchingEvent()\n", data_id.id);
 
-     	if (drive_complex->getTarget()->GetTypeId() == ENTITY::PLANET_ID)
-     	{
-     		starsystem->Add(this, drive_complex->getTarget()->GetPoints().GetCenter(), 0, NULL);
-
-     		((Planet*)drive_complex->getTarget())->GetLand()->Remove(this);
+	switch(parent_vehicleslot->GetOwner()->GetTypeId())
+	{
+		case ENTITY::ANGAR_ID:
+		{
+			Base* place = ((Angar*)parent_vehicleslot->GetOwner())->GetOwnerKosmoport()->GetOwner();
+		     	starsystem->Add(this, ((Planet*)place)->GetPoints().GetCenter(), 0, NULL);
+			parent_vehicleslot->Release();
+			break;
+		}
+			
+		case ENTITY::VEHICLE_ID:
+		{
+			break;
+		}
 	}
-	
-     	if (drive_complex->getTarget()->GetTypeId() == ENTITY::VEHICLE_ID)
-     	{	
-     		if (drive_complex->getTarget()->GetSubTypeId() == ENTITY::SPACESTATION_ID)
-     		{
-     			starsystem->Add(this, drive_complex->getTarget()->GetPoints().GetCenter(), 0, NULL);
-
-     			((SpaceStation*)drive_complex->getTarget())->GetLand()->Remove(this);
-     		}
-	}	
-
-     	drive_complex->resetTarget();
 }
 //// 
 
@@ -691,7 +704,10 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
        	save_ptree.put(root+"data_korpus.slot_weapon_num", data_korpus.slot_weapon_num);       	
        	
        	save_ptree.put(root+"data_unresolved_Vehicle.npc_id", owner_npc->GetId());       	
-       	save_ptree.put(root+"data_unresolved_Vehicle.texOb_korpus_path", texOb_korpus->path);       	
+       	save_ptree.put(root+"data_unresolved_Vehicle.texOb_korpus_path", texOb_korpus->path);     
+       	
+       	if (place_type_id == ENTITY::VEHICLESLOT_ID) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", parent_vehicleslot->GetId()); }
+       	else { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); }  	
 }
 
 void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptree)
@@ -714,6 +730,7 @@ void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptre
 
    	data_unresolved_Vehicle.npc_id            = load_ptree.get<int>("data_unresolved_Vehicle.npc_id"); 
    	data_unresolved_Vehicle.texOb_korpus_path = load_ptree.get<std::string>("data_unresolved_Vehicle.texOb_korpus_path"); 
+   	data_unresolved_Vehicle.parent_vehicleslot_id = load_ptree.get<int>("data_unresolved_Vehicle.parent_vehicleslot_id"); 
 }
 
 void Vehicle::ResolveDataUniqueVehicle()
