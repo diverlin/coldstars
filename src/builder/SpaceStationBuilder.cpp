@@ -64,7 +64,7 @@ void SpaceStationBuilder::CreateNewInternals()
         int size_threshold = 2; 
 	data_korpus.draw_turrels = true; 
                            
-    	spacestation->SetSubTypeId(SPACESTATION::MILITARY_ID);
+    	spacestation->SetSubSubTypeId(SPACESTATION::MILITARY_ID);
     	spacestation->SetKorpusData(data_korpus);
 	spacestation->SetTextureOb(texOb);
 	spacestation->SetLifeData(data_life);
@@ -76,5 +76,7 @@ void SpaceStationBuilder::CreateNewInternals()
         CreateProtectionComplex(spacestation);	
         CreateEquipmentSlots(spacestation);
                 
-    	spacestation->CreateLand(RACE::R0_ID);
+        KosmoportBuilder::Instance().CreateNewKosmoport();
+	KosmoportBuilder::Instance().CreateNewInternals();
+	spacestation->BindLand(KosmoportBuilder::Instance().GetKosmoport());
 }

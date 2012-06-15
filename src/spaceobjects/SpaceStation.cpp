@@ -32,13 +32,12 @@ SpaceStation::~SpaceStation()
 	delete land;
 }    
  
-void SpaceStation::CreateLand(int race_id)
+void SpaceStation::BindLand(BaseLand* land)       		
 {
-	KosmoportBuilder::Instance().CreateNewKosmoport();
-	KosmoportBuilder::Instance().CreateNewInternals();
-	land = KosmoportBuilder::Instance().GetKosmoport();
+	this->land = land;
+	this->land->SetOwner(this);
 }
-	        	
+       	
 void SpaceStation::UpdateInSpace(int time, bool show_effect)
 {
 	CheckDeath(show_effect);
@@ -106,22 +105,53 @@ void SpaceStation::RenderAtPlanet() const
 
 
 
-
 /*virtual*/
 void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	//const std::string root = "rocket."+int2str(data_id.id)+".";
+	const std::string root = "spacestation."+int2str(data_id.id)+".";
+        SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueBaseGameEntity(save_ptree, root);
+	SaveDataUniqueVehicle(save_ptree, root);
+	SaveDataUniqueSpaceStation(save_ptree, root);
 }
 
 /*virtual*/
 void SpaceStation::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-
+        LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueBaseGameEntity(load_ptree);
+	LoadDataUniqueVehicle(load_ptree);
+	LoadDataUniqueSpaceStation(load_ptree);
 }
 
 /*virtual*/
 void SpaceStation::ResolveData()
 {
-
+        ResolveDataUniqueBase();
+	ResolveDataUniqueBaseGameEntity();
+	ResolveDataUniqueVehicle();
+	ResolveDataUniqueSpaceStation();
 }
 
+void SpaceStation::SaveDataUniqueSpaceStation(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+	save_ptree.put(root+"unresolved.land_id", land->GetId());
+}
+
+void SpaceStation::LoadDataUniqueSpaceStation(const boost::property_tree::ptree& load_ptree)
+{
+	data_unresolved_SpaceStation.land_id = load_ptree.get<int>("unresolved.land_id");
+}
+
+void SpaceStation::ResolveDataUniqueSpaceStation()
+{
+        SpaceStationBuilder::Instance().CreateKorpusGeometry(this);
+        SpaceStationBuilder::Instance().CreateKorpusGui(this);
+        
+        SpaceStationBuilder::Instance().CreateProtectionComplex(this);
+        SpaceStationBuilder::Instance().CreateDriveComplex(this);
+        SpaceStationBuilder::Instance().CreateWeaponsComplex(this);        
+
+	BindLand((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_SpaceStation.land_id));	                       
+	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this, data_unresolved_BaseGameEntity.center, data_unresolved_BaseGameEntity.angle, parent); 
+}
