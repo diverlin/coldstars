@@ -159,7 +159,10 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
         	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
         	int ship_size_id = getRandInt(1, 9);
         	int weapons_num = 5;
-        	SpaceStation* spacestation = VehicleBuilder::Instance().GetNewSpaceStation();
+        	
+        	SpaceStationBuilder::Instance().CreateNewSpaceStation();
+        	SpaceStationBuilder::Instance().CreateNewInternals();
+        	SpaceStation* spacestation = SpaceStationBuilder::Instance().GetSpaceStation();
        
         	VehicleBuilder::Instance().Equip(spacestation);       	// improove
         	spacestation->UpdateAllPropertiesAndAbilities(); 	// improove

@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-SpaceStation::SpaceStation(int id, int race_id)
+SpaceStation::SpaceStation(int id)
 {      
 	data_id.id = id;
 	data_id.type_id = ENTITY::VEHICLE_ID;
