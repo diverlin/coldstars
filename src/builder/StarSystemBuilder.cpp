@@ -88,6 +88,8 @@ void StarSystemBuilder::CreateNewInternals2()
           
         int planet_num = 1;//getRandInt(ENTITY::STARSYSTEM::PLANET_MIN, ENTITY::STARSYSTEM::PLANET_MAX);
         this->CreatePlanets(planet_num);
+        
+        this->CreateSpaceStations(3);
 }
 
 void StarSystemBuilder::CreateBackground(int distNebula_num, int distStar_num, int color_id)
@@ -174,10 +176,10 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
                 
         	starsystem->Add(spacestation, center, angle, NULL);
         	
-		Satellite* satellite = VehicleBuilder::Instance().GetNewSatellite();
-                VehicleBuilder::Instance().Equip(satellite);           		// improove
+		//Satellite* satellite = VehicleBuilder::Instance().GetNewSatellite();
+                //VehicleBuilder::Instance().Equip(satellite);           		// improove
                         	
-                starsystem->Add((Vehicle*)satellite, vec2f(0, 0), 0, spacestation);
+                //starsystem->Add((Vehicle*)satellite, vec2f(0, 0), 0, spacestation);
     	}        
 }
 

@@ -20,6 +20,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef SPACESTATION_H
 #define SPACESTATION_H
 
+struct UnresolvedDataUniqueSpaceStation
+{
+	int land_id;
+};
 
 class SpaceStation : public Vehicle
 {
@@ -28,8 +32,7 @@ class SpaceStation : public Vehicle
         	~SpaceStation();
         	
 		BaseLand* GetLand() const { return land; };
-
-		void CreateLand(int);
+		void BindLand(BaseLand* land);
 
 		void UpdateInSpace(int, bool);
 		
@@ -45,6 +48,12 @@ class SpaceStation : public Vehicle
     		
         private:
                 BaseLand* land;
+                
+                UnresolvedDataUniqueSpaceStation data_unresolved_SpaceStation;
+                
+                void SaveDataUniqueSpaceStation(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueSpaceStation(const boost::property_tree::ptree&);
+		void ResolveDataUniqueSpaceStation();
 };
 
 

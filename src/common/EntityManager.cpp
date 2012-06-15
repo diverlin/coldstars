@@ -142,6 +142,15 @@ void EntityManager::LoadPass0()
 		}
 	}
 
+        if (load_ptree.get_child_optional("spacestation"))
+	{
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("spacestation"))
+		{
+			SpaceStationBuilder::Instance().CreateNewSpaceStation(v.second.get<int>("data_id.id"));
+			SpaceStationBuilder::Instance().GetSpaceStation()->LoadData(v.second);
+		}
+	}
+	
         if (load_ptree.get_child_optional("kosmoport"))
 	{	
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("kosmoport"))
