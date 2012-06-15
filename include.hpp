@@ -203,6 +203,7 @@ class Kosmoport;
 
 #include "src/builder/BaseVehicleBuilder.hpp"
 #include "src/builder/ShipBuilder.hpp"
+#include "src/builder/SpaceStationBuilder.hpp"
 #include "src/builder/ItemSlotBuilder.hpp"
 #include "src/builder/VehicleSlotBuilder.hpp"
 #include "src/builder/VehicleBuilder.hpp"
@@ -354,6 +355,7 @@ class Kosmoport;
 #include "src/builder/ContainerBuilder.cpp"
 #include "src/builder/BaseVehicleBuilder.cpp"
 #include "src/builder/ShipBuilder.cpp"
+#include "src/builder/SpaceStationBuilder.cpp"
 
 #include "src/builder/ItemSlotBuilder.cpp"
 #include "src/builder/VehicleSlotBuilder.cpp"
