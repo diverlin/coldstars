@@ -46,7 +46,6 @@ struct KorpusData
 
 struct UnresolvedDataUniqueVehicle
 {
-	int npc_id;
 	int parent_vehicleslot_id;
 	std::string texOb_korpus_path; 	
 };

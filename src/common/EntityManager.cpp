@@ -150,7 +150,16 @@ void EntityManager::LoadPass0()
 			SpaceStationBuilder::Instance().GetSpaceStation()->LoadData(v.second);
 		}
 	}
-	
+
+        if (load_ptree.get_child_optional("satellite"))
+	{
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("satellite"))
+		{
+			SatelliteBuilder::Instance().CreateNewSatellite(v.second.get<int>("data_id.id"));
+			SatelliteBuilder::Instance().GetSatellite()->LoadData(v.second);
+		}
+	}
+		
         if (load_ptree.get_child_optional("kosmoport"))
 	{	
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("kosmoport"))

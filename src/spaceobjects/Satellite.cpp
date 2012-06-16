@@ -18,7 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-Satellite :: Satellite(int id)
+Satellite::Satellite(int id)
 {        
 	data_id.id = id;
 	data_id.type_id = ENTITY::VEHICLE_ID;
@@ -30,14 +30,12 @@ Satellite :: Satellite(int id)
     	d_angle.z = 1.0f;
 }
 
-Satellite :: ~Satellite() 
+Satellite::~Satellite() 
 {
 	delete orbit;
 }
-    
-Orbit* Satellite :: getOrbit() const { return orbit; }
-    				
-void Satellite :: update_inSpace(int time, bool show_effect)
+
+void Satellite::UpdateInSpace(int time, bool show_effect)
 {
 	CheckDeath(show_effect);
 	if (time > 0)
@@ -60,8 +58,7 @@ void Satellite :: update_inSpace(int time, bool show_effect)
 	}
 }
 
-
-void Satellite :: UpdateInfo()
+void Satellite::UpdateInfo()
 {
 	info.clear();
 
@@ -72,9 +69,7 @@ void Satellite :: UpdateInfo()
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 }
             
-
-
-void Satellite :: updateRenderStuff()
+void Satellite::UpdateRenderStuff()
 {
     	//points.update(); 
     	protection_complex->GetShieldEffect()->Update();
@@ -90,7 +85,7 @@ void Satellite :: updateRenderStuff()
     	//}
 }
 
-void Satellite :: render_inSpace() const
+void Satellite::RenderInSpace() const
 {   
         //if (ableTo.GRAB == true)
         //{
@@ -115,8 +110,7 @@ void Satellite :: render_inSpace() const
         }
 }
 
-
-void Satellite :: render_atPlanet() const
+void Satellite::RenderAtPlanet() const
 {
 	RenderKorpus();
 	
@@ -128,22 +122,65 @@ void Satellite :: render_atPlanet() const
 
 
 
+
 /*virtual*/
 void Satellite::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	//const std::string root = "rocket."+int2str(data_id.id)+".";
+	const std::string root = "satellite."+int2str(data_id.id)+".";
+        SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueBaseGameEntity(save_ptree, root);
+	SaveDataUniqueVehicle(save_ptree, root);
+	SaveDataUniqueSatellite(save_ptree, root);
 }
 
 /*virtual*/
 void Satellite::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-
+        LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueBaseGameEntity(load_ptree);
+	LoadDataUniqueVehicle(load_ptree);
+	LoadDataUniqueSatellite(load_ptree);
 }
 
 /*virtual*/
 void Satellite::ResolveData()
 {
-
+        ResolveDataUniqueBase();
+	ResolveDataUniqueBaseGameEntity();
+	ResolveDataUniqueVehicle();
+	ResolveDataUniqueSatellite();
 }
+
+void Satellite::SaveDataUniqueSatellite(boost::property_tree::ptree&, const std::string&) const
+{}
+
+void Satellite::LoadDataUniqueSatellite(const boost::property_tree::ptree&)
+{}
+
+void Satellite::ResolveDataUniqueSatellite()
+{
+        SatelliteBuilder::Instance().CreateKorpusGeometry(this);
+        SatelliteBuilder::Instance().CreateKorpusGui(this);
+        
+        SatelliteBuilder::Instance().CreateProtectionComplex(this);
+        SatelliteBuilder::Instance().CreateDriveComplex(this);
+        SatelliteBuilder::Instance().CreateWeaponsComplex(this);        
+                       
+        switch(place_type_id)
+        {
+        	case ENTITY::SPACE_ID: 
+        	{
+			((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this, data_unresolved_BaseGameEntity.center, data_unresolved_BaseGameEntity.angle, parent); 
+			break;
+		}
+		
+		//case ENTITY::VEHICLESLOT_ID:
+		//{	
+			//((VehicleSlot*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this); 
+			//break;
+		//}
+	}
+}
+
 
 

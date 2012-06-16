@@ -29,7 +29,7 @@ class StarSystemBuilder
 
         	void CreateNewStarSystem(int id = NONE_ID); 
                 void CreateNewInternals();
-                void CreateNewInternals2();
+                //void CreateNewInternalsDebug();
                 StarSystem* GetStarSystem() const { return starsystem; };
                        	 		                
         private:

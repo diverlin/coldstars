@@ -74,23 +74,23 @@ void StarSystemBuilder::CreateNewInternals()
 }
 
   	
-void StarSystemBuilder::CreateNewInternals2()
-{
-        vec2f center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH -  2*GUI::MAP::BORDER_X), 
-        	     getRandInt(GUI::MAP::BORDER_Y, Config::Instance().SCREEN_HEIGHT - 2*GUI::MAP::BORDER_Y) );			 
-        starsystem->GetPoints().SetCenter(center);
+//void StarSystemBuilder::CreateNewInternalsDebug()
+//{
+        //vec2f center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH -  2*GUI::MAP::BORDER_X), 
+        	     //getRandInt(GUI::MAP::BORDER_Y, Config::Instance().SCREEN_HEIGHT - 2*GUI::MAP::BORDER_Y) );			 
+        //starsystem->GetPoints().SetCenter(center);
 
-        this->CreateStar();
+        //this->CreateStar();
         
-        int distNebula_num = getRandInt(4,7);
-        int distStar_num = getRandInt(40, 60);
-        this->CreateBackground(distNebula_num, distStar_num, starsystem->GetStar()->GetColorId());
+        //int distNebula_num = getRandInt(4,7);
+        //int distStar_num = getRandInt(40, 60);
+        //this->CreateBackground(distNebula_num, distStar_num, starsystem->GetStar()->GetColorId());
           
-        int planet_num = 1;//getRandInt(ENTITY::STARSYSTEM::PLANET_MIN, ENTITY::STARSYSTEM::PLANET_MAX);
-        this->CreatePlanets(planet_num);
+        //int planet_num = 1;//getRandInt(ENTITY::STARSYSTEM::PLANET_MIN, ENTITY::STARSYSTEM::PLANET_MAX);
+        //this->CreatePlanets(planet_num);
         
-        this->CreateSpaceStations(3);
-}
+        //this->CreateSpaceStations(3);
+//}
 
 void StarSystemBuilder::CreateBackground(int distNebula_num, int distStar_num, int color_id)
 {
@@ -135,10 +135,12 @@ void StarSystemBuilder::CreatePlanets(int planet_per_system)
 
                 starsystem->Add(planet, starsystem->GetStar());
                 
-                //Satellite* satellite = VehicleBuilder::Instance().GetNewSatellite();
-                //VehicleBuilder::Instance().Equip(satellite);           		// improove
+                SatelliteBuilder::Instance().CreateNewSatellite();
+                SatelliteBuilder::Instance().CreateNewInternals();
+                Satellite* satellite = SatelliteBuilder::Instance().GetSatellite();
+                SatelliteBuilder::Instance().Equip(satellite);           		// improove
                         	
-                //starsystem->Add((Vehicle*)satellite, vec2f(0, 0), 0, planet);
+                starsystem->Add((Vehicle*)satellite, vec2f(0, 0), 0, planet);
         }
         
 }
@@ -166,7 +168,7 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
         	SpaceStationBuilder::Instance().CreateNewInternals();
         	SpaceStation* spacestation = SpaceStationBuilder::Instance().GetSpaceStation();
        
-        	VehicleBuilder::Instance().Equip(spacestation);       	// improove
+        	SpaceStationBuilder::Instance().Equip(spacestation);       	// improove
         	spacestation->UpdateAllPropertiesAndAbilities(); 	// improove
         
         	npc->BindVehicle(spacestation);
@@ -176,10 +178,12 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
                 
         	starsystem->Add(spacestation, center, angle, NULL);
         	
-		//Satellite* satellite = VehicleBuilder::Instance().GetNewSatellite();
-                //VehicleBuilder::Instance().Equip(satellite);           		// improove
+                SatelliteBuilder::Instance().CreateNewSatellite();
+                SatelliteBuilder::Instance().CreateNewInternals();
+                Satellite* satellite = SatelliteBuilder::Instance().GetSatellite();
+                SatelliteBuilder::Instance().Equip(satellite);           		// improove
                         	
-                //starsystem->Add((Vehicle*)satellite, vec2f(0, 0), 0, spacestation);
+                starsystem->Add((Vehicle*)satellite, vec2f(0, 0), 0, spacestation);
     	}        
 }
 
@@ -212,7 +216,7 @@ void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num)
         	ShipBuilder::Instance().CreateNewInternals(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
         	Ship* ship = ShipBuilder::Instance().GetShip();
        
-        	VehicleBuilder::Instance().Equip(ship);            	// improove
+        	ShipBuilder::Instance().Equip(ship);            	// improove
         
         	npc->BindVehicle(ship);
 

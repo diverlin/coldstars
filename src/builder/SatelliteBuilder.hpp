@@ -16,35 +16,32 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#ifndef SATELLITEBUILDER_H
+#define SATELLITEBUILDER_H
 
-#ifndef SATELLITE_H
-#define SATELLITE_H
 
-
-class Satellite : public Vehicle
+class SatelliteBuilder : public BaseVehicleBuilder
 {
-    	public:  
-        	Satellite(int);
-        	~Satellite();
-
-    		Orbit* getOrbit() const;
-    		
-		void update_inSpace(int, bool);
-        	
-        	void updateRenderStuff();
-        	void render_inSpace() const;
-		void render_atPlanet() const; 
+	public:
+		static SatelliteBuilder& Instance();
+		~SatelliteBuilder();
 		
-		void SaveData(boost::property_tree::ptree&) const;
-    		void LoadData(const boost::property_tree::ptree&);
-    		void ResolveData();
-    		
+		void CreateNewSatellite(int id = NONE_ID);							
+		void CreateNewInternals();   
+		Satellite* GetSatellite() const { return satellite; };         
+       
         private:
-        	Orbit* orbit;
-
-        	virtual void UpdateInfo();
-};
+        	SatelliteBuilder():satellite(NULL) {};   	
+        	SatelliteBuilder(const SatelliteBuilder&) = delete; 
+        	SatelliteBuilder& operator=(const SatelliteBuilder&) = delete;
+        	
+        	Satellite* satellite;
+}; 
 
 
 #endif 
+    
+
+        
+
 
