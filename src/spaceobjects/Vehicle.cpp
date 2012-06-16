@@ -703,7 +703,6 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
        	save_ptree.put(root+"data_korpus.slot_freezer_num", data_korpus.slot_freezer_num);
        	save_ptree.put(root+"data_korpus.slot_weapon_num", data_korpus.slot_weapon_num);       	
        	
-       	save_ptree.put(root+"data_unresolved_Vehicle.npc_id", owner_npc->GetId());       	
        	save_ptree.put(root+"data_unresolved_Vehicle.texOb_korpus_path", texOb_korpus->path);     
        	
        	if (place_type_id == ENTITY::VEHICLESLOT_ID) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", parent_vehicleslot->GetId()); }
@@ -728,7 +727,6 @@ void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptre
    	data_korpus.slot_freezer_num   = load_ptree.get<int>("data_korpus.slot_freezer_num"); 
    	data_korpus.slot_weapon_num    = load_ptree.get<int>("data_korpus.slot_weapon_num"); 
 
-   	data_unresolved_Vehicle.npc_id            = load_ptree.get<int>("data_unresolved_Vehicle.npc_id"); 
    	data_unresolved_Vehicle.texOb_korpus_path = load_ptree.get<std::string>("data_unresolved_Vehicle.texOb_korpus_path"); 
    	data_unresolved_Vehicle.parent_vehicleslot_id = load_ptree.get<int>("data_unresolved_Vehicle.parent_vehicleslot_id"); 
 }

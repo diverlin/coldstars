@@ -51,7 +51,7 @@ void PlayerBuilder::CreateNewInternals()
         ShipBuilder::Instance().CreateNewInternals(prace_id, psubtype_id, size_id, weapons_num);
         Ship* pship = ShipBuilder::Instance().GetShip();
         	
-	VehicleBuilder::Instance().Equip(pship);   // improove
+	ShipBuilder::Instance().Equip(pship);   // improove
         
         pnpc->BindVehicle(pship);
    	player->BindNpc(pnpc);

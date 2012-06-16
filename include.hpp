@@ -181,7 +181,7 @@ class Kosmoport;
 #include "src/spaceobjects/Vehicle.hpp"
 #include "src/spaceobjects/rocketBullet.hpp"
 #include "src/spaceobjects/SpaceStation.hpp"
-#include "src/spaceobjects/satellite.hpp"
+#include "src/spaceobjects/Satellite.hpp"
 #include "src/spaceobjects/Ship.hpp"
 #include "src/builder/ContainerBuilder.hpp"
 #include "src/builder/items/equipment/BakEquipmentBuilder.hpp"
@@ -204,6 +204,7 @@ class Kosmoport;
 #include "src/builder/BaseVehicleBuilder.hpp"
 #include "src/builder/ShipBuilder.hpp"
 #include "src/builder/SpaceStationBuilder.hpp"
+#include "src/builder/SatelliteBuilder.hpp"
 #include "src/builder/ItemSlotBuilder.hpp"
 #include "src/builder/VehicleSlotBuilder.hpp"
 #include "src/builder/VehicleBuilder.hpp"
@@ -304,7 +305,7 @@ class Kosmoport;
 #include "src/spaceobjects/BasePlanet.cpp"
 #include "src/spaceobjects/Asteroid.cpp"   
 #include "src/spaceobjects/SpaceStation.cpp" 
-#include "src/spaceobjects/satellite.cpp" 
+#include "src/spaceobjects/Satellite.cpp" 
 #include "src/items/others/Bomb.cpp" 
 #include "src/spaceobjects/blackHole.cpp"
 
@@ -356,6 +357,7 @@ class Kosmoport;
 #include "src/builder/BaseVehicleBuilder.cpp"
 #include "src/builder/ShipBuilder.cpp"
 #include "src/builder/SpaceStationBuilder.cpp"
+#include "src/builder/SatelliteBuilder.cpp"
 
 #include "src/builder/ItemSlotBuilder.cpp"
 #include "src/builder/VehicleSlotBuilder.cpp"

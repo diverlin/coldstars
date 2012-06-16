@@ -101,7 +101,7 @@ void StarSystem::Add(Vehicle* vehicle, vec2f center, float angle, BaseGameEntity
 		case ENTITY::SATELLITE_ID:    	
 		{ 
 			vehicle->SetParent(parent);
-			((Satellite*)vehicle)->getOrbit()->CalcPath(parent->GetCollisionRadius(), 1.0);
+			((Satellite*)vehicle)->GetOrbit()->CalcPath(parent->GetCollisionRadius(), 1.0);
 			SATELLITE_vec.push_back((Satellite*)vehicle); 
 		
 			break; 
@@ -625,7 +625,7 @@ void StarSystem :: updateEntities_s(int time, bool show_effect)
                 
         for (unsigned int si = 0; si < SATELLITE_vec.size(); si++)
         {
-                SATELLITE_vec[si]->update_inSpace(time, show_effect);         
+                SATELLITE_vec[si]->UpdateInSpace(time, show_effect);         
     	}        
     	//
     	

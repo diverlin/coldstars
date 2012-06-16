@@ -17,28 +17,38 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef VEHICLEBUILDER_H
-#define VEHICLEBUILDER_H
+#ifndef SATELLITE_H
+#define SATELLITE_H
 
 
-class VehicleBuilder : public BaseVehicleBuilder
+class Satellite : public Vehicle
 {
-	public:
-		static VehicleBuilder& Instance();
-		~VehicleBuilder();
+    	public:  
+        	Satellite(int);
+        	~Satellite();
+
+    		Orbit* GetOrbit() const { return orbit; };
+    		
+		void UpdateInSpace(int, bool);
+        	
+        	void UpdateRenderStuff();
+        	void RenderInSpace() const;
+		void RenderAtPlanet() const; 
 		
-		RocketBullet* GetNewRocket(BulletData, ItemSlot*, float, bool force_center_start = false) const;                
-       
+		void SaveData(boost::property_tree::ptree&) const;
+    		void LoadData(const boost::property_tree::ptree&);
+    		void ResolveData();
+    		
         private:
-        	VehicleBuilder() {};   	
-        	VehicleBuilder(const VehicleBuilder&) = delete; 
-        	VehicleBuilder operator=(const VehicleBuilder&) = delete;
-}; 
+        	Orbit* orbit;
+
+        	virtual void UpdateInfo();
+        	
+        	void SaveDataUniqueSatellite(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueSatellite(const boost::property_tree::ptree&);
+		void ResolveDataUniqueSatellite();
+};
 
 
 #endif 
-    
-
-        
-
 
