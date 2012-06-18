@@ -27,6 +27,7 @@ RocketEquipment::RocketEquipment(int id)
         radius_orig   = 0;
         
         ammo   = 0;
+        fire_atOnce = getRandInt(1, 3);
 }
 
 /* virtual */
@@ -106,17 +107,35 @@ std::string RocketEquipment::GetRadiusStr()
 void RocketEquipment::FireEvent()
 {
 	int num = 0;
-	RocketBuilder::Instance().CreateNewRocket();
-	RocketBuilder::Instance().CreateNewInternals(data_bullet, slot, 0.0f);
+	float offset;
 	
-    	slot->GetOwnerVehicle()->GetStarSystem()->Add(RocketBuilder::Instance().GetRocket());
-    	num++;
+	if (fire_atOnce>=1)
+	{
+		offset = 0.0;
+		RocketBuilder::Instance().CreateNewRocket();
+		RocketBuilder::Instance().CreateNewInternals(data_bullet);	
+    		slot->GetOwnerVehicle()->GetStarSystem()->Add(RocketBuilder::Instance().GetRocket(), slot, offset);
+    		num++;
+    	}
+    	
+    	//if (fire_atOnce>=2)
+    	//{
+    		//offset = +2.0;
+		//RocketBuilder::Instance().CreateNewRocket();
+		//RocketBuilder::Instance().CreateNewInternals(data_bullet);	
+    		//slot->GetOwnerVehicle()->GetStarSystem()->Add(RocketBuilder::Instance().GetRocket(), slot, offset);
+    		//num++;
+    	//}
 
-    	//RocketBullet* rocket2 = getNewRocketBullet(data_bullet, slot, +2);
-    	//slot->getOwnerShip()->GetStarSystem()->add(rocket2);
-    	//num++;
-
-
+    	//if (fire_atOnce>=3)
+    	//{
+    		//offset = -2.0;
+		//RocketBuilder::Instance().CreateNewRocket();
+		//RocketBuilder::Instance().CreateNewInternals(data_bullet);	
+    		//slot->GetOwnerVehicle()->GetStarSystem()->Add(RocketBuilder::Instance().GetRocket(), slot, offset);
+    		//num++;
+    	//}    	
+    	
     	//rocketlaunch.play()
     	ammo -= num;
 

@@ -168,10 +168,30 @@ void StarSystem::Add(Container* container, vec2f pos)
         CONTAINER_vec.push_back(container);
 }
 
-void StarSystem::Add(RocketBullet* _rocket)
+void StarSystem::Add(RocketBullet* rocket, ItemSlot* slot, float offset)
 {
-	_rocket->SetStarSystem(this);
-	ROCKET_vec.push_back(_rocket);
+	rocket->SetStarSystem(this);
+	vec2f start_pos;
+	float angle_inD;
+
+	if (slot->GetOwnerVehicle()->data_korpus.draw_turrels == true)
+    	{
+        	start_pos = slot->GetTurrel()->GetPoints().GetCenter(); 
+        	angle_inD = slot->GetTurrel()->GetPoints().GetAngleDegree();
+        }
+        else
+    	{
+         	start_pos = slot->GetOwnerVehicle()->GetPoints().GetCenter();
+         	angle_inD = slot->GetOwnerVehicle()->GetPoints().GetAngleDegree();
+    	}
+    	
+        rocket->GetPoints().SetCenter(start_pos.x + offset, start_pos.y + offset);
+        rocket->GetPoints().SetAngle(angle_inD);
+        
+        rocket->SetOwnerId(slot->GetOwnerVehicle()->GetId());
+        rocket->SetTarget(slot->GetTurrel()->GetTarget());
+        
+	ROCKET_vec.push_back(rocket);
 }    
 
 void StarSystem::Add(BlackHole* blackhole, vec2f pos)
@@ -444,7 +464,7 @@ void StarSystem::rocketCollision_s(bool show_effect)
                 	{
                 		for (unsigned int ki = 0; ki < SHIP_vec.size(); ki++)
                 		{
-                        		if (ROCKET_vec[ri]->GetOwner()->GetId() != SHIP_vec[ki]->GetId())
+                        		if (ROCKET_vec[ri]->GetOwnerId() != SHIP_vec[ki]->GetId())
                         		{                        
                         			collide = checkCollision(ROCKET_vec[ri], SHIP_vec[ki], show_effect);
                         			if (collide == true) { break; }                        
@@ -458,7 +478,7 @@ void StarSystem::rocketCollision_s(bool show_effect)
                 	{
                 		for (unsigned int si = 0; si < SATELLITE_vec.size(); si++)
                 		{
-                        		if (ROCKET_vec[ri]->GetOwner()->GetId() != SATELLITE_vec[si]->GetId())
+                        		if (ROCKET_vec[ri]->GetOwnerId() != SATELLITE_vec[si]->GetId())
                         		{                        
                         			collide = checkCollision(ROCKET_vec[ri], SATELLITE_vec[si], show_effect);
                         			if (collide == true) { break; }                        
@@ -471,7 +491,7 @@ void StarSystem::rocketCollision_s(bool show_effect)
                 	{
                 		for (unsigned int si = 0; si < SPACESTATION_vec.size(); si++)
                 		{
-                        		if (ROCKET_vec[ri]->GetOwner()->GetId() != SPACESTATION_vec[si]->GetId())
+                        		if (ROCKET_vec[ri]->GetOwnerId() != SPACESTATION_vec[si]->GetId())
                         		{                        
                         			collide = checkCollision(ROCKET_vec[ri], SPACESTATION_vec[si], show_effect);
                         			if (collide == true) { break; }                        

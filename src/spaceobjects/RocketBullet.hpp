@@ -28,14 +28,12 @@ class RocketBullet : public Vehicle
                 	     
                 ~RocketBullet();
                                 
-		void Place(vec2f, float, float);
-		
 		void SetBulletData(BulletData data_bullet) { this->data_bullet = data_bullet; speed = data_bullet.speed_init; };
-		void SetOwner(BaseGameEntity* owner) { this->owner = owner; };
+		void SetOwnerId(int owner_id) { this->owner_id = owner_id; };
 		void SetTarget(BaseGameEntity* target) { this->target = target; };
 		
         	int GetDamage() const { return data_bullet.damage; };
-		BaseGameEntity* GetOwner() const { return owner; };
+		unsigned int GetOwnerId() const { return owner_id; };
         
                 void UpdateInSpace(int, bool);
 
@@ -56,7 +54,7 @@ class RocketBullet : public Vehicle
                 float dx, dy;
                 float angle_inD;                
                 
-                BaseGameEntity* owner;
+                unsigned int owner_id;
                 BaseGameEntity* target;
                
                 void deathEventUnique(bool);
