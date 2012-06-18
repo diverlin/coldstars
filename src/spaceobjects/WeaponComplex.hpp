@@ -30,18 +30,19 @@ class WeaponComplex
                 bool AddSlot(ItemSlot*);
                 bool Add(BaseItem*);
         	
-      		void PostCreateInit(int, bool);
-
-        	WeaponSelector weapon_selector; 
-        	
                	void PrepareWeapons();
                      
                 void SetTarget(BaseGameEntity*);     
        
         	void Fire(int timer, bool);
 
-     		void SelectWeapons();  
-        	void ResetDeselectedWeaponTargets();   
+        	void WeaponsControlledFromUpperLevel(const WeaponSelector&); 
+        	
+     		void ActivateAllWeapons();
+     		void DeactivateAllWeapons();
+		void ActivateWeaponsBySubTypeId(int);
+		void DeactivateWeaponsBySubTypeId(int);
+
         	bool IsAnyWeaponSelected() const; 
         	
         	bool UpdateFireAbility();
@@ -52,14 +53,15 @@ class WeaponComplex
         	void RenderTurrels() const;
         	
       	private:
-      		int weapon_num;
       		Vehicle* owner_vehicle;
       		
       		int fire_delay, d_fire_delay;
         	std::vector<ItemSlot*> slot_weapon_vec;
         	std::vector<ItemSlot*> slot_weapon_equiped_vec;
         	std::vector<ItemSlot*> slot_weapon_reloaded_vec;
-        	
+
+        	void ResetDeselectedWeaponTargets(); 
+        	        	
         	void ReloadAllWeapons();  
         	void ValidateAllReloadedWeaponsTarget();
       		

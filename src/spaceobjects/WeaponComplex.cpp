@@ -43,134 +43,7 @@ bool WeaponComplex::Add(BaseItem* item)
         
         return false;
 }
-                
-void WeaponComplex::PostCreateInit(int weapon_num, bool draw_turrels)
-{
-	this->weapon_num = weapon_num;
-    	
-        if (weapon_num >= 1)
-    	{         
-       		if (draw_turrels == true)
-       		{   
-                        //turrel1 = new Turrel(weapon_slot1, owner_vehicle->GetPoints().getpWeapon1Center()); 
-                        //turrel1->SetTextureOb(texOb_turrel);       
-                        //turrel1->GetPoints().addMainQuadPoints();
-                        //turrel1->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
-                
-                        //weapon_slot1->SetTurrel(turrel1);
-                
-           		//owner_vehicle->GetPoints().initWeapon1CenterPoint(0, owner_vehicle->GetTextureOb()->getFrameHeight()/3);
-           		//owner_vehicle->GetPoints().addWeapon1CenterPoint();
-       		} 
-    	}
-   
-    	//if (weapon_num >= 2)
-    	//{  
-                //ItemSlot* weapon_slot2 = GetNewItemSlot(SLOT::WEAPON_ID); 
-                
-       		//weapon_slot2->SetRect(owner_vehicle->GetGuiRect().GetCenter().x+1*GUI::SLOT::WIDTH_FOR_SHIP, 
-       				      //owner_vehicle->GetGuiRect().GetCenter().y+-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
-       				      //GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
-       			    
-       		//slot_weapon_vec.push_back(weapon_slot2);
-       		//owner_vehicle->Add(weapon_slot2); 
-       
-                //turrel2 = new Turrel(weapon_slot2, owner_vehicle->GetPoints().getpWeapon2Center()); 
-       		//turrel2->SetTextureOb(texOb_turrel);
-                //turrel2->GetPoints().addMainQuadPoints();
-                //turrel2->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
-                
-              	//weapon_slot2->SetTurrel(turrel2);
-
-        
-       		//if (draw_turrels == true)
-       		//{  
-           		//owner_vehicle->GetPoints().initWeapon2CenterPoint(0, -owner_vehicle->GetTextureOb()->getFrameHeight()/3);
-           		//owner_vehicle->GetPoints().addWeapon2CenterPoint();
-       		//}
-    	//}
-
-    	//if (weapon_num >= 3)
-    	//{  
-                //ItemSlot* weapon_slot3 = GetNewItemSlot(SLOT::WEAPON_ID); 
-                	
-       		//weapon_slot3->SetRect(owner_vehicle->GetGuiRect().GetCenter().x+1*GUI::SLOT::WIDTH_FOR_SHIP, 
-                                      //owner_vehicle->GetGuiRect().GetCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP,
-       					//GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
-       				
-       		//slot_weapon_vec.push_back(weapon_slot3);
-       		//owner_vehicle->Add(weapon_slot3); 
-              
-       		//turrel3 = new Turrel(weapon_slot3, owner_vehicle->GetPoints().getpWeapon3Center()); 
-       		//turrel3->SetTextureOb(texOb_turrel);
-                //turrel3->GetPoints().addMainQuadPoints();
-                //turrel3->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
-                
-                
-              	//weapon_slot3->SetTurrel(turrel3);
-       
-       		//if (draw_turrels == true)
-       		//{  
-           		//owner_vehicle->GetPoints().initWeapon3CenterPoint(-owner_vehicle->GetTextureOb()->getFrameWidth()/5, owner_vehicle->GetTextureOb()->getFrameHeight()/3);
-           		//owner_vehicle->GetPoints().addWeapon3CenterPoint();
-       		//}
-    	//}
-
-    	//if (weapon_num >= 4)
-    	//{  
-                //ItemSlot* weapon_slot4 = GetNewItemSlot(SLOT::WEAPON_ID); 
-                
-       		//weapon_slot4->SetRect(owner_vehicle->GetGuiRect().GetCenter().x+2.2*GUI::SLOT::WIDTH_FOR_SHIP, 
-                                      //owner_vehicle->GetGuiRect().GetCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
-                                      //GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);	
-       			
-       		//slot_weapon_vec.push_back(weapon_slot4);
-       		//owner_vehicle->Add(weapon_slot4); 
-              
-       		//turrel4 = new Turrel(weapon_slot4, owner_vehicle->GetPoints().getpWeapon4Center()); 
-       		//turrel4->SetTextureOb(texOb_turrel);
-                //turrel4->GetPoints().addMainQuadPoints();
-                //turrel4->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
-                
-                
-              	//weapon_slot4->SetTurrel(turrel4);
-
-         
-       		//if (draw_turrels == true)
-       		//{  
-           		//owner_vehicle->GetPoints().initWeapon4CenterPoint(owner_vehicle->GetTextureOb()->getFrameWidth()/5, -owner_vehicle->GetTextureOb()->getFrameHeight()/3);
-           		//owner_vehicle->GetPoints().addWeapon4CenterPoint();
-       		//}
-
-    	//}   
-
-    	//if (weapon_num >= 5)
-    	//{  
-                //ItemSlot* weapon_slot5 = GetNewItemSlot(SLOT::WEAPON_ID); 
-                
-       		//weapon_slot5->SetRect(owner_vehicle->GetGuiRect().GetCenter().x+2.2*GUI::SLOT::WIDTH_FOR_SHIP, 
-                                      //owner_vehicle->GetGuiRect().GetCenter().y-1*GUI::SLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::SLOT::HEIGHT_FOR_SHIP/2,
-                                      //GUI::SLOT::WIDTH_FOR_SHIP, GUI::SLOT::HEIGHT_FOR_SHIP);
-       					
-       		//slot_weapon_vec.push_back(weapon_slot5);
-       		//owner_vehicle->Add(weapon_slot5); 
-              
-       		//turrel5 = new Turrel(weapon_slot5, owner_vehicle->GetPoints().getpWeapon5Center()); 
-              	//turrel5->SetTextureOb(texOb_turrel);
-                //turrel5->GetPoints().addMainQuadPoints();
-                //turrel5->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
-                
-                
-                //weapon_slot5->SetTurrel(turrel5);
-       		
-       		//if (draw_turrels == true)
-       		//{  
-           		//owner_vehicle->GetPoints().initWeapon5CenterPoint(-owner_vehicle->GetTextureOb()->getFrameWidth()/3, -owner_vehicle->GetTextureOb()->getFrameHeight()/3);
-           		//owner_vehicle->GetPoints().addWeapon5CenterPoint();
-       		//}
-    	//} 
-}
-
+ 
 void WeaponComplex::PrepareWeapons()
 {
      	// used once at the beginning of turn
@@ -193,28 +66,76 @@ void WeaponComplex::ReloadAllWeapons()
      	d_fire_delay = 40;   
 }
   
-void WeaponComplex::SelectWeapons()
+void WeaponComplex::WeaponsControlledFromUpperLevel(const WeaponSelector& weapon_selector)
 {
-        //if (weapon_num >= 1)
-                //weapon_slot1->GetTurrel()->SetSelectedStatus(weapon_selector.slot_1);
-        //if (weapon_num >= 2)
-                //weapon_slot2->GetTurrel()->SetSelectedStatus(weapon_selector.slot_2);
-        //if (weapon_num >= 3)
-                //weapon_slot3->GetTurrel()->SetSelectedStatus(weapon_selector.slot_3);
-        //if (weapon_num >= 4)
-                //weapon_slot4->GetTurrel()->SetSelectedStatus(weapon_selector.slot_4);
-        //if (weapon_num >= 5)
-                //weapon_slot5->GetTurrel()->SetSelectedStatus(weapon_selector.slot_5);
+	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
+	{
+               	slot_weapon_vec[i]->GetTurrel()->SetSelectedStatus(weapon_selector.GetSingle(i+1));
+	}
+                
+        ResetDeselectedWeaponTargets();
 }
+
+void WeaponComplex::ActivateAllWeapons()
+{
+	for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
+	{
+               	slot_weapon_reloaded_vec[i]->GetTurrel()->SetSelectedStatus(true);
+	}
+}
+
+void WeaponComplex::DeactivateAllWeapons()
+{
+	for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
+	{
+               	slot_weapon_reloaded_vec[i]->GetTurrel()->SetSelectedStatus(false);
+	}
+	
+	ResetDeselectedWeaponTargets();
+}
+
+void WeaponComplex::ActivateWeaponsBySubTypeId(int weapon_subtype_id)
+{
+	for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
+	{
+		if (slot_weapon_reloaded_vec[i]->GetItem()->GetSubTypeId() == weapon_subtype_id)
+		{
+               		slot_weapon_reloaded_vec[i]->GetTurrel()->SetSelectedStatus(true);		
+		}
+	}
+}
+
+
+void WeaponComplex::DeactivateWeaponsBySubTypeId(int weapon_subtype_id)
+{
+	for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
+	{
+		if (slot_weapon_reloaded_vec[i]->GetItem()->GetSubTypeId() == weapon_subtype_id)
+		{
+               		slot_weapon_reloaded_vec[i]->GetTurrel()->SetSelectedStatus(false);		
+		}
+	}
+	
+	ResetDeselectedWeaponTargets();
+}
+
 
 bool WeaponComplex::IsAnyWeaponSelected() const
 {
-	return weapon_selector.isAnySelected();
+	for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
+	{
+       		if (slot_weapon_reloaded_vec[i]->GetTurrel()->GetSelectedStatus() == true)
+       		{ 
+       			return true;		
+		}
+	}
+	
+	return false;
 }
 
-void WeaponComplex::SetTarget(BaseGameEntity* _target)
+void WeaponComplex::SetTarget(BaseGameEntity* target)
 {                          
-        float dist = distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), _target->GetPoints().GetCenter());
+        float dist = distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), target->GetPoints().GetCenter());
         
         for (unsigned int i = 0; i < slot_weapon_equiped_vec.size(); i++)
         {
@@ -222,7 +143,7 @@ void WeaponComplex::SetTarget(BaseGameEntity* _target)
         	{
            		if ( slot_weapon_equiped_vec[i]->GetTurrel()->GetTarget() == NULL )
            		{
-         			slot_weapon_equiped_vec[i]->GetTurrel()->SetTarget(_target);
+         			slot_weapon_equiped_vec[i]->GetTurrel()->SetTarget(target);
                                 slot_weapon_equiped_vec[i]->GetTurrel()->CheckTarget();                                        
                         }
                 } 
@@ -264,8 +185,6 @@ void WeaponComplex::ValidateAllReloadedWeaponsTarget()
 	}
 }
 
-
-
 void WeaponComplex::ResetDeselectedWeaponTargets()
 {
         for (unsigned int i = 0; i < slot_weapon_equiped_vec.size(); i++)
@@ -276,7 +195,6 @@ void WeaponComplex::ResetDeselectedWeaponTargets()
                 }
         }
 }
-
 
 bool WeaponComplex::UpdateFireAbility()
 {

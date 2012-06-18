@@ -24,25 +24,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class RocketBullet : public Vehicle
 {
         public:
-                RocketBullet(int, BulletData,  
-                	     BaseGameEntity*, 
-                	     int _owner_id);
+                RocketBullet(int);
                 	     
                 ~RocketBullet();
-                
-                
-		void place(vec2f, float, float);
-
+                                
+		void Place(vec2f, float, float);
+		
+		void SetBulletData(BulletData data_bullet) { this->data_bullet = data_bullet; speed = data_bullet.speed_init; };
+		void SetOwner(BaseGameEntity* owner) { this->owner = owner; };
+		void SetTarget(BaseGameEntity* target) { this->target = target; };
+		
+        	int GetDamage() const { return data_bullet.damage; };
+		BaseGameEntity* GetOwner() const { return owner; };
         
-		int GetDamage() const { return data_bullet.damage; };
-		int getOwnerShipId() const { return owner_ship_id; };
-        
-                void update_inSpace(int, bool);
+                void UpdateInSpace(int, bool);
 
 		void CollisionEvent(bool);
 
-             	void updateRenderStuff();
-                void render_inSpace() const;
+             	void UpdateRenderStuff();
+                void RenderInSpace() const;
                 
                 void SaveData(boost::property_tree::ptree&) const;
     		void LoadData(const boost::property_tree::ptree&);
@@ -50,14 +50,13 @@ class RocketBullet : public Vehicle
     		
         private:
                 BulletData data_bullet;
-
-                int owner_ship_id;
-
+               
                 float speed;
                
                 float dx, dy;
                 float angle_inD;                
                 
+                BaseGameEntity* owner;
                 BaseGameEntity* target;
                
                 void deathEventUnique(bool);

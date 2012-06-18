@@ -44,6 +44,7 @@ class GuiKosmoport;
 class GuiMap;
 
 class Kosmoport;
+class WeaponSelector;
 
 #include <iostream>
 #include "src/common/myVector.hpp"
@@ -179,7 +180,7 @@ class Kosmoport;
 #include "src/spaceobjects/WeaponComplex.hpp"
 #include "src/spaceobjects/ProtectionComplex.hpp"
 #include "src/spaceobjects/Vehicle.hpp"
-#include "src/spaceobjects/rocketBullet.hpp"
+#include "src/spaceobjects/RocketBullet.hpp"
 #include "src/spaceobjects/SpaceStation.hpp"
 #include "src/spaceobjects/Satellite.hpp"
 #include "src/spaceobjects/Ship.hpp"
@@ -203,11 +204,11 @@ class Kosmoport;
 
 #include "src/builder/BaseVehicleBuilder.hpp"
 #include "src/builder/ShipBuilder.hpp"
+#include "src/builder/RocketBuilder.hpp"
 #include "src/builder/SpaceStationBuilder.hpp"
 #include "src/builder/SatelliteBuilder.hpp"
 #include "src/builder/ItemSlotBuilder.hpp"
 #include "src/builder/VehicleSlotBuilder.hpp"
-#include "src/builder/VehicleBuilder.hpp"
 #include "src/builder/StarSystemBuilder.hpp"
 #include "src/builder/StarBuilder.hpp"
 #include "src/builder/AsteroidBuilder.hpp"
@@ -356,6 +357,7 @@ class Kosmoport;
 #include "src/builder/ContainerBuilder.cpp"
 #include "src/builder/BaseVehicleBuilder.cpp"
 #include "src/builder/ShipBuilder.cpp"
+#include "src/builder/RocketBuilder.cpp"
 #include "src/builder/SpaceStationBuilder.cpp"
 #include "src/builder/SatelliteBuilder.cpp"
 
@@ -363,7 +365,6 @@ class Kosmoport;
 #include "src/builder/VehicleSlotBuilder.cpp"
 #include "src/builder/AngarBuilder.cpp"
 #include "src/builder/StoreBuilder.cpp"
-#include "src/builder/VehicleBuilder.cpp"
 #include "src/builder/StarSystemBuilder.cpp"
 #include "src/builder/StarBuilder.cpp"
 #include "src/builder/AsteroidBuilder.cpp"
@@ -411,7 +412,7 @@ class Kosmoport;
 #include "src/effects/particlesystem/damage.cpp"
 #include "src/effects/lazerTrace.cpp"
 #include "src/effects/Shield.cpp"
-#include "src/spaceobjects/rocketBullet.cpp"
+#include "src/spaceobjects/RocketBullet.cpp"
 
 #include "src/pilots/player.cpp"
 #include "src/skill/skill.cpp"

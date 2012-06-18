@@ -146,32 +146,6 @@ ParticleData :: ParticleData()
 }
 	
 
-WeaponSelector :: WeaponSelector()
-{
-	slot_1 = false;
-     	slot_2 = false;
-     	slot_3 = false;
-     	slot_4 = false;
-     	slot_5 = false;
-}
-
-     	
-void WeaponSelector :: setAll(bool _status)
-{
-	slot_1 = _status;
-     	slot_2 = _status;
-     	slot_3 = _status;
-     	slot_4 = _status;
-     	slot_5 = _status;
-}
-
-bool WeaponSelector :: isAnySelected() const
-{
-	return (slot_1 or slot_2 or slot_3 or slot_4 or slot_5);
-}
-		
-
-
 ControlWord :: ControlWord()
 {
 	scan = false;

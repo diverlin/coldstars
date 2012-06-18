@@ -18,27 +18,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-RocketBullet :: RocketBullet(int id, BulletData _data_bullet, 			     
-                             BaseGameEntity* target,
-			     int _owner_id)
+RocketBullet::RocketBullet(int id)
 {
 	data_id.id = id;
 	data_id.type_id = ENTITY::ROCKET_ID;
-	
-	data_bullet = _data_bullet;
-	
-        owner_ship_id = _owner_id;
 
-        this->target = target;
-
-        speed = _data_bullet.speed_init;
-
+	owner = NULL;
+	target = NULL;
+        //speed = _data_bullet.speed_init;
 }
 
-RocketBullet :: ~RocketBullet()
+RocketBullet::~RocketBullet()
 {}
 
-void RocketBullet :: place(vec2f _start_pos, float _angle_inD, float offset)
+void RocketBullet::Place(vec2f _start_pos, float _angle_inD, float offset)
 {
 	dx = 0;
         dy = 0;
@@ -49,7 +42,7 @@ void RocketBullet :: place(vec2f _start_pos, float _angle_inD, float offset)
 }
 
 
-void RocketBullet :: update_inSpace(int time, bool show_effect)
+void RocketBullet::UpdateInSpace(int time, bool show_effect)
 {
 	CheckDeath(show_effect);
         
@@ -79,7 +72,7 @@ void RocketBullet :: update_inSpace(int time, bool show_effect)
     	}
 }
 
-bool RocketBullet :: CheckTarget() const
+bool RocketBullet::CheckTarget() const
 {
         if (target->GetAlive() == true)
         {
@@ -92,7 +85,7 @@ bool RocketBullet :: CheckTarget() const
         return false;
 }
 
-bool RocketBullet :: CheckStarSystem() const
+bool RocketBullet::CheckStarSystem() const
 {
         if (target->GetStarSystem() == starsystem)
         {
@@ -111,7 +104,7 @@ void RocketBullet::CollisionEvent(bool show_effect)
 
 
 
-void RocketBullet :: deathEventUnique(bool show_effect)
+void RocketBullet::deathEventUnique(bool show_effect)
 {
 	if (show_effect == true)
 	{
@@ -120,18 +113,18 @@ void RocketBullet :: deathEventUnique(bool show_effect)
 }
 
 
-void RocketBullet :: UpdateInfo()
+void RocketBullet::UpdateInfo()
 {}
 
 
 
-void RocketBullet :: updateRenderStuff()
+void RocketBullet::UpdateRenderStuff()
 {
 	//points.update();
 }
 
 
-void RocketBullet :: render_inSpace() const
+void RocketBullet::RenderInSpace() const
 {
 	RenderKorpus();
 	RenderDriveTrail();

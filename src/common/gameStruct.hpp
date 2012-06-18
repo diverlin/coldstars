@@ -171,28 +171,6 @@ struct ParticleData
 };
 
 
-
-
-
-
-
-
-class WeaponSelector
-{
-	public:
-		WeaponSelector();
-
-		bool slot_1;
-		bool slot_2;
-		bool slot_3;
-		bool slot_4;
-		bool slot_5;
-
-		void setAll(bool);
-		bool isAnySelected() const;
-};
-
-
 class ControlWord
 {
 	public:

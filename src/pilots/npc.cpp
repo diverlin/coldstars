@@ -170,12 +170,9 @@ void Npc::CheckNeeds()
 
 void Npc::AsteroidScenario()
 {
-        vehicle->GetWeaponComplex()->weapon_selector.setAll(false);
-        vehicle->GetWeaponComplex()->SelectWeapons();
-        vehicle->GetWeaponComplex()->ResetDeselectedWeaponTargets();
+        vehicle->GetWeaponComplex()->DeactivateAllWeapons();
 
-        vehicle->GetWeaponComplex()->weapon_selector.setAll(true);
-        vehicle->GetWeaponComplex()->SelectWeapons();
+        vehicle->GetWeaponComplex()->ActivateAllWeapons();
         vehicle->GetWeaponComplex()->SetTarget(observation->visible_ASTEROID_vec[0].asteroid);
                 
         //printf("TARGET => ship_id, asteroid id = %i/%i\n", ship->GetId(), sorted_visible_ASTEROID_pList[0]->GetId());

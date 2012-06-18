@@ -19,6 +19,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef PLAYER_H
 #define PLAYER_H
 
+class WeaponSelector
+{
+	public:
+		WeaponSelector();
+		void SetSingle(unsigned int, bool);		
+		void SetAll(bool);
+		
+		bool GetSingle(unsigned int) const;
+		bool IsAllTrue() const;
+	
+	private:
+		bool state[GAME::WEAPONS_NUM_MAX];	
+};
+
 struct UnresolvedDataUniquePlayer
 {
 	int npc_id;	
@@ -122,7 +136,7 @@ class Player : public Base
     		void SessionInKosmoport();
     		
     		void MouseInteraction_inSpace();
-    		void Update_global(); 
+    		void UpdateGlobal(); 
     		
     		bool IsObjectOnScreen(const Points&) const;
     		

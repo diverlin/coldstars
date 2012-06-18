@@ -98,101 +98,150 @@ void UserInput::GetSimpleInputs(Player* player)
          	  		// WEAPON SLOTS
            			case sf::Key::Num1:
                		 	{
-              				if (player->weapon_selector.slot_1 == false)
+              				if (player->weapon_selector.GetSingle(1) == false)
               				{
-                		  		player->weapon_selector.slot_1 = true;
-                		  		printf("pPLAYER->weapon slot 1 -> YES\n");
+                		  		player->weapon_selector.SetSingle(1, true);
+                		  		printf("player->weapon slot 1 -> YES\n");
               				}
               				else
               				{
-                		  		player->weapon_selector.slot_1 = false;
-                		  		printf("pPLAYER->weapon slot 1 -> NO\n");
+                		  		player->weapon_selector.SetSingle(1, false);
+                		  		printf("player->weapon slot 1 -> NO\n");
               				}
   					break;
                 		}
 
            			case sf::Key::Num2:
                 		{
-              				if (player->weapon_selector.slot_2 == false)
+              				if (player->weapon_selector.GetSingle(2) == false)
               				{
-                	  			player->weapon_selector.slot_2 = true;
-                	  			printf("pPLAYER->weapon slot 2 -> YES\n");
+                		  		player->weapon_selector.SetSingle(2, true);
+                		  		printf("player->weapon slot 2 -> YES\n");
               				}
               				else
               				{
-                				player->weapon_selector.slot_2 = false;
-                	  			printf("pPLAYER->weapon slot 2 -> NO\n");
+                		  		player->weapon_selector.SetSingle(2, false);
+                		  		printf("player->weapon slot 2 -> NO\n");
               				}
-                	       		 break;
+  					break;
                 		}
 
            			case sf::Key::Num3:
                		 	{
-              				if (player->weapon_selector.slot_3 == false)
+              				if (player->weapon_selector.GetSingle(3) == false)
               				{
-                		  		player->weapon_selector.slot_3 = true;
-                		  		printf("pPLAYER->weapon slot 3 -> YES\n");
+                		  		player->weapon_selector.SetSingle(3, true);
+                		  		printf("player->weapon slot 3 -> YES\n");
               				}
               				else
               				{
-                		  		player->weapon_selector.slot_3 = false;
-                		 	 	printf("pPLAYER->weapon slot 3 -> NO\n");
+                		  		player->weapon_selector.SetSingle(3, false);
+                		  		printf("player->weapon slot 3 -> NO\n");
               				}
-                		     	break;
+  					break;
                 		}
-
 
           			case sf::Key::Num4:
                 		{
-              				if (player->weapon_selector.slot_4 == false)
+              				if (player->weapon_selector.GetSingle(4) == false)
               				{
-                		 		 player->weapon_selector.slot_4 = true;
-                		 		 printf("pPLAYER->weapon slot 4 -> YES\n");
-             				}
-             				else
-             				{
-                				 player->weapon_selector.slot_4 = false;
-          				         printf("pPLAYER->weapon slot 4 -> NO\n");
-              				}
- 					break;
-                		}	
-
-
-           			case sf::Key::Num5:
-                		{
-                			if (player->weapon_selector.slot_5 == false)
-             				{
-                		  		player->weapon_selector.slot_5 = true;
-                		  		printf("pPLAYER->weapon slot 5 -> YES\n");
-             				}
-             				else
-              				{
-                		  		player->weapon_selector.slot_5 = false;
-                		  		printf("pPLAYER->weapon slot 5 -> NO\n");
-              				}
-               		 	        break;
- 				}
-
-
-           			case sf::Key::A:
-                		{ 
-	        		      	if ( (player->weapon_selector.slot_1 == true) && (player->weapon_selector.slot_2 == true) && (player->weapon_selector.slot_3 == true) && (player->weapon_selector.slot_4 == true) && (player->weapon_selector.slot_5 == true) )
-              				{
-                		  		player->weapon_selector.slot_1 = false;
-                		  		player->weapon_selector.slot_2 = false;
-                		  		player->weapon_selector.slot_3 = false;
-                		  		player->weapon_selector.slot_4 = false;
-                		  		player->weapon_selector.slot_5 = false;
-                		  		printf("pPLAYER->weapon slot 1,2,3,4,5 -> NO\n");
+                		  		player->weapon_selector.SetSingle(4, true);
+                		  		printf("player->weapon slot 4 -> YES\n");
               				}
               				else
               				{
-                		  		player->weapon_selector.slot_1 = true;
-                		  		player->weapon_selector.slot_2 = true;
-                		  		player->weapon_selector.slot_3 = true;
-                		  		player->weapon_selector.slot_4 = true;
-                		  		player->weapon_selector.slot_5 = true;
-                		  		printf("pPLAYER->weapon slot 1,2,3,4,5 -> YES\n");
+                		  		player->weapon_selector.SetSingle(4, false);
+                		  		printf("player->weapon slot 4 -> NO\n");
+              				}
+  					break;
+                		}	
+
+           			case sf::Key::Num5:
+                		{
+              				if (player->weapon_selector.GetSingle(5) == false)
+              				{
+                		  		player->weapon_selector.SetSingle(5, true);
+                		  		printf("player->weapon slot 5 -> YES\n");
+              				}
+              				else
+              				{
+                		  		player->weapon_selector.SetSingle(5, false);
+                		  		printf("player->weapon slot 5 -> NO\n");
+              				}
+  					break;
+ 				}
+
+           			case sf::Key::Num6:
+                		{
+              				if (player->weapon_selector.GetSingle(6) == false)
+              				{
+                		  		player->weapon_selector.SetSingle(6, true);
+                		  		printf("player->weapon slot 6 -> YES\n");
+              				}
+              				else
+              				{
+                		  		player->weapon_selector.SetSingle(6, false);
+                		  		printf("player->weapon slot 6 -> NO\n");
+              				}
+  					break;
+ 				}
+
+           			case sf::Key::Num7:
+                		{
+              				if (player->weapon_selector.GetSingle(7) == false)
+              				{
+                		  		player->weapon_selector.SetSingle(7, true);
+                		  		printf("player->weapon slot 7 -> YES\n");
+              				}
+              				else
+              				{
+                		  		player->weapon_selector.SetSingle(7, false);
+                		  		printf("player->weapon slot 7 -> NO\n");
+              				}
+  					break;
+ 				}
+
+           			case sf::Key::Num8:
+                		{
+              				if (player->weapon_selector.GetSingle(8) == false)
+              				{
+                		  		player->weapon_selector.SetSingle(8, true);
+                		  		printf("player->weapon slot 8 -> YES\n");
+              				}
+              				else
+              				{
+                		  		player->weapon_selector.SetSingle(8, false);
+                		  		printf("player->weapon slot 8 -> NO\n");
+              				}
+  					break;
+ 				}
+
+           			case sf::Key::Num9:
+                		{
+              				if (player->weapon_selector.GetSingle(9) == false)
+              				{
+                		  		player->weapon_selector.SetSingle(9, true);
+                		  		printf("player->weapon slot 9 -> YES\n");
+              				}
+              				else
+              				{
+                		  		player->weapon_selector.SetSingle(9, false);
+                		  		printf("player->weapon slot 9 -> NO\n");
+              				}
+  					break;
+ 				}
+ 				 				 				
+           			case sf::Key::A:
+                		{ 
+	        		      	if (player->weapon_selector.IsAllTrue() == true)
+              				{
+                		  		player->weapon_selector.SetAll(false);
+                		  		printf("pPLAYER->weapon slot 1,2,3,4,5,6,7,8,9 -> NO\n");
+              				}
+              				else
+              				{
+                		  		player->weapon_selector.SetAll(true);
+                		  		printf("pPLAYER->weapon slot 1,2,3,4,5,6,7,8,9 -> YES\n");
               				}
                 		        break;
 				}
