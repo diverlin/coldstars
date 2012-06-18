@@ -608,6 +608,9 @@ namespace TEXTURE
 	};
 } 
 
-
+namespace GAME
+{
+	const int WEAPONS_NUM_MAX = 9;
+}
 #endif //CONSTANTS_HPP
 

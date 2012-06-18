@@ -110,7 +110,10 @@ void GuiManager::RenderInScan() const
 	enable_BLEND();
 
 		gui_vehicle->Render(vehicle);
-		gui_skill->Render();
+		if (vehicle->GetOwnerNpc() != NULL)
+		{
+			gui_skill->Render();
+		}
 		
 		player->GetCursor()->GetItemSlot()->RenderEquipedItem();		
 	

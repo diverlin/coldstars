@@ -34,8 +34,7 @@ void MicroScenarioDestroy :: update_inStatic(Npc* _npc) const
 	{
 		if ( (_npc->GetStateMachine()->getCurrentMicroTask()->getTarget()->GetAlive() == true) or ( _npc->GetStarSystem() == _npc->GetStateMachine()->getCurrentMicroTask()->getTarget()->GetStarSystem()) )
 		{
-			_npc->GetVehicle()->GetWeaponComplex()->weapon_selector.setAll(true);
-			_npc->GetVehicle()->GetWeaponComplex()->SelectWeapons();
+			_npc->GetVehicle()->GetWeaponComplex()->ActivateAllWeapons();
 			//_npc->GetVehicle()->getWeaponComplex()->setTarget(_npc->GetStateMachine()->getCurrentMicroTask()->getTarget()->GetNpc()->GetVehicle());
                                                    
 			//_npc->GetVehicle()->getDriveComplex()->setTarget(_npc->GetStateMachine()->getCurrentMicroTask()->getTarget()->GetNpc()->GetVehicle(), FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID ); 

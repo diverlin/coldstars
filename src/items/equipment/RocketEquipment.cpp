@@ -106,8 +106,10 @@ std::string RocketEquipment::GetRadiusStr()
 void RocketEquipment::FireEvent()
 {
 	int num = 0;
-    	RocketBullet* rocket1 = VehicleBuilder::Instance().GetNewRocket(data_bullet, slot, 0.0f);
-    	slot->GetOwnerVehicle()->GetStarSystem()->Add(rocket1);
+	RocketBuilder::Instance().CreateNewRocket();
+	RocketBuilder::Instance().CreateNewInternals(data_bullet, slot, 0.0f);
+	
+    	slot->GetOwnerVehicle()->GetStarSystem()->Add(RocketBuilder::Instance().GetRocket());
     	num++;
 
     	//RocketBullet* rocket2 = getNewRocketBullet(data_bullet, slot, +2);

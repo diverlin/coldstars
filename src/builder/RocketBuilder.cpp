@@ -17,30 +17,38 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-VehicleBuilder& VehicleBuilder::Instance()
+RocketBuilder& RocketBuilder::Instance()
 {	
-	static VehicleBuilder instance;
+	static RocketBuilder instance;
 	return instance;
 }	
 
 
-VehicleBuilder::~VehicleBuilder() {}
+RocketBuilder::~RocketBuilder() {}
 
 
-
-
-RocketBullet* VehicleBuilder::GetNewRocket(BulletData data_bullet, ItemSlot* slot, float offset, bool force_center_start) const
+void RocketBuilder::CreateNewRocket(int id)
 {
-	IdData data_id;
-	int id         = g_ID_GENERATOR.getNextId(); 
+	if (id == NONE_ID)
+	{
+		id = g_ID_GENERATOR.getNextId();
+	}
+        rocket = new RocketBullet(id);
+        EntityManager::Instance().RegisterEntity(rocket);
+}
 
+void RocketBuilder::CreateNewInternals(BulletData data_bullet, ItemSlot* slot, float offset, bool force_center_start) 
+{
 	LifeData data_life;	
 	data_life.is_alive      = true;
         data_life.garbage_ready = false;
         data_life.armor = data_bullet.armor;        
 
-    	RocketBullet* rocket = new RocketBullet(id, data_bullet, slot->GetTurrel()->GetTarget(), slot->GetOwnerVehicle()->GetId());
          
+        rocket->SetBulletData(data_bullet);
+        rocket->SetOwner(slot->GetOwnerVehicle());
+        rocket->SetTarget(slot->GetTurrel()->GetTarget());
+        
         rocket->SetLifeData(data_life);
         rocket->SetTextureOb(data_bullet.texOb);
          
@@ -51,14 +59,4 @@ RocketBullet* VehicleBuilder::GetNewRocket(BulletData data_bullet, ItemSlot* slo
         //CreateWeaponsComplex(rocket);
         //CreateProtectionComplex(rocket);
         //CreateEquipmentSlots(rocket);
-                 
-        if ( (slot->GetOwnerVehicle()->data_korpus.draw_turrels == true) and (force_center_start == false))
-    	{
-        	rocket->place(slot->GetTurrel()->GetPoints().GetCenter(), slot->GetTurrel()->GetPoints().GetAngleDegree(), offset);
-        }
-        else
-    	{
-         	rocket->place(slot->GetOwnerVehicle()->GetPoints().GetCenter(), slot->GetOwnerVehicle()->GetPoints().GetAngleDegree(), offset);
-    	}
-        return rocket;
 }

@@ -19,6 +19,54 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../config/config.hpp"
 
 
+WeaponSelector::WeaponSelector()
+{
+	for (unsigned int i=0; i<GAME::WEAPONS_NUM_MAX; i++)
+	{
+		state[i] = false;
+	}
+}
+     	
+void WeaponSelector::SetSingle(unsigned int index, bool status)
+{
+	if (index > GAME::WEAPONS_NUM_MAX )
+	{
+		assert("WeaponSelector::SetSingle(), index is out of range");
+	}
+	state[index-1] = status;
+}
+
+bool WeaponSelector::GetSingle(unsigned int index) const
+{
+	if (index > GAME::WEAPONS_NUM_MAX )
+	{
+		assert("WeaponSelector::GetSingle(), index is out of range");
+	}
+	return state[index-1];
+}
+     			
+void WeaponSelector::SetAll(bool status)
+{
+	for (unsigned int i=0; i<GAME::WEAPONS_NUM_MAX; i++)
+	{
+		state[i] = status;
+	}
+}
+   			
+bool WeaponSelector::IsAllTrue() const
+{
+	for (unsigned int i=0; i<GAME::WEAPONS_NUM_MAX; i++)
+	{
+		if (state[i] == false)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+
+
 Player::Player(int id)
 { 
     	data_id.id         = id;
@@ -51,11 +99,11 @@ Player::~Player()
 	delete GUI_MAP;
 }  
             
-void Player::Update_global()
+void Player::UpdateGlobal()
 {
-	if (npc->GetAlive()  == true)
+	if (npc->GetAlive() == true)
 	{       	
-		npc->GetVehicle()->GetWeaponComplex()->weapon_selector = weapon_selector;
+		//npc->GetVehicle()->GetWeaponComplex()->weapon_selector = weapon_selector;
 	}
 }  
                			
@@ -298,8 +346,8 @@ void Player::RenderEntities_NEW()
     			
     			for(unsigned int i = 0; i < visible_ROCKET_vec.size(); i++)
     			{ 
-    			    	visible_ROCKET_vec[i]->updateRenderStuff();
-       				visible_ROCKET_vec[i]->render_inSpace(); 
+    			    	visible_ROCKET_vec[i]->UpdateRenderStuff();
+       				visible_ROCKET_vec[i]->RenderInSpace(); 
        				npc->GetStarSystem()->RestoreSceneColor();
     			}    	
 		disable_BLEND();
@@ -440,8 +488,8 @@ void Player::RenderEntities_OLD()
                         
     		for(unsigned int i = 0; i < visible_ROCKET_vec.size(); i++)
     		{ 
-                        visible_ROCKET_vec[i]->updateRenderStuff();
-       			visible_ROCKET_vec[i]->render_inSpace(); 
+                        visible_ROCKET_vec[i]->UpdateRenderStuff();
+       			visible_ROCKET_vec[i]->RenderInSpace(); 
                         npc->GetStarSystem()->RestoreSceneColor();
     		}
 
@@ -521,9 +569,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
 
 	if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 	{
-    		npc->GetVehicle()->GetWeaponComplex()->SelectWeapons();                   				       
-    		npc->GetVehicle()->GetWeaponComplex()->ResetDeselectedWeaponTargets();
-
+    		npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);                   				       
         	npc->GetVehicle()->GetWeaponComplex()->RenderWeaponIcons();
         }
 
@@ -545,7 +591,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
 				{
                				if (mlb == true)
                				{
-                   				npc->GetVehicle()->GetWeaponComplex()->SelectWeapons();                   					    
+                   				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);                   					    
                    				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_CONTAINER_vec[ci]);
                				}
                				if (mrb == true)
@@ -588,7 +634,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
                 			{
                 				if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
                 				{
-                   					npc->GetVehicle()->GetWeaponComplex()->SelectWeapons();
+                   					npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
                    					npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_SATELLITE_vec[i]);
                    				}
                    				else
@@ -645,7 +691,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
                 			
                 			        if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
                 				{
-                   					npc->GetVehicle()->GetWeaponComplex()->SelectWeapons();
+                   					npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
                    					npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_ASTEROID_vec[ai]);
                    				}
                    				else
@@ -684,7 +730,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
                 			{
                 				if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
                 				{
-                   					npc->GetVehicle()->GetWeaponComplex()->SelectWeapons();
+                   					npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
                    					npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_SHIP_vec[ki]);
                    				}
                    				else
@@ -762,7 +808,7 @@ void Player::MouseInteraction_inSpace() // all large objects must be cheked by l
                 			{
                 				if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
                 				{
-                   					npc->GetVehicle()->GetWeaponComplex()->SelectWeapons();
+                   					npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
                    					npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_SPACESTATION_vec[i]);
                    				}
                    				else
@@ -993,7 +1039,7 @@ void Player::SessionInKosmoport()
 
 void Player::RunSession(GameTimer* TIMER)
 {
-	this->Update_global();     
+	this->UpdateGlobal();     
 
        	switch(npc->GetPlaceTypeId())
        	{

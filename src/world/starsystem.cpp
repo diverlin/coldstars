@@ -444,7 +444,7 @@ void StarSystem::rocketCollision_s(bool show_effect)
                 	{
                 		for (unsigned int ki = 0; ki < SHIP_vec.size(); ki++)
                 		{
-                        		if (ROCKET_vec[ri]->getOwnerShipId() != SHIP_vec[ki]->GetId())
+                        		if (ROCKET_vec[ri]->GetOwner()->GetId() != SHIP_vec[ki]->GetId())
                         		{                        
                         			collide = checkCollision(ROCKET_vec[ri], SHIP_vec[ki], show_effect);
                         			if (collide == true) { break; }                        
@@ -458,7 +458,7 @@ void StarSystem::rocketCollision_s(bool show_effect)
                 	{
                 		for (unsigned int si = 0; si < SATELLITE_vec.size(); si++)
                 		{
-                        		if (ROCKET_vec[ri]->getOwnerShipId() != SATELLITE_vec[si]->GetId())
+                        		if (ROCKET_vec[ri]->GetOwner()->GetId() != SATELLITE_vec[si]->GetId())
                         		{                        
                         			collide = checkCollision(ROCKET_vec[ri], SATELLITE_vec[si], show_effect);
                         			if (collide == true) { break; }                        
@@ -471,7 +471,7 @@ void StarSystem::rocketCollision_s(bool show_effect)
                 	{
                 		for (unsigned int si = 0; si < SPACESTATION_vec.size(); si++)
                 		{
-                        		if (ROCKET_vec[ri]->getOwnerShipId() != SPACESTATION_vec[si]->GetId())
+                        		if (ROCKET_vec[ri]->GetOwner()->GetId() != SPACESTATION_vec[si]->GetId())
                         		{                        
                         			collide = checkCollision(ROCKET_vec[ri], SPACESTATION_vec[si], show_effect);
                         			if (collide == true) { break; }                        
@@ -631,7 +631,7 @@ void StarSystem :: updateEntities_s(int time, bool show_effect)
     	
         for (unsigned int ri = 0; ri < ROCKET_vec.size(); ri++)
         {
-                ROCKET_vec[ri]->update_inSpace(time, show_effect); 
+                ROCKET_vec[ri]->UpdateInSpace(time, show_effect); 
         }
         
         
