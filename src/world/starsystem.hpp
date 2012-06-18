@@ -68,7 +68,7 @@ class StarSystem : public BaseGameEntity
 						
 		void Add(BasePlanet*, BaseGameEntity* parent = NULL, int it = 0);
 		void Add(Container*, vec2f);
-		void Add(RocketBullet*);
+		void Add(RocketBullet*, ItemSlot*, float offset);
 		void Add(BlackHole*, vec2f);
 
 		// effects

@@ -28,7 +28,7 @@ class RocketBuilder : public BaseVehicleBuilder
 		~RocketBuilder();
 		
 		void CreateNewRocket(int id = NONE_ID);							
-		void CreateNewInternals(BulletData, ItemSlot*, float, bool force_center_start = false);   
+		void CreateNewInternals(BulletData);   
 		RocketBullet* GetRocket() const { return rocket; };         
        
         private:

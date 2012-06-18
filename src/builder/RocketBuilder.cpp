@@ -37,7 +37,7 @@ void RocketBuilder::CreateNewRocket(int id)
         EntityManager::Instance().RegisterEntity(rocket);
 }
 
-void RocketBuilder::CreateNewInternals(BulletData data_bullet, ItemSlot* slot, float offset, bool force_center_start) 
+void RocketBuilder::CreateNewInternals(BulletData data_bullet) 
 {
 	LifeData data_life;	
 	data_life.is_alive      = true;
@@ -46,8 +46,6 @@ void RocketBuilder::CreateNewInternals(BulletData data_bullet, ItemSlot* slot, f
 
          
         rocket->SetBulletData(data_bullet);
-        rocket->SetOwner(slot->GetOwnerVehicle());
-        rocket->SetTarget(slot->GetTurrel()->GetTarget());
         
         rocket->SetLifeData(data_life);
         rocket->SetTextureOb(data_bullet.texOb);

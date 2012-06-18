@@ -135,7 +135,18 @@ class Player : public Base
     		void SessionInSpace(GameTimer*);
     		void SessionInKosmoport();
     		
-    		void MouseInteraction_inSpace();
+    		void MouseInteractionInSpace();
+    		bool MouseInteractionWithRockets(int, int, bool, bool) const;
+    		bool MouseInteractionWithContainers(int, int, bool, bool) const;
+    		bool MouseInteractionWithSatellites(int, int, bool, bool) const;
+    		bool MouseInteractionWithAsteroids(int, int, bool, bool) const;
+    		bool MouseInteractionWithShips(int, int, bool, bool) const;
+    		bool MouseInteractionWithBlackHoles(int, int, bool, bool) const;
+    		bool MouseInteractionWithSpaceStations(int, int, bool, bool) const;
+    		bool MouseInteractionWithPlanets(int, int, bool, bool) const;
+    		bool MouseInteractionWithStars(int, int, bool, bool) const;
+    		void MouseNavigation(int, int, bool, bool) const;
+    		    		    		    		    		    		    		    		
     		void UpdateGlobal(); 
     		
     		bool IsObjectOnScreen(const Points&) const;

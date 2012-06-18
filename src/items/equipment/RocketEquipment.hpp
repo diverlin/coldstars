@@ -76,6 +76,8 @@ class RocketEquipment : public BaseEquipment
       		int radius_add;
       		int radius;     
      	      	
+     	      	int fire_atOnce;
+     	      	
       	      	BulletData data_bullet;
       		
      		void virtual AddUniqueInfo();

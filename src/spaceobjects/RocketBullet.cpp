@@ -23,24 +23,14 @@ RocketBullet::RocketBullet(int id)
 	data_id.id = id;
 	data_id.type_id = ENTITY::ROCKET_ID;
 
-	owner = NULL;
 	target = NULL;
-        //speed = _data_bullet.speed_init;
+	
+	dx = 0;
+        dy = 0;
 }
 
 RocketBullet::~RocketBullet()
 {}
-
-void RocketBullet::Place(vec2f _start_pos, float _angle_inD, float offset)
-{
-	dx = 0;
-        dy = 0;
-
-        points.SetCenter(_start_pos.x + offset, _start_pos.y + offset);
-        angle_inD = _angle_inD;
-        points.SetAngle(angle_inD);
-}
-
 
 void RocketBullet::UpdateInSpace(int time, bool show_effect)
 {
