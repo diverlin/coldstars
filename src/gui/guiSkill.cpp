@@ -77,7 +77,7 @@ void GuiSkill :: createControlSkillButtons()
 void GuiSkill :: update()
 {
 	int mxvp = player->GetCursor()->GetMousePos().x;
-     	int myvp = player->GetScreen()->getHeight()  - player->GetCursor()->GetMousePos().y;         
+     	int myvp = player->GetScreen()->GetHeight()  - player->GetCursor()->GetMousePos().y;         
      	int lmb  = player->GetCursor()->GetMouseLeftButton();;
 
 	Skill* skill = player->GetNpc()->GetSkill();

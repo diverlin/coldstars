@@ -428,5 +428,5 @@ void UserInput::ScrollCamera(Player* player)
             	}
         }
       
-      	player->GetScreen()->bottomLeftGlobalCoordIncrease(vec2f(scroll_accel_x, scroll_accel_y));
+      	player->GetScreen()->MovingBy(vec2f(scroll_accel_x, scroll_accel_y));
 }

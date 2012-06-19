@@ -45,7 +45,7 @@ void Goverment::Render(Player* player) const // move to GuiGoverment
         clearScreen();
         resetRenderTransformation();
                                                         
-        Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());    
+        Rect screen_rect = Rect(0, 0, player->GetScreen()->GetWidth(), player->GetScreen()->GetHeight());    
         RenderBackground(screen_rect);
         
         RenderInternals();

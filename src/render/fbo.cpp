@@ -62,7 +62,7 @@ void FBO :: activate(Screen* screen)
      	glLoadIdentity();
 
      	glPushAttrib(GL_VIEWPORT_BIT);               // viewport is shared with the main context
-     	glViewport(0, 0, screen->getWidth(), screen->getHeight());
+     	glViewport(0, 0, screen->GetWidth(), screen->GetHeight());
 }
 
 void FBO :: deactivate()

@@ -106,7 +106,7 @@ void Angar::MouseControl(Player* player)
         for (unsigned int i = 0; i < vehicleslot_vec.size(); i++)
         { 
                 float dist = distBetweenPoints(player->GetCursor()->GetMousePos().x, 
-                                               player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y, 
+                                               player->GetScreen()->GetHeight() - player->GetCursor()->GetMousePos().y, 
                                                vehicleslot_vec[i]->GetRect().GetCenter().x, 
                                                vehicleslot_vec[i]->GetRect().GetCenter().y);
         				
@@ -129,7 +129,7 @@ void Angar::Render(Player* player) const // move to GuiAngar
         clearScreen();
         resetRenderTransformation();
                     
-        Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight());    
+        Rect screen_rect = Rect(0, 0, player->GetScreen()->GetWidth(), player->GetScreen()->GetHeight());    
         RenderBackground(screen_rect);
                 
 	enable_BLEND();
@@ -155,7 +155,7 @@ void Angar::RenderItemInfo(Player* player) const
                 {
 
                 	float dist = distBetweenPoints(player->GetCursor()->GetMousePos().x, 
-                        	                       player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y, 
+                        	                       player->GetScreen()->GetHeight() - player->GetCursor()->GetMousePos().y, 
                                 	               vehicleslot_vec[i]->GetRect().GetCenter().x, 
                                         	       vehicleslot_vec[i]->GetRect().GetCenter().y);
         				

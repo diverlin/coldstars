@@ -34,7 +34,7 @@ void GuiVehicle::Update(Vehicle* vehicle, Store* store)
 
 	for(unsigned int i = 0; i < vehicle->slot_total_vec.size(); i++)
 	{ 
-		if (vehicle->slot_total_vec[i]->CheckInteraction(player->GetCursor()->GetMousePos().x, (player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y)) == true)
+		if (vehicle->slot_total_vec[i]->CheckInteraction(player->GetCursor()->GetMousePos().x, (player->GetScreen()->GetHeight() - player->GetCursor()->GetMousePos().y)) == true)
 		{  
 			if (lmb == true)
 			{
@@ -57,7 +57,7 @@ void GuiVehicle::Update(Vehicle* vehicle, Store* store)
 	// GATE SLOT
 	if ((player->GetCursor()->GetItemSlot()->GetEquipedStatus() == true) and (store == NULL))
 	{
-		if (vehicle->GetGateSlot()->CheckInteraction(player->GetCursor()->GetMousePos().x, (player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y)) == true)  
+		if (vehicle->GetGateSlot()->CheckInteraction(player->GetCursor()->GetMousePos().x, (player->GetScreen()->GetHeight() - player->GetCursor()->GetMousePos().y)) == true)  
 		{
 			if (lmb == true)
 			{
@@ -87,7 +87,7 @@ void GuiVehicle::RenderFocusedItemInfo(Vehicle* vehicle) const
 {
 	for(unsigned int i = 0; i < vehicle->slot_total_vec.size(); i++)
 	{ 
-		if (vehicle->slot_total_vec[i]->CheckInteraction(player->GetCursor()->GetMousePos().x, (player->GetScreen()->getHeight()  - player->GetCursor()->GetMousePos().y)) == true)
+		if (vehicle->slot_total_vec[i]->CheckInteraction(player->GetCursor()->GetMousePos().x, (player->GetScreen()->GetHeight()  - player->GetCursor()->GetMousePos().y)) == true)
 		{  
 			vehicle->slot_total_vec[i]->RenderItemInfo();
 		}

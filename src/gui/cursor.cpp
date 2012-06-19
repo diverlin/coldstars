@@ -38,7 +38,7 @@ void Cursor::UpdateMousePos()
 
 void Cursor::Update()
 {
-     	slot->GetRect().SetCenter(mouse_pos.x, player->GetScreen()->getHeight()  - mouse_pos.y);
+     	slot->GetRect().SetCenter(mouse_pos.x, player->GetScreen()->GetHeight()  - mouse_pos.y);
 }
 
 

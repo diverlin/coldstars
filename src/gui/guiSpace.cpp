@@ -59,7 +59,7 @@ void GuiSpace :: resetInfoFlags()
 void GuiSpace :: mouseCheckInteraction()
 {
 	int mxvp = player->GetCursor()->GetMousePos().x;
-	int myvp = player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y;         
+	int myvp = player->GetScreen()->GetHeight() - player->GetCursor()->GetMousePos().y;         
 	int lmb  = player->GetCursor()->GetMouseLeftButton();
 
 	for (unsigned int i = 0; i < button_vec.size(); i++)
@@ -87,7 +87,7 @@ void GuiSpace :: Render()
 	renderInfo();
 	disable_BLEND();
 
-	renderText(player->GetScreen()->getBottomLeftGlobalCoord());
+	renderText(player->GetScreen()->GetBottomLeftGlobalCoord());
 }
 
 

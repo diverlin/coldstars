@@ -36,6 +36,7 @@ class WeaponSelector
 struct UnresolvedDataUniquePlayer
 {
 	int npc_id;	
+	vec2f screen_pos;
 };
 
 class Player : public Base
