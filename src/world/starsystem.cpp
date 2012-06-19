@@ -106,14 +106,25 @@ void StarSystem::Add(Vehicle* vehicle, vec2f center, float angle, BaseGameEntity
 		
 			break; 
 		}
+		
+		case ENTITY::ROCKETBULLET_ID:
+		{
+			vehicle->GetPoints().SetCenter(center); 
+    			vehicle->GetPoints().SetAngle(angle);   
+    			vehicle->GetPoints().Update();  
+    			
+    			ROCKET_vec.push_back((RocketBullet*)vehicle);
+    						
+			break;
+		}
 	}
      	
      	if (vehicle->GetOwnerNpc())
      	{
      		Add(vehicle->GetOwnerNpc());
      	}
-     	
 }
+
 
 void StarSystem::Add(Npc* npc)
 {
@@ -167,32 +178,6 @@ void StarSystem::Add(Container* container, vec2f pos)
         
         CONTAINER_vec.push_back(container);
 }
-
-void StarSystem::Add(RocketBullet* rocket, ItemSlot* slot, float offset)
-{
-	rocket->SetStarSystem(this);
-	vec2f start_pos;
-	float angle_inD;
-
-	if (slot->GetOwnerVehicle()->data_korpus.draw_turrels == true)
-    	{
-        	start_pos = slot->GetTurrel()->GetPoints().GetCenter(); 
-        	angle_inD = slot->GetTurrel()->GetPoints().GetAngleDegree();
-        }
-        else
-    	{
-         	start_pos = slot->GetOwnerVehicle()->GetPoints().GetCenter();
-         	angle_inD = slot->GetOwnerVehicle()->GetPoints().GetAngleDegree();
-    	}
-    	
-        rocket->GetPoints().SetCenter(start_pos.x + offset, start_pos.y + offset);
-        rocket->GetPoints().SetAngle(angle_inD);
-        
-        rocket->SetOwnerId(slot->GetOwnerVehicle()->GetId());
-        rocket->SetTarget(slot->GetTurrel()->GetTarget());
-        
-	ROCKET_vec.push_back(rocket);
-}    
 
 void StarSystem::Add(BlackHole* blackhole, vec2f pos)
 {

@@ -47,22 +47,25 @@ class RocketBullet : public Vehicle
     		void ResolveData();
     		
         private:
-                BulletData data_bullet;
-               
                 float speed;
                
                 float dx, dy;
                 float angle_inD;                
                 
-                unsigned int owner_id;
+                int owner_id;
                 BaseGameEntity* target;
-               
-                void deathEventUnique(bool);
-                
+
+                BulletData data_bullet;
+                                
                 virtual void UpdateInfo(); 
                 
                 bool CheckTarget() const;
                 bool CheckStarSystem() const;     
+
+                int unresolved_target_id;                
+                void SaveDataUniqueRocketBullet(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadDataUniqueRocketBullet(const boost::property_tree::ptree&);
+		void ResolveDataUniqueRocketBullet();
 };
 
 #endif 

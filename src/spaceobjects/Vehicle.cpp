@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-KorpusData :: KorpusData()
+KorpusData::KorpusData()
 {        
         space       = 0;
         armor       = 0;
@@ -56,6 +56,8 @@ Vehicle::Vehicle()
         freezer_slot   = NULL;
         
         gate_slot = NULL;
+        
+        textureOb_gui = NULL;
 }
 
 /*virtual*/
@@ -703,7 +705,7 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
        	save_ptree.put(root+"data_korpus.slot_freezer_num", data_korpus.slot_freezer_num);
        	save_ptree.put(root+"data_korpus.slot_weapon_num", data_korpus.slot_weapon_num);       	
        	
-       	save_ptree.put(root+"data_unresolved_Vehicle.texOb_korpus_path", texOb_korpus->path);     
+        save_ptree.put(root+"data_unresolved_Vehicle.textureOb_gui_path", textureOb_gui->path);      
        	
        	if (place_type_id == ENTITY::VEHICLESLOT_ID) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", parent_vehicleslot->GetId()); }
        	else { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); }  	
@@ -727,12 +729,12 @@ void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptre
    	data_korpus.slot_freezer_num   = load_ptree.get<int>("data_korpus.slot_freezer_num"); 
    	data_korpus.slot_weapon_num    = load_ptree.get<int>("data_korpus.slot_weapon_num"); 
 
-   	data_unresolved_Vehicle.texOb_korpus_path = load_ptree.get<std::string>("data_unresolved_Vehicle.texOb_korpus_path"); 
+   	data_unresolved_Vehicle.textureOb_gui_path = load_ptree.get<std::string>("data_unresolved_Vehicle.textureOb_gui_path"); 
    	data_unresolved_Vehicle.parent_vehicleslot_id = load_ptree.get<int>("data_unresolved_Vehicle.parent_vehicleslot_id"); 
 }
 
 void Vehicle::ResolveDataUniqueVehicle()
 {
-        texOb_korpus = g_TEXTURE_MANAGER.GetTextureObByPath(data_unresolved_Vehicle.texOb_korpus_path);
+       	textureOb_gui = g_TEXTURE_MANAGER.GetTextureObByPath(data_unresolved_Vehicle.textureOb_gui_path);
 }
                 

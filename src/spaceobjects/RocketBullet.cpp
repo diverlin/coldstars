@@ -21,7 +21,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 RocketBullet::RocketBullet(int id)
 {
 	data_id.id = id;
-	data_id.type_id = ENTITY::ROCKET_ID;
+	data_id.type_id = ENTITY::VEHICLE_ID;
+	data_id.subtype_id = ENTITY::ROCKETBULLET_ID;
 
 	target = NULL;
 	
@@ -91,21 +92,18 @@ void RocketBullet::CollisionEvent(bool show_effect)
 	data_life.dying_time = -1;
 }
 
-
-
-
-void RocketBullet::deathEventUnique(bool show_effect)
-{
-	if (show_effect == true)
-	{
-       		createExplosion(starsystem, points.GetCenter(), textureOb->size_id);
-       	}
-}
-
-
 void RocketBullet::UpdateInfo()
-{}
+{
+	info.clear();
 
+    	info.addTitleStr("ROCKET");
+    	info.addNameStr("id/ss_id:");          	info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->GetId()) );
+    	info.addNameStr("armor/max:");     	info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) );
+    	if (target != NULL) 
+    	{ 
+    	info.addNameStr("target_id:");   	info.addValueStr(int2str(target->GetId())); 
+	}
+}
 
 
 void RocketBullet::UpdateRenderStuff()
@@ -125,18 +123,60 @@ void RocketBullet::RenderInSpace() const
 /*virtual*/
 void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	//const std::string root = "rocket."+int2str(data_id.id)+".";
+	const std::string root = "rocketbullet."+int2str(data_id.id)+".";
+        SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueBaseGameEntity(save_ptree, root);
+	SaveDataUniqueVehicle(save_ptree, root);
+	SaveDataUniqueRocketBullet(save_ptree, root);
 }
 
 /*virtual*/
 void RocketBullet::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-
+        LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueBaseGameEntity(load_ptree);
+	LoadDataUniqueVehicle(load_ptree);
+	LoadDataUniqueRocketBullet(load_ptree);
 }
 
 /*virtual*/
 void RocketBullet::ResolveData()
 {
+        ResolveDataUniqueBase();
+	ResolveDataUniqueBaseGameEntity();
+	ResolveDataUniqueVehicle();
+	ResolveDataUniqueRocketBullet();
+}
 
+void RocketBullet::SaveDataUniqueRocketBullet(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+        save_ptree.put(root+"speed", speed);
+        save_ptree.put(root+"owner_id", owner_id);
+        if (target != NULL) 	{ save_ptree.put(root+"target_id", target->GetId()); }
+	else                	{ save_ptree.put(root+"target_id", NONE_ID); }
+	
+	data_bullet.SaveData(save_ptree, root);
+}
+
+void RocketBullet::LoadDataUniqueRocketBullet(const boost::property_tree::ptree& load_ptree)
+{
+        speed = load_ptree.get<float>("speed");  
+        owner_id = load_ptree.get<int>("owner_id");  
+        unresolved_target_id = load_ptree.get<int>("target_id");  
+        
+        data_bullet.LoadData(load_ptree.get_child("data_bullet"));
+}
+
+void RocketBullet::ResolveDataUniqueRocketBullet()
+{
+        RocketBulletBuilder::Instance().CreateKorpusGeometry(this);
+        RocketBulletBuilder::Instance().CreateDriveComplex(this);    
+                       
+        if (unresolved_target_id != NONE_ID)
+        {
+        	target = (BaseGameEntity*)EntityManager::Instance().GetEntityById(unresolved_target_id);
+        }
+                       
+	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this, data_unresolved_BaseGameEntity.center, data_unresolved_BaseGameEntity.angle, parent); 
 }
 

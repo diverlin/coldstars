@@ -21,18 +21,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define ROCKETEQUIPMENT_H
 
 
-struct BulletData
+class BulletData
 {
-	TextureOb* texOb;
-	
-	int damage; 
-        int armor; 
-        int live_time;
+	public:
+		int damage; 
+        	int armor; 
+        	int live_time;
                 
-        float speed_init;
-        float speed_max;
-        float d_speed; 
-        float angular_speed; 
+        	float speed_init;
+        	float speed_max;
+        	float d_speed; 
+        	float angular_speed; 
+        
+        	void SaveData(boost::property_tree::ptree&, const std::string&) const;
+		void LoadData(const boost::property_tree::ptree&);
+		void ResolveData();
 };
 
 

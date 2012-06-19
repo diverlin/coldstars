@@ -204,7 +204,7 @@ class WeaponSelector;
 
 #include "src/builder/BaseVehicleBuilder.hpp"
 #include "src/builder/ShipBuilder.hpp"
-#include "src/builder/RocketBuilder.hpp"
+#include "src/builder/RocketBulletBuilder.hpp"
 #include "src/builder/SpaceStationBuilder.hpp"
 #include "src/builder/SatelliteBuilder.hpp"
 #include "src/builder/ItemSlotBuilder.hpp"
@@ -357,7 +357,7 @@ class WeaponSelector;
 #include "src/builder/ContainerBuilder.cpp"
 #include "src/builder/BaseVehicleBuilder.cpp"
 #include "src/builder/ShipBuilder.cpp"
-#include "src/builder/RocketBuilder.cpp"
+#include "src/builder/RocketBulletBuilder.cpp"
 #include "src/builder/SpaceStationBuilder.cpp"
 #include "src/builder/SatelliteBuilder.cpp"
 

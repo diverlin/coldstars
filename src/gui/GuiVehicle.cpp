@@ -72,7 +72,7 @@ void GuiVehicle::Update(Vehicle* vehicle, Store* store)
 
 void GuiVehicle::Render(Vehicle* vehicle) const
 {
-	drawTexturedRect(vehicle->texOb_korpus, vehicle->kontur_rect, -1.0);
+	drawTexturedRect(vehicle->textureOb_gui, vehicle->kontur_rect, -1.0);
 
 	for(unsigned int i = 0; i < vehicle->slot_total_vec.size(); i++)
 	{

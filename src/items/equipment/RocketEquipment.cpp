@@ -16,6 +16,33 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+void BulletData::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{       	
+	std::string sroot = root+"data_bullet.";
+        save_ptree.put(sroot+"damage", damage);        
+        save_ptree.put(sroot+"armor", armor); 
+        save_ptree.put(sroot+"live_time", live_time); 
+
+        save_ptree.put(sroot+"speed_init", speed_init); 
+        save_ptree.put(sroot+"speed_max", speed_max); 
+        save_ptree.put(sroot+"d_speed", d_speed); 
+        save_ptree.put(sroot+"angular_speed", angular_speed); 
+}	
+
+void BulletData::LoadData(const boost::property_tree::ptree& load_ptree)
+{
+        damage = load_ptree.get<int>("damage"); 
+        armor = load_ptree.get<int>("armor"); 
+        live_time = load_ptree.get<int>("live_time"); 
+
+        speed_init = load_ptree.get<float>("speed_init"); 
+        speed_max = load_ptree.get<float>("speed_max"); 
+        d_speed = load_ptree.get<float>("d_speed"); 
+        angular_speed = load_ptree.get<float>("angular_speed"); 
+}
+
+void BulletData::ResolveData()
+{}
 
 RocketEquipment::RocketEquipment(int id)
 {
@@ -107,14 +134,31 @@ std::string RocketEquipment::GetRadiusStr()
 void RocketEquipment::FireEvent()
 {
 	int num = 0;
-	float offset;
-	
+
+	vec2f start_pos;
+	float angle_inD;
+			
 	if (fire_atOnce>=1)
 	{
-		offset = 0.0;
-		RocketBuilder::Instance().CreateNewRocket();
-		RocketBuilder::Instance().CreateNewInternals(data_bullet);	
-    		slot->GetOwnerVehicle()->GetStarSystem()->Add(RocketBuilder::Instance().GetRocket(), slot, offset);
+		RocketBulletBuilder::Instance().CreateNewRocket();
+		RocketBulletBuilder::Instance().CreateNewInternals(data_bullet);	
+		RocketBullet* rocket_bullet = RocketBulletBuilder::Instance().GetRocket();
+
+		if (slot->GetOwnerVehicle()->data_korpus.draw_turrels == true)
+    		{
+        		start_pos = slot->GetTurrel()->GetPoints().GetCenter(); 
+        		angle_inD = slot->GetTurrel()->GetPoints().GetAngleDegree();
+        	}
+        	else
+    		{
+         		start_pos = slot->GetOwnerVehicle()->GetPoints().GetCenter();
+         		angle_inD = slot->GetOwnerVehicle()->GetPoints().GetAngleDegree();
+    		}  
+        
+                rocket_bullet->SetOwnerId(slot->GetOwnerVehicle()->GetId());
+        	rocket_bullet->SetTarget(slot->GetTurrel()->GetTarget());
+        
+    		slot->GetOwnerVehicle()->GetStarSystem()->Add(rocket_bullet, start_pos, angle_inD);
     		num++;
     	}
     	
@@ -176,6 +220,9 @@ void RocketEquipment::SaveDataUniqueRocketEquipment(boost::property_tree::ptree&
         save_ptree.put(root+"ammo", ammo);
         save_ptree.put(root+"damage_orig", damage_orig);
         save_ptree.put(root+"radius_orig", radius_orig);
+        save_ptree.put(root+"fire_atOnce", fire_atOnce);
+        
+        data_bullet.SaveData(save_ptree, root);
 }
                 
 void RocketEquipment::LoadDataUniqueRocketEquipment(const boost::property_tree::ptree& load_ptree)
@@ -184,9 +231,14 @@ void RocketEquipment::LoadDataUniqueRocketEquipment(const boost::property_tree::
         ammo = load_ptree.get<int>("ammo"); 
         damage_orig = load_ptree.get<int>("damage_orig");  
         radius_orig = load_ptree.get<int>("radius_orig");   
+        fire_atOnce = load_ptree.get<int>("fire_atOnce");  
+
+        data_bullet.LoadData(load_ptree.get_child("data_bullet"));
 }                
 
 void RocketEquipment::ResolveDataUniqueRocketEquipment()
-{}
+{
+        data_bullet.ResolveData();
+}
 
 
