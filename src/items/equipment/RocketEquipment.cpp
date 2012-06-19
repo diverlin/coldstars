@@ -44,6 +44,8 @@ void BulletData::LoadData(const boost::property_tree::ptree& load_ptree)
 void BulletData::ResolveData()
 {}
 
+
+
 RocketEquipment::RocketEquipment(int id)
 {
         data_id.id         = id;

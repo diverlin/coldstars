@@ -225,7 +225,7 @@ class WeaponSelector;
 
 #include "src/pilots/Player.hpp"
 
-#include "src/skill/skill.hpp"
+#include "src/pilots/Skill.hpp"
 #include "src/pilots/Npc.hpp"           
 
 #include "src/pilots/scenarios/scenarioBase.hpp" 
@@ -247,7 +247,7 @@ class WeaponSelector;
 #include "src/pilots/aiModel/aiModelConqueror.hpp"
 
 //   
-#include "src/pilots/observation.hpp" 
+#include "src/pilots/Observation.hpp" 
 
 #include "src/gui/button.hpp"
 #include "src/gui/guiSpace.hpp"
@@ -415,7 +415,7 @@ class WeaponSelector;
 #include "src/spaceobjects/RocketBullet.cpp"
 
 #include "src/pilots/Player.cpp"
-#include "src/skill/skill.cpp"
+#include "src/pilots/Skill.cpp"
 
 #include "src/pilots/Npc.cpp"
 //
@@ -437,7 +437,7 @@ class WeaponSelector;
 #include "src/pilots/aiModel/aiModelRanger.cpp"
 #include "src/pilots/aiModel/aiModelConqueror.cpp"
 
-#include "src/pilots/observation.cpp" 
+#include "src/pilots/Observation.cpp" 
 
 #include "src/common/common.cpp"
 

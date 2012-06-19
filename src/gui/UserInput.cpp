@@ -78,6 +78,11 @@ void UserInput::GetSimpleInputs(Player* player)
                			{
               				if (player->GetNpc()->GetScanTarget() != NULL)
               				{
+                 		  		if (player->GetNpc()->GetScanTarget() == player->GetNpc()->GetVehicle())
+                 		  		{
+                 		  			player->GetNpc()->GetSkill()->Acknowledge();
+                 		  		}
+ 
                 		  		player->GetNpc()->ResetScanTarget();
               				}
               				break;
