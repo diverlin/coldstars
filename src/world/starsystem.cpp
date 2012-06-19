@@ -743,7 +743,7 @@ void StarSystem::DrawBackground(vec2f scroll_coords)
 
     		for(unsigned int i = 0; i<distantNebulaEffect_vec.size(); i++)
     		{ 
-       			distantNebulaEffect_vec[i]->UpdateRenderStuff(); 
+       			distantNebulaEffect_vec[i]->Update(); 
         		distantNebulaEffect_vec[i]->Render(scroll_coords.x, scroll_coords.y); 
     		}
 

@@ -31,7 +31,7 @@ class DistantNebulaEffect : public BaseBackGroundEffect
 	      	void SetAngle(float angle_inD) 	{ this->angle_inD = angle_inD; };	        	        
 	      	void SetDAngle(float d_angle_inD) 	{ this->d_angle_inD = d_angle_inD; };
 
-        	void UpdateRenderStuff();
+        	void Update();
         	void Render(float vx, float vy);
         	
         	void SaveData(boost::property_tree::ptree&, const std::string&) const;		
@@ -39,12 +39,7 @@ class DistantNebulaEffect : public BaseBackGroundEffect
 		void ResolveData();
 		
         private:
-        	int minus_half_w, minus_half_h, plus_half_w, plus_half_h;   
-        	
-        	float angle_inD;
-        	float d_angle_inD;
-      	
-        	void CalcRenderConstants();   
+        	float angle_inD, d_angle_inD;
         	
         	void SaveDataUniqueDistantNebulaEffect(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueDistantNebulaEffect(const boost::property_tree::ptree&);

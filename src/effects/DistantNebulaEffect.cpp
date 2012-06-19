@@ -24,7 +24,7 @@ DistantNebulaEffect::DistantNebulaEffect():angle_inD(0.f), d_angle_inD(0.f)
 DistantNebulaEffect::~DistantNebulaEffect()
 {}
    
-void DistantNebulaEffect::UpdateRenderStuff()
+void DistantNebulaEffect::Update()
 {
      	angle_inD += d_angle_inD;  
 }        
@@ -58,11 +58,17 @@ void DistantNebulaEffect::ResolveData()
 
 		
 
-void DistantNebulaEffect::SaveDataUniqueDistantNebulaEffect(boost::property_tree::ptree&, const std::string&) const		
-{}
+void DistantNebulaEffect::SaveDataUniqueDistantNebulaEffect(boost::property_tree::ptree& save_ptree, const std::string& root) const		
+{
+	save_ptree.put(root+"angle_inD", angle_inD);
+	save_ptree.put(root+"d_angle_inD", d_angle_inD);
+}
 
-void DistantNebulaEffect::LoadDataUniqueDistantNebulaEffect(const boost::property_tree::ptree&)
-{}
+void DistantNebulaEffect::LoadDataUniqueDistantNebulaEffect(const boost::property_tree::ptree& load_ptree)
+{
+	angle_inD = load_ptree.get<float>("angle_inD");
+	d_angle_inD = load_ptree.get<float>("d_angle_inD");
+}
 
 void DistantNebulaEffect::ResolveDataUniqueDistantNebulaEffect()
 {}
