@@ -67,7 +67,7 @@ class WeaponSelector;
 
 #include "src/common/myStr.hpp"
 
-#include "src/render/screen.hpp"
+#include "src/render/Screen.hpp"
 
 #include "src/resources/objLoader.hpp"
 
@@ -223,10 +223,10 @@ class WeaponSelector;
 #include "src/builder/KosmoportBuilder.hpp"
 
 
-#include "src/pilots/player.hpp"
+#include "src/pilots/Player.hpp"
 
 #include "src/skill/skill.hpp"
-#include "src/pilots/npc.hpp"           
+#include "src/pilots/Npc.hpp"           
 
 #include "src/pilots/scenarios/scenarioBase.hpp" 
 
@@ -414,10 +414,10 @@ class WeaponSelector;
 #include "src/effects/Shield.cpp"
 #include "src/spaceobjects/RocketBullet.cpp"
 
-#include "src/pilots/player.cpp"
+#include "src/pilots/Player.cpp"
 #include "src/skill/skill.cpp"
 
-#include "src/pilots/npc.cpp"
+#include "src/pilots/Npc.cpp"
 //
 #include "src/pilots/scenarios/scenarioBase.cpp" 
 
@@ -450,7 +450,7 @@ class WeaponSelector;
 
 #include "src/text/textstuff.cpp"
 
-#include "src/render/screen.cpp"
+#include "src/render/Screen.cpp"
 #include "src/common/gameTimer.cpp"
 #include "src/config/SaveManager.cpp" 
 

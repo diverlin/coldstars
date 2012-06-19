@@ -28,24 +28,26 @@ class Screen
         	Screen();
         	~Screen();   
         	
-        	void resize(int, int);
-        	int getWidth() const;
-        	int getHeight() const;
+        	void SetBottomLeftGlobalCoord(vec2f bottomLeft_globalCoord) {this->bottomLeft_globalCoord = bottomLeft_globalCoord; UpdateOnEvent(); };
+        	
+        	int GetWidth() const  { return width; };
+        	int GetHeight() const { return height; };
         	     	
-        	const vec2f& getTopRightGlobalCoord() const;
-        	const vec2f& getBottomLeftGlobalCoord() const;
+        	const vec2f& GetTopRightGlobalCoord()   const { return topRight_globalCoord; };
+        	const vec2f& GetBottomLeftGlobalCoord() const { return bottomLeft_globalCoord; };
         	     			
-        	FBO* getFbo0() const;
-		FBO* getFbo1() const;
-		FBO* getFbo2() const;
-		FBO* getFbo3() const;
+        	FBO* GetFbo0() const { return fbo0; };
+		FBO* GetFbo1() const { return fbo1; };
+		FBO* GetFbo2() const { return fbo2; };
+		FBO* GetFbo3() const { return fbo3; }
 
-		BloomEffect* getBloom() const;	
+		BloomEffect* GetBloom() const { return bloom; };	
 		
-		void bottomLeftGlobalCoordIncrease(vec2f);
-				
-		void update();
-		void display();	
+		void MovingBy(vec2f);
+
+        	void Resize(int, int);
+        					
+		void Display();	
 
 	private:
       		int width, height;
@@ -64,10 +66,11 @@ class Screen
       		
       		sf::View view;
       		
-      		void initGl();
-      		void resizeGl();
+      		void InitGl();
+      		void ResizeGl();
       		
-      		void resizePostProcess();
+      		void ResizePostProcess();
+		void UpdateOnEvent();
 }; 
 
 #endif 

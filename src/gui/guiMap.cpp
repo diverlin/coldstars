@@ -34,7 +34,7 @@ bool GuiMap :: update()
      	if (player->GetNpc()->GetVehicle()->ableTo.HJUMP == true)
      	{
         	int mx  = player->GetCursor()->GetMousePos().x;
-        	int my  = player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y; 
+        	int my  = player->GetScreen()->GetHeight() - player->GetCursor()->GetMousePos().y; 
         	int lmb = player->GetCursor()->GetMouseLeftButton();
    
         	for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)

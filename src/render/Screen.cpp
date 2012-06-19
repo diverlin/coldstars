@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-Screen :: Screen()
+Screen::Screen()
 {
       	fbo0  = NULL;
 	fbo1  = NULL;	
@@ -30,11 +30,11 @@ Screen :: Screen()
       	bpp       = Config::Instance().BPP;
       	vert_sync = Config::Instance().VSYNC;
       	
-      	initGl();
-      	resize(width, height);
+      	InitGl();
+      	Resize(width, height);
 }
 
-Screen :: ~Screen()
+Screen::~Screen()
 {
 	delete fbo0;
 	delete fbo1;	
@@ -43,7 +43,7 @@ Screen :: ~Screen()
 	delete bloom;
 }
         
-void Screen :: resize(int width, int height)
+void Screen::Resize(int width, int height)
 {
 	this->width  = width;
 	this->height = height;
@@ -56,44 +56,32 @@ void Screen :: resize(int width, int height)
 	Gui::GetWindow().SetView(view);	
 	Gui::GetWindow().SetSize(width, height);
 	    	
-	resizeGl();
+	ResizeGl();
 		
 	if (Config::Instance().MODERN_EFFECTS == true)
 	{
-		resizePostProcess();
+		ResizePostProcess();
 	}
 }
-
-
-int Screen :: getWidth() const  { return width; }
-int Screen :: getHeight() const { return height; }
-
-const vec2f& Screen :: getTopRightGlobalCoord()   const { return topRight_globalCoord; }
-const vec2f& Screen :: getBottomLeftGlobalCoord() const { return bottomLeft_globalCoord; }
-        	
-FBO* Screen :: getFbo0() const { return fbo0; }
-FBO* Screen :: getFbo1() const { return fbo1; }
-FBO* Screen :: getFbo2() const { return fbo2; }
-FBO* Screen :: getFbo3() const { return fbo3; }
-
-BloomEffect* Screen :: getBloom() const { return bloom; }
 	
-void Screen :: bottomLeftGlobalCoordIncrease(vec2f delta)
+void Screen::MovingBy(vec2f delta)
 {
 	bottomLeft_globalCoord += delta;
+	UpdateOnEvent();
+}
+
+void Screen::UpdateOnEvent()
+{
 	topRight_globalCoord.Set(bottomLeft_globalCoord.x + width, bottomLeft_globalCoord.y + height);
 }
 
-void Screen :: update()
-{}
-
-void Screen :: display()
+void Screen::Display()
 {
   	Gui::Update();
   	Gui::GetWindow().Display();
 }
 
-void Screen :: initGl()
+void Screen::InitGl()
 {   
   	// Set color and depth clear value
   	//glClearDepth(1.f);
@@ -114,9 +102,7 @@ void Screen :: initGl()
       	//glDisable(GL_LIGHTING);  
 }   
 
-
-
-void Screen :: resizePostProcess()
+void Screen::ResizePostProcess()
 {
 	delete fbo0;
 	delete fbo1;	
@@ -131,8 +117,7 @@ void Screen :: resizePostProcess()
 	bloom = new BloomEffect(width, height, g_SHADERS.blur, g_SHADERS.extractbright, g_SHADERS.combine, 1, 1);
 }
 
-
-void Screen :: resizeGl()
+void Screen::ResizeGl()
 {
   	// Setup a perspective projection
   	glMatrixMode(GL_PROJECTION);

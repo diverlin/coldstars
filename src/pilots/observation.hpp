@@ -58,37 +58,32 @@ class StarSystemObservationData
 };
 
 
-
 class Observation 
 {
    	public:
       		Observation(Npc*);
      		~Observation();
-            
-     		std::vector<ContainerObservationData> visible_CONTAINER_vec;
      		
- 		void observeAll_inSpace_inStatic();
+ 		void ObserveAllInSpaceInStatic();
           	
-          	void findEchievableStarSystems_inStatic(Galaxy*);
-          	StarSystem* getClosestStarSystem(bool) const;
-          	Npc* getClosestNpc(std::vector<int>*) const;
+          	void FindEchievableStarSystemsInStatic(Galaxy*);
+          	StarSystem* GetClosestStarSystem(bool) const;
+          	Npc* GetClosestNpc(std::vector<int>*) const;
           	          	          	                
-          	void findVisibleAsteroids_inSpace_inStatic();
-          	void findVisibleMinerals_inSpace_inStatic();
-          	void findVisibleContainers_inSpace_inStatic();
-          	void findVisibleNpcs_inSpace_inStatic();
+          	void FindVisibleAsteroidsInSpaceInStatic();
+          	void FindVisibleContainersInSpaceInStatic();
+          	void FindVisibleNpcsInSpaceInStatic();
 
                 template <typename OBSERVED_DATA_TYPE>
-		void sort(std::vector<OBSERVED_DATA_TYPE>*);
+		void Sort(std::vector<OBSERVED_DATA_TYPE>*);
 
-              	
-               	void printVisibleMineralInformation() const;  // debug
+              	void _printVisibleMineralInformation() const;  // debug
                	
 	private:
                 Npc* npc_owner;	
 
      		std::vector<StarSystemObservationData> visible_STARSYSTEM_vec; 
-     		                                
+     		std::vector<ContainerObservationData> visible_CONTAINER_vec;                              
      		std::vector<AsteroidObservationData>  visible_ASTEROID_vec; 		
 
      		std::vector<NpcObservationData> visible_NPC_vec;                

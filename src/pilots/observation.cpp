@@ -16,25 +16,25 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-ContainerObservationData :: ContainerObservationData(Container* _container, float _dist)
+ContainerObservationData::ContainerObservationData(Container* _container, float _dist)
 {
 	container = _container;
 	dist = _dist;
 }	
 
-AsteroidObservationData :: AsteroidObservationData(Asteroid* _asteroid, float _dist)
+AsteroidObservationData::AsteroidObservationData(Asteroid* _asteroid, float _dist)
 {
 	asteroid = _asteroid;
 	dist = _dist;
 }	
 
-NpcObservationData :: NpcObservationData(Npc* _npc, float _dist)
+NpcObservationData::NpcObservationData(Npc* _npc, float _dist)
 {
 	npc = _npc;
 	dist = _dist;
 }	
 
-StarSystemObservationData :: StarSystemObservationData(StarSystem* _starsystem, float _dist)
+StarSystemObservationData::StarSystemObservationData(StarSystem* _starsystem, float _dist)
 {
 	starsystem = _starsystem;
 	dist = _dist;
@@ -42,16 +42,16 @@ StarSystemObservationData :: StarSystemObservationData(StarSystem* _starsystem, 
 
 
 
-Observation :: Observation(Npc* _npc)
+Observation::Observation(Npc* _npc)
 { 
     	npc_owner = _npc;
 }
     
-Observation :: ~Observation()
+Observation::~Observation()
 {}  
     
     
-void Observation :: findEchievableStarSystems_inStatic(Galaxy* galaxy)
+void Observation::FindEchievableStarSystemsInStatic(Galaxy* galaxy)
 {
         visible_STARSYSTEM_vec.clear();
 
@@ -64,11 +64,11 @@ void Observation :: findEchievableStarSystems_inStatic(Galaxy* galaxy)
                 } 
         }
         
-        sort(&visible_STARSYSTEM_vec);
+        //Sort(&visible_STARSYSTEM_vec);
 }
           
           
-StarSystem* Observation :: getClosestStarSystem(bool _captured) const
+StarSystem* Observation::GetClosestStarSystem(bool _captured) const
 {
 	StarSystem* _target_starsystem = NULL;
 	
@@ -85,7 +85,7 @@ StarSystem* Observation :: getClosestStarSystem(bool _captured) const
 }    	
 
 
-Npc* Observation :: getClosestNpc(std::vector<int>* _pVec_race_id) const
+Npc* Observation::GetClosestNpc(std::vector<int>* _pVec_race_id) const
 {
 	for (unsigned int i = 0; i < visible_NPC_vec.size(); i++)
         {
@@ -102,56 +102,15 @@ Npc* Observation :: getClosestNpc(std::vector<int>* _pVec_race_id) const
 	return NULL;	
 }
 
-void Observation :: observeAll_inSpace_inStatic()
+void Observation::ObserveAllInSpaceInStatic()
 {
-     	findVisibleAsteroids_inSpace_inStatic();
-     	findVisibleMinerals_inSpace_inStatic();
-        
-     	findVisibleContainers_inSpace_inStatic();
-
-     	findVisibleNpcs_inSpace_inStatic();
-}
-
-void Observation :: findVisibleAsteroids_inSpace_inStatic()
-{
-	see.ASTEROID  = false;
-        visible_ASTEROID_vec.clear();
-
-        for (unsigned int ai = 0; ai < npc_owner->GetStarSystem()->ASTEROID_vec.size(); ai++)
-        {    
-        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), npc_owner->GetStarSystem()->ASTEROID_vec[ai]->GetPoints().GetCenter());
-                if (dist < npc_owner->GetVehicle()->propetries.radius)
-                {
-                	visible_ASTEROID_vec.push_back( AsteroidObservationData(npc_owner->GetStarSystem()->ASTEROID_vec[ai], dist) );
-                      	see.ASTEROID = true;
-                } 
-        }
-        
-        sort(&visible_ASTEROID_vec);
-}
-
-
-
-void Observation :: findVisibleMinerals_inSpace_inStatic()
-{
-	//see.MINERAL   = false;
-        //visible_MINERAL_vec.clear();
-
-        //for (unsigned int mi = 0; mi < npc_owner->GetStarSystem()->MINERAL_vec.size(); mi++)
-        //{    
-         	//float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), npc_owner->GetStarSystem()->MINERAL_vec[mi]->GetPoints().GetCenter());
-               	//if (dist < npc_owner->GetVehicle()->propetries.radius)
-              	//{              		
-               		//visible_MINERAL_vec.push_back(MineralObservationData(npc_owner->GetStarSystem()->MINERAL_vec[mi], dist));
-              		//see.MINERAL = true;
-               	//} 
-        //}
-        
-        //sort(&visible_MINERAL_vec);
+     	FindVisibleAsteroidsInSpaceInStatic();
+     	FindVisibleContainersInSpaceInStatic();
+     	FindVisibleNpcsInSpaceInStatic();
 }
 
 template <typename OBSERVED_DATA_TYPE>
-void Observation :: sort(std::vector<OBSERVED_DATA_TYPE>* pDataVec)
+void Observation::Sort(std::vector<OBSERVED_DATA_TYPE>* pDataVec)
 {
 	for (unsigned int i = 0; i < pDataVec->size(); i++)
 	{
@@ -173,9 +132,25 @@ void Observation :: sort(std::vector<OBSERVED_DATA_TYPE>* pDataVec)
 }
 
 
+void Observation::FindVisibleAsteroidsInSpaceInStatic()
+{
+	see.ASTEROID  = false;
+        visible_ASTEROID_vec.clear();
 
+        for (unsigned int ai = 0; ai < npc_owner->GetStarSystem()->ASTEROID_vec.size(); ai++)
+        {    
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), npc_owner->GetStarSystem()->ASTEROID_vec[ai]->GetPoints().GetCenter());
+                if (dist < npc_owner->GetVehicle()->propetries.radius)
+                {
+                	visible_ASTEROID_vec.push_back( AsteroidObservationData(npc_owner->GetStarSystem()->ASTEROID_vec[ai], dist) );
+                      	see.ASTEROID = true;
+                } 
+        }
+        
+        Sort(&visible_ASTEROID_vec);
+}
 
-void Observation :: findVisibleContainers_inSpace_inStatic()
+void Observation::FindVisibleContainersInSpaceInStatic()
 {
 	see.CONTAINER   = false;
         visible_CONTAINER_vec.clear();
@@ -189,11 +164,9 @@ void Observation :: findVisibleContainers_inSpace_inStatic()
                 	see.CONTAINER = true;
                 } 
     	}
-
 }
 
-
-void Observation ::findVisibleNpcs_inSpace_inStatic()
+void Observation::FindVisibleNpcsInSpaceInStatic()
 {
 	visible_NPC_vec.clear();
 
@@ -205,7 +178,7 @@ void Observation ::findVisibleNpcs_inSpace_inStatic()
                 	visible_NPC_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_vec[i], dist) );
                	} 
        	}	
-        sort(&visible_NPC_vec);
+        Sort(&visible_NPC_vec);
        	
        	
        	see.RANGER  = false;
@@ -273,9 +246,7 @@ void Observation ::findVisibleNpcs_inSpace_inStatic()
 }
 
 
-
-
-void Observation :: printVisibleMineralInformation() const
+void Observation::_printVisibleMineralInformation() const
 {
 	//printf("visible_MINERAL_vec for npc_id = %i\n", npc_owner->GetId());
 	//for (unsigned int i = 0; i < visible_MINERAL_vec.size(); i++)

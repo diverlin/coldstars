@@ -82,7 +82,7 @@ void GuiManager::RenderInStore() const
 		
 	resetRenderTransformation();
 
-        Rect screen_rect = Rect(0, 0, player->GetScreen()->getWidth(), player->GetScreen()->getHeight()); 
+        Rect screen_rect = Rect(0, 0, player->GetScreen()->GetWidth(), player->GetScreen()->GetHeight()); 
 	gui_store->RenderBackground(store, screen_rect);
 	
 	enable_BLEND();

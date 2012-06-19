@@ -123,7 +123,7 @@ void GuiKosmoport::ResetInfoFlags()
 void GuiKosmoport::MouseCheckInteraction()
 {
      	int mxvp = player->GetCursor()->GetMousePos().x;
-     	int myvp = player->GetScreen()->getHeight() - player->GetCursor()->GetMousePos().y;         
+     	int myvp = player->GetScreen()->GetHeight() - player->GetCursor()->GetMousePos().y;         
      	int lmb  = player->GetCursor()->GetMouseLeftButton();;
 
     	for (unsigned int i = 0; i< button_common_pList.size(); i++)

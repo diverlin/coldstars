@@ -36,9 +36,9 @@ void MacroScenarioStarSystemDefence :: update_inStatic(Npc* _npc) const
 	{
 		if ( (_npc->GetStateMachine()->getCurrentMicroTask()->getScenario() != MICROSCENARIO_DESTROY) or (_npc->GetStateMachine()->getCurrentMicroTask()->getValid() == false) )
 		{
-            		_npc->GetObservation()->findVisibleNpcs_inSpace_inStatic();
+            		_npc->GetObservation()->FindVisibleNpcsInSpaceInStatic();
             	
-            		Npc* _target_npc = _npc->GetObservation()->getClosestNpc(&RACES_GOOD_LIST);
+            		Npc* _target_npc = _npc->GetObservation()->GetClosestNpc(&RACES_GOOD_LIST);
             		if (_target_npc != NULL)
             		{
 				_npc->GetStateMachine()->setCurrentMicroTask(MICROSCENARIO_DESTROY, _target_npc);

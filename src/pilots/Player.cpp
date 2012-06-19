@@ -249,13 +249,13 @@ void Player::AddIfVisible(VerticalFlowText* effect)
   
 void Player::RenderEntities_NEW()
 {   
-	int w = screen->getWidth();
-	int h = screen->getHeight();
+	int w = screen->GetWidth();
+	int h = screen->GetHeight();
 
-	screen->getFbo0()->activate(screen);
+	screen->GetFbo0()->activate(screen);
    
-        	npc->GetStarSystem()->DrawBackground(screen->getBottomLeftGlobalCoord());           
-		camera(screen->getBottomLeftGlobalCoord().x, screen->getBottomLeftGlobalCoord().y);    
+        	npc->GetStarSystem()->DrawBackground(screen->GetBottomLeftGlobalCoord());           
+		camera(screen->GetBottomLeftGlobalCoord().x, screen->GetBottomLeftGlobalCoord().y);    
 	        
 
 		npc->GetStarSystem()->RestoreDefaultColor();
@@ -266,47 +266,47 @@ void Player::RenderEntities_NEW()
     			}
     		disable_BLEND();
 		npc->GetStarSystem()->RestoreSceneColor();
-	screen->getFbo0()->deactivate();
+	screen->GetFbo0()->deactivate();
 
 	// POST PROCESS BLOOM (many FBO)
-	screen->getBloom()->pass0(screen, screen->getFbo0()->getTexture(), visible_STAR_vec[0]->GetBrightThreshold());
-	screen->getBloom()->restPasses(screen);
-	screen->getBloom()->combine(screen, screen->getFbo0()->getTexture());
+	screen->GetBloom()->pass0(screen, screen->GetFbo0()->getTexture(), visible_STAR_vec[0]->GetBrightThreshold());
+	screen->GetBloom()->restPasses(screen);
+	screen->GetBloom()->combine(screen, screen->GetFbo0()->getTexture());
 
 	// RENDER to FBO1, VOLUMETRIC LIGHT
-	screen->getFbo1()->activate(screen);
+	screen->GetFbo1()->activate(screen);
 		glUseProgram(g_SHADERS.volumetriclight);
 			glActiveTexture(GL_TEXTURE0);                                
-			glBindTexture(GL_TEXTURE_2D, screen->getBloom()->pTo_fbo_final->getTexture());
+			glBindTexture(GL_TEXTURE_2D, screen->GetBloom()->pTo_fbo_final->getTexture());
 			glUniform1i(glGetUniformLocation(g_SHADERS.volumetriclight, "FullSampler"), 0);
 
 			glActiveTexture(GL_TEXTURE1);                                
-			glBindTexture(GL_TEXTURE_2D, screen->getBloom()->texture_blured);
+			glBindTexture(GL_TEXTURE_2D, screen->GetBloom()->texture_blured);
 			glUniform1i(glGetUniformLocation(g_SHADERS.volumetriclight, "BlurSampler"), 1);
 
-			glUniform4f(glGetUniformLocation(g_SHADERS.volumetriclight, "sun_pos"), -screen->getBottomLeftGlobalCoord().x/w, -screen->getBottomLeftGlobalCoord().y/h, -100.0, 1.0);
+			glUniform4f(glGetUniformLocation(g_SHADERS.volumetriclight, "sun_pos"), -screen->GetBottomLeftGlobalCoord().x/w, -screen->GetBottomLeftGlobalCoord().y/h, -100.0, 1.0);
           
 			glActiveTexture(GL_TEXTURE0);
 			drawFullScreenQuad(w, h, -999.0);
 		glUseProgram(0);
 		glActiveTexture(GL_TEXTURE0);
-	screen->getFbo1()->deactivate();
+	screen->GetFbo1()->deactivate();
 
 
-	screen->getFbo2()->activate(screen);
-		drawFullScreenTexturedQuad(screen->getFbo1()->getTexture(), w, h, -999.0);
+	screen->GetFbo2()->activate(screen);
+		drawFullScreenTexturedQuad(screen->GetFbo1()->getTexture(), w, h, -999.0);
            
-          	camera(screen->getBottomLeftGlobalCoord().x, screen->getBottomLeftGlobalCoord().y);    
+          	camera(screen->GetBottomLeftGlobalCoord().x, screen->GetBottomLeftGlobalCoord().y);    
         
 		enable_DEPTH();  
     			for(unsigned int i = 0; i < visible_PLANET_vec.size(); i++) 
     			{ 
-       				visible_PLANET_vec[i]->Render_NEW(screen->getBottomLeftGlobalCoord()); 
+       				visible_PLANET_vec[i]->Render_NEW(screen->GetBottomLeftGlobalCoord()); 
     			}
     		
     			for(unsigned int i = 0; i < visible_ASTEROID_vec.size(); i++)
     			{ 
-       				visible_ASTEROID_vec[i]->Render_NEW(screen->getBottomLeftGlobalCoord()); 
+       				visible_ASTEROID_vec[i]->Render_NEW(screen->GetBottomLeftGlobalCoord()); 
     			}
     		disable_DEPTH();
 
@@ -352,11 +352,11 @@ void Player::RenderEntities_NEW()
     			}    	
 		disable_BLEND();
 		
-    	screen->getFbo2()->deactivate();
+    	screen->GetFbo2()->deactivate();
 
 
 	// POST PROCESS WAVE SHOCK into FBO2
-	screen->getFbo3()->activate(screen);
+	screen->GetFbo3()->activate(screen);
 
 		float center_array[10][2];
 		float xyz_array[10][3];
@@ -364,8 +364,8 @@ void Player::RenderEntities_NEW()
 
 		for (unsigned int i = 0; i < visible_effect_SHOCKWAVE_vec.size(); i++)
 		{         
-			center_array[i][0] = visible_effect_SHOCKWAVE_vec[i]->center.x/w - screen->getBottomLeftGlobalCoord().x/w;
-			center_array[i][1] = visible_effect_SHOCKWAVE_vec[i]->center.y/h - screen->getBottomLeftGlobalCoord().y/h;
+			center_array[i][0] = visible_effect_SHOCKWAVE_vec[i]->center.x/w - screen->GetBottomLeftGlobalCoord().x/w;
+			center_array[i][1] = visible_effect_SHOCKWAVE_vec[i]->center.y/h - screen->GetBottomLeftGlobalCoord().y/h;
 			xyz_array[i][0] = visible_effect_SHOCKWAVE_vec[i]->parameter.x;
 			xyz_array[i][1] = visible_effect_SHOCKWAVE_vec[i]->parameter.y;
 			xyz_array[i][2] = visible_effect_SHOCKWAVE_vec[i]->parameter.z;
@@ -376,7 +376,7 @@ void Player::RenderEntities_NEW()
 
 		glUseProgram(g_SHADERS.shockwave);
 			glActiveTexture(GL_TEXTURE0);                                
-			glBindTexture(GL_TEXTURE_2D, screen->getFbo2()->getTexture());
+			glBindTexture(GL_TEXTURE_2D, screen->GetFbo2()->getTexture());
 			glUniform1i (glGetUniformLocation(g_SHADERS.shockwave, "sceneTex"), 0);
 
 			int len_effect_SHOCKWAVE_list = visible_effect_SHOCKWAVE_vec.size();
@@ -388,7 +388,7 @@ void Player::RenderEntities_NEW()
 			drawFullScreenQuad(w, h, -999.0);
 		glUseProgram(0);
 	
-	screen->getFbo3()->deactivate();
+	screen->GetFbo3()->deactivate();
 
 
 	// render from FBO
@@ -398,10 +398,10 @@ void Player::RenderEntities_NEW()
 	clearScreen();
 	resetRenderTransformation();
 
-	drawFullScreenTexturedQuad(screen->getFbo3()->getTexture(), w, h, -999.0);
+	drawFullScreenTexturedQuad(screen->GetFbo3()->getTexture(), w, h, -999.0);
 	//drawFullScreenTexturedQuad(pTo_fbo0->texture, w, h, -999.0);  // debug
 
-	camera(screen->getBottomLeftGlobalCoord().x, screen->getBottomLeftGlobalCoord().y);
+	camera(screen->GetBottomLeftGlobalCoord().x, screen->GetBottomLeftGlobalCoord().y);
 	
 	enable_BLEND();
 		for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
@@ -418,7 +418,7 @@ void Player::RenderEntities_NEW()
     		
     		for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
     		{ 
-        		visible_text_DAMAGE_vec[i]->Render(screen->getBottomLeftGlobalCoord()); 
+        		visible_text_DAMAGE_vec[i]->Render(screen->GetBottomLeftGlobalCoord()); 
     		}    		
     		
     	disable_BLEND();
@@ -432,9 +432,9 @@ void Player::RenderEntities_NEW()
 void Player::RenderEntities_OLD()
 {   
 	glLoadIdentity();
-        npc->GetStarSystem()->DrawBackground(screen->getBottomLeftGlobalCoord());
+        npc->GetStarSystem()->DrawBackground(screen->GetBottomLeftGlobalCoord());
 	
-        camera(screen->getBottomLeftGlobalCoord().x, screen->getBottomLeftGlobalCoord().y);
+        camera(screen->GetBottomLeftGlobalCoord().x, screen->GetBottomLeftGlobalCoord().y);
         
         disable_BLEND();
         enable_DEPTH();
@@ -511,7 +511,7 @@ void Player::RenderEntities_OLD()
 
         for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
     	{ 
-        	visible_text_DAMAGE_vec[i]->Render(screen->getBottomLeftGlobalCoord()); 
+        	visible_text_DAMAGE_vec[i]->Render(screen->GetBottomLeftGlobalCoord()); 
     	}    		
     		
                 
@@ -561,8 +561,8 @@ void Player::MouseInteractionInSpace() // all large objects must be cheked by la
 {   
     	bool cursor_has_target = false;   
  
-    	int mxvp = cursor->GetMousePos().x                       + screen->getBottomLeftGlobalCoord().x;
-    	int myvp = screen->getHeight() - cursor->GetMousePos().y + screen->getBottomLeftGlobalCoord().y;
+    	int mxvp = cursor->GetMousePos().x                       + screen->GetBottomLeftGlobalCoord().x;
+    	int myvp = screen->GetHeight() - cursor->GetMousePos().y + screen->GetBottomLeftGlobalCoord().y;
 
     	bool mlb = cursor->GetMouseLeftButton();
     	bool mrb = cursor->GetMouseRightButton();
@@ -594,7 +594,7 @@ bool Player::MouseInteractionWithRockets(int mxvp, int myvp, bool mlb, bool mrb)
             	float object_cursor_dist = distBetweenPoints(visible_ROCKET_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
             	if (object_cursor_dist < visible_ROCKET_vec[i]->GetCollisionRadius())
             	{ 
-               		visible_ROCKET_vec[i]->RenderInfoInSpace(screen->getBottomLeftGlobalCoord()); 
+               		visible_ROCKET_vec[i]->RenderInfoInSpace(screen->GetBottomLeftGlobalCoord()); 
                
 			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 			{
@@ -627,7 +627,7 @@ bool Player::MouseInteractionWithContainers(int mxvp, int myvp, bool mlb, bool m
        		float object_cursor_dist = distBetweenPoints(visible_CONTAINER_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
        		if (object_cursor_dist < visible_CONTAINER_vec[i]->GetCollisionRadius())
             	{   
-               		visible_CONTAINER_vec[i]->RenderInfoInSpace(screen->getBottomLeftGlobalCoord()); 
+               		visible_CONTAINER_vec[i]->RenderInfoInSpace(screen->GetBottomLeftGlobalCoord()); 
 
 			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 			{
@@ -662,7 +662,7 @@ bool Player::MouseInteractionWithSatellites(int mxvp, int myvp, bool mlb, bool m
             	float object_cursor_dist = distBetweenPoints(visible_SATELLITE_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
             	if (object_cursor_dist < visible_SATELLITE_vec[i]->GetCollisionRadius())
             	{ 
-            	      	visible_SATELLITE_vec[i]->RenderInfoInSpace(screen->getBottomLeftGlobalCoord()); 
+            	      	visible_SATELLITE_vec[i]->RenderInfoInSpace(screen->GetBottomLeftGlobalCoord()); 
                 	visible_SATELLITE_vec[i]->GetWeaponComplex()->RenderWeaponIcons();
 
                 	visible_SATELLITE_vec[i]->RenderRadarRange(); 
@@ -721,7 +721,7 @@ bool Player::MouseInteractionWithAsteroids(int mxvp, int myvp, bool mlb, bool mr
        		float object_cursor_dist = distBetweenPoints(visible_ASTEROID_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
        		if (object_cursor_dist < visible_ASTEROID_vec[i]->GetCollisionRadius())
        		{   
-                	visible_ASTEROID_vec[i]->RenderInfoInSpace(screen->getBottomLeftGlobalCoord()); 
+                	visible_ASTEROID_vec[i]->RenderInfoInSpace(screen->GetBottomLeftGlobalCoord()); 
                                 
                         visible_ASTEROID_vec[i]->GetOrbit()->Draw();
 
@@ -757,7 +757,7 @@ bool Player::MouseInteractionWithShips(int mxvp, int myvp, bool mlb, bool mrb) c
         	float object_cursor_dist = distBetweenPoints(visible_SHIP_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
         	if (object_cursor_dist < visible_SHIP_vec[i]->GetCollisionRadius())
         	{ 
-               		visible_SHIP_vec[i]->RenderInfoInSpace(screen->getBottomLeftGlobalCoord()); 
+               		visible_SHIP_vec[i]->RenderInfoInSpace(screen->GetBottomLeftGlobalCoord()); 
                		visible_SHIP_vec[i]->GetWeaponComplex()->RenderWeaponIcons();
 
                		visible_SHIP_vec[i]->RenderRadarRange(); 
@@ -815,7 +815,7 @@ bool Player::MouseInteractionWithBlackHoles(int mxvp, int myvp, bool mlb, bool m
        		float cursor_dist = distBetweenPoints(visible_BLACKHOLE_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
        		if (cursor_dist < visible_BLACKHOLE_vec[i]->GetCollisionRadius())
        		{   
-       			visible_BLACKHOLE_vec[i]->RenderInfoInSpace(screen->getBottomLeftGlobalCoord()); 
+       			visible_BLACKHOLE_vec[i]->RenderInfoInSpace(screen->GetBottomLeftGlobalCoord()); 
        			
        			return true;
       		}
@@ -831,7 +831,7 @@ bool Player::MouseInteractionWithSpaceStations(int mxvp, int myvp, bool mlb, boo
        		float object_cursor_dist = distBetweenPoints(visible_SPACESTATION_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
        		if (object_cursor_dist < visible_SPACESTATION_vec[i]->GetCollisionRadius())
             	{ 
-            		visible_SPACESTATION_vec[i]->RenderInfoInSpace(screen->getBottomLeftGlobalCoord()); 
+            		visible_SPACESTATION_vec[i]->RenderInfoInSpace(screen->GetBottomLeftGlobalCoord()); 
                 	visible_SPACESTATION_vec[i]->GetWeaponComplex()->RenderWeaponIcons();
 
                 	visible_SPACESTATION_vec[i]->RenderRadarRange(); 
@@ -888,7 +888,7 @@ bool Player::MouseInteractionWithPlanets(int mxvp, int myvp, bool mlb, bool mrb)
        		float object_cursor_dist = distBetweenPoints(visible_PLANET_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
        		if (object_cursor_dist < visible_PLANET_vec[i]->GetCollisionRadius())
             	{   
-                	visible_PLANET_vec[i]->RenderInfoInSpace(screen->getBottomLeftGlobalCoord()); 
+                	visible_PLANET_vec[i]->RenderInfoInSpace(screen->GetBottomLeftGlobalCoord()); 
 
                         visible_PLANET_vec[i]->GetOrbit()->Draw();
           
@@ -916,7 +916,7 @@ bool Player::MouseInteractionWithStars(int mxvp, int myvp, bool mlb, bool mrb) c
       		float object_cursor_dist = distBetweenPoints(visible_STAR_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
        		if (object_cursor_dist < visible_STAR_vec[i]->GetCollisionRadius())
        		{   
-       			visible_STAR_vec[i]->RenderInfo_inSpace(screen->getBottomLeftGlobalCoord()); 
+       			visible_STAR_vec[i]->RenderInfo_inSpace(screen->GetBottomLeftGlobalCoord()); 
 
        			return true; 
         	}
@@ -945,13 +945,13 @@ bool Player::IsObjectOnScreen(const Points& points) const
         int ob_w = points.GetWidth();
         int ob_h = points.GetHeight();
         
-        if (ob_centerx < (screen->getBottomLeftGlobalCoord().x - ob_w))
+        if (ob_centerx < (screen->GetBottomLeftGlobalCoord().x - ob_w))
                 return false;
-        if (ob_centerx > (screen->getTopRightGlobalCoord().x + ob_w))
+        if (ob_centerx > (screen->GetTopRightGlobalCoord().x + ob_w))
                 return false;
-        if (ob_centery < (screen->getBottomLeftGlobalCoord().y - ob_h))
+        if (ob_centery < (screen->GetBottomLeftGlobalCoord().y - ob_h))
                 return false;
-        if (ob_centery > (screen->getTopRightGlobalCoord().y + ob_h))
+        if (ob_centery > (screen->GetTopRightGlobalCoord().y + ob_h))
                 return false;
 
         return true;
@@ -1070,10 +1070,9 @@ void Player::RunSession(GameTimer* TIMER)
        	{
        		case ENTITY::SPACE_ID: 	    	{ this->SessionInSpace(TIMER); break; }
        		case ENTITY::KOSMOPORT_ID:  	{ this->SessionInKosmoport(); break; }
-       	} 
+       	}        	
        	
-       	screen->update();           	
-       	screen->display();
+       	screen->Display();
 }     		
 
 void Player::SaveData(boost::property_tree::ptree& save_ptree) const
@@ -1099,15 +1098,20 @@ void Player::ResolveData()
 void Player::SaveDataUniquePlayer(boost::property_tree::ptree& save_ptree, const std::string& root) const	
 {
         save_ptree.put(root+"unresolved.npc_id", npc->GetId());
+        save_ptree.put(root+"unresolved.screen_pos_x", screen->GetBottomLeftGlobalCoord().x);
+        save_ptree.put(root+"unresolved.screen_pos_y", screen->GetBottomLeftGlobalCoord().y);
 }
 
 void Player::LoadDataUniquePlayer(const boost::property_tree::ptree& load_ptree)
 {
 	data_unresolved_player.npc_id = load_ptree.get<int>("unresolved.npc_id");
+	data_unresolved_player.screen_pos.x = load_ptree.get<float>("unresolved.screen_pos_x");
+	data_unresolved_player.screen_pos.y = load_ptree.get<float>("unresolved.screen_pos_y");
 }
 
 void Player::ResolveDataUniquePlayer()
 {
         BindNpc((Npc*)EntityManager::Instance().GetEntityById(data_unresolved_player.npc_id));
+        screen->SetBottomLeftGlobalCoord(data_unresolved_player.screen_pos);
 }		
 
