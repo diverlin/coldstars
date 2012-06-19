@@ -595,13 +595,7 @@ bool Player::MouseInteractionWithRockets(int mxvp, int myvp, bool mlb, bool mrb)
             	if (object_cursor_dist < visible_ROCKET_vec[i]->GetCollisionRadius())
             	{ 
                		visible_ROCKET_vec[i]->RenderInfoInSpace(screen->getBottomLeftGlobalCoord()); 
-               		visible_ROCKET_vec[i]->GetWeaponComplex()->RenderWeaponIcons();
-
-               		visible_ROCKET_vec[i]->RenderRadarRange(); 
-               		visible_ROCKET_vec[i]->GetWeaponComplex()->RenderWeaponsRange(); 
-                		                                
-                        visible_ROCKET_vec[i]->GetDriveComplex()->drawPath(); 
-                
+               
 			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 			{
                 		if (mlb == true)

@@ -17,17 +17,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-RocketBuilder& RocketBuilder::Instance()
+RocketBulletBuilder& RocketBulletBuilder::Instance()
 {	
-	static RocketBuilder instance;
+	static RocketBulletBuilder instance;
 	return instance;
 }	
 
 
-RocketBuilder::~RocketBuilder() {}
+RocketBulletBuilder::~RocketBulletBuilder() {}
 
 
-void RocketBuilder::CreateNewRocket(int id)
+void RocketBulletBuilder::CreateNewRocket(int id)
 {
 	if (id == NONE_ID)
 	{
@@ -37,24 +37,22 @@ void RocketBuilder::CreateNewRocket(int id)
         EntityManager::Instance().RegisterEntity(rocket);
 }
 
-void RocketBuilder::CreateNewInternals(BulletData data_bullet) 
+void RocketBulletBuilder::CreateNewInternals(BulletData data_bullet) 
 {
 	LifeData data_life;	
 	data_life.is_alive      = true;
         data_life.garbage_ready = false;
         data_life.armor = data_bullet.armor;        
 
-         
         rocket->SetBulletData(data_bullet);
         
         rocket->SetLifeData(data_life);
-        rocket->SetTextureOb(data_bullet.texOb);
+        rocket->SetTextureOb(g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ROCKET_BULLET_ID));
          
         CreateKorpusGeometry(rocket);
         //CreateShieldGeometry(rocket);
-        //CreateGuiKontur(rocket);
+        CreateKorpusGui(rocket);
         CreateDriveComplex(rocket);
         //CreateWeaponsComplex(rocket);
         //CreateProtectionComplex(rocket);
-        //CreateEquipmentSlots(rocket);
 }

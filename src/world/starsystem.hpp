@@ -64,11 +64,10 @@ class StarSystem : public BaseGameEntity
 		//// TRANSITION
 		void AddToHyperJumpQueue(Vehicle*);
 
-		void Add(Vehicle*, vec2f, float, BaseGameEntity*);
+		void Add(Vehicle*, vec2f, float, BaseGameEntity* parent = NULL);
 						
 		void Add(BasePlanet*, BaseGameEntity* parent = NULL, int it = 0);
 		void Add(Container*, vec2f);
-		void Add(RocketBullet*, ItemSlot*, float offset);
 		void Add(BlackHole*, vec2f);
 
 		// effects

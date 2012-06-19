@@ -47,7 +47,7 @@ struct KorpusData
 struct UnresolvedDataUniqueVehicle
 {
 	int parent_vehicleslot_id;
-	std::string texOb_korpus_path; 	
+	std::string textureOb_gui_path; 	
 };
 
 class Vehicle : public BaseGameEntity
@@ -64,7 +64,7 @@ class Vehicle : public BaseGameEntity
 		void SetProtectionComplex(ProtectionComplex* protection_complex) { this->protection_complex = protection_complex; };
                                 
                 void SetKorpusData(KorpusData data_korpus) { this->data_korpus = data_korpus; };
-                void SetGuiTextureOb(TextureOb* textureOb) { texOb_korpus = textureOb; };
+                void SetGuiTextureOb(TextureOb* textureOb_gui) { this->textureOb_gui = textureOb_gui; };
         	void SetGuiRect(Rect rect) { kontur_rect = rect; };
         	
                 void AddItemSlot(ItemSlot*, const Rect&); 
@@ -164,7 +164,7 @@ class Vehicle : public BaseGameEntity
 		        	
         	// KONTUR RECT 
         	Rect kontur_rect; 
-                TextureOb* texOb_korpus;
+                TextureOb* textureOb_gui;
                 //                
                 
                 VehicleSlot* parent_vehicleslot;

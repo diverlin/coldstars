@@ -159,6 +159,15 @@ void EntityManager::LoadPass0()
 			SatelliteBuilder::Instance().GetSatellite()->LoadData(v.second);
 		}
 	}
+
+        if (load_ptree.get_child_optional("rocketbullet"))
+	{
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("rocketbullet"))
+		{
+			RocketBulletBuilder::Instance().CreateNewRocket(v.second.get<int>("data_id.id"));
+			RocketBulletBuilder::Instance().GetRocket()->LoadData(v.second);
+		}
+	}
 		
         if (load_ptree.get_child_optional("kosmoport"))
 	{	

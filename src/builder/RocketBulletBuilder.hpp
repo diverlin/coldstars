@@ -17,24 +17,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef ROCKETBUILDER_H
-#define ROCKETBUILDER_H
+#ifndef ROCKETBULLETBUILDER_H
+#define ROCKETBULLETBUILDER_H
 
 
-class RocketBuilder : public BaseVehicleBuilder
+class RocketBulletBuilder : public BaseVehicleBuilder
 {
 	public:
-		static RocketBuilder& Instance();
-		~RocketBuilder();
+		static RocketBulletBuilder& Instance();
+		~RocketBulletBuilder();
 		
 		void CreateNewRocket(int id = NONE_ID);							
 		void CreateNewInternals(BulletData);   
 		RocketBullet* GetRocket() const { return rocket; };         
        
         private:
-        	RocketBuilder():rocket(NULL) {};   	
-        	RocketBuilder(const RocketBuilder&) = delete; 
-        	RocketBuilder& operator=(const RocketBuilder&) = delete;
+        	RocketBulletBuilder():rocket(NULL) {};   	
+        	RocketBulletBuilder(const RocketBulletBuilder&) = delete; 
+        	RocketBulletBuilder& operator=(const RocketBulletBuilder&) = delete;
         	
         	RocketBullet* rocket;
 }; 

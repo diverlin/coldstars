@@ -62,7 +62,6 @@ void RocketEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
     	common_data.deterioration_rate = 1;
 
         BulletData data_bullet;
-        data_bullet.texOb         = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ROCKET_BULLET_ID);    
         data_bullet.damage        = damage_orig;
         data_bullet.armor         = ENTITY::ROCKET::ARMOR;
         data_bullet.speed_init    = ENTITY::ROCKET::START_SPEED;
