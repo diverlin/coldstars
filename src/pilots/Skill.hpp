@@ -20,41 +20,44 @@
 #ifndef SKILL_H
 #define SKILL_H
 
-
 class Skill
 { 
 	public:
 		Skill();
 		~Skill();
 
-		int getAttack()   const;   
-		int getDefence()  const;  
-		int getLeader()   const;  
-		int getTrader()   const;   
-		int getTechnic()  const;  
-		int getDiplomat() const; 
+		int GetAttack()   const { return attack; };   
+		int GetDefence()  const { return defence; };  
+		int GetLeader()   const { return leader; };  
+		int GetTrader()   const { return trader; };   
+		int GetTechnic()  const { return technic; };  
+		int GetDiplomat() const { return diplomat; }; 
 
-		void addExpirience(unsigned long int expirience);
-		void acknowledge();
+		void AddExpirience(unsigned long int expirience);
+		void Acknowledge();
 
-		void incrementAttack();
-		void decrementAttack();
+		void IncrementAttack();
+		void DecrementAttack();
 
-		void incrementDefence();
-		void decrementDefence();
+		void IncrementDefence();
+		void DecrementDefence();
 
-		void incrementLeader();
-		void decrementLeader();
+		void IncrementLeader();
+		void DecrementLeader();
 
-		void incrementTrader();
-		void decrementTrader();
+		void IncrementTrader();
+		void DecrementTrader();
 
-		void incrementTechnic();
-		void decrementTechnic();
+		void IncrementTechnic();
+		void DecrementTechnic();
 
-		void incrementDiplomat();
-		void decrementDiplomat();
+		void IncrementDiplomat();
+		void DecrementDiplomat();
 
+		void SaveData(boost::property_tree::ptree&, const std::string&) const;
+		void LoadData(const boost::property_tree::ptree&);
+		void ResolveData();	
+		
 	private:
 		int attack;   
 		int defence;  
@@ -74,7 +77,6 @@ class Skill
 
 		unsigned long int expirience;
 		unsigned long int expirience_for_next_level;
-
 };
 
 #endif

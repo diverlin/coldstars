@@ -289,12 +289,16 @@ void Npc::SaveDataUniqueNpc(boost::property_tree::ptree& save_ptree, const std::
         if (land) save_ptree.put(root+"unresolved.land_id", land->GetId());
 	else save_ptree.put(root+"unresolved.land_id", NONE_ID);
 	
+	skill->SaveData(save_ptree, root);
+	
 }
 
 void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
 {
 	data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresolved.vehicle_id");
 	data_unresolved_npc.land_id = load_ptree.get<int>("unresolved.land_id");
+
+	skill->LoadData(load_ptree.get_child("skill"));
 }
 
 void Npc::ResolveDataUniqueNpc()
@@ -305,4 +309,6 @@ void Npc::ResolveDataUniqueNpc()
         { 
         	SetLand( (BaseLand*)EntityManager::Instance().GetEntityById(data_unresolved_npc.land_id) ); 
         }	
+
+	skill->ResolveData();
 }		

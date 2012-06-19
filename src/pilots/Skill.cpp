@@ -17,9 +17,9 @@
 	 */
 
 
-#include "skill.hpp"
+#include "Skill.hpp"
 
-Skill :: Skill()
+Skill::Skill()
 {
 	attack   = getRandInt(0, 5);
 	defence  = getRandInt(0, 5);
@@ -28,7 +28,7 @@ Skill :: Skill()
 	technic  = getRandInt(0, 5);
 	diplomat = getRandInt(0, 5);  
 
-	acknowledge();
+	Acknowledge();
 
 	available_points = 3;
 
@@ -36,21 +36,10 @@ Skill :: Skill()
 	expirience_for_next_level = 1000;
 }     
 
-Skill :: ~Skill()
+Skill::~Skill()
 {}
 
-
-
-int Skill :: getAttack()   const { return attack; }
-int Skill :: getDefence()  const { return defence; }  
-int Skill :: getLeader()   const { return leader; }  
-int Skill :: getTrader()   const { return trader; }   
-int Skill :: getTechnic()  const { return technic; }  
-int Skill :: getDiplomat() const { return diplomat; }
-
-
-
-void Skill :: addExpirience(unsigned long int addExpirience)
+void Skill::AddExpirience(unsigned long int addExpirience)
 {
 	expirience += addExpirience;
 	if (expirience > expirience_for_next_level)
@@ -60,8 +49,7 @@ void Skill :: addExpirience(unsigned long int addExpirience)
 	}
 }
 
-
-void Skill :: acknowledge()
+void Skill::Acknowledge()
 {
 	attack_undo   = 0;
 	defence_undo  = 0;
@@ -72,7 +60,7 @@ void Skill :: acknowledge()
 }
 
 //######### ATTACK ###############
-void Skill :: incrementAttack()
+void Skill::IncrementAttack()
 {
 	if (available_points > 0)
 	{
@@ -82,7 +70,7 @@ void Skill :: incrementAttack()
 	}
 }
 
-void Skill :: decrementAttack()
+void Skill::DecrementAttack()
 {
 	if (attack_undo > 0)
 	{ 
@@ -94,7 +82,7 @@ void Skill :: decrementAttack()
 
 
 //######### DEFENCE ###############
-void Skill :: incrementDefence()
+void Skill::IncrementDefence()
 {
 	if (available_points > 0)
 	{
@@ -104,7 +92,7 @@ void Skill :: incrementDefence()
 	}  
 } 
 
-void Skill :: decrementDefence()
+void Skill::DecrementDefence()
 {
 	if (defence_undo > 0)
 	{
@@ -116,7 +104,7 @@ void Skill :: decrementDefence()
 
 
 //######### LEADER ###############
-void Skill :: incrementLeader()
+void Skill::IncrementLeader()
 {
 	if (available_points > 0)
 	{
@@ -126,7 +114,7 @@ void Skill :: incrementLeader()
 	}
 }
 
-void Skill :: decrementLeader()
+void Skill::DecrementLeader()
 {
 	if (leader_undo > 0)
 	{
@@ -138,7 +126,7 @@ void Skill :: decrementLeader()
 
 
 //######### TRADER ###############
-void Skill :: incrementTrader()
+void Skill::IncrementTrader()
 {
 	if (available_points > 0)
 	{
@@ -148,7 +136,7 @@ void Skill :: incrementTrader()
 	}
 }
 
-void Skill :: decrementTrader()
+void Skill::DecrementTrader()
 {
 	if (trader_undo > 0)
 	{
@@ -159,7 +147,7 @@ void Skill :: decrementTrader()
 }
 
 //######### TECHNIC ###############
-void Skill :: incrementTechnic()
+void Skill::IncrementTechnic()
 {
 	if (available_points > 0)
 	{
@@ -169,7 +157,7 @@ void Skill :: incrementTechnic()
 	}  
 }
 
-void Skill :: decrementTechnic()
+void Skill::DecrementTechnic()
 {
 	if (technic_undo > 0)
 	{
@@ -181,7 +169,7 @@ void Skill :: decrementTechnic()
 
 
 //######### DIMPLOMAT ###############
-void Skill :: incrementDiplomat()
+void Skill::IncrementDiplomat()
 {
 	if (available_points > 0)
 	{
@@ -191,7 +179,7 @@ void Skill :: incrementDiplomat()
 	}
 }
 
-void Skill :: decrementDiplomat()
+void Skill::DecrementDiplomat()
 {
 	if (diplomat_undo > 0)
 	{
@@ -201,5 +189,34 @@ void Skill :: decrementDiplomat()
 	}
 }
 
+void Skill::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{       
+	std::string sroot = root+"skill.";
+        save_ptree.put(sroot+"attack", attack);        
+        save_ptree.put(sroot+"defence", defence); 
+        save_ptree.put(sroot+"leader", leader);
+        save_ptree.put(sroot+"trader", trader); 
+        save_ptree.put(sroot+"technic", technic); 
+        save_ptree.put(sroot+"diplomat", diplomat); 
+        save_ptree.put(sroot+"available_points", available_points); 
 
+        save_ptree.put(sroot+"expirience", expirience); 
+        save_ptree.put(sroot+"expirience_for_next_level", expirience_for_next_level); 
+}	
 
+void Skill::LoadData(const boost::property_tree::ptree& load_ptree)
+{
+        attack = load_ptree.get<int>("attack"); 
+        defence = load_ptree.get<int>("defence"); 
+        leader = load_ptree.get<int>("leader"); 
+        trader = load_ptree.get<int>("trader"); 
+        technic = load_ptree.get<int>("technic"); 
+        diplomat = load_ptree.get<int>("diplomat"); 
+        available_points = load_ptree.get<int>("available_points"); 
+        
+        expirience = load_ptree.get<int>("expirience"); 
+        expirience_for_next_level = load_ptree.get<int>("expirience_for_next_level"); 
+}
+
+void Skill::ResolveData()
+{}
