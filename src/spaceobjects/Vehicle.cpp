@@ -171,7 +171,7 @@ void Vehicle::RecalculateCollisionRadius()
 
 bool Vehicle::DockingEffect()
 {
-	if (color.a > 0.1)
+	if (color.a > 0.01)
 	{
 		color.a -= 0.01;
 		return false;
@@ -265,6 +265,7 @@ void Vehicle::LaunchingEvent()
 			
 		case ENTITY::VEHICLE_ID:
 		{
+			//..
 			break;
 		}
 	}

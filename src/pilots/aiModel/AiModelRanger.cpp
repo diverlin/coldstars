@@ -17,19 +17,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef AIMODELTRADER_H
-#define AIMODELTRADER_H
+AiModelRanger::AiModelRanger() 
+{}
 
-class AiModelTrader : public AiModelBase
+AiModelRanger::~AiModelRanger() 
+{}
+
+void AiModelRanger::UpdateInStatic(Npc* npc) const
 {
-	public:
-		AiModelTrader();
-		virtual ~AiModelTrader();
-		
-		virtual void update_inStatic(Npc*) const;
-		virtual std::string getDescription(Npc*) const;
-}; 
+	if (npc->GetStateMachine()->GetCurrentMacroTask()->GetValid() == false)
+        {
+        	StarSystem* ss_to_free = npc->GetClosestStarSystem(true);
+        	if (ss_to_free != NULL)
+        	{
+        		npc->GetStateMachine()->SetCurrentMacroTask(MACROSCENARIO_STARSYSTEMLIBERATION, ss_to_free);        			
+        	}
+        }            
+}
 
-
-#endif 
-     
+std::string AiModelRanger::GetDescription(Npc* npc) const
+{
+	return "AiModelRanger";
+}

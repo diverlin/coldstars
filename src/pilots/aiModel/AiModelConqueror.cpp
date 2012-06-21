@@ -17,19 +17,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef AIMODELBASE_H
-#define AIMODELBASE_H
+AiModelConqueror::AiModelConqueror() 
+{}
 
-class AiModelBase
+AiModelConqueror::~AiModelConqueror() 
+{}
+
+void AiModelConqueror::UpdateInStatic(Npc* npc) const
 {
-	public:
-		AiModelBase();
-		virtual ~AiModelBase();
-		
-		virtual void update_inStatic(Npc*) const;
-		virtual std::string getDescription(Npc*) const;
-}; 
+	if ( npc->GetStateMachine()->GetCurrentMacroTask()->GetValid() == false) 
+	{
+	        npc->GetStateMachine()->SetCurrentMacroTask(MACROSCENARIO_STARSYSTEMDEFENCE, npc->GetStarSystem());
+	}
+}
 
-
-#endif 
-     
+std::string AiModelConqueror::GetDescription(Npc* npc) const
+{
+	return "AiModelConqueror";
+}

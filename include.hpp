@@ -30,7 +30,7 @@ class Star;
 
 class StateMachine;
 class ScenarioBase;
-class AiModelBase;
+class BaseAiModel;
 
 class Player;
 class FBO;
@@ -243,9 +243,9 @@ class WeaponSelector;
 #include "src/pilots/scenarios/MacroScenarioStarSystemLiberation.hpp"
 #include "src/pilots/scenarios/MacroScenarioStarSystemDefence.hpp"
 
-#include "src/pilots/aiModel/aiModelBase.hpp"
-#include "src/pilots/aiModel/aiModelRanger.hpp"
-#include "src/pilots/aiModel/aiModelConqueror.hpp"
+#include "src/pilots/aiModel/BaseAiModel.hpp"
+#include "src/pilots/aiModel/AiModelRanger.hpp"
+#include "src/pilots/aiModel/AiModelConqueror.hpp"
 
 //   
 #include "src/pilots/Observation.hpp" 
@@ -435,9 +435,9 @@ class WeaponSelector;
 #include "src/pilots/scenarios/MacroScenarioStarSystemLiberation.cpp"
 #include "src/pilots/scenarios/MacroScenarioStarSystemDefence.cpp"
 
-#include "src/pilots/aiModel/aiModelBase.cpp"
-#include "src/pilots/aiModel/aiModelRanger.cpp"
-#include "src/pilots/aiModel/aiModelConqueror.cpp"
+#include "src/pilots/aiModel/BaseAiModel.cpp"
+#include "src/pilots/aiModel/AiModelRanger.cpp"
+#include "src/pilots/aiModel/AiModelConqueror.cpp"
 
 #include "src/pilots/Observation.cpp" 
 

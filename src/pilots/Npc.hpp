@@ -32,7 +32,7 @@ class Npc : public BaseGameEntity
      		virtual ~Npc();    		
      		
      		void SetRaceId(int race_id)			{ this->race_id = race_id; };
-     		void SetModelAi(AiModelBase* ai_model)		{ this->ai_model = ai_model; };
+     		void SetModelAi(BaseAiModel* ai_model)	{ this->ai_model = ai_model; };
 		void SetGarbageReady(bool garbage_ready)	{ data_life.garbage_ready = garbage_ready; }
 		void SetAlive(bool alive)			{ data_life.is_alive = alive; }
 		void SetLand(BaseLand* land)			{ this->land = land; };
@@ -95,7 +95,7 @@ class Npc : public BaseGameEntity
    	     	Skill* skill; 
 
 
-     		AiModelBase* ai_model;
+     		BaseAiModel* ai_model;
      		StateMachine* state_machine;
    		     	
      		 	

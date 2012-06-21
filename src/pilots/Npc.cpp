@@ -98,19 +98,15 @@ void Npc::UpdateInSpaceInStatic()
                 
 		observation->ObserveAllInSpaceInStatic();          
         
-        	// place model here
         	if (ai_model)
         	{
-			ai_model->update_inStatic(this);
+			ai_model->UpdateInStatic(this);
 		}
-		//
-        
-       
+      
 		if (observation->see.ASTEROID == true)
 		{
                 	AsteroidScenario();
-		}
-             
+		}             
 
        		state_machine->UpdateInStatic();                 
         }
