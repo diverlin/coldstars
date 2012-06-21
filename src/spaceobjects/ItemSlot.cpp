@@ -47,10 +47,6 @@ ItemSlot::~ItemSlot()
 void ItemSlot::SetRect(float pos_x, float pos_y, int w, int h) 
 {
 	rect.Set(pos_x, pos_y, w, h);
-	if (turrel != NULL)
-	{
-		turrel->GetPoints().SetParentCenter(vec2f(pos_x/((Vehicle*)owner)->data_korpus.gui_scale, pos_y/((Vehicle*)owner)->data_korpus.gui_scale));
-	}
 }
 
 bool ItemSlot::InsertItem(BaseItem* item)

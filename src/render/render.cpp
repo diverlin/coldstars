@@ -80,14 +80,13 @@ void drawRect(Rect rect, float z_pos) // the drawrect function was inverted by Y
     	glBegin(GL_QUADS);
       		glTexCoord3f(0, 0, 0); glVertex3f(rect.GetBottomLeft().x,           	        rect.GetBottomLeft().y + rect.GetHeight(), z_pos);
       		glTexCoord3f(1, 0, 0); glVertex3f(rect.GetBottomLeft().x + rect.GetWidth(),     rect.GetBottomLeft().y + rect.GetHeight(), z_pos);
-      		glTexCoord3f(1, 1, 0); glVertex3f(rect.GetBottomLeft().x + rect.GetWidth(),     rect.GetBottomLeft().y,           	 z_pos);
-     		glTexCoord3f(0, 1, 0); glVertex3f(rect.GetBottomLeft().x,           	        rect.GetBottomLeft().y,         	         z_pos);
+      		glTexCoord3f(1, 1, 0); glVertex3f(rect.GetBottomLeft().x + rect.GetWidth(),     rect.GetBottomLeft().y,           	   z_pos);
+     		glTexCoord3f(0, 1, 0); glVertex3f(rect.GetBottomLeft().x,           	        rect.GetBottomLeft().y,         	   z_pos);
     	glEnd();
 }
 
 void drawTexturedRect(TextureOb* texOb, Rect rect, float z_pos)
 {
-	assert(texOb);
     	glBindTexture(GL_TEXTURE_2D, texOb->texture);
 	int frame = texOb->updateAnimationFrame();
 	

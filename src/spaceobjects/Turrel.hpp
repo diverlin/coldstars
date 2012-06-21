@@ -26,7 +26,6 @@ class Turrel
                 ~Turrel();
 
                 void SetTextureOb(TextureOb* textureOb)	{ this->textureOb = textureOb; };
-                //void SetCenter(vec2f* pCenter) 		{ this->pCenter = pCenter; };
                               
                 void SetTarget(BaseGameEntity* target) 	{ this->target = target; };
                 void SetSelectedStatus(bool selected) 	{ is_SELECTED = selected; };

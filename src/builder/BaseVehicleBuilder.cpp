@@ -57,9 +57,9 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
         for (unsigned int i = 0; i<vehicle->data_korpus.slot_weapon_num; i++)
         {
         	ItemSlot* weapon_slot = GetNewItemSlot(ITEMSLOT::WEAPON_ID);
-        	rect = Rect(vehicle->GetGuiRect().GetBottomLeft().x + 1.1*i*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
-                             	  vehicle->GetGuiRect().GetBottomLeft().y -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
-       			     	  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);        
+        	rect = Rect(vehicle->GetGuiRect().GetCenter().x - 1.1*i*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+                            vehicle->GetGuiRect().GetCenter().y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 2*1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+       			    GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);        
         	vehicle->AddItemSlot(weapon_slot, rect);
         }
         //
@@ -182,13 +182,13 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
     		{
     	    		RocketEquipmentBuilder::Instance().CreateNewRocketEquipment();
         		RocketEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
-       			vehicle->GetWeaponComplex()->Add(RocketEquipmentBuilder::Instance().GetRocketEquipment());
+       			vehicle->GetWeaponComplex()->AddItem(RocketEquipmentBuilder::Instance().GetRocketEquipment());
 		}
 		else
 		{
     	        	LazerEquipmentBuilder::Instance().CreateNewLazerEquipment();
         		LazerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
-       			vehicle->GetWeaponComplex()->Add(LazerEquipmentBuilder::Instance().GetLazerEquipment()); 
+       			vehicle->GetWeaponComplex()->AddItem(LazerEquipmentBuilder::Instance().GetLazerEquipment()); 
        		}
     	}   
            

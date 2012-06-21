@@ -176,7 +176,7 @@ class WeaponSelector;
 #include "src/spaceobjects/BaseSlot.hpp"
 #include "src/docking/VehicleSlot.hpp"
 #include "src/spaceobjects/ItemSlot.hpp"
-#include "src/spaceobjects/driveComplex.hpp"
+#include "src/spaceobjects/DriveComplex.hpp"
 #include "src/spaceobjects/WeaponComplex.hpp"
 #include "src/spaceobjects/ProtectionComplex.hpp"
 #include "src/spaceobjects/Vehicle.hpp"
@@ -397,7 +397,7 @@ class WeaponSelector;
 #include "src/spaceobjects/ProtectionComplex.cpp"
 #include "src/spaceobjects/Vehicle.cpp"
 #include "src/spaceobjects/Ship.cpp"
-#include "src/spaceobjects/driveComplex.cpp"
+#include "src/spaceobjects/DriveComplex.cpp"
 #include "src/spaceobjects/Turrel.cpp"
 
 

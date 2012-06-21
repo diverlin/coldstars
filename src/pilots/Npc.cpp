@@ -114,12 +114,11 @@ void Npc::Update_inSpace_inStatic()
        		state_machine->update_inStatic();                 
         }
 
-        vehicle->GetDriveComplex()->Update_inSpace_inStatic();
+        vehicle->GetDriveComplex()->UpdatePath();
 }
 
 void Npc::Update_inSpace(int time, bool show_effect)
 {
-        //	macroTask_stateMachine->update_inDynamic(); // is it needed ?
         if (time > 0)
         {
        		state_machine->update_inDynamic();

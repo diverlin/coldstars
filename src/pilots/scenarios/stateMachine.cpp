@@ -18,35 +18,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-StateMachine :: StateMachine(Npc* _npc) 
+StateMachine::StateMachine(Npc* npc) 
 {
 	current_macroTask  = new TaskHolder();		
-	previous_macroTask = new TaskHolder();
+	//previous_macroTask = new TaskHolder();
 
 	current_microTask  = new TaskHolder();		
-	previous_microTask = new TaskHolder();
+	//previous_microTask = new TaskHolder();
 	
-	npc_owner = _npc;
+	npc_owner = npc;
 }
 		
-StateMachine :: ~StateMachine() 
+StateMachine::~StateMachine() 
 {
 	delete current_macroTask;		
-	delete previous_macroTask;
+	//delete previous_macroTask;
 
 	delete current_microTask;		
-	delete previous_microTask;
+	//delete previous_microTask;
 }
-
-
-TaskHolder* StateMachine :: getCurrentMacroTask() const  { return current_macroTask; }
-TaskHolder* StateMachine :: getPreviousMacroTask() const { return previous_macroTask; }	
 		
-TaskHolder* StateMachine :: getCurrentMicroTask() const  { return current_microTask; }
-TaskHolder* StateMachine :: getPreviousMicroTask() const { return previous_microTask; }	
-		
-		
-void StateMachine :: update_inStatic()
+void StateMachine::update_inStatic()
 {
 	if (current_macroTask->getScenario() != NULL)
 	{
@@ -59,7 +51,7 @@ void StateMachine :: update_inStatic()
 	}
 }
 
-void StateMachine :: update_inDynamic()
+void StateMachine::update_inDynamic()
 {
 	if (current_microTask->getScenario() != NULL)
 	{
@@ -68,12 +60,12 @@ void StateMachine :: update_inDynamic()
 }
 	
 		
-void StateMachine :: setCurrentMacroTask(ScenarioBase* _new_state, BaseGameEntity* _target)
+void StateMachine::setCurrentMacroTask(ScenarioBase* _new_state, BaseGameEntity* _target)
 {
-	if (previous_macroTask->getScenario() != NULL)
-	{
-		previous_macroTask->getScenario()->exit(npc_owner);
-	}
+	//if (previous_macroTask->getScenario() != NULL)
+	//{
+		//previous_macroTask->getScenario()->exit(npc_owner);
+	//}
 
 	//previous_macroTask->set(current_macroTask->getScenario(), current_macroTask->getTarget());
 	current_macroTask->set(_new_state, _target);
@@ -85,12 +77,12 @@ void StateMachine :: setCurrentMacroTask(ScenarioBase* _new_state, BaseGameEntit
 }
 
 				
-void StateMachine :: setCurrentMicroTask(ScenarioBase* _new_state,  BaseGameEntity* _target)
+void StateMachine::setCurrentMicroTask(ScenarioBase* _new_state,  BaseGameEntity* _target)
 {
-	if (previous_microTask->getScenario() != NULL)
-	{
-		previous_microTask->getScenario()->exit(npc_owner);
-	}
+	//if (previous_microTask->getScenario() != NULL)
+	//{
+		//previous_microTask->getScenario()->exit(npc_owner);
+	//}
 
 	//previous_microTask->set(current_microTask->getScenario(), current_microTask->getTarget());
 	current_microTask->set(_new_state, _target);
@@ -101,13 +93,13 @@ void StateMachine :: setCurrentMicroTask(ScenarioBase* _new_state,  BaseGameEnti
 	}
 }
 
-void StateMachine :: reset()
+void StateMachine::reset()
 {
 	current_macroTask->reset();		
-	previous_macroTask->reset();
+	//previous_macroTask->reset();
 
 	current_microTask->reset();		
-	previous_microTask->reset();
+	//previous_microTask->reset();
 }
 
 

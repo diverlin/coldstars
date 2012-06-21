@@ -28,7 +28,7 @@ class WeaponComplex
       		~WeaponComplex();
                
                 bool AddSlot(ItemSlot*);
-                bool Add(BaseItem*);
+                bool AddItem(BaseItem*);
         	
                	void PrepareWeapons();
                      

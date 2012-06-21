@@ -30,7 +30,7 @@ bool WeaponComplex::AddSlot(ItemSlot* slot)
         slot_weapon_vec.push_back(slot); 
 }
         
-bool WeaponComplex::Add(BaseItem* item)
+bool WeaponComplex::AddItem(BaseItem* item)
 {
         for(unsigned int i = 0; i<slot_weapon_vec.size(); i++)
         {
@@ -61,9 +61,9 @@ void WeaponComplex::ReloadAllWeapons()
              		slot_weapon_reloaded_vec.push_back(slot_weapon_equiped_vec[i]);
                 }
         }
-            
-     	fire_delay = 10;
-     	d_fire_delay = 40;   
+        
+     	fire_delay = getRandInt(7,15);
+     	d_fire_delay = TURN_TIME/(slot_weapon_reloaded_vec.size()+1);   
 }
   
 void WeaponComplex::WeaponsControlledFromUpperLevel(const WeaponSelector& weapon_selector)

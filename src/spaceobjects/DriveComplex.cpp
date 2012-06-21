@@ -23,7 +23,7 @@ DriveComplex::DriveComplex(Vehicle* owner_vehicle)
    
         target = NULL;
         
-	resetTarget();
+	ResetTarget();
 
 	drive_trail = createTrailEffect(owner_vehicle->GetTextureOb()->size_id, owner_vehicle->GetPoints().GetpMidLeft(), owner_vehicle->GetPoints().GetpMidFarLeft());
 }
@@ -35,7 +35,7 @@ DriveComplex::~DriveComplex()
         delete drive_trail;
 }
 
-void DriveComplex :: resetTarget()
+void DriveComplex::ResetTarget()
 {
 	target = NULL;
     		
@@ -46,27 +46,30 @@ void DriveComplex :: resetTarget()
 	direction_list_END = true;
 }
       
-void DriveComplex :: setStaticTargetCoords(vec2f _target_pos)
+void DriveComplex::SetStaticTargetCoords(vec2f _target_pos)
 {    
-    	resetTarget();
+    	ResetTarget();
         
     	target_pos = _target_pos;
-       	calcPath();
+    	
+       	UpdatePath();
 }      
     
     
           		
-void DriveComplex :: setTarget(BaseGameEntity* target, int _action_id)
+void DriveComplex::SetTarget(BaseGameEntity* target, int _action_id)
 {
-    	resetTarget();
+    	ResetTarget();
 
 	this->target = target;    
 	
-	defineDistance(_action_id);
+	DefineDistance(_action_id);
+	
+	UpdatePath();
 }
   
 
-void DriveComplex :: defineDistance(int _action_id)
+void DriveComplex::DefineDistance(int _action_id)
 {
 	action_id = _action_id;
     	
@@ -116,22 +119,17 @@ void DriveComplex :: defineDistance(int _action_id)
 }
                       
 
-void DriveComplex :: Update_inSpace_inStatic()
+void DriveComplex::UpdatePath()
 {
 	if (target != NULL)
 	{
-		validateTarget();
-		updateTargetCoord();
+		ValidateTarget();
+		UpdateTargetCoord();
 	}
-	calcPath();
+	CalcPath();
 }
 
-void DriveComplex :: update_inSpace_inDynamic()
-{
-	updatePosition();
-}
-
-bool DriveComplex :: validateTarget() const
+bool DriveComplex::ValidateTarget() const
 {
         if (target->GetAlive() == true)
 	{
@@ -146,7 +144,7 @@ bool DriveComplex :: validateTarget() const
 
 
 
-bool DriveComplex :: updateTargetCoord()
+bool DriveComplex::UpdateTargetCoord()
 {		
 	switch(target->GetTypeId())
 	{
@@ -178,7 +176,7 @@ bool DriveComplex :: updateTargetCoord()
 }
 
 
-bool DriveComplex :: checkEchievement()
+bool DriveComplex::CheckTargetEchievement()
 {
 	if (target != NULL)
 	{
@@ -192,7 +190,7 @@ bool DriveComplex :: checkEchievement()
 }
 
 
-bool DriveComplex :: getDockingPermission()
+bool DriveComplex::GetDockingPermission()
 {
 	switch(target->GetTypeId())
 	{
@@ -212,13 +210,13 @@ bool DriveComplex :: getDockingPermission()
 }
 
 
-void DriveComplex :: calcPath()
+void DriveComplex::CalcPath()
 {
 	path_vec.clear();
 	angle_inD_vec.clear();
     	    	
-	vec2f mid = calcRoundPath();
-	calcDirectPath(mid);
+	vec2f mid = CalcRoundPath();
+	CalcDirectPath(mid);
 
 	if (path_vec.size() > 1)
 	{
@@ -234,7 +232,7 @@ void DriveComplex :: calcPath()
 
 
 
-//void DriveComplex :: calcDirectPath() 
+//void DriveComplex::calcDirectPath() 
 //{   
     	////path_vec.clear();
     	////angle_inD_vec.clear();
@@ -269,7 +267,7 @@ void DriveComplex :: calcPath()
 
 
 
-vec2f DriveComplex :: calcRoundPath()  // not working yet
+vec2f DriveComplex::CalcRoundPath()  // not working yet
 {
         // vychislenie centrov okruzhnostej traektorij na osnovanii tekuwego polozhenija ob'ekta 
         float start_angle_inD = owner_vehicle->GetPoints().GetAngleDegree();
@@ -528,7 +526,7 @@ vec2f DriveComplex :: calcRoundPath()  // not working yet
 
 
 
-void DriveComplex :: calcDirectPath(vec2f start_pos) 
+void DriveComplex::CalcDirectPath(vec2f start_pos) 
 {   
     	vec2f ll = target_pos - start_pos;
     	vec2f new_pos = start_pos;
@@ -554,7 +552,7 @@ void DriveComplex :: calcDirectPath(vec2f start_pos)
 
 
 
-void DriveComplex :: updatePosition()
+void DriveComplex::UpdatePosition()
 {
      	if (direction_list_END == false)
      	{
@@ -571,7 +569,7 @@ void DriveComplex :: updatePosition()
      	}
 }
 
-void DriveComplex :: drawPath()
+void DriveComplex::DrawPath()
 {
         if (direction_list_END == false)
         {
@@ -586,7 +584,7 @@ void DriveComplex :: drawPath()
 }
 
                 
-void DriveComplex::renderTrail()
+void DriveComplex::RenderTrail()
 {
 	drive_trail->update();
 	drive_trail->Render();
