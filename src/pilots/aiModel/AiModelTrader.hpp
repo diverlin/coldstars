@@ -17,21 +17,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-AiModelTrader :: AiModelTrader() 
-{}
+#ifndef AIMODELTRADER_H
+#define AIMODELTRADER_H
 
-AiModelTrader :: ~AiModelTrader() 
-{}
-
-void AiModelTrader :: update_inStatic(Npc* npc) const
+class AiModelTrader : public BaseAiModel
 {
-	if (npc->GetStateMachine()->GetCurrentMacroTask()->GetValid() == false)
-        {
-        	npc->GetStateMachine()->SetCurrentMacroTask();        			
-        }            
-}
+	public:
+		AiModelTrader();
+		virtual ~AiModelTrader();
+		
+		virtual void UpdateInStatic(Npc*) const;
+		virtual std::string GetDescription(Npc*) const;
+}; 
 
-std::string AiModelTrader :: getDescription(Npc* npc) const
-{
-	return "AiModelTrader";
-}
+
+#endif 
+     

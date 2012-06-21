@@ -17,17 +17,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef AIMODELRANGER_H
-#define AIMODELRANGER_H
+#ifndef BASEAIMODEL_H
+#define BASEAIMODEL_H
 
-class AiModelRanger : public AiModelBase
+class BaseAiModel
 {
 	public:
-		AiModelRanger();
-		virtual ~AiModelRanger();
+		BaseAiModel();
+		virtual ~BaseAiModel();
 		
-		virtual void update_inStatic(Npc*) const;
-		virtual std::string getDescription(Npc*) const;
+		virtual void UpdateInStatic(Npc*) const;
+		virtual std::string GetDescription(Npc*) const;
 }; 
 
 

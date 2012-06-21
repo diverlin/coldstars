@@ -26,7 +26,7 @@ MicroScenarioLaunching::~MicroScenarioLaunching()
 		
 void MicroScenarioLaunching::Enter(Npc* npc) const
 {	
-	printf("npc_id = %i, is going to MicroScenarioLaunching to ob id = %i\n", npc->GetId(), npc->GetStateMachine()->GetCurrentMicroTask()->GetTarget()->GetId());
+	printf("npc_id = %i, Enter MicroScenarioLaunching\n", npc->GetId());
 }
 
 void MicroScenarioLaunching::UpdateInStatic(Npc* npc) const
@@ -42,11 +42,11 @@ void MicroScenarioLaunching::UpdateInDynamic(Npc* npc) const
 
 void MicroScenarioLaunching::Exit(Npc* _npc) const 
 {
-	printf("npc_id = %i, finish to MicroScenarioLaunching to ob id = %i\n", _npc->GetId(), _npc->GetStateMachine()->GetCurrentMicroTask()->GetTarget()->GetId());
+	printf("npc_id = %i, finish to MicroScenarioLaunching\n", _npc->GetId());
 }
 
 
 std::string MicroScenarioLaunching::GetDescription(Npc* _npc) const
 {
-	return "MicroScenarioLaunching to ob_id = " + int2str( _npc->GetStateMachine()->GetCurrentMicroTask()->GetTarget()->GetId());
+	return "MicroScenarioLaunching";
 }
