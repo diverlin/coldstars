@@ -17,32 +17,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-MacroScenarioSelfSafety :: MacroScenarioSelfSafety() 
-{}
 
-MacroScenarioSelfSafety :: ~MacroScenarioSelfSafety() 
-{}
-
-void MacroScenarioSelfSafety :: update_inStatic(Npc* npc) const
+TaskHolder::TaskHolder()
 {
-	if (npc->GetStarSystem()->GetCaptured() == false)
-	{
-		if (npc->GetStateMachine()->getCurrentMacroTask()->getTarget()->GetTypeId() != ENTITY::PLANET_ID)
-		{ 
-			npc->GetStateMachine()->setCurrentMicroTask(MICROSCENARIO_DOCKING, npc->GetPlanetForDocking());
-		}
-	}
-	else
-	{
-		if (npc->GetStateMachine()->getCurrentMicroTask()->getTarget()->GetTypeId() != ENTITY::STARSYSTEM_ID)
-		{
-			npc->GetStateMachine()->setCurrentMicroTask(MICROSCENARIO_JUMP, npc->GetFailBackStarSystem());
-		}
-	}        
+	is_valid = false;
+	
+	target   = NULL;
+	scenario = NULL;
+}
+
+TaskHolder::~TaskHolder()
+{}
+
+void TaskHolder::Set(BaseScenario* scenario, BaseGameEntity* target)
+{
+	is_valid = true;
+	
+	this->scenario = scenario;
+	this->target   = target;
 }
 
 
-std::string MacroScenarioSelfSafety :: getDescription(Npc* npc) const
+void TaskHolder::Reset()
 {
-	return "MacroScenarioSelfSafety";
+	is_valid = false;
+	
+	scenario = NULL;
+	target   = NULL;
 }
+
+

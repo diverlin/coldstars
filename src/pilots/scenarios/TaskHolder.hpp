@@ -17,18 +17,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MACROSCENARIOSTARSYSTEMLIBERATION_H
-#define MACROSCENARIOSTARSYSTEMLIBERATION_H
+#ifndef TASKHOLDER_H
+#define TASKHOLDER_H
 
-class MacroScenarioStarSystemLiberation : public ScenarioBase
+
+class TaskHolder
 {
 	public:
-		MacroScenarioStarSystemLiberation();
-		virtual ~MacroScenarioStarSystemLiberation();
+		TaskHolder();
+		~TaskHolder();
 		
-		virtual void update_inStatic(Npc*) const;	
-		virtual std::string getDescription(Npc*) const;	
-}; 
+		void Set(BaseScenario*, BaseGameEntity*);
+				
+		BaseGameEntity* GetTarget() const { return target; };	
+		BaseScenario* GetScenario() const { return scenario; };				
+		bool GetValid() const { return is_valid; };		
+
+		void Reset();
+				
+	protected:
+		BaseGameEntity* target;	
+		BaseScenario* scenario;
+		bool is_valid;
+};
 
 
 #endif 

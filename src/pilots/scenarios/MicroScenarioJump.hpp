@@ -20,18 +20,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MICROSCENARIOUMP_H
 #define MICROSCENARIOUMP_H
 
-class MicroScenarioJump : public ScenarioBase
+class MicroScenarioJump : public BaseScenario
 {
 	public:
 		MicroScenarioJump();
 		virtual ~MicroScenarioJump();
 		
-		virtual void enter(Npc*) const;
-		virtual void update_inStatic(Npc*) const;
-		virtual void update_inDynamic(Npc*) const;	
-		virtual void exit(Npc*) const;
+		virtual void Enter(Npc*) const;
+		virtual void UpdateInStatic(Npc*) const;
+		virtual void UpdateInDynamic(Npc*) const;	
+		virtual void Exit(Npc*) const;
 		
-		virtual std::string getDescription(Npc*) const;
+		virtual std::string GetDescription(Npc*) const;
 };
 
 #endif 

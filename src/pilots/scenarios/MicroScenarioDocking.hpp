@@ -17,23 +17,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-MicroScenarioBase :: MicroScenarioBase() 
-{}
+#ifndef MICROSCENARIODOCKING_H
+#define MICROSCENARIODOCKING_H
 
-MicroScenarioBase :: ~MicroScenarioBase() 
-{}
+class MicroScenarioDocking : public BaseScenario
+{
+	public:
+		MicroScenarioDocking();
+		virtual ~MicroScenarioDocking();
+		
+		virtual void Enter(Npc*) const;
+		virtual void UpdateInStatic(Npc*) const;
+		virtual void UpdateInDynamic(Npc*) const;	
+		virtual void Exit(Npc*) const;
+		
+		virtual std::string GetDescription(Npc*) const;
+};
 
-void MicroScenarioBase :: enter(Npc*) const
-{}
-
-void MicroScenarioBase :: update_inStatic(Npc*) const 
-{}
-
-void MicroScenarioBase :: update_inDynamic(Npc*) const
-{}
-
-void MicroScenarioBase :: exit(Npc*) const 
-{}
-
-std::string MicroScenarioBase :: getDescription(Npc* _npc) const
-{}
+#endif 
+     

@@ -17,25 +17,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-MicroScenarioJump :: MicroScenarioJump()
+MicroScenarioJump::MicroScenarioJump()
 {}
 
 
-MicroScenarioJump :: ~MicroScenarioJump()
+MicroScenarioJump::~MicroScenarioJump()
 {}
 		
-void MicroScenarioJump :: enter(Npc* npc) const
+void MicroScenarioJump::Enter(Npc* npc) const
 {	
-	npc->GetVehicle()->GetDriveComplex()->SetTarget(npc->GetStateMachine()->getCurrentMicroTask()->getTarget()->GetStarSystem(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
-	printf("npc_id = %i, is GOING to MicroScenarioJump from ss_id = %i to ss_id = %i\n", npc->GetId(), npc->GetStarSystem()->GetId(), npc->GetStateMachine()->getCurrentMicroTask()->getTarget()->GetId());
+	npc->GetVehicle()->GetDriveComplex()->SetTarget(npc->GetStateMachine()->GetCurrentMicroTask()->GetTarget()->GetStarSystem(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
+	printf("npc_id = %i, is GOING to MicroScenarioJump from ss_id = %i to ss_id = %i\n", npc->GetId(), npc->GetStarSystem()->GetId(), npc->GetStateMachine()->GetCurrentMicroTask()->GetTarget()->GetId());
 }
 
-void MicroScenarioJump :: update_inStatic(Npc* _npc) const
+void MicroScenarioJump::UpdateInStatic(Npc* _npc) const
 {
 	// check if still able to jump
 }
 
-void MicroScenarioJump :: update_inDynamic(Npc* npc) const
+void MicroScenarioJump::UpdateInDynamic(Npc* npc) const
 {
      	if (npc->GetVehicle()->GetDriveComplex()->CheckTargetEchievement() == true)
      	{
@@ -44,13 +44,13 @@ void MicroScenarioJump :: update_inDynamic(Npc* npc) const
      	}
 }
 
-void MicroScenarioJump :: exit(Npc* npc) const
+void MicroScenarioJump::Exit(Npc* npc) const
 {
-	printf("npc_id = %i, FINISH MicroScenarioJump from ss_id = %i to ss_id = %i\n", npc->GetId(), npc->GetStarSystem()->GetId(), npc->GetStateMachine()->getCurrentMicroTask()->getTarget()->GetId());
+	printf("npc_id = %i, FINISH MicroScenarioJump from ss_id = %i to ss_id = %i\n", npc->GetId(), npc->GetStarSystem()->GetId(), npc->GetStateMachine()->GetCurrentMicroTask()->GetTarget()->GetId());
 }
 
 
-std::string MicroScenarioJump :: getDescription(Npc* npc) const
+std::string MicroScenarioJump::GetDescription(Npc* npc) const
 {
-	return "JUMP to ss_id = " + int2str( npc->GetStateMachine()->getCurrentMicroTask()->getTarget()->GetId());
+	return "JUMP to ss_id = " + int2str( npc->GetStateMachine()->GetCurrentMicroTask()->GetTarget()->GetId());
 }
