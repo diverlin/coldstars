@@ -27,8 +27,8 @@ class DriveComplex
       		DriveComplex(Vehicle*);
       		~DriveComplex();
 
-      		void setTarget(BaseGameEntity*, int);       
-      		void setStaticTargetCoords(vec2f);
+      		void SetTarget(BaseGameEntity*, int);       
+      		void SetStaticTargetCoords(vec2f);
       		
                 void SetDriveSlot(ItemSlot* drive_slot) { this->drive_slot = drive_slot; };
                 void SetBakSlot(ItemSlot* bak_slot)     { this->bak_slot = bak_slot; };
@@ -36,18 +36,18 @@ class DriveComplex
       		ItemSlot* GetDriveSlot() const { return drive_slot; };
         	ItemSlot* GetBakSlot()   const { return bak_slot; };
                   
-                BaseGameEntity* getTarget() const { return target; };                
+                BaseGameEntity* GetTarget() const { return target; };                
              
-      		bool checkEchievement();
-      		bool getDockingPermission();               
+      		bool CheckTargetEchievement();
+      		bool GetDockingPermission();               
        	
-        	void resetTarget();
+        	void ResetTarget();
 
-        	void Update_inSpace_inStatic();
-        	void update_inSpace_inDynamic();
+        	void UpdatePath();
+                void UpdatePosition();
                 
-                void drawPath();
-                void renderTrail();
+                void DrawPath();
+                void RenderTrail();
 
       	private:
                 ItemSlot* drive_slot;
@@ -82,16 +82,15 @@ class DriveComplex
                                         PathVisual visual_k1k2;      // debug
                                         PathVisual visual_k;         // debug
                                         PathVisual visual_target;    // debug
-                void updatePosition();
                        	
-                bool validateTarget() const;
+                bool ValidateTarget() const;
 	
-	        bool updateTargetCoord();
-	        void calcPath();
-			vec2f calcRoundPath();
-			void calcDirectPath(vec2f);
+	        bool UpdateTargetCoord();
+	        void CalcPath();
+			vec2f CalcRoundPath();
+			void CalcDirectPath(vec2f);
 
-		void defineDistance(int);
+		void DefineDistance(int);
 };
 
 

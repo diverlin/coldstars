@@ -35,9 +35,9 @@ void BaseSlot::SetRect(float pos_x, float pos_y, int w, int h)
 }
 
 
-bool BaseSlot::CheckInteraction(int _x, int _y)
+bool BaseSlot::CheckInteraction(int cursor_x, int cursor_y)
 {        
-        float dist = distBetweenPoints(rect.GetCenter().x, rect.GetCenter().y, _x, _y);
+        float dist = distBetweenPoints(rect.GetCenter().x, rect.GetCenter().y, cursor_x, cursor_y);
         if (dist < rect.GetWidth()/2)
                 return true;
         else

@@ -43,7 +43,6 @@ StarSystem::~StarSystem()
 {       
 	EntityManager::Instance().RemoveEntity(this);
 	
-	
 	//std::vector<Player*> 	   PLAYER_vec;
 
 	for(unsigned int i=0; i<STAR_vec.size(); i++) { delete STAR_vec[i]; } 
@@ -79,6 +78,7 @@ void StarSystem::Add(Vehicle* vehicle, vec2f center, float angle, BaseGameEntity
 		case ENTITY::SHIP_ID:         	
 		{ 	
 			SHIP_vec.push_back((Ship*)vehicle);  
+			((Ship*)vehicle)->SetColor(STAR_vec[0]->GetColor());
 			 
 		     	vehicle->GetPoints().SetCenter(center); 
     			vehicle->GetPoints().SetAngle(angle);   
@@ -775,7 +775,7 @@ void StarSystem::DrawPath()
 {
         for(unsigned int i = 0; i < SHIP_vec.size(); i++) 
 	{ 
-		SHIP_vec[i]->GetDriveComplex()->drawPath(); 
+		SHIP_vec[i]->GetDriveComplex()->DrawPath(); 
 	}
 }
      

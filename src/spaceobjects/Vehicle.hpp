@@ -67,6 +67,8 @@ class Vehicle : public BaseGameEntity
                 void SetGuiTextureOb(TextureOb* textureOb_gui) { this->textureOb_gui = textureOb_gui; };
         	void SetGuiRect(Rect rect) { kontur_rect = rect; };
         	
+        	void SetColor(Color4f color) { this->color = color; }
+        	        	
                 void AddItemSlot(ItemSlot*, const Rect&); 
                 bool AddItemToOtsec(BaseItem*);
 
@@ -122,7 +124,10 @@ class Vehicle : public BaseGameEntity
         	void HyperJumpEvent();
         	void DockingEvent();
         	void LaunchingEvent();
-
+        	
+        	bool DockingEffect();
+        	bool LaunchingEffect();
+        	
         	void RenderInfo(float, float, float, float);
         	void RenderInfoInSpace(vec2f);
         	
@@ -167,7 +172,10 @@ class Vehicle : public BaseGameEntity
                 TextureOb* textureOb_gui;
                 //                
                 
+                Color4f color;
+                                
                 VehicleSlot* parent_vehicleslot;
+                
                 UnresolvedDataUniqueVehicle data_unresolved_Vehicle;
                 
                 void SaveDataUniqueVehicle(boost::property_tree::ptree&, const std::string&) const;		

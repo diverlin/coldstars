@@ -123,97 +123,7 @@ void EntityManager::LoadPass0()
 			AsteroidBuilder::Instance().GetAsteroid()->LoadData(v.second);
 		}
 	}
-		
-	if (load_ptree.get_child_optional("npc"))
-	{
-		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("npc"))
-		{
-			NpcBuilder::Instance().CreateNewNpc(v.second.get<int>("data_id.id"));
-			NpcBuilder::Instance().GetNpc()->LoadData(v.second);
-		}
-	}
-
-        if (load_ptree.get_child_optional("ship"))
-	{
-		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("ship"))
-		{
-			ShipBuilder::Instance().CreateNewShip(v.second.get<int>("data_id.id"));
-			ShipBuilder::Instance().GetShip()->LoadData(v.second);
-		}
-	}
-
-        if (load_ptree.get_child_optional("spacestation"))
-	{
-		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("spacestation"))
-		{
-			SpaceStationBuilder::Instance().CreateNewSpaceStation(v.second.get<int>("data_id.id"));
-			SpaceStationBuilder::Instance().GetSpaceStation()->LoadData(v.second);
-		}
-	}
-
-        if (load_ptree.get_child_optional("satellite"))
-	{
-		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("satellite"))
-		{
-			SatelliteBuilder::Instance().CreateNewSatellite(v.second.get<int>("data_id.id"));
-			SatelliteBuilder::Instance().GetSatellite()->LoadData(v.second);
-		}
-	}
-
-        if (load_ptree.get_child_optional("rocketbullet"))
-	{
-		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("rocketbullet"))
-		{
-			RocketBulletBuilder::Instance().CreateNewRocket(v.second.get<int>("data_id.id"));
-			RocketBulletBuilder::Instance().GetRocket()->LoadData(v.second);
-		}
-	}
-		
-        if (load_ptree.get_child_optional("kosmoport"))
-	{	
-		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("kosmoport"))
-		{
-			KosmoportBuilder::Instance().CreateNewKosmoport(v.second.get<int>("data_id.id"));
-			KosmoportBuilder::Instance().GetKosmoport()->LoadData(v.second);
-		}
-	}
-
-        if (load_ptree.get_child_optional("angar"))
-	{
-		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("angar"))
-		{
-			AngarBuilder::Instance().CreateNewAngar(v.second.get<int>("data_id.id"));
-			AngarBuilder::Instance().GetAngar()->LoadData(v.second);
-		}
-	}
-
-        if (load_ptree.get_child_optional("store"))
-	{
-		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("store"))
-		{
-			StoreBuilder::Instance().CreateNewStore(v.second.get<int>("data_id.id"));
-			StoreBuilder::Instance().GetStore()->LoadData(v.second);
-		}
-	}
-
-        if (load_ptree.get_child_optional("shop"))
-	{
-		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("shop"))
-		{
-			ShopBuilder::Instance().CreateNewShop(v.second.get<int>("data_id.id"));
-			ShopBuilder::Instance().GetShop()->LoadData(v.second);
-		}
-	}
-
-        if (load_ptree.get_child_optional("goverment"))
-	{
-		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("goverment"))
-		{
-			GovermentBuilder::Instance().CreateNewGoverment(v.second.get<int>("data_id.id"));
-			GovermentBuilder::Instance().GetGoverment()->LoadData(v.second);
-		}
-	}
-        
+	        
         if (load_ptree.get_child_optional("item_slot"))
 	{
         	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("item_slot"))
@@ -382,6 +292,97 @@ void EntityManager::LoadPass0()
 		{
 			GoodsPack* goods_pack = GetNewGoodsPack(v.second.get<int>("data_id.subtype_id"), v.second.get<int>("data_id.id"));
                 	goods_pack->LoadData(v.second);
+		}
+	}
+	
+		
+	if (load_ptree.get_child_optional("npc"))
+	{
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("npc"))
+		{
+			NpcBuilder::Instance().CreateNewNpc(v.second.get<int>("data_id.id"));
+			NpcBuilder::Instance().GetNpc()->LoadData(v.second);
+		}
+	}
+
+        if (load_ptree.get_child_optional("ship"))
+	{
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("ship"))
+		{
+			ShipBuilder::Instance().CreateNewShip(v.second.get<int>("data_id.id"));
+			ShipBuilder::Instance().GetShip()->LoadData(v.second);
+		}
+	}
+
+        if (load_ptree.get_child_optional("spacestation"))
+	{
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("spacestation"))
+		{
+			SpaceStationBuilder::Instance().CreateNewSpaceStation(v.second.get<int>("data_id.id"));
+			SpaceStationBuilder::Instance().GetSpaceStation()->LoadData(v.second);
+		}
+	}
+
+        if (load_ptree.get_child_optional("satellite"))
+	{
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("satellite"))
+		{
+			SatelliteBuilder::Instance().CreateNewSatellite(v.second.get<int>("data_id.id"));
+			SatelliteBuilder::Instance().GetSatellite()->LoadData(v.second);
+		}
+	}
+
+        if (load_ptree.get_child_optional("rocketbullet"))
+	{
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("rocketbullet"))
+		{
+			RocketBulletBuilder::Instance().CreateNewRocket(v.second.get<int>("data_id.id"));
+			RocketBulletBuilder::Instance().GetRocket()->LoadData(v.second);
+		}
+	}
+		
+        if (load_ptree.get_child_optional("kosmoport"))
+	{	
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("kosmoport"))
+		{
+			KosmoportBuilder::Instance().CreateNewKosmoport(v.second.get<int>("data_id.id"));
+			KosmoportBuilder::Instance().GetKosmoport()->LoadData(v.second);
+		}
+	}
+
+        if (load_ptree.get_child_optional("angar"))
+	{
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("angar"))
+		{
+			AngarBuilder::Instance().CreateNewAngar(v.second.get<int>("data_id.id"));
+			AngarBuilder::Instance().GetAngar()->LoadData(v.second);
+		}
+	}
+
+        if (load_ptree.get_child_optional("store"))
+	{
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("store"))
+		{
+			StoreBuilder::Instance().CreateNewStore(v.second.get<int>("data_id.id"));
+			StoreBuilder::Instance().GetStore()->LoadData(v.second);
+		}
+	}
+
+        if (load_ptree.get_child_optional("shop"))
+	{
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("shop"))
+		{
+			ShopBuilder::Instance().CreateNewShop(v.second.get<int>("data_id.id"));
+			ShopBuilder::Instance().GetShop()->LoadData(v.second);
+		}
+	}
+
+        if (load_ptree.get_child_optional("goverment"))
+	{
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("goverment"))
+		{
+			GovermentBuilder::Instance().CreateNewGoverment(v.second.get<int>("data_id.id"));
+			GovermentBuilder::Instance().GetGoverment()->LoadData(v.second);
 		}
 	}
 

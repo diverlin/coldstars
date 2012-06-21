@@ -86,7 +86,14 @@ void Vehicle::AddItemSlot(ItemSlot* slot, const Rect& rect)
 	{
                 case ITEMSLOT::WEAPON_ID:    
                 {
-                 	points.Add(slot->GetTurrel()->GetPoints().GetpCenter(), slot->GetTurrel()->GetPoints().GetpParentCenter());  
+                	int w = textureOb->getFrameWidth();
+                	int h = textureOb->getFrameHeight();
+                	float border_start = 0.2;
+                	float border_end   = 0.8;
+                	int pos_x = getRandInt(border_start*w, border_end*w) - w/2;
+                	int pos_y = getRandInt(border_start*h, border_end*h) - h/2;
+			slot->GetTurrel()->GetPoints().SetParentCenter(vec2f(pos_x, pos_y));
+                 	points.Add(slot->GetTurrel()->GetPoints().GetpCenter(), slot->GetTurrel()->GetPoints().GetpParentCenter()); 
                 	weapon_complex->AddSlot(slot); break; 
                 }
                 case ITEMSLOT::DRIVE_ID:     { drive_complex->SetDriveSlot(slot); break; }
@@ -162,7 +169,35 @@ void Vehicle::RecalculateCollisionRadius()
 	collision_radius = (textureOb->getFrameWidth() + textureOb->getFrameHeight())/3;
 }
 
+bool Vehicle::DockingEffect()
+{
+	if (color.a > 0.1)
+	{
+		color.a -= 0.01;
+		return false;
+	}
+	else
+	{
+		color.a = 0.0;
+		return true;
+	}
+}
 
+bool Vehicle::LaunchingEffect()
+{
+	if (color.a < 1.0)
+	{
+		std::cout<<"LaunchingEffect works"<<std::endl;
+		color.a += 0.01;
+		return false;
+	}
+	else
+	{
+		std::cout<<"LaunchingEffect finished"<<std::endl;
+		color.a = 1.0;
+		return true;
+	}
+}
 
 //// ******** DOCKING/LAUNCHING ******** 
 void Vehicle::HyperJumpEvent()
@@ -170,8 +205,8 @@ void Vehicle::HyperJumpEvent()
         starsystem->RemoveShip(data_id.id);  
         starsystem->RemoveNpc(owner_npc->GetId(), owner_npc->GetSubTypeId());  
                                                         
-        ((StarSystem*)drive_complex->getTarget())->AddToHyperJumpQueue(this);
-        drive_complex->resetTarget();        
+        ((StarSystem*)drive_complex->GetTarget())->AddToHyperJumpQueue(this);
+        drive_complex->ResetTarget();        
 }
                 
                 
@@ -180,22 +215,22 @@ void Vehicle::DockingEvent()
      	starsystem->RemoveShip(data_id.id);
      	starsystem->RemoveNpc(owner_npc->GetId(), owner_npc->GetSubTypeId());
             
-        switch(drive_complex->getTarget()->GetTypeId())         	     	     	
+        switch(drive_complex->GetTarget()->GetTypeId())         	     	     	
      	{
      		case ENTITY::PLANET_ID:
      		{
-                	Planet* planet = ((Planet*)drive_complex->getTarget());                
+                	Planet* planet = ((Planet*)drive_complex->GetTarget());                
      			planet->GetLand()->Add((Ship*)this);
 			break;
 		}
 	
 		case ENTITY::VEHICLE_ID:
 		{	 
-			switch(drive_complex->getTarget()->GetSubTypeId())
+			switch(drive_complex->GetTarget()->GetSubTypeId())
 			{
 				case ENTITY::SPACESTATION_ID:
 				{
-                			SpaceStation* spacestation = ((SpaceStation*)drive_complex->getTarget());
+                			SpaceStation* spacestation = ((SpaceStation*)drive_complex->GetTarget());
                         		spacestation->GetLand()->Add((Ship*)this);
 					break;
 				}
@@ -211,7 +246,7 @@ void Vehicle::DockingEvent()
 		}                          		
 	}
         
-        GetDriveComplex()->resetTarget();
+        GetDriveComplex()->ResetTarget();
 }
 
 void Vehicle::LaunchingEvent()
@@ -280,7 +315,6 @@ void Vehicle::UpdateAllPropertiesAndAbilities()
     	// this function set actual ship propretries relying to all equipment placed in slots
     	// used when ship change items in slot
     	// !!! all this stuff can be called separately by item deterioration function if item becomes broken !!!
-
     	UpdateDriveAbility();
     	UpdateRadarAbility();
     	UpdateJumpAbility();
@@ -572,7 +606,7 @@ void Vehicle::RenderKorpus() const
 
 void Vehicle::RenderDriveTrail() const
 {
-	drive_complex->renderTrail();
+	drive_complex->RenderTrail();
 }
 
 
@@ -604,7 +638,6 @@ void Vehicle::RenderGrappleRange()
 		glPopMatrix();
 	}
 }
-
 
 bool Vehicle::ExternalRepairEvent()
 {

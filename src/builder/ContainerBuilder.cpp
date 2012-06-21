@@ -34,7 +34,7 @@ void ContainerBuilder::CreateNewContainer(int id)
 	}
         container = new Container(id);
         EntityManager::Instance().RegisterEntity(container);
-        std::cout<<std::endl<<"<<new container generated>>"<<std::endl;
+        //std::cout<<std::endl<<"<<new container generated>>"<<std::endl;
 } 
         	
 void ContainerBuilder::CreateNewInternals(TextureOb* textureOb, BaseItem* item)

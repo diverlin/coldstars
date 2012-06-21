@@ -542,7 +542,7 @@ void Player::Render(bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
         	{
                 	npc->GetStarSystem()->DrawPath();
         	}
-       	 	npc->GetVehicle()->GetDriveComplex()->drawPath();
+       	 	npc->GetVehicle()->GetDriveComplex()->DrawPath();
        		npc->GetVehicle()->GetWeaponComplex()->RenderWeaponsRange();
        	
         	if (GetShowRadarRange() == true)
@@ -607,8 +607,7 @@ bool Player::MouseInteractionWithRockets(int mxvp, int myvp, bool mlb, bool mrb)
                    			}
                    			else
                    			{
-                   				npc->GetVehicle()->GetDriveComplex()->setTarget(visible_ROCKET_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
-                   				npc->GetVehicle()->GetDriveComplex()->Update_inSpace_inStatic();
+                   				npc->GetVehicle()->GetDriveComplex()->SetTarget(visible_ROCKET_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
                    			}
 				}
 			}
@@ -668,7 +667,7 @@ bool Player::MouseInteractionWithSatellites(int mxvp, int myvp, bool mlb, bool m
                 	visible_SATELLITE_vec[i]->RenderRadarRange(); 
                 	visible_SATELLITE_vec[i]->GetWeaponComplex()->RenderWeaponsRange(); 
                 		                                
-                        visible_SATELLITE_vec[i]->GetDriveComplex()->drawPath(); 
+                        visible_SATELLITE_vec[i]->GetDriveComplex()->DrawPath(); 
                 
 			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 			{
@@ -681,8 +680,7 @@ bool Player::MouseInteractionWithSatellites(int mxvp, int myvp, bool mlb, bool m
                    			}
                    			else
                    			{
-                   				npc->GetVehicle()->GetDriveComplex()->setTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);   // make it like a ai scenario (follow obj)
-                   				npc->GetVehicle()->GetDriveComplex()->Update_inSpace_inStatic();
+                   				npc->GetVehicle()->GetDriveComplex()->SetTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);   // make it like a ai scenario (follow obj)
                    			}
 				}
 
@@ -736,8 +734,7 @@ bool Player::MouseInteractionWithAsteroids(int mxvp, int myvp, bool mlb, bool mr
                    			}
                    			else
                    			{
-                   				npc->GetVehicle()->GetDriveComplex()->setTarget(visible_ASTEROID_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
-                   				npc->GetVehicle()->GetDriveComplex()->Update_inSpace_inStatic();
+                   				npc->GetVehicle()->GetDriveComplex()->SetTarget(visible_ASTEROID_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
                    			}
                    		}
                 	}
@@ -763,7 +760,7 @@ bool Player::MouseInteractionWithShips(int mxvp, int myvp, bool mlb, bool mrb) c
                		visible_SHIP_vec[i]->RenderRadarRange(); 
                		visible_SHIP_vec[i]->GetWeaponComplex()->RenderWeaponsRange(); 
                 		                                
-                        visible_SHIP_vec[i]->GetDriveComplex()->drawPath(); 
+                        visible_SHIP_vec[i]->GetDriveComplex()->DrawPath(); 
                 
 			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 			{
@@ -776,8 +773,7 @@ bool Player::MouseInteractionWithShips(int mxvp, int myvp, bool mlb, bool mrb) c
                    			}
                    			else
                    			{
-                   				npc->GetVehicle()->GetDriveComplex()->setTarget(visible_SHIP_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
-                   				npc->GetVehicle()->GetDriveComplex()->Update_inSpace_inStatic();
+                   				npc->GetVehicle()->GetDriveComplex()->SetTarget(visible_SHIP_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
                    			}
 				}
 
@@ -837,7 +833,7 @@ bool Player::MouseInteractionWithSpaceStations(int mxvp, int myvp, bool mlb, boo
                 	visible_SPACESTATION_vec[i]->RenderRadarRange(); 
                 	visible_SPACESTATION_vec[i]->GetWeaponComplex()->RenderWeaponsRange(); 
                 		                                
-                        visible_SPACESTATION_vec[i]->GetDriveComplex()->drawPath(); 
+                        visible_SPACESTATION_vec[i]->GetDriveComplex()->DrawPath(); 
                 
 			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 			{
@@ -896,7 +892,7 @@ bool Player::MouseInteractionWithPlanets(int mxvp, int myvp, bool mlb, bool mrb)
 			{
                 		if (mlb == true)
                 		{
-                    			//pPLAYER->GetVehicle()->getNavigator()->setTarget(visible_PLANET_vec[pi], DOCKING_NAVIGATOR_ACTION_ID);
+                    			//pPLAYER->GetVehicle()->getNavigator()->SetTarget(visible_PLANET_vec[pi], DOCKING_NAVIGATOR_ACTION_ID);
                     			//pPLAYER->GetVehicle()->getNavigator()->Update_inSpace_inStatic();  
                     			npc->GetStateMachine()->setCurrentMicroTask(MICROSCENARIO_DOCKING, visible_PLANET_vec[i]);
                 		}   
@@ -931,7 +927,7 @@ void Player::MouseNavigation(int mxvp, int myvp, bool mlb, bool mrb) const
 	{
        		if (mlb == true)
        		{
-       			npc->GetVehicle()->GetDriveComplex()->setStaticTargetCoords(vec2f(mxvp, myvp));  
+       			npc->GetVehicle()->GetDriveComplex()->SetStaticTargetCoords(vec2f(mxvp, myvp));  
       			npc->GetStateMachine()->reset();
       		}
       	}

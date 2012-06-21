@@ -58,7 +58,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 
     		if (ableTo.DRIVE == true) 
     		{ 
-       			drive_complex->update_inSpace_inDynamic();
+       			drive_complex->UpdatePosition();
     		}
     
     		if (ableTo.GRAB == true)
@@ -76,6 +76,7 @@ void Ship::UpdateRenderStuff()
 
 void Ship::RenderInSpace() const
 {   
+	setColor(color);
         if (ableTo.GRAB == true)
         {
                 RenderGrappleTrail();
@@ -97,6 +98,7 @@ void Ship::RenderInSpace() const
     	{
         	RenderShield(); 
         }
+	starsystem->RestoreSceneColor();
 }
 
 
@@ -145,14 +147,14 @@ void Ship::LoadDataUniqueShip(const boost::property_tree::ptree&)
 {}
 
 void Ship::ResolveDataUniqueShip()
-{
+{ 
         ShipBuilder::Instance().CreateKorpusGeometry(this);
         ShipBuilder::Instance().CreateKorpusGui(this);
         
         ShipBuilder::Instance().CreateProtectionComplex(this);
         ShipBuilder::Instance().CreateDriveComplex(this);
-        ShipBuilder::Instance().CreateWeaponsComplex(this);        
-                       
+        ShipBuilder::Instance().CreateWeaponsComplex(this); 
+        
         switch(place_type_id)
         {
         	case ENTITY::SPACE_ID: 

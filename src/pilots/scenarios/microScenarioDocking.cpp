@@ -26,9 +26,8 @@ MicroScenarioDocking :: ~MicroScenarioDocking()
 		
 void MicroScenarioDocking :: enter(Npc* npc) const
 {	
-	npc->GetVehicle()->GetDriveComplex()->setTarget(npc->GetStateMachine()->getCurrentMicroTask()->getTarget(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
+	npc->GetVehicle()->GetDriveComplex()->SetTarget(npc->GetStateMachine()->getCurrentMicroTask()->getTarget(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
 
-	npc->GetVehicle()->GetDriveComplex()->Update_inSpace_inStatic();
 	printf("npc_id = %i, is going to MicroScenarioDocking to ob id = %i\n", npc->GetId(), npc->GetStateMachine()->getCurrentMicroTask()->getTarget()->GetId());
 }
 
@@ -37,14 +36,17 @@ void MicroScenarioDocking :: update_inStatic(Npc* npc) const
 
 }
 
-void MicroScenarioDocking :: update_inDynamic(Npc* _npc) const
+void MicroScenarioDocking::update_inDynamic(Npc* npc) const
 {
-     	if (_npc->GetVehicle()->GetDriveComplex()->checkEchievement() == true)
+     	if (npc->GetVehicle()->GetDriveComplex()->CheckTargetEchievement() == true)
      	{
-     		if (_npc->GetVehicle()->GetDriveComplex()->getDockingPermission() == true)
+     		if (npc->GetVehicle()->GetDriveComplex()->GetDockingPermission() == true)
      		{
-     		     	_npc->GetVehicle()->DockingEvent();
-     		     	printf("npc id = %i, dockEvent()\n", _npc->GetId());
+	     		if (npc->GetVehicle()->DockingEffect() == true)
+     	     		{
+     	     			npc->GetVehicle()->DockingEvent();
+     	     			printf("npc id = %i, DockingEvent()\n", npc->GetId());
+     			}
      		}
      		else
      		{
