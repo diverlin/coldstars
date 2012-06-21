@@ -573,7 +573,7 @@ void Vehicle::RenderGrappleTrail() const
 {
         for (unsigned int i = 0; i<grapple_slot->GetGrappleEquipment()->target_vec.size(); i++)
         {
-                //if (grapple_slot->GetGrappleEquipment()->target_vec[i]->getValid() == true)
+                //if (grapple_slot->GetGrappleEquipment()->target_vec[i]->GetValid() == true)
                 {              
                     	float xl = grapple_slot->GetGrappleEquipment()->target_vec[i]->GetPoints().GetCenter().x - points.GetCenter().x;
                         float yl = grapple_slot->GetGrappleEquipment()->target_vec[i]->GetPoints().GetCenter().y - points.GetCenter().y;

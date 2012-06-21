@@ -17,21 +17,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MICROSCENARIOGRAB_H
-#define MICROSCENARIOGRAB_H
+#ifndef MICROSCENARIODESTROY_H
+#define MICROSCENARIODESTROY_H
 
-class MicroScenarioGrab : public ScenarioBase
+class MicroScenarioDestroy : public BaseScenario
 {
 	public:
-		MicroScenarioGrab();
-		virtual ~MicroScenarioGrab();
+		MicroScenarioDestroy();
+		virtual ~MicroScenarioDestroy();
 		
 		virtual void Enter(Npc*) const;
-		virtual void update_inStatic(Npc*) const;
-		virtual void update_inDynamic(Npc*) const;	
+		virtual void UpdateInStatic(Npc*) const;
+		virtual void UpdateInDynamic(Npc*) const;	
 		virtual void Exit(Npc*) const;
 		
-		virtual std::string getDescription(Npc*) const;
+		virtual std::string GetDescription(Npc*) const;
 };
 
 #endif 

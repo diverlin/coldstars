@@ -17,29 +17,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef TASKHOLDER_H
-#define TASKHOLDER_H
+#ifndef BASESCENARIO_H
+#define SCENARIOSCENARIO_H
 
-
-class TaskHolder
+class BaseScenario
 {
 	public:
-		TaskHolder();
-		~TaskHolder();
+		BaseScenario();
+		virtual ~BaseScenario();
 		
-		void set(ScenarioBase*, BaseGameEntity*);
-				
-		BaseGameEntity* getTarget() const;	
-		ScenarioBase* getScenario() const;
-				
-		bool getValid() const;		
-		void reset();
-				
-	protected:
-		BaseGameEntity* target;	
-		ScenarioBase* scenario;
-		bool is_valid;
-};
+		virtual void Enter(Npc*) const;
+		virtual void UpdateInStatic(Npc*) const;	
+		virtual void UpdateInDynamic(Npc*) const;	
+		virtual void Exit(Npc*) const;
+		
+		virtual std::string GetDescription(Npc*) const;
+}; 
 
 
 #endif 

@@ -25,9 +25,9 @@ AiModelTrader :: ~AiModelTrader()
 
 void AiModelTrader :: update_inStatic(Npc* npc) const
 {
-	if (npc->GetStateMachine()->getCurrentMacroTask()->getValid() == false)
+	if (npc->GetStateMachine()->GetCurrentMacroTask()->GetValid() == false)
         {
-        	npc->GetStateMachine()->setCurrentMacroTask();        			
+        	npc->GetStateMachine()->SetCurrentMacroTask();        			
         }            
 }
 

@@ -17,21 +17,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef SCENARIOBASE_H
-#define SCENARIOBASE_H
+#ifndef MACROSCENARIOSTARSYSTEMDEFENCE_H
+#define MACROSCENARIOSTARSYSTEMDEFENCE_H
 
-class ScenarioBase
+class MacroScenarioStarSystemDefence : public BaseScenario
 {
 	public:
-		ScenarioBase();
-		virtual ~ScenarioBase();
+		MacroScenarioStarSystemDefence();
+		virtual ~MacroScenarioStarSystemDefence();
 		
-		virtual void enter(Npc*) const;
-		virtual void update_inStatic(Npc*) const;	
-		virtual void update_inDynamic(Npc*) const;	
-		virtual void exit(Npc*) const;
-		
-		virtual std::string getDescription(Npc*) const;
+		virtual void UpdateInStatic(Npc*) const;	
+		virtual std::string GetDescription(Npc*) const;	
 }; 
 
 

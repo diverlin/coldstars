@@ -846,7 +846,7 @@ bool Player::MouseInteractionWithSpaceStations(int mxvp, int myvp, bool mlb, boo
                    			}
                    			else
                    			{
-                   				npc->GetStateMachine()->setCurrentMicroTask(MICROSCENARIO_DOCKING, visible_SPACESTATION_vec[i]);
+                   				npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_DOCKING, visible_SPACESTATION_vec[i]);
                    			}
 				}
 
@@ -894,7 +894,7 @@ bool Player::MouseInteractionWithPlanets(int mxvp, int myvp, bool mlb, bool mrb)
                 		{
                     			//pPLAYER->GetVehicle()->getNavigator()->SetTarget(visible_PLANET_vec[pi], DOCKING_NAVIGATOR_ACTION_ID);
                     			//pPLAYER->GetVehicle()->getNavigator()->Update_inSpace_inStatic();  
-                    			npc->GetStateMachine()->setCurrentMicroTask(MICROSCENARIO_DOCKING, visible_PLANET_vec[i]);
+                    			npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_DOCKING, visible_PLANET_vec[i]);
                 		}   
 			}
 				
@@ -928,7 +928,7 @@ void Player::MouseNavigation(int mxvp, int myvp, bool mlb, bool mrb) const
        		if (mlb == true)
        		{
        			npc->GetVehicle()->GetDriveComplex()->SetStaticTargetCoords(vec2f(mxvp, myvp));  
-      			npc->GetStateMachine()->reset();
+      			npc->GetStateMachine()->Reset();
       		}
       	}
 }

@@ -17,31 +17,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-MacroScenarioStarSystemDefence :: MacroScenarioStarSystemDefence() 
+MacroScenarioStarSystemDefence::MacroScenarioStarSystemDefence() 
 {}
 
-MacroScenarioStarSystemDefence :: ~MacroScenarioStarSystemDefence() 
+MacroScenarioStarSystemDefence::~MacroScenarioStarSystemDefence() 
 {}
 
-void MacroScenarioStarSystemDefence :: update_inStatic(Npc* _npc) const
+void MacroScenarioStarSystemDefence::UpdateInStatic(Npc* _npc) const
 {
-	if ( _npc->GetStarSystem() != _npc->GetStateMachine()->getCurrentMacroTask()->getTarget()->GetStarSystem() )
+	if ( _npc->GetStarSystem() != _npc->GetStateMachine()->GetCurrentMacroTask()->GetTarget()->GetStarSystem() )
 	{
-		if (_npc->GetStateMachine()->getCurrentMicroTask()->getTarget()->GetStarSystem() != _npc->GetStateMachine()->getCurrentMacroTask()->getTarget()->GetStarSystem())
+		if (_npc->GetStateMachine()->GetCurrentMicroTask()->GetTarget()->GetStarSystem() != _npc->GetStateMachine()->GetCurrentMacroTask()->GetTarget()->GetStarSystem())
 		{
-			_npc->GetStateMachine()->setCurrentMicroTask(MICROSCENARIO_JUMP, _npc->GetStateMachine()->getCurrentMacroTask()->getTarget()->GetStarSystem());
+			_npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_JUMP, _npc->GetStateMachine()->GetCurrentMacroTask()->GetTarget()->GetStarSystem());
 		}
 	}
 	else
 	{
-		if ( (_npc->GetStateMachine()->getCurrentMicroTask()->getScenario() != MICROSCENARIO_DESTROY) or (_npc->GetStateMachine()->getCurrentMicroTask()->getValid() == false) )
+		if ( (_npc->GetStateMachine()->GetCurrentMicroTask()->GetScenario() != MICROSCENARIO_DESTROY) or (_npc->GetStateMachine()->GetCurrentMicroTask()->GetValid() == false) )
 		{
             		_npc->GetObservation()->FindVisibleNpcsInSpaceInStatic();
             	
             		Npc* _target_npc = _npc->GetObservation()->GetClosestNpc(&RACES_GOOD_LIST);
             		if (_target_npc != NULL)
             		{
-				_npc->GetStateMachine()->setCurrentMicroTask(MICROSCENARIO_DESTROY, _target_npc);
+				_npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_DESTROY, _target_npc);
 			}
 			else
 			{
@@ -51,7 +51,7 @@ void MacroScenarioStarSystemDefence :: update_inStatic(Npc* _npc) const
 	}
 }
 
-std::string MacroScenarioStarSystemDefence :: getDescription(Npc* _npc) const
+std::string MacroScenarioStarSystemDefence::GetDescription(Npc* _npc) const
 {
-	return "MacroScenarioStarSystemDefence: ss_id = " + int2str(_npc->GetStateMachine()->getCurrentMacroTask()->getTarget()->GetId());
+	return "MacroScenarioStarSystemDefence: ss_id = " + int2str(_npc->GetStateMachine()->GetCurrentMacroTask()->GetTarget()->GetId());
 }

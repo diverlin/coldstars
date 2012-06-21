@@ -75,7 +75,7 @@ void Npc::ThinkCommon_inKosmoport_inStatic()
 	}
 	
 	// if all things are DONE
-	//((Planet*)vehicle->GetDriveComplex()->getTarget())->GetLand()->AddToLaunchingQueue(this); // improove by adding spacestation
+	//((Planet*)vehicle->GetDriveComplex()->GetTarget())->GetLand()->AddToLaunchingQueue(this); // improove by adding spacestation
 }
 
 void Npc::ThinkCommon_inLand_inStatic()
@@ -111,7 +111,7 @@ void Npc::Update_inSpace_inStatic()
 		}
              
 
-       		state_machine->update_inStatic();                 
+       		state_machine->UpdateInStatic();                 
         }
 
         vehicle->GetDriveComplex()->UpdatePath();
@@ -121,7 +121,7 @@ void Npc::Update_inSpace(int time, bool show_effect)
 {
         if (time > 0)
         {
-       		state_machine->update_inDynamic();
+       		state_machine->UpdateInDynamic();
        	}
 }     	
 
@@ -240,14 +240,14 @@ void Npc::UpdateInfo()
 			info.addNameStr("grab_id:");   		info.addValueStr( grab_str ); 
 		}
 	}
-    	if (state_machine->getCurrentMacroTask()->getScenario() != NULL)
+    	if (state_machine->GetCurrentMacroTask()->GetScenario() != NULL)
     	{ 	
-    	info.addNameStr("macro_task_main:");   	info.addValueStr( state_machine->getCurrentMacroTask()->getScenario()->getDescription(this) ); 
+    	info.addNameStr("macro_task_main:");   	info.addValueStr( state_machine->GetCurrentMacroTask()->GetScenario()->GetDescription(this) ); 
     	}
     	
-    	if (state_machine->getCurrentMicroTask()->getScenario() != NULL)
+    	if (state_machine->GetCurrentMicroTask()->GetScenario() != NULL)
     	{ 	
-    	info.addNameStr("micro_task:");   	info.addValueStr( state_machine->getCurrentMicroTask()->getScenario()->getDescription(this)  ); 
+    	info.addNameStr("micro_task:");   	info.addValueStr( state_machine->GetCurrentMicroTask()->GetScenario()->GetDescription(this)  ); 
     	}
 }
 

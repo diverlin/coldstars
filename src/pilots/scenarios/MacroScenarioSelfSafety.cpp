@@ -17,37 +17,32 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-
-TaskHolder :: TaskHolder()
-{
-	is_valid = false;
-	
-	target   = NULL;
-	scenario = NULL;
-}
-
-TaskHolder :: ~TaskHolder()
+MacroScenarioSelfSafety::MacroScenarioSelfSafety() 
 {}
 
-bool TaskHolder :: getValid() const { return is_valid; }
-BaseGameEntity*  TaskHolder :: getTarget() const { return target; }	
-ScenarioBase* TaskHolder :: getScenario()   const { return scenario; }
+MacroScenarioSelfSafety::~MacroScenarioSelfSafety() 
+{}
 
-void TaskHolder :: set(ScenarioBase* scenario, BaseGameEntity* target)
+void MacroScenarioSelfSafety::UpdateInStatic(Npc* npc) const
 {
-	is_valid = true;
-	
-	this->scenario = scenario;
-	this->target   = target;
+	if (npc->GetStarSystem()->GetCaptured() == false)
+	{
+		if (npc->GetStateMachine()->GetCurrentMacroTask()->GetTarget()->GetTypeId() != ENTITY::PLANET_ID)
+		{ 
+			npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_DOCKING, npc->GetPlanetForDocking());
+		}
+	}
+	else
+	{
+		if (npc->GetStateMachine()->GetCurrentMicroTask()->GetTarget()->GetTypeId() != ENTITY::STARSYSTEM_ID)
+		{
+			npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_JUMP, npc->GetFailBackStarSystem());
+		}
+	}        
 }
 
 
-void TaskHolder :: reset()
+std::string MacroScenarioSelfSafety::GetDescription(Npc* npc) const
 {
-	is_valid = false;
-	
-	scenario = NULL;
-	target   = NULL;
+	return "MacroScenarioSelfSafety";
 }
-
-
