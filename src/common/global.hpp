@@ -36,6 +36,7 @@ class MacroScenarioStarSystemLiberation; MacroScenarioStarSystemLiberation* MACR
 class MacroScenarioStarSystemDefence;    MacroScenarioStarSystemDefence*    MACROSCENARIO_STARSYSTEMDEFENCE;
 class MacroScenarioSelfSafety;           MacroScenarioSelfSafety*           MACROSCENARIO_SELFSAFETY;
 
+class MicroScenarioLaunching;            MicroScenarioLaunching* MICROSCENARIO_LAUNCHING;
 class MicroScenarioDocking;              MicroScenarioDocking* MICROSCENARIO_DOCKING;
 class MicroScenarioJump;                 MicroScenarioJump*    MICROSCENARIO_JUMP;
 class MicroScenarioDestroy;              MicroScenarioDestroy* MICROSCENARIO_DESTROY;
