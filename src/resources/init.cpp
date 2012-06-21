@@ -46,8 +46,9 @@ void init()
 	
 	/* create Micro Scenaries */
 	MICROSCENARIO_DOCKING = new MicroScenarioDocking();    	 // make as singlenton
+	MICROSCENARIO_LAUNCHING = new MicroScenarioLaunching();    	 // make as singlenton
 	MICROSCENARIO_JUMP    = new MicroScenarioJump();       	 // make as singlenton
-	MICROSCENARIO_DESTROY = new MicroScenarioDestroy();	 	 // make as singlenton
+	MICROSCENARIO_DESTROY = new MicroScenarioDestroy();	 // make as singlenton
 	//g_STATE_EXPLORE = new StateExplore();	 	 // make as singlenton
 	
 	/* create AI models */

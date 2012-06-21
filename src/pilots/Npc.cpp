@@ -48,7 +48,8 @@ Npc::Npc(int id)
         ai_model = NULL;     
 }
     
-Npc :: ~Npc() /* virtual */
+/* virtual */
+Npc :: ~Npc() 
 {
         delete skill;
       
@@ -66,7 +67,7 @@ void Npc::BindVehicle(Vehicle* vehicle)
 void Npc::IncreaseCredits(int credits) { this->credits += credits; }
 void Npc::DecreaseCredits(int credits) { this->credits -= credits; }
     
-void Npc::ThinkCommon_inKosmoport_inStatic()
+void Npc::ThinkCommonInKosmoportInStatic()
 {   		
 	if (needsToDo.REPAIR_KORPUS == true)
 	{
@@ -78,10 +79,10 @@ void Npc::ThinkCommon_inKosmoport_inStatic()
 	//((Planet*)vehicle->GetDriveComplex()->GetTarget())->GetLand()->AddToLaunchingQueue(this); // improove by adding spacestation
 }
 
-void Npc::ThinkCommon_inLand_inStatic()
+void Npc::ThinkCommonInLandInStatic()
 {}
 
-void Npc::Update_inSpace_inStatic()
+void Npc::UpdateInSpaceInStatic()
 {
 	vehicle->GetWeaponComplex()->PrepareWeapons();
 	if (vehicle->ableTo.GRAB == true)
@@ -117,7 +118,7 @@ void Npc::Update_inSpace_inStatic()
         vehicle->GetDriveComplex()->UpdatePath();
 }
 
-void Npc::Update_inSpace(int time, bool show_effect)
+void Npc::UpdateInSpace(int time, bool show_effect)
 {
         if (time > 0)
         {

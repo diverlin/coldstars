@@ -234,6 +234,7 @@ class WeaponSelector;
 #include "src/pilots/scenarios/MicroScenarioGrab.hpp" 
 #include "src/pilots/scenarios/MicroScenarioJump.hpp" 
 #include "src/pilots/scenarios/MicroScenarioDocking.hpp"
+#include "src/pilots/scenarios/MicroScenarioLaunching.hpp"
 
 #include "src/pilots/scenarios/TaskHolder.hpp"
 #include "src/pilots/scenarios/StateMachine.hpp"
@@ -425,6 +426,7 @@ class WeaponSelector;
 #include "src/pilots/scenarios/MicroScenarioGrab.cpp" 
 #include "src/pilots/scenarios/MicroScenarioJump.cpp" 
 #include "src/pilots/scenarios/MicroScenarioDocking.cpp"
+#include "src/pilots/scenarios/MicroScenarioLaunching.cpp"
 
 #include "src/pilots/scenarios/TaskHolder.cpp"
 #include "src/pilots/scenarios/StateMachine.cpp"

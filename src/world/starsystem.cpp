@@ -614,7 +614,7 @@ void StarSystem :: updateEntities_s(int time, bool show_effect)
     	
         for (unsigned int ni = 0; ni < NPC_vec.size(); ni++)
         {
-                NPC_vec[ni]->Update_inSpace(time, show_effect); 
+                NPC_vec[ni]->UpdateInSpace(time, show_effect); 
     	}
     	
     	// vehicle
@@ -670,26 +670,26 @@ void StarSystem :: updateEntities_s(int time, bool show_effect)
 
 void StarSystem :: updateEntities_inStatic_s()
 {
-     	for (unsigned int ni = 0; ni < NPC_vec.size(); ni++)
+     	for (unsigned int i = 0; i < NPC_vec.size(); i++)
      	{
-		NPC_vec[ni]->Update_inSpace_inStatic();
+		NPC_vec[i]->UpdateInSpaceInStatic();
     	}
 
 	// vehicle (robot mind)
-     	for (unsigned int si = 0; si < SPACESTATION_vec.size(); si++)
+     	for (unsigned int i = 0; i < SPACESTATION_vec.size(); i++)
      	{
-		//SPACESTATION_vec[si]->Update_inSpace_inStatic();
+		//SPACESTATION_vec[i]->Update_inSpace_inStatic();
     	}
     	    	
-    	for (unsigned int si = 0; si < SATELLITE_vec.size(); si++)
+    	for (unsigned int i = 0; i < SATELLITE_vec.size(); i++)
      	{
-		//SATELLITE_vec[si]->Update_inSpace_inStatic();
+		//SATELLITE_vec[i]->Update_inSpace_inStatic();
     	}
     	//
     	
-     	for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
+     	for (unsigned int i = 0; i < PLANET_vec.size(); i++)
      	{
-         	PLANET_vec[pi]->UpdateInSpaceInStatic();
+         	PLANET_vec[i]->UpdateInSpaceInStatic();
      	}
 }      
 
