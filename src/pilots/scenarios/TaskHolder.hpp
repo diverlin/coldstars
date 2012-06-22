@@ -28,17 +28,19 @@ class TaskHolder
 		~TaskHolder();
 		
 		void Set(BaseScenario*, BaseGameEntity*);
-				
+		void SetResult(int result)  { this->result = result; }
+		
+		int GetResult() const { return result; };
+		
 		BaseGameEntity* GetTarget() const { return target; };	
 		BaseScenario* GetScenario() const { return scenario; };				
-		bool GetValid() const { return is_valid; };		
-
-		void Reset();
 				
 	protected:
 		BaseGameEntity* target;	
 		BaseScenario* scenario;
-		bool is_valid;
+		int result;
+
+		void Reset();
 };
 
 

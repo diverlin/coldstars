@@ -39,7 +39,7 @@ class StateMachine
 		void UpdateInDynamic();			
 		void UpdateInStatic();	
 		
-		void Reset();
+		void ForceReset();
 
 	private:
 		Npc* npc_owner;

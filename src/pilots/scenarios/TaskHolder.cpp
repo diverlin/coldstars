@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 TaskHolder::TaskHolder()
 {
-	is_valid = false;
+	result = NONE_ID;
 	
 	target   = NULL;
 	scenario = NULL;
@@ -31,17 +31,15 @@ TaskHolder::~TaskHolder()
 
 void TaskHolder::Set(BaseScenario* scenario, BaseGameEntity* target)
 {
-	is_valid = true;
-	
 	this->scenario = scenario;
 	this->target   = target;
+
+	result = NONE_ID;
 }
 
 
 void TaskHolder::Reset()
 {
-	is_valid = false;
-	
 	scenario = NULL;
 	target   = NULL;
 }
