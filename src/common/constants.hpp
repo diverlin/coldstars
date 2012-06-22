@@ -47,6 +47,8 @@ const int SIZE_8 = 200;  // 8 - up to 200x200
 const int SIZE_9 = 240;  // 9 - up to 240x240
 
 const int NONE_ID = -1;
+const int FAIL_ID = 1;
+const int SUCCESS_ID = 2;
 
 namespace COLOR
 {

@@ -93,13 +93,13 @@ void StateMachine::SetCurrentMicroTask(BaseScenario* _new_state,  BaseGameEntity
 	}
 }
 
-void StateMachine::Reset()
+void StateMachine::ForceReset()
 {
-	current_macroTask->Reset();		
-	//previous_macroTask->Reset();
-
-	current_microTask->Reset();		
-	//previous_microTask->Reset();
+	current_macroTask->SetResult(FAIL_ID);		
+	//previous_macroTask->SetResult(FAIL_ID);
+		
+	current_microTask->SetResult(FAIL_ID);		
+	//previous_microTask->SetResult(FAIL_ID);	
 }
 
 

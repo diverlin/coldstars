@@ -50,7 +50,6 @@ void Angar::Ai() const
                	}
         }
 }
-
                                                 
 int Angar::GetFreeVehicleSlotTotalNum() const
 {

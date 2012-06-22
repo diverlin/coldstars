@@ -928,7 +928,7 @@ void Player::MouseNavigation(int mxvp, int myvp, bool mlb, bool mrb) const
        		if (mlb == true)
        		{
        			npc->GetVehicle()->GetDriveComplex()->SetStaticTargetCoords(vec2f(mxvp, myvp));  
-      			npc->GetStateMachine()->Reset();
+      			npc->GetStateMachine()->ForceReset();
       		}
       	}
 }

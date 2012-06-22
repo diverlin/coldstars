@@ -34,7 +34,7 @@ void MacroScenarioStarSystemDefence::UpdateInStatic(Npc* _npc) const
 	}
 	else
 	{
-		if ( (_npc->GetStateMachine()->GetCurrentMicroTask()->GetScenario() != MICROSCENARIO_DESTROY) or (_npc->GetStateMachine()->GetCurrentMicroTask()->GetValid() == false) )
+		if ( (_npc->GetStateMachine()->GetCurrentMicroTask()->GetScenario() == NULL) or (_npc->GetStateMachine()->GetCurrentMicroTask()->GetScenario() != MICROSCENARIO_DESTROY) )
 		{
             		_npc->GetObservation()->FindVisibleNpcsInSpaceInStatic();
             	
