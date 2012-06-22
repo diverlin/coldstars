@@ -55,13 +55,10 @@ class Npc : public BaseGameEntity
 		void DecreaseCredits(int);
      
      		// AI
-     		void UpdateInSpaceInStatic();     		
      		void UpdateInSpace(int, bool);
-     		
-     		void ThinkCommonInKosmoportInStatic();
-     		void ThinkCommonInLandInStatic();
 
-     		void UpdateInDynamic(int, bool);
+     		void MindInSpace();         		     		
+     		void MindInKosmoport();
                 //
 
      		//// scanning
