@@ -165,8 +165,8 @@ class StarSystem : public BaseGameEntity
                 void PostHyperJumpEvent();
                 void LaunchingEvent() const;
     		
-    		void updateEntities_inStatic_s();
-    		void updateEntities_s(int, bool);   		
+    		void SingleEventPerTurnEntitiesInStatic_s();
+    		void UpdateEntities_s(int, bool);   		
                       
                 bool RemoveFromTheListById(std::vector<Npc*>*, int);
     		

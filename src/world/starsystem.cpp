@@ -400,7 +400,7 @@ void StarSystem::Update(int time, bool detalied_simulation)
         manageUnavaliableObjects_s();
         manageDeadObjects_s();         // no need to update so frequently, pri /6
                         
-	updateEntities_s(time, detalied_simulation);
+	UpdateEntities_s(time, detalied_simulation);
 	    		
 	if (time > 0)
 	{
@@ -423,7 +423,7 @@ void StarSystem::Update(int time, bool detalied_simulation)
 	    		
 		if (calculation_per_turn_allowed == true)
 		{    		
-    			updateEntities_inStatic_s();     			
+    			SingleEventPerTurnEntitiesInStatic_s();     			
 
     			calculation_per_turn_allowed = false;
     			calculation_per_turn_allowed_inDynamic = true;
@@ -516,7 +516,7 @@ void StarSystem::rocketCollision_s(bool show_effect)
 
 
 
-void StarSystem :: asteroidCollision_s(bool show_effect)
+void StarSystem::asteroidCollision_s(bool show_effect)
 {
 	bool collide = false;
 	
@@ -582,115 +582,37 @@ void StarSystem :: asteroidCollision_s(bool show_effect)
 	}
 }
 
-
-
-
-void StarSystem :: updateEntities_s(int time, bool show_effect)
+void StarSystem::UpdateEntities_s(int time, bool show_effect)
 {
-        for (unsigned int si = 0; si < STAR_vec.size(); si++)
-        {
-                STAR_vec[si]->Update_inSpace(time, show_effect); 
-	}
-	
-        for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
-        {
-                PLANET_vec[pi]->UpdateInSpace(time, show_effect); 
-    	}
-    	
-     	for (unsigned int i = 0; i < BLACKHOLE_vec.size(); i++)
-        {
-                BLACKHOLE_vec[i]->UpdateInSpace(time, show_effect); 
-     	}
-     	
-        for (unsigned int ci = 0; ci < CONTAINER_vec.size(); ci++)
-        {
-                CONTAINER_vec[ci]->UpdateInSpace(time, show_effect); 
-	}
-	
-        for (unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++) 
-        {
-                ASTEROID_vec[ai]->UpdateInSpace(time, show_effect); 
-    	}
-    	
-        for (unsigned int ni = 0; ni < NPC_vec.size(); ni++)
-        {
-                NPC_vec[ni]->UpdateInSpace(time, show_effect); 
-    	}
+        for (unsigned int i=0; i<STAR_vec.size(); i++)         	{ STAR_vec[i]->Update_inSpace(time, show_effect);  }	
+        for (unsigned int i=0; i<PLANET_vec.size(); i++)       	{ PLANET_vec[i]->UpdateInSpace(time, show_effect); }
+    	for (unsigned int i=0; i<BLACKHOLE_vec.size(); i++) 		{ BLACKHOLE_vec[i]->UpdateInSpace(time, show_effect); }
+     	for (unsigned int i=0; i<CONTAINER_vec.size(); i++)       	{ CONTAINER_vec[i]->UpdateInSpace(time, show_effect); }
+	for (unsigned int i=0; i<ASTEROID_vec.size(); i++)        	{ ASTEROID_vec[i]->UpdateInSpace(time, show_effect); }
+    	for (unsigned int i=0; i<NPC_vec.size(); i++)             	{ NPC_vec[i]->UpdateInSpace(time, show_effect); }
     	
     	// vehicle
-        for (unsigned int ki = 0; ki < SHIP_vec.size(); ki++)
-        {
-                SHIP_vec[ki]->UpdateInSpace(time, show_effect);         
-    	}
-
-        for (unsigned int si = 0; si < SPACESTATION_vec.size(); si++)
-        {
-                SPACESTATION_vec[si]->UpdateInSpace(time, show_effect); 
-        }
+        for (unsigned int i=0; i<SHIP_vec.size(); i++) 	        { SHIP_vec[i]->UpdateInSpace(time, show_effect); }
+        for (unsigned int i=0; i<SPACESTATION_vec.size(); i++)    	{ SPACESTATION_vec[i]->UpdateInSpace(time, show_effect); }
+        for (unsigned int i=0; i<SATELLITE_vec.size(); i++)       	{ SATELLITE_vec[i]->UpdateInSpace(time, show_effect); }        
+        for (unsigned int i=0; i<ROCKET_vec.size(); i++)          	{ ROCKET_vec[i]->UpdateInSpace(time, show_effect); }
                 
-        for (unsigned int si = 0; si < SATELLITE_vec.size(); si++)
-        {
-                SATELLITE_vec[si]->UpdateInSpace(time, show_effect);         
-    	}        
-    	//
-    	
-        for (unsigned int ri = 0; ri < ROCKET_vec.size(); ri++)
-        {
-                ROCKET_vec[ri]->UpdateInSpace(time, show_effect); 
-        }
-        
-        
         // effects
-        for(unsigned int i = 0; i<effect_LAZERTRACE_vec.size(); i++)
-	{ 
-		effect_LAZERTRACE_vec[i]->update(); 
-	}
-
-	for(unsigned int i = 0; i < effect_PARTICLESYSTEM_vec.size(); i++)
-	{ 
-		effect_PARTICLESYSTEM_vec[i]->update();
-	}
-
-	
-	for (unsigned int i = 0; i < effect_SHOCKWAVE_vec.size(); i++)
-	{         
-		effect_SHOCKWAVE_vec[i]->update();
-
-	}
-	
-	for(unsigned int i = 0; i<text_DAMAGE_vec.size(); i++)
-    	{ 
-    	        text_DAMAGE_vec[i]->update(); 
-    	}   
-        
+        for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)  	{ effect_LAZERTRACE_vec[i]->update(); }
+	for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { effect_PARTICLESYSTEM_vec[i]->update(); }
+	for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++) 	{ effect_SHOCKWAVE_vec[i]->update(); }
+	for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)         { text_DAMAGE_vec[i]->update(); }   
 }  
       
- 
-
-
-void StarSystem :: updateEntities_inStatic_s()
+void StarSystem::SingleEventPerTurnEntitiesInStatic_s()
 {
-     	for (unsigned int i = 0; i < NPC_vec.size(); i++)
-     	{
-		NPC_vec[i]->UpdateInSpaceInStatic();
-    	}
+     	for (unsigned int i = 0; i < NPC_vec.size(); i++) 	{ NPC_vec[i]->UpdateInSpaceInStatic(); }
 
 	// vehicle (robot mind)
-     	for (unsigned int i = 0; i < SPACESTATION_vec.size(); i++)
-     	{
-		//SPACESTATION_vec[i]->Update_inSpace_inStatic();
-    	}
-    	    	
-    	for (unsigned int i = 0; i < SATELLITE_vec.size(); i++)
-     	{
-		//SATELLITE_vec[i]->Update_inSpace_inStatic();
-    	}
-    	//
+     	for (unsigned int i = 0; i < SPACESTATION_vec.size(); i++) 	{ /*SPACESTATION_vec[i]->Update_inSpace_inStatic(); */ }    	    	
+   	for (unsigned int i = 0; i < SATELLITE_vec.size(); i++)	{ /*SATELLITE_vec[i]->Update_inSpace_inStatic();*/ }
     	
-     	for (unsigned int i = 0; i < PLANET_vec.size(); i++)
-     	{
-         	PLANET_vec[i]->UpdateInSpaceInStatic();
-     	}
+     	for (unsigned int i = 0; i < PLANET_vec.size(); i++)     	{ /*PLANET_vec[i]->UpdateInSpaceInStatic();*/ }
 }      
 
 void StarSystem::FindVisibleEntities_c(Player* player)
@@ -782,7 +704,7 @@ void StarSystem::DrawPath()
     
 
 
-void StarSystem :: asteroidManager_s(unsigned int num)
+void StarSystem::asteroidManager_s(unsigned int num)
 {
         while (ASTEROID_vec.size() < num)
         {
@@ -795,7 +717,7 @@ void StarSystem :: asteroidManager_s(unsigned int num)
 }
 
 
-void StarSystem :: manageUnavaliableObjects_s()
+void StarSystem::manageUnavaliableObjects_s()
 {
     	for(unsigned int i = 0; i < remove_CONTAINER_queue.size(); i++)
     	{
@@ -811,7 +733,7 @@ void StarSystem :: manageUnavaliableObjects_s()
     	remove_CONTAINER_queue.clear();    	
 }
     		
-void StarSystem :: manageDeadObjects_s()
+void StarSystem::manageDeadObjects_s()
 {  
 	{
 	
@@ -964,7 +886,7 @@ void StarSystem::BombExplosionEvent(Container* container, bool show_effect)
 }
 
 
-void StarSystem :: damageEventInsideCircle(vec2f epicentr, float radius, int damage, bool show_effect)
+void StarSystem::damageEventInsideCircle(vec2f epicentr, float radius, int damage, bool show_effect)
 {
 	for (unsigned int i = 0; i < SHIP_vec.size(); i++)
     	{
@@ -992,8 +914,8 @@ void StarSystem :: damageEventInsideCircle(vec2f epicentr, float radius, int dam
 }
 
 
-
-void StarSystem :: PostDeathUniqueEvent(bool) /*virtual */
+/*virtual */
+void StarSystem::PostDeathUniqueEvent(bool) 
 {}
 
 void StarSystem::SaveDataUniqueStarSystem(boost::property_tree::ptree& save_ptree, const std::string& root) const
