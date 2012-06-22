@@ -423,7 +423,7 @@ void StarSystem::Update(int time, bool detalied_simulation)
 	    		
 		if (calculation_per_turn_allowed == true)
 		{    		
-    			SingleEventPerTurnEntitiesInStatic_s();     			
+    			MindEntitiesInStatic_s();     			
 
     			calculation_per_turn_allowed = false;
     			calculation_per_turn_allowed_inDynamic = true;
@@ -604,9 +604,9 @@ void StarSystem::UpdateEntities_s(int time, bool show_effect)
 	for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)         { text_DAMAGE_vec[i]->update(); }   
 }  
       
-void StarSystem::SingleEventPerTurnEntitiesInStatic_s()
+void StarSystem::MindEntitiesInStatic_s()
 {
-     	for (unsigned int i = 0; i < NPC_vec.size(); i++) 		{ NPC_vec[i]->UpdateInSpaceInStatic(); }
+     	for (unsigned int i = 0; i < NPC_vec.size(); i++) 		{ NPC_vec[i]->MindInSpace(); }
     	for (unsigned int i = 0; i < PLANET_vec.size(); i++)     	{ /*PLANET_vec[i]->UpdateInSpaceInStatic();*/ }
 	// vehicle (robot mind)
      	for (unsigned int i = 0; i < SPACESTATION_vec.size(); i++) 	{ /*SPACESTATION_vec[i]->Update_inSpace_inStatic(); */ }    	    	

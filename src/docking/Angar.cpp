@@ -45,7 +45,7 @@ void Angar::Ai() const
                 {
                 	if (vehicleslot_vec[i]->GetVehicle()->GetOwnerNpc() != NULL)
                 	{
-                        	vehicleslot_vec[i]->GetVehicle()->GetOwnerNpc()->ThinkCommonInKosmoportInStatic();
+                        	vehicleslot_vec[i]->GetVehicle()->GetOwnerNpc()->MindInKosmoport();
                 	}
                	}
         }

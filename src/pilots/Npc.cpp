@@ -67,7 +67,7 @@ void Npc::BindVehicle(Vehicle* vehicle)
 void Npc::IncreaseCredits(int credits) { this->credits += credits; }
 void Npc::DecreaseCredits(int credits) { this->credits -= credits; }
     
-void Npc::ThinkCommonInKosmoportInStatic()
+void Npc::MindInKosmoport()
 {   		
 	if (needsToDo.REPAIR_KORPUS == true)
 	{
@@ -79,10 +79,7 @@ void Npc::ThinkCommonInKosmoportInStatic()
 	//((Planet*)vehicle->GetDriveComplex()->GetTarget())->GetLand()->AddToLaunchingQueue(this); // improove by adding spacestation
 }
 
-void Npc::ThinkCommonInLandInStatic()
-{}
-
-void Npc::UpdateInSpaceInStatic()
+void Npc::MindInSpace()
 {
 	vehicle->GetWeaponComplex()->PrepareWeapons();
 	if (vehicle->ableTo.GRAB == true)
