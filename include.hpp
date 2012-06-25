@@ -238,7 +238,9 @@ class WeaponSelector;
 #include "src/pilots/scenarios/MicroScenarioLaunching.hpp"
 
 #include "src/pilots/scenarios/TaskHolder.hpp"
+
 #include "src/pilots/scenarios/StateMachine.hpp"
+#include "src/pilots/scenarios/TaskObject.hpp"
 
 #include "src/pilots/scenarios/MacroScenarioSelfSafety.hpp"
 #include "src/pilots/scenarios/MacroScenarioStarSystemLiberation.hpp"
@@ -431,6 +433,7 @@ class WeaponSelector;
 
 #include "src/pilots/scenarios/TaskHolder.cpp"
 #include "src/pilots/scenarios/StateMachine.cpp"
+#include "src/pilots/scenarios/TaskObject.cpp"
 
 #include "src/pilots/scenarios/MacroScenarioSelfSafety.cpp"
 #include "src/pilots/scenarios/MacroScenarioStarSystemLiberation.cpp"
