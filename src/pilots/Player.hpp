@@ -83,7 +83,7 @@ class Player : public Base
      		void AddIfVisible(VerticalFlowText*); 
      		//	
   		
-     		void RunSession(GameTimer*); 
+     		void RunSession(const TurnTimer&); 
                 
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
@@ -133,7 +133,7 @@ class Player : public Base
     			void RenderEntities_OLD();
     		
     		
-    		void SessionInSpace(GameTimer*);
+    		void SessionInSpace(const TurnTimer&);
     		void SessionInKosmoport();
     		
     		void MouseInteractionInSpace();

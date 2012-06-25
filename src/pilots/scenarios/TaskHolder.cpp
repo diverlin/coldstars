@@ -22,6 +22,9 @@ TaskHolder::TaskHolder()
 {
 	result = NONE_ID;
 	
+	price = 0;
+	expirience = 0;
+	
 	target   = NULL;
 	scenario = NULL;
 }

@@ -16,36 +16,25 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#ifndef TURNTIMER_H
+#define TURNTIMER_H
 
-#ifndef TASKHOLDER_H
-#define TASKHOLDER_H
-
-
-class TaskHolder
+class TurnTimer
 {
 	public:
-		TaskHolder();
-		~TaskHolder();
+		TurnTimer();
+		~TurnTimer();
 		
-		void Set(BaseScenario*, BaseGameEntity*);
-		void SetResult(int result)  { this->result = result; }
+		bool GetTurnEnded()  const { return turn_ended; };
+		int GetTurnTick() const { return turn_tick; };
+		void NextTurn();
 		
-		int GetResult() const { return result; };
-		
-		BaseGameEntity* GetTarget() const { return target; };	
-		BaseScenario* GetScenario() const { return scenario; };				
-				
-	protected:
-		int result;
-		int price;
-		int expirience;
-
-		BaseGameEntity* target;	
-		BaseScenario* scenario;
-		
-		void Reset();
+		void Update(GameDate&);
+		void Draw() const;		
+	
+	private:
+		int turn_tick;		
+		bool turn_ended;	
 };
 
-
-#endif 
-     
+#endif

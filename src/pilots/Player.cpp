@@ -954,14 +954,14 @@ bool Player::IsObjectOnScreen(const Points& points) const
 }
 
 
-void Player::SessionInSpace(GameTimer* TIMER)
+void Player::SessionInSpace(const TurnTimer& turn_timer)
 {
 	cursor->UpdateMousePos();
 
 	npc->GetStarSystem()->FindVisibleEntities_c(this);
-	Render(TIMER->getTurnEnded(), GetShowAllOrbit(), GetShowAllPath()); 
+	Render(turn_timer.GetTurnEnded(), GetShowAllOrbit(), GetShowAllPath()); 
 
-	if (TIMER->getTurnEnded() == true)  
+	if (turn_timer.GetTurnEnded() == true)  
 	{
 		if ( (npc->GetScanTarget() == NULL) && (GetWorldMapShowFlag() == false) )
 		{
@@ -1058,13 +1058,13 @@ void Player::SessionInKosmoport()
          
 }
 
-void Player::RunSession(GameTimer* TIMER)
+void Player::RunSession(const TurnTimer& turn_timer)
 {
 	this->UpdateGlobal();     
 
        	switch(npc->GetPlaceTypeId())
        	{
-       		case ENTITY::SPACE_ID: 	    	{ this->SessionInSpace(TIMER); break; }
+       		case ENTITY::SPACE_ID: 	    	{ this->SessionInSpace(turn_timer); break; }
        		case ENTITY::KOSMOPORT_ID:  	{ this->SessionInKosmoport(); break; }
        	}        	
        	

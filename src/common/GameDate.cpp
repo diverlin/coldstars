@@ -16,31 +16,53 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GAMETIMER_H
-#define GAMETIMER_H
-
-class GameTimer
+Date::Date()
 {
-	public:
-		GameTimer();
-		~GameTimer();
-		
-		bool getTurnEnded() const;
-		int getTurnTick() const;
-		void nextTurn();
-		
-		void update();
-		void draw() const;
-		
-	
-	private:
-		unsigned int year;
-		unsigned int month;
-		unsigned int day;	
-		
-		int turn_tick;
-		
-		bool turn_ended;	
-};
+	this->day = 0;
+	this->month = 0;
+	this->year = 0;
+}
 
-#endif
+Date::Date(unsigned int day, unsigned int month, unsigned int year)
+{
+	this->day = day;
+	this->month = month;
+	this->year = year;
+}
+
+Date::~Date()
+{}
+	
+std::string Date::GetDateString() const { return "day:" + int2str(day) + " month:" + int2str(month) + " year:" + int2str(year); };
+
+
+
+GameDate::GameDate(unsigned int day, unsigned int month, unsigned int year)
+{
+	date.day = day;
+	date.month = month;
+	date.year = year;	
+}
+
+GameDate::~GameDate()
+{}
+
+void GameDate::NextDay() 
+{
+        date.day++;
+	if (date.day>=31)
+	{
+		date.month++;
+		date.day = 1;
+		if (date.month>=12)
+		{
+			date.month = 1;
+			date.year++;
+		}
+	}
+}
+	
+					
+
+	
+

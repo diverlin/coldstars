@@ -17,24 +17,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-GameTimer :: GameTimer() : year(4000), month(1), day(0), turn_tick(-1), turn_ended(true)
+TurnTimer::TurnTimer():
+turn_tick(-1),
+turn_ended(true)
 {}
 
-GameTimer :: ~GameTimer()
+TurnTimer::~TurnTimer()
 {}
-	
-bool GameTimer :: getTurnEnded() const { return turn_ended; }
-int GameTimer :: getTurnTick() const { return turn_tick; }
 
-
-void GameTimer :: nextTurn() 
+void TurnTimer::NextTurn() 
 {
 	turn_tick = TURN_TIME;
-        day++;
-        printf("        *** turn END was activated, day = %i\n", day); 
+        //day++;
+        //printf("        *** turn END was activated, day = %i\n", day); 
 }
 						
-void GameTimer :: update()
+void TurnTimer::Update(GameDate& game_date)
 {
         turn_tick -= Config::Instance().GAMESPEED;
         
@@ -43,8 +41,8 @@ void GameTimer :: update()
        	if ( (turn_tick < -50) and (Config::Instance().AUTOTURN_MODE == true) )
        	{  
        		turn_tick = TURN_TIME;
-        	day++;
-        	printf("        *** auto turn END was activated, day = %i\n", day);
+        	game_date.NextDay();
+        	printf("        *** auto turn END was activated\n");
         }     
         
         if (turn_tick < 0)
@@ -57,7 +55,7 @@ void GameTimer :: update()
         }
 }
 
-void GameTimer :: draw() const
+void TurnTimer::Draw() const
 {}
 		
 	

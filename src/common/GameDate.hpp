@@ -16,36 +16,35 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#ifndef GAMEDATE_H
+#define GAMEDATE_H
 
-#ifndef TASKHOLDER_H
-#define TASKHOLDER_H
-
-
-class TaskHolder
+class Date
 {
 	public:
-		TaskHolder();
-		~TaskHolder();
-		
-		void Set(BaseScenario*, BaseGameEntity*);
-		void SetResult(int result)  { this->result = result; }
-		
-		int GetResult() const { return result; };
-		
-		BaseGameEntity* GetTarget() const { return target; };	
-		BaseScenario* GetScenario() const { return scenario; };				
-				
-	protected:
-		int result;
-		int price;
-		int expirience;
+		Date();
+		Date(unsigned int, unsigned int, unsigned int);
+		~Date();
+						
+		std::string GetDateString() const;
 
-		BaseGameEntity* target;	
-		BaseScenario* scenario;
-		
-		void Reset();
+		unsigned int day;
+		unsigned int month;
+		unsigned int year;	
 };
 
 
-#endif 
-     
+class GameDate
+{
+	public:
+		GameDate(unsigned int, unsigned int, unsigned int);
+		~GameDate();
+		
+		void NextDay();
+		std::string GetDateString() const;
+	
+	private:
+	Date date;
+};
+
+#endif
