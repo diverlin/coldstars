@@ -22,7 +22,8 @@ int main()
 {       
 	init();  
 
-	GameTimer* TIMER = new GameTimer();
+	TurnTimer turn_timer;
+	GameDate game_date(1,1,4000);
 
         GalaxyBuilder::Instance().CreateNewGalaxy();
         GalaxyBuilder::Instance().CreateNewInternals();
@@ -42,16 +43,16 @@ int main()
 	while (Gui::GetWindow().IsOpened())
 	{    
 		/* server code start */
-		TIMER->update();
+		turn_timer.Update(game_date);
 
 		for (int i = 0; i < Config::Instance().GAMESPEED; i++)  // fake implementation (static ai should not be run several times at once)
 		{
-			GalaxyBuilder::Instance().GetGalaxy()->Update(TIMER->getTurnTick());
+			GalaxyBuilder::Instance().GetGalaxy()->Update(turn_timer.GetTurnTick());
 		}
 
-		if ((TIMER->getTurnEnded() == true) and (UserInput::Instance().GetNextTurnReady()))
+		if ((turn_timer.GetTurnEnded() == true) and (UserInput::Instance().GetNextTurnReady()))
 		{
-			TIMER->nextTurn();
+			turn_timer.NextTurn();
 		}              	
 		/* server code end */
 
@@ -73,7 +74,7 @@ int main()
 			player = (Player*)EntityManager::Instance().GetEntityById(_player_id);
 		}
 				
-		player->RunSession(TIMER);
+		player->RunSession(turn_timer);
 		/* client code end */           	
 	}
 

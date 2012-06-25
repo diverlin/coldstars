@@ -62,7 +62,8 @@ class WeaponSelector;
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp> 
 
-#include "src/common/gameTimer.hpp"
+#include "src/common/GameDate.hpp"
+#include "src/common/TurnTimer.hpp"
 
 
 #include "src/common/myStr.hpp"
@@ -453,7 +454,8 @@ class WeaponSelector;
 #include "src/text/textstuff.cpp"
 
 #include "src/render/Screen.cpp"
-#include "src/common/gameTimer.cpp"
+#include "src/common/TurnTimer.cpp"
+#include "src/common/GameDate.cpp"
 #include "src/config/SaveManager.cpp" 
 
 #include "src/builder/items/equipment/BakEquipmentBuilder.cpp"
