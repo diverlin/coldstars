@@ -17,42 +17,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
+#ifndef TASKOBJECT_H
+#define TASKOBJECT_H
 
-TaskHolder::TaskHolder()
-{
-	result = NONE_ID;
-	
-	target   = NULL;
-	scenario = NULL;
-}
 
-TaskHolder::TaskHolder(Date date_creation, Date date_expired)
+class TaskObject
 {
-	this->date_creation = date_creation;
-	this->date_expired = date_expired;
-			
-	result = NONE_ID;
+	public:
+		TaskObject(Base*, int, int, int);
+		~TaskObject();
+				
+	protected:
+		int reward;
+		int expiriance;
 		
-	target   = NULL;
-	scenario = NULL;
-}
-
-TaskHolder::~TaskHolder()
-{}
-
-void TaskHolder::Set(BaseScenario* scenario, BaseGameEntity* target)
-{
-	this->scenario = scenario;
-	this->target   = target;
-
-	result = NONE_ID;
-}
+		int action_id;
+				
+		Base* object;	
+};
 
 
-void TaskHolder::Reset()
-{
-	scenario = NULL;
-	target   = NULL;
-}
-
-
+#endif 
+     

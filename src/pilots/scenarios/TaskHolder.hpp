@@ -25,11 +25,12 @@ class TaskHolder
 {
 	public:
 		TaskHolder();
+		TaskHolder(Date, Date);
 		~TaskHolder();
 		
 		void Set(BaseScenario*, BaseGameEntity*);
 		void SetResult(int result)  { this->result = result; }
-		
+				
 		int GetResult() const { return result; };
 		
 		BaseGameEntity* GetTarget() const { return target; };	
@@ -37,9 +38,10 @@ class TaskHolder
 				
 	protected:
 		int result;
-		int price;
-		int expirience;
 
+		Date date_creation;
+		Date date_expired;
+				
 		BaseGameEntity* target;	
 		BaseScenario* scenario;
 		

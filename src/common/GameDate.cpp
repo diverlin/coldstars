@@ -18,9 +18,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Date::Date()
 {
-	this->day = 0;
-	this->month = 0;
-	this->year = 0;
+	day = 0;
+	month = 0;
+	year = 0;
 }
 
 Date::Date(unsigned int day, unsigned int month, unsigned int year)

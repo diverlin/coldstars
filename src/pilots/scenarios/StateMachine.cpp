@@ -21,10 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 StateMachine::StateMachine(Npc* npc) 
 {
 	current_macroTask  = new TaskHolder();		
-	//previous_macroTask = new TaskHolder();
-
 	current_microTask  = new TaskHolder();		
-	//previous_microTask = new TaskHolder();
 	
 	npc_owner = npc;
 }
@@ -32,10 +29,7 @@ StateMachine::StateMachine(Npc* npc)
 StateMachine::~StateMachine() 
 {
 	delete current_macroTask;		
-	//delete previous_macroTask;
-
 	delete current_microTask;		
-	//delete previous_microTask;
 }
 		
 void StateMachine::UpdateInStatic()
@@ -62,12 +56,10 @@ void StateMachine::UpdateInDynamic()
 		
 void StateMachine::SetCurrentMacroTask(BaseScenario* _new_state, BaseGameEntity* _target)
 {
-	//if (previous_macroTask->GetScenario() != NULL)
-	//{
-		//previous_macroTask->GetScenario()->Exit(npc_owner);
-	//}
-
-	//previous_macroTask->set(current_macroTask->GetScenario(), current_macroTask->GetTarget());
+	if (current_macroTask->GetScenario() != NULL)
+	{
+		current_macroTask->GetScenario()->Exit(npc_owner);
+	}
 	current_macroTask->Set(_new_state, _target);
 	
 	if (current_macroTask->GetScenario() != NULL)
@@ -79,12 +71,11 @@ void StateMachine::SetCurrentMacroTask(BaseScenario* _new_state, BaseGameEntity*
 				
 void StateMachine::SetCurrentMicroTask(BaseScenario* _new_state,  BaseGameEntity* _target)
 {
-	//if (previous_microTask->GetScenario() != NULL)
-	//{
-		//previous_microTask->GetScenario()->Exit(npc_owner);
-	//}
-
-	//previous_microTask->set(current_microTask->GetScenario(), current_microTask->GetTarget());
+	if (current_microTask->GetScenario() != NULL)
+	{
+		current_microTask->GetScenario()->Exit(npc_owner);
+	}
+	
 	current_microTask->Set(_new_state, _target);
 	
 	if (current_microTask->GetScenario() != NULL)
@@ -96,10 +87,7 @@ void StateMachine::SetCurrentMicroTask(BaseScenario* _new_state,  BaseGameEntity
 void StateMachine::ForceReset()
 {
 	current_macroTask->SetResult(FAIL_ID);		
-	//previous_macroTask->SetResult(FAIL_ID);
-		
 	current_microTask->SetResult(FAIL_ID);		
-	//previous_microTask->SetResult(FAIL_ID);	
 }
 
 

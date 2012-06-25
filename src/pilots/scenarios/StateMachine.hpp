@@ -31,10 +31,8 @@ class StateMachine
 		void SetCurrentMacroTask(BaseScenario*, BaseGameEntity*);
 		
 		TaskHolder* GetCurrentMacroTask() const { return current_macroTask; };
-		//TaskHolder* GetPreviousMacroTask() const { return previous_macroTask; };	
-		
 		TaskHolder* GetCurrentMicroTask() const { return current_microTask; };
-		//TaskHolder* GetPreviousMicroTask() const { return previous_microTask; };		
+		
 				
 		void UpdateInDynamic();			
 		void UpdateInStatic();	
@@ -45,10 +43,7 @@ class StateMachine
 		Npc* npc_owner;
 		
 		TaskHolder* current_macroTask;		
-		//TaskHolder* previous_macroTask;
-
 		TaskHolder* current_microTask;		
-		//TaskHolder* previous_microTask;
 }; 
 
 
