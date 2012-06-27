@@ -18,7 +18,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 MicroScenarioLaunching::MicroScenarioLaunching()
-{}
+{
+	type_id = MICROSCENARIO::LAUNCHING_ID;
+}
 
 
 MicroScenarioLaunching::~MicroScenarioLaunching()

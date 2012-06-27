@@ -50,12 +50,29 @@ const int NONE_ID = -1;
 const int FAIL_ID = 1;
 const int SUCCESS_ID = 2;
 
-namespace TASK
+
+namespace MACROSCENARIO
 {
 	enum TYPE_ID
 	{
-		STARSYSTEMDEFENCE_ID, STARSYSTEMLIBERATION_ID, SELFSAFETY_ID,
-		DESTROY_ID
+		STARSYSTEMDEFENCE_ID, 
+		STARSYSTEMLIBERATION_ID, 
+		SELFSAFETY_ID, // replace selfsafety to survival
+		
+		ENUM_MAX
+	};
+} 
+
+namespace MICROSCENARIO
+{
+	enum TYPE_ID
+	{
+		DESTROY_ID = MACROSCENARIO::TYPE_ID::ENUM_MAX,
+		DOCKING_ID,		
+		LAUNCHING_ID,
+		GRAB_ID,
+		JUMP_ID,
+		
 	};
 } 
 

@@ -30,7 +30,7 @@ void AiModelRanger::UpdateInStatic(Npc* npc) const
         	StarSystem* starsystem = npc->GetClosestStarSystem(true);
         	if (starsystem != NULL)
         	{
-        	        MacroTask* macrotask = new MacroTask(starsystem, TASK::STARSYSTEMLIBERATION_ID);
+        	        MacroTask* macrotask = new MacroTask(starsystem, MACROSCENARIO::STARSYSTEMLIBERATION_ID);
         		npc->GetStateMachine()->SetCurrentMacroTask(macrotask);        			
         	}
         }            

@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 MacroScenarioSelfSafety::MacroScenarioSelfSafety() 
 {
-	type_id = TASK::SELFSAFETY_ID;
+	type_id = MACROSCENARIO::SELFSAFETY_ID;
 }
 
 MacroScenarioSelfSafety::~MacroScenarioSelfSafety() 
