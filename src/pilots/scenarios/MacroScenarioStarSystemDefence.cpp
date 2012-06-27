@@ -18,23 +18,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 MacroScenarioStarSystemDefence::MacroScenarioStarSystemDefence() 
-{}
+{
+	type_id = TASK::STARSYSTEMDEFENCE_ID;
+}
 
 MacroScenarioStarSystemDefence::~MacroScenarioStarSystemDefence() 
 {}
 
 void MacroScenarioStarSystemDefence::UpdateInStatic(Npc* _npc) const
 {
-	if ( _npc->GetStarSystem() != _npc->GetStateMachine()->GetCurrentMacroTask()->GetTarget()->GetStarSystem() )
+	if ( _npc->GetStarSystem() != _npc->GetStateMachine()->GetMacroTaskHolder()->GetMacroTask()->GetTarget()->GetStarSystem() )
 	{
-		if (_npc->GetStateMachine()->GetCurrentMicroTask()->GetTarget()->GetStarSystem() != _npc->GetStateMachine()->GetCurrentMacroTask()->GetTarget()->GetStarSystem())
+		if (_npc->GetStateMachine()->GetMicroTaskHolder()->GetTarget()->GetStarSystem() != _npc->GetStateMachine()->GetMacroTaskHolder()->GetMacroTask()->GetTarget()->GetStarSystem())
 		{
-			_npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_JUMP, _npc->GetStateMachine()->GetCurrentMacroTask()->GetTarget()->GetStarSystem());
+			_npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_JUMP, _npc->GetStateMachine()->GetMacroTaskHolder()->GetMacroTask()->GetTarget()->GetStarSystem());
 		}
 	}
 	else
 	{
-		if ( (_npc->GetStateMachine()->GetCurrentMicroTask()->GetScenario() == NULL) or (_npc->GetStateMachine()->GetCurrentMicroTask()->GetScenario() != MICROSCENARIO_DESTROY) )
+		if ( (_npc->GetStateMachine()->GetMicroTaskHolder()->GetScenario() == NULL) or (_npc->GetStateMachine()->GetMicroTaskHolder()->GetScenario() != MICROSCENARIO_DESTROY) )
 		{
             		_npc->GetObservation()->FindVisibleNpcsInSpaceInStatic();
             	
@@ -53,5 +55,5 @@ void MacroScenarioStarSystemDefence::UpdateInStatic(Npc* _npc) const
 
 std::string MacroScenarioStarSystemDefence::GetDescription(Npc* _npc) const
 {
-	return "MacroScenarioStarSystemDefence: ss_id = " + int2str(_npc->GetStateMachine()->GetCurrentMacroTask()->GetTarget()->GetId());
+	return "MacroScenarioStarSystemDefence: ss_id = " + int2str(_npc->GetStateMachine()->GetMacroTaskHolder()->GetMacroTask()->GetTarget()->GetId());
 }

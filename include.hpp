@@ -237,10 +237,15 @@ class WeaponSelector;
 #include "src/pilots/scenarios/MicroScenarioDocking.hpp"
 #include "src/pilots/scenarios/MicroScenarioLaunching.hpp"
 
-#include "src/pilots/scenarios/TaskHolder.hpp"
+class ScenarioCollector;
+#include "src/pilots/scenarios/MacroTask.hpp"
+#include "src/pilots/scenarios/MicroTaskHolder.hpp"
+#include "src/pilots/scenarios/MacroTaskHolder.hpp"
+
 
 #include "src/pilots/scenarios/StateMachine.hpp"
-#include "src/pilots/scenarios/TaskObject.hpp"
+#include "src/pilots/scenarios/ScenarioCollector.hpp"
+
 
 #include "src/pilots/scenarios/MacroScenarioSelfSafety.hpp"
 #include "src/pilots/scenarios/MacroScenarioStarSystemLiberation.hpp"
@@ -431,9 +436,11 @@ class WeaponSelector;
 #include "src/pilots/scenarios/MicroScenarioDocking.cpp"
 #include "src/pilots/scenarios/MicroScenarioLaunching.cpp"
 
-#include "src/pilots/scenarios/TaskHolder.cpp"
+#include "src/pilots/scenarios/MacroTask.cpp"
+#include "src/pilots/scenarios/MicroTaskHolder.cpp"
+#include "src/pilots/scenarios/MacroTaskHolder.cpp"
 #include "src/pilots/scenarios/StateMachine.cpp"
-#include "src/pilots/scenarios/TaskObject.cpp"
+#include "src/pilots/scenarios/ScenarioCollector.cpp"
 
 #include "src/pilots/scenarios/MacroScenarioSelfSafety.cpp"
 #include "src/pilots/scenarios/MacroScenarioStarSystemLiberation.cpp"

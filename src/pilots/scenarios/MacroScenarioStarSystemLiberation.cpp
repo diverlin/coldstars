@@ -18,23 +18,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 MacroScenarioStarSystemLiberation::MacroScenarioStarSystemLiberation() 
-{}
+{
+	type_id = TASK::STARSYSTEMLIBERATION_ID;
+}
 
 MacroScenarioStarSystemLiberation::~MacroScenarioStarSystemLiberation() 
 {}
 
 void MacroScenarioStarSystemLiberation::UpdateInStatic(Npc* _npc) const
 {
-	if ( _npc->GetStarSystem()->GetId() != _npc->GetStateMachine()->GetCurrentMacroTask()->GetTarget()->GetId() )
+	if ( _npc->GetStarSystem()->GetId() != _npc->GetStateMachine()->GetMacroTaskHolder()->GetMacroTask()->GetTarget()->GetId() )
 	{
 		//if (_npc->getMicroTask()->GetTarget()->getObId() != _npc->getMacroTaskMain()->GetTarget()->GetStarSystem()->GetId())
 		{
-			_npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_JUMP, _npc->GetStateMachine()->GetCurrentMacroTask()->GetTarget()->GetStarSystem());
+			_npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_JUMP, _npc->GetStateMachine()->GetMacroTaskHolder()->GetMacroTask()->GetTarget()->GetStarSystem());
 		}
 	}
 	else
 	{
-		if (_npc->GetStateMachine()->GetCurrentMicroTask()->GetTarget()->GetTypeId() != ENTITY::NPC_ID)
+		if (_npc->GetStateMachine()->GetMicroTaskHolder()->GetTarget()->GetTypeId() != ENTITY::NPC_ID)
 		{
 			Npc* _target_npc = _npc->GetStarSystem()->GetRandNpc(&RACES_EVIL_LIST);
 			if (_target_npc != NULL)
@@ -51,5 +53,5 @@ void MacroScenarioStarSystemLiberation::UpdateInStatic(Npc* _npc) const
 
 std::string MacroScenarioStarSystemLiberation::GetDescription(Npc* _npc) const
 {
-	return "MacroScenarioStarSystemLiberation: ss_id = " + int2str(_npc->GetStateMachine()->GetCurrentMacroTask()->GetTarget()->GetId());
+	return "MacroScenarioStarSystemLiberation: ss_id = " + int2str(_npc->GetStateMachine()->GetMacroTaskHolder()->GetMacroTask()->GetTarget()->GetId());
 }

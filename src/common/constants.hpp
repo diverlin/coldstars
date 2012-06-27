@@ -50,6 +50,15 @@ const int NONE_ID = -1;
 const int FAIL_ID = 1;
 const int SUCCESS_ID = 2;
 
+namespace TASK
+{
+	enum TYPE_ID
+	{
+		STARSYSTEMDEFENCE_ID, STARSYSTEMLIBERATION_ID, SELFSAFETY_ID,
+		DESTROY_ID
+	};
+} 
+
 namespace COLOR
 {
 	enum ID

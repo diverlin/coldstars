@@ -32,9 +32,9 @@ DetaliedIdGenerator g_TYPE_ID_GENERATOR    = DetaliedIdGenerator();
 UniqueTextureCollector g_UNIQUE_TEXTURE_COLLECTOR;
 TextureManager g_TEXTURE_MANAGER;
 
-class MacroScenarioStarSystemLiberation; MacroScenarioStarSystemLiberation* MACROSCENARIO_STARSYSTEMLIBERATION;
-class MacroScenarioStarSystemDefence;    MacroScenarioStarSystemDefence*    MACROSCENARIO_STARSYSTEMDEFENCE;
-class MacroScenarioSelfSafety;           MacroScenarioSelfSafety*           MACROSCENARIO_SELFSAFETY;
+//class MacroScenarioStarSystemLiberation; MacroScenarioStarSystemLiberation* MACROSCENARIO_STARSYSTEMLIBERATION;
+//class MacroScenarioStarSystemDefence;    MacroScenarioStarSystemDefence*    MACROSCENARIO_STARSYSTEMDEFENCE;
+//class MacroScenarioSelfSafety;           MacroScenarioSelfSafety*           MACROSCENARIO_SELFSAFETY;
 
 class MicroScenarioLaunching;            MicroScenarioLaunching* MICROSCENARIO_LAUNCHING;
 class MicroScenarioDocking;              MicroScenarioDocking* MICROSCENARIO_DOCKING;

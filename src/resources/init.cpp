@@ -39,10 +39,11 @@ void init()
     	loadGameData();           
         g_TEXTURE_MANAGER.FillShipSubTypeList();        
     	
+    	
 	/* create Macro Scenaries */
-	MACROSCENARIO_STARSYSTEMLIBERATION = new MacroScenarioStarSystemLiberation();    // make as singlenton
-	MACROSCENARIO_STARSYSTEMDEFENCE    = new MacroScenarioStarSystemDefence();       // make as singlenton
-	MACROSCENARIO_SELFSAFETY           = new MacroScenarioSelfSafety();	 	   // make as singlenton
+	ScenarioCollector::Instance().RegisterScenario(new MacroScenarioStarSystemLiberation());
+	ScenarioCollector::Instance().RegisterScenario(new MacroScenarioStarSystemDefence());
+	//MACROSCENARIO_SELFSAFETY           = new MacroScenarioSelfSafety();	 	   // make as singlenton
 	
 	/* create Micro Scenaries */
 	MICROSCENARIO_DOCKING = new MicroScenarioDocking();    	 // make as singlenton
