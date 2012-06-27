@@ -18,7 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-TaskHolder::TaskHolder()
+MicroTaskHolder::MicroTaskHolder()
 {
 	result = NONE_ID;
 	
@@ -26,21 +26,10 @@ TaskHolder::TaskHolder()
 	scenario = NULL;
 }
 
-TaskHolder::TaskHolder(Date date_creation, Date date_expired)
-{
-	this->date_creation = date_creation;
-	this->date_expired = date_expired;
-			
-	result = NONE_ID;
-		
-	target   = NULL;
-	scenario = NULL;
-}
-
-TaskHolder::~TaskHolder()
+MicroTaskHolder::~MicroTaskHolder()
 {}
 
-void TaskHolder::Set(BaseScenario* scenario, BaseGameEntity* target)
+void MicroTaskHolder::Set(BaseScenario* scenario, BaseGameEntity* target)
 {
 	this->scenario = scenario;
 	this->target   = target;
@@ -49,7 +38,7 @@ void TaskHolder::Set(BaseScenario* scenario, BaseGameEntity* target)
 }
 
 
-void TaskHolder::Reset()
+void MicroTaskHolder::Reset()
 {
 	scenario = NULL;
 	target   = NULL;

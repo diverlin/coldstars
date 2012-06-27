@@ -17,28 +17,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef BASESCENARIO_H
-#define SCENARIOSCENARIO_H
 
-class BaseScenario
+MacroTaskHolder::MacroTaskHolder()
 {
-	public:
-		BaseScenario();
-		virtual ~BaseScenario();
-		
-		int GetTypeId() const { return type_id; };
-		
-		virtual void Enter(Npc*) const;
-		virtual void UpdateInStatic(Npc*) const;	
-		virtual void UpdateInDynamic(Npc*) const;	
-		virtual void Exit(Npc*) const;
-		
-		virtual std::string GetDescription(Npc*) const;
-		
-	protected:
-		int type_id;
-}; 
+	result = NONE_ID;
+	
+	macrotask = NULL;
+	scenario  = NULL;
+}
+
+MacroTaskHolder::~MacroTaskHolder()
+{}
+
+void MacroTaskHolder::Set(MacroTask* macrotask)
+{
+	this->scenario = ScenarioCollector::Instance().GetScenario(macrotask->GetScenarioTypeId());
+	this->macrotask = macrotask;
+
+	result = NONE_ID;
+}
 
 
-#endif 
-     
+void MacroTaskHolder::Reset()
+{
+	scenario  = NULL;
+	macrotask = NULL;
+}
+
+

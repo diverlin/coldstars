@@ -18,7 +18,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 MacroScenarioSelfSafety::MacroScenarioSelfSafety() 
-{}
+{
+	type_id = TASK::SELFSAFETY_ID;
+}
 
 MacroScenarioSelfSafety::~MacroScenarioSelfSafety() 
 {}
@@ -27,14 +29,14 @@ void MacroScenarioSelfSafety::UpdateInStatic(Npc* npc) const
 {
 	if (npc->GetStarSystem()->GetCaptured() == false)
 	{
-		if (npc->GetStateMachine()->GetCurrentMacroTask()->GetTarget()->GetTypeId() != ENTITY::PLANET_ID)
+		if (npc->GetStateMachine()->GetMacroTaskHolder()->GetMacroTask()->GetTarget()->GetTypeId() != ENTITY::PLANET_ID)
 		{ 
 			npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_DOCKING, npc->GetPlanetForDocking());
 		}
 	}
 	else
 	{
-		if (npc->GetStateMachine()->GetCurrentMicroTask()->GetTarget()->GetTypeId() != ENTITY::STARSYSTEM_ID)
+		if (npc->GetStateMachine()->GetMicroTaskHolder()->GetTarget()->GetTypeId() != ENTITY::STARSYSTEM_ID)
 		{
 			npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_JUMP, npc->GetFailBackStarSystem());
 		}

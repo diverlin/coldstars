@@ -27,12 +27,11 @@ class StateMachine
 		StateMachine(Npc*);
 		~StateMachine();
 
+		void SetCurrentMacroTask(MacroTask*);
 		void SetCurrentMicroTask(BaseScenario*, BaseGameEntity*);
-		void SetCurrentMacroTask(BaseScenario*, BaseGameEntity*);
 		
-		TaskHolder* GetCurrentMacroTask() const { return current_macroTask; };
-		TaskHolder* GetCurrentMicroTask() const { return current_microTask; };
-		
+		MacroTaskHolder* GetMacroTaskHolder() const { return macrotask_holder; };
+		MicroTaskHolder* GetMicroTaskHolder() const { return microtask_holder; };		
 				
 		void UpdateInDynamic();			
 		void UpdateInStatic();	
@@ -42,8 +41,8 @@ class StateMachine
 	private:
 		Npc* npc_owner;
 		
-		TaskHolder* current_macroTask;		
-		TaskHolder* current_microTask;		
+		MacroTaskHolder* macrotask_holder;		
+		MicroTaskHolder* microtask_holder;		
 }; 
 
 

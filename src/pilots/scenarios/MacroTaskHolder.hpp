@@ -17,32 +17,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef TASKHOLDER_H
-#define TASKHOLDER_H
+#ifndef MACROTASKHOLDER_H
+#define MACROTASKHOLDER_H
 
 
-class TaskHolder
+class MacroTaskHolder
 {
 	public:
-		TaskHolder();
-		TaskHolder(Date, Date);
-		~TaskHolder();
+		MacroTaskHolder();
+		~MacroTaskHolder();
 		
-		void Set(BaseScenario*, BaseGameEntity*);
+		void Set(MacroTask*);
 		void SetResult(int result)  { this->result = result; }
 				
 		int GetResult() const { return result; };
 		
-		BaseGameEntity* GetTarget() const { return target; };	
+		MacroTask* GetMacroTask() const { return macrotask; };	
 		BaseScenario* GetScenario() const { return scenario; };				
 				
 	protected:
 		int result;
-
-		Date date_creation;
-		Date date_expired;
 				
-		BaseGameEntity* target;	
+		MacroTask* macrotask;	
 		BaseScenario* scenario;
 		
 		void Reset();

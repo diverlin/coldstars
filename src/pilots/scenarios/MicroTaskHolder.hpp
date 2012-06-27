@@ -17,27 +17,32 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef BASESCENARIO_H
-#define SCENARIOSCENARIO_H
+#ifndef MICROTASKHOLDER_H
+#define MICROTASKHOLDER_H
 
-class BaseScenario
+
+class MicroTaskHolder
 {
 	public:
-		BaseScenario();
-		virtual ~BaseScenario();
+		MicroTaskHolder();
+		~MicroTaskHolder();
 		
-		int GetTypeId() const { return type_id; };
+		void Set(BaseScenario*, BaseGameEntity*);
+		void SetResult(int result)  { this->result = result; }
+				
+		int GetResult() const { return result; };
 		
-		virtual void Enter(Npc*) const;
-		virtual void UpdateInStatic(Npc*) const;	
-		virtual void UpdateInDynamic(Npc*) const;	
-		virtual void Exit(Npc*) const;
-		
-		virtual std::string GetDescription(Npc*) const;
-		
+		BaseGameEntity* GetTarget() const { return target; };	
+		BaseScenario* GetScenario() const { return scenario; };				
+				
 	protected:
-		int type_id;
-}; 
+		int result;
+				
+		BaseGameEntity* target;	
+		BaseScenario* scenario;
+		
+		void Reset();
+};
 
 
 #endif 
