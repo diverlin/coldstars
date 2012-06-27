@@ -20,60 +20,60 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 StateMachine::StateMachine(Npc* npc) 
 {
-	macrotask_holder  = new MacroTaskHolder();		
-	microtask_holder  = new MicroTaskHolder();		
+	macrotask_manager  = new MacroTaskManager();		
+	microtask_manager  = new MicroTaskManager();		
 	
 	npc_owner = npc;
 }
 		
 StateMachine::~StateMachine() 
 {
-	delete macrotask_holder;		
-	delete microtask_holder;		
+	delete macrotask_manager;		
+	delete microtask_manager;		
 }
 		
 void StateMachine::UpdateInStatic()
 {
-	if (macrotask_holder->GetScenario() != NULL) { macrotask_holder->GetScenario()->UpdateInStatic(npc_owner); }
-	if (microtask_holder->GetScenario() != NULL) { microtask_holder->GetScenario()->UpdateInStatic(npc_owner); }
+	if (macrotask_manager->GetScenario() != NULL) { macrotask_manager->GetScenario()->UpdateInStatic(npc_owner); }
+	if (microtask_manager->GetScenario() != NULL) { microtask_manager->GetScenario()->UpdateInStatic(npc_owner); }
 }
 
 void StateMachine::UpdateInDynamic()
 {
-	if (microtask_holder->GetScenario() != NULL)
+	if (microtask_manager->GetScenario() != NULL)
 	{
-	 	microtask_holder->GetScenario()->UpdateInDynamic(npc_owner);
+	 	microtask_manager->GetScenario()->UpdateInDynamic(npc_owner);
 	}
 }
 	
 		
 void StateMachine::SetCurrentMacroTask(MacroTask* macrotask)
 {
-	if (macrotask_holder->GetScenario() != NULL)
+	if (macrotask_manager->GetScenario() != NULL)
 	{
-		//macrotask_holder->GetScenario()->Exit(npc_owner);
+		//macrotask_manager->GetScenario()->Exit(npc_owner);
 	}
 	
-	//macrotask_holder->Set(target, new_scenario);
-	//macrotask_holder->GetScenario()->Enter(npc_owner);
+	//macrotask_manager->Set(target, new_scenario);
+	//macrotask_manager->GetScenario()->Enter(npc_owner);
 }
 
 				
 void StateMachine::SetCurrentMicroTask(BaseScenario* new_scenario, BaseGameEntity* target)
 {
-	if (microtask_holder->GetScenario() != NULL)
+	if (microtask_manager->GetScenario() != NULL)
 	{
-		microtask_holder->GetScenario()->Exit(npc_owner);
+		microtask_manager->GetScenario()->Exit(npc_owner);
 	}
 	
-	microtask_holder->Set(new_scenario, target);
-	microtask_holder->GetScenario()->Enter(npc_owner);
+	microtask_manager->Set(new_scenario, target);
+	microtask_manager->GetScenario()->Enter(npc_owner);
 }
 
 void StateMachine::ForceReset()
 {
-	macrotask_holder->SetResult(FAIL_ID);		
-	microtask_holder->SetResult(FAIL_ID);		
+	macrotask_manager->SetResult(FAIL_ID);		
+	microtask_manager->SetResult(FAIL_ID);		
 }
 
 

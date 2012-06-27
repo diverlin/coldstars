@@ -25,7 +25,7 @@ AiModelConqueror::~AiModelConqueror()
 
 void AiModelConqueror::UpdateInStatic(Npc* npc) const
 {
-	if ( npc->GetStateMachine()->GetMacroTaskHolder()->GetScenario() == NULL) 
+	if ( npc->GetStateMachine()->GetMacroTaskManager()->GetScenario() == NULL) 
 	{
 		MacroTask* macrotask = new MacroTask(npc->GetStarSystem(), MACROSCENARIO::STARSYSTEMDEFENCE_ID);
 	        npc->GetStateMachine()->SetCurrentMacroTask(macrotask); 

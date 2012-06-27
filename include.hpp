@@ -239,8 +239,8 @@ class WeaponSelector;
 
 class ScenarioCollector;
 #include "src/ai/MacroTask.hpp"
-#include "src/ai/MicroTaskHolder.hpp"
-#include "src/ai/MacroTaskHolder.hpp"
+#include "src/ai/MicroTaskManager.hpp"
+#include "src/ai/MacroTaskManager.hpp"
 
 
 #include "src/ai/StateMachine.hpp"
@@ -437,8 +437,8 @@ class ScenarioCollector;
 #include "src/ai/scenarios/micro/MicroScenarioLaunching.cpp"
 
 #include "src/ai/MacroTask.cpp"
-#include "src/ai/MicroTaskHolder.cpp"
-#include "src/ai/MacroTaskHolder.cpp"
+#include "src/ai/MicroTaskManager.cpp"
+#include "src/ai/MacroTaskManager.cpp"
 #include "src/ai/StateMachine.cpp"
 #include "src/ai/ScenarioCollector.cpp"
 
