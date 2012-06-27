@@ -17,18 +17,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
+#ifndef SCENARIOCOLLECTOR_H
+#define SCENARIOCOLLECTOR_H
 
-TaskObject::TaskObject(Base* object, int action_id, int reward, int expiriance)
+
+class ScenarioCollector
 {
-	this->object = object;
-	this->action_id = action_id;
+	public:
+		static ScenarioCollector& Instance();
+		~ScenarioCollector();
 		
-	this->reward = reward;
-	this->expiriance = expiriance;
-}		
+		void RegisterScenario(BaseScenario*);
+		BaseScenario* GetScenario(int) const;
+                      	 		                
+        private:   
+        	std::map<int, BaseScenario*> scenario_map;
+        	             
+		ScenarioCollector() {};
+		ScenarioCollector(const ScenarioCollector&) = delete;
+		ScenarioCollector& operator=(const ScenarioCollector&) = delete;
+}; 
 
-TaskObject::~TaskObject()
-{}
 
+#endif 
+    
+
+        
 
 

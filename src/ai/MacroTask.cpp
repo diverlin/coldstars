@@ -17,25 +17,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef TASKOBJECT_H
-#define TASKOBJECT_H
 
-
-class TaskObject
+MacroTask::MacroTask(BaseGameEntity* target, int action_id, int reward, int expiriance)
 {
-	public:
-		TaskObject(Base*, int, int, int);
-		~TaskObject();
-				
-	protected:
-		int reward;
-		int expiriance;
+	this->target = target;
+	this->action_id = action_id;
 		
-		int action_id;
-				
-		Base* object;	
-};
+	this->reward = reward;
+	this->expiriance = expiriance;
+}		
+
+MacroTask::~MacroTask()
+{}
 
 
-#endif 
-     
+

@@ -229,31 +229,31 @@ class WeaponSelector;
 #include "src/pilots/Skill.hpp"
 #include "src/pilots/Npc.hpp"           
 
-#include "src/pilots/scenarios/BaseScenario.hpp" 
+#include "src/ai/scenarios/BaseScenario.hpp" 
 
-#include "src/pilots/scenarios/MicroScenarioDestroy.hpp" 
-#include "src/pilots/scenarios/MicroScenarioGrab.hpp" 
-#include "src/pilots/scenarios/MicroScenarioJump.hpp" 
-#include "src/pilots/scenarios/MicroScenarioDocking.hpp"
-#include "src/pilots/scenarios/MicroScenarioLaunching.hpp"
+#include "src/ai/scenarios/micro/MicroScenarioDestroy.hpp" 
+#include "src/ai/scenarios/micro/MicroScenarioGrab.hpp" 
+#include "src/ai/scenarios/micro/MicroScenarioJump.hpp" 
+#include "src/ai/scenarios/micro/MicroScenarioDocking.hpp"
+#include "src/ai/scenarios/micro/MicroScenarioLaunching.hpp"
 
 class ScenarioCollector;
-#include "src/pilots/scenarios/MacroTask.hpp"
-#include "src/pilots/scenarios/MicroTaskHolder.hpp"
-#include "src/pilots/scenarios/MacroTaskHolder.hpp"
+#include "src/ai/MacroTask.hpp"
+#include "src/ai/MicroTaskHolder.hpp"
+#include "src/ai/MacroTaskHolder.hpp"
 
 
-#include "src/pilots/scenarios/StateMachine.hpp"
-#include "src/pilots/scenarios/ScenarioCollector.hpp"
+#include "src/ai/StateMachine.hpp"
+#include "src/ai/ScenarioCollector.hpp"
 
 
-#include "src/pilots/scenarios/MacroScenarioSelfSafety.hpp"
-#include "src/pilots/scenarios/MacroScenarioStarSystemLiberation.hpp"
-#include "src/pilots/scenarios/MacroScenarioStarSystemDefence.hpp"
+#include "src/ai/scenarios/macro/MacroScenarioSelfSafety.hpp"
+#include "src/ai/scenarios/macro/MacroScenarioStarSystemLiberation.hpp"
+#include "src/ai/scenarios/macro/MacroScenarioStarSystemDefence.hpp"
 
-#include "src/pilots/aiModel/BaseAiModel.hpp"
-#include "src/pilots/aiModel/AiModelRanger.hpp"
-#include "src/pilots/aiModel/AiModelConqueror.hpp"
+#include "src/ai/aiModel/BaseAiModel.hpp"
+#include "src/ai/aiModel/AiModelRanger.hpp"
+#include "src/ai/aiModel/AiModelConqueror.hpp"
 
 //   
 #include "src/pilots/Observation.hpp" 
@@ -428,27 +428,27 @@ class ScenarioCollector;
 
 #include "src/pilots/Npc.cpp"
 //
-#include "src/pilots/scenarios/BaseScenario.cpp" 
+#include "src/ai/scenarios/BaseScenario.cpp" 
 
-#include "src/pilots/scenarios/MicroScenarioDestroy.cpp" 
-#include "src/pilots/scenarios/MicroScenarioGrab.cpp" 
-#include "src/pilots/scenarios/MicroScenarioJump.cpp" 
-#include "src/pilots/scenarios/MicroScenarioDocking.cpp"
-#include "src/pilots/scenarios/MicroScenarioLaunching.cpp"
+#include "src/ai/scenarios/micro/MicroScenarioDestroy.cpp" 
+#include "src/ai/scenarios/micro/MicroScenarioGrab.cpp" 
+#include "src/ai/scenarios/micro/MicroScenarioJump.cpp" 
+#include "src/ai/scenarios/micro/MicroScenarioDocking.cpp"
+#include "src/ai/scenarios/micro/MicroScenarioLaunching.cpp"
 
-#include "src/pilots/scenarios/MacroTask.cpp"
-#include "src/pilots/scenarios/MicroTaskHolder.cpp"
-#include "src/pilots/scenarios/MacroTaskHolder.cpp"
-#include "src/pilots/scenarios/StateMachine.cpp"
-#include "src/pilots/scenarios/ScenarioCollector.cpp"
+#include "src/ai/MacroTask.cpp"
+#include "src/ai/MicroTaskHolder.cpp"
+#include "src/ai/MacroTaskHolder.cpp"
+#include "src/ai/StateMachine.cpp"
+#include "src/ai/ScenarioCollector.cpp"
 
-#include "src/pilots/scenarios/MacroScenarioSelfSafety.cpp"
-#include "src/pilots/scenarios/MacroScenarioStarSystemLiberation.cpp"
-#include "src/pilots/scenarios/MacroScenarioStarSystemDefence.cpp"
+#include "src/ai/scenarios/macro/MacroScenarioSelfSafety.cpp"
+#include "src/ai/scenarios/macro/MacroScenarioStarSystemLiberation.cpp"
+#include "src/ai/scenarios/macro/MacroScenarioStarSystemDefence.cpp"
 
-#include "src/pilots/aiModel/BaseAiModel.cpp"
-#include "src/pilots/aiModel/AiModelRanger.cpp"
-#include "src/pilots/aiModel/AiModelConqueror.cpp"
+#include "src/ai/aiModel/BaseAiModel.cpp"
+#include "src/ai/aiModel/AiModelRanger.cpp"
+#include "src/ai/aiModel/AiModelConqueror.cpp"
 
 #include "src/pilots/Observation.cpp" 
 
