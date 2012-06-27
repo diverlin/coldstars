@@ -234,14 +234,14 @@ void Npc::UpdateInfo()
 			info.addNameStr("grab_id:");   		info.addValueStr( grab_str ); 
 		}
 	}
-    	if (state_machine->GetMacroTaskHolder()->GetScenario() != NULL)
+    	if (state_machine->GetMacroTaskManager()->GetScenario() != NULL)
     	{ 	
-    	info.addNameStr("macro_task_main:");   	info.addValueStr( state_machine->GetMacroTaskHolder()->GetScenario()->GetDescription(this) ); 
+    	info.addNameStr("macro_task_main:");   	info.addValueStr( state_machine->GetMacroTaskManager()->GetScenario()->GetDescription(this) ); 
     	}
     	
-    	if (state_machine->GetMicroTaskHolder()->GetScenario() != NULL)
+    	if (state_machine->GetMicroTaskManager()->GetScenario() != NULL)
     	{ 	
-    	info.addNameStr("micro_task:");   	info.addValueStr( state_machine->GetMicroTaskHolder()->GetScenario()->GetDescription(this)  ); 
+    	info.addNameStr("micro_task:");   	info.addValueStr( state_machine->GetMicroTaskManager()->GetScenario()->GetDescription(this)  ); 
     	}
 }
 

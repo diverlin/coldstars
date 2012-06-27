@@ -29,14 +29,14 @@ void MacroScenarioSelfSafety::UpdateInStatic(Npc* npc) const
 {
 	if (npc->GetStarSystem()->GetCaptured() == false)
 	{
-		if (npc->GetStateMachine()->GetMacroTaskHolder()->GetMacroTask()->GetTarget()->GetTypeId() != ENTITY::PLANET_ID)
+		if (npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetTypeId() != ENTITY::PLANET_ID)
 		{ 
 			npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_DOCKING, npc->GetPlanetForDocking());
 		}
 	}
 	else
 	{
-		if (npc->GetStateMachine()->GetMicroTaskHolder()->GetTarget()->GetTypeId() != ENTITY::STARSYSTEM_ID)
+		if (npc->GetStateMachine()->GetMicroTaskManager()->GetTarget()->GetTypeId() != ENTITY::STARSYSTEM_ID)
 		{
 			npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_JUMP, npc->GetFailBackStarSystem());
 		}

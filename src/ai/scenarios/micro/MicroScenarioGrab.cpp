@@ -28,7 +28,7 @@ MicroScenarioGrab::~MicroScenarioGrab()
 		
 void MicroScenarioGrab::Enter(Npc* npc) const
 {	
-	printf("npc_id = %i, STARTS MicroScenarioGrab item id = %i\n", npc->GetId(), npc->GetStateMachine()->GetMicroTaskHolder()->GetTarget()->GetId());
+	printf("npc_id = %i, STARTS MicroScenarioGrab item id = %i\n", npc->GetId(), npc->GetStateMachine()->GetMicroTaskManager()->GetTarget()->GetId());
 }
 
 void MicroScenarioGrab::UpdateInStatic(Npc* npc) const
@@ -46,7 +46,7 @@ void MicroScenarioGrab::UpdateInStatic(Npc* npc) const
                 //}
         //}
         
-        //npc->GetVehicle()->GetDriveComplex()->setTarget(npc->GetStateMachine()->GetMicroTaskHolder()->GetTarget(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
+        //npc->GetVehicle()->GetDriveComplex()->setTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetTarget(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
 
 }
 
@@ -101,5 +101,5 @@ void MicroScenarioGrab::Exit(Npc* npc) const
 
 std::string MicroScenarioGrab::GetDescription(Npc* npc) const 
 {
-	return "GRAB to ob id = %i\n" + int2str(npc->GetStateMachine()->GetMicroTaskHolder()->GetTarget()->GetId());
+	return "GRAB to ob id = %i\n" + int2str(npc->GetStateMachine()->GetMicroTaskManager()->GetTarget()->GetId());
 }

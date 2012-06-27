@@ -27,16 +27,16 @@ MacroScenarioStarSystemDefence::~MacroScenarioStarSystemDefence()
 
 void MacroScenarioStarSystemDefence::UpdateInStatic(Npc* _npc) const
 {
-	if ( _npc->GetStarSystem() != _npc->GetStateMachine()->GetMacroTaskHolder()->GetMacroTask()->GetTarget()->GetStarSystem() )
+	if ( _npc->GetStarSystem() != _npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetStarSystem() )
 	{
-		if (_npc->GetStateMachine()->GetMicroTaskHolder()->GetTarget()->GetStarSystem() != _npc->GetStateMachine()->GetMacroTaskHolder()->GetMacroTask()->GetTarget()->GetStarSystem())
+		if (_npc->GetStateMachine()->GetMicroTaskManager()->GetTarget()->GetStarSystem() != _npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetStarSystem())
 		{
-			_npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_JUMP, _npc->GetStateMachine()->GetMacroTaskHolder()->GetMacroTask()->GetTarget()->GetStarSystem());
+			_npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_JUMP, _npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetStarSystem());
 		}
 	}
 	else
 	{
-		if ( (_npc->GetStateMachine()->GetMicroTaskHolder()->GetScenario() == NULL) or (_npc->GetStateMachine()->GetMicroTaskHolder()->GetScenario() != MICROSCENARIO_DESTROY) )
+		if ( (_npc->GetStateMachine()->GetMicroTaskManager()->GetScenario() == NULL) or (_npc->GetStateMachine()->GetMicroTaskManager()->GetScenario() != MICROSCENARIO_DESTROY) )
 		{
             		_npc->GetObservation()->FindVisibleNpcsInSpaceInStatic();
             	
@@ -55,5 +55,5 @@ void MacroScenarioStarSystemDefence::UpdateInStatic(Npc* _npc) const
 
 std::string MacroScenarioStarSystemDefence::GetDescription(Npc* _npc) const
 {
-	return "MacroScenarioStarSystemDefence: ss_id = " + int2str(_npc->GetStateMachine()->GetMacroTaskHolder()->GetMacroTask()->GetTarget()->GetId());
+	return "MacroScenarioStarSystemDefence: ss_id = " + int2str(_npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetId());
 }

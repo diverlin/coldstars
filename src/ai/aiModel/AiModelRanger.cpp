@@ -25,7 +25,7 @@ AiModelRanger::~AiModelRanger()
 
 void AiModelRanger::UpdateInStatic(Npc* npc) const
 {
-	if (npc->GetStateMachine()->GetMacroTaskHolder()->GetScenario() == NULL)
+	if (npc->GetStateMachine()->GetMacroTaskManager()->GetScenario() == NULL)
         {
         	StarSystem* starsystem = npc->GetClosestStarSystem(true);
         	if (starsystem != NULL)

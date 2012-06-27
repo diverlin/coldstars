@@ -17,33 +17,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MICROTASKHOLDER_H
-#define MICROTASKHOLDER_H
 
-
-class MicroTaskHolder
+MacroTaskManager::MacroTaskManager()
 {
-	public:
-		MicroTaskHolder();
-		~MicroTaskHolder();
-		
-		void Set(BaseScenario*, BaseGameEntity*);
-		void SetResult(int result)  { this->result = result; }
-				
-		int GetResult() const { return result; };
-		
-		BaseGameEntity* GetTarget() const { return target; };	
-		BaseScenario* GetScenario() const { return scenario; };				
-				
-	protected:
-		int result;
-				
-		BaseGameEntity* target;	
-		BaseScenario* scenario;
-		
-		void Reset();
-};
+	result = NONE_ID;
+	
+	macrotask = NULL;
+	scenario  = NULL;
+}
+
+MacroTaskManager::~MacroTaskManager()
+{}
+
+void MacroTaskManager::Set(MacroTask* macrotask)
+{
+	this->scenario = ScenarioCollector::Instance().GetScenario(macrotask->GetScenarioTypeId());
+	this->macrotask = macrotask;
+
+	result = NONE_ID;
+}
 
 
-#endif 
-     
+void MacroTaskManager::Reset()
+{
+	scenario  = NULL;
+	macrotask = NULL;
+}
+
+
