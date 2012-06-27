@@ -51,30 +51,33 @@ void StateMachine::SetCurrentMacroTask(MacroTask* macrotask)
 {
 	if (macrotask_manager->GetScenario() != NULL)
 	{
-		//macrotask_manager->GetScenario()->Exit(npc_owner);
+		macrotask_manager->GetScenario()->Exit(npc_owner);
+		macrotask_manager->DeleteMacroTaskAndReset();
 	}
 	
-	//macrotask_manager->Set(target, new_scenario);
-	//macrotask_manager->GetScenario()->Enter(npc_owner);
+	macrotask_manager->SetMacroTask(macrotask);
+	macrotask_manager->GetScenario()->Enter(npc_owner);
 }
 
 				
-void StateMachine::SetCurrentMicroTask(BaseScenario* new_scenario, BaseGameEntity* target)
+void StateMachine::SetCurrentMicroTask(MicroTask* microtask)
 {
 	if (microtask_manager->GetScenario() != NULL)
 	{
 		microtask_manager->GetScenario()->Exit(npc_owner);
+		microtask_manager->DeleteMicroTaskAndReset();
 	}
 	
-	microtask_manager->Set(new_scenario, target);
+	microtask_manager->SetMicroTask(microtask);
 	microtask_manager->GetScenario()->Enter(npc_owner);
 }
 
-void StateMachine::ForceReset()
+void StateMachine::ForceReset() const
 {
-	macrotask_manager->SetResult(FAIL_ID);		
-	microtask_manager->SetResult(FAIL_ID);		
+	macrotask_manager->DeleteMacroTaskAndReset();
+	microtask_manager->DeleteMicroTaskAndReset();
 }
+
 
 
 

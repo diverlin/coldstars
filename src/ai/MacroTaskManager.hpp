@@ -27,21 +27,18 @@ class MacroTaskManager
 		MacroTaskManager();
 		~MacroTaskManager();
 		
-		void Set(MacroTask*);
-		void SetResult(int result)  { this->result = result; }
-				
-		int GetResult() const { return result; };
+		void SetMacroTask(MacroTask*);
 		
 		MacroTask* GetMacroTask() const { return macrotask; };	
 		BaseScenario* GetScenario() const { return scenario; };				
-				
-	protected:
-		int result;
-				
+						
+	private:
 		MacroTask* macrotask;	
 		BaseScenario* scenario;
+
+		void DeleteMacroTaskAndReset();	
 		
-		void Reset();
+		friend class StateMachine;
 };
 
 

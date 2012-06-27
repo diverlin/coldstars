@@ -27,21 +27,18 @@ class MicroTaskManager
 		MicroTaskManager();
 		~MicroTaskManager();
 		
-		void Set(BaseScenario*, BaseGameEntity*);
-		void SetResult(int result)  { this->result = result; }
-				
-		int GetResult() const { return result; };
+		void SetMicroTask(MicroTask*);
 		
-		BaseGameEntity* GetTarget() const { return target; };	
-		BaseScenario* GetScenario() const { return scenario; };				
+		MicroTask* GetMicroTask() const { return microtask; };	
+		BaseScenario* GetScenario() const { return scenario; };
 				
-	protected:
-		int result;
-				
-		BaseGameEntity* target;	
+	private:
+		MicroTask* microtask;	
 		BaseScenario* scenario;
 		
-		void Reset();
+		void DeleteMicroTaskAndReset();	
+		
+		friend class StateMachine;
 };
 
 

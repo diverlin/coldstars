@@ -159,8 +159,9 @@ void GuiKosmoport::MouseCheckInteraction()
 		   			}
 		   			if (button_angar_pList[i]->GetSubTypeId() == GUI::BUTTON::GETLAUNCH_ID)
 		   			{
+		   				MicroTask* microtask = new MicroTask(NULL, MICROSCENARIO::LAUNCHING_ID);
        						player->GetNpc()->GetVehicle()->LaunchingEvent();
-       						player->GetNpc()->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_LAUNCHING, NULL);
+       						player->GetNpc()->GetStateMachine()->SetCurrentMicroTask(microtask);
        			   		}
        				}
        				break;

@@ -18,26 +18,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-MicroTaskManager::MicroTaskManager()
+MicroTask::MicroTask(BaseGameEntity* target, int action_id, int reward, int expiriance)
 {
-	microtask = NULL;
-	scenario = NULL;
-}
+	this->target = target;
+	this->action_id = action_id;
+		
+	this->reward = reward;
+	this->expiriance = expiriance;
+}		
 
-MicroTaskManager::~MicroTaskManager()
-{
-	delete microtask;
-}
+MicroTask::~MicroTask()
+{}
 
-void MicroTaskManager::SetMicroTask(MicroTask* microtask)
-{
-	this->microtask = microtask;
-	this->scenario = ScenarioCollector::Instance().GetScenario(microtask->GetScenarioTypeId());
-}
 
-void MicroTaskManager::DeleteMicroTaskAndReset()
-{
-	delete microtask;
-	microtask = NULL;
-	scenario  = NULL;
-}	
+

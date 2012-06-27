@@ -18,26 +18,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-MicroTaskManager::MicroTaskManager()
-{
-	microtask = NULL;
-	scenario = NULL;
-}
+BaseTask::BaseTask()
+{}		
 
-MicroTaskManager::~MicroTaskManager()
-{
-	delete microtask;
-}
+BaseTask::~BaseTask()
+{}
 
-void MicroTaskManager::SetMicroTask(MicroTask* microtask)
-{
-	this->microtask = microtask;
-	this->scenario = ScenarioCollector::Instance().GetScenario(microtask->GetScenarioTypeId());
-}
 
-void MicroTaskManager::DeleteMicroTaskAndReset()
-{
-	delete microtask;
-	microtask = NULL;
-	scenario  = NULL;
-}	
+

@@ -46,6 +46,9 @@ class GuiMap;
 class Kosmoport;
 class WeaponSelector;
 
+
+class ScenarioCollector;
+
 #include <iostream>
 #include "src/common/myVector.hpp"
 #include "src/common/gameStruct.hpp"
@@ -237,8 +240,9 @@ class WeaponSelector;
 #include "src/ai/scenarios/micro/MicroScenarioDocking.hpp"
 #include "src/ai/scenarios/micro/MicroScenarioLaunching.hpp"
 
-class ScenarioCollector;
+#include "src/ai/BaseTask.hpp"
 #include "src/ai/MacroTask.hpp"
+#include "src/ai/MicroTask.hpp"
 #include "src/ai/MicroTaskManager.hpp"
 #include "src/ai/MacroTaskManager.hpp"
 
@@ -436,7 +440,9 @@ class ScenarioCollector;
 #include "src/ai/scenarios/micro/MicroScenarioDocking.cpp"
 #include "src/ai/scenarios/micro/MicroScenarioLaunching.cpp"
 
+#include "src/ai/BaseTask.cpp"
 #include "src/ai/MacroTask.cpp"
+#include "src/ai/MicroTask.cpp"
 #include "src/ai/MicroTaskManager.cpp"
 #include "src/ai/MacroTaskManager.cpp"
 #include "src/ai/StateMachine.cpp"

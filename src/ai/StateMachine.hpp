@@ -28,21 +28,23 @@ class StateMachine
 		~StateMachine();
 
 		void SetCurrentMacroTask(MacroTask*);
-		void SetCurrentMicroTask(BaseScenario*, BaseGameEntity*);
+		void SetCurrentMicroTask(MicroTask*);
 		
 		MacroTaskManager* GetMacroTaskManager() const { return macrotask_manager; };
 		MicroTaskManager* GetMicroTaskManager() const { return microtask_manager; };		
 				
 		void UpdateInDynamic();			
 		void UpdateInStatic();	
-		
-		void ForceReset();
 
 	private:
 		Npc* npc_owner;
 		
 		MacroTaskManager* macrotask_manager;		
-		MicroTaskManager* microtask_manager;		
+		MicroTaskManager* microtask_manager;	
+		
+		void ForceReset() const;
+			
+		friend void Player::ForceStateMachineReset() const;
 }; 
 
 
