@@ -25,23 +25,25 @@ MacroScenarioStarSystemLiberation::MacroScenarioStarSystemLiberation()
 MacroScenarioStarSystemLiberation::~MacroScenarioStarSystemLiberation() 
 {}
 
-void MacroScenarioStarSystemLiberation::UpdateInStatic(Npc* _npc) const
+void MacroScenarioStarSystemLiberation::UpdateInStatic(Npc* npc) const
 {
-	if ( _npc->GetStarSystem()->GetId() != _npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetId() )
+	if (npc->GetStarSystem()->GetId() != npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetId() )
 	{
-		//if (_npc->getMicroTask()->GetTarget()->getObId() != _npc->getMacroTaskMain()->GetTarget()->GetStarSystem()->GetId())
+		//if (npc->getMicroTask()->GetTarget()->getObId() != npc->getMacroTaskMain()->GetTarget()->GetStarSystem()->GetId())
 		{
-			_npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_JUMP, _npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetStarSystem());
+			MicroTask* microtask = new MicroTask(npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetStarSystem(), MICROSCENARIO::JUMP_ID);
+			npc->GetStateMachine()->SetCurrentMicroTask(microtask);
 		}
 	}
 	else
 	{
-		if (_npc->GetStateMachine()->GetMicroTaskManager()->GetTarget()->GetTypeId() != ENTITY::NPC_ID)
+		if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetTypeId() != ENTITY::NPC_ID)
 		{
-			Npc* _target_npc = _npc->GetStarSystem()->GetRandNpc(&RACES_EVIL_LIST);
-			if (_target_npc != NULL)
+			Npc* _targetnpc = npc->GetStarSystem()->GetRandNpc(&RACES_EVIL_LIST);
+			if (_targetnpc != NULL)
 			{
-				_npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_DESTROY, _target_npc);
+				MicroTask* microtask = new MicroTask(_targetnpc, MICROSCENARIO::DESTROY_ID);
+				npc->GetStateMachine()->SetCurrentMicroTask(microtask);
 			}
 			else
 			{
@@ -51,7 +53,7 @@ void MacroScenarioStarSystemLiberation::UpdateInStatic(Npc* _npc) const
 	}        
 }
 
-std::string MacroScenarioStarSystemLiberation::GetDescription(Npc* _npc) const
+std::string MacroScenarioStarSystemLiberation::GetDescription(Npc* npc) const
 {
-	return "MacroScenarioStarSystemLiberation: ss_id = " + int2str(_npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetId());
+	return "MacroScenarioStarSystemLiberation: ss_id = " + int2str(npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetId());
 }

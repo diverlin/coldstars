@@ -31,14 +31,16 @@ void MacroScenarioSelfSafety::UpdateInStatic(Npc* npc) const
 	{
 		if (npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetTypeId() != ENTITY::PLANET_ID)
 		{ 
-			npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_DOCKING, npc->GetPlanetForDocking());
+			MicroTask* microtask = new MicroTask(npc->GetPlanetForDocking(), MICROSCENARIO::DOCKING_ID);
+			npc->GetStateMachine()->SetCurrentMicroTask(microtask);
 		}
 	}
 	else
 	{
-		if (npc->GetStateMachine()->GetMicroTaskManager()->GetTarget()->GetTypeId() != ENTITY::STARSYSTEM_ID)
+		if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetTypeId() != ENTITY::STARSYSTEM_ID)
 		{
-			npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_JUMP, npc->GetFailBackStarSystem());
+			MicroTask* microtask = new MicroTask(npc->GetFailBackStarSystem(), MICROSCENARIO::JUMP_ID);
+			npc->GetStateMachine()->SetCurrentMicroTask(microtask);
 		}
 	}        
 }

@@ -25,6 +25,8 @@ MacroTask::MacroTask(BaseGameEntity* target, int action_id, int reward, int expi
 		
 	this->reward = reward;
 	this->expiriance = expiriance;
+
+	result = NONE_ID;
 }		
 
 MacroTask::~MacroTask()

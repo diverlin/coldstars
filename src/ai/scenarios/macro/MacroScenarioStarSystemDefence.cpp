@@ -25,25 +25,27 @@ MacroScenarioStarSystemDefence::MacroScenarioStarSystemDefence()
 MacroScenarioStarSystemDefence::~MacroScenarioStarSystemDefence() 
 {}
 
-void MacroScenarioStarSystemDefence::UpdateInStatic(Npc* _npc) const
+void MacroScenarioStarSystemDefence::UpdateInStatic(Npc* npc) const
 {
-	if ( _npc->GetStarSystem() != _npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetStarSystem() )
+	if ( npc->GetStarSystem() != npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetStarSystem() )
 	{
-		if (_npc->GetStateMachine()->GetMicroTaskManager()->GetTarget()->GetStarSystem() != _npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetStarSystem())
+		if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetStarSystem() != npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetStarSystem())
 		{
-			_npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_JUMP, _npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetStarSystem());
+			MicroTask* microtask = new MicroTask(npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetStarSystem(), MICROSCENARIO::JUMP_ID);
+			npc->GetStateMachine()->SetCurrentMicroTask(microtask);
 		}
 	}
 	else
 	{
-		if ( (_npc->GetStateMachine()->GetMicroTaskManager()->GetScenario() == NULL) or (_npc->GetStateMachine()->GetMicroTaskManager()->GetScenario() != MICROSCENARIO_DESTROY) )
+		if ( (npc->GetStateMachine()->GetMicroTaskManager()->GetScenario() == NULL) or (npc->GetStateMachine()->GetMicroTaskManager()->GetScenario()->GetTypeId() != MICROSCENARIO::DESTROY_ID) )
 		{
-            		_npc->GetObservation()->FindVisibleNpcsInSpaceInStatic();
+            		npc->GetObservation()->FindVisibleNpcsInSpaceInStatic();
             	
-            		Npc* _target_npc = _npc->GetObservation()->GetClosestNpc(&RACES_GOOD_LIST);
-            		if (_target_npc != NULL)
+            		Npc* _targetnpc = npc->GetObservation()->GetClosestNpc(&RACES_GOOD_LIST);
+            		if (_targetnpc != NULL)
             		{
-				_npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_DESTROY, _target_npc);
+            			MicroTask* microtask = new MicroTask(_targetnpc, MICROSCENARIO::DESTROY_ID);
+				npc->GetStateMachine()->SetCurrentMicroTask(microtask);
 			}
 			else
 			{
@@ -53,7 +55,7 @@ void MacroScenarioStarSystemDefence::UpdateInStatic(Npc* _npc) const
 	}
 }
 
-std::string MacroScenarioStarSystemDefence::GetDescription(Npc* _npc) const
+std::string MacroScenarioStarSystemDefence::GetDescription(Npc* npc) const
 {
-	return "MacroScenarioStarSystemDefence: ss_id = " + int2str(_npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetId());
+	return "MacroScenarioStarSystemDefence: ss_id = " + int2str(npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetId());
 }

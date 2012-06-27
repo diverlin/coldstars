@@ -21,22 +21,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define MACROTASK_H
 
 
-class MacroTask
+class MacroTask : public BaseTask
 {
 	public:
 		MacroTask(BaseGameEntity*, int, int reward = 0, int expiriance = 0);
 		~MacroTask();
 		
-		int GetScenarioTypeId() const { return action_id; };
-		BaseGameEntity* GetTarget() const { return target; };
+		void SetResult(int result)  { this->result = result; }
 				
-	protected:
-		int reward;
-		int expiriance;
-		
-		int action_id;
+		int GetResult() const { return result; };
 				
-		BaseGameEntity* target;	
+	private:
+		int result;
+
 };
 
 

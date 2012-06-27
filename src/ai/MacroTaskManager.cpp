@@ -20,28 +20,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 MacroTaskManager::MacroTaskManager()
 {
-	result = NONE_ID;
-	
 	macrotask = NULL;
 	scenario  = NULL;
 }
 
 MacroTaskManager::~MacroTaskManager()
-{}
-
-void MacroTaskManager::Set(MacroTask* macrotask)
 {
-	this->scenario = ScenarioCollector::Instance().GetScenario(macrotask->GetScenarioTypeId());
+	delete macrotask;
+}
+
+void MacroTaskManager::SetMacroTask(MacroTask* macrotask)
+{
 	this->macrotask = macrotask;
-
-	result = NONE_ID;
+	this->scenario = ScenarioCollector::Instance().GetScenario(macrotask->GetScenarioTypeId());
 }
 
-
-void MacroTaskManager::Reset()
+void MacroTaskManager::DeleteMacroTaskAndReset()
 {
-	scenario  = NULL;
+	delete macrotask;
 	macrotask = NULL;
-}
-
+	scenario  = NULL;
+}	
 

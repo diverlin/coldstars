@@ -84,7 +84,9 @@ class Player : public Base
      		//	
   		
      		void RunSession(const TurnTimer&); 
-                
+    		
+    		void ForceStateMachineReset() const;
+    		                
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();

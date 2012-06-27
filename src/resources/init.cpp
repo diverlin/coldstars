@@ -43,14 +43,13 @@ void init()
 	/* create Macro Scenaries */
 	ScenarioCollector::Instance().RegisterScenario(new MacroScenarioStarSystemLiberation());
 	ScenarioCollector::Instance().RegisterScenario(new MacroScenarioStarSystemDefence());
-	//MACROSCENARIO_SELFSAFETY           = new MacroScenarioSelfSafety();	 	   // make as singlenton
+	ScenarioCollector::Instance().RegisterScenario(new MacroScenarioSelfSafety()); 	 	   // make as singlenton
 	
 	/* create Micro Scenaries */
-	MICROSCENARIO_DOCKING = new MicroScenarioDocking();    	 // make as singlenton
-	MICROSCENARIO_LAUNCHING = new MicroScenarioLaunching();    	 // make as singlenton
-	MICROSCENARIO_JUMP    = new MicroScenarioJump();       	 // make as singlenton
-	MICROSCENARIO_DESTROY = new MicroScenarioDestroy();	 // make as singlenton
-	//g_STATE_EXPLORE = new StateExplore();	 	 // make as singlenton
+	ScenarioCollector::Instance().RegisterScenario(new MicroScenarioDocking());
+	ScenarioCollector::Instance().RegisterScenario(new MicroScenarioLaunching());
+	ScenarioCollector::Instance().RegisterScenario(new MicroScenarioJump());
+	ScenarioCollector::Instance().RegisterScenario(new MicroScenarioDestroy());
 	
 	/* create AI models */
  	AIMODEL_RANGER    = new AiModelRanger();     // make as singlenton

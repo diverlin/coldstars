@@ -34,26 +34,26 @@ void MicroScenarioDestroy::UpdateInStatic(Npc* npc) const
 {
 	if (npc->GetStateMachine()->GetMicroTaskManager()->GetScenario() != NULL)
 	{
-		if ( (npc->GetStateMachine()->GetMicroTaskManager()->GetTarget()->GetAlive() == true) or ( npc->GetStarSystem() == npc->GetStateMachine()->GetMicroTaskManager()->GetTarget()->GetStarSystem()) )
+		if ( (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetAlive() == true) or ( npc->GetStarSystem() == npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetStarSystem()) )
 		{
 			npc->GetVehicle()->GetWeaponComplex()->ActivateAllWeapons();
-			//npc->GetVehicle()->GetWeaponComplex()->SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetTarget()->GetNpc()->GetVehicle());
-                        //npc->GetVehicle()->GetDriveComplex()->SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetTarget()->GetNpc()->GetVehicle(), FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID ); 
+			//npc->GetVehicle()->GetWeaponComplex()->SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetNpc()->GetVehicle());
+                        //npc->GetVehicle()->GetDriveComplex()->SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetNpc()->GetVehicle(), FOLLOWING_MIDDLE_NAVIGATOR_ACTION_ID ); 
 		}
 	}
 }
 
 void MicroScenarioDestroy::UpdateInDynamic(Npc* npc) const
 {
-	if (npc->GetStateMachine()->GetMicroTaskManager()->GetTarget()->GetAlive() == false)
-	{
-		npc->GetStateMachine()->GetMicroTaskManager()->SetResult(SUCCESS_ID);
-	}
+	//if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetAlive() == false)
+	//{
+		//npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->SetResult(SUCCESS_ID);
+	//}
 	
-	if (npc->GetStarSystem() != npc->GetStateMachine()->GetMicroTaskManager()->GetTarget()->GetStarSystem())
-	{
-		npc->GetStateMachine()->GetMicroTaskManager()->SetResult(FAIL_ID);
-	}
+	//if (npc->GetStarSystem() != npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetStarSystem())
+	//{
+		//npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->SetResult(FAIL_ID);
+	//}
 	
 }
 
@@ -65,5 +65,5 @@ void MicroScenarioDestroy::Exit(Npc* npc) const
 
 std::string MicroScenarioDestroy::GetDescription(Npc* npc) const
 {
-	return "DESTROY to ob_id" + int2str( npc->GetStateMachine()->GetMicroTaskManager()->GetTarget()->GetId()) ;
+	return "DESTROY to ob_id" + int2str( npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetId()) ;
 }

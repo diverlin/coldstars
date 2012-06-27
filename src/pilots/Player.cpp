@@ -846,7 +846,8 @@ bool Player::MouseInteractionWithSpaceStations(int mxvp, int myvp, bool mlb, boo
                    			}
                    			else
                    			{
-                   				npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_DOCKING, visible_SPACESTATION_vec[i]);
+                   				MicroTask* microtask = new MicroTask(visible_SPACESTATION_vec[i], MICROSCENARIO::DOCKING_ID);
+                   				npc->GetStateMachine()->SetCurrentMicroTask(microtask);
                    			}
 				}
 
@@ -894,7 +895,8 @@ bool Player::MouseInteractionWithPlanets(int mxvp, int myvp, bool mlb, bool mrb)
                 		{
                     			//pPLAYER->GetVehicle()->getNavigator()->SetTarget(visible_PLANET_vec[pi], DOCKING_NAVIGATOR_ACTION_ID);
                     			//pPLAYER->GetVehicle()->getNavigator()->Update_inSpace_inStatic();  
-                    			npc->GetStateMachine()->SetCurrentMicroTask(MICROSCENARIO_DOCKING, visible_PLANET_vec[i]);
+               				MicroTask* microtask = new MicroTask(visible_PLANET_vec[i], MICROSCENARIO::DOCKING_ID);
+                    			npc->GetStateMachine()->SetCurrentMicroTask(microtask);
                 		}   
 			}
 				
@@ -927,8 +929,8 @@ void Player::MouseNavigation(int mxvp, int myvp, bool mlb, bool mrb) const
 	{
        		if (mlb == true)
        		{
+      			ForceStateMachineReset();
        			npc->GetVehicle()->GetDriveComplex()->SetStaticTargetCoords(vec2f(mxvp, myvp));  
-      			npc->GetStateMachine()->ForceReset();
       		}
       	}
 }
@@ -1069,6 +1071,11 @@ void Player::RunSession(const TurnTimer& turn_timer)
        	}        	
        	
        	screen->Display();
+}
+
+void Player::ForceStateMachineReset() const
+{
+	npc->GetStateMachine()->ForceReset();
 }     		
 
 void Player::SaveData(boost::property_tree::ptree& save_ptree) const
