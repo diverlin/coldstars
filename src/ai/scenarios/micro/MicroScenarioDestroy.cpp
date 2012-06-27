@@ -18,7 +18,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 MicroScenarioDestroy::MicroScenarioDestroy()
-{}
+{
+	type_id = MICROSCENARIO::DESTROY_ID;
+}
 
 MicroScenarioDestroy::~MicroScenarioDestroy()
 {}

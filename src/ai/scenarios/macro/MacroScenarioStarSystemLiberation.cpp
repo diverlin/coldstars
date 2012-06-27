@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 MacroScenarioStarSystemLiberation::MacroScenarioStarSystemLiberation() 
 {
-	type_id = TASK::STARSYSTEMLIBERATION_ID;
+	type_id = MACROSCENARIO::STARSYSTEMLIBERATION_ID;
 }
 
 MacroScenarioStarSystemLiberation::~MacroScenarioStarSystemLiberation() 
