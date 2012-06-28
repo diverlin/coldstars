@@ -18,34 +18,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-#ifndef GUIKOSMOPORT_H
-#define GUIKOSMOPORT_H
+#ifndef GUIANGAR_H
+#define GUIANGAR_H
 
 
-class GuiKosmoport
+class GuiAngar
 {
     	public:
-       		GuiKosmoport(Player*);
-       		~GuiKosmoport();
-
-		int GetActiveScreenId() const { return active_screen_id; };
+       		GuiAngar(Player*);
+       		~GuiAngar();
 		
-       		void UpdateMouseInteraction();
-                void Render() const;
-                
+       		void UpdateMouseInteraction(int, int, int);
+
+       		void RenderInternal() const;
+       		void RenderInfo() const;                
+       	
        	private:
-       		int active_screen_id; 
-       		
-       		Player* player;
+      		Player* player;
        		
        		std::vector<Button*> button_vec;
-       		
-       		GuiAngar* gui_angar;
                 
                 void ResetInfoFlags();
 
-       		void RenderInternal() const;
-       		void RenderInfo() const;
+
 };
 
 

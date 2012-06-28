@@ -74,8 +74,17 @@ void StateMachine::SetCurrentMicroTask(MicroTask* microtask)
 
 void StateMachine::ForceReset() const
 {
-	macrotask_manager->DeleteMacroTaskAndReset();
-	microtask_manager->DeleteMicroTaskAndReset();
+	if (microtask_manager->GetScenario() != NULL)
+	{
+		microtask_manager->GetScenario()->Exit(npc_owner);
+		microtask_manager->DeleteMicroTaskAndReset();
+	}
+
+	if (macrotask_manager->GetScenario() != NULL)
+	{	
+		macrotask_manager->GetScenario()->Exit(npc_owner);
+		macrotask_manager->DeleteMacroTaskAndReset();
+	}
 }
 
 

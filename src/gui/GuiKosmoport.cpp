@@ -22,205 +22,150 @@ GuiKosmoport::GuiKosmoport(Player* player)
 {
 	this->player = player;
 	
+	gui_angar = new GuiAngar(player);
+	
 	int screen_w = Config::Instance().SCREEN_WIDTH;
 	int screen_h = Config::Instance().SCREEN_HEIGHT;
 	
         TextureOb* texOb_button = g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_green; // fake
 
-    	angar_screen_button     = new Button(texOb_button, 
+    	Button* angar_screen_button     = new Button(texOb_button, 
     					     GUI::SCREEN::ANGAR_ID,
     					     screen_w - 1 * (GUI::ICON_SIZE + 5), 
     					     GUI::ICON_SIZE, 
     					     GUI::ICON_SIZE,  
     					     GUI::ICON_SIZE, 
     					     "angar");    					     
-    	button_common_pList.push_back(angar_screen_button);
+    	button_vec.push_back(angar_screen_button);
     	
-    	store_screen_button     = new Button(texOb_button, 
+    	Button* store_screen_button     = new Button(texOb_button, 
     					     GUI::SCREEN::STORE_ID,
     					     screen_w - 2 * (GUI::ICON_SIZE + 5),
     					     GUI::ICON_SIZE, 
     					     GUI::ICON_SIZE,  
     					     GUI::ICON_SIZE, 
     					     "store");
-	button_common_pList.push_back(store_screen_button);
+	button_vec.push_back(store_screen_button);
     					        	
-    	shop_screen_button      = new Button(texOb_button, 
+    	Button* shop_screen_button      = new Button(texOb_button, 
     					     GUI::SCREEN::SHOP_ID,
     					     screen_w - 3 * (GUI::ICON_SIZE + 5), 
     					     GUI::ICON_SIZE, 
     					     GUI::ICON_SIZE,  
     					     GUI::ICON_SIZE, 
     					     "shop");
-    	button_common_pList.push_back(shop_screen_button);
+    	button_vec.push_back(shop_screen_button);
     					     
-    	galaxymap_screen_button = new Button(texOb_button, 
+    	Button* galaxymap_screen_button = new Button(texOb_button, 
     					     GUI::SCREEN::GALAXYMAP_ID,
     					     screen_w - 4 * (GUI::ICON_SIZE + 5), 
     					     GUI::ICON_SIZE, 
     					     GUI::ICON_SIZE,  
     					     GUI::ICON_SIZE, 
     					     "galaxymap");
-        button_common_pList.push_back(galaxymap_screen_button);
+        button_vec.push_back(galaxymap_screen_button);
     					     
-    	goverment_screen_button = new Button(texOb_button, 
+    	Button* goverment_screen_button = new Button(texOb_button, 
     					     GUI::SCREEN::GOVERMENT_ID,
     					     screen_w - 5 * (GUI::ICON_SIZE + 5), 
     					     GUI::ICON_SIZE,
     					     GUI::ICON_SIZE,  
     					     GUI::ICON_SIZE, 
     					     "goverment");
-    	button_common_pList.push_back(goverment_screen_button);
-
-    	repair_button = new Button(texOb_button, 
-    	    			   GUI::BUTTON::GETREPAIR_ID,
-    				   screen_w - 1 * (GUI::ICON_SIZE + 5),
-    				   screen_h - 2*GUI::ICON_SIZE, 
-    				   GUI::ICON_SIZE,  
-    				   GUI::ICON_SIZE, 
-    				   "buy_repair");
-    	button_angar_pList.push_back(repair_button);
-    				   
-    	fuel_button   = new Button(texOb_button,
-    	 			   GUI::BUTTON::GETFUEL_ID,
-    	 			   screen_w - 1 * (GUI::ICON_SIZE + 5),
-    	 			   screen_h - 3*GUI::ICON_SIZE, 
-    	 			   GUI::ICON_SIZE,  
-    	 			   GUI::ICON_SIZE, 
-    	 			   "buy fuel");  
-    	button_angar_pList.push_back(fuel_button);
-    	 			   
-    	launch_button = new Button(texOb_button, 
-    				   GUI::BUTTON::GETLAUNCH_ID,
-    				   screen_w - 1 * (GUI::ICON_SIZE + 5), 
-    				   screen_h - 4*GUI::ICON_SIZE, 
-    				   GUI::ICON_SIZE,  
-    				   GUI::ICON_SIZE, 
-    				   "launch");
-    	button_angar_pList.push_back(launch_button);
+    	button_vec.push_back(goverment_screen_button);
 
 	active_screen_id = GUI::SCREEN::ANGAR_ID;
 }
 
 
 GuiKosmoport::~GuiKosmoport()
-{}
+{
+	for (unsigned int i = 0; i< button_vec.size(); i++)
+	{
+       		delete button_vec[i];
+        }
+        
+        delete gui_angar;
+}
 	
 void GuiKosmoport::ResetInfoFlags()
 {
-    	for (unsigned int i = 0; i< button_common_pList.size(); i++)
+    	for (unsigned int i = 0; i< button_vec.size(); i++)
 	{
-       		button_common_pList[i]->setShowInfoFlag(false);
-        }
-        
-    	for (unsigned int i = 0; i< button_angar_pList.size(); i++)
-	{
-       		button_angar_pList[i]->setShowInfoFlag(false);
+       		button_vec[i]->setShowInfoFlag(false);
         }
 }
        			
 		
-void GuiKosmoport::MouseCheckInteraction()
+void GuiKosmoport::UpdateMouseInteraction()
 {
+      	this->ResetInfoFlags(); 
+      
      	int mxvp = player->GetCursor()->GetMousePos().x;
      	int myvp = player->GetScreen()->GetHeight() - player->GetCursor()->GetMousePos().y;         
-     	int lmb  = player->GetCursor()->GetMouseLeftButton();;
+     	int lmb  = player->GetCursor()->GetMouseLeftButton();
 
-    	for (unsigned int i = 0; i< button_common_pList.size(); i++)
+    	for (unsigned int i = 0; i< button_vec.size(); i++)
 	{
-       		if (button_common_pList[i]->CheckInteraction(mxvp, myvp) == true)
+       		if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
        		{
-       		        button_common_pList[i]->setShowInfoFlag(true);
+       		        button_vec[i]->setShowInfoFlag(true);
        			if (lmb == true)
        			{	
-       			   	active_screen_id = button_common_pList[i]->GetSubTypeId();       			   	
+       			   	active_screen_id = button_vec[i]->GetSubTypeId();
+       			   	return;       			   	
        			}
        			break;
        		}
         }
         
-
-     	if (active_screen_id == GUI::SCREEN::ANGAR_ID)
-    	{
-     		for (unsigned int i = 0; i< button_angar_pList.size(); i++)
-		{
-       			if (button_angar_pList[i]->CheckInteraction(mxvp, myvp) == true)
-       			{
-       		        	button_angar_pList[i]->setShowInfoFlag(true);
-       				if (lmb == true)
-       				{	
-		   			if (button_angar_pList[i]->GetSubTypeId() == GUI::BUTTON::GETREPAIR_ID)
-		   			{
-		   				player->GetNpc()->GetVehicle()->SetMaxArmor(); 
-		   			}
-		   			if (button_angar_pList[i]->GetSubTypeId() == GUI::BUTTON::GETFUEL_ID)
-		   			{
-		   		        	player->GetNpc()->GetVehicle()->SetMaxFuel();
-		   			}
-		   			if (button_angar_pList[i]->GetSubTypeId() == GUI::BUTTON::GETLAUNCH_ID)
-		   			{
-		   				MicroTask* microtask = new MicroTask(NULL, MICROSCENARIO::LAUNCHING_ID);
-       						player->GetNpc()->GetVehicle()->LaunchingEvent();
-       						player->GetNpc()->GetStateMachine()->SetCurrentMicroTask(microtask);
-       			   		}
-       				}
-       				break;
-       			}
+        switch(active_screen_id)
+        {
+        	case GUI::SCREEN::ANGAR_ID:
+        	{
+        		gui_angar->UpdateMouseInteraction(mxvp, myvp, lmb); 
+        		break;
         	}
-	}
-
+    	}
 }
 
 void GuiKosmoport::RenderInternal() const
-{
-   
-    	for (unsigned int i = 0; i< button_common_pList.size(); i++)
+{   
+    	for (unsigned int i = 0; i< button_vec.size(); i++)
 	{
-       		button_common_pList[i]->Render();
-        }
-
-    	if (active_screen_id == GUI::SCREEN::ANGAR_ID)
-    	{
-    		for (unsigned int i = 0; i< button_angar_pList.size(); i++)
-		{
-       			button_angar_pList[i]->Render();
+       		button_vec[i]->Render();
+        }    	
+        
+        switch(active_screen_id)
+        {
+        	case GUI::SCREEN::ANGAR_ID:
+        	{
+        		gui_angar->RenderInternal();
+        		break;
         	}
-    	} 
+    	}
 }
 
 void GuiKosmoport::RenderInfo() const
 {
-
-	for (unsigned int i = 0; i< button_common_pList.size(); i++)
+	for (unsigned int i = 0; i<button_vec.size(); i++)
 	{
-	    	if (button_common_pList[i]->getShowInfoFlag() == true)
+	    	if (button_vec[i]->getShowInfoFlag() == true)
 	    	{
-        		button_common_pList[i]->renderInfo();
+        		button_vec[i]->renderInfo();
+        		return; break;
+        	}
+        } 
+        
+        switch(active_screen_id)
+        {
+        	case GUI::SCREEN::ANGAR_ID:
+        	{
+        		gui_angar->RenderInfo();
         		break;
         	}
-        }       
-
-    	if (active_screen_id == GUI::SCREEN::ANGAR_ID)
-    	{
-    		for (unsigned int i = 0; i< button_angar_pList.size(); i++)
-		{
-		
-    			if (button_angar_pList[i]->getShowInfoFlag() == true)
-	    		{
-        			button_angar_pList[i]->renderInfo();
-        			break;
-        		}
-        	}
-    	} 
-        
+    	}      
 }
-
-void GuiKosmoport::Update()
-{
-        ResetInfoFlags(); 
-        MouseCheckInteraction(); 
-}
-                
                 
 void GuiKosmoport::Render() const
 {
@@ -228,6 +173,6 @@ void GuiKosmoport::Render() const
         
         enable_BLEND();   
                 RenderInternal(); 
-                RenderInfo();    
+                RenderInfo(); 
         disable_BLEND(); 
 }
