@@ -78,9 +78,6 @@ Player::Player(int id)
     	screen = new Screen();
     	
     	GUI_MANAGER    = new GuiManager(this);
- 	GUI_SPACE      = new GuiSpace(this);
- 	GUI_KOSMOPORT  = new GuiKosmoport(this);
-	GUI_MAP        = new GuiMap(this); 
     	
     	show_all_orbit     = false;
      	show_all_path      = false;
@@ -94,9 +91,6 @@ Player::~Player()
 	delete screen;
 	
 	delete GUI_MANAGER;
- 	delete GUI_SPACE;
- 	delete GUI_KOSMOPORT;
-	delete GUI_MAP;
 }  
             
 void Player::UpdateGlobal()
@@ -970,94 +964,15 @@ void Player::SessionInSpace(const TurnTimer& turn_timer)
 			MouseInteractionInSpace();  // improove to exclude all render calls
 		}
 	}
-
-	//////////// SCAN ///////////////
-	if (GetNpc()->GetScanTarget() != NULL )
-	{         
-		GUI_MANAGER->UpdateInSpace();
-		GUI_MANAGER->RenderInScan();                       
-	}
-
-	//////////// WORLDMAP ///////////
-	if (GetWorldMapShowFlag() == true )  
-	{
-		GUI_MAP->update();   
-		GUI_MAP->Render();   
-	}
-
-	GUI_SPACE->update();    
-	GUI_SPACE->Render();
+	
+	GUI_MANAGER->RunSession();   
 }
 
 
 void Player::SessionInKosmoport()
 {
 	cursor->UpdateMousePos();
-	
-	switch(GUI_KOSMOPORT->GetActiveScreenId())
-        {
-        	case GUI::SCREEN::ANGAR_ID:
-        	{
-        		((Kosmoport*)npc->GetLand())->GetAngar()->MouseControl(this);                                
-               		((Kosmoport*)npc->GetLand())->GetAngar()->Render(this);
-
-			if (npc->GetScanTarget() != NULL) 
-			{ 
-				GUI_MANAGER->UpdateInAngar();
-				GUI_MANAGER->RenderInScan(); 
-			}
-			else
-			{
-				((Kosmoport*)npc->GetLand())->GetAngar()->RenderItemInfo(this);
-			}
-			
-			break;
-		}
-		
-		case GUI::SCREEN::STORE_ID:
-        	{
-        		//if (npc->GetScanTarget() != npc->GetVehicle())
-        		{
-        			GetNpc()->SetScanTarget(npc->GetVehicle());
-        		}
-                                    
-        		GUI_MANAGER->UpdateInStore();
-                	GUI_MANAGER->RenderInStore(); 
-		
-			GetNpc()->ResetScanTarget();
-		
-			break;
-		}
-
-        	case GUI::SCREEN::SHOP_ID:
-        	{
-        		((Kosmoport*)npc->GetLand())->GetShop()->Update();
-                	((Kosmoport*)npc->GetLand())->GetShop()->Render(this);
-		
-			break;
-		}
-
-        	case GUI::SCREEN::GALAXYMAP_ID:
-        	{
-        		clearScreen();
-        		GUI_MAP->update();
-                	GUI_MAP->Render();   
-         	
-         		break;
-         	}
-
-         	case GUI::SCREEN::GOVERMENT_ID:
-         	{
-         		((Kosmoport*)npc->GetLand())->GetGoverment()->Update();
-                	((Kosmoport*)npc->GetLand())->GetGoverment()->Render(this);
-         	
-         		break;
-         	}
-	}
-	
-        GUI_KOSMOPORT->UpdateMouseInteraction(); 
-        GUI_KOSMOPORT->Render(); 
-         
+	GUI_MANAGER->RunSession();        
 }
 
 void Player::RunSession(const TurnTimer& turn_timer)

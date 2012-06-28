@@ -126,9 +126,6 @@ class Player : public Base
     		UnresolvedDataUniquePlayer data_unresolved_player;
     		
     		GuiManager*   GUI_MANAGER;    
- 		GuiSpace*     GUI_SPACE;      
- 		GuiKosmoport* GUI_KOSMOPORT;  
-		GuiMap*       GUI_MAP;         
     		
     		void Render(bool, bool, bool); 
      			void RenderEntities_NEW();

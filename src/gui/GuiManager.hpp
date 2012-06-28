@@ -26,13 +26,7 @@ class GuiManager
       		GuiManager(Player*);
       		~GuiManager();
 
-		void UpdateInAngar();
-     		void UpdateInStore();
-     		void UpdateInSpace();
-     		
-     		void RenderInStore() const;
-     		void RenderInScan() const;  		
-
+		void RunSession();
       		
       	private:
       		Player* player;
@@ -40,8 +34,18 @@ class GuiManager
       		GuiVehicle* gui_vehicle;
       		GuiSkill*   gui_skill;
       		GuiStore*   gui_store;
+      		GuiKosmoport* gui_kosmoport;
+      		GuiSpace*     gui_space;      
+		GuiMap*       gui_map;    
 
      		void UpdateInScan(bool allow_full_control = false);
+
+		void UpdateInAngar();
+     		void UpdateInStore();
+     		void UpdateInSpace();
+     		
+     		void RenderInStore() const;
+     		void RenderInScan() const;  	
 };
 
 
