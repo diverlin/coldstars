@@ -68,7 +68,7 @@ class ScenarioCollector;
 #include "src/common/GameDate.hpp"
 #include "src/common/TurnTimer.hpp"
 
-
+#include "src/common/Logger.hpp"
 #include "src/common/myStr.hpp"
 
 #include "src/render/Screen.hpp"
@@ -264,6 +264,7 @@ class ScenarioCollector;
 
 #include "src/gui/button.hpp"
 #include "src/gui/guiSpace.hpp"
+#include "src/gui/GuiAngar.hpp"
 #include "src/gui/GuiKosmoport.hpp"
 #include "src/gui/GuiVehicle.hpp"
 #include "src/gui/guiSkill.hpp"
@@ -363,6 +364,7 @@ class ScenarioCollector;
 
 #include "src/gui/button.cpp"
 #include "src/gui/guiSpace.cpp"
+#include "src/gui/GuiAngar.cpp"
 #include "src/gui/GuiKosmoport.cpp"
 #include "src/gui/GuiStore.cpp"
 #include "src/gui/GuiManager.cpp"
@@ -490,4 +492,5 @@ class ScenarioCollector;
 #include "src/builder/items/module/RadarModuleBuilder.cpp"
 
 #include "src/builder/items/other/BombBuilder.cpp"
+#include "src/common/Logger.cpp"
 ////////////////////////////////////////////

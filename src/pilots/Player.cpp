@@ -1055,7 +1055,7 @@ void Player::SessionInKosmoport()
          	}
 	}
 	
-        GUI_KOSMOPORT->Update(); 
+        GUI_KOSMOPORT->UpdateMouseInteraction(); 
         GUI_KOSMOPORT->Render(); 
          
 }

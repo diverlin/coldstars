@@ -28,7 +28,7 @@ MicroScenarioGrab::~MicroScenarioGrab()
 		
 void MicroScenarioGrab::Enter(Npc* npc) const
 {	
-	printf("npc_id = %i, STARTS MicroScenarioGrab item id = %i\n", npc->GetId(), npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetId());
+	printf("npc_id = %i, ENTER MicroScenarioGrab item id = %i\n", npc->GetId(), npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetId()); 
 }
 
 void MicroScenarioGrab::UpdateInStatic(Npc* npc) const

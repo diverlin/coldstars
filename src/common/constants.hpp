@@ -15,10 +15,13 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
+
 #ifndef CONSTANTS_HPP
 #define CONSTANTS_HPP
 
 #include <string>
+
+#define LOG_ENABLED 0
 
 const std::string GAME_TITLE = "cold star V0.0.4.51 (SFML/C++)";
 
@@ -27,6 +30,10 @@ const int TURN_TIME = 150;  //turn time, depends on game fps
 
 const int VISIBLE_DISTANCE_WITHOUT_RADAR = 200;
 
+namespace LOG
+{
+	enum { TOSCREEN, TOFILE, TOSCREENTOFILE };
+}
 
 // trigonomerty
 const float PI = 3.141592653589797;
