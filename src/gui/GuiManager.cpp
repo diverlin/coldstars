@@ -46,25 +46,35 @@ GuiManager :: ~GuiManager()
 	delete gui_map;
 }
 
-bool GuiManager::CheckInteractionAccessToScanVehicle(Vehicle* vehicle, bool allow_full_control)
+bool GuiManager::UpdateMouseInteractionWithScanVehicle(int mxvp, int myvp, int lmb, int rmb, Vehicle* scan_vehicle, bool allow_full_control)
 {
 	if (allow_full_control == false)
 	{
-        	if (vehicle->GetId() == player->GetNpc()->GetVehicle()->GetId())
+        	if (scan_vehicle->GetId() == player->GetNpc()->GetVehicle()->GetId())
     		{
         		allow_full_control = true;  
         	    	// modify full control for friend ships         
         	}
         }
-        
-        return allow_full_control;
+
+	bool interaction = false;        
+	if (allow_full_control == true)
+	{
+		interaction = gui_vehicle->UpdateMouseInteraction(mxvp, myvp, lmb, rmb, scan_vehicle);
+		if (scan_vehicle->GetOwnerNpc() != NULL)
+		{
+			interaction = gui_skill->UpdateMouseInteraction(mxvp, myvp, lmb, rmb, scan_vehicle->GetOwnerNpc()->GetSkill());
+		}
+	}
+	
+	return interaction;
 }
 
 void GuiManager::RenderScanVehicle(Vehicle* vehicle) const
 {
-	resetRenderTransformation();
-	enable_BLEND();
-		gui_vehicle->RenderVehicle(vehicle);
+        resetRenderTransformation();
+        enable_BLEND();   
+        	gui_vehicle->RenderVehicle(vehicle);
 		if (vehicle->GetOwnerNpc() != NULL)
 		{
 			gui_skill->Render();
@@ -96,13 +106,7 @@ void GuiManager::RunSession()
 			Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget(); 
 			if (scan_vehicle != NULL )
 			{
-				bool allow_full_control = CheckInteractionAccessToScanVehicle(scan_vehicle);
-				if (allow_full_control == true)
-				{
-					gui_vehicle->UpdateMouseInteraction(mxvp, myvp, lmb, rmb, scan_vehicle);
-					gui_skill->update();
-				}
-	
+				UpdateMouseInteractionWithScanVehicle(mxvp, myvp, lmb, rmb, scan_vehicle);
 				RenderScanVehicle(scan_vehicle);     
 					                 
 			}
@@ -136,12 +140,7 @@ void GuiManager::RunSession()
 					    	{
 							if (scan_vehicle != NULL) 
 							{ 
-								bool allow_full_control = CheckInteractionAccessToScanVehicle(scan_vehicle);
-								if (allow_full_control == true)
-								{
-									gui_vehicle->UpdateMouseInteraction(mxvp, myvp, lmb, rmb, scan_vehicle);
-									gui_skill->update();
-								}
+								UpdateMouseInteractionWithScanVehicle(mxvp, myvp, lmb, rmb, scan_vehicle);
 							}					    	
 					    	} 
 			        	}

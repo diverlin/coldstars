@@ -39,7 +39,7 @@ class GuiManager
       		GuiSpace*     	gui_space;      
 		GuiMap*       	gui_map;    
 
-     		bool CheckInteractionAccessToScanVehicle(Vehicle*, bool allow_full_control = false);     		
+     		bool UpdateMouseInteractionWithScanVehicle(int, int, int, int, Vehicle*, bool allow_full_control = false);     		
      		void RenderScanVehicle(Vehicle*) const;  	
 };
 

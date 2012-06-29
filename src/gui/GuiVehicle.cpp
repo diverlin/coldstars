@@ -27,7 +27,7 @@ GuiVehicle :: ~GuiVehicle()
 {}
 
 
-void GuiVehicle::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb, Vehicle* vehicle, Store* store)
+bool GuiVehicle::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb, Vehicle* vehicle, Store* store)
 {
 	for(unsigned int i = 0; i < vehicle->slot_total_vec.size(); i++)
 	{ 
@@ -47,6 +47,8 @@ void GuiVehicle::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb, Ve
 					player->GetCursor()->GetItemSlot()->SwapItemWith(vehicle->slot_total_vec[i]);     
 				}
 			} 
+			
+			return true;
        		}        	
         }         
                         
@@ -60,8 +62,12 @@ void GuiVehicle::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb, Ve
 			{
 				player->GetCursor()->GetItemSlot()->DropItemToSpace(player->GetNpc()->GetVehicle());	
 			}
+			
+			return true;
 		}
 	}
+	
+	return false;
 }
 
 

@@ -18,24 +18,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-GuiSkill :: GuiSkill(Player* player)
+GuiSkill::GuiSkill(Player* player)
 {
 	this->player = player;
 	
-	createControlSkillButtons();
-}
-
-GuiSkill :: ~GuiSkill()
-{
-	for (unsigned int i = 0; i < button_vec.size(); i++)
-	{
-		delete button_vec[i];
-	}
-}
-
-
-void GuiSkill :: createControlSkillButtons()
-{
      	int x = 10;  //self.korpus.kontur_rect.right
      	int y = 50;  //self.korpus.kontur_rect.centery
      	int w = 20;  //skill_w
@@ -74,15 +60,17 @@ void GuiSkill :: createControlSkillButtons()
         button_vec.push_back(Decrement_diplomat_button);     
 }
 
-void GuiSkill :: update()
+GuiSkill::~GuiSkill()
 {
-	int mxvp = player->GetCursor()->GetMousePos().x;
-     	int myvp = player->GetScreen()->GetHeight()  - player->GetCursor()->GetMousePos().y;         
-     	int lmb  = player->GetCursor()->GetMouseLeftButton();;
-
-	Skill* skill = player->GetNpc()->GetSkill();
-
 	for (unsigned int i = 0; i < button_vec.size(); i++)
+	{
+		delete button_vec[i];
+	}
+}
+
+bool GuiSkill::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb, Skill* skill)
+{
+	for (unsigned int i=0; i<button_vec.size(); i++)
 	{
 		if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
 		{
@@ -109,12 +97,14 @@ void GuiSkill :: update()
         	        		case GUI::BUTTON::SKILL::DECREMENT_DIPLOMAT_ID: { skill->DecrementDiplomat(); break; }        
            	        	}  		   	
            		}
+		
+			return true;
 		}
 	}
 }
 
 
-void GuiSkill :: Render() const
+void GuiSkill::Render() const
 {
 	Skill* skill = player->GetNpc()->GetScanTarget()->GetOwnerNpc()->GetSkill();
      	TextureOb* texOb_skill = g_UNIQUE_TEXTURE_COLLECTOR.texOb_skill;
