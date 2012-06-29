@@ -30,8 +30,10 @@ class GuiKosmoport
 
 		int GetActiveScreenId() const { return active_screen_id; };
 		
-       		void UpdateMouseInteraction();
-                void Render() const;
+       		bool UpdateMouseInteraction(int, int, int, int);
+       		
+       		void RenderButtons() const;
+       		void RenderButtonInfo(int, int) const;
                 
        	private:
        		int active_screen_id; 
@@ -39,13 +41,6 @@ class GuiKosmoport
        		Player* player;
        		
        		std::vector<Button*> button_vec;
-       		
-       		GuiAngar* gui_angar;
-                
-                void ResetInfoFlags();
-
-       		void RenderInternal() const;
-       		void RenderInfo() const;
 };
 
 

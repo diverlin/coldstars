@@ -21,9 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 GuiKosmoport::GuiKosmoport(Player* player)
 {
 	this->player = player;
-	
-	gui_angar = new GuiAngar(player);
-	
+	      	
 	int screen_w = Config::Instance().SCREEN_WIDTH;
 	int screen_h = Config::Instance().SCREEN_HEIGHT;
 	
@@ -84,27 +82,10 @@ GuiKosmoport::~GuiKosmoport()
 	{
        		delete button_vec[i];
         }
-        
-        delete gui_angar;
 }
-	
-void GuiKosmoport::ResetInfoFlags()
-{
-    	for (unsigned int i = 0; i< button_vec.size(); i++)
-	{
-       		button_vec[i]->setShowInfoFlag(false);
-        }
-}
-       			
 		
-void GuiKosmoport::UpdateMouseInteraction()
+bool GuiKosmoport::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb)
 {
-      	this->ResetInfoFlags(); 
-      
-     	int mxvp = player->GetCursor()->GetMousePos().x;
-     	int myvp = player->GetScreen()->GetHeight() - player->GetCursor()->GetMousePos().y;         
-     	int lmb  = player->GetCursor()->GetMouseLeftButton();
-
     	for (unsigned int i = 0; i< button_vec.size(); i++)
 	{
        		if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
@@ -113,66 +94,32 @@ void GuiKosmoport::UpdateMouseInteraction()
        			if (lmb == true)
        			{	
        			   	active_screen_id = button_vec[i]->GetSubTypeId();
-       			   	return;       			   	
+       			   	return true;       			   	
        			}
        			break;
        		}
         }
         
-        switch(active_screen_id)
-        {
-        	case GUI::SCREEN::ANGAR_ID:
-        	{
-        		gui_angar->UpdateMouseInteraction(mxvp, myvp, lmb); 
-        		break;
-        	}
-    	}
+        return false;
 }
 
-void GuiKosmoport::RenderInternal() const
+void GuiKosmoport::RenderButtons() const
 {   
     	for (unsigned int i = 0; i< button_vec.size(); i++)
 	{
        		button_vec[i]->Render();
         }    	
-        
-        switch(active_screen_id)
-        {
-        	case GUI::SCREEN::ANGAR_ID:
-        	{
-        		gui_angar->RenderInternal();
-        		break;
-        	}
-    	}
 }
 
-void GuiKosmoport::RenderInfo() const
+void GuiKosmoport::RenderButtonInfo(int mxvp, int myvp) const
 {
 	for (unsigned int i = 0; i<button_vec.size(); i++)
 	{
-	    	if (button_vec[i]->getShowInfoFlag() == true)
-	    	{
+       		if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
+       		{
         		button_vec[i]->renderInfo();
         		return; break;
         	}
         } 
-        
-        switch(active_screen_id)
-        {
-        	case GUI::SCREEN::ANGAR_ID:
-        	{
-        		gui_angar->RenderInfo();
-        		break;
-        	}
-    	}      
 }
                 
-void GuiKosmoport::Render() const
-{
-        resetRenderTransformation();
-        
-        enable_BLEND();   
-                RenderInternal(); 
-                RenderInfo(); 
-        disable_BLEND(); 
-}

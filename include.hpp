@@ -265,10 +265,10 @@ class ScenarioCollector;
 #include "src/gui/button.hpp"
 #include "src/gui/guiSpace.hpp"
 #include "src/gui/GuiAngar.hpp"
+#include "src/gui/GuiStore.hpp"
 #include "src/gui/GuiKosmoport.hpp"
 #include "src/gui/GuiVehicle.hpp"
 #include "src/gui/guiSkill.hpp"
-#include "src/gui/GuiStore.hpp"
 #include "src/gui/GuiManager.hpp"
 
 #include "src/world/garbageEffects.hpp"  

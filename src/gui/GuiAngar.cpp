@@ -59,18 +59,21 @@ GuiAngar::GuiAngar(Player* player)
 GuiAngar::~GuiAngar()
 {}
 	
-void GuiAngar::ResetInfoFlags()
-{     
-    	for (unsigned int i = 0; i< button_vec.size(); i++)
+	
+bool GuiAngar::UpdateMouseInteraction(Angar* angar, int mxvp, int myvp, int lmb, int rmb)
+{    	   	
+	bool interaction = UpdateMouseButtonsInteraction(mxvp, myvp, lmb, rmb);
+	if (interaction == false)
 	{
-       		button_vec[i]->setShowInfoFlag(false);
-        }
-}       	
-		
-void GuiAngar::UpdateMouseInteraction(int mxvp, int myvp, int lmb)
-{
-	ResetInfoFlags();
+		interaction = UpdateMouseVehicleSlotsInteraction(angar, mxvp, myvp, lmb, rmb);
+	}
+	
+	return interaction;
+	
+}
 
+bool GuiAngar::UpdateMouseButtonsInteraction(int mxvp, int myvp, int lmb, int rmb)            
+{
 	for (unsigned int i = 0; i< button_vec.size(); i++)
 	{
        		if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
@@ -83,19 +86,19 @@ void GuiAngar::UpdateMouseInteraction(int mxvp, int myvp, int lmb)
 	   				case GUI::BUTTON::GETREPAIR_ID: 
 	   				{
 	   					player->GetNpc()->GetVehicle()->SetMaxArmor(); 
-	   					return; break;
+	   					return true; break;
 	   				}
 	   				case GUI::BUTTON::GETFUEL_ID:
 	   				{
 	   		        		player->GetNpc()->GetVehicle()->SetMaxFuel();
-	   					return; break;
+	   					return true; break;
 	   				}
 	   				case GUI::BUTTON::GETLAUNCH_ID:
 	   				{
 	   					MicroTask* microtask = new MicroTask(NULL, MICROSCENARIO::LAUNCHING_ID);
        						player->GetNpc()->GetVehicle()->LaunchingEvent();
        						player->GetNpc()->GetStateMachine()->SetCurrentMicroTask(microtask);
-       		   				return; break;
+       		   				return true; break;
        		   			}
        				}
        				
@@ -103,10 +106,32 @@ void GuiAngar::UpdateMouseInteraction(int mxvp, int myvp, int lmb)
        			break;
         	}
         }
+        
+        return false;
 }
 
+bool GuiAngar::UpdateMouseVehicleSlotsInteraction(Angar* angar, int mxvp, int myvp, int lmb, int rmb)
+{	
+        for (unsigned int i = 0; i < angar->vehicleslot_vec.size(); i++)
+        { 
+                if (angar->vehicleslot_vec[i]->CheckInteraction(mxvp, myvp) == true)
+                {
+                        if (rmb == true)
+                        {
+                                if (angar->vehicleslot_vec[i]->GetVehicle() != NULL)
+                                {
+                                        player->GetNpc()->SetScanTarget(angar->vehicleslot_vec[i]->GetVehicle());
+                                        return true;
+                                }
+                        }
+                }
+        }
+        
+        return false;
+}
 
-void GuiAngar::RenderInternal() const
+       		
+void GuiAngar::RenderButtons() const
 {
 	for (unsigned int i = 0; i< button_vec.size(); i++)
 	{
@@ -114,14 +139,38 @@ void GuiAngar::RenderInternal() const
        	}
 }
 
-void GuiAngar::RenderInfo() const
+void GuiAngar::RenderButtonInfo(int mxvp, int myvp) const
 {
 	for (unsigned int i = 0; i< button_vec.size(); i++)
 	{		
-    		if (button_vec[i]->getShowInfoFlag() == true)
-		{
+                if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
+                {
         		button_vec[i]->renderInfo();
         		return; break;
         	}
         }
 }
+
+void GuiAngar::RenderInternal(Angar* angar) const
+{
+        for (unsigned int i=0; i<angar->vehicleslot_vec.size(); i++)
+        {
+                angar->vehicleslot_vec[i]->Render();
+        }
+}
+
+void GuiAngar::RenderItemInfo(Angar* angar, int mxvp, int myvp) const
+{
+        for (unsigned int i=0; i<angar->vehicleslot_vec.size(); i++)
+        { 
+		if (angar->vehicleslot_vec[i]->GetVehicle() != NULL)
+                {
+                       	if (angar->vehicleslot_vec[i]->CheckInteraction(mxvp, myvp) == true)
+                	{
+		                angar->vehicleslot_vec[i]->RenderInfo();
+		                return;
+                	}
+                }
+        }
+}
+            
