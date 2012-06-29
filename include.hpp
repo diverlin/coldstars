@@ -268,7 +268,7 @@ class ScenarioCollector;
 #include "src/gui/GuiStore.hpp"
 #include "src/gui/GuiKosmoport.hpp"
 #include "src/gui/GuiVehicle.hpp"
-#include "src/gui/guiSkill.hpp"
+#include "src/gui/GuiSkill.hpp"
 #include "src/gui/GuiManager.hpp"
 
 #include "src/world/garbageEffects.hpp"  
@@ -391,7 +391,7 @@ class ScenarioCollector;
 #include "src/builder/ShopBuilder.cpp"
 #include "src/builder/KosmoportBuilder.cpp"
 
-#include "src/gui/guiSkill.cpp"
+#include "src/gui/GuiSkill.cpp"
 #include "src/gui/guiMap.cpp"
 #include "src/gui/cursor.cpp"   
 

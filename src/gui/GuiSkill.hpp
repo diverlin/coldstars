@@ -25,10 +25,8 @@ class GuiSkill
    	public:
       		GuiSkill(Player*);
       		~GuiSkill();
-
-      		void createControlSkillButtons();
   		
-     		void update();
+     		bool UpdateMouseInteraction(int, int, int, int, Skill*);
       		void Render() const;
 
       	private:     		
