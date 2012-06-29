@@ -22,9 +22,11 @@ GuiManager :: GuiManager(Player* player)
 {
 	this->player = player;
 	
+	gui_angar = new GuiAngar(player);
+	gui_store = new GuiStore(player);
+	
 	gui_vehicle = new GuiVehicle(player);
       	gui_skill   = new GuiSkill(player);
-      	gui_store   = new GuiStore(player);
       	
       	gui_kosmoport = new GuiKosmoport(player);
       	gui_space     = new GuiSpace(player);
@@ -33,91 +35,36 @@ GuiManager :: GuiManager(Player* player)
 
 GuiManager :: ~GuiManager()
 {
+        delete gui_angar;
+        delete gui_store;
+        
 	delete gui_vehicle;
 	delete gui_skill;
-	delete gui_store;
 	
 	delete gui_kosmoport;
 	delete gui_space;
 	delete gui_map;
 }
 
-void GuiManager::UpdateInAngar()
-{
-	UpdateInScan();
-}
-
-void GuiManager::UpdateInSpace()
-{
-	UpdateInScan();
-}
-
-void GuiManager::UpdateInStore()
-{        	
-	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
-	Vehicle* vehicle = player->GetNpc()->GetScanTarget();
-	
-	gui_store->Update(store);
-	gui_vehicle->Update(vehicle, store);
-	
-	player->GetCursor()->Update();
-}
-
-void GuiManager::UpdateInScan(bool allow_full_control)
+bool GuiManager::CheckInteractionAccessToScanVehicle(Vehicle* vehicle, bool allow_full_control)
 {
 	if (allow_full_control == false)
 	{
-        	if (player->GetNpc()->GetVehicle() == player->GetNpc()->GetScanTarget())
+        	if (vehicle->GetId() == player->GetNpc()->GetVehicle()->GetId())
     		{
         		allow_full_control = true;  
         	    	// modify full control for friend ships         
         	}
         }
-               
-	if (allow_full_control == true)
-	{
-		gui_vehicle->Update(player->GetNpc()->GetScanTarget());
-		gui_skill->update();
-	}
-	
-	player->GetCursor()->Update();
+        
+        return allow_full_control;
 }
 
-void GuiManager::RenderInStore() const
+void GuiManager::RenderScanVehicle(Vehicle* vehicle) const
 {
-	Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
-	Vehicle* vehicle = player->GetNpc()->GetScanTarget();
-		
-	resetRenderTransformation();
-
-        Rect screen_rect = Rect(0, 0, player->GetScreen()->GetWidth(), player->GetScreen()->GetHeight()); 
-	gui_store->RenderBackground(store, screen_rect);
-	
-	enable_BLEND();
-
-		gui_vehicle->Render(vehicle);
-		gui_store->RenderSlots(store);
-		
-		player->GetCursor()->GetItemSlot()->RenderEquipedItem();	
-
-		gui_store->RenderFocusedItemInfo(store);	
-		if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == false)
-		{
-			gui_vehicle->RenderFocusedItemInfo(vehicle);
-		}
-
-	disable_BLEND();
-}
-
-
-void GuiManager::RenderInScan() const
-{
-	Vehicle* vehicle = player->GetNpc()->GetScanTarget();
-	
 	resetRenderTransformation();
 	enable_BLEND();
-
-		gui_vehicle->Render(vehicle);
+		gui_vehicle->RenderVehicle(vehicle);
 		if (vehicle->GetOwnerNpc() != NULL)
 		{
 			gui_skill->Render();
@@ -134,15 +81,30 @@ void GuiManager::RenderInScan() const
 
 void GuiManager::RunSession()
 {
+	int mxvp = player->GetCursor()->GetMousePos().x;
+     	int myvp = player->GetScreen()->GetHeight() - player->GetCursor()->GetMousePos().y;         
+     	int lmb  = player->GetCursor()->GetMouseLeftButton();
+     	int rmb  = player->GetCursor()->GetMouseRightButton();
+     			
+     	player->GetCursor()->Update(); 
+     								
 	switch(player->GetNpc()->GetPlaceTypeId())
 	{
 		case ENTITY::SPACE_ID:
 		{
 			//////////// SCAN ///////////////
-			if (player->GetNpc()->GetScanTarget() != NULL )
+			Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget(); 
+			if (scan_vehicle != NULL )
 			{
-				UpdateInSpace();
-				RenderInScan();                       
+				bool allow_full_control = CheckInteractionAccessToScanVehicle(scan_vehicle);
+				if (allow_full_control == true)
+				{
+					gui_vehicle->UpdateMouseInteraction(mxvp, myvp, lmb, rmb, scan_vehicle);
+					gui_skill->update();
+				}
+	
+				RenderScanVehicle(scan_vehicle);     
+					                 
 			}
 
 			//////////// WORLDMAP ///////////
@@ -159,25 +121,47 @@ void GuiManager::RunSession()
 		}
 		
 		case ENTITY::KOSMOPORT_ID:
-		{
-			
+		{    								
 			switch(gui_kosmoport->GetActiveScreenId())
         		{
         			case GUI::SCREEN::ANGAR_ID:
         			{
-        				((Kosmoport*)player->GetNpc()->GetLand())->GetAngar()->MouseControl(player);                                
-               				((Kosmoport*)player->GetNpc()->GetLand())->GetAngar()->Render(player);
+        				Angar* angar = ((Kosmoport*)player->GetNpc()->GetLand())->GetAngar();
+					Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget();
 
-					if (player->GetNpc()->GetScanTarget() != NULL) 
-					{ 
-						UpdateInAngar();
-						RenderInScan(); 
-					}
-					else
+					//update  
+					if (gui_kosmoport->UpdateMouseInteraction(mxvp, myvp, lmb, rmb) == false)
 					{
-						((Kosmoport*)player->GetNpc()->GetLand())->GetAngar()->RenderItemInfo(player);
-					}
-			
+					    	if (gui_angar->UpdateMouseInteraction(angar, mxvp, myvp, lmb, rmb) == false)
+					    	{
+							if (scan_vehicle != NULL) 
+							{ 
+								bool allow_full_control = CheckInteractionAccessToScanVehicle(scan_vehicle);
+								if (allow_full_control == true)
+								{
+									gui_vehicle->UpdateMouseInteraction(mxvp, myvp, lmb, rmb, scan_vehicle);
+									gui_skill->update();
+								}
+							}					    	
+					    	} 
+			        	}
+			        	
+			        	//render
+        				resetRenderTransformation();
+        				Rect screen_rect = Rect(0, 0, player->GetScreen()->GetWidth(), player->GetScreen()->GetHeight());    
+        				angar->RenderBackground(screen_rect);
+               				enable_BLEND();   
+			        		gui_angar->RenderInternal(angar);
+			        		
+						if (scan_vehicle != NULL) 	{ RenderScanVehicle(scan_vehicle); }
+						else 				{ gui_angar->RenderItemInfo(angar, mxvp, myvp); }
+
+			        		gui_kosmoport->RenderButtons(); 
+			        		gui_angar->RenderButtons();
+                				gui_kosmoport->RenderButtonInfo(mxvp, myvp); 
+                				gui_angar->RenderButtonInfo(mxvp, myvp); 
+               				disable_BLEND(); 
+	        		
 					break;
 				}
 		
@@ -188,11 +172,40 @@ void GuiManager::RunSession()
         					player->GetNpc()->SetScanTarget(player->GetNpc()->GetVehicle());
         				}
                                     
-        				UpdateInStore();
-                			RenderInStore(); 
+                                        Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
+        				Vehicle* vehicle = player->GetNpc()->GetScanTarget();        				
 		
+					//update
+					if (gui_kosmoport->UpdateMouseInteraction(mxvp, myvp, lmb, rmb) == false)
+					{
+					    	if (gui_store->UpdateMouseInteraction(store, mxvp, myvp, lmb, rmb) == false)
+					    	{
+					    		gui_vehicle->UpdateMouseInteraction(mxvp, myvp, lmb, rmb, vehicle, store);
+					    	}
+					}
+								        	
+			        	//render
+        				resetRenderTransformation();
+					Rect screen_rect(0, 0, player->GetScreen()->GetWidth(), player->GetScreen()->GetHeight()); 
+					store->RenderBackground(screen_rect);
+					enable_BLEND();
+						gui_vehicle->RenderVehicle(vehicle);
+						gui_store->RenderSlots(store);
+		
+						player->GetCursor()->GetItemSlot()->RenderEquipedItem();	
+
+						gui_store->RenderFocusedItemInfo(store, mxvp, myvp);	
+						if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == false)
+						{
+							gui_vehicle->RenderFocusedItemInfo(vehicle);
+						}
+
+			        		gui_kosmoport->RenderButtons(); 
+                				gui_kosmoport->RenderButtonInfo(mxvp, myvp); 
+					disable_BLEND();
+	
 					player->GetNpc()->ResetScanTarget();
-		
+        				
 					break;
 				}
 
@@ -201,6 +214,9 @@ void GuiManager::RunSession()
         				((Kosmoport*)player->GetNpc()->GetLand())->GetShop()->Update();
                 			((Kosmoport*)player->GetNpc()->GetLand())->GetShop()->Render(player);
 		
+        				//gui_kosmoport->UpdateMouseInteraction(); 
+        				//gui_kosmoport->Render(); 
+        				
 					break;
 				}
 
@@ -209,7 +225,10 @@ void GuiManager::RunSession()
         				clearScreen();
         				gui_map->update();
                 			gui_map->Render();   
-         	
+
+        				//gui_kosmoport->UpdateMouseInteraction(); 
+        				//gui_kosmoport->Render(); 
+        				         	
          				break;
          			}
 
@@ -218,12 +237,12 @@ void GuiManager::RunSession()
          				((Kosmoport*)player->GetNpc()->GetLand())->GetGoverment()->Update();
                 			((Kosmoport*)player->GetNpc()->GetLand())->GetGoverment()->Render(player);
          	
+         	        		//gui_kosmoport->UpdateMouseInteraction(); 
+        				//gui_kosmoport->Render(); 
+        				
          				break;
          			}
 			}
-	
-        		gui_kosmoport->UpdateMouseInteraction(); 
-        		gui_kosmoport->Render(); 
 			
 		break;		
 		}

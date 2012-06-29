@@ -26,9 +26,9 @@ class GuiVehicle
       		GuiVehicle(Player*);
       		~GuiVehicle();
 
-     		void Update(Vehicle*, Store* store = NULL);   
+     		void UpdateMouseInteraction(int, int, int, int, Vehicle*, Store* store = NULL);   
      				
-      		void Render(Vehicle*) const;
+      		void RenderVehicle(Vehicle*) const;
 		void RenderFocusedItemInfo(Vehicle*) const;
       		
       	private: 		

@@ -27,11 +27,10 @@ class GuiStore
                 GuiStore(Player*);                      
                 ~GuiStore();
 
-                void Update(Store*);
-                void RenderSlots(Store*) const;
-                
-                void RenderBackground(Store*, const Rect&);
-                void RenderFocusedItemInfo(Store*);
+                bool UpdateMouseInteraction(Store*, int, int, int, int);
+
+        	void RenderSlots(Store*) const;                
+                void RenderFocusedItemInfo(Store*, int, int);
                 
         public:          
         	Player* player;

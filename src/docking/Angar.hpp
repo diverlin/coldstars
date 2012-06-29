@@ -33,11 +33,6 @@ class Angar : public Room
                 bool AddVehicle(Vehicle*);
                 //bool RemoveVehicle(Vehicle*);
 
-                void MouseControl(Player*);
-
-                void Render(Player*) const;
-                void RenderItemInfo(Player*) const;
-
                 int GetFreeVehicleSlotTotalNum() const;
                 
                 void SaveData(boost::property_tree::ptree&) const;		
@@ -46,12 +41,12 @@ class Angar : public Room
 		
         private:               
                 std::vector<VehicleSlot*> vehicleslot_vec;
-
-                void RenderInternals() const;
                 
                 void SaveDataUniqueAngar(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueAngar(const boost::property_tree::ptree&);
 		void ResolveDataUniqueAngar();
+		
+		friend class GuiAngar;
 };
 
 #endif 

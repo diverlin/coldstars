@@ -27,32 +27,24 @@ GuiStore::~GuiStore()
 {}
 
         
-void GuiStore::Update(Store* store)
+bool GuiStore::UpdateMouseInteraction(Store* store, int mxvp, int myvp, int lmb, int rmb)
 {
-         bool lmb = player->GetCursor()->GetMouseLeftButton();; 
-        //bool rmb = player->GetCursor()->GetMouseRightButton();; 
-
         for (unsigned int i = 0; i < store->slot_total_vec.size(); i++)
         { 
                 if (store->slot_total_vec[i]->GetEquipedStatus() == true)
-                {                                
-                	float dist = distBetweenPoints(store->slot_total_vec[i]->GetRect().GetCenter(), player->GetCursor()->GetMousePos().x, player->GetScreen()->GetHeight() - player->GetCursor()->GetMousePos().y);
-                                                       				
-                	if (dist < store->slot_total_vec[i]->GetRect().GetWidth()/2)
+                {
+                	if (store->slot_total_vec[i]->CheckInteraction(mxvp, myvp) == true)
                 	{
                         	if (lmb == true)
                         	{
                         		store->SellItemFromSlot(player->GetNpc(), store->slot_total_vec[i]);
                         	} 
-                        	break;
+                        	return true; break;
                 	} 
         	}
         }
-}
-
-void GuiStore::RenderBackground(Store* store, const Rect& rect)
-{
-	store->RenderBackground(rect);                
+        
+        return false;
 }
 
 void GuiStore::RenderSlots(Store* store) const
@@ -63,17 +55,14 @@ void GuiStore::RenderSlots(Store* store) const
         }
 }
 
-void GuiStore::RenderFocusedItemInfo(Store* store)
+void GuiStore::RenderFocusedItemInfo(Store* store, int mxvp, int myvp)
 {	
         for (unsigned int i = 0; i < store->slot_total_vec.size(); i++)
-        { 
-                float dist = distBetweenPoints(store->slot_total_vec[i]->GetRect().GetCenter(), player->GetCursor()->GetMousePos().x, player->GetScreen()->GetHeight() - player->GetCursor()->GetMousePos().y);
-                                                       				
-                if (dist < store->slot_total_vec[i]->GetRect().GetWidth()/2)
+        {                              				
+                if (store->slot_total_vec[i]->CheckInteraction(mxvp, myvp) == true)
                 {
                         store->slot_total_vec[i]->RenderItemInfo();                    
                 } 
         }
 }
-
 

@@ -28,19 +28,21 @@ class GuiAngar
        		GuiAngar(Player*);
        		~GuiAngar();
 		
-       		void UpdateMouseInteraction(int, int, int);
+       		bool UpdateMouseInteraction(Angar*, int, int, int, int);
 
-       		void RenderInternal() const;
-       		void RenderInfo() const;                
+       		void RenderButtons() const;
+       		void RenderButtonInfo(int, int) const;   
+       		
+       		void RenderInternal(Angar*) const;
+                void RenderItemInfo(Angar*, int, int) const;             
        	
        	private:
       		Player* player;
        		
        		std::vector<Button*> button_vec;
-                
-                void ResetInfoFlags();
 
-
+       		bool UpdateMouseButtonsInteraction(int, int, int, int);                
+       		bool UpdateMouseVehicleSlotsInteraction(Angar*, int, int, int, int);
 };
 
 
