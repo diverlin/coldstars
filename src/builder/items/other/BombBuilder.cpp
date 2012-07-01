@@ -32,7 +32,15 @@ void BombBuilder::CreateNewBomb(int id)
 	{
 		id = g_ID_GENERATOR.getNextId();
 	}
-        bomb = new Bomb(id);
+
+   	try 
+        { 
+        	bomb = new Bomb(id);
+        }
+        catch(std::bad_alloc)
+        {
+        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+        }
         EntityManager::Instance().RegisterEntity(bomb);
 } 
         	

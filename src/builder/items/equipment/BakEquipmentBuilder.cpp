@@ -32,7 +32,15 @@ void BakEquipmentBuilder::CreateNewBakEquipment(int id)
 	{
 		id = g_ID_GENERATOR.getNextId();
 	}
-        bak_equipment = new BakEquipment(id);
+
+        try 
+        { 
+        	bak_equipment = new BakEquipment(id);
+        }
+        catch(std::bad_alloc)
+        {
+        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+        }
         EntityManager::Instance().RegisterEntity(bak_equipment);
 } 
         	

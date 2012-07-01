@@ -32,7 +32,16 @@ void StarSystemBuilder::CreateNewStarSystem(int id)
 	{
 		id = g_ID_GENERATOR.getNextId();
 	}
-        starsystem = new StarSystem(id);
+
+        try 
+        { 
+        	starsystem = new StarSystem(id);
+        }
+        catch(std::bad_alloc)
+        {
+        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+        }
+        
         EntityManager::Instance().RegisterEntity(starsystem);
 } 
         	

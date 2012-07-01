@@ -32,7 +32,15 @@ void NpcBuilder::CreateNewNpc(int id)
 	{
 		id = g_ID_GENERATOR.getNextId();
 	}
-	npc = new Npc(id);
+
+        try 
+        { 
+		npc = new Npc(id);
+        }
+        catch(std::bad_alloc)
+        {
+        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+        }
 	EntityManager::Instance().RegisterEntity(npc);
 } 
         	

@@ -24,7 +24,17 @@ ItemSlot* GetNewItemSlot(int subtype_id, int id)
 	{
 		id = g_ID_GENERATOR.getNextId();
 	} 
-        ItemSlot* item_slot = new ItemSlot(id);
+
+	ItemSlot* item_slot = NULL;
+        try 
+        { 
+        	item_slot = new ItemSlot(id);
+        }
+        catch(std::bad_alloc)
+        {
+        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+        }
+        
         EntityManager::Instance().RegisterEntity(item_slot);
       
         TextureOb* texOb_slot = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ITEMSLOT_ID);
@@ -33,9 +43,17 @@ ItemSlot* GetNewItemSlot(int subtype_id, int id)
         
         if (subtype_id == ITEMSLOT::WEAPON_ID)
         {
+        	Turrel* turrel = NULL;
                 TextureOb* texOb_turrel = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::TURREL_ID); 
-                        
-                Turrel* turrel = new Turrel(item_slot); 
+                try 
+        	{ 
+                	turrel = new Turrel(item_slot); 
+        	}
+        	catch(std::bad_alloc)
+        	{
+        		Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+        	}
+        
                 turrel->SetTextureOb(texOb_turrel);       
                 turrel->GetPoints().addMainQuadPoints();
                 turrel->GetPoints().initMainQuadPoints(texOb_turrel->getFrameWidth(), texOb_turrel->getFrameHeight());
