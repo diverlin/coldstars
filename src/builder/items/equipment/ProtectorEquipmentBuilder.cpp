@@ -32,7 +32,16 @@ void ProtectorEquipmentBuilder::CreateNewProtectorEquipment(int id)
 	{
 		id = g_ID_GENERATOR.getNextId();
 	}
-        protector_equipment = new ProtectorEquipment(id);
+
+	try 
+        { 
+        	protector_equipment = new ProtectorEquipment(id);
+        }
+        catch(std::bad_alloc)
+        {
+        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+        }
+        
         EntityManager::Instance().RegisterEntity(protector_equipment);
 } 
         	

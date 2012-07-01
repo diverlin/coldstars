@@ -32,7 +32,16 @@ void LazerEquipmentBuilder::CreateNewLazerEquipment(int id)
 	{
 		id = g_ID_GENERATOR.getNextId();
 	}
-        lazer_equipment = new LazerEquipment(id);
+
+        try 
+        { 
+        	lazer_equipment = new LazerEquipment(id);
+        }
+        catch(std::bad_alloc)
+        {
+        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+        }
+        
         EntityManager::Instance().RegisterEntity(lazer_equipment);
 } 
         	

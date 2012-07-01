@@ -32,7 +32,15 @@ void FreezerEquipmentBuilder::CreateNewFreezerEquipment(int id)
 	{
 		id = g_ID_GENERATOR.getNextId();
 	}
-        freezer_equipment = new FreezerEquipment(id);
+
+ 	try 
+        { 
+        	freezer_equipment = new FreezerEquipment(id);
+        }
+        catch(std::bad_alloc)
+        {
+        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+        }
         EntityManager::Instance().RegisterEntity(freezer_equipment);
 } 
         	

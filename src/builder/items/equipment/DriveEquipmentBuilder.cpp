@@ -32,7 +32,15 @@ void DriveEquipmentBuilder::CreateNewDriveEquipment(int id)
 	{
 		id = g_ID_GENERATOR.getNextId();
 	}
-        drive_equipment = new DriveEquipment(id);
+
+        try 
+        { 
+        	drive_equipment = new DriveEquipment(id);
+        }
+        catch(std::bad_alloc)
+        {
+        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+        }
         EntityManager::Instance().RegisterEntity(drive_equipment);
 } 
         	

@@ -29,11 +29,19 @@ AngarBuilder::~AngarBuilder()
 
 void AngarBuilder::CreateNewAngar(int id)
 {
-	if (id == NONE_ID)
+	if (id == NONE_ID) 
 	{
 		id = g_ID_GENERATOR.getNextId();
 	}
-        angar = new Angar(id);
+        
+        try 
+        { 
+        	angar = new Angar(id); 
+        }
+        catch(std::bad_alloc)
+        {
+        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+        }
         EntityManager::Instance().RegisterEntity(angar);
 } 
         	

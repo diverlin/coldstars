@@ -33,7 +33,16 @@ void ShipBuilder::CreateNewShip(int id)
 	{
 		id = g_ID_GENERATOR.getNextId();
 	}
-        ship = new Ship(id);
+
+        try 
+        { 
+        	ship = new Ship(id);
+        }
+        catch(std::bad_alloc)
+        {
+        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+        }
+        
         EntityManager::Instance().RegisterEntity(ship);
 }
 

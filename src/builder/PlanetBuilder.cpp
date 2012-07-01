@@ -32,7 +32,16 @@ void PlanetBuilder::CreateNewPlanet(int id)
 	{
 		id = g_ID_GENERATOR.getNextId();
 	}
-        planet = new Planet(id);
+
+	try 
+        { 
+		planet = new Planet(id);
+        }
+        catch(std::bad_alloc)
+        {
+        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+        }
+        
         EntityManager::Instance().RegisterEntity(planet);
 } 
         	
