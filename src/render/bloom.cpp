@@ -55,10 +55,10 @@ BloomEffect :: ~BloomEffect()
 {}
 
 
-void BloomEffect :: pass0(Screen* screen, GLuint _orig_scene_texture, float brightThreshold)
+void BloomEffect :: pass0(const vec2i& resolution, GLuint _orig_scene_texture, float brightThreshold)
 {
 	// RENDER TO FBO0
-        (pTo_fbo_pass_pList[0])[0]->activate(screen);
+        (pTo_fbo_pass_pList[0])[0]->activate(resolution);
 
 	// render background
 	glUseProgram(program_extractBright);
@@ -86,14 +86,14 @@ void BloomEffect :: pass0(Screen* screen, GLuint _orig_scene_texture, float brig
         
 }       
                 
-void BloomEffect :: restPasses(Screen* screen)
+void BloomEffect :: restPasses(const vec2i& resolution)
 {
 	for (int pass_num = 1; pass_num < pass_max; pass_num++) 
         {   
         	int div = 1;    
 		for(int fbo_num = 0; fbo_num < fbo_max_per_pass; fbo_num++)
 		{
-		        (pTo_fbo_pass_pList[pass_num])[fbo_num]->activate(screen);
+		        (pTo_fbo_pass_pList[pass_num])[fbo_num]->activate(resolution);
           		drawFullScreenTexturedQuadBlurred((pTo_fbo_pass_pList[pass_num-1])[fbo_num]->getTexture(), screen_w/div, screen_h/div, -999.0, program_blur);
           		(pTo_fbo_pass_pList[pass_num])[fbo_num]->deactivate();
           
@@ -104,10 +104,10 @@ void BloomEffect :: restPasses(Screen* screen)
 
 
 
-void BloomEffect :: combine(Screen* screen, GLuint _orig_scene_texture)
+void BloomEffect :: combine(const vec2i& resolution, GLuint _orig_scene_texture)
 {
           // RENDER TO final FBO
-          pTo_fbo_final->activate(screen);
+          pTo_fbo_final->activate(resolution);
 
           glUseProgram(program_combine);
 

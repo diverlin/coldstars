@@ -20,15 +20,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef FBO_H
 #define FBO_H
 
+#include "../gui/Window.hpp"
+#include "../common/myVector.hpp"
+
 class FBO
 {
 	public:
-      		FBO(int _w, int _h);
+      		FBO(int, int);
       		~FBO();
 
 		GLuint getTexture() const; 
 		
-      		void activate(Screen*);
+      		void activate(const vec2i&);
       		void deactivate();
       		
       	private:

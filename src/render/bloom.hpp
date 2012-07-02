@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef BLOOM_H
 #define BLOOM_H
 
-
+#include "../common/myVector.hpp"
 
 class BloomEffect
 {
@@ -42,9 +42,9 @@ class BloomEffect
                 BloomEffect(int _screen_w, int _screen_h, GLuint _program_blur, GLuint _program_extractBright, GLuint _program_combine, int _pass_max, int _fbo_max_per_pass);
                 ~BloomEffect();
                 
-                void pass0(Screen*, GLuint, float);
-                void restPasses(Screen*);
-                void combine(Screen*, GLuint);
+                void pass0(const vec2i&, GLuint, float);
+                void restPasses(const vec2i&);
+                void combine(const vec2i&, GLuint);
 };
  
 // HDR http://prideout.net/archive/bloom/  

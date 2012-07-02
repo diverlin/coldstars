@@ -7,10 +7,11 @@ class vec2f
                 float x; 
                 float y;
                 
-                vec2f():x(0), y(0) {};
+                vec2f():x(0.0), y(0.0) {};
                 vec2f(float x, float y) { this->x = x; this->y = y; };
-                vec2f(const vec2f& v) { *this = v; } ;
-                                
+                vec2f(const vec2f& v) { *this = v; };
+                ~vec2f() {};
+                                                
                 bool IsNull() const;
                 
                 float GetLen() const;
@@ -26,6 +27,19 @@ class vec2f
                 vec2f operator-(const vec2f&) const;
                 vec2f operator*(const float) const;
                 vec2f operator/(const float) const;
+};
+
+class vec2i
+{
+	public:
+	        int x; 
+                int y;
+                
+                vec2i():x(0), y(0) {};
+                vec2i(int x, int y) { this->x = x; this->y = y; };
+                vec2i(const vec2i& v) { *this = v; } ;
+                ~vec2i() {};
+                		
 };
 
 class vec3f
