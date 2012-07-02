@@ -90,7 +90,6 @@ bool GuiKosmoport::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb)
 	{
        		if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
        		{
-       		        button_vec[i]->setShowInfoFlag(true);
        			if (lmb == true)
        			{	
        			   	active_screen_id = button_vec[i]->GetSubTypeId();
@@ -117,7 +116,7 @@ void GuiKosmoport::RenderFocusedButtonInfo(int mxvp, int myvp) const
 	{
        		if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
        		{
-        		button_vec[i]->renderInfo();
+        		button_vec[i]->RenderInfo();
         		return; break;
         	}
         } 

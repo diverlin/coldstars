@@ -75,7 +75,7 @@ void GuiSpace::RenderFocusedButtonInfo(int mxvp, int myvp) const
 	{
 		if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
 		{
-			button_vec[i]->renderInfo();
+			button_vec[i]->RenderInfo();
 			break;
 		}
 	}       

@@ -23,38 +23,35 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Button
 {
     	public:
-       		Button(TextureOb* _texOb, 
-       		       int _subtype_id, 
-       		       float _pos_x, 
-       		       float _pos_y, 
-       		       int _w, 
-       		       int _h, 
-       		       std::string _info_str);
+       		Button(TextureOb* textureOb, 
+       		       int subtype_id, 
+       		       int pos_x, 
+       		       int pos_y, 
+       		       int w, 
+       		       int h, 
+       		       std::string info_str);
        		       
        		~Button();  
-       		
-       		void setShowInfoFlag(bool);       		       		
-       		bool getShowInfoFlag() const;
-       		Rect GetRect() const;
-       		TextureOb* GetTextureOb();
-       		int GetTypeId() const;
-       		int GetSubTypeId() const;
-       		       
-       		bool CheckInteraction(int _x, int _y);
 
-       		void setCenter(int _x, int _y);
+       		const Rect& GetRect() const { return rect; };
+       		TextureOb* GetTextureOb() const { return textureOb; };
+       		int GetTypeId() const { return type_id; };
+       		int GetSubTypeId() const { return subtype_id; };
+       		       
+       		bool CheckInteraction(int, int);
+
+       		void SetCenter(int, int);
 
        		void Render() const;    
-       		void renderInfo() const;
+       		void RenderInfo() const;
         
         private:
-        	int type_id, subtype_id;
+        	int type_id;
+        	int subtype_id;
         	
-               	TextureOb* texOb;
+               	TextureOb* textureOb;
        		Rect rect;
-       		std::string info_str;
-       		bool show_info;
-        
+       		std::string info_str;  
 };
 
 #endif
