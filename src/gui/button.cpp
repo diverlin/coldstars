@@ -19,54 +19,46 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "button.hpp"
 
-Button :: Button(TextureOb* _texOb, 
-		 int _subtype_id, 
-		 float _pos_x, 
-		 float _pos_y, 
-		 int _w, 
-		 int _h, 
-		 std::string _info_str)
+Button::Button(TextureOb* textureOb, 
+		 int subtype_id, 
+		 int pos_x, 
+		 int pos_y, 
+		 int w, 
+		 int h, 
+		 std::string info_str)
 {
 	type_id = GUI::BUTTON::BUTTON_ID;
-	subtype_id = _subtype_id;
 	
-    	texOb = _texOb;
-    
-    	rect = Rect(_pos_x, _pos_y, _w, _h);
-    	info_str = _info_str; 
-    	show_info = false; 
+	this->subtype_id = subtype_id;
+    	this->textureOb = textureOb;
+    	this->info_str = info_str; 
+
+    	rect.Set(pos_x, pos_y, w, h);
 }
 
-Button :: ~Button()
+Button::~Button()
 {}
 
-void Button :: setShowInfoFlag(bool _show_info)   { show_info = _show_info; }
-bool Button :: getShowInfoFlag() const { return show_info; }
-Rect Button :: GetRect() const         { return rect; }
-TextureOb* Button :: GetTextureOb()        { return texOb; }
-int Button :: GetTypeId() const        { return subtype_id; }
-int Button :: GetSubTypeId() const     { return subtype_id; }
-
-bool Button :: CheckInteraction(int _x, int _y)
+bool Button::CheckInteraction(int x, int y)
 {        
-    	float dist = distBetweenPoints(rect.GetCenter().x, rect.GetCenter().y, _x, _y);
+    	float dist = distBetweenPoints(rect.GetCenter(), x, y);
     	if (dist < rect.GetWidth()/2)
         	return true;
     	else
         	return false;    
 }
     
-void Button :: setCenter(int _x, int _y)
+void Button::SetCenter(int x, int y)
 {        
-     	rect.SetCenter((float)_x, (float)_y);
+     	rect.SetCenter((float)x, (float)y);
 }
    
-void Button :: Render() const
+void Button::Render() const
 {
-   	drawTexturedRect(texOb, rect, -1);
+   	drawTexturedRect(textureOb, rect, -1);
 }
 
-void Button :: renderInfo() const
+void Button::RenderInfo() const
 {
      	drawSimpleText(info_str, 12, rect.GetBottomLeft().x - 50, rect.GetBottomLeft().y + 30);
 }

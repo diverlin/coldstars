@@ -83,7 +83,6 @@ bool GuiAngar::UpdateMouseButtonsInteraction(int mxvp, int myvp, int lmb, int rm
 	{
        		if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
        		{
-       	        	button_vec[i]->setShowInfoFlag(true);
        			if (lmb == true)
        			{	
 	   			switch(button_vec[i]->GetSubTypeId())
@@ -150,7 +149,7 @@ void GuiAngar::RenderFocusedButtonInfo(int mxvp, int myvp) const
 	{		
                 if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
                 {
-        		button_vec[i]->renderInfo();
+        		button_vec[i]->RenderInfo();
         		return; break;
         	}
         }
