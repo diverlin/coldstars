@@ -27,12 +27,14 @@ class GuiMap
      		GuiMap(Player*);
      		~GuiMap();
    
-     		bool update();
-     		void Render();
+     		bool UpdateMouseInteraction(Galaxy*, int, int, int, int);
+     		void Render(Galaxy*);
 
      	private:
      		Player* player;
      		Rect rect;
+     		
+     		TextureOb* texOb_background;
 };
      		
 #endif 

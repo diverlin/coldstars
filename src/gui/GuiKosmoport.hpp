@@ -33,7 +33,7 @@ class GuiKosmoport
        		bool UpdateMouseInteraction(int, int, int, int);
        		
        		void RenderButtons() const;
-       		void RenderButtonInfo(int, int) const;
+       		void RenderFocusedButtonInfo(int, int) const;
                 
        	private:
        		int active_screen_id; 

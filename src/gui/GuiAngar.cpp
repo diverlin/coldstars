@@ -57,7 +57,12 @@ GuiAngar::GuiAngar(Player* player)
 
 
 GuiAngar::~GuiAngar()
-{}
+{
+	for (unsigned int i=0; i<button_vec.size(); i++)
+	{
+		delete button_vec[i];
+	}
+}
 	
 	
 bool GuiAngar::UpdateMouseInteraction(Angar* angar, int mxvp, int myvp, int lmb, int rmb)
@@ -139,7 +144,7 @@ void GuiAngar::RenderButtons() const
        	}
 }
 
-void GuiAngar::RenderButtonInfo(int mxvp, int myvp) const
+void GuiAngar::RenderFocusedButtonInfo(int mxvp, int myvp) const
 {
 	for (unsigned int i = 0; i< button_vec.size(); i++)
 	{		
@@ -159,7 +164,7 @@ void GuiAngar::RenderInternal(Angar* angar) const
         }
 }
 
-void GuiAngar::RenderItemInfo(Angar* angar, int mxvp, int myvp) const
+void GuiAngar::RenderFocusedItemInfo(Angar* angar, int mxvp, int myvp) const
 {
         for (unsigned int i=0; i<angar->vehicleslot_vec.size(); i++)
         { 

@@ -18,30 +18,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-GuiMap :: GuiMap(Player* player)
+GuiMap::GuiMap(Player* player)
 { 
 	this->player = player;
     	rect = Rect(GUI::MAP::BORDER_X, GUI::MAP::BORDER_Y, (Config::Instance().SCREEN_WIDTH - 2 * GUI::MAP::BORDER_X), (Config::Instance().SCREEN_HEIGHT - 2 * GUI::MAP::BORDER_X));
+    	texOb_background = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::TEXT_BACKGROUND_ID);
 }
 
-GuiMap :: ~GuiMap()
+GuiMap::~GuiMap()
 {}
 
-bool GuiMap :: update()
+bool GuiMap::UpdateMouseInteraction(Galaxy* galaxy, int mxvp, int myvp, int lmb, int rmb)
 {
-	Galaxy* galaxy = player->GetNpc()->GetStarSystem()->GetGalaxy();
-
      	if (player->GetNpc()->GetVehicle()->ableTo.HJUMP == true)
-     	{
-        	int mx  = player->GetCursor()->GetMousePos().x;
-        	int my  = player->GetScreen()->GetHeight() - player->GetCursor()->GetMousePos().y; 
-        	int lmb = player->GetCursor()->GetMouseLeftButton();
-   
+     	{  
         	for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
         	{
             		//if (STARSYSTEM_pList[si]->id != pTo_PLAYER->pTo_starsystem->id)
             		{
-                		float ss_cursor_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), mx, my);
+                		float ss_cursor_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), mxvp, myvp);
                 		if (ss_cursor_dist < 10)
                 		{ 
                    			int ss_ss_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), 
@@ -75,49 +70,39 @@ bool GuiMap :: update()
 
 
 
-void GuiMap :: Render()
+void GuiMap::Render(Galaxy* galaxy)
 {
-    	TextureOb* texOb_textBg = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::TEXT_BACKGROUND_ID);
-    	Galaxy* galaxy = player->GetNpc()->GetStarSystem()->GetGalaxy();
-      
-        resetRenderTransformation();
-    	        
-        enable_BLEND();                              
-
-    		drawTexturedRect(texOb_textBg, rect, -1);
+	drawTexturedRect(texOb_background, rect, -1);
     	
-    		enable_POINTSPRITE();
+    	enable_POINTSPRITE();
     		
-    			for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
-    			{
-   		
-        			TextureOb* texOb_particle = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::DISTANTSTAR_ID, galaxy->STARSYSTEM_vec[si]->STAR_vec[0]->GetColorId()); 
-                                        
-        			drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), 30.0, -2.0);
-        	       
-        			if (galaxy->STARSYSTEM_vec[si]->GetCaptured() == true)
-        			{
-        				drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_enemy_ss->texture, galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), 40.0, -2.0);
-           			}
+    	for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
+    	{   		
+        	TextureOb* texOb_particle = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::DISTANTSTAR_ID, galaxy->STARSYSTEM_vec[si]->STAR_vec[0]->GetColorId()); 
+                                      
+        	drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), 30.0, -2.0);
+              
+        	if (galaxy->STARSYSTEM_vec[si]->GetCaptured() == true)
+        	{
+        		drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_enemy_ss->texture, galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), 40.0, -2.0);
+        	}
            	
-    			}	 
-           		drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_player_ss->texture, player->GetNpc()->GetStarSystem()->GetPoints().GetCenter(), 40.0, -2.0);
+    	}	 
+        drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_player_ss->texture, player->GetNpc()->GetStarSystem()->GetPoints().GetCenter(), 40.0, -2.0);
 
-    			//if self.GL_LIST_range_ID != None:
-       				//glCallList(self.GL_LIST_range_ID)
+    	//if self.GL_LIST_range_ID != None:
+       		//glCallList(self.GL_LIST_range_ID)
        		
-        	disable_POINTSPRITE();
+        disable_POINTSPRITE();
         	
-        	int font_size = 10;     
-        	for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
-    		{
-	  		drawSimpleText(int2str(galaxy->STARSYSTEM_vec[si]->GetId()), 
+        int font_size = 10;     
+        for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
+    	{
+		drawSimpleText(int2str(galaxy->STARSYSTEM_vec[si]->GetId()), 
         	       	      		 font_size, 
         	       	       		 galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter().x - 20, 
         	       	       		 galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter().y - 20);
-    		} 
-    		
-    	disable_BLEND();  
+   	} 
 }
 
 

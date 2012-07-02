@@ -28,18 +28,13 @@ class Goverment : public Room
                 ~Goverment();
                 
                 void SetTextureObFace(TextureOb* textureOb_face) { this->textureOb_face = textureOb_face; };
-                                
-                void Update();
-                void Render(Player*) const;
-                
+           
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 		
         private:
                 TextureOb* textureOb_face;
-                
-                void RenderInternals() const;
                 
                 void SaveDataUniqueGoverment(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueGoverment(const boost::property_tree::ptree&);

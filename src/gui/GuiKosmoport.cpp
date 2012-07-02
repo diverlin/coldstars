@@ -78,7 +78,7 @@ GuiKosmoport::GuiKosmoport(Player* player)
 
 GuiKosmoport::~GuiKosmoport()
 {
-	for (unsigned int i = 0; i< button_vec.size(); i++)
+	for (unsigned int i=0; i<button_vec.size(); i++)
 	{
        		delete button_vec[i];
         }
@@ -111,7 +111,7 @@ void GuiKosmoport::RenderButtons() const
         }    	
 }
 
-void GuiKosmoport::RenderButtonInfo(int mxvp, int myvp) const
+void GuiKosmoport::RenderFocusedButtonInfo(int mxvp, int myvp) const
 {
 	for (unsigned int i = 0; i<button_vec.size(); i++)
 	{
