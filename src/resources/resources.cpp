@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 void loadGameData()
 {    	
-    	Gui::GetFont().LoadFromFile("data/font/font.ttf");
+    	Window::Instance().GetFont().LoadFromFile("data/font/font.ttf");
 
 	load3DModels();
     	loadImages();

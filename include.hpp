@@ -153,7 +153,7 @@ class ScenarioCollector;
 #include "src/docking/Kosmoport.hpp"
 #include "src/docking/NatureLand.hpp"
 
-#include "src/gui/cursor.hpp"  
+#include "src/gui/Cursor.hpp"  
 
 #include "src/render/render.hpp"
 #include "src/render/glsl.hpp"
@@ -262,7 +262,7 @@ class ScenarioCollector;
 //   
 #include "src/pilots/Observation.hpp" 
 
-#include "src/gui/button.hpp"
+#include "src/gui/Button.hpp"
 #include "src/gui/GuiSpace.hpp"
 #include "src/gui/GuiAngar.hpp"
 #include "src/gui/GuiStore.hpp"
@@ -362,7 +362,7 @@ class ScenarioCollector;
 
 #include "src/docking/NatureLand.cpp"
 
-#include "src/gui/button.cpp"
+#include "src/gui/Button.cpp"
 #include "src/gui/GuiSpace.cpp"
 #include "src/gui/GuiAngar.cpp"
 #include "src/gui/GuiKosmoport.cpp"
@@ -393,7 +393,7 @@ class ScenarioCollector;
 
 #include "src/gui/GuiSkill.cpp"
 #include "src/gui/GuiMap.cpp"
-#include "src/gui/cursor.cpp"   
+#include "src/gui/Cursor.cpp"   
 
 #include "src/gui/UserInput.cpp"
 

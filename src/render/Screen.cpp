@@ -48,13 +48,13 @@ void Screen::Resize(int width, int height)
 	this->width  = width;
 	this->height = height;
 	
-	Gui::GetWindow().SetFramerateLimit(Config::Instance().FPS_LIMIT); 
-    	Gui::GetWindow().PreserveOpenGLStates(true);
-    	Gui::GetWindow().UseVerticalSync(Config::Instance().VSYNC);
+	Window::Instance().GetWindow().SetFramerateLimit(Config::Instance().FPS_LIMIT); 
+    	Window::Instance().GetWindow().PreserveOpenGLStates(true);
+    	Window::Instance().GetWindow().UseVerticalSync(Config::Instance().VSYNC);
 
 	view.SetFromRect(sf::FloatRect(0, 0, width, height));
-	Gui::GetWindow().SetView(view);	
-	Gui::GetWindow().SetSize(width, height);
+	Window::Instance().GetWindow().SetView(view);	
+	Window::Instance().GetWindow().SetSize(width, height);
 	    	
 	ResizeGl();
 		
@@ -77,8 +77,8 @@ void Screen::UpdateOnEvent()
 
 void Screen::Display()
 {
-  	Gui::Update();
-  	Gui::GetWindow().Display();
+  	Window::Instance().Update();
+  	Window::Instance().GetWindow().Display();
 }
 
 void Screen::InitGl()
