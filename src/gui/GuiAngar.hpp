@@ -31,10 +31,10 @@ class GuiAngar
        		bool UpdateMouseInteraction(Angar*, int, int, int, int);
 
        		void RenderButtons() const;
-       		void RenderButtonInfo(int, int) const;   
+       		void RenderFocusedButtonInfo(int, int) const;   
        		
        		void RenderInternal(Angar*) const;
-                void RenderItemInfo(Angar*, int, int) const;             
+                void RenderFocusedItemInfo(Angar*, int, int) const;             
        	
        	private:
       		Player* player;

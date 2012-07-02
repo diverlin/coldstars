@@ -107,25 +107,39 @@ void GuiManager::RunSession()
 			if (scan_vehicle != NULL )
 			{
 				UpdateMouseInteractionWithScanVehicle(mxvp, myvp, lmb, rmb, scan_vehicle);
-				RenderScanVehicle(scan_vehicle);     
-					                 
+				RenderScanVehicle(scan_vehicle);    					                 
 			}
 
 			//////////// WORLDMAP ///////////
 			if (player->GetWorldMapShowFlag() == true )  
 			{
-				gui_map->update();   
-				gui_map->Render();   
+				Galaxy* galaxy = player->GetNpc()->GetStarSystem()->GetGalaxy();
+				//update
+				gui_map->UpdateMouseInteraction(galaxy, mxvp, myvp, lmb, rmb);   
+				
+				//render
+			        resetRenderTransformation();
+        			enable_BLEND();   
+     					gui_map->Render(galaxy);    
+				disable_BLEND();  					
 			}
 
-			gui_space->update();    
-			gui_space->Render();
+			gui_space->UpdateMouseInteraction(mxvp, myvp, lmb, rmb);    
+			resetRenderTransformation();
+			enable_BLEND();    						
+				gui_space->RenderButtons();
+				gui_space->RenderFocusedButtonInfo(mxvp, myvp);
+			disable_BLEND();
+
+			gui_space->RenderText(player->GetScreen()->GetBottomLeftGlobalCoord());
 		
 			break;
 		}
 		
 		case ENTITY::KOSMOPORT_ID:
-		{    								
+		{    	
+			Rect screen_rect = Rect(0, 0, player->GetScreen()->GetWidth(), player->GetScreen()->GetHeight());   
+										
 			switch(gui_kosmoport->GetActiveScreenId())
         		{
         			case GUI::SCREEN::ANGAR_ID:
@@ -147,18 +161,17 @@ void GuiManager::RunSession()
 			        	
 			        	//render
         				resetRenderTransformation();
-        				Rect screen_rect = Rect(0, 0, player->GetScreen()->GetWidth(), player->GetScreen()->GetHeight());    
         				angar->RenderBackground(screen_rect);
                				enable_BLEND();   
 			        		gui_angar->RenderInternal(angar);
 			        		
 						if (scan_vehicle != NULL) 	{ RenderScanVehicle(scan_vehicle); }
-						else 				{ gui_angar->RenderItemInfo(angar, mxvp, myvp); }
+						else 				{ gui_angar->RenderFocusedItemInfo(angar, mxvp, myvp); }
 
 			        		gui_kosmoport->RenderButtons(); 
 			        		gui_angar->RenderButtons();
-                				gui_kosmoport->RenderButtonInfo(mxvp, myvp); 
-                				gui_angar->RenderButtonInfo(mxvp, myvp); 
+                				gui_kosmoport->RenderFocusedButtonInfo(mxvp, myvp); 
+                				gui_angar->RenderFocusedButtonInfo(mxvp, myvp); 
                				disable_BLEND(); 
 	        		
 					break;
@@ -185,7 +198,6 @@ void GuiManager::RunSession()
 								        	
 			        	//render
         				resetRenderTransformation();
-					Rect screen_rect(0, 0, player->GetScreen()->GetWidth(), player->GetScreen()->GetHeight()); 
 					store->RenderBackground(screen_rect);
 					enable_BLEND();
 						gui_vehicle->RenderVehicle(vehicle);
@@ -200,7 +212,7 @@ void GuiManager::RunSession()
 						}
 
 			        		gui_kosmoport->RenderButtons(); 
-                				gui_kosmoport->RenderButtonInfo(mxvp, myvp); 
+                				gui_kosmoport->RenderFocusedButtonInfo(mxvp, myvp); 
 					disable_BLEND();
 	
 					player->GetNpc()->ResetScanTarget();
@@ -210,35 +222,72 @@ void GuiManager::RunSession()
 
         			case GUI::SCREEN::SHOP_ID:
         			{
-        				((Kosmoport*)player->GetNpc()->GetLand())->GetShop()->Update();
-                			((Kosmoport*)player->GetNpc()->GetLand())->GetShop()->Render(player);
-		
-        				//gui_kosmoport->UpdateMouseInteraction(); 
-        				//gui_kosmoport->Render(); 
+        				Shop* shop = ((Kosmoport*)player->GetNpc()->GetLand())->GetShop();
+        				
+        				//update        					
+         	        		if (gui_kosmoport->UpdateMouseInteraction(mxvp, myvp, lmb, rmb) == false)
+					{
+						//gui_shop->UpdateMouseInternaction(shop, mxvp, myvp, lmb, rmb);	
+			        	}
+			        	
+			        	//render
+        				resetRenderTransformation();
+        				shop->RenderBackground(screen_rect);
+        				enable_BLEND();   
+     						//gui_shop->RenderInternals(shop);
+     						
+     						gui_kosmoport->RenderButtons(); 
+                				gui_kosmoport->RenderFocusedButtonInfo(mxvp, myvp); 
+                				    
+					disable_BLEND();  
         				
 					break;
 				}
 
         			case GUI::SCREEN::GALAXYMAP_ID:
         			{
-        				clearScreen();
-        				gui_map->update();
-                			gui_map->Render();   
-
-        				//gui_kosmoport->UpdateMouseInteraction(); 
-        				//gui_kosmoport->Render(); 
+					Galaxy* galaxy = player->GetNpc()->GetStarSystem()->GetGalaxy();
+					//update
+					if (gui_kosmoport->UpdateMouseInteraction(mxvp, myvp, lmb, rmb) == false)
+					{
+						gui_map->UpdateMouseInteraction(galaxy, mxvp, myvp, lmb, rmb);
+			        	}					   
+				
+					//render
+        				clearScreen(); //becase there is no background
+			        	resetRenderTransformation();
+        				enable_BLEND();   
+     						gui_map->Render(galaxy);
+     						
+     						gui_kosmoport->RenderButtons(); 
+                				gui_kosmoport->RenderFocusedButtonInfo(mxvp, myvp); 
+                				    
+					disable_BLEND();    
         				         	
          				break;
          			}
 
          			case GUI::SCREEN::GOVERMENT_ID:
          			{
-         				((Kosmoport*)player->GetNpc()->GetLand())->GetGoverment()->Update();
-                			((Kosmoport*)player->GetNpc()->GetLand())->GetGoverment()->Render(player);
-         	
-         	        		//gui_kosmoport->UpdateMouseInteraction(); 
-        				//gui_kosmoport->Render(); 
-        				
+         				Goverment* goverment = ((Kosmoport*)player->GetNpc()->GetLand())->GetGoverment();
+         				
+         				//update
+         				if (gui_kosmoport->UpdateMouseInteraction(mxvp, myvp, lmb, rmb) == false)
+					{
+						//gui_goverment->UpdateMouseInteraction(goverment, mxvp, myvp, lmb, rmb);
+			        	}
+			        	
+			        	//render
+			        	resetRenderTransformation();
+        				goverment->RenderBackground(screen_rect);
+        				enable_BLEND();   
+						//gui_goverment->RenderInternals(goverment);
+     						
+     						gui_kosmoport->RenderButtons(); 
+                				gui_kosmoport->RenderFocusedButtonInfo(mxvp, myvp); 
+                				    
+					disable_BLEND(); 
+
          				break;
          			}
 			}

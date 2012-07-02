@@ -28,22 +28,18 @@ class GuiSpace
       		GuiSpace(Player*);
        		~GuiSpace();
 
-		void update();
-		void Render();
+       		void UpdateMouseInteraction(int, int, int, int);
+       		
+       		void RenderButtons() const;
+       		void RenderFocusedButtonInfo(int, int) const;
+       		void RenderText(const vec2f&) const;
        		
        	private:
        		Player* player;
        		
        		std::vector<Button*> button_vec;
        		
-       		Button* galaxymap_screen_button; 
-       		
-       		void resetInfoFlags();
-       		void mouseCheckInteraction();
-       		
-       		void renderInternal() const;
-       		void renderInfo() const;
-       		void renderText(vec2f) const;
+
 };
 
 

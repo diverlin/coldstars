@@ -26,29 +26,12 @@ Goverment::Goverment(int id)
 	data_id.type_id = ENTITY::GOVERMENT_ID;
 	data_id.subtype_id = NONE_ID;
 
-        textureOb_face         = NULL;   
+        textureOb_face = NULL;   
 }
 
 Goverment::~Goverment()
 {
 	EntityManager::Instance().RemoveEntity(this);
-}
-
-void Goverment::Update()
-{}
-
-void Goverment::RenderInternals() const
-{}
-            
-void Goverment::Render(Player* player) const // move to GuiGoverment
-{
-        clearScreen();
-        resetRenderTransformation();
-                                                        
-        Rect screen_rect = Rect(0, 0, player->GetScreen()->GetWidth(), player->GetScreen()->GetHeight());    
-        RenderBackground(screen_rect);
-        
-        RenderInternals();
 }
 
 

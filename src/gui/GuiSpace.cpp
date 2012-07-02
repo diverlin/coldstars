@@ -16,15 +16,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "guiSpace.hpp"
+#include "GuiSpace.hpp"
 
-GuiSpace :: GuiSpace(Player* player)
+GuiSpace::GuiSpace(Player* player)
 {
 	this->player = player;
 	
     	TextureOb* texOb_icon_map = g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_map;
     	
-    	galaxymap_screen_button = new Button(texOb_icon_map, 
+    	Button* galaxymap_screen_button = new Button(texOb_icon_map, 
         				     GUI::SCREEN::GALAXYMAP_ID,
     					     Config::Instance().SCREEN_WIDTH  - (GUI::ICON_SIZE + 5),
     					     Config::Instance().SCREEN_HEIGHT - (GUI::ICON_SIZE + 5), 
@@ -36,32 +36,16 @@ GuiSpace :: GuiSpace(Player* player)
 }
 
 
-GuiSpace :: ~GuiSpace()
-{}
-
-
-void GuiSpace :: update()
+GuiSpace::~GuiSpace()
 {
-	resetInfoFlags();
-	mouseCheckInteraction();
-}
-
-
-void GuiSpace :: resetInfoFlags()
-{
-	for (unsigned int i = 0; i< button_vec.size(); i++)
+	for (unsigned int i=0; i<button_vec.size(); i++)
 	{
-		button_vec[i]->setShowInfoFlag(false);
+		delete button_vec[i];
 	}
 }
 
-
-void GuiSpace :: mouseCheckInteraction()
+void GuiSpace::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb)
 {
-	int mxvp = player->GetCursor()->GetMousePos().x;
-	int myvp = player->GetScreen()->GetHeight() - player->GetCursor()->GetMousePos().y;         
-	int lmb  = player->GetCursor()->GetMouseLeftButton();
-
 	for (unsigned int i = 0; i < button_vec.size(); i++)
      	{ 
         	if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
@@ -77,21 +61,7 @@ void GuiSpace :: mouseCheckInteraction()
      	}
 }
 
-
-void GuiSpace :: Render()
-{
-	resetRenderTransformation();
-
-	enable_BLEND();    						
-	renderInternal();
-	renderInfo();
-	disable_BLEND();
-
-	renderText(player->GetScreen()->GetBottomLeftGlobalCoord());
-}
-
-
-void GuiSpace :: renderInternal() const
+void GuiSpace::RenderButtons() const
 {
 	for (unsigned int i = 0; i < button_vec.size(); i++)
 	{ 
@@ -99,12 +69,11 @@ void GuiSpace :: renderInternal() const
 	}
 }
 
-void GuiSpace :: renderInfo() const
+void GuiSpace::RenderFocusedButtonInfo(int mxvp, int myvp) const
 {
-
-	for (unsigned int i = 0; i< button_vec.size(); i++)
+	for (unsigned int i=0; i<button_vec.size(); i++)
 	{
-		if (button_vec[i]->getShowInfoFlag() == true)
+		if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
 		{
 			button_vec[i]->renderInfo();
 			break;
@@ -112,7 +81,7 @@ void GuiSpace :: renderInfo() const
 	}       
 }
 
-void GuiSpace :: renderText(vec2f scroll_coords) const
+void GuiSpace::RenderText(const vec2f& scroll_coords) const
 {
 	std::string _coord_str = "world coord: " + int2str(scroll_coords.x) + "," + int2str(scroll_coords.y);
 

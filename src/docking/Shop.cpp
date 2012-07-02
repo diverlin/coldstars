@@ -33,25 +33,6 @@ Shop::~Shop()
 }                
 
 
-void Shop::RenderInternals() const
-{}
-      
-void Shop::Update()
-{}
-            
-void Shop::Render(Player* player) const // move to GuiShop
-{
-        clearScreen();
-        resetRenderTransformation();
-        
-        Rect screen_rect = Rect(0, 0, player->GetScreen()->GetWidth(), player->GetScreen()->GetHeight());    
-        RenderBackground(screen_rect);
-        
-        enable_BLEND();
-                RenderInternals();
-        disable_BLEND();
-}
-
 
 
 void Shop::SaveDataUniqueShop(boost::property_tree::ptree& save_ptree, const std::string& root) const

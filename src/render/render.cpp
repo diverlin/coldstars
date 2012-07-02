@@ -189,14 +189,12 @@ void drawInfoIn2Column(
      	TextureOb* texOb_textBg = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::TEXT_BACKGROUND_ID);
      	Rect rect = Rect(center_x - char_w, center_y - info_total_string_h, info_total_string_w, info_total_string_h + char_h/2);
 
-     	glEnable(GL_BLEND);
      	drawTexturedRect(texOb_textBg, rect, -2);
-     	glDisable(GL_BLEND);
 
      	sf::String s((*pInfo_title_list)[0], Gui::GetFont(), (font_size+1));
      	s.SetColor(sf::Color(255, 255, 255));
      	s.SetPosition(center_x - scroll_x + info_total_string_w/3, (Gui::GetWindow().GetHeight() - center_y) + scroll_y); 
-      Gui::GetWindow().Draw(s);
+      	Gui::GetWindow().Draw(s);
 
      	for (unsigned int i = 1; i < pInfo_title_list->size(); i++)
      	{
@@ -212,7 +210,7 @@ void drawInfoIn2Column(
          	sf::String s((*pInfo_value_list)[i], Gui::GetFont(), font_size);
          	s.SetColor(sf::Color(250, 250, 0));
          	s.SetPosition(center_x - scroll_x + max_info_title_str_size * (char_w - 1.2), (Gui::GetWindow().GetHeight() - center_y) + char_h*i + char_h + scroll_y); 
-          Gui::GetWindow().Draw(s);
+          	Gui::GetWindow().Draw(s);
      	}  
 }
 
@@ -230,7 +228,7 @@ void drawSimpleText(std:: string str, int font_size, float pos_x, float pos_y)
      	sf::String s(str, Gui::GetFont(), font_size);
      	s.SetColor(sf::Color(255, 255, 255));
      	s.SetPosition(pos_x, (Gui::GetWindow().GetHeight() - pos_y)); 
-      Gui::GetWindow().Draw(s);
+      	Gui::GetWindow().Draw(s);
 }
 
 

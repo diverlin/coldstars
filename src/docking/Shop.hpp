@@ -26,17 +26,12 @@ class Shop : public Room
         public: 
                 Shop(int id);
                 ~Shop();                
-                                       
-                void Update();
-                void Render(Player*) const;
                 
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 		
-        private:
-                void RenderInternals() const;
-                
+        private:                
                 void SaveDataUniqueShop(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueShop(const boost::property_tree::ptree&);
 		void ResolveDataUniqueShop();
