@@ -53,7 +53,7 @@ FBO::~FBO()
 GLuint FBO :: getTexture() const { return texture; }
 		
 		
-void FBO :: activate(Screen* screen)
+void FBO :: activate(const vec2i& resolution)
 {
      	glBindTexture(GL_TEXTURE_2D, 0);            // unbind texture
      	glBindFramebuffer(GL_FRAMEBUFFER, fbo);    // putcom // bind fbo
@@ -62,7 +62,7 @@ void FBO :: activate(Screen* screen)
      	glLoadIdentity();
 
      	glPushAttrib(GL_VIEWPORT_BIT);               // viewport is shared with the main context
-     	glViewport(0, 0, screen->GetWidth(), screen->GetHeight());
+     	glViewport(0, 0, resolution.x, resolution.y);
 }
 
 void FBO :: deactivate()

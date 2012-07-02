@@ -71,7 +71,7 @@ class ScenarioCollector;
 #include "src/common/Logger.hpp"
 #include "src/common/myStr.hpp"
 
-#include "src/render/Screen.hpp"
+//#include "src/render/Screen.hpp"
 
 #include "src/resources/objLoader.hpp"
 
@@ -471,7 +471,7 @@ class ScenarioCollector;
 
 #include "src/text/textstuff.cpp"
 
-#include "src/render/Screen.cpp"
+//#include "src/render/Screen.cpp"
 #include "src/common/TurnTimer.cpp"
 #include "src/common/GameDate.cpp"
 #include "src/config/SaveManager.cpp" 
