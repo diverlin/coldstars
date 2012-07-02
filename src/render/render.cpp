@@ -143,7 +143,7 @@ void drawLine(TextureOb* texOb,
 void drawSimpleColoredText(std::string str, vec2f pos, Color4i color, vec2f scroll_coord)
 {
      	 int font_size = 12;
-         sf::String s(str, Gui::GetFont(), font_size);
+         sf::String s(str, Window::Instance().GetFont(), font_size);
               	
           /* SHADOW */
      	 //s.SetColor(sf::Color(0, 0, 0));
@@ -151,8 +151,8 @@ void drawSimpleColoredText(std::string str, vec2f pos, Color4i color, vec2f scro
          //GetWindows().Draw(s);
          
          s.SetColor(sf::Color(color.r, color.g, color.b));
-         s.SetPosition(pos.x - scroll_coord.x, (Gui::GetWindow().GetHeight() - pos.y) + scroll_coord.y); 
-         Gui::GetWindow().Draw(s);        
+         s.SetPosition(pos.x - scroll_coord.x, (Window::Instance().GetWindow().GetHeight() - pos.y) + scroll_coord.y); 
+         Window::Instance().GetWindow().Draw(s);        
 }
 
 
@@ -191,26 +191,26 @@ void drawInfoIn2Column(
 
      	drawTexturedRect(texOb_textBg, rect, -2);
 
-     	sf::String s((*pInfo_title_list)[0], Gui::GetFont(), (font_size+1));
+     	sf::String s((*pInfo_title_list)[0], Window::Instance().GetFont(), (font_size+1));
      	s.SetColor(sf::Color(255, 255, 255));
-     	s.SetPosition(center_x - scroll_x + info_total_string_w/3, (Gui::GetWindow().GetHeight() - center_y) + scroll_y); 
-      	Gui::GetWindow().Draw(s);
+     	s.SetPosition(center_x - scroll_x + info_total_string_w/3, (Window::Instance().GetWindow().GetHeight() - center_y) + scroll_y); 
+      	Window::Instance().GetWindow().Draw(s);
 
      	for (unsigned int i = 1; i < pInfo_title_list->size(); i++)
      	{
-         	sf::String s((*pInfo_title_list)[i], Gui::GetFont(), font_size);
+         	sf::String s((*pInfo_title_list)[i], Window::Instance().GetFont(), font_size);
          	s.SetColor(sf::Color(255, 255, 255));
-         	s.SetPosition(center_x - scroll_x, (Gui::GetWindow().GetHeight() - center_y) + char_h*i + scroll_y); 
-          Gui::GetWindow().Draw(s);
+         	s.SetPosition(center_x - scroll_x, (Window::Instance().GetWindow().GetHeight() - center_y) + char_h*i + scroll_y); 
+          Window::Instance().GetWindow().Draw(s);
      	}       
 
 
      	for (unsigned int i = 0; i < pInfo_value_list->size(); i++)
      	{
-         	sf::String s((*pInfo_value_list)[i], Gui::GetFont(), font_size);
+         	sf::String s((*pInfo_value_list)[i], Window::Instance().GetFont(), font_size);
          	s.SetColor(sf::Color(250, 250, 0));
-         	s.SetPosition(center_x - scroll_x + max_info_title_str_size * (char_w - 1.2), (Gui::GetWindow().GetHeight() - center_y) + char_h*i + char_h + scroll_y); 
-          	Gui::GetWindow().Draw(s);
+         	s.SetPosition(center_x - scroll_x + max_info_title_str_size * (char_w - 1.2), (Window::Instance().GetWindow().GetHeight() - center_y) + char_h*i + char_h + scroll_y); 
+          	Window::Instance().GetWindow().Draw(s);
      	}  
 }
 
@@ -225,10 +225,10 @@ void drawInfoIn2Column(
 
 void drawSimpleText(std:: string str, int font_size, float pos_x, float pos_y)
 {
-     	sf::String s(str, Gui::GetFont(), font_size);
+     	sf::String s(str, Window::Instance().GetFont(), font_size);
      	s.SetColor(sf::Color(255, 255, 255));
-     	s.SetPosition(pos_x, (Gui::GetWindow().GetHeight() - pos_y)); 
-      	Gui::GetWindow().Draw(s);
+     	s.SetPosition(pos_x, (Window::Instance().GetWindow().GetHeight() - pos_y)); 
+      	Window::Instance().GetWindow().Draw(s);
 }
 
 

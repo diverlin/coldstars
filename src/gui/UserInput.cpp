@@ -60,11 +60,11 @@ void UserInput::GetSimpleInputs(Player* player)
 	save = false;
 	load = false;
 			
-	while (Gui::GetWindow().GetEvent(event))
+	while (Window::Instance().GetWindow().GetEvent(event))
 	{
 	        // Close window : exit
 	        if (event.Type == sf::Event::Closed)
-		    	Gui::GetWindow().Close();
+		    	Window::Instance().GetWindow().Close();
                           
 	        // Resize event : adjust viewport
 	        if (event.Type == sf::Event::Resized)
@@ -346,7 +346,7 @@ void UserInput::GetSimpleInputs(Player* player)
 
 void UserInput::GetRealTimeInputs()
 {       
-        const sf::Input& Input = Gui::GetWindow().GetInput();
+        const sf::Input& Input = Window::Instance().GetWindow().GetInput();
               
         // KEYBOARD input
         keyboardLeftPressed  = Input.IsKeyDown(sf::Key::Left);   

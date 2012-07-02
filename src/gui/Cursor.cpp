@@ -32,7 +32,7 @@ Cursor::~Cursor()
 
 void Cursor::UpdateMousePos()
 {
-        const sf::Input& Input = Gui::GetWindow().GetInput();
+        const sf::Input& Input = Window::Instance().GetWindow().GetInput();
         mouse_pos.Set(Input.GetMouseX(), Input.GetMouseY());
 }
 

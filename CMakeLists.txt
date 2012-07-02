@@ -17,13 +17,13 @@ add_definitions (-Wall -pedantic -std=c++0x -std=gnu++0x -pedantic-errors -Wextr
 set (HEADERS
 	src/config/config.hpp
 	
-	src/gui/window.hpp
+	src/gui/Window.hpp
 	include.hpp
 )
 
 set (SOURCES
 	src/config/config.cpp
-	src/gui/window.cpp
+	src/gui/Window.cpp
   main.cpp
 )
 
