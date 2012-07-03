@@ -16,6 +16,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
+#ifndef GLOBAL_H
+#define GLOBAL_H
+
+//#include "../resources/objLoader.hpp"
+//#include "../common/id.hpp"
+//#include "../resources/textureManager.hpp"
+
 sf::Clock g_CLOCK;
 
 ObjMeshInstance* g_SPHERE_MESH; 
@@ -46,3 +54,7 @@ std::vector<int> RACE3_ALLOWED_SUBTYPE_LIST;
 std::vector<int> RACE4_ALLOWED_SUBTYPE_LIST;
 std::vector<int> RACE6_ALLOWED_SUBTYPE_LIST;
 std::vector<int> RACE7_ALLOWED_SUBTYPE_LIST;
+
+
+
+#endif 

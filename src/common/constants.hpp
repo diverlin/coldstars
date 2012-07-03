@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #define LOG_ENABLED 0
 
-const std::string GAME_TITLE = "cold star V0.0.4.51 (SFML/C++)";
+const std::string GAME_TITLE = "cold star V0.0.4.52 (SFML/C++)";
 
 const int TURN_TIME = 150;  //turn time, depends on game fps
 

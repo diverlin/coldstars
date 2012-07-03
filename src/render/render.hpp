@@ -20,6 +20,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef RENDER_H
 #define RENDER_H
 
+void initGl(int, int);
+void resizeGl(int, int);
+
 void clearScreen();
 void resetRenderTransformation();
 

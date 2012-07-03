@@ -38,7 +38,7 @@ class Cursor
 		ItemSlot* GetItemSlot() const { return slot; };
 								
 		void UpdateMousePos();		
-		void Update();
+		void Update(int, int);
         	
         private:
         	ItemSlot* slot;        	

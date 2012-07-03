@@ -55,7 +55,6 @@ class Player : public Base
 		bool GetWorldMapShowFlag() const { return control.worldmap; }         	
 		Npc* GetNpc()       const { return npc; }
 		Cursor* GetCursor() const { return cursor; }
-		Screen* GetScreen() const { return screen; }
          
 		bool GetShowAllOrbit()     const { return show_all_orbit; }
 		bool GetShowAllPath()      const { return show_all_path; }
@@ -95,7 +94,6 @@ class Player : public Base
     	     	Npc*     npc;
      	     	
      	     	Cursor* cursor;
-     	     	Screen* screen;
      	     	
      	     	ControlWord control;  
      		WeaponSelector weapon_selector;

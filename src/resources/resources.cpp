@@ -21,14 +21,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 void loadGameData()
 {    	
-    	Window::Instance().GetFont().LoadFromFile("data/font/font.ttf");
+ 	int width     = Config::Instance().SCREEN_WIDTH; 
+      	int height    = Config::Instance().SCREEN_HEIGHT;
+      	int bpp       = Config::Instance().BPP;
+      	bool vert_sync = Config::Instance().VSYNC;
+ 	      	
+      	Screen::Instance().InitBasic(width, height, bpp, vert_sync, GAME_TITLE);
 
 	load3DModels();
     	loadImages();
     	if (Config::Instance().MODERN_EFFECTS == true)
 	{
 		loadShaders();
+		Screen::Instance().InitPostEffects(Screen::Instance().GetWindow().GetWidth(), Screen::Instance().GetWindow().GetHeight());
 	}
+	
+    	Screen::Instance().GetFont().LoadFromFile("data/font/font.ttf");
 }
 
 

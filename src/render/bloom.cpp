@@ -37,14 +37,18 @@ BloomEffect :: BloomEffect(int _screen_w,
         	int div = 1;    
 		for(int fbo_num = 0; fbo_num < fbo_max_per_pass; fbo_num++)
 		{
-                	FBO* pTo_fbo = new FBO(screen_w/div, screen_h/div); 
+                	FBO* pTo_fbo = new FBO(); 
+                	pTo_fbo->Create();
+                	pTo_fbo->Resize(screen_w/div, screen_h/div);
 			fbo_pList.push_back(pTo_fbo);
 			div *= 2;
 		}
 		pTo_fbo_pass_pList.push_back(fbo_pList);
 	}
 
-        pTo_fbo_final = new FBO(screen_w, screen_h);
+        pTo_fbo_final = new FBO();
+        pTo_fbo_final->Create();
+	pTo_fbo_final->Resize(screen_w, screen_h);
 
 	program_blur =          _program_blur;
 	program_extractBright = _program_extractBright;
@@ -52,13 +56,23 @@ BloomEffect :: BloomEffect(int _screen_w,
 }
 
 BloomEffect :: ~BloomEffect()
-{}
+{
+	//for (unsigned int i=0; i<pTo_fbo_pass_pList.size(); i++)
+	//{
+		//for (unsigned int j=0; j<pTo_fbo_pass_pList[i]->size(); j++)
+		//{
+			//delete (*pTo_fbo_pass_pList[i])[j];
+		//}
+	//}
+	
+	//delete pTo_fbo_final;
+}
 
 
-void BloomEffect :: pass0(const vec2i& resolution, GLuint _orig_scene_texture, float brightThreshold)
+void BloomEffect :: pass0(int width, int height, GLuint _orig_scene_texture, float brightThreshold)
 {
 	// RENDER TO FBO0
-        (pTo_fbo_pass_pList[0])[0]->activate(resolution);
+        (pTo_fbo_pass_pList[0])[0]->Activate(width, height);
 
 	// render background
 	glUseProgram(program_extractBright);
@@ -71,14 +85,14 @@ void BloomEffect :: pass0(const vec2i& resolution, GLuint _orig_scene_texture, f
 	drawFullScreenQuad(screen_w, screen_h, -999.0);
 	glUseProgram(0);
 
-        (pTo_fbo_pass_pList[0])[0]->deactivate();
+        (pTo_fbo_pass_pList[0])[0]->Deactivate();
         
         int div = 2;    
 	for(int fbo_num = 1; fbo_num < fbo_max_per_pass; fbo_num++)
 	{
-	        (pTo_fbo_pass_pList[0])[fbo_num]->activate(screen);
-        	drawFullScreenTexturedQuad((pTo_fbo_pass_pList[0])[0]->getTexture(), screen_w/div, screen_h/div, -999.0);
-		(pTo_fbo_pass_pList[0])[fbo_num]->deactivate();
+	        (pTo_fbo_pass_pList[0])[fbo_num]->Activate(width, height);
+        	drawFullScreenTexturedQuad((pTo_fbo_pass_pList[0])[0]->GetTexture(), screen_w/div, screen_h/div, -999.0);
+		(pTo_fbo_pass_pList[0])[fbo_num]->Deactivate();
          
 		div *= 2;
 	}
@@ -86,16 +100,16 @@ void BloomEffect :: pass0(const vec2i& resolution, GLuint _orig_scene_texture, f
         
 }       
                 
-void BloomEffect :: restPasses(const vec2i& resolution)
+void BloomEffect :: restPasses(int width, int height)
 {
 	for (int pass_num = 1; pass_num < pass_max; pass_num++) 
         {   
         	int div = 1;    
 		for(int fbo_num = 0; fbo_num < fbo_max_per_pass; fbo_num++)
 		{
-		        (pTo_fbo_pass_pList[pass_num])[fbo_num]->activate(resolution);
-          		drawFullScreenTexturedQuadBlurred((pTo_fbo_pass_pList[pass_num-1])[fbo_num]->getTexture(), screen_w/div, screen_h/div, -999.0, program_blur);
-          		(pTo_fbo_pass_pList[pass_num])[fbo_num]->deactivate();
+		        (pTo_fbo_pass_pList[pass_num])[fbo_num]->Activate(width, height);
+          		drawFullScreenTexturedQuadBlurred((pTo_fbo_pass_pList[pass_num-1])[fbo_num]->GetTexture(), screen_w/div, screen_h/div, -999.0, program_blur);
+          		(pTo_fbo_pass_pList[pass_num])[fbo_num]->Deactivate();
           
 			div *= 2;
 		}
@@ -104,10 +118,10 @@ void BloomEffect :: restPasses(const vec2i& resolution)
 
 
 
-void BloomEffect :: combine(const vec2i& resolution, GLuint _orig_scene_texture)
+void BloomEffect :: combine(int width, int height, GLuint _orig_scene_texture)
 {
           // RENDER TO final FBO
-          pTo_fbo_final->activate(resolution);
+          pTo_fbo_final->Activate(width, height);
 
           glUseProgram(program_combine);
 
@@ -117,60 +131,60 @@ void BloomEffect :: combine(const vec2i& resolution, GLuint _orig_scene_texture)
 
 
           glActiveTexture(GL_TEXTURE1);                                
-          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[0])[0]->getTexture());
+          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[0])[0]->GetTexture());
           glUniform1i(glGetUniformLocation(program_combine, "Pass0_tex1"), 1);
 
           glActiveTexture(GL_TEXTURE2);        
-          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[0])[1]->getTexture());
+          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[0])[1]->GetTexture());
           glUniform1i(glGetUniformLocation(program_combine, "Pass0_tex2"), 2);
 
           glActiveTexture(GL_TEXTURE3);                                
-          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[0])[2]->getTexture());
+          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[0])[2]->GetTexture());
           glUniform1i(glGetUniformLocation(program_combine, "Pass0_tex3"), 3);
 
           glActiveTexture(GL_TEXTURE4);                                
-          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[0])[3]->getTexture());
+          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[0])[3]->GetTexture());
           glUniform1i(glGetUniformLocation(program_combine, "Pass0_tex4"), 4);
 
 
           glActiveTexture(GL_TEXTURE5);                                
-          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[1])[0]->getTexture());
+          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[1])[0]->GetTexture());
           glUniform1i(glGetUniformLocation(program_combine, "Pass1_tex1"), 5);
 
           glActiveTexture(GL_TEXTURE6);                                
-          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[1])[1]->getTexture());
+          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[1])[1]->GetTexture());
           glUniform1i(glGetUniformLocation(program_combine, "Pass1_tex2"), 6);
 
           glActiveTexture(GL_TEXTURE7);                                
-          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[1])[2]->getTexture());
+          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[1])[2]->GetTexture());
           glUniform1i(glGetUniformLocation(program_combine, "Pass1_tex3"), 7);
 
           glActiveTexture(GL_TEXTURE8);                                
-          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[1])[3]->getTexture());
+          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[1])[3]->GetTexture());
           glUniform1i(glGetUniformLocation(program_combine, "Pass1_tex4"), 8);
 
 
           glActiveTexture(GL_TEXTURE9);                                
-          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[2])[0]->getTexture());
+          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[2])[0]->GetTexture());
           glUniform1i(glGetUniformLocation(program_combine, "Pass2_tex1"), 9);
 
           glActiveTexture(GL_TEXTURE10);                                
-          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[2])[1]->getTexture());
+          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[2])[1]->GetTexture());
           glUniform1i(glGetUniformLocation(program_combine, "Pass2_tex2"), 10);
 
           glActiveTexture(GL_TEXTURE11);                                
-          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[2])[2]->getTexture());
+          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[2])[2]->GetTexture());
           glUniform1i(glGetUniformLocation(program_combine, "Pass2_tex3"), 11);
 
           glActiveTexture(GL_TEXTURE12);                                
-          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[2])[3]->getTexture());
+          glBindTexture(GL_TEXTURE_2D, (pTo_fbo_pass_pList[2])[3]->GetTexture());
           glUniform1i(glGetUniformLocation(program_combine, "Pass2_tex4"), 12);
 
           drawFullScreenQuad(screen_w, screen_h, -999.0);
 
-          pTo_fbo_final->deactivate();
+          pTo_fbo_final->Deactivate();
           //texture_blured = pTo_fbo_final->texture; //(pTo_fbo_pass_pList[pass_num])[fbo_num]->texture; // improove, blured texture is needed for volumetric shader
-          texture_blured = (pTo_fbo_pass_pList[2])[3]->getTexture(); // improove, blured texture is needed for volumetric shader
+          texture_blured = (pTo_fbo_pass_pList[2])[3]->GetTexture(); // improove, blured texture is needed for volumetric shader
 }
 
 

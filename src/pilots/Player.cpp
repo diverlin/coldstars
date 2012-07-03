@@ -75,7 +75,6 @@ Player::Player(int id)
    	
     	npc  = NULL;
     	cursor = new Cursor(this);
-    	screen = new Screen();
     	
     	GUI_MANAGER    = new GuiManager(this);
     	
@@ -88,7 +87,6 @@ Player::Player(int id)
 Player::~Player()
 {
 	delete cursor;
-	delete screen;
 	
 	delete GUI_MANAGER;
 }  
@@ -243,13 +241,13 @@ void Player::AddIfVisible(VerticalFlowText* effect)
   
 void Player::RenderEntities_NEW()
 {   
-	int w = screen->GetWidth();
-	int h = screen->GetHeight();
+	int w = Screen::Instance().GetWindow().GetWidth();
+	int h = Screen::Instance().GetWindow().GetHeight();
 
-	screen->GetFbo0()->activate(screen);
+	Screen::Instance().GetFbo0().Activate(w, h);
    
-        	npc->GetStarSystem()->DrawBackground(screen->GetBottomLeftGlobalCoord());           
-		camera(screen->GetBottomLeftGlobalCoord().x, screen->GetBottomLeftGlobalCoord().y);    
+        	npc->GetStarSystem()->DrawBackground(Screen::Instance().GetBottomLeftGlobalCoord());           
+		camera(Screen::Instance().GetBottomLeftGlobalCoord().x, Screen::Instance().GetBottomLeftGlobalCoord().y);    
 	        
 
 		npc->GetStarSystem()->RestoreDefaultColor();
@@ -260,47 +258,47 @@ void Player::RenderEntities_NEW()
     			}
     		disable_BLEND();
 		npc->GetStarSystem()->RestoreSceneColor();
-	screen->GetFbo0()->deactivate();
+	Screen::Instance().GetFbo0().Deactivate();
 
 	// POST PROCESS BLOOM (many FBO)
-	screen->GetBloom()->pass0(screen, screen->GetFbo0()->getTexture(), visible_STAR_vec[0]->GetBrightThreshold());
-	screen->GetBloom()->restPasses(screen);
-	screen->GetBloom()->combine(screen, screen->GetFbo0()->getTexture());
+	Screen::Instance().GetBloom()->pass0(w, h, Screen::Instance().GetFbo0().GetTexture(), visible_STAR_vec[0]->GetBrightThreshold());
+	Screen::Instance().GetBloom()->restPasses(w, h);
+	Screen::Instance().GetBloom()->combine(w, h, Screen::Instance().GetFbo0().GetTexture());
 
 	// RENDER to FBO1, VOLUMETRIC LIGHT
-	screen->GetFbo1()->activate(screen);
+	Screen::Instance().GetFbo1().Activate(w, h);
 		glUseProgram(g_SHADERS.volumetriclight);
 			glActiveTexture(GL_TEXTURE0);                                
-			glBindTexture(GL_TEXTURE_2D, screen->GetBloom()->pTo_fbo_final->getTexture());
+			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetBloom()->pTo_fbo_final->GetTexture());
 			glUniform1i(glGetUniformLocation(g_SHADERS.volumetriclight, "FullSampler"), 0);
 
 			glActiveTexture(GL_TEXTURE1);                                
-			glBindTexture(GL_TEXTURE_2D, screen->GetBloom()->texture_blured);
+			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetBloom()->texture_blured);
 			glUniform1i(glGetUniformLocation(g_SHADERS.volumetriclight, "BlurSampler"), 1);
 
-			glUniform4f(glGetUniformLocation(g_SHADERS.volumetriclight, "sun_pos"), -screen->GetBottomLeftGlobalCoord().x/w, -screen->GetBottomLeftGlobalCoord().y/h, -100.0, 1.0);
+			glUniform4f(glGetUniformLocation(g_SHADERS.volumetriclight, "sun_pos"), -Screen::Instance().GetBottomLeftGlobalCoord().x/w, -Screen::Instance().GetBottomLeftGlobalCoord().y/h, -100.0, 1.0);
           
 			glActiveTexture(GL_TEXTURE0);
 			drawFullScreenQuad(w, h, -999.0);
 		glUseProgram(0);
 		glActiveTexture(GL_TEXTURE0);
-	screen->GetFbo1()->deactivate();
+	Screen::Instance().GetFbo1().Deactivate();
 
 
-	screen->GetFbo2()->activate(screen);
-		drawFullScreenTexturedQuad(screen->GetFbo1()->getTexture(), w, h, -999.0);
+	Screen::Instance().GetFbo2().Activate(w, h);
+		drawFullScreenTexturedQuad(Screen::Instance().GetFbo1().GetTexture(), w, h, -999.0);
            
-          	camera(screen->GetBottomLeftGlobalCoord().x, screen->GetBottomLeftGlobalCoord().y);    
+          	camera(Screen::Instance().GetBottomLeftGlobalCoord().x, Screen::Instance().GetBottomLeftGlobalCoord().y);    
         
 		enable_DEPTH();  
     			for(unsigned int i = 0; i < visible_PLANET_vec.size(); i++) 
     			{ 
-       				visible_PLANET_vec[i]->Render_NEW(screen->GetBottomLeftGlobalCoord()); 
+       				visible_PLANET_vec[i]->Render_NEW(Screen::Instance().GetBottomLeftGlobalCoord()); 
     			}
     		
     			for(unsigned int i = 0; i < visible_ASTEROID_vec.size(); i++)
     			{ 
-       				visible_ASTEROID_vec[i]->Render_NEW(screen->GetBottomLeftGlobalCoord()); 
+       				visible_ASTEROID_vec[i]->Render_NEW(Screen::Instance().GetBottomLeftGlobalCoord()); 
     			}
     		disable_DEPTH();
 
@@ -346,11 +344,11 @@ void Player::RenderEntities_NEW()
     			}    	
 		disable_BLEND();
 		
-    	screen->GetFbo2()->deactivate();
+    	Screen::Instance().GetFbo2().Deactivate();
 
 
 	// POST PROCESS WAVE SHOCK into FBO2
-	screen->GetFbo3()->activate(screen);
+	Screen::Instance().GetFbo3().Activate(w, h);
 
 		float center_array[10][2];
 		float xyz_array[10][3];
@@ -358,8 +356,8 @@ void Player::RenderEntities_NEW()
 
 		for (unsigned int i = 0; i < visible_effect_SHOCKWAVE_vec.size(); i++)
 		{         
-			center_array[i][0] = visible_effect_SHOCKWAVE_vec[i]->center.x/w - screen->GetBottomLeftGlobalCoord().x/w;
-			center_array[i][1] = visible_effect_SHOCKWAVE_vec[i]->center.y/h - screen->GetBottomLeftGlobalCoord().y/h;
+			center_array[i][0] = visible_effect_SHOCKWAVE_vec[i]->center.x/w - Screen::Instance().GetBottomLeftGlobalCoord().x/w;
+			center_array[i][1] = visible_effect_SHOCKWAVE_vec[i]->center.y/h - Screen::Instance().GetBottomLeftGlobalCoord().y/h;
 			xyz_array[i][0] = visible_effect_SHOCKWAVE_vec[i]->parameter.x;
 			xyz_array[i][1] = visible_effect_SHOCKWAVE_vec[i]->parameter.y;
 			xyz_array[i][2] = visible_effect_SHOCKWAVE_vec[i]->parameter.z;
@@ -370,7 +368,7 @@ void Player::RenderEntities_NEW()
 
 		glUseProgram(g_SHADERS.shockwave);
 			glActiveTexture(GL_TEXTURE0);                                
-			glBindTexture(GL_TEXTURE_2D, screen->GetFbo2()->getTexture());
+			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetFbo2().GetTexture());
 			glUniform1i (glGetUniformLocation(g_SHADERS.shockwave, "sceneTex"), 0);
 
 			int len_effect_SHOCKWAVE_list = visible_effect_SHOCKWAVE_vec.size();
@@ -382,7 +380,7 @@ void Player::RenderEntities_NEW()
 			drawFullScreenQuad(w, h, -999.0);
 		glUseProgram(0);
 	
-	screen->GetFbo3()->deactivate();
+	Screen::Instance().GetFbo3().Deactivate();
 
 
 	// render from FBO
@@ -392,10 +390,10 @@ void Player::RenderEntities_NEW()
 	clearScreen();
 	resetRenderTransformation();
 
-	drawFullScreenTexturedQuad(screen->GetFbo3()->getTexture(), w, h, -999.0);
+	drawFullScreenTexturedQuad(Screen::Instance().GetFbo3().GetTexture(), w, h, -999.0);
 	//drawFullScreenTexturedQuad(pTo_fbo0->texture, w, h, -999.0);  // debug
 
-	camera(screen->GetBottomLeftGlobalCoord().x, screen->GetBottomLeftGlobalCoord().y);
+	camera(Screen::Instance().GetBottomLeftGlobalCoord().x, Screen::Instance().GetBottomLeftGlobalCoord().y);
 	
 	enable_BLEND();
 		for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
@@ -412,7 +410,7 @@ void Player::RenderEntities_NEW()
     		
     		for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
     		{ 
-        		visible_text_DAMAGE_vec[i]->Render(screen->GetBottomLeftGlobalCoord()); 
+        		visible_text_DAMAGE_vec[i]->Render(Screen::Instance().GetBottomLeftGlobalCoord()); 
     		}    		
     		
     	disable_BLEND();
@@ -426,9 +424,9 @@ void Player::RenderEntities_NEW()
 void Player::RenderEntities_OLD()
 {   
 	glLoadIdentity();
-        npc->GetStarSystem()->DrawBackground(screen->GetBottomLeftGlobalCoord());
+        npc->GetStarSystem()->DrawBackground(Screen::Instance().GetBottomLeftGlobalCoord());
 	
-        camera(screen->GetBottomLeftGlobalCoord().x, screen->GetBottomLeftGlobalCoord().y);
+        camera(Screen::Instance().GetBottomLeftGlobalCoord().x, Screen::Instance().GetBottomLeftGlobalCoord().y);
         
         disable_BLEND();
         enable_DEPTH();
@@ -505,7 +503,7 @@ void Player::RenderEntities_OLD()
 
         for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
     	{ 
-        	visible_text_DAMAGE_vec[i]->Render(screen->GetBottomLeftGlobalCoord()); 
+        	visible_text_DAMAGE_vec[i]->Render(Screen::Instance().GetBottomLeftGlobalCoord()); 
     	}    		
     		
                 
@@ -555,8 +553,8 @@ void Player::MouseInteractionInSpace() // all large objects must be cheked by la
 {   
     	bool cursor_has_target = false;   
  
-    	int mxvp = cursor->GetMousePos().x                       + screen->GetBottomLeftGlobalCoord().x;
-    	int myvp = screen->GetHeight() - cursor->GetMousePos().y + screen->GetBottomLeftGlobalCoord().y;
+    	int mxvp = cursor->GetMousePos().x                       + Screen::Instance().GetBottomLeftGlobalCoord().x;
+    	int myvp = Screen::Instance().GetWindow().GetHeight() - cursor->GetMousePos().y + Screen::Instance().GetBottomLeftGlobalCoord().y;
 
     	bool mlb = cursor->GetMouseLeftButton();
     	bool mrb = cursor->GetMouseRightButton();
@@ -588,7 +586,7 @@ bool Player::MouseInteractionWithRockets(int mxvp, int myvp, bool mlb, bool mrb)
             	float object_cursor_dist = distBetweenPoints(visible_ROCKET_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
             	if (object_cursor_dist < visible_ROCKET_vec[i]->GetCollisionRadius())
             	{ 
-               		visible_ROCKET_vec[i]->RenderInfoInSpace(screen->GetBottomLeftGlobalCoord()); 
+               		visible_ROCKET_vec[i]->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord()); 
                
 			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 			{
@@ -620,7 +618,7 @@ bool Player::MouseInteractionWithContainers(int mxvp, int myvp, bool mlb, bool m
        		float object_cursor_dist = distBetweenPoints(visible_CONTAINER_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
        		if (object_cursor_dist < visible_CONTAINER_vec[i]->GetCollisionRadius())
             	{   
-               		visible_CONTAINER_vec[i]->RenderInfoInSpace(screen->GetBottomLeftGlobalCoord()); 
+               		visible_CONTAINER_vec[i]->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord()); 
 
 			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 			{
@@ -655,7 +653,7 @@ bool Player::MouseInteractionWithSatellites(int mxvp, int myvp, bool mlb, bool m
             	float object_cursor_dist = distBetweenPoints(visible_SATELLITE_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
             	if (object_cursor_dist < visible_SATELLITE_vec[i]->GetCollisionRadius())
             	{ 
-            	      	visible_SATELLITE_vec[i]->RenderInfoInSpace(screen->GetBottomLeftGlobalCoord()); 
+            	      	visible_SATELLITE_vec[i]->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord()); 
                 	visible_SATELLITE_vec[i]->GetWeaponComplex()->RenderWeaponIcons();
 
                 	visible_SATELLITE_vec[i]->RenderRadarRange(); 
@@ -713,7 +711,7 @@ bool Player::MouseInteractionWithAsteroids(int mxvp, int myvp, bool mlb, bool mr
        		float object_cursor_dist = distBetweenPoints(visible_ASTEROID_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
        		if (object_cursor_dist < visible_ASTEROID_vec[i]->GetCollisionRadius())
        		{   
-                	visible_ASTEROID_vec[i]->RenderInfoInSpace(screen->GetBottomLeftGlobalCoord()); 
+                	visible_ASTEROID_vec[i]->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord()); 
                                 
                         visible_ASTEROID_vec[i]->GetOrbit()->Draw();
 
@@ -748,7 +746,7 @@ bool Player::MouseInteractionWithShips(int mxvp, int myvp, bool mlb, bool mrb) c
         	float object_cursor_dist = distBetweenPoints(visible_SHIP_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
         	if (object_cursor_dist < visible_SHIP_vec[i]->GetCollisionRadius())
         	{ 
-               		visible_SHIP_vec[i]->RenderInfoInSpace(screen->GetBottomLeftGlobalCoord()); 
+               		visible_SHIP_vec[i]->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord()); 
                		visible_SHIP_vec[i]->GetWeaponComplex()->RenderWeaponIcons();
 
                		visible_SHIP_vec[i]->RenderRadarRange(); 
@@ -805,7 +803,7 @@ bool Player::MouseInteractionWithBlackHoles(int mxvp, int myvp, bool mlb, bool m
        		float cursor_dist = distBetweenPoints(visible_BLACKHOLE_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
        		if (cursor_dist < visible_BLACKHOLE_vec[i]->GetCollisionRadius())
        		{   
-       			visible_BLACKHOLE_vec[i]->RenderInfoInSpace(screen->GetBottomLeftGlobalCoord()); 
+       			visible_BLACKHOLE_vec[i]->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord()); 
        			
        			return true;
       		}
@@ -821,7 +819,7 @@ bool Player::MouseInteractionWithSpaceStations(int mxvp, int myvp, bool mlb, boo
        		float object_cursor_dist = distBetweenPoints(visible_SPACESTATION_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
        		if (object_cursor_dist < visible_SPACESTATION_vec[i]->GetCollisionRadius())
             	{ 
-            		visible_SPACESTATION_vec[i]->RenderInfoInSpace(screen->GetBottomLeftGlobalCoord()); 
+            		visible_SPACESTATION_vec[i]->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord()); 
                 	visible_SPACESTATION_vec[i]->GetWeaponComplex()->RenderWeaponIcons();
 
                 	visible_SPACESTATION_vec[i]->RenderRadarRange(); 
@@ -879,7 +877,7 @@ bool Player::MouseInteractionWithPlanets(int mxvp, int myvp, bool mlb, bool mrb)
        		float object_cursor_dist = distBetweenPoints(visible_PLANET_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
        		if (object_cursor_dist < visible_PLANET_vec[i]->GetCollisionRadius())
             	{   
-                	visible_PLANET_vec[i]->RenderInfoInSpace(screen->GetBottomLeftGlobalCoord()); 
+                	visible_PLANET_vec[i]->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord()); 
 
                         visible_PLANET_vec[i]->GetOrbit()->Draw();
           
@@ -908,7 +906,7 @@ bool Player::MouseInteractionWithStars(int mxvp, int myvp, bool mlb, bool mrb) c
       		float object_cursor_dist = distBetweenPoints(visible_STAR_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
        		if (object_cursor_dist < visible_STAR_vec[i]->GetCollisionRadius())
        		{   
-       			visible_STAR_vec[i]->RenderInfo_inSpace(screen->GetBottomLeftGlobalCoord()); 
+       			visible_STAR_vec[i]->RenderInfo_inSpace(Screen::Instance().GetBottomLeftGlobalCoord()); 
 
        			return true; 
         	}
@@ -937,13 +935,13 @@ bool Player::IsObjectOnScreen(const Points& points) const
         int ob_w = points.GetWidth();
         int ob_h = points.GetHeight();
         
-        if (ob_centerx < (screen->GetBottomLeftGlobalCoord().x - ob_w))
+        if (ob_centerx < (Screen::Instance().GetBottomLeftGlobalCoord().x - ob_w))
                 return false;
-        if (ob_centerx > (screen->GetTopRightGlobalCoord().x + ob_w))
+        if (ob_centerx > (Screen::Instance().GetTopRightGlobalCoord().x + ob_w))
                 return false;
-        if (ob_centery < (screen->GetBottomLeftGlobalCoord().y - ob_h))
+        if (ob_centery < (Screen::Instance().GetBottomLeftGlobalCoord().y - ob_h))
                 return false;
-        if (ob_centery > (screen->GetTopRightGlobalCoord().y + ob_h))
+        if (ob_centery > (Screen::Instance().GetTopRightGlobalCoord().y + ob_h))
                 return false;
 
         return true;
@@ -985,7 +983,7 @@ void Player::RunSession(const TurnTimer& turn_timer)
        		case ENTITY::KOSMOPORT_ID:  	{ this->SessionInKosmoport(); break; }
        	}        	
        	
-       	screen->Display();
+       	Screen::Instance().Display();
 }
 
 void Player::ForceStateMachineReset() const
@@ -1016,8 +1014,8 @@ void Player::ResolveData()
 void Player::SaveDataUniquePlayer(boost::property_tree::ptree& save_ptree, const std::string& root) const	
 {
         save_ptree.put(root+"unresolved.npc_id", npc->GetId());
-        save_ptree.put(root+"unresolved.screen_pos_x", screen->GetBottomLeftGlobalCoord().x);
-        save_ptree.put(root+"unresolved.screen_pos_y", screen->GetBottomLeftGlobalCoord().y);
+        save_ptree.put(root+"unresolved.screen_pos_x", Screen::Instance().GetBottomLeftGlobalCoord().x);
+        save_ptree.put(root+"unresolved.screen_pos_y", Screen::Instance().GetBottomLeftGlobalCoord().y);
 }
 
 void Player::LoadDataUniquePlayer(const boost::property_tree::ptree& load_ptree)
@@ -1030,6 +1028,6 @@ void Player::LoadDataUniquePlayer(const boost::property_tree::ptree& load_ptree)
 void Player::ResolveDataUniquePlayer()
 {
         BindNpc((Npc*)EntityManager::Instance().GetEntityById(data_unresolved_player.npc_id));
-        screen->SetBottomLeftGlobalCoord(data_unresolved_player.screen_pos);
+        Screen::Instance().SetBottomLeftGlobalCoord(data_unresolved_player.screen_pos);
 }		
 

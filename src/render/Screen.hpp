@@ -5,35 +5,35 @@
 #include <SFML/Graphics.hpp>
 #include "../common/myVector.hpp"
 #include "../render/fbo.hpp"
-#include "../render/bloom.hpp"
+//#include "../render/bloom.hpp"
 
 class Screen:private sf::NonCopyable
 {
 	public:
       		static Screen& Instance();
-      		sf::RenderWindow& GetWindow() { return render_window; };
-      		sf::Font& GetFont() { return font; };
-      		void Update();
-      		
-      		 	void SetBottomLeftGlobalCoord(vec2f bottomLeft_globalCoord) { this->bottomLeft_globalCoord = bottomLeft_globalCoord; UpdateOnEvent(); };
-        	
-        	int GetWidth() const  { return width; };
-        	int GetHeight() const { return height; };
-        	     	
+        	void InitBasic(int width, int height, int bpp, bool vert_sync, const std::string&);
+      		void InitPostEffects(int, int);
+      		      		        	         		
+	 	void SetBottomLeftGlobalCoord(vec2f bottomLeft_globalCoord) { this->bottomLeft_globalCoord = bottomLeft_globalCoord; }; 
+        
+              	sf::RenderWindow& GetWindow() { return render_window; };
+      		sf::Font& GetFont() { return font; };      			
+       	     	
         	const vec2f& GetTopRightGlobalCoord()   const { return topRight_globalCoord; };
         	const vec2f& GetBottomLeftGlobalCoord() const { return bottomLeft_globalCoord; };
         	     			
-        	FBO* GetFbo0() const { return fbo0; };
-		FBO* GetFbo1() const { return fbo1; };
-		FBO* GetFbo2() const { return fbo2; };
-		FBO* GetFbo3() const { return fbo3; }
+        	FBO& GetFbo0() { return fbo0; };
+		FBO& GetFbo1() { return fbo1; };
+		FBO& GetFbo2() { return fbo2; };
+		FBO& GetFbo3() { return fbo3; }
 
 		BloomEffect* GetBloom() const { return bloom; };	
 		
 		void MovingBy(vec2f);
 
         	void Resize(int, int);
-        					
+   
+      		void Update();     					
 		void Display();	
 
     	private:
@@ -42,29 +42,25 @@ class Screen:private sf::NonCopyable
       		Screen(const Screen&) = delete;
       		Screen& operator=(const Screen&) = delete;
 
-      		sf::RenderWindow render_window;
-      		sf::Font font;
-      
-            		int width, height;
       		int bpp;
       		bool vert_sync;
       		
-      		FBO* fbo0;
-		FBO* fbo1;
-		FBO* fbo2;
-		FBO* fbo3;
+      		sf::RenderWindow render_window;
+      		sf::Font font;
+      		sf::View view;
+      		
+      		FBO fbo0;
+		FBO fbo1;
+		FBO fbo2;
+		FBO fbo3;
 
 		BloomEffect* bloom;
       		
       		vec2f topRight_globalCoord;
       		vec2f bottomLeft_globalCoord;
+
+      		void ResizePostEffects(int, int);
       		
-      		sf::View view;
-      		
-      		void InitGl();
-      		void ResizeGl();
-      		
-      		void ResizePostProcess();
 		void UpdateOnEvent();
 		
       		void DrawFsp();

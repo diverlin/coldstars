@@ -17,7 +17,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "GuiSpace.hpp"
-#include "Window.hpp"
 
 GuiSpace::GuiSpace(Player* player)
 {
@@ -86,10 +85,10 @@ void GuiSpace::RenderText(const vec2f& scroll_coords) const
 {
 	std::string _coord_str = "world coord: " + int2str(scroll_coords.x) + "," + int2str(scroll_coords.y);
 
-	sf::String _str(_coord_str, Window::Instance().GetFont(), 14);
+	sf::String _str(_coord_str, Screen::Instance().GetFont(), 14);
 	_str.SetColor(sf::Color(255, 255, 255));
 	_str.SetPosition(Config::Instance().SCREEN_WIDTH - 200, 15); 
 
-	Window::Instance().GetWindow().Draw(_str);    
+	Screen::Instance().GetWindow().Draw(_str);    
 }
 
