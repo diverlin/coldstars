@@ -157,7 +157,7 @@ class ScenarioCollector;
 
 #include "src/render/render.hpp"
 #include "src/render/glsl.hpp"
-#include "src/render/fbo.hpp"
+#include "src/render/Fbo.hpp"
 #include "src/render/bloom.hpp"
 #include "src/effects/shockWave.hpp"
 
@@ -465,7 +465,7 @@ class ScenarioCollector;
 #include "src/render/render.cpp"
 
 #include "src/render/glsl.cpp"
-#include "src/render/fbo.cpp"
+#include "src/render/Fbo.cpp"
 #include "src/render/bloom.cpp"
 #include "src/effects/shockWave.cpp"
 

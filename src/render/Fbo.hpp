@@ -17,16 +17,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef FBO_H
-#define FBO_H
+#ifndef Fbo_H
+#define Fbo_H
 
 #include "../common/myVector.hpp"
 
-class FBO
+class Fbo
 {
 	public:
-      		FBO();
-      		~FBO();
+      		Fbo();
+      		~Fbo();
 
 		void Create();
 		const GLuint GetTexture() const { return texture; }; 
@@ -41,9 +41,6 @@ class FBO
       		GLuint depth_buffer;
       		GLuint fbo;      	
 };
-
-typedef std::vector<FBO*> VEC_pFBO_type; 
-typedef std::vector<VEC_pFBO_type> VEC_pList_pFBO_type; 
 
 // http://www.flashbang.se/archives/48
     

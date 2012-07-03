@@ -4,7 +4,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "../common/myVector.hpp"
-#include "../render/fbo.hpp"
+#include "../render/Fbo.hpp"
 //#include "../render/bloom.hpp"
 
 class Screen:private sf::NonCopyable
@@ -22,10 +22,10 @@ class Screen:private sf::NonCopyable
         	const vec2f& GetTopRightGlobalCoord()   const { return topRight_globalCoord; };
         	const vec2f& GetBottomLeftGlobalCoord() const { return bottomLeft_globalCoord; };
         	     			
-        	FBO& GetFbo0() { return fbo0; };
-		FBO& GetFbo1() { return fbo1; };
-		FBO& GetFbo2() { return fbo2; };
-		FBO& GetFbo3() { return fbo3; }
+        	Fbo& GetFbo0() { return fbo0; };
+		Fbo& GetFbo1() { return fbo1; };
+		Fbo& GetFbo2() { return fbo2; };
+		Fbo& GetFbo3() { return fbo3; }
 
 		BloomEffect* GetBloom() const { return bloom; };	
 		
@@ -49,10 +49,10 @@ class Screen:private sf::NonCopyable
       		sf::Font font;
       		sf::View view;
       		
-      		FBO fbo0;
-		FBO fbo1;
-		FBO fbo2;
-		FBO fbo3;
+      		Fbo fbo0;
+		Fbo fbo1;
+		Fbo fbo2;
+		Fbo fbo3;
 
 		BloomEffect* bloom;
       		
