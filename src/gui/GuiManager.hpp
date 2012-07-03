@@ -40,7 +40,7 @@ class GuiManager
 		GuiMap*       	gui_map;    
 
      		bool UpdateMouseInteractionWithScanVehicle(int, int, int, int, Vehicle*, bool allow_full_control = false);     		
-     		void RenderScanVehicle(Vehicle*) const;  	
+     		void RenderScanVehicle(Vehicle*, int, int) const;  	
 };
 
 

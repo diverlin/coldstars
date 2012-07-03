@@ -29,7 +29,7 @@ class GuiVehicle
      		bool UpdateMouseInteraction(int, int, int, int, Vehicle*, Store* store = NULL);   
      				
       		void RenderVehicle(Vehicle*) const;
-		void RenderFocusedItemInfo(Vehicle*) const;
+		void RenderFocusedItemInfo(Vehicle*, int, int) const;
       		
       	private: 		
       		Player* player;

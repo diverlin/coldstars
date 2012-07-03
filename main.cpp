@@ -40,7 +40,7 @@ int main()
 	//player->GetScreen()->resize(Config::Instance().SCREEN_WIDTH*2, Config::Instance().SCREEN_HEIGHT);
 
 	// GAME LOOP
-	while (Window::Instance().GetWindow().IsOpened())
+	while (Screen::Instance().GetWindow().IsOpened())
 	{    
 		/* server code start */
 		turn_timer.Update(game_date);

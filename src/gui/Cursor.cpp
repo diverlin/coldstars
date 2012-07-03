@@ -32,13 +32,13 @@ Cursor::~Cursor()
 
 void Cursor::UpdateMousePos()
 {
-        const sf::Input& Input = Window::Instance().GetWindow().GetInput();
+        const sf::Input& Input = Screen::Instance().GetWindow().GetInput();
         mouse_pos.Set(Input.GetMouseX(), Input.GetMouseY());
 }
 
-void Cursor::Update()
+void Cursor::Update(int mxvp, int myvp)
 {
-     	slot->GetRect().SetCenter(mouse_pos.x, player->GetScreen()->GetHeight()  - mouse_pos.y);
+     	slot->GetRect().SetCenter(mxvp, myvp);
 }
 
 

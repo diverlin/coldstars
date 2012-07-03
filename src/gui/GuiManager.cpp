@@ -70,7 +70,7 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(int mxvp, int myvp, int l
 	return interaction;
 }
 
-void GuiManager::RenderScanVehicle(Vehicle* vehicle) const
+void GuiManager::RenderScanVehicle(Vehicle* vehicle, int mxvp, int myvp) const
 {
         resetRenderTransformation();
         enable_BLEND();   
@@ -84,7 +84,7 @@ void GuiManager::RenderScanVehicle(Vehicle* vehicle) const
 	
 		if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == false)
 		{
-			gui_vehicle->RenderFocusedItemInfo(vehicle);
+			gui_vehicle->RenderFocusedItemInfo(vehicle, mxvp, myvp);
 		}
 	disable_BLEND();
 }
@@ -92,11 +92,11 @@ void GuiManager::RenderScanVehicle(Vehicle* vehicle) const
 void GuiManager::RunSession()
 {
 	int mxvp = player->GetCursor()->GetMousePos().x;
-     	int myvp = player->GetScreen()->GetHeight() - player->GetCursor()->GetMousePos().y;         
+     	int myvp = Screen::Instance().GetWindow().GetHeight() - player->GetCursor()->GetMousePos().y;         
      	int lmb  = player->GetCursor()->GetMouseLeftButton();
      	int rmb  = player->GetCursor()->GetMouseRightButton();
      			
-     	player->GetCursor()->Update(); 
+     	player->GetCursor()->Update(mxvp, myvp); 
      								
 	switch(player->GetNpc()->GetPlaceTypeId())
 	{
@@ -107,7 +107,7 @@ void GuiManager::RunSession()
 			if (scan_vehicle != NULL )
 			{
 				UpdateMouseInteractionWithScanVehicle(mxvp, myvp, lmb, rmb, scan_vehicle);
-				RenderScanVehicle(scan_vehicle);    					                 
+				RenderScanVehicle(scan_vehicle, mxvp, myvp);    					                 
 			}
 
 			//////////// WORLDMAP ///////////
@@ -131,14 +131,14 @@ void GuiManager::RunSession()
 				gui_space->RenderFocusedButtonInfo(mxvp, myvp);
 			disable_BLEND();
 
-			gui_space->RenderText(player->GetScreen()->GetBottomLeftGlobalCoord());
+			gui_space->RenderText(Screen::Instance().GetBottomLeftGlobalCoord());
 		
 			break;
 		}
 		
 		case ENTITY::KOSMOPORT_ID:
 		{    	
-			Rect screen_rect = Rect(0, 0, player->GetScreen()->GetWidth(), player->GetScreen()->GetHeight());   
+			Rect screen_rect = Rect(0, 0, Screen::Instance().GetWindow().GetWidth(), Screen::Instance().GetWindow().GetHeight());   
 										
 			switch(gui_kosmoport->GetActiveScreenId())
         		{
@@ -165,7 +165,7 @@ void GuiManager::RunSession()
                				enable_BLEND();   
 			        		gui_angar->RenderInternal(angar);
 			        		
-						if (scan_vehicle != NULL) 	{ RenderScanVehicle(scan_vehicle); }
+						if (scan_vehicle != NULL) 	{ RenderScanVehicle(scan_vehicle, mxvp, myvp); }
 						else 				{ gui_angar->RenderFocusedItemInfo(angar, mxvp, myvp); }
 
 			        		gui_kosmoport->RenderButtons(); 
@@ -208,7 +208,7 @@ void GuiManager::RunSession()
 						gui_store->RenderFocusedItemInfo(store, mxvp, myvp);	
 						if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == false)
 						{
-							gui_vehicle->RenderFocusedItemInfo(vehicle);
+							gui_vehicle->RenderFocusedItemInfo(vehicle, mxvp, myvp);
 						}
 
 			        		gui_kosmoport->RenderButtons(); 

@@ -20,24 +20,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef FBO_H
 #define FBO_H
 
-#include "../gui/Window.hpp"
 #include "../common/myVector.hpp"
 
 class FBO
 {
 	public:
-      		FBO(int, int);
+      		FBO();
       		~FBO();
 
-		GLuint getTexture() const; 
+		void Create();
+		const GLuint GetTexture() const { return texture; }; 
 		
-      		void activate(const vec2i&);
-      		void deactivate();
+      		void Activate(int, int);
+      		void Deactivate();
+      		
+      		void Resize(int, int);
       		
       	private:
       	      	GLuint texture;
-      		int w, h;
-
       		GLuint depth_buffer;
       		GLuint fbo;      	
 };

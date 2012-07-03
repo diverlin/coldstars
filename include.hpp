@@ -282,7 +282,7 @@ class ScenarioCollector;
 
 
 #include "src/common/global.hpp"
-
+#include "src/render/Screen.hpp"
 
 
 
@@ -493,4 +493,5 @@ class ScenarioCollector;
 
 #include "src/builder/items/other/BombBuilder.cpp"
 #include "src/common/Logger.cpp"
+#include "src/render/Screen.cpp"
 ////////////////////////////////////////////

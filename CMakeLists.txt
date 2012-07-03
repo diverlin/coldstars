@@ -15,15 +15,14 @@ set (LIBRARIES
 add_definitions (-Wall -pedantic -std=c++0x -std=gnu++0x -pedantic-errors -Wextra -w -Waddress -Wc++0x-compat)
 
 set (HEADERS
-	src/config/config.hpp
-	
-	src/gui/Window.hpp
 	include.hpp
+
+	src/config/config.hpp	
+	
 )
 
 set (SOURCES
 	src/config/config.cpp
-	src/gui/Window.cpp
   main.cpp
 )
 

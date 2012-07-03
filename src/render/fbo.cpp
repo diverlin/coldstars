@@ -17,55 +17,56 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
+FBO::FBO()
+{}
 
-FBO :: FBO(int w, int h)
+void FBO::Create()
 {
-	this->w = w;
-      	this->h = h;
-      	// create a color texture
-      	glGenTextures(1, &texture);
+      	glGenTextures(1, &texture); 		// create a color texture
+      	glGenRenderbuffers(1, &depth_buffer); 	// create depth renderbuffer
+     	glGenFramebuffers(1, &fbo);        	// create FBO
+}
+
+FBO::~FBO()
+{}
+	
+	
+void FBO::Resize(int w, int h)
+{
+      	// color texture manipulation
       	glBindTexture(GL_TEXTURE_2D, texture);
       	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,  w, h, 0, GL_RGBA, GL_INT, NULL); // no data transferred
-
 
       	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
       	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
       	glBindTexture(GL_TEXTURE_2D, 0);
 
-      	// create depth renderbuffer
-      	glGenRenderbuffers(1, &depth_buffer); // putcom
+      	// depth renderbuffer manipulation
       	glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, depth_buffer);
       	glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT32, w, h);
 
-      	// create FBO
-      	glGenFramebuffers(1, &fbo);   // putcom
-      	glBindFramebuffer(GL_FRAMEBUFFER, fbo);  // putcom     // switch to our fbo so we can bind stuff to it
+      	// FBO manipulation
+      	glBindFramebuffer(GL_FRAMEBUFFER, fbo); 
       	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, texture, 0);
       	glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depth_buffer);
 
       	// Go back to regular frame buffer rendering
       	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
-}
+}      		
 
-FBO::~FBO()
-{}
-
-GLuint FBO :: getTexture() const { return texture; }
-		
-		
-void FBO :: activate(const vec2i& resolution)
+void FBO::Activate(int width, int height)
 {
      	glBindTexture(GL_TEXTURE_2D, 0);            // unbind texture
-     	glBindFramebuffer(GL_FRAMEBUFFER, fbo);    // putcom // bind fbo
+     	glBindFramebuffer(GL_FRAMEBUFFER, fbo);     // bind fbo
 
      	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
      	glLoadIdentity();
 
      	glPushAttrib(GL_VIEWPORT_BIT);               // viewport is shared with the main context
-     	glViewport(0, 0, resolution.x, resolution.y);
+     	glViewport(0, 0, width, height);
 }
 
-void FBO :: deactivate()
+void FBO::Deactivate()
 {
      	glActiveTexture(GL_TEXTURE0);                // debug
      	glPopAttrib();                               // restore viewport

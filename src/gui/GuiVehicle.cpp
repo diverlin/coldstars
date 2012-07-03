@@ -84,11 +84,11 @@ void GuiVehicle::RenderVehicle(Vehicle* vehicle) const
 }
 
 
-void GuiVehicle::RenderFocusedItemInfo(Vehicle* vehicle) const
+void GuiVehicle::RenderFocusedItemInfo(Vehicle* vehicle, int mxvp, int myvp) const
 {
 	for(unsigned int i = 0; i < vehicle->slot_total_vec.size(); i++)
 	{ 
-		if (vehicle->slot_total_vec[i]->CheckInteraction(player->GetCursor()->GetMousePos().x, (player->GetScreen()->GetHeight()  - player->GetCursor()->GetMousePos().y)) == true)
+		if (vehicle->slot_total_vec[i]->CheckInteraction(mxvp, myvp) == true)
 		{  
 			vehicle->slot_total_vec[i]->RenderItemInfo();
 		}

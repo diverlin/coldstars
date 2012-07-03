@@ -16,6 +16,41 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
+void initGl(int width, int height)
+{   
+  	// Set color and depth clear value
+  	//glClearDepth(1.f);
+  	glClearColor(0.f, 0.f, 0.f, 0.f);
+
+  	// Enable Z-buffer read and write
+  	//glEnable(GL_DEPTH_TEST);
+  	//glDepthMask(GL_TRUE);
+  	
+  	glEnable(GL_TEXTURE_2D);
+  	glEnable(GL_BLEND);
+  	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+  	glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
+  
+      	glShadeModel(GL_SMOOTH);
+      	//glDisable(GL_LIGHTING); 
+      	
+      	resizeGl(width, height); 
+}   
+
+void resizeGl(int width, int height)
+{
+  	// Setup a perspective projection
+  	glMatrixMode(GL_PROJECTION);
+  	glLoadIdentity();
+
+  	//gluPerspective(90.f, 1.f, 1.f, 500.f);
+  	glOrtho(0, width, 0, height, 0.1f, 1000.0f);
+  	
+  	glMatrixMode(GL_MODELVIEW);
+}
+
 void clearScreen() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 void resetRenderTransformation() { glLoadIdentity(); }
 
@@ -143,7 +178,7 @@ void drawLine(TextureOb* texOb,
 void drawSimpleColoredText(std::string str, vec2f pos, Color4i color, vec2f scroll_coord)
 {
      	 int font_size = 12;
-         sf::String s(str, Window::Instance().GetFont(), font_size);
+         sf::String s(str, Screen::Instance().GetFont(), font_size);
               	
           /* SHADOW */
      	 //s.SetColor(sf::Color(0, 0, 0));
@@ -151,8 +186,8 @@ void drawSimpleColoredText(std::string str, vec2f pos, Color4i color, vec2f scro
          //GetWindows().Draw(s);
          
          s.SetColor(sf::Color(color.r, color.g, color.b));
-         s.SetPosition(pos.x - scroll_coord.x, (Window::Instance().GetWindow().GetHeight() - pos.y) + scroll_coord.y); 
-         Window::Instance().GetWindow().Draw(s);        
+         s.SetPosition(pos.x - scroll_coord.x, (Screen::Instance().GetWindow().GetHeight() - pos.y) + scroll_coord.y); 
+         Screen::Instance().GetWindow().Draw(s);        
 }
 
 
@@ -191,26 +226,26 @@ void drawInfoIn2Column(
 
      	drawTexturedRect(texOb_textBg, rect, -2);
 
-     	sf::String s((*pInfo_title_list)[0], Window::Instance().GetFont(), (font_size+1));
+     	sf::String s((*pInfo_title_list)[0], Screen::Instance().GetFont(), (font_size+1));
      	s.SetColor(sf::Color(255, 255, 255));
-     	s.SetPosition(center_x - scroll_x + info_total_string_w/3, (Window::Instance().GetWindow().GetHeight() - center_y) + scroll_y); 
-      	Window::Instance().GetWindow().Draw(s);
+     	s.SetPosition(center_x - scroll_x + info_total_string_w/3, (Screen::Instance().GetWindow().GetHeight() - center_y) + scroll_y); 
+      	Screen::Instance().GetWindow().Draw(s);
 
      	for (unsigned int i = 1; i < pInfo_title_list->size(); i++)
      	{
-         	sf::String s((*pInfo_title_list)[i], Window::Instance().GetFont(), font_size);
+         	sf::String s((*pInfo_title_list)[i], Screen::Instance().GetFont(), font_size);
          	s.SetColor(sf::Color(255, 255, 255));
-         	s.SetPosition(center_x - scroll_x, (Window::Instance().GetWindow().GetHeight() - center_y) + char_h*i + scroll_y); 
-          Window::Instance().GetWindow().Draw(s);
+         	s.SetPosition(center_x - scroll_x, (Screen::Instance().GetWindow().GetHeight() - center_y) + char_h*i + scroll_y); 
+          Screen::Instance().GetWindow().Draw(s);
      	}       
 
 
      	for (unsigned int i = 0; i < pInfo_value_list->size(); i++)
      	{
-         	sf::String s((*pInfo_value_list)[i], Window::Instance().GetFont(), font_size);
+         	sf::String s((*pInfo_value_list)[i], Screen::Instance().GetFont(), font_size);
          	s.SetColor(sf::Color(250, 250, 0));
-         	s.SetPosition(center_x - scroll_x + max_info_title_str_size * (char_w - 1.2), (Window::Instance().GetWindow().GetHeight() - center_y) + char_h*i + char_h + scroll_y); 
-          	Window::Instance().GetWindow().Draw(s);
+         	s.SetPosition(center_x - scroll_x + max_info_title_str_size * (char_w - 1.2), (Screen::Instance().GetWindow().GetHeight() - center_y) + char_h*i + char_h + scroll_y); 
+          	Screen::Instance().GetWindow().Draw(s);
      	}  
 }
 
@@ -225,10 +260,10 @@ void drawInfoIn2Column(
 
 void drawSimpleText(std:: string str, int font_size, float pos_x, float pos_y)
 {
-     	sf::String s(str, Window::Instance().GetFont(), font_size);
+     	sf::String s(str, Screen::Instance().GetFont(), font_size);
      	s.SetColor(sf::Color(255, 255, 255));
-     	s.SetPosition(pos_x, (Window::Instance().GetWindow().GetHeight() - pos_y)); 
-      	Window::Instance().GetWindow().Draw(s);
+     	s.SetPosition(pos_x, (Screen::Instance().GetWindow().GetHeight() - pos_y)); 
+      	Screen::Instance().GetWindow().Draw(s);
 }
 
 
