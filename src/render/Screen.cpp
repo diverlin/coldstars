@@ -11,9 +11,7 @@ Screen& Screen::Instance()
 }
     
 Screen::Screen()
-{
-std::cout<<"Olololo 0/n";
-}
+{}
 
 Screen::~Screen()
 {}
@@ -45,12 +43,7 @@ void Screen::InitPostEffects(int width, int height)
 }
 
        	
-void Screen::Update()
-{
-	DrawFsp();
-}
-
-void Screen::DrawFsp()
+void Screen::DrawFps()
 {
 	float fps = 1.f / render_window.GetFrameTime();
       	sf::String _str(std::string(	"FPS:" + 
@@ -65,11 +58,11 @@ void Screen::DrawFsp()
      
 void Screen::Resize(int width, int height)
 {
+	resizeGl(width, height);
+	
 	view.SetFromRect(sf::FloatRect(0, 0, width, height));
 	render_window.SetView(view);	
 	render_window.SetSize(width, height);
-	    	
-	resizeGl(width, height);
 	
 	if (Config::Instance().MODERN_EFFECTS == true)
 	{
@@ -77,25 +70,7 @@ void Screen::Resize(int width, int height)
 	}
 }
 	
-void Screen::MovingBy(vec2f delta)
-{
-	bottomLeft_globalCoord += delta;
-	UpdateOnEvent();
-}
-
-void Screen::UpdateOnEvent()
-{
-	topRight_globalCoord.Set(bottomLeft_globalCoord.x + render_window.GetWidth(), bottomLeft_globalCoord.y + render_window.GetHeight());
-}
-
-void Screen::Display()
-{
-	UpdateOnEvent();
-  	Update();
-  	render_window.Display();
-}
-
-
+	
 void Screen::ResizePostEffects(int width, int height)
 {
 	fbo0.Resize(width, height);
@@ -105,5 +80,24 @@ void Screen::ResizePostEffects(int width, int height)
 	
 	bloom.Resize(width, height);
 }
+
+void Screen::MovingBy(vec2f delta)
+{
+	bottomLeft_globalCoord += delta;
+	UpdateTopRightGlobalCoord();
+}
+
+void Screen::UpdateTopRightGlobalCoord()
+{
+	topRight_globalCoord.Set(bottomLeft_globalCoord.x + render_window.GetWidth(), bottomLeft_globalCoord.y + render_window.GetHeight());
+}
+
+void Screen::Draw()
+{
+  	DrawFps();
+  	render_window.Display();
+}
+
+
 
    
