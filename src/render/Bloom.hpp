@@ -25,26 +25,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class BloomEffect
 {
 	public:
+		Fbo& GetFboFinal() { return fbo_final; };
+		GLuint GetTextureBlured() const { return texture_blured; }
+          	
+                BloomEffect(int, int);
+                ~BloomEffect();
+                
+                void BindShaderPrograms(GLuint, GLuint, GLuint);
+                void Pass0(int, int, GLuint, float);
+                void RestPasses(int, int);
+                void Combine(int, int, GLuint);
+                
+	private:
                 int pass_max;
                 int fbo_max_per_pass;
-                
+
                 int screen_w, screen_h;
-                
+                                
                 std::vector<std::vector<Fbo*>> vec_vec_fbo;
-          	Fbo* fbo_final;
+          	Fbo fbo_final;	
 
           	GLuint texture_blured;
           	
           	GLuint program_blur;
           	GLuint program_extractBright;
           	GLuint program_combine;
-          	
-                BloomEffect(int _screen_w, int _screen_h, GLuint _program_blur, GLuint _program_extractBright, GLuint _program_combine, int _pass_max, int _fbo_max_per_pass);
-                ~BloomEffect();
-                
-                void pass0(int, int, GLuint, float);
-                void restPasses(int, int);
-                void combine(int, int, GLuint);
 };
  
 // HDR http://prideout.net/archive/bloom/  
