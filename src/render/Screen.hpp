@@ -27,7 +27,7 @@ class Screen:private sf::NonCopyable
 		Fbo& GetFbo2() { return fbo2; };
 		Fbo& GetFbo3() { return fbo3; }
 
-		BloomEffect* GetBloom() const { return bloom; };	
+		BloomEffect& GetBloom() { return bloom; };	
 		
 		void MovingBy(vec2f);
 
@@ -54,7 +54,7 @@ class Screen:private sf::NonCopyable
 		Fbo fbo2;
 		Fbo fbo3;
 
-		BloomEffect* bloom;
+		BloomEffect bloom;
       		
       		vec2f topRight_globalCoord;
       		vec2f bottomLeft_globalCoord;

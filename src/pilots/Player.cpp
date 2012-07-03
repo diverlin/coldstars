@@ -261,19 +261,17 @@ void Player::RenderEntities_NEW()
 	Screen::Instance().GetFbo0().Deactivate();
 
 	// POST PROCESS BLOOM (many FBO)
-	Screen::Instance().GetBloom()->Pass0(w, h, Screen::Instance().GetFbo0().GetTexture(), visible_STAR_vec[0]->GetBrightThreshold());
-	Screen::Instance().GetBloom()->RestPasses(w, h);
-	Screen::Instance().GetBloom()->Combine(w, h, Screen::Instance().GetFbo0().GetTexture());
+	Screen::Instance().GetBloom().Proceed(w, h, Screen::Instance().GetFbo0().GetTexture(), visible_STAR_vec[0]->GetBrightThreshold());
 
 	// RENDER to FBO1, VOLUMETRIC LIGHT
 	Screen::Instance().GetFbo1().Activate(w, h);
 		glUseProgram(g_SHADERS.volumetriclight);
 			glActiveTexture(GL_TEXTURE0);                                
-			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetBloom()->GetFboFinal().GetTexture());
+			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetBloom().GetFboFinal().GetTexture());
 			glUniform1i(glGetUniformLocation(g_SHADERS.volumetriclight, "FullSampler"), 0);
 
 			glActiveTexture(GL_TEXTURE1);                                
-			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetBloom()->GetTextureBlured());
+			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetBloom().GetTextureBlured());
 			glUniform1i(glGetUniformLocation(g_SHADERS.volumetriclight, "BlurSampler"), 1);
 
 			glUniform4f(glGetUniformLocation(g_SHADERS.volumetriclight, "sun_pos"), -Screen::Instance().GetBottomLeftGlobalCoord().x/w, -Screen::Instance().GetBottomLeftGlobalCoord().y/h, -100.0, 1.0);

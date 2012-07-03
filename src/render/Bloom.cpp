@@ -17,57 +17,67 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-BloomEffect::BloomEffect(int _screen_w, 
-			   int _screen_h)
+BloomEffect::BloomEffect()
 {
-	pass_max = 3; 	      //_pass_max;
-	fbo_max_per_pass = 4; //_fbo_max_per_pass;
-            
-	screen_w = _screen_w;
-	screen_h = _screen_h;
-            
-        for (int pass_num = 0; pass_num < pass_max; pass_num++) 
-        {   
-        	std::vector<Fbo*> vec_fbo;
-        	int div = 1;    
-		for(int fbo_num = 0; fbo_num < fbo_max_per_pass; fbo_num++)
-		{
-                	Fbo* pTo_fbo = new Fbo(); 
-                	pTo_fbo->Create();
-                	pTo_fbo->Resize(screen_w/div, screen_h/div);
-			vec_fbo.push_back(pTo_fbo);
-			div *= 2;
-		}
-		vec_vec_fbo.push_back(vec_fbo);
-	}
-
-        fbo_final.Create();
-	fbo_final.Resize(screen_w, screen_h);
-
-
+	pass_max = 3; 	      
+	fbo_max_per_pass = 4; 
 }
 
                 
 BloomEffect::~BloomEffect()
 {
-	//for (unsigned int i=0; i<vec_vec_fbo.size(); i++)
-	//{
-		//for (unsigned int j=0; j<vec_vec_fbo[i]->size(); j++)
-		//{
-			//delete (*vec_vec_fbo[i])[j];
-		//}
-	//}
-	
-	//delete fbo_final;
+	for (unsigned int i=0; i<vec_vec_fbo.size(); i++)
+	{
+		for (unsigned int j=0; j<vec_vec_fbo[i].size(); j++)
+		{
+			delete (vec_vec_fbo[i])[j];
+		}
+	}
 }
 
-void BloomEffect::BindShaderPrograms(GLuint program_blur, GLuint program_extractBright, GLuint program_combine)
+void BloomEffect::Create(GLuint program_blur, GLuint program_extractBright, GLuint program_combine)
 {
 	this->program_blur          = program_blur;
 	this->program_extractBright = program_extractBright;
 	this->program_combine       = program_combine;
-}
+	
+        for (int pass_num = 0; pass_num < pass_max; pass_num++) 
+        {   
+        	std::vector<Fbo*> vec_fbo;
+		for(int fbo_num = 0; fbo_num < fbo_max_per_pass; fbo_num++)
+		{
+                	Fbo* fbo = new Fbo(); 
+                	fbo->Create();
+			vec_fbo.push_back(fbo);
+		}
+		vec_vec_fbo.push_back(vec_fbo);
+	}
 
+        fbo_final.Create();
+}
+                
+void BloomEffect::Resize(int width, int height)
+{
+	for (unsigned int i=0; i<vec_vec_fbo.size(); i++) 
+        {   
+        	int div = 1;    
+		for(unsigned int j=0; j<vec_vec_fbo[i].size(); j++)
+		{
+                	(vec_vec_fbo[i])[j]->Resize(width/div, height/div);
+			div *= 2;
+		}
+	}
+
+	fbo_final.Resize(width, height);
+}
+                
+void BloomEffect::Proceed(int width, int height, GLuint texture, float brightness_threshold)
+{
+	Pass0(width, height, texture, brightness_threshold);
+	RestPasses(width, height);
+	Combine(width, height, texture);
+}
+                
 void BloomEffect::Pass0(int width, int height, GLuint _orig_scene_texture, float brightThreshold)
 {
 	// RENDER TO FBO0
@@ -81,7 +91,7 @@ void BloomEffect::Pass0(int width, int height, GLuint _orig_scene_texture, float
 
 	glUniform1f(glGetUniformLocation(program_extractBright, "threshold"), brightThreshold);
 	
-	drawFullScreenQuad(screen_w, screen_h, -999.0);
+	drawFullScreenQuad(width, height, -999.0);
 	glUseProgram(0);
 
         (vec_vec_fbo[0])[0]->Deactivate();
@@ -90,7 +100,7 @@ void BloomEffect::Pass0(int width, int height, GLuint _orig_scene_texture, float
 	for(int fbo_num = 1; fbo_num < fbo_max_per_pass; fbo_num++)
 	{
 	        (vec_vec_fbo[0])[fbo_num]->Activate(width, height);
-        	drawFullScreenTexturedQuad((vec_vec_fbo[0])[0]->GetTexture(), screen_w/div, screen_h/div, -999.0);
+        	drawFullScreenTexturedQuad((vec_vec_fbo[0])[0]->GetTexture(), width/div, height/div, -999.0);
 		(vec_vec_fbo[0])[fbo_num]->Deactivate();
          
 		div *= 2;
@@ -105,7 +115,7 @@ void BloomEffect::RestPasses(int width, int height)
 		for(int fbo_num = 0; fbo_num < fbo_max_per_pass; fbo_num++)
 		{
 		        (vec_vec_fbo[pass_num])[fbo_num]->Activate(width, height);
-          		drawFullScreenTexturedQuadBlurred((vec_vec_fbo[pass_num-1])[fbo_num]->GetTexture(), screen_w/div, screen_h/div, -999.0, program_blur);
+          		drawFullScreenTexturedQuadBlurred((vec_vec_fbo[pass_num-1])[fbo_num]->GetTexture(), width/div, height/div, -999.0, program_blur);
           		(vec_vec_fbo[pass_num])[fbo_num]->Deactivate();
           
 			div *= 2;
@@ -177,7 +187,7 @@ void BloomEffect::Combine(int width, int height, GLuint _orig_scene_texture)
           glBindTexture(GL_TEXTURE_2D, (vec_vec_fbo[2])[3]->GetTexture());
           glUniform1i(glGetUniformLocation(program_combine, "Pass2_tex4"), 12);
 
-          drawFullScreenQuad(screen_w, screen_h, -999.0);
+          drawFullScreenQuad(width, height, -999.0);
 
           fbo_final.Deactivate();
           //texture_blured = fbo_final->texture; //(vec_vec_fbo[pass_num])[fbo_num]->texture; // improove, blured texture is needed for volumetric shader
