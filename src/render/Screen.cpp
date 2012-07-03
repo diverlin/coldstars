@@ -1,7 +1,7 @@
 #include "Screen.hpp"
 #include <boost/lexical_cast.hpp>
 
-#include "../render/glsl.hpp"
+#include "../render/Glsl.hpp"
 
 
 Screen& Screen::Instance()
