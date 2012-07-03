@@ -19,7 +19,8 @@
 
 #ifndef ORBIT_H
 #define ORBIT_H
-#include "../render/pathVisual.hpp"
+
+#include "../render/PathVisual.hpp"
 
 
 class Orbit

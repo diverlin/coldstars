@@ -81,7 +81,7 @@ class ScenarioCollector;
 #include "src/common/points.hpp"
 #include "src/common/common.hpp"
 
-#include "src/render/pathVisual.hpp"
+#include "src/render/PathVisual.hpp"
 
 #include "src/text/textstuff.hpp"
 
@@ -155,8 +155,8 @@ class ScenarioCollector;
 
 #include "src/gui/Cursor.hpp"  
 
-#include "src/render/render.hpp"
-#include "src/render/glsl.hpp"
+#include "src/render/Render.hpp"
+#include "src/render/Glsl.hpp"
 #include "src/render/Fbo.hpp"
 #include "src/render/Bloom.hpp"
 #include "src/effects/shockWave.hpp"
@@ -294,7 +294,7 @@ class ScenarioCollector;
 
 
 
-#include "src/render/pathVisual.cpp"
+#include "src/render/PathVisual.cpp"
 #include "src/common/rand.cpp"
 #include "src/common/gameStruct.cpp"
 #include "src/common/id.cpp"
@@ -462,9 +462,9 @@ class ScenarioCollector;
 
 #include "src/common/common.cpp"
 
-#include "src/render/render.cpp"
+#include "src/render/Render.cpp"
 
-#include "src/render/glsl.cpp"
+#include "src/render/Glsl.cpp"
 #include "src/render/Fbo.cpp"
 #include "src/render/Bloom.cpp"
 #include "src/effects/shockWave.cpp"
