@@ -30,8 +30,8 @@ class BloomEffect
                 
                 int screen_w, screen_h;
                 
-                VEC_pList_pFBO_type pTo_fbo_pass_pList;
-          	FBO* pTo_fbo_final;
+                std::vector<std::vector<Fbo*>> vec_vec_fbo;
+          	Fbo* fbo_final;
 
           	GLuint texture_blured;
           	

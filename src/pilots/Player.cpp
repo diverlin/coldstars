@@ -269,7 +269,7 @@ void Player::RenderEntities_NEW()
 	Screen::Instance().GetFbo1().Activate(w, h);
 		glUseProgram(g_SHADERS.volumetriclight);
 			glActiveTexture(GL_TEXTURE0);                                
-			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetBloom()->pTo_fbo_final->GetTexture());
+			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetBloom()->fbo_final->GetTexture());
 			glUniform1i(glGetUniformLocation(g_SHADERS.volumetriclight, "FullSampler"), 0);
 
 			glActiveTexture(GL_TEXTURE1);                                

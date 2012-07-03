@@ -17,21 +17,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-FBO::FBO()
+Fbo::Fbo()
 {}
 
-void FBO::Create()
+void Fbo::Create()
 {
       	glGenTextures(1, &texture); 		// create a color texture
       	glGenRenderbuffers(1, &depth_buffer); 	// create depth renderbuffer
-     	glGenFramebuffers(1, &fbo);        	// create FBO
+     	glGenFramebuffers(1, &fbo);        	// create Fbo
 }
 
-FBO::~FBO()
+Fbo::~Fbo()
 {}
 	
 	
-void FBO::Resize(int w, int h)
+void Fbo::Resize(int w, int h)
 {
       	// color texture manipulation
       	glBindTexture(GL_TEXTURE_2D, texture);
@@ -45,7 +45,7 @@ void FBO::Resize(int w, int h)
       	glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, depth_buffer);
       	glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT32, w, h);
 
-      	// FBO manipulation
+      	// Fbo manipulation
       	glBindFramebuffer(GL_FRAMEBUFFER, fbo); 
       	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, texture, 0);
       	glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depth_buffer);
@@ -54,7 +54,7 @@ void FBO::Resize(int w, int h)
       	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }      		
 
-void FBO::Activate(int width, int height)
+void Fbo::Activate(int width, int height)
 {
      	glBindTexture(GL_TEXTURE_2D, 0);            // unbind texture
      	glBindFramebuffer(GL_FRAMEBUFFER, fbo);     // bind fbo
@@ -66,7 +66,7 @@ void FBO::Activate(int width, int height)
      	glViewport(0, 0, width, height);
 }
 
-void FBO::Deactivate()
+void Fbo::Deactivate()
 {
      	glActiveTexture(GL_TEXTURE0);                // debug
      	glPopAttrib();                               // restore viewport
