@@ -18,6 +18,7 @@
 
 #ifndef PATHVISUAL_H
 #define PATHVISUAL_H
+
 #include <SFML/Graphics.hpp>
 
 
@@ -27,9 +28,9 @@ class PathVisual
 		PathVisual();
 		~PathVisual();
 
-		void fillData(GLuint texture, std::vector<float>* pVec_x, std::vector<float>* pVec_y, float step, int point_size);
-		void fillData(GLuint texture, std::vector<vec2f>* pVec2f, float step, int point_size);
-		void draw();
+		void FillData(GLuint texture, std::vector<float>* pVec_x, std::vector<float>* pVec_y, float step, int point_size);
+		void FillData(GLuint texture, std::vector<vec2f>* pVec2f, float step, int point_size);
+		void Draw() const;
 
 	private:
 		GLuint gl_list;

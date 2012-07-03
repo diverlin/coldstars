@@ -16,10 +16,17 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-PathVisual :: PathVisual()  { gl_list = glGenLists(1); }
-PathVisual :: ~PathVisual() {}
+PathVisual::PathVisual()  
+{ 
+	gl_list = glGenLists(1); 
+}
+
+PathVisual::~PathVisual() 
+{
+	glDeleteLists(gl_list, sizeof(gl_list));
+}
                 
-void PathVisual :: fillData(GLuint texture, std::vector<float>* pVec_x, std::vector<float>* pVec_y, float step, int point_size)
+void PathVisual::FillData(GLuint texture, std::vector<float>* pVec_x, std::vector<float>* pVec_y, float step, int point_size)
 {   
         int i = 0;
         int list_len = pVec_x->size();
@@ -35,7 +42,7 @@ void PathVisual :: fillData(GLuint texture, std::vector<float>* pVec_x, std::vec
         glEndList();
 }
 
-void PathVisual :: fillData(GLuint texture, std::vector<vec2f>* pVec2f, float step, int point_size)
+void PathVisual::FillData(GLuint texture, std::vector<vec2f>* pVec2f, float step, int point_size)
 {   
         int i = 0;
         int list_len = pVec2f->size();
@@ -51,10 +58,10 @@ void PathVisual :: fillData(GLuint texture, std::vector<vec2f>* pVec2f, float st
         glEndList();
 }
 
-void PathVisual :: draw()
+void PathVisual::Draw() const
 {
         enable_BLEND();
-        glCallList(gl_list);
+        	glCallList(gl_list);
         disable_BLEND();        
 }
 

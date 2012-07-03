@@ -30,7 +30,7 @@ ObjMeshInstance* g_SPHERE_MESH;
 ObjMeshInstance* g_DEFORMED_SPHERE_MESH;
 
 
-class Shaders; Shaders g_SHADERS;
+class ShadersPack; ShadersPack g_SHADERS_PACK;
 
 SimpleIdGenerator   g_ID_GENERATOR  = SimpleIdGenerator();
 

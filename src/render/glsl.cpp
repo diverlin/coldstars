@@ -19,19 +19,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "glsl.hpp"
 
 
-void compile_program(const GLchar *pTo_vertex_source, const GLchar *pTo_fragment_source, GLuint* pTo_program)
+void compile_program(const GLchar* vertex_source, const GLchar* fragment_source, GLuint program)
 {
 	GLuint vertex_shader, fragment_shader;
   
-    	if (*pTo_program != 0)
+    	if (program != 0)
     	{
-        	vertex_shader = compile_shader(pTo_vertex_source, GL_VERTEX_SHADER);
-        	glAttachShader(*pTo_program, vertex_shader);
+        	vertex_shader = compile_shader(vertex_source, GL_VERTEX_SHADER);
+        	glAttachShader(program, vertex_shader);
 
-        	fragment_shader = compile_shader(pTo_fragment_source, GL_FRAGMENT_SHADER);
-        	glAttachShader(*pTo_program, fragment_shader);
+        	fragment_shader = compile_shader(fragment_source, GL_FRAGMENT_SHADER);
+        	glAttachShader(program, fragment_shader);
  
-        	glLinkProgram(*pTo_program);
+        	glLinkProgram(program);
 
         	glDeleteShader(vertex_shader);
         	glDeleteShader(fragment_shader);
@@ -39,11 +39,11 @@ void compile_program(const GLchar *pTo_vertex_source, const GLchar *pTo_fragment
     	else
         	printf("program was not generated succesfully\n");
 
-    	printProgramInfoLog(*pTo_program);
+    	printProgramInfoLog(program);
 }
 
 
-GLuint compile_shader(const GLchar *source, GLenum shader_type)
+GLuint compile_shader(const GLchar* source, GLenum shader_type)
 {
     	GLuint shader = glCreateShader(shader_type);
     	glShaderSource(shader, 1, &source, NULL);

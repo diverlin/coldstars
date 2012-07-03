@@ -246,12 +246,12 @@ void ItemSlot::UpdateRange(TextureOb* _texOb)
       	
 	int step = 1;
 	int size = 6;
-        range_visual.fillData(_texOb->texture, &range_vec, step, size);
+        range_visual.FillData(_texOb->texture, &range_vec, step, size);
 }
 
 void ItemSlot::DrawRange()
 { 
-    	range_visual.draw();
+    	range_visual.Draw();
 }
 
 bool ItemSlot::CheckTarget(BaseGameEntity* _target) const
