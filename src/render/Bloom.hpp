@@ -28,19 +28,17 @@ class BloomEffect
 		Fbo& GetFboFinal() { return fbo_final; };
 		GLuint GetTextureBlured() const { return texture_blured; }
           	
-                BloomEffect(int, int);
+                BloomEffect();
                 ~BloomEffect();
                 
-                void BindShaderPrograms(GLuint, GLuint, GLuint);
-                void Pass0(int, int, GLuint, float);
-                void RestPasses(int, int);
-                void Combine(int, int, GLuint);
+                void Create(GLuint, GLuint, GLuint);
+                void Resize(int, int);
+                
+                void Proceed(int w, int h, GLuint texture, float brightness_threshold);
                 
 	private:
                 int pass_max;
                 int fbo_max_per_pass;
-
-                int screen_w, screen_h;
                                 
                 std::vector<std::vector<Fbo*>> vec_vec_fbo;
           	Fbo fbo_final;	
@@ -50,6 +48,10 @@ class BloomEffect
           	GLuint program_blur;
           	GLuint program_extractBright;
           	GLuint program_combine;
+
+                void Pass0(int, int, GLuint, float);
+                void RestPasses(int, int);
+                void Combine(int, int, GLuint);
 };
  
 // HDR http://prideout.net/archive/bloom/  

@@ -16,9 +16,7 @@ std::cout<<"Olololo 0/n";
 }
 
 Screen::~Screen()
-{
-	delete bloom;
-}
+{}
 
 
 void Screen::InitBasic(int width, int height, int bpp, bool vert_sync, const std::string& title)
@@ -32,8 +30,6 @@ void Screen::InitBasic(int width, int height, int bpp, bool vert_sync, const std
     	render_window.PreserveOpenGLStates(true);
     	 	
       	initGl(width, height);
- 
-	bloom = NULL;	
 }
 
 void Screen::InitPostEffects(int width, int height)
@@ -42,6 +38,8 @@ void Screen::InitPostEffects(int width, int height)
 	fbo1.Create();	
 	fbo2.Create();
 	fbo3.Create();
+	
+	bloom.Create(g_SHADERS.blur, g_SHADERS.extractbright, g_SHADERS.combine);
 	
 	ResizePostEffects(width, height);
 }
@@ -100,15 +98,12 @@ void Screen::Display()
 
 void Screen::ResizePostEffects(int width, int height)
 {
-	//delete bloom;
-	
 	fbo0.Resize(width, height);
 	fbo1.Resize(width, height);	
 	fbo2.Resize(width, height);
 	fbo3.Resize(width, height);
 	
-	bloom = new BloomEffect(width, height);
-	bloom->BindShaderPrograms(g_SHADERS.blur, g_SHADERS.extractbright, g_SHADERS.combine);
+	bloom.Resize(width, height);
 }
 
    
