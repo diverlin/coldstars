@@ -1269,8 +1269,8 @@ static const char * pTo_blackToAlphaFragSource = {
 "}"
 };       
 
-g_SHADERS.black2alpha = glCreateProgram();
-compile_program(pTo_blackToAlphaVertexSource, pTo_blackToAlphaFragSource, &g_SHADERS.black2alpha);
+g_SHADERS_PACK.black2alpha = glCreateProgram();
+compile_program(pTo_blackToAlphaVertexSource, pTo_blackToAlphaFragSource, g_SHADERS_PACK.black2alpha);
 
 
 
@@ -1320,8 +1320,8 @@ static const GLchar * pTo_shockWaveFragSource = {
 "}"
 };
 
-g_SHADERS.shockwave = glCreateProgram();
-compile_program(pTo_shockWaveVertexSource, pTo_shockWaveFragSource, &g_SHADERS.shockwave);
+g_SHADERS_PACK.shockwave = glCreateProgram();
+compile_program(pTo_shockWaveVertexSource, pTo_shockWaveFragSource, g_SHADERS_PACK.shockwave);
 
 
 
@@ -1391,8 +1391,8 @@ static const GLchar * pTo_volumetricLightFragSource = {
 "}"
 };
 
-g_SHADERS.volumetriclight = glCreateProgram();
-compile_program(pTo_volumetricLightVertexSource, pTo_volumetricLightFragSource, &g_SHADERS.volumetriclight );
+g_SHADERS_PACK.volumetriclight = glCreateProgram();
+compile_program(pTo_volumetricLightVertexSource, pTo_volumetricLightFragSource, g_SHADERS_PACK.volumetriclight );
 
 
 
@@ -1457,8 +1457,8 @@ static const GLchar * pTo_lightFragSource = {
 "}"
 };       
 
-g_SHADERS.light = glCreateProgram();
-compile_program(pTo_lightVertexSource, pTo_lightFragSource, &g_SHADERS.light);
+g_SHADERS_PACK.light = glCreateProgram();
+compile_program(pTo_lightVertexSource, pTo_lightFragSource, g_SHADERS_PACK.light);
 
 
 
@@ -1510,8 +1510,8 @@ static const GLchar * pTo_blurFragmentSource = {
 "}"
 };  
 
-g_SHADERS.blur = glCreateProgram();
-compile_program(pTo_blurVertexSource, pTo_blurFragmentSource, &g_SHADERS.blur);
+g_SHADERS_PACK.blur = glCreateProgram();
+compile_program(pTo_blurVertexSource, pTo_blurFragmentSource, g_SHADERS_PACK.blur);
 
 
 
@@ -1544,8 +1544,8 @@ static const GLchar * pTo_extractBrightFragmentSource = {
 "}"
 };  
 
-g_SHADERS.extractbright = glCreateProgram();
-compile_program(pTo_extractBrightVertexSource, pTo_extractBrightFragmentSource, &g_SHADERS.extractbright);
+g_SHADERS_PACK.extractbright = glCreateProgram();
+compile_program(pTo_extractBrightVertexSource, pTo_extractBrightFragmentSource, g_SHADERS_PACK.extractbright);
 
 
 
@@ -1607,8 +1607,8 @@ static const GLchar * pTo_combineFragmentSource = {
 "}"
 };  
 
-g_SHADERS.combine = glCreateProgram();
-compile_program(pTo_combineVertexSource, pTo_combineFragmentSource, &g_SHADERS.combine);
+g_SHADERS_PACK.combine = glCreateProgram();
+compile_program(pTo_combineVertexSource, pTo_combineFragmentSource, g_SHADERS_PACK.combine);
 
 
 
@@ -1652,6 +1652,6 @@ static const GLchar * pTo_multitexFragmentSource = {
 };
 
     
-g_SHADERS.multitexturing = glCreateProgram();
-compile_program(pTo_multitexVertexSource, pTo_multitexFragmentSource, &g_SHADERS.multitexturing);
+g_SHADERS_PACK.multitexturing = glCreateProgram();
+compile_program(pTo_multitexVertexSource, pTo_multitexFragmentSource, g_SHADERS_PACK.multitexturing);
 }

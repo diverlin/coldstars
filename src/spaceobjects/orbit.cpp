@@ -88,13 +88,13 @@ void Orbit::UpdatePosition()
 
 void Orbit::UpdateVisual()
 {
-	orbit_visual.fillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue->texture, &coords_vec, 50, 10);
+	orbit_visual.FillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue->texture, &coords_vec, 50, 10);
 }
 
 void Orbit::Draw()
 {   
 	this->UpdateVisual();   // TOO SLOW
-        orbit_visual.draw();
+        orbit_visual.Draw();
 }
 
 

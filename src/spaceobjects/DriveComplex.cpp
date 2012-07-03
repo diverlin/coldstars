@@ -222,7 +222,7 @@ void DriveComplex::CalcPath()
 	{
 		direction_list_END = false;
                
-       		visual_path.fillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue->texture, &path_vec, 10, 10);
+       		visual_path.FillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue->texture, &path_vec, 10, 10);
        		move_it = 0;
        	}
 }
@@ -469,11 +469,11 @@ vec2f DriveComplex::CalcRoundPath()  // not working yet
         k_vec.push_back(vec2f(xk, yk));                                                                   // debug
         target_vec.push_back(target_pos);                                                                 // debug
         
-        visual_c1c2.fillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_yellow->texture, &c1c2_vec, 1, 20);     // debug
-        visual_rc.fillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_red->texture, &rc_vec, 1, 10);            // debug
-        visual_k1k2.fillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_green->texture, &k1k2_vec, 1, 20);      // debug   
-        visual_k.fillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_red->texture, &k_vec, 1, 10);              // debug  
-        visual_target.fillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_red->texture, &target_vec, 1, 10);    // debug
+        visual_c1c2.FillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_yellow->texture, &c1c2_vec, 1, 20);     // debug
+        visual_rc.FillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_red->texture, &rc_vec, 1, 10);            // debug
+        visual_k1k2.FillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_green->texture, &k1k2_vec, 1, 20);      // debug   
+        visual_k.FillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_red->texture, &k_vec, 1, 10);              // debug  
+        visual_target.FillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_red->texture, &target_vec, 1, 10);    // debug
                 
                 
 
@@ -573,13 +573,13 @@ void DriveComplex::DrawPath()
 {
         if (direction_list_END == false)
         {
-                visual_path.draw();
+                visual_path.Draw();
 
-        	//visual_c1c2.draw();   // debug
-        	//visual_rc.draw();     // debug
-        	//visual_k1k2.draw();   // debug
-        	visual_k.draw();      // debug
-        	visual_target.draw(); // debug
+        	//visual_c1c2.Draw();   // debug
+        	//visual_rc.Draw();     // debug
+        	//visual_k1k2.Draw();   // debug
+        	visual_k.Draw();      // debug
+        	visual_target.Draw(); // debug
         }
 }
 

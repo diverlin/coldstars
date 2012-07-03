@@ -61,7 +61,7 @@ void BasePlanet::UpdatePosition()
 				 		
 void BasePlanet::Render_NEW(vec2f scroll_coords)
 {     	
-     	glUseProgram(g_SHADERS.light);
+     	glUseProgram(g_SHADERS_PACK.light);
      	//printProgramInfoLog(g_LIGHT_PROGRAM);
 
      	//if (glGetUniformLocation(g_LIGHT_PROGRAM, "lightPos") == -1)
@@ -71,12 +71,12 @@ void BasePlanet::Render_NEW(vec2f scroll_coords)
      	//if (glGetUniformLocation(g_LIGHT_PROGRAM, "Texture_0") == -1)
          	//printf("shader Texture_0 fail\n"); 
 
-     	glUniform4f(glGetUniformLocation(g_SHADERS.light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
-     	glUniform4f(glGetUniformLocation(g_SHADERS.light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
+     	glUniform4f(glGetUniformLocation(g_SHADERS_PACK.light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
+     	glUniform4f(glGetUniformLocation(g_SHADERS_PACK.light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
 
      	glActiveTexture(GL_TEXTURE0);
      	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-     	glUniform1i(glGetUniformLocation(g_SHADERS.light, "Texture_0"), 0);
+     	glUniform1i(glGetUniformLocation(g_SHADERS_PACK.light, "Texture_0"), 0);
       
 	renderMesh(mesh->glList, points.GetCenter3f(), angle, data_planet.scale);
 
