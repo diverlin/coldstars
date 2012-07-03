@@ -981,7 +981,7 @@ void Player::RunSession(const TurnTimer& turn_timer)
        		case ENTITY::KOSMOPORT_ID:  	{ this->SessionInKosmoport(); break; }
        	}        	
        	
-       	Screen::Instance().Display();
+       	Screen::Instance().Draw();
 }
 
 void Player::ForceStateMachineReset() const

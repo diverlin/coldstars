@@ -14,7 +14,7 @@ class Screen:private sf::NonCopyable
         	void InitBasic(int width, int height, int bpp, bool vert_sync, const std::string&);
       		void InitPostEffects(int, int);
       		      		        	         		
-	 	void SetBottomLeftGlobalCoord(vec2f bottomLeft_globalCoord) { this->bottomLeft_globalCoord = bottomLeft_globalCoord; }; 
+	 	void SetBottomLeftGlobalCoord(vec2f bottomLeft_globalCoord) { this->bottomLeft_globalCoord = bottomLeft_globalCoord; UpdateTopRightGlobalCoord(); }; 
         
               	sf::RenderWindow& GetWindow() { return render_window; };
       		sf::Font& GetFont() { return font; };      			
@@ -26,15 +26,13 @@ class Screen:private sf::NonCopyable
 		Fbo& GetFbo1() { return fbo1; };
 		Fbo& GetFbo2() { return fbo2; };
 		Fbo& GetFbo3() { return fbo3; }
-
 		BloomEffect& GetBloom() { return bloom; };	
 		
 		void MovingBy(vec2f);
 
-        	void Resize(int, int);
-   
-      		void Update();     					
-		void Display();	
+        	void Resize(int, int);   
+			
+		void Draw();	
 
     	private:
       		Screen();
@@ -61,9 +59,9 @@ class Screen:private sf::NonCopyable
 
       		void ResizePostEffects(int, int);
       		
-		void UpdateOnEvent();
+		void UpdateTopRightGlobalCoord();
 		
-      		void DrawFsp();
+      		void DrawFps();
 };
 
 
