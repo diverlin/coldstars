@@ -107,7 +107,8 @@ void Screen::ResizePostEffects(int width, int height)
 	fbo2.Resize(width, height);
 	fbo3.Resize(width, height);
 	
-	bloom = new BloomEffect(width, height, g_SHADERS.blur, g_SHADERS.extractbright, g_SHADERS.combine, 1, 1);
+	bloom = new BloomEffect(width, height);
+	bloom->BindShaderPrograms(g_SHADERS.blur, g_SHADERS.extractbright, g_SHADERS.combine);
 }
 
    
