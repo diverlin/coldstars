@@ -105,7 +105,7 @@ void StarSystemBuilder::CreateBackground(int distNebula_num, int distStar_num, i
 {
         for(int i = 0; i < distNebula_num; i++)
         { 
-		DistantNebulaEffect* dn = GetNewDistantNebulaEffect(color_id);
+		DistantNebulaEffect* dn = GetNewDistantNebulaEffect(-1);
                 starsystem->Add(dn);
         } 
 

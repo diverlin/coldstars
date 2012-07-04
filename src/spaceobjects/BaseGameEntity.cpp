@@ -82,6 +82,18 @@ void BaseGameEntity::CheckDeath(bool show_effect)
 	}  
 }
 
+void BaseGameEntity::RenderInfoInSpace(const vec2f& scroll_coords)
+{ 
+	UpdateInfo();
+     	drawInfoIn2Column(&info.title_list, &info.value_list, points.GetCenter().x - scroll_coords.x, points.GetCenter().y - scroll_coords.y);
+}
+
+void BaseGameEntity::RenderInfo(const vec2f& center)
+{ 
+	UpdateInfo();
+     	drawInfoIn2Column(&info.title_list, &info.value_list, center.x, center.y);
+}
+
 void BaseGameEntity::SaveDataUniqueBaseGameEntity(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	save_ptree.put(root+"data_life.is_alive",   data_life.is_alive);

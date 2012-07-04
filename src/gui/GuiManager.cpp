@@ -125,6 +125,7 @@ void GuiManager::RunSession()
 			}
 
 			gui_space->UpdateMouseInteraction(mxvp, myvp, lmb, rmb);    
+				
 			resetRenderTransformation();
 			enable_BLEND();    						
 				gui_space->RenderButtons();

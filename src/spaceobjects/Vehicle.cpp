@@ -173,7 +173,7 @@ bool Vehicle::DockingEffect()
 {
 	if (color.a > 0.01)
 	{
-		color.a -= 0.01;
+		color.a -= 0.02;
 		return false;
 	}
 	else
@@ -188,7 +188,7 @@ bool Vehicle::LaunchingEffect()
 	if (color.a < 1.0)
 	{
 		std::cout<<"LaunchingEffect works"<<std::endl;
-		color.a += 0.01;
+		color.a += 0.02;
 		return false;
 	}
 	else
@@ -554,20 +554,26 @@ std::string Vehicle::returnProtectionStr()
        		return int2str(data_korpus.protection);
 }
 
-void Vehicle::RenderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y)
+void Vehicle::RenderInfoInSpace(const vec2f& scroll_coords)
 {  
-        this->UpdateInfo(); // virtual, overriding
-     	drawInfoIn2Column(&info.title_list, &info.value_list, _pos_x, _pos_y, _offset_x, _offset_y);
+	UpdateInfo(); // virtual
+     	drawInfoIn2Column(&info.title_list, &info.value_list, points.GetCenter().x - scroll_coords.x, points.GetCenter().y - scroll_coords.y);
      	
      	if (owner_npc != NULL)
      	{
-     		owner_npc->RenderInfo(_pos_x, _pos_y, _offset_x, _offset_y);
+     		owner_npc->RenderInfo(vec2f(points.GetCenter().x + 190 - scroll_coords.x, points.GetCenter().y - scroll_coords.y));
      	}
 }
 
-void Vehicle::RenderInfoInSpace(vec2f scroll_coords)
+void Vehicle::RenderInfo(const vec2f& center)
 {  
-	RenderInfo(points.GetCenter().x, points.GetCenter().y, scroll_coords.x, scroll_coords.y);
+	UpdateInfo(); // virtual
+     	drawInfoIn2Column(&info.title_list, &info.value_list, center.x, center.y);
+     	
+     	if (owner_npc != NULL)
+     	{
+     		owner_npc->RenderInfo(vec2f(center.x + 190, center.y));
+     	}
 }
 
 void Vehicle::RenderGrappleTrail() const

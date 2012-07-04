@@ -37,7 +37,7 @@ int main()
 
 	GalaxyBuilder::Instance().GetGalaxy()->GetRandomStarSystem()->Add(player->GetNpc()->GetVehicle(), center, angle, NULL);
 
-	Screen::Instance().Resize(Config::Instance().SCREEN_WIDTH/1.5, Config::Instance().SCREEN_HEIGHT);
+	//Screen::Instance().Resize(Config::Instance().SCREEN_WIDTH/1.5, Config::Instance().SCREEN_HEIGHT);
 
 	// GAME LOOP
 	while (Screen::Instance().GetWindow().IsOpened())

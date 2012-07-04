@@ -128,9 +128,9 @@ class Vehicle : public BaseGameEntity
         	bool DockingEffect();
         	bool LaunchingEffect();
         	
-        	void RenderInfo(float, float, float, float);
-        	void RenderInfoInSpace(vec2f);
-        	
+        	void RenderInfoInSpace(const vec2f&);
+        	void RenderInfo(const vec2f&);
+        	        	
         	void RenderRadarRange();
         	void RenderGrappleRange();        
 
@@ -175,7 +175,7 @@ class Vehicle : public BaseGameEntity
                 Color4f color;
                                 
                 VehicleSlot* parent_vehicleslot;
-                
+        	                
                 UnresolvedDataUniqueVehicle data_unresolved_Vehicle;
                 
                 void SaveDataUniqueVehicle(boost::property_tree::ptree&, const std::string&) const;		

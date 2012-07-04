@@ -245,14 +245,6 @@ void Npc::UpdateInfo()
     	}
 }
 
-
-
-void Npc::RenderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y)
-{  
-        UpdateInfo();
-     	drawInfoIn2Column(&info.title_list, &info.value_list, _pos_x + 190, _pos_y, _offset_x, _offset_y);
-}
-   
    
 void Npc::SaveData(boost::property_tree::ptree& save_ptree) const
 {

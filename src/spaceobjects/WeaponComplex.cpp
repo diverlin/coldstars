@@ -265,9 +265,7 @@ void WeaponComplex::RenderWeaponsRange()
 }
 
 void WeaponComplex::RenderWeaponIcons() const
-{
-        enable_BLEND();
-        
+{       
         int offset = 0;
         for (unsigned int i = 0; i < slot_weapon_vec.size(); i++)
         {
@@ -279,6 +277,4 @@ void WeaponComplex::RenderWeaponIcons() const
                         offset++;
                 }        
         }
-        
-        disable_BLEND();
 }

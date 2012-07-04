@@ -38,8 +38,6 @@ class Star : public BasePlanet
     		
     		void Render_NEW();
     		void Render_OLD();
-
-    		void RenderInfo_inSpace(vec2f);
                 
                 void SaveData(boost::property_tree::ptree&) const;
                 void LoadData(const boost::property_tree::ptree&);

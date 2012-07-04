@@ -171,7 +171,7 @@ void GuiAngar::RenderFocusedItemInfo(Angar* angar, int mxvp, int myvp) const
                 {
                        	if (angar->vehicleslot_vec[i]->CheckInteraction(mxvp, myvp) == true)
                 	{
-		                angar->vehicleslot_vec[i]->RenderInfo();
+		                angar->vehicleslot_vec[i]->RenderItemInfo();
 		                return;
                 	}
                 }

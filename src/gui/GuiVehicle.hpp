@@ -33,6 +33,8 @@ class GuiVehicle
       		
       	private: 		
       		Player* player;
+      		
+      		vec2i offset;
 };
 
 

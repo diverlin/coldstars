@@ -76,14 +76,8 @@ void Orbit::CalcPath(float radius, float speed)
 
 void Orbit::UpdatePosition()
 {   
-     	if (it < len-1)
-     	{ 
-        	it++;
-     	}
-     	else
-     	{
-        	it = 0;
-        }
+     	if (it < len-1) { it++; }
+     	else { it = 0; }
 }    
 
 void Orbit::UpdateVisual()

@@ -57,9 +57,9 @@ void VehicleSlot::Render() const
 }
 
 
-void VehicleSlot::RenderInfo() const
+void VehicleSlot::RenderItemInfo() const
 {
-	vehicle->RenderInfo(rect.GetCenter().x, rect.GetCenter().y, 0, 0);
+	vehicle->RenderInfo(rect.GetCenter());
 }
 
 

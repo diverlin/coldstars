@@ -94,7 +94,7 @@ class Player : public Base
     	     	Npc*     npc;
      	     	
      	     	Cursor* cursor;
-     	     	
+
      	     	ControlWord control;  
      		WeaponSelector weapon_selector;
      		     	     	
@@ -125,9 +125,9 @@ class Player : public Base
     		
     		GuiManager*   GUI_MANAGER;    
     		
-    		void Render(bool, bool, bool); 
-     			void RenderEntities_NEW();
-    			void RenderEntities_OLD();
+    		void RenderInSpace(bool, bool, bool); 
+     			void RenderInSpace_NEW();
+    			void RenderInSpace_OLD();
     		
     		
     		void SessionInSpace(const TurnTimer&);
@@ -152,7 +152,7 @@ class Player : public Base
     		void SaveDataUniquePlayer(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniquePlayer(const boost::property_tree::ptree&);
 		void ResolveDataUniquePlayer();
-		
+
     		friend class UserInput;
 };
 

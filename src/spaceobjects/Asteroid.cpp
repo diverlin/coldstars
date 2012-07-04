@@ -80,12 +80,6 @@ void Asteroid::UpdateInfo()
 	info.addNameStr("speed x 100:"); info.addValueStr(int2str(int(data_planet.speed*100)));
 }     
 
-void Asteroid::RenderInfoInSpace(vec2f scroll_coords) 
-{  
-	UpdateInfo();
-     	drawInfoIn2Column(&info.title_list, &info.value_list, points.GetCenter().x, points.GetCenter().y, scroll_coords.x, scroll_coords.y);
-}
-
 void Asteroid::SaveDataUniqueAsteroid(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {}
 

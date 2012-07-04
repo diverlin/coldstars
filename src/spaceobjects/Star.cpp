@@ -93,12 +93,6 @@ void Star::UpdateInfo()
     	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
 }
 
-void Star::RenderInfo_inSpace(vec2f scroll_coords)
-{ 
-	UpdateInfo();
-     	drawInfoIn2Column(&info.title_list, &info.value_list, points.GetCenter().x, points.GetCenter().y, scroll_coords.x, scroll_coords.y);
-}
-
 void Star::PostDeathUniqueEvent(bool)
 {}
 

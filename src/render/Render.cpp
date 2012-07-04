@@ -110,7 +110,7 @@ void drawDynamic(TextureOb* texOb,
 
 
 
-void drawRect(Rect rect, float z_pos) // the drawrect function was inverted by Y axis
+void drawRect(const Rect& rect, float z_pos) // the drawrect function was inverted by Y axis
 {
     	glBegin(GL_QUADS);
       		glTexCoord3f(0, 0, 0); glVertex3f(rect.GetBottomLeft().x,           	        rect.GetBottomLeft().y + rect.GetHeight(), z_pos);
@@ -120,7 +120,7 @@ void drawRect(Rect rect, float z_pos) // the drawrect function was inverted by Y
     	glEnd();
 }
 
-void drawTexturedRect(TextureOb* texOb, Rect rect, float z_pos)
+void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos)
 {
     	glBindTexture(GL_TEXTURE_2D, texOb->texture);
 	int frame = texOb->updateAnimationFrame();
@@ -195,9 +195,7 @@ void drawInfoIn2Column(
                 std::vector<std::string>* pInfo_title_list, 
                 std::vector<std::string>* pInfo_value_list, 
                 float center_x, 
-                float center_y,
-                float scroll_x,
-                float scroll_y)
+                float center_y)
 {
      	int font_size = 13;
      	float char_h = 25;
@@ -224,19 +222,22 @@ void drawInfoIn2Column(
      	TextureOb* texOb_textBg = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::TEXT_BACKGROUND_ID);
      	Rect rect = Rect(center_x - char_w, center_y - info_total_string_h, info_total_string_w, info_total_string_h + char_h/2);
 
-     	drawTexturedRect(texOb_textBg, rect, -2);
-
+	glLoadIdentity();
+	//enable_BLEND();
+		drawTexturedRect(texOb_textBg, rect, -2);
+	//disable_BLEND();
+	
      	sf::String s((*pInfo_title_list)[0], Screen::Instance().GetFont(), (font_size+1));
      	s.SetColor(sf::Color(255, 255, 255));
-     	s.SetPosition(center_x - scroll_x + info_total_string_w/3, (Screen::Instance().GetWindow().GetHeight() - center_y) + scroll_y); 
+     	s.SetPosition(center_x + info_total_string_w/3, (Screen::Instance().GetWindow().GetHeight() - center_y)); 
       	Screen::Instance().GetWindow().Draw(s);
 
      	for (unsigned int i = 1; i < pInfo_title_list->size(); i++)
      	{
          	sf::String s((*pInfo_title_list)[i], Screen::Instance().GetFont(), font_size);
          	s.SetColor(sf::Color(255, 255, 255));
-         	s.SetPosition(center_x - scroll_x, (Screen::Instance().GetWindow().GetHeight() - center_y) + char_h*i + scroll_y); 
-          Screen::Instance().GetWindow().Draw(s);
+         	s.SetPosition(center_x, (Screen::Instance().GetWindow().GetHeight() - center_y) + char_h*i); 
+          	Screen::Instance().GetWindow().Draw(s);
      	}       
 
 
@@ -244,7 +245,7 @@ void drawInfoIn2Column(
      	{
          	sf::String s((*pInfo_value_list)[i], Screen::Instance().GetFont(), font_size);
          	s.SetColor(sf::Color(250, 250, 0));
-         	s.SetPosition(center_x - scroll_x + max_info_title_str_size * (char_w - 1.2), (Screen::Instance().GetWindow().GetHeight() - center_y) + char_h*i + char_h + scroll_y); 
+         	s.SetPosition(center_x + max_info_title_str_size * (char_w - 1.2), (Screen::Instance().GetWindow().GetHeight() - center_y) + char_h*i + char_h); 
           	Screen::Instance().GetWindow().Draw(s);
      	}  
 }
