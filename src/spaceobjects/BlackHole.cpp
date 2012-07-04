@@ -28,8 +28,6 @@ BlackHole::BlackHole(int id)
 
 BlackHole::~BlackHole() {}
    
-void BlackHole::SetEffect(BlackHoleEffect* effect) { this->effect = effect; } 
-		
 void BlackHole::UpdateInSpace(int time, bool show_effect)
 {
 	//updateRotation();

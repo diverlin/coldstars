@@ -100,7 +100,7 @@ void drawFullScreenTexturedQuad(GLuint texture, int w, int h, float pos_z);
 void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z, GLuint program_blur);
 
 
-void renderMesh(GLuint glList, vec3f center, vec3f angle, float scale);
+void renderMesh(GLuint glList, const vec3f& center, const vec3f& angle, float scale);
 
 
 #endif 

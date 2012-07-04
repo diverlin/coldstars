@@ -28,10 +28,10 @@ ShockWaveEffect :: ShockWaveEffect(vec2f center,
 
 	this->center = center;
 	
-        parameter.set(_x, _y, _z);
+        parameter.Set(_x, _y, _z);
         time = _time; 
 
-        d_parameter.set(_d_x, _d_y, _d_z);
+        d_parameter.Set(_d_x, _d_y, _d_z);
         d_time = _d_time; 
 }
 

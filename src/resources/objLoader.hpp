@@ -96,93 +96,85 @@ class ObjMeshInstance
    ObjMeshInstance()
   {}
       
-  ObjMeshInstance(std::string filename)
-  {
-  	path = filename;
-    std::ifstream filestream;
-    filestream.open(filename.c_str());
+ObjMeshInstance(std::string filename)
+{
+	path = filename;
+    	std::ifstream filestream;
+    	filestream.open(filename.c_str());
  
-    std::string line_stream;    // No longer depending on char arrays thanks to: Dale Weiler
-    while(std::getline(filestream, line_stream))
-    {
-        std::stringstream str_stream(line_stream);
-        std::string type_str;
-        str_stream >> type_str;
-        if(type_str == TOKEN_VERTEX_POS)
-        {
-            Vector3f pos;
-            str_stream >> pos.x >> pos.y >> pos.z;
-            positions.push_back(pos);
-        }
-        else if(type_str == TOKEN_VERTEX_TEX)
-        {
-            Vector2f tex;
-            str_stream >> tex.x >> tex.y;
-            texcoords.push_back(tex);
-        }
-        else if(type_str == TOKEN_VERTEX_NOR)
-        {
-            Vector3f nor;
-            str_stream >> nor.x >> nor.y >> nor.z;
-            normals.push_back(nor);
-        }
-        else if(type_str == TOKEN_FACE)
-        {
-            _ObjMeshFaceIndex face_index;
-            char interupt;
-            for(int i = 0; i < 3; ++i)
-            {
-                str_stream >> face_index.pos_index[i] >> interupt
-                           >> face_index.tex_index[i] >> interupt
-                           >> face_index.nor_index[i];
-            }
-            faces.push_back(face_index);
-        }
-    }
-    // Explicit closing of the file
-    filestream.close();
+    	std::string line_stream;    // No longer depending on char arrays thanks to: Dale Weiler
+    	while(std::getline(filestream, line_stream))
+    	{
+        	std::stringstream str_stream(line_stream);
+        	std::string type_str;
+        	str_stream >> type_str;
+        	if(type_str == TOKEN_VERTEX_POS)
+        	{
+            		Vector3f pos;
+            		str_stream >> pos.x >> pos.y >> pos.z;
+            		positions.push_back(pos);
+        	}
+        	else if(type_str == TOKEN_VERTEX_TEX)
+        	{
+            		Vector2f tex;
+            		str_stream >> tex.x >> tex.y;
+            		texcoords.push_back(tex);
+        	}
+        	else if(type_str == TOKEN_VERTEX_NOR)
+        	{
+            		Vector3f nor;
+            		str_stream >> nor.x >> nor.y >> nor.z;
+            		normals.push_back(nor);
+        	}
+        	else if(type_str == TOKEN_FACE)
+        	{
+            		_ObjMeshFaceIndex face_index;
+            		char interupt;
+            		for(int i = 0; i < 3; ++i)
+            		{
+                		str_stream >> face_index.pos_index[i] >> interupt
+                        		   >> face_index.tex_index[i] >> interupt
+                           	   	   >> face_index.nor_index[i];
+            		}
+            		faces.push_back(face_index);
+        	}
+    	}
+    	// Explicit closing of the file
+    	filestream.close();
  
-    for(size_t i = 0; i < faces.size(); ++i)
-    {
-        ObjMeshFace face;
-        for(size_t j = 0; j < 3; ++j)
-        {
-            face.vertices[j].pos        = positions[faces[i].pos_index[j] - 1];
-            face.vertices[j].texcoord   = texcoords[faces[i].tex_index[j] - 1];
-            face.vertices[j].normal     = normals[faces[i].nor_index[j] - 1];
-        }
-        myMesh.faces.push_back(face);
-    }
+    	for(size_t i=0; i<faces.size(); ++i)
+    	{
+        	ObjMeshFace face;
+        	for(size_t j=0; j<3; ++j)
+        	{
+            		face.vertices[j].pos      = positions[faces[i].pos_index[j] - 1];
+            		face.vertices[j].texcoord = texcoords[faces[i].tex_index[j] - 1];
+            		face.vertices[j].normal   = normals[faces[i].nor_index[j] - 1];
+        	}
+        	myMesh.faces.push_back(face);
+    	}
 
-
-  createGlList();
-  }
+  	createGlList();
+}
   
   
-  void createGlList()
-  {
-      glList = glGenLists(1);
-      glNewList(glList, GL_COMPILE);
-      for(unsigned int i = 0; i<myMesh.faces.size(); i++)
-      { 
-         glBegin(GL_POLYGON);
-         for(unsigned int j = 0; j<3; j++)
-         {
-             glNormal3f(myMesh.faces[i].vertices[j].normal.x, myMesh.faces[i].vertices[j].normal.y, myMesh.faces[i].vertices[j].normal.z);
-             glTexCoord2f(myMesh.faces[i].vertices[j].texcoord.x, myMesh.faces[i].vertices[j].texcoord.y);
-             glVertex3f(myMesh.faces[i].vertices[j].pos.x, myMesh.faces[i].vertices[j].pos.y, myMesh.faces[i].vertices[j].pos.z);
-         }  
-         glEnd();   
-      }    
-      glEndList();
-  }
-                //for i in range(len(vertices)):
-                //if normals[i] > 0:
-                    //glNormal3fv(self.normals[normals[i] - 1])
-                //if texture_coords[i] > 0:
-                    //glTexCoord2fv(self.texcoords[texture_coords[i] - 1])
-                //glVertex3fv(self.vertices[vertices[i] - 1])
-
+void createGlList()
+{
+ 	glList = glGenLists(1);
+      	glNewList(glList, GL_COMPILE);
+      	for(unsigned int i=0; i<myMesh.faces.size(); i++)
+      	{ 
+        	glBegin(GL_POLYGON);
+         	for(unsigned int j=0; j<3; j++)
+         	{
+             		glNormal3f(  myMesh.faces[i].vertices[j].normal.x,   myMesh.faces[i].vertices[j].normal.y,   myMesh.faces[i].vertices[j].normal.z);
+             		glTexCoord2f(myMesh.faces[i].vertices[j].texcoord.x, myMesh.faces[i].vertices[j].texcoord.y);
+             		glVertex3f(  myMesh.faces[i].vertices[j].pos.x,      myMesh.faces[i].vertices[j].pos.y,      myMesh.faces[i].vertices[j].pos.z);
+         	}  
+         	glEnd();   
+      	}    
+      	glEndList();
+}
 
 };
 
