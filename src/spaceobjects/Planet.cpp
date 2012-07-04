@@ -62,12 +62,6 @@ void Planet::UpdateInfo()
 	info.addNameStr("population:");  info.addValueStr(int2str(population));
 }
 
-void Planet::RenderInfoInSpace(vec2f scroll_coords)
-{  
-	UpdateInfo();
-	drawInfoIn2Column(&info.title_list, &info.value_list, points.GetCenter().x, points.GetCenter().y, scroll_coords.x, scroll_coords.y);
-}
-
 void Planet::PostDeathUniqueEvent(bool)
 {}
 

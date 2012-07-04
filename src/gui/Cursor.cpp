@@ -22,6 +22,7 @@ mouse_left_button(false),
 mouse_right_button(false)
 {
 	this->player = player;
+	focused_space_ob = NULL;
 	
      	slot = GetNewItemSlot(ITEMSLOT::CARGO_ID);
      	slot->SetRect(0, 0, GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
@@ -41,4 +42,117 @@ void Cursor::Update(int mxvp, int myvp)
      	slot->GetRect().SetCenter(mxvp, myvp);
 }
 
+void Cursor::RenderFocusedSpaceObjectStuff()
+{
+	if (focused_space_ob != NULL)
+	{
+		switch(focused_space_ob->GetTypeId())
+		{
+			case ENTITY::VEHICLE_ID:
+			{
+				switch(focused_space_ob->GetSubTypeId())
+				{
+					case ENTITY::ROCKETBULLET_ID:
+					{
+						((RocketBullet*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+						
+						break;
+					}
 
+					case ENTITY::SATELLITE_ID:
+					{
+						Satellite* satellite = (Satellite*)focused_space_ob;
+						
+			                	satellite->GetWeaponComplex()->RenderWeaponIcons();
+
+                				satellite->RenderRadarRange(); 
+                				satellite->GetWeaponComplex()->RenderWeaponsRange(); 
+                		                                
+                        			satellite->GetDriveComplex()->DrawPath(); 
+
+						satellite->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+						                        
+						break;
+					}
+
+					case ENTITY::SHIP_ID:
+					{
+						Ship* ship = (Ship*)focused_space_ob;
+						
+			                	ship->GetWeaponComplex()->RenderWeaponIcons();
+
+                				ship->RenderRadarRange(); 
+                				ship->GetWeaponComplex()->RenderWeaponsRange(); 
+                		                                
+                        			ship->GetDriveComplex()->DrawPath(); 
+
+						ship->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+						                        
+						break;
+					}
+
+					case ENTITY::SPACESTATION_ID:
+					{
+						SpaceStation* spacestation = (SpaceStation*)focused_space_ob;
+	
+			                	spacestation->GetWeaponComplex()->RenderWeaponIcons();
+
+                				spacestation->RenderRadarRange(); 
+                				spacestation->GetWeaponComplex()->RenderWeaponsRange(); 
+                		                                
+                        			spacestation->GetDriveComplex()->DrawPath(); 
+        
+        					spacestation->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+        					                
+						break;
+					}
+				}
+
+				
+				break;
+			}
+
+			case ENTITY::CONTAINER_ID:
+			{
+				((Container*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+				
+				break;
+			}
+
+			case ENTITY::ASTEROID_ID:
+			{
+				((Asteroid*)focused_space_ob)->GetOrbit()->Draw();
+
+				((Asteroid*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+								
+				break;
+			}
+
+			case ENTITY::BLACKHOLE_ID:
+			{
+				((BlackHole*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+				
+				break;
+			}
+									
+			case ENTITY::PLANET_ID:
+			{
+				((Planet*)focused_space_ob)->GetOrbit()->Draw();
+
+				((Planet*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+								
+				break;
+			}
+			
+			case ENTITY::STAR_ID:
+			{
+				((Star*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+
+				break;
+			}		
+		}
+	
+	}
+	
+	focused_space_ob = NULL;
+}

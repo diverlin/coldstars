@@ -60,9 +60,7 @@ void PathVisual::FillData(GLuint texture, std::vector<vec2f>* pVec2f, float step
 
 void PathVisual::Draw() const
 {
-        enable_BLEND();
-        	glCallList(gl_list);
-        disable_BLEND();        
+       	glCallList(gl_list);
 }
 
 

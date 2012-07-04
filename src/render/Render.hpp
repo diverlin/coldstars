@@ -56,8 +56,8 @@ void drawDynamic(TextureOb* texOb,
 
 
 
-void drawRect(Rect rect, float z_pos); // the drawrect function was inverted by Y axis
-void drawTexturedRect(TextureOb* texOb, Rect rect, float z_pos);   
+void drawRect(const Rect& rect, float z_pos); // the drawrect function was inverted by Y axis
+void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   
 
 
 void drawTexturedPoint(GLuint texture, vec2f _center, float size, float pos_z);
@@ -85,9 +85,7 @@ void drawInfoIn2Column(
                 std::vector<std::string>* pInfo_title_list, 
                 std::vector<std::string>* pInfo_value_list, 
                 float center_x, 
-                float center_y,
-                float scroll_x = 0.0,
-                float scroll_y = 0.0);
+                float center_y);
 
 
 void drawSimpleText(std:: string str, int font_size, float pos_x, float pos_y);

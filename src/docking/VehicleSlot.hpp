@@ -32,7 +32,7 @@ class VehicleSlot : public BaseSlot
                 void Release(); 
         
                 void Render() const;
-                void RenderInfo() const;
+                void RenderItemInfo() const;
                 
                 virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);

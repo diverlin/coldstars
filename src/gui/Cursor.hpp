@@ -39,13 +39,18 @@ class Cursor
 								
 		void UpdateMousePos();		
 		void Update(int, int);
-        	
+        		
+		void SetFocusedSpaceObject(BaseGameEntity* focused_space_ob) { this->focused_space_ob = focused_space_ob; };
+		void RenderFocusedSpaceObjectStuff();
+		
         private:
         	ItemSlot* slot;        	
         	Player* player;
         	
         	vec2f mouse_pos;
         	
+        	BaseGameEntity* focused_space_ob;
+        	     	     	
         	bool mouse_left_button;
         	bool mouse_right_button;
 }; 

@@ -29,8 +29,6 @@ class BlackHole : public BaseGameEntity
 
 		void SetEffect(BlackHoleEffect*);
 		void UpdateInSpace(int, bool);
-		
-        	void RenderInfoInSpace(vec2f);
         	
         	void Render2D() const;
         	

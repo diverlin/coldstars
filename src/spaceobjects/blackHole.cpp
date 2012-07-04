@@ -49,12 +49,6 @@ void BlackHole::UpdateInfo()
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 }
             
-void BlackHole::RenderInfoInSpace(vec2f scroll_coords)
-{
-	UpdateInfo();
-     	drawInfoIn2Column(&info.title_list, &info.value_list, points.GetCenter().x, points.GetCenter().y, scroll_coords.x, scroll_coords.y);    
-}
-
 void BlackHole::Render2D() const
 {
 	//effect->Render();

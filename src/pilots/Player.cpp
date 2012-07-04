@@ -239,7 +239,7 @@ void Player::AddIfVisible(VerticalFlowText* effect)
 }     		
 
   
-void Player::RenderEntities_NEW()
+void Player::RenderInSpace_NEW()
 {   
 	int w = Screen::Instance().GetWindow().GetWidth();
 	int h = Screen::Instance().GetWindow().GetHeight();
@@ -405,21 +405,20 @@ void Player::RenderEntities_NEW()
         			visible_effect_PARTICLESYSTEM_vec[i]->Render(); 
     			}
     		disable_POINTSPRITE();
-    		
-    		for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
-    		{ 
-        		visible_text_DAMAGE_vec[i]->Render(Screen::Instance().GetBottomLeftGlobalCoord()); 
-    		}    		
-    		
     	disable_BLEND();
-    	
+
+    	for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
+    	{ 
+        	visible_text_DAMAGE_vec[i]->Render(Screen::Instance().GetBottomLeftGlobalCoord()); 
+    	}   
+    		    	
     	npc->GetStarSystem()->RestoreSceneColor();    	          
 }
     
 
 	
   
-void Player::RenderEntities_OLD()
+void Player::RenderInSpace_OLD()
 {   
 	glLoadIdentity();
         npc->GetStarSystem()->DrawBackground(Screen::Instance().GetBottomLeftGlobalCoord());
@@ -496,62 +495,66 @@ void Player::RenderEntities_OLD()
     			{ 
         			visible_effect_PARTICLESYSTEM_vec[i]->Render(); 
     			}
-        	disable_POINTSPRITE();
+        	disable_POINTSPRITE();        	
         disable_BLEND();
 
+	// text
         for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
     	{ 
         	visible_text_DAMAGE_vec[i]->Render(Screen::Instance().GetBottomLeftGlobalCoord()); 
     	}    		
-    		
-                
+              
     	npc->GetStarSystem()->RestoreSceneColor();
 }
 
 
-void Player::Render(bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
-{
-    	
+void Player::RenderInSpace(bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
+{    	
     	if (Config::Instance().MODERN_EFFECTS == true)
     	{
-    		RenderEntities_NEW();
+    		RenderInSpace_NEW();
     	}
     	else
     	{
-        	RenderEntities_OLD(); 
-        }
-                
-        if (turn_ended == true)
-        {
-        	if (forceDraw_orbits == true)
-        	{
-                	npc->GetStarSystem()->DrawOrbits();
-        	}
-        
-        	if (forceDraw_path == true)
-        	{
-                	npc->GetStarSystem()->DrawPath();
-        	}
-       	 	npc->GetVehicle()->GetDriveComplex()->DrawPath();
-       		npc->GetVehicle()->GetWeaponComplex()->RenderWeaponsRange();
-       	
-        	if (GetShowRadarRange() == true)
-        	{
-        		npc->GetVehicle()->RenderRadarRange();
-        	}
+        	RenderInSpace_OLD(); 
+        }        
 
-        	if (GetShowGrappleRange() == true)
+	enable_BLEND();              
+        	if (turn_ended == true)
         	{
-        		npc->GetVehicle()->RenderGrappleRange();
-        	}
-	}
+        		if (forceDraw_orbits == true)
+        		{
+                		npc->GetStarSystem()->DrawOrbits();
+        		}
+        
+        		if (forceDraw_path == true)
+        		{
+                		npc->GetStarSystem()->DrawPath();
+        		}
+       	 		npc->GetVehicle()->GetDriveComplex()->DrawPath();
+       			npc->GetVehicle()->GetWeaponComplex()->RenderWeaponsRange();
+       			npc->GetVehicle()->GetWeaponComplex()->RenderWeaponIcons(); 
+       	
+        		if (GetShowRadarRange() == true)
+        		{
+        			npc->GetVehicle()->RenderRadarRange();
+        		}
+
+        		if (GetShowGrappleRange() == true)
+        		{
+        			npc->GetVehicle()->RenderGrappleRange();
+        		}
+		}
+	
+		cursor->RenderFocusedSpaceObjectStuff();   // perform this function the last, because it resets previos Gl transform
+	disable_BLEND();  
 } 
 
 void Player::MouseInteractionInSpace() // all large objects must be cheked by last
 {   
     	bool cursor_has_target = false;   
  
-    	int mxvp = cursor->GetMousePos().x                       + Screen::Instance().GetBottomLeftGlobalCoord().x;
+    	int mxvp = cursor->GetMousePos().x + Screen::Instance().GetBottomLeftGlobalCoord().x;
     	int myvp = Screen::Instance().GetWindow().GetHeight() - cursor->GetMousePos().y + Screen::Instance().GetBottomLeftGlobalCoord().y;
 
     	bool mlb = cursor->GetMouseLeftButton();
@@ -560,10 +563,8 @@ void Player::MouseInteractionInSpace() // all large objects must be cheked by la
 	if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 	{
     		npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);                   				       
-        	npc->GetVehicle()->GetWeaponComplex()->RenderWeaponIcons();
         }
-
-
+	
 	/* NOTE: the intersection must be checked in order from small objects to huge */	
     	if (MouseInteractionWithRockets(mxvp, myvp, mlb, mrb)) { return; }
     	if (MouseInteractionWithContainers(mxvp, myvp, mlb, mrb)) { return; }
@@ -573,7 +574,8 @@ void Player::MouseInteractionInSpace() // all large objects must be cheked by la
     	if (MouseInteractionWithBlackHoles(mxvp, myvp, mlb, mrb)) { return; }	
     	if (MouseInteractionWithSpaceStations(mxvp, myvp, mlb, mrb)) { return; }	
     	if (MouseInteractionWithPlanets(mxvp, myvp, mlb, mrb)) { return; }    
-
+    	if (MouseInteractionWithStars(mxvp, myvp, mlb, mrb)) { return; }    
+    	
 	MouseNavigation(mxvp, myvp, mlb, mrb);  
 }
 
@@ -584,7 +586,7 @@ bool Player::MouseInteractionWithRockets(int mxvp, int myvp, bool mlb, bool mrb)
             	float object_cursor_dist = distBetweenPoints(visible_ROCKET_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
             	if (object_cursor_dist < visible_ROCKET_vec[i]->GetCollisionRadius())
             	{ 
-               		visible_ROCKET_vec[i]->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord()); 
+            		cursor->SetFocusedSpaceObject(visible_ROCKET_vec[i]);
                
 			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 			{
@@ -616,8 +618,8 @@ bool Player::MouseInteractionWithContainers(int mxvp, int myvp, bool mlb, bool m
        		float object_cursor_dist = distBetweenPoints(visible_CONTAINER_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
        		if (object_cursor_dist < visible_CONTAINER_vec[i]->GetCollisionRadius())
             	{   
-               		visible_CONTAINER_vec[i]->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord()); 
-
+			cursor->SetFocusedSpaceObject(visible_CONTAINER_vec[i]);
+			            		
 			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 			{
                			if (mlb == true)
@@ -651,13 +653,7 @@ bool Player::MouseInteractionWithSatellites(int mxvp, int myvp, bool mlb, bool m
             	float object_cursor_dist = distBetweenPoints(visible_SATELLITE_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
             	if (object_cursor_dist < visible_SATELLITE_vec[i]->GetCollisionRadius())
             	{ 
-            	      	visible_SATELLITE_vec[i]->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord()); 
-                	visible_SATELLITE_vec[i]->GetWeaponComplex()->RenderWeaponIcons();
-
-                	visible_SATELLITE_vec[i]->RenderRadarRange(); 
-                	visible_SATELLITE_vec[i]->GetWeaponComplex()->RenderWeaponsRange(); 
-                		                                
-                        visible_SATELLITE_vec[i]->GetDriveComplex()->DrawPath(); 
+            	       	cursor->SetFocusedSpaceObject(visible_SATELLITE_vec[i]);
                 
 			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 			{
@@ -709,9 +705,8 @@ bool Player::MouseInteractionWithAsteroids(int mxvp, int myvp, bool mlb, bool mr
        		float object_cursor_dist = distBetweenPoints(visible_ASTEROID_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
        		if (object_cursor_dist < visible_ASTEROID_vec[i]->GetCollisionRadius())
        		{   
-                	visible_ASTEROID_vec[i]->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord()); 
-                                
-                        visible_ASTEROID_vec[i]->GetOrbit()->Draw();
+                        cursor->SetFocusedSpaceObject(visible_ASTEROID_vec[i]);        
+                        //visible_ASTEROID_vec[i]->GetOrbit()->Draw();
 
 			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 			{
@@ -744,13 +739,7 @@ bool Player::MouseInteractionWithShips(int mxvp, int myvp, bool mlb, bool mrb) c
         	float object_cursor_dist = distBetweenPoints(visible_SHIP_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
         	if (object_cursor_dist < visible_SHIP_vec[i]->GetCollisionRadius())
         	{ 
-               		visible_SHIP_vec[i]->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord()); 
-               		visible_SHIP_vec[i]->GetWeaponComplex()->RenderWeaponIcons();
-
-               		visible_SHIP_vec[i]->RenderRadarRange(); 
-               		visible_SHIP_vec[i]->GetWeaponComplex()->RenderWeaponsRange(); 
-                		                                
-                        visible_SHIP_vec[i]->GetDriveComplex()->DrawPath(); 
+               		cursor->SetFocusedSpaceObject(visible_SHIP_vec[i]);    
                 
 			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 			{
@@ -801,7 +790,7 @@ bool Player::MouseInteractionWithBlackHoles(int mxvp, int myvp, bool mlb, bool m
        		float cursor_dist = distBetweenPoints(visible_BLACKHOLE_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
        		if (cursor_dist < visible_BLACKHOLE_vec[i]->GetCollisionRadius())
        		{   
-       			visible_BLACKHOLE_vec[i]->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord()); 
+       			cursor->SetFocusedSpaceObject(visible_BLACKHOLE_vec[i]); 
        			
        			return true;
       		}
@@ -817,13 +806,7 @@ bool Player::MouseInteractionWithSpaceStations(int mxvp, int myvp, bool mlb, boo
        		float object_cursor_dist = distBetweenPoints(visible_SPACESTATION_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
        		if (object_cursor_dist < visible_SPACESTATION_vec[i]->GetCollisionRadius())
             	{ 
-            		visible_SPACESTATION_vec[i]->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord()); 
-                	visible_SPACESTATION_vec[i]->GetWeaponComplex()->RenderWeaponIcons();
-
-                	visible_SPACESTATION_vec[i]->RenderRadarRange(); 
-                	visible_SPACESTATION_vec[i]->GetWeaponComplex()->RenderWeaponsRange(); 
-                		                                
-                        visible_SPACESTATION_vec[i]->GetDriveComplex()->DrawPath(); 
+                	cursor->SetFocusedSpaceObject(visible_SPACESTATION_vec[i]); 
                 
 			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 			{
@@ -875,9 +858,8 @@ bool Player::MouseInteractionWithPlanets(int mxvp, int myvp, bool mlb, bool mrb)
        		float object_cursor_dist = distBetweenPoints(visible_PLANET_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
        		if (object_cursor_dist < visible_PLANET_vec[i]->GetCollisionRadius())
             	{   
-                	visible_PLANET_vec[i]->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord()); 
-
-                        visible_PLANET_vec[i]->GetOrbit()->Draw();
+                	cursor->SetFocusedSpaceObject(visible_PLANET_vec[i]); 
+                	//visible_PLANET_vec[i]->GetOrbit()->Draw();
           
 			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
 			{
@@ -904,8 +886,8 @@ bool Player::MouseInteractionWithStars(int mxvp, int myvp, bool mlb, bool mrb) c
       		float object_cursor_dist = distBetweenPoints(visible_STAR_vec[i]->GetPoints().GetCenter(), mxvp, myvp);
        		if (object_cursor_dist < visible_STAR_vec[i]->GetCollisionRadius())
        		{   
-       			visible_STAR_vec[i]->RenderInfo_inSpace(Screen::Instance().GetBottomLeftGlobalCoord()); 
-
+                	cursor->SetFocusedSpaceObject(visible_STAR_vec[i]); 
+                	
        			return true; 
         	}
     	}
@@ -951,7 +933,7 @@ void Player::SessionInSpace(const TurnTimer& turn_timer)
 	cursor->UpdateMousePos();
 
 	npc->GetStarSystem()->FindVisibleEntities_c(this);
-	Render(turn_timer.GetTurnEnded(), GetShowAllOrbit(), GetShowAllPath()); 
+	RenderInSpace(turn_timer.GetTurnEnded(), GetShowAllOrbit(), GetShowAllPath()); 
 
 	if (turn_timer.GetTurnEnded() == true)  
 	{

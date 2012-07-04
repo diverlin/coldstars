@@ -67,6 +67,10 @@ class BaseGameEntity : public Base
 		void MovingByExternalForce(vec2f, float);
 
 		void Hit(int, bool);
+
+		void RenderInfoInSpace(const vec2f&);		
+		void RenderInfo(const vec2f&);
+		void virtual UpdateInfo() {};		
 				
 	protected:
 		LifeData data_life;

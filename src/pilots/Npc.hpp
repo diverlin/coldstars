@@ -71,9 +71,7 @@ class Npc : public BaseGameEntity
     		StarSystem* GetClosestStarSystem(bool);
     		
                 NeedsToDo needsToDo;
-               
-                void RenderInfo(float _pos_x, float _pos_y, float _offset_x, float _offset_y);
-                               
+                             
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
