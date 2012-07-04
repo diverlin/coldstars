@@ -48,8 +48,12 @@ class BasePlanet : public BaseGameEntity
 				
 	protected:
 		PlanetData data_planet;   
-		Orbit* orbit;  		
+		Orbit* orbit;  	
+		TextureOb* texOb_atmosphere;	
 		
+		vec3f angle_atmosphere;
+		vec3f d_angle_atmosphere;
+				
 		virtual void PostDeathUniqueEvent(bool);
 		void UpdatePosition();
 				

@@ -20,6 +20,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 BasePlanet::BasePlanet()
 {
 	orbit = new Orbit();
+	texOb_atmosphere = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ATMOSPHERE_ID);
+	
+	angle_atmosphere.Set(0.0, 0.0, 0.0);
+	d_angle_atmosphere.Set(-0.1, -0.3, 0.0);
+		
 }
 
 /* virtual */
@@ -62,14 +67,6 @@ void BasePlanet::UpdatePosition()
 void BasePlanet::Render_NEW(vec2f scroll_coords)
 {     	
      	glUseProgram(g_SHADERS_PACK.light);
-     	//printProgramInfoLog(g_LIGHT_PROGRAM);
-
-     	//if (glGetUniformLocation(g_LIGHT_PROGRAM, "lightPos") == -1)
-         	//printf("shader lightPos fail\n"); 
-     	//if (glGetUniformLocation(g_LIGHT_PROGRAM, "eyePos") == -1)
-         	//printf("shader eyePos fail\n"); 
-     	//if (glGetUniformLocation(g_LIGHT_PROGRAM, "Texture_0") == -1)
-         	//printf("shader Texture_0 fail\n"); 
 
      	glUniform4f(glGetUniformLocation(g_SHADERS_PACK.light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
      	glUniform4f(glGetUniformLocation(g_SHADERS_PACK.light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
@@ -80,17 +77,17 @@ void BasePlanet::Render_NEW(vec2f scroll_coords)
       
 	renderMesh(mesh->glList, points.GetCenter3f(), angle, data_planet.scale);
 
-     	//// render atmosphere
-     	//glEnable(GL_BLEND);
-     	//glActiveTexture(GL_TEXTURE0);                                
-     	//glBindTexture(GL_TEXTURE_2D, pTo_atmosphereTexOb->texture);
-     	//glUniform1i(glGetUniformLocation(g_LIGHT_PROGRAM, "Texture_0"), 0);
+     	//render atmosphere
+	angle_atmosphere += d_angle_atmosphere;
+     	glEnable(GL_BLEND);
+     		glActiveTexture(GL_TEXTURE0);                                
+     		glBindTexture(GL_TEXTURE_2D, texOb_atmosphere->texture);
+     		glUniform1i(glGetUniformLocation(g_SHADERS_PACK.light, "Texture_0"), 0);
 
-	//renderMesh(mesh->glList, center_pos, angle, planet_data.scale*1.05);
+		renderMesh(mesh->glList, points.GetCenter3f(), angle_atmosphere, data_planet.scale*1.05f);
+	glDisable(GL_BLEND);
+	//end render atmosphere
 	
-     	//glDisable(GL_BLEND);
-     	//// render atmosphere
-
      	glUseProgram(0);
      	glActiveTexture(GL_TEXTURE0);
 }

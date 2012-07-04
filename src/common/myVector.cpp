@@ -20,15 +20,15 @@ vec2f vec2f::GetNorm() const
 }	
                 
 
-vec2f vec2f::operator+=(const vec2f& vec_add)
+vec2f& vec2f::operator+=(const vec2f& rhs)
 {
-	x += vec_add.x;
-	y += vec_add.y;
+	x += rhs.x;
+	y += rhs.y;
 	
 	return *this;
 }
 
-vec2f vec2f::operator+=(float offset)
+vec2f& vec2f::operator+=(float offset)
 {
 	x += offset;
 	y += offset;
@@ -82,31 +82,20 @@ vec2f vec2f::operator/(const float _val) const
 
 
 
-
-
-
-
-
-vec3f :: vec3f()
+vec3f& vec3f::operator+=(const vec3f& rhs)
 {
-        x = 0;
-        y = 0;
-        y = 0;
+	x += rhs.x;
+	y += rhs.y;
+	z += rhs.z;	
+	
+	return *this;
 }
-    
-vec3f :: vec3f(float _x, float _y, float _z)
-{
-        x = _x; 
-        y = _y; 
-        z = _z; 
-}
-            
-void vec3f :: set(float _x, float _y, float _z) 
-{ 
-        x = _x; 
-        y = _y; 
-        z = _z; 
-}
+
+
+
+
+
+
 
 
 

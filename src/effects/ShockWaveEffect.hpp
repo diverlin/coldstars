@@ -17,8 +17,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef SHOCKWAVE_H
-#define SHOCKWAVE_H
+#ifndef SHOCKWAVEEFFECT_H
+#define SHOCKWAVEEFFECT_H
  
  
 class ShockWaveEffect

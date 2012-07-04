@@ -220,7 +220,7 @@ void drawInfoIn2Column(
      	float info_total_string_h = char_h * pInfo_title_list->size();
 
      	TextureOb* texOb_textBg = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::TEXT_BACKGROUND_ID);
-     	Rect rect = Rect(center_x - char_w, center_y - info_total_string_h, info_total_string_w, info_total_string_h + char_h/2);
+     	Rect rect(center_x - char_w, center_y - info_total_string_h, info_total_string_w, info_total_string_h + char_h/2);
 
 	glLoadIdentity();
 	//enable_BLEND();
@@ -306,7 +306,7 @@ void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z
 }
     
     
-void renderMesh(GLuint glList, vec3f center, vec3f angle, float scale)
+void renderMesh(GLuint glList, const vec3f& center, const vec3f& angle, float scale)
 {
      	glPushMatrix();
        		glTranslatef(center.x, center.y, center.z);

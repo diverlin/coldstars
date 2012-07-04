@@ -128,7 +128,7 @@ class ScenarioCollector;
 #include "src/effects/particlesystem/trail.hpp"
 #include "src/effects/particlesystem/damage.hpp"
 
-#include "src/spaceobjects/blackHole.hpp"
+#include "src/spaceobjects/BlackHole.hpp"
 
 #include "src/items/equipment/BaseEquipment.hpp"
 #include "src/items/equipment/RocketEquipment.hpp"
@@ -159,7 +159,7 @@ class ScenarioCollector;
 #include "src/render/Glsl.hpp"
 #include "src/render/Fbo.hpp"
 #include "src/render/Bloom.hpp"
-#include "src/effects/shockWave.hpp"
+#include "src/effects/ShockWaveEffect.hpp"
 
 #include "src/effects/BaseBackGroundEffect.hpp"
 #include "src/effects/DistantNebulaEffect.hpp"
@@ -322,7 +322,7 @@ class ScenarioCollector;
 #include "src/spaceobjects/SpaceStation.cpp" 
 #include "src/spaceobjects/Satellite.cpp" 
 #include "src/items/others/Bomb.cpp" 
-#include "src/spaceobjects/blackHole.cpp"
+#include "src/spaceobjects/BlackHole.cpp"
 
 #include "src/items/BaseItem.cpp"
 #include "src/items/equipment/BaseEquipment.cpp"
@@ -467,7 +467,7 @@ class ScenarioCollector;
 #include "src/render/Glsl.cpp"
 #include "src/render/Fbo.cpp"
 #include "src/render/Bloom.cpp"
-#include "src/effects/shockWave.cpp"
+#include "src/effects/ShockWaveEffect.cpp"
 
 #include "src/text/textstuff.cpp"
 

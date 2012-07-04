@@ -27,7 +27,7 @@ class BlackHole : public BaseGameEntity
         	BlackHole(int);
         	~BlackHole();
 
-		void SetEffect(BlackHoleEffect*);
+		//void SetEffect(BlackHoleEffect* effect) { this->effect = effect; } ;
 		void UpdateInSpace(int, bool);
         	
         	void Render2D() const;
@@ -37,10 +37,10 @@ class BlackHole : public BaseGameEntity
 		virtual void ResolveData();
 		
         private:
-        	BlackHoleEffect* effect;
+        	//BlackHoleEffect* effect;
+        	ShockWaveEffect* shock_wave;
         	
-        	InfoTable info;
-        	void UpdateInfo();    
+         	void UpdateInfo();    
 };
 
 BlackHole* GetNewBlackHole();

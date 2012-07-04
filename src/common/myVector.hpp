@@ -20,8 +20,8 @@ class vec2f
 		void Set(float x, float y) 	{ this->x = x; this->y = y; }
                 void Set(const vec2f& v)    	{ *this = v; };
                 
-                vec2f operator+=(const vec2f&);                
-                vec2f operator+=(float);  
+                vec2f& operator+=(const vec2f&);                
+                vec2f& operator+=(float);  
                 
                 vec2f operator+(const vec2f&) const;
                 vec2f operator-(const vec2f&) const;
@@ -49,10 +49,13 @@ class vec3f
                 float y;
                 float z;
                 
-                vec3f();
-                vec3f(float _x, float _y, float _z);
+                vec3f():x(0.0), y(0.0), z(0.0) {};
+                vec3f(float x, float y, float z) { this->x = x; this->y = y; this->z = z; };
+                vec3f(const vec3f& v) { *this = v; };
+                ~vec3f() {};
                 
-                void set(float _x, float _y, float _z);
+                void Set(float x, float y, float z) { this->x = x; this->y = y; this->z = z; };
+                vec3f& operator+=(const vec3f&);     
 };
 
 float distBetweenPoints(vec2f, vec2f);
