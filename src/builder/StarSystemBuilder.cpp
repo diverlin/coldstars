@@ -60,7 +60,7 @@ void StarSystemBuilder::CreateNewInternals()
         int planet_num = getRandInt(ENTITY::STARSYSTEM::PLANET_MIN, ENTITY::STARSYSTEM::PLANET_MAX);
         this->CreatePlanets(planet_num);
         
-        for (int i = 0; i < 10; i++)
+        for (int i=0; i<SHOCKWAVESBLACKHOLES_MAX_NUM; i++)
         {
         	BlackHole* bh = GetNewBlackHole();
         	starsystem->Add(bh, vec2f((float)getRandInt(0, 3000), (float)getRandInt(0, 3000)));

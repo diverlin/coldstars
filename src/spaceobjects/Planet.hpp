@@ -37,11 +37,13 @@ class Planet : public BasePlanet
 		void BindLand(BaseLand* land);
 		void SetPopulation(unsigned long int population) 	{ this->population = population; };
 		
-		int GetDockingRadius() const { return data_planet.scale; };
+		int GetDockingRadius() const { return scale; };
 		BaseLand* GetLand() const { return land; };
 
 		void UpdateInSpace(int, bool);
 		void UpdateInSpaceInStatic();
+		
+		void RenderAtmosphere_NEW(const vec2f&) const;
 
 		void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
@@ -49,7 +51,10 @@ class Planet : public BasePlanet
 		
 	private:
 		TextureOb* textureOb_atmosphere;
-
+		
+		vec3f angle_atmosphere;
+		vec3f d_angle_atmosphere;
+		
 		BaseLand* land;
 
 		unsigned long int population;

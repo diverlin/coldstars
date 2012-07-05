@@ -20,17 +20,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef BLACKHOLE_H
 #define BLACKHOLE_H
 
+#include "../effects/ShockWaveEffect.hpp"
 
-class BlackHole : public BaseGameEntity
+class BlackHole : public BasePlanet
 {
     	public:  
         	BlackHole(int);
-        	~BlackHole();
+        	virtual ~BlackHole();
 
 		//void SetEffect(BlackHoleEffect* effect) { this->effect = effect; } ;
+		void SetCenter(const vec2f& center) { points.SetCenter(center); };
+		
+		ShockWaveEffect* GetShockWaveEffect() const { return shock_wave; };
+		
 		void UpdateInSpace(int, bool);
-        	
-        	void Render2D() const;
         	
         	virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);

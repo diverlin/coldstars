@@ -51,7 +51,6 @@ void PlanetBuilder::CreateNewInternals(float orbit_radius)
 
 	PlanetData planet_data;
 
-	planet_data.scale         = getRandInt(ENTITY::PLANET::SIZE_MIN_, ENTITY::PLANET::SIZE_MAX_);  
 	planet_data.orbit_center  = vec2f(0, 0); 
 	planet_data.radius_A      = orbit_radius;
 	planet_data.radius_B      = orbit_radius; 
@@ -84,6 +83,7 @@ void PlanetBuilder::CreateNewInternals(float orbit_radius)
 	planet->SetSubTypeId(ENTITY::KOSMOPORT_ID);
 	planet->SetLifeData(data_life);
 	planet->SetMesh(g_SPHERE_MESH);	
+	planet->SetScale(getRandInt(ENTITY::PLANET::SIZE_MIN_, ENTITY::PLANET::SIZE_MAX_));
 
 	planet->CalcCollisionrRadius();
 }

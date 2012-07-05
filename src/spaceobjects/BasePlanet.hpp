@@ -43,16 +43,12 @@ class BasePlanet : public BaseGameEntity
 
 		void CalcCollisionrRadius();
 		
-		void Render_NEW(vec2f);
-		void Render_OLD();
+		void Render_NEW(const vec2f&) const;
+		void Render_OLD() const;
 				
 	protected:
 		PlanetData data_planet;   
 		Orbit* orbit;  	
-		TextureOb* texOb_atmosphere;	
-		
-		vec3f angle_atmosphere;
-		vec3f d_angle_atmosphere;
 				
 		virtual void PostDeathUniqueEvent(bool);
 		void UpdatePosition();

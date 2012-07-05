@@ -28,6 +28,7 @@ class Container : public BaseGameEntity
         	Container(int);
         	virtual ~Container();
         	
+        	void SetTargetPos(const vec2f& target_pos) { this->target_pos = target_pos; keep_moving = true; };
         	void BindItemSlot(ItemSlot*);
         	ItemSlot* GetItemSlot() const { return item_slot; };
 

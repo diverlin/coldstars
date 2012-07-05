@@ -66,7 +66,7 @@ void ExplosionEffect :: Render()
                  
 
 
-void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
+void  createExplosion(StarSystem* starsystem, vec2f center, int obSize)
 {
 	//obSize = getRandInt(1,9); // DEBUG
 	ExplosionEffect* explosion;
@@ -110,13 +110,13 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 
 		explosion = new ExplosionEffect();
                 explosion->setTextureOb(texOb_particle);
-                explosion->setPosition(_center_pos);
+                explosion->setPosition(center);
                 explosion->setParticleData(data_particle);
                 explosion->setParticlesNum(particles_num);
                 
                 explosion->createParticles();
                 
-		_starsystem->Add(explosion);
+		starsystem->Add(explosion);
 	}
     	else    
 	{
@@ -128,13 +128,13 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 		
 		explosion = new ExplosionEffect();
                 explosion->setTextureOb(texOb_particle);
-                explosion->setPosition(_center_pos);
+                explosion->setPosition(center);
                 explosion->setParticleData(data_particle);
                 explosion->setParticlesNum(particles_num);
                 
                 explosion->createParticles();
                 
-		_starsystem->Add(explosion);
+		starsystem->Add(explosion);
                 }
 
                 {
@@ -145,13 +145,13 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 
 		explosion = new ExplosionEffect();
                 explosion->setTextureOb(texOb_particle);
-                explosion->setPosition(_center_pos);
+                explosion->setPosition(center);
                 explosion->setParticleData(data_particle);
                 explosion->setParticlesNum(particles_num);
                 
                 explosion->createParticles();
                 
-		_starsystem->Add(explosion);
+		starsystem->Add(explosion);
                 }
         
                 {
@@ -162,19 +162,19 @@ void  createExplosion(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 		
 		explosion = new ExplosionEffect();
                 explosion->setTextureOb(texOb_particle);
-                explosion->setPosition(_center_pos);
+                explosion->setPosition(center);
                 explosion->setParticleData(data_particle);
                 explosion->setParticlesNum(particles_num);
                 
                 explosion->createParticles();
                 
-		_starsystem->Add(explosion);
+		starsystem->Add(explosion);
                 }
 	} 	       
  
- 	if ( (obSize > 3) && (_starsystem->GetShockWaveNum() < 10) )
+ 	if ( (obSize > 3) && (starsystem->GetShockWaveNum() < SHOCKWAVESEXPLOSION_MAX_NUM) )
 	{
-		createShockWave(_starsystem, _center_pos, obSize);
+		starsystem->Add(GetNewShockWave(obSize), center);
 	}
 	//explosion.play()
 } 

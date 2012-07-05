@@ -63,7 +63,7 @@ void Asteroid::PostDeathUniqueEvent(bool show_effect)
    	
    	if (show_effect == true)
      	{
-        	createExplosion(starsystem, points.GetCenter(), data_planet.scale/2);        		
+        	createExplosion(starsystem, points.GetCenter(), scale/2);        		
         }
         			
 }    

@@ -39,16 +39,17 @@ class BaseGameEntity : public Base
 		BaseGameEntity();
 		virtual ~BaseGameEntity();
 
-		void SetLifeData(LifeData data_life)        { this->data_life = data_life; }
+		void SetLifeData(const LifeData& data_life)        { this->data_life = data_life; }
 		void SetMesh(ObjMeshInstance* mesh)         { this->mesh = mesh; }
 		void SetTextureOb(TextureOb* textureOb)     { this->textureOb = textureOb; }
 		void SetStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
 		void SetPlaceTypeId(int place_type_id)      { this->place_type_id = place_type_id;  }
 
-		void SetAngle(vec3f angle)                  { this->angle = angle; }
-		void SetDeltaAngle(vec3f d_angle)           { this->d_angle = d_angle; }
+		void SetAngle(const vec3f& angle)           { this->angle = angle; }
+		void SetDeltaAngle(const vec3f& d_angle)    { this->d_angle = d_angle; }
 
 		void SetParent(BaseGameEntity* parent)     { this->parent = parent; }
+		void SetScale(float scale) { this->scale = scale; }
 
 		StarSystem* GetStarSystem() const { return starsystem; }           
 		int GetPlaceTypeId()        const { return place_type_id; }
@@ -89,6 +90,7 @@ class BaseGameEntity : public Base
 		InfoTable info;
 
 		int mass;
+		float scale;
 
 		BaseGameEntity* parent;
 

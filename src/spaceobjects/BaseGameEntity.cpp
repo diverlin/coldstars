@@ -111,7 +111,8 @@ void BaseGameEntity::SaveDataUniqueBaseGameEntity(boost::property_tree::ptree& s
 	save_ptree.put(root+"collision_radius", collision_radius);
 
 	save_ptree.put(root+"mass", mass);
-
+	save_ptree.put(root+"scale", scale);	
+	
 	if (mesh) 	save_ptree.put(root+"data_unresolved_BaseGameEntity.mesh_path", mesh->path);
 	else           save_ptree.put(root+"data_unresolved_BaseGameEntity.mesh_path", "none");
 	
@@ -126,7 +127,7 @@ void BaseGameEntity::SaveDataUniqueBaseGameEntity(boost::property_tree::ptree& s
 			
 	save_ptree.put(root+"data_unresolved_BaseGameEntity.center.x", points.GetCenter().x);
 	save_ptree.put(root+"data_unresolved_BaseGameEntity.center.y", points.GetCenter().y);
-	save_ptree.put(root+"data_unresolved_BaseGameEntity.angle_2D", points.GetAngleDegree());	
+	save_ptree.put(root+"data_unresolved_BaseGameEntity.angle_2D", points.GetAngleDegree());
 }
 
 
@@ -148,7 +149,8 @@ void BaseGameEntity::LoadDataUniqueBaseGameEntity(const boost::property_tree::pt
 	collision_radius = load_ptree.get<float>("collision_radius");
 
 	mass = load_ptree.get<int>("mass");
-
+	scale = load_ptree.get<int>("scale");
+	
 	place_type_id = load_ptree.get<int>("place_type_id");	
 
 

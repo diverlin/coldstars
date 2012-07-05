@@ -55,12 +55,12 @@ class vec3f
                 ~vec3f() {};
                 
                 void Set(float x, float y, float z) { this->x = x; this->y = y; this->z = z; };
-                vec3f& operator+=(const vec3f&);     
+                const vec3f& operator+=(const vec3f&);     
 };
 
-float distBetweenPoints(vec2f, vec2f);
-float distBetweenPoints(vec2f center1, float x2, float y2);
+float distBetweenPoints(const vec2f&, const vec2f&);
+float distBetweenPoints(const vec2f& center1, float x2, float y2);
 float distBetweenPoints(float x1, float y1, float x2, float y2);
 
-vec2f getRandVec(int radius_min, int radius_max);
+vec2f getRandVec2f(int radius_min, int radius_max);
 #endif

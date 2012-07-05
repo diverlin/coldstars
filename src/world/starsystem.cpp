@@ -18,7 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>
-
+#include "../common/myVector.hpp"
 
 StarSystem::StarSystem(int id)
 { 
@@ -68,7 +68,7 @@ StarSystem::~StarSystem()
         for(unsigned int i=0; i<text_DAMAGE_vec.size(); i++)           { delete text_DAMAGE_vec[i]; } 
 }      
 
-void StarSystem::Add(Vehicle* vehicle, vec2f center, float angle, BaseGameEntity* parent)
+void StarSystem::Add(Vehicle* vehicle, const vec2f& center, float angle, BaseGameEntity* parent)
 {
      	vehicle->SetPlaceTypeId(ENTITY::SPACE_ID);
      	vehicle->SetStarSystem(this);  
@@ -168,29 +168,27 @@ void StarSystem::Add(BasePlanet* object, BaseGameEntity* parent, int it)
 	}
 }
                 
-void StarSystem::Add(Container* container, vec2f pos)
+void StarSystem::Add(Container* container, const vec2f& center)
 {
 	container->SetStarSystem(this);
         container->SetPlaceTypeId(ENTITY::SPACE_ID);
-    	container->GetPoints().SetCenter(pos);
-    	//target_pos = start_pos + getRandVec(60, 100);
-        //keep_moving = true;
+    	container->GetPoints().SetCenter(center);
+    	container->SetTargetPos(center+getRandVec2f(60, 100));
         
         CONTAINER_vec.push_back(container);
 }
 
-void StarSystem::Add(BlackHole* blackhole, vec2f pos)
+void StarSystem::Add(BlackHole* blackhole, const vec2f& center)
 {
-	//blackhole->moveToSpace(this, pos);
-	//blackhole->setEffect(getNewBlackHoleEffect(this, pos, 8));
-	//getNewBlackHoleEffect(this, pos, 8);
-	//BLACKHOLE_vec.push_back(blackhole);
+	blackhole->SetCenter(center);
+	BLACKHOLE_vec.push_back(blackhole);
+	Add(blackhole->GetShockWaveEffect(), center);
 }    
     		
-void StarSystem::Add(ShockWaveEffect* _shockWave)              { effect_SHOCKWAVE_vec.push_back(_shockWave); }
-void StarSystem::Add(LazerTraceEffect* _lazerTraceEffect)      { effect_LAZERTRACE_vec.push_back(_lazerTraceEffect); }
-void StarSystem::Add(BaseParticleSystem* _ps)                  { effect_PARTICLESYSTEM_vec.push_back(_ps); }
-void StarSystem::Add(VerticalFlowText* _text)                  { text_DAMAGE_vec.push_back(_text); }
+void StarSystem::Add(ShockWaveEffect* shockwave, const vec2f& center)           { shockwave->SetCenter(center); effect_SHOCKWAVE_vec.push_back(shockwave); }
+void StarSystem::Add(LazerTraceEffect* lazerTraceEffect)     { effect_LAZERTRACE_vec.push_back(lazerTraceEffect); }
+void StarSystem::Add(BaseParticleSystem* ps)                 { effect_PARTICLESYSTEM_vec.push_back(ps); }
+void StarSystem::Add(VerticalFlowText* text)                 { text_DAMAGE_vec.push_back(text); }
 void StarSystem::Add(DistantNebulaEffect* dn)                { distantNebulaEffect_vec.push_back(dn); }
 void StarSystem::Add(DistantStarEffect* ds)                  { distantStarEffect_vec.push_back(ds); }
 void StarSystem::AddToHyperJumpQueue(Vehicle* vehicle)                { appear_VEHICLE_queue.push_back(vehicle); }	
@@ -600,7 +598,7 @@ void StarSystem::UpdateEntities_s(int time, bool show_effect)
         // effects
         for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)  	{ effect_LAZERTRACE_vec[i]->update(); }
 	for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { effect_PARTICLESYSTEM_vec[i]->update(); }
-	for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++) 	{ effect_SHOCKWAVE_vec[i]->update(); }
+	for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++) 	{ effect_SHOCKWAVE_vec[i]->Update(); }
 	for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)         { text_DAMAGE_vec[i]->update(); }   
 }  
       
@@ -627,7 +625,7 @@ void StarSystem::FindVisibleEntities_c(Player* player)
     	for (unsigned int i = 0; i < ROCKET_vec.size(); i++)       	{ player->AddIfVisible(ROCKET_vec[i]); }
     	for (unsigned int i = 0; i < BLACKHOLE_vec.size(); i++)    	{ player->AddIfVisible(BLACKHOLE_vec[i]); } 
            		
-    	    	//effects
+    	//effects
 	for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)    { player->AddIfVisible(effect_SHOCKWAVE_vec[i]); }
 	for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)   { player->AddIfVisible(effect_LAZERTRACE_vec[i]); }
 	for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { player->AddIfVisible(effect_PARTICLESYSTEM_vec[i]); }

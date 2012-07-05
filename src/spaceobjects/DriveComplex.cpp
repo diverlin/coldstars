@@ -78,7 +78,7 @@ void DriveComplex::DefineDistance(int _action_id)
     		case NAVIGATOR_ACTION::DOCKING_ID:
     		{
     			target_distance = target->GetCollisionRadius()/4;
-    			target_offset = getRandVec(target->GetCollisionRadius()/15, target->GetCollisionRadius()/10); 
+    			target_offset = getRandVec2f(target->GetCollisionRadius()/15, target->GetCollisionRadius()/10); 
     			
     			break;   
     		}
@@ -86,7 +86,7 @@ void DriveComplex::DefineDistance(int _action_id)
     		case NAVIGATOR_ACTION::COLLECTING_ID:
     		{
     		    	target_distance = target->GetCollisionRadius()*1.2;
-    			target_offset = getRandVec(target->GetCollisionRadius()/10, target->GetCollisionRadius()/5); 
+    			target_offset = getRandVec2f(target->GetCollisionRadius()/10, target->GetCollisionRadius()/5); 
     			
     			break;    		
     		}
@@ -94,7 +94,7 @@ void DriveComplex::DefineDistance(int _action_id)
     		case NAVIGATOR_ACTION::KEEP_CLOSE_ID:
     		{
     		    	target_distance = target->GetCollisionRadius()*1.2;
-    			target_offset = getRandVec(target->GetCollisionRadius()/10, target->GetCollisionRadius()/5); 
+    			target_offset = getRandVec2f(target->GetCollisionRadius()/10, target->GetCollisionRadius()/5); 
     			
     			break;    		
     		}
@@ -102,7 +102,7 @@ void DriveComplex::DefineDistance(int _action_id)
     		case NAVIGATOR_ACTION::KEEP_MIDDLE_ID:
     		{
     		    	target_distance = target->GetCollisionRadius()*2.5;
-    			target_offset = getRandVec(target->GetCollisionRadius()/10, target->GetCollisionRadius()/5); 
+    			target_offset = getRandVec2f(target->GetCollisionRadius()/10, target->GetCollisionRadius()/5); 
     			
     			break;    		
     		}
@@ -110,7 +110,7 @@ void DriveComplex::DefineDistance(int _action_id)
     		case NAVIGATOR_ACTION::KEEP_FAR_ID:
     		{
     		    	target_distance = target->GetCollisionRadius()*4;
-    			target_offset = getRandVec(target->GetCollisionRadius()/10, target->GetCollisionRadius()/5); 
+    			target_offset = getRandVec2f(target->GetCollisionRadius()/10, target->GetCollisionRadius()/5); 
     			
     			break;    
     		}

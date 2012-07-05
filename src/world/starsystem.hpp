@@ -64,15 +64,15 @@ class StarSystem : public BaseGameEntity
 		//// TRANSITION
 		void AddToHyperJumpQueue(Vehicle*);
 
-		void Add(Vehicle*, vec2f, float, BaseGameEntity* parent = NULL);
+		void Add(Vehicle*, const vec2f&, float, BaseGameEntity* parent = NULL);
 						
 		void Add(BasePlanet*, BaseGameEntity* parent = NULL, int it = 0);
-		void Add(Container*, vec2f);
-		void Add(BlackHole*, vec2f);
+		void Add(Container*, const vec2f&);
+		void Add(BlackHole*, const vec2f&);
 
 		// effects
 		void Add(BaseParticleSystem*);
-		void Add(ShockWaveEffect*);
+		void Add(ShockWaveEffect*, const vec2f&);
 		void Add(LazerTraceEffect*);
 
 		void Add(DistantNebulaEffect*);
