@@ -20,11 +20,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 BasePlanet::BasePlanet()
 {
 	orbit = new Orbit();
-	texOb_atmosphere = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ATMOSPHERE_ID);
-	
-	angle_atmosphere.Set(0.0, 0.0, 0.0);
-	d_angle_atmosphere.Set(-0.1, -0.3, 0.0);
-		
 }
 
 /* virtual */
@@ -41,11 +36,11 @@ void BasePlanet::CreateOrbit()
 void BasePlanet::CalcCollisionrRadius()
 {
         float scale_factor = 5.4;                                            
-        int w = scale_factor * data_planet.scale;
-        int h = scale_factor * data_planet.scale;
+        int w = scale_factor * scale;
+        int h = scale_factor * scale;
         collision_radius = (w + h)/4; 
         
-        points.SetWidthHeight(scale_factor*data_planet.scale, scale_factor*data_planet.scale);  // needs for finding visible corners
+        points.SetWidthHeight(scale_factor*scale, scale_factor*scale);  // needs for finding visible corners
 }
 
 void BasePlanet::PostDeathUniqueEvent(bool)  /* virtual */
@@ -64,7 +59,7 @@ void BasePlanet::UpdatePosition()
 	}
 }
 				 		
-void BasePlanet::Render_NEW(vec2f scroll_coords)
+void BasePlanet::Render_NEW(const vec2f& scroll_coords) const
 {     	
      	glUseProgram(g_SHADERS_PACK.light);
 
@@ -75,33 +70,21 @@ void BasePlanet::Render_NEW(vec2f scroll_coords)
      	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
      	glUniform1i(glGetUniformLocation(g_SHADERS_PACK.light, "Texture_0"), 0);
       
-	renderMesh(mesh->glList, points.GetCenter3f(), angle, data_planet.scale);
-
-     	//render atmosphere
-	angle_atmosphere += d_angle_atmosphere;
-     	glEnable(GL_BLEND);
-     		glActiveTexture(GL_TEXTURE0);                                
-     		glBindTexture(GL_TEXTURE_2D, texOb_atmosphere->texture);
-     		glUniform1i(glGetUniformLocation(g_SHADERS_PACK.light, "Texture_0"), 0);
-
-		renderMesh(mesh->glList, points.GetCenter3f(), angle_atmosphere, data_planet.scale*1.05f);
-	glDisable(GL_BLEND);
-	//end render atmosphere
+	renderMesh(mesh->glList, points.GetCenter3f(), angle, scale);
 	
      	glUseProgram(0);
      	glActiveTexture(GL_TEXTURE0);
 }
 
-void BasePlanet::Render_OLD()
+void BasePlanet::Render_OLD() const
 {   	
 	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-	renderMesh(mesh->glList, points.GetCenter3f(), angle, data_planet.scale);
+	renderMesh(mesh->glList, points.GetCenter3f(), angle, scale);
 }
 
 
 void BasePlanet::SaveDataUniqueBasePlanet(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-	save_ptree.put(root+"data.scale", data_planet.scale);
 	save_ptree.put(root+"data.orbit_center.x", data_planet.orbit_center.x);	
 	save_ptree.put(root+"data.orbit_center.y", data_planet.orbit_center.y);	
 	save_ptree.put(root+"data.radius_A", data_planet.radius_A);	
@@ -114,7 +97,6 @@ void BasePlanet::SaveDataUniqueBasePlanet(boost::property_tree::ptree& save_ptre
 
 void BasePlanet::LoadDataUniqueBasePlanet(const boost::property_tree::ptree& load_ptree)
 {
-	data_planet.scale = load_ptree.get<int>("data.scale");
 	data_planet.orbit_center.x = load_ptree.get<float>("data.orbit_center.x");	
 	data_planet.orbit_center.y = load_ptree.get<float>("data.orbit_center.y");	
 	data_planet.radius_A = load_ptree.get<float>("data.radius_A");	

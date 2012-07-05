@@ -32,19 +32,20 @@ class ShockWaveEffect
           	vec3f parameter;
           	vec3f d_parameter;
           	float time, d_time;
+          	
+          	void SetCenter(vec2f center) { this->center = center; };
+          	const vec2f& GetCenter() const { return center; };
 
-      		ShockWaveEffect(vec2f center, float _x, float _y, float _z, float _time, float _d_x, float _d_y, float _d_z, float d_time);
+      		ShockWaveEffect(float _x, float _y, float _z, float _time, float _d_x, float _d_y, float _d_z, float d_time);
       		~ShockWaveEffect();
       		
-      		void update();
+      		void Update();
       		
       	private:
 
       	
 };
 
-
-void createShockWave(StarSystem* _starsystem, vec2f _center_pos, int obSize);          
-   
+ShockWaveEffect* GetNewShockWave(int, bool dynamic = true);          
     
 #endif

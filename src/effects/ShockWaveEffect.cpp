@@ -19,29 +19,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-ShockWaveEffect :: ShockWaveEffect(vec2f center, 
- 				   float _x, float _y, float _z, float _time, 
- 				   float _d_x, float _d_y, float _d_z, float _d_time)
+ShockWaveEffect::ShockWaveEffect(float x, float y, float z, float time, 
+ 				     float d_x, float d_y, float d_z, float d_time)
 {
 	is_alive = true;
         is_alreadyInRemoveQueue = false;
-
-	this->center = center;
 	
-        parameter.Set(_x, _y, _z);
-        time = _time; 
+        parameter.Set(x, y, z);
+        this->time = time; 
 
-        d_parameter.Set(_d_x, _d_y, _d_z);
-        d_time = _d_time; 
+        d_parameter.Set(d_x, d_y, d_z);
+        this->d_time = d_time; 
 }
 
-ShockWaveEffect :: ~ShockWaveEffect()
+ShockWaveEffect::~ShockWaveEffect()
 {}
-
-
-
       		
-void ShockWaveEffect :: update()
+void ShockWaveEffect::Update()
 {
 	parameter.x -= d_parameter.x;
 
@@ -64,11 +58,8 @@ void ShockWaveEffect :: update()
 }
              
         
-void createShockWave(StarSystem* _starsystem, vec2f _center_pos, int obSize)
-{
-	//int w = g_VIEW_WIDTH;
-	//int h = g_VIEW_HEIGHT;      
-        
+ShockWaveEffect* GetNewShockWave(int obSize, bool dynamic)
+{       
 	float x = 10;
 	float y = 1.8;
 	float z = 0.13;
@@ -78,7 +69,20 @@ void createShockWave(StarSystem* _starsystem, vec2f _center_pos, int obSize)
 	float dz = 0.0005;
 	float dtime = -(0.001 + obSize * 0.0003);     // 10, 1.8, 0.13, 0.0,  0,  0.02, 0.0005, -0.004 
 	//float dtime = -(0.0001*obSize + obSize * 0.0003);     // 10, 1.8, 0.13, 0.0,  0,  0.02, 0.0005, -0.004 
-		        
-	ShockWaveEffect* shockWave = new ShockWaveEffect(_center_pos, x, y, z, time, dx, dy, dz, dtime);  
-	_starsystem->Add(shockWave);
+		
+        if (dynamic == false)
+	{
+		x = 100;
+		y = 1.8;
+		z = 0.02;
+		time = 0.1; 
+		dx = 0.0;
+		dy = 0.0;
+		dz = 0.0;
+		dtime = 0.0;     
+	}
+	
+	        
+	ShockWaveEffect* shockwave = new ShockWaveEffect(x, y, z, time, dx, dy, dz, dtime);  
+	return shockwave;
 }

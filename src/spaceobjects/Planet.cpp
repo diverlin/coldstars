@@ -22,8 +22,13 @@ Planet::Planet(int id)
 	data_id.id = id;
 	data_id.type_id = ENTITY::PLANET_ID;
 	
-	//textureOb_atmosphere = _textureOb_atmoshere;
-	population  = 0;      	
+	population  = 0;
+		
+	textureOb_atmosphere = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ATMOSPHERE_ID);
+	
+	angle_atmosphere.Set(0.0, 0.0, 0.0);
+	d_angle_atmosphere.Set(-0.1, -0.3, 0.0);
+		      	
 	land = NULL;
 }
 
@@ -44,6 +49,7 @@ void Planet::BindLand(BaseLand* land)
 void Planet::UpdateInSpace(int time, bool show_effect)
 {      
 	UpdateRotation();
+	angle_atmosphere += d_angle_atmosphere;
 	if (time > 0)
 	{
 		UpdatePosition();
@@ -64,6 +70,27 @@ void Planet::UpdateInfo()
 
 void Planet::PostDeathUniqueEvent(bool)
 {}
+
+				 		
+void Planet::RenderAtmosphere_NEW(const vec2f& scroll_coords) const
+{     	
+     	glUseProgram(g_SHADERS_PACK.light);
+
+     	glUniform4f(glGetUniformLocation(g_SHADERS_PACK.light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
+     	glUniform4f(glGetUniformLocation(g_SHADERS_PACK.light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
+
+     	glEnable(GL_BLEND);
+     		glActiveTexture(GL_TEXTURE0);                                
+     		glBindTexture(GL_TEXTURE_2D, textureOb_atmosphere->texture);
+     		glUniform1i(glGetUniformLocation(g_SHADERS_PACK.light, "Texture_0"), 0);
+
+		renderMesh(mesh->glList, points.GetCenter3f(), angle_atmosphere, scale*1.05f);
+	glDisable(GL_BLEND);
+	
+     	glUseProgram(0);
+     	glActiveTexture(GL_TEXTURE0);
+}
+
 
 void Planet::SaveDataUniquePlanet(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {

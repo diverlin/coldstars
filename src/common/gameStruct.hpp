@@ -24,7 +24,6 @@ struct PlanetData
 {
 	PlanetData();
 
-	float scale; 
 	vec2f orbit_center; 
 	int radius_A;
 	int radius_B; 

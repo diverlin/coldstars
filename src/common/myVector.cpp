@@ -47,27 +47,27 @@ vec2f vec2f::operator+(const vec2f& _vec_add) const
 	return result;
 }
 
-vec2f vec2f::operator-(const vec2f& _vec_add) const
+vec2f vec2f::operator-(const vec2f& rhs) const
 {
 	vec2f result;
 	
-	result.x = x - _vec_add.x;
-	result.y = y - _vec_add.y;
+	result.x = x - rhs.x;
+	result.y = y - rhs.y;
 	
 	return result;
 }
 
-vec2f vec2f::operator*(const float _val) const
+vec2f vec2f::operator*(float val) const
 {
 	vec2f result;
 	
-	result.x = x * _val;
-	result.y = y * _val;
+	result.x = x * val;
+	result.y = y * val;
 	
 	return result;
 }
 
-vec2f vec2f::operator/(const float _val) const
+vec2f vec2f::operator/(float _val) const
 {
 	vec2f result;
 	
@@ -79,10 +79,7 @@ vec2f vec2f::operator/(const float _val) const
 
 
 
-
-
-
-vec3f& vec3f::operator+=(const vec3f& rhs)
+const vec3f& vec3f::operator+=(const vec3f& rhs)
 {
 	x += rhs.x;
 	y += rhs.y;
@@ -100,7 +97,7 @@ vec3f& vec3f::operator+=(const vec3f& rhs)
 
 
 
-float distBetweenPoints(vec2f center1, vec2f center2)
+float distBetweenPoints(const vec2f& center1, const vec2f& center2)
 {
         float xl = center2.x - center1.x;
         float yl = center2.y - center1.y;
@@ -108,7 +105,7 @@ float distBetweenPoints(vec2f center1, vec2f center2)
         return sqrt(xl*xl + yl*yl);
 }
 
-float distBetweenPoints(vec2f center1, float x2, float y2)
+float distBetweenPoints(const vec2f& center1, float x2, float y2)
 {
         float xl = (x2 - center1.x);
         float yl = (y2 - center1.y);
@@ -127,7 +124,7 @@ float distBetweenPoints(float x1, float y1, float x2, float y2)
 
 
 
-vec2f getRandVec(int radius_min, int radius_max)
+vec2f getRandVec2f(int radius_min, int radius_max)
 {
     	float alpha = (float)getRandInt(0, 360) / 57.0;
     	int len = getRandInt(radius_min, radius_max);

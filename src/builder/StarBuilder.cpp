@@ -50,7 +50,6 @@ void StarBuilder::CreateNewInternals()
         LifeData data_life;
 
  	PlanetData star_data;
-	star_data.scale         = getRandInt(ENTITY::STAR::SIZE_MIN_, ENTITY::STAR::SIZE_MAX_);  
     	star_data.orbit_center  = vec2f(0, 0); 
     	star_data.radius_A      = 50;
     	star_data.radius_B      = 50; 
@@ -63,7 +62,8 @@ void StarBuilder::CreateNewInternals()
 	star->SetTextureOb(texOb);
 	star->SetLifeData(data_life);
 	star->SetMesh(g_SPHERE_MESH);	
-        	
+	star->SetScale(getRandInt(ENTITY::STAR::SIZE_MIN_, ENTITY::STAR::SIZE_MAX_));        	
+        
         star->CalcCollisionrRadius();
  
 	star->CalcColor();

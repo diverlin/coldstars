@@ -24,13 +24,23 @@ BlackHole::BlackHole(int id)
 	data_id.type_id = ENTITY::BLACKHOLE_ID;
 	
     	mass = getRandInt(1000, 4000);
+    	
+    	int size = 4;
+    	bool dynamic = false;
+       	shock_wave = GetNewShockWave(size, dynamic); 
 }
 
-BlackHole::~BlackHole() {}
-   
+/* virtual */
+BlackHole::~BlackHole() 
+{
+	delete shock_wave;
+} 
+ 
 void BlackHole::UpdateInSpace(int time, bool show_effect)
 {
-	//updateRotation();
+	UpdateRotation();
+	points.SetCenter(points.GetCenter()+vec2f(0.1, 0.1));
+	shock_wave->SetCenter(points.GetCenter());
 	//effect->update();
 	if (time > 0)
 	{}
@@ -47,11 +57,6 @@ void BlackHole::UpdateInfo()
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 }
             
-void BlackHole::Render2D() const
-{
-	//effect->Render();
-}
-
 /*virtual*/
 void BlackHole::SaveData(boost::property_tree::ptree&) const
 {
@@ -72,7 +77,7 @@ void BlackHole::ResolveData()
 
 BlackHole* GetNewBlackHole()
 {
-        int id         = g_ID_GENERATOR.getNextId();
+        int id = g_ID_GENERATOR.getNextId();
         
         LifeData data_life;
         data_life.is_alive   = true;
@@ -81,13 +86,18 @@ BlackHole* GetNewBlackHole()
         data_life.dying_time = 30;        
         
 	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::BLACKHOLE_ID); 
-	
+	vec3f d_angle(0.0, 0.0, 10.0); 		
+       
 	BlackHole* blackhole = new BlackHole(id);
-
+                
 	blackhole->SetLifeData(data_life);
 	blackhole->SetTextureOb(texOb);
+	blackhole->SetMesh(g_SPHERE_MESH);	
 	
-   	//blackhole->CalcCollisionrRadius();
+	blackhole->SetDeltaAngle(d_angle);
+	blackhole->SetScale(30);
+	
+	blackhole->CalcCollisionrRadius();
 	
 	return blackhole;
 }

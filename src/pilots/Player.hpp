@@ -148,6 +148,7 @@ class Player : public Base
     		void UpdateGlobal(); 
     		
     		bool IsObjectOnScreen(const Points&) const;
+    		bool IsObjectOnScreen(const vec2f&, float) const;
     		
     		void SaveDataUniquePlayer(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniquePlayer(const boost::property_tree::ptree&);

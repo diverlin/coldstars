@@ -220,7 +220,10 @@ void Player::AddIfVisible(Ship* ship)
         
 void Player::AddIfVisible(ShockWaveEffect* effect)
 {
-	visible_effect_SHOCKWAVE_vec.push_back(effect);
+        if (IsObjectOnScreen(effect->GetCenter(), 600))
+        {
+		visible_effect_SHOCKWAVE_vec.push_back(effect);
+	}
 }
 
 void Player::AddIfVisible(LazerTraceEffect* effect)
@@ -298,6 +301,12 @@ void Player::RenderInSpace_NEW()
     			{ 
        				visible_ASTEROID_vec[i]->Render_NEW(Screen::Instance().GetBottomLeftGlobalCoord()); 
     			}
+
+    			for(unsigned int i = 0; i < visible_BLACKHOLE_vec.size(); i++)
+			{ 
+        			visible_BLACKHOLE_vec[i]->Render_NEW(Screen::Instance().GetBottomLeftGlobalCoord()); 
+        			
+    			}  	
     		disable_DEPTH();
 
     	          
@@ -308,11 +317,6 @@ void Player::RenderInSpace_NEW()
        				visible_SPACESTATION_vec[i]->RenderInSpace(); 
         			npc->GetStarSystem()->RestoreSceneColor();
     			}
-    			
-    			for(unsigned int i = 0; i < visible_BLACKHOLE_vec.size(); i++)
-			{ 
-        			visible_BLACKHOLE_vec[i]->Render2D(); 
-    			}  		
    
     			for(unsigned int i = 0; i < visible_CONTAINER_vec.size(); i++)
     			{ 
@@ -441,6 +445,11 @@ void Player::RenderInSpace_OLD()
     		{ 
        			visible_ASTEROID_vec[i]->Render_OLD(); 
     		}
+
+            	for(unsigned int i = 0; i < visible_BLACKHOLE_vec.size(); i++)
+		{ 
+        		visible_BLACKHOLE_vec[i]->Render_OLD(); 
+    		}    		
         disable_DEPTH();
 
         enable_BLEND();
@@ -450,11 +459,6 @@ void Player::RenderInSpace_OLD()
        			visible_SPACESTATION_vec[i]->RenderInSpace(); 
         		npc->GetStarSystem()->RestoreSceneColor();
     		}
-                        
-            	for(unsigned int i = 0; i < visible_BLACKHOLE_vec.size(); i++)
-		{ 
-        		visible_BLACKHOLE_vec[i]->Render2D(); 
-    		}  	
            
     		for(unsigned int i = 0; i < visible_CONTAINER_vec.size(); i++)
     		{ 
@@ -922,6 +926,20 @@ bool Player::IsObjectOnScreen(const Points& points) const
         if (ob_centery < (Screen::Instance().GetBottomLeftGlobalCoord().y - ob_h))
                 return false;
         if (ob_centery > (Screen::Instance().GetTopRightGlobalCoord().y + ob_h))
+                return false;
+
+        return true;
+}
+
+bool Player::IsObjectOnScreen(const vec2f& ob_center, float sizeInPixels) const
+{       
+        if (ob_center.x < (Screen::Instance().GetBottomLeftGlobalCoord().x - sizeInPixels))
+                return false;
+        if (ob_center.x > (Screen::Instance().GetTopRightGlobalCoord().x + sizeInPixels))
+                return false;
+        if (ob_center.y < (Screen::Instance().GetBottomLeftGlobalCoord().y - sizeInPixels))
+                return false;
+        if (ob_center.y > (Screen::Instance().GetTopRightGlobalCoord().y + sizeInPixels))
                 return false;
 
         return true;

@@ -30,6 +30,9 @@ const int TURN_TIME = 150;  //turn time, depends on game fps
 
 const int VISIBLE_DISTANCE_WITHOUT_RADAR = 200;
 
+const int SHOCKWAVESBLACKHOLES_MAX_NUM = 3;
+const int SHOCKWAVESEXPLOSION_MAX_NUM = 7;
+
 namespace LOG
 {
 	enum { TOSCREEN, TOFILE, TOSCREENTOFILE };
