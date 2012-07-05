@@ -109,13 +109,13 @@ void Player::ClearVisibleEntities()
 {
         visible_STAR_vec.clear();
         visible_PLANET_vec.clear();
-        visible_SPACESTATION_vec.clear();
-        visible_SATELLITE_vec.clear();
         
         visible_ASTEROID_vec.clear();
         visible_CONTAINER_vec.clear();
 
         visible_SHIP_vec.clear();
+        visible_SATELLITE_vec.clear();
+        visible_SPACESTATION_vec.clear();
         visible_ROCKET_vec.clear();
         visible_BLACKHOLE_vec.clear();
 
@@ -185,35 +185,19 @@ void Player::AddIfVisible(BlackHole* blackhole)
 	}
 }
 
-void Player::AddIfVisible(SpaceStation* spacestation)  
-{
-        if (IsObjectOnScreen(spacestation->GetPoints()))  
-        {	  
-                //if ( distBetweenPoints(spacestation->getPoints()->getCenter(), player_center) < player_vision_radius )
-               	{
-        		visible_SPACESTATION_vec.push_back(spacestation);
-        	}
-        }
-}
 
-void Player::AddIfVisible(Satellite* satellite) 
+void Player::AddIfVisible(Vehicle* vehicle) 
 {
-        if (IsObjectOnScreen(satellite->GetPoints()))  
+        if (IsObjectOnScreen(vehicle->GetPoints()))
         {	  
-        	//if ( distBetweenPoints(satellite->getPoints()->getCenter(), player_center) < player_vision_radius )
-                {
-        		visible_SATELLITE_vec.push_back(satellite);
-        	}
-        }
-}
-
-void Player::AddIfVisible(Ship* ship) 
-{
-        if (IsObjectOnScreen(ship->GetPoints()))
-        {	  
-                //if ( distBetweenPoints(ship->getPoints()->getCenter(), player_center) < player_vision_radius )
+                //if ( distBetweenPoints(vehicle->getPoints()->getCenter(), player_center) < player_vision_radius )
                	{
-			visible_SHIP_vec.push_back(ship);
+			switch(vehicle->GetSubTypeId())
+			{			
+				case ENTITY::SHIP_ID:         { visible_SHIP_vec.push_back((Ship*)vehicle); break; }
+				case ENTITY::SATELLITE_ID:    { visible_SATELLITE_vec.push_back((Satellite*)vehicle); break; }
+				case ENTITY::SPACESTATION_ID: { visible_SPACESTATION_vec.push_back((SpaceStation*)vehicle); break; }
+			}
 		}
 	}
 }     		

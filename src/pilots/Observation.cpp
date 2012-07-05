@@ -16,31 +16,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-ContainerObservationData::ContainerObservationData(Container* _container, float _dist)
-{
-	container = _container;
-	dist = _dist;
-}	
-
-AsteroidObservationData::AsteroidObservationData(Asteroid* _asteroid, float _dist)
-{
-	asteroid = _asteroid;
-	dist = _dist;
-}	
-
-NpcObservationData::NpcObservationData(Npc* _npc, float _dist)
-{
-	npc = _npc;
-	dist = _dist;
-}	
-
-StarSystemObservationData::StarSystemObservationData(StarSystem* _starsystem, float _dist)
-{
-	starsystem = _starsystem;
-	dist = _dist;
-}	
-
-
 
 Observation::Observation(Npc* _npc)
 { 
@@ -53,14 +28,14 @@ Observation::~Observation()
     
 void Observation::FindEchievableStarSystemsInStatic(Galaxy* galaxy)
 {
-        visible_STARSYSTEM_vec.clear();
+        visible_STARSYSTEM_pair_vec.clear();
 
         for (unsigned int i = 0; i < galaxy->STARSYSTEM_vec.size(); i++)
         {    
         	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetStarSystem()->GetPoints().GetCenter(),  galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter());
                 //if (dist < npc_owner->getShip()->propetries.hyper)
                 {
-                	visible_STARSYSTEM_vec.push_back( StarSystemObservationData(galaxy->STARSYSTEM_vec[i], dist) );
+                	visible_STARSYSTEM_pair_vec.push_back( Pair<StarSystem*>(galaxy->STARSYSTEM_vec[i], dist) );
                 } 
         }
         
@@ -72,11 +47,11 @@ StarSystem* Observation::GetClosestStarSystem(bool _captured) const
 {
 	StarSystem* _target_starsystem = NULL;
 	
- 	for (unsigned int i = 0; i<visible_STARSYSTEM_vec.size(); i++)
+ 	for (unsigned int i = 0; i<visible_STARSYSTEM_pair_vec.size(); i++)
  	{
- 		if (visible_STARSYSTEM_vec[i].starsystem->GetCaptured() == _captured)
+ 		if (visible_STARSYSTEM_pair_vec[i].object->GetCaptured() == _captured)
  		{
- 			_target_starsystem = visible_STARSYSTEM_vec[i].starsystem;
+ 			_target_starsystem = visible_STARSYSTEM_pair_vec[i].object;
  			break;
  		}
  	}   
@@ -85,16 +60,18 @@ StarSystem* Observation::GetClosestStarSystem(bool _captured) const
 }    	
 
 
-Npc* Observation::GetClosestNpc(std::vector<int>* _pVec_race_id) const
+Vehicle* Observation::GetClosestVehicle(std::vector<int>* _pVec_race_id) const
 {
-	for (unsigned int i = 0; i < visible_NPC_vec.size(); i++)
+	for (unsigned int i=0; i<visible_VEHICLE_pair_vec.size(); i++)
         {
-        	for (unsigned int j = 0; j < _pVec_race_id->size(); j++)
+        	for (unsigned int j=0; j<_pVec_race_id->size(); j++)
         	{
-        		if ( visible_NPC_vec[i].npc->GetRaceId() == (*_pVec_race_id)[j] )
+        		if (visible_VEHICLE_pair_vec[i].object->GetOwnerNpc() != NULL)
         		{
-        			return visible_NPC_vec[i].npc;
-
+        			if ( visible_VEHICLE_pair_vec[i].object->GetOwnerNpc()->GetRaceId() == (*_pVec_race_id)[j] )
+        			{
+        				return visible_VEHICLE_pair_vec[i].object;
+        			}
         		}
         	}
         }
@@ -106,7 +83,7 @@ void Observation::ObserveAllInSpaceInStatic()
 {
      	FindVisibleAsteroidsInSpaceInStatic();
      	FindVisibleContainersInSpaceInStatic();
-     	FindVisibleNpcsInSpaceInStatic();
+     	FindVisibleVehiclesInSpaceInStatic();
 }
 
 template <typename OBSERVED_DATA_TYPE>
@@ -135,50 +112,50 @@ void Observation::Sort(std::vector<OBSERVED_DATA_TYPE>* pDataVec)
 void Observation::FindVisibleAsteroidsInSpaceInStatic()
 {
 	see.ASTEROID  = false;
-        visible_ASTEROID_vec.clear();
+        visible_ASTEROID_pair_vec.clear();
 
-        for (unsigned int ai = 0; ai < npc_owner->GetStarSystem()->ASTEROID_vec.size(); ai++)
+        for (unsigned int i=0; i<npc_owner->GetStarSystem()->ASTEROID_vec.size(); i++)
         {    
-        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), npc_owner->GetStarSystem()->ASTEROID_vec[ai]->GetPoints().GetCenter());
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), npc_owner->GetStarSystem()->ASTEROID_vec[i]->GetPoints().GetCenter());
                 if (dist < npc_owner->GetVehicle()->propetries.radius)
                 {
-                	visible_ASTEROID_vec.push_back( AsteroidObservationData(npc_owner->GetStarSystem()->ASTEROID_vec[ai], dist) );
+                	visible_ASTEROID_pair_vec.push_back( Pair<Asteroid*>(npc_owner->GetStarSystem()->ASTEROID_vec[i], dist) );
                       	see.ASTEROID = true;
                 } 
         }
         
-        Sort(&visible_ASTEROID_vec);
+        Sort(&visible_ASTEROID_pair_vec);
 }
 
 void Observation::FindVisibleContainersInSpaceInStatic()
 {
 	see.CONTAINER   = false;
-        visible_CONTAINER_vec.clear();
+        visible_CONTAINER_pair_vec.clear();
 
-        for (unsigned int ci = 0; ci < npc_owner->GetStarSystem()->CONTAINER_vec.size(); ci++)
+        for (unsigned int i=0; i<npc_owner->GetStarSystem()->CONTAINER_vec.size(); i++)
         {    
-        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), npc_owner->GetStarSystem()->CONTAINER_vec[ci]->GetPoints().GetCenter());
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), npc_owner->GetStarSystem()->CONTAINER_vec[i]->GetPoints().GetCenter());
                 if (dist < npc_owner->GetVehicle()->propetries.radius)
                 {
-                	visible_CONTAINER_vec.push_back( ContainerObservationData(npc_owner->GetStarSystem()->CONTAINER_vec[ci], dist) );
+                	visible_CONTAINER_pair_vec.push_back( Pair<Container*>(npc_owner->GetStarSystem()->CONTAINER_vec[i], dist) );
                 	see.CONTAINER = true;
                 } 
     	}
 }
 
-void Observation::FindVisibleNpcsInSpaceInStatic()
+void Observation::FindVisibleVehiclesInSpaceInStatic()
 {
-	visible_NPC_vec.clear();
+	visible_VEHICLE_pair_vec.clear();
 
-        for (unsigned int i = 0; i < npc_owner->GetStarSystem()->NPC_vec.size(); i++)
+        for (unsigned int i=0; i<npc_owner->GetStarSystem()->VEHICLE_vec.size(); i++)
         {    
-        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), npc_owner->GetStarSystem()->NPC_vec[i]->GetVehicle()->GetPoints().GetCenter());
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), npc_owner->GetStarSystem()->VEHICLE_vec[i]->GetPoints().GetCenter());
                 if (dist < npc_owner->GetVehicle()->propetries.radius)
                 {
-                	visible_NPC_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_vec[i], dist) );
+                	visible_VEHICLE_pair_vec.push_back( Pair<Vehicle*>(npc_owner->GetStarSystem()->VEHICLE_vec[i], dist) );
                	} 
        	}	
-        Sort(&visible_NPC_vec);
+        Sort(&visible_VEHICLE_pair_vec);
        	
        	
        	see.RANGER  = false;
@@ -187,61 +164,61 @@ void Observation::FindVisibleNpcsInSpaceInStatic()
        	see.PIRAT = false;
        	see.DIPLOMAT = false;
        	       	       	
-        visible_NPC_RANGER_vec.clear();
-	visible_NPC_WARRIOR_vec.clear();
-       	visible_NPC_TRADER_vec.clear();
-       	visible_NPC_PIRAT_vec.clear();
-       	visible_NPC_DIPLOMAT_vec.clear();
+        //visible_NPC_RANGER_vec.clear();
+	//visible_NPC_WARRIOR_vec.clear();
+       	//visible_NPC_TRADER_vec.clear();
+       	//visible_NPC_PIRAT_vec.clear();
+       	//visible_NPC_DIPLOMAT_vec.clear();
        	       	       	
-        for (unsigned int i = 0; i < npc_owner->GetStarSystem()->NPC_vec.size(); i++)
-        {    
-        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), npc_owner->GetStarSystem()->NPC_vec[i]->GetVehicle()->GetPoints().GetCenter());
-                if (dist < npc_owner->GetVehicle()->propetries.radius)
-                {
-                	switch(npc_owner->GetStarSystem()->NPC_vec[i]->GetSubTypeId())
-                	{
-                		case CLASS::RANGER_ID:
-                		{
-                			visible_NPC_RANGER_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_vec[i], dist) );
-                        		see.RANGER = true;
-                        		break;
-                		}
+        //for (unsigned int i = 0; i < npc_owner->GetStarSystem()->NPC_vec.size(); i++)
+        //{    
+        	//float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), npc_owner->GetStarSystem()->NPC_vec[i]->GetVehicle()->GetPoints().GetCenter());
+                //if (dist < npc_owner->GetVehicle()->propetries.radius)
+                //{
+                	//switch(npc_owner->GetStarSystem()->NPC_vec[i]->GetSubTypeId())
+                	//{
+                		//case CLASS::RANGER_ID:
+                		//{
+                			//visible_NPC_RANGER_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_vec[i], dist) );
+                        		//see.RANGER = true;
+                        		//break;
+                		//}
                 	
-                	        case CLASS::WARRIOR_ID:
-                		{
-                			visible_NPC_WARRIOR_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_vec[i], dist) );
-                        		see.WARRIOR = true;
-                        		break;
-                		}
+                	        //case CLASS::WARRIOR_ID:
+                		//{
+                			//visible_NPC_WARRIOR_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_vec[i], dist) );
+                        		//see.WARRIOR = true;
+                        		//break;
+                		//}
 
-                	        case CLASS::TRADER_ID:
-                		{
-                			visible_NPC_TRADER_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_vec[i], dist) );
-                        		see.TRADER = true;
-                        		break;
-                		}
+                	        //case CLASS::TRADER_ID:
+                		//{
+                			//visible_NPC_TRADER_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_vec[i], dist) );
+                        		//see.TRADER = true;
+                        		//break;
+                		//}
 
-                	        case CLASS::PIRAT_ID:
-                		{
-                			visible_NPC_PIRAT_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_vec[i], dist) );
-                        		see.PIRAT = true;
-                        		break;
-                		}                		                			
+                	        //case CLASS::PIRAT_ID:
+                		//{
+                			//visible_NPC_PIRAT_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_vec[i], dist) );
+                        		//see.PIRAT = true;
+                        		//break;
+                		//}                		                			
 
-                	        case CLASS::DIPLOMAT_ID:
-                		{
-                			visible_NPC_DIPLOMAT_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_vec[i], dist) );
-                        		see.DIPLOMAT = true;
-                        		break;
-                		}   
-                	}
+                	        //case CLASS::DIPLOMAT_ID:
+                		//{
+                			//visible_NPC_DIPLOMAT_vec.push_back( NpcObservationData(npc_owner->GetStarSystem()->NPC_vec[i], dist) );
+                        		//see.DIPLOMAT = true;
+                        		//break;
+                		//}   
+                	//}
 
-               	}
-               	else
-               	{
-               		break;
-               	} 
-       	}   
+               	//}
+               	//else
+               	//{
+               		//break;
+               	//} 
+       	//}   
 
 }
 

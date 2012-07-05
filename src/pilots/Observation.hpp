@@ -20,41 +20,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef OBSERVATION_H
 #define OBSERVATION_H
 
-class ContainerObservationData
+template <class TYPE>
+class Pair
 {
 	public:
-		Container* container;
+		TYPE object;
 		float dist;
 		
-		ContainerObservationData(Container*, float);
-};
-
-class AsteroidObservationData
-{
-	public:
-		Asteroid* asteroid;
-		float dist;
-		
-		AsteroidObservationData(Asteroid*, float);
-};
-
-class NpcObservationData
-{
-	public:
-		Npc* npc;
-		float dist;
-		
-		NpcObservationData(Npc*, float);
-};
-
-
-class StarSystemObservationData
-{
-	public:
-		StarSystem* starsystem;
-		float dist;
-		
-		StarSystemObservationData(StarSystem*, float);
+	Pair(TYPE object, float dist):object(object), dist(dist) {};
+	~Pair() {};
 };
 
 
@@ -68,11 +42,11 @@ class Observation
           	
           	void FindEchievableStarSystemsInStatic(Galaxy*);
           	StarSystem* GetClosestStarSystem(bool) const;
-          	Npc* GetClosestNpc(std::vector<int>*) const;
+          	Vehicle* GetClosestVehicle(std::vector<int>*) const;
           	          	          	                
           	void FindVisibleAsteroidsInSpaceInStatic();
           	void FindVisibleContainersInSpaceInStatic();
-          	void FindVisibleNpcsInSpaceInStatic();
+          	void FindVisibleVehiclesInSpaceInStatic();
 
                 template <typename OBSERVED_DATA_TYPE>
 		void Sort(std::vector<OBSERVED_DATA_TYPE>*);
@@ -82,16 +56,16 @@ class Observation
 	private:
                 Npc* npc_owner;	
 
-     		std::vector<StarSystemObservationData> visible_STARSYSTEM_vec; 
-     		std::vector<ContainerObservationData> visible_CONTAINER_vec;                              
-     		std::vector<AsteroidObservationData>  visible_ASTEROID_vec; 		
+     		std::vector<Pair<StarSystem*>> visible_STARSYSTEM_pair_vec; 
+     		std::vector<Pair<Container*>> visible_CONTAINER_pair_vec;                              
+     		std::vector<Pair<Asteroid*>>  visible_ASTEROID_pair_vec; 		
 
-     		std::vector<NpcObservationData> visible_NPC_vec;                
-     		std::vector<NpcObservationData> visible_NPC_RANGER_vec;
-     		std::vector<NpcObservationData> visible_NPC_WARRIOR_vec;
-     		std::vector<NpcObservationData> visible_NPC_TRADER_vec;
-     		std::vector<NpcObservationData> visible_NPC_PIRAT_vec;
-     		std::vector<NpcObservationData> visible_NPC_DIPLOMAT_vec;
+     		std::vector<Pair<Vehicle*>> visible_VEHICLE_pair_vec;                
+     		//std::vector<ShipObservationData> visible_SHIP_RANGER_vec;
+     		//std::vector<ShipObservationData> visible_SHIP_WARRIOR_vec;
+     		//std::vector<ShipObservationData> visible_SHIP_TRADER_vec;
+     		//std::vector<ShipObservationData> visible_SHIP_PIRAT_vec;
+     		//std::vector<ShipObservationData> visible_SHIP_DIPLOMAT_vec;
 
      		VisionStatus see;
      		

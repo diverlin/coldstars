@@ -149,7 +149,7 @@ void StarSystemBuilder::CreatePlanets(int planet_per_system)
                 Satellite* satellite = SatelliteBuilder::Instance().GetSatellite();
                 SatelliteBuilder::Instance().Equip(satellite);           		// improove
                         	
-                starsystem->Add((Vehicle*)satellite, vec2f(0, 0), 0, planet);
+                starsystem->AddVehicle((Vehicle*)satellite, vec2f(0, 0), 0, planet);
         }
         
 }
@@ -185,14 +185,14 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
 		vec2f center(getRandInt(0, 800), getRandInt(0, 800));
 		float angle = getRandInt(0, 360);  
                 
-        	starsystem->Add(spacestation, center, angle, NULL);
+        	starsystem->AddVehicle(spacestation, center, angle, NULL);
         	
                 SatelliteBuilder::Instance().CreateNewSatellite();
                 SatelliteBuilder::Instance().CreateNewInternals();
                 Satellite* satellite = SatelliteBuilder::Instance().GetSatellite();
                 SatelliteBuilder::Instance().Equip(satellite);           		// improove
                         	
-                starsystem->Add((Vehicle*)satellite, vec2f(0, 0), 0, spacestation);
+                starsystem->AddVehicle((Vehicle*)satellite, vec2f(0, 0), 0, spacestation);
     	}        
 }
 
@@ -232,7 +232,7 @@ void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num)
 		vec2f center(getRandInt(0, 800), getRandInt(0, 800));
 		float angle = getRandInt(0, 360);  
 		
-        	starsystem->Add(ship, center, angle, NULL);
+        	starsystem->AddVehicle(ship, center, angle, NULL);
     	}
 }
 

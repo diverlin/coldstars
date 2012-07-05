@@ -53,7 +53,7 @@ class StarSystem : public BaseGameEntity
 
 		void SetGalaxy(Galaxy* galaxy)  { this->galaxy = galaxy; };
 						
-		bool GetDetailedSimulationFlag() const { return detalied_simulation; };
+		//bool GetDetailedSimulationFlag() const { return detalied_simulation; };
 		bool GetCaptured()       const { return is_CAPTURED; };  
 		int GetRaceId()          const { return race_id; };
 		int GetConquerorRaceId() const { return conqueror_race_id; };  
@@ -64,8 +64,9 @@ class StarSystem : public BaseGameEntity
 		//// TRANSITION
 		void AddToHyperJumpQueue(Vehicle*);
 
-		void Add(Vehicle*, const vec2f&, float, BaseGameEntity* parent = NULL);
-						
+		void AddVehicle(Vehicle*, const vec2f&, float, BaseGameEntity* parent = NULL);
+		void AddBullet(RocketBullet*, const vec2f&, float);
+								
 		void Add(BasePlanet*, BaseGameEntity* parent = NULL, int it = 0);
 		void Add(Container*, const vec2f&);
 		void Add(BlackHole*, const vec2f&);
@@ -84,8 +85,7 @@ class StarSystem : public BaseGameEntity
 		void AddToRemoveFromOuterSpaceQueue(Container*);
 		void AddToRemoveFromOuterSpaceQueue(Vehicle*);
 				
-		bool RemoveShip(int);    
-		bool RemoveNpc(int, int); 
+		bool RemoveVehicle(int);    
 		
 		void BombExplosionEvent(Container*, bool);
 		
@@ -105,15 +105,15 @@ class StarSystem : public BaseGameEntity
 				                                           		    		    		
 		// poor
 		Planet* GetClosestPlanet(vec2f);
-		Npc* GetRandomNpc();
-		Npc* GetRandomNpcExcludingRaceId(int);
-		Npc* GetRandNpcByRaceId(int) const;
-		Npc* GetRandNpc(std::vector<int>*) const;
+		Vehicle* GetRandomVehicle();
+		Vehicle* GetRandomVehicleExcludingNpcRaceId(int);
+		Vehicle* GetRandomVehicleByNpcRaceId(int) const;
+		Vehicle* GetRandomVehicle(std::vector<int>*) const;
 		// 
     	private:
                 int race_id, conqueror_race_id;
                 
-    		bool detalied_simulation;
+    		//bool detalied_simulation;
     		bool calculation_per_turn_allowed; 
     		bool calculation_per_turn_allowed_inDynamic; 
     		    		
@@ -122,7 +122,7 @@ class StarSystem : public BaseGameEntity
     		Galaxy* galaxy;
     	
     		// ENTITY VECTORS
-		std::vector<Player*> 	   PLAYER_vec;
+		//std::vector<Player*> 	   PLAYER_vec;
 
 		std::vector<Star*>         STAR_vec;
 		std::vector<Planet*>       PLANET_vec;
@@ -130,11 +130,8 @@ class StarSystem : public BaseGameEntity
 		std::vector<Container*>    CONTAINER_vec;
 		std::vector<RocketBullet*> ROCKET_vec;
 		std::vector<BlackHole*>    BLACKHOLE_vec;
-		std::vector<SpaceStation*> SPACESTATION_vec;
-		std::vector<Satellite*>    SATELLITE_vec;
-
-		std::vector<Ship*> SHIP_vec;
-		std::vector<Npc*>  NPC_vec;
+		
+		std::vector<Vehicle*> VEHICLE_vec;
     		   
     		// effects
     	    	std::vector<DistantNebulaEffect*> distantNebulaEffect_vec;
@@ -157,9 +154,7 @@ class StarSystem : public BaseGameEntity
                     		  	
     		GarbageEntities garbage_entities;
     		GarbageEffects  garbage_effects;
-    		
-    		void Add(Npc*);
-    		    		            
+ 		    		            
     		UnresolvedDataUniqueStarSystem data_unresolved_ss;
     		            		    
                 void PostHyperJumpEvent();
@@ -167,8 +162,6 @@ class StarSystem : public BaseGameEntity
     		
     		void MindEntitiesInStatic_s();
     		void UpdateEntities_s(int, bool);   		
-                      
-                bool RemoveFromTheListById(std::vector<Npc*>*, int);
     		
     		void updateStates();
     		

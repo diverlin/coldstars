@@ -39,12 +39,12 @@ void MacroScenarioStarSystemDefence::UpdateInStatic(Npc* npc) const
 	{
 		if ( (npc->GetStateMachine()->GetMicroTaskManager()->GetScenario() == NULL) or (npc->GetStateMachine()->GetMicroTaskManager()->GetScenario()->GetTypeId() != MICROSCENARIO::DESTROY_ID) )
 		{
-            		npc->GetObservation()->FindVisibleNpcsInSpaceInStatic();
+            		npc->GetObservation()->FindVisibleVehiclesInSpaceInStatic();
             	
-            		Npc* _targetnpc = npc->GetObservation()->GetClosestNpc(&RACES_GOOD_LIST);
-            		if (_targetnpc != NULL)
+            		Vehicle* _target_vehicle = npc->GetObservation()->GetClosestVehicle(&RACES_GOOD_LIST);
+            		if (_target_vehicle != NULL)
             		{
-            			MicroTask* microtask = new MicroTask(_targetnpc, MICROSCENARIO::DESTROY_ID);
+            			MicroTask* microtask = new MicroTask(_target_vehicle, MICROSCENARIO::DESTROY_ID);
 				npc->GetStateMachine()->SetCurrentMicroTask(microtask);
 			}
 			else

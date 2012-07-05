@@ -39,10 +39,10 @@ void MacroScenarioStarSystemLiberation::UpdateInStatic(Npc* npc) const
 	{
 		if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetTypeId() != ENTITY::NPC_ID)
 		{
-			Npc* _targetnpc = npc->GetStarSystem()->GetRandNpc(&RACES_EVIL_LIST);
-			if (_targetnpc != NULL)
+			Vehicle* _target_vehicle = npc->GetStarSystem()->GetRandomVehicle(&RACES_EVIL_LIST);
+			if (_target_vehicle != NULL)
 			{
-				MicroTask* microtask = new MicroTask(_targetnpc, MICROSCENARIO::DESTROY_ID);
+				MicroTask* microtask = new MicroTask(_target_vehicle, MICROSCENARIO::DESTROY_ID);
 				npc->GetStateMachine()->SetCurrentMicroTask(microtask);
 			}
 			else
