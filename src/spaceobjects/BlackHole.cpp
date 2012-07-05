@@ -39,11 +39,11 @@ BlackHole::~BlackHole()
 void BlackHole::UpdateInSpace(int time, bool show_effect)
 {
 	UpdateRotation();
-	points.SetCenter(points.GetCenter()+vec2f(0.1, 0.1));
-	shock_wave->SetCenter(points.GetCenter());
-	//effect->update();
 	if (time > 0)
-	{}
+	{
+		points.SetCenter(points.GetCenter()+vec2f(0.1, 0.1)); // hack
+		shock_wave->SetCenter(points.GetCenter());
+	}
 }
 
 void BlackHole::UpdateInfo()

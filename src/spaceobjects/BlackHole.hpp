@@ -28,7 +28,6 @@ class BlackHole : public BasePlanet
         	BlackHole(int);
         	virtual ~BlackHole();
 
-		//void SetEffect(BlackHoleEffect* effect) { this->effect = effect; } ;
 		void SetCenter(const vec2f& center) { points.SetCenter(center); };
 		
 		ShockWaveEffect* GetShockWaveEffect() const { return shock_wave; };
@@ -40,7 +39,6 @@ class BlackHole : public BasePlanet
 		virtual void ResolveData();
 		
         private:
-        	//BlackHoleEffect* effect;
         	ShockWaveEffect* shock_wave;
         	
          	void UpdateInfo();    

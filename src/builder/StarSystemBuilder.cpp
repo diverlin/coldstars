@@ -53,7 +53,7 @@ void StarSystemBuilder::CreateNewInternals()
 
         this->CreateStar();
         
-        int distNebula_num = getRandInt(4,7);
+        int distNebula_num = getRandInt(6,8);
         int distStar_num = getRandInt(40, 60);
         this->CreateBackground(distNebula_num, distStar_num, starsystem->GetStar()->GetColorId());
           
