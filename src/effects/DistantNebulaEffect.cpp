@@ -81,9 +81,9 @@ DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
 	   	
 	float parallax_rate;
 	if(textureOb->getFrameWidth() * textureOb->getFrameHeight() > 300000)
-     		parallax_rate =  1/60.0; 
+     		parallax_rate =  1.0/getRandInt(50, 70); 
     	else
-      		parallax_rate =  1/40.0;
+      		parallax_rate =  1.0/getRandInt(30, 50);
 
         float angle_inD = getRandInt(0, 360);
         float d_angle_inD = 0.0;

@@ -101,6 +101,7 @@ class Vehicle : public BaseGameEntity
         	void SelfRepairEvent();
         	bool ExternalRepairEvent();
         	                
+        	virtual void UpdateInSpace(int, bool) = 0;
         	void Hit(int, bool);
 
         	virtual void PostDeathUniqueEvent(bool); 

@@ -71,9 +71,7 @@ class Player : public Base
      		void AddIfVisible(Container*);     	
      		void AddIfVisible(RocketBullet*);  
      		void AddIfVisible(BlackHole*);  
-     		void AddIfVisible(SpaceStation*);  
-     		void AddIfVisible(Satellite*); 
-     		void AddIfVisible(Ship*); 
+     		void AddIfVisible(Vehicle*); 
 
 		//effect
      		void AddIfVisible(ShockWaveEffect*);  
@@ -109,10 +107,10 @@ class Player : public Base
     		std::vector<Asteroid*>     visible_ASTEROID_vec;
     		std::vector<Container*>    visible_CONTAINER_vec;
     		std::vector<RocketBullet*> visible_ROCKET_vec;
-    		std::vector<BlackHole*>    visible_BLACKHOLE_vec;
-    		std::vector<SpaceStation*> visible_SPACESTATION_vec;
-    		std::vector<Satellite*>    visible_SATELLITE_vec;    		
+    		std::vector<BlackHole*>    visible_BLACKHOLE_vec; 		
     		std::vector<Ship*>         visible_SHIP_vec;
+    		std::vector<Satellite*>    visible_SATELLITE_vec;
+    		std::vector<SpaceStation*> visible_SPACESTATION_vec;
     		
     		//effects
     		std::vector<ShockWaveEffect*>    visible_effect_SHOCKWAVE_vec;

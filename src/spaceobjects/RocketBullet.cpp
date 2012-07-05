@@ -177,6 +177,6 @@ void RocketBullet::ResolveDataUniqueRocketBullet()
         	target = (BaseGameEntity*)EntityManager::Instance().GetEntityById(unresolved_target_id);
         }
                        
-	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this, data_unresolved_BaseGameEntity.center, data_unresolved_BaseGameEntity.angle, parent); 
+	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->AddBullet(this, data_unresolved_BaseGameEntity.center, data_unresolved_BaseGameEntity.angle); 
 }
 

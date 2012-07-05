@@ -202,8 +202,7 @@ bool Vehicle::LaunchingEffect()
 //// ******** DOCKING/LAUNCHING ******** 
 void Vehicle::HyperJumpEvent()
 {
-        starsystem->RemoveShip(data_id.id);  
-        starsystem->RemoveNpc(owner_npc->GetId(), owner_npc->GetSubTypeId());  
+        starsystem->RemoveVehicle(data_id.id);  
                                                         
         ((StarSystem*)drive_complex->GetTarget())->AddToHyperJumpQueue(this);
         drive_complex->ResetTarget();        
@@ -212,8 +211,7 @@ void Vehicle::HyperJumpEvent()
                 
 void Vehicle::DockingEvent()
 {
-     	starsystem->RemoveShip(data_id.id);
-     	starsystem->RemoveNpc(owner_npc->GetId(), owner_npc->GetSubTypeId());
+     	starsystem->RemoveVehicle(data_id.id);
             
         switch(drive_complex->GetTarget()->GetTypeId())         	     	     	
      	{
@@ -258,7 +256,7 @@ void Vehicle::LaunchingEvent()
 		case ENTITY::ANGAR_ID:
 		{
 			Base* place = ((Angar*)parent_vehicleslot->GetOwner())->GetOwnerKosmoport()->GetOwner();
-		     	starsystem->Add(this, ((Planet*)place)->GetPoints().GetCenter(), 0, NULL);
+		     	starsystem->AddVehicle(this, ((Planet*)place)->GetPoints().GetCenter(), 0, NULL);
 			parent_vehicleslot->Release();
 			break;
 		}

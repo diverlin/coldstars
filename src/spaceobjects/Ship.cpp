@@ -53,6 +53,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 	CheckDeath(show_effect);
 	if (time > 0)
 	{
+		owner_npc->UpdateInSpace(time, show_effect);
 		points.Update();   
 		weapon_complex->Fire(time, show_effect);
 
@@ -159,7 +160,7 @@ void Ship::ResolveDataUniqueShip()
         {
         	case ENTITY::SPACE_ID: 
         	{
-			((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this, data_unresolved_BaseGameEntity.center, data_unresolved_BaseGameEntity.angle, parent); 
+			((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->AddVehicle(this, data_unresolved_BaseGameEntity.center, data_unresolved_BaseGameEntity.angle, parent); 
 			break;
 		}
 		

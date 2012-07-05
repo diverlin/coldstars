@@ -153,5 +153,5 @@ void SpaceStation::ResolveDataUniqueSpaceStation()
         SpaceStationBuilder::Instance().CreateWeaponsComplex(this);        
 
 	BindLand((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_SpaceStation.land_id));	                       
-	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this, data_unresolved_BaseGameEntity.center, data_unresolved_BaseGameEntity.angle, parent); 
+	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->AddVehicle(this, data_unresolved_BaseGameEntity.center, data_unresolved_BaseGameEntity.angle, parent); 
 }

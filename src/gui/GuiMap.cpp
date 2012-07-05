@@ -47,8 +47,7 @@ bool GuiMap::UpdateMouseInteraction(Galaxy* galaxy, int mxvp, int myvp, int lmb,
                       				if (lmb == true)
                       				{ 
                                                         // debug
-                                                        player->GetNpc()->GetStarSystem()->RemoveShip(player->GetNpc()->GetVehicle()->GetId());  
-                                                        player->GetNpc()->GetStarSystem()->RemoveNpc(player->GetNpc()->GetId(), player->GetNpc()->GetSubTypeId());  
+                                                        player->GetNpc()->GetStarSystem()->RemoveVehicle(player->GetNpc()->GetVehicle()->GetId());  
                                                         galaxy->STARSYSTEM_vec[si]->AddToHyperJumpQueue(player->GetNpc()->GetVehicle());    
                                                         // debug
                                                         

@@ -35,7 +35,7 @@ int main()
 	vec2f center(-400, 400);
 	double angle = 0;  
 
-	GalaxyBuilder::Instance().GetGalaxy()->GetRandomStarSystem()->Add(player->GetNpc()->GetVehicle(), center, angle, NULL);
+	GalaxyBuilder::Instance().GetGalaxy()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, NULL);
 
 	//Screen::Instance().Resize(Config::Instance().SCREEN_WIDTH/1.5, Config::Instance().SCREEN_HEIGHT);
 
@@ -81,9 +81,7 @@ int main()
 	return EXIT_SUCCESS;
 }
 
-
-
-
+// make npc for all vehicle, even robotic
 
 //######################## UPRAVLENIE
 //# 1,2,3 aktivacija oruzhija po donomu(na tekuwij moment radius dejstvija bolshevat, no eto s celju testa)
