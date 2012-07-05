@@ -37,43 +37,27 @@ vec2f& vec2f::operator+=(float offset)
 }
 
 
-vec2f vec2f::operator+(const vec2f& _vec_add) const
+vec2f vec2f::operator+(const vec2f& rhs) const
 {
-	vec2f result;
-	
-	result.x = x + _vec_add.x;
-	result.y = y + _vec_add.y;
-	
+	vec2f result(x+rhs.x, y+rhs.y);	
 	return result;
 }
 
 vec2f vec2f::operator-(const vec2f& rhs) const
 {
-	vec2f result;
-	
-	result.x = x - rhs.x;
-	result.y = y - rhs.y;
-	
+	vec2f result(x-rhs.x, y-rhs.y);	
 	return result;
 }
 
 vec2f vec2f::operator*(float val) const
 {
-	vec2f result;
-	
-	result.x = x * val;
-	result.y = y * val;
-	
+	vec2f result(x*val, y*val);
 	return result;
 }
 
-vec2f vec2f::operator/(float _val) const
+vec2f vec2f::operator/(float val) const
 {
-	vec2f result;
-	
-	result.x = x / _val;
-	result.y = y / _val;
-	
+	vec2f result(x/val, y/val);	
 	return result;
 }
 
@@ -81,9 +65,9 @@ vec2f vec2f::operator/(float _val) const
 
 const vec3f& vec3f::operator+=(const vec3f& rhs)
 {
-	x += rhs.x;
-	y += rhs.y;
-	z += rhs.z;	
+	x+=rhs.x;
+	y+=rhs.y;
+	z+=rhs.z;	
 	
 	return *this;
 }

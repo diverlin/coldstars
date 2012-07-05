@@ -25,8 +25,8 @@ class vec2f
                 
                 vec2f operator+(const vec2f&) const;
                 vec2f operator-(const vec2f&) const;
-                vec2f operator*(const float) const;
-                vec2f operator/(const float) const;
+                vec2f operator*(float) const;
+                vec2f operator/(float) const;
 };
 
 class vec2i
