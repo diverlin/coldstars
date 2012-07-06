@@ -28,7 +28,7 @@ class DriveComplex
       		~DriveComplex();
 
       		void SetTarget(BaseGameEntity*, int);       
-      		void SetStaticTargetCoords(vec2f);
+      		void SetStaticTargetCoords(const vec2f&);
       		
                 void SetDriveSlot(ItemSlot* drive_slot) { this->drive_slot = drive_slot; };
                 void SetBakSlot(ItemSlot* bak_slot)     { this->bak_slot = bak_slot; };

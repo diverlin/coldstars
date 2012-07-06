@@ -51,28 +51,27 @@ void StoreBuilder::CreateNewInternals()
 	// create slots
 	TextureOb* texOb_slot = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ITEMSLOT_ID);
 	        
- 	int row = 3;
-        int clm = 10;
-        int x0 = 120;
-        int y0 = Config::Instance().SCREEN_HEIGHT - (row + 2) * texOb_slot->getFrameHeight();
+ 	int row_num = 4;  // must be divided by 2
+        int clm_num = 10; // must be divided by 2
+        vec2i center(Screen::Instance().GetWindow().GetWidth()/2, Screen::Instance().GetWindow().GetHeight()/2);
 
-        int row_act = 1;
-        while (row_act <= row)
+        int row = 1;
+        while (row <= row_num)
         {
-                int clm_act = 1;
-                while (clm_act <= clm)
+                int clm = 1;
+                while (clm <= clm_num)
                 {
                         ItemSlot* item_slot = GetNewItemSlot(ITEMSLOT::CARGO_ID);
  
-                        Rect rect(x0 + clm_act * 1.1 * GUI::ITEMSLOT::WIDTH_FOR_STORE, 
-                        	  y0 + row_act * 1.1 * GUI::ITEMSLOT::HEIGHT_FOR_STORE,
+                        Rect rect(center.x + (clm - clm_num/2) * 1.1 * GUI::ITEMSLOT::WIDTH_FOR_STORE, 
+                        	  center.y - (row - row_num/2) * 1.1 * GUI::ITEMSLOT::HEIGHT_FOR_STORE,
                         	  GUI::ITEMSLOT::WIDTH_FOR_STORE,
                                   GUI::ITEMSLOT::HEIGHT_FOR_STORE);
                                                         
                         store->AddItemSlot(item_slot, rect);
-                        clm_act++;
+                        clm++;
                 }
-                row_act++;
+                row++;
         }
         
 	

@@ -82,6 +82,7 @@ int main()
 }
 
 // make npc for all vehicle, even robotic
+//Temporal Distortion
 
 //######################## UPRAVLENIE
 //# 1,2,3 aktivacija oruzhija po donomu(na tekuwij moment radius dejstvija bolshevat, no eto s celju testa)

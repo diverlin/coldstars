@@ -26,13 +26,18 @@ class GuiSkill
       		GuiSkill(Player*);
       		~GuiSkill();
   		
+  		void SetOffset(const vec2i& offset) { this->offset = offset; };
+  				
      		bool UpdateMouseInteraction(int, int, int, int, Skill*);
-      		void Render() const;
+      		void Render(Skill*) const;
 
       	private:     		
       		std::vector<Button*> button_vec;
 
 		Player* player;
+		TextureOb* texOb_skill;
+		
+		vec2i offset;
 };
 
 

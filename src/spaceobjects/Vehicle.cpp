@@ -169,37 +169,37 @@ void Vehicle::RecalculateCollisionRadius()
 	collision_radius = (textureOb->getFrameWidth() + textureOb->getFrameHeight())/3;
 }
 
-bool Vehicle::DockingEffect()
-{
-	if (color.a > 0.01)
-	{
-		color.a -= 0.02;
-		return false;
-	}
-	else
-	{
-		color.a = 0.0;
-		return true;
-	}
-}
+//bool Vehicle::DockingEffect()
+//{
+	//if (color.a > 0.01)
+	//{
+		//color.a -= 0.02;
+		//return false;
+	//}
+	//else
+	//{
+		//color.a = 0.0;
+		//return true;
+	//}
+//}
 
-bool Vehicle::LaunchingEffect()
-{
-	if (color.a < 1.0)
-	{
-		std::cout<<"LaunchingEffect works"<<std::endl;
-		color.a += 0.02;
-		return false;
-	}
-	else
-	{
-		std::cout<<"LaunchingEffect finished"<<std::endl;
-		color.a = 1.0;
-		return true;
-	}
-}
+//bool Vehicle::LaunchingEffect()
+//{
+	//if (color.a < 1.0)
+	//{
+		//std::cout<<"LaunchingEffect works"<<std::endl;
+		//color.a += 0.02;
+		//return false;
+	//}
+	//else
+	//{
+		//std::cout<<"LaunchingEffect finished"<<std::endl;
+		//color.a = 1.0;
+		//return true;
+	//}
+//}
 
-//// ******** DOCKING/LAUNCHING ******** 
+/// ******** DOCKING/LAUNCHING ******** 
 void Vehicle::HyperJumpEvent()
 {
         starsystem->RemoveVehicle(data_id.id);  
