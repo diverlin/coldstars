@@ -35,12 +35,7 @@ void MicroScenarioLaunching::UpdateInStatic(Npc* npc) const
 {}
 
 void MicroScenarioLaunching::UpdateInDynamic(Npc* npc) const
-{
-	if (npc->GetVehicle()->LaunchingEffect() == true)
-	{
-     		printf("npc id = %i, LaunchingEffect() done\n", npc->GetId());
-	}
-}
+{}
 
 void MicroScenarioLaunching::Exit(Npc* _npc) const 
 {

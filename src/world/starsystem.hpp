@@ -190,9 +190,9 @@ class StarSystem : public BaseGameEntity
 template <typename AGRESSOR, typename VICTIM>
 bool checkCollision(AGRESSOR*,  VICTIM*, bool);
 
-bool collisionBetweenCenters(Points* points1, Points* points2, float collision_radius);
-bool collisionBetweenCenters(Points* points1, vec2f point2, float collision_radius);
-bool collisionBetweenCenters(Points* points1, float center2_x, float center2_y, float collision_radius);
+bool collisionBetweenCenters(const Points& points1, const Points& points2, float collision_radius);
+bool collisionBetweenCenters(const Points& points1, const vec2f& point2, float collision_radius);
+bool collisionBetweenCenters(const Points& points1, float center2_x, float center2_y, float collision_radius);
 
 #endif 
 

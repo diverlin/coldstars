@@ -73,20 +73,18 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(int mxvp, int myvp, int l
 void GuiManager::RenderScanVehicle(Vehicle* vehicle, int mxvp, int myvp) const
 {
         resetRenderTransformation();
-        enable_BLEND();   
-        	gui_vehicle->RenderVehicle(vehicle);
-		if (vehicle->GetOwnerNpc() != NULL)
-		{
-			gui_skill->Render();
-		}
+       	gui_vehicle->RenderVehicle(vehicle);
+	if (vehicle->GetOwnerNpc() != NULL)
+	{
+		gui_skill->Render(vehicle->GetOwnerNpc()->GetSkill());
+	}
 		
-		player->GetCursor()->GetItemSlot()->RenderEquipedItem();		
+	player->GetCursor()->GetItemSlot()->RenderEquipedItem();		
 	
-		if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == false)
-		{
-			gui_vehicle->RenderFocusedItemInfo(vehicle, mxvp, myvp);
-		}
-	disable_BLEND();
+	if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == false)
+	{
+		gui_vehicle->RenderFocusedItemInfo(vehicle, mxvp, myvp);
+	}
 }
 
 void GuiManager::RunSession()
@@ -102,12 +100,17 @@ void GuiManager::RunSession()
 	{
 		case ENTITY::SPACE_ID:
 		{
+			gui_vehicle->SetOffset(GUI_VEHICLE_INSPACE_OFFSET);
+			gui_skill->SetOffset(GUI_SKILL_INSPACE_OFFSET);
+			        				
 			//////////// SCAN ///////////////
 			Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget(); 
 			if (scan_vehicle != NULL )
 			{
 				UpdateMouseInteractionWithScanVehicle(mxvp, myvp, lmb, rmb, scan_vehicle);
-				RenderScanVehicle(scan_vehicle, mxvp, myvp);    					                 
+				enable_BLEND(); 
+					RenderScanVehicle(scan_vehicle, mxvp, myvp);    					                 
+				disable_BLEND();
 			}
 
 			//////////// WORLDMAP ///////////
@@ -145,6 +148,9 @@ void GuiManager::RunSession()
         		{
         			case GUI::SCREEN::ANGAR_ID:
         			{
+        				gui_vehicle->SetOffset(GUI_VEHICLE_INANGAR_OFFSET);
+        				gui_skill->SetOffset(GUI_SKILL_INANGAR_OFFSET);
+        				        						
         				Angar* angar = ((Kosmoport*)player->GetNpc()->GetLand())->GetAngar();
 					Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget();
 
@@ -180,6 +186,9 @@ void GuiManager::RunSession()
 		
 				case GUI::SCREEN::STORE_ID:
         			{
+        				gui_vehicle->SetOffset(GUI_VEHICLE_INSTORE_OFFSET);
+        				gui_store->SetOffset(GUI_STORE_OFFSET);
+        						
         				//if (npc->GetScanTarget() != npc->GetVehicle())
         				{
         					player->GetNpc()->SetScanTarget(player->GetNpc()->GetVehicle());

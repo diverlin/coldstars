@@ -126,8 +126,8 @@ class Vehicle : public BaseGameEntity
         	void DockingEvent();
         	void LaunchingEvent();
         	
-        	bool DockingEffect();
-        	bool LaunchingEffect();
+        	//bool DockingEffect();
+        	//bool LaunchingEffect();
         	
         	void RenderInfoInSpace(const vec2f&);
         	void RenderInfo(const vec2f&);

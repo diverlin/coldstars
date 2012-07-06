@@ -858,7 +858,7 @@ bool checkCollision(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
 
 
 
-bool collisionBetweenCenters(Points& points1, Points& points2, float collision_radius)
+bool collisionBetweenCenters(const Points& points1, const Points& points2, float collision_radius)
 {
     if(abs(points1.GetCenter().x - points2.GetCenter().x) > collision_radius)
        return false;
@@ -868,7 +868,7 @@ bool collisionBetweenCenters(Points& points1, Points& points2, float collision_r
     return true;
 }
 
-bool collisionBetweenCenters(Points& points1, vec2f point2, float collision_radius)
+bool collisionBetweenCenters(const Points& points1, const vec2f& point2, float collision_radius)
 {
     if(abs(points1.GetCenter().x - point2.x) > collision_radius)
        return false;
@@ -878,7 +878,7 @@ bool collisionBetweenCenters(Points& points1, vec2f point2, float collision_radi
     return true;
 }
 
-bool collisionBetweenCenters(Points& points1, float center2_x, float center2_y, float collision_radius)
+bool collisionBetweenCenters(const Points& points1, float center2_x, float center2_y, float collision_radius)
 {
     if(abs(points1.GetCenter().x - center2_x) > collision_radius)
        return false;

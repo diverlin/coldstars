@@ -30,8 +30,6 @@ DriveComplex::DriveComplex(Vehicle* owner_vehicle)
 
 DriveComplex::~DriveComplex()
 {      
-        //delete drive_slot;
-        //delete bak_slot;
         delete drive_trail;
 }
 
@@ -46,11 +44,11 @@ void DriveComplex::ResetTarget()
 	direction_list_END = true;
 }
       
-void DriveComplex::SetStaticTargetCoords(vec2f _target_pos)
+void DriveComplex::SetStaticTargetCoords(const vec2f& target_pos)
 {    
     	ResetTarget();
         
-    	target_pos = _target_pos;
+    	this->target_pos = target_pos;
     	
        	UpdatePath();
 }      

@@ -33,7 +33,7 @@ bool GuiStore::UpdateMouseInteraction(Store* store, int mxvp, int myvp, int lmb,
         { 
                 if (store->slot_total_vec[i]->GetEquipedStatus() == true)
                 {
-                	if (store->slot_total_vec[i]->CheckInteraction(mxvp, myvp) == true)
+                	if (store->slot_total_vec[i]->CheckInteraction(mxvp - offset.x, myvp - offset.y) == true)
                 	{
                         	if (lmb == true)
                         	{
@@ -49,19 +49,22 @@ bool GuiStore::UpdateMouseInteraction(Store* store, int mxvp, int myvp, int lmb,
 
 void GuiStore::RenderSlots(Store* store) const
 {      
-        for (unsigned int i = 0; i < store->slot_total_vec.size(); i ++)
-        {
-                store->slot_total_vec[i]->Render(-1);
-        }
+	glPushMatrix();
+		glTranslatef(offset.x, offset.y, 0);
+        	for (unsigned int i = 0; i < store->slot_total_vec.size(); i ++)
+        	{
+                	store->slot_total_vec[i]->Render(-1);
+        	}
+	glPopMatrix();
 }
 
 void GuiStore::RenderFocusedItemInfo(Store* store, int mxvp, int myvp)
 {	
         for (unsigned int i = 0; i < store->slot_total_vec.size(); i++)
         {                              				
-                if (store->slot_total_vec[i]->CheckInteraction(mxvp, myvp) == true)
+                if (store->slot_total_vec[i]->CheckInteraction(mxvp - offset.x, myvp - offset.y) == true)
                 {
-                        store->slot_total_vec[i]->RenderItemInfo();                    
+                        store->slot_total_vec[i]->RenderItemInfo(-offset.x, -offset.y);                    
                 } 
         }
 }

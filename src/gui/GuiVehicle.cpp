@@ -21,8 +21,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 GuiVehicle :: GuiVehicle(Player* player)
 {
 	this->player = player;
-	offset.x = -200;
-	offset.y = 0;
 }
 
 GuiVehicle :: ~GuiVehicle()
