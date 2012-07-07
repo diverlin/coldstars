@@ -51,6 +51,8 @@ const float HALF_PI = PI/2;
 const float RADIAN_TO_DEGREE_RATE = 180 / PI; 
 //
 
+
+
 const float FLOAT_EPSILON = 0.1;    
 
 const int SIZE_1 = 20;   // 1 - up to 20x20
@@ -575,6 +577,7 @@ namespace TECHLEVEL
 
 namespace GUI
 {
+	const int BAR_HEIGHT = 30;
 	namespace BUTTON
 	{
 		enum TYPE

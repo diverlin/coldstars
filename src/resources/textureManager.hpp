@@ -41,10 +41,10 @@ struct GuiTextureObCollector
         TextureOb* dot_black;
         TextureOb* dot_yellow;
         
-        TextureOb* bar_inspace_bottom;
-        TextureOb* bar_inspace_left;
-        TextureOb* bar_inspace_top;
-        TextureOb* bar_inspace_right;        
+        TextureOb* bar_bottom;
+        TextureOb* bar_left;
+        TextureOb* bar_top;
+        TextureOb* bar_right;        
         
         TextureOb* text_background;
 

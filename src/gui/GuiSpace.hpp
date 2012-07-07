@@ -32,6 +32,8 @@ class GuiSpace
        		void RenderFocusedButtonInfo(int, int) const;
        		void RenderText(const vec2f&) const;
        		
+       		void RenderBar() const;
+       		
        	private:
        		Player* player;
        		

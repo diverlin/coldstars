@@ -71,22 +71,26 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(int mxvp, int myvp, int l
 }
 
 void GuiManager::RenderScanVehicle(Vehicle* vehicle, int mxvp, int myvp) const
-{
-        resetRenderTransformation();
-       	gui_vehicle->RenderVehicle(vehicle);
+{		
+	if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == true)
+	{
+       		gui_vehicle->RenderVehicle(vehicle, mxvp, myvp, player->GetCursor()->GetItemSlot()->GetItem()->GetFunctionalSlotSubTypeId());
+		player->GetCursor()->GetItemSlot()->GetItem()->Render(player->GetCursor()->GetItemSlot()->GetRect());		
+	}
+	else
+	{
+		gui_vehicle->RenderVehicle(vehicle, mxvp, myvp, NONE_ID);
+	}
+					
 	if (vehicle->GetOwnerNpc() != NULL)
 	{
 		gui_skill->Render(vehicle->GetOwnerNpc()->GetSkill());
-	}
-		
-	if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == true)
-	{
-		player->GetCursor()->GetItemSlot()->GetItem()->Render(player->GetCursor()->GetItemSlot()->GetRect());		
-	}
-	
+	}   					                 
+
 	if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == false)
 	{
-		gui_vehicle->RenderFocusedItemInfo(vehicle, mxvp, myvp);
+		gui_vehicle->RenderFocusedItemInfo(vehicle, mxvp, myvp);					
+		//gui_skill
 	}
 }
 
@@ -105,35 +109,34 @@ void GuiManager::RunSession()
 		{
 			gui_vehicle->SetOffset(GUI_VEHICLE_INSPACE_OFFSET);
 			gui_skill->SetOffset(GUI_SKILL_INSPACE_OFFSET);
-			        				
-			//////////// SCAN ///////////////
+			
 			Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget(); 
-			if (scan_vehicle != NULL )
-			{
-				UpdateMouseInteractionWithScanVehicle(mxvp, myvp, lmb, rmb, scan_vehicle);
-				enable_BLEND(); 
-					RenderScanVehicle(scan_vehicle, mxvp, myvp);    					                 
-				disable_BLEND();
-			}
-
-			//////////// WORLDMAP ///////////
+						        				
+			//update
 			if (player->GetWorldMapShowFlag() == true )  
 			{
-				Galaxy* galaxy = player->GetNpc()->GetStarSystem()->GetGalaxy();
-				//update
-				gui_map->UpdateMouseInteraction(galaxy, mxvp, myvp, lmb, rmb);   
-				
-				//render
-			        resetRenderTransformation();
-        			enable_BLEND();   
-     					gui_map->Render(galaxy);    
-				disable_BLEND();  					
+				gui_map->UpdateMouseInteraction(player->GetNpc()->GetStarSystem()->GetGalaxy(), mxvp, myvp, lmb, rmb); 	
+			}
+			else if (scan_vehicle != NULL )
+			{
+				UpdateMouseInteractionWithScanVehicle(mxvp, myvp, lmb, rmb, scan_vehicle);
 			}
 
 			gui_space->UpdateMouseInteraction(mxvp, myvp, lmb, rmb);    
 				
+			//render
 			resetRenderTransformation();
-			enable_BLEND();    						
+			enable_BLEND();    
+				if (player->GetWorldMapShowFlag() == true )  
+				{					   
+     					gui_map->Render(player->GetNpc()->GetStarSystem()->GetGalaxy());    
+				}
+				else if (scan_vehicle != NULL )
+				{
+					RenderScanVehicle(scan_vehicle, mxvp, myvp); 				                 
+				}
+						
+				gui_space->RenderBar();	
 				gui_space->RenderButtons();
 				gui_space->RenderFocusedButtonInfo(mxvp, myvp);
 			disable_BLEND();
@@ -175,8 +178,14 @@ void GuiManager::RunSession()
                				enable_BLEND();   
 			        		gui_angar->RenderInternal(angar);
 			        		
-						if (scan_vehicle != NULL) 	{ RenderScanVehicle(scan_vehicle, mxvp, myvp); }
-						else 				{ gui_angar->RenderFocusedItemInfo(angar, mxvp, myvp); }
+						if (scan_vehicle != NULL) 	
+						{ 
+							RenderScanVehicle(scan_vehicle, mxvp, myvp); 
+						}
+						else
+						{ 
+							gui_angar->RenderFocusedItemInfo(angar, mxvp, myvp); 
+						}
 
 			        		gui_kosmoport->RenderButtons(); 
 			        		gui_angar->RenderButtons();
@@ -213,17 +222,9 @@ void GuiManager::RunSession()
         				resetRenderTransformation();
 					store->RenderBackground(screen_rect);
 					enable_BLEND();
-						gui_vehicle->RenderVehicle(vehicle);
 						gui_store->RenderSlots(store);
 		
-						if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == true)
-						{
-							player->GetCursor()->GetItemSlot()->GetItem()->Render(player->GetCursor()->GetItemSlot()->GetRect());		
-						}	
-						else
-						{
-							gui_vehicle->RenderFocusedItemInfo(vehicle, mxvp, myvp);
-						}
+						RenderScanVehicle(vehicle, mxvp, myvp);
 
 						gui_store->RenderFocusedItemInfo(store, mxvp, myvp);
 						

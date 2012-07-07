@@ -27,7 +27,7 @@ class ItemSlot : public BaseSlot
 		ItemSlot(int id);
 		~ItemSlot();                
 	
-		void SetTurrel(Turrel* turrel)                	{ this->turrel = turrel; };
+		void SetTurrel(Turrel* turrel) { this->turrel = turrel; };
                                 
 		Turrel* GetTurrel() const { return turrel; };
 		
@@ -66,9 +66,10 @@ class ItemSlot : public BaseSlot
             
 		void RemoveItem();
                 
-		void Render(TextureOb* textureOb_mark = NULL);
-       
-		void RenderItemInfo(float offset_x = 0, float offset_y = 0);
+		void Render() const;
+		void RenderMark(TextureOb*) const;
+		       
+		void RenderItemInfo(float offset_x = 0, float offset_y = 0) const;
                 
                 void DropItemToSpace(Vehicle*);
                                                 
