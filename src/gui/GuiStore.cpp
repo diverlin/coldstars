@@ -53,7 +53,11 @@ void GuiStore::RenderSlots(Store* store) const
 		glTranslatef(offset.x, offset.y, 0);
         	for (unsigned int i = 0; i < store->slot_total_vec.size(); i ++)
         	{
-                	store->slot_total_vec[i]->Render(-1);
+                	store->slot_total_vec[i]->Render();
+                	if (store->slot_total_vec[i]->GetEquipedStatus() == true)
+                	{
+                		store->slot_total_vec[i]->GetItem()->Render(store->slot_total_vec[i]->GetRect());	
+                	}
         	}
 	glPopMatrix();
 }

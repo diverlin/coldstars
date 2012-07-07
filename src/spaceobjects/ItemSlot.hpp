@@ -66,9 +66,8 @@ class ItemSlot : public BaseSlot
             
 		void RemoveItem();
                 
-		void Render(GLuint);
+		void Render(TextureOb* textureOb_mark = NULL);
        
-		void RenderEquipedItem();
 		void RenderItemInfo(float offset_x = 0, float offset_y = 0);
                 
                 void DropItemToSpace(Vehicle*);
