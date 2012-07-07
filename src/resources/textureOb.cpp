@@ -76,10 +76,7 @@ TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, std::ve
 		case TEXTURE::SHOP_BACKGROUND_ID:  { shopBgArgManager(pTo_arg);  break; }
     		case TEXTURE::GOVERMENT_BACKGROUND_ID: { govermentBgArgManager(pTo_arg); break; }
     		case TEXTURE::FACE_ID:         { loadToVRAM(); faceArgManager(pTo_arg); break; }
-
-    		// other
-    		case TEXTURE::TEXT_BACKGROUND_ID: { loadToVRAM(); break; }
-    		
+ 		
     		case TEXTURE::SPACESTATION_ID:   { loadToVRAM(); spacestationArgManager(pTo_arg); break; }    	
     		case TEXTURE::SATELLITE_ID:  { loadToVRAM(); satelliteArgManager(pTo_arg); break; }
 		case TEXTURE::SHIP_ID:     { loadToVRAM(); shipArgManager(pTo_arg); break; }

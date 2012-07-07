@@ -24,16 +24,18 @@ class BaseScenario
 {
 	public:
 		BaseScenario();
-		virtual ~BaseScenario();
+		virtual ~BaseScenario() {};
 		
 		int GetTypeId() const { return type_id; };
 		
-		virtual void Enter(Npc*) const;
-		virtual void UpdateInStatic(Npc*) const;	
-		virtual void UpdateInDynamic(Npc*) const;	
-		virtual void Exit(Npc*) const;
+		virtual bool Validate(Npc*) const {};
 		
-		virtual std::string GetDescription(Npc*) const;
+		virtual void Enter(Npc*) const {};
+		virtual void UpdateInStatic(Npc*) const {};	
+		virtual void UpdateInDynamic(Npc*) const {};	
+		virtual void Exit(Npc*) const {};
+		
+		virtual std::string GetDescription(Npc*) const {};
 		
 	protected:
 		int type_id;

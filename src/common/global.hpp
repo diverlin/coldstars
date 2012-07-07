@@ -37,7 +37,7 @@ SimpleIdGenerator   g_ID_GENERATOR  = SimpleIdGenerator();
 SimpleIdGenerator   g_TEXTURE_ID_GENERATOR = SimpleIdGenerator();
 DetaliedIdGenerator g_TYPE_ID_GENERATOR    = DetaliedIdGenerator(); 
 
-UniqueTextureCollector g_UNIQUE_TEXTURE_COLLECTOR;
+GuiTextureObCollector g_GUI_TEXTUREOB_COLLECTOR;
 TextureManager g_TEXTURE_MANAGER;
 
 class AiModelRanger;       		 AiModelRanger*      AIMODEL_RANGER;

@@ -26,13 +26,9 @@ class MacroTask : public BaseTask
 	public:
 		MacroTask(BaseGameEntity*, int, int reward = 0, int expiriance = 0);
 		~MacroTask();
-		
-		void SetResult(int result)  { this->result = result; }
-				
-		int GetResult() const { return result; };
 				
 	private:
-		int result;
+
 
 };
 

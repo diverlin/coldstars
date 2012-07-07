@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 MacroTaskManager::MacroTaskManager()
 {
-	macrotask = NULL;
+	macrotask = new MacroTask(NULL, NONE_ID);
 	scenario  = NULL;
 }
 
@@ -38,7 +38,7 @@ void MacroTaskManager::SetMacroTask(MacroTask* macrotask)
 void MacroTaskManager::DeleteMacroTaskAndReset()
 {
 	delete macrotask;
-	macrotask = NULL;
+	macrotask = new MacroTask(NULL, NONE_ID);;
 	scenario  = NULL;
 }	
 

@@ -26,8 +26,10 @@ class MacroScenarioStarSystemLiberation : public BaseScenario
 		MacroScenarioStarSystemLiberation();
 		virtual ~MacroScenarioStarSystemLiberation();
 		
+		virtual void Enter(Npc*) const;
 		virtual void UpdateInStatic(Npc*) const;	
 		virtual std::string GetDescription(Npc*) const;	
+		virtual void Exit(Npc*) const;
 }; 
 
 

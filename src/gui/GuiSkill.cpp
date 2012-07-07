@@ -22,13 +22,13 @@ GuiSkill::GuiSkill(Player* player)
 {
 	this->player = player;
 	
-     	texOb_skill = g_UNIQUE_TEXTURE_COLLECTOR.texOb_skill;
-     	     	
+     	textureOb_skill = g_GUI_TEXTUREOB_COLLECTOR.skill;
+     	textureOb_skill_transparent = g_GUI_TEXTUREOB_COLLECTOR.skill_transparent;     	     	
 
      	vec2i center(Screen::Instance().GetWindow().GetWidth()/2, Screen::Instance().GetWindow().GetHeight()/2);
      	int w = 20;  //skill_w
-     	TextureOb* texOb_icon_plus  = g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_plus;
-     	TextureOb* texOb_icon_minus = g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_minus;
+     	TextureOb* texOb_icon_plus  = g_GUI_TEXTUREOB_COLLECTOR.icon_plus;
+     	TextureOb* texOb_icon_minus = g_GUI_TEXTUREOB_COLLECTOR.icon_minus;
      	     	
      	Button* Increment_attack_button   = new Button(texOb_icon_plus, GUI::BUTTON::SKILL::INCREMENT_ATTACK_ID, center.x, center.y - w,   w, w, "");  
      	button_vec.push_back(Increment_attack_button);
@@ -59,6 +59,9 @@ GuiSkill::GuiSkill(Player* player)
      	button_vec.push_back(Increment_diplomat_button);
      	Button* Decrement_diplomat_button = new Button(texOb_icon_minus, GUI::BUTTON::SKILL::DECREMENT_DIPLOMAT_ID, center.x + 5*w, center.y - 2*w, w, w, "");
         button_vec.push_back(Decrement_diplomat_button);     
+
+	background_rect.Set(center.x, center.y, 6*w, SKILL::ATTACK_MAX*w);	
+	textureOb_background = g_GUI_TEXTUREOB_COLLECTOR.text_background;
 }
 
 GuiSkill::~GuiSkill()
@@ -113,6 +116,8 @@ void GuiSkill::Render(Skill* skill) const
 	glPushMatrix();
 	{
 		glTranslatef(offset.x, offset.y, 0);
+	
+		drawTexturedRect(textureOb_background, background_rect, -1.0);
  		for (unsigned int bi = 0; bi < button_vec.size(); bi++)
 		{
 			button_vec[bi]->Render();
@@ -120,14 +125,15 @@ void GuiSkill::Render(Skill* skill) const
 			switch(button_vec[bi]->GetSubTypeId())		
 			{
 				case GUI::BUTTON::SKILL::INCREMENT_ATTACK_ID:
-				{
-		     			for (int i = 0; i < skill->GetAttack(); i++) 
+				{  			
+		     			for (int i=0; i<SKILL::ATTACK_MAX; i++) 
      					{ 
-         					Rect tmp_rect = Rect(button_vec[bi]->GetRect().GetCenter().x - w/2, 
-         		      					     button_vec[bi]->GetRect().GetCenter().y + h/2 + i*h, 
-         		      					     w, h);
-         		      			     
-         					drawTexturedRect(texOb_skill, tmp_rect, -1.0);
+         					Rect tmp_rect(button_vec[bi]->GetRect().GetCenter().x - w/2, 
+         		      				      button_vec[bi]->GetRect().GetCenter().y + h/2 + i*h, 
+         		      				      w, h);
+
+     						if (i<skill->GetAttack()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+     						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
      					}
  			
  					break;
@@ -135,12 +141,13 @@ void GuiSkill::Render(Skill* skill) const
 			
 				case GUI::BUTTON::SKILL::INCREMENT_DEFENCE_ID:
 				{
-		     			for (int i = 0; i < skill->GetDefence(); i++) 
+		     			for (int i=0; i<SKILL::DEFENCE_MAX; i++) 
      					{		 
-         					Rect tmp_rect = Rect(button_vec[bi]->GetRect().GetCenter().x - w/2, 
-         		      					     button_vec[bi]->GetRect().GetCenter().y + h/2 + i*h, 
-         		      					     w, h);
-         					drawTexturedRect(texOb_skill, tmp_rect, -1.0);
+         					Rect tmp_rect(button_vec[bi]->GetRect().GetCenter().x - w/2, 
+         		      				      button_vec[bi]->GetRect().GetCenter().y + h/2 + i*h, 
+         		      				      w, h);
+         					if (i<skill->GetDefence()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+     						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
      					}
 				
 					break;
@@ -148,12 +155,13 @@ void GuiSkill::Render(Skill* skill) const
 
 				case GUI::BUTTON::SKILL::INCREMENT_LEADER_ID:
 				{
-	   		     		for (int i = 0; i < skill->GetLeader(); i++) 
+	   		     		for (int i=0; i<SKILL::LEADER_MAX; i++) 
      					{ 
-         					Rect tmp_rect = Rect(button_vec[bi]->GetRect().GetCenter().x - w/2, 
-         		      					     button_vec[bi]->GetRect().GetCenter().y + h/2 + i*h, 
-         		      					     w, h);
-         					drawTexturedRect(texOb_skill, tmp_rect, -1.0);
+         					Rect tmp_rect(button_vec[bi]->GetRect().GetCenter().x - w/2, 
+         		      				      button_vec[bi]->GetRect().GetCenter().y + h/2 + i*h, 
+         		      				      w, h);
+         					if (i<skill->GetLeader()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+     						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
      					}
 				
 					break;
@@ -161,12 +169,13 @@ void GuiSkill::Render(Skill* skill) const
 
 	   			case GUI::BUTTON::SKILL::INCREMENT_TRADER_ID:
 	   			{
-	   	     			for (int i = 0; i < skill->GetTrader(); i++) 
+	   	     			for (int i=0; i<SKILL::TRADER_MAX; i++) 
      					{ 
-         					Rect tmp_rect = Rect(button_vec[bi]->GetRect().GetCenter().x - w/2, 
-         		     					     button_vec[bi]->GetRect().GetCenter().y + h/2 + i*h, 
-         		     					     w, h);
-         					drawTexturedRect(texOb_skill, tmp_rect, -1.0);
+         					Rect tmp_rect(button_vec[bi]->GetRect().GetCenter().x - w/2, 
+         		     				      button_vec[bi]->GetRect().GetCenter().y + h/2 + i*h, 
+         		     				      w, h);
+         					if (i<skill->GetTrader()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+     						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
     					}
 				
 					break;
@@ -174,24 +183,26 @@ void GuiSkill::Render(Skill* skill) const
 			
 	   			case GUI::BUTTON::SKILL::INCREMENT_TECHNIC_ID:
 	   			{
-	   	     			for (int i = 0; i < skill->GetTechnic(); i++) 
+	   	     			for (int i=0; i<SKILL::TECHNIC_MAX; i++) 
      					{ 
-         					Rect tmp_rect = Rect(button_vec[bi]->GetRect().GetCenter().x - w/2, 
-         		      					     button_vec[bi]->GetRect().GetCenter().y + h/2 + i*h, 
-         		      					     w, h);
-         					drawTexturedRect(texOb_skill, tmp_rect, -1.0);
+         					Rect tmp_rect(button_vec[bi]->GetRect().GetCenter().x - w/2, 
+         		      				      button_vec[bi]->GetRect().GetCenter().y + h/2 + i*h, 
+         		      				      w, h);
+         					if (i<skill->GetTechnic()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+     						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
      					}     
 	   				break;
 	   			}
 
 	   			case GUI::BUTTON::SKILL::INCREMENT_DIPLOMAT_ID:
 	   			{
-	   				for (int i = 0; i < skill->GetDiplomat(); i++) 
+	   				for (int i=0; i<SKILL::DIPLOMAT_MAX; i++) 
      					{ 
-         					Rect tmp_rect = Rect(button_vec[bi]->GetRect().GetCenter().x - w/2, 
-         		      					     button_vec[bi]->GetRect().GetCenter().y + h/2 + i*h, 
-         		     					     w, h);
-         					drawTexturedRect(texOb_skill, tmp_rect, -1.0);
+         					Rect tmp_rect(button_vec[bi]->GetRect().GetCenter().x - w/2, 
+         		      				      button_vec[bi]->GetRect().GetCenter().y + h/2 + i*h, 
+         		     				      w, h);
+         					if (skill->GetDiplomat()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+     						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
      					}
 	   				break;
 	   			}

@@ -25,7 +25,7 @@ GuiKosmoport::GuiKosmoport(Player* player)
 	int screen_w = Config::Instance().SCREEN_WIDTH;
 	int screen_h = Config::Instance().SCREEN_HEIGHT;
 	
-        TextureOb* texOb_button = g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_green; // fake
+        TextureOb* texOb_button = g_GUI_TEXTUREOB_COLLECTOR.dot_green; // fake
 
     	Button* angar_screen_button     = new Button(texOb_button, 
     					     GUI::SCREEN::ANGAR_ID,

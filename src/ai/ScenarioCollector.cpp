@@ -30,7 +30,10 @@ void ScenarioCollector::RegisterScenario(BaseScenario* scenario)
 	scenario_map.insert(std::make_pair(scenario->GetTypeId(), scenario));
 }
   		
-BaseScenario* ScenarioCollector::GetScenario(int id) const
+BaseScenario* ScenarioCollector::GetScenario(int type_id) const
 {
-	return (scenario_map.find(id))->second;
+	if (type_id != NONE_ID)
+		return (scenario_map.find(type_id))->second;
+
+	return NULL;
 }
