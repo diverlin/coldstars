@@ -21,13 +21,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 GuiSpace::GuiSpace(Player* player)
 {
 	this->player = player;
-	
-    	TextureOb* texOb_icon_map = g_GUI_TEXTUREOB_COLLECTOR.icon_map;
     	
-    	Button* galaxymap_screen_button = new Button(texOb_icon_map, 
+    	Button* galaxymap_screen_button = new Button(g_GUI_TEXTUREOB_COLLECTOR.icon_map, 
         				     GUI::SCREEN::GALAXYMAP_ID,
-    					     Config::Instance().SCREEN_WIDTH  - (GUI::ICON_SIZE + 5),
-    					     Config::Instance().SCREEN_HEIGHT - (GUI::ICON_SIZE + 5), 
+    					     Screen::Instance().GetWindow().GetWidth() - (GUI::ICON_SIZE + 5),
+    					     Screen::Instance().GetWindow().GetHeight() - (GUI::ICON_SIZE + 5), 
     					     GUI::ICON_SIZE,  
     					     GUI::ICON_SIZE, 
     					     "galaxy map");
@@ -61,6 +59,18 @@ void GuiSpace::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb)
      	}
 }
 
+void GuiSpace::RenderBar() const
+{
+	int screen_w = Screen::Instance().GetWindow().GetWidth();
+	int screen_h = Screen::Instance().GetWindow().GetHeight();
+	
+	Rect rect1(0, 0, screen_w, GUI::BAR_HEIGHT);
+	drawTexturedRect(g_GUI_TEXTUREOB_COLLECTOR.bar_bottom, rect1, -1.5);
+
+	Rect rect2(0, screen_h, screen_w, -GUI::BAR_HEIGHT);
+	drawTexturedRect(g_GUI_TEXTUREOB_COLLECTOR.bar_bottom, rect2, -1.5);
+}
+
 void GuiSpace::RenderButtons() const
 {
 	for (unsigned int i = 0; i < button_vec.size(); i++)
@@ -85,9 +95,9 @@ void GuiSpace::RenderText(const vec2f& scroll_coords) const
 {
 	std::string _coord_str = "world coord: " + int2str(scroll_coords.x) + "," + int2str(scroll_coords.y);
 
-	sf::String _str(_coord_str, Screen::Instance().GetFont(), 14);
+	sf::String _str(_coord_str, Screen::Instance().GetFont(), 12);
 	_str.SetColor(sf::Color(255, 255, 255));
-	_str.SetPosition(Config::Instance().SCREEN_WIDTH - 200, 15); 
+	_str.SetPosition(Screen::Instance().GetWindow().GetWidth() - 200, 5); 
 
 	Screen::Instance().GetWindow().Draw(_str);    
 }

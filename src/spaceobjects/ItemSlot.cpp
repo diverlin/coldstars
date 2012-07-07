@@ -117,16 +117,16 @@ void ItemSlot::UpdateOwnerAbilities()
 	}
 }
 
-void ItemSlot::Render(TextureOb* textureOb_mark)
+void ItemSlot::Render() const
 {
-       	drawTexturedRect(textureOb, rect, -1.5);
-        
-        if (textureOb_mark != NULL)
-	{
-		drawTexturedRect(textureOb_mark, rect, -1.0);
-        }            
+       	drawTexturedRect(textureOb, rect, -1.5);    
 }
-              
+
+void ItemSlot::RenderMark(TextureOb* textureOb_mark) const
+{
+	drawTexturedRect(textureOb_mark, rect, -1.0);
+}      
+        
 int ItemSlot::GetItemRadius() const
 {       
         switch(item->GetTypeId())
@@ -155,7 +155,7 @@ int ItemSlot::GetItemRadius() const
 }
 
 
-void ItemSlot::RenderItemInfo(float offset_x, float offset_y)
+void ItemSlot::RenderItemInfo(float offset_x, float offset_y) const
 {
         if (is_EQUIPED == true)
         {

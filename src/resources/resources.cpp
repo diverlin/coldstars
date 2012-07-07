@@ -1221,22 +1221,22 @@ void loadImages()
 
 {
 	std::vector<int> arg;  
-	g_GUI_TEXTUREOB_COLLECTOR.bar_inspace_bottom = new TextureOb(NONE_ID, "data/gui/bar_inspace_bottom.png", true, &arg);
+	g_GUI_TEXTUREOB_COLLECTOR.bar_bottom = new TextureOb(NONE_ID, "data/gui/bar_bottom.png", true, &arg);
 }
 
 {
 	std::vector<int> arg;  
-	g_GUI_TEXTUREOB_COLLECTOR.bar_inspace_left = new TextureOb(NONE_ID, "data/gui/bar_inspace_left.png", true, &arg);
+	g_GUI_TEXTUREOB_COLLECTOR.bar_left = new TextureOb(NONE_ID, "data/gui/bar_left.png", true, &arg);
 }
 
 {
 	std::vector<int> arg;  
-	g_GUI_TEXTUREOB_COLLECTOR.bar_inspace_top = new TextureOb(NONE_ID, "data/gui/bar_inspace_top.png", true, &arg);
+	g_GUI_TEXTUREOB_COLLECTOR.bar_top = new TextureOb(NONE_ID, "data/gui/bar_top.png", true, &arg);
 }
 
 {
 	std::vector<int> arg;  
-	g_GUI_TEXTUREOB_COLLECTOR.bar_inspace_top = new TextureOb(NONE_ID, "data/gui/bar_inspace_top.png", true, &arg);
+	g_GUI_TEXTUREOB_COLLECTOR.bar_top = new TextureOb(NONE_ID, "data/gui/bar_top.png", true, &arg);
 }
 
 {

@@ -29,13 +29,16 @@ class GuiVehicle
 		void SetOffset(const vec2i& offset) { this->offset = offset; };
      		bool UpdateMouseInteraction(int, int, int, int, Vehicle*, Store* store = NULL);   
      				
-      		void RenderVehicle(Vehicle*) const;
+      		void RenderVehicle(Vehicle*, int, int, int) const;
 		void RenderFocusedItemInfo(Vehicle*, int, int) const;
       		
       	private: 		
       		Player* player;
       		
       		vec2i offset;
+  		
+      		void RenderSlotsAndItems(Vehicle*) const;
+      		void RenderMarksForEmptySlots(Vehicle*, int, int, int) const;  
 };
 
 
