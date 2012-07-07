@@ -18,24 +18,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-#ifndef GUIANGAR_H
-#define GUIANGAR_H
+#ifndef BASEGUI_H
+#define BASEGUI_H
 
+#include "../gui/Button.hpp"
 
-class GuiAngar : public BaseGui
+class BaseGui
 {
     	public:
-       		GuiAngar(Player*);
-       		~GuiAngar();
-		
-       		bool UpdateMouseInteraction(Angar*, int, int, int, int);
+       		BaseGui();
+       		~BaseGui();
+
+  		void SetOffset(const vec2i& offset) { this->offset = offset; };
+  		
+       		void RenderButtons() const;
+       		void RenderFocusedButtonInfo(int, int) const;         		
+                  	
+       	protected:
+      		Player* player;
+       		int button_w, button_h;
        		
-       		void RenderVehicleSlots(Angar*) const;
-                void RenderFocusedItemInfo(Angar*, int, int) const;             
-       	
-       	private:
-       		bool UpdateMouseButtonsInteraction(int, int, int, int);                
-       		bool UpdateMouseVehicleSlotsInteraction(Angar*, int, int, int, int);
+       		std::vector<Button*> button_vec;
+       						
+		vec2i offset;
 };
 
 

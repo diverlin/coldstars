@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef GUISPACE_H
 #define GUISPACE_H
 
-class GuiSpace
+class GuiSpace : public BaseGui
 {
     	public:
       		GuiSpace(Player*);
@@ -28,16 +28,11 @@ class GuiSpace
 
        		void UpdateMouseInteraction(int, int, int, int);
        		
-       		void RenderButtons() const;
-       		void RenderFocusedButtonInfo(int, int) const;
        		void RenderText(const vec2f&) const;
        		
        		void RenderBar() const;
        		
        	private:
-       		Player* player;
-       		
-       		std::vector<Button*> button_vec;
        		
 
 };

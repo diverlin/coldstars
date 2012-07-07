@@ -531,6 +531,26 @@ void Vehicle::UpdateScanAbility()
         }
 }
 
+                
+bool Vehicle::IsArmorFull() const
+{
+	return (data_life.armor == data_korpus.armor);
+}
+
+bool Vehicle::IsFuelFull() const
+{
+     	if (drive_complex->GetBakSlot()->GetEquipedStatus() == true)
+     	{
+     		if (drive_complex->GetBakSlot()->GetBakEquipment()->GetFuel() == drive_complex->GetBakSlot()->GetBakEquipment()->GetFuelMax())
+     		{
+     			return true;
+     		}
+     	}
+     	
+     	return false;
+}
+                
+                
 void Vehicle::SetMaxArmor()
 {
      	data_life.armor = data_korpus.armor;
@@ -543,7 +563,7 @@ void Vehicle::SetMaxFuel()
         	drive_complex->GetBakSlot()->GetBakEquipment()->SetFuel(drive_complex->GetBakSlot()->GetBakEquipment()->GetFuelMax());
         }
 }
-
+                
 std::string Vehicle::returnProtectionStr()
 {
     	if (ableTo.PROTECT == true)

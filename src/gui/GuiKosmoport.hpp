@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define GUIKOSMOPORT_H
 
 
-class GuiKosmoport
+class GuiKosmoport : public BaseGui
 {
     	public:
        		GuiKosmoport(Player*);
@@ -31,16 +31,9 @@ class GuiKosmoport
 		int GetActiveScreenId() const { return active_screen_id; };
 		
        		bool UpdateMouseInteraction(int, int, int, int);
-       		
-       		void RenderButtons() const;
-       		void RenderFocusedButtonInfo(int, int) const;
-                
+               
        	private:
        		int active_screen_id; 
-       		
-       		Player* player;
-       		
-       		std::vector<Button*> button_vec;
 };
 
 

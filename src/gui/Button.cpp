@@ -33,6 +33,9 @@ Button::Button(TextureOb* textureOb,
     	this->textureOb = textureOb;
     	this->info_str = info_str; 
 
+	alpha = 1.0f;
+	lock = false;
+	
     	rect.Set(pos_x, pos_y, w, h);
 }
 
@@ -53,12 +56,29 @@ void Button::SetCenter(int x, int y)
      	rect.SetCenter((float)x, (float)y);
 }
    
+void Button::Update()
+{
+	if (lock == false)
+	{
+		if (alpha < 1.0f)
+		{
+			alpha += 0.01f;
+		}
+		else
+		{
+			alpha = 1.0f;
+		}
+	}
+}
+          		
 void Button::Render() const
 {
+
+	glColor4f(1.0f, 1.0f, 1.0f, alpha);
    	drawTexturedRect(textureOb, rect, -1);
 }
 
-void Button::RenderInfo() const
+void Button::RenderInfo(int offset_x, int offset_y) const
 {
-     	drawSimpleText(info_str, 12, rect.GetBottomLeft().x - 50, rect.GetBottomLeft().y + 30);
+     	drawSimpleText(info_str, 12, rect.GetBottomLeft().x - 50 + offset_x, rect.GetBottomLeft().y + 30 + offset_y);
 }

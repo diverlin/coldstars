@@ -57,13 +57,7 @@ GuiAngar::GuiAngar(Player* player)
 
 
 GuiAngar::~GuiAngar()
-{
-	for (unsigned int i=0; i<button_vec.size(); i++)
-	{
-		delete button_vec[i];
-	}
-}
-	
+{}	
 	
 bool GuiAngar::UpdateMouseInteraction(Angar* angar, int mxvp, int myvp, int lmb, int rmb)
 {    	   	
@@ -89,20 +83,44 @@ bool GuiAngar::UpdateMouseButtonsInteraction(int mxvp, int myvp, int lmb, int rm
 	   			{
 	   				case GUI::BUTTON::GETREPAIR_ID: 
 	   				{
-	   					player->GetNpc()->GetVehicle()->SetMaxArmor(); 
-	   					return true; break;
+	   					if (player->GetNpc()->GetVehicle()->IsArmorFull() == false)
+	   				       	{
+	   				       		button_vec[i]->StartPressAnimation();
+	   					
+	   						player->GetNpc()->GetVehicle()->SetMaxArmor(); 
+	   						return true; 
+	   					}
+	   					else
+	   					{
+	   						button_vec[i]->LockOn();
+	   					}
+	   						
+	   					break;
 	   				}
 	   				case GUI::BUTTON::GETFUEL_ID:
 	   				{
-	   		        		player->GetNpc()->GetVehicle()->SetMaxFuel();
-	   					return true; break;
+	   					if (player->GetNpc()->GetVehicle()->IsFuelFull() == false)
+	   					{
+	   						button_vec[i]->StartPressAnimation();
+	   		        			
+	   		        			player->GetNpc()->GetVehicle()->SetMaxFuel();
+	   						return true; 
+	   					}
+	   					else
+	   					{
+	   						button_vec[i]->LockOn();
+	   					}
+	   						
+	   					break;
 	   				}
 	   				case GUI::BUTTON::GETLAUNCH_ID:
 	   				{
 	   					MicroTask* microtask = new MicroTask(NULL, MICROSCENARIO::LAUNCHING_ID);
        						player->GetNpc()->GetVehicle()->LaunchingEvent();
        						player->GetNpc()->GetStateMachine()->SetCurrentMicroTask(microtask);
-       		   				return true; break;
+       		   				return true; 
+       		   				
+       		   				break;
        		   			}
        				}
        				
@@ -134,28 +152,8 @@ bool GuiAngar::UpdateMouseVehicleSlotsInteraction(Angar* angar, int mxvp, int my
         return false;
 }
 
-       		
-void GuiAngar::RenderButtons() const
-{
-	for (unsigned int i = 0; i< button_vec.size(); i++)
-	{
-		button_vec[i]->Render();
-       	}
-}
 
-void GuiAngar::RenderFocusedButtonInfo(int mxvp, int myvp) const
-{
-	for (unsigned int i = 0; i< button_vec.size(); i++)
-	{		
-                if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
-                {
-        		button_vec[i]->RenderInfo();
-        		return; break;
-        	}
-        }
-}
-
-void GuiAngar::RenderInternal(Angar* angar) const
+void GuiAngar::RenderVehicleSlots(Angar* angar) const
 {
         for (unsigned int i=0; i<angar->vehicleslot_vec.size(); i++)
         {

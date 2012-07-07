@@ -81,6 +81,9 @@ int main()
 	return EXIT_SUCCESS;
 }
 
+//float currentColor[4];
+//glGetFloatv(GL_CURRENT_COLOR,currentColor);
+
 // make npc for all vehicle, even robotic
 //Temporal Distortion
 
