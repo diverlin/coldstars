@@ -22,7 +22,7 @@ GuiMap::GuiMap(Player* player)
 { 
 	this->player = player;
     	rect = Rect(GUI::MAP::BORDER_X, GUI::MAP::BORDER_Y, (Config::Instance().SCREEN_WIDTH - 2 * GUI::MAP::BORDER_X), (Config::Instance().SCREEN_HEIGHT - 2 * GUI::MAP::BORDER_X));
-    	texOb_background = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::TEXT_BACKGROUND_ID);
+    	texOb_background = g_GUI_TEXTUREOB_COLLECTOR.text_background;
 }
 
 GuiMap::~GuiMap()
@@ -83,11 +83,11 @@ void GuiMap::Render(Galaxy* galaxy)
               
         	if (galaxy->STARSYSTEM_vec[si]->GetCaptured() == true)
         	{
-        		drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_enemy_ss->texture, galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), 40.0, -2.0);
+        		drawTexturedPoint(g_GUI_TEXTUREOB_COLLECTOR.starsystem_mark_enemy->texture, galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), 40.0, -2.0);
         	}
            	
     	}	 
-        drawTexturedPoint(g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_player_ss->texture, player->GetNpc()->GetStarSystem()->GetPoints().GetCenter(), 40.0, -2.0);
+        drawTexturedPoint(g_GUI_TEXTUREOB_COLLECTOR.starsystem_mark_player->texture, player->GetNpc()->GetStarSystem()->GetPoints().GetCenter(), 40.0, -2.0);
 
     	//if self.GL_LIST_range_ID != None:
        		//glCallList(self.GL_LIST_range_ID)

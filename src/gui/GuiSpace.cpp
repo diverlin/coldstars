@@ -22,7 +22,7 @@ GuiSpace::GuiSpace(Player* player)
 {
 	this->player = player;
 	
-    	TextureOb* texOb_icon_map = g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_map;
+    	TextureOb* texOb_icon_map = g_GUI_TEXTUREOB_COLLECTOR.icon_map;
     	
     	Button* galaxymap_screen_button = new Button(texOb_icon_map, 
         				     GUI::SCREEN::GALAXYMAP_ID,

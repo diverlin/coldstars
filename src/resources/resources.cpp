@@ -1141,10 +1141,6 @@ void loadImages()
 	g_TEXTURE_MANAGER.Add( new TextureOb(TEXTURE::RADAR_EQUIPMENT_ID, "data/item/radar/radar_Race0_Tech1.png", true, &arg, 3, 1) );
 }
 
-{
-	std::vector<int> arg;  
-	g_TEXTURE_MANAGER.Add( new TextureOb(TEXTURE::TEXT_BACKGROUND_ID, "data/other/text_background.png", true, &arg) );
-}
 
 //################## MODULES
 {
@@ -1158,72 +1154,105 @@ void loadImages()
 
 {
 	std::vector<int> arg;  
-	g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_enemy_ss = new TextureOb(NONE_ID, "data/other/mark_enemy_ss.png", true, &arg);
+	g_GUI_TEXTUREOB_COLLECTOR.starsystem_mark_enemy = new TextureOb(NONE_ID, "data/other/mark_enemy_ss.png", true, &arg);
 }
 
 {
 	std::vector<int> arg;  
-	g_UNIQUE_TEXTURE_COLLECTOR.texOb_mark_player_ss = new TextureOb(NONE_ID, "data/other/mark_player_ss.png", true, &arg);
+	g_GUI_TEXTUREOB_COLLECTOR.starsystem_mark_player = new TextureOb(NONE_ID, "data/other/mark_player_ss.png", true, &arg);
 }
 
 
 
 {
 	std::vector<int> arg;  
-	g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_minus = new TextureOb(NONE_ID, "data/icon/minus.png", true, &arg);
+	g_GUI_TEXTUREOB_COLLECTOR.icon_minus = new TextureOb(NONE_ID, "data/icon/minus.png", true, &arg);
 }
 
 {
 	std::vector<int> arg;  
-	g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_plus = new TextureOb(NONE_ID, "data/icon/plus.png", true, &arg);
+	g_GUI_TEXTUREOB_COLLECTOR.icon_plus = new TextureOb(NONE_ID, "data/icon/plus.png", true, &arg);
 }
 
 {
 	std::vector<int> arg;  
-	g_UNIQUE_TEXTURE_COLLECTOR.texOb_skill = new TextureOb(NONE_ID, "data/other/skill.png", true, &arg);
+	g_GUI_TEXTUREOB_COLLECTOR.skill = new TextureOb(NONE_ID, "data/other/skill.png", true, &arg);
 }
 
 {
 	std::vector<int> arg;  
-	g_UNIQUE_TEXTURE_COLLECTOR.texOb_icon_map = new TextureOb(NONE_ID, "data/icon/starsystem_ICON.png", true, &arg);
+	g_GUI_TEXTUREOB_COLLECTOR.skill_transparent = new TextureOb(NONE_ID, "data/other/skill_transparent.png", true, &arg);
 }
 
 {
 	std::vector<int> arg;  
-	g_UNIQUE_TEXTURE_COLLECTOR.texOb_grapple_trail = new TextureOb(NONE_ID, "data/effect/grapple_jet.png", true, &arg);
+	g_GUI_TEXTUREOB_COLLECTOR.icon_map = new TextureOb(NONE_ID, "data/icon/starsystem_ICON.png", true, &arg);
 }
 
 {
 	std::vector<int> arg;  
-	g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue = new TextureOb(NONE_ID, "data/other/dot_blue.png", true, &arg);
+	g_GUI_TEXTUREOB_COLLECTOR.grapple_trail = new TextureOb(NONE_ID, "data/effect/grapple_jet.png", true, &arg);
 }
 
 {
 	std::vector<int> arg;  
-	g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_green = new TextureOb(NONE_ID, "data/other/dot_green.png", true, &arg);
+	g_GUI_TEXTUREOB_COLLECTOR.dot_blue = new TextureOb(NONE_ID, "data/other/dot_blue.png", true, &arg);
 }
 
 {
 	std::vector<int> arg;  
-	g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_red = new TextureOb(NONE_ID, "data/other/dot_red.png", true, &arg);
+	g_GUI_TEXTUREOB_COLLECTOR.dot_green = new TextureOb(NONE_ID, "data/other/dot_green.png", true, &arg);
 }
 
 {
 	std::vector<int> arg;  
-	g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_black = new TextureOb(NONE_ID, "data/other/dot_black.png", true, &arg);
+	g_GUI_TEXTUREOB_COLLECTOR.dot_red = new TextureOb(NONE_ID, "data/other/dot_red.png", true, &arg);
 }
 
 {
 	std::vector<int> arg;  
-	g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_yellow = new TextureOb(NONE_ID, "data/other/dot_yellow.png", true, &arg);
+	g_GUI_TEXTUREOB_COLLECTOR.dot_black = new TextureOb(NONE_ID, "data/other/dot_black.png", true, &arg);
 }
 
+{
+	std::vector<int> arg;  
+	g_GUI_TEXTUREOB_COLLECTOR.dot_yellow = new TextureOb(NONE_ID, "data/other/dot_yellow.png", true, &arg);
+}
 
-//{
-	//std::vector<int> arg;  
-	//arg.push_back(COLOR::GREY_ID); arg.push_back(COLOR::BLUE_ID); arg.push_back(COLOR::YELLOW_ID); arg.push_back(COLOR::RED_ID);  
-	//g_UNIQUE_TEXTURE_COLLECTOR.texOb_particles_sheet = new TextureOb(TEXTURE::PARTICLE_EFFECT_ID, "data/effect/particles/particles_sheet.png", true, &arg, 4, 1, 0); 
-//}
+{
+	std::vector<int> arg;  
+	g_GUI_TEXTUREOB_COLLECTOR.bar_inspace_bottom = new TextureOb(NONE_ID, "data/gui/bar_inspace_bottom.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
+	g_GUI_TEXTUREOB_COLLECTOR.bar_inspace_left = new TextureOb(NONE_ID, "data/gui/bar_inspace_left.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
+	g_GUI_TEXTUREOB_COLLECTOR.bar_inspace_top = new TextureOb(NONE_ID, "data/gui/bar_inspace_top.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
+	g_GUI_TEXTUREOB_COLLECTOR.bar_inspace_top = new TextureOb(NONE_ID, "data/gui/bar_inspace_top.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
+	g_GUI_TEXTUREOB_COLLECTOR.text_background =  new TextureOb(NONE_ID, "data/other/text_background.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
+	g_GUI_TEXTUREOB_COLLECTOR.slot_mark_accept =  new TextureOb(NONE_ID, "data/other/slot_mark_accept.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
+	g_GUI_TEXTUREOB_COLLECTOR.slot_mark_reject =  new TextureOb(NONE_ID, "data/other/slot_mark_reject.png", true, &arg);
+}
 
 }
 

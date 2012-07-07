@@ -27,14 +27,20 @@ class BaseTask
 		BaseTask();
 		~BaseTask();
 		
-		int GetScenarioTypeId() const { return action_id; };
+		int GetScenarioTypeId() const { return scenario_type_id; };
 		BaseGameEntity* GetTarget() const { return target; };
+		
+		void SetResult(int result)  { this->result = result; }
+				
+		int GetResult() const { return result; };
 				
 	protected:
+		int result;
+	
 		int reward;
 		int expiriance;
 		
-		int action_id;
+		int scenario_type_id;
 				
 		BaseGameEntity* target;	
 };

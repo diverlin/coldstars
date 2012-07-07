@@ -589,7 +589,7 @@ void Vehicle::RenderGrappleTrail() const
 
                         float angle_inD = angle_inR * RADIAN_TO_DEGREE_RATE;
         
-                        drawLine(g_UNIQUE_TEXTURE_COLLECTOR.texOb_grapple_trail, 
+                        drawLine(g_GUI_TEXTUREOB_COLLECTOR.grapple_trail, 
                                  points.GetCenter(), 
                                  points.GetPosZ(), 
                                  len, 
@@ -626,7 +626,7 @@ void Vehicle::RenderRadarRange()
 	{
 		glPushMatrix();
 			glTranslatef(points.GetCenter().x, points.GetCenter().y, 0.0f);
-			radar_slot->UpdateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_yellow);
+			radar_slot->UpdateRange(g_GUI_TEXTUREOB_COLLECTOR.dot_yellow);
              		radar_slot->DrawRange();
 		glPopMatrix();
 	}
@@ -638,7 +638,7 @@ void Vehicle::RenderGrappleRange()
 	{
 		glPushMatrix();
 			glTranslatef(points.GetCenter().x, points.GetCenter().y, 0.0f);
-			grapple_slot->UpdateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue);
+			grapple_slot->UpdateRange(g_GUI_TEXTUREOB_COLLECTOR.dot_blue);
              		grapple_slot->DrawRange();
 		glPopMatrix();
 	}

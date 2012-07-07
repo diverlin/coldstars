@@ -35,8 +35,12 @@ class GuiSkill
       		std::vector<Button*> button_vec;
 
 		Player* player;
-		TextureOb* texOb_skill;
+		TextureOb* textureOb_skill;
+		TextureOb* textureOb_skill_transparent;
 		
+		Rect background_rect;
+		TextureOb* textureOb_background;
+				
 		vec2i offset;
 };
 

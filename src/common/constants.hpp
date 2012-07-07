@@ -66,6 +66,7 @@ const int SIZE_9 = 240;  // 9 - up to 240x240
 const int NONE_ID = -1;
 const int FAIL_ID = 1;
 const int SUCCESS_ID = 2;
+const int PERFORM_ID = 3;
 
 
 namespace MACROSCENARIO
@@ -76,23 +77,33 @@ namespace MACROSCENARIO
 		STARSYSTEMLIBERATION_ID, 
 		SELFSAFETY_ID, // replace selfsafety to survival
 		
-		ENUM_MAX
+		ENUM_LAST
 	};
+	
 } 
 
 namespace MICROSCENARIO
 {
 	enum TYPE_ID
 	{
-		DESTROY_ID = MACROSCENARIO::TYPE_ID::ENUM_MAX,
+		DESTROY_ID = MACROSCENARIO::TYPE_ID::ENUM_LAST,
 		DOCKING_ID,		
 		LAUNCHING_ID,
 		GRAB_ID,
 		JUMP_ID,
-		
+	
 	};
-} 
-
+}
+ 
+namespace SKILL
+{
+	const int ATTACK_MAX = 10;
+	const int DEFENCE_MAX = 10;
+	const int LEADER_MAX = 10;
+	const int TRADER_MAX = 10;
+	const int TECHNIC_MAX = 10;
+	const int DIPLOMAT_MAX = 10;
+}
 namespace COLOR
 {
 	enum ID
@@ -630,7 +641,6 @@ namespace TEXTURE
 {
 	enum TEXTURE_TYPE
 	{ 
-		TEXT_BACKGROUND_ID, 
 		ANGAR_BACKGROUND_ID, STORE_BACKGROUND_ID, SHOP_BACKGROUND_ID, GOVERMENT_BACKGROUND_ID, 
 		LAND_BACKGROUND_ID,
 		NEBULA_BACKGROUND_ID, DISTANTSTAR_ID, 

@@ -220,7 +220,7 @@ void DriveComplex::CalcPath()
 	{
 		direction_list_END = false;
                
-       		visual_path.FillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue->texture, &path_vec, 10, 10);
+       		visual_path.FillData(g_GUI_TEXTUREOB_COLLECTOR.dot_blue->texture, &path_vec, 10, 10);
        		move_it = 0;
        	}
 }
@@ -265,14 +265,21 @@ void DriveComplex::CalcPath()
 
 
 
-vec2f DriveComplex::CalcRoundPath()  // not working yet
+vec2f DriveComplex::CalcRoundPath()
 {
         // vychislenie centrov okruzhnostej traektorij na osnovanii tekuwego polozhenija ob'ekta 
         float start_angle_inD = owner_vehicle->GetPoints().GetAngleDegree();
         vec2f start_pos = owner_vehicle->GetPoints().GetCenter();
         
         float R = 100.0f; //(float)getRandInt(80, 130);
-                        
+{//hack on
+float dist = distBetweenPoints(start_pos, target_pos);
+if(dist < R)
+{
+	float rate = 1.1f*dist/R;
+	target_pos.Set(target_pos.x*rate, target_pos.y*rate); ;
+}
+}//hack off               
         float gamma1 = (start_angle_inD + 90) / RADIAN_TO_DEGREE_RATE;
         float gamma2 = (start_angle_inD - 90) / RADIAN_TO_DEGREE_RATE;
                 
@@ -467,11 +474,11 @@ vec2f DriveComplex::CalcRoundPath()  // not working yet
         k_vec.push_back(vec2f(xk, yk));                                                                   // debug
         target_vec.push_back(target_pos);                                                                 // debug
         
-        visual_c1c2.FillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_yellow->texture, &c1c2_vec, 1, 20);     // debug
-        visual_rc.FillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_red->texture, &rc_vec, 1, 10);            // debug
-        visual_k1k2.FillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_green->texture, &k1k2_vec, 1, 20);      // debug   
-        visual_k.FillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_red->texture, &k_vec, 1, 10);              // debug  
-        visual_target.FillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_red->texture, &target_vec, 1, 10);    // debug
+        visual_c1c2.FillData(g_GUI_TEXTUREOB_COLLECTOR.dot_yellow->texture, &c1c2_vec, 1, 20);     // debug
+        visual_rc.FillData(g_GUI_TEXTUREOB_COLLECTOR.dot_red->texture, &rc_vec, 1, 10);            // debug
+        visual_k1k2.FillData(g_GUI_TEXTUREOB_COLLECTOR.dot_green->texture, &k1k2_vec, 1, 20);      // debug   
+        visual_k.FillData(g_GUI_TEXTUREOB_COLLECTOR.dot_red->texture, &k_vec, 1, 10);              // debug  
+        visual_target.FillData(g_GUI_TEXTUREOB_COLLECTOR.dot_red->texture, &target_vec, 1, 10);    // debug
                 
                 
 

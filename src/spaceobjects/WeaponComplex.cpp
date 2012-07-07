@@ -256,7 +256,7 @@ void WeaponComplex::RenderWeaponsRange()
         	{
          		if (slot_weapon_reloaded_vec[i]->GetTurrel()->GetSelectedStatus() == true)
                 	{
-                		slot_weapon_reloaded_vec[i]->UpdateRange(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_red);
+                		slot_weapon_reloaded_vec[i]->UpdateRange(g_GUI_TEXTUREOB_COLLECTOR.dot_red);
              			slot_weapon_reloaded_vec[i]->DrawRange();
              		}
 

@@ -34,8 +34,22 @@ StateMachine::~StateMachine()
 		
 void StateMachine::UpdateInStatic()
 {
-	if (macrotask_manager->GetScenario() != NULL) { macrotask_manager->GetScenario()->UpdateInStatic(npc_owner); }
-	if (microtask_manager->GetScenario() != NULL) { microtask_manager->GetScenario()->UpdateInStatic(npc_owner); }
+	if (macrotask_manager->GetScenario() != NULL) 
+	{ 
+		macrotask_manager->GetScenario()->UpdateInStatic(npc_owner); 
+	}
+	if (microtask_manager->GetScenario() != NULL) 
+	{
+		if (microtask_manager->GetScenario()->Validate(npc_owner) == true)
+		{
+			microtask_manager->GetScenario()->UpdateInStatic(npc_owner); 
+		}
+		else
+		{
+			microtask_manager->GetScenario()->Exit(npc_owner);
+			microtask_manager->DeleteMicroTaskAndReset();
+		}
+	}
 }
 
 void StateMachine::UpdateInDynamic()

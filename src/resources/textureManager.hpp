@@ -22,23 +22,35 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "../resources/textureOb.hpp"
 
-struct UniqueTextureCollector
+struct GuiTextureObCollector
 {
-	TextureOb* texOb_mark_enemy_ss;	
-	TextureOb* texOb_mark_player_ss;
+	TextureOb* starsystem_mark_enemy;	
+	TextureOb* starsystem_mark_player;
 	
-	TextureOb* texOb_icon_minus;
-	TextureOb* texOb_icon_plus;
-	TextureOb* texOb_skill;	
+	TextureOb* icon_minus;
+	TextureOb* icon_plus;
+	TextureOb* skill;	
+	TextureOb* skill_transparent;	
+	
+	TextureOb* icon_map;
+        TextureOb* grapple_trail;	
 
-	TextureOb* texOb_icon_map;
-        TextureOb* texOb_grapple_trail;	
+        TextureOb* dot_blue;
+        TextureOb* dot_red;
+        TextureOb* dot_green;
+        TextureOb* dot_black;
+        TextureOb* dot_yellow;
+        
+        TextureOb* bar_inspace_bottom;
+        TextureOb* bar_inspace_left;
+        TextureOb* bar_inspace_top;
+        TextureOb* bar_inspace_right;        
+        
+        TextureOb* text_background;
 
-        TextureOb* texOb_dot_blue;
-        TextureOb* texOb_dot_red;
-        TextureOb* texOb_dot_green;
-        TextureOb* texOb_dot_black;
-        TextureOb* texOb_dot_yellow;
+        TextureOb* slot_mark_accept;
+        TextureOb* slot_mark_reject;
+
 };
 
 class TextureManager
@@ -164,9 +176,7 @@ class TextureManager
        		std::vector<TextureOb*> face_race4_texOb_vec;
         	std::vector<TextureOb*> face_race6_texOb_vec;
         	std::vector<TextureOb*> face_race7_texOb_vec;
-        	
-        	std::vector<TextureOb*> textBackground_texOb_vec;
-        	
+       	
         	TextureOb* GetRandomTextureObFromList(std::vector<TextureOb*>*);
        		TextureOb* getShipTexObByClosestSizeFromList(std::vector<TextureOb*>*, int);
         	TextureOb* getShipTexObBySizeFromList(std::vector<TextureOb*>*, int);

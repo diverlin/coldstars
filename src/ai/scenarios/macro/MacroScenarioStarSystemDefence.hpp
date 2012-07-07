@@ -26,8 +26,10 @@ class MacroScenarioStarSystemDefence : public BaseScenario
 		MacroScenarioStarSystemDefence();
 		virtual ~MacroScenarioStarSystemDefence();
 		
+		virtual void Enter(Npc*) const;
 		virtual void UpdateInStatic(Npc*) const;	
-		virtual std::string GetDescription(Npc*) const;	
+		virtual std::string GetDescription(Npc*) const;
+		virtual void Exit(Npc*) const;	
 }; 
 
 

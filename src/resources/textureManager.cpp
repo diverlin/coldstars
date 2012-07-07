@@ -162,7 +162,6 @@ void TextureManager::Add(TextureOb* texOb)
 		case TEXTURE::BOMB_ID:      { bomb_texOb_vec.push_back(texOb);      break; }
 
     		case TEXTURE::BLACKHOLE_ID: { blackhole_texOb_vec.push_back(texOb); break; }
-       		case TEXTURE::TEXT_BACKGROUND_ID: { textBackground_texOb_vec.push_back(texOb); break; } 
 
 		// LAND
     		case TEXTURE::LAND_BACKGROUND_ID: { landBg_texOb_vec.push_back(texOb); break; }
@@ -488,8 +487,6 @@ TextureOb* TextureManager::GetRandomTextureOb(int texture_type_id)
 		case TEXTURE::STORE_BACKGROUND_ID:         { return GetRandomTextureObFromList(&storeBg_texOb_vec);              break; }	
 		case TEXTURE::SHOP_BACKGROUND_ID:          { return GetRandomTextureObFromList(&shopBg_texOb_vec);               break; }	
 		case TEXTURE::GOVERMENT_BACKGROUND_ID:     { return GetRandomTextureObFromList(&govermentBg_texOb_vec);          break; }	
-
-		case TEXTURE::TEXT_BACKGROUND_ID:  { return GetRandomTextureObFromList(&textBackground_texOb_vec);       break; }			
 
 		case TEXTURE::SHIELD_EFFECT_ID:    { return GetRandomTextureObFromList(&shieldEffect_texOb_vec);         break; }	
 		case TEXTURE::NEBULA_BACKGROUND_ID:           { return GetRandomTextureObFromList(&nebulaBgEffect_texOb_vec);       break; }

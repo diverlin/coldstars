@@ -18,10 +18,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-MicroTask::MicroTask(BaseGameEntity* target, int action_id, int reward, int expiriance)
+MicroTask::MicroTask(BaseGameEntity* target, int scenario_type_id, int reward, int expiriance)
 {
 	this->target = target;
-	this->action_id = action_id;
+	this->scenario_type_id = scenario_type_id;
 		
 	this->reward = reward;
 	this->expiriance = expiriance;

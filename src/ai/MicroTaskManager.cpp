@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 MicroTaskManager::MicroTaskManager()
 {
-	microtask = NULL;
+	microtask = new MicroTask(NULL, NONE_ID);
 	scenario = NULL;
 }
 
@@ -38,6 +38,6 @@ void MicroTaskManager::SetMicroTask(MicroTask* microtask)
 void MicroTaskManager::DeleteMicroTaskAndReset()
 {
 	delete microtask;
-	microtask = NULL;
+	microtask = new MicroTask(NULL, NONE_ID);;
 	scenario  = NULL;
 }	

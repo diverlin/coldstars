@@ -305,11 +305,42 @@ void UserInput::GetSimpleInputs(Player* player)
 	             			}
 	                 	      	break;
 				}
-				
-				case sf::Key::F5:
+
+				case sf::Key::F5: // save event
 				{		
 					save = true;			
 					break;
+				}
+				
+	           		case sf::Key::F6: // slow down GAME SPEED 
+	                	{
+	              			if (Config::Instance().GAMESPEED > 1)
+	              			{
+	                			Config::Instance().GAMESPEED--;
+	             			}
+	             			break;
+				}
+
+	           		case sf::Key::F7: // speed up GAME SPEED 
+	                	{
+	              			if (Config::Instance().GAMESPEED < 10)
+	              			{
+	                			Config::Instance().GAMESPEED++;
+	             			}	             			
+	             			break;
+				}
+				
+	           		case sf::Key::F8: // AutoTurn
+	                	{
+	              			if (Config::Instance().AUTOTURN_MODE == false)
+	              			{
+	                			Config::Instance().AUTOTURN_MODE = true;
+	             			}
+	              			else
+	              			{
+	                			Config::Instance().AUTOTURN_MODE = false;
+	             			}
+	                 	      	break;
 				}
 				
 				case sf::Key::F9:

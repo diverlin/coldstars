@@ -22,20 +22,5 @@ BaseScenario::BaseScenario()
 	type_id = NONE_ID;
 }
 
-BaseScenario::~BaseScenario() 
-{}
 
-void BaseScenario::Enter(Npc*) const
-{}
 
-void BaseScenario::UpdateInStatic(Npc*) const 
-{}
-
-void BaseScenario::UpdateInDynamic(Npc*) const
-{}
-
-void BaseScenario::Exit(Npc*) const 
-{}
-
-std::string BaseScenario::GetDescription(Npc*) const
-{}

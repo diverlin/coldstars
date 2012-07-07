@@ -26,6 +26,8 @@ class MicroScenarioDestroy : public BaseScenario
 		MicroScenarioDestroy();
 		virtual ~MicroScenarioDestroy();
 		
+		virtual bool Validate(Npc*) const;
+				
 		virtual void Enter(Npc*) const;
 		virtual void UpdateInStatic(Npc*) const;
 		virtual void UpdateInDynamic(Npc*) const;	

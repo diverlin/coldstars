@@ -46,9 +46,7 @@ void Screen::InitPostEffects(int width, int height)
 void Screen::DrawFps()
 {
 	float fps = 1.f / render_window.GetFrameTime();
-      	sf::String _str(std::string(	"FPS:" + 
-                                  	boost::lexical_cast<std::string>( (int)fps) ),
-                                  	font, 14);
+      	sf::String _str(std::string("FPS:" + boost::lexical_cast<std::string>( (int)fps) +" / GAMESPEED: x" + boost::lexical_cast<std::string>( Config::Instance().GAMESPEED) ), font, 14);
       	_str.SetColor(sf::Color(255, 255, 255));
       	_str.SetPosition(100, 15);
       	render_window.Draw(_str);

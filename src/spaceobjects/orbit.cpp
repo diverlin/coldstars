@@ -82,7 +82,7 @@ void Orbit::UpdatePosition()
 
 void Orbit::UpdateVisual()
 {
-	orbit_visual.FillData(g_UNIQUE_TEXTURE_COLLECTOR.texOb_dot_blue->texture, &coords_vec, 50, 10);
+	orbit_visual.FillData(g_GUI_TEXTUREOB_COLLECTOR.dot_blue->texture, &coords_vec, 50, 10);
 }
 
 void Orbit::Draw()
