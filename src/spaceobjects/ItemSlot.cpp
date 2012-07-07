@@ -117,14 +117,14 @@ void ItemSlot::UpdateOwnerAbilities()
 	}
 }
 
-void ItemSlot::Render(GLuint flash_tex)
+void ItemSlot::Render(TextureOb* textureOb_mark)
 {
        	drawTexturedRect(textureOb, rect, -1.5);
-
-	//if self.flash == True:
-		//drawTexturedRect(flash_tex, self.rect, -1.0)
-                
-        RenderEquipedItem();     
+        
+        if (textureOb_mark != NULL)
+	{
+		drawTexturedRect(textureOb_mark, rect, -1.0);
+        }            
 }
               
 int ItemSlot::GetItemRadius() const
@@ -154,14 +154,6 @@ int ItemSlot::GetItemRadius() const
         return 0;
 }
 
-
-void ItemSlot::RenderEquipedItem()
-{
-        if (is_EQUIPED == true)
-        {
-                item->Render(rect);
-        }
-}
 
 void ItemSlot::RenderItemInfo(float offset_x, float offset_y)
 {

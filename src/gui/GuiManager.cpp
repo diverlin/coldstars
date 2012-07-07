@@ -79,7 +79,10 @@ void GuiManager::RenderScanVehicle(Vehicle* vehicle, int mxvp, int myvp) const
 		gui_skill->Render(vehicle->GetOwnerNpc()->GetSkill());
 	}
 		
-	player->GetCursor()->GetItemSlot()->RenderEquipedItem();		
+	if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == true)
+	{
+		player->GetCursor()->GetItemSlot()->GetItem()->Render(player->GetCursor()->GetItemSlot()->GetRect());		
+	}
 	
 	if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == false)
 	{
@@ -213,14 +216,17 @@ void GuiManager::RunSession()
 						gui_vehicle->RenderVehicle(vehicle);
 						gui_store->RenderSlots(store);
 		
-						player->GetCursor()->GetItemSlot()->RenderEquipedItem();	
-
-						gui_store->RenderFocusedItemInfo(store, mxvp, myvp);	
-						if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == false)
+						if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == true)
+						{
+							player->GetCursor()->GetItemSlot()->GetItem()->Render(player->GetCursor()->GetItemSlot()->GetRect());		
+						}	
+						else
 						{
 							gui_vehicle->RenderFocusedItemInfo(vehicle, mxvp, myvp);
 						}
 
+						gui_store->RenderFocusedItemInfo(store, mxvp, myvp);
+						
 			        		gui_kosmoport->RenderButtons(); 
                 				gui_kosmoport->RenderFocusedButtonInfo(mxvp, myvp); 
 					disable_BLEND();

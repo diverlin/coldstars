@@ -64,16 +64,16 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 } 
 
 /* virtual */
-void BaseEquipment::Render(Rect slot_rect)
+void BaseEquipment::Render(const Rect& rect)
 {
-    	drawTexturedRect(textureOb, slot_rect, -1.0);
+    	drawTexturedRect(textureOb, rect, -1.0);
     	//if ((subtype == ROCKET_ID) or (subtype == TORPED_ID))
         	//drawSimpleText((slot_rect[0], slot_rect[1] + self.h/2), str(self.ammo_max) + '/' + str(self.ammo))
     
     	for (unsigned int i = 0; i < modules_vec.size(); i++)
     	{
-        	Rect module_rect(	slot_rect.GetBottomLeft().x + (1.1 * GUI::INSERTED_MODULE_SIZE) * (i), 
-        		          	slot_rect.GetBottomLeft().y + (1.1 * GUI::INSERTED_MODULE_SIZE),
+        	Rect module_rect(	rect.GetBottomLeft().x + (1.1 * GUI::INSERTED_MODULE_SIZE) * (i), 
+        		          	rect.GetBottomLeft().y + (1.1 * GUI::INSERTED_MODULE_SIZE),
         			  	GUI::INSERTED_MODULE_SIZE, 
         			  	GUI::INSERTED_MODULE_SIZE);
         	drawTexturedRect(modules_vec[i]->GetTextureOb(), module_rect, -1);

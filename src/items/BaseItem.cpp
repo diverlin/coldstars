@@ -73,16 +73,16 @@ void BaseItem::UpdateInfo()
     	AddCommonInfo();
 }
 
-void BaseItem::RenderInfo(Rect slot_rect, float offset_x, float offset_y)
+void BaseItem::RenderInfo(const Rect& rect, float offset_x, float offset_y)
 {  
 	UpdateInfo();
-     	drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.GetCenter().x - offset_x, slot_rect.GetCenter().y - offset_y);
+     	drawInfoIn2Column(&info.title_list, &info.value_list, rect.GetCenter().x - offset_x, rect.GetCenter().y - offset_y);
 }
 
 /* virtual */
-void BaseItem::Render(Rect slot_rect)
+void BaseItem::Render(const Rect& rect)
 {
-    	drawTexturedRect(textureOb, slot_rect, -1.0);
+    	drawTexturedRect(textureOb, rect, -1.0);
 }
 
 void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, const std::string& root) const

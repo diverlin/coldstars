@@ -77,19 +77,23 @@ void GuiVehicle::RenderVehicle(Vehicle* vehicle) const
 		glTranslatef(offset.x, offset.y, 0);
 		drawTexturedRect(vehicle->textureOb_gui, vehicle->kontur_rect, -1.0);
 
-		for(unsigned int i = 0; i < vehicle->slot_total_vec.size(); i++)
+		for(unsigned int i=0; i<vehicle->slot_total_vec.size(); i++)
 		{
-			vehicle->slot_total_vec[i]->Render(-1);
+			vehicle->slot_total_vec[i]->Render();
+			if (vehicle->slot_total_vec[i]->GetEquipedStatus() == true)
+                	{
+                		vehicle->slot_total_vec[i]->GetItem()->Render(vehicle->slot_total_vec[i]->GetRect());	
+                	}
 		}
 	
-		vehicle->GetGateSlot()->Render(-1);
+		vehicle->GetGateSlot()->Render();
 	glPopMatrix();
 }
 
 
 void GuiVehicle::RenderFocusedItemInfo(Vehicle* vehicle, int mxvp, int myvp) const
 {
-	for(unsigned int i = 0; i < vehicle->slot_total_vec.size(); i++)
+	for(unsigned int i=0; i<vehicle->slot_total_vec.size(); i++)
 	{ 
 		if (vehicle->slot_total_vec[i]->CheckInteraction(mxvp - offset.x, myvp - offset.y) == true)
 		{  

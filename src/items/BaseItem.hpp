@@ -59,8 +59,8 @@ class BaseItem : public Base
                 
 		void UpdateInfo();
 			
-      		virtual void Render(Rect);
-      		void RenderInfo(Rect, float, float); 
+      		virtual void Render(const Rect&);
+      		void RenderInfo(const Rect&, float, float); 
 
 	protected:
      		TextureOb* textureOb;
