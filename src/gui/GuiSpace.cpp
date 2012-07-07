@@ -35,12 +35,7 @@ GuiSpace::GuiSpace(Player* player)
 
 
 GuiSpace::~GuiSpace()
-{
-	for (unsigned int i=0; i<button_vec.size(); i++)
-	{
-		delete button_vec[i];
-	}
-}
+{}
 
 void GuiSpace::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb)
 {
@@ -71,25 +66,6 @@ void GuiSpace::RenderBar() const
 	drawTexturedRect(g_GUI_TEXTUREOB_COLLECTOR.bar_bottom, rect2, -1.5);
 }
 
-void GuiSpace::RenderButtons() const
-{
-	for (unsigned int i = 0; i < button_vec.size(); i++)
-	{ 
-		button_vec[i]->Render();
-	}
-}
-
-void GuiSpace::RenderFocusedButtonInfo(int mxvp, int myvp) const
-{
-	for (unsigned int i=0; i<button_vec.size(); i++)
-	{
-		if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
-		{
-			button_vec[i]->RenderInfo();
-			break;
-		}
-	}       
-}
 
 void GuiSpace::RenderText(const vec2f& scroll_coords) const
 {

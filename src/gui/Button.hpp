@@ -39,15 +39,21 @@ class Button
        		int GetSubTypeId() const { return subtype_id; };
        		       
        		bool CheckInteraction(int, int);
+       		void StartPressAnimation() { alpha = 0.4f; };
+       		void LockOn() { lock = true; alpha = 0.2f; };
+       		void LockOff() { lock = false; };
+       		void Update();
 
        		void SetCenter(int, int);
 
        		void Render() const;    
-       		void RenderInfo() const;
+       		void RenderInfo(int offset_x = 0, int offset_y = 0) const;
         
         private:
         	int type_id;
         	int subtype_id;
+        	bool lock;
+        	float alpha;
         	
                	TextureOb* textureOb;
        		Rect rect;

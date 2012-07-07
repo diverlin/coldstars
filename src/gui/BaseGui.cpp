@@ -18,25 +18,40 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-#ifndef GUIANGAR_H
-#define GUIANGAR_H
+BaseGui::BaseGui()
+{}
 
 
-class GuiAngar : public BaseGui
+BaseGui::~BaseGui()
 {
-    	public:
-       		GuiAngar(Player*);
-       		~GuiAngar();
-		
-       		bool UpdateMouseInteraction(Angar*, int, int, int, int);
-       		
-       		void RenderVehicleSlots(Angar*) const;
-                void RenderFocusedItemInfo(Angar*, int, int) const;             
-       	
-       	private:
-       		bool UpdateMouseButtonsInteraction(int, int, int, int);                
-       		bool UpdateMouseVehicleSlotsInteraction(Angar*, int, int, int, int);
-};
+	for (unsigned int i=0; i<button_vec.size(); i++)
+	{
+		delete button_vec[i];
+	}
+}	
+      		
+void BaseGui::RenderButtons() const
+{
+	glPushMatrix();
+	{
+		glTranslatef(offset.x, offset.y, 0);
+		for (unsigned int i=0; i<button_vec.size(); i++)
+		{
+			button_vec[i]->Render();
+       		}
+       	}
+       	glPopMatrix();
+}
 
+void BaseGui::RenderFocusedButtonInfo(int mxvp, int myvp) const
+{
+	for (unsigned int i=0; i<button_vec.size(); i++)
+	{		
+                if (button_vec[i]->CheckInteraction(mxvp - offset.x, myvp - offset.y) == true)
+                {
+        		button_vec[i]->RenderInfo(offset.x, offset.y);
+        		return; break;
+        	}
+        }
+}
 
-#endif 

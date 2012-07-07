@@ -262,6 +262,7 @@ class ScenarioCollector;
 //   
 #include "src/pilots/Observation.hpp" 
 
+#include "src/gui/BaseGui.hpp"
 #include "src/gui/Button.hpp"
 #include "src/gui/GuiSpace.hpp"
 #include "src/gui/GuiAngar.hpp"
@@ -362,6 +363,7 @@ class ScenarioCollector;
 
 #include "src/docking/NatureLand.cpp"
 
+#include "src/gui/BaseGui.cpp"
 #include "src/gui/Button.cpp"
 #include "src/gui/GuiSpace.cpp"
 #include "src/gui/GuiAngar.cpp"

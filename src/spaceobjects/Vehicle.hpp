@@ -74,6 +74,9 @@ class Vehicle : public BaseGameEntity
 
                 float GetVisionRadius() const { return propetries.radius; };
                 
+                bool IsArmorFull() const;
+                bool IsFuelFull() const;
+                
                 WeaponComplex* GetWeaponComplex()         const { return weapon_complex; };
                 DriveComplex* GetDriveComplex()           const { return drive_complex; };
                 ProtectionComplex* GetProtectionComplex() const { return protection_complex; };

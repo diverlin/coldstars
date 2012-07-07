@@ -70,7 +70,7 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(int mxvp, int myvp, int l
 	return interaction;
 }
 
-void GuiManager::RenderScanVehicle(Vehicle* vehicle, int mxvp, int myvp) const
+void GuiManager::RenderScanVehicle(Vehicle* vehicle, int mxvp, int myvp, bool show_skill) const
 {		
 	if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == true)
 	{
@@ -82,9 +82,11 @@ void GuiManager::RenderScanVehicle(Vehicle* vehicle, int mxvp, int myvp) const
 		gui_vehicle->RenderVehicle(vehicle, mxvp, myvp, NONE_ID);
 	}
 					
-	if (vehicle->GetOwnerNpc() != NULL)
+	if ( (show_skill == true) and (vehicle->GetOwnerNpc() != NULL) )
 	{
-		gui_skill->Render(vehicle->GetOwnerNpc()->GetSkill());
+		gui_skill->RenderButtons();
+		gui_skill->RenderSkills(vehicle->GetOwnerNpc()->GetSkill());
+		gui_skill->RenderFocusedButtonInfo(mxvp, myvp);
 	}   					                 
 
 	if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == false)
@@ -176,7 +178,7 @@ void GuiManager::RunSession()
         				resetRenderTransformation();
         				angar->RenderBackground(screen_rect);
                				enable_BLEND();   
-			        		gui_angar->RenderInternal(angar);
+			        		gui_angar->RenderVehicleSlots(angar);
 			        		
 						if (scan_vehicle != NULL) 	
 						{ 
@@ -224,7 +226,8 @@ void GuiManager::RunSession()
 					enable_BLEND();
 						gui_store->RenderSlots(store);
 		
-						RenderScanVehicle(vehicle, mxvp, myvp);
+						bool show_skill = false;
+						RenderScanVehicle(vehicle, mxvp, myvp, show_skill);
 
 						gui_store->RenderFocusedItemInfo(store, mxvp, myvp);
 						

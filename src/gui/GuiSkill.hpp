@@ -20,28 +20,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef GUISKILL_H
 #define GUISKILL_H
 
-class GuiSkill
+class GuiSkill : public BaseGui
 {
    	public:
       		GuiSkill(Player*);
       		~GuiSkill();
-  		
-  		void SetOffset(const vec2i& offset) { this->offset = offset; };
   				
      		bool UpdateMouseInteraction(int, int, int, int, Skill*);
-      		void Render(Skill*) const;
+      		void RenderSkills(Skill*) const;
 
       	private:     		
-      		std::vector<Button*> button_vec;
-
-		Player* player;
 		TextureOb* textureOb_skill;
 		TextureOb* textureOb_skill_transparent;
 		
 		Rect background_rect;
 		TextureOb* textureOb_background;
-				
-		vec2i offset;
 };
 
 

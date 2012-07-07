@@ -22,8 +22,8 @@ GuiKosmoport::GuiKosmoport(Player* player)
 {
 	this->player = player;
 	      	
-	int screen_w = Config::Instance().SCREEN_WIDTH;
-	int screen_h = Config::Instance().SCREEN_HEIGHT;
+	int screen_w = Screen::Instance().GetWindow().GetWidth();
+	int screen_h = Screen::Instance().GetWindow().GetHeight();
 	
         TextureOb* texOb_button = g_GUI_TEXTUREOB_COLLECTOR.dot_green; // fake
 
@@ -77,12 +77,7 @@ GuiKosmoport::GuiKosmoport(Player* player)
 
 
 GuiKosmoport::~GuiKosmoport()
-{
-	for (unsigned int i=0; i<button_vec.size(); i++)
-	{
-       		delete button_vec[i];
-        }
-}
+{}
 		
 bool GuiKosmoport::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb)
 {
@@ -91,7 +86,8 @@ bool GuiKosmoport::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb)
        		if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
        		{
        			if (lmb == true)
-       			{	
+       			{
+       			       	button_vec[i]->StartPressAnimation();	
        			   	active_screen_id = button_vec[i]->GetSubTypeId();
        			   	return true;       			   	
        			}
@@ -102,23 +98,4 @@ bool GuiKosmoport::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb)
         return false;
 }
 
-void GuiKosmoport::RenderButtons() const
-{   
-    	for (unsigned int i = 0; i< button_vec.size(); i++)
-	{
-       		button_vec[i]->Render();
-        }    	
-}
-
-void GuiKosmoport::RenderFocusedButtonInfo(int mxvp, int myvp) const
-{
-	for (unsigned int i = 0; i<button_vec.size(); i++)
-	{
-       		if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
-       		{
-        		button_vec[i]->RenderInfo();
-        		return; break;
-        	}
-        } 
-}
                 
