@@ -533,19 +533,7 @@ void Vehicle::UpdateScanAbility()
         }
 }
 
-                
-bool Vehicle::IsArmorFull() const
-{
-	return (data_life.armor == data_korpus.armor);
-}
-
                
-                
-void Vehicle::SetMaxArmor()
-{
-     	data_life.armor = data_korpus.armor;
-}
-
                
 std::string Vehicle::returnProtectionStr()
 {
@@ -661,6 +649,45 @@ bool Vehicle::ExternalRepairEvent()
         
         return false;        
 }
+
+
+
+
+bool Vehicle::IsArmorFull() const
+{
+	if (GetArmorMiss() == 0)
+	{
+		return true;
+	}
+	
+	return false;
+}
+
+int Vehicle::GetArmorMiss() const
+{
+	return (data_korpus.armor - data_life.armor);
+}
+
+void Vehicle::BuyArmorAsMuchAsPossible()
+{
+	int price_for_one = ((Kosmoport*)land)->GetAngar()->GetPriceArmor();
+	int armor_to_buy_max = owner_npc->GetCredits() / price_for_one;
+	int armor_to_buy_need = GetArmorMiss();
+	
+	int armor;
+	if (armor_to_buy_max > armor_to_buy_need )
+	{		
+		armor = armor_to_buy_need;
+	}
+	else
+	{
+		armor = armor_to_buy_max;
+	}
+
+	owner_npc->DecreaseCredits(armor * price_for_one);
+	data_life.armor += armor;
+}
+
 
 
 bool Vehicle::IsFuelFull() const

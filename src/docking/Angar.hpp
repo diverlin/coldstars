@@ -36,7 +36,7 @@ class Angar : public Room
                 int GetFreeVehicleSlotTotalNum() const;
                 
                 int GetPriceFuel() const { return price_fuel; };
-                int GePriceArmor() const { return price_armor; };
+                int GetPriceArmor() const { return price_armor; };
                                 
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);

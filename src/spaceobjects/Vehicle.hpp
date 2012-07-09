@@ -77,9 +77,7 @@ class Vehicle : public BaseGameEntity
                 bool AddItemToOtsec(BaseItem*);
 
                 float GetVisionRadius() const { return propetries.radius; };
-                
-                bool IsArmorFull() const;
-                
+              
                 WeaponComplex* GetWeaponComplex()         const { return weapon_complex; };
                 DriveComplex* GetDriveComplex()           const { return drive_complex; };
                 ProtectionComplex* GetProtectionComplex() const { return protection_complex; };
@@ -125,8 +123,6 @@ class Vehicle : public BaseGameEntity
              		void UpdateGrabAbility();
              		void UpdateScanAbility();
 
-        	void SetMaxArmor();
-
         	void HyperJumpEvent();
         	void DockingEvent();
         	void LaunchingEvent();
@@ -145,6 +141,10 @@ class Vehicle : public BaseGameEntity
         	
         	void RecalculateCollisionRadius();
 
+		bool IsArmorFull() const;
+		int GetArmorMiss() const;
+		void BuyArmorAsMuchAsPossible();
+		
 		bool IsFuelFull() const;
 		int GetFuelMiss() const;
 		void BuyFuelAsMuchAsPossible();
