@@ -142,8 +142,6 @@ class Player : public Base
     		bool MouseInteractionWithPlanets(int, int, bool, bool) const;
     		bool MouseInteractionWithStars(int, int, bool, bool) const;
     		void MouseNavigation(int, int, bool, bool) const;
-    		    		    		    		    		    		    		    		
-    		void UpdateGlobal(); 
     		
     		bool IsObjectOnScreen(const Points&) const;
     		bool IsObjectOnScreen(const vec2f&, float) const;

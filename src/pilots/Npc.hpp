@@ -22,20 +22,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 struct UnresolvedDataUniqueNpc
 {
 	int vehicle_id;	
-	int land_id;
 };
 
-class Npc : public BaseGameEntity
+class Npc : public Base
 {
    	public:
               	Npc(int);              	    
      		virtual ~Npc();    		
      		
      		void SetRaceId(int race_id)			{ this->race_id = race_id; };
-     		void SetModelAi(BaseAiModel* ai_model)	{ this->ai_model = ai_model; };
-		void SetGarbageReady(bool garbage_ready)	{ data_life.garbage_ready = garbage_ready; }
-		void SetAlive(bool alive)			{ data_life.is_alive = alive; }
-		void SetLand(BaseLand* land)			{ this->land = land; };
+     		void SetModelAi(BaseAiModel* ai_model)		{ this->ai_model = ai_model; };
+		void SetAlive(bool is_alive)			{ this->is_alive = is_alive; }
 		void SetScanTarget(Vehicle* vehicle_to_scan)	{ this->vehicle_to_scan = vehicle_to_scan; };
 		void SetUpperControl(bool upper_control)       { this->upper_control = upper_control; };
 
@@ -47,8 +44,9 @@ class Npc : public BaseGameEntity
 		Observation* GetObservation()   	const { return observation; };
 		unsigned long int GetCredits()  	const { return credits; };   
 		StateMachine* GetStateMachine() 	const { return state_machine; };
-		BaseLand* GetLand()             	const { return land; };
 
+		StarSystem* GetStarSystem() { return vehicle->GetStarSystem(); };
+		
    		void BindVehicle(Vehicle*);
 
 		void IncreaseCredits(int);
@@ -71,19 +69,22 @@ class Npc : public BaseGameEntity
     		StarSystem* GetClosestStarSystem(bool);
     		
                 NeedsToDo needsToDo;
-                             
+
+		void RenderInfo(const vec2f&);
+		                   
+                bool BuyArmorAsMuchAsPossible();
+                
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 		
    	private:
+   		bool is_alive;
      		int race_id;
      		unsigned long int credits; 
      		bool upper_control;
 
    	     	StarSystem* failback_starsystem;
-   	     	
-   	     	BaseLand* land;
    	     	     		     		
    	     	Vehicle* vehicle;
    	     	
@@ -93,6 +94,7 @@ class Npc : public BaseGameEntity
      		BaseAiModel* ai_model;
      		StateMachine* state_machine;
    		     	
+   		InfoTable info;
      		 	
      		Vehicle* vehicle_to_scan;
      		
@@ -103,7 +105,7 @@ class Npc : public BaseGameEntity
                 void AsteroidScenario();
                 void CheckNeeds();
                                     		
-     		void UpdateInfo();     	
+		void UpdateInfo();	     	
     		
      		void SaveDataUniqueNpc(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueNpc(const boost::property_tree::ptree&);

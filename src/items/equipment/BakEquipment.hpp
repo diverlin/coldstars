@@ -29,6 +29,8 @@ class BakEquipment : public BaseEquipment
 		
                 void SetFuelMaxOrig(int fuel_max_orig) { this->fuel_max_orig = fuel_max_orig; };
                 void SetFuel(int fuel)                 { this->fuel = fuel; };
+                void IncreaseFuel(int fuel);	
+                int GetFuelMiss() const { return (fuel_max - fuel); };	
                                 
 		int GetFuel() const    { return fuel; };
 		int GetFuelMax() const { return fuel_max; };

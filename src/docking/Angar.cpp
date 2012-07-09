@@ -22,6 +22,9 @@ Angar::Angar(int id)
 	data_id.id = id;
 	data_id.type_id = ENTITY::ANGAR_ID;
 	data_id.subtype_id = NONE_ID;
+	
+	price_fuel = PRICE_FUEL;
+        price_armor = PRICE_ARMOR;
 }
 
 Angar::~Angar()

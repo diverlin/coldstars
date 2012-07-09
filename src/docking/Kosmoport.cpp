@@ -73,11 +73,10 @@ bool Kosmoport::GetPermissionToLand() const
 bool Kosmoport::Add(Vehicle* vehicle)
 {
         angar->AddVehicle(vehicle);        
-        if (vehicle->GetOwnerNpc()) 
-        { 
-        	vehicle->GetOwnerNpc()->SetPlaceTypeId(data_id.type_id); 
-        	vehicle->GetOwnerNpc()->SetLand(this);
-        }
+
+       	vehicle->SetPlaceTypeId(data_id.type_id); 
+       	vehicle->SetLand(this);
+
         return true;
 }
 

@@ -31,6 +31,15 @@ BakEquipment::BakEquipment(int id)
 BakEquipment::~BakEquipment() 
 {}
 		
+void BakEquipment::IncreaseFuel(int fuel)		
+{
+	this->fuel += fuel; 
+        if (this->fuel > fuel_max)
+        { 
+        	this->fuel = fuel_max; // not sure if it's needed
+        }       					
+}	
+                					
 /* virtual */			
 void BakEquipment::UpdatePropetries()
 {

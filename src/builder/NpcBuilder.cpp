@@ -46,14 +46,14 @@ void NpcBuilder::CreateNewNpc(int id)
         	
 void NpcBuilder::CreateNewInternals(int race_id, int subtype_id)
 {    	
-    	LifeData data_life;
+    	//LifeData data_life;
     	
-       	TextureOb* texOb_face  = g_TEXTURE_MANAGER.getRandomFaceTexObWithFolloingAttributes(race_id);
+       	//TextureOb* texOb_face  = g_TEXTURE_MANAGER.getRandomFaceTexObWithFolloingAttributes(race_id);
        	    
        	npc->SetRaceId(race_id);
-        npc->SetTextureOb(texOb_face);
+        //npc->SetTextureOb(texOb_face);
         npc->SetSubTypeId(subtype_id);
-        npc->SetLifeData(data_life);
+        //npc->SetLifeData(data_life);
         
    
         if (( race_id == RACE::R6_ID) or ( race_id == RACE::R7_ID) )

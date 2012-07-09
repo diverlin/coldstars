@@ -47,6 +47,7 @@ struct KorpusData
 struct UnresolvedDataUniqueVehicle
 {
 	int parent_vehicleslot_id;
+	int land_id;
 	std::string textureOb_gui_path; 	
 };
 
@@ -68,14 +69,16 @@ class Vehicle : public BaseGameEntity
         	void SetGuiRect(Rect rect) { kontur_rect = rect; };
         	
         	void SetColor(Color4f color) { this->color = color; }
-        	        	
+        	void SetLand(BaseLand* land) { this->land = land; };
+        	        		
+        	BaseLand* GetLand() const { return land; };
+        	        					
                 void AddItemSlot(ItemSlot*, const Rect&); 
                 bool AddItemToOtsec(BaseItem*);
 
                 float GetVisionRadius() const { return propetries.radius; };
                 
                 bool IsArmorFull() const;
-                bool IsFuelFull() const;
                 
                 WeaponComplex* GetWeaponComplex()         const { return weapon_complex; };
                 DriveComplex* GetDriveComplex()           const { return drive_complex; };
@@ -123,7 +126,6 @@ class Vehicle : public BaseGameEntity
              		void UpdateScanAbility();
 
         	void SetMaxArmor();
-        	void SetMaxFuel();
 
         	void HyperJumpEvent();
         	void DockingEvent();
@@ -142,6 +144,10 @@ class Vehicle : public BaseGameEntity
 
         	
         	void RecalculateCollisionRadius();
+
+		bool IsFuelFull() const;
+		int GetFuelMiss() const;
+		void BuyFuelAsMuchAsPossible();
 
 	protected:
 		virtual void UpdateInfo() = 0;
@@ -176,6 +182,9 @@ class Vehicle : public BaseGameEntity
                 TextureOb* textureOb_gui;
                 //                
                 
+                   	     	
+   	     	BaseLand* land;
+   	     	
                 Color4f color;
                                 
                 VehicleSlot* parent_vehicleslot;

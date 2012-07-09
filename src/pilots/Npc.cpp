@@ -19,6 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 Npc::Npc(int id)
 { 
+	is_alive = true;
 	data_id.id = id;
     	data_id.type_id    = ENTITY::NPC_ID;
     	race_id = NONE_ID;
@@ -26,24 +27,17 @@ Npc::Npc(int id)
     	upper_control = false;
 
     	credits = 1000;   	
-   	
-	place_type_id = NONE_ID; 
 
 
         vehicle    = NULL;
-    	land       = NULL;
-    	starsystem = NULL;
     	
     	vehicle_to_scan = NULL;
     	
     	failback_starsystem = NULL;
     	    		
-	skill = new Skill();
-        
-   		
-        observation = new Observation(this);
-
-        state_machine = new StateMachine(this);   
+	skill 		= new Skill();          		
+        observation 	= new Observation(this);
+        state_machine 	= new StateMachine(this);   
         
         ai_model = NULL;     
 }
@@ -51,10 +45,8 @@ Npc::Npc(int id)
 /* virtual */
 Npc :: ~Npc() 
 {
-        delete skill;
-      
+        delete skill;      
         delete observation;
-
         delete state_machine;        
 }  
 
@@ -174,13 +166,13 @@ void Npc::AsteroidScenario()
 
 Planet* Npc::GetPlanetForDocking()
 {
-     	Planet* _target_planet = starsystem->GetClosestPlanet(vehicle->GetPoints().GetCenter());  // improove
+     	Planet* _target_planet = GetStarSystem()->GetClosestPlanet(vehicle->GetPoints().GetCenter());  // improove
      	return _target_planet;
 }
 
 StarSystem* Npc::GetClosestStarSystem(bool _captured)
 {
-       	observation->FindEchievableStarSystemsInStatic(starsystem->GetGalaxy());
+       	observation->FindEchievableStarSystemsInStatic(GetStarSystem()->GetGalaxy());
         	
        	StarSystem* _target_starsystem = observation->GetClosestStarSystem(_captured);   
 	return _target_starsystem;
@@ -223,8 +215,8 @@ void Npc::UpdateInfo()
 	info.clear();
 
     	info.addTitleStr("NPC");
-    	info.addNameStr("id/ss_id:");           info.addValueStr( int2str(data_id.id) + " / "  + int2str(starsystem->GetId()) );
-    	info.addNameStr("race:");   		info.addValueStr( returnRaceStringByRaceId(textureOb->race_id) ); 
+    	info.addNameStr("id:");           info.addValueStr( int2str(data_id.id)  );
+    	info.addNameStr("race:");   	  info.addValueStr( returnRaceStringByRaceId(race_id) ); 
 
 	if (vehicle->ableTo.GRAB == true)
 	{
@@ -245,43 +237,43 @@ void Npc::UpdateInfo()
     	}
 }
 
+void Npc::RenderInfo(const vec2f& center)
+{ 
+	UpdateInfo();
+     	drawInfoIn2Column(&info.title_list, &info.value_list, center.x, center.y);
+}
+                   
    
 void Npc::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "npc."+int2str(data_id.id)+".";
 	SaveDataUniqueBase(save_ptree, root);
-	SaveDataUniqueBaseGameEntity(save_ptree, root);	
 	SaveDataUniqueNpc(save_ptree, root);	
 }		
 
 void Npc::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
-	LoadDataUniqueBaseGameEntity(load_ptree);
 	LoadDataUniqueNpc(load_ptree);	   
 }        
 
 void Npc::ResolveData()
 {
 	ResolveDataUniqueBase();
-	ResolveDataUniqueBaseGameEntity();	
 	ResolveDataUniqueNpc();	
 }
   
 void Npc::SaveDataUniqueNpc(boost::property_tree::ptree& save_ptree, const std::string& root) const	
 {
+	save_ptree.put(root+"is_alive", is_alive);
         save_ptree.put(root+"unresolved.vehicle_id", vehicle->GetId());
-        if (land) save_ptree.put(root+"unresolved.land_id", land->GetId());
-	else save_ptree.put(root+"unresolved.land_id", NONE_ID);
-	
 	skill->SaveData(save_ptree, root);
-	
 }
 
 void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
 {
+	is_alive   = load_ptree.get<bool>("is_alive");
 	data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresolved.vehicle_id");
-	data_unresolved_npc.land_id = load_ptree.get<int>("unresolved.land_id");
 
 	skill->LoadData(load_ptree.get_child("skill"));
 }
@@ -289,11 +281,6 @@ void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
 void Npc::ResolveDataUniqueNpc()
 {
         BindVehicle( (Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_npc.vehicle_id) );
-        SetStarSystem( (StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id) );        
-        if (data_unresolved_npc.land_id != NONE_ID) 
-        { 
-        	SetLand( (BaseLand*)EntityManager::Instance().GetEntityById(data_unresolved_npc.land_id) ); 
-        }	
 
 	skill->ResolveData();
 }		

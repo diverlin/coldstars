@@ -39,10 +39,10 @@ bool NatureLand::Add(Vehicle* vehicle)
 /* virtual */
 bool NatureLand::Add(Npc* npc)
 {
-        npc->SetPlaceTypeId(ENTITY::LAND_ID);        
+        //npc->SetPlaceTypeId(ENTITY::LAND_ID);        
         //NPC_vec.push_back(npc);
 
-        npc->SetLand(this);
+        //npc->SetLand(this);
  
         return true;
 }
