@@ -35,12 +35,18 @@ class Angar : public Room
 
                 int GetFreeVehicleSlotTotalNum() const;
                 
+                int GetPriceFuel() const { return price_fuel; };
+                int GePriceArmor() const { return price_armor; };
+                                
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 		
         private:               
                 std::vector<VehicleSlot*> vehicleslot_vec;
+                
+                int price_fuel;
+                int price_armor;
                 
                 void SaveDataUniqueAngar(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueAngar(const boost::property_tree::ptree&);

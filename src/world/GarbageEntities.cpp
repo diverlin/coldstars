@@ -24,7 +24,7 @@ GarbageEntities :: ~GarbageEntities()
 {}
          
          
-void GarbageEntities::Add(BaseGameEntity* entitiy) 
+void GarbageEntities::Add(Base* entitiy) 
 {
 	entities_vec.push_back(entitiy);
 }

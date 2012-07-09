@@ -105,7 +105,7 @@ void GuiManager::RunSession()
      			
      	player->GetCursor()->Update(mxvp, myvp); 
      								
-	switch(player->GetNpc()->GetPlaceTypeId())
+	switch(player->GetNpc()->GetVehicle()->GetPlaceTypeId())
 	{
 		case ENTITY::SPACE_ID:
 		{
@@ -159,7 +159,7 @@ void GuiManager::RunSession()
         				gui_vehicle->SetOffset(GUI_VEHICLE_INANGAR_OFFSET);
         				gui_skill->SetOffset(GUI_SKILL_INANGAR_OFFSET);
         				        						
-        				Angar* angar = ((Kosmoport*)player->GetNpc()->GetLand())->GetAngar();
+        				Angar* angar = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetAngar();
 					Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget();
 
 					//update  
@@ -208,7 +208,7 @@ void GuiManager::RunSession()
         					player->GetNpc()->SetScanTarget(player->GetNpc()->GetVehicle());
         				}
                                     
-                                        Store* store = ((Kosmoport*)player->GetNpc()->GetLand())->GetStore();
+                                        Store* store = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetStore();
         				Vehicle* vehicle = player->GetNpc()->GetScanTarget();        				
 		
 					//update
@@ -242,7 +242,7 @@ void GuiManager::RunSession()
 
         			case GUI::SCREEN::SHOP_ID:
         			{
-        				Shop* shop = ((Kosmoport*)player->GetNpc()->GetLand())->GetShop();
+        				Shop* shop = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetShop();
         				
         				//update        					
          	        		if (gui_kosmoport->UpdateMouseInteraction(mxvp, myvp, lmb, rmb) == false)
@@ -289,7 +289,7 @@ void GuiManager::RunSession()
 
          			case GUI::SCREEN::GOVERMENT_ID:
          			{
-         				Goverment* goverment = ((Kosmoport*)player->GetNpc()->GetLand())->GetGoverment();
+         				Goverment* goverment = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetGoverment();
          				
          				//update
          				if (gui_kosmoport->UpdateMouseInteraction(mxvp, myvp, lmb, rmb) == false)

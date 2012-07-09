@@ -91,13 +91,6 @@ Player::~Player()
 	delete GUI_MANAGER;
 }  
             
-void Player::UpdateGlobal()
-{
-	if (npc->GetAlive() == true)
-	{       	
-		//npc->GetVehicle()->GetWeaponComplex()->weapon_selector = weapon_selector;
-	}
-}  
                			
 void Player::BindNpc(Npc* npc)
 {
@@ -548,10 +541,7 @@ void Player::MouseInteractionInSpace() // all large objects must be cheked by la
     	bool mlb = cursor->GetMouseLeftButton();
     	bool mrb = cursor->GetMouseRightButton();
 
-	if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
-	{
-    		npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);                   				       
-        }
+	npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);                   				       
 	
 	/* NOTE: the intersection must be checked in order from small objects to huge */	
     	if (MouseInteractionWithRockets(mxvp, myvp, mlb, mrb)) { return; }
@@ -576,20 +566,17 @@ bool Player::MouseInteractionWithRockets(int mxvp, int myvp, bool mlb, bool mrb)
             	{ 
             		cursor->SetFocusedSpaceObject(visible_ROCKET_vec[i]);
                
-			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
-			{
-                		if (mlb == true)
-                		{
-                			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
-                			{
-                   				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
-                   				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_ROCKET_vec[i]);
-                   			}
-                   			else
-                   			{
-                   				npc->GetVehicle()->GetDriveComplex()->SetTarget(visible_ROCKET_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
-                   			}
-				}
+               		if (mlb == true)
+               		{
+               			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
+               			{
+               				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
+               				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_ROCKET_vec[i]);
+               			}
+               			else
+               			{
+               				npc->GetVehicle()->GetDriveComplex()->SetTarget(visible_ROCKET_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
+               			}
 			}
 				
                 	return true; 
@@ -608,26 +595,24 @@ bool Player::MouseInteractionWithContainers(int mxvp, int myvp, bool mlb, bool m
             	{   
 			cursor->SetFocusedSpaceObject(visible_CONTAINER_vec[i]);
 			            		
-			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
-			{
-               			if (mlb == true)
-               			{
-                			npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);                   					    
-                			npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_CONTAINER_vec[i]);
-               			}
-               			if (mrb == true)
-	       			{
-	       				if (npc->GetVehicle()->ableTo.GRAB == true)
-	       				{
-	       					npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(visible_CONTAINER_vec[i]);
-	       					npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets();
-	       					printf("CONTAINER with id = %i HAS BEEN MARKED\n", visible_CONTAINER_vec[i]->GetId());	       						
-	       				}
-	       			}
- 			}
+      			if (mlb == true)
+       			{
+              			npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);                   					    
+               			npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_CONTAINER_vec[i]);
+      			}
+       			if (mrb == true)
+   			{
+      				if (npc->GetVehicle()->ableTo.GRAB == true)
+      				{
+       					npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(visible_CONTAINER_vec[i]);
+       					npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets();
+       					printf("CONTAINER with id = %i HAS BEEN MARKED\n", visible_CONTAINER_vec[i]->GetId());	       						
+       				}
+       			}
+
  					
-               		return true; 
-            	}
+       			return true; 
+          	}
         	
     	}
     	
@@ -643,43 +628,40 @@ bool Player::MouseInteractionWithSatellites(int mxvp, int myvp, bool mlb, bool m
             	{ 
             	       	cursor->SetFocusedSpaceObject(visible_SATELLITE_vec[i]);
                 
-			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
-			{
-                		if (mlb == true)
-                		{
-                			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
-                			{
-                   				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
-                   				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_SATELLITE_vec[i]);
-                   			}
-                   			else
-                   			{
-                   				npc->GetVehicle()->GetDriveComplex()->SetTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);   // make it like a ai scenario (follow obj)
-                   			}
-				}
-
-                		if (mrb == true)
-                		{
-                			if (GetShowGrappleRange() == true)
-                			{
-	       					//if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
-	       					//{
-	       						//pPLAYER->GetVehicle()->grapple_slot.GetGrappleEquipment()->add(visible_SATELLITE_vec[i]);
-	       						//pPLAYER->GetVehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();	       						
-	       					//}
-                   			}
-                   			else
-                   			{
-                   			        if ( npc->CheckPossibilityToScan(visible_SATELLITE_vec[i]) == true )
-                   				{
-                        				npc->SetScanTarget(visible_SATELLITE_vec[i]);
-                   				}
-
-	       				}
-	       			}
+               		if (mlb == true)
+               		{
+               			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
+               			{
+               				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
+               				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_SATELLITE_vec[i]);
+              			}
+              			else
+               			{
+               				npc->GetVehicle()->GetDriveComplex()->SetTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);   // make it like a ai scenario (follow obj)
+               			}
 			}
-				
-                	return true; 
+
+               		if (mrb == true)
+               		{
+               			if (GetShowGrappleRange() == true)
+               			{
+       					//if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
+       					//{
+       						//pPLAYER->GetVehicle()->grapple_slot.GetGrappleEquipment()->add(visible_SATELLITE_vec[i]);
+       						//pPLAYER->GetVehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();	       						
+       					//}
+               			}
+               			else
+               			{
+               			        if ( npc->CheckPossibilityToScan(visible_SATELLITE_vec[i]) == true )
+               				{
+                      				npc->SetScanTarget(visible_SATELLITE_vec[i]);
+               				}
+
+      				}
+       			}
+						
+               		return true; 
             	}
         }
     	
@@ -695,22 +677,21 @@ bool Player::MouseInteractionWithAsteroids(int mxvp, int myvp, bool mlb, bool mr
        		{   
                         cursor->SetFocusedSpaceObject(visible_ASTEROID_vec[i]);        
                         //visible_ASTEROID_vec[i]->GetOrbit()->Draw();
-
-			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
+			
+			
+                	if (mlb == true)
 			{
-                		if (mlb == true)
-				{
-                		        if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
-                			{
-                   				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
-                   				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_ASTEROID_vec[i]);
-                   			}
-                   			else
-                   			{
-                   				npc->GetVehicle()->GetDriveComplex()->SetTarget(visible_ASTEROID_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
-                   			}
+                	        if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
+                		{
+                   			npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
+                   			npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_ASTEROID_vec[i]);
                    		}
-                	}
+                   		else
+                   		{
+                   			npc->GetVehicle()->GetDriveComplex()->SetTarget(visible_ASTEROID_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
+                   		}
+                   	}
+			
                 		
                 	return true; 
             	}
@@ -729,41 +710,38 @@ bool Player::MouseInteractionWithShips(int mxvp, int myvp, bool mlb, bool mrb) c
         	{ 
                		cursor->SetFocusedSpaceObject(visible_SHIP_vec[i]);    
                 
-			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
-			{
-                		if (mlb == true)
-                		{
-                			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
-                			{
-                   				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
-                   				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_SHIP_vec[i]);
-                   			}
-                   			else
-                   			{
-                   				npc->GetVehicle()->GetDriveComplex()->SetTarget(visible_SHIP_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
-                   			}
-				}
-
-                		if (mrb == true)
-                		{
-                			if (GetShowGrappleRange() == true)
-                			{
-	       					if (npc->GetVehicle()->ableTo.GRAB == true)
-	       					{
-	       						npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(visible_SHIP_vec[i]);
-	       						npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets();	       						
-	       					}
-                   			}
-                   			else
-                   			{
-                   			        if ( npc->CheckPossibilityToScan(visible_SHIP_vec[i]) == true )
-                   				{
-                        				npc->SetScanTarget(visible_SHIP_vec[i]);
-                   				}
-       					}
-       				}
+               		if (mlb == true)
+               		{
+               			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
+               			{
+               				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
+               				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_SHIP_vec[i]);
+               			}
+               			else
+               			{
+               				npc->GetVehicle()->GetDriveComplex()->SetTarget(visible_SHIP_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
+               			}
 			}
-				
+
+               		if (mrb == true)
+               		{
+               			if (GetShowGrappleRange() == true)
+               			{
+					if (npc->GetVehicle()->ableTo.GRAB == true)
+	       				{
+	       					npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(visible_SHIP_vec[i]);
+	       					npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets();	       						
+	       				}
+                		}
+                		else
+                		{
+                		        if ( npc->CheckPossibilityToScan(visible_SHIP_vec[i]) == true )
+                			{
+                      				npc->SetScanTarget(visible_SHIP_vec[i]);
+                			}
+       				}
+       			}
+						
                		return true; 
             	}
         }
@@ -796,42 +774,39 @@ bool Player::MouseInteractionWithSpaceStations(int mxvp, int myvp, bool mlb, boo
             	{ 
                 	cursor->SetFocusedSpaceObject(visible_SPACESTATION_vec[i]); 
                 
-			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
-			{
-                		if (mlb == true)
-                		{
-                			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
-                			{
-                   				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
-                   				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_SPACESTATION_vec[i]);
-                   			}
-                   			else
-                   			{
-                   				MicroTask* microtask = new MicroTask(visible_SPACESTATION_vec[i], MICROSCENARIO::DOCKING_ID);
-                   				npc->GetStateMachine()->SetCurrentMicroTask(microtask);
-                   			}
-				}
-
-                		if (mrb == true)
-                		{
-                			if (GetShowGrappleRange() == true)
-                			{
-	       					//if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
-	       					//{
-	       						//pPLAYER->GetVehicle()->grapple_slot.GetGrappleEquipment()->add(visible_STARBASE_vec[i]);
-	       						//pPLAYER->GetVehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();	       						
-	       					//}
-                   			}
-                   			else
-                   			{
-                   			        if ( npc->CheckPossibilityToScan(visible_SPACESTATION_vec[i]) == true )
-                   				{
-                        				npc->SetScanTarget(visible_SPACESTATION_vec[i]);
-                   				}
-       					}
-       				}
+               		if (mlb == true)
+               		{
+               			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
+               			{
+               				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
+               				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_SPACESTATION_vec[i]);
+               			}
+               			else
+               			{
+               				MicroTask* microtask = new MicroTask(visible_SPACESTATION_vec[i], MICROSCENARIO::DOCKING_ID);
+               				npc->GetStateMachine()->SetCurrentMicroTask(microtask);
+               			}
 			}
-				
+
+               		if (mrb == true)
+               		{
+               			if (GetShowGrappleRange() == true)
+               			{
+					//if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
+					//{
+						//pPLAYER->GetVehicle()->grapple_slot.GetGrappleEquipment()->add(visible_STARBASE_vec[i]);
+						//pPLAYER->GetVehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();	       						
+					//}
+               			}
+               			else
+               			{
+               			        if ( npc->CheckPossibilityToScan(visible_SPACESTATION_vec[i]) == true )
+               				{
+                      				npc->SetScanTarget(visible_SPACESTATION_vec[i]);
+               				}
+       				}
+       			}
+			
                		return true; 
             	}
         }
@@ -849,16 +824,14 @@ bool Player::MouseInteractionWithPlanets(int mxvp, int myvp, bool mlb, bool mrb)
                 	cursor->SetFocusedSpaceObject(visible_PLANET_vec[i]); 
                 	//visible_PLANET_vec[i]->GetOrbit()->Draw();
           
-			if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
-			{
-                		if (mlb == true)
-                		{
-                    			//pPLAYER->GetVehicle()->getNavigator()->SetTarget(visible_PLANET_vec[pi], DOCKING_NAVIGATOR_ACTION_ID);
-                    			//pPLAYER->GetVehicle()->getNavigator()->Update_inSpace_inStatic();  
-               				MicroTask* microtask = new MicroTask(visible_PLANET_vec[i], MICROSCENARIO::DOCKING_ID);
-                    			npc->GetStateMachine()->SetCurrentMicroTask(microtask);
-                		}   
-			}
+               		if (mlb == true)
+               		{
+               			//pPLAYER->GetVehicle()->getNavigator()->SetTarget(visible_PLANET_vec[pi], DOCKING_NAVIGATOR_ACTION_ID);
+               			//pPLAYER->GetVehicle()->getNavigator()->Update_inSpace_inStatic();  
+       				MicroTask* microtask = new MicroTask(visible_PLANET_vec[i], MICROSCENARIO::DOCKING_ID);
+              			npc->GetStateMachine()->SetCurrentMicroTask(microtask);
+              		}   
+		
 				
                 	return true; 
             	}
@@ -885,14 +858,11 @@ bool Player::MouseInteractionWithStars(int mxvp, int myvp, bool mlb, bool mrb) c
 
 void Player::MouseNavigation(int mxvp, int myvp, bool mlb, bool mrb) const
 {
-	if ( (npc->GetAlive() == true) and (npc->GetVehicle() != NULL) )
+	if (mlb == true)
 	{
-       		if (mlb == true)
-       		{
-      			ForceStateMachineReset();
-       			npc->GetVehicle()->GetDriveComplex()->SetStaticTargetCoords(vec2f(mxvp, myvp));  
-      		}
-      	}
+		ForceStateMachineReset();
+		npc->GetVehicle()->GetDriveComplex()->SetStaticTargetCoords(vec2f(mxvp, myvp));  
+	}
 }
 
 bool Player::IsObjectOnScreen(const Points& points) const
@@ -957,11 +927,9 @@ void Player::SessionInKosmoport()
 
 void Player::RunSession(const TurnTimer& turn_timer)
 {
-	this->UpdateGlobal();     
-
-       	switch(npc->GetPlaceTypeId())
+       	switch(npc->GetVehicle()->GetPlaceTypeId())
        	{
-       		case ENTITY::SPACE_ID: 	    	{ this->SessionInSpace(turn_timer); break; }
+       		case ENTITY::SPACE_ID: 	{ this->SessionInSpace(turn_timer); break; }
        		case ENTITY::KOSMOPORT_ID:  	{ this->SessionInKosmoport(); break; }
        	}        	
        	

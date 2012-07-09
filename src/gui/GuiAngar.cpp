@@ -103,7 +103,7 @@ bool GuiAngar::UpdateMouseButtonsInteraction(int mxvp, int myvp, int lmb, int rm
 	   					{
 	   						button_vec[i]->StartPressAnimation();
 	   		        			
-	   		        			player->GetNpc()->GetVehicle()->SetMaxFuel();
+	   		        			player->GetNpc()->GetVehicle()->BuyFuelAsMuchAsPossible();
 	   						return true; 
 	   					}
 	   					else

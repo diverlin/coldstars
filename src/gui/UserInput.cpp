@@ -42,7 +42,7 @@ void UserInput::Update(Player* player)
 {
 	GetSimpleInputs(player);
         GetRealTimeInputs();
-        if (player->GetNpc()->GetPlaceTypeId() == ENTITY::SPACE_ID)
+        if (player->GetNpc()->GetVehicle()->GetPlaceTypeId() == ENTITY::SPACE_ID)
         {
         	ScrollCamera(player);
         }

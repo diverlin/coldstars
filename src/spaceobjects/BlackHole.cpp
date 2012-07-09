@@ -33,7 +33,7 @@ BlackHole::BlackHole(int id)
 /* virtual */
 BlackHole::~BlackHole() 
 {
-	delete shock_wave;
+	//delete shock_wave; delete from outside, starsystem of shockwaves effects vec in destructor
 } 
  
 void BlackHole::UpdateInSpace(int time, bool show_effect)

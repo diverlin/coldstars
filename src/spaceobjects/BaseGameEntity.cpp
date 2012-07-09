@@ -28,6 +28,8 @@ BaseGameEntity::BaseGameEntity():starsystem(NULL), mesh(NULL), textureOb(NULL), 
 	d_angle.x      = 0.0;
 	d_angle.y      = 0.0;
 	d_angle.z      = getRandInt(10, 100)*0.01;  
+	
+	scale = 1;
 }
 
 BaseGameEntity::~BaseGameEntity()
@@ -120,7 +122,7 @@ void BaseGameEntity::SaveDataUniqueBaseGameEntity(boost::property_tree::ptree& s
 	else            save_ptree.put(root+"data_unresolved_BaseGameEntity.textureOb_path", "none");
 
 	if (parent) save_ptree.put(root+"data_unresolved_BaseGameEntity.parent_id", parent->GetId());
-	else        save_ptree.put(root+"data_unresolved_BaseGameEntity.parent_id", -1);
+	else        save_ptree.put(root+"data_unresolved_BaseGameEntity.parent_id", NONE_ID);
 
 	save_ptree.put(root+"data_unresolved_BaseGameEntity.starsystem_id", starsystem->GetId());
 	save_ptree.put(root+"place_type_id", place_type_id);

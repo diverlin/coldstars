@@ -80,11 +80,11 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const vec2f& center, float angle, 
 
 	VEHICLE_vec.push_back(vehicle);  
 	     	
-     	if (vehicle->GetOwnerNpc())
-     	{
-     	     	vehicle->GetOwnerNpc()->SetPlaceTypeId(ENTITY::SPACE_ID);
-     		vehicle->GetOwnerNpc()->SetStarSystem(this); 
-     	}
+     	//if (vehicle->GetOwnerNpc())
+     	//{
+     	     	//vehicle->GetOwnerNpc()->SetPlaceTypeId(ENTITY::SPACE_ID);
+     		//vehicle->GetOwnerNpc()->SetStarSystem(this); 
+     	//}
 
 	if (vehicle->GetSubTypeId() == ENTITY::SATELLITE_ID)
 	{
@@ -638,8 +638,7 @@ void StarSystem::manageDeadObjects_s()
         		if (VEHICLE_vec[i]->GetOwnerNpc() != NULL)
         		{
             			VEHICLE_vec[i]->GetOwnerNpc()->SetAlive(false);
-               			VEHICLE_vec[i]->GetOwnerNpc()->SetGarbageReady(true);
-            			garbage_entities.Add(VEHICLE_vec[i]->GetOwnerNpc()); //??
+            			garbage_entities.Add(VEHICLE_vec[i]->GetOwnerNpc()); 
                		}
                		
             		garbage_entities.Add(VEHICLE_vec[i]);

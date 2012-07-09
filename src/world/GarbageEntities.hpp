@@ -27,12 +27,12 @@ class GarbageEntities
 		GarbageEntities();
 		~GarbageEntities();
 		
-		void Add(BaseGameEntity*);
+		void Add(Base*);
 		
 		void Clear();
 	
 	private:
-		std::vector<BaseGameEntity*> entities_vec;
+		std::vector<Base*> entities_vec;
 };
      		
 #endif 

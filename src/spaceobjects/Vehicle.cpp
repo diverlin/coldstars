@@ -58,6 +58,8 @@ Vehicle::Vehicle()
         gate_slot = NULL;
         
         textureOb_gui = NULL;
+        
+        land  = NULL;
 }
 
 /*virtual*/
@@ -537,33 +539,14 @@ bool Vehicle::IsArmorFull() const
 	return (data_life.armor == data_korpus.armor);
 }
 
-bool Vehicle::IsFuelFull() const
-{
-     	if (drive_complex->GetBakSlot()->GetEquipedStatus() == true)
-     	{
-     		if (drive_complex->GetBakSlot()->GetBakEquipment()->GetFuel() == drive_complex->GetBakSlot()->GetBakEquipment()->GetFuelMax())
-     		{
-     			return true;
-     		}
-     	}
-     	
-     	return false;
-}
-                
+               
                 
 void Vehicle::SetMaxArmor()
 {
      	data_life.armor = data_korpus.armor;
 }
 
-void Vehicle::SetMaxFuel()
-{
-     	if (drive_complex->GetBakSlot()->GetEquipedStatus() == true)
-     	{
-        	drive_complex->GetBakSlot()->GetBakEquipment()->SetFuel(drive_complex->GetBakSlot()->GetBakEquipment()->GetFuelMax());
-        }
-}
-                
+               
 std::string Vehicle::returnProtectionStr()
 {
     	if (ableTo.PROTECT == true)
@@ -680,6 +663,41 @@ bool Vehicle::ExternalRepairEvent()
 }
 
 
+bool Vehicle::IsFuelFull() const
+{
+	if (GetFuelMiss() == 0)
+	{
+		return true;
+	}
+	
+	return false;
+}
+
+int Vehicle::GetFuelMiss() const
+{
+	return GetDriveComplex()->GetBakSlot()->GetBakEquipment()->GetFuelMiss();
+}
+
+void Vehicle::BuyFuelAsMuchAsPossible()
+{
+	int price_for_one = ((Kosmoport*)land)->GetAngar()->GetPriceFuel();
+	int fuel_to_buy_max =  owner_npc->GetCredits() / price_for_one;
+	int fuel_to_buy_need = GetFuelMiss();
+	
+	int fuel;
+	if (fuel_to_buy_max > fuel_to_buy_need )
+	{		
+		fuel = fuel_to_buy_need;
+	}
+	else
+	{
+		fuel = fuel_to_buy_max;
+	}
+
+	owner_npc->DecreaseCredits(fuel * price_for_one);
+	GetDriveComplex()->GetBakSlot()->GetBakEquipment()->IncreaseFuel(fuel);
+}
+
 void Vehicle::DropRandomItemToSpace()
 {
 	std::vector<ItemSlot*> _equiped_slot_vec;
@@ -765,6 +783,9 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
        	
         save_ptree.put(root+"data_unresolved_Vehicle.textureOb_gui_path", textureOb_gui->path);      
        	
+       	if (land) save_ptree.put(root+"unresolved.land_id", land->GetId());
+	else save_ptree.put(root+"unresolved.land_id", NONE_ID);
+	
        	if (place_type_id == ENTITY::VEHICLESLOT_ID) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", parent_vehicleslot->GetId()); }
        	else { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); }  	
 }
@@ -789,10 +810,18 @@ void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptre
 
    	data_unresolved_Vehicle.textureOb_gui_path = load_ptree.get<std::string>("data_unresolved_Vehicle.textureOb_gui_path"); 
    	data_unresolved_Vehicle.parent_vehicleslot_id = load_ptree.get<int>("data_unresolved_Vehicle.parent_vehicleslot_id"); 
+   	
+   	data_unresolved_Vehicle.land_id = load_ptree.get<int>("unresolved.land_id");
 }
 
 void Vehicle::ResolveDataUniqueVehicle()
 {
        	textureOb_gui = g_TEXTURE_MANAGER.GetTextureObByPath(data_unresolved_Vehicle.textureOb_gui_path);
+       	
+       	if (data_unresolved_Vehicle.land_id != NONE_ID) 
+        { 
+        	SetLand( (BaseLand*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.land_id) ); 
+        }	
+        
 }
                 
