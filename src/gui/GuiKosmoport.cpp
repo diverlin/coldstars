@@ -83,6 +83,7 @@ bool GuiKosmoport::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb)
 {
     	for (unsigned int i = 0; i< button_vec.size(); i++)
 	{
+		button_vec[i]->Update();
        		if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
        		{
        			if (lmb == true)

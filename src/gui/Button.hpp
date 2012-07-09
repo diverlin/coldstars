@@ -37,9 +37,10 @@ class Button
        		TextureOb* GetTextureOb() const { return textureOb; };
        		int GetTypeId() const { return type_id; };
        		int GetSubTypeId() const { return subtype_id; };
+       		bool GetLock() const { return lock; };
        		       
        		bool CheckInteraction(int, int);
-       		void StartPressAnimation() { alpha = 0.4f; };
+       		void StartPressAnimation() { alpha = 0.2f; };
        		void LockOn() { lock = true; alpha = 0.2f; };
        		void LockOff() { lock = false; };
        		void Update();

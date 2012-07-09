@@ -73,53 +73,80 @@ bool GuiAngar::UpdateMouseInteraction(Angar* angar, int mxvp, int myvp, int lmb,
 
 bool GuiAngar::UpdateMouseButtonsInteraction(int mxvp, int myvp, int lmb, int rmb)            
 {
+
+	for (unsigned int i = 0; i< button_vec.size(); i++)
+	{
+		button_vec[i]->Update();
+		switch(button_vec[i]->GetSubTypeId())
+   		{
+   			case GUI::BUTTON::GETREPAIR_ID: 
+   			{
+   				if (player->GetNpc()->GetVehicle()->IsArmorFull() == true)
+   			       	{
+   					button_vec[i]->LockOn();
+   				}
+	   						
+   				break;
+   			}
+	   		
+   			case GUI::BUTTON::GETFUEL_ID:
+   			{
+   				if (player->GetNpc()->GetVehicle()->IsFuelFull() == true)
+				{
+	   				button_vec[i]->LockOn();
+	   			}
+	   						
+	   			break;
+	   		}
+      				
+       		}
+        }
+        
+
+
+
+
 	for (unsigned int i = 0; i< button_vec.size(); i++)
 	{
        		if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
        		{
        			if (lmb == true)
-       			{	
-	   			switch(button_vec[i]->GetSubTypeId())
+       			{
+				switch(button_vec[i]->GetSubTypeId())
 	   			{
 	   				case GUI::BUTTON::GETREPAIR_ID: 
 	   				{
-	   					if (player->GetNpc()->GetVehicle()->IsArmorFull() == false)
-	   				       	{
-	   				       		button_vec[i]->StartPressAnimation();
+	   					if (button_vec[i]->GetLock() == false)
+	   			       		{  			
+	   				      		button_vec[i]->StartPressAnimation();
 	   					
-	   						player->GetNpc()->GetVehicle()->SetMaxArmor(); 
+	   						player->GetNpc()->GetVehicle()->BuyArmorAsMuchAsPossible();
 	   						return true; 
-	   					}
-	   					else
-	   					{
-	   						button_vec[i]->LockOn();
 	   					}
 	   						
 	   					break;
-	   				}
+	  	 			}
+	   		
 	   				case GUI::BUTTON::GETFUEL_ID:
 	   				{
-	   					if (player->GetNpc()->GetVehicle()->IsFuelFull() == false)
+	   					if (button_vec[i]->GetLock() == false)
 	   					{
-	   						button_vec[i]->StartPressAnimation();
-	   		        			
+	   		       				button_vec[i]->StartPressAnimation();
+	   		        		
 	   		        			player->GetNpc()->GetVehicle()->BuyFuelAsMuchAsPossible();
 	   						return true; 
-	   					}
-	   					else
-	   					{
-	   						button_vec[i]->LockOn();
-	   					}
-	   						
+	   					}	   				
+	   					
 	   					break;
 	   				}
+	   			
 	   				case GUI::BUTTON::GETLAUNCH_ID:
 	   				{
-	   					MicroTask* microtask = new MicroTask(NULL, MICROSCENARIO::LAUNCHING_ID);
+	   			       		MicroTask* microtask = new MicroTask(NULL, MICROSCENARIO::LAUNCHING_ID);
        						player->GetNpc()->GetVehicle()->LaunchingEvent();
        						player->GetNpc()->GetStateMachine()->SetCurrentMicroTask(microtask);
        		   				return true; 
-       		   				
+       		   				      		   			
        		   				break;
        		   			}
        				}
