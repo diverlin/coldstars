@@ -1,0 +1,21 @@
+*) BaseButton and different buttons (one pos, two pos) 
+ 
+*) Space Gui, all controls are accesible by mouse only(shortkeys as additional way to control)
+-weapons activation icons
+-load/save icons
+
+*) blackholes improovement (fluctuation movement, save/load ability)
+
+*) ablitiy to resize the Gui depending on screen resolution.
+
+*) gui scroll bar implementation
+
+*) ability to trade in store (different goods)
+
+*) re-implementation of the PathCalculation
+
+*) gui radar implementation
+
+*) exploration ai scenario.
+
+*) ai for traders
