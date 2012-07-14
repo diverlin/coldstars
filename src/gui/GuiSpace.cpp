@@ -41,18 +41,21 @@ GuiSpace::GuiSpace(Player* player)
        	Resize(screen_w, screen_h);
        	
 	int angle = 0;
+	int subtype_id = GUI::BUTTON::WEAPON1_ACTIVATOR_ID;
 	for (int i=0; i<GAME::WEAPONS_NUM_MAX; i++)
 	{
 		vec2i pos = getVec2i(rect_bar_radar.GetWidth()/2.5, angle);
     		Button* button = new Button(	g_GUI_TEXTUREOB_COLLECTOR.dot_purple, 
-        					GUI::SCREEN::GALAXYMAP_ID,
+        					subtype_id,
     						rect_bar_radar.GetCenter().x+pos.x-GUI::ICON_SIZE/2,
     						rect_bar_radar.GetCenter().y+pos.y-GUI::ICON_SIZE/2, 
     					     	GUI::ICON_SIZE,  
     					     	GUI::ICON_SIZE, 
     					     	"weapon_"+int2str(i+1));    					     
     		button_vec.push_back(button);
+    		
 		angle += 20;
+		subtype_id++;
     	}
 }
 
