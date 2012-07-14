@@ -34,11 +34,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class VerticalFlowText
 {
         public:
-                VerticalFlowText(std::string _str, 
-                                vec2f _center, 
-                                Color4i _color, 
-                                float _collision_radius);
-                                   
+                VerticalFlowText(const std::string&, const vec2f&, const Color4i&, float);                                   
                 ~VerticalFlowText();
 
 		bool GetAlive() const;

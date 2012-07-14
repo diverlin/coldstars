@@ -55,8 +55,8 @@ class TextureOb
         	TextureOb();
         	TextureOb(int _type_id, std::string _path, bool _use_alpha, std::vector<int>* arg, int _columns_num = 1, int _rows_num = 1, int _fps = 0);
 
-        	int getFrameWidth() const;
-        	int getFrameHeight() const;
+        	int GetFrameWidth() const;
+        	int GetFrameHeight() const;
         	
         	void loadToVRAM();
         	void removeFromVRAM();

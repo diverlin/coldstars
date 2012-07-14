@@ -17,28 +17,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-KorpusData::KorpusData()
-{        
-        space       = 0;
-        armor       = 0;
-        protection  = 0; 
-        temperature = 0;   
-        
-        price = 0;
-       
-        draw_turrels = false;
-        gui_scale = 1.0;
-        
-        slot_grapple_num   = 0;
-        slot_drive_num     = 0;
-        slot_protector_num = 0;
-        slot_radar_num     = 0;
-        slot_scaner_num    = 0;
-        slot_freezer_num   = 0;
-	slot_weapon_num    = 0;
-}
-
-
 Vehicle::Vehicle()
 {
 	owner_npc = NULL;
@@ -88,8 +66,8 @@ void Vehicle::AddItemSlot(ItemSlot* slot, const Rect& rect)
 	{
                 case ITEMSLOT::WEAPON_ID:    
                 {
-                	int w = textureOb->getFrameWidth();
-                	int h = textureOb->getFrameHeight();
+                	int w = textureOb->GetFrameWidth();
+                	int h = textureOb->GetFrameHeight();
                 	float border_start = 0.2;
                 	float border_end   = 0.8;
                 	int pos_x = getRandInt(border_start*w, border_end*w) - w/2;
@@ -166,9 +144,15 @@ ItemSlot* Vehicle::GetCargoSlotWithGoods(int requested_goods_subtype_id)
 }
 
 
+void Vehicle::BindOwnerNpc(Npc* owner_npc) 	           
+{ 
+	this->owner_npc = owner_npc; 
+	owner_npc->SetVehicle(this); 
+} 
+
 void Vehicle::RecalculateCollisionRadius()
 {
-	collision_radius = (textureOb->getFrameWidth() + textureOb->getFrameHeight())/3;
+	collision_radius = (textureOb->GetFrameWidth() + textureOb->GetFrameHeight())/3;
 }
 
 //bool Vehicle::DockingEffect()
@@ -273,10 +257,12 @@ void Vehicle::LaunchingEvent()
 //// 
 
 
-void Vehicle::Hit(int _damage, bool show_effect)
+void Vehicle::Hit(int damage, bool show_effect)
 {
-    	data_life.armor -= _damage;
-
+	damage = damage * ( 1.0 - (owner_npc->GetSkill()->GetDefence()/SKILL::DEFENCE_NORMALIZED_RATE + propetries.protection/100.0) );
+	
+	data_life.armor -= damage;
+	
     	if (data_life.armor < 0)
     	{
        		data_life.is_alive = false;
@@ -290,7 +276,7 @@ void Vehicle::Hit(int _damage, bool show_effect)
        		}       	
        		// improove
        		Color4i color;  	       		
-       		VerticalFlowText* text = new VerticalFlowText(int2str(_damage), points.GetCenter(), color, collision_radius);
+       		VerticalFlowText* text = new VerticalFlowText(int2str(damage), points.GetCenter(), color, collision_radius);
        		starsystem->Add(text); 
        	}
 }
@@ -331,7 +317,6 @@ void Vehicle::UpdateAllPropertiesAndAbilities()
 
 void Vehicle::UpdateFireAbility()
 {
-     	//ableTo.FIRE = 
      	weapon_complex->UpdateFireAbility();
 }
 
@@ -445,7 +430,6 @@ void Vehicle::UpdateProtectionAbility()
         propetries.protection = data_korpus.protection;
         ableTo.PROTECT = false;
 
-
      	if (protection_complex->GetProtectorSlot()->GetEquipedStatus() == true)
      	{
         	if (protection_complex->GetProtectorSlot()->GetProtectorEquipment()->GetCondition() > 0)
@@ -455,9 +439,6 @@ void Vehicle::UpdateProtectionAbility()
         	}       
      	}   
 }
-
-
-
 
 void Vehicle::UpdateRepairAbility()
 {

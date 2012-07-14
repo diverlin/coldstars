@@ -34,7 +34,7 @@ class WeaponComplex
                      
                 void SetTarget(BaseGameEntity*);     
        
-        	void Fire(int timer, bool);
+        	void Fire(int, int, bool);
 
         	void WeaponsControlledFromUpperLevel(const WeaponSelector&); 
         	

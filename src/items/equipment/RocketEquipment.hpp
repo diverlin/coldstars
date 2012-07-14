@@ -56,7 +56,7 @@ class RocketEquipment : public BaseEquipment
 		int GetDamage() const { return damage; };
 		int GetRadius() const { return radius; };
 		
-      		void FireEvent();
+      		void FireEvent(float);
       		
       	      	void CountPrice();
       		virtual void UpdatePropetries();

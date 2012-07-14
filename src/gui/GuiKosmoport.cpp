@@ -88,7 +88,7 @@ bool GuiKosmoport::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb)
        		{
        			if (lmb == true)
        			{
-       			       	button_vec[i]->StartPressAnimation();	
+       			       	button_vec[i]->PressEvent();	
        			   	active_screen_id = button_vec[i]->GetSubTypeId();
        			   	return true;       			   	
        			}

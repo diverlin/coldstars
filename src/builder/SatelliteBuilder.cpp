@@ -53,10 +53,10 @@ void SatelliteBuilder::CreateNewInternals()
        	int protection_rate = 1;
        	//if (subtype_id == CLASS::WARRIOR_ID)
         //{
-        	protection_rate = 1;
+        	//protection_rate = 1;
         //}
         
-        KorpusData data_korpus;
+        VehicleKorpusData data_korpus;
     	data_korpus.space       = 60 + getRandInt(0, 20);
     	data_korpus.armor       = 10*data_korpus.space;
     	data_korpus.protection  = 2*protection_rate;

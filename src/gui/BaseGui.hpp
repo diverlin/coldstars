@@ -29,10 +29,12 @@ class BaseGui
        		BaseGui();
        		~BaseGui();
 
+       		Button* GetButton(int);  
+       		
   		void SetOffset(const vec2i& offset) { this->offset = offset; };
   		
        		void RenderButtons() const;
-       		void RenderFocusedButtonInfo(int, int) const;         		
+       		void RenderFocusedButtonInfo(int, int) const;  
                   	
        	protected:
       		Player* player;

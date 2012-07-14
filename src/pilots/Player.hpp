@@ -19,6 +19,82 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef PLAYER_H
 #define PLAYER_H
 
+
+
+class ControlFlags
+{
+	private:
+		bool scan_mode;
+		bool grab_mode;
+
+		bool show_galaxymap;
+		bool show_all_path;
+		bool show_all_shipsinfo;
+		bool show_planets_info;	
+		bool show_all_orbits;
+		bool show_radar_range;
+	
+	public:
+		ControlFlags():
+		scan_mode(false),
+		grab_mode(false),
+		show_galaxymap(false),
+		show_all_path(false),
+		show_all_shipsinfo(false),
+		show_planets_info(false),
+		show_all_orbits(false),
+		show_radar_range(false)
+		{}
+		~ControlFlags() {};
+
+		//void SetShowAllOrbit(bool show_all_orbit)     { this->show_all_orbit = show_all_orbit; }
+		//void SetShowAllPath(bool show_all_path)       { this->show_all_path = show_all_path; }
+		//void SetShowRadarRange(bool show_radar_range) { this->show_radar_range = show_radar_range; }
+		//void SetShowGrappleRange(bool show_grapple_range)  { this->show_grapple_range = show_grapple_range; }
+		//void SetShowGalaxyMap(bool show_galaxymap) { this->show_galaxymap = show_galaxymap; };
+		//void SetShowAllShipsInfo(bool show_all_shipsinfo) { this->show_all_shipsinfo = show_all_shipsinfo; };
+
+		bool GetShowAllOrbitsFlag()     const { return show_all_orbits; };
+		bool GetShowAllPathFlag()      const { return show_all_path; };
+		//bool GetShowRadarRange()   const { return show_radar_range; }
+		//bool GetShowGrappleRange() const { return show_grapple_range; }        
+				
+		//void InverseShowGalaxyMapFlag() 
+		//{
+			//if (show_galaxymap == true) 	{ show_galaxymap = false; }
+			//else 				{ show_galaxymap = true; };			
+		//};
+
+		void InverseShowAllPathFlag() 
+		{
+			if (show_all_path == true) 	{ show_all_path = false; }
+			else 				{ show_all_path = true; };			
+		};
+		
+		void InverseShowAllOrbitsFlag() 
+		{
+			if (show_all_orbits == true) 	{ show_all_orbits = false; }
+			else 				{ show_all_orbits = true; };			
+		};
+		
+		void InverseShowRadarRangeFlag() 
+		{
+			if (show_radar_range == true) 	{ show_radar_range = false; }
+			else 				{ show_radar_range = true; };			
+		};
+		
+		void InverseGrabModeFlag() 
+		{
+			if (grab_mode == true) 	{ grab_mode = false; }
+			else 				{ grab_mode = true; };			
+		};
+				
+		bool GetShowGalaxyMapFlag() const { return show_galaxymap; };
+		bool GetShowAllShipsInfoFlag() const { return show_all_shipsinfo; };
+		bool GetShowRadarRangeFlag() const { return show_radar_range; };
+		bool GetGrabModeFlag() const { return grab_mode; };
+};
+
 class WeaponSelector
 {
 	public:
@@ -33,33 +109,24 @@ class WeaponSelector
 		bool state[GAME::WEAPONS_NUM_MAX];	
 };
 
+
 struct UnresolvedDataUniquePlayer
 {
 	int npc_id;	
 	vec2f screen_pos;
 };
 
+
 class Player : public Base
 {
    	public:
     		Player(int);
      		~Player();
-   
-   		void SetWorldMapShowFlag(bool _show_worldmap) { control.worldmap = _show_worldmap; }
+
+		ControlFlags& GetControlFlags() { return control_flags; };
           	
-		void SetShowAllOrbit(bool show_all_orbit)     { this->show_all_orbit = show_all_orbit; }
-		void SetShowAllPath(bool show_all_path)       { this->show_all_path = show_all_path; }
-		void SetShowRadarRange(bool show_radar_range) { this->show_radar_range = show_radar_range; }
-		void SetShowGrappleRange(bool show_grapple_range)  { this->show_grapple_range = show_grapple_range; }
-          	
-		bool GetWorldMapShowFlag() const { return control.worldmap; }         	
 		Npc* GetNpc()       const { return npc; }
 		Cursor* GetCursor() const { return cursor; }
-         
-		bool GetShowAllOrbit()     const { return show_all_orbit; }
-		bool GetShowAllPath()      const { return show_all_path; }
-		bool GetShowRadarRange()   const { return show_radar_range; }
-		bool GetShowGrappleRange() const { return show_grapple_range; }          	 
    
      		void BindNpc(Npc*);
      		
@@ -93,13 +160,8 @@ class Player : public Base
      	     	
      	     	Cursor* cursor;
 
-     	     	ControlWord control;  
-     		WeaponSelector weapon_selector;
-     		     	     	
-     	     	bool show_all_orbit;
-     	     	bool show_all_path;
-     	     	bool show_radar_range;
-     	     	bool show_grapple_range;
+     	     	ControlFlags control_flags;  
+     		WeaponSelector weapon_selector;     		     	     	
      	     	
      	     	// VISIBLE ENTITY LIST
     		std::vector<Star*>         visible_STAR_vec;

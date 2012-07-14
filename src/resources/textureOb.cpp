@@ -111,8 +111,8 @@ TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, std::ve
 	}
 }  
 
-int TextureOb :: getFrameWidth() const  { return w_slice; }
-int TextureOb :: getFrameHeight() const { return h_slice;}
+int TextureOb :: GetFrameWidth() const  { return w_slice; }
+int TextureOb :: GetFrameHeight() const { return h_slice;}
         	
 void TextureOb :: loadToVRAM()
 {

@@ -54,20 +54,29 @@ bool Turrel::CheckAmmo() const
     	return false;           
 }
 
-bool Turrel::FireEvent(bool show_effect)
-{
+bool Turrel::FireEvent(int attack_skill, bool show_effect)
+{       			
 	switch(slot->GetItem()->GetSubTypeId())
 	{
     		case SUBTYPE::LAZER_ID:
     		{   
        			slot->GetLazerEquipment()->FireEvent_TRUE();
-
+       			
+			int damage = slot->GetLazerEquipment()->GetDamage() * attack_skill*SKILL::ATTACK_NORMALIZED_RATE;
 			switch(target->GetTypeId())
 			{
-				case ENTITY::VEHICLE_ID:   { ((Vehicle*)target)->Hit(slot->GetLazerEquipment()->GetDamage(), show_effect);   return true; break; }
-       				case ENTITY::ASTEROID_ID:  { ((Asteroid*)target)->Hit(slot->GetLazerEquipment()->GetDamage(), show_effect);  return true; break; }
-				case ENTITY::CONTAINER_ID: { ((Container*)target)->Hit(slot->GetLazerEquipment()->GetDamage(), show_effect); return true; break; }
-				case ENTITY::BOMB_ID:      { ((Container*)target)->Hit(slot->GetLazerEquipment()->GetDamage(), show_effect); return true; break; }
+				case ENTITY::VEHICLE_ID:   { ((Vehicle*)target)->Hit(damage, show_effect); return true; break; }
+       				case ENTITY::ASTEROID_ID:  { ((Asteroid*)target)->Hit(damage, show_effect); return true; break; }
+				case ENTITY::CONTAINER_ID: { ((Container*)target)->Hit(damage, show_effect); return true; break; }
+       			}
+       			
+       			if (target->GetAlive() == false)
+       			{
+       				int expirience = 1000;
+       			       	Color4i color(0,255,0,255);  	       		
+       				VerticalFlowText* text = new VerticalFlowText(int2str(expirience), slot->GetOwnerVehicle()->GetPoints().GetCenter(), color, 10);
+       				slot->GetOwnerVehicle()->GetStarSystem()->Add(text); 
+       				slot->GetOwnerVehicle()->GetOwnerNpc()->GetSkill()->AddExpirience(expirience);
        			}
        			
        			break;
@@ -75,7 +84,7 @@ bool Turrel::FireEvent(bool show_effect)
 
     		case SUBTYPE::ROCKET_ID:
     		{       
-                	slot->GetRocketEquipment()->FireEvent();
+                	slot->GetRocketEquipment()->FireEvent( attack_skill*SKILL::ATTACK_NORMALIZED_RATE );
                 	return true; break;              
     		}
 

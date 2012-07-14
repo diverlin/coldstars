@@ -16,6 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include <boost/lexical_cast.hpp>
 
 Ship::Ship(int id)
 {
@@ -44,7 +45,13 @@ void Ship::UpdateInfo()
 	info.addNameStr("temp.:");       	info.addValueStr( int2str(data_korpus.temperature) );
         info.addNameStr("radius:");    		info.addValueStr( int2str(propetries.radius) );
     	info.addNameStr("protect:");        	info.addValueStr( returnProtectionStr() );
-	info.addNameStr("speedx:");       	info.addValueStr(int2str(int(propetries.speed*100)) );
+	info.addNameStr("speed:");       	info.addValueStr( boost::lexical_cast<std::string>(propetries.speed) );
+
+
+	//info.addNameStr("attackR:");       	info.addValueStr( boost::lexical_cast<std::string>(propetries.attack_rate_normalized) );	
+	//info.addNameStr("defenceR:");       	info.addValueStr( boost::lexical_cast<std::string>(propetries.defence_rate_normalized) );	
+
+	
 }
 
 
@@ -55,7 +62,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 	{
 		owner_npc->UpdateInSpace(time, show_effect);
 		points.Update();   
-		weapon_complex->Fire(time, show_effect);
+		weapon_complex->Fire(time, owner_npc->GetSkill()->GetAttack(), show_effect);
 
     		if (ableTo.DRIVE == true) 
     		{ 

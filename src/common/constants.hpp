@@ -43,6 +43,24 @@ const vec2i GUI_SKILL_INANGAR_OFFSET(100, 0);
 const vec2i GUI_VEHICLE_INSTORE_OFFSET(0, 200);
 const vec2i GUI_STORE_OFFSET(0, -100);
 
+namespace PRICE
+{
+	const int MINERALS_MAX = 10; 
+}
+const int MINERALS_AMOUNT_MIN = 10;
+const int MINERALS_AMOUNT_MAX = 100;
+const int FOOD_AMOUNT_MIN = 10;
+const int FOOD_AMOUNT_MAX = 100;
+const int MEDICINE_AMOUNT_MIN = 10;
+const int MEDICINE_AMOUNT_MAX = 100;
+const int MILITARY_AMOUNT_MIN = 10;
+const int MILITARY_AMOUNT_MAX = 100;
+const int DRUG_AMOUNT_MIN = 10;
+const int DRUG_AMOUNT_MAX = 100;
+const int EXCLUSIVE_AMOUNT_MIN = 10;
+const int EXCLUSIVE_AMOUNT_MAX = 100;
+        
+        
 namespace LOG
 {
 	enum { TOSCREEN, TOFILE, TOSCREENTOFILE };
@@ -67,6 +85,7 @@ const int SIZE_6 = 130;  // 6 - up to 130x130
 const int SIZE_7 = 160;  // 7 - up to 160x160
 const int SIZE_8 = 200;  // 8 - up to 200x200
 const int SIZE_9 = 240;  // 9 - up to 240x240
+const int SIZE_MIN = SIZE_1;
 
 const int NONE_ID = -1;
 const int FAIL_ID = 1;
@@ -102,12 +121,24 @@ namespace MICROSCENARIO
  
 namespace SKILL
 {
+	const int ATTACK_MIN = 1;
+	const int DEFENCE_MIN = 1;
+	const int LEADER_MIN = 1;
+	const int TRADER_MIN = 1;
+	const int TECHNIC_MIN = 1;
+	const int DIPLOMAT_MIN = 1;
+	
 	const int ATTACK_MAX = 10;
 	const int DEFENCE_MAX = 10;
 	const int LEADER_MAX = 10;
 	const int TRADER_MAX = 10;
 	const int TECHNIC_MAX = 10;
 	const int DIPLOMAT_MAX = 10;
+	
+	const float ATTACK_NORMALIZED_RATE = ATTACK_MIN/(float)ATTACK_MAX;
+	const float DEFENCE_NORMALIZED_RATE = DEFENCE_MIN/(float)DEFENCE_MAX;
+		
+	const int EXPIRIENCE_THRESHOLD = 1000;
 }
 namespace COLOR
 {
@@ -331,7 +362,7 @@ namespace PROTECTOR
 {
 const int PROTECTION_MIN = 3;
 const int PROTECTION_MAX = 30;
-const int MODULES_NUM_MIN = 0;
+const int MODULES_NUM_MIN = 1;
 const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
 
 const int CONDITION_MIN = 2000;
@@ -395,8 +426,8 @@ namespace LAZER
 {
 const int RADIUS_MIN = 200;
 const int RADIUS_MAX = 500;
-const int DAMAGE_MIN = 4;
-const int DAMAGE_MAX = 20;
+const int DAMAGE_MIN = 40;
+const int DAMAGE_MAX = 200;
 const int MODULES_NUM_MIN = 0;
 const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
 

@@ -32,27 +32,6 @@ struct PlanetData
 };
 
 
-struct Color4f
-{
-	Color4f();
-
-	float r;
-	float g;
-	float b;
-	float a;
-};
-
-
-struct Color4i
-{
-	Color4i();
-
-	int r;
-	int g;
-	int b;
-	int a;
-};
-
 struct VisionStatus
 {
 	VisionStatus();
@@ -103,27 +82,6 @@ struct AbilitiesStatus
 };
 
 
-struct ShipPropetries
-{       
-	/* this data is changed during game play, the propetries depends on many factors */
-	ShipPropetries();
-
-	int protection;
-	int radius;
-	int speed;  // depends on mass and drive
-
-	int hyper;  // depends on drive and bak
-	int repair; // depends on droid
-	int freeze; // depends on freezer
-	int scan;   // depends on scaner
-
-	int energy;
-	int temperature;
-
-	// simplification
-	int average_damage;
-	int average_fire_radius;
-};
 
 struct LifeData
 {
@@ -169,22 +127,6 @@ struct ParticleData
 	int frame;
 };
 
-
-class ControlWord
-{
-	public:
-		bool scan;
-		bool grapple;
-
-		bool worldmap;
-		bool ship_info;
-		bool planet_info;	
-		bool planet_orbits;
-		bool radar_radius;
-
-		ControlWord();
-		~ControlWord();
-};
 
 
 struct AngleData

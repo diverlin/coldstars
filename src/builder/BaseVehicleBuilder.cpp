@@ -21,7 +21,7 @@ void BaseVehicleBuilder::CreateKorpusGeometry(Vehicle* vehicle) const
 {
 	vehicle->RecalculateCollisionRadius();
 
-    	vehicle->GetPoints().initMainQuadPoints(vehicle->GetTextureOb()->getFrameWidth(), vehicle->GetTextureOb()->getFrameHeight());
+    	vehicle->GetPoints().initMainQuadPoints(vehicle->GetTextureOb()->GetFrameWidth(), vehicle->GetTextureOb()->GetFrameHeight());
     	vehicle->GetPoints().addMainQuadPoints();
 }
 
@@ -31,17 +31,17 @@ void BaseVehicleBuilder::CreateKorpusGui(Vehicle* vehicle) const
 	vehicle->SetGuiTextureOb(vehicle->GetTextureOb());         	
 
     	float kontur_w, kontur_h;
-    	if (vehicle->GetTextureOb()->getFrameWidth() > vehicle->GetTextureOb()->getFrameHeight())
+    	if (vehicle->GetTextureOb()->GetFrameWidth() > vehicle->GetTextureOb()->GetFrameHeight())
     	{
         	kontur_w = 500; 
-    		vehicle->data_korpus.gui_scale = (float)kontur_w/vehicle->GetTextureOb()->getFrameWidth();
-        	kontur_h = vehicle->GetTextureOb()->getFrameHeight() * kontur_w / (float)vehicle->GetTextureOb()->getFrameWidth();
+    		vehicle->data_korpus.gui_scale = (float)kontur_w/vehicle->GetTextureOb()->GetFrameWidth();
+        	kontur_h = vehicle->GetTextureOb()->GetFrameHeight() * kontur_w / (float)vehicle->GetTextureOb()->GetFrameWidth();
     	}
     	else
     	{
         	kontur_h = 500; 
-    		vehicle->data_korpus.gui_scale = (float)kontur_h/vehicle->GetTextureOb()->getFrameHeight();
-        	kontur_w = vehicle->GetTextureOb()->getFrameWidth() * kontur_h / (float)vehicle->GetTextureOb()->getFrameHeight();
+    		vehicle->data_korpus.gui_scale = (float)kontur_h/vehicle->GetTextureOb()->GetFrameHeight();
+        	kontur_w = vehicle->GetTextureOb()->GetFrameWidth() * kontur_h / (float)vehicle->GetTextureOb()->GetFrameHeight();
     	}               
 
     	Rect kontur_rect(0, 0, kontur_w, kontur_h); 

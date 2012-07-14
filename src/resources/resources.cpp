@@ -1221,6 +1221,16 @@ void loadImages()
 
 {
 	std::vector<int> arg;  
+	g_GUI_TEXTUREOB_COLLECTOR.dot_purple = new TextureOb(NONE_ID, "data/other/dot_purple.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
+	g_GUI_TEXTUREOB_COLLECTOR.bar_radar = new TextureOb(NONE_ID, "data/gui/radar_bar.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
 	g_GUI_TEXTUREOB_COLLECTOR.bar_bottom = new TextureOb(NONE_ID, "data/gui/bar_bottom.png", true, &arg);
 }
 

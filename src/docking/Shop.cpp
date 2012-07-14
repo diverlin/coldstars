@@ -25,6 +25,15 @@ Shop::Shop(int id)
 	data_id.id = id;
 	data_id.type_id = ENTITY::SHOP_ID;
 	data_id.subtype_id = ENTITY::SHOP_ID;
+	
+	minerals_ammount  = getRandInt(MINERALS_AMOUNT_MIN, MINERALS_AMOUNT_MAX);
+        food_ammount      = getRandInt(FOOD_AMOUNT_MIN, FOOD_AMOUNT_MAX);
+        medicine_ammount  = getRandInt(MEDICINE_AMOUNT_MIN, MEDICINE_AMOUNT_MAX);
+        military_ammount  = getRandInt(MILITARY_AMOUNT_MIN, MILITARY_AMOUNT_MAX);
+        drug_ammount      = getRandInt(DRUG_AMOUNT_MIN, DRUG_AMOUNT_MAX);
+        exclusive_ammount = getRandInt(EXCLUSIVE_AMOUNT_MIN, EXCLUSIVE_AMOUNT_MAX);
+        
+        UpdatePrices();
 }
 
 Shop::~Shop()
@@ -33,22 +42,40 @@ Shop::~Shop()
 }                
 
 
+void Shop::UpdatePrices()
+{
+	minerals_price 	= PRICE::MINERALS_MAX * (1.0f - exp(-1.0f/minerals_ammount));
+        //food_price 	= PRICE::FOOD_MAX      - PRICE::FOOD_RATE * food_ammount;    
+        //medicine_price	= PRICE::MEDICINE_MAX  - PRICE::MEDICINE_RATE * medicine_ammount; 
+        //military_price  = PRICE::MILITARY_MAX  - PRICE::MILITARY_RATE * military_ammount;   
+        //drug_price      = PRICE::DRUG_MAX      - PRICE::DRUG_RATE * drug_ammount;     
+        //exclusive_price = PRICE::EXCLUSIVE_MAX - PRICE::EXCLUSIVE_RATE * exclusive_ammount;   ;
+}
 
 
 void Shop::SaveDataUniqueShop(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-	//save_ptree.put(root+"unresolved.angar_id",     angar->GetId());
-
+	save_ptree.put(root+"minerals_ammount", minerals_ammount);
+	save_ptree.put(root+"food_ammount", food_ammount);
+	save_ptree.put(root+"medicine_ammount", medicine_ammount);
+	save_ptree.put(root+"military_ammount", military_ammount);
+	save_ptree.put(root+"drug_ammount", drug_ammount);
+	save_ptree.put(root+"exclusive_ammount", exclusive_ammount);
 }
 
 void Shop::LoadDataUniqueShop(const boost::property_tree::ptree& load_ptree)
 {
-	//data_unresolved_Kosmoport.angar_id = load_ptree.get<int>("unresolved.angar_id");
-
+	minerals_ammount = load_ptree.get<int>("minerals_ammount");
+	food_ammount = load_ptree.get<int>("food_ammount");
+	medicine_ammount = load_ptree.get<int>("medicine_ammount");
+	military_ammount = load_ptree.get<int>("military_ammount");
+	drug_ammount = load_ptree.get<int>("drug_ammount");
+	exclusive_ammount = load_ptree.get<int>("exclusive_ammount");
 }
 
 void Shop::ResolveDataUniqueShop()
 {
+	UpdatePrices();
 	((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindShop(this); 
 }
 

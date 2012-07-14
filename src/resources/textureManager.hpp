@@ -22,36 +22,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "../resources/textureOb.hpp"
 
-struct GuiTextureObCollector
-{
-	TextureOb* starsystem_mark_enemy;	
-	TextureOb* starsystem_mark_player;
-	
-	TextureOb* icon_minus;
-	TextureOb* icon_plus;
-	TextureOb* skill;	
-	TextureOb* skill_transparent;	
-	
-	TextureOb* icon_map;
-        TextureOb* grapple_trail;	
-
-        TextureOb* dot_blue;
-        TextureOb* dot_red;
-        TextureOb* dot_green;
-        TextureOb* dot_black;
-        TextureOb* dot_yellow;
-        
-        TextureOb* bar_bottom;
-        TextureOb* bar_left;
-        TextureOb* bar_top;
-        TextureOb* bar_right;        
-        
-        TextureOb* text_background;
-
-        TextureOb* slot_mark_accept;
-        TextureOb* slot_mark_reject;
-
-};
 
 class TextureManager
 {   

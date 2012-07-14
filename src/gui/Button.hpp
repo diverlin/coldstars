@@ -38,27 +38,36 @@ class Button
        		int GetTypeId() const { return type_id; };
        		int GetSubTypeId() const { return subtype_id; };
        		bool GetLock() const { return lock; };
-       		       
+       		bool GetTrigger() const { return trigger; };
+       		       		       
        		bool CheckInteraction(int, int);
-       		void StartPressAnimation() { alpha = 0.2f; };
-       		void LockOn() { lock = true; alpha = 0.2f; };
-       		void LockOff() { lock = false; };
+
+		void PressEvent();
+		void TriggerEvent();
+		
+       		void LockOn();
+       		void LockOff();
        		void Update();
 
        		void SetCenter(int, int);
 
        		void Render() const;    
+       		void RenderWithTitle(const std::string&, int offset_x = 0, int offset_y = 0) const;    
        		void RenderInfo(int offset_x = 0, int offset_y = 0) const;
         
         private:
-        	int type_id;
-        	int subtype_id;
+        	int type_id, subtype_id;
         	bool lock;
+        	bool trigger;
         	float alpha;
         	
                	TextureOb* textureOb;
        		Rect rect;
-       		std::string info_str;  
+       		std::string info;  
+
+     		void FullShadeOn();
+     		void ShadeOn();
+     		void ShadeOff();
 };
 
 #endif

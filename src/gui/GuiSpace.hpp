@@ -26,15 +26,21 @@ class GuiSpace : public BaseGui
       		GuiSpace(Player*);
        		~GuiSpace();
 
-       		void UpdateMouseInteraction(int, int, int, int);
-       		
+       		bool UpdateMouseInteraction(int, int, int, int);
+
+       		void Resize(int, int);
+       		       		
        		void RenderText(const vec2f&) const;
-       		
        		void RenderBar() const;
        		
        	private:
+       		Rect rect_bar_top;
+       		Rect rect_bar_bottom;
+       		Rect rect_bar_radar;
        		
-
+       		TextureOb* textureOb_bar_top;
+       		TextureOb* textureOb_bar_bottom;
+       		TextureOb* textureOb_bar_radar;
 };
 
 
