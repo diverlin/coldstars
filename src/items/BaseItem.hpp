@@ -44,7 +44,7 @@ class BaseItem : public Base
 
 		void SetTextureOb(TextureOb* textureOb)  { this->textureOb = textureOb; };
 		void SetFunctionalSlotSubTypeId(int functional_slot_subtype_id) { this->functional_slot_subtype_id = functional_slot_subtype_id; };
-		void SetItemCommonData(ItemCommonData data_item) { this->data_item = data_item; };
+		void SetItemCommonData(const ItemCommonData& data_item) { this->data_item = data_item; };
                 void SetSlot(ItemSlot* slot)  { this->slot = slot; };
                                 
             	TextureOb* GetTextureOb()   	const { return textureOb; };

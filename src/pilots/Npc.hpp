@@ -35,6 +35,7 @@ class Npc : public Base
 		void SetAlive(bool is_alive)			{ this->is_alive = is_alive; }
 		void SetScanTarget(Vehicle* vehicle_to_scan)	{ this->vehicle_to_scan = vehicle_to_scan; };
 		void SetUpperControl(bool upper_control)       { this->upper_control = upper_control; };
+		void SetVehicle(Vehicle* vehicle) 		{ this->vehicle = vehicle; };
 
 		int GetRaceId()				const { return race_id; };
 		StarSystem* GetFailBackStarSystem() 	const { return failback_starsystem; };
@@ -46,11 +47,9 @@ class Npc : public Base
 		StateMachine* GetStateMachine() 	const { return state_machine; };
 
 		StarSystem* GetStarSystem() { return vehicle->GetStarSystem(); };
-		
-   		void BindVehicle(Vehicle*);
 
-		void IncreaseCredits(int);
-		void DecreaseCredits(int);
+		void IncreaseCredits(int credits) { this->credits += credits; };
+		void DecreaseCredits(int credits) { this->credits -= credits; };
      
      		// AI
      		void UpdateInSpace(int, bool);

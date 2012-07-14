@@ -20,11 +20,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
-struct KorpusData
+
+struct VehicleKorpusData
 {
 	/* this data depends only on korpus and cannot be changed by artefacts/items */        
-	KorpusData();
-
 	unsigned int space;
 	unsigned int armor;
 	unsigned int protection; 
@@ -42,6 +41,62 @@ struct KorpusData
         int slot_scaner_num;
         int slot_freezer_num;
 	int slot_weapon_num;
+
+	VehicleKorpusData():
+	space(0),
+        armor(0),
+        protection(0), 
+        temperature(0),   
+        
+        price(0),
+       
+        draw_turrels(false),
+        gui_scale(1.0f),
+        
+        slot_grapple_num(0),
+        slot_drive_num(0),
+        slot_protector_num(0),
+        slot_radar_num(0),
+        slot_scaner_num(0),
+        slot_freezer_num(0),
+	slot_weapon_num(0)	
+	{}
+};
+
+
+struct VehiclePropetries
+{    
+	/* this data is changed during game play, the propetries depends on many factors */
+	int protection;
+	int radius;
+	int speed;  // depends on mass and drive
+
+	int hyper;  // depends on drive and bak
+	int repair; // depends on droid
+	int freeze; // depends on freezer
+	int scan;   // depends on scaner
+
+	int energy;
+	int temperature;
+		
+	// simplification
+	int average_damage;
+	int average_fire_radius;
+	
+
+	VehiclePropetries():
+	protection(0),
+        radius(0),
+        speed(0),
+        hyper(0),
+        repair(0),
+        freeze(0),
+        scan(0),        
+        energy(0),
+        temperature(0),
+        average_damage(0),
+        average_fire_radius(0) 
+        {}
 };
 
 struct UnresolvedDataUniqueVehicle
@@ -56,15 +111,14 @@ class Vehicle : public BaseGameEntity
     	public:
        	        Vehicle();
         	virtual ~Vehicle(); 
-        	
-                void SetNpc(Npc* owner_npc) { this->owner_npc = owner_npc; };
+
 		void SetParentVehicleSlot(VehicleSlot* parent_vehicleslot) { this->parent_vehicleslot = parent_vehicleslot; };
 		
                 void SetWeaponComplex(WeaponComplex* weapon_complex) { this->weapon_complex = weapon_complex; };
                 void SetDriveComplex(DriveComplex* drive_complex)    { this->drive_complex  = drive_complex; };
 		void SetProtectionComplex(ProtectionComplex* protection_complex) { this->protection_complex = protection_complex; };
                                 
-                void SetKorpusData(KorpusData data_korpus) { this->data_korpus = data_korpus; };
+                void SetKorpusData(VehicleKorpusData data_korpus) { this->data_korpus = data_korpus; };
                 void SetGuiTextureOb(TextureOb* textureOb_gui) { this->textureOb_gui = textureOb_gui; };
         	void SetGuiRect(Rect rect) { kontur_rect = rect; };
         	
@@ -77,7 +131,9 @@ class Vehicle : public BaseGameEntity
                 bool AddItemToOtsec(BaseItem*);
 
                 float GetVisionRadius() const { return propetries.radius; };
-              
+
+                void BindOwnerNpc(Npc*);
+                              
                 WeaponComplex* GetWeaponComplex()         const { return weapon_complex; };
                 DriveComplex* GetDriveComplex()           const { return drive_complex; };
                 ProtectionComplex* GetProtectionComplex() const { return protection_complex; };
@@ -99,8 +155,8 @@ class Vehicle : public BaseGameEntity
         	void PostCreateInit();
         	
         	AbilitiesStatus ableTo;
-                ShipPropetries propetries;
-                KorpusData data_korpus;
+                VehiclePropetries propetries;
+                VehicleKorpusData data_korpus;
                        	
         	void SelfRepairEvent();
         	bool ExternalRepairEvent();

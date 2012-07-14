@@ -49,15 +49,6 @@ Npc :: ~Npc()
         delete observation;
         delete state_machine;        
 }  
-
-void Npc::BindVehicle(Vehicle* vehicle) 	           
-{ 
-	this->vehicle = vehicle; 
-	vehicle->SetNpc(this); 
-} 	
-
-void Npc::IncreaseCredits(int credits) { this->credits += credits; }
-void Npc::DecreaseCredits(int credits) { this->credits -= credits; }
     
 void Npc::MindInKosmoport()
 {   		
@@ -266,13 +257,15 @@ void Npc::ResolveData()
 void Npc::SaveDataUniqueNpc(boost::property_tree::ptree& save_ptree, const std::string& root) const	
 {
 	save_ptree.put(root+"is_alive", is_alive);
+	save_ptree.put(root+"race_id", race_id);
         save_ptree.put(root+"unresolved.vehicle_id", vehicle->GetId());
 	skill->SaveData(save_ptree, root);
 }
 
 void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
 {
-	is_alive   = load_ptree.get<bool>("is_alive");
+	is_alive = load_ptree.get<bool>("is_alive");
+	race_id  = load_ptree.get<int>("race_id");
 	data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresolved.vehicle_id");
 
 	skill->LoadData(load_ptree.get_child("skill"));
@@ -280,7 +273,7 @@ void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
 
 void Npc::ResolveDataUniqueNpc()
 {
-        BindVehicle( (Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_npc.vehicle_id) );
+        ((Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_npc.vehicle_id))->BindOwnerNpc(this);
 
 	skill->ResolveData();
 }		

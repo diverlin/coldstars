@@ -193,7 +193,7 @@ void GuiSkill::RenderSkills(Skill* skill) const
          					Rect tmp_rect(button_vec[bi]->GetRect().GetCenter().x - button_w/2, 
          		      				      button_vec[bi]->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		     				      button_w, button_h);
-         					if (skill->GetDiplomat()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+         					if (i<skill->GetDiplomat()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
      						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
      					}
 	   				break;

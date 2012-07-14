@@ -118,7 +118,7 @@ bool GuiAngar::UpdateMouseButtonsInteraction(int mxvp, int myvp, int lmb, int rm
 	   				{
 	   					if (button_vec[i]->GetLock() == false)
 	   			       		{  			
-	   				      		button_vec[i]->StartPressAnimation();
+	   				      		button_vec[i]->PressEvent();
 	   					
 	   						player->GetNpc()->GetVehicle()->BuyArmorAsMuchAsPossible();
 	   						return true; 
@@ -131,7 +131,7 @@ bool GuiAngar::UpdateMouseButtonsInteraction(int mxvp, int myvp, int lmb, int rm
 	   				{
 	   					if (button_vec[i]->GetLock() == false)
 	   					{
-	   		       				button_vec[i]->StartPressAnimation();
+	   		       				button_vec[i]->PressEvent();
 	   		        		
 	   		        			player->GetNpc()->GetVehicle()->BuyFuelAsMuchAsPossible();
 	   						return true; 

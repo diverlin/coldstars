@@ -62,7 +62,7 @@ void PlayerBuilder::CreateNewInternals()
         	
 	ShipBuilder::Instance().Equip(pship);   // improove
         
-        pnpc->BindVehicle(pship);
+        pship->BindOwnerNpc(pnpc);
    	player->BindNpc(pnpc);
 }
 

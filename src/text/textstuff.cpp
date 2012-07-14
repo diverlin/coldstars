@@ -18,23 +18,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-VerticalFlowText :: VerticalFlowText(std::string _str, 
-                                     vec2f _center, 
-                                     Color4i _color, 
-                                     float _collision_radius)
+VerticalFlowText :: VerticalFlowText(const std::string& str, 
+                                         const vec2f& center, 
+                                         const Color4i& color, 
+                                         float collision_radius)
 {
         is_alive = true;
         live_time = 70; //TEXT_EXISTANCE_TIME
 
-        str = _str;
-        color = _color;
+        this->str = str;
+        this->color = color;
 
 
         float kof1 = 0.1 * getRandInt(3, 18);
         float kof2 = 0.1 * getRandInt(5, 15);
 
-        pos.x = _center.x - _collision_radius * kof1;
-        pos.y = _center.y + _collision_radius * kof2;
+        pos.x = center.x - collision_radius * kof1;
+        pos.y = center.y + collision_radius * kof2;
         
         speed = 2.0;
 }

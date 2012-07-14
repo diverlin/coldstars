@@ -19,22 +19,23 @@
 
 #include "Skill.hpp"
 
-Skill::Skill()
-{
-	attack   = getRandInt(0, 5);
-	defence  = getRandInt(0, 5);
-	leader   = getRandInt(0, 5);
-	trader   = getRandInt(0, 5);
-	technic  = getRandInt(0, 5);
-	diplomat = getRandInt(0, 5);  
-
-	Acknowledge();
-
-	available_points = 3;
-
-	expirience = getRandInt(40, 400);
-	expirience_for_next_level = 1000;
-}     
+Skill::Skill():
+attack(SKILL::ATTACK_MIN),
+defence(SKILL::DEFENCE_MIN),
+leader(SKILL::LEADER_MIN),
+trader(SKILL::TRADER_MIN),
+technic(SKILL::TECHNIC_MIN),
+diplomat(SKILL::DIPLOMAT_MIN),
+attack_undo(0),
+defence_undo(0),
+leader_undo(0),
+trader_undo(0),
+technic_undo(0),
+diplomat_undo(0),	
+available_points(6),
+expirience(0),
+expirience_for_next_level(SKILL::EXPIRIENCE_THRESHOLD)
+{}     
 
 Skill::~Skill()
 {}

@@ -133,7 +133,7 @@ std::string RocketEquipment::GetRadiusStr()
        		return int2str(radius_orig) + "+" + int2str(radius_add);
 }
 
-void RocketEquipment::FireEvent()
+void RocketEquipment::FireEvent(float attack_rate_normalized)
 {
 	int num = 0;
 
@@ -145,6 +145,7 @@ void RocketEquipment::FireEvent()
 		RocketBulletBuilder::Instance().CreateNewRocket();
 		RocketBulletBuilder::Instance().CreateNewInternals(data_bullet);	
 		RocketBullet* rocket_bullet = RocketBulletBuilder::Instance().GetRocket();
+		rocket_bullet->SetDamage(data_bullet.damage*attack_rate_normalized);
 
 		if (slot->GetOwnerVehicle()->data_korpus.draw_turrels == true)
     		{

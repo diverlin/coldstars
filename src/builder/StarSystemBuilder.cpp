@@ -148,25 +148,27 @@ void StarSystemBuilder::CreatePlanets(int planet_per_system)
                 SatelliteBuilder::Instance().CreateNewInternals();
                 Satellite* satellite = SatelliteBuilder::Instance().GetSatellite();
                 SatelliteBuilder::Instance().Equip(satellite);           		// improove
-                        	
+                 
+                {       	
+                int npc_race_id = RACES_GOOD_LIST[getRandInt(0, RACES_GOOD_LIST.size())];
+                int npc_subtype_id = CLASS::WARRIOR_ID;
+                
+                NpcBuilder::Instance().CreateNewNpc();
+        	NpcBuilder::Instance().CreateNewInternals(npc_race_id, npc_subtype_id);
+                satellite->BindOwnerNpc(NpcBuilder::Instance().GetNpc());
+                }
+                
                 starsystem->AddVehicle((Vehicle*)satellite, vec2f(0, 0), 0, planet);
         }
         
 }
 
 void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
-{
-        int npc_subtype_id;
-    	int npc_race_id = RACES_EVIL_LIST[getRandInt(0, RACES_EVIL_LIST.size())];
-        
+{       
     	for (int i=0; i<spacestation_per_system; i++)
     	{     
-       		//npc_subtype_id = SHIP_SUBTYPE_LIST[getRandInt(0, RACES_EVIL_LIST.size())];
-                npc_subtype_id = CLASS::WARRIOR_ID;
-
-        	NpcBuilder::Instance().CreateNewNpc();
-                NpcBuilder::Instance().CreateNewInternals(npc_race_id, npc_subtype_id);
-                Npc* npc = NpcBuilder::Instance().GetNpc();
+    		int npc_race_id = RACES_GOOD_LIST[getRandInt(0, RACES_GOOD_LIST.size())];
+                int npc_subtype_id = CLASS::WARRIOR_ID;
 
         	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[getRandInt(0, RACES_ALL_LIST.size())];
         	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
@@ -179,20 +181,28 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
        
         	SpaceStationBuilder::Instance().Equip(spacestation);       	// improove
         	spacestation->UpdateAllPropertiesAndAbilities(); 	// improove
-        
-        	npc->BindVehicle(spacestation);
+
+        	NpcBuilder::Instance().CreateNewNpc();
+                NpcBuilder::Instance().CreateNewInternals(npc_race_id, npc_subtype_id); 
+        	spacestation->BindOwnerNpc(NpcBuilder::Instance().GetNpc());
 
 		vec2f center(getRandInt(0, 800), getRandInt(0, 800));
 		float angle = getRandInt(0, 360);  
                 
         	starsystem->AddVehicle(spacestation, center, angle, NULL);
         	
+        	{  
                 SatelliteBuilder::Instance().CreateNewSatellite();
                 SatelliteBuilder::Instance().CreateNewInternals();
                 Satellite* satellite = SatelliteBuilder::Instance().GetSatellite();
                 SatelliteBuilder::Instance().Equip(satellite);           		// improove
-                        	
+                   	
+                NpcBuilder::Instance().CreateNewNpc();
+        	NpcBuilder::Instance().CreateNewInternals(npc_race_id, npc_subtype_id);
+                satellite->BindOwnerNpc(NpcBuilder::Instance().GetNpc());
+                
                 starsystem->AddVehicle((Vehicle*)satellite, vec2f(0, 0), 0, spacestation);
+    		}
     	}        
 }
 
@@ -212,10 +222,6 @@ void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num)
                         case RACE::R6_ID: { npc_subtype_id = RACE6_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE6_ALLOWED_SUBTYPE_LIST.size())];  break; }
                         case RACE::R7_ID: { npc_subtype_id = RACE7_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE7_ALLOWED_SUBTYPE_LIST.size())];  break; }
                 }   
-           		
-        	NpcBuilder::Instance().CreateNewNpc();
-        	NpcBuilder::Instance().CreateNewInternals(npc_race_id, npc_subtype_id);
-                Npc* npc = NpcBuilder::Instance().GetNpc();
 
         	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[getRandInt(0, RACES_ALL_LIST.size())];
         	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
@@ -226,8 +232,10 @@ void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num)
         	Ship* ship = ShipBuilder::Instance().GetShip();
        
         	ShipBuilder::Instance().Equip(ship);            	// improove
-        
-        	npc->BindVehicle(ship);
+
+        	NpcBuilder::Instance().CreateNewNpc();
+        	NpcBuilder::Instance().CreateNewInternals(npc_race_id, npc_subtype_id);
+        	ship->BindOwnerNpc(NpcBuilder::Instance().GetNpc());
 
 		vec2f center(getRandInt(0, 800), getRandInt(0, 800));
 		float angle = getRandInt(0, 360);  

@@ -74,9 +74,9 @@ void Container::PostDeathUniqueEvent(bool show_effect)
 
 void Container::CalcCollisionrRadius()
 {
-        collision_radius = (textureOb->getFrameWidth() + textureOb->getFrameHeight())/4; 
+        collision_radius = (textureOb->GetFrameWidth() + textureOb->GetFrameHeight())/4; 
         
-        points.SetWidthHeight(textureOb->getFrameWidth(), textureOb->getFrameHeight());  // needs for finding visible corners
+        points.SetWidthHeight(textureOb->GetFrameWidth(), textureOb->GetFrameHeight());  // needs for finding visible corners
 }
 
 void Container::UpdateInSpace(int time, bool show_effect)

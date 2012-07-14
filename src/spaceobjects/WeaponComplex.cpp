@@ -151,26 +151,22 @@ void WeaponComplex::SetTarget(BaseGameEntity* target)
 
 }
 
-void WeaponComplex::Fire(int timer, bool show_effect)
+void WeaponComplex::Fire(int timer, int attack_skill, bool show_effect)
 {
      	if (timer < TURN_TIME - fire_delay)
      	{
-        	for (unsigned int i = 0; i < slot_weapon_reloaded_vec.size(); i++)
+        	for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
         	{	
                         slot_weapon_reloaded_vec[i]->GetTurrel()->CheckTarget();
                         if (slot_weapon_reloaded_vec[i]->GetTurrel()->GetTarget())
            		{
-               			if ( slot_weapon_reloaded_vec[i]->GetTurrel()->FireEvent(show_effect) == true )
+               			if ( slot_weapon_reloaded_vec[i]->GetTurrel()->FireEvent(attack_skill, show_effect) == true )
                			{
-                   			slot_weapon_reloaded_vec.erase(slot_weapon_reloaded_vec.begin() + i);
                    			fire_delay += d_fire_delay;
-                   			break;
                			}
-            			else
-            			{
-               				slot_weapon_reloaded_vec.erase(slot_weapon_reloaded_vec.begin() + i);
-               				break;
-            			}
+
+       				slot_weapon_reloaded_vec.erase(slot_weapon_reloaded_vec.begin() + i);
+       				break;
             		}
         	}
         }

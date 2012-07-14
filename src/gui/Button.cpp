@@ -25,16 +25,17 @@ Button::Button(TextureOb* textureOb,
 		 int pos_y, 
 		 int w, 
 		 int h, 
-		 std::string info_str)
+		 std::string info)
 {
 	type_id = GUI::BUTTON::BUTTON_ID;
 	
 	this->subtype_id = subtype_id;
     	this->textureOb = textureOb;
-    	this->info_str = info_str; 
+    	this->info = info; 
 
 	alpha = 1.0f;
-	lock = false;
+	lock    = false;
+	trigger = false;
 	
     	rect.Set(pos_x, pos_y, w, h);
 }
@@ -55,10 +56,56 @@ void Button::SetCenter(int x, int y)
 {        
      	rect.SetCenter((float)x, (float)y);
 }
-   
+
+void Button::PressEvent()
+{
+	ShadeOn();
+}
+
+void Button::TriggerEvent()
+{
+	if (trigger == false)
+	{
+		trigger = true;
+		ShadeOn();
+	}
+	else
+	{
+		trigger = false;
+		ShadeOff();
+	}
+}
+
+void Button::LockOn() 
+{ 
+	lock = true; 
+	FullShadeOn();  
+};
+
+void Button::LockOff() 
+{ 
+	lock = false; 
+	ShadeOff();
+};
+
+void Button::ShadeOn() 
+{
+	alpha = 0.4f; 
+}
+
+void Button::FullShadeOn() 
+{
+	alpha = 0.05f; 
+}
+
+void Button::ShadeOff() 
+{
+	alpha = 1.0f; 
+}
+       		
 void Button::Update()
 {
-	if (lock == false)
+	if ( (lock == false) and (trigger == false) )
 	{
 		if (alpha < 1.0f)
 		{
@@ -73,12 +120,17 @@ void Button::Update()
           		
 void Button::Render() const
 {
-
 	glColor4f(1.0f, 1.0f, 1.0f, alpha);
    	drawTexturedRect(textureOb, rect, -1);
 }
 
+void Button::RenderWithTitle(const std::string& title, int offset_x, int offset_y) const
+{
+	Render();
+     	drawSimpleText(info, 12, rect.GetBottomLeft().x  + offset_x, rect.GetBottomLeft().y + offset_y);
+}
+
 void Button::RenderInfo(int offset_x, int offset_y) const
 {
-     	drawSimpleText(info_str, 12, rect.GetBottomLeft().x - 50 + offset_x, rect.GetBottomLeft().y + 30 + offset_y);
+     	drawSimpleText(info, 12, rect.GetBottomLeft().x - 50 + offset_x, rect.GetBottomLeft().y + 30 + offset_y);
 }

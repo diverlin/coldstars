@@ -77,11 +77,6 @@ Player::Player(int id)
     	cursor = new Cursor(this);
     	
     	GUI_MANAGER    = new GuiManager(this);
-    	
-    	show_all_orbit     = false;
-     	show_all_path      = false;
-     	show_radar_range   = false;
-     	show_grapple_range = false;
 }
     
 Player::~Player()
@@ -516,12 +511,12 @@ void Player::RenderInSpace(bool turn_ended, bool forceDraw_orbits, bool forceDra
        			npc->GetVehicle()->GetWeaponComplex()->RenderWeaponsRange();
        			npc->GetVehicle()->GetWeaponComplex()->RenderWeaponIcons(); 
        	
-        		if (GetShowRadarRange() == true)
+        		if (control_flags.GetShowRadarRangeFlag() == true)
         		{
         			npc->GetVehicle()->RenderRadarRange();
         		}
 
-        		if (GetShowGrappleRange() == true)
+        		if (control_flags.GetGrabModeFlag() == true)
         		{
         			npc->GetVehicle()->RenderGrappleRange();
         		}
@@ -643,7 +638,7 @@ bool Player::MouseInteractionWithSatellites(int mxvp, int myvp, bool mlb, bool m
 
                		if (mrb == true)
                		{
-               			if (GetShowGrappleRange() == true)
+               			if (control_flags.GetGrabModeFlag() == true)
                			{
        					//if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
        					//{
@@ -725,7 +720,7 @@ bool Player::MouseInteractionWithShips(int mxvp, int myvp, bool mlb, bool mrb) c
 
                		if (mrb == true)
                		{
-               			if (GetShowGrappleRange() == true)
+               			if (control_flags.GetGrabModeFlag() == true)
                			{
 					if (npc->GetVehicle()->ableTo.GRAB == true)
 	       				{
@@ -790,7 +785,7 @@ bool Player::MouseInteractionWithSpaceStations(int mxvp, int myvp, bool mlb, boo
 
                		if (mrb == true)
                		{
-               			if (GetShowGrappleRange() == true)
+               			if (control_flags.GetGrabModeFlag() == true)
                			{
 					//if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
 					//{
@@ -905,17 +900,19 @@ void Player::SessionInSpace(const TurnTimer& turn_timer)
 	cursor->UpdateMousePos();
 
 	npc->GetStarSystem()->FindVisibleEntities_c(this);
-	RenderInSpace(turn_timer.GetTurnEnded(), GetShowAllOrbit(), GetShowAllPath()); 
-
-	if (turn_timer.GetTurnEnded() == true)  
+	RenderInSpace(turn_timer.GetTurnEnded(), control_flags.GetShowAllOrbitsFlag(), control_flags.GetShowAllPathFlag()); 
+	bool interaction_with_gui = GUI_MANAGER->RunSession(); 
+	
+	if (interaction_with_gui == false)
 	{
-		if ( (npc->GetScanTarget() == NULL) && (GetWorldMapShowFlag() == false) )
+		if (turn_timer.GetTurnEnded() == true)  
 		{
-			MouseInteractionInSpace();  // improove to exclude all render calls
+			if ( (npc->GetScanTarget() == NULL) && (control_flags.GetShowGalaxyMapFlag() == false) )
+			{
+				MouseInteractionInSpace();  // improove to exclude all render calls
+			}
 		}
 	}
-	
-	GUI_MANAGER->RunSession();   
 }
 
 

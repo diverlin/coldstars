@@ -27,7 +27,7 @@ class ProtectorEquipment  : public BaseEquipment
       		ProtectorEquipment(int);
       		virtual ~ProtectorEquipment();
 
-                void SetProtectionOrig(int rotection_orig) { this->protection_orig = protection_orig; };
+                void SetProtectionOrig(int protection_orig) { this->protection_orig = protection_orig; };
 		int GetProtection() const { return protection; };
       		
       		void CountPrice();

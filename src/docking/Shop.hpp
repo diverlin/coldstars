@@ -31,7 +31,23 @@ class Shop : public Room
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 		
-        private:                
+        private:   
+                int minerals_ammount;
+        	int food_ammount;    
+        	int medicine_ammount;  
+        	int military_ammount;  
+        	int drug_ammount;     
+        	int exclusive_ammount;
+
+                int minerals_price;
+        	int food_price;    
+        	int medicine_price;  
+        	int military_price;  
+        	int drug_price;     
+        	int exclusive_price;
+        	                     
+        	void UpdatePrices();
+        	
                 void SaveDataUniqueShop(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueShop(const boost::property_tree::ptree&);
 		void ResolveDataUniqueShop();

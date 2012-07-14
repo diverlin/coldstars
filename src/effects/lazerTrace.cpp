@@ -106,7 +106,7 @@ void LazerTraceEffect :: Render()
     		 -2, 
     		 len, 
     		 angle_inD, 
-    		 texOb->getFrameHeight()/4);	
+    		 texOb->GetFrameHeight()/4);	
 	}
 }
 

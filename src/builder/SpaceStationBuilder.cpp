@@ -50,16 +50,16 @@ void SpaceStationBuilder::CreateNewInternals()
 {
 	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SPACESTATION_ID); 
        
-       	int protection_rate = 1;
+       	int protection_rate = 50;
        	//if (subtype_id == CLASS::WARRIOR_ID)
         //{
-        	protection_rate = 5;
+        	//protection_rate = 5;
         //}
         
-        KorpusData data_korpus;
+        VehicleKorpusData data_korpus;
     	data_korpus.space       = 2500 + getRandInt(0, 1000);
     	data_korpus.armor       = data_korpus.space;
-    	data_korpus.protection  = 2*protection_rate;
+    	data_korpus.protection  = protection_rate;
     	data_korpus.temperature = 100;
         data_korpus.price       = 10000000;
 

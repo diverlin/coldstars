@@ -53,13 +53,13 @@ void ShipBuilder::CreateNewInternals(int race_id, int subsubtype_id, int size_id
        	int protection_rate = 1;
        	if (subsubtype_id == CLASS::WARRIOR_ID)
         {
-        	protection_rate = 3;
+        	protection_rate = 2;
         }
         
-        KorpusData data_korpus;
+        VehicleKorpusData data_korpus;
     	data_korpus.space       = size_id*150 + getRandInt(0, 100);
     	data_korpus.armor       = data_korpus.space;
-    	data_korpus.protection  = size_id/2*protection_rate;
+    	data_korpus.protection  = protection_rate*size_id/(SIZE_MIN);
     	data_korpus.temperature = 100;
         data_korpus.price       = getRandInt(200, 400)*size_id;
 

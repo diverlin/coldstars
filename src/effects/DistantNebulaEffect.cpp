@@ -80,7 +80,7 @@ DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
 	else    	    textureOb = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::NEBULA_BACKGROUND_ID, color_id);	
 	   	
 	float parallax_rate;
-	if(textureOb->getFrameWidth() * textureOb->getFrameHeight() > 300000)
+	if(textureOb->GetFrameWidth() * textureOb->GetFrameHeight() > 300000)
      		parallax_rate =  1.0/getRandInt(50, 70); 
     	else
       		parallax_rate =  1.0/getRandInt(30, 50);

@@ -107,13 +107,20 @@ float distBetweenPoints(float x1, float y1, float x2, float y2)
 }
 
 
+vec2i getVec2i(int len, int angle)
+{
+    	float alpha = (float)angle / 57.0;	
+    	vec2i request(sin(alpha) * len, cos(alpha) * len);
+    	
+    	return request;
+}
 
 vec2f getRandVec2f(int radius_min, int radius_max)
 {
     	float alpha = (float)getRandInt(0, 360) / 57.0;
     	int len = getRandInt(radius_min, radius_max);
    
- 	vec2f target(sin(alpha) * len, cos(alpha) * len) ;
+ 	vec2f request(sin(alpha) * len, cos(alpha) * len);
     	
-    	return target;
+    	return request;
 }

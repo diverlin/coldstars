@@ -30,6 +30,19 @@ BaseGui::~BaseGui()
 	}
 }	
       		
+Button* BaseGui::GetButton(int request_subtype_id)
+{
+	for (unsigned int i=0; i<button_vec.size(); i++)
+	{
+		if (button_vec[i]->GetSubTypeId() == request_subtype_id)
+		{
+			return button_vec[i]; 
+		}
+	}
+	
+	return NULL;
+} 
+      		       		
 void BaseGui::RenderButtons() const
 {
 	glPushMatrix();

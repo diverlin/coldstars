@@ -255,54 +255,26 @@ void UserInput::GetSimpleInputs(Player* player)
           	
 	           		case sf::Key::G:   // Grapple
 	               	 	{
-	                	        if (player->GetShowGrappleRange() == false)
-	            			{
-	                 			player->SetShowGrappleRange(true);
-	              			}   
-	              			else
-	              			{
-	                 			player->SetShowGrappleRange(false);
-	              			}
+	                	        player->GetControlFlags().InverseGrabModeFlag();
 	                       		break;
 	 			}
 
 
 	           		case sf::Key::R: // RADAR
 	                	{
-	              			if (player->GetShowRadarRange() == false)
-	              			{
-	                			player->SetShowRadarRange(true);
-	             			}
-	              			else
-	              			{
-	                			player->SetShowRadarRange(false);
-	             			}
+                	        	player->GetControlFlags().InverseShowRadarRangeFlag();
 	                 	      	break;
 				}
 
 	           		case sf::Key::O: // Orbits
 	                	{
-	              			if (player->GetShowAllOrbit() == false)
-	              			{
-	                			player->SetShowAllOrbit(true);
-	             			}
-	              			else
-	              			{
-	                			player->SetShowAllOrbit(false);
-	             			}
+                	        	player->GetControlFlags().InverseShowAllOrbitsFlag();
 	                 	      	break;
 				}
 
 	           		case sf::Key::P: // Path
 	                	{
-	              			if (player->GetShowAllPath() == false)
-	              			{
-	                			player->SetShowAllPath(true);
-	             			}
-	              			else
-	              			{
-	                			player->SetShowAllPath(false);
-	             			}
+	              			player->GetControlFlags().InverseShowAllPathFlag();
 	                 	      	break;
 				}
 

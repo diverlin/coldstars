@@ -28,23 +28,6 @@ PlanetData :: PlanetData()
 }
 
 
-Color4f :: Color4f()
-{
-	r = 1.0;
-	g = 1.0;
-	b = 1.0;
-	a = 1.0;
-}
-
-
-Color4i :: Color4i()
-{
-	r = 255;
-	g = 255;
-	b = 255;
-	a = 255;
-}
-
 
 VisionStatus :: VisionStatus()
 {
@@ -90,27 +73,6 @@ AbilitiesStatus :: AbilitiesStatus()
 }
 
 
-
-
-ShipPropetries :: ShipPropetries()
-{       
-        protection   = 0;
-        radius       = 0;
-        speed        = 0;  // depends on mass and drive
-
-        hyper        = 0;  // depends on drive and bak
-        repair       = 0; // depends on droid
-        freeze       = 0; // depends on freezer
-        scan         = 0;   // depends on scaner
-        
-        energy       = 0;
-        temperature  = 0;
-        
-        average_damage = 0;
-        average_fire_radius = 0;
-}
-
-
 LifeData :: LifeData()
 {
         is_alive = true;
@@ -144,21 +106,6 @@ ParticleData :: ParticleData()
         frame = 0;
 }
 	
-
-ControlWord :: ControlWord()
-{
-	scan = false;
-	grapple = false;
-
-	worldmap = false;
-	ship_info = false;
-	planet_info = false;	
-	planet_orbits = false;
-	radar_radius = false;
-}
-
-ControlWord :: ~ControlWord()
-{}
 
 
 
