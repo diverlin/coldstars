@@ -27,50 +27,50 @@ GuiKosmoport::GuiKosmoport(Player* player)
 	
         TextureOb* texOb_button = g_GUI_TEXTUREOB_COLLECTOR.dot_green; // fake
 
-    	Button* angar_screen_button     = new Button(texOb_button, 
-    					     GUI::SCREEN::ANGAR_ID,
+    	ButtonSingle* angar_screen_button     = new ButtonSingle(texOb_button, 
+    					     GUI::BUTTON::ANGAR_ID,
     					     screen_w - 1 * (GUI::ICON_SIZE + 5), 
     					     GUI::ICON_SIZE, 
     					     GUI::ICON_SIZE,  
     					     GUI::ICON_SIZE, 
     					     "angar");    					     
-    	button_vec.push_back(angar_screen_button);
+    	button_map.insert(std::make_pair(GUI::BUTTON::ANGAR_ID, angar_screen_button));
     	
-    	Button* store_screen_button     = new Button(texOb_button, 
-    					     GUI::SCREEN::STORE_ID,
+    	ButtonSingle* store_screen_button     = new ButtonSingle(texOb_button, 
+    					     GUI::BUTTON::STORE_ID,
     					     screen_w - 2 * (GUI::ICON_SIZE + 5),
     					     GUI::ICON_SIZE, 
     					     GUI::ICON_SIZE,  
     					     GUI::ICON_SIZE, 
     					     "store");
-	button_vec.push_back(store_screen_button);
+    	button_map.insert(std::make_pair(GUI::BUTTON::STORE_ID, store_screen_button));
     					        	
-    	Button* shop_screen_button      = new Button(texOb_button, 
-    					     GUI::SCREEN::SHOP_ID,
+    	ButtonSingle* shop_screen_button      = new ButtonSingle(texOb_button, 
+    					     GUI::BUTTON::SHOP_ID,
     					     screen_w - 3 * (GUI::ICON_SIZE + 5), 
     					     GUI::ICON_SIZE, 
     					     GUI::ICON_SIZE,  
     					     GUI::ICON_SIZE, 
     					     "shop");
-    	button_vec.push_back(shop_screen_button);
+    	button_map.insert(std::make_pair(GUI::BUTTON::SHOP_ID, shop_screen_button));
     					     
-    	Button* galaxymap_screen_button = new Button(texOb_button, 
-    					     GUI::SCREEN::GALAXYMAP_ID,
+    	ButtonSingle* galaxymap_screen_button = new ButtonSingle(texOb_button, 
+    					     GUI::BUTTON::GALAXYMAP_ID,
     					     screen_w - 4 * (GUI::ICON_SIZE + 5), 
     					     GUI::ICON_SIZE, 
     					     GUI::ICON_SIZE,  
     					     GUI::ICON_SIZE, 
     					     "galaxymap");
-        button_vec.push_back(galaxymap_screen_button);
+   	button_map.insert(std::make_pair(GUI::BUTTON::GALAXYMAP_ID, galaxymap_screen_button));
     					     
-    	Button* goverment_screen_button = new Button(texOb_button, 
-    					     GUI::SCREEN::GOVERMENT_ID,
+    	ButtonSingle* goverment_screen_button = new ButtonSingle(texOb_button, 
+    					     GUI::BUTTON::GOVERMENT_ID,
     					     screen_w - 5 * (GUI::ICON_SIZE + 5), 
     					     GUI::ICON_SIZE,
     					     GUI::ICON_SIZE,  
     					     GUI::ICON_SIZE, 
     					     "goverment");
-    	button_vec.push_back(goverment_screen_button);
+   	button_map.insert(std::make_pair(GUI::BUTTON::GOVERMENT_ID, goverment_screen_button));
 
 	active_screen_id = GUI::SCREEN::ANGAR_ID;
 }
@@ -79,24 +79,57 @@ GuiKosmoport::GuiKosmoport(Player* player)
 GuiKosmoport::~GuiKosmoport()
 {}
 		
-bool GuiKosmoport::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb)
+void GuiKosmoport::ButtonsAction()
 {
-    	for (unsigned int i = 0; i< button_vec.size(); i++)
+	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{
-		button_vec[i]->Update();
-       		if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
-       		{
-       			if (lmb == true)
-       			{
-       			       	button_vec[i]->PressEvent();	
-       			   	active_screen_id = button_vec[i]->GetSubTypeId();
-       			   	return true;       			   	
-       			}
-       			break;
-       		}
-        }
-        
-        return false;
+		BaseButton* button = iterator->second;
+		if (button->GetPressed() == true)
+		{
+			switch(button->GetSubTypeId())
+	   		{
+	   			case GUI::BUTTON::ANGAR_ID: 
+	   			{
+   				      	button->PressEvent();	   					
+   					active_screen_id = GUI::SCREEN::ANGAR_ID;
+	   					
+   					return; break;
+	  	 		}
+
+	   			case GUI::BUTTON::STORE_ID: 
+	   			{
+   				      	button->PressEvent();	   					
+   					active_screen_id = GUI::SCREEN::STORE_ID;
+	   					
+   					return; break;
+	  	 		}
+
+	   			case GUI::BUTTON::SHOP_ID: 
+	   			{
+   				      	button->PressEvent();	   					
+   					active_screen_id = GUI::SCREEN::SHOP_ID;
+	   					
+   					return; break;
+	  	 		}
+
+	   			case GUI::BUTTON::GALAXYMAP_ID: 
+	   			{
+   				      	button->PressEvent();	   					
+   					active_screen_id = GUI::SCREEN::GALAXYMAP_ID;
+	   					
+   					return; break;
+	  	 		}
+
+	   			case GUI::BUTTON::GOVERMENT_ID: 
+	   			{
+   				      	button->PressEvent();	   					
+   					active_screen_id = GUI::SCREEN::GOVERMENT_ID;
+	   					
+   					return; break;
+	  	 		}
+	  	 	}
+	  	 }
+	  }
 }
 
                 

@@ -24,33 +24,52 @@ BaseGui::BaseGui()
 
 BaseGui::~BaseGui()
 {
-	for (unsigned int i=0; i<button_vec.size(); i++)
+	for (std::map<int, BaseButton*>::iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{
-		delete button_vec[i];
+		delete iterator->second;
 	}
 }	
       		
-Button* BaseGui::GetButton(int request_subtype_id)
+BaseButton* BaseGui::GetButton(int request_subtype_id) const
 {
-	for (unsigned int i=0; i<button_vec.size(); i++)
+	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{
-		if (button_vec[i]->GetSubTypeId() == request_subtype_id)
+		if (iterator->first == request_subtype_id)
 		{
-			return button_vec[i]; 
+			return iterator->second; 
 		}
 	}
 	
 	return NULL;
 } 
-      		       		
+      
+
+bool BaseGui::UpdateButtonsMouseInteraction(int mxvp, int myvp, int lmb, int rmb)
+{
+	for (std::map<int, BaseButton*>::iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
+	{
+		iterator->second->Update();
+        	if (iterator->second->CheckInteraction(mxvp, myvp) == true)
+        	{
+           		if (lmb == true)
+           		{
+       				iterator->second->PressEvent();
+           		}
+           		return true;
+        	}
+     	}
+     	
+     	return false;
+}
+		       		
 void BaseGui::RenderButtons() const
 {
 	glPushMatrix();
 	{
 		glTranslatef(offset.x, offset.y, 0);
-		for (unsigned int i=0; i<button_vec.size(); i++)
+		for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 		{
-			button_vec[i]->Render();
+			iterator->second->Render();
        		}
        	}
        	glPopMatrix();
@@ -58,11 +77,11 @@ void BaseGui::RenderButtons() const
 
 void BaseGui::RenderFocusedButtonInfo(int mxvp, int myvp) const
 {
-	for (unsigned int i=0; i<button_vec.size(); i++)
-	{		
-                if (button_vec[i]->CheckInteraction(mxvp - offset.x, myvp - offset.y) == true)
+	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
+	{	
+                if (iterator->second->CheckInteraction(mxvp - offset.x, myvp - offset.y) == true)
                 {
-        		button_vec[i]->RenderInfo(offset.x, offset.y);
+        		iterator->second->RenderInfo(offset.x, offset.y);
         		return; break;
         	}
         }

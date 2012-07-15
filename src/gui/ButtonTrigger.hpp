@@ -17,26 +17,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef GUISKILL_H
-#define GUISKILL_H
+#ifndef BUTTONTRIGGER_H
+#define BUTTONTRIGGER_H
 
-class GuiSkill : public BaseGui
+class ButtonTrigger : public BaseButton
 {
-   	public:
-      		GuiSkill(Player*);
-      		~GuiSkill();
-  				
-     		void ButtonsAction(Skill*) const;
-      		void RenderSkills(Skill*) const;
+    	public:
+       		ButtonTrigger(TextureOb* textureOb, 
+       		       int subtype_id, 
+       		       int pos_x, 
+       		       int pos_y, 
+       		       int w, 
+       		       int h, 
+       		       std::string info_str):BaseButton(textureOb, subtype_id, pos_x, pos_y, w, h, info_str) {};
+       		       
+       		virtual ~ButtonTrigger() {};  
 
-      	private:     		
-		TextureOb* textureOb_skill;
-		TextureOb* textureOb_skill_transparent;
-		
-		Rect background_rect;
-		TextureOb* textureOb_background;
+		virtual void PressEvent();
+       		virtual void Update();
+        
+        private:
 };
-
-
 
 #endif

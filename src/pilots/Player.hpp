@@ -51,11 +51,17 @@ class ControlFlags
 		//void SetShowAllPath(bool show_all_path)       { this->show_all_path = show_all_path; }
 		//void SetShowRadarRange(bool show_radar_range) { this->show_radar_range = show_radar_range; }
 		//void SetShowGrappleRange(bool show_grapple_range)  { this->show_grapple_range = show_grapple_range; }
-		//void SetShowGalaxyMap(bool show_galaxymap) { this->show_galaxymap = show_galaxymap; };
+		void SetShowGalaxyMapFlag(bool show_galaxymap) { this->show_galaxymap = show_galaxymap; };
 		//void SetShowAllShipsInfo(bool show_all_shipsinfo) { this->show_all_shipsinfo = show_all_shipsinfo; };
 
 		bool GetShowAllOrbitsFlag()     const { return show_all_orbits; };
 		bool GetShowAllPathFlag()      const { return show_all_path; };
+
+		bool GetShowGalaxyMapFlag() const { return show_galaxymap; };
+		bool GetShowAllShipsInfoFlag() const { return show_all_shipsinfo; };
+		bool GetShowRadarRangeFlag() const { return show_radar_range; };
+		bool GetGrabModeFlag() const { return grab_mode; };
+		
 		//bool GetShowRadarRange()   const { return show_radar_range; }
 		//bool GetShowGrappleRange() const { return show_grapple_range; }        
 				
@@ -88,11 +94,6 @@ class ControlFlags
 			if (grab_mode == true) 	{ grab_mode = false; }
 			else 				{ grab_mode = true; };			
 		};
-				
-		bool GetShowGalaxyMapFlag() const { return show_galaxymap; };
-		bool GetShowAllShipsInfoFlag() const { return show_all_shipsinfo; };
-		bool GetShowRadarRangeFlag() const { return show_radar_range; };
-		bool GetGrabModeFlag() const { return grab_mode; };
 };
 
 class WeaponSelector
@@ -103,7 +104,7 @@ class WeaponSelector
 		void SetAll(bool);
 		
 		bool GetSingle(unsigned int) const;
-		bool IsAllTrue() const;
+		bool StatesAreMixed() const;
 	
 	private:
 		bool state[GAME::WEAPONS_NUM_MAX];	
@@ -123,7 +124,8 @@ class Player : public Base
     		Player(int);
      		~Player();
 
-		ControlFlags& GetControlFlags() { return control_flags; };
+		ControlFlags& GetControlFlags() 	{ return control_flags; };
+		WeaponSelector& GetWeaponsSelector()	{ return weapons_selector; };
           	
 		Npc* GetNpc()       const { return npc; }
 		Cursor* GetCursor() const { return cursor; }
@@ -161,7 +163,7 @@ class Player : public Base
      	     	Cursor* cursor;
 
      	     	ControlFlags control_flags;  
-     		WeaponSelector weapon_selector;     		     	     	
+     		WeaponSelector weapons_selector;     		     	     	
      	     	
      	     	// VISIBLE ENTITY LIST
     		std::vector<Star*>         visible_STAR_vec;
@@ -193,17 +195,17 @@ class Player : public Base
     		void SessionInSpace(const TurnTimer&);
     		void SessionInKosmoport();
     		
-    		void MouseInteractionInSpace();
-    		bool MouseInteractionWithRockets(int, int, bool, bool) const;
-    		bool MouseInteractionWithContainers(int, int, bool, bool) const;
-    		bool MouseInteractionWithSatellites(int, int, bool, bool) const;
-    		bool MouseInteractionWithAsteroids(int, int, bool, bool) const;
-    		bool MouseInteractionWithShips(int, int, bool, bool) const;
-    		bool MouseInteractionWithBlackHoles(int, int, bool, bool) const;
-    		bool MouseInteractionWithSpaceStations(int, int, bool, bool) const;
-    		bool MouseInteractionWithPlanets(int, int, bool, bool) const;
-    		bool MouseInteractionWithStars(int, int, bool, bool) const;
-    		void MouseNavigation(int, int, bool, bool) const;
+    		void MouseInteractionInSpace(float, float, bool, bool);
+    		bool MouseInteractionWithRockets(float, float, bool, bool) const;
+    		bool MouseInteractionWithContainers(float, float, bool, bool) const;
+    		bool MouseInteractionWithSatellites(float, float, bool, bool) const;
+    		bool MouseInteractionWithAsteroids(float, float, bool, bool) const;
+    		bool MouseInteractionWithShips(float, float, bool, bool) const;
+    		bool MouseInteractionWithBlackHoles(float, float, bool, bool) const;
+    		bool MouseInteractionWithSpaceStations(float, float, bool, bool) const;
+    		bool MouseInteractionWithPlanets(float, float, bool, bool) const;
+    		bool MouseInteractionWithStars(float, float, bool, bool) const;
+    		void MouseNavigation(float, float, bool, bool) const;
     		
     		bool IsObjectOnScreen(const Points&) const;
     		bool IsObjectOnScreen(const vec2f&, float) const;

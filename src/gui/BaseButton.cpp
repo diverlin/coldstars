@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "BaseButton.hpp"
 
-Button::Button(TextureOb* textureOb, 
+BaseButton::BaseButton(TextureOb* textureOb, 
 		 int subtype_id, 
 		 int pos_x, 
 		 int pos_y, 
@@ -29,21 +29,23 @@ Button::Button(TextureOb* textureOb,
 {
 	type_id = GUI::BUTTON::BUTTON_ID;
 	
-	this->subtype_id = subtype_id;
     	this->textureOb = textureOb;
+	this->subtype_id = subtype_id;
     	this->info = info; 
 
+	textureOb_additional = NULL;
+	
 	alpha = 1.0f;
-	lock    = false;
-	trigger = false;
+	lock  = false;
+	pressed = false;
 	
     	rect.Set(pos_x, pos_y, w, h);
 }
 
-Button::~Button()
+BaseButton::~BaseButton()
 {}
 
-bool Button::CheckInteraction(int x, int y)
+bool BaseButton::CheckInteraction(int x, int y)
 {        
     	float dist = distBetweenPoints(rect.GetCenter(), x, y);
     	if (dist < rect.GetWidth()/2)
@@ -52,85 +54,61 @@ bool Button::CheckInteraction(int x, int y)
         	return false;    
 }
     
-void Button::SetCenter(int x, int y)
+void BaseButton::SetCenter(int x, int y)
 {        
      	rect.SetCenter((float)x, (float)y);
 }
 
-void Button::PressEvent()
+void BaseButton::Reset()
 {
-	ShadeOn();
+	pressed = false;
+	ShadeOff();
 }
 
-void Button::TriggerEvent()
-{
-	if (trigger == false)
-	{
-		trigger = true;
-		ShadeOn();
-	}
-	else
-	{
-		trigger = false;
-		ShadeOff();
-	}
-}
-
-void Button::LockOn() 
+void BaseButton::LockOn() 
 { 
 	lock = true; 
 	FullShadeOn();  
 };
 
-void Button::LockOff() 
+void BaseButton::LockOff() 
 { 
 	lock = false; 
 	ShadeOff();
 };
 
-void Button::ShadeOn() 
+void BaseButton::ShadeOn() 
 {
 	alpha = 0.4f; 
 }
 
-void Button::FullShadeOn() 
+void BaseButton::FullShadeOn() 
 {
 	alpha = 0.05f; 
 }
 
-void Button::ShadeOff() 
+void BaseButton::ShadeOff() 
 {
 	alpha = 1.0f; 
-}
-       		
-void Button::Update()
-{
-	if ( (lock == false) and (trigger == false) )
-	{
-		if (alpha < 1.0f)
-		{
-			alpha += 0.01f;
-		}
-		else
-		{
-			alpha = 1.0f;
-		}
-	}
-}
-          		
-void Button::Render() const
+}       		
+         		
+void BaseButton::Render() const
 {
 	glColor4f(1.0f, 1.0f, 1.0f, alpha);
    	drawTexturedRect(textureOb, rect, -1);
+   	if (textureOb_additional != NULL)
+   	{
+   		drawTexturedRect(textureOb_additional, rect, -1);   	
+   	}
 }
 
-void Button::RenderWithTitle(const std::string& title, int offset_x, int offset_y) const
-{
-	Render();
-     	drawSimpleText(info, 12, rect.GetBottomLeft().x  + offset_x, rect.GetBottomLeft().y + offset_y);
-}
+//void BaseButton::RenderWithTitle(const std::string& title, int offset_x, int offset_y) const
+//{
+	//Render();
+     	//drawSimpleText(info, 12, rect.GetBottomLeft().x  + offset_x, rect.GetBottomLeft().y + offset_y);
+//}
 
-void Button::RenderInfo(int offset_x, int offset_y) const
+void BaseButton::RenderInfo(int offset_x, int offset_y) const
 {
      	drawSimpleText(info, 12, rect.GetBottomLeft().x - 50 + offset_x, rect.GetBottomLeft().y + 30 + offset_y);
 }

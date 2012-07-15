@@ -32,35 +32,35 @@ GuiSkill::GuiSkill(Player* player)
      	TextureOb* texOb_icon_plus  = g_GUI_TEXTUREOB_COLLECTOR.icon_plus;
      	TextureOb* texOb_icon_minus = g_GUI_TEXTUREOB_COLLECTOR.icon_minus;
      	     	
-     	Button* Increment_attack_button   = new Button(texOb_icon_plus, GUI::BUTTON::SKILL::INCREMENT_ATTACK_ID, center.x, center.y - button_h, button_w, button_h, "increment attack");  
-     	button_vec.push_back(Increment_attack_button);
-     	Button* Decrement_attack_button   = new Button(texOb_icon_minus, GUI::BUTTON::SKILL::DECREMENT_ATTACK_ID, center.x, center.y - 2*button_h, button_w, button_h, "decrement attack");  
-     	button_vec.push_back(Decrement_attack_button);
+     	ButtonSingle* Increment_attack_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_ATTACK_ID, center.x, center.y - button_h, button_w, button_h, "increment attack");  
+     	button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_ATTACK_ID, Increment_attack_button));
+     	ButtonSingle* Decrement_attack_button   = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_ATTACK_ID, center.x, center.y - 2*button_h, button_w, button_h, "decrement attack");  
+     	button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_ATTACK_ID, Decrement_attack_button));
                      
-     	Button* Increment_defence_button  = new Button(texOb_icon_plus, GUI::BUTTON::SKILL::INCREMENT_DEFENCE_ID, center.x + button_w, center.y - button_h, button_w, button_h, "increment defence");  
-     	button_vec.push_back(Increment_defence_button);
-     	Button* Decrement_defence_button  = new Button(texOb_icon_minus, GUI::BUTTON::SKILL::DECREMENT_DEFENCE_ID, center.x + button_w, center.y - 2*button_h, button_w, button_h, "decrement defence");  
-     	button_vec.push_back(Decrement_defence_button);
+     	ButtonSingle* Increment_defence_button  = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_DEFENCE_ID, center.x + button_w, center.y - button_h, button_w, button_h, "increment defence");  
+     	button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_DEFENCE_ID, Increment_defence_button));
+     	ButtonSingle* Decrement_defence_button  = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_DEFENCE_ID, center.x + button_w, center.y - 2*button_h, button_w, button_h, "decrement defence");  
+     	button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_DEFENCE_ID, Decrement_defence_button));
      	        
-     	Button* Increment_leader_button   = new Button(texOb_icon_plus, GUI::BUTTON::SKILL::INCREMENT_LEADER_ID, center.x + 2*button_w, center.y - button_h, button_w, button_h, "increment leader");  
-     	button_vec.push_back(Increment_leader_button);
-     	Button* Decrement_leader_button   = new Button(texOb_icon_minus, GUI::BUTTON::SKILL::DECREMENT_LEADER_ID, center.x + 2*button_w, center.y - 2*button_h, button_w, button_h, "decrement leader"); 
-     	button_vec.push_back(Decrement_leader_button);
+     	ButtonSingle* Increment_leader_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_LEADER_ID, center.x + 2*button_w, center.y - button_h, button_w, button_h, "increment leader");  
+     	button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_LEADER_ID, Increment_leader_button));
+     	ButtonSingle* Decrement_leader_button   = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_LEADER_ID, center.x + 2*button_w, center.y - 2*button_h, button_w, button_h, "decrement leader"); 
+     	button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_LEADER_ID, Decrement_leader_button));
      	      
-     	Button* Increment_trader_button   = new Button(texOb_icon_plus, GUI::BUTTON::SKILL::INCREMENT_TRADER_ID, center.x + 3*button_w, center.y - button_h, button_w, button_h, "increment trader");  
-     	button_vec.push_back(Increment_trader_button);
-     	Button* Decrement_trader_button   = new Button(texOb_icon_minus, GUI::BUTTON::SKILL::DECREMENT_TRADER_ID, center.x + 3*button_w, center.y - 2*button_h, button_w, button_h, "decrement trader"); 
-     	button_vec.push_back(Decrement_trader_button);
+     	ButtonSingle* Increment_trader_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_TRADER_ID, center.x + 3*button_w, center.y - button_h, button_w, button_h, "increment trader");  
+     	button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_TRADER_ID, Increment_trader_button));
+     	ButtonSingle* Decrement_trader_button   = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_TRADER_ID, center.x + 3*button_w, center.y - 2*button_h, button_w, button_h, "decrement trader"); 
+     	button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_TRADER_ID, Decrement_trader_button));
     
-     	Button* Increment_technic_button  = new Button(texOb_icon_plus, GUI::BUTTON::SKILL::INCREMENT_TECHNIC_ID, center.x + 4*button_w, center.y - button_h, button_w, button_h, "increment technic");  
-     	button_vec.push_back(Increment_technic_button);
-     	Button* Decrement_technic_button  = new Button(texOb_icon_minus, GUI::BUTTON::SKILL::DECREMENT_TECHNIC_ID, center.x + 4*button_w, center.y - 2*button_h, button_w, button_h, "decrement technic"); 
-     	button_vec.push_back(Decrement_technic_button);
+     	ButtonSingle* Increment_technic_button  = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_TECHNIC_ID, center.x + 4*button_w, center.y - button_h, button_w, button_h, "increment technic");  
+     	button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_TECHNIC_ID, Increment_technic_button));
+     	ButtonSingle* Decrement_technic_button  = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_TECHNIC_ID, center.x + 4*button_w, center.y - 2*button_h, button_w, button_h, "decrement technic"); 
+     	button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_TECHNIC_ID, Decrement_technic_button));
      
-     	Button* Increment_diplomat_button = new Button(texOb_icon_plus, GUI::BUTTON::SKILL::INCREMENT_DIPLOMAT_ID, center.x + 5*button_w, center.y - button_h, button_w, button_h, "increment diplomat");  
-     	button_vec.push_back(Increment_diplomat_button);
-     	Button* Decrement_diplomat_button = new Button(texOb_icon_minus, GUI::BUTTON::SKILL::DECREMENT_DIPLOMAT_ID, center.x + 5*button_w, center.y - 2*button_h, button_w, button_h, "decrement diplomat");
-        button_vec.push_back(Decrement_diplomat_button);     
+     	ButtonSingle* Increment_diplomat_button = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_DIPLOMAT_ID, center.x + 5*button_w, center.y - button_h, button_w, button_h, "increment diplomat");  
+     	button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_DIPLOMAT_ID, Increment_diplomat_button));
+     	ButtonSingle* Decrement_diplomat_button = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_DIPLOMAT_ID, center.x + 5*button_w, center.y - 2*button_h, button_w, button_h, "decrement diplomat");
+     	button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_DIPLOMAT_ID, Decrement_diplomat_button));    
 
 	background_rect.Set(center.x, center.y, 6*button_w, SKILL::ATTACK_MAX*button_h);	
 	textureOb_background = g_GUI_TEXTUREOB_COLLECTOR.text_background;
@@ -69,37 +69,33 @@ GuiSkill::GuiSkill(Player* player)
 GuiSkill::~GuiSkill()
 {}
 
-bool GuiSkill::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb, Skill* skill)
+void GuiSkill::ButtonsAction(Skill* skill) const
 {
-	for (unsigned int i=0; i<button_vec.size(); i++)
+	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{
-		if (button_vec[i]->CheckInteraction(mxvp - offset.x, myvp - offset.y) == true)
+		BaseButton* button = iterator->second;
+		if (button->GetPressed() == true)
 		{
-	       		if (lmb == true)
+        		switch(button->GetSubTypeId())
         		{
-        	   		switch(button_vec[i]->GetSubTypeId())
-        	   		{
-        	   	   		case GUI::BUTTON::SKILL::INCREMENT_ATTACK_ID:   { skill->IncrementAttack(); break; }
-        	        		case GUI::BUTTON::SKILL::DECREMENT_ATTACK_ID:   { skill->DecrementAttack(); break; }
+        			case GUI::BUTTON::INCREMENT_ATTACK_ID:   { skill->IncrementAttack(); break; }
+        			case GUI::BUTTON::DECREMENT_ATTACK_ID:   { skill->DecrementAttack(); break; }
            		   	      	
-        	   			case GUI::BUTTON::SKILL::INCREMENT_DEFENCE_ID:  { skill->IncrementDefence(); break; }
-        	        		case GUI::BUTTON::SKILL::DECREMENT_DEFENCE_ID:  { skill->DecrementDefence(); break; }
+        			case GUI::BUTTON::INCREMENT_DEFENCE_ID:  { skill->IncrementDefence(); break; }
+        			case GUI::BUTTON::DECREMENT_DEFENCE_ID:  { skill->DecrementDefence(); break; }
           		   	      	
-        	   			case GUI::BUTTON::SKILL::INCREMENT_LEADER_ID:   { skill->IncrementLeader(); break; }
-        	        		case GUI::BUTTON::SKILL::DECREMENT_LEADER_ID:   { skill->DecrementLeader(); break; }
+        			case GUI::BUTTON::INCREMENT_LEADER_ID:   { skill->IncrementLeader(); break; }
+        			case GUI::BUTTON::DECREMENT_LEADER_ID:   { skill->DecrementLeader(); break; }
            		   	      	
-        	   			case GUI::BUTTON::SKILL::INCREMENT_TRADER_ID:   { skill->IncrementTrader(); break; }
-        	        		case GUI::BUTTON::SKILL::DECREMENT_TRADER_ID:   { skill->DecrementTrader(); break; }
+        			case GUI::BUTTON::INCREMENT_TRADER_ID:   { skill->IncrementTrader(); break; }
+        			case GUI::BUTTON::DECREMENT_TRADER_ID:   { skill->DecrementTrader(); break; }
            		   	      	
-        	   			case GUI::BUTTON::SKILL::INCREMENT_TECHNIC_ID:  { skill->IncrementTechnic(); break; }
-        	       			case GUI::BUTTON::SKILL::DECREMENT_TECHNIC_ID:  { skill->DecrementTechnic(); break; }
+        			case GUI::BUTTON::INCREMENT_TECHNIC_ID:  { skill->IncrementTechnic(); break; }
+        			case GUI::BUTTON::DECREMENT_TECHNIC_ID:  { skill->DecrementTechnic(); break; }
            		   	      	
-        	   			case GUI::BUTTON::SKILL::INCREMENT_DIPLOMAT_ID: { skill->IncrementDiplomat(); break; }
-        	        		case GUI::BUTTON::SKILL::DECREMENT_DIPLOMAT_ID: { skill->DecrementDiplomat(); break; }        
-           	        	}  		   	
-           		}
-		
-			return true;
+        			case GUI::BUTTON::INCREMENT_DIPLOMAT_ID: { skill->IncrementDiplomat(); break; }
+        			case GUI::BUTTON::DECREMENT_DIPLOMAT_ID: { skill->DecrementDiplomat(); break; }        
+           		}  		   	
 		}
 	}
 }
@@ -112,16 +108,17 @@ void GuiSkill::RenderSkills(Skill* skill) const
 		glTranslatef(offset.x, offset.y, 0);
 	
 		drawTexturedRect(textureOb_background, background_rect, -1.0);
- 		for (unsigned int bi=0; bi<button_vec.size(); bi++)
+		for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 		{
-			switch(button_vec[bi]->GetSubTypeId())		
+			BaseButton* button = iterator->second;
+			switch(button->GetSubTypeId())		
 			{
-				case GUI::BUTTON::SKILL::INCREMENT_ATTACK_ID:
+				case GUI::BUTTON::INCREMENT_ATTACK_ID:
 				{  			
 		     			for (int i=0; i<SKILL::ATTACK_MAX; i++) 
      					{ 
-         					Rect tmp_rect(button_vec[bi]->GetRect().GetCenter().x - button_w/2, 
-         		      				      button_vec[bi]->GetRect().GetCenter().y + button_h/2 + i*button_h, 
+         					Rect tmp_rect(button->GetRect().GetCenter().x - button_w/2, 
+         		      				      button->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		      				      button_w, button_h);
 
      						if (i<skill->GetAttack()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
@@ -131,12 +128,12 @@ void GuiSkill::RenderSkills(Skill* skill) const
  					break;
 				}
 			
-				case GUI::BUTTON::SKILL::INCREMENT_DEFENCE_ID:
+				case GUI::BUTTON::INCREMENT_DEFENCE_ID:
 				{
 		     			for (int i=0; i<SKILL::DEFENCE_MAX; i++) 
      					{		 
-         					Rect tmp_rect(button_vec[bi]->GetRect().GetCenter().x - button_w/2, 
-         		      				      button_vec[bi]->GetRect().GetCenter().y + button_h/2 + i*button_h, 
+         					Rect tmp_rect(button->GetRect().GetCenter().x - button_w/2, 
+         		      				      button->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		      				      button_w, button_h);
          					if (i<skill->GetDefence()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
      						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
@@ -145,12 +142,12 @@ void GuiSkill::RenderSkills(Skill* skill) const
 					break;
 				}
 
-				case GUI::BUTTON::SKILL::INCREMENT_LEADER_ID:
+				case GUI::BUTTON::INCREMENT_LEADER_ID:
 				{
 	   		     		for (int i=0; i<SKILL::LEADER_MAX; i++) 
      					{ 
-         					Rect tmp_rect(button_vec[bi]->GetRect().GetCenter().x - button_w/2, 
-         		      				      button_vec[bi]->GetRect().GetCenter().y + button_h/2 + i*button_h, 
+         					Rect tmp_rect(button->GetRect().GetCenter().x - button_w/2, 
+         		      				      button->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		      				      button_w, button_h);
          					if (i<skill->GetLeader()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
      						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
@@ -159,12 +156,12 @@ void GuiSkill::RenderSkills(Skill* skill) const
 					break;
 	   			}
 
-	   			case GUI::BUTTON::SKILL::INCREMENT_TRADER_ID:
+	   			case GUI::BUTTON::INCREMENT_TRADER_ID:
 	   			{
 	   	     			for (int i=0; i<SKILL::TRADER_MAX; i++) 
      					{ 
-         					Rect tmp_rect(button_vec[bi]->GetRect().GetCenter().x - button_w/2, 
-         		     				      button_vec[bi]->GetRect().GetCenter().y + button_h/2 + i*button_h, 
+         					Rect tmp_rect(button->GetRect().GetCenter().x - button_w/2, 
+         		     				      button->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		     				      button_w, button_h);
          					if (i<skill->GetTrader()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
      						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
@@ -173,12 +170,12 @@ void GuiSkill::RenderSkills(Skill* skill) const
 					break;
 	   	   		}
 			
-	   			case GUI::BUTTON::SKILL::INCREMENT_TECHNIC_ID:
+	   			case GUI::BUTTON::INCREMENT_TECHNIC_ID:
 	   			{
 	   	     			for (int i=0; i<SKILL::TECHNIC_MAX; i++) 
      					{ 
-         					Rect tmp_rect(button_vec[bi]->GetRect().GetCenter().x - button_w/2, 
-         		      				      button_vec[bi]->GetRect().GetCenter().y + button_h/2 + i*button_h, 
+         					Rect tmp_rect(button->GetRect().GetCenter().x - button_w/2, 
+         		      				      button->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		      				      button_w, button_h);
          					if (i<skill->GetTechnic()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
      						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
@@ -186,12 +183,12 @@ void GuiSkill::RenderSkills(Skill* skill) const
 	   				break;
 	   			}
 
-	   			case GUI::BUTTON::SKILL::INCREMENT_DIPLOMAT_ID:
+	   			case GUI::BUTTON::INCREMENT_DIPLOMAT_ID:
 	   			{
 	   				for (int i=0; i<SKILL::DIPLOMAT_MAX; i++) 
      					{ 
-         					Rect tmp_rect(button_vec[bi]->GetRect().GetCenter().x - button_w/2, 
-         		      				      button_vec[bi]->GetRect().GetCenter().y + button_h/2 + i*button_h, 
+         					Rect tmp_rect(button->GetRect().GetCenter().x - button_w/2, 
+         		      				      button->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		     				      button_w, button_h);
          					if (i<skill->GetDiplomat()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
      						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }

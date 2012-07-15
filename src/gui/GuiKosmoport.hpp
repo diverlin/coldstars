@@ -30,7 +30,7 @@ class GuiKosmoport : public BaseGui
 
 		int GetActiveScreenId() const { return active_screen_id; };
 		
-       		bool UpdateMouseInteraction(int, int, int, int);
+       		void ButtonsAction();
                
        	private:
        		int active_screen_id; 

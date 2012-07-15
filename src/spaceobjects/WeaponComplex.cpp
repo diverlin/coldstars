@@ -30,6 +30,20 @@ bool WeaponComplex::AddSlot(ItemSlot* slot)
         slot_weapon_vec.push_back(slot); 
 }
         
+TextureOb* WeaponComplex::GetItemTextureOb(int index) const
+{
+	index--;
+	if (index < slot_weapon_vec.size())
+	{
+		if (slot_weapon_vec[index]->GetEquipedStatus() == true)
+                {
+                     	return slot_weapon_vec[index]->GetItem()->GetTextureOb();   
+                }
+	}
+
+	return NULL;	
+}
+                       	
 bool WeaponComplex::AddItem(BaseItem* item)
 {
         for(unsigned int i = 0; i<slot_weapon_vec.size(); i++)
@@ -45,10 +59,10 @@ bool WeaponComplex::AddItem(BaseItem* item)
 }
  
 void WeaponComplex::PrepareWeapons()
-{
+{       
      	// used once at the beginning of turn
 	ReloadAllWeapons();
-	ValidateAllReloadedWeaponsTarget();
+	ValidateAllWeaponsTarget();
 }
     
 void WeaponComplex::ReloadAllWeapons()
@@ -172,13 +186,22 @@ void WeaponComplex::Fire(int timer, int attack_skill, bool show_effect)
         }
 }
 
-void WeaponComplex::ValidateAllReloadedWeaponsTarget()
+void WeaponComplex::ValidateAllWeaponsTarget()
 {
-	// in STATIC after weapons reloaded
-        for (unsigned int i = 0; i < slot_weapon_reloaded_vec.size(); i++)
-        {	
-        	slot_weapon_reloaded_vec[i]->GetTurrel()->CheckTarget();
-	}
+	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
+        {
+                if (slot_weapon_vec[i]->GetTurrel()->GetTarget() != NULL) 
+                {
+         		if (slot_weapon_vec[i]->GetEquipedStatus() == true) 
+                	{
+             			slot_weapon_reloaded_vec[i]->GetTurrel()->CheckTarget();
+                	}
+                	else
+                	{
+                		slot_weapon_vec[i]->GetTurrel()->ResetTarget();
+                	}
+                }
+        }
 }
 
 void WeaponComplex::ResetDeselectedWeaponTargets()
@@ -247,30 +270,29 @@ void WeaponComplex::RenderTurrels() const
 void WeaponComplex::RenderWeaponsRange()
 {
 	glPushMatrix();
+	{
 		glTranslatef(owner_vehicle->GetPoints().GetCenter().x, owner_vehicle->GetPoints().GetCenter().y, 0.0f);
-		for (unsigned int i = 0; i < slot_weapon_reloaded_vec.size(); i++)
+		for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
         	{
          		if (slot_weapon_reloaded_vec[i]->GetTurrel()->GetSelectedStatus() == true)
                 	{
                 		slot_weapon_reloaded_vec[i]->UpdateRange(g_GUI_TEXTUREOB_COLLECTOR.dot_red);
              			slot_weapon_reloaded_vec[i]->DrawRange();
              		}
-
         	}
+	}
 	glPopMatrix();
 }
 
 void WeaponComplex::RenderWeaponIcons() const
 {       
-        int offset = 0;
-        for (unsigned int i = 0; i < slot_weapon_vec.size(); i++)
+        for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
         {
                 Turrel* _turrel = slot_weapon_vec[i]->GetTurrel();
                 if (_turrel->GetTarget() != NULL )
                 {       
-                        Rect _rect(_turrel->GetTarget()->GetPoints().GetCenter().x - 40/2 + 23*offset, _turrel->GetTarget()->GetPoints().GetCenter().y + 40/2, 20, 20);
+                        Rect _rect(_turrel->GetTarget()->GetPoints().GetCenter().x - 40/2 + 23*i, _turrel->GetTarget()->GetPoints().GetCenter().y + 40/2, 20, 20);
                         drawTexturedRect(slot_weapon_vec[i]->GetItem()->GetTextureOb(), _rect, -2.0);
-                        offset++;
                 }        
         }
 }

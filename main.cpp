@@ -57,7 +57,7 @@ int main()
 		/* server code end */
 
 		/* client code start */
-		UserInput::Instance().Update(player);
+		player->RunSession(turn_timer);
 		
 		if (UserInput::Instance().GetSaveCommand())
 		{
@@ -73,8 +73,7 @@ int main()
 					
 			player = (Player*)EntityManager::Instance().GetEntityById(_player_id);
 		}
-				
-		player->RunSession(turn_timer);
+
 		/* client code end */           	
 	}
 
