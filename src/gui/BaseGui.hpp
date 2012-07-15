@@ -29,9 +29,11 @@ class BaseGui
        		BaseGui();
        		~BaseGui();
 
-       		Button* GetButton(int);  
+       		BaseButton* GetButton(int) const;  
        		
   		void SetOffset(const vec2i& offset) { this->offset = offset; };
+  		
+  		bool UpdateButtonsMouseInteraction(int, int, int, int);
   		
        		void RenderButtons() const;
        		void RenderFocusedButtonInfo(int, int) const;  
@@ -40,7 +42,7 @@ class BaseGui
       		Player* player;
        		int button_w, button_h;
        		
-       		std::vector<Button*> button_vec;
+       		std::map<int, BaseButton*> button_map;
        						
 		vec2i offset;
 };

@@ -27,32 +27,32 @@ GuiAngar::GuiAngar(Player* player)
 	
         TextureOb* texOb_button = g_GUI_TEXTUREOB_COLLECTOR.dot_green; // fake
 
-    	Button* repair_button = new Button(texOb_button, 
+    	ButtonSingle* repair_button = new ButtonSingle(texOb_button, 
     	    			   GUI::BUTTON::GETREPAIR_ID,
     				   screen_w - 1 * (GUI::ICON_SIZE + 5),
     				   screen_h - 2*GUI::ICON_SIZE, 
     				   GUI::ICON_SIZE,  
     				   GUI::ICON_SIZE, 
     				   "buy_repair");
-    	button_vec.push_back(repair_button);
+    	button_map.insert(std::make_pair(GUI::BUTTON::GETREPAIR_ID, repair_button));
     				   
-    	Button* fuel_button   = new Button(texOb_button,
+    	ButtonSingle* fuel_button   = new ButtonSingle(texOb_button,
     	 			   GUI::BUTTON::GETFUEL_ID,
     	 			   screen_w - 1 * (GUI::ICON_SIZE + 5),
     	 			   screen_h - 3*GUI::ICON_SIZE, 
     	 			   GUI::ICON_SIZE,  
     	 			   GUI::ICON_SIZE, 
     	 			   "buy fuel");  
-    	button_vec.push_back(fuel_button);
+    	button_map.insert(std::make_pair(GUI::BUTTON::GETFUEL_ID, fuel_button));
     	 			   
-    	Button* launch_button = new Button(texOb_button, 
+    	ButtonSingle* launch_button = new ButtonSingle(texOb_button, 
     				   GUI::BUTTON::GETLAUNCH_ID,
     				   screen_w - 1 * (GUI::ICON_SIZE + 5), 
     				   screen_h - 4*GUI::ICON_SIZE, 
     				   GUI::ICON_SIZE,  
     				   GUI::ICON_SIZE, 
     				   "launch");
-    	button_vec.push_back(launch_button);
+    	button_map.insert(std::make_pair(GUI::BUTTON::GETLAUNCH_ID, launch_button));
 }
 
 
@@ -61,7 +61,7 @@ GuiAngar::~GuiAngar()
 	
 bool GuiAngar::UpdateMouseInteraction(Angar* angar, int mxvp, int myvp, int lmb, int rmb)
 {    	   	
-	bool interaction = UpdateMouseButtonsInteraction(mxvp, myvp, lmb, rmb);
+	bool interaction = UpdateButtonsMouseInteraction(mxvp, myvp, lmb, rmb);
 	if (interaction == false)
 	{
 		interaction = UpdateMouseVehicleSlotsInteraction(angar, mxvp, myvp, lmb, rmb);
@@ -71,92 +71,53 @@ bool GuiAngar::UpdateMouseInteraction(Angar* angar, int mxvp, int myvp, int lmb,
 	
 }
 
-bool GuiAngar::UpdateMouseButtonsInteraction(int mxvp, int myvp, int lmb, int rmb)            
+void GuiAngar::ButtonsAction() const     
 {
-
-	for (unsigned int i = 0; i< button_vec.size(); i++)
+	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{
-		button_vec[i]->Update();
-		switch(button_vec[i]->GetSubTypeId())
-   		{
-   			case GUI::BUTTON::GETREPAIR_ID: 
-   			{
-   				if (player->GetNpc()->GetVehicle()->IsArmorFull() == true)
-   			       	{
-   					button_vec[i]->LockOn();
-   				}
-	   						
-   				break;
-   			}
-	   		
-   			case GUI::BUTTON::GETFUEL_ID:
-   			{
-   				if (player->GetNpc()->GetVehicle()->IsFuelFull() == true)
-				{
-	   				button_vec[i]->LockOn();
-	   			}
-	   						
-	   			break;
-	   		}
-      				
-       		}
-        }
-        
-
-
-
-
-	for (unsigned int i = 0; i< button_vec.size(); i++)
-	{
-       		if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
-       		{
-       			if (lmb == true)
-       			{
-				switch(button_vec[i]->GetSubTypeId())
+		BaseButton* button = iterator->second;
+		if (button->GetPressed() == true)
+		{
+			switch(button->GetSubTypeId())
+	   		{
+	   			case GUI::BUTTON::GETREPAIR_ID: 
 	   			{
-	   				case GUI::BUTTON::GETREPAIR_ID: 
-	   				{
-	   					if (button_vec[i]->GetLock() == false)
-	   			       		{  			
-	   				      		button_vec[i]->PressEvent();
+	   				if (button->GetLock() == false)
+	   				{  			
+	   				      	button->PressEvent();
 	   					
-	   						player->GetNpc()->GetVehicle()->BuyArmorAsMuchAsPossible();
-	   						return true; 
-	   					}
-	   						
-	   					break;
-	  	 			}
-	   		
-	   				case GUI::BUTTON::GETFUEL_ID:
-	   				{
-	   					if (button_vec[i]->GetLock() == false)
-	   					{
-	   		       				button_vec[i]->PressEvent();
-	   		        		
-	   		        			player->GetNpc()->GetVehicle()->BuyFuelAsMuchAsPossible();
-	   						return true; 
-	   					}	   				
-	   					
-	   					break;
+	   					player->GetNpc()->GetVehicle()->BuyArmorAsMuchAsPossible();
+	   					return; 
 	   				}
-	   			
-	   				case GUI::BUTTON::GETLAUNCH_ID:
+	   						
+	   				break;
+	  	 		}
+	   		
+	   			case GUI::BUTTON::GETFUEL_ID:
+	   			{
+	   				if (button->GetLock() == false)
 	   				{
-	   			       		MicroTask* microtask = new MicroTask(NULL, MICROSCENARIO::LAUNCHING_ID);
-       						player->GetNpc()->GetVehicle()->LaunchingEvent();
-       						player->GetNpc()->GetStateMachine()->SetCurrentMicroTask(microtask);
-       		   				return true; 
+	   		       			button->PressEvent();
+	   		        		
+	   		        		player->GetNpc()->GetVehicle()->BuyFuelAsMuchAsPossible();
+	   					return; 
+	   				}	   				
+	   					
+	   				break;
+	   			}
+	   			
+	   			case GUI::BUTTON::GETLAUNCH_ID:
+	   			{
+	   				MicroTask* microtask = new MicroTask(NULL, MICROSCENARIO::LAUNCHING_ID);
+       					player->GetNpc()->GetVehicle()->LaunchingEvent();
+       					player->GetNpc()->GetStateMachine()->SetCurrentMicroTask(microtask);
+       		   			return; 
        		   				      		   			
-       		   				break;
-       		   			}
-       				}
-       				
+       		   			break;
+       		   		}
        			}
-       			break;
         	}
         }
-        
-        return false;
 }
 
 bool GuiAngar::UpdateMouseVehicleSlotsInteraction(Angar* angar, int mxvp, int myvp, int lmb, int rmb)

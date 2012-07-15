@@ -27,6 +27,8 @@ class WeaponComplex
       		WeaponComplex(Vehicle*);
       		~WeaponComplex();
                
+               	TextureOb* GetItemTextureOb(int) const; // used for gui, additional icons
+               
                 bool AddSlot(ItemSlot*);
                 bool AddItem(BaseItem*);
         	
@@ -63,7 +65,7 @@ class WeaponComplex
         	void ResetDeselectedWeaponTargets(); 
         	        	
         	void ReloadAllWeapons();  
-        	void ValidateAllReloadedWeaponsTarget();
+        	void ValidateAllWeaponsTarget();
       		
 };
 

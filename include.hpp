@@ -264,6 +264,8 @@ class ScenarioCollector;
 
 #include "src/gui/BaseGui.hpp"
 #include "src/gui/BaseButton.hpp"
+#include "src/gui/ButtonTrigger.hpp"
+#include "src/gui/ButtonSingle.hpp"
 #include "src/gui/GuiSpace.hpp"
 #include "src/gui/GuiAngar.hpp"
 #include "src/gui/GuiStore.hpp"
@@ -365,6 +367,8 @@ class ScenarioCollector;
 
 #include "src/gui/BaseGui.cpp"
 #include "src/gui/BaseButton.cpp"
+#include "src/gui/ButtonTrigger.cpp"
+#include "src/gui/ButtonSingle.cpp"
 #include "src/gui/GuiSpace.cpp"
 #include "src/gui/GuiAngar.cpp"
 #include "src/gui/GuiKosmoport.cpp"

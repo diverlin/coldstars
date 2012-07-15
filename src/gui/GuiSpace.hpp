@@ -23,13 +23,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class GuiSpace : public BaseGui
 {
     	public:
-      		GuiSpace(Player*);
+      		GuiSpace();
        		~GuiSpace();
 
-       		bool UpdateMouseInteraction(int, int, int, int);
-
        		void Resize(int, int);
+       		void ButtonsAction(Player*) const;
        		       		
+       		void UpdateEquipmentIcons(Player*) const;
+       		
        		void RenderText(const vec2f&) const;
        		void RenderBar() const;
        		

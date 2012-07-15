@@ -31,7 +31,7 @@ class UserInput
 		
 		bool GetNextTurnReady() const { return next_turn_ready; };
 
-		void Update(Player*);
+		void UpdateInSpace(Player*, GuiSpace*);
 
 	private:
 		UserInput();
@@ -44,12 +44,14 @@ class UserInput
         	bool keyboardUpPressed;    
         	bool keyboardDownPressed;  
         
+        	sf::Event event;
+        	
         	int scroll_accel_x; 
         	int scroll_accel_y; 
         	
         	bool next_turn_ready;
         	
-        	void GetSimpleInputs(Player*);
+        	void GetSimpleInputs(Player*, GuiSpace*);
         	void GetRealTimeInputs();
         	void ScrollCamera(Player*);
 	

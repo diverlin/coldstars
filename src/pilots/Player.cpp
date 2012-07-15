@@ -21,27 +21,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 WeaponSelector::WeaponSelector()
 {
-	for (unsigned int i=0; i<GAME::WEAPONS_NUM_MAX; i++)
-	{
-		state[i] = false;
-	}
+	SetAll(false);
 }
      	
 void WeaponSelector::SetSingle(unsigned int index, bool status)
 {
-	if (index > GAME::WEAPONS_NUM_MAX )
-	{
-		assert("WeaponSelector::SetSingle(), index is out of range");
-	}
 	state[index-1] = status;
 }
 
 bool WeaponSelector::GetSingle(unsigned int index) const
 {
-	if (index > GAME::WEAPONS_NUM_MAX )
-	{
-		assert("WeaponSelector::GetSingle(), index is out of range");
-	}
 	return state[index-1];
 }
      			
@@ -53,16 +42,23 @@ void WeaponSelector::SetAll(bool status)
 	}
 }
    			
-bool WeaponSelector::IsAllTrue() const
+bool WeaponSelector::StatesAreMixed() const
 {
+	bool activated_present = false;
+	bool deactivated_present = false;
 	for (unsigned int i=0; i<GAME::WEAPONS_NUM_MAX; i++)
 	{
-		if (state[i] == false)
+		if (state[i] == true)
 		{
-			return false;
+			activated_present = true;
+		}
+		else
+		{
+			deactivated_present = true;
 		}
 	}
-	return true;
+	
+	return (activated_present and deactivated_present);
 }
 
 
@@ -526,17 +522,9 @@ void Player::RenderInSpace(bool turn_ended, bool forceDraw_orbits, bool forceDra
 	disable_BLEND();  
 } 
 
-void Player::MouseInteractionInSpace() // all large objects must be cheked by last
+void Player::MouseInteractionInSpace(float mxvp, float myvp, bool mlb, bool mrb) 
 {   
     	bool cursor_has_target = false;   
- 
-    	int mxvp = cursor->GetMousePos().x + Screen::Instance().GetBottomLeftGlobalCoord().x;
-    	int myvp = Screen::Instance().GetWindow().GetHeight() - cursor->GetMousePos().y + Screen::Instance().GetBottomLeftGlobalCoord().y;
-
-    	bool mlb = cursor->GetMouseLeftButton();
-    	bool mrb = cursor->GetMouseRightButton();
-
-	npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);                   				       
 	
 	/* NOTE: the intersection must be checked in order from small objects to huge */	
     	if (MouseInteractionWithRockets(mxvp, myvp, mlb, mrb)) { return; }
@@ -552,7 +540,7 @@ void Player::MouseInteractionInSpace() // all large objects must be cheked by la
 	MouseNavigation(mxvp, myvp, mlb, mrb);  
 }
 
-bool Player::MouseInteractionWithRockets(int mxvp, int myvp, bool mlb, bool mrb) const
+bool Player::MouseInteractionWithRockets(float mxvp, float myvp, bool mlb, bool mrb) const
 {
 	for (unsigned int i = 0; i < visible_ROCKET_vec.size(); i++)
        	{ 
@@ -565,7 +553,7 @@ bool Player::MouseInteractionWithRockets(int mxvp, int myvp, bool mlb, bool mrb)
                		{
                			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
                			{
-               				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
+               				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapons_selector);
                				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_ROCKET_vec[i]);
                			}
                			else
@@ -581,7 +569,7 @@ bool Player::MouseInteractionWithRockets(int mxvp, int myvp, bool mlb, bool mrb)
         return false;
 }
 
-bool Player::MouseInteractionWithContainers(int mxvp, int myvp, bool mlb, bool mrb) const
+bool Player::MouseInteractionWithContainers(float mxvp, float myvp, bool mlb, bool mrb) const
 {
        	for (unsigned int i = 0; i < visible_CONTAINER_vec.size(); i++)
        	{ 
@@ -592,7 +580,7 @@ bool Player::MouseInteractionWithContainers(int mxvp, int myvp, bool mlb, bool m
 			            		
       			if (mlb == true)
        			{
-              			npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);                   					    
+              			npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapons_selector);                   					    
                			npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_CONTAINER_vec[i]);
       			}
        			if (mrb == true)
@@ -614,7 +602,7 @@ bool Player::MouseInteractionWithContainers(int mxvp, int myvp, bool mlb, bool m
     	return false;
 }
 
-bool Player::MouseInteractionWithSatellites(int mxvp, int myvp, bool mlb, bool mrb) const
+bool Player::MouseInteractionWithSatellites(float mxvp, float myvp, bool mlb, bool mrb) const
 {
 	for (unsigned int i = 0; i < visible_SATELLITE_vec.size(); i++)
 	{ 
@@ -627,7 +615,7 @@ bool Player::MouseInteractionWithSatellites(int mxvp, int myvp, bool mlb, bool m
                		{
                			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
                			{
-               				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
+               				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapons_selector);
                				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_SATELLITE_vec[i]);
               			}
               			else
@@ -663,7 +651,7 @@ bool Player::MouseInteractionWithSatellites(int mxvp, int myvp, bool mlb, bool m
     	return false;
 }
 
-bool Player::MouseInteractionWithAsteroids(int mxvp, int myvp, bool mlb, bool mrb) const
+bool Player::MouseInteractionWithAsteroids(float mxvp, float myvp, bool mlb, bool mrb) const
 {
        	for (unsigned int i = 0; i < visible_ASTEROID_vec.size(); i++)
        	{ 
@@ -678,7 +666,7 @@ bool Player::MouseInteractionWithAsteroids(int mxvp, int myvp, bool mlb, bool mr
 			{
                 	        if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
                 		{
-                   			npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
+                   			npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapons_selector);
                    			npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_ASTEROID_vec[i]);
                    		}
                    		else
@@ -696,7 +684,7 @@ bool Player::MouseInteractionWithAsteroids(int mxvp, int myvp, bool mlb, bool mr
     	return false;
 }
 
-bool Player::MouseInteractionWithShips(int mxvp, int myvp, bool mlb, bool mrb) const
+bool Player::MouseInteractionWithShips(float mxvp, float myvp, bool mlb, bool mrb) const
 {
 	for (unsigned int i = 0; i < visible_SHIP_vec.size(); i++)
 	{ 
@@ -709,7 +697,7 @@ bool Player::MouseInteractionWithShips(int mxvp, int myvp, bool mlb, bool mrb) c
                		{
                			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
                			{
-               				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
+               				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapons_selector);
                				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_SHIP_vec[i]);
                			}
                			else
@@ -744,7 +732,7 @@ bool Player::MouseInteractionWithShips(int mxvp, int myvp, bool mlb, bool mrb) c
 	return false;
 }
 
-bool Player::MouseInteractionWithBlackHoles(int mxvp, int myvp, bool mlb, bool mrb) const
+bool Player::MouseInteractionWithBlackHoles(float mxvp, float myvp, bool mlb, bool mrb) const
 {
        	for (unsigned int i = 0; i < visible_BLACKHOLE_vec.size(); i++)
        	{ 
@@ -760,7 +748,7 @@ bool Player::MouseInteractionWithBlackHoles(int mxvp, int myvp, bool mlb, bool m
     	return false;
 }
 
-bool Player::MouseInteractionWithSpaceStations(int mxvp, int myvp, bool mlb, bool mrb) const
+bool Player::MouseInteractionWithSpaceStations(float mxvp, float myvp, bool mlb, bool mrb) const
 {
 	for (unsigned int i = 0; i < visible_SPACESTATION_vec.size(); i++)
 	{ 
@@ -773,7 +761,7 @@ bool Player::MouseInteractionWithSpaceStations(int mxvp, int myvp, bool mlb, boo
                		{
                			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
                			{
-               				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapon_selector);
+               				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapons_selector);
                				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_SPACESTATION_vec[i]);
                			}
                			else
@@ -809,7 +797,7 @@ bool Player::MouseInteractionWithSpaceStations(int mxvp, int myvp, bool mlb, boo
         return false;
 }
 
-bool Player::MouseInteractionWithPlanets(int mxvp, int myvp, bool mlb, bool mrb) const
+bool Player::MouseInteractionWithPlanets(float mxvp, float myvp, bool mlb, bool mrb) const
 {
        	for (unsigned int i = 0; i < visible_PLANET_vec.size(); i++)
        	{ 
@@ -835,7 +823,7 @@ bool Player::MouseInteractionWithPlanets(int mxvp, int myvp, bool mlb, bool mrb)
     	return false;
 }
 
-bool Player::MouseInteractionWithStars(int mxvp, int myvp, bool mlb, bool mrb) const
+bool Player::MouseInteractionWithStars(float mxvp, float myvp, bool mlb, bool mrb) const
 {
        	for (unsigned int i = 0; i < visible_STAR_vec.size(); i++)
        	{ 
@@ -851,7 +839,7 @@ bool Player::MouseInteractionWithStars(int mxvp, int myvp, bool mlb, bool mrb) c
     	return false;
 }
 
-void Player::MouseNavigation(int mxvp, int myvp, bool mlb, bool mrb) const
+void Player::MouseNavigation(float mxvp, float myvp, bool mlb, bool mrb) const
 {
 	if (mlb == true)
 	{
@@ -898,18 +886,30 @@ bool Player::IsObjectOnScreen(const vec2f& ob_center, float sizeInPixels) const
 void Player::SessionInSpace(const TurnTimer& turn_timer)
 {
 	cursor->UpdateMousePos();
-
+	
+	npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapons_selector); 
+	
 	npc->GetStarSystem()->FindVisibleEntities_c(this);
 	RenderInSpace(turn_timer.GetTurnEnded(), control_flags.GetShowAllOrbitsFlag(), control_flags.GetShowAllPathFlag()); 
-	bool interaction_with_gui = GUI_MANAGER->RunSession(); 
 	
+	int mx = cursor->GetMousePos().x;
+     	int my = Screen::Instance().GetWindow().GetHeight() - cursor->GetMousePos().y;  
+     	       
+    	bool lmb = cursor->GetMouseLeftButton();
+    	bool rmb = cursor->GetMouseRightButton();
+     	
+	bool interaction_with_gui = GUI_MANAGER->RunSession(mx, my, lmb, rmb); 
+
 	if (interaction_with_gui == false)
 	{
+		float mxvp = mx + Screen::Instance().GetBottomLeftGlobalCoord().x;
+    		float myvp = my + Screen::Instance().GetBottomLeftGlobalCoord().y;
+    	
 		if (turn_timer.GetTurnEnded() == true)  
 		{
 			if ( (npc->GetScanTarget() == NULL) && (control_flags.GetShowGalaxyMapFlag() == false) )
 			{
-				MouseInteractionInSpace();  // improove to exclude all render calls
+				MouseInteractionInSpace(mxvp, myvp, lmb, rmb);  // improove to exclude all render calls
 			}
 		}
 	}
@@ -918,16 +918,22 @@ void Player::SessionInSpace(const TurnTimer& turn_timer)
 
 void Player::SessionInKosmoport()
 {
+	int mx = cursor->GetMousePos().x;
+     	int my = Screen::Instance().GetWindow().GetHeight() - cursor->GetMousePos().y;  
+     	       
+    	bool lmb = cursor->GetMouseLeftButton();
+    	bool rmb = cursor->GetMouseRightButton();
+    	
 	cursor->UpdateMousePos();
-	GUI_MANAGER->RunSession();        
+	GUI_MANAGER->RunSession(mx, my, lmb, rmb);        
 }
 
 void Player::RunSession(const TurnTimer& turn_timer)
 {
        	switch(npc->GetVehicle()->GetPlaceTypeId())
        	{
-       		case ENTITY::SPACE_ID: 	{ this->SessionInSpace(turn_timer); break; }
-       		case ENTITY::KOSMOPORT_ID:  	{ this->SessionInKosmoport(); break; }
+       		case ENTITY::SPACE_ID: 	{ SessionInSpace(turn_timer); break; }
+       		case ENTITY::KOSMOPORT_ID:  	{ SessionInKosmoport(); break; }
        	}        	
        	
        	Screen::Instance().Draw();

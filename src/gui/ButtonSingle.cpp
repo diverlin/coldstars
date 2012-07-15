@@ -17,26 +17,30 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef GUISKILL_H
-#define GUISKILL_H
+#include "ButtonSingle.hpp"
 
-class GuiSkill : public BaseGui
+/*virtual*/
+void ButtonSingle::PressEvent()
 {
-   	public:
-      		GuiSkill(Player*);
-      		~GuiSkill();
-  				
-     		void ButtonsAction(Skill*) const;
-      		void RenderSkills(Skill*) const;
+	pressed = true;
+	ShadeOn();
+}
 
-      	private:     		
-		TextureOb* textureOb_skill;
-		TextureOb* textureOb_skill_transparent;
-		
-		Rect background_rect;
-		TextureOb* textureOb_background;
-};
-
-
-
-#endif
+/*virtual*/   		
+void ButtonSingle::Update()
+{
+	if ( (lock == false) )
+	{
+		if (alpha < 1.0f)
+		{
+			alpha += 0.01f;
+		}
+		else
+		{
+			alpha = 1.0f;
+		}
+	}
+	
+	pressed = false;
+}
+      

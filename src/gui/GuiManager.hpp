@@ -26,7 +26,7 @@ class GuiManager
       		GuiManager(Player*);
       		~GuiManager();
 
-		bool RunSession();
+		bool RunSession(int, int, bool, bool);
       		
       	private:
       		Player* player;

@@ -18,21 +18,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "GuiSpace.hpp"
 
-GuiSpace::GuiSpace(Player* player)
-{
-	this->player = player;
-    	
+GuiSpace::GuiSpace()
+{   	
     	int screen_w = Screen::Instance().GetWindow().GetWidth();
     	int screen_h = Screen::Instance().GetWindow().GetHeight();
     	
-    	Button* galaxymap_screen_button = new Button(	g_GUI_TEXTUREOB_COLLECTOR.icon_map, 
-        				     		GUI::SCREEN::GALAXYMAP_ID,
-    					     		screen_w - (GUI::ICON_SIZE + 5),
-    					     		screen_h - (GUI::ICON_SIZE + 5), 
-    					     		GUI::ICON_SIZE,  
-    					     		GUI::ICON_SIZE, 
-    					     		"galaxy map");    					     
-    	button_vec.push_back(galaxymap_screen_button);
+    	ButtonTrigger* galaxymap_button = new ButtonTrigger(	g_GUI_TEXTUREOB_COLLECTOR.icon_map, 
+        				     			GUI::BUTTON::GALAXYMAP_ID,
+    					     			screen_w - (GUI::ICON_SIZE + 5),
+    					     			screen_h - (GUI::ICON_SIZE + 5), 
+    					     			GUI::ICON_SIZE,  
+    					     			GUI::ICON_SIZE, 
+    					     			"galaxy map");    					     
+    	button_map.insert(std::make_pair(GUI::BUTTON::GALAXYMAP_ID, galaxymap_button));
 	
        	textureOb_bar_top 	= g_GUI_TEXTUREOB_COLLECTOR.bar_bottom;
        	textureOb_bar_bottom 	= g_GUI_TEXTUREOB_COLLECTOR.bar_bottom;
@@ -45,23 +43,51 @@ GuiSpace::GuiSpace(Player* player)
 	for (int i=0; i<GAME::WEAPONS_NUM_MAX; i++)
 	{
 		vec2i pos = getVec2i(rect_bar_radar.GetWidth()/2.5, angle);
-    		Button* button = new Button(	g_GUI_TEXTUREOB_COLLECTOR.dot_purple, 
+    		ButtonTrigger* button = new ButtonTrigger(	g_GUI_TEXTUREOB_COLLECTOR.dot_purple, 
         					subtype_id,
     						rect_bar_radar.GetCenter().x+pos.x-GUI::ICON_SIZE/2,
     						rect_bar_radar.GetCenter().y+pos.y-GUI::ICON_SIZE/2, 
-    					     	GUI::ICON_SIZE,  
-    					     	GUI::ICON_SIZE, 
+    					     	GUI::ICON_SIZE*1.5,  
+    					     	GUI::ICON_SIZE*1.5, 
     					     	"weapon_"+int2str(i+1));    					     
-    		button_vec.push_back(button);
+    		button_map.insert(std::make_pair(subtype_id, button));
     		
 		angle += 20;
 		subtype_id++;
     	}
 }
 
-
+/*virtual*/
 GuiSpace::~GuiSpace()
 {}
+
+void GuiSpace::ButtonsAction(Player* player) const
+{
+	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
+	{
+		BaseButton* button = iterator->second;
+       		switch(button->GetSubTypeId())
+       		{
+       			case GUI::BUTTON::GALAXYMAP_ID:   
+       			{ 
+       				player->GetControlFlags().SetShowGalaxyMapFlag(button->GetPressed()); 
+       				break; 
+       			}
+        		
+        		case GUI::BUTTON::WEAPON1_ACTIVATOR_ID: { player->GetWeaponsSelector().SetSingle(1, button->GetPressed()); break; }
+        		case GUI::BUTTON::WEAPON2_ACTIVATOR_ID: { player->GetWeaponsSelector().SetSingle(2, button->GetPressed()); break; }      		
+        		case GUI::BUTTON::WEAPON3_ACTIVATOR_ID: { player->GetWeaponsSelector().SetSingle(3, button->GetPressed()); break; }     
+          		case GUI::BUTTON::WEAPON4_ACTIVATOR_ID: { player->GetWeaponsSelector().SetSingle(4, button->GetPressed()); break; }     
+        		case GUI::BUTTON::WEAPON5_ACTIVATOR_ID: { player->GetWeaponsSelector().SetSingle(5, button->GetPressed()); break; }         		           		   	      	
+                	case GUI::BUTTON::WEAPON6_ACTIVATOR_ID: { player->GetWeaponsSelector().SetSingle(6, button->GetPressed()); break; }          		
+        		case GUI::BUTTON::WEAPON7_ACTIVATOR_ID: { player->GetWeaponsSelector().SetSingle(7, button->GetPressed()); break; }          		
+        		case GUI::BUTTON::WEAPON8_ACTIVATOR_ID: { player->GetWeaponsSelector().SetSingle(8, button->GetPressed()); break; }          		
+        		case GUI::BUTTON::WEAPON9_ACTIVATOR_ID: { player->GetWeaponsSelector().SetSingle(9, button->GetPressed()); break; }     
+		}
+	}
+	
+	UpdateEquipmentIcons(player);
+}
 
 void GuiSpace::Resize(int screen_w, int screen_h)
 {
@@ -70,24 +96,18 @@ void GuiSpace::Resize(int screen_w, int screen_h)
 	rect_bar_radar.Set(0, 0, 250, 250);
 }
 
-bool GuiSpace::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb)
+void GuiSpace::UpdateEquipmentIcons(Player* player) const
 {
-	for (unsigned int i=0; i<button_vec.size(); i++)
-     	{ 
-        	if (button_vec[i]->CheckInteraction(mxvp, myvp) == true)
-        	{
-           		if (lmb == true)
-           		{
-           			if (button_vec[i]->GetSubTypeId() == GUI::SCREEN::GALAXYMAP_ID)
-              			{
-              				button_vec[i]->TriggerEvent();
-                 		}
-           		}
-           		return true;
-        	}
-     	}
-     	
-     	return false;
+       	WeaponComplex* weapon_complex = player->GetNpc()->GetVehicle()->GetWeaponComplex();
+       	GetButton(GUI::BUTTON::WEAPON1_ACTIVATOR_ID)->SetAdditionalTextureOb(weapon_complex->GetItemTextureOb(1));
+       	GetButton(GUI::BUTTON::WEAPON2_ACTIVATOR_ID)->SetAdditionalTextureOb(weapon_complex->GetItemTextureOb(2));
+       	GetButton(GUI::BUTTON::WEAPON3_ACTIVATOR_ID)->SetAdditionalTextureOb(weapon_complex->GetItemTextureOb(3));
+       	GetButton(GUI::BUTTON::WEAPON4_ACTIVATOR_ID)->SetAdditionalTextureOb(weapon_complex->GetItemTextureOb(4));
+       	GetButton(GUI::BUTTON::WEAPON5_ACTIVATOR_ID)->SetAdditionalTextureOb(weapon_complex->GetItemTextureOb(5));
+       	GetButton(GUI::BUTTON::WEAPON6_ACTIVATOR_ID)->SetAdditionalTextureOb(weapon_complex->GetItemTextureOb(6));
+       	GetButton(GUI::BUTTON::WEAPON7_ACTIVATOR_ID)->SetAdditionalTextureOb(weapon_complex->GetItemTextureOb(7));       	       	       	
+       	GetButton(GUI::BUTTON::WEAPON8_ACTIVATOR_ID)->SetAdditionalTextureOb(weapon_complex->GetItemTextureOb(8)); 
+       	GetButton(GUI::BUTTON::WEAPON9_ACTIVATOR_ID)->SetAdditionalTextureOb(weapon_complex->GetItemTextureOb(9)); 
 }
 
 void GuiSpace::RenderBar() const
