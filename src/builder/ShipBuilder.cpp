@@ -68,7 +68,7 @@ void ShipBuilder::CreateNewInternals(int race_id, int subsubtype_id, int size_id
        
 
     	LifeData data_life;
-        data_life.armor      = data_korpus.armor;
+        data_life.armor      = data_korpus.armor*0.1;
         data_life.dying_time = 10*texOb->size_id;
         
         int size_threshold = 2; 

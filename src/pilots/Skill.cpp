@@ -34,7 +34,7 @@ technic_undo(0),
 diplomat_undo(0),	
 available_points(6),
 expirience(0),
-expirience_for_next_level(SKILL::EXPIRIENCE_THRESHOLD)
+expirience_nextlevel(SKILL::EXPIRIENCE_THRESHOLD)
 {}     
 
 Skill::~Skill()
@@ -43,10 +43,10 @@ Skill::~Skill()
 void Skill::AddExpirience(unsigned long int addExpirience)
 {
 	expirience += addExpirience;
-	if (expirience > expirience_for_next_level)
+	if (expirience > expirience_nextlevel)
 	{
 		available_points += 1;
-		expirience_for_next_level *= 2;
+		expirience_nextlevel *= 2;
 	}
 }
 
@@ -202,7 +202,7 @@ void Skill::SaveData(boost::property_tree::ptree& save_ptree, const std::string&
         save_ptree.put(sroot+"available_points", available_points); 
 
         save_ptree.put(sroot+"expirience", expirience); 
-        save_ptree.put(sroot+"expirience_for_next_level", expirience_for_next_level); 
+        save_ptree.put(sroot+"expirience_nextlevel", expirience_nextlevel); 
 }	
 
 void Skill::LoadData(const boost::property_tree::ptree& load_ptree)
@@ -216,7 +216,7 @@ void Skill::LoadData(const boost::property_tree::ptree& load_ptree)
         available_points = load_ptree.get<int>("available_points"); 
         
         expirience = load_ptree.get<int>("expirience"); 
-        expirience_for_next_level = load_ptree.get<int>("expirience_for_next_level"); 
+        expirience_nextlevel = load_ptree.get<int>("expirience_nextlevel"); 
 }
 
 void Skill::ResolveData()

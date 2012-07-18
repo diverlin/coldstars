@@ -208,7 +208,10 @@ void Npc::UpdateInfo()
     	info.addTitleStr("NPC");
     	info.addNameStr("id:");           info.addValueStr( int2str(data_id.id)  );
     	info.addNameStr("race:");   	  info.addValueStr( returnRaceStringByRaceId(race_id) ); 
-
+    	info.addNameStr("credits:");   	  info.addValueStr( int2str(credits) );	
+    	info.addNameStr("expirience:");   info.addValueStr( int2str(skill->GetExpirience()) + " / " + int2str(skill->GetExpirienceNextLevel()) );	
+    	info.addNameStr("availiable points:");   info.addValueStr( int2str(skill->GetAvailiablePoints()) );	
+    	    	
 	if (vehicle->ableTo.GRAB == true)
 	{
 		std::string grab_str = vehicle->GetGrappleSlot()->GetGrappleEquipment()->GetTargetStr();
@@ -217,6 +220,7 @@ void Npc::UpdateInfo()
 			info.addNameStr("grab_id:");   		info.addValueStr( grab_str ); 
 		}
 	}
+	
     	if (state_machine->GetMacroTaskManager()->GetScenario() != NULL)
     	{ 	
     	info.addNameStr("macro_task_main:");   	info.addValueStr( state_machine->GetMacroTaskManager()->GetScenario()->GetDescription(this) ); 

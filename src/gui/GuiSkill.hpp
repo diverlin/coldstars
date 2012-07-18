@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class GuiSkill : public BaseGui
 {
    	public:
-      		GuiSkill(Player*);
+      		GuiSkill();
       		~GuiSkill();
   				
      		void ButtonsAction(Skill*) const;
@@ -36,7 +36,5 @@ class GuiSkill : public BaseGui
 		Rect background_rect;
 		TextureOb* textureOb_background;
 };
-
-
 
 #endif

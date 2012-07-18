@@ -26,6 +26,10 @@ class Skill
 		Skill();
 		~Skill();
 
+		int GetAvailiablePoints() const	{ return available_points; };
+		int GetExpirience() 	  const		{ return expirience; };
+		int GetExpirienceNextLevel() const 	{ return expirience_nextlevel; };
+
 		int GetAttack()   const { return attack; };   
 		int GetDefence()  const { return defence; };  
 		int GetLeader()   const { return leader; };  
@@ -76,7 +80,7 @@ class Skill
 		int available_points;
 
 		unsigned long int expirience;
-		unsigned long int expirience_for_next_level;
+		unsigned long int expirience_nextlevel;
 };
 
 #endif

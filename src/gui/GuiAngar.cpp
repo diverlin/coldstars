@@ -28,22 +28,22 @@ GuiAngar::GuiAngar(Player* player)
         TextureOb* texOb_button = g_GUI_TEXTUREOB_COLLECTOR.dot_green; // fake
 
     	ButtonSingle* repair_button = new ButtonSingle(texOb_button, 
-    	    			   GUI::BUTTON::GETREPAIR_ID,
+    	    			   GUI::BUTTON::BUYARMOR_ID,
     				   screen_w - 1 * (GUI::ICON_SIZE + 5),
     				   screen_h - 2*GUI::ICON_SIZE, 
     				   GUI::ICON_SIZE,  
     				   GUI::ICON_SIZE, 
     				   "buy_repair");
-    	button_map.insert(std::make_pair(GUI::BUTTON::GETREPAIR_ID, repair_button));
+    	button_map.insert(std::make_pair(GUI::BUTTON::BUYARMOR_ID, repair_button));
     				   
     	ButtonSingle* fuel_button   = new ButtonSingle(texOb_button,
-    	 			   GUI::BUTTON::GETFUEL_ID,
+    	 			   GUI::BUTTON::BUYFUEL_ID,
     	 			   screen_w - 1 * (GUI::ICON_SIZE + 5),
     	 			   screen_h - 3*GUI::ICON_SIZE, 
     	 			   GUI::ICON_SIZE,  
     	 			   GUI::ICON_SIZE, 
     	 			   "buy fuel");  
-    	button_map.insert(std::make_pair(GUI::BUTTON::GETFUEL_ID, fuel_button));
+    	button_map.insert(std::make_pair(GUI::BUTTON::BUYFUEL_ID, fuel_button));
     	 			   
     	ButtonSingle* launch_button = new ButtonSingle(texOb_button, 
     				   GUI::BUTTON::GETLAUNCH_ID,
@@ -59,16 +59,13 @@ GuiAngar::GuiAngar(Player* player)
 GuiAngar::~GuiAngar()
 {}	
 	
-bool GuiAngar::UpdateMouseInteraction(Angar* angar, int mxvp, int myvp, int lmb, int rmb)
+void GuiAngar::CheckButtonsLock()
 {    	   	
-	bool interaction = UpdateButtonsMouseInteraction(mxvp, myvp, lmb, rmb);
-	if (interaction == false)
-	{
-		interaction = UpdateMouseVehicleSlotsInteraction(angar, mxvp, myvp, lmb, rmb);
-	}
-	
-	return interaction;
-	
+	if (player->GetNpc()->GetVehicle()->IsFuelFull() == true) 	{ GetButton(GUI::BUTTON::BUYFUEL_ID)->LockOn(); }
+	else								{ GetButton(GUI::BUTTON::BUYFUEL_ID)->LockOff(); }
+
+	if (player->GetNpc()->GetVehicle()->IsArmorFull() == true) 	{ GetButton(GUI::BUTTON::BUYARMOR_ID)->LockOn(); }
+	else								{ GetButton(GUI::BUTTON::BUYARMOR_ID)->LockOff(); }
 }
 
 void GuiAngar::ButtonsAction() const     
@@ -80,7 +77,7 @@ void GuiAngar::ButtonsAction() const
 		{
 			switch(button->GetSubTypeId())
 	   		{
-	   			case GUI::BUTTON::GETREPAIR_ID: 
+	   			case GUI::BUTTON::BUYARMOR_ID: 
 	   			{
 	   				if (button->GetLock() == false)
 	   				{  			
@@ -93,7 +90,7 @@ void GuiAngar::ButtonsAction() const
 	   				break;
 	  	 		}
 	   		
-	   			case GUI::BUTTON::GETFUEL_ID:
+	   			case GUI::BUTTON::BUYFUEL_ID:
 	   			{
 	   				if (button->GetLock() == false)
 	   				{

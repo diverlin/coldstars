@@ -49,7 +49,7 @@ bool BaseGui::UpdateButtonsMouseInteraction(int mxvp, int myvp, int lmb, int rmb
 	for (std::map<int, BaseButton*>::iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{
 		iterator->second->Update();
-        	if (iterator->second->CheckInteraction(mxvp, myvp) == true)
+        	if (iterator->second->CheckInteraction(mxvp - offset.x, myvp - offset.y) == true)
         	{
            		if (lmb == true)
            		{

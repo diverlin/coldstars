@@ -22,14 +22,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 /*virtual*/
 void ButtonSingle::PressEvent()
 {
-	pressed = true;
-	ShadeOn();
+	if (lock == false)
+	{
+		pressed = true;
+		ShadeOn();
+	}
 }
 
 /*virtual*/   		
 void ButtonSingle::Update()
 {
-	if ( (lock == false) )
+	if (lock == false)
 	{
 		if (alpha < 1.0f)
 		{
