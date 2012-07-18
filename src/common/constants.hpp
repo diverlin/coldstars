@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #define LOG_ENABLED 0
 
-const std::string GAME_TITLE = "cold star V0.0.4.52 (SFML/C++)";
+const std::string GAME_TITLE = "cold star V0.0.4.53 (SFML/C++)";
 
 const int TURN_TIME = 150;  //turn time, depends on game fps
 
@@ -618,7 +618,7 @@ namespace GUI
 		enum TYPE
 		{
 			BUTTON_ID, 
-			GETREPAIR_ID, GETFUEL_ID, GETLAUNCH_ID,		
+			BUYARMOR_ID, BUYFUEL_ID, GETLAUNCH_ID,		
 			WEAPON1_ACTIVATOR_ID, WEAPON2_ACTIVATOR_ID, WEAPON3_ACTIVATOR_ID, WEAPON4_ACTIVATOR_ID, WEAPON5_ACTIVATOR_ID, 
 			WEAPON6_ACTIVATOR_ID, WEAPON7_ACTIVATOR_ID, WEAPON8_ACTIVATOR_ID, WEAPON9_ACTIVATOR_ID,
 			

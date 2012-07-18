@@ -58,9 +58,9 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
         for (unsigned int i=0; i<vehicle->data_korpus.slot_weapon_num; i++)
         {
         	ItemSlot* weapon_slot = GetNewItemSlot(ITEMSLOT::WEAPON_ID);
-        	rect = Rect( center.x - 1.1*i*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+        	rect = Rect( center.x - 3*GUI::ITEMSLOT::WIDTH_FOR_SHIP    + 1.1*i*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
                              center.y - 1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 2*1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
-       			    GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);        
+       			     GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);        
         	vehicle->AddItemSlot(weapon_slot, rect);
         }
         //

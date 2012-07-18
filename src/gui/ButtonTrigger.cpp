@@ -22,15 +22,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 /*virtual*/
 void ButtonTrigger::PressEvent()
 {
-	if (pressed == false)
+	if (lock == false)
 	{
-		pressed = true;
-		ShadeOn();
-	}
-	else
-	{
-		pressed = false;
-		ShadeOff();
+		if (pressed == false)
+		{
+			pressed = true;
+			ShadeOn();
+		}
+		else
+		{
+			pressed = false;
+			ShadeOff();
+		}
 	}
 }
 

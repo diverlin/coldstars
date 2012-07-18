@@ -26,7 +26,7 @@ GuiManager :: GuiManager(Player* player)
 	gui_store = new GuiStore(player);
 	
 	gui_vehicle = new GuiVehicle(player);
-      	gui_skill   = new GuiSkill(player);
+      	gui_skill   = new GuiSkill();
       	
       	gui_kosmoport = new GuiKosmoport(player);
       	gui_space     = new GuiSpace();
@@ -154,7 +154,12 @@ bool GuiManager::RunSession(int mxvp, int myvp, bool lmb, bool rmb)
 		case ENTITY::KOSMOPORT_ID:
 		{    	
 			Rect screen_rect = Rect(0, 0, Screen::Instance().GetWindow().GetWidth(), Screen::Instance().GetWindow().GetHeight());   
-										
+			
+			UserInput::Instance().UpdateInKosmoport(player);
+					       	
+			interaction = gui_kosmoport->UpdateButtonsMouseInteraction(mxvp, myvp, lmb, rmb);
+			gui_kosmoport->ButtonsAction();
+													
 			switch(gui_kosmoport->GetActiveScreenId())
         		{
         			case GUI::SCREEN::ANGAR_ID:
@@ -166,10 +171,16 @@ bool GuiManager::RunSession(int mxvp, int myvp, bool lmb, bool rmb)
 					Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget();
 
 					//update  
-					interaction = gui_kosmoport->UpdateButtonsMouseInteraction(mxvp, myvp, lmb, rmb);
+					gui_angar->CheckButtonsLock();
 					if (interaction == false)
-					{
-						interaction = gui_angar->UpdateMouseInteraction(angar, mxvp, myvp, lmb, rmb);
+					{					
+						interaction = gui_angar->UpdateButtonsMouseInteraction(mxvp, myvp, lmb, rmb);
+						if (interaction == false)
+						{
+							interaction = gui_angar->UpdateMouseVehicleSlotsInteraction(angar, mxvp, myvp, lmb, rmb);
+						}
+	
+						gui_angar->ButtonsAction();
 					    	if ( interaction == false)
 					    	{
 							if (scan_vehicle != NULL) 
@@ -217,7 +228,6 @@ bool GuiManager::RunSession(int mxvp, int myvp, bool lmb, bool rmb)
         				Vehicle* vehicle = player->GetNpc()->GetScanTarget();        				
 		
 					//update
-					interaction = gui_kosmoport->UpdateButtonsMouseInteraction(mxvp, myvp, lmb, rmb);
 					if (interaction == false)
 					{
 						interaction = gui_store->UpdateMouseInteraction(store, mxvp, myvp, lmb, rmb);
@@ -251,8 +261,7 @@ bool GuiManager::RunSession(int mxvp, int myvp, bool lmb, bool rmb)
         			{
         				Shop* shop = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetShop();
         				
-        				//update
-        				interaction = gui_kosmoport->UpdateButtonsMouseInteraction(mxvp, myvp, lmb, rmb);      					
+        				//update				
          	        		if ( interaction == false)
 					{
 						//interaction = gui_shop->UpdateMouseInternaction(shop, mxvp, myvp, lmb, rmb);	
@@ -276,7 +285,6 @@ bool GuiManager::RunSession(int mxvp, int myvp, bool lmb, bool rmb)
         			{
 					Galaxy* galaxy = player->GetNpc()->GetStarSystem()->GetGalaxy();
 					//update
-					interaction = gui_kosmoport->UpdateButtonsMouseInteraction(mxvp, myvp, lmb, rmb);
 					if ( interaction == false)
 					{
 						interaction = gui_map->UpdateMouseInteraction(galaxy, mxvp, myvp, lmb, rmb);
@@ -301,7 +309,6 @@ bool GuiManager::RunSession(int mxvp, int myvp, bool lmb, bool rmb)
          				Goverment* goverment = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetGoverment();
          				
          				//update
-         				interaction = gui_kosmoport->UpdateButtonsMouseInteraction(mxvp, myvp, lmb, rmb);
          				if (interaction == false)
 					{
 						//interaction = gui_goverment->UpdateMouseInteraction(goverment, mxvp, myvp, lmb, rmb);
@@ -322,7 +329,7 @@ bool GuiManager::RunSession(int mxvp, int myvp, bool lmb, bool rmb)
          			}
 			}
 			
-		break;		
+			break;		
 		}
 	}
 	

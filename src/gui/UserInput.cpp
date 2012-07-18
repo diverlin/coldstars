@@ -33,6 +33,9 @@ UserInput::UserInput()
     	scroll_accel_y = 0;  
     
 	next_turn_ready = false;
+	
+	save = false;
+	load = false;
 }
 
 UserInput::~UserInput()
@@ -40,199 +43,227 @@ UserInput::~UserInput()
 		
 void UserInput::UpdateInSpace(Player* player, GuiSpace* gui_space)
 {
-	GetSimpleInputs(player, gui_space);
+	GetSimpleInputsInSpace(player, gui_space);
         GetRealTimeInputs();
        	ScrollCamera(player);
 }
 
-void UserInput::GetSimpleInputs(Player* player, GuiSpace* gui_space)
+void UserInput::UpdateInKosmoport(Player* player)
+{
+	GetSimpleInputsInKosmoport(player);
+}
+
+void UserInput::KeyPressedInSpace(Player* player, GuiSpace* gui_space)
+{
+	switch(event.Key.Code) 
+        {
+        	case sf::Key::Escape:
+        	{
+ 			if (player->GetNpc()->GetScanTarget() != NULL)
+ 			{
+       		  		if (player->GetNpc()->GetScanTarget() == player->GetNpc()->GetVehicle())
+       		  		{
+       		  			player->GetNpc()->GetSkill()->Acknowledge();
+       		  		}
+ 
+          	  		player->GetNpc()->ResetScanTarget();
+         		}
+         		
+         		break;
+         	}
+
+         	case sf::Key::Space:
+		{
+			if (next_turn_ready == false)
+			{
+				next_turn_ready = true;
+			}
+
+			break;
+		} 
+
+		// WEAPON SLOTS
+		case sf::Key::Num1: { gui_space->GetButton(GUI::BUTTON::WEAPON1_ACTIVATOR_ID)->PressEvent(); break; }
+		case sf::Key::Num2: { gui_space->GetButton(GUI::BUTTON::WEAPON2_ACTIVATOR_ID)->PressEvent(); break; }
+		case sf::Key::Num3: { gui_space->GetButton(GUI::BUTTON::WEAPON3_ACTIVATOR_ID)->PressEvent(); break; }
+		case sf::Key::Num4: { gui_space->GetButton(GUI::BUTTON::WEAPON4_ACTIVATOR_ID)->PressEvent(); break; }
+		case sf::Key::Num5: { gui_space->GetButton(GUI::BUTTON::WEAPON5_ACTIVATOR_ID)->PressEvent(); break; } 
+		case sf::Key::Num6: { gui_space->GetButton(GUI::BUTTON::WEAPON6_ACTIVATOR_ID)->PressEvent(); break; } 
+		case sf::Key::Num7: { gui_space->GetButton(GUI::BUTTON::WEAPON7_ACTIVATOR_ID)->PressEvent(); break; }
+		case sf::Key::Num8: { gui_space->GetButton(GUI::BUTTON::WEAPON8_ACTIVATOR_ID)->PressEvent(); break; }            		
+		case sf::Key::Num9: { gui_space->GetButton(GUI::BUTTON::WEAPON9_ACTIVATOR_ID)->PressEvent(); break; }     
+										
+		case sf::Key::A:
+		{ 
+			if (player->GetWeaponsSelector().StatesAreMixed() == true)
+			{
+				gui_space->GetButton(GUI::BUTTON::WEAPON1_ACTIVATOR_ID)->Reset();
+				gui_space->GetButton(GUI::BUTTON::WEAPON2_ACTIVATOR_ID)->Reset();
+				gui_space->GetButton(GUI::BUTTON::WEAPON3_ACTIVATOR_ID)->Reset();
+				gui_space->GetButton(GUI::BUTTON::WEAPON4_ACTIVATOR_ID)->Reset();
+				gui_space->GetButton(GUI::BUTTON::WEAPON5_ACTIVATOR_ID)->Reset();
+				gui_space->GetButton(GUI::BUTTON::WEAPON6_ACTIVATOR_ID)->Reset();
+				gui_space->GetButton(GUI::BUTTON::WEAPON7_ACTIVATOR_ID)->Reset();
+				gui_space->GetButton(GUI::BUTTON::WEAPON8_ACTIVATOR_ID)->Reset();
+				gui_space->GetButton(GUI::BUTTON::WEAPON9_ACTIVATOR_ID)->Reset();
+			}
+			else
+			{
+				gui_space->GetButton(GUI::BUTTON::WEAPON1_ACTIVATOR_ID)->PressEvent();
+				gui_space->GetButton(GUI::BUTTON::WEAPON2_ACTIVATOR_ID)->PressEvent();
+				gui_space->GetButton(GUI::BUTTON::WEAPON3_ACTIVATOR_ID)->PressEvent();
+				gui_space->GetButton(GUI::BUTTON::WEAPON4_ACTIVATOR_ID)->PressEvent();
+				gui_space->GetButton(GUI::BUTTON::WEAPON5_ACTIVATOR_ID)->PressEvent();
+				gui_space->GetButton(GUI::BUTTON::WEAPON6_ACTIVATOR_ID)->PressEvent();
+				gui_space->GetButton(GUI::BUTTON::WEAPON7_ACTIVATOR_ID)->PressEvent();
+				gui_space->GetButton(GUI::BUTTON::WEAPON8_ACTIVATOR_ID)->PressEvent();
+				gui_space->GetButton(GUI::BUTTON::WEAPON9_ACTIVATOR_ID)->PressEvent();
+			}
+			break;
+		}
+		
+		case sf::Key::G:   // Grapple
+		{
+			player->GetControlFlags().InverseGrabModeFlag();
+			break;
+		}
+
+		case sf::Key::R: // RADAR
+		{
+			player->GetControlFlags().InverseShowRadarRangeFlag();
+			break;
+		}
+
+		case sf::Key::O: // Orbits
+		{
+			player->GetControlFlags().InverseShowAllOrbitsFlag();
+			break;
+		}
+
+		case sf::Key::P: // Path
+		{
+			player->GetControlFlags().InverseShowAllPathFlag();
+			break;
+		}
+
+		case sf::Key::F5: // save event
+		{		
+			save = true;			
+			break;
+		}
+		
+		case sf::Key::F6: // slow down GAME SPEED 
+		{
+			if (Config::Instance().GAMESPEED > 1)
+			{
+				Config::Instance().GAMESPEED--;
+			}
+			break;
+		}
+
+		case sf::Key::F7: // speed up GAME SPEED 
+		{
+			if (Config::Instance().GAMESPEED < 10)
+			{
+				Config::Instance().GAMESPEED++;
+			}	             			
+			break;
+		}
+		
+		case sf::Key::F8: // AutoTurn
+		{
+			if (Config::Instance().AUTOTURN_MODE == false)
+			{
+				Config::Instance().AUTOTURN_MODE = true;
+			}
+			else
+			{
+				Config::Instance().AUTOTURN_MODE = false;
+			}
+			break;
+		}
+		
+		case sf::Key::F9:
+		{
+			load = true;
+			break;
+		}
+	}   
+}
+        
+        
+void UserInput::KeyPressedInKosmoport(Player* player)
+{
+	switch(event.Key.Code) 
+        {
+        	case sf::Key::Escape:
+        	{
+ 			if (player->GetNpc()->GetScanTarget() != NULL)
+ 			{
+       		  		if (player->GetNpc()->GetScanTarget()->GetId() == player->GetNpc()->GetVehicle()->GetId())
+       		  		{
+       		  			player->GetNpc()->GetSkill()->Acknowledge();
+       		  		}
+ 
+          	  		player->GetNpc()->ResetScanTarget();
+         		}
+         		
+         		break;
+         	}
+	}
+}
+
+void UserInput::MouseButtonPressed(Player* player)
+{
+	switch(event.Key.Code) 
+	{ 
+		case sf::Mouse::Left:  { player->GetCursor()->SetLeftMouseButton(true); break; } 
+		case sf::Mouse::Right: { player->GetCursor()->SetRightMouseButton(true); break; }
+	}
+}
+ 
+void UserInput::ResetFlags(Player* player)
 {
    	player->GetCursor()->SetLeftMouseButton(false);
    	player->GetCursor()->SetRightMouseButton(false);
-
+   	
 	next_turn_ready = false;
 	
 	save = false;
 	load = false;
+}
+                		
+void UserInput::GetSimpleInputsInSpace(Player* player, GuiSpace* gui_space)
+{
+	ResetFlags(player);
 			
 	while (Screen::Instance().GetWindow().GetEvent(event))
 	{
-	        if (event.Type == sf::Event::Closed)
+		switch(event.Type)
 	        {
-		    	Screen::Instance().GetWindow().Close();
-                }          
-
-	        if (event.Type == sf::Event::Resized)
-	        {
-	            	glViewport(0, 0, event.Size.Width, event.Size.Height);
-           	}
-           	
-	        if (event.Type == sf::Event::KeyPressed)
-       		{
-           		switch(event.Key.Code) 
-           		{
-           			case sf::Key::Escape:
-               			{
-              				if (player->GetNpc()->GetScanTarget() != NULL)
-              				{
-                 		  		if (player->GetNpc()->GetScanTarget() == player->GetNpc()->GetVehicle())
-                 		  		{
-                 		  			player->GetNpc()->GetSkill()->Acknowledge();
-                 		  		}
- 
-                		  		player->GetNpc()->ResetScanTarget();
-              				}
-              				break;
-                		}
-
-          			case sf::Key::Space:
-               		 	{
-               		 		if (next_turn_ready == false)
-               		 		{
-               		 			next_turn_ready = true;
-               		 		}
-       
-                		        break;
-                		} 
-
-
-
-         	  		// WEAPON SLOTS
-           			case sf::Key::Num1: { gui_space->GetButton(GUI::BUTTON::WEAPON1_ACTIVATOR_ID)->PressEvent(); break; }
-           			case sf::Key::Num2: { gui_space->GetButton(GUI::BUTTON::WEAPON2_ACTIVATOR_ID)->PressEvent(); break; }
-           			case sf::Key::Num3: { gui_space->GetButton(GUI::BUTTON::WEAPON3_ACTIVATOR_ID)->PressEvent(); break; }
-          			case sf::Key::Num4: { gui_space->GetButton(GUI::BUTTON::WEAPON4_ACTIVATOR_ID)->PressEvent(); break; }
-          			case sf::Key::Num5: { gui_space->GetButton(GUI::BUTTON::WEAPON5_ACTIVATOR_ID)->PressEvent(); break; } 
-               			case sf::Key::Num6: { gui_space->GetButton(GUI::BUTTON::WEAPON6_ACTIVATOR_ID)->PressEvent(); break; } 
-           			case sf::Key::Num7: { gui_space->GetButton(GUI::BUTTON::WEAPON7_ACTIVATOR_ID)->PressEvent(); break; }
-           			case sf::Key::Num8: { gui_space->GetButton(GUI::BUTTON::WEAPON8_ACTIVATOR_ID)->PressEvent(); break; }            		
-           			case sf::Key::Num9: { gui_space->GetButton(GUI::BUTTON::WEAPON9_ACTIVATOR_ID)->PressEvent(); break; }     
- 				 				 				
-           			case sf::Key::A:
-                		{ 
-	        		      	if (player->GetWeaponsSelector().StatesAreMixed() == true)
-              				{
-						gui_space->GetButton(GUI::BUTTON::WEAPON1_ACTIVATOR_ID)->Reset();
-						gui_space->GetButton(GUI::BUTTON::WEAPON2_ACTIVATOR_ID)->Reset();
-						gui_space->GetButton(GUI::BUTTON::WEAPON3_ACTIVATOR_ID)->Reset();
-						gui_space->GetButton(GUI::BUTTON::WEAPON4_ACTIVATOR_ID)->Reset();
-						gui_space->GetButton(GUI::BUTTON::WEAPON5_ACTIVATOR_ID)->Reset();
-						gui_space->GetButton(GUI::BUTTON::WEAPON6_ACTIVATOR_ID)->Reset();
-						gui_space->GetButton(GUI::BUTTON::WEAPON7_ACTIVATOR_ID)->Reset();
-						gui_space->GetButton(GUI::BUTTON::WEAPON8_ACTIVATOR_ID)->Reset();
-						gui_space->GetButton(GUI::BUTTON::WEAPON9_ACTIVATOR_ID)->Reset();
-              				}
-              				else
-              				{
-						gui_space->GetButton(GUI::BUTTON::WEAPON1_ACTIVATOR_ID)->PressEvent();
-						gui_space->GetButton(GUI::BUTTON::WEAPON2_ACTIVATOR_ID)->PressEvent();
-						gui_space->GetButton(GUI::BUTTON::WEAPON3_ACTIVATOR_ID)->PressEvent();
-						gui_space->GetButton(GUI::BUTTON::WEAPON4_ACTIVATOR_ID)->PressEvent();
-						gui_space->GetButton(GUI::BUTTON::WEAPON5_ACTIVATOR_ID)->PressEvent();
-						gui_space->GetButton(GUI::BUTTON::WEAPON6_ACTIVATOR_ID)->PressEvent();
-						gui_space->GetButton(GUI::BUTTON::WEAPON7_ACTIVATOR_ID)->PressEvent();
-						gui_space->GetButton(GUI::BUTTON::WEAPON8_ACTIVATOR_ID)->PressEvent();
-						gui_space->GetButton(GUI::BUTTON::WEAPON9_ACTIVATOR_ID)->PressEvent();
-              				}
-                		        break;
-				}
-
-
-          	
-	           		case sf::Key::G:   // Grapple
-	               	 	{
-	                	        player->GetControlFlags().InverseGrabModeFlag();
-	                       		break;
-	 			}
-
-
-	           		case sf::Key::R: // RADAR
-	                	{
-                	        	player->GetControlFlags().InverseShowRadarRangeFlag();
-	                 	      	break;
-				}
-
-	           		case sf::Key::O: // Orbits
-	                	{
-                	        	player->GetControlFlags().InverseShowAllOrbitsFlag();
-	                 	      	break;
-				}
-
-	           		case sf::Key::P: // Path
-	                	{
-	              			player->GetControlFlags().InverseShowAllPathFlag();
-	                 	      	break;
-				}
-
-				case sf::Key::F5: // save event
-				{		
-					save = true;			
-					break;
-				}
-				
-	           		case sf::Key::F6: // slow down GAME SPEED 
-	                	{
-	              			if (Config::Instance().GAMESPEED > 1)
-	              			{
-	                			Config::Instance().GAMESPEED--;
-	             			}
-	             			break;
-				}
-
-	           		case sf::Key::F7: // speed up GAME SPEED 
-	                	{
-	              			if (Config::Instance().GAMESPEED < 10)
-	              			{
-	                			Config::Instance().GAMESPEED++;
-	             			}	             			
-	             			break;
-				}
-				
-	           		case sf::Key::F8: // AutoTurn
-	                	{
-	              			if (Config::Instance().AUTOTURN_MODE == false)
-	              			{
-	                			Config::Instance().AUTOTURN_MODE = true;
-	             			}
-	              			else
-	              			{
-	                			Config::Instance().AUTOTURN_MODE = false;
-	             			}
-	                 	      	break;
-				}
-				
-				case sf::Key::F9:
-				{
-					load = true;
-					break;
-				}
-				
-	        	} // end switch      
-	        } //enfif 
-
-
-	        if (event.Type == sf::Event::MouseButtonPressed)
-	        {
-	                switch(event.Key.Code) 
-	                { 
-	           		case sf::Mouse::Left:
-	           		{              
-	              			player->GetCursor()->SetLeftMouseButton(true);
-	              			break;
-	              		} 
-	
-	           		case sf::Mouse::Right:
-	           		{
-	              			player->GetCursor()->SetRightMouseButton(true);
-	              			break;
-	              		}
-	              	}
-	        }
-
-	      
-	 } // endwhile
+	        	case sf::Event::Closed:     		{ Screen::Instance().GetWindow().Close(); break; }
+                        case sf::Event::Resized:    		{ glViewport(0, 0, event.Size.Width, event.Size.Height); /*Screen::Instance().Resize(event.Size.Width, event.Size.Height);*/ break; }
+	        	case sf::Event::KeyPressed: 		{ KeyPressedInSpace(player, gui_space); break; }
+	                case sf::Event::MouseButtonPressed: 	{ MouseButtonPressed(player); break; }
+	        }	      
+	 }
 }
-
+             		
+void UserInput::GetSimpleInputsInKosmoport(Player* player)
+{
+	ResetFlags(player);
+			
+	while (Screen::Instance().GetWindow().GetEvent(event))
+	{
+		switch(event.Type)
+	        {
+	        	case sf::Event::Closed:     		{ Screen::Instance().GetWindow().Close(); break; }
+                        case sf::Event::Resized:    		{ glViewport(0, 0, event.Size.Width, event.Size.Height); /*Screen::Instance().Resize(event.Size.Width, event.Size.Height);*/ break; }
+	        	case sf::Event::KeyPressed: 		{ KeyPressedInKosmoport(player); break; }
+	                case sf::Event::MouseButtonPressed: 	{ MouseButtonPressed(player); break; }
+	        }	      
+	 }
+}
 
 void UserInput::GetRealTimeInputs()
 {       

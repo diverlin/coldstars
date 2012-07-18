@@ -100,6 +100,7 @@ void BaseButton::Render() const
    	{
    		drawTexturedRect(textureOb_additional, rect, -1);   	
    	}
+	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
 //void BaseButton::RenderWithTitle(const std::string& title, int offset_x, int offset_y) const

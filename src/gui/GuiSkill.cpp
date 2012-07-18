@@ -18,10 +18,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-GuiSkill::GuiSkill(Player* player)
+GuiSkill::GuiSkill()
 {
-	this->player = player;
-	
      	textureOb_skill = g_GUI_TEXTUREOB_COLLECTOR.skill;
      	textureOb_skill_transparent = g_GUI_TEXTUREOB_COLLECTOR.skill_transparent;     	     	
 
