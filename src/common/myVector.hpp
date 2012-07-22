@@ -1,6 +1,7 @@
 #ifndef MYVECTOR_H
 #define MYVECTOR_H
 
+
 class vec2f
 {
         public:
@@ -27,7 +28,28 @@ class vec2f
                 vec2f operator-(const vec2f&) const;
                 vec2f operator*(float) const;
                 vec2f operator/(float) const;
+                
+                void operator()(const vec2f&);
 };
+
+
+class vector2f
+{
+	public:
+		vector2f(const vec2f& p0_, const vec2f& p_):p0(p0_),p(p_) {};
+		~vector2f() {};
+		
+		vec2f p0;
+		vec2f p;
+		
+		float GetLen() const;
+		
+		
+};
+
+float getAngle(const vector2f&, const vector2f&);
+
+
 
 class vec2i
 {

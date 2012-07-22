@@ -45,12 +45,6 @@ LazerTraceEffect :: LazerTraceEffect(TextureOb* _texOb, vec2f* _pTo_start_pos, v
 LazerTraceEffect :: ~LazerTraceEffect()
 {}
 
-
-void LazerTraceEffect :: setDamageEffect(DamageEffect* _damage_effect) { damage_effect = _damage_effect; }
-bool LazerTraceEffect :: GetAlive() const { return is_alive; }
-		
-		
-
 void LazerTraceEffect :: update()
 {
 	updateAngleAndLen();

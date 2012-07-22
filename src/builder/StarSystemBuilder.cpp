@@ -83,23 +83,23 @@ void StarSystemBuilder::CreateNewInternals()
 }
 
   	
-//void StarSystemBuilder::CreateNewInternalsDebug()
-//{
-        //vec2f center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH -  2*GUI::MAP::BORDER_X), 
-        	     //getRandInt(GUI::MAP::BORDER_Y, Config::Instance().SCREEN_HEIGHT - 2*GUI::MAP::BORDER_Y) );			 
-        //starsystem->GetPoints().SetCenter(center);
+void StarSystemBuilder::CreateNewInternalsDebug()
+{
+        vec2f center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH -  2*GUI::MAP::BORDER_X), 
+        	     getRandInt(GUI::MAP::BORDER_Y, Config::Instance().SCREEN_HEIGHT - 2*GUI::MAP::BORDER_Y) );			 
+        starsystem->GetPoints().SetCenter(center);
 
-        //this->CreateStar();
+        this->CreateStar();
         
-        //int distNebula_num = getRandInt(4,7);
-        //int distStar_num = getRandInt(40, 60);
-        //this->CreateBackground(distNebula_num, distStar_num, starsystem->GetStar()->GetColorId());
+        int distNebula_num = getRandInt(4,7);
+        int distStar_num = getRandInt(40, 60);
+        this->CreateBackground(distNebula_num, distStar_num, starsystem->GetStar()->GetColorId());
           
         //int planet_num = 1;//getRandInt(ENTITY::STARSYSTEM::PLANET_MIN, ENTITY::STARSYSTEM::PLANET_MAX);
         //this->CreatePlanets(planet_num);
         
         //this->CreateSpaceStations(3);
-//}
+}
 
 void StarSystemBuilder::CreateBackground(int distNebula_num, int distStar_num, int color_id)
 {
