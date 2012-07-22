@@ -64,31 +64,23 @@ class DriveComplex
 		float target_distance;   
 		vec2f target_offset;
 
-        	std::vector<vec2f> path_vec;
+		//std::vector<vec2f> debug_midLeft_vec;
+        	std::vector<vec2f> path_center_vec;
         	std::vector<float> angle_inD_vec;
 
-                                        std::vector<vec2f> c1c2_vec;   // debug
-                                        std::vector<vec2f> rc_vec;     // debug
-                                        std::vector<vec2f> k1k2_vec;   // debug
-                                        std::vector<vec2f> k_vec;      // debug
-                                        std::vector<vec2f> target_vec; // debug
-                                
+                               
         	bool direction_list_END;
         	int move_it;
    
-                PathVisual visual_path;
-                                        PathVisual visual_c1c2;      // debug
-                                        PathVisual visual_rc;        // debug
-                                        PathVisual visual_k1k2;      // debug
-                                        PathVisual visual_k;         // debug
-                                        PathVisual visual_target;    // debug
-                       	
+                PathVisual visual_center_path;
+                //PathVisual visual_debug_midLeft_path;
+
+	        void CalcPath();                                       	
+                void CalcRoundPath();
+                void CalcDirectPath();
                 bool ValidateTarget() const;
 	
 	        bool UpdateTargetCoord();
-	        void CalcPath();
-			vec2f CalcRoundPath();
-			void CalcDirectPath(vec2f);
 
 		void DefineDistance(int);
 };

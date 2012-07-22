@@ -103,7 +103,7 @@ void Points::Update()
         	float cosa = cos(angle_radian);
         	float sina = sin(angle_radian);
  
-        	for (unsigned int i = 0; i < vector.size(); i++)
+        	for (unsigned int i=0; i<vector.size(); i++)
         	{   
            		////// rotation around center
             		vector[i]->x = vector_orig[i]->x * cosa - vector_orig[i]->y * sina;

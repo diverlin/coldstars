@@ -62,8 +62,10 @@ class Points
                 const vec2f& GetBottomRight() const { return bottomRight; }; 
                 const vec2f& GetTopRight()    const { return topRight; };    
                 const vec2f& GetTopLeft()     const { return topLeft; };
-                
-                vec2f* GetpMidLeft()    { return &midLeft; };	     // used in drive jet
+
+                const vec2f& GetMidLeftOrig()    { return midLeft_origin; };	// used in path calc              
+                const vec2f& GetMidLeft()    { return midLeft; };	// used in path calc                
+                vec2f* GetpMidLeft()    { return &midLeft; };	     	// used in drive jet
                 vec2f* GetpMidFarLeft() { return &midFarLeft; };
                    
                 Points();

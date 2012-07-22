@@ -32,7 +32,7 @@ int main()
 	PlayerBuilder::Instance().CreateNewInternals();
 	Player* player = PlayerBuilder::Instance().GetPlayer();
 
-	vec2f center(-400, 400);
+	vec2f center(400, 400);
 	double angle = 0;  
 
 	GalaxyBuilder::Instance().GetGalaxy()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, NULL);

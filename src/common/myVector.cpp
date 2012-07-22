@@ -61,7 +61,11 @@ vec2f vec2f::operator/(float val) const
 	return result;
 }
 
-
+void vec2f::operator()(const vec2f& v)
+{
+	x = v.x;
+	y = v.y;
+}
 
 const vec3f& vec3f::operator+=(const vec3f& rhs)
 {
@@ -123,4 +127,16 @@ vec2f getRandVec2f(int radius_min, int radius_max)
  	vec2f request(sin(alpha) * len, cos(alpha) * len);
     	
     	return request;
+}
+
+float vector2f::GetLen() const
+{
+	float len = sqrt((p.x-p0.x)*(p.x-p0.x) + (p.y-p0.y)*(p.y-p0.y));
+	return len;
+}
+
+float getAngle(const vector2f& v1, const vector2f& v2)
+{
+	float angle = acos( ((v1.p.x-v1.p0.x)*(v2.p.x-v2.p0.x) + (v1.p.y-v1.p0.y)*(v2.p.y-v2.p0.y))/(v1.GetLen()*v2.GetLen()) ) * RADIAN_TO_DEGREE_RATE;
+    	return angle;
 }

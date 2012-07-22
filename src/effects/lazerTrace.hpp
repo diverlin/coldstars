@@ -27,8 +27,8 @@ class LazerTraceEffect
        				 vec2f* _pTo_end_pos);
        		~LazerTraceEffect();
 
-		void setDamageEffect(DamageEffect*);
-		bool GetAlive() const;
+		void setDamageEffect(DamageEffect* _damage_effect) { damage_effect = _damage_effect; };
+		bool GetAlive() const { return is_alive; };
 		
        		void update();
        		void Render();
