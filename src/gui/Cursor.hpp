@@ -21,6 +21,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef CURSOR_H
 #define CURSOR_H
 
+struct MouseData
+{
+       	int mx;
+      	int my;
+      	float mxvp;
+      	float myvp;
+      	
+       	bool left_click;
+       	bool right_click;
+       	bool left_press;
+       	bool right_press;       	
+};
 
 class Cursor
 {
@@ -28,31 +40,25 @@ class Cursor
         	Cursor(Player*);
         	~Cursor();
 		
-		void SetLeftMouseButton(bool mouse_left_button) 	{ this->mouse_left_button = mouse_left_button; };
-		void SetRightMouseButton(bool mouse_right_button) 	{ this->mouse_right_button = mouse_right_button; };
-		
-		vec2f GetMousePos() const { return mouse_pos; };
-		bool GetMouseLeftButton() const { return mouse_left_button; };
-		bool GetMouseRightButton() const { return mouse_right_button; };
-			
-		ItemSlot* GetItemSlot() const { return slot; };
+		void SetLeftMouseButtonClick(bool left_click) 		{ data_mouse.left_click = left_click; };
+		void SetRightMouseButtonClick(bool right_click) 	{ data_mouse.right_click = right_click; };
+		const MouseData& GetMouseData() { return data_mouse; };
+					
+		ItemSlot* GetItemSlot() const { return item_slot; };
 								
-		void UpdateMousePos();		
-		void Update(int, int);
+		void UpdateMouseStuff();		
+		void Update(const MouseData&);
         		
 		void SetFocusedSpaceObject(BaseGameEntity* focused_space_ob) { this->focused_space_ob = focused_space_ob; };
 		void RenderFocusedSpaceObjectStuff();
 		
         private:
-        	ItemSlot* slot;        	
+        	ItemSlot* item_slot;        	
         	Player* player;
         	
-        	vec2f mouse_pos;
+        	MouseData data_mouse;
         	
         	BaseGameEntity* focused_space_ob;
-        	     	     	
-        	bool mouse_left_button;
-        	bool mouse_right_button;
 }; 
 
 #endif 

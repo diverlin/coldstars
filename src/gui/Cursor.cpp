@@ -18,28 +18,35 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 Cursor::Cursor(Player* player):
-mouse_left_button(false), 
-mouse_right_button(false)
+player(player),
+focused_space_ob(NULL)
 {
-	this->player = player;
-	focused_space_ob = NULL;
-	
-     	slot = GetNewItemSlot(ITEMSLOT::CARGO_ID);
-     	slot->SetRect(0, 0, GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
+     	item_slot = GetNewItemSlot(ITEMSLOT::CARGO_ID);
+     	item_slot->SetRect(0, 0, GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
 }
 
 Cursor::~Cursor()
 {}
 
-void Cursor::UpdateMousePos()
+void Cursor::UpdateMouseStuff()
 {
+   	data_mouse.left_click = false;
+   	data_mouse.right_click = false;
+   	
         const sf::Input& Input = Screen::Instance().GetWindow().GetInput();
-        mouse_pos.Set(Input.GetMouseX(), Input.GetMouseY());
+        data_mouse.left_press  = Input.IsMouseButtonDown(sf::Mouse::Left);
+        data_mouse.right_press = Input.IsMouseButtonDown(sf::Mouse::Right);        
+
+        data_mouse.mx = Input.GetMouseX();
+        data_mouse.my = Screen::Instance().GetWindow().GetHeight() - Input.GetMouseY();
+                
+        data_mouse.mxvp = data_mouse.mx + Screen::Instance().GetBottomLeftGlobalCoord().x;
+    	data_mouse.myvp = data_mouse.my + Screen::Instance().GetBottomLeftGlobalCoord().y;
 }
 
-void Cursor::Update(int mxvp, int myvp)
+void Cursor::Update(const MouseData& data_mouse)
 {
-     	slot->GetRect().SetCenter(mxvp, myvp);
+     	item_slot->GetRect().SetCenter(data_mouse.mx, data_mouse.my);
 }
 
 void Cursor::RenderFocusedSpaceObjectStuff()

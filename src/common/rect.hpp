@@ -25,14 +25,17 @@ class Rect
 	public:
 	    	Rect();
 	    	Rect(float, float, int, int);
-      		Rect(vec2f, int, int);
+      		Rect(const vec2f&, int, int);
       		~Rect();
       		
+      		bool CheckInteraction(int, int) const;
+      		       		
       		void Set(float, float, int, int);
-
-      		void SetCenter(vec2f);
+      		void Set(const vec2f&, int, int);
+      		
+      		void SetCenter(const vec2f&);
       		void SetCenter(float, float);
-      		void SetBottomLeft(vec2f);
+      		void SetBottomLeft(const vec2f&);
       		void SetBottomLeft(float, float);
       		      		
 		const vec2f& GetCenter() const     { return center; }

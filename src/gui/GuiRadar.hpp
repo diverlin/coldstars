@@ -17,34 +17,42 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef GUIMANAGER_H
-#define GUIMANAGER_H
+#ifndef GURADAR_H
+#define GUIRADAR_H
 
-class GuiManager
+class GuiRadar : public BaseGui
 {
    	public:
-      		GuiManager(Player*);
-      		~GuiManager();
-
-		bool RunSession(const MouseData&);
+      		GuiRadar();
+      		~GuiRadar();
       		
+      		void Resize(int, int);
+     	
+     		void Reset();
+     		void ButtonsAction(Player* player) const;
+     		
+     		void Update();
+     		bool UpdateMouseInteraction(const MouseData&);
+     		void UpdateEquipmentIcons(Player* player) const;
+     		
+     		void AddIfWithinRange(BaseGameEntity*);
+		void Render() const;
+		     			
       	private:
+      		float scale;
+      		
+      		TextureOb* textureOb_background;
+      		TextureOb* textureOb_bar; 	
+      		TextureOb* textureOb_screenrect; 
+      		
+      	       	Rect rect;
+      	       	Rect screenrect;
+      	       	      	       	      		
+      		std::vector<BaseGameEntity*> vehicle_vec;
+      		
       		Player* player;
       		
-      		GuiVehicle* 	gui_vehicle;
-      		GuiSkill*   	gui_skill;
-      		GuiKosmoport* 	gui_kosmoport;
-      		GuiAngar* 	gui_angar;
-                GuiStore* 	gui_store;
-      		GuiSpace     	gui_space;      
-		GuiMap*       	gui_map;    
-       		
-       		GuiRadar gui_radar;
-       		
-     		bool UpdateMouseInteractionWithScanVehicle(const MouseData&, Vehicle*, bool allow_full_control = false);     		
-     		void RenderScanVehicle(const MouseData&, Vehicle*, bool show_skill = true) const;  	
+
 };
-
-
 
 #endif

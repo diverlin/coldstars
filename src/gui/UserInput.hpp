@@ -32,7 +32,7 @@ class UserInput
 		bool GetNextTurnReady() const { return next_turn_ready; };
 
 		void UpdateInKosmoport(Player*);
-		void UpdateInSpace(Player*, GuiSpace*);
+		void UpdateInSpace(Player*, const GuiSpace&);
 
 	private:
 		UserInput();
@@ -54,13 +54,13 @@ class UserInput
 
         	void ResetFlags(Player*);
         	        	
-        	void GetSimpleInputsInSpace(Player*, GuiSpace*);
+        	void GetSimpleInputsInSpace(Player*, const GuiSpace&);
         	void GetSimpleInputsInKosmoport(Player*);
-        	void KeyPressedInSpace(Player*, GuiSpace*);
+        	void KeyPressedInSpace(Player*, const GuiSpace&);
         	void KeyPressedInKosmoport(Player*);
         	void MouseButtonPressed(Player*);
         	        	
-        	void GetRealTimeInputs();
+        	void GetRealTimeInputs(Player*);
         	void ScrollCamera(Player*);
 };
 

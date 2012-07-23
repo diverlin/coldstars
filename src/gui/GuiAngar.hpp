@@ -28,13 +28,13 @@ class GuiAngar : public BaseGui
        		GuiAngar(Player*);
        		~GuiAngar();
 		
-       		bool UpdateMouseVehicleSlotsInteraction(Angar*, int, int, int, int);
+       		bool UpdateMouseVehicleSlotsInteraction(const MouseData&, Angar*);
 
 		void CheckButtonsLock();
        		void ButtonsAction() const;   
        		       		
        		void RenderVehicleSlots(Angar*) const;
-                void RenderFocusedItemInfo(Angar*, int, int) const;             
+                void RenderFocusedItemInfo(const MouseData&, Angar*) const;             
        	
        	private:
 };

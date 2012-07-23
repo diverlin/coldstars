@@ -1,4 +1,5 @@
 *) BaseButton and different buttons (one pos, two pos) 
+- done
  
 *) Space Gui, all controls are accesible by mouse only(shortkeys as additional way to control)
 -weapons activation icons
@@ -13,6 +14,7 @@
 *) ability to trade in store (different goods)
 
 *) re-implementation of the PathCalculation
+- done
 
 *) gui radar implementation
 

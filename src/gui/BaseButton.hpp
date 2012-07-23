@@ -40,8 +40,6 @@ class BaseButton
        		int GetSubTypeId() const { return subtype_id; };
        		bool GetLock() const { return lock; };
        		bool GetPressed() const { return pressed; };
-       		       		       
-       		bool CheckInteraction(int, int);
 
 		virtual void PressEvent()=0;
 		

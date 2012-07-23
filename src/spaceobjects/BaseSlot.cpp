@@ -34,17 +34,6 @@ void BaseSlot::SetRect(float pos_x, float pos_y, int w, int h)
 	rect.Set(pos_x, pos_y, w, h);
 }
 
-
-bool BaseSlot::CheckInteraction(int cursor_x, int cursor_y)
-{        
-        float dist = distBetweenPoints(rect.GetCenter().x, rect.GetCenter().y, cursor_x, cursor_y);
-        if (dist < rect.GetWidth()/2)
-                return true;
-        else
-                return false;    
-}
-  
-
 /*virtual*/
 void BaseSlot::SaveData(boost::property_tree::ptree& save_ptree) const
 {

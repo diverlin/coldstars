@@ -97,11 +97,6 @@ void Particle :: Render() const
 {
 	if (is_alive == true)
 	{
-     		glPointSize(size);
-        	
-        	glBegin(GL_POINTS);           		
-     			glColor4f(color.r, color.g, color.b, color.a);
-     			glVertex3f(pos.x, pos.y, -2);
-       		glEnd();
+		drawParticle(size, color, pos);
      	}
 }

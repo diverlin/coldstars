@@ -28,7 +28,7 @@ GuiMap::GuiMap(Player* player)
 GuiMap::~GuiMap()
 {}
 
-bool GuiMap::UpdateMouseInteraction(Galaxy* galaxy, int mxvp, int myvp, int lmb, int rmb)
+bool GuiMap::UpdateMouseInteraction(const MouseData& data_mouse, Galaxy* galaxy)
 {
      	if (player->GetNpc()->GetVehicle()->ableTo.HJUMP == true)
      	{  
@@ -36,7 +36,7 @@ bool GuiMap::UpdateMouseInteraction(Galaxy* galaxy, int mxvp, int myvp, int lmb,
         	{
             		//if (STARSYSTEM_pList[si]->id != pTo_PLAYER->pTo_starsystem->id)
             		{
-                		float ss_cursor_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), mxvp, myvp);
+                		float ss_cursor_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
                 		if (ss_cursor_dist < 10)
                 		{ 
                    			int ss_ss_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), 
@@ -44,7 +44,7 @@ bool GuiMap::UpdateMouseInteraction(Galaxy* galaxy, int mxvp, int myvp, int lmb,
                    				       
                    			if ( (ss_ss_dist < player->GetNpc()->GetVehicle()->GetDriveComplex()->GetDriveSlot()->GetDriveEquipment()->GetHyper()) && (ss_ss_dist < player->GetNpc()->GetVehicle()->GetDriveComplex()->GetBakSlot()->GetBakEquipment()->GetFuel()) )
                       			{
-                      				if (lmb == true)
+                      				if (data_mouse.left_click == true)
                       				{ 
                                                         // debug
                                                         player->GetNpc()->GetStarSystem()->RemoveVehicle(player->GetNpc()->GetVehicle()->GetId());  

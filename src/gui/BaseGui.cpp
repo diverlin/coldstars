@@ -41,17 +41,16 @@ BaseButton* BaseGui::GetButton(int request_subtype_id) const
 	}
 	
 	return NULL;
-} 
-      
+}       
 
-bool BaseGui::UpdateButtonsMouseInteraction(int mxvp, int myvp, int lmb, int rmb)
+bool BaseGui::UpdateButtonsMouseInteraction(const MouseData& data_mouse)
 {
 	for (std::map<int, BaseButton*>::iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{
 		iterator->second->Update();
-        	if (iterator->second->CheckInteraction(mxvp - offset.x, myvp - offset.y) == true)
+        	if (iterator->second->GetRect().CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
         	{
-           		if (lmb == true)
+           		if (data_mouse.left_click == true)
            		{
        				iterator->second->PressEvent();
            		}
@@ -75,11 +74,11 @@ void BaseGui::RenderButtons() const
        	glPopMatrix();
 }
 
-void BaseGui::RenderFocusedButtonInfo(int mxvp, int myvp) const
+void BaseGui::RenderFocusedButtonInfo(const MouseData& data_mouse) const
 {
 	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{	
-                if (iterator->second->CheckInteraction(mxvp - offset.x, myvp - offset.y) == true)
+                if (iterator->second->GetRect().CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
                 {
         		iterator->second->RenderInfo(offset.x, offset.y);
         		return; break;

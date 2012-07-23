@@ -28,20 +28,16 @@ class GuiSpace : public BaseGui
 
        		void Resize(int, int);
        		void ButtonsAction(Player*) const;
-       		       		
-       		void UpdateEquipmentIcons(Player*) const;
-       		
+     		
        		void RenderText(const vec2f&) const;
        		void RenderBar() const;
        		
        	private:
        		Rect rect_bar_top;
        		Rect rect_bar_bottom;
-       		Rect rect_bar_radar;
        		
        		TextureOb* textureOb_bar_top;
        		TextureOb* textureOb_bar_bottom;
-       		TextureOb* textureOb_bar_radar;
 };
 
 

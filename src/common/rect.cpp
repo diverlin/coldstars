@@ -28,7 +28,7 @@ Rect::Rect(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h)
 	Set(_bottomLeft_x, _bottomLeft_y, _w, _h);
 }
 
-Rect::Rect(vec2f _bottomLeft, int _w, int _h)
+Rect::Rect(const vec2f& _bottomLeft, int _w, int _h)
 {
 	Set(_bottomLeft.x, _bottomLeft.y, _w, _h);
 }
@@ -36,6 +36,15 @@ Rect::Rect(vec2f _bottomLeft, int _w, int _h)
 Rect::~Rect()
 {}
 
+bool Rect::CheckInteraction(int x, int y) const
+{        
+    	float dist = distBetweenPoints(center, x, y);
+    	if (dist < w/2)
+        	return true;
+    	else
+        	return false;    
+}
+        
 void Rect::Set(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h)
 {
 	bottomLeft.x = _bottomLeft_x;
@@ -47,7 +56,12 @@ void Rect::Set(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h)
 	UpdateCenter();
 }
 
-void Rect::SetCenter(vec2f _center)
+void Rect::Set(const vec2f& vbl, int _w, int _h)
+{
+	Set(vbl.x, vbl.y, _w , _h);
+}
+      		
+void Rect::SetCenter(const vec2f& _center)
 {
 	SetCenter(_center.x, _center.y);
 }
@@ -64,7 +78,7 @@ void Rect::SetCenter(float _center_x, float _center_y)
 	center.y = _center_y;
 }
 
-void Rect::SetBottomLeft(vec2f _bottomLeft)
+void Rect::SetBottomLeft(const vec2f& _bottomLeft)
 {
 	SetBottomLeft(_bottomLeft.x, _bottomLeft.y);
 }
