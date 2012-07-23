@@ -117,13 +117,13 @@ void GuiAngar::ButtonsAction() const
         }
 }
 
-bool GuiAngar::UpdateMouseVehicleSlotsInteraction(Angar* angar, int mxvp, int myvp, int lmb, int rmb)
+bool GuiAngar::UpdateMouseVehicleSlotsInteraction(const MouseData& data_mouse, Angar* angar)
 {	
         for (unsigned int i = 0; i < angar->vehicleslot_vec.size(); i++)
         { 
-                if (angar->vehicleslot_vec[i]->CheckInteraction(mxvp, myvp) == true)
+                if (angar->vehicleslot_vec[i]->GetRect().CheckInteraction(data_mouse.mx, data_mouse.my) == true)
                 {
-                        if (rmb == true)
+                        if (data_mouse.right_click == true)
                         {
                                 if (angar->vehicleslot_vec[i]->GetVehicle() != NULL)
                                 {
@@ -146,13 +146,13 @@ void GuiAngar::RenderVehicleSlots(Angar* angar) const
         }
 }
 
-void GuiAngar::RenderFocusedItemInfo(Angar* angar, int mxvp, int myvp) const
+void GuiAngar::RenderFocusedItemInfo(const MouseData& data_mouse, Angar* angar) const
 {
         for (unsigned int i=0; i<angar->vehicleslot_vec.size(); i++)
         { 
 		if (angar->vehicleslot_vec[i]->GetVehicle() != NULL)
                 {
-                       	if (angar->vehicleslot_vec[i]->CheckInteraction(mxvp, myvp) == true)
+                       	if (angar->vehicleslot_vec[i]->GetRect().CheckInteraction(data_mouse.mx, data_mouse.my) == true)
                 	{
 		                angar->vehicleslot_vec[i]->RenderItemInfo();
 		                return;

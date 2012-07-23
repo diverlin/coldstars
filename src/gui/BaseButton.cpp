@@ -45,15 +45,6 @@ BaseButton::BaseButton(TextureOb* textureOb,
 BaseButton::~BaseButton()
 {}
 
-bool BaseButton::CheckInteraction(int x, int y)
-{        
-    	float dist = distBetweenPoints(rect.GetCenter(), x, y);
-    	if (dist < rect.GetWidth()/2)
-        	return true;
-    	else
-        	return false;    
-}
-    
 void BaseButton::SetCenter(int x, int y)
 {        
      	rect.SetCenter((float)x, (float)y);

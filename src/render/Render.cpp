@@ -320,3 +320,21 @@ void renderMesh(GLuint glList, const vec3f& center, const vec3f& angle, float sc
 
 }
 
+void drawParticle(float size, const Color4f& color, const vec2f& center)
+{
+	glPointSize(size);
+        	
+        glBegin(GL_POINTS);           		
+     		glColor4f(color.r, color.g, color.b, color.a);
+     		glVertex3f(center.x, center.y, -2);
+       	glEnd();
+}
+
+void drawParticle(float size, const vec2f& center)
+{
+	glPointSize(size);
+        	
+        glBegin(GL_POINTS);           		
+     		glVertex3f(center.x, center.y, -2);
+       	glEnd();
+}

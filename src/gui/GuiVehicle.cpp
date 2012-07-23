@@ -27,13 +27,13 @@ GuiVehicle :: ~GuiVehicle()
 {}
 
 
-bool GuiVehicle::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb, Vehicle* vehicle, Store* store)
+bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse, Vehicle* vehicle, Store* store)
 {
-	for(unsigned int i = 0; i < vehicle->slot_total_vec.size(); i++)
+	for(unsigned int i=0; i<vehicle->slot_total_vec.size(); i++)
 	{ 
-		if (vehicle->slot_total_vec[i]->CheckInteraction(mxvp - offset.x, myvp - offset.y) == true)
+		if (vehicle->slot_total_vec[i]->GetRect().CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
 		{  
-			if (lmb == true)
+			if (data_mouse.left_click == true)
 			{
 				if (store != NULL)
 				{	
@@ -56,9 +56,9 @@ bool GuiVehicle::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb, Ve
 	// GATE SLOT
 	if ((player->GetCursor()->GetItemSlot()->GetEquipedStatus() == true) and (store == NULL))
 	{
-		if (vehicle->GetGateSlot()->CheckInteraction(mxvp - offset.x, myvp - offset.y) == true)  
+		if (vehicle->GetGateSlot()->GetRect().CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)  
 		{
-			if (lmb == true)
+			if (data_mouse.left_click == true)
 			{
 				player->GetCursor()->GetItemSlot()->DropItemToSpace(player->GetNpc()->GetVehicle());	
 			}
@@ -71,7 +71,7 @@ bool GuiVehicle::UpdateMouseInteraction(int mxvp, int myvp, int lmb, int rmb, Ve
 }
 
 
-void GuiVehicle::RenderVehicle(Vehicle* vehicle, int mxvp, int myvp, int requested_subtype_id) const
+void GuiVehicle::RenderVehicle(const MouseData& data_mouse, Vehicle* vehicle, int requested_subtype_id) const
 {
 	glPushMatrix();
 		glTranslatef(offset.x, offset.y, 0);
@@ -79,7 +79,9 @@ void GuiVehicle::RenderVehicle(Vehicle* vehicle, int mxvp, int myvp, int request
 
 		RenderSlotsAndItems(vehicle);
 		if (requested_subtype_id != NONE_ID)
-			RenderMarksForEmptySlots(vehicle, mxvp, myvp, requested_subtype_id);
+		{
+			RenderMarksForEmptySlots(data_mouse, vehicle, requested_subtype_id);
+		}
 	glPopMatrix();
 }
 
@@ -97,7 +99,7 @@ void GuiVehicle::RenderSlotsAndItems(Vehicle* vehicle) const
 	vehicle->GetGateSlot()->Render();
 }
 
-void GuiVehicle::RenderMarksForEmptySlots(Vehicle* vehicle, int mxvp, int myvp, int requested_subtype_id) const
+void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, Vehicle* vehicle, int requested_subtype_id) const
 {
 	for(unsigned int i=0; i<vehicle->slot_total_vec.size(); i++)
 	{
@@ -109,7 +111,7 @@ void GuiVehicle::RenderMarksForEmptySlots(Vehicle* vehicle, int mxvp, int myvp, 
                		}
                		else
                		{
-               			if (vehicle->slot_total_vec[i]->CheckInteraction(mxvp - offset.x, myvp - offset.y) == true)
+               			if (vehicle->slot_total_vec[i]->GetRect().CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
                			{
                				vehicle->slot_total_vec[i]->RenderMark(g_GUI_TEXTUREOB_COLLECTOR.slot_mark_reject);
                			}
@@ -118,13 +120,11 @@ void GuiVehicle::RenderMarksForEmptySlots(Vehicle* vehicle, int mxvp, int myvp, 
 	}
 }
 
-
-
-void GuiVehicle::RenderFocusedItemInfo(Vehicle* vehicle, int mxvp, int myvp) const
+void GuiVehicle::RenderFocusedItemInfo(const MouseData& data_mouse, Vehicle* vehicle) const
 {
 	for(unsigned int i=0; i<vehicle->slot_total_vec.size(); i++)
 	{ 
-		if (vehicle->slot_total_vec[i]->CheckInteraction(mxvp - offset.x, myvp - offset.y) == true)
+		if (vehicle->slot_total_vec[i]->GetRect().CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
 		{  
 			vehicle->slot_total_vec[i]->RenderItemInfo(-offset.x, -offset.y);
 		}

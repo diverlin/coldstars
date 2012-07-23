@@ -102,6 +102,8 @@ void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z
 
 void renderMesh(GLuint glList, const vec3f& center, const vec3f& angle, float scale);
 
+void drawParticle(float, const Color4f&, const vec2f&);
+void drawParticle(float, const vec2f&);
 
 #endif 
 

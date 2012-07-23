@@ -59,8 +59,6 @@ class BaseSlot : public Base
 		Base* GetOwner() const { return owner; };
 			
                 void SetRect(float, float, int, int);
-                
-                bool CheckInteraction(int, int);
         
         	virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);

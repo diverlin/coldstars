@@ -28,10 +28,10 @@ class GuiStore
                 ~GuiStore();
 
 		void SetOffset(const vec2i& offset) { this->offset = offset; };
-                bool UpdateMouseInteraction(Store*, int, int, int, int);
+                bool UpdateMouseInteraction(const MouseData&, Store*);
 
         	void RenderSlots(Store*) const;                
-                void RenderFocusedItemInfo(Store*, int, int);
+                void RenderFocusedItemInfo(const MouseData&, Store*);
                 
         public:          
         	Player* player;

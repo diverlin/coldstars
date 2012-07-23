@@ -27,15 +27,15 @@ GuiStore::~GuiStore()
 {}
 
         
-bool GuiStore::UpdateMouseInteraction(Store* store, int mxvp, int myvp, int lmb, int rmb)
+bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse, Store* store)
 {
         for (unsigned int i = 0; i < store->slot_total_vec.size(); i++)
         { 
                 if (store->slot_total_vec[i]->GetEquipedStatus() == true)
                 {
-                	if (store->slot_total_vec[i]->CheckInteraction(mxvp - offset.x, myvp - offset.y) == true)
+                	if (store->slot_total_vec[i]->GetRect().CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
                 	{
-                        	if (lmb == true)
+                        	if (data_mouse.left_click == true)
                         	{
                         		store->SellItemFromSlot(player->GetNpc(), store->slot_total_vec[i]);
                         	} 
@@ -62,11 +62,11 @@ void GuiStore::RenderSlots(Store* store) const
 	glPopMatrix();
 }
 
-void GuiStore::RenderFocusedItemInfo(Store* store, int mxvp, int myvp)
+void GuiStore::RenderFocusedItemInfo(const MouseData& data_mouse, Store* store)
 {	
         for (unsigned int i = 0; i < store->slot_total_vec.size(); i++)
         {                              				
-                if (store->slot_total_vec[i]->CheckInteraction(mxvp - offset.x, myvp - offset.y) == true)
+                if (store->slot_total_vec[i]->GetRect().CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
                 {
                         store->slot_total_vec[i]->RenderItemInfo(-offset.x, -offset.y);                    
                 } 

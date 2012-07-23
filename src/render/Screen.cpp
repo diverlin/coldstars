@@ -79,7 +79,7 @@ void Screen::ResizePostEffects(int width, int height)
 	bloom.Resize(width, height);
 }
 
-void Screen::MovingBy(vec2f delta)
+void Screen::MovingBy(const vec2f& delta)
 {
 	bottomLeft_globalCoord += delta;
 	UpdateTopRightGlobalCoord();

@@ -20,25 +20,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef GUIVEHICLE_H
 #define GUIVEHICLE_H
 
-class GuiVehicle
+class GuiVehicle : public BaseGui
 {
    	public:
       		GuiVehicle(Player*);
       		~GuiVehicle();
 
-		void SetOffset(const vec2i& offset) { this->offset = offset; };
-     		bool UpdateMouseInteraction(int, int, int, int, Vehicle*, Store* store = NULL);   
+     		bool UpdateMouseInteraction(const MouseData&, Vehicle*, Store* store = NULL);   
      				
-      		void RenderVehicle(Vehicle*, int, int, int) const;
-		void RenderFocusedItemInfo(Vehicle*, int, int) const;
+      		void RenderVehicle(const MouseData&, Vehicle*, int) const;
+		void RenderFocusedItemInfo(const MouseData&, Vehicle*) const;
       		
-      	private: 		
-      		Player* player;
-      		
-      		vec2i offset;
-  		
+      	private:  		
       		void RenderSlotsAndItems(Vehicle*) const;
-      		void RenderMarksForEmptySlots(Vehicle*, int, int, int) const;  
+      		void RenderMarksForEmptySlots(const MouseData&, Vehicle*, int) const;  
 };
 
 

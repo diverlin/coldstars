@@ -1224,6 +1224,17 @@ void loadImages()
 	g_GUI_TEXTUREOB_COLLECTOR.dot_purple = new TextureOb(NONE_ID, "data/other/dot_purple.png", true, &arg);
 }
 
+
+{
+	std::vector<int> arg;  
+	g_GUI_TEXTUREOB_COLLECTOR.screenrect = new TextureOb(NONE_ID, "data/gui/screenrect.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
+	g_GUI_TEXTUREOB_COLLECTOR.background_radar = new TextureOb(NONE_ID, "data/gui/radar_background.png", true, &arg);
+}
+
 {
 	std::vector<int> arg;  
 	g_GUI_TEXTUREOB_COLLECTOR.bar_radar = new TextureOb(NONE_ID, "data/gui/radar_bar.png", true, &arg);

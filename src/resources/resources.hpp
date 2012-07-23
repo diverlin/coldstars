@@ -40,7 +40,9 @@ struct GuiTextureObCollector
         TextureOb* dot_black;
         TextureOb* dot_yellow;
         TextureOb* dot_purple;
-                
+
+	TextureOb* screenrect;
+        TextureOb* background_radar;                
         TextureOb* bar_radar;
         TextureOb* bar_bottom;
         TextureOb* bar_left;

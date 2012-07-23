@@ -195,17 +195,17 @@ class Player : public Base
     		void SessionInSpace(const TurnTimer&);
     		void SessionInKosmoport();
     		
-    		void MouseInteractionInSpace(float, float, bool, bool);
-    		bool MouseInteractionWithRockets(float, float, bool, bool) const;
-    		bool MouseInteractionWithContainers(float, float, bool, bool) const;
-    		bool MouseInteractionWithSatellites(float, float, bool, bool) const;
-    		bool MouseInteractionWithAsteroids(float, float, bool, bool) const;
-    		bool MouseInteractionWithShips(float, float, bool, bool) const;
-    		bool MouseInteractionWithBlackHoles(float, float, bool, bool) const;
-    		bool MouseInteractionWithSpaceStations(float, float, bool, bool) const;
-    		bool MouseInteractionWithPlanets(float, float, bool, bool) const;
-    		bool MouseInteractionWithStars(float, float, bool, bool) const;
-    		void MouseNavigation(float, float, bool, bool) const;
+    		void MouseInteractionInSpace(const MouseData&);
+    		bool MouseInteractionWithRockets(const MouseData&) const;
+    		bool MouseInteractionWithContainers(const MouseData&) const;
+    		bool MouseInteractionWithSatellites(const MouseData&) const;
+    		bool MouseInteractionWithAsteroids(const MouseData&) const;
+    		bool MouseInteractionWithShips(const MouseData&) const;
+    		bool MouseInteractionWithBlackHoles(const MouseData&) const;
+    		bool MouseInteractionWithSpaceStations(const MouseData&) const;
+    		bool MouseInteractionWithPlanets(const MouseData&) const;
+    		bool MouseInteractionWithStars(const MouseData&) const;
+    		void MouseNavigation(const MouseData&) const;
     		
     		bool IsObjectOnScreen(const Points&) const;
     		bool IsObjectOnScreen(const vec2f&, float) const;

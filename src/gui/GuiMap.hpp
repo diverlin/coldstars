@@ -27,7 +27,7 @@ class GuiMap
      		GuiMap(Player*);
      		~GuiMap();
    
-     		bool UpdateMouseInteraction(Galaxy*, int, int, int, int);
+     		bool UpdateMouseInteraction(const MouseData&, Galaxy*);
      		void Render(Galaxy*);
 
      	private:
