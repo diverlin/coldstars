@@ -18,31 +18,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-GuiManager :: GuiManager(Player* player)
+GuiManager :: GuiManager()
 {
-	this->player = player;
-	
-	gui_angar = new GuiAngar(player);
-	gui_store = new GuiStore(player);
-	
-	gui_vehicle = new GuiVehicle(player);
-      	gui_skill   = new GuiSkill();
-      	
-      	gui_kosmoport = new GuiKosmoport(player);
-	gui_map       = new GuiMap(player); 
+	player = NULL;
 }
 
 GuiManager :: ~GuiManager()
-{
-        delete gui_angar;
-        delete gui_store;
-        
-	delete gui_vehicle;
-	delete gui_skill;
+{}
+
+void GuiManager::SetPlayer(Player* player)
+{	
+	this->player = player;
 	
-	delete gui_kosmoport;
-	delete gui_map;
-}
+	gui_angar.SetPlayer(player);
+	gui_store.SetPlayer(player);
+	
+	gui_vehicle.SetPlayer(player);
+      	//gui_skill.SetPlayer(player);
+      	
+      	gui_kosmoport.SetPlayer(player);
+	gui_map.SetPlayer(player); 
+}		
 
 bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mouse, Vehicle* scan_vehicle, bool allow_full_control)
 {
@@ -58,11 +54,11 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
 	bool interaction = false;        
 	if (allow_full_control == true)
 	{
-		interaction = gui_vehicle->UpdateMouseInteraction(data_mouse, scan_vehicle);
+		interaction = gui_vehicle.UpdateMouseInteraction(data_mouse, scan_vehicle);
 		if (scan_vehicle->GetOwnerNpc() != NULL)
 		{
-			interaction = gui_skill->UpdateButtonsMouseInteraction(data_mouse);
-			gui_skill->ButtonsAction(scan_vehicle->GetOwnerNpc()->GetSkill());
+			interaction = gui_skill.UpdateButtonsMouseInteraction(data_mouse);
+			gui_skill.ButtonsAction(scan_vehicle->GetOwnerNpc()->GetSkill());
 		}
 	}
 
@@ -73,26 +69,26 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
 
 void GuiManager::RenderScanVehicle(const MouseData& data_mouse, Vehicle* vehicle, bool show_skill) const
 {		
-	if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == true)
+	if (player->GetCursor().GetItemSlot()->GetEquipedStatus() == true)
 	{
-       		gui_vehicle->RenderVehicle(data_mouse, vehicle, player->GetCursor()->GetItemSlot()->GetItem()->GetFunctionalSlotSubTypeId());
-		player->GetCursor()->GetItemSlot()->GetItem()->Render(player->GetCursor()->GetItemSlot()->GetRect());		
+       		gui_vehicle.RenderVehicle(data_mouse, vehicle, player->GetCursor().GetItemSlot()->GetItem()->GetFunctionalSlotSubTypeId());
+		player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetItemSlot()->GetRect());		
 	}
 	else
 	{
-		gui_vehicle->RenderVehicle(data_mouse, vehicle, NONE_ID);
+		gui_vehicle.RenderVehicle(data_mouse, vehicle, NONE_ID);
 	}
 					
 	if ( (show_skill == true) and (vehicle->GetOwnerNpc() != NULL) )
 	{
-		gui_skill->RenderButtons();
-		gui_skill->RenderSkills(vehicle->GetOwnerNpc()->GetSkill());
-		gui_skill->RenderFocusedButtonInfo(data_mouse);
+		gui_skill.RenderButtons();
+		gui_skill.RenderSkills(vehicle->GetOwnerNpc()->GetSkill());
+		gui_skill.RenderFocusedButtonInfo(data_mouse);
 	}   					                 
 
-	if (player->GetCursor()->GetItemSlot()->GetEquipedStatus() == false)
+	if (player->GetCursor().GetItemSlot()->GetEquipedStatus() == false)
 	{
-		gui_vehicle->RenderFocusedItemInfo(data_mouse, vehicle);					
+		gui_vehicle.RenderFocusedItemInfo(data_mouse, vehicle);					
 		//gui_skill
 	}
 }
@@ -101,14 +97,14 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 {
      	bool interaction = false;
      		
-     	player->GetCursor()->Update(data_mouse); 
+     	player->GetCursor().Update(data_mouse); 
      								
 	switch(player->GetNpc()->GetVehicle()->GetPlaceTypeId())
 	{
 		case ENTITY::SPACE_ID:
 		{
-			gui_vehicle->SetOffset(GUI_VEHICLE_INSPACE_OFFSET);
-			gui_skill->SetOffset(GUI_SKILL_INSPACE_OFFSET);
+			gui_vehicle.SetOffset(GUI_VEHICLE_INSPACE_OFFSET);
+			gui_skill.SetOffset(GUI_SKILL_INSPACE_OFFSET);
 		
 		       	UserInput::Instance().UpdateInSpace(player, gui_space);
 		       				
@@ -117,7 +113,7 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 			//update
 			if (player->GetControlFlags().GetShowGalaxyMapFlag() == true)  
 			{
-				interaction = gui_map->UpdateMouseInteraction(data_mouse, player->GetNpc()->GetStarSystem()->GetGalaxy()); 	
+				interaction = gui_map.UpdateMouseInteraction(data_mouse, player->GetNpc()->GetStarSystem()->GetGalaxy()); 	
 			}
 			else if (scan_vehicle != NULL )
 			{				
@@ -146,7 +142,7 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 			enable_BLEND();    
 				if (player->GetControlFlags().GetShowGalaxyMapFlag() == true)  
 				{					   
-     					gui_map->Render(player->GetNpc()->GetStarSystem()->GetGalaxy());    
+     					gui_map.Render(player->GetNpc()->GetStarSystem()->GetGalaxy());    
 				}
 				else if (scan_vehicle != NULL )
 				{
@@ -173,30 +169,30 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 			
 			UserInput::Instance().UpdateInKosmoport(player);
 					       	
-			interaction = gui_kosmoport->UpdateButtonsMouseInteraction(data_mouse);
-			gui_kosmoport->ButtonsAction();
+			interaction = gui_kosmoport.UpdateButtonsMouseInteraction(data_mouse);
+			gui_kosmoport.ButtonsAction();
 													
-			switch(gui_kosmoport->GetActiveScreenId())
+			switch(gui_kosmoport.GetActiveScreenId())
         		{
         			case GUI::SCREEN::ANGAR_ID:
         			{
-        				gui_vehicle->SetOffset(GUI_VEHICLE_INANGAR_OFFSET);
-        				gui_skill->SetOffset(GUI_SKILL_INANGAR_OFFSET);
+        				gui_vehicle.SetOffset(GUI_VEHICLE_INANGAR_OFFSET);
+        				gui_skill.SetOffset(GUI_SKILL_INANGAR_OFFSET);
         				        						
         				Angar* angar = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetAngar();
 					Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget();
 
 					//update  
-					gui_angar->CheckButtonsLock();
+					gui_angar.CheckButtonsLock();
 					if (interaction == false)
 					{					
-						interaction = gui_angar->UpdateButtonsMouseInteraction(data_mouse);
+						interaction = gui_angar.UpdateButtonsMouseInteraction(data_mouse);
 						if (interaction == false)
 						{
-							interaction = gui_angar->UpdateMouseVehicleSlotsInteraction(data_mouse, angar);
+							interaction = gui_angar.UpdateMouseVehicleSlotsInteraction(data_mouse, angar);
 						}
 	
-						gui_angar->ButtonsAction();
+						gui_angar.ButtonsAction();
 					    	if ( interaction == false)
 					    	{
 							if (scan_vehicle != NULL) 
@@ -210,7 +206,7 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
         				resetRenderTransformation();
         				angar->RenderBackground(screen_rect);
                				enable_BLEND();   
-			        		gui_angar->RenderVehicleSlots(angar);
+			        		gui_angar.RenderVehicleSlots(angar);
 			        		
 						if (scan_vehicle != NULL) 	
 						{ 
@@ -218,13 +214,13 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 						}
 						else
 						{ 
-							gui_angar->RenderFocusedItemInfo(data_mouse, angar); 
+							gui_angar.RenderFocusedItemInfo(data_mouse, angar); 
 						}
 
-			        		gui_kosmoport->RenderButtons(); 
-			        		gui_angar->RenderButtons();
-                				gui_kosmoport->RenderFocusedButtonInfo(data_mouse); 
-                				gui_angar->RenderFocusedButtonInfo(data_mouse); 
+			        		gui_kosmoport.RenderButtons(); 
+			        		gui_angar.RenderButtons();
+                				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 
+                				gui_angar.RenderFocusedButtonInfo(data_mouse); 
                				disable_BLEND(); 
 	        		
 					break;
@@ -232,8 +228,8 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 		
 				case GUI::SCREEN::STORE_ID:
         			{
-        				gui_vehicle->SetOffset(GUI_VEHICLE_INSTORE_OFFSET);
-        				gui_store->SetOffset(GUI_STORE_OFFSET);
+        				gui_vehicle.SetOffset(GUI_VEHICLE_INSTORE_OFFSET);
+        				gui_store.SetOffset(GUI_STORE_OFFSET);
         						
         				//if (npc->GetScanTarget() != npc->GetVehicle())
         				{
@@ -246,10 +242,10 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 					//update
 					if (interaction == false)
 					{
-						interaction = gui_store->UpdateMouseInteraction(data_mouse, store);
+						interaction = gui_store.UpdateMouseInteraction(data_mouse, store);
 					    	if (interaction == false)
 					    	{
-					    		interaction = gui_vehicle->UpdateMouseInteraction(data_mouse, vehicle, store);
+					    		interaction = gui_vehicle.UpdateMouseInteraction(data_mouse, vehicle, store);
 					    	}
 					}
 								        	
@@ -257,15 +253,15 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
         				resetRenderTransformation();
 					store->RenderBackground(screen_rect);
 					enable_BLEND();
-						gui_store->RenderSlots(store);
+						gui_store.RenderSlots(store);
 		
 						bool show_skill = false;
 						RenderScanVehicle(data_mouse, vehicle, show_skill);
 
-						gui_store->RenderFocusedItemInfo(data_mouse, store);
+						gui_store.RenderFocusedItemInfo(data_mouse, store);
 						
-			        		gui_kosmoport->RenderButtons(); 
-                				gui_kosmoport->RenderFocusedButtonInfo(data_mouse); 
+			        		gui_kosmoport.RenderButtons(); 
+                				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 
 					disable_BLEND();
 	
 					player->GetNpc()->ResetScanTarget();
@@ -289,8 +285,8 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
         				enable_BLEND();   
      						//gui_shop->RenderInternals(shop);
      						
-     						gui_kosmoport->RenderButtons(); 
-                				gui_kosmoport->RenderFocusedButtonInfo(data_mouse); 
+     						gui_kosmoport.RenderButtons(); 
+                				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 
                 				    
 					disable_BLEND();  
         				
@@ -303,17 +299,17 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 					//update
 					if ( interaction == false)
 					{
-						interaction = gui_map->UpdateMouseInteraction(data_mouse, galaxy);
+						interaction = gui_map.UpdateMouseInteraction(data_mouse, galaxy);
 			        	}					   
 				
 					//render
         				clearScreen(); //becase there is no background
 			        	resetRenderTransformation();
         				enable_BLEND();   
-     						gui_map->Render(galaxy);
+     						gui_map.Render(galaxy);
      						
-     						gui_kosmoport->RenderButtons(); 
-                				gui_kosmoport->RenderFocusedButtonInfo(data_mouse); 
+     						gui_kosmoport.RenderButtons(); 
+                				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 
                 				    
 					disable_BLEND();    
         				         	
@@ -336,8 +332,8 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
         				enable_BLEND();   
 						//gui_goverment->RenderInternals(goverment);
      						
-     						gui_kosmoport->RenderButtons(); 
-                				gui_kosmoport->RenderFocusedButtonInfo(data_mouse); 
+     						gui_kosmoport.RenderButtons(); 
+                				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 
                 				    
 					disable_BLEND(); 
 

@@ -89,8 +89,9 @@ class StarSystem : public BaseGameEntity
 		
 		void BombExplosionEvent(Container*, bool);
 		
-		void FindVisibleEntities_c(Player*);  
-
+		void FindRenderVisibleEntities_c(Player*);  
+		void FindRadarVisibleEntities_c(Player*);  
+		
 		void Update(int, bool);
 
     		void RestoreDefaultColor();

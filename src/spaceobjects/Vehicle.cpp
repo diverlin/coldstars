@@ -150,6 +150,17 @@ void Vehicle::BindOwnerNpc(Npc* owner_npc)
 	owner_npc->SetVehicle(this); 
 } 
 
+bool Vehicle::IsObjectWithinRadarRange(BaseGameEntity* object) const
+{
+        float dist = distBetweenPoints(points.GetCenter(), object->GetPoints().GetCenter());
+        if (dist < propetries.radius)
+        {
+               	return true;
+        }
+        
+        return false;
+}	
+	
 void Vehicle::RecalculateCollisionRadius()
 {
 	collision_radius = (textureOb->GetFrameWidth() + textureOb->GetFrameHeight())/3;

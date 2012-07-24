@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class GuiVehicle : public BaseGui
 {
    	public:
-      		GuiVehicle(Player*);
+      		GuiVehicle();
       		~GuiVehicle();
 
      		bool UpdateMouseInteraction(const MouseData&, Vehicle*, Store* store = NULL);   

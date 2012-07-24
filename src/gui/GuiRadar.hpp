@@ -17,8 +17,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef GURADAR_H
+#ifndef GUIRADAR_H
 #define GUIRADAR_H
+
+#include "../gui/BaseGui.hpp"
 
 class GuiRadar : public BaseGui
 {
@@ -35,7 +37,9 @@ class GuiRadar : public BaseGui
      		bool UpdateMouseInteraction(const MouseData&);
      		void UpdateEquipmentIcons(Player* player) const;
      		
-     		void AddIfWithinRange(BaseGameEntity*);
+     		void Add(BaseGameEntity*);
+     		void AddIfWithinRadarRange(BaseGameEntity*, const Vehicle&);
+     		
 		void Render() const;
 		     			
       	private:
@@ -48,8 +52,8 @@ class GuiRadar : public BaseGui
       	       	Rect rect;
       	       	Rect screenrect;
       	       	      	       	      		
-      		std::vector<BaseGameEntity*> vehicle_vec;
-      		
+      		std::vector<BaseGameEntity*> entity_vec;
+      		      		
       		Player* player;
       		
 

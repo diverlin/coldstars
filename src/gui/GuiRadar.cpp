@@ -57,7 +57,7 @@ void GuiRadar::Resize(int screen_w, int screen_h)
      	
 void GuiRadar::Reset()
 {
-	vehicle_vec.clear();
+	entity_vec.clear();
 }
     
 void GuiRadar::ButtonsAction(Player* player) const
@@ -116,27 +116,64 @@ bool GuiRadar::UpdateMouseInteraction(const MouseData& data_mouse)
      	return false;
 }
      		
-void GuiRadar::AddIfWithinRange(BaseGameEntity* instance)
+void GuiRadar::Add(BaseGameEntity* object)
 {
-	float dist = distBetweenPoints(player->GetNpc()->GetVehicle()->GetPoints().GetCenter(), instance->GetPoints().GetCenter());
-	if (dist < 600)
-	{
-		vehicle_vec.push_back(instance);
-	}
+	entity_vec.push_back(object);
 }
+
+void GuiRadar::AddIfWithinRadarRange(BaseGameEntity* object, const Vehicle& vehicle)
+{
+ 	if (vehicle.IsObjectWithinRadarRange(object) == true) 
+       	{    	
+       		Add(object); 
+	}
+}     		
     		
 void GuiRadar::Render() const
 {
-	drawTexturedRect(textureOb_background, rect, -1.5);
-	drawTexturedRect(textureOb_bar, rect, -1.5);
-	drawTexturedRect(textureOb_screenrect, screenrect, -1.5);
+	drawTexturedRect(textureOb_background, rect, -2.0);
+	drawTexturedRect(textureOb_bar, rect, -2.0);
+	drawTexturedRect(textureOb_screenrect, screenrect, -2.0);
 		
+	float size, size_base = 7;
 	enable_POINTSPRITE();       	
-     		glBindTexture(GL_TEXTURE_2D,  g_GUI_TEXTUREOB_COLLECTOR.dot_red->texture);
-		for (unsigned int i=0; i<vehicle_vec.size(); i++)
+		for (unsigned int i=0; i<entity_vec.size(); i++)
 		{
-			float size = 1.0f;
-			drawParticle(size, vehicle_vec[i]->GetPoints().GetCenter());			
+			switch(entity_vec[i]->GetTypeId())
+			{
+				case ENTITY::STAR_ID:
+				{
+					glBindTexture(GL_TEXTURE_2D, g_GUI_TEXTUREOB_COLLECTOR.dot_yellow->texture);
+					size = 2*size_base;
+					break;
+				}
+				case ENTITY::PLANET_ID:
+				{
+					glBindTexture(GL_TEXTURE_2D, g_GUI_TEXTUREOB_COLLECTOR.dot_blue->texture);
+					size = 1.5*size_base;
+					break;				
+				}
+				case ENTITY::ASTEROID_ID:
+				{
+					glBindTexture(GL_TEXTURE_2D, g_GUI_TEXTUREOB_COLLECTOR.dot_red->texture);
+					size = 1.25*size_base;
+					break;				
+				}
+				case ENTITY::BLACKHOLE_ID:
+				{
+					glBindTexture(GL_TEXTURE_2D, g_GUI_TEXTUREOB_COLLECTOR.dot_purple->texture);
+					size = 1.5*size_base;
+					break;				
+				}
+				case ENTITY::VEHICLE_ID:
+				{
+					glBindTexture(GL_TEXTURE_2D, g_GUI_TEXTUREOB_COLLECTOR.dot_green->texture);
+					size = 1*size_base;
+					break;				
+				}
+			}
+			
+			drawParticle(size, rect.GetCenter() + entity_vec[i]->GetPoints().GetCenter()*scale);			
 		}
 	disable_POINTSPRITE(); 
 	

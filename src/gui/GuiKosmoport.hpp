@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class GuiKosmoport : public BaseGui
 {
     	public:
-       		GuiKosmoport(Player*);
+       		GuiKosmoport();
        		~GuiKosmoport();
 
 		int GetActiveScreenId() const { return active_screen_id; };

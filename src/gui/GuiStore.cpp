@@ -18,10 +18,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-GuiStore::GuiStore(Player* player)
-{
-	this->player = player;
-}
+GuiStore::GuiStore()
+{}
 
 GuiStore::~GuiStore()
 {}

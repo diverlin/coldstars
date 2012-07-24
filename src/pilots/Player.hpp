@@ -19,6 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "../gui/GuiManager.hpp"
 
 
 class ControlFlags
@@ -126,9 +127,10 @@ class Player : public Base
 
 		ControlFlags& GetControlFlags() 	{ return control_flags; };
 		WeaponSelector& GetWeaponsSelector()	{ return weapons_selector; };
+		GuiManager& GetGuiManager() { return gui_manager; };
           	
-		Npc* GetNpc()       const { return npc; }
-		Cursor* GetCursor() const { return cursor; }
+		Npc* GetNpc() const { return npc; }
+		Cursor& GetCursor() { return cursor; }
    
      		void BindNpc(Npc*);
      		
@@ -158,9 +160,9 @@ class Player : public Base
 		void ResolveData();
 		 
      	private:
-    	     	Npc*     npc;
+    	     	Npc* npc;
      	     	
-     	     	Cursor* cursor;
+     	     	Cursor cursor;
 
      	     	ControlFlags control_flags;  
      		WeaponSelector weapons_selector;     		     	     	
@@ -183,9 +185,7 @@ class Player : public Base
     		std::vector<VerticalFlowText*>   visible_text_DAMAGE_vec;
     		//  
     		
-    		UnresolvedDataUniquePlayer data_unresolved_player;
-    		
-    		GuiManager*   GUI_MANAGER;    
+    		GuiManager gui_manager;    
     		
     		void RenderInSpace(bool, bool, bool); 
      			void RenderInSpace_NEW();
@@ -196,20 +196,21 @@ class Player : public Base
     		void SessionInKosmoport();
     		
     		void MouseInteractionInSpace(const MouseData&);
-    		bool MouseInteractionWithRockets(const MouseData&) const;
-    		bool MouseInteractionWithContainers(const MouseData&) const;
-    		bool MouseInteractionWithSatellites(const MouseData&) const;
-    		bool MouseInteractionWithAsteroids(const MouseData&) const;
-    		bool MouseInteractionWithShips(const MouseData&) const;
-    		bool MouseInteractionWithBlackHoles(const MouseData&) const;
-    		bool MouseInteractionWithSpaceStations(const MouseData&) const;
-    		bool MouseInteractionWithPlanets(const MouseData&) const;
-    		bool MouseInteractionWithStars(const MouseData&) const;
+    		bool MouseInteractionWithRockets(const MouseData&);
+    		bool MouseInteractionWithContainers(const MouseData&);
+    		bool MouseInteractionWithSatellites(const MouseData&);
+    		bool MouseInteractionWithAsteroids(const MouseData&);
+    		bool MouseInteractionWithShips(const MouseData&);
+    		bool MouseInteractionWithBlackHoles(const MouseData&);
+    		bool MouseInteractionWithSpaceStations(const MouseData&);
+    		bool MouseInteractionWithPlanets(const MouseData&);
+    		bool MouseInteractionWithStars(const MouseData&);
     		void MouseNavigation(const MouseData&) const;
     		
     		bool IsObjectOnScreen(const Points&) const;
     		bool IsObjectOnScreen(const vec2f&, float) const;
-    		
+
+    		UnresolvedDataUniquePlayer data_unresolved_player;    		
     		void SaveDataUniquePlayer(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniquePlayer(const boost::property_tree::ptree&);
 		void ResolveDataUniquePlayer();

@@ -18,10 +18,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-GuiVehicle :: GuiVehicle(Player* player)
-{
-	this->player = player;
-}
+GuiVehicle :: GuiVehicle()
+{}
 
 GuiVehicle :: ~GuiVehicle()
 {}
@@ -44,7 +42,7 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse, Vehicle* ve
             			}          		
 				else 
 				{
-					player->GetCursor()->GetItemSlot()->SwapItemWith(vehicle->slot_total_vec[i]);     
+					player->GetCursor().GetItemSlot()->SwapItemWith(vehicle->slot_total_vec[i]);     
 				}
 			} 
 			
@@ -54,13 +52,13 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse, Vehicle* ve
                         
 
 	// GATE SLOT
-	if ((player->GetCursor()->GetItemSlot()->GetEquipedStatus() == true) and (store == NULL))
+	if ((player->GetCursor().GetItemSlot()->GetEquipedStatus() == true) and (store == NULL))
 	{
 		if (vehicle->GetGateSlot()->GetRect().CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)  
 		{
 			if (data_mouse.left_click == true)
 			{
-				player->GetCursor()->GetItemSlot()->DropItemToSpace(player->GetNpc()->GetVehicle());	
+				player->GetCursor().GetItemSlot()->DropItemToSpace(player->GetNpc()->GetVehicle());	
 			}
 			
 			return true;

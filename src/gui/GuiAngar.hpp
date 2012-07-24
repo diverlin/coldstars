@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class GuiAngar : public BaseGui
 {
     	public:
-       		GuiAngar(Player*);
+       		GuiAngar();
        		~GuiAngar();
 		
        		bool UpdateMouseVehicleSlotsInteraction(const MouseData&, Angar*);
