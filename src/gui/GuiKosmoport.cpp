@@ -18,10 +18,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-GuiKosmoport::GuiKosmoport(Player* player)
+GuiKosmoport::GuiKosmoport()
 {
-	this->player = player;
-	      	
 	int screen_w = Screen::Instance().GetWindow().GetWidth();
 	int screen_h = Screen::Instance().GetWindow().GetHeight();
 	

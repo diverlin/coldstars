@@ -75,9 +75,8 @@ void Npc::MindInSpace()
 	if (upper_control == false)
 	{
         	CheckNeeds();
-                
-		observation->ObserveAllInSpaceInStatic();          
-        
+        	observation->ObserveAllInSpace();  
+                        
         	if (ai_model)
         	{
 			ai_model->UpdateInStatic(this);
@@ -163,7 +162,7 @@ Planet* Npc::GetPlanetForDocking()
 
 StarSystem* Npc::GetClosestStarSystem(bool _captured)
 {
-       	observation->FindEchievableStarSystemsInStatic(GetStarSystem()->GetGalaxy());
+       	observation->FindEchievableStarSystems(GetStarSystem()->GetGalaxy());
         	
        	StarSystem* _target_starsystem = observation->GetClosestStarSystem(_captured);   
 	return _target_starsystem;

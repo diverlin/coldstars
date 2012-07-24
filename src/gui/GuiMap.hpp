@@ -21,17 +21,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define GUIMAP_H
 
 
-class GuiMap 
+class GuiMap : public BaseGui
 {
   	public:
-     		GuiMap(Player*);
+     		GuiMap();
      		~GuiMap();
    
      		bool UpdateMouseInteraction(const MouseData&, Galaxy*);
      		void Render(Galaxy*);
 
      	private:
-     		Player* player;
      		Rect rect;
      		
      		TextureOb* texOb_background;

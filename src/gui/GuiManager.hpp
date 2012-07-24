@@ -20,26 +20,39 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef GUIMANAGER_H
 #define GUIMANAGER_H
 
+#include "../gui/GuiRadar.hpp"
+#include "../gui/GuiVehicle.hpp"
+#include "../gui/GuiSkill.hpp"
+#include "../gui/GuiKosmoport.hpp"
+#include "../gui/GuiAngar.hpp"
+#include "../gui/GuiStore.hpp"
+#include "../gui/GuiSpace.hpp"
+#include "../gui/GuiMap.hpp"
+
+		
+		
 class GuiManager
 {
    	public:
-      		GuiManager(Player*);
+      		GuiManager();
       		~GuiManager();
 
+		void SetPlayer(Player*);
+		
 		bool RunSession(const MouseData&);
+		GuiRadar& GetGuiRadar() { return gui_radar; };
       		
       	private:
       		Player* player;
       		
-      		GuiVehicle* 	gui_vehicle;
-      		GuiSkill*   	gui_skill;
-      		GuiKosmoport* 	gui_kosmoport;
-      		GuiAngar* 	gui_angar;
-                GuiStore* 	gui_store;
+      		GuiVehicle 	gui_vehicle;
+      		GuiSkill   	gui_skill;
+      		GuiKosmoport 	gui_kosmoport;
+      		GuiAngar 	gui_angar;
+                GuiStore 	gui_store;
       		GuiSpace     	gui_space;      
-		GuiMap*       	gui_map;    
-       		
-       		GuiRadar gui_radar;
+		GuiMap       	gui_map;      		
+       		GuiRadar 	gui_radar;
        		
      		bool UpdateMouseInteractionWithScanVehicle(const MouseData&, Vehicle*, bool allow_full_control = false);     		
      		void RenderScanVehicle(const MouseData&, Vehicle*, bool show_skill = true) const;  	

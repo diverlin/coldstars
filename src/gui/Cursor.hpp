@@ -37,8 +37,10 @@ struct MouseData
 class Cursor
 {
   	public:
-        	Cursor(Player*);
+        	Cursor();
         	~Cursor();
+		
+		void SetPlayer(Player* player) {this->player = player; };
 		
 		void SetLeftMouseButtonClick(bool left_click) 		{ data_mouse.left_click = left_click; };
 		void SetRightMouseButtonClick(bool right_click) 	{ data_mouse.right_click = right_click; };

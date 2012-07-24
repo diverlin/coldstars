@@ -21,22 +21,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define GUISTORE_H
 
 
-class GuiStore
+class GuiStore : public BaseGui
 {
         public:
-                GuiStore(Player*);                      
+                GuiStore();                      
                 ~GuiStore();
 
-		void SetOffset(const vec2i& offset) { this->offset = offset; };
                 bool UpdateMouseInteraction(const MouseData&, Store*);
 
         	void RenderSlots(Store*) const;                
                 void RenderFocusedItemInfo(const MouseData&, Store*);
                 
         public:          
-        	Player* player;
-        	
-        	vec2i offset;
 };
            
            

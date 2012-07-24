@@ -20,6 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef GUISKILL_H
 #define GUISKILL_H
 
+#include "../pilots/Skill.hpp"
+
 class GuiSkill : public BaseGui
 {
    	public:

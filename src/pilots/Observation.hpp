@@ -38,9 +38,9 @@ class Observation
       		Observation(Npc*);
      		~Observation();
      		
- 		void ObserveAllInSpaceInStatic();
+ 		void ObserveAllInSpace();
           	
-          	void FindEchievableStarSystemsInStatic(Galaxy*);
+          	void FindEchievableStarSystems(Galaxy*);
           	StarSystem* GetClosestStarSystem(bool) const;
           	Vehicle* GetClosestVehicle(std::vector<int>*) const;
           	          	          	                
@@ -50,22 +50,15 @@ class Observation
 
                 template <typename OBSERVED_DATA_TYPE>
 		void Sort(std::vector<OBSERVED_DATA_TYPE>*);
-
-              	void _printVisibleMineralInformation() const;  // debug
                	
 	private:
                 Npc* npc_owner;	
 
      		std::vector<Pair<StarSystem*>> visible_STARSYSTEM_pair_vec; 
      		std::vector<Pair<Container*>> visible_CONTAINER_pair_vec;                              
-     		std::vector<Pair<Asteroid*>>  visible_ASTEROID_pair_vec; 		
+     		std::vector<Pair<Asteroid*>> visible_ASTEROID_pair_vec; 		
 
      		std::vector<Pair<Vehicle*>> visible_VEHICLE_pair_vec;                
-     		//std::vector<ShipObservationData> visible_SHIP_RANGER_vec;
-     		//std::vector<ShipObservationData> visible_SHIP_WARRIOR_vec;
-     		//std::vector<ShipObservationData> visible_SHIP_TRADER_vec;
-     		//std::vector<ShipObservationData> visible_SHIP_PIRAT_vec;
-     		//std::vector<ShipObservationData> visible_SHIP_DIPLOMAT_vec;
 
      		VisionStatus see;
      		

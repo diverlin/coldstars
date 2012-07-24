@@ -18,10 +18,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-GuiMap::GuiMap(Player* player)
+GuiMap::GuiMap()
 { 
-	this->player = player;
-    	rect = Rect(GUI::MAP::BORDER_X, GUI::MAP::BORDER_Y, (Config::Instance().SCREEN_WIDTH - 2 * GUI::MAP::BORDER_X), (Config::Instance().SCREEN_HEIGHT - 2 * GUI::MAP::BORDER_X));
+    	rect.Set(	GUI::MAP::BORDER_X, 
+    			GUI::MAP::BORDER_Y, 
+    			(Config::Instance().SCREEN_WIDTH  - 2 * GUI::MAP::BORDER_X), 
+    			(Config::Instance().SCREEN_HEIGHT - 2 * GUI::MAP::BORDER_X));
+    			
     	texOb_background = g_GUI_TEXTUREOB_COLLECTOR.text_background;
 }
 

@@ -217,8 +217,8 @@ void UserInput::MouseButtonPressed(Player* player)
 {
 	switch(event.Key.Code) 
 	{ 
-		case sf::Mouse::Left:  { player->GetCursor()->SetLeftMouseButtonClick(true); break; } 
-		case sf::Mouse::Right: { player->GetCursor()->SetRightMouseButtonClick(true); break; }
+		case sf::Mouse::Left:  { player->GetCursor().SetLeftMouseButtonClick(true); break; } 
+		case sf::Mouse::Right: { player->GetCursor().SetRightMouseButtonClick(true); break; }
 	}
 }
  
