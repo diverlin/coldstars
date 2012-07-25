@@ -19,8 +19,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "../gui/GuiManager.hpp"
+#include <vector>
 
+#include "../gui/GuiManager.hpp"
+#include "../gui/Cursor.hpp"
+#include "../common/TurnTimer.hpp"
+
+#include "../spaceobjects/Star.hpp"
+#include "../spaceobjects/Planet.hpp"
+#include "../spaceobjects/BlackHole.hpp"
+#include "../spaceobjects/Asteroid.hpp"
+#include "../spaceobjects/SpaceStation.hpp"
+#include "../spaceobjects/Satellite.hpp"
+#include "../spaceobjects/Ship.hpp"
+#include "../spaceobjects/Container.hpp"
+#include "../spaceobjects/RocketBullet.hpp"
+
+#include "../effects/lazerTrace.hpp"
 
 class ControlFlags
 {
@@ -96,21 +111,6 @@ class ControlFlags
 			else 				{ grab_mode = true; };			
 		};
 };
-
-class WeaponSelector
-{
-	public:
-		WeaponSelector();
-		void SetSingle(unsigned int, bool);		
-		void SetAll(bool);
-		
-		bool GetSingle(unsigned int) const;
-		bool StatesAreMixed() const;
-	
-	private:
-		bool state[GAME::WEAPONS_NUM_MAX];	
-};
-
 
 struct UnresolvedDataUniquePlayer
 {

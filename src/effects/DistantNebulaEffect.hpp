@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef DISTANTNEBULAEFFECT_H
 #define DISTANTNEBULAEFFECT_H
 
-    
+#include "../effects/BaseBackGroundEffect.hpp"    
 
 class DistantNebulaEffect : public BaseBackGroundEffect
 {

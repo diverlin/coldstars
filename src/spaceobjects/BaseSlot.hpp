@@ -20,6 +20,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef BASESLOT_H
 #define BASESLOT_H
 
+#include "../common/constants.hpp"
+class Vehicle;
+
 struct UnresolvedDataUniqueBaseSlot
 {
 	UnresolvedDataUniqueBaseSlot()

@@ -20,6 +20,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
+#include "../spaceobjects/BaseGameEntity.hpp"
+#include "../docking/VehicleSlot.hpp"
+#include "../spaceobjects/WeaponComplex.hpp"
+#include "../spaceobjects/DriveComplex.hpp"
+#include "../spaceobjects/ProtectionComplex.hpp"
+
+#include "../docking/BaseLand.hpp"
+#include "../pilots/Npc.hpp"
 
 struct VehicleKorpusData
 {

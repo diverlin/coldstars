@@ -16,6 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+int BaseBackGroundEffect::counter;
 
 BaseBackGroundEffect::BaseBackGroundEffect():textureOb(NULL), scale(1.f), parallax_rate(1.f)
 {

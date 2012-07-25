@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //#include "../resources/objLoader.hpp"
 //#include "../common/id.hpp"
 //#include "../resources/textureManager.hpp"
+#include "../common/id.hpp"
 
 sf::Clock g_CLOCK;
 

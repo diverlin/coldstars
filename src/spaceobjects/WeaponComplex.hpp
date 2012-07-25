@@ -20,6 +20,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef WEAPONCOMPLEX_H
 #define WEAPONCOMPLEX_H
 
+class Vehicle;
+#include "../spaceobjects/ItemSlot.hpp"
+#include "../pilots/WeaponSelector.hpp" 
 
 class WeaponComplex
 {

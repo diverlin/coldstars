@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MODULEBASE_H
 #define MODULEBASE_H
 
+#include "../BaseItem.hpp"
 
 class BaseModule : public BaseItem
 {

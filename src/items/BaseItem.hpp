@@ -20,6 +20,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef BASEITEM_H
 #define BASEITEM_H
 
+#include "../common/Base.hpp"
+#include "../text/textstuff.hpp"
+
 struct ItemCommonData 
 {
 	ItemCommonData();

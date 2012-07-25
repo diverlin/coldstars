@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef GUIANGAR_H
 #define GUIANGAR_H
 
+#include "../docking/Angar.hpp"
 
 class GuiAngar : public BaseGui
 {

@@ -49,7 +49,9 @@ Npc :: ~Npc()
         delete observation;
         delete state_machine;        
 }  
-    
+
+StarSystem* Npc::GetStarSystem() const { return vehicle->GetStarSystem(); }
+		
 void Npc::MindInKosmoport()
 {   		
 	if (needsToDo.REPAIR_KORPUS == true)

@@ -21,10 +21,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <string>
 
+#include "../common/myVector.hpp"
+
 #define LOG_ENABLED 0
 
-float RADAR_SCALE = 1/50.0;
+const double NO_DELAY = 0.0f;
+const int NO_ADDITIONAL_INFO = 0;
+
 const std::string GAME_TITLE = "cold star V0.0.4.54 (SFML/C++)";
+
+const float RADAR_SCALE = 1/50.0;
 
 const int TURN_TIME = 150;  //turn time, depends on game fps
 
@@ -627,13 +633,15 @@ namespace GUI
 			
 			INCREMENT_ATTACK_ID, DECREMENT_ATTACK_ID, INCREMENT_DEFENCE_ID, DECREMENT_DEFENCE_ID, INCREMENT_LEADER_ID,
 			DECREMENT_LEADER_ID, INCREMENT_TRADER_ID, DECREMENT_TRADER_ID, INCREMENT_TECHNIC_ID, DECREMENT_TECHNIC_ID,
-			INCREMENT_DIPLOMAT_ID, DECREMENT_DIPLOMAT_ID
+			INCREMENT_DIPLOMAT_ID, DECREMENT_DIPLOMAT_ID,
+			
+			SAVE_ID, LOAD_ID
 		};
 		
 		namespace SKILL
 		{
 			const int BUTTON_WIDTH = 20;
-			const int BUTTON_HEIGHT = 12;
+			const int BUTTON_HEIGHT = 14;
 		}
 	}
 	
@@ -710,5 +718,5 @@ namespace GAME
 {
 	const int WEAPONS_NUM_MAX = 9;
 }
-#endif //CONSTANTS_HPP
+#endif
 

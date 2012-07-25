@@ -106,7 +106,7 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 			gui_vehicle.SetOffset(GUI_VEHICLE_INSPACE_OFFSET);
 			gui_skill.SetOffset(GUI_SKILL_INSPACE_OFFSET);
 		
-		       	UserInput::Instance().UpdateInSpace(player, gui_space);
+		       	UserInput::Instance().UpdateInSpace(player, *this);
 		       				
 			Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget(); 
 						        				

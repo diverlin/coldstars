@@ -23,9 +23,8 @@
 #include <map>
 #include <cassert>
 #include <string>
-//#include "../spaceobjects/BaseGameEntity.hpp"
-//#include "../spaceobjects/planetBase.hpp"
-//#include "../spaceobjects/planet.hpp"
+
+#include "../common/Base.hpp"
 
 
 class EntityManager

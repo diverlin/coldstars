@@ -17,6 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "../common/constants.hpp"
+#include "../common/EntityManager.hpp"
 
 Galaxy::Galaxy(int id)
 {

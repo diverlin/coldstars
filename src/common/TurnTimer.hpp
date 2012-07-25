@@ -19,6 +19,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef TURNTIMER_H
 #define TURNTIMER_H
 
+#include "../common/GameDate.hpp"
+
 class TurnTimer
 {
 	public:

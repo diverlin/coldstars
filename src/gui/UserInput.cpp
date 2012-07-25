@@ -16,6 +16,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "../gui/UserInput.hpp"
+#include "../common/SaveLoadManager.hpp"
+
 UserInput& UserInput::Instance()
 {
 	static UserInput instance;
@@ -33,17 +36,14 @@ UserInput::UserInput()
     	scroll_accel_y = 0;  
     
 	next_turn_ready = false;
-	
-	save = false;
-	load = false;
 }
 
 UserInput::~UserInput()
 {}
 		
-void UserInput::UpdateInSpace(Player* player, const GuiSpace& gui_space)
+void UserInput::UpdateInSpace(Player* player, GuiManager& gui_manager)
 {
-	GetSimpleInputsInSpace(player, gui_space);
+	GetSimpleInputsInSpace(player, gui_manager);
         GetRealTimeInputs(player);
        	ScrollCamera(player);
 }
@@ -53,7 +53,7 @@ void UserInput::UpdateInKosmoport(Player* player)
 	GetSimpleInputsInKosmoport(player);
 }
 
-void UserInput::KeyPressedInSpace(Player* player, const GuiSpace& gui_space)
+void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 {
 	switch(event.Key.Code) 
         {
@@ -83,41 +83,41 @@ void UserInput::KeyPressedInSpace(Player* player, const GuiSpace& gui_space)
 		} 
 
 		// WEAPON SLOTS
-		case sf::Key::Num1: { gui_space.GetButton(GUI::BUTTON::WEAPON1_ACTIVATOR_ID)->PressEvent(); break; }
-		case sf::Key::Num2: { gui_space.GetButton(GUI::BUTTON::WEAPON2_ACTIVATOR_ID)->PressEvent(); break; }
-		case sf::Key::Num3: { gui_space.GetButton(GUI::BUTTON::WEAPON3_ACTIVATOR_ID)->PressEvent(); break; }
-		case sf::Key::Num4: { gui_space.GetButton(GUI::BUTTON::WEAPON4_ACTIVATOR_ID)->PressEvent(); break; }
-		case sf::Key::Num5: { gui_space.GetButton(GUI::BUTTON::WEAPON5_ACTIVATOR_ID)->PressEvent(); break; } 
-		case sf::Key::Num6: { gui_space.GetButton(GUI::BUTTON::WEAPON6_ACTIVATOR_ID)->PressEvent(); break; } 
-		case sf::Key::Num7: { gui_space.GetButton(GUI::BUTTON::WEAPON7_ACTIVATOR_ID)->PressEvent(); break; }
-		case sf::Key::Num8: { gui_space.GetButton(GUI::BUTTON::WEAPON8_ACTIVATOR_ID)->PressEvent(); break; }            		
-		case sf::Key::Num9: { gui_space.GetButton(GUI::BUTTON::WEAPON9_ACTIVATOR_ID)->PressEvent(); break; }     
+		case sf::Key::Num1: { gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON1_ACTIVATOR_ID)->PressEvent(); break; }
+		case sf::Key::Num2: { gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON2_ACTIVATOR_ID)->PressEvent(); break; }
+		case sf::Key::Num3: { gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON3_ACTIVATOR_ID)->PressEvent(); break; }
+		case sf::Key::Num4: { gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON4_ACTIVATOR_ID)->PressEvent(); break; }
+		case sf::Key::Num5: { gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON5_ACTIVATOR_ID)->PressEvent(); break; } 
+		case sf::Key::Num6: { gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON6_ACTIVATOR_ID)->PressEvent(); break; } 
+		case sf::Key::Num7: { gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON7_ACTIVATOR_ID)->PressEvent(); break; }
+		case sf::Key::Num8: { gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON8_ACTIVATOR_ID)->PressEvent(); break; }            		
+		case sf::Key::Num9: { gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON9_ACTIVATOR_ID)->PressEvent(); break; }     
 										
 		case sf::Key::A:
 		{ 
 			if (player->GetWeaponsSelector().StatesAreMixed() == true)
 			{
-				gui_space.GetButton(GUI::BUTTON::WEAPON1_ACTIVATOR_ID)->Reset();
-				gui_space.GetButton(GUI::BUTTON::WEAPON2_ACTIVATOR_ID)->Reset();
-				gui_space.GetButton(GUI::BUTTON::WEAPON3_ACTIVATOR_ID)->Reset();
-				gui_space.GetButton(GUI::BUTTON::WEAPON4_ACTIVATOR_ID)->Reset();
-				gui_space.GetButton(GUI::BUTTON::WEAPON5_ACTIVATOR_ID)->Reset();
-				gui_space.GetButton(GUI::BUTTON::WEAPON6_ACTIVATOR_ID)->Reset();
-				gui_space.GetButton(GUI::BUTTON::WEAPON7_ACTIVATOR_ID)->Reset();
-				gui_space.GetButton(GUI::BUTTON::WEAPON8_ACTIVATOR_ID)->Reset();
-				gui_space.GetButton(GUI::BUTTON::WEAPON9_ACTIVATOR_ID)->Reset();
+				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON1_ACTIVATOR_ID)->Reset();
+				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON2_ACTIVATOR_ID)->Reset();
+				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON3_ACTIVATOR_ID)->Reset();
+				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON4_ACTIVATOR_ID)->Reset();
+				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON5_ACTIVATOR_ID)->Reset();
+				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON6_ACTIVATOR_ID)->Reset();
+				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON7_ACTIVATOR_ID)->Reset();
+				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON8_ACTIVATOR_ID)->Reset();
+				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON9_ACTIVATOR_ID)->Reset();
 			}
 			else
 			{
-				gui_space.GetButton(GUI::BUTTON::WEAPON1_ACTIVATOR_ID)->PressEvent();
-				gui_space.GetButton(GUI::BUTTON::WEAPON2_ACTIVATOR_ID)->PressEvent();
-				gui_space.GetButton(GUI::BUTTON::WEAPON3_ACTIVATOR_ID)->PressEvent();
-				gui_space.GetButton(GUI::BUTTON::WEAPON4_ACTIVATOR_ID)->PressEvent();
-				gui_space.GetButton(GUI::BUTTON::WEAPON5_ACTIVATOR_ID)->PressEvent();
-				gui_space.GetButton(GUI::BUTTON::WEAPON6_ACTIVATOR_ID)->PressEvent();
-				gui_space.GetButton(GUI::BUTTON::WEAPON7_ACTIVATOR_ID)->PressEvent();
-				gui_space.GetButton(GUI::BUTTON::WEAPON8_ACTIVATOR_ID)->PressEvent();
-				gui_space.GetButton(GUI::BUTTON::WEAPON9_ACTIVATOR_ID)->PressEvent();
+				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON1_ACTIVATOR_ID)->PressEvent();
+				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON2_ACTIVATOR_ID)->PressEvent();
+				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON3_ACTIVATOR_ID)->PressEvent();
+				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON4_ACTIVATOR_ID)->PressEvent();
+				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON5_ACTIVATOR_ID)->PressEvent();
+				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON6_ACTIVATOR_ID)->PressEvent();
+				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON7_ACTIVATOR_ID)->PressEvent();
+				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON8_ACTIVATOR_ID)->PressEvent();
+				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON9_ACTIVATOR_ID)->PressEvent();
 			}
 			break;
 		}
@@ -148,7 +148,7 @@ void UserInput::KeyPressedInSpace(Player* player, const GuiSpace& gui_space)
 
 		case sf::Key::F5: // save event
 		{		
-			save = true;			
+			SaveLoadManager::Instance().SetSave(true);			
 			break;
 		}
 		
@@ -185,7 +185,7 @@ void UserInput::KeyPressedInSpace(Player* player, const GuiSpace& gui_space)
 		
 		case sf::Key::F9:
 		{
-			load = true;
+			SaveLoadManager::Instance().SetLoad(true);
 			break;
 		}
 	}   
@@ -225,12 +225,9 @@ void UserInput::MouseButtonPressed(Player* player)
 void UserInput::ResetFlags(Player* player)
 {  	
 	next_turn_ready = false;
-	
-	save = false;
-	load = false;
 }
                 		
-void UserInput::GetSimpleInputsInSpace(Player* player, const GuiSpace& gui_space)
+void UserInput::GetSimpleInputsInSpace(Player* player, GuiManager& gui_manager)
 {
 	ResetFlags(player);
 			
@@ -240,7 +237,7 @@ void UserInput::GetSimpleInputsInSpace(Player* player, const GuiSpace& gui_space
 	        {
 	        	case sf::Event::Closed:     		{ Screen::Instance().GetWindow().Close(); break; }
                         case sf::Event::Resized:    		{ glViewport(0, 0, event.Size.Width, event.Size.Height); /*Screen::Instance().Resize(event.Size.Width, event.Size.Height);*/ break; }
-	        	case sf::Event::KeyPressed: 		{ KeyPressedInSpace(player, gui_space); break; }
+	        	case sf::Event::KeyPressed: 		{ KeyPressedInSpace(player, gui_manager); break; }
 	                case sf::Event::MouseButtonPressed: 	{ MouseButtonPressed(player); break; }
 	        }	      
 	 }

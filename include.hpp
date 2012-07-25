@@ -65,25 +65,10 @@ class ScenarioCollector;
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp> 
 
-#include "src/common/GameDate.hpp"
-#include "src/common/TurnTimer.hpp"
-
-#include "src/common/Logger.hpp"
+//#include "src/common/Logger.hpp"
 #include "src/common/myStr.hpp"
 
-//#include "src/render/Screen.hpp"
-
-#include "src/resources/objLoader.hpp"
-
-//#include "src/common/gameStruct.hpp"
-#include "src/common/rand.hpp"
-#include "src/common/id.hpp"
-#include "src/common/points.hpp"
 #include "src/common/common.hpp"
-
-#include "src/render/PathVisual.hpp"
-
-#include "src/text/textstuff.hpp"
 
 #include "src/resources/textureOb.hpp"
 #include "src/resources/textureManager.hpp"
@@ -92,25 +77,8 @@ class ScenarioCollector;
 
 #include "src/common/rect.hpp"
 
-#include "src/Base.hpp"
-
 #include "src/gui/UserInput.hpp"
-#include "src/items/BaseItem.hpp"
-#include "src/items/modules/BaseModule.hpp"
-#include "src/items/modules/RocketModule.hpp"
-#include "src/items/modules/LazerModule.hpp"
-#include "src/items/modules/RadarModule.hpp"
-#include "src/items/modules/DriveModule.hpp"
-#include "src/items/modules/BakModule.hpp"
-#include "src/items/modules/EnergizerModule.hpp"
-#include "src/items/modules/ProtectorModule.hpp"
-#include "src/items/modules/DroidModule.hpp"
-#include "src/items/modules/FreezerModule.hpp"
-#include "src/items/modules/ScanerModule.hpp"
-#include "src/items/modules/GrappleModule.hpp"
 
-#include "src/spaceobjects/BaseGameEntity.hpp"
-#include "src/common/EntityManager.hpp"
 #include "src/common/Message.hpp"
 #include "src/common/MessageManager.hpp"
 
@@ -314,7 +282,7 @@ class ScenarioCollector;
 #include "src/items/others/GoodsPack.cpp"   
 #include "src/spaceobjects/Star.cpp"  
 #include "src/spaceobjects/Planet.cpp"
-#include "src/Base.cpp" 
+#include "src/common/Base.cpp" 
 #include "src/spaceobjects/BaseGameEntity.cpp" 
 #include "src/common/EntityManager.cpp"
 #include "src/common/Message.cpp"
@@ -479,7 +447,7 @@ class ScenarioCollector;
 
 #include "src/text/textstuff.cpp"
 
-//#include "src/render/Screen.cpp"
+
 #include "src/common/TurnTimer.cpp"
 #include "src/common/GameDate.cpp"
 #include "src/config/SaveManager.cpp" 
@@ -500,6 +468,6 @@ class ScenarioCollector;
 #include "src/builder/items/module/RadarModuleBuilder.cpp"
 
 #include "src/builder/items/other/BombBuilder.cpp"
-#include "src/common/Logger.cpp"
+//#include "src/common/Logger.cpp"
 #include "src/render/Screen.cpp"
 ////////////////////////////////////////////
