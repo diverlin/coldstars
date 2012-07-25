@@ -30,7 +30,7 @@ void PlanetBuilder::CreateNewPlanet(int id)
 {
 	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
 
 	try 
@@ -58,8 +58,8 @@ void PlanetBuilder::CreateNewInternals(float orbit_radius)
 	planet_data.speed         = (float)getRandInt(ENTITY::PLANET::SPEED_MIN, ENTITY::PLANET::SPEED_MAX) / (float)orbit_radius;
 
 
-        TextureOb* textureOb 	        = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::PLANET_ID); 
-        TextureOb* textureOb_atmosphere = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ATMOSPHERE_ID); 
+        TextureOb* textureOb 	        = TextureManager::Instance().GetRandomTextureOb(TEXTURE::PLANET_ID); 
+        TextureOb* textureOb_atmosphere = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ATMOSPHERE_ID); 
         
         planet->SetPlanetData(planet_data);
 

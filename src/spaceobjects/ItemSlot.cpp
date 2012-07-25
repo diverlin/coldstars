@@ -165,7 +165,7 @@ void ItemSlot::RenderItemInfo(float offset_x, float offset_y) const
 
 void ItemSlot::DropItemToSpace(Vehicle* vehicle)
 {
-        TextureOb* textureOb_ = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::CONTAINER_ID);   
+        TextureOb* textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::CONTAINER_ID);   
         
         ContainerBuilder::Instance().CreateNewContainer();
         ContainerBuilder::Instance().CreateNewInternals(textureOb_, item);

@@ -20,6 +20,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef KOSMOPORT_H
 #define KOSMOPORT_H
 
+#include "../docking/Angar.hpp"
+#include "../docking/Store.hpp"
+#include "../docking/Shop.hpp"
+#include "../docking/Goverment.hpp"
 
 class Kosmoport : public BaseLand
 {

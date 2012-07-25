@@ -17,6 +17,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "SaveLoadManager.hpp"
+#include <boost/property_tree/info_parser.hpp>
+
 
 SaveLoadManager& SaveLoadManager::Instance()
 {
@@ -24,14 +26,15 @@ SaveLoadManager& SaveLoadManager::Instance()
 	return instance;
 }
 
-void SaveLoadManager::Update(Player* player) const
+Player* SaveLoadManager::Update(Player* player)
 {
-	if (save == true)
+	if (perform_save == true)
 	{
 		EntityManager::Instance().SaveEvent();
+		perform_save = false;
 	}
 
-	else if (load == true)
+	if (perform_load == true)
 	{
 		int _player_id = player->GetId();
 		delete player->GetNpc()->GetStarSystem()->GetGalaxy();
@@ -39,7 +42,22 @@ void SaveLoadManager::Update(Player* player) const
 		EntityManager::Instance().LoadPass1();
 				
 		player = (Player*)EntityManager::Instance().GetEntityById(_player_id);
+		perform_load = false;
+		
+		return player;
 	}
+	
+	return NULL;
+}
+
+void SaveLoadManager::SaveFile(const std::string& filename, boost::property_tree::ptree& ptree) const
+{		
+	write_info(filename, ptree);
+}
+
+void SaveLoadManager::LoadFile(const std::string& filename, boost::property_tree::ptree& ptree) const
+{
+	read_info(filename, ptree);
 }
 
 

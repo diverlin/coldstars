@@ -25,7 +25,7 @@ GuiMap::GuiMap()
     			(Config::Instance().SCREEN_WIDTH  - 2 * GUI::MAP::BORDER_X), 
     			(Config::Instance().SCREEN_HEIGHT - 2 * GUI::MAP::BORDER_X));
     			
-    	texOb_background = g_GUI_TEXTUREOB_COLLECTOR.text_background;
+    	texOb_background = GuiTextureObCollector::Instance().text_background;
 }
 
 GuiMap::~GuiMap()
@@ -80,17 +80,17 @@ void GuiMap::Render(Galaxy* galaxy)
     		
     	for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
     	{   		
-        	TextureOb* texOb_particle = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::DISTANTSTAR_ID, galaxy->STARSYSTEM_vec[si]->STAR_vec[0]->GetColorId()); 
+        	TextureOb* texOb_particle = TextureManager::Instance().getTexObByColorId(TEXTURE::DISTANTSTAR_ID, galaxy->STARSYSTEM_vec[si]->STAR_vec[0]->GetColorId()); 
                                       
         	drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), 30.0, -2.0);
               
         	if (galaxy->STARSYSTEM_vec[si]->GetCaptured() == true)
         	{
-        		drawTexturedPoint(g_GUI_TEXTUREOB_COLLECTOR.starsystem_mark_enemy->texture, galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), 40.0, -2.0);
+        		drawTexturedPoint(GuiTextureObCollector::Instance().starsystem_mark_enemy->texture, galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), 40.0, -2.0);
         	}
            	
     	}	 
-        drawTexturedPoint(g_GUI_TEXTUREOB_COLLECTOR.starsystem_mark_player->texture, player->GetNpc()->GetStarSystem()->GetPoints().GetCenter(), 40.0, -2.0);
+        drawTexturedPoint(GuiTextureObCollector::Instance().starsystem_mark_player->texture, player->GetNpc()->GetStarSystem()->GetPoints().GetCenter(), 40.0, -2.0);
 
     	//if self.GL_LIST_range_ID != None:
        		//glCallList(self.GL_LIST_range_ID)

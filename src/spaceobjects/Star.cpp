@@ -60,17 +60,17 @@ void Star::Render_NEW()
         texture_offset1 += 0.0002;
         texture_offset2 += 0.0003;
 
-        glUseProgram(g_SHADERS_PACK.multitexturing);
+        glUseProgram(ShadersPack::Instance().multitexturing);
 
         glActiveTexture(GL_TEXTURE0);                                
         glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-        glUniform1i(glGetUniformLocation(g_SHADERS_PACK.multitexturing, "Texture_0"), 0);
+        glUniform1i(glGetUniformLocation(ShadersPack::Instance().multitexturing, "Texture_0"), 0);
 
         glActiveTexture(GL_TEXTURE1);                                
         glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-        glUniform1i(glGetUniformLocation(g_SHADERS_PACK.multitexturing, "Texture_1"), 1);
+        glUniform1i(glGetUniformLocation(ShadersPack::Instance().multitexturing, "Texture_1"), 1);
         
-	glUniform2f(glGetUniformLocation(g_SHADERS_PACK.multitexturing, "displ"), texture_offset1, texture_offset2);
+	glUniform2f(glGetUniformLocation(ShadersPack::Instance().multitexturing, "displ"), texture_offset1, texture_offset2);
 
 	renderMesh(mesh->glList, points.GetCenter3f(), angle, scale);
 

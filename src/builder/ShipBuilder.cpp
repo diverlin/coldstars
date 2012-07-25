@@ -31,7 +31,7 @@ void ShipBuilder::CreateNewShip(int id)
 {
 	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
 
         try 
@@ -48,7 +48,7 @@ void ShipBuilder::CreateNewShip(int id)
 
 void ShipBuilder::CreateNewInternals(int race_id, int subsubtype_id, int size_id, int weapons_num) 
 {
-	TextureOb* texOb = g_TEXTURE_MANAGER.getRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id); 
+	TextureOb* texOb = TextureManager::Instance().getRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id); 
        
        	int protection_rate = 1;
        	if (subsubtype_id == CLASS::WARRIOR_ID)

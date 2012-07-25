@@ -21,38 +21,48 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define RESOURCES_H
 
 
-struct GuiTextureObCollector
+class GuiTextureObCollector
 {
-	TextureOb* starsystem_mark_enemy;	
-	TextureOb* starsystem_mark_player;
+	public:
+		TextureOb* starsystem_mark_enemy;	
+		TextureOb* starsystem_mark_player;
 	
-	TextureOb* icon_minus;
-	TextureOb* icon_plus;
-	TextureOb* skill;	
-	TextureOb* skill_transparent;	
+		TextureOb* icon_minus;
+		TextureOb* icon_plus;
+		TextureOb* skill;	
+		TextureOb* skill_transparent;	
 	
-	TextureOb* icon_map;
-        TextureOb* grapple_trail;	
+		TextureOb* icon_map;
+        	TextureOb* grapple_trail;	
 
-        TextureOb* dot_blue;
-        TextureOb* dot_red;
-        TextureOb* dot_green;
-        TextureOb* dot_black;
-        TextureOb* dot_yellow;
-        TextureOb* dot_purple;
+        	TextureOb* dot_blue;
+        	TextureOb* dot_red;
+        	TextureOb* dot_green;
+        	TextureOb* dot_black;
+        	TextureOb* dot_yellow;
+        	TextureOb* dot_purple;
 
-	TextureOb* screenrect;
-        TextureOb* background_radar;                
-        TextureOb* bar_radar;
-        TextureOb* bar_bottom;
-        TextureOb* bar_left;
-        TextureOb* bar_top;
-        TextureOb* bar_right;        
+		TextureOb* screenrect;
+        	TextureOb* background_radar;                
+        	TextureOb* bar_radar;
+        	TextureOb* bar_bottom;
+        	TextureOb* bar_left;
+        	TextureOb* bar_top;
+        	TextureOb* bar_right;        
         
-        TextureOb* text_background;
+        	TextureOb* text_background;
 
-        TextureOb* slot_mark_accept;
-        TextureOb* slot_mark_reject;
+        	TextureOb* slot_mark_accept;
+        	TextureOb* slot_mark_reject;
+        	
+        	static GuiTextureObCollector& Instance();
+        	
+        private:
+        	GuiTextureObCollector() {};
+        	~GuiTextureObCollector() {};
+        	
+        	GuiTextureObCollector(const GuiTextureObCollector&) = delete;
+        	GuiTextureObCollector& operator=(const GuiTextureObCollector&) = delete;
 };
 
 void loadGameData();

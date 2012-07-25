@@ -23,7 +23,7 @@ GuiAngar::GuiAngar()
 	int screen_w = Config::Instance().SCREEN_WIDTH;
 	int screen_h = Config::Instance().SCREEN_HEIGHT;
 	
-        TextureOb* texOb_button = g_GUI_TEXTUREOB_COLLECTOR.dot_green; // fake
+        TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
 
     	ButtonSingle* repair_button = new ButtonSingle(texOb_button, 
     	    			   GUI::BUTTON::BUYARMOR_ID,

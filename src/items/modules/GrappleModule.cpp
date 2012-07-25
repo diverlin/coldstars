@@ -103,14 +103,14 @@ void GrappleModule::ResolveDataUniqueGrappleModule()
 
 GrappleModule* GetNewGrappleModule()
 {
-    	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MODULE_ID);   
+    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
                        
     	int strength_add   = getRandInt(MODULE::GRAPPLE::STRENGTH_MIN, MODULE::GRAPPLE::STRENGTH_MAX);
     	int radius_add     = getRandInt(MODULE::GRAPPLE::RADIUS_MIN, MODULE::GRAPPLE::RADIUS_MAX);
     	int speed_add      = getRandInt(MODULE::GRAPPLE::SPEED_MIN, MODULE::GRAPPLE::SPEED_MAX);
     	int maxNumItem_add = getRandInt(MODULE::GRAPPLE::MAXNUMITEM_MIN, MODULE::GRAPPLE::MAXNUMITEM_MAX);
         
-        int id = g_ID_GENERATOR.getNextId();
+        int id = SimpleIdGenerator::Instance().GetNextId();
                 
     	GrappleModule* grapple_module = new GrappleModule(id);    	
     	grapple_module->SetTextureOb(texOb);

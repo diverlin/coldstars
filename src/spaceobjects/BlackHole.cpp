@@ -77,7 +77,7 @@ void BlackHole::ResolveData()
 
 BlackHole* GetNewBlackHole()
 {
-        int id = g_ID_GENERATOR.getNextId();
+        int id = SimpleIdGenerator::Instance().GetNextId();
         
         LifeData data_life;
         data_life.is_alive   = true;
@@ -85,7 +85,7 @@ BlackHole* GetNewBlackHole()
     	data_life.armor      = 100000;
         data_life.dying_time = 30;        
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::BLACKHOLE_ID); 
+	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BLACKHOLE_ID); 
 	vec3f d_angle(0.0, 0.0, 10.0); 		
        
 	BlackHole* blackhole = new BlackHole(id);

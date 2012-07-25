@@ -16,6 +16,7 @@
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "src/common/global.cpp"
 #include "include.hpp"
 
 int main()
@@ -58,7 +59,11 @@ int main()
 
 		/* client code start */
 		player->RunSession(turn_timer);
-		SaveLoadManager::Instance().Update(player);
+		Player* recreated_player = SaveLoadManager::Instance().Update(player);
+		if (recreated_player !=NULL)
+		{
+			player = recreated_player;
+		}
 		/* client code end */           	
 	}
 

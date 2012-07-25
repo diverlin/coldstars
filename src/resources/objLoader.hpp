@@ -29,6 +29,8 @@
 #include <sstream>
 #include <fstream>
 
+#include <GL/glew.h>
+
 #define TOKEN_VERTEX_POS "v"
 #define TOKEN_VERTEX_NOR "vn"
 #define TOKEN_VERTEX_TEX "vt"

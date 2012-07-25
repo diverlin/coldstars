@@ -79,11 +79,11 @@ void ProtectorModule::ResolveDataUniqueProtectorModule()
 
 ProtectorModule* GetNewProtectorModule()
 {
-    	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MODULE_ID);   
+    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
         
     	int protection_add = getRandInt(MODULE::PROTECTOR::PROTECTION_MIN, MODULE::PROTECTOR::PROTECTION_MAX);
 
-        int id = g_ID_GENERATOR.getNextId();
+        int id = SimpleIdGenerator::Instance().GetNextId();
         
     	ProtectorModule* protector_module = new ProtectorModule(id);
         protector_module->SetTextureOb(texOb);

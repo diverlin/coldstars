@@ -22,7 +22,7 @@ VehicleSlot* GetNewVehicleSlot(int id)
 {
        	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	} 
 
 	VehicleSlot* vehicle_slot = NULL;
@@ -37,7 +37,7 @@ VehicleSlot* GetNewVehicleSlot(int id)
         
         EntityManager::Instance().RegisterEntity(vehicle_slot);
       
-	TextureOb* texOb_slot = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::VEHICLESLOT_ID);
+	TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::VEHICLESLOT_ID);
     	vehicle_slot->SetTextureOb(texOb_slot);
               
         return vehicle_slot;

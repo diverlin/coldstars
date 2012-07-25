@@ -46,6 +46,6 @@ void Room::LoadDataUniqueRoom(const boost::property_tree::ptree& load_ptree)
 
 void Room::ResolveDataUniqueRoom()
 {
-	textureOb_background = g_TEXTURE_MANAGER.GetTextureObByPath(data_unresolved_Room.textureOb_background_path);
+	textureOb_background = TextureManager::Instance().GetTextureObByPath(data_unresolved_Room.textureOb_background_path);
 }
 

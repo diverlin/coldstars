@@ -22,7 +22,7 @@ ItemSlot* GetNewItemSlot(int subtype_id, int id)
 {
        	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	} 
 
 	ItemSlot* item_slot = NULL;
@@ -37,14 +37,14 @@ ItemSlot* GetNewItemSlot(int subtype_id, int id)
         
         EntityManager::Instance().RegisterEntity(item_slot);
       
-        TextureOb* texOb_slot = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ITEMSLOT_ID);
+        TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ITEMSLOT_ID);
 	item_slot->SetSubTypeId(subtype_id);
     	item_slot->SetTextureOb(texOb_slot);
         
         if (subtype_id == ITEMSLOT::WEAPON_ID)
         {
         	Turrel* turrel = NULL;
-                TextureOb* texOb_turrel = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::TURREL_ID); 
+                TextureOb* texOb_turrel = TextureManager::Instance().GetRandomTextureOb(TEXTURE::TURREL_ID); 
                 try 
         	{ 
                 	turrel = new Turrel(item_slot); 

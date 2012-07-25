@@ -31,7 +31,7 @@ void SatelliteBuilder::CreateNewSatellite(int id)
 {
 	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
 	 	
 	try 
@@ -48,7 +48,7 @@ void SatelliteBuilder::CreateNewSatellite(int id)
 
 void SatelliteBuilder::CreateNewInternals() 
 {
-	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SATELLITE_ID);  
+	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SATELLITE_ID);  
 	
        	int protection_rate = 1;
        	//if (subtype_id == CLASS::WARRIOR_ID)

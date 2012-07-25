@@ -20,15 +20,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 GuiSkill::GuiSkill()
 {
-     	textureOb_skill = g_GUI_TEXTUREOB_COLLECTOR.skill;
-     	textureOb_skill_transparent = g_GUI_TEXTUREOB_COLLECTOR.skill_transparent;     	     	
+     	textureOb_skill = GuiTextureObCollector::Instance().skill;
+     	textureOb_skill_transparent = GuiTextureObCollector::Instance().skill_transparent;     	     	
 
      	button_w = GUI::BUTTON::SKILL::BUTTON_WIDTH;  
      	button_h = GUI::BUTTON::SKILL::BUTTON_HEIGHT; 
      	
      	vec2i center(Screen::Instance().GetWindow().GetWidth()/2, Screen::Instance().GetWindow().GetHeight()/2);
-     	TextureOb* texOb_icon_plus  = g_GUI_TEXTUREOB_COLLECTOR.icon_plus;
-     	TextureOb* texOb_icon_minus = g_GUI_TEXTUREOB_COLLECTOR.icon_minus;
+     	TextureOb* texOb_icon_plus  = GuiTextureObCollector::Instance().icon_plus;
+     	TextureOb* texOb_icon_minus = GuiTextureObCollector::Instance().icon_minus;
      	     	
      	ButtonSingle* Increment_attack_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_ATTACK_ID, center.x, center.y - button_h, button_w, button_h, "increment attack");  
      	button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_ATTACK_ID, Increment_attack_button));
@@ -61,7 +61,7 @@ GuiSkill::GuiSkill()
      	button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_DIPLOMAT_ID, Decrement_diplomat_button));    
 
 	background_rect.Set(center.x, center.y, 6*button_w, SKILL::ATTACK_MAX*button_h);	
-	textureOb_background = g_GUI_TEXTUREOB_COLLECTOR.text_background;
+	textureOb_background = GuiTextureObCollector::Instance().text_background;
 }
 
 GuiSkill::~GuiSkill()

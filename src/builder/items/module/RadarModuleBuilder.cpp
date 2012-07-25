@@ -30,7 +30,7 @@ void RadarModuleBuilder::CreateNewRadarModule(int id)
 {
 	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
 
         try 
@@ -47,7 +47,7 @@ void RadarModuleBuilder::CreateNewRadarModule(int id)
         	
 void RadarModuleBuilder::CreateNewInternals()
 {     
-    	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MODULE_ID);   
+    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
     	int radius_add  = getRandInt(MODULE::RADAR::RADIUS_MIN, MODULE::RADAR::RADIUS_MAX);
     
         radar_module->SetTextureOb(texOb);

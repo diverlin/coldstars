@@ -80,10 +80,10 @@ void FreezerModule::ResolveDataUniqueFreezerModule()
 
 FreezerModule* GetNewFreezerModule()
 {
-    	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MODULE_ID);   
+    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
         int freeze_add = getRandInt(MODULE::FREEZER::FREEZE_MIN, MODULE::FREEZER::FREEZE_MAX);
 
-        int id = g_ID_GENERATOR.getNextId();
+        int id = SimpleIdGenerator::Instance().GetNextId();
         
         FreezerModule* freezer_module = new FreezerModule(freeze_add);
         freezer_module->SetTextureOb(texOb);

@@ -50,6 +50,6 @@ void BaseBackGroundEffect::LoadDataUniqueBaseBackGroundEffect(const boost::prope
 		
 void BaseBackGroundEffect::ResolveDataUniqueBaseBackGroundEffect()
 {
-	textureOb = g_TEXTURE_MANAGER.GetTextureObByPath(textureOb_path);
+	textureOb = TextureManager::Instance().GetTextureObByPath(textureOb_path);
 }
               

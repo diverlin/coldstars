@@ -20,6 +20,8 @@
 #ifndef SAVELOADMANAGER_H
 #define SAVELOADMANAGER_H
 
+#include <boost/property_tree/ptree.hpp>
+
 #include "../pilots/Player.hpp"
 #include "../common/EntityManager.hpp"
 #include "../world/starsystem.hpp"
@@ -28,17 +30,20 @@ class SaveLoadManager
 {
 	public:
 		static SaveLoadManager& Instance();
-		void SetSave(bool load) { this->save = save; };
-		void SetLoad(bool load) { this->load = load; };
+		void PerformDelayedSave() { perform_save = true; };
+		void PerformDelayedLoad() { perform_load = true; };
 		
-		void Update(Player*) const;
-		
+		Player* Update(Player*);
+
+		void SaveFile(const std::string&, boost::property_tree::ptree&) const;
+		void LoadFile(const std::string&, boost::property_tree::ptree&) const;
+				
 	private:
-		SaveLoadManager():save(false), load(false){}
+		SaveLoadManager():perform_save(false), perform_load(false){}
 		SaveLoadManager(const SaveLoadManager&);
 		SaveLoadManager& operator=(const SaveLoadManager&);
 		
-		bool save, load;
+		bool perform_save, perform_load;
 
 };
 

@@ -16,12 +16,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <boost/property_tree/info_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>
 
 #include "EntityManager.hpp"
 #include "../common/Logger.hpp"
+#include "../common/SaveLoadManager.hpp"
 
 EntityManager& EntityManager::Instance()
 {
@@ -58,7 +58,7 @@ void EntityManager::SaveEvent()
 		iterator->second->SaveData(save_ptree);
 	}
 	
-	SaveManager::Instance().SaveFile("save.info", save_ptree);
+	SaveLoadManager::Instance().SaveFile("save.info", save_ptree);
 }
 		
 void EntityManager::LoadPass0()
@@ -68,7 +68,7 @@ void EntityManager::LoadPass0()
 	Logger::Instance().Log("LOADING STARTED");
 	
 	boost::property_tree::ptree load_ptree;
-	SaveManager::Instance().LoadFile("save.info", load_ptree);
+	SaveLoadManager::Instance().LoadFile("save.info", load_ptree);
 	
 	if (load_ptree.get_child_optional("galaxy"))
 	{		

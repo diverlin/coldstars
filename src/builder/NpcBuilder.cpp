@@ -30,7 +30,7 @@ void NpcBuilder::CreateNewNpc(int id)
 {
 	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
 
         try 
@@ -48,7 +48,7 @@ void NpcBuilder::CreateNewInternals(int race_id, int subtype_id)
 {    	
     	//LifeData data_life;
     	
-       	//TextureOb* texOb_face  = g_TEXTURE_MANAGER.getRandomFaceTexObWithFolloingAttributes(race_id);
+       	//TextureOb* texOb_face  = TextureManager::Instance().getRandomFaceTexObWithFolloingAttributes(race_id);
        	    
        	npc->SetRaceId(race_id);
         //npc->SetTextureOb(texOb_face);

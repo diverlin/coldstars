@@ -82,9 +82,9 @@ void BakModule::ResolveDataUniqueBakModule()
 
 BakModule* GetNewBakModule()
 {
-    	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MODULE_ID);             	
+    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);             	
     	int fuel_max_add = getRandInt(MODULE::BAK::FUEL_MIN, MODULE::BAK::FUEL_MAX);
-        int id = g_ID_GENERATOR.getNextId();
+        int id = SimpleIdGenerator::Instance().GetNextId();
         
     	BakModule* bak_module = new BakModule(id);
     	bak_module->SetFuelMaxAdd(fuel_max_add);

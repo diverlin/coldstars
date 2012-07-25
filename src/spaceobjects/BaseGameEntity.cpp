@@ -170,7 +170,7 @@ void BaseGameEntity::LoadDataUniqueBaseGameEntity(const boost::property_tree::pt
 void BaseGameEntity::ResolveDataUniqueBaseGameEntity()
 {
 	mesh = g_DEFORMED_SPHERE_MESH; //data_unresolved_bge.mesh_path; 
-	textureOb = g_TEXTURE_MANAGER.GetTextureObByPath(data_unresolved_BaseGameEntity.textureOb_path);
+	textureOb = TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseGameEntity.textureOb_path);
 	
 	if (data_unresolved_BaseGameEntity.parent_id != NONE_ID)
 	{

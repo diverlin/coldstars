@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef ROCKETBULLET_H
 #define ROCKETBULLET_H
 
+#include "../spaceobjects/Vehicle.hpp"
 
 class RocketBullet : public Vehicle
 {

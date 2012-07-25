@@ -30,7 +30,7 @@ void EnergizerEquipmentBuilder::CreateNewEnergizerEquipment(int id)
 {
 	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
 
  	try 
@@ -54,7 +54,7 @@ void EnergizerEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ENERGIZER_EQUIPMENT_ID);   
+    	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ENERGIZER_EQUIPMENT_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(ENERGIZER_ITEM_TEXTURE_ID, revision_id)
 
     	int energy_max_orig  = getRandInt(EQUIPMENT::ENERGIZER::ENERGY_MIN,      EQUIPMENT::ENERGIZER::ENERGY_MAX);

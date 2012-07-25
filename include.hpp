@@ -54,7 +54,6 @@ class ScenarioCollector;
 #include "src/common/gameStruct.hpp"
 #include "src/common/constants.hpp"
 #include "src/config/config.hpp"
-#include "src/config/SaveManager.hpp"
 #include "GL/glew.h"   
 
 #include <stdio.h>
@@ -65,7 +64,6 @@ class ScenarioCollector;
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp> 
 
-//#include "src/common/Logger.hpp"
 #include "src/common/myStr.hpp"
 
 #include "src/common/common.hpp"
@@ -151,7 +149,7 @@ class ScenarioCollector;
 #include "src/spaceobjects/DriveComplex.hpp"
 #include "src/spaceobjects/WeaponComplex.hpp"
 #include "src/spaceobjects/ProtectionComplex.hpp"
-#include "src/spaceobjects/Vehicle.hpp"
+//#include "src/spaceobjects/Vehicle.hpp"
 #include "src/spaceobjects/RocketBullet.hpp"
 #include "src/spaceobjects/SpaceStation.hpp"
 #include "src/spaceobjects/Satellite.hpp"
@@ -253,7 +251,7 @@ class ScenarioCollector;
 
 
 
-#include "src/common/global.hpp"
+//#include "src/common/global.cpp"
 #include "src/render/Screen.hpp"
 
 
@@ -386,7 +384,7 @@ class ScenarioCollector;
 
 #include "src/spaceobjects/WeaponComplex.cpp"
 #include "src/spaceobjects/ProtectionComplex.cpp"
-#include "src/spaceobjects/Vehicle.cpp"
+//#include "src/spaceobjects/Vehicle.cpp"
 #include "src/spaceobjects/Ship.cpp"
 #include "src/spaceobjects/DriveComplex.cpp"
 #include "src/spaceobjects/Turrel.cpp"
@@ -450,7 +448,6 @@ class ScenarioCollector;
 
 #include "src/common/TurnTimer.cpp"
 #include "src/common/GameDate.cpp"
-#include "src/config/SaveManager.cpp" 
 
 #include "src/builder/items/equipment/BakEquipmentBuilder.cpp"
 #include "src/builder/items/equipment/DriveEquipmentBuilder.cpp"

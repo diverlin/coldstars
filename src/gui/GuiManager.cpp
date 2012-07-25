@@ -140,6 +140,11 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 			//render
 			resetRenderTransformation();
 			enable_BLEND();    
+				if (player->GetControlFlags().GetShowGalaxyMapFlag() == false)  
+				{
+					gui_radar.Render();
+				}
+				
 				if (player->GetControlFlags().GetShowGalaxyMapFlag() == true)  
 				{					   
      					gui_map.Render(player->GetNpc()->GetStarSystem()->GetGalaxy());    
@@ -147,10 +152,6 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 				else if (scan_vehicle != NULL )
 				{
 					RenderScanVehicle(data_mouse, scan_vehicle); 				                 
-				}
-				else
-				{
-					gui_radar.Render();
 				}
 						
 				gui_space.RenderBar();	

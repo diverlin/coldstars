@@ -20,9 +20,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 GuiRadar::GuiRadar()
 {		
-	textureOb_background 	= g_GUI_TEXTUREOB_COLLECTOR.background_radar;
-	textureOb_bar	 	= g_GUI_TEXTUREOB_COLLECTOR.bar_radar;
-	textureOb_screenrect	= g_GUI_TEXTUREOB_COLLECTOR.screenrect;
+	textureOb_background 	= GuiTextureObCollector::Instance().background_radar;
+	textureOb_bar	 	= GuiTextureObCollector::Instance().bar_radar;
+	textureOb_screenrect	= GuiTextureObCollector::Instance().screenrect;
 		
 	scale = RADAR_SCALE;
 	int screen_w = Screen::Instance().GetWindow().GetWidth();
@@ -34,7 +34,7 @@ GuiRadar::GuiRadar()
 	for (int i=0; i<GAME::WEAPONS_NUM_MAX; i++)
 	{
 		vec2i pos = getVec2i(rect.GetWidth()/2.5, angle);
-    		ButtonTrigger* button = new ButtonTrigger(	g_GUI_TEXTUREOB_COLLECTOR.dot_purple, 
+    		ButtonTrigger* button = new ButtonTrigger(	GuiTextureObCollector::Instance().dot_purple, 
         					subtype_id,
     						rect.GetCenter().x+pos.x-GUI::ICON_SIZE/2,
     						rect.GetCenter().y+pos.y-GUI::ICON_SIZE/2, 
@@ -144,31 +144,31 @@ void GuiRadar::Render() const
 			{
 				case ENTITY::STAR_ID:
 				{
-					glBindTexture(GL_TEXTURE_2D, g_GUI_TEXTUREOB_COLLECTOR.dot_yellow->texture);
+					glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_yellow->texture);
 					size = 2*size_base;
 					break;
 				}
 				case ENTITY::PLANET_ID:
 				{
-					glBindTexture(GL_TEXTURE_2D, g_GUI_TEXTUREOB_COLLECTOR.dot_blue->texture);
+					glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_blue->texture);
 					size = 1.5*size_base;
 					break;				
 				}
 				case ENTITY::ASTEROID_ID:
 				{
-					glBindTexture(GL_TEXTURE_2D, g_GUI_TEXTUREOB_COLLECTOR.dot_red->texture);
+					glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_red->texture);
 					size = 1.25*size_base;
 					break;				
 				}
 				case ENTITY::BLACKHOLE_ID:
 				{
-					glBindTexture(GL_TEXTURE_2D, g_GUI_TEXTUREOB_COLLECTOR.dot_purple->texture);
+					glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_purple->texture);
 					size = 1.5*size_base;
 					break;				
 				}
 				case ENTITY::VEHICLE_ID:
 				{
-					glBindTexture(GL_TEXTURE_2D, g_GUI_TEXTUREOB_COLLECTOR.dot_green->texture);
+					glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_green->texture);
 					size = 1*size_base;
 					break;				
 				}

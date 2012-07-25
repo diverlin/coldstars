@@ -23,7 +23,7 @@ GuiSpace::GuiSpace()
     	int screen_w = Screen::Instance().GetWindow().GetWidth();
     	int screen_h = Screen::Instance().GetWindow().GetHeight();
     	
-    	ButtonTrigger* galaxymap_button = new ButtonTrigger(	g_GUI_TEXTUREOB_COLLECTOR.icon_map, 
+    	ButtonTrigger* galaxymap_button = new ButtonTrigger(	GuiTextureObCollector::Instance().icon_map, 
         				     			GUI::BUTTON::GALAXYMAP_ID,
     					     			screen_w - (GUI::ICON_SIZE + 5),
     					     			screen_h - (GUI::ICON_SIZE + 5), 
@@ -32,7 +32,7 @@ GuiSpace::GuiSpace()
     					     			"galaxy map");    					     
     	button_map.insert(std::make_pair(GUI::BUTTON::GALAXYMAP_ID, galaxymap_button));
 
-    	ButtonSingle* load_button = new ButtonSingle(	g_GUI_TEXTUREOB_COLLECTOR.icon_plus, 
+    	ButtonSingle* load_button = new ButtonSingle(	GuiTextureObCollector::Instance().icon_plus, 
         				     			GUI::BUTTON::LOAD_ID,
     					     			screen_w - 2*(GUI::ICON_SIZE + 5),
     					     			screen_h - (GUI::ICON_SIZE + 5), 
@@ -41,7 +41,7 @@ GuiSpace::GuiSpace()
     					     			"load");    					     
     	button_map.insert(std::make_pair(GUI::BUTTON::LOAD_ID, load_button));
     	
-    	ButtonSingle* save_button = new ButtonSingle(	g_GUI_TEXTUREOB_COLLECTOR.icon_minus, 
+    	ButtonSingle* save_button = new ButtonSingle(	GuiTextureObCollector::Instance().icon_minus, 
         				     			GUI::BUTTON::SAVE_ID,
     					     			screen_w - 3*(GUI::ICON_SIZE + 5),
     					     			screen_h - (GUI::ICON_SIZE + 5), 
@@ -50,8 +50,8 @@ GuiSpace::GuiSpace()
     					     			"save");    					     
     	button_map.insert(std::make_pair(GUI::BUTTON::SAVE_ID, save_button));
     	    		
-       	textureOb_bar_top 	= g_GUI_TEXTUREOB_COLLECTOR.bar_bottom;
-       	textureOb_bar_bottom 	= g_GUI_TEXTUREOB_COLLECTOR.bar_bottom;
+       	textureOb_bar_top 	= GuiTextureObCollector::Instance().bar_bottom;
+       	textureOb_bar_bottom 	= GuiTextureObCollector::Instance().bar_bottom;
 
        	Resize(screen_w, screen_h);
 }
@@ -77,7 +77,7 @@ void GuiSpace::ButtonsAction(Player* player) const
        			{
        				if (button->GetPressed() == true) 
        				{
-       					std::cout<<"save"<<std::endl; 
+       					SaveLoadManager::Instance().PerformDelayedSave();
        					break;
        				} 
        			}   
@@ -86,7 +86,7 @@ void GuiSpace::ButtonsAction(Player* player) const
        			{ 
        			       	if (button->GetPressed() == true) 
        				{
-       					std::cout<<"load"<<std::endl; 
+       					SaveLoadManager::Instance().PerformDelayedLoad();
        					break;
        				} 
        			}   

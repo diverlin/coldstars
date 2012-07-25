@@ -20,6 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef GARBAGEEFFECTS_H
 #define GARBAGEEFFECTS_H
 
+#include "../effects/lazerTrace.hpp"
+#include "../effects/ShockWaveEffect.hpp"
 
 class GarbageEffects
 {

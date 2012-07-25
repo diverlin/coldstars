@@ -20,6 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef OBSERVATION_H
 #define OBSERVATION_H
 
+#include <vector>
+
 class Galaxy;
 class StarSystem;
 class Asteroid;
@@ -60,11 +62,11 @@ class Observation
 	private:
                 Npc* npc_owner;	
 
-     		std::vector<Pair<StarSystem*>> visible_STARSYSTEM_pair_vec; 
-     		std::vector<Pair<Container*>> visible_CONTAINER_pair_vec;                              
-     		std::vector<Pair<Asteroid*>> visible_ASTEROID_pair_vec; 		
+     		std::vector< Pair<StarSystem*> > visible_STARSYSTEM_pair_vec; 
+     		std::vector< Pair<Container*> > visible_CONTAINER_pair_vec;                              
+     		std::vector< Pair<Asteroid*> > visible_ASTEROID_pair_vec; 		
 
-     		std::vector<Pair<Vehicle*>> visible_VEHICLE_pair_vec;                
+     		std::vector< Pair<Vehicle*> > visible_VEHICLE_pair_vec;                
 
      		VisionStatus see;
      		

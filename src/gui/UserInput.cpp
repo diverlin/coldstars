@@ -148,7 +148,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 
 		case sf::Key::F5: // save event
 		{		
-			SaveLoadManager::Instance().SetSave(true);			
+			SaveLoadManager::Instance().PerformDelayedSave();			
 			break;
 		}
 		
@@ -185,7 +185,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 		
 		case sf::Key::F9:
 		{
-			SaveLoadManager::Instance().SetLoad(true);
+			SaveLoadManager::Instance().PerformDelayedLoad();
 			break;
 		}
 	}   
