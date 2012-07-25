@@ -16,53 +16,64 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "../common/id.hpp"
+
+//DetaliedIdGenerator& DetaliedIdGenerator::Instance()
+//{
+	//static DetaliedIdGenerator instance;
+	//return instance;
+//}
+
+//unsigned long int DetaliedIdGenerator::getNextId(const std::string& id_string)
+//{  
+	//last_id++;
+	
+	//IdInfoData id_data;
+	//id_data.id = last_id;
+	//id_data.str = id_string;
+	
+	//id_data_vec.push_back(id_data);
+        
+        //return last_id;
+//}  
+
+//std::string DetaliedIdGenerator::getStrByTypeId(unsigned long int _id)
+//{
+        //for(unsigned int i=0; i<id_data_vec.size(); i++)
+        //{
+		//if(_id == id_data_vec[i].id)
+		//{
+                 	//return id_data_vec[i].str; 
+                //}                 
+        //}  
+        
+        //return "___";
+//}
 
 
-DetaliedIdGenerator :: DetaliedIdGenerator()
+
+SimpleIdGenerator& SimpleIdGenerator::Instance()
 {
-	last_id = 0;
+	static SimpleIdGenerator instance;
+	return instance;
 }
 
-DetaliedIdGenerator :: ~DetaliedIdGenerator()
-{}
-
-unsigned long int DetaliedIdGenerator :: getNextId(std::string id_string)
+unsigned long int SimpleIdGenerator::GetNextId()
 {  
 	last_id++;
-	
-	IdInfoData id_data;
-	id_data.id = last_id;
-	id_data.str = id_string;
-	
-	id_data_vec.push_back(id_data);
+        id_vec.push_back(last_id);
         
         return last_id;
 }  
 
-std::string DetaliedIdGenerator :: getStrByTypeId(unsigned long int _id)
+
+TextureIdGenerator& TextureIdGenerator::Instance()
 {
-        for(unsigned int i=0; i < id_data_vec.size(); i++)
-        {
-		if(_id == id_data_vec[i].id)
-		{
-                 	return id_data_vec[i].str; 
-                }                 
-        }  
-        
-        return "___";
+	static TextureIdGenerator instance;
+	return instance;
 }
 
-
-
-SimpleIdGenerator :: SimpleIdGenerator()
-{
-	last_id = 0;
-}
-
-SimpleIdGenerator :: ~SimpleIdGenerator()
-{}
-
-unsigned long int SimpleIdGenerator :: getNextId()
+unsigned long int TextureIdGenerator::GetNextId()
 {  
 	last_id++;
         id_vec.push_back(last_id);

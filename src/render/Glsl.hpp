@@ -20,16 +20,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef GLSL_H
 #define GLSL_H
 
-struct ShadersPack
+#include <GL/glew.h>
+
+class ShadersPack
 {
-	GLuint black2alpha;
-	GLuint shockwave;
-	GLuint volumetriclight;
-	GLuint light;
-	GLuint blur;
-	GLuint extractbright;
-	GLuint combine;
-	GLuint multitexturing;
+	public:
+		static ShadersPack& Instance();
+		
+		GLuint black2alpha;
+		GLuint shockwave;
+		GLuint volumetriclight;
+		GLuint light;
+		GLuint blur;
+		GLuint extractbright;
+		GLuint combine;
+		GLuint multitexturing;
+		
+	private:
+		ShadersPack() {};
+		~ShadersPack() {};
+
+		ShadersPack(const ShadersPack&) = delete;
+		ShadersPack& operator=(const ShadersPack&) = delete;
 };
 
 void compile_program(const GLchar* vertex_source, const GLchar* fragment_source, GLuint program);

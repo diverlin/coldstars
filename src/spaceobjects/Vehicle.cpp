@@ -17,6 +17,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "Vehicle.hpp"
+#include "../world/starsystem.hpp"
+#include "../common/EntityManager.hpp"
+#include "../common/rand.hpp"
+#include "../common/myStr.hpp"
+#include "../docking/Kosmoport.hpp"
+#include "../render/Render.hpp"
+#include "../effects/particlesystem/explosion.hpp"
+
+#include "../resources/textureManager.hpp"
+#include "../resources/resources.hpp"
 
 Vehicle::Vehicle()
 {
@@ -573,7 +583,7 @@ void Vehicle::RenderGrappleTrail() const
 
                         float angle_inD = angle_inR * RADIAN_TO_DEGREE_RATE;
         
-                        drawLine(g_GUI_TEXTUREOB_COLLECTOR.grapple_trail, 
+                        drawLine(GuiTextureObCollector::Instance().grapple_trail, 
                                  points.GetCenter(), 
                                  points.GetPosZ(), 
                                  len, 
@@ -610,7 +620,7 @@ void Vehicle::RenderRadarRange()
 	{
 		glPushMatrix();
 			glTranslatef(points.GetCenter().x, points.GetCenter().y, 0.0f);
-			radar_slot->UpdateRange(g_GUI_TEXTUREOB_COLLECTOR.dot_yellow);
+			radar_slot->UpdateRange(GuiTextureObCollector::Instance().dot_yellow);
              		radar_slot->DrawRange();
 		glPopMatrix();
 	}
@@ -622,7 +632,7 @@ void Vehicle::RenderGrappleRange()
 	{
 		glPushMatrix();
 			glTranslatef(points.GetCenter().x, points.GetCenter().y, 0.0f);
-			grapple_slot->UpdateRange(g_GUI_TEXTUREOB_COLLECTOR.dot_blue);
+			grapple_slot->UpdateRange(GuiTextureObCollector::Instance().dot_blue);
              		grapple_slot->DrawRange();
 		glPopMatrix();
 	}
@@ -836,7 +846,7 @@ void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptre
 
 void Vehicle::ResolveDataUniqueVehicle()
 {
-       	textureOb_gui = g_TEXTURE_MANAGER.GetTextureObByPath(data_unresolved_Vehicle.textureOb_gui_path);
+       	textureOb_gui = TextureManager::Instance().GetTextureObByPath(data_unresolved_Vehicle.textureOb_gui_path);
        	
        	if (data_unresolved_Vehicle.land_id != NONE_ID) 
         { 

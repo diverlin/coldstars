@@ -31,7 +31,7 @@ void RocketBulletBuilder::CreateNewRocket(int id)
 {
 	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
 
         try 
@@ -56,7 +56,7 @@ void RocketBulletBuilder::CreateNewInternals(BulletData data_bullet)
         rocket->SetBulletData(data_bullet);
         
         rocket->SetLifeData(data_life);
-        rocket->SetTextureOb(g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ROCKET_BULLET_ID));
+        rocket->SetTextureOb(TextureManager::Instance().GetRandomTextureOb(TEXTURE::ROCKET_BULLET_ID));
          
         CreateKorpusGeometry(rocket);
         //CreateShieldGeometry(rocket);

@@ -105,13 +105,13 @@ void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, Vehicle* 
                	{
                		if (requested_subtype_id == vehicle->slot_total_vec[i]->GetSubTypeId())
                		{
-               			vehicle->slot_total_vec[i]->RenderMark(g_GUI_TEXTUREOB_COLLECTOR.slot_mark_accept);
+               			vehicle->slot_total_vec[i]->RenderMark(GuiTextureObCollector::Instance().slot_mark_accept);
                		}
                		else
                		{
                			if (vehicle->slot_total_vec[i]->GetRect().CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
                			{
-               				vehicle->slot_total_vec[i]->RenderMark(g_GUI_TEXTUREOB_COLLECTOR.slot_mark_reject);
+               				vehicle->slot_total_vec[i]->RenderMark(GuiTextureObCollector::Instance().slot_mark_reject);
                			}
                		}
                	}

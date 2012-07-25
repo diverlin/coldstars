@@ -27,7 +27,7 @@ class DroidEquipment : public BaseEquipment
      		DroidEquipment(int);
      		virtual ~DroidEquipment();
 
-		int SetRepairOrig(int repair_orig) { this->repair_orig = repair_orig; };
+		void SetRepairOrig(int repair_orig) { this->repair_orig = repair_orig; };
 		int GetRepair() const { return repair; };
 
       		void CountPrice();

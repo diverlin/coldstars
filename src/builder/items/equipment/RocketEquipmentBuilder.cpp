@@ -30,7 +30,9 @@ void RocketEquipmentBuilder::CreateNewRocketEquipment(int id)
 {
 	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+
+
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
 
  	try 
@@ -55,7 +57,7 @@ void RocketEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
         
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ROCKET_EQUIPMENT_ID);    
+    	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ROCKET_EQUIPMENT_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::ROCKET_EQUIPMENT_ID, revision_id)   
     
     	int ammo_max_orig = getRandInt(EQUIPMENT::ROCKET::AMMO_MIN, EQUIPMENT::ROCKET::AMMO_MAX);

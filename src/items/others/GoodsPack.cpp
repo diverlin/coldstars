@@ -90,10 +90,10 @@ GoodsPack* GetNewGoodsPack(int subtype_id, int id)
 {
         if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
         
-	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::CONTAINER_ID); 
+	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::CONTAINER_ID); 
 	
 	GoodsPack* goodsPack = new GoodsPack(id);
 	goodsPack->SetSubTypeId(subtype_id);

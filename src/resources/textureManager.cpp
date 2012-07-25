@@ -19,11 +19,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../common/constants.hpp"
 
 
-TextureManager :: TextureManager()
-{}
-
-TextureManager :: ~TextureManager()
-{}
+TextureManager& TextureManager::Instance()
+{
+	static TextureManager instance;
+	return instance;
+}
 
 void TextureManager::Add(TextureOb* texOb)
 {

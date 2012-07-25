@@ -53,7 +53,7 @@ void Asteroid::PostDeathUniqueEvent(bool show_effect)
 {
        	for (int i = 0; i<3; i++)
 	{      
-                TextureOb* textureOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MINERAL_ID);   
+                TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MINERAL_ID);   
                 GoodsPack* goods_pack = GetNewGoodsPack(ENTITY::MINERAL_ID);
                 goods_pack->Increase(4);
                 ContainerBuilder::Instance().CreateNewContainer();

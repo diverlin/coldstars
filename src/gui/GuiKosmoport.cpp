@@ -23,7 +23,7 @@ GuiKosmoport::GuiKosmoport()
 	int screen_w = Screen::Instance().GetWindow().GetWidth();
 	int screen_h = Screen::Instance().GetWindow().GetHeight();
 	
-        TextureOb* texOb_button = g_GUI_TEXTUREOB_COLLECTOR.dot_green; // fake
+        TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
 
     	ButtonSingle* angar_screen_button     = new ButtonSingle(texOb_button, 
     					     GUI::BUTTON::ANGAR_ID,

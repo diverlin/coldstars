@@ -31,7 +31,7 @@ void GovermentBuilder::CreateNewGoverment(int id)
 {
 	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
 
         try 
@@ -47,10 +47,10 @@ void GovermentBuilder::CreateNewGoverment(int id)
         	
 void GovermentBuilder::CreateNewInternals()
 {
-	TextureOb* textureOb_face  = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::GOVERMENT_BACKGROUND_ID); 
+	TextureOb* textureOb_face  = TextureManager::Instance().GetRandomTextureOb(TEXTURE::GOVERMENT_BACKGROUND_ID); 
 	goverment->SetTextureObFace(textureOb_face);
 		        
-	TextureOb* textureOb_background  = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::GOVERMENT_BACKGROUND_ID); 
+	TextureOb* textureOb_background  = TextureManager::Instance().GetRandomTextureOb(TEXTURE::GOVERMENT_BACKGROUND_ID); 
 	goverment->SetTextureObBackground(textureOb_background);
 
 }

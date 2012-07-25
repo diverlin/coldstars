@@ -16,30 +16,20 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-#ifndef GLOBAL_H
-#define GLOBAL_H
-
-//#include "../resources/objLoader.hpp"
-//#include "../common/id.hpp"
-//#include "../resources/textureManager.hpp"
+#include "../resources/objLoader.hpp"
 #include "../common/id.hpp"
+#include "../resources/textureManager.hpp"
+#include "../resources/resources.hpp"
+#include "../common/id.hpp"
+#include "../render/Glsl.hpp"
+
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp> 
 
 sf::Clock g_CLOCK;
 
 ObjMeshInstance* g_SPHERE_MESH; 
 ObjMeshInstance* g_DEFORMED_SPHERE_MESH;
-
-
-class ShadersPack; ShadersPack g_SHADERS_PACK;
-
-SimpleIdGenerator   g_ID_GENERATOR  = SimpleIdGenerator();
-
-SimpleIdGenerator   g_TEXTURE_ID_GENERATOR = SimpleIdGenerator();
-DetaliedIdGenerator g_TYPE_ID_GENERATOR    = DetaliedIdGenerator(); 
-
-GuiTextureObCollector g_GUI_TEXTUREOB_COLLECTOR;
-TextureManager g_TEXTURE_MANAGER;
 
 class AiModelRanger;       		 AiModelRanger*      AIMODEL_RANGER;
 class AiModelConqueror;    		 AiModelConqueror*   AIMODEL_CONQUEROR;
@@ -56,6 +46,3 @@ std::vector<int> RACE4_ALLOWED_SUBTYPE_LIST;
 std::vector<int> RACE6_ALLOWED_SUBTYPE_LIST;
 std::vector<int> RACE7_ALLOWED_SUBTYPE_LIST;
 
-
-
-#endif 

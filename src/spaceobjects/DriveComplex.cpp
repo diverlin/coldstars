@@ -217,7 +217,7 @@ void DriveComplex::CalcPath()
 	path_center_vec.clear();
 	//debug_midLeft_vec.clear();
 	angle_inD_vec.clear();
-       	visual_center_path.FillData(g_GUI_TEXTUREOB_COLLECTOR.dot_blue->texture, &path_center_vec, 10, 10);
+       	visual_center_path.FillData(GuiTextureObCollector::Instance().dot_blue->texture, &path_center_vec, 10, 10);
        		
     	if ( (distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), target_pos) < 300) or (target_pos.x == 0 and target_pos.y == 0) ) // hack
     	//if (distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), target_pos) < 300)
@@ -233,8 +233,8 @@ void DriveComplex::CalcPath()
 	{
 		direction_list_END = false;
                
-       		visual_center_path.FillData(g_GUI_TEXTUREOB_COLLECTOR.dot_blue->texture, &path_center_vec, 10, 10);
-       		//visual_debug_midLeft_path.FillData(g_GUI_TEXTUREOB_COLLECTOR.dot_red->texture, &debug_midLeft_vec, 10, 10);
+       		visual_center_path.FillData(GuiTextureObCollector::Instance().dot_blue->texture, &path_center_vec, 10, 10);
+       		//visual_debug_midLeft_path.FillData(GuiTextureObCollector::Instance().dot_red->texture, &debug_midLeft_vec, 10, 10);
        		move_it = 0;
        	}
 }

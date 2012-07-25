@@ -122,7 +122,7 @@ void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_pt
                 
 void BaseItem::ResolveDataUniqueBaseItem()
 {
-	textureOb = g_TEXTURE_MANAGER.GetTextureObByPath(data_unresolved_BaseItem.textureOb_path);
+	textureOb = TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path);
 	if(data_unresolved_BaseItem.slot_id != NONE_ID)
 		((ItemSlot*)EntityManager::Instance().GetEntityById(data_unresolved_BaseItem.slot_id))->InsertItem(this);
 }

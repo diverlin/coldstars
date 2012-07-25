@@ -31,7 +31,7 @@ void StoreBuilder::CreateNewStore(int id)
 {
 	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
 
         try 
@@ -49,7 +49,7 @@ void StoreBuilder::CreateNewStore(int id)
 void StoreBuilder::CreateNewInternals()
 {
 	// create slots
-	TextureOb* texOb_slot = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ITEMSLOT_ID);
+	TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ITEMSLOT_ID);
 	        
  	int row_num = 4;  // must be divided by 2
         int clm_num = 10; // must be divided by 2
@@ -75,7 +75,7 @@ void StoreBuilder::CreateNewInternals()
         }
         
 	
-	TextureOb* texOb_bg  = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::STORE_BACKGROUND_ID); 
+	TextureOb* texOb_bg  = TextureManager::Instance().GetRandomTextureOb(TEXTURE::STORE_BACKGROUND_ID); 
 	store->SetTextureObBackground(texOb_bg);
 
 }

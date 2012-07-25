@@ -30,7 +30,7 @@ void GalaxyBuilder::CreateNewGalaxy(int id)
 {
 	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
 
         try 

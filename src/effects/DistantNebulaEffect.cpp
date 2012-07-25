@@ -76,8 +76,8 @@ void DistantNebulaEffect::ResolveDataUniqueDistantNebulaEffect()
 DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
 {
 	TextureOb* textureOb = NULL;
-	if (color_id == -1) textureOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::NEBULA_BACKGROUND_ID);
-	else    	    textureOb = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::NEBULA_BACKGROUND_ID, color_id);	
+	if (color_id == -1) textureOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::NEBULA_BACKGROUND_ID);
+	else    	    textureOb = TextureManager::Instance().getTexObByColorId(TEXTURE::NEBULA_BACKGROUND_ID, color_id);	
 	   	
 	float parallax_rate;
 	if(textureOb->GetFrameWidth() * textureOb->GetFrameHeight() > 300000)

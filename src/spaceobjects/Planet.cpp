@@ -24,7 +24,7 @@ Planet::Planet(int id)
 	
 	population  = 0;
 		
-	textureOb_atmosphere = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ATMOSPHERE_ID);
+	textureOb_atmosphere = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ATMOSPHERE_ID);
 	
 	angle_atmosphere.Set(0.0, 0.0, 0.0);
 	d_angle_atmosphere.Set(-0.1, -0.3, 0.0);
@@ -74,15 +74,15 @@ void Planet::PostDeathUniqueEvent(bool)
 				 		
 void Planet::RenderAtmosphere_NEW(const vec2f& scroll_coords) const
 {     	
-     	glUseProgram(g_SHADERS_PACK.light);
+     	glUseProgram(ShadersPack::Instance().light);
 
-     	glUniform4f(glGetUniformLocation(g_SHADERS_PACK.light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
-     	glUniform4f(glGetUniformLocation(g_SHADERS_PACK.light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
+     	glUniform4f(glGetUniformLocation(ShadersPack::Instance().light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
+     	glUniform4f(glGetUniformLocation(ShadersPack::Instance().light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
 
      	glEnable(GL_BLEND);
      		glActiveTexture(GL_TEXTURE0);                                
      		glBindTexture(GL_TEXTURE_2D, textureOb_atmosphere->texture);
-     		glUniform1i(glGetUniformLocation(g_SHADERS_PACK.light, "Texture_0"), 0);
+     		glUniform1i(glGetUniformLocation(ShadersPack::Instance().light, "Texture_0"), 0);
 
 		renderMesh(mesh->glList, points.GetCenter3f(), angle_atmosphere, scale*1.05f);
 	glDisable(GL_BLEND);

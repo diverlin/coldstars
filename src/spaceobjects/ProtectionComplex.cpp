@@ -22,7 +22,7 @@ ProtectionComplex::ProtectionComplex(Vehicle* vehicle)
         this->owner_vehicle = vehicle;
         
  	shield_effect = new ShieldEffect();
-        TextureOb* texOb_shield = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SHIELD_EFFECT_ID); 
+        TextureOb* texOb_shield = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SHIELD_EFFECT_ID); 
         shield_effect->SetTextureOb(texOb_shield);
         shield_effect->SetParent(vehicle);
         

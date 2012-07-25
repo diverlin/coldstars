@@ -99,13 +99,13 @@ void RocketModule::ResolveDataUniqueRocketModule()
 
 RocketModule* GetNewRocketModule()
 {
-    	TextureOb* texOb =  g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MODULE_ID);   
+    	TextureOb* texOb =  TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
         
     	int ammo_max_add = getRandInt(MODULE::ROCKET::AMMO_MIN, MODULE::ROCKET::AMMO_MAX);
     	int damage_add = getRandInt(MODULE::ROCKET::DAMAGE_MIN, MODULE::ROCKET::DAMAGE_MAX);
     	int radius_add = getRandInt(MODULE::ROCKET::RADIUS_MIN, MODULE::ROCKET::RADIUS_MAX);
 
-        int id    = g_ID_GENERATOR.getNextId();
+        int id    = SimpleIdGenerator::Instance().GetNextId();
         
     	RocketModule* rocket_module = new RocketModule(id);
         rocket_module->SetTextureOb(texOb);

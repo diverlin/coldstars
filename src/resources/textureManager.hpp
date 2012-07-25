@@ -26,8 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class TextureManager
 {   
 	public:
-        	TextureManager();
-        	~TextureManager();
+		static TextureManager& Instance();
         	
         	void Add(TextureOb*);
 
@@ -43,6 +42,12 @@ class TextureManager
                 void FillShipSubTypeList();
 
         private:
+                TextureManager() {};
+        	~TextureManager() {};
+        	
+        	TextureManager(TextureManager&) = delete;
+        	TextureManager& operator=(TextureManager&) = delete;
+        	
         	std::vector<TextureOb*> textureOb_total_vec;
         	
         	std::vector<TextureOb*> itemslot_texOb_vec;

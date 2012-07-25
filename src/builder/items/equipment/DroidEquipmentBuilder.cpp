@@ -30,7 +30,7 @@ void DroidEquipmentBuilder::CreateNewDroidEquipment(int id)
 {
 	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
 
         try 
@@ -54,7 +54,7 @@ void DroidEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
 
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::DROID_EQUIPMENT_ID);    
+    	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::DROID_EQUIPMENT_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::DROID_EQUIPMENT_ID, revision_id)
 
     	int repair_orig     = getRandInt(EQUIPMENT::DROID::REPAIR_MIN, EQUIPMENT::DROID::REPAIR_MAX);

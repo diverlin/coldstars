@@ -18,6 +18,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "Glsl.hpp"
 
+ShadersPack& ShadersPack::Instance()
+{
+	static ShadersPack instance;
+	return instance;
+}
+		
 
 void compile_program(const GLchar* vertex_source, const GLchar* fragment_source, GLuint program)
 {

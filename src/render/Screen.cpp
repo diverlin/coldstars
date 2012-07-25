@@ -37,7 +37,7 @@ void Screen::InitPostEffects(int width, int height)
 	fbo2.Create();
 	fbo3.Create();
 	
-	bloom.Create(g_SHADERS_PACK.blur, g_SHADERS_PACK.extractbright, g_SHADERS_PACK.combine);
+	bloom.Create(ShadersPack::Instance().blur, ShadersPack::Instance().extractbright, ShadersPack::Instance().combine);
 	
 	ResizePostEffects(width, height);
 }

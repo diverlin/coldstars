@@ -89,12 +89,12 @@ void EnergizerModule::ResolveDataUniqueEnergizerModule()
 
 EnergizerModule* GetNewEnergizerModule()
 {
-    	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MODULE_ID);   
+    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
         	
      	int energy_max_add  = getRandInt(MODULE::ENERGIZER::ENERGY_MIN, MODULE::ENERGIZER::ENERGY_MAX);
      	int restoration_add = getRandInt(MODULE::ENERGIZER::RESTORATION_MIN, MODULE::ENERGIZER::RESTORATION_MAX);
      	
-        int id = g_ID_GENERATOR.getNextId();
+        int id = SimpleIdGenerator::Instance().GetNextId();
         
      	EnergizerModule* energizer_module = new EnergizerModule(id);
         energizer_module->SetTextureOb(texOb);

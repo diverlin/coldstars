@@ -72,8 +72,8 @@ void DistantStarEffect::ResolveDataUniqueDistantStarEffect()
 DistantStarEffect* GetNewDistantStarEffect(int color_id)
 {
 	TextureOb* textureOb = NULL;
-	if (color_id == -1) textureOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::DISTANTSTAR_ID);
-	else    	    textureOb = g_TEXTURE_MANAGER.getTexObByColorId(TEXTURE::DISTANTSTAR_ID, color_id);
+	if (color_id == -1) textureOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::DISTANTSTAR_ID);
+	else    	    textureOb = TextureManager::Instance().getTexObByColorId(TEXTURE::DISTANTSTAR_ID, color_id);
         
         float size = (float)getRandInt(ENTITY::GALAXY::DISTANTSTAR_SIZE_MIN, ENTITY::GALAXY::DISTANTSTAR_SIZE_MAX);
         vec3f center(getRandInt(0, 1000), getRandInt(0, 1000), -2.0);        

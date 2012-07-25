@@ -31,7 +31,7 @@ void SpaceStationBuilder::CreateNewSpaceStation(int id)
 {
 	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
 	        
 	try 
@@ -48,7 +48,7 @@ void SpaceStationBuilder::CreateNewSpaceStation(int id)
 
 void SpaceStationBuilder::CreateNewInternals() 
 {
-	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SPACESTATION_ID); 
+	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SPACESTATION_ID); 
        
        	int protection_rate = 50;
        	//if (subtype_id == CLASS::WARRIOR_ID)

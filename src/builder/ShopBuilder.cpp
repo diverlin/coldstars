@@ -31,7 +31,7 @@ void ShopBuilder::CreateNewShop(int id)
 {
 	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
 
         try 
@@ -48,7 +48,7 @@ void ShopBuilder::CreateNewShop(int id)
         	
 void ShopBuilder::CreateNewInternals()
 {    
-	TextureOb* textureOb_background  = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::SHOP_BACKGROUND_ID); 
+	TextureOb* textureOb_background  = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SHOP_BACKGROUND_ID); 
 	shop->SetTextureObBackground(textureOb_background);
 }
 

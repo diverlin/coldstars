@@ -31,7 +31,7 @@ void AngarBuilder::CreateNewAngar(int id)
 {
 	if (id == NONE_ID) 
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
         
         try 
@@ -57,7 +57,7 @@ void AngarBuilder::CreateNewInternals()
         	angar->AddVehicleSlot(vehicle_slot, tmp_rect);
 	}
 		
-	TextureOb* texOb_bg  = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ANGAR_BACKGROUND_ID); 
+	TextureOb* texOb_bg  = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ANGAR_BACKGROUND_ID); 
 	angar->SetTextureObBackground(texOb_bg);
 }
 

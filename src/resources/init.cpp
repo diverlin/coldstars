@@ -37,7 +37,7 @@ void init()
     	RACES_EVIL_LIST.push_back(RACE::R7_ID);  
         
     	loadGameData();           
-        g_TEXTURE_MANAGER.FillShipSubTypeList();        
+        TextureManager::Instance().FillShipSubTypeList();        
     	
     	
 	/* create Macro Scenaries */

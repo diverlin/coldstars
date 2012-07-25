@@ -30,7 +30,7 @@ void BombBuilder::CreateNewBomb(int id)
 {
 	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
 
    	try 
@@ -46,7 +46,7 @@ void BombBuilder::CreateNewBomb(int id)
         	
 void BombBuilder::CreateNewInternals()
 {     
-	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::BOMB_ID); 
+	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BOMB_ID); 
 	int damage = 300;
         int radius = 300;
         

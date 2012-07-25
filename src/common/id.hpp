@@ -19,6 +19,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef ID_H
 #define ID_H
 
+#include <string>
+#include <vector>
+
+
 struct IdInfoData
 {
 	unsigned long int id;
@@ -26,35 +30,62 @@ struct IdInfoData
 };
 
 
-class DetaliedIdGenerator
-{
-    	public:
-        	DetaliedIdGenerator();
-        	~DetaliedIdGenerator();
+//class DetaliedIdGenerator
+//{
+    	//public:
+		//static DetaliedIdGenerator& Instance();
 
-        	unsigned long int getNextId(std::string);
-        	std::string getStrByTypeId(unsigned long int);
+        	//unsigned long int getNextId(const std::string&);
+        	//std::string getStrByTypeId(unsigned long int);
         	
-        private:
-                unsigned long int last_id;
-                std::vector<IdInfoData> id_data_vec;        
-};
+        //private:
+                //DetaliedIdGenerator():last_id(0) {};
+        	//~DetaliedIdGenerator() {};
+                	
+        	//DetaliedIdGenerator(DetaliedIdGenerator&) = delete;
+        	//DetaliedIdGenerator& operator=(DetaliedIdGenerator&) = delete;
+        	
+                //unsigned long int last_id;
+                //std::vector<IdInfoData> id_data_vec;        
+//};
 
 
 
 class SimpleIdGenerator
 {
     	public:
-        	SimpleIdGenerator();
-        	~SimpleIdGenerator();
+		static SimpleIdGenerator& Instance();
         	
-        	unsigned long int getNextId();
+        	unsigned long int GetNextId();
         	
         private:
-        
+        	SimpleIdGenerator():last_id(0) {};
+        	~SimpleIdGenerator() {};
+        	
+        	SimpleIdGenerator(SimpleIdGenerator&) = delete;
+        	SimpleIdGenerator& operator=(SimpleIdGenerator&) = delete;
+        	        
                 unsigned long int last_id;
         	std::vector<unsigned long int> id_vec; 
 };
 
+
+class TextureIdGenerator
+{
+    	public:
+		static TextureIdGenerator& Instance();
+        	
+        	unsigned long int GetNextId();
+        	
+        private:
+        	TextureIdGenerator():last_id(0) {};
+        	~TextureIdGenerator() {};
+        	
+        	TextureIdGenerator(TextureIdGenerator&) = delete;
+        	TextureIdGenerator& operator=(TextureIdGenerator&) = delete;
+        	        
+                unsigned long int last_id;
+        	std::vector<unsigned long int> id_vec; 
+};
 
 #endif

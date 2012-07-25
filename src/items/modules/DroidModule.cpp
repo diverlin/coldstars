@@ -79,11 +79,11 @@ void DroidModule::ResolveDataUniqueDroidModule()
 
 DroidModule* GetNewDroidModule()
 {
-    	TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::MODULE_ID);    
+    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);    
          
     	int repair_add = getRandInt(MODULE::DROID::REPAIR_MIN, MODULE::DROID::REPAIR_MAX);
 
-	int id = g_ID_GENERATOR.getNextId();
+	int id = SimpleIdGenerator::Instance().GetNextId();
         
     	DroidModule* droid_module = new DroidModule(repair_add);
         droid_module->SetTextureOb(texOb);

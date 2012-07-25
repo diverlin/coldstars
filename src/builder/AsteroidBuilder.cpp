@@ -30,7 +30,7 @@ void AsteroidBuilder::CreateNewAsteroid(int id)
 {
 	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
 
         try 
@@ -58,7 +58,7 @@ void AsteroidBuilder::CreateNewInternals()
     	planet_data.orbit_phi_inD = getRandInt(0, 360);
     	planet_data.speed         = 0.1;
 
-        TextureOb* texOb = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::ASTEROID_ID); 
+        TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ASTEROID_ID); 
         
         asteroid->SetPlanetData(planet_data);
 	asteroid->SetTextureOb(texOb);

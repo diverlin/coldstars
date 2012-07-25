@@ -30,7 +30,7 @@ void LazerEquipmentBuilder::CreateNewLazerEquipment(int id)
 {
 	if (id == NONE_ID)
 	{
-		id = g_ID_GENERATOR.getNextId();
+		id = SimpleIdGenerator::Instance().GetNextId();
 	}
 
         try 
@@ -56,7 +56,7 @@ void LazerEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
     	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
 
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::LAZER_EQUIPMENT_ID, revision_id)
-    	TextureOb* texOb_item = g_TEXTURE_MANAGER.GetRandomTextureOb(TEXTURE::LAZER_EQUIPMENT_ID);     
+    	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::LAZER_EQUIPMENT_ID);     
 
     	int damage_orig     = getRandInt(EQUIPMENT::LAZER::DAMAGE_MIN, EQUIPMENT::LAZER::DAMAGE_MAX);
     	int radius_orig     = getRandInt(EQUIPMENT::LAZER::RADIUS_MIN, EQUIPMENT::LAZER::RADIUS_MAX);
