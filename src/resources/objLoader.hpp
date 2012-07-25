@@ -21,6 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+#ifndef OBJLOADER_HPP
+#define OBJLOADER_HPP
 
 #include <string>
 #include <vector>
@@ -178,5 +180,4 @@ void createGlList()
 
 };
 
-
-
+#endif

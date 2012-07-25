@@ -20,6 +20,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef OBSERVATION_H
 #define OBSERVATION_H
 
+class Galaxy;
+class StarSystem;
+class Asteroid;
+class Container;
+class Vehicle;
+
 template <class TYPE>
 class Pair
 {

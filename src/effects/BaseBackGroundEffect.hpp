@@ -50,7 +50,5 @@ class BaseBackGroundEffect
     
 };
 
-int BaseBackGroundEffect::counter;
-
 #endif 
 

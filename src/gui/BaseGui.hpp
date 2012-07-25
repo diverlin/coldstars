@@ -21,7 +21,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef BASEGUI_H
 #define BASEGUI_H
 
+#include <map>
+
 #include "../gui/BaseButton.hpp"
+class Player; class MouseData; //#include "../pilots/Player.hpp"
+
 
 class BaseGui
 {

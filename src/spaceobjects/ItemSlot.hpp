@@ -20,6 +20,38 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef ITEMSLOT_H
 #define ITEMSLOT_H
 
+#include "../spaceobjects/BaseSlot.hpp"
+#include "../spaceobjects/Turrel.hpp"
+#include "../items/BaseItem.hpp"
+
+#include "../items/equipment/RocketEquipment.hpp"
+#include "../items/equipment/LazerEquipment.hpp"
+#include "../items/equipment/RadarEquipment.hpp"
+#include "../items/equipment/BakEquipment.hpp"
+#include "../items/equipment/EnergizerEquipment.hpp"
+#include "../items/equipment/ProtectorEquipment.hpp"
+#include "../items/equipment/DroidEquipment.hpp"
+#include "../items/equipment/FreezerEquipment.hpp"
+#include "../items/equipment/ScanerEquipment.hpp"
+#include "../items/equipment/DriveEquipment.hpp"
+#include "../items/equipment/GrappleEquipment.hpp"
+
+#include "../items/modules/RocketModule.hpp"
+#include "../items/modules/LazerModule.hpp"
+#include "../items/modules/RadarModule.hpp"
+#include "../items/modules/BakModule.hpp"
+#include "../items/modules/EnergizerModule.hpp"
+#include "../items/modules/ProtectorModule.hpp"
+#include "../items/modules/DroidModule.hpp"
+#include "../items/modules/FreezerModule.hpp"
+#include "../items/modules/ScanerModule.hpp"
+#include "../items/modules/DriveModule.hpp"
+#include "../items/modules/GrappleModule.hpp"
+
+#include "../items/others/Bomb.hpp"
+#include "../items/others/GoodsPack.hpp"
+
+#include "../render/PathVisual.hpp"
 
 class ItemSlot : public BaseSlot
 {   

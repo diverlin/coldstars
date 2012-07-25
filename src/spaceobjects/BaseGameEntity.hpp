@@ -19,8 +19,16 @@
 
 #ifndef BASEGAMEENTITY_H
 #define BASEGAMEENTITY_H
-//#include "../world/starsystem.hpp"
-//#include "../common/gameStruct.hpp"
+
+#include <boost/property_tree/ptree.hpp>
+
+#include "../common/Base.hpp"
+
+class StarSystem; //#include "../world/starsystem.hpp"
+#include "../common/gameStruct.hpp"
+#include "../resources/objLoader.hpp" // class ObjMeshInstance;
+#include "../common/points.hpp"
+#include "../text/textstuff.hpp" // class InfoTable;
 
 struct UnresolvedDataUniqueBaseGameEntity
 {

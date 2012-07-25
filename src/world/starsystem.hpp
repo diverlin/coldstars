@@ -19,12 +19,13 @@
 
 #ifndef STARSYSTEM_H
 #define STARSYSTEM_H
-//#include <vector>
+
+#include <vector>
 //#include "../spaceobjects/BaseGameEntity.hpp"
 //#include "../spaceobjects/planet.hpp"
 //#include "../pilots/player.hpp"
 //#include "../pilots/npc.hpp"
-//#include "../spaceobjects/star.hpp"
+#include "../spaceobjects/Star.hpp"
 //#include "../spaceobjects/asteroid.hpp"
 //#include "../spaceobjects/mineral.hpp"
 //#include "../spaceobjects/container.hpp"
@@ -35,9 +36,14 @@
 //#include "../spaceobjects/spaceStation.hpp"
 //#include "../spaceobjects/satellite.hpp"
 //#include "../spaceobjects/ship.hpp"
-//#include "../world/galaxy.hpp"
+class Galaxy; //#include "../world/galaxy.hpp"
 //#include "../gui/guiVehicle.hpp"
 
+#include "../effects/DistantNebulaEffect.hpp"
+#include "../effects/DistantStarEffect.hpp"
+
+#include "../world/GarbageEntities.hpp"
+#include "../world/garbageEffects.hpp"
 
 struct UnresolvedDataUniqueStarSystem
 {

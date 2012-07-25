@@ -18,7 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 #ifndef BASESCENARIO_H
-#define SCENARIOSCENARIO_H
+#define BASESCENARIO_H
 
 class BaseScenario
 {

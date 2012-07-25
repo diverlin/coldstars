@@ -19,6 +19,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef NPC_H
 #define NPC_H
 
+#include "../ai/aiModel/BaseAiModel.hpp"
+#include "../pilots/Skill.hpp"
+#include "../pilots/Observation.hpp" 
+#include "../ai/StateMachine.hpp"
+
+class Planet;
+
 struct UnresolvedDataUniqueNpc
 {
 	int vehicle_id;	
@@ -46,7 +53,7 @@ class Npc : public Base
 		unsigned long int GetCredits()  	const { return credits; };   
 		StateMachine* GetStateMachine() 	const { return state_machine; };
 
-		StarSystem* GetStarSystem() { return vehicle->GetStarSystem(); };
+		StarSystem* GetStarSystem() const;
 
 		void IncreaseCredits(int credits) { this->credits += credits; };
 		void DecreaseCredits(int credits) { this->credits -= credits; };

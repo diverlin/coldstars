@@ -19,50 +19,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../config/config.hpp"
 
 
-WeaponSelector::WeaponSelector()
-{
-	SetAll(false);
-}
-     	
-void WeaponSelector::SetSingle(unsigned int index, bool status)
-{
-	state[index-1] = status;
-}
-
-bool WeaponSelector::GetSingle(unsigned int index) const
-{
-	return state[index-1];
-}
-     			
-void WeaponSelector::SetAll(bool status)
-{
-	for (unsigned int i=0; i<GAME::WEAPONS_NUM_MAX; i++)
-	{
-		state[i] = status;
-	}
-}
-   			
-bool WeaponSelector::StatesAreMixed() const
-{
-	bool activated_present = false;
-	bool deactivated_present = false;
-	for (unsigned int i=0; i<GAME::WEAPONS_NUM_MAX; i++)
-	{
-		if (state[i] == true)
-		{
-			activated_present = true;
-		}
-		else
-		{
-			deactivated_present = true;
-		}
-	}
-	
-	return (activated_present and deactivated_present);
-}
-
-
-
 Player::Player(int id)
 { 
     	data_id.id         = id;

@@ -2,12 +2,8 @@
 #define MESSAGEMANAGER_H
 
 #include <set>
-
-
-const double NO_DELAY = 0.0f;
-const int    NO_ADDITIONAL_INFO   = 0;
-
-                   
+                 
+#include "../spaceobjects/BaseGameEntity.hpp"   
 
 class MessageManager
 {

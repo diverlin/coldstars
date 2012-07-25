@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef GALAXY_H
 #define GALAXY_H
 
+#include "../world/starsystem.hpp"
 
 class Galaxy : public Base
 {

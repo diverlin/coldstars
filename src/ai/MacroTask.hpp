@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MACROTASK_H
 #define MACROTASK_H
 
+#include "../ai/BaseTask.hpp"
 
 class MacroTask : public BaseTask
 {

@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef TRAIL_H
 #define TRAIL_H
 
+#include "baseParticleSystem.hpp"
 
 class TrailEffect : public BaseParticleSystem
 {

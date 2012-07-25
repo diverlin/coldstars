@@ -20,6 +20,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef STATEMACHINE_H
 #define STATEMACHINE_H
 
+#include "../ai/MacroTask.hpp"
+#include "../ai/MicroTask.hpp"
+#include "../ai/MacroTaskManager.hpp"
+#include "../ai/MicroTaskManager.hpp"
 
 class StateMachine
 {
@@ -36,15 +40,15 @@ class StateMachine
 		void UpdateInDynamic();			
 		void UpdateInStatic();	
 
+		void ForceReset() const; // was private
+		
 	private:
 		Npc* npc_owner;
 		
 		MacroTaskManager* macrotask_manager;		
 		MicroTaskManager* microtask_manager;	
-		
-		void ForceReset() const;
-			
-		friend void Player::ForceStateMachineReset() const;
+					
+		//friend void Player::ForceStateMachineReset() const;
 }; 
 
 

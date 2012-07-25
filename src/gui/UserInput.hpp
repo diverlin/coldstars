@@ -25,21 +25,17 @@ class UserInput
     	public:
 		static UserInput& Instance();
         	~UserInput();
-
-		bool GetSaveCommand() const { return save; };
-		bool GetLoadCommand() const { return load; };
 		
 		bool GetNextTurnReady() const { return next_turn_ready; };
 
 		void UpdateInKosmoport(Player*);
-		void UpdateInSpace(Player*, const GuiSpace&);
+		void UpdateInSpace(Player*, GuiManager&);
 
 	private:
 		UserInput();
 		UserInput(const UserInput&) = delete;
 		UserInput& operator=(const UserInput&) = delete;
 		
-		bool save, load;
 	        bool keyboardLeftPressed;
         	bool keyboardRightPressed;    
         	bool keyboardUpPressed;    
@@ -54,9 +50,9 @@ class UserInput
 
         	void ResetFlags(Player*);
         	        	
-        	void GetSimpleInputsInSpace(Player*, const GuiSpace&);
+        	void GetSimpleInputsInSpace(Player*, GuiManager&);
         	void GetSimpleInputsInKosmoport(Player*);
-        	void KeyPressedInSpace(Player*, const GuiSpace&);
+        	void KeyPressedInSpace(Player*, GuiManager&);
         	void KeyPressedInKosmoport(Player*);
         	void MouseButtonPressed(Player*);
         	        	

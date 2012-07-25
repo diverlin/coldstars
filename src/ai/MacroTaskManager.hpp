@@ -21,6 +21,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define MACROTASKMANAGER_H
 
 
+#include "../ai/scenarios/BaseScenario.hpp"
+
 class MacroTaskManager
 {
 	public:

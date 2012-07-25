@@ -20,6 +20,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef STAR_H
 #define STAR_H
 
+#include <boost/property_tree/ptree.hpp>
+
+#include "../spaceobjects/BasePlanet.hpp"
+#include "../resources/textureOb.hpp"
 
 class Star : public BasePlanet
 {

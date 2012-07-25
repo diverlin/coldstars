@@ -69,9 +69,7 @@ class GrappleEquipment : public BaseEquipment
       		int maxNumItem_orig;
       		int maxNumItem_add;
       		int maxNumItem;
-      		
-      	      	std::vector<GrappleModule*> modules_vec; 
-      		
+    		
      		void virtual AddUniqueInfo();
            	std::string GetStrengthStr();
            	std::string GetRadiusStr();

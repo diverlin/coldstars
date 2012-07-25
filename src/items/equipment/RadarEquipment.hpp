@@ -27,7 +27,7 @@ class RadarEquipment : public BaseEquipment
       		RadarEquipment(int);
   		virtual ~RadarEquipment();
 
-      		int SetRadiusOrig(int radius_orig)   { this->radius_orig = radius_orig; }; 
+      		void SetRadiusOrig(int radius_orig)   { this->radius_orig = radius_orig; }; 
       		int GetRadius() const { return radius; };
 
       		virtual void UpdatePropetries();

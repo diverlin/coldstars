@@ -21,6 +21,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define GUIRADAR_H
 
 #include "../gui/BaseGui.hpp"
+#include "../spaceobjects/BaseGameEntity.hpp"
+#include "../spaceobjects/Vehicle.hpp"
 
 class GuiRadar : public BaseGui
 {

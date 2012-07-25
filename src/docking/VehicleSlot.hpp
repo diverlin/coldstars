@@ -20,6 +20,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef VEHICLESLOT_H
 #define VEHICLESLOT_H
 
+#include <boost/property_tree/ptree.hpp>
+
+#include "../spaceobjects/BaseSlot.hpp"
+
+class Vehicle;
 
 class VehicleSlot : public BaseSlot
 {

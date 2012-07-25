@@ -18,7 +18,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 #ifndef ROOM_H
-#define ROOm_H
+#define ROOM_H
+
+class Kosmoport;
 
 struct UnresolvedDataUniqueRoom
 {

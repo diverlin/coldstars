@@ -18,12 +18,16 @@ set (HEADERS
 	include.hpp
 
 	src/config/config.hpp	
-	
+	src/common/SaveLoadManager.hpp
+	src/pilots/WeaponSelector.hpp
 )
 
 set (SOURCES
+	src/common/Logger.cpp
 	src/config/config.cpp
-  main.cpp
+	src/common/SaveLoadManager.cpp
+	src/pilots/WeaponSelector.cpp
+  	main.cpp
 )
 
 add_executable (${PROJECT} ${HEADERS} ${SOURCES})

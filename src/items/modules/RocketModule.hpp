@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef ROCKETMODULE_H
 #define ROCKETMODULE_H
 
+#include "BaseModule.hpp"
 
 class RocketModule : public BaseModule
 {

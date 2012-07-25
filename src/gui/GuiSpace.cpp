@@ -31,7 +31,25 @@ GuiSpace::GuiSpace()
     					     			GUI::ICON_SIZE, 
     					     			"galaxy map");    					     
     	button_map.insert(std::make_pair(GUI::BUTTON::GALAXYMAP_ID, galaxymap_button));
-	
+
+    	ButtonSingle* load_button = new ButtonSingle(	g_GUI_TEXTUREOB_COLLECTOR.icon_plus, 
+        				     			GUI::BUTTON::LOAD_ID,
+    					     			screen_w - 2*(GUI::ICON_SIZE + 5),
+    					     			screen_h - (GUI::ICON_SIZE + 5), 
+    					     			GUI::ICON_SIZE,  
+    					     			GUI::ICON_SIZE, 
+    					     			"load");    					     
+    	button_map.insert(std::make_pair(GUI::BUTTON::LOAD_ID, load_button));
+    	
+    	ButtonSingle* save_button = new ButtonSingle(	g_GUI_TEXTUREOB_COLLECTOR.icon_minus, 
+        				     			GUI::BUTTON::SAVE_ID,
+    					     			screen_w - 3*(GUI::ICON_SIZE + 5),
+    					     			screen_h - (GUI::ICON_SIZE + 5), 
+    					     			GUI::ICON_SIZE,  
+    					     			GUI::ICON_SIZE, 
+    					     			"save");    					     
+    	button_map.insert(std::make_pair(GUI::BUTTON::SAVE_ID, save_button));
+    	    		
        	textureOb_bar_top 	= g_GUI_TEXTUREOB_COLLECTOR.bar_bottom;
        	textureOb_bar_bottom 	= g_GUI_TEXTUREOB_COLLECTOR.bar_bottom;
 
@@ -54,7 +72,25 @@ void GuiSpace::ButtonsAction(Player* player) const
        				player->GetControlFlags().SetShowGalaxyMapFlag(button->GetPressed()); 
        				break; 
        			}   
-		}
+
+     			case GUI::BUTTON::SAVE_ID:   
+       			{
+       				if (button->GetPressed() == true) 
+       				{
+       					std::cout<<"save"<<std::endl; 
+       					break;
+       				} 
+       			}   
+
+     			case GUI::BUTTON::LOAD_ID:   
+       			{ 
+       			       	if (button->GetPressed() == true) 
+       				{
+       					std::cout<<"load"<<std::endl; 
+       					break;
+       				} 
+       			}   
+       		}
 	}
 }
 

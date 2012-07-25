@@ -20,6 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef PROTECTIONCOMPLEX_H
 #define PROTECTIONCOMPLEX_H
 
+class Vehicle;
+#include "../effects/Shield.hpp"
 
 class ProtectionComplex
 {

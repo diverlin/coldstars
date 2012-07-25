@@ -58,22 +58,7 @@ int main()
 
 		/* client code start */
 		player->RunSession(turn_timer);
-		
-		if (UserInput::Instance().GetSaveCommand())
-		{
-			EntityManager::Instance().SaveEvent();
-		}
-
-		if (UserInput::Instance().GetLoadCommand())
-		{
-			int _player_id = player->GetId();
-			delete player->GetNpc()->GetStarSystem()->GetGalaxy();
-			EntityManager::Instance().LoadPass0();
-			EntityManager::Instance().LoadPass1();
-					
-			player = (Player*)EntityManager::Instance().GetEntityById(_player_id);
-		}
-
+		SaveLoadManager::Instance().Update(player);
 		/* client code end */           	
 	}
 

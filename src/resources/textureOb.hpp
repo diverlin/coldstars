@@ -20,6 +20,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef TEXTUREOB_H
 #define TEXTUREOB_H
 
+#include <string>
+#include <vector>
+#include "GL/glew.h"
+
+#include "../common/myVector.hpp"
+
 class TextureOb
 {
     	public:
