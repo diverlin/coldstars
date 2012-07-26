@@ -427,13 +427,13 @@ void EntityManager::LoadPass1()
 	}
 }
 
-void EntityManager::LoadPass2()
-{
-	for (std::map<int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
-	{
-		if (iterator->second->GetSubTypeId() == ENTITY::SHIP_ID)
-		{
-			((Vehicle*)iterator->second)->UpdateAllPropertiesAndAbilities();
-		}
-	}
-}
+//void EntityManager::LoadPass2()
+//{
+	//for (std::map<int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
+	//{
+		//if (iterator->second->GetSubTypeId() == ENTITY::SHIP_ID)
+		//{
+			////((Vehicle*)iterator->second)->UpdateRadarAbility();
+		//}
+	//}
+//}

@@ -51,26 +51,23 @@ void ItemSlot::SetRect(float pos_x, float pos_y, int w, int h)
 
 bool ItemSlot::InsertItem(BaseItem* item)
 {
-	if (item != NULL)
-	{
-		if (data_id.subtype_id == ITEMSLOT::CARGO_ID) 
-		{           
-                        this->item = item;
-                        is_EQUIPED = true; 
-                        item->SetSlot(this);
-                     
-			return true;
-   		}
-   	
-		if (data_id.subtype_id == item->GetFunctionalSlotSubTypeId())
-		{              
-                        this->item = item;
-                        is_EQUIPED = true; 
-                        item->SetSlot(this);
-                
-			UpdateOwnerAbilities();
-			return true;
-		}
+	if (data_id.subtype_id == ITEMSLOT::CARGO_ID) 
+	{           
+		this->item = item;
+		is_EQUIPED = true; 
+		item->SetSlot(this);
+	     
+		return true;
+	}
+
+	if (data_id.subtype_id == item->GetFunctionalSlotSubTypeId())
+	{        
+		this->item = item;
+		is_EQUIPED = true; 
+		item->SetSlot(this);
+	
+		UpdateOwnerAbilities();
+		return true;
 	}
 
 	return false;
@@ -86,33 +83,30 @@ void ItemSlot::RemoveItem()
 
 void ItemSlot::UpdateOwnerAbilities()
 {
-	if (owner)
-	{
-		if (owner->GetTypeId() == ENTITY::VEHICLE_ID)
-        	{ 	
-			switch(data_id.subtype_id)
-			{
-				case ITEMSLOT::WEAPON_ID: 	{ ((Vehicle*)owner)->UpdateFireAbility(); break; }
-				case ITEMSLOT::SCANER_ID: 	{ ((Vehicle*)owner)->UpdateScanAbility(); break; }
-				case ITEMSLOT::BAK_ID:     	{
-							  		((Vehicle*)owner)->UpdateDriveAbility();
-    							  		((Vehicle*)owner)->UpdateJumpAbility(); 
-							  		break;
-								}
+	if (owner->GetTypeId() == ENTITY::VEHICLE_ID)
+	{ 	
+		switch(data_id.subtype_id)
+		{
+			case ITEMSLOT::WEAPON_ID: 	{ ((Vehicle*)owner)->UpdateFireAbility(); break; }
+			case ITEMSLOT::SCANER_ID: 	{ ((Vehicle*)owner)->UpdateScanAbility(); break; }
+			case ITEMSLOT::BAK_ID:     	{
+						  		((Vehicle*)owner)->UpdateDriveAbility();
+								((Vehicle*)owner)->UpdateJumpAbility(); 
+						  		break;
+							}
 
-				case ITEMSLOT::DRIVE_ID:   	{
-						  			((Vehicle*)owner)->UpdateDriveAbility();
-    						  			((Vehicle*)owner)->UpdateJumpAbility(); 
-						  			break;
-								}
-					
-				case ITEMSLOT::DROID_ID: 	{ ((Vehicle*)owner)->UpdateRepairAbility(); break; }
-				case ITEMSLOT::ENERGIZER_ID: 	{ ((Vehicle*)owner)->UpdateEnergyAbility(); break; }
-				case ITEMSLOT::FREEZER_ID: 	{ ((Vehicle*)owner)->UpdateFreezeAbility(); break; }
-				case ITEMSLOT::GRAPPLE_ID: 	{ ((Vehicle*)owner)->UpdateGrabAbility(); break; }
-				case ITEMSLOT::PROTECTOR_ID: 	{ ((Vehicle*)owner)->UpdateProtectionAbility(); break; }
-				case ITEMSLOT::RADAR_ID: 	{ ((Vehicle*)owner)->UpdateRadarAbility(); break; }
-			}
+			case ITEMSLOT::DRIVE_ID:   	{
+					  			((Vehicle*)owner)->UpdateDriveAbility();
+								((Vehicle*)owner)->UpdateJumpAbility(); 
+					  			break;
+							}
+				
+			case ITEMSLOT::DROID_ID: 	{ ((Vehicle*)owner)->UpdateRepairAbility(); break; }
+			case ITEMSLOT::ENERGIZER_ID: 	{ ((Vehicle*)owner)->UpdateEnergyAbility(); break; }
+			case ITEMSLOT::FREEZER_ID: 	{ ((Vehicle*)owner)->UpdateFreezeAbility(); break; }
+			case ITEMSLOT::GRAPPLE_ID: 	{ ((Vehicle*)owner)->UpdateGrabAbility(); break; }
+			case ITEMSLOT::PROTECTOR_ID: 	{ ((Vehicle*)owner)->UpdateProtectionAbility(); break; }
+			case ITEMSLOT::RADAR_ID: 	{ ((Vehicle*)owner)->UpdateRadarAbility(); break; }
 		}
 	}
 }

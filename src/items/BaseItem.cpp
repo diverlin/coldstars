@@ -124,5 +124,7 @@ void BaseItem::ResolveDataUniqueBaseItem()
 {
 	textureOb = TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path);
 	if(data_unresolved_BaseItem.slot_id != NONE_ID)
+	{
 		((ItemSlot*)EntityManager::Instance().GetEntityById(data_unresolved_BaseItem.slot_id))->InsertItem(this);
+	}
 }
