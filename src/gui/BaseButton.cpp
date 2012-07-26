@@ -19,13 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "BaseButton.hpp"
 
-BaseButton::BaseButton(TextureOb* textureOb, 
-		 int subtype_id, 
-		 int pos_x, 
-		 int pos_y, 
-		 int w, 
-		 int h, 
-		 std::string info)
+BaseButton::BaseButton(TextureOb* textureOb, int subtype_id, const std::string& info_str):BaseGuiElement(textureOb, subtype_id, info_str)
 {
 	type_id = GUI::BUTTON::BUTTON_ID;
 	
@@ -38,17 +32,11 @@ BaseButton::BaseButton(TextureOb* textureOb,
 	alpha = 1.0f;
 	lock  = false;
 	pressed = false;
-	
-    	rect.Set(pos_x, pos_y, w, h);
 }
 
 BaseButton::~BaseButton()
 {}
 
-void BaseButton::SetCenter(int x, int y)
-{        
-     	rect.SetCenter((float)x, (float)y);
-}
 
 void BaseButton::Reset()
 {
@@ -94,13 +82,3 @@ void BaseButton::Render() const
 	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
-//void BaseButton::RenderWithTitle(const std::string& title, int offset_x, int offset_y) const
-//{
-	//Render();
-     	//drawSimpleText(info, 12, rect.GetBottomLeft().x  + offset_x, rect.GetBottomLeft().y + offset_y);
-//}
-
-void BaseButton::RenderInfo(int offset_x, int offset_y) const
-{
-     	drawSimpleText(info, 12, rect.GetBottomLeft().x - 50 + offset_x, rect.GetBottomLeft().y + 30 + offset_y);
-}

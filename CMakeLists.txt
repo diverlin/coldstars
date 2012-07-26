@@ -24,6 +24,8 @@ set (HEADERS
 )
 
 set (SOURCES
+	src/gui/BaseGuiElement.cpp
+	src/gui/Slider.cpp
 	src/common/Logger.cpp
 	src/config/config.cpp
 	src/common/SaveLoadManager.cpp

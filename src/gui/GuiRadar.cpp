@@ -34,13 +34,11 @@ GuiRadar::GuiRadar()
 	for (int i=0; i<GAME::WEAPONS_NUM_MAX; i++)
 	{
 		vec2i pos = getVec2i(rect.GetWidth()/2.5, angle);
-    		ButtonTrigger* button = new ButtonTrigger(	GuiTextureObCollector::Instance().dot_purple, 
-        					subtype_id,
-    						rect.GetCenter().x+pos.x-GUI::ICON_SIZE/2,
-    						rect.GetCenter().y+pos.y-GUI::ICON_SIZE/2, 
-    					     	GUI::ICON_SIZE*1.5,  
-    					     	GUI::ICON_SIZE*1.5, 
-    					     	"weapon_"+int2str(i+1));    					     
+    		ButtonTrigger* button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_purple, subtype_id, "weapon_"+int2str(i+1));  
+    		button->SetRect(Rect(rect.GetCenter().x+pos.x-GUI::ICON_SIZE/2,
+    				     rect.GetCenter().y+pos.y-GUI::ICON_SIZE/2, 
+    				     GUI::ICON_SIZE*1.5,  
+    				     GUI::ICON_SIZE*1.5));  					     
     		button_map.insert(std::make_pair(subtype_id, button));
     		
 		angle += 20;

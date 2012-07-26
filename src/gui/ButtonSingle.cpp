@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "ButtonSingle.hpp"
 
 /*virtual*/
+
 void ButtonSingle::PressEvent()
 {
 	if (lock == false)

@@ -20,27 +20,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef BASEBUTTON_H
 #define BASEBUTTON_H
 
-#include "../resources/textureOb.hpp"
-#include "../common/rect.hpp"
+#include "../gui/BaseGuiElement.hpp"
 
-class BaseButton
+class BaseButton : public BaseGuiElement
 {
     	public:
-       		BaseButton(TextureOb* textureOb, 
-       		       int subtype_id, 
-       		       int pos_x, 
-       		       int pos_y, 
-       		       int w, 
-       		       int h, 
-       		       std::string info_str);
-       		       
+       		BaseButton(TextureOb*, int, const std::string&);       		       
        		virtual ~BaseButton();  
 
-		void SetAdditionalTextureOb(TextureOb* textureOb_additional) { this->textureOb_additional = textureOb_additional; };
-       		const Rect& GetRect() const { return rect; };
-       		TextureOb* GetTextureOb() const { return textureOb; };
-       		int GetTypeId() const { return type_id; };
-       		int GetSubTypeId() const { return subtype_id; };
        		bool GetLock() const { return lock; };
        		bool GetPressed() const { return pressed; };
 
@@ -50,25 +37,15 @@ class BaseButton
        		void LockOff();
        		virtual void Update()=0;
 
-       		void SetCenter(int, int);
-
 		void Reset();
 		
        		void Render() const;    
-       		//void RenderWithTitle(const std::string&, int offset_x = 0, int offset_y = 0) const;    
-       		void RenderInfo(int offset_x = 0, int offset_y = 0) const;
         
         protected:
-        	int type_id, subtype_id;
         	bool lock;
         	bool pressed;
         	float alpha;
         	
-               	TextureOb* textureOb;
-               	TextureOb* textureOb_additional;
-       		Rect rect;
-       		std::string info;  
-
      		void FullShadeOn();
      		void ShadeOn();
      		void ShadeOff();

@@ -30,34 +30,56 @@ GuiSkill::GuiSkill()
      	TextureOb* texOb_icon_plus  = GuiTextureObCollector::Instance().icon_plus;
      	TextureOb* texOb_icon_minus = GuiTextureObCollector::Instance().icon_minus;
      	     	
-     	ButtonSingle* Increment_attack_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_ATTACK_ID, center.x, center.y - button_h, button_w, button_h, "increment attack");  
+     	ButtonSingle* Increment_attack_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_ATTACK_ID, "increment attack");  
+     	Increment_attack_button->SetRect(Rect(center.x, center.y - button_h, button_w, button_h));
      	button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_ATTACK_ID, Increment_attack_button));
-     	ButtonSingle* Decrement_attack_button   = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_ATTACK_ID, center.x, center.y - 2*button_h, button_w, button_h, "decrement attack");  
+     	
+     	ButtonSingle* Decrement_attack_button   = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_ATTACK_ID, "decrement attack");  
+     	Decrement_attack_button->SetRect(Rect(center.x, center.y - 2*button_h, button_w, button_h));
      	button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_ATTACK_ID, Decrement_attack_button));
+        
                      
-     	ButtonSingle* Increment_defence_button  = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_DEFENCE_ID, center.x + button_w, center.y - button_h, button_w, button_h, "increment defence");  
+     	ButtonSingle* Increment_defence_button  = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_DEFENCE_ID, "increment defence");  
+     	Increment_defence_button->SetRect(Rect(center.x + button_w, center.y - button_h, button_w, button_h));
      	button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_DEFENCE_ID, Increment_defence_button));
-     	ButtonSingle* Decrement_defence_button  = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_DEFENCE_ID, center.x + button_w, center.y - 2*button_h, button_w, button_h, "decrement defence");  
+     	
+     	ButtonSingle* Decrement_defence_button  = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_DEFENCE_ID, "decrement defence");  
+     	Decrement_defence_button->SetRect(Rect(center.x + button_w, center.y - 2*button_h, button_w, button_h));
      	button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_DEFENCE_ID, Decrement_defence_button));
+     	     
      	        
-     	ButtonSingle* Increment_leader_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_LEADER_ID, center.x + 2*button_w, center.y - button_h, button_w, button_h, "increment leader");  
+     	ButtonSingle* Increment_leader_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_LEADER_ID, "increment leader");  
+     	Increment_leader_button->SetRect(Rect(center.x + 2*button_w, center.y - button_h, button_w, button_h));
      	button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_LEADER_ID, Increment_leader_button));
-     	ButtonSingle* Decrement_leader_button   = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_LEADER_ID, center.x + 2*button_w, center.y - 2*button_h, button_w, button_h, "decrement leader"); 
+     	
+     	ButtonSingle* Decrement_leader_button   = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_LEADER_ID, "decrement leader"); 
+     	Decrement_leader_button->SetRect(Rect(center.x + 2*button_w, center.y - 2*button_h, button_w, button_h));
      	button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_LEADER_ID, Decrement_leader_button));
+     	
      	      
-     	ButtonSingle* Increment_trader_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_TRADER_ID, center.x + 3*button_w, center.y - button_h, button_w, button_h, "increment trader");  
+     	ButtonSingle* Increment_trader_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_TRADER_ID, "increment trader");  
+     	Increment_trader_button->SetRect(Rect(center.x + 3*button_w, center.y - button_h, button_w, button_h));
      	button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_TRADER_ID, Increment_trader_button));
-     	ButtonSingle* Decrement_trader_button   = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_TRADER_ID, center.x + 3*button_w, center.y - 2*button_h, button_w, button_h, "decrement trader"); 
+     	
+     	ButtonSingle* Decrement_trader_button   = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_TRADER_ID, "decrement trader"); 
+     	Decrement_trader_button->SetRect(Rect(center.x + 3*button_w, center.y - 2*button_h, button_w, button_h));
      	button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_TRADER_ID, Decrement_trader_button));
     
-     	ButtonSingle* Increment_technic_button  = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_TECHNIC_ID, center.x + 4*button_w, center.y - button_h, button_w, button_h, "increment technic");  
+    
+     	ButtonSingle* Increment_technic_button  = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_TECHNIC_ID, "increment technic");  
+ 	Increment_technic_button->SetRect(Rect(center.x + 4*button_w, center.y - button_h, button_w, button_h));
      	button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_TECHNIC_ID, Increment_technic_button));
-     	ButtonSingle* Decrement_technic_button  = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_TECHNIC_ID, center.x + 4*button_w, center.y - 2*button_h, button_w, button_h, "decrement technic"); 
+    
+     	ButtonSingle* Decrement_technic_button  = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_TECHNIC_ID, "decrement technic"); 
+        Decrement_technic_button->SetRect(Rect(center.x + 4*button_w, center.y - 2*button_h, button_w, button_h));
      	button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_TECHNIC_ID, Decrement_technic_button));
      
-     	ButtonSingle* Increment_diplomat_button = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_DIPLOMAT_ID, center.x + 5*button_w, center.y - button_h, button_w, button_h, "increment diplomat");  
+     	ButtonSingle* Increment_diplomat_button = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_DIPLOMAT_ID, "increment diplomat");  
+     	Increment_diplomat_button->SetRect(Rect(center.x + 5*button_w, center.y - button_h, button_w, button_h));
      	button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_DIPLOMAT_ID, Increment_diplomat_button));
-     	ButtonSingle* Decrement_diplomat_button = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_DIPLOMAT_ID, center.x + 5*button_w, center.y - 2*button_h, button_w, button_h, "decrement diplomat");
+     	
+     	ButtonSingle* Decrement_diplomat_button = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_DIPLOMAT_ID, "decrement diplomat");
+     	Decrement_diplomat_button->SetRect(Rect(center.x + 5*button_w, center.y - 2*button_h, button_w, button_h));
      	button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_DIPLOMAT_ID, Decrement_diplomat_button));    
 
 	background_rect.Set(center.x, center.y, 6*button_w, SKILL::ATTACK_MAX*button_h);	

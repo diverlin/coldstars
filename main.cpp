@@ -60,7 +60,7 @@ int main()
 		/* client code start */
 		player->RunSession(turn_timer);
 		Player* recreated_player = SaveLoadManager::Instance().Update(player);
-		if (recreated_player !=NULL)
+		if (recreated_player != NULL)
 		{
 			player = recreated_player;
 		}
