@@ -41,7 +41,8 @@ class EntityManager
 		void SaveEvent();
 		void LoadPass0();
 		void LoadPass1();
-
+		void LoadPass2();
+		
 	private:
 		EntityManager(){}
 		EntityManager(const EntityManager&);

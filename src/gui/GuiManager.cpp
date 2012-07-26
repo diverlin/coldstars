@@ -160,7 +160,8 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 			disable_BLEND();
 
 			gui_space.RenderText(Screen::Instance().GetBottomLeftGlobalCoord());
-		
+			// end render
+			
 			break;
 		}
 		

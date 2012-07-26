@@ -23,13 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class ButtonTrigger : public BaseButton
 {
     	public:
-       		ButtonTrigger(TextureOb* textureOb, 
-       		       int subtype_id, 
-       		       int pos_x, 
-       		       int pos_y, 
-       		       int w, 
-       		       int h, 
-       		       std::string info_str):BaseButton(textureOb, subtype_id, pos_x, pos_y, w, h, info_str) {};
+       		ButtonTrigger(TextureOb* textureOb, int subtype_id, const std::string& info_str):BaseButton(textureOb, subtype_id, info_str) {};
        		       
        		virtual ~ButtonTrigger() {};  
 

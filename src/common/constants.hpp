@@ -620,6 +620,14 @@ namespace GUI
 {
 	const int BAR_HEIGHT = 30;
 	
+	namespace SLIDER
+	{
+		enum TYPE
+		{
+			SLIDER_ID
+		};
+	}
+	
 	namespace BUTTON
 	{
 		enum TYPE

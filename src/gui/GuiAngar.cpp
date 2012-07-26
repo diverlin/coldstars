@@ -25,31 +25,25 @@ GuiAngar::GuiAngar()
 	
         TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
 
-    	ButtonSingle* repair_button = new ButtonSingle(texOb_button, 
-    	    			   GUI::BUTTON::BUYARMOR_ID,
-    				   screen_w - 1 * (GUI::ICON_SIZE + 5),
-    				   screen_h - 2*GUI::ICON_SIZE, 
-    				   GUI::ICON_SIZE,  
-    				   GUI::ICON_SIZE, 
-    				   "buy_repair");
+    	ButtonSingle* repair_button = new ButtonSingle(texOb_button, GUI::BUTTON::BUYARMOR_ID, "buy_repair");
+        repair_button->SetRect(Rect(screen_w - 1 * (GUI::ICON_SIZE + 5),
+    				    screen_h - 2 * GUI::ICON_SIZE, 
+    				    GUI::ICON_SIZE,  
+    				    GUI::ICON_SIZE));
     	button_map.insert(std::make_pair(GUI::BUTTON::BUYARMOR_ID, repair_button));
     				   
-    	ButtonSingle* fuel_button   = new ButtonSingle(texOb_button,
-    	 			   GUI::BUTTON::BUYFUEL_ID,
-    	 			   screen_w - 1 * (GUI::ICON_SIZE + 5),
-    	 			   screen_h - 3*GUI::ICON_SIZE, 
-    	 			   GUI::ICON_SIZE,  
-    	 			   GUI::ICON_SIZE, 
-    	 			   "buy fuel");  
+    	ButtonSingle* fuel_button = new ButtonSingle(texOb_button, GUI::BUTTON::BUYFUEL_ID, "buy fuel");  
+        fuel_button->SetRect(Rect(screen_w - 1 * (GUI::ICON_SIZE + 5),
+    	 			  screen_h - 3*GUI::ICON_SIZE, 
+    	 			  GUI::ICON_SIZE,  
+    	 			  GUI::ICON_SIZE));
     	button_map.insert(std::make_pair(GUI::BUTTON::BUYFUEL_ID, fuel_button));
     	 			   
-    	ButtonSingle* launch_button = new ButtonSingle(texOb_button, 
-    				   GUI::BUTTON::GETLAUNCH_ID,
-    				   screen_w - 1 * (GUI::ICON_SIZE + 5), 
-    				   screen_h - 4*GUI::ICON_SIZE, 
-    				   GUI::ICON_SIZE,  
-    				   GUI::ICON_SIZE, 
-    				   "launch");
+    	ButtonSingle* launch_button = new ButtonSingle(texOb_button, GUI::BUTTON::GETLAUNCH_ID, "launch");
+        launch_button->SetRect(Rect(screen_w - 1 * (GUI::ICON_SIZE + 5), 
+    				    screen_h - 4*GUI::ICON_SIZE, 
+    				    GUI::ICON_SIZE,  
+    				    GUI::ICON_SIZE));
     	button_map.insert(std::make_pair(GUI::BUTTON::GETLAUNCH_ID, launch_button));
 }
 

@@ -23,31 +23,25 @@ GuiSpace::GuiSpace()
     	int screen_w = Screen::Instance().GetWindow().GetWidth();
     	int screen_h = Screen::Instance().GetWindow().GetHeight();
     	
-    	ButtonTrigger* galaxymap_button = new ButtonTrigger(	GuiTextureObCollector::Instance().icon_map, 
-        				     			GUI::BUTTON::GALAXYMAP_ID,
-    					     			screen_w - (GUI::ICON_SIZE + 5),
-    					     			screen_h - (GUI::ICON_SIZE + 5), 
-    					     			GUI::ICON_SIZE,  
-    					     			GUI::ICON_SIZE, 
-    					     			"galaxy map");    					     
+    	ButtonTrigger* galaxymap_button = new ButtonTrigger(GuiTextureObCollector::Instance().icon_map, GUI::BUTTON::GALAXYMAP_ID, "galaxy map");    
+    	galaxymap_button->SetRect(Rect(screen_w - (GUI::ICON_SIZE + 5),
+    				       screen_h - (GUI::ICON_SIZE + 5), 
+    				       GUI::ICON_SIZE,  
+    				       GUI::ICON_SIZE));		     								     
     	button_map.insert(std::make_pair(GUI::BUTTON::GALAXYMAP_ID, galaxymap_button));
 
-    	ButtonSingle* load_button = new ButtonSingle(	GuiTextureObCollector::Instance().icon_plus, 
-        				     			GUI::BUTTON::LOAD_ID,
-    					     			screen_w - 2*(GUI::ICON_SIZE + 5),
-    					     			screen_h - (GUI::ICON_SIZE + 5), 
-    					     			GUI::ICON_SIZE,  
-    					     			GUI::ICON_SIZE, 
-    					     			"load");    					     
+    	ButtonSingle* load_button = new ButtonSingle(GuiTextureObCollector::Instance().icon_plus, GUI::BUTTON::LOAD_ID, "load");    
+    	load_button->SetRect(Rect(screen_w - 2*(GUI::ICON_SIZE + 5),
+    			          screen_h - (GUI::ICON_SIZE + 5), 
+    			          GUI::ICON_SIZE,  
+    			          GUI::ICON_SIZE));					     
     	button_map.insert(std::make_pair(GUI::BUTTON::LOAD_ID, load_button));
     	
-    	ButtonSingle* save_button = new ButtonSingle(	GuiTextureObCollector::Instance().icon_minus, 
-        				     			GUI::BUTTON::SAVE_ID,
-    					     			screen_w - 3*(GUI::ICON_SIZE + 5),
-    					     			screen_h - (GUI::ICON_SIZE + 5), 
-    					     			GUI::ICON_SIZE,  
-    					     			GUI::ICON_SIZE, 
-    					     			"save");    					     
+    	ButtonSingle* save_button = new ButtonSingle(GuiTextureObCollector::Instance().icon_minus, GUI::BUTTON::SAVE_ID, "save");    
+        save_button->SetRect(Rect(screen_w - 3*(GUI::ICON_SIZE + 5),
+    				  screen_h - (GUI::ICON_SIZE + 5), 
+    				  GUI::ICON_SIZE,  
+    				  GUI::ICON_SIZE));					     
     	button_map.insert(std::make_pair(GUI::BUTTON::SAVE_ID, save_button));
     	    		
        	textureOb_bar_top 	= GuiTextureObCollector::Instance().bar_bottom;

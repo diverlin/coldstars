@@ -20,10 +20,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 GuiMap::GuiMap()
 { 
-    	rect.Set(	GUI::MAP::BORDER_X, 
-    			GUI::MAP::BORDER_Y, 
-    			(Config::Instance().SCREEN_WIDTH  - 2 * GUI::MAP::BORDER_X), 
-    			(Config::Instance().SCREEN_HEIGHT - 2 * GUI::MAP::BORDER_X));
+    	rect.Set(GUI::MAP::BORDER_X, 
+    		 GUI::MAP::BORDER_Y, 
+    		 (Config::Instance().SCREEN_WIDTH  - 2 * GUI::MAP::BORDER_X), 
+    		 (Config::Instance().SCREEN_HEIGHT - 2 * GUI::MAP::BORDER_X));
     			
     	texOb_background = GuiTextureObCollector::Instance().text_background;
 }
@@ -80,6 +80,7 @@ void GuiMap::Render(Galaxy* galaxy)
     		
     	for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
     	{   		
+    		std::cout<<"si ="<<si<<std::endl;
         	TextureOb* texOb_particle = TextureManager::Instance().getTexObByColorId(TEXTURE::DISTANTSTAR_ID, galaxy->STARSYSTEM_vec[si]->STAR_vec[0]->GetColorId()); 
                                       
         	drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), 30.0, -2.0);
