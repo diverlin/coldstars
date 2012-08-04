@@ -18,8 +18,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 #include "BaseButton.hpp"
+#include "../render/Render.hpp"
 
-BaseButton::BaseButton(TextureOb* textureOb, int subtype_id, const std::string& info_str):BaseGuiElement(textureOb, subtype_id, info_str)
+BaseButton::BaseButton(TextureOb* textureOb, int subtype_id, const std::string& info_str)
 {
 	type_id = GUI::BUTTON::BUTTON_ID;
 	
@@ -41,6 +42,7 @@ BaseButton::~BaseButton()
 void BaseButton::Reset()
 {
 	pressed = false;
+	lock = false;
 	ShadeOff();
 }
 
@@ -70,8 +72,19 @@ void BaseButton::ShadeOff()
 {
 	alpha = 1.0f; 
 }       		
-         		
-void BaseButton::Render() const
+         
+         
+void BaseButton::SetCenter(int x, int y)
+{        
+     	rect.SetCenter((float)x, (float)y);
+}
+
+void BaseButton::RenderInfo(int offset_x, int offset_y) const
+{
+     	drawSimpleText(info, 12, rect.GetBottomLeft().x - 50 + offset_x, rect.GetBottomLeft().y + 30 + offset_y);
+}
+
+void BaseButton::Render(int offset_x, int offset_y) const
 {
 	glColor4f(1.0f, 1.0f, 1.0f, alpha);
    	drawTexturedRect(textureOb, rect, -1);
@@ -80,5 +93,10 @@ void BaseButton::Render() const
    		drawTexturedRect(textureOb_additional, rect, -1);   	
    	}
 	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+	
+	if (label != "")
+	{
+		drawSimpleText(label, 12, rect.GetBottomLeft().x + offset_x, rect.GetBottomLeft().y + rect.GetHeight() + offset_y);
+	}
 }
-
+		

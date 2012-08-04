@@ -35,6 +35,7 @@ class Rect
       		
       		void SetCenter(const vec2f&);
       		void SetCenter(float, float);
+      		void SetBottomLeftX(float);
       		void SetBottomLeft(const vec2f&);
       		void SetBottomLeft(float, float);
       		      		

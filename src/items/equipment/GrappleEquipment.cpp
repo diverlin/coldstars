@@ -92,26 +92,7 @@ std::string GrappleEquipment::GetTargetStr() const
         {
         	if (target_vec[i]) // hack, validator should be deal this
         	{
-        	switch(target_vec[i]->GetTypeId())
-        	{
-        		case ENTITY::MINERAL_ID:
-        		{
-        			str += "m" + int2str(target_vec[i]->GetTypeId()) + ", ";
-        			break;
-        		}
-        		
-        		case ENTITY::CONTAINER_ID:
-        		{
-        			str += "c" + int2str(target_vec[i]->GetTypeId()) + ", ";
-        			break;
-        		}
-        		        		
-        		case ENTITY::BOMB_ID:
-        		{
-        			str += "b" + int2str(target_vec[i]->GetTypeId()) + ", ";
-        			break;
-        		}
-        	}
+       			str += "c" + int2str(target_vec[i]->GetTypeId()) + ", ";
         	}
         }
         

@@ -18,12 +18,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-GuiManager :: GuiManager()
+GuiManager::GuiManager()
 {
 	player = NULL;
 }
 
-GuiManager :: ~GuiManager()
+GuiManager::~GuiManager()
 {}
 
 void GuiManager::SetPlayer(Player* player)
@@ -34,10 +34,11 @@ void GuiManager::SetPlayer(Player* player)
 	gui_store.SetPlayer(player);
 	
 	gui_vehicle.SetPlayer(player);
-      	//gui_skill.SetPlayer(player);
       	
       	gui_kosmoport.SetPlayer(player);
 	gui_map.SetPlayer(player); 
+	
+	slider.SetPlayer(player);
 }		
 
 bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mouse, Vehicle* scan_vehicle, bool allow_full_control)
@@ -275,17 +276,38 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
         			{
         				Shop* shop = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetShop();
         				
-        				//update				
-         	        		if ( interaction == false)
+        				//update	
+        				gui_shop.UpdateLables(shop);			
+         	        		gui_shop.ButtonsAction(shop, slider);
+         	        		if (slider.GetSubTypeId() != NONE_ID)
 					{
-						//interaction = gui_shop->UpdateMouseInternaction(shop, mxvp, myvp, lmb, rmb);	
+						slider.CheckButtonsLock();
+         	        			slider.ButtonsAction(shop);
+         	        		}
+         	        		
+         	        		if (interaction == false)
+					{
+						interaction = gui_shop.UpdateButtonsMouseInteraction(data_mouse);
+						if (interaction == false)
+						{
+							if (slider.GetSubTypeId() != NONE_ID)
+							{
+								slider.UpdateSlidePosition(data_mouse);
+								interaction = slider.UpdateButtonsMouseInteraction(data_mouse);
+							}
+						}	
 			        	}
 			        	
 			        	//render
         				resetRenderTransformation();
         				shop->RenderBackground(screen_rect);
         				enable_BLEND();   
-     						//gui_shop->RenderInternals(shop);
+     						gui_shop.RenderButtons();
+     						
+     						if (slider.GetSubTypeId() != NONE_ID)
+     						{
+     							slider.Render();
+     						}
      						
      						gui_kosmoport.RenderButtons(); 
                 				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 

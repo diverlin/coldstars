@@ -98,7 +98,7 @@ void Vehicle::AddItemSlot(ItemSlot* slot, const Rect& rect)
 		case ITEMSLOT::DROID_ID:     { droid_slot     = slot; break; }
 		case ITEMSLOT::FREEZER_ID:   { freezer_slot   = slot; break; }
 		
-		case ITEMSLOT::CARGO_ID:     { slot_otsec_vec.push_back(slot); break; }
+		case ITEMSLOT::CARGO_ID:     { slot_cargo_vec.push_back(slot); break; }
 		case ITEMSLOT::GATE_ID:      { gate_slot      = slot; break; }
 	}
         
@@ -108,44 +108,89 @@ void Vehicle::AddItemSlot(ItemSlot* slot, const Rect& rect)
 	}
 }
 
-bool Vehicle::AddItemToOtsec(BaseItem* item)
+ItemSlot* Vehicle::GetEmptyCargoSlot()
 {
-	for (unsigned int i=0; i<slot_otsec_vec.size(); i++)
-	{
-		if (!slot_otsec_vec[i]->GetEquipedStatus())
-		{
-			slot_otsec_vec[i]->InsertItem(item);
-			return true;
-		}
-	}
-	
-	return false;                
-} 
-
-ItemSlot* Vehicle::GetEmptyOtsecSlot()
-{
-      	for (unsigned int i = 0; i < slot_otsec_vec.size(); i++)
+      	for (unsigned int i = 0; i < slot_cargo_vec.size(); i++)
       	{
-          	if (slot_otsec_vec[i]->GetEquipedStatus() == false)
+          	if (!slot_cargo_vec[i]->GetEquipedStatus())
           	{
-             		return slot_otsec_vec[i];
+             		return slot_cargo_vec[i];
              	}
         }
         
       	return NULL;
 }
 
+bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
+{
+	//if (container->GetItemSlot()->GetItem()->GetTypeId() == ENTITY::GOODS_ID)
+	//{
+		//if (MergeIdenticalGoods(container->GetItemSlot()->GetItem()) == true)
+		//{       		
+			//return true;
+		//}		
+	//}
+	
+ 	if (AddItemToCargoSlot(container->GetItemSlot()->GetItem()) == true)
+       	{      		
+       		return true;
+      	}
+      	
+      	return false;
+} 
+
+bool Vehicle::AddItemToCargoSlot(BaseItem* item)
+{
+	if (item->GetTypeId() == ENTITY::GOODS_ID)
+	{
+		if (MergeIdenticalGoods(item) == true)
+		{       		
+			return true;
+		}
+	}
+	
+	return AddItemToEmptyCargoSlot(item);          
+} 
+
+
+	
+	
+
+bool Vehicle::MergeIdenticalGoods(BaseItem* item)
+{
+	ItemSlot* cargo_slot = GetCargoSlotWithGoods(item->GetSubTypeId());
+	if (cargo_slot != NULL)
+	{
+		cargo_slot->GetGoodsPack()->Increase(item->GetMass());
+		return true;
+	}
+	
+	return false;                
+} 
+
+bool Vehicle::AddItemToEmptyCargoSlot(BaseItem* item)
+{
+	ItemSlot* empty_cargo = GetEmptyCargoSlot();
+	if (empty_cargo != NULL)
+	{
+		empty_cargo->InsertItem(item);
+		return true;
+	}
+	
+	return false;                
+} 
+
 ItemSlot* Vehicle::GetCargoSlotWithGoods(int requested_goods_subtype_id)
 {
-      	for (unsigned int i = 0; i < slot_otsec_vec.size(); i++)
+      	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
       	{
-          	if (slot_otsec_vec[i]->GetEquipedStatus() == true)
+          	if (slot_cargo_vec[i]->GetEquipedStatus() == true)
           	{
-          		if (slot_otsec_vec[i]->GetItem()->GetTypeId() == ENTITY::GOODS_ID)
+          		if (slot_cargo_vec[i]->GetItem()->GetTypeId() == ENTITY::GOODS_ID)
           		{
-          			if (slot_otsec_vec[i]->GetItem()->GetSubTypeId() == requested_goods_subtype_id)
+          			if (slot_cargo_vec[i]->GetItem()->GetSubTypeId() == requested_goods_subtype_id)
           			{
-          				return slot_otsec_vec[i];
+          				return slot_cargo_vec[i];
           			}
           		}
           	}             		
@@ -153,7 +198,6 @@ ItemSlot* Vehicle::GetCargoSlotWithGoods(int requested_goods_subtype_id)
         
       	return NULL;
 }
-
 
 void Vehicle::BindOwnerNpc(Npc* owner_npc) 	           
 { 
@@ -764,30 +808,30 @@ void Vehicle::GrappleMicroProgramm()
        			{
       				case ENTITY::CONTAINER_ID:
        				{
-       					ItemSlot* _slot = GetEmptyOtsecSlot();
-                                        Container* _container = (Container*)grapple_slot->GetGrappleEquipment()->target_vec[i];
-       				        if (_slot != NULL)
-       					{
-                                                _slot->InsertItem(_container->GetItemSlot()->GetItem());
-                                                _container->GetItemSlot()->RemoveItem();    
-       						_container->SetPlaceTypeId(NONE_ID);
+       					Container* container = (Container*)grapple_slot->GetGrappleEquipment()->target_vec[i];
+       					if (UnpackContainerItemToCargoSlot(container) == true)
+					{
+						container->GetItemSlot()->RemoveItem();    
+       						container->SetPlaceTypeId(NONE_ID); // this needs for destroy
+       			
+						grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(container);
        					}
-					grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(_container);
+       					
        					break;
        				}        			
         				
-       				case ENTITY::VEHICLE_ID:
-       				{
-       					ItemSlot* _slot = GetEmptyOtsecSlot();
-                                        Vehicle* _vehicle = (Vehicle*)grapple_slot->GetGrappleEquipment()->target_vec[i];
-       				        if (_slot != NULL)
-       					{
-       						//_slot->InsertItem(_vehicle);
-       						starsystem->AddToRemoveFromOuterSpaceQueue(_vehicle);
-       					}
-					grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(_vehicle);
-       					break;
-       				}
+       				//case ENTITY::VEHICLE_ID:
+       				//{
+       					//ItemSlot* _slot = GetEmptyOtsecSlot();
+                                        //Vehicle* _vehicle = (Vehicle*)grapple_slot->GetGrappleEquipment()->target_vec[i];
+       				        //if (_slot != NULL)
+       					//{
+       						////_slot->InsertItem(_vehicle);
+       						//starsystem->AddToRemoveFromOuterSpaceQueue(_vehicle);
+       					//}
+					//grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(_vehicle);
+       					//break;
+       				//}
        			}
        		}
        	}

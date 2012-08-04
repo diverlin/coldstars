@@ -74,7 +74,7 @@ bool Store::SellItemFromSlot(Npc* npc, ItemSlot* slot)
 	unsigned int price = slot->GetItem()->GetPrice();
         if (npc->GetCredits() >= price)
         {
-        	npc->GetVehicle()->GetEmptyOtsecSlot()->SwapItemWith(slot); 
+        	npc->GetVehicle()->GetEmptyCargoSlot()->SwapItemWith(slot); 
                 npc->IncreaseCredits(price);    
                 
                 return true;                 	                                       

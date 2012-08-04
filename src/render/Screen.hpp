@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "../common/myVector.hpp"
 #include "../render/Fbo.hpp"
-//#include "../render/bloom.hpp"
+#include "../render/Bloom.hpp"
 
 class Screen:private sf::NonCopyable
 {

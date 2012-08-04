@@ -20,6 +20,7 @@
 #ifndef BASE_H
 #define BASE_H
 
+#include <boost/property_tree/ptree.hpp>
 #include "../common/gameStruct.hpp"
 
 class Base

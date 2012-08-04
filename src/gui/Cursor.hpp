@@ -21,18 +21,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef CURSOR_H
 #define CURSOR_H
 
-struct MouseData
-{
-       	int mx;
-      	int my;
-      	float mxvp;
-      	float myvp;
-      	
-       	bool left_click;
-       	bool right_click;
-       	bool left_press;
-       	bool right_press;       	
-};
+#include "../spaceobjects/ItemSlot.hpp"
+#include "../gui/MouseData.hpp"
 
 class Cursor
 {
