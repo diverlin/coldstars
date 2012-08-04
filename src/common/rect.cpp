@@ -37,12 +37,17 @@ Rect::~Rect()
 {}
 
 bool Rect::CheckInteraction(int x, int y) const
-{        
-    	float dist = distBetweenPoints(center, x, y);
-    	if (dist < w/2)
-        	return true;
-    	else
-        	return false;    
+{       	
+        if (x < bottomLeft.x)
+                return false;
+        if (x > bottomLeft.x + w)
+                return false;
+        if (y < bottomLeft.y)
+                return false;
+        if (y > bottomLeft.y + h)
+                return false;
+
+        return true;
 }
         
 void Rect::Set(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h)
@@ -87,6 +92,13 @@ void Rect::SetBottomLeft(float _pos_x, float _pos_y)
 {
 	bottomLeft.x = _pos_x;
 	bottomLeft.y = _pos_y;
+
+	UpdateCenter();
+}
+
+void Rect::SetBottomLeftX(float _pos_x)
+{
+	bottomLeft.x = _pos_x;
 
 	UpdateCenter();
 }

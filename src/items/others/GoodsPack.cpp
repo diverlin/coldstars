@@ -39,8 +39,12 @@ void GoodsPack::AddUniqueInfo()
     	
     	switch(GetSubTypeId())
     	{
-    		case ENTITY::MINERAL_ID: { info.addNameStr("mineral:"); info.addValueStr(int2str(data_item.mass)); break; }\
-		//case
+    		case ENTITY::MINERALS_ID: 	{ info.addNameStr("mineral:"); info.addValueStr(int2str(data_item.mass)); break; }
+    		case ENTITY::FOOD_ID: 		{ info.addNameStr("food:"); info.addValueStr(int2str(data_item.mass)); break; }
+    		case ENTITY::MEDICINE_ID: 	{ info.addNameStr("medicine:"); info.addValueStr(int2str(data_item.mass)); break; }
+    		case ENTITY::MILITARY_ID: 	{ info.addNameStr("military:"); info.addValueStr(int2str(data_item.mass)); break; }
+    		case ENTITY::DRUG_ID: 		{ info.addNameStr("drug:"); info.addValueStr(int2str(data_item.mass)); break; }
+    		case ENTITY::EXCLUSIVE_ID: 	{ info.addNameStr("exclusive:"); info.addValueStr(int2str(data_item.mass)); break; }
     	}
 }
  	

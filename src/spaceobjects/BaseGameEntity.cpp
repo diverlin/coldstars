@@ -16,7 +16,7 @@
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	 */
 
-//#include "BaseGameEntity.hpp"
+#include "BaseGameEntity.hpp"
 
 BaseGameEntity::BaseGameEntity():starsystem(NULL), mesh(NULL), textureOb(NULL), parent(NULL),
 				 place_type_id(NONE_ID), collision_radius(0), mass(0)

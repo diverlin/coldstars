@@ -136,8 +136,9 @@ class Vehicle : public BaseGameEntity
         	BaseLand* GetLand() const { return land; };
         	        					
                 void AddItemSlot(ItemSlot*, const Rect&); 
-                bool AddItemToOtsec(BaseItem*);
-
+                bool AddItemToCargoSlot(BaseItem*);
+                bool UnpackContainerItemToCargoSlot(Container*);
+                
                 float GetVisionRadius() const { return propetries.radius; };
 
                 void BindOwnerNpc(Npc*);
@@ -156,7 +157,7 @@ class Vehicle : public BaseGameEntity
         	ItemSlot* GetGateSlot()      const { return gate_slot; };
 
                 Npc* GetOwnerNpc() const { return owner_npc; };
-       	        ItemSlot* GetEmptyOtsecSlot();
+       	        ItemSlot* GetEmptyCargoSlot();
        	        ItemSlot* GetCargoSlotWithGoods(int);
         	
         	const Rect& GetGuiRect() const { return kontur_rect; };
@@ -240,7 +241,7 @@ class Vehicle : public BaseGameEntity
                 ItemSlot* gate_slot;
                 
                 std::vector<ItemSlot*> slot_total_vec;
-        	std::vector<ItemSlot*> slot_otsec_vec;
+        	std::vector<ItemSlot*> slot_cargo_vec;
 		        	
         	// KONTUR RECT 
         	Rect kontur_rect; 
@@ -262,6 +263,8 @@ class Vehicle : public BaseGameEntity
 
         private:
              	void DropRandomItemToSpace();   
+             	bool AddItemToEmptyCargoSlot(BaseItem*);
+                bool MergeIdenticalGoods(BaseItem*);
              	
         friend class GuiVehicle;
              	

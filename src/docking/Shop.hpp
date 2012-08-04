@@ -20,13 +20,32 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef SHOP_H
 #define SHOP_H
 
+#include "Room.hpp"
+#include "../pilots/Npc.hpp"
 
 class Shop : public Room
 {
         public: 
                 Shop(int id);
                 ~Shop();                
-                
+
+                int GetMineralsAmmount() 	const { return minerals_ammount; };
+        	int GetFoodAmmount()		const { return food_ammount; };    
+        	int GetMedicineAmmount() 	const { return medicine_ammount; };  
+        	int GetMilitaryAmmount()	const { return military_ammount; };  
+        	int GetDrugAmmount()		const { return drug_ammount; };     
+        	int GetExclusiveAmmount() 	const { return exclusive_ammount; };
+
+                int GetMineralsPrice() 		const { return minerals_price; };
+        	int GetFoodPrice() 		const { return food_price; };   
+        	int GetMedicinePrice() 		const { return medicine_price; };  
+        	int GetMilitaryPrice()		const { return military_price; };  
+        	int GetDrugPrice() 		const { return drug_price; };     
+        	int GetExclusivePrice()		const { return exclusive_price; };
+        	                
+        	void Buy(Npc*, int, int, int);
+        	//void Sell(Npc*, int, int);
+        	                
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
@@ -46,8 +65,14 @@ class Shop : public Room
         	int drug_price;     
         	int exclusive_price;
         	                     
-        	void UpdatePrices();
-        	
+        	void UpdateAllPrices();
+        	void UpdateMineralPrice();
+        	void UpdateFoodPrice();
+        	void UpdateMedicinePrice();
+        	void UpdateMilitaryPrice();
+        	void UpdateDrugPrice();
+        	void UpdateExclusivePrice();
+    	
                 void SaveDataUniqueShop(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueShop(const boost::property_tree::ptree&);
 		void ResolveDataUniqueShop();
@@ -80,12 +105,7 @@ class Shop : public Room
         //#self.background_tex = bg_texOb.texture
         //self.item_list = []
 
-        //mineral_icon_rect   = pygame.Rect((VIEW_WIDTH - (INTERFACE_ICON_SIZE + 150),  1 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE))
-        //food_icon_rect      = pygame.Rect((VIEW_WIDTH - (INTERFACE_ICON_SIZE + 150),  2 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE))
-        //medicine_icon_rect  = pygame.Rect((VIEW_WIDTH - (INTERFACE_ICON_SIZE + 150),  3 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE))
-        //military_icon_rect  = pygame.Rect((VIEW_WIDTH - (INTERFACE_ICON_SIZE + 150),  4 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE))
-        //drug_icon_rect      = pygame.Rect((VIEW_WIDTH - (INTERFACE_ICON_SIZE + 150),  5 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE))
-        //exclusive_icon_rect = pygame.Rect((VIEW_WIDTH - (INTERFACE_ICON_SIZE + 150),  6 * (INTERFACE_ICON_SIZE + 5)), (INTERFACE_ICON_SIZE,  INTERFACE_ICON_SIZE))
+
 
         //self.minerals = ShopItem(mineral_icon_tex, (mineral_icon_w, mineral_icon_h), mineral_icon_rect )
         //self.item_list.append(self.minerals)

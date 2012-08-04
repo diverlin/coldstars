@@ -23,14 +23,15 @@ set (HEADERS
 	src/spaceobjects/Vehicle.hpp
 )
 
+
 set (SOURCES
-	src/gui/BaseGuiElement.cpp
 	src/gui/Slider.cpp
 	src/common/Logger.cpp
 	src/config/config.cpp
 	src/common/SaveLoadManager.cpp
 	src/pilots/WeaponSelector.cpp
 	src/spaceobjects/Vehicle.cpp
+	src/gui/GuiShop.cpp
 
   	main.cpp
 )

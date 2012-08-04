@@ -16,26 +16,21 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "BaseGuiElement.hpp"
 
-BaseGuiElement::BaseGuiElement(TextureOb* textureOb, int subtype_id, const std::string& info)
-{	
-    	this->textureOb = textureOb;
-	this->subtype_id = subtype_id;
-    	this->info = info; 
+#ifndef MOUSEDATA_H
+#define MOUSEDATA_H
 
-	textureOb_additional = NULL;
-}
-
-BaseGuiElement::~BaseGuiElement()
-{}
-
-void BaseGuiElement::SetCenter(int x, int y)
-{        
-     	rect.SetCenter((float)x, (float)y);
-}
-
-void BaseGuiElement::RenderInfo(int offset_x, int offset_y) const
+struct MouseData
 {
-     	drawSimpleText(info, 12, rect.GetBottomLeft().x - 50 + offset_x, rect.GetBottomLeft().y + 30 + offset_y);
-}
+       	int mx;
+      	int my;
+      	float mxvp;
+      	float myvp;
+      	
+       	bool left_click;
+       	bool right_click;
+       	bool left_press;
+       	bool right_press;       	
+};
+
+#endif 

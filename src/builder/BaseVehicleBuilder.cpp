@@ -236,14 +236,14 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
     	{        
     	    	RadarModuleBuilder::Instance().CreateNewRadarModule();
         	RadarModuleBuilder::Instance().CreateNewInternals();
-        	vehicle->AddItemToOtsec(RadarModuleBuilder::Instance().GetRadarModule());
+        	vehicle->AddItemToCargoSlot(RadarModuleBuilder::Instance().GetRadarModule());
     	}  
     	
     	for (unsigned int i = 0; i < 3; i++) 
     	{        
     	    	BombBuilder::Instance().CreateNewBomb();
         	BombBuilder::Instance().CreateNewInternals();
-        	vehicle->AddItemToOtsec(BombBuilder::Instance().GetBomb());
+        	vehicle->AddItemToCargoSlot(BombBuilder::Instance().GetBomb());
     	}   
     	
     	vehicle->UpdateAllPropertiesAndAbilities(); 

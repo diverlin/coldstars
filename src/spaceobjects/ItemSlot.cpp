@@ -78,7 +78,10 @@ void ItemSlot::RemoveItem()
         item = NULL;
     	is_EQUIPED = false;  
         
-       	UpdateOwnerAbilities();
+        if (data_id.subtype_id != ITEMSLOT::CARGO_ID) 
+	{    
+	       	UpdateOwnerAbilities();
+	}
 }
 
 void ItemSlot::UpdateOwnerAbilities()

@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../gui/GuiKosmoport.hpp"
 #include "../gui/GuiAngar.hpp"
 #include "../gui/GuiStore.hpp"
+#include "../gui/GuiShop.hpp"
 #include "../gui/GuiSpace.hpp"
 #include "../gui/GuiMap.hpp"
 
@@ -50,9 +51,12 @@ class GuiManager
       		GuiKosmoport 	gui_kosmoport;
       		GuiAngar 	gui_angar;
                 GuiStore 	gui_store;
+                GuiShop        gui_shop;
       		GuiSpace     	gui_space;      
 		GuiMap       	gui_map;      		
        		GuiRadar 	gui_radar;
+       		
+       		Slider slider;     
        		
      		bool UpdateMouseInteractionWithScanVehicle(const MouseData&, Vehicle*, bool allow_full_control = false);     		
      		void RenderScanVehicle(const MouseData&, Vehicle*, bool show_skill = true) const;  	
