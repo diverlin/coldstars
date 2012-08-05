@@ -60,7 +60,7 @@ void GrappleEquipment::ValidateTargets()
 {
         for (unsigned int i = 0; i < target_vec.size(); i++)
         {
-                if (slot->CheckTarget(target_vec[i]) == false)
+                if (item_slot->CheckTarget(target_vec[i]) == false)
                 {
                         remove_queue.push_back(target_vec[i]);
                 }                

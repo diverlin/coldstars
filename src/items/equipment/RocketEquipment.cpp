@@ -147,21 +147,21 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
 		RocketBullet* rocket_bullet = RocketBulletBuilder::Instance().GetRocket();
 		rocket_bullet->SetDamage(data_bullet.damage*attack_rate_normalized);
 
-		if (slot->GetOwnerVehicle()->data_korpus.draw_turrels == true)
+		if (item_slot->GetOwnerVehicle()->data_korpus.draw_turrels == true)
     		{
-        		start_pos = slot->GetTurrel()->GetPoints().GetCenter(); 
-        		angle_inD = slot->GetTurrel()->GetPoints().GetAngleDegree();
+        		start_pos = item_slot->GetTurrel()->GetPoints().GetCenter(); 
+        		angle_inD = item_slot->GetTurrel()->GetPoints().GetAngleDegree();
         	}
         	else
     		{
-         		start_pos = slot->GetOwnerVehicle()->GetPoints().GetCenter();
-         		angle_inD = slot->GetOwnerVehicle()->GetPoints().GetAngleDegree();
+         		start_pos = item_slot->GetOwnerVehicle()->GetPoints().GetCenter();
+         		angle_inD = item_slot->GetOwnerVehicle()->GetPoints().GetAngleDegree();
     		}  
         
-                rocket_bullet->SetOwnerId(slot->GetOwnerVehicle()->GetId());
-        	rocket_bullet->SetTarget(slot->GetTurrel()->GetTarget());
+                rocket_bullet->SetOwnerId(item_slot->GetOwnerVehicle()->GetId());
+        	rocket_bullet->SetTarget(item_slot->GetTurrel()->GetTarget());
         
-    		slot->GetOwnerVehicle()->GetStarSystem()->AddBullet(rocket_bullet, start_pos, angle_inD);
+    		item_slot->GetOwnerVehicle()->GetStarSystem()->AddBullet(rocket_bullet, start_pos, angle_inD);
     		num++;
     	}
     	

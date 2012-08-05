@@ -27,7 +27,7 @@ ItemCommonData :: ItemCommonData()
 
 BaseItem::BaseItem()
 {
-        slot = NULL;
+        item_slot = NULL;
         
         functional_slot_subtype_id = NONE_ID;
         race_id = NONE_ID;
@@ -50,7 +50,7 @@ void BaseItem::Deterioration()
     		if (condition <= 0)
     		{
        			is_DAMAGED = true;
-       			slot->UpdateOwnerAbilities(); 
+       			item_slot->UpdateOwnerAbilities(); 
        		}
     	}
 }
@@ -61,7 +61,7 @@ void BaseItem::Repair()
     	if (is_DAMAGED == true)
     	{
         	is_DAMAGED = false;
-        	slot->UpdateOwnerAbilities();   
+        	item_slot->UpdateOwnerAbilities();   
     	}
 }
 
@@ -100,8 +100,8 @@ void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, c
 	if (textureOb) 	save_ptree.put(root+"unresolved.textureOb_path", textureOb->path);
 	else            save_ptree.put(root+"unresolved.textureOb_path", "none");
         
-        if (slot) 	{ save_ptree.put(root+"unresolved.slot_id", slot->GetId()); }
-	else           	{ save_ptree.put(root+"unresolved.slot_id", NONE_ID); }
+        if (item_slot) 	{ save_ptree.put(root+"unresolved.item_slot_id", item_slot->GetId()); }
+	else           	{ save_ptree.put(root+"unresolved.sitem_slot_id", NONE_ID); }
 }
 
 void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_ptree)
@@ -117,14 +117,14 @@ void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_pt
         data_item.mass               = load_ptree.get<int>("data_item.mass");
                     
 	data_unresolved_BaseItem.textureOb_path = load_ptree.get<std::string>("unresolved.textureOb_path");
-	data_unresolved_BaseItem.slot_id        = load_ptree.get<int>("unresolved.slot_id");
+	data_unresolved_BaseItem.item_slot_id   = load_ptree.get<int>("unresolved.item_slot_id");
 }
                 
 void BaseItem::ResolveDataUniqueBaseItem()
 {
 	textureOb = TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path);
-	if(data_unresolved_BaseItem.slot_id != NONE_ID)
+	if(data_unresolved_BaseItem.item_slot_id != NONE_ID)
 	{
-		((ItemSlot*)EntityManager::Instance().GetEntityById(data_unresolved_BaseItem.slot_id))->InsertItem(this);
+		((ItemSlot*)EntityManager::Instance().GetEntityById(data_unresolved_BaseItem.item_slot_id))->InsertItem(this);
 	}
 }

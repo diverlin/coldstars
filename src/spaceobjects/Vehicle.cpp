@@ -122,15 +122,7 @@ ItemSlot* Vehicle::GetEmptyCargoSlot()
 }
 
 bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
-{
-	//if (container->GetItemSlot()->GetItem()->GetTypeId() == ENTITY::GOODS_ID)
-	//{
-		//if (MergeIdenticalGoods(container->GetItemSlot()->GetItem()) == true)
-		//{       		
-			//return true;
-		//}		
-	//}
-	
+{	
  	if (AddItemToCargoSlot(container->GetItemSlot()->GetItem()) == true)
        	{      		
        		return true;
@@ -162,6 +154,7 @@ bool Vehicle::MergeIdenticalGoods(BaseItem* item)
 	if (cargo_slot != NULL)
 	{
 		cargo_slot->GetGoodsPack()->Increase(item->GetMass());
+		// delete item; dangerrr
 		return true;
 	}
 	

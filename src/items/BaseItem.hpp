@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "../common/Base.hpp"
 #include "../text/textstuff.hpp"
+class ItemSlot; //#include "../spaceobjects/ItemSlot.hpp"
 
 struct ItemCommonData 
 {
@@ -36,7 +37,7 @@ struct ItemCommonData
 struct UnresolvedDataUniqueBaseItem
 {
         std::string textureOb_path;
-        int slot_id;
+        int item_slot_id;
 };
 
 class BaseItem : public Base
@@ -48,8 +49,10 @@ class BaseItem : public Base
 		void SetTextureOb(TextureOb* textureOb)  { this->textureOb = textureOb; };
 		void SetFunctionalSlotSubTypeId(int functional_slot_subtype_id) { this->functional_slot_subtype_id = functional_slot_subtype_id; };
 		void SetItemCommonData(const ItemCommonData& data_item) { this->data_item = data_item; };
-                void SetSlot(ItemSlot* slot)  { this->slot = slot; };
-                                
+                void SetItemSlot(ItemSlot* item_slot)  { this->item_slot = item_slot; };
+
+                ItemSlot* GetItemSlot() const { return item_slot; };
+                                                
             	TextureOb* GetTextureOb()   	const { return textureOb; };
 		unsigned int GetMass()      	const { return data_item.mass; };
 		unsigned int GetCondition() 	const { return condition; };
@@ -78,7 +81,7 @@ class BaseItem : public Base
                 
                 ItemCommonData data_item;
                 
-                ItemSlot* slot;
+                ItemSlot* item_slot;
                 
                 InfoTable info;  
      		
