@@ -41,16 +41,15 @@ Shop::~Shop()
 	EntityManager::Instance().RemoveEntity(this);
 }                
 
-void Shop::Buy(Npc* npc, int subtype_id, int ammount, int price)
-{
-	GoodsPack* goods_pack = GetNewGoodsPack(subtype_id);
-        goods_pack->Increase(ammount);
-        		
+void Shop::SellGoods(Npc* npc, int subtype_id, int ammount)
+{       		
 	switch(subtype_id)
 	{
 		case ENTITY::MINERALS_ID:
 		{        					
 			minerals_ammount -= ammount;
+			npc->DecreaseCredits(ammount*minerals_price);
+			
 			UpdateMineralPrice();
 			
 			break;
@@ -59,6 +58,8 @@ void Shop::Buy(Npc* npc, int subtype_id, int ammount, int price)
 		case ENTITY::FOOD_ID:
 		{        					
 			food_ammount -= ammount;
+			npc->DecreaseCredits(ammount*food_price);
+						
 			UpdateFoodPrice();
 			
 			break;
@@ -67,6 +68,8 @@ void Shop::Buy(Npc* npc, int subtype_id, int ammount, int price)
 		case ENTITY::MEDICINE_ID:
 		{        					
 			medicine_ammount -= ammount;
+			npc->DecreaseCredits(ammount*medicine_price);
+			
 			UpdateMedicinePrice();
 			
 			break;
@@ -75,6 +78,8 @@ void Shop::Buy(Npc* npc, int subtype_id, int ammount, int price)
 		case ENTITY::MILITARY_ID:
 		{        					
 			military_ammount -= ammount;
+			npc->DecreaseCredits(ammount*military_price);	
+		
 			UpdateMilitaryPrice();
 			
 			break;
@@ -83,6 +88,8 @@ void Shop::Buy(Npc* npc, int subtype_id, int ammount, int price)
 		case ENTITY::DRUG_ID:
 		{        					
 			drug_ammount -= ammount;
+			npc->DecreaseCredits(ammount*drug_price);
+						
 			UpdateDrugPrice();
 			
 			break;
@@ -91,30 +98,90 @@ void Shop::Buy(Npc* npc, int subtype_id, int ammount, int price)
 		case ENTITY::EXCLUSIVE_ID:
 		{        					
 			exclusive_ammount -= ammount;
+			npc->DecreaseCredits(ammount*exclusive_price);
+						
+			UpdateExclusivePrice();
+			
+			break;
+		}	
+	}
+
+	GoodsPack* goods_pack = GetNewGoodsPack(subtype_id);
+        goods_pack->Increase(ammount);	
+	npc->GetVehicle()->AddItemToCargoSlot(goods_pack);
+}
+    
+        	
+void Shop::BuyGoods(Npc* npc, GoodsPack* goods_pack)
+{
+        int ammount = goods_pack->GetMass();	
+	
+	switch(goods_pack->GetSubTypeId())
+	{
+		case ENTITY::MINERALS_ID:
+		{        					
+			minerals_ammount += ammount;
+			npc->IncreaseCredits(ammount*minerals_price);
+			
+			UpdateMineralPrice();
+			
+			break;
+		}
+
+		case ENTITY::FOOD_ID:
+		{        					
+			food_ammount += ammount;
+			npc->IncreaseCredits(ammount*food_price);
+						
+			UpdateFoodPrice();
+			
+			break;
+		}
+
+		case ENTITY::MEDICINE_ID:
+		{        					
+			medicine_ammount += ammount;
+			npc->IncreaseCredits(ammount*medicine_price);
+			
+			UpdateMedicinePrice();
+			
+			break;
+		}			
+
+		case ENTITY::MILITARY_ID:
+		{        					
+			military_ammount += ammount;
+			npc->IncreaseCredits(ammount*military_price);	
+		
+			UpdateMilitaryPrice();
+			
+			break;
+		}	
+
+		case ENTITY::DRUG_ID:
+		{        					
+			drug_ammount += ammount;
+			npc->IncreaseCredits(ammount*drug_price);
+						
+			UpdateDrugPrice();
+			
+			break;
+		}	
+
+		case ENTITY::EXCLUSIVE_ID:
+		{        					
+			exclusive_ammount += ammount;
+			npc->IncreaseCredits(ammount*exclusive_price);
+						
 			UpdateExclusivePrice();
 			
 			break;
 		}	
 	}
 	
-	npc->GetVehicle()->AddItemToCargoSlot(goods_pack);
-	npc->DecreaseCredits(price);
+	goods_pack->GetItemSlot()->RemoveItem();
+	//delete goods_pack; // dangerrr
 }
-        	
-//void Shop::Sell(Npc* npc, int subtype_id, int ammount)
-//{
-	//switch(subtype_id)
-	//{
-		//case GUI::BUTTON::MINERALS_ID:
-		//{
-			//minerals_ammount -= ammount;
-			//UpdatePrices();
-			
-			//break;
-		//}
-	
-	//}
-//}
         	
 void Shop::UpdateAllPrices()
 {

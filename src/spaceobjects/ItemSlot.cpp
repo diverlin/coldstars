@@ -55,7 +55,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 	{           
 		this->item = item;
 		is_EQUIPED = true; 
-		item->SetSlot(this);
+		item->SetItemSlot(this);
 	     
 		return true;
 	}
@@ -64,7 +64,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 	{        
 		this->item = item;
 		is_EQUIPED = true; 
-		item->SetSlot(this);
+		item->SetItemSlot(this);
 	
 		UpdateOwnerAbilities();
 		return true;

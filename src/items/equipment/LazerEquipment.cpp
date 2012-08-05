@@ -93,27 +93,27 @@ std::string LazerEquipment::GetRadiusStr()
 void LazerEquipment::FireEvent_TRUE()
 { 
     	LazerTraceEffect* _lazer_trace_effect;
-    	if (slot->GetOwnerVehicle()->data_korpus.draw_turrels == true)
+    	if (item_slot->GetOwnerVehicle()->data_korpus.draw_turrels == true)
     	{
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
-                                                     	      slot->GetTurrel()->GetPoints().GetpCenter(), 
-                                                              slot->GetTurrel()->GetTarget()->GetPoints().GetpCenter());
+                                                     	      item_slot->GetTurrel()->GetPoints().GetpCenter(), 
+                                                              item_slot->GetTurrel()->GetTarget()->GetPoints().GetpCenter());
         }
     	else
     	{
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
-                                                              slot->GetOwnerVehicle()->GetPoints().GetpCenter(), 
-                                                              slot->GetTurrel()->GetTarget()->GetPoints().GetpCenter());
+                                                              item_slot->GetOwnerVehicle()->GetPoints().GetpCenter(), 
+                                                              item_slot->GetTurrel()->GetTarget()->GetPoints().GetpCenter());
         }
     
     	// DAMAGE effect
-	DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, slot->GetTurrel()->GetTarget());
+	DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, item_slot->GetTurrel()->GetTarget());
     	_lazer_trace_effect->setDamageEffect(_damage_effect);
     	
     	Deterioration();
     	
-    	slot->GetOwnerVehicle()->GetStarSystem()->Add(_lazer_trace_effect);
-    	slot->GetOwnerVehicle()->GetStarSystem()->Add(_damage_effect);
+    	item_slot->GetOwnerVehicle()->GetStarSystem()->Add(_lazer_trace_effect);
+    	item_slot->GetOwnerVehicle()->GetStarSystem()->Add(_damage_effect);
 } 
 
 void LazerEquipment::FireEvent_FALSE()

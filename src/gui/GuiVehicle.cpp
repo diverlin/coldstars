@@ -37,7 +37,14 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse, Vehicle* ve
 				{	
 					if (vehicle->slot_total_vec[i]->GetEquipedStatus() == true)
 					{
-						store->BuyItemFromSlot(player->GetNpc(), vehicle->slot_total_vec[i]);
+						if (vehicle->slot_total_vec[i]->GetItem()->GetTypeId() != ENTITY::GOODS_ID)
+						{
+							store->BuyItemFromSlot(player->GetNpc(), vehicle->slot_total_vec[i]);
+						}
+						else
+						{
+							store->GetOwnerKosmoport()->GetShop()->BuyGoods(player->GetNpc(), (GoodsPack*)vehicle->slot_total_vec[i]->GetItem());
+						}
 					}
             			}          		
 				else 

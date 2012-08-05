@@ -51,11 +51,11 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 {
 	if (modules_vec.size() < data_item.modules_num_max)
     	{
-    		module->SetSlot(NULL);
+    		module->SetItemSlot(NULL);
 	       	modules_vec.push_back(module);
         	UpdatePropetries();
         	
-        	slot->UpdateOwnerAbilities();
+        	item_slot->UpdateOwnerAbilities();
 
         	return true;
     	}
