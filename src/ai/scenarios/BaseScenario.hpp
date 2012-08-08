@@ -20,10 +20,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef BASESCENARIO_H
 #define BASESCENARIO_H
 
+#include <string>
+#include "../../common/constants.hpp"
+class Npc;
+
 class BaseScenario
 {
 	public:
-		BaseScenario();
+		BaseScenario():type_id(NONE_ID) {};
 		virtual ~BaseScenario() {};
 		
 		int GetTypeId() const { return type_id; };

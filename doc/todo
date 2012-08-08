@@ -1,0 +1,43 @@
+################### FEATURES #################
+<< blackholes improovement (fluctuation movement, save/load ability)
+
+<< exploration ai scenario.
+
+<< base ai mode(scenario)l for traders
+
+<< ablitiy to resize the Gui depending on screen resolution.
+- NOT RELEVANT
+
+<< Space Gui, all controls are accesible by mouse only(shortkeys as additional way to control)
+- NOT RELEVANT
+
+<< BaseButton and different buttons (one pos, two pos) 
+- DONE
+
+<< weapons activation icons
+- DONE
+
+<< load/save icons
+- DONE
+
+<< gui scroll bar implementation
+- DONE
+
+<< ability to trade in store (different goods)
+- DONE
+
+<< re-implementation of the PathCalculation
+- DONE
+
+<< gui radar implementation
+- DONE
+##########################################
+
+
+#################### BUGS ###################
+#1
+ship.propetries structure is not correct after save/load
+
+# textureOb, updateAnimationFrame()
+current implementation is: one textureOb is shared between many objects, so if the objects has the same texture then animation speed will be rised proportionally, which is not correct. 
+#############################################

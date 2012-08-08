@@ -18,6 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "gameStruct.hpp"
 
+	
 PlanetData :: PlanetData()
 {
     	orbit_center = vec2f(0, 0); 

@@ -27,9 +27,9 @@ GuiStore::~GuiStore()
         
 bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse, Store* store)
 {
-        for (unsigned int i = 0; i < store->slot_total_vec.size(); i++)
+        for (unsigned int i=0; i<store->slot_total_vec.size(); i++)
         { 
-                if (store->slot_total_vec[i]->GetEquipedStatus() == true)
+                if (store->slot_total_vec[i]->GetEquiped() == true)
                 {
                 	if (store->slot_total_vec[i]->GetRect().CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
                 	{
@@ -52,7 +52,7 @@ void GuiStore::RenderSlots(Store* store) const
         	for (unsigned int i = 0; i < store->slot_total_vec.size(); i ++)
         	{
                 	store->slot_total_vec[i]->Render();
-                	if (store->slot_total_vec[i]->GetEquipedStatus() == true)
+                	if (store->slot_total_vec[i]->GetEquiped() == true)
                 	{
                 		store->slot_total_vec[i]->GetItem()->Render(store->slot_total_vec[i]->GetRect());	
                 	}

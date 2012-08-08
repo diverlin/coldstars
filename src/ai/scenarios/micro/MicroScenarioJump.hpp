@@ -20,6 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MICROSCENARIOUMP_H
 #define MICROSCENARIOUMP_H
 
+#include "../../../pilots/Npc.hpp"
+
 class MicroScenarioJump : public BaseScenario
 {
 	public:

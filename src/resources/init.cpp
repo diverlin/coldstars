@@ -16,25 +16,33 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "../ai/aiModel/AiModelCollector.hpp"
+#include "../ai/ScenarioCollector.hpp"
+
+#include "../ai/scenarios/macro/MacroScenarioStarSystemLiberation.hpp"
+#include "../ai/scenarios/macro/MacroScenarioStarSystemDefence.hpp"
+#include "../ai/scenarios/macro/MacroScenarioSelfSafety.hpp"
+
+#include "../ai/scenarios/micro/MicroScenarioDestroy.hpp"
 
 void init()
 {
-        RACES_ALL_LIST.push_back(RACE::R0_ID);
-    	RACES_ALL_LIST.push_back(RACE::R1_ID);
-    	RACES_ALL_LIST.push_back(RACE::R2_ID);
-    	RACES_ALL_LIST.push_back(RACE::R3_ID);
-    	RACES_ALL_LIST.push_back(RACE::R4_ID);
-   	RACES_ALL_LIST.push_back(RACE::R6_ID);
-    	RACES_ALL_LIST.push_back(RACE::R7_ID);
+        RaceInformationCollector.RACES_ALL_vec.push_back(RACE::R0_ID);
+    	RaceInformationCollector.RACES_ALL_vec.push_back(RACE::R1_ID);
+    	RaceInformationCollector.RACES_ALL_vec.push_back(RACE::R2_ID);
+    	RaceInformationCollector.RACES_ALL_vec.push_back(RACE::R3_ID);
+    	RaceInformationCollector.RACES_ALL_vec.push_back(RACE::R4_ID);
+   	RaceInformationCollector.RACES_ALL_vec.push_back(RACE::R6_ID);
+    	RaceInformationCollector.RACES_ALL_vec.push_back(RACE::R7_ID);
 
-    	RACES_GOOD_LIST.push_back(RACE::R0_ID);
-    	RACES_GOOD_LIST.push_back(RACE::R1_ID);
-   	RACES_GOOD_LIST.push_back(RACE::R2_ID);
-    	RACES_GOOD_LIST.push_back(RACE::R3_ID);
-    	RACES_GOOD_LIST.push_back(RACE::R4_ID);
+    	RaceInformationCollector.RACES_GOOD_vec.push_back(RACE::R0_ID);
+    	RaceInformationCollector.RACES_GOOD_vec.push_back(RACE::R1_ID);
+   	RaceInformationCollector.RACES_GOOD_vec.push_back(RACE::R2_ID);
+    	RaceInformationCollector.RACES_GOOD_vec.push_back(RACE::R3_ID);
+    	RaceInformationCollector.RACES_GOOD_vec.push_back(RACE::R4_ID);
 
-    	RACES_EVIL_LIST.push_back(RACE::R6_ID);
-    	RACES_EVIL_LIST.push_back(RACE::R7_ID);  
+    	RaceInformationCollector.RACES_EVIL_vec.push_back(RACE::R6_ID);
+    	RaceInformationCollector.RACES_EVIL_vec.push_back(RACE::R7_ID);  
         
     	loadGameData();           
         TextureManager::Instance().FillShipSubTypeList();        
@@ -52,8 +60,8 @@ void init()
 	ScenarioCollector::Instance().RegisterScenario(new MicroScenarioDestroy());
 	
 	/* create AI models */
- 	AIMODEL_RANGER    = new AiModelRanger();     // make as singlenton
-	AIMODEL_CONQUEROR = new AiModelConqueror();  // make as singlenton
+	AiModelCollector::Instance().RegisterAiModel(new AiModelRanger());
+	AiModelCollector::Instance().RegisterAiModel(new AiModelConqueror());  
 }
 
 

@@ -16,6 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "Npc.hpp"
 
 Npc::Npc(int id)
 { 
@@ -181,7 +182,7 @@ bool Npc::CheckPossibilityToScan(Vehicle* vehicle)
  
      	if (this->vehicle->ableTo.SCAN == true) 
      	{
-        	if (vehicle->GetProtectionComplex()->GetProtectorSlot()->GetEquipedStatus() == true)
+        	if (vehicle->GetProtectionComplex()->GetProtectorSlot()->GetEquiped() == true)
         	{
            		if (this->vehicle->GetScanerSlot()->GetScanerEquipment()->GetScan() >= vehicle->GetProtectionComplex()->GetProtectorSlot()->GetProtectorEquipment()->GetProtection()) 
               		{

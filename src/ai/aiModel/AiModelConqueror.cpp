@@ -16,18 +16,24 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "AiModelConqueror.hpp"
+#include "../MacroTask.hpp"
+#include "../../common/constants.hpp"
+#include "../../world/starsystem.hpp"
 
 AiModelConqueror::AiModelConqueror() 
-{}
+{
+	type_id = AIMODEL::CONQUEROR_ID;
+}
 
 AiModelConqueror::~AiModelConqueror() 
 {}
 
 void AiModelConqueror::UpdateInStatic(Npc* npc) const
 {
-	if ( npc->GetStateMachine()->GetMacroTaskManager()->GetScenario() == NULL) 
+	if (npc->GetStateMachine()->GetMacroTaskManager()->GetScenario() == NULL) 
 	{
-		MacroTask* macrotask = new MacroTask(npc->GetStarSystem(), MACROSCENARIO::STARSYSTEMDEFENCE_ID);
+		MacroTask* macrotask = new MacroTask(npc->GetStarSystem(), MACROSCENARIO::TYPE_ID::STARSYSTEMDEFENCE_ID, 0, 0);
 	        npc->GetStateMachine()->SetCurrentMacroTask(macrotask); 
 	}
 }

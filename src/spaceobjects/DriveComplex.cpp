@@ -211,23 +211,30 @@ bool DriveComplex::GetDockingPermission()
         return false;
 }
 
-
-void DriveComplex::CalcPath()
+void DriveComplex::ClearPath()
 {
 	path_center_vec.clear();
 	//debug_midLeft_vec.clear();
 	angle_inD_vec.clear();
+}
+
+void DriveComplex::CalcPath()
+{
+	ClearPath();
+	
        	visual_center_path.FillData(GuiTextureObCollector::Instance().dot_blue->texture, &path_center_vec, 10, 10);
        		
-    	if ( (distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), target_pos) < 300) or (target_pos.x == 0 and target_pos.y == 0) ) // hack
+    	//if ( (distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), target_pos) < 300) or (target_pos.x == 0 and target_pos.y == 0) ) // hack
     	//if (distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), target_pos) < 300)
-    	//if (target_pos.x == 0 and target_pos.y == 0)
+    	if (target_pos.x == 0 and target_pos.y == 0)
     	{
     		return;
     	}
-    	  	
-        CalcRoundPath();	
-	CalcDirectPath();
+    	  
+	if (CalcRoundPath() == true)
+	{        	
+		CalcDirectPath();
+	}
 
 	if (path_center_vec.size() >= 1)
 	{
@@ -239,12 +246,12 @@ void DriveComplex::CalcPath()
        	}
 }
 
-void DriveComplex::CalcRoundPath()
+bool DriveComplex::CalcRoundPath()
 {  	
     	vector2f vehicle_basis(owner_vehicle->GetPoints().GetMidLeft(), owner_vehicle->GetPoints().GetCenter());
-    	vector2f target_basis(owner_vehicle->GetPoints().GetMidLeft(),      target_pos);
+    	vector2f target_basis(owner_vehicle->GetPoints().GetMidLeft(),  target_pos);
     	    	    	
-    	float d_angle = 1.0f;
+    	float d_angle = 1.5f;
     	float target_angle_diff = getAngle(vehicle_basis, target_basis);
     	float target_angle_diff_start = target_angle_diff;
     	
@@ -254,8 +261,16 @@ void DriveComplex::CalcRoundPath()
 
     	float step = owner_vehicle->propetries.speed/100.0;  // remove from here 
 
+    	int it_max = 361/d_angle;
+    	int i = 0;
     	while (target_angle_diff > 2*d_angle)
     	{   		
+    		i++; //std::cout<<i<<std::endl;
+    		if (i > it_max)
+    		{
+    			return false; // if a target point is close to object and is not reachable, then further calc has no sense
+    		}
+    		
     		angle_inD += sign*d_angle;	    	
 	    	
        		float angle_radian = angle_inD/RADIAN_TO_DEGREE_RATE;
@@ -286,7 +301,9 @@ void DriveComplex::CalcRoundPath()
         	//debug_midLeft_vec.push_back(vehicle_basis.p0);
         	path_center_vec.push_back(vehicle_basis.p);
             	angle_inD_vec.push_back(angle_inD);
-        }	
+        }
+        
+        return true;	
 }
 
 

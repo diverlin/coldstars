@@ -1,5 +1,0 @@
-#1
-ship.propetries structure is not correct after save/load
-
-#2
-pathCalc breaks if target point is close to vehicle. this is ok but not for UpdatePath()

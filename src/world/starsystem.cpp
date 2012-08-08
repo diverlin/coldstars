@@ -289,7 +289,7 @@ void StarSystem::updateStates()
 	bool enemy_is_here;
 	bool friendly_is_here; 
 	
-	Vehicle* _vehicle_evil = GetRandomVehicle(&RACES_EVIL_LIST);
+	Vehicle* _vehicle_evil = GetRandomVehicle(&RaceInformationCollector.RACES_EVIL_vec);
 	if (_vehicle_evil != NULL)
 	{
 		enemy_is_here = true;
@@ -299,7 +299,7 @@ void StarSystem::updateStates()
 		enemy_is_here = false;
 	}
 	
-	Vehicle* _vehicle_good = GetRandomVehicle(&RACES_GOOD_LIST);
+	Vehicle* _vehicle_good = GetRandomVehicle(&RaceInformationCollector.RACES_GOOD_vec);
 	if (_vehicle_good != NULL)
 	{
 		friendly_is_here = true;

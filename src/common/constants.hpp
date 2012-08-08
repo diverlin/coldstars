@@ -99,6 +99,15 @@ const int FAIL_ID = 1;
 const int SUCCESS_ID = 2;
 const int PERFORM_ID = 3;
 
+namespace AIMODEL
+{
+	enum TYPE_ID
+	{
+		CONQUEROR_ID,
+		RANGER_ID,
+		TRADER_ID
+	};
+}
 
 namespace MACROSCENARIO
 {
@@ -108,6 +117,7 @@ namespace MACROSCENARIO
 		STARSYSTEMLIBERATION_ID, 
 		SELFSAFETY_ID, // replace selfsafety to survival
 		
+		GOODSTRADING_ID,
 		ENUM_LAST
 	};
 	

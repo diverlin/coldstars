@@ -18,6 +18,12 @@
 
 #include "rand.hpp"
 
+int getRandIntFromVec(const std::vector<int>& list)
+{
+       	return list[getRandInt(0, list.size())];
+}
+        
+        
 float getRandFloat(float low, float high)
 {
 	float precision = 100000.0;

@@ -39,6 +39,21 @@ class Pair
 	~Pair() {};
 };
 
+struct VisionStatus
+{
+	VisionStatus();
+
+	bool ASTEROID;
+	bool CONTAINER;
+	bool MINERAL;
+
+	bool RANGER;
+	bool WARRIOR;
+	bool TRADER;  
+	bool PIRAT;
+	bool DIPLOMAT;
+};
+
 
 class Observation 
 {

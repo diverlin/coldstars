@@ -20,6 +20,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef AIMODELRANGER_H
 #define AIMODELRANGER_H
 
+#include "BaseAiModel.hpp"
+#include "../../pilots/Npc.hpp"
+
 class AiModelRanger : public BaseAiModel
 {
 	public:

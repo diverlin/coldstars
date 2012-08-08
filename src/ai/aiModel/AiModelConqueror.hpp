@@ -20,6 +20,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef AIMODELCONQUEROR_H
 #define AIMODELCONQUEROR_H
 
+#include "BaseAiModel.hpp"
+#include "../../pilots/Npc.hpp"
+
 class AiModelConqueror : public BaseAiModel
 {
 	public:

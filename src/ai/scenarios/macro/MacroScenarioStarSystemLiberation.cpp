@@ -16,6 +16,11 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "MacroScenarioStarSystemLiberation.hpp"
+#include "../../../common/constants.hpp"
+#include "../../../common/Logger.hpp"
+#include "../../../common/myStr.hpp"
+#include "../../../world/starsystem.hpp"
 
 MacroScenarioStarSystemLiberation::MacroScenarioStarSystemLiberation() 
 {
@@ -49,7 +54,7 @@ void MacroScenarioStarSystemLiberation::UpdateInStatic(Npc* npc) const
 		{
 			if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetScenarioTypeId() != MICROSCENARIO::DESTROY_ID)
 			{
-				Vehicle* target_vehicle = npc->GetStarSystem()->GetRandomVehicle(&RACES_EVIL_LIST);
+				Vehicle* target_vehicle = npc->GetStarSystem()->GetRandomVehicle(&RaceInformationCollector.RACES_EVIL_vec);
 				if (target_vehicle != NULL)
 				{
 					MicroTask* microtask = new MicroTask(target_vehicle, MICROSCENARIO::DESTROY_ID);

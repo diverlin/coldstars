@@ -75,6 +75,8 @@ struct VehicleKorpusData
 struct VehiclePropetries
 {    
 	/* this data is changed during game play, the propetries depends on many factors */
+	int free_space;
+	
 	int protection;
 	int radius;
 	int speed;  // depends on mass and drive
@@ -93,6 +95,7 @@ struct VehiclePropetries
 	
 
 	VehiclePropetries():
+	free_space(0),
 	protection(0),
         radius(0),
         speed(0),
@@ -139,6 +142,7 @@ class Vehicle : public BaseGameEntity
                 bool AddItemToCargoSlot(BaseItem*);
                 bool UnpackContainerItemToCargoSlot(Container*);
                 
+                int GetFreeSpace() const { return propetries.free_space; };
                 float GetVisionRadius() const { return propetries.radius; };
 
                 void BindOwnerNpc(Npc*);
@@ -162,7 +166,7 @@ class Vehicle : public BaseGameEntity
         	
         	const Rect& GetGuiRect() const { return kontur_rect; };
         	
-        	void PostCreateInit();
+        	bool HasSomeGoodsInCargo() const;
         	
         	AbilitiesStatus ableTo;
                 VehiclePropetries propetries;

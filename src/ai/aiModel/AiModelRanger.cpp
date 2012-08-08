@@ -16,9 +16,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "AiModelRanger.hpp"
+#include "../MacroTask.hpp"
+#include "../../common/constants.hpp"
+#include "../../world/starsystem.hpp"
 
 AiModelRanger::AiModelRanger() 
-{}
+{
+	type_id = AIMODEL::RANGER_ID;
+}
 
 AiModelRanger::~AiModelRanger() 
 {}
@@ -30,7 +36,7 @@ void AiModelRanger::UpdateInStatic(Npc* npc) const
         	StarSystem* starsystem = npc->GetClosestStarSystem(true);
         	if (starsystem != NULL)
         	{
-        	        MacroTask* macrotask = new MacroTask(starsystem, MACROSCENARIO::STARSYSTEMLIBERATION_ID);
+        	        MacroTask* macrotask = new MacroTask(starsystem, MACROSCENARIO::TYPE_ID::STARSYSTEMLIBERATION_ID);
         		npc->GetStateMachine()->SetCurrentMacroTask(macrotask);        			
         	}
         }            

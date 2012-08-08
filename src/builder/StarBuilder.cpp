@@ -61,7 +61,7 @@ void StarBuilder::CreateNewInternals()
     	star->SetPlanetData(star_data);
 	star->SetTextureOb(texOb);
 	star->SetLifeData(data_life);
-	star->SetMesh(g_SPHERE_MESH);	
+	star->SetMesh(MeshCollector.SPHERE_MESH);	
 	star->SetScale(getRandInt(ENTITY::STAR::SIZE_MIN_, ENTITY::STAR::SIZE_MAX_));        	
         
         star->CalcCollisionrRadius();

@@ -16,6 +16,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "NpcBuilder.hpp"
+#include "../pilots/Npc.hpp"
+
+#include "../ai/aiModel/AiModelCollector.hpp"
+#include "../ai/aiModel/AiModelConqueror.hpp"
+#include "../ai/aiModel/AiModelRanger.hpp"
+#include "../ai/aiModel/AiModelTrader.hpp"
 
 NpcBuilder& NpcBuilder::Instance()
 {
@@ -58,10 +65,10 @@ void NpcBuilder::CreateNewInternals(int race_id, int subtype_id)
    
         if (( race_id == RACE::R6_ID) or ( race_id == RACE::R7_ID) )
         {
-                npc->SetModelAi(AIMODEL_CONQUEROR);
+                npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::CONQUEROR_ID));
         }
         else
         {
-       		npc->SetModelAi(AIMODEL_RANGER);        
+                npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));       
         }
 }

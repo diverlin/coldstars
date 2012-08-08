@@ -20,6 +20,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef AIMODELTRADER_H
 #define AIMODELTRADER_H
 
+#include "BaseAiModel.hpp"
+#include "../../pilots/Npc.hpp"
+
 class AiModelTrader : public BaseAiModel
 {
 	public:

@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define BASEAIMODEL_H
 
 class Npc;
+#include <string>
 
 class BaseAiModel
 {
@@ -28,8 +29,13 @@ class BaseAiModel
 		BaseAiModel();
 		virtual ~BaseAiModel();
 		
+		int GetTypeId() const { return type_id; };
+		
 		virtual void UpdateInStatic(Npc*) const;
 		virtual std::string GetDescription(Npc*) const;
+		
+	protected:
+		int type_id;
 }; 
 
 

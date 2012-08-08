@@ -16,11 +16,29 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "AiModelCollector.hpp"
+#include "../../common/constants.hpp"
 
-BaseScenario::BaseScenario() 
+AiModelCollector& AiModelCollector::Instance()
 {
-	type_id = NONE_ID;
+	static AiModelCollector instance;
+	return instance;
 }
 
+AiModelCollector::~AiModelCollector()
+{}
 
-
+void AiModelCollector::RegisterAiModel(BaseAiModel* ai_model)
+{
+	aimodel_map.insert(std::make_pair(ai_model->GetTypeId(), ai_model));
+}
+  		
+BaseAiModel* AiModelCollector::GetAiModel(int type_id) const
+{
+	if (type_id != NONE_ID)
+	{
+		return (aimodel_map.find(type_id))->second;
+	}
+	
+	return NULL;
+}

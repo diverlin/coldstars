@@ -68,13 +68,13 @@ void StarSystemBuilder::CreateNewInternals()
 
         if (getRandBool())
         {
-                int npc_race_id = RACES_GOOD_LIST[getRandInt(0, RACES_GOOD_LIST.size())];
+                int npc_race_id = getRandIntFromVec(RaceInformationCollector.RACES_GOOD_vec);
                 int ship_num = getRandInt(ENTITY::STARSYSTEM::SHIP_INIT_MIN, ENTITY::STARSYSTEM::SHIP_INIT_MAX);
                 this->CreateShips(npc_race_id, ship_num);
         }
         else
         {
-                int npc_race_id = RACES_EVIL_LIST[getRandInt(0, RACES_EVIL_LIST.size())];
+                int npc_race_id = getRandIntFromVec(RaceInformationCollector.RACES_EVIL_vec);
                 int ship_num = getRandInt(ENTITY::STARSYSTEM::SHIP_INIT_MIN, ENTITY::STARSYSTEM::SHIP_INIT_MAX);
                 this->CreateShips(npc_race_id, ship_num);    
         }
@@ -150,7 +150,7 @@ void StarSystemBuilder::CreatePlanets(int planet_per_system)
                 SatelliteBuilder::Instance().Equip(satellite);           		// improove
                  
                 {       	
-                int npc_race_id = RACES_GOOD_LIST[getRandInt(0, RACES_GOOD_LIST.size())];
+                int npc_race_id = getRandIntFromVec(RaceInformationCollector.RACES_GOOD_vec);
                 int npc_subtype_id = CLASS::WARRIOR_ID;
                 
                 NpcBuilder::Instance().CreateNewNpc();
@@ -167,11 +167,11 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
 {       
     	for (int i=0; i<spacestation_per_system; i++)
     	{     
-    		int npc_race_id = RACES_GOOD_LIST[getRandInt(0, RACES_GOOD_LIST.size())];
+    		int npc_race_id = getRandIntFromVec(RaceInformationCollector.RACES_GOOD_vec);
                 int npc_subtype_id = CLASS::WARRIOR_ID;
 
-        	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[getRandInt(0, RACES_ALL_LIST.size())];
-        	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
+        	int ship_race_id = npc_race_id;         // RACES_ALL_vec[getRandInt(0, RACES_ALL_vec.size())];
+        	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
         	int ship_size_id = getRandInt(1, 9);
         	int weapons_num = 5;
         	
@@ -214,17 +214,17 @@ void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num)
     	{     
                 switch(npc_race_id)
                 {
-                        case RACE::R0_ID: { npc_subtype_id = RACE0_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE0_ALLOWED_SUBTYPE_LIST.size())];  break; }
-                        case RACE::R1_ID: { npc_subtype_id = RACE1_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE1_ALLOWED_SUBTYPE_LIST.size())];  break; }
-                        case RACE::R2_ID: { npc_subtype_id = RACE2_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE2_ALLOWED_SUBTYPE_LIST.size())];  break; }
-                        case RACE::R3_ID: { npc_subtype_id = RACE3_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE3_ALLOWED_SUBTYPE_LIST.size())];  break; }
-                        case RACE::R4_ID: { npc_subtype_id = RACE4_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE4_ALLOWED_SUBTYPE_LIST.size())];  break; }
-                        case RACE::R6_ID: { npc_subtype_id = RACE6_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE6_ALLOWED_SUBTYPE_LIST.size())];  break; }
-                        case RACE::R7_ID: { npc_subtype_id = RACE7_ALLOWED_SUBTYPE_LIST[getRandInt(0, RACE7_ALLOWED_SUBTYPE_LIST.size())];  break; }
+                        case RACE::R0_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector.RACE0_ALLOWED_SUBTYPE_vec);  break; }
+                        case RACE::R1_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector.RACE1_ALLOWED_SUBTYPE_vec);  break; }
+                        case RACE::R2_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector.RACE2_ALLOWED_SUBTYPE_vec);  break; }
+                        case RACE::R3_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector.RACE3_ALLOWED_SUBTYPE_vec);  break; }
+                        case RACE::R4_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector.RACE4_ALLOWED_SUBTYPE_vec);  break; }
+                        case RACE::R6_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector.RACE6_ALLOWED_SUBTYPE_vec);  break; }
+                        case RACE::R7_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector.RACE7_ALLOWED_SUBTYPE_vec);  break; }
                 }   
 
-        	int ship_race_id = npc_race_id;         // RACES_ALL_LIST[getRandInt(0, RACES_ALL_LIST.size())];
-        	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_LIST[getRandInt(0, SHIP_SUBTYPE_LIST.size())];
+        	int ship_race_id = npc_race_id;         // RACES_ALL_vec[getRandInt(0, RACES_ALL_vec.size())];
+        	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
         	int ship_size_id = getRandInt(1, 9);
         	int weapons_num = getRandInt(1, 5);
         	ShipBuilder::Instance().CreateNewShip();
