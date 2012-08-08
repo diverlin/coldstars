@@ -19,7 +19,8 @@
 
 #ifndef PLANET_H
 #define PLANET_H
-//#include "planetBase.hpp"
+
+#include "BasePlanet.hpp"
 //#include "../common/myVector.hpp"
 
 struct UnresolvedDataUniquePlanet

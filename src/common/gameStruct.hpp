@@ -19,7 +19,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef GAMESTRUCT_H
 #define GAMESTRUCT_H
 
+#include "../resources/objLoader.hpp"
 #include "../common/myVector.hpp"
+
+
+static struct
+{
+	ObjMeshInstance* SPHERE_MESH; 
+	ObjMeshInstance* DEFORMED_SPHERE_MESH;
+} MeshCollector;
+
+static struct
+{
+	std::vector<int> RACES_ALL_vec;
+	std::vector<int> RACES_GOOD_vec;
+	std::vector<int> RACES_EVIL_vec;
+
+	std::vector<int> RACE0_ALLOWED_SUBTYPE_vec;
+	std::vector<int> RACE1_ALLOWED_SUBTYPE_vec;
+	std::vector<int> RACE2_ALLOWED_SUBTYPE_vec;
+	std::vector<int> RACE3_ALLOWED_SUBTYPE_vec; 
+	std::vector<int> RACE4_ALLOWED_SUBTYPE_vec;
+	std::vector<int> RACE6_ALLOWED_SUBTYPE_vec;
+	std::vector<int> RACE7_ALLOWED_SUBTYPE_vec;
+	
+} RaceInformationCollector; 
+
+
 
 struct PlanetData
 {
@@ -30,22 +56,6 @@ struct PlanetData
 	int radius_B; 
 	float orbit_phi_inD;
 	float speed;
-};
-
-
-struct VisionStatus
-{
-	VisionStatus();
-
-	bool ASTEROID;
-	bool CONTAINER;
-	bool MINERAL;
-
-	bool RANGER;
-	bool WARRIOR;
-	bool TRADER;  
-	bool PIRAT;
-	bool DIPLOMAT;
 };
 
 

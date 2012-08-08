@@ -77,8 +77,11 @@ class DriveComplex
                 PathVisual visual_center_path;
                 //PathVisual visual_debug_midLeft_path;
 
+		//void SetTargetPos(const vec2f& target_pos) { this->target_pos = target_pos; };
+
+		void ClearPath();
 	        void CalcPath();                                       	
-                void CalcRoundPath();
+                bool CalcRoundPath();
                 void CalcDirectPath();
                 bool ValidateTarget() const;
 	

@@ -16,6 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "MacroScenarioStarSystemDefence.hpp"
 
 MacroScenarioStarSystemDefence::MacroScenarioStarSystemDefence() 
 {
@@ -47,7 +48,7 @@ void MacroScenarioStarSystemDefence::UpdateInStatic(Npc* npc) const
 	{
 		if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetScenarioTypeId() != MICROSCENARIO::DESTROY_ID)
 		{       	
-            		Vehicle* target_vehicle = npc->GetObservation()->GetClosestVehicle(&RACES_GOOD_LIST);
+            		Vehicle* target_vehicle = npc->GetObservation()->GetClosestVehicle(&RaceInformationCollector.RACES_GOOD_vec);
             		if (target_vehicle != NULL)
             		{
             			MicroTask* microtask = new MicroTask(target_vehicle, MICROSCENARIO::DESTROY_ID);

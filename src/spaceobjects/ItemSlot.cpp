@@ -174,7 +174,7 @@ void ItemSlot::DropItemToSpace(Vehicle* vehicle)
         
 bool ItemSlot::SwapItemWith(ItemSlot* _slot)
 {
-       	if ( (is_EQUIPED == false) and (_slot->GetEquipedStatus() == true) )
+       	if ( (is_EQUIPED == false) and (_slot->GetEquiped() == true) )
        	{      
        		if (InsertItem(_slot->GetItem()) == true) 
        		{
@@ -184,7 +184,7 @@ bool ItemSlot::SwapItemWith(ItemSlot* _slot)
        		}             
 	}
 	
-	if ( (is_EQUIPED == true) and (_slot->GetEquipedStatus() == false) )
+	if ( (is_EQUIPED == true) and (_slot->GetEquiped() == false) )
        	{ 
 		if (_slot->InsertItem(GetItem())     == true)
 		{ 
@@ -194,7 +194,7 @@ bool ItemSlot::SwapItemWith(ItemSlot* _slot)
 		}
 	}
 
-	if ( (is_EQUIPED == true) and (_slot->GetEquipedStatus() == true) )
+	if ( (is_EQUIPED == true) and (_slot->GetEquiped() == true) )
        	{          
        		if ( (item->GetTypeId() == TYPE::MODULE_ID) and (_slot->GetItem()->GetTypeId() == TYPE::EQUIPMENT_ID) )
        		{

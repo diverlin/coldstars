@@ -92,7 +92,7 @@ BlackHole* GetNewBlackHole()
                 
 	blackhole->SetLifeData(data_life);
 	blackhole->SetTextureOb(texOb);
-	blackhole->SetMesh(g_SPHERE_MESH);	
+	blackhole->SetMesh(MeshCollector.SPHERE_MESH);	
 	
 	blackhole->SetDeltaAngle(d_angle);
 	blackhole->SetScale(30);

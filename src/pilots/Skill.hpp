@@ -20,6 +20,8 @@
 #ifndef SKILL_H
 #define SKILL_H
 
+#include <boost/property_tree/ptree.hpp>
+
 class Skill
 { 
 	public:

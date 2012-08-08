@@ -17,24 +17,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MICROSCENARIODOCKING_H
-#define MICROSCENARIODOCKING_H
+#ifndef MACROSCENARIOGOODSTRADING_H
+#define MACROSCENARIOGOODSTRADING_H
 
-#include "../../../pilots/Npc.hpp"
+#include "../BaseScenario.hpp"
 
-class MicroScenarioDocking : public BaseScenario
+class MacroScenarioGoodsTrading : public BaseScenario
 {
 	public:
-		MicroScenarioDocking();
-		virtual ~MicroScenarioDocking();
+		MacroScenarioGoodsTrading();
+		virtual ~MacroScenarioGoodsTrading();
 		
-		virtual void Enter(Npc*) const;
-		virtual void UpdateInStatic(Npc*) const;
-		virtual void UpdateInDynamic(Npc*) const;	
-		virtual void Exit(Npc*) const;
-		
+		virtual void UpdateInStatic(Npc*) const;	
 		virtual std::string GetDescription(Npc*) const;
-};
+}; 
 
 #endif 
      

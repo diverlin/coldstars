@@ -16,6 +16,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "AiModelTrader.hpp"
+#include "../MacroTask.hpp"
+#include "../StateMachine.hpp"
 
 AiModelTrader::AiModelTrader() 
 {}
@@ -25,9 +28,9 @@ AiModelTrader::~AiModelTrader()
 
 void AiModelTrader::UpdateInStatic(Npc* npc) const
 {
-	if (npc->GetStateMachine()->GetCurrentMacroTask()->GetValid() == false)
+	if (npc->GetStateMachine()->GetMacroTaskManager()->GetScenario() == NULL)
         {
-        	npc->GetStateMachine()->SetCurrentMacroTask();        			
+        	//npc->GetStateMachine()->SetCurrentMacroTask();        			
         }            
 }
 

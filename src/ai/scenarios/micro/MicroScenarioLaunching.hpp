@@ -20,6 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MICROSCENARIOLAUNCHING_H
 #define MICROSCENARIOLAUNCHING_H
 
+#include "../../../pilots/Npc.hpp"
+
 class MicroScenarioLaunching : public BaseScenario
 {
 	public:

@@ -49,9 +49,9 @@ void loadGameData()
 
 void load3DModels()
 {    	
-g_SPHERE_MESH = new ObjMeshInstance("data/obj/sphere/planet.obj");
+	MeshCollector.SPHERE_MESH = new ObjMeshInstance("data/obj/sphere/planet.obj");
 
-g_DEFORMED_SPHERE_MESH = new ObjMeshInstance("data/obj/sphere_deformed/planet.obj");
+	MeshCollector.DEFORMED_SPHERE_MESH = new ObjMeshInstance("data/obj/sphere_deformed/planet.obj");
 //g_DEFORMED_SPHERE_MESH = new ObjMeshInstance("data/obj/ship/Shipyard_Scene.obj");
 //g_MODEL.import("data/obj/ship/Space.obj");
 //g_MODEL.normalize();
@@ -1122,13 +1122,13 @@ void loadImages()
 {
 	std::vector<int> arg;  
 	arg.push_back(RACE::R0_ID); arg.push_back(TECHLEVEL::L0_ID); 
-	TextureManager::Instance().Add( new TextureOb(TEXTURE::SCANER_EQUIPMENT_ID, "data/item/scaner/scaner_Race0_Tech0.png", true, &arg, 3, 1) );
+	TextureManager::Instance().Add( new TextureOb(TEXTURE::SCANER_EQUIPMENT_ID, "data/item/scaner/scaner_Race0_Tech0.png", true, &arg, 3, 1, 3) );
 }
 //####### TECH_LEVEL_1
 {
 	std::vector<int> arg;  
 	arg.push_back(RACE::R0_ID); arg.push_back(TECHLEVEL::L1_ID); 
-	TextureManager::Instance().Add( new TextureOb(TEXTURE::SCANER_EQUIPMENT_ID, "data/item/scaner/scaner_Race0_Tech1.png", true, &arg, 3, 1) );
+	TextureManager::Instance().Add( new TextureOb(TEXTURE::SCANER_EQUIPMENT_ID, "data/item/scaner/scaner_Race0_Tech1.png", true, &arg, 3, 1, 3) );
 }
 
 //############################ FREEZER_ITEM
@@ -1137,14 +1137,14 @@ void loadImages()
 {
 	std::vector<int> arg;  
 	arg.push_back(RACE::R0_ID); arg.push_back(TECHLEVEL::L0_ID); 
-	TextureManager::Instance().Add( new TextureOb(TEXTURE::RADAR_EQUIPMENT_ID, "data/item/radar/radar_Race0_Tech0.png", true, &arg, 3, 1) );
+	TextureManager::Instance().Add( new TextureOb(TEXTURE::RADAR_EQUIPMENT_ID, "data/item/radar/radar_Race0_Tech0.png", true, &arg, 3, 1, 3) );
 }
 
 //####### TECH_LEVEL_1
 {
 	std::vector<int> arg;  
 	arg.push_back(RACE::R0_ID); arg.push_back(TECHLEVEL::L1_ID); 
-	TextureManager::Instance().Add( new TextureOb(TEXTURE::RADAR_EQUIPMENT_ID, "data/item/radar/radar_Race0_Tech1.png", true, &arg, 3, 1) );
+	TextureManager::Instance().Add( new TextureOb(TEXTURE::RADAR_EQUIPMENT_ID, "data/item/radar/radar_Race0_Tech1.png", true, &arg, 3, 1, 3) );
 }
 
 

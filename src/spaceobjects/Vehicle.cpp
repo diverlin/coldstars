@@ -67,6 +67,22 @@ Vehicle::~Vehicle()
 	slot_total_vec.clear();
 } 
 
+bool Vehicle::HasSomeGoodsInCargo() const
+{
+	for(unsigned int i=0; i<slot_cargo_vec.size(); i++)
+	{
+		if (slot_cargo_vec[i]->GetEquiped() == true)
+		{
+			if (slot_cargo_vec[i]->GetItem()->GetTypeId() == ENTITY::GOODS_ID)
+			{
+				return true;
+			}
+		}
+	}	
+	
+	return false;
+}
+        	
 void Vehicle::AddItemSlot(ItemSlot* slot, const Rect& rect) 
 { 
 	assert(slot);
@@ -112,7 +128,7 @@ ItemSlot* Vehicle::GetEmptyCargoSlot()
 {
       	for (unsigned int i = 0; i < slot_cargo_vec.size(); i++)
       	{
-          	if (!slot_cargo_vec[i]->GetEquipedStatus())
+          	if (!slot_cargo_vec[i]->GetEquiped())
           	{
              		return slot_cargo_vec[i];
              	}
@@ -177,7 +193,7 @@ ItemSlot* Vehicle::GetCargoSlotWithGoods(int requested_goods_subtype_id)
 {
       	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
       	{
-          	if (slot_cargo_vec[i]->GetEquipedStatus() == true)
+          	if (slot_cargo_vec[i]->GetEquiped() == true)
           	{
           		if (slot_cargo_vec[i]->GetItem()->GetTypeId() == ENTITY::GOODS_ID)
           		{
@@ -361,7 +377,9 @@ void Vehicle::UpdateAllPropertiesAndAbilities()
     	// this function set actual ship propretries relying to all equipment placed in slots
     	// used when ship change items in slot
     	// !!! all this stuff can be called separately by item deterioration function if item becomes broken !!!
-    	UpdateDriveAbility();
+     	RecalculateMass();
+     
+    	UpdateDriveAbility(); 
     	UpdateRadarAbility();
     	UpdateJumpAbility();
     	UpdateEnergyAbility();  // make reurtn true, and add below if condition 
@@ -381,29 +399,29 @@ void Vehicle::UpdateFireAbility()
 
 void Vehicle::RecalculateMass()
 {
+     	// calculate mass and then actual ship speed depending on drive power and actual mass
+     	// used each time when ship picked up/bought or drop/sold something. 
+     	
      	mass = 0;   
-
     	for (unsigned int i=0; i<slot_total_vec.size(); i++)
     	{
-        	if (slot_total_vec[i]->GetEquipedStatus() == true)
+        	if (slot_total_vec[i]->GetEquiped() == true)
         	{
            		mass += slot_total_vec[i]->GetItem()->GetMass();  
            	}    
     	}
+    	
+    	propetries.free_space = data_korpus.space - mass;
 }
 
 
 void Vehicle::UpdateDriveAbility()
 {
-     	//// calculate mass and then actual ship speed depending on drive power and actual mass
-     	//// used each time when ship picked up/bought or drop/sold something.
-     	RecalculateMass();   	  
-
      	//// speed calculation ////
      	propetries.speed = 0;
      	ableTo.DRIVE = false;
 
-     	if (drive_complex->GetDriveSlot()->GetEquipedStatus() == true) 
+     	if (drive_complex->GetDriveSlot()->GetEquiped() == true) 
      	{
         	if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetCondition() > 0)  
         	{
@@ -425,7 +443,7 @@ void Vehicle::UpdateDriveAbility()
 
 void Vehicle::UpdateRadarAbility()
 {
-   	if (radar_slot->GetEquipedStatus() == true) 
+   	if (radar_slot->GetEquiped() == true) 
    	{
       		if (radar_slot->GetRadarEquipment()->GetCondition() > 0)  
       		{
@@ -452,9 +470,9 @@ void Vehicle::UpdateJumpAbility()
 	propetries.hyper = 0;
      	ableTo.HJUMP = false;
 
-     	if (drive_complex->GetDriveSlot()->GetEquipedStatus() == true)
+     	if (drive_complex->GetDriveSlot()->GetEquiped() == true)
         	if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetCondition() > 0)
-           		if (drive_complex->GetBakSlot()->GetEquipedStatus() == true)
+           		if (drive_complex->GetBakSlot()->GetEquiped() == true)
               			if (drive_complex->GetBakSlot()->GetBakEquipment()->GetCondition() > 0)
               			{
                  			if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetHyper() > drive_complex->GetBakSlot()->GetBakEquipment()->GetFuel())
@@ -472,7 +490,7 @@ void Vehicle::UpdateEnergyAbility()
      	propetries.energy = 0;
      	ableTo.ENERGIZE = false;
 
-     	if (energizer_slot->GetEquipedStatus() == true)
+     	if (energizer_slot->GetEquiped() == true)
      	{
         	if (energizer_slot->GetEnergizerEquipment()->GetCondition() > 0)
         	{
@@ -489,7 +507,7 @@ void Vehicle::UpdateProtectionAbility()
         propetries.protection = data_korpus.protection;
         ableTo.PROTECT = false;
 
-     	if (protection_complex->GetProtectorSlot()->GetEquipedStatus() == true)
+     	if (protection_complex->GetProtectorSlot()->GetEquiped() == true)
      	{
         	if (protection_complex->GetProtectorSlot()->GetProtectorEquipment()->GetCondition() > 0)
         	{
@@ -504,7 +522,7 @@ void Vehicle::UpdateRepairAbility()
      	propetries.repair = 0;
      	ableTo.REPAIR = false;
 
-     	if (droid_slot->GetEquipedStatus() == true)
+     	if (droid_slot->GetEquiped() == true)
      	{
         	if (droid_slot->GetDroidEquipment()->GetCondition() > 0)
         	{
@@ -536,7 +554,7 @@ void Vehicle::UpdateFreezeAbility()
      	propetries.freeze = 0;
      	ableTo.FREEZE = false;
 
-     	if (freezer_slot->GetEquipedStatus() == true)
+     	if (freezer_slot->GetEquiped() == true)
      	{
         	if (freezer_slot->GetFreezerEquipment()->GetCondition() > 0)
         	{
@@ -552,7 +570,7 @@ void Vehicle::UpdateGrabAbility()
      	ableTo.GRAB = false;
 
      	if (data_korpus.slot_grapple_num != 0)
-        	if (grapple_slot->GetEquipedStatus() == true)
+        	if (grapple_slot->GetEquiped() == true)
            		if (grapple_slot->GetGrappleEquipment()->GetCondition() > 0)
               			ableTo.GRAB = true;
 }
@@ -563,7 +581,7 @@ void Vehicle::UpdateScanAbility()
      	propetries.scan = 0;
      	ableTo.SCAN = false;
 
-     	if (scaner_slot->GetEquipedStatus() == true)
+     	if (scaner_slot->GetEquiped() == true)
      	{
         	if (scaner_slot->GetScanerEquipment()->GetCondition() > 0)
         	{
@@ -771,7 +789,7 @@ void Vehicle::DropRandomItemToSpace()
 	
 	for (unsigned int i = 0; i<slot_total_vec.size(); i++)
 	{
-		if (slot_total_vec[i]->GetEquipedStatus() == true)
+		if (slot_total_vec[i]->GetEquiped() == true)
 		{
 			_equiped_slot_vec.push_back(slot_total_vec[i]);
 		}

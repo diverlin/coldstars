@@ -70,7 +70,7 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
 
 void GuiManager::RenderScanVehicle(const MouseData& data_mouse, Vehicle* vehicle, bool show_skill) const
 {		
-	if (player->GetCursor().GetItemSlot()->GetEquipedStatus() == true)
+	if (player->GetCursor().GetItemSlot()->GetEquiped() == true)
 	{
        		gui_vehicle.RenderVehicle(data_mouse, vehicle, player->GetCursor().GetItemSlot()->GetItem()->GetFunctionalSlotSubTypeId());
 		player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetItemSlot()->GetRect());		
@@ -87,7 +87,7 @@ void GuiManager::RenderScanVehicle(const MouseData& data_mouse, Vehicle* vehicle
 		gui_skill.RenderFocusedButtonInfo(data_mouse);
 	}   					                 
 
-	if (player->GetCursor().GetItemSlot()->GetEquipedStatus() == false)
+	if (player->GetCursor().GetItemSlot()->GetEquiped() == false)
 	{
 		gui_vehicle.RenderFocusedItemInfo(data_mouse, vehicle);					
 		//gui_skill

@@ -35,7 +35,7 @@ TextureOb* WeaponComplex::GetItemTextureOb(int index) const
 	index--;
 	if (index < slot_weapon_vec.size())
 	{
-		if (slot_weapon_vec[index]->GetEquipedStatus() == true)
+		if (slot_weapon_vec[index]->GetEquiped() == true)
                 {
                      	return slot_weapon_vec[index]->GetItem()->GetTextureOb();   
                 }
@@ -48,7 +48,7 @@ bool WeaponComplex::AddItem(BaseItem* item)
 {
         for(unsigned int i = 0; i<slot_weapon_vec.size(); i++)
         {
-                if (slot_weapon_vec[i]->GetEquipedStatus() == false)
+                if (slot_weapon_vec[i]->GetEquiped() == false)
                 {
                      slot_weapon_vec[i]->InsertItem(item);
                      return true;   
@@ -192,7 +192,7 @@ void WeaponComplex::ValidateAllWeaponsTarget()
         {
                 if (slot_weapon_vec[i]->GetTurrel()->GetTarget() != NULL) 
                 {
-         		if (slot_weapon_vec[i]->GetEquipedStatus() == true) 
+         		if (slot_weapon_vec[i]->GetEquiped() == true) 
                 	{
              			slot_weapon_reloaded_vec[i]->GetTurrel()->CheckTarget();
                 	}
@@ -227,7 +227,7 @@ bool WeaponComplex::UpdateFireAbility()
      	
      	for (unsigned int i = 0; i < slot_weapon_vec.size(); i++)
      	{ 
-        	if (slot_weapon_vec[i]->GetEquipedStatus() == true)
+        	if (slot_weapon_vec[i]->GetEquiped() == true)
         	{
            		if (slot_weapon_vec[i]->GetItem()->GetCondition() > 0)
            		{

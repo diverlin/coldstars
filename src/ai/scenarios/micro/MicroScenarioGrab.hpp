@@ -20,6 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MICROSCENARIOGRAB_H
 #define MICROSCENARIOGRAB_H
 
+#include "../../../pilots/Npc.hpp"
+
 class MicroScenarioGrab : public BaseScenario
 {
 	public:

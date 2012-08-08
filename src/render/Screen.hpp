@@ -28,6 +28,8 @@ class Screen:private sf::NonCopyable
 		Fbo& GetFbo3() { return fbo3; }
 		BloomEffect& GetBloom() { return bloom; };	
 		
+		const sf::Clock& GetPreciseClock() const { return precise_clock; };
+		
 		void MovingBy(const vec2f&);
 
         	void Resize(int, int);   
@@ -43,6 +45,8 @@ class Screen:private sf::NonCopyable
       		int bpp;
       		bool vert_sync;
       		
+      		sf::Clock precise_clock;
+      			
       		sf::RenderWindow render_window;
       		sf::Font font;
       		sf::View view;

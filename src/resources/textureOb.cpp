@@ -17,6 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "../common/constants.hpp"
+#include "../render/Screen.hpp"
 
 TextureOb :: TextureOb()
 {}
@@ -191,7 +192,7 @@ int TextureOb :: updateAnimationFrame()
 {
 	if (is_animated)
 	{
-     		float elapsed_time = g_CLOCK.GetElapsedTime();
+		float elapsed_time = Screen::Instance().GetPreciseClock().GetElapsedTime();
      		if (elapsed_time - last_update_time > delay)
      		{
          		frame++;

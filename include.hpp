@@ -30,7 +30,7 @@ class Star;
 
 class StateMachine;
 class ScenarioBase;
-class BaseAiModel;
+
 
 class Player;
 class FBO;
@@ -198,9 +198,7 @@ class ScenarioCollector;
 #include "src/pilots/Skill.hpp"
 #include "src/pilots/Npc.hpp"           
 
-#include "src/ai/scenarios/BaseScenario.hpp" 
-
-#include "src/ai/scenarios/micro/MicroScenarioDestroy.hpp" 
+//#include "src/ai/scenarios/micro/MicroScenarioDestroy.hpp" 
 #include "src/ai/scenarios/micro/MicroScenarioGrab.hpp" 
 #include "src/ai/scenarios/micro/MicroScenarioJump.hpp" 
 #include "src/ai/scenarios/micro/MicroScenarioDocking.hpp"
@@ -215,15 +213,6 @@ class ScenarioCollector;
 
 #include "src/ai/StateMachine.hpp"
 #include "src/ai/ScenarioCollector.hpp"
-
-
-#include "src/ai/scenarios/macro/MacroScenarioSelfSafety.hpp"
-#include "src/ai/scenarios/macro/MacroScenarioStarSystemLiberation.hpp"
-#include "src/ai/scenarios/macro/MacroScenarioStarSystemDefence.hpp"
-
-#include "src/ai/aiModel/BaseAiModel.hpp"
-#include "src/ai/aiModel/AiModelRanger.hpp"
-#include "src/ai/aiModel/AiModelConqueror.hpp"
 
 //   
 #include "src/pilots/Observation.hpp" 
@@ -249,9 +238,6 @@ class ScenarioCollector;
 #include "src/world/galaxy.hpp"
 #include "src/gui/GuiMap.hpp"
 
-
-
-//#include "src/common/global.cpp"
 #include "src/render/Screen.hpp"
 
 
@@ -408,13 +394,6 @@ class ScenarioCollector;
 
 #include "src/pilots/Npc.cpp"
 //
-#include "src/ai/scenarios/BaseScenario.cpp" 
-
-#include "src/ai/scenarios/micro/MicroScenarioDestroy.cpp" 
-#include "src/ai/scenarios/micro/MicroScenarioGrab.cpp" 
-#include "src/ai/scenarios/micro/MicroScenarioJump.cpp" 
-#include "src/ai/scenarios/micro/MicroScenarioDocking.cpp"
-#include "src/ai/scenarios/micro/MicroScenarioLaunching.cpp"
 
 #include "src/ai/BaseTask.cpp"
 #include "src/ai/MacroTask.cpp"
@@ -424,13 +403,8 @@ class ScenarioCollector;
 #include "src/ai/StateMachine.cpp"
 #include "src/ai/ScenarioCollector.cpp"
 
-#include "src/ai/scenarios/macro/MacroScenarioSelfSafety.cpp"
-#include "src/ai/scenarios/macro/MacroScenarioStarSystemLiberation.cpp"
 #include "src/ai/scenarios/macro/MacroScenarioStarSystemDefence.cpp"
 
-#include "src/ai/aiModel/BaseAiModel.cpp"
-#include "src/ai/aiModel/AiModelRanger.cpp"
-#include "src/ai/aiModel/AiModelConqueror.cpp"
 
 #include "src/pilots/Observation.cpp" 
 

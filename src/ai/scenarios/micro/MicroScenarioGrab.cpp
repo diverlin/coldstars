@@ -16,6 +16,11 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "MicroScenarioGrab.hpp"
+#include "../../../common/constants.hpp"
+#include "../../../common/Logger.hpp"
+#include "../../../common/myStr.hpp"
+#include "../../../spaceobjects/Vehicle.hpp"
 
 MicroScenarioGrab::MicroScenarioGrab()
 {

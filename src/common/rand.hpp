@@ -19,6 +19,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef RAND_H
 #define RAND_H
 
+int getRandIntFromVec(const std::vector<int>&);
+
 float getRandFloat(float, float);
 int getRandInt(int, int);
 int getRandSign();

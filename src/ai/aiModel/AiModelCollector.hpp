@@ -17,24 +17,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MICROSCENARIODOCKING_H
-#define MICROSCENARIODOCKING_H
+#ifndef AIMODELCOLLECTOR_H
+#define AIMODELCOLLECTOR_H
 
-#include "../../../pilots/Npc.hpp"
+#include "BaseAiModel.hpp"
+#include <map>
 
-class MicroScenarioDocking : public BaseScenario
+class AiModelCollector
 {
 	public:
-		MicroScenarioDocking();
-		virtual ~MicroScenarioDocking();
+		static AiModelCollector& Instance();
+		~AiModelCollector();
 		
-		virtual void Enter(Npc*) const;
-		virtual void UpdateInStatic(Npc*) const;
-		virtual void UpdateInDynamic(Npc*) const;	
-		virtual void Exit(Npc*) const;
-		
-		virtual std::string GetDescription(Npc*) const;
-};
+		void RegisterAiModel(BaseAiModel*);
+		BaseAiModel* GetAiModel(int) const;
+                      	 		                
+        private:   
+        	std::map<int, BaseAiModel*> aimodel_map;
+        	             
+		AiModelCollector() {};
+		AiModelCollector(const AiModelCollector&) = delete;
+		AiModelCollector& operator=(const AiModelCollector&) = delete;
+}; 
+
 
 #endif 
-     
+    
+
+        
+
+

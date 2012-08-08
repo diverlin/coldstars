@@ -56,7 +56,7 @@ class BaseSlot : public Base
 		void SetTextureOb(TextureOb* textureOb)       	{ this->textureOb = textureOb; };
 		void SetOwner(Base* owner) { this->owner = owner; };
 		
-		bool GetEquipedStatus() const { return is_EQUIPED; };
+		bool GetEquiped() const { return is_EQUIPED; };
 		
                 Rect& GetRect() { return rect; };
 		Vehicle* GetOwnerVehicle() const { return (Vehicle*)owner; };

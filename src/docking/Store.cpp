@@ -58,9 +58,9 @@ bool Store::AddItem(BaseItem* item)
 
 ItemSlot* Store::GetEmptySlot()
 {
-        for (unsigned int i = 0; i < slot_total_vec.size(); i++)
+        for (unsigned int i=0; i<slot_total_vec.size(); i++)
         {
-                if (slot_total_vec[i]->GetEquipedStatus() == false)
+                if (slot_total_vec[i]->GetEquiped() == false)
                 {
                         return slot_total_vec[i];
         	}

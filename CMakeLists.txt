@@ -33,6 +33,24 @@ set (SOURCES
 	src/spaceobjects/Vehicle.cpp
 	src/gui/GuiShop.cpp
 
+	src/ai/aiModel/AiModelCollector.cpp
+
+	src/ai/aiModel/BaseAiModel.cpp
+	src/ai/aiModel/AiModelRanger.cpp
+	src/ai/aiModel/AiModelTrader.cpp
+	src/ai/aiModel/AiModelConqueror.cpp
+
+	src/ai/scenarios/macro/MacroScenarioSelfSafety.cpp
+	src/ai/scenarios/macro/MacroScenarioStarSystemLiberation.cpp
+
+	src/ai/scenarios/micro/MicroScenarioDestroy.cpp
+	src/ai/scenarios/micro/MicroScenarioGrab.cpp
+	src/ai/scenarios/micro/MicroScenarioJump.cpp
+	src/ai/scenarios/micro/MicroScenarioDocking.cpp
+	src/ai/scenarios/micro/MicroScenarioLaunching.cpp
+
+	src/ai/scenarios/macro/MacroScenarioGoodsTrading.cpp
+
   	main.cpp
 )
 
