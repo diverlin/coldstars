@@ -16,16 +16,10 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "MacroTask.hpp"
 
-
-MacroTask::MacroTask(BaseGameEntity* target, int scenario_type_id, int reward, int expiriance)
-{
-	this->target = target;
-	this->scenario_type_id = scenario_type_id;
-		
-	this->reward = reward;
-	this->expiriance = expiriance;
-}		
+MacroTask::MacroTask(int scenario_type_id, BaseGameEntity* target, int reward, int expiriance):BaseTask(scenario_type_id, target, reward, expiriance)
+{}		
 
 MacroTask::~MacroTask()
 {}

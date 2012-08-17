@@ -16,11 +16,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
+#include "MicroTaskManager.hpp"
+#include "scenarios/ScenarioCollector.hpp"
 
 MicroTaskManager::MicroTaskManager()
 {
-	microtask = new MicroTask(NULL, NONE_ID);
+	microtask = new MicroTask(NONE_ID);
 	scenario = NULL;
 }
 
@@ -38,6 +39,6 @@ void MicroTaskManager::SetMicroTask(MicroTask* microtask)
 void MicroTaskManager::DeleteMicroTaskAndReset()
 {
 	delete microtask;
-	microtask = new MicroTask(NULL, NONE_ID);;
+	microtask = new MicroTask(NONE_ID);
 	scenario  = NULL;
 }	

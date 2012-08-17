@@ -31,13 +31,15 @@ class Angar : public Room
                 void Ai() const;
                 
                 bool AddVehicle(Vehicle*);
-                //bool RemoveVehicle(Vehicle*);
+                bool RemoveVehicle(Vehicle*);
 
                 int GetFreeVehicleSlotTotalNum() const;
                 
                 int GetPriceFuel() const { return price_fuel; };
                 int GetPriceArmor() const { return price_armor; };
-                                
+                             
+                std::string GetDockVehicleStr() const;
+                                                
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();

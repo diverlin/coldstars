@@ -16,7 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
+#include "../config/config.hpp"
 
 GuiAngar::GuiAngar()
 {	
@@ -97,7 +97,7 @@ void GuiAngar::ButtonsAction() const
 	   			
 	   			case GUI::BUTTON::GETLAUNCH_ID:
 	   			{
-	   				MicroTask* microtask = new MicroTask(NULL, MICROSCENARIO::LAUNCHING_ID);
+	   				MicroTask* microtask = new MicroTask(MICROSCENARIO::LAUNCHING_ID);
        					player->GetNpc()->GetVehicle()->LaunchingEvent();
        					player->GetNpc()->GetStateMachine()->SetCurrentMicroTask(microtask);
        		   			return; 

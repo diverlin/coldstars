@@ -1,11 +1,15 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include <GL/glew.h>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+
 #include "../common/myVector.hpp"
 #include "../render/Fbo.hpp"
 #include "../render/Bloom.hpp"
+
+
 
 class Screen:private sf::NonCopyable
 {

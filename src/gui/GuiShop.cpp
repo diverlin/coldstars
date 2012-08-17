@@ -66,37 +66,37 @@ void GuiShop::UpdateLables(Shop* shop) const
 		{
 			case GUI::BUTTON::MINERALS_ID:
 			{
-	                	iterator->second->SetLabel("mineral:" + int2str(shop->GetMineralsAmmount()) + " price:" + int2str(shop->GetMineralsPrice()));	                
+	                	iterator->second->SetLabel("mineral:" + int2str(shop->GetMineralsAmount()) + " price:" + int2str(shop->GetMineralsPrice()));	                
 	                	break;
         		}
         	
 			case GUI::BUTTON::FOOD_ID:
 			{
-	                	iterator->second->SetLabel("food:" + int2str(shop->GetFoodAmmount()) + " price:" + int2str(shop->GetFoodPrice()));	                
+	                	iterator->second->SetLabel("food:" + int2str(shop->GetFoodAmount()) + " price:" + int2str(shop->GetFoodPrice()));	                
 	                	break;
         		}
 
 			case GUI::BUTTON::MEDICINE_ID:
 			{
-	                	iterator->second->SetLabel("medicine:" + int2str(shop->GetMedicineAmmount()) + " price:" + int2str(shop->GetMedicinePrice()));	                
+	                	iterator->second->SetLabel("medicine:" + int2str(shop->GetMedicineAmount()) + " price:" + int2str(shop->GetMedicinePrice()));	                
 	                	break;
         		}
 
 			case GUI::BUTTON::MILITARY_ID:
 			{
-	                	iterator->second->SetLabel("military:" + int2str(shop->GetMilitaryAmmount()) + " price:" + int2str(shop->GetMilitaryPrice()));	                
+	                	iterator->second->SetLabel("military:" + int2str(shop->GetMilitaryAmount()) + " price:" + int2str(shop->GetMilitaryPrice()));	                
 	                	break;
         		}
 
 			case GUI::BUTTON::DRUG_ID:
 			{
-	                	iterator->second->SetLabel("drug:" + int2str(shop->GetDrugAmmount()) + " price:" + int2str(shop->GetDrugPrice()));	                
+	                	iterator->second->SetLabel("drug:" + int2str(shop->GetDrugAmount()) + " price:" + int2str(shop->GetDrugPrice()));	                
 	                	break;
         		}
         		
         		case GUI::BUTTON::EXCLUSIVE_ID:
 			{
-	                	iterator->second->SetLabel("exclusive:" + int2str(shop->GetExclusiveAmmount()) + " price:" + int2str(shop->GetExclusivePrice()));	                
+	                	iterator->second->SetLabel("exclusive:" + int2str(shop->GetExclusiveAmount()) + " price:" + int2str(shop->GetExclusivePrice()));	                
 	                	break;
         		}
         	}
@@ -113,12 +113,12 @@ void GuiShop::ButtonsAction(Shop* shop, Slider& slider)
 		       	slider.SetSubTypeId(button->GetSubTypeId());
         		switch(button->GetSubTypeId())
         		{
-        			case GUI::BUTTON::MINERALS_ID: 	{ slider.Configure(shop->GetMineralsAmmount(), shop->GetMineralsPrice()); break; }
-        			case GUI::BUTTON::FOOD_ID: 		{ slider.Configure(shop->GetFoodAmmount(), shop->GetFoodPrice()); break; }
-        			case GUI::BUTTON::MEDICINE_ID: 	{ slider.Configure(shop->GetMedicineAmmount(), shop->GetMedicinePrice()); break; }
-        			case GUI::BUTTON::MILITARY_ID: 	{ slider.Configure(shop->GetMilitaryAmmount(), shop->GetMilitaryPrice()); break; }
-        			case GUI::BUTTON::DRUG_ID: 		{ slider.Configure(shop->GetDrugAmmount(), shop->GetDrugPrice()); break; }
-        			case GUI::BUTTON::EXCLUSIVE_ID: 	{ slider.Configure(shop->GetExclusiveAmmount(), shop->GetExclusivePrice()); break; }
+        			case GUI::BUTTON::MINERALS_ID: 	{ slider.Configure(shop->GetMineralsAmount(), shop->GetMineralsPrice()); break; }
+        			case GUI::BUTTON::FOOD_ID: 		{ slider.Configure(shop->GetFoodAmount(), shop->GetFoodPrice()); break; }
+        			case GUI::BUTTON::MEDICINE_ID: 	{ slider.Configure(shop->GetMedicineAmount(), shop->GetMedicinePrice()); break; }
+        			case GUI::BUTTON::MILITARY_ID: 	{ slider.Configure(shop->GetMilitaryAmount(), shop->GetMilitaryPrice()); break; }
+        			case GUI::BUTTON::DRUG_ID: 		{ slider.Configure(shop->GetDrugAmount(), shop->GetDrugPrice()); break; }
+        			case GUI::BUTTON::EXCLUSIVE_ID: 	{ slider.Configure(shop->GetExclusiveAmount(), shop->GetExclusivePrice()); break; }
            		}  		   	
 		}
 	}

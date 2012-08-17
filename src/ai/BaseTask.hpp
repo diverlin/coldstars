@@ -21,17 +21,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define BASETASK_H
 
 #include "../spaceobjects/BaseGameEntity.hpp"
+#include "../common/constants.hpp"
 
 class BaseTask
 {
 	public:
-		BaseTask();
-		~BaseTask();
+		BaseTask(int scenario_type_id, BaseGameEntity* target, int reward, int expiriance):
+		scenario_type_id(scenario_type_id),
+		target(target),
+		reward(reward),
+		expiriance(expiriance) {};
 		
+		~BaseTask() {};
+
+		void SetResult(int result)  { this->result = result; }
+				
 		int GetScenarioTypeId() const { return scenario_type_id; };
 		BaseGameEntity* GetTarget() const { return target; };
-		
-		void SetResult(int result)  { this->result = result; }
 				
 		int GetResult() const { return result; };
 				

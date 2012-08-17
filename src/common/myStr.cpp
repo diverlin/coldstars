@@ -18,26 +18,47 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "constants.hpp"
 
-
-
-std :: string returnRaceStringByRaceId(int id)  // replace by generator class
+std::string getAiModelString(int id)
 {
-     	if (id == RACE::R0_ID)
-        	return "RACE0";
-     	if (id == RACE::R1_ID)
-        	return "RACE1";
-     	if (id == RACE::R2_ID)
-        	return "RACE2";
-     	if (id == RACE::R3_ID)
-        	return "RACE3";
-     	if (id == RACE::R4_ID)
-        	return "RACE4";
-     	if (id == RACE::R6_ID)
-        	return "RACE6";
-     	if (id == RACE::R7_ID)
-        	return "RACE7";        
-     	else
-        	return "____";   
+	switch(id)
+	{
+		case AIMODEL::CONQUEROR_ID: 	{ return "CONQUEROR_ID"; break; }
+		case AIMODEL::RANGER_ID:	{ return "RANGER_ID"; break; }
+		case AIMODEL::TRADER_ID:	{ return "TRADER_ID"; break; }
+		
+		default:			{ return "___"; break; }		
+	}
+}
+
+std::string getClassString(int id)
+{
+	switch(id)
+	{
+		case CLASS::RANGER_ID: 	{ return "RANGER_ID"; break; }
+		case CLASS::WARRIOR_ID:	{ return "WARRIOR_ID"; break; }
+		case CLASS::PIRAT_ID:		{ return "PIRAT_ID"; break; }
+		case CLASS::TRADER_ID:		{ return "TRADER_ID"; break; }
+		case CLASS::DIPLOMAT_ID:	{ return "DIPLOMAT_ID"; break; }
+		
+		default:			{ return "___"; break; }		
+	}
+}
+
+std::string getRaceString(int race_id) 
+{
+	switch(race_id)
+	{
+		case RACE::R0_ID: 	{ return "RACE0"; break; }
+		case RACE::R1_ID:	{ return "RACE1"; break; }
+		case RACE::R2_ID:	{ return "RACE2"; break; }
+		case RACE::R3_ID:	{ return "RACE3"; break; }
+		case RACE::R4_ID:	{ return "RACE4"; break; }	
+
+		case RACE::R6_ID:	{ return "RACE6"; break; }
+		case RACE::R7_ID:	{ return "RACE7"; break; }	
+		
+		default:		{ return "___"; break; }
+	}
 }
 
 

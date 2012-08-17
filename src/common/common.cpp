@@ -15,8 +15,8 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-//#include "constants.hpp"
 
+#include "constants.hpp"
 
 //size 0...9
 int returnObjectSize(int w, int h)
@@ -97,4 +97,16 @@ void get_dX_dY_angleInD_ToPoint(float x1, float y1, float x2, float y2, float ve
     	(*pTo_angle_inD) = atan2(ly, lx) * RADIAN_TO_DEGREE_RATE;
 }
 
+template <typename T>
+T getMin(T val1, T val2)
+{
+	if (val1<val2) 	return val1;
+	else		return val2;
+}
 
+template <typename T>
+T getMin(T val1, T val2, T val3)
+{
+	int min2 = getMin(val1, val2);
+	return getMin(min2, val3);
+}

@@ -36,7 +36,7 @@ void MicroScenarioGrab::Enter(Npc* npc) const
 	printf("npc_id = %i, ENTER MicroScenarioGrab item id = %i\n", npc->GetId(), npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetId()); 
 }
 
-void MicroScenarioGrab::UpdateInStatic(Npc* npc) const
+void MicroScenarioGrab::UpdateInStaticInSpace(Npc* npc) const
 {
               
         //for (unsigned int i = 0; i < npc->GetObservation()->visible_MINERAL_vec.size(); i++)
@@ -55,7 +55,7 @@ void MicroScenarioGrab::UpdateInStatic(Npc* npc) const
 
 }
 
-void MicroScenarioGrab::UpdateInDynamic(Npc* npc) const
+void MicroScenarioGrab::UpdateInDynamicInSpace(Npc* npc) const
 {
         /*
 	GrappleEquipment* grapple_equipment = npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment();

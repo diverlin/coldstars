@@ -51,14 +51,14 @@ void MicroScenarioDestroy::Enter(Npc* npc) const
 	Logger::Instance().Log("npc_id=" + int2str(npc->GetId()) + ", enter MicroScenarioDestroy");
 }
 
-void MicroScenarioDestroy::UpdateInStatic(Npc* npc) const
+void MicroScenarioDestroy::UpdateInStaticInSpace(Npc* npc) const
 {
 	npc->GetVehicle()->GetWeaponComplex()->ActivateAllWeapons();
 	npc->GetVehicle()->GetWeaponComplex()->SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget());
         npc->GetVehicle()->GetDriveComplex()->SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget(), NAVIGATOR_ACTION::KEEP_MIDDLE_ID); 
 }
 
-void MicroScenarioDestroy::UpdateInDynamic(Npc* npc) const
+void MicroScenarioDestroy::UpdateInDynamicInSpace(Npc* npc) const
 {}
 
 void MicroScenarioDestroy::Exit(Npc* npc) const

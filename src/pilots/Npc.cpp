@@ -35,8 +35,7 @@ Npc::Npc(int id)
     	vehicle_to_scan = NULL;
     	
     	failback_starsystem = NULL;
-    	    		
-	skill 		= new Skill();          		
+ 		
         observation 	= new Observation(this);
         state_machine 	= new StateMachine(this);   
         
@@ -45,8 +44,7 @@ Npc::Npc(int id)
     
 /* virtual */
 Npc :: ~Npc() 
-{
-        delete skill;      
+{ 
         delete observation;
         delete state_machine;        
 }  
@@ -63,6 +61,16 @@ void Npc::MindInKosmoport()
 	
 	// if all things are DONE
 	//((Planet*)vehicle->GetDriveComplex()->GetTarget())->GetLand()->AddToLaunchingQueue(this); // improove by adding spacestation
+	if (upper_control == false)
+	{
+        	//if (ai_model)
+        	//{
+		//	ai_model->UpdateInStatic(this);
+		//}
+
+       		state_machine->UpdateInStaticInDock();      
+       	}
+	
 }
 
 void Npc::MindInSpace()
@@ -90,7 +98,7 @@ void Npc::MindInSpace()
                 	AsteroidScenario();
 		}             
 
-       		state_machine->UpdateInStatic();                 
+       		state_machine->UpdateInStaticInSpace();                 
         }
 
         vehicle->GetDriveComplex()->UpdatePath();
@@ -100,7 +108,7 @@ void Npc::UpdateInSpace(int time, bool show_effect)
 {
         if (time > 0)
         {
-       		state_machine->UpdateInDynamic();
+       		state_machine->UpdateInDynamicInSpace();
        	}
 }     	
 
@@ -209,10 +217,12 @@ void Npc::UpdateInfo()
 
     	info.addTitleStr("NPC");
     	info.addNameStr("id:");           info.addValueStr( int2str(data_id.id)  );
-    	info.addNameStr("race:");   	  info.addValueStr( returnRaceStringByRaceId(race_id) ); 
+    	info.addNameStr("race:");   	  info.addValueStr( getRaceString(race_id) ); 
+    	info.addNameStr("class:");   	  info.addValueStr( getClassString(data_id.subtype_id) );  
+    	info.addNameStr("model_ai:");     info.addValueStr( getAiModelString(ai_model->GetTypeId()) );  
     	info.addNameStr("credits:");   	  info.addValueStr( int2str(credits) );	
-    	info.addNameStr("expirience:");   info.addValueStr( int2str(skill->GetExpirience()) + " / " + int2str(skill->GetExpirienceNextLevel()) );	
-    	info.addNameStr("availiable points:");   info.addValueStr( int2str(skill->GetAvailiablePoints()) );	
+    	info.addNameStr("expirience:");   info.addValueStr( int2str(skill.GetExpirience()) + " / " + int2str(skill.GetExpirienceNextLevel()) );	
+    	info.addNameStr("availiable points:");   info.addValueStr( int2str(skill.GetAvailiablePoints()) );	
     	    	
 	if (vehicle->ableTo.GRAB == true)
 	{
@@ -230,7 +240,7 @@ void Npc::UpdateInfo()
     	
     	if (state_machine->GetMicroTaskManager()->GetScenario() != NULL)
     	{ 	
-    	info.addNameStr("micro_task:");   	info.addValueStr( state_machine->GetMicroTaskManager()->GetScenario()->GetDescription(this)  ); 
+    	info.addNameStr("micro_task:");   	info.addValueStr( state_machine->GetMicroTaskManager()->GetScenario()->GetDescription(this) ); 
     	}
 }
 
@@ -240,6 +250,23 @@ void Npc::RenderInfo(const vec2f& center)
      	drawInfoIn2Column(&info.title_list, &info.value_list, center.x, center.y);
 }
                    
+  
+bool Npc::BuyProfitGoods()
+{
+	Shop* shop = ((Kosmoport*)vehicle->GetLand())->GetShop();
+	int subtype_id = getRandInt(ENTITY::MINERALS_ID, ENTITY::EXCLUSIVE_ID);
+
+	// hard coded logic
+	int amount_to_hold  	= 0.8*vehicle->GetFreeSpace();
+	int amount_to_buy 	= GetCredits()/shop->GetPrice(subtype_id);
+	int amount_available 	= shop->GetAmount(subtype_id); 
+	
+	int amount = getMin(amount_to_hold, amount_to_buy, amount_available);
+	if (amount != 0)		
+	{
+		((Kosmoport*)vehicle->GetLand())->GetShop()->SellGoods(this, subtype_id, amount); 
+	}
+}
    
 void Npc::SaveData(boost::property_tree::ptree& save_ptree) const
 {
@@ -265,7 +292,7 @@ void Npc::SaveDataUniqueNpc(boost::property_tree::ptree& save_ptree, const std::
 	save_ptree.put(root+"is_alive", is_alive);
 	save_ptree.put(root+"race_id", race_id);
         save_ptree.put(root+"unresolved.vehicle_id", vehicle->GetId());
-	skill->SaveData(save_ptree, root);
+	skill.SaveData(save_ptree, root);
 }
 
 void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
@@ -274,12 +301,12 @@ void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
 	race_id  = load_ptree.get<int>("race_id");
 	data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresolved.vehicle_id");
 
-	skill->LoadData(load_ptree.get_child("skill"));
+	skill.LoadData(load_ptree.get_child("skill"));
 }
 
 void Npc::ResolveDataUniqueNpc()
 {
         ((Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_npc.vehicle_id))->BindOwnerNpc(this);
 
-	skill->ResolveData();
+	skill.ResolveData();
 }		

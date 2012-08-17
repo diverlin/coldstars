@@ -16,11 +16,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
+#include "MacroTaskManager.hpp"
+#include "scenarios/ScenarioCollector.hpp"
 
 MacroTaskManager::MacroTaskManager()
 {
-	macrotask = new MacroTask(NULL, NONE_ID);
+	macrotask = new MacroTask(NONE_ID);
 	scenario  = NULL;
 }
 
@@ -38,7 +39,7 @@ void MacroTaskManager::SetMacroTask(MacroTask* macrotask)
 void MacroTaskManager::DeleteMacroTaskAndReset()
 {
 	delete macrotask;
-	macrotask = new MacroTask(NULL, NONE_ID);;
+	macrotask = new MacroTask(NONE_ID);
 	scenario  = NULL;
 }	
 

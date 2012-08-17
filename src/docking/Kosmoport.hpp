@@ -44,10 +44,12 @@ class Kosmoport : public BaseLand
                 virtual bool GetPermissionToLand() const;
                                 
                 virtual bool Add(Vehicle*);
-                //virtual bool Remove(Vehicle*);
+                virtual bool Remove(Vehicle*);
                 
-                virtual void Ai();
+                virtual void UpdateInSpaceInStatic();
                 
+                virtual std::string GetDockVehicleStr() const;
+                                
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();

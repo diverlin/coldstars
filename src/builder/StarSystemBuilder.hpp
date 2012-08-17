@@ -43,7 +43,7 @@ class StarSystemBuilder
         	void CreateStar();
         	void CreatePlanets(int);
         	void CreateSpaceStations(int);
-        	void CreateShips(int, int);   
+        	void CreateShips(int, int, int requestedclass = NONE_ID);   
 }; 
 
 

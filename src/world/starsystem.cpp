@@ -510,8 +510,8 @@ void StarSystem::UpdateEntities_s(int time, bool show_effect)
       
 void StarSystem::MindEntitiesInStatic_s()
 {
-     	for (unsigned int i = 0; i < VEHICLE_vec.size(); i++) 	{ if (VEHICLE_vec[i]->GetOwnerNpc() != NULL) VEHICLE_vec[i]->GetOwnerNpc()->MindInSpace(); }
-    	for (unsigned int i = 0; i < PLANET_vec.size(); i++)     	{ /*PLANET_vec[i]->UpdateInSpaceInStatic();*/ }
+     	for (unsigned int i=0; i<VEHICLE_vec.size(); i++) 		{ if (VEHICLE_vec[i]->GetOwnerNpc() != NULL) VEHICLE_vec[i]->GetOwnerNpc()->MindInSpace(); }
+    	for (unsigned int i=0; i<PLANET_vec.size(); i++)     		{ PLANET_vec[i]->UpdateInSpaceInStatic(); }
 }      
 
 void StarSystem::FindRenderVisibleEntities_c(Player* player)

@@ -32,11 +32,12 @@ class BaseScenario
 		
 		int GetTypeId() const { return type_id; };
 		
-		virtual bool Validate(Npc*) const { return true; };
-		
 		virtual void Enter(Npc*) const {};
-		virtual void UpdateInStatic(Npc*) const {};	
-		virtual void UpdateInDynamic(Npc*) const {};	
+		virtual bool Validate(Npc*) const { return true; };
+		virtual void UpdateInStaticInSpace(Npc*) const {};	
+		virtual void UpdateInStaticInDock(Npc*) const {};	
+		virtual void UpdateInDynamicInSpace(Npc*) const {};	
+		virtual void UpdateInDynamicInDock(Npc*) const {};	
 		virtual void Exit(Npc*) const {};
 		
 		virtual std::string GetDescription(Npc*) const { return "_"; };

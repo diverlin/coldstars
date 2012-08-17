@@ -30,43 +30,71 @@ MacroScenarioGoodsTrading::MacroScenarioGoodsTrading()
 MacroScenarioGoodsTrading::~MacroScenarioGoodsTrading() 
 {}
 
-void MacroScenarioGoodsTrading::UpdateInStatic(Npc* npc) const
+bool MacroScenarioGoodsTrading::IsAbleToBuyGoods(Npc* npc) const
 {
-	if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::SPACE_ID)
+	if (npc->GetVehicle()->GetFreeSpace() > 10)
 	{
-		if (npc->GetVehicle()->GetFreeSpace() > 10)
+		if (npc->GetCredits() > 100)
 		{
-			if (npc->GetCredits() > 100)
+			return true;
+		}
+	}
+	
+	return false;
+}
+		
+void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
+{
+	if (npc->GetVehicle()->HasSomeGoodsInCargo() == false)
+	{
+		if (IsAbleToBuyGoods(npc) == true)
+		{
+			if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetScenarioTypeId() != MICROSCENARIO::DOCKING_ID)
 			{
 				Planet* planet = npc->GetPlanetForDocking(); // find proper planet!
-				MicroTask* microtask = new MicroTask(planet, MICROSCENARIO::DOCKING_ID);
+				MicroTask* microtask = new MicroTask(MICROSCENARIO::DOCKING_ID, planet);
 				npc->GetStateMachine()->SetCurrentMicroTask(microtask);
 				
 				return;
 			}
-			else
+		}
+
+		if (IsAbleToBuyGoods(npc) == false)
+		{
+	
+			//if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetScenarioTypeId() != MICROSCENARIO::MINERAL_HARVEST) 
 			{
 				// mineral hunting micro scenario
 				
 				return;
 			}
 		}
-		else
-		{
-			if (npc->GetVehicle()->HasSomeGoodsInCargo() == true)
-			{
-				Planet* planet = npc->GetPlanetForDocking(); // find proper planet
-				MicroTask* microtask = new MicroTask(planet, MICROSCENARIO::DOCKING_ID);
-				npc->GetStateMachine()->SetCurrentMicroTask(microtask);
-				
-				return;
-			}
-		}
-			
-		
 	}
+	else
+	{
+		if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetScenarioTypeId() != MICROSCENARIO::DOCKING_ID)
+		{
+			Planet* planet = npc->GetPlanetForDocking(); // find proper planet
+			MicroTask* microtask = new MicroTask(MICROSCENARIO::DOCKING_ID, planet);
+			npc->GetStateMachine()->SetCurrentMicroTask(microtask);
+			
+			return;
+		}
+	}
+
 }
 
+
+void MacroScenarioGoodsTrading::UpdateInStaticInDock(Npc* npc) const
+{
+	if (IsAbleToBuyGoods(npc) == true)
+	{
+		npc->BuyProfitGoods();
+	}
+
+	MicroTask* microtask = new MicroTask(MICROSCENARIO::LAUNCHING_ID);
+	npc->GetStateMachine()->SetCurrentMicroTask(microtask);		
+}
 
 std::string MacroScenarioGoodsTrading::GetDescription(Npc* npc) const
 {

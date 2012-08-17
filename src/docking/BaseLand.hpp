@@ -40,9 +40,11 @@ class BaseLand : public Base
 		virtual bool GetPermissionToLand() const = 0;
 		                
                 virtual bool Add(Vehicle*) = 0;
-                //virtual bool Remove(Vehicle*) = 0;
+                virtual bool Remove(Vehicle*) = 0;
                 
-                virtual void Ai() = 0;  
+                virtual void UpdateInSpaceInStatic() = 0;  
+                
+                virtual std::string GetDockVehicleStr() const = 0;
 		  
         protected:
                 Base* owner;

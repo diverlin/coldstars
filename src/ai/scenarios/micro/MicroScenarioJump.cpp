@@ -39,12 +39,12 @@ void MicroScenarioJump::Enter(Npc* npc) const
 	printf("npc_id = %i, is GOING to MicroScenarioJump from ss_id = %i to ss_id = %i\n", npc->GetId(), npc->GetStarSystem()->GetId(), npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetId());
 }
 
-void MicroScenarioJump::UpdateInStatic(Npc* _npc) const
+void MicroScenarioJump::UpdateInStaticInSpace(Npc* _npc) const
 {
 	// check if still able to jump
 }
 
-void MicroScenarioJump::UpdateInDynamic(Npc* npc) const
+void MicroScenarioJump::UpdateInDynamicInSpace(Npc* npc) const
 {
      	if (npc->GetVehicle()->GetDriveComplex()->CheckTargetEchievement() == true)
      	{

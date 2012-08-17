@@ -20,6 +20,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MACROSCENARIOSTARSYSTEMDEFENCE_H
 #define MACROSCENARIOSTARSYSTEMDEFENCE_H
 
+#include "../BaseScenario.hpp"
+#include "../../../pilots/Npc.hpp"
+
 class MacroScenarioStarSystemDefence : public BaseScenario
 {
 	public:

@@ -89,7 +89,7 @@ GuiSkill::GuiSkill()
 GuiSkill::~GuiSkill()
 {}
 
-void GuiSkill::ButtonsAction(Skill* skill) const
+void GuiSkill::ButtonsAction(Skill& skill) const
 {
 	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{
@@ -98,30 +98,30 @@ void GuiSkill::ButtonsAction(Skill* skill) const
 		{
         		switch(button->GetSubTypeId())
         		{
-        			case GUI::BUTTON::INCREMENT_ATTACK_ID:   { skill->IncrementAttack(); break; }
-        			case GUI::BUTTON::DECREMENT_ATTACK_ID:   { skill->DecrementAttack(); break; }
+        			case GUI::BUTTON::INCREMENT_ATTACK_ID:   { skill.IncrementAttack(); break; }
+        			case GUI::BUTTON::DECREMENT_ATTACK_ID:   { skill.DecrementAttack(); break; }
            		   	      	
-        			case GUI::BUTTON::INCREMENT_DEFENCE_ID:  { skill->IncrementDefence(); break; }
-        			case GUI::BUTTON::DECREMENT_DEFENCE_ID:  { skill->DecrementDefence(); break; }
+        			case GUI::BUTTON::INCREMENT_DEFENCE_ID:  { skill.IncrementDefence(); break; }
+        			case GUI::BUTTON::DECREMENT_DEFENCE_ID:  { skill.DecrementDefence(); break; }
           		   	      	
-        			case GUI::BUTTON::INCREMENT_LEADER_ID:   { skill->IncrementLeader(); break; }
-        			case GUI::BUTTON::DECREMENT_LEADER_ID:   { skill->DecrementLeader(); break; }
+        			case GUI::BUTTON::INCREMENT_LEADER_ID:   { skill.IncrementLeader(); break; }
+        			case GUI::BUTTON::DECREMENT_LEADER_ID:   { skill.DecrementLeader(); break; }
            		   	      	
-        			case GUI::BUTTON::INCREMENT_TRADER_ID:   { skill->IncrementTrader(); break; }
-        			case GUI::BUTTON::DECREMENT_TRADER_ID:   { skill->DecrementTrader(); break; }
+        			case GUI::BUTTON::INCREMENT_TRADER_ID:   { skill.IncrementTrader(); break; }
+        			case GUI::BUTTON::DECREMENT_TRADER_ID:   { skill.DecrementTrader(); break; }
            		   	      	
-        			case GUI::BUTTON::INCREMENT_TECHNIC_ID:  { skill->IncrementTechnic(); break; }
-        			case GUI::BUTTON::DECREMENT_TECHNIC_ID:  { skill->DecrementTechnic(); break; }
+        			case GUI::BUTTON::INCREMENT_TECHNIC_ID:  { skill.IncrementTechnic(); break; }
+        			case GUI::BUTTON::DECREMENT_TECHNIC_ID:  { skill.DecrementTechnic(); break; }
            		   	      	
-        			case GUI::BUTTON::INCREMENT_DIPLOMAT_ID: { skill->IncrementDiplomat(); break; }
-        			case GUI::BUTTON::DECREMENT_DIPLOMAT_ID: { skill->DecrementDiplomat(); break; }        
+        			case GUI::BUTTON::INCREMENT_DIPLOMAT_ID: { skill.IncrementDiplomat(); break; }
+        			case GUI::BUTTON::DECREMENT_DIPLOMAT_ID: { skill.DecrementDiplomat(); break; }        
            		}  		   	
 		}
 	}
 }
 
 
-void GuiSkill::RenderSkills(Skill* skill) const
+void GuiSkill::RenderSkills(const Skill& skill) const
 {
 	glPushMatrix();
 	{
@@ -141,7 +141,7 @@ void GuiSkill::RenderSkills(Skill* skill) const
          		      				      button->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		      				      button_w, button_h);
 
-     						if (i<skill->GetAttack()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+     						if (i<skill.GetAttack()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
      						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
      					}
  			
@@ -155,7 +155,7 @@ void GuiSkill::RenderSkills(Skill* skill) const
          					Rect tmp_rect(button->GetRect().GetCenter().x - button_w/2, 
          		      				      button->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		      				      button_w, button_h);
-         					if (i<skill->GetDefence()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+         					if (i<skill.GetDefence()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
      						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
      					}
 				
@@ -169,7 +169,7 @@ void GuiSkill::RenderSkills(Skill* skill) const
          					Rect tmp_rect(button->GetRect().GetCenter().x - button_w/2, 
          		      				      button->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		      				      button_w, button_h);
-         					if (i<skill->GetLeader()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+         					if (i<skill.GetLeader()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
      						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
      					}
 				
@@ -183,7 +183,7 @@ void GuiSkill::RenderSkills(Skill* skill) const
          					Rect tmp_rect(button->GetRect().GetCenter().x - button_w/2, 
          		     				      button->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		     				      button_w, button_h);
-         					if (i<skill->GetTrader()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+         					if (i<skill.GetTrader()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
      						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
     					}
 				
@@ -197,7 +197,7 @@ void GuiSkill::RenderSkills(Skill* skill) const
          					Rect tmp_rect(button->GetRect().GetCenter().x - button_w/2, 
          		      				      button->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		      				      button_w, button_h);
-         					if (i<skill->GetTechnic()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+         					if (i<skill.GetTechnic()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
      						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
      					}     
 	   				break;
@@ -210,7 +210,7 @@ void GuiSkill::RenderSkills(Skill* skill) const
          					Rect tmp_rect(button->GetRect().GetCenter().x - button_w/2, 
          		      				      button->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		     				      button_w, button_h);
-         					if (i<skill->GetDiplomat()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+         					if (i<skill.GetDiplomat()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
      						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
      					}
 	   				break;

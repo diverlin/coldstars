@@ -28,8 +28,8 @@ class GuiSkill : public BaseGui
       		GuiSkill();
       		~GuiSkill();
   				
-     		void ButtonsAction(Skill*) const;
-      		void RenderSkills(Skill*) const;
+     		void ButtonsAction(Skill&) const;
+      		void RenderSkills(const Skill&) const;
 
       	private:     		
 		TextureOb* textureOb_skill;
