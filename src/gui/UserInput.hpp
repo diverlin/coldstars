@@ -20,6 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef USERINPUT_H
 #define USERINPUT_H
 
+#include <SFML/Window.hpp>
+
 class UserInput
 {
     	public:

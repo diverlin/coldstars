@@ -27,14 +27,14 @@ class NatureLand : public BaseLand
                 virtual ~NatureLand();
 
                 virtual bool Add(Vehicle*);
-                virtual bool Add(Npc*);
                 virtual bool Remove(Vehicle*);
-                virtual bool Remove(Npc*);
                 
                 virtual bool GetPermissionToLand() const;
                                 
-                virtual void Ai();      
+                virtual void UpdateInSpaceInStatic();      
                 
+                virtual std::string GetDockVehicleStr() const { return "not_implemented yet"; };
+                                
                 void SaveData(boost::property_tree::ptree&) const;
     		void LoadData(const boost::property_tree::ptree&);
     		void ResolveData(); 

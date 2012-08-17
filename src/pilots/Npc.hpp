@@ -47,7 +47,7 @@ class Npc : public Base
 		int GetRaceId()				const { return race_id; };
 		StarSystem* GetFailBackStarSystem() 	const { return failback_starsystem; };
 		Vehicle* GetVehicle()           	const { return vehicle; };
-		Skill* GetSkill() 	        	const { return skill; };
+		Skill& GetSkill() 			       { return skill; };
 		Vehicle* GetScanTarget()        	const { return vehicle_to_scan; };	
 		Observation* GetObservation()   	const { return observation; };
 		unsigned long int GetCredits()  	const { return credits; };   
@@ -78,7 +78,8 @@ class Npc : public Base
 
 		void RenderInfo(const vec2f&);
 		                   
-                bool BuyArmorAsMuchAsPossible();
+                //bool BuyArmorAsMuchAsPossible();
+                bool BuyProfitGoods();
                 
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
@@ -94,7 +95,7 @@ class Npc : public Base
    	     	     		     		
    	     	Vehicle* vehicle;
    	     	
-   	     	Skill* skill; 
+   	     	Skill skill; 
 
 
      		BaseAiModel* ai_model;

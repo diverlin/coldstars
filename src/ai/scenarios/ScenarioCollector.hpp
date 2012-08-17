@@ -20,6 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef SCENARIOCOLLECTOR_H
 #define SCENARIOCOLLECTOR_H
 
+#include <map>
+#include "BaseScenario.hpp"
 
 class ScenarioCollector
 {

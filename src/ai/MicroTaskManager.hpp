@@ -20,6 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MICROTASKMANAGER_H
 #define MICROTASKMANAGER_H
 
+#include "MicroTask.hpp"
+#include "scenarios/BaseScenario.hpp"
 
 class MicroTaskManager
 {

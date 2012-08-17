@@ -36,11 +36,28 @@ void MicroScenarioLaunching::Enter(Npc* npc) const
 	printf("npc_id = %i, Enter MicroScenarioLaunching\n", npc->GetId());
 }
 
-void MicroScenarioLaunching::UpdateInStatic(Npc* npc) const
+/* virtual */
+bool MicroScenarioLaunching::Validate(Npc* npc) const
+{
+	if (npc->GetVehicle()->GetPlaceTypeId() != ENTITY::SPACE_ID)
+	{
+		return true;
+	}
+
+	return false;
+}
+		
+void MicroScenarioLaunching::UpdateInStaticInSpace(Npc* npc) const
 {}
 
-void MicroScenarioLaunching::UpdateInDynamic(Npc* npc) const
+void MicroScenarioLaunching::UpdateInDynamicInSpace(Npc* npc) const
 {}
+
+/* virtual */
+void MicroScenarioLaunching::UpdateInStaticInDock(Npc* npc) const
+{
+	npc->GetVehicle()->LaunchingEvent();
+}
 
 void MicroScenarioLaunching::Exit(Npc* _npc) const 
 {

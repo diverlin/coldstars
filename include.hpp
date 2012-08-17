@@ -28,9 +28,6 @@ class Turrel;
 class Planet;
 class Star;
 
-class StateMachine;
-class ScenarioBase;
-
 
 class Player;
 class FBO;
@@ -47,22 +44,16 @@ class Kosmoport;
 class WeaponSelector;
 
 
-class ScenarioCollector;
-
 #include <iostream>
 #include "src/common/myVector.hpp"
 #include "src/common/gameStruct.hpp"
 #include "src/common/constants.hpp"
-#include "src/config/config.hpp"
-#include "GL/glew.h"   
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <vector>
 #include <math.h>
 
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp> 
 
 #include "src/common/myStr.hpp"
 
@@ -122,9 +113,7 @@ class ScenarioCollector;
 #include "src/gui/Cursor.hpp"  
 
 #include "src/render/Render.hpp"
-#include "src/render/Glsl.hpp"
-#include "src/render/Fbo.hpp"
-#include "src/render/Bloom.hpp"
+
 #include "src/effects/ShockWaveEffect.hpp"
 
 #include "src/effects/BaseBackGroundEffect.hpp"
@@ -149,7 +138,7 @@ class ScenarioCollector;
 #include "src/spaceobjects/DriveComplex.hpp"
 #include "src/spaceobjects/WeaponComplex.hpp"
 #include "src/spaceobjects/ProtectionComplex.hpp"
-//#include "src/spaceobjects/Vehicle.hpp"
+
 #include "src/spaceobjects/RocketBullet.hpp"
 #include "src/spaceobjects/SpaceStation.hpp"
 #include "src/spaceobjects/Satellite.hpp"
@@ -198,21 +187,7 @@ class ScenarioCollector;
 #include "src/pilots/Skill.hpp"
 #include "src/pilots/Npc.hpp"           
 
-//#include "src/ai/scenarios/micro/MicroScenarioDestroy.hpp" 
-#include "src/ai/scenarios/micro/MicroScenarioGrab.hpp" 
-#include "src/ai/scenarios/micro/MicroScenarioJump.hpp" 
-#include "src/ai/scenarios/micro/MicroScenarioDocking.hpp"
-#include "src/ai/scenarios/micro/MicroScenarioLaunching.hpp"
 
-#include "src/ai/BaseTask.hpp"
-#include "src/ai/MacroTask.hpp"
-#include "src/ai/MicroTask.hpp"
-#include "src/ai/MicroTaskManager.hpp"
-#include "src/ai/MacroTaskManager.hpp"
-
-
-#include "src/ai/StateMachine.hpp"
-#include "src/ai/ScenarioCollector.hpp"
 
 //   
 #include "src/pilots/Observation.hpp" 
@@ -370,7 +345,7 @@ class ScenarioCollector;
 
 #include "src/spaceobjects/WeaponComplex.cpp"
 #include "src/spaceobjects/ProtectionComplex.cpp"
-//#include "src/spaceobjects/Vehicle.cpp"
+
 #include "src/spaceobjects/Ship.cpp"
 #include "src/spaceobjects/DriveComplex.cpp"
 #include "src/spaceobjects/Turrel.cpp"
@@ -395,26 +370,17 @@ class ScenarioCollector;
 #include "src/pilots/Npc.cpp"
 //
 
-#include "src/ai/BaseTask.cpp"
-#include "src/ai/MacroTask.cpp"
-#include "src/ai/MicroTask.cpp"
-#include "src/ai/MicroTaskManager.cpp"
-#include "src/ai/MacroTaskManager.cpp"
-#include "src/ai/StateMachine.cpp"
-#include "src/ai/ScenarioCollector.cpp"
-
-#include "src/ai/scenarios/macro/MacroScenarioStarSystemDefence.cpp"
-
-
 #include "src/pilots/Observation.cpp" 
 
 #include "src/common/common.cpp"
 
 #include "src/render/Render.cpp"
 
-#include "src/render/Glsl.cpp"
-#include "src/render/Fbo.cpp"
-#include "src/render/Bloom.cpp"
+
+
+
+
+
 #include "src/effects/ShockWaveEffect.cpp"
 
 #include "src/text/textstuff.cpp"
@@ -439,6 +405,5 @@ class ScenarioCollector;
 #include "src/builder/items/module/RadarModuleBuilder.cpp"
 
 #include "src/builder/items/other/BombBuilder.cpp"
-//#include "src/common/Logger.cpp"
-#include "src/render/Screen.cpp"
+
 ////////////////////////////////////////////

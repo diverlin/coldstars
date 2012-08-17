@@ -33,6 +33,13 @@ set (SOURCES
 	src/spaceobjects/Vehicle.cpp
 	src/gui/GuiShop.cpp
 
+
+	src/ai/MacroTask.cpp
+	src/ai/MicroTask.cpp
+
+	src/ai/MicroTaskManager.cpp
+	src/ai/MacroTaskManager.cpp
+
 	src/ai/aiModel/AiModelCollector.cpp
 
 	src/ai/aiModel/BaseAiModel.cpp
@@ -40,7 +47,10 @@ set (SOURCES
 	src/ai/aiModel/AiModelTrader.cpp
 	src/ai/aiModel/AiModelConqueror.cpp
 
+	src/ai/scenarios/ScenarioCollector.cpp
+
 	src/ai/scenarios/macro/MacroScenarioSelfSafety.cpp
+	src/ai/scenarios/macro/MacroScenarioStarSystemDefence.cpp
 	src/ai/scenarios/macro/MacroScenarioStarSystemLiberation.cpp
 
 	src/ai/scenarios/micro/MicroScenarioDestroy.cpp
@@ -50,6 +60,14 @@ set (SOURCES
 	src/ai/scenarios/micro/MicroScenarioLaunching.cpp
 
 	src/ai/scenarios/macro/MacroScenarioGoodsTrading.cpp
+
+	src/ai/StateMachine.cpp
+
+	src/render/Screen.cpp
+
+	src/render/Glsl.cpp
+	src/render/Fbo.cpp
+	src/render/Bloom.cpp
 
   	main.cpp
 )

@@ -44,7 +44,7 @@ void MacroScenarioStarSystemLiberation::UpdateInStatic(Npc* npc) const
 	{
 		if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetScenarioTypeId() != MICROSCENARIO::JUMP_ID)
 		{
-			MicroTask* microtask = new MicroTask(npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetStarSystem(), MICROSCENARIO::JUMP_ID);
+			MicroTask* microtask = new MicroTask(MICROSCENARIO::JUMP_ID, npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetStarSystem());
 			npc->GetStateMachine()->SetCurrentMicroTask(microtask);
 		}
 	}
@@ -57,7 +57,7 @@ void MacroScenarioStarSystemLiberation::UpdateInStatic(Npc* npc) const
 				Vehicle* target_vehicle = npc->GetStarSystem()->GetRandomVehicle(&RaceInformationCollector.RACES_EVIL_vec);
 				if (target_vehicle != NULL)
 				{
-					MicroTask* microtask = new MicroTask(target_vehicle, MICROSCENARIO::DESTROY_ID);
+					MicroTask* microtask = new MicroTask(MICROSCENARIO::DESTROY_ID, target_vehicle);
 					npc->GetStateMachine()->SetCurrentMicroTask(microtask);
 				}
 				else

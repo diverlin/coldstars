@@ -16,7 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
+#include "StateMachine.hpp"
 
 StateMachine::StateMachine(Npc* npc) 
 {
@@ -32,17 +32,17 @@ StateMachine::~StateMachine()
 	delete microtask_manager;		
 }
 		
-void StateMachine::UpdateInStatic()
+void StateMachine::UpdateInStaticInSpace()
 {
 	if (macrotask_manager->GetScenario() != NULL) 
 	{ 
-		macrotask_manager->GetScenario()->UpdateInStatic(npc_owner); 
+		macrotask_manager->GetScenario()->UpdateInStaticInSpace(npc_owner); 
 	}
 	if (microtask_manager->GetScenario() != NULL) 
 	{
 		if (microtask_manager->GetScenario()->Validate(npc_owner) == true)
 		{
-			microtask_manager->GetScenario()->UpdateInStatic(npc_owner); 
+			microtask_manager->GetScenario()->UpdateInStaticInSpace(npc_owner); 
 		}
 		else
 		{
@@ -52,11 +52,39 @@ void StateMachine::UpdateInStatic()
 	}
 }
 
-void StateMachine::UpdateInDynamic()
+void StateMachine::UpdateInStaticInDock()
+{
+	if (macrotask_manager->GetScenario() != NULL) 
+	{ 
+		macrotask_manager->GetScenario()->UpdateInStaticInDock(npc_owner); 
+	}
+	if (microtask_manager->GetScenario() != NULL) 
+	{
+		if (microtask_manager->GetScenario()->Validate(npc_owner) == true)
+		{
+			microtask_manager->GetScenario()->UpdateInStaticInDock(npc_owner); 
+		}
+		else
+		{
+			microtask_manager->GetScenario()->Exit(npc_owner);
+			microtask_manager->DeleteMicroTaskAndReset();
+		}
+	}
+}
+
+void StateMachine::UpdateInDynamicInSpace()
 {
 	if (microtask_manager->GetScenario() != NULL)
 	{
-	 	microtask_manager->GetScenario()->UpdateInDynamic(npc_owner);
+	 	microtask_manager->GetScenario()->UpdateInDynamicInSpace(npc_owner);
+	}
+}
+
+void StateMachine::UpdateInDynamicInDock()
+{
+	if (microtask_manager->GetScenario() != NULL)
+	{
+	 	microtask_manager->GetScenario()->UpdateInDynamicInDock(npc_owner);
 	}
 }
 	

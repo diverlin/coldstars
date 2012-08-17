@@ -20,6 +20,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef RENDER_H
 #define RENDER_H
 
+#include <GL/glew.h>
+#include "../resources/textureOb.hpp"
+#include "../common/rect.hpp"
+
 void initGl(int, int);
 void resizeGl(int, int);
 

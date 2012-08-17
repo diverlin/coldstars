@@ -20,7 +20,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define CONSTANTS_HPP
 
 #include <string>
-
 #include "../common/myVector.hpp"
 
 #define LOG_ENABLED 0
@@ -28,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 const double NO_DELAY = 0.0f;
 const int NO_ADDITIONAL_INFO = 0;
 
-const std::string GAME_TITLE = "cold star V0.0.4.54 (SFML/C++)";
+const std::string GAME_TITLE = "cold star V0.0.4.55 (SFML/C++)";
 
 const float RADAR_SCALE = 1/50.0;
 
@@ -53,20 +52,37 @@ const vec2i GUI_STORE_OFFSET(0, -100);
 namespace PRICE
 {
 	const int MINERALS_MAX = 10; 
+	const int FOOD_MAX = 10; 
+	const int MEDICINE_MAX = 10; 
+	const int MILITARY_MAX = 10; 
+	const int DRUG_MAX = 100; 
+	const int EXCLUSIVE_MAX = 100; 
 }
-const int MINERALS_AMOUNT_MIN = 10;
-const int MINERALS_AMOUNT_MAX = 100;
-const int FOOD_AMOUNT_MIN = 10;
-const int FOOD_AMOUNT_MAX = 100;
-const int MEDICINE_AMOUNT_MIN = 10;
-const int MEDICINE_AMOUNT_MAX = 100;
-const int MILITARY_AMOUNT_MIN = 10;
-const int MILITARY_AMOUNT_MAX = 100;
-const int DRUG_AMOUNT_MIN = 10;
+
+const int MINERALS_AMOUNT_MAX = 1000;
+const int MINERALS_STARTAMOUNT_MIN = MINERALS_AMOUNT_MAX/100;
+const int MINERALS_STARTAMOUNT_MAX = MINERALS_AMOUNT_MAX/10;
+
+const int FOOD_AMOUNT_MAX = 1000;
+const int FOOD_STARTAMOUNT_MIN = 10;
+const int FOOD_STARTAMOUNT_MAX = FOOD_AMOUNT_MAX/10;
+
+const int MEDICINE_AMOUNT_MAX = 1000;
+const int MEDICINE_STARTAMOUNT_MIN = MEDICINE_AMOUNT_MAX/100;
+const int MEDICINE_STARTAMOUNT_MAX = MEDICINE_AMOUNT_MAX/10;
+
+const int MILITARY_AMOUNT_MAX = 1000;
+const int MILITARY_STARTAMOUNT_MIN = MILITARY_AMOUNT_MAX/100;
+const int MILITARY_STARTAMOUNT_MAX = MILITARY_AMOUNT_MAX/10;
+
 const int DRUG_AMOUNT_MAX = 100;
-const int EXCLUSIVE_AMOUNT_MIN = 10;
-const int EXCLUSIVE_AMOUNT_MAX = 100;
-        
+const int DRUG_STARTAMOUNT_MIN = DRUG_AMOUNT_MAX/100;
+const int DRUG_STARTAMOUNT_MAX = DRUG_AMOUNT_MAX/10;
+
+const int EXCLUSIVE_AMOUNT_MAX = 100;  
+const int EXCLUSIVE_STARTAMOUNT_MIN = EXCLUSIVE_AMOUNT_MAX/100;
+const int EXCLUSIVE_STARTAMOUNT_MAX = EXCLUSIVE_AMOUNT_MAX/10;
+     
         
 namespace LOG
 {
@@ -586,8 +602,6 @@ namespace NAVIGATOR_ACTION
 		NONE_ID, DOCKING_ID, COLLECTING_ID, KEEP_CLOSE_ID, KEEP_MIDDLE_ID, KEEP_FAR_ID 
 	};
 }
-
-
 
 namespace CLASS
 {

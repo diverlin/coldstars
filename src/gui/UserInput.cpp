@@ -63,7 +63,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
  			{
        		  		if (player->GetNpc()->GetScanTarget() == player->GetNpc()->GetVehicle())
        		  		{
-       		  			player->GetNpc()->GetSkill()->Acknowledge();
+       		  			player->GetNpc()->GetSkill().Acknowledge();
        		  		}
  
           	  		player->GetNpc()->ResetScanTarget();
@@ -202,7 +202,7 @@ void UserInput::KeyPressedInKosmoport(Player* player)
  			{
        		  		if (player->GetNpc()->GetScanTarget()->GetId() == player->GetNpc()->GetVehicle()->GetId())
        		  		{
-       		  			player->GetNpc()->GetSkill()->Acknowledge();
+       		  			player->GetNpc()->GetSkill().Acknowledge();
        		  		}
  
           	  		player->GetNpc()->ResetScanTarget();

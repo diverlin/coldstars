@@ -29,8 +29,9 @@ class MicroScenarioDocking : public BaseScenario
 		virtual ~MicroScenarioDocking();
 		
 		virtual void Enter(Npc*) const;
-		virtual void UpdateInStatic(Npc*) const;
-		virtual void UpdateInDynamic(Npc*) const;	
+		virtual bool Validate(Npc* npc) const;
+		virtual void UpdateInStaticInSpace(Npc*) const;
+		virtual void UpdateInDynamicInSpace(Npc*) const;	
 		virtual void Exit(Npc*) const;
 		
 		virtual std::string GetDescription(Npc*) const;

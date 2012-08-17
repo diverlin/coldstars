@@ -40,12 +40,20 @@ void MicroScenarioDocking::Enter(Npc* npc) const
 	#endif
 }
 
-void MicroScenarioDocking::UpdateInStatic(Npc* npc) const
+bool MicroScenarioDocking::Validate(Npc* npc) const
 {
+	if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::SPACE_ID)
+	{
+		return true;
+	}
 
+	return false;
 }
 
-void MicroScenarioDocking::UpdateInDynamic(Npc* npc) const
+void MicroScenarioDocking::UpdateInStaticInSpace(Npc* npc) const
+{}
+
+void MicroScenarioDocking::UpdateInDynamicInSpace(Npc* npc) const
 {
      	if (npc->GetVehicle()->GetDriveComplex()->CheckTargetEchievement() == true)
      	{

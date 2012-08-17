@@ -42,7 +42,7 @@ void Angar::AddVehicleSlot(VehicleSlot* vehicle_slot, const Rect& rect)
                          
 void Angar::Ai() const
 {
-        for (unsigned int i = 0; i < vehicleslot_vec.size(); i++)
+        for (unsigned int i=0; i<vehicleslot_vec.size(); i++)
         {
                 if (vehicleslot_vec[i]->GetVehicle() != NULL)
                 {
@@ -81,23 +81,37 @@ bool Angar::AddVehicle(Vehicle* vehicle)
 }
 
 
-//bool Angar::RemoveVehicle(Vehicle* vehicle)
-//{
-        //for (unsigned int i = 0; i < vehicleslot_vec.size(); i++)
-        //{
-                //if (vehicleslot_vec[i]->GetVehicle() != NULL)
-                //{
-                        //if (vehicleslot_vec[i]->GetVehicle() == vehicle)
-                        //{
-                                //vehicleslot_vec[i]->Release();
-                                //return true;
-                        //}
-                //}
-        //}
+bool Angar::RemoveVehicle(Vehicle* vehicle)
+{
+        for (unsigned int i=0; i<vehicleslot_vec.size(); i++)
+        {
+                if (vehicleslot_vec[i]->GetVehicle() != NULL)
+                {
+                        if (vehicleslot_vec[i]->GetVehicle() == vehicle)
+                        {
+                                vehicleslot_vec[i]->Release();
+                                return true;
+                        }
+                }
+        }
     
-        //return false;       
-//}
+        return false;       
+}
 
+std::string Angar::GetDockVehicleStr() const
+{
+	std::string str;
+        for (unsigned int i=0; i<vehicleslot_vec.size(); i++)
+        {
+                if (vehicleslot_vec[i]->GetVehicle() != NULL)
+                {
+                	str += "_" + int2str(vehicleslot_vec[i]->GetVehicle()->GetId());
+                }
+        }
+        
+        return str;
+}
+                
 
 
 void Angar::SaveDataUniqueAngar(boost::property_tree::ptree& save_ptree, const std::string& root) const

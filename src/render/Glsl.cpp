@@ -17,6 +17,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "Glsl.hpp"
+#include "../common/Logger.hpp"
+#include "../common/myStr.hpp"
 
 ShadersPack& ShadersPack::Instance()
 {
@@ -43,7 +45,7 @@ void compile_program(const GLchar* vertex_source, const GLchar* fragment_source,
         	glDeleteShader(fragment_shader);
     	}
     	else
-        	printf("program was not generated succesfully\n");
+        	Logger::Instance().Log("program was not generated succesfully");
 
     	printProgramInfoLog(program);
 }
@@ -63,6 +65,6 @@ void printProgramInfoLog(GLuint program)
 {
     	char log[256];
     	glGetInfoLogARB(program, 256, NULL, log);
-    	printf(" Infolog: %s, program id = %i\n", log, program);
+    	Logger::Instance().Log("Infolog"+std::string(log)+"program id =" + int2str(program));
 }
 

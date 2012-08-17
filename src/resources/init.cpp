@@ -17,13 +17,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "../ai/aiModel/AiModelCollector.hpp"
-#include "../ai/ScenarioCollector.hpp"
+#include "../ai/scenarios/ScenarioCollector.hpp"
 
+#include "../ai/scenarios/macro/MacroScenarioGoodsTrading.hpp"
 #include "../ai/scenarios/macro/MacroScenarioStarSystemLiberation.hpp"
 #include "../ai/scenarios/macro/MacroScenarioStarSystemDefence.hpp"
 #include "../ai/scenarios/macro/MacroScenarioSelfSafety.hpp"
 
 #include "../ai/scenarios/micro/MicroScenarioDestroy.hpp"
+#include "../ai/scenarios/micro/MicroScenarioGrab.hpp" 
+#include "../ai/scenarios/micro/MicroScenarioJump.hpp" 
+#include "../ai/scenarios/micro/MicroScenarioDocking.hpp"
+#include "../ai/scenarios/micro/MicroScenarioLaunching.hpp"
 
 void init()
 {
@@ -49,9 +54,10 @@ void init()
     	
     	
 	/* create Macro Scenaries */
+	ScenarioCollector::Instance().RegisterScenario(new MacroScenarioGoodsTrading());
 	ScenarioCollector::Instance().RegisterScenario(new MacroScenarioStarSystemLiberation());
 	ScenarioCollector::Instance().RegisterScenario(new MacroScenarioStarSystemDefence());
-	ScenarioCollector::Instance().RegisterScenario(new MacroScenarioSelfSafety()); 	 	   // make as singlenton
+	ScenarioCollector::Instance().RegisterScenario(new MacroScenarioSelfSafety()); 	 	
 	
 	/* create Micro Scenaries */
 	ScenarioCollector::Instance().RegisterScenario(new MicroScenarioDocking());
@@ -62,6 +68,7 @@ void init()
 	/* create AI models */
 	AiModelCollector::Instance().RegisterAiModel(new AiModelRanger());
 	AiModelCollector::Instance().RegisterAiModel(new AiModelConqueror());  
+	AiModelCollector::Instance().RegisterAiModel(new AiModelTrader());  
 }
 
 

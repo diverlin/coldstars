@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class MacroTask : public BaseTask
 {
 	public:
-		MacroTask(BaseGameEntity*, int, int reward = 0, int expiriance = 0);
+		MacroTask(int, BaseGameEntity* target = NULL, int reward = 0, int expiriance = 0);
 		~MacroTask();
 				
 	private:

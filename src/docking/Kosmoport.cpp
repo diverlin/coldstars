@@ -63,6 +63,7 @@ bool Kosmoport::GetPermissionToLand() const
 {
       	if (angar->GetFreeVehicleSlotTotalNum() > 0) 
         { 
+        	std::cout<<"da da, mozhno"<<std::endl;
         	return true; 
         }
         
@@ -81,19 +82,23 @@ bool Kosmoport::Add(Vehicle* vehicle)
 }
 
 /* virtual */
-//bool Kosmoport::Remove(Vehicle* vehicle)
-//{        
-    	//return angar->RemoveVehicle(vehicle);
-//}
+bool Kosmoport::Remove(Vehicle* vehicle)
+{        
+    	return angar->RemoveVehicle(vehicle);
+}
 
 
 /* virtual */
-void Kosmoport::Ai()
+void Kosmoport::UpdateInSpaceInStatic()
 {
 	angar->Ai();	
 }
 
-
+/* virtual */
+std::string Kosmoport::GetDockVehicleStr() const
+{
+	return angar->GetDockVehicleStr();
+}                
 
 
 void Kosmoport::SaveDataUniqueKosmoport(boost::property_tree::ptree& save_ptree, const std::string& root) const

@@ -21,14 +21,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define MACROSCENARIOGOODSTRADING_H
 
 #include "../BaseScenario.hpp"
+#include "../../../pilots/Npc.hpp"
 
 class MacroScenarioGoodsTrading : public BaseScenario
 {
 	public:
 		MacroScenarioGoodsTrading();
 		virtual ~MacroScenarioGoodsTrading();
+
+		bool IsAbleToBuyGoods(Npc*) const;
+				
+		virtual void UpdateInStaticInSpace(Npc*) const;	
+		virtual void UpdateInStaticInDock(Npc*) const;
 		
-		virtual void UpdateInStatic(Npc*) const;	
 		virtual std::string GetDescription(Npc*) const;
 }; 
 

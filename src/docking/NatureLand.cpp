@@ -36,17 +36,6 @@ bool NatureLand::Add(Vehicle* vehicle)
         return true;
 }
 
-/* virtual */
-bool NatureLand::Add(Npc* npc)
-{
-        //npc->SetPlaceTypeId(ENTITY::LAND_ID);        
-        //NPC_vec.push_back(npc);
-
-        //npc->SetLand(this);
- 
-        return true;
-}
-
 /*virtual */
 bool NatureLand::Remove(Vehicle* vehicle)
 {
@@ -64,22 +53,6 @@ bool NatureLand::Remove(Vehicle* vehicle)
         //return is_removed;
 }
 
-/* virtual */
-bool NatureLand::Remove(Npc* npc)
-{
-        //bool is_removed = false;
-    
-        //for (unsigned int i = 0; i < NPC_vec.size(); i++)
-        //{ 
-                //if (NPC_vec[i] == npc)
-                //{
-                        //NPC_vec.erase(NPC_vec.begin() + i);
-                        //is_removed = true;
-                //}
-        //}
-        
-        //return is_removed;
-}
 
 /* virtual */
 bool NatureLand::GetPermissionToLand() const
@@ -88,7 +61,7 @@ bool NatureLand::GetPermissionToLand() const
 }
 
 /* virtual */
-void NatureLand::Ai()
+void NatureLand::UpdateInSpaceInStatic()
 {
         //for (unsigned int i = 0; i < NPC_vec.size(); i++)
         //{

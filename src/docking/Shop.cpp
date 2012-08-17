@@ -18,6 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 #include "Shop.hpp"
+#include "../common/constants.hpp"
 
 
 Shop::Shop(int id)
@@ -26,12 +27,12 @@ Shop::Shop(int id)
 	data_id.type_id = ENTITY::SHOP_ID;
 	data_id.subtype_id = ENTITY::SHOP_ID;
 	
-	minerals_ammount  = getRandInt(MINERALS_AMOUNT_MIN, MINERALS_AMOUNT_MAX);
-        food_ammount      = getRandInt(FOOD_AMOUNT_MIN, FOOD_AMOUNT_MAX);
-        medicine_ammount  = getRandInt(MEDICINE_AMOUNT_MIN, MEDICINE_AMOUNT_MAX);
-        military_ammount  = getRandInt(MILITARY_AMOUNT_MIN, MILITARY_AMOUNT_MAX);
-        drug_ammount      = getRandInt(DRUG_AMOUNT_MIN, DRUG_AMOUNT_MAX);
-        exclusive_ammount = getRandInt(EXCLUSIVE_AMOUNT_MIN, EXCLUSIVE_AMOUNT_MAX);
+	minerals_amount  = getRandInt(MINERALS_STARTAMOUNT_MIN, MINERALS_STARTAMOUNT_MAX);
+        food_amount      = getRandInt(FOOD_STARTAMOUNT_MIN, FOOD_STARTAMOUNT_MAX);
+        medicine_amount  = getRandInt(MEDICINE_STARTAMOUNT_MIN, MEDICINE_STARTAMOUNT_MAX);
+        military_amount  = getRandInt(MILITARY_STARTAMOUNT_MIN, MILITARY_STARTAMOUNT_MAX);
+        drug_amount      = getRandInt(DRUG_STARTAMOUNT_MIN, DRUG_STARTAMOUNT_MAX);
+        exclusive_amount = getRandInt(EXCLUSIVE_STARTAMOUNT_MIN, EXCLUSIVE_STARTAMOUNT_MAX);
         
         UpdateAllPrices();
 }
@@ -41,87 +42,63 @@ Shop::~Shop()
 	EntityManager::Instance().RemoveEntity(this);
 }                
 
-void Shop::SellGoods(Npc* npc, int subtype_id, int ammount)
-{       		
+
+int Shop::GetAmount(int subtype_id) const
+{
 	switch(subtype_id)
 	{
-		case ENTITY::MINERALS_ID:
-		{        					
-			minerals_ammount -= ammount;
-			npc->DecreaseCredits(ammount*minerals_price);
-			
-			UpdateMineralPrice();
-			
-			break;
-		}
-
-		case ENTITY::FOOD_ID:
-		{        					
-			food_ammount -= ammount;
-			npc->DecreaseCredits(ammount*food_price);
-						
-			UpdateFoodPrice();
-			
-			break;
-		}
-
-		case ENTITY::MEDICINE_ID:
-		{        					
-			medicine_ammount -= ammount;
-			npc->DecreaseCredits(ammount*medicine_price);
-			
-			UpdateMedicinePrice();
-			
-			break;
-		}			
-
-		case ENTITY::MILITARY_ID:
-		{        					
-			military_ammount -= ammount;
-			npc->DecreaseCredits(ammount*military_price);	
-		
-			UpdateMilitaryPrice();
-			
-			break;
-		}	
-
-		case ENTITY::DRUG_ID:
-		{        					
-			drug_ammount -= ammount;
-			npc->DecreaseCredits(ammount*drug_price);
-						
-			UpdateDrugPrice();
-			
-			break;
-		}	
-
-		case ENTITY::EXCLUSIVE_ID:
-		{        					
-			exclusive_ammount -= ammount;
-			npc->DecreaseCredits(ammount*exclusive_price);
-						
-			UpdateExclusivePrice();
-			
-			break;
-		}	
+		case ENTITY::MINERALS_ID: 	{ return minerals_amount; break; }
+		case ENTITY::FOOD_ID: 		{ return food_amount; break; }
+		case ENTITY::MEDICINE_ID: 	{ return medicine_amount; break; }
+		case ENTITY::MILITARY_ID: 	{ return military_amount; break; }		
+		case ENTITY::DRUG_ID:		{ return drug_amount; break; }
+		case ENTITY::EXCLUSIVE_ID: 	{ return exclusive_amount; break; }
 	}
+}    
+                
+int Shop::GetPrice(int subtype_id) const
+{
+	switch(subtype_id)
+	{
+		case ENTITY::MINERALS_ID: 	{ return minerals_price; break; }
+		case ENTITY::FOOD_ID: 		{ return food_price; break; }
+		case ENTITY::MEDICINE_ID: 	{ return medicine_price; break; }
+		case ENTITY::MILITARY_ID: 	{ return military_price; break; }		
+		case ENTITY::DRUG_ID:		{ return drug_price; break; }
+		case ENTITY::EXCLUSIVE_ID: 	{ return exclusive_price; break; }
+	}
+}
+
+                
+void Shop::SellGoods(Npc* npc, int subtype_id, int amount)
+{    
+	int sign = -1;
+	Deal(npc, sign, subtype_id, amount);	   		
 
 	GoodsPack* goods_pack = GetNewGoodsPack(subtype_id);
-        goods_pack->Increase(ammount);	
+        goods_pack->Increase(amount);	
 	npc->GetVehicle()->AddItemToCargoSlot(goods_pack);
 }
     
         	
 void Shop::BuyGoods(Npc* npc, GoodsPack* goods_pack)
 {
-        int ammount = goods_pack->GetMass();	
-	
-	switch(goods_pack->GetSubTypeId())
+	int sign = 1;
+ 	
+	Deal(npc, sign, goods_pack->GetSubTypeId(), goods_pack->GetMass());	
+	goods_pack->GetItemSlot()->RemoveItem();
+	//delete goods_pack; // dangerrr
+}
+       
+void Shop::Deal(Npc* npc, int sign, int subtype_id, int amount)
+{
+ 	float skill_rate = 1.0f + sign*0.1*npc->GetSkill().GetTrader();
+	switch(subtype_id)
 	{
 		case ENTITY::MINERALS_ID:
-		{        					
-			minerals_ammount += ammount;
-			npc->IncreaseCredits(ammount*minerals_price);
+		{		
+			minerals_amount += sign*amount;
+			npc->IncreaseCredits(sign*amount*skill_rate*minerals_price);
 			
 			UpdateMineralPrice();
 			
@@ -130,8 +107,8 @@ void Shop::BuyGoods(Npc* npc, GoodsPack* goods_pack)
 
 		case ENTITY::FOOD_ID:
 		{        					
-			food_ammount += ammount;
-			npc->IncreaseCredits(ammount*food_price);
+			food_amount += sign*amount;
+			npc->IncreaseCredits(sign*amount*skill_rate*food_price);
 						
 			UpdateFoodPrice();
 			
@@ -140,8 +117,8 @@ void Shop::BuyGoods(Npc* npc, GoodsPack* goods_pack)
 
 		case ENTITY::MEDICINE_ID:
 		{        					
-			medicine_ammount += ammount;
-			npc->IncreaseCredits(ammount*medicine_price);
+			medicine_amount += sign*amount;
+			npc->IncreaseCredits(sign*amount*skill_rate*medicine_price);
 			
 			UpdateMedicinePrice();
 			
@@ -150,8 +127,8 @@ void Shop::BuyGoods(Npc* npc, GoodsPack* goods_pack)
 
 		case ENTITY::MILITARY_ID:
 		{        					
-			military_ammount += ammount;
-			npc->IncreaseCredits(ammount*military_price);	
+			military_amount += sign*amount;
+			npc->IncreaseCredits(sign*amount*skill_rate*military_price);	
 		
 			UpdateMilitaryPrice();
 			
@@ -160,8 +137,8 @@ void Shop::BuyGoods(Npc* npc, GoodsPack* goods_pack)
 
 		case ENTITY::DRUG_ID:
 		{        					
-			drug_ammount += ammount;
-			npc->IncreaseCredits(ammount*drug_price);
+			drug_amount += sign*amount;
+			npc->IncreaseCredits(sign*amount*skill_rate*drug_price);
 						
 			UpdateDrugPrice();
 			
@@ -170,17 +147,14 @@ void Shop::BuyGoods(Npc* npc, GoodsPack* goods_pack)
 
 		case ENTITY::EXCLUSIVE_ID:
 		{        					
-			exclusive_ammount += ammount;
-			npc->IncreaseCredits(ammount*exclusive_price);
+			exclusive_amount += sign*amount;
+			npc->IncreaseCredits(sign*amount*skill_rate*exclusive_price);
 						
 			UpdateExclusivePrice();
 			
 			break;
 		}	
 	}
-	
-	goods_pack->GetItemSlot()->RemoveItem();
-	//delete goods_pack; // dangerrr
 }
         	
 void Shop::UpdateAllPrices()
@@ -195,52 +169,52 @@ void Shop::UpdateAllPrices()
 
 void Shop::UpdateMineralPrice()
 {
-	minerals_price 	= 50; //PRICE::MINERALS_MAX * (1.0f - exp(-1.0f/minerals_ammount));
+	minerals_price = PRICE::MINERALS_MAX * (1.0 - atan((float)minerals_amount/MINERALS_AMOUNT_MAX)/1.6);
 }
  
 void Shop::UpdateFoodPrice()
 {
-        food_price 	= 1; //PRICE::FOOD_MAX      - PRICE::FOOD_RATE * food_ammount;    
+        food_price = PRICE::FOOD_MAX * (1.0 - atan((float)food_amount/FOOD_AMOUNT_MAX)/1.6);    
 }
 
 void Shop::UpdateMedicinePrice()
 {
-        medicine_price	= 1; //PRICE::MEDICINE_MAX  - PRICE::MEDICINE_RATE * medicine_ammount; 
+        medicine_price	= PRICE::MEDICINE_MAX  * (1.0 - atan((float)medicine_amount/MEDICINE_AMOUNT_MAX)/1.6); 
 }
 
 void Shop::UpdateMilitaryPrice()
 {
-        military_price  = 1; //PRICE::MILITARY_MAX  - PRICE::MILITARY_RATE * military_ammount;   
+        military_price  = PRICE::MILITARY_MAX * (1.0 - atan((float)military_amount/MILITARY_AMOUNT_MAX)/1.6);   
 }
 
 void Shop::UpdateDrugPrice()
 {
-        drug_price      = 1; // PRICE::DRUG_MAX      - PRICE::DRUG_RATE * drug_ammount;  
+        drug_price = PRICE::DRUG_MAX * (1.0 - atan((float)drug_amount/DRUG_AMOUNT_MAX)/1.6);  
 }
 
 void Shop::UpdateExclusivePrice()
 {
-        exclusive_price = 1; //PRICE::EXCLUSIVE_MAX - PRICE::EXCLUSIVE_RATE * exclusive_ammount;   
+        exclusive_price = PRICE::EXCLUSIVE_MAX * (1.0 - atan((float)exclusive_amount/EXCLUSIVE_AMOUNT_MAX)/1.6);   
 }        	
 
 void Shop::SaveDataUniqueShop(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-	save_ptree.put(root+"minerals_ammount", minerals_ammount);
-	save_ptree.put(root+"food_ammount", 	food_ammount);
-	save_ptree.put(root+"medicine_ammount", medicine_ammount);
-	save_ptree.put(root+"military_ammount", military_ammount);
-	save_ptree.put(root+"drug_ammount", 	drug_ammount);
-	save_ptree.put(root+"exclusive_ammount", exclusive_ammount);
+	save_ptree.put(root+"minerals_amount", minerals_amount);
+	save_ptree.put(root+"food_amount", 	food_amount);
+	save_ptree.put(root+"medicine_amount", medicine_amount);
+	save_ptree.put(root+"military_amount", military_amount);
+	save_ptree.put(root+"drug_amount", 	drug_amount);
+	save_ptree.put(root+"exclusive_amount", exclusive_amount);
 }
 
 void Shop::LoadDataUniqueShop(const boost::property_tree::ptree& load_ptree)
 {
-	minerals_ammount = load_ptree.get<int>("minerals_ammount");
-	food_ammount	 = load_ptree.get<int>("food_ammount");
-	medicine_ammount = load_ptree.get<int>("medicine_ammount");
-	military_ammount = load_ptree.get<int>("military_ammount");
-	drug_ammount 	 = load_ptree.get<int>("drug_ammount");
-	exclusive_ammount = load_ptree.get<int>("exclusive_ammount");
+	minerals_amount = load_ptree.get<int>("minerals_amount");
+	food_amount	 = load_ptree.get<int>("food_amount");
+	medicine_amount = load_ptree.get<int>("medicine_amount");
+	military_amount = load_ptree.get<int>("military_amount");
+	drug_amount 	 = load_ptree.get<int>("drug_amount");
+	exclusive_amount = load_ptree.get<int>("exclusive_amount");
 }
 
 void Shop::ResolveDataUniqueShop()

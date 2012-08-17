@@ -20,11 +20,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef MICROTASK_H
 #define MICROTASK_H
 
+#include "BaseTask.hpp"
 
 class MicroTask : public BaseTask
 {
 	public:
-		MicroTask(BaseGameEntity*, int, int reward = 0, int expiriance = 0);
+		MicroTask(int, BaseGameEntity* target = NULL, int reward = 0, int expiriance = 0);
 		~MicroTask();
 				
 	private:

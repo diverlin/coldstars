@@ -17,6 +17,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "MacroScenarioStarSystemDefence.hpp"
+#include "../../../pilots/Npc.hpp"
+#include "../../../spaceobjects/Vehicle.hpp"
+#include "../../../common/constants.hpp"
+#include "../../../common/Logger.hpp"
+#include "../../../common/myStr.hpp"
+#include "../../MicroTask.hpp"
+#include "../../../world/starsystem.hpp"
 
 MacroScenarioStarSystemDefence::MacroScenarioStarSystemDefence() 
 {
@@ -40,7 +47,7 @@ void MacroScenarioStarSystemDefence::UpdateInStatic(Npc* npc) const
 	{
 		if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetScenarioTypeId() != MICROSCENARIO::JUMP_ID)
 		{
-			MicroTask* microtask = new MicroTask(npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetStarSystem(), MICROSCENARIO::JUMP_ID);
+			MicroTask* microtask = new MicroTask(MICROSCENARIO::JUMP_ID, npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetStarSystem());
 			npc->GetStateMachine()->SetCurrentMicroTask(microtask);
 		}
 	}
@@ -51,7 +58,7 @@ void MacroScenarioStarSystemDefence::UpdateInStatic(Npc* npc) const
             		Vehicle* target_vehicle = npc->GetObservation()->GetClosestVehicle(&RaceInformationCollector.RACES_GOOD_vec);
             		if (target_vehicle != NULL)
             		{
-            			MicroTask* microtask = new MicroTask(target_vehicle, MICROSCENARIO::DESTROY_ID);
+            			MicroTask* microtask = new MicroTask(MICROSCENARIO::DESTROY_ID, target_vehicle);
 				npc->GetStateMachine()->SetCurrentMicroTask(microtask);
 			}
 			else

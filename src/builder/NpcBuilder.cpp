@@ -62,13 +62,33 @@ void NpcBuilder::CreateNewInternals(int race_id, int subtype_id)
         npc->SetSubTypeId(subtype_id);
         //npc->SetLifeData(data_life);
         
-   
-        if (( race_id == RACE::R6_ID) or ( race_id == RACE::R7_ID) )
-        {
-                npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::CONQUEROR_ID));
-        }
-        else
-        {
-                npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));       
-        }
+   	if ((race_id != RACE::R6_ID) and (race_id != RACE::R7_ID))
+   	{
+		switch(subtype_id)
+		{
+   		   	//case CLASS::DIPLOMAT_ID: 	{}
+   		   	//case CLASS::PIRAT_ID: 	{}
+   			//case CLASS::WARRIOR_ID: 	{}
+   			case CLASS::RANGER_ID:
+   			{
+   				npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));    					
+   				break;    
+   			}
+   		   	case CLASS::TRADER_ID: 
+   		   	{
+   		   		npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER_ID)); 
+   		   		break;
+   		   	}
+   		   	
+   		   	default: 
+   		   	{
+   				npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));    					
+   				break;    
+   			}
+   		}
+   	}
+   	else
+   	{
+		npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::CONQUEROR_ID));    			
+   	}
 }

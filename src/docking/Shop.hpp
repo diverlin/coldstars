@@ -28,14 +28,14 @@ class Shop : public Room
 {
         public: 
                 Shop(int id);
-                ~Shop();                
+                ~Shop();      
 
-                int GetMineralsAmmount() 	const { return minerals_ammount; };
-        	int GetFoodAmmount()		const { return food_ammount; };    
-        	int GetMedicineAmmount() 	const { return medicine_ammount; };  
-        	int GetMilitaryAmmount()	const { return military_ammount; };  
-        	int GetDrugAmmount()		const { return drug_ammount; };     
-        	int GetExclusiveAmmount() 	const { return exclusive_ammount; };
+                int GetMineralsAmount() 	const { return minerals_amount; };
+        	int GetFoodAmount()		const { return food_amount; };    
+        	int GetMedicineAmount() 	const { return medicine_amount; };  
+        	int GetMilitaryAmount()		const { return military_amount; };  
+        	int GetDrugAmount()		const { return drug_amount; };     
+        	int GetExclusiveAmount() 	const { return exclusive_amount; };
 
                 int GetMineralsPrice() 		const { return minerals_price; };
         	int GetFoodPrice() 		const { return food_price; };   
@@ -43,7 +43,10 @@ class Shop : public Room
         	int GetMilitaryPrice()		const { return military_price; };  
         	int GetDrugPrice() 		const { return drug_price; };     
         	int GetExclusivePrice()		const { return exclusive_price; };
-        	                
+
+                int GetAmount(int) const;    
+                int GetPrice(int) const;
+                        	                
         	void SellGoods(Npc*, int, int);
         	void BuyGoods(Npc*, GoodsPack*);
         	                
@@ -52,12 +55,12 @@ class Shop : public Room
 		void ResolveData();
 		
         private:   
-                int minerals_ammount;
-        	int food_ammount;    
-        	int medicine_ammount;  
-        	int military_ammount;  
-        	int drug_ammount;     
-        	int exclusive_ammount;
+                int minerals_amount;
+        	int food_amount;    
+        	int medicine_amount;  
+        	int military_amount;  
+        	int drug_amount;     
+        	int exclusive_amount;
 
                 int minerals_price;
         	int food_price;    
@@ -65,6 +68,8 @@ class Shop : public Room
         	int military_price;  
         	int drug_price;     
         	int exclusive_price;
+        	                   
+        	void Deal(Npc*, int, int, int);
         	                     
         	void UpdateAllPrices();
         	void UpdateMineralPrice();

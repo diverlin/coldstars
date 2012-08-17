@@ -172,6 +172,11 @@ int main()
 //# gravitacionnaja mina, lokal'noe uvelichenie gravitacionnogo polja, effect shockwave zamedlennyj(puzyr')
 //# korpus piratov dop sekretnyj slot s ogranichennym ob'emom dlja perevozki zapretnyx tovarov
 
-
+/*  from Segej
+сделать гильдию торговцев, минусы -  взносы каждый месяц,
+- выполнять требования(и квесты) гильдии(к примеру эмбарго в каких то системах и прочее)
+плюсы - персонаж находится под защитой гильдии(реже нападают пираты)
+- более выгодные условия торговли (скидки на оптовые закупки в бизнесцентрах)
+*/
 
 // navyk xakerstva

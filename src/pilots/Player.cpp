@@ -716,7 +716,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
                			}
                			else
                			{
-               				MicroTask* microtask = new MicroTask(visible_SPACESTATION_vec[i], MICROSCENARIO::DOCKING_ID);
+               				MicroTask* microtask = new MicroTask(MICROSCENARIO::DOCKING_ID, visible_SPACESTATION_vec[i]);
                				npc->GetStateMachine()->SetCurrentMicroTask(microtask);
                			}
 			}
@@ -761,7 +761,7 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
                		{
                			//pPLAYER->GetVehicle()->getNavigator()->SetTarget(visible_PLANET_vec[pi], DOCKING_NAVIGATOR_ACTION_ID);
                			//pPLAYER->GetVehicle()->getNavigator()->Update_inSpace_inStatic();  
-       				MicroTask* microtask = new MicroTask(visible_PLANET_vec[i], MICROSCENARIO::DOCKING_ID);
+       				MicroTask* microtask = new MicroTask(MICROSCENARIO::DOCKING_ID, visible_PLANET_vec[i]);
               			npc->GetStateMachine()->SetCurrentMicroTask(microtask);
               		}   
 		

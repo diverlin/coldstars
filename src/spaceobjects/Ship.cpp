@@ -36,7 +36,8 @@ void Ship::UpdateInfo()
 
     	info.addTitleStr("SHIP");
     	info.addNameStr("id/ss_id:");          	info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->GetId()) );
-    	info.addNameStr("race:");   		info.addValueStr( returnRaceStringByRaceId(textureOb->race_id) ); 
+    	info.addNameStr("race:");   		info.addValueStr( getRaceString(textureOb->race_id) ); 
+    	info.addNameStr("class:");   		info.addValueStr( getClassString(data_id.subsubtype_id) );     	
     	info.addNameStr("armor/max:");     	info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) );
     	info.addNameStr("size id:");     	info.addValueStr( int2str(textureOb->size_id) );
     	info.addNameStr("space/free:");   	info.addValueStr( int2str(data_korpus.space) + "/" + int2str(propetries.free_space) );
@@ -62,7 +63,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 	{
 		owner_npc->UpdateInSpace(time, show_effect);
 		points.Update();   
-		weapon_complex->Fire(time, owner_npc->GetSkill()->GetAttack(), show_effect);
+		weapon_complex->Fire(time, owner_npc->GetSkill().GetAttack(), show_effect);
 
     		if (ableTo.DRIVE == true) 
     		{ 

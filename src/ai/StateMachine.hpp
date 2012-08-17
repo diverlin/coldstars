@@ -37,9 +37,11 @@ class StateMachine
 		MacroTaskManager* GetMacroTaskManager() const { return macrotask_manager; };
 		MicroTaskManager* GetMicroTaskManager() const { return microtask_manager; };		
 				
-		void UpdateInDynamic();			
-		void UpdateInStatic();	
-
+		void UpdateInStaticInSpace();	
+		void UpdateInStaticInDock();	
+		void UpdateInDynamicInSpace();			
+		void UpdateInDynamicInDock();	
+		
 		void ForceReset() const; // was private
 		
 	private:
