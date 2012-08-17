@@ -58,9 +58,10 @@ struct VisionStatus
 class Observation 
 {
    	public:
-      		Observation(Npc*);
+      		Observation();
      		~Observation();
      		
+     		void SetNpcOwner(Npc* npc_owner) { this->npc_owner = npc_owner; };
  		void ObserveAllInSpace();
           	
           	void FindEchievableStarSystems(Galaxy*);
