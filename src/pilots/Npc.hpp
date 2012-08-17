@@ -47,9 +47,9 @@ class Npc : public Base
 		int GetRaceId()				const { return race_id; };
 		StarSystem* GetFailBackStarSystem() 	const { return failback_starsystem; };
 		Vehicle* GetVehicle()           	const { return vehicle; };
-		Skill& GetSkill() 			       { return skill; };
+		Skill& GetSkill() 			{ return skill; };
 		Vehicle* GetScanTarget()        	const { return vehicle_to_scan; };	
-		Observation* GetObservation()   	const { return observation; };
+		Observation& GetObservation()   	{ return observation; };
 		unsigned long int GetCredits()  	const { return credits; };   
 		StateMachine* GetStateMachine() 	const { return state_machine; };
 
@@ -105,7 +105,7 @@ class Npc : public Base
      		 	
      		Vehicle* vehicle_to_scan;
      		
-                Observation* observation;
+                Observation observation;
 
 		UnresolvedDataUniqueNpc data_unresolved_npc;
 

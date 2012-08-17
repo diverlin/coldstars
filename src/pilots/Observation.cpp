@@ -17,10 +17,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-Observation::Observation(Npc* _npc)
-{ 
-    	npc_owner = _npc;
-}
+Observation::Observation():npc_owner(NULL)
+{}
     
 Observation::~Observation()
 {}  

@@ -36,7 +36,7 @@ Npc::Npc(int id)
     	
     	failback_starsystem = NULL;
  		
-        observation 	= new Observation(this);
+        observation.SetNpcOwner(this);
         state_machine 	= new StateMachine(this);   
         
         ai_model = NULL;     
@@ -45,7 +45,6 @@ Npc::Npc(int id)
 /* virtual */
 Npc :: ~Npc() 
 { 
-        delete observation;
         delete state_machine;        
 }  
 
@@ -86,14 +85,14 @@ void Npc::MindInSpace()
 	if (upper_control == false)
 	{
         	CheckNeeds();
-        	observation->ObserveAllInSpace();  
+        	observation.ObserveAllInSpace();  
                         
         	if (ai_model)
         	{
 			ai_model->UpdateInStatic(this);
 		}
       
-		if (observation->see.ASTEROID == true)
+		if (observation.see.ASTEROID == true)
 		{
                 	AsteroidScenario();
 		}             
@@ -159,7 +158,7 @@ void Npc::AsteroidScenario()
         vehicle->GetWeaponComplex()->DeactivateAllWeapons();
 
         vehicle->GetWeaponComplex()->ActivateAllWeapons();
-        vehicle->GetWeaponComplex()->SetTarget(observation->visible_ASTEROID_pair_vec[0].object);
+        vehicle->GetWeaponComplex()->SetTarget(observation.visible_ASTEROID_pair_vec[0].object);
                 
         //printf("TARGET => ship_id, asteroid id = %i/%i\n", ship->GetId(), sorted_visible_ASTEROID_pList[0]->GetId());
 }
@@ -173,9 +172,9 @@ Planet* Npc::GetPlanetForDocking()
 
 StarSystem* Npc::GetClosestStarSystem(bool _captured)
 {
-       	observation->FindEchievableStarSystems(GetStarSystem()->GetGalaxy());
+       	observation.FindEchievableStarSystems(GetStarSystem()->GetGalaxy());
         	
-       	StarSystem* _target_starsystem = observation->GetClosestStarSystem(_captured);   
+       	StarSystem* _target_starsystem = observation.GetClosestStarSystem(_captured);   
 	return _target_starsystem;
 }
 
