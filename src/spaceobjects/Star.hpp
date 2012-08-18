@@ -37,6 +37,8 @@ class Star : public BasePlanet
 		int GetColorId()           const { return textureOb->color_id; }
 		float GetBrightThreshold() const { return textureOb->brightThreshold; }
 
+		void Hit(int, bool) {};
+
                 void CalcColor();    		
     		void Update_inSpace(int, bool);
     		

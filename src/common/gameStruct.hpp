@@ -96,14 +96,19 @@ struct AbilitiesStatus
 
 struct LifeData
 {
-	LifeData();
-
 	bool is_alive;
 	int armor;
 
 	int dying_time;
 
 	bool garbage_ready;
+
+	LifeData():
+	is_alive(true),
+        armor(1),
+        dying_time(0),
+        garbage_ready(false) {};
+        
 };
 
 

@@ -275,7 +275,10 @@ Vehicle* StarSystem::GetRandomVehicle(std::vector<int>* _pVec_race_id) const
 
 void StarSystem::updateStates()
 {
-	asteroidManager_s(5);
+	if (CONTAINER_vec.size() < 100)
+	{
+		asteroidManager_s(1);
+	}
 	     	
 	//if (PLAYER_vec.size() > 0)
 	//{

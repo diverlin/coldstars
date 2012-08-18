@@ -33,10 +33,10 @@ MicroScenarioDocking::~MicroScenarioDocking()
 		
 void MicroScenarioDocking::Enter(Npc* npc) const
 {	
-	npc->GetVehicle()->GetDriveComplex()->SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
-	
+	npc->GetVehicle()->GetDriveComplex()->SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget(), NAVIGATOR_ACTION::DOCKING_ID);
+
 	#if LOG_ENABLED == 1 
-	Logger::Instance().Log( "npc_id="+int2str(npc->GetId())+" ENTER MicroScenarioDocking, docking to ob_id="+int2str( npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetId() ) ); 
+	Logger::Instance().Log( "npc_id="+int2str(npc->GetId())+" ENTER MicroScenarioDocking, docking to ob_id="+int2str(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetId()) ); 
 	#endif
 }
 

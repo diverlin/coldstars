@@ -41,6 +41,8 @@ void DriveComplex::ResetTarget()
 	action_id = NAVIGATOR_ACTION::NONE_ID;
 	
 	direction_list_END = true;
+	
+	//std::cout<<"drive_complex reset target"<<std::endl;
 }
       
 void DriveComplex::SetStaticTargetCoords(const vec2f& target_pos)
@@ -66,9 +68,9 @@ void DriveComplex::SetTarget(BaseGameEntity* target, int _action_id)
 }
   
 
-void DriveComplex::DefineDistance(int _action_id)
+void DriveComplex::DefineDistance(int action_id)
 {
-	action_id = _action_id;
+	this->action_id = action_id;
     	
     	switch(action_id)
     	{	

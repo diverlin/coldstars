@@ -43,7 +43,7 @@ class Planet : public BasePlanet
 
 		void UpdateInSpace(int, bool);
 		void UpdateInSpaceInStatic();
-		
+				
 		void RenderAtmosphere_NEW(const vec2f&) const;
 
 		void SaveData(boost::property_tree::ptree&) const;		

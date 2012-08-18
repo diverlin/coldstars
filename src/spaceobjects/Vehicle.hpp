@@ -166,7 +166,8 @@ class Vehicle : public BaseGameEntity
         	
         	const Rect& GetGuiRect() const { return kontur_rect; };
         	
-        	bool HasSomeGoodsInCargo() const;
+        	//bool HasSomeGoodsInCargo() const;
+        	GoodsPack* GetGoodsPack() const;
         	
         	AbilitiesStatus ableTo;
                 VehiclePropetries propetries;

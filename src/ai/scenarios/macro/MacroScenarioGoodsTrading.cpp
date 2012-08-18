@@ -45,7 +45,7 @@ bool MacroScenarioGoodsTrading::IsAbleToBuyGoods(Npc* npc) const
 		
 void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
 {
-	if (npc->GetVehicle()->HasSomeGoodsInCargo() == false)
+	if (npc->GetVehicle()->GetGoodsPack() == NULL)
 	{
 		if (IsAbleToBuyGoods(npc) == true)
 		{
@@ -87,9 +87,16 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
 
 void MacroScenarioGoodsTrading::UpdateInStaticInDock(Npc* npc) const
 {
+	GoodsPack* goods_pack = npc->GetVehicle()->GetGoodsPack(); 
+	while(goods_pack != NULL)
+	{
+		npc->SellGoods(goods_pack);
+		goods_pack = npc->GetVehicle()->GetGoodsPack(); 
+	}
+	
 	if (IsAbleToBuyGoods(npc) == true)
 	{
-		npc->BuyProfitGoods();
+		npc->BuyGoods();
 	}
 
 	MicroTask* microtask = new MicroTask(MICROSCENARIO::LAUNCHING_ID);

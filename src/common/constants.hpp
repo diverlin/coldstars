@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <string>
 #include "../common/myVector.hpp"
 
-#define LOG_ENABLED 0
+#define LOG_ENABLED 1
 
 const double NO_DELAY = 0.0f;
 const int NO_ADDITIONAL_INFO = 0;

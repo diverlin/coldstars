@@ -71,7 +71,7 @@ bool Kosmoport::GetPermissionToLand() const
 }
                 
 /* virtual */
-bool Kosmoport::Add(Vehicle* vehicle)
+bool Kosmoport::AddVehicle(Vehicle* vehicle)
 {
         angar->AddVehicle(vehicle);        
 
@@ -82,7 +82,7 @@ bool Kosmoport::Add(Vehicle* vehicle)
 }
 
 /* virtual */
-bool Kosmoport::Remove(Vehicle* vehicle)
+bool Kosmoport::RemoveVehicle(Vehicle* vehicle)
 {        
     	return angar->RemoveVehicle(vehicle);
 }

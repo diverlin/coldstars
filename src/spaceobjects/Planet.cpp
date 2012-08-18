@@ -67,8 +67,9 @@ void Planet::UpdateInfo()
 
 	info.addTitleStr("PLANET");
 	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
+	info.addNameStr("armor:");  	 info.addValueStr(int2str(data_life.armor));
 	info.addNameStr("population:");  info.addValueStr(int2str(population));
-	info.addNameStr("dock_veh:");  info.addValueStr(land->GetDockVehicleStr());
+	info.addNameStr("dock_veh:");    info.addValueStr(land->GetDockVehicleStr());
 }
 
 void Planet::PostDeathUniqueEvent(bool)

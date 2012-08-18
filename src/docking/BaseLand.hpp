@@ -39,8 +39,8 @@ class BaseLand : public Base
 		Base* GetOwner() const { return owner; };
 		virtual bool GetPermissionToLand() const = 0;
 		                
-                virtual bool Add(Vehicle*) = 0;
-                virtual bool Remove(Vehicle*) = 0;
+                virtual bool AddVehicle(Vehicle*) = 0;
+                virtual bool RemoveVehicle(Vehicle*) = 0;
                 
                 virtual void UpdateInSpaceInStatic() = 0;  
                 
