@@ -48,6 +48,7 @@ void StarBuilder::CreateNewStar(int id)
 void StarBuilder::CreateNewInternals()
 {     
         LifeData data_life;
+        data_life.armor = 1000000; 
 
  	PlanetData star_data;
     	star_data.orbit_center  = vec2f(0, 0); 

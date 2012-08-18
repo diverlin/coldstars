@@ -48,6 +48,7 @@ void PlanetBuilder::CreateNewPlanet(int id)
 void PlanetBuilder::CreateNewInternals(float orbit_radius)
 {           
         LifeData data_life;
+	data_life.armor = 100000;
 
 	PlanetData planet_data;
 
@@ -64,6 +65,7 @@ void PlanetBuilder::CreateNewInternals(float orbit_radius)
         planet->SetPlanetData(planet_data);
 
         unsigned long int population = getRandInt(1000, 4000);
+        planet->SetPopulation(population);
 	//unsigned long int population = 0;
 	BaseLand* land;
 	if (population > 0) 

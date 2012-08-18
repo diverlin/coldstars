@@ -749,18 +749,15 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
 
 bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
 {
-       	for (unsigned int i = 0; i < visible_PLANET_vec.size(); i++)
+       	for (unsigned int i=0; i<visible_PLANET_vec.size(); i++)
        	{ 
        		float object_cursor_dist = distBetweenPoints(visible_PLANET_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
        		if (object_cursor_dist < visible_PLANET_vec[i]->GetCollisionRadius())
             	{   
                 	cursor.SetFocusedSpaceObject(visible_PLANET_vec[i]); 
-                	//visible_PLANET_vec[i]->GetOrbit()->Draw();
           
                		if (data_mouse.left_click == true)
                		{
-               			//pPLAYER->GetVehicle()->getNavigator()->SetTarget(visible_PLANET_vec[pi], DOCKING_NAVIGATOR_ACTION_ID);
-               			//pPLAYER->GetVehicle()->getNavigator()->Update_inSpace_inStatic();  
        				MicroTask* microtask = new MicroTask(MICROSCENARIO::DOCKING_ID, visible_PLANET_vec[i]);
               			npc->GetStateMachine()->SetCurrentMicroTask(microtask);
               		}   

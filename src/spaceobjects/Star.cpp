@@ -91,6 +91,7 @@ void Star::UpdateInfo()
 	info.clear();
     	info.addTitleStr("STAR");
     	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
+    	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
 }
 
 void Star::PostDeathUniqueEvent(bool)

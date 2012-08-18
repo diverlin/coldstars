@@ -67,7 +67,23 @@ Vehicle::~Vehicle()
 	slot_total_vec.clear();
 } 
 
-bool Vehicle::HasSomeGoodsInCargo() const
+//bool Vehicle::HasSomeGoodsInCargo() const
+//{
+	//for(unsigned int i=0; i<slot_cargo_vec.size(); i++)
+	//{
+		//if (slot_cargo_vec[i]->GetEquiped() == true)
+		//{
+			//if (slot_cargo_vec[i]->GetItem()->GetTypeId() == ENTITY::GOODS_ID)
+			//{
+				//return true;
+			//}
+		//}
+	//}	
+	
+	//return false;
+//}
+
+GoodsPack* Vehicle::GetGoodsPack() const
 {
 	for(unsigned int i=0; i<slot_cargo_vec.size(); i++)
 	{
@@ -75,12 +91,12 @@ bool Vehicle::HasSomeGoodsInCargo() const
 		{
 			if (slot_cargo_vec[i]->GetItem()->GetTypeId() == ENTITY::GOODS_ID)
 			{
-				return true;
+				return slot_cargo_vec[i]->GetGoodsPack();
 			}
 		}
 	}	
 	
-	return false;
+	return NULL;
 }
         	
 void Vehicle::AddItemSlot(ItemSlot* slot, const Rect& rect) 
@@ -279,7 +295,7 @@ void Vehicle::DockingEvent()
      		case ENTITY::PLANET_ID:
      		{
                 	Planet* planet = ((Planet*)drive_complex->GetTarget());                
-     			planet->GetLand()->Add((Ship*)this);
+     			planet->GetLand()->AddVehicle(this);
 			break;
 		}
 	
@@ -290,7 +306,7 @@ void Vehicle::DockingEvent()
 				case ENTITY::SPACESTATION_ID:
 				{
                 			SpaceStation* spacestation = ((SpaceStation*)drive_complex->GetTarget());
-                        		spacestation->GetLand()->Add((Ship*)this);
+                        		spacestation->GetLand()->AddVehicle(this);
 					break;
 				}
 				
@@ -318,7 +334,8 @@ void Vehicle::LaunchingEvent()
 		{
 			Base* place = ((Angar*)parent_vehicleslot->GetOwner())->GetOwnerKosmoport()->GetOwner();
 		     	starsystem->AddVehicle(this, ((Planet*)place)->GetPoints().GetCenter(), 0, NULL);
-			parent_vehicleslot->Release();
+			//parent_vehicleslot->Release(); 
+			((Planet*)place)->GetLand()->RemoveVehicle(this);
 			break;
 		}
 			

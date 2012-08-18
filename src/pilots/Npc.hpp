@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../ai/StateMachine.hpp"
 
 class Planet;
+class GoodsPack;
 
 struct UnresolvedDataUniqueNpc
 {
@@ -79,8 +80,9 @@ class Npc : public Base
 		void RenderInfo(const vec2f&);
 		                   
                 //bool BuyArmorAsMuchAsPossible();
-                bool BuyProfitGoods();
-                
+                bool BuyGoods();
+                bool SellGoods(GoodsPack*);
+                                
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();

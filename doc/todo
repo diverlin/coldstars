@@ -42,9 +42,10 @@
 #1
 ship.propetries structure is not correct after save/load
 
-# textureOb, updateAnimationFrame()
+#2
+textureOb, updateAnimationFrame()
 current implementation is: one textureOb is shared between many objects, so if the objects has the same texture then animation speed will be rised proportionally, which is not correct. 
 
 #3
 save/load =>starmap, stars are not shown anymore
-#############################################
+

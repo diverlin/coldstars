@@ -77,6 +77,13 @@ void NpcBuilder::CreateNewInternals(int race_id, int subtype_id)
    		   	case CLASS::TRADER_ID: 
    		   	{
    		   		npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER_ID)); 
+   		   		
+   		   		for (int i=0; i<6; i++)
+   		   		{
+   		   			npc->GetSkill().IncrementTrader();
+   		   		}
+   		   		npc->GetSkill().Acknowledge();
+   		   		
    		   		break;
    		   	}
    		   	

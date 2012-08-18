@@ -74,15 +74,7 @@ AbilitiesStatus :: AbilitiesStatus()
 }
 
 
-LifeData :: LifeData()
-{
-        is_alive = true;
-        armor = 1;
-        	
-        dying_time = 0;
-        
-        garbage_ready = false;
-}	
+
 
 
 IdData :: IdData()

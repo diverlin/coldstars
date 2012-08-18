@@ -28,7 +28,7 @@ NatureLand::~NatureLand()
 
 //// ******* TRANSITION ******* 
 /* virtual */
-bool NatureLand::Add(Vehicle* vehicle)
+bool NatureLand::AddVehicle(Vehicle* vehicle)
 {
         vehicle->SetPlaceTypeId(ENTITY::PLANET_ID);
         //VEHICLE_vec.push_back(vehicle);
@@ -37,7 +37,7 @@ bool NatureLand::Add(Vehicle* vehicle)
 }
 
 /*virtual */
-bool NatureLand::Remove(Vehicle* vehicle)
+bool NatureLand::RemoveVehicle(Vehicle* vehicle)
 {
         //bool is_removed = false;
         
