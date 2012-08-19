@@ -23,7 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../common/myStr.hpp"
 #include "../docking/Kosmoport.hpp"
 #include "../render/Render.hpp"
-#include "../effects/particlesystem/explosion.hpp"
+#include "../effects/particlesystem/ExplosionEffect.hpp"
 
 #include "../resources/textureManager.hpp"
 #include "../resources/resources.hpp"

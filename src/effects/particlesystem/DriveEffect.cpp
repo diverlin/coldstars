@@ -16,10 +16,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
+#include "DriveEffect.hpp"
+#include "../../render/Render.hpp"
+#include "../../common/constants.hpp"
+#include "../../resources/textureManager.hpp"
 
 DriveEffect::DriveEffect(vec2f* pTo_start_pos, 
-			    vec2f* pTo_target_pos)
+			 vec2f* pTo_target_pos)
 {
     	this->pTo_start_pos  = pTo_start_pos;      //ob.points.midLeft
      	this->pTo_target_pos = pTo_target_pos;     //ob.points.midFarLeft

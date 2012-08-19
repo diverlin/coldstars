@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef EXPLOSION_H
 #define EXPLOSION_H
 
+#include "BaseParticleSystem.hpp"
 
 class ExplosionEffect : public BaseParticleSystem
 { 

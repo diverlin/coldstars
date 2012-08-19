@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef DRIVEEFFECT_H
 #define DRIVEEFFECT_H
 
-#include "baseParticleSystem.hpp"
+#include "BaseParticleSystem.hpp"
 
 class DriveEffect : public BaseParticleSystem
 {

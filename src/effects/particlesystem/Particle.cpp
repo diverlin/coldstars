@@ -16,6 +16,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "Particle.hpp"
+#include "../../common/rand.hpp"
+#include "../../render/Render.hpp"
 
 Particle::Particle(ParticleData _data_particle)
 {
@@ -30,15 +33,6 @@ Particle::Particle(ParticleData _data_particle)
       
 Particle::~Particle()
 {}
-
-void Particle::SetPosition(vec2f pos) { this->pos = pos; } 
-void Particle::SetVelocity(vec2f _velocity) { d_pos = _velocity; }
-
-bool Particle::GetAlive()       const { return is_alive; }   
-float Particle::GetAlpha()      const { return color.a; }
-float Particle::GetAlphaStart() const { return data_particle.color_start.a; }
-
-
 
 void Particle::RandomizeLifeTime(float low, float high)
 {

@@ -69,6 +69,14 @@ set (SOURCES
 	src/render/Fbo.cpp
 	src/render/Bloom.cpp
 
+
+	src/effects/particlesystem/Particle.cpp
+	src/effects/particlesystem/BaseParticleSystem.cpp
+
+	src/effects/particlesystem/DamageEffect.cpp
+	src/effects/particlesystem/DriveEffect.cpp
+	src/effects/particlesystem/ExplosionEffect.cpp
+
   	main.cpp
 )
 
