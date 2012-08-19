@@ -174,19 +174,22 @@ void BaseVehicleBuilder::CreateProtectionComplex(Vehicle* vehicle) const
  	vehicle->SetProtectionComplex(protection_complex);
 }
 
-void BaseVehicleBuilder::CreateTextureDependedStuff(Vehicle* vehicle) const
+void BaseVehicleBuilder::CreateDriveComplexTextureDependedStuff(Vehicle* vehicle) const
 {
-	vehicle->GetProtectionComplex()->Resize(1.2*vehicle->GetTextureOb()->GetFrameWidth(), 1.2*vehicle->GetTextureOb()->GetFrameHeight());
-
     	vehicle->GetPoints().initMidLeftPoint();
     	vehicle->GetPoints().addMidLeftPoint();
 
     	vehicle->GetPoints().initMidFarLeftPoint();
     	vehicle->GetPoints().addMidFarLeftPoint();
     	
-	TrailEffect* drive_effect = createTrailEffect(vehicle->GetTextureOb()->size_id, vehicle->GetPoints().GetpMidLeft(), vehicle->GetPoints().GetpMidFarLeft());
+	DriveEffect* drive_effect = GetNewDriveEffect(vehicle->GetTextureOb()->size_id, vehicle->GetPoints().GetpMidLeft(), vehicle->GetPoints().GetpMidFarLeft());
  	vehicle->GetDriveComplex()->SetDriveEffect(drive_effect);
 }               
+
+void BaseVehicleBuilder::CreateProtectionComplexTextureDependedStuff(Vehicle* vehicle) const
+{
+	vehicle->GetProtectionComplex()->Resize(1.2*vehicle->GetTextureOb()->GetFrameWidth(), 1.2*vehicle->GetTextureOb()->GetFrameHeight());
+}          
 
 void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
 {

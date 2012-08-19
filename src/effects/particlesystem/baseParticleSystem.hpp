@@ -30,16 +30,16 @@ class BaseParticleSystem
     		BaseParticleSystem();
     		virtual ~BaseParticleSystem();
 
-      		void setDying();
-                void setTextureOb(TextureOb*);
-                void setParent(BaseGameEntity*);
-                void setPosition(vec2f);
-                void setParticlesNum(int);
-                void setParticleData(ParticleData);
+      		void SetDying();
+                void SetTextureOb(TextureOb*);
+                void SetParent(BaseGameEntity*);
+                void SetPosition(vec2f);
+                void SetParticlesNum(int);
+                void SetParticleData(ParticleData);
                 
 		bool GetAlive() const;
 		
-       		virtual void update() = 0;
+       		virtual void Update() = 0;
        		virtual void Render() = 0;
        		
        	protected:
@@ -55,9 +55,9 @@ class BaseParticleSystem
    
           	std::vector<Particle*> particles_vec;  
                 
-                vec2f getRandomVelocity();            
-		vec2f getRandomAccurateVelocity();
-                vec2f getRandomDirtyVelocity();
+                vec2f GetRandomVelocity();            
+		vec2f GetRandomAccurateVelocity();
+                vec2f GetRandomDirtyVelocity();
 		//void calcAccurateRandomVelocity2(vec2f);
 };
 

@@ -17,44 +17,44 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-ExplosionEffect :: ExplosionEffect()
+ExplosionEffect::ExplosionEffect()
 {  
 	//subtype_id = EXPLOSION_EFFECT_ID;
 }
  
 /* virtual */
-ExplosionEffect :: ~ExplosionEffect()
+ExplosionEffect::~ExplosionEffect()
 {}
 
 
-void ExplosionEffect :: createParticles()
+void ExplosionEffect::CreateParticles()
 {
-	for(int i = 0; i< num_particles; i++)
+	for(int i=0; i<num_particles; i++)
     	{  
                 Particle* particle = new Particle(data_particle);
-                particle->setPosition(center);
-       		particle->setVelocity(getRandomVelocity());
+                particle->SetPosition(center);
+       		particle->SetVelocity(GetRandomVelocity());
        		particles_vec.push_back(particle);
     	}
 }
 
 
 
-void ExplosionEffect :: update()
+void ExplosionEffect::Update()
 {
     	is_alive = false;
     	for (unsigned int i = 0; i < num_particles; i++)
     	{
         	if (particles_vec[i]->GetAlive() == true)
         	{
-           		particles_vec[i]->update();
+           		particles_vec[i]->Update();
            		is_alive = true;
         	}
     	}  
 }     
     
 
-void ExplosionEffect :: Render()
+void ExplosionEffect::Render()
 {
 	glBindTexture(GL_TEXTURE_2D, texOb->texture);
     	for(unsigned int i = 0; i < num_particles; i++)
@@ -109,12 +109,12 @@ void  createExplosion(StarSystem* starsystem, vec2f center, int obSize)
                 texOb_particle = TextureManager::Instance().getTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
 
 		explosion = new ExplosionEffect();
-                explosion->setTextureOb(texOb_particle);
-                explosion->setPosition(center);
-                explosion->setParticleData(data_particle);
-                explosion->setParticlesNum(particles_num);
+                explosion->SetTextureOb(texOb_particle);
+                explosion->SetPosition(center);
+                explosion->SetParticleData(data_particle);
+                explosion->SetParticlesNum(particles_num);
                 
-                explosion->createParticles();
+                explosion->CreateParticles();
                 
 		starsystem->Add(explosion);
 	}
@@ -127,12 +127,12 @@ void  createExplosion(StarSystem* starsystem, vec2f center, int obSize)
                 texOb_particle = TextureManager::Instance().getTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
 		
 		explosion = new ExplosionEffect();
-                explosion->setTextureOb(texOb_particle);
-                explosion->setPosition(center);
-                explosion->setParticleData(data_particle);
-                explosion->setParticlesNum(particles_num);
+                explosion->SetTextureOb(texOb_particle);
+                explosion->SetPosition(center);
+                explosion->SetParticleData(data_particle);
+                explosion->SetParticlesNum(particles_num);
                 
-                explosion->createParticles();
+                explosion->CreateParticles();
                 
 		starsystem->Add(explosion);
                 }
@@ -144,12 +144,12 @@ void  createExplosion(StarSystem* starsystem, vec2f center, int obSize)
                 texOb_particle = TextureManager::Instance().getTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::YELLOW_ID);
 
 		explosion = new ExplosionEffect();
-                explosion->setTextureOb(texOb_particle);
-                explosion->setPosition(center);
-                explosion->setParticleData(data_particle);
-                explosion->setParticlesNum(particles_num);
+                explosion->SetTextureOb(texOb_particle);
+                explosion->SetPosition(center);
+                explosion->SetParticleData(data_particle);
+                explosion->SetParticlesNum(particles_num);
                 
-                explosion->createParticles();
+                explosion->CreateParticles();
                 
 		starsystem->Add(explosion);
                 }
@@ -161,12 +161,12 @@ void  createExplosion(StarSystem* starsystem, vec2f center, int obSize)
                 texOb_particle = TextureManager::Instance().getTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
 		
 		explosion = new ExplosionEffect();
-                explosion->setTextureOb(texOb_particle);
-                explosion->setPosition(center);
-                explosion->setParticleData(data_particle);
-                explosion->setParticlesNum(particles_num);
+                explosion->SetTextureOb(texOb_particle);
+                explosion->SetPosition(center);
+                explosion->SetParticleData(data_particle);
+                explosion->SetParticlesNum(particles_num);
                 
-                explosion->createParticles();
+                explosion->CreateParticles();
                 
 		starsystem->Add(explosion);
                 }

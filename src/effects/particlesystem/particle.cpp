@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-Particle :: Particle(ParticleData _data_particle)
+Particle::Particle(ParticleData _data_particle)
 {
 	is_alive = true;
   
@@ -28,26 +28,26 @@ Particle :: Particle(ParticleData _data_particle)
       	size  = _data_particle.size_start;
 } 
       
-Particle :: ~Particle()
+Particle::~Particle()
 {}
 
-void Particle :: setPosition(vec2f pos) { this->pos = pos; } 
-void Particle :: setVelocity(vec2f _velocity) { d_pos = _velocity; }
+void Particle::SetPosition(vec2f pos) { this->pos = pos; } 
+void Particle::SetVelocity(vec2f _velocity) { d_pos = _velocity; }
 
-bool Particle :: GetAlive()       const { return is_alive; }   
-float Particle :: getAlpha()      const { return color.a; }
-float Particle :: getAlphaStart() const { return data_particle.color_start.a; }
+bool Particle::GetAlive()       const { return is_alive; }   
+float Particle::GetAlpha()      const { return color.a; }
+float Particle::GetAlphaStart() const { return data_particle.color_start.a; }
 
 
 
-void Particle :: randomizeLifeTime(float low, float high)
+void Particle::RandomizeLifeTime(float low, float high)
 {
         float speed_rate              = getRandFloat(low, high);   // 0.5, 0.8
         data_particle.d_size         *= speed_rate;
         data_particle.velocity_start *= speed_rate;
 }
 
-void Particle :: randomize_d_alpha(float val1_f, float val2_f)
+void Particle::Randomize_d_alpha(float val1_f, float val2_f)
 {
 	float val1_i = val1_f*10000;
 	float val2_i = val2_f*10000;
@@ -56,7 +56,7 @@ void Particle :: randomize_d_alpha(float val1_f, float val2_f)
 }            	
       		
 
-//void Particle :: reborn(vec2f center)
+//void Particle::reborn(vec2f center)
 //{       	 
 	//is_alive = true;
        			
@@ -67,7 +67,7 @@ void Particle :: randomize_d_alpha(float val1_f, float val2_f)
 //}
 
 
-void Particle :: reborn()
+void Particle::Reborn()
 {       	 
 	is_alive = true;
        	//pos = _new_pos_start;  
@@ -79,7 +79,7 @@ void Particle :: reborn()
 }
       		
 
-void Particle :: update()
+void Particle::Update()
 {
     	pos.x += d_pos.x;
     	pos.y += d_pos.y; 
@@ -93,7 +93,7 @@ void Particle :: update()
     	}
 }
 
-void Particle :: Render() const
+void Particle::Render() const
 {
 	if (is_alive == true)
 	{

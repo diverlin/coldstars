@@ -84,8 +84,9 @@ void SpaceStationBuilder::CreateNewInternals()
     	
 	CreateKorpusGeometry(spacestation);
         CreateKorpusGui(spacestation);
-        CreateTextureDependedStuff(spacestation);
-
+        CreateDriveComplexTextureDependedStuff(spacestation);
+        CreateProtectionComplexTextureDependedStuff(spacestation);
+        
         CreateEquipmentSlots(spacestation);
                 
         KosmoportBuilder::Instance().CreateNewKosmoport();

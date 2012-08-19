@@ -82,7 +82,7 @@ class WeaponSelector;
 #include "src/effects/particlesystem/baseParticleSystem.hpp"
 #include "src/effects/particlesystem/blackHoleEffect.hpp"
 #include "src/effects/particlesystem/explosion.hpp"
-#include "src/effects/particlesystem/trail.hpp"
+#include "src/effects/particlesystem/DriveEffect.hpp"
 #include "src/effects/particlesystem/damage.hpp"
 
 #include "src/spaceobjects/BlackHole.hpp"
@@ -358,7 +358,7 @@ class WeaponSelector;
 #include "src/effects/particlesystem/baseParticleSystem.cpp"
 #include "src/effects/particlesystem/blackHoleEffect.cpp"
 #include "src/effects/particlesystem/explosion.cpp"
-#include "src/effects/particlesystem/trail.cpp"
+#include "src/effects/particlesystem/DriveEffect.cpp"
 #include "src/effects/particlesystem/damage.cpp"
 #include "src/effects/lazerTrace.cpp"
 #include "src/effects/Shield.cpp"

@@ -17,23 +17,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef TRAIL_H
-#define TRAIL_H
+#ifndef DRIVEEFFECT_H
+#define DRIVEEFFECT_H
 
 #include "baseParticleSystem.hpp"
 
-class TrailEffect : public BaseParticleSystem
+class DriveEffect : public BaseParticleSystem
 {
    	public:
-       		TrailEffect(vec2f*, vec2f*);
-       		virtual ~TrailEffect();
+       		DriveEffect(vec2f*, vec2f*);
+       		virtual ~DriveEffect();
        
-       		virtual void update();
+       		virtual void Update();
        		virtual void Render();
        		
-                void createParticles();
-                void updateVelocity();
-       		void putParticlesToInitPos();
+                void CreateParticles();
+                void UpdateVelocity();
+       		void PutParticlesToInitPos();
                                 
        	private:
        		vec2f* pTo_start_pos;      //ob.points.midLeft
@@ -46,6 +46,6 @@ class TrailEffect : public BaseParticleSystem
        	
 };  
 
-TrailEffect* createTrailEffect(int, vec2f*, vec2f*);
+DriveEffect* GetNewDriveEffect(int, vec2f*, vec2f*);
 
 #endif
