@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef LAZERTRACE_H
 #define LAZERTRACE_H 
 
-#include "../effects/particlesystem/damage.hpp"
+#include "../effects/particlesystem/DamageEffect.hpp"
 
 class LazerTraceEffect
 { 

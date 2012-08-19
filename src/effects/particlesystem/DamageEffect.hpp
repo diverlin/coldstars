@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef DAMAGE_H
 #define DAMAGE_H
 
+#include "BaseParticleSystem.hpp"
 
 class DamageEffect : public BaseParticleSystem
 {

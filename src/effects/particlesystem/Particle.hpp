@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef PARTICLE_H
 #define PARTICLE_H
  
+#include "../../common/gameStruct.hpp"
 
 class Particle
 {
@@ -27,12 +28,12 @@ class Particle
       		Particle(ParticleData);       
       		~Particle();
 
-                void SetPosition(vec2f);      		
-      		void SetVelocity(vec2f);
+                void SetPosition(const vec2f& pos) { this->pos = pos; };      		
+      		void SetVelocity(const vec2f& _velocity) { d_pos = _velocity; };
       		
-      		bool GetAlive()       const;
-      		float GetAlpha()      const;
-      		float GetAlphaStart() const;
+      		bool GetAlive()       const { return is_alive; };
+      		float GetAlpha()      const { return color.a; };
+      		float GetAlphaStart() const { return data_particle.color_start.a; };
                 
             	void Reborn();      
 

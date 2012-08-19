@@ -78,12 +78,6 @@ class WeaponSelector;
 #include "src/spaceobjects/Container.hpp"
 #include "src/items/others/GoodsPack.hpp"
 
-#include "src/effects/particlesystem/particle.hpp"
-#include "src/effects/particlesystem/baseParticleSystem.hpp"
-#include "src/effects/particlesystem/blackHoleEffect.hpp"
-#include "src/effects/particlesystem/explosion.hpp"
-#include "src/effects/particlesystem/DriveEffect.hpp"
-#include "src/effects/particlesystem/damage.hpp"
 
 #include "src/spaceobjects/BlackHole.hpp"
 
@@ -354,12 +348,7 @@ class WeaponSelector;
 #include "src/effects/BaseBackGroundEffect.cpp"
 #include "src/effects/DistantNebulaEffect.cpp"
 #include "src/effects/DistantStarEffect.cpp"
-#include "src/effects/particlesystem/particle.cpp"
-#include "src/effects/particlesystem/baseParticleSystem.cpp"
-#include "src/effects/particlesystem/blackHoleEffect.cpp"
-#include "src/effects/particlesystem/explosion.cpp"
-#include "src/effects/particlesystem/DriveEffect.cpp"
-#include "src/effects/particlesystem/damage.cpp"
+
 #include "src/effects/lazerTrace.cpp"
 #include "src/effects/Shield.cpp"
 #include "src/spaceobjects/RocketBullet.cpp"
