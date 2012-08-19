@@ -81,22 +81,22 @@ bool Angar::AddVehicle(Vehicle* vehicle)
 }
 
 
-bool Angar::RemoveVehicle(Vehicle* vehicle)
-{
-        for (unsigned int i=0; i<vehicleslot_vec.size(); i++)
-        {
-                if (vehicleslot_vec[i]->GetVehicle() != NULL)
-                {
-                        if (vehicleslot_vec[i]->GetVehicle() == vehicle)
-                        {
-                                vehicleslot_vec[i]->Release();
-                                return true;
-                        }
-                }
-        }
+//bool Angar::RemoveVehicle(Vehicle* vehicle)
+//{
+        //for (unsigned int i=0; i<vehicleslot_vec.size(); i++)
+        //{
+                //if (vehicleslot_vec[i]->GetVehicle() != NULL)
+                //{
+                        //if (vehicleslot_vec[i]->GetVehicle() == vehicle)
+                        //{
+                                //vehicleslot_vec[i]->Release();
+                                //return true;
+                        //}
+                //}
+        //}
     
-        return false;       
-}
+        //return false;       
+//}
 
 std::string Angar::GetDockVehicleStr() const
 {

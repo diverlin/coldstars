@@ -21,6 +21,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define MODULEBASE_H
 
 #include "../BaseItem.hpp"
+//#include "../equipment/BaseEquipment.hpp"
+class BaseEquipment;
+
+struct UnresolvedDataUniqueBaseModule
+{
+        int equipment_owner_id;
+};
 
 class BaseModule : public BaseItem
 {
@@ -28,9 +35,15 @@ class BaseModule : public BaseItem
       		BaseModule();
       		virtual ~BaseModule();
       		
+      		void SetEquipmentOwner(BaseEquipment* equipment_owner) { this->equipment_owner = equipment_owner; };
+      		
       		virtual void UpdateOwnerAbilities();
 
-	protected:     		
+	protected:     	
+		BaseEquipment* equipment_owner;
+		
+		UnresolvedDataUniqueBaseModule data_unresolved_BaseModule;
+		
      		void AddCommonInfo();   
      		
      		void SaveDataUniqueBaseModule(boost::property_tree::ptree&, const std::string&) const;

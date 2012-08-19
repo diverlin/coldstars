@@ -41,6 +41,7 @@
 #################### BUGS ###################
 #1
 ship.propetries structure is not correct after save/load
+- fix DONE
 
 #2
 textureOb, updateAnimationFrame()

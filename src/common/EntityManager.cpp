@@ -129,37 +129,19 @@ void EntityManager::LoadPass0()
 			AsteroidBuilder::Instance().GetAsteroid()->LoadData(v.second);
 		}
 	}
-	        
-        if (load_ptree.get_child_optional("item_slot"))
+	  
+        //module
+	if (load_ptree.get_child_optional("radar_module"))
 	{
-		Logger::Instance().Log("loading itemslots...");
-        	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("item_slot"))
+		Logger::Instance().Log("loading radar_modules...");
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("radar_module"))
 		{
-			ItemSlot* itemslot = GetNewItemSlot(v.second.get<int>("data_id.subtype_id"), v.second.get<int>("data_id.id"));
-			itemslot->LoadData(v.second);
+			RadarModuleBuilder::Instance().CreateNewRadarModule(v.second.get<int>("data_id.id"));
+			RadarModule* radar_module = RadarModuleBuilder::Instance().GetRadarModule();
+                	radar_module->LoadData(v.second);
 		}
-	}
+	} 
 	
-	if (load_ptree.get_child_optional("vehicle_slot"))
-	{
-		Logger::Instance().Log("loading vehicle_slots...");
-        	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("vehicle_slot"))
-		{
-			VehicleSlot* vehicleslot = GetNewVehicleSlot(v.second.get<int>("data_id.id"));
-			vehicleslot->LoadData(v.second);
-		}
-	}
-	
-	if (load_ptree.get_child_optional("container"))
-	{
-		Logger::Instance().Log("loading containers...");
-        	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("container"))
-		{
-			ContainerBuilder::Instance().CreateNewContainer(v.second.get<int>("data_id.id"));
-			ContainerBuilder::Instance().GetContainer()->LoadData(v.second);
-		}
-	}
-        
         // equipment
 	if (load_ptree.get_child_optional("bak_equipment"))
 	{
@@ -282,19 +264,7 @@ void EntityManager::LoadPass0()
 		}
 	}
 	
-	//module
-	if (load_ptree.get_child_optional("radar_module"))
-	{
-		Logger::Instance().Log("loading radar_modules...");
-		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("radar_module"))
-		{
-			RadarModuleBuilder::Instance().CreateNewRadarModule(v.second.get<int>("data_id.id"));
-			RadarModule* radar_module = RadarModuleBuilder::Instance().GetRadarModule();
-                	radar_module->LoadData(v.second);
-		}
-	}
-	
-	// other
+	// other item
 	if (load_ptree.get_child_optional("bomb"))
 	{
 		Logger::Instance().Log("loading bombs...");
@@ -315,7 +285,38 @@ void EntityManager::LoadPass0()
                 	goods_pack->LoadData(v.second);
 		}
 	}
+	//
 	
+	if (load_ptree.get_child_optional("item_slot"))
+	{
+		Logger::Instance().Log("loading itemslots...");
+        	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("item_slot"))
+		{
+			ItemSlot* itemslot = GetNewItemSlot(v.second.get<int>("data_id.subtype_id"), v.second.get<int>("data_id.id"));
+			itemslot->LoadData(v.second);
+		}
+	}
+	
+	if (load_ptree.get_child_optional("vehicle_slot"))
+	{
+		Logger::Instance().Log("loading vehicle_slots...");
+        	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("vehicle_slot"))
+		{
+			VehicleSlot* vehicleslot = GetNewVehicleSlot(v.second.get<int>("data_id.id"));
+			vehicleslot->LoadData(v.second);
+		}
+	}
+	
+	if (load_ptree.get_child_optional("container"))
+	{
+		Logger::Instance().Log("loading containers...");
+        	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("container"))
+		{
+			ContainerBuilder::Instance().CreateNewContainer(v.second.get<int>("data_id.id"));
+			ContainerBuilder::Instance().GetContainer()->LoadData(v.second);
+		}
+	}
+	//
 		
 	if (load_ptree.get_child_optional("npc"))
 	{
@@ -327,7 +328,7 @@ void EntityManager::LoadPass0()
 		}
 	}
 
-        if (load_ptree.get_child_optional("ship"))
+	if (load_ptree.get_child_optional("ship"))
 	{
 		Logger::Instance().Log("loading ships...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("ship"))
@@ -419,21 +420,11 @@ void EntityManager::LoadPass0()
 
 }
 
-void EntityManager::LoadPass1()
+void EntityManager::LoadPass1() const
 {
-	for (std::map<int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
+	for (std::map<int, Base*>::const_iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
 	{
 		iterator->second->ResolveData();
 	}
 }
 
-//void EntityManager::LoadPass2()
-//{
-	//for (std::map<int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
-	//{
-		//if (iterator->second->GetSubTypeId() == ENTITY::SHIP_ID)
-		//{
-			////((Vehicle*)iterator->second)->UpdateRadarAbility();
-		//}
-	//}
-//}

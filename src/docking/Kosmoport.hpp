@@ -44,7 +44,7 @@ class Kosmoport : public BaseLand
                 virtual bool GetPermissionToLand() const;
                                 
                 virtual bool AddVehicle(Vehicle*);
-                virtual bool RemoveVehicle(Vehicle*);
+                //virtual bool RemoveVehicle(Vehicle*);
                 
                 virtual void UpdateInSpaceInStatic();
                 

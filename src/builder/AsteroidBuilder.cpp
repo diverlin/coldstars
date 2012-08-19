@@ -57,7 +57,8 @@ void AsteroidBuilder::CreateNewInternals()
     	planet_data.radius_B      = getRandInt(300, 1200); 
     	planet_data.orbit_phi_inD = getRandInt(0, 360);
     	planet_data.speed         = 0.1;
-
+    	planet_data.clockwise     = getRandBool();
+    	
         TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ASTEROID_ID); 
         
         asteroid->SetPlanetData(planet_data);

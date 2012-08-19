@@ -19,17 +19,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "gameStruct.hpp"
 
 	
-PlanetData :: PlanetData()
-{
-    	orbit_center = vec2f(0, 0); 
-    	radius_A = 0;
-    	radius_B = 0; 
-    	orbit_phi_inD = 0.0;
-    	speed = 0.0;
-}
-
-
-
 VisionStatus :: VisionStatus()
 {
    	ASTEROID  = false;

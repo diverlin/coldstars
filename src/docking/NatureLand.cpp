@@ -37,8 +37,8 @@ bool NatureLand::AddVehicle(Vehicle* vehicle)
 }
 
 /*virtual */
-bool NatureLand::RemoveVehicle(Vehicle* vehicle)
-{
+//bool NatureLand::RemoveVehicle(Vehicle* vehicle)
+//{
         //bool is_removed = false;
         
         //for (unsigned int i = 0; i < VEHICLE_vec.size(); i++) 
@@ -51,7 +51,7 @@ bool NatureLand::RemoveVehicle(Vehicle* vehicle)
         //}
         
         //return is_removed;
-}
+//}
 
 
 /* virtual */

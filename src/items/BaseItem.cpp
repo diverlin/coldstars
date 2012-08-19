@@ -101,7 +101,7 @@ void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, c
 	else            save_ptree.put(root+"unresolved.textureOb_path", "none");
         
         if (item_slot) 	{ save_ptree.put(root+"unresolved.item_slot_id", item_slot->GetId()); }
-	else           	{ save_ptree.put(root+"unresolved.sitem_slot_id", NONE_ID); }
+	else           	{ save_ptree.put(root+"unresolved.item_slot_id", NONE_ID); }
 }
 
 void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_ptree)
@@ -123,7 +123,10 @@ void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_pt
 void BaseItem::ResolveDataUniqueBaseItem()
 {
 	textureOb = TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path);
-	if(data_unresolved_BaseItem.item_slot_id != NONE_ID)
+		
+	UpdatePropetries(); // this function must be performed before inserting to slot!!!
+		
+	if(data_unresolved_BaseItem.item_slot_id != NONE_ID) // item_slot can be NULL in case of inserted module
 	{
 		((ItemSlot*)EntityManager::Instance().GetEntityById(data_unresolved_BaseItem.item_slot_id))->InsertItem(this);
 	}

@@ -145,13 +145,6 @@ void SpaceStation::LoadDataUniqueSpaceStation(const boost::property_tree::ptree&
 
 void SpaceStation::ResolveDataUniqueSpaceStation()
 {
-        SpaceStationBuilder::Instance().CreateKorpusGeometry(this);
-        SpaceStationBuilder::Instance().CreateKorpusGui(this);
-        
-        SpaceStationBuilder::Instance().CreateProtectionComplex(this);
-        SpaceStationBuilder::Instance().CreateDriveComplex(this);
-        SpaceStationBuilder::Instance().CreateWeaponsComplex(this);        
-
 	BindLand((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_SpaceStation.land_id));	                       
 	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->AddVehicle(this, data_unresolved_BaseGameEntity.center, data_unresolved_BaseGameEntity.angle, parent); 
 }

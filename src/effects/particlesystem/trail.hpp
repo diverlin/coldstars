@@ -46,6 +46,6 @@ class TrailEffect : public BaseParticleSystem
        	
 };  
 
-TrailEffect* createTrailEffect(int size_id, vec2f* pTo_pos, vec2f* pTo_target_pos);
+TrailEffect* createTrailEffect(int, vec2f*, vec2f*);
 
 #endif

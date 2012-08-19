@@ -158,14 +158,7 @@ void Satellite::LoadDataUniqueSatellite(const boost::property_tree::ptree&)
 {}
 
 void Satellite::ResolveDataUniqueSatellite()
-{
-        SatelliteBuilder::Instance().CreateKorpusGeometry(this);
-        SatelliteBuilder::Instance().CreateKorpusGui(this);
-        
-        SatelliteBuilder::Instance().CreateProtectionComplex(this);
-        SatelliteBuilder::Instance().CreateDriveComplex(this);
-        SatelliteBuilder::Instance().CreateWeaponsComplex(this);        
-                       
+{                      
         switch(place_type_id)
         {
         	case ENTITY::SPACE_ID: 

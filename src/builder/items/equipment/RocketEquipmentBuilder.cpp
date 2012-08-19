@@ -30,8 +30,6 @@ void RocketEquipmentBuilder::CreateNewRocketEquipment(int id)
 {
 	if (id == NONE_ID)
 	{
-
-
 		id = SimpleIdGenerator::Instance().GetNextId();
 	}
 

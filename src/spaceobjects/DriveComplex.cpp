@@ -23,12 +23,12 @@ DriveComplex::DriveComplex(Vehicle* owner_vehicle)
         
 	ResetTarget();
 
-	drive_trail = createTrailEffect(owner_vehicle->GetTextureOb()->size_id, owner_vehicle->GetPoints().GetpMidLeft(), owner_vehicle->GetPoints().GetpMidFarLeft());
+	drive_effect = NULL; 
 }
 
 DriveComplex::~DriveComplex()
 {      
-        delete drive_trail;
+        delete drive_effect;
 }
 
 void DriveComplex::ResetTarget()
@@ -374,7 +374,7 @@ void DriveComplex::DrawPath()
                 
 void DriveComplex::RenderTrail()
 {
-	drive_trail->update();
-	drive_trail->Render();
+	drive_effect->update();
+	drive_effect->Render();
 }
 

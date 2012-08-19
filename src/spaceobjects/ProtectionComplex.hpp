@@ -31,6 +31,8 @@ class ProtectionComplex
 
       		void SetProtectorSlot(ItemSlot* protector_slot) { this->protector_slot = protector_slot; };
 
+		void Resize(int, int);
+	
       		ItemSlot* GetProtectorSlot()    const { return protector_slot; };
         	ShieldEffect* GetShieldEffect() const { return shield_effect; }; 
         	

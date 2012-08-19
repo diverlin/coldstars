@@ -41,7 +41,7 @@ void LazerEquipmentBuilder::CreateNewLazerEquipment(int id)
         {
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
-        
+
         EntityManager::Instance().RegisterEntity(lazer_equipment);
 } 
         	

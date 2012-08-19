@@ -52,6 +52,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 	if (modules_vec.size() < data_item.modules_num_max)
     	{
     		module->SetItemSlot(NULL);
+    		module->SetEquipmentOwner(this);
 	       	modules_vec.push_back(module);
         	UpdatePropetries();
         	
@@ -70,42 +71,22 @@ void BaseEquipment::Render(const Rect& rect)
     	//if ((subtype == ROCKET_ID) or (subtype == TORPED_ID))
         	//drawSimpleText((slot_rect[0], slot_rect[1] + self.h/2), str(self.ammo_max) + '/' + str(self.ammo))
     
-    	for (unsigned int i = 0; i < modules_vec.size(); i++)
+    	for (unsigned int i=0; i<modules_vec.size(); i++)
     	{
-        	Rect module_rect(	rect.GetBottomLeft().x + (1.1 * GUI::INSERTED_MODULE_SIZE) * (i), 
-        		          	rect.GetBottomLeft().y + (1.1 * GUI::INSERTED_MODULE_SIZE),
-        			  	GUI::INSERTED_MODULE_SIZE, 
-        			  	GUI::INSERTED_MODULE_SIZE);
+        	Rect module_rect(rect.GetBottomLeft().x + (1.1 * GUI::INSERTED_MODULE_SIZE) * (i), 
+        		         rect.GetBottomLeft().y + (1.1 * GUI::INSERTED_MODULE_SIZE),
+        			 GUI::INSERTED_MODULE_SIZE, 
+        			 GUI::INSERTED_MODULE_SIZE);
         	drawTexturedRect(modules_vec[i]->GetTextureOb(), module_rect, -1);
     	}
 }
 
 
 void BaseEquipment::SaveDataUniqueBaseEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-	for (unsigned int i = 0; i < modules_vec.size(); i++)
-	{
-	        save_ptree.put(root+"unresolved.inserted_module."+int2str(modules_vec[i]->GetId())+".id", modules_vec[i]->GetId());
-	}
-}
+{}
 
 void BaseEquipment::LoadDataUniqueBaseEquipment(const boost::property_tree::ptree& load_ptree)
-{
-	boost::property_tree::ptree tmp_ptree = load_ptree;
-	if (tmp_ptree.get_child_optional("unresolved.inserted_module"))
-	{
-		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, tmp_ptree.get_child("unresolved.inserted_module"))
-		{
-			data_unresolved_BaseEquipment.modules_id.push_back(v.second.get<int>("id"));
-		}
-	}
-}
+{}
 
 void BaseEquipment::ResolveDataUniqueBaseEquipment()
-{
-	UpdatePropetries();
-	for (unsigned int i = 0; i<data_unresolved_BaseEquipment.modules_id.size(); i++)
-	{
-		InsertModule((BaseModule*)EntityManager::Instance().GetEntityById(data_unresolved_BaseEquipment.modules_id[i]));
-	}
-}
+{}

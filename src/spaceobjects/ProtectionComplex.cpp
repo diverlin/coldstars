@@ -26,7 +26,6 @@ ProtectionComplex::ProtectionComplex(Vehicle* vehicle)
         shield_effect->SetTextureOb(texOb_shield);
         shield_effect->SetParent(vehicle);
         
-        shield_effect->GetPoints().initMainQuadPoints(1.2*vehicle->GetTextureOb()->GetFrameWidth(), 1.2*vehicle->GetTextureOb()->GetFrameHeight());
     	shield_effect->GetPoints().addMainQuadPoints();
         
         protector_slot = NULL;
@@ -34,7 +33,11 @@ ProtectionComplex::ProtectionComplex(Vehicle* vehicle)
 
 ProtectionComplex::~ProtectionComplex() 
 { 
-        //delete protector_slot;
         delete shield_effect; 
 }
 
+
+void ProtectionComplex::Resize(int w, int h)
+{
+        shield_effect->GetPoints().initMainQuadPoints(w, h);
+}

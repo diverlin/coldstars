@@ -27,7 +27,7 @@ class NatureLand : public BaseLand
                 virtual ~NatureLand();
 
                 virtual bool AddVehicle(Vehicle*);
-                virtual bool RemoveVehicle(Vehicle*);
+                //virtual bool RemoveVehicle(Vehicle*);
                 
                 virtual bool GetPermissionToLand() const;
                                 

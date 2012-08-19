@@ -296,6 +296,7 @@ void Npc::SaveDataUniqueNpc(boost::property_tree::ptree& save_ptree, const std::
 	save_ptree.put(root+"is_alive", is_alive);
 	save_ptree.put(root+"race_id", race_id);
         save_ptree.put(root+"unresolved.vehicle_id", vehicle->GetId());
+        save_ptree.put(root+"unresolved.aiModel_id", ai_model->GetTypeId());
 	skill.SaveData(save_ptree, root);
 }
 
@@ -304,13 +305,15 @@ void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
 	is_alive = load_ptree.get<bool>("is_alive");
 	race_id  = load_ptree.get<int>("race_id");
 	data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresolved.vehicle_id");
-
+	data_unresolved_npc.aiModel_id = load_ptree.get<int>("unresolved.aiModel_id");
+	
 	skill.LoadData(load_ptree.get_child("skill"));
 }
 
 void Npc::ResolveDataUniqueNpc()
 {
         ((Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_npc.vehicle_id))->BindOwnerNpc(this);
+        SetAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
 
 	skill.ResolveData();
 }		

@@ -34,9 +34,9 @@ void RadarEquipment::UpdatePropetries()
 {
     	radius_add  = 0;
     	
-    	for (unsigned int i = 0; i < modules_vec.size(); i++)
+    	for (unsigned int i=0; i<modules_vec.size(); i++)
     	{
-        	radius_add   += ((RadarModule*)modules_vec[i])->GetRadiusAdd();        	
+        	radius_add += ((RadarModule*)modules_vec[i])->GetRadiusAdd();        	
     	}
     	
     	radius = radius_orig + radius_add;
