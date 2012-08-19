@@ -50,3 +50,5 @@ current implementation is: one textureOb is shared between many objects, so if t
 #3
 save/load =>starmap, stars are not shown anymore
 
+#4 turrels needs update after save/load event
+
