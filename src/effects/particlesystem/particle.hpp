@@ -27,19 +27,19 @@ class Particle
       		Particle(ParticleData);       
       		~Particle();
 
-                void setPosition(vec2f);      		
-      		void setVelocity(vec2f);
+                void SetPosition(vec2f);      		
+      		void SetVelocity(vec2f);
       		
       		bool GetAlive()       const;
-      		float getAlpha()      const;
-      		float getAlphaStart() const;
+      		float GetAlpha()      const;
+      		float GetAlphaStart() const;
                 
-            	void reborn();      
+            	void Reborn();      
 
-            	void randomizeLifeTime(float, float);
-            	void randomize_d_alpha(float, float);
+            	void RandomizeLifeTime(float, float);
+            	void Randomize_d_alpha(float, float);
 
-      		void update();
+      		void Update();
       		void Render() const;
       		
       	private:
@@ -48,7 +48,6 @@ class Particle
       		vec2f pos;
       		vec2f d_pos;
       		
-      		//float alpha;
                 Color4f color;
                                                 
       		float size;

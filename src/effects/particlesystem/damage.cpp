@@ -18,28 +18,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-DamageEffect :: DamageEffect()
+DamageEffect::DamageEffect()
 {
 	//subtype_id = DAMAGE_EFFECT_ID;
 }
 
-DamageEffect :: ~DamageEffect()
+DamageEffect::~DamageEffect()
 {}
 
 
-void DamageEffect :: createParticles()
+void DamageEffect::CreateParticles()
 {
 	for(int i = 0; i < num_particles; i++)
     	{  
        		Particle* particle = new Particle(data_particle);
-                particle->setPosition(center);
-       		particle->randomize_d_alpha(0.003, 0.006); //   ??
-       		particle->setVelocity(getRandomVelocity());
+                particle->SetPosition(center);
+       		particle->Randomize_d_alpha(0.003, 0.006); //   ??
+       		particle->SetVelocity(GetRandomVelocity());
        		particles_vec.push_back(particle);
     	}
 }
 
-void DamageEffect :: update()
+void DamageEffect::Update()
 {
      	is_alive = false;
 
@@ -47,21 +47,21 @@ void DamageEffect :: update()
         {
                 if (particles_vec[i]->GetAlive() == true)
         	{
-            		particles_vec[i]->update();
+            		particles_vec[i]->Update();
             		is_alive = true;
             	}
             	else
             	{
             		if (is_dying == false)
             		{
-                                particles_vec[i]->setPosition(parent->GetPoints().GetCenter());
-            			particles_vec[i]->reborn();
+                                particles_vec[i]->SetPosition(parent->GetPoints().GetCenter());
+            			particles_vec[i]->Reborn();
             		}
             	}
         }
 }
 
-void DamageEffect :: Render()
+void DamageEffect::Render()
 {
      	glBindTexture(GL_TEXTURE_2D, texOb->texture);
 	for (unsigned int i = 0; i < num_particles; i++)
@@ -106,13 +106,13 @@ DamageEffect* getNewDamageEffect(int color_id, BaseGameEntity* parent)
                 
 	DamageEffect* damage = new DamageEffect();
         
-        damage->setTextureOb(texOb_particle);        
-        damage->setParticleData(data_particle);
-        damage->setParticlesNum(particles_num);
+        damage->SetTextureOb(texOb_particle);        
+        damage->SetParticleData(data_particle);
+        damage->SetParticlesNum(particles_num);
                 
-        damage->setParent(parent);
+        damage->SetParent(parent);
                 
-        damage->createParticles();
+        damage->CreateParticles();
                 
 	return damage;
 }

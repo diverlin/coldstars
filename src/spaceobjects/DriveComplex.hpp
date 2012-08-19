@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define DRIVECOMPLEX_H
 
 class Vehicle;
-#include "../effects/particlesystem/trail.hpp"
+#include "../effects/particlesystem/DriveEffect.hpp"
 
 class DriveComplex
 {
@@ -29,7 +29,7 @@ class DriveComplex
       		DriveComplex(Vehicle*);
       		~DriveComplex();
       		
-      		void SetDriveEffect(TrailEffect* drive_effect) { this->drive_effect = drive_effect; };
+      		void SetDriveEffect(DriveEffect* drive_effect) { this->drive_effect = drive_effect; };
       		      		
                 void SetDriveSlot(ItemSlot* drive_slot) { this->drive_slot = drive_slot; };
                 void SetBakSlot(ItemSlot* bak_slot)     { this->bak_slot = bak_slot; };
@@ -60,7 +60,7 @@ class DriveComplex
       		Vehicle* owner_vehicle;
       		BaseGameEntity* target;
 
-		TrailEffect* drive_effect; 
+		DriveEffect* drive_effect; 
 
 		vec2f target_pos;
 

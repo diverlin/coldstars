@@ -16,7 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-BaseParticleSystem :: BaseParticleSystem()
+BaseParticleSystem::BaseParticleSystem()
 {
     	is_alive = true;
     	is_dying = false;
@@ -25,46 +25,39 @@ BaseParticleSystem :: BaseParticleSystem()
 }
  
 /* virtual */
-BaseParticleSystem :: ~BaseParticleSystem()
+BaseParticleSystem::~BaseParticleSystem()
 {
-	for (unsigned int i = 0; i < particles_vec.size(); i++) 
+	for (unsigned int i=0; i<particles_vec.size(); i++) 
      	{
   		delete particles_vec[i];
      	}
 }
 
 
-void BaseParticleSystem :: setTextureOb(TextureOb* texOb) { this->texOb = texOb; }
+void BaseParticleSystem::SetTextureOb(TextureOb* texOb) { this->texOb = texOb; }
                 
-void BaseParticleSystem :: setDying()                  { is_dying = true; }
-void BaseParticleSystem :: setParent(BaseGameEntity* parent) { this->parent = parent; } 
-void BaseParticleSystem :: setPosition(vec2f center)          { this->center = center; }
-void BaseParticleSystem :: setParticlesNum(int num_particles) { this->num_particles = num_particles; }
-void BaseParticleSystem :: setParticleData(ParticleData data_particle) { this->data_particle = data_particle; }
+void BaseParticleSystem::SetDying()                  { is_dying = true; }
+void BaseParticleSystem::SetParent(BaseGameEntity* parent) { this->parent = parent; } 
+void BaseParticleSystem::SetPosition(vec2f center)          { this->center = center; }
+void BaseParticleSystem::SetParticlesNum(int num_particles) { this->num_particles = num_particles; }
+void BaseParticleSystem::SetParticleData(ParticleData data_particle) { this->data_particle = data_particle; }
                 
-bool BaseParticleSystem :: GetAlive() const { return is_alive; }
+bool BaseParticleSystem::GetAlive() const { return is_alive; }
 
 
-//void BaseParticleSystem :: update()
-//{}         
-
-//void BaseParticleSystem :: Render()
-//{}                   
-
-
-vec2f BaseParticleSystem :: getRandomVelocity()
+vec2f BaseParticleSystem::GetRandomVelocity()
 {
      	if (getRandBool() == true)
      	{
-        	return getRandomDirtyVelocity();
+        	return GetRandomDirtyVelocity();
         }
      	else
      	{
-        	return getRandomAccurateVelocity();
+        	return GetRandomAccurateVelocity();
         }
 }
 
-vec2f BaseParticleSystem :: getRandomDirtyVelocity()
+vec2f BaseParticleSystem::GetRandomDirtyVelocity()
 {
     	float dx_n = getRandFloat(0.1, 1.0)*getRandSign();
     	float dy_n = getRandFloat(0.1, 1.0)*getRandSign();
@@ -77,7 +70,7 @@ vec2f BaseParticleSystem :: getRandomDirtyVelocity()
 }
 
 
-vec2f BaseParticleSystem :: getRandomAccurateVelocity()
+vec2f BaseParticleSystem::GetRandomAccurateVelocity()
 {
     	float _len   = getRandInt(50, 100);
     	float _angle = getRandInt(0, 360)/RADIAN_TO_DEGREE_RATE;
@@ -97,7 +90,7 @@ vec2f BaseParticleSystem :: getRandomAccurateVelocity()
 
 
 
-//void BaseParticleSystem :: calcAccurateRandomVelocity2(vec2f center)
+//void BaseParticleSystem::calcAccurateRandomVelocity2(vec2f center)
 //{
     	//float _len   = getRandInt(50, 100);
     	//float _angle = getRandInt(0, 360)/RADIAN_TO_DEGREE_RATE;

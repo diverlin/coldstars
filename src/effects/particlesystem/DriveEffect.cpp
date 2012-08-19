@@ -18,30 +18,30 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-TrailEffect :: TrailEffect(vec2f* _pTo_start_pos, 
-			      vec2f* _pTo_target_pos)
+DriveEffect::DriveEffect(vec2f* pTo_start_pos, 
+			    vec2f* pTo_target_pos)
 {
-    	pTo_start_pos  = _pTo_start_pos;      //ob.points.midLeft
-     	pTo_target_pos = _pTo_target_pos;     //ob.points.midFarLeft
+    	this->pTo_start_pos  = pTo_start_pos;      //ob.points.midLeft
+     	this->pTo_target_pos = pTo_target_pos;     //ob.points.midFarLeft
 }
 
 
-TrailEffect :: ~TrailEffect()
+DriveEffect::~DriveEffect()
 {}
 
-void TrailEffect :: createParticles()
+void DriveEffect::CreateParticles()
 {
      	for (unsigned int i = 0; i < num_particles; i++)
      	{
          	Particle* particle = new Particle(data_particle);  
-                particle->setPosition(*pTo_start_pos);
-         	particle->setVelocity(velocity);
+                particle->SetPosition(*pTo_start_pos);
+         	particle->SetVelocity(velocity);
          	particles_vec.push_back(particle);
      	}
 }
 
 
-void TrailEffect :: updateVelocity()
+void DriveEffect::UpdateVelocity()
 {
      	float xl = (pTo_target_pos->x - pTo_start_pos->x);
      	float yl = (pTo_target_pos->y - pTo_start_pos->y);
@@ -55,42 +55,42 @@ void TrailEffect :: updateVelocity()
 }
 
 
-void TrailEffect :: putParticlesToInitPos()
+void DriveEffect::PutParticlesToInitPos()
 {
         float particle_offset = (data_particle.color_start.a - data_particle.color_end.a) / num_particles; 
         
      	for (unsigned int i = 0; i < particles_vec.size(); i++) 
      	{
-         	while ( particles_vec[i]->getAlpha() > ( particles_vec[i]->getAlphaStart() - i * particle_offset) ) 
+         	while ( particles_vec[i]->GetAlpha() > ( particles_vec[i]->GetAlphaStart() - i * particle_offset) ) 
          	{
-            		particles_vec[i]->update();
+            		particles_vec[i]->Update();
          	}     
      	}
 }
 
 
-void TrailEffect :: update()
+void DriveEffect::Update()
 {
-     	updateVelocity();
+     	UpdateVelocity();
 
      	for (unsigned int i = 0; i < particles_vec.size(); i++) 
      	{
      		if (particles_vec[i]->GetAlive() == true)
      		{
-            		particles_vec[i]->update();
+            		particles_vec[i]->Update();
             	}
             	else
             	{
-                        particles_vec[i]->setPosition(*pTo_start_pos);
-                        particles_vec[i]->setVelocity(velocity);
-            		particles_vec[i]->reborn();
+                        particles_vec[i]->SetPosition(*pTo_start_pos);
+                        particles_vec[i]->SetVelocity(velocity);
+            		particles_vec[i]->Reborn();
             	}
 	}
 }
 
 
 
-void TrailEffect :: Render()
+void DriveEffect::Render()
 {
        	enable_POINTSPRITE();       	
      		glBindTexture(GL_TEXTURE_2D, texOb->texture);
@@ -105,7 +105,7 @@ void TrailEffect :: Render()
 
 
 
-TrailEffect* createTrailEffect(int size_id, vec2f* pTo_pos, vec2f* pTo_target_pos)
+DriveEffect* GetNewDriveEffect(int size_id, vec2f* pTo_pos, vec2f* pTo_target_pos)
 {
    	ParticleData data_particle;        
                        
@@ -136,17 +136,17 @@ TrailEffect* createTrailEffect(int size_id, vec2f* pTo_pos, vec2f* pTo_target_po
    	int particles_num = 5;                        
                        
         TextureOb* texOb_particle = TextureManager::Instance().getTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
-   	TrailEffect* drive_trail = new TrailEffect(pTo_pos, pTo_target_pos);
+   	DriveEffect* drive_effect = new DriveEffect(pTo_pos, pTo_target_pos);
         
-        drive_trail->setTextureOb(texOb_particle);                                 
-        drive_trail->setParticleData(data_particle);
-        drive_trail->setParticlesNum(particles_num);
+        drive_effect->SetTextureOb(texOb_particle);                                 
+        drive_effect->SetParticleData(data_particle);
+        drive_effect->SetParticlesNum(particles_num);
         
-        drive_trail->updateVelocity();
-     	drive_trail->createParticles();
-     	drive_trail->putParticlesToInitPos();
+        drive_effect->UpdateVelocity();
+     	drive_effect->CreateParticles();
+     	drive_effect->PutParticlesToInitPos();
                 
-  	return drive_trail;
+  	return drive_effect;
 }
 
 

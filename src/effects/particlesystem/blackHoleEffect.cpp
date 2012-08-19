@@ -31,7 +31,7 @@ void BlackHoleEffect :: createParticles()
 	for(int i = 0; i< num_particles; i++)
     	{  
        		Particle* particle = new Particle(data_particle);
-                particle->setPosition(center);
+                particle->SetPosition(center);
        		//particle->calcAccurateRandomVelocity2(center_pos);
        		particles_vec.push_back(particle);
     	}
@@ -47,14 +47,14 @@ void BlackHoleEffect :: update()
         {
                 if (particles_vec[i]->GetAlive() == true)
         	{
-            		particles_vec[i]->update();
+            		particles_vec[i]->Update();
             		is_alive = true;
             	}
             	else
             	{
             		if (is_dying == false)
             		{
-            			particles_vec[i]->reborn();
+            			particles_vec[i]->Reborn();
             		}
             	}
         }

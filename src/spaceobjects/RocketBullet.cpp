@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 RocketBullet::RocketBullet(int id)
 {
 	data_id.id = id;
-	data_id.type_id = ENTITY::VEHICLE_ID;
+	data_id.type_id    = ENTITY::VEHICLE_ID;
 	data_id.subtype_id = ENTITY::ROCKETBULLET_ID;
 
 	target = NULL;
@@ -168,10 +168,7 @@ void RocketBullet::LoadDataUniqueRocketBullet(const boost::property_tree::ptree&
 }
 
 void RocketBullet::ResolveDataUniqueRocketBullet()
-{
-        RocketBulletBuilder::Instance().CreateKorpusGeometry(this);
-        RocketBulletBuilder::Instance().CreateDriveComplex(this);    
-                       
+{                       
         if (unresolved_target_id != NONE_ID)
         {
         	target = (BaseGameEntity*)EntityManager::Instance().GetEntityById(unresolved_target_id);

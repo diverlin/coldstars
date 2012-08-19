@@ -54,7 +54,7 @@ void LazerTraceEffect :: update()
        		is_alive = false;
        		if (is_alreadyInRemoveQueue == false)
        		{ 
-          		damage_effect->setDying();
+          		damage_effect->SetDying();
           		is_alreadyInRemoveQueue = true;
        		}
     	} 

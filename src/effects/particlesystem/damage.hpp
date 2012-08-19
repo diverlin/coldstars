@@ -27,9 +27,9 @@ class DamageEffect : public BaseParticleSystem
        		DamageEffect();   
        		virtual ~DamageEffect();
                 
-                void createParticles(); 
+                void CreateParticles(); 
                                 
-       		virtual void update();
+       		virtual void Update();
        		virtual void Render();
 
        	private:    

@@ -925,8 +925,12 @@ void Vehicle::ResolveDataUniqueVehicle()
        	
        	BaseVehicleBuilder::Instance().CreateKorpusGeometry(this);
         BaseVehicleBuilder::Instance().CreateKorpusGui(this);
-        BaseVehicleBuilder::Instance().CreateTextureDependedStuff(this);
-        
+        BaseVehicleBuilder::Instance().CreateDriveComplexTextureDependedStuff(this);
+        if (data_id.subtype_id != ENTITY::ROCKETBULLET_ID)
+        {
+        	BaseVehicleBuilder::Instance().CreateProtectionComplexTextureDependedStuff(this);
+        }
+         
        	if (data_unresolved_Vehicle.land_id != NONE_ID) 
         { 
         	SetLand( (BaseLand*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.land_id) ); 

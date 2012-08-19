@@ -27,10 +27,10 @@ class ExplosionEffect : public BaseParticleSystem
        		ExplosionEffect();       
        		virtual ~ExplosionEffect();
 		
-       		virtual void update();
+       		virtual void Update();
        		virtual void Render();
        		
-                void createParticles();
+                void CreateParticles();
        	private:
 
 };
