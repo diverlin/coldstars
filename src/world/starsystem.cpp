@@ -822,6 +822,8 @@ void StarSystem::LoadDataUniqueStarSystem(const boost::property_tree::ptree& loa
                 	Add(ds);
 		}
 	}
+	
+	points.SetCenter(data_unresolved_BaseGameEntity.center);
 }
 
 void StarSystem::ResolveDataUniqueStarSystem()
@@ -873,31 +875,31 @@ bool checkCollision(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
 
 bool collisionBetweenCenters(const Points& points1, const Points& points2, float collision_radius)
 {
-    if(abs(points1.GetCenter().x - points2.GetCenter().x) > collision_radius)
-       return false;
-    if(abs(points1.GetCenter().y - points2.GetCenter().y) > collision_radius)
-       return false;
+    	if (abs(points1.GetCenter().x - points2.GetCenter().x) > collision_radius)
+       		return false;
+    	if (abs(points1.GetCenter().y - points2.GetCenter().y) > collision_radius)
+       		return false;
 
-    return true;
+    	return true;
 }
 
 bool collisionBetweenCenters(const Points& points1, const vec2f& point2, float collision_radius)
 {
-    if(abs(points1.GetCenter().x - point2.x) > collision_radius)
-       return false;
-    if(abs(points1.GetCenter().y - point2.y) > collision_radius)
-       return false;
+    	if(abs(points1.GetCenter().x - point2.x) > collision_radius)
+       		return false;
+    	if(abs(points1.GetCenter().y - point2.y) > collision_radius)
+       		return false;
 
-    return true;
+    	return true;
 }
 
 bool collisionBetweenCenters(const Points& points1, float center2_x, float center2_y, float collision_radius)
 {
-    if(abs(points1.GetCenter().x - center2_x) > collision_radius)
-       return false;
-    if(abs(points1.GetCenter().y - center2_y) > collision_radius)
-       return false;
+    	if(abs(points1.GetCenter().x - center2_x) > collision_radius)
+      		return false;
+    	if(abs(points1.GetCenter().y - center2_y) > collision_radius)
+       		return false;
 
-    return true;
+    	return true;
 }
 
