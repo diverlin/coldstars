@@ -43,6 +43,10 @@ void SatelliteBuilder::CreateNewSatellite(int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
 
+        CreateProtectionComplex(satellite);
+        CreateDriveComplex(satellite);
+        CreateWeaponsComplex(satellite); 
+        
         EntityManager::Instance().RegisterEntity(satellite);
 }
 
@@ -79,9 +83,7 @@ void SatelliteBuilder::CreateNewInternals()
 	
 	CreateKorpusGeometry(satellite);
         CreateKorpusGui(satellite);
-        CreateDriveComplex(satellite);
-        CreateWeaponsComplex(satellite);
-        CreateProtectionComplex(satellite);
-        
+        CreateTextureDependedStuff(satellite);
+                
         CreateEquipmentSlots(satellite);
 }

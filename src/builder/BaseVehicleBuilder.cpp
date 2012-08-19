@@ -16,6 +16,11 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+BaseVehicleBuilder& BaseVehicleBuilder::Instance()
+{	
+	static BaseVehicleBuilder instance;
+	return instance;
+}	
 
 void BaseVehicleBuilder::CreateKorpusGeometry(Vehicle* vehicle) const
 {
@@ -152,13 +157,7 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
 }	
 
 void BaseVehicleBuilder::CreateDriveComplex(Vehicle* vehicle) const
-{
-    	vehicle->GetPoints().initMidLeftPoint();
-    	vehicle->GetPoints().addMidLeftPoint();
-
-    	vehicle->GetPoints().initMidFarLeftPoint();
-    	vehicle->GetPoints().addMidFarLeftPoint();
-    	
+{   	
     	DriveComplex* drive_complex = new DriveComplex(vehicle);  
     	vehicle->SetDriveComplex(drive_complex);
 }
@@ -174,6 +173,20 @@ void BaseVehicleBuilder::CreateProtectionComplex(Vehicle* vehicle) const
 	ProtectionComplex* protection_complex = new ProtectionComplex(vehicle); 	
  	vehicle->SetProtectionComplex(protection_complex);
 }
+
+void BaseVehicleBuilder::CreateTextureDependedStuff(Vehicle* vehicle) const
+{
+	vehicle->GetProtectionComplex()->Resize(1.2*vehicle->GetTextureOb()->GetFrameWidth(), 1.2*vehicle->GetTextureOb()->GetFrameHeight());
+
+    	vehicle->GetPoints().initMidLeftPoint();
+    	vehicle->GetPoints().addMidLeftPoint();
+
+    	vehicle->GetPoints().initMidFarLeftPoint();
+    	vehicle->GetPoints().addMidFarLeftPoint();
+    	
+	TrailEffect* drive_effect = createTrailEffect(vehicle->GetTextureOb()->size_id, vehicle->GetPoints().GetpMidLeft(), vehicle->GetPoints().GetpMidFarLeft());
+ 	vehicle->GetDriveComplex()->SetDriveEffect(drive_effect);
+}               
 
 void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
 {

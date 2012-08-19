@@ -78,17 +78,12 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const vec2f& center, float angle, 
     	
 	vehicle->SetParent(parent);
 
+	//vehicle->UpdateAllPropertiesAndAbilities(); // hack to fix issue #1
 	VEHICLE_vec.push_back(vehicle);  
-	     	
-     	//if (vehicle->GetOwnerNpc())
-     	//{
-     	     	//vehicle->GetOwnerNpc()->SetPlaceTypeId(ENTITY::SPACE_ID);
-     		//vehicle->GetOwnerNpc()->SetStarSystem(this); 
-     	//}
 
 	if (vehicle->GetSubTypeId() == ENTITY::SATELLITE_ID)
 	{
-		((Satellite*)vehicle)->GetOrbit()->CalcPath(parent->GetCollisionRadius(), 1.0);
+		((Satellite*)vehicle)->GetOrbit()->CalcPath(parent->GetCollisionRadius(), 1.0, getRandBool());
 	}
 }
 

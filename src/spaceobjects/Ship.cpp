@@ -156,15 +156,8 @@ void Ship::LoadDataUniqueShip(const boost::property_tree::ptree&)
 {}
 
 void Ship::ResolveDataUniqueShip()
-{ 
-        ShipBuilder::Instance().CreateKorpusGeometry(this);
-        ShipBuilder::Instance().CreateKorpusGui(this);
-        
-        ShipBuilder::Instance().CreateProtectionComplex(this);
-        ShipBuilder::Instance().CreateDriveComplex(this);
-        ShipBuilder::Instance().CreateWeaponsComplex(this); 
-        
-        switch(place_type_id)
+{
+       switch(place_type_id)
         {
         	case ENTITY::SPACE_ID: 
         	{

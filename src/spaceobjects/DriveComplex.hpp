@@ -28,18 +28,20 @@ class DriveComplex
 	public:
       		DriveComplex(Vehicle*);
       		~DriveComplex();
+      		
+      		void SetDriveEffect(TrailEffect* drive_effect) { this->drive_effect = drive_effect; };
+      		      		
+                void SetDriveSlot(ItemSlot* drive_slot) { this->drive_slot = drive_slot; };
+                void SetBakSlot(ItemSlot* bak_slot)     { this->bak_slot = bak_slot; };
 
       		void SetTarget(BaseGameEntity*, int);       
       		void SetStaticTargetCoords(const vec2f&);
-      		
-                void SetDriveSlot(ItemSlot* drive_slot) { this->drive_slot = drive_slot; };
-                void SetBakSlot(ItemSlot* bak_slot)     { this->bak_slot = bak_slot; };
-                
+      		                
       		ItemSlot* GetDriveSlot() const { return drive_slot; };
         	ItemSlot* GetBakSlot()   const { return bak_slot; };
                   
                 BaseGameEntity* GetTarget() const { return target; };                
-             
+    		
       		bool CheckTargetEchievement();
       		bool GetDockingPermission();               
        	
@@ -58,7 +60,7 @@ class DriveComplex
       		Vehicle* owner_vehicle;
       		BaseGameEntity* target;
 
-		TrailEffect* drive_trail; 
+		TrailEffect* drive_effect; 
 
 		vec2f target_pos;
 

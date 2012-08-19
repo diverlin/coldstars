@@ -39,15 +39,21 @@ vec2f Orbit::GetNextTurnPosition() const
 }
 
 
-void Orbit::CalcPath(float radius_A, float radius_B, float speed, float orbit_phi_inD)
+void Orbit::CalcPath(float radius_A, float radius_B, float speed, float orbit_phi_inD, bool clockwise)
 {   
 	coords_vec.clear();
 	
-     	float d_angleInRad  = speed / RADIAN_TO_DEGREE_RATE;
+     	float d_angleInRad = speed / RADIAN_TO_DEGREE_RATE;;
+     	if (clockwise == true) 
+     	{
+     		d_angleInRad *= -1;
+     	}     	
+		 
      	float orbitPhiInRad = orbit_phi_inD / RADIAN_TO_DEGREE_RATE;
      	
      	vec2f new_coord;
-     	for(float angleInRad = 0; angleInRad < 2*PI; angleInRad += d_angleInRad) 
+     	
+     	for(float angleInRad=0; abs(angleInRad)<2*PI; angleInRad+=d_angleInRad) 
      	{ 
          	new_coord.x = radius_A * cos(angleInRad) * cos(orbitPhiInRad) - radius_B * sin(angleInRad) * sin(orbitPhiInRad);
          	new_coord.y = radius_A * cos(angleInRad) * sin(orbitPhiInRad) + radius_B * sin(angleInRad) * cos(orbitPhiInRad);
@@ -57,14 +63,18 @@ void Orbit::CalcPath(float radius_A, float radius_B, float speed, float orbit_ph
         //it = getRandInt(1, len);
 }    
 
-void Orbit::CalcPath(float radius, float speed)
+void Orbit::CalcPath(float radius, float speed, bool clockwise)
 {   	
 	coords_vec.clear();
 	
      	float d_angleInRad  = speed / RADIAN_TO_DEGREE_RATE;
+     	if (clockwise == true) 
+     	{
+     		d_angleInRad *= -1;
+     	}    
      	
      	vec2f new_coord;
-     	for(float angleInRad = 0; angleInRad < 2*PI; angleInRad += d_angleInRad) 
+     	for(float angleInRad=0; abs(angleInRad)<2*PI; angleInRad+=d_angleInRad) 
      	{ 
          	new_coord.x = radius * cos(angleInRad)  - radius * sin(angleInRad);
          	new_coord.y = radius * cos(angleInRad)  + radius * sin(angleInRad);

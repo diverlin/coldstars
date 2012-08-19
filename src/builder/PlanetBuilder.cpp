@@ -52,12 +52,12 @@ void PlanetBuilder::CreateNewInternals(float orbit_radius)
 
 	PlanetData planet_data;
 
-	planet_data.orbit_center  = vec2f(0, 0); 
+	planet_data.orbit_center.Set(0, 0); 
 	planet_data.radius_A      = orbit_radius;
 	planet_data.radius_B      = orbit_radius; 
 	planet_data.orbit_phi_inD = 0;
 	planet_data.speed         = (float)getRandInt(ENTITY::PLANET::SPEED_MIN, ENTITY::PLANET::SPEED_MAX) / (float)orbit_radius;
-
+    	planet_data.clockwise     = getRandBool();
 
         TextureOb* textureOb 	        = TextureManager::Instance().GetRandomTextureOb(TEXTURE::PLANET_ID); 
         TextureOb* textureOb_atmosphere = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ATMOSPHERE_ID); 

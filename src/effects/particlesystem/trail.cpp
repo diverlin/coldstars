@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 TrailEffect :: TrailEffect(vec2f* _pTo_start_pos, 
-			   vec2f* _pTo_target_pos)
+			      vec2f* _pTo_target_pos)
 {
     	pTo_start_pos  = _pTo_start_pos;      //ob.points.midLeft
      	pTo_target_pos = _pTo_target_pos;     //ob.points.midFarLeft
@@ -133,8 +133,7 @@ TrailEffect* createTrailEffect(int size_id, vec2f* pTo_pos, vec2f* pTo_target_po
         data_particle.color_delta.a    = 0.1;
         
    	   	
-   	int particles_num = 5;
-                        
+   	int particles_num = 5;                        
                        
         TextureOb* texOb_particle = TextureManager::Instance().getTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
    	TrailEffect* drive_trail = new TrailEffect(pTo_pos, pTo_target_pos);

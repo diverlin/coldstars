@@ -63,7 +63,6 @@ bool Kosmoport::GetPermissionToLand() const
 {
       	if (angar->GetFreeVehicleSlotTotalNum() > 0) 
         { 
-        	std::cout<<"da da, mozhno"<<std::endl;
         	return true; 
         }
         
@@ -81,11 +80,11 @@ bool Kosmoport::AddVehicle(Vehicle* vehicle)
         return true;
 }
 
-/* virtual */
-bool Kosmoport::RemoveVehicle(Vehicle* vehicle)
-{        
-    	return angar->RemoveVehicle(vehicle);
-}
+///* virtual */
+//bool Kosmoport::RemoveVehicle(Vehicle* vehicle)
+//{        
+    	//return angar->RemoveVehicle(vehicle);
+//}
 
 
 /* virtual */

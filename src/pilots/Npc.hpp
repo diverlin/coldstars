@@ -30,6 +30,7 @@ class GoodsPack;
 struct UnresolvedDataUniqueNpc
 {
 	int vehicle_id;	
+	int aiModel_id;
 };
 
 class Npc : public Base

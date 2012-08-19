@@ -65,6 +65,8 @@ class BaseItem : public Base
                 
 		void UpdateInfo();
 			
+		virtual void UpdatePropetries() {};
+			
       		virtual void Render(const Rect&);
       		void RenderInfo(const Rect&, float, float); 
 

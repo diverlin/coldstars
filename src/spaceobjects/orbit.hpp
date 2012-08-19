@@ -35,8 +35,8 @@ class Orbit
 		vec2f GetPosition() const { return coords_vec[it]; };
 		vec2f GetNextTurnPosition() const; 
 
-		void CalcPath(float, float, float, float);
-		void CalcPath(float, float);
+		void CalcPath(float, float, float, float, bool);
+		void CalcPath(float, float, bool);
 		
 		void UpdatePosition();
 

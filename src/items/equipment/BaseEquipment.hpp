@@ -22,10 +22,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../BaseItem.hpp"
 #include "../modules/BaseModule.hpp"
 
-struct UnresolvedDataUniqueBaseEquipment
-{
-        std::vector<int> modules_id;
-};
 
 class BaseEquipment : public BaseItem
 {
@@ -34,7 +30,6 @@ class BaseEquipment : public BaseItem
      		virtual ~BaseEquipment();
 
       		bool InsertModule(BaseModule*);
-      		virtual void UpdatePropetries() = 0;
       		
       		virtual void Render(const Rect&);
       		      		
@@ -43,7 +38,6 @@ class BaseEquipment : public BaseItem
                 
                 virtual void AddCommonInfo();
                 
-                UnresolvedDataUniqueBaseEquipment data_unresolved_BaseEquipment;
                 void SaveDataUniqueBaseEquipment(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueBaseEquipment(const boost::property_tree::ptree&);
 		void ResolveDataUniqueBaseEquipment();   

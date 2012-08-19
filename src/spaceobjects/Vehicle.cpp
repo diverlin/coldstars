@@ -27,6 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "../resources/textureManager.hpp"
 #include "../resources/resources.hpp"
+#include "../builder/BaseVehicleBuilder.hpp"
 
 Vehicle::Vehicle()
 {
@@ -117,7 +118,9 @@ void Vehicle::AddItemSlot(ItemSlot* slot, const Rect& rect)
                 	int pos_y = getRandInt(border_start*h, border_end*h) - h/2;
 			slot->GetTurrel()->GetPoints().SetParentCenter(vec2f(pos_x, pos_y));
                  	points.Add(slot->GetTurrel()->GetPoints().GetpCenter(), slot->GetTurrel()->GetPoints().GetpParentCenter()); 
-                	weapon_complex->AddSlot(slot); break; 
+                	weapon_complex->AddSlot(slot); 
+                	
+                	break; 
                 }
                 case ITEMSLOT::DRIVE_ID:     { drive_complex->SetDriveSlot(slot); break; }
                 case ITEMSLOT::BAK_ID:       { drive_complex->SetBakSlot(slot); break; }
@@ -334,8 +337,8 @@ void Vehicle::LaunchingEvent()
 		{
 			Base* place = ((Angar*)parent_vehicleslot->GetOwner())->GetOwnerKosmoport()->GetOwner();
 		     	starsystem->AddVehicle(this, ((Planet*)place)->GetPoints().GetCenter(), 0, NULL);
-			//parent_vehicleslot->Release(); 
-			((Planet*)place)->GetLand()->RemoveVehicle(this);
+			parent_vehicleslot->Release(); //((Planet*)place)->GetLand()->RemoveVehicle(this); 
+			
 			break;
 		}
 			
@@ -394,10 +397,10 @@ void Vehicle::UpdateAllPropertiesAndAbilities()
     	// this function set actual ship propretries relying to all equipment placed in slots
     	// used when ship change items in slot
     	// !!! all this stuff can be called separately by item deterioration function if item becomes broken !!!
-     	RecalculateMass();
+     	RecalculateMass(); 
      
     	UpdateDriveAbility(); 
-    	UpdateRadarAbility();
+    	UpdateRadarAbility();  
     	UpdateJumpAbility();
     	UpdateEnergyAbility();  // make reurtn true, and add below if condition 
     	UpdateProtectionAbility(); // because energy shield depends on energy and consume it much
@@ -419,7 +422,7 @@ void Vehicle::RecalculateMass()
      	// calculate mass and then actual ship speed depending on drive power and actual mass
      	// used each time when ship picked up/bought or drop/sold something. 
      	
-     	mass = 0;   
+     	mass = 0;
     	for (unsigned int i=0; i<slot_total_vec.size(); i++)
     	{
         	if (slot_total_vec[i]->GetEquiped() == true)
@@ -920,6 +923,10 @@ void Vehicle::ResolveDataUniqueVehicle()
 {
        	textureOb_gui = TextureManager::Instance().GetTextureObByPath(data_unresolved_Vehicle.textureOb_gui_path);
        	
+       	BaseVehicleBuilder::Instance().CreateKorpusGeometry(this);
+        BaseVehicleBuilder::Instance().CreateKorpusGui(this);
+        BaseVehicleBuilder::Instance().CreateTextureDependedStuff(this);
+        
        	if (data_unresolved_Vehicle.land_id != NONE_ID) 
         { 
         	SetLand( (BaseLand*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.land_id) ); 

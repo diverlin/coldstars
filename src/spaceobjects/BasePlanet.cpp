@@ -30,7 +30,7 @@ BasePlanet::~BasePlanet()
 
 void BasePlanet::CreateOrbit()
 {
-	orbit->CalcPath(data_planet.radius_A, data_planet.radius_B, data_planet.speed, data_planet.orbit_phi_inD);
+	orbit->CalcPath(data_planet.radius_A, data_planet.radius_B, data_planet.speed, data_planet.orbit_phi_inD, data_planet.clockwise);
 }
     		
 void BasePlanet::CalcCollisionrRadius()
@@ -91,7 +91,8 @@ void BasePlanet::SaveDataUniqueBasePlanet(boost::property_tree::ptree& save_ptre
 	save_ptree.put(root+"data.radius_B", data_planet.radius_B);
 	save_ptree.put(root+"data.orbit_phi_inD", data_planet.orbit_phi_inD);		
 	save_ptree.put(root+"data.speed", data_planet.speed);
-
+	save_ptree.put(root+"data.clockwise", data_planet.clockwise);
+	
 	save_ptree.put(root+"unresolved.orbit_it", orbit->GetIt());
 }
 
@@ -103,7 +104,8 @@ void BasePlanet::LoadDataUniqueBasePlanet(const boost::property_tree::ptree& loa
 	data_planet.radius_B = load_ptree.get<float>("data.radius_B");
 	data_planet.orbit_phi_inD = load_ptree.get<float>("data.orbit_phi_inD");		
 	data_planet.speed = load_ptree.get<float>("data.speed");
-
+	data_planet.clockwise = load_ptree.get<bool>("data.clockwise");
+	
 	data_unresolved_BasePlanet.orbit_it = load_ptree.get<int>("unresolved.orbit_it");
 }
 

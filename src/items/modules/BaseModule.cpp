@@ -20,6 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 BaseModule::BaseModule()
 {
         data_id.type_id = TYPE::MODULE_ID;
+        
+        equipment_owner = NULL;
 }
 
 /* virtual */
@@ -38,23 +40,21 @@ void BaseModule::AddCommonInfo()
     	//info.addNameStr("price:");     info.addValueStr( int2str(price) );
 }
 
-//void ModuleBase :: RenderInfo(Rect slot_rect, float offset_x, float offset_y)
-//{  
-	//UpdateInfo();
-        //drawInfoIn2Column(&info.title_list, &info.value_list, slot_rect.GetCenter().x, slot_rect.GetCenter().y, offset_x, offset_y);
-//}
-
-//void ModuleBase :: Render(Rect slot_rect)
-//{
-        //drawTexturedRect(texOb, slot_rect, -1);   
-//}
-
-
 void BaseModule::SaveDataUniqueBaseModule(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{}
+{
+        if (equipment_owner) 	{ save_ptree.put(root+"unresolved.equipment_owner_id", equipment_owner->GetId()); }
+	else           		{ save_ptree.put(root+"unresolved.equipment_owner_id", NONE_ID); }
+}
 
 void BaseModule::LoadDataUniqueBaseModule(const boost::property_tree::ptree& load_ptree)
-{}
+{
+	data_unresolved_BaseModule.equipment_owner_id = load_ptree.get<int>("unresolved.equipment_owner_id");
+}
 
 void BaseModule::ResolveDataUniqueBaseModule()
-{}
+{
+	if(data_unresolved_BaseModule.equipment_owner_id != NONE_ID) 
+	{
+		((BaseEquipment*)EntityManager::Instance().GetEntityById(data_unresolved_BaseModule.equipment_owner_id))->InsertModule(this);
+	}
+}
