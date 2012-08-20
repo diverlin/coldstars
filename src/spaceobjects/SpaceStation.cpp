@@ -89,7 +89,7 @@ void SpaceStation::RenderInSpace() const
     	
     	if (ableTo.PROTECT == true)
     	{
-        	RenderShield(); 
+        	RenderShieldEffect(1.0 - color.a); 
         }
 }
 

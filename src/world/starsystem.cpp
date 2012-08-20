@@ -550,12 +550,12 @@ void StarSystem::FindRadarVisibleEntities_c(Player* player)
       
 void StarSystem::RestoreSceneColor()
 {
-        setColor(STAR_vec[0]->GetColor());
+        setColor4f(STAR_vec[0]->GetColor());
 }     
 
 void StarSystem::RestoreDefaultColor()
 {
-	setColor(COLOR::DEFAULT4f);
+	setColor4f(COLOR::DEFAULT4f);
 }
 
 void StarSystem::DrawBackground(vec2f scroll_coords)

@@ -97,9 +97,11 @@ void GuiAngar::ButtonsAction() const
 	   			
 	   			case GUI::BUTTON::GETLAUNCH_ID:
 	   			{
-	   				MicroTask* microtask = new MicroTask(MICROSCENARIO::LAUNCHING_ID);
+	   				//MicroTask* microtask = new MicroTask(MICROSCENARIO::LAUNCHING_ID);
+       					//player->GetNpc()->GetStateMachine()->SetCurrentMicroTask(microtask);
+       					
        					player->GetNpc()->GetVehicle()->LaunchingEvent();
-       					player->GetNpc()->GetStateMachine()->SetCurrentMicroTask(microtask);
+       					player->GetNpc()->GetVehicle()->SetSpecialActionId(SPECIAL_ACTION::INITIATE_LAUNCHING_ID);
        		   			return; 
        		   				      		   			
        		   			break;

@@ -22,13 +22,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../../resources/textureManager.hpp"
 
 DriveEffect::DriveEffect(vec2f* pTo_start_pos, 
-			 vec2f* pTo_target_pos)
+			    vec2f* pTo_target_pos)
 {
     	this->pTo_start_pos  = pTo_start_pos;      //ob.points.midLeft
      	this->pTo_target_pos = pTo_target_pos;     //ob.points.midFarLeft
 }
 
-
+/* virtual */
 DriveEffect::~DriveEffect()
 {}
 
@@ -71,7 +71,7 @@ void DriveEffect::PutParticlesToInitPos()
      	}
 }
 
-
+/* virtual */
 void DriveEffect::Update()
 {
      	UpdateVelocity();
@@ -93,13 +93,13 @@ void DriveEffect::Update()
 
 
 
-void DriveEffect::Render()
+void DriveEffect::Render(float parent_d_alpha)
 {
        	enable_POINTSPRITE();       	
      		glBindTexture(GL_TEXTURE_2D, texOb->texture);
-     		for (unsigned int i = 0; i < particles_vec.size(); i++) 
+     		for (unsigned int i=0; i<particles_vec.size(); i++) 
      		{
-         		particles_vec[i]->Render();
+         		particles_vec[i]->Render(parent_d_alpha);
      		}
 	disable_POINTSPRITE();
 }

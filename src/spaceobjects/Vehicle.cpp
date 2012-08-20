@@ -29,8 +29,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../resources/resources.hpp"
 #include "../builder/BaseVehicleBuilder.hpp"
 
+#include "../common/Logger.hpp"
+
 Vehicle::Vehicle()
 {
+	special_action_id = SPECIAL_ACTION::NONE_ID;
+	
 	owner_npc = NULL;
        	starsystem = NULL; 
       	
@@ -249,37 +253,80 @@ void Vehicle::RecalculateCollisionRadius()
 	collision_radius = (textureOb->GetFrameWidth() + textureOb->GetFrameHeight())/3;
 }
 
-//bool Vehicle::DockingEffect()
-//{
-	//if (color.a > 0.01)
-	//{
-		//color.a -= 0.02;
-		//return false;
-	//}
-	//else
-	//{
-		//color.a = 0.0;
-		//return true;
-	//}
-//}
+void Vehicle::UpdateSpecialAction()
+{
+	if (special_action_id != SPECIAL_ACTION::NONE_ID)
+	{
+		switch(special_action_id)
+		{
+			case SPECIAL_ACTION::INITIATE_DOCKING_ID:
+			{
+				if (UpdateFadeInEffect() == true)
+				{
+					DockingEvent();
+					special_action_id = SPECIAL_ACTION::NONE_ID;
+				}
+				
+				break;			
+			}
+			
+			
+			case SPECIAL_ACTION::INITIATE_LAUNCHING_ID:
+			{
+				if (UpdateFadeOutEffect() == true)
+				{
+					special_action_id = SPECIAL_ACTION::NONE_ID;
+				}
+				
+				break;
+			}
 
-//bool Vehicle::LaunchingEffect()
-//{
-	//if (color.a < 1.0)
-	//{
-		//std::cout<<"LaunchingEffect works"<<std::endl;
-		//color.a += 0.02;
-		//return false;
-	//}
-	//else
-	//{
-		//std::cout<<"LaunchingEffect finished"<<std::endl;
-		//color.a = 1.0;
-		//return true;
-	//}
-//}
+			case SPECIAL_ACTION::INITIATE_JUMPIN_ID:
+			{
+			
+				break;
+			}
+			
+			case SPECIAL_ACTION::INITIATE_JUMPOUT_ID:
+			{
+			
+				break;
+			}			
+			
+			
+		}
+	}
+}
 
-/// ******** DOCKING/LAUNCHING ******** 
+bool Vehicle::UpdateFadeInEffect()
+{
+	if (color.a > 0.01)
+	{
+		color.a -= 0.02;
+		return false;
+	}
+	else
+	{
+		color.a = 0.0;
+		return true;
+	}
+}
+
+bool Vehicle::UpdateFadeOutEffect()
+{
+	if (color.a < 1.0)
+	{
+		color.a += 0.02;
+		return false;
+	}
+	else
+	{
+		color.a = 1.0;
+		return true;
+	}
+}
+
+//// ******** DOCKING/LAUNCHING ******** 
 void Vehicle::HyperJumpEvent()
 {
         starsystem->RemoveVehicle(data_id.id);  
@@ -325,6 +372,10 @@ void Vehicle::DockingEvent()
 	}
         
         GetDriveComplex()->ResetTarget();
+        
+        #if LOG_ENABLED == 1 
+	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" DockingEvent()"); 
+	#endif
 }
 
 void Vehicle::LaunchingEvent()
@@ -348,6 +399,8 @@ void Vehicle::LaunchingEvent()
 			break;
 		}
 	}
+	
+	color.a = 0.1;
 }
 //// 
 
@@ -678,15 +731,16 @@ void Vehicle::RenderKorpus() const
 				  points.GetPosZ());
 }
 
-void Vehicle::RenderDriveTrail() const
+void Vehicle::RenderDriveEffect(float parent_d_alpha) const
 {
-	drive_complex->RenderTrail();
+	drive_complex->GetDriveEffect()->Update();
+	drive_complex->GetDriveEffect()->Render(parent_d_alpha);
 }
 
 
-void Vehicle::RenderShield() const
+void Vehicle::RenderShieldEffect(float parent_d_alpha) const
 {
-     	protection_complex->GetShieldEffect()->Render();
+     	protection_complex->GetShieldEffect()->Render(parent_d_alpha);
 }
 
 void Vehicle::RenderRadarRange()

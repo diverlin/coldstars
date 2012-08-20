@@ -31,7 +31,8 @@ void clearScreen();
 void resetRenderTransformation();
 
 void camera(float x, float y);
-void setColor(Color4f);	
+void setColor4f(const Color4f&);	
+void setColor4f(float, float, float, float);
 
 void enable_BLEND();
 void disable_BLEND();
@@ -44,15 +45,15 @@ void disable_POINTSPRITE();
 
 
 void drawFlatQuadPerVertexIn2D(TextureOb* texOb,
-			       vec2f bottomLeft, 
-			       vec2f bottomRight, 
-			       vec2f topRight, 
-			       vec2f topLeft, 
-			       float z_pos);
+			         const vec2f& bottomLeft, 
+			         const vec2f& bottomRight, 
+			         const vec2f& topRight, 
+			         const vec2f& topLeft, 
+			         float z_pos);
 			       
 
 void drawDynamic(TextureOb* texOb, 
-		 vec2f center, 
+		 const vec2f& center, 
 		 float angleInDegree, 
 		 float pos_z);
 
@@ -64,12 +65,12 @@ void drawRect(const Rect& rect, float z_pos); // the drawrect function was inver
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   
 
 
-void drawTexturedPoint(GLuint texture, vec2f _center, float size, float pos_z);
+void drawTexturedPoint(GLuint texture, const vec2f& _center, float size, float pos_z);
 
 
 
 void drawLine(TextureOb* texOb, 
-              vec2f start_pos, 
+              const vec2f& start_pos, 
               float z_pos, 
               float len, 
               float angle_inD, 
@@ -78,8 +79,8 @@ void drawLine(TextureOb* texOb,
 
              
 void drawSimpleColoredText(std::string str, 
-			   vec2f pos, 
-			   Color4i color,
+			   const vec2f& pos, 
+			   const Color4i& color,
 			   float scroll_x = 0.0, 
 			   float scroll_y = 0.0);
 
@@ -106,6 +107,7 @@ void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z
 
 void renderMesh(GLuint glList, const vec3f& center, const vec3f& angle, float scale);
 
+void drawParticle(float, float r, float g, float b, float a, const vec2f&);
 void drawParticle(float, const Color4f&, const vec2f&);
 void drawParticle(float, const vec2f&);
 

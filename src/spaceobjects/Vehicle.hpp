@@ -123,6 +123,7 @@ class Vehicle : public BaseGameEntity
        	        Vehicle();
         	virtual ~Vehicle(); 
 
+		void SetSpecialActionId(int special_action_id) { this->special_action_id = special_action_id; };
 		void SetParentVehicleSlot(VehicleSlot* parent_vehicleslot) { this->parent_vehicleslot = parent_vehicleslot; };
 		
                 void SetWeaponComplex(WeaponComplex* weapon_complex) { this->weapon_complex = weapon_complex; };
@@ -166,7 +167,6 @@ class Vehicle : public BaseGameEntity
         	
         	const Rect& GetGuiRect() const { return kontur_rect; };
         	
-        	//bool HasSomeGoodsInCargo() const;
         	GoodsPack* GetGoodsPack() const;
         	
         	AbilitiesStatus ableTo;
@@ -175,7 +175,8 @@ class Vehicle : public BaseGameEntity
                        	
         	void SelfRepairEvent();
         	bool ExternalRepairEvent();
-        	                
+        	       
+        	void UpdateSpecialAction();         
         	virtual void UpdateInSpace(int, bool) = 0;
         	void Hit(int, bool);
 
@@ -198,8 +199,7 @@ class Vehicle : public BaseGameEntity
         	void DockingEvent();
         	void LaunchingEvent();
         	
-        	//bool DockingEffect();
-        	//bool LaunchingEffect();
+		void UpdateSpecialEffect();
         	
         	void RenderInfoInSpace(const vec2f&);
         	void RenderInfo(const vec2f&);
@@ -221,6 +221,8 @@ class Vehicle : public BaseGameEntity
 		void BuyFuelAsMuchAsPossible();
 
 	protected:
+		int special_action_id;
+	
 		virtual void UpdateInfo() = 0;
              	std::string returnProtectionStr();
 
@@ -233,8 +235,8 @@ class Vehicle : public BaseGameEntity
                 void RenderGrappleTrail() const;
 		void RenderKorpus() const;
              	void RenderTurrels() const;
-             	void RenderDriveTrail() const;
-          	void RenderShield() const;
+             	void RenderDriveEffect(float parent_d_alpha = 0.0) const;
+          	void RenderShieldEffect(float parent_d_alpha = 0.0) const;
         	
         	ItemSlot* radar_slot;
         	ItemSlot* scaner_slot;
@@ -270,6 +272,9 @@ class Vehicle : public BaseGameEntity
              	void DropRandomItemToSpace();   
              	bool AddItemToEmptyCargoSlot(BaseItem*);
                 bool MergeIdenticalGoods(BaseItem*);
+                
+                bool UpdateFadeInEffect();
+        	bool UpdateFadeOutEffect();
              	
         friend class GuiVehicle;
              	

@@ -8,7 +8,10 @@
 
 << sattelite and spacestation add fireevent
 
-<< add fading animation for docking/launching, jumping
+<< add fading animation jump IN/-OUT
+
+<< add fading animation for docking/launching
+- DONE
 
 << ablitiy to resize the Gui depending on screen resolution.
 - NOT RELEVANT
@@ -54,4 +57,5 @@ save/load =>starmap, stars are not shown anymore
 - fix DONE
 
 #4 turrels needs update after save/load event
+- NOT RELEVANT, dissapear after first update()
 

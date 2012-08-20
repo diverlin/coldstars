@@ -94,3 +94,11 @@ void Particle::Render() const
 		drawParticle(size, color, pos);
      	}
 }
+
+void Particle::Render(float parent_d_alpha) const
+{
+	if (is_alive == true)
+	{
+		drawParticle(size, color.r, color.g, color.b, color.a - parent_d_alpha, pos);
+     	}
+}

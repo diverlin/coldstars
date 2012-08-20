@@ -29,7 +29,8 @@ class DriveEffect : public BaseParticleSystem
        		virtual ~DriveEffect();
        
        		virtual void Update();
-       		virtual void Render();
+       		virtual void Render() {};
+       		void Render(float parent_d_alpha = 0.0);
        		
                 void CreateParticles();
                 void UpdateVelocity();

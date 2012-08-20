@@ -32,7 +32,7 @@ class ShieldEffect
 		
                 Points& GetPoints() { return points; };
         	void Update();
-        	void Render() const;            
+        	void Render(float) const;            
 
         private:       
         	Color4f color;
