@@ -225,7 +225,7 @@ bool WeaponComplex::UpdateFireAbility()
      	
      	//int sum_fire_radius = 0;
      	
-     	for (unsigned int i = 0; i < slot_weapon_vec.size(); i++)
+     	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
      	{ 
         	if (slot_weapon_vec[i]->GetEquiped() == true)
         	{
@@ -261,7 +261,7 @@ bool WeaponComplex::UpdateFireAbility()
 
 void WeaponComplex::RenderTurrels() const
 {
-    	for(unsigned int i = 0; i < slot_weapon_equiped_vec.size(); i++)
+    	for(unsigned int i=0; i<slot_weapon_equiped_vec.size(); i++)
     	{
         	slot_weapon_equiped_vec[i]->GetTurrel()->Render(owner_vehicle->GetPoints().GetAngleDegree());        
     	} 

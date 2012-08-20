@@ -115,7 +115,7 @@ void RocketBullet::UpdateRenderStuff()
 void RocketBullet::RenderInSpace() const
 {
 	RenderKorpus();
-	RenderDriveTrail();
+	RenderDriveEffect();
 }
 
 

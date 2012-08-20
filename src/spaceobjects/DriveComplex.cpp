@@ -371,10 +371,4 @@ void DriveComplex::DrawPath()
         }
 }
 
-                
-void DriveComplex::RenderTrail()
-{
-	drive_effect->Update();
-	drive_effect->Render();
-}
 

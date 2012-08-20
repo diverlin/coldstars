@@ -36,7 +36,9 @@ class DriveComplex
 
       		void SetTarget(BaseGameEntity*, int);       
       		void SetStaticTargetCoords(const vec2f&);
-      		                
+
+      		DriveEffect* GetDriveEffect() const { return drive_effect; };
+      		      		                
       		ItemSlot* GetDriveSlot() const { return drive_slot; };
         	ItemSlot* GetBakSlot()   const { return bak_slot; };
                   
@@ -51,7 +53,6 @@ class DriveComplex
                 void UpdatePosition();
                 
                 void DrawPath();
-                void RenderTrail();
 
       	private:
                 ItemSlot* drive_slot;

@@ -42,7 +42,8 @@ class Particle
 
       		void Update();
       		void Render() const;
-      		
+      		void Render(float) const;
+      		      		
       	private:
       	      	bool is_alive;
  		

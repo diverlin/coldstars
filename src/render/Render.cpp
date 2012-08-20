@@ -57,7 +57,8 @@ void resetRenderTransformation() { glLoadIdentity(); }
 
 void camera(float x, float y) { glTranslatef(-x, -y, 0.0); }
 
-void setColor(Color4f color) { glColor4f(color.r, color.g, color.b, color.a); }
+void setColor4f(const Color4f& color) { glColor4f(color.r, color.g, color.b, color.a); }
+void setColor4f(float r, float g, float b, float a) { glColor4f(r, g, b, a); }
 
 void enable_BLEND()  { glEnable(GL_BLEND);  }
 void disable_BLEND() { glDisable(GL_BLEND); }
@@ -69,11 +70,11 @@ void enable_POINTSPRITE()  { glEnable(GL_POINT_SPRITE);  }
 void disable_POINTSPRITE() { glDisable(GL_POINT_SPRITE); }
 
 void drawFlatQuadPerVertexIn2D(TextureOb* texOb, 
-			       vec2f bottomLeft, 
-			       vec2f bottomRight, 
-			       vec2f topRight, 
-			       vec2f topLeft, 
-			       float z_pos)
+			        const vec2f& bottomLeft, 
+			        const vec2f& bottomRight, 
+			        const vec2f& topRight, 
+			        const vec2f& topLeft, 
+			        float z_pos)
 {       
     	glBindTexture(GL_TEXTURE_2D, texOb->texture);
 	int frame = texOb->updateAnimationFrame();
@@ -88,7 +89,7 @@ void drawFlatQuadPerVertexIn2D(TextureOb* texOb,
 
 
 void drawDynamic(TextureOb* texOb,
-		 vec2f center, 
+		 const vec2f& center, 
 		 float angleInDegree, 
 		 float pos_z)
 {
@@ -135,7 +136,7 @@ void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos)
 
 
 
-void drawTexturedPoint(GLuint texture, vec2f center, float size, float pos_z)
+void drawTexturedPoint(GLuint texture, const vec2f& center, float size, float pos_z)
 {
     	glBindTexture(GL_TEXTURE_2D, texture);
     	
@@ -149,7 +150,7 @@ void drawTexturedPoint(GLuint texture, vec2f center, float size, float pos_z)
 
 
 void drawLine(TextureOb* texOb, 
-              vec2f start_pos, 
+              const vec2f& start_pos, 
               float z_pos, 
               float len, 
               float angle_inD, 
@@ -175,7 +176,7 @@ void drawLine(TextureOb* texOb,
 
 
 
-void drawSimpleColoredText(std::string str, vec2f pos, Color4i color, vec2f scroll_coord)
+void drawSimpleColoredText(std::string str, const vec2f& pos, Color4i color, vec2f scroll_coord)
 {
      	 int font_size = 12;
          sf::String s(str, Screen::Instance().GetFont(), font_size);
@@ -318,6 +319,16 @@ void renderMesh(GLuint glList, const vec3f& center, const vec3f& angle, float sc
        		glCallList(glList);
      	glPopMatrix();
 
+}
+
+void drawParticle(float size, float r, float g, float b, float a, const vec2f& center)
+{
+	glPointSize(size);
+        	
+        glBegin(GL_POINTS);           		
+     		glColor4f(r, g, b, a);
+     		glVertex3f(center.x, center.y, -2);
+       	glEnd();
 }
 
 void drawParticle(float size, const Color4f& color, const vec2f& center)

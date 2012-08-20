@@ -57,6 +57,7 @@ void MicroScenarioLaunching::UpdateInDynamicInSpace(Npc* npc) const
 void MicroScenarioLaunching::UpdateInStaticInDock(Npc* npc) const
 {
 	npc->GetVehicle()->LaunchingEvent();
+	npc->GetVehicle()->SetSpecialActionId(SPECIAL_ACTION::INITIATE_LAUNCHING_ID);
 }
 
 void MicroScenarioLaunching::Exit(Npc* _npc) const 

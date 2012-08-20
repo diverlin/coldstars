@@ -46,9 +46,9 @@ void ShieldEffect::Update()
        		color.a = alpha_start;
 }
 
-void ShieldEffect::Render() const
+void ShieldEffect::Render(float parent_d_alpha) const
 {
-    	setColor(color);
+    	setColor4f(color.r, color.g, color.b, color.a - parent_d_alpha);
 
     	drawFlatQuadPerVertexIn2D(textureOb,
     				  points.GetBottomLeft(), 

@@ -61,6 +61,8 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 	CheckDeath(show_effect);
 	if (time > 0)
 	{
+		UpdateSpecialAction();
+	
 		owner_npc->UpdateInSpace(time, show_effect);
 		points.Update();   
 		weapon_complex->Fire(time, owner_npc->GetSkill().GetAttack(), show_effect);
@@ -85,7 +87,7 @@ void Ship::UpdateRenderStuff()
 
 void Ship::RenderInSpace() const
 {   
-	setColor(color);
+	setColor4f(color);
         if (ableTo.GRAB == true)
         {
                 RenderGrappleTrail();
@@ -100,12 +102,12 @@ void Ship::RenderInSpace() const
 
     	if (ableTo.DRIVE == true)
     	{
-		RenderDriveTrail();
+		RenderDriveEffect(1.0 - color.a);
     	}
     	
     	if (ableTo.PROTECT == true)
     	{
-        	RenderShield(); 
+        	RenderShieldEffect(1.0 - color.a); 
         }
 	starsystem->RestoreSceneColor();
 }
