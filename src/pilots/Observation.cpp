@@ -39,13 +39,22 @@ void Observation::FindEchievableStarSystems(Galaxy* galaxy)
         
         //Sort(&visible_STARSYSTEM_vec);
 }
+
+Container* Observation::GetClosestContainer() const
+{
+	return visible_CONTAINER_pair_vec[0].object;
+}
           
-          
+Container* Observation::GetRandContainer() const
+{
+	return visible_CONTAINER_pair_vec[getRandInt(0, visible_CONTAINER_pair_vec.size()-1)].object;
+}
+                    	
 StarSystem* Observation::GetClosestStarSystem(bool _captured) const
 {
 	StarSystem* _target_starsystem = NULL;
 	
- 	for (unsigned int i = 0; i<visible_STARSYSTEM_pair_vec.size(); i++)
+ 	for (unsigned int i=0; i<visible_STARSYSTEM_pair_vec.size(); i++)
  	{
  		if (visible_STARSYSTEM_pair_vec[i].object->GetCaptured() == _captured)
  		{

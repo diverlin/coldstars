@@ -274,7 +274,7 @@ void StarSystem::updateStates()
 {
 	if (CONTAINER_vec.size() < 100)
 	{
-		asteroidManager_s(1);
+		asteroidManager_s(3);
 	}
 	     	
 	//if (PLAYER_vec.size() > 0)

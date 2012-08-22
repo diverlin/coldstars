@@ -51,7 +51,7 @@ class GuiManager
       		GuiKosmoport 	gui_kosmoport;
       		GuiAngar 	gui_angar;
                 GuiStore 	gui_store;
-                GuiShop        gui_shop;
+                GuiShop        	gui_shop;
       		GuiSpace     	gui_space;      
 		GuiMap       	gui_map;      		
        		GuiRadar 	gui_radar;

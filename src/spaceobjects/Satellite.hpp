@@ -25,7 +25,7 @@ class Satellite : public Vehicle
 {
     	public:  
         	Satellite(int);
-        	~Satellite();
+        	virtual ~Satellite();
 
     		Orbit* GetOrbit() const { return orbit; };
     		

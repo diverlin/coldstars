@@ -25,7 +25,7 @@ class Ship : public Vehicle
 {   
     	public:
                 Ship(int);
-        	~Ship();
+        	virtual ~Ship();
 
         	void UpdateInSpace(int, bool);
         	

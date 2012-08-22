@@ -51,7 +51,6 @@ class RocketBullet : public Vehicle
         private:
                 float speed;
                
-                float dx, dy;
                 float angle_inD;                
                 
                 int owner_id;

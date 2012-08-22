@@ -36,16 +36,15 @@ class GrappleEquipment : public BaseEquipment
 		int GetRadius()     const { return radius; };
 		int GetSpeed()      const { return speed; };
 		int GetMaxNumItem() const { return maxNumItem; };
-                
+              
                 void AddTarget(BaseGameEntity*);
                 void AddToRemoveQueue(BaseGameEntity*);
                 
-                void ValidateTargets();
-                std::vector<BaseGameEntity*> target_vec;
-                std::vector<BaseGameEntity*> remove_queue;
-                
 		std::string GetTargetStr() const;
-		
+
+		void UpdateSpecificProgram();
+		void RenderGrappleTrail() const;
+				              
       	      	void CountPrice();
       		virtual void UpdatePropetries();  
       		
@@ -69,13 +68,17 @@ class GrappleEquipment : public BaseEquipment
       		int maxNumItem_orig;
       		int maxNumItem_add;
       		int maxNumItem;
-    		
+
+                std::vector<BaseGameEntity*> target_vec;
+                std::vector<BaseGameEntity*> remove_queue;
+                    		
      		void virtual AddUniqueInfo();
            	std::string GetStrengthStr();
            	std::string GetRadiusStr();
            	std::string GetSpeedStr();
            	std::string GetMaxNumItemStr();
-                
+
+		void ValidateTargets();  
                 void ClearRemoveQueue();
                 
                 void SaveDataUniqueGrappleEquipment(boost::property_tree::ptree&, const std::string&) const;

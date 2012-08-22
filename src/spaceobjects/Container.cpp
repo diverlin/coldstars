@@ -47,13 +47,19 @@ void Container::BindItemSlot(ItemSlot* item_slot)
 
 
 void Container::UpdateInfo()  
-{}        
+{
+	info.clear();
+    	info.addTitleStr("CONTAINER");
+    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
+    	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
+}        
        	
-void Container::RenderInfoInSpace(vec2f scroll_coords)
+void Container::RenderInfoInSpace(const vec2f& scroll_coords)
 {
 	UpdateInfo();
      	item_slot->GetRect().SetCenter(points.GetCenter());
-     	item_slot->RenderItemInfo(scroll_coords.x, scroll_coords.y);
+     	drawInfoIn2Column(&info.title_list, &info.value_list, points.GetCenter().x - scroll_coords.x - 200, points.GetCenter().y - scroll_coords.y);
+     	item_slot->RenderItemInfo(scroll_coords);
 }
  
 /* virtual */    
@@ -88,7 +94,7 @@ void Container::UpdateInSpace(int time, bool show_effect)
 	{
      		if (keep_moving == true)
      		{
-        		keep_moving = get_dX_dY_ToPoint(points.GetCenter().x, points.GetCenter().y, target_pos.x, target_pos.y, velocity, &d_pos.x, &d_pos.y);
+        		keep_moving = get_dPos_ToPoint(points.GetCenter(), target_pos, velocity, d_pos);
         		points.SetCenter(points.GetCenter().x + d_pos.x, points.GetCenter().y + d_pos.y);
      		}  
      	}

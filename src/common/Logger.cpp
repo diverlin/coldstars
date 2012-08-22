@@ -27,26 +27,33 @@ Logger& Logger::Instance()
 Logger::~Logger()
 {}
 
-void Logger::Log(const std::string& str)
+void Logger::Log(const std::string& str, int dip)
 {
+	std::string spaces;
+	for (int i=0; i<3*dip; i++)
+	{
+		spaces += " ";
+	}
+	
+	std::string result = spaces + str;
 	switch(mode)
 	{
 		case LOG::TOSCREEN:
 		{
-			ToScreen(str);
+			ToScreen(result);
 			break;
 		}
 		
 		case LOG::TOFILE:
 		{
-			ToFile(str);
+			ToFile(result);
 			break;		
 		}
 		
 		case LOG::TOSCREENTOFILE:
 		{
-			ToScreen(str);
-			ToFile(str);
+			ToScreen(result);
+			ToFile(result);
 			break;
 		}
 	

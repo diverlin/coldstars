@@ -151,6 +151,10 @@ int ItemSlot::GetItemRadius() const
         return 0;
 }
 
+void ItemSlot::RenderItemInfo(const vec2f& offset) const
+{
+	RenderItemInfo(offset.x, offset.y);
+}
 
 void ItemSlot::RenderItemInfo(float offset_x, float offset_y) const
 {

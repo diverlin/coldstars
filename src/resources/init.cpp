@@ -64,7 +64,8 @@ void init()
 	ScenarioCollector::Instance().RegisterScenario(new MicroScenarioLaunching());
 	ScenarioCollector::Instance().RegisterScenario(new MicroScenarioJump());
 	ScenarioCollector::Instance().RegisterScenario(new MicroScenarioDestroy());
-	
+	ScenarioCollector::Instance().RegisterScenario(new MicroScenarioGrab());
+		
 	/* create AI models */
 	AiModelCollector::Instance().RegisterAiModel(new AiModelRanger());
 	AiModelCollector::Instance().RegisterAiModel(new AiModelConqueror());  

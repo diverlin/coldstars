@@ -74,7 +74,7 @@ class BaseGameEntity : public Base
 
 		BaseGameEntity* GetParent() const { return parent; }
 
-		void MovingByExternalForce(vec2f, float);
+		void MovingByExternalForce(const vec2f&, float);
 
 		void Hit(int, bool);
 
@@ -86,6 +86,7 @@ class BaseGameEntity : public Base
 		LifeData data_life;
 		
 		vec3f angle, d_angle;
+		vec2f d_pos;
 
 		float collision_radius;
 

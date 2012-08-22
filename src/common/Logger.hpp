@@ -29,7 +29,7 @@ class Logger
 		static Logger& Instance();
 		~Logger();
 		
-		void Log(const std::string&);
+		void Log(const std::string&, int dip = 0);
                       	 		                
         private:
 		Logger():mode(LOG::TOSCREEN) {};

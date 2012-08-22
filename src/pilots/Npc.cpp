@@ -75,10 +75,11 @@ void Npc::MindInKosmoport()
 void Npc::MindInSpace()
 {
 	vehicle->GetWeaponComplex()->PrepareWeapons();
-	if (vehicle->ableTo.GRAB == true)
-	{
-        	vehicle->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets();
-        }
+	// this check is performed in Dynamic, no need to repeat in Static
+	//if (vehicle->ableTo.GRAB == true) 
+	//{
+        	//vehicle->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets(); 
+        //}
         vehicle->SelfRepairEvent();
         // drive work, energy and so on
         

@@ -19,8 +19,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "MacroScenarioGoodsTrading.hpp"
 #include "../../../pilots/Npc.hpp"
 #include "../../../spaceobjects/Vehicle.hpp"
-#include "../../../common/constants.hpp"
 #include "../../../spaceobjects/Planet.hpp"
+#include "../../../spaceobjects/Container.hpp"
+#include "../../../common/constants.hpp"
+#include "../../../common/Logger.hpp"
+#include "../../../common/myStr.hpp"
 
 MacroScenarioGoodsTrading::MacroScenarioGoodsTrading() 
 {
@@ -42,37 +45,80 @@ bool MacroScenarioGoodsTrading::IsAbleToBuyGoods(Npc* npc) const
 	
 	return false;
 }
-		
-void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
+
+/* virtual */
+void MacroScenarioGoodsTrading::Enter(Npc* npc) const
+{
+	#if AISCENARIO_LOG_ENABLED == 1 
+	Logger::Instance().Log( "npc_id = "+int2str(npc->GetId())+" ENTER MacroScenarioGoodsTrading"); 
+	#endif
+}
+
+/* virtual */
+bool MacroScenarioGoodsTrading::Validation(Npc* npc) const
 {
 	if (npc->GetVehicle()->GetGoodsPack() == NULL)
 	{
-		if (IsAbleToBuyGoods(npc) == true)
-		{
-			if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetScenarioTypeId() != MICROSCENARIO::DOCKING_ID)
-			{
-				Planet* planet = npc->GetPlanetForDocking(); // find proper planet!
-				MicroTask* microtask = new MicroTask(MICROSCENARIO::DOCKING_ID, planet);
-				npc->GetStateMachine()->SetCurrentMicroTask(microtask);
-				
-				return;
-			}
-		}
-
-		if (IsAbleToBuyGoods(npc) == false)
-		{
-	
-			//if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetScenarioTypeId() != MICROSCENARIO::MINERAL_HARVEST) 
-			{
-				// mineral hunting micro scenario
-				
-				return;
-			}
-		}
+		return IsAbleToBuyGoods(npc);
 	}
 	else
 	{
-		if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetScenarioTypeId() != MICROSCENARIO::DOCKING_ID)
+		return true;
+	}
+		
+	return false;
+}
+
+/* virtual */		
+void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
+{
+	bool see_container   = npc->GetObservation().GetVisionStatus().CONTAINER;
+	bool able_buy        = IsAbleToBuyGoods(npc);
+	bool has_goods = false;
+	if (npc->GetVehicle()->GetGoodsPack() != NULL)
+	{
+		has_goods = true;
+	}
+	int microScenarioTypeId = npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetScenarioTypeId();
+	
+	// LOGIC
+	if ( (see_container == true) and (has_goods == false) )
+	{	
+		if (microScenarioTypeId != MICROSCENARIO::GRAB_ID) 
+		{
+			Container* container = npc->GetObservation().GetRandContainer(); // find proper!
+			MicroTask* microtask = new MicroTask(MICROSCENARIO::GRAB_ID, container);
+			npc->GetStateMachine()->SetCurrentMicroTask(microtask); 
+			
+			return;
+		}
+	}
+	/*
+	if ( (has_goods == false) and (able_buy == false) )
+	{
+		//if (microScenarioTypeId != MICROSCENARIO::explore) 
+		{
+			// EXPLORATION HERE
+				
+			return;
+		}
+	}
+	*/
+	if ( (has_goods == false) and (able_buy == true) )
+	{
+		if (microScenarioTypeId != MICROSCENARIO::DOCKING_ID)
+		{
+			Planet* planet = npc->GetPlanetForDocking(); // find proper planet!
+			MicroTask* microtask = new MicroTask(MICROSCENARIO::DOCKING_ID, planet);
+			npc->GetStateMachine()->SetCurrentMicroTask(microtask); 
+				
+			return;
+		}
+	}
+			
+	if (has_goods == true)
+	{
+		if (microScenarioTypeId != MICROSCENARIO::DOCKING_ID)
 		{
 			Planet* planet = npc->GetPlanetForDocking(); // find proper planet
 			MicroTask* microtask = new MicroTask(MICROSCENARIO::DOCKING_ID, planet);
@@ -81,10 +127,9 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
 			return;
 		}
 	}
-
 }
 
-
+/* virtual */
 void MacroScenarioGoodsTrading::UpdateInStaticInDock(Npc* npc) const
 {
 	GoodsPack* goods_pack = npc->GetVehicle()->GetGoodsPack(); 
@@ -103,6 +148,14 @@ void MacroScenarioGoodsTrading::UpdateInStaticInDock(Npc* npc) const
 	npc->GetStateMachine()->SetCurrentMicroTask(microtask);		
 }
 
+void MacroScenarioGoodsTrading::Exit(Npc* npc) const
+{
+	#if AISCENARIO_LOG_ENABLED == 1 
+	Logger::Instance().Log( "npc_id = "+int2str(npc->GetId())+" EXIT MacroScenarioGoodsTrading"); 
+	#endif
+}
+
+/* virtual */
 std::string MacroScenarioGoodsTrading::GetDescription(Npc* npc) const
 {
 	return "MacroScenarioGoodsTrading";

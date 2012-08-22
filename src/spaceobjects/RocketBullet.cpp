@@ -25,9 +25,6 @@ RocketBullet::RocketBullet(int id)
 	data_id.subtype_id = ENTITY::ROCKETBULLET_ID;
 
 	target = NULL;
-	
-	dx = 0;
-        dy = 0;
 }
 
 RocketBullet::~RocketBullet()
@@ -48,7 +45,7 @@ void RocketBullet::UpdateInSpace(int time, bool show_effect)
                 
 		if (target != NULL)
     		{ 
-        		get_dX_dY_angleInD_ToPoint(points.GetCenter().x, points.GetCenter().y, target->GetPoints().GetCenter().x, target->GetPoints().GetCenter().y, speed/100.0, &dx, &dy, &angle_inD);
+        		get_dPos_ToPoint(points.GetCenter(), target->GetPoints().GetCenter(), speed/100.0, d_pos, angle_inD);
     		
                         if (CheckTarget() == false)
                         {
@@ -56,7 +53,7 @@ void RocketBullet::UpdateInSpace(int time, bool show_effect)
                         }
                 }      
     		points.SetAngle(angle_inD);
-    		points.SetCenter(points.GetCenter().x + dx, points.GetCenter().y + dy);
+    		points.SetCenter(points.GetCenter() + d_pos);
     
 
     		data_bullet.live_time -= 1;

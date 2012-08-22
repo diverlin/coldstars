@@ -25,6 +25,7 @@ Ship::Ship(int id)
 	data_id.subtype_id = ENTITY::SHIP_ID;
 }
 
+/* virtual */
 Ship::~Ship()
 {} 
 
@@ -74,7 +75,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
     
     		if (ableTo.GRAB == true)
     		{
-    			GrappleMicroProgramm();
+    			UpdateGrappleMicroProgram();
     		}
     	}
 }

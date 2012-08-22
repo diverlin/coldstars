@@ -42,7 +42,9 @@ void DriveComplex::ResetTarget()
 	
 	direction_list_END = true;
 	
-	//std::cout<<"drive_complex reset target"<<std::endl;
+	#if DRIVECOMPLEX_LOG_ENABLED == 1 
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" RESET DriveComplex Target ", 2); 
+	#endif    
 }
       
 void DriveComplex::SetStaticTargetCoords(const vec2f& target_pos)
@@ -65,6 +67,10 @@ void DriveComplex::SetTarget(BaseGameEntity* target, int _action_id)
 	DefineDistance(_action_id);
 	
 	UpdatePath();
+	
+	#if DRIVECOMPLEX_LOG_ENABLED == 1 
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex GOT Target " + getEntityStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " navigator_action = " + getNavigatorActionStr(action_id), 2); 
+	#endif    
 }
   
 
@@ -84,7 +90,7 @@ void DriveComplex::DefineDistance(int action_id)
     		
     		case NAVIGATOR_ACTION::COLLECTING_ID:
     		{
-    		    	target_distance = target->GetCollisionRadius()*1.2;
+    		    	target_distance = owner_vehicle->GetGrappleSlot()->GetGrappleEquipment()->GetRadius()/2; 
     			target_offset = getRandVec2f(target->GetCollisionRadius()/10, target->GetCollisionRadius()/5); 
     			
     			break;    		
@@ -172,6 +178,12 @@ bool DriveComplex::UpdateTargetCoord()
     		} 
     	     
     		case ENTITY::VEHICLE_ID:
+    		{ 
+			target_pos = target->GetPoints().GetCenter() + target_offset;  
+        		return true; break;    
+    		}
+
+    		case ENTITY::CONTAINER_ID:
     		{ 
 			target_pos = target->GetPoints().GetCenter() + target_offset;  
         		return true; break;    
@@ -267,7 +279,7 @@ bool DriveComplex::CalcRoundPath()
     	int i = 0;
     	while (target_angle_diff > 2*d_angle)
     	{   		
-    		i++; //std::cout<<i<<std::endl;
+    		i++; 
     		if (i > it_max)
     		{
     			return false; // if a target point is close to object and is not reachable, then further calc has no sense

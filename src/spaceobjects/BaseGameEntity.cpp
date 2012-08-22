@@ -14,12 +14,12 @@
 	 You should have received a copy of the GNU General Public License
 	 along with this program; if not, write to the Free Software
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-	 */
+*/
 
 #include "BaseGameEntity.hpp"
 
 BaseGameEntity::BaseGameEntity():starsystem(NULL), mesh(NULL), textureOb(NULL), parent(NULL),
-				 place_type_id(NONE_ID), collision_radius(0), mass(0)
+				     place_type_id(NONE_ID), collision_radius(0), mass(0)
 {
 	angle.x        = getRandInt(10, 40);
 	angle.y        = getRandInt(10, 40);
@@ -43,11 +43,9 @@ void BaseGameEntity::UpdateRotation()
 	angle.z += d_angle.z; 
 }
 
-void BaseGameEntity::MovingByExternalForce(vec2f _target, float force)
+void BaseGameEntity::MovingByExternalForce(const vec2f& _target_pos, float force)
 {
-	vec2f d_pos;
-	get_dX_dY_ToPoint(points.GetCenter().x, points.GetCenter().y, _target.x, _target.y, force, &d_pos.x, &d_pos.y);
-	//points.SetCenter(points.GetCenter().x + d_pos.x, points.GetCenter().y + d_pos.y);
+	get_dPos_ToPoint(points.GetCenter(), _target_pos, force, d_pos);
 	points.SetCenter(points.GetCenter() + d_pos);
 }
 
