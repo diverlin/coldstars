@@ -62,7 +62,7 @@ bool Turrel::FireEvent(int attack_skill, bool show_effect)
     		{   
        			slot->GetLazerEquipment()->FireEvent_TRUE();
        			
-			int damage = slot->GetLazerEquipment()->GetDamage() * attack_skill*SKILL::ATTACK_NORMALIZED_RATE;
+			int damage = slot->GetLazerEquipment()->GetDamage() * attack_skill * SKILL::ATTACK_NORMALIZED_RATE;
 			switch(target->GetTypeId())
 			{
 				case ENTITY::VEHICLE_ID:   { ((Vehicle*)target)->Hit(damage, show_effect); return true; break; }
@@ -84,7 +84,7 @@ bool Turrel::FireEvent(int attack_skill, bool show_effect)
 
     		case SUBTYPE::ROCKET_ID:
     		{       
-                	slot->GetRocketEquipment()->FireEvent( attack_skill*SKILL::ATTACK_NORMALIZED_RATE );
+                	slot->GetRocketEquipment()->FireEvent( attack_skill * SKILL::ATTACK_NORMALIZED_RATE );
                 	return true; break;              
     		}
 
