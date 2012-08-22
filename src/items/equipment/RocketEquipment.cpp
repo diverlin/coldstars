@@ -145,7 +145,7 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
 		RocketBulletBuilder::Instance().CreateNewRocket();
 		RocketBulletBuilder::Instance().CreateNewInternals(data_bullet);	
 		RocketBullet* rocket_bullet = RocketBulletBuilder::Instance().GetRocket();
-		rocket_bullet->SetDamage(data_bullet.damage*attack_rate_normalized);
+		rocket_bullet->SetDamage(data_bullet.damage * attack_rate_normalized);
 
 		if (item_slot->GetOwnerVehicle()->data_korpus.draw_turrels == true)
     		{

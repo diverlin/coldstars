@@ -425,7 +425,7 @@ void Vehicle::LaunchingEvent()
 
 void Vehicle::Hit(int damage, bool show_effect)
 {
-	damage = damage * ( 1.0 - (owner_npc->GetSkill().GetDefence()/SKILL::DEFENCE_NORMALIZED_RATE + propetries.protection/100.0) );
+	damage = damage * ( 1.0 - (owner_npc->GetSkill().GetDefence()*SKILL::DEFENCE_NORMALIZED_RATE + propetries.protection*0.01f) );
 	
 	data_life.armor -= damage;
 	

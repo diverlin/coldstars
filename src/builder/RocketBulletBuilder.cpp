@@ -53,8 +53,6 @@ void RocketBulletBuilder::CreateNewRocket(int id)
 void RocketBulletBuilder::CreateNewInternals(BulletData data_bullet) 
 {
 	LifeData data_life;	
-	data_life.is_alive      = true;
-        data_life.garbage_ready = false;
         data_life.armor = data_bullet.armor;        
 
         rocket->SetBulletData(data_bullet);

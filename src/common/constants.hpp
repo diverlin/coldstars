@@ -485,8 +485,8 @@ const int AMMO_MIN = 20;
 const int AMMO_MAX = 40;
 const int RADIUS_MIN = 350;
 const int RADIUS_MAX = 750;
-const int DAMAGE_MIN = 2;
-const int DAMAGE_MAX = 12;
+const int DAMAGE_MIN = 10;
+const int DAMAGE_MAX = 20;
 const int MODULES_NUM_MIN = 0;
 const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
 
