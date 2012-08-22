@@ -61,10 +61,14 @@ class Observation
       		Observation();
      		~Observation();
      		
+     		const VisionStatus& GetVisionStatus() const { return see; };
+     		
      		void SetNpcOwner(Npc* npc_owner) { this->npc_owner = npc_owner; };
  		void ObserveAllInSpace();
           	
           	void FindEchievableStarSystems(Galaxy*);
+          	Container* GetClosestContainer() const;
+          	Container* GetRandContainer() const;
           	StarSystem* GetClosestStarSystem(bool) const;
           	Vehicle* GetClosestVehicle(std::vector<int>*) const;
           	          	          	                

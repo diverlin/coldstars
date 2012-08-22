@@ -36,7 +36,6 @@ void GoodsPack::UpdateOwnerAbilities() { /* do nothing*/ }
 void GoodsPack::AddUniqueInfo() 
 {
     	info.addTitleStr("GOODS");
-    	
     	switch(GetSubTypeId())
     	{
     		case ENTITY::MINERALS_ID: 	{ info.addNameStr("mineral:"); info.addValueStr(int2str(data_item.mass)); break; }
@@ -45,6 +44,8 @@ void GoodsPack::AddUniqueInfo()
     		case ENTITY::MILITARY_ID: 	{ info.addNameStr("military:"); info.addValueStr(int2str(data_item.mass)); break; }
     		case ENTITY::DRUG_ID: 		{ info.addNameStr("drug:"); info.addValueStr(int2str(data_item.mass)); break; }
     		case ENTITY::EXCLUSIVE_ID: 	{ info.addNameStr("exclusive:"); info.addValueStr(int2str(data_item.mass)); break; }
+    		
+    		default: { info.addNameStr("UNKNOWN:"); info.addValueStr("fix the bug"); break; }
     	}
 }
  	

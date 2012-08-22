@@ -47,54 +47,53 @@ int returnObjectSize(int w, int h)
 
 
 
-bool get_dX_dY_ToPoint(float x1, float y1, float x2, float y2, float velocity, float* pTo_dx, float* pTo_dy)
+bool get_dPos_ToPoint(const vec2f& p1, const vec2f& p2, float velocity, vec2f& d_pos)
 {    
-    	float xn, yn; 
-    	float lx = x2 - x1;
-    	float ly = y2 - y1;
+    	float lx = p2.x - p1.x;
+    	float ly = p2.y - p1.y;
     
     	float l = sqrt(lx*lx + ly*ly);
 
-    	if (l < 0.1)
+    	if (l != 0.0f)
     	{
-       		return false;
-    	}
-    	else
-    	{ 
-       		xn = lx/l;
-       		yn = ly/l;
-     
-       		(*pTo_dx) = xn * velocity;
-       		(*pTo_dy) = yn * velocity;
+    	       	d_pos.x = lx/l * velocity;
+       		d_pos.y = ly/l * velocity;
        		
        		return true;
+    	}
+    	else
+    	{
+    	    	d_pos.x = 0.0f;
+       		d_pos.y = 0.0f;
+       		
+       		return false;
     	}
 }
 
 
-
-void get_dX_dY_angleInD_ToPoint(float x1, float y1, float x2, float y2, float velocity, float* pTo_dx, float* pTo_dy, float* pTo_angle_inD)
+bool get_dPos_ToPoint(const vec2f& p1, const vec2f& p2, float velocity, vec2f& d_pos, float& rTo_angle_inD)
 {
-    	float xn, yn; 
-    	float lx = x2 - x1;
-    	float ly = y2 - y1;
-
+    	float lx = p2.x - p1.x;
+    	float ly = p2.y - p1.y;
+    
     	float l = sqrt(lx*lx + ly*ly);
 
-    	if (l!= 0)
+    	if (l != 0.0f)
     	{
-       		xn = lx/l;
-       		yn = ly/l;
+    	       	d_pos.x = lx/l * velocity;
+       		d_pos.y = ly/l * velocity;
+       		rTo_angle_inD = atan2(ly, lx) * RADIAN_TO_DEGREE_RATE;
+       		
+       		return true;
     	}
     	else
     	{
-       		xn = 0; 
-       		yn = 0;
-    	}
-     
-    	(*pTo_dx) = xn * velocity;
-    	(*pTo_dy) = yn * velocity;
-    	(*pTo_angle_inD) = atan2(ly, lx) * RADIAN_TO_DEGREE_RATE;
+    	    	d_pos.x = 0.0f;
+       		d_pos.y = 0.0f;
+       		rTo_angle_inD = atan2(ly, lx) * RADIAN_TO_DEGREE_RATE;
+       		
+       		return false;
+    	}    	
 }
 
 template <typename T>

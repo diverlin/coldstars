@@ -32,7 +32,7 @@ class Container : public BaseGameEntity
         	void BindItemSlot(ItemSlot*);
         	ItemSlot* GetItemSlot() const { return item_slot; };
 
-        	void RenderInfoInSpace(vec2f);
+        	void RenderInfoInSpace(const vec2f&);
         	
         	virtual void PostDeathUniqueEvent(bool);
             	

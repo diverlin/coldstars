@@ -29,7 +29,7 @@ class SpaceStation : public Vehicle
 {
     	public:  
         	SpaceStation(int);
-        	~SpaceStation();
+        	virtual ~SpaceStation();
         	
 		BaseLand* GetLand() const { return land; };
 		void BindLand(BaseLand* land);

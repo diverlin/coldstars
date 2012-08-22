@@ -22,6 +22,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <string>
 #include "../common/myVector.hpp"
 
+#define GRAPPLE_QUEUE_LOG_ENABLED 1
+#define DRIVECOMPLEX_LOG_ENABLED 1
+#define AISCENARIO_LOG_ENABLED 1
+
 #define LOG_ENABLED 1
 
 const double NO_DELAY = 0.0f;

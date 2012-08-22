@@ -18,51 +18,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "constants.hpp"
 
-std::string getAiModelString(int id)
-{
-	switch(id)
-	{
-		case AIMODEL::CONQUEROR_ID: 	{ return "CONQUEROR_ID"; break; }
-		case AIMODEL::RANGER_ID:	{ return "RANGER_ID"; break; }
-		case AIMODEL::TRADER_ID:	{ return "TRADER_ID"; break; }
-		
-		default:			{ return "___"; break; }		
-	}
-}
-
-std::string getClassString(int id)
-{
-	switch(id)
-	{
-		case CLASS::RANGER_ID: 	{ return "RANGER_ID"; break; }
-		case CLASS::WARRIOR_ID:	{ return "WARRIOR_ID"; break; }
-		case CLASS::PIRAT_ID:		{ return "PIRAT_ID"; break; }
-		case CLASS::TRADER_ID:		{ return "TRADER_ID"; break; }
-		case CLASS::DIPLOMAT_ID:	{ return "DIPLOMAT_ID"; break; }
-		
-		default:			{ return "___"; break; }		
-	}
-}
-
-std::string getRaceString(int race_id) 
-{
-	switch(race_id)
-	{
-		case RACE::R0_ID: 	{ return "RACE0"; break; }
-		case RACE::R1_ID:	{ return "RACE1"; break; }
-		case RACE::R2_ID:	{ return "RACE2"; break; }
-		case RACE::R3_ID:	{ return "RACE3"; break; }
-		case RACE::R4_ID:	{ return "RACE4"; break; }	
-
-		case RACE::R6_ID:	{ return "RACE6"; break; }
-		case RACE::R7_ID:	{ return "RACE7"; break; }	
-		
-		default:		{ return "___"; break; }
-	}
-}
-
-
-
 std::string int2str(int var) 
 {
     	std::ostringstream stm;
@@ -81,5 +36,104 @@ std::string bool2str(bool var)
 }
 
 
+
+
+std::string getAiModelString(int id)
+{
+	switch(id)
+	{
+		case AIMODEL::CONQUEROR_ID: 	{ return "CONQUEROR_ID"; break; }
+		case AIMODEL::RANGER_ID:	{ return "RANGER_ID"; break; }
+		case AIMODEL::TRADER_ID:	{ return "TRADER_ID"; break; }
+		
+		default:			{ return "UKNOWN. fix the bug"; break; }		
+	}
+}
+
+std::string getClassString(int id)
+{
+	switch(id)
+	{
+		case CLASS::RANGER_ID: 	{ return "RANGER_ID"; break; }
+		case CLASS::WARRIOR_ID:	{ return "WARRIOR_ID"; break; }
+		case CLASS::PIRAT_ID:		{ return "PIRAT_ID"; break; }
+		case CLASS::TRADER_ID:		{ return "TRADER_ID"; break; }
+		case CLASS::DIPLOMAT_ID:	{ return "DIPLOMAT_ID"; break; }
+		
+		default:			{ return "UKNOWN. fix the bug"; break; }		
+	}
+}
+
+std::string getRaceString(int race_id) 
+{
+	switch(race_id)
+	{
+		case RACE::R0_ID: 	{ return "RACE0"; break; }
+		case RACE::R1_ID:	{ return "RACE1"; break; }
+		case RACE::R2_ID:	{ return "RACE2"; break; }
+		case RACE::R3_ID:	{ return "RACE3"; break; }
+		case RACE::R4_ID:	{ return "RACE4"; break; }	
+
+		case RACE::R6_ID:	{ return "RACE6"; break; }
+		case RACE::R7_ID:	{ return "RACE7"; break; }	
+		
+		default:		{ return "UKNOWN. fix the bug"; break; }
+	}
+}
+
+std::string getNavigatorActionStr(int type_id)
+{
+	switch(type_id)
+	{
+		case NAVIGATOR_ACTION::NONE_ID: 		{ return "NONE_ID"; break; }
+		case NAVIGATOR_ACTION::DOCKING_ID:		{ return "DOCKING_ID"; break; }
+		case NAVIGATOR_ACTION::COLLECTING_ID:	{ return "COLLECTING_ID"; break; }
+		case NAVIGATOR_ACTION::KEEP_CLOSE_ID:	{ return "KEEP_CLOSE_ID"; break; }
+		case NAVIGATOR_ACTION::KEEP_MIDDLE_ID:	{ return "KEEP_MIDDLE_ID"; break; }
+		case NAVIGATOR_ACTION::KEEP_FAR_ID: 		{ return "KEEP_FAR_ID"; break; }
+		
+		default: { return "UNKNOWN. fix the bug"; }
+	}
+}
+
+std::string getEntityStr(int type_id)
+{
+	switch(type_id)
+	{
+		case ENTITY::VEHICLE_ID: 		{ return "VEHICLE_ID"; break; }
+		case ENTITY::SHIP_ID: 			{ return "SHIP_ID"; break; }
+		case ENTITY::SPACESTATION_ID: 		{ return "SPACESTATION_ID"; break; }
+		case ENTITY::SATELLITE_ID: 		{ return "SATELLITE_ID"; break; }
+		case ENTITY::NPC_ID: 			{ return "NPC_ID"; break; }
+		case ENTITY::ROCKETBULLET_ID: 		{ return "ROCKETBULLET_ID"; break; }
+		case ENTITY::MINERALS_ID: 		{ return "MINERALS_ID"; break; }
+		case ENTITY::FOOD_ID: 			{ return "FOOD_ID"; break; }
+		case ENTITY::MEDICINE_ID: 		{ return "MEDICINE_ID"; break; }
+		case ENTITY::MILITARY_ID: 		{ return "MILITARY_ID"; break; }
+		case ENTITY::DRUG_ID: 			{ return "DRUG_ID"; break; }
+		case ENTITY::EXCLUSIVE_ID: 		{ return "EXCLUSIVE_ID"; break; }
+		case ENTITY::CONTAINER_ID: 		{ return "CONTAINER_ID"; break; }
+		case ENTITY::GALAXY_ID: 		{ return "GALAXY_ID"; break; }
+		case ENTITY::STARSYSTEM_ID: 		{ return "STARSYSTEM_ID"; break; }
+		case ENTITY::STAR_ID: 			{ return "STAR_ID"; break; }
+		case ENTITY::ASTEROID_ID: 		{ return "ASTEROID_ID"; break; }
+		case ENTITY::PLANET_ID: 		{ return "PLANET_ID"; break; }
+		case ENTITY::BLACKHOLE_ID: 		{ return "BLACKHOLE_ID"; break; }
+		case ENTITY::BOMB_ID: 			{ return "BOMB_ID"; break; }
+		case ENTITY::GOODS_ID: 		{ return "GOODS_ID"; break; }
+		case ENTITY::PLAYER_ID: 		{ return "PLAYER_ID"; break; }
+		case ENTITY::KOSMOPORT_ID: 		{ return "KOSMOPORT_ID"; break; }
+		case ENTITY::LAND_ID: 			{ return "LAND_ID"; break; }
+		case ENTITY::SPACE_ID: 		{ return "SPACE_ID"; break; }
+		case ENTITY::GOVERMENT_ID: 		{ return "GOVERMENT_ID"; break; }
+		case ENTITY::STORE_ID: 		{ return "STORE_ID"; break; }
+		case ENTITY::SHOP_ID: 			{ return "SHOP_ID"; break; }
+		case ENTITY::ANGAR_ID: 		{ return "ANGAR_ID"; break; }
+		case ENTITY::VEHICLESLOT_ID: 		{ return "VEHICLESLOT_ID"; break; }
+		case ENTITY::ITEMSLOT_ID: 		{ return "ITEMSLOT_ID"; break; }
+		
+		default: { return "UNKNOWN. fix the bug"; }
+	}
+}
 
 

@@ -60,7 +60,6 @@ void Orbit::CalcPath(float radius_A, float radius_B, float speed, float orbit_ph
          	coords_vec.push_back(new_coord);
      	}
         len = coords_vec.size();
-        it = getRandInt(1, len-1);
 }    
 
 void Orbit::CalcPath(float radius, float speed, bool clockwise)
@@ -81,7 +80,6 @@ void Orbit::CalcPath(float radius, float speed, bool clockwise)
          	coords_vec.push_back(new_coord);
      	}
         len = coords_vec.size();
-        it = getRandInt(1, len-1);
 }    
 
 void Orbit::UpdatePosition()

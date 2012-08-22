@@ -27,6 +27,7 @@ SpaceStation::SpaceStation(int id)
 	land = NULL;
 }
 
+/* virtual */
 SpaceStation::~SpaceStation() 
 {
 	delete land;

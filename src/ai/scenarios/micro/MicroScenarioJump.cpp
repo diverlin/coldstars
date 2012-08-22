@@ -29,14 +29,16 @@ MicroScenarioJump::MicroScenarioJump()
 	type_id = MICROSCENARIO::JUMP_ID;
 }
 
-
 MicroScenarioJump::~MicroScenarioJump()
 {}
 		
 void MicroScenarioJump::Enter(Npc* npc) const
 {	
 	npc->GetVehicle()->GetDriveComplex()->SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetStarSystem(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
-	printf("npc_id = %i, is GOING to MicroScenarioJump from ss_id = %i to ss_id = %i\n", npc->GetId(), npc->GetStarSystem()->GetId(), npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetId());
+        
+        #if AISCENARIO_LOG_ENABLED == 1 
+	Logger::Instance().Log("npc_id="+int2str(npc->GetId())+" ENTER MicroScenarioJump"); 
+	#endif    
 }
 
 void MicroScenarioJump::UpdateInStaticInSpace(Npc* _npc) const
@@ -48,14 +50,15 @@ void MicroScenarioJump::UpdateInDynamicInSpace(Npc* npc) const
 {
      	if (npc->GetVehicle()->GetDriveComplex()->CheckTargetEchievement() == true)
      	{
-                npc->GetVehicle()->HyperJumpEvent();
-     	        printf("npc id = %i, jumpEvent()\n", npc->GetId());
+     		npc->GetVehicle()->SetSpecialActionId(SPECIAL_ACTION::INITIATE_JUMPIN_ID);
      	}
 }
 
 void MicroScenarioJump::Exit(Npc* npc) const
 {
-	printf("npc_id = %i, FINISH MicroScenarioJump from ss_id = %i to ss_id = %i\n", npc->GetId(), npc->GetStarSystem()->GetId(), npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetId());
+        #if AISCENARIO_LOG_ENABLED == 1 
+	Logger::Instance().Log("npc_id="+int2str(npc->GetId())+" EXIT MicroScenarioJump"); 
+	#endif   
 }
 
 

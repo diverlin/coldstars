@@ -206,9 +206,6 @@ class Vehicle : public BaseGameEntity
         	        	
         	void RenderRadarRange();
         	void RenderGrappleRange();        
-
-                void GrappleMicroProgramm();               
-
         	
         	void RecalculateCollisionRadius();
 
@@ -231,13 +228,7 @@ class Vehicle : public BaseGameEntity
         	ProtectionComplex* protection_complex;
                 
 		Npc* owner_npc;
-             		
-                void RenderGrappleTrail() const;
-		void RenderKorpus() const;
-             	void RenderTurrels() const;
-             	void RenderDriveEffect(float parent_d_alpha = 0.0) const;
-          	void RenderShieldEffect(float parent_d_alpha = 0.0) const;
-        	
+
         	ItemSlot* radar_slot;
         	ItemSlot* scaner_slot;
         	ItemSlot* energizer_slot;
@@ -261,7 +252,15 @@ class Vehicle : public BaseGameEntity
                 Color4f color;
                                 
                 VehicleSlot* parent_vehicleslot;
+                             		
+                void RenderGrappleTrail() const;
+		void RenderKorpus() const;
+             	void RenderTurrels() const;
+             	void RenderDriveEffect(float parent_d_alpha = 0.0) const;
+          	void RenderShieldEffect(float parent_d_alpha = 0.0) const;
         	                
+        	void UpdateGrappleMicroProgram();       
+        	                                
                 UnresolvedDataUniqueVehicle data_unresolved_Vehicle;
                 
                 void SaveDataUniqueVehicle(boost::property_tree::ptree&, const std::string&) const;		

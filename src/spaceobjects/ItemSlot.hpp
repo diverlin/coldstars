@@ -100,7 +100,8 @@ class ItemSlot : public BaseSlot
                 
 		void Render() const;
 		void RenderMark(TextureOb*) const;
-		       
+
+		void RenderItemInfo(const vec2f&) const;		       
 		void RenderItemInfo(float offset_x = 0, float offset_y = 0) const;
                 
                 void DropItemToSpace(Vehicle*);

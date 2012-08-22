@@ -30,6 +30,7 @@ Satellite::Satellite(int id)
     	d_angle.z = 1.0f;
 }
 
+/* virtual */
 Satellite::~Satellite() 
 {
 	delete orbit;

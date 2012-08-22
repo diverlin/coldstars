@@ -29,6 +29,7 @@ class MicroScenarioGrab : public BaseScenario
 		virtual ~MicroScenarioGrab();
 		
 		virtual void Enter(Npc*) const;
+		virtual bool Validate(Npc* npc) const;
 		virtual void UpdateInStaticInSpace(Npc*) const;
 		virtual void UpdateInDynamicInSpace(Npc*) const;	
 		virtual void Exit(Npc*) const;

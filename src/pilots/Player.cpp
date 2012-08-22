@@ -537,9 +537,10 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
    			{
       				if (npc->GetVehicle()->ableTo.GRAB == true)
       				{
-       					npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(visible_CONTAINER_vec[i]);
-       					npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets();
-       					printf("CONTAINER with id = %i HAS BEEN MARKED\n", visible_CONTAINER_vec[i]->GetId());	       						
+       					if (npc->GetVehicle()->GetGrappleSlot()->CheckTarget(visible_CONTAINER_vec[i]) == true)
+       					{
+       						npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(visible_CONTAINER_vec[i]);
+       					}       						
        				}
        			}
 
@@ -662,8 +663,10 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
                			{
 					if (npc->GetVehicle()->ableTo.GRAB == true)
 	       				{
-	       					npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(visible_SHIP_vec[i]);
-	       					npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets();	       						
+	       					if (npc->GetVehicle()->GetGrappleSlot()->CheckTarget(visible_SHIP_vec[i]) == true)
+	       					{
+	       						npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(visible_SHIP_vec[i]);
+	       					}					
 	       				}
                 		}
                 		else

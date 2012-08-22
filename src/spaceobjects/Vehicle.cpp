@@ -163,7 +163,10 @@ ItemSlot* Vehicle::GetEmptyCargoSlot()
 bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
 {	
  	if (AddItemToCargoSlot(container->GetItemSlot()->GetItem()) == true)
-       	{      		
+       	{      
+       		container->GetItemSlot()->RemoveItem();    
+       		container->SetPlaceTypeId(NONE_ID); // this needs for destroy
+       								
        		return true;
       	}
       	
@@ -283,12 +286,21 @@ void Vehicle::UpdateSpecialAction()
 
 			case SPECIAL_ACTION::INITIATE_JUMPIN_ID:
 			{
+				if (UpdateFadeInEffect() == true)
+				{
+			                HyperJumpEvent();
+			                special_action_id = SPECIAL_ACTION::INITIATE_JUMPOUT_ID;
+			        }
 			
 				break;
 			}
 			
 			case SPECIAL_ACTION::INITIATE_JUMPOUT_ID:
 			{
+				if (UpdateFadeOutEffect() == true)
+				{
+			                special_action_id = SPECIAL_ACTION::NONE_ID;
+			        }
 			
 				break;
 			}			
@@ -332,7 +344,11 @@ void Vehicle::HyperJumpEvent()
         starsystem->RemoveVehicle(data_id.id);  
                                                         
         ((StarSystem*)drive_complex->GetTarget())->AddToHyperJumpQueue(this);
-        drive_complex->ResetTarget();        
+        drive_complex->ResetTarget();  
+        
+        #if LOG_ENABLED == 1 
+	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" jumpEvent()", 2); 
+	#endif      
 }
                 
                 
@@ -374,14 +390,12 @@ void Vehicle::DockingEvent()
         GetDriveComplex()->ResetTarget();
         
         #if LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" DockingEvent()"); 
+	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" DockingEvent()", 2); 
 	#endif
 }
 
 void Vehicle::LaunchingEvent()
 {
-     	printf("vehicle id = %i, launchingEvent()\n", data_id.id);
-
 	switch(parent_vehicleslot->GetOwner()->GetTypeId())
 	{
 		case ENTITY::ANGAR_ID:
@@ -401,6 +415,10 @@ void Vehicle::LaunchingEvent()
 	}
 	
 	color.a = 0.1;
+	
+	#if LOG_ENABLED == 1 
+	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" launchingEvent()", 2); 
+	#endif
 }
 //// 
 
@@ -698,27 +716,7 @@ void Vehicle::RenderInfo(const vec2f& center)
 
 void Vehicle::RenderGrappleTrail() const
 {
-        for (unsigned int i = 0; i<grapple_slot->GetGrappleEquipment()->target_vec.size(); i++)
-        {
-                //if (grapple_slot->GetGrappleEquipment()->target_vec[i]->GetValid() == true)
-                {              
-                    	float xl = grapple_slot->GetGrappleEquipment()->target_vec[i]->GetPoints().GetCenter().x - points.GetCenter().x;
-                        float yl = grapple_slot->GetGrappleEquipment()->target_vec[i]->GetPoints().GetCenter().y - points.GetCenter().y;
-
-                        float len = sqrt((xl*xl) + (yl*yl));
-
-                        float angle_inR = atan2(yl, xl);
-
-                        float angle_inD = angle_inR * RADIAN_TO_DEGREE_RATE;
-        
-                        drawLine(GuiTextureObCollector::Instance().grapple_trail, 
-                                 points.GetCenter(), 
-                                 points.GetPosZ(), 
-                                 len, 
-                                 angle_inD, 
-                                 8);
-                }
-        }
+        grapple_slot->GetGrappleEquipment()->RenderGrappleTrail();
 }
 		
 void Vehicle::RenderKorpus() const
@@ -878,48 +876,9 @@ void Vehicle::DropRandomItemToSpace()
 		
 }
 
-void Vehicle::GrappleMicroProgramm()
+void Vehicle::UpdateGrappleMicroProgram()
 {
-        grapple_slot->GetGrappleEquipment()->ValidateTargets();  
-                
-        for (unsigned int i = 0; i < grapple_slot->GetGrappleEquipment()->target_vec.size(); i++)
-        {
-               	grapple_slot->GetGrappleEquipment()->target_vec[i]->MovingByExternalForce(points.GetCenter(), grapple_slot->GetGrappleEquipment()->GetStrength());        	
-       	
-       		float dist = distBetweenPoints(points.GetCenter(), grapple_slot->GetGrappleEquipment()->target_vec[i]->GetPoints().GetCenter() ); 
-       		if (dist < GetCollisionRadius()/4.0f)
-       		{
-       			switch(grapple_slot->GetGrappleEquipment()->target_vec[i]->GetTypeId())
-       			{
-      				case ENTITY::CONTAINER_ID:
-       				{
-       					Container* container = (Container*)grapple_slot->GetGrappleEquipment()->target_vec[i];
-       					if (UnpackContainerItemToCargoSlot(container) == true)
-					{
-						container->GetItemSlot()->RemoveItem();    
-       						container->SetPlaceTypeId(NONE_ID); // this needs for destroy
-       			
-						grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(container);
-       					}
-       					
-       					break;
-       				}        			
-        				
-       				//case ENTITY::VEHICLE_ID:
-       				//{
-       					//ItemSlot* _slot = GetEmptyOtsecSlot();
-                                        //Vehicle* _vehicle = (Vehicle*)grapple_slot->GetGrappleEquipment()->target_vec[i];
-       				        //if (_slot != NULL)
-       					//{
-       						////_slot->InsertItem(_vehicle);
-       						//starsystem->AddToRemoveFromOuterSpaceQueue(_vehicle);
-       					//}
-					//grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(_vehicle);
-       					//break;
-       				//}
-       			}
-       		}
-       	}
+        grapple_slot->GetGrappleEquipment()->UpdateSpecificProgram();  
 }
 		
 void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, const std::string& root) const
