@@ -91,7 +91,7 @@ void Ship::RenderInSpace() const
 	setColor4f(color);
         if (ableTo.GRAB == true)
         {
-                RenderGrappleTrail();
+                RenderGrabTrail();
         }
         
     	RenderKorpus();

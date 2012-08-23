@@ -222,8 +222,8 @@ namespace STARSYSTEM
 const int PLANET_MIN = 3;
 const int PLANET_MAX = 5;
 
-const int SHIP_INIT_MIN = 3;
-const int SHIP_INIT_MAX = 5;
+const int SHIP_INIT_MIN = 10;
+const int SHIP_INIT_MAX = 15;
 const int ENEMYSHIP_INIT_MIN = 10;
 const int ENEMYSHIP_INIT_MAX = 20;
 }

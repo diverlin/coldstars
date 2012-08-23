@@ -42,8 +42,8 @@ class GrappleEquipment : public BaseEquipment
                 
 		std::string GetTargetStr() const;
 
-		void UpdateSpecificProgram();
-		void RenderGrappleTrail() const;
+		void UpdateGrabScenarioProgram();
+		void RenderGrabTrail() const;
 				              
       	      	void CountPrice();
       		virtual void UpdatePropetries();  
@@ -78,7 +78,6 @@ class GrappleEquipment : public BaseEquipment
            	std::string GetSpeedStr();
            	std::string GetMaxNumItemStr();
 
-		void ValidateTargets();  
                 void ClearRemoveQueue();
                 
                 void SaveDataUniqueGrappleEquipment(boost::property_tree::ptree&, const std::string&) const;

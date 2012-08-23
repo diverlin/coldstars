@@ -714,9 +714,9 @@ void Vehicle::RenderInfo(const vec2f& center)
      	}
 }
 
-void Vehicle::RenderGrappleTrail() const
+void Vehicle::RenderGrabTrail() const
 {
-        grapple_slot->GetGrappleEquipment()->RenderGrappleTrail();
+        grapple_slot->GetGrappleEquipment()->RenderGrabTrail();
 }
 		
 void Vehicle::RenderKorpus() const
@@ -878,7 +878,7 @@ void Vehicle::DropRandomItemToSpace()
 
 void Vehicle::UpdateGrappleMicroProgram()
 {
-        grapple_slot->GetGrappleEquipment()->UpdateSpecificProgram();  
+        grapple_slot->GetGrappleEquipment()->UpdateGrabScenarioProgram();  
 }
 		
 void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, const std::string& root) const
