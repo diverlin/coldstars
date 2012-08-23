@@ -58,6 +58,7 @@ set (SOURCES
 	src/ai/scenarios/micro/MicroScenarioJump.cpp
 	src/ai/scenarios/micro/MicroScenarioDocking.cpp
 	src/ai/scenarios/micro/MicroScenarioLaunching.cpp
+	src/ai/scenarios/micro/MicroScenarioExploration.cpp
 
 	src/ai/scenarios/macro/MacroScenarioGoodsTrading.cpp
 

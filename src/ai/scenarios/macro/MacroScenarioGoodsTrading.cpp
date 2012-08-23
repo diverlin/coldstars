@@ -50,7 +50,7 @@ bool MacroScenarioGoodsTrading::IsAbleToBuyGoods(Npc* npc) const
 void MacroScenarioGoodsTrading::Enter(Npc* npc) const
 {
 	#if AISCENARIO_LOG_ENABLED == 1 
-	Logger::Instance().Log( "npc_id = "+int2str(npc->GetId())+" ENTER MacroScenarioGoodsTrading"); 
+	Logger::Instance().Log( "npc_id="+int2str(npc->GetId())+" ENTER MacroScenarioGoodsTrading"); 
 	#endif
 }
 
@@ -93,17 +93,18 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
 			return;
 		}
 	}
-	/*
+
 	if ( (has_goods == false) and (able_buy == false) )
 	{
-		//if (microScenarioTypeId != MICROSCENARIO::explore) 
+		if (microScenarioTypeId != MICROSCENARIO::EXPLORATION_ID) 
 		{
-			// EXPLORATION HERE
+			MicroTask* microtask = new MicroTask(MICROSCENARIO::EXPLORATION_ID);
+			npc->GetStateMachine()->SetCurrentMicroTask(microtask); 
 				
 			return;
 		}
 	}
-	*/
+	
 	if ( (has_goods == false) and (able_buy == true) )
 	{
 		if (microScenarioTypeId != MICROSCENARIO::DOCKING_ID)
@@ -151,7 +152,7 @@ void MacroScenarioGoodsTrading::UpdateInStaticInDock(Npc* npc) const
 void MacroScenarioGoodsTrading::Exit(Npc* npc) const
 {
 	#if AISCENARIO_LOG_ENABLED == 1 
-	Logger::Instance().Log( "npc_id = "+int2str(npc->GetId())+" EXIT MacroScenarioGoodsTrading"); 
+	Logger::Instance().Log( "npc_id="+int2str(npc->GetId())+" EXIT MacroScenarioGoodsTrading"); 
 	#endif
 }
 

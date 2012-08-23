@@ -29,6 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../ai/scenarios/micro/MicroScenarioJump.hpp" 
 #include "../ai/scenarios/micro/MicroScenarioDocking.hpp"
 #include "../ai/scenarios/micro/MicroScenarioLaunching.hpp"
+#include "../ai/scenarios/micro/MicroScenarioExploration.hpp"
 
 void init()
 {
@@ -65,7 +66,8 @@ void init()
 	ScenarioCollector::Instance().RegisterScenario(new MicroScenarioJump());
 	ScenarioCollector::Instance().RegisterScenario(new MicroScenarioDestroy());
 	ScenarioCollector::Instance().RegisterScenario(new MicroScenarioGrab());
-		
+	ScenarioCollector::Instance().RegisterScenario(new MicroScenarioExploration());
+			
 	/* create AI models */
 	AiModelCollector::Instance().RegisterAiModel(new AiModelRanger());
 	AiModelCollector::Instance().RegisterAiModel(new AiModelConqueror());  

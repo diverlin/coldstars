@@ -31,6 +31,16 @@ DriveComplex::~DriveComplex()
         delete drive_effect;
 }
 
+bool DriveComplex::PathExists() const
+{
+    	if ( (direction_list_END == true) and (path_center_vec.size() == 0 ) )
+    	{
+    		return false;
+    	}	
+    	
+    	return true;
+}
+
 void DriveComplex::ResetTarget()
 {
 	target = NULL;

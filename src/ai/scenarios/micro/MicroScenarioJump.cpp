@@ -29,9 +29,11 @@ MicroScenarioJump::MicroScenarioJump()
 	type_id = MICROSCENARIO::JUMP_ID;
 }
 
+/* virtual */
 MicroScenarioJump::~MicroScenarioJump()
 {}
 		
+/* virtual */
 void MicroScenarioJump::Enter(Npc* npc) const
 {	
 	npc->GetVehicle()->GetDriveComplex()->SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetStarSystem(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
@@ -41,11 +43,13 @@ void MicroScenarioJump::Enter(Npc* npc) const
 	#endif    
 }
 
+/* virtual */
 void MicroScenarioJump::UpdateInStaticInSpace(Npc* _npc) const
 {
 	// check if still able to jump
 }
 
+/* virtual */
 void MicroScenarioJump::UpdateInDynamicInSpace(Npc* npc) const
 {
      	if (npc->GetVehicle()->GetDriveComplex()->CheckTargetEchievement() == true)
@@ -54,6 +58,7 @@ void MicroScenarioJump::UpdateInDynamicInSpace(Npc* npc) const
      	}
 }
 
+/* virtual */
 void MicroScenarioJump::Exit(Npc* npc) const
 {
         #if AISCENARIO_LOG_ENABLED == 1 
@@ -61,7 +66,7 @@ void MicroScenarioJump::Exit(Npc* npc) const
 	#endif   
 }
 
-
+/* virtual */
 std::string MicroScenarioJump::GetDescription(Npc* npc) const
 {
 	return "JUMP to ss_id = " + int2str( npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetId());
