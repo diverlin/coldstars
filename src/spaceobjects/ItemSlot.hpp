@@ -128,7 +128,9 @@ class ItemSlot : public BaseSlot
            	PathVisual range_visual;
            	
            	int GetItemRadius() const;
-           	                
+           	              
+           	bool CheckAlive(BaseGameEntity*) const;
+           	bool CheckPlaceTypeId(BaseGameEntity*) const;  
                 bool CheckStarSystem(BaseGameEntity*) const;
            	bool CheckDistance(BaseGameEntity*) const;
                 

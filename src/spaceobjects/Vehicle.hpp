@@ -253,7 +253,7 @@ class Vehicle : public BaseGameEntity
                                 
                 VehicleSlot* parent_vehicleslot;
                              		
-                void RenderGrappleTrail() const;
+                void RenderGrabTrail() const;
 		void RenderKorpus() const;
              	void RenderTurrels() const;
              	void RenderDriveEffect(float parent_d_alpha = 0.0) const;

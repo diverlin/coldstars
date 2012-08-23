@@ -34,8 +34,6 @@ GrappleEquipment::~GrappleEquipment()
 
 void GrappleEquipment::AddTarget(BaseGameEntity* target)
 {
-        //ValidateTargets();
-        
 	// avoiding dublicated items in the vector
         for (unsigned int i=0; i<target_vec.size(); i++)
         {
@@ -60,30 +58,13 @@ void GrappleEquipment::AddToRemoveQueue(BaseGameEntity* target)
         remove_queue.push_back(target);
 }
 
-void GrappleEquipment::ValidateTargets()
-{
-        for (unsigned int i=0; i<target_vec.size(); i++)
-        {
-                if (item_slot->CheckTarget(target_vec[i]) == false)
-                {
-                        remove_queue.push_back(target_vec[i]);
-                        
-                        #if GRAPPLE_QUEUE_LOG_ENABLED == 1 
-			Logger::Instance().Log("vehicle_id=" + int2str(item_slot->GetOwnerVehicle()->GetId()) + " " + getEntityStr(target_vec[i]->GetTypeId()) + " id = " + int2str(target_vec[i]->GetId()) + " ADDED to grapple REMOVE queue", 2); 
-			#endif
-                }                
-        }
-        
-        ClearRemoveQueue();        
-}
-
 void GrappleEquipment::ClearRemoveQueue()
 {
         for (unsigned int i=0; i<remove_queue.size(); i++)
         {
                 for (unsigned int j=0; j<target_vec.size(); j++)
                 {
-                        if (remove_queue[i] == target_vec[j])
+                        if (remove_queue[i]->GetId() == target_vec[j]->GetId())
                         {
                                 target_vec.erase(target_vec.begin() + j);
                                 break;                                
@@ -107,49 +88,60 @@ std::string GrappleEquipment::GetTargetStr() const
         return str;
 }
  
- 
-void GrappleEquipment::UpdateSpecificProgram()
-{
-        ValidateTargets();  
-                
+        
+void GrappleEquipment::UpdateGrabScenarioProgram()
+{               
         for (unsigned int i=0; i<target_vec.size(); i++)
         {
-               	target_vec[i]->MovingByExternalForce(item_slot->GetOwnerVehicle()->GetPoints().GetCenter(), GetStrength());        	
+        	if (item_slot->CheckTarget(target_vec[i]) == true)
+        	{
+               		target_vec[i]->MovingByExternalForce(item_slot->GetOwnerVehicle()->GetPoints().GetCenter(), GetStrength());        	
        	
-       		float dist = distBetweenPoints(item_slot->GetOwnerVehicle()->GetPoints().GetCenter(), target_vec[i]->GetPoints().GetCenter() ); 
-       		if (dist < item_slot->GetOwnerVehicle()->GetCollisionRadius()/2.0f)
-       		{
-       			switch(target_vec[i]->GetTypeId())
+       			float dist = distBetweenPoints(item_slot->GetOwnerVehicle()->GetPoints().GetCenter(), target_vec[i]->GetPoints().GetCenter() ); 
+       			if (dist < item_slot->GetOwnerVehicle()->GetCollisionRadius()/2.0f)
        			{
-      				case ENTITY::CONTAINER_ID:
+       				switch(target_vec[i]->GetTypeId())
        				{
-       					Container* container = (Container*)target_vec[i];
-       					if (item_slot->GetOwnerVehicle()->UnpackContainerItemToCargoSlot(container) == true)
-					{
-						AddToRemoveQueue(container);
-       					}
+      					case ENTITY::CONTAINER_ID:
+       					{
+       						Container* container = (Container*)target_vec[i];
+       						if (item_slot->GetOwnerVehicle()->UnpackContainerItemToCargoSlot(container) == true)
+						{
+							AddToRemoveQueue(target_vec[i]);
+       						}
        					
-       					break;
-       				}        			
+       						break;
+       					}        			
         				
-       				//case ENTITY::VEHICLE_ID:
-       				//{
-       					//ItemSlot* _slot = GetEmptyOtsecSlot();
-                                        //Vehicle* _vehicle = (Vehicle*)grapple_slot->GetGrappleEquipment()->target_vec[i];
-       				        //if (_slot != NULL)
+       					//case ENTITY::VEHICLE_ID:
        					//{
-       						////_slot->InsertItem(_vehicle);
-       						//starsystem->AddToRemoveFromOuterSpaceQueue(_vehicle);
+       						//ItemSlot* _slot = GetEmptyOtsecSlot();
+                                        	//Vehicle* _vehicle = (Vehicle*)grapple_slot->GetGrappleEquipment()->target_vec[i];
+       				        	//if (_slot != NULL)
+       						//{
+       							////_slot->InsertItem(_vehicle);
+       							//starsystem->AddToRemoveFromOuterSpaceQueue(_vehicle);
+       						//}
+						//grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(_vehicle);
+       						//break;
        					//}
-					//grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(_vehicle);
-       					//break;
-       				//}
+       				}
        			}
        		}
+       		else
+       		{
+       		        AddToRemoveQueue(target_vec[i]);
+
+                        #if GRAPPLE_QUEUE_LOG_ENABLED == 1 
+			Logger::Instance().Log("vehicle_id=" + int2str(item_slot->GetOwnerVehicle()->GetId()) + " " + getEntityStr(target_vec[i]->GetTypeId()) + " id = " + int2str(target_vec[i]->GetId()) + " ADDED to grapple REMOVE queue", 2); 
+			#endif
+       		}
        	}
+
+        ClearRemoveQueue(); 
 }
 
-void GrappleEquipment::RenderGrappleTrail() const
+void GrappleEquipment::RenderGrabTrail() const
 {
         for (unsigned int i=0; i<target_vec.size(); i++)
         {

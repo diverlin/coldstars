@@ -249,13 +249,16 @@ void ItemSlot::DrawRange()
 
 bool ItemSlot::CheckTarget(BaseGameEntity* _target) const
 {
-        if (_target->GetAlive() == true)
+        if (CheckAlive(_target) == true)
         {
-                if (CheckStarSystem(_target) == true)
-                {
-                        if (CheckDistance(_target) == true)
-                        {
-                                return true;
+        	if (CheckPlaceTypeId(_target) == true)
+        	{
+                	if (CheckStarSystem(_target) == true)
+                	{
+                        	if (CheckDistance(_target) == true)
+                        	{
+                                	return true;
+                        	}
                         }
                 }
         }
@@ -263,14 +266,19 @@ bool ItemSlot::CheckTarget(BaseGameEntity* _target) const
         return false;
 }
 
+bool ItemSlot::CheckAlive(BaseGameEntity* _target) const
+{
+	return _target->GetAlive();
+}
+
+bool ItemSlot::CheckPlaceTypeId(BaseGameEntity* _target) const  
+{
+	return (_target->GetPlaceTypeId() == ENTITY::SPACE_ID);
+}           	
+
 bool ItemSlot::CheckStarSystem(BaseGameEntity* _target) const
 {
-        if (_target->GetStarSystem() == ((Vehicle*)owner)->GetStarSystem())
-        {
-                return true;
-        }
-        
-        return false;
+        return (_target->GetStarSystem() == ((Vehicle*)owner)->GetStarSystem());
 }                
 
 bool ItemSlot::CheckDistance(BaseGameEntity* _target) const
