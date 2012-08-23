@@ -272,8 +272,8 @@ void DriveComplex::CalcPath()
 
 bool DriveComplex::CalcRoundPath()
 {  	
-    	vector2f vehicle_basis(owner_vehicle->GetPoints().GetMidLeft(), owner_vehicle->GetPoints().GetCenter());
-    	vector2f target_basis(owner_vehicle->GetPoints().GetMidLeft(),  target_pos);
+    	Vector2f vehicle_basis(owner_vehicle->GetPoints().GetMidLeft(), owner_vehicle->GetPoints().GetCenter());
+    	Vector2f target_basis(owner_vehicle->GetPoints().GetMidLeft(),  target_pos);
     	    	    	
     	float d_angle = 1.0f;
     	float target_angle_diff = getAngle(vehicle_basis, target_basis);

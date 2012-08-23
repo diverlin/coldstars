@@ -97,6 +97,7 @@ namespace LOG
 const float PI = 3.141592653589797;
 const float HALF_PI = PI/2;
 const float RADIAN_TO_DEGREE_RATE = 180 / PI; 
+const float DEGREE_TO_RADIAN_RATE = 1/RADIAN_TO_DEGREE_RATE; 
 //
 
 

@@ -63,7 +63,7 @@ void StarSystemBuilder::CreateNewInternals()
         for (int i=0; i<SHOCKWAVESBLACKHOLES_MAX_NUM; i++)
         {
         	BlackHole* bh = GetNewBlackHole();
-        	starsystem->Add(bh, vec2f((float)getRandInt(0, 3000), (float)getRandInt(0, 3000)));
+        	starsystem->Add(bh, getRandVec2f(1200, 2000));
         }
 
         //if (getRandBool())
@@ -186,7 +186,7 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
                 NpcBuilder::Instance().CreateNewInternals(npc_race_id, npc_subtype_id); 
         	spacestation->BindOwnerNpc(NpcBuilder::Instance().GetNpc());
 
-		vec2f center(getRandInt(0, 800), getRandInt(0, 800));
+		vec2f center = getRandVec2f(700, 1500);
 		float angle = getRandInt(0, 360);  
                 
         	starsystem->AddVehicle(spacestation, center, angle, NULL);
@@ -244,7 +244,7 @@ void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num, int requested
         	NpcBuilder::Instance().CreateNewInternals(npc_race_id, npc_subtype_id);
         	ship->BindOwnerNpc(NpcBuilder::Instance().GetNpc());
 
-		vec2f center(getRandInt(0, 800), getRandInt(0, 800));
+		vec2f center = getRandVec2f(300, 1200);
 		float angle = getRandInt(0, 360);  
 		
         	starsystem->AddVehicle(ship, center, angle, NULL);

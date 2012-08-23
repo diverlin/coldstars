@@ -33,11 +33,11 @@ class vec2f
 };
 
 
-class vector2f
+class Vector2f
 {
 	public:
-		vector2f(const vec2f& p0_, const vec2f& p_):p0(p0_),p(p_) {};
-		~vector2f() {};
+		Vector2f(const vec2f& p0, const vec2f& p):p0(p0), p(p) {};
+		~Vector2f() {};
 		
 		vec2f p0;
 		vec2f p;
@@ -47,7 +47,7 @@ class vector2f
 		
 };
 
-float getAngle(const vector2f&, const vector2f&);
+float getAngle(const Vector2f&, const Vector2f&);
 
 
 
