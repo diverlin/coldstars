@@ -27,18 +27,21 @@ MicroScenarioGrab::MicroScenarioGrab()
 	type_id = MICROSCENARIO::GRAB_ID;
 }
 
+/* virtual */
 MicroScenarioGrab::~MicroScenarioGrab()
 {}
-		
+
+/* virtual */		
 void MicroScenarioGrab::Enter(Npc* npc) const
 {
 	npc->GetVehicle()->GetDriveComplex()->SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget(), NAVIGATOR_ACTION::COLLECTING_ID);
 	
         #if AISCENARIO_LOG_ENABLED == 1 
-	Logger::Instance().Log("npc_id = "+int2str(npc->GetId())+" ENTER MicroScenarioGrab"); 
+	Logger::Instance().Log("npc_id="+int2str(npc->GetId())+" ENTER MicroScenarioGrab"); 
 	#endif   	 
 }
 
+/* virtual */
 bool MicroScenarioGrab::Validate(Npc* npc) const
 {
 	if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetPlaceTypeId() == ENTITY::SPACE_ID)
@@ -49,6 +52,7 @@ bool MicroScenarioGrab::Validate(Npc* npc) const
 	return false;
 }
 
+/* virtual */
 void MicroScenarioGrab::UpdateInStaticInSpace(Npc* npc) const
 {
 	BaseGameEntity* target = npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget();
@@ -58,17 +62,19 @@ void MicroScenarioGrab::UpdateInStaticInSpace(Npc* npc) const
        	}
 }
 
+/* virtual */
 void MicroScenarioGrab::UpdateInDynamicInSpace(Npc* npc) const
 {}
 
+/* virtual */
 void MicroScenarioGrab::Exit(Npc* npc) const
 {
         #if AISCENARIO_LOG_ENABLED == 1 
-	Logger::Instance().Log("npc_id = "+int2str(npc->GetId())+" EXIT MicroScenarioGrab"); 
+	Logger::Instance().Log("npc_id="+int2str(npc->GetId())+" EXIT MicroScenarioGrab"); 
 	#endif    
 }
 
-
+/* virtual */
 std::string MicroScenarioGrab::GetDescription(Npc* npc) const 
 {
 	return "MicroScenarioGrab ob_id = " + int2str(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetId());

@@ -152,6 +152,7 @@ namespace MICROSCENARIO
 		LAUNCHING_ID,
 		GRAB_ID,
 		JUMP_ID,
+		EXPLORATION_ID
 	
 	};
 }

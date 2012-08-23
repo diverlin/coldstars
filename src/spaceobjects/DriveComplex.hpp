@@ -44,6 +44,8 @@ class DriveComplex
                   
                 BaseGameEntity* GetTarget() const { return target; };                
     		
+    		bool PathExists() const;
+    		
       		bool CheckTargetEchievement();
       		bool GetDockingPermission();               
        	
