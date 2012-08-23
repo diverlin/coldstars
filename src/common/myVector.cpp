@@ -76,7 +76,11 @@ const vec3f& vec3f::operator+=(const vec3f& rhs)
 	return *this;
 }
 
-
+float Vector2f::GetLen() const
+{
+	float len = sqrt((p.x-p0.x)*(p.x-p0.x) + (p.y-p0.y)*(p.y-p0.y));
+	return len;
+}
 
 
 
@@ -113,7 +117,7 @@ float distBetweenPoints(float x1, float y1, float x2, float y2)
 
 vec2i getVec2i(int len, int angle)
 {
-    	float alpha = (float)angle / 57.0;	
+    	float alpha = (float)angle * DEGREE_TO_RADIAN_RATE;	
     	vec2i request(sin(alpha) * len, cos(alpha) * len);
     	
     	return request;
@@ -121,21 +125,15 @@ vec2i getVec2i(int len, int angle)
 
 vec2f getRandVec2f(int radius_min, int radius_max)
 {
-    	float alpha = (float)getRandInt(0, 360) / 57.0;
+    	float alpha = (float)getRandInt(0, 360) * DEGREE_TO_RADIAN_RATE;
     	int len = getRandInt(radius_min, radius_max);
    
- 	vec2f request(sin(alpha) * len, cos(alpha) * len);
+ 	vec2f rand(sin(alpha) * len, cos(alpha) * len);
     	
-    	return request;
+    	return rand;
 }
 
-float vector2f::GetLen() const
-{
-	float len = sqrt((p.x-p0.x)*(p.x-p0.x) + (p.y-p0.y)*(p.y-p0.y));
-	return len;
-}
-
-float getAngle(const vector2f& v1, const vector2f& v2)
+float getAngle(const Vector2f& v1, const Vector2f& v2)
 {
 	float angle = acos( ((v1.p.x-v1.p0.x)*(v2.p.x-v2.p0.x) + (v1.p.y-v1.p0.y)*(v2.p.y-v2.p0.y))/(v1.GetLen()*v2.GetLen()) ) * RADIAN_TO_DEGREE_RATE;
     	return angle;

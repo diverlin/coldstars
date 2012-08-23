@@ -31,27 +31,19 @@
 
 #include <GL/glew.h>
 
+#include "../common/myVector.hpp"
+
 #define TOKEN_VERTEX_POS "v"
 #define TOKEN_VERTEX_NOR "vn"
 #define TOKEN_VERTEX_TEX "vt"
 #define TOKEN_FACE "f"
  
 
-struct Vector2f
-{
-    float x, y;
-};
-
-struct Vector3f
-{
-    float x, y, z;
-};
-
 struct ObjMeshVertex
 {
-    Vector3f pos;
-    Vector2f texcoord;
-    Vector3f normal;
+    vec3f pos;
+    vec2f texcoord;
+    vec3f normal;
 };
 
 /* This is a triangle, that we can render */
@@ -80,9 +72,9 @@ class ObjMeshInstance
   public:
   float a;
   ObjMesh myMesh;
-  std::vector<Vector3f>           positions;
-  std::vector<Vector2f>           texcoords;
-  std::vector<Vector3f>           normals;
+  std::vector<vec3f>           positions;
+  std::vector<vec2f>           texcoords;
+  std::vector<vec3f>           normals;
   std::vector<_ObjMeshFaceIndex>  faces;
   GLuint glList; 
   
@@ -114,19 +106,19 @@ ObjMeshInstance(std::string filename)
         	str_stream >> type_str;
         	if(type_str == TOKEN_VERTEX_POS)
         	{
-            		Vector3f pos;
+            		vec3f pos;
             		str_stream >> pos.x >> pos.y >> pos.z;
             		positions.push_back(pos);
         	}
         	else if(type_str == TOKEN_VERTEX_TEX)
         	{
-            		Vector2f tex;
+            		vec2f tex;
             		str_stream >> tex.x >> tex.y;
             		texcoords.push_back(tex);
         	}
         	else if(type_str == TOKEN_VERTEX_NOR)
         	{
-            		Vector3f nor;
+            		vec3f nor;
             		str_stream >> nor.x >> nor.y >> nor.z;
             		normals.push_back(nor);
         	}

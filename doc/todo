@@ -1,5 +1,6 @@
 ################### FEATURES #################
 << blackholes improovement (fluctuation movement, save/load ability)
+- DONE
 
 << exploration ai scenario.
 - DONE
@@ -44,18 +45,10 @@
 
 
 #################### BUGS ###################
-#1
-ship.propetries structure is not correct after save/load
-- fix DONE
-
 #2
 textureOb, updateAnimationFrame()
 current implementation is: one textureOb is shared between many objects, so if the objects has the same texture then animation speed will be rised proportionally, which is not correct. 
 - NOT RELEVANT
-
-#3
-save/load =>starmap, stars are not shown anymore
-- fix DONE
 
 #4 turrels needs update after save/load event
 - NOT RELEVANT, dissapear after first update()

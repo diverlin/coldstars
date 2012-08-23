@@ -41,7 +41,7 @@ void BlackHole::UpdateInSpace(int time, bool show_effect)
 	UpdateRotation();
 	if (time > 0)
 	{
-		points.SetCenter(points.GetCenter()+vec2f(0.1, 0.1)); // hack
+		points.SetCenter(points.GetCenter()+getRandVec2f(1, 2));
 		shock_wave->SetCenter(points.GetCenter());
 	}
 }
