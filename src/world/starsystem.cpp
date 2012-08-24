@@ -27,9 +27,11 @@ StarSystem::StarSystem(int id)
     	data_id.id = id;
     	data_id.type_id = ENTITY::STARSYSTEM_ID;
     	
-    	is_CAPTURED = false;
+    	place_type_id = ENTITY::SPACE_ID;
     	
-    	this->race_id = RACE::R0_ID;
+    	condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
+    	
+    	race_id = RACE::R0_ID;
     	conqueror_race_id = NONE_ID;
 
     	calculation_per_turn_allowed = true;
@@ -80,7 +82,6 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const vec2f& center, float angle, 
     	
 	vehicle->SetParent(parent);
 
-	//vehicle->UpdateAllPropertiesAndAbilities(); // hack to fix issue #1
 	VEHICLE_vec.push_back(vehicle);  
 
 	if (vehicle->GetSubTypeId() == ENTITY::SATELLITE_ID)
@@ -170,11 +171,11 @@ void StarSystem::AddToRemoveFromOuterSpaceQueue(Vehicle* vehicle)
 	
 }   		
 
-bool StarSystem::RemoveVehicle(int id)
+bool StarSystem::RemoveVehicle(Vehicle* vehicle)
 {       
         for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
         {
-                if (VEHICLE_vec[i]->GetId() == id)
+                if (VEHICLE_vec[i]->GetId() == vehicle->GetId())
                 {
                         VEHICLE_vec.erase(VEHICLE_vec.begin() + i);
                         return true; 
@@ -185,7 +186,7 @@ bool StarSystem::RemoveVehicle(int id)
 //// ******* TRANSITION ******* 
   		           
 // poor                
-Planet* StarSystem::GetClosestPlanet(vec2f _pos)
+Planet* StarSystem::GetClosestPlanet(const vec2f& _pos)
 {
      	return PLANET_vec[getRandInt(0, PLANET_vec.size()-1)];
 }
@@ -241,30 +242,26 @@ Vehicle* StarSystem::GetRandomVehicleByNpcRaceId(int _race_id) const
         return requested_vehicle;
 }
 
-Vehicle* StarSystem::GetRandomVehicle(std::vector<int>* _pVec_race_id) const
+Vehicle* StarSystem::GetRandomVehicle(const std::vector<int>& rVec_race_id) const
 {
-	std::vector<Vehicle*> _vehicle_vec;
+	std::vector<Vehicle*> tmp_vehicle_vec;
 	Vehicle* requested_vehicle = NULL;
-	
-	for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
-        {
-        	for (unsigned int j=0; j<_pVec_race_id->size(); j++)
-         	{
-        		if (VEHICLE_vec[i]->GetOwnerNpc() != NULL)
-        		{
-        			if (VEHICLE_vec[i]->GetOwnerNpc()->GetRaceId() == (*_pVec_race_id)[j])
-        			{
-        				_vehicle_vec.push_back(VEHICLE_vec[i]);
-        				break;
-        			}
-        		}
+
+        for (unsigned int i=0; i<rVec_race_id.size(); i++)
+        {	
+		for (unsigned int j=0; j<VEHICLE_vec.size(); j++)
+        	{
+       			if (rVec_race_id[i] == VEHICLE_vec[j]->GetOwnerNpc()->GetRaceId())
+       			{
+       				tmp_vehicle_vec.push_back(VEHICLE_vec[j]);
+       			}
         	}
         }
         
-        if (_vehicle_vec.size() > 0)
+        if (tmp_vehicle_vec.size() > 0)
         {
-                requested_vehicle = _vehicle_vec[getRandInt(0, _vehicle_vec.size()-1)];
-        }	
+                requested_vehicle = tmp_vehicle_vec[getRandInt(0, tmp_vehicle_vec.size()-1)];
+        }
 	
 	return requested_vehicle;
 }
@@ -286,68 +283,82 @@ void StarSystem::updateStates()
 		//detalied_simulation = false;
 	//}
 
-	bool enemy_is_here;
-	bool friendly_is_here; 
+	bool enemy_is_here    = false;
+	bool friendly_is_here = false; 
 	
-	Vehicle* _vehicle_evil = GetRandomVehicle(&RaceInformationCollector.RACES_EVIL_vec);
+	Vehicle* _vehicle_evil = GetRandomVehicle(RaceInformationCollector::Instance().RACES_EVIL_vec);
 	if (_vehicle_evil != NULL)
 	{
 		enemy_is_here = true;
 	}
-	else
-	{
-		enemy_is_here = false;
-	}
 	
-	Vehicle* _vehicle_good = GetRandomVehicle(&RaceInformationCollector.RACES_GOOD_vec);
+	Vehicle* _vehicle_good = GetRandomVehicle(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	if (_vehicle_good != NULL)
 	{
 		friendly_is_here = true;
 	}
-	else
-	{
-		friendly_is_here = false;
-	}
-
 	
-	
-	if (is_CAPTURED == false)
+	switch(condition_id)
 	{
-		if (enemy_is_here == true)
-		{
-			if (friendly_is_here == true)
-			{
-				// war is going
-			}
-			else
-			{
-				is_CAPTURED = true;
-				if (GetRandomVehicleByNpcRaceId(RACE::R6_ID) != NULL)
-				{
-					conqueror_race_id = RACE::R6_ID;
-				}
-				
-				if (GetRandomVehicleByNpcRaceId(RACE::R7_ID) != NULL)
-				{
-					conqueror_race_id = RACE::R7_ID;
-				}
-			}
-		}
-	}
-
-	if (is_CAPTURED == true)
-	{
-		if (friendly_is_here == true)
+		case ENTITY::STARSYSTEM::CONDITION::SAFE_ID:
 		{
 			if (enemy_is_here == true)
 			{
-				// war is going
+				if (friendly_is_here == true)
+				{
+					condition_id = ENTITY::STARSYSTEM::CONDITION::WAR_ID;
+				}
+				else
+				{
+					condition_id = ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID;
+					if (GetRandomVehicleByNpcRaceId(RACE::R6_ID) != NULL)
+					{
+						conqueror_race_id = RACE::R6_ID;
+					}
+				
+					if (GetRandomVehicleByNpcRaceId(RACE::R7_ID) != NULL)
+					{
+						conqueror_race_id = RACE::R7_ID;
+					}
+				}
+			}
+		
+			break;
+		}
+
+		case ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID:
+		{
+			if (friendly_is_here == true)
+			{
+				if (enemy_is_here == true)
+				{
+					condition_id = ENTITY::STARSYSTEM::CONDITION::WAR_ID;
+				}
+				else	
+				{
+					condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
+					conqueror_race_id = NONE_ID;
+				}
+			}
+			
+			break;
+		}
+
+		case ENTITY::STARSYSTEM::CONDITION::WAR_ID:
+		{
+			if (friendly_is_here == true)
+			{
+				if (enemy_is_here == false)
+				{
+					condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
+				}
 			}
 			else
 			{
-				is_CAPTURED = false;
-				conqueror_race_id = NONE_ID;
+				condition_id = ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID;
 			}
+				
+			break;
 		}
 	}
 }
@@ -377,10 +388,10 @@ void StarSystem::Update(int time, bool detalied_simulation)
 	}
 	else
 	{
-		updateStates();
-	    		
 		if (calculation_per_turn_allowed == true)
 		{    		
+			updateStates();
+		
     			MindEntitiesInStatic_s();     			
 
     			calculation_per_turn_allowed = false;
@@ -510,7 +521,7 @@ void StarSystem::UpdateEntities_s(int time, bool show_effect)
       
 void StarSystem::MindEntitiesInStatic_s()
 {
-     	for (unsigned int i=0; i<VEHICLE_vec.size(); i++) 		{ if (VEHICLE_vec[i]->GetOwnerNpc() != NULL) VEHICLE_vec[i]->GetOwnerNpc()->MindInSpace(); }
+     	for (unsigned int i=0; i<VEHICLE_vec.size(); i++) 		{ VEHICLE_vec[i]->GetOwnerNpc()->MindInSpace(); }
     	for (unsigned int i=0; i<PLANET_vec.size(); i++)     		{ PLANET_vec[i]->UpdateInSpaceInStatic(); }
 }      
 
@@ -733,7 +744,7 @@ void StarSystem::PostHyperJumpEvent()
 {
         for (unsigned int i = 0; i<appear_VEHICLE_queue.size(); i++)
         {               
-        	vec2f center(getRandInt(700, 1200), getRandInt(700, 1200));
+        	vec2f center(getRandInt(700, 1200), getRandInt(700, 1200)); // get correct pos
 		float angle = getRandInt(0, 360);  
 		
                 AddVehicle(appear_VEHICLE_queue[i], center, angle, appear_VEHICLE_queue[i]->GetParent());  

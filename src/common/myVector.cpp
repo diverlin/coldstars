@@ -123,6 +123,14 @@ vec2i getVec2i(int len, int angle)
     	return request;
 }
 
+vec2f getVec2f(int len, int angle)
+{
+    	float alpha = (float)angle * DEGREE_TO_RADIAN_RATE;	
+    	vec2f request(sin(alpha) * len, cos(alpha) * len);
+    	
+    	return request;
+}
+
 vec2f getRandVec2f(int radius_min, int radius_max)
 {
     	float alpha = (float)getRandInt(0, 360) * DEGREE_TO_RADIAN_RATE;

@@ -1156,11 +1156,14 @@ void loadImages()
 
 
 
-
+{
+	std::vector<int> arg;  
+	GuiTextureObCollector::Instance().starsystem_mark_war = new TextureOb(NONE_ID, "data/other/ss_mark_war.png", true, &arg);
+}
 
 {
 	std::vector<int> arg;  
-	GuiTextureObCollector::Instance().starsystem_mark_enemy = new TextureOb(NONE_ID, "data/other/mark_enemy_ss.png", true, &arg);
+	GuiTextureObCollector::Instance().starsystem_mark_captured = new TextureOb(NONE_ID, "data/other/ss_mark_captured.png", true, &arg);
 }
 
 {

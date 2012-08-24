@@ -1,4 +1,6 @@
 ################### FEATURES #################
+<< player radar range in RadarGui
+
 << blackholes improovement (fluctuation movement, save/load ability)
 - DONE
 
@@ -9,8 +11,15 @@
 - DONE
 
 << sattelite and spacestation add fireevent
+- DONE
 
 << add fading animation jump IN/-OUT
+- DONE
+
+<< player UNDO grab
+
+<< save/load ai/quest/scenario stuff
+
 
 << add fading animation for docking/launching
 - DONE
@@ -52,4 +61,8 @@ current implementation is: one textureOb is shared between many objects, so if t
 
 #4 turrels needs update after save/load event
 - NOT RELEVANT, dissapear after first update()
+
+#5 after several HJ, update for player is going to fast 
+
+#6 bug with SetStaticCoords near to ship
 

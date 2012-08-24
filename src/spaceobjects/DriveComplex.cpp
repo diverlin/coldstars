@@ -170,8 +170,8 @@ bool DriveComplex::UpdateTargetCoord()
 	{
     		case ENTITY::STARSYSTEM_ID:
     		{
-    	 	    	target_pos.Set(800, 800);  // get correct coords
-    			target_distance = 100;  // ??      		
+    	 	    	target_pos = vec2f(800, 800);  // get correct coords
+    			target_distance = 200;  // ??      		
         		return false; break;        			
 		}
 
@@ -353,7 +353,7 @@ void DriveComplex::CalcDirectPath()
 		vec2f vstep = ll.GetNorm() * step;
 
        		unsigned int it = ll.GetLen() / step;
-       		for(unsigned int i=0; i<it; i++)
+       		for (unsigned int i=0; i<it; i++)
        		{
             		new_pos += vstep;
             		float angleInD = atan2(target_pos.y - new_pos.y, target_pos.x - new_pos.x) * RADIAN_TO_DEGREE_RATE;
@@ -364,8 +364,37 @@ void DriveComplex::CalcDirectPath()
     	}
 }
 
+void DriveComplex::CalcAcceleratedPath() // used for hyper jump effect
+{
+	ClearPath();
+	
+	float angleInD = owner_vehicle->GetPoints().GetAngleDegree();
 
+	vec2f start_pos(owner_vehicle->GetPoints().GetCenter());
+    	
+    	vec2f ll(getVec2f(100, angleInD) - start_pos);
+    	
+    	vec2f new_pos(start_pos);
+    	for (unsigned int i=0; i<500; i++)
+	{
+	    	float step = owner_vehicle->propetries.speed/100.0 + i*10;  // remove from here      		    		
+		vec2f vstep = ll.GetNorm() * step;
+	
+        	new_pos += vstep;
 
+            	path_center_vec.push_back(new_pos);
+            	angle_inD_vec.push_back(angleInD);
+       	}
+       	
+       	if (path_center_vec.size() >= 1)
+	{
+		direction_list_END = false;
+               
+       		visual_center_path.FillData(GuiTextureObCollector::Instance().dot_blue->texture, &path_center_vec, 10, 10);
+       		move_it = 0;
+       	}
+
+}
 
 void DriveComplex::UpdatePosition()
 {

@@ -43,27 +43,27 @@ void Galaxy::Add(StarSystem* starsystem)
 	STARSYSTEM_vec.push_back(starsystem); 
 }
      		
-////ugly
-StarSystem* Galaxy::GetRandomStarSystem()
+StarSystem* Galaxy::GetRandomStarSystem(int condition_id)
 {
-	return STARSYSTEM_vec[getRandInt(0, STARSYSTEM_vec.size())];
-}
-
-StarSystem* Galaxy::GetRandomCapturedStarSystem()
-{
-	std::vector<StarSystem*> ss_vec;
-	
-	for (unsigned int i = 0; i<STARSYSTEM_vec.size(); i++)
+	if (condition_id == NONE_ID)
 	{
-		if (STARSYSTEM_vec[i]->GetCaptured() == true)
-		{
-			ss_vec.push_back(STARSYSTEM_vec[i]);
-		}
+		return STARSYSTEM_vec[getRandInt(0, STARSYSTEM_vec.size())];
 	}
+	else
+	{
+		std::vector<StarSystem*> ss_vec;
 	
-	return ss_vec[getRandInt(0, ss_vec.size())];
+		for (unsigned int i = 0; i<STARSYSTEM_vec.size(); i++)
+		{
+			if (STARSYSTEM_vec[i]->GetConditionId() == condition_id)
+			{
+			ss_vec.push_back(STARSYSTEM_vec[i]);
+			}
+		}
+	
+		return ss_vec[getRandInt(0, ss_vec.size())];
+	}
 }
-//ugly
      		
 void Galaxy::Update(int time)
 {

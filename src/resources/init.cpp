@@ -33,22 +33,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 void init()
 {
-        RaceInformationCollector.RACES_ALL_vec.push_back(RACE::R0_ID);
-    	RaceInformationCollector.RACES_ALL_vec.push_back(RACE::R1_ID);
-    	RaceInformationCollector.RACES_ALL_vec.push_back(RACE::R2_ID);
-    	RaceInformationCollector.RACES_ALL_vec.push_back(RACE::R3_ID);
-    	RaceInformationCollector.RACES_ALL_vec.push_back(RACE::R4_ID);
-   	RaceInformationCollector.RACES_ALL_vec.push_back(RACE::R6_ID);
-    	RaceInformationCollector.RACES_ALL_vec.push_back(RACE::R7_ID);
+        RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::R0_ID);
+    	RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::R1_ID);
+    	RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::R2_ID);
+    	RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::R3_ID);
+    	RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::R4_ID);
+   	RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::R6_ID);
+    	RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::R7_ID);
 
-    	RaceInformationCollector.RACES_GOOD_vec.push_back(RACE::R0_ID);
-    	RaceInformationCollector.RACES_GOOD_vec.push_back(RACE::R1_ID);
-   	RaceInformationCollector.RACES_GOOD_vec.push_back(RACE::R2_ID);
-    	RaceInformationCollector.RACES_GOOD_vec.push_back(RACE::R3_ID);
-    	RaceInformationCollector.RACES_GOOD_vec.push_back(RACE::R4_ID);
+    	RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(RACE::R0_ID);
+    	RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(RACE::R1_ID);
+   	RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(RACE::R2_ID);
+    	RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(RACE::R3_ID);
+    	RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(RACE::R4_ID);
 
-    	RaceInformationCollector.RACES_EVIL_vec.push_back(RACE::R6_ID);
-    	RaceInformationCollector.RACES_EVIL_vec.push_back(RACE::R7_ID);  
+    	RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(RACE::R6_ID);
+    	RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(RACE::R7_ID);  
         
     	loadGameData();           
         TextureManager::Instance().FillShipSubTypeList();        

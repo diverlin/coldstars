@@ -138,7 +138,8 @@ class Vehicle : public BaseGameEntity
         	void SetLand(BaseLand* land) { this->land = land; };
         	        		
         	BaseLand* GetLand() const { return land; };
-        	        					
+        	int GetSpecialActionId() const { return special_action_id; };
+        					
                 void AddItemSlot(ItemSlot*, const Rect&); 
                 bool AddItemToCargoSlot(BaseItem*);
                 bool UnpackContainerItemToCargoSlot(Container*);

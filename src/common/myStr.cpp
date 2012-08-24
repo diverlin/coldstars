@@ -38,7 +38,7 @@ std::string bool2str(bool var)
 
 
 
-std::string getAiModelString(int id)
+std::string getAiModelStr(int id)
 {
 	switch(id)
 	{
@@ -50,7 +50,7 @@ std::string getAiModelString(int id)
 	}
 }
 
-std::string getClassString(int id)
+std::string getClassStr(int id)
 {
 	switch(id)
 	{
@@ -64,7 +64,7 @@ std::string getClassString(int id)
 	}
 }
 
-std::string getRaceString(int race_id) 
+std::string getRaceStr(int race_id) 
 {
 	switch(race_id)
 	{

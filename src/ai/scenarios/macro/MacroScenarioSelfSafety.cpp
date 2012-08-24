@@ -27,9 +27,9 @@ MacroScenarioSelfSafety::MacroScenarioSelfSafety()
 MacroScenarioSelfSafety::~MacroScenarioSelfSafety() 
 {}
 
-void MacroScenarioSelfSafety::UpdateInStatic(Npc* npc) const
+void MacroScenarioSelfSafety::UpdateInStaticInSpace(Npc* npc) const
 {
-	if (npc->GetStarSystem()->GetCaptured() == false)
+	if (npc->GetStarSystem()->GetConditionId() == ENTITY::STARSYSTEM::CONDITION::SAFE_ID)
 	{
 		if (npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetTypeId() != ENTITY::PLANET_ID)
 		{ 

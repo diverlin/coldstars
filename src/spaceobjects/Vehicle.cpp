@@ -272,8 +272,7 @@ void Vehicle::UpdateSpecialAction()
 				
 				break;			
 			}
-			
-			
+						
 			case SPECIAL_ACTION::INITIATE_LAUNCHING_ID:
 			{
 				if (UpdateFadeOutEffect() == true)
@@ -341,7 +340,7 @@ bool Vehicle::UpdateFadeOutEffect()
 //// ******** DOCKING/LAUNCHING ******** 
 void Vehicle::HyperJumpEvent()
 {
-        starsystem->RemoveVehicle(data_id.id);  
+        starsystem->RemoveVehicle(this);  
                                                         
         ((StarSystem*)drive_complex->GetTarget())->AddToHyperJumpQueue(this);
         drive_complex->ResetTarget();  
@@ -354,7 +353,7 @@ void Vehicle::HyperJumpEvent()
                 
 void Vehicle::DockingEvent()
 {
-     	starsystem->RemoveVehicle(data_id.id);
+     	starsystem->RemoveVehicle(this);
             
         switch(drive_complex->GetTarget()->GetTypeId())         	     	     	
      	{

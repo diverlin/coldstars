@@ -23,10 +23,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../common/myVector.hpp"
 
 #define GRAPPLE_QUEUE_LOG_ENABLED 1
-#define DRIVECOMPLEX_LOG_ENABLED 1
+#define DRIVECOMPLEX_LOG_ENABLED 0
 #define AISCENARIO_LOG_ENABLED 1
 
 #define LOG_ENABLED 1
+
+const bool TEST_ON = false;
 
 const double NO_DELAY = 0.0f;
 const int NO_ADDITIONAL_INFO = 0;
@@ -223,10 +225,16 @@ namespace STARSYSTEM
 const int PLANET_MIN = 3;
 const int PLANET_MAX = 5;
 
-const int SHIP_INIT_MIN = 10;
-const int SHIP_INIT_MAX = 15;
+const int SHIP_INIT_MIN = 4;
+const int SHIP_INIT_MAX = 7;
 const int ENEMYSHIP_INIT_MIN = 10;
 const int ENEMYSHIP_INIT_MAX = 20;
+
+	enum CONDITION
+	{
+		WAR_ID, CAPTURED_ID, SAFE_ID
+	};
+
 }
 
 namespace STAR

@@ -24,7 +24,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class GuiTextureObCollector
 {
 	public:
-		TextureOb* starsystem_mark_enemy;	
+		TextureOb* starsystem_mark_war;
+		TextureOb* starsystem_mark_captured;	
 		TextureOb* starsystem_mark_player;
 	
 		TextureOb* icon_minus;
