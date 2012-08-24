@@ -139,7 +139,8 @@ class Vehicle : public BaseGameEntity
         	        		
         	BaseLand* GetLand() const { return land; };
         	int GetSpecialActionId() const { return special_action_id; };
-        					
+        	const VehiclePropetries& GetPropetries() const { return propetries; };
+        				
                 void AddItemSlot(ItemSlot*, const Rect&); 
                 bool AddItemToCargoSlot(BaseItem*);
                 bool UnpackContainerItemToCargoSlot(Container*);
@@ -171,7 +172,6 @@ class Vehicle : public BaseGameEntity
         	GoodsPack* GetGoodsPack() const;
         	
         	AbilitiesStatus ableTo;
-                VehiclePropetries propetries;
                 VehicleKorpusData data_korpus;
                        	
         	void SelfRepairEvent();
@@ -221,8 +221,7 @@ class Vehicle : public BaseGameEntity
 	protected:
 		int special_action_id;
 	
-		virtual void UpdateInfo() = 0;
-             	std::string returnProtectionStr();
+	        VehiclePropetries propetries;
 
         	WeaponComplex*     weapon_complex;
             	DriveComplex*      drive_complex;
@@ -253,7 +252,10 @@ class Vehicle : public BaseGameEntity
                 Color4f color;
                                 
                 VehicleSlot* parent_vehicleslot;
-                             		
+                        
+                virtual void UpdateInfo() = 0;
+             	std::string returnProtectionStr();
+             	     		
                 void RenderGrabTrail() const;
 		void RenderKorpus() const;
              	void RenderTurrels() const;

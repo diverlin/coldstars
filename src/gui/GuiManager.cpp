@@ -37,7 +37,8 @@ void GuiManager::SetPlayer(Player* player)
       	
       	gui_kosmoport.SetPlayer(player);
 	gui_map.SetPlayer(player); 
-	
+	gui_radar.SetPlayer(player); 
+		
 	slider.SetPlayer(player);
 }		
 

@@ -20,10 +20,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 GuiRadar::GuiRadar()
 {		
-	textureOb_background 	= GuiTextureObCollector::Instance().background_radar;
-	textureOb_bar	 	= GuiTextureObCollector::Instance().bar_radar;
-	textureOb_screenrect	= GuiTextureObCollector::Instance().screenrect;
-		
+	textureOb_background 	= GuiTextureObCollector::Instance().radar_background;
+	textureOb_bar	 	= GuiTextureObCollector::Instance().radar_bar;
+	textureOb_screenrect	= GuiTextureObCollector::Instance().radar_screenrect;
+	textureOb_range		= GuiTextureObCollector::Instance().radar_range;
+			
 	scale = RADAR_SCALE;
 	int screen_w = Screen::Instance().GetWindow().GetWidth();
     	int screen_h = Screen::Instance().GetWindow().GetHeight();
@@ -130,10 +131,15 @@ void GuiRadar::AddIfWithinRadarRange(BaseGameEntity* object, const Vehicle& vehi
     		
 void GuiRadar::Render() const
 {
+	float range_diameter = 2*player->GetNpc()->GetVehicle()->GetPropetries().radius;
+	Rect range_rect(0, 0, scale*range_diameter, scale*range_diameter);
+	range_rect.SetCenter(rect.GetCenter() + player->GetNpc()->GetVehicle()->GetPoints().GetCenter() * scale);
+	
 	drawTexturedRect(textureOb_background, rect, -2.0);
 	drawTexturedRect(textureOb_bar, rect, -2.0);
 	drawTexturedRect(textureOb_screenrect, screenrect, -2.0);
-		
+	drawTexturedRect(textureOb_range, range_rect, -2.0);
+			
 	float size, size_base = 7;
 	enable_POINTSPRITE();       	
 		for (unsigned int i=0; i<entity_vec.size(); i++)

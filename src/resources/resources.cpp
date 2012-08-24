@@ -1236,17 +1236,22 @@ void loadImages()
 
 {
 	std::vector<int> arg;  
-	GuiTextureObCollector::Instance().screenrect = new TextureOb(NONE_ID, "data/gui/screenrect.png", true, &arg);
+	GuiTextureObCollector::Instance().radar_screenrect = new TextureOb(NONE_ID, "data/gui/radar_screenrect.png", true, &arg);
 }
 
 {
 	std::vector<int> arg;  
-	GuiTextureObCollector::Instance().background_radar = new TextureOb(NONE_ID, "data/gui/radar_background.png", true, &arg);
+	GuiTextureObCollector::Instance().radar_range = new TextureOb(NONE_ID, "data/gui/radar_range.png", true, &arg);
 }
 
 {
 	std::vector<int> arg;  
-	GuiTextureObCollector::Instance().bar_radar = new TextureOb(NONE_ID, "data/gui/radar_bar.png", true, &arg);
+	GuiTextureObCollector::Instance().radar_background = new TextureOb(NONE_ID, "data/gui/radar_background.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
+	GuiTextureObCollector::Instance().radar_bar = new TextureOb(NONE_ID, "data/gui/radar_bar.png", true, &arg);
 }
 
 {
