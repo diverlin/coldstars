@@ -30,8 +30,7 @@ class Galaxy : public Base
                 
      		void Add(StarSystem*);
      		
-     		StarSystem* GetRandomStarSystem();
-     		StarSystem* GetRandomCapturedStarSystem();
+     		StarSystem* GetRandomStarSystem(int condition_id = NONE_ID);
      		     
     		void Update(int);
 

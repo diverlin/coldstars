@@ -41,7 +41,7 @@ BaseEquipment::~BaseEquipment()
 void BaseEquipment::AddCommonInfo()
 {
     	info.addNameStr("modules:");   info.addValueStr( int2str(data_item.modules_num_max) );
-    	info.addNameStr("race:");      info.addValueStr( getRaceString(race_id) );
+    	info.addNameStr("race:");      info.addValueStr( getRaceStr(race_id) );
     	info.addNameStr("condition:"); info.addValueStr( int2str(condition) + "/" + int2str(data_item.condition_max) );
     	info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
     	info.addNameStr("price:");     info.addValueStr( int2str(price) );

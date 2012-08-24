@@ -18,7 +18,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "gameStruct.hpp"
 
+RaceInformationCollector& RaceInformationCollector::Instance()
+{
+	static RaceInformationCollector instance;
+	return instance;
+}
+
+bool RaceInformationCollector::IsGood(int race_id) const
+{
+	for (unsigned int i=0; i<RACES_GOOD_vec.size(); i++)
+	{
+		if (race_id == RACES_GOOD_vec[i])
+		{
+			return true;
+		}
+	}
 	
+	return false;
+}		
+		
 VisionStatus :: VisionStatus()
 {
    	ASTEROID  = false;

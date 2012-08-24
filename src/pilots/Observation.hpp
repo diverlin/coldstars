@@ -69,15 +69,16 @@ class Observation
           	void FindEchievableStarSystems(Galaxy*);
           	Container* GetClosestContainer() const;
           	Container* GetRandContainer() const;
-          	StarSystem* GetClosestStarSystem(bool) const;
-          	Vehicle* GetClosestVehicle(std::vector<int>*) const;
-          	          	          	                
+          	StarSystem* GetClosestStarSystem(int) const;
+          	Vehicle* GetClosestVisibleVehicle(const std::vector<int>&) const;
+          	Vehicle* GetRandVisibleVehicle(const std::vector<int>&) const;
+          	          	          	          	                
           	void FindVisibleAsteroidsInSpaceInStatic();
           	void FindVisibleContainersInSpaceInStatic();
           	void FindVisibleVehiclesInSpaceInStatic();
 
                 template <typename OBSERVED_DATA_TYPE>
-		void Sort(std::vector<OBSERVED_DATA_TYPE>*);
+		void Sort(std::vector<OBSERVED_DATA_TYPE>&);
                	
 	private:
                 Npc* npc_owner;	

@@ -50,13 +50,12 @@ Container* Observation::GetRandContainer() const
 	return visible_CONTAINER_pair_vec[getRandInt(0, visible_CONTAINER_pair_vec.size()-1)].object;
 }
                     	
-StarSystem* Observation::GetClosestStarSystem(bool _captured) const
+StarSystem* Observation::GetClosestStarSystem(int requested_consdition_id) const
 {
-	StarSystem* _target_starsystem = NULL;
-	
+	StarSystem* _target_starsystem = NULL;	
  	for (unsigned int i=0; i<visible_STARSYSTEM_pair_vec.size(); i++)
  	{
- 		if (visible_STARSYSTEM_pair_vec[i].object->GetCaptured() == _captured)
+ 		if (visible_STARSYSTEM_pair_vec[i].object->GetConditionId() == requested_consdition_id)
  		{
  			_target_starsystem = visible_STARSYSTEM_pair_vec[i].object;
  			break;
@@ -67,22 +66,41 @@ StarSystem* Observation::GetClosestStarSystem(bool _captured) const
 }    	
 
 
-Vehicle* Observation::GetClosestVehicle(std::vector<int>* _pVec_race_id) const
+Vehicle* Observation::GetClosestVisibleVehicle(const std::vector<int>& rVec_race_id) const
 {
-	for (unsigned int i=0; i<visible_VEHICLE_pair_vec.size(); i++)
+        for (unsigned int i=0; i<rVec_race_id.size(); i++)
         {
-        	for (unsigned int j=0; j<_pVec_race_id->size(); j++)
+		for (unsigned int j=0; j<visible_VEHICLE_pair_vec.size(); j++)
         	{
-        		if (visible_VEHICLE_pair_vec[i].object->GetOwnerNpc() != NULL)
-        		{
-        			if ( visible_VEHICLE_pair_vec[i].object->GetOwnerNpc()->GetRaceId() == (*_pVec_race_id)[j] )
-        			{
-        				return visible_VEHICLE_pair_vec[i].object;
-        			}
-        		}
-        	}
+       			if (rVec_race_id[i] == visible_VEHICLE_pair_vec[j].object->GetOwnerNpc()->GetRaceId())
+       			{
+       				return visible_VEHICLE_pair_vec[j].object;
+       			}
+             	}
         }
         
+	return NULL;	
+}
+
+Vehicle* Observation::GetRandVisibleVehicle(const std::vector<int>& rVec_race_id) const
+{
+	std::vector<Vehicle*> tmp_vehicle;
+        for (unsigned int i=0; i<rVec_race_id.size(); i++)
+        {
+		for (unsigned int j=0; j<visible_VEHICLE_pair_vec.size(); j++)
+        	{
+       			if (rVec_race_id[i] == visible_VEHICLE_pair_vec[j].object->GetOwnerNpc()->GetRaceId())
+       			{
+       				tmp_vehicle.push_back(visible_VEHICLE_pair_vec[j].object);
+       			}
+             	}
+        }
+        
+        if (tmp_vehicle.size() > 0)
+        {
+        	return tmp_vehicle[getRandInt(0, tmp_vehicle.size()-1)];
+        }
+	
 	return NULL;	
 }
 
@@ -94,24 +112,24 @@ void Observation::ObserveAllInSpace()
 }
 
 template <typename OBSERVED_DATA_TYPE>
-void Observation::Sort(std::vector<OBSERVED_DATA_TYPE>* pDataVec)
+void Observation::Sort(std::vector<OBSERVED_DATA_TYPE>& rDataVec)
 {
-	for (unsigned int i=0; i<pDataVec->size(); i++)
+	for (unsigned int i=0; i<rDataVec.size(); i++)
 	{
 		int i_min = i;
-		float min = (*pDataVec)[i].dist;
+		float min = rDataVec[i].dist;
 		
-		for (unsigned int j=i; j<pDataVec->size(); j++)
+		for (unsigned int j=i; j<rDataVec.size(); j++)
 		{	
-        		if ( (*pDataVec)[j].dist < min )
+        		if ( rDataVec[j].dist < min )
         		{
         			i_min = j;
-        			min = (*pDataVec)[j].dist;
+        			min = rDataVec[j].dist;
         		}
         	}
-        	OBSERVED_DATA_TYPE tmp = (*pDataVec)[i];
-        	(*pDataVec)[i]         = (*pDataVec)[i_min];
-        	(*pDataVec)[i_min]     = tmp;
+        	OBSERVED_DATA_TYPE tmp = rDataVec[i];
+        	rDataVec[i]            = rDataVec[i_min];
+        	rDataVec[i_min]        = tmp;
         }
 }
 
@@ -134,7 +152,7 @@ void Observation::FindVisibleAsteroidsInSpaceInStatic()
                 } 
         }
         
-        Sort(&visible_ASTEROID_pair_vec);
+        Sort(visible_ASTEROID_pair_vec);
 }
 
 void Observation::FindVisibleContainersInSpaceInStatic()
@@ -171,12 +189,14 @@ void Observation::FindVisibleVehiclesInSpaceInStatic()
         for (unsigned int i=0; i<vehicle_vec.size(); i++)
         {    
         	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), vehicle_vec[i]->GetPoints().GetCenter());
+        	//std::cout<<"dist, radius = "<<dist<<", "<<npc_owner->GetVehicle()->propetries.radius<<std::endl;
                 if (dist < npc_owner->GetVehicle()->propetries.radius)
                 {
                 	visible_VEHICLE_pair_vec.push_back( Pair<Vehicle*>(vehicle_vec[i], dist) );
                	} 
        	}	
-        Sort(&visible_VEHICLE_pair_vec);
+        Sort(visible_VEHICLE_pair_vec);
+        //std::cout<<"visible_VEHICLE_pair_vec.size = "<<visible_VEHICLE_pair_vec.size()<<std::endl;
 }
 
 

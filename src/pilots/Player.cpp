@@ -775,7 +775,7 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
 
 bool Player::MouseInteractionWithStars(const MouseData& data_mouse)
 {
-       	for (unsigned int i = 0; i < visible_STAR_vec.size(); i++)
+       	for (unsigned int i=0; i<visible_STAR_vec.size(); i++)
        	{ 
       		float object_cursor_dist = distBetweenPoints(visible_STAR_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
        		if (object_cursor_dist < visible_STAR_vec[i]->GetCollisionRadius())

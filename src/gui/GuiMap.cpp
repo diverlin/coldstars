@@ -35,29 +35,29 @@ bool GuiMap::UpdateMouseInteraction(const MouseData& data_mouse, Galaxy* galaxy)
 {
      	if (player->GetNpc()->GetVehicle()->ableTo.HJUMP == true)
      	{  
-        	for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
+        	for (unsigned int i=0; i<galaxy->STARSYSTEM_vec.size(); i++)
         	{
             		//if (STARSYSTEM_pList[si]->id != pTo_PLAYER->pTo_starsystem->id)
             		{
-                		float ss_cursor_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
+                		float ss_cursor_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter(), data_mouse.mx, data_mouse.my);
                 		if (ss_cursor_dist < 10)
                 		{ 
-                   			int ss_ss_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), 
-                   				       			   player->GetNpc()->GetStarSystem()->GetPoints().GetCenter() );
-                   				       
+                   			int ss_ss_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter(), player->GetNpc()->GetStarSystem()->GetPoints().GetCenter() );
                    			if ( (ss_ss_dist < player->GetNpc()->GetVehicle()->GetDriveComplex()->GetDriveSlot()->GetDriveEquipment()->GetHyper()) && (ss_ss_dist < player->GetNpc()->GetVehicle()->GetDriveComplex()->GetBakSlot()->GetBakEquipment()->GetFuel()) )
                       			{
                       				if (data_mouse.left_click == true)
                       				{ 
                                                         // debug
-                                                        player->GetNpc()->GetStarSystem()->RemoveVehicle(player->GetNpc()->GetVehicle()->GetId());  
-                                                        galaxy->STARSYSTEM_vec[si]->AddToHyperJumpQueue(player->GetNpc()->GetVehicle());    
+                                                        //player->GetNpc()->GetStarSystem()->RemoveVehicle(player->GetNpc()->GetVehicle());  
+                                                        //galaxy->STARSYSTEM_vec[i]->AddToHyperJumpQueue(player->GetNpc()->GetVehicle());    
                                                         // debug
                                                         
                           				//player.hyperJumpPreparation(ss)
                           				//#player.calculateTraceToCoord((player.jump_pos_x, player.jump_pos_y))
-                          				printf("ss_id = %i\n", galaxy->STARSYSTEM_vec[si]->GetId());    // debug
 
+              						MicroTask* microtask = new MicroTask(MICROSCENARIO::JUMP_ID, galaxy->STARSYSTEM_vec[i]);
+               						player->GetNpc()->GetStateMachine()->SetCurrentMicroTask(microtask);
+               				
                           				return true;
                       				} 
                       			}
@@ -78,16 +78,21 @@ void GuiMap::Render(Galaxy* galaxy)
     	
     	enable_POINTSPRITE();
     		
-    	for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
+    	for (unsigned int i = 0; i < galaxy->STARSYSTEM_vec.size(); i++)
     	{   		
-        	TextureOb* texOb_particle = TextureManager::Instance().getTexObByColorId(TEXTURE::DISTANTSTAR_ID, galaxy->STARSYSTEM_vec[si]->STAR_vec[0]->GetColorId()); 
+        	TextureOb* texOb_particle = TextureManager::Instance().getTexObByColorId(TEXTURE::DISTANTSTAR_ID, galaxy->STARSYSTEM_vec[i]->STAR_vec[0]->GetColorId()); 
                                       
-        	drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), 30.0, -2.0);
+        	drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter(), 30.0, -2.0);
               
-        	if (galaxy->STARSYSTEM_vec[si]->GetCaptured() == true)
+       		if (galaxy->STARSYSTEM_vec[i]->GetConquerorRaceId() != NONE_ID)
+       		{
+       			drawTexturedPoint(GuiTextureObCollector::Instance().starsystem_mark_captured->texture, galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter(), 20.0, -2.0);
+      		}
+
+       		if (galaxy->STARSYSTEM_vec[i]->GetConditionId() == ENTITY::STARSYSTEM::CONDITION::WAR_ID)
         	{
-        		drawTexturedPoint(GuiTextureObCollector::Instance().starsystem_mark_enemy->texture, galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter(), 40.0, -2.0);
-        	}
+        		drawTexturedPoint(GuiTextureObCollector::Instance().starsystem_mark_war->texture, galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter()+vec2f(0.0,-13.0), 20.0, -2.0);
+        	}        		
            	
     	}	 
         drawTexturedPoint(GuiTextureObCollector::Instance().starsystem_mark_player->texture, player->GetNpc()->GetStarSystem()->GetPoints().GetCenter(), 40.0, -2.0);
@@ -98,12 +103,12 @@ void GuiMap::Render(Galaxy* galaxy)
         disable_POINTSPRITE();
         	
         int font_size = 10;     
-        for (unsigned int si = 0; si < galaxy->STARSYSTEM_vec.size(); si++)
+        for (unsigned int i=0; i<galaxy->STARSYSTEM_vec.size(); i++)
     	{
-		drawSimpleText(int2str(galaxy->STARSYSTEM_vec[si]->GetId()), 
-        	       	      		 font_size, 
-        	       	       		 galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter().x - 20, 
-        	       	       		 galaxy->STARSYSTEM_vec[si]->GetPoints().GetCenter().y - 20);
+		drawSimpleText(int2str(galaxy->STARSYSTEM_vec[i]->GetId()), 
+        	       	      	       font_size, 
+        	       	       	       galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter().x - 20, 
+        	       	       	       galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter().y - 20);
    	} 
 }
 

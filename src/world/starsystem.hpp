@@ -59,7 +59,7 @@ class StarSystem : public BaseGameEntity
 		void SetGalaxy(Galaxy* galaxy)  { this->galaxy = galaxy; };
 						
 		//bool GetDetailedSimulationFlag() const { return detalied_simulation; };
-		bool GetCaptured()       const { return is_CAPTURED; };  
+		int GetConditionId()     const { return condition_id; };
 		int GetRaceId()          const { return race_id; };
 		int GetConquerorRaceId() const { return conqueror_race_id; };  
 		Star* GetStar()          const { return STAR_vec[0]; };		
@@ -90,7 +90,7 @@ class StarSystem : public BaseGameEntity
 		void AddToRemoveFromOuterSpaceQueue(Container*);
 		void AddToRemoveFromOuterSpaceQueue(Vehicle*);
 				
-		bool RemoveVehicle(int);    
+		bool RemoveVehicle(Vehicle*);    
 		
 		void BombExplosionEvent(Container*, bool);
 		
@@ -110,11 +110,11 @@ class StarSystem : public BaseGameEntity
 		void ResolveData();
 				                                           		    		    		
 		// poor
-		Planet* GetClosestPlanet(vec2f);
+		Planet* GetClosestPlanet(const vec2f&);
 		Vehicle* GetRandomVehicle();
 		Vehicle* GetRandomVehicleExcludingNpcRaceId(int);
 		Vehicle* GetRandomVehicleByNpcRaceId(int) const;
-		Vehicle* GetRandomVehicle(std::vector<int>*) const;
+		Vehicle* GetRandomVehicle(const std::vector<int>&) const;
 		// 
     	private:
                 int race_id, conqueror_race_id;
@@ -123,7 +123,7 @@ class StarSystem : public BaseGameEntity
     		bool calculation_per_turn_allowed; 
     		bool calculation_per_turn_allowed_inDynamic; 
     		    		
-    		bool is_CAPTURED;
+    		int condition_id;
     		
     		Galaxy* galaxy;
     	
@@ -146,7 +146,7 @@ class StarSystem : public BaseGameEntity
     		std::vector<LazerTraceEffect*>    effect_LAZERTRACE_vec;
     		std::vector<BaseParticleSystem*>  effect_PARTICLESYSTEM_vec;
     		std::vector<ShockWaveEffect*>     effect_SHOCKWAVE_vec;    		
-    		std::vector<VerticalFlowText*> text_DAMAGE_vec;
+    		std::vector<VerticalFlowText*> 	  text_DAMAGE_vec;
     		
     		// remove queue 	
     		std::vector<Container*>    remove_CONTAINER_queue;

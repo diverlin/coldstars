@@ -29,21 +29,32 @@ static struct
 	ObjMeshInstance* DEFORMED_SPHERE_MESH;
 } MeshCollector;
 
-static struct
+class RaceInformationCollector
 {
-	std::vector<int> RACES_ALL_vec;
-	std::vector<int> RACES_GOOD_vec;
-	std::vector<int> RACES_EVIL_vec;
+	public:
+		static RaceInformationCollector& Instance();
+		~RaceInformationCollector() {};
+		
+		std::vector<int> RACES_ALL_vec;
+		std::vector<int> RACES_GOOD_vec;
+		std::vector<int> RACES_EVIL_vec;
 
-	std::vector<int> RACE0_ALLOWED_SUBTYPE_vec;
-	std::vector<int> RACE1_ALLOWED_SUBTYPE_vec;
-	std::vector<int> RACE2_ALLOWED_SUBTYPE_vec;
-	std::vector<int> RACE3_ALLOWED_SUBTYPE_vec; 
-	std::vector<int> RACE4_ALLOWED_SUBTYPE_vec;
-	std::vector<int> RACE6_ALLOWED_SUBTYPE_vec;
-	std::vector<int> RACE7_ALLOWED_SUBTYPE_vec;
+		std::vector<int> RACE0_ALLOWED_SUBTYPE_vec;
+		std::vector<int> RACE1_ALLOWED_SUBTYPE_vec;
+		std::vector<int> RACE2_ALLOWED_SUBTYPE_vec;
+		std::vector<int> RACE3_ALLOWED_SUBTYPE_vec; 
+		std::vector<int> RACE4_ALLOWED_SUBTYPE_vec;
+		std::vector<int> RACE6_ALLOWED_SUBTYPE_vec;
+		std::vector<int> RACE7_ALLOWED_SUBTYPE_vec;
+		
+		bool IsGood(int) const;
 	
-} RaceInformationCollector; 
+	private:
+		RaceInformationCollector() {};
+		RaceInformationCollector(const RaceInformationCollector&) = delete;
+		RaceInformationCollector& operator=(const RaceInformationCollector&) = delete;
+	
+}; 
 
 
 

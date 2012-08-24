@@ -29,6 +29,7 @@ class MicroScenarioJump : public BaseScenario
 		virtual ~MicroScenarioJump();
 		
 		virtual void Enter(Npc*) const;
+		virtual bool Validation(Npc*) const;
 		virtual void UpdateInStaticInSpace(Npc*) const;
 		virtual void UpdateInDynamicInSpace(Npc*) const;	
 		virtual void Exit(Npc*) const;

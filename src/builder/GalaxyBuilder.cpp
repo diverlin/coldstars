@@ -47,10 +47,24 @@ void GalaxyBuilder::CreateNewGalaxy(int id)
 void GalaxyBuilder::CreateNewInternals()
 {     	
     	int starsystem_num = getRandInt(ENTITY::GALAXY::STARSYSTEM_NUM_MIN, ENTITY::GALAXY::STARSYSTEM_NUM_MAX);
-    	for(int i = 0; i < starsystem_num; i++)
+    	for(int i=0; i<starsystem_num; i++)
     	{  
                 StarSystemBuilder::Instance().CreateNewStarSystem();
                 StarSystemBuilder::Instance().CreateNewInternals();
+                
+        	StarSystem* starsystem = StarSystemBuilder::Instance().GetStarSystem();
+        	starsystem->SetGalaxy(galaxy);
+        	galaxy->Add(starsystem);
+ 	}
+}
+
+void GalaxyBuilder::CreateNewInternals_TEST()
+{     	
+    	int starsystem_num = 1;
+    	for(int i=0; i<starsystem_num; i++)
+    	{  
+                StarSystemBuilder::Instance().CreateNewStarSystem();
+                StarSystemBuilder::Instance().CreateNewInternals_TEST();
                 
         	StarSystem* starsystem = StarSystemBuilder::Instance().GetStarSystem();
         	starsystem->SetGalaxy(galaxy);

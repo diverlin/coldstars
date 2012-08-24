@@ -44,7 +44,18 @@ void MicroScenarioJump::Enter(Npc* npc) const
 }
 
 /* virtual */
-void MicroScenarioJump::UpdateInStaticInSpace(Npc* _npc) const
+bool MicroScenarioJump::Validation(Npc* npc) const
+{
+	if (npc->GetVehicle()->GetStarSystem()->GetId() != npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetStarSystem()->GetId())
+	{
+		return true;
+	}
+	
+	return false;
+}
+
+/* virtual */
+void MicroScenarioJump::UpdateInStaticInSpace(Npc* npc) const
 {
 	// check if still able to jump
 }
@@ -54,7 +65,11 @@ void MicroScenarioJump::UpdateInDynamicInSpace(Npc* npc) const
 {
      	if (npc->GetVehicle()->GetDriveComplex()->CheckTargetEchievement() == true)
      	{
-     		npc->GetVehicle()->SetSpecialActionId(SPECIAL_ACTION::INITIATE_JUMPIN_ID);
+     		if (npc->GetVehicle()->GetSpecialActionId() != SPECIAL_ACTION::INITIATE_JUMPIN_ID)
+     		{
+     			npc->GetVehicle()->SetSpecialActionId(SPECIAL_ACTION::INITIATE_JUMPIN_ID);
+     			//npc->GetVehicle()->GetDriveComplex()->CalcAcceleratedPath();
+     		}
      	}
 }
 

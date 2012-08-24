@@ -66,24 +66,24 @@ void StarSystemBuilder::CreateNewInternals()
         	starsystem->Add(bh, getRandVec2f(1200, 2000));
         }
 
-        //if (getRandBool())
+        if (getRandBool())
         {
-                int npc_race_id = getRandIntFromVec(RaceInformationCollector.RACES_GOOD_vec);
+                int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
                 int ship_num = getRandInt(ENTITY::STARSYSTEM::SHIP_INIT_MIN, ENTITY::STARSYSTEM::SHIP_INIT_MAX);
-                this->CreateShips(npc_race_id, ship_num, CLASS::TRADER_ID);
+                this->CreateShips(npc_race_id, ship_num);
+
+		this->CreateSpaceStations(3);
         }
-        //else
-        //{
-                //int npc_race_id = getRandIntFromVec(RaceInformationCollector.RACES_EVIL_vec);
-                //int ship_num = getRandInt(ENTITY::STARSYSTEM::SHIP_INIT_MIN, ENTITY::STARSYSTEM::SHIP_INIT_MAX);
-                //this->CreateShips(npc_race_id, ship_num);    
-        //}
-                      
-        this->CreateSpaceStations(3);
+        else
+        {
+                int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_EVIL_vec);
+                int ship_num = getRandInt(ENTITY::STARSYSTEM::SHIP_INIT_MIN, ENTITY::STARSYSTEM::SHIP_INIT_MAX);
+                this->CreateShips(npc_race_id, ship_num);    
+        }
 }
 
   	
-void StarSystemBuilder::CreateNewInternalsDebug()
+void StarSystemBuilder::CreateNewInternals_TEST()
 {
         vec2f center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH -  2*GUI::MAP::BORDER_X), 
         	     getRandInt(GUI::MAP::BORDER_Y, Config::Instance().SCREEN_HEIGHT - 2*GUI::MAP::BORDER_Y) );			 
@@ -99,6 +99,9 @@ void StarSystemBuilder::CreateNewInternalsDebug()
         //this->CreatePlanets(planet_num);
         
         //this->CreateSpaceStations(3);
+        int ship_num = 1;
+        CreateShips(getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec), ship_num);
+        CreateShips(getRandIntFromVec(RaceInformationCollector::Instance().RACES_EVIL_vec), ship_num);
 }
 
 void StarSystemBuilder::CreateBackground(int distNebula_num, int distStar_num, int color_id)
@@ -144,6 +147,8 @@ void StarSystemBuilder::CreatePlanets(int planet_per_system)
 
                 starsystem->Add(planet, starsystem->GetStar());
                 
+                /*
+                {
                 SatelliteBuilder::Instance().CreateNewSatellite();
                 SatelliteBuilder::Instance().CreateNewInternals();
                 Satellite* satellite = SatelliteBuilder::Instance().GetSatellite();
@@ -159,6 +164,7 @@ void StarSystemBuilder::CreatePlanets(int planet_per_system)
                 }
                 
                 starsystem->AddVehicle((Vehicle*)satellite, vec2f(0, 0), 0, planet);
+        	}*/
         }
         
 }
@@ -167,7 +173,7 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
 {       
     	for (int i=0; i<spacestation_per_system; i++)
     	{     
-    		int npc_race_id = getRandIntFromVec(RaceInformationCollector.RACES_GOOD_vec);
+    		int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
                 int npc_subtype_id = CLASS::WARRIOR_ID;
 
         	int ship_race_id = npc_race_id;         // RACES_ALL_vec[getRandInt(0, RACES_ALL_vec.size())];
@@ -216,13 +222,13 @@ void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num, int requested
     		{
                 	switch(npc_race_id)
                 	{
-                        	case RACE::R0_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector.RACE0_ALLOWED_SUBTYPE_vec);  break; }
-                        	case RACE::R1_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector.RACE1_ALLOWED_SUBTYPE_vec);  break; }
-                        	case RACE::R2_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector.RACE2_ALLOWED_SUBTYPE_vec);  break; }
-                        	case RACE::R3_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector.RACE3_ALLOWED_SUBTYPE_vec);  break; }
-                        	case RACE::R4_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector.RACE4_ALLOWED_SUBTYPE_vec);  break; }
-                        	case RACE::R6_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector.RACE6_ALLOWED_SUBTYPE_vec);  break; }
-                        	case RACE::R7_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector.RACE7_ALLOWED_SUBTYPE_vec);  break; }
+                        	case RACE::R0_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec);  break; }
+                        	case RACE::R1_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec);  break; }
+                        	case RACE::R2_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec);  break; }
+                        	case RACE::R3_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec);  break; }
+                        	case RACE::R4_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec);  break; }
+                        	case RACE::R6_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec);  break; }
+                        	case RACE::R7_ID: { npc_subtype_id = getRandIntFromVec(RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec);  break; }
                 	}
                 }
                 else

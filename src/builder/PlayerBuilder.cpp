@@ -47,7 +47,7 @@ void PlayerBuilder::CreateNewPlayer(int id)
         	
 void PlayerBuilder::CreateNewInternals()
 {    
-	int prace_id    = RACE::R7_ID;
+	int prace_id    = RACE::R0_ID;
       	int psubtype_id = CLASS::WARRIOR_ID;
       	int size_id     = SIZE_5;
       	int weapons_num = 7;

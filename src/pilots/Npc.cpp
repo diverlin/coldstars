@@ -171,11 +171,11 @@ Planet* Npc::GetPlanetForDocking()
      	return _target_planet;
 }
 
-StarSystem* Npc::GetClosestStarSystem(bool _captured)
+StarSystem* Npc::GetClosestStarSystem(int requested_condition_id)
 {
        	observation.FindEchievableStarSystems(GetStarSystem()->GetGalaxy());
         	
-       	StarSystem* _target_starsystem = observation.GetClosestStarSystem(_captured);   
+       	StarSystem* _target_starsystem = observation.GetClosestStarSystem(requested_condition_id);   
 	return _target_starsystem;
 }
 
@@ -217,9 +217,9 @@ void Npc::UpdateInfo()
 
     	info.addTitleStr("NPC");
     	info.addNameStr("id:");           info.addValueStr( int2str(data_id.id)  );
-    	info.addNameStr("race:");   	  info.addValueStr( getRaceString(race_id) ); 
-    	info.addNameStr("class:");   	  info.addValueStr( getClassString(data_id.subtype_id) );  
-    	info.addNameStr("model_ai:");     info.addValueStr( getAiModelString(ai_model->GetTypeId()) );  
+    	info.addNameStr("race:");   	  info.addValueStr( getRaceStr(race_id) ); 
+    	info.addNameStr("class:");   	  info.addValueStr( getClassStr(data_id.subtype_id) );  
+    	info.addNameStr("model_ai:");     info.addValueStr( getAiModelStr(ai_model->GetTypeId()) );  
     	info.addNameStr("credits:");   	  info.addValueStr( int2str(credits) );	
     	info.addNameStr("expirience:");   info.addValueStr( int2str(skill.GetExpirience()) + " / " + int2str(skill.GetExpirienceNextLevel()) );	
     	info.addNameStr("availiable points:");   info.addValueStr( int2str(skill.GetAvailiablePoints()) );	

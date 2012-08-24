@@ -74,7 +74,7 @@ class Npc : public Base
      		//// scanning
      		
      		Planet* GetPlanetForDocking();
-    		StarSystem* GetClosestStarSystem(bool);
+    		StarSystem* GetClosestStarSystem(int);
     		
                 NeedsToDo needsToDo;
 

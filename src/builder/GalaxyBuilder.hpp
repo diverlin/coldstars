@@ -29,6 +29,8 @@ class GalaxyBuilder
 
         	void CreateNewGalaxy(int id = NONE_ID); 
                 void CreateNewInternals();
+                void CreateNewInternals_TEST();
+                
                 Galaxy* GetGalaxy() const { return galaxy; };
         	 		                
         private:
