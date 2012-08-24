@@ -539,7 +539,15 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
       				{
        					if (npc->GetVehicle()->GetGrappleSlot()->CheckTarget(visible_CONTAINER_vec[i]) == true)
        					{
-       						npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(visible_CONTAINER_vec[i]);
+       						if (npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->CheckIfTargetAlreadyExistInQueue(visible_CONTAINER_vec[i]) == false)
+       						{
+       							npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(visible_CONTAINER_vec[i]);
+       						}
+       						else
+       						{
+       							npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddToRemoveQueue(visible_CONTAINER_vec[i]);
+       							npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->ClearRemoveQueue();
+       						}
        					}       						
        				}
        			}

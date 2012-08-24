@@ -32,16 +32,26 @@ GrappleEquipment::GrappleEquipment(int id)
 GrappleEquipment::~GrappleEquipment()
 {}
 
+bool GrappleEquipment::CheckIfTargetAlreadyExistInQueue(BaseGameEntity* target) const
+{
+        for (unsigned int i=0; i<target_vec.size(); i++)
+        {
+                if (target_vec[i]->GetId() == target->GetId())
+                {
+                       	return true;  
+                }    
+        }  
+        
+        return false;    
+}
+
 void GrappleEquipment::AddTarget(BaseGameEntity* target)
 {
 	// avoiding dublicated items in the vector
-        for (unsigned int i=0; i<target_vec.size(); i++)
-        {
-                if (target_vec[i]->GetId() == target->GetId() )
-                {
-                       	return;  
-                }    
-        }                
+	if (CheckIfTargetAlreadyExistInQueue(target) == true)    
+	{
+		return;
+	}         
                 
         if (target_vec.size() < maxNumItem)
         {
@@ -71,20 +81,19 @@ void GrappleEquipment::ClearRemoveQueue()
                         }
                 }
         }
+        
+        remove_queue.clear();
 }
                 
 std::string GrappleEquipment::GetTargetStr() const
 {
 	std::string str = "";
 	
-        for (unsigned int i = 0; i < target_vec.size(); i++)
+        for (unsigned int i=0; i<target_vec.size(); i++)
         {
-        	if (target_vec[i]) // hack, validator should be deal this
-        	{
-       			str += "c" + int2str(target_vec[i]->GetId()) + ", ";
-        	}
+		str += int2str(target_vec[i]->GetId()) + ", ";
         }
-        
+                
         return str;
 }
  
