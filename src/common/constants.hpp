@@ -33,7 +33,7 @@ const bool TEST_ON = false;
 const double NO_DELAY = 0.0f;
 const int NO_ADDITIONAL_INFO = 0;
 
-const std::string GAME_TITLE = "cold star V0.0.4.55 (SFML/C++)";
+const std::string GAME_TITLE = "cold star V0.0.4.56 (SFML/C++)";
 
 const float RADAR_SCALE = 1/50.0;
 

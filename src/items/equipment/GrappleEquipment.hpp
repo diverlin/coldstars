@@ -37,8 +37,10 @@ class GrappleEquipment : public BaseEquipment
 		int GetSpeed()      const { return speed; };
 		int GetMaxNumItem() const { return maxNumItem; };
               
+                bool CheckIfTargetAlreadyExistInQueue(BaseGameEntity* target) const;
                 void AddTarget(BaseGameEntity*);
                 void AddToRemoveQueue(BaseGameEntity*);
+                void ClearRemoveQueue();
                 
 		std::string GetTargetStr() const;
 
@@ -77,8 +79,6 @@ class GrappleEquipment : public BaseEquipment
            	std::string GetRadiusStr();
            	std::string GetSpeedStr();
            	std::string GetMaxNumItemStr();
-
-                void ClearRemoveQueue();
                 
                 void SaveDataUniqueGrappleEquipment(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueGrappleEquipment(const boost::property_tree::ptree&);
