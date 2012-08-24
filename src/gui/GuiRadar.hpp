@@ -46,19 +46,16 @@ class GuiRadar : public BaseGui
 		     			
       	private:
       		float scale;
-      		
+
       		TextureOb* textureOb_background;
       		TextureOb* textureOb_bar; 	
       		TextureOb* textureOb_screenrect; 
-      		
+      		TextureOb* textureOb_range;
+      		      		
       	       	Rect rect;
       	       	Rect screenrect;
       	       	      	       	      		
       		std::vector<BaseGameEntity*> entity_vec;
-      		      		
-      		Player* player;
-      		
-
 };
 
 #endif

@@ -283,7 +283,7 @@ bool DriveComplex::CalcRoundPath()
     	
     	int sign = 1;  //hack, define right sign here
 
-    	float step = owner_vehicle->propetries.speed/100.0;  // remove from here 
+    	float step = owner_vehicle->GetPropetries().speed/100.0;  // remove from here 
 
     	int it_max = 361/d_angle;
     	int i = 0;
@@ -346,9 +346,9 @@ void DriveComplex::CalcDirectPath()
     	vec2f ll(target_pos - start_pos);
     	vec2f new_pos(start_pos);
     	       		
-        if ( (owner_vehicle->propetries.speed > FLOAT_EPSILON) and (ll.IsNull() == false) )
+        if ( (owner_vehicle->GetPropetries().speed > FLOAT_EPSILON) and (ll.IsNull() == false) )
     	{
-    		float step = owner_vehicle->propetries.speed/100.0;  // remove from here    
+    		float step = owner_vehicle->GetPropetries().speed/100.0;  // remove from here    
        		    		
 		vec2f vstep = ll.GetNorm() * step;
 
@@ -377,7 +377,7 @@ void DriveComplex::CalcAcceleratedPath() // used for hyper jump effect
     	vec2f new_pos(start_pos);
     	for (unsigned int i=0; i<500; i++)
 	{
-	    	float step = owner_vehicle->propetries.speed/100.0 + i*10;  // remove from here      		    		
+	    	float step = owner_vehicle->GetPropetries().speed/100.0 + i*10;  // remove from here      		    		
 		vec2f vstep = ll.GetNorm() * step;
 	
         	new_pos += vstep;

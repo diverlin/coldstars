@@ -43,9 +43,10 @@ class GuiTextureObCollector
         	TextureOb* dot_yellow;
         	TextureOb* dot_purple;
 
-		TextureOb* screenrect;
-        	TextureOb* background_radar;                
-        	TextureOb* bar_radar;
+		TextureOb* radar_screenrect;
+        	TextureOb* radar_background;                
+        	TextureOb* radar_bar;
+        	TextureOb* radar_range;
         	TextureOb* bar_bottom;
         	TextureOb* bar_left;
         	TextureOb* bar_top;
