@@ -1,4 +1,12 @@
 ################### FEATURES #################
+<< precise fire
+
+<< korpus descriptor
+
+<< ability to hack ship
+
+<< save/load ai/quest/scenario stuff
+
 << player radar range in RadarGui
 - DONE
 
@@ -19,9 +27,6 @@
 
 << player UNDO grab
 - DONE
-
-<< save/load ai/quest/scenario stuff
-
 
 << add fading animation for docking/launching
 - DONE
