@@ -61,7 +61,7 @@ class BaseItem : public Base
  
      		void Repair();
 
-     		void Deterioration(); 
+		virtual void UpdateInStatic() {};
                 
 		void UpdateInfo();
 			
@@ -80,6 +80,7 @@ class BaseItem : public Base
                 int functional_slot_subtype_id;
 
      		bool is_DAMAGED;
+     		int lock_turns;
                 
                 ItemCommonData data_item;
                 
@@ -89,6 +90,8 @@ class BaseItem : public Base
      		
                 UnresolvedDataUniqueBaseItem data_unresolved_BaseItem;
                 
+                void Deterioration(); 
+                     		
      		virtual void AddCommonInfo()=0;
  		virtual void AddUniqueInfo()=0;   
                 

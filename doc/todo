@@ -1,4 +1,6 @@
 ################### FEATURES #################
+<< grabEquipment remove maxNumGrabItems, use strenght for that purpos
+
 << grab vehicle
 
 << precise fire

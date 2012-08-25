@@ -523,11 +523,6 @@ void Vehicle::UpdateDriveAbility()
            		}
         	}
         }
-     //speed = 200;    // debug
-     //printf("speed= %i\n,", speed); 
-     //// constants for direction visualization ////
-     //   self.turn_step = self.speed * TURN_TIME
-     //   self.draw_step = self.turn_step/ int(4*self.speed/DRIVE_SPEED_MIN)
 }
 
 
@@ -626,16 +621,20 @@ void Vehicle::SelfRepairEvent()
 {
 	if (ableTo.REPAIR == true)
 	{
-		if (data_life.armor < data_korpus.armor)
+		if (IsArmorFull() == false)
 		{
-			data_life.armor += propetries.repair;
-			droid_slot->GetDroidEquipment()->Deterioration();
+			droid_slot->GetDroidEquipment()->RepairEvent(this);
 		}
-		
-		if (data_life.armor > data_korpus.armor)
-		{
-			data_life.armor = data_korpus.armor;
-		}
+	}
+}
+
+void Vehicle::IncreaseArmor(int repair)
+{
+	data_life.armor += repair;
+	
+	if (data_life.armor > data_korpus.armor)
+	{
+		data_life.armor = data_korpus.armor;
 	}
 }
 
@@ -784,7 +783,7 @@ bool Vehicle::ExternalRepairEvent()
 
 bool Vehicle::IsArmorFull() const
 {
-	if (GetArmorMiss() == 0)
+	if (data_life.armor == data_korpus.armor)
 	{
 		return true;
 	}

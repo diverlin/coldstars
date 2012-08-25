@@ -71,6 +71,12 @@ std::string DroidEquipment::GetRepairStr()
         	return int2str(repair_orig) + "+" + int2str(repair_add);
 }
 
+void DroidEquipment::RepairEvent(Vehicle* vehicle)
+{
+	vehicle->IncreaseArmor(repair);
+	Deterioration();
+}
+      		
 /*virtual*/
 void DroidEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
