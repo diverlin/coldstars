@@ -114,7 +114,7 @@ void Npc::UpdateInSpace(int time, bool show_effect)
 
 void Npc::CheckNeeds()
 {
-        if (vehicle->GetArmor() < 0.5*vehicle->data_korpus.armor)   // move to ship
+        if (vehicle->GetArmor() < 0.5*vehicle->GetKorpusData().armor)   // move to ship
 	{
 		needsToDo.REPAIR_KORPUS = true;
 		//if (quest_self != g_QUEST_SELF_SAFETY)
@@ -188,7 +188,7 @@ bool Npc::CheckPossibilityToScan(Vehicle* vehicle)
         	return true;
         }
  
-     	if (this->vehicle->ableTo.SCAN == true) 
+     	if (this->vehicle->GetAbilitiesStatus().SCAN == true) 
      	{
         	if (vehicle->GetProtectionComplex()->GetProtectorSlot()->GetEquiped() == true)
         	{
@@ -224,7 +224,7 @@ void Npc::UpdateInfo()
     	info.addNameStr("expirience:");   info.addValueStr( int2str(skill.GetExpirience()) + " / " + int2str(skill.GetExpirienceNextLevel()) );	
     	info.addNameStr("availiable points:");   info.addValueStr( int2str(skill.GetAvailiablePoints()) );	
     	    	
-	if (vehicle->ableTo.GRAB == true)
+	if (vehicle->GetAbilitiesStatus().GRAB == true)
 	{
 		std::string grab_str = vehicle->GetGrappleSlot()->GetGrappleEquipment()->GetTargetStr();
 		if (grab_str.size() > 0)
