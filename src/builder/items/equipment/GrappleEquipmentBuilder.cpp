@@ -60,7 +60,6 @@ void GrappleEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
     	int strength_orig   = getRandInt(EQUIPMENT::GRAPPLE::STRENGTH_MIN,   EQUIPMENT::GRAPPLE::STRENGTH_MAX);
     	int radius_orig     = getRandInt(EQUIPMENT::GRAPPLE::RADIUS_MIN,     EQUIPMENT::GRAPPLE::RADIUS_MAX);
     	int speed_orig      = getRandInt(EQUIPMENT::GRAPPLE::SPEED_MIN,      EQUIPMENT::GRAPPLE::SPEED_MAX);
-    	int maxNumItem_orig = getRandInt(EQUIPMENT::GRAPPLE::MAXNUMITEM_MIN, EQUIPMENT::GRAPPLE::MAXNUMITEM_MAX);
     	
     	ItemCommonData common_data;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::GRAPPLE::MODULES_NUM_MIN, EQUIPMENT::GRAPPLE::MODULES_NUM_MAX);
@@ -71,7 +70,6 @@ void GrappleEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
         grapple_equipment->SetStrengthOrig(strength_orig);
         grapple_equipment->SetRadiusOrig(radius_orig);
         grapple_equipment->SetSpeedOrig(speed_orig);
-        grapple_equipment->SetMaxNumItemOrig(maxNumItem_orig);
 
         grapple_equipment->SetTextureOb(texOb_item);    
         grapple_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::GRAPPLE_ID);

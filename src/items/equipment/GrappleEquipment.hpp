@@ -30,17 +30,17 @@ class GrappleEquipment : public BaseEquipment
 		void SetStrengthOrig(int strength_orig)     { this->strength_orig   = strength_orig; };
 		void SetRadiusOrig(int radius_orig)         { this->radius_orig     = radius_orig; };
 		void SetSpeedOrig(int speed_orig)           { this->speed_orig      = speed_orig; };
-		void SetMaxNumItemOrig(int maxNumItem_orig) { this->maxNumItem_orig = maxNumItem_orig; };
                                 
 		int GetStrength()   const { return strength; };
 		int GetRadius()     const { return radius; };
 		int GetSpeed()      const { return speed; };
-		int GetMaxNumItem() const { return maxNumItem; };
               
                 bool CheckIfTargetAlreadyExistInQueue(BaseGameEntity* target) const;
                 void AddTarget(BaseGameEntity*);
                 void RemoveTarget(BaseGameEntity*);
-                
+
+                void RemoveAllTargets();
+                                
 		std::string GetTargetStr() const;
 
 		void UpdateGrabScenarioProgram();
@@ -65,10 +65,8 @@ class GrappleEquipment : public BaseEquipment
       		int speed_orig;
       		int speed_add;
       		int speed; 
-
-      		int maxNumItem_orig;
-      		int maxNumItem_add;
-      		int maxNumItem;
+                
+                int free_strength;
 
                 std::vector<BaseGameEntity*> target_vec;
                     		
@@ -76,7 +74,6 @@ class GrappleEquipment : public BaseEquipment
            	std::string GetStrengthStr();
            	std::string GetRadiusStr();
            	std::string GetSpeedStr();
-           	std::string GetMaxNumItemStr();
                 
                 void SaveDataUniqueGrappleEquipment(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueGrappleEquipment(const boost::property_tree::ptree&);
