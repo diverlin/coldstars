@@ -50,6 +50,7 @@ class BaseItem : public Base
 		void SetFunctionalSlotSubTypeId(int functional_slot_subtype_id) { this->functional_slot_subtype_id = functional_slot_subtype_id; };
 		void SetItemCommonData(const ItemCommonData& data_item) { this->data_item = data_item; };
                 void SetItemSlot(ItemSlot* item_slot)  { this->item_slot = item_slot; };
+                void SetLockTurns(int lock_turns) { this->lock_turns = lock_turns; }
 
                 ItemSlot* GetItemSlot() const { return item_slot; };
                                                 
@@ -61,7 +62,7 @@ class BaseItem : public Base
  
      		void Repair();
 
-		virtual void UpdateInStatic() {};
+		bool UpdateLock();
                 
 		void UpdateInfo();
 			

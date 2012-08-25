@@ -39,8 +39,7 @@ class GrappleEquipment : public BaseEquipment
               
                 bool CheckIfTargetAlreadyExistInQueue(BaseGameEntity* target) const;
                 void AddTarget(BaseGameEntity*);
-                void AddToRemoveQueue(BaseGameEntity*);
-                void ClearRemoveQueue();
+                void RemoveTarget(BaseGameEntity*);
                 
 		std::string GetTargetStr() const;
 
@@ -72,7 +71,6 @@ class GrappleEquipment : public BaseEquipment
       		int maxNumItem;
 
                 std::vector<BaseGameEntity*> target_vec;
-                std::vector<BaseGameEntity*> remove_queue;
                     		
      		void virtual AddUniqueInfo();
            	std::string GetStrengthStr();

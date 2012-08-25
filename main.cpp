@@ -17,9 +17,12 @@
 */
 
 #include "include.hpp"
+#include "pureTest.cpp"
 
 int main()
-{       
+{         
+        //runPureTest();
+            
 	init();  
 
 	TurnTimer turn_timer;
@@ -47,7 +50,7 @@ int main()
 		/* server code start */
 		turn_timer.Update(game_date);
 
-		for (int i = 0; i < Config::Instance().GAMESPEED; i++)  // fake implementation (static ai should not be run several times at once)
+		for (int i=0; i<Config::Instance().GAMESPEED; i++)  // fake implementation (static ai should not be run several times at once)
 		{
 			GalaxyBuilder::Instance().GetGalaxy()->Update(turn_timer.GetTurnTick());
 		}

@@ -202,7 +202,8 @@ class Vehicle : public BaseGameEntity
         	void LaunchingEvent();
         	
 		void UpdateSpecialEffect();
-        	
+        	void UpdateLockedItems();
+                
         	void RenderInfoInSpace(const vec2f&);
         	void RenderInfo(const vec2f&);
         	        	
@@ -244,7 +245,8 @@ class Vehicle : public BaseGameEntity
                 
                 std::vector<ItemSlot*> slot_total_vec;
         	std::vector<ItemSlot*> slot_cargo_vec;
-		        	
+        	std::vector<BaseItem*> locked_item_vec;
+                                
         	// KONTUR RECT 
         	Rect kontur_rect; 
                 TextureOb* textureOb_gui;

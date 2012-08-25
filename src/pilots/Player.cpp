@@ -545,8 +545,7 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
        						}
        						else
        						{
-       							npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddToRemoveQueue(visible_CONTAINER_vec[i]);
-       							npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->ClearRemoveQueue();
+       							npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->RemoveTarget(visible_CONTAINER_vec[i]);
        						}
        					}       						
        				}
