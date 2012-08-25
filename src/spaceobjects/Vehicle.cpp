@@ -309,6 +309,17 @@ void Vehicle::UpdateSpecialAction()
 	}
 }
 
+void Vehicle::UpdateLockedItems()
+{        
+        for (std::vector<BaseItem*>::iterator it = locked_item_vec.begin(); it != locked_item_vec.end(); ++it)
+        {
+                if ((*it)->UpdateLock() == false)
+                {
+                        it = locked_item_vec.erase(it);
+                }
+        }
+}
+                
 bool Vehicle::UpdateFadeInEffect()
 {
 	if (color.a > 0.01)
