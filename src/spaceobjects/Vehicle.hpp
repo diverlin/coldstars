@@ -213,6 +213,7 @@ class Vehicle : public BaseGameEntity
 
 		bool IsArmorFull() const;
 		int GetArmorMiss() const;
+		void IncreaseArmor(int);
 		void BuyArmorAsMuchAsPossible();
 		
 		bool IsFuelFull() const;
