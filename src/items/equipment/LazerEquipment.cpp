@@ -93,7 +93,7 @@ std::string LazerEquipment::GetRadiusStr()
 void LazerEquipment::FireEvent_TRUE()
 { 
     	LazerTraceEffect* _lazer_trace_effect;
-    	if (item_slot->GetOwnerVehicle()->data_korpus.draw_turrels == true)
+    	if (item_slot->GetOwnerVehicle()->GetKorpusData().draw_turrels == true)
     	{
         	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
                                                      	      item_slot->GetTurrel()->GetPoints().GetpCenter(), 

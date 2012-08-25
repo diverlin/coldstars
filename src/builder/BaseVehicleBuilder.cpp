@@ -39,13 +39,13 @@ void BaseVehicleBuilder::CreateKorpusGui(Vehicle* vehicle) const
     	if (vehicle->GetTextureOb()->GetFrameWidth() > vehicle->GetTextureOb()->GetFrameHeight())
     	{
         	kontur_w = 500; 
-    		vehicle->data_korpus.gui_scale = (float)kontur_w/vehicle->GetTextureOb()->GetFrameWidth();
+    		vehicle->GetKorpusData().gui_scale = (float)kontur_w/vehicle->GetTextureOb()->GetFrameWidth();
         	kontur_h = vehicle->GetTextureOb()->GetFrameHeight() * kontur_w / (float)vehicle->GetTextureOb()->GetFrameWidth();
     	}
     	else
     	{
         	kontur_h = 500; 
-    		vehicle->data_korpus.gui_scale = (float)kontur_h/vehicle->GetTextureOb()->GetFrameHeight();
+    		vehicle->GetKorpusData().gui_scale = (float)kontur_h/vehicle->GetTextureOb()->GetFrameHeight();
         	kontur_w = vehicle->GetTextureOb()->GetFrameWidth() * kontur_h / (float)vehicle->GetTextureOb()->GetFrameHeight();
     	}               
 
@@ -60,7 +60,7 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
 	vec2i center(vehicle->GetGuiRect().GetCenter().x, vehicle->GetGuiRect().GetCenter().y);
 
         // WEAPON SLOTS
-        for (unsigned int i=0; i<vehicle->data_korpus.slot_weapon_num; i++)
+        for (unsigned int i=0; i<vehicle->GetKorpusData().slot_weapon_num; i++)
         {
         	ItemSlot* weapon_slot = GetNewItemSlot(ITEMSLOT::WEAPON_ID);
         	rect = Rect( center.x - 3*GUI::ITEMSLOT::WIDTH_FOR_SHIP    + 1.1*i*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
@@ -91,7 +91,7 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
 	vehicle->AddItemSlot(energizer_slot, rect);
     		
     		
-	if (vehicle->data_korpus.slot_grapple_num != 0)
+	if (vehicle->GetKorpusData().slot_grapple_num != 0)
 	{
 		ItemSlot* grapple_slot = GetNewItemSlot(ITEMSLOT::GRAPPLE_ID);
 		rect = Rect(center.x-3*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
@@ -193,7 +193,7 @@ void BaseVehicleBuilder::CreateProtectionComplexTextureDependedStuff(Vehicle* ve
 
 void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
 {
-    	for (unsigned int i = 0; i<vehicle->data_korpus.slot_weapon_num; i++)
+    	for (unsigned int i = 0; i<vehicle->GetKorpusData().slot_weapon_num; i++)
     	{
     		if (getRandBool())
     		{
@@ -241,7 +241,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
         ScanerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
    	vehicle->GetScanerSlot()->InsertItem(ScanerEquipmentBuilder::Instance().GetScanerEquipment()); 
     
-    	if (vehicle->data_korpus.slot_grapple_num != 0) 
+    	if (vehicle->GetKorpusData().slot_grapple_num != 0) 
     	{
     	   	GrappleEquipmentBuilder::Instance().CreateNewGrappleEquipment();
         	GrappleEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);

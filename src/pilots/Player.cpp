@@ -535,7 +535,7 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
       			}
        			if (data_mouse.right_click == true)
    			{
-      				if (npc->GetVehicle()->ableTo.GRAB == true)
+      				if (npc->GetVehicle()->GetAbilitiesStatus().GRAB == true)
       				{
        					if (npc->GetVehicle()->GetGrappleSlot()->CheckTarget(visible_CONTAINER_vec[i]) == true)
        					{
@@ -669,13 +669,13 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
                		{
                			if (control_flags.GetGrabModeFlag() == true)
                			{
-					if (npc->GetVehicle()->ableTo.GRAB == true)
-	       				{
-	       					if (npc->GetVehicle()->GetGrappleSlot()->CheckTarget(visible_SHIP_vec[i]) == true)
-	       					{
-	       						npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(visible_SHIP_vec[i]);
-	       					}					
-	       				}
+					//if (npc->GetVehicle()->ableTo.GRAB == true)
+	       				//{
+	       					//if (npc->GetVehicle()->GetGrappleSlot()->CheckTarget(visible_SHIP_vec[i]) == true)
+	       					//{
+	       						//npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(visible_SHIP_vec[i]);
+	       					//}					
+	       				//}
                 		}
                 		else
                 		{
