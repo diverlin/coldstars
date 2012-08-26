@@ -1,19 +1,19 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+        Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+        
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License
+        as published by the Free Software Foundation; either version 2
+        of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+        
+        You should have received a copy of the GNU General Public License
+        along with this program; if not, write to the Free Software
+        Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #ifndef PLAYER_H
@@ -37,84 +37,78 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "../effects/lazerTrace.hpp"
 
-class ControlFlags
+class Show
 {
 	private:
-		bool scan_mode;
-		bool grab_mode;
-
-		bool show_galaxymap;
-		bool show_all_path;
-		bool show_all_shipsinfo;
-		bool show_planets_info;	
-		bool show_all_orbits;
-		bool show_radar_range;
+		bool gui_scan;
+		bool gui_galaxymap;
+                bool gui_radar;
+                
+		bool all_path;
+                bool all_orbits;
+                
+                bool info_ships;
+		bool info_planets;
+                
+		bool range_radar;
+                bool range_grapple;
 	
 	public:
-		ControlFlags():
-		scan_mode(false),
-		grab_mode(false),
-		show_galaxymap(false),
-		show_all_path(false),
-		show_all_shipsinfo(false),
-		show_planets_info(false),
-		show_all_orbits(false),
-		show_radar_range(false)
-		{}
-		~ControlFlags() {};
-
-		//void SetShowAllOrbit(bool show_all_orbit)     { this->show_all_orbit = show_all_orbit; }
-		//void SetShowAllPath(bool show_all_path)       { this->show_all_path = show_all_path; }
-		//void SetShowRadarRange(bool show_radar_range) { this->show_radar_range = show_radar_range; }
-		//void SetShowGrappleRange(bool show_grapple_range)  { this->show_grapple_range = show_grapple_range; }
-		void SetShowGalaxyMapFlag(bool show_galaxymap) { this->show_galaxymap = show_galaxymap; };
-		//void SetShowAllShipsInfo(bool show_all_shipsinfo) { this->show_all_shipsinfo = show_all_shipsinfo; };
-
-		bool GetShowAllOrbitsFlag()     const { return show_all_orbits; };
-		bool GetShowAllPathFlag()      const { return show_all_path; };
-
-		bool GetShowGalaxyMapFlag() const { return show_galaxymap; };
-		bool GetShowAllShipsInfoFlag() const { return show_all_shipsinfo; };
-		bool GetShowRadarRangeFlag() const { return show_radar_range; };
-		bool GetGrabModeFlag() const { return grab_mode; };
+		Show():
+		gui_scan(false),
+		gui_galaxymap(false),    
+                gui_radar(false),            
+		all_path(false),
+                all_orbits(false),                
+                info_ships(false),
+		info_planets(false),                
+		range_radar(false),
+                range_grapple(false)
+		{};
+                
+		~Show() {};
 		
-		//bool GetShowRadarRange()   const { return show_radar_range; }
-		//bool GetShowGrappleRange() const { return show_grapple_range; }        
-				
-		//void InverseShowGalaxyMapFlag() 
-		//{
-			//if (show_galaxymap == true) 	{ show_galaxymap = false; }
-			//else 				{ show_galaxymap = true; };			
-		//};
+		void SetGuiGalaxyMap(bool gui_galaxymap) { this->gui_galaxymap = gui_galaxymap; };
+		void SetGuiRadar(bool gui_radar) { this->gui_radar = gui_radar; };
+                		
+		bool GetAllOrbits()    const { return all_orbits; };
+		bool GetAllPath()      const { return all_path; };
 
-		void InverseShowAllPathFlag() 
+		bool GetGuiGalaxyMap() const { return gui_galaxymap; };
+		bool GetGuiRadar() const { return gui_radar; };
+                
+		bool GetInfoShips() const { return info_ships; };
+		bool GetRangeRadar() const { return range_radar; };
+		bool GetRangeGrapple() const { return range_grapple; };
+		
+		void InverseAllPath() 
 		{
-			if (show_all_path == true) 	{ show_all_path = false; }
-			else 				{ show_all_path = true; };			
+			if (all_path == true) 	{ all_path = false; }
+			else 			{ all_path = true; };
 		};
 		
-		void InverseShowAllOrbitsFlag() 
+		void InverseAllOrbits() 
 		{
-			if (show_all_orbits == true) 	{ show_all_orbits = false; }
-			else 				{ show_all_orbits = true; };			
+			if (all_orbits == true) { all_orbits = false; }
+			else 			{ all_orbits = true; };
 		};
 		
-		void InverseShowRadarRangeFlag() 
+		void InverseRangeRadar() 
 		{
-			if (show_radar_range == true) 	{ show_radar_range = false; }
-			else 				{ show_radar_range = true; };			
+			if (range_radar == true) { range_radar = false; }
+			else 			 { range_radar = true; };			
 		};
 		
-		void InverseGrabModeFlag() 
+		void InverseRangeGrapple() 
 		{
-			if (grab_mode == true) 	{ grab_mode = false; }
-			else 				{ grab_mode = true; };			
+			if (range_grapple == true) { range_grapple = false; }
+			else 		  { range_grapple = true; };
 		};
 };
 
 struct UnresolvedDataUniquePlayer
 {
-	int npc_id;	
+	int npc_id;
 	vec2f screen_pos;
 };
 
@@ -125,8 +119,8 @@ class Player : public Base
     		Player(int);
      		~Player();
 
-		ControlFlags& GetControlFlags() 	{ return control_flags; };
-		WeaponSelector& GetWeaponsSelector()	{ return weapons_selector; };
+		Show& GetShow() { return show; };
+		WeaponSelector& GetWeaponsSelector() { return weapons_selector; };
 		GuiManager& GetGuiManager() { return gui_manager; };
           	
 		Npc* GetNpc() const { return npc; }
@@ -164,7 +158,7 @@ class Player : public Base
      	     	
      	     	Cursor cursor;
 
-     	     	ControlFlags control_flags;  
+     	     	Show show;  
      		WeaponSelector weapons_selector;     		     	     	
      	     	
      	     	// VISIBLE ENTITY LIST

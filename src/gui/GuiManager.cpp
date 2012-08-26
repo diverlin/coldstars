@@ -1,19 +1,19 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+        Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+        
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License
+        as published by the Free Software Foundation; either version 2
+        of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+        
+        You should have received a copy of the GNU General Public License
+        along with this program; if not, write to the Free Software
+        Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
@@ -98,60 +98,80 @@ void GuiManager::RenderScanVehicle(const MouseData& data_mouse, Vehicle* vehicle
 bool GuiManager::RunSession(const MouseData& data_mouse)
 {
      	bool interaction = false;
-     		
+		
      	player->GetCursor().Update(data_mouse); 
      								
 	switch(player->GetNpc()->GetVehicle()->GetPlaceTypeId())
 	{
 		case ENTITY::SPACE_ID:
 		{
+                        Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget(); 
+                            
+                        bool show_gui_galaxymap = player->GetShow().GetGuiGalaxyMap();
+                                                                                
+                        bool show_gui_scan = false;
+                        if ( (scan_vehicle != NULL) and (show_gui_galaxymap == false) )
+                        {
+                                show_gui_scan = true;
+                        }
+                        
+                        bool show_gui_radar = false;
+                        if ( (show_gui_scan == false) and (show_gui_galaxymap == false) )
+                        {
+                                show_gui_radar = true;  
+                        }             
+             
 			gui_vehicle.SetOffset(GUI_VEHICLE_INSPACE_OFFSET);
 			gui_skill.SetOffset(GUI_SKILL_INSPACE_OFFSET);
 		
 		       	UserInput::Instance().UpdateInSpace(player, *this);
-		       				
-			Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget(); 
-						        				
+
 			//update
-			if (player->GetControlFlags().GetShowGalaxyMapFlag() == true)  
+                        interaction = gui_space.UpdateButtonsMouseInteraction(data_mouse);				
+                        gui_space.ButtonsAction(player);   
+                                                
+			if (show_gui_galaxymap == true)  
 			{
-				interaction = gui_map.UpdateMouseInteraction(data_mouse, player->GetNpc()->GetStarSystem()->GetGalaxy()); 	
-			}
-			else if (scan_vehicle != NULL )
+                                if (interaction == false)
+                                {
+                                        interaction = gui_map.UpdateMouseInteraction(data_mouse, player->GetNpc()->GetStarSystem()->GetGalaxy()); 	
+                                }
+                        }
+			
+                        if (show_gui_scan == true)
 			{				
 				interaction = UpdateMouseInteractionWithScanVehicle(data_mouse, scan_vehicle);
 			}
-
-			if (interaction == false)
-			{
-				interaction = gui_space.UpdateButtonsMouseInteraction(data_mouse);
-				if (interaction == false)
-				{
-					interaction = gui_radar.UpdateButtonsMouseInteraction(data_mouse);
-					if (interaction == false)
-					{
-						interaction = gui_radar.UpdateMouseInteraction(data_mouse);
-					}
-				}
-			}
-			
-			gui_space.ButtonsAction(player);    
-			gui_radar.ButtonsAction(player);
-			gui_radar.Update();
+                        
+                        if (show_gui_radar == true)
+                        {
+                                gui_radar.Update();
+                                
+                                if (interaction == false)
+                                {
+                                        interaction = gui_radar.UpdateButtonsMouseInteraction(data_mouse);
+                                        gui_radar.ButtonsAction(player);
+                                        if (interaction == false)
+                                        {
+                                                interaction = gui_radar.UpdateMouseInteraction(data_mouse);
+                                        }
+                                }
+                        }
 					
 			//render
 			resetRenderTransformation();
 			enable_BLEND();    
-				if (player->GetControlFlags().GetShowGalaxyMapFlag() == false)  
+				if (show_gui_radar == true)  
 				{
 					gui_radar.Render();
 				}
 				
-				if (player->GetControlFlags().GetShowGalaxyMapFlag() == true)  
-				{					   
+				if (show_gui_galaxymap == true)  
+				{
      					gui_map.Render(player->GetNpc()->GetStarSystem()->GetGalaxy());    
 				}
-				else if (scan_vehicle != NULL )
+                                
+				if (show_gui_scan == true)
 				{
 					RenderScanVehicle(data_mouse, scan_vehicle); 				                 
 				}

@@ -107,7 +107,7 @@ void Satellite::RenderInSpace() const
 		//renderDriveTrail();
     	//}
     	
-    	if (ableTo.PROTECT == true)
+        if (protection_complex->GetProtectorSlot()->GetEquiped() == true)
     	{
         	RenderShieldEffect(1.0 - color.a); 
         }

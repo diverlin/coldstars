@@ -59,10 +59,17 @@ class BaseItem : public Base
 		unsigned int GetCondition() 	const { return condition; };
 		int GetPrice()              	const { return price; };
 		int GetFunctionalSlotSubTypeId() const { return functional_slot_subtype_id; };
- 
-     		void Repair();
+
+                bool GetDamaged()       const { return is_DAMAGED; }
+                int GetLockTurns()      const { return lock_turns; }
+
+                
+                void Deterioration(); 
+                void DamageEvent();                 
+                void RepairEvent();
 
 		bool UpdateLock();
+                virtual void UpdateVehicleAbility(Vehicle*, int singn = 1) {};
                 
 		void UpdateInfo();
 			
@@ -90,9 +97,7 @@ class BaseItem : public Base
                 InfoTable info;  
      		
                 UnresolvedDataUniqueBaseItem data_unresolved_BaseItem;
-                
-                void Deterioration(); 
-                     		
+
      		virtual void AddCommonInfo()=0;
  		virtual void AddUniqueInfo()=0;   
                 

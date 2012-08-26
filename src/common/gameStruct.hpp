@@ -94,25 +94,6 @@ struct NeedsToDo
 	bool SELL;
 };
 
-struct AbilitiesStatus
-{
-	/* this structure shows what feature are avaliable for ship */
-	AbilitiesStatus();
-
-	bool RADAR;
-	bool DRIVE;
-	bool HJUMP;
-	bool ENERGIZE;
-	bool PROTECT;
-	bool REPAIR;
-	bool FREEZE;
-	bool GRAB;
-	bool SCAN;
-	//bool FIRE;
-};
-
-
-
 struct LifeData
 {
 	bool is_alive;

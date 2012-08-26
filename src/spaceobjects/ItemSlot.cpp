@@ -1,28 +1,28 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+        Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+        
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License
+        as published by the Free Software Foundation; either version 2
+        of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+        
+        You should have received a copy of the GNU General Public License
+        along with this program; if not, write to the Free Software
+        Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
 ItemSlot::ItemSlot(int id)
 {
 	/* 
-        The class provides implementation to insert/hold/remove all game items (equipments, modules and so on)
-        Depending on slot subtype there is the rule what items can be used with slot (for example 
-        Lazer weapon item cannot be inserted to drive slot and so on).
+                The class provides implementation to insert/hold/remove all game items (equipments, modules and so on)
+                Depending on slot subtype there is the rule what items can be used with slot (for example 
+                Lazer weapon item cannot be inserted to drive slot and so on).
 	*/
 
 	data_id.id         = id;
@@ -61,13 +61,18 @@ bool ItemSlot::InsertItem(BaseItem* item)
 	}
 
 	if (data_id.subtype_id == item->GetFunctionalSlotSubTypeId())
-	{        
+	{       
+                //this means slot is functional, and this means it's defenately is part of vehicle
+                                 
 		this->item = item;
 		is_EQUIPED = true; 
 		item->SetItemSlot(this);
 	
-		UpdateOwnerAbilities();
-		return true;
+                if ( (item->GetDamaged() == false) and (item->GetLockTurns() == 0) )
+                {
+                        item->UpdateVehicleAbility(GetOwnerVehicle());
+		}
+                return true;
 	}
 
 	return false;
@@ -75,44 +80,30 @@ bool ItemSlot::InsertItem(BaseItem* item)
 
 void ItemSlot::RemoveItem()
 {
-        item = NULL;
-    	is_EQUIPED = false;  
-        
         if (data_id.subtype_id != ITEMSLOT::CARGO_ID) 
 	{    
-	       	UpdateOwnerAbilities();
+                //this means slot is functional, and this means it's defenately is part of vehicle
+                if ( (item->GetDamaged() == false) and (item->GetLockTurns() == 0) )
+                {
+                        item->UpdateVehicleAbility(GetOwnerVehicle(), -1);
+                }
 	}
+        
+        item = NULL;
+    	is_EQUIPED = false;  
 }
 
-void ItemSlot::UpdateOwnerAbilities()
-{
-	if (owner->GetTypeId() == ENTITY::VEHICLE_ID)
-	{ 	
-		switch(data_id.subtype_id)
-		{
-			case ITEMSLOT::WEAPON_ID: 	{ ((Vehicle*)owner)->UpdateFireAbility(); break; }
-			case ITEMSLOT::SCANER_ID: 	{ ((Vehicle*)owner)->UpdateScanAbility(); break; }
-			case ITEMSLOT::BAK_ID:     	{
-						  		((Vehicle*)owner)->UpdateDriveAbility();
-								((Vehicle*)owner)->UpdateJumpAbility(); 
-						  		break;
-							}
-
-			case ITEMSLOT::DRIVE_ID:   	{
-					  			((Vehicle*)owner)->UpdateDriveAbility();
-								((Vehicle*)owner)->UpdateJumpAbility(); 
-					  			break;
-							}
-				
-			case ITEMSLOT::DROID_ID: 	{ ((Vehicle*)owner)->UpdateRepairAbility(); break; }
-			case ITEMSLOT::ENERGIZER_ID: 	{ ((Vehicle*)owner)->UpdateEnergyAbility(); break; }
-			case ITEMSLOT::FREEZER_ID: 	{ ((Vehicle*)owner)->UpdateFreezeAbility(); break; }
-			case ITEMSLOT::GRAPPLE_ID: 	{ ((Vehicle*)owner)->UpdateGrabAbility(); break; }
-			case ITEMSLOT::PROTECTOR_ID: 	{ ((Vehicle*)owner)->UpdateProtectionAbility(); break; }
-			case ITEMSLOT::RADAR_ID: 	{ ((Vehicle*)owner)->UpdateRadarAbility(); break; }
-		}
-	}
-}
+//void ItemSlot::UpdateOwnerAbilities()
+//{
+	//if (owner->GetTypeId() == ENTITY::VEHICLE_ID)
+	//{ 	
+		//switch(data_id.subtype_id)
+		//{
+			//case ITEMSLOT::WEAPON_ID: 	{ ((Vehicle*)owner)->UpdateFireAbility(); break; }
+			//case ITEMSLOT::PROTECTOR_ID: 	{ ((Vehicle*)owner)->UpdateProtectionAbility(); break; }
+		//}
+	//}
+//}
 
 void ItemSlot::Render() const
 {

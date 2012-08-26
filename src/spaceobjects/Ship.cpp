@@ -45,7 +45,7 @@ void Ship::UpdateInfo()
     	info.addNameStr("mass:");   		info.addValueStr( int2str(mass) );
     	info.addNameStr("energy:");            	info.addValueStr( int2str(propetries.energy) );
 	info.addNameStr("temp.:");       	info.addValueStr( int2str(data_korpus.temperature) );
-        info.addNameStr("radius:");    		info.addValueStr( int2str(propetries.radius) );
+        info.addNameStr("radar:");    		info.addValueStr( int2str(propetries.radar) );
     	info.addNameStr("protect:");        	info.addValueStr( returnProtectionStr() );
 	info.addNameStr("speed:");       	info.addValueStr( boost::lexical_cast<std::string>(propetries.speed) );
 
@@ -68,12 +68,12 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 		points.Update();   
 		weapon_complex->Fire(time, owner_npc->GetSkill().GetAttack(), show_effect);
 
-    		if (ableTo.DRIVE == true) 
+    		if (propetries.speed > 0) 
     		{ 
        			drive_complex->UpdatePosition();
     		}
     
-    		if (ableTo.GRAB == true)
+    		if (propetries.grab_radius > 0)
     		{
     			UpdateGrappleMicroProgram();
     		}
@@ -89,7 +89,7 @@ void Ship::UpdateRenderStuff()
 void Ship::RenderInSpace() const
 {   
 	setColor4f(color);
-        if (ableTo.GRAB == true)
+        if (propetries.grab_radius > 0)
         {
                 RenderGrabTrail();
         }
@@ -101,12 +101,12 @@ void Ship::RenderInSpace() const
         	weapon_complex->RenderTurrels();
         }
 
-    	if (ableTo.DRIVE == true)
+    	if (propetries.speed > 0)
     	{
 		RenderDriveEffect(1.0 - color.a);
     	}
     	
-    	if (ableTo.PROTECT == true)
+    	if (protection_complex->GetProtectorSlot()->GetEquiped() == true)
     	{
         	RenderShieldEffect(1.0 - color.a); 
         }
