@@ -46,6 +46,13 @@ void DriveEquipment::UpdatePropetries()
      	hyper = hyper_orig + hyper_add;
 }
 
+/* virtual */
+void DriveEquipment::UpdateVehicleAbility(Vehicle* vehicle, int sign)
+{
+        vehicle->GetPropetries().speed += sign*speed;
+        vehicle->GetPropetries().hyper += sign*hyper;        
+}
+                
 void DriveEquipment::CountPrice()
 {
      	float speed_rate         = (float)speed_orig / EQUIPMENT::DRIVE::SPEED_MIN;

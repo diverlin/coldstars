@@ -1,19 +1,19 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+        Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+        
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License
+        as published by the Free Software Foundation; either version 2
+        of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+        
+        You should have received a copy of the GNU General Public License
+        along with this program; if not, write to the Free Software
+        Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
@@ -78,14 +78,18 @@ struct VehiclePropetries
 	int free_space;
 	
 	int protection;
-	int radius;
+	int radar;
 	int speed;  // depends on mass and drive
 
-	int hyper;  // depends on drive and bak
+	int hyper;  // depends on drive
+	int fuel;    // depends on bak
 	int repair; // depends on droid
 	int freeze; // depends on freezer
 	int scan;   // depends on scaner
 
+        int grab_radius;
+        int grab_strength;
+        
 	int energy;
 	int temperature;
 		
@@ -97,12 +101,16 @@ struct VehiclePropetries
 	VehiclePropetries():
 	free_space(0),
 	protection(0),
-        radius(0),
+        radar(VISIBLE_DISTANCE_WITHOUT_RADAR),
         speed(0),
         hyper(0),
+        fuel(0),
         repair(0),
         freeze(0),
-        scan(0),        
+        scan(0),    
+        grab_radius(0),
+        grab_strength(0),
+            
         energy(0),
         temperature(0),
         average_damage(0),
@@ -129,19 +137,19 @@ class Vehicle : public BaseGameEntity
                 void SetWeaponComplex(WeaponComplex* weapon_complex) { this->weapon_complex = weapon_complex; };
                 void SetDriveComplex(DriveComplex* drive_complex)    { this->drive_complex  = drive_complex; };
 		void SetProtectionComplex(ProtectionComplex* protection_complex) { this->protection_complex = protection_complex; };
-                                
-                void SetKorpusData(VehicleKorpusData data_korpus) { this->data_korpus = data_korpus; };
+
                 void SetGuiTextureOb(TextureOb* textureOb_gui) { this->textureOb_gui = textureOb_gui; };
         	void SetGuiRect(Rect rect) { kontur_rect = rect; };
         	
         	void SetColor(Color4f color) { this->color = color; }
         	void SetLand(BaseLand* land) { this->land = land; };
-        	        		
+        	        
+                void SetKorpusData(VehicleKorpusData);
+                        		
         	BaseLand* GetLand() const { return land; };
         	int GetSpecialActionId() const { return special_action_id; };
         	
-        	const VehiclePropetries& GetPropetries() const { return propetries; };
-        	const AbilitiesStatus& GetAbilitiesStatus() const { return ableTo; };
+        	VehiclePropetries& GetPropetries() { return propetries; };
                 VehicleKorpusData& GetKorpusData() { return data_korpus; };
                 
                 			
@@ -150,7 +158,6 @@ class Vehicle : public BaseGameEntity
                 bool UnpackContainerItemToCargoSlot(Container*);
                 
                 int GetFreeSpace() const { return propetries.free_space; };
-                float GetVisionRadius() const { return propetries.radius; };
 
                 void BindOwnerNpc(Npc*);
 		bool IsObjectWithinRadarRange(BaseGameEntity*) const;
@@ -187,15 +194,6 @@ class Vehicle : public BaseGameEntity
         	void UpdateAllPropertiesAndAbilities();
              		void RecalculateMass();
              		void UpdateFireAbility();
-             		void UpdateRadarAbility();
-             		void UpdateDriveAbility();
-             		void UpdateJumpAbility();
-             		void UpdateEnergyAbility();
-             		void UpdateProtectionAbility();
-             		void UpdateRepairAbility();
-             		void UpdateFreezeAbility();
-             		void UpdateGrabAbility();
-             		void UpdateScanAbility();
 
         	void HyperJumpEvent();
         	void DockingEvent();
@@ -225,7 +223,6 @@ class Vehicle : public BaseGameEntity
 		int special_action_id;
 	
 	        VehiclePropetries propetries;
-        	AbilitiesStatus ableTo;
                 VehicleKorpusData data_korpus;
                 
         	WeaponComplex*     weapon_complex;
@@ -252,7 +249,6 @@ class Vehicle : public BaseGameEntity
                 TextureOb* textureOb_gui;
                 //                
                 
-                   	     	
    	     	BaseLand* land;
    	     	
                 Color4f color;

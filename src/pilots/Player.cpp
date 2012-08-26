@@ -1,19 +1,19 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+        Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+        
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License
+        as published by the Free Software Foundation; either version 2
+        of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+        
+        You should have received a copy of the GNU General Public License
+        along with this program; if not, write to the Free Software
+        Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "../config/config.hpp"
@@ -459,12 +459,12 @@ void Player::RenderInSpace(bool turn_ended, bool forceDraw_orbits, bool forceDra
        			npc->GetVehicle()->GetWeaponComplex()->RenderWeaponsRange();
        			npc->GetVehicle()->GetWeaponComplex()->RenderWeaponIcons(); 
        	
-        		if (control_flags.GetShowRadarRangeFlag() == true)
+        		if (show.GetRangeRadar() == true)
         		{
         			npc->GetVehicle()->RenderRadarRange();
         		}
 
-        		if (control_flags.GetGrabModeFlag() == true)
+        		if (show.GetRangeGrapple() == true)
         		{
         			npc->GetVehicle()->RenderGrappleRange();
         		}
@@ -535,7 +535,7 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
       			}
        			if (data_mouse.right_click == true)
    			{
-      				if (npc->GetVehicle()->GetAbilitiesStatus().GRAB == true)
+      				if (npc->GetVehicle()->GetPropetries().grab_radius > 0)
       				{
        					if (npc->GetVehicle()->GetGrappleSlot()->CheckTarget(visible_CONTAINER_vec[i]) == true)
        					{
@@ -584,7 +584,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
 
                		if (data_mouse.right_click == true)
                		{
-               			if (control_flags.GetGrabModeFlag() == true)
+               			if (show.GetRangeGrapple() == true)
                			{
        					//if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
        					//{
@@ -666,7 +666,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 
                		if (data_mouse.right_click == true)
                		{
-               			if (control_flags.GetGrabModeFlag() == true)
+               			if (show.GetRangeGrapple() == true)
                			{
 					//if (npc->GetVehicle()->ableTo.GRAB == true)
 	       				//{
@@ -733,7 +733,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
 
                		if (data_mouse.right_click == true)
                		{
-               			if (control_flags.GetGrabModeFlag() == true)
+               			if (show.GetRangeGrapple() == true)
                			{
 					//if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
 					//{
@@ -844,7 +844,7 @@ void Player::SessionInSpace(const TurnTimer& turn_timer)
 		npc->GetStarSystem()->FindRadarVisibleEntities_c(this);
 	}
 	
-	RenderInSpace(turn_timer.GetTurnEnded(), control_flags.GetShowAllOrbitsFlag(), control_flags.GetShowAllPathFlag()); 
+	RenderInSpace(turn_timer.GetTurnEnded(), show.GetAllOrbits(), show.GetAllPath()); 
     	     	
 	bool interaction_with_gui = gui_manager.RunSession(cursor.GetMouseData()); 
 
@@ -852,7 +852,7 @@ void Player::SessionInSpace(const TurnTimer& turn_timer)
 	{    	
 		if (turn_timer.GetTurnEnded() == true)  
 		{
-			if ( (npc->GetScanTarget() == NULL) && (control_flags.GetShowGalaxyMapFlag() == false) )
+			if ( (npc->GetScanTarget() == NULL) && (show.GetGuiGalaxyMap() == false) )
 			{
 				MouseInteractionInSpace(cursor.GetMouseData());  
 			}

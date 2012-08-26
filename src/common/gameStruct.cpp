@@ -65,25 +65,6 @@ NeedsToDo :: NeedsToDo()
    	SELL        = false;
 }
 
-
-AbilitiesStatus :: AbilitiesStatus()
-{
-        RADAR    = false;
-   	DRIVE    = false;
-   	HJUMP    = false;
-   	ENERGIZE = false;
-   	PROTECT  = false;
-   	REPAIR   = false;
-   	FREEZE   = false;
-   	GRAB     = false;
-   	SCAN     = false;
-   	//FIRE     = false;
-}
-
-
-
-
-
 IdData :: IdData()
 {
 	id            = NONE_ID;

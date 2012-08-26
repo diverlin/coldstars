@@ -33,7 +33,7 @@ GuiMap::~GuiMap()
 
 bool GuiMap::UpdateMouseInteraction(const MouseData& data_mouse, Galaxy* galaxy)
 {
-     	if (player->GetNpc()->GetVehicle()->GetAbilitiesStatus().HJUMP == true)
+     	//if (player->GetNpc()->GetVehicle()->GetAbilitiesStatus().HJUMP == true)
      	{  
         	for (unsigned int i=0; i<galaxy->STARSYSTEM_vec.size(); i++)
         	{

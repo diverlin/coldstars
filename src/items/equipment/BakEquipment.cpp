@@ -53,6 +53,11 @@ void BakEquipment::UpdatePropetries()
     	fuel_max = fuel_max_orig + fuel_max_add;    	
 }
 
+void BakEquipment::UpdateVehicleAbility(Vehicle* vehicle, int sign)
+{
+        vehicle->GetPropetries().fuel += sign*fuel;        
+}
+
 void BakEquipment::CountPrice()
 {
     	float fuel_rate          = (float)fuel_max_orig / EQUIPMENT::BAK::FUEL_MIN;

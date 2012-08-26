@@ -33,9 +33,11 @@ class DriveEquipment : public BaseEquipment
 		int GetSpeed() const { return speed; };
 		int GetHyper() const { return hyper; };
       		
-      		void CountPrice();
       		virtual void UpdatePropetries();
-      		      		
+                virtual void UpdateVehicleAbility(Vehicle*, int sign = 1);
+
+      		void CountPrice();
+                      		      		
       		virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);
 		virtual void ResolveData();

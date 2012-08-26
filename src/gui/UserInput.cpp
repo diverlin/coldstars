@@ -124,25 +124,25 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 		
 		case sf::Key::G:   // Grapple
 		{
-			player->GetControlFlags().InverseGrabModeFlag();
+			player->GetShow().InverseRangeGrapple();
 			break;
 		}
 
 		case sf::Key::R: // RADAR
 		{
-			player->GetControlFlags().InverseShowRadarRangeFlag();
+			player->GetShow().InverseRangeRadar();
 			break;
 		}
 
 		case sf::Key::O: // Orbits
 		{
-			player->GetControlFlags().InverseShowAllOrbitsFlag();
+			player->GetShow().InverseAllOrbits();
 			break;
 		}
 
 		case sf::Key::P: // Path
 		{
-			player->GetControlFlags().InverseShowAllPathFlag();
+			player->GetShow().InverseAllPath();
 			break;
 		}
 

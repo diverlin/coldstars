@@ -131,7 +131,7 @@ void GuiRadar::AddIfWithinRadarRange(BaseGameEntity* object, const Vehicle& vehi
     		
 void GuiRadar::Render() const
 {
-	float range_diameter = 2*player->GetNpc()->GetVehicle()->GetPropetries().radius;
+	float range_diameter = 2*player->GetNpc()->GetVehicle()->GetPropetries().radar;
 	Rect range_rect(0, 0, scale*range_diameter, scale*range_diameter);
 	range_rect.SetCenter(rect.GetCenter() + player->GetNpc()->GetVehicle()->GetPoints().GetCenter() * scale);
 	

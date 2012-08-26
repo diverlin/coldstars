@@ -63,7 +63,7 @@ void GuiSpace::ButtonsAction(Player* player) const
        		{
        			case GUI::BUTTON::GALAXYMAP_ID:   
        			{ 
-       				player->GetControlFlags().SetShowGalaxyMapFlag(button->GetPressed()); 
+       				player->GetShow().SetGuiGalaxyMap(button->GetPressed()); 
        				break; 
        			}   
 
