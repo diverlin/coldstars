@@ -31,7 +31,7 @@ class ProtectorEquipment  : public BaseEquipment
 		int GetProtection() const { return protection; };
       		
       		virtual void UpdatePropetries();
-                virtual void UpdateVehicleAbility(Vehicle*, int sign = 1);
+                virtual void UpdateVehiclePropetries(Vehicle*, int sign = 1);
       		
                 void CountPrice();
                                 

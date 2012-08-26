@@ -43,7 +43,7 @@ void RadarEquipment::UpdatePropetries()
 }
 
 /* virtual */
-void RadarEquipment::UpdateVehicleAbility(Vehicle* vehicle, int sign)
+void RadarEquipment::UpdateVehiclePropetries(Vehicle* vehicle, int sign)
 {
         vehicle->GetPropetries().radar += sign*radius;     
 }

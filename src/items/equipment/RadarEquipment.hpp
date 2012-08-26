@@ -31,7 +31,7 @@ class RadarEquipment : public BaseEquipment
       		int GetRadius() const { return radius; };
 
       		virtual void UpdatePropetries();
-                virtual void UpdateVehicleAbility(Vehicle*, int);
+                virtual void UpdateVehiclePropetries(Vehicle*, int);
       		
                 void CountPrice();
       		   

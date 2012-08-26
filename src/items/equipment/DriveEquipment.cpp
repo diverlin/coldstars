@@ -47,7 +47,7 @@ void DriveEquipment::UpdatePropetries()
 }
 
 /* virtual */
-void DriveEquipment::UpdateVehicleAbility(Vehicle* vehicle, int sign)
+void DriveEquipment::UpdateVehiclePropetries(Vehicle* vehicle, int sign)
 {
         vehicle->GetPropetries().speed += sign*speed;
         vehicle->GetPropetries().hyper += sign*hyper;        

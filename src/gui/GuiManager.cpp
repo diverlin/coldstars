@@ -56,8 +56,8 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
 	bool interaction = false;        
 	if (allow_full_control == true)
 	{
-		interaction = gui_vehicle.UpdateMouseInteraction(data_mouse, scan_vehicle);
-		if (scan_vehicle->GetOwnerNpc() != NULL)
+		interaction = gui_vehicle.UpdateMouseInteractionInSpace(data_mouse, scan_vehicle);
+		if (interaction == false)
 		{
 			interaction = gui_skill.UpdateButtonsMouseInteraction(data_mouse);
 			gui_skill.ButtonsAction(scan_vehicle->GetOwnerNpc()->GetSkill());
@@ -107,20 +107,20 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 		{
                         Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget(); 
                             
-                        bool show_gui_galaxymap = player->GetShow().GetGuiGalaxyMap();
-                                                                                
+                        // configure which part of gui should be managed/drawn
+                        bool show_gui_galaxymap = player->GetShow().GetGuiGalaxyMap();                                                                                
                         bool show_gui_scan = false;
                         if ( (scan_vehicle != NULL) and (show_gui_galaxymap == false) )
                         {
                                 show_gui_scan = true;
-                        }
-                        
+                        }                        
                         bool show_gui_radar = false;
                         if ( (show_gui_scan == false) and (show_gui_galaxymap == false) )
                         {
                                 show_gui_radar = true;  
                         }             
-             
+                        //
+                        
 			gui_vehicle.SetOffset(GUI_VEHICLE_INSPACE_OFFSET);
 			gui_skill.SetOffset(GUI_SKILL_INSPACE_OFFSET);
 		
@@ -269,7 +269,7 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 						interaction = gui_store.UpdateMouseInteraction(data_mouse, store);
 					    	if (interaction == false)
 					    	{
-					    		interaction = gui_vehicle.UpdateMouseInteraction(data_mouse, vehicle, store);
+					    		interaction = gui_vehicle.UpdateMouseInteractionInStore(data_mouse, vehicle, store);
 					    	}
 					}
 								        	

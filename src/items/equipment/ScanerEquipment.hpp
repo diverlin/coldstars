@@ -31,7 +31,7 @@ class ScanerEquipment : public BaseEquipment
 		int GetScan() const { return scan; };
    		
     		virtual void UpdatePropetries();
-                virtual void UpdateVehicleAbility(Vehicle*, int sign = 1);
+                virtual void UpdateVehiclePropetries(Vehicle*, int sign = 1);
                 
     		void CountPrice();
                     		

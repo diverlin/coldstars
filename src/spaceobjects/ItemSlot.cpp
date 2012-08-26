@@ -70,7 +70,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 	
                 if ( (item->GetDamaged() == false) and (item->GetLockTurns() == 0) )
                 {
-                        item->UpdateVehicleAbility(GetOwnerVehicle());
+                        item->UpdateVehiclePropetries(GetOwnerVehicle());
 		}
                 return true;
 	}
@@ -85,7 +85,7 @@ void ItemSlot::RemoveItem()
                 //this means slot is functional, and this means it's defenately is part of vehicle
                 if ( (item->GetDamaged() == false) and (item->GetLockTurns() == 0) )
                 {
-                        item->UpdateVehicleAbility(GetOwnerVehicle(), -1);
+                        item->UpdateVehiclePropetries(GetOwnerVehicle(), -1);
                 }
 	}
         
@@ -195,23 +195,21 @@ bool ItemSlot::SwapItemWith(ItemSlot* _slot)
        		{
 			if (((BaseEquipment*)_slot->GetItem())->InsertModule((BaseModule*)item) == true)  
 			{ 
-                                std::cout<<"__1"<<item->GetTypeId()<<_slot->GetItem()->GetTypeId()<<std::endl;
 				RemoveItem(); 
 				
 				return true;
         		}
        		}
        		
-       		if ( (item->GetTypeId() == TYPE::EQUIPMENT_ID) and (_slot->GetItem()->GetTypeId() == TYPE::MODULE_ID) )
-       		{
-			 if (((BaseEquipment*)item)->InsertModule((BaseModule*)_slot->GetItem()) == true)  
-			 { 
-                                std::cout<<"__2"<<item->GetTypeId()<<_slot->GetItem()->GetTypeId()<<std::endl;
-			 	_slot->RemoveItem(); 
+       		//if ( (item->GetTypeId() == TYPE::EQUIPMENT_ID) and (_slot->GetItem()->GetTypeId() == TYPE::MODULE_ID) )
+       		//{
+			 //if (((BaseEquipment*)item)->InsertModule((BaseModule*)_slot->GetItem()) == true)  
+			 //{ 
+			 	//_slot->RemoveItem(); 
 			 	
-			 	return true; 
-			 }       		        		
-       		}
+			 	//return true; 
+			 //}       		        		
+       		//}
 	}               
 	
 	return false;

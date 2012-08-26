@@ -43,7 +43,7 @@ void DroidEquipment::UpdatePropetries()
 }
 
 /* virtual */
-void DroidEquipment::UpdateVehicleAbility(Vehicle* vehicle, int sign)
+void DroidEquipment::UpdateVehiclePropetries(Vehicle* vehicle, int sign)
 {
         vehicle->GetPropetries().repair += sign*repair;      
 }

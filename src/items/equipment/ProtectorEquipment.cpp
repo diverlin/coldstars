@@ -43,7 +43,7 @@ void ProtectorEquipment::UpdatePropetries()
 }
 
 /* virtual */
-void ProtectorEquipment::UpdateVehicleAbility(Vehicle* vehicle, int sign)
+void ProtectorEquipment::UpdateVehiclePropetries(Vehicle* vehicle, int sign)
 {
         vehicle->GetPropetries().protection += sign*protection;   
 }

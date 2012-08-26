@@ -44,6 +44,13 @@ BaseItem::~BaseItem()
 	EntityManager::Instance().RemoveEntity(this);
 }
 
+void BaseItem::LockEvent(Vehicle* vehicle, int lock_turns)
+{
+        this->lock_turns = lock_turns;
+        UpdateVehiclePropetries(vehicle);        
+}
+                
+                
 void BaseItem::Deterioration()
 {
 	if (is_DAMAGED == false)
@@ -60,7 +67,7 @@ void BaseItem::Deterioration()
 void BaseItem::DamageEvent()
 {
         is_DAMAGED = true;
-       	UpdateVehicleAbility(item_slot->GetOwnerVehicle(), -1); 
+       	UpdateVehiclePropetries(item_slot->GetOwnerVehicle(), -1); 
 }           
                 
 void BaseItem::RepairEvent()
@@ -69,7 +76,7 @@ void BaseItem::RepairEvent()
     	if (is_DAMAGED == true)
     	{
         	is_DAMAGED = false;
-        	UpdateVehicleAbility(item_slot->GetOwnerVehicle());  
+        	UpdateVehiclePropetries(item_slot->GetOwnerVehicle());  
     	}
 }
 

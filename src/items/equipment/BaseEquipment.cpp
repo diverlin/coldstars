@@ -50,9 +50,9 @@ bool BaseEquipment::InsertModule(BaseModule* module)
     		module->SetEquipmentOwner(this);
 	       	modules_vec.push_back(module);
                 
-                UpdateVehicleAbility(item_slot->GetOwnerVehicle(), -1);                                
+                UpdateVehiclePropetries(item_slot->GetOwnerVehicle(), -1);                                
         	UpdatePropetries();
-        	UpdateVehicleAbility(item_slot->GetOwnerVehicle());
+        	UpdateVehiclePropetries(item_slot->GetOwnerVehicle());
 
         	return true;
     	}

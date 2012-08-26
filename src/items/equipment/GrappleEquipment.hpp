@@ -47,7 +47,7 @@ class GrappleEquipment : public BaseEquipment
 		void RenderGrabTrail() const;
 				              
       		virtual void UpdatePropetries();  
-                virtual void UpdateVehicleAbility(Vehicle*, int sign = 1);
+                virtual void UpdateVehiclePropetries(Vehicle*, int sign = 1);
                                 
                 void CountPrice();
                       		
