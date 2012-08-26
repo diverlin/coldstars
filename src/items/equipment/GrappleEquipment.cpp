@@ -193,7 +193,7 @@ void GrappleEquipment::UpdatePropetries()
 }
 
 /* virtual */
-void GrappleEquipment::UpdateVehicleAbility(Vehicle* vehicle, int sign)
+void GrappleEquipment::UpdateVehiclePropetries(Vehicle* vehicle, int sign)
 {
         vehicle->GetPropetries().grab_radius   += sign*radius;
         vehicle->GetPropetries().grab_strength += sign*strength;        

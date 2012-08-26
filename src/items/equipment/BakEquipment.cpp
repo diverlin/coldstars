@@ -53,7 +53,7 @@ void BakEquipment::UpdatePropetries()
     	fuel_max = fuel_max_orig + fuel_max_add;    	
 }
 
-void BakEquipment::UpdateVehicleAbility(Vehicle* vehicle, int sign)
+void BakEquipment::UpdateVehiclePropetries(Vehicle* vehicle, int sign)
 {
         vehicle->GetPropetries().fuel += sign*fuel;        
 }

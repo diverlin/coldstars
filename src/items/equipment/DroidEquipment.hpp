@@ -31,7 +31,7 @@ class DroidEquipment : public BaseEquipment
 		int GetRepair() const { return repair; };
 
       		virtual void UpdatePropetries();
-                virtual void UpdateVehicleAbility(Vehicle*, int sign = 1);
+                virtual void UpdateVehiclePropetries(Vehicle*, int sign = 1);
                 
       		void CountPrice();
       		

@@ -43,7 +43,7 @@ void ScanerEquipment::UpdatePropetries()
 }
 
 /* virtual */
-void ScanerEquipment::UpdateVehicleAbility(Vehicle* vehicle, int sign)
+void ScanerEquipment::UpdateVehiclePropetries(Vehicle* vehicle, int sign)
 {
         vehicle->GetPropetries().scan += sign*scan;     
 }
