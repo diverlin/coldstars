@@ -262,7 +262,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
         	vehicle->AddItemToCargoSlot(BombBuilder::Instance().GetBomb());
     	}   
     	
-    	vehicle->UpdateAllPropertiesAndAbilities(); 
+    	vehicle->UpdateAllProperties(); 
 }
 
 

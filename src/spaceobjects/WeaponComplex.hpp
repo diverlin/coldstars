@@ -66,7 +66,7 @@ class WeaponComplex
         	std::vector<ItemSlot*> slot_weapon_reloaded_vec;
 
         	void ResetDeselectedWeaponTargets(); 
-        	        	
+   	
         	void ReloadAllWeapons();  
         	void ValidateAllWeaponsTarget();
       		

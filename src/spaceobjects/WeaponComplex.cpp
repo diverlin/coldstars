@@ -68,7 +68,7 @@ void WeaponComplex::PrepareWeapons()
 void WeaponComplex::ReloadAllWeapons()
 {
      	slot_weapon_reloaded_vec.clear();
-     	for (unsigned int i = 0; i < slot_weapon_equiped_vec.size(); i++)
+     	for (unsigned int i=0; i<slot_weapon_equiped_vec.size(); i++)
         {
          	if (slot_weapon_equiped_vec[i]->GetTurrel()->CheckAmmo() == true)
                 {
@@ -229,7 +229,7 @@ bool WeaponComplex::UpdateFireAbility()
      	{ 
         	if (slot_weapon_vec[i]->GetEquiped() == true)
         	{
-           		if (slot_weapon_vec[i]->GetItem()->GetCondition() > 0)
+           		if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
            		{
               			slot_weapon_equiped_vec.push_back(slot_weapon_vec[i]);
               			//sum_damage      += slot_weapon_vec[i]->getItemDamage(); 

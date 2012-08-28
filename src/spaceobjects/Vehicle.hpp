@@ -97,11 +97,13 @@ struct VehiclePropetries
 	int average_damage;
 	int average_fire_radius;
 	
+	bool equipment_radar;
+	bool equipment_protector;
 
 	VehiclePropetries():
 	free_space(0),
 	protection(0),
-        radar(VISIBLE_DISTANCE_WITHOUT_RADAR),
+        radar(0),
         speed(0),
         hyper(0),
         fuel(0),
@@ -114,7 +116,9 @@ struct VehiclePropetries
         energy(0),
         temperature(0),
         average_damage(0),
-        average_fire_radius(0) 
+        average_fire_radius(0) ,
+        equipment_radar(false),
+        equipment_protector(false)
         {}
 };
 
@@ -149,7 +153,7 @@ class Vehicle : public BaseGameEntity
         	BaseLand* GetLand() const { return land; };
         	int GetSpecialActionId() const { return special_action_id; };
         	
-        	VehiclePropetries& GetPropetries() { return propetries; };
+        	const VehiclePropetries& GetPropetries() const { return propetries; };
                 VehicleKorpusData& GetKorpusData() { return data_korpus; };
                 
                 			
@@ -182,8 +186,7 @@ class Vehicle : public BaseGameEntity
         	
         	GoodsPack* GetGoodsPack() const;
                        	
-        	void SelfRepairEvent();
-        	bool ExternalRepairEvent();
+         	bool ExternalRepairEvent();
         	       
         	void UpdateSpecialAction();         
         	virtual void UpdateInSpace(int, bool) = 0;
@@ -191,9 +194,17 @@ class Vehicle : public BaseGameEntity
 
         	virtual void PostDeathUniqueEvent(bool); 
         	
-        	void UpdateAllPropertiesAndAbilities();
-             		void RecalculateMass();
-             		void UpdateFireAbility();
+        	void UpdateAllFunctionalItemsInStatic();
+        	void UpdateAllProperties();
+             		void RecalculateMassDebug();
+             		void UpdatePropertiesFire();
+             		void UpdatePropertiesRadar();
+             		void UpdatePropertiesDrive();
+             		void UpdatePropertiesJump();
+             		void UpdatePropertiesProtection();
+             		void UpdatePropertiesRepair();
+             		void UpdatePropertiesScan();
+             		void UpdatePropertiesGrab();
 
         	void HyperJumpEvent();
         	void DockingEvent();
@@ -241,8 +252,8 @@ class Vehicle : public BaseGameEntity
                 ItemSlot* gate_slot;
                 
                 std::vector<ItemSlot*> slot_total_vec;
+                std::vector<ItemSlot*> slot_funct_vec;
         	std::vector<ItemSlot*> slot_cargo_vec;
-        	std::vector<BaseItem*> locked_item_vec;
                                 
         	// KONTUR RECT 
         	Rect kontur_rect; 

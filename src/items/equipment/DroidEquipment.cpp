@@ -43,9 +43,24 @@ void DroidEquipment::UpdatePropetries()
 }
 
 /* virtual */
-void DroidEquipment::UpdateVehiclePropetries(Vehicle* vehicle, int sign)
+void DroidEquipment::UpdateInStatic(Vehicle* vehicle)
 {
-        vehicle->GetPropetries().repair += sign*repair;      
+	if (vehicle->IsArmorFull() == false)
+	{
+		if ( (is_DAMAGED == false) and (lock_turns != 0) )	
+		{
+			vehicle->IncreaseArmor(repair);
+			Deterioration();
+		}
+	}
+	
+	UpdateLock();
+}
+      		
+/* virtual */
+void DroidEquipment::UpdateVehiclePropetries(Vehicle* vehicle)
+{
+        vehicle->UpdatePropertiesRepair();      
 }
 
 void DroidEquipment::CountPrice()

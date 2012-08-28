@@ -43,9 +43,9 @@ void ProtectorEquipment::UpdatePropetries()
 }
 
 /* virtual */
-void ProtectorEquipment::UpdateVehiclePropetries(Vehicle* vehicle, int sign)
+void ProtectorEquipment::UpdateVehiclePropetries(Vehicle* vehicle)
 {
-        vehicle->GetPropetries().protection += sign*protection;   
+        vehicle->UpdatePropertiesProtection(); 
 }
 
 void ProtectorEquipment::CountPrice()

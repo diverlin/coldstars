@@ -37,6 +37,8 @@ class LazerEquipment : public BaseEquipment
       		void FireEvent_FALSE();
       		
        	      	virtual void UpdatePropetries();
+                virtual void UpdateVehiclePropetries(Vehicle*);
+                
       		void CountPrice();
     		
     		virtual void SaveData(boost::property_tree::ptree&) const;

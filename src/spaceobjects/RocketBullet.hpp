@@ -63,7 +63,7 @@ class RocketBullet : public Vehicle
                 bool CheckTarget() const;
                 bool CheckStarSystem() const;     
 
-                int unresolved_target_id;                
+                int unresolved_target_id;              
                 void SaveDataUniqueRocketBullet(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueRocketBullet(const boost::property_tree::ptree&);
 		void ResolveDataUniqueRocketBullet();
