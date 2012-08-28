@@ -48,9 +48,8 @@ bool BaseEquipment::InsertModule(BaseModule* module)
     	{
     		module->SetItemSlot(NULL);
     		module->SetEquipmentOwner(this);
-	       	modules_vec.push_back(module);
-                
-                UpdateVehiclePropetries(item_slot->GetOwnerVehicle(), -1);                                
+	       	modules_vec.push_back(module);                
+                        
         	UpdatePropetries();
         	UpdateVehiclePropetries(item_slot->GetOwnerVehicle());
 

@@ -59,9 +59,11 @@ class RocketEquipment : public BaseEquipment
 		
       		void FireEvent(float);
       		
-      	      	void CountPrice();
       		virtual void UpdatePropetries();
-      		
+                virtual void UpdateVehiclePropetries(Vehicle*);
+
+      	      	void CountPrice();
+      	      	                
       		virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);
 		virtual void ResolveData();

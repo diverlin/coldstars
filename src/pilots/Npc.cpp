@@ -80,8 +80,7 @@ void Npc::MindInSpace()
 	//{
         	//vehicle->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets(); 
         //}
-        vehicle->SelfRepairEvent();
-        // drive work, energy and so on
+        vehicle->UpdateAllFunctionalItemsInStatic();
         
 	if (upper_control == false)
 	{

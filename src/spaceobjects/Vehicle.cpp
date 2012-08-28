@@ -127,7 +127,6 @@ void Vehicle::AddItemSlot(ItemSlot* slot, const Rect& rect)
 		case ITEMSLOT::DROID_ID:     { droid_slot     = slot; break; }
 		case ITEMSLOT::FREEZER_ID:   { freezer_slot   = slot; break; }
 		
-		case ITEMSLOT::CARGO_ID:     { slot_cargo_vec.push_back(slot); break; }
 		case ITEMSLOT::GATE_ID:      { gate_slot      = slot; break; }
 	}
         
@@ -135,6 +134,17 @@ void Vehicle::AddItemSlot(ItemSlot* slot, const Rect& rect)
 	{
 		slot_total_vec.push_back(slot); 
 	}
+
+	if ( (slot->GetSubTypeId() != ITEMSLOT::GATE_ID) and (slot->GetSubTypeId() != ITEMSLOT::CARGO_ID) )
+	{
+		slot_funct_vec.push_back(slot);
+	}
+	
+	if (slot->GetSubTypeId() == ITEMSLOT::CARGO_ID)
+	{
+		slot_cargo_vec.push_back(slot); 
+	}
+		
 }
 
 ItemSlot* Vehicle::GetEmptyCargoSlot()
@@ -298,18 +308,7 @@ void Vehicle::UpdateSpecialAction()
 		}
 	}
 }
-
-void Vehicle::UpdateLockedItems()
-{        
-        for (std::vector<BaseItem*>::iterator it = locked_item_vec.begin(); it != locked_item_vec.end(); ++it)
-        {
-                if ((*it)->UpdateLock() == false)
-                {
-                        it = locked_item_vec.erase(it);
-                }
-        }
-}
-                
+              
 bool Vehicle::UpdateFadeInEffect()
 {
 	if (color.a > 0.01)
@@ -462,23 +461,28 @@ void Vehicle::PostDeathUniqueEvent(bool show_effect)  /* virtual */
         }
 }
 
+void Vehicle::UpdateAllFunctionalItemsInStatic()
+{
+	for (unsigned int i=0; i<slot_funct_vec.size(); i++)
+	{
+		if (slot_funct_vec[i]->GetEquiped() == true)
+		{
+			slot_funct_vec[i]->GetItem()->UpdateInStatic(this);
+		}
+	}
+}
 
-void Vehicle::UpdateAllPropertiesAndAbilities()
+void Vehicle::UpdateAllProperties()
 {
     	// this function set actual ship propretries relying to all equipment placed in slots
     	// used when ship change items in slot
     	// !!! all this stuff can be called separately by item deterioration function if item becomes broken !!!
-     	RecalculateMass(); 
+     	RecalculateMassDebug(); 
      
-    	UpdateFireAbility();
+    	UpdatePropertiesFire();
 }
 
-void Vehicle::UpdateFireAbility()
-{
-     	weapon_complex->UpdateFireAbility();
-}
-
-void Vehicle::RecalculateMass()
+void Vehicle::RecalculateMassDebug()
 {
      	// calculate mass and then actual ship speed depending on drive power and actual mass
      	// used each time when ship picked up/bought or drop/sold something. 
@@ -495,70 +499,69 @@ void Vehicle::RecalculateMass()
     	propetries.free_space = data_korpus.space - mass;
 }
 
+void Vehicle::UpdatePropertiesFire()
+{
+     	weapon_complex->UpdateFireAbility();
+}
 
-//void Vehicle::UpdateDriveAbility()
-//{
-     	//// speed calculation ////
-     	//propetries.speed = 0;
-     	//ableTo.DRIVE = true;
+void Vehicle::UpdatePropertiesDrive()
+{
+     	// speed calculation ////
+     	propetries.speed = 0;
 
-     	//if (drive_complex->GetDriveSlot()->GetEquiped() == true) 
-     	//{
-        	//if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetCondition() > 0)  
-        	//{
-           		//float val = (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetSpeed() - mass/70);
-           		//if (val > 0)
-           		//{ 
-              			//propetries.speed = val;
-              			//ableTo.DRIVE = true;              
-           		//}
-        	//}
-        //}
-//}
-
-
-//void Vehicle::UpdateRadarAbility()
-//{
-   	//if (radar_slot->GetEquiped() == true) 
-   	//{
-      		//if (radar_slot->GetRadarEquipment()->GetCondition() > 0)  
-      		//{
-          		//propetries.radar = radar_slot->GetRadarEquipment()->GetRadius();
-          		//ableTo.RADAR = true;
-      		//}
-       		//else
-      		//{
-          		//propetries.radius = VISIBLE_DISTANCE_WITHOUT_RADAR;
-          		//ableTo.RADAR = false;
-      		//}
-      	//}
-      	//else
-      	//{
-      	        //propetries.radius = VISIBLE_DISTANCE_WITHOUT_RADAR;
-          	//ableTo.RADAR = false;
-      	//}
-//}
+     	if (drive_complex->GetDriveSlot()->GetEquiped() == true) 
+     	{
+        	if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)  
+        	{
+           		float val = (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetSpeed() - mass/70);
+           		if (val > 0)
+           		{ 
+              			propetries.speed = val;         
+           		}
+        	}
+        }
+}
 
 
+void Vehicle::UpdatePropertiesRadar()
+{
+   	if (radar_slot->GetEquiped() == true) 
+   	{
+      		if (radar_slot->GetRadarEquipment()->GetCondition() > 0)  
+      		{
+          		propetries.radar = radar_slot->GetRadarEquipment()->GetRadius();
+          		propetries.equipment_radar = true;
+      		}
+       		else
+      		{
+          		propetries.radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
+          		propetries.equipment_radar = false;
+      		}
+      	}
+      	else
+      	{
+      	        propetries.radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
+          	propetries.equipment_radar = false;
+      	}
+}
 
-//void Vehicle::UpdateJumpAbility()
-//{    
-	//propetries.hyper = 0;
-     	//ableTo.HJUMP = false;
 
-     	//if (drive_complex->GetDriveSlot()->GetEquiped() == true)
-        	//if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetCondition() > 0)
-           		//if (drive_complex->GetBakSlot()->GetEquiped() == true)
-              			//if (drive_complex->GetBakSlot()->GetBakEquipment()->GetCondition() > 0)
-              			//{
-                 			//if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetHyper() > drive_complex->GetBakSlot()->GetBakEquipment()->GetFuel())
-                    				//propetries.hyper = drive_complex->GetDriveSlot()->GetDriveEquipment()->GetHyper();
-                 			//else
-                    				//propetries.hyper = drive_complex->GetBakSlot()->GetBakEquipment()->GetFuel();
 
-                 			//ableTo.HJUMP = true;
-              			//}    
-//}
+void Vehicle::UpdatePropertiesJump()
+{    
+	propetries.hyper = 0;
+
+     	if (drive_complex->GetDriveSlot()->GetEquiped() == true)
+        	if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetCondition() > 0)
+           		if (drive_complex->GetBakSlot()->GetEquiped() == true)
+              			if (drive_complex->GetBakSlot()->GetBakEquipment()->GetCondition() > 0)
+              			{
+                 			if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetHyper() > drive_complex->GetBakSlot()->GetBakEquipment()->GetFuel())
+                    				propetries.hyper = drive_complex->GetDriveSlot()->GetDriveEquipment()->GetHyper();
+                 			else
+                    				propetries.hyper = drive_complex->GetBakSlot()->GetBakEquipment()->GetFuel();
+              			}    
+}
 
 
 //void Vehicle::UpdateEnergyAbility()
@@ -576,45 +579,34 @@ void Vehicle::RecalculateMass()
         //}
 //}
 
-
-
-//void Vehicle::UpdateProtectionAbility()
-//{
-        //propetries.protection = data_korpus.protection;
-        //ableTo.PROTECT = false;
-
-     	//if (protection_complex->GetProtectorSlot()->GetEquiped() == true)
-     	//{
-        	//if (protection_complex->GetProtectorSlot()->GetProtectorEquipment()->GetCondition() > 0)
-        	//{
-           		//propetries.protection += protection_complex->GetProtectorSlot()->GetProtectorEquipment()->GetProtection();
-           		//ableTo.PROTECT = true;
-        	//}       
-     	//}   
-//}
-
-//void Vehicle::UpdateRepairAbility()
-//{
-     	//propetries.repair = 0;
-     	//ableTo.REPAIR = false;
-
-     	//if (droid_slot->GetEquiped() == true)
-     	//{
-        	//if (droid_slot->GetDroidEquipment()->GetCondition() > 0)
-        	//{
-            		//propetries.repair = droid_slot->GetDroidEquipment()->GetRepair();
-            		//ableTo.REPAIR = true;
-        	//}
-        //}
-//}
-
-void Vehicle::SelfRepairEvent()
+void Vehicle::UpdatePropertiesProtection()
 {
-	if ( (propetries.repair > 0) and (IsArmorFull() == false) )
-        {
-                IncreaseArmor(propetries.repair);
-	}
+        propetries.protection = data_korpus.protection;
+        propetries.equipment_protector = false;
+
+     	if (protection_complex->GetProtectorSlot()->GetEquiped() == true)
+     	{
+        	if (protection_complex->GetProtectorSlot()->GetProtectorEquipment()->GetFunctioning() == true)
+        	{
+           		propetries.protection += protection_complex->GetProtectorSlot()->GetProtectorEquipment()->GetProtection();
+           		propetries.equipment_protector = true;
+        	}       
+     	}   
 }
+
+void Vehicle::UpdatePropertiesRepair()
+{
+     	propetries.repair = 0;
+
+     	if (droid_slot->GetEquiped() == true)
+     	{
+        	if (droid_slot->GetDroidEquipment()->GetFunctioning() == true)
+        	{
+            		propetries.repair = droid_slot->GetDroidEquipment()->GetRepair();
+        	}
+        }
+}
+
 
 void Vehicle::IncreaseArmor(int repair)
 {
@@ -642,31 +634,32 @@ void Vehicle::IncreaseArmor(int repair)
 //}
 
 
-//void Vehicle::UpdateGrabAbility()
-//{
-     	//ableTo.GRAB = false;
+void Vehicle::UpdatePropertiesGrab()
+{
+     	if (data_korpus.slot_grapple_num != 0)
+     	{
+        	if (grapple_slot->GetEquiped() == true)
+           	{
+           		if (grapple_slot->GetGrappleEquipment()->GetFunctioning() == true)
+              		{
+              		
+              		}
+              	}
+	}
+}
 
-     	//if (data_korpus.slot_grapple_num != 0)
-        	//if (grapple_slot->GetEquiped() == true)
-           		//if (grapple_slot->GetGrappleEquipment()->GetCondition() > 0)
-              			//ableTo.GRAB = true;
-//}
+void Vehicle::UpdatePropertiesScan()
+{
+     	propetries.scan = 0;
 
-
-//void Vehicle::UpdateScanAbility()
-//{
-     	//propetries.scan = 0;
-     	//ableTo.SCAN = false;
-
-     	//if (scaner_slot->GetEquiped() == true)
-     	//{
-        	//if (scaner_slot->GetScanerEquipment()->GetCondition() > 0)
-        	//{
-           		//propetries.scan = scaner_slot->GetScanerEquipment()->GetScan();
-           		//ableTo.SCAN = true;
-        	//}
-        //}
-//}
+     	if (scaner_slot->GetEquiped() == true)
+     	{
+        	if (scaner_slot->GetScanerEquipment()->GetFunctioning() == true)
+        	{
+           		propetries.scan = scaner_slot->GetScanerEquipment()->GetScan();
+        	}
+        }
+}
 
                
                

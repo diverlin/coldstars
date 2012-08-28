@@ -67,7 +67,7 @@ void BaseItem::Deterioration()
 void BaseItem::DamageEvent()
 {
         is_DAMAGED = true;
-       	UpdateVehiclePropetries(item_slot->GetOwnerVehicle(), -1); 
+       	UpdateVehiclePropetries(item_slot->GetOwnerVehicle()); 
 }           
                 
 void BaseItem::RepairEvent()
@@ -80,15 +80,12 @@ void BaseItem::RepairEvent()
     	}
 }
 
-bool BaseItem::UpdateLock()
+void BaseItem::UpdateLock()
 {
         if (lock_turns > 0)
         {
                 lock_turns--; 
-                return true;
         }
-        
-        return false;
 }     
 
 void BaseItem::UpdateInfo()

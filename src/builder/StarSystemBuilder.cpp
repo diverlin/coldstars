@@ -186,7 +186,6 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
         	SpaceStation* spacestation = SpaceStationBuilder::Instance().GetSpaceStation();
        
         	SpaceStationBuilder::Instance().Equip(spacestation);       	// improove
-        	spacestation->UpdateAllPropertiesAndAbilities(); 	// improove
 
         	NpcBuilder::Instance().CreateNewNpc();
                 NpcBuilder::Instance().CreateNewInternals(npc_race_id, npc_subtype_id); 

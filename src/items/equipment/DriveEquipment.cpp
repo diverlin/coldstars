@@ -47,10 +47,10 @@ void DriveEquipment::UpdatePropetries()
 }
 
 /* virtual */
-void DriveEquipment::UpdateVehiclePropetries(Vehicle* vehicle, int sign)
+void DriveEquipment::UpdateVehiclePropetries(Vehicle* vehicle)
 {
-        vehicle->GetPropetries().speed += sign*speed;
-        vehicle->GetPropetries().hyper += sign*hyper;        
+        vehicle->UpdatePropertiesDrive();
+	vehicle->UpdatePropertiesJump();   
 }
                 
 void DriveEquipment::CountPrice()

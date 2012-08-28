@@ -59,21 +59,19 @@ class BaseItem : public Base
 		int GetPrice()              	const { return price; };
 		int GetFunctionalSlotSubTypeId() const { return functional_slot_subtype_id; };
 
-                bool GetDamaged()       const { return is_DAMAGED; }
-                int GetLockTurns()      const { return lock_turns; }
-
+                //bool GetDamaged()       const { return is_DAMAGED; }
+                int GetFunctioning()      const { return ( (is_DAMAGED == false) and (lock_turns == 0) ); }
                 
                 void LockEvent(Vehicle*, int); 
                 void Deterioration(); 
                 void DamageEvent();                 
                 void RepairEvent();
 
-		bool UpdateLock();
-                virtual void UpdateVehiclePropetries(Vehicle*, int singn = 1) {};
+		virtual void UpdatePropetries() {};
+		virtual void UpdateInStatic(Vehicle*) { UpdateLock(); };
+                virtual void UpdateVehiclePropetries(Vehicle*) {};
                 
 		void UpdateInfo();
-			
-		virtual void UpdatePropetries() {};
 			
       		virtual void Render(const Rect&);
       		void RenderInfo(const Rect&, float, float); 
@@ -95,7 +93,9 @@ class BaseItem : public Base
                 ItemSlot* item_slot;
                 
                 InfoTable info;  
-     		
+
+		void UpdateLock();
+		     		
                 UnresolvedDataUniqueBaseItem data_unresolved_BaseItem;
 
      		virtual void AddCommonInfo()=0;

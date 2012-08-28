@@ -68,7 +68,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 		is_EQUIPED = true; 
 		item->SetItemSlot(this);
 	
-                if ( (item->GetDamaged() == false) and (item->GetLockTurns() == 0) )
+                if (item->GetFunctioning() == true)
                 {
                         item->UpdateVehiclePropetries(GetOwnerVehicle());
 		}
@@ -83,9 +83,9 @@ void ItemSlot::RemoveItem()
         if (data_id.subtype_id != ITEMSLOT::CARGO_ID) 
 	{    
                 //this means slot is functional, and this means it's defenately is part of vehicle
-                if ( (item->GetDamaged() == false) and (item->GetLockTurns() == 0) )
+                if (item->GetFunctioning() == true)
                 {
-                        item->UpdateVehiclePropetries(GetOwnerVehicle(), -1);
+                        item->UpdateVehiclePropetries(GetOwnerVehicle());
                 }
 	}
         

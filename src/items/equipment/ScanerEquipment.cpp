@@ -43,9 +43,9 @@ void ScanerEquipment::UpdatePropetries()
 }
 
 /* virtual */
-void ScanerEquipment::UpdateVehiclePropetries(Vehicle* vehicle, int sign)
+void ScanerEquipment::UpdateVehiclePropetries(Vehicle* vehicle)
 {
-        vehicle->GetPropetries().scan += sign*scan;     
+        vehicle->UpdatePropertiesScan();  
 }
 
 void ScanerEquipment::CountPrice()

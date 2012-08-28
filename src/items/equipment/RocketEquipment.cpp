@@ -82,6 +82,13 @@ void RocketEquipment::UpdatePropetries()
     	radius   = radius_orig + radius_add;
 }
 
+     		
+/* virtual */
+void RocketEquipment::UpdateVehiclePropetries(Vehicle* vehicle)
+{
+        vehicle->UpdatePropertiesFire();      
+}
+
 void RocketEquipment::CountPrice()
 {
     	float ammo_rate     = (float)ammo_max_orig / EQUIPMENT::ROCKET::AMMO_MIN;

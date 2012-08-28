@@ -193,10 +193,9 @@ void GrappleEquipment::UpdatePropetries()
 }
 
 /* virtual */
-void GrappleEquipment::UpdateVehiclePropetries(Vehicle* vehicle, int sign)
+void GrappleEquipment::UpdateVehiclePropetries(Vehicle* vehicle)
 {
-        vehicle->GetPropetries().grab_radius   += sign*radius;
-        vehicle->GetPropetries().grab_strength += sign*strength;        
+        vehicle->UpdatePropertiesGrab();     
 }
 
 void GrappleEquipment::CountPrice()

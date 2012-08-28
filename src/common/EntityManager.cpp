@@ -55,6 +55,7 @@ void EntityManager::SaveEvent()
 	
 	for (std::map<int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
 	{
+		Logger::Instance().Log("saving " + getEntityStr(iterator->second->GetTypeId()));
 		iterator->second->SaveData(save_ptree);
 	}
 	
