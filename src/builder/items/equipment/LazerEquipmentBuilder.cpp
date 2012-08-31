@@ -72,7 +72,8 @@ void LazerEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
         lazer_equipment->SetTextureOb(texOb_item);    	
         lazer_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::WEAPON_ID);
         lazer_equipment->SetItemCommonData(common_data);
-        
+        lazer_equipment->SetCondition(common_data.condition_max);
+                
    	lazer_equipment->UpdatePropetries();
    	lazer_equipment->CountPrice();
 }

@@ -35,7 +35,7 @@ class GuiVehicle : public BaseGui
 		void RenderFocusedItemInfo(const MouseData&, Vehicle*) const;
       		
       	private:  		
-      		void RenderSlotsAndItems(Vehicle*) const;
+      		void RenderSlots(Vehicle*) const;
       		void RenderMarksForEmptySlots(const MouseData&, Vehicle*, int) const;  
 };
 

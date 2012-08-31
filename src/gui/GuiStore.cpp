@@ -52,10 +52,6 @@ void GuiStore::RenderSlots(Store* store) const
         	for (unsigned int i=0; i<store->slot_total_vec.size(); i++)
         	{
                 	store->slot_total_vec[i]->Render();
-                	if (store->slot_total_vec[i]->GetEquiped() == true)
-                	{
-                		store->slot_total_vec[i]->GetItem()->Render(store->slot_total_vec[i]->GetRect());	
-                	}
         	}
 	glPopMatrix();
 }

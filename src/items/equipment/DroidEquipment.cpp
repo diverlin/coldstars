@@ -47,10 +47,10 @@ void DroidEquipment::UpdateInStatic(Vehicle* vehicle)
 {
 	if (vehicle->IsArmorFull() == false)
 	{
-		if ( (is_DAMAGED == false) and (lock_turns != 0) )	
+		if (GetFunctioning() == true)	
 		{
 			vehicle->IncreaseArmor(repair);
-			Deterioration();
+			DeteriorationEvent();
 		}
 	}
 	

@@ -190,7 +190,7 @@ class Vehicle : public BaseGameEntity
         	       
         	void UpdateSpecialAction();         
         	virtual void UpdateInSpace(int, bool) = 0;
-        	void Hit(int, bool);
+        	virtual void Hit(int, bool);
 
         	virtual void PostDeathUniqueEvent(bool); 
         	
@@ -229,6 +229,8 @@ class Vehicle : public BaseGameEntity
 		bool IsFuelFull() const;
 		int GetFuelMiss() const;
 		void BuyFuelAsMuchAsPossible();
+
+		void LockRandomItem(int);
 
 	protected:
 		int special_action_id;

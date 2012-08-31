@@ -71,7 +71,8 @@ void BakEquipmentBuilder::CreateNewInternals()
         bak_equipment->SetTextureOb(texOb_item);    	
         bak_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::BAK_ID);
         bak_equipment->SetItemCommonData(common_data);
-                                
+        bak_equipment->SetCondition(common_data.condition_max);
+                                        
         bak_equipment->UpdatePropetries();
     	bak_equipment->CountPrice();
 }

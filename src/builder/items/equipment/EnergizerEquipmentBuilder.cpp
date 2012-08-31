@@ -72,7 +72,8 @@ void EnergizerEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
         energizer_equipment->SetTextureOb(texOb_item);    	
         energizer_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::ENERGIZER_ID);
         energizer_equipment->SetItemCommonData(common_data);
-                
+        energizer_equipment->SetCondition(common_data.condition_max);
+                        
         energizer_equipment->UpdatePropetries();
     	energizer_equipment->CountPrice();
 }

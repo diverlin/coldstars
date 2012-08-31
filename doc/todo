@@ -1,4 +1,8 @@
 ################### FEATURES #################
+<< implement all modules
+
+<< implement artifacts
+
 << make mass calc individual depending on in coming out coming item
 
 << item, make additional single flag which merge states of is_damaged = false, lock_turns = 0;
@@ -96,3 +100,4 @@ void RocketBullet::ResolveDataUniqueRocketBullet()
 #2  0x00000000004cd5d6 in SaveLoadManager::Update(Player*) ()
 #3  0x000000000054e258 in main ()
 
+#segfault when player died

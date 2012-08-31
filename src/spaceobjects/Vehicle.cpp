@@ -149,7 +149,7 @@ void Vehicle::AddItemSlot(ItemSlot* slot, const Rect& rect)
 
 ItemSlot* Vehicle::GetEmptyCargoSlot()
 {
-      	for (unsigned int i = 0; i < slot_cargo_vec.size(); i++)
+      	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
       	{
           	if (!slot_cargo_vec[i]->GetEquiped())
           	{
@@ -422,6 +422,7 @@ void Vehicle::LaunchingEvent()
 //// 
 
 
+/* virtual */
 void Vehicle::Hit(int damage, bool show_effect)
 {
 	damage = damage * ( 1.0 - (owner_npc->GetSkill().GetDefence()*SKILL::DEFENCE_NORMALIZED_RATE + propetries.protection*0.01f) );
@@ -834,11 +835,31 @@ void Vehicle::BuyFuelAsMuchAsPossible()
 	GetDriveComplex()->GetBakSlot()->GetBakEquipment()->IncreaseFuel(fuel);
 }
 
+void Vehicle::LockRandomItem(int locked_turns)
+{
+	std::vector<ItemSlot*> _equiped_slot_vec;
+	
+	for (unsigned int i=0; i<slot_funct_vec.size(); i++)
+	{
+		if (slot_funct_vec[i]->GetEquiped() == true)
+		{
+			_equiped_slot_vec.push_back(slot_funct_vec[i]);
+		}
+	}
+	
+	if (_equiped_slot_vec.size() > 0)
+	{
+		unsigned int _rand = getRandInt(0, _equiped_slot_vec.size());	
+		_equiped_slot_vec[_rand]->GetItem()->LockEvent(this, locked_turns);
+	}	
+}
+
+		
 void Vehicle::DropRandomItemToSpace()
 {
 	std::vector<ItemSlot*> _equiped_slot_vec;
 	
-	for (unsigned int i = 0; i<slot_total_vec.size(); i++)
+	for (unsigned int i=0; i<slot_total_vec.size(); i++)
 	{
 		if (slot_total_vec[i]->GetEquiped() == true)
 		{
@@ -851,8 +872,7 @@ void Vehicle::DropRandomItemToSpace()
 		unsigned int _rand = getRandInt(0, _equiped_slot_vec.size());
 	
 		_equiped_slot_vec[_rand]->DropItemToSpace(this);
-	}
-		
+	}		
 }
 
 void Vehicle::UpdateGrappleMicroProgram()

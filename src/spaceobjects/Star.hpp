@@ -40,10 +40,10 @@ class Star : public BasePlanet
 		void Hit(int, bool) {};
 
                 void CalcColor();    		
-    		void Update_inSpace(int, bool);
+    		void UpdateInSpace(int, bool);
     		
-    		void Render_NEW();
-    		void Render_OLD();
+    		void Render_NEW() const;
+    		void Render_OLD() const;
                 
                 void SaveData(boost::property_tree::ptree&) const;
                 void LoadData(const boost::property_tree::ptree&);

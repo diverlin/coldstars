@@ -118,7 +118,7 @@ void LazerEquipment::FireEvent_TRUE()
 	DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, item_slot->GetTurrel()->GetTarget());
     	_lazer_trace_effect->setDamageEffect(_damage_effect);
     	
-    	Deterioration();
+	DeteriorationEvent();
     	
     	item_slot->GetOwnerVehicle()->GetStarSystem()->Add(_lazer_trace_effect);
     	item_slot->GetOwnerVehicle()->GetStarSystem()->Add(_damage_effect);
@@ -126,7 +126,7 @@ void LazerEquipment::FireEvent_TRUE()
 
 void LazerEquipment::FireEvent_FALSE()
 { 
-    	Deterioration();
+	DeteriorationEvent();
 } 
 
 /*virtual*/

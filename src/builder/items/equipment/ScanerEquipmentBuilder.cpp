@@ -70,7 +70,8 @@ void ScanerEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
         scaner_equipment->SetTextureOb(texOb_item);    	
         scaner_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::SCANER_ID);
         scaner_equipment->SetItemCommonData(common_data);
-           
+        scaner_equipment->SetCondition(common_data.condition_max);
+                   
     	scaner_equipment->UpdatePropetries();
     	scaner_equipment->CountPrice();
 }
