@@ -93,7 +93,7 @@ void GuiVehicle::RenderVehicle(const MouseData& data_mouse, Vehicle* vehicle, in
 		glTranslatef(offset.x, offset.y, 0);
 		drawTexturedRect(vehicle->textureOb_gui, vehicle->kontur_rect, -1.0);
 
-		RenderSlotsAndItems(vehicle);
+		RenderSlots(vehicle);
 		if (requested_subtype_id != NONE_ID)
 		{
 			RenderMarksForEmptySlots(data_mouse, vehicle, requested_subtype_id);
@@ -101,15 +101,11 @@ void GuiVehicle::RenderVehicle(const MouseData& data_mouse, Vehicle* vehicle, in
 	glPopMatrix();
 }
 
-void GuiVehicle::RenderSlotsAndItems(Vehicle* vehicle) const
+void GuiVehicle::RenderSlots(Vehicle* vehicle) const
 {
 	for(unsigned int i=0; i<vehicle->slot_total_vec.size(); i++)
 	{
 		vehicle->slot_total_vec[i]->Render();
-		if (vehicle->slot_total_vec[i]->GetEquiped() == true)
-               	{
-               		vehicle->slot_total_vec[i]->GetItem()->Render(vehicle->slot_total_vec[i]->GetRect());	
-               	}
 	}
 	
 	vehicle->GetGateSlot()->Render();

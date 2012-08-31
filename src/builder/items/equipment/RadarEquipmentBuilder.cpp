@@ -70,7 +70,7 @@ void RadarEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
         radar_equipment->SetTextureOb(texOb_item);
         radar_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::RADAR_ID);
         radar_equipment->SetItemCommonData(common_data);
-        
+        radar_equipment->SetCondition(common_data.condition_max);
  
     	radar_equipment->UpdatePropetries();
     	radar_equipment->CountPrice();

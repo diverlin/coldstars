@@ -87,6 +87,7 @@ void RocketEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
         rocket_equipment->SetTextureOb(texOb_item);    	
         rocket_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::WEAPON_ID);
         rocket_equipment->SetItemCommonData(common_data);
+        rocket_equipment->SetCondition(common_data.condition_max);
                 
         rocket_equipment->UpdatePropetries();
         rocket_equipment->CountPrice();

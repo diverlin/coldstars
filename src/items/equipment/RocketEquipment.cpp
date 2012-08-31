@@ -193,7 +193,7 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
     	//rocketlaunch.play()
     	ammo -= num;
 
-    	Deterioration();
+	DeteriorationEvent();
 }
 
 /*virtual*/

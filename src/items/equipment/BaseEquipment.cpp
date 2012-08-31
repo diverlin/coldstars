@@ -24,7 +24,6 @@ BaseEquipment::BaseEquipment()
           
     	is_DAMAGED = false;
 
-    	condition       = 1000; //common_data.condition_max;
     	price = 0;
 }
 
@@ -40,6 +39,7 @@ void BaseEquipment::AddCommonInfo()
     	info.addNameStr("condition:"); info.addValueStr( int2str(condition) + "/" + int2str(data_item.condition_max) );
     	info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
     	info.addNameStr("price:");     info.addValueStr( int2str(price) );
+    	info.addNameStr("damaged:");   info.addValueStr( int2str(is_DAMAGED) );
 }
 
 bool BaseEquipment::InsertModule(BaseModule* module)
@@ -74,6 +74,16 @@ void BaseEquipment::Render(const Rect& rect)
         			 GUI::INSERTED_MODULE_SIZE);
         	drawTexturedRect(modules_vec[i]->GetTextureOb(), module_rect, -1);
     	}
+    	
+    	if (is_DAMAGED == true)
+	{
+    		drawTexturedRect(GuiTextureObCollector::Instance().slot_mark_reject , rect, -1.0);	
+	}
+	if (locked_turns != 0)
+	{
+    		drawTexturedRect(GuiTextureObCollector::Instance().slot_mark_accept, rect, -1.0);	
+	}
+	
 }
 
 

@@ -503,7 +503,7 @@ void StarSystem::asteroidCollision_s(bool show_effect)
 
 void StarSystem::UpdateEntities_s(int time, bool show_effect)
 {
-        for (unsigned int i=0; i<STAR_vec.size(); i++)         	{ STAR_vec[i]->Update_inSpace(time, show_effect);  }	
+        for (unsigned int i=0; i<STAR_vec.size(); i++)         	{ STAR_vec[i]->UpdateInSpace(time, show_effect);  }	
         for (unsigned int i=0; i<PLANET_vec.size(); i++)       	{ PLANET_vec[i]->UpdateInSpace(time, show_effect); }
     	for (unsigned int i=0; i<BLACKHOLE_vec.size(); i++) 		{ BLACKHOLE_vec[i]->UpdateInSpace(time, show_effect); }
      	for (unsigned int i=0; i<CONTAINER_vec.size(); i++)       	{ CONTAINER_vec[i]->UpdateInSpace(time, show_effect); }
@@ -517,6 +517,7 @@ void StarSystem::UpdateEntities_s(int time, bool show_effect)
 	for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { effect_PARTICLESYSTEM_vec[i]->Update(); }
 	for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++) 	{ effect_SHOCKWAVE_vec[i]->Update(); }
 	for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)         { text_DAMAGE_vec[i]->update(); }   
+	for (unsigned int i=0; i<distantNebulaEffect_vec.size(); i++) { distantNebulaEffect_vec[i]->Update(); } 
 }  
       
 void StarSystem::MindEntitiesInStatic_s()
@@ -584,9 +585,8 @@ void StarSystem::DrawBackground(vec2f scroll_coords)
     	enable_BLEND();
 		glDepthMask(false);
 
-    		for(unsigned int i = 0; i<distantNebulaEffect_vec.size(); i++)
+    		for(unsigned int i=0; i<distantNebulaEffect_vec.size(); i++)
     		{ 
-       			distantNebulaEffect_vec[i]->Update(); 
         		distantNebulaEffect_vec[i]->Render(scroll_coords.x, scroll_coords.y); 
     		}
 

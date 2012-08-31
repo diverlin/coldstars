@@ -445,8 +445,8 @@ const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
 
 const int MASS_MIN = 10;
 const int MASS_MAX = 50;
-const int CONDITION_MIN = 80;
-const int CONDITION_MAX = 300;
+const int CONDITION_MIN = 2;
+const int CONDITION_MAX = 3;
 
 const float REPAIR_WEIGHT = 0.8;
 const float MODULES_NUM_WEIGHT = 0.2;

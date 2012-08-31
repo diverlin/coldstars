@@ -35,7 +35,9 @@ BaseItem::BaseItem()
         condition = 0;
         price = 0;
         
-        lock_turns = 0;
+        locked_turns = 0;
+        
+        textureOb = NULL;
 }
 
 /* virtual */
@@ -44,14 +46,14 @@ BaseItem::~BaseItem()
 	EntityManager::Instance().RemoveEntity(this);
 }
 
-void BaseItem::LockEvent(Vehicle* vehicle, int lock_turns)
+void BaseItem::LockEvent(Vehicle* vehicle, int locked_turns)
 {
-        this->lock_turns = lock_turns;
+        this->locked_turns = locked_turns;
         UpdateVehiclePropetries(vehicle);        
 }
                 
                 
-void BaseItem::Deterioration()
+void BaseItem::DeteriorationEvent()
 {
 	if (is_DAMAGED == false)
 	{
@@ -82,9 +84,9 @@ void BaseItem::RepairEvent()
 
 void BaseItem::UpdateLock()
 {
-        if (lock_turns > 0)
+        if (locked_turns > 0)
         {
-                lock_turns--; 
+                locked_turns--; 
         }
 }     
 
@@ -112,7 +114,7 @@ void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, c
 {
         save_ptree.put(root+"price", price);
         save_ptree.put(root+"condition", condition);
-        save_ptree.put(root+"lock_turns", lock_turns);
+        save_ptree.put(root+"locked_turns", locked_turns);
         save_ptree.put(root+"race_id", race_id);
         save_ptree.put(root+"functional_slot_subtype_id", functional_slot_subtype_id);
         
@@ -132,7 +134,7 @@ void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_pt
 {
         price = load_ptree.get<int>("price");
         condition = load_ptree.get<int>("condition");
-        lock_turns = load_ptree.get<int>("lock_turns");
+        locked_turns = load_ptree.get<int>("locked_turns");
         race_id = load_ptree.get<int>("race_id");
         functional_slot_subtype_id = load_ptree.get<int>("functional_slot_subtype_id");
     

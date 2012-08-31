@@ -50,6 +50,7 @@ class BaseItem : public Base
 		void SetFunctionalSlotSubTypeId(int functional_slot_subtype_id) { this->functional_slot_subtype_id = functional_slot_subtype_id; };
 		void SetItemCommonData(const ItemCommonData& data_item) { this->data_item = data_item; };
                 void SetItemSlot(ItemSlot* item_slot)  { this->item_slot = item_slot; };
+                void SetCondition(int condition) { this->condition = condition; };
 
                 ItemSlot* GetItemSlot() const { return item_slot; };
                                                 
@@ -60,10 +61,10 @@ class BaseItem : public Base
 		int GetFunctionalSlotSubTypeId() const { return functional_slot_subtype_id; };
 
                 //bool GetDamaged()       const { return is_DAMAGED; }
-                int GetFunctioning()      const { return ( (is_DAMAGED == false) and (lock_turns == 0) ); }
+                int GetFunctioning()      const { return ( (is_DAMAGED == false) and (locked_turns == 0) ); }
                 
+                void DeteriorationEvent(); 
                 void LockEvent(Vehicle*, int); 
-                void Deterioration(); 
                 void DamageEvent();                 
                 void RepairEvent();
 
@@ -78,15 +79,15 @@ class BaseItem : public Base
 
 	protected:
      		TextureOb* textureOb;
-                
+     				                
                 int race_id;
-		unsigned int condition;
+		int condition;
      		int price;
 
                 int functional_slot_subtype_id;
 
      		bool is_DAMAGED;
-     		int lock_turns;
+     		int locked_turns;
                 
                 ItemCommonData data_item;
                 

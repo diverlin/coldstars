@@ -49,6 +49,7 @@ void BaseGameEntity::MovingByExternalForce(const vec2f& _target_pos, float force
 	points.SetCenter(points.GetCenter() + d_pos);
 }
 
+/* virtual */
 void BaseGameEntity::Hit(int damage, bool show_effect)
 {
 	data_life.armor -= damage;

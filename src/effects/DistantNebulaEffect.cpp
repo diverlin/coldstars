@@ -29,7 +29,6 @@ void DistantNebulaEffect::Update()
      	angle_inD += d_angle_inD;  
 }        
 
-
 void DistantNebulaEffect::Render(float vx, float vy)
 { 
    	drawDynamic(textureOb, vec2f(center.x - vx*parallax_rate, center.y - vy*parallax_rate), angle_inD, center.z);

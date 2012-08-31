@@ -51,15 +51,17 @@ void Star::CalcColor()
 	}
 }
        
-void Star::Update_inSpace(int time, bool show_effect)
-{}
-    
-    
-void Star::Render_NEW()
+void Star::UpdateInSpace(int time, bool show_effect)
 {
         texture_offset1 += 0.0002;
         texture_offset2 += 0.0003;
 
+	//UpdateRotation(); // not relevant for render NEW
+}
+    
+    
+void Star::Render_NEW() const
+{
         glUseProgram(ShadersPack::Instance().multitexturing);
 
         glActiveTexture(GL_TEXTURE0);                                
@@ -78,10 +80,8 @@ void Star::Render_NEW()
         glActiveTexture(GL_TEXTURE0);
 }
         
-void Star::Render_OLD()
+void Star::Render_OLD() const
 {    
-	UpdateRotation();
-     	
      	glBindTexture(GL_TEXTURE_2D, textureOb->texture);      		
 	renderMesh(mesh->glList, points.GetCenter3f(), angle, scale);
 }

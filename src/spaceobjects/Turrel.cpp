@@ -60,16 +60,18 @@ bool Turrel::FireEvent(int attack_skill, bool show_effect)
 	{
     		case SUBTYPE::LAZER_ID:
     		{   
-       			slot->GetLazerEquipment()->FireEvent_TRUE();
-       			
 			int damage = slot->GetLazerEquipment()->GetDamage() * attack_skill * SKILL::ATTACK_NORMALIZED_RATE;
-			switch(target->GetTypeId())
+       			slot->GetLazerEquipment()->FireEvent_TRUE();       			
+			target->Hit(damage, show_effect);
+			
+			if (target->GetTypeId() == ENTITY::VEHICLE_ID) 
 			{
-				case ENTITY::VEHICLE_ID:   { ((Vehicle*)target)->Hit(damage, show_effect); return true; break; }
-       				case ENTITY::ASTEROID_ID:  { ((Asteroid*)target)->Hit(damage, show_effect); return true; break; }
-				case ENTITY::CONTAINER_ID: { ((Container*)target)->Hit(damage, show_effect); return true; break; }
-       			}
-       			
+				if (getRandInt(1, 2) == 1)
+				{
+					((Vehicle*)target)->LockRandomItem(3);
+				}
+			}
+						       			
        			if (target->GetAlive() == false)
        			{
        				int expirience = 1000;

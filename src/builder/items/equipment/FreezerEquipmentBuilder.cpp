@@ -69,7 +69,8 @@ void FreezerEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
         freezer_equipment->SetTextureOb(texOb_item);    	
         freezer_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::FREEZER_ID);
         freezer_equipment->SetItemCommonData(common_data);
-  
+        freezer_equipment->SetCondition(common_data.condition_max);
+          
       	freezer_equipment->UpdatePropetries();
     	freezer_equipment->CountPrice();
 }

@@ -69,7 +69,7 @@ void DroidEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
         droid_equipment->SetTextureOb(texOb_item);    	
         droid_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::DROID_ID);
         droid_equipment->SetItemCommonData(common_data);
-                
+        droid_equipment->SetCondition(common_data.condition_max);
                 
     	droid_equipment->UpdatePropetries();
     	droid_equipment->CountPrice();

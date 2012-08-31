@@ -71,7 +71,8 @@ void DriveEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
         drive_equipment->SetTextureOb(texOb_item);    	
         drive_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::DRIVE_ID);
         drive_equipment->SetItemCommonData(common_data);
-         
+        drive_equipment->SetCondition(common_data.condition_max);
+        
         drive_equipment->UpdatePropetries();
      	drive_equipment->CountPrice();
 }

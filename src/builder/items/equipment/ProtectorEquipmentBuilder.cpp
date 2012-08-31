@@ -70,7 +70,8 @@ void ProtectorEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
         protector_equipment->SetTextureOb(texOb_item);
         protector_equipment->SetFunctionalSlotSubTypeId(ITEMSLOT::PROTECTOR_ID);
         protector_equipment->SetItemCommonData(common_data);
-        
+        protector_equipment->SetCondition(common_data.condition_max);
+                
         protector_equipment->UpdatePropetries();
     	protector_equipment->CountPrice();
 }

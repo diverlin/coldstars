@@ -93,21 +93,14 @@ void ItemSlot::RemoveItem()
     	is_EQUIPED = false;  
 }
 
-//void ItemSlot::UpdateOwnerAbilities()
-//{
-	//if (owner->GetTypeId() == ENTITY::VEHICLE_ID)
-	//{ 	
-		//switch(data_id.subtype_id)
-		//{
-			//case ITEMSLOT::WEAPON_ID: 	{ ((Vehicle*)owner)->UpdateFireAbility(); break; }
-			//case ITEMSLOT::PROTECTOR_ID: 	{ ((Vehicle*)owner)->UpdateProtectionAbility(); break; }
-		//}
-	//}
-//}
 
 void ItemSlot::Render() const
 {
        	drawTexturedRect(textureOb, rect, -1.5);    
+       	if (is_EQUIPED == true)
+       	{
+       		item->Render(rect);	
+        }
 }
 
 void ItemSlot::RenderMark(TextureOb* textureOb_mark) const
