@@ -150,8 +150,6 @@ class WeaponSelector;
 #include "src/builder/items/equipment/RocketEquipmentBuilder.hpp"
 #include "src/builder/items/equipment/ScanerEquipmentBuilder.hpp"
 
-#include "src/builder/items/module/RadarModuleBuilder.hpp"
-
 #include "src/builder/items/other/BombBuilder.hpp"
 ///
 
@@ -390,8 +388,6 @@ class WeaponSelector;
 #include "src/builder/items/equipment/RocketEquipmentBuilder.cpp"
 #include "src/builder/items/equipment/ScanerEquipmentBuilder.cpp"
 
-
-#include "src/builder/items/module/RadarModuleBuilder.cpp"
 
 #include "src/builder/items/other/BombBuilder.cpp"
 

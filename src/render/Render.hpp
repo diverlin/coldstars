@@ -93,7 +93,7 @@ void drawInfoIn2Column(
                 float center_y);
 
 
-void drawSimpleText(std:: string str, int font_size, float pos_x, float pos_y);
+void drawSimpleText(const std::string& str, int font_size, float pos_x, float pos_y);
 
 
 void drawFullScreenQuad(int w, int h, float pos_z);

@@ -1,19 +1,19 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+	
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
@@ -60,7 +60,7 @@ bool WeaponComplex::AddItem(BaseItem* item)
  
 void WeaponComplex::PrepareWeapons()
 {       
-     	// used once at the beginning of turn
+     	// used once at the begining of turn
 	ReloadAllWeapons();
 	ValidateAllWeaponsTarget();
 }
@@ -217,14 +217,13 @@ void WeaponComplex::ResetDeselectedWeaponTargets()
 
 bool WeaponComplex::UpdateFireAbility()
 {
-     	slot_weapon_equiped_vec.clear();
-
      	//total_damage = 0;
      	//avr_damage =
      	//avr_radius =  
      	
      	//int sum_fire_radius = 0;
-     	
+
+     	slot_weapon_equiped_vec.clear();     	
      	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
      	{ 
         	if (slot_weapon_vec[i]->GetEquiped() == true)

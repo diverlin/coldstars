@@ -250,11 +250,18 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
 
     	for (unsigned int i = 0; i < 3; i++) 
     	{        
-    	    	RadarModuleBuilder::Instance().CreateNewRadarModule();
-        	RadarModuleBuilder::Instance().CreateNewInternals();
-        	vehicle->AddItemToCargoSlot(RadarModuleBuilder::Instance().GetRadarModule());
+    	    	DroidModuleBuilder::Instance().CreateNewDroidModule();
+        	DroidModuleBuilder::Instance().CreateNewInternals();
+        	vehicle->AddItemToCargoSlot(DroidModuleBuilder::Instance().GetDroidModule());
     	}  
     	
+    	//for (unsigned int i = 0; i < 3; i++) 
+    	//{        
+    	    	//RadarModuleBuilder::Instance().CreateNewRadarModule();
+        	//RadarModuleBuilder::Instance().CreateNewInternals();
+        	//vehicle->AddItemToCargoSlot(RadarModuleBuilder::Instance().GetRadarModule());
+    	//}  
+    	    	
     	for (unsigned int i = 0; i < 3; i++) 
     	{        
     	    	BombBuilder::Instance().CreateNewBomb();

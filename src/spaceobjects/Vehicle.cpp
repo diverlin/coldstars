@@ -503,6 +503,7 @@ void Vehicle::RecalculateMassDebug()
 void Vehicle::UpdatePropertiesFire()
 {
      	weapon_complex->UpdateFireAbility();
+     	weapon_complex->PrepareWeapons();
 }
 
 void Vehicle::UpdatePropertiesDrive()

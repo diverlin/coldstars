@@ -94,12 +94,12 @@ void ItemSlot::RemoveItem()
 }
 
 
-void ItemSlot::Render() const
+void ItemSlot::Render(const vec2i& gui_offset) const
 {
        	drawTexturedRect(textureOb, rect, -1.5);    
        	if (is_EQUIPED == true)
        	{
-       		item->Render(rect);	
+       		item->Render(rect, gui_offset);	
         }
 }
 

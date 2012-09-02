@@ -98,7 +98,7 @@ class ItemSlot : public BaseSlot
             
 		void RemoveItem();
                 
-		void Render() const;
+		void Render(const vec2i&) const;
 		void RenderMark(TextureOb*) const;
 
 		void RenderItemInfo(const vec2f&) const;		       

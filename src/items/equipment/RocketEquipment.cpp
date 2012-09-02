@@ -86,6 +86,7 @@ void RocketEquipment::UpdatePropetries()
 /* virtual */
 void RocketEquipment::UpdateVehiclePropetries(Vehicle* vehicle)
 {
+	std::cout<<"blaaaaaaaaaaaaAAAAAAAAAAAAAAAAAAA"<<std::endl;
         vehicle->UpdatePropertiesFire();      
 }
 

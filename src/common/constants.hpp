@@ -531,14 +531,12 @@ const int FREEZE_MAX = 6;
 
 namespace GRAPPLE
 {
-const int STRENGTH_MIN = 0;
+const int STRENGTH_MIN = 1;
 const int STRENGTH_MAX = 20;
 const int RADIUS_MIN = 0;
 const int RADIUS_MAX = 200;
 const int SPEED_MIN = 0;
 const int SPEED_MAX = 80;
-const int MAXNUMITEM_MIN = 0;
-const int MAXNUMITEM_MAX = 1;
 }
 
 namespace RADAR

@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef DROIDMODULE_H
 #define DROIDMODULE_H
 
+#include "BaseModule.hpp"
 
 class DroidModule : public BaseModule
 {
@@ -43,8 +44,5 @@ class DroidModule : public BaseModule
 		void LoadDataUniqueDroidModule(const boost::property_tree::ptree&);
 		void ResolveDataUniqueDroidModule();
 };
-
-DroidModule* GetNewDroidModule();
-
 
 #endif
