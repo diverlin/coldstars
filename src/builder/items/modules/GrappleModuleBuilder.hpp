@@ -17,32 +17,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef BAKMODULE_H
-#define BAKMODULE_H
+#ifndef GRAPPLEMODULEBUILDER_H
+#define GRAPPLEMODULEBUILDER_H
 
-#include "BaseModule.hpp"
+#include "../../../common/constants.hpp"
+#include "../../../items/modules/GrappleModule.hpp"
 
-class BakModule : public BaseModule
+class GrappleModuleBuilder
 {
-   	public:
-     		BakModule(int);
-      		virtual ~BakModule();
- 
- 		void SetFuelMaxAdd(int fuel_max_add) { this->fuel_max_add = fuel_max_add; };
- 		int GetFuelMaxAdd() const { return fuel_max_add; };
+	public:
+		static GrappleModuleBuilder& Instance();
+		~GrappleModuleBuilder();
 
-		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-     	private:
-      		int fuel_max_add;
-      		
-      		void virtual AddUniqueInfo();
+        	void CreateNewGrappleModule(int id = NONE_ID); 
+                void CreateNewInternals();
+                GrappleModule* GetGrappleModule() const { return grapple_module; };
+        	 		                
+        private:
+                GrappleModule* grapple_module;
+                
+		GrappleModuleBuilder() {};
+		GrappleModuleBuilder(const GrappleModuleBuilder&) = delete;
+		GrappleModuleBuilder& operator=(const GrappleModuleBuilder&) = delete;
+}; 
 
-		void SaveDataUniqueBakModule(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueBakModule(const boost::property_tree::ptree&);
-		void ResolveDataUniqueBakModule();
-};
+#endif 
+    
 
-#endif
+        
+
+

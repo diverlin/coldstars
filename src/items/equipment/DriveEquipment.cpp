@@ -45,14 +45,7 @@ void DriveEquipment::UpdatePropetries()
      	speed = speed_orig + speed_add;
      	hyper = hyper_orig + hyper_add;
 }
-
-/* virtual */
-void DriveEquipment::UpdateVehiclePropetries(Vehicle* vehicle)
-{
-        vehicle->UpdatePropertiesDrive();
-	vehicle->UpdatePropertiesJump();   
-}
-                
+             
 void DriveEquipment::CountPrice()
 {
      	float speed_rate         = (float)speed_orig / EQUIPMENT::DRIVE::SPEED_MIN;

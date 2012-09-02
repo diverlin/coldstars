@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef SCANERMODULE_H
 #define SCANERMODULE_H
 
+#include "BaseModule.hpp"
 
 class ScanerModule : public BaseModule
 {
@@ -43,8 +44,5 @@ class ScanerModule : public BaseModule
 		void LoadDataUniqueScanerModule(const boost::property_tree::ptree&);
 		void ResolveDataUniqueScanerModule();      
 };
-
-ScanerModule* GetNewScanerModule();
-
 
 #endif

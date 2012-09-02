@@ -76,20 +76,3 @@ void ScanerModule::LoadDataUniqueScanerModule(const boost::property_tree::ptree&
 
 void ScanerModule::ResolveDataUniqueScanerModule()
 {}
-
-ScanerModule* GetNewScanerModule()
-{
-    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-         
-    	int scan_add = getRandInt(MODULE::SCANER::SCAN_MIN, MODULE::SCANER::SCAN_MAX);
-
-        int id = SimpleIdGenerator::Instance().GetNextId();
-        
-    	ScanerModule* scaner_module = new ScanerModule(scan_add);
-        scaner_module->SetTextureOb(texOb);
-        scaner_module->SetScanAdd(scan_add);
-        
-        EntityManager::Instance().RegisterEntity(scaner_module);
-                
-    	return scaner_module;
-}

@@ -76,20 +76,3 @@ void ProtectorModule::LoadDataUniqueProtectorModule(const boost::property_tree::
 
 void ProtectorModule::ResolveDataUniqueProtectorModule()
 {}
-
-ProtectorModule* GetNewProtectorModule()
-{
-    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-        
-    	int protection_add = getRandInt(MODULE::PROTECTOR::PROTECTION_MIN, MODULE::PROTECTOR::PROTECTION_MAX);
-
-        int id = SimpleIdGenerator::Instance().GetNextId();
-        
-    	ProtectorModule* protector_module = new ProtectorModule(id);
-        protector_module->SetTextureOb(texOb);
-        protector_module->SetProtectionAdd(protection_add);
-        
-        EntityManager::Instance().RegisterEntity(protector_module);
-                
-    	return protector_module;
-}

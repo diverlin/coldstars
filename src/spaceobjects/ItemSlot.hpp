@@ -94,9 +94,10 @@ class ItemSlot : public BaseSlot
 
                 void SetRect(float, float, int, int);
                                 
-		bool InsertItem(BaseItem*);
-            
+		bool InsertItem(BaseItem*);            
 		void RemoveItem();
+		
+		void UpdateVehiclePropetries() const;
                 
 		void Render(const vec2i&) const;
 		void RenderMark(TextureOb*) const;

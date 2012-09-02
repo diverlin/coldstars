@@ -37,7 +37,6 @@ class LazerEquipment : public BaseEquipment
       		void FireEvent_FALSE();
       		
        	      	virtual void UpdatePropetries();
-                virtual void UpdateVehiclePropetries(Vehicle*);
                 
       		void CountPrice();
     		

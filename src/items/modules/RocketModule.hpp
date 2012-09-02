@@ -52,7 +52,4 @@ class RocketModule : public BaseModule
 		void ResolveDataUniqueRocketModule(); 
 };
 
-RocketModule* GetNewRocketModule();
-
-
 #endif

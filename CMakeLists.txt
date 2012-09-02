@@ -80,6 +80,13 @@ set (SOURCES
 
 	src/builder/items/modules/DroidModuleBuilder.cpp
 	src/builder/items/modules/RadarModuleBuilder.cpp
+	src/builder/items/modules/DriveModuleBuilder.cpp
+	src/builder/items/modules/BakModuleBuilder.cpp
+	src/builder/items/modules/GrappleModuleBuilder.cpp
+	src/builder/items/modules/LazerModuleBuilder.cpp
+	src/builder/items/modules/ProtectorModuleBuilder.cpp
+	src/builder/items/modules/RocketModuleBuilder.cpp
+	src/builder/items/modules/ScanerModuleBuilder.cpp
 
   	main.cpp
 )

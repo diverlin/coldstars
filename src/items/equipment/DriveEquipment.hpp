@@ -34,7 +34,6 @@ class DriveEquipment : public BaseEquipment
 		int GetHyper() const { return hyper; };
       		
       		virtual void UpdatePropetries();
-                virtual void UpdateVehiclePropetries(Vehicle*);
 
       		void CountPrice();
                       		      		

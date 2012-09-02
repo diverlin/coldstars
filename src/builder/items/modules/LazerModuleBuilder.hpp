@@ -17,32 +17,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef BAKMODULE_H
-#define BAKMODULE_H
+#ifndef LAZERMODULEBUILDER_H
+#define LAZERMODULEBUILDER_H
 
-#include "BaseModule.hpp"
+#include "../../../common/constants.hpp"
+#include "../../../items/modules/LazerModule.hpp"
 
-class BakModule : public BaseModule
+class LazerModuleBuilder
 {
-   	public:
-     		BakModule(int);
-      		virtual ~BakModule();
- 
- 		void SetFuelMaxAdd(int fuel_max_add) { this->fuel_max_add = fuel_max_add; };
- 		int GetFuelMaxAdd() const { return fuel_max_add; };
+	public:
+		static LazerModuleBuilder& Instance();
+		~LazerModuleBuilder();
 
-		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-     	private:
-      		int fuel_max_add;
-      		
-      		void virtual AddUniqueInfo();
+        	void CreateNewLazerModule(int id = NONE_ID); 
+                void CreateNewInternals();
+                LazerModule* GetLazerModule() const { return lazer_module; };
+        	 		                
+        private:
+                LazerModule* lazer_module;
+                
+		LazerModuleBuilder() {};
+		LazerModuleBuilder(const LazerModuleBuilder&) = delete;
+		LazerModuleBuilder& operator=(const LazerModuleBuilder&) = delete;
+}; 
 
-		void SaveDataUniqueBakModule(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueBakModule(const boost::property_tree::ptree&);
-		void ResolveDataUniqueBakModule();
-};
+#endif 
+    
 
-#endif
+        
+
+

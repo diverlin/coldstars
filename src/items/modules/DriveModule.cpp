@@ -90,23 +90,4 @@ void DriveModule::ResolveDataUniqueDriveModule()
 {}
 
 
-DriveModule* GetNewDriveModule()
-{
-    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-           	
-    	int speed_add = getRandInt(MODULE::DRIVE::SPEED_MIN, MODULE::DRIVE::SPEED_MAX);
-    	int hyper_add = getRandInt(MODULE::DRIVE::HYPER_MIN, MODULE::DRIVE::HYPER_MAX);
-
-        int id = SimpleIdGenerator::Instance().GetNextId();
-        
-    	DriveModule* drive_module = new DriveModule(id);
-    	drive_module->SetSpeedAdd(speed_add);
-	drive_module->SetHyperAdd(hyper_add);
-        drive_module->SetTextureOb(texOb);
-        
-        EntityManager::Instance().RegisterEntity(drive_module);
-                
-    	return drive_module;
-}
-
 

@@ -17,28 +17,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef DROIDMODULEBUILDER_H
-#define DROIDMODULEBUILDER_H
+#ifndef PROTECTORMODULEBUILDER_H
+#define PROTECTORMODULEBUILDER_H
 
 #include "../../../common/constants.hpp"
-#include "../../../items/modules/DroidModule.hpp"
+#include "../../../items/modules/ProtectorModule.hpp"
 
-class DroidModuleBuilder
+class ProtectorModuleBuilder
 {
 	public:
-		static DroidModuleBuilder& Instance();
-		~DroidModuleBuilder();
+		static ProtectorModuleBuilder& Instance();
+		~ProtectorModuleBuilder();
 
-        	void CreateNewDroidModule(int id = NONE_ID); 
+        	void CreateNewProtectorModule(int id = NONE_ID); 
                 void CreateNewInternals();
-                DroidModule* GetDroidModule() const { return droid_module; };
+                ProtectorModule* GetProtectorModule() const { return protector_module; };
         	 		                
         private:
-               	DroidModule* droid_module;
+                ProtectorModule* protector_module;
                 
-		DroidModuleBuilder() {};
-		DroidModuleBuilder(const DroidModuleBuilder&) = delete;
-		DroidModuleBuilder& operator=(const DroidModuleBuilder&) = delete;
+		ProtectorModuleBuilder() {};
+		ProtectorModuleBuilder(const ProtectorModuleBuilder&) = delete;
+		ProtectorModuleBuilder& operator=(const ProtectorModuleBuilder&) = delete;
 }; 
 
 #endif 

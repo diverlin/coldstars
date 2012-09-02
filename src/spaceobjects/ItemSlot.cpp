@@ -51,6 +51,14 @@ void ItemSlot::SetRect(float pos_x, float pos_y, int w, int h)
 
 bool ItemSlot::InsertItem(BaseItem* item)
 {
+	if (owner != NULL) // slot in cursor has owner = NULL
+	{
+		if (owner->GetTypeId() == ENTITY::VEHICLE_ID)
+		{
+			GetOwnerVehicle()->ChangeMass(item->GetMass());
+		}
+	}
+	
 	if (data_id.subtype_id == ITEMSLOT::CARGO_ID) 
 	{           
 		this->item = item;
@@ -61,39 +69,69 @@ bool ItemSlot::InsertItem(BaseItem* item)
 	}
 
 	if (data_id.subtype_id == item->GetFunctionalSlotSubTypeId())
-	{       
-                //this means slot is functional, and this means it's defenately is part of vehicle
-                                 
+	{                                     
 		this->item = item;
 		is_EQUIPED = true; 
 		item->SetItemSlot(this);
 	
-                if (item->GetFunctioning() == true)
-                {
-                        item->UpdateVehiclePropetries(GetOwnerVehicle());
-		}
+                UpdateVehiclePropetries(); 
+
                 return true;
 	}
-
+	
 	return false;
 }
 
 void ItemSlot::RemoveItem()
-{
-        if (data_id.subtype_id != ITEMSLOT::CARGO_ID) 
-	{    
-                //this means slot is functional, and this means it's defenately is part of vehicle
-                if (item->GetFunctioning() == true)
-                {
-                        item->UpdateVehiclePropetries(GetOwnerVehicle());
-                }
+{        
+	if (owner != NULL) // slot in cursor has owner = NULL
+	{
+		if (owner->GetTypeId() == ENTITY::VEHICLE_ID)
+		{
+			GetOwnerVehicle()->ChangeMass(-item->GetMass());
+		}
 	}
-        
+	
         item = NULL;
-    	is_EQUIPED = false;  
+    	is_EQUIPED = false;
+    	
+    	if (data_id.subtype_id != ITEMSLOT::CARGO_ID) 
+	{    
+                UpdateVehiclePropetries(); 
+	}    	 
 }
 
-
+void ItemSlot::UpdateVehiclePropetries() const
+{
+	if (owner->GetTypeId() == ENTITY::VEHICLE_ID)
+	{ 	
+		switch(data_id.subtype_id)
+		{
+			case ITEMSLOT::WEAPON_ID: 	{ GetOwnerVehicle()->UpdatePropertiesFire(); break; }
+			case ITEMSLOT::SCANER_ID: 	{ GetOwnerVehicle()->UpdatePropertiesScan(); break; }
+			case ITEMSLOT::BAK_ID:     	{
+						  		GetOwnerVehicle()->UpdatePropertiesSpeed();
+   								GetOwnerVehicle()->UpdatePropertiesJump(); 
+   	
+   						  		break;
+  							}
+  			
+  			case ITEMSLOT::DRIVE_ID:   	{
+  					  			GetOwnerVehicle()->UpdatePropertiesSpeed();
+								GetOwnerVehicle()->UpdatePropertiesJump(); 
+					  			break;
+							}
+				
+			case ITEMSLOT::DROID_ID: 	{ GetOwnerVehicle()->UpdatePropertiesRepair(); break; }
+			//case ITEMSLOT::ENERGIZER_ID: 	{ GetOwnerVehicle()->UpdateEnergyAbility(); break; }
+			//case ITEMSLOT::FREEZER_ID: 	{ GetOwnerVehicle()->UpdateFreezeAbility(); break; }
+			case ITEMSLOT::GRAPPLE_ID: 	{ GetOwnerVehicle()->UpdatePropertiesGrab(); break; }
+			case ITEMSLOT::PROTECTOR_ID: 	{ GetOwnerVehicle()->UpdatePropertiesProtection(); break; }
+			case ITEMSLOT::RADAR_ID: 	{ GetOwnerVehicle()->UpdatePropertiesRadar(); break; }
+		}
+	}
+}
+   
 void ItemSlot::Render(const vec2i& gui_offset) const
 {
        	drawTexturedRect(textureOb, rect, -1.5);    

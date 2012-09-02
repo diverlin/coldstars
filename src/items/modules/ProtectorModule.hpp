@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef PROTECTORMODULE_H
 #define PROTECTORMODULE_H
 
+#include "BaseModule.hpp"
 
 class ProtectorModule : public BaseModule
 {
@@ -44,8 +45,5 @@ class ProtectorModule : public BaseModule
 		void LoadDataUniqueProtectorModule(const boost::property_tree::ptree&);
 		void ResolveDataUniqueProtectorModule();    
 };
-
-ProtectorModule* GetNewProtectorModule();
-
 
 #endif

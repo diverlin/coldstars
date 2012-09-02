@@ -36,6 +36,55 @@ bool GuiVehicle::UpdateMouseInteractionInSpace(const MouseData& data_mouse, Vehi
 				player->GetCursor().GetItemSlot()->SwapItemWith(vehicle->slot_total_vec[i]);     
 			} 
 			
+			#if DEBUG_ITEMDAMAGELOCKVIAGUI > 0
+			{
+				switch(DEBUG_ITEMDAMAGELOCKVIAGUI)
+				{
+					case 1:
+					{
+						if (vehicle->slot_total_vec[i]->GetEquiped() == true)
+						{
+							if (data_mouse.right_click == true)
+							{
+								std::cout<<"DEBUG ACTION in GuiVehicle::UpdateMouseInteractionInSpace, ItemLOck testing"<<std::endl;
+								if (vehicle->slot_total_vec[i]->GetItem()->GetFunctioning() == true)
+								{
+									vehicle->slot_total_vec[i]->GetItem()->LockEvent(2);
+								}
+								else
+								{
+									vehicle->slot_total_vec[i]->GetItem()->LockEvent(0);
+								}
+							}
+						}
+						
+						break;
+					}
+					
+					case 2:
+					{						
+						if (vehicle->slot_total_vec[i]->GetEquiped() == true)
+						{
+							if (data_mouse.right_click == true)
+							{
+								std::cout<<"DEBUG ACTION in GuiVehicle::UpdateMouseInteractionInSpace, Item Damage testing"<<std::endl;
+								if (vehicle->slot_total_vec[i]->GetItem()->GetFunctioning() == true)
+								{
+									vehicle->slot_total_vec[i]->GetItem()->SetCondition(0);
+								}
+								else
+								{
+									vehicle->slot_total_vec[i]->GetItem()->SetCondition(1000);
+								}
+							}
+						}
+						
+						break;
+					}
+				}
+			}
+			#endif
+			
 			return true;
        		}
         }                       

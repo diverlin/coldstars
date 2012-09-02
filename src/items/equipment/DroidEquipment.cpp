@@ -43,13 +43,13 @@ void DroidEquipment::UpdatePropetries()
 }
 
 /* virtual */
-void DroidEquipment::UpdateInStatic(Vehicle* vehicle)
+void DroidEquipment::UpdateInStatic()
 {
-	if (vehicle->IsArmorFull() == false)
+	if (GetFunctioning() == true)	
 	{
-		if (GetFunctioning() == true)	
+		if (item_slot->GetOwnerVehicle()->IsArmorFull() == false)
 		{
-			vehicle->IncreaseArmor(repair);
+			item_slot->GetOwnerVehicle()->IncreaseArmor(repair);
 			DeteriorationEvent();
 		}
 	}
@@ -57,12 +57,6 @@ void DroidEquipment::UpdateInStatic(Vehicle* vehicle)
 	UpdateLock();
 }
       		
-/* virtual */
-void DroidEquipment::UpdateVehiclePropetries(Vehicle* vehicle)
-{
-        vehicle->UpdatePropertiesRepair();      
-}
-
 void DroidEquipment::CountPrice()
 {
      	float repair_rate        = (float)repair_orig / EQUIPMENT::DROID::REPAIR_MIN;

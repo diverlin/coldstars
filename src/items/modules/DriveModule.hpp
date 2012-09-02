@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef DRIVEMODULE_H
 #define DRIVEMODULE_H
 
+#include "BaseModule.hpp"
 
 class DriveModule : public BaseModule
 {
@@ -47,8 +48,5 @@ class DriveModule : public BaseModule
 		void LoadDataUniqueDriveModule(const boost::property_tree::ptree&);
 		void ResolveDataUniqueDriveModule();
 };
-
-DriveModule* GetNewDriveModule();
-
 
 #endif

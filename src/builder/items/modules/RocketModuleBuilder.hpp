@@ -17,32 +17,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef BAKMODULE_H
-#define BAKMODULE_H
+#ifndef ROCKETMODULEBUILDER_H
+#define ROCKETMODULEBUILDER_H
 
-#include "BaseModule.hpp"
+#include "../../../common/constants.hpp"
+#include "../../../items/modules/RocketModule.hpp"
 
-class BakModule : public BaseModule
+class RocketModuleBuilder
 {
-   	public:
-     		BakModule(int);
-      		virtual ~BakModule();
- 
- 		void SetFuelMaxAdd(int fuel_max_add) { this->fuel_max_add = fuel_max_add; };
- 		int GetFuelMaxAdd() const { return fuel_max_add; };
+	public:
+		static RocketModuleBuilder& Instance();
+		~RocketModuleBuilder();
 
-		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-     	private:
-      		int fuel_max_add;
-      		
-      		void virtual AddUniqueInfo();
+        	void CreateNewRocketModule(int id = NONE_ID); 
+                void CreateNewInternals();
+                RocketModule* GetRocketModule() const { return rocket_module; };
+        	 		                
+        private:
+                RocketModule* rocket_module;
+                
+		RocketModuleBuilder() {};
+		RocketModuleBuilder(const RocketModuleBuilder&) = delete;
+		RocketModuleBuilder& operator=(const RocketModuleBuilder&) = delete;
+}; 
 
-		void SaveDataUniqueBakModule(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueBakModule(const boost::property_tree::ptree&);
-		void ResolveDataUniqueBakModule();
-};
+#endif 
+    
 
-#endif
+        
+
+

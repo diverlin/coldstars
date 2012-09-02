@@ -101,27 +101,6 @@ void GrappleModule::LoadDataUniqueGrappleModule(const boost::property_tree::ptre
 void GrappleModule::ResolveDataUniqueGrappleModule()
 {}
 
-GrappleModule* GetNewGrappleModule()
-{
-    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-                       
-    	int strength_add   = getRandInt(MODULE::GRAPPLE::STRENGTH_MIN, MODULE::GRAPPLE::STRENGTH_MAX);
-    	int radius_add     = getRandInt(MODULE::GRAPPLE::RADIUS_MIN, MODULE::GRAPPLE::RADIUS_MAX);
-    	int speed_add      = getRandInt(MODULE::GRAPPLE::SPEED_MIN, MODULE::GRAPPLE::SPEED_MAX);
-        
-        int id = SimpleIdGenerator::Instance().GetNextId();
-                
-    	GrappleModule* grapple_module = new GrappleModule(id);    	
-    	grapple_module->SetTextureOb(texOb);
-        grapple_module->SetStrengthAdd(strength_add);
-        grapple_module->SetRadiusAdd(radius_add);
-        grapple_module->SetSpeedAdd(speed_add);
-                                
-        EntityManager::Instance().RegisterEntity(grapple_module);
-                
-        return grapple_module;
-}
-
 
 
 

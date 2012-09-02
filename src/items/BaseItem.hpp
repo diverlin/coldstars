@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class ItemSlot; //#include "../spaceobjects/ItemSlot.hpp"
 #include "../resources/textureOb.hpp"
 #include "../common/rect.hpp"
-class Vehicle;//#include "../spaceobjects/Vehicle.hpp"
+class Vehicle; //#include "../spaceobjects/Vehicle.hpp"
 
 struct ItemCommonData 
 {
@@ -67,13 +67,12 @@ class BaseItem : public Base
                 int GetFunctioning()      const { return ( (is_DAMAGED == false) and (locked_turns == 0) ); }
                 
                 void DeteriorationEvent(); 
-                void LockEvent(Vehicle*, int); 
+                void LockEvent(int); 
                 void DamageEvent();                 
                 void RepairEvent();
 
 		virtual void UpdatePropetries() {};
-		virtual void UpdateInStatic(Vehicle*) { UpdateLock(); };
-                virtual void UpdateVehiclePropetries(Vehicle*) {};
+		virtual void UpdateInStatic() { UpdateLock(); };
                 
 		void UpdateInfo();
 			

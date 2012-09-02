@@ -95,25 +95,3 @@ void RocketModule::LoadDataUniqueRocketModule(const boost::property_tree::ptree&
 void RocketModule::ResolveDataUniqueRocketModule()
 {}
 
-
-
-RocketModule* GetNewRocketModule()
-{
-    	TextureOb* texOb =  TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-        
-    	int ammo_max_add = getRandInt(MODULE::ROCKET::AMMO_MIN, MODULE::ROCKET::AMMO_MAX);
-    	int damage_add = getRandInt(MODULE::ROCKET::DAMAGE_MIN, MODULE::ROCKET::DAMAGE_MAX);
-    	int radius_add = getRandInt(MODULE::ROCKET::RADIUS_MIN, MODULE::ROCKET::RADIUS_MAX);
-
-        int id    = SimpleIdGenerator::Instance().GetNextId();
-        
-    	RocketModule* rocket_module = new RocketModule(id);
-        rocket_module->SetTextureOb(texOb);
-        rocket_module->SetAmmoMaxAdd(ammo_max_add);
-        rocket_module->SetDamageAdd(damage_add);
-        rocket_module->SetRadiusAdd(radius_add);
-                         
-        EntityManager::Instance().RegisterEntity(rocket_module);
-                        
-    	return rocket_module;
-}

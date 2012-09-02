@@ -1,9 +1,11 @@
 ################### FEATURES #################
-<< implement all modules
+<< implement all ModuleBuilder
+- DONE
 
 << implement artifacts
 
 << make mass calc individual depending on in coming out coming item
+- DONE
 
 << item, make additional single flag which merge states of is_damaged = false, lock_turns = 0;
 - DONE

@@ -49,8 +49,6 @@ class LazerModule : public BaseModule
 		void ResolveDataUniqueLazerModule();    
 };
 
-LazerModule* GetNewLazerModule();
-
 #endif
 
 

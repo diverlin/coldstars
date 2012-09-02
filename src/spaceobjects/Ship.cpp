@@ -46,7 +46,8 @@ void Ship::UpdateInfo()
     	info.addNameStr("energy:");            	info.addValueStr( int2str(propetries.energy) );
 	info.addNameStr("temp.:");       	info.addValueStr( int2str(data_korpus.temperature) );
         info.addNameStr("radar:");    		info.addValueStr( int2str(propetries.radar) );
-    	info.addNameStr("protect:");        	info.addValueStr( returnProtectionStr() );
+    	info.addNameStr("protect:");        	info.addValueStr( int2str(propetries.protection) );
+    	info.addNameStr("repair:");        	info.addValueStr( int2str(propetries.repair) );
 	info.addNameStr("speed:");       	info.addValueStr( boost::lexical_cast<std::string>(propetries.speed) );
 
 

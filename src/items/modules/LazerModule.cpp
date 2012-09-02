@@ -86,22 +86,3 @@ void LazerModule::LoadDataUniqueLazerModule(const boost::property_tree::ptree& l
 
 void LazerModule::ResolveDataUniqueLazerModule()
 {}
-
-LazerModule* GetNewLazerModule()
-{
-    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);    
-        
-    	int damage_add = getRandInt(MODULE::LAZER::DAMAGE_MIN, MODULE::LAZER::DAMAGE_MAX);
-    	int radius_add = getRandInt(MODULE::LAZER::RADIUS_MIN, MODULE::LAZER::RADIUS_MAX);
-
-        int id = SimpleIdGenerator::Instance().GetNextId();
-        
-    	LazerModule* lazer_module = new LazerModule(id);
-        lazer_module->SetTextureOb(texOb);
-        lazer_module->SetDamageAdd(damage_add);
-        lazer_module->SetRadiusAdd(radius_add);
-        
-        EntityManager::Instance().RegisterEntity(lazer_module);
-                        
-    	return lazer_module;
-}

@@ -31,8 +31,7 @@ class ScanerEquipment : public BaseEquipment
 		int GetScan() const { return scan; };
    		
     		virtual void UpdatePropetries();
-                virtual void UpdateVehiclePropetries(Vehicle*);
-                
+               
     		void CountPrice();
                     		
     		virtual void SaveData(boost::property_tree::ptree&) const;
