@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef RADARMODULE_H
 #define RADARMODULE_H
 
+#include "BaseModule.hpp"
 
 class RadarModule : public BaseModule
 {

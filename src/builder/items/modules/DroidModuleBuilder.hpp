@@ -16,31 +16,33 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BASEEQUIPMENT_H
-#define BASEEQUIPMENT_H
 
-#include "../BaseItem.hpp"
-#include "../modules/BaseModule.hpp"
+#ifndef DROIDMODULEBUILDER_H
+#define DROIDMODULEBUILDER_H
 
+#include "../../../items/modules/DroidModule.hpp"
 
-class BaseEquipment : public BaseItem
+class DroidModuleBuilder
 {
-        public:
-     		BaseEquipment();
-     		virtual ~BaseEquipment();
+	public:
+		static DroidModuleBuilder& Instance();
+		~DroidModuleBuilder();
 
-      		bool InsertModule(BaseModule*);
-      		
-      		virtual void Render(const Rect&, const vec2i&);
-      		      		
-     	protected:
-		std::vector<BaseModule*> modules_vec;    // needs for inserted modules drawing
+        	void CreateNewDroidModule(int id = NONE_ID); 
+                void CreateNewInternals();
+                DroidModule* GetDroidModule() const { return droid_module; };
+        	 		                
+        private:
+               	DroidModule* droid_module;
                 
-                virtual void AddCommonInfo();
-                
-                void SaveDataUniqueBaseEquipment(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueBaseEquipment(const boost::property_tree::ptree&);
-		void ResolveDataUniqueBaseEquipment();   
-};
+		DroidModuleBuilder() {};
+		DroidModuleBuilder(const DroidModuleBuilder&) = delete;
+		DroidModuleBuilder& operator=(const DroidModuleBuilder&) = delete;
+}; 
 
 #endif 
+    
+
+        
+
+

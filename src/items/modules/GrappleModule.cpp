@@ -108,7 +108,6 @@ GrappleModule* GetNewGrappleModule()
     	int strength_add   = getRandInt(MODULE::GRAPPLE::STRENGTH_MIN, MODULE::GRAPPLE::STRENGTH_MAX);
     	int radius_add     = getRandInt(MODULE::GRAPPLE::RADIUS_MIN, MODULE::GRAPPLE::RADIUS_MAX);
     	int speed_add      = getRandInt(MODULE::GRAPPLE::SPEED_MIN, MODULE::GRAPPLE::SPEED_MAX);
-    	int maxNumItem_add = getRandInt(MODULE::GRAPPLE::MAXNUMITEM_MIN, MODULE::GRAPPLE::MAXNUMITEM_MAX);
         
         int id = SimpleIdGenerator::Instance().GetNextId();
                 
@@ -117,7 +116,6 @@ GrappleModule* GetNewGrappleModule()
         grapple_module->SetStrengthAdd(strength_add);
         grapple_module->SetRadiusAdd(radius_add);
         grapple_module->SetSpeedAdd(speed_add);
-        grapple_module->SetMaxNumItemAdd(maxNumItem_add);
                                 
         EntityManager::Instance().RegisterEntity(grapple_module);
                 

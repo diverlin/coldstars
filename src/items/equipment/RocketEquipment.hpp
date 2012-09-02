@@ -52,7 +52,8 @@ class RocketEquipment : public BaseEquipment
                 void SetBulletData(BulletData data_bullet) { this->data_bullet = data_bullet; };
                 
     		void SetAmmo(int ammo) { this->ammo = ammo; };
-                            
+
+		int GetAmmoMax()   const { return ammo_max; };                            
 		int GetAmmo()   const { return ammo; };
 		int GetDamage() const { return damage; };
 		int GetRadius() const { return radius; };

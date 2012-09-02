@@ -23,6 +23,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../common/Logger.hpp"
 #include "../common/SaveLoadManager.hpp"
 
+#include "../builder/items/modules/DroidModuleBuilder.hpp"
+#include "../builder/items/modules/RadarModuleBuilder.hpp"
+
 EntityManager& EntityManager::Instance()
 {
 	static EntityManager instance;
@@ -132,6 +135,17 @@ void EntityManager::LoadPass0()
 	}
 	  
         //module
+	if (load_ptree.get_child_optional("droid_module"))
+	{
+		Logger::Instance().Log("loading droid_modules...");
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("droid_module"))
+		{
+			DroidModuleBuilder::Instance().CreateNewDroidModule(v.second.get<int>("data_id.id"));
+			DroidModule* droid_module = DroidModuleBuilder::Instance().GetDroidModule();
+                	droid_module->LoadData(v.second);
+		}
+	} 	
+	
 	if (load_ptree.get_child_optional("radar_module"))
 	{
 		Logger::Instance().Log("loading radar_modules...");

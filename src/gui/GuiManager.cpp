@@ -64,8 +64,6 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
 		}
 	}
 
-	player->GetNpc()->GetVehicle()->GetWeaponComplex()->PrepareWeapons(); // this action is needed to watch waht weapons items has been removed within gui_vehicle 
-		
 	return interaction;
 }
 
@@ -74,7 +72,7 @@ void GuiManager::RenderScanVehicle(const MouseData& data_mouse, Vehicle* vehicle
 	if (player->GetCursor().GetItemSlot()->GetEquiped() == true)
 	{
        		gui_vehicle.RenderVehicle(data_mouse, vehicle, player->GetCursor().GetItemSlot()->GetItem()->GetFunctionalSlotSubTypeId());
-		player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetItemSlot()->GetRect());		
+		player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetItemSlot()->GetRect(), vec2i(0, 0));		
 	}
 	else
 	{

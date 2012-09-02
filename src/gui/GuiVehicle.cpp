@@ -105,10 +105,10 @@ void GuiVehicle::RenderSlots(Vehicle* vehicle) const
 {
 	for(unsigned int i=0; i<vehicle->slot_total_vec.size(); i++)
 	{
-		vehicle->slot_total_vec[i]->Render();
+		vehicle->slot_total_vec[i]->Render(offset);
 	}
 	
-	vehicle->GetGateSlot()->Render();
+	vehicle->GetGateSlot()->Render(offset);
 }
 
 void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, Vehicle* vehicle, int requested_subtype_id) const

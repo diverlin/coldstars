@@ -77,18 +77,4 @@ void DroidModule::LoadDataUniqueDroidModule(const boost::property_tree::ptree& l
 void DroidModule::ResolveDataUniqueDroidModule()
 {}
 
-DroidModule* GetNewDroidModule()
-{
-    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);    
-         
-    	int repair_add = getRandInt(MODULE::DROID::REPAIR_MIN, MODULE::DROID::REPAIR_MAX);
 
-	int id = SimpleIdGenerator::Instance().GetNextId();
-        
-    	DroidModule* droid_module = new DroidModule(repair_add);
-        droid_module->SetTextureOb(texOb);
-        
-        EntityManager::Instance().RegisterEntity(droid_module);
-                
-    	return droid_module;
-}

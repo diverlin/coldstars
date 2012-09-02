@@ -16,17 +16,23 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "DroidModuleBuilder.hpp"
+#include "../../../common/id.hpp"
+#include "../../../common/EntityManager.hpp"
+#include "../../../common/Logger.hpp"
+#include "../../../common/rand.hpp"
+#include "../../../resources/textureManager.hpp"
 
-RadarModuleBuilder& RadarModuleBuilder::Instance()
+DroidModuleBuilder& DroidModuleBuilder::Instance()
 {
-	static RadarModuleBuilder instance;
+	static DroidModuleBuilder instance;
 	return instance;
 }
 
-RadarModuleBuilder::~RadarModuleBuilder()
+DroidModuleBuilder::~DroidModuleBuilder()
 {}
 
-void RadarModuleBuilder::CreateNewRadarModule(int id)
+void DroidModuleBuilder::CreateNewDroidModule(int id)
 {
 	if (id == NONE_ID)
 	{
@@ -35,23 +41,23 @@ void RadarModuleBuilder::CreateNewRadarModule(int id)
 
         try 
         { 
-        	radar_module = new RadarModule(id);
+        	droid_module = new DroidModule(id);
         }
         catch(std::bad_alloc)
         {
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         
-        EntityManager::Instance().RegisterEntity(radar_module);
+        EntityManager::Instance().RegisterEntity(droid_module);
 } 
         	
-void RadarModuleBuilder::CreateNewInternals()
+void DroidModuleBuilder::CreateNewInternals()
 {     
     	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-    	int radius_add  = getRandInt(MODULE::RADAR::RADIUS_MIN, MODULE::RADAR::RADIUS_MAX);
+    	int repair_add  = getRandInt(MODULE::DROID::REPAIR_MIN, MODULE::DROID::REPAIR_MAX);
     
-        radar_module->SetTextureOb(texOb);
-        radar_module->SetRadiusAdd(radius_add);
+        droid_module->SetTextureOb(texOb);
+        droid_module->SetRepairAdd(repair_add);
 }
 
 

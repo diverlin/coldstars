@@ -78,6 +78,9 @@ set (SOURCES
 	src/effects/particlesystem/DriveEffect.cpp
 	src/effects/particlesystem/ExplosionEffect.cpp
 
+	src/builder/items/modules/DroidModuleBuilder.cpp
+	src/builder/items/modules/RadarModuleBuilder.cpp
+
   	main.cpp
 )
 

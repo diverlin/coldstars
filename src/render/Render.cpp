@@ -260,7 +260,7 @@ void drawInfoIn2Column(
 
 
 
-void drawSimpleText(std:: string str, int font_size, float pos_x, float pos_y)
+void drawSimpleText(const std::string& str, int font_size, float pos_x, float pos_y)
 {
      	sf::String s(str, Screen::Instance().GetFont(), font_size);
      	s.SetColor(sf::Color(255, 255, 255));

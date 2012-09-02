@@ -23,6 +23,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../common/Base.hpp"
 #include "../text/textstuff.hpp"
 class ItemSlot; //#include "../spaceobjects/ItemSlot.hpp"
+#include "../resources/textureOb.hpp"
+#include "../common/rect.hpp"
+class Vehicle;//#include "../spaceobjects/Vehicle.hpp"
 
 struct ItemCommonData 
 {
@@ -74,7 +77,7 @@ class BaseItem : public Base
                 
 		void UpdateInfo();
 			
-      		virtual void Render(const Rect&);
+      		virtual void Render(const Rect&, const vec2i&);
       		void RenderInfo(const Rect&, float, float); 
 
 	protected:

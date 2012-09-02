@@ -20,6 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef RADARMODULEBUILDER_H
 #define RADARMODULEBUILDER_H
 
+#include "../../../common/constants.hpp"
+#include "../../../items/modules/RadarModule.hpp"
 
 class RadarModuleBuilder
 {
