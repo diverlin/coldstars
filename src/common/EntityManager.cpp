@@ -23,6 +23,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../common/Logger.hpp"
 #include "../common/SaveLoadManager.hpp"
 
+#include "../builder/items/modules/BakModuleBuilder.hpp"
+#include "../builder/items/modules/DriveModuleBuilder.hpp"
+#include "../builder/items/modules/GrappleModuleBuilder.hpp"
+#include "../builder/items/modules/LazerModuleBuilder.hpp"
+#include "../builder/items/modules/ProtectorModuleBuilder.hpp"
+#include "../builder/items/modules/RocketModuleBuilder.hpp"
+#include "../builder/items/modules/ScanerModuleBuilder.hpp"
 #include "../builder/items/modules/DroidModuleBuilder.hpp"
 #include "../builder/items/modules/RadarModuleBuilder.hpp"
 
@@ -135,6 +142,28 @@ void EntityManager::LoadPass0()
 	}
 	  
         //module
+	if (load_ptree.get_child_optional("bak_module"))
+	{
+		Logger::Instance().Log("loading bak_modules...");
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("bak_module"))
+		{
+			BakModuleBuilder::Instance().CreateNewBakModule(v.second.get<int>("data_id.id"));
+			BakModule* bak_module = BakModuleBuilder::Instance().GetBakModule();
+                	bak_module->LoadData(v.second);
+		}
+	} 	
+
+	if (load_ptree.get_child_optional("drive_module"))
+	{
+		Logger::Instance().Log("loading drive_modules...");
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("drive_module"))
+		{
+			DriveModuleBuilder::Instance().CreateNewDriveModule(v.second.get<int>("data_id.id"));
+			DriveModule* drive_module = DriveModuleBuilder::Instance().GetDriveModule();
+                	drive_module->LoadData(v.second);
+		}
+	} 	
+		
 	if (load_ptree.get_child_optional("droid_module"))
 	{
 		Logger::Instance().Log("loading droid_modules...");
@@ -145,7 +174,40 @@ void EntityManager::LoadPass0()
                 	droid_module->LoadData(v.second);
 		}
 	} 	
-	
+
+	if (load_ptree.get_child_optional("grapple_module"))
+	{
+		Logger::Instance().Log("loading grapple_modules...");
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("grapple_module"))
+		{
+			GrappleModuleBuilder::Instance().CreateNewGrappleModule(v.second.get<int>("data_id.id"));
+			GrappleModule* grapple_module = GrappleModuleBuilder::Instance().GetGrappleModule();
+                	grapple_module->LoadData(v.second);
+		}
+	} 	
+
+	if (load_ptree.get_child_optional("lazer_module"))
+	{
+		Logger::Instance().Log("loading lazer_modules...");
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("lazer_module"))
+		{
+			LazerModuleBuilder::Instance().CreateNewLazerModule(v.second.get<int>("data_id.id"));
+			LazerModule* lazer_module = LazerModuleBuilder::Instance().GetLazerModule();
+                	lazer_module->LoadData(v.second);
+		}
+	} 	
+
+	if (load_ptree.get_child_optional("protector_module"))
+	{
+		Logger::Instance().Log("loading protector_modules...");
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("protector_module"))
+		{
+			ProtectorModuleBuilder::Instance().CreateNewProtectorModule(v.second.get<int>("data_id.id"));
+			ProtectorModule* protector_module = ProtectorModuleBuilder::Instance().GetProtectorModule();
+                	protector_module->LoadData(v.second);
+		}
+	} 	
+				
 	if (load_ptree.get_child_optional("radar_module"))
 	{
 		Logger::Instance().Log("loading radar_modules...");
@@ -156,7 +218,29 @@ void EntityManager::LoadPass0()
                 	radar_module->LoadData(v.second);
 		}
 	} 
-	
+
+	if (load_ptree.get_child_optional("rocket_module"))
+	{
+		Logger::Instance().Log("loading rocket_modules...");
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("rocket_module"))
+		{
+			RocketModuleBuilder::Instance().CreateNewRocketModule(v.second.get<int>("data_id.id"));
+			RocketModule* rocket_module = RocketModuleBuilder::Instance().GetRocketModule();
+                	rocket_module->LoadData(v.second);
+		}
+	} 
+
+	if (load_ptree.get_child_optional("scaner_module"))
+	{
+		Logger::Instance().Log("loading scaner_modules...");
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("scaner_module"))
+		{
+			ScanerModuleBuilder::Instance().CreateNewScanerModule(v.second.get<int>("data_id.id"));
+			ScanerModule* scaner_module = ScanerModuleBuilder::Instance().GetScanerModule();
+                	scaner_module->LoadData(v.second);
+		}
+	} 
+			
         // equipment
 	if (load_ptree.get_child_optional("bak_equipment"))
 	{

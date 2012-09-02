@@ -42,12 +42,6 @@ void ScanerEquipment::UpdatePropetries()
      	scan = scan_orig + scan_add;
 }
 
-/* virtual */
-void ScanerEquipment::UpdateVehiclePropetries(Vehicle* vehicle)
-{
-        vehicle->UpdatePropertiesScan();  
-}
-
 void ScanerEquipment::CountPrice()
 {
      	float scan_rate          = (float)scan_orig / EQUIPMENT::SCANER::SCAN_MIN;

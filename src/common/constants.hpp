@@ -27,6 +27,8 @@
 #define AISCENARIO_LOG_ENABLED 1
 //#define SAVELOAD_LOG_ENABLED 1
 
+#define DEBUG_ITEMDAMAGELOCKVIAGUI 1  // 1 - is locking/unlocking item by right mouse click; 2 - is damaging/undamaging item by right mouse click
+
 #define LOG_ENABLED 1
 
 const bool TEST_ON = false;
@@ -445,8 +447,8 @@ const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
 
 const int MASS_MIN = 10;
 const int MASS_MAX = 50;
-const int CONDITION_MIN = 2;
-const int CONDITION_MAX = 3;
+const int CONDITION_MIN = 300;
+const int CONDITION_MAX = 2000;
 
 const float REPAIR_WEIGHT = 0.8;
 const float MODULES_NUM_WEIGHT = 0.2;

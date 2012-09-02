@@ -76,21 +76,3 @@ void BakModule::LoadDataUniqueBakModule(const boost::property_tree::ptree& load_
 
 void BakModule::ResolveDataUniqueBakModule()
 {}
-
-
-
-
-BakModule* GetNewBakModule()
-{
-    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);             	
-    	int fuel_max_add = getRandInt(MODULE::BAK::FUEL_MIN, MODULE::BAK::FUEL_MAX);
-        int id = SimpleIdGenerator::Instance().GetNextId();
-        
-    	BakModule* bak_module = new BakModule(id);
-    	bak_module->SetFuelMaxAdd(fuel_max_add);
-        bak_module->SetTextureOb(texOb);
-        
-        EntityManager::Instance().RegisterEntity(bak_module);
-        
-    	return bak_module;
-}

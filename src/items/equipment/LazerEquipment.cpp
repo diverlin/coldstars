@@ -49,15 +49,7 @@ void LazerEquipment::UpdatePropetries()
     	damage = damage_orig + damage_add;
     	radius = radius_orig + radius_add;
 } 
-
       		
-/* virtual */
-void LazerEquipment::UpdateVehiclePropetries(Vehicle* vehicle)
-{
-        vehicle->UpdatePropertiesFire();      
-}
-
-
 void LazerEquipment::CountPrice()
 {
    	float damage_rate        = (float)damage_orig / EQUIPMENT::LAZER::DAMAGE_MIN;

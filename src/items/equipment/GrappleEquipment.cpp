@@ -192,12 +192,6 @@ void GrappleEquipment::UpdatePropetries()
         RemoveAllTargets();
 }
 
-/* virtual */
-void GrappleEquipment::UpdateVehiclePropetries(Vehicle* vehicle)
-{
-        vehicle->UpdatePropertiesGrab();     
-}
-
 void GrappleEquipment::CountPrice()
 {
     	float strength_rate      = (float)strength_orig / EQUIPMENT::GRAPPLE::STRENGTH_MIN;

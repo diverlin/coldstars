@@ -41,13 +41,7 @@ void RadarEquipment::UpdatePropetries()
     	
     	radius = radius_orig + radius_add;
 }
-
-/* virtual */
-void RadarEquipment::UpdateVehiclePropetries(Vehicle* vehicle)
-{
-        vehicle->UpdatePropertiesRadar();     
-}
-     
+   
 void RadarEquipment::CountPrice()
 {
     	float radius_rate         = (float)radius_orig / EQUIPMENT::RADAR::RADIUS_MIN;

@@ -61,7 +61,6 @@ class RocketEquipment : public BaseEquipment
       		void FireEvent(float);
       		
       		virtual void UpdatePropetries();
-                virtual void UpdateVehiclePropetries(Vehicle*);
 
       	      	void CountPrice();
       	      	                

@@ -468,7 +468,7 @@ void Vehicle::UpdateAllFunctionalItemsInStatic()
 	{
 		if (slot_funct_vec[i]->GetEquiped() == true)
 		{
-			slot_funct_vec[i]->GetItem()->UpdateInStatic(this);
+			slot_funct_vec[i]->GetItem()->UpdateInStatic();
 		}
 	}
 }
@@ -478,26 +478,14 @@ void Vehicle::UpdateAllProperties()
     	// this function set actual ship propretries relying to all equipment placed in slots
     	// used when ship change items in slot
     	// !!! all this stuff can be called separately by item deterioration function if item becomes broken !!!
-     	RecalculateMassDebug(); 
-     
-    	UpdatePropertiesFire();
+   	UpdatePropertiesFire();
 }
 
-void Vehicle::RecalculateMassDebug()
+void Vehicle::ChangeMass(int d_mass)
 {
-     	// calculate mass and then actual ship speed depending on drive power and actual mass
-     	// used each time when ship picked up/bought or drop/sold something. 
-     	
-     	mass = 0;
-    	for (unsigned int i=0; i<slot_total_vec.size(); i++)
-    	{
-        	if (slot_total_vec[i]->GetEquiped() == true)
-        	{
-           		mass += slot_total_vec[i]->GetItem()->GetMass();  
-           	}    
-    	}
-    	
+	mass += d_mass;
     	propetries.free_space = data_korpus.space - mass;
+	UpdatePropertiesSpeed();
 }
 
 void Vehicle::UpdatePropertiesFire()
@@ -506,7 +494,7 @@ void Vehicle::UpdatePropertiesFire()
      	weapon_complex->PrepareWeapons();
 }
 
-void Vehicle::UpdatePropertiesDrive()
+void Vehicle::UpdatePropertiesSpeed()
 {
      	// speed calculation ////
      	propetries.speed = 0;
@@ -527,23 +515,16 @@ void Vehicle::UpdatePropertiesDrive()
 
 void Vehicle::UpdatePropertiesRadar()
 {
+        propetries.radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
+        propetries.equipment_radar = false;
+	
    	if (radar_slot->GetEquiped() == true) 
    	{
-      		if (radar_slot->GetRadarEquipment()->GetCondition() > 0)  
+      		if (radar_slot->GetRadarEquipment()->GetFunctioning() == true)  
       		{
           		propetries.radar = radar_slot->GetRadarEquipment()->GetRadius();
           		propetries.equipment_radar = true;
       		}
-       		else
-      		{
-          		propetries.radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
-          		propetries.equipment_radar = false;
-      		}
-      	}
-      	else
-      	{
-      	        propetries.radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
-          	propetries.equipment_radar = false;
       	}
 }
 
@@ -554,9 +535,9 @@ void Vehicle::UpdatePropertiesJump()
 	propetries.hyper = 0;
 
      	if (drive_complex->GetDriveSlot()->GetEquiped() == true)
-        	if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetCondition() > 0)
+        	if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)
            		if (drive_complex->GetBakSlot()->GetEquiped() == true)
-              			if (drive_complex->GetBakSlot()->GetBakEquipment()->GetCondition() > 0)
+              			if (drive_complex->GetBakSlot()->GetBakEquipment()->GetFunctioning() == true)
               			{
                  			if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetHyper() > drive_complex->GetBakSlot()->GetBakEquipment()->GetFuel())
                     				propetries.hyper = drive_complex->GetDriveSlot()->GetDriveEquipment()->GetHyper();
@@ -573,7 +554,7 @@ void Vehicle::UpdatePropertiesJump()
 
      	//if (energizer_slot->GetEquiped() == true)
      	//{
-        	//if (energizer_slot->GetEnergizerEquipment()->GetCondition() > 0)
+        	//if (energizer_slot->GetEnergizerEquipment()->GetFunctioning() == true)
         	//{
            		//propetries.energy = energizer_slot->GetEnergizerEquipment()->GetEnergy();
            		//ableTo.ENERGIZE = true;
@@ -627,7 +608,7 @@ void Vehicle::IncreaseArmor(int repair)
 
      	//if (freezer_slot->GetEquiped() == true)
      	//{
-        	//if (freezer_slot->GetFreezerEquipment()->GetCondition() > 0)
+        	//if (freezer_slot->GetFreezerEquipment()->GetFunctioning() == true)
         	//{
            		//propetries.freeze = freezer_slot->GetFreezerEquipment()->GetFreeze();
            		//ableTo.FREEZE = true;
@@ -662,17 +643,7 @@ void Vehicle::UpdatePropertiesScan()
         	}
         }
 }
-
                
-               
-std::string Vehicle::returnProtectionStr()
-{
-    	if (protection_complex->GetProtectorSlot()->GetEquiped() == true)
-       		return int2str(protection_complex->GetProtectorSlot()->GetProtectorEquipment()->GetProtection()) + '+' + int2str(data_korpus.protection);
-    	else
-       		return int2str(data_korpus.protection);
-}
-
 void Vehicle::RenderInfoInSpace(const vec2f& scroll_coords)
 {  
 	UpdateInfo(); // virtual
@@ -851,7 +822,7 @@ void Vehicle::LockRandomItem(int locked_turns)
 	if (_equiped_slot_vec.size() > 0)
 	{
 		unsigned int _rand = getRandInt(0, _equiped_slot_vec.size());	
-		_equiped_slot_vec[_rand]->GetItem()->LockEvent(this, locked_turns);
+		_equiped_slot_vec[_rand]->GetItem()->LockEvent(locked_turns);
 	}	
 }
 

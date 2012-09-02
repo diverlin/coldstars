@@ -221,10 +221,14 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
         BakEquipmentBuilder::Instance().CreateNewInternals();
     	vehicle->GetDriveComplex()->GetBakSlot()->InsertItem(BakEquipmentBuilder::Instance().GetBakEquipment()); 
         
-        EnergizerEquipmentBuilder::Instance().CreateNewEnergizerEquipment();
-        EnergizerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
-    	vehicle->GetEnergizerSlot()->InsertItem(EnergizerEquipmentBuilder::Instance().GetEnergizerEquipment());     
+        //EnergizerEquipmentBuilder::Instance().CreateNewEnergizerEquipment();
+        //EnergizerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
+    	//vehicle->GetEnergizerSlot()->InsertItem(EnergizerEquipmentBuilder::Instance().GetEnergizerEquipment());     
 
+ 	//FreezerEquipmentBuilder::Instance().CreateNewFreezerEquipment();
+        //FreezerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
+   	//vehicle->GetFreezerSlot()->InsertItem(FreezerEquipmentBuilder::Instance().GetFreezerEquipment());  
+   	
    	ProtectorEquipmentBuilder::Instance().CreateNewProtectorEquipment();
         ProtectorEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
    	vehicle->GetProtectionComplex()->GetProtectorSlot()->InsertItem(ProtectorEquipmentBuilder::Instance().GetProtectorEquipment()); 
@@ -232,10 +236,6 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
    	DroidEquipmentBuilder::Instance().CreateNewDroidEquipment();
         DroidEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
    	vehicle->GetDroidSlot()->InsertItem(DroidEquipmentBuilder::Instance().GetDroidEquipment()); 
-
-   	FreezerEquipmentBuilder::Instance().CreateNewFreezerEquipment();
-        FreezerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
-   	vehicle->GetFreezerSlot()->InsertItem(FreezerEquipmentBuilder::Instance().GetFreezerEquipment());  
 
    	ScanerEquipmentBuilder::Instance().CreateNewScanerEquipment();
         ScanerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);

@@ -196,10 +196,10 @@ class Vehicle : public BaseGameEntity
         	
         	void UpdateAllFunctionalItemsInStatic();
         	void UpdateAllProperties();
-             		void RecalculateMassDebug();
+             		void ChangeMass(int);
              		void UpdatePropertiesFire();
              		void UpdatePropertiesRadar();
-             		void UpdatePropertiesDrive();
+             		void UpdatePropertiesSpeed();
              		void UpdatePropertiesJump();
              		void UpdatePropertiesProtection();
              		void UpdatePropertiesRepair();
@@ -269,7 +269,6 @@ class Vehicle : public BaseGameEntity
                 VehicleSlot* parent_vehicleslot;
                         
                 virtual void UpdateInfo() = 0;
-             	std::string returnProtectionStr();
              	     		
                 void RenderGrabTrail() const;
 		void RenderKorpus() const;

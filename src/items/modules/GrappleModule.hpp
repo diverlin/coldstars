@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef GRAPPLEMODULE_H
 #define GRAPPLEMODULE_H
 
+#include "BaseModule.hpp"
 
 class GrappleModule : public BaseModule
 {
@@ -53,8 +54,5 @@ class GrappleModule : public BaseModule
 		void LoadDataUniqueGrappleModule(const boost::property_tree::ptree&);
 		void ResolveDataUniqueGrappleModule();
 };
-
-GrappleModule* GetNewGrappleModule();
-
 
 #endif

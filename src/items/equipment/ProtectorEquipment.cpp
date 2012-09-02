@@ -42,12 +42,6 @@ void ProtectorEquipment::UpdatePropetries()
       	protection = protection_orig + protection_add;
 }
 
-/* virtual */
-void ProtectorEquipment::UpdateVehiclePropetries(Vehicle* vehicle)
-{
-        vehicle->UpdatePropertiesProtection(); 
-}
-
 void ProtectorEquipment::CountPrice()
 {
       	float protection_rate    = (float)protection_orig / EQUIPMENT::PROTECTOR::PROTECTION_MIN;

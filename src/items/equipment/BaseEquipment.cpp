@@ -51,7 +51,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 	       	modules_vec.push_back(module);                
                         
         	UpdatePropetries();
-        	UpdateVehiclePropetries(item_slot->GetOwnerVehicle());
+        	item_slot->UpdateVehiclePropetries();
 
         	return true;
     	}
