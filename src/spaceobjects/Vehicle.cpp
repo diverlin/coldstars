@@ -26,10 +26,13 @@
 #include "../effects/particlesystem/ExplosionEffect.hpp"
 
 #include "../resources/textureManager.hpp"
-#include "../resources/resources.hpp"
+#include "../resources/GuiTextureObCollector.hpp"
 #include "../builder/BaseVehicleBuilder.hpp"
 
 #include "../common/Logger.hpp"
+
+#include "../items/artefacts/GravityArtefact.hpp"
+#include "../items/artefacts/ProtectorArtefact.hpp"
 
 Vehicle::Vehicle()
 {
@@ -102,7 +105,7 @@ void Vehicle::AddItemSlot(ItemSlot* slot, const Rect& rect)
                 
 	switch(slot->GetSubTypeId())
 	{
-                case ITEMSLOT::WEAPON_ID:    
+                case ENTITY::WEAPON_SLOT_ID:    
                 {
                 	int w = textureOb->GetFrameWidth();
                 	int h = textureOb->GetFrameHeight();
@@ -116,31 +119,36 @@ void Vehicle::AddItemSlot(ItemSlot* slot, const Rect& rect)
                 	
                 	break; 
                 }
-                case ITEMSLOT::DRIVE_ID:     { drive_complex->SetDriveSlot(slot); break; }
-                case ITEMSLOT::BAK_ID:       { drive_complex->SetBakSlot(slot); break; }
-                case ITEMSLOT::PROTECTOR_ID: { protection_complex->SetProtectorSlot(slot); break; }
-		case ITEMSLOT::RADAR_ID:     { radar_slot  = slot; break; }
-		case ITEMSLOT::SCANER_ID:    { scaner_slot = slot; break; }
+                case ENTITY::DRIVE_SLOT_ID:     { drive_complex->SetDriveSlot(slot); break; }
+                case ENTITY::BAK_SLOT_ID:       { drive_complex->SetBakSlot(slot); break; }
+                case ENTITY::PROTECTOR_SLOT_ID: { protection_complex->SetProtectorSlot(slot); break; }
+		case ENTITY::RADAR_SLOT_ID:     { radar_slot  = slot; break; }
+		case ENTITY::SCANER_SLOT_ID:    { scaner_slot = slot; break; }
 		
-		case ITEMSLOT::ENERGIZER_ID: { energizer_slot = slot; break; }
-		case ITEMSLOT::GRAPPLE_ID:   { grapple_slot   = slot; break; }
-		case ITEMSLOT::DROID_ID:     { droid_slot     = slot; break; }
-		case ITEMSLOT::FREEZER_ID:   { freezer_slot   = slot; break; }
+		case ENTITY::ENERGIZER_SLOT_ID: { energizer_slot = slot; break; }
+		case ENTITY::GRAPPLE_SLOT_ID:   { grapple_slot   = slot; break; }
+		case ENTITY::DROID_SLOT_ID:     { droid_slot     = slot; break; }
+		case ENTITY::FREEZER_SLOT_ID:   { freezer_slot   = slot; break; }
 		
-		case ITEMSLOT::GATE_ID:      { gate_slot      = slot; break; }
+		case ENTITY::GATE_SLOT_ID:      { gate_slot      = slot; break; }
 	}
         
-	if (slot->GetSubTypeId() != ITEMSLOT::GATE_ID)
+	if (slot->GetSubTypeId() != ENTITY::GATE_SLOT_ID)
 	{
 		slot_total_vec.push_back(slot); 
 	}
 
-	if ( (slot->GetSubTypeId() != ITEMSLOT::GATE_ID) and (slot->GetSubTypeId() != ITEMSLOT::CARGO_ID) )
+	if ( (slot->GetSubTypeId() != ENTITY::GATE_SLOT_ID) and (slot->GetSubTypeId() != ENTITY::ARTEFACT_SLOT_ID) and (slot->GetSubTypeId() != ENTITY::CARGO_SLOT_ID) )
 	{
 		slot_funct_vec.push_back(slot);
 	}
 	
-	if (slot->GetSubTypeId() == ITEMSLOT::CARGO_ID)
+	if (slot->GetSubTypeId() == ENTITY::ARTEFACT_SLOT_ID)
+	{
+		slot_artef_vec.push_back(slot);
+	}
+	
+	if (slot->GetSubTypeId() == ENTITY::CARGO_SLOT_ID)
 	{
 		slot_cargo_vec.push_back(slot); 
 	}
@@ -471,21 +479,21 @@ void Vehicle::UpdateAllFunctionalItemsInStatic()
 			slot_funct_vec[i]->GetItem()->UpdateInStatic();
 		}
 	}
-}
 
-void Vehicle::UpdateAllProperties()
-{
-    	// this function set actual ship propretries relying to all equipment placed in slots
-    	// used when ship change items in slot
-    	// !!! all this stuff can be called separately by item deterioration function if item becomes broken !!!
-   	UpdatePropertiesFire();
+	for (unsigned int i=0; i<slot_artef_vec.size(); i++)
+	{
+		if (slot_artef_vec[i]->GetEquiped() == true)
+		{
+			slot_artef_vec[i]->GetItem()->UpdateInStatic();
+		}
+	}
 }
 
 void Vehicle::ChangeMass(int d_mass)
 {
 	mass += d_mass;
     	propetries.free_space = data_korpus.space - mass;
-	UpdatePropertiesSpeed();
+	UpdatePropertiesSpeed(); // as the mass influence speed this action is necessary here
 }
 
 void Vehicle::UpdatePropertiesFire()
@@ -503,10 +511,19 @@ void Vehicle::UpdatePropertiesSpeed()
      	{
         	if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)  
         	{
-           		float val = (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetSpeed() - mass/70);
-           		if (val > 0)
+           		float actual_speed = (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetSpeed() - (float)mass/70); //70 = MINIM_SHIP_SPACE, probably shuld be used unique value for each ship size
+           		if (actual_speed > 0)
            		{ 
-              			propetries.speed = val;         
+           			if (propetries.artefact_gravity > 0)
+           			{
+              				propetries.speed = (1.0 + propetries.artefact_gravity/100.0)*actual_speed;         
+           			}
+           			else
+           			{
+           				propetries.speed = actual_speed; 
+           			}
+           			
+           			drive_complex->CalcPath();
            		}
         	}
         }
@@ -575,6 +592,11 @@ void Vehicle::UpdatePropertiesProtection()
            		propetries.equipment_protector = true;
         	}       
      	}   
+     	
+     	if (propetries.artefact_protection > 0)
+     	{
+     		propetries.protection += propetries.artefact_protection;
+     	}
 }
 
 void Vehicle::UpdatePropertiesRepair()
@@ -616,6 +638,18 @@ void Vehicle::IncreaseArmor(int repair)
         //}
 //}
 
+void Vehicle::UpdatePropertiesScan()
+{
+     	propetries.scan = 0;
+
+     	if (scaner_slot->GetEquiped() == true)
+     	{
+        	if (scaner_slot->GetScanerEquipment()->GetFunctioning() == true)
+        	{
+           		propetries.scan = scaner_slot->GetScanerEquipment()->GetScan();
+        	}
+        }
+}
 
 void Vehicle::UpdatePropertiesGrab()
 {
@@ -630,18 +664,45 @@ void Vehicle::UpdatePropertiesGrab()
               	}
 	}
 }
-
-void Vehicle::UpdatePropertiesScan()
+        
+void Vehicle::UpdateArtefactInfluence()
 {
-     	propetries.scan = 0;
+	propetries.artefact_gravity = 0;
+	propetries.artefact_protection = 0;
+	
+	for (unsigned int i=0; i<slot_artef_vec.size(); i++)
+	{
+		if (slot_artef_vec[i]->GetEquiped() == true)
+		{
+		        if (slot_artef_vec[i]->GetItem()->GetFunctioning() == true)
+              		{
+				switch(slot_artef_vec[i]->GetItem()->GetSubTypeId())
+				{
+					case ENTITY::GRAVITY_ARTEFACT_ID:
+					{
+						propetries.artefact_gravity += ((GravityArtefact*)slot_artef_vec[i]->GetItem())->GetGravity();
+						break;
+					}
 
-     	if (scaner_slot->GetEquiped() == true)
-     	{
-        	if (scaner_slot->GetScanerEquipment()->GetFunctioning() == true)
-        	{
-           		propetries.scan = scaner_slot->GetScanerEquipment()->GetScan();
-        	}
-        }
+					case ENTITY::PROTECTOR_ARTEFACT_ID:
+					{
+						propetries.artefact_protection += ((ProtectorArtefact*)slot_artef_vec[i]->GetItem())->GetProtection();
+						break;
+					}
+				}              		
+              		}
+		}
+	}
+	
+	if (propetries.artefact_gravity > 0)
+	{
+		UpdatePropertiesSpeed();
+	}
+	
+	if (propetries.artefact_protection > 0)
+	{
+		UpdatePropertiesProtection();
+	}
 }
                
 void Vehicle::RenderInfoInSpace(const vec2f& scroll_coords)
@@ -875,7 +936,7 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
        	if (land) save_ptree.put(root+"unresolved.land_id", land->GetId());
 	else save_ptree.put(root+"unresolved.land_id", NONE_ID);
 	
-       	if (place_type_id == ENTITY::VEHICLESLOT_ID) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", parent_vehicleslot->GetId()); }
+       	if (place_type_id == ENTITY::VEHICLE_SLOT_ID) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", parent_vehicleslot->GetId()); }
        	else { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); }  	
 }
 

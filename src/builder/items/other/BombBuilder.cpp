@@ -53,7 +53,7 @@ void BombBuilder::CreateNewInternals()
 	bomb->SetTextureOb(texOb);
 	bomb->SetDamage(damage);
 	bomb->SetRadius(radius);
-	bomb->SetFunctionalSlotSubTypeId(ITEMSLOT::CARGO_ID);
+	bomb->SetFunctionalSlotSubTypeId(ENTITY::CARGO_SLOT_ID);
 }
 
 

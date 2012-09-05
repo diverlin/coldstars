@@ -164,7 +164,7 @@ void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, Vehicle* 
 {
 	for(unsigned int i=0; i<vehicle->slot_total_vec.size(); i++)
 	{
-		if ( (vehicle->slot_total_vec[i]->GetEquiped() == false) and (vehicle->slot_total_vec[i]->GetSubTypeId() != ITEMSLOT::CARGO_ID) )
+		if ( (vehicle->slot_total_vec[i]->GetEquiped() == false) and (vehicle->slot_total_vec[i]->GetSubTypeId() != ENTITY::CARGO_SLOT_ID) )
                	{
                		if (requested_subtype_id == vehicle->slot_total_vec[i]->GetSubTypeId())
                		{

@@ -16,11 +16,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "FreezerEquipment.hpp"
+#include "../../common/constants.hpp"
+#include "../../common/myStr.hpp"
+#include "../../items/modules/FreezerModule.hpp"
 
 FreezerEquipment::FreezerEquipment(int id)
 {
         data_id.id         = id;
-        data_id.subtype_id = SUBTYPE::FREEZER_ID; 
+        data_id.subtype_id = ENTITY::FREEZER_EQUIPMENT_ID; 
          
     	freeze_orig = 0;
 }

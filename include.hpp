@@ -81,20 +81,6 @@ class WeaponSelector;
 
 #include "src/spaceobjects/BlackHole.hpp"
 
-#include "src/items/equipment/BaseEquipment.hpp"
-#include "src/items/equipment/RocketEquipment.hpp"
-#include "src/items/equipment/LazerEquipment.hpp"
-#include "src/items/equipment/RadarEquipment.hpp"
-#include "src/items/equipment/DriveEquipment.hpp"
-#include "src/items/equipment/BakEquipment.hpp"
-#include "src/items/equipment/EnergizerEquipment.hpp"
-#include "src/items/equipment/ProtectorEquipment.hpp"
-#include "src/items/equipment/DroidEquipment.hpp"
-#include "src/items/equipment/FreezerEquipment.hpp"
-#include "src/items/equipment/ScanerEquipment.hpp"
-#include "src/items/equipment/GrappleEquipment.hpp"
-
-
 #include "src/docking/Room.hpp"
 #include "src/docking/Angar.hpp"
 #include "src/docking/Shop.hpp"
@@ -138,17 +124,6 @@ class WeaponSelector;
 #include "src/spaceobjects/Satellite.hpp"
 #include "src/spaceobjects/Ship.hpp"
 #include "src/builder/ContainerBuilder.hpp"
-#include "src/builder/items/equipment/BakEquipmentBuilder.hpp"
-#include "src/builder/items/equipment/DriveEquipmentBuilder.hpp"
-#include "src/builder/items/equipment/DroidEquipmentBuilder.hpp"
-#include "src/builder/items/equipment/EnergizerEquipmentBuilder.hpp"
-#include "src/builder/items/equipment/FreezerEquipmentBuilder.hpp"
-#include "src/builder/items/equipment/GrappleEquipmentBuilder.hpp"
-#include "src/builder/items/equipment/LazerEquipmentBuilder.hpp"
-#include "src/builder/items/equipment/ProtectorEquipmentBuilder.hpp"
-#include "src/builder/items/equipment/RadarEquipmentBuilder.hpp"
-#include "src/builder/items/equipment/RocketEquipmentBuilder.hpp"
-#include "src/builder/items/equipment/ScanerEquipmentBuilder.hpp"
 
 #include "src/builder/items/other/BombBuilder.hpp"
 ///
@@ -247,33 +222,6 @@ class WeaponSelector;
 #include "src/items/others/Bomb.cpp" 
 #include "src/spaceobjects/BlackHole.cpp"
 
-#include "src/items/BaseItem.cpp"
-#include "src/items/equipment/BaseEquipment.cpp"
-#include "src/items/equipment/RocketEquipment.cpp"
-#include "src/items/equipment/LazerEquipment.cpp"
-#include "src/items/equipment/RadarEquipment.cpp"
-#include "src/items/equipment/DriveEquipment.cpp"
-#include "src/items/equipment/BakEquipment.cpp"
-#include "src/items/equipment/EnergizerEquipment.cpp"
-#include "src/items/equipment/ProtectorEquipment.cpp"
-#include "src/items/equipment/DroidEquipment.cpp"
-#include "src/items/equipment/FreezerEquipment.cpp"
-#include "src/items/equipment/ScanerEquipment.cpp"
-#include "src/items/equipment/GrappleEquipment.cpp"
-
-#include "src/items/modules/BaseModule.cpp"
-#include "src/items/modules/RocketModule.cpp"
-#include "src/items/modules/LazerModule.cpp"
-#include "src/items/modules/RadarModule.cpp"
-#include "src/items/modules/DriveModule.cpp"
-#include "src/items/modules/BakModule.cpp"
-#include "src/items/modules/EnergizerModule.cpp"
-#include "src/items/modules/ProtectorModule.cpp"
-#include "src/items/modules/DroidModule.cpp"
-#include "src/items/modules/FreezerModule.cpp"
-#include "src/items/modules/ScanerModule.cpp"
-#include "src/items/modules/GrappleModule.cpp"
-
 #include "src/docking/VehicleSlot.cpp"
 #include "src/docking/Room.cpp"
 #include "src/docking/Angar.cpp"
@@ -363,11 +311,6 @@ class WeaponSelector;
 
 #include "src/render/Render.cpp"
 
-
-
-
-
-
 #include "src/effects/ShockWaveEffect.cpp"
 
 #include "src/text/textstuff.cpp"
@@ -375,19 +318,6 @@ class WeaponSelector;
 
 #include "src/common/TurnTimer.cpp"
 #include "src/common/GameDate.cpp"
-
-#include "src/builder/items/equipment/BakEquipmentBuilder.cpp"
-#include "src/builder/items/equipment/DriveEquipmentBuilder.cpp"
-#include "src/builder/items/equipment/DroidEquipmentBuilder.cpp"
-#include "src/builder/items/equipment/EnergizerEquipmentBuilder.cpp"
-#include "src/builder/items/equipment/FreezerEquipmentBuilder.cpp"
-#include "src/builder/items/equipment/GrappleEquipmentBuilder.cpp"
-#include "src/builder/items/equipment/LazerEquipmentBuilder.cpp"
-#include "src/builder/items/equipment/ProtectorEquipmentBuilder.cpp"
-#include "src/builder/items/equipment/RadarEquipmentBuilder.cpp"
-#include "src/builder/items/equipment/RocketEquipmentBuilder.cpp"
-#include "src/builder/items/equipment/ScanerEquipmentBuilder.cpp"
-
 
 #include "src/builder/items/other/BombBuilder.cpp"
 

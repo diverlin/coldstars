@@ -36,7 +36,7 @@ const bool TEST_ON = false;
 const double NO_DELAY = 0.0f;
 const int NO_ADDITIONAL_INFO = 0;
 
-const std::string GAME_TITLE = "cold star V0.0.4.56 (SFML/C++)";
+const std::string GAME_TITLE = "cold star V0.0.4.57 (SFML/C++)";
 
 const float RADAR_SCALE = 1/50.0;
 
@@ -195,410 +195,406 @@ namespace COLOR
 	const Color4i DEFAULT4i;	
 }
 
-namespace ITEMSLOT
-{
-	enum TYPE
-	{
-		CARGO_ID, GATE_ID, WEAPON_ID, DRIVE_ID, RADAR_ID, BAK_ID, ENERGIZER_ID, PROTECTOR_ID, DROID_ID, FREEZER_ID, GRAPPLE_ID, SCANER_ID 
-	};
-}
 
 namespace ENTITY 
 {
-enum TYPE
-{
-	VEHICLE_ID, SHIP_ID, SPACESTATION_ID, SATELLITE_ID, 
-	NPC_ID, ROCKETBULLET_ID, MINERALS_ID, FOOD_ID, MEDICINE_ID, MILITARY_ID, DRUG_ID, EXCLUSIVE_ID, CONTAINER_ID, 
-	GALAXY_ID, STARSYSTEM_ID, STAR_ID, ASTEROID_ID, PLANET_ID, BLACKHOLE_ID, BOMB_ID, GOODS_ID, PLAYER_ID, KOSMOPORT_ID, LAND_ID,
-	SPACE_ID,
-	GOVERMENT_ID, STORE_ID, SHOP_ID, ANGAR_ID, VEHICLESLOT_ID, ITEMSLOT_ID
-};
-
-namespace GALAXY
-{
-const int STARSYSTEM_NUM_MIN = 10;
-const int STARSYSTEM_NUM_MAX = 10;
-
-const int DISTANTSTAR_SIZE_MIN = 3; 
-const int DISTANTSTAR_SIZE_MAX = 15;
-}
-
-namespace STARSYSTEM
-{
-const int PLANET_MIN = 3;
-const int PLANET_MAX = 5;
-
-const int SHIP_INIT_MIN = 4;
-const int SHIP_INIT_MAX = 7;
-const int ENEMYSHIP_INIT_MIN = 10;
-const int ENEMYSHIP_INIT_MAX = 20;
-
-	enum CONDITION
-	{
-		WAR_ID, CAPTURED_ID, SAFE_ID
-	};
-
-}
-
-namespace STAR
-{ 
-const int SIZE_MIN_ = 80;
-const int SIZE_MAX_ = 120;
-}
-
-namespace PLANET
-{
-namespace SURFACE
-{
 	enum TYPE
 	{
-		EARTH_ID, WATER_ID, LAVA_ID, ICE_ID, GAS_ID, ROCK_ID		
+		VEHICLE_ID, SHIP_ID, SPACESTATION_ID, SATELLITE_ID, 
+		NPC_ID, ROCKETBULLET_ID, MINERALS_ID, FOOD_ID, MEDICINE_ID, MILITARY_ID, DRUG_ID, EXCLUSIVE_ID, CONTAINER_ID, 
+		GALAXY_ID, STARSYSTEM_ID, STAR_ID, ASTEROID_ID, PLANET_ID, BLACKHOLE_ID, BOMB_ID, GOODS_ID, PLAYER_ID, KOSMOPORT_ID, LAND_ID,
+		SPACE_ID,
+		GOVERMENT_ID, STORE_ID, SHOP_ID, ANGAR_ID,
+		
+		EQUIPMENT_ID, MODULE_ID, ARTEFACT_ID,
+		
+		VEHICLE_SLOT_ID, ITEM_SLOT_ID, CARGO_SLOT_ID, GATE_SLOT_ID, WEAPON_SLOT_ID, DRIVE_SLOT_ID, RADAR_SLOT_ID, BAK_SLOT_ID, ENERGIZER_SLOT_ID, PROTECTOR_SLOT_ID, DROID_SLOT_ID, FREEZER_SLOT_ID, GRAPPLE_SLOT_ID, SCANER_SLOT_ID, ARTEFACT_SLOT_ID, 
+		
+		LAZER_EQUIPMENT_ID, ROCKET_EQUIPMENT_ID, DRIVE_EQUIPMENT_ID, RADAR_EQUIPMENT_ID, BAK_EQUIPMENT_ID, ENERGIZER_EQUIPMENT_ID, PROTECTOR_EQUIPMENT_ID, DROID_EQUIPMENT_ID, FREEZER_EQUIPMENT_ID, GRAPPLE_EQUIPMENT_ID, SCANER_EQUIPMENT_ID,  
+		LAZER_MODULE_ID, ROCKET_MODULE_ID, DRIVE_MODULE_ID, RADAR_MODULE_ID, BAK_MODULE_ID, ENERGIZER_MODULE_ID, PROTECTOR_MODULE_ID, DROID_MODULE_ID, FREEZER_MODULE_ID, GRAPPLE_MODULE_ID, SCANER_MODULE_ID,
+	
+		GRAVITY_ARTEFACT_ID, PROTECTOR_ARTEFACT_ID
 	};
-}
 
-const int DISTANCE_MIN = 400;
-const int DISTANCE_MAX = 500;
-const int SIZE_MIN_ = 40;
-const int SIZE_MAX_ = 60;
-const int SPEED_MIN = 40;
-const int SPEED_MAX = 50;
-const int POPULATION_MIN = 6000;
-const int POPULATION_MAX = 20000;
-}
-
-namespace ASTEROID
-{
-const int SIZE_MIN_ = 6;
-const int SIZE_MAX_ = 12;
-}
-
-namespace SPACESTATION
-{
-const int MASS_MIN = 1000;
-const int MASS_MAX = 2000;
-}
-
-namespace SATELLITE
-{
-const int MASS_MIN = 100;
-const int MASS_MAX = 200;
-}
-
-namespace ROCKET
-{
-const int ARMOR          = 6;
-const int START_SPEED    = 200;
-const int SPEED_MAX      = 300;
-const float DELTA_SPEED    = 0.5;
-const float ANGULAR_SPEED  = 1.0;
-const int LIFE_TIME = 3 * TURN_TIME;
-}
-
-}
-
-
-namespace TYPE
-{       
-        enum TYPE
+	namespace GALAXY
 	{
-                EQUIPMENT_ID, MODULE_ID
-	};        
-}
+		const int STARSYSTEM_NUM_MIN = 10;
+		const int STARSYSTEM_NUM_MAX = 10;
 
-namespace SUBTYPE
-{
-        enum SUBTYPE
-        {
-                LAZER_ID, ROCKET_ID, DRIVE_ID, RADAR_ID, BAK_ID, ENERGIZER_ID, PROTECTOR_ID, DROID_ID, FREEZER_ID, GRAPPLE_ID, SCANER_ID  
-        };
-}
+		const int DISTANTSTAR_SIZE_MIN = 3; 
+		const int DISTANTSTAR_SIZE_MAX = 15;
+	}
 
+	namespace STARSYSTEM
+	{
+		const int PLANET_MIN = 3;
+		const int PLANET_MAX = 5;
+		
+		const int SHIP_INIT_MIN = 4;
+		const int SHIP_INIT_MAX = 7;
+		const int ENEMYSHIP_INIT_MIN = 10;
+		const int ENEMYSHIP_INIT_MAX = 20;
+	
+		enum CONDITION
+		{
+			WAR_ID, CAPTURED_ID, SAFE_ID
+		};
+
+	}
+
+	namespace STAR
+	{ 
+		const int SIZE_MIN_ = 80;
+		const int SIZE_MAX_ = 120;
+	}
+
+	namespace PLANET
+	{
+		namespace SURFACE
+		{
+			enum TYPE
+			{
+				EARTH_ID, WATER_ID, LAVA_ID, ICE_ID, GAS_ID, ROCK_ID		
+			};
+		}
+	
+		const int DISTANCE_MIN = 400;
+		const int DISTANCE_MAX = 500;
+		const int SIZE_MIN_ = 40;
+		const int SIZE_MAX_ = 60;
+		const int SPEED_MIN = 40;
+		const int SPEED_MAX = 50;
+		const int POPULATION_MIN = 6000;
+		const int POPULATION_MAX = 20000;
+	}
+
+	namespace ASTEROID
+	{
+		const int SIZE_MIN_ = 6;
+		const int SIZE_MAX_ = 12;
+	}
+	
+	namespace SPACESTATION
+	{
+		const int MASS_MIN = 1000;
+		const int MASS_MAX = 2000;
+	}
+	
+	namespace SATELLITE
+	{
+		const int MASS_MIN = 100;
+		const int MASS_MAX = 200;
+	}
+
+	namespace ROCKET
+	{
+		const int ARMOR          = 6;
+		const int START_SPEED    = 200;
+		const int SPEED_MAX      = 300;
+		const float DELTA_SPEED    = 0.5;
+		const float ANGULAR_SPEED  = 1.0;
+		const int LIFE_TIME = 3 * TURN_TIME;
+	}
+
+}
 
 namespace EQUIPMENT
 {       
-namespace ENERGIZER
-{
-const int ENERGY_MIN = 2000;
-const int ENERGY_MAX = 10000;
-const int RESTORATION_MIN = 20;
-const int RESTORATION_MAX = 100;
-const int MODULES_NUM_MIN = 1;
-const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+	namespace ENERGIZER
+	{
+		const int ENERGY_MIN = 2000;
+		const int ENERGY_MAX = 10000;
+		const int RESTORATION_MIN = 20;
+		const int RESTORATION_MAX = 100;
+		const int MODULES_NUM_MIN = 1;
+		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		
+		const int MASS_MIN = 20;
+		const int MASS_MAX = 80;
+		const int CONDITION_MIN = 1000;
+		const int CONDITION_MAX = 4000;
+		
+		const float ENERGY_WEIGHT = 0.4;
+		const float RESTORATION_WEIGHT = 0.4;
+		const float MODULES_NUM_WEIGHT  = 0.2;
+	}
+	
+	namespace FREEZER
+	{
+		const int FREEZE_MIN = 1;
+		const int FREEZE_MAX = 5;
+		const int MODULES_NUM_MIN = 0;
+		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		const int MASS_MIN = 10;
+		const int MASS_MAX = 20;
+		const int CONDITION_MIN = 3000;
+		const int CONDITION_MAX = 4000;
+		
+		const float FREEZE_WEIGHT = 0.5;
+		const float MODULES_NUM_WEIGHT = 0.5;
+	}
 
-const int MASS_MIN = 20;
-const int MASS_MAX = 80;
-const int CONDITION_MIN = 1000;
-const int CONDITION_MAX = 4000;
+	namespace GRAPPLE
+	{
+		const int STRENGTH_MIN = 6;
+		const int STRENGTH_MAX = 50;
+		const int RADIUS_MIN = 100;
+		const int RADIUS_MAX = 200;
+		const int SPEED_MIN = 100;
+		const int SPEED_MAX = 170;
+		const int MODULES_NUM_MIN = 0;
+		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		const int MASS_MIN = 10;
+		const int MASS_MAX = 40;
+		const int CONDITION_MIN = 100;
+		const int CONDITION_MAX = 1000;
+		
+		const float STRENGTH_WEIGHT = 0.4;
+		const float RADIUS_WEIGHT = 0.3;
+		const float SPEED_WEIGHT = 0.2;
+		const float MAXNUMITEM_WEIGHT = 0.1;
+		const float MODULES_NUM_WEIGHT = 0.1;
+	}
 
-const float ENERGY_WEIGHT = 0.4;
-const float RESTORATION_WEIGHT = 0.4;
-const float MODULES_NUM_WEIGHT  = 0.2;
+	namespace RADAR
+	{
+		const int RADIUS_MIN = 1000; //700
+		const int RADIUS_MAX = 1500; //1500
+		const int MODULES_NUM_MIN = 0;
+		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		const int MASS_MIN = 10;
+		const int MASS_MAX = 50;
+		const int CONDITION_MIN = 2000;
+		const int CONDITION_MAX = 10000;
+		
+		const float RADIUS_WEIGHT = 0.6;
+		const float MODULES_NUM_WEIGHT = 0.4;
+	}
+
+	namespace DRIVE
+	{
+		const int SPEED_MIN = 130;   
+		const int SPEED_MAX = 300;   
+		
+		const int HYPER_MIN = 100 * 20;
+		const int HYPER_MAX = 400 * 20;
+		const int MODULES_NUM_MIN = 0;
+		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		
+		const int MASS_MIN = 20;
+		const int MASS_MAX = 70;
+		const int CONDITION_MIN = 500;
+		const int CONDITION_MAX = 2000;
+		
+		const float SPEED_WEIGHT = 0.4;
+		const float HYPER_WEIGHT = 0.4;
+		const float MODULES_NUM_WEIGHT = 0.2;
+	}
+
+	namespace PROTECTOR
+	{
+		const int PROTECTION_MIN = 3;
+		const int PROTECTION_MAX = 30;
+		const int MODULES_NUM_MIN = 1;
+		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		
+		const int CONDITION_MIN = 2000;
+		const int CONDITION_MAX = 10000;
+		const int MASS_MIN = 20;
+		const int MASS_MAX = 80;
+		
+		const float PROTECTION_WEIGHT = 0.8;
+		const float MODULES_NUM_WEIGHT = 0.2;
+	}
+
+	namespace BAK
+	{
+		const int FUEL_MIN = 100 * 20;    // *20 - debug
+		const int FUEL_MAX = 400 * 20;    // *20 - debug
+		const int MODULES_NUM_MIN = 0;
+		const int MODULES_NUM_MAX = 1;
+		
+		const int MASS_MIN = 10;
+		const int MASS_MAX = 40;
+		const int CONDITION_MIN = 30;
+		const int CONDITION_MAX = 100;
+		
+		const float FUEL_WEIGHT = 0.7;
+		const float MODULES_NUM_WEIGHT = 0.3;
+	}
+
+	namespace DROID
+	{
+		const int REPAIR_MIN = 1;
+		const int REPAIR_MAX = 15;
+		const int MODULES_NUM_MIN = 0;
+		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		
+		const int MASS_MIN = 10;
+		const int MASS_MAX = 50;
+		const int CONDITION_MIN = 300;
+		const int CONDITION_MAX = 2000;
+		
+		const float REPAIR_WEIGHT = 0.8;
+		const float MODULES_NUM_WEIGHT = 0.2;
+	}
+
+	namespace SCANER
+	{
+		const int SCAN_MIN = 2;
+		const int SCAN_MAX = 40;
+		const int MODULES_NUM_MIN = 0;
+		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		
+		const int MASS_MIN = 7;
+		const int MASS_MAX = 38;
+		const int CONDITION_MIN = 30;
+		const int CONDITION_MAX = 100;
+		
+		const float SCAN_WEIGHT = 0.7;
+		const float MODULES_NUM_WEIGHT = 0.3;
+	}
+
+	namespace LAZER
+	{
+		const int RADIUS_MIN = 200;
+		const int RADIUS_MAX = 500;
+		const int DAMAGE_MIN = 40;
+		const int DAMAGE_MAX = 200;
+		const int MODULES_NUM_MIN = 0;
+		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		
+		const int MASS_MIN = 10;
+		const int MASS_MAX = 40;
+		const int CONDITION_MIN = 100;
+		const int CONDITION_MAX = 1000;
+		
+		const float DAMAGE_WEIGHT = 0.4;
+		const float RADIUS_WEIGHT = 0.4;
+		const float MODULES_NUM_WEIGHT = 0.2;
+	}
+
+	namespace ROCKET
+	{
+		const int AMMO_MIN = 20;
+		const int AMMO_MAX = 40;
+		const int RADIUS_MIN = 350;
+		const int RADIUS_MAX = 750;
+		const int DAMAGE_MIN = 10;
+		const int DAMAGE_MAX = 20;
+		const int MODULES_NUM_MIN = 0;
+		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		
+		const int MASS_MIN = 30;
+		const int MASS_MAX = 60;
+		const int CONDITION_MIN = 100;
+		const int CONDITION_MAX = 900;
+		
+		const float AMMO_WEIGHT = 0.3;
+		const float DAMAGE_WEIGHT = 0.3;
+		const float RADIUS_WEIGHT = 0.2;
+		const float MODULES_NUM_WEIGHT = 0.2;
+	}
 }
-namespace FREEZER
-{
-const int FREEZE_MIN = 1;
-const int FREEZE_MAX = 5;
-const int MODULES_NUM_MIN = 0;
-const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
-const int MASS_MIN = 10;
-const int MASS_MAX = 20;
-const int CONDITION_MIN = 3000;
-const int CONDITION_MAX = 4000;
-
-const float FREEZE_WEIGHT = 0.5;
-const float MODULES_NUM_WEIGHT = 0.5;
-}
-
-namespace GRAPPLE
-{
-const int STRENGTH_MIN = 6;
-const int STRENGTH_MAX = 50;
-const int RADIUS_MIN = 100;
-const int RADIUS_MAX = 200;
-const int SPEED_MIN = 100;
-const int SPEED_MAX = 170;
-const int MODULES_NUM_MIN = 0;
-const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
-const int MASS_MIN = 10;
-const int MASS_MAX = 40;
-const int CONDITION_MIN = 100;
-const int CONDITION_MAX = 1000;
-
-const float STRENGTH_WEIGHT = 0.4;
-const float RADIUS_WEIGHT = 0.3;
-const float SPEED_WEIGHT = 0.2;
-const float MAXNUMITEM_WEIGHT = 0.1;
-const float MODULES_NUM_WEIGHT = 0.1;
-}
-
-namespace RADAR
-{
-const int RADIUS_MIN = 1000; //700
-const int RADIUS_MAX = 1500; //1500
-const int MODULES_NUM_MIN = 0;
-const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
-const int MASS_MIN = 10;
-const int MASS_MAX = 50;
-const int CONDITION_MIN = 2000;
-const int CONDITION_MAX = 10000;
-
-const float RADIUS_WEIGHT = 0.6;
-const float MODULES_NUM_WEIGHT = 0.4;
-}
-
-namespace DRIVE
-{
-const int SPEED_MIN = 130;   
-const int SPEED_MAX = 300;   
-
-const int HYPER_MIN = 100 * 20;
-const int HYPER_MAX = 400 * 20;
-const int MODULES_NUM_MIN = 0;
-const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
-
-const int MASS_MIN = 20;
-const int MASS_MAX = 70;
-const int CONDITION_MIN = 500;
-const int CONDITION_MAX = 2000;
-
-const float SPEED_WEIGHT = 0.4;
-const float HYPER_WEIGHT = 0.4;
-const float MODULES_NUM_WEIGHT = 0.2;
-}
-
-namespace PROTECTOR
-{
-const int PROTECTION_MIN = 3;
-const int PROTECTION_MAX = 30;
-const int MODULES_NUM_MIN = 1;
-const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
-
-const int CONDITION_MIN = 2000;
-const int CONDITION_MAX = 10000;
-const int MASS_MIN = 20;
-const int MASS_MAX = 80;
-
-const float PROTECTION_WEIGHT = 0.8;
-const float MODULES_NUM_WEIGHT = 0.2;
-}
-
-namespace BAK
-{
-const int FUEL_MIN = 100 * 20;    // *20 - debug
-const int FUEL_MAX = 400 * 20;    // *20 - debug
-const int MODULES_NUM_MIN = 0;
-const int MODULES_NUM_MAX = 1;
-
-const int MASS_MIN = 10;
-const int MASS_MAX = 40;
-const int CONDITION_MIN = 30;
-const int CONDITION_MAX = 100;
-
-const float FUEL_WEIGHT = 0.7;
-const float MODULES_NUM_WEIGHT = 0.3;
-}
-
-namespace DROID
-{
-const int REPAIR_MIN = 1;
-const int REPAIR_MAX = 15;
-const int MODULES_NUM_MIN = 0;
-const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
-
-const int MASS_MIN = 10;
-const int MASS_MAX = 50;
-const int CONDITION_MIN = 300;
-const int CONDITION_MAX = 2000;
-
-const float REPAIR_WEIGHT = 0.8;
-const float MODULES_NUM_WEIGHT = 0.2;
-}
-
-namespace SCANER
-{
-const int SCAN_MIN = 2;
-const int SCAN_MAX = 40;
-const int MODULES_NUM_MIN = 0;
-const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
-
-const int MASS_MIN = 7;
-const int MASS_MAX = 38;
-const int CONDITION_MIN = 30;
-const int CONDITION_MAX = 100;
-
-const float SCAN_WEIGHT = 0.7;
-const float MODULES_NUM_WEIGHT = 0.3;
-}
-
-namespace LAZER
-{
-const int RADIUS_MIN = 200;
-const int RADIUS_MAX = 500;
-const int DAMAGE_MIN = 40;
-const int DAMAGE_MAX = 200;
-const int MODULES_NUM_MIN = 0;
-const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
-
-const int MASS_MIN = 10;
-const int MASS_MAX = 40;
-const int CONDITION_MIN = 100;
-const int CONDITION_MAX = 1000;
-
-const float DAMAGE_WEIGHT = 0.4;
-const float RADIUS_WEIGHT = 0.4;
-const float MODULES_NUM_WEIGHT = 0.2;
-}
-
-namespace ROCKET
-{
-
-const int AMMO_MIN = 20;
-const int AMMO_MAX = 40;
-const int RADIUS_MIN = 350;
-const int RADIUS_MAX = 750;
-const int DAMAGE_MIN = 10;
-const int DAMAGE_MAX = 20;
-const int MODULES_NUM_MIN = 0;
-const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
-
-const int MASS_MIN = 30;
-const int MASS_MAX = 60;
-const int CONDITION_MIN = 100;
-const int CONDITION_MAX = 900;
-
-const float AMMO_WEIGHT = 0.3;
-const float DAMAGE_WEIGHT = 0.3;
-const float RADIUS_WEIGHT = 0.2;
-const float MODULES_NUM_WEIGHT = 0.2;
-}
-}
-
 
 namespace MODULE
 {
 
-namespace ENERGIZER
-{
-const int ENERGY_MIN = 0;
-const int ENERGY_MAX = 25;
-const int RESTORATION_MIN = 0;
-const int RESTORATION_MAX = 25;
-}
+	namespace ENERGIZER
+	{
+		const int ENERGY_MIN = 0;
+		const int ENERGY_MAX = 25;
+		const int RESTORATION_MIN = 0;
+		const int RESTORATION_MAX = 25;
+	}
 
-namespace FREEZER
-{
-const int FREEZE_MIN = 1;
-const int FREEZE_MAX = 6;
-}
+	namespace FREEZER
+	{
+		const int FREEZE_MIN = 1;
+		const int FREEZE_MAX = 6;
+	}
 
-namespace GRAPPLE
-{
-const int STRENGTH_MIN = 1;
-const int STRENGTH_MAX = 20;
-const int RADIUS_MIN = 0;
-const int RADIUS_MAX = 200;
-const int SPEED_MIN = 0;
-const int SPEED_MAX = 80;
-}
+	namespace GRAPPLE
+	{
+		const int STRENGTH_MIN = 1;
+		const int STRENGTH_MAX = 20;
+		const int RADIUS_MIN = 0;
+		const int RADIUS_MAX = 200;
+		const int SPEED_MIN = 0;
+		const int SPEED_MAX = 80;
+	}
 
-namespace RADAR
-{
-const int RADIUS_MIN = 100;
-const int RADIUS_MAX = 1200;
-}
+	namespace RADAR
+	{
+		const int RADIUS_MIN = 100;
+		const int RADIUS_MAX = 1200;
+	}
 
-namespace DRIVE
-{
-const int SPEED_MIN = 0;
-const int SPEED_MAX = 100;
-const int HYPER_MIN = 0;
-const int HYPER_MAX = 100;
-}
+	namespace DRIVE
+	{
+		const int SPEED_MIN = 0;
+		const int SPEED_MAX = 100;
+		const int HYPER_MIN = 0;
+		const int HYPER_MAX = 100;
+	}
 
-namespace PROTECTOR
-{
-const int PROTECTION_MIN = 0;
-const int PROTECTION_MAX = 20;
-}
+	namespace PROTECTOR
+	{
+		const int PROTECTION_MIN = 0;
+		const int PROTECTION_MAX = 20;
+	}
 
-namespace BAK
-{
-const int FUEL_MIN = 0;
-const int FUEL_MAX = 100;
-}
+	namespace BAK
+	{
+		const int FUEL_MIN = 0;
+		const int FUEL_MAX = 100;
+	}
+	
+	namespace DROID
+	{
+		const int REPAIR_MIN = 0;
+		const int REPAIR_MAX = 10;
+	}
+	
+	namespace SCANER
+	{
+		const int SCAN_MIN = 0;
+		const int SCAN_MAX = 10;
+	}
 
-namespace DROID
-{
-const int REPAIR_MIN = 0;
-const int REPAIR_MAX = 10;
-}
-
-namespace SCANER
-{
-const int SCAN_MIN = 0;
-const int SCAN_MAX = 10;
-}
-
-namespace LAZER
-{
-const int DAMAGE_MIN = 0;
-const int DAMAGE_MAX = 10;
-const int RADIUS_MIN = 0;
-const int RADIUS_MAX = 300;
-}
-
-namespace ROCKET
-{
-const int AMMO_MIN   = 0;
-const int AMMO_MAX   = 10;
-const int DAMAGE_MIN = 0;
-const int DAMAGE_MAX = 6;
-const int RADIUS_MIN = 0;
-const int RADIUS_MAX = 450;
-}
+	namespace LAZER
+	{
+		const int DAMAGE_MIN = 0;
+		const int DAMAGE_MAX = 10;
+		const int RADIUS_MIN = 0;
+		const int RADIUS_MAX = 300;
+	}
+	
+	namespace ROCKET
+	{
+		const int AMMO_MIN   = 0;
+		const int AMMO_MAX   = 10;
+		const int DAMAGE_MIN = 0;
+		const int DAMAGE_MAX = 6;
+		const int RADIUS_MIN = 0;
+		const int RADIUS_MAX = 450;
+	}
 }	
 
+namespace ARTEFACT
+{
+	namespace GRAVITY
+	{
+		const int GRAVITYRATE_MIN = 10;
+		const int GRAVITYRATE_MAX = 40;		
+	}
 
+	namespace PROTECTOR
+	{
+		const int PROTECTION_MIN = 10;
+		const int PROTECTION_MAX = 40;		
+	}
+}
 
 namespace RACE 
 {
@@ -631,25 +627,6 @@ namespace CLASS
 		RANGER_ID, WARRIOR_ID, PIRAT_ID, TRADER_ID, DIPLOMAT_ID	
 	};
 }
-
-/*
-namespace QUEST
-{
-	enum TYPE
-	{
-		LIBERATION_STARSYSTEM_ID, DESTROY_SHIP_ID	
-	};
-}
-
-namespace TASK
-{
-	enum TYPE
-	{
-		SELFCARE_ID, LANDING_ID, GRABBING_ID
-	};
-}
-*/
-
 
 
 
@@ -731,8 +708,8 @@ namespace GUI
 	
 	namespace MAP
 	{
-	const int BORDER_X = 60;
-	const int BORDER_Y = 60;
+		const int BORDER_X = 60;
+		const int BORDER_Y = 60;
 	}
 }
 
@@ -755,7 +732,7 @@ namespace TEXTURE
 		NEBULA_BACKGROUND_ID, DISTANTSTAR_ID, 
 		FACE_ID, 
 					
-		VEHICLESLOT_ID, ITEMSLOT_ID, TURREL_ID,
+		VEHICLE_SLOT_ID, ITEM_SLOT_ID, TURREL_ID,
 	
 		SPACESTATION_ID, SATELLITE_ID, SHIP_ID, STAR_ID, PLANET_ID, ATMOSPHERE_ID,
 		ASTEROID_ID, MINERAL_ID, CONTAINER_ID, BOMB_ID, BLACKHOLE_ID, 		
@@ -776,5 +753,6 @@ namespace GAME
 {
 	const int WEAPONS_NUM_MAX = 9;
 }
+
 #endif
 

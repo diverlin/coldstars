@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef ENERGIZERMODULE_H
 #define ENERGIZERMODULE_H
 
+#include "BaseModule.hpp"
 
 class EnergizerModule : public BaseModule
 {
@@ -47,8 +48,5 @@ class EnergizerModule : public BaseModule
 		void LoadDataUniqueEnergizerModule(const boost::property_tree::ptree&);
 		void ResolveDataUniqueEnergizerModule();
 };
-
-EnergizerModule* GetNewEnergizerModule();
-
 
 #endif

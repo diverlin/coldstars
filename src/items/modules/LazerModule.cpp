@@ -16,11 +16,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "LazerModule.hpp"
+#include "../../common/constants.hpp"
+#include "../../common/myStr.hpp"
 
 LazerModule::LazerModule(int id)
 {
         data_id.type_id    = id;
-        data_id.subtype_id = SUBTYPE::LAZER_ID;  
+        data_id.subtype_id = ENTITY::LAZER_MODULE_ID;  
         
      	damage_add = 0;
      	radius_add = 0;

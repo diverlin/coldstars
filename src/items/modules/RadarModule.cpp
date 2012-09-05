@@ -16,11 +16,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "RadarModule.hpp"
+#include "../../common/constants.hpp"
+#include "../../common/myStr.hpp"
 
 RadarModule::RadarModule(int id)
 {
         data_id.id = id;
-        data_id.subtype_id = SUBTYPE::RADAR_ID; 
+        data_id.subtype_id = ENTITY::RADAR_MODULE_ID; 
         
      	radius_add = 0;
 }

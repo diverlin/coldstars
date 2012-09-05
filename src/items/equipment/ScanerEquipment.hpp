@@ -20,6 +20,7 @@
 #ifndef SCANEREQUIPMENT_H
 #define SCANEREQUIPMENT_H
 
+#include "BaseEquipment.hpp"
 
 class ScanerEquipment : public BaseEquipment
 {

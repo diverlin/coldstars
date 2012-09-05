@@ -16,11 +16,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "FreezerModule.hpp"
+#include "../../common/constants.hpp"
+#include "../../common/myStr.hpp"
 
 FreezerModule::FreezerModule(int id)
 {
         data_id.type_id    = id;
-        data_id.subtype_id = SUBTYPE::FREEZER_ID; 
+        data_id.subtype_id = ENTITY::FREEZER_MODULE_ID; 
         
      	freeze_add = 0;
 }
@@ -78,18 +81,3 @@ void FreezerModule::ResolveDataUniqueFreezerModule()
 {}
 
 
-FreezerModule* GetNewFreezerModule()
-{
-    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-        int freeze_add = getRandInt(MODULE::FREEZER::FREEZE_MIN, MODULE::FREEZER::FREEZE_MAX);
-
-        int id = SimpleIdGenerator::Instance().GetNextId();
-        
-        FreezerModule* freezer_module = new FreezerModule(freeze_add);
-        freezer_module->SetTextureOb(texOb);
-        freezer_module->SetFreezeAdd(freeze_add);
-        
-        EntityManager::Instance().RegisterEntity(freezer_module);
-                
-        return freezer_module;
-}

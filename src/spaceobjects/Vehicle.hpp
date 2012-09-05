@@ -92,6 +92,9 @@ struct VehiclePropetries
         
 	int energy;
 	int temperature;
+	
+	int artefact_gravity;
+	int artefact_protection;
 		
 	// simplification
 	int average_damage;
@@ -115,6 +118,9 @@ struct VehiclePropetries
             
         energy(0),
         temperature(0),
+        artefact_gravity(0),
+        artefact_protection(0),
+        
         average_damage(0),
         average_fire_radius(0) ,
         equipment_radar(false),
@@ -195,7 +201,6 @@ class Vehicle : public BaseGameEntity
         	virtual void PostDeathUniqueEvent(bool); 
         	
         	void UpdateAllFunctionalItemsInStatic();
-        	void UpdateAllProperties();
              		void ChangeMass(int);
              		void UpdatePropertiesFire();
              		void UpdatePropertiesRadar();
@@ -205,6 +210,7 @@ class Vehicle : public BaseGameEntity
              		void UpdatePropertiesRepair();
              		void UpdatePropertiesScan();
              		void UpdatePropertiesGrab();
+             		void UpdateArtefactInfluence();
 
         	void HyperJumpEvent();
         	void DockingEvent();
@@ -255,6 +261,7 @@ class Vehicle : public BaseGameEntity
                 
                 std::vector<ItemSlot*> slot_total_vec;
                 std::vector<ItemSlot*> slot_funct_vec;
+        	std::vector<ItemSlot*> slot_artef_vec;
         	std::vector<ItemSlot*> slot_cargo_vec;
                                 
         	// KONTUR RECT 

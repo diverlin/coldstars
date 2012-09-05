@@ -19,7 +19,7 @@
 #include "Slider.hpp"
 #include "../render/Render.hpp"
 #include "../common/constants.hpp"
-#include "../resources/resources.hpp"
+#include "../resources/GuiTextureObCollector.hpp"
 #include "../common/myStr.hpp"
 #include "../gui/ButtonSingle.hpp"
 #include "../gui/ButtonTrigger.hpp"

@@ -16,11 +16,15 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "ScanerEquipment.hpp"
+#include "../../common/constants.hpp"
+#include "../../common/myStr.hpp"
+#include "../../items/modules/ScanerModule.hpp"
 
 ScanerEquipment::ScanerEquipment(int id)
 {
         data_id.id         = id;
-        data_id.subtype_id = SUBTYPE::SCANER_ID; 
+        data_id.subtype_id = ENTITY::SCANER_EQUIPMENT_ID; 
         
     	scan_orig = 0;
 }

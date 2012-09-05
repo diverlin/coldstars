@@ -16,6 +16,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "RocketEquipment.hpp"
+#include "../../common/constants.hpp"
+#include "../../common/rand.hpp"
+#include "../../common/myStr.hpp"
+#include "../../items/modules/RocketModule.hpp"
+#include "../../builder/RocketBulletBuilder.hpp"
+#include "../../world/starsystem.hpp"
+
 void BulletData::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {       	
 	std::string sroot = root+"data_bullet.";
@@ -49,7 +57,7 @@ void BulletData::ResolveData()
 RocketEquipment::RocketEquipment(int id)
 {
         data_id.id         = id;
-        data_id.subtype_id = SUBTYPE::ROCKET_ID;     
+        data_id.subtype_id = ENTITY::ROCKET_EQUIPMENT_ID;     
         
         ammo_max_orig = 0;
         damage_orig   = 0;

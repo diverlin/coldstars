@@ -16,11 +16,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "ScanerModule.hpp"
+#include "../../common/constants.hpp"
+#include "../../common/myStr.hpp"
 
 ScanerModule::ScanerModule(int id)
 {
         data_id.id         = id;
-        data_id.subtype_id = SUBTYPE::SCANER_ID;
+        data_id.subtype_id = ENTITY::SCANER_MODULE_ID;
         
     	scan_add = 0;
 }

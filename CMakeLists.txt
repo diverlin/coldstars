@@ -78,6 +78,18 @@ set (SOURCES
 	src/effects/particlesystem/DriveEffect.cpp
 	src/effects/particlesystem/ExplosionEffect.cpp
 
+	src/builder/items/equipment/BakEquipmentBuilder.cpp
+	src/builder/items/equipment/DriveEquipmentBuilder.cpp
+	src/builder/items/equipment/DroidEquipmentBuilder.cpp
+	src/builder/items/equipment/EnergizerEquipmentBuilder.cpp
+	src/builder/items/equipment/FreezerEquipmentBuilder.cpp
+	src/builder/items/equipment/GrappleEquipmentBuilder.cpp
+	src/builder/items/equipment/LazerEquipmentBuilder.cpp
+	src/builder/items/equipment/ProtectorEquipmentBuilder.cpp
+	src/builder/items/equipment/RadarEquipmentBuilder.cpp
+	src/builder/items/equipment/RocketEquipmentBuilder.cpp
+	src/builder/items/equipment/ScanerEquipmentBuilder.cpp
+
 	src/builder/items/modules/DroidModuleBuilder.cpp
 	src/builder/items/modules/RadarModuleBuilder.cpp
 	src/builder/items/modules/DriveModuleBuilder.cpp
@@ -87,6 +99,41 @@ set (SOURCES
 	src/builder/items/modules/ProtectorModuleBuilder.cpp
 	src/builder/items/modules/RocketModuleBuilder.cpp
 	src/builder/items/modules/ScanerModuleBuilder.cpp
+
+	src/builder/items/artefacts/GravityArtefactBuilder.cpp
+	src/builder/items/artefacts/ProtectorArtefactBuilder.cpp
+
+	src/items/BaseItem.cpp
+	src/items/equipment/BaseEquipment.cpp
+	src/items/equipment/RocketEquipment.cpp
+	src/items/equipment/LazerEquipment.cpp
+	src/items/equipment/RadarEquipment.cpp
+	src/items/equipment/DriveEquipment.cpp
+	src/items/equipment/BakEquipment.cpp
+	src/items/equipment/EnergizerEquipment.cpp
+	src/items/equipment/ProtectorEquipment.cpp
+	src/items/equipment/DroidEquipment.cpp
+	src/items/equipment/FreezerEquipment.cpp
+	src/items/equipment/ScanerEquipment.cpp
+	src/items/equipment/GrappleEquipment.cpp
+
+	src/items/modules/BaseModule.cpp
+	src/items/modules/RocketModule.cpp
+	src/items/modules/LazerModule.cpp
+	src/items/modules/RadarModule.cpp
+	src/items/modules/DriveModule.cpp
+	src/items/modules/BakModule.cpp
+	src/items/modules/EnergizerModule.cpp
+	src/items/modules/ProtectorModule.cpp
+	src/items/modules/DroidModule.cpp
+	src/items/modules/FreezerModule.cpp
+	src/items/modules/ScanerModule.cpp
+	src/items/modules/GrappleModule.cpp
+
+	src/items/artefacts/GravityArtefact.cpp
+	src/items/artefacts/ProtectorArtefact.cpp
+
+	src/resources/GuiTextureObCollector.cpp
 
   	main.cpp
 )

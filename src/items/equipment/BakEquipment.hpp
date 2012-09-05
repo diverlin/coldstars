@@ -20,6 +20,7 @@
 #ifndef BAKEQUIPMENT_H
 #define BAKEQUIPMENT_H
 
+#include "BaseEquipment.hpp"
 
 class BakEquipment : public BaseEquipment
 {

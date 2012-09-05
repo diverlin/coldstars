@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef DRIVEEQUIPMENT_H
 #define DRIVEEQUIPMENT_H
 
+#include "BaseEquipment.hpp"
 
 class DriveEquipment : public BaseEquipment
 {

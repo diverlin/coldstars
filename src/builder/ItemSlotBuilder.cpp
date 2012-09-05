@@ -37,11 +37,11 @@ ItemSlot* GetNewItemSlot(int subtype_id, int id)
         
         EntityManager::Instance().RegisterEntity(item_slot);
       
-        TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ITEMSLOT_ID);
+        TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ITEM_SLOT_ID);
 	item_slot->SetSubTypeId(subtype_id);
     	item_slot->SetTextureOb(texOb_slot);
         
-        if (subtype_id == ITEMSLOT::WEAPON_ID)
+        if (subtype_id == ENTITY::WEAPON_SLOT_ID)
         {
         	Turrel* turrel = NULL;
                 TextureOb* texOb_turrel = TextureManager::Instance().GetRandomTextureOb(TEXTURE::TURREL_ID); 

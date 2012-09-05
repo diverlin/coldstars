@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 VehicleSlot::VehicleSlot(int id)
 {   
 	data_id.id = id;
-	data_id.type_id = ENTITY::VEHICLESLOT_ID;
+	data_id.type_id = ENTITY::VEHICLE_SLOT_ID;
 	data_id.subtype_id = NONE_ID;
 	
     	vehicle = NULL;

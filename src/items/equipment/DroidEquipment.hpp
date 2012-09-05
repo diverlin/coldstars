@@ -20,6 +20,7 @@
 #ifndef DROIDEQUIPMENT_H
 #define DROIDEQUIPMENT_H
 
+#include "BaseEquipment.hpp"
 
 class DroidEquipment : public BaseEquipment
 {

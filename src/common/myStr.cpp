@@ -129,10 +129,51 @@ std::string getEntityStr(int type_id)
 		case ENTITY::STORE_ID: 		{ return "STORE_ID"; break; }
 		case ENTITY::SHOP_ID: 			{ return "SHOP_ID"; break; }
 		case ENTITY::ANGAR_ID: 		{ return "ANGAR_ID"; break; }
-		case ENTITY::VEHICLESLOT_ID: 		{ return "VEHICLESLOT_ID"; break; }
-		case ENTITY::ITEMSLOT_ID: 		{ return "ITEMSLOT_ID"; break; }
+		case ENTITY::VEHICLE_SLOT_ID: 		{ return "VEHICLE_SLOT_ID"; break; }
+		case ENTITY::ITEM_SLOT_ID: 		{ return "ITEM_SLOT_ID"; break; }
 		
-		default: { return "UNKNOWN. fix the bug"; }
+		case ENTITY::CARGO_SLOT_ID: 		{ return "CARGO_SLOT_ID"; break; }	
+		case ENTITY::GATE_SLOT_ID: 		{ return "GATE_SLOT_ID"; break; }		
+		case ENTITY::WEAPON_SLOT_ID: 		{ return "WEAPON_SLOT_ID"; break; }
+		case ENTITY::DRIVE_SLOT_ID: 		{ return "DRIVE_SLOT_ID"; break; }
+		case ENTITY::RADAR_SLOT_ID: 		{ return "RADAR_SLOT_ID"; break; }
+		case ENTITY::BAK_SLOT_ID: 		{ return "BAK_SLOT_ID"; break; }
+		case ENTITY::ENERGIZER_SLOT_ID: 	{ return "ENERGIZER_SLOT_ID"; break; }
+		case ENTITY::PROTECTOR_SLOT_ID: 	{ return "PROTECTOR_SLOT_ID"; break; }
+		case ENTITY::DROID_SLOT_ID: 		{ return "DROID_SLOT_ID"; break; }
+		case ENTITY::FREEZER_SLOT_ID: 		{ return "FREEZER_SLOT_ID"; break; }
+		case ENTITY::GRAPPLE_SLOT_ID: 		{ return "GRAPPLE_SLOT_ID"; break; }
+		case ENTITY::SCANER_SLOT_ID: 		{ return "SCANER_SLOT_ID"; break; }
+		case ENTITY::ARTEFACT_SLOT_ID: 	{ return "ARTEFACT_SLOT_ID"; break; }
+																						
+		case ENTITY::LAZER_EQUIPMENT_ID: 	{ return "LAZER_EQUIPMENT_ID"; break; }
+		case ENTITY::ROCKET_EQUIPMENT_ID: 	{ return "ROCKET_EQUIPMENT_ID"; break; }
+		case ENTITY::DRIVE_EQUIPMENT_ID: 	{ return "DRIVE_EQUIPMENT_ID"; break; }
+		case ENTITY::RADAR_EQUIPMENT_ID: 	{ return "RADAR_EQUIPMENT_ID"; break; }
+		case ENTITY::BAK_EQUIPMENT_ID: 	{ return "BAK_EQUIPMENT_ID"; break; }
+		case ENTITY::ENERGIZER_EQUIPMENT_ID: 	{ return "ENERGIZER_EQUIPMENT_ID"; break; }
+		case ENTITY::PROTECTOR_EQUIPMENT_ID: 	{ return "PROTECTOR_EQUIPMENT_ID"; break; }
+		case ENTITY::DROID_EQUIPMENT_ID: 	{ return "DROID_EQUIPMENT_ID"; break; }
+		case ENTITY::FREEZER_EQUIPMENT_ID: 	{ return "FREEZER_EQUIPMENT_ID"; break; }
+		case ENTITY::GRAPPLE_EQUIPMENT_ID: 	{ return "GRAPPLE_EQUIPMENT_ID"; break; }
+		case ENTITY::SCANER_EQUIPMENT_ID: 	{ return "GRAPPLE_EQUIPMENT_ID"; break; }
+
+		case ENTITY::LAZER_MODULE_ID: 		{ return "LAZER_MODULE_ID"; break; }
+		case ENTITY::ROCKET_MODULE_ID: 	{ return "ROCKET_MODULE_ID"; break; }
+		case ENTITY::DRIVE_MODULE_ID: 		{ return "DRIVE_MODULE_ID"; break; }
+		case ENTITY::RADAR_MODULE_ID: 		{ return "RADAR_MODULE_ID"; break; }
+		case ENTITY::BAK_MODULE_ID: 		{ return "BAK_MODULE_ID"; break; }
+		case ENTITY::ENERGIZER_MODULE_ID: 	{ return "ENERGIZER_MODULE_ID"; break; }
+		case ENTITY::PROTECTOR_MODULE_ID: 	{ return "PROTECTOR_MODULE_ID"; break; }
+		case ENTITY::DROID_MODULE_ID: 		{ return "DROID_MODULE_ID"; break; }
+		case ENTITY::FREEZER_MODULE_ID: 	{ return "FREEZER_MODULE_ID"; break; }
+		case ENTITY::GRAPPLE_MODULE_ID: 	{ return "GRAPPLE_MODULE_ID"; break; }						
+		case ENTITY::SCANER_MODULE_ID: 	{ return "SCANER_MODULE_ID"; break; }	
+		
+		case ENTITY::GRAVITY_ARTEFACT_ID: 	{ return "GRAVITY_ARTEFACT_ID"; break; }						
+		case ENTITY::PROTECTOR_ARTEFACT_ID: 	{ return "PROTECTOR_ARTEFACT_ID"; break; }	
+			
+		default: { return "TYPE UNKNOWN. fix the bug"; }
 	}
 }
 

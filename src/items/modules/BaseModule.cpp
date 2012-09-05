@@ -16,10 +16,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "BaseModule.hpp"
+#include "../../common/constants.hpp"
+#include "../../common/myStr.hpp"
+#include "../../common/EntityManager.hpp"
+#include "../../items/equipment/BaseEquipment.hpp"
 
 BaseModule::BaseModule()
 {
-        data_id.type_id = TYPE::MODULE_ID;
+        data_id.type_id = ENTITY::MODULE_ID;
         
         equipment_owner = NULL;
 }
@@ -28,16 +33,9 @@ BaseModule::BaseModule()
 BaseModule::~BaseModule ()
 {}
 
-/* virtual */
-void BaseModule::UpdateOwnerAbilities()     { /* do nothing*/ } 
-
 void BaseModule::AddCommonInfo()
 {
-    	//info.addNameStr("modules:");   info.addValueStr( int2str(common_data.modules_num_max) );
-    	//info.addNameStr("race:");      info.addValueStr( returnRaceStringByRaceId(race_id) );
-    	//info.addNameStr("condition:"); info.addValueStr( int2str(condition) + "/" + int2str(common_data.condition_max) );
     	info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
-    	//info.addNameStr("price:");     info.addValueStr( int2str(price) );
 }
 
 void BaseModule::SaveDataUniqueBaseModule(boost::property_tree::ptree& save_ptree, const std::string& root) const

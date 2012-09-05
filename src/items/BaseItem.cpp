@@ -16,7 +16,14 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-ItemCommonData :: ItemCommonData()
+#include "BaseItem.hpp"
+#include "../common/constants.hpp"
+#include "../common/EntityManager.hpp"
+#include "../spaceobjects/ItemSlot.hpp"
+#include "../render/Render.hpp"
+#include "../resources/textureManager.hpp"
+
+ItemCommonData::ItemCommonData()
 {	
 	modules_num_max    = 0; 
 	condition_max      = 0; 

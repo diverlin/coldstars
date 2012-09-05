@@ -44,6 +44,8 @@ class DriveComplex
                   
                 BaseGameEntity* GetTarget() const { return target; };                
     		
+   		void CalcPath();      
+    			        
     		bool PathExists() const;
     		
       		bool CheckTargetEchievement();
@@ -86,7 +88,6 @@ class DriveComplex
 		//void SetTargetPos(const vec2f& target_pos) { this->target_pos = target_pos; };
 
 		void ClearPath();
-	        void CalcPath();                                       	
                 bool CalcRoundPath();
                 void CalcDirectPath();
                 bool ValidateTarget() const;

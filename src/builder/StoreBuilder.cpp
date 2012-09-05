@@ -49,7 +49,7 @@ void StoreBuilder::CreateNewStore(int id)
 void StoreBuilder::CreateNewInternals()
 {
 	// create slots
-	TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ITEMSLOT_ID);
+	TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ITEM_SLOT_ID);
 	        
  	int row_num = 4;  // must be divided by 2
         int clm_num = 10; // must be divided by 2
@@ -61,7 +61,7 @@ void StoreBuilder::CreateNewInternals()
                 int clm = 1;
                 while (clm <= clm_num)
                 {
-                        ItemSlot* item_slot = GetNewItemSlot(ITEMSLOT::CARGO_ID);
+                        ItemSlot* item_slot = GetNewItemSlot(ENTITY::CARGO_SLOT_ID);
  
                         Rect rect(center.x + (clm - clm_num/2) * 1.1 * GUI::ITEMSLOT::WIDTH_FOR_STORE, 
                         	  center.y - (row - row_num/2) * 1.1 * GUI::ITEMSLOT::HEIGHT_FOR_STORE,

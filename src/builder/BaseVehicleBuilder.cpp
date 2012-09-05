@@ -16,6 +16,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "items/artefacts/GravityArtefactBuilder.hpp"
+#include "BaseVehicleBuilder.hpp"
+
 BaseVehicleBuilder& BaseVehicleBuilder::Instance()
 {	
 	static BaseVehicleBuilder instance;
@@ -62,7 +65,7 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
         // WEAPON SLOTS
         for (unsigned int i=0; i<vehicle->GetKorpusData().slot_weapon_num; i++)
         {
-        	ItemSlot* weapon_slot = GetNewItemSlot(ITEMSLOT::WEAPON_ID);
+        	ItemSlot* weapon_slot = GetNewItemSlot(ENTITY::WEAPON_SLOT_ID);
         	rect = Rect( center.x - 3*GUI::ITEMSLOT::WIDTH_FOR_SHIP    + 1.1*i*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
                              center.y - 1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 2*1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
        			     GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);        
@@ -70,21 +73,21 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
         }
         //
                 
-	ItemSlot* radar_slot = GetNewItemSlot(ITEMSLOT::RADAR_ID);
+	ItemSlot* radar_slot = GetNewItemSlot(ENTITY::RADAR_SLOT_ID);
         rect = Rect(center.x+4*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 			  center.y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
 			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 	vehicle->AddItemSlot(radar_slot, rect);
 	
 	
-	ItemSlot* scaner_slot = GetNewItemSlot(ITEMSLOT::SCANER_ID); 
+	ItemSlot* scaner_slot = GetNewItemSlot(ENTITY::SCANER_SLOT_ID); 
 	rect = Rect(center.x+4*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 			  center.y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
 			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 	vehicle->AddItemSlot(scaner_slot, rect);
 	
 	
-	ItemSlot* energizer_slot = GetNewItemSlot(ITEMSLOT::ENERGIZER_ID); 
+	ItemSlot* energizer_slot = GetNewItemSlot(ENTITY::ENERGIZER_SLOT_ID); 
 	rect = Rect(center.x-2*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 			  center.y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
 			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
@@ -93,42 +96,42 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
     		
 	if (vehicle->GetKorpusData().slot_grapple_num != 0)
 	{
-		ItemSlot* grapple_slot = GetNewItemSlot(ITEMSLOT::GRAPPLE_ID);
+		ItemSlot* grapple_slot = GetNewItemSlot(ENTITY::GRAPPLE_SLOT_ID);
 		rect = Rect(center.x-3*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
                                   center.y-GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
                                   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);					 
     		vehicle->AddItemSlot(grapple_slot, rect); 
     	}
     	
-	ItemSlot* droid_slot = GetNewItemSlot(ITEMSLOT::DROID_ID);
+	ItemSlot* droid_slot = GetNewItemSlot(ENTITY::DROID_SLOT_ID);
 	rect = Rect(center.x-1*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 			  center.y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
 			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);				    
     	vehicle->AddItemSlot(droid_slot, rect); 
     	
     	
-	ItemSlot* freezer_slot = GetNewItemSlot(ITEMSLOT::FREEZER_ID);
+	ItemSlot* freezer_slot = GetNewItemSlot(ENTITY::FREEZER_SLOT_ID);
 	rect = Rect(center.x-1*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 			  center.y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
 			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);	
 	vehicle->AddItemSlot(freezer_slot, rect);   
         
         
-        ItemSlot* protector_slot = GetNewItemSlot(ITEMSLOT::PROTECTOR_ID); 
+        ItemSlot* protector_slot = GetNewItemSlot(ENTITY::PROTECTOR_SLOT_ID); 
 	rect = Rect(center.x-3*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 			  center.y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
 			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);	    
     	vehicle->AddItemSlot(protector_slot, rect); 
         
         
-        ItemSlot* drive_slot = GetNewItemSlot(ITEMSLOT::DRIVE_ID); 
+        ItemSlot* drive_slot = GetNewItemSlot(ENTITY::DRIVE_SLOT_ID); 
 	rect = Rect(center.x-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 			  center.y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
                           GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 	vehicle->AddItemSlot(drive_slot, rect);
 	
 	
-        ItemSlot* bak_slot = GetNewItemSlot(ITEMSLOT::BAK_ID);  
+        ItemSlot* bak_slot = GetNewItemSlot(ENTITY::BAK_SLOT_ID);  
 	rect = Rect(center.x-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 			  center.y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
 			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
@@ -137,9 +140,9 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
 
 
     	//////// OTSEC SLOT ////////////////////////////////
-    	for (int i = 0; i <= 10; i++)
+    	for (int i=0; i<=10; i++)
     	{
-         	ItemSlot* otsec_slot = GetNewItemSlot(ITEMSLOT::CARGO_ID);
+         	ItemSlot* otsec_slot = GetNewItemSlot(ENTITY::CARGO_SLOT_ID);
          	rect = Rect(center.x+(i-6)*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
          			  center.y    -3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
          			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);         					
@@ -149,11 +152,22 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
 
 
     	//////////// GATE SLOT /////////////////////////////
-    	ItemSlot* gate_slot = GetNewItemSlot(ITEMSLOT::GATE_ID);
+    	ItemSlot* gate_slot = GetNewItemSlot(ENTITY::GATE_SLOT_ID);
    	rect = Rect(center.x-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
     			  center.y+3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
     			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
     	vehicle->AddItemSlot(gate_slot, rect);
+    	
+    	//////////// ARTEFACT SLOT /////////////////////////  	  	
+    	for (int i=0; i<4; i++)
+    	{
+    		ItemSlot* artefact_slot = GetNewItemSlot(ENTITY::ARTEFACT_SLOT_ID);
+   		rect = Rect(center.x+i*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+    	        	    center.y+4*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+    		   	 GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+    		vehicle->AddItemSlot(artefact_slot, rect);         
+    	}
+    	
 }	
 
 void BaseVehicleBuilder::CreateDriveComplex(Vehicle* vehicle) const
@@ -193,7 +207,7 @@ void BaseVehicleBuilder::CreateProtectionComplexTextureDependedStuff(Vehicle* ve
 
 void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
 {
-    	for (unsigned int i = 0; i<vehicle->GetKorpusData().slot_weapon_num; i++)
+    	for (unsigned int i=0; i<vehicle->GetKorpusData().slot_weapon_num; i++)
     	{
     		if (getRandBool())
     		{
@@ -248,28 +262,40 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
       		vehicle->GetGrappleSlot()->InsertItem(GrappleEquipmentBuilder::Instance().GetGrappleEquipment()); 
    	}
 
-    	for (unsigned int i = 0; i < 3; i++) 
+    	for (unsigned int i=0; i<3; i++) 
     	{        
     	    	DroidModuleBuilder::Instance().CreateNewDroidModule();
         	DroidModuleBuilder::Instance().CreateNewInternals();
         	vehicle->AddItemToCargoSlot(DroidModuleBuilder::Instance().GetDroidModule());
     	}  
     	
-    	//for (unsigned int i = 0; i < 3; i++) 
+    	//for (unsigned int i=0; i<3; i++) 
     	//{        
     	    	//RadarModuleBuilder::Instance().CreateNewRadarModule();
         	//RadarModuleBuilder::Instance().CreateNewInternals();
         	//vehicle->AddItemToCargoSlot(RadarModuleBuilder::Instance().GetRadarModule());
     	//}  
     	    	
-    	for (unsigned int i = 0; i < 3; i++) 
+    	for (unsigned int i=0; i<3; i++) 
     	{        
     	    	BombBuilder::Instance().CreateNewBomb();
         	BombBuilder::Instance().CreateNewInternals();
         	vehicle->AddItemToCargoSlot(BombBuilder::Instance().GetBomb());
     	}   
-    	
-    	vehicle->UpdateAllProperties(); 
+
+    	for (unsigned int i=0; i<3; i++) 
+    	{        
+    	    	GravityArtefactBuilder::Instance().CreateNewGravityArtefact();
+        	GravityArtefactBuilder::Instance().CreateNewInternals();
+        	vehicle->AddItemToCargoSlot(GravityArtefactBuilder::Instance().GetGravityArtefact());
+    	}   
+
+    	for (unsigned int i=0; i<3; i++) 
+    	{        
+    	    	ProtectorArtefactBuilder::Instance().CreateNewProtectorArtefact();
+        	ProtectorArtefactBuilder::Instance().CreateNewInternals();
+        	vehicle->AddItemToCargoSlot(ProtectorArtefactBuilder::Instance().GetProtectorArtefact());
+    	}   
 }
 
 
