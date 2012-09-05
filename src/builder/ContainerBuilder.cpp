@@ -58,7 +58,7 @@ void ContainerBuilder::CreateNewInternals(TextureOb* textureOb, BaseItem* item)
 	container->SetDeltaAngle(d_angle);
 
    	container->CalcCollisionrRadius();
-   	container->BindItemSlot(GetNewItemSlot(ITEMSLOT::CARGO_ID));
+   	container->BindItemSlot(GetNewItemSlot(ENTITY::CARGO_SLOT_ID));
         container->GetItemSlot()->InsertItem(item);
 }
 

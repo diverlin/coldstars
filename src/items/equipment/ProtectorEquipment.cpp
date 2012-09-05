@@ -16,11 +16,15 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "ProtectorEquipment.hpp"
+#include "../../common/constants.hpp"
+#include "../../common/myStr.hpp"
+#include "../../items/modules/ProtectorModule.hpp"
 
 ProtectorEquipment::ProtectorEquipment(int id)
 {
         data_id.id         = id;
-        data_id.subtype_id = SUBTYPE::PROTECTOR_ID;
+        data_id.subtype_id = ENTITY::PROTECTOR_EQUIPMENT_ID;
         
     	protection_orig = 0;
 }

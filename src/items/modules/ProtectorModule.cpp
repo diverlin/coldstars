@@ -16,11 +16,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "ProtectorModule.hpp"
+#include "../../common/constants.hpp"
+#include "../../common/myStr.hpp"
 
 ProtectorModule::ProtectorModule(int id)
 {
         data_id.type_id    = id;
-        data_id.subtype_id = SUBTYPE::PROTECTOR_ID;
+        data_id.subtype_id = ENTITY::PROTECTOR_MODULE_ID;
         
      	protection_add = 0;
 }

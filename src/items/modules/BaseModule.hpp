@@ -21,8 +21,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define MODULEBASE_H
 
 #include "../BaseItem.hpp"
-//#include "../equipment/BaseEquipment.hpp"
-class BaseEquipment;
+class BaseEquipment; //#include "../equipment/BaseEquipment.hpp"
+
 
 struct UnresolvedDataUniqueBaseModule
 {
@@ -36,8 +36,6 @@ class BaseModule : public BaseItem
       		virtual ~BaseModule();
       		
       		void SetEquipmentOwner(BaseEquipment* equipment_owner) { this->equipment_owner = equipment_owner; };
-      		
-      		virtual void UpdateOwnerAbilities();
 
 	protected:     	
 		BaseEquipment* equipment_owner;

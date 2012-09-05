@@ -169,7 +169,7 @@ void Ship::ResolveDataUniqueShip()
 			break;
 		}
 		
-		case ENTITY::VEHICLESLOT_ID:
+		case ENTITY::VEHICLE_SLOT_ID:
 		{	
 			((VehicleSlot*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this); 
 			break;

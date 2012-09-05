@@ -16,11 +16,20 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "LazerEquipment.hpp"
+#include "../../common/constants.hpp"
+#include "../../common/myStr.hpp"
+#include "../../resources/textureManager.hpp"
+#include "../../items/modules/LazerModule.hpp"
+#include "../../effects/lazerTrace.hpp"
+#include "../../spaceobjects/ItemSlot.hpp"
+#include "../../spaceobjects/Vehicle.hpp"
+#include "../../world/starsystem.hpp"
 
 LazerEquipment::LazerEquipment(int id)
 {
         data_id.id         = id;
-        data_id.subtype_id = SUBTYPE::LAZER_ID;
+        data_id.subtype_id = ENTITY::LAZER_EQUIPMENT_ID;
         
    	damage_orig = 0;
    	radius_orig = 0;

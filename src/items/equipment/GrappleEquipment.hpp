@@ -20,6 +20,8 @@
 #ifndef GRAPPLEEQUIPMENT_H
 #define GRAPPLEEQUIPMENT_H
 
+#include "BaseEquipment.hpp"
+#include "../../spaceobjects/BaseGameEntity.hpp"
 
 class GrappleEquipment : public BaseEquipment
 {

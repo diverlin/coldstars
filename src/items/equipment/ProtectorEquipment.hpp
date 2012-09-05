@@ -20,6 +20,7 @@
 #ifndef PROTECTOREQUIPMENT_H
 #define PROTECTOREQUIPMENT_H
 
+#include "BaseEquipment.hpp"
 
 class ProtectorEquipment  : public BaseEquipment
 {

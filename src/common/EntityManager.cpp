@@ -23,6 +23,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../common/Logger.hpp"
 #include "../common/SaveLoadManager.hpp"
 
+#include "../builder/items/equipment/BakEquipmentBuilder.hpp"
+#include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
+#include "../builder/items/equipment/GrappleEquipmentBuilder.hpp"
+#include "../builder/items/equipment/LazerEquipmentBuilder.hpp"
+#include "../builder/items/equipment/ProtectorEquipmentBuilder.hpp"
+#include "../builder/items/equipment/RocketEquipmentBuilder.hpp"
+#include "../builder/items/equipment/ScanerEquipmentBuilder.hpp"
+#include "../builder/items/equipment/DroidEquipmentBuilder.hpp"
+#include "../builder/items/equipment/RadarEquipmentBuilder.hpp"
+#include "../builder/items/equipment/FreezerEquipmentBuilder.hpp"
+#include "../builder/items/equipment/EnergizerEquipmentBuilder.hpp"
+
 #include "../builder/items/modules/BakModuleBuilder.hpp"
 #include "../builder/items/modules/DriveModuleBuilder.hpp"
 #include "../builder/items/modules/GrappleModuleBuilder.hpp"
@@ -32,6 +44,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../builder/items/modules/ScanerModuleBuilder.hpp"
 #include "../builder/items/modules/DroidModuleBuilder.hpp"
 #include "../builder/items/modules/RadarModuleBuilder.hpp"
+
+#include "../builder/items/artefacts/GravityArtefactBuilder.hpp"
+#include "../builder/items/artefacts/ProtectorArtefactBuilder.hpp"
 
 EntityManager& EntityManager::Instance()
 {
@@ -140,7 +155,30 @@ void EntityManager::LoadPass0()
 			AsteroidBuilder::Instance().GetAsteroid()->LoadData(v.second);
 		}
 	}
-	  
+	
+	//artefact
+	if (load_ptree.get_child_optional("gravity_artefact"))
+	{
+		Logger::Instance().Log("loading gravity_artefact...");
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("gravity_artefact"))
+		{
+			GravityArtefactBuilder::Instance().CreateNewGravityArtefact(v.second.get<int>("data_id.id"));
+			GravityArtefact* gravity_artefact = GravityArtefactBuilder::Instance().GetGravityArtefact();
+                	gravity_artefact->LoadData(v.second);
+		}
+	} 	
+
+	if (load_ptree.get_child_optional("protector_artefact"))
+	{
+		Logger::Instance().Log("loading protector_artefact...");
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("protector_artefact"))
+		{
+			ProtectorArtefactBuilder::Instance().CreateNewProtectorArtefact(v.second.get<int>("data_id.id"));
+			ProtectorArtefact* protector_artefact = ProtectorArtefactBuilder::Instance().GetProtectorArtefact();
+                	protector_artefact->LoadData(v.second);
+		}
+	} 	
+		  
         //module
 	if (load_ptree.get_child_optional("bak_module"))
 	{

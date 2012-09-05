@@ -16,11 +16,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "EnergizerModule.hpp"
+#include "../../common/constants.hpp"
+#include "../../common/myStr.hpp"
+#include "../../items/equipment/BaseEquipment.hpp"
 
 EnergizerModule::EnergizerModule(int id)
 {
         data_id.id         = id;
-	data_id.subtype_id = SUBTYPE::ENERGIZER_ID;
+	data_id.subtype_id = ENTITY::ENERGIZER_MODULE_ID;
         
      	energy_max_add  = 0;
      	restoration_add = 0;
@@ -87,21 +91,3 @@ void EnergizerModule::LoadDataUniqueEnergizerModule(const boost::property_tree::
 void EnergizerModule::ResolveDataUniqueEnergizerModule()
 {}
 
-EnergizerModule* GetNewEnergizerModule()
-{
-    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-        	
-     	int energy_max_add  = getRandInt(MODULE::ENERGIZER::ENERGY_MIN, MODULE::ENERGIZER::ENERGY_MAX);
-     	int restoration_add = getRandInt(MODULE::ENERGIZER::RESTORATION_MIN, MODULE::ENERGIZER::RESTORATION_MAX);
-     	
-        int id = SimpleIdGenerator::Instance().GetNextId();
-        
-     	EnergizerModule* energizer_module = new EnergizerModule(id);
-        energizer_module->SetTextureOb(texOb);
-        energizer_module->SetEnergyMaxAdd(energy_max_add);
-        energizer_module->SetRestorationAdd(restoration_add);
-        
-        EntityManager::Instance().RegisterEntity(energizer_module);
-                
-        return energizer_module; 
-}

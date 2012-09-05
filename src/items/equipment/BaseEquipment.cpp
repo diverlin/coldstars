@@ -16,10 +16,16 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "BaseEquipment.hpp"
+#include "../../common/constants.hpp"
+#include "../../common/myStr.hpp"
+#include "../../spaceobjects/ItemSlot.hpp"
+#include "../../render/Render.hpp"
+#include "../../resources/GuiTextureObCollector.hpp"
 
 BaseEquipment::BaseEquipment()
 {
-        data_id.type_id = TYPE::EQUIPMENT_ID;
+        data_id.type_id = ENTITY::EQUIPMENT_ID;
         race_id         = RACE::R0_ID;
           
     	is_DAMAGED = false;
@@ -83,7 +89,7 @@ void BaseEquipment::Render(const Rect& rect, const vec2i& gui_offset)
     		drawSimpleText(int2str(locked_turns), 12, rect.GetCenter().x + gui_offset.x, rect.GetCenter().y + gui_offset.y);	
 	}
 
-    	if (data_id.subtype_id == SUBTYPE::ROCKET_ID)
+    	if (data_id.subtype_id == ENTITY::ROCKET_EQUIPMENT_ID)
         {
         	drawSimpleText(int2str(((RocketEquipment*)this)->GetAmmoMax()) + '/' + int2str(((RocketEquipment*)this)->GetAmmo()), 12, rect.GetCenter().x - rect.GetWidth()/2 + gui_offset.x, rect.GetCenter().y + gui_offset.y);
 	}

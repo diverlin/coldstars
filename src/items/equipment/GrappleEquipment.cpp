@@ -16,11 +16,19 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "GrappleEquipment.hpp"
+#include "../../common/constants.hpp"
+#include "../../common/myStr.hpp"
+#include "../../common/Logger.hpp"
+#include "../../spaceobjects/ItemSlot.hpp"
+#include "../../spaceobjects/Vehicle.hpp"
+#include "../../resources/GuiTextureObCollector.hpp"
+#include "../../render/Render.hpp"
 
 GrappleEquipment::GrappleEquipment(int id)
 {
         data_id.id         = id;
-        data_id.subtype_id = SUBTYPE::GRAPPLE_ID;
+        data_id.subtype_id = ENTITY::GRAPPLE_EQUIPMENT_ID;
         
     	strength_orig   = 0;
     	radius_orig     = 0;

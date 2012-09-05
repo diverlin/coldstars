@@ -47,8 +47,8 @@ bool Turrel::CheckAmmo() const
 {
 	switch(slot->GetItem()->GetSubTypeId())
 	{
-    		case SUBTYPE::LAZER_ID:  { /*if check energy */  return true; break; }
-    		case SUBTYPE::ROCKET_ID: { if (slot->GetRocketEquipment()->GetAmmo() > 0) return true; break; }
+    		case ENTITY::LAZER_EQUIPMENT_ID:  { /*if check energy */  return true; break; }
+    		case ENTITY::ROCKET_EQUIPMENT_ID: { if (slot->GetRocketEquipment()->GetAmmo() > 0) return true; break; }
 	}
 	
     	return false;           
@@ -58,7 +58,7 @@ bool Turrel::FireEvent(int attack_skill, bool show_effect)
 {       			
 	switch(slot->GetItem()->GetSubTypeId())
 	{
-    		case SUBTYPE::LAZER_ID:
+    		case ENTITY::LAZER_EQUIPMENT_ID:
     		{   
 			int damage = slot->GetLazerEquipment()->GetDamage() * attack_skill * SKILL::ATTACK_NORMALIZED_RATE;
        			slot->GetLazerEquipment()->FireEvent_TRUE();       			
@@ -84,7 +84,7 @@ bool Turrel::FireEvent(int attack_skill, bool show_effect)
        			break;
     		}
 
-    		case SUBTYPE::ROCKET_ID:
+    		case ENTITY::ROCKET_EQUIPMENT_ID:
     		{       
                 	slot->GetRocketEquipment()->FireEvent( attack_skill * SKILL::ATTACK_NORMALIZED_RATE );
                 	return true; break;              

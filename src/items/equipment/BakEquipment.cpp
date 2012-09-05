@@ -16,12 +16,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
+#include "BakEquipment.hpp"
+#include "../../common/constants.hpp"
+#include "../../common/myStr.hpp"
+#include "../../items//modules/BakModule.hpp"
 
 BakEquipment::BakEquipment(int id)
 {
         data_id.id         = id;
-        data_id.subtype_id = SUBTYPE::BAK_ID;
+        data_id.subtype_id = ENTITY::BAK_EQUIPMENT_ID;
         
     	fuel_max_orig = 0;  
     	fuel          = 0;

@@ -16,6 +16,7 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "ItemSlot.hpp"
 
 ItemSlot::ItemSlot(int id)
 {
@@ -26,8 +27,7 @@ ItemSlot::ItemSlot(int id)
 	*/
 
 	data_id.id         = id;
-        data_id.type_id    = ENTITY::ITEMSLOT_ID;
-	data_id.subtype_id = NONE_ID;
+        data_id.type_id    = ENTITY::ITEM_SLOT_ID;
                         
         turrel     = NULL;                
         item   	   = NULL;
@@ -59,7 +59,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 		}
 	}
 	
-	if (data_id.subtype_id == ITEMSLOT::CARGO_ID) 
+	if (data_id.subtype_id == ENTITY::CARGO_SLOT_ID) 
 	{           
 		this->item = item;
 		is_EQUIPED = true; 
@@ -73,7 +73,6 @@ bool ItemSlot::InsertItem(BaseItem* item)
 		this->item = item;
 		is_EQUIPED = true; 
 		item->SetItemSlot(this);
-	
                 UpdateVehiclePropetries(); 
 
                 return true;
@@ -95,7 +94,7 @@ void ItemSlot::RemoveItem()
         item = NULL;
     	is_EQUIPED = false;
     	
-    	if (data_id.subtype_id != ITEMSLOT::CARGO_ID) 
+    	if (data_id.subtype_id != ENTITY::CARGO_SLOT_ID) 
 	{    
                 UpdateVehiclePropetries(); 
 	}    	 
@@ -107,27 +106,29 @@ void ItemSlot::UpdateVehiclePropetries() const
 	{ 	
 		switch(data_id.subtype_id)
 		{
-			case ITEMSLOT::WEAPON_ID: 	{ GetOwnerVehicle()->UpdatePropertiesFire(); break; }
-			case ITEMSLOT::SCANER_ID: 	{ GetOwnerVehicle()->UpdatePropertiesScan(); break; }
-			case ITEMSLOT::BAK_ID:     	{
+			case ENTITY::WEAPON_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesFire(); break; }
+			case ENTITY::SCANER_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesScan(); break; }
+			case ENTITY::BAK_SLOT_ID:     	{
 						  		GetOwnerVehicle()->UpdatePropertiesSpeed();
    								GetOwnerVehicle()->UpdatePropertiesJump(); 
    	
    						  		break;
   							}
   			
-  			case ITEMSLOT::DRIVE_ID:   	{
+  			case ENTITY::DRIVE_SLOT_ID:   	{
   					  			GetOwnerVehicle()->UpdatePropertiesSpeed();
 								GetOwnerVehicle()->UpdatePropertiesJump(); 
 					  			break;
 							}
 				
-			case ITEMSLOT::DROID_ID: 	{ GetOwnerVehicle()->UpdatePropertiesRepair(); break; }
-			//case ITEMSLOT::ENERGIZER_ID: 	{ GetOwnerVehicle()->UpdateEnergyAbility(); break; }
-			//case ITEMSLOT::FREEZER_ID: 	{ GetOwnerVehicle()->UpdateFreezeAbility(); break; }
-			case ITEMSLOT::GRAPPLE_ID: 	{ GetOwnerVehicle()->UpdatePropertiesGrab(); break; }
-			case ITEMSLOT::PROTECTOR_ID: 	{ GetOwnerVehicle()->UpdatePropertiesProtection(); break; }
-			case ITEMSLOT::RADAR_ID: 	{ GetOwnerVehicle()->UpdatePropertiesRadar(); break; }
+			case ENTITY::DROID_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesRepair(); break; }
+			//case ENTITY::ENERGIZER_SLOT_ID: 	{ GetOwnerVehicle()->UpdateEnergyAbility(); break; }
+			//case ENTITY::FREEZER_SLOT_ID: 	{ GetOwnerVehicle()->UpdateFreezeAbility(); break; }
+			case ENTITY::GRAPPLE_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesGrab(); break; }
+			case ENTITY::PROTECTOR_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesProtection(); break; }
+			case ENTITY::RADAR_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesRadar(); break; }
+			
+			case ENTITY::ARTEFACT_SLOT_ID: { GetOwnerVehicle()->UpdateArtefactInfluence(); break; }
 		}
 	}
 }
@@ -150,15 +151,15 @@ int ItemSlot::GetItemRadius() const
 {       
         switch(item->GetTypeId())
         {
-                case TYPE::EQUIPMENT_ID:
+                case ENTITY::EQUIPMENT_ID:
                 {
                         switch (item->GetSubTypeId())
                         {
-                                case SUBTYPE::LAZER_ID:   { return ((LazerEquipment*)item)->GetRadius();  break; };
-                                case SUBTYPE::ROCKET_ID:  { return ((RocketEquipment*)item)->GetRadius(); break; };
+                                case ENTITY::LAZER_EQUIPMENT_ID:   { return ((LazerEquipment*)item)->GetRadius();  break; };
+                                case ENTITY::ROCKET_EQUIPMENT_ID:  { return ((RocketEquipment*)item)->GetRadius(); break; };
 		
-                                case SUBTYPE::GRAPPLE_ID: { return ((GrappleEquipment*)item)->GetRadius(); break; };
-                                case SUBTYPE::RADAR_ID:   { return ((RadarEquipment*)item)->GetRadius();   break; };
+                                case ENTITY::GRAPPLE_EQUIPMENT_ID: { return ((GrappleEquipment*)item)->GetRadius(); break; };
+                                case ENTITY::RADAR_EQUIPMENT_ID:   { return ((RadarEquipment*)item)->GetRadius();   break; };
                         }
                         
                         break;
@@ -222,7 +223,7 @@ bool ItemSlot::SwapItemWith(ItemSlot* _slot)
 
 	if ( (is_EQUIPED == true) and (_slot->GetEquiped() == true) )
        	{          
-       		if ( (item->GetTypeId() == TYPE::MODULE_ID) and (_slot->GetItem()->GetTypeId() == TYPE::EQUIPMENT_ID) )
+       		if ( (item->GetTypeId() == ENTITY::MODULE_ID) and (_slot->GetItem()->GetTypeId() == ENTITY::EQUIPMENT_ID) )
        		{
 			if (((BaseEquipment*)_slot->GetItem())->InsertModule((BaseModule*)item) == true)  
 			{ 

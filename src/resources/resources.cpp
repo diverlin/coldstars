@@ -19,12 +19,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "resources.hpp"
 #include "../common/constants.hpp"
 
-GuiTextureObCollector& GuiTextureObCollector::Instance()
-{
-	static GuiTextureObCollector instance;
-	return instance;
-}
-
 void loadGameData()
 {    	
  	int width     = Config::Instance().SCREEN_WIDTH; 
@@ -79,13 +73,13 @@ void loadImages()
 {
 	std::vector<int> arg;   
 	arg.push_back(RACE::R0_ID);
-	TextureManager::Instance().Add( new TextureOb(TEXTURE::ITEMSLOT_ID, "data/other/slot.png", true, &arg) );
+	TextureManager::Instance().Add( new TextureOb(TEXTURE::ITEM_SLOT_ID, "data/other/slot.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
 	arg.push_back(RACE::R0_ID);
-	TextureManager::Instance().Add( new TextureOb(TEXTURE::VEHICLESLOT_ID, "data/other/H.png", true, &arg, 3, 2, 3) );
+	TextureManager::Instance().Add( new TextureOb(TEXTURE::VEHICLE_SLOT_ID, "data/other/H.png", true, &arg, 3, 2, 3) );
 }
 
 //####################################### TEXTURE::FACE_ID ################################
