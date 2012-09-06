@@ -119,8 +119,9 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
                         }             
                         //
                         
-			gui_vehicle.SetOffset(GUI_VEHICLE_INSPACE_OFFSET);
-			gui_skill.SetOffset(GUI_SKILL_INSPACE_OFFSET);
+                        vec2i center_screen(Screen::Instance().GetWindow().GetWidth()/2, Screen::Instance().GetWindow().GetHeight()/2);
+			gui_vehicle.SetOffset(center_screen + GUI_VEHICLE_INSPACE_OFFSET);
+			gui_skill.SetOffset(center_screen + GUI_SKILL_INSPACE_OFFSET);
 		
 		       	UserInput::Instance().UpdateInSpace(player, *this);
 

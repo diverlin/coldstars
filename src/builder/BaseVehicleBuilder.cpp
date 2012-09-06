@@ -1,19 +1,19 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+	
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "items/artefacts/GravityArtefactBuilder.hpp"
@@ -52,89 +52,87 @@ void BaseVehicleBuilder::CreateKorpusGui(Vehicle* vehicle) const
         	kontur_w = vehicle->GetTextureOb()->GetFrameWidth() * kontur_h / (float)vehicle->GetTextureOb()->GetFrameHeight();
     	}               
 
-    	Rect kontur_rect(0, 0, kontur_w, kontur_h); 
-    	kontur_rect.SetCenter(Screen::Instance().GetWindow().GetWidth()/2, Screen::Instance().GetWindow().GetHeight()/2); 
+    	Rect kontur_rect(-kontur_w/2, -kontur_h/2, kontur_w, kontur_h); 
 	vehicle->SetGuiRect(kontur_rect);
 }
         
 void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
 {        
 	Rect rect;
-	vec2i center(vehicle->GetGuiRect().GetCenter().x, vehicle->GetGuiRect().GetCenter().y);
 
         // WEAPON SLOTS
         for (unsigned int i=0; i<vehicle->GetKorpusData().slot_weapon_num; i++)
         {
         	ItemSlot* weapon_slot = GetNewItemSlot(ENTITY::WEAPON_SLOT_ID);
-        	rect = Rect( center.x - 3*GUI::ITEMSLOT::WIDTH_FOR_SHIP    + 1.1*i*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
-                             center.y - 1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 2*1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+        	rect = Rect( -3*GUI::ITEMSLOT::WIDTH_FOR_SHIP    + 1.1*i*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+                             -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 2*1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
        			     GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);        
         	vehicle->AddItemSlot(weapon_slot, rect);
         }
         //
                 
 	ItemSlot* radar_slot = GetNewItemSlot(ENTITY::RADAR_SLOT_ID);
-        rect = Rect(center.x+4*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
-			  center.y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
-			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        rect = Rect(4*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+		    -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
+		    GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 	vehicle->AddItemSlot(radar_slot, rect);
 	
 	
 	ItemSlot* scaner_slot = GetNewItemSlot(ENTITY::SCANER_SLOT_ID); 
-	rect = Rect(center.x+4*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
-			  center.y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
-			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+	rect = Rect(4*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+		    -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
+		    GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 	vehicle->AddItemSlot(scaner_slot, rect);
 	
 	
 	ItemSlot* energizer_slot = GetNewItemSlot(ENTITY::ENERGIZER_SLOT_ID); 
-	rect = Rect(center.x-2*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
-			  center.y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
-			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+	rect = Rect(-2*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+		    -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
+		    GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 	vehicle->AddItemSlot(energizer_slot, rect);
     		
     		
 	if (vehicle->GetKorpusData().slot_grapple_num != 0)
 	{
 		ItemSlot* grapple_slot = GetNewItemSlot(ENTITY::GRAPPLE_SLOT_ID);
-		rect = Rect(center.x-3*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
-                                  center.y-GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
-                                  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);					 
+		rect = Rect(-3*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+                            -GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+                            GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);					 
     		vehicle->AddItemSlot(grapple_slot, rect); 
     	}
     	
 	ItemSlot* droid_slot = GetNewItemSlot(ENTITY::DROID_SLOT_ID);
-	rect = Rect(center.x-1*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
-			  center.y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
-			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);				    
+	rect = Rect(-1*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+		    -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+		    GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);				    
     	vehicle->AddItemSlot(droid_slot, rect); 
     	
     	
 	ItemSlot* freezer_slot = GetNewItemSlot(ENTITY::FREEZER_SLOT_ID);
-	rect = Rect(center.x-1*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
-			  center.y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
-			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);	
+	rect = Rect(-1*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+		    -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+		    GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);	
 	vehicle->AddItemSlot(freezer_slot, rect);   
         
         
         ItemSlot* protector_slot = GetNewItemSlot(ENTITY::PROTECTOR_SLOT_ID); 
-	rect = Rect(center.x-3*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
-			  center.y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
-			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);	    
+	rect = Rect(-3*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+		    -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+		    GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);	    
     	vehicle->AddItemSlot(protector_slot, rect); 
         
         
         ItemSlot* drive_slot = GetNewItemSlot(ENTITY::DRIVE_SLOT_ID); 
-	rect = Rect(center.x-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
-			  center.y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
-                          GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+	rect = Rect(-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+		    -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
+                    GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 	vehicle->AddItemSlot(drive_slot, rect);
 	
 	
         ItemSlot* bak_slot = GetNewItemSlot(ENTITY::BAK_SLOT_ID);  
-	rect = Rect(center.x-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
-			  center.y-1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
-			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+	rect = Rect(-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+		    -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
+		    GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 	vehicle->AddItemSlot(bak_slot, rect);
 	////////////////////////////////////////////////////
 
@@ -143,9 +141,9 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
     	for (int i=0; i<=10; i++)
     	{
          	ItemSlot* otsec_slot = GetNewItemSlot(ENTITY::CARGO_SLOT_ID);
-         	rect = Rect(center.x+(i-6)*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
-         			  center.y    -3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
-         			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);         					
+         	rect = Rect((i-6)*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+         		    -3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+         		    GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);         					
          	vehicle->AddItemSlot(otsec_slot, rect);         
     	}
     	////////////////////////////////////////////////////
@@ -153,18 +151,18 @@ void BaseVehicleBuilder::CreateEquipmentSlots(Vehicle* vehicle) const
 
     	//////////// GATE SLOT /////////////////////////////
     	ItemSlot* gate_slot = GetNewItemSlot(ENTITY::GATE_SLOT_ID);
-   	rect = Rect(center.x-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
-    			  center.y+3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
-    			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+   	rect = Rect(-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+    		    3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+    		    GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
     	vehicle->AddItemSlot(gate_slot, rect);
     	
     	//////////// ARTEFACT SLOT /////////////////////////  	  	
     	for (int i=0; i<4; i++)
     	{
     		ItemSlot* artefact_slot = GetNewItemSlot(ENTITY::ARTEFACT_SLOT_ID);
-   		rect = Rect(center.x+i*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
-    	        	    center.y+4*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
-    		   	 GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+   		rect = Rect(i*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+    	        	    4*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+    		   	    GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
     		vehicle->AddItemSlot(artefact_slot, rect);         
     	}
     	

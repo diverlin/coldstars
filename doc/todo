@@ -1,8 +1,11 @@
 ################### FEATURES #################
+<< scale VehicleGui
+
 << implement all ModuleBuilder
 - DONE
 
-<< implement artifacts
+<< implement artefacts
+- DONE
 
 << make mass calc individual depending on in coming out coming item
 - DONE
