@@ -56,7 +56,7 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
 	bool interaction = false;        
 	if (allow_full_control == true)
 	{
-		interaction = gui_vehicle.UpdateMouseInteractionInSpace(data_mouse, scan_vehicle);
+		interaction = gui_vehicle.UpdateMouseInteractionInSpace(data_mouse);
 		if (interaction == false)
 		{
 			interaction = gui_skill.UpdateButtonsMouseInteraction(data_mouse);
@@ -71,12 +71,12 @@ void GuiManager::RenderScanVehicle(const MouseData& data_mouse, Vehicle* vehicle
 {		
 	if (player->GetCursor().GetItemSlot()->GetEquiped() == true)
 	{
-       		gui_vehicle.RenderVehicle(data_mouse, vehicle, player->GetCursor().GetItemSlot()->GetItem()->GetFunctionalSlotSubTypeId());
-		player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetItemSlot()->GetRect(), vec2i(0, 0));		
+       		gui_vehicle.RenderVehicle(data_mouse, player->GetCursor().GetItemSlot()->GetItem()->GetFunctionalSlotSubTypeId());
+		player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetRect(), vec2i(0, 0));		
 	}
 	else
 	{
-		gui_vehicle.RenderVehicle(data_mouse, vehicle, NONE_ID);
+		gui_vehicle.RenderVehicle(data_mouse, NONE_ID);
 	}
 					
 	if ( (show_skill == true) and (vehicle->GetOwnerNpc() != NULL) )
@@ -88,7 +88,7 @@ void GuiManager::RenderScanVehicle(const MouseData& data_mouse, Vehicle* vehicle
 
 	if (player->GetCursor().GetItemSlot()->GetEquiped() == false)
 	{
-		gui_vehicle.RenderFocusedItemInfo(data_mouse, vehicle);					
+		gui_vehicle.RenderFocusedItemInfo(data_mouse);					
 		//gui_skill
 	}
 }
@@ -188,7 +188,7 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 		
 		case ENTITY::KOSMOPORT_ID:
 		{    	
-			Rect screen_rect = Rect(0, 0, Screen::Instance().GetWindow().GetWidth(), Screen::Instance().GetWindow().GetHeight());   
+			Rect screen_rect(0, 0, Screen::Instance().GetWindow().GetWidth(), Screen::Instance().GetWindow().GetHeight());   
 			
 			UserInput::Instance().UpdateInKosmoport(player);
 					       	

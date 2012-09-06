@@ -58,11 +58,8 @@ class BaseSlot : public Base
 		
 		bool GetEquiped() const { return is_EQUIPED; };
 		
-                Rect& GetRect() { return rect; };
 		Vehicle* GetOwnerVehicle() const { return (Vehicle*)owner; };
 		Base* GetOwner() const { return owner; };
-			
-                void SetRect(float, float, int, int);
         
         	virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);
@@ -72,8 +69,6 @@ class BaseSlot : public Base
                 bool is_EQUIPED;                       
                 
                 TextureOb* textureOb;
-                
-                Rect rect;
                                 
                 Base* owner; 
              

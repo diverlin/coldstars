@@ -37,6 +37,7 @@ class Cursor
 		const MouseData& GetMouseData() { return data_mouse; };
 					
 		ItemSlot* GetItemSlot() const { return item_slot; };
+		const Rect& GetRect() const { return rect; };
 								
 		void UpdateMouseStuff();		
 		void Update(const MouseData&);
@@ -45,7 +46,8 @@ class Cursor
 		void RenderFocusedSpaceObjectStuff();
 		
         private:
-        	ItemSlot* item_slot;        	
+        	ItemSlot* item_slot;  
+        	Rect rect;      	
         	Player* player;
         	
         	MouseData data_mouse;

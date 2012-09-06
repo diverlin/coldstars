@@ -82,9 +82,9 @@ void SatelliteBuilder::CreateNewInternals()
 	satellite->SetTextureOb(texOb);
 	
 	CreateKorpusGeometry(satellite);
-        CreateKorpusGui(satellite);
+
         CreateDriveComplexTextureDependedStuff(satellite);
         CreateProtectionComplexTextureDependedStuff(satellite);
                         
-        CreateEquipmentSlots(satellite);
+        CreateItemSlots(satellite);
 }

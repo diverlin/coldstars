@@ -26,8 +26,11 @@ class Rect
 	    	Rect();
 	    	Rect(float, float, int, int);
       		Rect(const vec2f&, int, int);
+      		//Rect(const Rect&);
       		~Rect();
-      		
+
+      		//const Rect& operator=(const Rect&);
+	
       		bool CheckInteraction(int, int) const;
       		       		
       		void Set(float, float, int, int);

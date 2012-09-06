@@ -597,6 +597,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
                			        if ( npc->CheckPossibilityToScan(visible_SATELLITE_vec[i]) == true )
                				{
                       				npc->SetScanTarget(visible_SATELLITE_vec[i]);
+                      				gui_manager.GetGuiVehicle().BindVehicle(visible_SATELLITE_vec[i]);
                				}
 
       				}
@@ -681,6 +682,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
                 		        if ( npc->CheckPossibilityToScan(visible_SHIP_vec[i]) == true )
                 			{
                       				npc->SetScanTarget(visible_SHIP_vec[i]);
+                      				gui_manager.GetGuiVehicle().BindVehicle(visible_SHIP_vec[i]);
                 			}
        				}
        			}
@@ -746,6 +748,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
                			        if ( npc->CheckPossibilityToScan(visible_SPACESTATION_vec[i]) == true )
                				{
                       				npc->SetScanTarget(visible_SPACESTATION_vec[i]);
+                      				gui_manager.GetGuiVehicle().BindVehicle(visible_SPACESTATION_vec[i]);
                				}
        				}
        			}

@@ -29,11 +29,6 @@ BaseSlot::BaseSlot()
 BaseSlot::~BaseSlot()
 {}
                 
-void BaseSlot::SetRect(float pos_x, float pos_y, int w, int h) 
-{
-	rect.Set(pos_x, pos_y, w, h);
-}
-
 /*virtual*/
 void BaseSlot::SaveData(boost::property_tree::ptree& save_ptree) const
 {
@@ -57,12 +52,7 @@ void BaseSlot::ResolveData()
 }
 
 void BaseSlot::SaveDataUniqueBaseSlot(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-        save_ptree.put(root+"unresolved.rect.BottomLeft.x", rect.GetBottomLeft().x);
-        save_ptree.put(root+"unresolved.rect.BottomLeft.y", rect.GetBottomLeft().y); 
-        save_ptree.put(root+"unresolved.rect.width", rect.GetWidth());
-        save_ptree.put(root+"unresolved.rect.height", rect.GetHeight()); 
-        
+{       
         if (owner) 
         {
         	save_ptree.put(root+"unresolved.owner_type_id", owner->GetTypeId());        	

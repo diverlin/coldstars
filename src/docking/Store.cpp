@@ -39,7 +39,7 @@ Store::~Store()
 void Store::AddItemSlot(ItemSlot* slot, const Rect& rect) 
 { 
 	slot->SetOwner(this);
-	slot->SetRect(rect.GetBottomLeft().x, rect.GetBottomLeft().y, rect.GetWidth(), rect.GetHeight()); 
+	//change slot->SetRect(rect.GetBottomLeft().x, rect.GetBottomLeft().y, rect.GetWidth(), rect.GetHeight()); 
 	        
 	slot_total_vec.push_back(slot); 
 };     

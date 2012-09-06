@@ -83,11 +83,11 @@ void SpaceStationBuilder::CreateNewInternals()
 	spacestation->SetLifeData(data_life);
     	
 	CreateKorpusGeometry(spacestation);
-        CreateKorpusGui(spacestation);
+
         CreateDriveComplexTextureDependedStuff(spacestation);
         CreateProtectionComplexTextureDependedStuff(spacestation);
         
-        CreateEquipmentSlots(spacestation);
+        CreateItemSlots(spacestation);
                 
         KosmoportBuilder::Instance().CreateNewKosmoport();
 	KosmoportBuilder::Instance().CreateNewInternals();

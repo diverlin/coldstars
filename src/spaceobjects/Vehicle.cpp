@@ -54,8 +54,6 @@ Vehicle::Vehicle()
         
         gate_slot = NULL;
         
-        textureOb_gui = NULL;
-        
         land  = NULL;
 }
 
@@ -97,11 +95,9 @@ GoodsPack* Vehicle::GetGoodsPack() const
 	return NULL;
 }
         	
-void Vehicle::AddItemSlot(ItemSlot* slot, const Rect& rect) 
+void Vehicle::AddItemSlot(ItemSlot* slot) 
 { 
-	assert(slot);
         slot->SetOwner(this); 
-        slot->SetRect(rect.GetBottomLeft().x, rect.GetBottomLeft().y, rect.GetWidth(), rect.GetHeight());        
                 
 	switch(slot->GetSubTypeId())
 	{
@@ -931,8 +927,6 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
        	save_ptree.put(root+"data_korpus.slot_freezer_num", data_korpus.slot_freezer_num);
        	save_ptree.put(root+"data_korpus.slot_weapon_num", data_korpus.slot_weapon_num);       	
        	
-        save_ptree.put(root+"data_unresolved_Vehicle.textureOb_gui_path", textureOb_gui->path);      
-       	
        	if (land) save_ptree.put(root+"unresolved.land_id", land->GetId());
 	else save_ptree.put(root+"unresolved.land_id", NONE_ID);
 	
@@ -966,10 +960,7 @@ void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptre
 
 void Vehicle::ResolveDataUniqueVehicle()
 {
-       	textureOb_gui = TextureManager::Instance().GetTextureObByPath(data_unresolved_Vehicle.textureOb_gui_path);
-       	
        	BaseVehicleBuilder::Instance().CreateKorpusGeometry(this);
-        BaseVehicleBuilder::Instance().CreateKorpusGui(this);
         BaseVehicleBuilder::Instance().CreateDriveComplexTextureDependedStuff(this);
         if (data_id.subtype_id != ENTITY::ROCKETBULLET_ID)
         {
