@@ -147,9 +147,6 @@ class Vehicle : public BaseGameEntity
                 void SetWeaponComplex(WeaponComplex* weapon_complex) { this->weapon_complex = weapon_complex; };
                 void SetDriveComplex(DriveComplex* drive_complex)    { this->drive_complex  = drive_complex; };
 		void SetProtectionComplex(ProtectionComplex* protection_complex) { this->protection_complex = protection_complex; };
-
-                void SetGuiTextureOb(TextureOb* textureOb_gui) { this->textureOb_gui = textureOb_gui; };
-        	void SetGuiRect(Rect rect) { kontur_rect = rect; };
         	
         	void SetColor(Color4f color) { this->color = color; }
         	void SetLand(BaseLand* land) { this->land = land; };
@@ -163,7 +160,7 @@ class Vehicle : public BaseGameEntity
                 VehicleKorpusData& GetKorpusData() { return data_korpus; };
                 
                 			
-                void AddItemSlot(ItemSlot*, const Rect&); 
+                void AddItemSlot(ItemSlot*); 
                 bool AddItemToCargoSlot(BaseItem*);
                 bool UnpackContainerItemToCargoSlot(Container*);
                 
@@ -187,8 +184,6 @@ class Vehicle : public BaseGameEntity
                 Npc* GetOwnerNpc() const { return owner_npc; };
        	        ItemSlot* GetEmptyCargoSlot();
        	        ItemSlot* GetCargoSlotWithGoods(int);
-        	
-        	const Rect& GetGuiRect() const { return kontur_rect; };
         	
         	GoodsPack* GetGoodsPack() const;
                        	
@@ -263,11 +258,6 @@ class Vehicle : public BaseGameEntity
                 std::vector<ItemSlot*> slot_funct_vec;
         	std::vector<ItemSlot*> slot_artef_vec;
         	std::vector<ItemSlot*> slot_cargo_vec;
-                                
-        	// KONTUR RECT 
-        	Rect kontur_rect; 
-                TextureOb* textureOb_gui;
-                //                
                 
    	     	BaseLand* land;
    	     	

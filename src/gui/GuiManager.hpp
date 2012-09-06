@@ -42,6 +42,7 @@ class GuiManager
 		
 		bool RunSession(const MouseData&);
 		GuiRadar& GetGuiRadar() { return gui_radar; };
+		GuiVehicle& GetGuiVehicle() { return gui_vehicle; };
       		
       	private:
       		Player* player;

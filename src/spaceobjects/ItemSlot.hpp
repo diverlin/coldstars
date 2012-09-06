@@ -91,19 +91,17 @@ class ItemSlot : public BaseSlot
 		Bomb* GetBomb()           const { return (Bomb*)item; }
 		//Artefact* GetArtefact() const { return artefact; }
 		GoodsPack* GetGoodsPack() const { return (GoodsPack*)item; }
-
-                void SetRect(float, float, int, int);
                                 
 		bool InsertItem(BaseItem*);            
 		void RemoveItem();
 		
 		void UpdateVehiclePropetries() const;
                 
-		void Render(const vec2i&) const;
-		void RenderMark(TextureOb*) const;
+		void Render(const Rect&, const vec2i&) const;
+		void RenderMark(const Rect&, TextureOb*) const;
 
-		void RenderItemInfo(const vec2f&) const;		       
-		void RenderItemInfo(float offset_x = 0, float offset_y = 0) const;
+		void RenderItemInfo(const Rect&, const vec2f&) const;		       
+		void RenderItemInfo(const Rect&, float offset_x = 0, float offset_y = 0) const;
                 
                 void DropItemToSpace(Vehicle*);
                                                 

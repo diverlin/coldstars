@@ -44,11 +44,6 @@ ItemSlot::~ItemSlot()
 	}
 }
                 
-void ItemSlot::SetRect(float pos_x, float pos_y, int w, int h) 
-{
-	rect.Set(pos_x, pos_y, w, h);
-}
-
 bool ItemSlot::InsertItem(BaseItem* item)
 {
 	if (owner != NULL) // slot in cursor has owner = NULL
@@ -133,7 +128,7 @@ void ItemSlot::UpdateVehiclePropetries() const
 	}
 }
    
-void ItemSlot::Render(const vec2i& gui_offset) const
+void ItemSlot::Render(const Rect& rect, const vec2i& gui_offset) const
 {
        	drawTexturedRect(textureOb, rect, -1.5);    
        	if (is_EQUIPED == true)
@@ -142,7 +137,7 @@ void ItemSlot::Render(const vec2i& gui_offset) const
         }
 }
 
-void ItemSlot::RenderMark(TextureOb* textureOb_mark) const
+void ItemSlot::RenderMark(const Rect& rect, TextureOb* textureOb_mark) const
 {
 	drawTexturedRect(textureOb_mark, rect, -1.0);
 }      
@@ -174,12 +169,12 @@ int ItemSlot::GetItemRadius() const
         return 0;
 }
 
-void ItemSlot::RenderItemInfo(const vec2f& offset) const
+void ItemSlot::RenderItemInfo(const Rect& rect, const vec2f& offset) const
 {
-	RenderItemInfo(offset.x, offset.y);
+	RenderItemInfo(rect, offset.x, offset.y);
 }
 
-void ItemSlot::RenderItemInfo(float offset_x, float offset_y) const
+void ItemSlot::RenderItemInfo(const Rect& rect, float offset_x, float offset_y) const
 {
         if (is_EQUIPED == true)
         {
@@ -351,10 +346,10 @@ void ItemSlot::LoadDataUniqueItemSlot(const boost::property_tree::ptree& load_pt
 
 void ItemSlot::ResolveDataUniqueItemSlot()
 {
-        Rect tmp_rect(unresolved_BaseSlot.rect_blx, unresolved_BaseSlot.rect_bly, unresolved_BaseSlot.rect_w, unresolved_BaseSlot.rect_h);
+        Rect tmp_rect(unresolved_BaseSlot.rect_blx, unresolved_BaseSlot.rect_bly, unresolved_BaseSlot.rect_w, unresolved_BaseSlot.rect_h); // no need to save this
         switch(unresolved_BaseSlot.owner_type_id)
         {
-	       case ENTITY::VEHICLE_ID: 	{	((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this, tmp_rect); break; }
+	       case ENTITY::VEHICLE_ID: 	{	((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
 	       case ENTITY::CONTAINER_ID:     	{	((Container*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }
 	       case ENTITY::STORE_ID:         	{ 	((Store*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this, tmp_rect); break; }
 	       case ENTITY::ANGAR_ID:         	{ 	}//((Angar*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this, tmp_rect); break; }

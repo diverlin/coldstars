@@ -62,7 +62,6 @@ void RocketBulletBuilder::CreateNewInternals(BulletData data_bullet)
          
         CreateKorpusGeometry(rocket);
         //CreateShieldGeometry(rocket);
-        CreateKorpusGui(rocket);
 
 	CreateDriveComplexTextureDependedStuff(rocket);       
 }

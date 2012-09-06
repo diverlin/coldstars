@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 Cursor::Cursor():focused_space_ob(NULL)
 {
      	item_slot = GetNewItemSlot(ENTITY::CARGO_SLOT_ID);
-     	item_slot->SetRect(0, 0, GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
+     	rect.Set(0, 0, GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
 }
 
 Cursor::~Cursor()
@@ -44,7 +44,7 @@ void Cursor::UpdateMouseStuff()
 
 void Cursor::Update(const MouseData& data_mouse)
 {
-     	item_slot->GetRect().SetCenter(data_mouse.mx, data_mouse.my);
+     	rect.SetCenter(data_mouse.mx, data_mouse.my);
 }
 
 void Cursor::RenderFocusedSpaceObjectStuff()

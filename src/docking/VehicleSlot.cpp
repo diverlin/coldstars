@@ -28,7 +28,11 @@ VehicleSlot::VehicleSlot(int id)
 VehicleSlot::~VehicleSlot()
 {}
       
-
+      
+void VehicleSlot::SetRect(float pos_x, float pos_y, int w, int h) 
+{
+	rect.Set(pos_x, pos_y, w, h);
+}
 
 void VehicleSlot::InsertVehicle(Vehicle* vehicle)
 {

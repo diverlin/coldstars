@@ -22,21 +22,43 @@
 
 #include "../docking/Store.hpp"
 
+template <class TYPE>
+class GuiPair
+{
+	public:
+		Rect rect;
+		TYPE object;
+		
+	GuiPair(const Rect& rect, TYPE object):rect(rect), object(object) {};
+	GuiPair(const GuiPair& rhs):rect(rhs.rect), object(rhs.object) {};
+	~GuiPair() {};
+};
+
 class GuiVehicle : public BaseGui
 {
    	public:
       		GuiVehicle();
       		~GuiVehicle();
 
-     		bool UpdateMouseInteractionInSpace(const MouseData&, Vehicle*);   
+		void BindVehicle(Vehicle*);
+        	
+     		bool UpdateMouseInteractionInSpace(const MouseData&);   
                 bool UpdateMouseInteractionInStore(const MouseData&, Vehicle*, Store*); 
                         			
-      		void RenderVehicle(const MouseData&, Vehicle*, int) const;
-		void RenderFocusedItemInfo(const MouseData&, Vehicle*) const;
+      		void RenderVehicle(const MouseData&, int) const;
+		void RenderFocusedItemInfo(const MouseData&) const;
       		
-      	private:  		
-      		void RenderSlots(Vehicle*) const;
-      		void RenderMarksForEmptySlots(const MouseData&, Vehicle*, int) const;  
+      	private:  	
+      	        Rect rect_korpus; 
+                TextureOb* textureOb_korpus;
+                	
+      		std::vector<GuiPair<ItemSlot*>> rect_slot_vec;
+      	
+      		void RenderSlots() const;
+      		void RenderMarksForEmptySlots(const MouseData&, int) const;  
+
+        	void CreateKorpusGui(Vehicle*);
+        	void CreateItemSlotsGeometry(Vehicle*);
 };
 
 
