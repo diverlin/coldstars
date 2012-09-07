@@ -55,8 +55,10 @@ const vec2i GUI_VEHICLE_INSPACE_OFFSET(-180, 0);
 const vec2i GUI_SKILL_INSPACE_OFFSET(100, 0);
 const vec2i GUI_VEHICLE_INANGAR_OFFSET(-180, 0);
 const vec2i GUI_SKILL_INANGAR_OFFSET(100, 0);
-const vec2i GUI_VEHICLE_INSTORE_OFFSET(0, 200);
-const vec2i GUI_STORE_OFFSET(0, -100);
+const vec2i GUI_VEHICLE_INSTORE_OFFSET(-180, -200);
+const vec2i GUI_STORE_OFFSET(-200, 200);
+
+const int STORE_SLOTS_NUM = 32;
 
 namespace PRICE
 {
@@ -641,6 +643,7 @@ namespace TECHLEVEL
 namespace GUI
 {
 	const int BAR_HEIGHT = 30;
+	const int STORE_SLOTS_INROW = 10;
 	
 	namespace SLIDER
 	{

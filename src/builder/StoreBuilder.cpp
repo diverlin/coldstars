@@ -48,36 +48,13 @@ void StoreBuilder::CreateNewStore(int id)
         	
 void StoreBuilder::CreateNewInternals()
 {
-	// create slots
-	TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ITEM_SLOT_ID);
-	        
- 	int row_num = 4;  // must be divided by 2
-        int clm_num = 10; // must be divided by 2
-        vec2i center(Screen::Instance().GetWindow().GetWidth()/2, Screen::Instance().GetWindow().GetHeight()/2);
-
-        int row = 1;
-        while (row <= row_num)
+        for (unsigned int i=0; i<STORE_SLOTS_NUM; i++)
         {
-                int clm = 1;
-                while (clm <= clm_num)
-                {
-                        ItemSlot* item_slot = GetNewItemSlot(ENTITY::CARGO_SLOT_ID);
- 
-                        Rect rect(center.x + (clm - clm_num/2) * 1.1 * GUI::ITEMSLOT::WIDTH_FOR_STORE, 
-                        	  center.y - (row - row_num/2) * 1.1 * GUI::ITEMSLOT::HEIGHT_FOR_STORE,
-                        	  GUI::ITEMSLOT::WIDTH_FOR_STORE,
-                                  GUI::ITEMSLOT::HEIGHT_FOR_STORE);
-                                                        
-                        store->AddItemSlot(item_slot, rect);
-                        clm++;
-                }
-                row++;
+		ItemSlot* item_slot = GetNewItemSlot(ENTITY::CARGO_SLOT_ID);
+                store->AddItemSlot(item_slot);
         }
-        
-	
-	TextureOb* texOb_bg  = TextureManager::Instance().GetRandomTextureOb(TEXTURE::STORE_BACKGROUND_ID); 
-	store->SetTextureObBackground(texOb_bg);
 
+	store->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TEXTURE::STORE_BACKGROUND_ID));
 }
 
 

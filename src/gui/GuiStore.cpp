@@ -24,18 +24,41 @@ GuiStore::GuiStore()
 GuiStore::~GuiStore()
 {}
 
+void GuiStore::BindStore(Store* store)
+{
+	rect_slot_vec.clear();
+
+        int clm = 0;
+        int row = 0;
+        for (unsigned int i=0; i<store->slot_total_vec.size(); i++)
+        {	                     
+	        Rect rect(clm * 1.1 * GUI::ITEMSLOT::WIDTH_FOR_STORE, 
+        	       	  -row * 1.1 * GUI::ITEMSLOT::HEIGHT_FOR_STORE,
+                          GUI::ITEMSLOT::WIDTH_FOR_STORE,
+                          GUI::ITEMSLOT::HEIGHT_FOR_STORE);
+                                                        
+       		rect_slot_vec.push_back(GuiPair<ItemSlot*>(rect, store->slot_total_vec[i]));
+       		
+       		clm++;
+        	if (clm > GUI::STORE_SLOTS_INROW)
+        	{
+        		clm = 0;
+        		row++;
+        	}
+        }
+}
         
 bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse, Store* store)
 {
-        for (unsigned int i=0; i<store->slot_total_vec.size(); i++)
+        for (unsigned int i=0; i<rect_slot_vec.size(); i++)
         { 
-                if (store->slot_total_vec[i]->GetEquiped() == true)
+                if (rect_slot_vec[i].object->GetEquiped() == true)
                 {
-                	//change if (store->slot_total_vec[i]->GetRect().CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
+                	if (rect_slot_vec[i].rect.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
                 	{
                         	if (data_mouse.left_click == true)
                         	{
-                        		store->SellItemFromSlot(player->GetNpc(), store->slot_total_vec[i]);
+                        		store->SellItemFromSlot(player->GetNpc(), rect_slot_vec[i].object);
                         	} 
                         	return true; break;
                 	} 
@@ -45,24 +68,24 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse, Store* store)
         return false;
 }
 
-void GuiStore::RenderSlots(Store* store) const
+void GuiStore::RenderSlots() const
 {      
 	glPushMatrix();
 		glTranslatef(offset.x, offset.y, 0);
-        	for (unsigned int i=0; i<store->slot_total_vec.size(); i++)
+        	for (unsigned int i=0; i<rect_slot_vec.size(); i++)
         	{
-                	//change store->slot_total_vec[i]->Render(store->slot_total_vec[i]->GetRect(), offset);
+                	rect_slot_vec[i].object->Render(rect_slot_vec[i].rect, offset);
         	}
 	glPopMatrix();
 }
 
-void GuiStore::RenderFocusedItemInfo(const MouseData& data_mouse, Store* store)
+void GuiStore::RenderFocusedItemInfo(const MouseData& data_mouse)
 {	
-        for (unsigned int i=0; i<store->slot_total_vec.size(); i++)
+        for (unsigned int i=0; i<rect_slot_vec.size(); i++)
         {                              				
-                //change if (store->slot_total_vec[i]->GetRect().CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
+                if (rect_slot_vec[i].rect.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
                 {
-                        //change store->slot_total_vec[i]->RenderItemInfo(-offset.x, -offset.y);                    
+                        rect_slot_vec[i].object->RenderItemInfo(rect_slot_vec[i].rect, -offset.x, -offset.y);                    
                 } 
         }
 }

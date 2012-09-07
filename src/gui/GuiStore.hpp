@@ -16,23 +16,26 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #ifndef GUISTORE_H
 #define GUISTORE_H
 
+#include "GuiPair.hpp"
 
 class GuiStore : public BaseGui
 {
         public:
                 GuiStore();                      
                 ~GuiStore();
+		
+		void BindStore(Store*);
 
                 bool UpdateMouseInteraction(const MouseData&, Store*);
 
-        	void RenderSlots(Store*) const;                
-                void RenderFocusedItemInfo(const MouseData&, Store*);
+        	void RenderSlots() const;                
+                void RenderFocusedItemInfo(const MouseData&);
                 
-        public:          
+        private:
+              	std::vector<GuiPair<ItemSlot*>> rect_slot_vec;          
 };
            
            

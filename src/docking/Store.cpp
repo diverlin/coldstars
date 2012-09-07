@@ -22,7 +22,6 @@ Store::Store(int id)
 {
 	data_id.id = id;
 	data_id.type_id  = ENTITY::STORE_ID;
-	data_id.subtype_id  = NONE_ID;
 }
 
 Store::~Store()
@@ -36,7 +35,7 @@ Store::~Store()
 	slot_total_vec.clear();
 }
 
-void Store::AddItemSlot(ItemSlot* slot, const Rect& rect) 
+void Store::AddItemSlot(ItemSlot* slot) 
 { 
 	slot->SetOwner(this);
 	//change slot->SetRect(rect.GetBottomLeft().x, rect.GetBottomLeft().y, rect.GetWidth(), rect.GetHeight()); 

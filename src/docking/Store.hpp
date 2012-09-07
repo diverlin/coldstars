@@ -28,7 +28,7 @@ class Store : public Room
                 Store(int);                      
                 ~Store();
                 
-		void AddItemSlot(ItemSlot* slot, const Rect& rect);                
+		void AddItemSlot(ItemSlot*);                
                 bool AddItem(BaseItem*);
 
                 ItemSlot* GetEmptySlot();
