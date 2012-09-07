@@ -17,39 +17,21 @@
 */
 
 
-#ifndef GUIVEHICLE_H
-#define GUIVEHICLE_H
+#ifndef GUIPAIR_H
+#define GUIPAIR_H
 
-#include "../docking/Store.hpp"
 #include "GuiPair.hpp"
 
-class GuiVehicle : public BaseGui
+template <class TYPE>
+class GuiPair
 {
-   	public:
-      		GuiVehicle();
-      		~GuiVehicle();
-
-		void BindVehicle(Vehicle*);
-        	
-     		bool UpdateMouseInteractionInSpace(const MouseData&);   
-                bool UpdateMouseInteractionInStore(const MouseData&, Vehicle*, Store*); 
-                        			
-      		void RenderVehicle(const MouseData&, int) const;
-		void RenderFocusedItemInfo(const MouseData&) const;
-      		
-      	private:  	
-      	        Rect rect_korpus; 
-                TextureOb* textureOb_korpus;
-                	
-      		std::vector<GuiPair<ItemSlot*>> rect_slot_vec;
-      	
-      		void RenderSlots() const;
-      		void RenderMarksForEmptySlots(const MouseData&, int) const;  
-
-        	void CreateKorpusGui(Vehicle*);
-        	void CreateItemSlotsGeometry(Vehicle*);
+	public:
+		Rect rect;
+		TYPE object;
+		
+	GuiPair(const Rect& rect, TYPE object):rect(rect), object(object) {};
+	GuiPair(const GuiPair& rhs):rect(rhs.rect), object(rhs.object) {};
+	~GuiPair() {};
 };
-
-
 
 #endif
