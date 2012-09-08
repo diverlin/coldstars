@@ -58,7 +58,8 @@ const vec2i GUI_SKILL_INANGAR_OFFSET(100, 0);
 const vec2i GUI_VEHICLE_INSTORE_OFFSET(-180, -200);
 const vec2i GUI_STORE_OFFSET(-200, 200);
 
-const int STORE_SLOTS_NUM = 32;
+const int STORE_ITEM_SLOTS_NUM = 32;
+const int ANGAR_VEHICLE_SLOTS_NUM = 6;
 
 namespace PRICE
 {

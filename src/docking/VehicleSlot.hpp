@@ -32,15 +32,12 @@ class VehicleSlot : public BaseSlot
                 VehicleSlot(int);
                 ~VehicleSlot();	
                 
-                                Rect& GetRect() { return rect; };			
-                		void SetRect(float, float, int, int);
-                
                 Vehicle* GetVehicle() const { return vehicle; };
                 void InsertVehicle(Vehicle*);
                 void Release(); 
         
-                void Render() const;
-                void RenderItemInfo() const;
+                void Render(const Rect&) const;
+                void RenderItemInfo(const Rect&, int, int) const;
                 
                 virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);
@@ -48,8 +45,6 @@ class VehicleSlot : public BaseSlot
 		
         private:
         	Vehicle* vehicle;
-        	
-        	Rect rect;
         
                 void SaveDataUniqueVehicleSlot(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueVehicleSlot(const boost::property_tree::ptree&);

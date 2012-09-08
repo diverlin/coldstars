@@ -21,7 +21,6 @@ Angar::Angar(int id)
 {
 	data_id.id = id;
 	data_id.type_id = ENTITY::ANGAR_ID;
-	data_id.subtype_id = NONE_ID;
 	
 	price_fuel = PRICE_FUEL;
         price_armor = PRICE_ARMOR;
@@ -32,9 +31,8 @@ Angar::~Angar()
 	EntityManager::Instance().RemoveEntity(this);
 }
        
-void Angar::AddVehicleSlot(VehicleSlot* vehicle_slot, const Rect& rect) 
+void Angar::AddVehicleSlot(VehicleSlot* vehicle_slot) 
 { 
-	vehicle_slot->SetRect(rect.GetBottomLeft().x, rect.GetBottomLeft().y, rect.GetWidth(), rect.GetHeight());
 	vehicle_slot->SetOwner(this);
 	vehicleslot_vec.push_back(vehicle_slot); 
 };
@@ -57,7 +55,7 @@ void Angar::Ai() const
 int Angar::GetFreeVehicleSlotTotalNum() const
 {
         int sum_free = 0;
-        for (unsigned int i = 0; i < vehicleslot_vec.size(); i++)
+        for (unsigned int i=0; i<vehicleslot_vec.size(); i++)
         {
                 if (vehicleslot_vec[i]->GetVehicle() == NULL)
                 {

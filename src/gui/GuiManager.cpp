@@ -16,7 +16,7 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
+#include "GuiManager.hpp"
 
 GuiManager::GuiManager()
 {
@@ -199,11 +199,12 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
         		{
         			case GUI::SCREEN::ANGAR_ID:
         			{
-        				gui_vehicle.SetOffset(GUI_VEHICLE_INANGAR_OFFSET);
-        				gui_skill.SetOffset(GUI_SKILL_INANGAR_OFFSET);
+        				gui_vehicle.SetOffset(center_screen + GUI_VEHICLE_INANGAR_OFFSET);
+        				gui_skill.SetOffset(center_screen + GUI_SKILL_INANGAR_OFFSET);
         				        						
         				Angar* angar = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetAngar();
 					Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget();
+					gui_angar.BindAngar(angar);
 
 					//update  
 					gui_angar.CheckButtonsLock();
@@ -212,7 +213,7 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 						interaction = gui_angar.UpdateButtonsMouseInteraction(data_mouse);
 						if (interaction == false)
 						{
-							interaction = gui_angar.UpdateMouseVehicleSlotsInteraction(data_mouse, angar);
+							interaction = gui_angar.UpdateMouseVehicleSlotsInteraction(data_mouse);
 						}
 	
 						gui_angar.ButtonsAction();
@@ -277,8 +278,9 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 			        	//render
         				resetRenderTransformation();
 					store->RenderBackground(screen_rect);
+
 					enable_BLEND();
-						gui_store.RenderSlots();
+						gui_store.RenderSlots(player->GetNpc()->GetCredits());
 		
 						bool show_skill = false;
 						RenderScanVehicle(data_mouse, vehicle, show_skill);
@@ -288,7 +290,9 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 			        		gui_kosmoport.RenderButtons(); 
                 				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 
 					disable_BLEND();
-	
+					drawSimpleText("credits:"+int2str(player->GetNpc()->GetCredits()), 12, 600, 200);
+					//
+					
 					player->GetNpc()->ResetScanTarget();
         				
 					break;

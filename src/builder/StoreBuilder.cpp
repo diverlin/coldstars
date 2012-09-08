@@ -48,7 +48,7 @@ void StoreBuilder::CreateNewStore(int id)
         	
 void StoreBuilder::CreateNewInternals()
 {
-        for (unsigned int i=0; i<STORE_SLOTS_NUM; i++)
+        for (unsigned int i=0; i<STORE_ITEM_SLOTS_NUM; i++)
         {
 		ItemSlot* item_slot = GetNewItemSlot(ENTITY::CARGO_SLOT_ID);
                 store->AddItemSlot(item_slot);

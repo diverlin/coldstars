@@ -215,7 +215,7 @@ class Vehicle : public BaseGameEntity
         	void UpdateLockedItems();
                 
         	void RenderInfoInSpace(const vec2f&);
-        	void RenderInfo(const vec2f&);
+        	void RenderInfo(const vec2f&, int, int);
         	        	
         	void RenderRadarRange();
         	void RenderGrappleRange();        

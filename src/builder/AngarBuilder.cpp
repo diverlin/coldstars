@@ -50,15 +50,13 @@ void AngarBuilder::CreateNewInternals()
 	int screen_w = Config::Instance().SCREEN_WIDTH;
 	int screen_h = Config::Instance().SCREEN_HEIGHT;	
  	
- 	for (int i = 0; i<4; i++)
+ 	for (int i=0; i<ANGAR_VEHICLE_SLOTS_NUM; i++)
  	{
  		VehicleSlot* vehicle_slot = GetNewVehicleSlot(); 	
- 		Rect tmp_rect(screen_w/2 - i*GUI::ITEMSLOT::WIDTH_FOR_ANGAR,       screen_h/2,       GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
-        	angar->AddVehicleSlot(vehicle_slot, tmp_rect);
+ 		angar->AddVehicleSlot(vehicle_slot);
 	}
 		
-	TextureOb* texOb_bg  = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ANGAR_BACKGROUND_ID); 
-	angar->SetTextureObBackground(texOb_bg);
+	angar->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TEXTURE::ANGAR_BACKGROUND_ID));
 }
 
   	

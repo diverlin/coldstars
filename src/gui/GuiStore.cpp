@@ -58,7 +58,10 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse, Store* store)
                 	{
                         	if (data_mouse.left_click == true)
                         	{
-                        		store->SellItemFromSlot(player->GetNpc(), rect_slot_vec[i].object);
+                        		if (player->GetNpc()->GetCredits() >= rect_slot_vec[i].object->GetItem()->GetPrice())
+                              		{
+                        			store->SellItemFromSlot(player->GetNpc(), rect_slot_vec[i].object);
+                        		}
                         	} 
                         	return true; break;
                 	} 
@@ -68,13 +71,20 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse, Store* store)
         return false;
 }
 
-void GuiStore::RenderSlots() const
+void GuiStore::RenderSlots(int credits) const
 {      
 	glPushMatrix();
 		glTranslatef(offset.x, offset.y, 0);
         	for (unsigned int i=0; i<rect_slot_vec.size(); i++)
         	{
                 	rect_slot_vec[i].object->Render(rect_slot_vec[i].rect, offset);
+                	if (rect_slot_vec[i].object->GetEquiped() == true)
+                	{
+                		if (rect_slot_vec[i].object->GetItem()->GetPrice() > credits)
+                		{
+                			rect_slot_vec[i].object->RenderMark(rect_slot_vec[i].rect, GuiTextureObCollector::Instance().slot_mark_reject);
+               			}
+               		}                	
         	}
 	glPopMatrix();
 }

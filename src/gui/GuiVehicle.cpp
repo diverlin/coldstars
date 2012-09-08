@@ -26,13 +26,13 @@ GuiVehicle :: GuiVehicle()
 GuiVehicle :: ~GuiVehicle()
 {}
 
-void GuiVehicle::BindVehicle(Vehicle* vehicle)
+void GuiVehicle::BindVehicle(Vehicle* vehicle, float scale)
 {
-	CreateKorpusGui(vehicle);
-	CreateItemSlotsGeometry(vehicle);
+	CreateKorpusGui(vehicle, scale);
+	CreateItemSlotsGeometry(vehicle, scale);
 }	
 	
-void GuiVehicle::CreateKorpusGui(Vehicle* vehicle)
+void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
 {
 	textureOb_korpus = vehicle->GetTextureOb();         	
 
@@ -50,10 +50,10 @@ void GuiVehicle::CreateKorpusGui(Vehicle* vehicle)
         	kontur_w = textureOb_korpus->GetFrameWidth() * kontur_h / (float)textureOb_korpus->GetFrameHeight();
     	}               
 
-    	rect_korpus.Set(-kontur_w/2, -kontur_h/2, kontur_w, kontur_h); 
+    	rect_korpus.Set(-kontur_w/2 * scale, -kontur_h/2 * scale, kontur_w * scale, kontur_h * scale); 
 }      
   
-void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle)
+void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
 {        
 	rect_slot_vec.clear();
 
@@ -66,10 +66,11 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle)
         	{        
         		case ENTITY::WEAPON_SLOT_ID:
         		{
-        		       	Rect rect(-3*GUI::ITEMSLOT::WIDTH_FOR_SHIP    + 1.1*weapon_slot_counter*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
-                                           -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 2*1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
-       			                   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP); 
+        		       	Rect rect(-3*GUI::ITEMSLOT::WIDTH_FOR_SHIP + 1.1*weapon_slot_counter*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+                                          -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 2*1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+       			                  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP); 
        			     
+       			     	rect.Scale(scale);
        			     	GuiPair<ItemSlot*> gui_pair(rect, vehicle->slot_total_vec[i]);
        			     	rect_slot_vec.push_back(gui_pair);
         			weapon_slot_counter++;	
@@ -82,7 +83,8 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle)
         		        Rect rect(4*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 		    			  -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
 		    			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-		           			     	
+		           		
+		           	rect.Scale(scale);	     	
 		       		GuiPair<ItemSlot*> gui_pair(rect, vehicle->slot_total_vec[i]);
         			rect_slot_vec.push_back(gui_pair);
         			
@@ -94,7 +96,8 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle)
 				Rect rect(4*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 		    			  -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
 		    			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-		           			     	
+		           	
+		           	rect.Scale(scale);		     	
 		       		GuiPair<ItemSlot*> gui_pair(rect, vehicle->slot_total_vec[i]);
         			rect_slot_vec.push_back(gui_pair);
         			
@@ -106,7 +109,8 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle)
 				Rect rect(-2*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 		    			  -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
 		    			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-		           			     	
+		           	
+		           	rect.Scale(scale);		     	
 		       		GuiPair<ItemSlot*> gui_pair(rect, vehicle->slot_total_vec[i]);
         			rect_slot_vec.push_back(gui_pair);
         			
@@ -118,7 +122,8 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle)
 				Rect rect(-3*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
                                           -GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
                                           GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-		           			     	
+		           		
+		           	rect.Scale(scale);	     	
 		       		GuiPair<ItemSlot*> gui_pair(rect, vehicle->slot_total_vec[i]);
         			rect_slot_vec.push_back(gui_pair);
         			
@@ -130,7 +135,8 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle)
 				Rect rect(-1*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 		    			  -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
 		    			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);	
-		           			     	
+		           		
+		           	rect.Scale(scale);	     	
 		       		GuiPair<ItemSlot*> gui_pair(rect, vehicle->slot_total_vec[i]);
         			rect_slot_vec.push_back(gui_pair);
         			
@@ -142,7 +148,8 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle)
 				Rect rect(-1*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 		    			  -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
 		    			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);		
-		           			     	
+		           		
+		           	rect.Scale(scale);	     	
 		       		GuiPair<ItemSlot*> gui_pair(rect, vehicle->slot_total_vec[i]);
         			rect_slot_vec.push_back(gui_pair);
         			
@@ -154,7 +161,8 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle)
 				Rect rect(-3*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 		    			  -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
 		                          GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);	 		
-		           			     	
+		           	
+		           	rect.Scale(scale);		     	
 		       		GuiPair<ItemSlot*> gui_pair(rect, vehicle->slot_total_vec[i]);
         			rect_slot_vec.push_back(gui_pair);
         			
@@ -166,7 +174,8 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle)
 				Rect rect(-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 		    			   -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
                     			   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP); 		
-		           			     	
+		           		
+		           	rect.Scale(scale);	     	
 		       		GuiPair<ItemSlot*> gui_pair(rect, vehicle->slot_total_vec[i]);
         			rect_slot_vec.push_back(gui_pair);
         			
@@ -177,8 +186,9 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle)
         		{
 				Rect rect(-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 		    			   -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
-		    			   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);		
-		           			     	
+		    			   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+		    			   		
+		           	rect.Scale(scale);		     	
 		       		GuiPair<ItemSlot*> gui_pair(rect, vehicle->slot_total_vec[i]);
         			rect_slot_vec.push_back(gui_pair);
         			
@@ -190,7 +200,8 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle)
    				Rect rect(artef_slot_counter*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
     	        	    		  4*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
     		   	    		  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);	
-		           			   
+		           		
+		           	rect.Scale(scale);	   
 				GuiPair<ItemSlot*> gui_pair(rect, vehicle->slot_total_vec[i]);
         			rect_slot_vec.push_back(gui_pair);
         			artef_slot_counter++;
@@ -203,7 +214,8 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle)
          			Rect rect((otsec_slot_counter-6)*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
          		  		   -3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
          		  		   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);  		
-		           			   
+		           	
+		           	rect.Scale(scale);		   
 				GuiPair<ItemSlot*> gui_pair(rect, vehicle->slot_total_vec[i]);
         			rect_slot_vec.push_back(gui_pair);
         			otsec_slot_counter++;
@@ -217,7 +229,8 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle)
    	Rect rect(-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
     		   3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
     		   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);		
-		           			   
+		
+	rect.Scale(scale);           			   
 	GuiPair<ItemSlot*> gui_pair(rect, vehicle->gate_slot);
 	rect_slot_vec.push_back(gui_pair);
 }	
