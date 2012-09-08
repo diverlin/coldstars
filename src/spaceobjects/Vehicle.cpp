@@ -712,14 +712,14 @@ void Vehicle::RenderInfoInSpace(const vec2f& scroll_coords)
      	}
 }
 
-void Vehicle::RenderInfo(const vec2f& center)
+void Vehicle::RenderInfo(const vec2f& center, int offset_x, int offset_y)
 {  
 	UpdateInfo(); // virtual
-     	drawInfoIn2Column(&info.title_list, &info.value_list, center.x, center.y);
+     	drawInfoIn2Column(&info.title_list, &info.value_list, center.x - offset_x, center.y - offset_y);
      	
      	if (owner_npc != NULL)
      	{
-     		owner_npc->RenderInfo(vec2f(center.x + 190, center.y));
+     		owner_npc->RenderInfo(vec2f(center.x + 190 - offset_x, center.y - offset_y));
      	}
 }
 

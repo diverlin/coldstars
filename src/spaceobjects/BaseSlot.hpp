@@ -30,11 +30,6 @@ struct UnresolvedDataUniqueBaseSlot
 	{
 		owner_type_id = NONE_ID;
 		owner_id = NONE_ID;
-			
-		rect_blx = 0.0;
-        	rect_bly = 0.0;
-        	rect_w = 0; 
-        	rect_h = 0;  
 	};
 	
 	int owner_type_id;

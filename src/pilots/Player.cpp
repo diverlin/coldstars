@@ -246,7 +246,6 @@ void Player::RenderInSpace_NEW()
 
     			for(unsigned int i = 0; i < visible_SHIP_vec.size(); i++)
     			{ 
-    				visible_SHIP_vec[i]->UpdateRenderStuff(); 
        				visible_SHIP_vec[i]->RenderInSpace(); 
         			npc->GetStarSystem()->RestoreSceneColor();
     			}
@@ -387,7 +386,6 @@ void Player::RenderInSpace_OLD()
            
     		for(unsigned int i = 0; i < visible_SHIP_vec.size(); i++)
     		{ 
-    		    	visible_SHIP_vec[i]->UpdateRenderStuff();
        			visible_SHIP_vec[i]->RenderInSpace(); 
         		npc->GetStarSystem()->RestoreSceneColor();
     		}
@@ -682,7 +680,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
                 		        if ( npc->CheckPossibilityToScan(visible_SHIP_vec[i]) == true )
                 			{
                       				npc->SetScanTarget(visible_SHIP_vec[i]);
-                      				gui_manager.GetGuiVehicle().BindVehicle(visible_SHIP_vec[i]);
+                      				gui_manager.GetGuiVehicle().BindVehicle(visible_SHIP_vec[i], 0.6);
                 			}
        				}
        			}

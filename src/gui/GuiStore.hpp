@@ -31,7 +31,7 @@ class GuiStore : public BaseGui
 
                 bool UpdateMouseInteraction(const MouseData&, Store*);
 
-        	void RenderSlots() const;                
+        	void RenderSlots(int) const;                
                 void RenderFocusedItemInfo(const MouseData&);
                 
         private:

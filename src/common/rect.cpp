@@ -33,20 +33,22 @@ Rect::Rect(const vec2f& _bottomLeft, int _w, int _h)
 	Set(_bottomLeft.x, _bottomLeft.y, _w, _h);
 }
 
-//Rect::Rect(const Rect& rhs)
-//{
-	//Set(rhs.GetBottomLeft(), rhs.GetWidth(), rhs.GetHeight());
-//}
+Rect::Rect(const Rect& rhs)
+{
+	Set(rhs.GetBottomLeft(), rhs.GetWidth(), rhs.GetHeight());
+}
 
 Rect::~Rect()
 {}
-
-//const Rect& Rect::operator=(const Rect& rhs)
-//{
-	//Set(rhs.GetBottomLeft(), rhs.GetWidth(), rhs.GetHeight());
-	//return *this;
-//}
-      		
+     	
+void Rect::Scale(float scale)
+{
+	bottomLeft *= scale;    
+      	center *= scale;  
+      	w *= scale;
+      	h *= scale;     	
+}
+     		
 bool Rect::CheckInteraction(int x, int y) const
 {       	
         if (x < bottomLeft.x)

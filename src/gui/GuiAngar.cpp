@@ -1,22 +1,24 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+	
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "../config/config.hpp"
+
+#include "../docking/VehicleSlot.hpp"
 
 GuiAngar::GuiAngar()
 {	
@@ -51,6 +53,18 @@ GuiAngar::GuiAngar()
 GuiAngar::~GuiAngar()
 {}	
 	
+void GuiAngar::BindAngar(Angar* angar)
+{
+	rect_slot_vec.clear();
+
+	for (int i=0; i<angar->vehicleslot_vec.size(); i++)
+ 	{
+ 		Rect _rect(i*GUI::ITEMSLOT::WIDTH_FOR_ANGAR, 0, 
+ 			   GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
+        	rect_slot_vec.push_back(GuiPair<VehicleSlot*>(_rect, angar->vehicleslot_vec[i]));
+	}
+}
+
 void GuiAngar::CheckButtonsLock()
 {    	   	
 	if (player->GetNpc()->GetVehicle()->IsFuelFull() == true) 	{ GetButton(GUI::BUTTON::BUYFUEL_ID)->LockOn(); }
@@ -111,17 +125,18 @@ void GuiAngar::ButtonsAction() const
         }
 }
 
-bool GuiAngar::UpdateMouseVehicleSlotsInteraction(const MouseData& data_mouse, Angar* angar)
+bool GuiAngar::UpdateMouseVehicleSlotsInteraction(const MouseData& data_mouse)
 {	
-        for (unsigned int i = 0; i < angar->vehicleslot_vec.size(); i++)
+        for (unsigned int i=0; i<rect_slot_vec.size(); i++)
         { 
-                if (angar->vehicleslot_vec[i]->GetRect().CheckInteraction(data_mouse.mx, data_mouse.my) == true)
+                if (rect_slot_vec[i].rect.CheckInteraction(data_mouse.mx, data_mouse.my) == true)
                 {
                         if (data_mouse.right_click == true)
                         {
-                                if (angar->vehicleslot_vec[i]->GetVehicle() != NULL)
+                                if (rect_slot_vec[i].object->GetVehicle() != NULL)
                                 {
-                                        player->GetNpc()->SetScanTarget(angar->vehicleslot_vec[i]->GetVehicle());
+                                        player->GetNpc()->SetScanTarget(rect_slot_vec[i].object->GetVehicle());
+                                        player->GetGuiManager().GetGuiVehicle().BindVehicle(rect_slot_vec[i].object->GetVehicle());
                                         return true;
                                 }
                         }
@@ -134,21 +149,24 @@ bool GuiAngar::UpdateMouseVehicleSlotsInteraction(const MouseData& data_mouse, A
 
 void GuiAngar::RenderVehicleSlots(Angar* angar) const
 {
-        for (unsigned int i=0; i<angar->vehicleslot_vec.size(); i++)
-        {
-                angar->vehicleslot_vec[i]->Render();
-        }
+	glPushMatrix();
+		glTranslatef(offset.x, offset.y, 0);
+        	for (unsigned int i=0; i<rect_slot_vec.size(); i++)
+        	{
+                	rect_slot_vec[i].object->Render(rect_slot_vec[i].rect);
+        	}
+        glPopMatrix();
 }
 
 void GuiAngar::RenderFocusedItemInfo(const MouseData& data_mouse, Angar* angar) const
 {
         for (unsigned int i=0; i<angar->vehicleslot_vec.size(); i++)
         { 
-		if (angar->vehicleslot_vec[i]->GetVehicle() != NULL)
+		if (rect_slot_vec[i].object->GetVehicle() != NULL)
                 {
-                       	if (angar->vehicleslot_vec[i]->GetRect().CheckInteraction(data_mouse.mx, data_mouse.my) == true)
+                       	if (rect_slot_vec[i].rect.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
                 	{
-		                angar->vehicleslot_vec[i]->RenderItemInfo();
+		                rect_slot_vec[i].object->RenderItemInfo(rect_slot_vec[i].rect, -offset.x, -offset.y);
 		                return;
                 	}
                 }

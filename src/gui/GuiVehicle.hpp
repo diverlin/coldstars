@@ -29,7 +29,7 @@ class GuiVehicle : public BaseGui
       		GuiVehicle();
       		~GuiVehicle();
 
-		void BindVehicle(Vehicle*);
+		void BindVehicle(Vehicle*, float scale = 1.0f);
         	
      		bool UpdateMouseInteractionInSpace(const MouseData&);   
                 bool UpdateMouseInteractionInStore(const MouseData&, Vehicle*, Store*); 
@@ -46,8 +46,8 @@ class GuiVehicle : public BaseGui
       		void RenderSlots() const;
       		void RenderMarksForEmptySlots(const MouseData&, int) const;  
 
-        	void CreateKorpusGui(Vehicle*);
-        	void CreateItemSlotsGeometry(Vehicle*);
+        	void CreateKorpusGui(Vehicle*, float);
+        	void CreateItemSlotsGeometry(Vehicle*, float);
 };
 
 

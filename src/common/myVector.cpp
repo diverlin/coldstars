@@ -44,10 +44,18 @@ vec2f& vec2f::operator+=(const vec2f& rhs)
 	return *this;
 }
 
-vec2f& vec2f::operator+=(float offset)
+vec2f& vec2f::operator+=(float rhs)
 {
-	x += offset;
-	y += offset;
+	x += rhs;
+	y += rhs;
+	
+	return *this;
+}
+
+vec2f& vec2f::operator*=(float rhs)
+{
+	x *= rhs;
+	y *= rhs;
 	
 	return *this;
 }

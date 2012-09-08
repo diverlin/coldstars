@@ -27,7 +27,7 @@ class Angar : public Room
                 Angar(int id);
                 ~Angar();
                 
-                void AddVehicleSlot(VehicleSlot*, const Rect&);
+                void AddVehicleSlot(VehicleSlot*);
                 void Ai() const;
                 
                 bool AddVehicle(Vehicle*);

@@ -33,7 +33,7 @@ class Store : public Room
 
                 ItemSlot* GetEmptySlot();
                                      	
-                bool SellItemFromSlot(Npc*, ItemSlot*);		
+                void SellItemFromSlot(Npc*, ItemSlot*);		
                 bool BuyItemFromSlot(Npc*, ItemSlot*); 
                 
                 void SaveData(boost::property_tree::ptree&) const;		

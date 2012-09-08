@@ -1,19 +1,19 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+	
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include <boost/lexical_cast.hpp>
@@ -61,6 +61,7 @@ void Ship::UpdateInfo()
 void Ship::UpdateInSpace(int time, bool show_effect)
 {   
 	CheckDeath(show_effect);
+	protection_complex->GetShieldEffect()->Update();
 	if (time > 0)
 	{
 		UpdateSpecialAction();
@@ -79,12 +80,6 @@ void Ship::UpdateInSpace(int time, bool show_effect)
     			UpdateGrappleMicroProgram();
     		}
     	}
-}
-
-void Ship::UpdateRenderStuff()
-{
-    	//points.update(); 
-    	protection_complex->GetShieldEffect()->Update();
 }
 
 void Ship::RenderInSpace() const
@@ -115,8 +110,12 @@ void Ship::RenderInSpace() const
 }
 
 
-void Ship::RenderAtPlanet() const
+void Ship::RenderAtPlanet(const Rect& rect)
 {
+       	points.SetCenter(rect.GetCenter());
+        points.SetAngle(0);
+        points.Update();
+        
 	RenderKorpus();
 	
 	if (data_korpus.draw_turrels == true)
