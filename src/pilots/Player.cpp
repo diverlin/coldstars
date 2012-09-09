@@ -677,10 +677,21 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
                 		}
                 		else
                 		{
-                		        if ( npc->CheckPossibilityToScan(visible_SHIP_vec[i]) == true )
+                      		        if (npc->CheckPossibilityToScan(visible_SHIP_vec[i]) == true)
                 			{
-                      				npc->SetScanTarget(visible_SHIP_vec[i]);
-                      				gui_manager.GetGuiVehicle().BindVehicle(visible_SHIP_vec[i], 0.6);
+                				if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == false)
+                				{
+                      					npc->SetScanTarget(visible_SHIP_vec[i]);
+                      					gui_manager.GetGuiVehicle().BindVehicle(visible_SHIP_vec[i]);
+                				}                			
+                				else
+                				{
+                					//if (npc->GetVehicle()->GetWeaponComplex()->IsAllPreciseWeaponsSelected() == true)
+                					{
+                      						npc->SetScanTarget(visible_SHIP_vec[i]);
+                      						gui_manager.GetGuiVehicle().BindVehicle(visible_SHIP_vec[i], 0.5f, true);
+                					}
+                				}
                 			}
        				}
        			}

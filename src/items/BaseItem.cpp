@@ -55,8 +55,17 @@ BaseItem::~BaseItem()
 
 void BaseItem::LockEvent(int locked_turns)
 {
-        this->locked_turns = locked_turns;
-        item_slot->UpdateVehiclePropetries();        
+	bool was_working = false;
+	if (this->locked_turns == 0)
+	{
+		was_working = true;
+	}
+	
+        this->locked_turns += locked_turns;
+        if (was_working == true)
+        {
+        	item_slot->UpdateVehiclePropetries();        
+	}
 }
                 
                 
@@ -116,7 +125,7 @@ void BaseItem::RenderInfo(const Rect& rect, float offset_x, float offset_y)
 }
 
 /* virtual */
-void BaseItem::Render(const Rect& rect, const vec2i& gui_offset)
+void BaseItem::Render(const Rect& rect, const vec2i& gui_offset, bool draw_text)
 {
     	drawTexturedRect(textureOb, rect, -1.0);
 }

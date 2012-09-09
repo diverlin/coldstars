@@ -433,6 +433,11 @@ void Vehicle::Hit(int damage, bool show_effect)
 	
 	data_life.armor -= damage;
 	
+	//if (getRandInt(1, 30) == 1)
+	//{
+		//LockRandomItem(getRandInt(1,3));
+	//}
+
     	if (data_life.armor < 0)
     	{
        		data_life.is_alive = false;
@@ -451,8 +456,8 @@ void Vehicle::Hit(int damage, bool show_effect)
        	}
 }
 
-
-void Vehicle::PostDeathUniqueEvent(bool show_effect)  /* virtual */
+/* virtual */
+void Vehicle::PostDeathUniqueEvent(bool show_effect)  
 {
 	int num_items = getRandInt(0, 3);
 	for (int i = 0; i<num_items; i++)
@@ -862,6 +867,11 @@ void Vehicle::BuyFuelAsMuchAsPossible()
 
 	owner_npc->DecreaseCredits(fuel * price_for_one);
 	GetDriveComplex()->GetBakSlot()->GetBakEquipment()->IncreaseFuel(fuel);
+}
+
+void Vehicle::LockItemInItemSlot(ItemSlot* item_slot, int locked_turns)
+{
+	item_slot->GetItem()->LockEvent(locked_turns);	
 }
 
 void Vehicle::LockRandomItem(int locked_turns)

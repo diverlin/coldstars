@@ -26,10 +26,19 @@ GuiVehicle :: GuiVehicle()
 GuiVehicle :: ~GuiVehicle()
 {}
 
-void GuiVehicle::BindVehicle(Vehicle* vehicle, float scale)
+void GuiVehicle::BindVehicle(Vehicle* vehicle, float scale, bool simple)
 {
-	CreateKorpusGui(vehicle, scale);
-	CreateItemSlotsGeometry(vehicle, scale);
+	this->simple = simple;
+
+	rect_slot_vec.clear();
+	textureOb_korpus = NULL;
+
+	CreateFunctionalItemSlotsGeometry(vehicle, scale);
+	if (simple == false)
+	{
+		CreateKorpusGui(vehicle, scale);
+		CreateNonFunctionalItemSlotsGeometry(vehicle, scale);
+	}
 }	
 	
 void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
@@ -53,13 +62,10 @@ void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
     	rect_korpus.Set(-kontur_w/2 * scale, -kontur_h/2 * scale, kontur_w * scale, kontur_h * scale); 
 }      
   
-void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
+void GuiVehicle::CreateFunctionalItemSlotsGeometry(Vehicle* vehicle, float scale)
 {        
-	rect_slot_vec.clear();
-
 	int weapon_slot_counter = 0;
 	int artef_slot_counter = 0;
-	int otsec_slot_counter = 0;
         for (unsigned int i=0; i<vehicle->slot_total_vec.size(); i++)
         {		
         	switch (vehicle->slot_total_vec[i]->GetSubTypeId())
@@ -208,8 +214,18 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
         			
         			break;
         		}
-        		 
-        		case ENTITY::CARGO_SLOT_ID:
+        	}      
+        }    	
+}	
+ 
+void GuiVehicle::CreateNonFunctionalItemSlotsGeometry(Vehicle* vehicle, float scale)
+{        
+	int otsec_slot_counter = 0;
+        for (unsigned int i=0; i<vehicle->slot_total_vec.size(); i++)
+        {		
+        	switch (vehicle->slot_total_vec[i]->GetSubTypeId())
+        	{   
+      		 	case ENTITY::CARGO_SLOT_ID:
         		{
          			Rect rect((otsec_slot_counter-6)*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
          		  		   -3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
@@ -312,6 +328,23 @@ bool GuiVehicle::UpdateMouseInteractionInSpace(const MouseData& data_mouse)
 	return false;
 }
 
+
+ItemSlot* GuiVehicle::GetInreactedItemSlot(const MouseData& data_mouse)
+{
+	for(unsigned int i=0; i<rect_slot_vec.size(); i++)
+	{ 
+		if (rect_slot_vec[i].rect.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
+		{  
+			if (data_mouse.left_click == true)
+			{
+				return rect_slot_vec[i].object;
+			} 
+       		}
+        }  
+        
+        return NULL;                     
+}
+
 bool GuiVehicle::UpdateMouseInteractionInStore(const MouseData& data_mouse, Vehicle* vehicle, Store* store)
 {
 	for(unsigned int i=0; i<rect_slot_vec.size(); i++)
@@ -344,8 +377,10 @@ void GuiVehicle::RenderVehicle(const MouseData& data_mouse, int requested_subtyp
 {
 	glPushMatrix();
 		glTranslatef(offset.x, offset.y, 0);
-		drawTexturedRect(textureOb_korpus, rect_korpus, -1.0);
-
+		if (!simple)
+		{
+			drawTexturedRect(textureOb_korpus, rect_korpus, -1.0);
+		}
 		RenderSlots();
 		if (requested_subtype_id != NONE_ID)
 		{
@@ -358,7 +393,7 @@ void GuiVehicle::RenderSlots() const
 {
 	for(unsigned int i=0; i<rect_slot_vec.size(); i++)
 	{
-		rect_slot_vec[i].object->Render(rect_slot_vec[i].rect, offset);
+		rect_slot_vec[i].object->Render(rect_slot_vec[i].rect, offset, !simple);
 	}
 }
 

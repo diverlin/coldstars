@@ -16,7 +16,6 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #ifndef GUIMANAGER_H
 #define GUIMANAGER_H
 
@@ -29,9 +28,7 @@
 #include "../gui/GuiShop.hpp"
 #include "../gui/GuiSpace.hpp"
 #include "../gui/GuiMap.hpp"
-
-		
-		
+				
 class GuiManager
 {
    	public:
@@ -60,6 +57,8 @@ class GuiManager
        		Slider slider;     
        		
      		bool UpdateMouseInteractionWithScanVehicle(const MouseData&, Vehicle*, bool allow_full_control = false);     		
+     		bool UpdateMouseInteractionWithScanVehicleAsWeaponTarget(const MouseData&, Vehicle*);   
+     		
      		void RenderScanVehicle(const MouseData&, Vehicle*, bool show_skill = true) const;  	
 };
 

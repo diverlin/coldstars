@@ -32,20 +32,24 @@ class Turrel
                 void SetTextureOb(TextureOb* textureOb)	{ this->textureOb = textureOb; };
                               
                 void SetTarget(BaseGameEntity* target) 	{ this->target = target; };
+                void SetTarget(BaseGameEntity* target, ItemSlot* subtarget) { this->target = target; this->subtarget = subtarget; };
+                
                 void SetSelectedStatus(bool selected) 	{ is_SELECTED = selected; };
                 
                 bool GetSelectedStatus() const	{ return is_SELECTED; };
                 Points& GetPoints()		{ return points; };
                 
                 BaseGameEntity* GetTarget() const { return target; };
-       
-                void ResetTarget() { target = NULL; };
+                ItemSlot* GetSubTarget() const { return subtarget; };
+                       
+                void ResetTarget() { target = NULL; subtarget = NULL; };
                        
                 void CheckTarget();                
                 bool CheckAmmo() const;
                 
+                bool PreciseFireEvent(ItemSlot*, int, bool);
                 bool FireEvent(int, bool);
-
+                
                 void Render(float);                 
                
         private:
@@ -53,7 +57,8 @@ class Turrel
                         
                 ItemSlot* slot;
                 BaseGameEntity* target;
-                
+                ItemSlot* subtarget;
+                                
                 bool is_SELECTED;                        
                
                 Points points;         
