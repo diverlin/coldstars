@@ -7,9 +7,9 @@ void runPureTest()
                 int_vec.push_back(i);
         }
                 
-        for (std::vector<int>::iterator it = int_vec.begin(); it != int_vec.end(); ++it)
+        for (std::vector<int>::iterator it = int_vec.begin(); it < int_vec.end(); ++it)
         {
-                if ((*it == 4) or (*it == 10))
+                if ((*it == 4) or (*it == 19))
                 {
                         it = int_vec.erase(it);
                 }

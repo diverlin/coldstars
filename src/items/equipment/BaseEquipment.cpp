@@ -66,7 +66,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 } 
 
 /* virtual */
-void BaseEquipment::Render(const Rect& rect, const vec2i& gui_offset)
+void BaseEquipment::Render(const Rect& rect, const vec2i& gui_offset, bool draw_text)
 {
     	drawTexturedRect(textureOb, rect, -1.0);
     
@@ -89,9 +89,12 @@ void BaseEquipment::Render(const Rect& rect, const vec2i& gui_offset)
     		drawSimpleText(int2str(locked_turns), 12, rect.GetCenter().x + gui_offset.x, rect.GetCenter().y + gui_offset.y);	
 	}
 
-    	if (data_id.subtype_id == ENTITY::ROCKET_EQUIPMENT_ID)
-        {
-        	drawSimpleText(int2str(((RocketEquipment*)this)->GetAmmoMax()) + '/' + int2str(((RocketEquipment*)this)->GetAmmo()), 12, rect.GetCenter().x - rect.GetWidth()/2 + gui_offset.x, rect.GetCenter().y + gui_offset.y);
+	if (draw_text == true)
+	{
+    		if (data_id.subtype_id == ENTITY::ROCKET_EQUIPMENT_ID)
+        	{
+        		drawSimpleText(int2str(((RocketEquipment*)this)->GetAmmoMax()) + '/' + int2str(((RocketEquipment*)this)->GetAmmo()), 12, rect.GetCenter().x - rect.GetWidth()/2 + gui_offset.x, rect.GetCenter().y + gui_offset.y);
+		}
 	}
 }
 

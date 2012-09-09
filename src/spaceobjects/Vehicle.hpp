@@ -231,6 +231,7 @@ class Vehicle : public BaseGameEntity
 		int GetFuelMiss() const;
 		void BuyFuelAsMuchAsPossible();
 
+		void LockItemInItemSlot(ItemSlot*, int);
 		void LockRandomItem(int);
 
 	protected:

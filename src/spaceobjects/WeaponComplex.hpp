@@ -38,7 +38,8 @@ class WeaponComplex
                	void PrepareWeapons();
                      
                 void SetTarget(BaseGameEntity*);     
-       
+                void SetPreciseFireTarget(BaseGameEntity*, ItemSlot*);     
+                       
         	void Fire(int, int, bool);
 
         	void WeaponsControlledFromUpperLevel(const WeaponSelector&); 
@@ -49,6 +50,7 @@ class WeaponComplex
 		void DeactivateWeaponsBySubTypeId(int);
 
         	bool IsAnyWeaponSelected() const; 
+        	//bool IsAllPreciseWeaponsSelected() const;
         	
         	bool UpdateFireAbility();
         	

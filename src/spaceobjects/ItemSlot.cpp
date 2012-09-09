@@ -128,12 +128,12 @@ void ItemSlot::UpdateVehiclePropetries() const
 	}
 }
    
-void ItemSlot::Render(const Rect& rect, const vec2i& gui_offset) const
+void ItemSlot::Render(const Rect& rect, const vec2i& gui_offset, bool draw_text) const
 {
        	drawTexturedRect(textureOb, rect, -1.5);    
        	if (is_EQUIPED == true)
        	{
-       		item->Render(rect, gui_offset);	
+       		item->Render(rect, gui_offset, draw_text);	
         }
 }
 

@@ -17,6 +17,7 @@
 */
 
 #include "GuiManager.hpp"
+#include "../spaceobjects/ItemSlot.hpp"
 
 GuiManager::GuiManager()
 {
@@ -65,6 +66,12 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
 	}
 
 	return interaction;
+}
+
+bool GuiManager::UpdateMouseInteractionWithScanVehicleAsWeaponTarget(const MouseData& data_mouse, Vehicle* scan_vehicle)
+{
+	ItemSlot* selected_item_slot = gui_vehicle.GetInreactedItemSlot(data_mouse);	
+	player->GetNpc()->GetVehicle()->GetWeaponComplex()->SetPreciseFireTarget(selected_item_slot->GetOwnerVehicle(), selected_item_slot);
 }
 
 void GuiManager::RenderScanVehicle(const MouseData& data_mouse, Vehicle* vehicle, bool show_skill) const
@@ -122,9 +129,12 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
                         }             
                         //
                         
-                        gui_vehicle.SetOffset(center_screen + GUI_VEHICLE_INSPACE_OFFSET);
-			gui_skill.SetOffset(center_screen + GUI_SKILL_INSPACE_OFFSET);
-		
+                        if (show_gui_scan)
+                        {
+                        	gui_vehicle.SetOffset(center_screen + GUI_VEHICLE_INSPACE_OFFSET);
+				gui_skill.SetOffset(center_screen + GUI_SKILL_INSPACE_OFFSET);
+			}
+			
 		       	UserInput::Instance().UpdateInSpace(player, *this);
 
 			//update
@@ -140,8 +150,20 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
                         }
 			
                         if (show_gui_scan == true)
-			{				
-				interaction = UpdateMouseInteractionWithScanVehicle(data_mouse, scan_vehicle);
+			{	
+				if (gui_vehicle.GetSimple() == false)
+				{			
+					interaction = UpdateMouseInteractionWithScanVehicle(data_mouse, scan_vehicle);
+				}
+				else
+				{
+					ItemSlot* item_slot = gui_vehicle.GetInreactedItemSlot(data_mouse);
+					if (item_slot != NULL)
+					{
+						player->GetNpc()->GetVehicle()->GetWeaponComplex()->SetPreciseFireTarget(item_slot->GetOwnerVehicle(), item_slot);
+						player->GetNpc()->ResetScanTarget();
+					}
+				}
 			}
                         
                         if (show_gui_radar == true)

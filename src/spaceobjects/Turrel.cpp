@@ -22,6 +22,7 @@ Turrel::Turrel(ItemSlot* slot)
         this->slot = slot;
       
         target  = NULL;
+        subtarget = NULL;
 }
 
 Turrel::~Turrel()
@@ -54,6 +55,44 @@ bool Turrel::CheckAmmo() const
     	return false;           
 }
 
+bool Turrel::PreciseFireEvent(ItemSlot* item_slot, int attack_skill, bool show_effect)
+{       			
+	switch(slot->GetItem()->GetSubTypeId())
+	{
+    		case ENTITY::LAZER_EQUIPMENT_ID:
+    		{   
+			int damage = slot->GetLazerEquipment()->GetDamage() * attack_skill * SKILL::ATTACK_NORMALIZED_RATE;
+       			slot->GetLazerEquipment()->FireEvent_TRUE();       			
+			target->Hit(damage/3, show_effect);
+			
+			if (target->GetTypeId() == ENTITY::VEHICLE_ID)
+			{			       		
+				//if (getRandInt(1, 2) == 1)
+				{
+					((Vehicle*)target)->LockItemInItemSlot(item_slot, 1);
+				}
+			}
+			else
+			{
+				std::cout<<"Turrel::PreciseFireEvent on non Vehicle ob, FAIL code"<<std::endl;
+			}
+		
+       			if (target->GetAlive() == false)
+       			{
+       				int expirience = 1000;
+       			       	Color4i color(0,255,0,255);  	       		
+       				VerticalFlowText* text = new VerticalFlowText(int2str(expirience), slot->GetOwnerVehicle()->GetPoints().GetCenter(), color, 10);
+       				slot->GetOwnerVehicle()->GetStarSystem()->Add(text); 
+       				slot->GetOwnerVehicle()->GetOwnerNpc()->GetSkill().AddExpirience(expirience);
+       			}
+       			
+       			break;
+    		}
+	}
+	
+    	return false;
+}
+
 bool Turrel::FireEvent(int attack_skill, bool show_effect)
 {       			
 	switch(slot->GetItem()->GetSubTypeId())
@@ -63,14 +102,6 @@ bool Turrel::FireEvent(int attack_skill, bool show_effect)
 			int damage = slot->GetLazerEquipment()->GetDamage() * attack_skill * SKILL::ATTACK_NORMALIZED_RATE;
        			slot->GetLazerEquipment()->FireEvent_TRUE();       			
 			target->Hit(damage, show_effect);
-			
-			if (target->GetTypeId() == ENTITY::VEHICLE_ID) 
-			{
-				if (getRandInt(1, 2) == 1)
-				{
-					((Vehicle*)target)->LockRandomItem(3);
-				}
-			}
 						       			
        			if (target->GetAlive() == false)
        			{

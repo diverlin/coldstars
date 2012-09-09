@@ -97,7 +97,7 @@ class ItemSlot : public BaseSlot
 		
 		void UpdateVehiclePropetries() const;
                 
-		void Render(const Rect&, const vec2i&) const;
+		void Render(const Rect&, const vec2i&, bool draw_text = true) const;
 		void RenderMark(const Rect&, TextureOb*) const;
 
 		void RenderItemInfo(const Rect&, const vec2f&) const;		       

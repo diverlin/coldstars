@@ -76,7 +76,7 @@ class BaseItem : public Base
                 
 		void UpdateInfo();
 			
-      		virtual void Render(const Rect&, const vec2i&);
+      		virtual void Render(const Rect&, const vec2i&, bool draw_text = true);
       		void RenderInfo(const Rect&, float, float); 
 
 	protected:
