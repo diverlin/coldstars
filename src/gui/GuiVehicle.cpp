@@ -33,10 +33,10 @@ void GuiVehicle::BindVehicle(Vehicle* vehicle, float scale, bool simple)
 	rect_slot_vec.clear();
 	textureOb_korpus = NULL;
 
+	CreateKorpusGui(vehicle, scale);
 	CreateFunctionalItemSlotsGeometry(vehicle, scale);
 	if (simple == false)
 	{
-		CreateKorpusGui(vehicle, scale);
 		CreateNonFunctionalItemSlotsGeometry(vehicle, scale);
 	}
 }	
@@ -377,8 +377,8 @@ void GuiVehicle::RenderVehicle(const MouseData& data_mouse, int requested_subtyp
 {
 	glPushMatrix();
 		glTranslatef(offset.x, offset.y, 0);
-		if (!simple)
-		{
+		//if (!simple)
+		{		
 			drawTexturedRect(textureOb_korpus, rect_korpus, -1.0);
 		}
 		RenderSlots();
