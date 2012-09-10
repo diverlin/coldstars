@@ -1,23 +1,24 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+	
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "resources.hpp"
 #include "../common/constants.hpp"
+#include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
 
 void loadGameData()
 {    	
@@ -1287,429 +1288,99 @@ void loadImages()
 
 
 
-
 void loadShaders()
 {
-//static const char * pTo_lightVertexSource = {
-//"/* vertex */"
-//"    void main() {"
-//"        gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;"
-//"    }"
-//};   
-
-//static const char * pTo_lightFragSource = {
-//"/* fragment */"
-//"    void main() {"
-//"        gl_FragColor = vec4(0.0, 1.0, 0.0, 0.0);"
-//"    }"
-//};       
-
-static const char * pTo_blackToAlphaVertexSource = {
-"/* vertex */"
-"void main()" 
-"{"
-"  gl_Position = ftransform();"
-"  gl_TexCoord[0] = gl_MultiTexCoord0;"
-"}"
-};   
-
-static const char * pTo_blackToAlphaFragSource = {
-"/* fragment */"
-"uniform sampler2D sceneTex;     /* texture unit 0 */"
-"void main()"
-"{"
-"    vec4 c = texture2D(sceneTex, gl_TexCoord[0].st);"
-"    float rgb = c.r + c.g + c.b;"
-"    if (c.g > 0.6)"
-"       gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);"
-"    else"
-"       gl_FragColor = c;"
-"}"
-};       
-
-ShadersPack::Instance().black2alpha = glCreateProgram();
-compile_program(pTo_blackToAlphaVertexSource, pTo_blackToAlphaFragSource, ShadersPack::Instance().black2alpha);
-
-
-
-
-
-// shaders are taken from http://www.geeks3d.com/20091116/shader-library-2d-shockwave-post-processing-filter-glsl/
-static const GLchar * pTo_shockWaveVertexSource = {
-"/* Vertex program */"
-" "
-"void main(void)"
-"{"
-"  gl_Position = ftransform();"
-"  gl_TexCoord[0] = gl_MultiTexCoord0;"
-"}"
-};
-
-
-static const GLchar * pTo_shockWaveFragSource = {
-"/* Fragment program */"
-" "
-"uniform sampler2D sceneTex;     /* texture unit 0 */"
-"uniform vec2 center[10];"        
-"uniform vec3 shockParams[10];   /* 10.0, 0.8, 0.1 */" 
-"uniform float time[10];         /* effect elapsed time */"
-"uniform int imax;               /* how many shaders */"
-" "
-"void main()"
-"{"
-"  vec2 uv = gl_TexCoord[0].xy;"
-"  vec2 texCoord = uv;"
-"  for(int i=0; i<imax; i++)"
-"  {"
-"      float distance = distance(uv, center[i]);"
-"      /* if ( (distance <= (time[i] + shockParams[i].z)) && (distance >= (time[i] - shockParams[i].z)) ) */"
-"      if (distance <= (time[i] + shockParams[i].z))"
-"         if (distance >= (time[i] - shockParams[i].z))"
-"         {"
-"              float diff = (distance - time[i]);"
-"              float powDiff = 1.0 - pow(abs(diff*shockParams[i].x), shockParams[i].y);"
-"              float diffTime = diff  * powDiff;"
-"              vec2 diffUV = normalize(uv - center[i]);"
-"              texCoord = uv + (diffUV * diffTime);"
-"         }"
-"  }"
-" "
-"  gl_FragColor = texture2D(sceneTex, texCoord);"
-"}"
-};
-
-ShadersPack::Instance().shockwave = glCreateProgram();
-compile_program(pTo_shockWaveVertexSource, pTo_shockWaveFragSource, ShadersPack::Instance().shockwave);
-
-
-
-
-
-static const GLchar * pTo_volumetricLightVertexSource = {
-"/* Vertex program */"
-" "
-"void main(void)"
-"{"
-"  gl_Position = ftransform();"
-"  gl_TexCoord[0] = gl_MultiTexCoord0;"
-"}"
-};
-
-
-static const GLchar * pTo_volumetricLightFragSource = {
-"/* Fragment program */"
-" "
-"uniform sampler2D FullSampler;"
-"uniform sampler2D BlurSampler;"
-"uniform vec4 sun_pos;"
-" "
-"const vec4 ShaftParams	= vec4(0.05, 1.0, 0.05, 1.0);"
-"const vec4 sunColor	= vec4(0.9, 0.8, 0.6, 1.0);"
-" "
-"float saturate(float val)"
-"{"
-"	return clamp(val,0.0,1.0);"
-"}"
-" "
-"void main(void)"
-"{ "
-"	vec2  sunPosProj = sun_pos.xy;"
-"	float sign = sun_pos.w;"
-" "
-"	vec2  tc = gl_TexCoord[0].xy;"
-" "
-"	vec2  sunVec = sunPosProj.xy - tc; /* + vec2(0.5,0.5); */"
-"	float sunDist = saturate(sign) * (1.0 - saturate(dot(sunVec,sunVec) * ShaftParams.y));"
-" "
-"	sunVec *= ShaftParams.x * sign;"
-" "
-"	tc += sunVec;"
-"	vec4 accum = texture2D(BlurSampler, tc);"
-"	tc += sunVec;"
-"	accum += texture2D(BlurSampler, tc) * 0.875;"
-"	tc += sunVec;"
-"	accum += texture2D(BlurSampler, tc) * 0.75;"
-"	tc += sunVec;"
-"	accum += texture2D(BlurSampler, tc) * 0.625;"
-"	tc += sunVec;"
-"	accum += texture2D(BlurSampler, tc) * 0.5;"
-"	tc += sunVec;"
-"	accum += texture2D(BlurSampler, tc) * 0.375;"
-"	tc += sunVec;"
-"	accum += texture2D(BlurSampler, tc) * 0.25;"
-"	tc += sunVec;"
-"	accum += texture2D(BlurSampler, tc) * 0.125;"
-" "
-"	accum  *= 1.65 * sunDist;"
-" "
-"	vec4 cScreen = texture2D(FullSampler, gl_TexCoord[0].xy);"
-"	accum = cScreen + accum * ShaftParams.w * sunColor * ( 1.0 - cScreen );"
-" "
-"	gl_FragColor = accum;"
-"}"
-};
-
-ShadersPack::Instance().volumetriclight = glCreateProgram();
-compile_program(pTo_volumetricLightVertexSource, pTo_volumetricLightFragSource, ShadersPack::Instance().volumetriclight );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//http://www.gamedev.ru/code/forum/?id=90743
-static const GLchar * pTo_lightVertexSource = {
-"/* Vertex program */"
-" "
-"uniform vec4 lightPos, eyePos;"
-"varying vec3 l, v, n;"
-" "
-"void main(void)"
-"{"
-"    vec3 p = vec3(gl_ModelViewMatrix * gl_Vertex);      /* transformed point to world space */ "
-"    l = normalize(vec3(lightPos) - p);                  /* vector to light source */           "
-"    v = normalize(vec3(eyePos)   - p);                  /* vector to the eye */                "
-"    n = normalize(gl_NormalMatrix * gl_Normal);         /* transformed n */                    "
-"    gl_TexCoord[0] = gl_MultiTexCoord0;                                                        " 
-" "
-"    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;                                    "
-"}"
-};   
-
-//http://www.gamedev.ru/code/forum/?id=90743
-static const GLchar * pTo_lightFragSource = {
-"/* Fragment program */"
-" "
-"uniform sampler2D Texture_0;"
-"varying vec3 l, v, n;"
-" "
-"void main (void)"
-"{"
-"    const vec4  diffColor = vec4(1.0, 1.0, 1.0, 1.0);"
-"    const vec4  ambientColor = vec4(0.1, 0.1, 0.1, 1.0);"
-"    const vec4  specColor = vec4(0.7, 0.7, 0.0, 0.0);"
-"    const float specPower = 30.0;"
-" "
-"    vec3 n2   = normalize(n);"
-"    vec3 l2   = normalize(l);"
-"    vec3 v2   = normalize(v);"
-"    vec3 r    = reflect(-v2, n2);"
-"    vec4 diff = diffColor * max(dot(n2, l2), 0.0);"
-"    vec4 spec = specColor * pow(max(dot(l2, r), 0.0), specPower);"
-"    vec2 texCoord0 = gl_TexCoord[0].xy;"
-"    vec4 texColor0 = texture2D(Texture_0, texCoord0);"
-" "
-"    gl_FragColor = (diff + ambientColor) * texColor0;"
-"}"
-};       
-
-ShadersPack::Instance().light = glCreateProgram();
-compile_program(pTo_lightVertexSource, pTo_lightFragSource, ShadersPack::Instance().light);
-
-
-
-
-
-
-
-
-static const GLchar * pTo_blurVertexSource = {
-"/* Vertex program */"
-" "
-"void main(void)"
-"{"
-"  gl_Position = ftransform();"
-"  gl_TexCoord[0] = gl_MultiTexCoord0;"
-"}"
-};     
-
-static const GLchar * pTo_blurFragmentSource = {
-"/* Fragment program */"
-"uniform sampler2D sceneTex;  /* 0 */"
-" "
-"uniform float rt_w;    /* render target width  */"
-"uniform float rt_h;    /* render target height */"
-"uniform float vx_offset;"
-" "
-"float offset[3] = float[]( 0.0, 1.3846153846, 3.2307692308 );"
-"float weight[3] = float[]( 0.2270270270, 0.3162162162, 0.0702702703 );"
-" "
-"void main()"
-"{"
-"  vec3 tc = vec3(0.0, 0.0, 0.0);"
-"  if (gl_TexCoord[0].x<(vx_offset-0.01))"
-"  {"
-"    vec2 uv = gl_TexCoord[0].xy;"
-"    tc = texture2D(sceneTex, uv).rgb * weight[0];"
-" "
-"    for (int i=1; i<3; i++)"
-"    {"
-"      tc += texture2D(sceneTex, uv + vec2(offset[i])/rt_w, 0.0).rgb * weight[i];"
-"      tc += texture2D(sceneTex, uv - vec2(offset[i])/rt_w, 0.0).rgb * weight[i];"
-"    }"
-"  }"
-"  else if (gl_TexCoord[0].x>=(vx_offset+0.01))"
-"  {"
-"    tc = texture2D(sceneTex, gl_TexCoord[0].xy).rgb;"
-"  }"
-"  gl_FragColor = vec4(tc, 1.0);"
-"}"
-};  
-
-ShadersPack::Instance().blur = glCreateProgram();
-compile_program(pTo_blurVertexSource, pTo_blurFragmentSource, ShadersPack::Instance().blur);
-
-
-
-
-
-static const GLchar * pTo_extractBrightVertexSource = {
-"/* Vertex program */"
-" "
-"void main(void)"
-"{"
-"  gl_Position = ftransform();"
-"  gl_TexCoord[0] = gl_MultiTexCoord0;"
-"}"
-};  
-
-
-static const GLchar * pTo_extractBrightFragmentSource = {
-"/* Fragment program */"
-"uniform sampler2D source;"
-"uniform float threshold;"
-" "
-"void main(void)"
-"{"
-"    vec4 c = texture2D(source, gl_TexCoord[0].st);"
-"    float rgb = c.r + c.g + c.b;"
-"    if (rgb > threshold)   /* threshold ~ 1.9 */ "
-"       gl_FragColor = c;"
-"    else"
-"       gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);"
-"}"
-};  
-
-ShadersPack::Instance().extractbright = glCreateProgram();
-compile_program(pTo_extractBrightVertexSource, pTo_extractBrightFragmentSource, ShadersPack::Instance().extractbright);
-
-
-
-
-
-
-
-static const GLchar * pTo_combineVertexSource = {
-"/* Vertex program */"
-" "
-"void main(void)"
-"{"
-"  gl_Position = ftransform();   /* This transforms the input vertex the same way the fixed-function pipeline would */"
-"  gl_TexCoord[0] = gl_MultiTexCoord0;"
-"}"
-};  
-
-
-static const GLchar * pTo_combineFragmentSource = {
-"/* Fragment program */"
-"uniform sampler2D Scene;"
-" "
-"uniform sampler2D Pass0_tex1;"
-"uniform sampler2D Pass0_tex2;"
-"uniform sampler2D Pass0_tex3;"
-"uniform sampler2D Pass0_tex4;"
-" "
-"uniform sampler2D Pass1_tex1;"
-"uniform sampler2D Pass1_tex2;"
-"uniform sampler2D Pass1_tex3;"
-"uniform sampler2D Pass1_tex4;"
-" "
-"uniform sampler2D Pass2_tex1;"
-"uniform sampler2D Pass2_tex2;"
-"uniform sampler2D Pass2_tex3;"
-"uniform sampler2D Pass2_tex4;"
-" "
-"void main(void)"
-"{"
-"    vec4 t0 = texture2D(Scene, gl_TexCoord[0].st);"
-" "
-"    vec4 p0t1 = texture2D(Pass0_tex1, gl_TexCoord[0].st);"
-"    vec4 p0t2 = texture2D(Pass0_tex2, gl_TexCoord[0].st);"
-"    vec4 p0t3 = texture2D(Pass0_tex3, gl_TexCoord[0].st);"
-"    vec4 p0t4 = texture2D(Pass0_tex4, gl_TexCoord[0].st);"
-" "
-"    vec4 p1t1 = texture2D(Pass1_tex1, gl_TexCoord[0].st);"
-"    vec4 p1t2 = texture2D(Pass1_tex2, gl_TexCoord[0].st);"
-"    vec4 p1t3 = texture2D(Pass1_tex3, gl_TexCoord[0].st);"
-"    vec4 p1t4 = texture2D(Pass1_tex4, gl_TexCoord[0].st);"
-" "
-"    vec4 p2t1 = texture2D(Pass2_tex1, gl_TexCoord[0].st);"
-"    vec4 p2t2 = texture2D(Pass2_tex2, gl_TexCoord[0].st);"
-"    vec4 p2t3 = texture2D(Pass2_tex3, gl_TexCoord[0].st);"
-"    vec4 p2t4 = texture2D(Pass2_tex4, gl_TexCoord[0].st);"
-" "
-" "
-"    gl_FragColor = t0 + p0t1 + p0t2 + p0t3 + p0t4 + p1t1 + p1t2 + p1t3 + p1t4 + p2t1 + p2t2 + p2t3 + p2t4;"
-"}"
-};  
-
-ShadersPack::Instance().combine = glCreateProgram();
-compile_program(pTo_combineVertexSource, pTo_combineFragmentSource, ShadersPack::Instance().combine);
-
-
-
-
-
-
-
-
-
-static const GLchar * pTo_multitexVertexSource = {
-"/* Vertex program */"
-" "
-"void main(void)"
-"{"
-"  gl_Position = ftransform();"
-"  gl_TexCoord[0] = gl_MultiTexCoord0;"
-"}"
-};
-
-
-static const GLchar * pTo_multitexFragmentSource = {
-"/* Fragment program */"
-"uniform sampler2D Texture_0;     /* texture unit 0 */"
-"uniform sampler2D Texture_1;"
-" "
-"uniform vec2 displ;"
-" "
-"void main() {"
-"  vec2 uv = gl_TexCoord[0].xy;"
-"  vec2 texCoord0 = uv - displ;"
-"  vec2 texCoord1 = uv + displ;"
-" "
-"  vec4 color0 = texture2D(Texture_0, texCoord0);"
-"  vec4 color1 = texture2D(Texture_1, texCoord1);"
-"  /*vec4 color3 = vec4(1.0, 1.0, 0.0, 1.0); */"
-"  vec4 tmp = mix(color0, color1, 0.5);"
-" "
-"  /*gl_FragColor = mix(tmp, color3, 0.4); */"
-"  gl_FragColor = tmp;"
-"}"
-};
-
-    
-ShadersPack::Instance().multitexturing = glCreateProgram();
-compile_program(pTo_multitexVertexSource, pTo_multitexFragmentSource, ShadersPack::Instance().multitexturing);
+	{
+	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/black2alpha.vert")); 
+	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/black2alpha.frag")); 
+
+	ShadersPack::Instance().black2alpha = glCreateProgram();
+	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShadersPack::Instance().black2alpha);
+	}
+
+	{
+	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/shockwave.vert")); 
+	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/shockwave.frag")); 
+
+	ShadersPack::Instance().shockwave = glCreateProgram();
+	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShadersPack::Instance().shockwave);
+	}
+
+	{
+	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/volumetricLight.vert")); 
+	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/volumetricLight.frag")); 
+
+	ShadersPack::Instance().volumetriclight = glCreateProgram();
+	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShadersPack::Instance().volumetriclight);
+	}
+
+	{
+	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/light.vert")); 
+	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/light.frag")); 
+
+	ShadersPack::Instance().light = glCreateProgram();
+	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShadersPack::Instance().light);
+	}
+
+	{
+	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/blur.vert")); 
+	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/blur.frag")); 
+
+	ShadersPack::Instance().blur = glCreateProgram();
+	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShadersPack::Instance().blur);
+	}
+
+	{
+	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/extractBright.vert")); 
+	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/extractBright.frag")); 
+
+	ShadersPack::Instance().extractbright = glCreateProgram();
+	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShadersPack::Instance().extractbright);
+	}
+
+	{
+	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/combine.vert")); 
+	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/combine.frag")); 
+
+	ShadersPack::Instance().combine = glCreateProgram();
+	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShadersPack::Instance().combine);
+	}
+
+	{
+	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/multitex.vert")); 
+	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/multitex.frag")); 
+
+	ShadersPack::Instance().multitexturing = glCreateProgram();
+	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShadersPack::Instance().multitexturing);
+	}
+
+	{
+	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/blank.vert")); 
+	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/blank.frag")); 
+
+	ShadersPack::Instance().blank = glCreateProgram();
+	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShadersPack::Instance().blank);
+	}
+}
+
+
+std::string getStringFromFile(const std::string& fpath)
+{
+	std::ifstream file(fpath.c_str());
+	if (!file.is_open())
+	{
+		std::cout<<"Failed to open "<<fpath<<std::endl;
+		file.close();
+		return " ";
+	}
+
+	std::string line;
+	std::string result;
+	while(getline(file, line))
+	{
+		result += line;
+	}
+
+	file.close();
+	return result;
 }

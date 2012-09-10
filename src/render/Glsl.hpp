@@ -35,6 +35,7 @@ class ShadersPack
 		GLuint extractbright;
 		GLuint combine;
 		GLuint multitexturing;
+		GLuint blank;
 		
 	private:
 		ShadersPack() {};
