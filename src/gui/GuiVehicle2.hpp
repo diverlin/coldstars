@@ -16,33 +16,29 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GUISTORE_H
-#define GUISTORE_H
 
+#ifndef GUIVEHICLE2_H
+#define GUIVEHICLE2_H
+
+#include "../docking/Store.hpp"
 #include "GuiPair.hpp"
 
-class GuiStore : public BaseGui
+class GuiVehicle2 : public BaseGui
 {
-        public:
-                GuiStore();                      
-                ~GuiStore();
-		
-		void BindStore(Store*);
+   	public:
+      		GuiVehicle2();
+      		~GuiVehicle2();
 
-                bool UpdateMouseInteraction(const MouseData&, Store*);
+		void BindVehicle(Vehicle*, float scale = 1.0f);        	
+      		void UpdateEquipmentIcons() const;
+      		void ButtonsAction(Player*) const;
+      		
+      	private:
+      		std::vector<GuiPair<BaseButton*, ItemSlot*>> button_slot_vec;
 
-        	void RenderSlots(int) const;                
-                void RenderFocusedItemInfo(const MouseData&);
-                
-        private:
-              	std::vector<GuiPair<Rect, ItemSlot*>> rect_slot_vec;          
+        	void CreateFunctionalItemSlotsCircleGeometry(Vehicle*, float);
 };
-           
-           
+
 
 
 #endif
-
-
-
-

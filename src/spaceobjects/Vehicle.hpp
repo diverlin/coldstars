@@ -291,7 +291,7 @@ class Vehicle : public BaseGameEntity
         	bool UpdateFadeOutEffect();
              	
         friend class GuiVehicle;
-             	
+        friend class GuiVehicle2;             	
 };
 
 #endif 

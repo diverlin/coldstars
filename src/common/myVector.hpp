@@ -70,20 +70,20 @@ float getAngle(const Vector2f&, const Vector2f&);
 
 
 
-class vec2i
-{
-	public:
-	        int x; 
-                int y;
+//class vec2i
+//{
+	//public:
+	        //int x; 
+                //int y;
                 
-                vec2i():x(0), y(0) {};
-                vec2i(int x, int y) { this->x = x; this->y = y; };
-                vec2i(const vec2i& v) { *this = v; } ;
-                ~vec2i() {};
+                //vec2i():x(0), y(0) {};
+                //vec2i(int x, int y) { this->x = x; this->y = y; };
+                //vec2i(const vec2i& v) { *this = v; } ;
+                //~vec2i() {};
                 
-                vec2i operator+(const vec2i&) const;
+                //vec2i operator+(const vec2i&) const;
                 		
-};
+//};
 
 class vec3f
 {
@@ -132,7 +132,7 @@ float distBetweenPoints(const vec2f&, const vec2f&);
 float distBetweenPoints(const vec2f& center1, float x2, float y2);
 float distBetweenPoints(float x1, float y1, float x2, float y2);
 
-vec2i getVec2i(int len, int angle);
+//vec2i getVec2i(int len, int angle);
 vec2f getVec2f(int len, int angle);
 
 vec2f getRandVec2f(int radius_min, int radius_max);

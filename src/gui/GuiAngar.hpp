@@ -39,7 +39,7 @@ class GuiAngar : public BaseGui
                 void RenderFocusedItemInfo(const MouseData&, Angar*) const;             
        	
        	private:
-       	      	std::vector<GuiPair<VehicleSlot*>> rect_slot_vec;
+       	      	std::vector<GuiPair<Rect, VehicleSlot*>> rect_slot_vec;
 };
 
 

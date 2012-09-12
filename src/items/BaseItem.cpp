@@ -125,7 +125,7 @@ void BaseItem::RenderInfo(const Rect& rect, float offset_x, float offset_y)
 }
 
 /* virtual */
-void BaseItem::Render(const Rect& rect, const vec2i& gui_offset, bool draw_text)
+void BaseItem::Render(const Rect& rect, const vec2f& gui_offset, bool draw_text)
 {
     	drawTexturedRect(textureOb, rect, -1.0);
 }

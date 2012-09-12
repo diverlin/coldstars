@@ -135,6 +135,16 @@ std::string getEntityStr(int type_id)
 		case ENTITY::CARGO_SLOT_ID: 		{ return "CARGO_SLOT_ID"; break; }	
 		case ENTITY::GATE_SLOT_ID: 		{ return "GATE_SLOT_ID"; break; }		
 		case ENTITY::WEAPON_SLOT_ID: 		{ return "WEAPON_SLOT_ID"; break; }
+		case ENTITY::WEAPON_SLOT1_ID: 		{ return "WEAPON_SLOT1_ID"; break; }
+		case ENTITY::WEAPON_SLOT2_ID: 		{ return "WEAPON_SLOT2_ID"; break; }
+		case ENTITY::WEAPON_SLOT3_ID: 		{ return "WEAPON_SLOT3_ID"; break; }
+		case ENTITY::WEAPON_SLOT4_ID: 		{ return "WEAPON_SLOT4_ID"; break; }
+		case ENTITY::WEAPON_SLOT5_ID: 		{ return "WEAPON_SLOT5_ID"; break; }
+		case ENTITY::WEAPON_SLOT6_ID: 		{ return "WEAPON_SLOT6_ID"; break; }
+		case ENTITY::WEAPON_SLOT7_ID: 		{ return "WEAPON_SLOT7_ID"; break; }
+		case ENTITY::WEAPON_SLOT8_ID: 		{ return "WEAPON_SLOT8_ID"; break; }
+		case ENTITY::WEAPON_SLOT9_ID: 		{ return "WEAPON_SLOT9_ID"; break; }
+		
 		case ENTITY::DRIVE_SLOT_ID: 		{ return "DRIVE_SLOT_ID"; break; }
 		case ENTITY::RADAR_SLOT_ID: 		{ return "RADAR_SLOT_ID"; break; }
 		case ENTITY::BAK_SLOT_ID: 		{ return "BAK_SLOT_ID"; break; }

@@ -14,7 +14,7 @@
 	 You should have received a copy of the GNU General Public License
 	 along with this program; if not, write to the Free Software
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-	 */
+ */
 
 
 
@@ -78,7 +78,12 @@ void Rect::Set(const vec2f& vbl, int _w, int _h)
 {
 	Set(vbl.x, vbl.y, _w , _h);
 }
-      		
+      	
+void Rect::Set(const Rect& rect)
+{
+	Set(rect.GetBottomLeft(), rect.GetWidth(), rect.GetHeight());
+}
+	
 void Rect::SetCenter(const vec2f& _center)
 {
 	SetCenter(_center.x, _center.y);
@@ -116,7 +121,7 @@ void Rect::SetBottomLeftX(float _pos_x)
 	UpdateCenter();
 }
 
-void Rect::Resize(int _w, int _h)
+void Rect::SetSize(int _w, int _h)
 {
 	w = _w;
 	h = _h;

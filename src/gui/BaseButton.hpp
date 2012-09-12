@@ -34,7 +34,7 @@ class BaseButton
 		void SetLabel(const std::string& label) { this->label = label; };
 						
 		void SetAdditionalTextureOb(TextureOb* textureOb_additional) { this->textureOb_additional = textureOb_additional; };
-		void SetRect(const Rect& rect) { this->rect = rect; };
+		void SetRect(const Rect& rect) { this->rect.Set(rect); };
 
        		TextureOb* GetTextureOb() const { return textureOb; };       		
        		Rect& GetRect() { return rect; };

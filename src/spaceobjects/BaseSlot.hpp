@@ -50,8 +50,10 @@ class BaseSlot : public Base
                 
 		void SetTextureOb(TextureOb* textureOb)       	{ this->textureOb = textureOb; };
 		void SetOwner(Base* owner) { this->owner = owner; };
+		void SetSelected(bool selected) { this->selected = selected; };
 		
-		bool GetEquiped() const { return is_EQUIPED; };
+		bool GetSelected() const { return selected; };
+		bool GetEquiped() const { return equiped; };
 		
 		Vehicle* GetOwnerVehicle() const { return (Vehicle*)owner; };
 		Base* GetOwner() const { return owner; };
@@ -61,7 +63,8 @@ class BaseSlot : public Base
 		virtual void ResolveData();
 		
         protected:
-                bool is_EQUIPED;                       
+                bool equiped;  
+                bool selected;                     
                 
                 TextureOb* textureOb;
                                 

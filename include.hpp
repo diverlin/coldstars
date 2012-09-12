@@ -169,6 +169,7 @@ class WeaponSelector;
 #include "src/gui/GuiStore.hpp"
 #include "src/gui/GuiKosmoport.hpp"
 #include "src/gui/GuiVehicle.hpp"
+#include "src/gui/GuiVehicle2.hpp"
 #include "src/gui/GuiSkill.hpp"
 #include "src/gui/GuiManager.hpp"
 
@@ -244,6 +245,7 @@ class WeaponSelector;
 #include "src/gui/GuiStore.cpp"
 #include "src/gui/GuiManager.cpp"
 #include "src/gui/GuiVehicle.cpp"
+#include "src/gui/GuiVehicle2.cpp"
 #include "src/builder/ContainerBuilder.cpp"
 #include "src/builder/BaseVehicleBuilder.cpp"
 #include "src/builder/ShipBuilder.cpp"

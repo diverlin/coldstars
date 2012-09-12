@@ -66,7 +66,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 } 
 
 /* virtual */
-void BaseEquipment::Render(const Rect& rect, const vec2i& gui_offset, bool draw_text)
+void BaseEquipment::Render(const Rect& rect, const vec2f& gui_offset, bool draw_text)
 {
     	drawTexturedRect(textureOb, rect, -1.0);
     

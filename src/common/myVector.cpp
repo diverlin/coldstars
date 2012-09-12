@@ -92,11 +92,11 @@ void vec2f::operator()(const vec2f& v)
 }
 
 
-vec2i vec2i::operator+(const vec2i& rhs) const
-{
-	vec2i result(x+rhs.x, y+rhs.y);	
-	return result;
-}
+//vec2i vec2i::operator+(const vec2i& rhs) const
+//{
+	//vec2i result(x+rhs.x, y+rhs.y);	
+	//return result;
+//}
 
 const vec3f& vec3f::operator+=(const vec3f& rhs)
 {
@@ -146,13 +146,13 @@ float distBetweenPoints(float x1, float y1, float x2, float y2)
 }
 
 
-vec2i getVec2i(int len, int angle)
-{
-    	float alpha = (float)angle * DEGREE_TO_RADIAN_RATE;	
-    	vec2i request(sin(alpha) * len, cos(alpha) * len);
+//vec2i getVec2i(int len, int angle)
+//{
+    	//float alpha = (float)angle * DEGREE_TO_RADIAN_RATE;	
+    	//vec2i request(sin(alpha) * len, cos(alpha) * len);
     	
-    	return request;
-}
+    	//return request;
+//}
 
 vec2f getVec2f(int len, int angle)
 {

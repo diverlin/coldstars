@@ -21,6 +21,7 @@
 
 #include "../gui/GuiRadar.hpp"
 #include "../gui/GuiVehicle.hpp"
+#include "../gui/GuiVehicle2.hpp"
 #include "../gui/GuiSkill.hpp"
 #include "../gui/GuiKosmoport.hpp"
 #include "../gui/GuiAngar.hpp"
@@ -39,12 +40,14 @@ class GuiManager
 		
 		bool RunSession(const MouseData&);
 		GuiRadar& GetGuiRadar() { return gui_radar; };
+		GuiVehicle2& GetGuiVehicle2() { return gui_vehicle2; };
 		GuiVehicle& GetGuiVehicle() { return gui_vehicle; };
 		      		
       	private:
       		Player* player;
-      		
+	
       		GuiVehicle 	gui_vehicle;
+      		GuiVehicle2 	gui_vehicle2;
       		GuiSkill   	gui_skill;
       		GuiKosmoport 	gui_kosmoport;
       		GuiAngar 	gui_angar;
@@ -54,8 +57,10 @@ class GuiManager
 		GuiMap       	gui_map;      		
        		GuiRadar 	gui_radar;
        		
-       		Slider slider;     
-       		
+       		Slider slider;  
+
+		bool done;
+		       		
      		bool UpdateMouseInteractionWithScanVehicle(const MouseData&, Vehicle*, bool allow_full_control = false);     		
      		bool UpdateMouseInteractionWithScanVehicleAsWeaponTarget(const MouseData&, Vehicle*);   
      		

@@ -22,15 +22,15 @@
 
 #include "GuiPair.hpp"
 
-template <class TYPE>
+template <class TYPE1, class TYPE2>
 class GuiPair
 {
 	public:
-		Rect rect;
-		TYPE object;
+		TYPE1 first;
+		TYPE2 second;
 		
-	GuiPair(const Rect& rect, TYPE object):rect(rect), object(object) {};
-	GuiPair(const GuiPair& rhs):rect(rhs.rect), object(rhs.object) {};
+	GuiPair(TYPE1 first, TYPE2 second):first(first), second(second) {};
+	GuiPair(const GuiPair& rhs):first(rhs.first), second(rhs.second) {};
 	~GuiPair() {};
 };
 
