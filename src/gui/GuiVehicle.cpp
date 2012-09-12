@@ -301,23 +301,6 @@ bool GuiVehicle::UpdateMouseInteractionInSpace(const MouseData& data_mouse)
 	return false;
 }
 
-
-ItemSlot* GuiVehicle::GetInreactedItemSlot(const MouseData& data_mouse)
-{
-	for(unsigned int i=0; i<rect_slot_vec.size(); i++)
-	{ 
-		if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
-		{  
-			if (data_mouse.left_click == true)
-			{
-				return rect_slot_vec[i].second;
-			} 
-       		}
-        }  
-        
-        return NULL;                     
-}
-
 bool GuiVehicle::UpdateMouseInteractionInStore(const MouseData& data_mouse, Vehicle* vehicle, Store* store)
 {
 	for(unsigned int i=0; i<rect_slot_vec.size(); i++)

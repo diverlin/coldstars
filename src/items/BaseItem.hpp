@@ -63,8 +63,9 @@ class BaseItem : public Base
 		int GetPrice()              	const { return price; };
 		int GetFunctionalSlotSubTypeId() const { return functional_slot_subtype_id; };
 
-                //bool GetDamaged()       const { return is_DAMAGED; }
-                int GetFunctioning()      const { return ( (is_DAMAGED == false) and (locked_turns == 0) ); }
+		bool GetLocked()	const { return (locked_turns != 0); }
+                bool GetDamaged()       const { return is_DAMAGED; }
+                int GetFunctioning()    const { return ( (is_DAMAGED == false) and (locked_turns == 0) ); }
                 
                 void DeteriorationEvent(); 
                 void LockEvent(int); 

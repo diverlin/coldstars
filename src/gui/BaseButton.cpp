@@ -29,7 +29,8 @@ BaseButton::BaseButton(TextureOb* textureOb, int subtype_id, const std::string& 
     	this->info = info; 
 
 	textureOb_additional = NULL;
-	
+	textureOb_mask = NULL;
+		
 	alpha = 1.0f;
 	lock  = false;
 	pressed = false;
@@ -93,7 +94,12 @@ void BaseButton::Render(int offset_x, int offset_y) const
    		drawTexturedRect(textureOb_additional, rect, -1);   	
    	}
 	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-	
+
+   	if (textureOb_mask != NULL)
+   	{
+   		drawTexturedRect(textureOb_mask, rect, -1);   	
+   	}
+   		
 	if (label != "")
 	{
 		drawSimpleText(label, 12, rect.GetBottomLeft().x + offset_x, rect.GetBottomLeft().y + rect.GetHeight() + offset_y);

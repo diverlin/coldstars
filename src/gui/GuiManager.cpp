@@ -22,8 +22,6 @@
 GuiManager::GuiManager()
 {
 	player = NULL;
-	
-	done = false;
 }
 
 GuiManager::~GuiManager()
@@ -70,10 +68,22 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
 	return interaction;
 }
 
-bool GuiManager::UpdateMouseInteractionWithScanVehicleAsWeaponTarget(const MouseData& data_mouse, Vehicle* scan_vehicle)
+bool GuiManager::UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData& data_mouse)
 {
-	ItemSlot* selected_item_slot = gui_vehicle.GetInreactedItemSlot(data_mouse);	
-	player->GetNpc()->GetVehicle()->GetWeaponComplex()->SetPreciseFireTarget(selected_item_slot->GetOwnerVehicle(), selected_item_slot);
+	gui_vehicle3.UpdateEquipmentIcons();
+
+	ItemSlot* selected_item_slot = gui_vehicle3.GetInreactedItemSlot(data_mouse);	
+	if (selected_item_slot != NULL)
+	{
+		if (selected_item_slot->GetEquiped() == true)
+		{
+			player->GetNpc()->GetVehicle()->GetWeaponComplex()->SetPreciseFireTarget(selected_item_slot->GetOwnerVehicle(), selected_item_slot);
+			gui_vehicle3.Reset();
+			return true;
+		}
+	}	
+	
+	return false;
 }
 
 void GuiManager::RenderScanVehicle(const MouseData& data_mouse, Vehicle* vehicle, bool show_skill) const
@@ -131,30 +141,27 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
                         }             
                         //
 
-			if (done == false)
+			if (gui_vehicle2.GetValid() == false)
 			{
 				gui_vehicle2.BindVehicle(player->GetNpc()->GetVehicle(), 0.6f);
                         	gui_vehicle2.SetOffset(gui_radar.GetRect().GetCenter());                        
-				done = true;
 			}
 			gui_vehicle2.UpdateEquipmentIcons();
+			
+                        
                         if (show_gui_scan)
                         {
                         	gui_vehicle.SetOffset(center_screen + GUI_VEHICLE_INSPACE_OFFSET);
 				gui_skill.SetOffset(center_screen + GUI_SKILL_INSPACE_OFFSET);
 			}
 			
+			gui_vehicle3.SetOffset(center_screen);
+			
 		       	UserInput::Instance().UpdateInSpace(player, *this);
 
 			//update
                         interaction = gui_space.UpdateButtonsMouseInteraction(data_mouse);				
                         gui_space.ButtonsAction(player);   
-                        
-                        if (interaction == false)
-                        {
-                        	interaction = gui_vehicle2.UpdateButtonsMouseInteraction(data_mouse);
-                        }
-                        gui_vehicle2.ButtonsAction(player);
                                                 
 			if (show_gui_galaxymap == true)  
 			{
@@ -170,21 +177,16 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 				{
 					interaction = UpdateMouseInteractionWithScanVehicle(data_mouse, scan_vehicle);
 				}
-					//else
-					//{
-						//ItemSlot* item_slot = gui_vehicle.GetInreactedItemSlot(data_mouse);
-						//if (item_slot != NULL)
-						//{
-							//player->GetNpc()->GetVehicle()->GetWeaponComplex()->SetPreciseFireTarget(item_slot->GetOwnerVehicle(), item_slot);
-							//player->GetNpc()->ResetScanTarget();
-							//interaction = true;
-						//}
-					//}
-				
 			}
-                        
+
+                        gui_vehicle2.ButtonsAction(player);
                         if (show_gui_radar == true)
                         {
+                                if (interaction == false)
+                        	{
+                        		interaction = gui_vehicle2.UpdateButtonsMouseInteraction(data_mouse);
+                        	}
+                        
                                 gui_radar.Update();                                
                                 if (interaction == false)
                                 {
@@ -194,13 +196,20 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
                                         }
                                 }
                         }
-					
+                        
+                        if (gui_vehicle3.GetValid() == true)
+			{
+				interaction = UpdateMouseInteractionWithPreciseWeaponTarget(data_mouse);
+			}	
+				
 			//render
 			resetRenderTransformation();
 			enable_BLEND();    
 				if (show_gui_radar == true)  
 				{
 					gui_radar.Render();
+                                	gui_vehicle2.RenderButtons();
+                               		gui_vehicle2.RenderFocusedButtonInfo(data_mouse);    
 				}
 				
 				if (show_gui_galaxymap == true)  
@@ -212,13 +221,16 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 				{
 					RenderScanVehicle(data_mouse, scan_vehicle); 				                 
 				}
+				
+				if (gui_vehicle3.GetValid() == true)
+				{
+                                	gui_vehicle3.RenderButtons();
+                               		gui_vehicle3.RenderFocusedButtonInfo(data_mouse); 
+				}
 					
 				gui_space.RenderBar();	
 				gui_space.RenderButtons();
 				gui_space.RenderFocusedButtonInfo(data_mouse);
-
-                                gui_vehicle2.RenderButtons();
-                                gui_vehicle2.RenderFocusedButtonInfo(data_mouse);                                
 			disable_BLEND();
 
 			gui_space.RenderText(Screen::Instance().GetBottomLeftGlobalCoord());

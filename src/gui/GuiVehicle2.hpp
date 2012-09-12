@@ -28,15 +28,22 @@ class GuiVehicle2 : public BaseGui
    	public:
       		GuiVehicle2();
       		~GuiVehicle2();
+      		
+      		bool GetValid() const { return valid; };
 
+		void Reset();
 		void BindVehicle(Vehicle*, float scale = 1.0f);        	
       		void UpdateEquipmentIcons() const;
       		void ButtonsAction(Player*) const;
+      		
+      		ItemSlot* GetInreactedItemSlot(const MouseData&);   
       		
       	private:
       		std::vector<GuiPair<BaseButton*, ItemSlot*>> button_slot_vec;
 
         	void CreateFunctionalItemSlotsCircleGeometry(Vehicle*, float);
+        	
+        	bool valid;
 };
 
 

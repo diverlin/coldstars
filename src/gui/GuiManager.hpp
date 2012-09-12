@@ -40,14 +40,16 @@ class GuiManager
 		
 		bool RunSession(const MouseData&);
 		GuiRadar& GetGuiRadar() { return gui_radar; };
-		GuiVehicle2& GetGuiVehicle2() { return gui_vehicle2; };
 		GuiVehicle& GetGuiVehicle() { return gui_vehicle; };
-		      		
+		GuiVehicle2& GetGuiVehicle2() { return gui_vehicle2; };
+		GuiVehicle2& GetGuiVehicle3() { return gui_vehicle3; };
+						      		
       	private:
       		Player* player;
 	
       		GuiVehicle 	gui_vehicle;
       		GuiVehicle2 	gui_vehicle2;
+      		GuiVehicle2 	gui_vehicle3;
       		GuiSkill   	gui_skill;
       		GuiKosmoport 	gui_kosmoport;
       		GuiAngar 	gui_angar;
@@ -58,11 +60,9 @@ class GuiManager
        		GuiRadar 	gui_radar;
        		
        		Slider slider;  
-
-		bool done;
 		       		
      		bool UpdateMouseInteractionWithScanVehicle(const MouseData&, Vehicle*, bool allow_full_control = false);     		
-     		bool UpdateMouseInteractionWithScanVehicleAsWeaponTarget(const MouseData&, Vehicle*);   
+     		bool UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData&);   
      		
      		void RenderScanVehicle(const MouseData&, Vehicle*, bool show_skill = true) const;  	
 };
