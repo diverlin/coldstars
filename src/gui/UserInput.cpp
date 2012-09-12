@@ -373,6 +373,7 @@ void UserInput::KeyPressedInKosmoport(Player* player)
        		  		}
  
           	  		player->GetNpc()->ResetScanTarget();
+         			player->GetGuiManager().GetGuiVehicle3().Reset();
          		}
          		
          		break;

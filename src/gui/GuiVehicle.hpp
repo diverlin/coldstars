@@ -32,7 +32,6 @@ class GuiVehicle : public BaseGui
 		void BindVehicle(Vehicle*, float scale = 1.0f);
         	
      		bool UpdateMouseInteractionInSpace(const MouseData&);   
-     		ItemSlot* GetInreactedItemSlot(const MouseData&);   
                 bool UpdateMouseInteractionInStore(const MouseData&, Vehicle*, Store*); 
                         			
       		void RenderVehicle(const MouseData&, int mark_slot_subtype_id = NONE_ID) const;

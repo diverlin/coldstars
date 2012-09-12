@@ -19,24 +19,35 @@
 #include "GuiVehicle2.hpp"
 
 GuiVehicle2::GuiVehicle2()
-{}
+{
+	valid = false;
+}
 
 GuiVehicle2::~GuiVehicle2()
 {}
 
-void GuiVehicle2::BindVehicle(Vehicle* vehicle, float scale)
+void GuiVehicle2::Reset()
 {
-	CreateFunctionalItemSlotsCircleGeometry(vehicle, scale);
-}	
-	
-void GuiVehicle2::CreateFunctionalItemSlotsCircleGeometry(Vehicle* vehicle, float scale)
-{        
 	for (unsigned int i=0; i<button_slot_vec.size(); i++)
 	{
 		delete button_slot_vec[i].first;
 	}
 	button_slot_vec.clear();
 	button_map.clear();
+	
+	valid = false;
+}
+
+void GuiVehicle2::BindVehicle(Vehicle* vehicle, float scale)
+{
+	CreateFunctionalItemSlotsCircleGeometry(vehicle, scale);
+	
+	valid = true;
+}	
+	
+void GuiVehicle2::CreateFunctionalItemSlotsCircleGeometry(Vehicle* vehicle, float scale)
+{        
+	Reset();
 
         Rect rect;
         		
@@ -102,11 +113,21 @@ void GuiVehicle2::UpdateEquipmentIcons() const
 	{
 		if (button_slot_vec[i].second->GetEquiped() == true)
 		{
-			button_slot_vec[i].first->SetAdditionalTextureOb(button_slot_vec[i].second->GetItem()->GetTextureOb());
+			button_slot_vec[i].first->SetTextureObAdditional(button_slot_vec[i].second->GetItem()->GetTextureOb());
+			button_slot_vec[i].first->SetTextureObMask(NULL);
+			if (button_slot_vec[i].second->GetItem()->GetDamaged())
+			{
+				button_slot_vec[i].first->SetTextureObMask(GuiTextureObCollector::Instance().slot_mark_reject);
+			}
+			if (button_slot_vec[i].second->GetItem()->GetLocked())
+			{
+				button_slot_vec[i].first->SetTextureObMask(GuiTextureObCollector::Instance().slot_mark_accept);
+			}
 		}
 		else
 		{
-			button_slot_vec[i].first->SetAdditionalTextureOb(NULL);
+			button_slot_vec[i].first->SetTextureObAdditional(NULL);
+			button_slot_vec[i].first->SetTextureObMask(NULL);
 		}
 	}
 }
@@ -129,4 +150,21 @@ void GuiVehicle2::ButtonsAction(Player* player) const
         		case ENTITY::WEAPON_SLOT9_ID: { player->GetWeaponsSelector().SetSingle(9, button->GetPressed()); break; }     
 		}
 	}
+}
+
+
+ItemSlot* GuiVehicle2::GetInreactedItemSlot(const MouseData& data_mouse)
+{
+	for(unsigned int i=0; i<button_slot_vec.size(); i++)
+	{ 
+		if (button_slot_vec[i].first->GetRect().CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
+		{  
+			if (data_mouse.left_click == true)
+			{
+				return button_slot_vec[i].second;
+			}
+       		}
+        }  
+        
+        return NULL;                     
 }
