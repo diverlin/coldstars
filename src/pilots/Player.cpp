@@ -689,7 +689,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
                 					//if (npc->GetVehicle()->GetWeaponComplex()->IsAllPreciseWeaponsSelected() == true)
                 					{
                       						npc->SetScanTarget(visible_SHIP_vec[i]);
-                      						gui_manager.GetGuiVehicle().BindVehicle(visible_SHIP_vec[i], 0.5f, true);
+                      						gui_manager.GetGuiVehicle().BindVehicle(visible_SHIP_vec[i], 0.5f);
                 					}
                 				}
                 			}

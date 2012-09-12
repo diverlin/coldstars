@@ -28,32 +28,28 @@ class GuiVehicle : public BaseGui
    	public:
       		GuiVehicle();
       		~GuiVehicle();
-      		
-      		bool GetSimple() const { return simple; };
 
-		void BindVehicle(Vehicle*, float scale = 1.0f, bool simple = false);
+		void BindVehicle(Vehicle*, float scale = 1.0f);
         	
      		bool UpdateMouseInteractionInSpace(const MouseData&);   
      		ItemSlot* GetInreactedItemSlot(const MouseData&);   
                 bool UpdateMouseInteractionInStore(const MouseData&, Vehicle*, Store*); 
                         			
-      		void RenderVehicle(const MouseData&, int) const;
+      		void RenderVehicle(const MouseData&, int mark_slot_subtype_id = NONE_ID) const;
 		void RenderFocusedItemInfo(const MouseData&) const;
       		
       	private:
-      	  	bool simple;
-      	
       	        Rect rect_korpus; 
                 TextureOb* textureOb_korpus;
                 	
-      		std::vector<GuiPair<ItemSlot*>> rect_slot_vec;
-      	
+      		std::vector<GuiPair<Rect, ItemSlot*>> rect_slot_vec;
+      		      	
       		void RenderSlots() const;
       		void RenderMarksForEmptySlots(const MouseData&, int) const;  
 
         	void CreateKorpusGui(Vehicle*, float);
-        	void CreateFunctionalItemSlotsGeometry(Vehicle*, float);
-        	void CreateNonFunctionalItemSlotsGeometry(Vehicle*, float);
+        	void CreateItemSlotsGeometry(Vehicle*, float);
+        	void CreateFunctionalItemSlotsCircleGeometry(Vehicle*, float);
 };
 
 

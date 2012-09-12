@@ -37,13 +37,13 @@ ItemSlot::~ItemSlot()
 {
 	EntityManager::Instance().RemoveEntity(this);
 		
-	if (is_EQUIPED == true)
+	if (equiped == true)
 	{
 		delete item;
 		item = NULL;
 	}
-}
-                
+}  
+        		        
 bool ItemSlot::InsertItem(BaseItem* item)
 {
 	if (owner != NULL) // slot in cursor has owner = NULL
@@ -57,7 +57,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 	if (data_id.subtype_id == ENTITY::CARGO_SLOT_ID) 
 	{           
 		this->item = item;
-		is_EQUIPED = true; 
+		equiped = true; 
 		item->SetItemSlot(this);
 	     
 		return true;
@@ -66,7 +66,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 	if (data_id.subtype_id == item->GetFunctionalSlotSubTypeId())
 	{                                     
 		this->item = item;
-		is_EQUIPED = true; 
+		equiped = true; 
 		item->SetItemSlot(this);
                 UpdateVehiclePropetries(); 
 
@@ -87,7 +87,7 @@ void ItemSlot::RemoveItem()
 	}
 	
         item = NULL;
-    	is_EQUIPED = false;
+    	equiped = false;
     	
     	if (data_id.subtype_id != ENTITY::CARGO_SLOT_ID) 
 	{    
@@ -128,10 +128,10 @@ void ItemSlot::UpdateVehiclePropetries() const
 	}
 }
    
-void ItemSlot::Render(const Rect& rect, const vec2i& gui_offset, bool draw_text) const
+void ItemSlot::Render(const Rect& rect, const vec2f& gui_offset, bool draw_text) const
 {
        	drawTexturedRect(textureOb, rect, -1.5);    
-       	if (is_EQUIPED == true)
+       	if (equiped == true)
        	{
        		item->Render(rect, gui_offset, draw_text);	
         }
@@ -176,7 +176,7 @@ void ItemSlot::RenderItemInfo(const Rect& rect, const vec2f& offset) const
 
 void ItemSlot::RenderItemInfo(const Rect& rect, float offset_x, float offset_y) const
 {
-        if (is_EQUIPED == true)
+        if (equiped == true)
         {
                 item->RenderInfo(rect, offset_x, offset_y);
         }
@@ -196,7 +196,7 @@ void ItemSlot::DropItemToSpace(Vehicle* vehicle)
         
 bool ItemSlot::SwapItemWith(ItemSlot* _slot)
 {
-       	if ( (is_EQUIPED == false) and (_slot->GetEquiped() == true) )
+       	if ( (equiped == false) and (_slot->GetEquiped() == true) )
        	{      
        		if (InsertItem(_slot->GetItem()) == true) 
        		{
@@ -206,7 +206,7 @@ bool ItemSlot::SwapItemWith(ItemSlot* _slot)
        		}             
 	}
 	
-	if ( (is_EQUIPED == true) and (_slot->GetEquiped() == false) )
+	if ( (equiped == true) and (_slot->GetEquiped() == false) )
        	{ 
 		if (_slot->InsertItem(GetItem())     == true)
 		{ 
@@ -216,7 +216,7 @@ bool ItemSlot::SwapItemWith(ItemSlot* _slot)
 		}
 	}
 
-	if ( (is_EQUIPED == true) and (_slot->GetEquiped() == true) )
+	if ( (equiped == true) and (_slot->GetEquiped() == true) )
        	{          
        		if ( (item->GetTypeId() == ENTITY::MODULE_ID) and (_slot->GetItem()->GetTypeId() == ENTITY::EQUIPMENT_ID) )
        		{

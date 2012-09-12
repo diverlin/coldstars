@@ -22,6 +22,8 @@
 GuiManager::GuiManager()
 {
 	player = NULL;
+	
+	done = false;
 }
 
 GuiManager::~GuiManager()
@@ -79,7 +81,7 @@ void GuiManager::RenderScanVehicle(const MouseData& data_mouse, Vehicle* vehicle
 	if (player->GetCursor().GetItemSlot()->GetEquiped() == true)
 	{
        		gui_vehicle.RenderVehicle(data_mouse, player->GetCursor().GetItemSlot()->GetItem()->GetFunctionalSlotSubTypeId());
-		player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetRect(), vec2i(0, 0));		
+		player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetRect(), vec2f(0, 0));		
 	}
 	else
 	{
@@ -105,7 +107,7 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
      	bool interaction = false;
 
 	Rect screen_rect(0, 0, Screen::Instance().GetWindow().GetWidth(), Screen::Instance().GetWindow().GetHeight());   
-	vec2i center_screen(Screen::Instance().GetWindow().GetWidth()/2, Screen::Instance().GetWindow().GetHeight()/2);        			
+	vec2f center_screen(Screen::Instance().GetWindow().GetWidth()/2, Screen::Instance().GetWindow().GetHeight()/2);        			
         			
      	player->GetCursor().Update(data_mouse); 
      								
@@ -128,7 +130,14 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
                                 show_gui_radar = true;  
                         }             
                         //
-                        
+
+			if (done == false)
+			{
+				gui_vehicle2.BindVehicle(player->GetNpc()->GetVehicle(), 0.6f);
+                        	gui_vehicle2.SetOffset(gui_radar.GetRect().GetCenter());                        
+				done = true;
+			}
+			gui_vehicle2.UpdateEquipmentIcons();
                         if (show_gui_scan)
                         {
                         	gui_vehicle.SetOffset(center_screen + GUI_VEHICLE_INSPACE_OFFSET);
@@ -140,6 +149,12 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 			//update
                         interaction = gui_space.UpdateButtonsMouseInteraction(data_mouse);				
                         gui_space.ButtonsAction(player);   
+                        
+                        if (interaction == false)
+                        {
+                        	interaction = gui_vehicle2.UpdateButtonsMouseInteraction(data_mouse);
+                        }
+                        gui_vehicle2.ButtonsAction(player);
                                                 
 			if (show_gui_galaxymap == true)  
 			{
@@ -151,29 +166,28 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 			
                         if (show_gui_scan == true)
 			{	
-				if (gui_vehicle.GetSimple() == false)
-				{			
+				if (interaction == false)
+				{
 					interaction = UpdateMouseInteractionWithScanVehicle(data_mouse, scan_vehicle);
 				}
-				else
-				{
-					ItemSlot* item_slot = gui_vehicle.GetInreactedItemSlot(data_mouse);
-					if (item_slot != NULL)
-					{
-						player->GetNpc()->GetVehicle()->GetWeaponComplex()->SetPreciseFireTarget(item_slot->GetOwnerVehicle(), item_slot);
-						player->GetNpc()->ResetScanTarget();
-					}
-				}
+					//else
+					//{
+						//ItemSlot* item_slot = gui_vehicle.GetInreactedItemSlot(data_mouse);
+						//if (item_slot != NULL)
+						//{
+							//player->GetNpc()->GetVehicle()->GetWeaponComplex()->SetPreciseFireTarget(item_slot->GetOwnerVehicle(), item_slot);
+							//player->GetNpc()->ResetScanTarget();
+							//interaction = true;
+						//}
+					//}
+				
 			}
                         
                         if (show_gui_radar == true)
                         {
-                                gui_radar.Update();
-                                
+                                gui_radar.Update();                                
                                 if (interaction == false)
                                 {
-                                        interaction = gui_radar.UpdateButtonsMouseInteraction(data_mouse);
-                                        gui_radar.ButtonsAction(player);
                                         if (interaction == false)
                                         {
                                                 interaction = gui_radar.UpdateMouseInteraction(data_mouse);
@@ -198,10 +212,13 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 				{
 					RenderScanVehicle(data_mouse, scan_vehicle); 				                 
 				}
-						
+					
 				gui_space.RenderBar();	
 				gui_space.RenderButtons();
 				gui_space.RenderFocusedButtonInfo(data_mouse);
+
+                                gui_vehicle2.RenderButtons();
+                                gui_vehicle2.RenderFocusedButtonInfo(data_mouse);                                
 			disable_BLEND();
 
 			gui_space.RenderText(Screen::Instance().GetBottomLeftGlobalCoord());

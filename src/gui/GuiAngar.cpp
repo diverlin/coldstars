@@ -61,7 +61,7 @@ void GuiAngar::BindAngar(Angar* angar)
  	{
  		Rect _rect(i*GUI::ITEMSLOT::WIDTH_FOR_ANGAR, 0, 
  			   GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
-        	rect_slot_vec.push_back(GuiPair<VehicleSlot*>(_rect, angar->vehicleslot_vec[i]));
+        	rect_slot_vec.push_back(GuiPair<Rect, VehicleSlot*>(_rect, angar->vehicleslot_vec[i]));
 	}
 }
 
@@ -129,14 +129,14 @@ bool GuiAngar::UpdateMouseVehicleSlotsInteraction(const MouseData& data_mouse)
 {	
         for (unsigned int i=0; i<rect_slot_vec.size(); i++)
         { 
-                if (rect_slot_vec[i].rect.CheckInteraction(data_mouse.mx, data_mouse.my) == true)
+                if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx, data_mouse.my) == true)
                 {
                         if (data_mouse.right_click == true)
                         {
-                                if (rect_slot_vec[i].object->GetVehicle() != NULL)
+                                if (rect_slot_vec[i].second->GetVehicle() != NULL)
                                 {
-                                        player->GetNpc()->SetScanTarget(rect_slot_vec[i].object->GetVehicle());
-                                        player->GetGuiManager().GetGuiVehicle().BindVehicle(rect_slot_vec[i].object->GetVehicle());
+                                        player->GetNpc()->SetScanTarget(rect_slot_vec[i].second->GetVehicle());
+                                        player->GetGuiManager().GetGuiVehicle().BindVehicle(rect_slot_vec[i].second->GetVehicle());
                                         return true;
                                 }
                         }
@@ -153,7 +153,7 @@ void GuiAngar::RenderVehicleSlots(Angar* angar) const
 		glTranslatef(offset.x, offset.y, 0);
         	for (unsigned int i=0; i<rect_slot_vec.size(); i++)
         	{
-                	rect_slot_vec[i].object->Render(rect_slot_vec[i].rect);
+                	rect_slot_vec[i].second->Render(rect_slot_vec[i].first);
         	}
         glPopMatrix();
 }
@@ -162,11 +162,11 @@ void GuiAngar::RenderFocusedItemInfo(const MouseData& data_mouse, Angar* angar) 
 {
         for (unsigned int i=0; i<angar->vehicleslot_vec.size(); i++)
         { 
-		if (rect_slot_vec[i].object->GetVehicle() != NULL)
+		if (rect_slot_vec[i].second->GetVehicle() != NULL)
                 {
-                       	if (rect_slot_vec[i].rect.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
+                       	if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
                 	{
-		                rect_slot_vec[i].object->RenderItemInfo(rect_slot_vec[i].rect, -offset.x, -offset.y);
+		                rect_slot_vec[i].second->RenderItemInfo(rect_slot_vec[i].first, -offset.x, -offset.y);
 		                return;
                 	}
                 }

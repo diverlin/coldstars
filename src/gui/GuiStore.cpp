@@ -37,7 +37,7 @@ void GuiStore::BindStore(Store* store)
                           GUI::ITEMSLOT::WIDTH_FOR_STORE,
                           GUI::ITEMSLOT::HEIGHT_FOR_STORE);
                                                         
-       		rect_slot_vec.push_back(GuiPair<ItemSlot*>(rect, store->slot_total_vec[i]));
+       		rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, store->slot_total_vec[i]));
        		
        		clm++;
         	if (clm > GUI::STORE_SLOTS_INROW)
@@ -52,15 +52,15 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse, Store* store)
 {
         for (unsigned int i=0; i<rect_slot_vec.size(); i++)
         { 
-                if (rect_slot_vec[i].object->GetEquiped() == true)
+                if (rect_slot_vec[i].second->GetEquiped() == true)
                 {
-                	if (rect_slot_vec[i].rect.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
+                	if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
                 	{
                         	if (data_mouse.left_click == true)
                         	{
-                        		if (player->GetNpc()->GetCredits() >= rect_slot_vec[i].object->GetItem()->GetPrice())
+                        		if (player->GetNpc()->GetCredits() >= rect_slot_vec[i].second->GetItem()->GetPrice())
                               		{
-                        			store->SellItemFromSlot(player->GetNpc(), rect_slot_vec[i].object);
+                        			store->SellItemFromSlot(player->GetNpc(), rect_slot_vec[i].second);
                         		}
                         	} 
                         	return true; break;
@@ -77,12 +77,12 @@ void GuiStore::RenderSlots(int credits) const
 		glTranslatef(offset.x, offset.y, 0);
         	for (unsigned int i=0; i<rect_slot_vec.size(); i++)
         	{
-                	rect_slot_vec[i].object->Render(rect_slot_vec[i].rect, offset);
-                	if (rect_slot_vec[i].object->GetEquiped() == true)
+                	rect_slot_vec[i].second->Render(rect_slot_vec[i].first, offset);
+                	if (rect_slot_vec[i].second->GetEquiped() == true)
                 	{
-                		if (rect_slot_vec[i].object->GetItem()->GetPrice() > credits)
+                		if (rect_slot_vec[i].second->GetItem()->GetPrice() > credits)
                 		{
-                			rect_slot_vec[i].object->RenderMark(rect_slot_vec[i].rect, GuiTextureObCollector::Instance().slot_mark_reject);
+                			rect_slot_vec[i].second->RenderMark(rect_slot_vec[i].first, GuiTextureObCollector::Instance().slot_mark_reject);
                			}
                		}                	
         	}
@@ -93,9 +93,9 @@ void GuiStore::RenderFocusedItemInfo(const MouseData& data_mouse)
 {	
         for (unsigned int i=0; i<rect_slot_vec.size(); i++)
         {                              				
-                if (rect_slot_vec[i].rect.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
+                if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
                 {
-                        rect_slot_vec[i].object->RenderItemInfo(rect_slot_vec[i].rect, -offset.x, -offset.y);                    
+                        rect_slot_vec[i].second->RenderItemInfo(rect_slot_vec[i].first, -offset.x, -offset.y);                    
                 } 
         }
 }

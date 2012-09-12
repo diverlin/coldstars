@@ -36,9 +36,10 @@ void BaseVehicleBuilder::CreateKorpusGeometry(Vehicle* vehicle) const
 void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
 {     
         // WEAPON SLOTS
-        for (unsigned int i=0; i<vehicle->GetKorpusData().slot_weapon_num; i++)
+        for (unsigned int i=0; (i<vehicle->GetKorpusData().slot_weapon_num) and (i<WEAPON_SLOT_MAX_NUM); i++)
         {
-        	ItemSlot* weapon_slot = GetNewItemSlot(ENTITY::WEAPON_SLOT_ID);     
+        	ItemSlot* weapon_slot = GetNewItemSlot(ENTITY::WEAPON_SLOT_ID);  
+        	weapon_slot->SetSubSubTypeId(ENTITY::WEAPON_SLOT1_ID + i);   
         	vehicle->AddItemSlot(weapon_slot);
         }
                 

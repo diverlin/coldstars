@@ -1,23 +1,24 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+	
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "../gui/UserInput.hpp"
 #include "../common/SaveLoadManager.hpp"
+#include "BaseButton.hpp"
 
 UserInput& UserInput::Instance()
 {
@@ -83,41 +84,207 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 		} 
 
 		// WEAPON SLOTS
-		case sf::Key::Num1: { gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON1_ACTIVATOR_ID)->PressEvent(); break; }
-		case sf::Key::Num2: { gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON2_ACTIVATOR_ID)->PressEvent(); break; }
-		case sf::Key::Num3: { gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON3_ACTIVATOR_ID)->PressEvent(); break; }
-		case sf::Key::Num4: { gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON4_ACTIVATOR_ID)->PressEvent(); break; }
-		case sf::Key::Num5: { gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON5_ACTIVATOR_ID)->PressEvent(); break; } 
-		case sf::Key::Num6: { gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON6_ACTIVATOR_ID)->PressEvent(); break; } 
-		case sf::Key::Num7: { gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON7_ACTIVATOR_ID)->PressEvent(); break; }
-		case sf::Key::Num8: { gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON8_ACTIVATOR_ID)->PressEvent(); break; }            		
-		case sf::Key::Num9: { gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON9_ACTIVATOR_ID)->PressEvent(); break; }     
+		case sf::Key::Num1: 
+		{ 
+			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT1_ID);
+			if (button)
+			{
+				button->PressEvent(); 
+			}
+			
+			break; 
+		
+		}		
+		case sf::Key::Num2: 
+		{ 
+			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT2_ID);
+			if (button)
+			{
+				button->PressEvent(); 
+			}
+			
+			break; 
+		
+		}
+		case sf::Key::Num3: 
+		{ 
+			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT3_ID);
+			if (button)
+			{
+				button->PressEvent(); 
+			}
+			
+			break; 
+		
+		}
+		case sf::Key::Num4: 
+		{ 
+			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT4_ID);
+			if (button)
+			{
+				button->PressEvent(); 
+			}
+			
+			break; 
+		
+		}
+		case sf::Key::Num5: 
+		{ 
+			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT5_ID);
+			if (button)
+			{
+				button->PressEvent(); 
+			}
+			
+			break; 
+		
+		}
+		case sf::Key::Num6: 
+		{ 
+			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT6_ID);
+			if (button)
+			{
+				button->PressEvent(); 
+			}
+			
+			break; 
+		
+		}
+		case sf::Key::Num7: 
+		{ 
+			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT7_ID);
+			if (button)
+			{
+				button->PressEvent(); 
+			}
+			
+			break; 
+		
+		}
+		case sf::Key::Num8: 
+		{ 
+			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT8_ID);
+			if (button)
+			{
+				button->PressEvent(); 
+			}
+			
+			break; 
+		
+		}        		
+		case sf::Key::Num9: 
+		{ 
+			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT9_ID);
+			if (button)
+			{
+				button->PressEvent(); 
+			}
+			
+			break; 
+		
+		} 
 										
 		case sf::Key::A:
 		{ 
 			if (player->GetWeaponsSelector().StatesAreMixed() == true)
 			{
-				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON1_ACTIVATOR_ID)->Reset();
-				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON2_ACTIVATOR_ID)->Reset();
-				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON3_ACTIVATOR_ID)->Reset();
-				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON4_ACTIVATOR_ID)->Reset();
-				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON5_ACTIVATOR_ID)->Reset();
-				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON6_ACTIVATOR_ID)->Reset();
-				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON7_ACTIVATOR_ID)->Reset();
-				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON8_ACTIVATOR_ID)->Reset();
-				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON9_ACTIVATOR_ID)->Reset();
+				BaseButton* button = NULL;
+				
+				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT1_ID);
+				if (button)
+				{
+					button->Reset();
+				}
+				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT2_ID);
+				if (button)
+				{
+					button->Reset();
+				}
+				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT3_ID);
+				if (button)
+				{
+					button->Reset();
+				}
+				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT4_ID);
+				if (button)
+				{
+					button->Reset();
+				}
+				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT5_ID);
+				if (button)
+				{
+					button->Reset();
+				}
+				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT6_ID);
+				if (button)
+				{
+					button->Reset();
+				}
+				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT7_ID);
+				if (button)
+				{
+					button->Reset();
+				}
+				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT8_ID);
+				if (button)
+				{
+					button->Reset();
+				}
+				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT9_ID);
+				if (button)
+				{
+					button->Reset();
+				}
 			}
 			else
 			{
-				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON1_ACTIVATOR_ID)->PressEvent();
-				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON2_ACTIVATOR_ID)->PressEvent();
-				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON3_ACTIVATOR_ID)->PressEvent();
-				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON4_ACTIVATOR_ID)->PressEvent();
-				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON5_ACTIVATOR_ID)->PressEvent();
-				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON6_ACTIVATOR_ID)->PressEvent();
-				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON7_ACTIVATOR_ID)->PressEvent();
-				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON8_ACTIVATOR_ID)->PressEvent();
-				gui_manager.GetGuiRadar().GetButton(GUI::BUTTON::WEAPON9_ACTIVATOR_ID)->PressEvent();
+				BaseButton* button = NULL;
+				
+				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT1_ID);
+				if (button)
+				{
+					button->PressEvent();
+				}
+				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT2_ID);
+				if (button)
+				{
+					button->PressEvent();
+				}
+				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT3_ID);
+				if (button)
+				{
+					button->PressEvent();
+				}
+				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT4_ID);
+				if (button)
+				{
+					button->PressEvent();
+				}
+				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT5_ID);
+				if (button)
+				{
+					button->PressEvent();
+				}
+				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT6_ID);
+				if (button)
+				{
+					button->PressEvent();
+				}
+				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT7_ID);
+				if (button)
+				{
+					button->PressEvent();
+				}
+				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT8_ID);
+				if (button)
+				{
+					button->PressEvent();
+				}
+				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT9_ID);
+				if (button)
+				{
+					button->PressEvent();
+				}
 			}
 			break;
 		}
