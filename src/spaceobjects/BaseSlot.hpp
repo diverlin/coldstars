@@ -50,8 +50,9 @@ class BaseSlot : public Base
                 
 		void SetTextureOb(TextureOb* textureOb)       	{ this->textureOb = textureOb; };
 		void SetOwner(Base* owner) { this->owner = owner; };
-		void SetSelected(bool selected) { this->selected = selected; };
-		
+		void SelectEvent() { selected = true; };
+		void DeselectEvent() { selected = false; };
+				
 		bool GetSelected() const { return selected; };
 		bool GetEquiped() const { return equiped; };
 		

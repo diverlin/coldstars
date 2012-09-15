@@ -95,6 +95,25 @@ void ItemSlot::RemoveItem()
 	}    	 
 }
 
+void ItemSlot::SelectEvent()
+{
+	selected = true;
+}
+
+void ItemSlot::DeselectEvent()
+{
+	selected = false;
+	
+	if (owner->GetTypeId() == ENTITY::VEHICLE_ID)
+	{ 	
+		switch(data_id.subtype_id)
+		{
+			case ENTITY::WEAPON_SLOT_ID: 	{ turrel->ResetTarget(); break; }
+		}
+	}
+			
+}
+        	
 void ItemSlot::UpdateVehiclePropetries() const
 {
 	if (owner->GetTypeId() == ENTITY::VEHICLE_ID)

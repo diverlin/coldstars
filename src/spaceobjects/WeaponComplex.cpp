@@ -94,7 +94,7 @@ void WeaponComplex::ActivateAllWeapons()
 {
 	for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
 	{
-               	slot_weapon_reloaded_vec[i]->SetSelected(true);
+               	slot_weapon_reloaded_vec[i]->SelectEvent();
 	}
 }
 
@@ -102,10 +102,9 @@ void WeaponComplex::DeactivateAllWeapons()
 {
 	for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
 	{
-               	slot_weapon_reloaded_vec[i]->SetSelected(false);
+               	slot_weapon_reloaded_vec[i]->DeselectEvent();
+               	slot_weapon_reloaded_vec[i]->GetTurrel()->ResetTarget();
 	}
-	
-	ResetDeselectedWeaponTargets();
 }
 
 void WeaponComplex::ActivateWeaponsBySubTypeId(int weapon_subtype_id)
@@ -114,7 +113,7 @@ void WeaponComplex::ActivateWeaponsBySubTypeId(int weapon_subtype_id)
 	{
 		if (slot_weapon_reloaded_vec[i]->GetItem()->GetSubTypeId() == weapon_subtype_id)
 		{
-               		slot_weapon_reloaded_vec[i]->SetSelected(true);		
+               		slot_weapon_reloaded_vec[i]->SelectEvent();		
 		}
 	}
 }
@@ -126,11 +125,10 @@ void WeaponComplex::DeactivateWeaponsBySubTypeId(int weapon_subtype_id)
 	{
 		if (slot_weapon_reloaded_vec[i]->GetItem()->GetSubTypeId() == weapon_subtype_id)
 		{
-               		slot_weapon_reloaded_vec[i]->SetSelected(false);		
+               		slot_weapon_reloaded_vec[i]->DeselectEvent();	
+               		slot_weapon_reloaded_vec[i]->GetTurrel()->ResetTarget();	
 		}
 	}
-	
-	ResetDeselectedWeaponTargets();
 }
 
 
@@ -242,17 +240,6 @@ void WeaponComplex::ValidateAllWeaponsTarget()
                 	{
                 		slot_weapon_vec[i]->GetTurrel()->ResetTarget();
                 	}
-                }
-        }
-}
-
-void WeaponComplex::ResetDeselectedWeaponTargets()
-{
-        for (unsigned int i=0; i<slot_weapon_equiped_vec.size(); i++)
-        {
-            	if (slot_weapon_equiped_vec[i]->GetSelected() == false)
-            	{
-                	slot_weapon_equiped_vec[i]->GetTurrel()->ResetTarget();
                 }
         }
 }
