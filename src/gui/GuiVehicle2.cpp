@@ -136,7 +136,15 @@ void GuiVehicle2::ButtonsAction(Player* player) const
 {
 	for (unsigned int i=0; i<button_slot_vec.size(); i++)
 	{
-       		button_slot_vec[i].second->SetSelected(button_slot_vec[i].first->GetPressed());
+		if (button_slot_vec[i].first->GetPressed() == true)
+		{
+			button_slot_vec[i].second->SelectEvent();
+		}
+		else
+		{
+			button_slot_vec[i].second->DeselectEvent();
+		}
+       		
 	}
 }
 

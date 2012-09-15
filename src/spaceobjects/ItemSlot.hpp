@@ -112,6 +112,9 @@ class ItemSlot : public BaseSlot
            	
            	bool CheckTarget(BaseGameEntity*) const;
         
+        	void SelectEvent();
+        	void DeselectEvent();
+        
         	virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);
 		virtual void ResolveData();
