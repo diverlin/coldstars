@@ -134,21 +134,9 @@ void GuiVehicle2::UpdateEquipmentIcons() const
 
 void GuiVehicle2::ButtonsAction(Player* player) const
 {
-	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
+	for (unsigned int i=0; i<button_slot_vec.size(); i++)
 	{
-		BaseButton* button = iterator->second;
-       		switch(button->GetSubTypeId())
-       		{	
-        		case ENTITY::WEAPON_SLOT1_ID: { player->GetWeaponsSelector().SetSingle(1, button->GetPressed()); break; }
-        		case ENTITY::WEAPON_SLOT2_ID: { player->GetWeaponsSelector().SetSingle(2, button->GetPressed()); break; }      		
-        		case ENTITY::WEAPON_SLOT3_ID: { player->GetWeaponsSelector().SetSingle(3, button->GetPressed()); break; }     
-          		case ENTITY::WEAPON_SLOT4_ID: { player->GetWeaponsSelector().SetSingle(4, button->GetPressed()); break; }     
-        		case ENTITY::WEAPON_SLOT5_ID: { player->GetWeaponsSelector().SetSingle(5, button->GetPressed()); break; }         		           		   	      	
-                	case ENTITY::WEAPON_SLOT6_ID: { player->GetWeaponsSelector().SetSingle(6, button->GetPressed()); break; }          		
-        		case ENTITY::WEAPON_SLOT7_ID: { player->GetWeaponsSelector().SetSingle(7, button->GetPressed()); break; }          		
-        		case ENTITY::WEAPON_SLOT8_ID: { player->GetWeaponsSelector().SetSingle(8, button->GetPressed()); break; }          		
-        		case ENTITY::WEAPON_SLOT9_ID: { player->GetWeaponsSelector().SetSingle(9, button->GetPressed()); break; }     
-		}
+       		button_slot_vec[i].second->SetSelected(button_slot_vec[i].first->GetPressed());
 	}
 }
 

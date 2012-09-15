@@ -120,7 +120,6 @@ class Player : public Base
      		~Player();
 
 		Show& GetShow() { return show; };
-		WeaponSelector& GetWeaponsSelector() { return weapons_selector; };
 		GuiManager& GetGuiManager() { return gui_manager; };
           	
 		Npc* GetNpc() const { return npc; }
@@ -159,7 +158,6 @@ class Player : public Base
      	     	Cursor cursor;
 
      	     	Show show;  
-     		WeaponSelector weapons_selector;     		     	     	
      	     	
      	     	// VISIBLE ENTITY LIST
     		std::vector<Star*>         visible_STAR_vec;

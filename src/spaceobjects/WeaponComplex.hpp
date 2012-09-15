@@ -22,7 +22,6 @@
 
 class Vehicle;
 #include "../spaceobjects/ItemSlot.hpp"
-#include "../pilots/WeaponSelector.hpp" 
 
 class WeaponComplex
 {
@@ -41,8 +40,6 @@ class WeaponComplex
                 void SetPreciseFireTarget(BaseGameEntity*, ItemSlot*);     
                        
         	void Fire(int, int, bool);
-
-        	void WeaponsControlledFromUpperLevel(const WeaponSelector&); 
         	
      		void ActivateAllWeapons();
      		void DeactivateAllWeapons();

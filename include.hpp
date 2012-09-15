@@ -41,7 +41,6 @@ class GuiKosmoport;
 class GuiMap;
 
 class Kosmoport;
-class WeaponSelector;
 
 
 #include <iostream>
