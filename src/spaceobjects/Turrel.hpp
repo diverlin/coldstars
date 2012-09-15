@@ -34,9 +34,6 @@ class Turrel
                 void SetTarget(BaseGameEntity* target) 	{ this->target = target; };
                 void SetTarget(BaseGameEntity* target, ItemSlot* subtarget) { this->target = target; this->subtarget = subtarget; };
                 
-                void SetSelectedStatus(bool selected) 	{ is_SELECTED = selected; };
-                
-                bool GetSelectedStatus() const	{ return is_SELECTED; };
                 Points& GetPoints()		{ return points; };
                 
                 BaseGameEntity* GetTarget() const { return target; };
@@ -57,9 +54,7 @@ class Turrel
                         
                 ItemSlot* slot;
                 BaseGameEntity* target;
-                ItemSlot* subtarget;
-                                
-                bool is_SELECTED;                        
+                ItemSlot* subtarget;              
                
                 Points points;         
 }; 

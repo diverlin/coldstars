@@ -501,7 +501,6 @@ bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
                		{
                			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
                			{
-               				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapons_selector);
                				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_ROCKET_vec[i]);
                			}
                			else
@@ -527,8 +526,7 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
 			cursor.SetFocusedSpaceObject(visible_CONTAINER_vec[i]);
 			            		
       			if (data_mouse.left_click == true)
-       			{
-              			npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapons_selector);                   					    
+       			{          					    
                			npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_CONTAINER_vec[i]);
       			}
        			if (data_mouse.right_click == true)
@@ -571,7 +569,6 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
                		{
                			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
                			{
-               				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapons_selector);
                				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_SATELLITE_vec[i]);
               			}
               			else
@@ -623,7 +620,6 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
 			{
                 	        if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
                 		{
-                   			npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapons_selector);
                    			npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_ASTEROID_vec[i]);
                    		}
                    		else
@@ -654,7 +650,6 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
                		{
                			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
                			{
-               				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapons_selector);
                				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_SHIP_vec[i]);
                			}
                			else
@@ -728,7 +723,6 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
                		{
                			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
                			{
-               				npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapons_selector);
                				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_SPACESTATION_vec[i]);
                			}
                			else
@@ -843,9 +837,7 @@ bool Player::IsObjectOnScreen(const vec2f& ob_center, float sizeInPixels) const
 
 
 void Player::SessionInSpace(const TurnTimer& turn_timer)
-{
-	npc->GetVehicle()->GetWeaponComplex()->WeaponsControlledFromUpperLevel(weapons_selector); 
-	
+{	
 	npc->GetStarSystem()->FindRenderVisibleEntities_c(this);
 	if (getRandInt(1,5) == 1)
 	{

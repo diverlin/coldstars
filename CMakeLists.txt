@@ -19,7 +19,6 @@ set (HEADERS
 
 	src/config/config.hpp	
 	src/common/SaveLoadManager.hpp
-	src/pilots/WeaponSelector.hpp
 	src/spaceobjects/Vehicle.hpp
 )
 
@@ -29,7 +28,6 @@ set (SOURCES
 	src/common/Logger.cpp
 	src/config/config.cpp
 	src/common/SaveLoadManager.cpp
-	src/pilots/WeaponSelector.cpp
 	src/spaceobjects/Vehicle.cpp
 	src/gui/GuiShop.cpp
 

@@ -80,21 +80,21 @@ void WeaponComplex::ReloadAllWeapons()
      	d_fire_delay = TURN_TIME/(slot_weapon_reloaded_vec.size()+1);   
 }
   
-void WeaponComplex::WeaponsControlledFromUpperLevel(const WeaponSelector& weapon_selector)
-{
-	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
-	{
-               	slot_weapon_vec[i]->GetTurrel()->SetSelectedStatus(weapon_selector.GetSingle(i+1));
-	}
+//void WeaponComplex::WeaponsControlledFromUpperLevel(const WeaponSelector& weapon_selector)
+//{
+	//for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
+	//{
+               	//slot_weapon_vec[i]->GetTurrel()->SetSelectedStatus(weapon_selector.GetSingle(i+1));
+	//}
                 
-        ResetDeselectedWeaponTargets();
-}
+        //ResetDeselectedWeaponTargets();
+//}
 
 void WeaponComplex::ActivateAllWeapons()
 {
 	for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
 	{
-               	slot_weapon_reloaded_vec[i]->GetTurrel()->SetSelectedStatus(true);
+               	slot_weapon_reloaded_vec[i]->SetSelected(true);
 	}
 }
 
@@ -102,7 +102,7 @@ void WeaponComplex::DeactivateAllWeapons()
 {
 	for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
 	{
-               	slot_weapon_reloaded_vec[i]->GetTurrel()->SetSelectedStatus(false);
+               	slot_weapon_reloaded_vec[i]->SetSelected(false);
 	}
 	
 	ResetDeselectedWeaponTargets();
@@ -114,7 +114,7 @@ void WeaponComplex::ActivateWeaponsBySubTypeId(int weapon_subtype_id)
 	{
 		if (slot_weapon_reloaded_vec[i]->GetItem()->GetSubTypeId() == weapon_subtype_id)
 		{
-               		slot_weapon_reloaded_vec[i]->GetTurrel()->SetSelectedStatus(true);		
+               		slot_weapon_reloaded_vec[i]->SetSelected(true);		
 		}
 	}
 }
@@ -126,7 +126,7 @@ void WeaponComplex::DeactivateWeaponsBySubTypeId(int weapon_subtype_id)
 	{
 		if (slot_weapon_reloaded_vec[i]->GetItem()->GetSubTypeId() == weapon_subtype_id)
 		{
-               		slot_weapon_reloaded_vec[i]->GetTurrel()->SetSelectedStatus(false);		
+               		slot_weapon_reloaded_vec[i]->SetSelected(false);		
 		}
 	}
 	
@@ -138,7 +138,7 @@ bool WeaponComplex::IsAnyWeaponSelected() const
 {
 	for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
 	{
-       		if (slot_weapon_reloaded_vec[i]->GetTurrel()->GetSelectedStatus() == true)
+       		if (slot_weapon_reloaded_vec[i]->GetSelected() == true)
        		{ 
        			return true;		
 		}
@@ -169,7 +169,7 @@ void WeaponComplex::SetTarget(BaseGameEntity* target)
         
         for (unsigned int i = 0; i < slot_weapon_equiped_vec.size(); i++)
         {
-        	if ( slot_weapon_equiped_vec[i]->GetTurrel()->GetSelectedStatus() == true )
+        	if (slot_weapon_equiped_vec[i]->GetSelected() == true )
         	{
            		if ( slot_weapon_equiped_vec[i]->GetTurrel()->GetTarget() == NULL )
            		{
@@ -186,9 +186,9 @@ void WeaponComplex::SetPreciseFireTarget(BaseGameEntity* target, ItemSlot* item_
         
         for (unsigned int i=0; i<slot_weapon_equiped_vec.size(); i++)
         {
-        	if ( slot_weapon_equiped_vec[i]->GetTurrel()->GetSelectedStatus() == true )
+        	if (slot_weapon_equiped_vec[i]->GetSelected() == true)
         	{
-           		if ( slot_weapon_equiped_vec[i]->GetTurrel()->GetTarget() == NULL )
+           		if (slot_weapon_equiped_vec[i]->GetTurrel()->GetTarget() == NULL)
            		{
          			slot_weapon_equiped_vec[i]->GetTurrel()->SetTarget(target, item_slot);
                                 slot_weapon_equiped_vec[i]->GetTurrel()->CheckTarget();                                        
@@ -248,9 +248,9 @@ void WeaponComplex::ValidateAllWeaponsTarget()
 
 void WeaponComplex::ResetDeselectedWeaponTargets()
 {
-        for (unsigned int i = 0; i < slot_weapon_equiped_vec.size(); i++)
+        for (unsigned int i=0; i<slot_weapon_equiped_vec.size(); i++)
         {
-            	if (slot_weapon_equiped_vec[i]->GetTurrel()->GetSelectedStatus() == false)
+            	if (slot_weapon_equiped_vec[i]->GetSelected() == false)
             	{
                 	slot_weapon_equiped_vec[i]->GetTurrel()->ResetTarget();
                 }
@@ -315,7 +315,7 @@ void WeaponComplex::RenderWeaponsRange()
 		glTranslatef(owner_vehicle->GetPoints().GetCenter().x, owner_vehicle->GetPoints().GetCenter().y, 0.0f);
 		for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
         	{
-         		if (slot_weapon_reloaded_vec[i]->GetTurrel()->GetSelectedStatus() == true)
+         		if (slot_weapon_reloaded_vec[i]->GetSelected() == true)
                 	{
                 		slot_weapon_reloaded_vec[i]->UpdateRange(GuiTextureObCollector::Instance().dot_red);
              			slot_weapon_reloaded_vec[i]->DrawRange();
