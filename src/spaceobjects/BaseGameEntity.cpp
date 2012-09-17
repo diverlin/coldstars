@@ -17,6 +17,7 @@
 */
 
 #include "BaseGameEntity.hpp"
+#include "../resources/MeshCollector.hpp"
 
 BaseGameEntity::BaseGameEntity():starsystem(NULL), mesh(NULL), textureOb(NULL), parent(NULL),
 				     place_type_id(NONE_ID), collision_radius(0), mass(0)
@@ -168,7 +169,7 @@ void BaseGameEntity::LoadDataUniqueBaseGameEntity(const boost::property_tree::pt
 
 void BaseGameEntity::ResolveDataUniqueBaseGameEntity()
 {
-	mesh = MeshCollector.DEFORMED_SPHERE_MESH; //data_unresolved_bge.mesh_path; 
+	mesh = MeshCollector::Instance().deformed_sphere; //data_unresolved_bge.mesh_path; 
 	textureOb = TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseGameEntity.textureOb_path);
 	
 	if (data_unresolved_BaseGameEntity.parent_id != NONE_ID)

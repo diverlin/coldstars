@@ -16,31 +16,18 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef COMMON_H
-#define COMMON_H
 
-#include <string>
-#include "myVector.hpp"
+#ifndef GLSLLOADER_H
+#define GLSLLOADER_H
 
-std::string getClassString(int); 
+#include <GL/glew.h>
 
-int returnObjectSize(int w, int h);  //size 0...9
+void compile_program(const GLchar* vertex_source, const GLchar* fragment_source, GLuint program);
 
-bool get_dPos_ToPoint(const vec2f&, const vec2f&, float, vec2f&);
-bool get_dPos_ToPoint(const vec2f&, const vec2f&, float, vec2f&, float&);
+GLuint compile_shader(const GLchar* source, GLenum shader_type);
 
-template <typename T>
-inline T getMin(T val1, T val2)
-{
-	if (val1<val2) 	return val1;
-	else		return val2;
-}
+void printProgramInfoLog(GLuint program);
 
-template <typename T>
-inline T getMin(T val1, T val2, T val3)
-{
-	int min2 = getMin(val1, val2);
-	return getMin(min2, val3);
-}
+#endif 
 
-#endif
+

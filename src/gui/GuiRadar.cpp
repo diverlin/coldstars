@@ -17,6 +17,7 @@
 */
 
 #include "GuiRadar.hpp"
+#include "../resources/GuiTextureObCollector.hpp"
 
 GuiRadar::GuiRadar()
 {		

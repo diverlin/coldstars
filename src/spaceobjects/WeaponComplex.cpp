@@ -103,7 +103,6 @@ void WeaponComplex::DeactivateAllWeapons()
 	for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
 	{
                	slot_weapon_reloaded_vec[i]->DeselectEvent();
-               	slot_weapon_reloaded_vec[i]->GetTurrel()->ResetTarget();
 	}
 }
 
@@ -126,7 +125,6 @@ void WeaponComplex::DeactivateWeaponsBySubTypeId(int weapon_subtype_id)
 		if (slot_weapon_reloaded_vec[i]->GetItem()->GetSubTypeId() == weapon_subtype_id)
 		{
                		slot_weapon_reloaded_vec[i]->DeselectEvent();	
-               		slot_weapon_reloaded_vec[i]->GetTurrel()->ResetTarget();	
 		}
 	}
 }
@@ -238,7 +236,7 @@ void WeaponComplex::ValidateAllWeaponsTarget()
                 	}
                 	else
                 	{
-                		slot_weapon_vec[i]->GetTurrel()->ResetTarget();
+                		slot_weapon_vec[i]->DeselectEvent();
                 	}
                 }
         }

@@ -17,16 +17,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "../resources/GuiTextureObCollector.hpp"
+#include "orbit.hpp"
+#include "../common/constants.hpp"
 
-Orbit::Orbit()
-{
-	it = 0;
-}
+Orbit::Orbit():it(0)
+{}
 
 Orbit::~Orbit()
 {}
  
-vec2f Orbit::GetNextTurnPosition() const 
+const vec2f& Orbit::GetNextTurnPosition() const 
 { 
         if (it + TURN_TIME < len)
         {

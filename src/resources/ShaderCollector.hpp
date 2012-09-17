@@ -16,31 +16,35 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef COMMON_H
-#define COMMON_H
 
-#include <string>
-#include "myVector.hpp"
+#ifndef SHADERCOLLECTOR_H
+#define SHADERCOLLECTOR_H
 
-std::string getClassString(int); 
+#include <GL/glew.h>
 
-int returnObjectSize(int w, int h);  //size 0...9
-
-bool get_dPos_ToPoint(const vec2f&, const vec2f&, float, vec2f&);
-bool get_dPos_ToPoint(const vec2f&, const vec2f&, float, vec2f&, float&);
-
-template <typename T>
-inline T getMin(T val1, T val2)
+class ShaderCollector
 {
-	if (val1<val2) 	return val1;
-	else		return val2;
-}
+	public:
+		static ShaderCollector& Instance();
+		
+		GLuint black2alpha;
+		GLuint shockwave;
+		GLuint volumetriclight;
+		GLuint light;
+		GLuint blur;
+		GLuint extractbright;
+		GLuint combine;
+		GLuint multitexturing;
+		GLuint blank;
+		
+	private:
+		ShaderCollector() {};
+		~ShaderCollector() {};
 
-template <typename T>
-inline T getMin(T val1, T val2, T val3)
-{
-	int min2 = getMin(val1, val2);
-	return getMin(min2, val3);
-}
+		ShaderCollector(const ShaderCollector&) = delete;
+		ShaderCollector& operator=(const ShaderCollector&) = delete;
+};
 
-#endif
+#endif 
+
+

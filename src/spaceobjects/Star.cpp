@@ -1,22 +1,30 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+	
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "../render/Glsl.hpp"
+#include "Star.hpp"
+#include "../common/constants.hpp"
+#include "../common/EntityManager.hpp"
+#include "../common/myStr.hpp"
+#include "../resources/textureManager.hpp"
+#include "../world/starsystem.hpp"
+#include "../render/Render.hpp"
+#include "../resources/ShaderCollector.hpp"
+
    
 Star::Star(int id)
 { 
@@ -62,17 +70,17 @@ void Star::UpdateInSpace(int time, bool show_effect)
     
 void Star::Render_NEW() const
 {
-        glUseProgram(ShadersPack::Instance().multitexturing);
+        glUseProgram(ShaderCollector::Instance().multitexturing);
 
         glActiveTexture(GL_TEXTURE0);                                
         glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-        glUniform1i(glGetUniformLocation(ShadersPack::Instance().multitexturing, "Texture_0"), 0);
+        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "Texture_0"), 0);
 
         glActiveTexture(GL_TEXTURE1);                                
         glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-        glUniform1i(glGetUniformLocation(ShadersPack::Instance().multitexturing, "Texture_1"), 1);
+        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "Texture_1"), 1);
         
-	glUniform2f(glGetUniformLocation(ShadersPack::Instance().multitexturing, "displ"), texture_offset1, texture_offset2);
+	glUniform2f(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "displ"), texture_offset1, texture_offset2);
 
 	renderMesh(mesh->glList, points.GetCenter3f(), angle, scale);
 

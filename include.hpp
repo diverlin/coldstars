@@ -56,7 +56,6 @@ class Kosmoport;
 
 #include "src/common/myStr.hpp"
 
-#include "src/common/common.hpp"
 
 #include "src/resources/textureOb.hpp"
 #include "src/resources/textureManager.hpp"
@@ -70,9 +69,7 @@ class Kosmoport;
 #include "src/common/Message.hpp"
 #include "src/common/MessageManager.hpp"
 
-#include "src/spaceobjects/orbit.hpp" 
 #include "src/spaceobjects/BasePlanet.hpp" 
-#include "src/spaceobjects/Asteroid.hpp"
 #include "src/items/others/Bomb.hpp"
 #include "src/spaceobjects/Container.hpp"
 #include "src/items/others/GoodsPack.hpp"
@@ -106,9 +103,6 @@ class Kosmoport;
 #include "src/effects/lazerTrace.hpp"
 
 
-#include "src/spaceobjects/Star.hpp"  
-#include "src/spaceobjects/Planet.hpp"
-
 #include "src/spaceobjects/Turrel.hpp"
 
 #include "src/spaceobjects/BaseSlot.hpp"
@@ -125,7 +119,7 @@ class Kosmoport;
 #include "src/builder/ContainerBuilder.hpp"
 
 #include "src/builder/items/other/BombBuilder.hpp"
-///
+
 
 #include "src/builder/BaseVehicleBuilder.hpp"
 #include "src/builder/ShipBuilder.hpp"
@@ -135,9 +129,7 @@ class Kosmoport;
 #include "src/builder/ItemSlotBuilder.hpp"
 #include "src/builder/VehicleSlotBuilder.hpp"
 #include "src/builder/StarSystemBuilder.hpp"
-#include "src/builder/StarBuilder.hpp"
-#include "src/builder/AsteroidBuilder.hpp"
-#include "src/builder/PlanetBuilder.hpp"
+
 #include "src/builder/GalaxyBuilder.hpp"
 #include "src/builder/PlayerBuilder.hpp"
 #include "src/builder/NpcBuilder.hpp"
@@ -150,8 +142,7 @@ class Kosmoport;
 
 #include "src/pilots/Player.hpp"
 
-#include "src/pilots/Skill.hpp"
-#include "src/pilots/Npc.hpp"           
+
 
 
 
@@ -206,17 +197,15 @@ class Kosmoport;
 
 #include "src/spaceobjects/Container.cpp"    
 #include "src/items/others/GoodsPack.cpp"   
-#include "src/spaceobjects/Star.cpp"  
-#include "src/spaceobjects/Planet.cpp"
+ 
+
 #include "src/common/Base.cpp" 
 #include "src/spaceobjects/BaseGameEntity.cpp" 
 #include "src/common/EntityManager.cpp"
 #include "src/common/Message.cpp"
 #include "src/common/MessageManager.cpp"
 
-#include "src/spaceobjects/orbit.cpp"
 #include "src/spaceobjects/BasePlanet.cpp"
-#include "src/spaceobjects/Asteroid.cpp"   
 #include "src/spaceobjects/SpaceStation.cpp" 
 #include "src/spaceobjects/Satellite.cpp" 
 #include "src/items/others/Bomb.cpp" 
@@ -257,9 +246,7 @@ class Kosmoport;
 #include "src/builder/AngarBuilder.cpp"
 #include "src/builder/StoreBuilder.cpp"
 #include "src/builder/StarSystemBuilder.cpp"
-#include "src/builder/StarBuilder.cpp"
-#include "src/builder/AsteroidBuilder.cpp"
-#include "src/builder/PlanetBuilder.cpp"
+
 #include "src/builder/GalaxyBuilder.cpp"
 #include "src/builder/PlayerBuilder.cpp"
 #include "src/builder/NpcBuilder.cpp"
@@ -301,14 +288,9 @@ class Kosmoport;
 #include "src/spaceobjects/RocketBullet.cpp"
 
 #include "src/pilots/Player.cpp"
-#include "src/pilots/Skill.cpp"
-
-#include "src/pilots/Npc.cpp"
 //
 
 #include "src/pilots/Observation.cpp" 
-
-#include "src/common/common.cpp"
 
 #include "src/render/Render.cpp"
 

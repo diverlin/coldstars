@@ -1,7 +1,7 @@
 #include "Screen.hpp"
 #include <boost/lexical_cast.hpp>
 
-#include "../render/Glsl.hpp"
+#include "../resources/ShaderCollector.hpp"
 #include "../render/Render.hpp"
 #include "../config/config.hpp"
 
@@ -38,7 +38,7 @@ void Screen::InitPostEffects(int width, int height)
 	fbo2.Create();
 	fbo3.Create();
 	
-	bloom.Create(ShadersPack::Instance().blur, ShadersPack::Instance().extractbright, ShadersPack::Instance().combine);
+	bloom.Create(ShaderCollector::Instance().blur, ShaderCollector::Instance().extractbright, ShaderCollector::Instance().combine);
 	
 	ResizePostEffects(width, height);
 }

@@ -17,7 +17,7 @@
 */
 
 #include "../config/config.hpp"
-
+#include "../resources/ShaderCollector.hpp"
 
 Player::Player(int id)
 { 
@@ -188,16 +188,16 @@ void Player::RenderInSpace_NEW()
 
 	// RENDER to FBO1, VOLUMETRIC LIGHT
 	Screen::Instance().GetFbo1().Activate(w, h);
-		glUseProgram(ShadersPack::Instance().volumetriclight);
+		glUseProgram(ShaderCollector::Instance().volumetriclight);
 			glActiveTexture(GL_TEXTURE0);                                
 			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetBloom().GetFboFinal().GetTexture());
-			glUniform1i(glGetUniformLocation(ShadersPack::Instance().volumetriclight, "FullSampler"), 0);
+			glUniform1i(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "FullSampler"), 0);
 
 			glActiveTexture(GL_TEXTURE1);                                
 			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetBloom().GetTextureBlured());
-			glUniform1i(glGetUniformLocation(ShadersPack::Instance().volumetriclight, "BlurSampler"), 1);
+			glUniform1i(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "BlurSampler"), 1);
 
-			glUniform4f(glGetUniformLocation(ShadersPack::Instance().volumetriclight, "sun_pos"), -Screen::Instance().GetBottomLeftGlobalCoord().x/w, -Screen::Instance().GetBottomLeftGlobalCoord().y/h, -100.0, 1.0);
+			glUniform4f(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "sun_pos"), -Screen::Instance().GetBottomLeftGlobalCoord().x/w, -Screen::Instance().GetBottomLeftGlobalCoord().y/h, -100.0, 1.0);
           
 			glActiveTexture(GL_TEXTURE0);
 			drawFullScreenQuad(w, h, -999.0);
@@ -287,16 +287,16 @@ void Player::RenderInSpace_NEW()
 		}
        
 
-		glUseProgram(ShadersPack::Instance().shockwave);
+		glUseProgram(ShaderCollector::Instance().shockwave);
 			glActiveTexture(GL_TEXTURE0);                                
 			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetFbo2().GetTexture());
-			glUniform1i (glGetUniformLocation(ShadersPack::Instance().shockwave, "sceneTex"), 0);
+			glUniform1i (glGetUniformLocation(ShaderCollector::Instance().shockwave, "sceneTex"), 0);
 
 			int len_effect_SHOCKWAVE_list = visible_effect_SHOCKWAVE_vec.size();
-			glUniform1i (glGetUniformLocation(ShadersPack::Instance().shockwave, "imax"),        len_effect_SHOCKWAVE_list);
-			glUniform2fv(glGetUniformLocation(ShadersPack::Instance().shockwave, "center"),      len_effect_SHOCKWAVE_list, *center_array);
-			glUniform3fv(glGetUniformLocation(ShadersPack::Instance().shockwave, "shockParams"), len_effect_SHOCKWAVE_list, *xyz_array);
-			glUniform1fv(glGetUniformLocation(ShadersPack::Instance().shockwave, "time"),        len_effect_SHOCKWAVE_list, time_array);
+			glUniform1i (glGetUniformLocation(ShaderCollector::Instance().shockwave, "imax"),        len_effect_SHOCKWAVE_list);
+			glUniform2fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "center"),      len_effect_SHOCKWAVE_list, *center_array);
+			glUniform3fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "shockParams"), len_effect_SHOCKWAVE_list, *xyz_array);
+			glUniform1fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "time"),        len_effect_SHOCKWAVE_list, time_array);
 
 			drawFullScreenQuad(w, h, -999.0);
 		glUseProgram(0);

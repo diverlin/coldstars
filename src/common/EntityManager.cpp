@@ -48,6 +48,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../builder/items/artefacts/GravityArtefactBuilder.hpp"
 #include "../builder/items/artefacts/ProtectorArtefactBuilder.hpp"
 
+#include "../builder/StarBuilder.hpp"
+#include "../builder/PlanetBuilder.hpp"
+#include "../builder/AsteroidBuilder.hpp"
+
 EntityManager& EntityManager::Instance()
 {
 	static EntityManager instance;

@@ -31,6 +31,10 @@ set (SOURCES
 	src/spaceobjects/Vehicle.cpp
 	src/gui/GuiShop.cpp
 
+	src/common/common.cpp
+	src/resources/MeshCollector.cpp
+	src/resources/ShaderCollector.cpp
+	src/resources/GlslLoader.cpp
 
 	src/ai/MacroTask.cpp
 	src/ai/MicroTask.cpp
@@ -64,7 +68,6 @@ set (SOURCES
 
 	src/render/Screen.cpp
 
-	src/render/Glsl.cpp
 	src/render/Fbo.cpp
 	src/render/Bloom.cpp
 
@@ -132,6 +135,19 @@ set (SOURCES
 	src/items/artefacts/ProtectorArtefact.cpp
 
 	src/resources/GuiTextureObCollector.cpp
+
+	src/spaceobjects/orbit.cpp
+
+	src/spaceobjects/Asteroid.cpp 
+	src/spaceobjects/Planet.cpp
+	src/spaceobjects/Star.cpp  
+
+	src/builder/StarBuilder.cpp
+	src/builder/PlanetBuilder.cpp
+	src/builder/AsteroidBuilder.cpp
+
+	src/pilots/Skill.cpp
+	src/pilots/Npc.cpp           
 
   	main.cpp
 )

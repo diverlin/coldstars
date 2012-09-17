@@ -1,22 +1,31 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+	
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "Npc.hpp"
+#include "../spaceobjects/Vehicle.hpp"
+#include "../world/starsystem.hpp"
+#include "../common/myStr.hpp"
+#include "../common/rand.hpp"
+#include "../common/EntityManager.hpp"
+#include "../common/common.hpp"
+#include "../ai/aiModel/AiModelCollector.hpp"
+#include "../render/Render.hpp"
+#include "../docking/Kosmoport.hpp"
 
 Npc::Npc(int id)
 { 
@@ -260,7 +269,7 @@ bool Npc::BuyGoods()
 	int amount_to_buy 	= GetCredits()/shop->GetPrice(subtype_id);
 	int amount_available 	= shop->GetAmount(subtype_id); 
 	
-	int amount = getMin(amount_to_hold, amount_to_buy, amount_available);
+	int amount = getMin<int>(amount_to_hold, amount_to_buy, amount_available);
 	if (amount != 0)		
 	{
 		shop->SellGoods(this, subtype_id, amount); 
