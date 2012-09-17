@@ -16,8 +16,35 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "items/artefacts/GravityArtefactBuilder.hpp"
 #include "BaseVehicleBuilder.hpp"
+
+#include "../builder/items/equipment/BakEquipmentBuilder.hpp"
+#include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
+#include "../builder/items/equipment/GrappleEquipmentBuilder.hpp"
+#include "../builder/items/equipment/LazerEquipmentBuilder.hpp"
+#include "../builder/items/equipment/ProtectorEquipmentBuilder.hpp"
+#include "../builder/items/equipment/RocketEquipmentBuilder.hpp"
+#include "../builder/items/equipment/ScanerEquipmentBuilder.hpp"
+#include "../builder/items/equipment/DroidEquipmentBuilder.hpp"
+#include "../builder/items/equipment/RadarEquipmentBuilder.hpp"
+#include "../builder/items/equipment/FreezerEquipmentBuilder.hpp"
+#include "../builder/items/equipment/EnergizerEquipmentBuilder.hpp"
+
+#include "../builder/items/modules/BakModuleBuilder.hpp"
+#include "../builder/items/modules/DriveModuleBuilder.hpp"
+#include "../builder/items/modules/GrappleModuleBuilder.hpp"
+#include "../builder/items/modules/LazerModuleBuilder.hpp"
+#include "../builder/items/modules/ProtectorModuleBuilder.hpp"
+#include "../builder/items/modules/RocketModuleBuilder.hpp"
+#include "../builder/items/modules/ScanerModuleBuilder.hpp"
+#include "../builder/items/modules/DroidModuleBuilder.hpp"
+#include "../builder/items/modules/RadarModuleBuilder.hpp"
+
+#include "../builder/items/artefacts/GravityArtefactBuilder.hpp"
+#include "../builder/items/artefacts/ProtectorArtefactBuilder.hpp"
+
+#include "../builder/items/other/BombBuilder.hpp"
+
 
 BaseVehicleBuilder& BaseVehicleBuilder::Instance()
 {	

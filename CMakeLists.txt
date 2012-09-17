@@ -32,9 +32,14 @@ set (SOURCES
 	src/gui/GuiShop.cpp
 
 	src/common/common.cpp
+	src/common/EntityManager.cpp
+
 	src/resources/MeshCollector.cpp
 	src/resources/ShaderCollector.cpp
 	src/resources/GlslLoader.cpp
+
+	src/common/Base.cpp 
+	src/spaceobjects/BaseGameEntity.cpp 
 
 	src/ai/MacroTask.cpp
 	src/ai/MicroTask.cpp
@@ -71,6 +76,8 @@ set (SOURCES
 	src/render/Fbo.cpp
 	src/render/Bloom.cpp
 
+
+	src/spaceobjects/BasePlanet.cpp
 
 	src/effects/particlesystem/Particle.cpp
 	src/effects/particlesystem/BaseParticleSystem.cpp
@@ -145,6 +152,13 @@ set (SOURCES
 	src/builder/StarBuilder.cpp
 	src/builder/PlanetBuilder.cpp
 	src/builder/AsteroidBuilder.cpp
+
+	src/builder/GalaxyBuilder.cpp
+	src/builder/PlayerBuilder.cpp
+	src/builder/NpcBuilder.cpp
+	src/builder/GovermentBuilder.cpp
+	src/builder/ShopBuilder.cpp
+	src/builder/KosmoportBuilder.cpp
 
 	src/pilots/Skill.cpp
 	src/pilots/Npc.cpp           

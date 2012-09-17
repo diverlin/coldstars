@@ -18,6 +18,14 @@
 
 #include "BaseGameEntity.hpp"
 #include "../resources/MeshCollector.hpp"
+#include "../resources/textureManager.hpp"
+#include "../common/constants.hpp"
+#include "../common/rand.hpp"
+#include "../common/common.hpp"
+#include "../common/myStr.hpp"
+#include "../common/EntityManager.hpp"
+#include "../world/starsystem.hpp"
+#include "../render/Render.hpp"
 
 BaseGameEntity::BaseGameEntity():starsystem(NULL), mesh(NULL), textureOb(NULL), parent(NULL),
 				     place_type_id(NONE_ID), collision_radius(0), mass(0)

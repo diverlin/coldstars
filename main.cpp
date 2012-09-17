@@ -19,6 +19,9 @@
 #include "include.hpp"
 #include "pureTest.cpp"
 
+#include "src/builder/GalaxyBuilder.hpp"
+#include "src/builder/PlayerBuilder.hpp"
+
 int main()
 {         
         //runPureTest();

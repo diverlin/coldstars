@@ -66,10 +66,6 @@ class Kosmoport;
 
 #include "src/gui/UserInput.hpp"
 
-#include "src/common/Message.hpp"
-#include "src/common/MessageManager.hpp"
-
-#include "src/spaceobjects/BasePlanet.hpp" 
 #include "src/items/others/Bomb.hpp"
 #include "src/spaceobjects/Container.hpp"
 #include "src/items/others/GoodsPack.hpp"
@@ -116,29 +112,6 @@ class Kosmoport;
 #include "src/spaceobjects/SpaceStation.hpp"
 #include "src/spaceobjects/Satellite.hpp"
 #include "src/spaceobjects/Ship.hpp"
-#include "src/builder/ContainerBuilder.hpp"
-
-#include "src/builder/items/other/BombBuilder.hpp"
-
-
-#include "src/builder/BaseVehicleBuilder.hpp"
-#include "src/builder/ShipBuilder.hpp"
-#include "src/builder/RocketBulletBuilder.hpp"
-#include "src/builder/SpaceStationBuilder.hpp"
-#include "src/builder/SatelliteBuilder.hpp"
-#include "src/builder/ItemSlotBuilder.hpp"
-#include "src/builder/VehicleSlotBuilder.hpp"
-#include "src/builder/StarSystemBuilder.hpp"
-
-#include "src/builder/GalaxyBuilder.hpp"
-#include "src/builder/PlayerBuilder.hpp"
-#include "src/builder/NpcBuilder.hpp"
-#include "src/builder/AngarBuilder.hpp"
-#include "src/builder/ShopBuilder.hpp"
-#include "src/builder/StoreBuilder.hpp"
-#include "src/builder/GovermentBuilder.hpp"
-#include "src/builder/KosmoportBuilder.hpp"
-
 
 #include "src/pilots/Player.hpp"
 
@@ -199,13 +172,6 @@ class Kosmoport;
 #include "src/items/others/GoodsPack.cpp"   
  
 
-#include "src/common/Base.cpp" 
-#include "src/spaceobjects/BaseGameEntity.cpp" 
-#include "src/common/EntityManager.cpp"
-#include "src/common/Message.cpp"
-#include "src/common/MessageManager.cpp"
-
-#include "src/spaceobjects/BasePlanet.cpp"
 #include "src/spaceobjects/SpaceStation.cpp" 
 #include "src/spaceobjects/Satellite.cpp" 
 #include "src/items/others/Bomb.cpp" 
@@ -246,13 +212,6 @@ class Kosmoport;
 #include "src/builder/AngarBuilder.cpp"
 #include "src/builder/StoreBuilder.cpp"
 #include "src/builder/StarSystemBuilder.cpp"
-
-#include "src/builder/GalaxyBuilder.cpp"
-#include "src/builder/PlayerBuilder.cpp"
-#include "src/builder/NpcBuilder.cpp"
-#include "src/builder/GovermentBuilder.cpp"
-#include "src/builder/ShopBuilder.cpp"
-#include "src/builder/KosmoportBuilder.cpp"
 
 #include "src/gui/GuiSkill.cpp"
 #include "src/gui/GuiMap.cpp"
