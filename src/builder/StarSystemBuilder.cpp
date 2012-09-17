@@ -21,6 +21,18 @@
 #include "StarSystemBuilder.hpp"
 #include "StarBuilder.hpp"
 #include "PlanetBuilder.hpp"
+#include "SpaceStationBuilder.hpp"
+#include "SatelliteBuilder.hpp"
+#include "ShipBuilder.hpp"
+
+#include "../common/id.hpp"
+#include "../common/EntityManager.hpp"
+#include "../common/Logger.hpp"
+#include "../common/rand.hpp"
+
+#include "../world/starsystem.hpp"
+
+#include "../config/config.hpp"
 
 StarSystemBuilder& StarSystemBuilder::Instance()
 {

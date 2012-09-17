@@ -152,6 +152,18 @@ set (SOURCES
 	src/builder/StarBuilder.cpp
 	src/builder/PlanetBuilder.cpp
 	src/builder/AsteroidBuilder.cpp
+	src/builder/ContainerBuilder.cpp
+	src/builder/BaseVehicleBuilder.cpp
+	src/builder/ShipBuilder.cpp
+	src/builder/RocketBulletBuilder.cpp
+	src/builder/SpaceStationBuilder.cpp
+	src/builder/SatelliteBuilder.cpp
+
+	src/builder/ItemSlotBuilder.cpp
+	src/builder/VehicleSlotBuilder.cpp
+	src/builder/AngarBuilder.cpp
+	src/builder/StoreBuilder.cpp
+	src/builder/StarSystemBuilder.cpp
 
 	src/builder/GalaxyBuilder.cpp
 	src/builder/PlayerBuilder.cpp

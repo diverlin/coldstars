@@ -20,9 +20,12 @@
 #ifndef BASESLOT_H
 #define BASESLOT_H
 
+#include "../common/Base.hpp"
 #include "../common/constants.hpp"
 #include "../common/rect.hpp"
 class Vehicle;
+#include "../resources/textureManager.hpp"
+
 
 struct UnresolvedDataUniqueBaseSlot
 {
@@ -48,7 +51,7 @@ class BaseSlot : public Base
 		BaseSlot();
 		~BaseSlot();
                 
-		void SetTextureOb(TextureOb* textureOb)       	{ this->textureOb = textureOb; };
+		void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
 		void SetOwner(Base* owner) { this->owner = owner; };
 		void SelectEvent() { selected = true; };
 		void DeselectEvent() { selected = false; };

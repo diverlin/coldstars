@@ -200,18 +200,7 @@ class Kosmoport;
 #include "src/gui/GuiManager.cpp"
 #include "src/gui/GuiVehicle.cpp"
 #include "src/gui/GuiVehicle2.cpp"
-#include "src/builder/ContainerBuilder.cpp"
-#include "src/builder/BaseVehicleBuilder.cpp"
-#include "src/builder/ShipBuilder.cpp"
-#include "src/builder/RocketBulletBuilder.cpp"
-#include "src/builder/SpaceStationBuilder.cpp"
-#include "src/builder/SatelliteBuilder.cpp"
 
-#include "src/builder/ItemSlotBuilder.cpp"
-#include "src/builder/VehicleSlotBuilder.cpp"
-#include "src/builder/AngarBuilder.cpp"
-#include "src/builder/StoreBuilder.cpp"
-#include "src/builder/StarSystemBuilder.cpp"
 
 #include "src/gui/GuiSkill.cpp"
 #include "src/gui/GuiMap.cpp"

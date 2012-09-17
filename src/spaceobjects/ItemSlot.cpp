@@ -18,6 +18,8 @@
 
 #include "ItemSlot.hpp"
 
+#include "../builder/ContainerBuilder.hpp"
+
 ItemSlot::ItemSlot(int id)
 {
 	/* 

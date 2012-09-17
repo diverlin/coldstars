@@ -19,6 +19,8 @@
 #ifndef BASEVEHICLEBUILDER_H
 #define BASEVEHICLEBUILDER_H
 
+#include "../spaceobjects/Vehicle.hpp"
+
 class BaseVehicleBuilder
 {
 	public:
