@@ -17,6 +17,10 @@
 */
 
 #include "../ai/aiModel/AiModelCollector.hpp"
+#include "../ai/aiModel/AiModelRanger.hpp"
+#include "../ai/aiModel/AiModelConqueror.hpp"
+#include "../ai/aiModel/AiModelTrader.hpp"
+
 #include "../ai/scenarios/ScenarioCollector.hpp"
 
 #include "../ai/scenarios/macro/MacroScenarioGoodsTrading.hpp"

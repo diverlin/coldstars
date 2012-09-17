@@ -16,7 +16,9 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "BasePlanet.hpp"
 #include "../resources/ShaderCollector.hpp"
+#include "../render/Render.hpp"
 
 BasePlanet::BasePlanet()
 {

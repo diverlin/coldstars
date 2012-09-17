@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "EntityManager.hpp"
 #include "../common/Logger.hpp"
 #include "../common/SaveLoadManager.hpp"
+#include "../common/myStr.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -48,9 +49,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../builder/items/artefacts/GravityArtefactBuilder.hpp"
 #include "../builder/items/artefacts/ProtectorArtefactBuilder.hpp"
 
+#include "../builder/items/other/BombBuilder.hpp"
+#include "../builder/ItemSlotBuilder.hpp"
+#include "../builder/VehicleSlotBuilder.hpp"
+
+#include "../builder/GalaxyBuilder.hpp"
+#include "../builder/PlayerBuilder.hpp"
+#include "../builder/StarSystemBuilder.hpp"
 #include "../builder/StarBuilder.hpp"
 #include "../builder/PlanetBuilder.hpp"
 #include "../builder/AsteroidBuilder.hpp"
+#include "../builder/ContainerBuilder.hpp"
+#include "../builder/NpcBuilder.hpp"
+#include "../builder/ShipBuilder.hpp"
+#include "../builder/SpaceStationBuilder.hpp"
+#include "../builder/SatelliteBuilder.hpp"
+#include "../builder/RocketBulletBuilder.hpp"
+
+#include "../builder/KosmoportBuilder.hpp"
+#include "../builder/AngarBuilder.hpp"
+#include "../builder/StoreBuilder.hpp"
+#include "../builder/ShopBuilder.hpp"
+#include "../builder/GovermentBuilder.hpp"
 
 EntityManager& EntityManager::Instance()
 {
