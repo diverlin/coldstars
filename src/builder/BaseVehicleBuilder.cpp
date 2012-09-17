@@ -45,6 +45,9 @@
 
 #include "../builder/items/other/BombBuilder.hpp"
 
+#include "../builder/ItemSlotBuilder.hpp"
+
+#include "../common/rand.hpp"
 
 BaseVehicleBuilder& BaseVehicleBuilder::Instance()
 {	

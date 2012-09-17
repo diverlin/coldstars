@@ -16,11 +16,11 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #ifndef SHIPBUILDER_H
 #define SHIPBUILDER_H
 
 #include "BaseVehicleBuilder.hpp"
+#include "../spaceobjects/Ship.hpp"
 
 class ShipBuilder : public BaseVehicleBuilder
 {

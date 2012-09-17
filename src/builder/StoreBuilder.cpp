@@ -1,22 +1,42 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+	
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "StoreBuilder.hpp"
+
+#include "../common/id.hpp"
+#include "../common/EntityManager.hpp"
+#include "../common/Logger.hpp"
+#include "../common/rand.hpp"
+#include "../resources/textureManager.hpp"
+
+#include "../builder/ItemSlotBuilder.hpp"
+#include "../builder/items/equipment/BakEquipmentBuilder.hpp"
+#include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
+#include "../builder/items/equipment/GrappleEquipmentBuilder.hpp"
+#include "../builder/items/equipment/LazerEquipmentBuilder.hpp"
+#include "../builder/items/equipment/ProtectorEquipmentBuilder.hpp"
+#include "../builder/items/equipment/RocketEquipmentBuilder.hpp"
+#include "../builder/items/equipment/ScanerEquipmentBuilder.hpp"
+#include "../builder/items/equipment/DroidEquipmentBuilder.hpp"
+#include "../builder/items/equipment/RadarEquipmentBuilder.hpp"
+#include "../builder/items/equipment/FreezerEquipmentBuilder.hpp"
+#include "../builder/items/equipment/EnergizerEquipmentBuilder.hpp"
+
 
 StoreBuilder& StoreBuilder::Instance()
 {
