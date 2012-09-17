@@ -16,6 +16,15 @@
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "Planet.hpp"
+#include "../common/constants.hpp"
+#include "../common/EntityManager.hpp"
+#include "../common/myStr.hpp"
+#include "../resources/textureManager.hpp"
+#include "../world/starsystem.hpp"
+#include "../render/Render.hpp"
+#include "../resources/ShaderCollector.hpp"
+#include "../docking/Kosmoport.hpp"
 
 Planet::Planet(int id)
 {    
@@ -78,15 +87,15 @@ void Planet::PostDeathUniqueEvent(bool)
 				 		
 void Planet::RenderAtmosphere_NEW(const vec2f& scroll_coords) const
 {     	
-     	glUseProgram(ShadersPack::Instance().light);
+     	glUseProgram(ShaderCollector::Instance().light);
 
-     	glUniform4f(glGetUniformLocation(ShadersPack::Instance().light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
-     	glUniform4f(glGetUniformLocation(ShadersPack::Instance().light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
+     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
+     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
 
      	glEnable(GL_BLEND);
      		glActiveTexture(GL_TEXTURE0);                                
      		glBindTexture(GL_TEXTURE_2D, textureOb_atmosphere->texture);
-     		glUniform1i(glGetUniformLocation(ShadersPack::Instance().light, "Texture_0"), 0);
+     		glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
 
 		renderMesh(mesh->glList, points.GetCenter3f(), angle_atmosphere, scale*1.05f);
 	glDisable(GL_BLEND);

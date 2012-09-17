@@ -32,8 +32,8 @@ class Orbit
 		void SetIt(int it) { this->it = it; };
 
 		int GetIt() const { return it; };
-		vec2f GetPosition() const { return coords_vec[it]; };
-		vec2f GetNextTurnPosition() const; 
+		const vec2f& GetPosition() const { return coords_vec[it]; };
+		const vec2f& GetNextTurnPosition() const; 
 
 		void CalcPath(float, float, float, float, bool);
 		void CalcPath(float, float, bool);

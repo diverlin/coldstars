@@ -1,21 +1,22 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+	
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "../resources/ShaderCollector.hpp"
 
 BasePlanet::BasePlanet()
 {
@@ -61,14 +62,14 @@ void BasePlanet::UpdatePosition()
 				 		
 void BasePlanet::Render_NEW(const vec2f& scroll_coords) const
 {     	
-     	glUseProgram(ShadersPack::Instance().light);
+     	glUseProgram(ShaderCollector::Instance().light);
 
-     	glUniform4f(glGetUniformLocation(ShadersPack::Instance().light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
-     	glUniform4f(glGetUniformLocation(ShadersPack::Instance().light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
+     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
+     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
 
      	glActiveTexture(GL_TEXTURE0);
      	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-     	glUniform1i(glGetUniformLocation(ShadersPack::Instance().light, "Texture_0"), 0);
+     	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
       
 	renderMesh(mesh->glList, points.GetCenter3f(), angle, scale);
 	

@@ -20,6 +20,7 @@
 #define PATHVISUAL_H
 
 #include <SFML/Graphics.hpp>
+#include "../common/myVector.hpp"
 
 
 class PathVisual
