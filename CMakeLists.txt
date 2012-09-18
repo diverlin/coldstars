@@ -250,6 +250,7 @@ set (SOURCES
 	src/gui/GuiVehicle.cpp
 	src/gui/GuiVehicle2.cpp
 	src/gui/GuiMap.cpp
+	src/gui/Cursor.cpp   
 
   	main.cpp
 )

@@ -17,8 +17,17 @@
 */
 
 #include "Cursor.hpp"
-
+#include "../render/Screen.hpp"
 #include "../builder/ItemSlotBuilder.hpp"
+
+#include "../spaceobjects/RocketBullet.hpp"
+#include "../spaceobjects/Satellite.hpp"
+#include "../spaceobjects/Ship.hpp"
+#include "../spaceobjects/SpaceStation.hpp"
+#include "../spaceobjects/Asteroid.hpp"
+#include "../spaceobjects/Planet.hpp"
+#include "../spaceobjects/Star.hpp"
+#include "../spaceobjects/BlackHole.hpp"
 
 Cursor::Cursor():focused_space_ob(NULL)
 {
