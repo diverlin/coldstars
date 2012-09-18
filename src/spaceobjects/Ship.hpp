@@ -20,6 +20,7 @@
 #ifndef SHIP_H
 #define SHIP_H
 
+#include "Vehicle.hpp"
 
 class Ship : public Vehicle
 {   

@@ -19,6 +19,8 @@
 #include "include.hpp"
 #include "pureTest.cpp"
 
+#include "src/resources/init.hpp"
+
 #include "src/builder/GalaxyBuilder.hpp"
 #include "src/builder/PlayerBuilder.hpp"
 

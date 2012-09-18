@@ -16,6 +16,10 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "init.hpp"
+#include "resources.hpp"
+#include "textureManager.hpp"
+
 #include "../ai/aiModel/AiModelCollector.hpp"
 #include "../ai/aiModel/AiModelRanger.hpp"
 #include "../ai/aiModel/AiModelConqueror.hpp"

@@ -20,6 +20,8 @@
 #ifndef RESOURCES_H
 #define RESOURCES_H
 
+#include <string>
+
 void loadGameData();
 
 void load3DModels();

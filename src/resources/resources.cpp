@@ -18,9 +18,15 @@
 
 #include "resources.hpp"
 #include "../common/constants.hpp"
+#include "../config/config.hpp"
 #include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
 #include "ShaderCollector.hpp"
 #include "GlslLoader.hpp"
+#include "../render/Screen.hpp"
+#include "MeshCollector.hpp"
+#include "objLoader.hpp"
+#include "textureManager.hpp"
+#include "GuiTextureObCollector.hpp"
 
 void loadGameData()
 {    	
