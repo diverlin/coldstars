@@ -23,6 +23,8 @@
 
 #include "src/builder/GalaxyBuilder.hpp"
 #include "src/builder/PlayerBuilder.hpp"
+#include "src/config/config.hpp"
+#include "src/common/SaveLoadManager.hpp"
 
 int main()
 {         

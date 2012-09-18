@@ -112,7 +112,3 @@ class Kosmoport;
 #include "src/gui/GuiKosmoport.cpp"
 #include "src/gui/GuiManager.cpp"
 
-
-
-
-#include "src/gui/UserInput.cpp"
