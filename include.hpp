@@ -109,10 +109,6 @@ class Kosmoport;
 
 
 //////////////////////////////////////
-#include "src/gui/BaseGui.cpp"
-#include "src/gui/BaseButton.cpp"
-#include "src/gui/ButtonTrigger.cpp"
-#include "src/gui/ButtonSingle.cpp"
 #include "src/gui/GuiRadar.cpp"
 #include "src/gui/GuiSpace.cpp"
 #include "src/gui/GuiAngar.cpp"

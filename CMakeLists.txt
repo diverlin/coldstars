@@ -238,6 +238,11 @@ set (SOURCES
 	src/effects/Shield.cpp
 	src/effects/ShockWaveEffect.cpp
 
+	src/gui/BaseGui.cpp
+	src/gui/BaseButton.cpp
+	src/gui/ButtonTrigger.cpp
+	src/gui/ButtonSingle.cpp
+
   	main.cpp
 )
 
