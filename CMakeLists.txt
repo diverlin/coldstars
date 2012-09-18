@@ -195,6 +195,15 @@ set (SOURCES
 	src/parts/DriveComplex.cpp
 	src/parts/Turrel.cpp
 
+	src/docking/Room.cpp
+	src/docking/Angar.cpp
+	src/docking/Store.cpp
+	src/docking/Shop.cpp
+	src/docking/Goverment.cpp
+	src/docking/BaseLand.cpp
+	src/docking/Kosmoport.cpp
+	src/docking/NatureLand.cpp
+
   	main.cpp
 )
 
