@@ -19,6 +19,7 @@
 #include "../config/config.hpp"
 
 #include "../slots/VehicleSlot.hpp"
+#include "../resources/GuiTextureObCollector.hpp"
 
 GuiAngar::GuiAngar()
 {	

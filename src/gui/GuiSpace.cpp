@@ -17,8 +17,13 @@
 */
 
 #include "GuiSpace.hpp"
+#include "ButtonTrigger.hpp"
+#include "ButtonSingle.hpp"
 #include "../common/SaveLoadManager.hpp"
+#include "../common/myStr.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
+#include "../render/Screen.hpp"
+#include "../render/Render.hpp"
 
 GuiSpace::GuiSpace()
 {   	
