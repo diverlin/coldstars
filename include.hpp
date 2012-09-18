@@ -94,7 +94,7 @@ class Kosmoport;
 
 #include "src/spaceobjects/BaseSlot.hpp"
 #include "src/docking/VehicleSlot.hpp"
-//#include "src/spaceobjects/ItemSlot.hpp"
+
 #include "src/spaceobjects/DriveComplex.hpp"
 #include "src/spaceobjects/WeaponComplex.hpp"
 #include "src/spaceobjects/ProtectionComplex.hpp"
