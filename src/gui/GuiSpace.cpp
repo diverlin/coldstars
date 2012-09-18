@@ -18,6 +18,7 @@
 
 #include "GuiSpace.hpp"
 #include "../common/SaveLoadManager.hpp"
+#include "../resources/GuiTextureObCollector.hpp"
 
 GuiSpace::GuiSpace()
 {   	

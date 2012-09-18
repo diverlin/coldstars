@@ -23,8 +23,9 @@
 
 #include <map>
 
-#include "../gui/BaseButton.hpp"
-class Player; class MouseData; //#include "../pilots/Player.hpp"
+#include "BaseButton.hpp"
+#include "MouseData.hpp"
+class Player; //#include "../pilots/Player.hpp"
 
 
 class BaseGui
