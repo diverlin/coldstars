@@ -18,6 +18,9 @@
 
 #include "GuiRadar.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
+#include "../render/Screen.hpp"
+#include "../render/Render.hpp"
+#include "../pilots/Player.hpp"
 
 GuiRadar::GuiRadar()
 {		
