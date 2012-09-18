@@ -16,9 +16,10 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "../gui/UserInput.hpp"
-#include "../common/SaveLoadManager.hpp"
+#include "UserInput.hpp"
 #include "BaseButton.hpp"
+#include "../common/SaveLoadManager.hpp"
+#include "../config/config.hpp"
 
 UserInput& UserInput::Instance()
 {

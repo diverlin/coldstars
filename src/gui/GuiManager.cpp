@@ -19,6 +19,7 @@
 #include "GuiManager.hpp"
 #include "../slots/ItemSlot.hpp"
 #include "../docking/Kosmoport.hpp"
+#include "../world/starsystem.hpp"
 
 GuiManager::GuiManager()
 {
