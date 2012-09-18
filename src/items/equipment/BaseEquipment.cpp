@@ -19,7 +19,7 @@
 #include "BaseEquipment.hpp"
 #include "../../common/constants.hpp"
 #include "../../common/myStr.hpp"
-#include "../../spaceobjects/ItemSlot.hpp"
+#include "../../vehicleparts/ItemSlot.hpp"
 #include "../../render/Render.hpp"
 #include "../../resources/GuiTextureObCollector.hpp"
 

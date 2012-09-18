@@ -185,6 +185,8 @@ set (SOURCES
 	src/pilots/Skill.cpp
 	src/pilots/Npc.cpp           
 
+	src/vehicleparts/ItemSlot.cpp
+
   	main.cpp
 )
 

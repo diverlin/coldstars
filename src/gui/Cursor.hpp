@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef CURSOR_H
 #define CURSOR_H
 
-#include "../spaceobjects/ItemSlot.hpp"
+#include "../vehicleparts/ItemSlot.hpp"
 #include "../gui/MouseData.hpp"
 
 class Cursor

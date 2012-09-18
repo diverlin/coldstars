@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../../resources/textureManager.hpp"
 #include "../../items/modules/LazerModule.hpp"
 #include "../../effects/lazerTrace.hpp"
-#include "../../spaceobjects/ItemSlot.hpp"
+#include "../../vehicleparts/ItemSlot.hpp"
 #include "../../spaceobjects/Vehicle.hpp"
 #include "../../world/starsystem.hpp"
 

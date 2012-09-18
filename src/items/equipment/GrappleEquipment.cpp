@@ -20,7 +20,7 @@
 #include "../../common/constants.hpp"
 #include "../../common/myStr.hpp"
 #include "../../common/Logger.hpp"
-#include "../../spaceobjects/ItemSlot.hpp"
+#include "../../vehicleparts/ItemSlot.hpp"
 #include "../../spaceobjects/Vehicle.hpp"
 #include "../../resources/GuiTextureObCollector.hpp"
 #include "../../render/Render.hpp"
