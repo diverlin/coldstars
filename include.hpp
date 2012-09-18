@@ -109,12 +109,6 @@ class Kosmoport;
 
 
 //////////////////////////////////////
-
-
-#include "src/world/garbageEffects.cpp"  
-#include "src/world/GarbageEntities.cpp"  
-
-
 #include "src/gui/BaseGui.cpp"
 #include "src/gui/BaseButton.cpp"
 #include "src/gui/ButtonTrigger.cpp"
@@ -131,11 +125,3 @@ class Kosmoport;
 #include "src/gui/GuiMap.cpp"
 #include "src/gui/Cursor.cpp"   
 #include "src/gui/UserInput.cpp"
-
-#include "src/effects/BaseBackGroundEffect.cpp"
-#include "src/effects/DistantNebulaEffect.cpp"
-#include "src/effects/DistantStarEffect.cpp"
-#include "src/effects/lazerTrace.cpp"
-#include "src/effects/Shield.cpp"
-#include "src/effects/ShockWaveEffect.cpp"
-
