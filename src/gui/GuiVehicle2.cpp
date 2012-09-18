@@ -17,6 +17,9 @@
 */
 
 #include "GuiVehicle2.hpp"
+#include "ButtonTrigger.hpp"
+#include "../common/myStr.hpp"
+#include "../resources/GuiTextureObCollector.hpp"
 
 GuiVehicle2::GuiVehicle2()
 {

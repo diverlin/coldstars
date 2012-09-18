@@ -16,10 +16,10 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #ifndef GUIVEHICLE2_H
 #define GUIVEHICLE2_H
 
+#include "BaseGui.hpp"
 #include "../docking/Store.hpp"
 #include "GuiPair.hpp"
 
