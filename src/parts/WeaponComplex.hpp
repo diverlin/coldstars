@@ -21,7 +21,7 @@
 #define WEAPONCOMPLEX_H
 
 class Vehicle;
-#include "../vehicleparts/ItemSlot.hpp"
+#include "../slots/ItemSlot.hpp"
 
 class WeaponComplex
 {
