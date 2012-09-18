@@ -90,15 +90,6 @@ class Kosmoport;
 #include "src/effects/lazerTrace.hpp"
 
 
-#include "src/parts/Turrel.hpp"
-
-#include "src/slots/BaseSlot.hpp"
-#include "src/slots/VehicleSlot.hpp"
-
-#include "src/parts/DriveComplex.hpp"
-#include "src/parts/WeaponComplex.hpp"
-#include "src/parts/ProtectionComplex.hpp"
-
 #include "src/spaceobjects/RocketBullet.hpp"
 
 #include "src/pilots/Player.hpp"
@@ -160,7 +151,6 @@ class Kosmoport;
 #include "src/items/others/Bomb.cpp" 
 #include "src/spaceobjects/BlackHole.cpp"
 
-#include "src/slots/VehicleSlot.cpp"
 #include "src/docking/Room.cpp"
 #include "src/docking/Angar.cpp"
 #include "src/docking/Store.cpp"
@@ -195,14 +185,6 @@ class Kosmoport;
 
 #include "src/common/rect.cpp"
 #include "src/common/points.cpp"
-
-#include "src/slots/BaseSlot.cpp"
-
-#include "src/parts/WeaponComplex.cpp"
-#include "src/parts/ProtectionComplex.cpp"
-
-#include "src/parts/DriveComplex.cpp"
-#include "src/parts/Turrel.cpp"
 
 
 #include "src/effects/BaseBackGroundEffect.cpp"

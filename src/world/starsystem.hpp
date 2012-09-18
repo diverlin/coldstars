@@ -17,8 +17,8 @@
 	 */
 
 
-#ifndef STARSYSTEM_H
-#define STARSYSTEM_H
+#ifndef STARSYSTEM_HPP
+#define STARSYSTEM_HPP
 
 #include <vector>
 //#include "../spaceobjects/BaseGameEntity.hpp"
@@ -192,13 +192,6 @@ class StarSystem : public BaseGameEntity
 		friend class Observation;
 		friend class Player;
 };
-
-template <typename AGRESSOR, typename VICTIM>
-bool checkCollision(AGRESSOR*,  VICTIM*, bool);
-
-bool collisionBetweenCenters(const Points& points1, const Points& points2, float collision_radius);
-bool collisionBetweenCenters(const Points& points1, const vec2f& point2, float collision_radius);
-bool collisionBetweenCenters(const Points& points1, float center2_x, float center2_y, float collision_radius);
 
 #endif 
 

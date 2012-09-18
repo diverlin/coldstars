@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Vehicle;
 #include "../effects/Shield.hpp"
+#include "../slots/ItemSlot.hpp"
 
 class ProtectionComplex
 {
