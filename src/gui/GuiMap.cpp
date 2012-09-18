@@ -17,7 +17,15 @@
 */
 
 #include "GuiMap.hpp"
+#include "MouseData.hpp"
 #include "../config/config.hpp"
+#include "../common/constants.hpp"
+#include "../common/myStr.hpp"
+#include "../resources/GuiTextureObCollector.hpp"
+#include "../pilots/Player.hpp"
+#include "../world/starsystem.hpp"
+#include "../world/galaxy.hpp"
+#include "../render/Render.hpp"
 
 GuiMap::GuiMap()
 { 

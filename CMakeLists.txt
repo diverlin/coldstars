@@ -249,6 +249,7 @@ set (SOURCES
 	src/gui/GuiStore.cpp
 	src/gui/GuiVehicle.cpp
 	src/gui/GuiVehicle2.cpp
+	src/gui/GuiMap.cpp
 
   	main.cpp
 )
