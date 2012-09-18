@@ -16,7 +16,11 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
+#include "GuiSkill.hpp"
+#include "../resources/GuiTextureObCollector.hpp"
+#include "../common/constants.hpp"
+#include "../render/Render.hpp"
+#include "ButtonSingle.hpp"
 
 GuiSkill::GuiSkill()
 {

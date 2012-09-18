@@ -242,6 +242,7 @@ set (SOURCES
 	src/gui/BaseButton.cpp
 	src/gui/ButtonTrigger.cpp
 	src/gui/ButtonSingle.cpp
+	src/gui/GuiSkill.cpp
 
   	main.cpp
 )

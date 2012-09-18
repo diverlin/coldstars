@@ -20,6 +20,7 @@
 #ifndef GUISKILL_H
 #define GUISKILL_H
 
+#include "BaseGui.hpp"
 #include "../pilots/Skill.hpp"
 
 class GuiSkill : public BaseGui
