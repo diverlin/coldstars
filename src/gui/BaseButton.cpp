@@ -18,6 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 #include "BaseButton.hpp"
+#include "../common/constants.hpp"
 #include "../render/Render.hpp"
 
 BaseButton::BaseButton(TextureOb* textureOb, int subtype_id, const std::string& info_str)
