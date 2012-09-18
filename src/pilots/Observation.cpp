@@ -19,6 +19,8 @@
 #include "Observation.hpp"
 #include "../world/galaxy.hpp"
 #include "../common/rand.hpp"
+#include "../pilots/Npc.hpp"
+#include "../world/starsystem.hpp"
 
 Observation::Observation():npc_owner(NULL)
 {}

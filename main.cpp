@@ -16,7 +16,6 @@
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "include.hpp"
 #include "pureTest.cpp"
 
 #include "src/resources/init.hpp"
@@ -25,6 +24,9 @@
 #include "src/builder/PlayerBuilder.hpp"
 #include "src/config/config.hpp"
 #include "src/common/SaveLoadManager.hpp"
+
+#include "src/render/Screen.hpp"
+#include "src/gui/UserInput.hpp"
 
 int main()
 {         

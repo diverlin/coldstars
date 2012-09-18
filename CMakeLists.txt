@@ -15,11 +15,7 @@ set (LIBRARIES
 add_definitions (-Wall -pedantic -std=c++0x -std=gnu++0x -pedantic-errors -Wextra -w -Waddress -Wc++0x-compat)
 
 set (HEADERS
-	include.hpp
 
-	src/config/config.hpp	
-	src/common/SaveLoadManager.hpp
-	src/spaceobjects/Vehicle.hpp
 )
 
 

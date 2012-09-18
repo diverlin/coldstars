@@ -17,6 +17,7 @@
 */
 
 #include "galaxy.hpp"
+#include "starsystem.hpp"
 #include "../common/constants.hpp"
 #include "../common/EntityManager.hpp"
 #include "../common/rand.hpp"
