@@ -24,7 +24,7 @@
 #include "GlslLoader.hpp"
 #include "../render/Screen.hpp"
 #include "MeshCollector.hpp"
-#include "objLoader.hpp"
+#include "ObjMeshInstance.hpp"
 #include "textureManager.hpp"
 #include "GuiTextureObCollector.hpp"
 

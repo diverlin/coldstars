@@ -150,8 +150,6 @@ set (SOURCES
 
 	src/resources/GuiTextureObCollector.cpp
 
-	src/spaceobjects/orbit.cpp
-
 	src/spaceobjects/Asteroid.cpp 
 	src/spaceobjects/Planet.cpp
 	src/spaceobjects/Star.cpp  
@@ -185,7 +183,8 @@ set (SOURCES
 	src/pilots/Skill.cpp
 	src/pilots/Npc.cpp           
 
-	src/vehicleparts/ItemSlot.cpp
+	src/parts/ItemSlot.cpp
+	src/parts/orbit.cpp
 
   	main.cpp
 )
