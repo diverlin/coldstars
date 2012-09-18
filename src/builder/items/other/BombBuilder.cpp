@@ -19,6 +19,10 @@
 #include "BombBuilder.hpp"
 
 #include "../../../common/Logger.hpp"
+#include "../../../common/id.hpp"
+#include "../../../common/EntityManager.hpp"
+
+#include "../../../resources/textureManager.hpp"
 
 BombBuilder& BombBuilder::Instance()
 {

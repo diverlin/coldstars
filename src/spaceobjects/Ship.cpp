@@ -16,7 +16,17 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
+#include "Ship.hpp"
+
 #include <boost/lexical_cast.hpp>
+
+#include "../common/myStr.hpp"
+#include "../common/EntityManager.hpp"
+
+#include "../world/starsystem.hpp"
+
+#include "../render/Render.hpp"
 
 Ship::Ship(int id)
 {

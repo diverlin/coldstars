@@ -57,21 +57,12 @@ class Kosmoport;
 #include "src/common/myStr.hpp"
 
 
-#include "src/resources/textureOb.hpp"
-#include "src/resources/textureManager.hpp"
-#include "src/resources/resources.hpp"
-#include "src/resources/init.hpp"
-
 #include "src/common/rect.hpp"
 
 #include "src/gui/UserInput.hpp"
 
 #include "src/items/others/Bomb.hpp"
-#include "src/spaceobjects/Container.hpp"
 #include "src/items/others/GoodsPack.hpp"
-
-
-#include "src/spaceobjects/BlackHole.hpp"
 
 #include "src/docking/Room.hpp"
 #include "src/docking/Angar.hpp"
@@ -109,17 +100,11 @@ class Kosmoport;
 #include "src/spaceobjects/ProtectionComplex.hpp"
 
 #include "src/spaceobjects/RocketBullet.hpp"
-#include "src/spaceobjects/SpaceStation.hpp"
-#include "src/spaceobjects/Satellite.hpp"
-#include "src/spaceobjects/Ship.hpp"
 
 #include "src/pilots/Player.hpp"
 
 
 
-
-
-//   
 #include "src/pilots/Observation.hpp" 
 
 #include "src/gui/BaseGui.hpp"
@@ -138,7 +123,7 @@ class Kosmoport;
 
 #include "src/world/garbageEffects.hpp"  
 #include "src/world/GarbageEntities.hpp"  
-#include "src/world/starsystem.hpp"    
+
 #include "src/effects/lazerTrace.hpp"
 
 #include "src/world/galaxy.hpp"
@@ -172,8 +157,6 @@ class Kosmoport;
 #include "src/items/others/GoodsPack.cpp"   
  
 
-#include "src/spaceobjects/SpaceStation.cpp" 
-#include "src/spaceobjects/Satellite.cpp" 
 #include "src/items/others/Bomb.cpp" 
 #include "src/spaceobjects/BlackHole.cpp"
 
@@ -208,10 +191,7 @@ class Kosmoport;
 
 #include "src/gui/UserInput.cpp"
 
-#include "src/resources/textureOb.cpp"
-#include "src/resources/textureManager.cpp"
-#include "src/resources/resources.cpp"
-#include "src/resources/init.cpp"
+
 
 #include "src/common/rect.cpp"
 #include "src/common/points.cpp"
@@ -222,7 +202,6 @@ class Kosmoport;
 #include "src/spaceobjects/WeaponComplex.cpp"
 #include "src/spaceobjects/ProtectionComplex.cpp"
 
-#include "src/spaceobjects/Ship.cpp"
 #include "src/spaceobjects/DriveComplex.cpp"
 #include "src/spaceobjects/Turrel.cpp"
 
@@ -250,6 +229,6 @@ class Kosmoport;
 #include "src/common/TurnTimer.cpp"
 #include "src/common/GameDate.cpp"
 
-#include "src/builder/items/other/BombBuilder.cpp"
+
 
 ////////////////////////////////////////////

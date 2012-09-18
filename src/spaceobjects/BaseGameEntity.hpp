@@ -26,7 +26,7 @@
 
 class StarSystem; //#include "../world/starsystem.hpp"
 #include "../common/gameStruct.hpp"
-#include "../resources/objLoader.hpp" // class ObjMeshInstance;
+#include "../resources/ObjMeshInstance.hpp"
 #include "../common/points.hpp"
 #include "../text/textstuff.hpp" // class InfoTable;
 #include "../resources/textureOb.hpp" // class InfoTable;

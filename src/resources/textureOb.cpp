@@ -1,28 +1,31 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+	
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "textureOb.hpp"
 #include "../common/constants.hpp"
+#include "../common/id.hpp"
+#include "../common/common.hpp"
 #include "../render/Screen.hpp"
 
-TextureOb :: TextureOb()
+TextureOb::TextureOb()
 {}
 
-TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, std::vector<int>* pTo_arg, int _columns_num, int _rows_num, int _fps)
+TextureOb::TextureOb(int _type_id, std::string _path, bool _use_alpha, std::vector<int>* pTo_arg, int _columns_num, int _rows_num, int _fps)
 {
     	// textureOb attributes INIT
     	race_id = -1;
@@ -112,10 +115,10 @@ TextureOb :: TextureOb(int _type_id, std::string _path, bool _use_alpha, std::ve
 	}
 }  
 
-int TextureOb :: GetFrameWidth() const  { return w_slice; }
-int TextureOb :: GetFrameHeight() const { return h_slice;}
+int TextureOb::GetFrameWidth() const  { return w_slice; }
+int TextureOb::GetFrameHeight() const { return h_slice;}
         	
-void TextureOb :: loadToVRAM()
+void TextureOb::loadToVRAM()
 {
      	sf::Image Image;
      	Image.LoadFromFile(path);
@@ -130,11 +133,11 @@ void TextureOb :: loadToVRAM()
      	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 }         
 
-void TextureOb :: removeFromVRAM()
+void TextureOb::removeFromVRAM()
 {}         
 
 
-void TextureOb :: createTextureCoords(int _columns_num, int _rows_num, int _fps)
+void TextureOb::createTextureCoords(int _columns_num, int _rows_num, int _fps)
 {
 	frame = 0;
      	frames_total_num = 0;
@@ -180,7 +183,7 @@ void TextureOb :: createTextureCoords(int _columns_num, int _rows_num, int _fps)
 }
 
 
-void TextureOb :: addTexCoordQuad(float _w_start, float _h_start, float _w_end, float _h_end)
+void TextureOb::addTexCoordQuad(float _w_start, float _h_start, float _w_end, float _h_end)
 {
      	texCoord_bottomLeft_vec.push_back( vec2f(_w_start, _h_start));   // (0, 0)
      	texCoord_bottomRight_vec.push_back(vec2f(_w_end,   _h_start));   // (1, 0)
@@ -188,7 +191,7 @@ void TextureOb :: addTexCoordQuad(float _w_start, float _h_start, float _w_end, 
      	texCoord_topRight_vec.push_back(   vec2f(_w_end,   _h_end));     // (1, 1)
 }
 
-int TextureOb :: updateAnimationFrame()
+int TextureOb::updateAnimationFrame()
 {
 	if (is_animated)
 	{
@@ -212,81 +215,81 @@ int TextureOb :: updateAnimationFrame()
 }
 
 
-void TextureOb :: itemslotArgManager(std::vector<int>* arg)
+void TextureOb::itemslotArgManager(std::vector<int>* arg)
 {}
 
-void TextureOb :: vehicleslotArgManager(std::vector<int>* arg)
+void TextureOb::vehicleslotArgManager(std::vector<int>* arg)
 {}
    
-void TextureOb :: turrelArgManager(std::vector<int>* arg)
+void TextureOb::turrelArgManager(std::vector<int>* arg)
 {}
    
 
 // SPACE OBJECTS
-void TextureOb :: spacestationArgManager(std::vector<int>* arg)
+void TextureOb::spacestationArgManager(std::vector<int>* arg)
 {}
 
-void TextureOb :: satelliteArgManager(std::vector<int>* arg)
+void TextureOb::satelliteArgManager(std::vector<int>* arg)
 {}
    
-void TextureOb :: shipArgManager(std::vector<int>* arg)
+void TextureOb::shipArgManager(std::vector<int>* arg)
 {
      	race_id    = (*arg)[0];
      	subtype_id = (*arg)[1];   // warrior/trader and so on
      	mod_id     = 0;
 }
 
-void TextureOb :: nebulaArgManager(std::vector<int>* arg)
+void TextureOb::nebulaArgManager(std::vector<int>* arg)
 {
      	color_id    = (*arg)[0];
     	is_rotated =  (*arg)[1];
 }
 
-void TextureOb :: starArgManager(std::vector<int>* arg)
+void TextureOb::starArgManager(std::vector<int>* arg)
 {
 	color_id        = (*arg)[0];
 	brightThreshold = (float)(*arg)[1]/1000;
 }
 
-void TextureOb :: planetArgManager(std::vector<int>* arg)
+void TextureOb::planetArgManager(std::vector<int>* arg)
 {}
 
-void TextureOb :: atmosphereArgManager(std::vector<int>* arg)
+void TextureOb::atmosphereArgManager(std::vector<int>* arg)
 {}
 
 
-void TextureOb :: asteroidArgManager(std::vector<int>* arg)
+void TextureOb::asteroidArgManager(std::vector<int>* arg)
 {}
 
-void TextureOb :: mineralArgManager(std::vector<int>* arg)
+void TextureOb::mineralArgManager(std::vector<int>* arg)
 {}
 
-void TextureOb :: containerArgManager(std::vector<int>* arg)
+void TextureOb::containerArgManager(std::vector<int>* arg)
 {}
 
-void TextureOb :: bombArgManager(std::vector<int>* arg)
+void TextureOb::bombArgManager(std::vector<int>* arg)
 {}
 
-void TextureOb :: blackholeArgManager(std::vector<int>* arg)
+void TextureOb::blackholeArgManager(std::vector<int>* arg)
 {}
 
 //######### IN KOSMOPORT
-void TextureOb :: landBgArgManager(std::vector<int>* arg)
+void TextureOb::landBgArgManager(std::vector<int>* arg)
 {}
 
-void TextureOb :: angarBgArgManager(std::vector<int>* arg)
+void TextureOb::angarBgArgManager(std::vector<int>* arg)
 {}
 
-void TextureOb :: storeBgArgManager(std::vector<int>* arg)
+void TextureOb::storeBgArgManager(std::vector<int>* arg)
 {}
 
-void TextureOb :: shopBgArgManager(std::vector<int>* arg)
+void TextureOb::shopBgArgManager(std::vector<int>* arg)
 {}
 
-void TextureOb :: govermentBgArgManager(std::vector<int>* arg)
+void TextureOb::govermentBgArgManager(std::vector<int>* arg)
 {}
 
-void TextureOb :: faceArgManager(std::vector<int>* arg)
+void TextureOb::faceArgManager(std::vector<int>* arg)
 {
    	race_id       = (*arg)[0];
    	subtype_id    = (*arg)[1];   // warrior/trader and so on
@@ -294,69 +297,69 @@ void TextureOb :: faceArgManager(std::vector<int>* arg)
 
 
 // ITEMS
-void TextureOb :: DriveEquipmentArgManager(std::vector<int>* arg)
+void TextureOb::DriveEquipmentArgManager(std::vector<int>* arg)
 {
    	race_id       = (*arg)[0];
    	tech_level_id = (*arg)[1];
 }
 
-void TextureOb :: LazerEquipmentArgManager(std::vector<int>* arg)
+void TextureOb::LazerEquipmentArgManager(std::vector<int>* arg)
 {
    	race_id       = (*arg)[0];
    	tech_level_id = (*arg)[1];
    	color_id      = (*arg)[2];
 }
 
-void TextureOb :: RocketEquipmentArgManager(std::vector<int>* arg)
+void TextureOb::RocketEquipmentArgManager(std::vector<int>* arg)
 {
    	race_id       = (*arg)[0];
    	tech_level_id = (*arg)[1];
   	 color_id      = (*arg)[2];
 }
 
-void TextureOb :: ProtectorEquipmentArgManager(std::vector<int>* arg)
+void TextureOb::ProtectorEquipmentArgManager(std::vector<int>* arg)
 {
    	race_id       = (*arg)[0];
    	tech_level_id = (*arg)[1];
 }
 
-void TextureOb :: DroidEquipmentArgManager(std::vector<int>* arg)
+void TextureOb::DroidEquipmentArgManager(std::vector<int>* arg)
 {
    	race_id       = (*arg)[0];
    	tech_level_id = (*arg)[1];
 }
 
-void TextureOb :: GrappleEquipmentArgManager(std::vector<int>* arg)
+void TextureOb::GrappleEquipmentArgManager(std::vector<int>* arg)
 {
    	race_id       = (*arg)[0];
    	tech_level_id = (*arg)[1];
 }
 
-void TextureOb :: BakEquipmentArgManager(std::vector<int>* arg)
+void TextureOb::BakEquipmentArgManager(std::vector<int>* arg)
 {
    	race_id       = (*arg)[0];
    	tech_level_id = (*arg)[1];
 }
 
-void TextureOb :: energyBlockItemArgManager(std::vector<int>* arg)
+void TextureOb::energyBlockItemArgManager(std::vector<int>* arg)
 {
    	race_id       = (*arg)[0];
    	tech_level_id = (*arg)[1];
 }
 
-void TextureOb :: FreezerEquipmentArgManager(std::vector<int>* arg)
+void TextureOb::FreezerEquipmentArgManager(std::vector<int>* arg)
 {
    	race_id       = (*arg)[0];
    	tech_level_id = (*arg)[1];
 }
 
-void TextureOb :: RadarEquipmentArgManager(std::vector<int>* arg)
+void TextureOb::RadarEquipmentArgManager(std::vector<int>* arg)
 {
    	race_id       = (*arg)[0];
    	tech_level_id = (*arg)[1];
 }
 
-void TextureOb :: ScanerEquipmentArgManager(std::vector<int>* arg)
+void TextureOb::ScanerEquipmentArgManager(std::vector<int>* arg)
 {
    	race_id       = (*arg)[0];
    	tech_level_id = (*arg)[1];
@@ -364,18 +367,18 @@ void TextureOb :: ScanerEquipmentArgManager(std::vector<int>* arg)
 
 
 //# BULLETS
-void TextureOb :: rocketBulletArgManager(std::vector<int>* arg)
+void TextureOb::rocketBulletArgManager(std::vector<int>* arg)
 {}
 
-void TextureOb :: torpedBulletArgManager(std::vector<int>* arg)
+void TextureOb::torpedBulletArgManager(std::vector<int>* arg)
 {}
 
-void TextureOb :: particleArgManager(std::vector<int>* arg)
+void TextureOb::particleArgManager(std::vector<int>* arg)
 {
         color_id = (*arg)[0];
 }
 
-//int TextureOb :: getParticleFrameNumByColorId(int _color_id)
+//int TextureOb::getParticleFrameNumByColorId(int _color_id)
 //{
         //for(unsigned int i = 0; i < color_id_vec.size(); i++)
         //{
@@ -388,18 +391,18 @@ void TextureOb :: particleArgManager(std::vector<int>* arg)
         //return 0;           
 //}
 
-void TextureOb :: distStarArgManager(std::vector<int>* arg)
+void TextureOb::distStarArgManager(std::vector<int>* arg)
 {
 	color_id        = (*arg)[0];
 }
 
-void TextureOb :: lazerEffectArgManager(std::vector<int>* arg)
+void TextureOb::lazerEffectArgManager(std::vector<int>* arg)
 {
    	tech_level_id = (*arg)[0];
    	color_id      = (*arg)[1];
 }
 
-void TextureOb :: shieldEffectArgManager(std::vector<int>* arg)
+void TextureOb::shieldEffectArgManager(std::vector<int>* arg)
 {
    	color_id = (*arg)[0];
 }

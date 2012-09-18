@@ -24,6 +24,11 @@ set (HEADERS
 
 
 set (SOURCES
+	src/resources/textureOb.cpp
+	src/resources/textureManager.cpp
+	src/resources/resources.cpp
+	src/resources/init.cpp
+
 	src/gui/Slider.cpp
 	src/common/Logger.cpp
 	src/config/config.cpp
@@ -111,6 +116,8 @@ set (SOURCES
 	src/builder/items/artefacts/GravityArtefactBuilder.cpp
 	src/builder/items/artefacts/ProtectorArtefactBuilder.cpp
 
+	src/builder/items/other/BombBuilder.cpp
+
 	src/items/BaseItem.cpp
 	src/items/equipment/BaseEquipment.cpp
 	src/items/equipment/RocketEquipment.cpp
@@ -148,6 +155,9 @@ set (SOURCES
 	src/spaceobjects/Asteroid.cpp 
 	src/spaceobjects/Planet.cpp
 	src/spaceobjects/Star.cpp  
+	src/spaceobjects/Ship.cpp
+	src/spaceobjects/SpaceStation.cpp 
+	src/spaceobjects/Satellite.cpp 
 
 	src/builder/StarBuilder.cpp
 	src/builder/PlanetBuilder.cpp
