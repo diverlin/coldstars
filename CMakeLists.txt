@@ -38,6 +38,7 @@ set (SOURCES
 
 	src/common/common.cpp
 	src/common/EntityManager.cpp
+	src/common/Collision.cpp
 
 	src/resources/MeshCollector.cpp
 	src/resources/ShaderCollector.cpp
@@ -183,8 +184,16 @@ set (SOURCES
 	src/pilots/Skill.cpp
 	src/pilots/Npc.cpp           
 
+	src/slots/BaseSlot.cpp
 	src/slots/ItemSlot.cpp
+	src/slots/VehicleSlot.cpp
+
 	src/parts/orbit.cpp
+
+	src/parts/WeaponComplex.cpp
+	src/parts/ProtectionComplex.cpp
+	src/parts/DriveComplex.cpp
+	src/parts/Turrel.cpp
 
   	main.cpp
 )

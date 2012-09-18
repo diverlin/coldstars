@@ -16,6 +16,12 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "WeaponComplex.hpp"
+#include "../common/rand.hpp"
+#include "../spaceobjects/Vehicle.hpp"
+#include "../resources/GuiTextureObCollector.hpp"
+
+#include "../render/Render.hpp"
 
 WeaponComplex::WeaponComplex(Vehicle* vehicle)
 { 
