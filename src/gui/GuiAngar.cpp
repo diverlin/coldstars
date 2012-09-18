@@ -16,10 +16,12 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "GuiAngar.hpp"
+#include "ButtonSingle.hpp"
 #include "../config/config.hpp"
-
 #include "../slots/VehicleSlot.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
+#include "../pilots/Player.hpp"
 
 GuiAngar::GuiAngar()
 {	

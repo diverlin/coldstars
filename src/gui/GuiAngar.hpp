@@ -19,6 +19,7 @@
 #ifndef GUIANGAR_H
 #define GUIANGAR_H
 
+#include "BaseGui.hpp"
 #include "../docking/Angar.hpp"
 #include "GuiPair.hpp"
 
