@@ -245,6 +245,7 @@ set (SOURCES
 	src/gui/GuiSkill.cpp
 	src/gui/GuiRadar.cpp
 	src/gui/GuiSpace.cpp
+	src/gui/GuiAngar.cpp
 
   	main.cpp
 )
