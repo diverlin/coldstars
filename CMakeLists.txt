@@ -248,6 +248,7 @@ set (SOURCES
 	src/gui/GuiAngar.cpp
 	src/gui/GuiStore.cpp
 	src/gui/GuiVehicle.cpp
+	src/gui/GuiVehicle2.cpp
 
   	main.cpp
 )
