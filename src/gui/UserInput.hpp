@@ -20,7 +20,9 @@
 #ifndef USERINPUT_H
 #define USERINPUT_H
 
+#include <GL/glew.h>
 #include <SFML/Window.hpp>
+#include "../pilots/Player.hpp"
 
 class UserInput
 {

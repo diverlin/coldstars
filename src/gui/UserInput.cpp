@@ -20,6 +20,7 @@
 #include "BaseButton.hpp"
 #include "../common/SaveLoadManager.hpp"
 #include "../config/config.hpp"
+#include "../render/Screen.hpp"
 
 UserInput& UserInput::Instance()
 {
