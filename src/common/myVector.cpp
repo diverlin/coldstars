@@ -16,6 +16,12 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
        
+#include "myVector.hpp"
+#include <cmath>
+#include "../common/constants.hpp"
+#include "../common/rand.hpp"
+
+
 bool vec2f::IsNull() const
 {
 	if ( (x == 0) and ( y == 0 ) )

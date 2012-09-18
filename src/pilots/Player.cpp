@@ -16,8 +16,16 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "Player.hpp"
 #include "../config/config.hpp"
 #include "../resources/ShaderCollector.hpp"
+#include "../render/Render.hpp"
+#include "../render/Screen.hpp"
+#include "../world/starsystem.hpp"
+
+#include "../common/rand.hpp"
+#include "../common/myStr.hpp"
+#include "../common/EntityManager.hpp"
 
 Player::Player(int id)
 { 

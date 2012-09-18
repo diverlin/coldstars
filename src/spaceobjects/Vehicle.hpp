@@ -29,6 +29,8 @@
 #include "../docking/BaseLand.hpp"
 #include "../pilots/Npc.hpp"
 
+#include "../spaceobjects/Container.hpp"
+
 struct VehicleKorpusData
 {
 	/* this data depends only on korpus and cannot be changed by artefacts/items */        

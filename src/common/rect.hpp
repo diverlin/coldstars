@@ -16,9 +16,10 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #ifndef RECT_H
 #define RECT_H
+
+#include "myVector.hpp"
 
 class Rect
 {  

@@ -16,6 +16,8 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "starsystem.hpp"
+#include "galaxy.hpp"
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>
 #include "../common/myVector.hpp"
@@ -23,6 +25,10 @@
 #include "../effects/particlesystem/ExplosionEffect.hpp"
 #include "../builder/AsteroidBuilder.hpp"
 #include "../common/Collision.hpp"
+#include "../common/EntityManager.hpp"
+#include "../common/rand.hpp"
+#include "../common/myStr.hpp"
+#include "../render/Render.hpp"
 
 StarSystem::StarSystem(int id)
 { 
@@ -797,7 +803,7 @@ void StarSystem::PostDeathUniqueEvent(bool)
 void StarSystem::SaveDataUniqueStarSystem(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	save_ptree.put(root+"galaxy_id", galaxy->GetId());
-	for (unsigned int i = 0; i<distantStarEffect_vec.size(); i++)
+	for (unsigned int i=0; i<distantStarEffect_vec.size(); i++)
 	{
 		distantStarEffect_vec[i]->SaveData(save_ptree, root);
 	}

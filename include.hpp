@@ -61,9 +61,6 @@ class Kosmoport;
 
 #include "src/gui/UserInput.hpp"
 
-//#include "src/items/others/Bomb.hpp"
-//#include "src/items/others/GoodsPack.hpp"
-
 #include "src/gui/Cursor.hpp"  
 
 #include "src/render/Render.hpp"
@@ -111,24 +108,12 @@ class Kosmoport;
 
 
 
+//////////////////////////////////////
 
 
-
-
-
-
-
-#include "src/render/PathVisual.cpp"
-#include "src/common/rand.cpp"
-#include "src/common/gameStruct.cpp"
-#include "src/common/id.cpp"
-
-#include "src/common/myVector.cpp"
-#include "src/common/myStr.cpp"
-#include "src/world/galaxy.cpp"
 #include "src/world/garbageEffects.cpp"  
 #include "src/world/GarbageEntities.cpp"  
-#include "src/world/starsystem.cpp"  
+
 
 #include "src/gui/BaseGui.cpp"
 #include "src/gui/BaseButton.cpp"
@@ -142,42 +127,15 @@ class Kosmoport;
 #include "src/gui/GuiManager.cpp"
 #include "src/gui/GuiVehicle.cpp"
 #include "src/gui/GuiVehicle2.cpp"
-
-
 #include "src/gui/GuiSkill.cpp"
 #include "src/gui/GuiMap.cpp"
 #include "src/gui/Cursor.cpp"   
-
 #include "src/gui/UserInput.cpp"
-
-
-
-#include "src/common/rect.cpp"
-#include "src/common/points.cpp"
-
 
 #include "src/effects/BaseBackGroundEffect.cpp"
 #include "src/effects/DistantNebulaEffect.cpp"
 #include "src/effects/DistantStarEffect.cpp"
-
 #include "src/effects/lazerTrace.cpp"
 #include "src/effects/Shield.cpp"
-
-#include "src/pilots/Player.cpp"
-//
-
-#include "src/pilots/Observation.cpp" 
-
-#include "src/render/Render.cpp"
-
 #include "src/effects/ShockWaveEffect.cpp"
 
-#include "src/text/textstuff.cpp"
-
-
-#include "src/common/TurnTimer.cpp"
-#include "src/common/GameDate.cpp"
-
-
-
-////////////////////////////////////////////

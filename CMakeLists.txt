@@ -29,6 +29,16 @@ set (SOURCES
 	src/resources/resources.cpp
 	src/resources/init.cpp
 
+	src/common/myVector.cpp
+	src/common/myStr.cpp
+	src/common/rand.cpp
+	src/common/gameStruct.cpp
+	src/common/id.cpp
+	src/common/rect.cpp
+	src/common/points.cpp
+	src/common/TurnTimer.cpp
+	src/common/GameDate.cpp
+
 	src/resources/GuiTextureObCollector.cpp
 
 	src/gui/Slider.cpp
@@ -185,8 +195,10 @@ set (SOURCES
 	src/builder/ShopBuilder.cpp
 	src/builder/KosmoportBuilder.cpp
 
-	src/pilots/Skill.cpp
+	src/pilots/Player.cpp
 	src/pilots/Npc.cpp           
+	src/pilots/Skill.cpp
+	src/pilots/Observation.cpp 
 
 	src/slots/BaseSlot.cpp
 	src/slots/ItemSlot.cpp
@@ -207,6 +219,14 @@ set (SOURCES
 	src/docking/BaseLand.cpp
 	src/docking/Kosmoport.cpp
 	src/docking/NatureLand.cpp
+
+	src/render/Render.cpp
+	src/render/PathVisual.cpp
+
+	src/text/textstuff.cpp
+
+	src/world/galaxy.cpp
+	src/world/starsystem.cpp 
 
   	main.cpp
 )

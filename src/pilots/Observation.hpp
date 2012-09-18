@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define OBSERVATION_H
 
 #include <vector>
+class Npc; //#include "../pilots/Npc.hpp" 
 
 class Galaxy;
 class StarSystem;
@@ -41,8 +42,14 @@ class Pair
 
 struct VisionStatus
 {
-	VisionStatus();
-
+	VisionStatus():ASTEROID(false),
+			 CONTAINER(false),
+			 MINERAL(false),
+			 RANGER(false),
+			 WARRIOR(false),
+			 TRADER(false),
+			 PIRAT(false),
+			 DIPLOMAT(false) {};
 	bool ASTEROID;
 	bool CONTAINER;
 	bool MINERAL;

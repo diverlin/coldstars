@@ -1,24 +1,26 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+	
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "textstuff.hpp"
+#include "../common/rand.hpp"
+#include "../render/Render.hpp"
 
-
-VerticalFlowText :: VerticalFlowText(const std::string& str, 
+VerticalFlowText::VerticalFlowText(const std::string& str, 
                                          const vec2f& center, 
                                          const Color4i& color, 
                                          float collision_radius)
@@ -39,14 +41,11 @@ VerticalFlowText :: VerticalFlowText(const std::string& str,
         speed = 2.0;
 }
 
-VerticalFlowText :: ~VerticalFlowText()
+VerticalFlowText::~VerticalFlowText()
 {}
 
 
-bool VerticalFlowText :: GetAlive() const { return is_alive; }
-		
-
-void VerticalFlowText :: update()
+void VerticalFlowText::update()
 {
         if (is_alive == true)
         {
@@ -64,7 +63,7 @@ void VerticalFlowText :: update()
         }
 }
                 
-void VerticalFlowText :: Render(vec2f scroll_coords) const
+void VerticalFlowText::Render(const vec2f& scroll_coords) const
 {
         if (is_alive == true)
         {
@@ -76,33 +75,29 @@ void VerticalFlowText :: Render(vec2f scroll_coords) const
 
 
 
-
-
-
-
-InfoTable :: InfoTable()
+InfoTable::InfoTable()
 {}
 
-InfoTable :: ~InfoTable()
+InfoTable::~InfoTable()
 {}
 
-void InfoTable :: clear()
+void InfoTable::clear()
 {
     	title_list.clear();
     	value_list.clear();
 }
 
-void InfoTable :: addTitleStr(std::string _str)
+void InfoTable::addTitleStr(std::string _str)
 {
 	title_list.push_back(_str);
 }
 
-void InfoTable :: addNameStr(std::string _str)
+void InfoTable::addNameStr(std::string _str)
 {
 	title_list.push_back(_str);
 }
 
-void InfoTable :: addValueStr(std::string _str)
+void InfoTable::addValueStr(std::string _str)
 {
 	value_list.push_back(_str);
 }
