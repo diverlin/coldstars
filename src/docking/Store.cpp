@@ -16,7 +16,12 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
+#include "Store.hpp"
+#include "Kosmoport.hpp"
+#include "../common/constants.hpp"
+#include "../common/myStr.hpp"
+#include "../common/EntityManager.hpp"
+#include "../spaceobjects/Vehicle.hpp"
 
 Store::Store(int id)
 {

@@ -18,6 +18,7 @@
 
 #include "GuiManager.hpp"
 #include "../slots/ItemSlot.hpp"
+#include "../docking/Kosmoport.hpp"
 
 GuiManager::GuiManager()
 {
