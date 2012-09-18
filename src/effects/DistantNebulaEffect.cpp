@@ -18,6 +18,12 @@
 
 #include "DistantNebulaEffect.hpp"
 #include "../common/rand.hpp"
+#include "../common/constants.hpp"
+#include "../common/myStr.hpp"
+
+#include "../resources/textureManager.hpp"
+
+#include "../render/Render.hpp"
 
 DistantNebulaEffect::DistantNebulaEffect():angle_inD(0.f), d_angle_inD(0.f)
 {}

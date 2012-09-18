@@ -228,6 +228,16 @@ set (SOURCES
 	src/world/galaxy.cpp
 	src/world/starsystem.cpp 
 
+	src/world/garbageEffects.cpp  
+	src/world/GarbageEntities.cpp 
+
+	src/effects/BaseBackGroundEffect.cpp
+	src/effects/DistantNebulaEffect.cpp
+	src/effects/DistantStarEffect.cpp
+	src/effects/lazerTrace.cpp
+	src/effects/Shield.cpp
+	src/effects/ShockWaveEffect.cpp
+
   	main.cpp
 )
 
