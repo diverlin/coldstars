@@ -17,6 +17,10 @@
 */
 
 #include "GuiVehicle.hpp"
+#include "../pilots/Player.hpp"
+#include "../resources/GuiTextureObCollector.hpp"
+#include "../docking/Kosmoport.hpp"
+#include "../render/Render.hpp"
 
 GuiVehicle::GuiVehicle()
 {
