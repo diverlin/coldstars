@@ -20,7 +20,7 @@
 #ifndef ITEMSLOTBUILDER_H
 #define ITEMSLOTBUILDER_H
 
-#include "../spaceobjects/ItemSlot.hpp"
+#include "../vehicleparts/ItemSlot.hpp"
 #include "../common/constants.hpp"
 
 ItemSlot* GetNewItemSlot(int subtype_id, int id = NONE_ID);

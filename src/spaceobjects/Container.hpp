@@ -20,7 +20,7 @@
 #define CONTAINER_H
 
 #include "BaseGameEntity.hpp"
-#include "ItemSlot.hpp"
+#include "../vehicleparts/ItemSlot.hpp"
 
 class Container : public BaseGameEntity
 {

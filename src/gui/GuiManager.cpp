@@ -17,7 +17,7 @@
 */
 
 #include "GuiManager.hpp"
-#include "../spaceobjects/ItemSlot.hpp"
+#include "../vehicleparts/ItemSlot.hpp"
 
 GuiManager::GuiManager()
 {
