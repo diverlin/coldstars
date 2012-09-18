@@ -19,7 +19,9 @@
 #ifndef GUISTORE_H
 #define GUISTORE_H
 
+#include "BaseGui.hpp"
 #include "GuiPair.hpp"
+#include "../docking/Store.hpp"
 
 class GuiStore : public BaseGui
 {
@@ -37,9 +39,6 @@ class GuiStore : public BaseGui
         private:
               	std::vector<GuiPair<Rect, ItemSlot*>> rect_slot_vec;          
 };
-           
-           
-
 
 #endif
 

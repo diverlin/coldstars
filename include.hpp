@@ -110,7 +110,7 @@ class Kosmoport;
 
 //////////////////////////////////////
 #include "src/gui/GuiKosmoport.cpp"
-#include "src/gui/GuiStore.cpp"
+
 #include "src/gui/GuiManager.cpp"
 #include "src/gui/GuiVehicle.cpp"
 #include "src/gui/GuiVehicle2.cpp"
