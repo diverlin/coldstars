@@ -17,7 +17,10 @@
 */
 
 #include "GuiKosmoport.hpp"
+#include "ButtonSingle.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
+#include "../render/Screen.hpp"
+#include "../common/constants.hpp"
 
 GuiKosmoport::GuiKosmoport()
 {
