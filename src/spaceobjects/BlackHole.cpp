@@ -16,8 +16,14 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "BlackHole.hpp"
 #include "../resources/MeshCollector.hpp"
+#include "../common/constants.hpp"
+#include "../common/myStr.hpp"
+#include "../common/rand.hpp"
 
+#include "../common/id.hpp"
+#include "../resources/textureManager.hpp"
 
 BlackHole::BlackHole(int id)
 {        

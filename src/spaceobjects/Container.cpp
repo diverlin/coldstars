@@ -18,6 +18,14 @@
 
 #include "Container.hpp"
 #include "../common/common.hpp"
+#include "../common/constants.hpp"
+
+#include "../common/rand.hpp"
+#include "../common/myStr.hpp"
+#include "../common/EntityManager.hpp"
+#include "../world/starsystem.hpp"
+#include "../render/Render.hpp"
+#include "../effects/particlesystem/ExplosionEffect.hpp"
 
 Container::Container(int id)
 {
