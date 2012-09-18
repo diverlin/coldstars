@@ -1,4 +1,7 @@
 
+#include <vector>
+#include <iostream>
+
 void runPureTest()
 {
         std::vector<int> int_vec;
