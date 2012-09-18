@@ -21,10 +21,10 @@
 #define VEHICLE_H
 
 #include "../spaceobjects/BaseGameEntity.hpp"
-#include "../docking/VehicleSlot.hpp"
-#include "../spaceobjects/WeaponComplex.hpp"
-#include "../spaceobjects/DriveComplex.hpp"
-#include "../spaceobjects/ProtectionComplex.hpp"
+#include "../slots/VehicleSlot.hpp"
+#include "../parts/WeaponComplex.hpp"
+#include "../parts/DriveComplex.hpp"
+#include "../parts/ProtectionComplex.hpp"
 
 #include "../docking/BaseLand.hpp"
 #include "../pilots/Npc.hpp"

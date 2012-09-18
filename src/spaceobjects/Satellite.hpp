@@ -20,7 +20,7 @@
 #define SATELLITE_H
 
 #include "Vehicle.hpp"
-#include "../spaceobjects/orbit.hpp"
+#include "../parts/orbit.hpp"
 
 class Satellite : public Vehicle
 {

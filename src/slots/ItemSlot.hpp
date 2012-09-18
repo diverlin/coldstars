@@ -20,8 +20,8 @@
 #ifndef ITEMSLOT_H
 #define ITEMSLOT_H
 
-#include "../spaceobjects/BaseSlot.hpp"
-#include "../spaceobjects/Turrel.hpp"
+#include "../slots/BaseSlot.hpp"
+#include "../parts/Turrel.hpp"
 #include "../items/BaseItem.hpp"
 
 #include "../items/equipment/RocketEquipment.hpp"

@@ -19,7 +19,7 @@
 #include "BaseItem.hpp"
 #include "../common/constants.hpp"
 #include "../common/EntityManager.hpp"
-#include "../vehicleparts/ItemSlot.hpp"
+#include "../slots/ItemSlot.hpp"
 #include "../render/Render.hpp"
 #include "../resources/textureManager.hpp"
 

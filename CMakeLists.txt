@@ -183,7 +183,7 @@ set (SOURCES
 	src/pilots/Skill.cpp
 	src/pilots/Npc.cpp           
 
-	src/parts/ItemSlot.cpp
+	src/slots/ItemSlot.cpp
 	src/parts/orbit.cpp
 
   	main.cpp

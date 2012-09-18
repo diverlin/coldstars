@@ -18,7 +18,7 @@
 
 #include "../config/config.hpp"
 
-#include "../docking/VehicleSlot.hpp"
+#include "../slots/VehicleSlot.hpp"
 
 GuiAngar::GuiAngar()
 {	
