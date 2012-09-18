@@ -22,7 +22,8 @@
 #define CURSOR_H
 
 #include "../slots/ItemSlot.hpp"
-#include "../gui/MouseData.hpp"
+#include "MouseData.hpp"
+class Player; //#include "../pilots/Player.hpp"
 
 class Cursor
 {
