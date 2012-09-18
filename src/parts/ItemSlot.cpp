@@ -19,6 +19,11 @@
 #include "ItemSlot.hpp"
 
 #include "../builder/ContainerBuilder.hpp"
+#include "../common/EntityManager.hpp"
+#include "../common/myStr.hpp"
+#include "../spaceobjects/Vehicle.hpp"
+#include "../render/Render.hpp"
+#include "../world/starsystem.hpp"
 
 ItemSlot::ItemSlot(int id)
 {
