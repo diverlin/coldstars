@@ -246,6 +246,7 @@ set (SOURCES
 	src/gui/GuiRadar.cpp
 	src/gui/GuiSpace.cpp
 	src/gui/GuiAngar.cpp
+	src/gui/GuiStore.cpp
 
   	main.cpp
 )
