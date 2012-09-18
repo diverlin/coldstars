@@ -29,11 +29,12 @@ set (SOURCES
 	src/resources/resources.cpp
 	src/resources/init.cpp
 
+	src/resources/GuiTextureObCollector.cpp
+
 	src/gui/Slider.cpp
 	src/common/Logger.cpp
 	src/config/config.cpp
 	src/common/SaveLoadManager.cpp
-	src/spaceobjects/Vehicle.cpp
 	src/gui/GuiShop.cpp
 
 	src/common/common.cpp
@@ -44,8 +45,7 @@ set (SOURCES
 	src/resources/ShaderCollector.cpp
 	src/resources/GlslLoader.cpp
 
-	src/common/Base.cpp 
-	src/spaceobjects/BaseGameEntity.cpp 
+	src/common/Base.cpp
 
 	src/ai/MacroTask.cpp
 	src/ai/MicroTask.cpp
@@ -81,9 +81,6 @@ set (SOURCES
 
 	src/render/Fbo.cpp
 	src/render/Bloom.cpp
-
-
-	src/spaceobjects/BasePlanet.cpp
 
 	src/effects/particlesystem/Particle.cpp
 	src/effects/particlesystem/BaseParticleSystem.cpp
@@ -149,14 +146,21 @@ set (SOURCES
 	src/items/artefacts/GravityArtefact.cpp
 	src/items/artefacts/ProtectorArtefact.cpp
 
-	src/resources/GuiTextureObCollector.cpp
+	src/items/others/GoodsPack.cpp   
+	src/items/others/Bomb.cpp 
 
+	src/spaceobjects/BaseGameEntity.cpp 
+	src/spaceobjects/BasePlanet.cpp
+	src/spaceobjects/Vehicle.cpp
+	src/spaceobjects/BlackHole.cpp
 	src/spaceobjects/Asteroid.cpp 
 	src/spaceobjects/Planet.cpp
 	src/spaceobjects/Star.cpp  
 	src/spaceobjects/Ship.cpp
 	src/spaceobjects/SpaceStation.cpp 
 	src/spaceobjects/Satellite.cpp 
+	src/spaceobjects/Container.cpp    
+	src/spaceobjects/RocketBullet.cpp
 
 	src/builder/StarBuilder.cpp
 	src/builder/PlanetBuilder.cpp

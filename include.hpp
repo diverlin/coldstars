@@ -61,17 +61,8 @@ class Kosmoport;
 
 #include "src/gui/UserInput.hpp"
 
-#include "src/items/others/Bomb.hpp"
-#include "src/items/others/GoodsPack.hpp"
-
-//#include "src/docking/Room.hpp"
-//#include "src/docking/Angar.hpp"
-//#include "src/docking/Shop.hpp"
-//#include "src/docking/Goverment.hpp"
-//#include "src/docking/Store.hpp"
-//#include "src/docking/BaseLand.hpp"
-//#include "src/docking/Kosmoport.hpp"
-//#include "src/docking/NatureLand.hpp"
+//#include "src/items/others/Bomb.hpp"
+//#include "src/items/others/GoodsPack.hpp"
 
 #include "src/gui/Cursor.hpp"  
 
@@ -89,12 +80,7 @@ class Kosmoport;
 
 #include "src/effects/lazerTrace.hpp"
 
-
-#include "src/spaceobjects/RocketBullet.hpp"
-
 #include "src/pilots/Player.hpp"
-
-
 
 #include "src/pilots/Observation.hpp" 
 
@@ -144,22 +130,6 @@ class Kosmoport;
 #include "src/world/GarbageEntities.cpp"  
 #include "src/world/starsystem.cpp"  
 
-#include "src/spaceobjects/Container.cpp"    
-#include "src/items/others/GoodsPack.cpp"   
- 
-
-#include "src/items/others/Bomb.cpp" 
-#include "src/spaceobjects/BlackHole.cpp"
-
-//#include "src/docking/Room.cpp"
-//#include "src/docking/Angar.cpp"
-//#include "src/docking/Store.cpp"
-//#include "src/docking/Shop.cpp"
-//#include "src/docking/Goverment.cpp"
-//#include "src/docking/BaseLand.cpp"
-//#include "src/docking/Kosmoport.cpp"
-//#include "src/docking/NatureLand.cpp"
-
 #include "src/gui/BaseGui.cpp"
 #include "src/gui/BaseButton.cpp"
 #include "src/gui/ButtonTrigger.cpp"
@@ -192,7 +162,6 @@ class Kosmoport;
 
 #include "src/effects/lazerTrace.cpp"
 #include "src/effects/Shield.cpp"
-#include "src/spaceobjects/RocketBullet.cpp"
 
 #include "src/pilots/Player.cpp"
 //
