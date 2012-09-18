@@ -253,7 +253,8 @@ set (SOURCES
 	src/gui/Cursor.cpp
 	src/gui/UserInput.cpp
 	src/gui/GuiKosmoport.cpp   
-
+	src/gui/GuiManager.cpp
+	
   	main.cpp
 )
 

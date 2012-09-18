@@ -17,9 +17,13 @@
 */
 
 #include "GuiManager.hpp"
+#include "UserInput.hpp"
 #include "../slots/ItemSlot.hpp"
 #include "../docking/Kosmoport.hpp"
 #include "../world/starsystem.hpp"
+#include "../common/myStr.hpp"
+#include "../render/Screen.hpp"
+#include "../render/Render.hpp"
 
 GuiManager::GuiManager()
 {

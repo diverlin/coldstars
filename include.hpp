@@ -107,5 +107,4 @@ class Kosmoport;
 
 
 //////////////////////////////////////
-#include "src/gui/GuiManager.cpp"
 
