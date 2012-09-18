@@ -106,9 +106,6 @@ class Kosmoport;
 #include "src/render/Screen.hpp"
 
 
-
-
 //////////////////////////////////////
-#include "src/gui/GuiKosmoport.cpp"
 #include "src/gui/GuiManager.cpp"
 
