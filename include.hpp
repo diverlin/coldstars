@@ -109,7 +109,6 @@ class Kosmoport;
 
 
 //////////////////////////////////////
-#include "src/gui/GuiSpace.cpp"
 #include "src/gui/GuiAngar.cpp"
 #include "src/gui/GuiKosmoport.cpp"
 #include "src/gui/GuiStore.cpp"

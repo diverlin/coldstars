@@ -244,6 +244,7 @@ set (SOURCES
 	src/gui/ButtonSingle.cpp
 	src/gui/GuiSkill.cpp
 	src/gui/GuiRadar.cpp
+	src/gui/GuiSpace.cpp
 
   	main.cpp
 )
