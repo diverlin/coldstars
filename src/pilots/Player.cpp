@@ -47,6 +47,8 @@
 #include "../spaceobjects/Satellite.hpp"
 #include "../spaceobjects/Ship.hpp"
 
+#include "../common/TurnTimer.hpp"
+
 Player::Player(int id)
 { 
     	data_id.id         = id;

@@ -25,6 +25,7 @@
 #include "../render/Screen.hpp"
 #include "../render/Render.hpp"
 #include "../parts/WeaponComplex.hpp"
+#include "../items/BaseItem.hpp"
 
 GuiManager::GuiManager()
 {

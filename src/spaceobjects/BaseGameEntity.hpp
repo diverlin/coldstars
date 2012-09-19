@@ -21,7 +21,6 @@
 #define BASEGAMEENTITY_H
 
 #include "../common/Base.hpp"
-class ptree; //#include <boost/property_tree/ptree.hpp>
 
 class StarSystem;
 class ObjMeshInstance;

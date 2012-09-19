@@ -39,6 +39,8 @@
 #include "../items/equipment/ScanerEquipment.hpp"
 #include "../items/equipment/GrappleEquipment.hpp"
 
+#include "../items/others/GoodsPack.hpp"
+
 #include "../items/artefacts/GravityArtefact.hpp"
 #include "../items/artefacts/ProtectorArtefact.hpp"
 
@@ -52,6 +54,7 @@
 #include "../parts/WeaponComplex.hpp"
 
 #include "../text/VerticalFlowText.hpp" 
+#include "../slots/VehicleSlot.hpp" 
 
 Vehicle::Vehicle()
 {

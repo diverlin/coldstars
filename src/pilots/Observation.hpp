@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define OBSERVATION_H
 
 #include <vector>
-class Npc; //#include "../pilots/Npc.hpp" 
+class Npc; 
 
 class Galaxy;
 class StarSystem;

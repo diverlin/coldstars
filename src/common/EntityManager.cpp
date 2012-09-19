@@ -50,6 +50,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../builder/items/artefacts/ProtectorArtefactBuilder.hpp"
 
 #include "../builder/items/other/BombBuilder.hpp"
+#include "../items/others/GoodsPack.hpp"
+
 #include "../builder/ItemSlotBuilder.hpp"
 #include "../builder/VehicleSlotBuilder.hpp"
 

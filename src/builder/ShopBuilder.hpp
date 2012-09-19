@@ -20,6 +20,7 @@
 #define SHOPBUILDER_H
 
 #include "../docking/Shop.hpp"
+#include "../common/constants.hpp"
 
 class ShopBuilder
 {
