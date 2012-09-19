@@ -16,7 +16,7 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "textstuff.hpp"
+#include "VerticalFlowText.hpp"
 #include "../common/rand.hpp"
 #include "../render/Render.hpp"
 
@@ -43,7 +43,6 @@ VerticalFlowText::VerticalFlowText(const std::string& str,
 
 VerticalFlowText::~VerticalFlowText()
 {}
-
 
 void VerticalFlowText::update()
 {
@@ -72,32 +71,3 @@ void VerticalFlowText::Render(const vec2f& scroll_coords) const
 }
  
 
-
-
-
-InfoTable::InfoTable()
-{}
-
-InfoTable::~InfoTable()
-{}
-
-void InfoTable::clear()
-{
-    	title_list.clear();
-    	value_list.clear();
-}
-
-void InfoTable::addTitleStr(std::string _str)
-{
-	title_list.push_back(_str);
-}
-
-void InfoTable::addNameStr(std::string _str)
-{
-	title_list.push_back(_str);
-}
-
-void InfoTable::addValueStr(std::string _str)
-{
-	value_list.push_back(_str);
-}

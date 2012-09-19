@@ -51,6 +51,8 @@
 #include "Container.hpp"
 #include "../parts/WeaponComplex.hpp"
 
+#include "../text/VerticalFlowText.hpp" 
+
 Vehicle::Vehicle()
 {
 	special_action_id = SPECIAL_ACTION::NONE_ID;

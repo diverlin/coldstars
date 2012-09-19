@@ -42,6 +42,18 @@
 
 #include "../effects/DistantNebulaEffect.hpp"
 #include "../effects/DistantStarEffect.hpp"
+#include "../text/VerticalFlowText.hpp" 
+#include "../effects/lazerTrace.hpp"
+
+#include "../spaceobjects/RocketBullet.hpp"
+#include "../spaceobjects/Container.hpp"
+#include "../spaceobjects/Star.hpp"
+#include "../spaceobjects/Planet.hpp"
+#include "../spaceobjects/BlackHole.hpp"
+#include "../spaceobjects/Asteroid.hpp"
+#include "../spaceobjects/SpaceStation.hpp"
+#include "../spaceobjects/Satellite.hpp"
+#include "../spaceobjects/Ship.hpp"
 
 StarSystem::StarSystem(int id)
 { 

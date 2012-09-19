@@ -20,16 +20,14 @@
 #ifndef BASEGAMEENTITY_H
 #define BASEGAMEENTITY_H
 
-#include <boost/property_tree/ptree.hpp>
-
 #include "../common/Base.hpp"
+class ptree; //#include <boost/property_tree/ptree.hpp>
 
-class StarSystem; //#include "../world/starsystem.hpp"
-#include "../common/gameStruct.hpp"
-#include "../resources/ObjMeshInstance.hpp"
+class StarSystem;
+class ObjMeshInstance;
 #include "../common/points.hpp"
-#include "../text/textstuff.hpp" // class InfoTable;
-#include "../resources/textureOb.hpp" // class InfoTable;
+#include "../text/InfoTable.hpp" 
+class TextureOb;
 
 struct UnresolvedDataUniqueBaseGameEntity
 {

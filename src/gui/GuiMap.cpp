@@ -29,7 +29,9 @@
 #include "../resources/textureManager.hpp"
 #include "../ai/MicroTask.hpp"
 #include "../ai/StateMachine.hpp"
- 
+
+#include "../spaceobjects/Star.hpp"
+
 GuiMap::GuiMap()
 { 
     	rect.Set(GUI::MAP::BORDER_X, 

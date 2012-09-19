@@ -26,6 +26,7 @@
 #include "../common/EntityManager.hpp"
 #include "../world/starsystem.hpp"
 #include "../render/Render.hpp"
+#include "../text/VerticalFlowText.hpp" 
 
 BaseGameEntity::BaseGameEntity():starsystem(NULL), mesh(NULL), textureOb(NULL), parent(NULL),
 				     place_type_id(NONE_ID), collision_radius(0), mass(0)

@@ -16,19 +16,11 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef TEXTSTUFF_H
-#define TEXTSTUFF_H
+#ifndef VERTICALFLOWTEXT_H
+#define VERTICALFLOWTEXT_H
 
 #include "../common/gameStruct.hpp"
 #include "../common/myVector.hpp"
-
-//class TextBoard
-//{
- 	//public:
-       		//TextBoard();
-       		//~TextBoard();
-
-//};
 
 class VerticalFlowText
 {
@@ -52,22 +44,6 @@ class VerticalFlowText
                 vec2f pos;
                 
                 float speed;
-};
-
-
-class InfoTable
-{
-	public:
-            	std::vector<std::string> title_list;        
-        	std::vector<std::string> value_list;
-        	
-		InfoTable();
-		~InfoTable();
-
-		void clear();
-		void addTitleStr(std::string);
-		void addNameStr(std::string);
-		void addValueStr(std::string);
 };
 
 #endif 

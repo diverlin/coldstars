@@ -25,17 +25,20 @@
 #include "../gui/Cursor.hpp"
 #include "../common/TurnTimer.hpp"
 
-#include "../spaceobjects/Star.hpp"
-#include "../spaceobjects/Planet.hpp"
-#include "../spaceobjects/BlackHole.hpp"
-#include "../spaceobjects/Asteroid.hpp"
-#include "../spaceobjects/SpaceStation.hpp"
-#include "../spaceobjects/Satellite.hpp"
-#include "../spaceobjects/Ship.hpp"
-#include "../spaceobjects/Container.hpp"
-#include "../spaceobjects/RocketBullet.hpp"
+class Star;
+class Planet;
+class BlackHole;
+class Asteroid;
+class SpaceStation;
+class Satellite;
+class Ship;
+class Container; 
+class RocketBullet; 
 
-#include "../effects/lazerTrace.hpp"
+class LazerTraceEffect;
+class ShockWaveEffect;
+class BaseParticleSystem;
+class VerticalFlowText;
 
 class Show
 {
