@@ -51,7 +51,6 @@ void SatelliteBuilder::CreateNewSatellite(int id)
         }
 
         CreateProtectionComplex(satellite);
-        CreateDriveComplex(satellite);
         
         EntityManager::Instance().RegisterEntity(satellite);
 }
@@ -89,7 +88,7 @@ void SatelliteBuilder::CreateNewInternals()
 	
 	CreateKorpusGeometry(satellite);
 
-        CreateDriveComplexTextureDependedStuff(satellite);
+        satellite->CreateDriveComplexTextureDependedStuff();
         CreateProtectionComplexTextureDependedStuff(satellite);
                         
         CreateItemSlots(satellite);

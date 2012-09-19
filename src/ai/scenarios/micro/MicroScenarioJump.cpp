@@ -37,7 +37,7 @@ MicroScenarioJump::~MicroScenarioJump()
 /* virtual */
 void MicroScenarioJump::Enter(Npc* npc) const
 {	
-	npc->GetVehicle()->GetDriveComplex()->SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetStarSystem(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
+	npc->GetVehicle()->GetDriveComplex().SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetStarSystem(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
         
         #if AISCENARIO_LOG_ENABLED == 1 
 	Logger::Instance().Log("npc_id="+int2str(npc->GetId())+" ENTER MicroScenarioJump"); 
@@ -64,12 +64,12 @@ void MicroScenarioJump::UpdateInStaticInSpace(Npc* npc) const
 /* virtual */
 void MicroScenarioJump::UpdateInDynamicInSpace(Npc* npc) const
 {
-     	if (npc->GetVehicle()->GetDriveComplex()->CheckTargetEchievement() == true)
+     	if (npc->GetVehicle()->GetDriveComplex().CheckTargetEchievement() == true)
      	{
      		if (npc->GetVehicle()->GetSpecialActionId() != SPECIAL_ACTION::INITIATE_JUMPIN_ID)
      		{
      			npc->GetVehicle()->SetSpecialActionId(SPECIAL_ACTION::INITIATE_JUMPIN_ID);
-     			//npc->GetVehicle()->GetDriveComplex()->CalcAcceleratedPath();
+     			//npc->GetVehicle()->GetDriveComplex().CalcAcceleratedPath();
      		}
      	}
 }

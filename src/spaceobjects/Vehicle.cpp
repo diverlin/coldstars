@@ -59,7 +59,7 @@ Vehicle::Vehicle()
        	starsystem = NULL; 
       	
     	weapon_complex.SetOwnerVehicle(this);
-    	drive_complex      = NULL;
+    	drive_complex.SetOwnerVehicle(this);
     	protection_complex = NULL;
     	
     	radar_slot     = NULL;
@@ -79,7 +79,6 @@ Vehicle::~Vehicle()
 {
 	EntityManager::Instance().RemoveEntity(this);
 	
-    	delete drive_complex;  drive_complex = NULL;
 	delete protection_complex; protection_complex = NULL;
 	
 	for(unsigned int i=0; i<slot_total_vec.size(); i++)
@@ -89,7 +88,19 @@ Vehicle::~Vehicle()
 	slot_total_vec.clear();
 } 
 
-void Vehicle::SetKorpusData(VehicleKorpusData data_korpus) 
+void Vehicle::CreateDriveComplexTextureDependedStuff()
+{
+    	GetPoints().initMidLeftPoint();
+    	GetPoints().addMidLeftPoint();
+
+    	GetPoints().initMidFarLeftPoint();
+    	GetPoints().addMidFarLeftPoint();
+    	
+	DriveEffect* drive_effect = GetNewDriveEffect(GetTextureOb()->size_id, GetPoints().GetpMidLeft(), GetPoints().GetpMidFarLeft());
+ 	GetDriveComplex().SetDriveEffect(drive_effect);
+}    
+
+void Vehicle::SetKorpusData(const VehicleKorpusData& data_korpus) 
 { 
         this->data_korpus = data_korpus; 
         propetries.protection = data_korpus.protection;
@@ -131,8 +142,8 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
                 	
                 	break; 
                 }
-                case ENTITY::DRIVE_SLOT_ID:     { drive_complex->SetDriveSlot(slot); break; }
-                case ENTITY::BAK_SLOT_ID:       { drive_complex->SetBakSlot(slot); break; }
+                case ENTITY::DRIVE_SLOT_ID:     { drive_complex.SetDriveSlot(slot); break; }
+                case ENTITY::BAK_SLOT_ID:       { drive_complex.SetBakSlot(slot); break; }
                 case ENTITY::PROTECTOR_SLOT_ID: { protection_complex->SetProtectorSlot(slot); break; }
 		case ENTITY::RADAR_SLOT_ID:     { radar_slot  = slot; break; }
 		case ENTITY::SCANER_SLOT_ID:    { scaner_slot = slot; break; }
@@ -362,8 +373,8 @@ void Vehicle::HyperJumpEvent()
 {
         starsystem->RemoveVehicle(this);  
                                                         
-        ((StarSystem*)drive_complex->GetTarget())->AddToHyperJumpQueue(this);
-        drive_complex->ResetTarget();  
+        ((StarSystem*)drive_complex.GetTarget())->AddToHyperJumpQueue(this);
+        drive_complex.ResetTarget();  
         
         #if LOG_ENABLED == 1 
 	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" jumpEvent()", 2); 
@@ -375,22 +386,22 @@ void Vehicle::DockingEvent()
 {
      	starsystem->RemoveVehicle(this);
             
-        switch(drive_complex->GetTarget()->GetTypeId())         	     	     	
+        switch(drive_complex.GetTarget()->GetTypeId())         	     	     	
      	{
      		case ENTITY::PLANET_ID:
      		{
-                	Planet* planet = ((Planet*)drive_complex->GetTarget());                
+                	Planet* planet = ((Planet*)drive_complex.GetTarget());                
      			planet->GetLand()->AddVehicle(this);
 			break;
 		}
 	
 		case ENTITY::VEHICLE_ID:
 		{	 
-			switch(drive_complex->GetTarget()->GetSubTypeId())
+			switch(drive_complex.GetTarget()->GetSubTypeId())
 			{
 				case ENTITY::SPACESTATION_ID:
 				{
-                			SpaceStation* spacestation = ((SpaceStation*)drive_complex->GetTarget());
+                			SpaceStation* spacestation = ((SpaceStation*)drive_complex.GetTarget());
                         		spacestation->GetLand()->AddVehicle(this);
 					break;
 				}
@@ -406,7 +417,7 @@ void Vehicle::DockingEvent()
 		}                          		
 	}
         
-        GetDriveComplex()->ResetTarget();
+        GetDriveComplex().ResetTarget();
         
         #if LOG_ENABLED == 1 
 	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" DockingEvent()", 2); 
@@ -524,11 +535,11 @@ void Vehicle::UpdatePropertiesSpeed()
      	// speed calculation ////
      	propetries.speed = 0;
 
-     	if (drive_complex->GetDriveSlot()->GetEquiped() == true) 
+     	if (drive_complex.GetDriveSlot()->GetEquiped() == true) 
      	{
-        	if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)  
+        	if (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)  
         	{
-           		float actual_speed = (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetSpeed() - (float)mass/70); //70 = MINIM_SHIP_SPACE, probably shuld be used unique value for each ship size
+           		float actual_speed = (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetSpeed() - (float)mass/70); //70 = MINIM_SHIP_SPACE, probably shuld be used unique value for each ship size
            		if (actual_speed > 0)
            		{ 
            			if (propetries.artefact_gravity > 0)
@@ -540,7 +551,7 @@ void Vehicle::UpdatePropertiesSpeed()
            				propetries.speed = actual_speed; 
            			}
            			
-           			drive_complex->CalcPath();
+           			drive_complex.CalcPath();
            		}
         	}
         }
@@ -568,18 +579,18 @@ void Vehicle::UpdatePropertiesJump()
 {    
 	propetries.hyper = 0;
 
-     	if (drive_complex->GetDriveSlot()->GetEquiped() == true)
+     	if (drive_complex.GetDriveSlot()->GetEquiped() == true)
      	{
-        	if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)
+        	if (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)
            	{
-           		if (drive_complex->GetBakSlot()->GetEquiped() == true)
+           		if (drive_complex.GetBakSlot()->GetEquiped() == true)
               		{
-              			if (drive_complex->GetBakSlot()->GetBakEquipment()->GetFunctioning() == true)
+              			if (drive_complex.GetBakSlot()->GetBakEquipment()->GetFunctioning() == true)
               			{
-                 			if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetHyper() > drive_complex->GetBakSlot()->GetBakEquipment()->GetFuel())
-                    				propetries.hyper = drive_complex->GetDriveSlot()->GetDriveEquipment()->GetHyper();
+                 			if (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetHyper() > drive_complex.GetBakSlot()->GetBakEquipment()->GetFuel())
+                    				propetries.hyper = drive_complex.GetDriveSlot()->GetDriveEquipment()->GetHyper();
                  			else
-                    				propetries.hyper = drive_complex->GetBakSlot()->GetBakEquipment()->GetFuel();
+                    				propetries.hyper = drive_complex.GetBakSlot()->GetBakEquipment()->GetFuel();
               			}
               		}    
 		}
@@ -767,8 +778,8 @@ void Vehicle::RenderKorpus() const
 
 void Vehicle::RenderDriveEffect(float parent_d_alpha) const
 {
-	drive_complex->GetDriveEffect()->Update();
-	drive_complex->GetDriveEffect()->Render(parent_d_alpha);
+	drive_complex.GetDriveEffect()->Update();
+	drive_complex.GetDriveEffect()->Render(parent_d_alpha);
 }
 
 
@@ -868,7 +879,7 @@ bool Vehicle::IsFuelFull() const
 
 int Vehicle::GetFuelMiss() const
 {
-	return GetDriveComplex()->GetBakSlot()->GetBakEquipment()->GetFuelMiss();
+	return drive_complex.GetBakSlot()->GetBakEquipment()->GetFuelMiss();
 }
 
 void Vehicle::BuyFuelAsMuchAsPossible()
@@ -888,7 +899,7 @@ void Vehicle::BuyFuelAsMuchAsPossible()
 	}
 
 	owner_npc->DecreaseCredits(fuel * price_for_one);
-	GetDriveComplex()->GetBakSlot()->GetBakEquipment()->IncreaseFuel(fuel);
+	GetDriveComplex().GetBakSlot()->GetBakEquipment()->IncreaseFuel(fuel);
 }
 
 void Vehicle::LockItemInItemSlot(ItemSlot* item_slot, int locked_turns)
@@ -993,7 +1004,7 @@ void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptre
 void Vehicle::ResolveDataUniqueVehicle()
 {
        	BaseVehicleBuilder::Instance().CreateKorpusGeometry(this);
-        BaseVehicleBuilder::Instance().CreateDriveComplexTextureDependedStuff(this);
+        CreateDriveComplexTextureDependedStuff();
         if (data_id.subtype_id != ENTITY::ROCKETBULLET_ID)
         {
         	BaseVehicleBuilder::Instance().CreateProtectionComplexTextureDependedStuff(this);

@@ -147,13 +147,13 @@ class Vehicle : public BaseGameEntity
 		void SetSpecialActionId(int special_action_id) { this->special_action_id = special_action_id; };
 		void SetParentVehicleSlot(VehicleSlot* parent_vehicleslot) { this->parent_vehicleslot = parent_vehicleslot; };
 		
-                void SetDriveComplex(DriveComplex* drive_complex)    { this->drive_complex  = drive_complex; };
 		void SetProtectionComplex(ProtectionComplex* protection_complex) { this->protection_complex = protection_complex; };
         	
         	void SetColor(Color4f color) { this->color = color; }
         	void SetLand(BaseLand* land) { this->land = land; };
         	        
-                void SetKorpusData(VehicleKorpusData);
+                void SetKorpusData(const VehicleKorpusData&);
+                void CreateDriveComplexTextureDependedStuff();
                         		
         	BaseLand* GetLand() const { return land; };
         	int GetSpecialActionId() const { return special_action_id; };
@@ -172,7 +172,8 @@ class Vehicle : public BaseGameEntity
 		bool IsObjectWithinRadarRange(BaseGameEntity*) const;
 		                              
                 WeaponComplex& GetWeaponComplex() { return weapon_complex; };
-                DriveComplex* GetDriveComplex()           const { return drive_complex; };
+                DriveComplex& GetDriveComplex()   { return drive_complex; };
+                
                 ProtectionComplex* GetProtectionComplex() const { return protection_complex; };
                 
         	ItemSlot* GetRadarSlot()     const { return radar_slot; };
@@ -243,7 +244,7 @@ class Vehicle : public BaseGameEntity
                 VehicleKorpusData data_korpus;
                 
         	WeaponComplex     weapon_complex;
-            	DriveComplex*      drive_complex;
+            	DriveComplex      drive_complex;
         	ProtectionComplex* protection_complex;
                 
 		Npc* owner_npc;

@@ -124,29 +124,11 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
     	}    	
 }	
 
-void BaseVehicleBuilder::CreateDriveComplex(Vehicle* vehicle) const
-{   	
-    	DriveComplex* drive_complex = new DriveComplex(vehicle);  
-    	vehicle->SetDriveComplex(drive_complex);
-}
-
 void BaseVehicleBuilder::CreateProtectionComplex(Vehicle* vehicle) const
 {
 	ProtectionComplex* protection_complex = new ProtectionComplex(vehicle); 	
  	vehicle->SetProtectionComplex(protection_complex);
 }
-
-void BaseVehicleBuilder::CreateDriveComplexTextureDependedStuff(Vehicle* vehicle) const
-{
-    	vehicle->GetPoints().initMidLeftPoint();
-    	vehicle->GetPoints().addMidLeftPoint();
-
-    	vehicle->GetPoints().initMidFarLeftPoint();
-    	vehicle->GetPoints().addMidFarLeftPoint();
-    	
-	DriveEffect* drive_effect = GetNewDriveEffect(vehicle->GetTextureOb()->size_id, vehicle->GetPoints().GetpMidLeft(), vehicle->GetPoints().GetpMidFarLeft());
- 	vehicle->GetDriveComplex()->SetDriveEffect(drive_effect);
-}               
 
 void BaseVehicleBuilder::CreateProtectionComplexTextureDependedStuff(Vehicle* vehicle) const
 {
@@ -177,11 +159,11 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
 
         DriveEquipmentBuilder::Instance().CreateNewDriveEquipment();
         DriveEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
-    	vehicle->GetDriveComplex()->GetDriveSlot()->InsertItem(DriveEquipmentBuilder::Instance().GetDriveEquipment()); 
+    	vehicle->GetDriveComplex().GetDriveSlot()->InsertItem(DriveEquipmentBuilder::Instance().GetDriveEquipment()); 
         
         BakEquipmentBuilder::Instance().CreateNewBakEquipment();
         BakEquipmentBuilder::Instance().CreateNewInternals();
-    	vehicle->GetDriveComplex()->GetBakSlot()->InsertItem(BakEquipmentBuilder::Instance().GetBakEquipment()); 
+    	vehicle->GetDriveComplex().GetBakSlot()->InsertItem(BakEquipmentBuilder::Instance().GetBakEquipment()); 
         
         //EnergizerEquipmentBuilder::Instance().CreateNewEnergizerEquipment();
         //EnergizerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);

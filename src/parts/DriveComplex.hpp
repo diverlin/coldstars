@@ -21,17 +21,18 @@
 #define DRIVECOMPLEX_H
 
 class Vehicle;
-class DriveEffect; //#include "../effects/particlesystem/DriveEffect.hpp"
-class ItemSlot; //#include "../slots/ItemSlot.hpp"
-#include "../render/PathVisual.hpp" //class PathVisual;
+class DriveEffect;
+class ItemSlot; 
+#include "../render/PathVisual.hpp" 
 class BaseGameEntity;
 
 class DriveComplex
 {
 	public:
-      		DriveComplex(Vehicle*);
+      		DriveComplex();
       		~DriveComplex();
       		
+      		void SetOwnerVehicle(Vehicle* owner_vehicle) { this->owner_vehicle = owner_vehicle; };
       		void SetDriveEffect(DriveEffect* drive_effect) { this->drive_effect = drive_effect; };
       		      		
                 void SetDriveSlot(ItemSlot* drive_slot) { this->drive_slot = drive_slot; };

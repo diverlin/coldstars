@@ -468,7 +468,7 @@ void Player::RenderInSpace(bool turn_ended, bool forceDraw_orbits, bool forceDra
         		{
                 		npc->GetStarSystem()->DrawPath();
         		}
-       	 		npc->GetVehicle()->GetDriveComplex()->DrawPath();
+       	 		npc->GetVehicle()->GetDriveComplex().DrawPath();
        			npc->GetVehicle()->GetWeaponComplex().RenderWeaponsRange();
        			npc->GetVehicle()->GetWeaponComplex().RenderWeaponIcons(); 
        	
@@ -520,7 +520,7 @@ bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
                			}
                			else
                			{
-               				npc->GetVehicle()->GetDriveComplex()->SetTarget(visible_ROCKET_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
+               				npc->GetVehicle()->GetDriveComplex().SetTarget(visible_ROCKET_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
                			}
 			}
 				
@@ -588,7 +588,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
               			}
               			else
                			{
-               				npc->GetVehicle()->GetDriveComplex()->SetTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);   // make it like a ai scenario (follow obj)
+               				npc->GetVehicle()->GetDriveComplex().SetTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);   // make it like a ai scenario (follow obj)
                			}
 			}
 
@@ -639,7 +639,7 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
                    		}
                    		else
                    		{
-                   			npc->GetVehicle()->GetDriveComplex()->SetTarget(visible_ASTEROID_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
+                   			npc->GetVehicle()->GetDriveComplex().SetTarget(visible_ASTEROID_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
                    		}
                    	}
 			
@@ -669,7 +669,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
                			}
                			else
                			{
-               				npc->GetVehicle()->GetDriveComplex()->SetTarget(visible_SHIP_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
+               				npc->GetVehicle()->GetDriveComplex().SetTarget(visible_SHIP_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
                			}
 			}
 
@@ -818,7 +818,7 @@ void Player::MouseNavigation(const MouseData& data_mouse) const
 	if (data_mouse.left_click == true)
 	{
 		ForceStateMachineReset();
-		npc->GetVehicle()->GetDriveComplex()->SetStaticTargetCoords(vec2f(data_mouse.mxvp, data_mouse.myvp));  
+		npc->GetVehicle()->GetDriveComplex().SetStaticTargetCoords(vec2f(data_mouse.mxvp, data_mouse.myvp));  
 	}
 }
 

@@ -28,9 +28,9 @@
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../common/constants.hpp"
 
-DriveComplex::DriveComplex(Vehicle* owner_vehicle)
+DriveComplex::DriveComplex()
 {      
-	this->owner_vehicle = owner_vehicle;
+	owner_vehicle = NULL;
         
 	ResetTarget();
 

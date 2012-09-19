@@ -38,7 +38,7 @@ MicroScenarioGrab::~MicroScenarioGrab()
 /* virtual */		
 void MicroScenarioGrab::Enter(Npc* npc) const
 {
-	npc->GetVehicle()->GetDriveComplex()->SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget(), NAVIGATOR_ACTION::COLLECTING_ID);
+	npc->GetVehicle()->GetDriveComplex().SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget(), NAVIGATOR_ACTION::COLLECTING_ID);
 	
         #if AISCENARIO_LOG_ENABLED == 1 
 	Logger::Instance().Log("npc_id="+int2str(npc->GetId())+" ENTER MicroScenarioGrab"); 
