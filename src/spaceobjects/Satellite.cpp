@@ -82,7 +82,7 @@ void Satellite::UpdateInfo()
 void Satellite::UpdateRenderStuff()
 {
     	//points.update(); 
-    	protection_complex->GetShieldEffect()->Update();
+    	protection_complex.GetShieldEffect()->Update();
     	
     	this->UpdateRotation();
 	points.SetAngle(angle.z);
@@ -114,7 +114,7 @@ void Satellite::RenderInSpace() const
 		//renderDriveTrail();
     	//}
     	
-        if (protection_complex->GetProtectorSlot()->GetEquiped() == true)
+        if (protection_complex.GetProtectorSlot()->GetEquiped() == true)
     	{
         	RenderShieldEffect(1.0 - color.a); 
         }

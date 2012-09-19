@@ -22,14 +22,14 @@
 #include "../effects/Shield.hpp"
 #include "../common/constants.hpp"
 
-ProtectionComplex::ProtectionComplex(Vehicle* vehicle)
+ProtectionComplex::ProtectionComplex()
 {        
-        this->owner_vehicle = vehicle;
+        owner_vehicle = NULL;
         
  	shield_effect = new ShieldEffect();
         TextureOb* texOb_shield = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SHIELD_EFFECT_ID); 
         shield_effect->SetTextureOb(texOb_shield);
-        shield_effect->SetParent(vehicle);
+
         
     	shield_effect->GetPoints().addMainQuadPoints();
         
@@ -41,8 +41,3 @@ ProtectionComplex::~ProtectionComplex()
         delete shield_effect; 
 }
 
-
-void ProtectionComplex::Resize(int w, int h)
-{
-        shield_effect->GetPoints().initMainQuadPoints(w, h);
-}

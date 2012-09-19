@@ -124,17 +124,6 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
     	}    	
 }	
 
-void BaseVehicleBuilder::CreateProtectionComplex(Vehicle* vehicle) const
-{
-	ProtectionComplex* protection_complex = new ProtectionComplex(vehicle); 	
- 	vehicle->SetProtectionComplex(protection_complex);
-}
-
-void BaseVehicleBuilder::CreateProtectionComplexTextureDependedStuff(Vehicle* vehicle) const
-{
-	vehicle->GetProtectionComplex()->Resize(1.2*vehicle->GetTextureOb()->GetFrameWidth(), 1.2*vehicle->GetTextureOb()->GetFrameHeight());
-}          
-
 void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
 {
     	for (unsigned int i=0; i<vehicle->GetKorpusData().slot_weapon_num; i++)
@@ -175,7 +164,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
    	
    	ProtectorEquipmentBuilder::Instance().CreateNewProtectorEquipment();
         ProtectorEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
-   	vehicle->GetProtectionComplex()->GetProtectorSlot()->InsertItem(ProtectorEquipmentBuilder::Instance().GetProtectorEquipment()); 
+   	vehicle->GetProtectionComplex().GetProtectorSlot()->InsertItem(ProtectorEquipmentBuilder::Instance().GetProtectorEquipment()); 
    	
    	DroidEquipmentBuilder::Instance().CreateNewDroidEquipment();
         DroidEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);

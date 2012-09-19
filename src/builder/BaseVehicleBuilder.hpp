@@ -29,11 +29,8 @@ class BaseVehicleBuilder
 
         	void Equip(Vehicle*) const; 
                 
-                void CreateKorpusGeometry(Vehicle*) const;                
-                void CreateProtectionComplexTextureDependedStuff(Vehicle*) const;
-                
-        	void CreateProtectionComplex(Vehicle*) const; 
-                
+                void CreateKorpusGeometry(Vehicle*) const;      
+           
                 void CreateItemSlots(Vehicle*) const;
                 
         protected:
