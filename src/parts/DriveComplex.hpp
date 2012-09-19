@@ -21,8 +21,10 @@
 #define DRIVECOMPLEX_H
 
 class Vehicle;
-#include "../effects/particlesystem/DriveEffect.hpp"
-#include "../slots/ItemSlot.hpp"
+class DriveEffect; //#include "../effects/particlesystem/DriveEffect.hpp"
+class ItemSlot; //#include "../slots/ItemSlot.hpp"
+#include "../render/PathVisual.hpp" //class PathVisual;
+class BaseGameEntity;
 
 class DriveComplex
 {

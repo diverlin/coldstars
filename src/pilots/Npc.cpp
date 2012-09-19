@@ -27,6 +27,11 @@
 #include "../render/Render.hpp"
 #include "../docking/Kosmoport.hpp"
 
+#include "../ai/aiModel/BaseAiModel.hpp"
+#include "../pilots/Skill.hpp"
+#include "../ai/StateMachine.hpp"
+#include "../spaceobjects/Vehicle.hpp"
+
 Npc::Npc(int id)
 { 
 	is_alive = true;

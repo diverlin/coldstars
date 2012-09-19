@@ -22,6 +22,7 @@
 #include "../resources/GuiTextureObCollector.hpp"
 
 #include "../render/Render.hpp"
+#include "../parts/Turrel.hpp"
 
 WeaponComplex::WeaponComplex(Vehicle* vehicle)
 { 

@@ -22,9 +22,9 @@
 
 #include "../common/Base.hpp"
 #include "../common/constants.hpp"
-#include "../common/rect.hpp"
+class Rect; //#include "../common/rect.hpp"
 class Vehicle;
-#include "../resources/textureManager.hpp"
+class TextureOb;
 
 
 struct UnresolvedDataUniqueBaseSlot
@@ -36,12 +36,7 @@ struct UnresolvedDataUniqueBaseSlot
 	};
 	
 	int owner_type_id;
-	int owner_id;
-	
-	float rect_blx;
-        float rect_bly;
-        int rect_w; 
-        int rect_h;         
+	int owner_id;    
 };
 
 

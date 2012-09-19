@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../../slots/ItemSlot.hpp"
 #include "../../spaceobjects/Vehicle.hpp"
 #include "../../world/starsystem.hpp"
+#include "../../parts/Turrel.hpp"
 
 LazerEquipment::LazerEquipment(int id)
 {

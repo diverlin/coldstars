@@ -24,6 +24,13 @@
 #include "../spaceobjects/Vehicle.hpp"
 #include "../render/Render.hpp"
 #include "../world/starsystem.hpp"
+#include "../world/starsystem.hpp"
+#include "../resources/textureManager.hpp"
+#include "../parts/Turrel.hpp"
+
+#include "../items/equipment/RocketEquipment.hpp"
+#include "../items/equipment/LazerEquipment.hpp"
+#include "../items/equipment/RadarEquipment.hpp"
 
 ItemSlot::ItemSlot(int id)
 {
@@ -371,8 +378,7 @@ void ItemSlot::LoadDataUniqueItemSlot(const boost::property_tree::ptree& load_pt
 {}
 
 void ItemSlot::ResolveDataUniqueItemSlot()
-{
-        Rect tmp_rect(unresolved_BaseSlot.rect_blx, unresolved_BaseSlot.rect_bly, unresolved_BaseSlot.rect_w, unresolved_BaseSlot.rect_h); // no need to save this
+{        
         switch(unresolved_BaseSlot.owner_type_id)
         {
 	       case ENTITY::VEHICLE_ID: 	{	((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }

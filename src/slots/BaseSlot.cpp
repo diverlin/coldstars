@@ -71,12 +71,7 @@ void BaseSlot::SaveDataUniqueBaseSlot(boost::property_tree::ptree& save_ptree, c
 }
 
 void BaseSlot::LoadDataUniqueBaseSlot(const boost::property_tree::ptree& load_ptree)
-{
-        unresolved_BaseSlot.rect_blx = load_ptree.get<float>("unresolved.rect.BottomLeft.x");
-        unresolved_BaseSlot.rect_bly = load_ptree.get<float>("unresolved.rect.BottomLeft.y");
-        unresolved_BaseSlot.rect_w   = load_ptree.get<int>("unresolved.rect.width"); 
-        unresolved_BaseSlot.rect_h   = load_ptree.get<int>("unresolved.rect.height"); 
-     
+{   
         unresolved_BaseSlot.owner_type_id = load_ptree.get<int>("unresolved.owner_type_id"); 
         unresolved_BaseSlot.owner_id = load_ptree.get<int>("unresolved.owner_id"); 
 }

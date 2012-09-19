@@ -21,6 +21,7 @@
 #include "../common/myStr.hpp"
 #include "../common/EntityManager.hpp"
 #include "../world/starsystem.hpp"
+#include "../effects/Shield.hpp"
 
 Satellite::Satellite(int id)
 {        

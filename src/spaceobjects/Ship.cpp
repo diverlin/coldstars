@@ -27,6 +27,7 @@
 #include "../world/starsystem.hpp"
 
 #include "../render/Render.hpp"
+#include "../effects/Shield.hpp"
 
 Ship::Ship(int id)
 {

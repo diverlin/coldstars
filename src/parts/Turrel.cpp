@@ -17,6 +17,8 @@
 */
 
 #include "Turrel.hpp"
+#include "../items/equipment/RocketEquipment.hpp"
+#include "../items/equipment/LazerEquipment.hpp"
 #include "../slots/ItemSlot.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../common/myStr.hpp"

@@ -16,28 +16,24 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#ifndef BULLETDATA_H
+#define BULLETDATA_H
 
-#ifndef BASEAIMODEL_H
-#define BASEAIMODEL_H
-
-class Npc;
-#include <string>
-
-class BaseAiModel
+class BulletData
 {
 	public:
-		BaseAiModel();
-		virtual ~BaseAiModel();
-		
-		int GetTypeId() const { return type_id; };
-		
-		virtual void UpdateInStatic(Npc*) const;
-		virtual std::string GetDescription(Npc*) const;
-		
-	protected:
-		int type_id;
-}; 
-
+		int damage; 
+        	int armor; 
+        	int live_time;
+                
+        	float speed_init;
+        	float speed_max;
+        	float d_speed; 
+        	float angular_speed; 
+        
+        	void SaveData(boost::property_tree::ptree&, const std::string&) const;
+		void LoadData(const boost::property_tree::ptree&);
+		void ResolveData();
+};
 
 #endif 
-     

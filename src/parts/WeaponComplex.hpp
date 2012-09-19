@@ -20,8 +20,12 @@
 #ifndef WEAPONCOMPLEX_H
 #define WEAPONCOMPLEX_H
 
+#include <vector>
 class Vehicle;
-#include "../slots/ItemSlot.hpp"
+class ItemSlot; //#include "../slots/ItemSlot.hpp"
+class BaseItem;
+class BaseGameEntity;
+class TextureOb;
 
 class WeaponComplex
 {

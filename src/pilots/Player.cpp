@@ -27,6 +27,9 @@
 #include "../common/myStr.hpp"
 #include "../common/EntityManager.hpp"
 
+#include "../ai/MicroTask.hpp"
+#include "../ai/StateMachine.hpp"
+
 Player::Player(int id)
 { 
     	data_id.id         = id;
