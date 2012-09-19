@@ -219,7 +219,8 @@ set (SOURCES
 	src/render/Render.cpp
 	src/render/PathVisual.cpp
 
-	src/text/textstuff.cpp
+	src/text/VerticalFlowText.cpp
+	src/text/InfoTable.cpp
 
 	src/world/galaxy.cpp
 	src/world/starsystem.cpp 

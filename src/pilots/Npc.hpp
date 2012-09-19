@@ -20,15 +20,15 @@
 #define NPC_H
 
 #include "../common/Base.hpp"
-class BaseAiModel; //#include "../ai/aiModel/BaseAiModel.hpp"
-#include "../pilots/Skill.hpp" //class Skill; //
-class StateMachine; //#include "../ai/StateMachine.hpp"
-class Vehicle; //#include "../spaceobjects/Vehicle.hpp"
-#include "Observation.hpp" //class Observation; //
+class BaseAiModel;
+#include "../pilots/Skill.hpp"
+class StateMachine; 
+class Vehicle;
+#include "Observation.hpp" 
 class Planet;
 class GoodsPack;
 class StarSystem;
-#include "../text/textstuff.hpp" //class InfoTable;
+#include "../text/InfoTable.hpp"
 
 struct UnresolvedDataUniqueNpc
 {

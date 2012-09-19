@@ -25,6 +25,7 @@
 
 #include "../world/starsystem.hpp"
 #include "../render/Render.hpp"
+#include "../text/VerticalFlowText.hpp" 
 
 Turrel::Turrel(ItemSlot* slot)
 {

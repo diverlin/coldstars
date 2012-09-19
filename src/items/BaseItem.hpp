@@ -20,9 +20,9 @@
 #define BASEITEM_H
 
 #include "../common/Base.hpp"
-#include "../text/textstuff.hpp"
-class ItemSlot; //#include "../spaceobjects/ItemSlot.hpp"
-#include "../resources/textureOb.hpp"
+#include "../text/InfoTable.hpp"
+class ItemSlot; 
+class TextureOb; 
 #include "../common/rect.hpp"
 
 struct ItemCommonData 
