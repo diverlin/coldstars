@@ -23,6 +23,7 @@
 #include "../slots/BaseSlot.hpp"
 class Turrel; //#include "../parts/Turrel.hpp"
 class BaseItem; //#include "../items/BaseItem.hpp"
+class BaseGameEntity;
 
 class RocketEquipment; //#include "../items/equipment/RocketEquipment.hpp"
 class LazerEquipment; //#include "../items/equipment/LazerEquipment.hpp"
@@ -51,8 +52,6 @@ class GrappleModule; //#include "../items/modules/c.hpp"
 class Bomb; //#include "../items/others/Bomb.hpp"
 class GoodsPack; //#include "../items/others/GoodsPack.hpp"
 #include "../render/PathVisual.hpp"
-
-class BaseGameEntity;
 
 class ItemSlot : public BaseSlot
 {   

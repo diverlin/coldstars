@@ -24,6 +24,7 @@
 #include "SpaceStationBuilder.hpp"
 #include "SatelliteBuilder.hpp"
 #include "ShipBuilder.hpp"
+#include "../spaceobjects/BlackHole.hpp"
 
 #include "../common/id.hpp"
 #include "../common/EntityManager.hpp"

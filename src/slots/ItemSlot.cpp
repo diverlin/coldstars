@@ -35,6 +35,8 @@
 
 #include "../items/others/Bomb.hpp"
 
+#include "../docking/Store.hpp"
+
 ItemSlot::ItemSlot(int id)
 {
 	/* 

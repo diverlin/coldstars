@@ -17,6 +17,7 @@
 */
 
 #include "Container.hpp"
+#include "../items/BaseItem.hpp"
 #include "../common/common.hpp"
 #include "../common/constants.hpp"
 
