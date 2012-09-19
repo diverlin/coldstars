@@ -20,7 +20,8 @@
 #define ANGAR_H
 
 #include "Room.hpp"
-#include "../slots/VehicleSlot.hpp"
+class VehicleSlot; 
+class Vehicle;
 
 class Angar : public Room
 {

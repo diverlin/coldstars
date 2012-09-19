@@ -24,6 +24,7 @@
 #include "../common/rand.hpp"
 #include "../common/EntityManager.hpp"
 #include "../spaceobjects/Vehicle.hpp"
+#include "../items/others/GoodsPack.hpp"
 
 Shop::Shop(int id)
 {

@@ -21,6 +21,7 @@
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../docking/Kosmoport.hpp"
 #include "../render/Render.hpp"
+#include "../items/BaseItem.hpp"
 
 GuiVehicle::GuiVehicle()
 {

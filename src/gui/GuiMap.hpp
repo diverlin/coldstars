@@ -20,7 +20,7 @@
 #define GUIMAP_H
 
 #include "BaseGui.hpp"
-class Galaxy; //#include "../world/galaxy.hpp"
+class Galaxy;
 
 class GuiMap : public BaseGui
 {

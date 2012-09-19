@@ -19,6 +19,7 @@
 #include "GuiStore.hpp"
 #include "../pilots/Player.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
+#include "../items/BaseItem.hpp"
 
 GuiStore::GuiStore()
 {}

@@ -23,6 +23,7 @@
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../gui/ButtonSingle.hpp"
 #include "../common/myStr.hpp"
+#include "../common/constants.hpp"
 
 GuiShop::GuiShop()
 {

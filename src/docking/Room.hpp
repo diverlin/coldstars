@@ -22,8 +22,7 @@
 
 #include "../common/Base.hpp"
 #include "../common/rect.hpp"
-#include "../resources/textureOb.hpp"
-
+class TextureOb; 
 class Kosmoport;
 
 struct UnresolvedDataUniqueRoom

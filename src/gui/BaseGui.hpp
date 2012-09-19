@@ -17,7 +17,6 @@
 */
 
 
-
 #ifndef BASEGUI_H
 #define BASEGUI_H
 
@@ -25,7 +24,7 @@
 
 #include "BaseButton.hpp"
 #include "MouseData.hpp"
-class Player; //#include "../pilots/Player.hpp"
+class Player;
 
 
 class BaseGui

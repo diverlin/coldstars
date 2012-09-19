@@ -22,7 +22,6 @@
 
 #include "../render/PathVisual.hpp"
 
-
 class Orbit
 {
 	public:      

@@ -22,7 +22,7 @@
 
 #include <vector>
 class Vehicle;
-class ItemSlot; //#include "../slots/ItemSlot.hpp"
+class ItemSlot;
 class BaseItem;
 class BaseGameEntity;
 class TextureOb;

@@ -23,7 +23,7 @@
 
 #include "../gui/GuiManager.hpp"
 #include "../gui/Cursor.hpp"
-#include "../common/TurnTimer.hpp"
+class TurnTimer;
 
 class Star;
 class Planet;

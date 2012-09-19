@@ -21,6 +21,7 @@
 #include "../common/EntityManager.hpp"
 #include "../common/myStr.hpp"
 #include "../spaceobjects/Vehicle.hpp"
+#include "../slots/VehicleSlot.hpp" 
 
 Angar::Angar(int id)
 {

@@ -53,6 +53,11 @@ void Turrel::CheckTarget()
         }
 }
 
+void Turrel::ResetTarget()
+{ 
+	target = NULL; 
+	subtarget = NULL; 
+}
 
 bool Turrel::CheckAmmo() const
 {
