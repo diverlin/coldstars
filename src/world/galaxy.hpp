@@ -22,7 +22,7 @@
 
 #include "../common/Base.hpp"
 #include "../common/constants.hpp"
-class StarSystem; //#include "../world/starsystem.hpp"
+class StarSystem;
 
 class Galaxy : public Base
 {

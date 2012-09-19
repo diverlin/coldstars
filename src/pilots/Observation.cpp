@@ -24,6 +24,7 @@
 
 #include "../spaceobjects/Asteroid.hpp"
 #include "../spaceobjects/Vehicle.hpp"
+#include "../spaceobjects/Container.hpp"
 
 Observation::Observation():npc_owner(NULL)
 {}

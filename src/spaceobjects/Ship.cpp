@@ -29,6 +29,8 @@
 #include "../render/Render.hpp"
 #include "../effects/Shield.hpp"
 #include "../items/equipment/GrappleEquipment.hpp"
+#include "../slots/ItemSlot.hpp"
+#include "../slots/VehicleSlot.hpp"
 
 Ship::Ship(int id)
 {

@@ -22,6 +22,7 @@
 #include "../common/EntityManager.hpp"
 #include "../world/starsystem.hpp"
 #include "../effects/Shield.hpp"
+#include "../slots/ItemSlot.hpp"
 
 Satellite::Satellite(int id)
 {        

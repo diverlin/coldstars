@@ -20,7 +20,8 @@
 #include "../spaceobjects/Vehicle.hpp"
 #include "../resources/textureManager.hpp"
 #include "../effects/Shield.hpp"
- 
+#include "../common/constants.hpp"
+
 ProtectionComplex::ProtectionComplex(Vehicle* vehicle)
 {        
         this->owner_vehicle = vehicle;

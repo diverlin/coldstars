@@ -28,6 +28,8 @@
 #include "../spaceobjects/Planet.hpp"
 #include "../spaceobjects/Star.hpp"
 #include "../spaceobjects/BlackHole.hpp"
+#include "../spaceobjects/Container.hpp"
+
 
 Cursor::Cursor():focused_space_ob(NULL)
 {

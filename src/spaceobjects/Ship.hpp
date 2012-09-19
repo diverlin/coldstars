@@ -21,6 +21,7 @@
 #define SHIP_H
 
 #include "Vehicle.hpp"
+#include "../common/rect.hpp"
 
 class Ship : public Vehicle
 {   
