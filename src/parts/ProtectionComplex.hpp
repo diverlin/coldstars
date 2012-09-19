@@ -27,12 +27,11 @@ class ItemSlot; //#include "../slots/ItemSlot.hpp"
 class ProtectionComplex
 {
 	public:
-      		ProtectionComplex(Vehicle*);
+      		ProtectionComplex();
       		~ProtectionComplex();
 
+               	void SetOwnerVehicle(Vehicle* owner_vehicle) { this->owner_vehicle = owner_vehicle; };
       		void SetProtectorSlot(ItemSlot* protector_slot) { this->protector_slot = protector_slot; };
-
-		void Resize(int, int);
 	
       		ItemSlot* GetProtectorSlot()    const { return protector_slot; };
         	ShieldEffect* GetShieldEffect() const { return shield_effect; }; 

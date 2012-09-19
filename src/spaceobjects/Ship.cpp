@@ -84,7 +84,7 @@ void Ship::UpdateInfo()
 void Ship::UpdateInSpace(int time, bool show_effect)
 {   
 	CheckDeath(show_effect);
-	protection_complex->GetShieldEffect()->Update();
+	protection_complex.GetShieldEffect()->Update();
 	if (time > 0)
 	{
 		UpdateSpecialAction();
@@ -125,7 +125,7 @@ void Ship::RenderInSpace() const
 		RenderDriveEffect(1.0 - color.a);
     	}
     	
-    	if (protection_complex->GetProtectorSlot()->GetEquiped() == true)
+    	if (protection_complex.GetProtectorSlot()->GetEquiped() == true)
     	{
         	RenderShieldEffect(1.0 - color.a); 
         }

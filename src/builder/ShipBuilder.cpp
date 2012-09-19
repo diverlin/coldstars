@@ -50,8 +50,6 @@ void ShipBuilder::CreateNewShip(int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         
-        CreateProtectionComplex(ship);
-        
         EntityManager::Instance().RegisterEntity(ship);
 }
 
@@ -94,7 +92,7 @@ void ShipBuilder::CreateNewInternals(int race_id, int subsubtype_id, int size_id
 	CreateKorpusGeometry(ship);
 
 	ship->CreateDriveComplexTextureDependedStuff();
-	CreateProtectionComplexTextureDependedStuff(ship);
-		                               
+	ship->CreateProtectionComplexTextureDependedStuff();
+	                            
         CreateItemSlots(ship);
 }

@@ -60,7 +60,7 @@ Vehicle::Vehicle()
       	
     	weapon_complex.SetOwnerVehicle(this);
     	drive_complex.SetOwnerVehicle(this);
-    	protection_complex = NULL;
+    	protection_complex.SetOwnerVehicle(this);
     	
     	radar_slot     = NULL;
         scaner_slot    = NULL;
@@ -78,8 +78,6 @@ Vehicle::Vehicle()
 Vehicle::~Vehicle()
 {
 	EntityManager::Instance().RemoveEntity(this);
-	
-	delete protection_complex; protection_complex = NULL;
 	
 	for(unsigned int i=0; i<slot_total_vec.size(); i++)
 	{
@@ -99,6 +97,12 @@ void Vehicle::CreateDriveComplexTextureDependedStuff()
 	DriveEffect* drive_effect = GetNewDriveEffect(GetTextureOb()->size_id, GetPoints().GetpMidLeft(), GetPoints().GetpMidFarLeft());
  	GetDriveComplex().SetDriveEffect(drive_effect);
 }    
+
+void Vehicle::CreateProtectionComplexTextureDependedStuff()
+{
+     protection_complex.GetShieldEffect()->SetParent(this);
+     protection_complex.GetShieldEffect()->GetPoints().initMainQuadPoints(1.2*textureOb->GetFrameWidth(), 1.2*textureOb->GetFrameHeight());	
+}
 
 void Vehicle::SetKorpusData(const VehicleKorpusData& data_korpus) 
 { 
@@ -144,7 +148,7 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
                 }
                 case ENTITY::DRIVE_SLOT_ID:     { drive_complex.SetDriveSlot(slot); break; }
                 case ENTITY::BAK_SLOT_ID:       { drive_complex.SetBakSlot(slot); break; }
-                case ENTITY::PROTECTOR_SLOT_ID: { protection_complex->SetProtectorSlot(slot); break; }
+                case ENTITY::PROTECTOR_SLOT_ID: { protection_complex.SetProtectorSlot(slot); break; }
 		case ENTITY::RADAR_SLOT_ID:     { radar_slot  = slot; break; }
 		case ENTITY::SCANER_SLOT_ID:    { scaner_slot = slot; break; }
 		
@@ -472,9 +476,9 @@ void Vehicle::Hit(int damage, bool show_effect)
 
 	if (show_effect == true)
 	{
-    		if (protection_complex->GetProtectorSlot()->GetEquiped() == true)
+    		if (protection_complex.GetProtectorSlot()->GetEquiped() == true)
     		{
-       			protection_complex->GetShieldEffect()->SetAlpha(1.0);
+       			protection_complex.GetShieldEffect()->SetAlpha(1.0);
        		}       	
        		// improove
        		Color4i color;  	       		
@@ -618,11 +622,11 @@ void Vehicle::UpdatePropertiesProtection()
         propetries.protection = data_korpus.protection;
         propetries.equipment_protector = false;
 
-     	if (protection_complex->GetProtectorSlot()->GetEquiped() == true)
+     	if (protection_complex.GetProtectorSlot()->GetEquiped() == true)
      	{
-        	if (protection_complex->GetProtectorSlot()->GetProtectorEquipment()->GetFunctioning() == true)
+        	if (protection_complex.GetProtectorSlot()->GetProtectorEquipment()->GetFunctioning() == true)
         	{
-           		propetries.protection += protection_complex->GetProtectorSlot()->GetProtectorEquipment()->GetProtection();
+           		propetries.protection += protection_complex.GetProtectorSlot()->GetProtectorEquipment()->GetProtection();
            		propetries.equipment_protector = true;
         	}       
      	}   
@@ -785,7 +789,7 @@ void Vehicle::RenderDriveEffect(float parent_d_alpha) const
 
 void Vehicle::RenderShieldEffect(float parent_d_alpha) const
 {
-     	protection_complex->GetShieldEffect()->Render(parent_d_alpha);
+     	protection_complex.GetShieldEffect()->Render(parent_d_alpha);
 }
 
 void Vehicle::RenderRadarRange()
@@ -1007,7 +1011,7 @@ void Vehicle::ResolveDataUniqueVehicle()
         CreateDriveComplexTextureDependedStuff();
         if (data_id.subtype_id != ENTITY::ROCKETBULLET_ID)
         {
-        	BaseVehicleBuilder::Instance().CreateProtectionComplexTextureDependedStuff(this);
+        	CreateProtectionComplexTextureDependedStuff();
         }
          
        	if (data_unresolved_Vehicle.land_id != NONE_ID) 

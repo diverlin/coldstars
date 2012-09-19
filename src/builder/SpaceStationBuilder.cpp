@@ -50,8 +50,6 @@ void SpaceStationBuilder::CreateNewSpaceStation(int id)
         {
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
-
-        CreateProtectionComplex(spacestation);
         
         EntityManager::Instance().RegisterEntity(spacestation);
 }
@@ -91,8 +89,8 @@ void SpaceStationBuilder::CreateNewInternals()
 	CreateKorpusGeometry(spacestation);
 
         spacestation->CreateDriveComplexTextureDependedStuff();
-        CreateProtectionComplexTextureDependedStuff(spacestation);
-        
+        spacestation->CreateProtectionComplexTextureDependedStuff();
+                
         CreateItemSlots(spacestation);
                 
         KosmoportBuilder::Instance().CreateNewKosmoport();

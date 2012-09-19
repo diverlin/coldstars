@@ -71,7 +71,7 @@ void SpaceStation::UpdateInfo()
 void SpaceStation::UpdateRenderStuff()
 {
     	//points.update(); 
-    	protection_complex->GetShieldEffect()->Update();
+    	protection_complex.GetShieldEffect()->Update();
     	
     	//if (ableTo.DRIVE == true)
     	//{
@@ -98,7 +98,7 @@ void SpaceStation::RenderInSpace() const
 		//renderDriveTrail();
     	//}
     	
-    	if (protection_complex->GetProtectorSlot()->GetEquiped() == true)
+    	if (protection_complex.GetProtectorSlot()->GetEquiped() == true)
     	{
         	RenderShieldEffect(1.0 - color.a); 
         }
