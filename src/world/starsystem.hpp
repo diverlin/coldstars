@@ -38,9 +38,13 @@ class Player;
 
 class DistantNebulaEffect;
 class DistantStarEffect;
+class BaseParticleSystem;
+class ShockWaveEffect;
+class LazerTraceEffect;
 
 #include "../world/GarbageEntities.hpp"
 #include "../world/garbageEffects.hpp"
+
 
 struct UnresolvedDataUniqueStarSystem
 {
