@@ -21,9 +21,11 @@
 #ifndef CURSOR_H
 #define CURSOR_H
 
-#include "../slots/ItemSlot.hpp"
+class ItemSlot; //#include "../slots/ItemSlot.hpp"
+#include "../common/rect.hpp"
 #include "MouseData.hpp"
 class Player; //#include "../pilots/Player.hpp"
+class BaseGameEntity;
 
 class Cursor
 {

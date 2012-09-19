@@ -33,6 +33,8 @@
 #include "../items/equipment/RadarEquipment.hpp"
 #include "../items/equipment/GrappleEquipment.hpp"
 
+#include "../items/others/Bomb.hpp"
+
 ItemSlot::ItemSlot(int id)
 {
 	/* 

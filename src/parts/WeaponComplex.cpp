@@ -23,6 +23,7 @@
 
 #include "../render/Render.hpp"
 #include "../parts/Turrel.hpp"
+#include "../items/BaseItem.hpp"
 
 WeaponComplex::WeaponComplex(Vehicle* vehicle)
 { 

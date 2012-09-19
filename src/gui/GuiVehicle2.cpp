@@ -22,6 +22,8 @@
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 
+#include "../items/BaseItem.hpp"
+
 GuiVehicle2::GuiVehicle2()
 {
 	valid = false;

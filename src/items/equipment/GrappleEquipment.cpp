@@ -17,6 +17,8 @@
 */
 
 #include "GrappleEquipment.hpp"
+#include "../modules/GrappleModule.hpp"
+
 #include "../../common/constants.hpp"
 #include "../../common/myStr.hpp"
 #include "../../common/Logger.hpp"
