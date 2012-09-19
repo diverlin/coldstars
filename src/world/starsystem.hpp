@@ -21,6 +21,7 @@
 #define STARSYSTEM_HPP
 
 #include <vector>
+#include "../spaceobjects/BaseGameEntity.hpp"
 
 class RocketBullet;
 class BasePlanet;

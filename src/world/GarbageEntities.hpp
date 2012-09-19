@@ -19,8 +19,8 @@
 #ifndef GARBAGEENTITIES_H
 #define GARBAGEENTITIES_H
 
-#include "../common/Base.hpp"
 #include <vector>
+class Base;
 
 class GarbageEntities
 {
