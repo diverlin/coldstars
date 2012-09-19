@@ -53,7 +53,6 @@ void SpaceStationBuilder::CreateNewSpaceStation(int id)
 
         CreateProtectionComplex(spacestation);
         CreateDriveComplex(spacestation);
-        CreateWeaponsComplex(spacestation); 
         
         EntityManager::Instance().RegisterEntity(spacestation);
 }

@@ -52,7 +52,6 @@ void ShipBuilder::CreateNewShip(int id)
         
         CreateProtectionComplex(ship);
         CreateDriveComplex(ship);
-        CreateWeaponsComplex(ship); 
         
         EntityManager::Instance().RegisterEntity(ship);
 }

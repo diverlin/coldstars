@@ -28,6 +28,7 @@ class VehicleSlot;
 #include "../docking/BaseLand.hpp"
 #include "../pilots/Npc.hpp"
 class Container;
+class BaseItem;
 
 struct VehicleKorpusData
 {
@@ -146,7 +147,6 @@ class Vehicle : public BaseGameEntity
 		void SetSpecialActionId(int special_action_id) { this->special_action_id = special_action_id; };
 		void SetParentVehicleSlot(VehicleSlot* parent_vehicleslot) { this->parent_vehicleslot = parent_vehicleslot; };
 		
-                void SetWeaponComplex(WeaponComplex* weapon_complex) { this->weapon_complex = weapon_complex; };
                 void SetDriveComplex(DriveComplex* drive_complex)    { this->drive_complex  = drive_complex; };
 		void SetProtectionComplex(ProtectionComplex* protection_complex) { this->protection_complex = protection_complex; };
         	
@@ -171,7 +171,7 @@ class Vehicle : public BaseGameEntity
                 void BindOwnerNpc(Npc*);
 		bool IsObjectWithinRadarRange(BaseGameEntity*) const;
 		                              
-                WeaponComplex* GetWeaponComplex()         const { return weapon_complex; };
+                WeaponComplex& GetWeaponComplex() { return weapon_complex; };
                 DriveComplex* GetDriveComplex()           const { return drive_complex; };
                 ProtectionComplex* GetProtectionComplex() const { return protection_complex; };
                 
@@ -242,7 +242,7 @@ class Vehicle : public BaseGameEntity
 	        VehiclePropetries propetries;
                 VehicleKorpusData data_korpus;
                 
-        	WeaponComplex*     weapon_complex;
+        	WeaponComplex     weapon_complex;
             	DriveComplex*      drive_complex;
         	ProtectionComplex* protection_complex;
                 

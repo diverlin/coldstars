@@ -31,6 +31,7 @@
 #include "../items/equipment/GrappleEquipment.hpp"
 #include "../slots/ItemSlot.hpp"
 #include "../slots/VehicleSlot.hpp"
+#include "../parts/WeaponComplex.hpp"
 
 Ship::Ship(int id)
 {
@@ -90,7 +91,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 	
 		owner_npc->UpdateInSpace(time, show_effect);
 		points.Update();   
-		weapon_complex->Fire(time, owner_npc->GetSkill().GetAttack(), show_effect);
+		weapon_complex.Fire(time, owner_npc->GetSkill().GetAttack(), show_effect);
 
     		if (propetries.speed > 0) 
     		{ 
@@ -116,7 +117,7 @@ void Ship::RenderInSpace() const
     	
     	if (data_korpus.draw_turrels == true)
     	{
-        	weapon_complex->RenderTurrels();
+        	weapon_complex.RenderTurrels();
         }
 
     	if (propetries.speed > 0)
@@ -142,7 +143,7 @@ void Ship::RenderAtPlanet(const Rect& rect)
 	
 	if (data_korpus.draw_turrels == true)
     	{
-        	weapon_complex->RenderTurrels();
+        	weapon_complex.RenderTurrels();
         }
 }		
 

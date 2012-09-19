@@ -35,7 +35,6 @@ class BaseVehicleBuilder
                 void CreateProtectionComplexTextureDependedStuff(Vehicle*) const;
                 
                 void CreateDriveComplex(Vehicle*) const;
-        	void CreateWeaponsComplex(Vehicle*) const;
         	void CreateProtectionComplex(Vehicle*) const; 
                 
                 void CreateItemSlots(Vehicle*) const;

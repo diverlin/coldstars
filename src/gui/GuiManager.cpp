@@ -24,6 +24,7 @@
 #include "../common/myStr.hpp"
 #include "../render/Screen.hpp"
 #include "../render/Render.hpp"
+#include "../parts/WeaponComplex.hpp"
 
 GuiManager::GuiManager()
 {
@@ -83,7 +84,7 @@ bool GuiManager::UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData& 
 	{
 		if (selected_item_slot->GetEquiped() == true)
 		{
-			player->GetNpc()->GetVehicle()->GetWeaponComplex()->SetPreciseFireTarget(selected_item_slot->GetOwnerVehicle(), selected_item_slot);
+			player->GetNpc()->GetVehicle()->GetWeaponComplex().SetPreciseFireTarget(selected_item_slot->GetOwnerVehicle(), selected_item_slot);
 			gui_vehicle3.Reset();
 			return true;
 		}

@@ -30,9 +30,10 @@ class TextureOb;
 class WeaponComplex
 {
 	public:
-      		WeaponComplex(Vehicle*);
+      		WeaponComplex();
       		~WeaponComplex();
                
+               	void SetOwnerVehicle(Vehicle* owner_vehicle) { this->owner_vehicle = owner_vehicle; };
                	TextureOb* GetItemTextureOb(int) const; // used for gui, additional icons
                
                 bool AddSlot(ItemSlot*);

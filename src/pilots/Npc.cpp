@@ -32,6 +32,7 @@
 #include "../ai/StateMachine.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../spaceobjects/Asteroid.hpp"
+#include "../parts/WeaponComplex.hpp"
 
 Npc::Npc(int id)
 { 
@@ -89,7 +90,7 @@ void Npc::MindInKosmoport()
 
 void Npc::MindInSpace()
 {
-	vehicle->GetWeaponComplex()->PrepareWeapons();
+	vehicle->GetWeaponComplex().PrepareWeapons();
 	// this check is performed in Dynamic, no need to repeat in Static
 	//if (vehicle->ableTo.GRAB == true) 
 	//{
@@ -170,10 +171,10 @@ void Npc::CheckNeeds()
 
 void Npc::AsteroidScenario()
 {
-        vehicle->GetWeaponComplex()->DeactivateAllWeapons();
+        vehicle->GetWeaponComplex().DeactivateAllWeapons();
 
-        vehicle->GetWeaponComplex()->ActivateAllWeapons();
-        vehicle->GetWeaponComplex()->SetTarget(observation.visible_ASTEROID_pair_vec[0].object);
+        vehicle->GetWeaponComplex().ActivateAllWeapons();
+        vehicle->GetWeaponComplex().SetTarget(observation.visible_ASTEROID_pair_vec[0].object);
                 
         //printf("TARGET => ship_id, asteroid id = %i/%i\n", ship->GetId(), sorted_visible_ASTEROID_pList[0]->GetId());
 }

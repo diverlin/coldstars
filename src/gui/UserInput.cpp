@@ -21,6 +21,7 @@
 #include "../common/SaveLoadManager.hpp"
 #include "../config/config.hpp"
 #include "../render/Screen.hpp"
+#include "../parts/WeaponComplex.hpp"
 
 UserInput& UserInput::Instance()
 {
@@ -188,7 +189,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 										
 		case sf::Key::A:
 		{ 
-			if (player->GetNpc()->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
+			if (player->GetNpc()->GetVehicle()->GetWeaponComplex().IsAnyWeaponSelected() == true)
 			{
 				BaseButton* button = NULL;
 				

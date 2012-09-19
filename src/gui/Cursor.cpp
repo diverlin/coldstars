@@ -30,6 +30,7 @@
 #include "../spaceobjects/BlackHole.hpp"
 #include "../spaceobjects/Container.hpp"
 
+#include "../parts/WeaponComplex.hpp"
 
 Cursor::Cursor():focused_space_ob(NULL)
 {
@@ -82,10 +83,10 @@ void Cursor::RenderFocusedSpaceObjectStuff()
 					{
 						Satellite* satellite = (Satellite*)focused_space_ob;
 						
-			                	satellite->GetWeaponComplex()->RenderWeaponIcons();
+			                	satellite->GetWeaponComplex().RenderWeaponIcons();
 
                 				satellite->RenderRadarRange(); 
-                				satellite->GetWeaponComplex()->RenderWeaponsRange(); 
+                				satellite->GetWeaponComplex().RenderWeaponsRange(); 
                 		                                
                         			satellite->GetDriveComplex()->DrawPath(); 
 
@@ -98,10 +99,10 @@ void Cursor::RenderFocusedSpaceObjectStuff()
 					{
 						Ship* ship = (Ship*)focused_space_ob;
 						
-			                	ship->GetWeaponComplex()->RenderWeaponIcons();
+			                	ship->GetWeaponComplex().RenderWeaponIcons();
 
                 				ship->RenderRadarRange(); 
-                				ship->GetWeaponComplex()->RenderWeaponsRange(); 
+                				ship->GetWeaponComplex().RenderWeaponsRange(); 
                 		                                
                         			ship->GetDriveComplex()->DrawPath(); 
 
@@ -114,10 +115,10 @@ void Cursor::RenderFocusedSpaceObjectStuff()
 					{
 						SpaceStation* spacestation = (SpaceStation*)focused_space_ob;
 	
-			                	spacestation->GetWeaponComplex()->RenderWeaponIcons();
+			                	spacestation->GetWeaponComplex().RenderWeaponIcons();
 
                 				spacestation->RenderRadarRange(); 
-                				spacestation->GetWeaponComplex()->RenderWeaponsRange(); 
+                				spacestation->GetWeaponComplex().RenderWeaponsRange(); 
                 		                                
                         			spacestation->GetDriveComplex()->DrawPath(); 
         

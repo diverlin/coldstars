@@ -23,6 +23,7 @@
 #include "../world/starsystem.hpp"
 #include "../effects/Shield.hpp"
 #include "../slots/ItemSlot.hpp"
+#include "../parts/WeaponComplex.hpp"
 
 Satellite::Satellite(int id)
 {        
@@ -63,7 +64,7 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
 			//points.SetCenter(orbit->getPosition());
 		//}
 		
-		weapon_complex->Fire(time, owner_npc->GetSkill().GetAttack(), show_effect);
+		weapon_complex.Fire(time, owner_npc->GetSkill().GetAttack(), show_effect);
 	}
 }
 
@@ -105,7 +106,7 @@ void Satellite::RenderInSpace() const
     	
     	if (data_korpus.draw_turrels == true)
     	{
-        	weapon_complex->RenderTurrels();
+        	weapon_complex.RenderTurrels();
         }
 
     	//if (ableTo.DRIVE == true)
@@ -125,7 +126,7 @@ void Satellite::RenderAtPlanet() const
 	
 	if (data_korpus.draw_turrels == true)
     	{
-        	weapon_complex->RenderTurrels();
+        	weapon_complex.RenderTurrels();
         }
 }		
 

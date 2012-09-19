@@ -22,6 +22,7 @@
 #include "../../../common/myStr.hpp"
 #include "../../../spaceobjects/Vehicle.hpp"
 #include "../../../ai/StateMachine.hpp"
+#include "../../../parts/WeaponComplex.hpp"
 
 MicroScenarioDestroy::MicroScenarioDestroy()
 {
@@ -59,8 +60,8 @@ void MicroScenarioDestroy::Enter(Npc* npc) const
 /* virtual */
 void MicroScenarioDestroy::UpdateInStaticInSpace(Npc* npc) const
 {
-	npc->GetVehicle()->GetWeaponComplex()->ActivateAllWeapons();
-	npc->GetVehicle()->GetWeaponComplex()->SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget());
+	npc->GetVehicle()->GetWeaponComplex().ActivateAllWeapons();
+	npc->GetVehicle()->GetWeaponComplex().SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget());
         npc->GetVehicle()->GetDriveComplex()->SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget(), NAVIGATOR_ACTION::KEEP_MIDDLE_ID); 
 }
 
