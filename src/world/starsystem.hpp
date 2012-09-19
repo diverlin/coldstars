@@ -14,22 +14,15 @@
 	 You should have received a copy of the GNU General Public License
 	 along with this program; if not, write to the Free Software
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-	 */
+*/
 
 
 #ifndef STARSYSTEM_HPP
 #define STARSYSTEM_HPP
 
 #include <vector>
-//#include "../spaceobjects/BaseGameEntity.hpp"
-//#include "../spaceobjects/planet.hpp"
-class Player; //#include "../pilots/Player.hpp"
-//#include "../pilots/npc.hpp"
 
-//#include "../spaceobjects/asteroid.hpp"
-//#include "../spaceobjects/container.hpp"
-class RocketBullet; //#include "../spaceobjects/RocketBullet.hpp"
-
+class RocketBullet;
 class BasePlanet;
 class Star;
 class Planet;
@@ -41,9 +34,10 @@ class Satellite;
 class Ship; 
 class Galaxy;
 class Container;
+class Player;
 
-#include "../effects/DistantNebulaEffect.hpp"
-#include "../effects/DistantStarEffect.hpp"
+class DistantNebulaEffect;
+class DistantStarEffect;
 
 #include "../world/GarbageEntities.hpp"
 #include "../world/garbageEffects.hpp"

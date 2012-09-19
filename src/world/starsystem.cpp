@@ -40,6 +40,9 @@
 
 #include "../pilots/Player.hpp"
 
+#include "../effects/DistantNebulaEffect.hpp"
+#include "../effects/DistantStarEffect.hpp"
+
 StarSystem::StarSystem(int id)
 { 
     	data_id.id = id;
