@@ -34,6 +34,8 @@
 #include "../spaceobjects/Asteroid.hpp"
 #include "../parts/WeaponComplex.hpp"
 
+#include "../docking/Shop.hpp"
+
 Npc::Npc(int id)
 { 
 	is_alive = true;

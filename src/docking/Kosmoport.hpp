@@ -22,10 +22,10 @@
 
 #include "../docking/BaseLand.hpp"
 
-#include "../docking/Angar.hpp"
-#include "../docking/Store.hpp"
-#include "../docking/Shop.hpp"
-#include "../docking/Goverment.hpp"
+class Angar; //#include "../docking/Angar.hpp"
+class Store; //#include "../docking/Store.hpp"
+class Shop; //#include "../docking/Shop.hpp"
+class Goverment; //#include "../docking/Goverment.hpp"
 
 class Kosmoport : public BaseLand
 {
