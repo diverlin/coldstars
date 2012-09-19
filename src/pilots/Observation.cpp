@@ -21,7 +21,9 @@
 #include "../common/rand.hpp"
 #include "../pilots/Npc.hpp"
 #include "../world/starsystem.hpp"
+
 #include "../spaceobjects/Asteroid.hpp"
+#include "../spaceobjects/Vehicle.hpp"
 
 Observation::Observation():npc_owner(NULL)
 {}

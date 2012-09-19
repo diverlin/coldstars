@@ -25,17 +25,22 @@
 //#include "../spaceobjects/planet.hpp"
 class Player; //#include "../pilots/Player.hpp"
 //#include "../pilots/npc.hpp"
-#include "../spaceobjects/Star.hpp"
+
 //#include "../spaceobjects/asteroid.hpp"
 //#include "../spaceobjects/container.hpp"
-#include "../spaceobjects/RocketBullet.hpp"
-//#include "../common/myVector.hpp"
+class RocketBullet; //#include "../spaceobjects/RocketBullet.hpp"
 
+class BasePlanet;
+class Star;
+class Planet;
+class Asteroid;
 class BlackHole;
+class Vehicle;
 class SpaceStation;
 class Satellite; 
 class Ship; 
 class Galaxy;
+class Container;
 
 #include "../effects/DistantNebulaEffect.hpp"
 #include "../effects/DistantStarEffect.hpp"
