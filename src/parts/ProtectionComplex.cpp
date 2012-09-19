@@ -18,7 +18,9 @@
 
 #include "ProtectionComplex.hpp"
 #include "../spaceobjects/Vehicle.hpp"
-
+#include "../resources/textureManager.hpp"
+#include "../effects/Shield.hpp"
+ 
 ProtectionComplex::ProtectionComplex(Vehicle* vehicle)
 {        
         this->owner_vehicle = vehicle;

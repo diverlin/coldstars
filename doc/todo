@@ -1,6 +1,22 @@
 ################### FEATURES #################
 << scale VehicleGui
 
+<< grab vehicle
+
+<< korpus descriptor
+
+<< ability to hack ship
+
+<< save/load ai/quest/scenario stuff
+
+
+<< ablitiy to resize the Gui depending on screen resolution.
+- NOT RELEVANT
+
+<< Space Gui, all controls are accesible by mouse only(shortkeys as additional way to control)
+- NOT RELEVANT
+
+
 << implement all ModuleBuilder
 - DONE
 
@@ -16,16 +32,8 @@
 << grabEquipment remove maxNumGrabItems, use strenght for that purpos
 - DONE
 
-<< grab vehicle
-
 << precise fire
 - DONE
-
-<< korpus descriptor
-
-<< ability to hack ship
-
-<< save/load ai/quest/scenario stuff
 
 << player radar range in RadarGui
 - DONE
@@ -50,12 +58,6 @@
 
 << add fading animation for docking/launching
 - DONE
-
-<< ablitiy to resize the Gui depending on screen resolution.
-- NOT RELEVANT
-
-<< Space Gui, all controls are accesible by mouse only(shortkeys as additional way to control)
-- NOT RELEVANT
 
 << BaseButton and different buttons (one pos, two pos) 
 - DONE

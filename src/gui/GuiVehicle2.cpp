@@ -20,6 +20,7 @@
 #include "ButtonTrigger.hpp"
 #include "../common/myStr.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
+#include "../spaceobjects/Vehicle.hpp"
 
 GuiVehicle2::GuiVehicle2()
 {

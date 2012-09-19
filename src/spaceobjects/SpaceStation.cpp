@@ -22,6 +22,7 @@
 #include "../common/EntityManager.hpp"
 #include "../world/starsystem.hpp"
 #include "../docking/Kosmoport.hpp"
+#include "../effects/Shield.hpp"
 
 SpaceStation::SpaceStation(int id)
 {      

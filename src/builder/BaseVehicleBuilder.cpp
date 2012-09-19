@@ -48,6 +48,7 @@
 #include "../builder/ItemSlotBuilder.hpp"
 
 #include "../common/rand.hpp"
+#include "../effects/particlesystem/DriveEffect.hpp"
 
 BaseVehicleBuilder& BaseVehicleBuilder::Instance()
 {	

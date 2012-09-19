@@ -19,15 +19,16 @@
 #ifndef NPC_H
 #define NPC_H
 
-#include "../ai/aiModel/BaseAiModel.hpp"
-#include "../pilots/Skill.hpp"
-#include "../pilots/Observation.hpp" 
-#include "../ai/StateMachine.hpp"
-#include "../spaceobjects/Vehicle.hpp"
-#include "Observation.hpp"
-
+#include "../common/Base.hpp"
+class BaseAiModel; //#include "../ai/aiModel/BaseAiModel.hpp"
+#include "../pilots/Skill.hpp" //class Skill; //
+class StateMachine; //#include "../ai/StateMachine.hpp"
+class Vehicle; //#include "../spaceobjects/Vehicle.hpp"
+#include "Observation.hpp" //class Observation; //
 class Planet;
 class GoodsPack;
+class StarSystem;
+#include "../text/textstuff.hpp" //class InfoTable;
 
 struct UnresolvedDataUniqueNpc
 {

@@ -21,12 +21,12 @@
 #define ITEMSLOT_H
 
 #include "../slots/BaseSlot.hpp"
-#include "../parts/Turrel.hpp"
-#include "../items/BaseItem.hpp"
+class Turrel; //#include "../parts/Turrel.hpp"
+class BaseItem; //#include "../items/BaseItem.hpp"
 
-#include "../items/equipment/RocketEquipment.hpp"
-#include "../items/equipment/LazerEquipment.hpp"
-#include "../items/equipment/RadarEquipment.hpp"
+class RocketEquipment; //#include "../items/equipment/RocketEquipment.hpp"
+class LazerEquipment; //#include "../items/equipment/LazerEquipment.hpp"
+class RadarEquipment; //#include "../items/equipment/RadarEquipment.hpp"
 #include "../items/equipment/BakEquipment.hpp"
 #include "../items/equipment/EnergizerEquipment.hpp"
 #include "../items/equipment/ProtectorEquipment.hpp"

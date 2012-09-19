@@ -31,8 +31,15 @@
 
 #include "../common/Logger.hpp"
 
+#include "../items/equipment/RadarEquipment.hpp"
+#include "../items/equipment/BakEquipment.hpp"
+
 #include "../items/artefacts/GravityArtefact.hpp"
 #include "../items/artefacts/ProtectorArtefact.hpp"
+
+#include "../parts/Turrel.hpp"
+#include "../effects/Shield.hpp"
+#include "../effects/particlesystem/DriveEffect.hpp"
 
 Vehicle::Vehicle()
 {

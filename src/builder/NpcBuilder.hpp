@@ -20,6 +20,7 @@
 #define NPCBUILDER_H
 
 #include "../pilots/Npc.hpp"
+#include "../common/constants.hpp"
 
 class NpcBuilder
 {

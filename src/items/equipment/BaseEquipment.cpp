@@ -17,6 +17,8 @@
 */
 
 #include "BaseEquipment.hpp"
+#include "RocketEquipment.hpp"
+
 #include "../../common/constants.hpp"
 #include "../../common/myStr.hpp"
 #include "../../slots/ItemSlot.hpp"

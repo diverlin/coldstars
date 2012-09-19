@@ -26,7 +26,10 @@
 #include "../world/starsystem.hpp"
 #include "../world/galaxy.hpp"
 #include "../render/Render.hpp"
-
+#include "../resources/textureManager.hpp"
+#include "../ai/MicroTask.hpp"
+#include "../ai/StateMachine.hpp"
+ 
 GuiMap::GuiMap()
 { 
     	rect.Set(GUI::MAP::BORDER_X, 

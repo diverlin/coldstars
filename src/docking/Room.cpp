@@ -19,7 +19,8 @@
 #include "Room.hpp"
 #include "Kosmoport.hpp"
 #include "../render/Render.hpp"
-
+#include "../resources/textureManager.hpp"
+ 
 Room::Room()
 {	
 	owner_kosmoport = NULL;
