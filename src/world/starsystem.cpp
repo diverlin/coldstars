@@ -32,6 +32,14 @@
 
 #include "../items/others/Bomb.hpp"
 
+#include "../spaceobjects/SpaceStation.hpp"
+#include "../spaceobjects/Satellite.hpp"
+#include "../spaceobjects/Ship.hpp"
+#include "../spaceobjects/Planet.hpp"
+#include "../spaceobjects/BlackHole.hpp"
+
+#include "../pilots/Player.hpp"
+
 StarSystem::StarSystem(int id)
 { 
     	data_id.id = id;

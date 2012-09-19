@@ -46,6 +46,9 @@
 #include "../effects/Shield.hpp"
 #include "../effects/particlesystem/DriveEffect.hpp"
 
+#include "../spaceobjects/Planet.hpp"
+#include "../spaceobjects/SpaceStation.hpp"
+
 Vehicle::Vehicle()
 {
 	special_action_id = SPECIAL_ACTION::NONE_ID;

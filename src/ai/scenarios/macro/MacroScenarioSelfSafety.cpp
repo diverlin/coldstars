@@ -18,7 +18,9 @@
 
 #include "MacroScenarioSelfSafety.hpp"
 #include "../../../world/starsystem.hpp"
+#include "../../../spaceobjects/Planet.hpp"
 #include "../../../ai/StateMachine.hpp"
+#include "../../../ai/MicroTask.hpp"
 
 MacroScenarioSelfSafety::MacroScenarioSelfSafety() 
 {

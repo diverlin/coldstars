@@ -31,6 +31,7 @@
 #include "../pilots/Skill.hpp"
 #include "../ai/StateMachine.hpp"
 #include "../spaceobjects/Vehicle.hpp"
+#include "../spaceobjects/Asteroid.hpp"
 
 Npc::Npc(int id)
 { 
