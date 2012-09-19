@@ -31,6 +31,7 @@
 #include "../items/equipment/RocketEquipment.hpp"
 #include "../items/equipment/LazerEquipment.hpp"
 #include "../items/equipment/RadarEquipment.hpp"
+#include "../items/equipment/GrappleEquipment.hpp"
 
 ItemSlot::ItemSlot(int id)
 {

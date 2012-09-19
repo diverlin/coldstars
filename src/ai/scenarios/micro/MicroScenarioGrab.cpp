@@ -23,6 +23,8 @@
 #include "../../../spaceobjects/Vehicle.hpp"
 #include "../../../ai/StateMachine.hpp"
 
+#include "../../../items/equipment/GrappleEquipment.hpp"
+
 MicroScenarioGrab::MicroScenarioGrab()
 {
 	type_id = MICROSCENARIO::GRAB_ID;

@@ -110,7 +110,7 @@ void DriveComplex::DefineDistance(int action_id)
     		
     		case NAVIGATOR_ACTION::COLLECTING_ID:
     		{
-    		    	target_distance = owner_vehicle->GetGrappleSlot()->GetGrappleEquipment()->GetRadius()/2; 
+    		    	target_distance = owner_vehicle->GetPropetries().grab_radius/2; 
     			target_offset = getRandVec2f(target->GetCollisionRadius()/10, target->GetCollisionRadius()/5); 
     			
     			break;    		

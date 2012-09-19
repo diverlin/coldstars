@@ -28,13 +28,13 @@ class RocketEquipment; //#include "../items/equipment/RocketEquipment.hpp"
 class LazerEquipment; //#include "../items/equipment/LazerEquipment.hpp"
 class RadarEquipment; //#include "../items/equipment/RadarEquipment.hpp"
 class BakEquipment; //#include "../items/equipment/BakEquipment.hpp"
-#include "../items/equipment/EnergizerEquipment.hpp"
-#include "../items/equipment/ProtectorEquipment.hpp"
-#include "../items/equipment/DroidEquipment.hpp"
-#include "../items/equipment/FreezerEquipment.hpp"
-#include "../items/equipment/ScanerEquipment.hpp"
-#include "../items/equipment/DriveEquipment.hpp"
-#include "../items/equipment/GrappleEquipment.hpp"
+class EnergizerEquipment; //#include "../items/equipment/EnergizerEquipment.hpp"
+class ProtectorEquipment; //#include "../items/equipment/ProtectorEquipment.hpp"
+class DroidEquipment; //#include "../items/equipment/DroidEquipment.hpp"
+class FreezerEquipment; //#include "../items/equipment/FreezerEquipment.hpp"
+class ScanerEquipment; //#include "../items/equipment/ScanerEquipment.hpp"
+class DriveEquipment; //#include "../items/equipment/DriveEquipment.hpp"
+class GrappleEquipment; //#include "../items/equipment/GrappleEquipment.hpp"
 
 #include "../items/modules/RocketModule.hpp"
 #include "../items/modules/LazerModule.hpp"
@@ -52,6 +52,8 @@ class BakEquipment; //#include "../items/equipment/BakEquipment.hpp"
 #include "../items/others/GoodsPack.hpp"
 
 #include "../render/PathVisual.hpp"
+
+class BaseGameEntity;
 
 class ItemSlot : public BaseSlot
 {   
