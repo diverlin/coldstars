@@ -22,6 +22,8 @@
 #include "BaseGui.hpp"
 #include "../docking/Store.hpp"
 #include "GuiPair.hpp"
+#include "../common/constants.hpp"
+class Vehicle;
 
 class GuiVehicle : public BaseGui
 {

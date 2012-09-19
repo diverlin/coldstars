@@ -20,8 +20,8 @@
 #define SHOP_H
 
 #include "Room.hpp"
-class Npc; //#include "../pilots/Npc.hpp"
-class GoodsPack; //#include "../items/others/GoodsPack.hpp"
+class Npc; 
+class GoodsPack; 
 
 class Shop : public Room
 {

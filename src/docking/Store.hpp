@@ -21,8 +21,9 @@
 #define STORE_H
 
 #include "Room.hpp"
-#include "../slots/ItemSlot.hpp"
-#include "../pilots/Npc.hpp"
+class ItemSlot;
+class BaseItem; 
+class Npc;
 
 class Store : public Room
 {

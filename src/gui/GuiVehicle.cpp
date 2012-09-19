@@ -22,6 +22,7 @@
 #include "../docking/Kosmoport.hpp"
 #include "../render/Render.hpp"
 #include "../items/BaseItem.hpp"
+#include "../slots/ItemSlot.hpp"
 
 GuiVehicle::GuiVehicle()
 {

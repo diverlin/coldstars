@@ -24,6 +24,8 @@
 #include "../docking/Kosmoport.hpp"
 #include "../effects/Shield.hpp"
 #include "../parts/WeaponComplex.hpp"
+#include "../common/constants.hpp"
+#include "../slots/ItemSlot.hpp"
 
 SpaceStation::SpaceStation(int id)
 {      

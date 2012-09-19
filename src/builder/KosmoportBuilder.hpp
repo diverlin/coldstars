@@ -20,6 +20,7 @@
 #define KOSMOPORTBUILDER_H
 
 #include "../docking/Kosmoport.hpp"
+#include "../common/constants.hpp"
 
 class KosmoportBuilder
 {
