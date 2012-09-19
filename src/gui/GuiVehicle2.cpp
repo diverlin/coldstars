@@ -23,6 +23,7 @@
 #include "../spaceobjects/Vehicle.hpp"
 
 #include "../items/BaseItem.hpp"
+#include "../slots/ItemSlot.hpp"
 
 GuiVehicle2::GuiVehicle2()
 {

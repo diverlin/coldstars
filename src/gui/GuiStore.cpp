@@ -20,6 +20,7 @@
 #include "../pilots/Player.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../items/BaseItem.hpp"
+#include "../slots/ItemSlot.hpp"
 
 GuiStore::GuiStore()
 {}

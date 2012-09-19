@@ -23,6 +23,7 @@
 #include "../common/EntityManager.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../items/BaseItem.hpp"
+#include "../slots/ItemSlot.hpp"
 
 Store::Store(int id)
 {

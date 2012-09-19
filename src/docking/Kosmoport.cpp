@@ -19,6 +19,7 @@
 #include "Kosmoport.hpp" 
 #include "../spaceobjects/Vehicle.hpp"
 #include "../common/myStr.hpp"
+#include "../common/constants.hpp"
 
 Kosmoport::Kosmoport(int id) 
 {
