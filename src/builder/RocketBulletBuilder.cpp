@@ -47,12 +47,8 @@ void RocketBulletBuilder::CreateNewRocket(int id)
         catch(std::bad_alloc)
         {
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        CreateDriveComplex(rocket);
-        //CreateWeaponsComplex(rocket);
-        //CreateProtectionComplex(rocket);
-        
+        }        
+      
         EntityManager::Instance().RegisterEntity(rocket);
 }
 
@@ -69,5 +65,5 @@ void RocketBulletBuilder::CreateNewInternals(BulletData data_bullet)
         CreateKorpusGeometry(rocket);
         //CreateShieldGeometry(rocket);
 
-	CreateDriveComplexTextureDependedStuff(rocket);       
+	rocket->CreateDriveComplexTextureDependedStuff();       
 }

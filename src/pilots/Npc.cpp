@@ -116,7 +116,7 @@ void Npc::MindInSpace()
        		state_machine->UpdateInStaticInSpace();                 
         }
 
-        vehicle->GetDriveComplex()->UpdatePath();
+        vehicle->GetDriveComplex().UpdatePath();
 }
 
 void Npc::UpdateInSpace(int time, bool show_effect)

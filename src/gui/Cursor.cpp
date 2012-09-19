@@ -88,7 +88,7 @@ void Cursor::RenderFocusedSpaceObjectStuff()
                 				satellite->RenderRadarRange(); 
                 				satellite->GetWeaponComplex().RenderWeaponsRange(); 
                 		                                
-                        			satellite->GetDriveComplex()->DrawPath(); 
+                        			satellite->GetDriveComplex().DrawPath(); 
 
 						satellite->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
 						                        
@@ -104,7 +104,7 @@ void Cursor::RenderFocusedSpaceObjectStuff()
                 				ship->RenderRadarRange(); 
                 				ship->GetWeaponComplex().RenderWeaponsRange(); 
                 		                                
-                        			ship->GetDriveComplex()->DrawPath(); 
+                        			ship->GetDriveComplex().DrawPath(); 
 
 						ship->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
 						                        
@@ -120,7 +120,7 @@ void Cursor::RenderFocusedSpaceObjectStuff()
                 				spacestation->RenderRadarRange(); 
                 				spacestation->GetWeaponComplex().RenderWeaponsRange(); 
                 		                                
-                        			spacestation->GetDriveComplex()->DrawPath(); 
+                        			spacestation->GetDriveComplex().DrawPath(); 
         
         					spacestation->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
         					                

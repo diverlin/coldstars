@@ -95,7 +95,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 
     		if (propetries.speed > 0) 
     		{ 
-       			drive_complex->UpdatePosition();
+       			drive_complex.UpdatePosition();
     		}
     
     		if (propetries.grab_radius > 0)

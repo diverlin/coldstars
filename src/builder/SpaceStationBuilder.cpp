@@ -52,7 +52,6 @@ void SpaceStationBuilder::CreateNewSpaceStation(int id)
         }
 
         CreateProtectionComplex(spacestation);
-        CreateDriveComplex(spacestation);
         
         EntityManager::Instance().RegisterEntity(spacestation);
 }
@@ -91,7 +90,7 @@ void SpaceStationBuilder::CreateNewInternals()
     	
 	CreateKorpusGeometry(spacestation);
 
-        CreateDriveComplexTextureDependedStuff(spacestation);
+        spacestation->CreateDriveComplexTextureDependedStuff();
         CreateProtectionComplexTextureDependedStuff(spacestation);
         
         CreateItemSlots(spacestation);

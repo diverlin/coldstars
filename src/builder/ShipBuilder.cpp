@@ -51,7 +51,6 @@ void ShipBuilder::CreateNewShip(int id)
         }
         
         CreateProtectionComplex(ship);
-        CreateDriveComplex(ship);
         
         EntityManager::Instance().RegisterEntity(ship);
 }
@@ -94,7 +93,7 @@ void ShipBuilder::CreateNewInternals(int race_id, int subsubtype_id, int size_id
 	
 	CreateKorpusGeometry(ship);
 
-	CreateDriveComplexTextureDependedStuff(ship);
+	ship->CreateDriveComplexTextureDependedStuff();
 	CreateProtectionComplexTextureDependedStuff(ship);
 		                               
         CreateItemSlots(ship);
