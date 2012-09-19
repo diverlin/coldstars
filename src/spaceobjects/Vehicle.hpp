@@ -20,15 +20,14 @@
 #define VEHICLE_H
 
 #include "../spaceobjects/BaseGameEntity.hpp"
-#include "../slots/VehicleSlot.hpp"
+class VehicleSlot; 
 #include "../parts/WeaponComplex.hpp"
 #include "../parts/DriveComplex.hpp"
 #include "../parts/ProtectionComplex.hpp"
 
 #include "../docking/BaseLand.hpp"
 #include "../pilots/Npc.hpp"
-
-#include "../spaceobjects/Container.hpp"
+class Container;
 
 struct VehicleKorpusData
 {

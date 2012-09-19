@@ -24,6 +24,7 @@
 #include "../../../ai/StateMachine.hpp"
 
 #include "../../../items/equipment/GrappleEquipment.hpp"
+#include "../../../slots/ItemSlot.hpp"
 
 MicroScenarioGrab::MicroScenarioGrab()
 {

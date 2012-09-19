@@ -18,6 +18,7 @@
 
 #include "NatureLand.hpp"
 #include "../spaceobjects/Vehicle.hpp"
+#include "../common/constants.hpp"
 
 NatureLand::NatureLand()
 {}

@@ -21,6 +21,7 @@
 #include "../../common/myStr.hpp"
 #include "../../items/modules/DroidModule.hpp"
 #include "../../spaceobjects/Vehicle.hpp"
+#include "../../slots/ItemSlot.hpp"
 
 DroidEquipment::DroidEquipment(int id)
 {

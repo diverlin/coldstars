@@ -48,6 +48,7 @@
 
 #include "../spaceobjects/Planet.hpp"
 #include "../spaceobjects/SpaceStation.hpp"
+#include "Container.hpp"
 
 Vehicle::Vehicle()
 {

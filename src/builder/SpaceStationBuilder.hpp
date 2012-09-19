@@ -21,6 +21,7 @@
 
 #include "BaseVehicleBuilder.hpp"
 #include "../spaceobjects/SpaceStation.hpp"
+#include "../common/constants.hpp"
 
 class SpaceStationBuilder : public BaseVehicleBuilder
 {

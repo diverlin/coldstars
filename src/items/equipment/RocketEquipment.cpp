@@ -24,6 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../../builder/RocketBulletBuilder.hpp"
 #include "../../world/starsystem.hpp"
 #include "../../parts/Turrel.hpp"
+#include "../../slots/ItemSlot.hpp"
 
 void BulletData::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {       	
