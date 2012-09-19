@@ -28,6 +28,7 @@
 
 #include "../render/Render.hpp"
 #include "../effects/Shield.hpp"
+#include "../items/equipment/GrappleEquipment.hpp"
 
 Ship::Ship(int id)
 {
@@ -61,6 +62,14 @@ void Ship::UpdateInfo()
     	info.addNameStr("repair:");        	info.addValueStr( int2str(propetries.repair) );
 	info.addNameStr("speed:");       	info.addValueStr( boost::lexical_cast<std::string>(propetries.speed) );
 
+	if (propetries.grab_radius > 0)
+	{
+		std::string grab_str = GetGrappleSlot()->GetGrappleEquipment()->GetTargetStr();
+		if (grab_str.size() > 0)
+		{
+			info.addNameStr("grab_id:");   		info.addValueStr( grab_str ); 
+		}
+	}
 
 	//info.addNameStr("attackR:");       	info.addValueStr( boost::lexical_cast<std::string>(propetries.attack_rate_normalized) );	
 	//info.addNameStr("defenceR:");       	info.addValueStr( boost::lexical_cast<std::string>(propetries.defence_rate_normalized) );	

@@ -201,19 +201,9 @@ bool Npc::CheckPossibilityToScan(Vehicle* vehicle)
         	return true;
         }
  
-     	if (this->vehicle->GetPropetries().scan > 0) 
+     	if (this->vehicle->GetPropetries().scan > vehicle->GetPropetries().protection) 
      	{
-        	if (vehicle->GetProtectionComplex()->GetProtectorSlot()->GetEquiped() == true)
-        	{
-           		if (this->vehicle->GetScanerSlot()->GetScanerEquipment()->GetScan() >= vehicle->GetProtectionComplex()->GetProtectorSlot()->GetProtectorEquipment()->GetProtection()) 
-              		{
-              			return true;
-              		}
-              	}
-              	else
-              	{
-              		return true;
-              	}
+		return true;
         }
 
      	return false;
@@ -236,15 +226,6 @@ void Npc::UpdateInfo()
     	info.addNameStr("credits:");   	  info.addValueStr( int2str(credits) );	
     	info.addNameStr("expirience:");   info.addValueStr( int2str(skill.GetExpirience()) + " / " + int2str(skill.GetExpirienceNextLevel()) );	
     	info.addNameStr("availiable points:");   info.addValueStr( int2str(skill.GetAvailiablePoints()) );	
-    	    	
-	if (vehicle->GetPropetries().grab_radius > 0)
-	{
-		std::string grab_str = vehicle->GetGrappleSlot()->GetGrappleEquipment()->GetTargetStr();
-		if (grab_str.size() > 0)
-		{
-			info.addNameStr("grab_id:");   		info.addValueStr( grab_str ); 
-		}
-	}
 	
     	if (state_machine->GetMacroTaskManager()->GetScenario() != NULL)
     	{ 	

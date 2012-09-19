@@ -30,6 +30,9 @@
 #include "../ai/MicroTask.hpp"
 #include "../ai/StateMachine.hpp"
 
+#include "../items/equipment/ScanerEquipment.hpp"
+#include "../items/equipment/GrappleEquipment.hpp"
+
 Player::Player(int id)
 { 
     	data_id.id         = id;
