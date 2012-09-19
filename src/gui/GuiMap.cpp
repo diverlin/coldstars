@@ -55,7 +55,7 @@ bool GuiMap::UpdateMouseInteraction(const MouseData& data_mouse, Galaxy* galaxy)
                 		if (ss_cursor_dist < 10)
                 		{ 
                    			int ss_ss_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter(), player->GetNpc()->GetStarSystem()->GetPoints().GetCenter() );
-                   			if ( (ss_ss_dist < player->GetNpc()->GetVehicle()->GetDriveComplex()->GetDriveSlot()->GetDriveEquipment()->GetHyper()) && (ss_ss_dist < player->GetNpc()->GetVehicle()->GetDriveComplex()->GetBakSlot()->GetBakEquipment()->GetFuel()) )
+                   			if (ss_ss_dist < player->GetNpc()->GetVehicle()->GetPropetries().hyper)
                       			{
                       				if (data_mouse.left_click == true)
                       				{ 
