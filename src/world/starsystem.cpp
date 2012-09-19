@@ -30,6 +30,8 @@
 #include "../common/myStr.hpp"
 #include "../render/Render.hpp"
 
+#include "../items/others/Bomb.hpp"
+
 StarSystem::StarSystem(int id)
 { 
     	data_id.id = id;
