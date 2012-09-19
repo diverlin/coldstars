@@ -560,15 +560,21 @@ void Vehicle::UpdatePropertiesJump()
 	propetries.hyper = 0;
 
      	if (drive_complex->GetDriveSlot()->GetEquiped() == true)
+     	{
         	if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)
+           	{
            		if (drive_complex->GetBakSlot()->GetEquiped() == true)
+              		{
               			if (drive_complex->GetBakSlot()->GetBakEquipment()->GetFunctioning() == true)
               			{
                  			if (drive_complex->GetDriveSlot()->GetDriveEquipment()->GetHyper() > drive_complex->GetBakSlot()->GetBakEquipment()->GetFuel())
                     				propetries.hyper = drive_complex->GetDriveSlot()->GetDriveEquipment()->GetHyper();
                  			else
                     				propetries.hyper = drive_complex->GetBakSlot()->GetBakEquipment()->GetFuel();
-              			}    
+              			}
+              		}    
+		}
+	}
 }
 
 

@@ -82,6 +82,7 @@ struct VehiclePropetries
 	int radar;
 	int speed;  // depends on mass and drive
 
+	int jump;  // min(hyper, fuel)
 	int hyper;  // depends on drive
 	int fuel;    // depends on bak
 	int repair; // depends on droid
@@ -109,6 +110,7 @@ struct VehiclePropetries
 	protection(0),
         radar(0),
         speed(0),
+        jump(0),
         hyper(0),
         fuel(0),
         repair(0),
