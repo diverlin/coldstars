@@ -27,6 +27,8 @@
 #include "../parts/WeaponComplex.hpp"
 #include "../items/BaseItem.hpp"
 
+#include "../docking/Goverment.hpp"
+
 GuiManager::GuiManager()
 {
 	player = NULL;

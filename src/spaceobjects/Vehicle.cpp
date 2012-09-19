@@ -56,6 +56,8 @@
 #include "../text/VerticalFlowText.hpp" 
 #include "../slots/VehicleSlot.hpp" 
 
+#include "../docking/Angar.hpp"
+
 Vehicle::Vehicle()
 {
 	special_action_id = SPECIAL_ACTION::NONE_ID;
