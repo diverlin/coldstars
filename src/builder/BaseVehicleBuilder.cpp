@@ -17,6 +17,7 @@
 */
 
 #include "BaseVehicleBuilder.hpp"
+#include "../parts/WeaponComplex.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -129,12 +130,6 @@ void BaseVehicleBuilder::CreateDriveComplex(Vehicle* vehicle) const
     	vehicle->SetDriveComplex(drive_complex);
 }
 
-void BaseVehicleBuilder::CreateWeaponsComplex(Vehicle* vehicle) const
-{
- 	WeaponComplex* weapon_complex = new WeaponComplex(vehicle);
- 	vehicle->SetWeaponComplex(weapon_complex);
-}
-
 void BaseVehicleBuilder::CreateProtectionComplex(Vehicle* vehicle) const
 {
 	ProtectionComplex* protection_complex = new ProtectionComplex(vehicle); 	
@@ -166,13 +161,13 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
     		{
     	    		RocketEquipmentBuilder::Instance().CreateNewRocketEquipment();
         		RocketEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
-       			vehicle->GetWeaponComplex()->AddItem(RocketEquipmentBuilder::Instance().GetRocketEquipment());
+       			vehicle->GetWeaponComplex().AddItem(RocketEquipmentBuilder::Instance().GetRocketEquipment());
 		}
 		else
 		{
     	        	LazerEquipmentBuilder::Instance().CreateNewLazerEquipment();
         		LazerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
-       			vehicle->GetWeaponComplex()->AddItem(LazerEquipmentBuilder::Instance().GetLazerEquipment()); 
+       			vehicle->GetWeaponComplex().AddItem(LazerEquipmentBuilder::Instance().GetLazerEquipment()); 
        		}
     	}   
            

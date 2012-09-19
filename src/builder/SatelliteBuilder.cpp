@@ -52,7 +52,6 @@ void SatelliteBuilder::CreateNewSatellite(int id)
 
         CreateProtectionComplex(satellite);
         CreateDriveComplex(satellite);
-        CreateWeaponsComplex(satellite); 
         
         EntityManager::Instance().RegisterEntity(satellite);
 }

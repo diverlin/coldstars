@@ -32,6 +32,7 @@
 
 #include "../items/equipment/ScanerEquipment.hpp"
 #include "../items/equipment/GrappleEquipment.hpp"
+#include "../parts/WeaponComplex.hpp"
 
 Player::Player(int id)
 { 
@@ -468,8 +469,8 @@ void Player::RenderInSpace(bool turn_ended, bool forceDraw_orbits, bool forceDra
                 		npc->GetStarSystem()->DrawPath();
         		}
        	 		npc->GetVehicle()->GetDriveComplex()->DrawPath();
-       			npc->GetVehicle()->GetWeaponComplex()->RenderWeaponsRange();
-       			npc->GetVehicle()->GetWeaponComplex()->RenderWeaponIcons(); 
+       			npc->GetVehicle()->GetWeaponComplex().RenderWeaponsRange();
+       			npc->GetVehicle()->GetWeaponComplex().RenderWeaponIcons(); 
        	
         		if (show.GetRangeRadar() == true)
         		{
@@ -513,9 +514,9 @@ bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
                
                		if (data_mouse.left_click == true)
                		{
-               			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
+               			if (npc->GetVehicle()->GetWeaponComplex().IsAnyWeaponSelected() == true)
                			{
-               				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_ROCKET_vec[i]);
+               				npc->GetVehicle()->GetWeaponComplex().SetTarget(visible_ROCKET_vec[i]);
                			}
                			else
                			{
@@ -541,7 +542,7 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
 			            		
       			if (data_mouse.left_click == true)
        			{          					    
-               			npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_CONTAINER_vec[i]);
+               			npc->GetVehicle()->GetWeaponComplex().SetTarget(visible_CONTAINER_vec[i]);
       			}
        			if (data_mouse.right_click == true)
    			{
@@ -581,9 +582,9 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
                 
                		if (data_mouse.left_click == true)
                		{
-               			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
+               			if (npc->GetVehicle()->GetWeaponComplex().IsAnyWeaponSelected() == true)
                			{
-               				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_SATELLITE_vec[i]);
+               				npc->GetVehicle()->GetWeaponComplex().SetTarget(visible_SATELLITE_vec[i]);
               			}
               			else
                			{
@@ -632,9 +633,9 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
 			
                 	if (data_mouse.left_click == true)
 			{
-                	        if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
+                	        if (npc->GetVehicle()->GetWeaponComplex().IsAnyWeaponSelected() == true)
                 		{
-                   			npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_ASTEROID_vec[i]);
+                   			npc->GetVehicle()->GetWeaponComplex().SetTarget(visible_ASTEROID_vec[i]);
                    		}
                    		else
                    		{
@@ -662,9 +663,9 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
                 
                		if (data_mouse.left_click == true)
                		{
-               			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
+               			if (npc->GetVehicle()->GetWeaponComplex().IsAnyWeaponSelected() == true)
                			{
-               				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_SHIP_vec[i]);
+               				npc->GetVehicle()->GetWeaponComplex().SetTarget(visible_SHIP_vec[i]);
                			}
                			else
                			{
@@ -688,7 +689,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
                 		{
                       		        if (npc->CheckPossibilityToScan(visible_SHIP_vec[i]) == true)
                 			{
-                				if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == false)
+                				if (npc->GetVehicle()->GetWeaponComplex().IsAnyWeaponSelected() == false)
                 				{
                       					npc->SetScanTarget(visible_SHIP_vec[i]);
                       					gui_manager.GetGuiVehicle().BindVehicle(visible_SHIP_vec[i]);
@@ -735,9 +736,9 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
                 
                		if (data_mouse.left_click == true)
                		{
-               			if (npc->GetVehicle()->GetWeaponComplex()->IsAnyWeaponSelected() == true)
+               			if (npc->GetVehicle()->GetWeaponComplex().IsAnyWeaponSelected() == true)
                			{
-               				npc->GetVehicle()->GetWeaponComplex()->SetTarget(visible_SPACESTATION_vec[i]);
+               				npc->GetVehicle()->GetWeaponComplex().SetTarget(visible_SPACESTATION_vec[i]);
                			}
                			else
                			{

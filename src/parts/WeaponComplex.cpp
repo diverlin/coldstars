@@ -26,9 +26,9 @@
 #include "../items/BaseItem.hpp"
 #include "../slots/ItemSlot.hpp"
 
-WeaponComplex::WeaponComplex(Vehicle* vehicle)
+WeaponComplex::WeaponComplex()
 { 
-        this->owner_vehicle = vehicle;
+        owner_vehicle = NULL;
 }
 
 WeaponComplex::~WeaponComplex()

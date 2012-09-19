@@ -49,6 +49,7 @@
 #include "../spaceobjects/Planet.hpp"
 #include "../spaceobjects/SpaceStation.hpp"
 #include "Container.hpp"
+#include "../parts/WeaponComplex.hpp"
 
 Vehicle::Vehicle()
 {
@@ -57,7 +58,7 @@ Vehicle::Vehicle()
 	owner_npc = NULL;
        	starsystem = NULL; 
       	
-    	weapon_complex     = NULL;
+    	weapon_complex.SetOwnerVehicle(this);
     	drive_complex      = NULL;
     	protection_complex = NULL;
     	
@@ -78,7 +79,6 @@ Vehicle::~Vehicle()
 {
 	EntityManager::Instance().RemoveEntity(this);
 	
-    	delete weapon_complex; weapon_complex = NULL;
     	delete drive_complex;  drive_complex = NULL;
 	delete protection_complex; protection_complex = NULL;
 	
@@ -127,7 +127,7 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
                 	int pos_y = getRandInt(border_start*h, border_end*h) - h/2;
 			slot->GetTurrel()->GetPoints().SetParentCenter(vec2f(pos_x, pos_y));
                  	points.Add(slot->GetTurrel()->GetPoints().GetpCenter(), slot->GetTurrel()->GetPoints().GetpParentCenter()); 
-                	weapon_complex->AddSlot(slot); 
+                	weapon_complex.AddSlot(slot); 
                 	
                 	break; 
                 }
@@ -515,8 +515,8 @@ void Vehicle::ChangeMass(int d_mass)
 
 void Vehicle::UpdatePropertiesFire()
 {
-     	weapon_complex->UpdateFireAbility();
-     	weapon_complex->PrepareWeapons();
+     	weapon_complex.UpdateFireAbility();
+     	weapon_complex.PrepareWeapons();
 }
 
 void Vehicle::UpdatePropertiesSpeed()
