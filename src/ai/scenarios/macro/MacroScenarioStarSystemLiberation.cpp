@@ -22,6 +22,8 @@
 #include "../../../common/myStr.hpp"
 #include "../../../world/starsystem.hpp"
 #include "../../../ai/StateMachine.hpp"
+#include "../../../ai/MicroTask.hpp"
+#include "../../../spaceobjects/Vehicle.hpp"
 
 MacroScenarioStarSystemLiberation::MacroScenarioStarSystemLiberation() 
 {
