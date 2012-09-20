@@ -16,7 +16,7 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "textureManager.hpp"
+#include "TextureManager.hpp"
 #include "../common/constants.hpp"
 #include "../common/rand.hpp"
 #include "../common/gameStruct.hpp"

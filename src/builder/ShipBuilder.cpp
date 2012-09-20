@@ -22,7 +22,7 @@
 #include "../common/Logger.hpp"
 #include "../common/rand.hpp"
 
-#include "../resources/textureManager.hpp"
+#include "../resources/TextureManager.hpp"
 
 ShipBuilder& ShipBuilder::Instance()
 {	

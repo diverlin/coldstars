@@ -17,7 +17,7 @@
 */
 
 #include "BaseBackGroundEffect.hpp"
-#include "../resources/textureManager.hpp"
+#include "../resources/TextureManager.hpp"
 #include "../render/Render.hpp"
 
 int BaseBackGroundEffect::counter;

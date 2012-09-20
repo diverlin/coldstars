@@ -20,7 +20,7 @@
 #include "../common/constants.hpp"
 #include "../common/EntityManager.hpp"
 #include "../common/myStr.hpp"
-#include "../resources/textureManager.hpp"
+#include "../resources/TextureManager.hpp"
 #include "../world/starsystem.hpp"
 #include "../render/Render.hpp"
 #include "../resources/ShaderCollector.hpp"

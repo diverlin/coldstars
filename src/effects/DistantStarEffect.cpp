@@ -21,7 +21,7 @@
 #include "../common/constants.hpp"
 #include "../common/rand.hpp"
 
-#include "../resources/textureManager.hpp"
+#include "../resources/TextureManager.hpp"
 
 DistantStarEffect::DistantStarEffect()
 {}

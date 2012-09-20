@@ -23,7 +23,7 @@
 #include "../common/rand.hpp"
 
 #include "../common/id.hpp"
-#include "../resources/textureManager.hpp"
+#include "../resources/TextureManager.hpp"
 
 BlackHole::BlackHole(int id)
 {        

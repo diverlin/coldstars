@@ -26,7 +26,7 @@
 #include "../world/starsystem.hpp"
 #include "../world/galaxy.hpp"
 #include "../render/Render.hpp"
-#include "../resources/textureManager.hpp"
+#include "../resources/TextureManager.hpp"
 #include "../ai/MicroTask.hpp"
 #include "../ai/StateMachine.hpp"
 

@@ -25,7 +25,7 @@
 #include "../render/Render.hpp"
 #include "../effects/particlesystem/ExplosionEffect.hpp"
 
-#include "../resources/textureManager.hpp"
+#include "../resources/TextureManager.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../builder/BaseVehicleBuilder.hpp"
 

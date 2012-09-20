@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../../../common/EntityManager.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/rand.hpp"
-#include "../../../resources/textureManager.hpp"
+#include "../../../resources/TextureManager.hpp"
 
 DroidModuleBuilder& DroidModuleBuilder::Instance()
 {

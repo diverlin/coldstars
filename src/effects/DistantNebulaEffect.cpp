@@ -21,7 +21,7 @@
 #include "../common/constants.hpp"
 #include "../common/myStr.hpp"
 
-#include "../resources/textureManager.hpp"
+#include "../resources/TextureManager.hpp"
 
 #include "../render/Render.hpp"
 

@@ -21,7 +21,7 @@
 #include "../common/constants.hpp"
 #include "../common/myStr.hpp"
 #include "../common/EntityManager.hpp"
-#include "../resources/textureManager.hpp"
+#include "../resources/TextureManager.hpp"
 #include "../world/starsystem.hpp"
 
 RocketBullet::RocketBullet(int id)

@@ -25,7 +25,7 @@
 #include "../render/Screen.hpp"
 #include "MeshCollector.hpp"
 #include "ObjMeshInstance.hpp"
-#include "textureManager.hpp"
+#include "TextureManager.hpp"
 #include "GuiTextureObCollector.hpp"
 
 void loadGameData()

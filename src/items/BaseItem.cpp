@@ -21,7 +21,7 @@
 #include "../common/EntityManager.hpp"
 #include "../slots/ItemSlot.hpp"
 #include "../render/Render.hpp"
-#include "../resources/textureManager.hpp"
+#include "../resources/TextureManager.hpp"
 
 ItemCommonData::ItemCommonData()
 {	

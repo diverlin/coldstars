@@ -21,7 +21,7 @@
 #include "../common/id.hpp"
 #include "../common/Logger.hpp"
 #include "../common/EntityManager.hpp"
-#include "../resources/textureManager.hpp"
+#include "../resources/TextureManager.hpp"
 
 GovermentBuilder& GovermentBuilder::Instance()
 {

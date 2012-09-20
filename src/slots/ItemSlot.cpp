@@ -25,7 +25,7 @@
 #include "../render/Render.hpp"
 #include "../world/starsystem.hpp"
 #include "../world/starsystem.hpp"
-#include "../resources/textureManager.hpp"
+#include "../resources/TextureManager.hpp"
 #include "../parts/Turrel.hpp"
 
 #include "../items/equipment/RocketEquipment.hpp"
