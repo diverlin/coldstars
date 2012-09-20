@@ -772,10 +772,22 @@ void StarSystem::manageDeadObjects_s()
     	}
 }    
     
+bool StarSystem::IsVehiclePartOfAppearQueue(int id)
+{
+        for (unsigned int i=0; i<appear_VEHICLE_queue.size(); i++)
+        {               
+		if (appear_VEHICLE_queue[i]->GetId() == id)
+		{
+			return true;
+		}
+        }
+        
+        return false;
+}    
 
 void StarSystem::PostHyperJumpEvent()
 {
-        for (unsigned int i = 0; i<appear_VEHICLE_queue.size(); i++)
+        for (unsigned int i=0; i<appear_VEHICLE_queue.size(); i++)
         {               
         	vec2f center(getRandInt(700, 1200), getRandInt(700, 1200)); // get correct pos
 		float angle = getRandInt(0, 360);  

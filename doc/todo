@@ -1,6 +1,4 @@
 ################### FEATURES #################
-<< scale VehicleGui
-
 << grab vehicle
 
 << korpus descriptor
@@ -16,6 +14,11 @@
 << Space Gui, all controls are accesible by mouse only(shortkeys as additional way to control)
 - NOT RELEVANT
 
+<< before player jump exec TurnEnd, after huperjum set camera to player position
+- DONE
+
+<< scale VehicleGui
+- DONE
 
 << implement all ModuleBuilder
 - DONE

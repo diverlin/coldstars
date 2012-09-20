@@ -122,6 +122,8 @@ class Player : public Base
     		Player(int);
      		~Player();
 
+		void SetTargetStarSystem(StarSystem* target_starsystem) { this->target_starsystem = target_starsystem; };
+
 		Show& GetShow() { return show; };
 		GuiManager& GetGuiManager() { return gui_manager; };
           	
@@ -150,14 +152,16 @@ class Player : public Base
      		void RunSession(const TurnTimer&); 
     		
     		void ForceStateMachineReset() const;
-    		                
+    		         
+    		void UpdateStarSystemTransaction(TurnTimer&);
+    		             		       
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 		 
      	private:
     	     	Npc* npc;
-     	     	
+     	     	StarSystem* target_starsystem;
      	     	Cursor cursor;
 
      	     	Show show;  
