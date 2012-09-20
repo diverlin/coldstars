@@ -140,7 +140,7 @@ DriveEffect* GetNewDriveEffect(int size_id, vec2f* pTo_pos, vec2f* pTo_target_po
    	   	
    	int particles_num = 5;                        
                        
-        TextureOb* texOb_particle = TextureManager::Instance().getTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
+        TextureOb* texOb_particle = TextureManager::Instance().GetTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
    	DriveEffect* drive_effect = new DriveEffect(pTo_pos, pTo_target_pos);
         
         drive_effect->SetTextureOb(texOb_particle);                                 

@@ -210,7 +210,7 @@ void TextureManager::Add(TextureOb* texOb)
 
 
 
-TextureOb* TextureManager :: GetRandomTextureObFromList(std::vector<TextureOb*>* pTo_list)
+TextureOb* TextureManager::GetRandomTextureObFromList(std::vector<TextureOb*>* pTo_list)
 {  
      	if (pTo_list->size() > 1)
 		return (*pTo_list)[getRandInt(0, pTo_list->size() )];
@@ -218,61 +218,61 @@ TextureOb* TextureManager :: GetRandomTextureObFromList(std::vector<TextureOb*>*
         	return (*pTo_list)[0];
 }
 
-TextureOb* TextureManager :: getShipTexObByClosestSizeFromList(std::vector<TextureOb*>* pTo_list, int _size_id)
+TextureOb* TextureManager::GetShipTexObByClosestSizeFromList(std::vector<TextureOb*>* pTo_list, int _size_id)
 {  
     int size_id = _size_id;
     TextureOb* texOb;
 
     size_id -= 1;
-    texOb = getShipTexObBySizeFromList(pTo_list, size_id);
+    texOb = GetShipTexObBySizeFromList(pTo_list, size_id);
 
     if (texOb == NULL)
     {
        size_id += 2;
-       texOb = getShipTexObBySizeFromList(pTo_list, size_id);
+       texOb = GetShipTexObBySizeFromList(pTo_list, size_id);
     }
      
     if (texOb == NULL)
     {
        size_id -= 3;
-       texOb = getShipTexObBySizeFromList(pTo_list, size_id);
+       texOb = GetShipTexObBySizeFromList(pTo_list, size_id);
     }
 
     if (texOb == NULL)
     {
        size_id += 4;
-       texOb = getShipTexObBySizeFromList(pTo_list, size_id);
+       texOb = GetShipTexObBySizeFromList(pTo_list, size_id);
     }
    
     if (texOb == NULL)
     {
        size_id -= 5;
-       texOb = getShipTexObBySizeFromList(pTo_list, size_id);
+       texOb = GetShipTexObBySizeFromList(pTo_list, size_id);
     }
 
     if (texOb == NULL)
     {
        size_id += 6;
-       texOb = getShipTexObBySizeFromList(pTo_list, size_id);
+       texOb = GetShipTexObBySizeFromList(pTo_list, size_id);
     }
 
     if (texOb == NULL)
     {
        size_id -= 7;
-       texOb = getShipTexObBySizeFromList(pTo_list, size_id);
+       texOb = GetShipTexObBySizeFromList(pTo_list, size_id);
     }
 
     if (texOb == NULL)
     {
        size_id += 8;
-       texOb = getShipTexObBySizeFromList(pTo_list, size_id);
+       texOb = GetShipTexObBySizeFromList(pTo_list, size_id);
     }
 
     return texOb;
 }
 
 
-TextureOb* TextureManager :: getShipTexObBySizeFromList(std::vector<TextureOb*>* pTo_list, int _size_id)
+TextureOb* TextureManager::GetShipTexObBySizeFromList(std::vector<TextureOb*>* pTo_list, int _size_id)
 {  
     TextureOb* pTo_texOb = NULL;
 
@@ -287,7 +287,7 @@ TextureOb* TextureManager :: getShipTexObBySizeFromList(std::vector<TextureOb*>*
 }
 
 
-TextureOb* TextureManager :: getRandomFaceTexObWithFolloingAttributes(int _race_id)
+TextureOb* TextureManager::GetRandomFaceTexObWithFolloingAttributes(int _race_id)
 {
 	switch(_race_id)
 	{
@@ -304,9 +304,7 @@ TextureOb* TextureManager :: getRandomFaceTexObWithFolloingAttributes(int _race_
 	return NULL;
 }
 
-
-
-TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race_id, int _subtype_id, int _size_id)
+TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(int _race_id, int _subtype_id, int _size_id)
 {
         switch(_race_id)
         {	
@@ -416,11 +414,7 @@ TextureOb* TextureManager :: getRandomShipTexObWithFollowingAtrributes(int _race
 
 }
 
-
-
-
-
-TextureOb* TextureManager :: getTexObByColorId(int _type_id, int _color_id)
+TextureOb* TextureManager::GetTexObByColorId(int _type_id, int _color_id)
 {
 	std::vector<TextureOb*>* requested_vec = NULL;
 	
@@ -445,7 +439,6 @@ TextureOb* TextureManager :: getTexObByColorId(int _type_id, int _color_id)
      	//printf("Particle with requested color is absent\n"); 
      	return NULL;
 }
-
                 
 TextureOb* TextureManager::GetRandomTextureOb(int texture_type_id)
 {

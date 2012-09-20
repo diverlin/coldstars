@@ -95,7 +95,7 @@ void GuiMap::Render(Galaxy* galaxy)
     		
     	for (unsigned int i = 0; i < galaxy->STARSYSTEM_vec.size(); i++)
     	{   		
-        	TextureOb* texOb_particle = TextureManager::Instance().getTexObByColorId(TEXTURE::DISTANTSTAR_ID, galaxy->STARSYSTEM_vec[i]->STAR_vec[0]->GetColorId()); 
+        	TextureOb* texOb_particle = TextureManager::Instance().GetTexObByColorId(TEXTURE::DISTANTSTAR_ID, galaxy->STARSYSTEM_vec[i]->STAR_vec[0]->GetColorId()); 
                                       
         	drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter(), 30.0, -2.0);
               
