@@ -71,6 +71,7 @@ bool GuiMap::UpdateMouseInteraction(const MouseData& data_mouse, Galaxy* galaxy)
 
               						MicroTask* microtask = new MicroTask(MICROSCENARIO::JUMP_ID, galaxy->STARSYSTEM_vec[i]);
                						player->GetNpc()->GetStateMachine()->SetCurrentMicroTask(microtask);
+               						player->SetTargetStarSystem(galaxy->STARSYSTEM_vec[i]);
                				
                           				return true;
                       				} 

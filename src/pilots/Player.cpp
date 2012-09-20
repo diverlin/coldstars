@@ -56,6 +56,7 @@ Player::Player(int id)
         data_id.subtype_id = NONE_ID;
    	
     	npc  = NULL;
+    	target_starsystem = NULL;
     	
     	cursor.SetPlayer(this);
     	gui_manager.SetPlayer(this);
@@ -191,7 +192,26 @@ void Player::AddIfVisible(VerticalFlowText* effect)
 	visible_text_DAMAGE_vec.push_back(effect);
 }     		
 
-  
+void Player::UpdateStarSystemTransaction(TurnTimer& turn_timer)
+{
+	if (target_starsystem != NULL)
+	{
+		if (target_starsystem->IsVehiclePartOfAppearQueue(npc->GetVehicle()->GetId()))
+		{
+			if (turn_timer.GetTurnEnded() == true)
+			{
+				turn_timer.NextTurn();
+			}
+		}
+	
+		if (target_starsystem == npc->GetStarSystem())
+		{
+			Screen::Instance().SetCenterGlobalCoord(npc->GetVehicle()->GetPoints().GetCenter());
+			target_starsystem = NULL;
+		}
+	}
+}
+     		
 void Player::RenderInSpace_NEW()
 {   
 	int w = Screen::Instance().GetWindow().GetWidth();

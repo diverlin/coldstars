@@ -69,10 +69,11 @@ int main()
 		if ((turn_timer.GetTurnEnded() == true) and (UserInput::Instance().GetNextTurnReady()))
 		{
 			turn_timer.NextTurn();
-		}              	
+		} 
 		/* server code end */
 
 		/* client code start */
+		player->UpdateStarSystemTransaction(turn_timer);      // deprecated 
 		player->RunSession(turn_timer);
 		Player* recreated_player = SaveLoadManager::Instance().Update(player);
 		if (recreated_player != NULL)

@@ -43,7 +43,11 @@ void Screen::InitPostEffects(int width, int height)
 	ResizePostEffects(width, height);
 }
 
-       	
+void Screen::SetCenterGlobalCoord(const vec2f& center_globalCoord)
+{
+	bottomLeft_globalCoord.Set(center_globalCoord.x - render_window.GetWidth()/2, center_globalCoord.y - render_window.GetHeight()/2);
+}
+	 	       	
 void Screen::DrawFps()
 {
 	float fps = 1.f / render_window.GetFrameTime();

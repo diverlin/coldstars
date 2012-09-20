@@ -166,6 +166,7 @@ class StarSystem : public BaseGameEntity
  		    		            
     		UnresolvedDataUniqueStarSystem data_unresolved_ss;
     		            		    
+                bool IsVehiclePartOfAppearQueue(int);
                 void PostHyperJumpEvent();
                 void LaunchingEvent() const;
     		

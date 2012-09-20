@@ -19,7 +19,9 @@ class Screen:private sf::NonCopyable
       		void InitPostEffects(int, int);
       		      		        	         		
 	 	void SetBottomLeftGlobalCoord(const vec2f& bottomLeft_globalCoord) { this->bottomLeft_globalCoord = bottomLeft_globalCoord; UpdateTopRightGlobalCoord(); }; 
+	 	void SetCenterGlobalCoord(const vec2f& center_globalCoord);
         
+                
               	sf::RenderWindow& GetWindow() { return render_window; };
       		sf::Font& GetFont() { return font; };      			
        	     	
