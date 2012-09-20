@@ -18,7 +18,7 @@
 
 #include "init.hpp"
 #include "resources.hpp"
-#include "textureManager.hpp"
+#include "TextureManager.hpp"
 
 #include "../ai/aiModel/AiModelCollector.hpp"
 #include "../ai/aiModel/AiModelRanger.hpp"

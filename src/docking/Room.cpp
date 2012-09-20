@@ -19,7 +19,7 @@
 #include "Room.hpp"
 #include "Kosmoport.hpp"
 #include "../render/Render.hpp"
-#include "../resources/textureManager.hpp"
+#include "../resources/TextureManager.hpp"
  
 Room::Room()
 {	

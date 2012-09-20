@@ -21,7 +21,7 @@
 #include "../common/id.hpp"
 #include "../common/EntityManager.hpp"
 #include "../common/Logger.hpp"
-#include "../resources/textureManager.hpp"
+#include "../resources/TextureManager.hpp"
 #include "../parts/Turrel.hpp"
 
 ItemSlot* GetNewItemSlot(int subtype_id, int id)

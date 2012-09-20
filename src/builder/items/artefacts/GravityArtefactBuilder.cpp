@@ -21,7 +21,7 @@
 #include "../../../common/Logger.hpp"
 #include "../../../common/EntityManager.hpp"
 #include "../../../common/rand.hpp"
-#include "../../../resources/textureManager.hpp"
+#include "../../../resources/TextureManager.hpp"
 
 GravityArtefactBuilder& GravityArtefactBuilder::Instance()
 {

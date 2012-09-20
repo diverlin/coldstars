@@ -18,7 +18,7 @@
 
 #include "BaseGameEntity.hpp"
 #include "../resources/MeshCollector.hpp"
-#include "../resources/textureManager.hpp"
+#include "../resources/TextureManager.hpp"
 #include "../common/constants.hpp"
 #include "../common/rand.hpp"
 #include "../common/common.hpp"

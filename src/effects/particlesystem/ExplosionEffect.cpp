@@ -20,7 +20,7 @@
 #include "../ShockWaveEffect.hpp"
 
 #include "../../common/constants.hpp"
-#include "../../resources/textureManager.hpp"
+#include "../../resources/TextureManager.hpp"
 #include "../../common/rand.hpp"
 #include "../../world/starsystem.hpp"
 

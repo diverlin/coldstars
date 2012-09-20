@@ -25,7 +25,7 @@
 #include "../gui/ButtonTrigger.hpp"
 #include "../gui/MouseData.hpp"
 #include "../pilots/Player.hpp"
-#include "../resources/textureManager.hpp"
+#include "../resources/TextureManager.hpp"
 #include "../render/Screen.hpp"
 
 Slider::Slider()

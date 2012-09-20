@@ -21,7 +21,7 @@ set (HEADERS
 
 set (SOURCES
 	src/resources/textureOb.cpp
-	src/resources/textureManager.cpp
+	src/resources/TextureManager.cpp
 	src/resources/resources.cpp
 	src/resources/init.cpp
 
