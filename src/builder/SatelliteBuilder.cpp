@@ -58,7 +58,7 @@ void SatelliteBuilder::CreateNewInternals()
 	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SATELLITE_ID);  
 	
        	int protection_rate = 1;
-       	//if (subtype_id == CLASS::WARRIOR_ID)
+       	//if (subtype_id == ENTITY::WARRIOR_ID)
         //{
         	//protection_rate = 1;
         //}

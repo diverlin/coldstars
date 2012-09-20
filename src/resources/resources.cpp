@@ -278,236 +278,236 @@ void loadImages()
 //################################ race texnologi
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R0_ID); arg.push_back(CLASS::RANGER_ID);   //COLOR_VIOLET
+	arg.push_back(RACE::R0_ID); arg.push_back(ENTITY::RANGER_ID);   //COLOR_VIOLET
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_00_0_0.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R0_ID); arg.push_back(CLASS::WARRIOR_ID);  //COLOR_VIOLET
+	arg.push_back(RACE::R0_ID); arg.push_back(ENTITY::WARRIOR_ID);  //COLOR_VIOLET
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_01_0_0.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R0_ID); arg.push_back(CLASS::WARRIOR_ID);  //COLOR_VIOLET
+	arg.push_back(RACE::R0_ID); arg.push_back(ENTITY::WARRIOR_ID);  //COLOR_VIOLET
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_01_0_1.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R0_ID); arg.push_back(CLASS::PIRAT_ID);    //COLOR_VIOLET
+	arg.push_back(RACE::R0_ID); arg.push_back(ENTITY::PIRAT_ID);    //COLOR_VIOLET
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_02_0_0.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R0_ID); arg.push_back(CLASS::TRADER_ID);   //COLOR_VIOLET
+	arg.push_back(RACE::R0_ID); arg.push_back(ENTITY::TRADER_ID);   //COLOR_VIOLET
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_03_0_0.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R0_ID); arg.push_back(CLASS::DIPLOMAT_ID); //COLOR_VIOLET
+	arg.push_back(RACE::R0_ID); arg.push_back(ENTITY::DIPLOMAT_ID); //COLOR_VIOLET
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_04_0_0.png", true, &arg) );
 }
 
 //################################ race voennye
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R1_ID); arg.push_back(CLASS::RANGER_ID);   //COLOR_GREY
+	arg.push_back(RACE::R1_ID); arg.push_back(ENTITY::RANGER_ID);   //COLOR_GREY
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_10_0_0.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R1_ID); arg.push_back(CLASS::WARRIOR_ID);  //COLOR_GREY
+	arg.push_back(RACE::R1_ID); arg.push_back(ENTITY::WARRIOR_ID);  //COLOR_GREY
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_11_0_0.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R1_ID); arg.push_back(CLASS::PIRAT_ID);    //COLOR_GREY
+	arg.push_back(RACE::R1_ID); arg.push_back(ENTITY::PIRAT_ID);    //COLOR_GREY
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_12_0_0.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R1_ID); arg.push_back(CLASS::TRADER_ID);   //COLOR_GREY
+	arg.push_back(RACE::R1_ID); arg.push_back(ENTITY::TRADER_ID);   //COLOR_GREY
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_12_0_0.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R1_ID); arg.push_back(CLASS::DIPLOMAT_ID);  //COLOR_GREY
+	arg.push_back(RACE::R1_ID); arg.push_back(ENTITY::DIPLOMAT_ID);  //COLOR_GREY
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_14_0_0.png", true, &arg) );
 }
 
 //################################ race zhuliki
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R2_ID); arg.push_back(CLASS::RANGER_ID);    
+	arg.push_back(RACE::R2_ID); arg.push_back(ENTITY::RANGER_ID);    
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/race2_ranger_00.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R2_ID); arg.push_back(CLASS::WARRIOR_ID);  //COLOR_GREEN
+	arg.push_back(RACE::R2_ID); arg.push_back(ENTITY::WARRIOR_ID);  //COLOR_GREEN
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/race2_warrior_00.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R2_ID); arg.push_back(CLASS::TRADER_ID);    //COLOR_RED
+	arg.push_back(RACE::R2_ID); arg.push_back(ENTITY::TRADER_ID);    //COLOR_RED
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/race2_trader_00.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R2_ID); arg.push_back(CLASS::PIRAT_ID);    //COLOR_RED
+	arg.push_back(RACE::R2_ID); arg.push_back(ENTITY::PIRAT_ID);    //COLOR_RED
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/race2_pirat_00.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R2_ID); arg.push_back(CLASS::DIPLOMAT_ID);   //COLOR_GREEN
+	arg.push_back(RACE::R2_ID); arg.push_back(ENTITY::DIPLOMAT_ID);   //COLOR_GREEN
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/race2_diplomat_00.png", true, &arg) );
 }
 
 //################################ race cheloveki
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R3_ID); arg.push_back(CLASS::RANGER_ID); //COLOR_BLUE
+	arg.push_back(RACE::R3_ID); arg.push_back(ENTITY::RANGER_ID); //COLOR_BLUE
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_30_0_0.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R3_ID); arg.push_back(CLASS::WARRIOR_ID); //COLOR_BLUE
+	arg.push_back(RACE::R3_ID); arg.push_back(ENTITY::WARRIOR_ID); //COLOR_BLUE
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_31_0_0.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R3_ID); arg.push_back(CLASS::WARRIOR_ID); //COLOR_BLUE
+	arg.push_back(RACE::R3_ID); arg.push_back(ENTITY::WARRIOR_ID); //COLOR_BLUE
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_31_0_1.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R3_ID); arg.push_back(CLASS::PIRAT_ID);   //COLOR_BLUE
+	arg.push_back(RACE::R3_ID); arg.push_back(ENTITY::PIRAT_ID);   //COLOR_BLUE
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_32_0_0.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R3_ID); arg.push_back(CLASS::TRADER_ID);  //COLOR_BLUE
+	arg.push_back(RACE::R3_ID); arg.push_back(ENTITY::TRADER_ID);  //COLOR_BLUE
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/_k_33_0_0.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R3_ID); arg.push_back(CLASS::DIPLOMAT_ID); //COLOR_BLUE
+	arg.push_back(RACE::R3_ID); arg.push_back(ENTITY::DIPLOMAT_ID); //COLOR_BLUE
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/_k_34_0_0.png", true, &arg) );
 }
 
 //################################ race bio
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R4_ID); arg.push_back(CLASS::WARRIOR_ID); //COLOR_GOLDENROD
+	arg.push_back(RACE::R4_ID); arg.push_back(ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_41_0_0.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R4_ID); arg.push_back(CLASS::TRADER_ID);  //COLOR_GOLDENROD
+	arg.push_back(RACE::R4_ID); arg.push_back(ENTITY::TRADER_ID);  //COLOR_GOLDENROD
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_43_0_0.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R4_ID); arg.push_back(CLASS::TRADER_ID);  //COLOR_GOLDENROD
+	arg.push_back(RACE::R4_ID); arg.push_back(ENTITY::TRADER_ID);  //COLOR_GOLDENROD
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_43_0_1.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R4_ID); arg.push_back(CLASS::DIPLOMAT_ID); //COLOR_GOLDENROD
+	arg.push_back(RACE::R4_ID); arg.push_back(ENTITY::DIPLOMAT_ID); //COLOR_GOLDENROD
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_44_0_0.png", true, &arg) );
 }
 
 //################################ enemy 1
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R6_ID); arg.push_back(CLASS::WARRIOR_ID); //COLOR_GOLDENROD
+	arg.push_back(RACE::R6_ID); arg.push_back(ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_61_0_0.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R6_ID); arg.push_back(CLASS::WARRIOR_ID); //COLOR_GOLDENROD
+	arg.push_back(RACE::R6_ID); arg.push_back(ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_61_0_1.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R6_ID); arg.push_back(CLASS::WARRIOR_ID); //COLOR_GOLDENROD
+	arg.push_back(RACE::R6_ID); arg.push_back(ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_61_0_2.png", true, &arg) );
 }
 
 
 //{
 	//std::vector<int> arg;   
-	//arg.push_back(RACE::R6_ID); arg.push_back(CLASS::WARRIOR_ID); //COLOR_GOLDENROD
+	//arg.push_back(RACE::R6_ID); arg.push_back(ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
 	//TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_61_0_3.png", true, &arg) );
 //}
 
 
 //{
 	//std::vector<int> arg;   
-	//arg.push_back(RACE::R6_ID); arg.push_back(CLASS::WARRIOR_ID); //COLOR_GOLDENROD
+	//arg.push_back(RACE::R6_ID); arg.push_back(ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
 	//TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_61_0_5.png", true, &arg) );
 //}
 
 //{
 	//std::vector<int> arg;   
-	//arg.push_back(RACE::R6_ID); arg.push_back(CLASS::WARRIOR_ID); //COLOR_GOLDENROD
+	//arg.push_back(RACE::R6_ID); arg.push_back(ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
 	//TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_61_0_6.png", true, &arg) );
 //}
 
 //{
 	//std::vector<int> arg;   
-	//arg.push_back(RACE::R6_ID); arg.push_back(CLASS::WARRIOR_ID); //COLOR_GOLDENROD
+	//arg.push_back(RACE::R6_ID); arg.push_back(ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
 	//TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_61_0_7.png", true, &arg) );
 //}
 
 //{
 	//std::vector<int> arg;   
-	//arg.push_back(RACE::R6_ID); arg.push_back(CLASS::WARRIOR_ID); //COLOR_GOLDENROD
+	//arg.push_back(RACE::R6_ID); arg.push_back(ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
 	//TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_61_0_8.png", true, &arg) );
 //}
 
 //{
 	//std::vector<int> arg;   
-	//arg.push_back(RACE::R6_ID); arg.push_back(CLASS::WARRIOR_ID); //COLOR_GOLDENROD
+	//arg.push_back(RACE::R6_ID); arg.push_back(ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
 	//TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_61_0_9.png", true, &arg) );
 //}
 
 //{
 	//std::vector<int> arg;   
-	//arg.push_back(RACE::R6_ID); arg.push_back(CLASS::WARRIOR_ID); //COLOR_GOLDENROD
+	//arg.push_back(RACE::R6_ID); arg.push_back(ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
 	//TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_61_0_10.png", true, &arg) );
 //}
 
 //{
 	//std::vector<int> arg;   
-	//arg.push_back(RACE::R6_ID); arg.push_back(CLASS::WARRIOR_ID); //COLOR_GOLDENROD
+	//arg.push_back(RACE::R6_ID); arg.push_back(ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
 	//TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_61_0_11.png", true, &arg) );
 //}
 
 //{
 	//std::vector<int> arg;   
-	//arg.push_back(RACE::R6_ID); arg.push_back(CLASS::WARRIOR_ID); //COLOR_GOLDENROD
+	//arg.push_back(RACE::R6_ID); arg.push_back(ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
 	//TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_61_0_12.png", true, &arg) );
 //}
 
@@ -516,13 +516,13 @@ void loadImages()
 //################################ enemy 2
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R7_ID); arg.push_back(CLASS::WARRIOR_ID); //COLOR_GOLDENROD
+	arg.push_back(RACE::R7_ID); arg.push_back(ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_71_0_0.png", true, &arg) );
 }
 
 {
 	std::vector<int> arg;   
-	arg.push_back(RACE::R7_ID); arg.push_back(CLASS::WARRIOR_ID); //COLOR_GOLDENROD
+	arg.push_back(RACE::R7_ID); arg.push_back(ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_71_0_1e.png", true, &arg) );
 }
 

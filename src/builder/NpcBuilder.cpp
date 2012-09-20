@@ -72,15 +72,15 @@ void NpcBuilder::CreateNewInternals(int race_id, int subtype_id)
    	{
 		switch(subtype_id)
 		{
-   		   	//case CLASS::DIPLOMAT_ID: 	{}
-   		   	//case CLASS::PIRAT_ID: 	{}
-   			//case CLASS::WARRIOR_ID: 	{}
-   			case CLASS::RANGER_ID:
+   		   	//case ENTITY::DIPLOMAT_ID: 	{}
+   		   	//case ENTITY::PIRAT_ID: 	{}
+   			//case ENTITY::WARRIOR_ID: 	{}
+   			case ENTITY::RANGER_ID:
    			{
    				npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));    					
    				break;    
    			}
-   		   	case CLASS::TRADER_ID: 
+   		   	case ENTITY::TRADER_ID: 
    		   	{
    		   		npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER_ID)); 
    		   		

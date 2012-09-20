@@ -177,7 +177,7 @@ void StarSystemBuilder::CreatePlanets(int planet_per_system)
                  
                 {       	
                 int npc_race_id = getRandIntFromVec(RaceInformationCollector.RACES_GOOD_vec);
-                int npc_subtype_id = CLASS::WARRIOR_ID;
+                int npc_subtype_id = ENTITY::WARRIOR_ID;
                 
                 NpcBuilder::Instance().CreateNewNpc();
         	NpcBuilder::Instance().CreateNewInternals(npc_race_id, npc_subtype_id);
@@ -195,7 +195,7 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
     	for (int i=0; i<spacestation_per_system; i++)
     	{     
     		int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
-                int npc_subtype_id = CLASS::WARRIOR_ID;
+                int npc_subtype_id = ENTITY::WARRIOR_ID;
 
         	int ship_race_id = npc_race_id;         // RACES_ALL_vec[getRandInt(0, RACES_ALL_vec.size())];
         	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];

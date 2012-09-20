@@ -58,7 +58,7 @@ void ShipBuilder::CreateNewInternals(int race_id, int subsubtype_id, int size_id
 	TextureOb* texOb = TextureManager::Instance().GetRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id); 
        
        	int protection_rate = 1;
-       	if (subsubtype_id == CLASS::WARRIOR_ID)
+       	if (subsubtype_id == ENTITY::WARRIOR_ID)
         {
         	protection_rate = 2;
         }
