@@ -229,7 +229,7 @@ void Npc::UpdateInfo()
     	info.addNameStr("model_ai:");     info.addValueStr( getAiModelStr(ai_model->GetTypeId()) );  
     	info.addNameStr("credits:");   	  info.addValueStr( int2str(credits) );	
     	info.addNameStr("expirience:");   info.addValueStr( int2str(skill.GetExpirience()) + " / " + int2str(skill.GetExpirienceNextLevel()) );	
-    	info.addNameStr("availiable points:");   info.addValueStr( int2str(skill.GetAvailiablePoints()) );	
+    	info.addNameStr("skills:");   info.addValueStr( int2str(skill.GetAvailiablePoints()) );	
 	
     	if (state_machine->GetMacroTaskManager()->GetScenario() != NULL)
     	{ 	
