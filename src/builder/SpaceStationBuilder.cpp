@@ -59,7 +59,7 @@ void SpaceStationBuilder::CreateNewInternals()
 	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SPACESTATION_ID); 
        
        	int protection_rate = 50;
-       	//if (subtype_id == CLASS::WARRIOR_ID)
+       	//if (subtype_id == ENTITY::WARRIOR_ID)
         //{
         	//protection_rate = 5;
         //}

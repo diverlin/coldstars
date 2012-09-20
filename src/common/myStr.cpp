@@ -47,7 +47,7 @@ std::string getAiModelStr(int id)
 		case AIMODEL::RANGER_ID:	{ return "RANGER_ID"; break; }
 		case AIMODEL::TRADER_ID:	{ return "TRADER_ID"; break; }
 		
-		default:			{ return "UKNOWN. fix the bug"; break; }		
+		default:			{ return "UKNOWN ID"; break; }		
 	}
 }
 
@@ -55,13 +55,13 @@ std::string getClassStr(int id)
 {
 	switch(id)
 	{
-		case CLASS::RANGER_ID: 	{ return "RANGER_ID"; break; }
-		case CLASS::WARRIOR_ID:	{ return "WARRIOR_ID"; break; }
-		case CLASS::PIRAT_ID:		{ return "PIRAT_ID"; break; }
-		case CLASS::TRADER_ID:		{ return "TRADER_ID"; break; }
-		case CLASS::DIPLOMAT_ID:	{ return "DIPLOMAT_ID"; break; }
+		case ENTITY::RANGER_ID: 	{ return "RANGER_ID"; break; }
+		case ENTITY::WARRIOR_ID:	{ return "WARRIOR_ID"; break; }
+		case ENTITY::PIRAT_ID:		{ return "PIRAT_ID"; break; }
+		case ENTITY::TRADER_ID:		{ return "TRADER_ID"; break; }
+		case ENTITY::DIPLOMAT_ID:	{ return "DIPLOMAT_ID"; break; }
 		
-		default:			{ return "UKNOWN. fix the bug"; break; }		
+		default:			{ return "UKNOWN ID"; break; }		
 	}
 }
 
@@ -78,7 +78,7 @@ std::string getRaceStr(int race_id)
 		case RACE::R6_ID:	{ return "RACE6"; break; }
 		case RACE::R7_ID:	{ return "RACE7"; break; }	
 		
-		default:		{ return "UKNOWN. fix the bug"; break; }
+		default:		{ return "UKNOWN ID"; break; }
 	}
 }
 
@@ -93,7 +93,7 @@ std::string getNavigatorActionStr(int type_id)
 		case NAVIGATOR_ACTION::KEEP_MIDDLE_ID:	{ return "KEEP_MIDDLE_ID"; break; }
 		case NAVIGATOR_ACTION::KEEP_FAR_ID: 		{ return "KEEP_FAR_ID"; break; }
 		
-		default: { return "UNKNOWN. fix the bug"; }
+		default: { return "UNKNOWN ID"; }
 	}
 }
 
@@ -101,6 +101,8 @@ std::string getEntityStr(int type_id)
 {
 	switch(type_id)
 	{
+		case NONE_ID: { return "NONE_ID"; break; }
+			
 		case ENTITY::VEHICLE_ID: 		{ return "VEHICLE_ID"; break; }
 		case ENTITY::SHIP_ID: 			{ return "SHIP_ID"; break; }
 		case ENTITY::SPACESTATION_ID: 		{ return "SPACESTATION_ID"; break; }
@@ -130,6 +132,7 @@ std::string getEntityStr(int type_id)
 		case ENTITY::STORE_ID: 		{ return "STORE_ID"; break; }
 		case ENTITY::SHOP_ID: 			{ return "SHOP_ID"; break; }
 		case ENTITY::ANGAR_ID: 		{ return "ANGAR_ID"; break; }
+		
 		case ENTITY::VEHICLE_SLOT_ID: 		{ return "VEHICLE_SLOT_ID"; break; }
 		case ENTITY::ITEM_SLOT_ID: 		{ return "ITEM_SLOT_ID"; break; }
 		
@@ -156,7 +159,11 @@ std::string getEntityStr(int type_id)
 		case ENTITY::GRAPPLE_SLOT_ID: 		{ return "GRAPPLE_SLOT_ID"; break; }
 		case ENTITY::SCANER_SLOT_ID: 		{ return "SCANER_SLOT_ID"; break; }
 		case ENTITY::ARTEFACT_SLOT_ID: 	{ return "ARTEFACT_SLOT_ID"; break; }
-																						
+
+		case ENTITY::EQUIPMENT_ID: 		{ return "EQUIPMENT_ID"; break; }		
+		case ENTITY::MODULE_ID: 		{ return "MODULE_ID"; break; }
+		case ENTITY::ARTEFACT_ID: 		{ return "ARTEFACT_ID"; break; }	
+																								
 		case ENTITY::LAZER_EQUIPMENT_ID: 	{ return "LAZER_EQUIPMENT_ID"; break; }
 		case ENTITY::ROCKET_EQUIPMENT_ID: 	{ return "ROCKET_EQUIPMENT_ID"; break; }
 		case ENTITY::DRIVE_EQUIPMENT_ID: 	{ return "DRIVE_EQUIPMENT_ID"; break; }
@@ -183,8 +190,14 @@ std::string getEntityStr(int type_id)
 		
 		case ENTITY::GRAVITY_ARTEFACT_ID: 	{ return "GRAVITY_ARTEFACT_ID"; break; }						
 		case ENTITY::PROTECTOR_ARTEFACT_ID: 	{ return "PROTECTOR_ARTEFACT_ID"; break; }	
-			
-		default: { return "TYPE UNKNOWN. fix the bug"; }
+
+		case ENTITY::RANGER_ID: 	{ return "RANGER_ID"; break; }
+		case ENTITY::WARRIOR_ID: 	{ return "WARRIOR_ID"; break; }
+		case ENTITY::PIRAT_ID: 	{ return "PIRAT_ID"; break; }
+		case ENTITY::TRADER_ID: 	{ return "TRADER_ID"; break; }						
+		case ENTITY::DIPLOMAT_ID: 	{ return "DIPLOMAT_ID"; break; }	
+							
+		default: { return "UNKNOWN ID"; }
 	}
 }
 
