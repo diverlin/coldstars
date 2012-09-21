@@ -25,7 +25,7 @@
 class VerticalFlowText
 {
         public:
-                VerticalFlowText(const std::string&, const vec2f&, const Color4i&, float);                                   
+                VerticalFlowText(const std::string&, int, const vec2f&, const Color4i&, float);                                   
                 ~VerticalFlowText();
 
 		bool GetAlive() const { return is_alive; };
@@ -37,6 +37,8 @@ class VerticalFlowText
                 bool is_alive;
                 int live_time;
 
+		int font_size;
+		
                 std::string str;
                 Color4i color;
 

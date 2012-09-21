@@ -245,7 +245,7 @@ void Npc::UpdateInfo()
 void Npc::RenderInfo(const vec2f& center)
 { 
 	UpdateInfo();
-     	drawInfoIn2Column(&info.title_list, &info.value_list, center.x, center.y);
+     	drawInfoIn2Column(info.title_list, info.value_list, center.x, center.y);
 }
                    
   

@@ -24,7 +24,7 @@
 class ButtonTrigger : public BaseButton
 {
     	public:
-       		ButtonTrigger(TextureOb* textureOb, int subtype_id, const std::string& info_str):BaseButton(textureOb, subtype_id, info_str) {};
+       		ButtonTrigger(TextureOb* textureOb, int subtype_id, const std::string& info):BaseButton(textureOb, subtype_id, info) {};
        		       
        		virtual ~ButtonTrigger() {};  
 

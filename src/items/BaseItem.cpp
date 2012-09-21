@@ -116,7 +116,7 @@ void BaseItem::UpdateInfo()
 void BaseItem::RenderInfo(const Rect& rect, float offset_x, float offset_y)
 {  
 	UpdateInfo();
-     	drawInfoIn2Column(&info.title_list, &info.value_list, rect.GetCenter().x - offset_x, rect.GetCenter().y - offset_y);
+     	drawInfoIn2Column(info.title_list, info.value_list, rect.GetCenter().x - offset_x, rect.GetCenter().y - offset_y);
 }
 
 /* virtual */

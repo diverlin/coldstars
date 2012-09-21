@@ -77,7 +77,7 @@ void BaseGameEntity::Hit(int damage, bool show_effect)
 
 	if (show_effect == true)
 	{	
-		VerticalFlowText* text = new VerticalFlowText(int2str(damage), points.GetCenter(), COLOR::DEFAULT4i, collision_radius);
+		VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, points.GetCenter(), COLOR::DEFAULT4i, collision_radius);
 		starsystem->Add(text); 
 	}
 
@@ -108,13 +108,13 @@ void BaseGameEntity::CheckDeath(bool show_effect)
 void BaseGameEntity::RenderInfoInSpace(const vec2f& scroll_coords)
 { 
 	UpdateInfo();
-     	drawInfoIn2Column(&info.title_list, &info.value_list, points.GetCenter().x - scroll_coords.x, points.GetCenter().y - scroll_coords.y);
+     	drawInfoIn2Column(info.title_list, info.value_list, points.GetCenter().x - scroll_coords.x, points.GetCenter().y - scroll_coords.y);
 }
 
 void BaseGameEntity::RenderInfo(const vec2f& center)
 { 
 	UpdateInfo();
-     	drawInfoIn2Column(&info.title_list, &info.value_list, center.x, center.y);
+     	drawInfoIn2Column(info.title_list, info.value_list, center.x, center.y);
 }
 
 void BaseGameEntity::SaveDataUniqueBaseGameEntity(boost::property_tree::ptree& save_ptree, const std::string& root) const
