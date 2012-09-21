@@ -24,6 +24,8 @@
 #include "../../slots/ItemSlot.hpp"
 #include "../../render/Render.hpp"
 #include "../../resources/GuiTextureObCollector.hpp"
+#include "../../common/Logger.hpp"
+#include "../../common/EntityManager.hpp"
 
 BaseEquipment::BaseEquipment()
 {
@@ -35,9 +37,18 @@ BaseEquipment::BaseEquipment()
     	price = 0;
 }
 
-
+/*virtual */
 BaseEquipment::~BaseEquipment()
-{}
+{
+	#ifdef CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~BaseEquipment(), id="+int2str(GetId()));
+	#endif
+
+    	for (unsigned int i=0; i<modules_vec.size(); i++)
+    	{
+		delete modules_vec[i];
+    	}
+}
 
 /* virtual */
 void BaseEquipment::AddCommonInfo()
@@ -66,6 +77,14 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 
        	return false;   
 } 
+
+void BaseEquipment::RemoveAllRelatedStuffFromEntityManager()
+{
+    	for (unsigned int i=0; i<modules_vec.size(); i++)
+    	{
+		EntityManager::Instance().RemoveEntity(modules_vec[i]);
+;    	}
+}
 
 /* virtual */
 void BaseEquipment::Render(const Rect& rect, const vec2f& gui_offset, bool draw_text)

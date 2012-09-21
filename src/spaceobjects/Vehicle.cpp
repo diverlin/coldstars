@@ -84,13 +84,14 @@ Vehicle::Vehicle()
 /*virtual*/
 Vehicle::~Vehicle()
 {
-	EntityManager::Instance().RemoveEntity(this);
-	
+	#ifdef CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~Vehicle(), id="+int2str(GetId()));
+	#endif
+
 	for(unsigned int i=0; i<slot_total_vec.size(); i++)
 	{
 		delete slot_total_vec[i];
 	}
-	slot_total_vec.clear();
 } 
 
 void Vehicle::CreateDriveComplexTextureDependedStuff()
@@ -962,7 +963,24 @@ void Vehicle::UpdateGrappleMicroProgram()
 {
         grapple_slot->GetGrappleEquipment()->UpdateGrabScenarioProgram();  
 }
-		
+	
+void Vehicle::RemoveAllRelatedStuffFromEntityManager()
+{
+        EntityManager::Instance().RemoveEntity(this);
+	for(unsigned int i=0; i<slot_total_vec.size(); i++)
+	{
+		EntityManager::Instance().RemoveEntity(slot_total_vec[i]);	
+		if (slot_total_vec[i]->GetEquiped() == true)
+		{
+			EntityManager::Instance().RemoveEntity(slot_total_vec[i]->GetItem());
+			if (slot_total_vec[i]->GetItem()->GetTypeId() == ENTITY::EQUIPMENT_ID)
+			{
+				((BaseEquipment*)slot_total_vec[i]->GetItem())->RemoveAllRelatedStuffFromEntityManager();
+			}
+		}
+	}
+}
+				
 void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
        	save_ptree.put(root+"data_korpus.space", data_korpus.space);       	

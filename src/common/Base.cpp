@@ -23,7 +23,11 @@ Base::Base()
 
 /*virtual*/
 Base::~Base()
-{}
+{
+	#ifdef CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~Base(), id="+int2str(GetId()));
+	#endif
+}
 
 void Base::SaveDataUniqueBase(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {

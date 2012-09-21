@@ -22,15 +22,8 @@
 #include "../slots/ItemSlot.hpp"
 #include "../render/Render.hpp"
 #include "../resources/TextureManager.hpp"
-
-ItemCommonData::ItemCommonData()
-{	
-	modules_num_max    = 0; 
-	condition_max      = 0; 
-	deterioration_rate = 0;
-	mass               = 0; 
-}	
-
+#include "../common/Logger.hpp"
+#include "../common/myStr.hpp"
 
 BaseItem::BaseItem()
 {
@@ -50,7 +43,9 @@ BaseItem::BaseItem()
 /* virtual */
 BaseItem::~BaseItem()
 {
-	EntityManager::Instance().RemoveEntity(this);
+	#ifdef CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~BaseItem(), id="+int2str(GetId()));
+	#endif
 }
 
 void BaseItem::LockEvent(int locked_turns)

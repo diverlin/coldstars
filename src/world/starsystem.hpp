@@ -183,7 +183,7 @@ class StarSystem : public BaseGameEntity
 		void asteroidManager_s(unsigned int num);
 
 		void manageUnavaliableObjects_s();
-		void manageDeadObjects_s();
+		void ManageDeadObjects_s();
 
 		void rocketCollision_s(bool);
 		void asteroidCollision_s(bool);

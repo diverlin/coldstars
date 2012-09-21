@@ -19,6 +19,7 @@
 #include "BaseSlot.hpp"
 #include "../common/constants.hpp"
 #include "../common/myStr.hpp"
+#include "../common/Logger.hpp"
 
 BaseSlot::BaseSlot()
 {
@@ -30,8 +31,13 @@ BaseSlot::BaseSlot()
         textureOb  = NULL;
 }
 
+/* virtual */
 BaseSlot::~BaseSlot()
-{}
+{
+	#ifdef CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~BaseSlot(), id="+int2str(GetId()));
+	#endif
+}
                 
 /*virtual*/
 void BaseSlot::SaveData(boost::property_tree::ptree& save_ptree) const

@@ -105,6 +105,13 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
         ItemSlot* bak_slot = GetNewItemSlot(ENTITY::BAK_SLOT_ID);  
 	vehicle->AddItemSlot(bak_slot);
 
+    	//////////// ARTEFACT SLOT /////////////////////////  	  	
+    	for (int i=0; i<4; i++)
+    	{
+    		ItemSlot* artefact_slot = GetNewItemSlot(ENTITY::ARTEFACT_SLOT_ID);
+    		vehicle->AddItemSlot(artefact_slot);         
+    	} 
+    	
     	//////// OTSEC SLOT ////////////////////////////////
     	for (int i=0; i<=10; i++)
     	{
@@ -113,22 +120,15 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
     	}
 
     	//////////// GATE SLOT /////////////////////////////
-    	ItemSlot* gate_slot = GetNewItemSlot(ENTITY::GATE_SLOT_ID);
+    	ItemSlot* gate_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::GATE_SLOT_ID);
     	vehicle->AddItemSlot(gate_slot);
-    	
-    	//////////// ARTEFACT SLOT /////////////////////////  	  	
-    	for (int i=0; i<4; i++)
-    	{
-    		ItemSlot* artefact_slot = GetNewItemSlot(ENTITY::ARTEFACT_SLOT_ID);
-    		vehicle->AddItemSlot(artefact_slot);         
-    	}    	
 }	
 
 void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
 {
     	for (unsigned int i=0; i<vehicle->GetKorpusData().slot_weapon_num; i++)
     	{
-    		if (getRandBool())
+    		if (0) //getRandBool())
     		{
     	    		RocketEquipmentBuilder::Instance().CreateNewRocketEquipment();
         		RocketEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 

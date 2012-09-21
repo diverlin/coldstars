@@ -32,6 +32,7 @@
 #include "../slots/ItemSlot.hpp"
 #include "../slots/VehicleSlot.hpp"
 #include "../parts/WeaponComplex.hpp"
+#include "../common/Logger.hpp"
 
 Ship::Ship(int id)
 {
@@ -42,7 +43,11 @@ Ship::Ship(int id)
 
 /* virtual */
 Ship::~Ship()
-{} 
+{
+	#ifdef CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~Ship(), id="+int2str(GetId()));
+	#endif
+} 
 
 
 //overriding
@@ -63,6 +68,7 @@ void Ship::UpdateInfo()
         info.addNameStr("radar:");    		info.addValueStr( int2str(propetries.radar) );
     	info.addNameStr("protect:");        	info.addValueStr( int2str(propetries.protection) );
     	info.addNameStr("repair:");        	info.addValueStr( int2str(propetries.repair) );
+    	info.addNameStr("scan:");        	info.addValueStr( int2str(propetries.scan) );
 	info.addNameStr("speed:");       	info.addValueStr( boost::lexical_cast<std::string>(propetries.speed) );
 
 	if (propetries.grab_radius > 0)

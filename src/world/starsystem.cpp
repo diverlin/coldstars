@@ -304,7 +304,7 @@ void StarSystem::updateStates()
 {
 	if (CONTAINER_vec.size() < 100)
 	{
-		asteroidManager_s(3);
+		asteroidManager_s(0);
 	}
 	     	
 	//if (PLAYER_vec.size() > 0)
@@ -400,7 +400,7 @@ void StarSystem::updateStates()
 void StarSystem::Update(int time, bool detalied_simulation)
 {
         manageUnavaliableObjects_s();
-        manageDeadObjects_s();         // no need to update so frequently, pri /6
+        ManageDeadObjects_s();         // no need to update so frequently, pri /6
                         
 	UpdateEntities_s(time, detalied_simulation);
 	    		
@@ -687,87 +687,92 @@ void StarSystem::manageUnavaliableObjects_s()
     	remove_CONTAINER_queue.clear();    	
 }
     		
-void StarSystem::manageDeadObjects_s()
+void StarSystem::ManageDeadObjects_s()
 {  	
-   	for(unsigned int i=0; i<VEHICLE_vec.size(); i++)
+   	for(std::vector<Vehicle*>::iterator it=VEHICLE_vec.begin(); it<VEHICLE_vec.end(); ++it)
     	{
-               	if (VEHICLE_vec[i]->GetGarbageReady() == true)
-        	{           
-        		if (VEHICLE_vec[i]->GetOwnerNpc() != NULL)
+               	if ((*it)->GetGarbageReady() == true)
+        	{	
+        		std::cout<<"______ManageDeadObjects_s catch dead Vehicle"<<std::endl;           
+        		Vehicle* vehicle = *it;
+    			Npc* npc = vehicle->GetOwnerNpc(); 
+    		
+        		if (npc != NULL)
         		{
-            			VEHICLE_vec[i]->GetOwnerNpc()->SetAlive(false);
-            			garbage_entities.Add(VEHICLE_vec[i]->GetOwnerNpc()); 
+        			EntityManager::Instance().RemoveEntity(npc);
+            			npc->SetAlive(false);
+            			garbage_entities.Add(npc); 
                		}
                		
-            		garbage_entities.Add(VEHICLE_vec[i]);
-            		VEHICLE_vec.erase(VEHICLE_vec.begin() + i);
+               		vehicle->RemoveAllRelatedStuffFromEntityManager();
+            		garbage_entities.Add(vehicle);
+            		it = VEHICLE_vec.erase(it);
         	} 
     	}
     	
-    	for(unsigned int i = 0; i < ASTEROID_vec.size(); i++)
+   	for(std::vector<Asteroid*>::iterator it=ASTEROID_vec.begin(); it<ASTEROID_vec.end(); ++it)
     	{
-        	if (ASTEROID_vec[i]->GetGarbageReady() == true)
+        	if ((*it)->GetGarbageReady() == true)
         	{
-            		garbage_entities.Add(ASTEROID_vec[i]);
-            		ASTEROID_vec.erase(ASTEROID_vec.begin() + i );
+            		garbage_entities.Add(*it);
+            		it = ASTEROID_vec.erase(it);
             	}
         }  
 
-    	for(unsigned int i = 0; i < CONTAINER_vec.size(); i++)
+   	for(std::vector<Container*>::iterator it=CONTAINER_vec.begin(); it<CONTAINER_vec.end(); ++it)
     	{
-        	if ( (CONTAINER_vec[i]->GetGarbageReady() == true) or (CONTAINER_vec[i]->GetPlaceTypeId() == NONE_ID) )
+        	if ( ((*it)->GetGarbageReady() == true) or ((*it)->GetPlaceTypeId() == NONE_ID) )
         	{   
-            		garbage_entities.Add(CONTAINER_vec[i]);
-            		CONTAINER_vec.erase(CONTAINER_vec.begin() + i );
+            		garbage_entities.Add(*it);
+            		it = CONTAINER_vec.erase(it);
         	}	 
     	}
 
-    	for(unsigned int ri = 0; ri < ROCKET_vec.size(); ri++)
+   	for(std::vector<RocketBullet*>::iterator it=ROCKET_vec.begin(); it<ROCKET_vec.end(); ++it)
     	{
-        	if (ROCKET_vec[ri]->GetGarbageReady() == true)
+        	if ((*it)->GetGarbageReady() == true)
         	{   
-            		garbage_entities.Add(ROCKET_vec[ri]);
-            		ROCKET_vec.erase(ROCKET_vec.begin() + ri );
+            		garbage_entities.Add(*it);
+            		it = ROCKET_vec.erase(it);
         	} 
-    	}
-    	
+    	}    	
     	
     	//effects
-    	for (unsigned int wi = 0; wi < effect_SHOCKWAVE_vec.size(); wi++)
+    	for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)
     	{
-    		if (effect_SHOCKWAVE_vec[wi]->is_alive == false)
+    		if (effect_SHOCKWAVE_vec[i]->is_alive == false)
     		{
-    			garbage_effects.add(effect_SHOCKWAVE_vec[wi]);
-    	   		effect_SHOCKWAVE_vec.erase(effect_SHOCKWAVE_vec.begin() + wi);
+    			garbage_effects.add(effect_SHOCKWAVE_vec[i]);
+    	   		effect_SHOCKWAVE_vec.erase(effect_SHOCKWAVE_vec.begin() + i);
     		}
     	}
 
 
-    	for (unsigned int lei = 0; lei < effect_LAZERTRACE_vec.size(); lei++)
+    	for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)
     	{
-         	if (effect_LAZERTRACE_vec[lei]->GetAlive() == false)
+         	if (effect_LAZERTRACE_vec[i]->GetAlive() == false)
          	{   
-           		garbage_effects.add(effect_LAZERTRACE_vec[lei]);
-            		effect_LAZERTRACE_vec.erase(effect_LAZERTRACE_vec.begin() + lei);
+           		garbage_effects.add(effect_LAZERTRACE_vec[i]);
+            		effect_LAZERTRACE_vec.erase(effect_LAZERTRACE_vec.begin() + i);
          	} 
     	}
 
 
-    	for(unsigned int i = 0; i<effect_PARTICLESYSTEM_vec.size(); i++)  
+    	for(unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++)  
     	{
         	if (effect_PARTICLESYSTEM_vec[i]->GetAlive() == false)
         	{   
             		garbage_effects.add(effect_PARTICLESYSTEM_vec[i]);
-            		effect_PARTICLESYSTEM_vec.erase(effect_PARTICLESYSTEM_vec.begin() + i );
+            		effect_PARTICLESYSTEM_vec.erase(effect_PARTICLESYSTEM_vec.begin() + i);
         	} 
     	}
 
-    	for(unsigned int ti = 0; ti < text_DAMAGE_vec.size(); ti++)    
+    	for(unsigned int i=0; i<text_DAMAGE_vec.size(); i++)    
     	{
-        	if (text_DAMAGE_vec[ti]->GetAlive() == false)
+        	if (text_DAMAGE_vec[i]->GetAlive() == false)
         	{   
-            		garbage_effects.add(text_DAMAGE_vec[ti]);
-            		text_DAMAGE_vec.erase(text_DAMAGE_vec.begin() + ti);
+            		garbage_effects.add(text_DAMAGE_vec[i]);
+            		text_DAMAGE_vec.erase(text_DAMAGE_vec.begin() + i);
         	} 
     	}
 }    

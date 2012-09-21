@@ -19,11 +19,9 @@
 #include "ItemSlot.hpp"
 
 #include "../builder/ContainerBuilder.hpp"
-#include "../common/EntityManager.hpp"
 #include "../common/myStr.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../render/Render.hpp"
-#include "../world/starsystem.hpp"
 #include "../world/starsystem.hpp"
 #include "../resources/TextureManager.hpp"
 #include "../parts/Turrel.hpp"
@@ -36,6 +34,8 @@
 #include "../items/others/Bomb.hpp"
 
 #include "../docking/Store.hpp"
+#include "../common/Logger.hpp"
+#include "../common/EntityManager.hpp"
 
 ItemSlot::ItemSlot(int id)
 {
@@ -52,9 +52,12 @@ ItemSlot::ItemSlot(int id)
         item   	   = NULL;
 }
 
+/* virtual */
 ItemSlot::~ItemSlot()
 {
-	EntityManager::Instance().RemoveEntity(this);
+	#ifdef CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~ItemSlot(), id="+int2str(GetId()));
+	#endif
 		
 	if (equiped == true)
 	{
