@@ -23,14 +23,19 @@
 #include "../render/Render.hpp"
 #include "../items/BaseItem.hpp"
 #include "../slots/ItemSlot.hpp"
+#include "../common/myStr.hpp"
+#include "../builder/ItemSlotBuilder.hpp"
 
 GuiVehicle::GuiVehicle()
 {
 	textureOb_korpus = NULL;
+	gate_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::GATE_SLOT_ID);
 }
 
 GuiVehicle::~GuiVehicle()
-{}
+{
+	delete gate_slot;
+}
 
 void GuiVehicle::BindVehicle(Vehicle* vehicle, float scale)
 {
@@ -221,13 +226,13 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
         	}      
         }
         
-        	// GATE SLOT
+        // GATE SLOT
    	Rect rect(-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
     		   3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
     		   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);		
 		
 	rect.Scale(scale);           			   
-	rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, vehicle->gate_slot));    	
+	rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, gate_slot));    	
 } 
 
 bool GuiVehicle::UpdateMouseInteractionInSpace(const MouseData& data_mouse)
@@ -349,9 +354,10 @@ void GuiVehicle::RenderVehicle(const MouseData& data_mouse, int mark_slot_subtyp
 }
 
 void GuiVehicle::RenderSlots() const
-{
+{	
 	for(unsigned int i=0; i<rect_slot_vec.size(); i++)
 	{
+		std::cout<<"slot_subtype ="<<getEntityStr(rect_slot_vec[i].second->GetSubTypeId())<<std::endl;
 		rect_slot_vec[i].second->Render(rect_slot_vec[i].first, offset);
 	}
 }
@@ -360,20 +366,23 @@ void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, int mark_
 {
 	for(unsigned int i=0; i<rect_slot_vec.size(); i++)
 	{
-		if ( (rect_slot_vec[i].second->GetEquiped() == false) and (rect_slot_vec[i].second->GetSubTypeId() != ENTITY::CARGO_SLOT_ID) and (rect_slot_vec[i].second->GetSubTypeId() != ENTITY::GATE_SLOT_ID) )
-               	{
-               		if (mark_slot_subtype_id == rect_slot_vec[i].second->GetSubTypeId())  
+		if (rect_slot_vec[i].second->GetEquiped() == false) 
+		{
+			if ( (rect_slot_vec[i].second->GetSubTypeId() != ENTITY::CARGO_SLOT_ID) and (rect_slot_vec[i].second->GetSubTypeId() != ENTITY::GATE_SLOT_ID) )
                		{
-               			rect_slot_vec[i].second->RenderMark(rect_slot_vec[i].first, GuiTextureObCollector::Instance().slot_mark_accept);
-               		}
-               		else
-               		{
-               			if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
+               			if (mark_slot_subtype_id == rect_slot_vec[i].second->GetSubTypeId())  
                			{
-               				rect_slot_vec[i].second->RenderMark(rect_slot_vec[i].first, GuiTextureObCollector::Instance().slot_mark_reject);
+               				rect_slot_vec[i].second->RenderMark(rect_slot_vec[i].first, GuiTextureObCollector::Instance().slot_mark_accept);
+               			}
+               			else
+               			{
+               				if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
+	               			{
+	               				rect_slot_vec[i].second->RenderMark(rect_slot_vec[i].first, GuiTextureObCollector::Instance().slot_mark_reject);
+	               			}
                			}
                		}
-               	}
+		}
 	}
 }
 

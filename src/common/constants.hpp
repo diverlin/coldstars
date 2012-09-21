@@ -22,18 +22,21 @@
 #include <string>
 #include "../common/myVector.hpp"
 
-#define GRAPPLE_QUEUE_LOG_ENABLED 1
-#define DRIVECOMPLEX_LOG_ENABLED 0
-#define AISCENARIO_LOG_ENABLED 1
-#define SAVELOAD_LOG_ENABLED 1
-#define CREATEDESTROY_LOG_ENABLED 1
+#define LOG_ENABLED 1
+#if LOG_ENABLED == 1
+	#define GRAPPLE_QUEUE_LOG_ENABLED 1
+	#define DRIVECOMPLEX_LOG_ENABLED 0
+	#define AISCENARIO_LOG_ENABLED 1
+	#define SAVELOAD_LOG_ENABLED 1
+	#define CREATEDESTROY_LOG_ENABLED 1
+#endif
 
 #define DEBUG_ITEMDAMAGELOCKVIAGUI 1  // 1 - is locking/unlocking item by right mouse click; 2 - is damaging/undamaging item by right mouse click
 
-#define LOG_ENABLED 1
+
 
 const bool TEST_ON = true;
-const bool CRASH_TEST_ON = true;
+const bool CRASH_TEST_ON = false;
 
 const double NO_DELAY = 0.0f;
 const int NO_ADDITIONAL_INFO = 0;

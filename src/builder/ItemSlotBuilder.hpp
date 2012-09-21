@@ -24,7 +24,7 @@
 #include "../common/constants.hpp"
 
 ItemSlot* GetNewItemSlot(int subtype_id, int id = NONE_ID);
-ItemSlot* GetNewItemSlotWithoutSaveAbility(int subtype_id, int id = NONE_ID);
+ItemSlot* GetNewItemSlotWithoutSaveAbility(int subtype_id);
 
 #endif 
     

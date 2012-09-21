@@ -36,7 +36,9 @@ void GarbageEntities::Clear()
 {  
    	for(unsigned int i=0; i<entities_vec.size(); i++)
     	{ 
+    		#if CREATEDESTROY_LOG_ENABLED == 1
     		Logger::Instance().Log("________GarbageEntities delete " + getEntityStr(entities_vec[i]->GetTypeId()) + "(" +int2str(entities_vec[i]->GetTypeId()) +") " + getEntityStr(entities_vec[i]->GetSubTypeId()) + "(" + int2str(entities_vec[i]->GetSubTypeId()) + ") id=" + int2str(entities_vec[i]->GetId()));
+		#endif
 		delete entities_vec[i];
 	}
     	entities_vec.clear();

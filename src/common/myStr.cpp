@@ -36,9 +36,6 @@ std::string bool2str(bool var)
     	return stm.str() ;
 }
 
-
-
-
 std::string getAiModelStr(int id)
 {
 	switch(id)
@@ -46,20 +43,6 @@ std::string getAiModelStr(int id)
 		case AIMODEL::CONQUEROR_ID: 	{ return "CONQUEROR_ID"; break; }
 		case AIMODEL::RANGER_ID:	{ return "RANGER_ID"; break; }
 		case AIMODEL::TRADER_ID:	{ return "TRADER_ID"; break; }
-		
-		default:			{ return "UKNOWN ID"; break; }		
-	}
-}
-
-std::string getClassStr(int id)
-{
-	switch(id)
-	{
-		case ENTITY::RANGER_ID: 	{ return "RANGER_ID"; break; }
-		case ENTITY::WARRIOR_ID:	{ return "WARRIOR_ID"; break; }
-		case ENTITY::PIRAT_ID:		{ return "PIRAT_ID"; break; }
-		case ENTITY::TRADER_ID:		{ return "TRADER_ID"; break; }
-		case ENTITY::DIPLOMAT_ID:	{ return "DIPLOMAT_ID"; break; }
 		
 		default:			{ return "UKNOWN ID"; break; }		
 	}

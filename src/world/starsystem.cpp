@@ -733,8 +733,7 @@ void StarSystem::ManageDeadObjects_s()
    	for(std::vector<Vehicle*>::iterator it=VEHICLE_vec.begin(); it<VEHICLE_vec.end(); ++it)
     	{
                	if ((*it)->GetGarbageReady() == true)
-        	{	
-        		std::cout<<"______ManageDeadObjects_s catch dead Vehicle"<<std::endl;           
+        	{  
         		Vehicle* vehicle = *it;
     			Npc* npc = vehicle->GetOwnerNpc(); 
     		
@@ -778,6 +777,7 @@ void StarSystem::ManageDeadObjects_s()
     	{
         	if ((*it)->GetGarbageReady() == true)
         	{   
+        	      	EntityManager::Instance().RemoveEntity(*it);
             		garbage_entities.Add(*it);
             		it = ROCKET_vec.erase(it);
         	} 

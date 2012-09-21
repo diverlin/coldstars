@@ -118,17 +118,13 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
          	ItemSlot* otsec_slot = GetNewItemSlot(ENTITY::CARGO_SLOT_ID);   					
          	vehicle->AddItemSlot(otsec_slot);         
     	}
-
-    	//////////// GATE SLOT /////////////////////////////
-    	ItemSlot* gate_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::GATE_SLOT_ID);
-    	vehicle->AddItemSlot(gate_slot);
 }	
 
 void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
 {
     	for (unsigned int i=0; i<vehicle->GetKorpusData().slot_weapon_num; i++)
     	{
-    		if (0) //getRandBool())
+    		if (getRandBool())
     		{
     	    		RocketEquipmentBuilder::Instance().CreateNewRocketEquipment();
         		RocketEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
@@ -195,21 +191,21 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
         	//vehicle->AddItemToCargoSlot(RadarModuleBuilder::Instance().GetRadarModule());
     	//}  
     	    	
-    	for (unsigned int i=0; i<3; i++) 
+    	for (unsigned int i=0; i<2; i++) 
     	{        
     	    	BombBuilder::Instance().CreateNewBomb();
         	BombBuilder::Instance().CreateNewInternals();
         	vehicle->AddItemToCargoSlot(BombBuilder::Instance().GetBomb());
     	}   
 
-    	for (unsigned int i=0; i<3; i++) 
+    	for (unsigned int i=0; i<2; i++) 
     	{        
     	    	GravityArtefactBuilder::Instance().CreateNewGravityArtefact();
         	GravityArtefactBuilder::Instance().CreateNewInternals();
         	vehicle->AddItemToCargoSlot(GravityArtefactBuilder::Instance().GetGravityArtefact());
     	}   
 
-    	for (unsigned int i=0; i<3; i++) 
+    	for (unsigned int i=0; i<2; i++) 
     	{        
     	    	ProtectorArtefactBuilder::Instance().CreateNewProtectorArtefact();
         	ProtectorArtefactBuilder::Instance().CreateNewInternals();

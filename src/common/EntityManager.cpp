@@ -82,7 +82,7 @@ EntityManager& EntityManager::Instance()
 
 void EntityManager::RegisterEntity(Base* entity)
 {
-	#ifdef CREATEDESTROY_LOG_ENABLED == 1
+	#if CREATEDESTROY_LOG_ENABLED == 1
 	Logger::Instance().Log("+++++++EntityManager register " + getEntityStr(entity->GetTypeId()) + "(" +int2str(entity->GetTypeId()) +") " + getEntityStr(entity->GetSubTypeId()) + "(" + int2str(entity->GetSubTypeId()) + ") id=" + int2str(entity->GetId()));
 	#endif
 	
@@ -100,7 +100,7 @@ Base* EntityManager::GetEntityById(int id) const
 
 void EntityManager::RemoveEntity(Base* entity)
 {    
-	#ifdef CREATEDESTROY_LOG_ENABLED == 1
+	#if CREATEDESTROY_LOG_ENABLED == 1
 	Logger::Instance().Log("________EntityManager remove " + getEntityStr(entity->GetTypeId()) + "(" +int2str(entity->GetTypeId()) +") " + getEntityStr(entity->GetSubTypeId()) + "(" + int2str(entity->GetSubTypeId()) + ") id=" + int2str(entity->GetId()));
 	#endif
 		
@@ -110,7 +110,7 @@ void EntityManager::RemoveEntity(Base* entity)
 	}
 	else
 	{
-		std::cout<<"---EntityManager::RemoveEntity fails"<<std::endl;
+		std::cout<<"fix the BUG ---EntityManager::RemoveEntity fails"<<std::endl;
 	}
 } 
 

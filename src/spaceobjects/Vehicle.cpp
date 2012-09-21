@@ -60,6 +60,8 @@
 
 Vehicle::Vehicle()
 {
+	god_mode = false;
+	
 	special_action_id = SPECIAL_ACTION::NONE_ID;
 	
 	owner_npc = NULL;
@@ -76,15 +78,13 @@ Vehicle::Vehicle()
         droid_slot     = NULL;
         freezer_slot   = NULL;
         
-        gate_slot = NULL;
-        
         land  = NULL;
 }
 
 /*virtual*/
 Vehicle::~Vehicle()
 {
-	#ifdef CREATEDESTROY_LOG_ENABLED == 1
+	#if CREATEDESTROY_LOG_ENABLED == 1
 	Logger::Instance().Log("___::~Vehicle(), id="+int2str(GetId()));
 	#endif
 
@@ -164,16 +164,11 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
 		case ENTITY::GRAPPLE_SLOT_ID:   { grapple_slot   = slot; break; }
 		case ENTITY::DROID_SLOT_ID:     { droid_slot     = slot; break; }
 		case ENTITY::FREEZER_SLOT_ID:   { freezer_slot   = slot; break; }
-		
-		case ENTITY::GATE_SLOT_ID:      { gate_slot      = slot; break; }
 	}
         
-	if (slot->GetSubTypeId() != ENTITY::GATE_SLOT_ID)
-	{
-		slot_total_vec.push_back(slot); 
-	}
+	slot_total_vec.push_back(slot); 
 
-	if ( (slot->GetSubTypeId() != ENTITY::GATE_SLOT_ID) and (slot->GetSubTypeId() != ENTITY::ARTEFACT_SLOT_ID) and (slot->GetSubTypeId() != ENTITY::CARGO_SLOT_ID) )
+	if ( (slot->GetSubTypeId() != ENTITY::ARTEFACT_SLOT_ID) and (slot->GetSubTypeId() != ENTITY::CARGO_SLOT_ID) )
 	{
 		slot_funct_vec.push_back(slot);
 	}
@@ -468,6 +463,9 @@ void Vehicle::LaunchingEvent()
 /* virtual */
 void Vehicle::Hit(int damage, bool show_effect)
 {
+	if (god_mode == false)
+	{
+	
 	damage = damage * ( 1.0 - (owner_npc->GetSkill().GetDefence()*SKILL::DEFENCE_NORMALIZED_RATE + propetries.protection*0.01f) );
 	
 	data_life.armor -= damage;
@@ -492,6 +490,8 @@ void Vehicle::Hit(int damage, bool show_effect)
        		Color4i color;  	       		
        		VerticalFlowText* text = new VerticalFlowText(int2str(damage), points.GetCenter(), color, collision_radius);
        		starsystem->Add(text); 
+       	}
+       	
        	}
 }
 
