@@ -78,12 +78,12 @@ bool BaseEquipment::InsertModule(BaseModule* module)
        	return false;   
 } 
 
-void BaseEquipment::RemoveAllRelatedStuffFromEntityManager()
+void BaseEquipment::BaseEquipment::BaseEquipment::RemoveChildFromEntityManager()
 {
     	for (unsigned int i=0; i<modules_vec.size(); i++)
     	{
 		EntityManager::Instance().RemoveEntity(modules_vec[i]);
-;    	}
+    	}
 }
 
 /* virtual */

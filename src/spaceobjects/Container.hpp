@@ -41,6 +41,8 @@ class Container : public BaseGameEntity
 		void SilentKill();
           	void CalcCollisionrRadius();
         	void Render2D();
+                              
+                void RemoveChildFromEntityManager();
                                 
         	virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);

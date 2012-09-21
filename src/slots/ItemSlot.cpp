@@ -354,6 +354,18 @@ bool ItemSlot::CheckDistance(BaseGameEntity* _target) const
        	return false;
 }
 
+void ItemSlot::RemoveChildFromEntityManager()
+{
+	if (equiped == true)
+	{
+		EntityManager::Instance().RemoveEntity(item);
+		if (item->GetTypeId() == ENTITY::EQUIPMENT_ID)
+		{
+			((BaseEquipment*)item)->RemoveChildFromEntityManager();
+		}
+	}
+}
+        	
 /*virtual*/
 void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree) const
 {

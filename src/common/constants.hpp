@@ -33,6 +33,7 @@
 #define LOG_ENABLED 1
 
 const bool TEST_ON = true;
+const bool CRASH_TEST_ON = true;
 
 const double NO_DELAY = 0.0f;
 const int NO_ADDITIONAL_INFO = 0;

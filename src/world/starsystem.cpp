@@ -24,6 +24,8 @@
 
 #include "../effects/particlesystem/ExplosionEffect.hpp"
 #include "../builder/AsteroidBuilder.hpp"
+#include "../builder/ShipBuilder.hpp"
+#include "../builder/NpcBuilder.hpp"
 #include "../common/Collision.hpp"
 #include "../common/EntityManager.hpp"
 #include "../common/rand.hpp"
@@ -300,13 +302,19 @@ Vehicle* StarSystem::GetRandomVehicle(const std::vector<int>& rVec_race_id) cons
 }
 
 
-void StarSystem::updateStates()
+void StarSystem::UpdateStates()
 {
 	if (CONTAINER_vec.size() < 100)
 	{
-		asteroidManager_s(0);
+		AsteroidManager_s(3);
 	}
 	     	
+	if (CRASH_TEST_ON == true)
+	{
+		AsteroidManager_s(50);
+		ShipManager_s(50);
+	}
+	
 	//if (PLAYER_vec.size() > 0)
 	//{
 		//detalied_simulation = true;
@@ -423,7 +431,7 @@ void StarSystem::Update(int time, bool detalied_simulation)
 	{
 		if (calculation_per_turn_allowed == true)
 		{    		
-			updateStates();
+			UpdateStates();
 		
     			MindEntitiesInStatic_s();     			
 
@@ -658,7 +666,7 @@ void StarSystem::DrawPath()
     
 
 
-void StarSystem::asteroidManager_s(unsigned int num)
+void StarSystem::AsteroidManager_s(unsigned int num)
 {
         while (ASTEROID_vec.size() < num)
         {
@@ -666,7 +674,40 @@ void StarSystem::asteroidManager_s(unsigned int num)
         	AsteroidBuilder::Instance().CreateNewInternals();        	        	
 
                 Add(AsteroidBuilder::Instance().GetAsteroid());
-                break;
+                //break;
+        }
+}
+
+void StarSystem::ShipManager_s(unsigned int num)
+{
+        while (VEHICLE_vec.size() < num)
+        {
+		int prace_id    = RACE::R0_ID;
+		if (getRandBool())
+		{
+			prace_id = RACE::R6_ID;
+		}
+		
+      		int psubtype_id = ENTITY::WARRIOR_ID;
+      		int size_id     = SIZE_4;
+      		int weapons_num = 7;
+        
+        	NpcBuilder::Instance().CreateNewNpc();
+        	NpcBuilder::Instance().CreateNewInternals(prace_id, psubtype_id);
+       		Npc* pnpc = NpcBuilder::Instance().GetNpc();
+                   
+        	ShipBuilder::Instance().CreateNewShip();
+        	ShipBuilder::Instance().CreateNewInternals(prace_id, psubtype_id, size_id, weapons_num);
+        	Ship* pship = ShipBuilder::Instance().GetShip();
+        	
+		ShipBuilder::Instance().Equip(pship);   // improove
+        
+        	pship->BindOwnerNpc(pnpc);  	        	
+
+		vec2f pos = getRandVec2f(100, 800);
+		int angle = getRandInt(0, 360);
+                AddVehicle(ShipBuilder::Instance().GetShip(), pos, angle);
+        	//break;
         }
 }
 
@@ -704,7 +745,8 @@ void StarSystem::ManageDeadObjects_s()
             			garbage_entities.Add(npc); 
                		}
                		
-               		vehicle->RemoveAllRelatedStuffFromEntityManager();
+               		EntityManager::Instance().RemoveEntity(vehicle);
+               		vehicle->RemoveChildFromEntityManager();
             		garbage_entities.Add(vehicle);
             		it = VEHICLE_vec.erase(it);
         	} 
@@ -714,6 +756,7 @@ void StarSystem::ManageDeadObjects_s()
     	{
         	if ((*it)->GetGarbageReady() == true)
         	{
+        		EntityManager::Instance().RemoveEntity(*it);
             		garbage_entities.Add(*it);
             		it = ASTEROID_vec.erase(it);
             	}
@@ -721,9 +764,12 @@ void StarSystem::ManageDeadObjects_s()
 
    	for(std::vector<Container*>::iterator it=CONTAINER_vec.begin(); it<CONTAINER_vec.end(); ++it)
     	{
-        	if ( ((*it)->GetGarbageReady() == true) or ((*it)->GetPlaceTypeId() == NONE_ID) )
+        	if ((*it)->GetGarbageReady() == true)
         	{   
-            		garbage_entities.Add(*it);
+        		Container* container = *it;
+        		EntityManager::Instance().RemoveEntity(container);
+        		container->RemoveChildFromEntityManager();
+            		garbage_entities.Add(container);
             		it = CONTAINER_vec.erase(it);
         	}	 
     	}
@@ -738,41 +784,39 @@ void StarSystem::ManageDeadObjects_s()
     	}    	
     	
     	//effects
-    	for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)
+   	for(std::vector<ShockWaveEffect*>::iterator it=effect_SHOCKWAVE_vec.begin(); it<effect_SHOCKWAVE_vec.end(); ++it)
     	{
-    		if (effect_SHOCKWAVE_vec[i]->is_alive == false)
+    		if ((*it)->is_alive == false)
     		{
-    			garbage_effects.add(effect_SHOCKWAVE_vec[i]);
-    	   		effect_SHOCKWAVE_vec.erase(effect_SHOCKWAVE_vec.begin() + i);
+    			garbage_effects.add(*it);
+    	   		it = effect_SHOCKWAVE_vec.erase(it);
     		}
     	}
 
-
-    	for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)
+   	for(std::vector<LazerTraceEffect*>::iterator it=effect_LAZERTRACE_vec.begin(); it<effect_LAZERTRACE_vec.end(); ++it)
     	{
-         	if (effect_LAZERTRACE_vec[i]->GetAlive() == false)
+         	if ((*it)->GetAlive() == false)
          	{   
-           		garbage_effects.add(effect_LAZERTRACE_vec[i]);
-            		effect_LAZERTRACE_vec.erase(effect_LAZERTRACE_vec.begin() + i);
+           		garbage_effects.add(*it);
+            		it = effect_LAZERTRACE_vec.erase(it);
          	} 
     	}
 
-
-    	for(unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++)  
+   	for(std::vector<BaseParticleSystem*>::iterator it=effect_PARTICLESYSTEM_vec.begin(); it<effect_PARTICLESYSTEM_vec.end(); ++it)
     	{
-        	if (effect_PARTICLESYSTEM_vec[i]->GetAlive() == false)
+        	if ((*it)->GetAlive() == false)
         	{   
-            		garbage_effects.add(effect_PARTICLESYSTEM_vec[i]);
-            		effect_PARTICLESYSTEM_vec.erase(effect_PARTICLESYSTEM_vec.begin() + i);
+            		garbage_effects.add(*it);
+            		it = effect_PARTICLESYSTEM_vec.erase(it);
         	} 
     	}
 
-    	for(unsigned int i=0; i<text_DAMAGE_vec.size(); i++)    
+   	for(std::vector<VerticalFlowText*>::iterator it=text_DAMAGE_vec.begin(); it<text_DAMAGE_vec.end(); ++it)
     	{
-        	if (text_DAMAGE_vec[i]->GetAlive() == false)
+        	if ((*it)->GetAlive() == false)
         	{   
-            		garbage_effects.add(text_DAMAGE_vec[i]);
-            		text_DAMAGE_vec.erase(text_DAMAGE_vec.begin() + i);
+            		garbage_effects.add(*it);
+            		it = text_DAMAGE_vec.erase(it);
         	} 
     	}
 }    

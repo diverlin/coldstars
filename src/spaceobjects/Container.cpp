@@ -44,7 +44,6 @@ Container::Container(int id)
 /* virtual */   
 Container::~Container()
 {
-	EntityManager::Instance().RemoveEntity(this);
 	delete item_slot;
 	item_slot = NULL;
 }
@@ -54,7 +53,6 @@ void Container::BindItemSlot(ItemSlot* item_slot)
 	this->item_slot = item_slot; 
 	item_slot->SetOwner(this); 
 }
-
 
 void Container::UpdateInfo()  
 {
@@ -123,6 +121,11 @@ void Container::Render2D()
     	drawDynamic(textureOb, points.GetCenter(), angle.z, points.GetPosZ());
 }
 
+void Container::RemoveChildFromEntityManager()
+{
+	EntityManager::Instance().RemoveEntity(item_slot);	
+	item_slot->RemoveChildFromEntityManager();
+}
 
 void Container::SaveDataUniqueContainer(boost::property_tree::ptree& save_ptree, const std::string& root) const	
 {
@@ -137,7 +140,7 @@ void Container::LoadDataUniqueContainer(const boost::property_tree::ptree& load_
 	target_pos.x   = load_ptree.get<float>("target_pos.x");
 	target_pos.y   = load_ptree.get<float>("target_pos.y");
 	
-	velocity   = load_ptree.get<float>("velocity");
+	velocity = load_ptree.get<float>("velocity");
 }
 
 void Container::ResolveDataUniqueContainer()

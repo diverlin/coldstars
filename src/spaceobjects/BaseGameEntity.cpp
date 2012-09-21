@@ -83,6 +83,12 @@ void BaseGameEntity::Hit(int damage, bool show_effect)
 
 }
 
+void BaseGameEntity::SilentKill()
+{
+	data_life.armor = 0;
+	data_life.is_alive = false;
+}
+
 void BaseGameEntity::CheckDeath(bool show_effect)
 {
 	if (data_life.is_alive == false)
