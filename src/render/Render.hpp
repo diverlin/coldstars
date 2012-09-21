@@ -1,19 +1,19 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+	
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
@@ -43,7 +43,6 @@ void disable_DEPTH();
 void enable_POINTSPRITE();
 void disable_POINTSPRITE();
 
-
 void drawFlatQuadPerVertexIn2D(TextureOb* texOb,
 			         const vec2f& bottomLeft, 
 			         const vec2f& bottomRight, 
@@ -51,23 +50,15 @@ void drawFlatQuadPerVertexIn2D(TextureOb* texOb,
 			         const vec2f& topLeft, 
 			         float z_pos);
 			       
-
 void drawDynamic(TextureOb* texOb, 
 		 const vec2f& center, 
 		 float angleInDegree, 
 		 float pos_z);
 
-
-
-
-
 void drawRect(const Rect& rect, float z_pos); // the drawrect function was inverted by Y axis
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   
 
-
 void drawTexturedPoint(GLuint texture, const vec2f& _center, float size, float pos_z);
-
-
 
 void drawLine(TextureOb* texOb, 
               const vec2f& start_pos, 
@@ -77,22 +68,25 @@ void drawLine(TextureOb* texOb,
               int half_h);
 
 
+void drawSimpleText(const std::string& str, int font_size, float pos_x, float pos_y);
              
 void drawSimpleColoredText(std::string, 
+			   int,
 			   const vec2f&, 
 			   const Color4i&,
 			   const vec2f&);
 
-
+void drawSimpleColoredTextWithBackground(std::string, 
+			   int,
+			   const vec2f&, 
+			   const Color4i&,
+			   const vec2f&);
+			   
 void drawInfoIn2Column(
-                std::vector<std::string>* pInfo_title_list, 
-                std::vector<std::string>* pInfo_value_list, 
+                const std::vector<std::string>& pnfo_title_list, 
+                const std::vector<std::string>& info_value_list, 
                 float center_x, 
                 float center_y);
-
-
-void drawSimpleText(const std::string& str, int font_size, float pos_x, float pos_y);
-
 
 void drawFullScreenQuad(int w, int h, float pos_z);
 

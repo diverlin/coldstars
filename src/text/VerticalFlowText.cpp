@@ -21,14 +21,16 @@
 #include "../render/Render.hpp"
 
 VerticalFlowText::VerticalFlowText(const std::string& str, 
-                                         const vec2f& center, 
-                                         const Color4i& color, 
-                                         float collision_radius)
+					int font_size,
+                                        const vec2f& center, 
+                                        const Color4i& color, 
+                                        float collision_radius)
 {
         is_alive = true;
         live_time = 70; //TEXT_EXISTANCE_TIME
 
         this->str = str;
+        this->font_size = font_size;
         this->color = color;
 
 
@@ -66,7 +68,7 @@ void VerticalFlowText::Render(const vec2f& scroll_coords) const
 {
         if (is_alive == true)
         {
-                drawSimpleColoredText(str, pos, color, scroll_coords);
+                drawSimpleColoredText(str, font_size, pos, color, scroll_coords);
         }
 }
  

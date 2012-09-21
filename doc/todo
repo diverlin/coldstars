@@ -1,6 +1,13 @@
 ################### FEATURES #################
 << save/load ai/quest/scenario stuff
 
+<< make RocketBullet independed on Vehicle class. probably good idea to implement common bullet class for bullets
+
+<< Gui notice when item broken/locked
+
+<< ability to bing Gui with Vehicle(not center screen). will be used in precise fire. probably better to freeze camera and set gui offset as a center of ship in space.
+
+
 << grab vehicle
 - NOT RELEVANT
 
@@ -100,17 +107,5 @@ current implementation is: one textureOb is shared between many objects, so if t
 
 #6 bug with SetStaticCoords near to ship
 
-#7 bug in
-void RocketBullet::ResolveDataUniqueRocketBullet()
-{                       
-        if (unresolved_target_id != NONE_ID)
-        {
-        	//target = (BaseGameEntity*)EntityManager::Instance().GetEntityById(unresolved_target_id);
+#8 segfault when player died
 
-#8
-#0  0x0000000004a87900 in ?? ()
-#1  0x00000000004f7c69 in EntityManager::SaveEvent() ()
-#2  0x00000000004cd5d6 in SaveLoadManager::Update(Player*) ()
-#3  0x000000000054e258 in main ()
-
-#8segfault when player died

@@ -96,7 +96,7 @@ bool Turrel::PreciseFireEvent(ItemSlot* item_slot, int attack_skill, bool show_e
        			{
        				int expirience = 1000;
        			       	Color4i color(0,255,0,255);  	       		
-       				VerticalFlowText* text = new VerticalFlowText(int2str(expirience), slot->GetOwnerVehicle()->GetPoints().GetCenter(), color, 10);
+       				VerticalFlowText* text = new VerticalFlowText(int2str(expirience), 12, slot->GetOwnerVehicle()->GetPoints().GetCenter(), color, 10);
        				slot->GetOwnerVehicle()->GetStarSystem()->Add(text); 
        				slot->GetOwnerVehicle()->GetOwnerNpc()->GetSkill().AddExpirience(expirience);
        			}
@@ -122,7 +122,7 @@ bool Turrel::FireEvent(int attack_skill, bool show_effect)
        			{
        				int expirience = 1000;
        			       	Color4i color(0,255,0,255);  	       		
-       				VerticalFlowText* text = new VerticalFlowText(int2str(expirience), slot->GetOwnerVehicle()->GetPoints().GetCenter(), color, 10);
+       				VerticalFlowText* text = new VerticalFlowText(int2str(expirience), 12, slot->GetOwnerVehicle()->GetPoints().GetCenter(), color, 10);
        				slot->GetOwnerVehicle()->GetStarSystem()->Add(text); 
        				slot->GetOwnerVehicle()->GetOwnerNpc()->GetSkill().AddExpirience(expirience);
        			}
