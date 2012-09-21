@@ -316,6 +316,13 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 			break;
 		}
 
+		case sf::Key::F1: // god mode on/off
+		{	
+			std::cout<<"god_mode ="<<!player->GetNpc()->GetVehicle()->GetGodMode()<<std::endl;
+			player->GetNpc()->GetVehicle()->SetGodMode(!player->GetNpc()->GetVehicle()->GetGodMode());			
+			break;
+		}
+		
 		case sf::Key::F5: // save event
 		{		
 			SaveLoadManager::Instance().PerformDelayedSave();			

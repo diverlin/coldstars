@@ -44,7 +44,7 @@ Ship::Ship(int id)
 /* virtual */
 Ship::~Ship()
 {
-	#ifdef CREATEDESTROY_LOG_ENABLED == 1
+	#if CREATEDESTROY_LOG_ENABLED == 1
 	Logger::Instance().Log("___::~Ship(), id="+int2str(GetId()));
 	#endif
 } 
@@ -58,7 +58,7 @@ void Ship::UpdateInfo()
     	info.addTitleStr("SHIP");
     	info.addNameStr("id/ss_id:");          	info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->GetId()) );
     	info.addNameStr("race:");   		info.addValueStr( getRaceStr(textureOb->race_id) ); 
-    	info.addNameStr("class:");   		info.addValueStr( getClassStr(data_id.subsubtype_id) );     	
+    	info.addNameStr("class:");   		info.addValueStr( getEntityStr(data_id.subsubtype_id) );     	
     	info.addNameStr("armor/max:");     	info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) );
     	info.addNameStr("size id:");     	info.addValueStr( int2str(textureOb->size_id) );
     	info.addNameStr("space/free:");   	info.addValueStr( int2str(data_korpus.space) + "/" + int2str(propetries.free_space) );

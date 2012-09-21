@@ -25,7 +25,6 @@ std::string int2str(int var);
 std::string bool2str(bool var); 
 
 std::string getAiModelStr(int);
-std::string getClassStr(int);
 std::string getRaceStr(int); 
 std::string getNavigatorActionStr(int);
 std::string getEntityStr(int);

@@ -40,7 +40,7 @@ BaseEquipment::BaseEquipment()
 /*virtual */
 BaseEquipment::~BaseEquipment()
 {
-	#ifdef CREATEDESTROY_LOG_ENABLED == 1
+	#if CREATEDESTROY_LOG_ENABLED == 1
 	Logger::Instance().Log("___::~BaseEquipment(), id="+int2str(GetId()));
 	#endif
 

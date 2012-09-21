@@ -46,7 +46,7 @@ BaseGameEntity::BaseGameEntity():starsystem(NULL), mesh(NULL), textureOb(NULL), 
 /* virtual */
 BaseGameEntity::~BaseGameEntity()
 {
-	#ifdef CREATEDESTROY_LOG_ENABLED == 1
+	#if CREATEDESTROY_LOG_ENABLED == 1
 	Logger::Instance().Log("___::~BaseGameEntity(), id="+int2str(GetId()));
 	#endif
 }

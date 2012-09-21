@@ -55,7 +55,7 @@ ItemSlot::ItemSlot(int id)
 /* virtual */
 ItemSlot::~ItemSlot()
 {
-	#ifdef CREATEDESTROY_LOG_ENABLED == 1
+	#if CREATEDESTROY_LOG_ENABLED == 1
 	Logger::Instance().Log("___::~ItemSlot(), id="+int2str(GetId()));
 	#endif
 		
@@ -169,6 +169,7 @@ void ItemSlot::UpdateVehiclePropetries() const
 	}
 }
    
+/* virtual */
 void ItemSlot::Render(const Rect& rect, const vec2f& gui_offset, bool draw_text) const
 {
        	drawTexturedRect(textureOb, rect, -1.5);    

@@ -24,7 +24,7 @@ Base::Base()
 /*virtual*/
 Base::~Base()
 {
-	#ifdef CREATEDESTROY_LOG_ENABLED == 1
+	#if CREATEDESTROY_LOG_ENABLED == 1
 	Logger::Instance().Log("___::~Base(), id="+int2str(GetId()));
 	#endif
 }

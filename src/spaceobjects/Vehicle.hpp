@@ -142,6 +142,7 @@ class Vehicle : public BaseGameEntity
        	        Vehicle();
         	virtual ~Vehicle(); 
 
+		void SetGodMode(bool god_mode) { this->god_mode = god_mode; };
 		void SetSpecialActionId(int special_action_id) { this->special_action_id = special_action_id; };
 		void SetParentVehicleSlot(VehicleSlot* parent_vehicleslot) { this->parent_vehicleslot = parent_vehicleslot; };
 		
@@ -152,6 +153,7 @@ class Vehicle : public BaseGameEntity
                 void CreateDriveComplexTextureDependedStuff();
                 void CreateProtectionComplexTextureDependedStuff();
                 
+                bool GetGodMode() const { return god_mode; };
         	BaseLand* GetLand() const { return land; };
         	int GetSpecialActionId() const { return special_action_id; };
         	
@@ -178,7 +180,6 @@ class Vehicle : public BaseGameEntity
         	ItemSlot* GetGrappleSlot()   const { return grapple_slot; };
         	ItemSlot* GetDroidSlot()     const { return droid_slot; };
         	ItemSlot* GetFreezerSlot()   const { return freezer_slot; };
-        	ItemSlot* GetGateSlot()      const { return gate_slot; };
 
                 Npc* GetOwnerNpc() const { return owner_npc; };
        	        ItemSlot* GetEmptyCargoSlot();
@@ -253,8 +254,6 @@ class Vehicle : public BaseGameEntity
         	ItemSlot* grapple_slot;
         	ItemSlot* droid_slot;
         	ItemSlot* freezer_slot;
-        
-                ItemSlot* gate_slot;
                 
                 std::vector<ItemSlot*> slot_total_vec;
                 std::vector<ItemSlot*> slot_funct_vec;
@@ -284,6 +283,8 @@ class Vehicle : public BaseGameEntity
 		void ResolveDataUniqueVehicle();
 
         private:
+        	bool god_mode;
+        
              	void DropRandomItemToSpace();   
              	bool AddItemToEmptyCargoSlot(BaseItem*);
                 bool MergeIdenticalGoods(BaseItem*);
