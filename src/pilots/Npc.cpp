@@ -61,7 +61,7 @@ Npc::Npc(int id)
 }
     
 /* virtual */
-Npc :: ~Npc() 
+Npc::~Npc() 
 { 
         delete state_machine;        
 }  

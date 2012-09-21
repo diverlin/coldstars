@@ -21,43 +21,43 @@
 #define ITEMSLOT_H
 
 #include "../slots/BaseSlot.hpp"
-class Turrel; //#include "../parts/Turrel.hpp"
-class BaseItem; //#include "../items/BaseItem.hpp"
+class Turrel; 
+class BaseItem;
 class BaseGameEntity;
 
-class RocketEquipment; //#include "../items/equipment/RocketEquipment.hpp"
-class LazerEquipment; //#include "../items/equipment/LazerEquipment.hpp"
-class RadarEquipment; //#include "../items/equipment/RadarEquipment.hpp"
-class BakEquipment; //#include "../items/equipment/BakEquipment.hpp"
-class EnergizerEquipment; //#include "../items/equipment/EnergizerEquipment.hpp"
-class ProtectorEquipment; //#include "../items/equipment/ProtectorEquipment.hpp"
-class DroidEquipment; //#include "../items/equipment/DroidEquipment.hpp"
-class FreezerEquipment; //#include "../items/equipment/FreezerEquipment.hpp"
-class ScanerEquipment; //#include "../items/equipment/ScanerEquipment.hpp"
-class DriveEquipment; //#include "../items/equipment/DriveEquipment.hpp"
-class GrappleEquipment; //#include "../items/equipment/GrappleEquipment.hpp"
+class RocketEquipment; 
+class LazerEquipment; 
+class RadarEquipment; 
+class BakEquipment; 
+class EnergizerEquipment; 
+class ProtectorEquipment; 
+class DroidEquipment; 
+class FreezerEquipment; 
+class ScanerEquipment;
+class DriveEquipment; 
+class GrappleEquipment; 
 
-class RocketModule; //#include "../items/modules/RocketModule.hpp"
-class LazerModule; //#include "../items/modules/LazerModule.hpp"
-class RadarModule; //#include "../items/modules/RadarModule.hpp"
-class BakModule; //#include "../items/modules/BakModule.hpp"
-class EnergizerModule; //#include "../items/modules/EnergizerModule.hpp"
-class ProtectorModule; //#include "../items/modules/ProtectorModule.hpp"
-class DroidModule; //#include "../items/modules/DroidModule.hpp"
-class FreezerModule; //#include "../items/modules/FreezerModule.hpp"
-class ScanerModule; //#include "../items/modules/ScanerModule.hpp"
-class DriveModule; //#include "../items/modules/DriveModule.hpp"
-class GrappleModule; //#include "../items/modules/c.hpp"
+class RocketModule;
+class LazerModule;
+class RadarModule; 
+class BakModule; 
+class EnergizerModule; 
+class ProtectorModule; 
+class DroidModule; 
+class FreezerModule; 
+class ScanerModule;
+class DriveModule; 
+class GrappleModule; 
 
-class Bomb; //#include "../items/others/Bomb.hpp"
-class GoodsPack; //#include "../items/others/GoodsPack.hpp"
+class Bomb; 
+class GoodsPack; 
 #include "../render/PathVisual.hpp"
 
 class ItemSlot : public BaseSlot
 {   
 	public:        
 		ItemSlot(int id);
-		~ItemSlot();                
+		virtual ~ItemSlot();                
 	
 		void SetTurrel(Turrel* turrel) { this->turrel = turrel; };
                                 

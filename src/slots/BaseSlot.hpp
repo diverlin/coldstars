@@ -22,9 +22,9 @@
 
 #include "../common/Base.hpp"
 #include "../common/constants.hpp"
-class Rect; //#include "../common/rect.hpp"
 class Vehicle;
 class TextureOb;
+class Rect;
 
 
 struct UnresolvedDataUniqueBaseSlot
@@ -44,7 +44,7 @@ class BaseSlot : public Base
 {   
 	public:        
 		BaseSlot();
-		~BaseSlot();
+		virtual ~BaseSlot();
                 
 		void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
 		void SetOwner(Base* owner) { this->owner = owner; };

@@ -41,8 +41,11 @@ ItemSlot* GetNewItemSlot(int subtype_id, int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         
-        EntityManager::Instance().RegisterEntity(item_slot);
-      
+        if (subtype_id != ENTITY::GATE_SLOT_ID)
+        {
+        	EntityManager::Instance().RegisterEntity(item_slot);
+      	}
+      	
         TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ITEM_SLOT_ID);
 	item_slot->SetSubTypeId(subtype_id);
     	item_slot->SetTextureOb(texOb_slot);
@@ -69,3 +72,26 @@ ItemSlot* GetNewItemSlot(int subtype_id, int id)
         return item_slot;
 }
 
+ItemSlot* GetNewItemSlotWithoutSaveAbility(int subtype_id, int id)
+{
+       	if (id == NONE_ID)
+	{
+		id = SimpleIdGenerator::Instance().GetNextId();
+	} 
+	
+	ItemSlot* item_slot = NULL;
+        try 
+        { 
+        	item_slot = new ItemSlot(id);
+        }
+        catch(std::bad_alloc)
+        {
+        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+        }
+      	
+        TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ITEM_SLOT_ID);
+	item_slot->SetSubTypeId(subtype_id);
+    	item_slot->SetTextureOb(texOb_slot);
+      
+        return item_slot;
+}

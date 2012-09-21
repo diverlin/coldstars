@@ -19,6 +19,8 @@
 #ifndef MYSTR_H
 #define MYSTR_H
 
+#include <string>
+
 std::string int2str(int var); 
 std::string bool2str(bool var); 
 

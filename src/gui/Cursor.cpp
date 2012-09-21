@@ -34,7 +34,7 @@
 
 Cursor::Cursor():focused_space_ob(NULL)
 {
-     	item_slot = GetNewItemSlot(ENTITY::CARGO_SLOT_ID);
+     	item_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::CARGO_SLOT_ID);
      	rect.Set(0, 0, GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
 }
 

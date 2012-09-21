@@ -27,8 +27,13 @@ class TextureOb;
 
 struct ItemCommonData 
 {
-	ItemCommonData();
-
+	ItemCommonData(): 
+	modules_num_max(0),
+	condition_max(0), 
+	deterioration_rate(0),
+	mass(0)
+	{};
+	
 	unsigned int modules_num_max; 
 	unsigned int condition_max; 
 	unsigned int deterioration_rate;

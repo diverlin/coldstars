@@ -52,7 +52,7 @@ void RocketBulletBuilder::CreateNewRocket(int id)
         EntityManager::Instance().RegisterEntity(rocket);
 }
 
-void RocketBulletBuilder::CreateNewInternals(BulletData data_bullet) 
+void RocketBulletBuilder::CreateNewInternals(const BulletData& data_bullet) 
 {
 	LifeData data_life;	
         data_life.armor = data_bullet.armor;        
@@ -63,7 +63,6 @@ void RocketBulletBuilder::CreateNewInternals(BulletData data_bullet)
         rocket->SetTextureOb(TextureManager::Instance().GetRandomTextureOb(TEXTURE::ROCKET_BULLET_ID));
          
         CreateKorpusGeometry(rocket);
-        //CreateShieldGeometry(rocket);
 
 	rocket->CreateDriveComplexTextureDependedStuff();       
 }

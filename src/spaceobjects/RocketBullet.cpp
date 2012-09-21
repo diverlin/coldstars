@@ -34,7 +34,9 @@ RocketBullet::RocketBullet(int id)
 }
 
 RocketBullet::~RocketBullet()
-{}
+{
+
+}
 
 void RocketBullet::UpdateInSpace(int time, bool show_effect)
 {
@@ -127,10 +129,10 @@ void RocketBullet::RenderInSpace() const
 void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	const std::string root = "rocketbullet."+int2str(data_id.id)+".";
-        SaveDataUniqueBase(save_ptree, root);
-	SaveDataUniqueBaseGameEntity(save_ptree, root);
-	SaveDataUniqueVehicle(save_ptree, root);
-	SaveDataUniqueRocketBullet(save_ptree, root);
+        //SaveDataUniqueBase(save_ptree, root);
+	//SaveDataUniqueBaseGameEntity(save_ptree, root);
+	//SaveDataUniqueVehicle(save_ptree, root);
+	//SaveDataUniqueRocketBullet(save_ptree, root);
 }
 
 /*virtual*/

@@ -31,6 +31,7 @@ class BaseEquipment : public BaseItem
 
       		bool InsertModule(BaseModule*);
       		
+      		void RemoveAllRelatedStuffFromEntityManager();
       		virtual void Render(const Rect&, const vec2f&, bool draw_text = true);
       		      		
      	protected:

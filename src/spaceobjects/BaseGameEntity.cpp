@@ -27,6 +27,7 @@
 #include "../world/starsystem.hpp"
 #include "../render/Render.hpp"
 #include "../text/VerticalFlowText.hpp" 
+#include "../common/Logger.hpp"
 
 BaseGameEntity::BaseGameEntity():starsystem(NULL), mesh(NULL), textureOb(NULL), parent(NULL),
 				     place_type_id(NONE_ID), collision_radius(0), mass(0)
@@ -42,8 +43,13 @@ BaseGameEntity::BaseGameEntity():starsystem(NULL), mesh(NULL), textureOb(NULL), 
 	scale = 1;
 }
 
+/* virtual */
 BaseGameEntity::~BaseGameEntity()
-{}
+{
+	#ifdef CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~BaseGameEntity(), id="+int2str(GetId()));
+	#endif
+}
 
 
 void BaseGameEntity::UpdateRotation()

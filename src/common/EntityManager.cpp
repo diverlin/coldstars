@@ -82,6 +82,10 @@ EntityManager& EntityManager::Instance()
 
 void EntityManager::RegisterEntity(Base* entity)
 {
+	#ifdef CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("+++++++EntityManager register " + getEntityStr(entity->GetTypeId()) + "(" +int2str(entity->GetTypeId()) +") " + getEntityStr(entity->GetSubTypeId()) + "(" + int2str(entity->GetSubTypeId()) + ") id=" + int2str(entity->GetId()));
+	#endif
+	
 	entity_map.insert(std::make_pair(entity->GetId(), entity));
 }
 	
@@ -96,7 +100,18 @@ Base* EntityManager::GetEntityById(int id) const
 
 void EntityManager::RemoveEntity(Base* entity)
 {    
-	entity_map.erase(entity_map.find(entity->GetId()));
+	#ifdef CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("________EntityManager remove " + getEntityStr(entity->GetTypeId()) + "(" +int2str(entity->GetTypeId()) +") " + getEntityStr(entity->GetSubTypeId()) + "(" + int2str(entity->GetSubTypeId()) + ") id=" + int2str(entity->GetId()));
+	#endif
+		
+	if (entity_map.count(entity->GetId()) == 1)
+	{
+		entity_map.erase(entity_map.find(entity->GetId()));
+	}
+	else
+	{
+		std::cout<<"---EntityManager::RemoveEntity fails"<<std::endl;
+	}
 } 
 
 		
@@ -106,7 +121,7 @@ void EntityManager::SaveEvent()
 	
 	for (std::map<int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
 	{
-		Logger::Instance().Log("saving " + getEntityStr(iterator->second->GetTypeId()) + " :" + int2str(iterator->second->GetTypeId()) + " " + getEntityStr(iterator->second->GetSubTypeId()));
+		Logger::Instance().Log("saving " + getEntityStr(iterator->second->GetTypeId()) + "(" +int2str(iterator->second->GetTypeId()) +") " + getEntityStr(iterator->second->GetSubTypeId()) + "(" + int2str(iterator->second->GetSubTypeId()) + ") id=" + int2str(iterator->second->GetId()));
 		iterator->second->SaveData(save_ptree);
 	}
 	
