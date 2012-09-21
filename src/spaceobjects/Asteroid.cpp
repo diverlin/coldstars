@@ -36,11 +36,9 @@ Asteroid::Asteroid(int id)
       	mass  = getRandInt(10, 30);
 }
     
- 
+/* virtual */
 Asteroid::~Asteroid()
-{
-	EntityManager::Instance().RemoveEntity(this);
-}
+{}
 
 void Asteroid::UpdateInSpace(int time, bool show_effect)
 {    

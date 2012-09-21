@@ -208,7 +208,7 @@ bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
  	if (AddItemToCargoSlot(container->GetItemSlot()->GetItem()) == true)
        	{      
        		container->GetItemSlot()->RemoveItem();    
-       		container->SetPlaceTypeId(NONE_ID); // this needs for destroy
+       		container->SilentKill();
        								
        		return true;
       	}
@@ -964,20 +964,12 @@ void Vehicle::UpdateGrappleMicroProgram()
         grapple_slot->GetGrappleEquipment()->UpdateGrabScenarioProgram();  
 }
 	
-void Vehicle::RemoveAllRelatedStuffFromEntityManager()
+void Vehicle::RemoveChildFromEntityManager()
 {
-        EntityManager::Instance().RemoveEntity(this);
 	for(unsigned int i=0; i<slot_total_vec.size(); i++)
 	{
 		EntityManager::Instance().RemoveEntity(slot_total_vec[i]);	
-		if (slot_total_vec[i]->GetEquiped() == true)
-		{
-			EntityManager::Instance().RemoveEntity(slot_total_vec[i]->GetItem());
-			if (slot_total_vec[i]->GetItem()->GetTypeId() == ENTITY::EQUIPMENT_ID)
-			{
-				((BaseEquipment*)slot_total_vec[i]->GetItem())->RemoveAllRelatedStuffFromEntityManager();
-			}
-		}
+		slot_total_vec[i]->RemoveChildFromEntityManager();
 	}
 }
 				

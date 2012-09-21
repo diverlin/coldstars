@@ -26,7 +26,7 @@ class Asteroid : public BasePlanet
 {
 	public:
 		Asteroid(int);
-		~Asteroid();
+		virtual ~Asteroid();
 
 		int GetDamage() const { return mass*10; };
 

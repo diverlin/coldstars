@@ -233,7 +233,7 @@ class Vehicle : public BaseGameEntity
 		void LockItemInItemSlot(ItemSlot*, int);
 		void LockRandomItem(int);
 		
-		void RemoveAllRelatedStuffFromEntityManager();
+		void RemoveChildFromEntityManager();
 
 	protected:
 		int special_action_id;

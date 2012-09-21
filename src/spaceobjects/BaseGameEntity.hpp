@@ -74,7 +74,8 @@ class BaseGameEntity : public Base
 		void MovingByExternalForce(const vec2f&, float);
 
 		virtual void Hit(int, bool);
-
+		void SilentKill();
+		
 		void RenderInfoInSpace(const vec2f&);		
 		void RenderInfo(const vec2f&);
 		void virtual UpdateInfo() {};		

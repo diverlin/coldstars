@@ -173,15 +173,16 @@ class StarSystem : public BaseGameEntity
     		void MindEntitiesInStatic_s();
     		void UpdateEntities_s(int, bool);   		
     		
-    		void updateStates();
+    		void UpdateStates();
     		
     		void damageEventInsideCircle(vec2f epicentr, float radius, int damage, bool show_effect);
     		
     		void PostDeathUniqueEvent(bool);
 
 
-		void asteroidManager_s(unsigned int num);
-
+		void AsteroidManager_s(unsigned int);
+		void ShipManager_s(unsigned int);
+		
 		void manageUnavaliableObjects_s();
 		void ManageDeadObjects_s();
 
