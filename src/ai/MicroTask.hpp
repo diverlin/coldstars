@@ -27,8 +27,16 @@ class MicroTask : public BaseTask
 	public:
 		MicroTask(int, BaseGameEntity* target = NULL, int reward = 0, int expiriance = 0);
 		~MicroTask();
+		
+		virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void LoadData(const boost::property_tree::ptree&);
+		virtual void ResolveData();
 				
 	private:
+	
+	        void SaveDataUniqueMicroTask(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadDataUniqueMicroTask(const boost::property_tree::ptree&);
+		void ResolveDataUniqueMicroTask();
 
 };
 

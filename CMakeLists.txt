@@ -53,6 +53,7 @@ set (SOURCES
 
 	src/common/Base.cpp
 
+	src/ai/BaseTask.cpp
 	src/ai/MacroTask.cpp
 	src/ai/MicroTask.cpp
 
