@@ -81,7 +81,7 @@ class BaseItem : public Base
 		void UpdateInfo();
 			
       		virtual void Render(const Rect&, const vec2f&, bool draw_text = true);
-      		void RenderInfo(const Rect&, float, float); 
+      		void RenderInfo(const vec2f&, float, float); 
 
 	protected:
      		TextureOb* textureOb;

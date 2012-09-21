@@ -211,16 +211,16 @@ int ItemSlot::GetItemRadius() const
         return 0;
 }
 
-void ItemSlot::RenderItemInfo(const Rect& rect, const vec2f& offset) const
+void ItemSlot::RenderItemInfo(const vec2f& pos, const vec2f& offset) const
 {
-	RenderItemInfo(rect, offset.x, offset.y);
+	RenderItemInfo(pos, offset.x, offset.y);
 }
 
-void ItemSlot::RenderItemInfo(const Rect& rect, float offset_x, float offset_y) const
+void ItemSlot::RenderItemInfo(const vec2f& pos, float offset_x, float offset_y) const
 {
         if (equiped == true)
         {
-                item->RenderInfo(rect, offset_x, offset_y);
+                item->RenderInfo(pos, offset_x, offset_y);
         }
 }
 

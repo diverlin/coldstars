@@ -35,7 +35,7 @@
 
 
 
-const bool TEST_ON = true;
+const bool TEST_ON = false;
 const bool CRASH_TEST_ON = false;
 
 const double NO_DELAY = 0.0f;
