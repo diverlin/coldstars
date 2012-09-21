@@ -100,8 +100,8 @@ class ItemSlot : public BaseSlot
 		virtual void Render(const Rect&, const vec2f&, bool draw_text = true) const;
 		void RenderMark(const Rect&, TextureOb*) const;
 
-		void RenderItemInfo(const Rect&, const vec2f&) const;		       
-		void RenderItemInfo(const Rect&, float offset_x = 0, float offset_y = 0) const;
+		void RenderItemInfo(const vec2f&, const vec2f&) const;		       
+		void RenderItemInfo(const vec2f&, float offset_x = 0, float offset_y = 0) const;
                 
                 void DropItemToSpace(Vehicle*);
                                                 

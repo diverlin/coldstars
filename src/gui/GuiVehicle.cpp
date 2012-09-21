@@ -392,7 +392,7 @@ void GuiVehicle::RenderFocusedItemInfo(const MouseData& data_mouse) const
 	{ 
 		if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
 		{  
-			rect_slot_vec[i].second->RenderItemInfo(rect_slot_vec[i].first, -offset.x, -offset.y);
+			rect_slot_vec[i].second->RenderItemInfo(rect_slot_vec[i].first.GetCenter(), -offset.x, -offset.y);
 		}
 	}
 }
