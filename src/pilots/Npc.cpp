@@ -297,6 +297,15 @@ void Npc::SaveDataUniqueNpc(boost::property_tree::ptree& save_ptree, const std::
         save_ptree.put(root+"unresolved.vehicle_id", vehicle->GetId());
         save_ptree.put(root+"unresolved.aiModel_id", ai_model->GetTypeId());
 	skill.SaveData(save_ptree, root);
+	if (state_machine->GetMacroTaskManager()->GetMacroTask() != NULL)
+	{
+		state_machine->GetMacroTaskManager()->GetMacroTask()->SaveData(save_ptree, root);
+	}
+	
+	if (state_machine->GetMicroTaskManager()->GetMicroTask() != NULL)	
+	{
+		state_machine->GetMacroTaskManager()->GetMacroTask()->SaveData(save_ptree, root);
+	}
 }
 
 void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)

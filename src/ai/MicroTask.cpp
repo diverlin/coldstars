@@ -43,9 +43,9 @@ void MicroTask::ResolveDataUniqueMicroTask()
 }		
 
 /*virtual*/
-void MicroTask::SaveData(boost::property_tree::ptree& save_ptree) const
+void MicroTask::SaveData(boost::property_tree::ptree& save_ptree, const std::string& parent_root) const
 {
-	const std::string root = "microtask.";
+	const std::string root = parent_root + "microtask.";
         //SaveDataUniqueBase(save_ptree, root);
 	SaveDataUniqueBaseTask(save_ptree, root);
 	SaveDataUniqueMicroTask(save_ptree, root);

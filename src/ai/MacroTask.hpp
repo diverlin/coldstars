@@ -28,7 +28,7 @@ class MacroTask : public BaseTask
 		MacroTask(int, BaseGameEntity* target = NULL, int reward = 0, int expiriance = 0);
 		~MacroTask();
 		
-		virtual void SaveData(boost::property_tree::ptree&) const;
+		virtual void SaveData(boost::property_tree::ptree&, const std::string&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);
 		virtual void ResolveData();
 				
@@ -36,10 +36,7 @@ class MacroTask : public BaseTask
 	        void SaveDataUniqueMacroTask(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueMacroTask(const boost::property_tree::ptree&);
 		void ResolveDataUniqueMacroTask();
-
-
 };
-
 
 #endif 
      

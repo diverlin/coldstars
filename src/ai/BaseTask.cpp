@@ -27,7 +27,14 @@ void BaseTask::SaveDataUniqueBaseTask(boost::property_tree::ptree& save_ptree, c
 	save_ptree.put(root+"expiriance", expiriance);
 	save_ptree.put(root+"scenario_type_id", scenario_type_id);
 
-	save_ptree.put(root+"target_id", target->GetId());	
+	if (target != NULL)
+	{
+		save_ptree.put(root+"target_id", target->GetId());	
+	}
+	else
+	{
+		save_ptree.put(root+"target_id", NONE_ID);
+	}
 }
 
 void BaseTask::LoadDataUniqueBaseTask(const boost::property_tree::ptree& load_ptree)
@@ -42,5 +49,8 @@ void BaseTask::LoadDataUniqueBaseTask(const boost::property_tree::ptree& load_pt
 
 void BaseTask::ResolveDataUniqueBaseTask()
 {
-	target = (BaseGameEntity*)EntityManager::Instance().GetEntityById(data_unresolved_BaseTask.target_id); 
+	if (data_unresolved_BaseTask.target_id != NONE_ID)
+	{
+		target = (BaseGameEntity*)EntityManager::Instance().GetEntityById(data_unresolved_BaseTask.target_id); 
+	}
 }

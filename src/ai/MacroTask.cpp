@@ -42,9 +42,9 @@ void MacroTask::ResolveDataUniqueMacroTask()
 }		
 
 /*virtual*/
-void MacroTask::SaveData(boost::property_tree::ptree& save_ptree) const
+void MacroTask::SaveData(boost::property_tree::ptree& save_ptree, const std::string& parent_root) const
 {
-	const std::string root = "macrotask.";
+	const std::string root = parent_root + "macrotask.";
         //SaveDataUniqueBase(save_ptree, root);
 	SaveDataUniqueBaseTask(save_ptree, root);
 	SaveDataUniqueMacroTask(save_ptree, root);
