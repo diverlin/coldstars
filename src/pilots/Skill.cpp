@@ -191,19 +191,19 @@ void Skill::DecrementDiplomat()
 	}
 }
 
-void Skill::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Skill::SaveData(boost::property_tree::ptree& save_ptree, const std::string& parent_root) const
 {       
-	std::string sroot = root+"skill.";
-        save_ptree.put(sroot+"attack", attack);        
-        save_ptree.put(sroot+"defence", defence); 
-        save_ptree.put(sroot+"leader", leader);
-        save_ptree.put(sroot+"trader", trader); 
-        save_ptree.put(sroot+"technic", technic); 
-        save_ptree.put(sroot+"diplomat", diplomat); 
-        save_ptree.put(sroot+"available_points", available_points); 
+	const std::string root = parent_root+"skill.";
+        save_ptree.put(root+"attack", attack);        
+        save_ptree.put(root+"defence", defence); 
+        save_ptree.put(root+"leader", leader);
+        save_ptree.put(root+"trader", trader); 
+        save_ptree.put(root+"technic", technic); 
+        save_ptree.put(root+"diplomat", diplomat); 
+        save_ptree.put(root+"available_points", available_points); 
 
-        save_ptree.put(sroot+"expirience", expirience); 
-        save_ptree.put(sroot+"expirience_nextlevel", expirience_nextlevel); 
+        save_ptree.put(root+"expirience", expirience); 
+        save_ptree.put(root+"expirience_nextlevel", expirience_nextlevel); 
 }	
 
 void Skill::LoadData(const boost::property_tree::ptree& load_ptree)
