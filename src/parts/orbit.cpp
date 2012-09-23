@@ -1,24 +1,25 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+        Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+        
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License
+        as published by the Free Software Foundation; either version 2
+        of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+        
+        You should have received a copy of the GNU General Public License
+        along with this program; if not, write to the Free Software
+        Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "../resources/GuiTextureObCollector.hpp"
+#include <cmath>
 #include "orbit.hpp"
 #include "../common/constants.hpp"
+
 
 Orbit::Orbit():it(0)
 {}
@@ -89,15 +90,17 @@ void Orbit::UpdatePosition()
      	else 		{ it = 0; }
 }    
 
-void Orbit::UpdateVisual()
+void Orbit::UpdatePathVisualisation()
 {
-	orbit_visual.FillData(GuiTextureObCollector::Instance().dot_blue->texture, &coords_vec, 50, 10);
+	visual_orbit_path.FillData(coords_vec, 50, 10);
+        visual_orbit_turn.FillData(coords_vec, 50, 10);
 }
 
-void Orbit::Draw()
+void Orbit::DrawPath()
 {   
-	this->UpdateVisual();   // TOO SLOW
-        orbit_visual.Draw();
+	this->UpdatePathVisualisation();   // TOO SLOW
+        visual_orbit_path.Draw();
+        visual_orbit_turn.Draw();
 }
 
 

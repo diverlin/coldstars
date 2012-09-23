@@ -297,7 +297,7 @@ void ItemSlot::UpdateRange(TextureOb* _texOb)
       	
 	int step = 1;
 	int size = 6;
-        range_visual.FillData(_texOb->texture, &range_vec, step, size);
+        range_visual.FillData(_texOb, range_vec, step, size);
 }
 
 void ItemSlot::DrawRange()

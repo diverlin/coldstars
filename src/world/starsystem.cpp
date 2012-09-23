@@ -646,12 +646,12 @@ void StarSystem::DrawOrbits()
 {
         for(unsigned int i = 0; i < PLANET_vec.size(); i++) 
 	{ 
-		PLANET_vec[i]->GetOrbit()->Draw(); 
+		PLANET_vec[i]->GetOrbit()->DrawPath(); 
 	}
 
 	for(unsigned int i = 0; i < ASTEROID_vec.size(); i++)
 	{ 
-		ASTEROID_vec[i]->GetOrbit()->Draw(); 
+		ASTEROID_vec[i]->GetOrbit()->DrawPath(); 
 	}
 }
  

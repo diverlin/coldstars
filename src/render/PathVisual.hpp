@@ -19,10 +19,10 @@
 #ifndef PATHVISUAL_H
 #define PATHVISUAL_H
 
+#include <vector>
 #include <GL/glew.h>
-#include <SFML/Graphics.hpp>
-#include "../common/myVector.hpp"
-
+class TextureOb;
+class vec2f;
 
 class PathVisual
 {
@@ -30,8 +30,8 @@ class PathVisual
 		PathVisual();
 		~PathVisual();
 
-		void FillData(GLuint texture, std::vector<float>* pVec_x, std::vector<float>* pVec_y, float step, int point_size);
-		void FillData(GLuint texture, std::vector<vec2f>* pVec2f, float step, int point_size);
+		void FillData(TextureOb*, const std::vector<vec2f>&, float step, int point_size);
+		void FillData(const std::vector<vec2f>&, float step, int point_size);
 		void Draw() const;
 
 	private:

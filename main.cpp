@@ -42,7 +42,7 @@ int main()
         GalaxyBuilder::Instance().CreateNewGalaxy();
         
         if (TEST_ON == false) { GalaxyBuilder::Instance().CreateNewInternals(); }
-        else 		       { GalaxyBuilder::Instance().CreateNewInternals_TEST(); }
+        else 		      { GalaxyBuilder::Instance().CreateNewInternals_TEST(); }
         
 	PlayerBuilder::Instance().CreateNewPlayer();
 	PlayerBuilder::Instance().CreateNewInternals();

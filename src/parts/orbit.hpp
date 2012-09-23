@@ -14,7 +14,7 @@
 	 You should have received a copy of the GNU General Public License
 	 along with this program; if not, write to the Free Software
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-	 */
+*/
 
 
 #ifndef ORBIT_H
@@ -39,15 +39,15 @@ class Orbit
 		
 		void UpdatePosition();
 
-		void Draw();
+		void UpdatePathVisualisation();
+		void DrawPath();
 
 	protected:
-		PathVisual orbit_visual;
-
+		PathVisual visual_orbit_path;
+		PathVisual visual_orbit_turn;
+                
 		std::vector<vec2f> coords_vec;
 		int len, it; 
-
-		void UpdateVisual();
 };
 
 #endif 

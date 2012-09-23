@@ -18,7 +18,9 @@
 
 #include "PathVisual.hpp"
 #include "Render.hpp"
-#include "../common/rect.hpp"
+#include "../common/constants.hpp"
+#include "../resources/GuiTextureObCollector.hpp"
+#include "../common/myVector.hpp"
 
 PathVisual::PathVisual()  
 { 
@@ -29,36 +31,56 @@ PathVisual::~PathVisual()
 {
 	glDeleteLists(gl_list, sizeof(gl_list));
 }
-                
-void PathVisual::FillData(GLuint texture, std::vector<float>* pVec_x, std::vector<float>* pVec_y, float step, int point_size)
+
+void PathVisual::FillData(TextureOb* textureOb, const std::vector<vec2f>& vec2f_vec, float step, int point_size)
 {   
         int i = 0;
-        int list_len = pVec_x->size();
-                        
+        int list_len = vec2f_vec.size();              
+                                
         glNewList(gl_list, GL_COMPILE);
-                glBindTexture(GL_TEXTURE_2D, texture);
+        {
+                enable_POINTSPRITE();
+                glBindTexture(GL_TEXTURE_2D, textureOb->texture);
                 while (i < list_len)
-                {
-                        Rect rect((*pVec_x)[i] - point_size/2.0f, (*pVec_y)[i] - point_size/2.0f, point_size, point_size);
-                        drawRect(rect, -1.0);
+                {                    
+                        drawParticle(point_size, vec2f_vec[i]);
                         i += step;
                 }
+                disable_POINTSPRITE();
+        }
         glEndList();
 }
 
-void PathVisual::FillData(GLuint texture, std::vector<vec2f>* pVec2f, float step, int point_size)
+void PathVisual::FillData(const std::vector<vec2f>& vec2f_vec, float step, int point_size)
 {   
         int i = 0;
-        int list_len = pVec2f->size();
-                        
+        int list_len = vec2f_vec.size();
+              
+        GLuint texture_green = GuiTextureObCollector::Instance().dot_green->texture;
+        GLuint texture_blue = GuiTextureObCollector::Instance().dot_blue->texture;
+        GLuint texture;
+                                
         glNewList(gl_list, GL_COMPILE);
-                glBindTexture(GL_TEXTURE_2D, texture);
+        {
+                enable_POINTSPRITE();
                 while (i < list_len)
                 {
-                        Rect rect((*pVec2f)[i].x - point_size/2.0f, (*pVec2f)[i].y - point_size/2.0f, point_size, point_size);
-                        drawRect(rect, -1.0);
+                        if (i < TURN_TIME)
+                        {
+                                texture = texture_green;
+                        }
+                        else
+                        {
+                                texture = texture_blue;                                
+                        }
+                        
+                        glBindTexture(GL_TEXTURE_2D, texture);
+                        drawParticle(point_size, vec2f_vec[i]);
+
                         i += step;
                 }
+                disable_POINTSPRITE();
+        }
         glEndList();
 }
 
