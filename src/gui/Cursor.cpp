@@ -141,7 +141,7 @@ void Cursor::RenderFocusedSpaceObjectStuff()
 
 			case ENTITY::ASTEROID_ID:
 			{
-				((Asteroid*)focused_space_ob)->GetOrbit()->Draw();
+				((Asteroid*)focused_space_ob)->GetOrbit()->DrawPath();
 
 				((Asteroid*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
 								
@@ -157,7 +157,7 @@ void Cursor::RenderFocusedSpaceObjectStuff()
 									
 			case ENTITY::PLANET_ID:
 			{
-				((Planet*)focused_space_ob)->GetOrbit()->Draw();
+				((Planet*)focused_space_ob)->GetOrbit()->DrawPath();
 
 				((Planet*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
 								

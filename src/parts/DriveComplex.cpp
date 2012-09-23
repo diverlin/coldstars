@@ -25,7 +25,6 @@
 #include "../common/myVector.hpp"
 #include "../common/Collision.hpp"
 
-#include "../resources/GuiTextureObCollector.hpp"
 #include "../common/constants.hpp"
 
 DriveComplex::DriveComplex()
@@ -256,9 +255,7 @@ void DriveComplex::ClearPath()
 void DriveComplex::CalcPath()
 {
 	ClearPath();
-	
-       	visual_center_path.FillData(GuiTextureObCollector::Instance().dot_blue->texture, &path_center_vec, 10, 10);
-       		
+                        
     	//if ( (distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), target_pos) < 300) or (target_pos.x == 0 and target_pos.y == 0) ) // hack
     	//if (distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), target_pos) < 300)
     	if (target_pos.x == 0 and target_pos.y == 0)
@@ -273,10 +270,8 @@ void DriveComplex::CalcPath()
 
 	if (path_center_vec.size() >= 1)
 	{
-		direction_list_END = false;
-               
-       		visual_center_path.FillData(GuiTextureObCollector::Instance().dot_blue->texture, &path_center_vec, 10, 10);
-       		//visual_debug_midLeft_path.FillData(GuiTextureObCollector::Instance().dot_red->texture, &debug_midLeft_vec, 10, 10);
+		direction_list_END = false;               
+       		
        		move_it = 0;
        	}
 }
@@ -401,7 +396,7 @@ void DriveComplex::CalcAcceleratedPath() // used for hyper jump effect
 	{
 		direction_list_END = false;
                
-       		visual_center_path.FillData(GuiTextureObCollector::Instance().dot_blue->texture, &path_center_vec, 10, 10);
+       		visual_center_path.FillData(path_center_vec, 10, 10);
        		move_it = 0;
        	}
 
@@ -424,11 +419,20 @@ void DriveComplex::UpdatePosition()
      	}
 }
 
+void DriveComplex::UpdatePathVisualisation()
+{        
+        visual_center_path.FillData(path_center_vec, 10, 10);
+        visual_center_turn.FillData(path_center_vec, TURN_TIME, 14);
+       	//visual_debug_midLeft_path.FillData(GuiTextureObCollector::Instance().dot_red->texture, &debug_midLeft_vec, 10, 10);}
+}
+
 void DriveComplex::DrawPath()
 {
         if (direction_list_END == false)
         {
+                this->UpdatePathVisualisation();
                 visual_center_path.Draw();
+                visual_center_turn.Draw();
                 //visual_debug_midLeft_path.Draw();
         }
 }

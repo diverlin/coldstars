@@ -16,7 +16,6 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #ifndef DRIVECOMPLEX_H
 #define DRIVECOMPLEX_H
 
@@ -24,6 +23,7 @@ class Vehicle;
 class DriveEffect;
 class ItemSlot; 
 #include "../render/PathVisual.hpp" 
+#include "../common/myVector.hpp" 
 class BaseGameEntity;
 
 class DriveComplex
@@ -60,7 +60,8 @@ class DriveComplex
     		void CalcAcceleratedPath(); // used for hyper jump effect
         	void UpdatePath();
                 void UpdatePosition();
-                
+
+                void UpdatePathVisualisation();                
                 void DrawPath();
 
       	private:
@@ -87,6 +88,7 @@ class DriveComplex
         	int move_it;
    
                 PathVisual visual_center_path;
+                PathVisual visual_center_turn;
                 //PathVisual visual_debug_midLeft_path;
 
 		//void SetTargetPos(const vec2f& target_pos) { this->target_pos = target_pos; };
