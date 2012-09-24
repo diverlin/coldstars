@@ -69,8 +69,7 @@ void BakEquipmentBuilder::CreateNewInternals()
     	common_data.modules_num_max    = getRandInt(EQUIPMENT::BAK::MODULES_NUM_MIN, EQUIPMENT::BAK::MODULES_NUM_MAX);
     	common_data.mass               = getRandInt(EQUIPMENT::BAK::MASS_MIN, EQUIPMENT::BAK::MASS_MAX);
     	common_data.condition_max      = getRandInt(EQUIPMENT::BAK::CONDITION_MIN, EQUIPMENT::BAK::CONDITION_MAX) * tech_rate;
-    	common_data.deterioration_rate = 1;
-
+    	common_data.deterioration_normal = 1;
 
         bak_equipment->SetFuelMaxOrig(fuel_max_orig);
         bak_equipment->SetFuel(fuel_max_orig);

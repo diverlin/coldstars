@@ -70,7 +70,8 @@ void DriveEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
         common_data.modules_num_max = getRandInt(EQUIPMENT::DRIVE::MODULES_NUM_MIN, EQUIPMENT::DRIVE::MODULES_NUM_MAX);
         common_data.mass            = getRandInt(EQUIPMENT::DRIVE::MASS_MIN,        EQUIPMENT::DRIVE::MASS_MAX);
         common_data.condition_max   = getRandInt(EQUIPMENT::DRIVE::CONDITION_MIN,   EQUIPMENT::DRIVE::CONDITION_MAX) * tech_rate;
-        common_data.deterioration_rate = 1;
+    	common_data.deterioration_normal = 1;
+    	common_data.deterioration_overload_rate = EQUIPMENT::DRIVE::OVERLOAD_DETERIORATION_RATE;
     
         drive_equipment->SetSpeedOrig(speed_orig);  
         drive_equipment->SetHyperOrig(hyper_orig);

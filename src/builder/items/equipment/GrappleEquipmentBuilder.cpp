@@ -71,7 +71,7 @@ void GrappleEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
     	common_data.modules_num_max = getRandInt(EQUIPMENT::GRAPPLE::MODULES_NUM_MIN, EQUIPMENT::GRAPPLE::MODULES_NUM_MAX);
     	common_data.mass            = getRandInt(EQUIPMENT::GRAPPLE::MASS_MIN,        EQUIPMENT::GRAPPLE::MASS_MAX);
     	common_data.condition_max   = getRandInt(EQUIPMENT::GRAPPLE::CONDITION_MIN,   EQUIPMENT::GRAPPLE::CONDITION_MAX) * tech_rate;
-    	common_data.deterioration_rate = 1;
+    	common_data.deterioration_normal = 1;
                                                                  
         grapple_equipment->SetStrengthOrig(strength_orig);
         grapple_equipment->SetRadiusOrig(radius_orig);

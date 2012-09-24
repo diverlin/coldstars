@@ -55,10 +55,12 @@ void BaseEquipment::AddCommonInfo()
 {
     	info.addNameStr("modules:");   info.addValueStr( int2str(data_item.modules_num_max) );
     	info.addNameStr("race:");      info.addValueStr( getRaceStr(race_id) );
+        info.addNameStr("deteriori:"); info.addValueStr( int2str(deterioration) );
     	info.addNameStr("condition:"); info.addValueStr( int2str(condition) + "/" + int2str(data_item.condition_max) );
-    	info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
+        info.addNameStr("damaged:");   info.addValueStr( int2str(is_DAMAGED) );
+        info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
     	info.addNameStr("price:");     info.addValueStr( int2str(price) );
-    	info.addNameStr("damaged:");   info.addValueStr( int2str(is_DAMAGED) );
+
 }
 
 bool BaseEquipment::InsertModule(BaseModule* module)

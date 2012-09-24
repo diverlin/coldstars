@@ -562,6 +562,17 @@ void Vehicle::UpdatePropertiesSpeed()
            			{
            				propetries.speed = actual_speed; 
            			}
+                                
+                                if (drive_complex.GetDriveSlot()->GetSelected() == true)
+                                {
+                                        propetries.speed *= EQUIPMENT::DRIVE::OVERLOAD_RATE;
+                                        drive_complex.GetDriveSlot()->GetItem()->UseOverloadDeterioration();
+                                }
+                                else
+                                {
+                                        drive_complex.GetDriveSlot()->GetItem()->UseNormalDeterioration();
+                                }
+
            			
            			drive_complex.CalcPath();
            		}

@@ -70,7 +70,7 @@ void ScanerEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
     	common_data.modules_num_max = getRandInt(EQUIPMENT::SCANER::MODULES_NUM_MIN, EQUIPMENT::SCANER::MODULES_NUM_MAX);
     	common_data.mass            = getRandInt(EQUIPMENT::SCANER::MASS_MIN,        EQUIPMENT::SCANER::MASS_MAX);
     	common_data.condition_max   = getRandInt(EQUIPMENT::SCANER::CONDITION_MIN,   EQUIPMENT::SCANER::CONDITION_MAX) * tech_rate;
-    	common_data.deterioration_rate = 1;
+    	common_data.deterioration_normal = 1;
         
         scaner_equipment->SetScanOrig(scan_orig);  
         scaner_equipment->SetTextureOb(texOb_item);    	

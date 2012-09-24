@@ -65,8 +65,7 @@ void GravityArtefactBuilder::CreateNewInternals()
     	int gravity = getRandInt(ARTEFACT::GRAVITY::GRAVITYRATE_MIN, ARTEFACT::GRAVITY::GRAVITYRATE_MAX);
 
       	ItemCommonData common_data;
-
-    	common_data.deterioration_rate = 1;
+    	common_data.deterioration_normal = 1;
 
         gravity_artefact->SetGravity(gravity);
         gravity_artefact->SetTextureOb(texOb_item);    	

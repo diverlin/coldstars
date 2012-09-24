@@ -69,7 +69,7 @@ void FreezerEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
     	common_data.modules_num_max = getRandInt(EQUIPMENT::FREEZER::MODULES_NUM_MIN, EQUIPMENT::FREEZER::MODULES_NUM_MAX);
     	common_data.mass            = getRandInt(EQUIPMENT::FREEZER::MASS_MIN,        EQUIPMENT::FREEZER::MASS_MAX);
     	common_data.condition_max   = getRandInt(EQUIPMENT::FREEZER::CONDITION_MIN,   EQUIPMENT::FREEZER::CONDITION_MAX) * tech_rate;
-    	common_data.deterioration_rate = 1;
+    	common_data.deterioration_normal = 1;
         
         freezer_equipment->SetFreezeOrig(freeze_orig);  
         freezer_equipment->SetTextureOb(texOb_item);    	

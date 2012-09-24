@@ -357,7 +357,6 @@ void GuiVehicle::RenderSlots() const
 {	
 	for(unsigned int i=0; i<rect_slot_vec.size(); i++)
 	{
-		std::cout<<"slot_subtype ="<<getEntityStr(rect_slot_vec[i].second->GetSubTypeId())<<std::endl;
 		rect_slot_vec[i].second->Render(rect_slot_vec[i].first, offset);
 	}
 }
