@@ -63,12 +63,22 @@ void BaseItem::LockEvent(int locked_turns)
 	}
 }
                 
+void BaseItem::UseNormalDeterioration()
+{
+        deterioration =  data_item.deterioration_normal;
+}
+                                
+void BaseItem::UseOverloadDeterioration()
+{
+        deterioration = data_item.deterioration_normal * data_item.deterioration_overload_rate;
+}
+                
                 
 void BaseItem::DeteriorationEvent()
 {
 	if (is_DAMAGED == false)
 	{
-	    	condition -= data_item.deterioration_rate;
+	    	condition -= deterioration;
     		if (condition <= 0)
     		{
                         DamageEvent();
@@ -135,7 +145,8 @@ void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, c
         
         save_ptree.put(root+"data_item.modules_num_max",    data_item.modules_num_max);
         save_ptree.put(root+"data_item.condition_max",      data_item.condition_max);                         
-        save_ptree.put(root+"data_item.deterioration_rate", data_item.deterioration_rate);   
+        save_ptree.put(root+"data_item.deterioration_normal", data_item.deterioration_normal);   
+        save_ptree.put(root+"data_item.deterioration_overload_rate", data_item.deterioration_overload_rate);   
         save_ptree.put(root+"data_item.mass",               data_item.mass);
                     
 	if (textureOb) 	save_ptree.put(root+"unresolved.textureOb_path", textureOb->path);
@@ -155,7 +166,8 @@ void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_pt
     
         data_item.modules_num_max    = load_ptree.get<int>("data_item.modules_num_max");
         data_item.condition_max      = load_ptree.get<int>("data_item.condition_max");                         
-        data_item.deterioration_rate = load_ptree.get<int>("data_item.deterioration_rate");   
+        data_item.deterioration_normal = load_ptree.get<int>("data_item.deterioration_normal");   
+        data_item.deterioration_overload_rate = load_ptree.get<float>("data_item.deterioration_overload_rate");   
         data_item.mass               = load_ptree.get<int>("data_item.mass");
                     
 	data_unresolved_BaseItem.textureOb_path = load_ptree.get<std::string>("unresolved.textureOb_path");

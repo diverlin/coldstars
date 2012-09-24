@@ -65,8 +65,7 @@ void ProtectorArtefactBuilder::CreateNewInternals()
     	int protection = getRandInt(ARTEFACT::PROTECTOR::PROTECTION_MIN, ARTEFACT::PROTECTOR::PROTECTION_MAX);
 
       	ItemCommonData common_data;
-
-    	common_data.deterioration_rate = 1;
+    	common_data.deterioration_normal = 1;
 
         protector_artefact->SetProtection(protection);
         protector_artefact->SetTextureOb(texOb_item);    	

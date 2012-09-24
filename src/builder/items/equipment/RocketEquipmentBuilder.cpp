@@ -74,7 +74,7 @@ void RocketEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
     	common_data.mass = getRandInt(EQUIPMENT::ROCKET::MASS_MIN, EQUIPMENT::ROCKET::MASS_MAX);
     	common_data.condition_max = getRandInt(EQUIPMENT::ROCKET::CONDITION_MIN, EQUIPMENT::ROCKET::CONDITION_MAX) * tech_rate;
 
-    	common_data.deterioration_rate = 1;
+    	common_data.deterioration_normal = 1;
 
         BulletData data_bullet;
         data_bullet.damage        = damage_orig;

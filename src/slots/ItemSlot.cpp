@@ -120,8 +120,20 @@ void ItemSlot::RemoveItem()
 void ItemSlot::SelectEvent()
 {
 	selected = true;
+        
+        if (owner->GetTypeId() == ENTITY::VEHICLE_ID)
+	{ 	
+		switch(data_id.subtype_id)
+		{
+			case ENTITY::DRIVE_SLOT_ID: 	{
+  					  			GetOwnerVehicle()->UpdatePropertiesSpeed();
+								//GetOwnerVehicle()->UpdatePropertiesJump();                                                                                                                                
+					  			break;
+							}
+		}
+	}
 }
-
+                                
 void ItemSlot::DeselectEvent()
 {
 	selected = false;
@@ -131,6 +143,11 @@ void ItemSlot::DeselectEvent()
 		switch(data_id.subtype_id)
 		{
 			case ENTITY::WEAPON_SLOT_ID: 	{ turrel->ResetTarget(); break; }
+                        case ENTITY::DRIVE_SLOT_ID: 	{
+  					  			GetOwnerVehicle()->UpdatePropertiesSpeed();
+								//GetOwnerVehicle()->UpdatePropertiesJump();
+                                                                break;
+							}
 		}
 	}
 			

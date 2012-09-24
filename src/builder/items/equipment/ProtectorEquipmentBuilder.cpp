@@ -70,7 +70,7 @@ void ProtectorEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
     	common_data.modules_num_max = getRandInt(EQUIPMENT::PROTECTOR::MODULES_NUM_MIN, EQUIPMENT::PROTECTOR::MODULES_NUM_MAX);
     	common_data.mass            = getRandInt(EQUIPMENT::PROTECTOR::MASS_MIN,        EQUIPMENT::PROTECTOR::MASS_MAX);
     	common_data.condition_max   = getRandInt(EQUIPMENT::PROTECTOR::CONDITION_MIN,   EQUIPMENT::PROTECTOR::CONDITION_MAX) * tech_rate;
-    	common_data.deterioration_rate = 1;
+    	common_data.deterioration_normal = 1;
 
         protector_equipment->SetProtectionOrig(protection_orig);  
         protector_equipment->SetTextureOb(texOb_item);

@@ -23,20 +23,22 @@
 #include "../text/InfoTable.hpp"
 class ItemSlot; 
 class TextureOb; 
-#include "../common/rect.hpp"
+class Rect; //#include "../common/rect.hpp"
 
 struct ItemCommonData 
 {
 	ItemCommonData(): 
 	modules_num_max(0),
 	condition_max(0), 
-	deterioration_rate(0),
+	deterioration_normal(0),
+	deterioration_overload_rate(0.0f),
 	mass(0)
 	{};
 	
 	unsigned int modules_num_max; 
 	unsigned int condition_max; 
-	unsigned int deterioration_rate;
+	unsigned int deterioration_normal;
+	float deterioration_overload_rate;
 	unsigned int mass; 
 };
 
@@ -54,7 +56,7 @@ class BaseItem : public Base
 
 		void SetTextureOb(TextureOb* textureOb)  { this->textureOb = textureOb; };
 		void SetFunctionalSlotSubTypeId(int functional_slot_subtype_id) { this->functional_slot_subtype_id = functional_slot_subtype_id; };
-		void SetItemCommonData(const ItemCommonData& data_item) { this->data_item = data_item; };
+		void SetItemCommonData(const ItemCommonData& data_item) { this->data_item = data_item; deterioration = data_item.deterioration_normal; };
                 void SetItemSlot(ItemSlot* item_slot)  { this->item_slot = item_slot; };
                 void SetCondition(int condition) { this->condition = condition; };
 
@@ -69,6 +71,9 @@ class BaseItem : public Base
 		bool GetLocked()	const { return (locked_turns != 0); }
                 bool GetDamaged()       const { return is_DAMAGED; }
                 int GetFunctioning()    const { return ( (is_DAMAGED == false) and (locked_turns == 0) ); }
+                
+                void UseNormalDeterioration();
+                void UseOverloadDeterioration();
                 
                 void DeteriorationEvent(); 
                 void LockEvent(int); 
@@ -90,6 +95,8 @@ class BaseItem : public Base
 		int condition;
      		int price;
 
+                int deterioration;
+                
                 int functional_slot_subtype_id;
 
      		bool is_DAMAGED;

@@ -69,7 +69,7 @@ void DroidEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
     	common_data.modules_num_max = getRandInt(EQUIPMENT::DROID::MODULES_NUM_MIN, EQUIPMENT::DROID::MODULES_NUM_MAX);
     	common_data.mass            = getRandInt(EQUIPMENT::DROID::MASS_MIN,        EQUIPMENT::DROID::MASS_MAX);
     	common_data.condition_max   = getRandInt(EQUIPMENT::DROID::CONDITION_MIN,   EQUIPMENT::DROID::CONDITION_MAX) * tech_rate;
-    	common_data.deterioration_rate = 1;
+    	common_data.deterioration_normal = 1;
        
         droid_equipment->SetRepairOrig(repair_orig);  
         droid_equipment->SetTextureOb(texOb_item);    	

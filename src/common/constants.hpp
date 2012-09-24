@@ -387,6 +387,9 @@ namespace EQUIPMENT
 
 	namespace DRIVE
 	{
+                const float OVERLOAD_RATE = 1.5f;
+                const float OVERLOAD_DETERIORATION_RATE = 4.0f;
+                                
 		const int SPEED_MIN = 130;   
 		const int SPEED_MAX = 300;   
 		

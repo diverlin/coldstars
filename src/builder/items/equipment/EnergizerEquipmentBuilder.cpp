@@ -70,7 +70,7 @@ void EnergizerEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
     	common_data.modules_num_max  = getRandInt(EQUIPMENT::ENERGIZER::MODULES_NUM_MIN, EQUIPMENT::ENERGIZER::MODULES_NUM_MAX);
     	common_data.mass             = getRandInt(EQUIPMENT::ENERGIZER::MASS_MIN,        EQUIPMENT::ENERGIZER::MASS_MAX);
     	common_data.condition_max    = getRandInt(EQUIPMENT::ENERGIZER::CONDITION_MIN,   EQUIPMENT::ENERGIZER::CONDITION_MAX) * tech_rate;
-    	common_data.deterioration_rate = 1;
+    	common_data.deterioration_normal = 1;
 
         energizer_equipment->SetEnergyMaxOrig(energy_max_orig);
         energizer_equipment->SetRestorationOrig(restoration_orig);
