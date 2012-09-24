@@ -21,31 +21,19 @@
 #include "common.hpp"
 #include "constants.hpp"
 
-//size 0...9
-int returnObjectSize(int w, int h)
+int getObjectSize(int w, int h)
 {
-    	if(w * h < SIZE_1 * SIZE_1)
-       		return 1;
-    	else if(w * h < SIZE_2 * SIZE_2)
-       		return 2;
-    	else if(w * h < SIZE_3 * SIZE_3)
-       		return 3;
-    	else if(w * h < SIZE_4 * SIZE_4)
-       		return 4;
-    	else if(w * h < SIZE_5 * SIZE_5)
-       		return 5;
-    	else if(w * h < SIZE_6 * SIZE_6)
-       		return 6;
-    	else if(w * h < SIZE_7 * SIZE_7)
-       		return 7;
-    	else if(w * h < SIZE_8 * SIZE_8)
-       		return 8;
-    	else if(w * h < SIZE_9 * SIZE_9)
-       		return 9;
-    	else if(w * h >= SIZE_9 * SIZE_9)
-       		return 10;
-                
-        return 0;
+	int area = w*h;
+    	if(area < SIZE_1_AREA) return SIZE_1_ID;
+    	if(area < SIZE_2_AREA) return SIZE_2_ID;
+    	if(area < SIZE_3_AREA) return SIZE_3_ID;
+    	if(area < SIZE_4_AREA) return SIZE_4_ID;
+    	if(area < SIZE_5_AREA) return SIZE_5_ID;
+    	if(area < SIZE_6_AREA) return SIZE_6_ID;
+    	if(area < SIZE_7_AREA) return SIZE_7_ID;
+    	if(area < SIZE_8_AREA) return SIZE_8_ID;
+    	if(area < SIZE_9_AREA) return SIZE_9_ID;
+    	if(area >= SIZE_9_AREA) return SIZE_10_ID;
 }
 
 

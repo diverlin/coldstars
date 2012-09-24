@@ -22,9 +22,7 @@
 #include <string>
 #include "myVector.hpp"
 
-std::string getClassString(int); 
-
-int returnObjectSize(int w, int h);  //size 0...9
+int getObjectSize(int w, int h); 
 
 bool get_dPos_ToPoint(const vec2f&, const vec2f&, float, vec2f&);
 bool get_dPos_ToPoint(const vec2f&, const vec2f&, float, vec2f&, float&);

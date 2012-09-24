@@ -24,6 +24,7 @@
 #include "../common/Logger.hpp"
 #include "../common/rand.hpp"
 #include "../resources/TextureManager.hpp"
+#include "../resources/textureOb.hpp"
 
 SpaceStationBuilder& SpaceStationBuilder::Instance()
 {	

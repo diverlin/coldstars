@@ -22,7 +22,7 @@
 #include <string>
 #include "../common/myVector.hpp"
 
-#define LOG_ENABLED 1
+#define LOG_ENABLED 0
 #if LOG_ENABLED == 1
 	#define GRAPPLE_QUEUE_LOG_ENABLED 1
 	#define DRIVECOMPLEX_LOG_ENABLED 0
@@ -36,7 +36,7 @@
 
 
 const bool TEST_ON = true;
-const bool CRASH_TEST_ON = false;
+const bool CRASH_TEST_ON = true;
 
 const double NO_DELAY = 0.0f;
 const int NO_ADDITIONAL_INFO = 0;
@@ -115,20 +115,28 @@ const float RADIAN_TO_DEGREE_RATE = 180 / PI;
 const float DEGREE_TO_RADIAN_RATE = 1/RADIAN_TO_DEGREE_RATE; 
 //
 
-
-
 const float FLOAT_EPSILON = 0.1;    
 
-const int SIZE_1 = 20;   // 1 - up to 20x20
-const int SIZE_2 = 40;   // 2 - up to 40x40
-const int SIZE_3 = 60;   // 3 - up to 60x60
-const int SIZE_4 = 80;   // 4 - up to 80x80
-const int SIZE_5 = 100;  // 5 - up to 100x100
-const int SIZE_6 = 130;  // 6 - up to 130x130
-const int SIZE_7 = 160;  // 7 - up to 160x160
-const int SIZE_8 = 200;  // 8 - up to 200x200
-const int SIZE_9 = 240;  // 9 - up to 240x240
-const int SIZE_MIN = SIZE_1;
+const int SIZE_1_AREA = 20*20;
+const int SIZE_2_AREA = 40*40;  
+const int SIZE_3_AREA = 60*60; 
+const int SIZE_4_AREA = 80*80; 
+const int SIZE_5_AREA = 100*100;
+const int SIZE_6_AREA = 130*130;
+const int SIZE_7_AREA = 160*160;
+const int SIZE_8_AREA = 200*200;
+const int SIZE_9_AREA = 240*240;
+
+const int SIZE_1_ID = 1;
+const int SIZE_2_ID = 2;
+const int SIZE_3_ID = 3; 
+const int SIZE_4_ID = 4;  
+const int SIZE_5_ID = 5;  
+const int SIZE_6_ID = 6;  
+const int SIZE_7_ID = 7;  
+const int SIZE_8_ID = 8;  
+const int SIZE_9_ID = 9;  
+const int SIZE_10_ID = 10;  
 
 const int NONE_ID = -1;
 const int FAIL_ID = 1;

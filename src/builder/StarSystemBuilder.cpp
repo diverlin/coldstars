@@ -16,9 +16,9 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "NpcBuilder.hpp"
-
 #include "StarSystemBuilder.hpp"
+
+#include "NpcBuilder.hpp"
 #include "StarBuilder.hpp"
 #include "PlanetBuilder.hpp"
 #include "SpaceStationBuilder.hpp"

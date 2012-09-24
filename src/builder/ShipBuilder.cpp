@@ -23,6 +23,7 @@
 #include "../common/rand.hpp"
 
 #include "../resources/TextureManager.hpp"
+#include "../resources/textureOb.hpp"
 
 ShipBuilder& ShipBuilder::Instance()
 {	
@@ -66,13 +67,12 @@ void ShipBuilder::CreateNewInternals(int race_id, int subsubtype_id, int size_id
         VehicleKorpusData data_korpus;
     	data_korpus.space       = size_id*10 + getRandInt(0, 100);
     	data_korpus.armor       = data_korpus.space;
-    	data_korpus.protection  = protection_rate*size_id/(SIZE_MIN);
+    	data_korpus.protection  = protection_rate*size_id/(SIZE_1_ID);
     	data_korpus.temperature = 100;
         data_korpus.price       = getRandInt(200, 400)*size_id;
 
         data_korpus.slot_grapple_num = 1;
-        data_korpus.slot_weapon_num  = weapons_num;
-       
+        data_korpus.slot_weapon_num  = weapons_num;       
 
     	LifeData data_life;
         data_life.armor      = data_korpus.armor*0.1;

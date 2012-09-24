@@ -396,7 +396,6 @@ void DriveComplex::CalcAcceleratedPath() // used for hyper jump effect
 	{
 		direction_list_END = false;
                
-       		visual_center_path.FillData(path_center_vec, 10, 10);
        		move_it = 0;
        	}
 

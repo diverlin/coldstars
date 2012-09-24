@@ -23,7 +23,8 @@
 #include "../common/id.hpp"
 #include "../common/Logger.hpp"
 #include "../common/EntityManager.hpp"
-
+ #include "../pilots/Player.hpp"
+ 
 PlayerBuilder& PlayerBuilder::Instance()
 {
 	static PlayerBuilder instance;
@@ -56,7 +57,7 @@ void PlayerBuilder::CreateNewInternals()
 {    
 	int prace_id    = RACE::R0_ID;
       	int psubtype_id = ENTITY::WARRIOR_ID;
-      	int size_id     = SIZE_4;
+      	int size_id     = SIZE_4_ID;
       	int weapons_num = 7;
         
         NpcBuilder::Instance().CreateNewNpc();

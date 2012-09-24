@@ -20,8 +20,9 @@
 #ifndef TEXTUREMANAGER_H
 #define TEXTUREMANAGER_H
 
-#include "../resources/textureOb.hpp"
-
+#include <string>
+#include <vector>
+class TextureOb;
 
 class TextureManager
 {   
@@ -152,9 +153,9 @@ class TextureManager
         	std::vector<TextureOb*> face_race6_texOb_vec;
         	std::vector<TextureOb*> face_race7_texOb_vec;
        	
-        	TextureOb* GetRandomTextureObFromList(std::vector<TextureOb*>*);
-       		TextureOb* GetShipTexObByClosestSizeFromList(std::vector<TextureOb*>*, int);
-        	TextureOb* GetShipTexObBySizeFromList(std::vector<TextureOb*>*, int);
+        	TextureOb* GetRandomTextureObFromVec(const std::vector<TextureOb*>&);
+       		TextureOb* GetShipTexObByClosestSizeFromVec(const std::vector<TextureOb*>&, int);
+        	TextureOb* GetShipTexObBySizeFromVec(const std::vector<TextureOb*>&, int);
 
 };
 
