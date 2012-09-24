@@ -19,7 +19,8 @@
 #ifndef PLAYERBUILDER_H
 #define PLAYERBUILDER_H
 
-#include "../pilots/Player.hpp"
+class Player;
+#include "../common/constants.hpp"
 
 class PlayerBuilder
 {

@@ -689,7 +689,7 @@ void StarSystem::ShipManager_s(unsigned int num)
 		}
 		
       		int psubtype_id = ENTITY::WARRIOR_ID;
-      		int size_id     = SIZE_4;
+      		int size_id     = SIZE_4_ID;
       		int weapons_num = 7;
         
         	NpcBuilder::Instance().CreateNewNpc();

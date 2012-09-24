@@ -58,7 +58,7 @@ TextureOb::TextureOb(int _type_id, std::string _path, bool _use_alpha, std::vect
    	is_loaded = false;
     	is_shared = false;
 
-        size_id = returnObjectSize(w, h);
+        size_id = getObjectSize(w, h);
 
 	switch(type_id)
 	{

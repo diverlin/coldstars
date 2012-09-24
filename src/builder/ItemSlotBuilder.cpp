@@ -23,6 +23,7 @@
 #include "../common/Logger.hpp"
 #include "../resources/TextureManager.hpp"
 #include "../parts/Turrel.hpp"
+#include "../resources/textureOb.hpp"
 
 ItemSlot* GetNewItemSlot(int subtype_id, int id)
 {
