@@ -24,6 +24,7 @@
 
 #include "../../../world/starsystem.hpp"
 #include "../../../ai/StateMachine.hpp"
+#include "../../../pilots/Npc.hpp"
 
 MicroScenarioJump::MicroScenarioJump()
 {

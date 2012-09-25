@@ -31,6 +31,7 @@
 #include "../ai/StateMachine.hpp"
 
 #include "../spaceobjects/Star.hpp"
+#include "../pilots/Npc.hpp"
 
 GuiMap::GuiMap()
 { 

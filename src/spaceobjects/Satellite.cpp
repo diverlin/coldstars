@@ -24,6 +24,7 @@
 #include "../effects/Shield.hpp"
 #include "../slots/ItemSlot.hpp"
 #include "../parts/WeaponComplex.hpp"
+#include "../pilots/Npc.hpp"
 
 Satellite::Satellite(int id)
 {        

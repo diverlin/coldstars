@@ -23,6 +23,8 @@
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../pilots/Player.hpp"
 
+#include "../pilots/Npc.hpp"
+
 GuiAngar::GuiAngar()
 {	
 	int screen_w = Config::Instance().SCREEN_WIDTH;

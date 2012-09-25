@@ -26,6 +26,7 @@
 #include "../world/starsystem.hpp"
 #include "../render/Render.hpp"
 #include "../text/VerticalFlowText.hpp" 
+#include "../pilots/Npc.hpp"
 
 Turrel::Turrel(ItemSlot* slot)
 {

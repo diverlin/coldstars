@@ -18,7 +18,7 @@
 
 #include "SaveLoadManager.hpp"
 #include <boost/property_tree/info_parser.hpp>
-
+#include "../pilots/Npc.hpp"
 
 SaveLoadManager& SaveLoadManager::Instance()
 {

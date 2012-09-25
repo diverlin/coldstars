@@ -23,6 +23,7 @@
 
 #include "../gui/GuiManager.hpp"
 #include "../gui/Cursor.hpp"
+#include "../pilots/Show.hpp"
 class TurnTimer;
 
 class Star;
@@ -39,75 +40,6 @@ class LazerTraceEffect;
 class ShockWaveEffect;
 class BaseParticleSystem;
 class VerticalFlowText;
-
-class Show
-{
-	private:
-		bool gui_scan;
-		bool gui_galaxymap;
-                bool gui_radar;
-                
-		bool all_path;
-                bool all_orbits;
-                
-                bool info_ships;
-		bool info_planets;
-                
-		bool range_radar;
-                bool range_grapple;
-	
-	public:
-		Show():
-		gui_scan(false),
-		gui_galaxymap(false),    
-                gui_radar(false),            
-		all_path(false),
-                all_orbits(false),                
-                info_ships(false),
-		info_planets(false),                
-		range_radar(false),
-                range_grapple(false)
-		{};
-                
-		~Show() {};
-		
-		void SetGuiGalaxyMap(bool gui_galaxymap) { this->gui_galaxymap = gui_galaxymap; };
-		void SetGuiRadar(bool gui_radar) { this->gui_radar = gui_radar; };
-                		
-		bool GetAllOrbits()    const { return all_orbits; };
-		bool GetAllPath()      const { return all_path; };
-
-		bool GetGuiGalaxyMap() const { return gui_galaxymap; };
-		bool GetGuiRadar() const { return gui_radar; };
-                
-		bool GetInfoShips() const { return info_ships; };
-		bool GetRangeRadar() const { return range_radar; };
-		bool GetRangeGrapple() const { return range_grapple; };
-		
-		void InverseAllPath() 
-		{
-			if (all_path == true) 	{ all_path = false; }
-			else 			{ all_path = true; };
-		};
-		
-		void InverseAllOrbits() 
-		{
-			if (all_orbits == true) { all_orbits = false; }
-			else 			{ all_orbits = true; };
-		};
-		
-		void InverseRangeRadar() 
-		{
-			if (range_radar == true) { range_radar = false; }
-			else 			 { range_radar = true; };			
-		};
-		
-		void InverseRangeGrapple() 
-		{
-			if (range_grapple == true) { range_grapple = false; }
-			else 		  { range_grapple = true; };
-		};
-};
 
 struct UnresolvedDataUniquePlayer
 {

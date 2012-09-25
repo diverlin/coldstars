@@ -28,6 +28,8 @@
 #include "../resources/TextureManager.hpp"
 #include "../render/Screen.hpp"
 
+#include "../pilots/Npc.hpp"
+
 Slider::Slider()
 {
 	type_id = GUI::SLIDER::SLIDER_ID;

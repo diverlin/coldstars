@@ -92,8 +92,8 @@ void Orbit::UpdatePosition()
 
 void Orbit::UpdatePathVisualisation()
 {
-	visual_orbit_path.FillData(coords_vec, 50, 10);
-        visual_orbit_turn.FillData(coords_vec, 50, 10);
+	visual_orbit_path.FillData(coords_vec, 30, 10);
+        visual_orbit_turn.FillData(coords_vec, TURN_TIME, 13);
 }
 
 void Orbit::DrawPath()

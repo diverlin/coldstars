@@ -22,6 +22,8 @@
 #include "../render/Render.hpp"
 #include "../pilots/Player.hpp"
 
+#include "../pilots/Npc.hpp"
+
 GuiRadar::GuiRadar()
 {		
 	textureOb_background 	= GuiTextureObCollector::Instance().radar_background;

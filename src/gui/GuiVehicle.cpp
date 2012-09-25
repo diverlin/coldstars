@@ -26,6 +26,8 @@
 #include "../common/myStr.hpp"
 #include "../builder/ItemSlotBuilder.hpp"
 
+#include "../pilots/Npc.hpp"
+
 GuiVehicle::GuiVehicle()
 {
 	textureOb_korpus = NULL;

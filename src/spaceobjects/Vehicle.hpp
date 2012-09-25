@@ -21,113 +21,17 @@
 
 #include "../spaceobjects/BaseGameEntity.hpp"
 class VehicleSlot; 
-#include "../parts/WeaponComplex.hpp"
-#include "../parts/DriveComplex.hpp"
-#include "../parts/ProtectionComplex.hpp"
-
-#include "../docking/BaseLand.hpp"
-#include "../pilots/Npc.hpp"
+class BaseLand; 
+class Npc;
+class GoodsPack;
 class Container;
 class BaseItem;
 
-struct VehicleKorpusData
-{
-	/* this data depends only on korpus and cannot be changed by artefacts/items */        
-	unsigned int space;
-	unsigned int armor;
-	unsigned int protection; 
-	unsigned int temperature;   
-
-	unsigned int price;
-
-	bool draw_turrels;
-	float gui_scale;
-
-        int slot_grapple_num;
-        int slot_drive_num;
-        int slot_protector_num;
-        int slot_radar_num;
-        int slot_scaner_num;
-        int slot_freezer_num;
-	int slot_weapon_num;
-
-	VehicleKorpusData():
-	space(0),
-        armor(0),
-        protection(0), 
-        temperature(0),   
-        
-        price(0),
-       
-        draw_turrels(false),
-        gui_scale(1.0f),
-        
-        slot_grapple_num(0),
-        slot_drive_num(0),
-        slot_protector_num(0),
-        slot_radar_num(0),
-        slot_scaner_num(0),
-        slot_freezer_num(0),
-	slot_weapon_num(0)	
-	{}
-};
-
-
-struct VehiclePropetries
-{    
-	/* this data is changed during game play, the propetries depends on many factors */
-	int free_space;
-	
-	int protection;
-	int radar;
-	int speed;  // depends on mass and drive
-
-	int hyper;  // depends on drive
-	int fuel;    // depends on bak
-	int repair; // depends on droid
-	int freeze; // depends on freezer
-	int scan;   // depends on scaner
-
-        int grab_radius;
-        int grab_strength;
-        
-	int energy;
-	int temperature;
-	
-	int artefact_gravity;
-	int artefact_protection;
-		
-	// simplification
-	int average_damage;
-	int average_fire_radius;
-	
-	bool equipment_radar;
-	bool equipment_protector;
-
-	VehiclePropetries():
-	free_space(0),
-	protection(0),
-        radar(0),
-        speed(0),
-        hyper(0),
-        fuel(0),
-        repair(0),
-        freeze(0),
-        scan(0),    
-        grab_radius(0),
-        grab_strength(0),
-            
-        energy(0),
-        temperature(0),
-        artefact_gravity(0),
-        artefact_protection(0),
-        
-        average_damage(0),
-        average_fire_radius(0) ,
-        equipment_radar(false),
-        equipment_protector(false)
-        {}
-};
+#include "../parts/WeaponComplex.hpp"
+#include "../parts/DriveComplex.hpp"
+#include "../parts/ProtectionComplex.hpp"
+#include "../parts/VehicleKorpusData.hpp"
+#include "../parts/VehiclePropetries.hpp"
 
 struct UnresolvedDataUniqueVehicle
 {

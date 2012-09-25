@@ -24,6 +24,7 @@
 #include "../spaceobjects/Vehicle.hpp"
 #include "../items/BaseItem.hpp"
 #include "../slots/ItemSlot.hpp"
+#include "../pilots/Npc.hpp"
 
 Store::Store(int id)
 {
