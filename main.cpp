@@ -29,6 +29,7 @@
 #include "src/gui/UserInput.hpp"
 
 #include "src/common/TurnTimer.hpp"
+#include "src/pilots/Npc.hpp"
 
 int main()
 {         

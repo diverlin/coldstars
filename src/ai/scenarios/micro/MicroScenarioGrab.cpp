@@ -25,6 +25,7 @@
 
 #include "../../../items/equipment/GrappleEquipment.hpp"
 #include "../../../slots/ItemSlot.hpp"
+#include "../../../pilots/Npc.hpp"
 
 MicroScenarioGrab::MicroScenarioGrab()
 {

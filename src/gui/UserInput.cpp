@@ -22,6 +22,7 @@
 #include "../config/config.hpp"
 #include "../render/Screen.hpp"
 #include "../parts/WeaponComplex.hpp"
+#include "../pilots/Npc.hpp"
 
 UserInput& UserInput::Instance()
 {
@@ -86,6 +87,19 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 			break;
 		} 
 
+		//DRIVE SLOT
+		case sf::Key::F: 
+		{ 
+			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::DRIVE_SLOT_ID);
+			if (button)
+			{
+				button->PressEvent(); 
+			}
+			
+			break; 
+		
+		}	
+		
 		// WEAPON SLOTS
 		case sf::Key::Num1: 
 		{ 

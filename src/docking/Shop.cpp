@@ -26,6 +26,7 @@
 #include "../spaceobjects/Vehicle.hpp"
 #include "../items/others/GoodsPack.hpp"
 #include "../slots/ItemSlot.hpp"
+#include "../pilots/Npc.hpp"
 
 Shop::Shop(int id)
 {

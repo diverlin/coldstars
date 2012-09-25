@@ -57,6 +57,7 @@
 #include "../slots/VehicleSlot.hpp" 
 
 #include "../docking/Angar.hpp"
+#include "../pilots/Npc.hpp"
 
 Vehicle::Vehicle()
 {
@@ -710,17 +711,21 @@ void Vehicle::UpdatePropertiesScan()
 
 void Vehicle::UpdatePropertiesGrab()
 {
+        propetries.grab_strength = 0;
+        propetries.grab_radius = 0;
+                      			      			
      	if (data_korpus.slot_grapple_num != 0)
      	{
         	if (grapple_slot->GetEquiped() == true)
            	{
            		if (grapple_slot->GetGrappleEquipment()->GetFunctioning() == true)
               		{
-              		
+			        propetries.grab_strength = grapple_slot->GetGrappleEquipment()->GetStrength();
+			        propetries.grab_radius = grapple_slot->GetGrappleEquipment()->GetRadius();
               		}
               	}
 	}
-}
+}                  
         
 void Vehicle::UpdateArtefactInfluence()
 {

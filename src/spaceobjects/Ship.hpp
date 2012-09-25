@@ -21,7 +21,7 @@
 #define SHIP_H
 
 #include "Vehicle.hpp"
-#include "../common/rect.hpp"
+#include "../common/myVector.hpp"
 
 class Ship : public Vehicle
 {   
@@ -34,7 +34,7 @@ class Ship : public Vehicle
         	virtual void UpdateInfo();  
         	
         	void RenderInSpace() const;
-		void RenderAtPlanet(const Rect&);       
+		void RenderAtPlanet(const vec2f&);       
 		
     		virtual void SaveData(boost::property_tree::ptree&) const;
     		virtual void LoadData(const boost::property_tree::ptree&);
@@ -45,6 +45,5 @@ class Ship : public Vehicle
 		void LoadDataUniqueShip(const boost::property_tree::ptree&);
 		void ResolveDataUniqueShip();
 };
-
 
 #endif 

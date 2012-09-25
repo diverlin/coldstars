@@ -28,6 +28,7 @@
 #include "../items/BaseItem.hpp"
 
 #include "../docking/Goverment.hpp"
+#include "../pilots/Npc.hpp"
 
 GuiManager::GuiManager()
 {

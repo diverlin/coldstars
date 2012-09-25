@@ -22,6 +22,7 @@
 #include "../../../common/myStr.hpp"
 #include "../../../spaceobjects/Vehicle.hpp"
 #include "../../../ai/StateMachine.hpp"
+#include "../../../pilots/Npc.hpp"
 
 MicroScenarioDocking::MicroScenarioDocking()
 {

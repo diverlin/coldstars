@@ -21,6 +21,7 @@
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../items/BaseItem.hpp"
 #include "../slots/ItemSlot.hpp"
+#include "../pilots/Npc.hpp"
 
 GuiStore::GuiStore()
 {}

@@ -34,6 +34,8 @@
 #include "../parts/WeaponComplex.hpp"
 #include "../common/Logger.hpp"
 
+#include "../pilots/Npc.hpp"
+
 Ship::Ship(int id)
 {
 	data_id.id = id;
@@ -139,9 +141,9 @@ void Ship::RenderInSpace() const
 }
 
 
-void Ship::RenderAtPlanet(const Rect& rect)
+void Ship::RenderAtPlanet(const vec2f& center)
 {
-       	points.SetCenter(rect.GetCenter());
+       	points.SetCenter(center);
         points.SetAngle(0);
         points.Update();
         

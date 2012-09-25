@@ -26,6 +26,7 @@
 #include "../parts/WeaponComplex.hpp"
 #include "../common/constants.hpp"
 #include "../slots/ItemSlot.hpp"
+#include "../pilots/Npc.hpp"
 
 SpaceStation::SpaceStation(int id)
 {      

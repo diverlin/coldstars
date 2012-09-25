@@ -22,6 +22,7 @@
 #include "../common/myStr.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../slots/VehicleSlot.hpp" 
+#include "../pilots/Npc.hpp"
 
 Angar::Angar(int id)
 {
