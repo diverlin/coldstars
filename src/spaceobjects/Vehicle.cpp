@@ -379,10 +379,8 @@ bool Vehicle::UpdateFadeOutEffect()
 //// ******** DOCKING/LAUNCHING ******** 
 void Vehicle::HyperJumpEvent()
 {
-        starsystem->RemoveVehicle(this);  
-                                                        
-        ((StarSystem*)drive_complex.GetTarget())->AddToHyperJumpQueue(this);
-        drive_complex.ResetTarget();  
+        drive_complex.GetTarget()->GetStarSystem()->AddToHyperJumpQueue(this);
+        drive_complex.ResetTarget();
         
         #if LOG_ENABLED == 1 
 	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" jumpEvent()", 2); 
@@ -391,9 +389,7 @@ void Vehicle::HyperJumpEvent()
                 
                 
 void Vehicle::DockingEvent()
-{
-     	starsystem->RemoveVehicle(this);
-            
+{           
         switch(drive_complex.GetTarget()->GetTypeId())         	     	     	
      	{
      		case ENTITY::PLANET_ID:

@@ -63,7 +63,6 @@ class Vehicle : public BaseGameEntity
         	
         	const VehiclePropetries& GetPropetries() const { return propetries; };
                 VehicleKorpusData& GetKorpusData() { return data_korpus; };
-                
                 			
                 void AddItemSlot(ItemSlot*); 
                 bool AddItemToCargoSlot(BaseItem*);

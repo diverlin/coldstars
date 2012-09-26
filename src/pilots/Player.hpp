@@ -85,8 +85,8 @@ class Player : public Base
     		
     		void ForceStateMachineReset() const;
     		         
-    		void UpdateStarSystemTransaction(TurnTimer&);
-    		             		       
+		void UpdatePostTransactionEvent(TurnTimer&);
+		    		             		       
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
@@ -118,12 +118,12 @@ class Player : public Base
     		
     		GuiManager gui_manager;    
     		
-    		void RenderInSpace(bool, bool, bool); 
-     			void RenderInSpace_NEW();
-    			void RenderInSpace_OLD();
+    		void RenderInSpace(StarSystem*, bool, bool, bool); 
+     			void RenderInSpace_NEW(StarSystem*);
+    			void RenderInSpace_OLD(StarSystem*);
     		
     		
-    		void SessionInSpace(const TurnTimer&);
+    		void SessionInSpace(StarSystem*, const TurnTimer&);
     		void SessionInKosmoport();
     		
     		void MouseInteractionInSpace(const MouseData&);

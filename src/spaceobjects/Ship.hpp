@@ -29,7 +29,7 @@ class Ship : public Vehicle
                 Ship(int);
         	virtual ~Ship();
 
-        	void UpdateInSpace(int, bool);
+        	virtual void UpdateInSpace(int, bool);
         	
         	virtual void UpdateInfo();  
         	

@@ -62,7 +62,7 @@ StarSystem::StarSystem(int id)
     	data_id.id = id;
     	data_id.type_id = ENTITY::STARSYSTEM_ID;
     	
-    	place_type_id = ENTITY::SPACE_ID;
+    	place_type_id = ENTITY::PLACE_SPACE_ID;
     	
     	condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
     	
@@ -106,7 +106,7 @@ StarSystem::~StarSystem()
 
 void StarSystem::AddVehicle(Vehicle* vehicle, const vec2f& center, float angle, BaseGameEntity* parent)
 {
-     	vehicle->SetPlaceTypeId(ENTITY::SPACE_ID);
+     	vehicle->SetPlaceTypeId(ENTITY::PLACE_SPACE_ID);
      	vehicle->SetStarSystem(this);  
 
 	vehicle->SetColor(STAR_vec[0]->GetColor());
@@ -128,7 +128,7 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const vec2f& center, float angle, 
 
 void StarSystem::AddBullet(RocketBullet* rocket, const vec2f& center, float angle)
 {
-     	rocket->SetPlaceTypeId(ENTITY::SPACE_ID);
+     	rocket->SetPlaceTypeId(ENTITY::PLACE_SPACE_ID);
      	rocket->SetStarSystem(this);  
 			
 	rocket->GetPoints().SetCenter(center); 
@@ -144,7 +144,7 @@ void StarSystem::Add(BasePlanet* object, BaseGameEntity* parent, int it)
         object->SetParent(parent);
         
         object->SetStarSystem(this);
-        object->SetPlaceTypeId(ENTITY::SPACE_ID);
+        object->SetPlaceTypeId(ENTITY::PLACE_SPACE_ID);
         
         object->GetOrbit()->SetIt(it);
         object->UpdatePosition();
@@ -174,7 +174,7 @@ void StarSystem::Add(BasePlanet* object, BaseGameEntity* parent, int it)
 void StarSystem::Add(Container* container, const vec2f& center)
 {
 	container->SetStarSystem(this);
-        container->SetPlaceTypeId(ENTITY::SPACE_ID);
+        container->SetPlaceTypeId(ENTITY::PLACE_SPACE_ID);
     	container->GetPoints().SetCenter(center);
     	container->SetTargetPos(center+getRandVec2f(60, 100));
         
@@ -194,30 +194,11 @@ void StarSystem::Add(BaseParticleSystem* ps)                 { effect_PARTICLESY
 void StarSystem::Add(VerticalFlowText* text)                 { text_DAMAGE_vec.push_back(text); }
 void StarSystem::Add(DistantNebulaEffect* dn)                { distantNebulaEffect_vec.push_back(dn); }
 void StarSystem::Add(DistantStarEffect* ds)                  { distantStarEffect_vec.push_back(ds); }
-void StarSystem::AddToHyperJumpQueue(Vehicle* vehicle)                { appear_VEHICLE_queue.push_back(vehicle); }	
-void StarSystem::AddToRemoveFromOuterSpaceQueue(Container* container) { remove_CONTAINER_queue.push_back(container); }
-
-void StarSystem::AddToRemoveFromOuterSpaceQueue(Vehicle* vehicle) 
+void StarSystem::AddToHyperJumpQueue(Vehicle* vehicle)      
 {
-	switch(vehicle->GetSubTypeId())
-	{
-		case ENTITY::SHIP_ID: { remove_SHIP_queue.push_back((Ship*)vehicle); break; }
-	}
-	
-}   		
-
-bool StarSystem::RemoveVehicle(Vehicle* vehicle)
-{       
-        for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
-        {
-                if (VEHICLE_vec[i]->GetId() == vehicle->GetId())
-                {
-                        VEHICLE_vec.erase(VEHICLE_vec.begin() + i);
-                        return true; 
-                }
-        }        
-        return false;
-}
+	vehicle->SetPlaceTypeId(ENTITY::PLACE_HYPER_ID); 
+	appear_VEHICLE_queue.push_back(vehicle); 
+}	
 //// ******* TRANSITION ******* 
   		           
 // poor                
@@ -407,7 +388,7 @@ void StarSystem::UpdateStates()
 
 void StarSystem::Update(int time, bool detalied_simulation)
 {
-        manageUnavaliableObjects_s();
+        ManageUnavaliableObjects_s();
         ManageDeadObjects_s();         // no need to update so frequently, pri /6
                         
 	UpdateEntities_s(time, detalied_simulation);
@@ -712,20 +693,15 @@ void StarSystem::ShipManager_s(unsigned int num)
 }
 
 
-void StarSystem::manageUnavaliableObjects_s()
+void StarSystem::ManageUnavaliableObjects_s()
 {
-    	for(unsigned int i = 0; i < remove_CONTAINER_queue.size(); i++)
-    	{
-    		for (unsigned int j = 0; j < CONTAINER_vec.size(); j++)
-    		{
-    			if (CONTAINER_vec[j]->GetId() == remove_CONTAINER_queue[i]->GetId())
-    			{
-    				CONTAINER_vec.erase(CONTAINER_vec.begin() + j );
-    				continue;
-    			}
-    		}
-    	}
-    	remove_CONTAINER_queue.clear();    	
+        for (std::vector<Vehicle*>::iterator it=VEHICLE_vec.begin(); it<VEHICLE_vec.end(); ++it)
+        {
+               	if ((*it)->GetPlaceTypeId() != ENTITY::PLACE_SPACE_ID)
+               	{
+               		it = VEHICLE_vec.erase(it);
+               	}
+        }
 }
     		
 void StarSystem::ManageDeadObjects_s()
@@ -837,7 +813,9 @@ bool StarSystem::IsVehiclePartOfAppearQueue(int id)
 void StarSystem::PostHyperJumpEvent()
 {
         for (unsigned int i=0; i<appear_VEHICLE_queue.size(); i++)
-        {               
+        {             
+                appear_VEHICLE_queue[i]->GetDriveComplex().ResetTarget(); 
+                  
         	vec2f center(getRandInt(700, 1200), getRandInt(700, 1200)); // get correct pos
 		float angle = getRandInt(0, 360);  
 		
