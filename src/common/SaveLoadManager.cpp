@@ -36,12 +36,12 @@ Player* SaveLoadManager::Update(Player* player)
 
 	if (perform_load == true)
 	{
-		int _player_id = player->GetId();
 		delete player->GetNpc()->GetStarSystem()->GetGalaxy();
+		EntityManager::Instance().Clear();
 		EntityManager::Instance().LoadPass0();
 		EntityManager::Instance().LoadPass1();
 						
-		player = (Player*)EntityManager::Instance().GetEntityById(_player_id);
+		player = (Player*)EntityManager::Instance().GetPlayer();
 		perform_load = false;
 		
 		return player;
