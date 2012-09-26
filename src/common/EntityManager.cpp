@@ -80,6 +80,11 @@ EntityManager& EntityManager::Instance()
 	return instance;
 }
 
+void EntityManager::Clear()
+{
+	entity_map.clear();
+}
+		
 void EntityManager::RegisterEntity(Base* entity)
 {
 	#if CREATEDESTROY_LOG_ENABLED == 1
@@ -97,6 +102,18 @@ Base* EntityManager::GetEntityById(int id) const
 	return slice->second;
 }
 
+Base* EntityManager::GetPlayer() const
+{
+	for (std::map<int, Base*>::const_iterator it=entity_map.begin(); it!=entity_map.end(); ++it)
+	{
+		if (it->second->GetTypeId() == ENTITY::PLAYER_ID)
+		{
+			return it->second;
+		}
+	}
+
+	return NULL;
+}
 
 void EntityManager::RemoveEntity(Base* entity)
 {    
@@ -129,9 +146,7 @@ void EntityManager::SaveEvent()
 }
 		
 void EntityManager::LoadPass0()
-{       
-	entity_map.clear();
-
+{
 	Logger::Instance().Log("LOADING STARTED");
 	
 	boost::property_tree::ptree load_ptree;

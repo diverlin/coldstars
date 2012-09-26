@@ -35,7 +35,9 @@ class EntityManager
 		void RegisterEntity(Base*);
 	
 		Base* GetEntityById(int) const;
-
+		Base* GetPlayer() const;
+		
+		void Clear();
 		void RemoveEntity(Base*);
 		
 		void SaveEvent();
