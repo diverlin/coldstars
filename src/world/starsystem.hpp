@@ -90,11 +90,6 @@ class StarSystem : public BaseGameEntity
 		void Add(VerticalFlowText*);
 		//
 
-		void AddToRemoveFromOuterSpaceQueue(Container*);
-		void AddToRemoveFromOuterSpaceQueue(Vehicle*);
-				
-		bool RemoveVehicle(Vehicle*);    
-		
 		void BombExplosionEvent(Container*, bool);
 		
 		void FindRenderVisibleEntities_c(Player*);  
@@ -141,7 +136,8 @@ class StarSystem : public BaseGameEntity
 		std::vector<BlackHole*>    BLACKHOLE_vec;
 		
 		std::vector<Vehicle*> VEHICLE_vec;
-    		   
+                std::vector<Vehicle*> appear_VEHICLE_queue;
+                    		   
     		// effects
     	    	std::vector<DistantNebulaEffect*> distantNebulaEffect_vec;
     		std::vector<DistantStarEffect*>   distantStarEffect_vec;
@@ -150,16 +146,6 @@ class StarSystem : public BaseGameEntity
     		std::vector<BaseParticleSystem*>  effect_PARTICLESYSTEM_vec;
     		std::vector<ShockWaveEffect*>     effect_SHOCKWAVE_vec;    		
     		std::vector<VerticalFlowText*> 	  text_DAMAGE_vec;
-    		
-    		// remove queue 	
-    		std::vector<Container*>    remove_CONTAINER_queue;
-    		std::vector<Ship*>         remove_SHIP_queue;
-    		std::vector<SpaceStation*> remove_SPACESTATION_queue;
-    		std::vector<Satellite*>    remove_SATELLITE_queue;    		
-    		//    			    		    	  
-
-    	    	// ENTITY VECTORS
-                std::vector<Vehicle*> appear_VEHICLE_queue;
                     		  	
     		GarbageEntities garbage_entities;
     		GarbageEffects  garbage_effects;
@@ -183,7 +169,7 @@ class StarSystem : public BaseGameEntity
 		void AsteroidManager_s(unsigned int);
 		void ShipManager_s(unsigned int);
 		
-		void manageUnavaliableObjects_s();
+		void ManageUnavaliableObjects_s();
 		void ManageDeadObjects_s();
 
 		void rocketCollision_s(bool);

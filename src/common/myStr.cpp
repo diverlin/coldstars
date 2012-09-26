@@ -110,7 +110,8 @@ std::string getEntityStr(int type_id)
 		case ENTITY::PLAYER_ID: 		{ return "PLAYER_ID"; break; }
 		case ENTITY::KOSMOPORT_ID: 		{ return "KOSMOPORT_ID"; break; }
 		case ENTITY::LAND_ID: 			{ return "LAND_ID"; break; }
-		case ENTITY::SPACE_ID: 		{ return "SPACE_ID"; break; }
+		case ENTITY::PLACE_SPACE_ID: 		{ return "PLACE_SPACE_ID"; break; }
+		case ENTITY::PLACE_HYPER_ID: 		{ return "PLACE_HYPER_ID"; break; }
 		case ENTITY::GOVERMENT_ID: 		{ return "GOVERMENT_ID"; break; }
 		case ENTITY::STORE_ID: 		{ return "STORE_ID"; break; }
 		case ENTITY::SHOP_ID: 			{ return "SHOP_ID"; break; }

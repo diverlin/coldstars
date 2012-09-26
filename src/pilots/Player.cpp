@@ -193,45 +193,41 @@ void Player::AddIfVisible(VerticalFlowText* effect)
 	visible_text_DAMAGE_vec.push_back(effect);
 }     		
 
-void Player::UpdateStarSystemTransaction(TurnTimer& turn_timer)
+void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 {
-	if (target_starsystem != NULL)
+	int action_id = npc->GetVehicle()->GetSpecialActionId();	
+	if ( (action_id == SPECIAL_ACTION::INITIATE_LAUNCHING_ID) or (action_id == SPECIAL_ACTION::INITIATE_JUMPOUT_ID) )
 	{
-		if (target_starsystem->IsVehiclePartOfAppearQueue(npc->GetVehicle()->GetId()))
+		if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::PLACE_SPACE_ID)
 		{
 			if (turn_timer.GetTurnEnded() == true)
 			{
-				turn_timer.NextTurn();
+				Screen::Instance().SetCenterGlobalCoord(npc->GetVehicle()->GetPoints().GetCenter());
+				turn_timer.NextTurn();				
 			}
-		}
-	
-		if (target_starsystem == npc->GetStarSystem())
-		{
-			Screen::Instance().SetCenterGlobalCoord(npc->GetVehicle()->GetPoints().GetCenter());
-			target_starsystem = NULL;
 		}
 	}
 }
      		
-void Player::RenderInSpace_NEW()
+void Player::RenderInSpace_NEW(StarSystem* starsystem)
 {   
 	int w = Screen::Instance().GetWindow().GetWidth();
 	int h = Screen::Instance().GetWindow().GetHeight();
 
 	Screen::Instance().GetFbo0().Activate(w, h);
    
-        	npc->GetStarSystem()->DrawBackground(Screen::Instance().GetBottomLeftGlobalCoord());           
+        	starsystem->DrawBackground(Screen::Instance().GetBottomLeftGlobalCoord());           
 		camera(Screen::Instance().GetBottomLeftGlobalCoord().x, Screen::Instance().GetBottomLeftGlobalCoord().y);    
 	        
 
-		npc->GetStarSystem()->RestoreDefaultColor();
+		starsystem->RestoreDefaultColor();
 		enable_BLEND();
 			for(unsigned int i = 0; i < visible_STAR_vec.size(); i++) 
 			{ 
         			visible_STAR_vec[i]->Render_NEW(); 
     			}
     		disable_BLEND();
-		npc->GetStarSystem()->RestoreSceneColor();
+		starsystem->RestoreSceneColor();
 	Screen::Instance().GetFbo0().Deactivate();
 
 	// POST PROCESS BLOOM (many FBO)
@@ -286,7 +282,7 @@ void Player::RenderInSpace_NEW()
     			{ 
     				visible_SPACESTATION_vec[i]->UpdateRenderStuff(); 
        				visible_SPACESTATION_vec[i]->RenderInSpace(); 
-        			npc->GetStarSystem()->RestoreSceneColor();
+        			starsystem->RestoreSceneColor();
     			}
    
     			for(unsigned int i = 0; i < visible_CONTAINER_vec.size(); i++)
@@ -298,21 +294,21 @@ void Player::RenderInSpace_NEW()
     			for(unsigned int i = 0; i < visible_SHIP_vec.size(); i++)
     			{ 
        				visible_SHIP_vec[i]->RenderInSpace(); 
-        			npc->GetStarSystem()->RestoreSceneColor();
+        			starsystem->RestoreSceneColor();
     			}
 
 			for(unsigned int i = 0; i < visible_SATELLITE_vec.size(); i++)
     			{ 
     				visible_SATELLITE_vec[i]->UpdateRenderStuff(); 
        				visible_SATELLITE_vec[i]->RenderInSpace(); 
-        			npc->GetStarSystem()->RestoreSceneColor();
+        			starsystem->RestoreSceneColor();
     			}
     			
     			for(unsigned int i = 0; i < visible_ROCKET_vec.size(); i++)
     			{ 
     			    	visible_ROCKET_vec[i]->UpdateRenderStuff();
        				visible_ROCKET_vec[i]->RenderInSpace(); 
-       				npc->GetStarSystem()->RestoreSceneColor();
+       				starsystem->RestoreSceneColor();
     			}    	
 		disable_BLEND();
 		
@@ -386,16 +382,16 @@ void Player::RenderInSpace_NEW()
         	visible_text_DAMAGE_vec[i]->Render(Screen::Instance().GetBottomLeftGlobalCoord()); 
     	}   
     		    	
-    	npc->GetStarSystem()->RestoreSceneColor();    	          
+    	starsystem->RestoreSceneColor();    	          
 }
     
 
 	
   
-void Player::RenderInSpace_OLD()
+void Player::RenderInSpace_OLD(StarSystem* starsystem)
 {   
 	glLoadIdentity();
-        npc->GetStarSystem()->DrawBackground(Screen::Instance().GetBottomLeftGlobalCoord());
+        starsystem->DrawBackground(Screen::Instance().GetBottomLeftGlobalCoord());
 	
         camera(Screen::Instance().GetBottomLeftGlobalCoord().x, Screen::Instance().GetBottomLeftGlobalCoord().y);
         
@@ -427,7 +423,7 @@ void Player::RenderInSpace_OLD()
     		{ 
     			visible_SPACESTATION_vec[i]->UpdateRenderStuff(); 
        			visible_SPACESTATION_vec[i]->RenderInSpace(); 
-        		npc->GetStarSystem()->RestoreSceneColor();
+        		starsystem->RestoreSceneColor();
     		}
            
     		for(unsigned int i = 0; i < visible_CONTAINER_vec.size(); i++)
@@ -438,21 +434,21 @@ void Player::RenderInSpace_OLD()
     		for(unsigned int i = 0; i < visible_SHIP_vec.size(); i++)
     		{ 
        			visible_SHIP_vec[i]->RenderInSpace(); 
-        		npc->GetStarSystem()->RestoreSceneColor();
+        		starsystem->RestoreSceneColor();
     		}
 
 		for(unsigned int i = 0; i < visible_SATELLITE_vec.size(); i++)
     		{ 
     			visible_SATELLITE_vec[i]->UpdateRenderStuff(); 
        			visible_SATELLITE_vec[i]->RenderInSpace(); 
-        		npc->GetStarSystem()->RestoreSceneColor();
+        		starsystem->RestoreSceneColor();
                 }
                         
     		for(unsigned int i = 0; i < visible_ROCKET_vec.size(); i++)
     		{ 
                         visible_ROCKET_vec[i]->UpdateRenderStuff();
        			visible_ROCKET_vec[i]->RenderInSpace(); 
-                        npc->GetStarSystem()->RestoreSceneColor();
+                        starsystem->RestoreSceneColor();
     		}
 
     		for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
@@ -477,19 +473,19 @@ void Player::RenderInSpace_OLD()
         	visible_text_DAMAGE_vec[i]->Render(Screen::Instance().GetBottomLeftGlobalCoord()); 
     	}    		
               
-    	npc->GetStarSystem()->RestoreSceneColor();
+    	starsystem->RestoreSceneColor();
 }
 
 
-void Player::RenderInSpace(bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
+void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {    	
     	if (Config::Instance().MODERN_EFFECTS == true)
     	{
-    		RenderInSpace_NEW();
+    		RenderInSpace_NEW(starsystem);
     	}
     	else
     	{
-        	RenderInSpace_OLD(); 
+        	RenderInSpace_OLD(starsystem); 
         }        
 
 	enable_BLEND();              
@@ -497,12 +493,12 @@ void Player::RenderInSpace(bool turn_ended, bool forceDraw_orbits, bool forceDra
         	{
         		if (forceDraw_orbits == true)
         		{
-                		npc->GetStarSystem()->DrawOrbits();
+                		starsystem->DrawOrbits();
         		}
         
         		if (forceDraw_path == true)
         		{
-                		npc->GetStarSystem()->DrawPath();
+                		starsystem->DrawPath();
         		}
        	 		npc->GetVehicle()->GetDriveComplex().DrawPath();
        			npc->GetVehicle()->GetWeaponComplex().RenderWeaponsRange();
@@ -763,7 +759,7 @@ bool Player::MouseInteractionWithBlackHoles(const MouseData& data_mouse)
 
 bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
 {
-	for (unsigned int i = 0; i < visible_SPACESTATION_vec.size(); i++)
+	for (unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
 	{ 
        		float object_cursor_dist = distBetweenPoints(visible_SPACESTATION_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
        		if (object_cursor_dist < visible_SPACESTATION_vec[i]->GetCollisionRadius())
@@ -887,18 +883,17 @@ bool Player::IsObjectOnScreen(const vec2f& ob_center, float sizeInPixels) const
 }
 
 
-void Player::SessionInSpace(const TurnTimer& turn_timer)
+void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 {	
-	npc->GetStarSystem()->FindRenderVisibleEntities_c(this);
+	starsystem->FindRenderVisibleEntities_c(this);
 	if (getRandInt(1,5) == 1)
 	{
-		npc->GetStarSystem()->FindRadarVisibleEntities_c(this);
+		starsystem->FindRadarVisibleEntities_c(this);
 	}
 	
-	RenderInSpace(turn_timer.GetTurnEnded(), show.GetAllOrbits(), show.GetAllPath()); 
+	RenderInSpace(starsystem, turn_timer.GetTurnEnded(), show.GetAllOrbits(), show.GetAllPath()); 
     	     	
 	bool interaction_with_gui = gui_manager.RunSession(cursor.GetMouseData()); 
-
 	if (interaction_with_gui == false)
 	{    	
 		if (turn_timer.GetTurnEnded() == true)  
@@ -923,7 +918,8 @@ void Player::RunSession(const TurnTimer& turn_timer)
 	
        	switch(npc->GetVehicle()->GetPlaceTypeId())
        	{
-       		case ENTITY::SPACE_ID: 		{ SessionInSpace(turn_timer); break; }
+       		case ENTITY::PLACE_SPACE_ID: 	{ SessionInSpace(npc->GetVehicle()->GetStarSystem(), turn_timer); break; }
+       		case ENTITY::PLACE_HYPER_ID: 	{ SessionInSpace((StarSystem*)npc->GetVehicle()->GetDriveComplex().GetTarget(), turn_timer); break; }
        		case ENTITY::KOSMOPORT_ID:  	{ SessionInKosmoport(); break; }
        	}        	
        	

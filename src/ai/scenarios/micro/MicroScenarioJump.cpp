@@ -70,7 +70,6 @@ void MicroScenarioJump::UpdateInDynamicInSpace(Npc* npc) const
      		if (npc->GetVehicle()->GetSpecialActionId() != SPECIAL_ACTION::INITIATE_JUMPIN_ID)
      		{
      			npc->GetVehicle()->SetSpecialActionId(SPECIAL_ACTION::INITIATE_JUMPIN_ID);
-     			//npc->GetVehicle()->GetDriveComplex().CalcAcceleratedPath();
      		}
      	}
 }

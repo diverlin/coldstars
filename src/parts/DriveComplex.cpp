@@ -26,12 +26,19 @@
 #include "../common/Collision.hpp"
 
 #include "../common/constants.hpp"
+#include "../common/Logger.hpp"
+#include "../common/myStr.hpp"
 
 DriveComplex::DriveComplex()
 {      
 	owner_vehicle = NULL;
         
-	ResetTarget();
+	target = NULL;
+    		
+	target_distance = 0.0;
+	action_id = NAVIGATOR_ACTION::NONE_ID;
+	
+	direction_list_END = true;
 
 	drive_effect = NULL; 
 }
@@ -53,6 +60,14 @@ bool DriveComplex::PathExists() const
 
 void DriveComplex::ResetTarget()
 {
+	#if DRIVECOMPLEX_LOG_ENABLED == 1 
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" RESET DriveComplex Target=", 2); 
+	if (target != NULL)
+	{
+		Logger::Instance().Log("target =" + getEntityStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), 3); 
+	}
+	#endif    
+	
 	target = NULL;
     		
 	target_distance = 0.0;
@@ -61,10 +76,6 @@ void DriveComplex::ResetTarget()
 	action_id = NAVIGATOR_ACTION::NONE_ID;
 	
 	direction_list_END = true;
-	
-	#if DRIVECOMPLEX_LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" RESET DriveComplex Target ", 2); 
-	#endif    
 }
       
 void DriveComplex::SetStaticTargetCoords(const vec2f& target_pos)
@@ -163,7 +174,7 @@ bool DriveComplex::ValidateTarget() const
 {
         if (target->GetAlive() == true)
 	{
-		if (target->GetPlaceTypeId() == ENTITY::SPACE_ID)
+		if (target->GetPlaceTypeId() == ENTITY::PLACE_SPACE_ID)
 		{
 			return true;
 		}
