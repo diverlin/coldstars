@@ -16,35 +16,37 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BASETASK_H
-#define BASETASK_H
+#ifndef TASK_H
+#define TASK_H
 
 #include <boost/property_tree/ptree.hpp>
-class BaseGameEntity; //#include "../spaceobjects/BaseGameEntity.hpp"
 #include "../common/constants.hpp"
 
-struct UnresolvedDataUniqueBaseTask
-{
-	int target_id;
-};
 
-class BaseTask
+class Task
 {
 	public:
-		BaseTask(int scenario_type_id, BaseGameEntity* target, int reward, int expiriance):
+		Task(int scenario_type_id = NONE_ID, int target_id = NONE_ID, int reward = 0, int expiriance = 0):
 		scenario_type_id(scenario_type_id),
-		target(target),
+		target_id(target_id),
 		reward(reward),
-		expiriance(expiriance) {};
+		expiriance(expiriance),
+		result(NONE_ID) 
+		{};
 		
-		~BaseTask() {};
+		~Task() {};
 
 		void SetResult(int result)  { this->result = result; }
 				
 		int GetScenarioTypeId() const { return scenario_type_id; };
-		BaseGameEntity* GetTarget() const { return target; };
+		int GetTargetId() const { return target_id; };
 				
 		int GetResult() const { return result; };
+		
+		void Reset();
+				
+		void SaveData(boost::property_tree::ptree&, const std::string&) const;
+		void LoadData(const boost::property_tree::ptree&);
 				
 	protected:
 		int result;
@@ -53,15 +55,8 @@ class BaseTask
 		int expiriance;
 		
 		int scenario_type_id;
-				
-		BaseGameEntity* target;	
-		
-		UnresolvedDataUniqueBaseTask data_unresolved_BaseTask;
-		void SaveDataUniqueBaseTask(boost::property_tree::ptree&, const std::string&) const;		
-		void LoadDataUniqueBaseTask(const boost::property_tree::ptree&);
-		void ResolveDataUniqueBaseTask();
+		int target_id;	
 };
-
 
 #endif 
      

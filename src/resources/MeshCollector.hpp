@@ -20,6 +20,7 @@
 #ifndef MESHCOLLECTOR_H
 #define MESHCOLLECTOR_H
 
+#include <map>
 #include <GL/glew.h>
 
 class ObjMeshInstance;
@@ -29,10 +30,12 @@ class MeshCollector
 	public:
 		static MeshCollector& Instance();
 		
-		ObjMeshInstance* sphere;
-		ObjMeshInstance* deformed_sphere;
+		void RegisterMesh(ObjMeshInstance*);
+		ObjMeshInstance* GetMeshByTypeId(int) const;
 		
 	private:
+		std::map<int, ObjMeshInstance*> mesh_map;
+		
 		MeshCollector() {};
 		~MeshCollector() {};
 

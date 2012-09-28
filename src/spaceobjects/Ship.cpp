@@ -190,19 +190,4 @@ void Ship::LoadDataUniqueShip(const boost::property_tree::ptree&)
 {}
 
 void Ship::ResolveDataUniqueShip()
-{
-       switch(place_type_id)
-        {
-        	case ENTITY::PLACE_SPACE_ID: 
-        	{
-			((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->AddVehicle(this, data_unresolved_BaseGameEntity.center, data_unresolved_BaseGameEntity.angle, parent); 
-			break;
-		}
-		
-		case ENTITY::VEHICLE_SLOT_ID:
-		{	
-			((VehicleSlot*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this); 
-			break;
-		}
-	}
-}
+{}

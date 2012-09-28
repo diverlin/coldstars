@@ -53,10 +53,7 @@ set (SOURCES
 
 	src/common/Base.cpp
 
-	src/ai/BaseTask.cpp
-	src/ai/MacroTask.cpp
-	src/ai/MicroTask.cpp
-
+	src/ai/Task.cpp
 	src/ai/MicroTaskManager.cpp
 	src/ai/MacroTaskManager.cpp
 
@@ -253,6 +250,8 @@ set (SOURCES
 	src/gui/GuiKosmoport.cpp   
 	src/gui/GuiManager.cpp
 	
+	src/world/HyperSpace.cpp
+
   	main.cpp
 )
 

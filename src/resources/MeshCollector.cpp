@@ -17,10 +17,23 @@
 */
 
 #include "MeshCollector.hpp"
+#include "ObjMeshInstance.hpp"
 
 MeshCollector& MeshCollector::Instance()
 {
 	static MeshCollector instance;
 	return instance;
 }
+		
+void MeshCollector::RegisterMesh(ObjMeshInstance* mesh)
+{
+	mesh_map.insert(std::make_pair(mesh->type_id, mesh));
+}
+
+ObjMeshInstance* MeshCollector::GetMeshByTypeId(int type_id) const
+{
+	std::map<int, ObjMeshInstance*>::const_iterator slice = mesh_map.find(type_id);
+	return slice->second;
+}
+
 		

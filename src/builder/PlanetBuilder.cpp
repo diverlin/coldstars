@@ -93,7 +93,7 @@ void PlanetBuilder::CreateNewInternals(float orbit_radius)
 	planet->SetTextureOb(textureOb);
 	planet->SetSubTypeId(ENTITY::KOSMOPORT_ID);
 	planet->SetLifeData(data_life);
-	planet->SetMesh(MeshCollector::Instance().sphere);	
+	planet->SetMesh(MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_NORMAL_ID));	
 	planet->SetScale(getRandInt(ENTITY::PLANET::SIZE_MIN_, ENTITY::PLANET::SIZE_MAX_));
 
 	planet->CalcCollisionrRadius();

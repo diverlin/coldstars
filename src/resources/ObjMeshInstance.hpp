@@ -70,6 +70,7 @@ struct _ObjMeshFaceIndex{
 class ObjMeshInstance
 { 
   public:
+  int type_id;
   float a;
   ObjMesh myMesh;
   std::vector<vec3f>           positions;
@@ -89,10 +90,8 @@ class ObjMeshInstance
    * 'vn' are vertices normals   (3 floats that can be positive or negative)
    * 'f'  are faces, 3 values that contain 3 values which are separated by / and <space>
    */
-   ObjMeshInstance()
-  {}
       
-ObjMeshInstance(std::string filename)
+ObjMeshInstance(const std::string& filename, int type_id):type_id(type_id)
 {
 	path = filename;
     	std::ifstream filestream;

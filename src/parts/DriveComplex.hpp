@@ -41,6 +41,7 @@ class DriveComplex
       		void SetTarget(BaseGameEntity*, int);       
       		void SetStaticTargetCoords(const vec2f&);
 
+		int GetActionId() const { return action_id; };
       		DriveEffect* GetDriveEffect() const { return drive_effect; };
       		      		                
       		ItemSlot* GetDriveSlot() const { return drive_slot; };
@@ -90,8 +91,6 @@ class DriveComplex
                 PathVisual visual_center_path;
                 PathVisual visual_center_turn;
                 //PathVisual visual_debug_midLeft_path;
-
-		//void SetTargetPos(const vec2f& target_pos) { this->target_pos = target_pos; };
 
 		void ClearPath();
                 bool CalcRoundPath();

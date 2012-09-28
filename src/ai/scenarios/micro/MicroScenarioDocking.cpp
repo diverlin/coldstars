@@ -36,7 +36,7 @@ MicroScenarioDocking::~MicroScenarioDocking()
 /* virtual */
 void MicroScenarioDocking::Enter(Npc* npc) const
 {	
-	npc->GetVehicle()->GetDriveComplex().SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget(), NAVIGATOR_ACTION::DOCKING_ID);
+	npc->GetVehicle()->GetDriveComplex().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget(), NAVIGATOR_ACTION::DOCKING_ID);
 
 	#if AISCENARIO_LOG_ENABLED == 1 
 	Logger::Instance().Log( "npc_id="+int2str(npc->GetId())+" ENTER MicroScenarioDocking", 1); 
@@ -85,5 +85,5 @@ void MicroScenarioDocking::Exit(Npc* npc) const
 /* virtual */
 std::string MicroScenarioDocking::GetDescription(Npc* npc) const
 {
-	return "MicroScenarioDocking to ob_id = " + int2str( npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetId());
+	return "MicroScenarioDocking to ob_id = " + int2str( npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetId());
 }

@@ -96,9 +96,14 @@ void EntityManager::RegisterEntity(Base* entity)
 	
 Base* EntityManager::GetEntityById(int id) const
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log("    EntityManager.GetEntityById() requested_id=" + int2str(id));
+	#endif
+	
 	std::map<int, Base*>::const_iterator slice = entity_map.find(id);
 
 	assert(slice->second);
+
 	return slice->second;
 }
 
@@ -611,13 +616,19 @@ void EntityManager::LoadPass0()
 		}
 	}
 
+	Logger::Instance().Log("LOADING FINISHED");
+	
 }
 
 void EntityManager::LoadPass1() const
 {
+	Logger::Instance().Log("RESOLVING DEPENDENCY START");
 	for (std::map<int, Base*>::const_iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
 	{
+		Logger::Instance().Log("ResolveData() in " + getEntityStr(iterator->second->GetTypeId()));
 		iterator->second->ResolveData();
 	}
+
+	Logger::Instance().Log("RESOLVING DEPENDENCY FINISHED");
 }
 

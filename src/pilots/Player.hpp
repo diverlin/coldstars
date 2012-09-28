@@ -54,8 +54,6 @@ class Player : public Base
     		Player(int);
      		~Player();
 
-		void SetTargetStarSystem(StarSystem* target_starsystem) { this->target_starsystem = target_starsystem; };
-
 		Show& GetShow() { return show; };
 		GuiManager& GetGuiManager() { return gui_manager; };
           	
@@ -93,7 +91,7 @@ class Player : public Base
 		 
      	private:
     	     	Npc* npc;
-     	     	StarSystem* target_starsystem;
+
      	     	Cursor cursor;
 
      	     	Show show;  

@@ -80,7 +80,7 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
 	{
 		has_goods = true;
 	}
-	int microScenarioTypeId = npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetScenarioTypeId();
+	int microScenarioTypeId = npc->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId();
 	
 	// LOGIC
 	if ( (see_container == true) and (has_goods == false) )
@@ -88,8 +88,8 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
 		if (microScenarioTypeId != MICROSCENARIO::GRAB_ID) 
 		{
 			Container* container = npc->GetObservation().GetClosestContainer(); // find proper!
-			MicroTask* microtask = new MicroTask(MICROSCENARIO::GRAB_ID, container);
-			npc->GetStateMachine()->SetCurrentMicroTask(microtask); 
+			Task microtask(MICROSCENARIO::GRAB_ID, container->GetId());
+			npc->GetStateMachine().SetCurrentMicroTask(microtask); 
 			
 			return;
 		}
@@ -99,8 +99,8 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
 	{
 		if (microScenarioTypeId != MICROSCENARIO::EXPLORATION_ID) 
 		{
-			MicroTask* microtask = new MicroTask(MICROSCENARIO::EXPLORATION_ID);
-			npc->GetStateMachine()->SetCurrentMicroTask(microtask); 
+			Task microtask(MICROSCENARIO::EXPLORATION_ID);
+			npc->GetStateMachine().SetCurrentMicroTask(microtask); 
 				
 			return;
 		}
@@ -111,8 +111,8 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
 		if (microScenarioTypeId != MICROSCENARIO::DOCKING_ID)
 		{
 			Planet* planet = npc->GetPlanetForDocking(); // find proper planet!
-			MicroTask* microtask = new MicroTask(MICROSCENARIO::DOCKING_ID, planet);
-			npc->GetStateMachine()->SetCurrentMicroTask(microtask); 
+			Task microtask(MICROSCENARIO::DOCKING_ID, planet->GetId());
+			npc->GetStateMachine().SetCurrentMicroTask(microtask); 
 				
 			return;
 		}
@@ -123,8 +123,8 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
 		if (microScenarioTypeId != MICROSCENARIO::DOCKING_ID)
 		{
 			Planet* planet = npc->GetPlanetForDocking(); // find proper planet
-			MicroTask* microtask = new MicroTask(MICROSCENARIO::DOCKING_ID, planet);
-			npc->GetStateMachine()->SetCurrentMicroTask(microtask);
+			Task microtask(MICROSCENARIO::DOCKING_ID, planet->GetId());
+			npc->GetStateMachine().SetCurrentMicroTask(microtask);
 			
 			return;
 		}
@@ -146,8 +146,8 @@ void MacroScenarioGoodsTrading::UpdateInStaticInDock(Npc* npc) const
 		npc->BuyGoods();
 	}
 
-	MicroTask* microtask = new MicroTask(MICROSCENARIO::LAUNCHING_ID);
-	npc->GetStateMachine()->SetCurrentMicroTask(microtask);		
+	Task microtask(MICROSCENARIO::LAUNCHING_ID);
+	npc->GetStateMachine().SetCurrentMicroTask(microtask);		
 }
 
 void MacroScenarioGoodsTrading::Exit(Npc* npc) const

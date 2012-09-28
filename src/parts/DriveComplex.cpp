@@ -61,10 +61,13 @@ bool DriveComplex::PathExists() const
 void DriveComplex::ResetTarget()
 {
 	#if DRIVECOMPLEX_LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" RESET DriveComplex Target=", 2); 
-	if (target != NULL)
+	if (target == NULL)
 	{
-		Logger::Instance().Log("target =" + getEntityStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), 3); 
+		Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" RESET DriveComplex Target", 2); 
+	}
+	else
+	{
+		Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" RESET DriveComplex target =" + getEntityStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), 2); 
 	}
 	#endif    
 	

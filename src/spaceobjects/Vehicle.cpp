@@ -379,12 +379,11 @@ bool Vehicle::UpdateFadeOutEffect()
 //// ******** DOCKING/LAUNCHING ******** 
 void Vehicle::HyperJumpEvent()
 {
-        drive_complex.GetTarget()->GetStarSystem()->AddToHyperJumpQueue(this);
-        drive_complex.ResetTarget();
-        
         #if LOG_ENABLED == 1 
 	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" jumpEvent()", 2); 
-	#endif      
+	#endif   
+	
+        drive_complex.GetTarget()->GetStarSystem()->GetHyperSpace().AddVehicle(this);
 }
                 
                 
@@ -1003,11 +1002,44 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
        	save_ptree.put(root+"data_korpus.slot_freezer_num", data_korpus.slot_freezer_num);
        	save_ptree.put(root+"data_korpus.slot_weapon_num", data_korpus.slot_weapon_num);       	
        	
-       	if (land) save_ptree.put(root+"unresolved.land_id", land->GetId());
-	else save_ptree.put(root+"unresolved.land_id", NONE_ID);
+
+       	if (drive_complex.GetTarget() != NULL) 
+       	{
+       		save_ptree.put(root+"unresolved.drive_complex_target_id", drive_complex.GetTarget()->GetId());
+       		save_ptree.put(root+"unresolved.drive_complex_action_id", drive_complex.GetActionId());
+       	}
+	else 
+	{
+       		save_ptree.put(root+"unresolved.drive_complex_target_id", NONE_ID);
+       		save_ptree.put(root+"unresolved.drive_complex_action_id", NONE_ID);
+	}
+	       	
+       	if (land != NULL) 
+       	{
+       		save_ptree.put(root+"unresolved.land_id", land->GetId());
+       	}
+	else 
+	{
+		save_ptree.put(root+"unresolved.land_id", NONE_ID);
+	}
 	
-       	if (place_type_id == ENTITY::VEHICLE_SLOT_ID) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", parent_vehicleslot->GetId()); }
-       	else { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); }  	
+       	if (place_type_id == ENTITY::VEHICLE_SLOT_ID) 
+       	{ 
+       		save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", parent_vehicleslot->GetId()); 
+       	}
+       	else 
+       	{ 
+       		save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); 
+       	}  	
+
+       	if (place_type_id == ENTITY::PLACE_HYPER_ID) 
+       	{ 
+       		save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", drive_complex.GetTarget()->GetId()); 
+       	}
+       	else 
+       	{ 
+       		save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", NONE_ID); 
+       	}  
 }
 
 void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptree)
@@ -1028,10 +1060,13 @@ void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptre
    	data_korpus.slot_freezer_num   = load_ptree.get<int>("data_korpus.slot_freezer_num"); 
    	data_korpus.slot_weapon_num    = load_ptree.get<int>("data_korpus.slot_weapon_num"); 
 
+   	data_unresolved_Vehicle.drive_complex_target_id   = load_ptree.get<int>("unresolved.drive_complex_target_id"); 
+   	data_unresolved_Vehicle.drive_complex_action_id   = load_ptree.get<int>("unresolved.drive_complex_action_id");    	
    	//data_unresolved_Vehicle.textureOb_gui_path = load_ptree.get<std::string>("data_unresolved_Vehicle.textureOb_gui_path"); 
    	data_unresolved_Vehicle.parent_vehicleslot_id = load_ptree.get<int>("data_unresolved_Vehicle.parent_vehicleslot_id"); 
-   	
    	data_unresolved_Vehicle.land_id = load_ptree.get<int>("unresolved.land_id");
+   	data_unresolved_Vehicle.starsystem_hyper_id = load_ptree.get<int>("data_unresolved_Vehicle.starsystem_hyper_id"); 
+   	
 }
 
 void Vehicle::ResolveDataUniqueVehicle()
@@ -1042,10 +1077,42 @@ void Vehicle::ResolveDataUniqueVehicle()
         {
         	CreateProtectionComplexTextureDependedStuff();
         }
-         
+
+       	if (data_unresolved_Vehicle.drive_complex_target_id != NONE_ID) 
+        { 
+        	drive_complex.SetTarget((BaseGameEntity*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.drive_complex_target_id),  data_unresolved_Vehicle.drive_complex_action_id); 
+        }        
+                 
        	if (data_unresolved_Vehicle.land_id != NONE_ID) 
         { 
         	SetLand( (BaseLand*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.land_id) ); 
         }              
+
+        switch(place_type_id)
+        {
+        	case ENTITY::PLACE_SPACE_ID: 
+        	{
+			((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->AddVehicle(this, data_unresolved_BaseGameEntity.center, data_unresolved_BaseGameEntity.angle, parent); 
+			break;
+		}
+		
+		case ENTITY::VEHICLE_SLOT_ID:
+		{	
+			((VehicleSlot*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this); 
+			break;
+		}
+		
+		case ENTITY::PLACE_HYPER_ID:
+		{
+			//std::cout<<"xxx="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
+			((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.starsystem_hyper_id))->GetHyperSpace().AddVehicle(this);
+			//std::cout<<"yyy="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
+		}
+	}
+	
+	if (data_id.subtype_id != ENTITY::ROCKETBULLET_ID)
+        {
+		weapon_complex.PrepareWeapons();
+	}
 }
                 

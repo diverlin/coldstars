@@ -26,9 +26,19 @@
 #if LOG_ENABLED == 1
 	#define GRAPPLE_QUEUE_LOG_ENABLED 1
 	#define DRIVECOMPLEX_LOG_ENABLED 1
-	#define AISCENARIO_LOG_ENABLED 0
-	#define SAVELOAD_LOG_ENABLED 0
+	#define STARSYSTEMADDREMOVE_LOG_ENABLED 1
+	#define AISCENARIO_LOG_ENABLED 1
+	#define SAVELOAD_LOG_ENABLED 1
 	#define CREATEDESTROY_LOG_ENABLED 0
+
+	const int GRAPPLE_QUEUE_LOG_DIP = 1;
+	const int DRIVECOMPLEX_LOG_DIP = 1;
+	const int STARSYSTEMADDREMOVE_LOG_DIP = 1;
+	const int AISCENARIO_LOG_DIP = 2;
+	const int SAVELOAD_LOG_DIP = 1;
+	const int CREATEDESTROY_LOG_DIP = 0;
+
+
 #endif
 
 #define DEBUG_ITEMDAMAGELOCKVIAGUI 1  // 1 - is locking/unlocking item by right mouse click; 2 - is damaging/undamaging item by right mouse click
@@ -101,7 +111,14 @@ const int DRUG_STARTAMOUNT_MAX = DRUG_AMOUNT_MAX/10;
 const int EXCLUSIVE_AMOUNT_MAX = 100;  
 const int EXCLUSIVE_STARTAMOUNT_MIN = EXCLUSIVE_AMOUNT_MAX/100;
 const int EXCLUSIVE_STARTAMOUNT_MAX = EXCLUSIVE_AMOUNT_MAX/10;
-     
+   
+namespace MESH
+{
+	enum TYPE_ID
+	{ 
+		SPHERE_NORMAL_ID, SPHERE_DEFORMED_ID 
+	};
+}  
         
 namespace LOG
 {

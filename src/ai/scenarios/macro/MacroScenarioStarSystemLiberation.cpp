@@ -22,7 +22,7 @@
 #include "../../../common/myStr.hpp"
 #include "../../../world/starsystem.hpp"
 #include "../../../ai/StateMachine.hpp"
-#include "../../../ai/MicroTask.hpp"
+#include "../../../ai/Task.hpp"
 #include "../../../spaceobjects/Vehicle.hpp"
 
 MacroScenarioStarSystemLiberation::MacroScenarioStarSystemLiberation() 
@@ -45,13 +45,13 @@ void MacroScenarioStarSystemLiberation::Enter(Npc* npc) const
 /*virtual*/
 void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(Npc* npc) const
 {
-	StarSystem* target_starsystem = npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetStarSystem();
+	StarSystem* target_starsystem = npc->GetStateMachine().GetMacroTaskManager().GetTarget()->GetStarSystem();
 	if (npc->GetStarSystem()->GetId() != target_starsystem->GetId())
 	{
-		if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetScenarioTypeId() != MICROSCENARIO::JUMP_ID)
+		if (npc->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() != MICROSCENARIO::JUMP_ID)
 		{
-			MicroTask* microtask = new MicroTask(MICROSCENARIO::JUMP_ID, target_starsystem);
-			npc->GetStateMachine()->SetCurrentMicroTask(microtask);
+			Task microtask(MICROSCENARIO::JUMP_ID, target_starsystem->GetId());
+			npc->GetStateMachine().SetCurrentMicroTask(microtask);
 			
 			return;
 		}
@@ -60,20 +60,20 @@ void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(Npc* npc) const
 	{
 		if (target_starsystem->GetConditionId() != ENTITY::STARSYSTEM::CONDITION::SAFE_ID)
 		{
-			if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetScenarioTypeId() != MICROSCENARIO::DESTROY_ID)
+			if (npc->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() != MICROSCENARIO::DESTROY_ID)
 			{
 				Vehicle* target_vehicle = npc->GetObservation().GetRandVisibleVehicle(RaceInformationCollector::Instance().RACES_EVIL_vec);
 				if (target_vehicle != NULL)
 				{
-					MicroTask* microtask = new MicroTask(MICROSCENARIO::DESTROY_ID, target_vehicle);
-					npc->GetStateMachine()->SetCurrentMicroTask(microtask);
+					Task microtask(MICROSCENARIO::DESTROY_ID, target_vehicle->GetId());
+					npc->GetStateMachine().SetCurrentMicroTask(microtask);
 					
 					return;
 				}
 				else
 				{
-					MicroTask* microtask = new MicroTask(MICROSCENARIO::EXPLORATION_ID);
-					npc->GetStateMachine()->SetCurrentMicroTask(microtask);
+					Task microtask(MICROSCENARIO::EXPLORATION_ID);
+					npc->GetStateMachine().SetCurrentMicroTask(microtask);
 					
 					return;
 				}
@@ -81,7 +81,7 @@ void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(Npc* npc) const
 		}
 		//else
 		//{
-			//npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->SetResult(SUCCESS_ID);
+			//npc->GetStateMachine().GetTaskManager().GetTask().SetResult(SUCCESS_ID);
 			//return;
 		//}
 	}        
@@ -98,5 +98,5 @@ void MacroScenarioStarSystemLiberation::Exit(Npc* npc) const
 /*virtual*/
 std::string MacroScenarioStarSystemLiberation::GetDescription(Npc* npc) const
 {
-	return "MacroScenarioStarSystemLiberation: ss_id = " + int2str(npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetId());
+	return "MacroScenarioStarSystemLiberation: ss_id = " + int2str(npc->GetStateMachine().GetMacroTaskManager().GetTarget()->GetId());
 }

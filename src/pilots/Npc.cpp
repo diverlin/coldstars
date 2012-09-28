@@ -29,7 +29,7 @@
 
 #include "../ai/aiModel/BaseAiModel.hpp"
 #include "../pilots/Skill.hpp"
-#include "../ai/StateMachine.hpp"
+
 #include "../spaceobjects/Vehicle.hpp"
 #include "../spaceobjects/Asteroid.hpp"
 #include "../parts/WeaponComplex.hpp"
@@ -55,16 +55,14 @@ Npc::Npc(int id)
     	failback_starsystem = NULL;
  		
         observation.SetNpcOwner(this);
-        state_machine 	= new StateMachine(this);   
+        state_machine.SetNpcOwner(this);   
         
         ai_model = NULL;     
 }
     
 /* virtual */
 Npc::~Npc() 
-{ 
-        delete state_machine;        
-}  
+{}  
 
 StarSystem* Npc::GetStarSystem() const { return vehicle->GetStarSystem(); }
 		
@@ -85,7 +83,7 @@ void Npc::MindInKosmoport()
 		//	ai_model->UpdateInStatic(this);
 		//}
 
-       		state_machine->UpdateInStaticInDock();      
+       		state_machine.UpdateInStaticInDock();      
        	}
 	
 }
@@ -115,7 +113,7 @@ void Npc::MindInSpace()
                 	AsteroidScenario();
 		}             
 
-       		state_machine->UpdateInStaticInSpace();                 
+       		state_machine.UpdateInStaticInSpace();                 
         }
 
         vehicle->GetDriveComplex().UpdatePath();
@@ -125,7 +123,7 @@ void Npc::UpdateInSpace(int time, bool show_effect)
 {
         if (time > 0)
         {
-       		state_machine->UpdateInDynamicInSpace();
+       		state_machine.UpdateInDynamicInSpace();
        	}
 }     	
 
@@ -231,14 +229,14 @@ void Npc::UpdateInfo()
     	info.addNameStr("expirience:");   info.addValueStr( int2str(skill.GetExpirience()) + " / " + int2str(skill.GetExpirienceNextLevel()) );	
     	info.addNameStr("skills:");   info.addValueStr( int2str(skill.GetAvailiablePoints()) );	
 	
-    	if (state_machine->GetMacroTaskManager()->GetScenario() != NULL)
+    	if (state_machine.GetMacroTaskManager().GetScenario() != NULL)
     	{ 	
-    	info.addNameStr("macro_task_main:");   	info.addValueStr( state_machine->GetMacroTaskManager()->GetScenario()->GetDescription(this) ); 
+    	info.addNameStr("macro_task:");   info.addValueStr( state_machine.GetMacroTaskManager().GetScenario()->GetDescription(this) ); 
     	}
     	
-    	if (state_machine->GetMicroTaskManager()->GetScenario() != NULL)
+    	if (state_machine.GetMicroTaskManager().GetScenario() != NULL)
     	{ 	
-    	info.addNameStr("micro_task:");   	info.addValueStr( state_machine->GetMicroTaskManager()->GetScenario()->GetDescription(this) ); 
+    	info.addNameStr("micro_task:");   info.addValueStr( state_machine.GetMicroTaskManager().GetScenario()->GetDescription(this) ); 
     	}
 }
 
@@ -297,14 +295,16 @@ void Npc::SaveDataUniqueNpc(boost::property_tree::ptree& save_ptree, const std::
         save_ptree.put(root+"unresolved.vehicle_id", vehicle->GetId());
         save_ptree.put(root+"unresolved.aiModel_id", ai_model->GetTypeId());
 	skill.SaveData(save_ptree, root);
-	if (state_machine->GetMacroTaskManager()->GetMacroTask() != NULL)
+	if (state_machine.GetMacroTaskManager().GetScenario() != NULL)
 	{
-		state_machine->GetMacroTaskManager()->GetMacroTask()->SaveData(save_ptree, root);
+		const std::string child_root = root + "macrotask.";
+		state_machine.GetMacroTaskManager().GetTask().SaveData(save_ptree, child_root);
 	}
 	
-	if (state_machine->GetMicroTaskManager()->GetMicroTask() != NULL)	
+	if (state_machine.GetMicroTaskManager().GetScenario() != NULL)	
 	{
-		state_machine->GetMacroTaskManager()->GetMacroTask()->SaveData(save_ptree, root);
+		const std::string child_root = root + "macrotask.";
+		state_machine.GetMicroTaskManager().GetTask().SaveData(save_ptree, child_root);
 	}
 }
 
@@ -316,6 +316,16 @@ void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
 	data_unresolved_npc.aiModel_id = load_ptree.get<int>("unresolved.aiModel_id");
 	
 	skill.LoadData(load_ptree.get_child("skill"));
+
+	if (load_ptree.get_child_optional("macrotask"))
+	{
+		data_unresolved_npc.macrotask.LoadData(load_ptree.get_child("macrotask"));
+	}
+	
+	if (load_ptree.get_child_optional("microtask"))
+	{
+		data_unresolved_npc.microtask.LoadData(load_ptree.get_child("microtask"));
+	}
 }
 
 void Npc::ResolveDataUniqueNpc()
@@ -324,4 +334,14 @@ void Npc::ResolveDataUniqueNpc()
         SetAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
 
 	skill.ResolveData();
+	
+	if (state_machine.GetMacroTaskManager().GetScenario() != NULL)
+	{
+		state_machine.SetCurrentMacroTask(data_unresolved_npc.macrotask);
+	}
+	
+	if (state_machine.GetMicroTaskManager().GetScenario() != NULL)
+	{
+		state_machine.SetCurrentMicroTask(data_unresolved_npc.microtask);
+	}
 }		

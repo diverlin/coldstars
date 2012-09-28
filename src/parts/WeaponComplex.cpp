@@ -204,9 +204,10 @@ void WeaponComplex::SetPreciseFireTarget(BaseGameEntity* target, ItemSlot* item_
 
 void WeaponComplex::Fire(int timer, int attack_skill, bool show_effect)
 {
+	return;
      	if (timer < TURN_TIME - fire_delay)
      	{
-        	for (std::vector<ItemSlot*>::iterator it = slot_weapon_reloaded_vec.begin(); it < slot_weapon_reloaded_vec.end(); it++)
+        	for (std::vector<ItemSlot*>::iterator it=slot_weapon_reloaded_vec.begin(); it<slot_weapon_reloaded_vec.end(); it++)
         	{	
                         (*it)->GetTurrel()->CheckTarget();
                         if ((*it)->GetTurrel()->GetSubTarget() != NULL)

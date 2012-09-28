@@ -52,12 +52,8 @@ void loadGameData()
 
 void load3DModels()
 {    	
-	MeshCollector::Instance().sphere = new ObjMeshInstance("data/obj/sphere/planet.obj");
-
-	MeshCollector::Instance().deformed_sphere = new ObjMeshInstance("data/obj/sphere_deformed/planet.obj");
-//g_DEFORMED_SPHERE_MESH = new ObjMeshInstance("data/obj/ship/Shipyard_Scene.obj");
-//g_MODEL.import("data/obj/ship/Space.obj");
-//g_MODEL.normalize();
+	MeshCollector::Instance().RegisterMesh(new ObjMeshInstance("data/obj/sphere/planet.obj", MESH::SPHERE_NORMAL_ID));
+	MeshCollector::Instance().RegisterMesh(new ObjMeshInstance("data/obj/sphere_deformed/planet.obj", MESH::SPHERE_DEFORMED_ID));
 }
 
 
