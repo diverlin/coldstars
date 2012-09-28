@@ -38,17 +38,17 @@ MicroScenarioJump::~MicroScenarioJump()
 /* virtual */
 void MicroScenarioJump::Enter(Npc* npc) const
 {	
-	npc->GetVehicle()->GetDriveComplex().SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetStarSystem(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
-        
         #if AISCENARIO_LOG_ENABLED == 1 
-	Logger::Instance().Log("npc_id="+int2str(npc->GetId())+" ENTER MicroScenarioJump"); 
+	Logger::Instance().Log("vehicle_id/npc_id="+int2str(npc->GetVehicle()->GetId())+"/"+int2str(npc->GetId())+"  ENTER MicroScenarioJump", AISCENARIO_LOG_DIP); 
 	#endif    
+	
+	npc->GetVehicle()->GetDriveComplex().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetStarSystem(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
 }
 
 /* virtual */
 bool MicroScenarioJump::Validation(Npc* npc) const
 {
-	if (npc->GetVehicle()->GetStarSystem()->GetId() != npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetStarSystem()->GetId())
+	if (npc->GetVehicle()->GetStarSystem()->GetId() != npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetStarSystem()->GetId())
 	{
 		return true;
 	}
@@ -67,7 +67,8 @@ void MicroScenarioJump::UpdateInDynamicInSpace(Npc* npc) const
 {
      	if (npc->GetVehicle()->GetDriveComplex().CheckTargetEchievement() == true)
      	{
-     		if (npc->GetVehicle()->GetSpecialActionId() != SPECIAL_ACTION::INITIATE_JUMPIN_ID)
+     		int action_id = npc->GetVehicle()->GetSpecialActionId();
+     		if ( (action_id != SPECIAL_ACTION::INITIATE_JUMPIN_ID) and (action_id != SPECIAL_ACTION::INITIATE_JUMPOUT_ID) )
      		{
      			npc->GetVehicle()->SetSpecialActionId(SPECIAL_ACTION::INITIATE_JUMPIN_ID);
      		}
@@ -78,12 +79,12 @@ void MicroScenarioJump::UpdateInDynamicInSpace(Npc* npc) const
 void MicroScenarioJump::Exit(Npc* npc) const
 {
         #if AISCENARIO_LOG_ENABLED == 1 
-	Logger::Instance().Log("npc_id="+int2str(npc->GetId())+" EXIT MicroScenarioJump"); 
+	Logger::Instance().Log("vehicle_id/npc_id="+int2str(npc->GetVehicle()->GetId())+"/"+int2str(npc->GetId())+" EXIT MicroScenarioJump", AISCENARIO_LOG_DIP); 
 	#endif   
 }
 
 /* virtual */
 std::string MicroScenarioJump::GetDescription(Npc* npc) const
 {
-	return "JUMP to ss_id = " + int2str( npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetId());
+	return "JUMP to ss_id = " + int2str( npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetId());
 }

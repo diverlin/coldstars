@@ -57,6 +57,8 @@
 #include "../spaceobjects/Satellite.hpp"
 #include "../spaceobjects/Ship.hpp"
 
+#include "../common/Logger.hpp"
+
 StarSystem::StarSystem(int id)
 { 
     	data_id.id = id;
@@ -106,6 +108,10 @@ StarSystem::~StarSystem()
 
 void StarSystem::AddVehicle(Vehicle* vehicle, const vec2f& center, float angle, BaseGameEntity* parent)
 {
+	#if STARSYSTEMADDREMOVE_LOG_ENABLED == 1
+	Logger::Instance().Log("starsysten_id="+int2str(GetId())+ " AddVehicle, vehicle_id=" + int2str(vehicle->GetId()));
+	#endif
+	
      	vehicle->SetPlaceTypeId(ENTITY::PLACE_SPACE_ID);
      	vehicle->SetStarSystem(this);  
 
@@ -194,11 +200,6 @@ void StarSystem::Add(BaseParticleSystem* ps)                 { effect_PARTICLESY
 void StarSystem::Add(VerticalFlowText* text)                 { text_DAMAGE_vec.push_back(text); }
 void StarSystem::Add(DistantNebulaEffect* dn)                { distantNebulaEffect_vec.push_back(dn); }
 void StarSystem::Add(DistantStarEffect* ds)                  { distantStarEffect_vec.push_back(ds); }
-void StarSystem::AddToHyperJumpQueue(Vehicle* vehicle)      
-{
-	vehicle->SetPlaceTypeId(ENTITY::PLACE_HYPER_ID); 
-	appear_VEHICLE_queue.push_back(vehicle); 
-}	
 //// ******* TRANSITION ******* 
   		           
 // poor                
@@ -390,14 +391,15 @@ void StarSystem::Update(int time, bool detalied_simulation)
 {
         ManageUnavaliableObjects_s();
         ManageDeadObjects_s();         // no need to update so frequently, pri /6
-                        
+        //std::cout<<hyperspace.GetQueueSize()<<std::endl;
+                 
 	UpdateEntities_s(time, detalied_simulation);
 	    		
 	if (time > 0)
 	{
 		if (calculation_per_turn_allowed_inDynamic == true)
 		{
-                        PostHyperJumpEvent();
+                        hyperspace.PostHyperJumpEvent(this);
                         LaunchingEvent();
 
 			calculation_per_turn_allowed_inDynamic = false;
@@ -698,7 +700,10 @@ void StarSystem::ManageUnavaliableObjects_s()
         for (std::vector<Vehicle*>::iterator it=VEHICLE_vec.begin(); it<VEHICLE_vec.end(); ++it)
         {
                	if ((*it)->GetPlaceTypeId() != ENTITY::PLACE_SPACE_ID)
-               	{
+               	{	
+               		#if STARSYSTEMADDREMOVE_LOG_ENABLED == 1
+			Logger::Instance().Log("starsysten_id="+int2str(GetId())+ " RemoveVehicle, vehicle_id=" + int2str((*it)->GetId()));
+			#endif
                		it = VEHICLE_vec.erase(it);
                	}
         }
@@ -797,33 +802,6 @@ void StarSystem::ManageDeadObjects_s()
     	}
 }    
     
-bool StarSystem::IsVehiclePartOfAppearQueue(int id)
-{
-        for (unsigned int i=0; i<appear_VEHICLE_queue.size(); i++)
-        {               
-		if (appear_VEHICLE_queue[i]->GetId() == id)
-		{
-			return true;
-		}
-        }
-        
-        return false;
-}    
-
-void StarSystem::PostHyperJumpEvent()
-{
-        for (unsigned int i=0; i<appear_VEHICLE_queue.size(); i++)
-        {             
-                appear_VEHICLE_queue[i]->GetDriveComplex().ResetTarget(); 
-                  
-        	vec2f center(getRandInt(700, 1200), getRandInt(700, 1200)); // get correct pos
-		float angle = getRandInt(0, 360);  
-		
-                AddVehicle(appear_VEHICLE_queue[i], center, angle, appear_VEHICLE_queue[i]->GetParent());  
-        }
-              
-        appear_VEHICLE_queue.clear();  
-}
 
 void StarSystem::LaunchingEvent() const
 {
@@ -881,7 +859,7 @@ void StarSystem::SaveDataUniqueStarSystem(boost::property_tree::ptree& save_ptre
 
 void StarSystem::LoadDataUniqueStarSystem(const boost::property_tree::ptree& load_ptree)
 {
-	data_unresolved_ss.galaxy_id = load_ptree.get<int>("galaxy_id");
+	data_unresolved_StarSystem.galaxy_id = load_ptree.get<int>("galaxy_id");
 	
 	boost::property_tree::ptree tmp_ptree = load_ptree;
 	if (tmp_ptree.get_child_optional("distant_nebula_effect"))
@@ -911,7 +889,7 @@ void StarSystem::LoadDataUniqueStarSystem(const boost::property_tree::ptree& loa
 
 void StarSystem::ResolveDataUniqueStarSystem()
 {
-	((Galaxy*)EntityManager::Instance().GetEntityById(data_unresolved_ss.galaxy_id))->Add(this);
+	((Galaxy*)EntityManager::Instance().GetEntityById(data_unresolved_StarSystem.galaxy_id))->Add(this);
 }
 
 void StarSystem::SaveData(boost::property_tree::ptree& save_ptree) const

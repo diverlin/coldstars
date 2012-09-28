@@ -27,7 +27,7 @@
 #include "../common/myStr.hpp"
 #include "../common/EntityManager.hpp"
 
-#include "../ai/MicroTask.hpp"
+#include "../ai/Task.hpp"
 #include "../ai/StateMachine.hpp"
 
 #include "../items/equipment/ScanerEquipment.hpp"
@@ -57,7 +57,6 @@ Player::Player(int id)
         data_id.subtype_id = NONE_ID;
    	
     	npc  = NULL;
-    	target_starsystem = NULL;
     	
     	cursor.SetPlayer(this);
     	gui_manager.SetPlayer(this);
@@ -207,6 +206,15 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 			}
 		}
 	}
+
+	if (action_id == SPECIAL_ACTION::INITIATE_DOCKING_ID)
+	{
+		if (turn_timer.GetTurnEnded() == true)
+		{
+			turn_timer.NextTurn();				
+		}
+	}	
+	
 }
      		
 void Player::RenderInSpace_NEW(StarSystem* starsystem)
@@ -774,8 +782,8 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
                			}
                			else
                			{
-               				MicroTask* microtask = new MicroTask(MICROSCENARIO::DOCKING_ID, visible_SPACESTATION_vec[i]);
-               				npc->GetStateMachine()->SetCurrentMicroTask(microtask);
+               				Task microtask(MICROSCENARIO::DOCKING_ID, visible_SPACESTATION_vec[i]->GetId());
+               				npc->GetStateMachine().SetCurrentMicroTask(microtask);
                			}
 			}
 
@@ -817,8 +825,8 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
           
                		if (data_mouse.left_click == true)
                		{
-       				MicroTask* microtask = new MicroTask(MICROSCENARIO::DOCKING_ID, visible_PLANET_vec[i]);
-              			npc->GetStateMachine()->SetCurrentMicroTask(microtask);
+       				Task microtask(MICROSCENARIO::DOCKING_ID, visible_PLANET_vec[i]->GetId());
+              			npc->GetStateMachine().SetCurrentMicroTask(microtask);
               		}   
 		
 				
@@ -928,7 +936,7 @@ void Player::RunSession(const TurnTimer& turn_timer)
 
 void Player::ForceStateMachineReset() const
 {
-	npc->GetStateMachine()->ForceReset();
+	npc->GetStateMachine().ForceReset();
 }     		
 
 void Player::SaveData(boost::property_tree::ptree& save_ptree) const

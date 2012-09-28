@@ -27,7 +27,7 @@
 #include "../world/galaxy.hpp"
 #include "../render/Render.hpp"
 #include "../resources/TextureManager.hpp"
-#include "../ai/MicroTask.hpp"
+#include "../ai/Task.hpp"
 #include "../ai/StateMachine.hpp"
 
 #include "../spaceobjects/Star.hpp"
@@ -70,9 +70,8 @@ bool GuiMap::UpdateMouseInteraction(const MouseData& data_mouse, Galaxy* galaxy)
                           				//player.hyperJumpPreparation(ss)
                           				//#player.calculateTraceToCoord((player.jump_pos_x, player.jump_pos_y))
 
-              						MicroTask* microtask = new MicroTask(MICROSCENARIO::JUMP_ID, galaxy->STARSYSTEM_vec[i]);
-               						player->GetNpc()->GetStateMachine()->SetCurrentMicroTask(microtask);
-               						player->SetTargetStarSystem(galaxy->STARSYSTEM_vec[i]);
+              						Task microtask(MICROSCENARIO::JUMP_ID, galaxy->STARSYSTEM_vec[i]->GetId());
+               						player->GetNpc()->GetStateMachine().SetCurrentMicroTask(microtask);
                				
                           				return true;
                       				} 

@@ -136,8 +136,8 @@ void BaseGameEntity::SaveDataUniqueBaseGameEntity(boost::property_tree::ptree& s
 	save_ptree.put(root+"mass", mass);
 	save_ptree.put(root+"scale", scale);	
 	
-	if (mesh) 	save_ptree.put(root+"data_unresolved_BaseGameEntity.mesh_path", mesh->path);
-	else           save_ptree.put(root+"data_unresolved_BaseGameEntity.mesh_path", "none");
+	if (mesh) save_ptree.put(root+"data_unresolved_BaseGameEntity.mesh_type_id", mesh->type_id);
+	else      save_ptree.put(root+"data_unresolved_BaseGameEntity.mesh_type_id", NONE_ID);
 	
 	if (textureOb) 	save_ptree.put(root+"data_unresolved_BaseGameEntity.textureOb_path", textureOb->path);
 	else            save_ptree.put(root+"data_unresolved_BaseGameEntity.textureOb_path", "none");
@@ -177,7 +177,7 @@ void BaseGameEntity::LoadDataUniqueBaseGameEntity(const boost::property_tree::pt
 	place_type_id = load_ptree.get<int>("place_type_id");	
 
 
-	data_unresolved_BaseGameEntity.mesh_path      = load_ptree.get<std::string>("data_unresolved_BaseGameEntity.mesh_path");
+	data_unresolved_BaseGameEntity.mesh_type_id = load_ptree.get<int>("data_unresolved_BaseGameEntity.mesh_type_id");
 	data_unresolved_BaseGameEntity.textureOb_path = load_ptree.get<std::string>("data_unresolved_BaseGameEntity.textureOb_path");
 	
 	data_unresolved_BaseGameEntity.parent_id = load_ptree.get<int>("data_unresolved_BaseGameEntity.parent_id");			
@@ -190,7 +190,11 @@ void BaseGameEntity::LoadDataUniqueBaseGameEntity(const boost::property_tree::pt
 
 void BaseGameEntity::ResolveDataUniqueBaseGameEntity()
 {
-	mesh = MeshCollector::Instance().deformed_sphere; //data_unresolved_bge.mesh_path; 
+	if (data_unresolved_BaseGameEntity.mesh_type_id != NONE_ID)
+	{
+		mesh = MeshCollector::Instance().GetMeshByTypeId(data_unresolved_BaseGameEntity.mesh_type_id); 
+	}
+	
 	textureOb = TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseGameEntity.textureOb_path);
 	
 	if (data_unresolved_BaseGameEntity.parent_id != NONE_ID)

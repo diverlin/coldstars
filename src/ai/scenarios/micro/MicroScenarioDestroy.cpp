@@ -36,12 +36,12 @@ MicroScenarioDestroy::~MicroScenarioDestroy()
 /* virtual */	
 bool MicroScenarioDestroy::Validate(Npc* npc) const
 {	
-	if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetAlive() == false)
+	if (npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetAlive() == false)
 	{
 		return false;
 	} 
 	
-	if (npc->GetStarSystem() != npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetStarSystem())
+	if (npc->GetStarSystem() != npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetStarSystem())
 	{
 		 return false;
 	}
@@ -61,8 +61,8 @@ void MicroScenarioDestroy::Enter(Npc* npc) const
 void MicroScenarioDestroy::UpdateInStaticInSpace(Npc* npc) const
 {
 	npc->GetVehicle()->GetWeaponComplex().ActivateAllWeapons();
-	npc->GetVehicle()->GetWeaponComplex().SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget());
-        npc->GetVehicle()->GetDriveComplex().SetTarget(npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget(), NAVIGATOR_ACTION::KEEP_MIDDLE_ID); 
+	npc->GetVehicle()->GetWeaponComplex().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget());
+        npc->GetVehicle()->GetDriveComplex().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget(), NAVIGATOR_ACTION::KEEP_MIDDLE_ID); 
 }
 
 /* virtual */
@@ -80,5 +80,5 @@ void MicroScenarioDestroy::Exit(Npc* npc) const
 /* virtual */
 std::string MicroScenarioDestroy::GetDescription(Npc* npc) const
 {
-	return "DESTROY ob_id=" + int2str( npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetId()) ;
+	return "DESTROY ob_id=" + int2str( npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetId()) ;
 }

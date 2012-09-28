@@ -17,7 +17,7 @@
 */
 
 #include "AiModelConqueror.hpp"
-#include "../MacroTask.hpp"
+#include "../Task.hpp"
 #include "../../common/constants.hpp"
 #include "../../world/starsystem.hpp"
 #include "../../ai/StateMachine.hpp"
@@ -32,10 +32,10 @@ AiModelConqueror::~AiModelConqueror()
 
 void AiModelConqueror::UpdateInStatic(Npc* npc) const
 {
-	if (npc->GetStateMachine()->GetMacroTaskManager()->GetScenario() == NULL) 
+	if (npc->GetStateMachine().GetMacroTaskManager().GetScenario() == NULL) 
 	{
-		MacroTask* macrotask = new MacroTask(MACROSCENARIO::STARSYSTEMDEFENCE_ID, npc->GetStarSystem());
-	        npc->GetStateMachine()->SetCurrentMacroTask(macrotask); 
+		Task macrotask(MACROSCENARIO::STARSYSTEMDEFENCE_ID, npc->GetStarSystem()->GetId());
+	        npc->GetStateMachine().SetCurrentMacroTask(macrotask); 
 	}
 }
 

@@ -35,6 +35,10 @@ class BaseItem;
 
 struct UnresolvedDataUniqueVehicle
 {
+	int drive_complex_target_id;
+	int drive_complex_action_id;
+
+	int starsystem_hyper_id;
 	int parent_vehicleslot_id;
 	int land_id;
 	//std::string textureOb_gui_path; 	

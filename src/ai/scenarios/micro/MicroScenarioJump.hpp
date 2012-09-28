@@ -21,7 +21,7 @@
 #define MICROSCENARIOUMP_H
 
 #include "../BaseScenario.hpp"
-class Npc; //#include "../../../pilots/Npc.hpp"
+class Npc; 
 
 class MicroScenarioJump : public BaseScenario
 {

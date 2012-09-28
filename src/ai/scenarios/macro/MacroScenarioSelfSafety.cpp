@@ -20,7 +20,7 @@
 #include "../../../world/starsystem.hpp"
 #include "../../../spaceobjects/Planet.hpp"
 #include "../../../ai/StateMachine.hpp"
-#include "../../../ai/MicroTask.hpp"
+#include "../../../ai/Task.hpp"
 
 MacroScenarioSelfSafety::MacroScenarioSelfSafety() 
 {
@@ -34,18 +34,18 @@ void MacroScenarioSelfSafety::UpdateInStaticInSpace(Npc* npc) const
 {
 	if (npc->GetStarSystem()->GetConditionId() == ENTITY::STARSYSTEM::CONDITION::SAFE_ID)
 	{
-		if (npc->GetStateMachine()->GetMacroTaskManager()->GetMacroTask()->GetTarget()->GetTypeId() != ENTITY::PLANET_ID)
+		if (npc->GetStateMachine().GetMacroTaskManager().GetTarget()->GetTypeId() != ENTITY::PLANET_ID)
 		{ 
-			MicroTask* microtask = new MicroTask(MICROSCENARIO::DOCKING_ID, npc->GetPlanetForDocking());
-			npc->GetStateMachine()->SetCurrentMicroTask(microtask);
+			Task microtask(MICROSCENARIO::DOCKING_ID, npc->GetPlanetForDocking()->GetId());
+			npc->GetStateMachine().SetCurrentMicroTask(microtask);
 		}
 	}
 	else
 	{
-		if (npc->GetStateMachine()->GetMicroTaskManager()->GetMicroTask()->GetTarget()->GetTypeId() != ENTITY::STARSYSTEM_ID)
+		if (npc->GetStateMachine().GetMacroTaskManager().GetTarget()->GetTypeId() != ENTITY::STARSYSTEM_ID)
 		{
-			MicroTask* microtask = new MicroTask(MICROSCENARIO::JUMP_ID, npc->GetFailBackStarSystem());
-			npc->GetStateMachine()->SetCurrentMicroTask(microtask);
+			Task microtask(MICROSCENARIO::JUMP_ID, npc->GetFailBackStarSystem()->GetId());
+			npc->GetStateMachine().SetCurrentMicroTask(microtask);
 		}
 	}        
 }

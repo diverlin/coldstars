@@ -17,7 +17,7 @@
 */
 
 #include "AiModelRanger.hpp"
-#include "../MacroTask.hpp"
+#include "../Task.hpp"
 #include "../../common/constants.hpp"
 #include "../../world/starsystem.hpp"
 #include "../../ai/StateMachine.hpp"
@@ -32,7 +32,7 @@ AiModelRanger::~AiModelRanger()
 
 void AiModelRanger::UpdateInStatic(Npc* npc) const
 {
-	if (npc->GetStateMachine()->GetMacroTaskManager()->GetScenario() == NULL)
+	if (npc->GetStateMachine().GetMacroTaskManager().GetScenario() == NULL)
         {
         	StarSystem* target_starsystem = NULL;
        		target_starsystem = npc->GetClosestStarSystem(ENTITY::STARSYSTEM::CONDITION::WAR_ID);
@@ -43,8 +43,8 @@ void AiModelRanger::UpdateInStatic(Npc* npc) const
         	
         	if (target_starsystem != NULL)
         	{
-        	        MacroTask* macrotask = new MacroTask(MACROSCENARIO::STARSYSTEMLIBERATION_ID, target_starsystem);
-        		npc->GetStateMachine()->SetCurrentMacroTask(macrotask);        			
+        	        Task macrotask(MACROSCENARIO::STARSYSTEMLIBERATION_ID, target_starsystem->GetId());
+        		npc->GetStateMachine().SetCurrentMacroTask(macrotask);        			
         	}
         }            
 }

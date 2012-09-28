@@ -30,7 +30,7 @@ class TextureOb;
 
 struct UnresolvedDataUniqueBaseGameEntity
 {
-	std::string mesh_path;
+	int mesh_type_id;
 	std::string textureOb_path;
 	int parent_id;
 	int starsystem_id;

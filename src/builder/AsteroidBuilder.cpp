@@ -71,7 +71,7 @@ void AsteroidBuilder::CreateNewInternals()
         asteroid->SetPlanetData(planet_data);
 	asteroid->SetTextureOb(texOb);
 	asteroid->SetLifeData(data_life);
-	asteroid->SetMesh(MeshCollector::Instance().deformed_sphere);
+	asteroid->SetMesh(MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_DEFORMED_ID));
 	asteroid->SetScale(getRandInt(ENTITY::ASTEROID::SIZE_MIN_, ENTITY::ASTEROID::SIZE_MAX_));	
        	
         asteroid->CalcCollisionrRadius();

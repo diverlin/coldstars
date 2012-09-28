@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "AiModelTrader.hpp"
-#include "../MacroTask.hpp"
+#include "../Task.hpp"
 #include "../StateMachine.hpp"
 
 AiModelTrader::AiModelTrader() 
@@ -30,10 +30,10 @@ AiModelTrader::~AiModelTrader()
 
 void AiModelTrader::UpdateInStatic(Npc* npc) const
 {
-	if (npc->GetStateMachine()->GetMacroTaskManager()->GetScenario() == NULL)
+	if (npc->GetStateMachine().GetMacroTaskManager().GetScenario() == NULL)
         {
-        	MacroTask* macrotask = new MacroTask(MACROSCENARIO::GOODSTRADING_ID);
-	        npc->GetStateMachine()->SetCurrentMacroTask(macrotask);
+        	Task macrotask(MACROSCENARIO::GOODSTRADING_ID);
+	        npc->GetStateMachine().SetCurrentMacroTask(macrotask);
         }            
 }
 

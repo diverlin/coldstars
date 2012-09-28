@@ -22,7 +22,7 @@
 #include "../common/Base.hpp"
 class BaseAiModel;
 #include "../pilots/Skill.hpp"
-class StateMachine; 
+#include "../ai/StateMachine.hpp"
 class Vehicle;
 #include "Observation.hpp" 
 class Planet;
@@ -34,6 +34,9 @@ struct UnresolvedDataUniqueNpc
 {
 	int vehicle_id;	
 	int aiModel_id;
+	
+	Task macrotask;
+	Task microtask;
 };
 
 class Npc : public Base
@@ -56,7 +59,7 @@ class Npc : public Base
 		Vehicle* GetScanTarget()        	const { return vehicle_to_scan; };	
 		Observation& GetObservation()   	{ return observation; };
 		unsigned long int GetCredits()  	const { return credits; };   
-		StateMachine* GetStateMachine() 	const { return state_machine; };
+		StateMachine& GetStateMachine() { return state_machine; };
 
 		StarSystem* GetStarSystem() const;
 
@@ -105,7 +108,7 @@ class Npc : public Base
 
 
      		BaseAiModel* ai_model;
-     		StateMachine* state_machine;
+     		StateMachine state_machine;
    		     	
    		InfoTable info;
      		 	

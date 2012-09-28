@@ -45,6 +45,7 @@ class LazerTraceEffect;
 
 #include "../world/GarbageEntities.hpp"
 #include "../world/garbageEffects.hpp"
+#include "HyperSpace.hpp"
 
 
 struct UnresolvedDataUniqueStarSystem
@@ -68,10 +69,9 @@ class StarSystem : public BaseGameEntity
 		Star* GetStar()          const { return STAR_vec[0]; };		
 		Galaxy* GetGalaxy()      const { return galaxy; };
 		int GetShockWaveNum()    const { return effect_SHOCKWAVE_vec.size(); };
+		HyperSpace& GetHyperSpace() { return hyperspace; };
 		
 		//// TRANSITION
-		void AddToHyperJumpQueue(Vehicle*);
-
 		void AddVehicle(Vehicle*, const vec2f&, float, BaseGameEntity* parent = NULL);
 		void AddBullet(RocketBullet*, const vec2f&, float);
 								
@@ -136,7 +136,7 @@ class StarSystem : public BaseGameEntity
 		std::vector<BlackHole*>    BLACKHOLE_vec;
 		
 		std::vector<Vehicle*> VEHICLE_vec;
-                std::vector<Vehicle*> appear_VEHICLE_queue;
+                HyperSpace hyperspace;
                     		   
     		// effects
     	    	std::vector<DistantNebulaEffect*> distantNebulaEffect_vec;
@@ -150,10 +150,8 @@ class StarSystem : public BaseGameEntity
     		GarbageEntities garbage_entities;
     		GarbageEffects  garbage_effects;
  		    		            
-    		UnresolvedDataUniqueStarSystem data_unresolved_ss;
+    		UnresolvedDataUniqueStarSystem data_unresolved_StarSystem;
     		            		    
-                bool IsVehiclePartOfAppearQueue(int);
-                void PostHyperJumpEvent();
                 void LaunchingEvent() const;
     		
     		void MindEntitiesInStatic_s();
@@ -179,9 +177,9 @@ class StarSystem : public BaseGameEntity
 		void LoadDataUniqueStarSystem(const boost::property_tree::ptree&);
 		void ResolveDataUniqueStarSystem();
 		
-		friend class GuiMap;
-		friend class Observation;
-		friend class Player;
+	friend class GuiMap;
+	friend class Observation;
+	friend class Player;
 };
 
 #endif 
