@@ -3,7 +3,7 @@
 
 #include <set>
                  
-#include "../spaceobjects/BaseGameEntity.hpp"   
+#include "../spaceobjects/BaseSpaceEntity.hpp"   
 
 class MessageManager
 {
@@ -21,7 +21,7 @@ class MessageManager
 	private:  
 		std::set<Message> messages_queue;
 
-		void SendEvent(BaseGameEntity*, const Message&);
+		void SendEvent(BaseSpaceEntity*, const Message&);
 
   		MessageManager(){}
 		MessageManager(const MessageManager&);

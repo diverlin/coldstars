@@ -20,7 +20,7 @@
 #ifndef BASEPLANET_H
 #define BASEPLANET_H
 
-#include "BaseGameEntity.hpp"
+#include "BaseSpaceEntity.hpp"
 #include "../common/myVector.hpp"
 #include "../parts/orbit.hpp"
 
@@ -29,7 +29,7 @@ struct UnresolvedDataBasePlanet
 	int orbit_it;
 };
 
-class BasePlanet : public BaseGameEntity 
+class BasePlanet : public BaseSpaceEntity 
 {
 	public:      
 		BasePlanet();

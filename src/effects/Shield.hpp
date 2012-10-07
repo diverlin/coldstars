@@ -20,7 +20,7 @@
 #define SHIELD_H
 
 #include "../resources/textureOb.hpp"
-#include "../spaceobjects/BaseGameEntity.hpp"
+#include "../spaceobjects/BaseSpaceEntity.hpp"
 
 class ShieldEffect
 {  
@@ -30,7 +30,7 @@ class ShieldEffect
 
                 void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
 		void SetAlpha(float alpha) { color.a = alpha; };
-                void SetParent(BaseGameEntity* parent) { this->parent = parent; };
+                void SetParent(BaseSpaceEntity* parent) { this->parent = parent; };
 		
                 Points& GetPoints() { return points; };
         	void Update();
@@ -43,7 +43,7 @@ class ShieldEffect
                 
                 Points points;
                 TextureOb* textureOb;
-                BaseGameEntity* parent;
+                BaseSpaceEntity* parent;
                 
 };
 

@@ -19,7 +19,7 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
-#include "../spaceobjects/BaseGameEntity.hpp"
+#include "../spaceobjects/BaseSpaceEntity.hpp"
 class VehicleSlot; 
 class BaseLand; 
 class Npc;
@@ -44,7 +44,7 @@ struct UnresolvedDataUniqueVehicle
 	//std::string textureOb_gui_path; 	
 };
 
-class Vehicle : public BaseGameEntity
+class Vehicle : public BaseSpaceEntity
 {   
     	public:
        	        Vehicle();
@@ -75,7 +75,7 @@ class Vehicle : public BaseGameEntity
                 int GetFreeSpace() const { return propetries.free_space; };
 
                 void BindOwnerNpc(Npc*);
-		bool IsObjectWithinRadarRange(BaseGameEntity*) const;
+		bool IsObjectWithinRadarRange(BaseSpaceEntity*) const;
 		                              
                 WeaponComplex& GetWeaponComplex() { return weapon_complex; };
                 DriveComplex& GetDriveComplex()   { return drive_complex; };                

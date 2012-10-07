@@ -75,7 +75,7 @@ int main()
 
 		/* client code start */
 		player->RunSession(turn_timer);
-		player->UpdatePostTransactionEvent(turn_timer);      // deprecated 
+		player->UpdatePostTransactionEvent(turn_timer);      
 		Player* recreated_player = SaveLoadManager::Instance().Update(player);
 		if (recreated_player != NULL)
 		{

@@ -124,7 +124,7 @@ void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	const std::string root = "spacestation."+int2str(data_id.id)+".";
         SaveDataUniqueBase(save_ptree, root);
-	SaveDataUniqueBaseGameEntity(save_ptree, root);
+	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
 	SaveDataUniqueVehicle(save_ptree, root);
 	SaveDataUniqueSpaceStation(save_ptree, root);
 }
@@ -133,7 +133,7 @@ void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree) const
 void SpaceStation::LoadData(const boost::property_tree::ptree& load_ptree)
 {
         LoadDataUniqueBase(load_ptree);
-	LoadDataUniqueBaseGameEntity(load_ptree);
+	LoadDataUniqueBaseSpaceEntity(load_ptree);
 	LoadDataUniqueVehicle(load_ptree);
 	LoadDataUniqueSpaceStation(load_ptree);
 }
@@ -142,7 +142,7 @@ void SpaceStation::LoadData(const boost::property_tree::ptree& load_ptree)
 void SpaceStation::ResolveData()
 {
         ResolveDataUniqueBase();
-	ResolveDataUniqueBaseGameEntity();
+	ResolveDataUniqueBaseSpaceEntity();
 	ResolveDataUniqueVehicle();
 	ResolveDataUniqueSpaceStation();
 }

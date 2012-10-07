@@ -89,16 +89,6 @@ void WeaponComplex::ReloadAllWeapons()
      	d_fire_delay = TURN_TIME/(slot_weapon_reloaded_vec.size()+1);   
 }
   
-//void WeaponComplex::WeaponsControlledFromUpperLevel(const WeaponSelector& weapon_selector)
-//{
-	//for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
-	//{
-               	//slot_weapon_vec[i]->GetTurrel()->SetSelectedStatus(weapon_selector.GetSingle(i+1));
-	//}
-                
-        //ResetDeselectedWeaponTargets();
-//}
-
 void WeaponComplex::ActivateAllWeapons()
 {
 	for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
@@ -168,7 +158,7 @@ bool WeaponComplex::IsAnyWeaponSelected() const
 	//return true;
 //}
 
-void WeaponComplex::SetTarget(BaseGameEntity* target)
+void WeaponComplex::SetTarget(BaseSpaceEntity* target)
 {                          
         float dist = distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), target->GetPoints().GetCenter());
         
@@ -185,7 +175,7 @@ void WeaponComplex::SetTarget(BaseGameEntity* target)
         }
 }
 
-void WeaponComplex::SetPreciseFireTarget(BaseGameEntity* target, ItemSlot* item_slot)
+void WeaponComplex::SetPreciseFireTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
 {                          
         float dist = distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), target->GetPoints().GetCenter());
         
@@ -204,7 +194,6 @@ void WeaponComplex::SetPreciseFireTarget(BaseGameEntity* target, ItemSlot* item_
 
 void WeaponComplex::Fire(int timer, int attack_skill, bool show_effect)
 {
-	return;
      	if (timer < TURN_TIME - fire_delay)
      	{
         	for (std::vector<ItemSlot*>::iterator it=slot_weapon_reloaded_vec.begin(); it<slot_weapon_reloaded_vec.end(); it++)

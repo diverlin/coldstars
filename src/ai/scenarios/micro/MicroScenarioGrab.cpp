@@ -60,7 +60,7 @@ bool MicroScenarioGrab::Validate(Npc* npc) const
 /* virtual */
 void MicroScenarioGrab::UpdateInStaticInSpace(Npc* npc) const
 {
-	BaseGameEntity* target = npc->GetStateMachine().GetMicroTaskManager().GetTarget();
+	BaseSpaceEntity* target = npc->GetStateMachine().GetMicroTaskManager().GetTarget();
 	if (npc->GetVehicle()->GetGrappleSlot()->CheckTarget(target) == true)
 	{
        		npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(target);

@@ -28,7 +28,7 @@ class ObjMeshInstance;
 #include "../text/InfoTable.hpp" 
 class TextureOb;
 
-struct UnresolvedDataUniqueBaseGameEntity
+struct UnresolvedDataUniqueBaseSpaceEntity
 {
 	int mesh_type_id;
 	std::string textureOb_path;
@@ -39,11 +39,11 @@ struct UnresolvedDataUniqueBaseGameEntity
 };
 
 
-class BaseGameEntity : public Base
+class BaseSpaceEntity : public Base
 {
 	public:      
-		BaseGameEntity();
-		virtual ~BaseGameEntity();
+		BaseSpaceEntity();
+		virtual ~BaseSpaceEntity();
 
 		void SetLifeData(const LifeData& data_life)        { this->data_life = data_life; }
 		void SetMesh(ObjMeshInstance* mesh)         { this->mesh = mesh; }
@@ -54,7 +54,7 @@ class BaseGameEntity : public Base
 		void SetAngle(const vec3f& angle)           { this->angle = angle; }
 		void SetDeltaAngle(const vec3f& d_angle)    { this->d_angle = d_angle; }
 
-		void SetParent(BaseGameEntity* parent)     { this->parent = parent; }
+		void SetParent(BaseSpaceEntity* parent)     { this->parent = parent; }
 		void SetScale(float scale) { this->scale = scale; }
 
 		StarSystem* GetStarSystem() const { return starsystem; }           
@@ -69,7 +69,7 @@ class BaseGameEntity : public Base
 		TextureOb* GetTextureOb() const { return textureOb; }
 		int GetArmor()        const { return data_life.armor; }
 
-		BaseGameEntity* GetParent() const { return parent; }
+		BaseSpaceEntity* GetParent() const { return parent; }
 
 		void MovingByExternalForce(const vec2f&, float);
 
@@ -100,17 +100,17 @@ class BaseGameEntity : public Base
 		int mass;
 		float scale;
 
-		BaseGameEntity* parent;
+		BaseSpaceEntity* parent;
 
 		void UpdateRotation();
 
 		void CheckDeath(bool);
 		virtual void PostDeathUniqueEvent(bool) {};
 
-		UnresolvedDataUniqueBaseGameEntity data_unresolved_BaseGameEntity;
-		void SaveDataUniqueBaseGameEntity(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueBaseGameEntity(const boost::property_tree::ptree&);
-		void ResolveDataUniqueBaseGameEntity();
+		UnresolvedDataUniqueBaseSpaceEntity data_unresolved_BaseSpaceEntity;
+		void SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree&, const std::string&) const;
+		void LoadDataUniqueBaseSpaceEntity(const boost::property_tree::ptree&);
+		void ResolveDataUniqueBaseSpaceEntity();
 				
 		friend class BaseVehicleBuilder;
 };

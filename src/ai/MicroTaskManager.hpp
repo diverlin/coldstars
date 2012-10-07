@@ -21,7 +21,7 @@
 
 #include "Task.hpp"
 #include "scenarios/BaseScenario.hpp"
-class BaseGameEntity;
+class BaseSpaceEntity;
 
 class MicroTaskManager
 {
@@ -31,14 +31,14 @@ class MicroTaskManager
 		
 		void SetTask(const Task&);
 		
-		BaseGameEntity* GetTarget() const { return target; };
+		BaseSpaceEntity* GetTarget() const { return target; };
 		const Task& GetTask() const { return microtask; };	
 		BaseScenario* GetScenario() const { return scenario; };
 				
 	private:
 		Task microtask;	
 		BaseScenario* scenario;
-		BaseGameEntity* target;
+		BaseSpaceEntity* target;
 		
 		void Reset();	
 		

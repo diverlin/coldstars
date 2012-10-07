@@ -24,7 +24,7 @@
 class Vehicle;
 class ItemSlot;
 class BaseItem;
-class BaseGameEntity;
+class BaseSpaceEntity;
 class TextureOb;
 
 class WeaponComplex
@@ -41,8 +41,8 @@ class WeaponComplex
         	
                	void PrepareWeapons();
                      
-                void SetTarget(BaseGameEntity*);     
-                void SetPreciseFireTarget(BaseGameEntity*, ItemSlot*);     
+                void SetTarget(BaseSpaceEntity*);     
+                void SetPreciseFireTarget(BaseSpaceEntity*, ItemSlot*);     
                        
         	void Fire(int, int, bool);
         	

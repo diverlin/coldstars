@@ -92,7 +92,7 @@ void DriveComplex::SetStaticTargetCoords(const vec2f& target_pos)
     
     
           		
-void DriveComplex::SetTarget(BaseGameEntity* target, int _action_id)
+void DriveComplex::SetTarget(BaseSpaceEntity* target, int _action_id)
 {
     	ResetTarget();
 

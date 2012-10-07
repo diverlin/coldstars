@@ -130,7 +130,7 @@ void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	const std::string root = "rocketbullet."+int2str(data_id.id)+".";
         SaveDataUniqueBase(save_ptree, root);
-	SaveDataUniqueBaseGameEntity(save_ptree, root);
+	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
 	SaveDataUniqueVehicle(save_ptree, root);
 	SaveDataUniqueRocketBullet(save_ptree, root);
 }
@@ -139,7 +139,7 @@ void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree) const
 void RocketBullet::LoadData(const boost::property_tree::ptree& load_ptree)
 {
         LoadDataUniqueBase(load_ptree);
-	LoadDataUniqueBaseGameEntity(load_ptree);
+	LoadDataUniqueBaseSpaceEntity(load_ptree);
 	LoadDataUniqueVehicle(load_ptree);
 	LoadDataUniqueRocketBullet(load_ptree);
 }
@@ -148,7 +148,7 @@ void RocketBullet::LoadData(const boost::property_tree::ptree& load_ptree)
 void RocketBullet::ResolveData()
 {
         ResolveDataUniqueBase();
-	ResolveDataUniqueBaseGameEntity();
+	ResolveDataUniqueBaseSpaceEntity();
 	ResolveDataUniqueVehicle();
 	ResolveDataUniqueRocketBullet();
 }
@@ -176,7 +176,7 @@ void RocketBullet::ResolveDataUniqueRocketBullet()
 {                       
         if (unresolved_target_id != NONE_ID)
         {
-        	target = (BaseGameEntity*)EntityManager::Instance().GetEntityById(unresolved_target_id);
+        	target = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(unresolved_target_id);
         }
 }
 

@@ -16,7 +16,7 @@
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "BaseGameEntity.hpp"
+#include "BaseSpaceEntity.hpp"
 #include "../resources/MeshCollector.hpp"
 #include "../resources/TextureManager.hpp"
 #include "../common/constants.hpp"
@@ -29,7 +29,7 @@
 #include "../text/VerticalFlowText.hpp" 
 #include "../common/Logger.hpp"
 
-BaseGameEntity::BaseGameEntity():starsystem(NULL), mesh(NULL), textureOb(NULL), parent(NULL),
+BaseSpaceEntity::BaseSpaceEntity():starsystem(NULL), mesh(NULL), textureOb(NULL), parent(NULL),
 				     place_type_id(NONE_ID), collision_radius(0), mass(0)
 {
 	angle.x        = getRandInt(10, 40);
@@ -44,29 +44,29 @@ BaseGameEntity::BaseGameEntity():starsystem(NULL), mesh(NULL), textureOb(NULL), 
 }
 
 /* virtual */
-BaseGameEntity::~BaseGameEntity()
+BaseSpaceEntity::~BaseSpaceEntity()
 {
 	#if CREATEDESTROY_LOG_ENABLED == 1
-	Logger::Instance().Log("___::~BaseGameEntity(), id="+int2str(GetId()));
+	Logger::Instance().Log("___::~BaseSpaceEntity(), id="+int2str(GetId()));
 	#endif
 }
 
 
-void BaseGameEntity::UpdateRotation()
+void BaseSpaceEntity::UpdateRotation()
 {
 	angle.x += d_angle.x;  
 	angle.y += d_angle.y;  
 	angle.z += d_angle.z; 
 }
 
-void BaseGameEntity::MovingByExternalForce(const vec2f& _target_pos, float force)
+void BaseSpaceEntity::MovingByExternalForce(const vec2f& _target_pos, float force)
 {
 	get_dPos_ToPoint(points.GetCenter(), _target_pos, force, d_pos);
 	points.SetCenter(points.GetCenter() + d_pos);
 }
 
 /* virtual */
-void BaseGameEntity::Hit(int damage, bool show_effect)
+void BaseSpaceEntity::Hit(int damage, bool show_effect)
 {
 	data_life.armor -= damage;
 	if (data_life.armor <= 0)
@@ -83,13 +83,13 @@ void BaseGameEntity::Hit(int damage, bool show_effect)
 
 }
 
-void BaseGameEntity::SilentKill()
+void BaseSpaceEntity::SilentKill()
 {
 	data_life.armor = 0;
 	data_life.is_alive = false;
 }
 
-void BaseGameEntity::CheckDeath(bool show_effect)
+void BaseSpaceEntity::CheckDeath(bool show_effect)
 {
 	if (data_life.is_alive == false)
 	{
@@ -105,19 +105,19 @@ void BaseGameEntity::CheckDeath(bool show_effect)
 	}  
 }
 
-void BaseGameEntity::RenderInfoInSpace(const vec2f& scroll_coords)
+void BaseSpaceEntity::RenderInfoInSpace(const vec2f& scroll_coords)
 { 
 	UpdateInfo();
      	drawInfoIn2Column(info.title_list, info.value_list, points.GetCenter().x - scroll_coords.x, points.GetCenter().y - scroll_coords.y);
 }
 
-void BaseGameEntity::RenderInfo(const vec2f& center)
+void BaseSpaceEntity::RenderInfo(const vec2f& center)
 { 
 	UpdateInfo();
      	drawInfoIn2Column(info.title_list, info.value_list, center.x, center.y);
 }
 
-void BaseGameEntity::SaveDataUniqueBaseGameEntity(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void BaseSpaceEntity::SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	save_ptree.put(root+"data_life.is_alive",   data_life.is_alive);
 	save_ptree.put(root+"data_life.armor",      data_life.armor);
@@ -136,26 +136,26 @@ void BaseGameEntity::SaveDataUniqueBaseGameEntity(boost::property_tree::ptree& s
 	save_ptree.put(root+"mass", mass);
 	save_ptree.put(root+"scale", scale);	
 	
-	if (mesh) save_ptree.put(root+"data_unresolved_BaseGameEntity.mesh_type_id", mesh->type_id);
-	else      save_ptree.put(root+"data_unresolved_BaseGameEntity.mesh_type_id", NONE_ID);
+	if (mesh) save_ptree.put(root+"data_unresolved_BaseSpaceEntity.mesh_type_id", mesh->type_id);
+	else      save_ptree.put(root+"data_unresolved_BaseSpaceEntity.mesh_type_id", NONE_ID);
 	
-	if (textureOb) 	save_ptree.put(root+"data_unresolved_BaseGameEntity.textureOb_path", textureOb->path);
-	else            save_ptree.put(root+"data_unresolved_BaseGameEntity.textureOb_path", "none");
+	if (textureOb) 	save_ptree.put(root+"data_unresolved_BaseSpaceEntity.textureOb_path", textureOb->path);
+	else            save_ptree.put(root+"data_unresolved_BaseSpaceEntity.textureOb_path", "none");
 
-	if (parent) save_ptree.put(root+"data_unresolved_BaseGameEntity.parent_id", parent->GetId());
-	else        save_ptree.put(root+"data_unresolved_BaseGameEntity.parent_id", NONE_ID);
+	if (parent) save_ptree.put(root+"data_unresolved_BaseSpaceEntity.parent_id", parent->GetId());
+	else        save_ptree.put(root+"data_unresolved_BaseSpaceEntity.parent_id", NONE_ID);
 
-	save_ptree.put(root+"data_unresolved_BaseGameEntity.starsystem_id", starsystem->GetId());
+	save_ptree.put(root+"data_unresolved_BaseSpaceEntity.starsystem_id", starsystem->GetId());
 	save_ptree.put(root+"place_type_id", place_type_id);
 			
-	save_ptree.put(root+"data_unresolved_BaseGameEntity.center.x", points.GetCenter().x);
-	save_ptree.put(root+"data_unresolved_BaseGameEntity.center.y", points.GetCenter().y);
-	save_ptree.put(root+"data_unresolved_BaseGameEntity.angle_2D", points.GetAngleDegree());
+	save_ptree.put(root+"data_unresolved_BaseSpaceEntity.center.x", points.GetCenter().x);
+	save_ptree.put(root+"data_unresolved_BaseSpaceEntity.center.y", points.GetCenter().y);
+	save_ptree.put(root+"data_unresolved_BaseSpaceEntity.angle_2D", points.GetAngleDegree());
 }
 
 
 
-void BaseGameEntity::LoadDataUniqueBaseGameEntity(const boost::property_tree::ptree& load_ptree)
+void BaseSpaceEntity::LoadDataUniqueBaseSpaceEntity(const boost::property_tree::ptree& load_ptree)
 {
 	data_life.is_alive   = load_ptree.get<bool>("data_life.is_alive");
 	data_life.armor      = load_ptree.get<int>("data_life.armor");
@@ -177,30 +177,30 @@ void BaseGameEntity::LoadDataUniqueBaseGameEntity(const boost::property_tree::pt
 	place_type_id = load_ptree.get<int>("place_type_id");	
 
 
-	data_unresolved_BaseGameEntity.mesh_type_id = load_ptree.get<int>("data_unresolved_BaseGameEntity.mesh_type_id");
-	data_unresolved_BaseGameEntity.textureOb_path = load_ptree.get<std::string>("data_unresolved_BaseGameEntity.textureOb_path");
+	data_unresolved_BaseSpaceEntity.mesh_type_id = load_ptree.get<int>("data_unresolved_BaseSpaceEntity.mesh_type_id");
+	data_unresolved_BaseSpaceEntity.textureOb_path = load_ptree.get<std::string>("data_unresolved_BaseSpaceEntity.textureOb_path");
 	
-	data_unresolved_BaseGameEntity.parent_id = load_ptree.get<int>("data_unresolved_BaseGameEntity.parent_id");			
-	data_unresolved_BaseGameEntity.starsystem_id = load_ptree.get<int>("data_unresolved_BaseGameEntity.starsystem_id");
+	data_unresolved_BaseSpaceEntity.parent_id = load_ptree.get<int>("data_unresolved_BaseSpaceEntity.parent_id");			
+	data_unresolved_BaseSpaceEntity.starsystem_id = load_ptree.get<int>("data_unresolved_BaseSpaceEntity.starsystem_id");
 			
-	data_unresolved_BaseGameEntity.center.x = load_ptree.get<float>("data_unresolved_BaseGameEntity.center.x");
-	data_unresolved_BaseGameEntity.center.y = load_ptree.get<float>("data_unresolved_BaseGameEntity.center.y");
-	data_unresolved_BaseGameEntity.angle    = load_ptree.get<float>("data_unresolved_BaseGameEntity.angle_2D");
+	data_unresolved_BaseSpaceEntity.center.x = load_ptree.get<float>("data_unresolved_BaseSpaceEntity.center.x");
+	data_unresolved_BaseSpaceEntity.center.y = load_ptree.get<float>("data_unresolved_BaseSpaceEntity.center.y");
+	data_unresolved_BaseSpaceEntity.angle    = load_ptree.get<float>("data_unresolved_BaseSpaceEntity.angle_2D");
 }
 
-void BaseGameEntity::ResolveDataUniqueBaseGameEntity()
+void BaseSpaceEntity::ResolveDataUniqueBaseSpaceEntity()
 {
-	if (data_unresolved_BaseGameEntity.mesh_type_id != NONE_ID)
+	if (data_unresolved_BaseSpaceEntity.mesh_type_id != NONE_ID)
 	{
-		mesh = MeshCollector::Instance().GetMeshByTypeId(data_unresolved_BaseGameEntity.mesh_type_id); 
+		mesh = MeshCollector::Instance().GetMeshByTypeId(data_unresolved_BaseSpaceEntity.mesh_type_id); 
 	}
 	
-	textureOb = TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseGameEntity.textureOb_path);
+	textureOb = TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseSpaceEntity.textureOb_path);
 	
-	if (data_unresolved_BaseGameEntity.parent_id != NONE_ID)
+	if (data_unresolved_BaseSpaceEntity.parent_id != NONE_ID)
 	{
-		parent = (BaseGameEntity*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.parent_id);
+		parent = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.parent_id);
 	}
 
-	starsystem = (StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id);
+	starsystem = (StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id);
 }

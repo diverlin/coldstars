@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "Particle.hpp"
 #include "../../resources/textureOb.hpp"
-#include "../../spaceobjects/BaseGameEntity.hpp"
+#include "../../spaceobjects/BaseSpaceEntity.hpp"
 
 class BaseParticleSystem 
 {
@@ -34,7 +34,7 @@ class BaseParticleSystem
 
       		void SetDying();
                 void SetTextureOb(TextureOb*);
-                void SetParent(BaseGameEntity*);
+                void SetParent(BaseSpaceEntity*);
                 void SetPosition(vec2f);
                 void SetParticlesNum(int);
                 void SetParticleData(ParticleData);
@@ -51,7 +51,7 @@ class BaseParticleSystem
        		TextureOb* texOb;
        		ParticleData data_particle;
        		vec2f center;
-                BaseGameEntity* parent;
+                BaseSpaceEntity* parent;
                 
        	    	bool is_alive, is_dying;
    

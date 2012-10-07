@@ -303,7 +303,7 @@ void Npc::SaveDataUniqueNpc(boost::property_tree::ptree& save_ptree, const std::
 	
 	if (state_machine.GetMicroTaskManager().GetScenario() != NULL)	
 	{
-		const std::string child_root = root + "macrotask.";
+		const std::string child_root = root + "microtask.";
 		state_machine.GetMicroTaskManager().GetTask().SaveData(save_ptree, child_root);
 	}
 }
@@ -335,12 +335,12 @@ void Npc::ResolveDataUniqueNpc()
 
 	skill.ResolveData();
 	
-	if (state_machine.GetMacroTaskManager().GetScenario() != NULL)
+	if (data_unresolved_npc.macrotask.GetScenarioTypeId() != NONE_ID)
 	{
 		state_machine.SetCurrentMacroTask(data_unresolved_npc.macrotask);
 	}
 	
-	if (state_machine.GetMicroTaskManager().GetScenario() != NULL)
+	if (data_unresolved_npc.microtask.GetScenarioTypeId() != NONE_ID)
 	{
 		state_machine.SetCurrentMicroTask(data_unresolved_npc.microtask);
 	}

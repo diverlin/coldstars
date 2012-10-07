@@ -20,7 +20,7 @@
 #define TURREL_H
 
 class ItemSlot; 
-class BaseGameEntity; 
+class BaseSpaceEntity; 
 class TextureOb;
 
 #include "../common/points.hpp"
@@ -33,12 +33,12 @@ class Turrel
 
                 void SetTextureOb(TextureOb* textureOb)	{ this->textureOb = textureOb; };
                               
-                void SetTarget(BaseGameEntity* target) 	{ this->target = target; };
-                void SetTarget(BaseGameEntity* target, ItemSlot* subtarget) { this->target = target; this->subtarget = subtarget; };
+                void SetTarget(BaseSpaceEntity* target) 	{ this->target = target; };
+                void SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget) { this->target = target; this->subtarget = subtarget; };
                 
                 Points& GetPoints()		{ return points; };
                 
-                BaseGameEntity* GetTarget() const { return target; };
+                BaseSpaceEntity* GetTarget() const { return target; };
                 ItemSlot* GetSubTarget() const { return subtarget; };
                        
                 void ResetTarget();
@@ -55,7 +55,7 @@ class Turrel
                 TextureOb* textureOb;
                         
                 ItemSlot* slot;
-                BaseGameEntity* target;
+                BaseSpaceEntity* target;
                 ItemSlot* subtarget;              
                
                 Points points;         

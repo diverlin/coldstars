@@ -24,7 +24,7 @@ class DriveEffect;
 class ItemSlot; 
 #include "../render/PathVisual.hpp" 
 #include "../common/myVector.hpp" 
-class BaseGameEntity;
+class BaseSpaceEntity;
 
 class DriveComplex
 {
@@ -38,7 +38,7 @@ class DriveComplex
                 void SetDriveSlot(ItemSlot* drive_slot) { this->drive_slot = drive_slot; };
                 void SetBakSlot(ItemSlot* bak_slot)     { this->bak_slot = bak_slot; };
 
-      		void SetTarget(BaseGameEntity*, int);       
+      		void SetTarget(BaseSpaceEntity*, int);       
       		void SetStaticTargetCoords(const vec2f&);
 
 		int GetActionId() const { return action_id; };
@@ -47,7 +47,7 @@ class DriveComplex
       		ItemSlot* GetDriveSlot() const { return drive_slot; };
         	ItemSlot* GetBakSlot()   const { return bak_slot; };
                   
-                BaseGameEntity* GetTarget() const { return target; };                
+                BaseSpaceEntity* GetTarget() const { return target; };                
     		
    		void CalcPath();      
     			        
@@ -70,7 +70,7 @@ class DriveComplex
         	ItemSlot* bak_slot;
 
       		Vehicle* owner_vehicle;
-      		BaseGameEntity* target;
+      		BaseSpaceEntity* target;
 
 		DriveEffect* drive_effect; 
 

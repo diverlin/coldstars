@@ -153,7 +153,7 @@ set (SOURCES
 	src/items/others/GoodsPack.cpp   
 	src/items/others/Bomb.cpp 
 
-	src/spaceobjects/BaseGameEntity.cpp 
+	src/spaceobjects/BaseSpaceEntity.cpp 
 	src/spaceobjects/BasePlanet.cpp
 	src/spaceobjects/Vehicle.cpp
 	src/spaceobjects/BlackHole.cpp
