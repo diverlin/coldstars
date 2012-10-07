@@ -19,10 +19,10 @@
 #ifndef CONTAINER_H
 #define CONTAINER_H
 
-#include "BaseGameEntity.hpp"
+#include "BaseSpaceEntity.hpp"
 #include "../slots/ItemSlot.hpp"
 
-class Container : public BaseGameEntity
+class Container : public BaseSpaceEntity
 {
     	public:                  
         	Container(int);

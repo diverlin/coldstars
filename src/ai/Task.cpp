@@ -17,7 +17,7 @@
 */
 
 #include "Task.hpp"
-#include "../spaceobjects/BaseGameEntity.hpp"
+#include "../spaceobjects/BaseSpaceEntity.hpp"
 #include "../common/EntityManager.hpp"
 		
 void Task::Reset()

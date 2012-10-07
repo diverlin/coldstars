@@ -106,7 +106,7 @@ StarSystem::~StarSystem()
         for(unsigned int i=0; i<text_DAMAGE_vec.size(); i++)           { delete text_DAMAGE_vec[i]; } 
 }      
 
-void StarSystem::AddVehicle(Vehicle* vehicle, const vec2f& center, float angle, BaseGameEntity* parent)
+void StarSystem::AddVehicle(Vehicle* vehicle, const vec2f& center, float angle, BaseSpaceEntity* parent)
 {
 	#if STARSYSTEMADDREMOVE_LOG_ENABLED == 1
 	Logger::Instance().Log("starsysten_id="+int2str(GetId())+ " AddVehicle, vehicle_id=" + int2str(vehicle->GetId()));
@@ -144,7 +144,7 @@ void StarSystem::AddBullet(RocketBullet* rocket, const vec2f& center, float angl
 	ROCKET_vec.push_back(rocket);  
 }
 
-void StarSystem::Add(BasePlanet* object, BaseGameEntity* parent, int it)
+void StarSystem::Add(BasePlanet* object, BaseSpaceEntity* parent, int it)
 {
 	object->CreateOrbit();
         object->SetParent(parent);
@@ -884,7 +884,7 @@ void StarSystem::LoadDataUniqueStarSystem(const boost::property_tree::ptree& loa
 		}
 	}
 	
-	points.SetCenter(data_unresolved_BaseGameEntity.center);
+	points.SetCenter(data_unresolved_BaseSpaceEntity.center);
 }
 
 void StarSystem::ResolveDataUniqueStarSystem()
@@ -896,21 +896,21 @@ void StarSystem::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	const std::string root = "starsystem." + int2str(starsystem->GetId())+".";
 	SaveDataUniqueBase(save_ptree, root);
-	SaveDataUniqueBaseGameEntity(save_ptree, root);
+	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
 	SaveDataUniqueStarSystem(save_ptree, root);
 }
 
 void StarSystem::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
-	LoadDataUniqueBaseGameEntity(load_ptree);
+	LoadDataUniqueBaseSpaceEntity(load_ptree);
 	LoadDataUniqueStarSystem(load_ptree);
 }
 
 void StarSystem::ResolveData()
 {
 	ResolveDataUniqueBase(); 
-	ResolveDataUniqueBaseGameEntity(); 
+	ResolveDataUniqueBaseSpaceEntity(); 
 	ResolveDataUniqueStarSystem(); 
 }		
 

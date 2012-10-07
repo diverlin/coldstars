@@ -20,7 +20,7 @@
 #define GUIRADAR_H
 
 #include "../gui/BaseGui.hpp"
-#include "../spaceobjects/BaseGameEntity.hpp"
+#include "../spaceobjects/BaseSpaceEntity.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 
 class GuiRadar : public BaseGui
@@ -37,8 +37,8 @@ class GuiRadar : public BaseGui
      		void Update();
      		bool UpdateMouseInteraction(const MouseData&);
      		
-     		void Add(BaseGameEntity*);
-     		void AddIfWithinRadarRange(BaseGameEntity*, const Vehicle&);
+     		void Add(BaseSpaceEntity*);
+     		void AddIfWithinRadarRange(BaseSpaceEntity*, const Vehicle&);
      		
 		void Render() const;
 		     			
@@ -53,7 +53,7 @@ class GuiRadar : public BaseGui
       	       	Rect rect;
       	       	Rect screenrect;
       	       	      	       	      		
-      		std::vector<BaseGameEntity*> entity_vec;
+      		std::vector<BaseSpaceEntity*> entity_vec;
 };
 
 #endif

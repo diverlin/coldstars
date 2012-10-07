@@ -21,7 +21,7 @@
 #define STARSYSTEM_HPP
 
 #include <vector>
-#include "../spaceobjects/BaseGameEntity.hpp"
+#include "../spaceobjects/BaseSpaceEntity.hpp"
 
 class RocketBullet;
 class BasePlanet;
@@ -54,7 +54,7 @@ struct UnresolvedDataUniqueStarSystem
 };
 
 
-class StarSystem : public BaseGameEntity
+class StarSystem : public BaseSpaceEntity
 {
 	public:
 		StarSystem(int);
@@ -72,10 +72,10 @@ class StarSystem : public BaseGameEntity
 		HyperSpace& GetHyperSpace() { return hyperspace; };
 		
 		//// TRANSITION
-		void AddVehicle(Vehicle*, const vec2f&, float, BaseGameEntity* parent = NULL);
+		void AddVehicle(Vehicle*, const vec2f&, float, BaseSpaceEntity* parent = NULL);
 		void AddBullet(RocketBullet*, const vec2f&, float);
 								
-		void Add(BasePlanet*, BaseGameEntity* parent = NULL, int it = 0);
+		void Add(BasePlanet*, BaseSpaceEntity* parent = NULL, int it = 0);
 		void Add(Container*, const vec2f&);
 		void Add(BlackHole*, const vec2f&);
 

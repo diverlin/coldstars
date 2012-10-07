@@ -23,7 +23,7 @@
 
 #include "Task.hpp"
 #include "scenarios/BaseScenario.hpp"
-class BaseGameEntity;
+class BaseSpaceEntity;
 
 class MacroTaskManager
 {
@@ -33,14 +33,14 @@ class MacroTaskManager
 		
 		void SetTask(const Task&);
 		
-		BaseGameEntity* GetTarget() const { return target; };
+		BaseSpaceEntity* GetTarget() const { return target; };
 		const Task& GetTask() const { return macrotask; };	
 		BaseScenario* GetScenario() const { return scenario; };				
 						
 	private:
 		Task macrotask;	
 		BaseScenario* scenario;
-		BaseGameEntity* target;
+		BaseSpaceEntity* target;
 		
 		void Reset();	
 		

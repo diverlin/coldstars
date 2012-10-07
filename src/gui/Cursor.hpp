@@ -25,7 +25,7 @@ class ItemSlot; //#include "../slots/ItemSlot.hpp"
 #include "../common/rect.hpp"
 #include "MouseData.hpp"
 class Player; //#include "../pilots/Player.hpp"
-class BaseGameEntity;
+class BaseSpaceEntity;
 
 class Cursor
 {
@@ -45,7 +45,7 @@ class Cursor
 		void UpdateMouseStuff();		
 		void Update(const MouseData&);
         		
-		void SetFocusedSpaceObject(BaseGameEntity* focused_space_ob) { this->focused_space_ob = focused_space_ob; };
+		void SetFocusedSpaceObject(BaseSpaceEntity* focused_space_ob) { this->focused_space_ob = focused_space_ob; };
 		void RenderFocusedSpaceObjectStuff();
 		
         private:
@@ -55,7 +55,7 @@ class Cursor
         	
         	MouseData data_mouse;
         	
-        	BaseGameEntity* focused_space_ob;
+        	BaseSpaceEntity* focused_space_ob;
 }; 
 
 #endif 

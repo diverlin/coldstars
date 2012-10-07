@@ -76,7 +76,7 @@ void DamageEffect::Render()
 
 
 
-DamageEffect* getNewDamageEffect(int color_id, BaseGameEntity* parent)
+DamageEffect* getNewDamageEffect(int color_id, BaseSpaceEntity* parent)
 {
 	int particles_num = 10;
    

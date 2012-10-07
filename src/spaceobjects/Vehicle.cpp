@@ -279,7 +279,7 @@ void Vehicle::BindOwnerNpc(Npc* owner_npc)
 	owner_npc->SetVehicle(this); 
 } 
 
-bool Vehicle::IsObjectWithinRadarRange(BaseGameEntity* object) const
+bool Vehicle::IsObjectWithinRadarRange(BaseSpaceEntity* object) const
 {
         float dist = distBetweenPoints(points.GetCenter(), object->GetPoints().GetCenter());
         if (dist < propetries.radar)
@@ -1080,7 +1080,7 @@ void Vehicle::ResolveDataUniqueVehicle()
 
        	if (data_unresolved_Vehicle.drive_complex_target_id != NONE_ID) 
         { 
-        	drive_complex.SetTarget((BaseGameEntity*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.drive_complex_target_id),  data_unresolved_Vehicle.drive_complex_action_id); 
+        	drive_complex.SetTarget((BaseSpaceEntity*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.drive_complex_target_id),  data_unresolved_Vehicle.drive_complex_action_id); 
         }        
                  
        	if (data_unresolved_Vehicle.land_id != NONE_ID) 
@@ -1092,7 +1092,7 @@ void Vehicle::ResolveDataUniqueVehicle()
         {
         	case ENTITY::PLACE_SPACE_ID: 
         	{
-			((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->AddVehicle(this, data_unresolved_BaseGameEntity.center, data_unresolved_BaseGameEntity.angle, parent); 
+			((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddVehicle(this, data_unresolved_BaseSpaceEntity.center, data_unresolved_BaseSpaceEntity.angle, parent); 
 			break;
 		}
 		

@@ -322,7 +322,7 @@ void ItemSlot::DrawRange()
     	range_visual.Draw();
 }
 
-bool ItemSlot::CheckTarget(BaseGameEntity* _target) const
+bool ItemSlot::CheckTarget(BaseSpaceEntity* _target) const
 {
         if (CheckAlive(_target) == true)
         {
@@ -341,22 +341,22 @@ bool ItemSlot::CheckTarget(BaseGameEntity* _target) const
         return false;
 }
 
-bool ItemSlot::CheckAlive(BaseGameEntity* _target) const
+bool ItemSlot::CheckAlive(BaseSpaceEntity* _target) const
 {
 	return _target->GetAlive();
 }
 
-bool ItemSlot::CheckPlaceTypeId(BaseGameEntity* _target) const  
+bool ItemSlot::CheckPlaceTypeId(BaseSpaceEntity* _target) const  
 {
 	return (_target->GetPlaceTypeId() == ENTITY::PLACE_SPACE_ID);
 }           	
 
-bool ItemSlot::CheckStarSystem(BaseGameEntity* _target) const
+bool ItemSlot::CheckStarSystem(BaseSpaceEntity* _target) const
 {
         return (_target->GetStarSystem() == ((Vehicle*)owner)->GetStarSystem());
 }                
 
-bool ItemSlot::CheckDistance(BaseGameEntity* _target) const
+bool ItemSlot::CheckDistance(BaseSpaceEntity* _target) const
 {
 	if (_target->GetTypeId() == ENTITY::STARSYSTEM_ID)
 	{

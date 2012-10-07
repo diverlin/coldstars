@@ -95,14 +95,14 @@ void Asteroid::LoadDataUniqueAsteroid(const boost::property_tree::ptree& ptree)
 
 void Asteroid::ResolveDataUniqueAsteroid()
 {
-	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this, parent, data_unresolved_BasePlanet.orbit_it); 
+	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, parent, data_unresolved_BasePlanet.orbit_it); 
 }
 	
 void Asteroid::SaveData(boost::property_tree::ptree& save_ptree) const		
 {
 	std::string root = "asteroid." + int2str(GetId())+".";
 	SaveDataUniqueBase(save_ptree, root);
-	SaveDataUniqueBaseGameEntity(save_ptree, root);
+	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
 	SaveDataUniqueBasePlanet(save_ptree, root);
 	SaveDataUniqueAsteroid(save_ptree, root);
 }
@@ -110,7 +110,7 @@ void Asteroid::SaveData(boost::property_tree::ptree& save_ptree) const
 void Asteroid::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
-	LoadDataUniqueBaseGameEntity(load_ptree);
+	LoadDataUniqueBaseSpaceEntity(load_ptree);
 	LoadDataUniqueBasePlanet(load_ptree);
 	LoadDataUniqueAsteroid(load_ptree);
 }
@@ -118,7 +118,7 @@ void Asteroid::LoadData(const boost::property_tree::ptree& load_ptree)
 void Asteroid::ResolveData()
 {
 	ResolveDataUniqueBase();
-	ResolveDataUniqueBaseGameEntity();
+	ResolveDataUniqueBaseSpaceEntity();
 	ResolveDataUniqueBasePlanet();
 	ResolveDataUniqueAsteroid();
 }	

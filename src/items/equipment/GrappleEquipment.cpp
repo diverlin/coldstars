@@ -41,7 +41,7 @@ GrappleEquipment::GrappleEquipment(int id)
 GrappleEquipment::~GrappleEquipment()
 {}
 
-bool GrappleEquipment::CheckIfTargetAlreadyExistInQueue(BaseGameEntity* target) const
+bool GrappleEquipment::CheckIfTargetAlreadyExistInQueue(BaseSpaceEntity* target) const
 {
         for (unsigned int i=0; i<target_vec.size(); i++)
         {
@@ -54,7 +54,7 @@ bool GrappleEquipment::CheckIfTargetAlreadyExistInQueue(BaseGameEntity* target) 
         return false;    
 }
 
-void GrappleEquipment::AddTarget(BaseGameEntity* target)
+void GrappleEquipment::AddTarget(BaseSpaceEntity* target)
 {
 	// avoiding dublicated items in the vector
 	if (CheckIfTargetAlreadyExistInQueue(target) == true)    
@@ -73,7 +73,7 @@ void GrappleEquipment::AddTarget(BaseGameEntity* target)
         }        
 }
 
-void GrappleEquipment::RemoveTarget(BaseGameEntity* target)
+void GrappleEquipment::RemoveTarget(BaseSpaceEntity* target)
 {
         for (unsigned int i=0; i<target_vec.size(); i++)
         {
@@ -108,7 +108,7 @@ std::string GrappleEquipment::GetTargetStr() const
         
 void GrappleEquipment::UpdateGrabScenarioProgram()
 {               
-        for (std::vector<BaseGameEntity*>::iterator it = target_vec.begin(); it != target_vec.end(); ++it)
+        for (std::vector<BaseSpaceEntity*>::iterator it = target_vec.begin(); it != target_vec.end(); ++it)
         {
         	if (item_slot->CheckTarget(*it) == true)
         	{

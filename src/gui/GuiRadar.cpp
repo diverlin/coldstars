@@ -70,12 +70,12 @@ bool GuiRadar::UpdateMouseInteraction(const MouseData& data_mouse)
      	return false;
 }
      		
-void GuiRadar::Add(BaseGameEntity* object)
+void GuiRadar::Add(BaseSpaceEntity* object)
 {
 	entity_vec.push_back(object);
 }
 
-void GuiRadar::AddIfWithinRadarRange(BaseGameEntity* object, const Vehicle& vehicle)
+void GuiRadar::AddIfWithinRadarRange(BaseSpaceEntity* object, const Vehicle& vehicle)
 {
  	if (vehicle.IsObjectWithinRadarRange(object) == true) 
        	{    	

@@ -122,14 +122,14 @@ void Planet::LoadDataUniquePlanet(const boost::property_tree::ptree& ptree)
 void Planet::ResolveDataUniquePlanet()
 {
 	BindLand((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Planet.land_id));	
-	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this, parent, data_unresolved_BasePlanet.orbit_it); 
+	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, parent, data_unresolved_BasePlanet.orbit_it); 
 }
 	
 void Planet::SaveData(boost::property_tree::ptree& save_ptree) const		
 {
 	std::string root = "planet." + int2str(GetId())+".";
 	SaveDataUniqueBase(save_ptree, root);
-	SaveDataUniqueBaseGameEntity(save_ptree, root);
+	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
 	SaveDataUniqueBasePlanet(save_ptree, root);
 	SaveDataUniquePlanet(save_ptree, root);
 }
@@ -137,7 +137,7 @@ void Planet::SaveData(boost::property_tree::ptree& save_ptree) const
 void Planet::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
-	LoadDataUniqueBaseGameEntity(load_ptree);
+	LoadDataUniqueBaseSpaceEntity(load_ptree);
 	LoadDataUniqueBasePlanet(load_ptree);
 	LoadDataUniquePlanet(load_ptree);
 }
@@ -145,7 +145,7 @@ void Planet::LoadData(const boost::property_tree::ptree& load_ptree)
 void Planet::ResolveData()
 {
 	ResolveDataUniqueBase();
-	ResolveDataUniqueBaseGameEntity();
+	ResolveDataUniqueBaseSpaceEntity();
 	ResolveDataUniqueBasePlanet();
 	ResolveDataUniquePlanet();
 }	

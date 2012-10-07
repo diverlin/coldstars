@@ -23,7 +23,7 @@
 #include "../slots/BaseSlot.hpp"
 class Turrel; 
 class BaseItem;
-class BaseGameEntity;
+class BaseSpaceEntity;
 
 class RocketEquipment; 
 class LazerEquipment; 
@@ -110,7 +110,7 @@ class ItemSlot : public BaseSlot
                 void UpdateRange(TextureOb*);
            	void DrawRange();
            	
-           	bool CheckTarget(BaseGameEntity*) const;
+           	bool CheckTarget(BaseSpaceEntity*) const;
         
         	void SelectEvent();
         	void DeselectEvent();
@@ -131,10 +131,10 @@ class ItemSlot : public BaseSlot
            	
            	int GetItemRadius() const;
            	              
-           	bool CheckAlive(BaseGameEntity*) const;
-           	bool CheckPlaceTypeId(BaseGameEntity*) const;  
-                bool CheckStarSystem(BaseGameEntity*) const;
-           	bool CheckDistance(BaseGameEntity*) const;
+           	bool CheckAlive(BaseSpaceEntity*) const;
+           	bool CheckPlaceTypeId(BaseSpaceEntity*) const;  
+                bool CheckStarSystem(BaseSpaceEntity*) const;
+           	bool CheckDistance(BaseSpaceEntity*) const;
                 
                 void SaveDataUniqueItemSlot(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueItemSlot(const boost::property_tree::ptree&);

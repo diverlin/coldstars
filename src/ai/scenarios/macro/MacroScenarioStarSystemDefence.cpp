@@ -73,7 +73,7 @@ void MacroScenarioStarSystemDefence::UpdateInStaticInSpace(Npc* npc) const
 				}
 				else
 				{
-					Task microtask(MICROSCENARIO::EXPLORATION_ID, target_vehicle->GetId());
+					Task microtask(MICROSCENARIO::EXPLORATION_ID, NONE_ID);
 					npc->GetStateMachine().SetCurrentMicroTask(microtask);
 					
 					return;

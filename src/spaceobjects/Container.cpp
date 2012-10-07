@@ -144,7 +144,7 @@ void Container::LoadDataUniqueContainer(const boost::property_tree::ptree& load_
 
 void Container::ResolveDataUniqueContainer()
 {
-	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseGameEntity.starsystem_id))->Add(this, vec2f(data_unresolved_BaseGameEntity.center.x, data_unresolved_BaseGameEntity.center.y)); 
+	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, vec2f(data_unresolved_BaseSpaceEntity.center.x, data_unresolved_BaseSpaceEntity.center.y)); 
 }		
 
 /*virtual*/
@@ -152,7 +152,7 @@ void Container::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	const std::string root = "container." + int2str(GetId()) + ".";
         SaveDataUniqueBase(save_ptree, root);
-	SaveDataUniqueBaseGameEntity(save_ptree, root);
+	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
 	SaveDataUniqueContainer(save_ptree, root);
 }
 
@@ -160,7 +160,7 @@ void Container::SaveData(boost::property_tree::ptree& save_ptree) const
 void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 {
         LoadDataUniqueBase(load_ptree);
-	LoadDataUniqueBaseGameEntity(load_ptree);
+	LoadDataUniqueBaseSpaceEntity(load_ptree);
 	LoadDataUniqueContainer(load_ptree);
 }
 	
@@ -168,6 +168,6 @@ void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 void Container::ResolveData()
 {
         ResolveDataUniqueBase();
-	ResolveDataUniqueBaseGameEntity();
+	ResolveDataUniqueBaseSpaceEntity();
 	ResolveDataUniqueContainer();
 }
