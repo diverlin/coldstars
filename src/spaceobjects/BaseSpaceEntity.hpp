@@ -71,6 +71,8 @@ class BaseSpaceEntity : public Base
 
 		BaseSpaceEntity* GetParent() const { return parent; }
 
+		void RecalculateCollisionRadius();
+
 		void MovingByExternalForce(const vec2f&, float);
 
 		virtual void Hit(int, bool);

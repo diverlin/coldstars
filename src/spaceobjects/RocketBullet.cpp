@@ -23,11 +23,17 @@
 #include "../common/EntityManager.hpp"
 #include "../resources/TextureManager.hpp"
 #include "../world/starsystem.hpp"
+#include "../builder/RocketBulletBuilder.hpp"
+#include "../resources/textureOb.hpp"
+#include "../effects/particlesystem/DriveEffect.hpp"
+#include "../render/Render.hpp"
+#include "../text/VerticalFlowText.hpp" 
+#include "../effects/particlesystem/ExplosionEffect.hpp"
 
 RocketBullet::RocketBullet(int id)
 {
 	data_id.id = id;
-	data_id.type_id    = ENTITY::VEHICLE_ID;
+	data_id.type_id    = ENTITY::BULLET_ID;
 	data_id.subtype_id = ENTITY::ROCKETBULLET_ID;
 
 	target = NULL;
@@ -35,8 +41,19 @@ RocketBullet::RocketBullet(int id)
 
 RocketBullet::~RocketBullet()
 {
-
+	delete drive_effect;
 }
+
+void RocketBullet::CreateDriveComplexTextureDependedStuff()
+{
+    	GetPoints().initMidLeftPoint();
+    	GetPoints().addMidLeftPoint();
+
+    	GetPoints().initMidFarLeftPoint();
+    	GetPoints().addMidFarLeftPoint();
+    	
+	drive_effect = GetNewDriveEffect(GetTextureOb()->size_id, GetPoints().GetpMidLeft(), GetPoints().GetpMidFarLeft());
+}    
 
 void RocketBullet::UpdateInSpace(int time, bool show_effect)
 {
@@ -83,7 +100,7 @@ bool RocketBullet::CheckTarget() const
 
 bool RocketBullet::CheckStarSystem() const
 {
-        if (target->GetStarSystem() == starsystem)
+        if (target->GetStarSystem()->GetId() == starsystem->GetId())
         {
                 return true;
         }
@@ -103,24 +120,57 @@ void RocketBullet::UpdateInfo()
 
     	info.addTitleStr("ROCKET");
     	info.addNameStr("id/ss_id:");          	info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->GetId()) );
-    	info.addNameStr("armor/max:");     	info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) );
+    	info.addNameStr("armor:");     		info.addValueStr( int2str(data_life.armor) );
     	if (target != NULL) 
     	{ 
     	info.addNameStr("target_id:");   	info.addValueStr(int2str(target->GetId())); 
 	}
 }
 
+/* virtual */
+void RocketBullet::Hit(int damage, bool show_effect)
+{
+	data_life.armor -= damage;
+
+    	if (data_life.armor < 0)
+    	{
+       		data_life.is_alive = false;
+       	}
+
+	if (show_effect == true)
+	{
+       		// improove
+       		Color4i color;  	       		
+       		VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, points.GetCenter(), color, collision_radius);
+       		starsystem->Add(text); 
+       	}
+}
+
+/* virtual */
+void RocketBullet::PostDeathUniqueEvent(bool show_effect)  
+{
+	if (show_effect == true)
+     	{
+        	createExplosion(starsystem, points.GetCenter(), textureOb->size_id);        		
+        }
+}
 
 void RocketBullet::UpdateRenderStuff()
 {
 	//points.update();
 }
 
-
 void RocketBullet::RenderInSpace() const
 {
-	RenderKorpus();
-	RenderDriveEffect();
+    	drawFlatQuadPerVertexIn2D(textureOb,
+    				  points.GetBottomLeft(), 
+                                  points.GetBottomRight(), 
+                                  points.GetTopRight(), 
+                                  points.GetTopLeft(), 
+				  points.GetPosZ());
+				  
+	drive_effect->Update();
+	drive_effect->Render(0.0f);
 }
 
 
@@ -131,7 +181,6 @@ void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree) const
 	const std::string root = "rocketbullet."+int2str(data_id.id)+".";
         SaveDataUniqueBase(save_ptree, root);
 	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
-	SaveDataUniqueVehicle(save_ptree, root);
 	SaveDataUniqueRocketBullet(save_ptree, root);
 }
 
@@ -140,7 +189,6 @@ void RocketBullet::LoadData(const boost::property_tree::ptree& load_ptree)
 {
         LoadDataUniqueBase(load_ptree);
 	LoadDataUniqueBaseSpaceEntity(load_ptree);
-	LoadDataUniqueVehicle(load_ptree);
 	LoadDataUniqueRocketBullet(load_ptree);
 }
 
@@ -149,7 +197,6 @@ void RocketBullet::ResolveData()
 {
         ResolveDataUniqueBase();
 	ResolveDataUniqueBaseSpaceEntity();
-	ResolveDataUniqueVehicle();
 	ResolveDataUniqueRocketBullet();
 }
 
@@ -167,16 +214,21 @@ void RocketBullet::LoadDataUniqueRocketBullet(const boost::property_tree::ptree&
 {
         speed = load_ptree.get<float>("speed");  
         owner_id = load_ptree.get<int>("owner_id");  
-        unresolved_target_id = load_ptree.get<int>("target_id");  
+        unresolved_RocketBullet_target_id = load_ptree.get<int>("target_id");  
         
         data_bullet.LoadData(load_ptree.get_child("data_bullet"));
 }
 
 void RocketBullet::ResolveDataUniqueRocketBullet()
-{                       
-        if (unresolved_target_id != NONE_ID)
+{           
+       	RocketBulletBuilder::Instance().CreateKorpusGeometry(this);
+        CreateDriveComplexTextureDependedStuff();
+                    
+        if (unresolved_RocketBullet_target_id != NONE_ID)
         {
-        	target = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(unresolved_target_id);
+        	target = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(unresolved_RocketBullet_target_id);
         }
+        
+        ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddBullet(this, data_unresolved_BaseSpaceEntity.center, data_unresolved_BaseSpaceEntity.angle); 
 }
 

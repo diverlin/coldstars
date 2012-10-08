@@ -22,6 +22,7 @@
 #include "../common/Logger.hpp"
 #include "../common/rand.hpp"
 #include "../resources/TextureManager.hpp"
+#include "../resources/textureOb.hpp"
 
 RocketBulletBuilder& RocketBulletBuilder::Instance()
 {	
@@ -65,4 +66,12 @@ void RocketBulletBuilder::CreateNewInternals(const BulletData& data_bullet)
         CreateKorpusGeometry(rocket);
 
 	rocket->CreateDriveComplexTextureDependedStuff();       
+}
+
+void RocketBulletBuilder::CreateKorpusGeometry(RocketBullet* rocket) const
+{
+	rocket->RecalculateCollisionRadius();
+
+    	rocket->GetPoints().initMainQuadPoints(rocket->GetTextureOb()->GetFrameWidth(), rocket->GetTextureOb()->GetFrameHeight());
+    	rocket->GetPoints().addMainQuadPoints();
 }

@@ -61,7 +61,7 @@ StarSystem* Galaxy::GetRandomStarSystem(int condition_id)
 		{
 			if (STARSYSTEM_vec[i]->GetConditionId() == condition_id)
 			{
-			ss_vec.push_back(STARSYSTEM_vec[i]);
+				ss_vec.push_back(STARSYSTEM_vec[i]);
 			}
 		}
 	
@@ -71,7 +71,7 @@ StarSystem* Galaxy::GetRandomStarSystem(int condition_id)
      		
 void Galaxy::Update(int time)
 {
-	for (unsigned int i = 0; i < STARSYSTEM_vec.size(); i++)
+	for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
      	{
 		STARSYSTEM_vec[i]->Update(time, true); 
      	}

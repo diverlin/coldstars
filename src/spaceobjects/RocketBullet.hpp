@@ -20,10 +20,11 @@
 #ifndef ROCKETBULLET_H
 #define ROCKETBULLET_H
 
-#include "../spaceobjects/Vehicle.hpp"
+#include "../spaceobjects/BaseSpaceEntity.hpp"
 #include "../common/BulletData.hpp"
+class DriveEffect;
 
-class RocketBullet : public Vehicle
+class RocketBullet : public BaseSpaceEntity
 {
         public:
                 RocketBullet(int);
@@ -38,9 +39,13 @@ class RocketBullet : public Vehicle
         	int GetDamage() const { return data_bullet.damage; };
 		unsigned int GetOwnerId() const { return owner_id; };
         
+        	void CreateDriveComplexTextureDependedStuff();
                 void UpdateInSpace(int, bool);
 
 		void CollisionEvent(bool);
+
+		virtual void Hit(int, bool);
+		virtual void PostDeathUniqueEvent(bool);  
 
              	void UpdateRenderStuff();
                 void RenderInSpace() const;
@@ -58,13 +63,14 @@ class RocketBullet : public Vehicle
                 BaseSpaceEntity* target;
 
                 BulletData data_bullet;
+                DriveEffect* drive_effect;
                                 
                 virtual void UpdateInfo(); 
                 
                 bool CheckTarget() const;
                 bool CheckStarSystem() const;     
 
-                int unresolved_target_id;              
+                int unresolved_RocketBullet_target_id;              
                 void SaveDataUniqueRocketBullet(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueRocketBullet(const boost::property_tree::ptree&);
 		void ResolveDataUniqueRocketBullet();

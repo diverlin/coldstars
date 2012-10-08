@@ -126,8 +126,6 @@ class Vehicle : public BaseSpaceEntity
         	        	
         	void RenderRadarRange();
         	void RenderGrappleRange();        
-        	
-        	void RecalculateCollisionRadius();
 
 		bool IsArmorFull() const;
 		int GetArmorMiss() const;

@@ -20,11 +20,10 @@
 #ifndef ROCKETBULLETBUILDER_H
 #define ROCKETBULLETBUILDER_H
 
-#include "BaseVehicleBuilder.hpp"
 #include "../spaceobjects/RocketBullet.hpp"
 #include "../common/constants.hpp"
 
-class RocketBulletBuilder : public BaseVehicleBuilder
+class RocketBulletBuilder
 {
 	public:
 		static RocketBulletBuilder& Instance();
@@ -33,7 +32,9 @@ class RocketBulletBuilder : public BaseVehicleBuilder
 		void CreateNewRocket(int id = NONE_ID);							
 		void CreateNewInternals(const BulletData&);   
 		RocketBullet* GetRocket() const { return rocket; };         
-       
+
+        	void CreateKorpusGeometry(RocketBullet*) const;
+        	       
         private:
         	RocketBulletBuilder():rocket(NULL) {};   	
         	RocketBulletBuilder(const RocketBulletBuilder&) = delete; 
