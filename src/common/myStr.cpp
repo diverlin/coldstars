@@ -36,6 +36,20 @@ std::string bool2str(bool var)
     	return stm.str() ;
 }
 
+std::string getSpecialActionStr(int id)
+{
+	switch(id)
+	{
+		case SPECIAL_ACTION::INITIATE_DOCKING_ID: 	{ return "INITIATE_DOCKING_ID"; break; }
+		case SPECIAL_ACTION::INITIATE_LAUNCHING_ID:	{ return "INITIATE_LAUNCHING_ID"; break; }
+		case SPECIAL_ACTION::INITIATE_JUMPIN_ID:	{ return "INITIATE_JUMPIN_ID"; break; }
+		case SPECIAL_ACTION::INITIATE_JUMPOUT_ID:	{ return "INITIATE_JUMPOUT_ID"; break; }
+		case NONE_ID:					{ return "NONE_ID"; break; }
+						
+		default:			{ return "UKNOWN ID"; break; }		
+	}
+}
+
 std::string getAiModelStr(int id)
 {
 	switch(id)
@@ -110,8 +124,8 @@ std::string getEntityStr(int type_id)
 		case ENTITY::PLAYER_ID: 		{ return "PLAYER_ID"; break; }
 		case ENTITY::KOSMOPORT_ID: 		{ return "KOSMOPORT_ID"; break; }
 		case ENTITY::LAND_ID: 			{ return "LAND_ID"; break; }
-		case ENTITY::PLACE_SPACE_ID: 		{ return "PLACE_SPACE_ID"; break; }
-		case ENTITY::PLACE_HYPER_ID: 		{ return "PLACE_HYPER_ID"; break; }
+		case ENTITY::SPACE_ID: 		{ return "SPACE_ID"; break; }
+		case ENTITY::HYPER_SPACE_ID: 		{ return "HYPER_SPACE_ID"; break; }
 		case ENTITY::GOVERMENT_ID: 		{ return "GOVERMENT_ID"; break; }
 		case ENTITY::STORE_ID: 		{ return "STORE_ID"; break; }
 		case ENTITY::SHOP_ID: 			{ return "SHOP_ID"; break; }

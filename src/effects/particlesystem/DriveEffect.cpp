@@ -24,7 +24,7 @@
 #include "../../resources/TextureManager.hpp"
 
 DriveEffect::DriveEffect(vec2f* pTo_start_pos, 
-			    vec2f* pTo_target_pos)
+			 vec2f* pTo_target_pos)
 {
     	this->pTo_start_pos  = pTo_start_pos;      //ob.points.midLeft
      	this->pTo_target_pos = pTo_target_pos;     //ob.points.midFarLeft

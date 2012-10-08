@@ -194,21 +194,34 @@ void Player::AddIfVisible(VerticalFlowText* effect)
 
 void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 {
-	int action_id = npc->GetVehicle()->GetSpecialActionId();	
-	if ( (action_id == SPECIAL_ACTION::INITIATE_LAUNCHING_ID) or (action_id == SPECIAL_ACTION::INITIATE_JUMPOUT_ID) )
+	int action_id = npc->GetVehicle()->GetSpecialActionId();
+	if (action_id == SPECIAL_ACTION::INITIATE_JUMPOUT_ID)
 	{
-		if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::PLACE_SPACE_ID)
+		if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::HYPER_SPACE_ID)
 		{
+			Screen::Instance().SetCenterGlobalCoord(npc->GetVehicle()->GetPoints().GetCenter());
 			if (turn_timer.GetTurnEnded() == true)
 			{
-				Screen::Instance().SetCenterGlobalCoord(npc->GetVehicle()->GetPoints().GetCenter());
 				turn_timer.NextTurn();				
 			}
 		}
 	}
 
+	if (action_id == SPECIAL_ACTION::INITIATE_LAUNCHING_ID)
+	{
+		if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::SPACE_ID)
+		{
+			Screen::Instance().SetCenterGlobalCoord(npc->GetVehicle()->GetPoints().GetCenter());
+			if (turn_timer.GetTurnEnded() == true)
+			{
+				turn_timer.NextTurn();				
+			}
+		}
+	}
+	
 	if (action_id == SPECIAL_ACTION::INITIATE_DOCKING_ID)
 	{
+		Screen::Instance().SetCenterGlobalCoord(npc->GetVehicle()->GetPoints().GetCenter());
 		if (turn_timer.GetTurnEnded() == true)
 		{
 			turn_timer.NextTurn();				
@@ -926,8 +939,8 @@ void Player::RunSession(const TurnTimer& turn_timer)
 	
        	switch(npc->GetVehicle()->GetPlaceTypeId())
        	{
-       		case ENTITY::PLACE_SPACE_ID: 	{ SessionInSpace(npc->GetVehicle()->GetStarSystem(), turn_timer); break; }
-       		case ENTITY::PLACE_HYPER_ID: 	{ SessionInSpace((StarSystem*)npc->GetVehicle()->GetDriveComplex().GetTarget(), turn_timer); break; }
+       		case ENTITY::SPACE_ID: 		{ SessionInSpace(npc->GetVehicle()->GetStarSystem(), turn_timer); break; }
+       		case ENTITY::HYPER_SPACE_ID: 	{ SessionInSpace((StarSystem*)npc->GetVehicle()->GetDriveComplex().GetTarget(), turn_timer); break; }
        		case ENTITY::KOSMOPORT_ID:  	{ SessionInKosmoport(); break; }
        	}        	
        	

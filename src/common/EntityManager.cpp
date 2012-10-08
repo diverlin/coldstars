@@ -207,7 +207,7 @@ void EntityManager::LoadPass0()
 		}
 	}
 
-	if (load_ptree.get_child_optional("asteroids"))
+	if (load_ptree.get_child_optional("asteroid"))
 	{
 		Logger::Instance().Log("loading asteroids...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("asteroid"))

@@ -348,7 +348,7 @@ bool ItemSlot::CheckAlive(BaseSpaceEntity* _target) const
 
 bool ItemSlot::CheckPlaceTypeId(BaseSpaceEntity* _target) const  
 {
-	return (_target->GetPlaceTypeId() == ENTITY::PLACE_SPACE_ID);
+	return (_target->GetPlaceTypeId() == ENTITY::SPACE_ID);
 }           	
 
 bool ItemSlot::CheckStarSystem(BaseSpaceEntity* _target) const

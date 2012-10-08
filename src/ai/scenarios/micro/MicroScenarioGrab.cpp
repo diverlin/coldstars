@@ -49,7 +49,7 @@ void MicroScenarioGrab::Enter(Npc* npc) const
 /* virtual */
 bool MicroScenarioGrab::Validate(Npc* npc) const
 {
-	if (npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetPlaceTypeId() == ENTITY::PLACE_SPACE_ID)
+	if (npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetPlaceTypeId() == ENTITY::SPACE_ID)
 	{
 		return true;
 	}

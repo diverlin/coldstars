@@ -134,7 +134,7 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
      								
 	switch(player->GetNpc()->GetVehicle()->GetPlaceTypeId())
 	{
-		case ENTITY::PLACE_SPACE_ID:
+		case ENTITY::SPACE_ID:
 		{
                         Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget(); 
                             

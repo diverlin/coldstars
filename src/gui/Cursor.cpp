@@ -68,17 +68,20 @@ void Cursor::RenderFocusedSpaceObjectStuff()
 	{
 		switch(focused_space_ob->GetTypeId())
 		{
+			case ENTITY::BULLET_ID:
+			{
+				case ENTITY::ROCKETBULLET_ID:
+				{
+					((RocketBullet*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+						
+					break;
+				}
+			}
+			
 			case ENTITY::VEHICLE_ID:
 			{
 				switch(focused_space_ob->GetSubTypeId())
 				{
-					case ENTITY::ROCKETBULLET_ID:
-					{
-						((RocketBullet*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
-						
-						break;
-					}
-
 					case ENTITY::SATELLITE_ID:
 					{
 						Satellite* satellite = (Satellite*)focused_space_ob;

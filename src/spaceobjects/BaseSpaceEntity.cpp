@@ -51,6 +51,10 @@ BaseSpaceEntity::~BaseSpaceEntity()
 	#endif
 }
 
+void BaseSpaceEntity::RecalculateCollisionRadius()
+{
+	collision_radius = (textureOb->GetFrameWidth() + textureOb->GetFrameHeight())/3;
+}
 
 void BaseSpaceEntity::UpdateRotation()
 {
@@ -135,7 +139,10 @@ void BaseSpaceEntity::SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree&
 
 	save_ptree.put(root+"mass", mass);
 	save_ptree.put(root+"scale", scale);	
-	
+
+	save_ptree.put(root+"d_pos.x", d_pos.x);
+	save_ptree.put(root+"d_pos.y", d_pos.y);	
+		
 	if (mesh) save_ptree.put(root+"data_unresolved_BaseSpaceEntity.mesh_type_id", mesh->type_id);
 	else      save_ptree.put(root+"data_unresolved_BaseSpaceEntity.mesh_type_id", NONE_ID);
 	
@@ -176,6 +183,8 @@ void BaseSpaceEntity::LoadDataUniqueBaseSpaceEntity(const boost::property_tree::
 	
 	place_type_id = load_ptree.get<int>("place_type_id");	
 
+	d_pos.x = load_ptree.get<float>("d_pos.x");
+	d_pos.y = load_ptree.get<float>("d_pos.y");
 
 	data_unresolved_BaseSpaceEntity.mesh_type_id = load_ptree.get<int>("data_unresolved_BaseSpaceEntity.mesh_type_id");
 	data_unresolved_BaseSpaceEntity.textureOb_path = load_ptree.get<std::string>("data_unresolved_BaseSpaceEntity.textureOb_path");

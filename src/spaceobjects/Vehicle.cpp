@@ -63,7 +63,7 @@ Vehicle::Vehicle()
 {
 	god_mode = false;
 	
-	special_action_id = SPECIAL_ACTION::NONE_ID;
+	special_action_id = NONE_ID;
 	
 	owner_npc = NULL;
        	starsystem = NULL; 
@@ -289,15 +289,10 @@ bool Vehicle::IsObjectWithinRadarRange(BaseSpaceEntity* object) const
         
         return false;
 }	
-	
-void Vehicle::RecalculateCollisionRadius()
-{
-	collision_radius = (textureOb->GetFrameWidth() + textureOb->GetFrameHeight())/3;
-}
 
 void Vehicle::UpdateSpecialAction()
 {
-	if (special_action_id != SPECIAL_ACTION::NONE_ID)
+	if (special_action_id != NONE_ID)
 	{
 		switch(special_action_id)
 		{
@@ -306,7 +301,7 @@ void Vehicle::UpdateSpecialAction()
 				if (UpdateFadeInEffect() == true)
 				{
 					DockingEvent();
-					special_action_id = SPECIAL_ACTION::NONE_ID;
+					special_action_id = NONE_ID;
 				}
 				
 				break;			
@@ -316,7 +311,7 @@ void Vehicle::UpdateSpecialAction()
 			{
 				if (UpdateFadeOutEffect() == true)
 				{
-					special_action_id = SPECIAL_ACTION::NONE_ID;
+					special_action_id = NONE_ID;
 				}
 				
 				break;
@@ -337,7 +332,7 @@ void Vehicle::UpdateSpecialAction()
 			{
 				if (UpdateFadeOutEffect() == true)
 				{
-			                special_action_id = SPECIAL_ACTION::NONE_ID;
+			                special_action_id = NONE_ID;
 			        }
 			
 				break;
@@ -1032,7 +1027,7 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
        		save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); 
        	}  	
 
-       	if (place_type_id == ENTITY::PLACE_HYPER_ID) 
+       	if (place_type_id == ENTITY::HYPER_SPACE_ID) 
        	{ 
        		save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", drive_complex.GetTarget()->GetId()); 
        	}
@@ -1090,7 +1085,7 @@ void Vehicle::ResolveDataUniqueVehicle()
 
         switch(place_type_id)
         {
-        	case ENTITY::PLACE_SPACE_ID: 
+        	case ENTITY::SPACE_ID: 
         	{
 			((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddVehicle(this, data_unresolved_BaseSpaceEntity.center, data_unresolved_BaseSpaceEntity.angle, parent); 
 			break;
@@ -1102,7 +1097,7 @@ void Vehicle::ResolveDataUniqueVehicle()
 			break;
 		}
 		
-		case ENTITY::PLACE_HYPER_ID:
+		case ENTITY::HYPER_SPACE_ID:
 		{
 			//std::cout<<"xxx="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
 			((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.starsystem_hyper_id))->GetHyperSpace().AddVehicle(this);
@@ -1110,9 +1105,6 @@ void Vehicle::ResolveDataUniqueVehicle()
 		}
 	}
 	
-	if (data_id.subtype_id != ENTITY::ROCKETBULLET_ID)
-        {
-		weapon_complex.PrepareWeapons();
-	}
+	weapon_complex.PrepareWeapons();
 }
                 
