@@ -97,7 +97,7 @@ class DriveComplex
                 void CalcDirectPath();
                 bool ValidateTarget() const;
 	
-	        bool UpdateTargetCoord();
+	        void UpdateDynamicTargetCoord();
 
 		void DefineDistance(int);
 };

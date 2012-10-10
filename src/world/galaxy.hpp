@@ -30,7 +30,7 @@ class Galaxy : public Base
      		Galaxy(int);
      		~Galaxy();
                 
-     		void Add(StarSystem*);
+     		void Add(StarSystem*, const vec2f&);
      		
      		StarSystem* GetRandomStarSystem(int condition_id = NONE_ID);
      		     

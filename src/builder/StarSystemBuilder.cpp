@@ -33,8 +33,6 @@
 
 #include "../world/starsystem.hpp"
 
-#include "../config/config.hpp"
-
 #include "../effects/DistantNebulaEffect.hpp"
 #include "../effects/DistantStarEffect.hpp"
 
@@ -68,10 +66,6 @@ void StarSystemBuilder::CreateNewStarSystem(int id)
         	
 void StarSystemBuilder::CreateNewInternals()
 {
-        vec2f center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH -  2*GUI::MAP::BORDER_X), 
-        	     getRandInt(GUI::MAP::BORDER_Y, Config::Instance().SCREEN_HEIGHT - 2*GUI::MAP::BORDER_Y) );			 
-        starsystem->GetPoints().SetCenter(center);
-
         this->CreateStar();
         
         int distNebula_num = getRandInt(6,8);
@@ -106,10 +100,6 @@ void StarSystemBuilder::CreateNewInternals()
   	
 void StarSystemBuilder::CreateNewInternals_TEST()
 {
-        vec2f center(getRandInt(GUI::MAP::BORDER_X, Config::Instance().SCREEN_WIDTH -  2*GUI::MAP::BORDER_X), 
-        	     getRandInt(GUI::MAP::BORDER_Y, Config::Instance().SCREEN_HEIGHT - 2*GUI::MAP::BORDER_Y) );			 
-        starsystem->GetPoints().SetCenter(center);
-
         this->CreateStar();
         
         int distNebula_num = getRandInt(4,7);
@@ -127,13 +117,13 @@ void StarSystemBuilder::CreateNewInternals_TEST()
 
 void StarSystemBuilder::CreateBackground(int distNebula_num, int distStar_num, int color_id)
 {
-        for(int i = 0; i < distNebula_num; i++)
+        for(int i=0; i<distNebula_num; i++)
         { 
 		DistantNebulaEffect* dn = GetNewDistantNebulaEffect(-1);
                 starsystem->Add(dn);
         } 
 
-        for(int i = 0; i < distStar_num; i++)
+        for(int i=0; i<distStar_num; i++)
         { 
 		DistantStarEffect* ds = GetNewDistantStarEffect();
                 starsystem->Add(ds);

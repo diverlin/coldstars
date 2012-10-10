@@ -46,17 +46,22 @@ class Rect
       		      		
 		const vec2f& GetCenter() const     { return center; }
 		const vec2f& GetBottomLeft() const { return bottomLeft; }
+		const vec2f& GetTopRight() const { return topRight; }
 		int GetWidth() const 	    { return w; }
 		int GetHeight() const 	    { return h; }  
       
       		void SetSize(int, int);
+      		void MovingBy(const vec2f&);
       		      		
       	private:
       		vec2f bottomLeft;    
       		vec2f center;  
+      		vec2f topRight;
+      		
       		int w, h;
 
       		void UpdateCenter();
+      		void UpdateTopRight();
 };
 
 

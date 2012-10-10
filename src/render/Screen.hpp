@@ -8,7 +8,7 @@
 #include "../common/myVector.hpp"
 #include "../render/Fbo.hpp"
 #include "../render/Bloom.hpp"
-
+#include "../common/rect.hpp"
 
 
 class Screen:private sf::NonCopyable
@@ -18,15 +18,13 @@ class Screen:private sf::NonCopyable
         	void InitBasic(int width, int height, int bpp, bool vert_sync, const std::string&);
       		void InitPostEffects(int, int);
       		      		        	         		
-	 	void SetBottomLeftGlobalCoord(const vec2f& bottomLeft_globalCoord) { this->bottomLeft_globalCoord = bottomLeft_globalCoord; UpdateTopRightGlobalCoord(); }; 
-	 	void SetCenterGlobalCoord(const vec2f& center_globalCoord);
-        
+	 	void SetBottomLeftGlobalCoord(const vec2f& bottomLeft_globalCoord) { rect.SetBottomLeft(bottomLeft_globalCoord); }; 
+	 	void SetCenterGlobalCoord(const vec2f& center_globalCoord) { rect.SetCenter(center_globalCoord); };        
                 
               	sf::RenderWindow& GetWindow() { return render_window; };
       		sf::Font& GetFont() { return font; };      			
        	     	
-        	const vec2f& GetTopRightGlobalCoord()   const { return topRight_globalCoord; };
-        	const vec2f& GetBottomLeftGlobalCoord() const { return bottomLeft_globalCoord; };
+        	const Rect& GetRect()   const { return rect; };
         	     			
         	Fbo& GetFbo0() { return fbo0; };
 		Fbo& GetFbo1() { return fbo1; };
@@ -64,12 +62,13 @@ class Screen:private sf::NonCopyable
 
 		BloomEffect bloom;
       		
-      		vec2f topRight_globalCoord;
-      		vec2f bottomLeft_globalCoord;
-
+      		Rect rect;
+      		vec2f target_center;
+      				
       		void ResizePostEffects(int, int);
       		
 		void UpdateTopRightGlobalCoord();
+		void UpdateTargetCenter();
 		
       		void DrawFps();
 };

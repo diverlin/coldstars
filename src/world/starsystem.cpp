@@ -883,13 +883,11 @@ void StarSystem::LoadDataUniqueStarSystem(const boost::property_tree::ptree& loa
                 	Add(ds);
 		}
 	}
-	
-	points.SetCenter(data_unresolved_BaseSpaceEntity.center);
 }
 
 void StarSystem::ResolveDataUniqueStarSystem()
 {
-	((Galaxy*)EntityManager::Instance().GetEntityById(data_unresolved_StarSystem.galaxy_id))->Add(this);
+	((Galaxy*)EntityManager::Instance().GetEntityById(data_unresolved_StarSystem.galaxy_id))->Add(this, data_unresolved_BaseSpaceEntity.center);
 }
 
 void StarSystem::SaveData(boost::property_tree::ptree& save_ptree) const

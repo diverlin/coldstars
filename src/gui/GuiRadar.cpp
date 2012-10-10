@@ -52,7 +52,7 @@ void GuiRadar::Reset()
     
 void GuiRadar::Update()
 {
-	screenrect.Set(rect.GetCenter() + Screen::Instance().GetBottomLeftGlobalCoord() * scale, (int)(Screen::Instance().GetWindow().GetWidth() * scale), (int)(Screen::Instance().GetWindow().GetWidth() * scale));
+	screenrect.Set(rect.GetCenter() + Screen::Instance().GetRect().GetBottomLeft() * scale, (int)(Screen::Instance().GetWindow().GetWidth() * scale), (int)(Screen::Instance().GetWindow().GetWidth() * scale));
 }
 
 bool GuiRadar::UpdateMouseInteraction(const MouseData& data_mouse)

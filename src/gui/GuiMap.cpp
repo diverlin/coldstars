@@ -41,6 +41,7 @@ GuiMap::GuiMap()
     		 (Config::Instance().SCREEN_HEIGHT - 2 * GUI::MAP::BORDER_X));
     			
     	texOb_background = GuiTextureObCollector::Instance().text_background;
+    	scale = 2*Config::Instance().SCREEN_WIDTH/(float)ENTITY::GALAXY::PARSEC;
 }
 
 GuiMap::~GuiMap()
@@ -54,7 +55,7 @@ bool GuiMap::UpdateMouseInteraction(const MouseData& data_mouse, Galaxy* galaxy)
         	{
             		//if (STARSYSTEM_pList[si]->id != pTo_PLAYER->pTo_starsystem->id)
             		{
-                		float ss_cursor_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter(), data_mouse.mx, data_mouse.my);
+                		float ss_cursor_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter()*scale, data_mouse.mx, data_mouse.my);
                 		if (ss_cursor_dist < 10)
                 		{ 
                    			int ss_ss_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter(), player->GetNpc()->GetStarSystem()->GetPoints().GetCenter() );
@@ -89,28 +90,28 @@ bool GuiMap::UpdateMouseInteraction(const MouseData& data_mouse, Galaxy* galaxy)
 
 void GuiMap::Render(Galaxy* galaxy)
 {
-	drawTexturedRect(texOb_background, rect, -1);
+	drawTexturedRect(texOb_background, rect, -1.0);
     	
     	enable_POINTSPRITE();
     		
-    	for (unsigned int i = 0; i < galaxy->STARSYSTEM_vec.size(); i++)
+    	for (unsigned int i=0; i<galaxy->STARSYSTEM_vec.size(); i++)
     	{   		
         	TextureOb* texOb_particle = TextureManager::Instance().GetTexObByColorId(TEXTURE::DISTANTSTAR_ID, galaxy->STARSYSTEM_vec[i]->STAR_vec[0]->GetColorId()); 
                                       
-        	drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter(), 30.0, -2.0);
+        	drawTexturedPoint(texOb_particle->texture, galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter()*scale, 30.0, -2.0);
               
        		if (galaxy->STARSYSTEM_vec[i]->GetConquerorRaceId() != NONE_ID)
        		{
-       			drawTexturedPoint(GuiTextureObCollector::Instance().starsystem_mark_captured->texture, galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter(), 20.0, -2.0);
+       			drawTexturedPoint(GuiTextureObCollector::Instance().starsystem_mark_captured->texture, galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter()*scale, 20.0, -2.0);
       		}
 
        		if (galaxy->STARSYSTEM_vec[i]->GetConditionId() == ENTITY::STARSYSTEM::CONDITION::WAR_ID)
         	{
-        		drawTexturedPoint(GuiTextureObCollector::Instance().starsystem_mark_war->texture, galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter()+vec2f(0.0,-13.0), 20.0, -2.0);
+        		drawTexturedPoint(GuiTextureObCollector::Instance().starsystem_mark_war->texture, galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter()*scale + vec2f(0.0,-13.0), 20.0, -2.0);
         	}        		
            	
     	}	 
-        drawTexturedPoint(GuiTextureObCollector::Instance().starsystem_mark_player->texture, player->GetNpc()->GetStarSystem()->GetPoints().GetCenter(), 40.0, -2.0);
+        drawTexturedPoint(GuiTextureObCollector::Instance().starsystem_mark_player->texture, player->GetNpc()->GetStarSystem()->GetPoints().GetCenter()*scale, 40.0, -2.0);
 
     	//if self.GL_LIST_range_ID != None:
        		//glCallList(self.GL_LIST_range_ID)
@@ -122,8 +123,8 @@ void GuiMap::Render(Galaxy* galaxy)
     	{
 		drawSimpleText(int2str(galaxy->STARSYSTEM_vec[i]->GetId()), 
         	       	      	       font_size, 
-        	       	       	       galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter().x - 20, 
-        	       	       	       galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter().y - 20);
+        	       	       	       galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter().x*scale - 20, 
+        	       	       	       galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter().y*scale - 20);
    	} 
 }
 

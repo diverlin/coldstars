@@ -55,13 +55,11 @@ void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
     	if (textureOb_korpus->GetFrameWidth() > textureOb_korpus->GetFrameHeight())
     	{
         	kontur_w = 500; 
-    		vehicle->GetKorpusData().gui_scale = (float)kontur_w/textureOb_korpus->GetFrameWidth();
         	kontur_h = textureOb_korpus->GetFrameHeight() * kontur_w / (float)textureOb_korpus->GetFrameWidth();
     	}
     	else
     	{
         	kontur_h = 500; 
-    		vehicle->GetKorpusData().gui_scale = (float)kontur_h/textureOb_korpus->GetFrameHeight();
         	kontur_w = textureOb_korpus->GetFrameWidth() * kontur_h / (float)textureOb_korpus->GetFrameHeight();
     	}               
 

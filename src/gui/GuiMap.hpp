@@ -32,6 +32,8 @@ class GuiMap : public BaseGui
      		void Render(Galaxy*);
 
      	private:
+     		float scale;
+     		
      		Rect rect;
      		
      		TextureOb* texOb_background;

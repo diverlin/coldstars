@@ -24,10 +24,11 @@
 
 #include "../common/myVector.hpp"
 #include "../common/Collision.hpp"
-
 #include "../common/constants.hpp"
 #include "../common/Logger.hpp"
 #include "../common/myStr.hpp"
+
+#include "../world/starsystem.hpp"
 
 DriveComplex::DriveComplex()
 {      
@@ -89,17 +90,24 @@ void DriveComplex::SetStaticTargetCoords(const vec2f& target_pos)
     	
        	UpdatePath();
 }      
-    
-    
-          		
+         		
 void DriveComplex::SetTarget(BaseSpaceEntity* target, int _action_id)
 {
     	ResetTarget();
 
 	this->target = target;    
 	
-	DefineDistance(_action_id);
-	
+	if (target->GetTypeId() == ENTITY::STARSYSTEM_ID)
+	{
+		float angleInD = 90-getAngleInD(target->GetPoints().GetCenter(), owner_vehicle->GetStarSystem()->GetPoints().GetCenter()); //??
+	    	target_pos = getVec2f(ENTITY::STARSYSTEM::JUMPRADIUS, angleInD);
+		target_distance = COLLISION_RADIUS_FOR_STATIC_COORD;     		
+	}
+	else
+	{
+		DefineDistance(_action_id);	
+	}
+
 	UpdatePath();
 	
 	#if DRIVECOMPLEX_LOG_ENABLED == 1 
@@ -163,7 +171,7 @@ void DriveComplex::UpdatePath()
 	{
 		if (ValidateTarget() == true)
 		{
-			UpdateTargetCoord();
+			UpdateDynamicTargetCoord();
 		}
 		else
 		{
@@ -188,39 +196,32 @@ bool DriveComplex::ValidateTarget() const
 
 
 
-bool DriveComplex::UpdateTargetCoord()
+void DriveComplex::UpdateDynamicTargetCoord()
 {		
 	switch(target->GetTypeId())
 	{
-    		case ENTITY::STARSYSTEM_ID:
-    		{
-    	 	    	target_pos = vec2f(800, 800);  // get correct coords
-    			target_distance = 200;  // ??      		
-        		return false; break;        			
-		}
-
     		case ENTITY::PLANET_ID:
     		{ 
         		target_pos = ((Planet*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;         	
-		       	return true; break;		       	
+		       	break;		       	
     		} 
 
     		case ENTITY::ASTEROID_ID:
     		{ 
         		target_pos = ((Asteroid*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;         	
-        		return true; break;
+        		break;
     		} 
     	     
     		case ENTITY::VEHICLE_ID:
     		{ 
 			target_pos = target->GetPoints().GetCenter() + target_offset;  
-        		return true; break;    
+        		break;    
     		}
 
     		case ENTITY::CONTAINER_ID:
     		{ 
 			target_pos = target->GetPoints().GetCenter() + target_offset;  
-        		return true; break;    
+        		break;    
     		}
     	}
 }
@@ -376,7 +377,7 @@ void DriveComplex::CalcDirectPath()
        		for (unsigned int i=0; i<it; i++)
        		{
             		new_pos += vstep;
-            		float angleInD = atan2(target_pos.y - new_pos.y, target_pos.x - new_pos.x) * RADIAN_TO_DEGREE_RATE;
+            		float angleInD = getAngleInD(target_pos, new_pos);
 
             		path_center_vec.push_back(new_pos);
             		angle_inD_vec.push_back(angleInD);
