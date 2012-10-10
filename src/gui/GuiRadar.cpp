@@ -62,7 +62,7 @@ bool GuiRadar::UpdateMouseInteraction(const MouseData& data_mouse)
         	if (data_mouse.left_press == true)
            	{
            		vec2f new_global_coord( (data_mouse.mx - rect.GetCenter().x - screenrect.GetWidth()/2)/scale, (data_mouse.my - rect.GetCenter().y - screenrect.GetHeight()/2)/scale);
-           		Screen::Instance().SetBottomLeftGlobalCoord(new_global_coord);
+           		Screen::Instance().GetRect().SetBottomLeft(new_global_coord);
        			return true;
         	}
      	}

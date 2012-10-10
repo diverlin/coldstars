@@ -199,9 +199,9 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 	{
 		if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::HYPER_SPACE_ID)
 		{
-			Screen::Instance().SetCenterGlobalCoord(npc->GetVehicle()->GetPoints().GetCenter());
 			if (turn_timer.GetTurnEnded() == true)
 			{
+				//Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenter());
 				turn_timer.NextTurn();				
 			}
 		}
@@ -211,9 +211,9 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 	{
 		if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::SPACE_ID)
 		{
-			Screen::Instance().SetCenterGlobalCoord(npc->GetVehicle()->GetPoints().GetCenter());
 			if (turn_timer.GetTurnEnded() == true)
 			{
+				Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenter());
 				turn_timer.NextTurn();				
 			}
 		}
@@ -221,13 +221,12 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 	
 	if (action_id == SPECIAL_ACTION::INITIATE_DOCKING_ID)
 	{
-		Screen::Instance().SetCenterGlobalCoord(npc->GetVehicle()->GetPoints().GetCenter());
 		if (turn_timer.GetTurnEnded() == true)
 		{
+			Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenter());
 			turn_timer.NextTurn();				
 		}
-	}	
-	
+	}		
 }
      		
 void Player::RenderInSpace_NEW(StarSystem* starsystem)
@@ -906,6 +905,8 @@ bool Player::IsObjectOnScreen(const vec2f& ob_center, float sizeInPixels) const
 
 void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 {	
+	Screen::Instance().UpdateInSpace();
+
 	starsystem->FindRenderVisibleEntities_c(this);
 	if (getRandInt(1,5) == 1)
 	{
@@ -989,6 +990,6 @@ void Player::LoadDataUniquePlayer(const boost::property_tree::ptree& load_ptree)
 void Player::ResolveDataUniquePlayer()
 {
         BindNpc((Npc*)EntityManager::Instance().GetEntityById(data_unresolved_player.npc_id));
-        Screen::Instance().SetBottomLeftGlobalCoord(data_unresolved_player.screen_pos);
+        Screen::Instance().GetRect().SetBottomLeft(data_unresolved_player.screen_pos);
 }		
 
