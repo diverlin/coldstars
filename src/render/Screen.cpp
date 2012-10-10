@@ -4,6 +4,7 @@
 #include "../resources/ShaderCollector.hpp"
 #include "../render/Render.hpp"
 #include "../config/config.hpp"
+#include "../common/common.hpp"
 
 Screen& Screen::Instance()
 {
@@ -17,11 +18,11 @@ Screen::Screen()
 Screen::~Screen()
 {}
 
-
 void Screen::InitBasic(int width, int height, int bpp, bool vert_sync, const std::string& title)
 {	
       	this->bpp = bpp;
       	this->vert_sync = vert_sync;
+      	auto_scroll = false;
       	
       	render_window.Create(sf::VideoMode(width, height, bpp), title);
       	render_window.SetFramerateLimit(Config::Instance().FPS_LIMIT); 
@@ -86,9 +87,19 @@ void Screen::MovingBy(const vec2f& delta)
 	rect.MovingBy(delta);
 }
 
-void Screen::UpdateTargetCenter()
-{
-	//get_dPos_ToPoint(, target_center, 0.2, d_pos)
+void Screen::UpdateInSpace()
+{	
+	if (auto_scroll == true)
+	{
+		vec2f d_pos;
+		float speed = 30.0;
+		get_dPos_ToPoint(rect.GetCenter(), target_center, speed, d_pos);
+		MovingBy(d_pos);
+		if ( ( fabs(rect.GetCenter().x - target_center.x) < speed ) and ( fabs(rect.GetCenter().y - target_center.y) < speed ) )
+		{
+			auto_scroll = false;
+		}
+	}
 }
 		
 void Screen::Draw()

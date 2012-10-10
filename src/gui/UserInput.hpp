@@ -47,9 +47,8 @@ class UserInput
         
         	sf::Event event;
         	
-        	int scroll_accel_x; 
-        	int scroll_accel_y; 
-        	
+        	vec2f scroll_accel; 
+        	        	
         	bool next_turn_ready;
 
         	void ResetFlags(Player*);

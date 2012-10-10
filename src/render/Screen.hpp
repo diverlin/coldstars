@@ -17,14 +17,11 @@ class Screen:private sf::NonCopyable
       		static Screen& Instance();
         	void InitBasic(int width, int height, int bpp, bool vert_sync, const std::string&);
       		void InitPostEffects(int, int);
-      		      		        	         		
-	 	void SetBottomLeftGlobalCoord(const vec2f& bottomLeft_globalCoord) { rect.SetBottomLeft(bottomLeft_globalCoord); }; 
-	 	void SetCenterGlobalCoord(const vec2f& center_globalCoord) { rect.SetCenter(center_globalCoord); };        
                 
               	sf::RenderWindow& GetWindow() { return render_window; };
       		sf::Font& GetFont() { return font; };      			
        	     	
-        	const Rect& GetRect()   const { return rect; };
+        	Rect& GetRect() { return rect; };
         	     			
         	Fbo& GetFbo0() { return fbo0; };
 		Fbo& GetFbo1() { return fbo1; };
@@ -35,7 +32,9 @@ class Screen:private sf::NonCopyable
 		const sf::Clock& GetPreciseClock() const { return precise_clock; };
 		
 		void MovingBy(const vec2f&);
-
+		void InitiateScrollTo(const vec2f& scroll_coord) { target_center = scroll_coord; auto_scroll = true; };
+		void UpdateInSpace();
+		
         	void Resize(int, int);   
 			
 		void Draw();	
@@ -48,6 +47,8 @@ class Screen:private sf::NonCopyable
 
       		int bpp;
       		bool vert_sync;
+      		
+      		bool auto_scroll;
       		
       		sf::Clock precise_clock;
       			
@@ -66,9 +67,6 @@ class Screen:private sf::NonCopyable
       		vec2f target_center;
       				
       		void ResizePostEffects(int, int);
-      		
-		void UpdateTopRightGlobalCoord();
-		void UpdateTargetCenter();
 		
       		void DrawFps();
 };

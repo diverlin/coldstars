@@ -37,9 +37,6 @@ UserInput::UserInput()
     	keyboardUpPressed    = false;    
     	keyboardDownPressed  = false;  
     
-    	scroll_accel_x = 0; 
-    	scroll_accel_y = 0;  
-    
 	next_turn_ready = false;
 }
 
@@ -305,7 +302,13 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 			}
 			break;
 		}
-		
+
+		case sf::Key::C:   
+		{
+			Screen::Instance().InitiateScrollTo(player->GetNpc()->GetVehicle()->GetPoints().GetCenter());
+			break;
+		}
+				
 		case sf::Key::G:   // Grapple
 		{
 			player->GetShow().InverseRangeGrapple();
@@ -470,34 +473,34 @@ void UserInput::ScrollCamera(Player* player)
         // SCROLLING X AXIS         
         if(keyboardLeftPressed)
         {
-            	scroll_accel_x -= SCROLL_VELOCITY_STEP;
-            	if (abs(scroll_accel_x) > abs(SCROLL_VELOCITY_MAX))
+            	scroll_accel.x -= SCROLL_VELOCITY_STEP;
+            	if (abs(scroll_accel.x) > abs(SCROLL_VELOCITY_MAX))
             	{
-                	scroll_accel_x = -SCROLL_VELOCITY_MAX;
+                	scroll_accel.x = -SCROLL_VELOCITY_MAX;
             	}
         }
         
         if(keyboardRightPressed)
         {
-            	scroll_accel_x += SCROLL_VELOCITY_STEP;
-            	if (abs(scroll_accel_x) > abs(SCROLL_VELOCITY_MAX))
+            	scroll_accel.x += SCROLL_VELOCITY_STEP;
+            	if (abs(scroll_accel.x) > abs(SCROLL_VELOCITY_MAX))
             	{
-                	scroll_accel_x = SCROLL_VELOCITY_MAX;
+                	scroll_accel.x = SCROLL_VELOCITY_MAX;
             	}
         }
         
         
         if(!keyboardLeftPressed && !keyboardRightPressed)
         {
-            	if (scroll_accel_x != 0)
+            	if (scroll_accel.x != 0)
             	{
-                	if (scroll_accel_x > 0)
+                	if (scroll_accel.x > 0)
                 	{
-                    		scroll_accel_x -= SCROLL_VELOCITY_STEP; 
+                    		scroll_accel.x -= SCROLL_VELOCITY_STEP; 
                 	} 
-                	else if (scroll_accel_x < 0)
+                	else if (scroll_accel.x < 0)
                 	{
-                    		scroll_accel_x += SCROLL_VELOCITY_STEP; 
+                    		scroll_accel.x += SCROLL_VELOCITY_STEP; 
                 	}   
             	}
         }
@@ -507,37 +510,37 @@ void UserInput::ScrollCamera(Player* player)
         // SCROLLING Y AXIS         
         if(keyboardUpPressed)
         {
-            	scroll_accel_y += SCROLL_VELOCITY_STEP;
-            	if (abs(scroll_accel_y) > abs(SCROLL_VELOCITY_MAX))
+            	scroll_accel.y += SCROLL_VELOCITY_STEP;
+            	if (abs(scroll_accel.y) > abs(SCROLL_VELOCITY_MAX))
             	{
-                	scroll_accel_y = SCROLL_VELOCITY_MAX;
+                	scroll_accel.y = SCROLL_VELOCITY_MAX;
             	}
         }
         
         if(keyboardDownPressed)
         {
-            	scroll_accel_y -= SCROLL_VELOCITY_STEP;
-            	if (abs(scroll_accel_y) > abs(SCROLL_VELOCITY_MAX))
+            	scroll_accel.y -= SCROLL_VELOCITY_STEP;
+            	if (abs(scroll_accel.y) > abs(SCROLL_VELOCITY_MAX))
             	{
-                	scroll_accel_y = -SCROLL_VELOCITY_MAX;
+                	scroll_accel.y = -SCROLL_VELOCITY_MAX;
             	}
         }
         
         
         if(!keyboardUpPressed && !keyboardDownPressed)
         {
-            	if (scroll_accel_y != 0)
+            	if (scroll_accel.y != 0)
             	{
-                	if (scroll_accel_y > 0)
+                	if (scroll_accel.y > 0)
                 	{
-                    		scroll_accel_y -= SCROLL_VELOCITY_STEP; 
+                    		scroll_accel.y -= SCROLL_VELOCITY_STEP; 
                 	} 
-                	else if (scroll_accel_y < 0)
+                	else if (scroll_accel.y < 0)
                 	{
-                    		scroll_accel_y += SCROLL_VELOCITY_STEP; 
+                    		scroll_accel.y += SCROLL_VELOCITY_STEP; 
                 	}   
             	}
         }
       
-      	Screen::Instance().MovingBy(vec2f(scroll_accel_x, scroll_accel_y));
+      	Screen::Instance().MovingBy(scroll_accel);
 }
