@@ -30,7 +30,6 @@ struct VehicleKorpusData
 	unsigned int price;
 
 	bool draw_turrels;
-	float gui_scale;
 
         int slot_grapple_num;
         int slot_drive_num;
@@ -49,7 +48,6 @@ struct VehicleKorpusData
         price(0),
        
         draw_turrels(false),
-        gui_scale(1.0f),
         
         slot_grapple_num(0),
         slot_drive_num(0),

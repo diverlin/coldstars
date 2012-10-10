@@ -160,12 +160,17 @@ float distBetweenPoints(float x1, float y1, float x2, float y2)
     	//return request;
 //}
 
-vec2f getVec2f(int len, int angle)
+vec2f getVec2f(float len, float angle)
 {
-    	float alpha = (float)angle * DEGREE_TO_RADIAN_RATE;	
-    	vec2f request(sin(alpha) * len, cos(alpha) * len);
+    	angle *= DEGREE_TO_RADIAN_RATE;	
+    	vec2f vec(sin(angle) * len, cos(angle) * len);
     	
-    	return request;
+    	return vec;
+}
+
+float getAngleInD(const vec2f& v_start, const vec2f& v_end)
+{
+	return atan2(v_start.y - v_end.y, v_start.x - v_end.x) * RADIAN_TO_DEGREE_RATE;
 }
 
 vec2f getRandVec2f(int radius_min, int radius_max)
@@ -173,9 +178,9 @@ vec2f getRandVec2f(int radius_min, int radius_max)
     	float alpha = (float)getRandInt(0, 360) * DEGREE_TO_RADIAN_RATE;
     	int len = getRandInt(radius_min, radius_max);
    
- 	vec2f rand(sin(alpha) * len, cos(alpha) * len);
+ 	vec2f vec(sin(alpha) * len, cos(alpha) * len);
     	
-    	return rand;
+    	return vec;
 }
 
 float getAngle(const Vector2f& v1, const Vector2f& v2)

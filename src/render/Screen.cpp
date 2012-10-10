@@ -29,6 +29,8 @@ void Screen::InitBasic(int width, int height, int bpp, bool vert_sync, const std
     	render_window.PreserveOpenGLStates(true);
     	 	
       	initGl(width, height);
+      	
+      	rect.Set(0.0, 0.0, width, height);
 }
 
 void Screen::InitPostEffects(int width, int height)
@@ -42,12 +44,7 @@ void Screen::InitPostEffects(int width, int height)
 	
 	ResizePostEffects(width, height);
 }
-
-void Screen::SetCenterGlobalCoord(const vec2f& center_globalCoord)
-{
-	bottomLeft_globalCoord.Set(center_globalCoord.x - render_window.GetWidth()/2, center_globalCoord.y - render_window.GetHeight()/2);
-}
-	 	       	
+	       	
 void Screen::DrawFps()
 {
 	float fps = 1.f / render_window.GetFrameTime();
@@ -86,15 +83,14 @@ void Screen::ResizePostEffects(int width, int height)
 
 void Screen::MovingBy(const vec2f& delta)
 {
-	bottomLeft_globalCoord += delta;
-	UpdateTopRightGlobalCoord();
+	rect.MovingBy(delta);
 }
 
-void Screen::UpdateTopRightGlobalCoord()
+void Screen::UpdateTargetCenter()
 {
-	topRight_globalCoord.Set(bottomLeft_globalCoord.x + render_window.GetWidth(), bottomLeft_globalCoord.y + render_window.GetHeight());
+	//get_dPos_ToPoint(, target_center, 0.2, d_pos)
 }
-
+		
 void Screen::Draw()
 {
   	DrawFps();

@@ -41,9 +41,7 @@ int main()
 	GameDate game_date(1,1,4000);
 
         GalaxyBuilder::Instance().CreateNewGalaxy();
-        
-        if (TEST_ON == false) { GalaxyBuilder::Instance().CreateNewInternals(); }
-        else 		      { GalaxyBuilder::Instance().CreateNewInternals_TEST(); }
+	GalaxyBuilder::Instance().CreateNewInternals(); 
         
 	PlayerBuilder::Instance().CreateNewPlayer();
 	PlayerBuilder::Instance().CreateNewInternals();

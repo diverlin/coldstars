@@ -41,9 +41,11 @@ Galaxy::~Galaxy()
 	STARSYSTEM_vec.clear();
 }
 
-void Galaxy::Add(StarSystem* starsystem) 
+void Galaxy::Add(StarSystem* starsystem, const vec2f& center) 
 { 
 	starsystem->SetGalaxy(this);
+        starsystem->GetPoints().SetCenter(center);
+        
 	STARSYSTEM_vec.push_back(starsystem); 
 }
      		

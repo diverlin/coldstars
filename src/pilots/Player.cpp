@@ -237,8 +237,8 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 
 	Screen::Instance().GetFbo0().Activate(w, h);
    
-        	starsystem->DrawBackground(Screen::Instance().GetBottomLeftGlobalCoord());           
-		camera(Screen::Instance().GetBottomLeftGlobalCoord().x, Screen::Instance().GetBottomLeftGlobalCoord().y);    
+        	starsystem->DrawBackground(Screen::Instance().GetRect().GetBottomLeft());           
+		camera(Screen::Instance().GetRect().GetBottomLeft().x, Screen::Instance().GetRect().GetBottomLeft().y);    
 	        
 
 		starsystem->RestoreDefaultColor();
@@ -265,7 +265,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetBloom().GetTextureBlured());
 			glUniform1i(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "BlurSampler"), 1);
 
-			glUniform4f(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "sun_pos"), -Screen::Instance().GetBottomLeftGlobalCoord().x/w, -Screen::Instance().GetBottomLeftGlobalCoord().y/h, -100.0, 1.0);
+			glUniform4f(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "sun_pos"), -Screen::Instance().GetRect().GetBottomLeft().x/w, -Screen::Instance().GetRect().GetBottomLeft().y/h, -100.0, 1.0);
           
 			glActiveTexture(GL_TEXTURE0);
 			drawFullScreenQuad(w, h, -999.0);
@@ -277,22 +277,22 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 	Screen::Instance().GetFbo2().Activate(w, h);
 		drawFullScreenTexturedQuad(Screen::Instance().GetFbo1().GetTexture(), w, h, -999.0);
            
-          	camera(Screen::Instance().GetBottomLeftGlobalCoord().x, Screen::Instance().GetBottomLeftGlobalCoord().y);    
+          	camera(Screen::Instance().GetRect().GetBottomLeft().x, Screen::Instance().GetRect().GetBottomLeft().y);    
         
 		enable_DEPTH();  
     			for(unsigned int i = 0; i < visible_PLANET_vec.size(); i++) 
     			{ 
-       				visible_PLANET_vec[i]->Render_NEW(Screen::Instance().GetBottomLeftGlobalCoord()); 
+       				visible_PLANET_vec[i]->Render_NEW(Screen::Instance().GetRect().GetBottomLeft()); 
     			}
     		
     			for(unsigned int i = 0; i < visible_ASTEROID_vec.size(); i++)
     			{ 
-       				visible_ASTEROID_vec[i]->Render_NEW(Screen::Instance().GetBottomLeftGlobalCoord()); 
+       				visible_ASTEROID_vec[i]->Render_NEW(Screen::Instance().GetRect().GetBottomLeft()); 
     			}
 
     			for(unsigned int i = 0; i < visible_BLACKHOLE_vec.size(); i++)
 			{ 
-        			visible_BLACKHOLE_vec[i]->Render_NEW(Screen::Instance().GetBottomLeftGlobalCoord()); 
+        			visible_BLACKHOLE_vec[i]->Render_NEW(Screen::Instance().GetRect().GetBottomLeft()); 
         			
     			}  	
     		disable_DEPTH();
@@ -345,8 +345,8 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 
 		for (unsigned int i = 0; i < visible_effect_SHOCKWAVE_vec.size(); i++)
 		{         
-			center_array[i][0] = visible_effect_SHOCKWAVE_vec[i]->center.x/w - Screen::Instance().GetBottomLeftGlobalCoord().x/w;
-			center_array[i][1] = visible_effect_SHOCKWAVE_vec[i]->center.y/h - Screen::Instance().GetBottomLeftGlobalCoord().y/h;
+			center_array[i][0] = visible_effect_SHOCKWAVE_vec[i]->center.x/w - Screen::Instance().GetRect().GetBottomLeft().x/w;
+			center_array[i][1] = visible_effect_SHOCKWAVE_vec[i]->center.y/h - Screen::Instance().GetRect().GetBottomLeft().y/h;
 			xyz_array[i][0] = visible_effect_SHOCKWAVE_vec[i]->parameter.x;
 			xyz_array[i][1] = visible_effect_SHOCKWAVE_vec[i]->parameter.y;
 			xyz_array[i][2] = visible_effect_SHOCKWAVE_vec[i]->parameter.z;
@@ -382,7 +382,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 	drawFullScreenTexturedQuad(Screen::Instance().GetFbo3().GetTexture(), w, h, -999.0);
 	//drawFullScreenTexturedQuad(pTo_fbo0->texture, w, h, -999.0);  // debug
 
-	camera(Screen::Instance().GetBottomLeftGlobalCoord().x, Screen::Instance().GetBottomLeftGlobalCoord().y);
+	camera(Screen::Instance().GetRect().GetBottomLeft().x, Screen::Instance().GetRect().GetBottomLeft().y);
 	
 	enable_BLEND();
 		for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
@@ -400,7 +400,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 
     	for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
     	{ 
-        	visible_text_DAMAGE_vec[i]->Render(Screen::Instance().GetBottomLeftGlobalCoord()); 
+        	visible_text_DAMAGE_vec[i]->Render(Screen::Instance().GetRect().GetBottomLeft()); 
     	}   
     		    	
     	starsystem->RestoreSceneColor();    	          
@@ -412,9 +412,9 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 void Player::RenderInSpace_OLD(StarSystem* starsystem)
 {   
 	glLoadIdentity();
-        starsystem->DrawBackground(Screen::Instance().GetBottomLeftGlobalCoord());
+        starsystem->DrawBackground(Screen::Instance().GetRect().GetBottomLeft());
 	
-        camera(Screen::Instance().GetBottomLeftGlobalCoord().x, Screen::Instance().GetBottomLeftGlobalCoord().y);
+        camera(Screen::Instance().GetRect().GetBottomLeft().x, Screen::Instance().GetRect().GetBottomLeft().y);
         
         disable_BLEND();
         enable_DEPTH();
@@ -491,7 +491,7 @@ void Player::RenderInSpace_OLD(StarSystem* starsystem)
 	// text
         for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
     	{ 
-        	visible_text_DAMAGE_vec[i]->Render(Screen::Instance().GetBottomLeftGlobalCoord()); 
+        	visible_text_DAMAGE_vec[i]->Render(Screen::Instance().GetRect().GetBottomLeft()); 
     	}    		
               
     	starsystem->RestoreSceneColor();
@@ -877,13 +877,13 @@ void Player::MouseNavigation(const MouseData& data_mouse) const
 
 bool Player::IsObjectOnScreen(const Points& points) const
 {      
-        if (points.GetCenter().x < (Screen::Instance().GetBottomLeftGlobalCoord().x - points.GetWidth()))
+        if (points.GetCenter().x < (Screen::Instance().GetRect().GetBottomLeft().x - points.GetWidth()))
                 return false;
-        if (points.GetCenter().x > (Screen::Instance().GetTopRightGlobalCoord().x   + points.GetWidth()))
+        if (points.GetCenter().x > (Screen::Instance().GetRect().GetTopRight().x   + points.GetWidth()))
                 return false;
-        if (points.GetCenter().y < (Screen::Instance().GetBottomLeftGlobalCoord().y - points.GetHeight()))
+        if (points.GetCenter().y < (Screen::Instance().GetRect().GetBottomLeft().y - points.GetHeight()))
                 return false;
-        if (points.GetCenter().y > (Screen::Instance().GetTopRightGlobalCoord().y   + points.GetHeight()))
+        if (points.GetCenter().y > (Screen::Instance().GetRect().GetTopRight().y   + points.GetHeight()))
                 return false;
 
         return true;
@@ -891,13 +891,13 @@ bool Player::IsObjectOnScreen(const Points& points) const
 
 bool Player::IsObjectOnScreen(const vec2f& ob_center, float sizeInPixels) const
 {       
-        if (ob_center.x < (Screen::Instance().GetBottomLeftGlobalCoord().x - sizeInPixels))
+        if (ob_center.x < (Screen::Instance().GetRect().GetBottomLeft().x - sizeInPixels))
                 return false;
-        if (ob_center.x > (Screen::Instance().GetTopRightGlobalCoord().x + sizeInPixels))
+        if (ob_center.x > (Screen::Instance().GetRect().GetTopRight().x + sizeInPixels))
                 return false;
-        if (ob_center.y < (Screen::Instance().GetBottomLeftGlobalCoord().y - sizeInPixels))
+        if (ob_center.y < (Screen::Instance().GetRect().GetBottomLeft().y - sizeInPixels))
                 return false;
-        if (ob_center.y > (Screen::Instance().GetTopRightGlobalCoord().y + sizeInPixels))
+        if (ob_center.y > (Screen::Instance().GetRect().GetTopRight().y + sizeInPixels))
                 return false;
 
         return true;
@@ -975,8 +975,8 @@ void Player::ResolveData()
 void Player::SaveDataUniquePlayer(boost::property_tree::ptree& save_ptree, const std::string& root) const	
 {
         save_ptree.put(root+"unresolved.npc_id", npc->GetId());
-        save_ptree.put(root+"unresolved.screen_pos_x", Screen::Instance().GetBottomLeftGlobalCoord().x);
-        save_ptree.put(root+"unresolved.screen_pos_y", Screen::Instance().GetBottomLeftGlobalCoord().y);
+        save_ptree.put(root+"unresolved.screen_pos_x", Screen::Instance().GetRect().GetBottomLeft().x);
+        save_ptree.put(root+"unresolved.screen_pos_y", Screen::Instance().GetRect().GetBottomLeft().y);
 }
 
 void Player::LoadDataUniquePlayer(const boost::property_tree::ptree& load_ptree)

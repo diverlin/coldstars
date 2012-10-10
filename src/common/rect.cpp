@@ -72,6 +72,7 @@ void Rect::Set(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h)
 	h = _h;
 
 	UpdateCenter();
+	UpdateTopRight();
 }
 
 void Rect::Set(const vec2f& vbl, int _w, int _h)
@@ -99,6 +100,8 @@ void Rect::SetCenter(float _center_x, float _center_y)
 
 	center.x = _center_x;
 	center.y = _center_y;
+	
+	UpdateTopRight();
 }
 
 void Rect::SetBottomLeft(const vec2f& _bottomLeft)
@@ -112,6 +115,7 @@ void Rect::SetBottomLeft(float _pos_x, float _pos_y)
 	bottomLeft.y = _pos_y;
 
 	UpdateCenter();
+	UpdateTopRight();
 }
 
 void Rect::SetBottomLeftX(float _pos_x)
@@ -119,6 +123,7 @@ void Rect::SetBottomLeftX(float _pos_x)
 	bottomLeft.x = _pos_x;
 
 	UpdateCenter();
+	UpdateTopRight();
 }
 
 void Rect::SetSize(int _w, int _h)
@@ -128,6 +133,15 @@ void Rect::SetSize(int _w, int _h)
 
 	bottomLeft.x = center.x - w/2;
 	bottomLeft.y = center.y - h/2;
+	
+	UpdateTopRight();
+}
+
+void Rect::MovingBy(const vec2f& d_pos)
+{
+	bottomLeft += d_pos;
+	UpdateCenter();
+	UpdateTopRight();
 }
 
 void Rect::UpdateCenter()
@@ -136,3 +150,8 @@ void Rect::UpdateCenter()
 	center.y = bottomLeft.y + h/2;
 }
 
+void Rect::UpdateTopRight()
+{
+	topRight.x = bottomLeft.x + w;
+	topRight.y = bottomLeft.y + h;	
+}

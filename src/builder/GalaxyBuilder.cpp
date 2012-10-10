@@ -20,10 +20,13 @@
 #include "StarSystemBuilder.hpp"
 #include "../world/starsystem.hpp"
 
+#include "../config/config.hpp"
+
 #include "../common/id.hpp"
 #include "../common/Logger.hpp"
 #include "../common/EntityManager.hpp"
 #include "../common/rand.hpp"
+#include "../common/common.hpp"
 
 GalaxyBuilder& GalaxyBuilder::Instance()
 {
@@ -53,30 +56,35 @@ void GalaxyBuilder::CreateNewGalaxy(int id)
 } 
         	
 void GalaxyBuilder::CreateNewInternals()
-{     	
-    	int starsystem_num = getRandInt(ENTITY::GALAXY::STARSYSTEM_NUM_MIN, ENTITY::GALAXY::STARSYSTEM_NUM_MAX);
-    	for(int i=0; i<starsystem_num; i++)
+{     
+        float h_div_w_rate = ENTITY::GALAXY::STARSYSTEM_SEGMENT_HEIGHT_NUM/(float)ENTITY::GALAXY::STARSYSTEM_SEGMENT_WIDTH_NUM;
+        int segment_w = ENTITY::GALAXY::PARSEC /((float)ENTITY::GALAXY::STARSYSTEM_SEGMENT_WIDTH_NUM + 1);
+	int segment_h = ENTITY::GALAXY::PARSEC * h_div_w_rate/((float)ENTITY::GALAXY::STARSYSTEM_SEGMENT_HEIGHT_NUM + 1);
+		
+	std::vector<vec2f> starsystem_segment_vec;
+	for (int i=1; i<=ENTITY::GALAXY::STARSYSTEM_SEGMENT_WIDTH_NUM; i++)
+	{
+		for (int j=1; j<=ENTITY::GALAXY::STARSYSTEM_SEGMENT_HEIGHT_NUM; j++)
+		{
+			starsystem_segment_vec.push_back(vec2f(i*segment_w/2, j*segment_h/2));
+		}		
+	}
+	
+    	for(int i=0; i<starsystem_segment_vec.size(); i++)
     	{  
-                StarSystemBuilder::Instance().CreateNewStarSystem();
-                StarSystemBuilder::Instance().CreateNewInternals();
-                
-        	StarSystem* starsystem = StarSystemBuilder::Instance().GetStarSystem();
-        	starsystem->SetGalaxy(galaxy);
-        	galaxy->Add(starsystem);
- 	}
-}
-
-void GalaxyBuilder::CreateNewInternals_TEST()
-{     	
-    	int starsystem_num = 1;
-    	for(int i=0; i<starsystem_num; i++)
-    	{  
-                StarSystemBuilder::Instance().CreateNewStarSystem();
-                StarSystemBuilder::Instance().CreateNewInternals_TEST();
-                
-        	StarSystem* starsystem = StarSystemBuilder::Instance().GetStarSystem();
-        	starsystem->SetGalaxy(galaxy);
-        	galaxy->Add(starsystem);
+    		int starsystem_insegment_num = getRandInt(ENTITY::GALAXY::STARSYSTEM_INSEGMENT_NUM_MIN, ENTITY::GALAXY::STARSYSTEM_INSEGMENT_NUM_MAX);
+                for (int j=0; j<starsystem_insegment_num; j++)
+                {
+                	vec2f center = starsystem_segment_vec[i] + getRandVec2f(getMax(segment_w, segment_h)/7, getMax(segment_w, segment_h)/3);
+                	
+                	StarSystemBuilder::Instance().CreateNewStarSystem();
+                	
+                	if (TEST_ON == false) { StarSystemBuilder::Instance().CreateNewInternals(); }
+        		else 		      { StarSystemBuilder::Instance().CreateNewInternals_TEST(); }
+                	                
+        		StarSystem* starsystem = StarSystemBuilder::Instance().GetStarSystem();
+        		galaxy->Add(starsystem, center);
+ 		}
  	}
 }
 

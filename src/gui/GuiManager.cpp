@@ -244,7 +244,7 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 				gui_space.RenderFocusedButtonInfo(data_mouse);
 			disable_BLEND();
 
-			gui_space.RenderText(Screen::Instance().GetBottomLeftGlobalCoord());
+			gui_space.RenderText(Screen::Instance().GetRect().GetBottomLeft());
 			// end render
 			
 			break;

@@ -57,6 +57,7 @@ const float RADAR_SCALE = 1/50.0;
 
 const int TURN_TIME = 150;  //turn time, depends on game fps
 
+const int COLLISION_RADIUS_FOR_STATIC_COORD = 5;
 
 const int VISIBLE_DISTANCE_WITHOUT_RADAR = 200;
 
@@ -260,8 +261,12 @@ namespace ENTITY
 
 	namespace GALAXY
 	{
-		const int STARSYSTEM_NUM_MIN = 10;
-		const int STARSYSTEM_NUM_MAX = 10;
+		const int PARSEC = 100;
+				
+		const int STARSYSTEM_SEGMENT_WIDTH_NUM = 4;
+		const int STARSYSTEM_SEGMENT_HEIGHT_NUM = 3;		
+		const int STARSYSTEM_INSEGMENT_NUM_MIN = 5;
+		const int STARSYSTEM_INSEGMENT_NUM_MAX = 6;
 
 		const int DISTANTSTAR_SIZE_MIN = 3; 
 		const int DISTANTSTAR_SIZE_MAX = 15;
@@ -269,6 +274,8 @@ namespace ENTITY
 
 	namespace STARSYSTEM
 	{
+		const int JUMPRADIUS = 1200;
+		
 		const int PLANET_MIN = 3;
 		const int PLANET_MAX = 5;
 		

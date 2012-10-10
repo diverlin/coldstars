@@ -53,8 +53,8 @@ void Cursor::UpdateMouseStuff()
         data_mouse.mx = Input.GetMouseX();
         data_mouse.my = Screen::Instance().GetWindow().GetHeight() - Input.GetMouseY();
                 
-        data_mouse.mxvp = data_mouse.mx + Screen::Instance().GetBottomLeftGlobalCoord().x;
-    	data_mouse.myvp = data_mouse.my + Screen::Instance().GetBottomLeftGlobalCoord().y;
+        data_mouse.mxvp = data_mouse.mx + Screen::Instance().GetRect().GetBottomLeft().x;
+    	data_mouse.myvp = data_mouse.my + Screen::Instance().GetRect().GetBottomLeft().y;
 }
 
 void Cursor::Update(const MouseData& data_mouse)
@@ -72,7 +72,7 @@ void Cursor::RenderFocusedSpaceObjectStuff()
 			{
 				case ENTITY::ROCKETBULLET_ID:
 				{
-					((RocketBullet*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+					((RocketBullet*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
 						
 					break;
 				}
@@ -93,7 +93,7 @@ void Cursor::RenderFocusedSpaceObjectStuff()
                 		                                
                         			satellite->GetDriveComplex().DrawPath(); 
 
-						satellite->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+						satellite->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
 						                        
 						break;
 					}
@@ -109,7 +109,7 @@ void Cursor::RenderFocusedSpaceObjectStuff()
                 		                                
                         			ship->GetDriveComplex().DrawPath(); 
 
-						ship->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+						ship->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
 						                        
 						break;
 					}
@@ -125,7 +125,7 @@ void Cursor::RenderFocusedSpaceObjectStuff()
                 		                                
                         			spacestation->GetDriveComplex().DrawPath(); 
         
-        					spacestation->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+        					spacestation->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
         					                
 						break;
 					}
@@ -137,7 +137,7 @@ void Cursor::RenderFocusedSpaceObjectStuff()
 
 			case ENTITY::CONTAINER_ID:
 			{
-				((Container*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+				((Container*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
 				
 				break;
 			}
@@ -146,14 +146,14 @@ void Cursor::RenderFocusedSpaceObjectStuff()
 			{
 				((Asteroid*)focused_space_ob)->GetOrbit()->DrawPath();
 
-				((Asteroid*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+				((Asteroid*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
 								
 				break;
 			}
 
 			case ENTITY::BLACKHOLE_ID:
 			{
-				((BlackHole*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+				((BlackHole*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
 				
 				break;
 			}
@@ -162,14 +162,14 @@ void Cursor::RenderFocusedSpaceObjectStuff()
 			{
 				((Planet*)focused_space_ob)->GetOrbit()->DrawPath();
 
-				((Planet*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+				((Planet*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
 								
 				break;
 			}
 			
 			case ENTITY::STAR_ID:
 			{
-				((Star*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftGlobalCoord());
+				((Star*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
 
 				break;
 			}		

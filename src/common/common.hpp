@@ -35,6 +35,13 @@ inline T getMin(T val1, T val2)
 }
 
 template <typename T>
+inline T getMax(T val1, T val2)
+{
+	if (val1>val2) 	return val1;
+	else		return val2;
+}
+
+template <typename T>
 inline T getMin(T val1, T val2, T val3)
 {
 	int min2 = getMin(val1, val2);
