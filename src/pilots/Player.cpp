@@ -57,6 +57,7 @@ Player::Player(int id)
         data_id.subtype_id = NONE_ID;
    	
     	npc  = NULL;
+    	starsystem = NULL;
     	
     	cursor.SetPlayer(this);
     	gui_manager.SetPlayer(this);
@@ -194,39 +195,73 @@ void Player::AddIfVisible(VerticalFlowText* effect)
 
 void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 {
-	int action_id = npc->GetVehicle()->GetSpecialActionId();
-	if (action_id == SPECIAL_ACTION::INITIATE_JUMPOUT_ID)
+	if (starsystem == NULL) //hack
 	{
-		if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::HYPER_SPACE_ID)
-		{
-			if (turn_timer.GetTurnEnded() == true)
-			{
-				//Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenter());
-				turn_timer.NextTurn();				
-			}
-		}
+		starsystem = npc->GetVehicle()->GetStarSystem();
 	}
-
-	if (action_id == SPECIAL_ACTION::INITIATE_LAUNCHING_ID)
+	
+	if (starsystem->GetId() != npc->GetVehicle()->GetStarSystem()->GetId())
 	{
-		if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::SPACE_ID)
+		Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenter());
+		starsystem = npc->GetVehicle()->GetStarSystem();
+	}
+	
+	int action_id = npc->GetVehicle()->GetSpecialActionId();
+	switch(action_id)
+	{
+		//case SPECIAL_ACTION::INITIATE_JUMPIN_ID:
+		//{
+			//if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::SPACE_ID)
+			//{
+				//if (turn_timer.GetTurnEnded() == true)
+				//{
+					//Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenter());	
+				//}
+			//}
+			
+			//break;
+		//}
+		
+		case SPECIAL_ACTION::INITIATE_JUMPOUT_ID:
+		{
+			if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::HYPER_SPACE_ID)
+			{
+				if (turn_timer.GetTurnEnded() == true)
+				{					
+					turn_timer.NextTurn();				
+				}
+			}
+			
+			break;
+		}
+
+		case SPECIAL_ACTION::INITIATE_LAUNCHING_ID:
+		{
+			if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::SPACE_ID)
+			{
+				if (turn_timer.GetTurnEnded() == true)
+				{
+					Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenter());
+					turn_timer.NextTurn();				
+				}
+			}
+			
+			break;
+		}
+	
+		case SPECIAL_ACTION::INITIATE_DOCKING_ID:
 		{
 			if (turn_timer.GetTurnEnded() == true)
 			{
 				Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenter());
 				turn_timer.NextTurn();				
 			}
-		}
+			
+			break;
+		}		
 	}
 	
-	if (action_id == SPECIAL_ACTION::INITIATE_DOCKING_ID)
-	{
-		if (turn_timer.GetTurnEnded() == true)
-		{
-			Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenter());
-			turn_timer.NextTurn();				
-		}
-	}		
+	Screen::Instance().UpdateInSpace();
 }
      		
 void Player::RenderInSpace_NEW(StarSystem* starsystem)
@@ -905,8 +940,6 @@ bool Player::IsObjectOnScreen(const vec2f& ob_center, float sizeInPixels) const
 
 void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 {	
-	Screen::Instance().UpdateInSpace();
-
 	starsystem->FindRenderVisibleEntities_c(this);
 	if (getRandInt(1,5) == 1)
 	{

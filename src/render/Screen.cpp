@@ -92,7 +92,7 @@ void Screen::UpdateInSpace()
 	if (auto_scroll == true)
 	{
 		vec2f d_pos;
-		float speed = 30.0;
+		float speed = 15.0;
 		get_dPos_ToPoint(rect.GetCenter(), target_center, speed, d_pos);
 		MovingBy(d_pos);
 		if ( ( fabs(rect.GetCenter().x - target_center.x) < speed ) and ( fabs(rect.GetCenter().y - target_center.y) < speed ) )
