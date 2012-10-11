@@ -100,34 +100,32 @@ std::string LazerEquipment::GetRadiusStr()
           	return int2str(radius_orig) + "+" + int2str(radius_add);
 }
 
-void LazerEquipment::FireEvent_TRUE()
+void LazerEquipment::FireEvent(bool show_effect)
 { 
-    	LazerTraceEffect* _lazer_trace_effect;
-    	if (item_slot->GetOwnerVehicle()->GetKorpusData().draw_turrels == true)
-    	{
-        	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
-                                                     	      item_slot->GetTurrel()->GetPoints().GetpCenter(), 
-                                                              item_slot->GetTurrel()->GetTarget()->GetPoints().GetpCenter());
-        }
-    	else
-    	{
-        	_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
-                                                              item_slot->GetOwnerVehicle()->GetPoints().GetpCenter(), 
-                                                              item_slot->GetTurrel()->GetTarget()->GetPoints().GetpCenter());
-        }
-    
-    	// DAMAGE effect
-	DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, item_slot->GetTurrel()->GetTarget());
-    	_lazer_trace_effect->setDamageEffect(_damage_effect);
-    	
-	DeteriorationEvent();
-    	
-    	item_slot->GetOwnerVehicle()->GetStarSystem()->Add(_lazer_trace_effect);
-    	item_slot->GetOwnerVehicle()->GetStarSystem()->Add(_damage_effect);
-} 
-
-void LazerEquipment::FireEvent_FALSE()
-{ 
+	if (show_effect)
+	{
+		// LazerTraceEffect
+    		LazerTraceEffect* _lazer_trace_effect;
+    		if (item_slot->GetOwnerVehicle()->GetKorpusData().draw_turrels == true)
+    		{
+        		_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
+                        	                             	      item_slot->GetTurrel()->GetPoints().GetpCenter(), 
+                                	                              item_slot->GetTurrel()->GetTarget()->GetPoints().GetpCenter());
+        	}
+    		else
+    		{
+        		_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
+                        	                                      item_slot->GetOwnerVehicle()->GetPoints().GetpCenter(), 
+                                	                              item_slot->GetTurrel()->GetTarget()->GetPoints().GetpCenter());
+        	}
+    		item_slot->GetOwnerVehicle()->GetStarSystem()->Add(_lazer_trace_effect);
+    	    
+    		// DamageEffect
+		DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, item_slot->GetTurrel()->GetTarget());
+    		_lazer_trace_effect->setDamageEffect(_damage_effect);
+    		item_slot->GetOwnerVehicle()->GetStarSystem()->Add(_damage_effect);
+	}
+	
 	DeteriorationEvent();
 } 
 

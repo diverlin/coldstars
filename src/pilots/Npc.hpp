@@ -66,6 +66,8 @@ class Npc : public Base
 		void IncreaseCredits(int credits) { this->credits += credits; };
 		void DecreaseCredits(int credits) { this->credits -= credits; };
      
+     		void AddExpirience(int, bool);
+     		
      		// AI
      		void UpdateInSpace(int, bool);
 
@@ -126,7 +128,7 @@ class Npc : public Base
      		void SaveDataUniqueNpc(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueNpc(const boost::property_tree::ptree&);
 		void ResolveDataUniqueNpc();
- };
+};
 
 
 #endif 
