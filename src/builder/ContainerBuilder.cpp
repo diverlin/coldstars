@@ -54,7 +54,7 @@ void ContainerBuilder::CreateNewContainer(int id)
 void ContainerBuilder::CreateNewInternals(TextureOb* textureOb, BaseItem* item)
 {           
         LifeData data_life;
-        data_life.armor = getRandInt(1,6);
+        data_life.armor = 1;
         data_life.dying_time = 30;
         
         vec3f d_angle;

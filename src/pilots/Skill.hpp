@@ -31,6 +31,7 @@ class Skill
 		int GetAvailiablePoints() const	{ return available_points; };
 		int GetExpirience() 	  const		{ return expirience; };
 		int GetExpirienceNextLevel() const 	{ return expirience_nextlevel; };
+		int GetLevel() const { return level; };
 
 		int GetAttack()   const { return attack; };   
 		int GetDefence()  const { return defence; };  
@@ -80,7 +81,8 @@ class Skill
 		int diplomat_undo;
 
 		int available_points;
-
+		int level;
+		
 		unsigned long int expirience;
 		unsigned long int expirience_nextlevel;
 };

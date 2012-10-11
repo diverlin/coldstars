@@ -35,7 +35,8 @@ technic_undo(0),
 diplomat_undo(0),	
 available_points(6),
 expirience(0),
-expirience_nextlevel(SKILL::EXPIRIENCE_THRESHOLD)
+expirience_nextlevel(SKILL::EXPIRIENCE_THRESHOLD),
+level(1)
 {}     
 
 Skill::~Skill()
@@ -48,6 +49,7 @@ void Skill::AddExpirience(unsigned long int addExpirience)
 	{
 		available_points += 1;
 		expirience_nextlevel *= 2;
+		level++;
 	}
 }
 

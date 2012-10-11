@@ -16,18 +16,17 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-
 #ifndef CURSOR_H
 #define CURSOR_H
 
-class ItemSlot; //#include "../slots/ItemSlot.hpp"
+class ItemSlot;
 #include "../common/rect.hpp"
 #include "MouseData.hpp"
-class Player; //#include "../pilots/Player.hpp"
+class Player;
 class BaseSpaceEntity;
+#include "BaseGui.hpp"
 
-class Cursor
+class Cursor : public BaseGui
 {
   	public:
         	Cursor();
@@ -37,21 +36,21 @@ class Cursor
 		
 		void SetLeftMouseButtonClick(bool left_click) 		{ data_mouse.left_click = left_click; };
 		void SetRightMouseButtonClick(bool right_click) 	{ data_mouse.right_click = right_click; };
+		void SetFocusedSpaceObject(BaseSpaceEntity* focused_space_ob) { this->focused_space_ob = focused_space_ob; };
+		
 		const MouseData& GetMouseData() { return data_mouse; };
-					
 		ItemSlot* GetItemSlot() const { return item_slot; };
 		const Rect& GetRect() const { return rect; };
 								
 		void UpdateMouseStuff();		
-		void Update(const MouseData&);
-        		
-		void SetFocusedSpaceObject(BaseSpaceEntity* focused_space_ob) { this->focused_space_ob = focused_space_ob; };
+		void Update();
+		bool UpdateInSpace();
+		
 		void RenderFocusedSpaceObjectStuff();
 		
         private:
         	ItemSlot* item_slot;  
         	Rect rect;      	
-        	Player* player;
         	
         	MouseData data_mouse;
         	

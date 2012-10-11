@@ -87,7 +87,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 		//DRIVE SLOT
 		case sf::Key::F: 
 		{ 
-			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::DRIVE_SLOT_ID);
+			BaseButton* button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::DRIVE_SLOT_ID);
 			if (button)
 			{
 				button->PressEvent(); 
@@ -100,7 +100,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 		// WEAPON SLOTS
 		case sf::Key::Num1: 
 		{ 
-			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT1_ID);
+			BaseButton* button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT1_ID);
 			if (button)
 			{
 				button->PressEvent(); 
@@ -111,7 +111,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 		}		
 		case sf::Key::Num2: 
 		{ 
-			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT2_ID);
+			BaseButton* button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT2_ID);
 			if (button)
 			{
 				button->PressEvent(); 
@@ -122,7 +122,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 		}
 		case sf::Key::Num3: 
 		{ 
-			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT3_ID);
+			BaseButton* button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT3_ID);
 			if (button)
 			{
 				button->PressEvent(); 
@@ -133,7 +133,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 		}
 		case sf::Key::Num4: 
 		{ 
-			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT4_ID);
+			BaseButton* button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT4_ID);
 			if (button)
 			{
 				button->PressEvent(); 
@@ -144,7 +144,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 		}
 		case sf::Key::Num5: 
 		{ 
-			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT5_ID);
+			BaseButton* button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT5_ID);
 			if (button)
 			{
 				button->PressEvent(); 
@@ -155,7 +155,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 		}
 		case sf::Key::Num6: 
 		{ 
-			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT6_ID);
+			BaseButton* button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT6_ID);
 			if (button)
 			{
 				button->PressEvent(); 
@@ -166,7 +166,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 		}
 		case sf::Key::Num7: 
 		{ 
-			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT7_ID);
+			BaseButton* button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT7_ID);
 			if (button)
 			{
 				button->PressEvent(); 
@@ -177,7 +177,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 		}
 		case sf::Key::Num8: 
 		{ 
-			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT8_ID);
+			BaseButton* button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT8_ID);
 			if (button)
 			{
 				button->PressEvent(); 
@@ -188,7 +188,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 		}        		
 		case sf::Key::Num9: 
 		{ 
-			BaseButton* button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT9_ID);
+			BaseButton* button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT9_ID);
 			if (button)
 			{
 				button->PressEvent(); 
@@ -204,47 +204,47 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 			{
 				BaseButton* button = NULL;
 				
-				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT1_ID);
+				button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT1_ID);
 				if (button)
 				{
 					button->Reset();
 				}
-				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT2_ID);
+				button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT2_ID);
 				if (button)
 				{
 					button->Reset();
 				}
-				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT3_ID);
+				button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT3_ID);
 				if (button)
 				{
 					button->Reset();
 				}
-				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT4_ID);
+				button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT4_ID);
 				if (button)
 				{
 					button->Reset();
 				}
-				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT5_ID);
+				button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT5_ID);
 				if (button)
 				{
 					button->Reset();
 				}
-				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT6_ID);
+				button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT6_ID);
 				if (button)
 				{
 					button->Reset();
 				}
-				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT7_ID);
+				button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT7_ID);
 				if (button)
 				{
 					button->Reset();
 				}
-				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT8_ID);
+				button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT8_ID);
 				if (button)
 				{
 					button->Reset();
 				}
-				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT9_ID);
+				button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT9_ID);
 				if (button)
 				{
 					button->Reset();
@@ -254,47 +254,47 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 			{
 				BaseButton* button = NULL;
 				
-				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT1_ID);
+				button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT1_ID);
 				if (button)
 				{
 					button->PressEvent();
 				}
-				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT2_ID);
+				button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT2_ID);
 				if (button)
 				{
 					button->PressEvent();
 				}
-				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT3_ID);
+				button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT3_ID);
 				if (button)
 				{
 					button->PressEvent();
 				}
-				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT4_ID);
+				button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT4_ID);
 				if (button)
 				{
 					button->PressEvent();
 				}
-				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT5_ID);
+				button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT5_ID);
 				if (button)
 				{
 					button->PressEvent();
 				}
-				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT6_ID);
+				button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT6_ID);
 				if (button)
 				{
 					button->PressEvent();
 				}
-				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT7_ID);
+				button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT7_ID);
 				if (button)
 				{
 					button->PressEvent();
 				}
-				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT8_ID);
+				button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT8_ID);
 				if (button)
 				{
 					button->PressEvent();
 				}
-				button = gui_manager.GetGuiVehicle2().GetButton(ENTITY::WEAPON_SLOT9_ID);
+				button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT9_ID);
 				if (button)
 				{
 					button->PressEvent();
@@ -400,7 +400,7 @@ void UserInput::KeyPressedInKosmoport(Player* player)
        		  		}
  
           	  		player->GetNpc()->ResetScanTarget();
-         			player->GetGuiManager().GetGuiVehicle3().Reset();
+         			player->GetGuiManager().GetGuiVehicleTarget().Reset();
          		}
          		
          		break;

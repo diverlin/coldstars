@@ -30,7 +30,7 @@ class GuiVehicle2 : public BaseGui
       		GuiVehicle2();
       		~GuiVehicle2();
       		
-      		bool GetValid() const { return valid; };
+      		Vehicle* GetVehicle() const { return vehicle; }
 
 		void Reset();
 		void BindVehicle(Vehicle*, float scale = 1.0f);        	
@@ -39,12 +39,14 @@ class GuiVehicle2 : public BaseGui
       		
       		ItemSlot* GetInreactedItemSlot(const MouseData&);   
       		
+      		void UpdateOffset();
+      		
       	private:
       		std::vector<GuiPair<BaseButton*, ItemSlot*>> button_slot_vec;
 
         	void CreateFunctionalItemSlotsCircleGeometry(Vehicle*, float);
         	
-        	bool valid;
+        	Vehicle* vehicle;
 };
 
 
