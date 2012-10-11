@@ -40,16 +40,16 @@ class GuiManager
 		
 		bool RunSession(const MouseData&);
 		GuiRadar& GetGuiRadar() { return gui_radar; };
-		GuiVehicle& GetGuiVehicle() { return gui_vehicle; };
-		GuiVehicle2& GetGuiVehicle2() { return gui_vehicle2; };
-		GuiVehicle2& GetGuiVehicle3() { return gui_vehicle3; };
+		GuiVehicle& GetGuiVehicleScan() { return gui_vehicle_scan; };
+		GuiVehicle2& GetGuiVehiclePlayer() { return gui_vehicle_player; };
+		GuiVehicle2& GetGuiVehicleTarget() { return gui_vehicle_target; };
 						      		
       	private:
       		Player* player;
 	
-      		GuiVehicle 	gui_vehicle;
-      		GuiVehicle2 	gui_vehicle2;
-      		GuiVehicle2 	gui_vehicle3;
+      		GuiVehicle 	gui_vehicle_scan;
+      		GuiVehicle2 	gui_vehicle_player;
+      		GuiVehicle2 	gui_vehicle_target;
       		GuiSkill   	gui_skill;
       		GuiKosmoport 	gui_kosmoport;
       		GuiAngar 	gui_angar;

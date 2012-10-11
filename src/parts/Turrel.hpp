@@ -46,7 +46,7 @@ class Turrel
                 void CheckTarget();                
                 bool CheckAmmo() const;
                 
-                bool FireEvent(int, ItemSlot*, bool);
+                bool FireEvent(int, bool);
                 
                 void Render(float);                 
                

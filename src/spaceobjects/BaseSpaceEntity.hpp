@@ -61,6 +61,7 @@ class BaseSpaceEntity : public Base
 		int GetPlaceTypeId()        const { return place_type_id; }
 		Points& GetPoints()          { return points; }
 
+		int GetGivenExpirience() const { return given_expirience; }
 		int GetCollisionRadius() const { return collision_radius; }   
 		bool GetAlive()          const { return data_life.is_alive; }
 		bool GetGarbageReady()   const { return data_life.garbage_ready; }             
@@ -101,6 +102,7 @@ class BaseSpaceEntity : public Base
 
 		int mass;
 		float scale;
+		int given_expirience;
 
 		BaseSpaceEntity* parent;
 

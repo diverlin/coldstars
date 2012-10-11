@@ -202,7 +202,8 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 	
 	if (starsystem->GetId() != npc->GetVehicle()->GetStarSystem()->GetId())
 	{
-		Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenter());
+		//Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenter());
+		Screen::Instance().GetRect().SetCenter(npc->GetVehicle()->GetPoints().GetCenter());
 		starsystem = npc->GetVehicle()->GetStarSystem();
 	}
 	
@@ -277,7 +278,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 
 		starsystem->RestoreDefaultColor();
 		enable_BLEND();
-			for(unsigned int i = 0; i < visible_STAR_vec.size(); i++) 
+			for(unsigned int i=0; i<visible_STAR_vec.size(); i++) 
 			{ 
         			visible_STAR_vec[i]->Render_NEW(); 
     			}
@@ -314,17 +315,17 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
           	camera(Screen::Instance().GetRect().GetBottomLeft().x, Screen::Instance().GetRect().GetBottomLeft().y);    
         
 		enable_DEPTH();  
-    			for(unsigned int i = 0; i < visible_PLANET_vec.size(); i++) 
+    			for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 
     			{ 
        				visible_PLANET_vec[i]->Render_NEW(Screen::Instance().GetRect().GetBottomLeft()); 
     			}
     		
-    			for(unsigned int i = 0; i < visible_ASTEROID_vec.size(); i++)
+    			for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
     			{ 
        				visible_ASTEROID_vec[i]->Render_NEW(Screen::Instance().GetRect().GetBottomLeft()); 
     			}
 
-    			for(unsigned int i = 0; i < visible_BLACKHOLE_vec.size(); i++)
+    			for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
 			{ 
         			visible_BLACKHOLE_vec[i]->Render_NEW(Screen::Instance().GetRect().GetBottomLeft()); 
         			
@@ -333,33 +334,33 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 
     	          
 		enable_BLEND();		
-		    	for(unsigned int i = 0; i < visible_SPACESTATION_vec.size(); i++)
+		    	for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
     			{ 
     				visible_SPACESTATION_vec[i]->UpdateRenderStuff(); 
        				visible_SPACESTATION_vec[i]->RenderInSpace(); 
         			starsystem->RestoreSceneColor();
     			}
    
-    			for(unsigned int i = 0; i < visible_CONTAINER_vec.size(); i++)
+    			for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
     			{ 
         			visible_CONTAINER_vec[i]->Render2D(); 
     			} 	 
            
 
-    			for(unsigned int i = 0; i < visible_SHIP_vec.size(); i++)
+    			for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
     			{ 
        				visible_SHIP_vec[i]->RenderInSpace(); 
         			starsystem->RestoreSceneColor();
     			}
 
-			for(unsigned int i = 0; i < visible_SATELLITE_vec.size(); i++)
+			for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
     			{ 
     				visible_SATELLITE_vec[i]->UpdateRenderStuff(); 
        				visible_SATELLITE_vec[i]->RenderInSpace(); 
         			starsystem->RestoreSceneColor();
     			}
     			
-    			for(unsigned int i = 0; i < visible_ROCKET_vec.size(); i++)
+    			for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
     			{ 
     			    	visible_ROCKET_vec[i]->UpdateRenderStuff();
        				visible_ROCKET_vec[i]->RenderInSpace(); 
@@ -377,7 +378,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 		float xyz_array[10][3];
 		float time_array[10];
 
-		for (unsigned int i = 0; i < visible_effect_SHOCKWAVE_vec.size(); i++)
+		for (unsigned int i=0; i<visible_effect_SHOCKWAVE_vec.size(); i++)
 		{         
 			center_array[i][0] = visible_effect_SHOCKWAVE_vec[i]->center.x/w - Screen::Instance().GetRect().GetBottomLeft().x/w;
 			center_array[i][1] = visible_effect_SHOCKWAVE_vec[i]->center.y/h - Screen::Instance().GetRect().GetBottomLeft().y/h;
@@ -425,7 +426,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
     		}
 
     		enable_POINTSPRITE();
-    			for(unsigned int i = 0; i < visible_effect_PARTICLESYSTEM_vec.size(); i++)
+    			for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
     			{ 
         			visible_effect_PARTICLESYSTEM_vec[i]->Render(); 
     			}
@@ -452,54 +453,54 @@ void Player::RenderInSpace_OLD(StarSystem* starsystem)
         
         disable_BLEND();
         enable_DEPTH();
-		for(unsigned int i = 0; i < visible_STAR_vec.size(); i++) 
+		for(unsigned int i=0; i<visible_STAR_vec.size(); i++) 
 		{ 
         		visible_STAR_vec[i]->Render_OLD(); 
     		}
 
-    		for(unsigned int i = 0; i < visible_PLANET_vec.size(); i++) 
+    		for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 
     		{ 
        			visible_PLANET_vec[i]->Render_OLD(); 
     		}
 
-    		for(unsigned int i = 0; i < visible_ASTEROID_vec.size(); i++)
+    		for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
     		{ 
        			visible_ASTEROID_vec[i]->Render_OLD(); 
     		}
 
-            	for(unsigned int i = 0; i < visible_BLACKHOLE_vec.size(); i++)
+            	for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
 		{ 
         		visible_BLACKHOLE_vec[i]->Render_OLD(); 
     		}    		
         disable_DEPTH();
 
         enable_BLEND();
-                for(unsigned int i = 0; i < visible_SPACESTATION_vec.size(); i++)
+                for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
     		{ 
     			visible_SPACESTATION_vec[i]->UpdateRenderStuff(); 
        			visible_SPACESTATION_vec[i]->RenderInSpace(); 
         		starsystem->RestoreSceneColor();
     		}
            
-    		for(unsigned int i = 0; i < visible_CONTAINER_vec.size(); i++)
+    		for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
     		{ 
         		visible_CONTAINER_vec[i]->Render2D(); 
     		} 	 
            
-    		for(unsigned int i = 0; i < visible_SHIP_vec.size(); i++)
+    		for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
     		{ 
        			visible_SHIP_vec[i]->RenderInSpace(); 
         		starsystem->RestoreSceneColor();
     		}
 
-		for(unsigned int i = 0; i < visible_SATELLITE_vec.size(); i++)
+		for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
     		{ 
     			visible_SATELLITE_vec[i]->UpdateRenderStuff(); 
        			visible_SATELLITE_vec[i]->RenderInSpace(); 
         		starsystem->RestoreSceneColor();
                 }
                         
-    		for(unsigned int i = 0; i < visible_ROCKET_vec.size(); i++)
+    		for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
     		{ 
                         visible_ROCKET_vec[i]->UpdateRenderStuff();
        			visible_ROCKET_vec[i]->RenderInSpace(); 
@@ -515,7 +516,7 @@ void Player::RenderInSpace_OLD(StarSystem* starsystem)
 
 	enable_BLEND();
         	enable_POINTSPRITE();
-    			for(unsigned int i = 0; i < visible_effect_PARTICLESYSTEM_vec.size(); i++)
+    			for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
     			{ 
         			visible_effect_PARTICLESYSTEM_vec[i]->Render(); 
     			}
@@ -586,8 +587,6 @@ void Player::MouseInteractionInSpace(const MouseData& data_mouse)
     	if (MouseInteractionWithSpaceStations(data_mouse)) { return; }	
     	if (MouseInteractionWithPlanets(data_mouse)) { return; }    
     	if (MouseInteractionWithStars(data_mouse)) { return; }    
-    	
-	MouseNavigation(data_mouse);  
 }
 
 bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
@@ -620,7 +619,7 @@ bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
 
 bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
 {
-       	for (unsigned int i = 0; i < visible_CONTAINER_vec.size(); i++)
+       	for (unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
        	{ 
        		float object_cursor_dist = distBetweenPoints(visible_CONTAINER_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
        		if (object_cursor_dist < visible_CONTAINER_vec[i]->GetCollisionRadius())
@@ -660,7 +659,7 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
 
 bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
 {
-	for (unsigned int i = 0; i < visible_SATELLITE_vec.size(); i++)
+	for (unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
 	{ 
             	float object_cursor_dist = distBetweenPoints(visible_SATELLITE_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
             	if (object_cursor_dist < visible_SATELLITE_vec[i]->GetCollisionRadius())
@@ -694,7 +693,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
                			        if ( npc->CheckPossibilityToScan(visible_SATELLITE_vec[i]) == true )
                				{
                       				npc->SetScanTarget(visible_SATELLITE_vec[i]);
-                      				gui_manager.GetGuiVehicle().BindVehicle(visible_SATELLITE_vec[i]);
+                      				gui_manager.GetGuiVehicleScan().BindVehicle(visible_SATELLITE_vec[i]);
                				}
 
       				}
@@ -709,7 +708,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
 
 bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
 {
-       	for (unsigned int i = 0; i < visible_ASTEROID_vec.size(); i++)
+       	for (unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
        	{ 
        		float object_cursor_dist = distBetweenPoints(visible_ASTEROID_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
        		if (object_cursor_dist < visible_ASTEROID_vec[i]->GetCollisionRadius())
@@ -741,52 +740,63 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
 
 bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 {
-	for (unsigned int i = 0; i < visible_SHIP_vec.size(); i++)
+	for (unsigned int i=0; i<visible_SHIP_vec.size(); i++)
 	{ 
         	float object_cursor_dist = distBetweenPoints(visible_SHIP_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
         	if (object_cursor_dist < visible_SHIP_vec[i]->GetCollisionRadius())
         	{ 
                		cursor.SetFocusedSpaceObject(visible_SHIP_vec[i]);    
                 
-               		if (data_mouse.left_click == true)
+                	if (npc->GetVehicle()->GetId() != visible_SHIP_vec[i]->GetId())
                		{
-               			if (npc->GetVehicle()->GetWeaponComplex().IsAnyWeaponSelected() == true)
+               			if (data_mouse.left_click == true)
                			{
-               				npc->GetVehicle()->GetWeaponComplex().SetTarget(visible_SHIP_vec[i]);
-               			}
-               			else
-               			{
-               				npc->GetVehicle()->GetDriveComplex().SetTarget(visible_SHIP_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
-               			}
-			}
+               				if (npc->GetVehicle()->GetWeaponComplex().IsAnyWeaponSelected() == true)
+               				{
+               					npc->GetVehicle()->GetWeaponComplex().SetTarget(visible_SHIP_vec[i]);
+               				}
+               				else
+               				{
+               					npc->GetVehicle()->GetDriveComplex().SetTarget(visible_SHIP_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
+               				}
+				}
 
-               		if (data_mouse.right_click == true)
-               		{
-               			if (show.GetRangeGrapple() == true)
+               			if (data_mouse.right_click == true)
                			{
-					//if (npc->GetVehicle()->ableTo.GRAB == true)
-	       				//{
-	       					//if (npc->GetVehicle()->GetGrappleSlot()->CheckTarget(visible_SHIP_vec[i]) == true)
-	       					//{
-	       						//npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(visible_SHIP_vec[i]);
-	       					//}					
-	       				//}
-                		}
-                		else
-                		{
-                      		        if (npc->CheckPossibilityToScan(visible_SHIP_vec[i]) == true)
-                			{
-                				if (npc->GetVehicle()->GetWeaponComplex().IsAnyWeaponSelected() == false)
-                				{
-                      					npc->SetScanTarget(visible_SHIP_vec[i]);
-                      					gui_manager.GetGuiVehicle().BindVehicle(visible_SHIP_vec[i]);
-                				}                			
-                				else
-                				{
-               						gui_manager.GetGuiVehicle3().BindVehicle(visible_SHIP_vec[i], 0.6f);
-                				}
-                			}
+               				if (show.GetRangeGrapple() == true)
+               				{
+						//if (npc->GetVehicle()->ableTo.GRAB == true)
+		       				//{
+		       					//if (npc->GetVehicle()->GetGrappleSlot()->CheckTarget(visible_SHIP_vec[i]) == true)
+		       					//{
+		       						//npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(visible_SHIP_vec[i]);
+		       					//}					
+		       				//}
+	                		}
+	                		else
+	                		{
+	                      		        if (npc->CheckPossibilityToScan(visible_SHIP_vec[i]) == true)
+	                			{
+	                				if (npc->GetVehicle()->GetWeaponComplex().IsAnyWeaponSelected() == false)
+	                				{
+	                      					npc->SetScanTarget(visible_SHIP_vec[i]);
+	                      					gui_manager.GetGuiVehicleScan().BindVehicle(visible_SHIP_vec[i]);
+	                				}                			
+	                				else
+	                				{
+	               						gui_manager.GetGuiVehicleTarget().BindVehicle(visible_SHIP_vec[i], 0.6f);
+	                				}
+	                			}
+	       				}
        				}
+       			}
+       			else
+       			{
+       				if (data_mouse.right_click == true)
+               			{
+               				npc->SetScanTarget(visible_SHIP_vec[i]);
+	                      		gui_manager.GetGuiVehicleScan().BindVehicle(visible_SHIP_vec[i]);
+               			}
        			}
 						
                		return true; 
@@ -798,7 +808,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 
 bool Player::MouseInteractionWithBlackHoles(const MouseData& data_mouse)
 {
-       	for (unsigned int i = 0; i < visible_BLACKHOLE_vec.size(); i++)
+       	for (unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
        	{ 
        		float cursor_dist = distBetweenPoints(visible_BLACKHOLE_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
        		if (cursor_dist < visible_BLACKHOLE_vec[i]->GetCollisionRadius())
@@ -849,7 +859,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
                			        if ( npc->CheckPossibilityToScan(visible_SPACESTATION_vec[i]) == true )
                				{
                       				npc->SetScanTarget(visible_SPACESTATION_vec[i]);
-                      				gui_manager.GetGuiVehicle().BindVehicle(visible_SPACESTATION_vec[i]);
+                      				gui_manager.GetGuiVehicleScan().BindVehicle(visible_SPACESTATION_vec[i]);
                				}
        				}
        			}
@@ -956,6 +966,11 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 			if ( (npc->GetScanTarget() == NULL) && (show.GetGuiGalaxyMap() == false) )
 			{
 				MouseInteractionInSpace(cursor.GetMouseData());  
+				interaction_with_gui = cursor.UpdateInSpace();
+				if (interaction_with_gui == false)
+				{	
+					MouseNavigation(cursor.GetMouseData());  
+				}
 			}
 		}
 	}

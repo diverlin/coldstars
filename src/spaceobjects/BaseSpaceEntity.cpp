@@ -30,7 +30,7 @@
 #include "../common/Logger.hpp"
 
 BaseSpaceEntity::BaseSpaceEntity():starsystem(NULL), mesh(NULL), textureOb(NULL), parent(NULL),
-				     place_type_id(NONE_ID), collision_radius(0), mass(0)
+				   place_type_id(NONE_ID), collision_radius(0), mass(0), given_expirience(1)
 {
 	angle.x        = getRandInt(10, 40);
 	angle.y        = getRandInt(10, 40);

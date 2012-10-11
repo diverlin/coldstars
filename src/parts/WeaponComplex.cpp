@@ -201,11 +201,12 @@ void WeaponComplex::Fire(int timer, int attack_skill, bool show_effect)
                         (*it)->GetTurrel()->CheckTarget();
                         if ((*it)->GetTurrel()->GetTarget() != NULL)
                         {
-      				(*it)->GetTurrel()->FireEvent(attack_skill, (*it)->GetTurrel()->GetSubTarget(), show_effect);
+      				(*it)->GetTurrel()->FireEvent(attack_skill, show_effect);
 				it = slot_weapon_reloaded_vec.erase(it);
 				if ((*it)->GetTurrel()->GetSubTarget() == NULL)
            			{
            				fire_delay += d_fire_delay;
+           				break;
            			}
         		}    
         	}

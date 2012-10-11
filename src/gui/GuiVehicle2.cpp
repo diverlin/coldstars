@@ -24,11 +24,10 @@
 
 #include "../items/BaseItem.hpp"
 #include "../slots/ItemSlot.hpp"
+#include "../render/Screen.hpp"
 
-GuiVehicle2::GuiVehicle2()
-{
-	valid = false;
-}
+GuiVehicle2::GuiVehicle2():vehicle(NULL)
+{}
 
 GuiVehicle2::~GuiVehicle2()
 {}
@@ -42,14 +41,14 @@ void GuiVehicle2::Reset()
 	button_slot_vec.clear();
 	button_map.clear();
 	
-	valid = false;
+	vehicle = NULL;
 }
 
 void GuiVehicle2::BindVehicle(Vehicle* vehicle, float scale)
 {
 	CreateFunctionalItemSlotsCircleGeometry(vehicle, scale);
 	
-	valid = true;
+	this->vehicle = vehicle;
 }	
 	
 void GuiVehicle2::CreateFunctionalItemSlotsCircleGeometry(Vehicle* vehicle, float scale)
@@ -58,60 +57,35 @@ void GuiVehicle2::CreateFunctionalItemSlotsCircleGeometry(Vehicle* vehicle, floa
 
         Rect rect;
         		
-	int angle_layer1 = 0;
-	int angle_layer2 = 0;
-	int angle_layer3 = 0;
         for (unsigned int i=0; i<vehicle->slot_total_vec.size(); i++)
         {	
         	int slot_subtype_id = vehicle->slot_total_vec[i]->GetSubTypeId();
-		int button_subtype_id = slot_subtype_id;
-		//if (slot_subtype_id == ENTITY::ARTEFACT_SLOT_ID)
-		//{
-		        //vec2f pos = getVec2f(100*scale, angle_layer1);	
-			//rect.SetCenter(pos);
-			//rect.SetSize(GUI::ITEMSLOT::WIDTH_FOR_SHIP/2, GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2);		    			   		
-           		//rect.Scale(scale);		     	
-           		
-       			//GuiPair<ItemSlot*> gui_pair(rect, vehicle->slot_total_vec[i]);
-			//rect_slot_vec.push_back(gui_pair);
-		
-			//angle_layer1 += 90;
-		//}
-
                 if ( (slot_subtype_id != ENTITY::CARGO_SLOT_ID) and (slot_subtype_id != ENTITY::ARTEFACT_SLOT_ID) )
         	{  
+        		int button_subtype_id = slot_subtype_id;
         		if (slot_subtype_id == ENTITY::WEAPON_SLOT_ID)
         		{
         			button_subtype_id = vehicle->slot_total_vec[i]->GetSubSubTypeId();
         		}
-        		
-        		vec2f pos = getVec2f(260*scale, angle_layer2);	
-			rect.SetCenter(pos);
-			rect.SetSize(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);		    			   
-           		rect.Scale(scale);	
-           			  
+			           			  
           		ButtonTrigger* button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_purple, button_subtype_id, getEntityStr(button_subtype_id));  
-    			button->SetRect(rect);  	
-    				        	
 			button_slot_vec.push_back(GuiPair<BaseButton*, ItemSlot*>(button, vehicle->slot_total_vec[i]));
 			button_map.insert(std::make_pair(button->GetSubTypeId(), button));
-		
-			angle_layer2 += 20;
 		}
-
-		//if (slot_subtype_id == ENTITY::CARGO_SLOT_ID)
-		//{
-		        //vec2f pos = getVec2f(220*scale, angle_layer3);	
-			//rect.SetCenter(pos);
-			//rect.SetSize(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);		    			   		
-           		//rect.Scale(scale);		     	
-       			
-       			//GuiPair<ItemSlot*> gui_pair(rect, vehicle->slot_total_vec[i]);
-			//rect_slot_vec.push_back(gui_pair);
-		
-			//angle_layer3 += 15*scale;
-		//}
         }    	
+        
+        int angle = 0;
+        for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
+	{
+        	vec2f pos = getVec2f(260*scale, angle);	
+		rect.SetCenter(pos);
+		rect.SetSize(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);		    			   
+        	rect.Scale(scale);	
+    		iterator->second->SetRect(rect);   
+
+		//angle += 360/button_map.size();
+		angle += 20;
+	}
 }	
 
 void GuiVehicle2::UpdateEquipmentIcons() const
@@ -155,7 +129,6 @@ void GuiVehicle2::ButtonsAction(Player* player) const
 	}
 }
 
-
 ItemSlot* GuiVehicle2::GetInreactedItemSlot(const MouseData& data_mouse)
 {
 	for(unsigned int i=0; i<button_slot_vec.size(); i++)
@@ -170,4 +143,9 @@ ItemSlot* GuiVehicle2::GetInreactedItemSlot(const MouseData& data_mouse)
         }  
         
         return NULL;                     
+}
+
+void GuiVehicle2::UpdateOffset()
+{
+	SetOffset(vehicle->GetPoints().GetCenter() - Screen::Instance().GetRect().GetBottomLeft());
 }

@@ -71,32 +71,30 @@ bool Turrel::CheckAmmo() const
 }
 
 
-bool Turrel::FireEvent(int attack_skill, ItemSlot* target_slot, bool show_effect)
+bool Turrel::FireEvent(int attack_skill, bool show_effect)
 {       			
 	switch(slot->GetItem()->GetSubTypeId())
 	{
     		case ENTITY::LAZER_EQUIPMENT_ID:
     		{   
-			int damage = slot->GetLazerEquipment()->GetDamage() * attack_skill * SKILL::ATTACK_NORMALIZED_RATE;
-       			slot->GetLazerEquipment()->FireEvent(show_effect);       			
-						
-			if (target_slot != NULL)
+			int damage = slot->GetLazerEquipment()->GetDamage() * attack_skill * SKILL::ATTACK_NORMALIZED_RATE;						
+			if (subtarget != NULL) // precise fire
 			{
 				if (target->GetTypeId() == ENTITY::VEHICLE_ID)
 				{			       		
 					//if (getRandInt(1, 2) == 1)
 					{
-						((Vehicle*)target)->LockItemInItemSlot(target_slot, 1);
+						((Vehicle*)target)->LockItemInItemSlot(subtarget, 1);
 					}
-					damage /= 3;
+					damage /= 3; // lower damage is used for precise fire
 				}	
 			}
+       			slot->GetLazerEquipment()->FireEvent(show_effect); 
 			target->Hit(damage, show_effect);
 									       			
        			if (target->GetAlive() == false)
        			{
-       				int expirience = 1000;
-       				slot->GetOwnerVehicle()->GetOwnerNpc()->AddExpirience(expirience, show_effect);
+       				slot->GetOwnerVehicle()->GetOwnerNpc()->AddExpirience(target->GetGivenExpirience(), show_effect);
        			}
        			
        			return true; break;  

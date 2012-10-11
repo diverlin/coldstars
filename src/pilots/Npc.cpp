@@ -126,7 +126,7 @@ void Npc::AddExpirience(int expirience, bool show_effect)
 	
 	if (show_effect == true)
 	{
-		Color4i color(0,0,255,255);  	       		
+		Color4i color(128,128,255,255);  	       		
        		VerticalFlowText* text = new VerticalFlowText(int2str(expirience), 12, vehicle->GetPoints().GetCenter(), color, 10);
        		vehicle->GetStarSystem()->Add(text); 
 	}

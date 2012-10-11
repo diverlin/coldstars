@@ -141,7 +141,7 @@ bool GuiAngar::UpdateMouseVehicleSlotsInteraction(const MouseData& data_mouse)
                                 if (rect_slot_vec[i].second->GetVehicle() != NULL)
                                 {
                                         player->GetNpc()->SetScanTarget(rect_slot_vec[i].second->GetVehicle());
-                                        player->GetGuiManager().GetGuiVehicle().BindVehicle(rect_slot_vec[i].second->GetVehicle());
+                                        player->GetGuiManager().GetGuiVehicleScan().BindVehicle(rect_slot_vec[i].second->GetVehicle());
                                         return true;
                                 }
                         }
