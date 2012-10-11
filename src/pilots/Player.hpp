@@ -95,6 +95,7 @@ class Player : public Base
      	     	Cursor cursor;
 
      	     	Show show;  
+     	     	StarSystem* starsystem;
      	     	
      	     	// VISIBLE ENTITY LIST
     		std::vector<Star*>         visible_STAR_vec;
