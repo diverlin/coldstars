@@ -33,8 +33,7 @@ class LazerEquipment : public BaseEquipment
 		int GetDamage() const { return damage; };
 		int GetRadius() const { return radius; };
 		
-      		void FireEvent_TRUE();
-      		void FireEvent_FALSE();
+      		void FireEvent(bool);
       		
        	      	virtual void UpdatePropetries();
                 

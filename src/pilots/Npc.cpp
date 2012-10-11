@@ -35,6 +35,7 @@
 #include "../parts/WeaponComplex.hpp"
 
 #include "../docking/Shop.hpp"
+#include "../text/VerticalFlowText.hpp" 
 
 Npc::Npc(int id)
 { 
@@ -119,6 +120,18 @@ void Npc::MindInSpace()
         vehicle->GetDriveComplex().UpdatePath();
 }
 
+void Npc::AddExpirience(int expirience, bool show_effect)
+{
+       	skill.AddExpirience(expirience);
+	
+	if (show_effect == true)
+	{
+		Color4i color(0,0,255,255);  	       		
+       		VerticalFlowText* text = new VerticalFlowText(int2str(expirience), 12, vehicle->GetPoints().GetCenter(), color, 10);
+       		vehicle->GetStarSystem()->Add(text); 
+	}
+}
+     		
 void Npc::UpdateInSpace(int time, bool show_effect)
 {
         if (time > 0)

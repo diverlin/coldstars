@@ -25,7 +25,6 @@
 
 #include "../world/starsystem.hpp"
 #include "../render/Render.hpp"
-#include "../text/VerticalFlowText.hpp" 
 #include "../pilots/Npc.hpp"
 
 Turrel::Turrel(ItemSlot* slot)
@@ -71,69 +70,41 @@ bool Turrel::CheckAmmo() const
     	return false;           
 }
 
-bool Turrel::PreciseFireEvent(ItemSlot* item_slot, int attack_skill, bool show_effect)
-{       			
-	switch(slot->GetItem()->GetSubTypeId())
-	{
-    		case ENTITY::LAZER_EQUIPMENT_ID:
-    		{   
-			int damage = slot->GetLazerEquipment()->GetDamage() * attack_skill * SKILL::ATTACK_NORMALIZED_RATE;
-       			slot->GetLazerEquipment()->FireEvent_TRUE();       			
-			target->Hit(damage/3, show_effect);
-			
-			if (target->GetTypeId() == ENTITY::VEHICLE_ID)
-			{			       		
-				//if (getRandInt(1, 2) == 1)
-				{
-					((Vehicle*)target)->LockItemInItemSlot(item_slot, 1);
-				}
-			}
-			else
-			{
-				std::cout<<"Turrel::PreciseFireEvent on non Vehicle ob, FAIL code"<<std::endl;
-			}
-		
-       			if (target->GetAlive() == false)
-       			{
-       				int expirience = 1000;
-       			       	Color4i color(0,255,0,255);  	       		
-       				VerticalFlowText* text = new VerticalFlowText(int2str(expirience), 12, slot->GetOwnerVehicle()->GetPoints().GetCenter(), color, 10);
-       				slot->GetOwnerVehicle()->GetStarSystem()->Add(text); 
-       				slot->GetOwnerVehicle()->GetOwnerNpc()->GetSkill().AddExpirience(expirience);
-       			}
-       			
-       			break;
-    		}
-	}
-	
-    	return false;
-}
 
-bool Turrel::FireEvent(int attack_skill, bool show_effect)
+bool Turrel::FireEvent(int attack_skill, ItemSlot* target_slot, bool show_effect)
 {       			
 	switch(slot->GetItem()->GetSubTypeId())
 	{
     		case ENTITY::LAZER_EQUIPMENT_ID:
     		{   
 			int damage = slot->GetLazerEquipment()->GetDamage() * attack_skill * SKILL::ATTACK_NORMALIZED_RATE;
-       			slot->GetLazerEquipment()->FireEvent_TRUE();       			
+       			slot->GetLazerEquipment()->FireEvent(show_effect);       			
+						
+			if (target_slot != NULL)
+			{
+				if (target->GetTypeId() == ENTITY::VEHICLE_ID)
+				{			       		
+					//if (getRandInt(1, 2) == 1)
+					{
+						((Vehicle*)target)->LockItemInItemSlot(target_slot, 1);
+					}
+					damage /= 3;
+				}	
+			}
 			target->Hit(damage, show_effect);
-						       			
+									       			
        			if (target->GetAlive() == false)
        			{
        				int expirience = 1000;
-       			       	Color4i color(0,255,0,255);  	       		
-       				VerticalFlowText* text = new VerticalFlowText(int2str(expirience), 12, slot->GetOwnerVehicle()->GetPoints().GetCenter(), color, 10);
-       				slot->GetOwnerVehicle()->GetStarSystem()->Add(text); 
-       				slot->GetOwnerVehicle()->GetOwnerNpc()->GetSkill().AddExpirience(expirience);
+       				slot->GetOwnerVehicle()->GetOwnerNpc()->AddExpirience(expirience, show_effect);
        			}
        			
-       			break;
+       			return true; break;  
     		}
 
     		case ENTITY::ROCKET_EQUIPMENT_ID:
     		{       
-                	slot->GetRocketEquipment()->FireEvent( attack_skill * SKILL::ATTACK_NORMALIZED_RATE );
+                	slot->GetRocketEquipment()->FireEvent(attack_skill * SKILL::ATTACK_NORMALIZED_RATE);
                 	return true; break;              
     		}
 

@@ -199,28 +199,17 @@ void WeaponComplex::Fire(int timer, int attack_skill, bool show_effect)
         	for (std::vector<ItemSlot*>::iterator it=slot_weapon_reloaded_vec.begin(); it<slot_weapon_reloaded_vec.end(); it++)
         	{	
                         (*it)->GetTurrel()->CheckTarget();
-                        if ((*it)->GetTurrel()->GetSubTarget() != NULL)
-           		{
-               			(*it)->GetTurrel()->PreciseFireEvent((*it)->GetTurrel()->GetSubTarget(), attack_skill, show_effect);
-       				it = slot_weapon_reloaded_vec.erase(it);
-            		}
-        	}     	
-     	
-        	for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
-        	{	
-                        slot_weapon_reloaded_vec[i]->GetTurrel()->CheckTarget();
-                        if (slot_weapon_reloaded_vec[i]->GetTurrel()->GetTarget() != NULL)
-           		{
-               			if (slot_weapon_reloaded_vec[i]->GetTurrel()->FireEvent(attack_skill, show_effect) == true)
-               			{
-                   			fire_delay += d_fire_delay;
-               			}
-
-       				slot_weapon_reloaded_vec.erase(slot_weapon_reloaded_vec.begin() + i);
-       				break;
-            		}
+                        if ((*it)->GetTurrel()->GetTarget() != NULL)
+                        {
+      				(*it)->GetTurrel()->FireEvent(attack_skill, (*it)->GetTurrel()->GetSubTarget(), show_effect);
+				it = slot_weapon_reloaded_vec.erase(it);
+				if ((*it)->GetTurrel()->GetSubTarget() == NULL)
+           			{
+           				fire_delay += d_fire_delay;
+           			}
+        		}    
         	}
-        }
+        } 	
 }
 
 void WeaponComplex::ValidateAllWeaponsTarget()
