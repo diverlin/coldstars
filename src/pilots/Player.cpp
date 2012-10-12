@@ -575,18 +575,18 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
 	disable_BLEND();  
 } 
 
-void Player::MouseInteractionInSpace(const MouseData& data_mouse) 
+bool Player::MouseInteractionWithSpaceObjectsInSpace(const MouseData& data_mouse) 
 {
 	/* NOTE: the intersection must be checked in order from small objects to huge */	
-    	if (MouseInteractionWithRockets(data_mouse)) { return; }
-    	if (MouseInteractionWithContainers(data_mouse)) { return; }
-    	if (MouseInteractionWithSatellites(data_mouse)) { return; }
-    	if (MouseInteractionWithAsteroids(data_mouse)) { return; }
-    	if (MouseInteractionWithShips(data_mouse)) { return; }	
-    	if (MouseInteractionWithBlackHoles(data_mouse)) { return; }	
-    	if (MouseInteractionWithSpaceStations(data_mouse)) { return; }	
-    	if (MouseInteractionWithPlanets(data_mouse)) { return; }    
-    	if (MouseInteractionWithStars(data_mouse)) { return; }    
+    	if (MouseInteractionWithRockets(data_mouse)) { return true; }
+    	if (MouseInteractionWithContainers(data_mouse)) { return true; }
+    	if (MouseInteractionWithSatellites(data_mouse)) { return true; }
+    	if (MouseInteractionWithAsteroids(data_mouse)) { return true; }
+    	if (MouseInteractionWithShips(data_mouse)) { return true; }	
+    	if (MouseInteractionWithBlackHoles(data_mouse)) { return true; }	
+    	if (MouseInteractionWithSpaceStations(data_mouse)) { return true; }	
+    	if (MouseInteractionWithPlanets(data_mouse)) { return true; }    
+    	if (MouseInteractionWithStars(data_mouse)) { return true; }    
 }
 
 bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
@@ -958,16 +958,16 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 	
 	RenderInSpace(starsystem, turn_timer.GetTurnEnded(), show.GetAllOrbits(), show.GetAllPath()); 
     	     	
-	bool interaction_with_gui = gui_manager.RunSession(cursor.GetMouseData()); 
-	if (interaction_with_gui == false)
+	bool mouse_interaction = gui_manager.RunSession(cursor.GetMouseData()); 
+	if (mouse_interaction == false)
 	{    	
 		if (turn_timer.GetTurnEnded() == true)  
 		{
 			if ( (npc->GetScanTarget() == NULL) && (show.GetGuiGalaxyMap() == false) )
 			{
-				MouseInteractionInSpace(cursor.GetMouseData());  
-				interaction_with_gui = cursor.UpdateInSpace();
-				if (interaction_with_gui == false)
+				mouse_interaction = MouseInteractionWithSpaceObjectsInSpace(cursor.GetMouseData());  
+				//mouse_interaction = cursor.UpdateInSpace();
+				if (mouse_interaction == false)
 				{	
 					MouseNavigation(cursor.GetMouseData());  
 				}
