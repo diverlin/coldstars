@@ -22,6 +22,8 @@
 #include "../common/EntityManager.hpp"
 #include "../common/rand.hpp"
 #include "../common/myStr.hpp"
+#include "../pilots/Player.hpp"
+#include "../pilots/Npc.hpp"
 
 Galaxy::Galaxy(int id)
 {
@@ -71,11 +73,17 @@ StarSystem* Galaxy::GetRandomStarSystem(int condition_id)
 	}
 }
      		
-void Galaxy::Update(int time)
+void Galaxy::Update(Player* player, int time)
 {
 	for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
      	{
-		STARSYSTEM_vec[i]->Update(time, true); 
+     		bool simulation_detalied = false;
+     		if (player->GetNpc()->GetVehicle()->GetStarSystem()->GetId() == STARSYSTEM_vec[i]->GetId())
+		{
+			simulation_detalied = true;
+		}
+			 
+     		STARSYSTEM_vec[i]->Update(time, simulation_detalied);
      	}
 }
 
