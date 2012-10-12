@@ -117,7 +117,7 @@ void ItemSlot::RemoveItem()
 	}    	 
 }
 
-void ItemSlot::SelectEvent()
+void ItemSlot::SelectEvent1()
 {
 	selected = true;
         

@@ -55,7 +55,7 @@ void drawDynamic(TextureOb* texOb,
 		 float angleInDegree, 
 		 float pos_z);
 
-void drawRect(const Rect& rect, float z_pos); // the drawrect function was inverted by Y axis
+//void drawRect(const Rect& rect, float z_pos); // the drawrect function was inverted by Y axis
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   
 
 void drawTexturedPoint(GLuint texture, const vec2f& _center, float size, float pos_z);

@@ -115,28 +115,27 @@ void drawDynamic(TextureOb* texOb,
 }
 
 
-
-void drawRect(const Rect& rect, float z_pos) // the drawrect function was inverted by Y axis
-{
-    	glBegin(GL_QUADS);
-      		glTexCoord3f(0, 0, 0); glVertex3f(rect.GetBottomLeft().x,           	        rect.GetBottomLeft().y + rect.GetHeight(), z_pos);
-      		glTexCoord3f(1, 0, 0); glVertex3f(rect.GetBottomLeft().x + rect.GetWidth(),     rect.GetBottomLeft().y + rect.GetHeight(), z_pos);
-      		glTexCoord3f(1, 1, 0); glVertex3f(rect.GetBottomLeft().x + rect.GetWidth(),     rect.GetBottomLeft().y,           	   z_pos);
-     		glTexCoord3f(0, 1, 0); glVertex3f(rect.GetBottomLeft().x,           	        rect.GetBottomLeft().y,         	   z_pos);
-    	glEnd();
-}
+//void drawRect(const Rect& rect, float z_pos) // the drawrect function was inverted by Y axis
+//{
+    	//glBegin(GL_QUADS);
+      		//glTexCoord3f(0, 0, 0); glVertex3f(rect.GetBottomLeft().x,           	        rect.GetBottomLeft().y + rect.GetHeight(), z_pos);
+      		//glTexCoord3f(1, 0, 0); glVertex3f(rect.GetBottomLeft().x + rect.GetWidth(),     rect.GetBottomLeft().y + rect.GetHeight(), z_pos);
+      		//glTexCoord3f(1, 1, 0); glVertex3f(rect.GetBottomLeft().x + rect.GetWidth(),     rect.GetBottomLeft().y,           	   z_pos);
+     		//glTexCoord3f(0, 1, 0); glVertex3f(rect.GetBottomLeft().x,           	        rect.GetBottomLeft().y,         	   z_pos);
+    	//glEnd();
+//}
 
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos)
 {
     	glBindTexture(GL_TEXTURE_2D, texOb->texture);
 	int frame = texOb->updateAnimationFrame();
 	
-    	glBegin(GL_QUADS);
-      		glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(rect.GetBottomLeft().x,           	  rect.GetBottomLeft().y + rect.GetHeight(), z_pos);
-      		glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f(rect.GetBottomLeft().x + rect.GetWidth(), rect.GetBottomLeft().y + rect.GetHeight(), z_pos);
-      		glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f(rect.GetBottomLeft().x + rect.GetWidth(), rect.GetBottomLeft().y,          	     z_pos);
-     		glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(rect.GetBottomLeft().x,           	  rect.GetBottomLeft().y,          	     z_pos);
-    	glEnd();
+	glBegin(GL_QUADS);
+		glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(rect.GetBottomLeft().x,           	  rect.GetBottomLeft().y + rect.GetHeight(), z_pos);
+		glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f(rect.GetBottomLeft().x + rect.GetWidth(), rect.GetBottomLeft().y + rect.GetHeight(), z_pos);
+		glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f(rect.GetBottomLeft().x + rect.GetWidth(), rect.GetBottomLeft().y,          	     z_pos);
+		glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(rect.GetBottomLeft().x,           	  rect.GetBottomLeft().y,          	     z_pos);
+	glEnd();
 }
 
 

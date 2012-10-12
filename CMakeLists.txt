@@ -82,9 +82,11 @@ set (SOURCES
 	src/ai/StateMachine.cpp
 
 	src/render/Screen.cpp
-
 	src/render/Fbo.cpp
 	src/render/Bloom.cpp
+	src/render/Render.cpp
+	src/render/PathVisual.cpp
+	src/render/AnimationEffect2D.cpp
 
 	src/effects/particlesystem/Particle.cpp
 	src/effects/particlesystem/BaseParticleSystem.cpp
@@ -213,9 +215,6 @@ set (SOURCES
 	src/docking/BaseLand.cpp
 	src/docking/Kosmoport.cpp
 	src/docking/NatureLand.cpp
-
-	src/render/Render.cpp
-	src/render/PathVisual.cpp
 
 	src/text/VerticalFlowText.cpp
 	src/text/InfoTable.cpp

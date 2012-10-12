@@ -21,7 +21,7 @@
 
 #include "../BaseItem.hpp"
 #include "../modules/BaseModule.hpp"
-
+class AnimationEffect2D;
 
 class BaseEquipment : public BaseItem
 {
@@ -36,6 +36,8 @@ class BaseEquipment : public BaseItem
       		      		
      	protected:
 		std::vector<BaseModule*> modules_vec;    // needs for inserted modules drawing
+                
+                AnimationEffect2D* animation;
                 
                 virtual void AddCommonInfo();
                 

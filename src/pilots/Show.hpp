@@ -33,7 +33,6 @@ class Show
 		bool info_planets;
                 
 		bool range_radar;
-                bool range_grapple;
 	
 	public:
 		Show():
@@ -44,8 +43,7 @@ class Show
                 all_orbits(false),                
                 info_ships(false),
 		info_planets(false),                
-		range_radar(false),
-                range_grapple(false)
+		range_radar(false)
 		{};
                 
 		~Show() {};
@@ -61,7 +59,6 @@ class Show
                 
 		bool GetInfoShips() const { return info_ships; };
 		bool GetRangeRadar() const { return range_radar; };
-		bool GetRangeGrapple() const { return range_grapple; };
 		
 		void InverseAllPath() 
 		{
@@ -79,12 +76,6 @@ class Show
 		{
 			if (range_radar == true) { range_radar = false; }
 			else 			 { range_radar = true; };			
-		};
-		
-		void InverseRangeGrapple() 
-		{
-			if (range_grapple == true) { range_grapple = false; }
-			else 		  { range_grapple = true; };
 		};
 };
 

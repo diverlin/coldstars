@@ -50,6 +50,14 @@ vec2f& vec2f::operator+=(const vec2f& rhs)
 	return *this;
 }
 
+vec2f& vec2f::operator-=(const vec2f& rhs)
+{
+	x -= rhs.x;
+	y -= rhs.y;
+	
+	return *this;
+}
+
 vec2f& vec2f::operator+=(float rhs)
 {
 	x += rhs;

@@ -309,9 +309,14 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 			break;
 		}
 				
-		case sf::Key::G:   // Grapple
+		case sf::Key::G: // Grapple
 		{
-			player->GetShow().InverseRangeGrapple();
+			BaseButton* button = gui_manager.GetGuiVehiclePlayer().GetButton(ENTITY::GRAPPLE_SLOT_ID);
+			if (button)
+			{
+				button->PressEvent();
+			}
+
 			break;
 		}
 
