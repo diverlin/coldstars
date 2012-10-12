@@ -51,6 +51,7 @@ int main()
 	double angle = 0;  
 
 	GalaxyBuilder::Instance().GetGalaxy()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, NULL);
+	player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
 
 	//Screen::Instance().Resize(Config::Instance().SCREEN_WIDTH/1.5, Config::Instance().SCREEN_HEIGHT);
 

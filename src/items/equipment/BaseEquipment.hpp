@@ -37,7 +37,7 @@ class BaseEquipment : public BaseItem
      	protected:
 		std::vector<BaseModule*> modules_vec;    // needs for inserted modules drawing
                 
-                AnimationEffect2D* animation;
+                AnimationEffect2D* animation_notfunctioning;
                 
                 virtual void AddCommonInfo();
                 

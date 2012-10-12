@@ -1108,3 +1108,23 @@ void Vehicle::ResolveDataUniqueVehicle()
 	weapon_complex.PrepareWeapons();
 }
                 
+void Vehicle::TEST_DamageAndLockRandItems()
+{
+	int rand_index1 = getRandInt(0, slot_funct_vec.size()-1);
+	while (slot_funct_vec[rand_index1]->GetEquiped() == false)
+	{
+		rand_index1 = getRandInt(0, slot_funct_vec.size()-1);	
+	}
+	LockItemInItemSlot(slot_funct_vec[rand_index1], 3);
+
+	int rand_index2 = getRandInt(0, slot_funct_vec.size()-1);
+	while (slot_funct_vec[rand_index2]->GetEquiped() == false)
+	{
+		rand_index2 = getRandInt(0, slot_funct_vec.size()-1);	
+	}
+	
+	while (slot_funct_vec[rand_index2]->GetItem()->GetCondition() > 0)
+	{
+		slot_funct_vec[rand_index2]->GetItem()->DeteriorationEvent();
+	}
+}

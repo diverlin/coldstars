@@ -25,8 +25,8 @@ class Rect
 {  
 	public:
 	    	Rect();
-	    	Rect(float, float, int, int);
-      		Rect(const vec2f&, int, int);
+	    	Rect(float, float, float, float);
+      		Rect(const vec2f&, float, float);
       		Rect(const Rect&);
       		~Rect();
 	
@@ -35,8 +35,8 @@ class Rect
 		
       		bool CheckInteraction(int, int) const;
       		       		
-      		void Set(float, float, int, int);
-      		void Set(const vec2f&, int, int);
+      		void Set(float, float, float, float);
+      		void Set(const vec2f&, float, float);
       		void Set(const Rect&);
       			
       		void SetCenter(const vec2f&);
@@ -48,10 +48,10 @@ class Rect
 		const vec2f& GetCenter() const     { return center; }
 		const vec2f& GetBottomLeft() const { return bottomLeft; }
 		const vec2f& GetTopRight() const { return topRight; }
-		int GetWidth() const 	    { return w; }
-		int GetHeight() const 	    { return h; }  
+		float GetWidth() const 	    { return w; }
+		float GetHeight() const     { return h; }  
       
-      		void SetSize(int, int);
+      		void SetSize(float, float);
       		void MovingBy(const vec2f&);
       		      		
       	private:
@@ -59,7 +59,7 @@ class Rect
       		vec2f center;  
       		vec2f topRight;
       		
-      		int w, h;
+      		float w, h;
 
       		void UpdateCenter();
       		void UpdateTopRight();

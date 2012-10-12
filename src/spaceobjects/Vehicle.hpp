@@ -140,6 +140,8 @@ class Vehicle : public BaseSpaceEntity
 		void LockRandomItem(int);
 		
 		void RemoveChildFromEntityManager();
+		
+		void TEST_DamageAndLockRandItems();
 
 	protected:
 		int special_action_id;

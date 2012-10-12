@@ -20,15 +20,15 @@
 
 Rect::Rect()
 {
-	Set(0, 0, 0, 0);
+	Set(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
-Rect::Rect(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h)
+Rect::Rect(float _bottomLeft_x, float _bottomLeft_y, float _w, float _h)
 {
 	Set(_bottomLeft_x, _bottomLeft_y, _w, _h);
 }
 
-Rect::Rect(const vec2f& _bottomLeft, int _w, int _h)
+Rect::Rect(const vec2f& _bottomLeft, float _w, float _h)
 {
 	Set(_bottomLeft.x, _bottomLeft.y, _w, _h);
 }
@@ -43,10 +43,10 @@ Rect::~Rect()
      	
 void Rect::Scale(float scale)
 {
-	bottomLeft *= scale;    
-      	center *= scale;  
       	w *= scale;
       	h *= scale;     	
+	bottomLeft.x = center.x - w/2; 
+	bottomLeft.y = center.y - h/2; 
 }
      	
 void Rect::Scale(const vec2f& scale)
@@ -71,7 +71,7 @@ bool Rect::CheckInteraction(int x, int y) const
         return true;
 }
         
-void Rect::Set(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h)
+void Rect::Set(float _bottomLeft_x, float _bottomLeft_y, float _w, float _h)
 {
 	bottomLeft.x = _bottomLeft_x;
 	bottomLeft.y = _bottomLeft_y;
@@ -83,7 +83,7 @@ void Rect::Set(float _bottomLeft_x, float _bottomLeft_y, int _w, int _h)
 	UpdateTopRight();
 }
 
-void Rect::Set(const vec2f& vbl, int _w, int _h)
+void Rect::Set(const vec2f& vbl, float _w, float _h)
 {
 	Set(vbl.x, vbl.y, _w , _h);
 }
@@ -134,10 +134,10 @@ void Rect::SetBottomLeftX(float _pos_x)
 	UpdateTopRight();
 }
 
-void Rect::SetSize(int _w, int _h)
+void Rect::SetSize(float w, float h)
 {
-	w = _w;
-	h = _h;
+	this->w = w;
+	this->h = h;
 
 	bottomLeft.x = center.x - w/2;
 	bottomLeft.y = center.y - h/2;
