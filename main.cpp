@@ -63,7 +63,7 @@ int main()
 
 		for (int i=0; i<Config::Instance().GAMESPEED; i++)  // fake implementation (static ai should not be run several times at once)
 		{
-			GalaxyBuilder::Instance().GetGalaxy()->Update(turn_timer.GetTurnTick());
+			GalaxyBuilder::Instance().GetGalaxy()->Update(player, turn_timer.GetTurnTick());
 		}
 
 		if ((turn_timer.GetTurnEnded() == true) and (UserInput::Instance().GetNextTurnReady()))

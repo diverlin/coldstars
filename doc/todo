@@ -1,8 +1,4 @@
 ################### FEATURES #################
-<< Gui notice when item broken/locked
-
-<< no effects for starsystems if there is no player in there
-
 << merge VehicleSlot and ItemSlot
 
 << grab vehicle
@@ -22,6 +18,12 @@
 
 << implement common bullet class for bullets
 - NOT RELEVANT
+
+<< no effects for starsystems if there is no player in there
+- DONE
+
+<< Gui notice when item broken/locked
+- DONE
 
 << save/load ai/quest/scenario stuff
 - DONE

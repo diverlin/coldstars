@@ -23,6 +23,7 @@
 #include "../common/Base.hpp"
 #include "../common/constants.hpp"
 class StarSystem;
+class Player;
 
 class Galaxy : public Base
 {
@@ -34,7 +35,7 @@ class Galaxy : public Base
      		
      		StarSystem* GetRandomStarSystem(int condition_id = NONE_ID);
      		     
-    		void Update(int);
+    		void Update(Player*, int);
 
     		void SaveData(boost::property_tree::ptree&) const;
     		void LoadData(const boost::property_tree::ptree&);
