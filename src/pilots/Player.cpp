@@ -565,7 +565,7 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
         			npc->GetVehicle()->RenderRadarRange();
         		}
 
-        		if (show.GetRangeGrapple() == true)
+			if ( (npc->GetVehicle()->GetGrappleSlot()->GetEquiped() == true) and (npc->GetVehicle()->GetGrappleSlot()->GetSelected() == true) )
         		{
         			npc->GetVehicle()->RenderGrappleRange();
         		}
@@ -680,7 +680,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
 
                		if (data_mouse.right_click == true)
                		{
-               			if (show.GetRangeGrapple() == true)
+               			if ( (npc->GetVehicle()->GetGrappleSlot()->GetEquiped() == true) and (npc->GetVehicle()->GetGrappleSlot()->GetSelected() == true) )
                			{
        					//if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
        					//{
@@ -763,7 +763,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 
                			if (data_mouse.right_click == true)
                			{
-               				if (show.GetRangeGrapple() == true)
+               				if ( (npc->GetVehicle()->GetGrappleSlot()->GetEquiped() == true) and (npc->GetVehicle()->GetGrappleSlot()->GetSelected() == true) )
                				{
 						//if (npc->GetVehicle()->ableTo.GRAB == true)
 		       				//{
@@ -846,7 +846,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
 
                		if (data_mouse.right_click == true)
                		{
-               			if (show.GetRangeGrapple() == true)
+               			if ( (npc->GetVehicle()->GetGrappleSlot()->GetEquiped() == true) and (npc->GetVehicle()->GetGrappleSlot()->GetSelected() == true) )
                			{
 					//if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
 					//{

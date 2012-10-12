@@ -27,6 +27,8 @@
 #include "../../common/Logger.hpp"
 #include "../../common/EntityManager.hpp"
 
+#include "../../render/AnimationEffect2D.hpp"
+
 BaseEquipment::BaseEquipment()
 {
         data_id.type_id = ENTITY::EQUIPMENT_ID;
@@ -35,6 +37,8 @@ BaseEquipment::BaseEquipment()
     	is_DAMAGED = false;
 
     	price = 0;
+    	
+    	animation = new AnimationEffect2D(vec2f(0.8, 0.8), vec2f(1.2, 1.2), vec2f(0.02, 0.02), 0, 0, 0);
 }
 
 /*virtual */
@@ -48,6 +52,8 @@ BaseEquipment::~BaseEquipment()
     	{
 		delete modules_vec[i];
     	}
+    	
+    	delete animation;
 }
 
 /* virtual */
@@ -89,9 +95,19 @@ void BaseEquipment::BaseEquipment::BaseEquipment::RemoveChildFromEntityManager()
 }
 
 /* virtual */
-void BaseEquipment::Render(const Rect& rect, const vec2f& gui_offset, bool draw_text)
+void BaseEquipment::Render(const Rect& rect1, const vec2f& gui_offset, bool draw_text)
 {
-    	drawTexturedRect(textureOb, rect, -1.0);
+	Rect rect(rect1);
+	if ((is_DAMAGED == true) or (locked_turns != 0))
+	{
+		animation->Update(rect);
+    	}
+    	else
+    	{
+    		animation->Reset();
+    	}
+    	
+    	drawTexturedRect(textureOb, rect, -1.0f);
     
     	for (unsigned int i=0; i<modules_vec.size(); i++)
     	{
@@ -99,16 +115,16 @@ void BaseEquipment::Render(const Rect& rect, const vec2f& gui_offset, bool draw_
         		         rect.GetBottomLeft().y + (1.1 * GUI::INSERTED_MODULE_SIZE),
         			 GUI::INSERTED_MODULE_SIZE, 
         			 GUI::INSERTED_MODULE_SIZE);
-        	drawTexturedRect(modules_vec[i]->GetTextureOb(), module_rect, -1);
+        	drawTexturedRect(modules_vec[i]->GetTextureOb(), module_rect, -1.0f);
     	}
     	
     	if (is_DAMAGED == true)
 	{
-    		drawTexturedRect(GuiTextureObCollector::Instance().slot_mark_reject , rect, -1.0);	
+    		drawTexturedRect(GuiTextureObCollector::Instance().slot_mark_reject , rect, -1.0f);	
 	}
 	if (locked_turns != 0)
-	{
-    		drawTexturedRect(GuiTextureObCollector::Instance().slot_mark_accept, rect, -1.0);
+	{		
+    		drawTexturedRect(GuiTextureObCollector::Instance().slot_mark_accept, rect, -1.0f);
     		drawSimpleText(int2str(locked_turns), 12, rect.GetCenter().x + gui_offset.x, rect.GetCenter().y + gui_offset.y);	
 	}
 

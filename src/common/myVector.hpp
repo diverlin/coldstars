@@ -40,6 +40,7 @@ class vec2f
                 void Set(const vec2f& v)    	{ *this = v; };
                 
                 vec2f& operator+=(const vec2f&);                
+                vec2f& operator-=(const vec2f&);  
                 vec2f& operator+=(float);  
                 vec2f& operator*=(float);  
                                 

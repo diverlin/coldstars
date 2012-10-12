@@ -112,7 +112,7 @@ class ItemSlot : public BaseSlot
            	
            	bool CheckTarget(BaseSpaceEntity*) const;
         
-        	void SelectEvent();
+        	void SelectEvent1();
         	void DeselectEvent();
         
         	void RemoveChildFromEntityManager();

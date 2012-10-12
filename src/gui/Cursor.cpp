@@ -41,34 +41,34 @@ Cursor::Cursor():focused_space_ob(NULL)
      	item_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::CARGO_SLOT_ID);
      	rect.Set(0, 0, GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
      	
-     	ButtonTrigger* button;
-   	button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_red, GUI::BUTTON::ACTION_ATTACK_ID, "attack");  
-  	button_map.insert(std::make_pair(button->GetSubTypeId(), button));
+     	//ButtonTrigger* button; // EXPERIMENTAL GUI
+   	//button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_red, GUI::BUTTON::ACTION_ATTACK_ID, "attack");  
+  	//button_map.insert(std::make_pair(button->GetSubTypeId(), button));
 
-   	button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_purple, GUI::BUTTON::ACTION_PRECISEATTACK_ID, "presize_attack");  
-  	button_map.insert(std::make_pair(button->GetSubTypeId(), button));
+   	//button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_purple, GUI::BUTTON::ACTION_PRECISEATTACK_ID, "presize_attack");  
+  	//button_map.insert(std::make_pair(button->GetSubTypeId(), button));
 
-   	button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_green, GUI::BUTTON::ACTION_SCAN_ID, "scan");  
-  	button_map.insert(std::make_pair(button->GetSubTypeId(), button));
+   	//button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_green, GUI::BUTTON::ACTION_SCAN_ID, "scan");  
+  	//button_map.insert(std::make_pair(button->GetSubTypeId(), button));
   	 
-  	button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_blue, GUI::BUTTON::ACTION_GRAB_ID, "grab");  
-  	button_map.insert(std::make_pair(button->GetSubTypeId(), button)); 	   		
+  	//button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_blue, GUI::BUTTON::ACTION_GRAB_ID, "grab");  
+  	//button_map.insert(std::make_pair(button->GetSubTypeId(), button)); 	   		
 
-  	button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_yellow, GUI::BUTTON::ACTION_FOLLOW_ID, "follow");  
-  	button_map.insert(std::make_pair(button->GetSubTypeId(), button));
+  	//button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_yellow, GUI::BUTTON::ACTION_FOLLOW_ID, "follow");  
+  	//button_map.insert(std::make_pair(button->GetSubTypeId(), button));
   	        
-        int angle = 0;
-        for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
-	{
-		float scale = 0.4;
-        	vec2f pos = getVec2f(100*scale, angle);	
-		rect.SetCenter(pos);
-		rect.SetSize(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);		    			   
-        	rect.Scale(scale);	
-    		iterator->second->SetRect(rect);   
+        //int angle = 0;
+        //for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
+	//{
+		//float scale = 0.4;
+        	//vec2f pos = getVec2f(100*scale, angle);	
+		//rect.SetCenter(pos);
+		//rect.SetSize(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);		    			   
+        	//rect.Scale(scale);	
+    		//iterator->second->SetRect(rect);   
 
-		angle += 360/button_map.size();
-	}
+		//angle += 360/button_map.size();
+	//}
 }
 
 Cursor::~Cursor()
@@ -118,31 +118,22 @@ bool Cursor::UpdateInSpace()
 					case ENTITY::SATELLITE_ID:
 					{
 						//Satellite* satellite = (Satellite*)focused_space_ob;
-						
-			                	//satellite->GetWeaponComplex().RenderWeaponIcons();
-
-                				//satellite->RenderRadarRange(); 
-                				//satellite->GetWeaponComplex().RenderWeaponsRange(); 
-                		                                
-                        			//satellite->GetDriveComplex().DrawPath(); 
-
-						//satellite->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
 						                        
 						break;
 					}
 
 					case ENTITY::SHIP_ID:
 					{
-						Ship* ship = (Ship*)focused_space_ob;
-						if (ship->GetId() != player->GetNpc()->GetVehicle()->GetId())
-						{
-							SetOffset(ship->GetPoints().GetCenter() - Screen::Instance().GetRect().GetBottomLeft());	
-							return UpdateButtonsMouseInteraction(data_mouse);
-					        }
-					        else
-					        {
-					        	return false;
-					        }  
+						//Ship* ship = (Ship*)focused_space_ob;
+						//if (ship->GetId() != player->GetNpc()->GetVehicle()->GetId())
+						//{
+							//SetOffset(ship->GetPoints().GetCenter() - Screen::Instance().GetRect().GetBottomLeft());	
+							//return UpdateButtonsMouseInteraction(data_mouse);
+					        //}
+					        //else
+					        //{
+					        	//return false;
+					        //}  
 					           
 						break;
 					}
@@ -150,15 +141,6 @@ bool Cursor::UpdateInSpace()
 					case ENTITY::SPACESTATION_ID:
 					{
 						//SpaceStation* spacestation = (SpaceStation*)focused_space_ob;
-	
-			                	//spacestation->GetWeaponComplex().RenderWeaponIcons();
-
-                				//spacestation->RenderRadarRange(); 
-                				//spacestation->GetWeaponComplex().RenderWeaponsRange(); 
-                		                                
-                        			//spacestation->GetDriveComplex().DrawPath(); 
-        
-        					//spacestation->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
         					                
 						break;
 					}
@@ -178,8 +160,6 @@ bool Cursor::UpdateInSpace()
 			case ENTITY::ASTEROID_ID:
 			{
 				//((Asteroid*)focused_space_ob)->GetOrbit()->DrawPath();
-
-				//((Asteroid*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
 								
 				break;
 			}
@@ -194,8 +174,6 @@ bool Cursor::UpdateInSpace()
 			case ENTITY::PLANET_ID:
 			{
 				//((Planet*)focused_space_ob)->GetOrbit()->DrawPath();
-
-				//((Planet*)focused_space_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
 								
 				break;
 			}
@@ -261,11 +239,11 @@ void Cursor::RenderFocusedSpaceObjectStuff()
 
 						ship->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
 						
-						if (ship->GetId() != player->GetNpc()->GetVehicle()->GetId())
-						{
-							RenderButtons(); 
-							RenderFocusedButtonInfo(data_mouse);
-						}
+						//if (ship->GetId() != player->GetNpc()->GetVehicle()->GetId()) // EXPERIMENTAL GUI
+						//{
+							//RenderButtons(); 
+							//RenderFocusedButtonInfo(data_mouse);
+						//}
 						             
 						break;
 					}

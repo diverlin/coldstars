@@ -1,12 +1,9 @@
 ################### FEATURES #################
-<< save/load ai/quest/scenario stuff
-
-<< make RocketBullet independed on Vehicle class. probably good idea to implement common bullet class for bullets
-
 << Gui notice when item broken/locked
 
-<< ability to bind Gui with Vehicle(not center screen). will be used in precise fire. probably better to freeze camera and set gui offset as a center of ship in space.
+<< no effects for starsystems if there is no player in there
 
+<< merge VehicleSlot and ItemSlot
 
 << grab vehicle
 - NOT RELEVANT
@@ -22,6 +19,15 @@
 
 << Space Gui, all controls are accesible by mouse only(shortkeys as additional way to control)
 - NOT RELEVANT
+
+<< implement common bullet class for bullets
+- NOT RELEVANT
+
+<< save/load ai/quest/scenario stuff
+- DONE
+
+<< make RocketBullet independed on Vehicle class. 
+- DONE
 
 << before player jump exec TurnEnd, after huperjum set camera to player position
 - DONE

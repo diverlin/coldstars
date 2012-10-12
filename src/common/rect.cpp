@@ -48,7 +48,15 @@ void Rect::Scale(float scale)
       	w *= scale;
       	h *= scale;     	
 }
-     		
+     	
+void Rect::Scale(const vec2f& scale)
+{
+      	w *= scale.x;
+      	h *= scale.y; 
+	bottomLeft.x = center.x - w/2;    
+	bottomLeft.y = center.y - h/2; 
+}
+	
 bool Rect::CheckInteraction(int x, int y) const
 {       	
         if (x < bottomLeft.x)

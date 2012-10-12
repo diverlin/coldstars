@@ -31,6 +31,7 @@ class Rect
       		~Rect();
 	
 		void Scale(float);
+		void Scale(const vec2f&);
 		
       		bool CheckInteraction(int, int) const;
       		       		
