@@ -77,7 +77,7 @@ void GuiVehicle2::CreateFunctionalItemSlotsCircleGeometry(Vehicle* vehicle, floa
         int angle = 0;
         for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{
-        	vec2f pos = getVec2f(260*scale, angle);	
+        	vec2f pos = getVec2f(160*scale, angle);	
 		rect.SetCenter(pos);
 		rect.SetSize(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);		    			   
         	rect.Scale(scale);	
@@ -99,16 +99,19 @@ void GuiVehicle2::UpdateEquipmentIcons() const
 			if (button_slot_vec[i].second->GetItem()->GetDamaged())
 			{
 				button_slot_vec[i].first->SetTextureObMask(GuiTextureObCollector::Instance().slot_mark_reject);
+				button_slot_vec[i].first->Reset();
 			}
 			if (button_slot_vec[i].second->GetItem()->GetLocked())
 			{
 				button_slot_vec[i].first->SetTextureObMask(GuiTextureObCollector::Instance().slot_mark_accept);
+				button_slot_vec[i].first->Reset();
 			}
 		}
 		else
 		{
 			button_slot_vec[i].first->SetTextureObAdditional(NULL);
 			button_slot_vec[i].first->SetTextureObMask(NULL);
+			button_slot_vec[i].first->Reset();
 		}
 	}
 }
@@ -124,8 +127,7 @@ void GuiVehicle2::ButtonsAction(Player* player) const
 		else
 		{
 			button_slot_vec[i].second->DeselectEvent();
-		}
-       		
+		}       		
 	}
 }
 

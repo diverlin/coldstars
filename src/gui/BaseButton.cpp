@@ -20,6 +20,7 @@
 #include "BaseButton.hpp"
 #include "../common/constants.hpp"
 #include "../render/Render.hpp"
+#include "../render/AnimationEffect2D.hpp"
 
 BaseButton::BaseButton(TextureOb* textureOb, int subtype_id, const std::string& info)
 {
@@ -35,10 +36,14 @@ BaseButton::BaseButton(TextureOb* textureOb, int subtype_id, const std::string& 
 	alpha = 1.0f;
 	lock  = false;
 	pressed = false;
+	
+	animation_scale = new AnimationEffect2D(vec2f(0.7, 0.7), vec2f(1.3, 1.3), vec2f(0.02, 0.02), 0, 0, 0);
 }
 
 BaseButton::~BaseButton()
-{}
+{
+	delete animation_scale;
+}
 
 
 void BaseButton::Reset()
@@ -88,17 +93,23 @@ void BaseButton::RenderInfo(int offset_x, int offset_y) const
 
 void BaseButton::Render(int offset_x, int offset_y) const
 {
-	glColor4f(1.0f, 1.0f, 1.0f, alpha);
+	Rect rect1(rect);
+	if (textureOb_mask != NULL)
+   	{
+   		animation_scale->Update(rect1);
+   	}
+   	
+	setColor4f(1.0f, 1.0f, 1.0f, alpha);
    	drawTexturedRect(textureOb, rect, -1);
    	if (textureOb_additional != NULL)
    	{
-   		drawTexturedRect(textureOb_additional, rect, -1);   	
+   		drawTexturedRect(textureOb_additional, rect1, -1);   	
    	}
-	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+	setColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
    	if (textureOb_mask != NULL)
    	{
-   		drawTexturedRect(textureOb_mask, rect, -1);   	
+   		drawTexturedRect(textureOb_mask, rect1, -1);   	
    	}
    		
 	if (label != "")

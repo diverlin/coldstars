@@ -22,6 +22,7 @@
 
 #include "../resources/textureOb.hpp"
 #include "../common/rect.hpp"
+class AnimationEffect2D;
 
 class BaseButton
 {
@@ -73,6 +74,8 @@ class BaseButton
        		
        		std::string info; 
        		std::string label; 
+       		
+       		AnimationEffect2D* animation_scale;
        		
      		void FullShadeOn();
      		void ShadeOn();
