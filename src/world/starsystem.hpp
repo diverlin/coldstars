@@ -177,7 +177,7 @@ class StarSystem : public BaseSpaceEntity
 		void LoadDataUniqueStarSystem(const boost::property_tree::ptree&);
 		void ResolveDataUniqueStarSystem();
 		
-	friend class GuiMap;
+	friend class GuiGalaxyMap;
 	friend class Observation;
 	friend class Player;
 };

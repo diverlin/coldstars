@@ -48,7 +48,7 @@ class Galaxy : public Base
     		void LoadDataUniqueGalaxy(const boost::property_tree::ptree&);
     		void ResolveDataUniqueGalaxy();
     		  	     	
-  	     	friend class GuiMap;
+  	     	friend class GuiGalaxyMap;
   	     	friend class Observation;
   	     	friend class GalaxyBuilder;
 };

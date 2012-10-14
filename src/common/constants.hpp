@@ -261,7 +261,7 @@ namespace ENTITY
 
 	namespace GALAXY
 	{
-		const int PARSEC = 100;
+		const int PARSEC = 200;
 				
 		const int STARSYSTEM_SEGMENT_WIDTH_NUM = 4;
 		const int STARSYSTEM_SEGMENT_HEIGHT_NUM = 3;		
@@ -428,8 +428,8 @@ namespace EQUIPMENT
 		const int SPEED_MIN = 130;   
 		const int SPEED_MAX = 300;   
 		
-		const int HYPER_MIN = 100 * 20;
-		const int HYPER_MAX = 400 * 20;
+		const int HYPER_MIN = 7;
+		const int HYPER_MAX = 20;
 		const int MODULES_NUM_MIN = 0;
 		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
 		
@@ -461,8 +461,8 @@ namespace EQUIPMENT
 
 	namespace BAK
 	{
-		const int FUEL_MIN = 100 * 20;    // *20 - debug
-		const int FUEL_MAX = 400 * 20;    // *20 - debug
+		const int FUEL_MIN = 10;    
+		const int FUEL_MAX = 30;    
 		const int MODULES_NUM_MIN = 0;
 		const int MODULES_NUM_MAX = 1;
 		
@@ -587,7 +587,7 @@ namespace MODULE
 		const int SPEED_MIN = 0;
 		const int SPEED_MAX = 100;
 		const int HYPER_MIN = 0;
-		const int HYPER_MAX = 100;
+		const int HYPER_MAX = 7;
 	}
 
 	namespace PROTECTOR

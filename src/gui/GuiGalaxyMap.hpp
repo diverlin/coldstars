@@ -16,27 +16,31 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GUIMAP_H
-#define GUIMAP_H
+#ifndef GUIGALAXYMAP_H
+#define GUIGALAXYMAP_H
 
 #include "BaseGui.hpp"
 class Galaxy;
+#include "../render/PathVisual.hpp"
 
-class GuiMap : public BaseGui
+class GuiGalaxyMap : public BaseGui
 {
   	public:
-     		GuiMap();
-     		~GuiMap();
+     		GuiGalaxyMap();
+     		~GuiGalaxyMap();
    
      		bool UpdateMouseInteraction(const MouseData&, Galaxy*);
      		void Render(Galaxy*);
 
      	private:
-     		float scale;
+     		float scale_parsec2screencoord;
      		
      		Rect rect;
      		
      		TextureOb* texOb_background;
+     		
+     		PathVisual visual_hyperjump_range;
+		PathVisual visual_hyperjump_path;
 };
      		
 #endif 

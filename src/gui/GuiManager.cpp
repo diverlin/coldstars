@@ -48,7 +48,7 @@ void GuiManager::SetPlayer(Player* player)
 	gui_vehicle_scan.SetPlayer(player);
       	
       	gui_kosmoport.SetPlayer(player);
-	gui_map.SetPlayer(player); 
+	gui_galaxymap.SetPlayer(player); 
 	gui_radar.SetPlayer(player); 
 		
 	slider.SetPlayer(player);
@@ -181,7 +181,7 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 			{
                                 if (interaction == false)
                                 {
-                                        interaction = gui_map.UpdateMouseInteraction(data_mouse, player->GetNpc()->GetStarSystem()->GetGalaxy()); 	
+                                        interaction = gui_galaxymap.UpdateMouseInteraction(data_mouse, player->GetNpc()->GetStarSystem()->GetGalaxy()); 	
                                 }
                         }
 			
@@ -228,7 +228,7 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 				
 				if (show_gui_galaxymap == true)  
 				{
-     					gui_map.Render(player->GetNpc()->GetStarSystem()->GetGalaxy());    
+     					gui_galaxymap.Render(player->GetNpc()->GetStarSystem()->GetGalaxy());    
 				}
                                 
 				if (show_gui_scan == true)
@@ -414,14 +414,14 @@ bool GuiManager::RunSession(const MouseData& data_mouse)
 					//update
 					if ( interaction == false)
 					{
-						interaction = gui_map.UpdateMouseInteraction(data_mouse, galaxy);
+						interaction = gui_galaxymap.UpdateMouseInteraction(data_mouse, galaxy);
 			        	}					   
 				
 					//render
         				clearScreen(); //becase there is no background
 			        	resetRenderTransformation();
         				enable_BLEND();   
-     						gui_map.Render(galaxy);
+     						gui_galaxymap.Render(galaxy);
      						
      						gui_kosmoport.RenderButtons(); 
                 				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 

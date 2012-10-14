@@ -28,7 +28,7 @@
 #include "../gui/GuiStore.hpp"
 #include "../gui/GuiShop.hpp"
 #include "../gui/GuiSpace.hpp"
-#include "../gui/GuiMap.hpp"
+#include "../gui/GuiGalaxyMap.hpp"
 				
 class GuiManager
 {
@@ -56,7 +56,7 @@ class GuiManager
                 GuiStore 	gui_store;
                 GuiShop        	gui_shop;
       		GuiSpace     	gui_space;      
-		GuiMap       	gui_map;      		
+		GuiGalaxyMap    gui_galaxymap;      		
        		GuiRadar 	gui_radar;
        		
        		Slider slider;  

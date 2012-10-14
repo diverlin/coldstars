@@ -810,11 +810,8 @@ void Vehicle::RenderRadarRange()
 {
 	if (propetries.radar > VISIBLE_DISTANCE_WITHOUT_RADAR)
 	{
-		glPushMatrix();
-			glTranslatef(points.GetCenter().x, points.GetCenter().y, 0.0f);
-			radar_slot->UpdateRange(GuiTextureObCollector::Instance().dot_yellow);
-             		radar_slot->DrawRange();
-		glPopMatrix();
+		radar_slot->UpdateRange(GuiTextureObCollector::Instance().dot_yellow);
+       		radar_slot->DrawRange(points.GetCenter());
 	}
 }
 
@@ -822,11 +819,8 @@ void Vehicle::RenderGrappleRange()
 {
 	if (propetries.grab_radius > 0)
 	{
-		glPushMatrix();
-			glTranslatef(points.GetCenter().x, points.GetCenter().y, 0.0f);
-			grapple_slot->UpdateRange(GuiTextureObCollector::Instance().dot_blue);
-             		grapple_slot->DrawRange();
-		glPopMatrix();
+		grapple_slot->UpdateRange(GuiTextureObCollector::Instance().dot_blue);
+       		grapple_slot->DrawRange(points.GetCenter());
 	}
 }
 

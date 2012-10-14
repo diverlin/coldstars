@@ -385,36 +385,35 @@ void DriveComplex::CalcDirectPath()
     	}
 }
 
-void DriveComplex::CalcAcceleratedPath() // used for hyper jump effect
-{
-	ClearPath();
+//void DriveComplex::CalcAcceleratedPath() // used for hyper jump effect
+//{
+	//ClearPath();
 	
-	float angleInD = owner_vehicle->GetPoints().GetAngleDegree();
+	//float angleInD = owner_vehicle->GetPoints().GetAngleDegree();
 
-	vec2f start_pos(owner_vehicle->GetPoints().GetCenter());
+	//vec2f start_pos(owner_vehicle->GetPoints().GetCenter());
     	
-    	vec2f ll(getVec2f(100, angleInD) - start_pos);
+    	//vec2f ll(getVec2f(100, angleInD) - start_pos);
     	
-    	vec2f new_pos(start_pos);
-    	for (unsigned int i=0; i<500; i++)
-	{
-	    	float step = owner_vehicle->GetPropetries().speed/100.0 + i*10;  // remove from here      		    		
-		vec2f vstep = ll.GetNorm() * step;
+    	//vec2f new_pos(start_pos);
+    	//for (unsigned int i=0; i<500; i++)
+	//{
+	    	//float step = owner_vehicle->GetPropetries().speed/100.0 + i*10;  // remove from here      		    		
+		//vec2f vstep = ll.GetNorm() * step;
 	
-        	new_pos += vstep;
+        	//new_pos += vstep;
 
-            	path_center_vec.push_back(new_pos);
-            	angle_inD_vec.push_back(angleInD);
-       	}
+            	//path_center_vec.push_back(new_pos);
+            	//angle_inD_vec.push_back(angleInD);
+       	//}
        	
-       	if (path_center_vec.size() >= 1)
-	{
-		direction_list_END = false;
+       	//if (path_center_vec.size() >= 1)
+	//{
+		//direction_list_END = false;
                
-       		move_it = 0;
-       	}
-
-}
+       		//move_it = 0;
+       	//}
+//}
 
 void DriveComplex::UpdatePosition()
 {

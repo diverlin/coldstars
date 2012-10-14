@@ -284,19 +284,14 @@ void WeaponComplex::RenderTurrels() const
 
 void WeaponComplex::RenderWeaponsRange()
 {
-	glPushMatrix();
-	{
-		glTranslatef(owner_vehicle->GetPoints().GetCenter().x, owner_vehicle->GetPoints().GetCenter().y, 0.0f);
-		for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
-        	{
-         		if (slot_weapon_reloaded_vec[i]->GetSelected() == true)
-                	{
-                		slot_weapon_reloaded_vec[i]->UpdateRange(GuiTextureObCollector::Instance().dot_red);
-             			slot_weapon_reloaded_vec[i]->DrawRange();
-             		}
+	for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
+       	{
+       		if (slot_weapon_reloaded_vec[i]->GetSelected() == true)
+               	{
+               		slot_weapon_reloaded_vec[i]->UpdateRange(GuiTextureObCollector::Instance().dot_red);
+       			slot_weapon_reloaded_vec[i]->DrawRange(owner_vehicle->GetPoints().GetCenter());
         	}
 	}
-	glPopMatrix();
 }
 
 void WeaponComplex::RenderWeaponIcons() const
