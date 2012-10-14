@@ -30,10 +30,14 @@ class PathVisual
 		PathVisual();
 		~PathVisual();
 
-		void FillData(TextureOb*, const std::vector<vec2f>&, float step, int point_size);
-		void FillData(const std::vector<vec2f>&, float step, int point_size);
+		void FillData(TextureOb*, const std::vector<vec2f>&, int step, int point_size);
+		void FillData(const std::vector<vec2f>&, int step, int point_size);
+		void FillData(TextureOb*, int radius, int point_size);	
+		void FillData(TextureOb*, const vec2f&, const vec2f&, int step, int point_size);																																																																																																																																																																														
+		
+		void Draw(const vec2f&) const;
 		void Draw() const;
-
+		
 	private:
 		GLuint gl_list;
 };

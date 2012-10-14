@@ -108,7 +108,7 @@ class ItemSlot : public BaseSlot
                 bool SwapItemWith(ItemSlot*);
                 
                 void UpdateRange(TextureOb*);
-           	void DrawRange();
+           	void DrawRange(const vec2f&);
            	
            	bool CheckTarget(BaseSpaceEntity*) const;
         
@@ -126,7 +126,6 @@ class ItemSlot : public BaseSlot
                 
                 BaseItem* item;
 
-		std::vector<vec2f> range_vec;
            	PathVisual range_visual;
            	
            	int GetItemRadius() const;

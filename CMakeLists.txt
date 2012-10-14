@@ -243,7 +243,7 @@ set (SOURCES
 	src/gui/GuiStore.cpp
 	src/gui/GuiVehicle.cpp
 	src/gui/GuiVehicle2.cpp
-	src/gui/GuiMap.cpp
+	src/gui/GuiGalaxyMap.cpp
 	src/gui/Cursor.cpp
 	src/gui/UserInput.cpp
 	src/gui/GuiKosmoport.cpp   

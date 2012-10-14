@@ -69,7 +69,7 @@ void DroidEquipment::CountPrice()
      	float modules_num_rate   = (float)data_item.modules_num_max / EQUIPMENT::DROID::MODULES_NUM_MAX;
 
      	float effectiveness_rate = EQUIPMENT::DROID::REPAIR_WEIGHT * repair_rate + 
-     				    EQUIPMENT::DROID::MODULES_NUM_WEIGHT * modules_num_rate;
+     				   EQUIPMENT::DROID::MODULES_NUM_WEIGHT * modules_num_rate;
 
      	float mass_rate          = (float)data_item.mass / EQUIPMENT::DROID::MASS_MIN;
      	float condition_rate     = (float)condition / data_item.condition_max;

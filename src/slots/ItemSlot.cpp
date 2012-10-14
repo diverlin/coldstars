@@ -304,22 +304,14 @@ bool ItemSlot::SwapItemWith(ItemSlot* _slot)
 void ItemSlot::UpdateRange(TextureOb* _texOb)
 {
 	float radius = this->GetItemRadius();
-	float da = 4.0f/RADIAN_TO_DEGREE_RATE;// - radius/1000.0f;
-	
-    	range_vec.clear();
-      	for (float a = 0.0f; a <= 2*PI; a+=da)
-      	{
-      		range_vec.push_back( vec2f(radius * cos(a), radius * sin(a)) );
-      	}
-      	
-	int step = 1;
 	int size = 6;
-        range_visual.FillData(_texOb, range_vec, step, size);
+	
+        range_visual.FillData(_texOb, radius, size);
 }
 
-void ItemSlot::DrawRange()
+void ItemSlot::DrawRange(const vec2f& offset)
 { 
-    	range_visual.Draw();
+    	range_visual.Draw(offset);
 }
 
 bool ItemSlot::CheckTarget(BaseSpaceEntity* _target) const

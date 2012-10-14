@@ -58,7 +58,7 @@ class DriveComplex
        	
         	void ResetTarget();
 
-    		void CalcAcceleratedPath(); // used for hyper jump effect
+    		//void CalcAcceleratedPath(); // used for hyper jump effect
         	void UpdatePath();
                 void UpdatePosition();
 
