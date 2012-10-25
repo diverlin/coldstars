@@ -81,7 +81,7 @@ void StarSystemBuilder::CreateNewInternals()
         	starsystem->Add(bh, getRandVec2f(1200, 2000));
         }
 
-        if (getRandBool())
+        if (getRandInt(1,7) != 1)
         {
                 int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
                 int ship_num = getRandInt(ENTITY::STARSYSTEM::SHIP_INIT_MIN, ENTITY::STARSYSTEM::SHIP_INIT_MAX);
@@ -140,24 +140,18 @@ void StarSystemBuilder::CreateStar()
 
 void StarSystemBuilder::CreatePlanets(int planet_per_system)
 {
-        int orbit_radius;
-        int offset = 0;
+        int orbit_radius = getRandInt(2 * ENTITY::PLANET::DISTANCE_MIN, 2 * ENTITY::PLANET::DISTANCE_MAX);
 
-        for(int pi = 0; pi < planet_per_system; pi++)
+        for(int i=0; i<planet_per_system; i++)
         {             
-                if (pi == 0)
-                        orbit_radius = getRandInt(2 * ENTITY::PLANET::DISTANCE_MIN, 2 * ENTITY::PLANET::DISTANCE_MAX);
-                else
-                        orbit_radius = offset + getRandInt(ENTITY::PLANET::DISTANCE_MIN, ENTITY::PLANET::DISTANCE_MAX);
-
-                offset = orbit_radius;
-
                 PlanetBuilder::Instance().CreateNewPlanet();
                 PlanetBuilder::Instance().CreateNewInternals(orbit_radius);
                 Planet* planet = PlanetBuilder::Instance().GetPlanet();
 
                 starsystem->Add(planet, starsystem->GetStar());
                 
+                orbit_radius += getRandInt(ENTITY::PLANET::DISTANCE_MIN, ENTITY::PLANET::DISTANCE_MAX);
+                                
                 /*
                 {
                 SatelliteBuilder::Instance().CreateNewSatellite();

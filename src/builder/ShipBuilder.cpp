@@ -65,7 +65,7 @@ void ShipBuilder::CreateNewInternals(int race_id, int subsubtype_id, int size_id
         }
         
         VehicleKorpusData data_korpus;
-    	data_korpus.space       = size_id*10 + getRandInt(0, 100);
+    	data_korpus.space       = size_id*100 + getRandInt(0, 100);
     	data_korpus.armor       = data_korpus.space;
     	data_korpus.protection  = protection_rate*size_id/(SIZE_1_ID);
     	data_korpus.temperature = 100;

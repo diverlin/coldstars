@@ -73,9 +73,9 @@ bool MacroScenarioGoodsTrading::Validation(Npc* npc) const
 /* virtual */		
 void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
 {
-	bool see_container   = npc->GetObservation().GetVisionStatus().CONTAINER;
-	bool able_buy        = IsAbleToBuyGoods(npc);
-	bool has_goods = false;
+	bool see_container = npc->GetObservation().GetVisionStatus().CONTAINER;
+	bool able_buy      = IsAbleToBuyGoods(npc);
+	bool has_goods     = false;
 	if (npc->GetVehicle()->GetGoodsPack() != NULL)
 	{
 		has_goods = true;

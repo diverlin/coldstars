@@ -64,7 +64,13 @@ void loadImages()
 {
 	std::vector<int> arg;   
 	arg.push_back(RACE::R0_ID);
-	TextureManager::Instance().Add( new TextureOb(TEXTURE::TURREL_ID, "data/turrel/lazer.png", true, &arg) );
+	TextureManager::Instance().Add( new TextureOb(TEXTURE::TURREL_ID, "data/turrel/turrel1.png", true, &arg) );
+}
+
+{
+	std::vector<int> arg;   
+	arg.push_back(RACE::R0_ID);
+	TextureManager::Instance().Add( new TextureOb(TEXTURE::TURREL_ID, "data/turrel/turrel2.png", true, &arg) );
 }
 
 //{
@@ -276,12 +282,6 @@ void loadImages()
 	std::vector<int> arg;   
 	arg.push_back(RACE::R0_ID); arg.push_back(ENTITY::RANGER_ID);   //COLOR_VIOLET
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_00_0_0.png", true, &arg) );
-}
-
-{
-	std::vector<int> arg;   
-	arg.push_back(RACE::R0_ID); arg.push_back(ENTITY::WARRIOR_ID);  //COLOR_VIOLET
-	TextureManager::Instance().Add( new TextureOb(TEXTURE::SHIP_ID, "data/ship/k_01_0_0.png", true, &arg) );
 }
 
 {

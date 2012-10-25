@@ -80,7 +80,7 @@ int main()
 		{
 			player = recreated_player;
 		}
-		/* client code end */           	
+		/* client code end */
 	}
 
 	return EXIT_SUCCESS;

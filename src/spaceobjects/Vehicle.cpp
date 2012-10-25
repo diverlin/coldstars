@@ -143,16 +143,17 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
 	{
                 case ENTITY::WEAPON_SLOT_ID:    
                 {
-                	int w = textureOb->GetFrameWidth();
-                	int h = textureOb->GetFrameHeight();
-                	float border_start = 0.2;
-                	float border_end   = 0.8;
-                	int pos_x = getRandInt(border_start*w, border_end*w) - w/2;
-                	int pos_y = getRandInt(border_start*h, border_end*h) - h/2;
+                        int w = textureOb->GetFrameWidth();
+                        int h = textureOb->GetFrameHeight();
+                        float border_start = 0.2;
+                        float border_end   = 0.8;
+                        int pos_x = getRandInt(border_start*w, border_end*w) - w/2;
+                        int pos_y = getRandInt(border_start*h, border_end*h) - h/2;
+                
 			slot->GetTurrel()->GetPoints().SetParentCenter(vec2f(pos_x, pos_y));
                  	points.Add(slot->GetTurrel()->GetPoints().GetpCenter(), slot->GetTurrel()->GetPoints().GetpParentCenter()); 
                 	weapon_complex.AddSlot(slot); 
-                	
+
                 	break; 
                 }
                 case ENTITY::DRIVE_SLOT_ID:     { drive_complex.SetDriveSlot(slot); break; }
@@ -321,8 +322,7 @@ void Vehicle::UpdateSpecialAction()
 			{
 				if (UpdateFadeInEffect() == true)
 				{
-			                HyperJumpEvent();
-			                special_action_id = SPECIAL_ACTION::INITIATE_JUMPOUT_ID;
+			                HyperJumpEvent(drive_complex.GetTarget()->GetStarSystem());
 			        }
 			
 				break;
@@ -372,13 +372,14 @@ bool Vehicle::UpdateFadeOutEffect()
 }
 
 //// ******** DOCKING/LAUNCHING ******** 
-void Vehicle::HyperJumpEvent()
+void Vehicle::HyperJumpEvent(StarSystem* starsystem)
 {
         #if LOG_ENABLED == 1 
 	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" jumpEvent()", 2); 
 	#endif   
 	
-        drive_complex.GetTarget()->GetStarSystem()->GetHyperSpace().AddVehicle(this);
+        special_action_id = SPECIAL_ACTION::INITIATE_JUMPOUT_ID;
+        starsystem->GetHyperSpace().AddVehicle(this);
 }
                 
                 

@@ -114,7 +114,7 @@ class Vehicle : public BaseSpaceEntity
              		void UpdatePropertiesGrab();
              		void UpdateArtefactInfluence();
 
-        	void HyperJumpEvent();
+        	void HyperJumpEvent(StarSystem*);
         	void DockingEvent();
         	void LaunchingEvent();
         	
