@@ -56,9 +56,9 @@ void PlayerBuilder::CreateNewPlayer(int id)
 void PlayerBuilder::CreateNewInternals()
 {    
 	int prace_id    = RACE::R0_ID;
-      	int psubtype_id = ENTITY::WARRIOR_ID;
+      	int psubtype_id = ENTITY::RANGER_ID;
       	int size_id     = SIZE_4_ID;
-      	int weapons_num = 7;
+      	int weapons_num = 4;
         
         NpcBuilder::Instance().CreateNewNpc();
         NpcBuilder::Instance().CreateNewInternals(prace_id, psubtype_id);

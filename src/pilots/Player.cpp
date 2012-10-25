@@ -228,8 +228,8 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 			if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::HYPER_SPACE_ID)
 			{
 				if (turn_timer.GetTurnEnded() == true)
-				{					
-					turn_timer.NextTurn();				
+				{
+					turn_timer.NextTurn();
 				}
 			}
 			

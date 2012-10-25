@@ -117,7 +117,7 @@ void ItemSlot::RemoveItem()
 	}    	 
 }
 
-void ItemSlot::SelectEvent1()
+void ItemSlot::SelectEvent()
 {
 	selected = true;
         
@@ -125,11 +125,7 @@ void ItemSlot::SelectEvent1()
 	{ 	
 		switch(data_id.subtype_id)
 		{
-			case ENTITY::DRIVE_SLOT_ID: 	{
-  					  			GetOwnerVehicle()->UpdatePropertiesSpeed();
-								//GetOwnerVehicle()->UpdatePropertiesJump();                                                                                                                                
-					  			break;
-							}
+			case ENTITY::DRIVE_SLOT_ID: { GetOwnerVehicle()->UpdatePropertiesSpeed(); break; }
 		}
 	}
 }

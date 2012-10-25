@@ -63,19 +63,16 @@ bool GuiGalaxyMap::UpdateMouseInteraction(const MouseData& data_mouse, Galaxy* g
                       			{
                       				if (data_mouse.left_click == true)
                       				{ 
-                                                        // debug
-                                                        //player->GetNpc()->GetStarSystem()->RemoveVehicle(player->GetNpc()->GetVehicle());  
-                                                        //galaxy->STARSYSTEM_vec[i]->AddToHyperJumpQueue(player->GetNpc()->GetVehicle());    
-                                                        // debug
-                                                        
-                          				//player.hyperJumpPreparation(ss)
-                          				//#player.calculateTraceToCoord((player.jump_pos_x, player.jump_pos_y))
-
               						Task microtask(MICROSCENARIO::JUMP_ID, galaxy->STARSYSTEM_vec[i]->GetId());
                						player->GetNpc()->GetStateMachine().SetCurrentMicroTask(microtask);
                				
                           				return true;
                       				} 
+                                                if (data_mouse.right_click == true)
+                                                {
+                                                        // DEBUG WAY
+                                                        player->GetNpc()->GetVehicle()->HyperJumpEvent(galaxy->STARSYSTEM_vec[i]);
+                                                }
                       			}
                 		}
             		}

@@ -23,6 +23,6 @@ void runPureTest()
                 std::cout<<" "<<int_vec[i];
         }
         std::cout<<std::endl;
-        
+
         exit(0);          
 }

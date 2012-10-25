@@ -72,19 +72,43 @@ void NpcBuilder::CreateNewInternals(int race_id, int subtype_id)
    	{
 		switch(subtype_id)
 		{
-   		   	//case ENTITY::DIPLOMAT_ID: 	{}
-   		   	//case ENTITY::PIRAT_ID: 	{}
-   			//case ENTITY::WARRIOR_ID: 	{}
-   			case ENTITY::RANGER_ID:
+                        case ENTITY::RANGER_ID:
    			{
    				npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));    					
-   				break;    
+   				
+                                while(npc->GetSkill().GetAvailiablePoints() != 0)
+   		   		{
+   		   			npc->GetSkill().IncrementAttack();
+   		   			npc->GetSkill().IncrementDefence();
+                                        npc->GetSkill().IncrementLeader();
+                                        npc->GetSkill().IncrementTrader();
+                                        npc->GetSkill().IncrementTechnic();
+                                        npc->GetSkill().IncrementDiplomat();
+   		   		}
+   		   		npc->GetSkill().Acknowledge();
+                                
+                                break;    
    			}
+                        
+   			case ENTITY::WARRIOR_ID:
+   			{
+   				npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));    					
+   				
+                                while(npc->GetSkill().GetAvailiablePoints() != 0)
+   		   		{
+   		   			npc->GetSkill().IncrementAttack();
+   		   			npc->GetSkill().IncrementDefence();
+   		   		}
+   		   		npc->GetSkill().Acknowledge();
+                                
+                                break;    
+   			}
+                       
    		   	case ENTITY::TRADER_ID: 
    		   	{
    		   		npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER_ID)); 
    		   		
-   		   		for (int i=0; i<6; i++)
+   		   		while(npc->GetSkill().GetAvailiablePoints() != 0)
    		   		{
    		   			npc->GetSkill().IncrementTrader();
    		   		}
@@ -93,10 +117,25 @@ void NpcBuilder::CreateNewInternals(int race_id, int subtype_id)
    		   		break;
    		   	}
    		   	
+                        //case ENTITY::DIPLOMAT_ID: 	{}
+   		   	//case ENTITY::PIRAT_ID: 	{}
+                        
    		   	default: 
    		   	{
    				npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));    					
-   				break;    
+   				
+                                while(npc->GetSkill().GetAvailiablePoints() != 0)
+   		   		{
+   		   			npc->GetSkill().IncrementAttack();
+   		   			npc->GetSkill().IncrementDefence();
+                                        npc->GetSkill().IncrementLeader();
+                                        npc->GetSkill().IncrementTrader();
+                                        npc->GetSkill().IncrementTechnic();
+                                        npc->GetSkill().IncrementDiplomat();
+   		   		}
+   		   		npc->GetSkill().Acknowledge();
+                                        
+                                break;    
    			}
    		}
    	}
