@@ -48,13 +48,16 @@ void Skill::AddExpirience(unsigned long int addExpirience)
 }
 
 //######### ATTACK ###############
-void Skill::IncrementAttack()
+bool Skill::IncrementAttack()
 {
 	if (available_points > 0)
 	{
 		available_points -= 1;
 		attack += 1;
+		return true;
 	}
+	
+	return false;
 }
 
 void Skill::DecrementAttack()
@@ -65,13 +68,16 @@ void Skill::DecrementAttack()
 
 
 //######### DEFENCE ###############
-void Skill::IncrementDefence()
+bool Skill::IncrementDefence()
 {
 	if (available_points > 0)
 	{
 		available_points -= 1;
 		defence += 1;
-	}  
+		return true;
+	}
+	
+	return false;  
 } 
 
 void Skill::DecrementDefence()
@@ -82,13 +88,16 @@ void Skill::DecrementDefence()
 
 
 //######### LEADER ###############
-void Skill::IncrementLeader()
+bool Skill::IncrementLeader()
 {
 	if (available_points > 0)
 	{
 		available_points -= 1;
 		leader += 1;
+		return true;
 	}
+	
+	return false;
 }
 
 void Skill::DecrementLeader()
@@ -99,13 +108,16 @@ void Skill::DecrementLeader()
 
 
 //######### TRADER ###############
-void Skill::IncrementTrader()
+bool Skill::IncrementTrader()
 {
 	if (available_points > 0)
 	{
 		available_points -= 1;
 		trader += 1;
+		return true;
 	}
+	
+	return false;
 }
 
 void Skill::DecrementTrader()
@@ -115,13 +127,16 @@ void Skill::DecrementTrader()
 }
 
 //######### TECHNIC ###############
-void Skill::IncrementTechnic()
+bool Skill::IncrementTechnic()
 {
 	if (available_points > 0)
 	{
 		available_points -= 1;
 		technic += 1;
-	}  
+		return true;
+	}
+	
+	return false;  
 }
 
 void Skill::DecrementTechnic()
@@ -132,13 +147,16 @@ void Skill::DecrementTechnic()
 
 
 //######### DIMPLOMAT ###############
-void Skill::IncrementDiplomat()
+bool Skill::IncrementDiplomat()
 {
 	if (available_points > 0)
 	{
 		available_points -= 1;
 		diplomat += 1;
+		return true;
 	}
+	
+	return false;
 }
 
 void Skill::DecrementDiplomat()
