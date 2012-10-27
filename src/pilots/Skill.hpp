@@ -41,7 +41,6 @@ class Skill
 		int GetDiplomat() const { return diplomat; }; 
 
 		void AddExpirience(unsigned long int expirience);
-		void Acknowledge();
 
 		void IncrementAttack();
 		void DecrementAttack();
@@ -72,13 +71,6 @@ class Skill
 		int trader;   
 		int technic;  
 		int diplomat; 
-
-		int attack_undo;
-		int defence_undo;
-		int leader_undo;
-		int trader_undo;
-		int technic_undo;
-		int diplomat_undo;
 
 		int available_points;
 		int level;

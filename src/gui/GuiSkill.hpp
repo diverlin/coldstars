@@ -29,10 +29,19 @@ class GuiSkill : public BaseGui
       		GuiSkill();
       		~GuiSkill();
   				
-     		void ButtonsAction(Skill&) const;
+                void Acknowledge();
+                                                
+     		void ButtonsAction(Skill&);
       		void RenderSkills(const Skill&) const;
 
-      	private:     		
+      	private:
+        	int attack_undo;
+		int defence_undo;
+		int leader_undo;
+		int trader_undo;
+		int technic_undo;
+		int diplomat_undo;
+                
 		TextureOb* textureOb_skill;
 		TextureOb* textureOb_skill_transparent;
 		

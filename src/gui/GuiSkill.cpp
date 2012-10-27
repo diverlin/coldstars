@@ -22,7 +22,13 @@
 #include "../render/Render.hpp"
 #include "ButtonSingle.hpp"
 
-GuiSkill::GuiSkill()
+GuiSkill::GuiSkill():
+attack_undo(0),
+defence_undo(0),
+leader_undo(0),
+trader_undo(0),
+technic_undo(0),
+diplomat_undo(0)
 {
      	textureOb_skill = GuiTextureObCollector::Instance().skill;
      	textureOb_skill_transparent = GuiTextureObCollector::Instance().skill_transparent;     	     	
@@ -92,7 +98,17 @@ GuiSkill::GuiSkill()
 GuiSkill::~GuiSkill()
 {}
 
-void GuiSkill::ButtonsAction(Skill& skill) const
+void GuiSkill::Acknowledge()
+{
+	attack_undo   = 0;
+	defence_undo  = 0;
+	leader_undo   = 0;
+	trader_undo   = 0;
+	technic_undo  = 0;
+	diplomat_undo = 0;
+}
+
+void GuiSkill::ButtonsAction(Skill& skill)
 {
 	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{
@@ -101,24 +117,113 @@ void GuiSkill::ButtonsAction(Skill& skill) const
 		{
         		switch(button->GetSubTypeId())
         		{
-        			case GUI::BUTTON::INCREMENT_ATTACK_ID:   { skill.IncrementAttack(); break; }
-        			case GUI::BUTTON::DECREMENT_ATTACK_ID:   { skill.DecrementAttack(); break; }
+        			case GUI::BUTTON::INCREMENT_ATTACK_ID:   
+                                {
+                                        skill.IncrementAttack(); 
+                                        attack_undo++; 
+                                                                                
+                                        break; 
+                                }        			
+                                case GUI::BUTTON::DECREMENT_ATTACK_ID:   
+                                {       
+                                        if (attack_undo > 0)
+                                        {
+                                                skill.DecrementAttack();
+                                                attack_undo--;
+                                        }
+                                        
+                                        break; 
+                                }
            		   	      	
-        			case GUI::BUTTON::INCREMENT_DEFENCE_ID:  { skill.IncrementDefence(); break; }
-        			case GUI::BUTTON::DECREMENT_DEFENCE_ID:  { skill.DecrementDefence(); break; }
+        			case GUI::BUTTON::INCREMENT_DEFENCE_ID:  
+                                { 
+                                        skill.IncrementDefence(); 
+                                        defence_undo++;
+                                        
+                                        break; 
+                                }                                
+        			case GUI::BUTTON::DECREMENT_DEFENCE_ID:  
+                                { 
+                                        if (defence_undo > 0)
+                                        {
+                                                skill.DecrementDefence();
+                                                defence_undo--; 
+                                        }
+                                        
+                                        break; 
+                                }
           		   	      	
-        			case GUI::BUTTON::INCREMENT_LEADER_ID:   { skill.IncrementLeader(); break; }
-        			case GUI::BUTTON::DECREMENT_LEADER_ID:   { skill.DecrementLeader(); break; }
+        			case GUI::BUTTON::INCREMENT_LEADER_ID:   
+                                { 
+                                        skill.IncrementLeader(); 
+                                        leader_undo++;
+                                        
+                                        break; 
+                                }                                
+        			case GUI::BUTTON::DECREMENT_LEADER_ID:   
+                                { 
+                                        if (leader_undo > 0)
+                                        {
+                                                skill.DecrementLeader(); 
+                                                leader_undo--;
+                                        }
+                                        
+                                        break; 
+                                }
            		   	      	
-        			case GUI::BUTTON::INCREMENT_TRADER_ID:   { skill.IncrementTrader(); break; }
-        			case GUI::BUTTON::DECREMENT_TRADER_ID:   { skill.DecrementTrader(); break; }
+        			case GUI::BUTTON::INCREMENT_TRADER_ID:   
+                                { 
+                                        skill.IncrementTrader(); 
+                                        trader_undo++;
+                                        
+                                        break; 
+                                }
+        			case GUI::BUTTON::DECREMENT_TRADER_ID:   
+                                { 
+                                        if (trader_undo > 0)
+                                        {
+                                                skill.DecrementTrader(); 
+                                                trader_undo--;
+                                        }
+                                        
+                                        break; 
+                                }
+
+        			case GUI::BUTTON::INCREMENT_TECHNIC_ID:  
+                                { 
+                                        skill.IncrementTechnic(); 
+                                        technic_undo++;
+                                        
+                                        break; 
+                                }
+                                case GUI::BUTTON::DECREMENT_TECHNIC_ID:  
+                                {
+                                        if (technic_undo > 0) 
+                                        {
+                                                skill.DecrementTechnic(); 
+                                                technic_undo--;
+                                        }
+                                        
+                                        break; 
+                                }
            		   	      	
-        			case GUI::BUTTON::INCREMENT_TECHNIC_ID:  { skill.IncrementTechnic(); break; }
-        			case GUI::BUTTON::DECREMENT_TECHNIC_ID:  { skill.DecrementTechnic(); break; }
-           		   	      	
-        			case GUI::BUTTON::INCREMENT_DIPLOMAT_ID: { skill.IncrementDiplomat(); break; }
-        			case GUI::BUTTON::DECREMENT_DIPLOMAT_ID: { skill.DecrementDiplomat(); break; }        
-           		}  		   	
+        			case GUI::BUTTON::INCREMENT_DIPLOMAT_ID: 
+                                { 
+                                        skill.IncrementDiplomat(); 
+                                        diplomat_undo++;
+                                        
+                                        break; 
+                                }
+        			case GUI::BUTTON::DECREMENT_DIPLOMAT_ID: 
+                                {
+                                        if (diplomat_undo > 0)
+                                        {
+                                                skill.DecrementDiplomat(); 
+                                                diplomat_undo--;
+                                        }
+                                        break; 
+                                }        
+           		}
 		}
 	}
 }

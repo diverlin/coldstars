@@ -27,12 +27,6 @@ leader(SKILL::LEADER_MIN),
 trader(SKILL::TRADER_MIN),
 technic(SKILL::TECHNIC_MIN),
 diplomat(SKILL::DIPLOMAT_MIN),
-attack_undo(0),
-defence_undo(0),
-leader_undo(0),
-trader_undo(0),
-technic_undo(0),
-diplomat_undo(0),
 available_points(6),
 expirience(0),
 expirience_nextlevel(SKILL::EXPIRIENCE_THRESHOLD),
@@ -53,16 +47,6 @@ void Skill::AddExpirience(unsigned long int addExpirience)
 	}
 }
 
-void Skill::Acknowledge()
-{
-	attack_undo   = 0;
-	defence_undo  = 0;
-	leader_undo   = 0;
-	trader_undo   = 0;
-	technic_undo  = 0;
-	diplomat_undo = 0;
-}
-
 //######### ATTACK ###############
 void Skill::IncrementAttack()
 {
@@ -70,18 +54,13 @@ void Skill::IncrementAttack()
 	{
 		available_points -= 1;
 		attack += 1;
-		attack_undo += 1;
 	}
 }
 
 void Skill::DecrementAttack()
 {
-	if (attack_undo > 0)
-	{ 
-		available_points += 1;
-		attack -= 1;
-		attack_undo -= 1;
-	}
+	available_points += 1;
+	attack -= 1;
 }
 
 
@@ -92,18 +71,13 @@ void Skill::IncrementDefence()
 	{
 		available_points -= 1;
 		defence += 1;
-		defence_undo += 1;
 	}  
 } 
 
 void Skill::DecrementDefence()
 {
-	if (defence_undo > 0)
-	{
-		available_points += 1;
-		defence -= 1;
-		defence_undo -= 1;
-	}
+	available_points += 1;
+	defence -= 1;
 }
 
 
@@ -114,18 +88,13 @@ void Skill::IncrementLeader()
 	{
 		available_points -= 1;
 		leader += 1;
-		leader_undo += 1;
 	}
 }
 
 void Skill::DecrementLeader()
 {
-	if (leader_undo > 0)
-	{
-		available_points += 1;
-		leader -= 1;
-		leader_undo -= 1;
-	}
+	available_points += 1;
+	leader -= 1;
 }
 
 
@@ -136,18 +105,13 @@ void Skill::IncrementTrader()
 	{
 		available_points -= 1;
 		trader += 1;
-		trader_undo += 1; 
 	}
 }
 
 void Skill::DecrementTrader()
 {
-	if (trader_undo > 0)
-	{
-		available_points += 1;
-		trader -= 1;
-		trader_undo -= 1;
-	}
+	available_points += 1;
+	trader -= 1;
 }
 
 //######### TECHNIC ###############
@@ -157,18 +121,13 @@ void Skill::IncrementTechnic()
 	{
 		available_points -= 1;
 		technic += 1;
-		technic_undo += 1;
 	}  
 }
 
 void Skill::DecrementTechnic()
 {
-	if (technic_undo > 0)
-	{
-		available_points += 1;
-		technic -= 1;
-		technic_undo -= 1;
-	}
+	available_points += 1;
+	technic -= 1;
 }
 
 
@@ -179,18 +138,13 @@ void Skill::IncrementDiplomat()
 	{
 		available_points -= 1;
 		diplomat += 1;
-		diplomat_undo += 1; 
 	}
 }
 
 void Skill::DecrementDiplomat()
 {
-	if (diplomat_undo > 0)
-	{
-		available_points += 1;
-		diplomat -= 1;
-		diplomat_undo -= 1;
-	}
+	available_points += 1;
+	diplomat -= 1;
 }
 
 void Skill::SaveData(boost::property_tree::ptree& save_ptree, const std::string& parent_root) const
