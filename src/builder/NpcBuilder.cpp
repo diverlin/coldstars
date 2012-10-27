@@ -85,7 +85,6 @@ void NpcBuilder::CreateNewInternals(int race_id, int subtype_id)
                                         npc->GetSkill().IncrementTechnic();
                                         npc->GetSkill().IncrementDiplomat();
    		   		}
-   		   		npc->GetSkill().Acknowledge();
                                 
                                 break;    
    			}
@@ -99,7 +98,6 @@ void NpcBuilder::CreateNewInternals(int race_id, int subtype_id)
    		   			npc->GetSkill().IncrementAttack();
    		   			npc->GetSkill().IncrementDefence();
    		   		}
-   		   		npc->GetSkill().Acknowledge();
                                 
                                 break;    
    			}
@@ -112,7 +110,6 @@ void NpcBuilder::CreateNewInternals(int race_id, int subtype_id)
    		   		{
    		   			npc->GetSkill().IncrementTrader();
    		   		}
-   		   		npc->GetSkill().Acknowledge();
    		   		
    		   		break;
    		   	}
@@ -133,7 +130,6 @@ void NpcBuilder::CreateNewInternals(int race_id, int subtype_id)
                                         npc->GetSkill().IncrementTechnic();
                                         npc->GetSkill().IncrementDiplomat();
    		   		}
-   		   		npc->GetSkill().Acknowledge();
                                         
                                 break;    
    			}
