@@ -119,9 +119,11 @@ void GuiSkill::ButtonsAction(Skill& skill)
         		{
         			case GUI::BUTTON::INCREMENT_ATTACK_ID:   
                                 {
-                                        skill.IncrementAttack(); 
-                                        attack_undo++; 
-                                                                                
+                                        if (skill.IncrementAttack() == true) 
+                                        {
+                                        	attack_undo++; 
+                                        }
+                                                                        
                                         break; 
                                 }        			
                                 case GUI::BUTTON::DECREMENT_ATTACK_ID:   
@@ -137,8 +139,10 @@ void GuiSkill::ButtonsAction(Skill& skill)
            		   	      	
         			case GUI::BUTTON::INCREMENT_DEFENCE_ID:  
                                 { 
-                                        skill.IncrementDefence(); 
-                                        defence_undo++;
+                                        if (skill.IncrementDefence() == true) 
+                                        {
+                                        	defence_undo++;
+                                        }
                                         
                                         break; 
                                 }                                
@@ -155,8 +159,10 @@ void GuiSkill::ButtonsAction(Skill& skill)
           		   	      	
         			case GUI::BUTTON::INCREMENT_LEADER_ID:   
                                 { 
-                                        skill.IncrementLeader(); 
-                                        leader_undo++;
+                                        if (skill.IncrementLeader() == true) 
+                                        {
+                                        	leader_undo++;
+                                        }
                                         
                                         break; 
                                 }                                
@@ -173,8 +179,10 @@ void GuiSkill::ButtonsAction(Skill& skill)
            		   	      	
         			case GUI::BUTTON::INCREMENT_TRADER_ID:   
                                 { 
-                                        skill.IncrementTrader(); 
-                                        trader_undo++;
+                                        if (skill.IncrementTrader() == true)
+                                        {
+                                        	trader_undo++;
+                                        }
                                         
                                         break; 
                                 }
@@ -191,8 +199,10 @@ void GuiSkill::ButtonsAction(Skill& skill)
 
         			case GUI::BUTTON::INCREMENT_TECHNIC_ID:  
                                 { 
-                                        skill.IncrementTechnic(); 
-                                        technic_undo++;
+                                	if (skill.IncrementTechnic() == true) 
+                                        {
+                                        	technic_undo++;
+                                        }
                                         
                                         break; 
                                 }
@@ -209,8 +219,10 @@ void GuiSkill::ButtonsAction(Skill& skill)
            		   	      	
         			case GUI::BUTTON::INCREMENT_DIPLOMAT_ID: 
                                 { 
-                                        skill.IncrementDiplomat(); 
-                                        diplomat_undo++;
+                                        if (skill.IncrementDiplomat() == true) 
+                                        {
+                                        	diplomat_undo++;
+                                        }
                                         
                                         break; 
                                 }

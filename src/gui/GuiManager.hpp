@@ -43,7 +43,8 @@ class GuiManager
 		GuiVehicle& GetGuiVehicleScan() { return gui_vehicle_scan; };
 		GuiVehicle2& GetGuiVehiclePlayer() { return gui_vehicle_player; };
 		GuiVehicle2& GetGuiVehicleTarget() { return gui_vehicle_target; };
-						      		
+		GuiSkill& GetGuiSkill() { return gui_skill; };
+								      		
       	private:
       		Player* player;
 	

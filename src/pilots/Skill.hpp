@@ -42,22 +42,22 @@ class Skill
 
 		void AddExpirience(unsigned long int expirience);
 
-		void IncrementAttack();
+		bool IncrementAttack();
 		void DecrementAttack();
 
-		void IncrementDefence();
+		bool IncrementDefence();
 		void DecrementDefence();
 
-		void IncrementLeader();
+		bool IncrementLeader();
 		void DecrementLeader();
 
-		void IncrementTrader();
+		bool IncrementTrader();
 		void DecrementTrader();
 
-		void IncrementTechnic();
+		bool IncrementTechnic();
 		void DecrementTechnic();
 
-		void IncrementDiplomat();
+		bool IncrementDiplomat();
 		void DecrementDiplomat();
 
 		void SaveData(boost::property_tree::ptree&, const std::string&) const;
