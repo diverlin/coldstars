@@ -72,35 +72,26 @@ void BaseItem::UseOverloadDeterioration()
 {
         deterioration = data_item.deterioration_normal * data_item.deterioration_overload_rate;
 }
-                
+ 
+void BaseItem::CheckDamage()
+{
+        if (condition <= 0)
+    	{
+                condition = 0;
+                item_slot->UpdateVehiclePropetries();
+       	}   
+}
                 
 void BaseItem::DeteriorationEvent()
 {
-	if (is_DAMAGED == false)
-	{
-	    	condition -= deterioration;
-    		if (condition <= 0)
-    		{
-                        DamageEvent();
-       		}
-    	}
-}
-
-
-void BaseItem::DamageEvent()
-{
-        is_DAMAGED = true;
-       	item_slot->UpdateVehiclePropetries(); 
-}           
+        condition -= deterioration;
+        CheckDamage();
+}         
                 
 void BaseItem::RepairEvent()
 {
     	condition = data_item.condition_max;
-    	if (is_DAMAGED == true)
-    	{
-        	is_DAMAGED = false;
-        	item_slot->UpdateVehiclePropetries();  
-    	}
+      	item_slot->UpdateVehiclePropetries();  
 }
 
 void BaseItem::UpdateLock()

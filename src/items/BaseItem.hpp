@@ -23,7 +23,7 @@
 #include "../text/InfoTable.hpp"
 class ItemSlot; 
 class TextureOb; 
-class Rect; //#include "../common/rect.hpp"
+class Rect;
 
 struct ItemCommonData 
 {
@@ -34,7 +34,7 @@ struct ItemCommonData
 	deterioration_overload_rate(0.0f),
 	mass(0)
 	{};
-	
+
 	unsigned int modules_num_max; 
 	unsigned int condition_max; 
 	unsigned int deterioration_normal;
@@ -50,7 +50,7 @@ struct UnresolvedDataUniqueBaseItem
 
 class BaseItem : public Base
 {
-    	public:    				
+    	public:
       		BaseItem();
       		virtual ~BaseItem();
 
@@ -68,39 +68,38 @@ class BaseItem : public Base
 		int GetPrice()              	const { return price; };
 		int GetFunctionalSlotSubTypeId() const { return functional_slot_subtype_id; };
 
-		bool GetLocked()	const { return (locked_turns != 0); }
-                bool GetDamaged()       const { return is_DAMAGED; }
-                int GetFunctioning()    const { return ( (is_DAMAGED == false) and (locked_turns == 0) ); }
+		bool GetLocked()	const { return (locked_turns > 0); }
+                int GetFunctioning()    const { return ( (condition > 0) and (locked_turns == 0) ); }
                 
                 void UseNormalDeterioration();
                 void UseOverloadDeterioration();
                 
+                void CheckDamage();
+                
                 void DeteriorationEvent(); 
                 void LockEvent(int); 
-                void DamageEvent();                 
+                
                 void RepairEvent();
 
 		virtual void UpdatePropetries() {};
 		virtual void UpdateInStatic() { UpdateLock(); };
                 
 		void UpdateInfo();
-			
+
       		virtual void Render(const Rect&, const vec2f&, bool draw_text = true);
       		void RenderInfo(const vec2f&, float, float); 
 
 	protected:
      		TextureOb* textureOb;
-     				                
+
                 int race_id;
+                int locked_turns;
 		int condition;
      		int price;
 
                 int deterioration;
                 
                 int functional_slot_subtype_id;
-
-     		bool is_DAMAGED;
-     		int locked_turns;
                 
                 ItemCommonData data_item;
                 
@@ -108,9 +107,9 @@ class BaseItem : public Base
                 
                 InfoTable info;  
 
-		void UpdateLock();
-		     		
                 UnresolvedDataUniqueBaseItem data_unresolved_BaseItem;
+                
+		void UpdateLock();
 
      		virtual void AddCommonInfo()=0;
  		virtual void AddUniqueInfo()=0;   

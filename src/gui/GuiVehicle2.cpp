@@ -96,7 +96,7 @@ void GuiVehicle2::UpdateEquipmentIcons() const
 		{
 			button_slot_vec[i].first->SetTextureObAdditional(button_slot_vec[i].second->GetItem()->GetTextureOb());
 			button_slot_vec[i].first->SetTextureObMask(NULL);
-			if (button_slot_vec[i].second->GetItem()->GetDamaged())
+			if (button_slot_vec[i].second->GetItem()->GetCondition() == 0)
 			{
 				button_slot_vec[i].first->SetTextureObMask(GuiTextureObCollector::Instance().slot_mark_reject);
 				button_slot_vec[i].first->Reset();
