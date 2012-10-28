@@ -36,6 +36,7 @@ class ShaderCollector
 		GLuint combine;
 		GLuint multitexturing;
 		GLuint blank;
+		GLuint fogwar;
 		
 	private:
 		ShaderCollector() {};

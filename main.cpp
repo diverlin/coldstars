@@ -32,11 +32,11 @@
 #include "src/pilots/Npc.hpp"
 
 int main()
-{         
-        //runPureTest();
-            
-	init();  
+{           
+	//runPureTest();
 
+	init();  
+        
 	TurnTimer turn_timer;
 	GameDate game_date(1,1,4000);
 
