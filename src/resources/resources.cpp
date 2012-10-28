@@ -1365,6 +1365,14 @@ void loadShaders()
 	ShaderCollector::Instance().blank = glCreateProgram();
 	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShaderCollector::Instance().blank);
 	}
+
+	{
+	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/fogwar.vert")); 
+	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/fogwar.frag")); 
+
+	ShaderCollector::Instance().fogwar = glCreateProgram();
+	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShaderCollector::Instance().fogwar);
+	}
 }
 
 

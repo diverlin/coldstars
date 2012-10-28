@@ -414,8 +414,22 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 	clearScreen();
 	resetRenderTransformation();
 
-	drawFullScreenTexturedQuad(Screen::Instance().GetFbo3().GetTexture(), w, h, -999.0);
+	//drawFullScreenTexturedQuad(Screen::Instance().GetFbo3().GetTexture(), w, h, -999.0);
 	//drawFullScreenTexturedQuad(pTo_fbo0->texture, w, h, -999.0);  // debug
+	// draw fogwar and final scene
+    	glUseProgram(ShaderCollector::Instance().fogwar);
+		glActiveTexture(GL_TEXTURE0);                                
+		glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetFbo3().GetTexture());
+		glUniform1i (glGetUniformLocation(ShaderCollector::Instance().fogwar, "sceneTex"), 0);
+
+		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "center"), npc->GetVehicle()->GetPoints().GetCenter().x/w, npc->GetVehicle()->GetPoints().GetCenter().y/h);
+		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "radius"), (float)npc->GetVehicle()->GetPropetries().radar/w);
+		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "pos"), Screen::Instance().GetRect().GetBottomLeft().x/w, Screen::Instance().GetRect().GetBottomLeft().y/h);
+
+		drawFullScreenQuad(w, h, -999.0);
+	glUseProgram(0); 
+
+
 
 	camera(Screen::Instance().GetRect().GetBottomLeft().x, Screen::Instance().GetRect().GetBottomLeft().y);
 	
@@ -438,7 +452,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
         	visible_text_DAMAGE_vec[i]->Render(Screen::Instance().GetRect().GetBottomLeft()); 
     	}   
     		    	
-    	starsystem->RestoreSceneColor();    	          
+    	starsystem->RestoreSceneColor();
 }
     
 
