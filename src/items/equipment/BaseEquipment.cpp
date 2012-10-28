@@ -33,8 +33,6 @@ BaseEquipment::BaseEquipment()
 {
         data_id.type_id = ENTITY::EQUIPMENT_ID;
         race_id         = RACE::R0_ID;
-          
-    	is_DAMAGED = false;
 
     	price = 0;
     	
@@ -63,7 +61,6 @@ void BaseEquipment::AddCommonInfo()
     	info.addNameStr("race:");      info.addValueStr( getRaceStr(race_id) );
         info.addNameStr("deteriori:"); info.addValueStr( int2str(deterioration) );
     	info.addNameStr("condition:"); info.addValueStr( int2str(condition) + "/" + int2str(data_item.condition_max) );
-        info.addNameStr("damaged:");   info.addValueStr( int2str(is_DAMAGED) );
         info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
     	info.addNameStr("price:");     info.addValueStr( int2str(price) );
 
@@ -118,7 +115,7 @@ void BaseEquipment::Render(const Rect& rect1, const vec2f& gui_offset, bool draw
         	drawTexturedRect(modules_vec[i]->GetTextureOb(), module_rect, -1.0f);
     	}
     	
-    	if (is_DAMAGED == true)
+    	if (condition == 0)
 	{
     		drawTexturedRect(GuiTextureObCollector::Instance().slot_mark_reject , rect, -1.0f);	
 	}
