@@ -83,9 +83,9 @@ void StarSystemBuilder::CreateNewInternals()
 
         if (getRandInt(1,7) != 1)
         {
-                int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
-                int ship_num = getRandInt(ENTITY::STARSYSTEM::SHIP_INIT_MIN, ENTITY::STARSYSTEM::SHIP_INIT_MAX);
-                this->CreateShips(npc_race_id, ship_num);
+                //int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+                //int ship_num = getRandInt(ENTITY::STARSYSTEM::SHIP_INIT_MIN, ENTITY::STARSYSTEM::SHIP_INIT_MAX);
+                //this->CreateShips(npc_race_id, ship_num);
 
 		this->CreateSpaceStations(3);
         }
@@ -96,8 +96,7 @@ void StarSystemBuilder::CreateNewInternals()
                 this->CreateShips(npc_race_id, ship_num);    
         }
 }
-
-  	
+ 
 void StarSystemBuilder::CreateNewInternals_TEST()
 {
         this->CreateStar();
@@ -192,9 +191,8 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
        
         	SpaceStationBuilder::Instance().Equip(spacestation);       	// improove
 
-        	NpcBuilder::Instance().CreateNewNpc();
-                NpcBuilder::Instance().CreateNewInternals(npc_race_id, npc_subtype_id); 
-        	spacestation->BindOwnerNpc(NpcBuilder::Instance().GetNpc());
+                Npc* npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id);
+        	spacestation->BindOwnerNpc(npc);
 
 		vec2f center = getRandVec2f(700, 1500);
 		float angle = getRandInt(0, 360);  
@@ -206,10 +204,9 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
                 SatelliteBuilder::Instance().CreateNewInternals();
                 Satellite* satellite = SatelliteBuilder::Instance().GetSatellite();
                 SatelliteBuilder::Instance().Equip(satellite);           		// improove
-                   	
-                NpcBuilder::Instance().CreateNewNpc();
-        	NpcBuilder::Instance().CreateNewInternals(npc_race_id, npc_subtype_id);
-                satellite->BindOwnerNpc(NpcBuilder::Instance().GetNpc());
+
+                Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id);
+                satellite->BindOwnerNpc(new_npc);
                 
                 starsystem->AddVehicle((Vehicle*)satellite, vec2f(0, 0), 0, spacestation);
     		}
@@ -244,20 +241,17 @@ void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num, int requested
         	int ship_subtype_id = npc_subtype_id;  
         	int ship_size_id = getRandInt(1, 9);
         	int weapons_num = getRandInt(1, 5);
-        	ShipBuilder::Instance().CreateNewShip();
-        	ShipBuilder::Instance().CreateNewInternals(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
-        	Ship* ship = ShipBuilder::Instance().GetShip();
-       
-        	ShipBuilder::Instance().Equip(ship);            	// improove
 
-        	NpcBuilder::Instance().CreateNewNpc();
-        	NpcBuilder::Instance().CreateNewInternals(npc_race_id, npc_subtype_id);
-        	ship->BindOwnerNpc(NpcBuilder::Instance().GetNpc());
+        	Ship* new_ship = ShipBuilder::Instance().GetNewShip(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
+        	ShipBuilder::Instance().Equip(new_ship); // improove
+
+        	Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id);
+        	new_ship->BindOwnerNpc(new_npc);
 
 		vec2f center = getRandVec2f(300, 1200);
 		float angle = getRandInt(0, 360);  
 		
-        	starsystem->AddVehicle(ship, center, angle, NULL);
+        	starsystem->AddVehicle(new_ship, center, angle, NULL);
     	}
 }
 

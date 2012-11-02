@@ -680,21 +680,15 @@ void StarSystem::ShipManager_s(unsigned int num)
       		int size_id     = SIZE_4_ID;
       		int weapons_num = 7;
         
-        	NpcBuilder::Instance().CreateNewNpc();
-        	NpcBuilder::Instance().CreateNewInternals(prace_id, psubtype_id);
-       		Npc* pnpc = NpcBuilder::Instance().GetNpc();
-                   
-        	ShipBuilder::Instance().CreateNewShip();
-        	ShipBuilder::Instance().CreateNewInternals(prace_id, psubtype_id, size_id, weapons_num);
-        	Ship* pship = ShipBuilder::Instance().GetShip();
-        	
-		ShipBuilder::Instance().Equip(pship);   // improove
+       		Npc* new_pnpc = NpcBuilder::Instance().GetNewNpc(prace_id, psubtype_id);
+        	Ship* new_pship = ShipBuilder::Instance().GetNewShip(prace_id, psubtype_id, size_id, weapons_num);
+        	ShipBuilder::Instance().Equip(new_pship);   // improove
         
-        	pship->BindOwnerNpc(pnpc);  	        	
+        	new_pship->BindOwnerNpc(new_pnpc);
 
 		vec2f pos = getRandVec2f(100, 800);
 		int angle = getRandInt(0, 360);
-                AddVehicle(ShipBuilder::Instance().GetShip(), pos, angle);
+                AddVehicle(new_pship, pos, angle);
         	//break;
         }
 }

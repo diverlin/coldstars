@@ -96,3 +96,10 @@ void ShipBuilder::CreateNewInternals(int race_id, int subsubtype_id, int size_id
 	                            
         CreateItemSlots(ship);
 }
+
+Ship* ShipBuilder::GetNewShip(int race_id, int subsubtype_id, int size_id, int weapons_num) 
+{
+        CreateNewShip();
+        CreateNewInternals(race_id, subsubtype_id, size_id, weapons_num);     
+        return GetShip();
+}

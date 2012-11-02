@@ -29,9 +29,10 @@ class ShipBuilder : public BaseVehicleBuilder
 		static ShipBuilder& Instance();
 		~ShipBuilder();
 		
-		void CreateNewShip(int id = NONE_ID);							
-		void CreateNewInternals(int, int, int, int);   
-		Ship* GetShip() const { return ship; };         
+		void CreateNewShip(int id = NONE_ID);
+                 
+		Ship* GetShip() const { return ship; }; 
+                Ship* GetNewShip(int, int, int, int);        
        
         private:
         	ShipBuilder():ship(NULL) {};   	
@@ -39,6 +40,8 @@ class ShipBuilder : public BaseVehicleBuilder
         	ShipBuilder& operator=(const ShipBuilder&) = delete;
         	
         	Ship* ship;
+                
+                void CreateNewInternals(int, int, int, int);  
 }; 
 
 
