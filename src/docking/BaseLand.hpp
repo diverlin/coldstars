@@ -20,7 +20,7 @@
 #define BASELAND_H
 
 #include <vector>
-#include "../common/Base.hpp"
+#include "../spaceobjects/BaseSpaceEntity.hpp"
 
 class Vehicle;
 
@@ -38,7 +38,7 @@ class BaseLand : public Base
                 BaseLand();
                 virtual ~BaseLand();
 
-		void SetOwner(Base* owner)  { this->owner = owner; } 
+		void SetOwner(BaseSpaceEntity* owner)  { this->owner = owner; } 
 		
 		Base* GetOwner() const { return owner; };
 		virtual bool GetPermissionToLand() const = 0;
@@ -51,7 +51,7 @@ class BaseLand : public Base
                 virtual std::string GetDockVehicleStr() const = 0;
 		  
         protected:
-                Base* owner;
+                BaseSpaceEntity* owner;
              
                 UnresolvedDataUniqueBaseLand data_unresolved_BaseLand;
                 void SaveDataUniqueBaseLand(boost::property_tree::ptree&, const std::string&) const;		

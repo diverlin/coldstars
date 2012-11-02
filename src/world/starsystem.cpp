@@ -203,15 +203,20 @@ void StarSystem::Add(DistantStarEffect* ds)                  { distantStarEffect
 //// ******* TRANSITION ******* 
   		           
 // poor                
-Planet* StarSystem::GetClosestPlanet(const vec2f& _pos)
+Planet* StarSystem::GetClosestPlanet(const vec2f& _pos) const
 {
      	return PLANET_vec[getRandInt(0, PLANET_vec.size()-1)];
 }
-Vehicle* StarSystem::GetRandomVehicle()
+Planet* StarSystem::GetRandomPlanet() const
+{
+     	return PLANET_vec[getRandInt(0, PLANET_vec.size()-1)];
+}
+
+Vehicle* StarSystem::GetRandomVehicle() const
 {
      	return VEHICLE_vec[getRandInt(0, VEHICLE_vec.size()-1)];
 }
-Vehicle* StarSystem::GetRandomVehicleExcludingNpcRaceId(int _race_id)
+Vehicle* StarSystem::GetRandomVehicleExcludingNpcRaceId(int _race_id) const
 {
         std::vector<Vehicle*> _vehicle_vec;
         Vehicle* requested_vehicle = NULL;

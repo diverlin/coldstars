@@ -108,9 +108,10 @@ class StarSystem : public BaseSpaceEntity
 		void ResolveData();
 				                                           		    		    		
 		// poor
-		Planet* GetClosestPlanet(const vec2f&);
-		Vehicle* GetRandomVehicle();
-		Vehicle* GetRandomVehicleExcludingNpcRaceId(int);
+		Planet* GetClosestPlanet(const vec2f&) const;
+		Planet* GetRandomPlanet() const;
+		Vehicle* GetRandomVehicle() const;
+		Vehicle* GetRandomVehicleExcludingNpcRaceId(int) const;
 		Vehicle* GetRandomVehicleByNpcRaceId(int) const;
 		Vehicle* GetRandomVehicle(const std::vector<int>&) const;
 		// 
