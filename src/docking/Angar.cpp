@@ -35,25 +35,45 @@ Angar::Angar(int id)
 
 Angar::~Angar()
 {
-	EntityManager::Instance().RemoveEntity(this);
+	EntityManager::Instance().RemoveEntity(this); // ??
+        
+        #if CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~Angar(), id="+int2str(GetId()));
+	#endif
+
+	for(unsigned int i=0; i<vehicleslot_total_vec.size(); i++)
+	{
+		delete vehicleslot_total_vec[i];
+	}
 }
        
 void Angar::AddVehicleSlot(VehicleSlot* vehicle_slot) 
 { 
 	vehicle_slot->SetOwner(this);
-	vehicleslot_vec.push_back(vehicle_slot); 
+        
+        if (vehicle_slot->GetSubTypeId() == ENTITY::VEHICLE_MILITARY_SLOT_ID)
+        {
+                vehicleslot_military_vec.push_back(vehicle_slot);
+        }
+        
+        if (vehicle_slot->GetSubTypeId() == ENTITY::VEHICLE_VISITORS_SLOT_ID)
+	{
+                vehicleslot_visitors_vec.push_back(vehicle_slot);     
+        }
+        
+        vehicleslot_total_vec.push_back(vehicle_slot); 
 };
                          
                          
 void Angar::Ai() const
 {
-        for (unsigned int i=0; i<vehicleslot_vec.size(); i++)
+        for (unsigned int i=0; i<vehicleslot_visitors_vec.size(); i++)
         {
-                if (vehicleslot_vec[i]->GetVehicle() != NULL)
+                if (vehicleslot_visitors_vec[i]->GetVehicle() != NULL)
                 {
-                	if (vehicleslot_vec[i]->GetVehicle()->GetOwnerNpc() != NULL)
+                	if (vehicleslot_visitors_vec[i]->GetVehicle()->GetOwnerNpc() != NULL)
                 	{
-                        	vehicleslot_vec[i]->GetVehicle()->GetOwnerNpc()->MindInKosmoport();
+                        	vehicleslot_visitors_vec[i]->GetVehicle()->GetOwnerNpc()->MindInKosmoport();
                 	}
                	}
         }
@@ -62,9 +82,9 @@ void Angar::Ai() const
 int Angar::GetFreeVehicleSlotTotalNum() const
 {
         int sum_free = 0;
-        for (unsigned int i=0; i<vehicleslot_vec.size(); i++)
+        for (unsigned int i=0; i<vehicleslot_visitors_vec.size(); i++)
         {
-                if (vehicleslot_vec[i]->GetVehicle() == NULL)
+                if (vehicleslot_visitors_vec[i]->GetVehicle() == NULL)
                 {
                         sum_free++;
                 }
@@ -74,14 +94,29 @@ int Angar::GetFreeVehicleSlotTotalNum() const
 
 bool Angar::AddVehicle(Vehicle* vehicle)
 {
-        for (unsigned int i = 0; i < vehicleslot_vec.size(); i++)
-        {
-                if (vehicleslot_vec[i]->GetVehicle() == NULL)
+        if (vehicle->GetSubTypeId() == ENTITY::MILITARY_ID)
+        {        
+                for (unsigned int i=0; i<vehicleslot_military_vec.size(); i++)
                 {
-                        vehicleslot_vec[i]->InsertVehicle(vehicle);
-                        return true;
+                        if (vehicleslot_military_vec[i]->GetVehicle() == NULL)
+                        {
+                                vehicleslot_military_vec[i]->InsertVehicle(vehicle);
+                                return true;
+                        }
                 }
-        }        
+        }  
+        else
+        {        
+                for (unsigned int i=0; i<vehicleslot_visitors_vec.size(); i++)
+                {
+                        if (vehicleslot_visitors_vec[i]->GetVehicle() == NULL)
+                        {
+                                vehicleslot_visitors_vec[i]->InsertVehicle(vehicle);
+                                return true;
+                        }
+                }
+        }  
+        
         return false;        
 }
 
@@ -106,11 +141,19 @@ bool Angar::AddVehicle(Vehicle* vehicle)
 std::string Angar::GetDockVehicleStr() const
 {
 	std::string str;
-        for (unsigned int i=0; i<vehicleslot_vec.size(); i++)
+        for (unsigned int i=0; i<vehicleslot_military_vec.size(); i++)
         {
-                if (vehicleslot_vec[i]->GetVehicle() != NULL)
+                if (vehicleslot_military_vec[i]->GetVehicle() != NULL)
                 {
-                	str += "_" + int2str(vehicleslot_vec[i]->GetVehicle()->GetId());
+                	str += "_m" + int2str(vehicleslot_military_vec[i]->GetVehicle()->GetId());
+                }
+        }
+        
+        for (unsigned int i=0; i<vehicleslot_visitors_vec.size(); i++)
+        {
+                if (vehicleslot_visitors_vec[i]->GetVehicle() != NULL)
+                {
+                	str += "_v" + int2str(vehicleslot_visitors_vec[i]->GetVehicle()->GetId());
                 }
         }
         

@@ -30,6 +30,7 @@
 
 #include "src/common/TurnTimer.hpp"
 #include "src/pilots/Npc.hpp"
+#include "src/spaceobjects/Planet.hpp"
 
 int main()
 {           
@@ -47,11 +48,19 @@ int main()
 	PlayerBuilder::Instance().CreateNewInternals();
 	Player* player = PlayerBuilder::Instance().GetPlayer();
 
-	vec2f center(400, 400);
-	double angle = 0;  
-
-	GalaxyBuilder::Instance().GetGalaxy()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, NULL);
-	player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
+        bool put_into_space = false;
+        if (put_into_space == true)
+        {
+                vec2f center(400, 400);
+                float angle = 0;  
+                GalaxyBuilder::Instance().GetGalaxy()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, NULL);
+	}
+        else
+        {
+                GalaxyBuilder::Instance().GetGalaxy()->GetRandomStarSystem()->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
+        }
+        
+        player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
 
 	//Screen::Instance().Resize(Config::Instance().SCREEN_WIDTH/1.5, Config::Instance().SCREEN_HEIGHT);
 

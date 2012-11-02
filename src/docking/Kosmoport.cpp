@@ -85,11 +85,16 @@ bool Kosmoport::AddVehicle(Vehicle* vehicle)
 
        	vehicle->SetPlaceTypeId(data_id.type_id); 
        	vehicle->SetLand(this);
+        
+        if (vehicle->GetStarSystem() == NULL) // used if vehicle added directly after creation
+        {
+                vehicle->SetStarSystem(owner->GetStarSystem());
+        }
 
         return true;
 }
 
-///* virtual */
+//* virtual */
 //bool Kosmoport::RemoveVehicle(Vehicle* vehicle)
 //{        
     	//return angar->RemoveVehicle(vehicle);

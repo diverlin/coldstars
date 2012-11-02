@@ -62,12 +62,28 @@ void GuiAngar::BindAngar(Angar* angar)
 {
 	rect_slot_vec.clear();
 
-	for (int i=0; i<angar->vehicleslot_vec.size(); i++)
+        int column_counter = 0;
+        int row_counter = 0;
+        for (int i=0; i<angar->vehicleslot_visitors_vec.size(); i++)
  	{
- 		Rect _rect(i*GUI::ITEMSLOT::WIDTH_FOR_ANGAR, 0, 
+ 		Rect _rect(column_counter*GUI::ITEMSLOT::WIDTH_FOR_ANGAR, row_counter*GUI::ITEMSLOT::HEIGHT_FOR_ANGAR, 
  			   GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
-        	rect_slot_vec.push_back(GuiPair<Rect, VehicleSlot*>(_rect, angar->vehicleslot_vec[i]));
+        	rect_slot_vec.push_back(GuiPair<Rect, VehicleSlot*>(_rect, angar->vehicleslot_visitors_vec[i]));
+                
+                column_counter++;                
 	}
+        
+        column_counter = 0;
+        row_counter = 2;
+        for (int i=0; i<angar->vehicleslot_military_vec.size(); i++)
+ 	{
+ 		Rect _rect(column_counter*GUI::ITEMSLOT::WIDTH_FOR_ANGAR, row_counter*GUI::ITEMSLOT::HEIGHT_FOR_ANGAR, 
+ 			   GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
+        	rect_slot_vec.push_back(GuiPair<Rect, VehicleSlot*>(_rect, angar->vehicleslot_military_vec[i]));
+                
+                column_counter++;                
+	}
+
 }
 
 void GuiAngar::CheckButtonsLock()
@@ -165,7 +181,7 @@ void GuiAngar::RenderVehicleSlots(Angar* angar) const
 
 void GuiAngar::RenderFocusedItemInfo(const MouseData& data_mouse, Angar* angar) const
 {
-        for (unsigned int i=0; i<angar->vehicleslot_vec.size(); i++)
+        for (unsigned int i=0; i<rect_slot_vec.size(); i++)
         { 
 		if (rect_slot_vec[i].second->GetVehicle() != NULL)
                 {

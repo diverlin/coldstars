@@ -31,7 +31,7 @@ class AngarBuilder
         	void CreateNewAngar(int id = NONE_ID); 
                 void CreateNewInternals();
                 Angar* GetAngar() const { return angar; };
-                       	 		                
+
         private:
                 Angar* angar;
                 

@@ -54,13 +54,21 @@ void AngarBuilder::CreateNewAngar(int id)
 } 
         	
 void AngarBuilder::CreateNewInternals()
-{ 	
- 	for (int i=0; i<ANGAR_VEHICLE_SLOTS_NUM; i++)
+{ 
+ 	for (int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM; i++)
  	{
- 		VehicleSlot* vehicle_slot = GetNewVehicleSlot(); 	
+ 		VehicleSlot* vehicle_slot = GetNewVehicleSlot(); 
+                vehicle_slot->SetSubTypeId(ENTITY::VEHICLE_MILITARY_SLOT_ID);
  		angar->AddVehicleSlot(vehicle_slot);
 	}
-		
+
+ 	for (int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM; i++)
+ 	{
+ 		VehicleSlot* vehicle_slot = GetNewVehicleSlot(); 
+                vehicle_slot->SetSubTypeId(ENTITY::VEHICLE_VISITORS_SLOT_ID);
+ 		angar->AddVehicleSlot(vehicle_slot);
+	}
+        
 	angar->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TEXTURE::ANGAR_BACKGROUND_ID));
 }
 

@@ -47,8 +47,10 @@ class Angar : public Room
 		void ResolveData();
 		
         private:               
-                std::vector<VehicleSlot*> vehicleslot_vec;
-                
+                std::vector<VehicleSlot*> vehicleslot_total_vec;
+                std::vector<VehicleSlot*> vehicleslot_military_vec;
+                std::vector<VehicleSlot*> vehicleslot_visitors_vec;
+                                                                
                 int price_fuel;
                 int price_armor;
                 
