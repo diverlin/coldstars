@@ -140,3 +140,10 @@ void NpcBuilder::CreateNewInternals(int race_id, int subtype_id)
 		npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::CONQUEROR_ID));    			
    	}
 }
+
+Npc* NpcBuilder::GetNewNpc(int race_id, int subtype_id) 
+{
+        CreateNewNpc();
+        CreateNewInternals(race_id, subtype_id);  
+        return GetNpc();
+}

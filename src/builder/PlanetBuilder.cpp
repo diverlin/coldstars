@@ -97,6 +97,11 @@ void PlanetBuilder::CreateNewInternals(float orbit_radius)
 	planet->SetScale(getRandInt(ENTITY::PLANET::SIZE_MIN_, ENTITY::PLANET::SIZE_MAX_));
 
 	planet->CalcCollisionrRadius();
+        
+        //int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+        //ship_num = getRandInt(1, 3);
+        //this->CreateShips(npc_race_id, ship_num);
+                
 }
 
 
