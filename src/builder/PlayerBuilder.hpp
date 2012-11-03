@@ -28,17 +28,15 @@ class PlayerBuilder
 		static PlayerBuilder& Instance();
 		~PlayerBuilder();
 
-        	void CreateNewPlayer(int id = NONE_ID); 
-                void CreateNewInternals();
-                Player* GetPlayer() const { return player; };
+        	Player* GetNewPlayerTemplate(int id = NONE_ID) const;
+        	Player* GetNewPlayer() const;
         	 		                
-        private:
-                Player* player;
-                
+        private:               
 		PlayerBuilder() {};
 		PlayerBuilder(const PlayerBuilder&) = delete;
 		PlayerBuilder& operator=(const PlayerBuilder&) = delete;
-		
+        	        	 
+                void CreateNewInternals(Player*) const;		
 }; 
 
 

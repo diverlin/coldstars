@@ -42,10 +42,7 @@ int main()
 	GameDate game_date(1,1,4000);
 
         Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy();
-        
-	PlayerBuilder::Instance().CreateNewPlayer();
-	PlayerBuilder::Instance().CreateNewInternals();
-	Player* player = PlayerBuilder::Instance().GetPlayer();
+	Player* player = PlayerBuilder::Instance().GetNewPlayer();
 
         bool put_into_space = false;
         if (put_into_space == true)

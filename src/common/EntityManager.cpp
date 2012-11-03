@@ -172,8 +172,8 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading players...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("player"))
 		{
-			PlayerBuilder::Instance().CreateNewPlayer(v.second.get<int>("data_id.id"));
-			PlayerBuilder::Instance().GetPlayer()->LoadData(v.second);
+			Player* player = PlayerBuilder::Instance().GetNewPlayerTemplate(v.second.get<int>("data_id.id"));
+			player->LoadData(v.second);
 		}
 	}
 	
