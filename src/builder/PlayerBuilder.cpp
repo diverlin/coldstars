@@ -34,8 +34,9 @@ PlayerBuilder& PlayerBuilder::Instance()
 PlayerBuilder::~PlayerBuilder()
 {}
 
-void PlayerBuilder::CreateNewPlayer(int id)
+Player* PlayerBuilder::GetNewPlayerTemplate(int id) const
 {
+	Player* player = NULL;
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -50,10 +51,20 @@ void PlayerBuilder::CreateNewPlayer(int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         
-	EntityManager::Instance().RegisterEntity(player);        
+	EntityManager::Instance().RegisterEntity(player); 
+	
+	return player;       
 } 
-        	
-void PlayerBuilder::CreateNewInternals()
+   
+Player* PlayerBuilder::GetNewPlayer() const
+{
+	Player* player = GetNewPlayerTemplate();
+	CreateNewInternals(player);
+	
+	return player;
+}     	
+
+void PlayerBuilder::CreateNewInternals(Player* player) const
 {    
 	int prace_id    = RACE::R0_ID;
       	int psubtype_id = ENTITY::RANGER_ID;
