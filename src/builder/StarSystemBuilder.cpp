@@ -185,10 +185,7 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
         	int ship_size_id = getRandInt(1, 9);
         	int weapons_num = 5;
         	
-        	SpaceStationBuilder::Instance().CreateNewSpaceStation();
-        	SpaceStationBuilder::Instance().CreateNewInternals();
-        	SpaceStation* spacestation = SpaceStationBuilder::Instance().GetSpaceStation();
-       
+        	SpaceStation* spacestation = SpaceStationBuilder::Instance().GetNewSpaceStation();
         	SpaceStationBuilder::Instance().Equip(spacestation);       	// improove
 
                 Npc* npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id);
