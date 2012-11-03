@@ -45,8 +45,10 @@ StarSystemBuilder& StarSystemBuilder::Instance()
 StarSystemBuilder::~StarSystemBuilder()
 {}
 
-void StarSystemBuilder::CreateNewStarSystem(int id)
+StarSystem* StarSystemBuilder::GetNewStarSystemTemplate(int id) const
 {
+	StarSystem* starsystem = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -62,18 +64,28 @@ void StarSystemBuilder::CreateNewStarSystem(int id)
         }
         
         EntityManager::Instance().RegisterEntity(starsystem);
+        
+        return starsystem;
+} 
+
+StarSystem* StarSystemBuilder::GetNewStarSystem() const
+{
+	StarSystem* starsystem = GetNewStarSystemTemplate();
+	CreateNewInternals(starsystem);
+        
+        return starsystem;
 } 
         	
-void StarSystemBuilder::CreateNewInternals()
+void StarSystemBuilder::CreateNewInternals(StarSystem* starsystem) const
 {
-        this->CreateStar();
+        this->CreateStar(starsystem);
         
         int distNebula_num = getRandInt(6,8);
         int distStar_num = getRandInt(40, 60);
-        this->CreateBackground(distNebula_num, distStar_num, starsystem->GetStar()->GetColorId());
+        this->CreateBackground(starsystem, distNebula_num, distStar_num, starsystem->GetStar()->GetColorId());
           
         int planet_num = getRandInt(ENTITY::STARSYSTEM::PLANET_MIN, ENTITY::STARSYSTEM::PLANET_MAX);
-        this->CreatePlanets(planet_num);
+        this->CreatePlanets(starsystem, planet_num);
         
         for (int i=0; i<SHOCKWAVESBLACKHOLES_MAX_NUM; i++)
         {
@@ -87,34 +99,34 @@ void StarSystemBuilder::CreateNewInternals()
                 //int ship_num = getRandInt(ENTITY::STARSYSTEM::SHIP_INIT_MIN, ENTITY::STARSYSTEM::SHIP_INIT_MAX);
                 //this->CreateShips(npc_race_id, ship_num);
 
-		this->CreateSpaceStations(3);
+		this->CreateSpaceStations(starsystem, 3);
         }
         else
         {
                 int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_EVIL_vec);
                 int ship_num = getRandInt(ENTITY::STARSYSTEM::SHIP_INIT_MIN, ENTITY::STARSYSTEM::SHIP_INIT_MAX);
-                this->CreateShips(npc_race_id, ship_num);    
+                this->CreateShips(starsystem, npc_race_id, ship_num);    
         }
 }
  
-void StarSystemBuilder::CreateNewInternals_TEST()
-{
-        this->CreateStar();
+//void StarSystemBuilder::CreateNewInternals_TEST()
+//{
+        //this->CreateStar();
         
-        int distNebula_num = getRandInt(4,7);
-        int distStar_num = getRandInt(40, 60);
-        this->CreateBackground(distNebula_num, distStar_num, starsystem->GetStar()->GetColorId());
+        //int distNebula_num = getRandInt(4,7);
+        //int distStar_num = getRandInt(40, 60);
+        //this->CreateBackground(distNebula_num, distStar_num, starsystem->GetStar()->GetColorId());
           
-        //int planet_num = 1;//getRandInt(ENTITY::STARSYSTEM::PLANET_MIN, ENTITY::STARSYSTEM::PLANET_MAX);
-        //this->CreatePlanets(planet_num);
+        ////int planet_num = 1;//getRandInt(ENTITY::STARSYSTEM::PLANET_MIN, ENTITY::STARSYSTEM::PLANET_MAX);
+        ////this->CreatePlanets(planet_num);
         
-        //this->CreateSpaceStations(3);
-        int ship_num = 1;
-        CreateShips(getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec), ship_num);
-        CreateShips(getRandIntFromVec(RaceInformationCollector::Instance().RACES_EVIL_vec), ship_num);
-}
+        ////this->CreateSpaceStations(3);
+        //int ship_num = 1;
+        //CreateShips(getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec), ship_num);
+        //CreateShips(getRandIntFromVec(RaceInformationCollector::Instance().RACES_EVIL_vec), ship_num);
+//}
 
-void StarSystemBuilder::CreateBackground(int distNebula_num, int distStar_num, int color_id)
+void StarSystemBuilder::CreateBackground(StarSystem* starsystem, int distNebula_num, int distStar_num, int color_id) const
 {
         for(int i=0; i<distNebula_num; i++)
         { 
@@ -129,7 +141,7 @@ void StarSystemBuilder::CreateBackground(int distNebula_num, int distStar_num, i
         } 
 }
                         	                
-void StarSystemBuilder::CreateStar()
+void StarSystemBuilder::CreateStar(StarSystem* starsystem) const
 {
 	StarBuilder::Instance().CreateNewStar();
 	StarBuilder::Instance().CreateNewInternals();	
@@ -137,7 +149,7 @@ void StarSystemBuilder::CreateStar()
         starsystem->Add(star);
 }
 
-void StarSystemBuilder::CreatePlanets(int planet_per_system)
+void StarSystemBuilder::CreatePlanets(StarSystem* starsystem, int planet_per_system) const
 {
         int orbit_radius = getRandInt(2 * ENTITY::PLANET::DISTANCE_MIN, 2 * ENTITY::PLANET::DISTANCE_MAX);
 
@@ -173,7 +185,7 @@ void StarSystemBuilder::CreatePlanets(int planet_per_system)
         
 }
 
-void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
+void StarSystemBuilder::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_system) const
 {       
     	for (int i=0; i<spacestation_per_system; i++)
     	{     
@@ -208,7 +220,7 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
     	}        
 }
 
-void StarSystemBuilder::CreateShips(int npc_race_id, int ship_num, int requestedclass)
+void StarSystemBuilder::CreateShips(StarSystem* starsystem, int npc_race_id, int ship_num, int requestedclass) const
 {
     	int npc_subtype_id;
 
