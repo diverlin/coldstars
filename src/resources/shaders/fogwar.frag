@@ -9,7 +9,7 @@ void main(void)
 	vec2 texCoord = gl_TexCoord[0].xy;
 	vec4 color = texture2D(sceneTex, texCoord);
 
-	vec2 global_texCoord = texCoord*vec(1.0f, 0.6f) + pos;
+	vec2 global_texCoord = texCoord + pos;
       	float distance = distance(global_texCoord, center);
 	if (distance > radius)
 	{

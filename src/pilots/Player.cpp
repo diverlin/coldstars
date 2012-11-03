@@ -1038,6 +1038,7 @@ void Player::ResolveData()
 void Player::SaveDataUniquePlayer(boost::property_tree::ptree& save_ptree, const std::string& root) const	
 {
         save_ptree.put(root+"unresolved.npc_id", npc->GetId());
+        save_ptree.put(root+"unresolved.starsystem_id", starsystem->GetId());
         save_ptree.put(root+"unresolved.screen_pos_x", Screen::Instance().GetRect().GetBottomLeft().x);
         save_ptree.put(root+"unresolved.screen_pos_y", Screen::Instance().GetRect().GetBottomLeft().y);
 }
@@ -1045,6 +1046,7 @@ void Player::SaveDataUniquePlayer(boost::property_tree::ptree& save_ptree, const
 void Player::LoadDataUniquePlayer(const boost::property_tree::ptree& load_ptree)
 {
 	data_unresolved_player.npc_id = load_ptree.get<int>("unresolved.npc_id");
+	data_unresolved_player.starsystem_id = load_ptree.get<int>("unresolved.starsystem_id");
 	data_unresolved_player.screen_pos.x = load_ptree.get<float>("unresolved.screen_pos_x");
 	data_unresolved_player.screen_pos.y = load_ptree.get<float>("unresolved.screen_pos_y");
 }
@@ -1052,6 +1054,7 @@ void Player::LoadDataUniquePlayer(const boost::property_tree::ptree& load_ptree)
 void Player::ResolveDataUniquePlayer()
 {
         BindNpc((Npc*)EntityManager::Instance().GetEntityById(data_unresolved_player.npc_id));
+        starsystem = (StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_player.starsystem_id);
         Screen::Instance().GetRect().SetBottomLeft(data_unresolved_player.screen_pos);
 }		
 

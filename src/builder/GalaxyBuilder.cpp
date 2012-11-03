@@ -37,8 +37,9 @@ GalaxyBuilder& GalaxyBuilder::Instance()
 GalaxyBuilder::~GalaxyBuilder()
 {}
 
-void GalaxyBuilder::CreateNewGalaxy(int id)
+Galaxy* GalaxyBuilder::GetNewGalaxyTemplate(int id) const
 {
+	Galaxy* galaxy = NULL;
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -53,9 +54,19 @@ void GalaxyBuilder::CreateNewGalaxy(int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         EntityManager::Instance().RegisterEntity(galaxy);
+        
+        return galaxy;
+} 
+
+Galaxy* GalaxyBuilder::GetNewGalaxy() const
+{
+	Galaxy* galaxy = GetNewGalaxyTemplate();
+	CreateNewInternals(galaxy);
+	
+	return galaxy;
 } 
         	
-void GalaxyBuilder::CreateNewInternals()
+void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy) const
 {     
         float h_div_w_rate = ENTITY::GALAXY::STARSYSTEM_SEGMENT_HEIGHT_NUM/(float)ENTITY::GALAXY::STARSYSTEM_SEGMENT_WIDTH_NUM;
         int segment_w = ENTITY::GALAXY::PARSEC /((float)ENTITY::GALAXY::STARSYSTEM_SEGMENT_WIDTH_NUM + 1);

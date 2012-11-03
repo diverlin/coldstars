@@ -44,6 +44,7 @@ class VerticalFlowText;
 struct UnresolvedDataUniquePlayer
 {
 	int npc_id;
+	int starsystem_id;
 	vec2f screen_pos;
 };
 

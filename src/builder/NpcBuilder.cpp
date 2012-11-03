@@ -29,7 +29,6 @@
 #include "../common/EntityManager.hpp"
 #include "../resources/TextureManager.hpp"
 
-
 NpcBuilder& NpcBuilder::Instance()
 {
 	static NpcBuilder instance;
@@ -39,8 +38,10 @@ NpcBuilder& NpcBuilder::Instance()
 NpcBuilder::~NpcBuilder()
 {}
 
-void NpcBuilder::CreateNewNpc(int id)
+Npc* NpcBuilder::GetNewNpcTemplate(int id) const
 {
+	Npc* npc = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -55,9 +56,20 @@ void NpcBuilder::CreateNewNpc(int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
 	EntityManager::Instance().RegisterEntity(npc);
+	
+	return npc;
 } 
+
+
+Npc* NpcBuilder::GetNewNpc(int race_id, int subtype_id) const
+{
+        Npc* npc = GetNewNpcTemplate();
+        CreateNewInternals(npc, race_id, subtype_id);  
+        
+        return npc;
+}
         	
-void NpcBuilder::CreateNewInternals(int race_id, int subtype_id)
+void NpcBuilder::CreateNewInternals(Npc* npc, int race_id, int subtype_id) const
 {    	
     	//LifeData data_life;
     	
@@ -139,11 +151,4 @@ void NpcBuilder::CreateNewInternals(int race_id, int subtype_id)
    	{
 		npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::CONQUEROR_ID));    			
    	}
-}
-
-Npc* NpcBuilder::GetNewNpc(int race_id, int subtype_id) 
-{
-        CreateNewNpc();
-        CreateNewInternals(race_id, subtype_id);  
-        return GetNpc();
 }
