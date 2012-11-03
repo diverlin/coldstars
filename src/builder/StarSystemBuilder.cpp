@@ -200,9 +200,7 @@ void StarSystemBuilder::CreateSpaceStations(int spacestation_per_system)
         	starsystem->AddVehicle(spacestation, center, angle, NULL);
         	
         	{  
-                SatelliteBuilder::Instance().CreateNewSatellite();
-                SatelliteBuilder::Instance().CreateNewInternals();
-                Satellite* satellite = SatelliteBuilder::Instance().GetSatellite();
+                Satellite* satellite = SatelliteBuilder::Instance().GetNewSatellite();
                 SatelliteBuilder::Instance().Equip(satellite);           		// improove
 
                 Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id);

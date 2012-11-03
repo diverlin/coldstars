@@ -551,8 +551,8 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading satellites...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("satellite"))
 		{
-			SatelliteBuilder::Instance().CreateNewSatellite(v.second.get<int>("data_id.id"));
-			SatelliteBuilder::Instance().GetSatellite()->LoadData(v.second);
+			Satellite* satellite = SatelliteBuilder::Instance().GetNewSatelliteTemplate(v.second.get<int>("data_id.id"));
+			satellite->LoadData(v.second);
 		}
 	}
 
