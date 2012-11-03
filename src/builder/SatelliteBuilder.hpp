@@ -29,16 +29,15 @@ class SatelliteBuilder : public BaseVehicleBuilder
 		static SatelliteBuilder& Instance();
 		~SatelliteBuilder();
 		
-		void CreateNewSatellite(int id = NONE_ID);							
-		void CreateNewInternals();   
-		Satellite* GetSatellite() const { return satellite; };         
+		Satellite* GetNewSatelliteTemplate(int id = NONE_ID) const;							
+		Satellite* GetNewSatellite() const;
        
         private:
-        	SatelliteBuilder():satellite(NULL) {};   	
+        	SatelliteBuilder() {};   	
         	SatelliteBuilder(const SatelliteBuilder&) = delete; 
         	SatelliteBuilder& operator=(const SatelliteBuilder&) = delete;
         	
-        	Satellite* satellite;
+		void CreateNewInternals(Satellite*) const; 
 }; 
 
 

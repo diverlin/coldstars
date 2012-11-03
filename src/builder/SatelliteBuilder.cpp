@@ -35,8 +35,9 @@ SatelliteBuilder& SatelliteBuilder::Instance()
 SatelliteBuilder::~SatelliteBuilder() {}
 
 
-void SatelliteBuilder::CreateNewSatellite(int id)
+Satellite* SatelliteBuilder::GetNewSatelliteTemplate(int id) const
 {
+	Satellite* satellite = NULL;
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -52,9 +53,19 @@ void SatelliteBuilder::CreateNewSatellite(int id)
         }
         
         EntityManager::Instance().RegisterEntity(satellite);
+        
+        return satellite;
 }
 
-void SatelliteBuilder::CreateNewInternals() 
+Satellite* SatelliteBuilder::GetNewSatellite() const
+{
+	Satellite* satellite = GetNewSatelliteTemplate();
+        CreateNewInternals(satellite);
+        
+        return satellite;
+}
+
+void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const 
 {
 	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SATELLITE_ID);  
 	
