@@ -26,6 +26,9 @@
 #include "../docking/NatureLand.hpp"
 #include "../resources/MeshCollector.hpp"
 
+#include "../builder/NpcBuilder.hpp"
+#include "../builder/ShipBuilder.hpp"
+
 PlanetBuilder& PlanetBuilder::Instance()
 {
 	static PlanetBuilder instance;
@@ -97,14 +100,28 @@ void PlanetBuilder::CreateNewInternals(float orbit_radius)
 	planet->SetScale(getRandInt(ENTITY::PLANET::SIZE_MIN_, ENTITY::PLANET::SIZE_MAX_));
 
 	planet->CalcCollisionrRadius();
-        
-        //int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
-        //ship_num = getRandInt(1, 3);
-        //this->CreateShips(npc_race_id, ship_num);
-                
 }
 
-
+//void PlanetBuilder::CreateNewInternals2(Planet* planet)
+//{    
+        //int race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+        //int ship_num_max = getRandInt(2, 5);
+        //int ship_count = 0;
+        //while(ship_count < ship_num_max)
+        //{        	
+      		//int subtype_id = ENTITY::WARRIOR_ID;
+      		//int size_id     = SIZE_4_ID;
+      		//int weapons_num = 4;
+        
+        	//Npc* new_npc = NpcBuilder::Instance().GetNewNpc(race_id, subtype_id);
+        	//Ship* new_ship = ShipBuilder::Instance().GetNewShip(race_id, subtype_id, size_id, weapons_num);
+		//ShipBuilder::Instance().Equip(new_ship);   // improove
+		
+		//planet->AddVehicle(new_ship);
+		
+		//ship_count++;
+        //}  
+//}
 
 
 

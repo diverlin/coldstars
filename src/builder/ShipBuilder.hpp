@@ -29,19 +29,15 @@ class ShipBuilder : public BaseVehicleBuilder
 		static ShipBuilder& Instance();
 		~ShipBuilder();
 		
-		void CreateNewShip(int id = NONE_ID);
-                 
-		Ship* GetShip() const { return ship; }; 
-                Ship* GetNewShip(int, int, int, int);        
+		Ship* GetNewShipTemplate(int id = NONE_ID) const;
+                Ship* GetNewShip(int, int, int, int) const;        
        
         private:
-        	ShipBuilder():ship(NULL) {};   	
+        	ShipBuilder() {};   	
         	ShipBuilder(const ShipBuilder&) = delete; 
         	ShipBuilder& operator=(const ShipBuilder&) = delete;
-        	
-        	Ship* ship;
                 
-                void CreateNewInternals(int, int, int, int);  
+                void CreateNewInternals(Ship*, int, int, int, int) const;  
 }; 
 
 

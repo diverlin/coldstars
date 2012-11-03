@@ -41,6 +41,8 @@ class Planet : public BasePlanet
 		int GetDockingRadius() const { return scale; };
 		BaseLand* GetLand() const { return land; };
 
+		void AddVehicle(Vehicle*) const;
+		
 		void UpdateInSpace(int, bool);
 		void UpdateInSpaceInStatic();
 				

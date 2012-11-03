@@ -94,7 +94,7 @@ int Angar::GetFreeVehicleSlotTotalNum() const
 
 bool Angar::AddVehicle(Vehicle* vehicle)
 {
-        if (vehicle->GetSubTypeId() == ENTITY::MILITARY_ID)
+        if (vehicle->GetSubSubTypeId() == ENTITY::WARRIOR_ID)
         {        
                 for (unsigned int i=0; i<vehicleslot_military_vec.size(); i++)
                 {

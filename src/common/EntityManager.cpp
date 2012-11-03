@@ -162,8 +162,8 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading galaxys...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("galaxy"))
 		{
-			GalaxyBuilder::Instance().CreateNewGalaxy(v.second.get<int>("data_id.id"));
-			GalaxyBuilder::Instance().GetGalaxy()->LoadData(v.second);
+			Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxyTemplate(v.second.get<int>("data_id.id"));
+			galaxy->LoadData(v.second);
 		}
 	}
 	
@@ -521,8 +521,8 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading npc...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("npc"))
 		{
-			NpcBuilder::Instance().CreateNewNpc(v.second.get<int>("data_id.id"));
-			NpcBuilder::Instance().GetNpc()->LoadData(v.second);
+			Npc* npc = NpcBuilder::Instance().GetNewNpcTemplate(v.second.get<int>("data_id.id"));
+			npc->LoadData(v.second);
 		}
 	}
 
@@ -531,8 +531,8 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading ships...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("ship"))
 		{
-			ShipBuilder::Instance().CreateNewShip(v.second.get<int>("data_id.id"));
-			ShipBuilder::Instance().GetShip()->LoadData(v.second);
+			Ship* ship = ShipBuilder::Instance().GetNewShipTemplate(v.second.get<int>("data_id.id"));
+			ship->LoadData(v.second);
 		}
 	}
 	

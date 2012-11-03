@@ -31,12 +31,12 @@ ShipBuilder& ShipBuilder::Instance()
 	return instance;
 }	
 
-
 ShipBuilder::~ShipBuilder() {}
 
-
-void ShipBuilder::CreateNewShip(int id)
+Ship* ShipBuilder::GetNewShipTemplate(int id) const
 {
+	Ship* ship = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -52,9 +52,19 @@ void ShipBuilder::CreateNewShip(int id)
         }
         
         EntityManager::Instance().RegisterEntity(ship);
+        
+        return ship;
 }
 
-void ShipBuilder::CreateNewInternals(int race_id, int subsubtype_id, int size_id, int weapons_num) 
+Ship* ShipBuilder::GetNewShip(int race_id, int subsubtype_id, int size_id, int weapons_num) const
+{
+        Ship* ship = GetNewShipTemplate();
+        CreateNewInternals(ship, race_id, subsubtype_id, size_id, weapons_num);     
+        
+        return ship;
+}
+
+void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id, int size_id, int weapons_num) const
 {
 	TextureOb* texOb = TextureManager::Instance().GetRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id); 
        
@@ -95,11 +105,4 @@ void ShipBuilder::CreateNewInternals(int race_id, int subsubtype_id, int size_id
 	ship->CreateProtectionComplexTextureDependedStuff();
 	                            
         CreateItemSlots(ship);
-}
-
-Ship* ShipBuilder::GetNewShip(int race_id, int subsubtype_id, int size_id, int weapons_num) 
-{
-        CreateNewShip();
-        CreateNewInternals(race_id, subsubtype_id, size_id, weapons_num);     
-        return GetShip();
 }

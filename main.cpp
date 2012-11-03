@@ -41,8 +41,7 @@ int main()
 	TurnTimer turn_timer;
 	GameDate game_date(1,1,4000);
 
-        GalaxyBuilder::Instance().CreateNewGalaxy();
-	GalaxyBuilder::Instance().CreateNewInternals(); 
+        Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy();
         
 	PlayerBuilder::Instance().CreateNewPlayer();
 	PlayerBuilder::Instance().CreateNewInternals();
@@ -53,11 +52,11 @@ int main()
         {
                 vec2f center(400, 400);
                 float angle = 0;  
-                GalaxyBuilder::Instance().GetGalaxy()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, NULL);
+                galaxy->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, NULL);
 	}
         else
         {
-                GalaxyBuilder::Instance().GetGalaxy()->GetRandomStarSystem()->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
+                galaxy->GetRandomStarSystem()->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
         }
         
         player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
@@ -72,7 +71,7 @@ int main()
 
 		for (int i=0; i<Config::Instance().GAMESPEED; i++)  // fake implementation (static ai should not be run several times at once)
 		{
-			GalaxyBuilder::Instance().GetGalaxy()->Update(player, turn_timer.GetTurnTick());
+			galaxy->Update(player, turn_timer.GetTurnTick());
 		}
 
 		if ((turn_timer.GetTurnEnded() == true) and (UserInput::Instance().GetNextTurnReady()))

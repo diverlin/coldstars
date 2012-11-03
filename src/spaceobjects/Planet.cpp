@@ -25,6 +25,7 @@
 #include "../render/Render.hpp"
 #include "../resources/ShaderCollector.hpp"
 #include "../docking/Kosmoport.hpp"
+#include "../spaceobjects/Vehicle.hpp"
 
 Planet::Planet(int id)
 {    
@@ -54,7 +55,18 @@ void Planet::BindLand(BaseLand* land)
 	this->land = land;
 	this->land->SetOwner(this);
 }
-		
+	
+void Planet::AddVehicle(Vehicle* vehicle) const
+{
+	if (vehicle->GetStarSystem() == NULL)
+	{
+		vehicle->SetStarSystem(starsystem);
+	}
+	
+	land->AddVehicle(vehicle);
+	
+}
+	
 void Planet::UpdateInSpace(int time, bool show_effect)
 {      
 	UpdateRotation();
