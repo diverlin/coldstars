@@ -29,16 +29,15 @@ class SpaceStationBuilder : public BaseVehicleBuilder
 		static SpaceStationBuilder& Instance();
 		~SpaceStationBuilder();
 		
-		void CreateNewSpaceStation(int id = NONE_ID);							
-		void CreateNewInternals();   
-		SpaceStation* GetSpaceStation() const { return spacestation; };         
+		SpaceStation* GetNewSpaceStationTemplate(int id = NONE_ID) const;							
+		SpaceStation* GetNewSpaceStation() const;         
        
         private:
-        	SpaceStationBuilder():spacestation(NULL) {};   	
+        	SpaceStationBuilder() {};   	
         	SpaceStationBuilder(const SpaceStationBuilder&) = delete; 
         	SpaceStationBuilder& operator=(const SpaceStationBuilder&) = delete;
-        	
-        	SpaceStation* spacestation;
+
+		void CreateNewInternals(SpaceStation*) const;   
 }; 
 
 

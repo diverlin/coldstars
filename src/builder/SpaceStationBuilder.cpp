@@ -32,12 +32,11 @@ SpaceStationBuilder& SpaceStationBuilder::Instance()
 	return instance;
 }	
 
-
 SpaceStationBuilder::~SpaceStationBuilder() {}
 
-
-void SpaceStationBuilder::CreateNewSpaceStation(int id)
+SpaceStation* SpaceStationBuilder::GetNewSpaceStationTemplate(int id) const
 {
+	SpaceStation* spacestation = NULL;
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -53,9 +52,19 @@ void SpaceStationBuilder::CreateNewSpaceStation(int id)
         }
         
         EntityManager::Instance().RegisterEntity(spacestation);
+        
+        return spacestation;
 }
 
-void SpaceStationBuilder::CreateNewInternals() 
+SpaceStation* SpaceStationBuilder::GetNewSpaceStation() const
+{
+	SpaceStation* spacestation = GetNewSpaceStationTemplate();
+        CreateNewInternals(spacestation);
+        
+        return spacestation;
+}
+
+void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 {
 	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SPACESTATION_ID); 
        

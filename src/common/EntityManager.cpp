@@ -541,8 +541,8 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading spacestations...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("spacestation"))
 		{
-			SpaceStationBuilder::Instance().CreateNewSpaceStation(v.second.get<int>("data_id.id"));
-			SpaceStationBuilder::Instance().GetSpaceStation()->LoadData(v.second);
+			SpaceStation* spacestation = SpaceStationBuilder::Instance().GetNewSpaceStationTemplate(v.second.get<int>("data_id.id"));
+			spacestation->LoadData(v.second);
 		}
 	}
 
