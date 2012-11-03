@@ -182,8 +182,8 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading starsystems...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("starsystem"))
 		{
-			StarSystemBuilder::Instance().CreateNewStarSystem(v.second.get<int>("data_id.id"));
-			StarSystemBuilder::Instance().GetStarSystem()->LoadData(v.second);
+			StarSystem* starsystem = StarSystemBuilder::Instance().GetNewStarSystemTemplate(v.second.get<int>("data_id.id"));
+			starsystem->LoadData(v.second);
 		}
 	}
 
