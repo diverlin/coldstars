@@ -21,6 +21,7 @@
 
 #include "../items/equipment/BakEquipment.hpp"
 #include "../items/equipment/DriveEquipment.hpp"
+#include "../items/equipment/DroidEquipment.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -146,8 +147,8 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
         RadarEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
     	vehicle->GetRadarSlot()->InsertItem(RadarEquipmentBuilder::Instance().GetRadarEquipment()); 
 
-    	vehicle->GetDriveComplex().GetDriveSlot()->InsertItem(DriveEquipmentBuilder::Instance().GetNewDriveEquipment(10)); 
-    	vehicle->GetDriveComplex().GetBakSlot()->InsertItem(BakEquipmentBuilder::Instance().GetNewBakEquipment(10)); 
+    	vehicle->GetDriveComplex().GetDriveSlot()->InsertItem(DriveEquipmentBuilder::Instance().GetNewDriveEquipment(2)); 
+    	vehicle->GetDriveComplex().GetBakSlot()->InsertItem(BakEquipmentBuilder::Instance().GetNewBakEquipment(2)); 
         
         //EnergizerEquipmentBuilder::Instance().CreateNewEnergizerEquipment();
         //EnergizerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
@@ -161,9 +162,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
         ProtectorEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
    	vehicle->GetProtectionComplex().GetProtectorSlot()->InsertItem(ProtectorEquipmentBuilder::Instance().GetProtectorEquipment()); 
    	
-   	DroidEquipmentBuilder::Instance().CreateNewDroidEquipment();
-        DroidEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
-   	vehicle->GetDroidSlot()->InsertItem(DroidEquipmentBuilder::Instance().GetDroidEquipment()); 
+   	vehicle->GetDroidSlot()->InsertItem(DroidEquipmentBuilder::Instance().GetNewDroidEquipment(2)); 
 
    	ScanerEquipmentBuilder::Instance().CreateNewScanerEquipment();
         ScanerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);

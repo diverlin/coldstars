@@ -76,6 +76,7 @@
 
 #include "../items/equipment/BakEquipment.hpp"
 #include "../items/equipment/DriveEquipment.hpp"
+#include "../items/equipment/DroidEquipment.hpp"
 
 EntityManager& EntityManager::Instance()
 {
@@ -369,8 +370,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading droid_equipments...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("droid_equipment"))
 		{
-			DroidEquipmentBuilder::Instance().CreateNewDroidEquipment(v.second.get<int>("data_id.id"));
-			DroidEquipment* droid_equipment = DroidEquipmentBuilder::Instance().GetDroidEquipment();
+			DroidEquipment* droid_equipment = DroidEquipmentBuilder::Instance().GetNewDroidEquipmentTemplate(v.second.get<int>("data_id.id"));
                 	droid_equipment->LoadData(v.second);
 		}
 	}
