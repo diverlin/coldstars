@@ -17,6 +17,7 @@
 */
 
 #include "DroidEquipmentBuilder.hpp"
+#include "../../../items/equipment/DroidEquipment.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/EntityManager.hpp"
@@ -32,8 +33,9 @@ DroidEquipmentBuilder& DroidEquipmentBuilder::Instance()
 DroidEquipmentBuilder::~DroidEquipmentBuilder()
 {}
 
-void DroidEquipmentBuilder::CreateNewDroidEquipment(int id)
+DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipmentTemplate(int id) const
 {
+	DroidEquipment* droid_equipment = NULL;
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -48,22 +50,42 @@ void DroidEquipmentBuilder::CreateNewDroidEquipment(int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         EntityManager::Instance().RegisterEntity(droid_equipment);
+        
+        return droid_equipment;
 } 
+
+DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipment(int tech_level, int race_id, int repair_orig) const
+{
+	DroidEquipment* droid_equipment = GetNewDroidEquipmentTemplate();
+	CreateNewInternals(droid_equipment, tech_level, race_id, repair_orig);
+        
+        return droid_equipment;
+}  
         	
-void DroidEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
+void DroidEquipmentBuilder::CreateNewInternals(DroidEquipment* droid_equipment, int tech_level, int race_id, int repair_orig) const
 {     
-       	if (race_id == -1)
-       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+        if (race_id == NONE_ID)
+        {
+       		race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+	}
+	
+    	if (tech_level == NONE_ID)
+    	{
+       		tech_level = 1; 
+	}
 
-    	if (revision_id == -1)
-       		revision_id = TECHLEVEL::L0_ID; 
-
-    	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
+	float tech_rate = 1.0f;
+	if (tech_level > 1)
+	{
+		tech_rate = tech_level * EQUIPMENT::TECHLEVEL_RATE;
+	}
+	
+    	tech_rate *= 1; //getRaceTechRate(race_id); 
 
     	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::DROID_EQUIPMENT_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::DROID_EQUIPMENT_ID, revision_id)
 
-    	int repair_orig     = getRandInt(EQUIPMENT::DROID::REPAIR_MIN, EQUIPMENT::DROID::REPAIR_MAX);
+    	repair_orig     = getRandInt(EQUIPMENT::DROID::REPAIR_MIN, EQUIPMENT::DROID::REPAIR_MAX);
     	
     	ItemCommonData common_data;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::DROID::MODULES_NUM_MIN, EQUIPMENT::DROID::MODULES_NUM_MAX);

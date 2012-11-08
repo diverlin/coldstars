@@ -19,7 +19,7 @@
 #ifndef DROIDEQUIPMENTBUILDER_H
 #define DROIDEQUIPMENTBUILDER_H
 
-#include "../../../items/equipment/DroidEquipment.hpp"
+class DroidEquipment;
 #include "../../../common/constants.hpp"
 
 class DroidEquipmentBuilder
@@ -28,12 +28,11 @@ class DroidEquipmentBuilder
 		static DroidEquipmentBuilder& Instance();
 		~DroidEquipmentBuilder();
 
-        	void CreateNewDroidEquipment(int id = NONE_ID); 
-                void CreateNewInternals(int race_id, int revision_id = -1);
-                DroidEquipment* GetDroidEquipment() const { return droid_equipment; };
+        	DroidEquipment* GetNewDroidEquipmentTemplate(int id = NONE_ID) const; 
+                DroidEquipment* GetNewDroidEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int repair_orig = NONE_ID) const;
         	 		                
         private:
-                DroidEquipment* droid_equipment;
+                void CreateNewInternals(DroidEquipment*, int, int, int) const;
                 
 		DroidEquipmentBuilder() {};
 		DroidEquipmentBuilder(const DroidEquipmentBuilder&) = delete;

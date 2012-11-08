@@ -28,6 +28,7 @@
 
 #include "../items/equipment/BakEquipment.hpp"
 #include "../items/equipment/DriveEquipment.hpp"
+#include "../items/equipment/DroidEquipment.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -148,9 +149,7 @@ void StoreBuilder::PutRandomEquipment()
 
         for (unsigned int dii = 0; dii < droid_num; dii++)
         { 
-   		DroidEquipmentBuilder::Instance().CreateNewDroidEquipment();
-        	DroidEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
-   		store->AddItem(DroidEquipmentBuilder::Instance().GetDroidEquipment()); 
+   		store->AddItem(DroidEquipmentBuilder::Instance().GetNewDroidEquipment()); 
         }
 
         for (unsigned int sii = 0; sii < scaner_num; sii++)
