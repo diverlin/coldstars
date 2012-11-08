@@ -19,7 +19,7 @@
 #ifndef BAKEQUIPMENTBUILDER_H
 #define BAKEQUIPMENTBUILDER_H
 
-#include "../../../items/equipment/BakEquipment.hpp"
+class BakEquipment;
 #include "../../../common/constants.hpp"
 
 class BakEquipmentBuilder
@@ -28,13 +28,12 @@ class BakEquipmentBuilder
 		static BakEquipmentBuilder& Instance();
 		~BakEquipmentBuilder();
 
-        	void CreateNewBakEquipment(int id = NONE_ID); 
-                void CreateNewInternals();
-                BakEquipment* GetBakEquipment() const { return bak_equipment; };
+        	BakEquipment* GetNewBakEquipmentTemplate(int id = NONE_ID) const; 
+                BakEquipment* GetNewBakEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int fuel_max = NONE_ID) const;
         	 		                
-        private:
-                BakEquipment* bak_equipment;
-                
+        private:                
+                void CreateNewInternals(BakEquipment*, int, int, int) const;
+                                
 		BakEquipmentBuilder() {};
 		BakEquipmentBuilder(const BakEquipmentBuilder&) = delete;
 		BakEquipmentBuilder& operator=(const BakEquipmentBuilder&) = delete;

@@ -19,6 +19,8 @@
 #include "BaseVehicleBuilder.hpp"
 #include "../parts/WeaponComplex.hpp"
 
+#include "../items/equipment/BakEquipment.hpp"
+
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
 #include "../builder/items/equipment/GrappleEquipmentBuilder.hpp"
@@ -147,9 +149,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
         DriveEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
     	vehicle->GetDriveComplex().GetDriveSlot()->InsertItem(DriveEquipmentBuilder::Instance().GetDriveEquipment()); 
         
-        BakEquipmentBuilder::Instance().CreateNewBakEquipment();
-        BakEquipmentBuilder::Instance().CreateNewInternals();
-    	vehicle->GetDriveComplex().GetBakSlot()->InsertItem(BakEquipmentBuilder::Instance().GetBakEquipment()); 
+    	vehicle->GetDriveComplex().GetBakSlot()->InsertItem(BakEquipmentBuilder::Instance().GetNewBakEquipment(10)); 
         
         //EnergizerEquipmentBuilder::Instance().CreateNewEnergizerEquipment();
         //EnergizerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
