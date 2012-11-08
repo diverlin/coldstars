@@ -27,6 +27,7 @@
 #include "../builder/ItemSlotBuilder.hpp"
 
 #include "../items/equipment/BakEquipment.hpp"
+#include "../items/equipment/DriveEquipment.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -129,11 +130,8 @@ void StoreBuilder::PutRandomEquipment()
         }
 
         for (unsigned int dii = 0; dii < drive_num; dii++)
-        { 
-                DriveEquipmentBuilder::Instance().CreateNewDriveEquipment();
-                DriveEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
-        
-                store->AddItem(DriveEquipmentBuilder::Instance().GetDriveEquipment());
+        {        
+                store->AddItem(DriveEquipmentBuilder::Instance().GetNewDriveEquipment());
         }
 
         for (unsigned int pii = 0; pii < protector_num; pii++)

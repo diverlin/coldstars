@@ -29,7 +29,7 @@ class BakEquipmentBuilder
 		~BakEquipmentBuilder();
 
         	BakEquipment* GetNewBakEquipmentTemplate(int id = NONE_ID) const; 
-                BakEquipment* GetNewBakEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int fuel_max = NONE_ID) const;
+                BakEquipment* GetNewBakEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int fuel_max_orig = NONE_ID) const;
         	 		                
         private:                
                 void CreateNewInternals(BakEquipment*, int, int, int) const;
