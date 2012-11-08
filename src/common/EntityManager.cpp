@@ -74,6 +74,8 @@
 #include "../builder/ShopBuilder.hpp"
 #include "../builder/GovermentBuilder.hpp"
 
+#include "../items/equipment/BakEquipment.hpp"
+
 EntityManager& EntityManager::Instance()
 {
 	static EntityManager instance;
@@ -346,8 +348,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading bak_equipments...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("bak_equipment"))
 		{
-			BakEquipmentBuilder::Instance().CreateNewBakEquipment(v.second.get<int>("data_id.id"));
-			BakEquipment* bak_equipment = BakEquipmentBuilder::Instance().GetBakEquipment();
+			BakEquipment* bak_equipment = BakEquipmentBuilder::Instance().GetNewBakEquipmentTemplate(v.second.get<int>("data_id.id"));
                 	bak_equipment->LoadData(v.second);
 		}
 	}

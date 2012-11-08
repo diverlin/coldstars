@@ -17,10 +17,12 @@
 */
 
 #include "BakEquipmentBuilder.hpp"
+#include "../../../items/equipment/BakEquipment.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/EntityManager.hpp"
 #include "../../../common/rand.hpp"
+#include "../../../common/gameStruct.hpp"
 #include "../../../resources/TextureManager.hpp"
 
 BakEquipmentBuilder& BakEquipmentBuilder::Instance()
@@ -32,8 +34,10 @@ BakEquipmentBuilder& BakEquipmentBuilder::Instance()
 BakEquipmentBuilder::~BakEquipmentBuilder()
 {}
 
-void BakEquipmentBuilder::CreateNewBakEquipment(int id)
+BakEquipment* BakEquipmentBuilder::GetNewBakEquipmentTemplate(int id) const
 {
+	BakEquipment* bak_equipment = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -48,28 +52,48 @@ void BakEquipmentBuilder::CreateNewBakEquipment(int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         EntityManager::Instance().RegisterEntity(bak_equipment);
+        
+        return bak_equipment;
 } 
-        	
-void BakEquipmentBuilder::CreateNewInternals()
+       
+BakEquipment* BakEquipmentBuilder::GetNewBakEquipment(int tech_level, int race_id, int fuel_max) const
+{
+	BakEquipment* bak_equipment = GetNewBakEquipmentTemplate();
+	CreateNewInternals(bak_equipment, tech_level, race_id, fuel_max);
+	
+	return bak_equipment;
+}
+                      	
+void BakEquipmentBuilder::CreateNewInternals(BakEquipment* bak_equipment, int tech_level, int race_id, int fuel_max) const
 {     
-        //if (race_id == -1)
-       		int race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
-
-    	//if (revision_id == -1)
-       		int revision_id = TECHLEVEL::L0_ID; 
-
-    	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
+        if (race_id == NONE_ID)
+        {
+       		race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+	}
+	
+    	if (tech_level == NONE_ID)
+    	{
+       		tech_level = 1; 
+	}
+	
+	float tech_rate = 1.0f;
+	if (tech_level > 1)
+	{
+		tech_rate = tech_level * EQUIPMENT::TECHLEVEL_RATE;
+	}
+	
+    	tech_rate *= 1; //getRaceTechRate(race_id);  
 
     	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BAK_EQUIPMENT_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
-    	int fuel_max_orig = getRandInt(EQUIPMENT::BAK::FUEL_MIN, EQUIPMENT::BAK::FUEL_MAX);
+    	int fuel_max_orig = getRandInt(EQUIPMENT::BAK::FUEL_MIN, EQUIPMENT::BAK::FUEL_MAX) * tech_rate;
 
       	ItemCommonData common_data;
-
     	common_data.modules_num_max    = getRandInt(EQUIPMENT::BAK::MODULES_NUM_MIN, EQUIPMENT::BAK::MODULES_NUM_MAX);
     	common_data.mass               = getRandInt(EQUIPMENT::BAK::MASS_MIN, EQUIPMENT::BAK::MASS_MAX);
-    	common_data.condition_max      = getRandInt(EQUIPMENT::BAK::CONDITION_MIN, EQUIPMENT::BAK::CONDITION_MAX) * tech_rate;
+    	common_data.condition_max      = getRandInt(EQUIPMENT::BAK::CONDITION_MIN, EQUIPMENT::BAK::CONDITION_MAX);
     	common_data.deterioration_normal = 1;
+    	common_data.tech_level 		= tech_level;
 
         bak_equipment->SetFuelMaxOrig(fuel_max_orig);
         bak_equipment->SetFuel(fuel_max_orig);

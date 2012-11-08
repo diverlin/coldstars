@@ -363,6 +363,8 @@ namespace ENTITY
 
 namespace EQUIPMENT
 {       
+	const float TECHLEVEL_RATE = 1.1f;
+
 	namespace ENERGIZER
 	{
 		const int ENERGY_MIN = 2000;

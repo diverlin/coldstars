@@ -25,6 +25,9 @@
 #include "../resources/TextureManager.hpp"
 
 #include "../builder/ItemSlotBuilder.hpp"
+
+#include "../items/equipment/BakEquipment.hpp"
+
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
 #include "../builder/items/equipment/GrappleEquipmentBuilder.hpp"
@@ -142,9 +145,7 @@ void StoreBuilder::PutRandomEquipment()
 
         for (unsigned int bii = 0; bii < bak_num; bii++)
         { 
-                BakEquipmentBuilder::Instance().CreateNewBakEquipment();
-                BakEquipmentBuilder::Instance().CreateNewInternals();
-                store->AddItem(BakEquipmentBuilder::Instance().GetBakEquipment());
+                store->AddItem(BakEquipmentBuilder::Instance().GetNewBakEquipment());
         }
 
         for (unsigned int dii = 0; dii < droid_num; dii++)

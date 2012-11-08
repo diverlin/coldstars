@@ -28,6 +28,7 @@ class Rect;
 struct ItemCommonData 
 {
 	ItemCommonData(): 
+	tech_level(0),
 	modules_num_max(0),
 	condition_max(0), 
 	deterioration_normal(0),
@@ -35,6 +36,7 @@ struct ItemCommonData
 	mass(0)
 	{};
 
+	unsigned int tech_level; 
 	unsigned int modules_num_max; 
 	unsigned int condition_max; 
 	unsigned int deterioration_normal;

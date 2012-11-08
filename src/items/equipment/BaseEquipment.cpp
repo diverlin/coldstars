@@ -57,6 +57,7 @@ BaseEquipment::~BaseEquipment()
 /* virtual */
 void BaseEquipment::AddCommonInfo()
 {
+    	info.addNameStr("tech_level:");   info.addValueStr( int2str(data_item.tech_level) );
     	info.addNameStr("modules:");   info.addValueStr( int2str(data_item.modules_num_max) );
     	info.addNameStr("race:");      info.addValueStr( getRaceStr(race_id) );
         info.addNameStr("deteriori:"); info.addValueStr( int2str(deterioration) );
