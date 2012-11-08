@@ -19,7 +19,7 @@
 #ifndef DRIVEEQUIPMENTBUILDER_H
 #define DRIVEEQUIPMENTBUILDER_H
 
-#include "../../../items/equipment/DriveEquipment.hpp"
+class DriveEquipment;
 #include "../../../common/constants.hpp"
 
 class DriveEquipmentBuilder
@@ -28,13 +28,12 @@ class DriveEquipmentBuilder
 		static DriveEquipmentBuilder& Instance();
 		~DriveEquipmentBuilder();
 
-        	void CreateNewDriveEquipment(int id = NONE_ID); 
-                void CreateNewInternals(int race_id, int revision_id = -1);
-                DriveEquipment* GetDriveEquipment() const { return drive_equipment; };
+        	DriveEquipment* GetNewDriveEquipmentTemplate(int id = NONE_ID) const; 
+                DriveEquipment* GetNewDriveEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int speed_orig = NONE_ID, int hyper_orig = NONE_ID) const;
         	 		                
         private:
-                DriveEquipment* drive_equipment;
-                
+                void CreateNewInternals(DriveEquipment*, int, int, int, int) const;
+                               
 		DriveEquipmentBuilder() {};
 		DriveEquipmentBuilder(const DriveEquipmentBuilder&) = delete;
 		DriveEquipmentBuilder& operator=(const DriveEquipmentBuilder&) = delete;

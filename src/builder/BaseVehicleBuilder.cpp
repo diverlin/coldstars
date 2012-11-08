@@ -20,6 +20,7 @@
 #include "../parts/WeaponComplex.hpp"
 
 #include "../items/equipment/BakEquipment.hpp"
+#include "../items/equipment/DriveEquipment.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -145,10 +146,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
         RadarEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
     	vehicle->GetRadarSlot()->InsertItem(RadarEquipmentBuilder::Instance().GetRadarEquipment()); 
 
-        DriveEquipmentBuilder::Instance().CreateNewDriveEquipment();
-        DriveEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
-    	vehicle->GetDriveComplex().GetDriveSlot()->InsertItem(DriveEquipmentBuilder::Instance().GetDriveEquipment()); 
-        
+    	vehicle->GetDriveComplex().GetDriveSlot()->InsertItem(DriveEquipmentBuilder::Instance().GetNewDriveEquipment(10)); 
     	vehicle->GetDriveComplex().GetBakSlot()->InsertItem(BakEquipmentBuilder::Instance().GetNewBakEquipment(10)); 
         
         //EnergizerEquipmentBuilder::Instance().CreateNewEnergizerEquipment();

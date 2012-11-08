@@ -75,6 +75,7 @@
 #include "../builder/GovermentBuilder.hpp"
 
 #include "../items/equipment/BakEquipment.hpp"
+#include "../items/equipment/DriveEquipment.hpp"
 
 EntityManager& EntityManager::Instance()
 {
@@ -358,8 +359,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading drive_equipments...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("drive_equipment"))
 		{
-			DriveEquipmentBuilder::Instance().CreateNewDriveEquipment(v.second.get<int>("data_id.id"));
-			DriveEquipment* drive_equipment = DriveEquipmentBuilder::Instance().GetDriveEquipment();
+			DriveEquipment* drive_equipment = DriveEquipmentBuilder::Instance().GetNewDriveEquipmentTemplate(v.second.get<int>("data_id.id"));
                 	drive_equipment->LoadData(v.second);
 		}
 	}

@@ -17,6 +17,7 @@
 */
 
 #include "DriveEquipmentBuilder.hpp"
+#include "../../../items/equipment/DriveEquipment.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/EntityManager.hpp"
@@ -32,8 +33,9 @@ DriveEquipmentBuilder& DriveEquipmentBuilder::Instance()
 DriveEquipmentBuilder::~DriveEquipmentBuilder()
 {}
 
-void DriveEquipmentBuilder::CreateNewDriveEquipment(int id)
+DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipmentTemplate(int id) const
 {
+	DriveEquipment* drive_equipment = NULL;
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -48,28 +50,49 @@ void DriveEquipmentBuilder::CreateNewDriveEquipment(int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         EntityManager::Instance().RegisterEntity(drive_equipment);
+        
+        return drive_equipment;
 } 
+        
+DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipment(int tech_level, int race_id, int speed_orig, int hyper_orig) const
+{
+	DriveEquipment* drive_equipment = GetNewDriveEquipmentTemplate();
+	CreateNewInternals(drive_equipment, tech_level, race_id, speed_orig, hyper_orig);
+        
+        return drive_equipment;
+}        
         	
-void DriveEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
+void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, int tech_level, int race_id, int speed_orig, int hyper_orig) const
 {     
-        if (race_id == -1)
-                race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+        if (race_id == NONE_ID)
+        {
+       		race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+	}
+	
+    	if (tech_level == NONE_ID)
+    	{
+       		tech_level = 1; 
+	}
 
-        if (revision_id == -1)
-                revision_id = TECHLEVEL::L0_ID; 
-
-        int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
+	float tech_rate = 1.0f;
+	if (tech_level > 1)
+	{
+		tech_rate = tech_level * EQUIPMENT::TECHLEVEL_RATE;
+	}
+	
+    	tech_rate *= 1; //getRaceTechRate(race_id); 
 
         TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::DRIVE_EQUIPMENT_ID);   
         //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::DRIVE_EQUIPMENT_ID, revision_id) 
 
-        int speed_orig      = getRandInt(EQUIPMENT::DRIVE::SPEED_MIN, EQUIPMENT::DRIVE::SPEED_MAX);
-        int hyper_orig      = getRandInt(EQUIPMENT::DRIVE::HYPER_MIN, EQUIPMENT::DRIVE::HYPER_MAX);
+        speed_orig      = getRandInt(EQUIPMENT::DRIVE::SPEED_MIN, EQUIPMENT::DRIVE::SPEED_MAX) * tech_rate;
+        hyper_orig      = getRandInt(EQUIPMENT::DRIVE::HYPER_MIN, EQUIPMENT::DRIVE::HYPER_MAX) * tech_rate;
     
         ItemCommonData common_data;
-        common_data.modules_num_max = getRandInt(EQUIPMENT::DRIVE::MODULES_NUM_MIN, EQUIPMENT::DRIVE::MODULES_NUM_MAX);
-        common_data.mass            = getRandInt(EQUIPMENT::DRIVE::MASS_MIN,        EQUIPMENT::DRIVE::MASS_MAX);
-        common_data.condition_max   = getRandInt(EQUIPMENT::DRIVE::CONDITION_MIN,   EQUIPMENT::DRIVE::CONDITION_MAX) * tech_rate;
+        common_data.tech_level 		= tech_level;
+        common_data.modules_num_max 	= getRandInt(EQUIPMENT::DRIVE::MODULES_NUM_MIN, EQUIPMENT::DRIVE::MODULES_NUM_MAX);
+        common_data.mass            	= getRandInt(EQUIPMENT::DRIVE::MASS_MIN,        EQUIPMENT::DRIVE::MASS_MAX);
+        common_data.condition_max   	= getRandInt(EQUIPMENT::DRIVE::CONDITION_MIN,   EQUIPMENT::DRIVE::CONDITION_MAX);
     	common_data.deterioration_normal = 1;
     	common_data.deterioration_overload_rate = EQUIPMENT::DRIVE::OVERLOAD_DETERIORATION_RATE;
     
