@@ -28,6 +28,8 @@
 #include "../common/rand.hpp"
 #include "../common/common.hpp"
 
+#include "God.hpp"
+
 GalaxyBuilder& GalaxyBuilder::Instance()
 {
 	static GalaxyBuilder instance;
@@ -90,6 +92,8 @@ void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy) const
                 	                
         		StarSystem* starsystem = StarSystemBuilder::Instance().GetNewStarSystem();
         		galaxy->Add(starsystem, center);
+        		
+        		God::Instance().CreateLifeInStarSystem(starsystem);
  		}
  	}
 }

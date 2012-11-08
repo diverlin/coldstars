@@ -63,7 +63,7 @@ void MicroScenarioDestroy::UpdateInStaticInSpace(Npc* npc) const
 	npc->GetVehicle()->GetWeaponComplex().ActivateAllWeapons();
 	npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetId();
 	npc->GetVehicle()->GetWeaponComplex().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget());
-        npc->GetVehicle()->GetDriveComplex().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget(), NAVIGATOR_ACTION::KEEP_MIDDLE_ID); 
+        npc->GetVehicle()->GetDriveComplex().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget(), NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE_ID); 
 }
 
 /* virtual */

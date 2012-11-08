@@ -270,6 +270,8 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 	int w = Screen::Instance().GetWindow().GetWidth();
 	int h = Screen::Instance().GetWindow().GetHeight();
 
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	Screen::Instance().GetFbo0().Activate(w, h);
    
         	starsystem->DrawBackground(Screen::Instance().GetRect().GetBottomLeft());           
@@ -327,8 +329,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 
     			for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
 			{ 
-        			visible_BLACKHOLE_vec[i]->Render_NEW(Screen::Instance().GetRect().GetBottomLeft()); 
-        			
+        			visible_BLACKHOLE_vec[i]->Render_NEW(Screen::Instance().GetRect().GetBottomLeft());         			
     			}  	
     		disable_DEPTH();
 

@@ -140,8 +140,7 @@ void RocketBullet::Hit(int damage, bool show_effect)
 	if (show_effect == true)
 	{
        		// improove
-       		Color4i color;  	       		
-       		VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, points.GetCenter(), color, collision_radius);
+       		VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, points.GetCenter(), COLOR::COLOR4I_RED_LIGHT, collision_radius);
        		starsystem->Add(text); 
        	}
 }

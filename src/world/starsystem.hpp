@@ -181,6 +181,7 @@ class StarSystem : public BaseSpaceEntity
 	friend class GuiGalaxyMap;
 	friend class Observation;
 	friend class Player;
+	friend class God;
 };
 
 #endif 

@@ -85,8 +85,11 @@ void Npc::MindInKosmoport()
 		//}
 
        		state_machine.UpdateInStaticInDock();      
+       		
+       		vehicle->LaunchingEvent();
        	}
-	
+       	
+
 }
 
 void Npc::MindInSpace()
@@ -126,8 +129,7 @@ void Npc::AddExpirience(int expirience, bool show_effect)
 	
 	if (show_effect == true)
 	{
-		Color4i color(128,128,255,255);  	       		
-       		VerticalFlowText* text = new VerticalFlowText(int2str(expirience), 12, vehicle->GetPoints().GetCenter(), color, 10);
+       		VerticalFlowText* text = new VerticalFlowText(int2str(expirience), 12, vehicle->GetPoints().GetCenter(), COLOR::COLOR4I_BLUE_LIGHT, 10);
        		vehicle->GetStarSystem()->Add(text); 
 	}
 }

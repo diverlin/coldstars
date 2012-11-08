@@ -16,31 +16,28 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef STARSYSTEMBUILDER_H
-#define STARSYSTEMBUILDER_H
+#ifndef GOD_H
+#define GOD_H
 
 class StarSystem;
 #include "../common/constants.hpp"
 
-class StarSystemBuilder
+class God
 {
 	public:
-		static StarSystemBuilder& Instance();
-		~StarSystemBuilder();
+		static God& Instance();
+		~God();
 
-        	StarSystem* GetNewStarSystemTemplate(int id = NONE_ID) const; 
-                StarSystem* GetNewStarSystem() const;
+		void CreateLifeInStarSystem(StarSystem*) const;
                        	 		                
         private:
-		StarSystemBuilder() {};
-		StarSystemBuilder(const StarSystemBuilder&) = delete;
-		StarSystemBuilder& operator=(const StarSystemBuilder&) = delete;
-		
-		void CreateNewInternals(StarSystem*) const;
-                
-                void CreateBackground(StarSystem*, int, int, int) const;
-        	void CreateStar(StarSystem*) const;
-        	void CreatePlanets(StarSystem*, int) const;
+		God() {};
+		God(const God&) = delete;
+		God& operator=(const God&) = delete;
+		                
+        	void CreateLifeToPlanets(StarSystem*) const;
+        	void CreateSpaceStations(StarSystem*, int) const;
+        	void CreateShipsInSpace(StarSystem*, int, int, int requestedclass = NONE_ID) const;   
 }; 
 
 #endif 

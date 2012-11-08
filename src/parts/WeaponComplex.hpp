@@ -36,6 +36,8 @@ class WeaponComplex
                	void SetOwnerVehicle(Vehicle* owner_vehicle) { this->owner_vehicle = owner_vehicle; };
                	TextureOb* GetItemTextureOb(int) const; // used for gui, additional icons
                
+               	int GetWeaponRadiusMin() const { return weapon_radius_min; };
+               
                 bool AddSlot(ItemSlot*);
                 bool AddItem(BaseItem*);
         	
@@ -62,6 +64,7 @@ class WeaponComplex
         	void RenderTurrels() const;
         	
       	private:
+      		int weapon_radius_min;
       		Vehicle* owner_vehicle;
       		
       		int fire_delay, d_fire_delay;

@@ -19,6 +19,9 @@
 #include "rand.hpp"
 #include <stdlib.h>
 
+#include "constants.hpp"
+#include "gameStruct.hpp"
+
 int getRandIntFromVec(const std::vector<int>& list)
 {
        	return list[getRandInt(0, list.size())];
@@ -53,4 +56,16 @@ bool getRandBool()
 }
 
 
-
+int getRandNpcSubTypeId(int race_id)
+{
+        switch(race_id)
+        {
+               	case RACE::R0_ID: { return getRandIntFromVec(RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec);  break; }
+               	case RACE::R1_ID: { return getRandIntFromVec(RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec);  break; }
+               	case RACE::R2_ID: { return getRandIntFromVec(RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec);  break; }
+               	case RACE::R3_ID: { return getRandIntFromVec(RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec);  break; }
+              	case RACE::R4_ID: { return getRandIntFromVec(RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec);  break; }
+              	case RACE::R6_ID: { return getRandIntFromVec(RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec);  break; }
+              	case RACE::R7_ID: { return getRandIntFromVec(RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec);  break; }
+	}
+}

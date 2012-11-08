@@ -37,7 +37,7 @@ Planet::Planet(int id)
 	textureOb_atmosphere = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ATMOSPHERE_ID);
 	
 	angle_atmosphere.Set(0.0, 0.0, 0.0);
-	d_angle_atmosphere.Set(-0.1, -0.3, 0.0);
+	d_angle_atmosphere.Set(-0.1, 0.0, 0.0);
 		      	
 	land = NULL;
 }
@@ -96,6 +96,18 @@ void Planet::UpdateInfo()
 void Planet::PostDeathUniqueEvent(bool)
 {}
 
+void Planet::Render_NEW(const vec2f& scroll_coords) const
+{
+	RenderMesh_NEW(scroll_coords);
+	//glDepthMask(GL_FALSE);
+	//RenderAtmosphere_NEW(scroll_coords);
+	//glDepthMask(GL_TRUE);
+}
+	
+void Planet::Render_OLD() const
+{
+	RenderMesh_OLD();	
+}
 				 		
 void Planet::RenderAtmosphere_NEW(const vec2f& scroll_coords) const
 {     	
@@ -109,7 +121,7 @@ void Planet::RenderAtmosphere_NEW(const vec2f& scroll_coords) const
      		glBindTexture(GL_TEXTURE_2D, textureOb_atmosphere->texture);
      		glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
 
-		renderMesh(mesh->glList, points.GetCenter3f(), angle_atmosphere, scale*1.05f);
+		renderMesh(mesh->glList, points.GetCenter3f(), angle_atmosphere, scale*1.1f);
 	glDisable(GL_BLEND);
 	
      	glUseProgram(0);

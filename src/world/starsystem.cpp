@@ -551,7 +551,15 @@ void StarSystem::UpdateEntities_s(int time, bool show_effect)
       
 void StarSystem::MindEntitiesInStatic_s()
 {
-     	for (unsigned int i=0; i<VEHICLE_vec.size(); i++) 		{ VEHICLE_vec[i]->GetOwnerNpc()->MindInSpace(); }
+     	for (unsigned int i=0; i<VEHICLE_vec.size(); i++) 		
+     	{ 
+     		VEHICLE_vec[i]->GetOwnerNpc()->MindInSpace(); 
+     		if (VEHICLE_vec[i]->GetSubTypeId() == ENTITY::SPACESTATION_ID)
+     		{
+     			((SpaceStation*)VEHICLE_vec[i])->GetLand()->UpdateInSpaceInStatic();
+     		}
+     	}
+     	
     	for (unsigned int i=0; i<PLANET_vec.size(); i++)     		{ PLANET_vec[i]->UpdateInSpaceInStatic(); }
 }      
 
@@ -596,7 +604,7 @@ void StarSystem::RestoreSceneColor()
 
 void StarSystem::RestoreDefaultColor()
 {
-	setColor4f(COLOR::DEFAULT4f);
+	setColor4f(COLOR::COLOR4F_WHITE);
 }
 
 void StarSystem::DrawBackground(vec2f scroll_coords)

@@ -425,6 +425,8 @@ void Vehicle::DockingEvent()
 
 void Vehicle::LaunchingEvent()
 {
+	SetSpecialActionId(SPECIAL_ACTION::INITIATE_LAUNCHING_ID);
+
 	switch(parent_vehicleslot->GetOwner()->GetTypeId())
 	{
 		case ENTITY::ANGAR_ID:
@@ -462,11 +464,6 @@ void Vehicle::Hit(int damage, bool show_effect)
 	
 	data_life.armor -= damage;
 	
-	//if (getRandInt(1, 30) == 1)
-	//{
-		//LockRandomItem(getRandInt(1,3));
-	//}
-
     	if (data_life.armor < 0)
     	{
        		data_life.is_alive = false;
@@ -478,9 +475,8 @@ void Vehicle::Hit(int damage, bool show_effect)
     		{
        			protection_complex.GetShieldEffect()->SetAlpha(1.0);
        		}       	
-       		// improove
-       		Color4i color;  	       		
-       		VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, points.GetCenter(), color, collision_radius);
+       		
+       		VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, points.GetCenter(), COLOR::COLOR4I_RED_LIGHT, collision_radius);
        		starsystem->Add(text); 
        	}
        	

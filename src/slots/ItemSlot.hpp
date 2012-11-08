@@ -120,15 +120,15 @@ class ItemSlot : public BaseSlot
         	virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);
 		virtual void ResolveData();
-		
+
+           	int GetItemRadius() const;
+           			
         private:                               
                 Turrel* turrel;          // only for weapons slot
                 
                 BaseItem* item;
 
            	PathVisual range_visual;
-           	
-           	int GetItemRadius() const;
            	              
            	bool CheckAlive(BaseSpaceEntity*) const;
            	bool CheckPlaceTypeId(BaseSpaceEntity*) const;  

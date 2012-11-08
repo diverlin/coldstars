@@ -63,7 +63,17 @@ void BlackHole::UpdateInfo()
     	info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 }
-            
+      
+void BlackHole::Render_NEW(const vec2f& scroll_coords) const
+{
+	RenderMesh_NEW(scroll_coords);
+}
+	
+void BlackHole::Render_OLD() const
+{
+	RenderMesh_OLD();	
+}
+      
 /*virtual*/
 void BlackHole::SaveData(boost::property_tree::ptree&) const
 {
