@@ -191,6 +191,8 @@ set (SOURCES
 	src/builder/ShopBuilder.cpp
 	src/builder/KosmoportBuilder.cpp
 
+	src/builder/God.cpp
+
 	src/pilots/Player.cpp
 	src/pilots/Npc.cpp           
 	src/pilots/Skill.cpp

@@ -136,7 +136,6 @@ void GuiAngar::ButtonsAction() const
        					//player->GetNpc()->GetStateMachine()->SetCurrentTask(microtask);
        					
        					player->GetNpc()->GetVehicle()->LaunchingEvent();
-       					player->GetNpc()->GetVehicle()->SetSpecialActionId(SPECIAL_ACTION::INITIATE_LAUNCHING_ID);
        		   			return; 
        		   				      		   			
        		   			break;

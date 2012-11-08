@@ -238,7 +238,9 @@ bool WeaponComplex::UpdateFireAbility()
      	//avr_radius =  
      	
      	//int sum_fire_radius = 0;
-
+	
+	weapon_radius_min = 0;
+     	
      	slot_weapon_equiped_vec.clear();     	
      	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
      	{ 
@@ -246,7 +248,13 @@ bool WeaponComplex::UpdateFireAbility()
         	{
            		if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
            		{
-              			slot_weapon_equiped_vec.push_back(slot_weapon_vec[i]);
+              			slot_weapon_equiped_vec.push_back(slot_weapon_vec[i]); 
+              			
+              			int weapon_radius = slot_weapon_vec[i]->GetItemRadius();
+              			if ( (weapon_radius < weapon_radius_min) or (weapon_radius_min == 0) )
+              			{
+              				weapon_radius_min = weapon_radius;
+              			}
               			//sum_damage      += slot_weapon_vec[i]->getItemDamage(); 
               			//sum_fire_radius += slot_weapon_vec[i]->getItemRadius(); 
            		}

@@ -112,7 +112,7 @@ void DriveComplex::SetTarget(BaseSpaceEntity* target, int _action_id)
 		DefineDistance(_action_id);
 	}
        
-	CalcPath();
+	UpdatePath();
 	
 	#if DRIVECOMPLEX_LOG_ENABLED == 1 
 	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex GOT Target " + getEntityStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " navigator_action = " + getNavigatorActionStr(action_id), 2); 
@@ -129,7 +129,7 @@ void DriveComplex::DefineDistance(int action_id)
     		case NAVIGATOR_ACTION::DOCKING_ID:
     		{
     			target_distance = target->GetCollisionRadius()/4;
-    			target_offset = getRandVec2f(target->GetCollisionRadius()/15, target->GetCollisionRadius()/10); 
+    			target_offset = getRandVec2f(target->GetCollisionRadius()/5, target->GetCollisionRadius()/2); 
     			
     			break;   
     		}
@@ -137,31 +137,40 @@ void DriveComplex::DefineDistance(int action_id)
     		case NAVIGATOR_ACTION::COLLECTING_ID:
     		{
     		    	target_distance = owner_vehicle->GetPropetries().grab_radius/2; 
-    			target_offset = getRandVec2f(target->GetCollisionRadius()/10, target->GetCollisionRadius()/5); 
+    			target_offset = getRandVec2f(target->GetCollisionRadius()/2, target->GetCollisionRadius()); 
     			
     			break;    		
     		}
-    		
+
+    		case NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE_ID:
+    		{
+    			int weapon_radius_min = owner_vehicle->GetWeaponComplex().GetWeaponRadiusMin();
+    		    	target_distance = 0; 
+    			target_offset = getRandVec2f(weapon_radius_min/4, weapon_radius_min/1.9); 
+    			
+    			break;    		
+    		}
+    		    		
     		case NAVIGATOR_ACTION::KEEP_CLOSE_ID:
     		{
-    		    	target_distance = target->GetCollisionRadius()*1.2;
-    			target_offset = getRandVec2f(target->GetCollisionRadius()/10, target->GetCollisionRadius()/5); 
+    		    	target_distance = target->GetCollisionRadius()*1.5;
+    			target_offset = getRandVec2f(target->GetCollisionRadius()/5, target->GetCollisionRadius()/2); 
     			
     			break;    		
     		}
 
     		case NAVIGATOR_ACTION::KEEP_MIDDLE_ID:
     		{
-    		    	target_distance = target->GetCollisionRadius()*2.5;
-    			target_offset = getRandVec2f(target->GetCollisionRadius()/10, target->GetCollisionRadius()/5); 
+    		    	target_distance = target->GetCollisionRadius()*4;
+    			target_offset = getRandVec2f(target->GetCollisionRadius()/2, target->GetCollisionRadius()); 
     			
     			break;    		
     		}
     		
     		case NAVIGATOR_ACTION::KEEP_FAR_ID:
     		{
-    		    	target_distance = target->GetCollisionRadius()*4;
-    			target_offset = getRandVec2f(target->GetCollisionRadius()/10, target->GetCollisionRadius()/5); 
+    		    	target_distance = target->GetCollisionRadius()*8;
+    			target_offset = getRandVec2f(target->GetCollisionRadius()/2, target->GetCollisionRadius()); 
     			
     			break;    
     		}
@@ -182,6 +191,7 @@ void DriveComplex::UpdatePath()
 			ResetTarget();
 		}
 	}
+	
         if (has_target == true)
         {
                 CalcPath();
@@ -210,25 +220,25 @@ void DriveComplex::UpdateDynamicTargetCoord()
     		case ENTITY::PLANET_ID:
     		{ 
         		target_pos = ((Planet*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;         	
-		       	break;		       	
+		       	return; break;		       	
     		} 
 
     		case ENTITY::ASTEROID_ID:
     		{ 
         		target_pos = ((Asteroid*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;         	
-        		break;
+        		return; break;
     		} 
     	     
     		case ENTITY::VEHICLE_ID:
     		{ 
 			target_pos = target->GetPoints().GetCenter() + target_offset;  
-        		break;    
+        		return; break;    
     		}
 
     		case ENTITY::CONTAINER_ID:
     		{ 
 			target_pos = target->GetPoints().GetCenter() + target_offset;  
-        		break;    
+        		return; break;    
     		}
     	}
 }

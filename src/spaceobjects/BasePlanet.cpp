@@ -62,7 +62,7 @@ void BasePlanet::UpdatePosition()
 	}
 }
 				 		
-void BasePlanet::Render_NEW(const vec2f& scroll_coords) const
+void BasePlanet::RenderMesh_NEW(const vec2f& scroll_coords) const
 {     	
      	glUseProgram(ShaderCollector::Instance().light);
 
@@ -79,7 +79,7 @@ void BasePlanet::Render_NEW(const vec2f& scroll_coords) const
      	glActiveTexture(GL_TEXTURE0);
 }
 
-void BasePlanet::Render_OLD() const
+void BasePlanet::RenderMesh_OLD() const
 {   	
 	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
 	renderMesh(mesh->glList, points.GetCenter3f(), angle, scale);

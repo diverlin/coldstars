@@ -28,4 +28,6 @@ int getRandInt(int, int);
 int getRandSign();
 bool getRandBool();
 
+int getRandNpcSubTypeId(int);
+
 #endif

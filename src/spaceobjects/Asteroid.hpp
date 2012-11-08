@@ -33,6 +33,9 @@ class Asteroid : public BasePlanet
 		void UpdateInSpace(int, bool);        	
 		void CollisionEvent(bool);
 
+		void Render_NEW(const vec2f& scroll_coords) const;	
+		void Render_OLD() const;
+
         	virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);
 		virtual void ResolveData();

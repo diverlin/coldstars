@@ -43,8 +43,6 @@
 
 #define DEBUG_ITEMDAMAGELOCKVIAGUI 1  // 1 - is locking/unlocking item by right mouse click; 2 - is damaging/undamaging item by right mouse click
 
-
-
 const bool TEST_ON = false;
 const bool CRASH_TEST_ON = false;
 
@@ -229,8 +227,12 @@ namespace COLOR
 		RED_ID, GREEN_ID, BLUE_ID, YELLOW_ID, GREY_ID
 	};
 	
-	const Color4f DEFAULT4f;
-	const Color4i DEFAULT4i;	
+	const Color4f COLOR4F_WHITE(1.0, 1.0, 1.0, 1.0);
+	const Color4i COLOR4I_WHITE(255, 255, 255, 255);	
+	const Color4i COLOR4I_RED_LIGHT(255, 128, 128, 255);
+	const Color4i COLOR4I_BLUE_LIGHT(128, 128, 255, 255); 	
+		
+
 }
 
 
@@ -284,9 +286,18 @@ namespace ENTITY
 		
 		const int SHIP_INIT_MIN = 4;
 		const int SHIP_INIT_MAX = 7;
-		const int ENEMYSHIP_INIT_MIN = 10;
-		const int ENEMYSHIP_INIT_MAX = 20;
-	
+		const int SHIPENEMY_INIT_MIN = 10;
+		const int SHIPENEMY_INIT_MAX = 20;
+
+		const int SPACESTATION_INIT_MIN = 1;
+		const int SPACESTATION_INIT_MAX = 3;
+			
+		const int DISTANT_NEBULA_MIN = 6;
+		const int DISTANT_NEBULA_MAX = 8;
+		
+		const int DISTANT_STAR_MIN = 40;
+		const int DISTANT_STAR_MAX = 60;
+        
 		enum CONDITION
 		{
 			WAR_ID, CAPTURED_ID, SAFE_ID
@@ -663,7 +674,7 @@ namespace NAVIGATOR_ACTION
 {
 	enum TYPE
 	{
-		NONE_ID, DOCKING_ID, COLLECTING_ID, KEEP_CLOSE_ID, KEEP_MIDDLE_ID, KEEP_FAR_ID 
+		NONE_ID, DOCKING_ID, COLLECTING_ID, KEEP_FIRE_DISTANCE_ID, KEEP_CLOSE_ID, KEEP_MIDDLE_ID, KEEP_FAR_ID 
 	};
 }
 

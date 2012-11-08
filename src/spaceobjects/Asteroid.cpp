@@ -87,6 +87,16 @@ void Asteroid::UpdateInfo()
 	info.addNameStr("speed x 100:"); info.addValueStr(int2str(int(data_planet.speed*100)));
 }     
 
+void Asteroid::Render_NEW(const vec2f& scroll_coords) const
+{
+	RenderMesh_NEW(scroll_coords);
+}
+	
+void Asteroid::Render_OLD() const
+{
+	RenderMesh_OLD();	
+}
+
 void Asteroid::SaveDataUniqueAsteroid(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {}
 

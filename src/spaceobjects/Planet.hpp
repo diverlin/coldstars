@@ -45,8 +45,9 @@ class Planet : public BasePlanet
 		
 		void UpdateInSpace(int, bool);
 		void UpdateInSpaceInStatic();
-				
-		void RenderAtmosphere_NEW(const vec2f&) const;
+			
+		void Render_NEW(const vec2f&) const;
+		void Render_OLD() const;
 
 		void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
@@ -65,6 +66,8 @@ class Planet : public BasePlanet
 
 		void PostDeathUniqueEvent(bool);
 
+		void RenderAtmosphere_NEW(const vec2f&) const;
+		
 		UnresolvedDataUniquePlanet data_unresolved_Planet;
 
 		void SaveDataUniquePlanet(boost::property_tree::ptree&, const std::string&) const;		
