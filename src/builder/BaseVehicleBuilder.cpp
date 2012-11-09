@@ -22,6 +22,7 @@
 #include "../items/equipment/BakEquipment.hpp"
 #include "../items/equipment/DriveEquipment.hpp"
 #include "../items/equipment/DroidEquipment.hpp"
+#include "../items/equipment/GrappleEquipment.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -127,6 +128,7 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
 
 void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
 {
+	int tech_level = 2;
     	for (unsigned int i=0; i<vehicle->GetKorpusData().slot_weapon_num; i++)
     	{
     		if (getRandBool())
@@ -147,8 +149,8 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
         RadarEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
     	vehicle->GetRadarSlot()->InsertItem(RadarEquipmentBuilder::Instance().GetRadarEquipment()); 
 
-    	vehicle->GetDriveComplex().GetDriveSlot()->InsertItem(DriveEquipmentBuilder::Instance().GetNewDriveEquipment(2)); 
-    	vehicle->GetDriveComplex().GetBakSlot()->InsertItem(BakEquipmentBuilder::Instance().GetNewBakEquipment(2)); 
+    	vehicle->GetDriveComplex().GetDriveSlot()->InsertItem(DriveEquipmentBuilder::Instance().GetNewDriveEquipment(tech_level)); 
+    	vehicle->GetDriveComplex().GetBakSlot()->InsertItem(BakEquipmentBuilder::Instance().GetNewBakEquipment(tech_level)); 
         
         //EnergizerEquipmentBuilder::Instance().CreateNewEnergizerEquipment();
         //EnergizerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
@@ -162,7 +164,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
         ProtectorEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
    	vehicle->GetProtectionComplex().GetProtectorSlot()->InsertItem(ProtectorEquipmentBuilder::Instance().GetProtectorEquipment()); 
    	
-   	vehicle->GetDroidSlot()->InsertItem(DroidEquipmentBuilder::Instance().GetNewDroidEquipment(2)); 
+   	vehicle->GetDroidSlot()->InsertItem(DroidEquipmentBuilder::Instance().GetNewDroidEquipment(tech_level)); 
 
    	ScanerEquipmentBuilder::Instance().CreateNewScanerEquipment();
         ScanerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
@@ -170,9 +172,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
     
     	if (vehicle->GetKorpusData().slot_grapple_num != 0) 
     	{
-    	   	GrappleEquipmentBuilder::Instance().CreateNewGrappleEquipment();
-        	GrappleEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
-      		vehicle->GetGrappleSlot()->InsertItem(GrappleEquipmentBuilder::Instance().GetGrappleEquipment()); 
+      		vehicle->GetGrappleSlot()->InsertItem(GrappleEquipmentBuilder::Instance().GetNewGrappleEquipment(tech_level)); 
    	}
 
     	for (unsigned int i=0; i<3; i++) 

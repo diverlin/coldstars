@@ -77,6 +77,7 @@
 #include "../items/equipment/BakEquipment.hpp"
 #include "../items/equipment/DriveEquipment.hpp"
 #include "../items/equipment/DroidEquipment.hpp"
+#include "../items/equipment/GrappleEquipment.hpp"
 
 EntityManager& EntityManager::Instance()
 {
@@ -402,8 +403,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading grapple_equipments...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("grapple_equipment"))
 		{
-			GrappleEquipmentBuilder::Instance().CreateNewGrappleEquipment(v.second.get<int>("data_id.id"));
-			GrappleEquipment* grapple_equipment = GrappleEquipmentBuilder::Instance().GetGrappleEquipment();
+			GrappleEquipment* grapple_equipment = GrappleEquipmentBuilder::Instance().GetNewGrappleEquipmentTemplate(v.second.get<int>("data_id.id"));
                 	grapple_equipment->LoadData(v.second);
                 }
 	}

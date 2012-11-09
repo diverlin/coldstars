@@ -29,6 +29,7 @@
 #include "../items/equipment/BakEquipment.hpp"
 #include "../items/equipment/DriveEquipment.hpp"
 #include "../items/equipment/DroidEquipment.hpp"
+#include "../items/equipment/GrappleEquipment.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -125,9 +126,7 @@ void StoreBuilder::PutRandomEquipment()
 
         for (unsigned int gii = 0; gii < grapple_num; gii++)
         { 
-    	   	GrappleEquipmentBuilder::Instance().CreateNewGrappleEquipment();
-        	GrappleEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
-      		store->AddItem(GrappleEquipmentBuilder::Instance().GetGrappleEquipment()); 
+      		store->AddItem(GrappleEquipmentBuilder::Instance().GetNewGrappleEquipment()); 
         }
 
         for (unsigned int dii = 0; dii < drive_num; dii++)
