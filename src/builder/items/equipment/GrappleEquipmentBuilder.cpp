@@ -17,6 +17,7 @@
 */
 
 #include "GrappleEquipmentBuilder.hpp"
+#include "../../../items/equipment/GrappleEquipment.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/EntityManager.hpp"
@@ -32,8 +33,10 @@ GrappleEquipmentBuilder& GrappleEquipmentBuilder::Instance()
 GrappleEquipmentBuilder::~GrappleEquipmentBuilder()
 {}
 
-void GrappleEquipmentBuilder::CreateNewGrappleEquipment(int id)
+GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipmentTemplate(int id) const
 {
+	GrappleEquipment* grapple_equipment = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -48,24 +51,44 @@ void GrappleEquipmentBuilder::CreateNewGrappleEquipment(int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         EntityManager::Instance().RegisterEntity(grapple_equipment);
+        
+        return grapple_equipment;
+} 
+        
+GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipment(int tech_level, int race_id, int strength_orig, int radius_orig, int speed_orig) const
+{
+	GrappleEquipment* grapple_equipment = GetNewGrappleEquipmentTemplate();
+	CreateNewInternals(grapple_equipment, tech_level, race_id, strength_orig, radius_orig, speed_orig);
+        
+        return grapple_equipment;
 } 
         	
-void GrappleEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
+void GrappleEquipmentBuilder::CreateNewInternals(GrappleEquipment* grapple_equipment, int tech_level, int race_id, int strength_orig, int radius_orig, int speed_orig) const
 {     
-    	if (race_id == -1)
-       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+        if (race_id == NONE_ID)
+        {
+       		race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+	}
+	
+    	if (tech_level == NONE_ID)
+    	{
+       		tech_level = 1; 
+	}
 
-    	if (revision_id == -1)
-       		revision_id = TECHLEVEL::L0_ID; 
-
-    	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
+	float tech_rate = 1.0f;
+	if (tech_level > 1)
+	{
+		tech_rate = tech_level * EQUIPMENT::TECHLEVEL_RATE;
+	}
+	
+    	tech_rate *= 1; //getRaceTechRate(race_id); 
 
     	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::GRAPPLE_EQUIPMENT_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::GRAPPLE_EQUIPMENT_ID, revision_id) 
 
-    	int strength_orig   = getRandInt(EQUIPMENT::GRAPPLE::STRENGTH_MIN,   EQUIPMENT::GRAPPLE::STRENGTH_MAX);
-    	int radius_orig     = getRandInt(EQUIPMENT::GRAPPLE::RADIUS_MIN,     EQUIPMENT::GRAPPLE::RADIUS_MAX);
-    	int speed_orig      = getRandInt(EQUIPMENT::GRAPPLE::SPEED_MIN,      EQUIPMENT::GRAPPLE::SPEED_MAX);
+    	strength_orig   = getRandInt(EQUIPMENT::GRAPPLE::STRENGTH_MIN,   EQUIPMENT::GRAPPLE::STRENGTH_MAX);
+    	radius_orig     = getRandInt(EQUIPMENT::GRAPPLE::RADIUS_MIN,     EQUIPMENT::GRAPPLE::RADIUS_MAX);
+    	speed_orig      = getRandInt(EQUIPMENT::GRAPPLE::SPEED_MIN,      EQUIPMENT::GRAPPLE::SPEED_MAX);
     	
     	ItemCommonData common_data;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::GRAPPLE::MODULES_NUM_MIN, EQUIPMENT::GRAPPLE::MODULES_NUM_MAX);

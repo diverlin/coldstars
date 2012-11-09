@@ -20,7 +20,7 @@
 #ifndef GRAPPLEEQUIPMENTBUILDER_H
 #define GRAPPLEEQUIPMENTBUILDER_H
 
-#include "../../../items/equipment/GrappleEquipment.hpp"
+class GrappleEquipment;
 #include "../../../common/constants.hpp"
 
 class GrappleEquipmentBuilder
@@ -29,13 +29,12 @@ class GrappleEquipmentBuilder
 		static GrappleEquipmentBuilder& Instance();
 		~GrappleEquipmentBuilder();
 
-        	void CreateNewGrappleEquipment(int id = NONE_ID); 
-                void CreateNewInternals(int race_id, int revision_id = -1);
-                GrappleEquipment* GetGrappleEquipment() const { return grapple_equipment; };
+        	GrappleEquipment* GetNewGrappleEquipmentTemplate(int id = NONE_ID) const; 
+                GrappleEquipment* GetNewGrappleEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int strength_orig = NONE_ID, int radius_orig = NONE_ID, int speed_orig = NONE_ID) const;
         	 		                
         private:
-                GrappleEquipment* grapple_equipment;
-                
+                void CreateNewInternals(GrappleEquipment*, int, int, int, int, int) const;
+                                
 		GrappleEquipmentBuilder() {};
 		GrappleEquipmentBuilder(const GrappleEquipmentBuilder&) = delete;
 		GrappleEquipmentBuilder& operator=(const GrappleEquipmentBuilder&) = delete;
