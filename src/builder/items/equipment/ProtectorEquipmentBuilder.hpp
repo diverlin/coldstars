@@ -20,7 +20,7 @@
 #ifndef PROTECTOREQUIPMENTBUILDER_H
 #define PROTECTOREQUIPMENTBUILDER_H
 
-#include "../../../items/equipment/ProtectorEquipment.hpp"
+class ProtectorEquipment;
 #include "../../../common/constants.hpp"
 
 class ProtectorEquipmentBuilder
@@ -29,12 +29,11 @@ class ProtectorEquipmentBuilder
 		static ProtectorEquipmentBuilder& Instance();
 		~ProtectorEquipmentBuilder();
 
-        	void CreateNewProtectorEquipment(int id = NONE_ID); 
-                void CreateNewInternals(int race_id, int revision_id = -1);
-                ProtectorEquipment* GetProtectorEquipment() const { return protector_equipment; };
+        	ProtectorEquipment* GetNewProtectorEquipmentTemplate(int id = NONE_ID) const; 
+                ProtectorEquipment* GetNewProtectorEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int protection_orig = NONE_ID) const;
         	 		                
         private:
-                ProtectorEquipment* protector_equipment;
+                void CreateNewInternals(ProtectorEquipment*, int, int, int) const;
                 
 		ProtectorEquipmentBuilder() {};
 		ProtectorEquipmentBuilder(const ProtectorEquipmentBuilder&) = delete;

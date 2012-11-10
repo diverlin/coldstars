@@ -24,6 +24,7 @@
 #include "../items/equipment/DroidEquipment.hpp"
 #include "../items/equipment/GrappleEquipment.hpp"
 #include "../items/equipment/LazerEquipment.hpp"
+#include "../items/equipment/ProtectorEquipment.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -159,9 +160,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
         //FreezerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
    	//vehicle->GetFreezerSlot()->InsertItem(FreezerEquipmentBuilder::Instance().GetFreezerEquipment());  
    	
-   	ProtectorEquipmentBuilder::Instance().CreateNewProtectorEquipment();
-        ProtectorEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
-   	vehicle->GetProtectionComplex().GetProtectorSlot()->InsertItem(ProtectorEquipmentBuilder::Instance().GetProtectorEquipment()); 
+   	vehicle->GetProtectionComplex().GetProtectorSlot()->InsertItem(ProtectorEquipmentBuilder::Instance().GetNewProtectorEquipment(tech_level)); 
    	
    	vehicle->GetDroidSlot()->InsertItem(DroidEquipmentBuilder::Instance().GetNewDroidEquipment(tech_level)); 
 
