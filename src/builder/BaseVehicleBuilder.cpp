@@ -25,6 +25,7 @@
 #include "../items/equipment/GrappleEquipment.hpp"
 #include "../items/equipment/LazerEquipment.hpp"
 #include "../items/equipment/ProtectorEquipment.hpp"
+#include "../items/equipment/RadarEquipment.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -145,10 +146,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
        		}
     	}   
            
-        RadarEquipmentBuilder::Instance().CreateNewRadarEquipment();
-        RadarEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
-    	vehicle->GetRadarSlot()->InsertItem(RadarEquipmentBuilder::Instance().GetRadarEquipment()); 
-
+    	vehicle->GetRadarSlot()->InsertItem(RadarEquipmentBuilder::Instance().GetNewRadarEquipment(tech_level)); 
     	vehicle->GetDriveComplex().GetDriveSlot()->InsertItem(DriveEquipmentBuilder::Instance().GetNewDriveEquipment(tech_level)); 
     	vehicle->GetDriveComplex().GetBakSlot()->InsertItem(BakEquipmentBuilder::Instance().GetNewBakEquipment(tech_level)); 
         

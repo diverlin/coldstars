@@ -19,7 +19,7 @@
 #ifndef RADAREQUIPMENTBUILDER_H
 #define RADAREQUIPMENTBUILDER_H
 
-#include "../../../items/equipment/RadarEquipment.hpp"
+class RadarEquipment;
 #include "../../../common/constants.hpp"
 
 class RadarEquipmentBuilder
@@ -28,12 +28,11 @@ class RadarEquipmentBuilder
 		static RadarEquipmentBuilder& Instance();
 		~RadarEquipmentBuilder();
 
-        	void CreateNewRadarEquipment(int id = NONE_ID); 
-                void CreateNewInternals(int race_id, int revision_id = -1);
-                RadarEquipment* GetRadarEquipment() const { return radar_equipment; };
+        	RadarEquipment* GetNewRadarEquipmentTemplate(int id = NONE_ID) const; 
+                RadarEquipment* GetNewRadarEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int radius_orig = NONE_ID) const;
         	 		                
         private:
-                RadarEquipment* radar_equipment;
+                void CreateNewInternals(RadarEquipment*, int, int, int) const;
                 
 		RadarEquipmentBuilder() {};
 		RadarEquipmentBuilder(const RadarEquipmentBuilder&) = delete;
