@@ -17,6 +17,7 @@
 */
 
 #include "LazerEquipmentBuilder.hpp"
+#include "../../../items/equipment/LazerEquipment.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/EntityManager.hpp"
@@ -32,8 +33,10 @@ LazerEquipmentBuilder& LazerEquipmentBuilder::Instance()
 LazerEquipmentBuilder::~LazerEquipmentBuilder()
 {}
 
-void LazerEquipmentBuilder::CreateNewLazerEquipment(int id)
+LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipmentTemplate(int id) const
 {
+	LazerEquipment* lazer_equipment = NULL; 
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -49,23 +52,43 @@ void LazerEquipmentBuilder::CreateNewLazerEquipment(int id)
         }
 
         EntityManager::Instance().RegisterEntity(lazer_equipment);
+        
+        return lazer_equipment;
 } 
-        	
-void LazerEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
+      
+LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipment(int tech_level, int race_id, int damage_orig, int radius_orig) const
+{
+	LazerEquipment* lazer_equipment = GetNewLazerEquipmentTemplate(); 
+	CreateNewInternals(lazer_equipment, tech_level, race_id, damage_orig, radius_orig);
+        
+        return lazer_equipment;
+} 
+  	
+void LazerEquipmentBuilder::CreateNewInternals(LazerEquipment* lazer_equipment, int tech_level, int race_id, int damage_orig, int radius_orig) const
 {     
-     	if (race_id == -1)
-       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+        if (race_id == NONE_ID)
+        {
+       		race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+	}
+	
+    	if (tech_level == NONE_ID)
+    	{
+       		tech_level = 1; 
+	}
 
-   	if (revision_id == -1)
-       		revision_id = TECHLEVEL::L0_ID; 
-
-    	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
+	float tech_rate = 1.0f;
+	if (tech_level > 1)
+	{
+		tech_rate = tech_level * EQUIPMENT::TECHLEVEL_RATE;
+	}
+	
+    	tech_rate *= 1; //getRaceTechRate(race_id); 
 
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::LAZER_EQUIPMENT_ID, revision_id)
     	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::LAZER_EQUIPMENT_ID);     
 
-    	int damage_orig     = getRandInt(EQUIPMENT::LAZER::DAMAGE_MIN, EQUIPMENT::LAZER::DAMAGE_MAX);
-    	int radius_orig     = getRandInt(EQUIPMENT::LAZER::RADIUS_MIN, EQUIPMENT::LAZER::RADIUS_MAX);
+    	damage_orig     = getRandInt(EQUIPMENT::LAZER::DAMAGE_MIN, EQUIPMENT::LAZER::DAMAGE_MAX);
+    	radius_orig     = getRandInt(EQUIPMENT::LAZER::RADIUS_MIN, EQUIPMENT::LAZER::RADIUS_MAX);
     	
     	ItemCommonData common_data;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::LAZER::MODULES_NUM_MIN, EQUIPMENT::LAZER::MODULES_NUM_MAX);

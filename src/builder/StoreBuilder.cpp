@@ -30,6 +30,7 @@
 #include "../items/equipment/DriveEquipment.hpp"
 #include "../items/equipment/DroidEquipment.hpp"
 #include "../items/equipment/GrappleEquipment.hpp"
+#include "../items/equipment/LazerEquipment.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -105,9 +106,7 @@ void StoreBuilder::PutRandomEquipment()
         
         for (unsigned int lii = 0; lii < lazer_num; lii++)
         { 
-    	        LazerEquipmentBuilder::Instance().CreateNewLazerEquipment();
-        	LazerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
-       		store->AddItem(LazerEquipmentBuilder::Instance().GetLazerEquipment()); 
+       		store->AddItem(LazerEquipmentBuilder::Instance().GetNewLazerEquipment()); 
         }
 
         for (unsigned int rii = 0; rii < rocket_num; rii++)

@@ -19,7 +19,7 @@
 #ifndef LAZEREQUIPMENTBUILDER_H
 #define LAZEREQUIPMENTBUILDER_H
 
-#include "../../../items/equipment/LazerEquipment.hpp"
+class LazerEquipment;
 #include "../../../common/constants.hpp"
 
 class LazerEquipmentBuilder
@@ -28,13 +28,12 @@ class LazerEquipmentBuilder
 		static LazerEquipmentBuilder& Instance();
 		~LazerEquipmentBuilder();
 
-        	void CreateNewLazerEquipment(int id = NONE_ID); 
-                void CreateNewInternals(int race_id, int revision_id = -1);
-                LazerEquipment* GetLazerEquipment() const { return lazer_equipment; };
+        	LazerEquipment* GetNewLazerEquipmentTemplate(int id = NONE_ID) const; 
+                LazerEquipment* GetNewLazerEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
         	 		                
         private:
-                LazerEquipment* lazer_equipment;
-                
+                void CreateNewInternals(LazerEquipment*, int, int, int, int) const;
+                               
 		LazerEquipmentBuilder() {};
 		LazerEquipmentBuilder(const LazerEquipmentBuilder&) = delete;
 		LazerEquipmentBuilder& operator=(const LazerEquipmentBuilder&) = delete;
