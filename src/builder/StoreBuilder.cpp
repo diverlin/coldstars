@@ -31,6 +31,7 @@
 #include "../items/equipment/DroidEquipment.hpp"
 #include "../items/equipment/GrappleEquipment.hpp"
 #include "../items/equipment/LazerEquipment.hpp"
+#include "../items/equipment/ProtectorEquipment.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -135,9 +136,7 @@ void StoreBuilder::PutRandomEquipment()
 
         for (unsigned int pii = 0; pii < protector_num; pii++)
         { 
-   		ProtectorEquipmentBuilder::Instance().CreateNewProtectorEquipment();
-       		ProtectorEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
-   		store->AddItem(ProtectorEquipmentBuilder::Instance().GetProtectorEquipment()); 
+   		store->AddItem(ProtectorEquipmentBuilder::Instance().GetNewProtectorEquipment()); 
         }
 
         for (unsigned int bii = 0; bii < bak_num; bii++)

@@ -17,6 +17,7 @@
 */
 
 #include "ProtectorEquipmentBuilder.hpp"
+#include "../../../items/equipment/ProtectorEquipment.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/EntityManager.hpp"
@@ -32,8 +33,10 @@ ProtectorEquipmentBuilder& ProtectorEquipmentBuilder::Instance()
 ProtectorEquipmentBuilder::~ProtectorEquipmentBuilder()
 {}
 
-void ProtectorEquipmentBuilder::CreateNewProtectorEquipment(int id)
+ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipmentTemplate(int id) const
 {
+	ProtectorEquipment* protector_equipment = NULL;
+
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -49,22 +52,42 @@ void ProtectorEquipmentBuilder::CreateNewProtectorEquipment(int id)
         }
         
         EntityManager::Instance().RegisterEntity(protector_equipment);
+        
+        return protector_equipment;
 } 
-        	
-void ProtectorEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
+   
+ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipment(int tech_level, int race_id, int protection_orig) const
+{
+	ProtectorEquipment* protector_equipment = GetNewProtectorEquipmentTemplate();
+	CreateNewInternals(protector_equipment, tech_level, race_id, protection_orig);
+        
+        return protector_equipment;
+} 
+     	
+void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector_equipment, int tech_level, int race_id, int protection_orig) const
 {     
-    	if (race_id == -1)
-       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+        if (race_id == NONE_ID)
+        {
+       		race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+	}
+	
+    	if (tech_level == NONE_ID)
+    	{
+       		tech_level = 1; 
+	}
 
-    	if (revision_id == -1)
-       		revision_id = TECHLEVEL::L0_ID; 
-
-    	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
+	float tech_rate = 1.0f;
+	if (tech_level > 1)
+	{
+		tech_rate = tech_level * EQUIPMENT::TECHLEVEL_RATE;
+	}
+	
+    	tech_rate *= 1; //getRaceTechRate(race_id); 
 
     	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::PROTECTOR_EQUIPMENT_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::PROTECTOR_EQUIPMENT_ID, revision_id) 
 
-    	int protection_orig = getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX);
+    	protection_orig = getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX);
     	
     	ItemCommonData common_data;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::PROTECTOR::MODULES_NUM_MIN, EQUIPMENT::PROTECTOR::MODULES_NUM_MAX);

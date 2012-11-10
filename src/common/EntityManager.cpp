@@ -79,6 +79,7 @@
 #include "../items/equipment/DroidEquipment.hpp"
 #include "../items/equipment/GrappleEquipment.hpp"
 #include "../items/equipment/LazerEquipment.hpp"
+#include "../items/equipment/ProtectorEquipment.hpp"
 
 EntityManager& EntityManager::Instance()
 {
@@ -424,8 +425,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading protector_equipments...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("protector_equipment"))
 		{
-			ProtectorEquipmentBuilder::Instance().CreateNewProtectorEquipment(v.second.get<int>("data_id.id"));
-			ProtectorEquipment* protector_equipment = ProtectorEquipmentBuilder::Instance().GetProtectorEquipment();
+			ProtectorEquipment* protector_equipment = ProtectorEquipmentBuilder::Instance().GetNewProtectorEquipmentTemplate(v.second.get<int>("data_id.id"));
                 	protector_equipment->LoadData(v.second);
 		}
 	}
