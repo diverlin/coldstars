@@ -431,9 +431,12 @@ void Vehicle::LaunchingEvent()
 	{
 		case ENTITY::ANGAR_ID:
 		{
+			int angleInD = getRandInt(0, 360);
+			vec2f offset_pos = getRandVec2f(40, 100);
+	
 			Base* place = ((Angar*)parent_vehicleslot->GetOwner())->GetOwnerKosmoport()->GetOwner();
-		     	starsystem->AddVehicle(this, ((Planet*)place)->GetPoints().GetCenter(), 0, NULL);
-			parent_vehicleslot->Release(); //((Planet*)place)->GetLand()->RemoveVehicle(this); 
+		     	starsystem->AddVehicle(this, ((Planet*)place)->GetPoints().GetCenter() + offset_pos, angleInD, NULL);
+			parent_vehicleslot->Release(); 
 			
 			break;
 		}

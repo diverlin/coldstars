@@ -23,6 +23,7 @@
 #include "../items/equipment/DriveEquipment.hpp"
 #include "../items/equipment/DroidEquipment.hpp"
 #include "../items/equipment/GrappleEquipment.hpp"
+#include "../items/equipment/LazerEquipment.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -139,9 +140,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
 		}
 		else
 		{
-    	        	LazerEquipmentBuilder::Instance().CreateNewLazerEquipment();
-        		LazerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
-       			vehicle->GetWeaponComplex().AddItem(LazerEquipmentBuilder::Instance().GetLazerEquipment()); 
+       			vehicle->GetWeaponComplex().AddItem(LazerEquipmentBuilder::Instance().GetNewLazerEquipment(tech_level)); 
        		}
     	}   
            

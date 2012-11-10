@@ -78,6 +78,7 @@
 #include "../items/equipment/DriveEquipment.hpp"
 #include "../items/equipment/DroidEquipment.hpp"
 #include "../items/equipment/GrappleEquipment.hpp"
+#include "../items/equipment/LazerEquipment.hpp"
 
 EntityManager& EntityManager::Instance()
 {
@@ -413,8 +414,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading lazer_equipments...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("lazer_equipment"))
 		{
-			LazerEquipmentBuilder::Instance().CreateNewLazerEquipment(v.second.get<int>("data_id.id"));
-			LazerEquipment* lazer_equipment = LazerEquipmentBuilder::Instance().GetLazerEquipment();
+			LazerEquipment* lazer_equipment = LazerEquipmentBuilder::Instance().GetNewLazerEquipmentTemplate(v.second.get<int>("data_id.id"));
                 	lazer_equipment->LoadData(v.second);
 		}
 	}
