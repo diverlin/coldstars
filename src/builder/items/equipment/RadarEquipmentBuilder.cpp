@@ -17,6 +17,7 @@
 */
 
 #include "RadarEquipmentBuilder.hpp"
+#include "../../../items/equipment/RadarEquipment.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/EntityManager.hpp"
@@ -32,8 +33,10 @@ RadarEquipmentBuilder& RadarEquipmentBuilder::Instance()
 RadarEquipmentBuilder::~RadarEquipmentBuilder()
 {}
 
-void RadarEquipmentBuilder::CreateNewRadarEquipment(int id)
+RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipmentTemplate(int id) const
 {
+	RadarEquipment* radar_equipment = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -49,22 +52,42 @@ void RadarEquipmentBuilder::CreateNewRadarEquipment(int id)
         }
         
         EntityManager::Instance().RegisterEntity(radar_equipment);
+        
+        return radar_equipment;
 } 
-        	
-void RadarEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
+  
+RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipment(int tech_level, int race_id, int radius_orig) const
+{
+	RadarEquipment* radar_equipment = GetNewRadarEquipmentTemplate();
+	CreateNewInternals(radar_equipment, tech_level, race_id, radius_orig);
+        
+        return radar_equipment;
+} 
+    	
+void RadarEquipmentBuilder::CreateNewInternals(RadarEquipment* radar_equipment, int tech_level, int race_id, int radius_orig) const
 {     
-    	if (race_id == -1)
-       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+        if (race_id == NONE_ID)
+        {
+       		race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+	}
+	
+    	if (tech_level == NONE_ID)
+    	{
+       		tech_level = 1; 
+	}
 
-    	if (revision_id == -1)
-       		revision_id = TECHLEVEL::L0_ID; 
-
-    	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
+	float tech_rate = 1.0f;
+	if (tech_level > 1)
+	{
+		tech_rate = tech_level * EQUIPMENT::TECHLEVEL_RATE;
+	}
+	
+    	tech_rate *= 1; //getRaceTechRate(race_id); 
 
     	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::RADAR_EQUIPMENT_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
 
-    	int radius_orig     = getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX);
+    	radius_orig     = getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX);
     	
     	ItemCommonData common_data;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::RADAR::MODULES_NUM_MIN, EQUIPMENT::RADAR::MODULES_NUM_MAX);

@@ -32,6 +32,7 @@
 #include "../items/equipment/GrappleEquipment.hpp"
 #include "../items/equipment/LazerEquipment.hpp"
 #include "../items/equipment/ProtectorEquipment.hpp"
+#include "../items/equipment/RadarEquipment.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -119,9 +120,7 @@ void StoreBuilder::PutRandomEquipment()
 
         for (unsigned int rii = 0; rii < radar_num; rii++)
         { 
-        	RadarEquipmentBuilder::Instance().CreateNewRadarEquipment();
-        	RadarEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
-    		store->AddItem(RadarEquipmentBuilder::Instance().GetRadarEquipment()); 
+    		store->AddItem(RadarEquipmentBuilder::Instance().GetNewRadarEquipment()); 
         }
 
         for (unsigned int gii = 0; gii < grapple_num; gii++)
