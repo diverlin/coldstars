@@ -81,6 +81,8 @@
 #include "../items/equipment/LazerEquipment.hpp"
 #include "../items/equipment/ProtectorEquipment.hpp"
 #include "../items/equipment/RadarEquipment.hpp"
+#include "../items/equipment/RocketEquipment.hpp"
+#include "../items/equipment/ScanerEquipment.hpp"
 
 EntityManager& EntityManager::Instance()
 {
@@ -446,8 +448,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading rocket_equipments...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("rocket_equipment"))
 		{
-			RocketEquipmentBuilder::Instance().CreateNewRocketEquipment(v.second.get<int>("data_id.id"));
-			RocketEquipment* rocket_equipment = RocketEquipmentBuilder::Instance().GetRocketEquipment();
+			RocketEquipment* rocket_equipment = RocketEquipmentBuilder::Instance().GetNewRocketEquipmentTemplate(v.second.get<int>("data_id.id"));
                 	rocket_equipment->LoadData(v.second);
 		}
 	}
@@ -457,8 +458,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading scaner_equipments...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("scaner_equipment"))
 		{
-			ScanerEquipmentBuilder::Instance().CreateNewScanerEquipment(v.second.get<int>("data_id.id"));
-			ScanerEquipment* scaner_equipment = ScanerEquipmentBuilder::Instance().GetScanerEquipment();
+			ScanerEquipment* scaner_equipment = ScanerEquipmentBuilder::Instance().GetNewScanerEquipmentTemplate(v.second.get<int>("data_id.id"));
                 	scaner_equipment->LoadData(v.second);
 		}
 	}

@@ -17,6 +17,7 @@
 */
 
 #include "RocketEquipmentBuilder.hpp"
+#include "../../../items/equipment/RocketEquipment.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/EntityManager.hpp"
@@ -32,8 +33,10 @@ RocketEquipmentBuilder& RocketEquipmentBuilder::Instance()
 RocketEquipmentBuilder::~RocketEquipmentBuilder()
 {}
 
-void RocketEquipmentBuilder::CreateNewRocketEquipment(int id)
+RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipmentTemplate(int id) const
 {
+	RocketEquipment* rocket_equipment = NULL;
+
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -49,24 +52,44 @@ void RocketEquipmentBuilder::CreateNewRocketEquipment(int id)
         }
         
         EntityManager::Instance().RegisterEntity(rocket_equipment);
+        
+        return rocket_equipment;
+} 
+
+RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipment(int tech_level, int race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+{
+	RocketEquipment* rocket_equipment = GetNewRocketEquipmentTemplate();
+	CreateNewInternals(rocket_equipment, tech_level, race_id, ammo_max_orig, damage_orig, radius_orig);
+	        
+        return rocket_equipment;
 } 
         	
-void RocketEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
+void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipment, int tech_level, int race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {     
-    	if (race_id == -1)
-       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+        if (race_id == NONE_ID)
+        {
+       		race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+	}
+	
+    	if (tech_level == NONE_ID)
+    	{
+       		tech_level = 1; 
+	}
 
-    	if (revision_id == -1)
-       		revision_id = TECHLEVEL::L0_ID; 
-
-    	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
+	float tech_rate = 1.0f;
+	if (tech_level > 1)
+	{
+		tech_rate = tech_level * EQUIPMENT::TECHLEVEL_RATE;
+	}
+	
+    	tech_rate *= 1; //getRaceTechRate(race_id); 
         
     	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ROCKET_EQUIPMENT_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::ROCKET_EQUIPMENT_ID, revision_id)   
     
-    	int ammo_max_orig = getRandInt(EQUIPMENT::ROCKET::AMMO_MIN, EQUIPMENT::ROCKET::AMMO_MAX);
-    	int damage_orig   = getRandInt(EQUIPMENT::ROCKET::DAMAGE_MIN, EQUIPMENT::ROCKET::DAMAGE_MAX);
-    	int radius_orig   = getRandInt(EQUIPMENT::ROCKET::RADIUS_MIN, EQUIPMENT::ROCKET::RADIUS_MAX);
+    	ammo_max_orig = getRandInt(EQUIPMENT::ROCKET::AMMO_MIN, EQUIPMENT::ROCKET::AMMO_MAX);
+    	damage_orig   = getRandInt(EQUIPMENT::ROCKET::DAMAGE_MIN, EQUIPMENT::ROCKET::DAMAGE_MAX);
+    	radius_orig   = getRandInt(EQUIPMENT::ROCKET::RADIUS_MIN, EQUIPMENT::ROCKET::RADIUS_MAX);
 
 	ItemCommonData common_data;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::ROCKET::MODULES_NUM_MIN, EQUIPMENT::ROCKET::MODULES_NUM_MAX);

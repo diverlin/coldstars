@@ -19,7 +19,7 @@
 #ifndef SCANEREQUIPMENTBUILDER_H
 #define SCANEREQUIPMENTBUILDER_H
 
-#include "../../../items/equipment/ScanerEquipment.hpp"
+class ScanerEquipment;
 #include "../../../common/constants.hpp"
 
 class ScanerEquipmentBuilder
@@ -28,12 +28,11 @@ class ScanerEquipmentBuilder
 		static ScanerEquipmentBuilder& Instance();
 		~ScanerEquipmentBuilder();
 
-        	void CreateNewScanerEquipment(int id = NONE_ID); 
-                void CreateNewInternals(int race_id, int revision_id = -1);
-                ScanerEquipment* GetScanerEquipment() const { return scaner_equipment; };
+        	ScanerEquipment* GetNewScanerEquipmentTemplate(int id = NONE_ID) const; 
+                ScanerEquipment* GetNewScanerEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int scan_orig = NONE_ID) const;
         	 		                
         private:
-                ScanerEquipment* scaner_equipment;
+                void CreateNewInternals(ScanerEquipment*, int, int, int) const;
                 
 		ScanerEquipmentBuilder() {};
 		ScanerEquipmentBuilder(const ScanerEquipmentBuilder&) = delete;
