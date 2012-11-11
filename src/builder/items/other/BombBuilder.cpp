@@ -17,7 +17,7 @@
 */
 
 #include "BombBuilder.hpp"
-
+#include "../../../items/others/Bomb.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/EntityManager.hpp"
@@ -33,8 +33,10 @@ BombBuilder& BombBuilder::Instance()
 BombBuilder::~BombBuilder()
 {}
 
-void BombBuilder::CreateNewBomb(int id)
+Bomb* BombBuilder::GetNewBombTemplate(int id) const
 {
+	Bomb* bomb = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -49,13 +51,23 @@ void BombBuilder::CreateNewBomb(int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         EntityManager::Instance().RegisterEntity(bomb);
+        
+        return bomb;
+} 
+
+Bomb* BombBuilder::GetNewBomb(int damage, int radius) const
+{
+	Bomb* bomb = GetNewBombTemplate();
+	CreateNewInternals(bomb, damage, radius);
+        
+        return bomb;
 } 
         	
-void BombBuilder::CreateNewInternals()
+void BombBuilder::CreateNewInternals(Bomb* bomb, int damage, int radius) const
 {     
 	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BOMB_ID); 
-	int damage = 300;
-        int radius = 300;
+	damage = 300;
+        radius = 300;
         
 	bomb->SetTextureOb(texOb);
 	bomb->SetDamage(damage);

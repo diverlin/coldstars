@@ -17,6 +17,7 @@
 */
 
 #include "ProtectorModuleBuilder.hpp"
+#include "../../../items/modules/ProtectorModule.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/EntityManager.hpp"
 #include "../../../common/Logger.hpp"
@@ -32,8 +33,10 @@ ProtectorModuleBuilder& ProtectorModuleBuilder::Instance()
 ProtectorModuleBuilder::~ProtectorModuleBuilder()
 {}
 
-void ProtectorModuleBuilder::CreateNewProtectorModule(int id)
+ProtectorModule* ProtectorModuleBuilder::GetNewProtectorModuleTemplate(int id) const
 {
+	ProtectorModule* protector_module = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -49,12 +52,22 @@ void ProtectorModuleBuilder::CreateNewProtectorModule(int id)
         }
         
         EntityManager::Instance().RegisterEntity(protector_module);
+        
+        return protector_module;
+} 
+
+ProtectorModule* ProtectorModuleBuilder::GetNewProtectorModule(int protection_add) const
+{
+	ProtectorModule* protector_module = GetNewProtectorModuleTemplate();
+	CreateNewInternals(protector_module, protection_add);
+        
+        return protector_module;
 } 
         	
-void ProtectorModuleBuilder::CreateNewInternals()
+void ProtectorModuleBuilder::CreateNewInternals(ProtectorModule* protector_module, int protection_add) const
 {     
     	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-    	int protection_add = getRandInt(MODULE::PROTECTOR::PROTECTION_MIN, MODULE::PROTECTOR::PROTECTION_MAX);
+    	protection_add = getRandInt(MODULE::PROTECTOR::PROTECTION_MIN, MODULE::PROTECTOR::PROTECTION_MAX);
     
         protector_module->SetTextureOb(texOb);
         protector_module->SetProtectionAdd(protection_add);

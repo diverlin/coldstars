@@ -1,27 +1,26 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+	
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-
 
 #ifndef SCANERMODULEBUILDER_H
 #define SCANERMODULEBUILDER_H
 
+class ScanerModule;
 #include "../../../common/constants.hpp"
-#include "../../../items/modules/ScanerModule.hpp"
 
 class ScanerModuleBuilder
 {
@@ -29,12 +28,11 @@ class ScanerModuleBuilder
 		static ScanerModuleBuilder& Instance();
 		~ScanerModuleBuilder();
 
-        	void CreateNewScanerModule(int id = NONE_ID); 
-                void CreateNewInternals();
-                ScanerModule* GetScanerModule() const { return scaner_module; };
+        	ScanerModule* GetNewScanerModuleTemplate(int id = NONE_ID) const; 
+                ScanerModule* GetNewScanerModule(int scan_add = NONE_ID) const;
         	 		                
         private:
-                ScanerModule* scaner_module;
+                void CreateNewInternals(ScanerModule*, int) const;
                 
 		ScanerModuleBuilder() {};
 		ScanerModuleBuilder(const ScanerModuleBuilder&) = delete;

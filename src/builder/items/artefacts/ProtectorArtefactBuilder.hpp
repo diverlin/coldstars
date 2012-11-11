@@ -19,7 +19,7 @@
 #ifndef PROTECTORARTEFACTBUILDER_H
 #define PROTECTORARTEFACTBUILDER_H
 
-#include "../../../items/artefacts/ProtectorArtefact.hpp"
+class ProtectorArtefact;
 #include "../../../common/constants.hpp"
 
 class ProtectorArtefactBuilder
@@ -28,12 +28,11 @@ class ProtectorArtefactBuilder
 		static ProtectorArtefactBuilder& Instance();
 		~ProtectorArtefactBuilder();
 
-        	void CreateNewProtectorArtefact(int id = NONE_ID); 
-                void CreateNewInternals();
-                ProtectorArtefact* GetProtectorArtefact() const { return protector_artefact; };
+        	ProtectorArtefact* GetNewProtectorArtefactTemplate(int id = NONE_ID) const;
+                ProtectorArtefact* GetNewProtectorArtefact(int protection = NONE_ID) const;
         	 		                
         private:
-                ProtectorArtefact* protector_artefact;
+                void CreateNewInternals(ProtectorArtefact*, int) const;
                 
 		ProtectorArtefactBuilder() {};
 		ProtectorArtefactBuilder(const ProtectorArtefactBuilder&) = delete;

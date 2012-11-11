@@ -36,6 +36,7 @@
 #include "../items/equipment/RocketEquipment.hpp"
 #include "../items/equipment/ScanerEquipment.hpp"
 #include "../items/equipment/EnergizerEquipment.hpp"
+#include "../items/equipment/FreezerEquipment.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -156,9 +157,7 @@ void StoreBuilder::PutRandomEquipment()
 
         for (unsigned int fii = 0; fii < freezer_num; fii++)
         { 
-   		FreezerEquipmentBuilder::Instance().CreateNewFreezerEquipment();
-        	FreezerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
-   		store->AddItem(FreezerEquipmentBuilder::Instance().GetFreezerEquipment()); 
+   		store->AddItem(FreezerEquipmentBuilder::Instance().GetNewFreezerEquipment()); 
         }
 
         for (unsigned int ebi = 0; ebi < energyBlock_num; ebi++) 

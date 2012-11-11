@@ -17,6 +17,7 @@
 */
 
 #include "GravityArtefactBuilder.hpp"
+#include "../../../items/artefacts/GravityArtefact.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/EntityManager.hpp"
@@ -32,8 +33,10 @@ GravityArtefactBuilder& GravityArtefactBuilder::Instance()
 GravityArtefactBuilder::~GravityArtefactBuilder()
 {}
 
-void GravityArtefactBuilder::CreateNewGravityArtefact(int id)
+GravityArtefact* GravityArtefactBuilder::GetNewGravityArtefactTemplate(int id) const
 {
+	GravityArtefact* gravity_artefact = NULL;
+
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -48,21 +51,23 @@ void GravityArtefactBuilder::CreateNewGravityArtefact(int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         EntityManager::Instance().RegisterEntity(gravity_artefact);
+        
+        return gravity_artefact;
 } 
-        	
-void GravityArtefactBuilder::CreateNewInternals()
+    
+GravityArtefact* GravityArtefactBuilder::GetNewGravityArtefact(int gravity) const
+{
+	GravityArtefact* gravity_artefact = GetNewGravityArtefactTemplate();
+	CreateNewInternals(gravity_artefact, gravity);	
+        
+        return gravity_artefact;
+} 
+    	
+void GravityArtefactBuilder::CreateNewInternals(GravityArtefact* gravity_artefact, int gravity) const
 {     
-        //if (race_id == -1)
-       		int race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
-
-    	//if (revision_id == -1)
-       		int revision_id = TECHLEVEL::L0_ID; 
-
-    	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
-
     	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BAK_EQUIPMENT_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
-    	int gravity = getRandInt(ARTEFACT::GRAVITY::GRAVITYRATE_MIN, ARTEFACT::GRAVITY::GRAVITYRATE_MAX);
+    	gravity = getRandInt(ARTEFACT::GRAVITY::GRAVITYRATE_MIN, ARTEFACT::GRAVITY::GRAVITYRATE_MAX);
 
       	ItemCommonData common_data;
     	common_data.deterioration_normal = 1;

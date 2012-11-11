@@ -17,6 +17,7 @@
 */
 
 #include "ProtectorArtefactBuilder.hpp"
+#include "../../../items/artefacts/ProtectorArtefact.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/EntityManager.hpp"
@@ -32,8 +33,10 @@ ProtectorArtefactBuilder& ProtectorArtefactBuilder::Instance()
 ProtectorArtefactBuilder::~ProtectorArtefactBuilder()
 {}
 
-void ProtectorArtefactBuilder::CreateNewProtectorArtefact(int id)
+ProtectorArtefact* ProtectorArtefactBuilder::GetNewProtectorArtefactTemplate(int id) const
 {
+	ProtectorArtefact* protector_artefact = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -48,21 +51,23 @@ void ProtectorArtefactBuilder::CreateNewProtectorArtefact(int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         EntityManager::Instance().RegisterEntity(protector_artefact);
+        
+        return protector_artefact;
 } 
-        	
-void ProtectorArtefactBuilder::CreateNewInternals()
-{     
-        //if (race_id == -1)
-       		int race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
-
-    	//if (revision_id == -1)
-       		int revision_id = TECHLEVEL::L0_ID; 
-
-    	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
-
+   
+ProtectorArtefact* ProtectorArtefactBuilder::GetNewProtectorArtefact(int protection) const
+{
+	ProtectorArtefact* protector_artefact = GetNewProtectorArtefactTemplate();
+	CreateNewInternals(protector_artefact, protection);	
+        
+        return protector_artefact;
+} 
+     	
+void ProtectorArtefactBuilder::CreateNewInternals(ProtectorArtefact* protector_artefact, int protection) const
+{ 
     	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BAK_EQUIPMENT_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
-    	int protection = getRandInt(ARTEFACT::PROTECTOR::PROTECTION_MIN, ARTEFACT::PROTECTOR::PROTECTION_MAX);
+    	protection = getRandInt(ARTEFACT::PROTECTOR::PROTECTION_MIN, ARTEFACT::PROTECTOR::PROTECTION_MAX);
 
       	ItemCommonData common_data;
     	common_data.deterioration_normal = 1;

@@ -17,6 +17,7 @@
 */
 
 #include "FreezerEquipmentBuilder.hpp"
+#include "../../../items/equipment/FreezerEquipment.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/EntityManager.hpp"
@@ -32,8 +33,10 @@ FreezerEquipmentBuilder& FreezerEquipmentBuilder::Instance()
 FreezerEquipmentBuilder::~FreezerEquipmentBuilder()
 {}
 
-void FreezerEquipmentBuilder::CreateNewFreezerEquipment(int id)
+FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipmentTemplate(int id) const
 {
+	FreezerEquipment* freezer_equipment = NULL;
+
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -48,22 +51,42 @@ void FreezerEquipmentBuilder::CreateNewFreezerEquipment(int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         EntityManager::Instance().RegisterEntity(freezer_equipment);
+        
+        return freezer_equipment;
 } 
-        	
-void FreezerEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
+    
+FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipment(int tech_level, int race_id, int freeze_orig) const
+{
+	FreezerEquipment* freezer_equipment = GetNewFreezerEquipmentTemplate();
+        CreateNewInternals(freezer_equipment, tech_level, race_id, freeze_orig);
+        
+        return freezer_equipment;
+} 
+    	
+void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equipment, int tech_level, int race_id, int freeze_orig) const
 {     
-    	if (race_id == -1)
-       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+        if (race_id == NONE_ID)
+        {
+       		race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+	}
+	
+    	if (tech_level == NONE_ID)
+    	{
+       		tech_level = 1; 
+	}
 
-    	if (revision_id == -1)
-       		revision_id = TECHLEVEL::L0_ID; 
-
-    	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
+	float tech_rate = 1.0f;
+	if (tech_level > 1)
+	{
+		tech_rate = tech_level * EQUIPMENT::TECHLEVEL_RATE;
+	}
+	
+    	tech_rate *= 1; //getRaceTechRate(race_id); 
 
     	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::FREEZER_EQUIPMENT_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
 
-    	int freeze_orig     = getRandInt(EQUIPMENT::FREEZER::FREEZE_MIN, EQUIPMENT::FREEZER::FREEZE_MAX);
+    	freeze_orig     = getRandInt(EQUIPMENT::FREEZER::FREEZE_MIN, EQUIPMENT::FREEZER::FREEZE_MAX);
     	
     	ItemCommonData common_data;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::FREEZER::MODULES_NUM_MIN, EQUIPMENT::FREEZER::MODULES_NUM_MAX);

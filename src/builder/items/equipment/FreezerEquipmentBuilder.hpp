@@ -20,7 +20,7 @@
 #ifndef FREEZEREQUIPMENTBUILDER_H
 #define FREEZEREQUIPMENTBUILDER_H
 
-#include "../../../items/equipment/FreezerEquipment.hpp"
+class FreezerEquipment;
 #include "../../../common/constants.hpp"
 
 class FreezerEquipmentBuilder
@@ -28,13 +28,12 @@ class FreezerEquipmentBuilder
 	public:
 		static FreezerEquipmentBuilder& Instance();
 		~FreezerEquipmentBuilder();
-
-        	void CreateNewFreezerEquipment(int id = NONE_ID); 
-                void CreateNewInternals(int race_id, int revision_id = -1);
-                FreezerEquipment* GetFreezerEquipment() const { return freezer_equipment; };
+		
+        	FreezerEquipment* GetNewFreezerEquipmentTemplate(int id = NONE_ID) const; 
+                FreezerEquipment* GetNewFreezerEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int freeze_orig = NONE_ID) const;
         	 		                
         private:
-                FreezerEquipment* freezer_equipment;
+                void CreateNewInternals(FreezerEquipment*, int, int, int) const;
                 
 		FreezerEquipmentBuilder() {};
 		FreezerEquipmentBuilder(const FreezerEquipmentBuilder&) = delete;
