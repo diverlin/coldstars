@@ -17,6 +17,7 @@
 */
 
 #include "RocketModuleBuilder.hpp"
+#include "../../../items/modules/RocketModule.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/EntityManager.hpp"
 #include "../../../common/Logger.hpp"
@@ -32,8 +33,10 @@ RocketModuleBuilder& RocketModuleBuilder::Instance()
 RocketModuleBuilder::~RocketModuleBuilder()
 {}
 
-void RocketModuleBuilder::CreateNewRocketModule(int id)
+RocketModule* RocketModuleBuilder::GetNewRocketModuleTemplate(int id) const
 {
+	RocketModule* rocket_module = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -49,14 +52,24 @@ void RocketModuleBuilder::CreateNewRocketModule(int id)
         }
         
         EntityManager::Instance().RegisterEntity(rocket_module);
+        
+        return rocket_module;
 } 
-        	
-void RocketModuleBuilder::CreateNewInternals()
+  
+RocketModule* RocketModuleBuilder::GetNewRocketModule(int ammo_max_add, int damage_add, int radius_add) const
+{
+	RocketModule* rocket_module = GetNewRocketModuleTemplate();
+	CreateNewInternals(rocket_module, ammo_max_add, damage_add, radius_add);	
+        
+        return rocket_module;
+} 
+      	
+void RocketModuleBuilder::CreateNewInternals(RocketModule* rocket_module, int ammo_max_add, int damage_add, int radius_add) const
 {     
     	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-    	int ammo_max_add = getRandInt(MODULE::ROCKET::AMMO_MIN, MODULE::ROCKET::AMMO_MAX);
-    	int damage_add = getRandInt(MODULE::ROCKET::DAMAGE_MIN, MODULE::ROCKET::DAMAGE_MAX);
-    	int radius_add = getRandInt(MODULE::ROCKET::RADIUS_MIN, MODULE::ROCKET::RADIUS_MAX);
+    	ammo_max_add = getRandInt(MODULE::ROCKET::AMMO_MIN, MODULE::ROCKET::AMMO_MAX);
+    	damage_add = getRandInt(MODULE::ROCKET::DAMAGE_MIN, MODULE::ROCKET::DAMAGE_MAX);
+    	radius_add = getRandInt(MODULE::ROCKET::RADIUS_MIN, MODULE::ROCKET::RADIUS_MAX);
     
         rocket_module->SetTextureOb(texOb);
         rocket_module->SetAmmoMaxAdd(ammo_max_add);

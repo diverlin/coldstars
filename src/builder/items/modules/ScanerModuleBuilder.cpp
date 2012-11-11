@@ -17,6 +17,7 @@
 */
 
 #include "ScanerModuleBuilder.hpp"
+#include "../../../items/modules/ScanerModule.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/EntityManager.hpp"
 #include "../../../common/Logger.hpp"
@@ -32,8 +33,10 @@ ScanerModuleBuilder& ScanerModuleBuilder::Instance()
 ScanerModuleBuilder::~ScanerModuleBuilder()
 {}
 
-void ScanerModuleBuilder::CreateNewScanerModule(int id)
+ScanerModule* ScanerModuleBuilder::GetNewScanerModuleTemplate(int id) const
 {
+	ScanerModule* scaner_module = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -49,12 +52,22 @@ void ScanerModuleBuilder::CreateNewScanerModule(int id)
         }
         
         EntityManager::Instance().RegisterEntity(scaner_module);
+        
+        return scaner_module;
 } 
-        	
-void ScanerModuleBuilder::CreateNewInternals()
+
+ScanerModule* ScanerModuleBuilder::GetNewScanerModule(int scan_add) const
+{
+	ScanerModule* scaner_module = GetNewScanerModuleTemplate();	
+	CreateNewInternals(scaner_module, scan_add);
+        
+        return scaner_module;
+} 
+       	
+void ScanerModuleBuilder::CreateNewInternals(ScanerModule* scaner_module, int scan_add) const
 {     
     	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-    	int scan_add = getRandInt(MODULE::SCANER::SCAN_MIN, MODULE::SCANER::SCAN_MAX);
+    	scan_add = getRandInt(MODULE::SCANER::SCAN_MIN, MODULE::SCANER::SCAN_MAX);
     
         scaner_module->SetTextureOb(texOb);
         scaner_module->SetScanAdd(scan_add);

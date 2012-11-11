@@ -17,6 +17,7 @@
 */
 
 #include "LazerModuleBuilder.hpp"
+#include "../../../items/modules/LazerModule.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/EntityManager.hpp"
 #include "../../../common/Logger.hpp"
@@ -32,8 +33,10 @@ LazerModuleBuilder& LazerModuleBuilder::Instance()
 LazerModuleBuilder::~LazerModuleBuilder()
 {}
 
-void LazerModuleBuilder::CreateNewLazerModule(int id)
+LazerModule* LazerModuleBuilder::GetNewLazerModuleTemplate(int id) const
 {
+	LazerModule* lazer_module = NULL;
+
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -49,13 +52,23 @@ void LazerModuleBuilder::CreateNewLazerModule(int id)
         }
         
         EntityManager::Instance().RegisterEntity(lazer_module);
+        
+        return lazer_module;
+} 
+
+LazerModule* LazerModuleBuilder::GetNewLazerModule(int damage_add, int radius_add) const
+{
+	LazerModule* lazer_module = GetNewLazerModuleTemplate();
+	CreateNewInternals(lazer_module, damage_add, radius_add);
+        
+        return lazer_module;
 } 
         	
-void LazerModuleBuilder::CreateNewInternals()
+void LazerModuleBuilder::CreateNewInternals(LazerModule* lazer_module, int damage_add, int radius_add) const
 {     
     	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-    	int damage_add = getRandInt(MODULE::LAZER::DAMAGE_MIN, MODULE::LAZER::DAMAGE_MAX);
-    	int radius_add = getRandInt(MODULE::LAZER::RADIUS_MIN, MODULE::LAZER::RADIUS_MAX);
+    	damage_add = getRandInt(MODULE::LAZER::DAMAGE_MIN, MODULE::LAZER::DAMAGE_MAX);
+    	radius_add = getRandInt(MODULE::LAZER::RADIUS_MIN, MODULE::LAZER::RADIUS_MAX);
     
         lazer_module->SetTextureOb(texOb);
         lazer_module->SetDamageAdd(damage_add);

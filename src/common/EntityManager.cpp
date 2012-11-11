@@ -84,6 +84,22 @@
 #include "../items/equipment/RocketEquipment.hpp"
 #include "../items/equipment/ScanerEquipment.hpp"
 #include "../items/equipment/EnergizerEquipment.hpp"
+#include "../items/equipment/FreezerEquipment.hpp"
+
+#include "../items/modules/BakModule.hpp"
+#include "../items/modules/DriveModule.hpp"
+#include "../items/modules/DroidModule.hpp"
+#include "../items/modules/GrappleModule.hpp"
+#include "../items/modules/LazerModule.hpp"
+#include "../items/modules/ProtectorModule.hpp"
+#include "../items/modules/RadarModule.hpp"
+#include "../items/modules/RocketModule.hpp"
+#include "../items/modules/ScanerModule.hpp"
+
+#include "../items/others/Bomb.hpp"
+
+#include "../items/artefacts/GravityArtefact.hpp"
+#include "../items/artefacts/ProtectorArtefact.hpp"
 
 EntityManager& EntityManager::Instance()
 {
@@ -234,8 +250,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading gravity_artefact...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("gravity_artefact"))
 		{
-			GravityArtefactBuilder::Instance().CreateNewGravityArtefact(v.second.get<int>("data_id.id"));
-			GravityArtefact* gravity_artefact = GravityArtefactBuilder::Instance().GetGravityArtefact();
+			GravityArtefact* gravity_artefact = GravityArtefactBuilder::Instance().GetNewGravityArtefactTemplate(v.second.get<int>("data_id.id"));
                 	gravity_artefact->LoadData(v.second);
 		}
 	} 	
@@ -245,8 +260,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading protector_artefact...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("protector_artefact"))
 		{
-			ProtectorArtefactBuilder::Instance().CreateNewProtectorArtefact(v.second.get<int>("data_id.id"));
-			ProtectorArtefact* protector_artefact = ProtectorArtefactBuilder::Instance().GetProtectorArtefact();
+			ProtectorArtefact* protector_artefact = ProtectorArtefactBuilder::Instance().GetNewProtectorArtefactTemplate(v.second.get<int>("data_id.id"));
                 	protector_artefact->LoadData(v.second);
 		}
 	} 	
@@ -257,8 +271,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading bak_modules...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("bak_module"))
 		{
-			BakModuleBuilder::Instance().CreateNewBakModule(v.second.get<int>("data_id.id"));
-			BakModule* bak_module = BakModuleBuilder::Instance().GetBakModule();
+			BakModule* bak_module = BakModuleBuilder::Instance().GetNewBakModuleTemplate(v.second.get<int>("data_id.id"));
                 	bak_module->LoadData(v.second);
 		}
 	} 	
@@ -268,8 +281,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading drive_modules...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("drive_module"))
 		{
-			DriveModuleBuilder::Instance().CreateNewDriveModule(v.second.get<int>("data_id.id"));
-			DriveModule* drive_module = DriveModuleBuilder::Instance().GetDriveModule();
+			DriveModule* drive_module = DriveModuleBuilder::Instance().GetNewDriveModuleTemplate(v.second.get<int>("data_id.id"));
                 	drive_module->LoadData(v.second);
 		}
 	} 	
@@ -279,8 +291,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading droid_modules...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("droid_module"))
 		{
-			DroidModuleBuilder::Instance().CreateNewDroidModule(v.second.get<int>("data_id.id"));
-			DroidModule* droid_module = DroidModuleBuilder::Instance().GetDroidModule();
+			DroidModule* droid_module = DroidModuleBuilder::Instance().GetNewDroidModuleTemplate(v.second.get<int>("data_id.id"));
                 	droid_module->LoadData(v.second);
 		}
 	} 	
@@ -290,8 +301,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading grapple_modules...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("grapple_module"))
 		{
-			GrappleModuleBuilder::Instance().CreateNewGrappleModule(v.second.get<int>("data_id.id"));
-			GrappleModule* grapple_module = GrappleModuleBuilder::Instance().GetGrappleModule();
+			GrappleModule* grapple_module = GrappleModuleBuilder::Instance().GetNewGrappleModuleTemplate(v.second.get<int>("data_id.id"));
                 	grapple_module->LoadData(v.second);
 		}
 	} 	
@@ -301,8 +311,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading lazer_modules...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("lazer_module"))
 		{
-			LazerModuleBuilder::Instance().CreateNewLazerModule(v.second.get<int>("data_id.id"));
-			LazerModule* lazer_module = LazerModuleBuilder::Instance().GetLazerModule();
+			LazerModule* lazer_module = LazerModuleBuilder::Instance().GetNewLazerModuleTemplate(v.second.get<int>("data_id.id"));
                 	lazer_module->LoadData(v.second);
 		}
 	} 	
@@ -312,8 +321,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading protector_modules...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("protector_module"))
 		{
-			ProtectorModuleBuilder::Instance().CreateNewProtectorModule(v.second.get<int>("data_id.id"));
-			ProtectorModule* protector_module = ProtectorModuleBuilder::Instance().GetProtectorModule();
+			ProtectorModule* protector_module = ProtectorModuleBuilder::Instance().GetNewProtectorModuleTemplate(v.second.get<int>("data_id.id"));
                 	protector_module->LoadData(v.second);
 		}
 	} 	
@@ -323,8 +331,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading radar_modules...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("radar_module"))
 		{
-			RadarModuleBuilder::Instance().CreateNewRadarModule(v.second.get<int>("data_id.id"));
-			RadarModule* radar_module = RadarModuleBuilder::Instance().GetRadarModule();
+			RadarModule* radar_module = RadarModuleBuilder::Instance().GetNewRadarModuleTemplate(v.second.get<int>("data_id.id"));
                 	radar_module->LoadData(v.second);
 		}
 	} 
@@ -334,8 +341,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading rocket_modules...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("rocket_module"))
 		{
-			RocketModuleBuilder::Instance().CreateNewRocketModule(v.second.get<int>("data_id.id"));
-			RocketModule* rocket_module = RocketModuleBuilder::Instance().GetRocketModule();
+			RocketModule* rocket_module = RocketModuleBuilder::Instance().GetNewRocketModuleTemplate(v.second.get<int>("data_id.id"));
                 	rocket_module->LoadData(v.second);
 		}
 	} 
@@ -345,8 +351,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading scaner_modules...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("scaner_module"))
 		{
-			ScanerModuleBuilder::Instance().CreateNewScanerModule(v.second.get<int>("data_id.id"));
-			ScanerModule* scaner_module = ScanerModuleBuilder::Instance().GetScanerModule();
+			ScanerModule* scaner_module = ScanerModuleBuilder::Instance().GetNewScanerModuleTemplate(v.second.get<int>("data_id.id"));
                 	scaner_module->LoadData(v.second);
 		}
 	} 
@@ -397,8 +402,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading freezer_equipments...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("freezer_equipment"))
 		{
-			FreezerEquipmentBuilder::Instance().CreateNewFreezerEquipment(v.second.get<int>("data_id.id"));
-			FreezerEquipment* freezer_equipment = FreezerEquipmentBuilder::Instance().GetFreezerEquipment();
+			FreezerEquipment* freezer_equipment = FreezerEquipmentBuilder::Instance().GetNewFreezerEquipmentTemplate(v.second.get<int>("data_id.id"));
                 	freezer_equipment->LoadData(v.second);
 		}
 	}
@@ -469,8 +473,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading bombs...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("bomb"))
 		{
-			BombBuilder::Instance().CreateNewBomb(v.second.get<int>("data_id.id"));
-			Bomb* bomb = BombBuilder::Instance().GetBomb();
+			Bomb* bomb = BombBuilder::Instance().GetNewBombTemplate(v.second.get<int>("data_id.id"));
                 	bomb->LoadData(v.second);
 		}
 	}

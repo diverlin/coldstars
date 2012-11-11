@@ -17,6 +17,7 @@
 */
 
 #include "DriveModuleBuilder.hpp"
+#include "../../../items/modules/DriveModule.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/EntityManager.hpp"
 #include "../../../common/Logger.hpp"
@@ -32,8 +33,10 @@ DriveModuleBuilder& DriveModuleBuilder::Instance()
 DriveModuleBuilder::~DriveModuleBuilder()
 {}
 
-void DriveModuleBuilder::CreateNewDriveModule(int id)
+DriveModule* DriveModuleBuilder::GetNewDriveModuleTemplate(int id) const
 {
+	DriveModule* drive_module = NULL;
+
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -49,13 +52,23 @@ void DriveModuleBuilder::CreateNewDriveModule(int id)
         }
         
         EntityManager::Instance().RegisterEntity(drive_module);
+        
+        return drive_module;
+} 
+
+DriveModule* DriveModuleBuilder::GetNewDriveModule(int speed_add, int hyper_add) const
+{
+	DriveModule* drive_module = GetNewDriveModuleTemplate();
+	CreateNewInternals(drive_module, speed_add, hyper_add);
+        
+        return drive_module;
 } 
         	
-void DriveModuleBuilder::CreateNewInternals()
+void DriveModuleBuilder::CreateNewInternals(DriveModule* drive_module, int speed_add, int hyper_add) const
 {     
     	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-    	int speed_add = getRandInt(MODULE::DRIVE::SPEED_MIN, MODULE::DRIVE::SPEED_MAX);
-    	int hyper_add = getRandInt(MODULE::DRIVE::HYPER_MIN, MODULE::DRIVE::HYPER_MAX);
+    	speed_add = getRandInt(MODULE::DRIVE::SPEED_MIN, MODULE::DRIVE::SPEED_MAX);
+    	hyper_add = getRandInt(MODULE::DRIVE::HYPER_MIN, MODULE::DRIVE::HYPER_MAX);
     
         drive_module->SetTextureOb(texOb);
     	drive_module->SetSpeedAdd(speed_add);

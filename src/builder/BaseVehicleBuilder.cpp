@@ -29,6 +29,13 @@
 #include "../items/equipment/RocketEquipment.hpp"
 #include "../items/equipment/ScanerEquipment.hpp"
 
+#include "../items/modules/DroidModule.hpp"
+
+#include "../items/others/Bomb.hpp"
+
+#include "../items/artefacts/GravityArtefact.hpp"
+#include "../items/artefacts/ProtectorArtefact.hpp"
+
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
 #include "../builder/items/equipment/GrappleEquipmentBuilder.hpp"
@@ -150,13 +157,8 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
     	vehicle->GetDriveComplex().GetDriveSlot()->InsertItem(DriveEquipmentBuilder::Instance().GetNewDriveEquipment(tech_level)); 
     	vehicle->GetDriveComplex().GetBakSlot()->InsertItem(BakEquipmentBuilder::Instance().GetNewBakEquipment(tech_level)); 
         
-        //EnergizerEquipmentBuilder::Instance().CreateNewEnergizerEquipment();
-        //EnergizerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
-    	//vehicle->GetEnergizerSlot()->InsertItem(EnergizerEquipmentBuilder::Instance().GetEnergizerEquipment());     
-
- 	//FreezerEquipmentBuilder::Instance().CreateNewFreezerEquipment();
-        //FreezerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
-   	//vehicle->GetFreezerSlot()->InsertItem(FreezerEquipmentBuilder::Instance().GetFreezerEquipment());  
+    	//vehicle->GetEnergizerSlot()->InsertItem(EnergizerEquipmentBuilder::Instance().GetNewEnergizerEquipment(tech_level));     
+   	//vehicle->GetFreezerSlot()->InsertItem(FreezerEquipmentBuilder::Instance().GetNewFreezerEquipment(tech_level));  
    	
    	vehicle->GetProtectionComplex().GetProtectorSlot()->InsertItem(ProtectorEquipmentBuilder::Instance().GetNewProtectorEquipment(tech_level)); 
    	
@@ -171,9 +173,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
 
     	for (unsigned int i=0; i<3; i++) 
     	{        
-    	    	DroidModuleBuilder::Instance().CreateNewDroidModule();
-        	DroidModuleBuilder::Instance().CreateNewInternals();
-        	vehicle->AddItemToCargoSlot(DroidModuleBuilder::Instance().GetDroidModule());
+        	vehicle->AddItemToCargoSlot(DroidModuleBuilder::Instance().GetNewDroidModule());
     	}  
     	
     	//for (unsigned int i=0; i<3; i++) 
@@ -185,23 +185,17 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
     	    	
     	for (unsigned int i=0; i<2; i++) 
     	{        
-    	    	BombBuilder::Instance().CreateNewBomb();
-        	BombBuilder::Instance().CreateNewInternals();
-        	vehicle->AddItemToCargoSlot(BombBuilder::Instance().GetBomb());
+        	vehicle->AddItemToCargoSlot(BombBuilder::Instance().GetNewBomb());
     	}   
 
     	for (unsigned int i=0; i<2; i++) 
     	{        
-    	    	GravityArtefactBuilder::Instance().CreateNewGravityArtefact();
-        	GravityArtefactBuilder::Instance().CreateNewInternals();
-        	vehicle->AddItemToCargoSlot(GravityArtefactBuilder::Instance().GetGravityArtefact());
+        	vehicle->AddItemToCargoSlot(GravityArtefactBuilder::Instance().GetNewGravityArtefact());
     	}   
 
     	for (unsigned int i=0; i<2; i++) 
     	{        
-    	    	ProtectorArtefactBuilder::Instance().CreateNewProtectorArtefact();
-        	ProtectorArtefactBuilder::Instance().CreateNewInternals();
-        	vehicle->AddItemToCargoSlot(ProtectorArtefactBuilder::Instance().GetProtectorArtefact());
+        	vehicle->AddItemToCargoSlot(ProtectorArtefactBuilder::Instance().GetNewProtectorArtefact());
     	}   
 }
 

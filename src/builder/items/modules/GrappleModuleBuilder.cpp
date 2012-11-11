@@ -17,6 +17,7 @@
 */
 
 #include "GrappleModuleBuilder.hpp"
+#include "../../../items/modules/GrappleModule.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/EntityManager.hpp"
 #include "../../../common/Logger.hpp"
@@ -32,8 +33,10 @@ GrappleModuleBuilder& GrappleModuleBuilder::Instance()
 GrappleModuleBuilder::~GrappleModuleBuilder()
 {}
 
-void GrappleModuleBuilder::CreateNewGrappleModule(int id)
+GrappleModule* GrappleModuleBuilder::GetNewGrappleModuleTemplate(int id) const
 {
+	GrappleModule* grapple_module = NULL;
+
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -49,14 +52,24 @@ void GrappleModuleBuilder::CreateNewGrappleModule(int id)
         }
         
         EntityManager::Instance().RegisterEntity(grapple_module);
+        
+        return grapple_module;
+} 
+
+GrappleModule* GrappleModuleBuilder::GetNewGrappleModule(int strength_add, int radius_add, int speed_add) const
+{
+	GrappleModule* grapple_module = GetNewGrappleModuleTemplate();
+	CreateNewInternals(grapple_module, strength_add, radius_add, speed_add);
+        
+        return grapple_module;
 } 
         	
-void GrappleModuleBuilder::CreateNewInternals()
+void GrappleModuleBuilder::CreateNewInternals(GrappleModule* grapple_module, int strength_add, int radius_add, int speed_add) const
 {     
     	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-    	int strength_add   = getRandInt(MODULE::GRAPPLE::STRENGTH_MIN, MODULE::GRAPPLE::STRENGTH_MAX);
-    	int radius_add     = getRandInt(MODULE::GRAPPLE::RADIUS_MIN, MODULE::GRAPPLE::RADIUS_MAX);
-    	int speed_add      = getRandInt(MODULE::GRAPPLE::SPEED_MIN, MODULE::GRAPPLE::SPEED_MAX);
+    	strength_add   = getRandInt(MODULE::GRAPPLE::STRENGTH_MIN, MODULE::GRAPPLE::STRENGTH_MAX);
+    	radius_add     = getRandInt(MODULE::GRAPPLE::RADIUS_MIN, MODULE::GRAPPLE::RADIUS_MAX);
+    	speed_add      = getRandInt(MODULE::GRAPPLE::SPEED_MIN, MODULE::GRAPPLE::SPEED_MAX);
     
         grapple_module->SetTextureOb(texOb);
         grapple_module->SetStrengthAdd(strength_add);

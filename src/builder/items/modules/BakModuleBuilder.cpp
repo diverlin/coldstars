@@ -17,6 +17,7 @@
 */
 
 #include "BakModuleBuilder.hpp"
+#include "../../../items/modules/BakModule.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/EntityManager.hpp"
 #include "../../../common/Logger.hpp"
@@ -32,8 +33,10 @@ BakModuleBuilder& BakModuleBuilder::Instance()
 BakModuleBuilder::~BakModuleBuilder()
 {}
 
-void BakModuleBuilder::CreateNewBakModule(int id)
+BakModule* BakModuleBuilder::GetNewBakModuleTemplate(int id) const
 {
+	BakModule* bak_module = NULL;
+
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -49,12 +52,22 @@ void BakModuleBuilder::CreateNewBakModule(int id)
         }
         
         EntityManager::Instance().RegisterEntity(bak_module);
+        
+        return bak_module;
 } 
-        	
-void BakModuleBuilder::CreateNewInternals()
+  
+BakModule* BakModuleBuilder::GetNewBakModule(int fuel_max_add) const
+{
+	BakModule* bak_module = GetNewBakModuleTemplate();
+	CreateNewInternals(bak_module, fuel_max_add);
+	  
+        return bak_module;
+} 
+         	
+void BakModuleBuilder::CreateNewInternals(BakModule* bak_module, int fuel_max_add) const
 {     
     	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-    	int fuel_max_add = getRandInt(MODULE::BAK::FUEL_MIN, MODULE::BAK::FUEL_MAX);
+    	fuel_max_add = getRandInt(MODULE::BAK::FUEL_MIN, MODULE::BAK::FUEL_MAX);
     
         bak_module->SetTextureOb(texOb);
     	bak_module->SetFuelMaxAdd(fuel_max_add);

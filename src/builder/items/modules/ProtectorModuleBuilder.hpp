@@ -1,27 +1,26 @@
 /*
-Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+	
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-
 
 #ifndef PROTECTORMODULEBUILDER_H
 #define PROTECTORMODULEBUILDER_H
 
+class ProtectorModule;
 #include "../../../common/constants.hpp"
-#include "../../../items/modules/ProtectorModule.hpp"
 
 class ProtectorModuleBuilder
 {
@@ -29,12 +28,11 @@ class ProtectorModuleBuilder
 		static ProtectorModuleBuilder& Instance();
 		~ProtectorModuleBuilder();
 
-        	void CreateNewProtectorModule(int id = NONE_ID); 
-                void CreateNewInternals();
-                ProtectorModule* GetProtectorModule() const { return protector_module; };
+        	ProtectorModule* GetNewProtectorModuleTemplate(int id = NONE_ID) const; 
+                ProtectorModule* GetNewProtectorModule(int protection_add = NONE_ID) const;
         	 		                
         private:
-                ProtectorModule* protector_module;
+                void CreateNewInternals(ProtectorModule*, int) const;
                 
 		ProtectorModuleBuilder() {};
 		ProtectorModuleBuilder(const ProtectorModuleBuilder&) = delete;

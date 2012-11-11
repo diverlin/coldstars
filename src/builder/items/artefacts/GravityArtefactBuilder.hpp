@@ -19,7 +19,7 @@
 #ifndef GRAVITYARTEFACTBUILDER_H
 #define GRAVITYARTEFACTBUILDER_H
 
-#include "../../../items/artefacts/GravityArtefact.hpp"
+class GravityArtefact;
 #include "../../../common/constants.hpp"
 
 class GravityArtefactBuilder
@@ -28,13 +28,12 @@ class GravityArtefactBuilder
 		static GravityArtefactBuilder& Instance();
 		~GravityArtefactBuilder();
 
-        	void CreateNewGravityArtefact(int id = NONE_ID); 
-                void CreateNewInternals();
-                GravityArtefact* GetGravityArtefact() const { return gravity_artefact; };
+        	GravityArtefact* GetNewGravityArtefactTemplate(int id = NONE_ID) const; 
+                GravityArtefact* GetNewGravityArtefact(int gravity = NONE_ID) const;
         	 		                
         private:
-                GravityArtefact* gravity_artefact;
-                
+                void CreateNewInternals(GravityArtefact*, int) const;
+                                
 		GravityArtefactBuilder() {};
 		GravityArtefactBuilder(const GravityArtefactBuilder&) = delete;
 		GravityArtefactBuilder& operator=(const GravityArtefactBuilder&) = delete;
