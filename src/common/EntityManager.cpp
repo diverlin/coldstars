@@ -24,6 +24,12 @@
 #include "../common/SaveLoadManager.hpp"
 #include "../common/myStr.hpp"
 
+#include "../spaceobjects/Star.hpp"
+#include "../spaceobjects/Planet.hpp"
+#include "../spaceobjects/Asteroid.hpp"
+#include "../spaceobjects/Container.hpp"
+#include "../spaceobjects/RocketBullet.hpp"
+
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
 #include "../builder/items/equipment/GrappleEquipmentBuilder.hpp"
@@ -100,6 +106,11 @@
 
 #include "../items/artefacts/GravityArtefact.hpp"
 #include "../items/artefacts/ProtectorArtefact.hpp"
+
+#include "../docking/Goverment.hpp"
+#include "../docking/Kosmoport.hpp"
+
+#include "../slots/VehicleSlot.hpp"
 
 EntityManager& EntityManager::Instance()
 {
@@ -219,8 +230,8 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading stars...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("star"))
 		{
-			StarBuilder::Instance().CreateNewStar(v.second.get<int>("data_id.id"));
-			StarBuilder::Instance().GetStar()->LoadData(v.second);
+			Star* star = StarBuilder::Instance().GetNewStarTemplate(v.second.get<int>("data_id.id"));
+			star->LoadData(v.second);
 		}
 	}
 	
@@ -229,8 +240,8 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading planets...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("planet"))
 		{
-			PlanetBuilder::Instance().CreateNewPlanet(v.second.get<int>("data_id.id"));
-			PlanetBuilder::Instance().GetPlanet()->LoadData(v.second);
+			Planet* planet = PlanetBuilder::Instance().GetNewPlanetTemplate(v.second.get<int>("data_id.id"));
+			planet->LoadData(v.second);
 		}
 	}
 
@@ -239,8 +250,8 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading asteroids...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("asteroid"))
 		{
-			AsteroidBuilder::Instance().CreateNewAsteroid(v.second.get<int>("data_id.id"));
-			AsteroidBuilder::Instance().GetAsteroid()->LoadData(v.second);
+			Asteroid* asteroid = AsteroidBuilder::Instance().GetNewAsteroidTemplate(v.second.get<int>("data_id.id"));
+			asteroid->LoadData(v.second);
 		}
 	}
 	
@@ -514,8 +525,8 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading containers...");
         	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("container"))
 		{
-			ContainerBuilder::Instance().CreateNewContainer(v.second.get<int>("data_id.id"));
-			ContainerBuilder::Instance().GetContainer()->LoadData(v.second);
+			Container* container = ContainerBuilder::Instance().GetNewContainerTemplate(v.second.get<int>("data_id.id"));
+			container->LoadData(v.second);
 		}
 	}
 	//
@@ -565,8 +576,8 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading rocketbullets...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("rocketbullet"))
 		{
-			RocketBulletBuilder::Instance().CreateNewRocket(v.second.get<int>("data_id.id"));
-			RocketBulletBuilder::Instance().GetRocket()->LoadData(v.second);
+			RocketBullet* rocket_bullet = RocketBulletBuilder::Instance().GetNewRocketBulletTemplate(v.second.get<int>("data_id.id"));
+			rocket_bullet->LoadData(v.second);
 		}
 	}
 		
@@ -575,8 +586,8 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading kosmoports...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("kosmoport"))
 		{
-			KosmoportBuilder::Instance().CreateNewKosmoport(v.second.get<int>("data_id.id"));
-			KosmoportBuilder::Instance().GetKosmoport()->LoadData(v.second);
+			Kosmoport* kosmoport = KosmoportBuilder::Instance().GetNewKosmoportTemplate(v.second.get<int>("data_id.id"));
+			kosmoport->LoadData(v.second);
 		}
 	}
 
@@ -585,8 +596,8 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading angars...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("angar"))
 		{
-			AngarBuilder::Instance().CreateNewAngar(v.second.get<int>("data_id.id"));
-			AngarBuilder::Instance().GetAngar()->LoadData(v.second);
+			Angar* angar = AngarBuilder::Instance().GetNewAngarTemplate(v.second.get<int>("data_id.id"));
+			angar->LoadData(v.second);
 		}
 	}
 
@@ -595,8 +606,8 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading stores...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("store"))
 		{
-			StoreBuilder::Instance().CreateNewStore(v.second.get<int>("data_id.id"));
-			StoreBuilder::Instance().GetStore()->LoadData(v.second);
+			Store* store = StoreBuilder::Instance().GetNewStoreTemplate(v.second.get<int>("data_id.id"));
+			store->LoadData(v.second);
 		}
 	}
 
@@ -605,8 +616,8 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading shops...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("shop"))
 		{
-			ShopBuilder::Instance().CreateNewShop(v.second.get<int>("data_id.id"));
-			ShopBuilder::Instance().GetShop()->LoadData(v.second);
+			Shop* shop = ShopBuilder::Instance().GetNewShopTemplate(v.second.get<int>("data_id.id"));
+			shop->LoadData(v.second);
 		}
 	}
 
@@ -615,8 +626,8 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading goverments...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("goverment"))
 		{
-			GovermentBuilder::Instance().CreateNewGoverment(v.second.get<int>("data_id.id"));
-			GovermentBuilder::Instance().GetGoverment()->LoadData(v.second);
+			Goverment* goverment = GovermentBuilder::Instance().GetNewGovermentTemplate(v.second.get<int>("data_id.id"));
+			goverment->LoadData(v.second);
 		}
 	}
 

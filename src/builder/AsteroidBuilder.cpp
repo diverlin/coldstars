@@ -17,6 +17,7 @@
 */
 
 #include "AsteroidBuilder.hpp"
+#include "../spaceobjects/Asteroid.hpp"
 #include "../common/id.hpp"
 #include "../common/Logger.hpp"
 #include "../common/EntityManager.hpp"
@@ -33,8 +34,10 @@ AsteroidBuilder& AsteroidBuilder::Instance()
 AsteroidBuilder::~AsteroidBuilder()
 {}
 
-void AsteroidBuilder::CreateNewAsteroid(int id)
+Asteroid* AsteroidBuilder::GetNewAsteroidTemplate(int id) const
 {
+	Asteroid* asteroid = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -49,9 +52,19 @@ void AsteroidBuilder::CreateNewAsteroid(int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         EntityManager::Instance().RegisterEntity(asteroid);
+        
+        return asteroid;
 } 
-        	
-void AsteroidBuilder::CreateNewInternals()
+
+Asteroid* AsteroidBuilder::GetNewAsteroid() const
+{
+	Asteroid* asteroid = GetNewAsteroidTemplate();
+	CreateNewInternals(asteroid);
+        
+        return asteroid;
+} 
+       	
+void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
 {           
 	LifeData data_life;   
 	data_life.armor      = 10;

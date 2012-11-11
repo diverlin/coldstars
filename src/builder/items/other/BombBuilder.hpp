@@ -32,11 +32,11 @@ class BombBuilder
                 Bomb* GetNewBomb(int damage = NONE_ID, int radius = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(Bomb*, int, int) const;
-                
 		BombBuilder() {};
 		BombBuilder(const BombBuilder&) = delete;
 		BombBuilder& operator=(const BombBuilder&) = delete;
+
+                void CreateNewInternals(Bomb*, int, int) const;
 }; 
 
 #endif 

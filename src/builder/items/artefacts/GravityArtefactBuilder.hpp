@@ -32,11 +32,11 @@ class GravityArtefactBuilder
                 GravityArtefact* GetNewGravityArtefact(int gravity = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(GravityArtefact*, int) const;
-                                
 		GravityArtefactBuilder() {};
 		GravityArtefactBuilder(const GravityArtefactBuilder&) = delete;
 		GravityArtefactBuilder& operator=(const GravityArtefactBuilder&) = delete;
+
+                void CreateNewInternals(GravityArtefact*, int) const;
 }; 
 
 

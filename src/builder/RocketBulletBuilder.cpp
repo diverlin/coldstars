@@ -17,6 +17,8 @@
 */
 
 #include "RocketBulletBuilder.hpp"
+#include "../spaceobjects/RocketBullet.hpp"
+
 #include "../common/id.hpp"
 #include "../common/EntityManager.hpp"
 #include "../common/Logger.hpp"
@@ -34,8 +36,10 @@ RocketBulletBuilder& RocketBulletBuilder::Instance()
 RocketBulletBuilder::~RocketBulletBuilder() {}
 
 
-void RocketBulletBuilder::CreateNewRocket(int id)
+RocketBullet* RocketBulletBuilder::GetNewRocketBulletTemplate(int id) const
 {
+	RocketBullet* rocket_bullet = NULL;
+
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -43,35 +47,45 @@ void RocketBulletBuilder::CreateNewRocket(int id)
 
         try 
         { 
-        	rocket = new RocketBullet(id);
+        	rocket_bullet = new RocketBullet(id);
         }
         catch(std::bad_alloc)
         {
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }        
       
-        EntityManager::Instance().RegisterEntity(rocket);
+        EntityManager::Instance().RegisterEntity(rocket_bullet);
+        
+        return rocket_bullet;
 }
 
-void RocketBulletBuilder::CreateNewInternals(const BulletData& data_bullet) 
+RocketBullet* RocketBulletBuilder::GetNewRocketBullet(const BulletData& data_bullet) const
+{
+	RocketBullet* rocket_bullet = GetNewRocketBulletTemplate();
+	CreateNewInternals(rocket_bullet, data_bullet);	
+        
+        return rocket_bullet;
+}
+
+void RocketBulletBuilder::CreateNewInternals(RocketBullet* rocket_bullet, const BulletData& data_bullet) const
 {
 	LifeData data_life;	
         data_life.armor = data_bullet.armor;        
 
-        rocket->SetBulletData(data_bullet);
+        rocket_bullet->SetBulletData(data_bullet);
         
-        rocket->SetLifeData(data_life);
-        rocket->SetTextureOb(TextureManager::Instance().GetRandomTextureOb(TEXTURE::ROCKET_BULLET_ID));
+        rocket_bullet->SetLifeData(data_life);
+        rocket_bullet->SetTextureOb(TextureManager::Instance().GetRandomTextureOb(TEXTURE::ROCKET_BULLET_ID));
          
-        CreateKorpusGeometry(rocket);
+        CreateKorpusGeometry(rocket_bullet);
 
-	rocket->CreateDriveComplexTextureDependedStuff();       
+	rocket_bullet->CreateDriveComplexTextureDependedStuff();       
 }
 
-void RocketBulletBuilder::CreateKorpusGeometry(RocketBullet* rocket) const
+void RocketBulletBuilder::CreateKorpusGeometry(RocketBullet* rocket_bullet) const
 {
-	rocket->RecalculateCollisionRadius();
+	rocket_bullet->RecalculateCollisionRadius();
 
-    	rocket->GetPoints().initMainQuadPoints(rocket->GetTextureOb()->GetFrameWidth(), rocket->GetTextureOb()->GetFrameHeight());
-    	rocket->GetPoints().addMainQuadPoints();
+    	rocket_bullet->GetPoints().initMainQuadPoints(rocket_bullet->GetTextureOb()->GetFrameWidth(), rocket_bullet->GetTextureOb()->GetFrameHeight());
+    	rocket_bullet->GetPoints().addMainQuadPoints();
 }

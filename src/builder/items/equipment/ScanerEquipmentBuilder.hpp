@@ -32,11 +32,11 @@ class ScanerEquipmentBuilder
                 ScanerEquipment* GetNewScanerEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int scan_orig = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(ScanerEquipment*, int, int, int) const;
-                
 		ScanerEquipmentBuilder() {};
 		ScanerEquipmentBuilder(const ScanerEquipmentBuilder&) = delete;
 		ScanerEquipmentBuilder& operator=(const ScanerEquipmentBuilder&) = delete;
+
+                void CreateNewInternals(ScanerEquipment*, int, int, int) const;
 }; 
 
 #endif 

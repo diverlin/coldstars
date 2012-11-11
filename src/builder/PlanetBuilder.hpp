@@ -19,7 +19,7 @@
 #ifndef PLANETBUILDER_H
 #define PLANETBUILDER_H
 
-#include "../spaceobjects/Planet.hpp"
+class Planet;
 #include "../common/constants.hpp"
 
 class PlanetBuilder
@@ -28,16 +28,15 @@ class PlanetBuilder
 		static PlanetBuilder& Instance();
 		~PlanetBuilder();
 
-        	void CreateNewPlanet(int id = NONE_ID); 
-                void CreateNewInternals(float);
-                Planet* GetPlanet() const { return planet; };
+        	Planet* GetNewPlanetTemplate(int id = NONE_ID) const; 
+                Planet* GetNewPlanet(float) const;
         	 		                
         private:
-                Planet* planet;
-                
 		PlanetBuilder() {};
 		PlanetBuilder(const PlanetBuilder&) = delete;
 		PlanetBuilder& operator=(const PlanetBuilder&) = delete;
+
+                void CreateNewInternals(Planet*, float) const;
 }; 
 
 

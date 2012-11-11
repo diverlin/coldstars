@@ -32,11 +32,11 @@ class BakModuleBuilder
                 BakModule* GetNewBakModule(int fuel_max_add = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(BakModule*, int) const;
-                
 		BakModuleBuilder() {};
 		BakModuleBuilder(const BakModuleBuilder&) = delete;
 		BakModuleBuilder& operator=(const BakModuleBuilder&) = delete;
+
+                void CreateNewInternals(BakModule*, int) const;
 }; 
 
 #endif 

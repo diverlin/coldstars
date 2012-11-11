@@ -32,11 +32,11 @@ class RadarEquipmentBuilder
                 RadarEquipment* GetNewRadarEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int radius_orig = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(RadarEquipment*, int, int, int) const;
-                
 		RadarEquipmentBuilder() {};
 		RadarEquipmentBuilder(const RadarEquipmentBuilder&) = delete;
 		RadarEquipmentBuilder& operator=(const RadarEquipmentBuilder&) = delete;
+
+                void CreateNewInternals(RadarEquipment*, int, int, int) const;
 }; 
 
 #endif 

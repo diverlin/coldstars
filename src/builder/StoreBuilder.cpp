@@ -60,8 +60,10 @@ StoreBuilder& StoreBuilder::Instance()
 StoreBuilder::~StoreBuilder()
 {}
 
-void StoreBuilder::CreateNewStore(int id)
+Store* StoreBuilder::GetNewStoreTemplate(int id) const
 {
+	Store* store = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -77,9 +79,20 @@ void StoreBuilder::CreateNewStore(int id)
         }
         
         EntityManager::Instance().RegisterEntity(store);
+        
+        return store;
+} 
+
+Store* StoreBuilder::GetNewStore() const
+{
+	Store* store = GetNewStoreTemplate();
+	CreateNewInternals(store);
+	PutRandomEquipment(store);
+	        
+        return store;
 } 
         	
-void StoreBuilder::CreateNewInternals()
+void StoreBuilder::CreateNewInternals(Store* store) const
 {
         for (unsigned int i=0; i<STORE_ITEM_SLOTS_NUM; i++)
         {
@@ -91,7 +104,7 @@ void StoreBuilder::CreateNewInternals()
 }
 
 
-void StoreBuilder::PutRandomEquipment()
+void StoreBuilder::PutRandomEquipment(Store* store) const
 {
         //int race_id = RACES_GOOD_LIST[getRandInt(0, RACES_GOOD_LIST.size() - 1)];
         //int revision_id = 0;
@@ -110,57 +123,57 @@ void StoreBuilder::PutRandomEquipment()
         unsigned int freezer_num     = 1;
         unsigned int energyBlock_num = 1;
         
-        for (unsigned int lii = 0; lii < lazer_num; lii++)
+        for (unsigned int i=0; i<lazer_num; i++)
         { 
        		store->AddItem(LazerEquipmentBuilder::Instance().GetNewLazerEquipment()); 
         }
 
-        for (unsigned int rii = 0; rii < rocket_num; rii++)
+        for (unsigned int i=0; i<rocket_num; i++)
         { 
        		store->AddItem(RocketEquipmentBuilder::Instance().GetNewRocketEquipment());
         }
 
-        for (unsigned int rii = 0; rii < radar_num; rii++)
+        for (unsigned int i=0; i<radar_num; i++)
         { 
     		store->AddItem(RadarEquipmentBuilder::Instance().GetNewRadarEquipment()); 
         }
 
-        for (unsigned int gii = 0; gii < grapple_num; gii++)
+        for (unsigned int i=0; i<grapple_num; i++)
         { 
       		store->AddItem(GrappleEquipmentBuilder::Instance().GetNewGrappleEquipment()); 
         }
 
-        for (unsigned int dii = 0; dii < drive_num; dii++)
+        for (unsigned int i=0; i<drive_num; i++)
         {        
                 store->AddItem(DriveEquipmentBuilder::Instance().GetNewDriveEquipment());
         }
 
-        for (unsigned int pii = 0; pii < protector_num; pii++)
+        for (unsigned int i=0; i<protector_num; i++)
         { 
    		store->AddItem(ProtectorEquipmentBuilder::Instance().GetNewProtectorEquipment()); 
         }
 
-        for (unsigned int bii = 0; bii < bak_num; bii++)
+        for (unsigned int i=0; i<bak_num; i++)
         { 
                 store->AddItem(BakEquipmentBuilder::Instance().GetNewBakEquipment());
         }
 
-        for (unsigned int dii = 0; dii < droid_num; dii++)
+        for (unsigned int i=0; i<droid_num; i++)
         { 
    		store->AddItem(DroidEquipmentBuilder::Instance().GetNewDroidEquipment()); 
         }
 
-        for (unsigned int sii = 0; sii < scaner_num; sii++)
+        for (unsigned int i=0; i<scaner_num; i++)
         { 
    		store->AddItem(ScanerEquipmentBuilder::Instance().GetNewScanerEquipment()); 
         }
 
-        for (unsigned int fii = 0; fii < freezer_num; fii++)
+        for (unsigned int i=0; i<freezer_num; i++)
         { 
    		store->AddItem(FreezerEquipmentBuilder::Instance().GetNewFreezerEquipment()); 
         }
 
-        for (unsigned int ebi = 0; ebi < energyBlock_num; ebi++) 
+        for (unsigned int i=0; i<energyBlock_num; i++) 
         { 
     		store->AddItem(EnergizerEquipmentBuilder::Instance().GetNewEnergizerEquipment());  
         }

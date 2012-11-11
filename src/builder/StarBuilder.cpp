@@ -17,6 +17,9 @@
 */
 
 #include "StarBuilder.hpp"
+
+#include "../spaceobjects/Star.hpp"
+
 #include "../common/id.hpp"
 #include "../common/EntityManager.hpp"
 #include "../common/Logger.hpp"
@@ -33,8 +36,10 @@ StarBuilder& StarBuilder::Instance()
 StarBuilder::~StarBuilder()
 {}
 
-void StarBuilder::CreateNewStar(int id)
+Star* StarBuilder::GetNewStarTemplate(int id) const
 {
+	Star* star = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -50,9 +55,19 @@ void StarBuilder::CreateNewStar(int id)
         }
         
         EntityManager::Instance().RegisterEntity(star);
+        
+        return star;
 } 
-        	
-void StarBuilder::CreateNewInternals()
+ 
+Star* StarBuilder::GetNewStar() const
+{
+	Star* star = GetNewStarTemplate();
+	CreateNewInternals(star);
+        
+        return star;
+} 
+      	
+void StarBuilder::CreateNewInternals(Star* star) const
 {     
         LifeData data_life;
         data_life.armor = 1000000; 

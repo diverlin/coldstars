@@ -32,11 +32,11 @@ class DroidEquipmentBuilder
                 DroidEquipment* GetNewDroidEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int repair_orig = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(DroidEquipment*, int, int, int) const;
-                
 		DroidEquipmentBuilder() {};
 		DroidEquipmentBuilder(const DroidEquipmentBuilder&) = delete;
 		DroidEquipmentBuilder& operator=(const DroidEquipmentBuilder&) = delete;
+
+                void CreateNewInternals(DroidEquipment*, int, int, int) const;
 }; 
 
 #endif 

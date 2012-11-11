@@ -32,11 +32,11 @@ class BakEquipmentBuilder
                 BakEquipment* GetNewBakEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int fuel_max_orig = NONE_ID) const;
         	 		                
         private:                
-                void CreateNewInternals(BakEquipment*, int, int, int) const;
-                                
 		BakEquipmentBuilder() {};
 		BakEquipmentBuilder(const BakEquipmentBuilder&) = delete;
 		BakEquipmentBuilder& operator=(const BakEquipmentBuilder&) = delete;
+
+                void CreateNewInternals(BakEquipment*, int, int, int) const;
 }; 
 
 

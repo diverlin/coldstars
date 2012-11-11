@@ -19,7 +19,7 @@
 #ifndef STARBUILDER_H
 #define STARBUILDER_H
 
-#include "../spaceobjects/Star.hpp"
+class Star;
 #include "../common/constants.hpp"
 
 class StarBuilder
@@ -28,16 +28,15 @@ class StarBuilder
 		static StarBuilder& Instance();
 		~StarBuilder();
 
-        	void CreateNewStar(int id = NONE_ID); 
-                void CreateNewInternals();
-                Star* GetStar() const { return star; };
+        	Star* GetNewStarTemplate(int id = NONE_ID) const; 
+                Star* GetNewStar() const;
         	 		                
         private:
-                Star* star;
-                
 		StarBuilder() {};
 		StarBuilder(const StarBuilder&) = delete;
 		StarBuilder& operator=(const StarBuilder&) = delete;
+
+                void CreateNewInternals(Star*) const;
 }; 
 
 

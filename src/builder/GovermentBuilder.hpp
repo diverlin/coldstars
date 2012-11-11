@@ -20,7 +20,7 @@
 #ifndef GOVERMENTBUILDER_H
 #define GOVERMENTBUILDER_H
 
-#include "../docking/Goverment.hpp"
+class Goverment;
 #include "../common/constants.hpp"
 
 class GovermentBuilder
@@ -29,16 +29,15 @@ class GovermentBuilder
 		static GovermentBuilder& Instance();
 		~GovermentBuilder();
 
-        	void CreateNewGoverment(int id = NONE_ID); 
-                void CreateNewInternals();
-                Goverment* GetGoverment() const { return goverment; };
+        	Goverment* GetNewGovermentTemplate(int id = NONE_ID) const; 
+                Goverment* GetNewGoverment() const;
                        	 		                
         private:
-                Goverment* goverment;
-                
 		GovermentBuilder() {};
 		GovermentBuilder(const GovermentBuilder&) = delete;
 		GovermentBuilder& operator=(const GovermentBuilder&) = delete;
+		
+		void CreateNewInternals(Goverment*) const;
 }; 
 
 

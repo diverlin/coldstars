@@ -17,6 +17,9 @@
 */
 
 #include "PlanetBuilder.hpp"
+#include "../spaceobjects/Planet.hpp"
+#include "../docking/Kosmoport.hpp"
+
 #include "../common/id.hpp"
 #include "../common/Logger.hpp"
 #include "../common/EntityManager.hpp"
@@ -38,8 +41,10 @@ PlanetBuilder& PlanetBuilder::Instance()
 PlanetBuilder::~PlanetBuilder()
 {}
 
-void PlanetBuilder::CreateNewPlanet(int id)
+Planet* PlanetBuilder::GetNewPlanetTemplate(int id) const
 {
+	Planet* planet = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -55,9 +60,19 @@ void PlanetBuilder::CreateNewPlanet(int id)
         }
         
         EntityManager::Instance().RegisterEntity(planet);
+        
+        return planet;
 } 
-        	
-void PlanetBuilder::CreateNewInternals(float orbit_radius)
+       
+Planet* PlanetBuilder::GetNewPlanet(float orbit_radius) const
+{
+	Planet* planet = GetNewPlanetTemplate();
+        CreateNewInternals(planet, orbit_radius);
+        
+        return planet;
+} 
+ 	
+void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
 {           
         LifeData data_life;
 	data_life.armor = 100000;
@@ -82,9 +97,7 @@ void PlanetBuilder::CreateNewInternals(float orbit_radius)
 	BaseLand* land;
 	if (population > 0) 
 	{ 
-		KosmoportBuilder::Instance().CreateNewKosmoport();
-		KosmoportBuilder::Instance().CreateNewInternals();
-		land = KosmoportBuilder::Instance().GetKosmoport();
+		land = KosmoportBuilder::Instance().GetNewKosmoport();
 	}
         else                
         { 

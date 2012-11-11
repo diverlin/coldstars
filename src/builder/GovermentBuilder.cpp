@@ -18,6 +18,8 @@
 
 #include "GovermentBuilder.hpp"
 
+#include "../docking/Goverment.hpp"
+
 #include "../common/id.hpp"
 #include "../common/Logger.hpp"
 #include "../common/EntityManager.hpp"
@@ -32,8 +34,10 @@ GovermentBuilder& GovermentBuilder::Instance()
 GovermentBuilder::~GovermentBuilder()
 {}
 
-void GovermentBuilder::CreateNewGoverment(int id)
+Goverment* GovermentBuilder::GetNewGovermentTemplate(int id) const
 {
+	Goverment* goverment = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -48,9 +52,19 @@ void GovermentBuilder::CreateNewGoverment(int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         EntityManager::Instance().RegisterEntity(goverment);
+        
+        return goverment;
 } 
-        	
-void GovermentBuilder::CreateNewInternals()
+
+Goverment* GovermentBuilder::GetNewGoverment() const
+{
+	Goverment* goverment = GetNewGovermentTemplate();
+	CreateNewInternals(goverment);
+        
+        return goverment;
+} 
+    	
+void GovermentBuilder::CreateNewInternals(Goverment* goverment) const
 {
 	TextureOb* textureOb_face  = TextureManager::Instance().GetRandomTextureOb(TEXTURE::GOVERMENT_BACKGROUND_ID); 
 	goverment->SetTextureObFace(textureOb_face);

@@ -19,7 +19,7 @@
 #ifndef ANGARBUILDER_H
 #define ANGARBUILDER_H
 
-#include "../docking/Angar.hpp"
+class Angar;
 #include "../common/constants.hpp"
 
 class AngarBuilder
@@ -28,18 +28,16 @@ class AngarBuilder
 		static AngarBuilder& Instance();
 		~AngarBuilder();
 
-        	void CreateNewAngar(int id = NONE_ID); 
-                void CreateNewInternals();
-                Angar* GetAngar() const { return angar; };
+        	Angar* GetNewAngarTemplate(int id = NONE_ID) const; 
+                Angar* GetNewAngar() const;
 
         private:
-                Angar* angar;
-                
-		AngarBuilder():angar(NULL) {};
+		AngarBuilder() {};
 		AngarBuilder(const AngarBuilder&) = delete;
 		AngarBuilder& operator=(const AngarBuilder&) = delete;
-}; 
 
+                void CreateNewInternals(Angar*) const;
+}; 
 
 #endif 
     

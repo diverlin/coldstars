@@ -33,11 +33,11 @@ class DroidModuleBuilder
                 DroidModule* GetNewDroidModule(int repair_add = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(DroidModule*, int) const;
-                
 		DroidModuleBuilder() {};
 		DroidModuleBuilder(const DroidModuleBuilder&) = delete;
 		DroidModuleBuilder& operator=(const DroidModuleBuilder&) = delete;
+
+                void CreateNewInternals(DroidModule*, int) const;
 }; 
 
 #endif 

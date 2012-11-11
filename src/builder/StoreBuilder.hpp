@@ -28,17 +28,16 @@ class StoreBuilder
 		static StoreBuilder& Instance();
 		~StoreBuilder();
 
-        	void CreateNewStore(int id = NONE_ID); 
-                void CreateNewInternals();
-                void PutRandomEquipment();
-                Store* GetStore() const { return store; };
-                       	 		                
+        	Store* GetNewStoreTemplate(int id = NONE_ID) const; 
+                Store* GetNewStore() const;
+                                       	 		                
         private:
-                Store* store;
-                
 		StoreBuilder() {};
 		StoreBuilder(const StoreBuilder&) = delete;
 		StoreBuilder& operator=(const StoreBuilder&) = delete;
+                
+                void CreateNewInternals(Store*) const;
+                void PutRandomEquipment(Store*) const;
 }; 
 
 

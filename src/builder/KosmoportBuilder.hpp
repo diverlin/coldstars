@@ -19,7 +19,7 @@
 #ifndef KOSMOPORTBUILDER_H
 #define KOSMOPORTBUILDER_H
 
-#include "../docking/Kosmoport.hpp"
+class Kosmoport;
 #include "../common/constants.hpp"
 
 class KosmoportBuilder
@@ -28,16 +28,15 @@ class KosmoportBuilder
 		static KosmoportBuilder& Instance();
 		~KosmoportBuilder();
 
-        	void CreateNewKosmoport(int id = NONE_ID); 
-                void CreateNewInternals();
-                Kosmoport* GetKosmoport() const { return kosmoport; };
+        	Kosmoport* GetNewKosmoportTemplate(int id = NONE_ID) const; 
+                Kosmoport* GetNewKosmoport() const;
                        	 		                
         private:
-                Kosmoport* kosmoport;
-                
 		KosmoportBuilder() {};
 		KosmoportBuilder(const KosmoportBuilder&) = delete;
 		KosmoportBuilder& operator=(const KosmoportBuilder&) = delete;
+		
+                void CreateNewInternals(Kosmoport*) const;
 }; 
 
 

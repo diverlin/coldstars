@@ -63,9 +63,9 @@ void Asteroid::PostDeathUniqueEvent(bool show_effect)
                 TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MINERAL_ID);   
                 GoodsPack* goods_pack = GetNewGoodsPack(ENTITY::MINERALS_ID);
                 goods_pack->Increase(4);
-                ContainerBuilder::Instance().CreateNewContainer();
-                ContainerBuilder::Instance().CreateNewInternals(textureOb, goods_pack);
-		starsystem->Add(ContainerBuilder::Instance().GetContainer(), points.GetCenter());
+
+                Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb, goods_pack);
+		starsystem->Add(container, points.GetCenter());
    	}
    	
    	if (show_effect == true)

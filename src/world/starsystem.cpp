@@ -666,10 +666,7 @@ void StarSystem::AsteroidManager_s(unsigned int num)
 {
         while (ASTEROID_vec.size() < num)
         {
-        	AsteroidBuilder::Instance().CreateNewAsteroid();
-        	AsteroidBuilder::Instance().CreateNewInternals();        	        	
-
-                Add(AsteroidBuilder::Instance().GetAsteroid());
+                Add(AsteroidBuilder::Instance().GetNewAsteroid());
                 //break;
         }
 }

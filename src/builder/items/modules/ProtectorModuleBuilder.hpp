@@ -32,11 +32,11 @@ class ProtectorModuleBuilder
                 ProtectorModule* GetNewProtectorModule(int protection_add = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(ProtectorModule*, int) const;
-                
 		ProtectorModuleBuilder() {};
 		ProtectorModuleBuilder(const ProtectorModuleBuilder&) = delete;
 		ProtectorModuleBuilder& operator=(const ProtectorModuleBuilder&) = delete;
+
+                void CreateNewInternals(ProtectorModule*, int) const;
 }; 
 
 #endif 

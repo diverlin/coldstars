@@ -19,7 +19,7 @@
 #ifndef ASTEROIDBUILDER_H
 #define ASTEROIDBUILDER_H
 
-#include "../spaceobjects/Asteroid.hpp"
+class Asteroid;
 #include "../common/constants.hpp"
 
 class AsteroidBuilder
@@ -28,16 +28,15 @@ class AsteroidBuilder
 		static AsteroidBuilder& Instance();
 		~AsteroidBuilder();
 
-        	void CreateNewAsteroid(int id = NONE_ID); 
-                void CreateNewInternals();
-                Asteroid* GetAsteroid() const { return asteroid; };
+        	Asteroid* GetNewAsteroidTemplate(int id = NONE_ID) const; 
+                Asteroid* GetNewAsteroid() const;
         	 		                
         private:
-                Asteroid* asteroid;
-                
 		AsteroidBuilder() {};
 		AsteroidBuilder(const AsteroidBuilder&) = delete;
 		AsteroidBuilder& operator=(const AsteroidBuilder&) = delete;
+
+                void CreateNewInternals(Asteroid*) const;
 }; 
 
 

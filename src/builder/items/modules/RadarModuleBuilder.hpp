@@ -32,11 +32,11 @@ class RadarModuleBuilder
                 RadarModule* GetNewRadarModule(int radius_add = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(RadarModule*, int) const;
-                
 		RadarModuleBuilder() {};
 		RadarModuleBuilder(const RadarModuleBuilder&) = delete;
 		RadarModuleBuilder& operator=(const RadarModuleBuilder&) = delete;
+
+                void CreateNewInternals(RadarModule*, int) const;
 }; 
 
 #endif 

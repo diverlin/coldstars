@@ -18,6 +18,7 @@
 
 #include "SpaceStationBuilder.hpp"
 #include "KosmoportBuilder.hpp"
+#include "../docking/Kosmoport.hpp"
 
 #include "../common/id.hpp"
 #include "../common/EntityManager.hpp"
@@ -103,7 +104,5 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
                 
         CreateItemSlots(spacestation);
                 
-        KosmoportBuilder::Instance().CreateNewKosmoport();
-	KosmoportBuilder::Instance().CreateNewInternals();
-	spacestation->BindLand(KosmoportBuilder::Instance().GetKosmoport());
+	spacestation->BindLand(KosmoportBuilder::Instance().GetNewKosmoport());
 }

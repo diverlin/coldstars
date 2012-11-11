@@ -32,11 +32,11 @@ class RocketModuleBuilder
                 RocketModule* GetNewRocketModule(int ammo_max_add = NONE_ID, int damage_add = NONE_ID, int radius_add = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(RocketModule*, int, int, int) const;
-                
 		RocketModuleBuilder() {};
 		RocketModuleBuilder(const RocketModuleBuilder&) = delete;
 		RocketModuleBuilder& operator=(const RocketModuleBuilder&) = delete;
+
+                void CreateNewInternals(RocketModule*, int, int, int) const;
 }; 
 
 #endif 

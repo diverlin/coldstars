@@ -19,7 +19,7 @@
 #ifndef SHOPBUILDER_H
 #define SHOPBUILDER_H
 
-#include "../docking/Shop.hpp"
+class Shop;
 #include "../common/constants.hpp"
 
 class ShopBuilder
@@ -28,16 +28,15 @@ class ShopBuilder
 		static ShopBuilder& Instance();
 		~ShopBuilder();
 
-        	void CreateNewShop(int id = NONE_ID); 
-                void CreateNewInternals();
-                Shop* GetShop() const { return shop; };
+        	Shop* GetNewShopTemplate(int id = NONE_ID) const; 
+                Shop* GetNewShop() const;
                        	 		                
         private:
-                Shop* shop;
-                
 		ShopBuilder() {};
 		ShopBuilder(const ShopBuilder&) = delete;
 		ShopBuilder& operator=(const ShopBuilder&) = delete;
+		
+		void CreateNewInternals(Shop*) const;
 }; 
 
 

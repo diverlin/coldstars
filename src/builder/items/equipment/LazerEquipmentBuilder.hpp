@@ -32,11 +32,11 @@ class LazerEquipmentBuilder
                 LazerEquipment* GetNewLazerEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(LazerEquipment*, int, int, int, int) const;
-                               
 		LazerEquipmentBuilder() {};
 		LazerEquipmentBuilder(const LazerEquipmentBuilder&) = delete;
 		LazerEquipmentBuilder& operator=(const LazerEquipmentBuilder&) = delete;
+
+                void CreateNewInternals(LazerEquipment*, int, int, int, int) const;
 }; 
 
 #endif 
