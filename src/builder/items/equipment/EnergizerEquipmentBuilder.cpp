@@ -17,6 +17,7 @@
 */
 
 #include "EnergizerEquipmentBuilder.hpp"
+#include "../../../items/equipment/EnergizerEquipment.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/EntityManager.hpp"
@@ -32,8 +33,10 @@ EnergizerEquipmentBuilder& EnergizerEquipmentBuilder::Instance()
 EnergizerEquipmentBuilder::~EnergizerEquipmentBuilder()
 {}
 
-void EnergizerEquipmentBuilder::CreateNewEnergizerEquipment(int id)
+EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipmentTemplate(int id) const
 {
+	EnergizerEquipment* energizer_equipment = NULL;
+
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -48,23 +51,43 @@ void EnergizerEquipmentBuilder::CreateNewEnergizerEquipment(int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         EntityManager::Instance().RegisterEntity(energizer_equipment);
+        
+        return energizer_equipment;
 } 
-        	
-void EnergizerEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
+    
+EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipment(int tech_level, int race_id, int energy_max_orig, int restoration_orig) const
+{
+	EnergizerEquipment* energizer_equipment = GetNewEnergizerEquipmentTemplate();
+	CreateNewInternals(energizer_equipment, tech_level, race_id, energy_max_orig, restoration_orig);
+	        
+        return energizer_equipment;
+} 
+    	
+void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer_equipment, int tech_level, int race_id, int energy_max_orig, int restoration_orig) const
 {     
-        if (race_id == -1)
-       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+        if (race_id == NONE_ID)
+        {
+       		race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+	}
+	
+    	if (tech_level == NONE_ID)
+    	{
+       		tech_level = 1; 
+	}
 
-    	if (revision_id == -1)
-       		revision_id = TECHLEVEL::L0_ID; 
-
-    	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
+	float tech_rate = 1.0f;
+	if (tech_level > 1)
+	{
+		tech_rate = tech_level * EQUIPMENT::TECHLEVEL_RATE;
+	}
+	
+    	tech_rate *= 1; //getRaceTechRate(race_id);   
 
     	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ENERGIZER_EQUIPMENT_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(ENERGIZER_ITEM_TEXTURE_ID, revision_id)
 
-    	int energy_max_orig  = getRandInt(EQUIPMENT::ENERGIZER::ENERGY_MIN,      EQUIPMENT::ENERGIZER::ENERGY_MAX);
-    	int restoration_orig = getRandInt(EQUIPMENT::ENERGIZER::RESTORATION_MIN, EQUIPMENT::ENERGIZER::RESTORATION_MAX);
+    	energy_max_orig  = getRandInt(EQUIPMENT::ENERGIZER::ENERGY_MIN,      EQUIPMENT::ENERGIZER::ENERGY_MAX);
+    	restoration_orig = getRandInt(EQUIPMENT::ENERGIZER::RESTORATION_MIN, EQUIPMENT::ENERGIZER::RESTORATION_MAX);
     	
     	ItemCommonData common_data;
     	common_data.modules_num_max  = getRandInt(EQUIPMENT::ENERGIZER::MODULES_NUM_MIN, EQUIPMENT::ENERGIZER::MODULES_NUM_MAX);
