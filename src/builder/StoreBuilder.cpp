@@ -35,6 +35,7 @@
 #include "../items/equipment/RadarEquipment.hpp"
 #include "../items/equipment/RocketEquipment.hpp"
 #include "../items/equipment/ScanerEquipment.hpp"
+#include "../items/equipment/EnergizerEquipment.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -162,9 +163,7 @@ void StoreBuilder::PutRandomEquipment()
 
         for (unsigned int ebi = 0; ebi < energyBlock_num; ebi++) 
         { 
-        	EnergizerEquipmentBuilder::Instance().CreateNewEnergizerEquipment();
-        	EnergizerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
-    		store->AddItem(EnergizerEquipmentBuilder::Instance().GetEnergizerEquipment());  
+    		store->AddItem(EnergizerEquipmentBuilder::Instance().GetNewEnergizerEquipment());  
         }
 }
 

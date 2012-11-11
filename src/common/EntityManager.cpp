@@ -83,6 +83,7 @@
 #include "../items/equipment/RadarEquipment.hpp"
 #include "../items/equipment/RocketEquipment.hpp"
 #include "../items/equipment/ScanerEquipment.hpp"
+#include "../items/equipment/EnergizerEquipment.hpp"
 
 EntityManager& EntityManager::Instance()
 {
@@ -386,8 +387,7 @@ void EntityManager::LoadPass0()
 		Logger::Instance().Log("loading energizer_equipments...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("energizer_equipment"))
 		{
-			EnergizerEquipmentBuilder::Instance().CreateNewEnergizerEquipment(v.second.get<int>("data_id.id"));
-			EnergizerEquipment* energizer_equipment = EnergizerEquipmentBuilder::Instance().GetEnergizerEquipment();
+			EnergizerEquipment* energizer_equipment = EnergizerEquipmentBuilder::Instance().GetNewEnergizerEquipmentTemplate(v.second.get<int>("data_id.id"));
                 	energizer_equipment->LoadData(v.second);
 		}
 	}

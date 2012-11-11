@@ -19,7 +19,7 @@
 #ifndef ENERGIZEREQUIPMENTBUILDER_H
 #define ENERGIZEREQUIPMENTBUILDER_H
 
-#include "../../../items/equipment/EnergizerEquipment.hpp"
+class EnergizerEquipment;
 #include "../../../common/constants.hpp"
 
 class EnergizerEquipmentBuilder
@@ -28,12 +28,11 @@ class EnergizerEquipmentBuilder
 		static EnergizerEquipmentBuilder& Instance();
 		~EnergizerEquipmentBuilder();
 
-        	void CreateNewEnergizerEquipment(int id = NONE_ID); 
-                void CreateNewInternals(int race_id, int revision_id = -1);
-                EnergizerEquipment* GetEnergizerEquipment() const { return energizer_equipment; };
+        	EnergizerEquipment* GetNewEnergizerEquipmentTemplate(int id = NONE_ID)const; 
+                EnergizerEquipment* GetNewEnergizerEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int energy_max_orig = NONE_ID, int restoration_orig = NONE_ID) const;
         	 		                
         private:
-                EnergizerEquipment* energizer_equipment;
+                void CreateNewInternals(EnergizerEquipment*, int, int, int, int) const;
                 
 		EnergizerEquipmentBuilder() {};
 		EnergizerEquipmentBuilder(const EnergizerEquipmentBuilder&) = delete;
