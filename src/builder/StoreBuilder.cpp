@@ -33,6 +33,8 @@
 #include "../items/equipment/LazerEquipment.hpp"
 #include "../items/equipment/ProtectorEquipment.hpp"
 #include "../items/equipment/RadarEquipment.hpp"
+#include "../items/equipment/RocketEquipment.hpp"
+#include "../items/equipment/ScanerEquipment.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -113,9 +115,7 @@ void StoreBuilder::PutRandomEquipment()
 
         for (unsigned int rii = 0; rii < rocket_num; rii++)
         { 
-    	    	RocketEquipmentBuilder::Instance().CreateNewRocketEquipment();
-        	RocketEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
-       		store->AddItem(RocketEquipmentBuilder::Instance().GetRocketEquipment());
+       		store->AddItem(RocketEquipmentBuilder::Instance().GetNewRocketEquipment());
         }
 
         for (unsigned int rii = 0; rii < radar_num; rii++)
@@ -150,9 +150,7 @@ void StoreBuilder::PutRandomEquipment()
 
         for (unsigned int sii = 0; sii < scaner_num; sii++)
         { 
-   		ScanerEquipmentBuilder::Instance().CreateNewScanerEquipment();
-        	ScanerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
-   		store->AddItem(ScanerEquipmentBuilder::Instance().GetScanerEquipment()); 
+   		store->AddItem(ScanerEquipmentBuilder::Instance().GetNewScanerEquipment()); 
         }
 
         for (unsigned int fii = 0; fii < freezer_num; fii++)

@@ -26,6 +26,8 @@
 #include "../items/equipment/LazerEquipment.hpp"
 #include "../items/equipment/ProtectorEquipment.hpp"
 #include "../items/equipment/RadarEquipment.hpp"
+#include "../items/equipment/RocketEquipment.hpp"
+#include "../items/equipment/ScanerEquipment.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -136,9 +138,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
     	{
     		if (getRandBool())
     		{
-    	    		RocketEquipmentBuilder::Instance().CreateNewRocketEquipment();
-        		RocketEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID); 
-       			vehicle->GetWeaponComplex().AddItem(RocketEquipmentBuilder::Instance().GetRocketEquipment());
+       			vehicle->GetWeaponComplex().AddItem(RocketEquipmentBuilder::Instance().GetNewRocketEquipment(tech_level));
 		}
 		else
 		{
@@ -162,9 +162,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
    	
    	vehicle->GetDroidSlot()->InsertItem(DroidEquipmentBuilder::Instance().GetNewDroidEquipment(tech_level)); 
 
-   	ScanerEquipmentBuilder::Instance().CreateNewScanerEquipment();
-        ScanerEquipmentBuilder::Instance().CreateNewInternals(RACE::R0_ID);
-   	vehicle->GetScanerSlot()->InsertItem(ScanerEquipmentBuilder::Instance().GetScanerEquipment()); 
+   	vehicle->GetScanerSlot()->InsertItem(ScanerEquipmentBuilder::Instance().GetNewScanerEquipment(tech_level)); 
     
     	if (vehicle->GetKorpusData().slot_grapple_num != 0) 
     	{

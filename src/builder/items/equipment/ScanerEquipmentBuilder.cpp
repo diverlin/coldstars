@@ -17,6 +17,7 @@
 */
 
 #include "ScanerEquipmentBuilder.hpp"
+#include "../../../items/equipment/ScanerEquipment.hpp"
 #include "../../../common/id.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/EntityManager.hpp"
@@ -32,8 +33,10 @@ ScanerEquipmentBuilder& ScanerEquipmentBuilder::Instance()
 ScanerEquipmentBuilder::~ScanerEquipmentBuilder()
 {}
 
-void ScanerEquipmentBuilder::CreateNewScanerEquipment(int id)
+ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipmentTemplate(int id) const
 {
+	ScanerEquipment* scaner_equipment = NULL;
+
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -49,22 +52,42 @@ void ScanerEquipmentBuilder::CreateNewScanerEquipment(int id)
         }
         
         EntityManager::Instance().RegisterEntity(scaner_equipment);
+        
+        return scaner_equipment;
+} 
+
+ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipment(int tech_level, int race_id, int scan_orig) const
+{
+	ScanerEquipment* scaner_equipment = GetNewScanerEquipmentTemplate();
+	CreateNewInternals(scaner_equipment, tech_level, race_id, scan_orig);
+        
+        return scaner_equipment;
 } 
         	
-void ScanerEquipmentBuilder::CreateNewInternals(int race_id, int revision_id)
+void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipment, int tech_level, int race_id, int scan_orig) const
 {     
-    	if (race_id == -1)
-       		race_id = RACE::R0_ID; //RACES_GOOD_LIST[randint(0, len(RACES_GOOD_LIST) - 1)]
+        if (race_id == NONE_ID)
+        {
+       		race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+	}
+	
+    	if (tech_level == NONE_ID)
+    	{
+       		tech_level = 1; 
+	}
 
-    	if (revision_id == -1)
-       		revision_id = TECHLEVEL::L0_ID; 
-
-    	int tech_rate = 1; //int tech_rate = returnRaceTechRate(race_id);  
+	float tech_rate = 1.0f;
+	if (tech_level > 1)
+	{
+		tech_rate = tech_level * EQUIPMENT::TECHLEVEL_RATE;
+	}
+	
+    	tech_rate *= 1; //getRaceTechRate(race_id);  
 
     	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SCANER_EQUIPMENT_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::SCANER_EQUIPMENT_ID, revision_id)
 
-    	int scan_orig       = getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX);
+    	scan_orig       = getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX);
     	
     	ItemCommonData common_data;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::SCANER::MODULES_NUM_MIN, EQUIPMENT::SCANER::MODULES_NUM_MAX);
