@@ -17,7 +17,8 @@
 */
 
 #include "AngarBuilder.hpp"
-
+#include "../slots/VehicleSlot.hpp"
+#include "../docking/Angar.hpp"
 #include "../common/id.hpp"
 #include "../common/EntityManager.hpp"
 #include "../common/Logger.hpp"
@@ -35,8 +36,10 @@ AngarBuilder& AngarBuilder::Instance()
 AngarBuilder::~AngarBuilder()
 {}
 
-void AngarBuilder::CreateNewAngar(int id)
+Angar* AngarBuilder::GetNewAngarTemplate(int id) const
 {
+	Angar* angar = NULL;
+	
 	if (id == NONE_ID) 
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -51,9 +54,19 @@ void AngarBuilder::CreateNewAngar(int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         EntityManager::Instance().RegisterEntity(angar);
+        
+        return angar;
+} 
+
+Angar* AngarBuilder::GetNewAngar() const
+{
+	Angar* angar = GetNewAngarTemplate();
+	CreateNewInternals(angar);
+        
+        return angar;
 } 
         	
-void AngarBuilder::CreateNewInternals()
+void AngarBuilder::CreateNewInternals(Angar* angar) const
 { 
  	for (int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM; i++)
  	{

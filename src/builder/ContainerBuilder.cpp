@@ -17,6 +17,7 @@
 */
 
 #include "ContainerBuilder.hpp"
+#include "../spaceobjects/Container.hpp"
 #include "../common/Logger.hpp"
 #include "../builder/ItemSlotBuilder.hpp"
 #include "../common/id.hpp"
@@ -33,8 +34,10 @@ ContainerBuilder& ContainerBuilder::Instance()
 ContainerBuilder::~ContainerBuilder()
 {}
 
-void ContainerBuilder::CreateNewContainer(int id)
+Container* ContainerBuilder::GetNewContainerTemplate(int id) const
 {
+	Container* container = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -49,9 +52,19 @@ void ContainerBuilder::CreateNewContainer(int id)
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         EntityManager::Instance().RegisterEntity(container);
+        
+        return container;
 } 
-        	
-void ContainerBuilder::CreateNewInternals(TextureOb* textureOb, BaseItem* item)
+
+Container* ContainerBuilder::GetNewContainer(TextureOb* textureOb, BaseItem* item) const
+{
+	Container* container = GetNewContainerTemplate();
+	CreateNewInternals(container, textureOb, item);
+        
+        return container;
+} 
+       	
+void ContainerBuilder::CreateNewInternals(Container* container, TextureOb* textureOb, BaseItem* item) const
 {           
         LifeData data_life;
         data_life.armor = 1;

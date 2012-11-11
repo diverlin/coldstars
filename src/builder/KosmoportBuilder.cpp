@@ -17,6 +17,8 @@
 */
 
 #include "KosmoportBuilder.hpp"
+#include "../docking/Kosmoport.hpp"
+
 #include "AngarBuilder.hpp"
 #include "StoreBuilder.hpp"
 #include "ShopBuilder.hpp"
@@ -35,8 +37,10 @@ KosmoportBuilder& KosmoportBuilder::Instance()
 KosmoportBuilder::~KosmoportBuilder()
 {}
 
-void KosmoportBuilder::CreateNewKosmoport(int id)
+Kosmoport* KosmoportBuilder::GetNewKosmoportTemplate(int id) const
 {
+	Kosmoport* kosmoport = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -52,26 +56,24 @@ void KosmoportBuilder::CreateNewKosmoport(int id)
         }
         
         EntityManager::Instance().RegisterEntity(kosmoport);
+        
+        return kosmoport;
 } 
-        	
-void KosmoportBuilder::CreateNewInternals()
+
+Kosmoport* KosmoportBuilder::GetNewKosmoport() const
 {
-	AngarBuilder::Instance().CreateNewAngar();
-	AngarBuilder::Instance().CreateNewInternals();	
-	kosmoport->BindAngar(AngarBuilder::Instance().GetAngar());
-
-	StoreBuilder::Instance().CreateNewStore();
-	StoreBuilder::Instance().CreateNewInternals();	
-	StoreBuilder::Instance().PutRandomEquipment();	
-	kosmoport->BindStore(StoreBuilder::Instance().GetStore());
-
-	ShopBuilder::Instance().CreateNewShop();
-	ShopBuilder::Instance().CreateNewInternals();	
-	kosmoport->BindShop(ShopBuilder::Instance().GetShop());
-		        	
-	GovermentBuilder::Instance().CreateNewGoverment();
-	GovermentBuilder::Instance().CreateNewInternals();	
-	kosmoport->BindGoverment(GovermentBuilder::Instance().GetGoverment());
+	Kosmoport* kosmoport = GetNewKosmoportTemplate();
+	CreateNewInternals(kosmoport);
+        
+        return kosmoport;
+} 
+       	
+void KosmoportBuilder::CreateNewInternals(Kosmoport* kosmoport) const
+{
+	kosmoport->BindAngar(AngarBuilder::Instance().GetNewAngar());
+	kosmoport->BindStore(StoreBuilder::Instance().GetNewStore());
+	kosmoport->BindShop(ShopBuilder::Instance().GetNewShop());
+	kosmoport->BindGoverment(GovermentBuilder::Instance().GetNewGoverment());
 }
 
   	

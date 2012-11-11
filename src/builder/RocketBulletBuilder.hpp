@@ -20,7 +20,8 @@
 #ifndef ROCKETBULLETBUILDER_H
 #define ROCKETBULLETBUILDER_H
 
-#include "../spaceobjects/RocketBullet.hpp"
+class RocketBullet;
+class BulletData;
 #include "../common/constants.hpp"
 
 class RocketBulletBuilder
@@ -29,18 +30,17 @@ class RocketBulletBuilder
 		static RocketBulletBuilder& Instance();
 		~RocketBulletBuilder();
 		
-		void CreateNewRocket(int id = NONE_ID);							
-		void CreateNewInternals(const BulletData&);   
-		RocketBullet* GetRocket() const { return rocket; };         
-
-        	void CreateKorpusGeometry(RocketBullet*) const;
+		RocketBullet* GetNewRocketBulletTemplate(int id = NONE_ID) const;							
+		RocketBullet* GetNewRocketBullet(const BulletData&) const;   
+		
+		void CreateKorpusGeometry(RocketBullet*) const;   
         	       
         private:
-        	RocketBulletBuilder():rocket(NULL) {};   	
+        	RocketBulletBuilder() {};   	
         	RocketBulletBuilder(const RocketBulletBuilder&) = delete; 
         	RocketBulletBuilder& operator=(const RocketBulletBuilder&) = delete;
         	
-        	RocketBullet* rocket;
+        	void CreateNewInternals(RocketBullet*, const BulletData&) const; 
 }; 
 
 

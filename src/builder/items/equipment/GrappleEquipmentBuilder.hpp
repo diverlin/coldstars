@@ -33,11 +33,11 @@ class GrappleEquipmentBuilder
                 GrappleEquipment* GetNewGrappleEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int strength_orig = NONE_ID, int radius_orig = NONE_ID, int speed_orig = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(GrappleEquipment*, int, int, int, int, int) const;
-                                
 		GrappleEquipmentBuilder() {};
 		GrappleEquipmentBuilder(const GrappleEquipmentBuilder&) = delete;
 		GrappleEquipmentBuilder& operator=(const GrappleEquipmentBuilder&) = delete;
+
+                void CreateNewInternals(GrappleEquipment*, int, int, int, int, int) const;
 }; 
 
 #endif 

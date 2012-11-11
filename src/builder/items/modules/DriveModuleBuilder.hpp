@@ -32,11 +32,11 @@ class DriveModuleBuilder
                 DriveModule* GetNewDriveModule(int speed_add = NONE_ID, int hyper_add = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(DriveModule*, int, int) const;
-                
 		DriveModuleBuilder() {};
 		DriveModuleBuilder(const DriveModuleBuilder&) = delete;
 		DriveModuleBuilder& operator=(const DriveModuleBuilder&) = delete;
+
+                void CreateNewInternals(DriveModule*, int, int) const;
 }; 
 
 #endif 

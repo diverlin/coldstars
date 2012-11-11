@@ -32,11 +32,11 @@ class EnergizerEquipmentBuilder
                 EnergizerEquipment* GetNewEnergizerEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int energy_max_orig = NONE_ID, int restoration_orig = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(EnergizerEquipment*, int, int, int, int) const;
-                
 		EnergizerEquipmentBuilder() {};
 		EnergizerEquipmentBuilder(const EnergizerEquipmentBuilder&) = delete;
 		EnergizerEquipmentBuilder& operator=(const EnergizerEquipmentBuilder&) = delete;
+
+                void CreateNewInternals(EnergizerEquipment*, int, int, int, int) const;
 }; 
 
 #endif 

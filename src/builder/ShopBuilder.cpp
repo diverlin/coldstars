@@ -18,6 +18,8 @@
 
 #include "ShopBuilder.hpp"
 
+#include "../docking/Shop.hpp"
+
 #include "../common/id.hpp"
 #include "../common/Logger.hpp"
 #include "../common/EntityManager.hpp"
@@ -32,8 +34,10 @@ ShopBuilder& ShopBuilder::Instance()
 ShopBuilder::~ShopBuilder()
 {}
 
-void ShopBuilder::CreateNewShop(int id)
+Shop* ShopBuilder::GetNewShopTemplate(int id) const
 {
+	Shop* shop = NULL;
+	
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -49,9 +53,19 @@ void ShopBuilder::CreateNewShop(int id)
         }
         
         EntityManager::Instance().RegisterEntity(shop);
+        
+        return shop;
 } 
-        	
-void ShopBuilder::CreateNewInternals()
+ 
+Shop* ShopBuilder::GetNewShop() const
+{
+	Shop* shop = GetNewShopTemplate();
+	CreateNewInternals(shop);
+        
+        return shop;
+} 
+       	
+void ShopBuilder::CreateNewInternals(Shop* shop) const
 {    
 	TextureOb* textureOb_background  = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SHOP_BACKGROUND_ID); 
 	shop->SetTextureObBackground(textureOb_background);

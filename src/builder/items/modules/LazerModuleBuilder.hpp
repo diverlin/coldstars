@@ -33,11 +33,11 @@ class LazerModuleBuilder
                 LazerModule* GetNewLazerModule(int damage_add = NONE_ID, int radius_add = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(LazerModule*, int, int) const;
-                
 		LazerModuleBuilder() {};
 		LazerModuleBuilder(const LazerModuleBuilder&) = delete;
 		LazerModuleBuilder& operator=(const LazerModuleBuilder&) = delete;
+
+                void CreateNewInternals(LazerModule*, int, int) const;
 }; 
 
 #endif 

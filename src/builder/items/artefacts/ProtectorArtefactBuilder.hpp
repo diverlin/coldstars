@@ -32,11 +32,11 @@ class ProtectorArtefactBuilder
                 ProtectorArtefact* GetNewProtectorArtefact(int protection = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(ProtectorArtefact*, int) const;
-                
 		ProtectorArtefactBuilder() {};
 		ProtectorArtefactBuilder(const ProtectorArtefactBuilder&) = delete;
 		ProtectorArtefactBuilder& operator=(const ProtectorArtefactBuilder&) = delete;
+		
+                void CreateNewInternals(ProtectorArtefact*, int) const;
 }; 
 
 

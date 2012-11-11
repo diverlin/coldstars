@@ -33,11 +33,11 @@ class FreezerEquipmentBuilder
                 FreezerEquipment* GetNewFreezerEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int freeze_orig = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(FreezerEquipment*, int, int, int) const;
-                
 		FreezerEquipmentBuilder() {};
 		FreezerEquipmentBuilder(const FreezerEquipmentBuilder&) = delete;
 		FreezerEquipmentBuilder& operator=(const FreezerEquipmentBuilder&) = delete;
+
+                void CreateNewInternals(FreezerEquipment*, int, int, int) const;
 }; 
 
 #endif 

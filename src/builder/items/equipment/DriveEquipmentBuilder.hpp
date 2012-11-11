@@ -32,11 +32,11 @@ class DriveEquipmentBuilder
                 DriveEquipment* GetNewDriveEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int speed_orig = NONE_ID, int hyper_orig = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(DriveEquipment*, int, int, int, int) const;
-                               
 		DriveEquipmentBuilder() {};
 		DriveEquipmentBuilder(const DriveEquipmentBuilder&) = delete;
 		DriveEquipmentBuilder& operator=(const DriveEquipmentBuilder&) = delete;
+
+                void CreateNewInternals(DriveEquipment*, int, int, int, int) const;
 }; 
 
 #endif 

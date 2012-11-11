@@ -32,11 +32,11 @@ class ScanerModuleBuilder
                 ScanerModule* GetNewScanerModule(int scan_add = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(ScanerModule*, int) const;
-                
 		ScanerModuleBuilder() {};
 		ScanerModuleBuilder(const ScanerModuleBuilder&) = delete;
 		ScanerModuleBuilder& operator=(const ScanerModuleBuilder&) = delete;
+
+                void CreateNewInternals(ScanerModule*, int) const;
 }; 
 
 #endif 

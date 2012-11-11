@@ -25,6 +25,8 @@
 #include "SatelliteBuilder.hpp"
 #include "ShipBuilder.hpp"
 #include "../spaceobjects/BlackHole.hpp"
+#include "../spaceobjects/Planet.hpp"
+#include "../spaceobjects/Star.hpp"
 
 #include "../common/id.hpp"
 #include "../common/EntityManager.hpp"
@@ -78,14 +80,14 @@ StarSystem* StarSystemBuilder::GetNewStarSystem() const
         	
 void StarSystemBuilder::CreateNewInternals(StarSystem* starsystem) const
 {
-        this->CreateStar(starsystem);
+        CreateStar(starsystem);
         
         int distNebula_num = getRandInt(ENTITY::STARSYSTEM::DISTANT_NEBULA_MIN, ENTITY::STARSYSTEM::DISTANT_NEBULA_MAX);
         int distStar_num = getRandInt(ENTITY::STARSYSTEM::DISTANT_STAR_MIN, ENTITY::STARSYSTEM::DISTANT_STAR_MAX);
-        this->CreateBackground(starsystem, distNebula_num, distStar_num, starsystem->GetStar()->GetColorId());
+        CreateBackground(starsystem, distNebula_num, distStar_num, starsystem->GetStar()->GetColorId());
           
         int planet_num = getRandInt(ENTITY::STARSYSTEM::PLANET_MIN, ENTITY::STARSYSTEM::PLANET_MAX);
-        this->CreatePlanets(starsystem, planet_num);
+        CreatePlanets(starsystem, planet_num);
 }
  
 void StarSystemBuilder::CreateBackground(StarSystem* starsystem, int distNebula_num, int distStar_num, int color_id) const
@@ -105,9 +107,7 @@ void StarSystemBuilder::CreateBackground(StarSystem* starsystem, int distNebula_
                         	                
 void StarSystemBuilder::CreateStar(StarSystem* starsystem) const
 {
-	StarBuilder::Instance().CreateNewStar();
-	StarBuilder::Instance().CreateNewInternals();	
-        Star* star = StarBuilder::Instance().GetStar();    
+        Star* star = StarBuilder::Instance().GetNewStar();    
         starsystem->Add(star);
 }
 
@@ -117,9 +117,7 @@ void StarSystemBuilder::CreatePlanets(StarSystem* starsystem, int planet_per_sys
 
         for(int i=0; i<planet_per_system; i++)
         {             
-                PlanetBuilder::Instance().CreateNewPlanet();
-                PlanetBuilder::Instance().CreateNewInternals(orbit_radius);
-                Planet* planet = PlanetBuilder::Instance().GetPlanet();
+                Planet* planet = PlanetBuilder::Instance().GetNewPlanet(orbit_radius);
 
                 starsystem->Add(planet, starsystem->GetStar());
                 

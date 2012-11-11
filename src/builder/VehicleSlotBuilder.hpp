@@ -20,7 +20,7 @@
 #ifndef VEHICLESLOTBUILDER_H
 #define VEHICLESLOTBUILDER_H
 
-#include "../slots/VehicleSlot.hpp"
+class VehicleSlot;
 #include "../common/constants.hpp"
 
 VehicleSlot* GetNewVehicleSlot(int id = NONE_ID);

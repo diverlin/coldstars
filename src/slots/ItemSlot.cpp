@@ -21,6 +21,7 @@
 #include "../builder/ContainerBuilder.hpp"
 #include "../common/myStr.hpp"
 #include "../spaceobjects/Vehicle.hpp"
+#include "../spaceobjects/Container.hpp"
 #include "../render/Render.hpp"
 #include "../world/starsystem.hpp"
 #include "../resources/TextureManager.hpp"
@@ -241,12 +242,11 @@ void ItemSlot::DropItemToSpace(Vehicle* vehicle)
 {
         TextureOb* textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::CONTAINER_ID);   
         
-        ContainerBuilder::Instance().CreateNewContainer();
-        ContainerBuilder::Instance().CreateNewInternals(textureOb_, item);
+        Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, item);
 
         RemoveItem();
         
-	vehicle->GetStarSystem()->Add(ContainerBuilder::Instance().GetContainer(), vehicle->GetPoints().GetCenter());	
+	vehicle->GetStarSystem()->Add(container, vehicle->GetPoints().GetCenter());	
 }
         
 bool ItemSlot::SwapItemWith(ItemSlot* _slot)

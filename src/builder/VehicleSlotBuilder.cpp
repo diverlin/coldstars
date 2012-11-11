@@ -18,6 +18,8 @@
 
 #include "VehicleSlotBuilder.hpp"
 
+#include "../slots/VehicleSlot.hpp"
+
 #include "../common/id.hpp"
 #include "../common/EntityManager.hpp"
 #include "../common/Logger.hpp"

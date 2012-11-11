@@ -33,11 +33,11 @@ class ProtectorEquipmentBuilder
                 ProtectorEquipment* GetNewProtectorEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int protection_orig = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(ProtectorEquipment*, int, int, int) const;
-                
 		ProtectorEquipmentBuilder() {};
 		ProtectorEquipmentBuilder(const ProtectorEquipmentBuilder&) = delete;
 		ProtectorEquipmentBuilder& operator=(const ProtectorEquipmentBuilder&) = delete;
+
+                void CreateNewInternals(ProtectorEquipment*, int, int, int) const;
 }; 
 
 #endif 

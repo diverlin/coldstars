@@ -33,11 +33,11 @@ class GrappleModuleBuilder
                 GrappleModule* GetNewGrappleModule(int strength_add = NONE_ID, int radius_add = NONE_ID, int speed_add = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(GrappleModule*, int, int, int) const;
-                
 		GrappleModuleBuilder() {};
 		GrappleModuleBuilder(const GrappleModuleBuilder&) = delete;
 		GrappleModuleBuilder& operator=(const GrappleModuleBuilder&) = delete;
+
+                void CreateNewInternals(GrappleModule*, int, int, int) const;
 }; 
 
 #endif 

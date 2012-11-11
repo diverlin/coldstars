@@ -32,11 +32,11 @@ class RocketEquipmentBuilder
                 RocketEquipment* GetNewRocketEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int ammo_max_orig = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
         	 		                
         private:
-                void CreateNewInternals(RocketEquipment*, int, int, int, int, int) const;
-                                
 		RocketEquipmentBuilder() {};
 		RocketEquipmentBuilder(const RocketEquipmentBuilder&) = delete;
 		RocketEquipmentBuilder& operator=(const RocketEquipmentBuilder&) = delete;
+
+                void CreateNewInternals(RocketEquipment*, int, int, int, int, int) const;
 }; 
 
 #endif 
