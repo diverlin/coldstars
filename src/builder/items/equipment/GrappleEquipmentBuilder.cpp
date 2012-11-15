@@ -91,6 +91,7 @@ void GrappleEquipmentBuilder::CreateNewInternals(GrappleEquipment* grapple_equip
     	speed_orig      = getRandInt(EQUIPMENT::GRAPPLE::SPEED_MIN,      EQUIPMENT::GRAPPLE::SPEED_MAX);
     	
     	ItemCommonData common_data;
+        common_data.tech_level 	    = tech_level;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::GRAPPLE::MODULES_NUM_MIN, EQUIPMENT::GRAPPLE::MODULES_NUM_MAX);
     	common_data.mass            = getRandInt(EQUIPMENT::GRAPPLE::MASS_MIN,        EQUIPMENT::GRAPPLE::MASS_MAX);
     	common_data.condition_max   = getRandInt(EQUIPMENT::GRAPPLE::CONDITION_MIN,   EQUIPMENT::GRAPPLE::CONDITION_MAX) * tech_rate;
@@ -101,7 +102,7 @@ void GrappleEquipmentBuilder::CreateNewInternals(GrappleEquipment* grapple_equip
         grapple_equipment->SetSpeedOrig(speed_orig);
 
         grapple_equipment->SetTextureOb(texOb_item);    
-        grapple_equipment->SetFunctionalSlotSubTypeId(ENTITY::GRAPPLE_SLOT_ID);
+        grapple_equipment->SetParentSubTypeId(ENTITY::GRAPPLE_SLOT_ID);
         grapple_equipment->SetItemCommonData(common_data);        
         grapple_equipment->SetCondition(common_data.condition_max);
         

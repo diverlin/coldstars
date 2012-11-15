@@ -89,6 +89,7 @@ void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equip
     	freeze_orig     = getRandInt(EQUIPMENT::FREEZER::FREEZE_MIN, EQUIPMENT::FREEZER::FREEZE_MAX);
     	
     	ItemCommonData common_data;
+    	common_data.tech_level 	    = tech_level;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::FREEZER::MODULES_NUM_MIN, EQUIPMENT::FREEZER::MODULES_NUM_MAX);
     	common_data.mass            = getRandInt(EQUIPMENT::FREEZER::MASS_MIN,        EQUIPMENT::FREEZER::MASS_MAX);
     	common_data.condition_max   = getRandInt(EQUIPMENT::FREEZER::CONDITION_MIN,   EQUIPMENT::FREEZER::CONDITION_MAX) * tech_rate;
@@ -96,7 +97,7 @@ void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equip
         
         freezer_equipment->SetFreezeOrig(freeze_orig);  
         freezer_equipment->SetTextureOb(texOb_item);    	
-        freezer_equipment->SetFunctionalSlotSubTypeId(ENTITY::FREEZER_SLOT_ID);
+        freezer_equipment->SetParentSubTypeId(ENTITY::FREEZER_SLOT_ID);
         freezer_equipment->SetItemCommonData(common_data);
         freezer_equipment->SetCondition(common_data.condition_max);
           

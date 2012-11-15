@@ -88,6 +88,7 @@ void DroidEquipmentBuilder::CreateNewInternals(DroidEquipment* droid_equipment, 
     	repair_orig     = getRandInt(EQUIPMENT::DROID::REPAIR_MIN, EQUIPMENT::DROID::REPAIR_MAX);
     	
     	ItemCommonData common_data;
+    	common_data.tech_level 	    = tech_level;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::DROID::MODULES_NUM_MIN, EQUIPMENT::DROID::MODULES_NUM_MAX);
     	common_data.mass            = getRandInt(EQUIPMENT::DROID::MASS_MIN,        EQUIPMENT::DROID::MASS_MAX);
     	common_data.condition_max   = getRandInt(EQUIPMENT::DROID::CONDITION_MIN,   EQUIPMENT::DROID::CONDITION_MAX) * tech_rate;
@@ -95,7 +96,7 @@ void DroidEquipmentBuilder::CreateNewInternals(DroidEquipment* droid_equipment, 
        
         droid_equipment->SetRepairOrig(repair_orig);  
         droid_equipment->SetTextureOb(texOb_item);    	
-        droid_equipment->SetFunctionalSlotSubTypeId(ENTITY::DROID_SLOT_ID);
+        droid_equipment->SetParentSubTypeId(ENTITY::DROID_SLOT_ID);
         droid_equipment->SetItemCommonData(common_data);
         droid_equipment->SetCondition(common_data.condition_max);
                 

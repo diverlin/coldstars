@@ -252,7 +252,7 @@ bool GuiVehicle::UpdateMouseInteractionInSpace(const MouseData& data_mouse)
 				}
 				else
 				{
-					player->GetCursor().GetItemSlot()->SwapItemWith(rect_slot_vec[i].second);     
+					player->GetCursor().GetItemSlot()->SwapItem(rect_slot_vec[i].second);     
 				}
 			} 
 			

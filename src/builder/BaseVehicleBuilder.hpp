@@ -19,7 +19,7 @@
 #ifndef BASEVEHICLEBUILDER_H
 #define BASEVEHICLEBUILDER_H
 
-#include "../spaceobjects/Vehicle.hpp"
+class Vehicle;
 
 class BaseVehicleBuilder
 {
@@ -27,7 +27,7 @@ class BaseVehicleBuilder
 		static BaseVehicleBuilder& Instance();
 		virtual ~BaseVehicleBuilder() {};
 
-        	void Equip(Vehicle*) const; 
+        	void Equip(Vehicle*, int tech_leve = 1) const; 
                 
                 void CreateKorpusGeometry(Vehicle*) const;      
            

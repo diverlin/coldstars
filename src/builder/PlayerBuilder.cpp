@@ -23,7 +23,7 @@
 #include "../common/id.hpp"
 #include "../common/Logger.hpp"
 #include "../common/EntityManager.hpp"
- #include "../pilots/Player.hpp"
+#include "../pilots/Player.hpp"
  
 PlayerBuilder& PlayerBuilder::Instance()
 {
@@ -73,7 +73,7 @@ void PlayerBuilder::CreateNewInternals(Player* player) const
         
         Npc* new_pnpc = NpcBuilder::Instance().GetNewNpc(prace_id, psubtype_id);
         Ship* new_pship = ShipBuilder::Instance().GetNewShip(prace_id, psubtype_id, size_id, weapons_num);
-	ShipBuilder::Instance().Equip(new_pship);   // improove
+	ShipBuilder::Instance().Equip(new_pship, 5);   
         
         new_pship->BindOwnerNpc(new_pnpc);
    	player->BindNpc(new_pnpc);

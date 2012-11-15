@@ -90,6 +90,7 @@ void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer
     	restoration_orig = getRandInt(EQUIPMENT::ENERGIZER::RESTORATION_MIN, EQUIPMENT::ENERGIZER::RESTORATION_MAX);
     	
     	ItemCommonData common_data;
+        common_data.tech_level 	     = tech_level;
     	common_data.modules_num_max  = getRandInt(EQUIPMENT::ENERGIZER::MODULES_NUM_MIN, EQUIPMENT::ENERGIZER::MODULES_NUM_MAX);
     	common_data.mass             = getRandInt(EQUIPMENT::ENERGIZER::MASS_MIN,        EQUIPMENT::ENERGIZER::MASS_MAX);
     	common_data.condition_max    = getRandInt(EQUIPMENT::ENERGIZER::CONDITION_MIN,   EQUIPMENT::ENERGIZER::CONDITION_MAX) * tech_rate;
@@ -99,7 +100,7 @@ void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer
         energizer_equipment->SetRestorationOrig(restoration_orig);
         energizer_equipment->SetEnergy(energy_max_orig);
         energizer_equipment->SetTextureOb(texOb_item);    	
-        energizer_equipment->SetFunctionalSlotSubTypeId(ENTITY::ENERGIZER_SLOT_ID);
+        energizer_equipment->SetParentSubTypeId(ENTITY::ENERGIZER_SLOT_ID);
         energizer_equipment->SetItemCommonData(common_data);
         energizer_equipment->SetCondition(common_data.condition_max);
                         

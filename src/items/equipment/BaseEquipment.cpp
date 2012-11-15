@@ -69,16 +69,19 @@ void BaseEquipment::AddCommonInfo()
 
 bool BaseEquipment::InsertModule(BaseModule* module)
 {
-	if (modules_vec.size() < data_item.modules_num_max)
-    	{
-    		module->SetItemSlot(NULL);
-    		module->SetEquipmentOwner(this);
-	       	modules_vec.push_back(module);                
+	if (module->GetParentSubTypeId() == data_id.subtype_id)
+	{
+		if (modules_vec.size() < data_item.modules_num_max)
+    		{
+    			module->SetItemSlot(NULL);
+    			module->SetEquipmentOwner(this);
+	       		modules_vec.push_back(module);                
                         
-        	UpdatePropetries();
-        	item_slot->UpdateVehiclePropetries();
+        		UpdatePropetries();
+        		item_slot->UpdateVehiclePropetries();
 
-        	return true;
+        		return true;
+    		}
     	}
 
        	return false;   

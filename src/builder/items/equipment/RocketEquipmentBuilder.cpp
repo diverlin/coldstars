@@ -92,6 +92,7 @@ void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipmen
     	radius_orig   = getRandInt(EQUIPMENT::ROCKET::RADIUS_MIN, EQUIPMENT::ROCKET::RADIUS_MAX);
 
 	ItemCommonData common_data;
+        common_data.tech_level 	    = tech_level;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::ROCKET::MODULES_NUM_MIN, EQUIPMENT::ROCKET::MODULES_NUM_MAX);
 
     	common_data.mass = getRandInt(EQUIPMENT::ROCKET::MASS_MIN, EQUIPMENT::ROCKET::MASS_MAX);
@@ -114,7 +115,7 @@ void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipmen
         rocket_equipment->SetBulletData(data_bullet); 
     	rocket_equipment->SetAmmo(ammo_max_orig);                
         rocket_equipment->SetTextureOb(texOb_item);    	
-        rocket_equipment->SetFunctionalSlotSubTypeId(ENTITY::WEAPON_SLOT_ID);
+        rocket_equipment->SetParentSubTypeId(ENTITY::WEAPON_SLOT_ID);
         rocket_equipment->SetItemCommonData(common_data);
         rocket_equipment->SetCondition(common_data.condition_max);
                 

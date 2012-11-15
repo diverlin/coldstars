@@ -91,6 +91,7 @@ void LazerEquipmentBuilder::CreateNewInternals(LazerEquipment* lazer_equipment, 
     	radius_orig     = getRandInt(EQUIPMENT::LAZER::RADIUS_MIN, EQUIPMENT::LAZER::RADIUS_MAX);
     	
     	ItemCommonData common_data;
+        common_data.tech_level 	    = tech_level;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::LAZER::MODULES_NUM_MIN, EQUIPMENT::LAZER::MODULES_NUM_MAX);
     	common_data.mass            = getRandInt(EQUIPMENT::LAZER::MASS_MIN, EQUIPMENT::LAZER::MASS_MAX);
     	common_data.condition_max   = getRandInt(EQUIPMENT::LAZER::CONDITION_MIN, EQUIPMENT::LAZER::CONDITION_MAX) * tech_rate;
@@ -99,7 +100,7 @@ void LazerEquipmentBuilder::CreateNewInternals(LazerEquipment* lazer_equipment, 
         lazer_equipment->SetDamageOrig(damage_orig);  
         lazer_equipment->SetRadiusOrig(radius_orig);  
         lazer_equipment->SetTextureOb(texOb_item);    	
-        lazer_equipment->SetFunctionalSlotSubTypeId(ENTITY::WEAPON_SLOT_ID);
+        lazer_equipment->SetParentSubTypeId(ENTITY::WEAPON_SLOT_ID);
         lazer_equipment->SetItemCommonData(common_data);
         lazer_equipment->SetCondition(common_data.condition_max);
                 

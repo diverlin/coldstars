@@ -101,7 +101,7 @@ void GuiManager::RenderScanVehicle(const MouseData& data_mouse, Vehicle* vehicle
 {		
 	if (player->GetCursor().GetItemSlot()->GetEquiped() == true)
 	{
-       		gui_vehicle_scan.RenderVehicle(data_mouse, player->GetCursor().GetItemSlot()->GetItem()->GetFunctionalSlotSubTypeId());
+       		gui_vehicle_scan.RenderVehicle(data_mouse, player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId());
 		player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetRect(), vec2f(0, 0));		
 	}
 	else
