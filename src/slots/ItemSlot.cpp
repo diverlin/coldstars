@@ -86,7 +86,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 		return true;
 	}
 
-	if (data_id.subtype_id == item->GetFunctionalSlotSubTypeId())
+	if (data_id.subtype_id == item->GetParentSubTypeId())
 	{                                     
 		this->item = item;
 		equiped = true; 
@@ -249,7 +249,7 @@ void ItemSlot::DropItemToSpace(Vehicle* vehicle)
 	vehicle->GetStarSystem()->Add(container, vehicle->GetPoints().GetCenter());	
 }
         
-bool ItemSlot::SwapItemWith(ItemSlot* _slot)
+bool ItemSlot::SwapItem(ItemSlot* _slot)
 {
        	if ( (equiped == false) and (_slot->GetEquiped() == true) )
        	{      

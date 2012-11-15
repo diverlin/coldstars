@@ -69,6 +69,7 @@ void ProtectorModuleBuilder::CreateNewInternals(ProtectorModule* protector_modul
     	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
     	protection_add = getRandInt(MODULE::PROTECTOR::PROTECTION_MIN, MODULE::PROTECTOR::PROTECTION_MAX);
     
+        protector_module->SetParentSubTypeId(ENTITY::PROTECTOR_EQUIPMENT_ID);    
         protector_module->SetTextureOb(texOb);
         protector_module->SetProtectionAdd(protection_add);
 }

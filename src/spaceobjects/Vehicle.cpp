@@ -59,6 +59,8 @@
 #include "../docking/Angar.hpp"
 #include "../pilots/Npc.hpp"
 
+#include "../builder/ItemSlotBuilder.hpp"
+
 Vehicle::Vehicle()
 {
 	god_mode = false;
@@ -187,6 +189,87 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
 		
 }
 
+            	
+bool Vehicle::ManageFunctionGoodsPack(BaseItem* item)
+{
+	if (MergeIdenticalGoods(item) == true)
+	{       		
+		return true;
+	}
+	
+	return false;
+}	
+
+bool Vehicle::ManageFunctionEquipment(BaseItem* item)
+{
+	if (item->GetParentSubTypeId() == ENTITY::WEAPON_SLOT_ID)
+	{
+		return weapon_complex.AddItem(item);
+	}
+	
+	ItemSlot* item_slot = GetFuctionalSlot(item->GetParentSubTypeId());
+	if (item_slot->GetEquiped() == false)
+	{
+		return item_slot->InsertItem(item);
+	}
+	
+	return false;        
+} 	
+
+bool Vehicle::ManageFunctionModule(BaseItem* item)
+{
+	for (unsigned int i=0; i<slot_funct_vec.size(); i++)
+	{
+		if (slot_funct_vec[i]->GetEquiped() == true)
+		{
+			if (slot_funct_vec[i]->GetItem()->GetSubTypeId() == item->GetParentSubTypeId())
+			{
+				return ((BaseEquipment*)slot_funct_vec[i]->GetItem())->InsertModule((BaseModule*)item);
+			}
+		}
+	}
+	
+	return false;
+}
+
+bool Vehicle::ManageFunctionArtefact(BaseItem* item)
+{
+	ItemSlot* artef_slot = GetEmptyArtefactSlot();
+	if (artef_slot != NULL)
+	{
+		return artef_slot->InsertItem(item);
+	}
+	else
+	{
+		AddItemToEmptyCargoSlot(item);		
+		return true;
+	}
+}
+
+ItemSlot* Vehicle::GetFuctionalSlot(int functional_slot_subtype_id) const
+{
+	for(unsigned int i=0; i<slot_funct_vec.size(); i++)
+	{
+		if (slot_funct_vec[i]->GetSubTypeId() == functional_slot_subtype_id)
+		{
+			return slot_funct_vec[i];
+		}
+	}
+}
+
+ItemSlot* Vehicle::GetEmptyArtefactSlot() const
+{
+	for(unsigned int i=0; i<slot_artef_vec.size(); i++)
+        {
+        	if (slot_artef_vec[i]->GetEquiped() == false)
+        	{
+        		return slot_artef_vec[i];
+        	}
+        }
+               		
+        return NULL;
+}
+                	
 ItemSlot* Vehicle::GetEmptyCargoSlot()
 {
       	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
@@ -195,6 +278,25 @@ ItemSlot* Vehicle::GetEmptyCargoSlot()
           	{
              		return slot_cargo_vec[i];
              	}
+        }
+        
+      	return NULL;
+}
+
+ItemSlot* Vehicle::GetCargoSlotWithGoods(int requested_goods_subtype_id)
+{
+      	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
+      	{
+          	if (slot_cargo_vec[i]->GetEquiped() == true)
+          	{
+          		if (slot_cargo_vec[i]->GetItem()->GetTypeId() == ENTITY::GOODS_ID)
+          		{
+          			if (slot_cargo_vec[i]->GetItem()->GetSubTypeId() == requested_goods_subtype_id)
+          			{
+          				return slot_cargo_vec[i];
+          			}
+          		}
+          	}             		
         }
         
       	return NULL;
@@ -217,19 +319,50 @@ bool Vehicle::AddItemToCargoSlot(BaseItem* item)
 {
 	if (item->GetTypeId() == ENTITY::GOODS_ID)
 	{
-		if (MergeIdenticalGoods(item) == true)
-		{       		
-			return true;
-		}
+		return ManageFunctionGoodsPack(item);
 	}
 	
-	return AddItemToEmptyCargoSlot(item);          
+	AddItemToEmptyCargoSlot(item);
+	return true;          
 } 
 
-
+bool Vehicle::AddAndManageItem(BaseItem* item)
+{
+	if (ManageItem(item) == false)
+	{
+		return AddItemToCargoSlot(item);
+	}
 	
-	
+	return true;
+}
 
+bool Vehicle::ManageItem(BaseItem* item)
+{
+	switch(item->GetTypeId())
+	{
+		case ENTITY::EQUIPMENT_ID: 	{ return ManageFunctionEquipment(item); break; }
+		case ENTITY::MODULE_ID: 	{ return ManageFunctionModule(item); break; }
+		case ENTITY::ARTEFACT_ID: 	{ return ManageFunctionArtefact(item); break; }	
+		case ENTITY::GOODS_ID: 		{ return ManageFunctionGoodsPack(item); break; }
+	}
+	
+	return false;
+} 
+      
+void Vehicle::ManageItemsInCargo()
+{
+	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
+	{
+		if (slot_cargo_vec[i]->GetEquiped() == true)
+		{
+			if (ManageItem(slot_cargo_vec[i]->GetItem()) == true)
+			{
+				slot_cargo_vec[i]->RemoveItem();
+			}
+		}
+	}
+}
+                
 bool Vehicle::MergeIdenticalGoods(BaseItem* item)
 {
 	ItemSlot* cargo_slot = GetCargoSlotWithGoods(item->GetSubTypeId());
@@ -252,27 +385,8 @@ bool Vehicle::AddItemToEmptyCargoSlot(BaseItem* item)
 		return true;
 	}
 	
-	return false;                
+	return false;
 } 
-
-ItemSlot* Vehicle::GetCargoSlotWithGoods(int requested_goods_subtype_id)
-{
-      	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
-      	{
-          	if (slot_cargo_vec[i]->GetEquiped() == true)
-          	{
-          		if (slot_cargo_vec[i]->GetItem()->GetTypeId() == ENTITY::GOODS_ID)
-          		{
-          			if (slot_cargo_vec[i]->GetItem()->GetSubTypeId() == requested_goods_subtype_id)
-          			{
-          				return slot_cargo_vec[i];
-          			}
-          		}
-          	}             		
-        }
-        
-      	return NULL;
-}
 
 void Vehicle::BindOwnerNpc(Npc* owner_npc) 	           
 { 
@@ -881,10 +995,16 @@ void Vehicle::BuyArmorAsMuchAsPossible()
 
 bool Vehicle::IsFuelFull() const
 {
+	if (drive_complex.GetBakSlot()->GetEquiped() == false)
+	{
+		return true;
+	}
+	
 	if (GetFuelMiss() == 0)
 	{
 		return true;
 	}
+	
 	
 	return false;
 }

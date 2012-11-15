@@ -105,7 +105,7 @@ class ItemSlot : public BaseSlot
                 
                 void DropItemToSpace(Vehicle*);
                                                 
-                bool SwapItemWith(ItemSlot*);
+                bool SwapItem(ItemSlot*);
                 
                 void UpdateRange(TextureOb*);
            	void DrawRange(const vec2f&);

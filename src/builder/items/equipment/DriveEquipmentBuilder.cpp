@@ -99,7 +99,7 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
         drive_equipment->SetSpeedOrig(speed_orig);  
         drive_equipment->SetHyperOrig(hyper_orig);
         drive_equipment->SetTextureOb(texOb_item);    	
-        drive_equipment->SetFunctionalSlotSubTypeId(ENTITY::DRIVE_SLOT_ID);
+        drive_equipment->SetParentSubTypeId(ENTITY::DRIVE_SLOT_ID);
         drive_equipment->SetItemCommonData(common_data);
         drive_equipment->SetCondition(common_data.condition_max);
         

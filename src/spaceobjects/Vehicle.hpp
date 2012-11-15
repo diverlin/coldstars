@@ -26,6 +26,7 @@ class Npc;
 class GoodsPack;
 class Container;
 class BaseItem;
+class BaseEquipment;
 
 #include "../parts/WeaponComplex.hpp"
 #include "../parts/DriveComplex.hpp"
@@ -69,7 +70,12 @@ class Vehicle : public BaseSpaceEntity
                 VehicleKorpusData& GetKorpusData() { return data_korpus; };
                 			
                 void AddItemSlot(ItemSlot*); 
+
                 bool AddItemToCargoSlot(BaseItem*);
+                bool AddAndManageItem(BaseItem*);
+                void ManageItemsInCargo();
+                bool ManageItem(BaseItem*);
+                                
                 bool UnpackContainerItemToCargoSlot(Container*);
                 
                 int GetFreeSpace() const { return propetries.free_space; };
@@ -89,8 +95,6 @@ class Vehicle : public BaseSpaceEntity
         	ItemSlot* GetFreezerSlot()   const { return freezer_slot; };
 
                 Npc* GetOwnerNpc() const { return owner_npc; };
-       	        ItemSlot* GetEmptyCargoSlot();
-       	        ItemSlot* GetCargoSlotWithGoods(int);
         	
         	GoodsPack* GetGoodsPack() const;
                        	
@@ -173,6 +177,16 @@ class Vehicle : public BaseSpaceEntity
                                 
                 VehicleSlot* parent_vehicleslot;
                         
+                ItemSlot* GetFuctionalSlot(int) const;
+       	        ItemSlot* GetEmptyCargoSlot();
+       	        ItemSlot* GetEmptyArtefactSlot() const;
+       	        ItemSlot* GetCargoSlotWithGoods(int);
+       	        
+       	        bool ManageFunctionEquipment(BaseItem*);
+                bool ManageFunctionModule(BaseItem*);
+                bool ManageFunctionArtefact(BaseItem*);
+                bool ManageFunctionGoodsPack(BaseItem*);
+                	
                 virtual void UpdateInfo() = 0;
              	     		
                 void RenderGrabTrail() const;

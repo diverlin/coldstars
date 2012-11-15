@@ -17,6 +17,8 @@
 */
 
 #include "BaseVehicleBuilder.hpp"
+#include "../spaceobjects/Vehicle.hpp"
+
 #include "../parts/WeaponComplex.hpp"
 
 #include "../items/equipment/BakEquipment.hpp"
@@ -138,49 +140,45 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
     	}
 }	
 
-void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
+void BaseVehicleBuilder::Equip(Vehicle* vehicle, int tech_level) const
 {
-	int tech_level = 2;
     	for (unsigned int i=0; i<vehicle->GetKorpusData().slot_weapon_num; i++)
     	{
     		if (getRandBool())
     		{
-       			vehicle->GetWeaponComplex().AddItem(RocketEquipmentBuilder::Instance().GetNewRocketEquipment(tech_level));
+       			vehicle->AddAndManageItem(RocketEquipmentBuilder::Instance().GetNewRocketEquipment(tech_level));
 		}
 		else
 		{
-       			vehicle->GetWeaponComplex().AddItem(LazerEquipmentBuilder::Instance().GetNewLazerEquipment(tech_level)); 
+       			vehicle->AddAndManageItem(LazerEquipmentBuilder::Instance().GetNewLazerEquipment(tech_level)); 
        		}
     	}   
            
-    	vehicle->GetRadarSlot()->InsertItem(RadarEquipmentBuilder::Instance().GetNewRadarEquipment(tech_level)); 
-    	vehicle->GetDriveComplex().GetDriveSlot()->InsertItem(DriveEquipmentBuilder::Instance().GetNewDriveEquipment(tech_level)); 
-    	vehicle->GetDriveComplex().GetBakSlot()->InsertItem(BakEquipmentBuilder::Instance().GetNewBakEquipment(tech_level)); 
-        
-    	//vehicle->GetEnergizerSlot()->InsertItem(EnergizerEquipmentBuilder::Instance().GetNewEnergizerEquipment(tech_level));     
-   	//vehicle->GetFreezerSlot()->InsertItem(FreezerEquipmentBuilder::Instance().GetNewFreezerEquipment(tech_level));  
+    	vehicle->AddAndManageItem(RadarEquipmentBuilder::Instance().GetNewRadarEquipment(tech_level)); 
+    	vehicle->AddAndManageItem(DriveEquipmentBuilder::Instance().GetNewDriveEquipment(tech_level)); 
+    	vehicle->AddAndManageItem(BakEquipmentBuilder::Instance().GetNewBakEquipment(tech_level));         
+    	//vehicle->AddAndManageItem(EnergizerEquipmentBuilder::Instance().GetNewEnergizerEquipment(tech_level));     
+   	//vehicle->AddAndManageItem(FreezerEquipmentBuilder::Instance().GetNewFreezerEquipment(tech_level));  
    	
-   	vehicle->GetProtectionComplex().GetProtectorSlot()->InsertItem(ProtectorEquipmentBuilder::Instance().GetNewProtectorEquipment(tech_level)); 
-   	
-   	vehicle->GetDroidSlot()->InsertItem(DroidEquipmentBuilder::Instance().GetNewDroidEquipment(tech_level)); 
-
-   	vehicle->GetScanerSlot()->InsertItem(ScanerEquipmentBuilder::Instance().GetNewScanerEquipment(tech_level)); 
+   	vehicle->AddAndManageItem(ProtectorEquipmentBuilder::Instance().GetNewProtectorEquipment(tech_level)); 
+   	vehicle->AddAndManageItem(DroidEquipmentBuilder::Instance().GetNewDroidEquipment(tech_level)); 
+   	vehicle->AddAndManageItem(ScanerEquipmentBuilder::Instance().GetNewScanerEquipment(tech_level)); 
     
     	if (vehicle->GetKorpusData().slot_grapple_num != 0) 
     	{
-      		vehicle->GetGrappleSlot()->InsertItem(GrappleEquipmentBuilder::Instance().GetNewGrappleEquipment(tech_level)); 
+      		vehicle->AddAndManageItem(GrappleEquipmentBuilder::Instance().GetNewGrappleEquipment(tech_level)); 
    	}
 
     	for (unsigned int i=0; i<3; i++) 
     	{        
-        	vehicle->AddItemToCargoSlot(DroidModuleBuilder::Instance().GetNewDroidModule());
+        	vehicle->AddAndManageItem(DroidModuleBuilder::Instance().GetNewDroidModule());
     	}  
     	
     	//for (unsigned int i=0; i<3; i++) 
     	//{        
     	    	//RadarModuleBuilder::Instance().CreateNewRadarModule();
         	//RadarModuleBuilder::Instance().CreateNewInternals();
-        	//vehicle->AddItemToCargoSlot(RadarModuleBuilder::Instance().GetRadarModule());
+        	//vehicle->AddItem(RadarModuleBuilder::Instance().GetRadarModule());
     	//}  
     	    	
     	for (unsigned int i=0; i<2; i++) 
@@ -190,13 +188,13 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle) const
 
     	for (unsigned int i=0; i<2; i++) 
     	{        
-        	vehicle->AddItemToCargoSlot(GravityArtefactBuilder::Instance().GetNewGravityArtefact());
+        	vehicle->AddAndManageItem(GravityArtefactBuilder::Instance().GetNewGravityArtefact());
     	}   
 
     	for (unsigned int i=0; i<2; i++) 
     	{        
-        	vehicle->AddItemToCargoSlot(ProtectorArtefactBuilder::Instance().GetNewProtectorArtefact());
-    	}   
+        	vehicle->AddAndManageItem(ProtectorArtefactBuilder::Instance().GetNewProtectorArtefact());
+    	}  
 }
 
 

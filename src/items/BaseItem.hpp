@@ -57,7 +57,7 @@ class BaseItem : public Base
       		virtual ~BaseItem();
 
 		void SetTextureOb(TextureOb* textureOb)  { this->textureOb = textureOb; };
-		void SetFunctionalSlotSubTypeId(int functional_slot_subtype_id) { this->functional_slot_subtype_id = functional_slot_subtype_id; };
+		void SetParentSubTypeId(int parent_subtype_id) { this->parent_subtype_id = parent_subtype_id; };
 		void SetItemCommonData(const ItemCommonData& data_item) { this->data_item = data_item; deterioration = data_item.deterioration_normal; };
                 void SetItemSlot(ItemSlot* item_slot)  { this->item_slot = item_slot; };
                 void SetCondition(int condition) { this->condition = condition; };
@@ -68,7 +68,7 @@ class BaseItem : public Base
 		unsigned int GetMass()      	const { return data_item.mass; };
 		unsigned int GetCondition() 	const { return condition; };
 		int GetPrice()              	const { return price; };
-		int GetFunctionalSlotSubTypeId() const { return functional_slot_subtype_id; };
+		int GetParentSubTypeId() const { return parent_subtype_id; };
 
 		bool GetLocked()	const { return (locked_turns > 0); }
                 int GetFunctioning()    const { return ( (condition > 0) and (locked_turns == 0) ); }
@@ -101,7 +101,7 @@ class BaseItem : public Base
 
                 int deterioration;
                 
-                int functional_slot_subtype_id;
+                int parent_subtype_id;
                 
                 ItemCommonData data_item;
                 

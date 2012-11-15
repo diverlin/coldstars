@@ -90,6 +90,7 @@ void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector
     	protection_orig = getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX);
     	
     	ItemCommonData common_data;
+        common_data.tech_level 	    = tech_level;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::PROTECTOR::MODULES_NUM_MIN, EQUIPMENT::PROTECTOR::MODULES_NUM_MAX);
     	common_data.mass            = getRandInt(EQUIPMENT::PROTECTOR::MASS_MIN,        EQUIPMENT::PROTECTOR::MASS_MAX);
     	common_data.condition_max   = getRandInt(EQUIPMENT::PROTECTOR::CONDITION_MIN,   EQUIPMENT::PROTECTOR::CONDITION_MAX) * tech_rate;
@@ -97,7 +98,7 @@ void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector
 
         protector_equipment->SetProtectionOrig(protection_orig);  
         protector_equipment->SetTextureOb(texOb_item);
-        protector_equipment->SetFunctionalSlotSubTypeId(ENTITY::PROTECTOR_SLOT_ID);
+        protector_equipment->SetParentSubTypeId(ENTITY::PROTECTOR_SLOT_ID);
         protector_equipment->SetItemCommonData(common_data);
         protector_equipment->SetCondition(common_data.condition_max);
                 

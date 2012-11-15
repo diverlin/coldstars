@@ -70,6 +70,7 @@ void DriveModuleBuilder::CreateNewInternals(DriveModule* drive_module, int speed
     	speed_add = getRandInt(MODULE::DRIVE::SPEED_MIN, MODULE::DRIVE::SPEED_MAX);
     	hyper_add = getRandInt(MODULE::DRIVE::HYPER_MIN, MODULE::DRIVE::HYPER_MAX);
     
+        drive_module->SetParentSubTypeId(ENTITY::DRIVE_EQUIPMENT_ID);    
         drive_module->SetTextureOb(texOb);
     	drive_module->SetSpeedAdd(speed_add);
 	drive_module->SetHyperAdd(hyper_add);

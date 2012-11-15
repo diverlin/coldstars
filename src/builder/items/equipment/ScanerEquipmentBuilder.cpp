@@ -90,6 +90,7 @@ void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipmen
     	scan_orig       = getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX);
     	
     	ItemCommonData common_data;
+        common_data.tech_level 	    = tech_level;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::SCANER::MODULES_NUM_MIN, EQUIPMENT::SCANER::MODULES_NUM_MAX);
     	common_data.mass            = getRandInt(EQUIPMENT::SCANER::MASS_MIN,        EQUIPMENT::SCANER::MASS_MAX);
     	common_data.condition_max   = getRandInt(EQUIPMENT::SCANER::CONDITION_MIN,   EQUIPMENT::SCANER::CONDITION_MAX) * tech_rate;
@@ -97,7 +98,7 @@ void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipmen
         
         scaner_equipment->SetScanOrig(scan_orig);  
         scaner_equipment->SetTextureOb(texOb_item);    	
-        scaner_equipment->SetFunctionalSlotSubTypeId(ENTITY::SCANER_SLOT_ID);
+        scaner_equipment->SetParentSubTypeId(ENTITY::SCANER_SLOT_ID);
         scaner_equipment->SetItemCommonData(common_data);
         scaner_equipment->SetCondition(common_data.condition_max);
                    

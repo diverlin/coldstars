@@ -90,6 +90,7 @@ void RadarEquipmentBuilder::CreateNewInternals(RadarEquipment* radar_equipment, 
     	radius_orig     = getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX);
     	
     	ItemCommonData common_data;
+        common_data.tech_level      = tech_level;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::RADAR::MODULES_NUM_MIN, EQUIPMENT::RADAR::MODULES_NUM_MAX);
     	common_data.mass            = getRandInt(EQUIPMENT::RADAR::MASS_MIN,        EQUIPMENT::RADAR::MASS_MAX);
     	common_data.condition_max   = getRandInt(EQUIPMENT::RADAR::CONDITION_MIN,   EQUIPMENT::RADAR::CONDITION_MAX) * tech_rate;
@@ -97,7 +98,7 @@ void RadarEquipmentBuilder::CreateNewInternals(RadarEquipment* radar_equipment, 
 
         radar_equipment->SetRadiusOrig(radius_orig);
         radar_equipment->SetTextureOb(texOb_item);
-        radar_equipment->SetFunctionalSlotSubTypeId(ENTITY::RADAR_SLOT_ID);
+        radar_equipment->SetParentSubTypeId(ENTITY::RADAR_SLOT_ID);
         radar_equipment->SetItemCommonData(common_data);
         radar_equipment->SetCondition(common_data.condition_max);
  
