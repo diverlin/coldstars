@@ -91,7 +91,7 @@ class ItemSlot : public BaseSlot
 		Bomb* GetBomb()           const { return (Bomb*)item; }
 		//Artefact* GetArtefact() const { return artefact; }
 		GoodsPack* GetGoodsPack() const { return (GoodsPack*)item; }
-                                
+                              
 		bool InsertItem(BaseItem*);            
 		void RemoveItem();
 		
@@ -129,7 +129,9 @@ class ItemSlot : public BaseSlot
                 BaseItem* item;
 
            	PathVisual range_visual;
-           	              
+           	      
+           	bool FakeInsertItem(BaseItem*) const;  
+           	      		        
            	bool CheckAlive(BaseSpaceEntity*) const;
            	bool CheckPlaceTypeId(BaseSpaceEntity*) const;  
                 bool CheckStarSystem(BaseSpaceEntity*) const;

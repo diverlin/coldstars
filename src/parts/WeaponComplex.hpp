@@ -39,7 +39,9 @@ class WeaponComplex
                	int GetWeaponRadiusMin() const { return weapon_radius_min; };
                
                 bool AddSlot(ItemSlot*);
-                bool AddItem(BaseItem*);
+                //bool AddItem(BaseItem*);
+                ItemSlot* GetEmptyWeaponSlot() const;
+                ItemSlot* GetEquipedWeakestWeaponSlot() const;
         	
                	void PrepareWeapons();
                      

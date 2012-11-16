@@ -61,6 +61,9 @@
 
 #include "../builder/ItemSlotBuilder.hpp"
 
+#include "../docking/Shop.hpp"
+#include "../docking/Store.hpp"
+
 Vehicle::Vehicle()
 {
 	god_mode = false;
@@ -189,28 +192,59 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
 		
 }
 
-            	
-bool Vehicle::ManageFunctionGoodsPack(BaseItem* item)
+bool Vehicle::ManageItem(BaseItem* item)
 {
-	if (MergeIdenticalGoods(item) == true)
-	{       		
-		return true;
+	switch(item->GetTypeId())
+	{
+		case ENTITY::EQUIPMENT_ID: 	{ return ManageFunctionEquipment(item); break; }
+		case ENTITY::MODULE_ID: 	{ return ManageFunctionModule(item); break; }
+		case ENTITY::ARTEFACT_ID: 	{ return ManageFunctionArtefact(item); break; }	
+		case ENTITY::GOODS_ID: 		{ return ManageFunctionGoodsPack(item); break; }
 	}
 	
 	return false;
+} 
+            	
+bool Vehicle::ManageFunctionGoodsPack(BaseItem* item)
+{
+	return MergeIdenticalGoods(item);
 }	
 
 bool Vehicle::ManageFunctionEquipment(BaseItem* item)
 {
 	if (item->GetParentSubTypeId() == ENTITY::WEAPON_SLOT_ID)
 	{
-		return weapon_complex.AddItem(item);
+		ItemSlot* item_slot = weapon_complex.GetEmptyWeaponSlot();
+		if (item_slot != NULL)
+		{
+			return item_slot->SwapItem(item->GetItemSlot());
+		}
+		else
+		{
+			ItemSlot* item_slot = weapon_complex.GetEquipedWeakestWeaponSlot();
+			if (item_slot != NULL)
+			{
+				if (item->GetPrice() > item_slot->GetItem()->GetPrice())
+				{
+					return item_slot->SwapItem(item->GetItemSlot());
+				}
+			}
+		}
 	}
-	
-	ItemSlot* item_slot = GetFuctionalSlot(item->GetParentSubTypeId());
-	if (item_slot->GetEquiped() == false)
+	else
 	{
-		return item_slot->InsertItem(item);
+		ItemSlot* item_slot = GetFuctionalSlot(item->GetParentSubTypeId());
+		if (item_slot->GetEquiped() == false)
+		{
+			return item_slot->SwapItem(item->GetItemSlot());
+		}
+		else
+		{
+			if (item->GetPrice() > item_slot->GetItem()->GetPrice())
+			{
+				return item_slot->SwapItem(item->GetItemSlot());
+			}
+		}		
 	}
 	
 	return false;        
@@ -225,6 +259,7 @@ bool Vehicle::ManageFunctionModule(BaseItem* item)
 			if (slot_funct_vec[i]->GetItem()->GetSubTypeId() == item->GetParentSubTypeId())
 			{
 				return ((BaseEquipment*)slot_funct_vec[i]->GetItem())->InsertModule((BaseModule*)item);
+				
 			}
 		}
 	}
@@ -237,13 +272,10 @@ bool Vehicle::ManageFunctionArtefact(BaseItem* item)
 	ItemSlot* artef_slot = GetEmptyArtefactSlot();
 	if (artef_slot != NULL)
 	{
-		return artef_slot->InsertItem(item);
+		return artef_slot->SwapItem(item->GetItemSlot());
 	}
-	else
-	{
-		AddItemToEmptyCargoSlot(item);		
-		return true;
-	}
+
+	return false;
 }
 
 ItemSlot* Vehicle::GetFuctionalSlot(int functional_slot_subtype_id) const
@@ -306,7 +338,7 @@ bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
 {	
  	if (AddItemToCargoSlot(container->GetItemSlot()->GetItem()) == true)
        	{      
-       		container->GetItemSlot()->RemoveItem();    
+       		container->GetItemSlot()->RemoveItem();    // no need
        		container->SilentKill();
        								
        		return true;
@@ -322,42 +354,50 @@ bool Vehicle::AddItemToCargoSlot(BaseItem* item)
 		return ManageFunctionGoodsPack(item);
 	}
 	
-	AddItemToEmptyCargoSlot(item);
-	return true;          
-} 
-
-bool Vehicle::AddAndManageItem(BaseItem* item)
-{
-	if (ManageItem(item) == false)
+	ItemSlot* cargo_slot = GetEmptyCargoSlot();
+	if (cargo_slot != NULL)
 	{
-		return AddItemToCargoSlot(item);
-	}
-	
-	return true;
-}
-
-bool Vehicle::ManageItem(BaseItem* item)
-{
-	switch(item->GetTypeId())
-	{
-		case ENTITY::EQUIPMENT_ID: 	{ return ManageFunctionEquipment(item); break; }
-		case ENTITY::MODULE_ID: 	{ return ManageFunctionModule(item); break; }
-		case ENTITY::ARTEFACT_ID: 	{ return ManageFunctionArtefact(item); break; }	
-		case ENTITY::GOODS_ID: 		{ return ManageFunctionGoodsPack(item); break; }
+		return cargo_slot->InsertItem(item);
 	}
 	
 	return false;
 } 
-      
-void Vehicle::ManageItemsInCargo()
+
+bool Vehicle::AddAndManageItem(BaseItem* item)
 {
+	bool result = AddItemToCargoSlot(item);
+	if (result == true)
+	{
+		ManageItem(item);
+	}
+	
+	return result;
+}
+     
+//void Vehicle::ManageItemsInCargo()
+//{
+	//for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
+	//{
+		//if (slot_cargo_vec[i]->GetEquiped() == true)
+		//{
+			//ManageItem(slot_cargo_vec[i]->GetItem());
+		//}
+	//}
+//}
+    
+void Vehicle::SellItemsInCargo() const
+{
+	Store* store = ((Kosmoport*)land)->GetStore();
+	Shop* shop = ((Kosmoport*)land)->GetShop();
+		
 	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
 	{
 		if (slot_cargo_vec[i]->GetEquiped() == true)
 		{
-			if (ManageItem(slot_cargo_vec[i]->GetItem()) == true)
+			switch(slot_cargo_vec[i]->GetItem()->GetTypeId())
 			{
-				slot_cargo_vec[i]->RemoveItem();
+				case ENTITY::GOODS_ID: 	   { shop->BuyGoods(owner_npc, (GoodsPack*)slot_cargo_vec[i]->GetItem()); break; }				
+				case ENTITY::EQUIPMENT_ID: { store->BuyItemFromSlot(owner_npc, slot_cargo_vec[i]); break; }
 			}
 		}
 	}
@@ -374,18 +414,6 @@ bool Vehicle::MergeIdenticalGoods(BaseItem* item)
 	}
 	
 	return false;                
-} 
-
-bool Vehicle::AddItemToEmptyCargoSlot(BaseItem* item)
-{
-	ItemSlot* empty_cargo = GetEmptyCargoSlot();
-	if (empty_cargo != NULL)
-	{
-		empty_cargo->InsertItem(item);
-		return true;
-	}
-	
-	return false;
 } 
 
 void Vehicle::BindOwnerNpc(Npc* owner_npc) 	           
