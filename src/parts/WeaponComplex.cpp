@@ -53,20 +53,63 @@ TextureOb* WeaponComplex::GetItemTextureOb(int index) const
 	return NULL;	
 }
                        	
-bool WeaponComplex::AddItem(BaseItem* item)
+//bool WeaponComplex::AddItem(BaseItem* item)
+//{
+        //for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
+        //{
+                //if (slot_weapon_vec[i]->GetEquiped() == false)
+                //{
+                     //slot_weapon_vec[i]->InsertItem(item);
+                     //return true;   
+                //}
+        //}
+        
+        //return false;
+//}
+ 
+ItemSlot* WeaponComplex::GetEmptyWeaponSlot() const
 {
-        for(unsigned int i = 0; i<slot_weapon_vec.size(); i++)
+        for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
         {
                 if (slot_weapon_vec[i]->GetEquiped() == false)
                 {
-                     slot_weapon_vec[i]->InsertItem(item);
-                     return true;   
+                    	return slot_weapon_vec[i];
                 }
         }
         
-        return false;
+        return NULL;
 }
- 
+
+ItemSlot* WeaponComplex::GetEquipedWeakestWeaponSlot() const
+{
+	int min_price = 0;
+	int i_min = 0;
+	
+	if (slot_weapon_equiped_vec.size() == 1)
+	{
+		return slot_weapon_equiped_vec[0];
+        }
+
+	if (slot_weapon_equiped_vec.size() > 1)
+	{
+		min_price = slot_weapon_equiped_vec[0]->GetItem()->GetPrice();
+		
+		for(unsigned int i=1; i<slot_weapon_equiped_vec.size(); i++)
+        	{
+        		int price = slot_weapon_equiped_vec[i]->GetItem()->GetPrice();
+                	if (min_price > price)
+                	{
+                		min_price = price;
+                		i_min = i;
+                	}
+        	}
+        	
+        	return slot_weapon_equiped_vec[i_min];
+        }
+        
+        return NULL;
+}
+                
 void WeaponComplex::PrepareWeapons()
 {       
      	// used once at the begining of turn

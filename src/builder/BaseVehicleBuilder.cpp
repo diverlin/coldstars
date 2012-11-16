@@ -31,7 +31,15 @@
 #include "../items/equipment/RocketEquipment.hpp"
 #include "../items/equipment/ScanerEquipment.hpp"
 
+#include "../items/modules/LazerModule.hpp"
+#include "../items/modules/RocketModule.hpp"
+#include "../items/modules/DriveModule.hpp"
 #include "../items/modules/DroidModule.hpp"
+#include "../items/modules/RadarModule.hpp"
+#include "../items/modules/BakModule.hpp"
+#include "../items/modules/ProtectorModule.hpp"
+#include "../items/modules/GrappleModule.hpp"
+#include "../items/modules/ScanerModule.hpp"
 
 #include "../items/others/Bomb.hpp"
 
@@ -142,7 +150,7 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
 
 void BaseVehicleBuilder::Equip(Vehicle* vehicle, int tech_level) const
 {
-    	for (unsigned int i=0; i<vehicle->GetKorpusData().slot_weapon_num; i++)
+    	for (unsigned int i=0; i<vehicle->GetKorpusData().slot_weapon_num + 2; i++)
     	{
     		if (getRandBool())
     		{
@@ -155,7 +163,11 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle, int tech_level) const
     	}   
            
     	vehicle->AddAndManageItem(RadarEquipmentBuilder::Instance().GetNewRadarEquipment(tech_level)); 
+
+    	vehicle->AddAndManageItem(DriveEquipmentBuilder::Instance().GetNewDriveEquipment(1)); 
+    	vehicle->AddAndManageItem(DriveEquipmentBuilder::Instance().GetNewDriveEquipment(3)); 
     	vehicle->AddAndManageItem(DriveEquipmentBuilder::Instance().GetNewDriveEquipment(tech_level)); 
+
     	vehicle->AddAndManageItem(BakEquipmentBuilder::Instance().GetNewBakEquipment(tech_level));         
     	//vehicle->AddAndManageItem(EnergizerEquipmentBuilder::Instance().GetNewEnergizerEquipment(tech_level));     
    	//vehicle->AddAndManageItem(FreezerEquipmentBuilder::Instance().GetNewFreezerEquipment(tech_level));  
@@ -174,14 +186,26 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle, int tech_level) const
         	vehicle->AddAndManageItem(DroidModuleBuilder::Instance().GetNewDroidModule());
     	}  
     	
-    	//for (unsigned int i=0; i<3; i++) 
-    	//{        
-    	    	//RadarModuleBuilder::Instance().CreateNewRadarModule();
-        	//RadarModuleBuilder::Instance().CreateNewInternals();
-        	//vehicle->AddItem(RadarModuleBuilder::Instance().GetRadarModule());
-    	//}  
+    	for (unsigned int i=0; i<4; i++) 
+    	{     
+    		int module_subtype_id = getRandInt(ENTITY::LAZER_MODULE_ID, ENTITY::SCANER_MODULE_ID); 
+    		switch(module_subtype_id)  
+    		{
+    			case ENTITY::LAZER_MODULE_ID: 		{ vehicle->AddItemToCargoSlot(LazerModuleBuilder::Instance().GetNewLazerModule()); break; }
+    			case ENTITY::ROCKET_MODULE_ID: 		{ vehicle->AddItemToCargoSlot(RocketModuleBuilder::Instance().GetNewRocketModule()); break; }    		
+    			case ENTITY::DRIVE_MODULE_ID: 		{ vehicle->AddItemToCargoSlot(DriveModuleBuilder::Instance().GetNewDriveModule()); break; }
+    			case ENTITY::RADAR_MODULE_ID: 		{ vehicle->AddItemToCargoSlot(RadarModuleBuilder::Instance().GetNewRadarModule()); break; }
+    			case ENTITY::BAK_MODULE_ID: 		{ vehicle->AddItemToCargoSlot(BakModuleBuilder::Instance().GetNewBakModule()); break; }
+    			//case ENTITY::ENERGIZER_MODULE_ID:	{ vehicle->AddItemToCargoSlot(EnergizerModuleBuilder::Instance().GetNewEnergizerModule()); break; }
+    			case ENTITY::PROTECTOR_MODULE_ID: 	{ vehicle->AddItemToCargoSlot(ProtectorModuleBuilder::Instance().GetNewProtectorModule()); break; }
+    			case ENTITY::DROID_MODULE_ID: 		{ vehicle->AddItemToCargoSlot(DroidModuleBuilder::Instance().GetNewDroidModule()); break; }
+    			//case ENTITY::FREEZER_MODULE_ID: 	{ vehicle->AddItemToCargoSlot(FreezerModuleBuilder::Instance().GetNewFreezerModule()); break; }
+    			case ENTITY::GRAPPLE_MODULE_ID: 	{ vehicle->AddItemToCargoSlot(GrappleModuleBuilder::Instance().GetNewGrappleModule()); break; }
+    			case ENTITY::SCANER_MODULE_ID: 		{ vehicle->AddItemToCargoSlot(ScanerModuleBuilder::Instance().GetNewScanerModule()); break; }
+    		}
+    	}  
     	    	
-    	for (unsigned int i=0; i<2; i++) 
+    	for (unsigned int i=0; i<1; i++) 
     	{        
         	vehicle->AddItemToCargoSlot(BombBuilder::Instance().GetNewBomb());
     	}   

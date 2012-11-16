@@ -73,9 +73,10 @@ class Vehicle : public BaseSpaceEntity
 
                 bool AddItemToCargoSlot(BaseItem*);
                 bool AddAndManageItem(BaseItem*);
-                void ManageItemsInCargo();
-                bool ManageItem(BaseItem*);
-                                
+                
+                //void ManageItemsInCargo();
+                void SellItemsInCargo() const;
+                                                
                 bool UnpackContainerItemToCargoSlot(Container*);
                 
                 int GetFreeSpace() const { return propetries.free_space; };
@@ -182,6 +183,7 @@ class Vehicle : public BaseSpaceEntity
        	        ItemSlot* GetEmptyArtefactSlot() const;
        	        ItemSlot* GetCargoSlotWithGoods(int);
        	        
+       	        bool ManageItem(BaseItem*);
        	        bool ManageFunctionEquipment(BaseItem*);
                 bool ManageFunctionModule(BaseItem*);
                 bool ManageFunctionArtefact(BaseItem*);
@@ -207,7 +209,6 @@ class Vehicle : public BaseSpaceEntity
         	bool god_mode;
         
              	void DropRandomItemToSpace();   
-             	bool AddItemToEmptyCargoSlot(BaseItem*);
                 bool MergeIdenticalGoods(BaseItem*);
                 
                 bool UpdateFadeInEffect();

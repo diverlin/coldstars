@@ -20,6 +20,7 @@
 #include "Kosmoport.hpp"
 #include "../common/EntityManager.hpp"
 #include "../common/myStr.hpp"
+#include "../common/Logger.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../slots/VehicleSlot.hpp" 
 #include "../pilots/Npc.hpp"

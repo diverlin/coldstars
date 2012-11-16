@@ -73,6 +73,10 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 	{
 		if (modules_vec.size() < data_item.modules_num_max)
     		{
+    			if (module->GetItemSlot() != NULL)
+    			{
+    				module->GetItemSlot()->RemoveItem();
+    			}
     			module->SetItemSlot(NULL);
     			module->SetEquipmentOwner(this);
 	       		modules_vec.push_back(module);                

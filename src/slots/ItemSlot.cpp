@@ -66,7 +66,22 @@ ItemSlot::~ItemSlot()
 		item = NULL;
 	}
 }  
-        		        
+    
+bool ItemSlot::FakeInsertItem(BaseItem* item) const
+{
+	if (data_id.subtype_id == ENTITY::CARGO_SLOT_ID) 
+	{
+		return true;
+	}
+
+	if (data_id.subtype_id == item->GetParentSubTypeId())
+	{                                     
+                return true;
+	}
+	
+	return false;
+}
+    		        
 bool ItemSlot::InsertItem(BaseItem* item)
 {
 	if (owner != NULL) // slot in cursor has owner = NULL
@@ -81,6 +96,10 @@ bool ItemSlot::InsertItem(BaseItem* item)
 	{           
 		this->item = item;
 		equiped = true; 
+		if (item->GetItemSlot() != NULL)
+		{
+			item->GetItemSlot()->RemoveItem();
+		}
 		item->SetItemSlot(this);
 	     
 		return true;
@@ -90,6 +109,10 @@ bool ItemSlot::InsertItem(BaseItem* item)
 	{                                     
 		this->item = item;
 		equiped = true; 
+		if (item->GetItemSlot() != NULL)
+		{
+			item->GetItemSlot()->RemoveItem();
+		}
 		item->SetItemSlot(this);
                 UpdateVehiclePropetries(); 
 
@@ -101,13 +124,13 @@ bool ItemSlot::InsertItem(BaseItem* item)
 
 void ItemSlot::RemoveItem()
 {        
-	if (owner != NULL) // slot in cursor has owner = NULL
-	{
-		if (owner->GetTypeId() == ENTITY::VEHICLE_ID)
-		{
-			GetOwnerVehicle()->ChangeMass(-item->GetMass());
-		}
-	}
+	//if (owner != NULL) // slot in cursor has owner = NULL
+	//{
+		//if (owner->GetTypeId() == ENTITY::VEHICLE_ID)
+		//{
+			//GetOwnerVehicle()->ChangeMass(-item->GetMass());
+		//}
+	//}
 	
         item = NULL;
     	equiped = false;
@@ -243,55 +266,52 @@ void ItemSlot::DropItemToSpace(Vehicle* vehicle)
         TextureOb* textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::CONTAINER_ID);   
         
         Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, item);
-
-        RemoveItem();
         
 	vehicle->GetStarSystem()->Add(container, vehicle->GetPoints().GetCenter());	
 }
         
-bool ItemSlot::SwapItem(ItemSlot* _slot)
+bool ItemSlot::SwapItem(ItemSlot* slot)
 {
-       	if ( (equiped == false) and (_slot->GetEquiped() == true) )
+       	if ( (equiped == false) and (slot->GetEquiped() == true) )
        	{      
-       		if (InsertItem(_slot->GetItem()) == true) 
-       		{
-       			_slot->RemoveItem(); 
-       			
+       		if (InsertItem(slot->GetItem()) == true) 
+       		{  			
        			return true; 
        		}             
 	}
 	
-	if ( (equiped == true) and (_slot->GetEquiped() == false) )
+	if ( (equiped == true) and (slot->GetEquiped() == false) )
        	{ 
-		if (_slot->InsertItem(GetItem())     == true)
-		{ 
-			RemoveItem(); 
-			
+		if (slot->InsertItem(GetItem()) == true)
+		{			
 			return true; 
 		}
 	}
 
-	if ( (equiped == true) and (_slot->GetEquiped() == true) )
-       	{          
-       		if ( (item->GetTypeId() == ENTITY::MODULE_ID) and (_slot->GetItem()->GetTypeId() == ENTITY::EQUIPMENT_ID) )
+	if ( (equiped == true) and (slot->GetEquiped() == true) )
+       	{        
+       		if (item->GetTypeId() == slot->GetItem()->GetTypeId())
        		{
-			if (((BaseEquipment*)_slot->GetItem())->InsertModule((BaseModule*)item) == true)  
-			{ 
-				RemoveItem(); 
-				
+       			BaseItem* tmp_item = slot->GetItem();
+       			if ( (slot->FakeInsertItem(item) == true) and (FakeInsertItem(tmp_item) == true) )
+       			{       				
+       				slot->InsertItem(item);
+       				tmp_item->SetItemSlot(NULL);
+       				InsertItem(tmp_item);
+       			
+       				return true;
+       			}
+       		
+       		}
+       	
+       	  
+       		if ( (item->GetTypeId() == ENTITY::MODULE_ID) and (slot->GetItem()->GetTypeId() == ENTITY::EQUIPMENT_ID) )
+       		{
+			if (((BaseEquipment*)slot->GetItem())->InsertModule((BaseModule*)item) == true)  
+			{				
 				return true;
         		}
        		}
-       		
-       		//if ( (item->GetTypeId() == TYPE::EQUIPMENT_ID) and (_slot->GetItem()->GetTypeId() == TYPE::MODULE_ID) )
-       		//{
-			 //if (((BaseEquipment*)item)->InsertModule((BaseModule*)_slot->GetItem()) == true)  
-			 //{ 
-			 	//_slot->RemoveItem(); 
-			 	
-			 	//return true; 
-			 //}       		        		
-       		//}
 	}               
 	
 	return false;

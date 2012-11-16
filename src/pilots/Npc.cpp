@@ -86,6 +86,7 @@ void Npc::MindInKosmoport()
 
        		state_machine.UpdateInStaticInDock();      
        		
+       		vehicle->SellItemsInCargo();
        		vehicle->LaunchingEvent();
        	}
        	
