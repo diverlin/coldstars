@@ -20,6 +20,7 @@
 #include "ButtonSingle.hpp"
 #include "../config/config.hpp"
 #include "../slots/VehicleSlot.hpp"
+#include "../slots/ItemSlot.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../pilots/Player.hpp"
 
@@ -60,28 +61,40 @@ GuiAngar::~GuiAngar()
 	
 void GuiAngar::BindAngar(Angar* angar)
 {
-	rect_slot_vec.clear();
-
-        int column_counter = 0;
+	rect_vehicleslot_vec.clear();
+	rect_itemslot_vec.clear();
+	
+        int column_counter = 1;
         int row_counter = 0;
-        for (int i=0; i<angar->vehicleslot_visitors_vec.size(); i++)
+        for (int i=0; i<angar->vehicle_visitors_slot_vec.size(); i++)
  	{
- 		Rect _rect(column_counter*GUI::ITEMSLOT::WIDTH_FOR_ANGAR, row_counter*GUI::ITEMSLOT::HEIGHT_FOR_ANGAR, 
- 			   GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
-        	rect_slot_vec.push_back(GuiPair<Rect, VehicleSlot*>(_rect, angar->vehicleslot_visitors_vec[i]));
+ 		Rect _rect(column_counter*GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, row_counter*GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR, 
+ 			   GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR);
+        	rect_vehicleslot_vec.push_back(GuiPair<Rect, VehicleSlot*>(_rect, angar->vehicle_visitors_slot_vec[i]));
                 
                 column_counter++;                
 	}
         
-        column_counter = 0;
+        column_counter = 1;
         row_counter = 2;
-        for (int i=0; i<angar->vehicleslot_military_vec.size(); i++)
+        for (int i=0; i<angar->vehicle_military_slot_vec.size(); i++)
+ 	{
+ 		Rect _rect(column_counter*GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, row_counter*GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR, 
+ 			   GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR);
+        	rect_vehicleslot_vec.push_back(GuiPair<Rect, VehicleSlot*>(_rect, angar->vehicle_military_slot_vec[i]));
+                
+                column_counter++;                
+	}
+	
+	column_counter = 0;
+        row_counter = 0;
+        for (int i=0; i<angar->item_slot_vec.size(); i++)
  	{
  		Rect _rect(column_counter*GUI::ITEMSLOT::WIDTH_FOR_ANGAR, row_counter*GUI::ITEMSLOT::HEIGHT_FOR_ANGAR, 
  			   GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
-        	rect_slot_vec.push_back(GuiPair<Rect, VehicleSlot*>(_rect, angar->vehicleslot_military_vec[i]));
+        	rect_itemslot_vec.push_back(GuiPair<Rect, ItemSlot*>(_rect, angar->item_slot_vec[i]));
                 
-                column_counter++;                
+                row_counter++;                
 	}
 
 }
@@ -147,22 +160,33 @@ void GuiAngar::ButtonsAction() const
 
 bool GuiAngar::UpdateMouseVehicleSlotsInteraction(const MouseData& data_mouse)
 {	
-        for (unsigned int i=0; i<rect_slot_vec.size(); i++)
+        for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
         { 
-                if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx, data_mouse.my) == true)
+                if (rect_vehicleslot_vec[i].first.CheckInteraction(data_mouse.mx, data_mouse.my) == true)
                 {
                         if (data_mouse.right_click == true)
                         {
-                                if (rect_slot_vec[i].second->GetVehicle() != NULL)
+                                if (rect_vehicleslot_vec[i].second->GetVehicle() != NULL)
                                 {
-                                        player->GetNpc()->SetScanTarget(rect_slot_vec[i].second->GetVehicle());
-                                        player->GetGuiManager().GetGuiVehicleScan().BindVehicle(rect_slot_vec[i].second->GetVehicle());
+                                        player->GetNpc()->SetScanTarget(rect_vehicleslot_vec[i].second->GetVehicle());
+                                        player->GetGuiManager().GetGuiVehicleScan().BindVehicle(rect_vehicleslot_vec[i].second->GetVehicle());
                                         return true;
                                 }
                         }
                 }
         }
-        
+
+        for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
+        { 
+                if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.mx, data_mouse.my) == true)
+                {
+                        if (data_mouse.left_click == true)
+                        {
+  				player->GetCursor().GetItemSlot()->SwapItem(rect_itemslot_vec[i].second);
+                        }
+                }
+        }
+                
         return false;
 }
 
@@ -171,22 +195,26 @@ void GuiAngar::RenderVehicleSlots(Angar* angar) const
 {
 	glPushMatrix();
 		glTranslatef(offset.x, offset.y, 0);
-        	for (unsigned int i=0; i<rect_slot_vec.size(); i++)
+        	for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
         	{
-                	rect_slot_vec[i].second->Render(rect_slot_vec[i].first);
+                	rect_vehicleslot_vec[i].second->Render(rect_vehicleslot_vec[i].first);
+        	}
+        	for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
+        	{
+                	rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, offset);
         	}
         glPopMatrix();
 }
 
 void GuiAngar::RenderFocusedItemInfo(const MouseData& data_mouse, Angar* angar) const
 {
-        for (unsigned int i=0; i<rect_slot_vec.size(); i++)
+        for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
         { 
-		if (rect_slot_vec[i].second->GetVehicle() != NULL)
+		if (rect_vehicleslot_vec[i].second->GetVehicle() != NULL)
                 {
-                       	if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
+                       	if (rect_vehicleslot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
                 	{
-		                rect_slot_vec[i].second->RenderItemInfo(rect_slot_vec[i].first, -offset.x, -offset.y);
+		                rect_vehicleslot_vec[i].second->RenderItemInfo(rect_vehicleslot_vec[i].first, -offset.x, -offset.y);
 		                return;
                 	}
                 }
