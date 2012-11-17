@@ -181,7 +181,7 @@ void EntityManager::SaveEvent()
 	
 	for (std::map<int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
 	{
-		Logger::Instance().Log("saving " + getEntityStr(iterator->second->GetTypeId()) + "(" +int2str(iterator->second->GetTypeId()) +") " + getEntityStr(iterator->second->GetSubTypeId()) + "(" + int2str(iterator->second->GetSubTypeId()) + ") id=" + int2str(iterator->second->GetId()));
+		Logger::Instance().Log("saving " + getTypeStr(iterator->second->GetTypeId()) + "(" +int2str(iterator->second->GetTypeId()) +") " + getTypeStr(iterator->second->GetSubTypeId()) + "(" + int2str(iterator->second->GetSubTypeId()) + ") id=" + int2str(iterator->second->GetId()));
 		iterator->second->SaveData(save_ptree);
 	}
 	
@@ -640,7 +640,7 @@ void EntityManager::LoadPass1() const
 	Logger::Instance().Log("RESOLVING DEPENDENCY START");
 	for (std::map<int, Base*>::const_iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
 	{
-		Logger::Instance().Log("ResolveData() in " + getEntityStr(iterator->second->GetTypeId()));
+		Logger::Instance().Log("ResolveData() in " + getTypeStr(iterator->second->GetTypeId()));
 		iterator->second->ResolveData();
 	}
 

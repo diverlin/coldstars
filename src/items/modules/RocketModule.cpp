@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 RocketModule::RocketModule(int id)
 {
-        data_id.type_id    = id;
+        data_id.id	   = id;
         data_id.subtype_id = ENTITY::ROCKET_MODULE_ID;  
         
      	ammo_max_add = 0;

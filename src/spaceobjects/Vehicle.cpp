@@ -374,16 +374,16 @@ bool Vehicle::AddAndManageItem(BaseItem* item)
 	return result;
 }
      
-//void Vehicle::ManageItemsInCargo()
-//{
-	//for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
-	//{
-		//if (slot_cargo_vec[i]->GetEquiped() == true)
-		//{
-			//ManageItem(slot_cargo_vec[i]->GetItem());
-		//}
-	//}
-//}
+void Vehicle::ManageItemsInCargo()
+{
+	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
+	{
+		if (slot_cargo_vec[i]->GetEquiped() == true)
+		{
+			ManageItem(slot_cargo_vec[i]->GetItem());
+		}
+	}
+}
     
 void Vehicle::SellItemsInCargo() const
 {

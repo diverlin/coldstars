@@ -74,7 +74,7 @@ class Vehicle : public BaseSpaceEntity
                 bool AddItemToCargoSlot(BaseItem*);
                 bool AddAndManageItem(BaseItem*);
                 
-                //void ManageItemsInCargo();
+                void ManageItemsInCargo();
                 void SellItemsInCargo() const;
                                                 
                 bool UnpackContainerItemToCargoSlot(Container*);
