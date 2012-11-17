@@ -95,7 +95,7 @@ std::string getNavigatorActionStr(int type_id)
 	}
 }
 
-std::string getEntityStr(int type_id)
+std::string getTypeStr(int type_id)
 {
 	switch(type_id)
 	{

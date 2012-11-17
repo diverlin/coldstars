@@ -69,7 +69,7 @@ void DriveComplex::ResetTarget()
 	}
 	else
 	{
-		Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" RESET DriveComplex target =" + getEntityStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), 2); 
+		Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" RESET DriveComplex target =" + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), 2); 
 	}
 	#endif    
 	
@@ -115,7 +115,7 @@ void DriveComplex::SetTarget(BaseSpaceEntity* target, int _action_id)
 	UpdatePath();
 	
 	#if DRIVECOMPLEX_LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex GOT Target " + getEntityStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " navigator_action = " + getNavigatorActionStr(action_id), 2); 
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex GOT Target " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " navigator_action = " + getNavigatorActionStr(action_id), 2); 
 	#endif    
 }
   

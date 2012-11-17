@@ -124,13 +124,13 @@ bool ItemSlot::InsertItem(BaseItem* item)
 
 void ItemSlot::RemoveItem()
 {        
-	//if (owner != NULL) // slot in cursor has owner = NULL
-	//{
-		//if (owner->GetTypeId() == ENTITY::VEHICLE_ID)
-		//{
-			//GetOwnerVehicle()->ChangeMass(-item->GetMass());
-		//}
-	//}
+	if (owner != NULL) // slot in cursor has owner = NULL
+	{
+		if (owner->GetTypeId() == ENTITY::VEHICLE_ID)
+		{
+			GetOwnerVehicle()->ChangeMass(-item->GetMass());
+		}
+	}
 	
         item = NULL;
     	equiped = false;
@@ -303,15 +303,22 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
        			}
        		
        		}
-       	
-       	  
+
        		if ( (item->GetTypeId() == ENTITY::MODULE_ID) and (slot->GetItem()->GetTypeId() == ENTITY::EQUIPMENT_ID) )
        		{
 			if (((BaseEquipment*)slot->GetItem())->InsertModule((BaseModule*)item) == true)  
-			{				
+			{	
 				return true;
         		}
        		}
+
+       		//if ( (item->GetTypeId() == ENTITY::EQUIPMENT_ID) and (slot->GetItem()->GetTypeId() == ENTITY::MODULE_ID) )
+       		//{
+			//if (((BaseEquipment*)item)->InsertModule((BaseModule*)slot->GetItem()) == true)  
+			//{				
+				//return true;
+        		//}
+       		//}
 	}               
 	
 	return false;

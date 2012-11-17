@@ -180,11 +180,6 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle, int tech_level) const
     	{
       		vehicle->AddAndManageItem(GrappleEquipmentBuilder::Instance().GetNewGrappleEquipment(tech_level)); 
    	}
-
-    	for (unsigned int i=0; i<3; i++) 
-    	{        
-        	vehicle->AddAndManageItem(DroidModuleBuilder::Instance().GetNewDroidModule());
-    	}  
     	
     	for (unsigned int i=0; i<4; i++) 
     	{     

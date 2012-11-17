@@ -68,7 +68,7 @@ void GrappleEquipment::AddTarget(BaseSpaceEntity* target)
                 free_strength -= target->GetMass();
                 
                	#if GRAPPLE_QUEUE_LOG_ENABLED == 1 
-		Logger::Instance().Log("vehicle_id=" + int2str(item_slot->GetOwnerVehicle()->GetId()) + " " + getEntityStr(target->GetTypeId()) + " id = " + int2str(target->GetId()) + " grapple->AddTarget()", 2); 
+		Logger::Instance().Log("vehicle_id=" + int2str(item_slot->GetOwnerVehicle()->GetId()) + " " + getTypeStr(target->GetTypeId()) + " id = " + int2str(target->GetId()) + " grapple->AddTarget()", 2); 
 		#endif
         }        
 }
@@ -149,7 +149,7 @@ void GrappleEquipment::UpdateGrabScenarioProgram()
        		else
        		{
                         #if GRAPPLE_QUEUE_LOG_ENABLED == 1 
-			Logger::Instance().Log("vehicle_id=" + int2str(item_slot->GetOwnerVehicle()->GetId()) + " " + getEntityStr((*it)->GetTypeId()) + " id = " + int2str((*it)->GetId()) + " grapple->RemoveTarget()", 2); 
+			Logger::Instance().Log("vehicle_id=" + int2str(item_slot->GetOwnerVehicle()->GetId()) + " " + getTypeStr((*it)->GetTypeId()) + " id = " + int2str((*it)->GetId()) + " grapple->RemoveTarget()", 2); 
 			#endif
                         
                         it = target_vec.erase(it);

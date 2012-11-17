@@ -85,7 +85,8 @@ void Npc::MindInKosmoport()
 		//}
 
        		state_machine.UpdateInStaticInDock();      
-       		
+
+       		vehicle->ManageItemsInCargo();       		
        		vehicle->SellItemsInCargo();
        		vehicle->LaunchingEvent();
        	}
@@ -239,7 +240,7 @@ void Npc::UpdateInfo()
     	info.addTitleStr("NPC");
     	info.addNameStr("id:");           info.addValueStr( int2str(data_id.id)  );
     	info.addNameStr("race:");   	  info.addValueStr( getRaceStr(race_id) ); 
-    	info.addNameStr("class:");   	  info.addValueStr( getEntityStr(data_id.subtype_id) );  
+    	info.addNameStr("class:");   	  info.addValueStr( getTypeStr(data_id.subtype_id) );  
     	info.addNameStr("model_ai:");     info.addValueStr( getAiModelStr(ai_model->GetTypeId()) );  
     	info.addNameStr("credits:");   	  info.addValueStr( int2str(credits) );	
     	info.addNameStr("expirience:");   info.addValueStr( int2str(skill.GetExpirience()) + " / " + int2str(skill.GetExpirienceNextLevel()) );	
