@@ -26,6 +26,7 @@
 #include "../resources/TextureManager.hpp"
 
 #include "../builder/VehicleSlotBuilder.hpp"
+#include "../builder/ItemSlotBuilder.hpp"
 
 AngarBuilder& AngarBuilder::Instance()
 {
@@ -82,6 +83,12 @@ void AngarBuilder::CreateNewInternals(Angar* angar) const
  		angar->AddVehicleSlot(vehicle_slot);
 	}
         
+        for (int i=0; i<ANGAR_ITEM_SLOTS_NUM; i++)
+ 	{
+ 		ItemSlot* cargo_slot = GetNewItemSlot(ENTITY::CARGO_SLOT_ID); 
+                angar->AddItemSlot(cargo_slot);
+	}
+	
 	angar->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TEXTURE::ANGAR_BACKGROUND_ID));
 }
 

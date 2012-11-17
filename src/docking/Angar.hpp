@@ -20,6 +20,7 @@
 #define ANGAR_H
 
 #include "Room.hpp"
+class ItemSlot;
 class VehicleSlot; 
 class Vehicle;
 
@@ -30,10 +31,11 @@ class Angar : public Room
                 ~Angar();
                 
                 void AddVehicleSlot(VehicleSlot*);
+                void AddItemSlot(ItemSlot*);
+                
                 void Ai() const;
                 
                 bool AddVehicle(Vehicle*);
-                //bool RemoveVehicle(Vehicle*);
 
                 int GetFreeVehicleSlotTotalNum() const;
                 
@@ -47,10 +49,12 @@ class Angar : public Room
 		void ResolveData();
 		
         private:               
-                std::vector<VehicleSlot*> vehicleslot_total_vec;
-                std::vector<VehicleSlot*> vehicleslot_military_vec;
-                std::vector<VehicleSlot*> vehicleslot_visitors_vec;
-                                                                
+                std::vector<VehicleSlot*> vehicle_total_slot_vec;
+                std::vector<VehicleSlot*> vehicle_military_slot_vec;
+                std::vector<VehicleSlot*> vehicle_visitors_slot_vec;
+
+                std::vector<ItemSlot*> item_slot_vec;
+                                                                                
                 int price_fuel;
                 int price_armor;
                 

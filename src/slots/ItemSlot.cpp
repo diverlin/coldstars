@@ -35,6 +35,8 @@
 #include "../items/others/Bomb.hpp"
 
 #include "../docking/Store.hpp"
+#include "../docking/Angar.hpp"
+
 #include "../common/Logger.hpp"
 #include "../common/EntityManager.hpp"
 
@@ -437,6 +439,6 @@ void ItemSlot::ResolveDataUniqueItemSlot()
 	       case ENTITY::VEHICLE_ID: 	{	((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
 	       case ENTITY::CONTAINER_ID:     	{	((Container*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }
 	       case ENTITY::STORE_ID:         	{ 	((Store*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
-	       case ENTITY::ANGAR_ID:         	{ 	}//((Angar*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this, tmp_rect); break; }
+	       case ENTITY::ANGAR_ID:         	{ 	((Angar*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
 	}
 }
