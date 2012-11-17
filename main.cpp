@@ -80,10 +80,13 @@ int main()
 		/* client code start */
 		player->RunSession(turn_timer);
 		player->UpdatePostTransactionEvent(turn_timer);      
-		Player* recreated_player = SaveLoadManager::Instance().Update(player);
-		if (recreated_player != NULL)
+		
+		
+		Player* loaded_player = SaveLoadManager::Instance().Update(player);
+		if (loaded_player != NULL)
 		{
-			player = recreated_player;
+			player = loaded_player;
+			galaxy = loaded_player->GetNpc()->GetVehicle()->GetStarSystem()->GetGalaxy();
 		}
 		/* client code end */
 	}
