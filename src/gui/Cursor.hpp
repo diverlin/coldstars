@@ -23,7 +23,7 @@ class ItemSlot;
 #include "../common/rect.hpp"
 #include "MouseData.hpp"
 class Player;
-class BaseSpaceEntity;
+class Base;
 #include "BaseGui.hpp"
 
 class Cursor : public BaseGui
@@ -36,8 +36,9 @@ class Cursor : public BaseGui
 		
 		void SetLeftMouseButtonClick(bool left_click) 		{ data_mouse.left_click = left_click; };
 		void SetRightMouseButtonClick(bool right_click) 	{ data_mouse.right_click = right_click; };
-		void SetFocusedSpaceObject(BaseSpaceEntity* focused_space_ob) { this->focused_space_ob = focused_space_ob; };
-		
+		void SetFocusedObject(Base* focused_ob) { this->focused_ob = focused_ob; };
+		//void SetFocusedObject(Base* focused_ob, const vec2f& offset) { this->focused_ob = focused_ob; this->offset = offset; };
+						
 		const MouseData& GetMouseData() { return data_mouse; };
 		ItemSlot* GetItemSlot() const { return item_slot; };
 		const Rect& GetRect() const { return rect; };
@@ -46,15 +47,18 @@ class Cursor : public BaseGui
 		void Update();
 		bool UpdateInSpace();
 		
-		void RenderFocusedSpaceObjectStuff();
-		
+		void RenderFocusedObjectStuff() const;
+		void RenderFocusedObjectInfo();
+				
         private:
+        	//vec2f offset;
+        	
         	ItemSlot* item_slot;  
         	Rect rect;      	
         	
         	MouseData data_mouse;
         	
-        	BaseSpaceEntity* focused_space_ob;
+        	Base* focused_ob;
 }; 
 
 #endif 

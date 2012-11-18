@@ -21,6 +21,7 @@
 #include "../config/config.hpp"
 #include "../slots/VehicleSlot.hpp"
 #include "../slots/ItemSlot.hpp"
+#include "../items/BaseItem.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../pilots/Player.hpp"
 
@@ -163,16 +164,19 @@ bool GuiAngar::UpdateMouseVehicleSlotsInteraction(const MouseData& data_mouse)
         for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
         { 
                 if (rect_vehicleslot_vec[i].first.CheckInteraction(data_mouse.mx, data_mouse.my) == true)
-                {
-                        if (data_mouse.right_click == true)
-                        {
-                                if (rect_vehicleslot_vec[i].second->GetVehicle() != NULL)
-                                {
-                                        player->GetNpc()->SetScanTarget(rect_vehicleslot_vec[i].second->GetVehicle());
-                                        player->GetGuiManager().GetGuiVehicleScan().BindVehicle(rect_vehicleslot_vec[i].second->GetVehicle());
-                                        return true;
-                                }
+                {         
+                       	if (data_mouse.right_click == true)
+                       	{
+                 		player->GetNpc()->SetScanTarget(rect_vehicleslot_vec[i].second->GetVehicle());
+                                player->GetGuiManager().GetGuiVehicleScan().BindVehicle(rect_vehicleslot_vec[i].second->GetVehicle());
+                                return true;
                         }
+                        
+                        if (rect_vehicleslot_vec[i].second->GetVehicle() != NULL)
+                        {       
+                        	player->GetCursor().SetFocusedObject(rect_vehicleslot_vec[i].second->GetVehicle());
+                        }           
+                                   
                 }
         }
 
@@ -180,10 +184,15 @@ bool GuiAngar::UpdateMouseVehicleSlotsInteraction(const MouseData& data_mouse)
         { 
                 if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.mx, data_mouse.my) == true)
                 {
-                        if (data_mouse.left_click == true)
+                	if (data_mouse.left_click == true)
                         {
   				player->GetCursor().GetItemSlot()->SwapItem(rect_itemslot_vec[i].second);
                         }
+                        	
+                        if (rect_itemslot_vec[i].second->GetItem() != NULL)
+                        {                         
+                		player->GetCursor().SetFocusedObject(rect_itemslot_vec[i].second->GetItem());
+                	}
                 }
         }
                 
@@ -206,18 +215,4 @@ void GuiAngar::RenderVehicleSlots(Angar* angar) const
         glPopMatrix();
 }
 
-void GuiAngar::RenderFocusedItemInfo(const MouseData& data_mouse, Angar* angar) const
-{
-        for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
-        { 
-		if (rect_vehicleslot_vec[i].second->GetVehicle() != NULL)
-                {
-                       	if (rect_vehicleslot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
-                	{
-		                rect_vehicleslot_vec[i].second->RenderItemInfo(rect_vehicleslot_vec[i].first, -offset.x, -offset.y);
-		                return;
-                	}
-                }
-        }
-}
-            
+           

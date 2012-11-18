@@ -258,8 +258,7 @@ bool Vehicle::ManageFunctionModule(BaseItem* item)
 		{
 			if (slot_funct_vec[i]->GetItem()->GetSubTypeId() == item->GetParentSubTypeId())
 			{
-				return ((BaseEquipment*)slot_funct_vec[i]->GetItem())->InsertModule((BaseModule*)item);
-				
+				return ((BaseEquipment*)slot_funct_vec[i]->GetItem())->InsertModule((BaseModule*)item);				
 			}
 		}
 	}

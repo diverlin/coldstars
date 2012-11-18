@@ -235,13 +235,18 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
 	rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, gate_slot));    	
 } 
 
-bool GuiVehicle::UpdateMouseInteractionInSpace(const MouseData& data_mouse)
+bool GuiVehicle::UpdateMouseInteractionInSpace(const MouseData& data_mouse, bool control)
 {
 	for(unsigned int i=0; i<rect_slot_vec.size(); i++)
 	{ 
 		if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
 		{  
-			if (data_mouse.left_click == true)
+			if (rect_slot_vec[i].second->GetEquiped() == true)
+			{
+				player->GetCursor().SetFocusedObject(rect_slot_vec[i].second->GetItem());
+			}
+						
+			if ( (data_mouse.left_click == true) and (control == true) )
 			{
 				if (rect_slot_vec[i].second->GetSubTypeId() == ENTITY::GATE_SLOT_ID)
 				{
@@ -318,10 +323,13 @@ bool GuiVehicle::UpdateMouseInteractionInStore(const MouseData& data_mouse, Vehi
 	{ 
 		if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
 		{  
-			if (data_mouse.left_click == true)
+			if (rect_slot_vec[i].second->GetEquiped() == true)
 			{
-				if (rect_slot_vec[i].second->GetEquiped() == true)
+				player->GetCursor().SetFocusedObject(rect_slot_vec[i].second->GetItem());
+							
+				if (data_mouse.left_click == true)
 				{
+
 					if (rect_slot_vec[i].second->GetItem()->GetTypeId() != ENTITY::GOODS_ID)
 					{
 						store->BuyItemFromSlot(player->GetNpc(), rect_slot_vec[i].second);
@@ -385,16 +393,7 @@ void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, int mark_
 	}
 }
 
-void GuiVehicle::RenderFocusedItemInfo(const MouseData& data_mouse) const
-{
-	for(unsigned int i=0; i<rect_slot_vec.size(); i++)
-	{ 
-		if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
-		{  
-			rect_slot_vec[i].second->RenderItemInfo(rect_slot_vec[i].first.GetCenter(), -offset.x, -offset.y);
-		}
-	}
-}
+
 
 
 

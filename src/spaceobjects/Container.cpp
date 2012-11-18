@@ -66,7 +66,7 @@ void Container::RenderInfoInSpace(const vec2f& scroll_coords)
 {
 	UpdateInfo();
      	drawInfoIn2Column(info.title_list, info.value_list, points.GetCenter().x - scroll_coords.x - 200, points.GetCenter().y - scroll_coords.y);
-     	item_slot->RenderItemInfo(points.GetCenter(), scroll_coords);
+     	item_slot->GetItem()->RenderInfo(points.GetCenter(), scroll_coords.x, scroll_coords.y);
 }
  
 /* virtual */    

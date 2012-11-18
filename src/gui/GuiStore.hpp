@@ -34,7 +34,6 @@ class GuiStore : public BaseGui
                 bool UpdateMouseInteraction(const MouseData&, Store*);
 
         	void RenderSlots(int) const;                
-                void RenderFocusedItemInfo(const MouseData&);
                 
         private:
               	std::vector<GuiPair<Rect, ItemSlot*>> rect_slot_vec;          

@@ -586,7 +586,8 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
         		}
 		}
 	
-		cursor.RenderFocusedSpaceObjectStuff();   // perform this function the last, because it resets previos Gl transform
+		cursor.RenderFocusedObjectStuff();
+		
 	disable_BLEND();  
 } 
 
@@ -611,7 +612,7 @@ bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
             	float object_cursor_dist = distBetweenPoints(visible_ROCKET_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
             	if (object_cursor_dist < visible_ROCKET_vec[i]->GetCollisionRadius())
             	{ 
-            		cursor.SetFocusedSpaceObject(visible_ROCKET_vec[i]);
+            		cursor.SetFocusedObject(visible_ROCKET_vec[i]);
                
                		if (data_mouse.left_click == true)
                		{
@@ -639,7 +640,7 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
        		float object_cursor_dist = distBetweenPoints(visible_CONTAINER_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
        		if (object_cursor_dist < visible_CONTAINER_vec[i]->GetCollisionRadius())
             	{   
-			cursor.SetFocusedSpaceObject(visible_CONTAINER_vec[i]);
+			cursor.SetFocusedObject(visible_CONTAINER_vec[i]);
 			            		
       			if (data_mouse.left_click == true)
        			{          					    
@@ -679,7 +680,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
             	float object_cursor_dist = distBetweenPoints(visible_SATELLITE_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
             	if (object_cursor_dist < visible_SATELLITE_vec[i]->GetCollisionRadius())
             	{ 
-            	       	cursor.SetFocusedSpaceObject(visible_SATELLITE_vec[i]);
+            	       	cursor.SetFocusedObject(visible_SATELLITE_vec[i]);
                 
                		if (data_mouse.left_click == true)
                		{
@@ -728,7 +729,7 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
        		float object_cursor_dist = distBetweenPoints(visible_ASTEROID_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
        		if (object_cursor_dist < visible_ASTEROID_vec[i]->GetCollisionRadius())
        		{   
-                        cursor.SetFocusedSpaceObject(visible_ASTEROID_vec[i]);        
+                        cursor.SetFocusedObject(visible_ASTEROID_vec[i]);        
                         //visible_ASTEROID_vec[i]->GetOrbit()->Draw();
 			
 			
@@ -760,7 +761,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
         	float object_cursor_dist = distBetweenPoints(visible_SHIP_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
         	if (object_cursor_dist < visible_SHIP_vec[i]->GetCollisionRadius())
         	{ 
-               		cursor.SetFocusedSpaceObject(visible_SHIP_vec[i]);    
+               		cursor.SetFocusedObject(visible_SHIP_vec[i]);    
                 
                 	if (npc->GetVehicle()->GetId() != visible_SHIP_vec[i]->GetId())
                		{
@@ -828,7 +829,7 @@ bool Player::MouseInteractionWithBlackHoles(const MouseData& data_mouse)
        		float cursor_dist = distBetweenPoints(visible_BLACKHOLE_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
        		if (cursor_dist < visible_BLACKHOLE_vec[i]->GetCollisionRadius())
        		{   
-       			cursor.SetFocusedSpaceObject(visible_BLACKHOLE_vec[i]); 
+       			cursor.SetFocusedObject(visible_BLACKHOLE_vec[i]); 
        			
        			return true;
       		}
@@ -844,7 +845,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
        		float object_cursor_dist = distBetweenPoints(visible_SPACESTATION_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
        		if (object_cursor_dist < visible_SPACESTATION_vec[i]->GetCollisionRadius())
             	{ 
-                	cursor.SetFocusedSpaceObject(visible_SPACESTATION_vec[i]); 
+                	cursor.SetFocusedObject(visible_SPACESTATION_vec[i]); 
                 
                		if (data_mouse.left_click == true)
                		{
@@ -893,7 +894,7 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
        		float object_cursor_dist = distBetweenPoints(visible_PLANET_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
        		if (object_cursor_dist < visible_PLANET_vec[i]->GetCollisionRadius())
             	{   
-                	cursor.SetFocusedSpaceObject(visible_PLANET_vec[i]); 
+                	cursor.SetFocusedObject(visible_PLANET_vec[i]); 
           
                		if (data_mouse.left_click == true)
                		{
@@ -916,7 +917,7 @@ bool Player::MouseInteractionWithStars(const MouseData& data_mouse)
       		float object_cursor_dist = distBetweenPoints(visible_STAR_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
        		if (object_cursor_dist < visible_STAR_vec[i]->GetCollisionRadius())
        		{   
-                	cursor.SetFocusedSpaceObject(visible_STAR_vec[i]); 
+                	cursor.SetFocusedObject(visible_STAR_vec[i]); 
                 	
        			return true; 
         	}
@@ -971,9 +972,7 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 		starsystem->FindRadarVisibleEntities_c(this);
 	}
 	
-	RenderInSpace(starsystem, turn_timer.GetTurnEnded(), show.GetAllOrbits(), show.GetAllPath()); 
-    	     	
-	bool mouse_interaction = gui_manager.RunSession(cursor.GetMouseData()); 
+	bool mouse_interaction = gui_manager.UpdateInSpace(cursor.GetMouseData()); 	
 	if (mouse_interaction == false)
 	{    	
 		if (turn_timer.GetTurnEnded() == true)  
@@ -989,12 +988,15 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 			}
 		}
 	}
+
+	RenderInSpace(starsystem, turn_timer.GetTurnEnded(), show.GetAllOrbits(), show.GetAllPath()); 
+ 	gui_manager.RenderInSpace(cursor.GetMouseData()); 
 }
 
 
 void Player::SessionInKosmoport()
 {   	
-	gui_manager.RunSession(cursor.GetMouseData());        
+	gui_manager.RunSessionInKosmoport(cursor.GetMouseData());        
 }
 
 void Player::RunSession(const TurnTimer& turn_timer)
@@ -1008,6 +1010,7 @@ void Player::RunSession(const TurnTimer& turn_timer)
        		case ENTITY::KOSMOPORT_ID:  	{ SessionInKosmoport(); break; }
        	}        	
        	
+       	cursor.RenderFocusedObjectInfo();
        	Screen::Instance().Draw();
 }
 

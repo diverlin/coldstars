@@ -250,19 +250,6 @@ int ItemSlot::GetItemRadius() const
         return 0;
 }
 
-void ItemSlot::RenderItemInfo(const vec2f& pos, const vec2f& offset) const
-{
-	RenderItemInfo(pos, offset.x, offset.y);
-}
-
-void ItemSlot::RenderItemInfo(const vec2f& pos, float offset_x, float offset_y) const
-{
-        if (equiped == true)
-        {
-                item->RenderInfo(pos, offset_x, offset_y);
-        }
-}
-
 void ItemSlot::DropItemToSpace(Vehicle* vehicle)
 {
         TextureOb* textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::CONTAINER_ID);   

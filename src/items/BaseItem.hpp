@@ -89,7 +89,7 @@ class BaseItem : public Base
 		void UpdateInfo();
 
       		virtual void Render(const Rect&, const vec2f&, bool draw_text = true);
-      		void RenderInfo(const vec2f&, float, float); 
+      		void RenderInfo(const vec2f&, float offset_x = 0, float offset_y = 0); 
 
 	protected:
      		TextureOb* textureOb;
