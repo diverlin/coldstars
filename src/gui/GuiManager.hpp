@@ -38,7 +38,11 @@ class GuiManager
 
 		void SetPlayer(Player*);
 		
-		bool RunSession(const MouseData&);
+		bool UpdateInSpace(const MouseData&);
+		void RenderInSpace(const MouseData&);
+		
+		bool RunSessionInKosmoport(const MouseData&);
+				
 		GuiRadar& GetGuiRadar() { return gui_radar; };
 		GuiVehicle& GetGuiVehicleScan() { return gui_vehicle_scan; };
 		GuiVehicle2& GetGuiVehiclePlayer() { return gui_vehicle_player; };
@@ -47,6 +51,11 @@ class GuiManager
 								      		
       	private:
       		Player* player;
+	
+		bool show_gui_galaxymap;                                                                                
+        	bool show_gui_scan;
+        	bool show_gui_radar;
+        
 	
       		GuiVehicle 	gui_vehicle_scan;
       		GuiVehicle2 	gui_vehicle_player;

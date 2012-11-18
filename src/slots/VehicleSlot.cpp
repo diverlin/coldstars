@@ -58,13 +58,6 @@ void VehicleSlot::Render(const Rect& rect) const
 	}
 }
 
-
-void VehicleSlot::RenderItemInfo(const Rect& rect, int offset_x, int offset_y) const
-{
-	vehicle->RenderInfo(rect.GetCenter(), offset_x, offset_y);
-}
-
-
 /*virtual*/
 void VehicleSlot::SaveData(boost::property_tree::ptree& save_ptree) const
 {

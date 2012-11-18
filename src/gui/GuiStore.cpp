@@ -61,6 +61,8 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse, Store* store)
                 {
                 	if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
                 	{
+				player->GetCursor().SetFocusedObject(rect_slot_vec[i].second->GetItem());
+                	
                         	if (data_mouse.left_click == true)
                         	{
                         		if (player->GetNpc()->GetCredits() >= rect_slot_vec[i].second->GetItem()->GetPrice())
@@ -68,7 +70,7 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse, Store* store)
                         			store->SellItemFromSlot(player->GetNpc(), rect_slot_vec[i].second);
                         		}
                         	} 
-                        	return true; break;
+                        	return true; 
                 	} 
         	}
         }
@@ -93,15 +95,3 @@ void GuiStore::RenderSlots(int credits) const
         	}
 	glPopMatrix();
 }
-
-void GuiStore::RenderFocusedItemInfo(const MouseData& data_mouse)
-{	
-        for (unsigned int i=0; i<rect_slot_vec.size(); i++)
-        {                              				
-                if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
-                {
-                        rect_slot_vec[i].second->RenderItemInfo(rect_slot_vec[i].first.GetCenter(), -offset.x, -offset.y);                    
-                } 
-        }
-}
-

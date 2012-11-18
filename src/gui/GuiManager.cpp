@@ -65,15 +65,11 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
         	}
         }
 
-	bool interaction = false;        
-	if (allow_full_control == true)
+	bool interaction = gui_vehicle_scan.UpdateMouseInteractionInSpace(data_mouse, allow_full_control);        
+	if ( (interaction == true) and (allow_full_control == true) )
 	{
-		interaction = gui_vehicle_scan.UpdateMouseInteractionInSpace(data_mouse);
-		if (interaction == false)
-		{
-			interaction = gui_skill.UpdateButtonsMouseInteraction(data_mouse);
-			gui_skill.ButtonsAction(scan_vehicle->GetOwnerNpc()->GetSkill());
-		}
+		interaction = gui_skill.UpdateButtonsMouseInteraction(data_mouse);
+		gui_skill.ButtonsAction(scan_vehicle->GetOwnerNpc()->GetSkill());
 	}
 
 	return interaction;
@@ -98,7 +94,9 @@ bool GuiManager::UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData& 
 }
 
 void GuiManager::RenderScanVehicle(const MouseData& data_mouse, Vehicle* vehicle, bool show_skill) const
-{		
+{	
+if (vehicle == NULL)
+return;	
 	if (player->GetCursor().GetItemSlot()->GetEquiped() == true)
 	{
        		gui_vehicle_scan.RenderVehicle(data_mouse, player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId());
@@ -115,348 +113,335 @@ void GuiManager::RenderScanVehicle(const MouseData& data_mouse, Vehicle* vehicle
 		gui_skill.RenderSkills(vehicle->GetOwnerNpc()->GetSkill());
 		gui_skill.RenderFocusedButtonInfo(data_mouse);
 	}   					                 
-
-	if (player->GetCursor().GetItemSlot()->GetEquiped() == false)
-	{
-		gui_vehicle_scan.RenderFocusedItemInfo(data_mouse);					
-		//gui_skill
-	}
 }
 
-bool GuiManager::RunSession(const MouseData& data_mouse)
+bool GuiManager::UpdateInSpace(const MouseData& data_mouse)
 {
-     	bool interaction = false;
-
 	Rect screen_rect(0, 0, Screen::Instance().GetWindow().GetWidth(), Screen::Instance().GetWindow().GetHeight());   
 	vec2f center_screen(Screen::Instance().GetWindow().GetWidth()/2, Screen::Instance().GetWindow().GetHeight()/2);        			
-        			
-     	player->GetCursor().Update();  
-     								
-	switch(player->GetNpc()->GetVehicle()->GetPlaceTypeId())
-	{
-		case ENTITY::SPACE_ID:
-		{
-                        Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget(); 
                             
-                        // configure which part of gui should be managed/drawn
-                        bool show_gui_galaxymap = player->GetShow().GetGuiGalaxyMap();                                                                                
-                        bool show_gui_scan = false;
-                        if ( (scan_vehicle != NULL) and (show_gui_galaxymap == false) )
-                        {
-                                show_gui_scan = true;
-                        }                        
-                        bool show_gui_radar = false;
-                        if ( (show_gui_scan == false) and (show_gui_galaxymap == false) )
-                        {
-                                show_gui_radar = true;  
-                        }             
-                        //
+       	UserInput::Instance().UpdateInSpace(player, *this);
+     	player->GetCursor().Update();  
+     	       	
+        // configure which part of gui should be managed/drawn       	
+        show_gui_galaxymap = false;                                                                                
+        show_gui_scan = false;
+        show_gui_radar = false;
 
-			if (gui_vehicle_player.GetVehicle() == NULL)
-			{
-				gui_vehicle_player.BindVehicle(player->GetNpc()->GetVehicle(), 0.6f);
-                        	gui_vehicle_player.SetOffset(gui_radar.GetRect().GetCenter());                        
-			}
-			gui_vehicle_player.UpdateEquipmentIcons();
+        show_gui_galaxymap = player->GetShow().GetGuiGalaxyMap();  
+
+        if ( (player->GetNpc()->GetScanTarget() != NULL) and (show_gui_galaxymap == false) )
+        {
+        	show_gui_scan = true;
+	}                        
+               
+        if ( (show_gui_scan == false) and (show_gui_galaxymap == false) )
+        {
+        	show_gui_radar = true;  
+        }             
+        //
+
+	if (gui_vehicle_player.GetVehicle() == NULL)
+	{
+		gui_vehicle_player.BindVehicle(player->GetNpc()->GetVehicle(), 0.6f);
+         	gui_vehicle_player.SetOffset(gui_radar.GetRect().GetCenter());                        
+	}
+	gui_vehicle_player.UpdateEquipmentIcons();
 			
                         
-                        if (show_gui_scan)
-                        {
-                        	gui_vehicle_scan.SetOffset(center_screen + GUI_VEHICLE_INSPACE_OFFSET);
-				gui_skill.SetOffset(center_screen + GUI_SKILL_INSPACE_OFFSET);
-			}
+        if (show_gui_scan)
+        {
+               	gui_vehicle_scan.SetOffset(center_screen + GUI_VEHICLE_INSPACE_OFFSET);
+		gui_skill.SetOffset(center_screen + GUI_SKILL_INSPACE_OFFSET);
+	}
 			
-			if (gui_vehicle_target.GetVehicle() != NULL)
-			{
-				gui_vehicle_target.UpdateOffset();
-			}
-			
-		       	UserInput::Instance().UpdateInSpace(player, *this);
+	if (gui_vehicle_target.GetVehicle() != NULL)
+	{
+		gui_vehicle_target.UpdateOffset();
+	}
 
-			//update
-                        interaction = gui_space.UpdateButtonsMouseInteraction(data_mouse);				
-                        gui_space.ButtonsAction(player);   
-                                                
-			if (show_gui_galaxymap == true)  
-			{
-                                if (interaction == false)
-                                {
-                                        interaction = gui_galaxymap.UpdateMouseInteraction(data_mouse, player->GetNpc()->GetStarSystem()->GetGalaxy()); 	
-                                }
-                        }
+	//update
+        bool interaction = gui_space.UpdateButtonsMouseInteraction(data_mouse);				
+        gui_space.ButtonsAction(player);   
+                                               
+	if (show_gui_galaxymap == true)  
+	{
+		if (interaction == false)
+                {
+                	interaction = gui_galaxymap.UpdateMouseInteraction(data_mouse, player->GetNpc()->GetStarSystem()->GetGalaxy()); 	
+                }
+        }
 			
-                        if (show_gui_scan == true)
-			{	
+        if (show_gui_scan == true)
+	{	
+		if (interaction == false)
+		{
+			interaction = UpdateMouseInteractionWithScanVehicle(data_mouse, player->GetNpc()->GetScanTarget());
+		}
+	}
+
+        gui_vehicle_player.ButtonsAction(player);
+        if (show_gui_radar == true)
+        {
+        	if (interaction == false)
+                {
+                 	interaction = gui_vehicle_player.UpdateButtonsMouseInteraction(data_mouse);
+                }
+                        
+                gui_radar.Update();                                
+                if (interaction == false)
+                {
+                	if (interaction == false)
+                        {
+                         	interaction = gui_radar.UpdateMouseInteraction(data_mouse);
+                        }
+                }
+        }
+                        
+        if (gui_vehicle_target.GetVehicle() != NULL)
+	{
+		interaction = UpdateMouseInteractionWithPreciseWeaponTarget(data_mouse);
+	}	
+	
+	return interaction;
+}
+
+
+
+void GuiManager::RenderInSpace(const MouseData& data_mouse)
+{
+	resetRenderTransformation();
+	enable_BLEND();    
+		if (show_gui_radar == true)  
+		{
+			gui_radar.Render();
+	              	gui_vehicle_player.RenderButtons();
+	      		gui_vehicle_player.RenderFocusedButtonInfo(data_mouse);    
+		}
+					
+		if (show_gui_galaxymap == true)  
+		{
+			gui_galaxymap.Render(player->GetNpc()->GetStarSystem()->GetGalaxy());    
+		}
+	                                
+		if (show_gui_scan == true)
+		{
+			RenderScanVehicle(data_mouse, player->GetNpc()->GetScanTarget()); 				                 
+		}
+					
+		if (gui_vehicle_target.GetVehicle() != NULL)
+		{
+	               	gui_vehicle_target.RenderButtons();
+	       		gui_vehicle_target.RenderFocusedButtonInfo(data_mouse); 
+		}
+						
+		gui_space.RenderBar();	
+		gui_space.RenderButtons();
+		gui_space.RenderFocusedButtonInfo(data_mouse);
+	disable_BLEND();
+
+	gui_space.RenderText(Screen::Instance().GetRect().GetBottomLeft());
+}
+
+
+bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
+{    	
+	Rect screen_rect(0, 0, Screen::Instance().GetWindow().GetWidth(), Screen::Instance().GetWindow().GetHeight());   
+	vec2f center_screen(Screen::Instance().GetWindow().GetWidth()/2, Screen::Instance().GetWindow().GetHeight()/2);       			
+        			
+ 	UserInput::Instance().UpdateInKosmoport(player);
+     	player->GetCursor().Update(); 
+     	    	       	
+	bool interaction = gui_kosmoport.UpdateButtonsMouseInteraction(data_mouse);
+	gui_kosmoport.ButtonsAction();
+													
+	switch(gui_kosmoport.GetActiveScreenId())
+	{
+		case GUI::SCREEN::ANGAR_ID:
+		{
+			gui_vehicle_scan.SetOffset(center_screen + GUI_VEHICLE_INANGAR_OFFSET);
+			gui_skill.SetOffset(center_screen + GUI_SKILL_INANGAR_OFFSET);
+										
+			Angar* angar = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetAngar();
+			Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget();
+			gui_angar.BindAngar(angar);
+
+			//update  
+			gui_angar.CheckButtonsLock();
+			if (interaction == false)
+			{					
+				interaction = gui_angar.UpdateButtonsMouseInteraction(data_mouse);
 				if (interaction == false)
 				{
-					interaction = UpdateMouseInteractionWithScanVehicle(data_mouse, scan_vehicle);
+					interaction = gui_angar.UpdateMouseVehicleSlotsInteraction(data_mouse);
 				}
-			}
 
-                        gui_vehicle_player.ButtonsAction(player);
-                        if (show_gui_radar == true)
-                        {
-                                if (interaction == false)
-                        	{
-                        		interaction = gui_vehicle_player.UpdateButtonsMouseInteraction(data_mouse);
-                        	}
-                        
-                                gui_radar.Update();                                
-                                if (interaction == false)
-                                {
-                                        if (interaction == false)
-                                        {
-                                                interaction = gui_radar.UpdateMouseInteraction(data_mouse);
-                                        }
-                                }
-                        }
-                        
-                        if (gui_vehicle_target.GetVehicle() != NULL)
-			{
-				interaction = UpdateMouseInteractionWithPreciseWeaponTarget(data_mouse);
-			}	
-				
-			//render
+				gui_angar.ButtonsAction();
+			    	if ( interaction == false)
+			    	{
+					if (scan_vehicle != NULL) 
+					{ 
+						interaction = UpdateMouseInteractionWithScanVehicle(data_mouse, scan_vehicle);
+					}					    	
+			    	} 
+	        	}
+	        	
+	        	//render
 			resetRenderTransformation();
-			enable_BLEND();    
-				if (show_gui_radar == true)  
-				{
-					gui_radar.Render();
-                                	gui_vehicle_player.RenderButtons();
-                               		gui_vehicle_player.RenderFocusedButtonInfo(data_mouse);    
+			angar->RenderBackground(screen_rect);
+			enable_BLEND();   
+	        		gui_angar.RenderVehicleSlots(angar);
+	        		
+				if (scan_vehicle != NULL) 	
+				{ 
+					RenderScanVehicle(data_mouse, scan_vehicle); 
 				}
 				
-				if (show_gui_galaxymap == true)  
-				{
-     					gui_galaxymap.Render(player->GetNpc()->GetStarSystem()->GetGalaxy());    
-				}
-                                
-				if (show_gui_scan == true)
-				{
-					RenderScanVehicle(data_mouse, scan_vehicle); 				                 
-				}
-				
-				if (gui_vehicle_target.GetVehicle() != NULL)
-				{
-                                	gui_vehicle_target.RenderButtons();
-                               		gui_vehicle_target.RenderFocusedButtonInfo(data_mouse); 
-				}
-					
-				gui_space.RenderBar();	
-				gui_space.RenderButtons();
-				gui_space.RenderFocusedButtonInfo(data_mouse);
-			disable_BLEND();
+	        		gui_kosmoport.RenderButtons(); 
+	        		gui_angar.RenderButtons();
+				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 
+				gui_angar.RenderFocusedButtonInfo(data_mouse); 
+			disable_BLEND(); 
+		
+			break;
+		}
 
-			gui_space.RenderText(Screen::Instance().GetRect().GetBottomLeft());
-			// end render
+		case GUI::SCREEN::STORE_ID:
+		{
+			gui_vehicle_scan.SetOffset(center_screen + GUI_VEHICLE_INSTORE_OFFSET);
+			gui_store.SetOffset(center_screen + GUI_STORE_OFFSET);
+					
+			//if (npc->GetScanTarget() != npc->GetVehicle())
+			{
+				player->GetNpc()->SetScanTarget(player->GetNpc()->GetVehicle());
+			}
+		    
+			Store* store = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetStore();
+			Vehicle* vehicle = player->GetNpc()->GetScanTarget();    
+			gui_store.BindStore(store);    				
+			gui_vehicle_scan.BindVehicle(vehicle);
+			
+			//update
+			if (interaction == false)
+			{
+				interaction = gui_store.UpdateMouseInteraction(data_mouse, store);
+			    	if (interaction == false)
+			    	{
+			    		interaction = gui_vehicle_scan.UpdateMouseInteractionInStore(data_mouse, vehicle, store);
+			    	}
+			}
+						        	
+	        	//render
+			resetRenderTransformation();
+			store->RenderBackground(screen_rect);
+
+			enable_BLEND();
+				gui_store.RenderSlots(player->GetNpc()->GetCredits());
+
+				bool show_skill = false;
+				RenderScanVehicle(data_mouse, vehicle, show_skill);
+				
+	        		gui_kosmoport.RenderButtons(); 
+				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 
+			disable_BLEND();
+			drawSimpleText("credits:"+int2str(player->GetNpc()->GetCredits()), 12, 600, 200);
+			//
+			
+			player->GetNpc()->ResetScanTarget();
 			
 			break;
 		}
-		
-		case ENTITY::KOSMOPORT_ID:
-		{  
-			UserInput::Instance().UpdateInKosmoport(player);
-					       	
-			interaction = gui_kosmoport.UpdateButtonsMouseInteraction(data_mouse);
-			gui_kosmoport.ButtonsAction();
-													
-			switch(gui_kosmoport.GetActiveScreenId())
-        		{
-        			case GUI::SCREEN::ANGAR_ID:
-        			{
-        				gui_vehicle_scan.SetOffset(center_screen + GUI_VEHICLE_INANGAR_OFFSET);
-        				gui_skill.SetOffset(center_screen + GUI_SKILL_INANGAR_OFFSET);
-        				        						
-        				Angar* angar = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetAngar();
-					Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget();
-					gui_angar.BindAngar(angar);
 
-					//update  
-					gui_angar.CheckButtonsLock();
-					if (interaction == false)
-					{					
-						interaction = gui_angar.UpdateButtonsMouseInteraction(data_mouse);
-						if (interaction == false)
-						{
-							interaction = gui_angar.UpdateMouseVehicleSlotsInteraction(data_mouse);
-						}
-	
-						gui_angar.ButtonsAction();
-					    	if ( interaction == false)
-					    	{
-							if (scan_vehicle != NULL) 
-							{ 
-								interaction = UpdateMouseInteractionWithScanVehicle(data_mouse, scan_vehicle);
-							}					    	
-					    	} 
-			        	}
-			        	
-			        	//render
-        				resetRenderTransformation();
-        				angar->RenderBackground(screen_rect);
-               				enable_BLEND();   
-			        		gui_angar.RenderVehicleSlots(angar);
-			        		
-						if (scan_vehicle != NULL) 	
-						{ 
-							RenderScanVehicle(data_mouse, scan_vehicle); 
-						}
-						else
-						{ 
-							gui_angar.RenderFocusedItemInfo(data_mouse, angar); 
-						}
-
-			        		gui_kosmoport.RenderButtons(); 
-			        		gui_angar.RenderButtons();
-                				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 
-                				gui_angar.RenderFocusedButtonInfo(data_mouse); 
-               				disable_BLEND(); 
-	        		
-					break;
-				}
-		
-				case GUI::SCREEN::STORE_ID:
-        			{
-        				gui_vehicle_scan.SetOffset(center_screen + GUI_VEHICLE_INSTORE_OFFSET);
-        				gui_store.SetOffset(center_screen + GUI_STORE_OFFSET);
-        						
-        				//if (npc->GetScanTarget() != npc->GetVehicle())
-        				{
-        					player->GetNpc()->SetScanTarget(player->GetNpc()->GetVehicle());
-        				}
-                                    
-                                        Store* store = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetStore();
-        				Vehicle* vehicle = player->GetNpc()->GetScanTarget();    
-        				gui_store.BindStore(store);    				
-					gui_vehicle_scan.BindVehicle(vehicle);
-					
-					//update
-					if (interaction == false)
-					{
-						interaction = gui_store.UpdateMouseInteraction(data_mouse, store);
-					    	if (interaction == false)
-					    	{
-					    		interaction = gui_vehicle_scan.UpdateMouseInteractionInStore(data_mouse, vehicle, store);
-					    	}
-					}
-								        	
-			        	//render
-        				resetRenderTransformation();
-					store->RenderBackground(screen_rect);
-
-					enable_BLEND();
-						gui_store.RenderSlots(player->GetNpc()->GetCredits());
-		
-						bool show_skill = false;
-						RenderScanVehicle(data_mouse, vehicle, show_skill);
-
-						gui_store.RenderFocusedItemInfo(data_mouse);
-						
-			        		gui_kosmoport.RenderButtons(); 
-                				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 
-					disable_BLEND();
-					drawSimpleText("credits:"+int2str(player->GetNpc()->GetCredits()), 12, 600, 200);
-					//
-					
-					player->GetNpc()->ResetScanTarget();
-        				
-					break;
-				}
-
-        			case GUI::SCREEN::SHOP_ID:
-        			{
-        				Shop* shop = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetShop();
-        				
-        				//update	
-        				gui_shop.UpdateLables(shop);			
-         	        		gui_shop.ButtonsAction(shop, slider);
-         	        		if (slider.GetSubTypeId() != NONE_ID)
-					{
-						slider.CheckButtonsLock();
-         	        			slider.ButtonsAction(shop);
-         	        		}
-         	        		
-         	        		if (interaction == false)
-					{
-						interaction = gui_shop.UpdateButtonsMouseInteraction(data_mouse);
-						if (interaction == false)
-						{
-							if (slider.GetSubTypeId() != NONE_ID)
-							{
-								slider.UpdateSlidePosition(data_mouse);
-								interaction = slider.UpdateButtonsMouseInteraction(data_mouse);
-							}
-						}	
-			        	}
-			        	
-			        	//render
-        				resetRenderTransformation();
-        				shop->RenderBackground(screen_rect);
-        				enable_BLEND();   
-     						gui_shop.RenderButtons();
-     						
-     						if (slider.GetSubTypeId() != NONE_ID)
-     						{
-     							slider.Render();
-     						}
-     						
-     						gui_kosmoport.RenderButtons(); 
-                				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 
-                				    
-					disable_BLEND();  
-        				
-					break;
-				}
-
-        			case GUI::SCREEN::GALAXYMAP_ID:
-        			{
-					Galaxy* galaxy = player->GetNpc()->GetStarSystem()->GetGalaxy();
-					//update
-					if ( interaction == false)
-					{
-						interaction = gui_galaxymap.UpdateMouseInteraction(data_mouse, galaxy);
-			        	}					   
-				
-					//render
-        				clearScreen(); //becase there is no background
-			        	resetRenderTransformation();
-        				enable_BLEND();   
-     						gui_galaxymap.Render(galaxy);
-     						
-     						gui_kosmoport.RenderButtons(); 
-                				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 
-                				    
-					disable_BLEND();    
-        				         	
-         				break;
-         			}
-
-         			case GUI::SCREEN::GOVERMENT_ID:
-         			{
-         				Goverment* goverment = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetGoverment();
-         				
-         				//update
-         				if (interaction == false)
-					{
-						//interaction = gui_goverment->UpdateMouseInteraction(goverment, mxvp, myvp, lmb, rmb);
-			        	}
-			        	
-			        	//render
-			        	resetRenderTransformation();
-        				goverment->RenderBackground(screen_rect);
-        				enable_BLEND();   
-						//gui_goverment->RenderInternals(goverment);
-     						
-     						gui_kosmoport.RenderButtons(); 
-                				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 
-                				    
-					disable_BLEND(); 
-
-         				break;
-         			}
+		case GUI::SCREEN::SHOP_ID:
+		{
+			Shop* shop = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetShop();
+			
+			//update	
+			gui_shop.UpdateLables(shop);			
+			gui_shop.ButtonsAction(shop, slider);
+			if (slider.GetSubTypeId() != NONE_ID)
+			{
+				slider.CheckButtonsLock();
+				slider.ButtonsAction(shop);
 			}
 			
-			break;		
+			if (interaction == false)
+			{
+				interaction = gui_shop.UpdateButtonsMouseInteraction(data_mouse);
+				if (interaction == false)
+				{
+					if (slider.GetSubTypeId() != NONE_ID)
+					{
+						slider.UpdateSlidePosition(data_mouse);
+						interaction = slider.UpdateButtonsMouseInteraction(data_mouse);
+					}
+				}	
+	        	}
+	        	
+	        	//render
+			resetRenderTransformation();
+			shop->RenderBackground(screen_rect);
+			enable_BLEND();   
+				gui_shop.RenderButtons();
+				
+				if (slider.GetSubTypeId() != NONE_ID)
+				{
+					slider.Render();
+				}
+				
+				gui_kosmoport.RenderButtons(); 
+				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 
+				    
+			disable_BLEND();  
+			
+			break;
+		}
+
+		case GUI::SCREEN::GALAXYMAP_ID:
+		{
+			Galaxy* galaxy = player->GetNpc()->GetStarSystem()->GetGalaxy();
+			//update
+			if ( interaction == false)
+			{
+				interaction = gui_galaxymap.UpdateMouseInteraction(data_mouse, galaxy);
+	        	}					   
+		
+			//render
+			clearScreen(); //becase there is no background
+	        	resetRenderTransformation();
+			enable_BLEND();   
+				gui_galaxymap.Render(galaxy);
+				
+				gui_kosmoport.RenderButtons(); 
+				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 
+				    
+			disable_BLEND();    
+					
+			break;
+		}
+
+		case GUI::SCREEN::GOVERMENT_ID:
+		{
+			Goverment* goverment = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetGoverment();
+			
+			//update
+			if (interaction == false)
+			{
+				//interaction = gui_goverment->UpdateMouseInteraction(goverment, mxvp, myvp, lmb, rmb);
+	        	}
+	        	
+	        	//render
+	        	resetRenderTransformation();
+			goverment->RenderBackground(screen_rect);
+			enable_BLEND();   
+				//gui_goverment->RenderInternals(goverment);
+				
+				gui_kosmoport.RenderButtons(); 
+				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 
+				    
+			disable_BLEND(); 
+
+			break;
 		}
 	}
 	

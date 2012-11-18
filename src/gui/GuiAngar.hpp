@@ -36,8 +36,7 @@ class GuiAngar : public BaseGui
 		void CheckButtonsLock();
        		void ButtonsAction() const;   
        		       		
-       		void RenderVehicleSlots(Angar*) const;
-                void RenderFocusedItemInfo(const MouseData&, Angar*) const;             
+       		void RenderVehicleSlots(Angar*) const;      
        	
        	private:
        	      	std::vector<GuiPair<Rect, VehicleSlot*>> rect_vehicleslot_vec;
