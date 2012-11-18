@@ -28,6 +28,8 @@
 #include "../resources/TextureManager.hpp"
 #include "../render/Screen.hpp"
 
+#include "../items/others/GoodsPack.hpp"
+
 #include "../pilots/Npc.hpp"
 
 Slider::Slider()
@@ -101,17 +103,17 @@ void Slider::ButtonsAction(Shop* shop)
         					int goods_subtype_id;
         					switch(subtype_id)
         					{
-        						case GUI::BUTTON::MINERALS_ID: 	{ goods_subtype_id = ENTITY::MINERALS_ID; break; }
+        						case GUI::BUTTON::MINERALS_ID: 		{ goods_subtype_id = ENTITY::MINERALS_ID; break; }
         						case GUI::BUTTON::FOOD_ID: 		{ goods_subtype_id = ENTITY::FOOD_ID; break; }
-        						case GUI::BUTTON::MEDICINE_ID: 	{ goods_subtype_id = ENTITY::MEDICINE_ID; break; }
-        						case GUI::BUTTON::MILITARY_ID: 	{ goods_subtype_id = ENTITY::MILITARY_ID; break; }
+        						case GUI::BUTTON::MEDICINE_ID: 		{ goods_subtype_id = ENTITY::MEDICINE_ID; break; }
+        						case GUI::BUTTON::MILITARY_ID: 		{ goods_subtype_id = ENTITY::MILITARY_ID; break; }
         						case GUI::BUTTON::DRUG_ID: 		{ goods_subtype_id = ENTITY::DRUG_ID; break; }
         						case GUI::BUTTON::EXCLUSIVE_ID: 	{ goods_subtype_id = ENTITY::EXCLUSIVE_ID; break; }
         					}
         					
         					
-						shop->SellGoods(player->GetNpc(), goods_subtype_id, ammount_selected);
-        				
+						shop->SellGoods(player->GetNpc()->GetVehicle(), goods_subtype_id, ammount_selected);
+						
         					SetSubTypeId(NONE_ID);
         					button->Reset(); //untrigger        				
         					break; 

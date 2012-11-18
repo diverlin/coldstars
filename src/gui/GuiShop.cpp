@@ -114,10 +114,10 @@ void GuiShop::ButtonsAction(Shop* shop, Slider& slider)
 		       	slider.SetSubTypeId(button->GetSubTypeId());
         		switch(button->GetSubTypeId())
         		{
-        			case GUI::BUTTON::MINERALS_ID: 	{ slider.Configure(shop->GetMineralsAmount(), shop->GetMineralsPrice()); break; }
+        			case GUI::BUTTON::MINERALS_ID: 		{ slider.Configure(shop->GetMineralsAmount(), shop->GetMineralsPrice()); break; }
         			case GUI::BUTTON::FOOD_ID: 		{ slider.Configure(shop->GetFoodAmount(), shop->GetFoodPrice()); break; }
-        			case GUI::BUTTON::MEDICINE_ID: 	{ slider.Configure(shop->GetMedicineAmount(), shop->GetMedicinePrice()); break; }
-        			case GUI::BUTTON::MILITARY_ID: 	{ slider.Configure(shop->GetMilitaryAmount(), shop->GetMilitaryPrice()); break; }
+        			case GUI::BUTTON::MEDICINE_ID: 		{ slider.Configure(shop->GetMedicineAmount(), shop->GetMedicinePrice()); break; }
+        			case GUI::BUTTON::MILITARY_ID: 		{ slider.Configure(shop->GetMilitaryAmount(), shop->GetMilitaryPrice()); break; }
         			case GUI::BUTTON::DRUG_ID: 		{ slider.Configure(shop->GetDrugAmount(), shop->GetDrugPrice()); break; }
         			case GUI::BUTTON::EXCLUSIVE_ID: 	{ slider.Configure(shop->GetExclusiveAmount(), shop->GetExclusivePrice()); break; }
            		}  		   	

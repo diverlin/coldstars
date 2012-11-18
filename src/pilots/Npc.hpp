@@ -90,7 +90,6 @@ class Npc : public Base
 		                   
                 //bool BuyArmorAsMuchAsPossible();
                 bool BuyGoods();
-                bool SellGoods(GoodsPack*);
                                 
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);

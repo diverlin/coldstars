@@ -67,7 +67,7 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse, Store* store)
                         	{
                         		if (player->GetNpc()->GetCredits() >= rect_slot_vec[i].second->GetItem()->GetPrice())
                               		{
-                        			store->SellItemFromSlot(player->GetNpc(), rect_slot_vec[i].second);
+                        			player->GetNpc()->GetVehicle()->BuyItem(rect_slot_vec[i].second->GetItem());
                         		}
                         	} 
                         	return true; 

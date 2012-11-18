@@ -337,7 +337,6 @@ bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
 {	
  	if (AddItemToCargoSlot(container->GetItemSlot()->GetItem()) == true)
        	{      
-       		container->GetItemSlot()->RemoveItem();    // no need
        		container->SilentKill();
        								
        		return true;
@@ -348,9 +347,13 @@ bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
 
 bool Vehicle::AddItemToCargoSlot(BaseItem* item)
 {
+	IncreaseMass(item->GetMass());
 	if (item->GetTypeId() == ENTITY::GOODS_ID)
 	{
-		return ManageFunctionGoodsPack(item);
+		if (ManageFunctionGoodsPack(item) == true)
+		{
+			return true;
+		}
 	}
 	
 	ItemSlot* cargo_slot = GetEmptyCargoSlot();
@@ -384,30 +387,69 @@ void Vehicle::ManageItemsInCargo()
 	}
 }
     
-void Vehicle::SellItemsInCargo() const
+void Vehicle::SellItemsInCargo()
 {
-	Store* store = ((Kosmoport*)land)->GetStore();
-	Shop* shop = ((Kosmoport*)land)->GetShop();
-		
 	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
 	{
 		if (slot_cargo_vec[i]->GetEquiped() == true)
 		{
-			switch(slot_cargo_vec[i]->GetItem()->GetTypeId())
-			{
-				case ENTITY::GOODS_ID: 	   { shop->BuyGoods(owner_npc, (GoodsPack*)slot_cargo_vec[i]->GetItem()); break; }				
-				case ENTITY::EQUIPMENT_ID: { store->BuyItemFromSlot(owner_npc, slot_cargo_vec[i]); break; }
-			}
+			SellItem(slot_cargo_vec[i]->GetItem());
 		}
 	}
+}
+
+bool Vehicle::SellItem(BaseItem* item)
+{
+	//float skill_rate = 1.0f + sign*0.1*npc->GetSkill().GetTrader();
+	//npc->IncreaseCredits(sign*amount*skill_rate*minerals_price);
+	int earn_money = 0;
+	int item_mass = item->GetMass();
+	switch(item->GetTypeId())
+	{
+		case ENTITY::GOODS_ID: 	   
+		{ 
+			earn_money = ((Kosmoport*)land)->GetShop()->BuyGoods((GoodsPack*)item);	
+			break; 
+		}
+		
+		case ENTITY::EQUIPMENT_ID: 
+		{ 
+			earn_money = ((Kosmoport*)land)->GetStore()->BuyItem(item);
+			break; 
+		}		
+	}
+	
+	if (earn_money > 0)
+	{
+		DecreaseMass(item_mass);
+		owner_npc->IncreaseCredits(earn_money);
+		
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+ 
+bool Vehicle::BuyItem(BaseItem* item)
+{
+        if (AddItemToCargoSlot(item) == true)
+        {
+        	owner_npc->IncreaseCredits(-item->GetPrice());
+        	
+        	return true; 
+        }
+        
+        return false;
 }
                 
 bool Vehicle::MergeIdenticalGoods(BaseItem* item)
 {
-	ItemSlot* cargo_slot = GetCargoSlotWithGoods(item->GetSubTypeId());
-	if (cargo_slot != NULL)
+	ItemSlot* item_slot = GetCargoSlotWithGoods(item->GetSubTypeId());
+	if (item_slot != NULL)
 	{
-		cargo_slot->GetGoodsPack()->Increase(item->GetMass());
+		item_slot->GetGoodsPack()->Increase(item->GetMass());
 		// delete item; dangerrr
 		return true;
 	}
@@ -661,17 +703,18 @@ void Vehicle::UpdateAllFunctionalItemsInStatic()
 	}
 }
 
-void Vehicle::ChangeMass(int d_mass)
+void Vehicle::IncreaseMass(int d_mass)
 {
 	mass += d_mass;
     	propetries.free_space = data_korpus.space - mass;
 	UpdatePropertiesSpeed(); // as the mass influence speed this action is necessary here
 }
 
-void Vehicle::UpdatePropertiesFire()
+void Vehicle::DecreaseMass(int d_mass)
 {
-     	weapon_complex.UpdateFireAbility();
-     	weapon_complex.PrepareWeapons();
+	mass -= d_mass;
+    	propetries.free_space = data_korpus.space - mass;
+	UpdatePropertiesSpeed(); // as the mass influence speed this action is necessary here
 }
 
 void Vehicle::UpdatePropertiesSpeed()
@@ -712,6 +755,11 @@ void Vehicle::UpdatePropertiesSpeed()
         }
 }
 
+void Vehicle::UpdatePropertiesFire()
+{
+     	weapon_complex.UpdateFireAbility();
+     	weapon_complex.PrepareWeapons();
+}
 
 void Vehicle::UpdatePropertiesRadar()
 {

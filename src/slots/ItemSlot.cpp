@@ -85,15 +85,7 @@ bool ItemSlot::FakeInsertItem(BaseItem* item) const
 }
     		        
 bool ItemSlot::InsertItem(BaseItem* item)
-{
-	if (owner != NULL) // slot in cursor has owner = NULL
-	{
-		if (owner->GetTypeId() == ENTITY::VEHICLE_ID)
-		{
-			GetOwnerVehicle()->ChangeMass(item->GetMass());
-		}
-	}
-	
+{	
 	if (data_id.subtype_id == ENTITY::CARGO_SLOT_ID) 
 	{           
 		this->item = item;
@@ -125,15 +117,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 }
 
 void ItemSlot::RemoveItem()
-{        
-	if (owner != NULL) // slot in cursor has owner = NULL
-	{
-		if (owner->GetTypeId() == ENTITY::VEHICLE_ID)
-		{
-			GetOwnerVehicle()->ChangeMass(-item->GetMass());
-		}
-	}
-	
+{	
         item = NULL;
     	equiped = false;
     	

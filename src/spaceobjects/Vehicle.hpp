@@ -55,7 +55,7 @@ class Vehicle : public BaseSpaceEntity
 		void SetSpecialActionId(int special_action_id) { this->special_action_id = special_action_id; };
 		void SetParentVehicleSlot(VehicleSlot* parent_vehicleslot) { this->parent_vehicleslot = parent_vehicleslot; };
 		
-        	void SetColor(Color4f color) { this->color = color; }
+        	void SetColor(const Color4f& color) { this->color = color; }
         	void SetLand(BaseLand* land) { this->land = land; };
         	        
                 void SetKorpusData(const VehicleKorpusData&);
@@ -75,7 +75,10 @@ class Vehicle : public BaseSpaceEntity
                 bool AddAndManageItem(BaseItem*);
                 
                 void ManageItemsInCargo();
-                void SellItemsInCargo() const;
+                void SellItemsInCargo();
+                
+                bool SellItem(BaseItem*);
+                bool BuyItem(BaseItem*);
                                                 
                 bool UnpackContainerItemToCargoSlot(Container*);
                 
@@ -108,10 +111,11 @@ class Vehicle : public BaseSpaceEntity
         	virtual void PostDeathUniqueEvent(bool); 
         	
         	void UpdateAllFunctionalItemsInStatic();
-             		void ChangeMass(int);
+             		void IncreaseMass(int);
+             		void DecreaseMass(int);
+             		void UpdatePropertiesSpeed();
              		void UpdatePropertiesFire();
              		void UpdatePropertiesRadar();
-             		void UpdatePropertiesSpeed();
              		void UpdatePropertiesJump();
              		void UpdatePropertiesProtection();
              		void UpdatePropertiesRepair();

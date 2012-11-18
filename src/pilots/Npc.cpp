@@ -34,6 +34,8 @@
 #include "../spaceobjects/Asteroid.hpp"
 #include "../parts/WeaponComplex.hpp"
 
+#include "../items/others/GoodsPack.hpp"
+
 #include "../docking/Shop.hpp"
 #include "../text/VerticalFlowText.hpp" 
 
@@ -277,15 +279,10 @@ bool Npc::BuyGoods()
 	int amount = getMin<int>(amount_to_hold, amount_to_buy, amount_available);
 	if (amount != 0)		
 	{
-		shop->SellGoods(this, subtype_id, amount); 
+		shop->SellGoods(GetVehicle(), subtype_id, amount); 
 	}
 }
-
-bool Npc::SellGoods(GoodsPack* goods_pack)
-{
-	((Kosmoport*)vehicle->GetLand())->GetShop()->BuyGoods(this, goods_pack); 
-}
-   
+  
 void Npc::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "npc."+int2str(data_id.id)+".";

@@ -35,9 +35,8 @@ class Store : public Room
                 bool AddItem(BaseItem*);
 
                 ItemSlot* GetEmptySlot();
-                                     	
-                void SellItemFromSlot(Npc*, ItemSlot*);		
-                bool BuyItemFromSlot(Npc*, ItemSlot*); 
+
+                int BuyItem(BaseItem*); 
                 
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
