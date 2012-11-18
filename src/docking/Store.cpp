@@ -76,24 +76,19 @@ ItemSlot* Store::GetEmptySlot()
         return NULL;
 }
 
-void Store::SellItemFromSlot(Npc* npc, ItemSlot* slot)
-{
-	npc->IncreaseCredits(-slot->GetItem()->GetPrice()); 
-        npc->GetVehicle()->AddItemToCargoSlot(slot->GetItem());
-        slot->RemoveItem();
-}		
-
-bool Store::BuyItemFromSlot(Npc* npc, ItemSlot* slot)
+int Store::BuyItem(BaseItem* item)
 {
 	ItemSlot* empty_slot = GetEmptySlot();	
 	if (empty_slot != NULL)
 	{
-		npc->IncreaseCredits(slot->GetItem()->GetPrice());
-		return empty_slot->SwapItem(slot);
+		if (empty_slot->InsertItem(item) == true)
+		{
+			return item->GetPrice();
+		}
 	}
         else
         {
-               	return false;
+               	return 0;
 	}
 }
 

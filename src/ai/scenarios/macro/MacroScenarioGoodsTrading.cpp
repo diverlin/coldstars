@@ -26,6 +26,8 @@
 #include "../../../common/myStr.hpp"
 #include "../../../ai/StateMachine.hpp"
 
+#include "../../../items/others/GoodsPack.hpp"
+
 MacroScenarioGoodsTrading::MacroScenarioGoodsTrading() 
 {
 	type_id = MACROSCENARIO::GOODSTRADING_ID;
@@ -137,7 +139,7 @@ void MacroScenarioGoodsTrading::UpdateInStaticInDock(Npc* npc) const
 	GoodsPack* goods_pack = npc->GetVehicle()->GetGoodsPack(); 
 	while(goods_pack != NULL)
 	{
-		npc->SellGoods(goods_pack);
+		npc->GetVehicle()->SellItem(goods_pack);
 		goods_pack = npc->GetVehicle()->GetGoodsPack(); 
 	}
 	

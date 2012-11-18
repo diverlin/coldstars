@@ -77,89 +77,101 @@ int Shop::GetPrice(int subtype_id) const
 }
 
                 
-void Shop::SellGoods(Npc* npc, int subtype_id, int amount)
+bool Shop::SellGoods(Vehicle* vehicle, int subtype_id, int amount)
 {    
 	int sign = -1;
-	Deal(npc, sign, subtype_id, amount);	   		
-
-	GoodsPack* goods_pack = GetNewGoodsPack(subtype_id);
-        goods_pack->Increase(amount);	
-	npc->GetVehicle()->AddItemToCargoSlot(goods_pack);
+	int money = Deal(sign, subtype_id, amount);
+	
+	if (money > 0)
+	{
+		GoodsPack* goods_pack = GetNewGoodsPack(subtype_id);
+		goods_pack->Increase(amount);	
+		
+		vehicle->AddItemToCargoSlot(goods_pack);
+		vehicle->GetOwnerNpc()->DecreaseCredits(money);
+		
+		return true;
+	}	  
+	
+	return false;
 }
     
         	
-void Shop::BuyGoods(Npc* npc, GoodsPack* goods_pack)
-{
-	int sign = 1;
- 	
-	Deal(npc, sign, goods_pack->GetSubTypeId(), goods_pack->GetMass());	
-	goods_pack->GetItemSlot()->RemoveItem();
-	//delete goods_pack; // dangerrr
+int Shop::BuyGoods(GoodsPack* goods_pack)
+{ 	
+	int sign = 1;	
+	int money = Deal(sign, goods_pack->GetSubTypeId(), goods_pack->GetMass());	
+	if (money > 0)
+	{
+		goods_pack->GetItemSlot()->RemoveItem();
+		EntityManager::Instance().RemoveEntity(goods_pack);
+		delete goods_pack;
+	}
 }
        
-void Shop::Deal(Npc* npc, int sign, int subtype_id, int amount)
+int Shop::Deal(int sign, int subtype_id, int amount)
 {
- 	float skill_rate = 1.0f + sign*0.1*npc->GetSkill().GetTrader();
+	int money = 0;
 	switch(subtype_id)
 	{
 		case ENTITY::MINERALS_ID:
 		{		
 			minerals_amount += sign*amount;
-			npc->IncreaseCredits(sign*amount*skill_rate*minerals_price);
+			money = amount*minerals_price;
 			
 			UpdateMineralPrice();
 			
-			break;
+			return money; break;
 		}
 
 		case ENTITY::FOOD_ID:
 		{        					
 			food_amount += sign*amount;
-			npc->IncreaseCredits(sign*amount*skill_rate*food_price);
+			money = amount*food_price;
 						
 			UpdateFoodPrice();
 			
-			break;
+			return money; break;
 		}
 
 		case ENTITY::MEDICINE_ID:
 		{        					
 			medicine_amount += sign*amount;
-			npc->IncreaseCredits(sign*amount*skill_rate*medicine_price);
+			money = amount*medicine_price;
 			
 			UpdateMedicinePrice();
 			
-			break;
+			return money; break;
 		}			
 
 		case ENTITY::MILITARY_ID:
 		{        					
 			military_amount += sign*amount;
-			npc->IncreaseCredits(sign*amount*skill_rate*military_price);	
+			money = amount*military_price;	
 		
 			UpdateMilitaryPrice();
 			
-			break;
+			return money; break;
 		}	
 
 		case ENTITY::DRUG_ID:
 		{        					
 			drug_amount += sign*amount;
-			npc->IncreaseCredits(sign*amount*skill_rate*drug_price);
+			money = amount*drug_price;	
 						
 			UpdateDrugPrice();
 			
-			break;
+			return money; break;
 		}	
 
 		case ENTITY::EXCLUSIVE_ID:
 		{        					
 			exclusive_amount += sign*amount;
-			npc->IncreaseCredits(sign*amount*skill_rate*exclusive_price);
+			money = amount*exclusive_price;
 						
 			UpdateExclusivePrice();
 			
-			break;
+			return money; break;
 		}	
 	}
 }

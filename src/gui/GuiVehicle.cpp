@@ -241,23 +241,30 @@ bool GuiVehicle::UpdateMouseInteractionInSpace(const MouseData& data_mouse, bool
 	{ 
 		if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
 		{  
-			if (rect_slot_vec[i].second->GetEquiped() == true)
+			if ( (rect_slot_vec[i].second->GetEquiped() == true) and (player->GetCursor().GetItemSlot()->GetEquiped() == false) )
 			{
 				player->GetCursor().SetFocusedObject(rect_slot_vec[i].second->GetItem());
 			}
 						
 			if ( (data_mouse.left_click == true) and (control == true) )
 			{
-				if (rect_slot_vec[i].second->GetSubTypeId() == ENTITY::GATE_SLOT_ID)
+				if (rect_slot_vec[i].second->GetSubTypeId() != ENTITY::GATE_SLOT_ID)
 				{
-					if (player->GetCursor().GetItemSlot()->GetEquiped() == true)
-					{
-						player->GetCursor().GetItemSlot()->DropItemToSpace(player->GetNpc()->GetVehicle());
-					}
+					player->GetCursor().GetItemSlot()->SwapItem(rect_slot_vec[i].second); 
 				}
 				else
 				{
-					player->GetCursor().GetItemSlot()->SwapItem(rect_slot_vec[i].second);     
+					if (player->GetCursor().GetItemSlot()->GetEquiped() == true)
+					{
+						if (player->GetNpc()->GetVehicle()->GetPlaceTypeId() == ENTITY::SPACE_ID)
+						{
+							player->GetCursor().GetItemSlot()->DropItemToSpace(player->GetNpc()->GetVehicle());
+						}
+						else
+						{
+							player->GetNpc()->GetVehicle()->SellItem(player->GetCursor().GetItemSlot()->GetItem());
+						}
+					}    
 				}
 			} 
 			
@@ -329,15 +336,7 @@ bool GuiVehicle::UpdateMouseInteractionInStore(const MouseData& data_mouse, Vehi
 							
 				if (data_mouse.left_click == true)
 				{
-
-					if (rect_slot_vec[i].second->GetItem()->GetTypeId() != ENTITY::GOODS_ID)
-					{
-						store->BuyItemFromSlot(player->GetNpc(), rect_slot_vec[i].second);
-					}
-					else
-					{
-						store->GetOwnerKosmoport()->GetShop()->BuyGoods(player->GetNpc(), (GoodsPack*)rect_slot_vec[i].second->GetItem());
-					}
+					vehicle->SellItem(rect_slot_vec[i].second->GetItem());
             			}
 			} 
 			

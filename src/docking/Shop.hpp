@@ -20,7 +20,7 @@
 #define SHOP_H
 
 #include "Room.hpp"
-class Npc; 
+class Vehicle; 
 class GoodsPack; 
 
 class Shop : public Room
@@ -46,8 +46,8 @@ class Shop : public Room
                 int GetAmount(int) const;    
                 int GetPrice(int) const;
                         	                
-        	void SellGoods(Npc*, int, int);
-        	void BuyGoods(Npc*, GoodsPack*);
+        	bool SellGoods(Vehicle*, int, int);
+        	int BuyGoods(GoodsPack*);
         	                
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
@@ -68,7 +68,7 @@ class Shop : public Room
         	int drug_price;     
         	int exclusive_price;
         	                   
-        	void Deal(Npc*, int, int, int);
+        	int Deal(int, int, int);
         	                     
         	void UpdateAllPrices();
         	void UpdateMineralPrice();

@@ -428,6 +428,14 @@ void Cursor::RenderFocusedObjectInfo()
 				
 				break;
 			}
+
+			case ENTITY::GOODS_ID:
+			{
+				((BaseItem*)focused_ob)->RenderInfo(rect.GetCenter()); 
+				
+				break;
+			}
+
 		}
 		
 		disable_BLEND();
