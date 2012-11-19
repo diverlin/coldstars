@@ -36,7 +36,6 @@ Player* SaveLoadManager::Update(Player* player)
 
 	if (perform_load == true)
 	{
-		delete player->GetNpc()->GetStarSystem()->GetGalaxy();
 		EntityManager::Instance().Clear();
 		EntityManager::Instance().LoadPass0();
 		EntityManager::Instance().LoadPass1();

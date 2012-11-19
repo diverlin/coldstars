@@ -41,7 +41,7 @@ void Galaxy::PutChildsToGarbage() const
 {
 	for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
 	{	
-		//STARSYSTEM_vec[i]->PutChildsToGarbage();
+		STARSYSTEM_vec[i]->PutChildsToGarbage();
 		EntityGarbage::Instance().Add(STARSYSTEM_vec[i]);
 	}
 }
