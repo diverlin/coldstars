@@ -31,7 +31,7 @@
 GuiVehicle::GuiVehicle()
 {
 	textureOb_korpus = NULL;
-	gate_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::GATE_SLOT_ID);
+	gate_slot   = GetNewItemSlotWithoutSaveAbility(ENTITY::GATE_SLOT_ID);
 }
 
 GuiVehicle::~GuiVehicle()
@@ -232,7 +232,7 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
     		   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);		
 		
 	rect.Scale(scale);           			   
-	rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, gate_slot));    	
+	rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, gate_slot));    		
 } 
 
 bool GuiVehicle::UpdateMouseInteractionInSpace(const MouseData& data_mouse, bool control)

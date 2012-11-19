@@ -23,6 +23,8 @@
 class ItemSlot;
 class VehicleSlot; 
 class Vehicle;
+class Npc;
+class BaseItem;
 
 class Angar : public Room
 {
@@ -38,6 +40,8 @@ class Angar : public Room
                 void Ai() const;
                 
                 bool AddVehicle(Vehicle*);
+                
+                bool RepairItem(Npc*, BaseItem*) const;
 
                 int GetFreeVehicleSlotTotalNum() const;
                 

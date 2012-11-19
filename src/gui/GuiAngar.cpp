@@ -26,9 +26,10 @@
 #include "../pilots/Player.hpp"
 
 #include "../pilots/Npc.hpp"
+#include "../builder/ItemSlotBuilder.hpp"
 
-GuiAngar::GuiAngar()
-{	
+GuiAngar::GuiAngar():angar(NULL)
+{
 	int screen_w = Config::Instance().SCREEN_WIDTH;
 	int screen_h = Config::Instance().SCREEN_HEIGHT;
 	
@@ -54,14 +55,20 @@ GuiAngar::GuiAngar()
     				    GUI::ICON_SIZE,  
     				    GUI::ICON_SIZE));
     	button_map.insert(std::make_pair(GUI::BUTTON::GETLAUNCH_ID, launch_button));
+
+	repair_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::REPAIR_SLOT_ID);
 }
 
 
 GuiAngar::~GuiAngar()
-{}	
+{
+	delete repair_slot;
+}	
 	
 void GuiAngar::BindAngar(Angar* angar)
 {
+	this->angar = angar;
+	
 	rect_vehicleslot_vec.clear();
 	rect_itemslot_vec.clear();
 	
@@ -97,6 +104,13 @@ void GuiAngar::BindAngar(Angar* angar)
                 
                 row_counter++;                
 	}
+	
+		
+   	Rect rect(GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+    		   3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+    		   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        			   
+	rect_itemslot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, repair_slot));    
 
 }
 
@@ -186,7 +200,15 @@ bool GuiAngar::UpdateMouseVehicleSlotsInteraction(const MouseData& data_mouse)
                 {
                 	if (data_mouse.left_click == true)
                         {
-  				player->GetCursor().GetItemSlot()->SwapItem(rect_itemslot_vec[i].second);
+                		if (rect_itemslot_vec[i].second->GetSubTypeId() != ENTITY::REPAIR_SLOT_ID)
+				{	
+  					player->GetCursor().GetItemSlot()->SwapItem(rect_itemslot_vec[i].second);
+                        	}
+                        	else
+                        	{
+                        		angar->RepairItem(player->GetNpc(), player->GetCursor().GetItemSlot()->GetItem());
+                        	}
+                        	
                         }
                         	
                         if (rect_itemslot_vec[i].second->GetItem() != NULL)
@@ -200,7 +222,7 @@ bool GuiAngar::UpdateMouseVehicleSlotsInteraction(const MouseData& data_mouse)
 }
 
 
-void GuiAngar::RenderVehicleSlots(Angar* angar) const
+void GuiAngar::RenderVehicleSlots() const
 {
 	glPushMatrix();
 		glTranslatef(offset.x, offset.y, 0);

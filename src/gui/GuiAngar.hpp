@@ -36,9 +36,13 @@ class GuiAngar : public BaseGui
 		void CheckButtonsLock();
        		void ButtonsAction() const;   
        		       		
-       		void RenderVehicleSlots(Angar*) const;      
+       		void RenderVehicleSlots() const;      
        	
        	private:
+       	        Angar* angar;
+       	        
+       	        ItemSlot* repair_slot;
+       	                
        	      	std::vector<GuiPair<Rect, VehicleSlot*>> rect_vehicleslot_vec;
        	      	std::vector<GuiPair<Rect, ItemSlot*>> rect_itemslot_vec;
 };

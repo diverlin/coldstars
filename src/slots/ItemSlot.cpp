@@ -170,7 +170,7 @@ void ItemSlot::DeselectEvent()
         	
 void ItemSlot::UpdateVehiclePropetries() const
 {
-	if (owner->GetTypeId() == ENTITY::VEHICLE_ID)
+	if (data_id.subtype_id != ENTITY::CARGO_SLOT_ID)
 	{ 	
 		switch(data_id.subtype_id)
 		{
