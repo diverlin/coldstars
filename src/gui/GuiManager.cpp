@@ -290,7 +290,7 @@ bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
 			resetRenderTransformation();
 			angar->RenderBackground(screen_rect);
 			enable_BLEND();   
-	        		gui_angar.RenderVehicleSlots(angar);
+	        		gui_angar.RenderVehicleSlots();
 	        		
 				if (scan_vehicle != NULL) 	
 				{ 

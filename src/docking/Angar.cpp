@@ -27,6 +27,7 @@
 #include "../pilots/Npc.hpp"
 
 #include "../garbage/EntityGarbage.hpp"
+#include "../items/BaseItem.hpp"
 
 Angar::Angar(int id)
 {
@@ -75,12 +76,22 @@ void Angar::AddVehicleSlot(VehicleSlot* vehicle_slot)
         
         vehicle_total_slot_vec.push_back(vehicle_slot); 
 };
-                         
+
    
 void Angar::AddItemSlot(ItemSlot* item_slot)
 {
         item_slot->SetOwner(this);
         item_slot_vec.push_back(item_slot); 
+}
+  
+bool Angar::RepairItem(Npc* npc, BaseItem* item) const
+{
+	int price = item->GetPrice() * REPAIR_ITEM_PRICE_RATE;
+	if (npc->GetCredits() > price)
+	{
+		npc->DecreaseCredits(price);
+		item->RepairEvent();
+	}
 }
                          
 void Angar::Ai() const

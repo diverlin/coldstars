@@ -101,7 +101,7 @@ int main()
 //######################## UPRAVLENIE
 //# 1,2,3...9 aktivacija oruzhija
 //# a - aktivacija/deaktivacija vsex slotov oruzhija odnovremenno
-//# g - aktivacija/deaktivacija zaxvata (u4ti zaxvat ne mozhet  tjanut' oskolki bolshe 30 kazhetsja :) i ewe pered tem kak sxvatit chtoto ootkljuchi vse pushki, a to ja ewe ne dodelal intelekt chtob ne streljal asteopidy po umolchaniju)
+//# g - aktivacija/deaktivacija zaxvata 
 //# p - pokazat' podpisi planetam/asteroidam/mineralam
 //# o - vkl/vykl otrisovku orbit vsex nebesnyx tel
 //# SPACE - propusk xoda

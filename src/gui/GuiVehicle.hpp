@@ -43,7 +43,7 @@ class GuiVehicle : public BaseGui
                 TextureOb* textureOb_korpus;
                 	
                 ItemSlot* gate_slot;
-                
+                                
       		std::vector<GuiPair<Rect, ItemSlot*>> rect_slot_vec;
       		      	
       		void RenderSlots() const;
