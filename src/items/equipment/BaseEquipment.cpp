@@ -25,7 +25,7 @@
 #include "../../render/Render.hpp"
 #include "../../resources/GuiTextureObCollector.hpp"
 #include "../../common/Logger.hpp"
-#include "../../garbage/GarbageEntities.hpp"
+#include "../../garbage/EntityGarbage.hpp"
 
 #include "../../render/AnimationEffect2D.hpp"
 
@@ -53,7 +53,7 @@ void BaseEquipment::PutChildsToGarbage() const
 {
 	for (unsigned int i=0; i<modules_vec.size(); i++)
 	{
-		GarbageEntities::Instance().Add(modules_vec[i]);
+		EntityGarbage::Instance().Add(modules_vec[i]);
 	}
 }
 		
@@ -98,7 +98,7 @@ void BaseEquipment::RemoveChildFromEntityManager()
 {
     	for (unsigned int i=0; i<modules_vec.size(); i++)
     	{
-		GarbageEntities::Instance().Add(modules_vec[i]);
+		EntityGarbage::Instance().Add(modules_vec[i]);
     	}
 }
 

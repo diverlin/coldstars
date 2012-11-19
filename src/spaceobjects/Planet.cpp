@@ -27,7 +27,7 @@
 #include "../docking/Kosmoport.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 
-#include "../garbage/GarbageEntities.hpp"
+#include "../garbage/EntityGarbage.hpp"
 
 Planet::Planet(int id)
 {    
@@ -50,7 +50,7 @@ Planet::~Planet()
 
 void Planet::PutChildsToGarbage() const
 {
-	GarbageEntities::Instance().Add(land);
+	EntityGarbage::Instance().Add(land);
 }
 
 void Planet::BindLand(BaseLand* land)       		

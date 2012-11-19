@@ -16,18 +16,18 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GARBAGEENTITIES_H
-#define GARBAGEENTITIES_H
+#ifndef ENTITYGARBAGE_H
+#define ENTITYGARBAGE_H
 
 #include <vector>
 class Base;
 
-class GarbageEntities
+class EntityGarbage
 {
 	public:
-		static GarbageEntities& Instance();
+		static EntityGarbage& Instance();
 
-		~GarbageEntities();
+		~EntityGarbage();
 		
 		void Add(Base*);
 		
@@ -36,9 +36,9 @@ class GarbageEntities
 	private:
 		std::vector<Base*> entities_vec;
 
-		GarbageEntities() {};
-		GarbageEntities(const GarbageEntities&) = delete;
-		GarbageEntities& operator=(const GarbageEntities&) = delete;
+		EntityGarbage() {};
+		EntityGarbage(const EntityGarbage&) = delete;
+		EntityGarbage& operator=(const EntityGarbage&) = delete;
 };
      		
 #endif 

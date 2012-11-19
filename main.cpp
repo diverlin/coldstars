@@ -32,7 +32,7 @@
 #include "src/pilots/Npc.hpp"
 #include "src/spaceobjects/Planet.hpp"
 
-#include "src/garbage/GarbageEntities.hpp"
+#include "src/garbage/EntityGarbage.hpp"
 
 int main()
 {           
@@ -92,7 +92,7 @@ int main()
 		}
 		/* client code end */
 		
-		GarbageEntities::Instance().Clear();
+		EntityGarbage::Instance().Clear();
 	}
 
 	return EXIT_SUCCESS;

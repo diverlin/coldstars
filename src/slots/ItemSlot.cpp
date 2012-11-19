@@ -40,7 +40,7 @@
 #include "../common/Logger.hpp"
 #include "../common/EntityManager.hpp"
 
-#include "../garbage/GarbageEntities.hpp"
+#include "../garbage/EntityGarbage.hpp"
 
 ItemSlot::ItemSlot(int id)
 {
@@ -74,7 +74,7 @@ void ItemSlot::PutChildsToGarbage() const
 			((BaseEquipment*)item)->PutChildsToGarbage();
 		}
 		
-		GarbageEntities::Instance().Add(item);
+		EntityGarbage::Instance().Add(item);
 	}
 }
 

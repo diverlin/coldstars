@@ -25,7 +25,7 @@
 #include "../pilots/Player.hpp"
 #include "../pilots/Npc.hpp"
 
-#include "../garbage/GarbageEntities.hpp"
+#include "../garbage/EntityGarbage.hpp"
 
 Galaxy::Galaxy(int id)
 {
@@ -42,7 +42,7 @@ void Galaxy::PutChildsToGarbage() const
 	for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
 	{	
 		//STARSYSTEM_vec[i]->PutChildsToGarbage();
-		GarbageEntities::Instance().Add(STARSYSTEM_vec[i]);
+		EntityGarbage::Instance().Add(STARSYSTEM_vec[i]);
 	}
 }
 
