@@ -31,6 +31,8 @@ class Store : public Room
                 Store(int);                      
                 ~Store();
                 
+                void PutChildsToGarbage() const;
+                
 		void AddItemSlot(ItemSlot*);                
                 bool AddItem(BaseItem*);
 

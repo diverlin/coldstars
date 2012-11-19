@@ -59,6 +59,8 @@ class ItemSlot : public BaseSlot
 		ItemSlot(int id);
 		virtual ~ItemSlot();                
 	
+	        void PutChildsToGarbage() const;
+	        	
 		void SetTurrel(Turrel* turrel) { this->turrel = turrel; };
                                 
 		Turrel* GetTurrel() const { return turrel; };
@@ -111,8 +113,6 @@ class ItemSlot : public BaseSlot
         
         	void SelectEvent();
         	void DeselectEvent();
-        
-        	void RemoveChildFromEntityManager();
         
         	virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);

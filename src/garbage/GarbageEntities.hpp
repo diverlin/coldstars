@@ -25,7 +25,8 @@ class Base;
 class GarbageEntities
 {
 	public:
-		GarbageEntities();
+		static GarbageEntities& Instance();
+
 		~GarbageEntities();
 		
 		void Add(Base*);
@@ -34,6 +35,10 @@ class GarbageEntities
 	
 	private:
 		std::vector<Base*> entities_vec;
+
+		GarbageEntities() {};
+		GarbageEntities(const GarbageEntities&) = delete;
+		GarbageEntities& operator=(const GarbageEntities&) = delete;
 };
      		
 #endif 

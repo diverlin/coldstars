@@ -33,9 +33,7 @@ Goverment::Goverment(int id)
 }
 
 Goverment::~Goverment()
-{
-	EntityManager::Instance().RemoveEntity(this);
-}
+{}
 
 
 void Goverment::SaveDataUniqueGoverment(boost::property_tree::ptree& save_ptree, const std::string& root) const

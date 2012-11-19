@@ -34,6 +34,8 @@ class Planet : public BasePlanet
 	public:
 		Planet(int);
 		~Planet();
+		
+		void PutChildsToGarbage() const;
 
 		void BindLand(BaseLand* land);
 		void SetPopulation(unsigned long int population) 	{ this->population = population; };

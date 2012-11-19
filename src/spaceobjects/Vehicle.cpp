@@ -64,6 +64,8 @@
 #include "../docking/Shop.hpp"
 #include "../docking/Store.hpp"
 
+#include "../garbage/GarbageEntities.hpp"
+
 Vehicle::Vehicle()
 {
 	god_mode = false;
@@ -93,12 +95,16 @@ Vehicle::~Vehicle()
 	#if CREATEDESTROY_LOG_ENABLED == 1
 	Logger::Instance().Log("___::~Vehicle(), id="+int2str(GetId()));
 	#endif
+} 
 
+void Vehicle::PutChildsToGarbage() const
+{
 	for(unsigned int i=0; i<slot_total_vec.size(); i++)
 	{
-		delete slot_total_vec[i];
+		GarbageEntities::Instance().Add(slot_total_vec[i]);	
+		slot_total_vec[i]->PutChildsToGarbage();
 	}
-} 
+}
 
 void Vehicle::CreateDriveComplexTextureDependedStuff()
 {
@@ -1157,15 +1163,6 @@ void Vehicle::DropRandomItemToSpace()
 void Vehicle::UpdateGrappleMicroProgram()
 {
         grapple_slot->GetGrappleEquipment()->UpdateGrabScenarioProgram();  
-}
-	
-void Vehicle::RemoveChildFromEntityManager()
-{
-	for(unsigned int i=0; i<slot_total_vec.size(); i++)
-	{
-		EntityManager::Instance().RemoveEntity(slot_total_vec[i]);	
-		slot_total_vec[i]->RemoveChildFromEntityManager();
-	}
 }
 				
 void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, const std::string& root) const

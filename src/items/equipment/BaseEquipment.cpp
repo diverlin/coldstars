@@ -25,7 +25,7 @@
 #include "../../render/Render.hpp"
 #include "../../resources/GuiTextureObCollector.hpp"
 #include "../../common/Logger.hpp"
-#include "../../common/EntityManager.hpp"
+#include "../../garbage/GarbageEntities.hpp"
 
 #include "../../render/AnimationEffect2D.hpp"
 
@@ -45,15 +45,18 @@ BaseEquipment::~BaseEquipment()
 	#if CREATEDESTROY_LOG_ENABLED == 1
 	Logger::Instance().Log("___::~BaseEquipment(), id="+int2str(GetId()));
 	#endif
-
-    	for (unsigned int i=0; i<modules_vec.size(); i++)
-    	{
-		delete modules_vec[i];
-    	}
     	
     	delete animation_notfunctioning;
 }
 
+void BaseEquipment::PutChildsToGarbage() const
+{
+	for (unsigned int i=0; i<modules_vec.size(); i++)
+	{
+		GarbageEntities::Instance().Add(modules_vec[i]);
+	}
+}
+		
 /* virtual */
 void BaseEquipment::AddCommonInfo()
 {
@@ -91,11 +94,11 @@ bool BaseEquipment::InsertModule(BaseModule* module)
        	return false;   
 } 
 
-void BaseEquipment::BaseEquipment::BaseEquipment::RemoveChildFromEntityManager()
+void BaseEquipment::RemoveChildFromEntityManager()
 {
     	for (unsigned int i=0; i<modules_vec.size(); i++)
     	{
-		EntityManager::Instance().RemoveEntity(modules_vec[i]);
+		GarbageEntities::Instance().Add(modules_vec[i]);
     	}
 }
 

@@ -51,6 +51,8 @@ class Vehicle : public BaseSpaceEntity
        	        Vehicle();
         	virtual ~Vehicle(); 
 
+		void PutChildsToGarbage() const;
+		
 		void SetGodMode(bool god_mode) { this->god_mode = god_mode; };
 		void SetSpecialActionId(int special_action_id) { this->special_action_id = special_action_id; };
 		void SetParentVehicleSlot(VehicleSlot* parent_vehicleslot) { this->parent_vehicleslot = parent_vehicleslot; };
@@ -147,8 +149,6 @@ class Vehicle : public BaseSpaceEntity
 
 		void LockItemInItemSlot(ItemSlot*, int);
 		void LockRandomItem(int);
-		
-		void RemoveChildFromEntityManager();
 		
 		void TEST_DamageAndLockRandItems();
 

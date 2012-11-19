@@ -27,6 +27,8 @@
 #include "../docking/Kosmoport.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 
+#include "../garbage/GarbageEntities.hpp"
+
 Planet::Planet(int id)
 {    
 	data_id.id = id;
@@ -44,10 +46,11 @@ Planet::Planet(int id)
 
 
 Planet::~Planet()
+{}
+
+void Planet::PutChildsToGarbage() const
 {
-	EntityManager::Instance().RemoveEntity(this);
-	
-	delete land;
+	GarbageEntities::Instance().Add(land);
 }
 
 void Planet::BindLand(BaseLand* land)       		

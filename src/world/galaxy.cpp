@@ -25,6 +25,8 @@
 #include "../pilots/Player.hpp"
 #include "../pilots/Npc.hpp"
 
+#include "../garbage/GarbageEntities.hpp"
+
 Galaxy::Galaxy(int id)
 {
 	data_id.id = id;
@@ -33,14 +35,15 @@ Galaxy::Galaxy(int id)
 }
 
 Galaxy::~Galaxy()
-{
-	EntityManager::Instance().RemoveEntity(this);
+{}
 
-	for (unsigned int i = 0; i<STARSYSTEM_vec.size(); i++)
+void Galaxy::PutChildsToGarbage() const
+{
+	for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
 	{	
-		delete STARSYSTEM_vec[i];
+		//STARSYSTEM_vec[i]->PutChildsToGarbage();
+		GarbageEntities::Instance().Add(STARSYSTEM_vec[i]);
 	}
-	STARSYSTEM_vec.clear();
 }
 
 void Galaxy::Add(StarSystem* starsystem, const vec2f& center) 

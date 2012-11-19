@@ -30,6 +30,8 @@ class Angar : public Room
                 Angar(int id);
                 ~Angar();
                 
+                void PutChildsToGarbage() const;
+                
                 void AddVehicleSlot(VehicleSlot*);
                 void AddItemSlot(ItemSlot*);
                 

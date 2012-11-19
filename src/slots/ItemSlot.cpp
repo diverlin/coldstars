@@ -40,6 +40,8 @@
 #include "../common/Logger.hpp"
 #include "../common/EntityManager.hpp"
 
+#include "../garbage/GarbageEntities.hpp"
+
 ItemSlot::ItemSlot(int id)
 {
 	/* 
@@ -61,14 +63,21 @@ ItemSlot::~ItemSlot()
 	#if CREATEDESTROY_LOG_ENABLED == 1
 	Logger::Instance().Log("___::~ItemSlot(), id="+int2str(GetId()));
 	#endif
-		
-	if (equiped == true)
-	{
-		delete item;
-		item = NULL;
-	}
 }  
     
+void ItemSlot::PutChildsToGarbage() const
+{
+	if (equiped == true)
+	{
+		if (item->GetTypeId() == ENTITY::EQUIPMENT_ID)
+		{
+			((BaseEquipment*)item)->PutChildsToGarbage();
+		}
+		
+		GarbageEntities::Instance().Add(item);
+	}
+}
+
 bool ItemSlot::FakeInsertItem(BaseItem* item) const
 {
 	if (data_id.subtype_id == ENTITY::CARGO_SLOT_ID) 
@@ -358,18 +367,6 @@ bool ItemSlot::CheckDistance(BaseSpaceEntity* _target) const
         }
 
        	return false;
-}
-
-void ItemSlot::RemoveChildFromEntityManager()
-{
-	if (equiped == true)
-	{
-		EntityManager::Instance().RemoveEntity(item);
-		if (item->GetTypeId() == ENTITY::EQUIPMENT_ID)
-		{
-			((BaseEquipment*)item)->RemoveChildFromEntityManager();
-		}
-	}
 }
         	
 /*virtual*/

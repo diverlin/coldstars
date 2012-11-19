@@ -28,6 +28,8 @@ class Container : public BaseSpaceEntity
         	Container(int);
         	virtual ~Container();
         	
+        	void PutChildsToGarbage() const;
+        	
         	void SetTargetPos(const vec2f& target_pos) { this->target_pos = target_pos; keep_moving = true; };
         	void BindItemSlot(ItemSlot*);
         	ItemSlot* GetItemSlot() const { return item_slot; };
@@ -41,8 +43,6 @@ class Container : public BaseSpaceEntity
 		void SilentKill();
           	void CalcCollisionrRadius();
         	void Render2D();
-                              
-                void RemoveChildFromEntityManager();
                                 
         	virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);

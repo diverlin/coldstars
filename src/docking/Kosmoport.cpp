@@ -26,6 +26,8 @@
 #include "../docking/Shop.hpp"
 #include "../docking/Goverment.hpp"
 
+#include "../garbage/GarbageEntities.hpp"
+
 Kosmoport::Kosmoport(int id) 
 {
 	data_id.id = id;
@@ -41,6 +43,17 @@ Kosmoport::Kosmoport(int id)
 /* virtual */
 Kosmoport::~Kosmoport()
 {}
+
+void Kosmoport::PutChildsToGarbage() const
+{
+	angar->PutChildsToGarbage();
+	store->PutChildsToGarbage();
+
+	GarbageEntities::Instance().Add(angar);
+	GarbageEntities::Instance().Add(store);
+	GarbageEntities::Instance().Add(shop);
+	GarbageEntities::Instance().Add(goverment);
+}
        
 void Kosmoport::BindAngar(Angar* angar) 			
 { 

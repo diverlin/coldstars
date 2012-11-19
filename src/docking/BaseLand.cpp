@@ -26,9 +26,7 @@ BaseLand::BaseLand()
 
 /* virtual */
 BaseLand::~BaseLand()
-{
-	EntityManager::Instance().RemoveEntity(this);
-}
+{}
 
 
 void BaseLand::SaveDataUniqueBaseLand(boost::property_tree::ptree& save_ptree, const std::string& root) const
