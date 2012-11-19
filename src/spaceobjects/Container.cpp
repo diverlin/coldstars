@@ -28,7 +28,7 @@
 #include "../render/Render.hpp"
 #include "../effects/particlesystem/ExplosionEffect.hpp"
 
-#include "../garbage/GarbageEntities.hpp"
+#include "../garbage/EntityGarbage.hpp"
 
 Container::Container(int id)
 {
@@ -50,7 +50,7 @@ Container::~Container()
 void Container::PutChildsToGarbage() const
 {
 	item_slot->PutChildsToGarbage();
-	GarbageEntities::Instance().Add(item_slot);
+	EntityGarbage::Instance().Add(item_slot);
 }
         	
 void Container::BindItemSlot(ItemSlot* item_slot) 

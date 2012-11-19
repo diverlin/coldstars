@@ -25,7 +25,7 @@
 #include "../docking/Angar.hpp"
 #include "../common/EntityManager.hpp"
 
-#include "../garbage/GarbageEntities.hpp"
+#include "../garbage/EntityGarbage.hpp"
 
 VehicleSlot::VehicleSlot(int id)
 {   
@@ -42,7 +42,7 @@ void VehicleSlot::PutChildsToGarbage() const
 {
 	if (vehicle)
 	{
-		GarbageEntities::Instance().Add(vehicle);
+		EntityGarbage::Instance().Add(vehicle);
 	} 
 }
                       

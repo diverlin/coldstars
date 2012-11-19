@@ -26,7 +26,7 @@
 #include "../slots/ItemSlot.hpp" 
 #include "../pilots/Npc.hpp"
 
-#include "../garbage/GarbageEntities.hpp"
+#include "../garbage/EntityGarbage.hpp"
 
 Angar::Angar(int id)
 {
@@ -49,13 +49,13 @@ void Angar::PutChildsToGarbage() const
 	for(unsigned int i=0; i<vehicle_total_slot_vec.size(); i++)
 	{
 		vehicle_total_slot_vec[i]->PutChildsToGarbage();
-		GarbageEntities::Instance().Add(vehicle_total_slot_vec[i]);
+		EntityGarbage::Instance().Add(vehicle_total_slot_vec[i]);
 	}
 
 	for(unsigned int i=0; i<item_slot_vec.size(); i++)
 	{
 		item_slot_vec[i]->PutChildsToGarbage();
-		GarbageEntities::Instance().Add(item_slot_vec[i]);
+		EntityGarbage::Instance().Add(item_slot_vec[i]);
 	}
 }
        

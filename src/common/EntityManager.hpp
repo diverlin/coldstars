@@ -25,7 +25,7 @@
 #include <string>
 
 #include "../common/Base.hpp"
-class GarbageEntities;
+class EntityGarbage;
 
 
 class EntityManager
@@ -53,7 +53,7 @@ class EntityManager
 
 		void RemoveEntity(Base*);
 				
-		friend class GarbageEntities;
+		friend class EntityGarbage;
 };
 
 

@@ -64,7 +64,7 @@
 #include "../docking/Shop.hpp"
 #include "../docking/Store.hpp"
 
-#include "../garbage/GarbageEntities.hpp"
+#include "../garbage/EntityGarbage.hpp"
 
 Vehicle::Vehicle()
 {
@@ -101,7 +101,7 @@ void Vehicle::PutChildsToGarbage() const
 {
 	for(unsigned int i=0; i<slot_total_vec.size(); i++)
 	{
-		GarbageEntities::Instance().Add(slot_total_vec[i]);	
+		EntityGarbage::Instance().Add(slot_total_vec[i]);	
 		slot_total_vec[i]->PutChildsToGarbage();
 	}
 }

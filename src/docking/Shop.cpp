@@ -28,7 +28,7 @@
 #include "../slots/ItemSlot.hpp"
 #include "../pilots/Npc.hpp"
 
-#include "../garbage/GarbageEntities.hpp"
+#include "../garbage/EntityGarbage.hpp"
 
 Shop::Shop(int id)
 {
@@ -104,7 +104,7 @@ int Shop::BuyGoods(GoodsPack* goods_pack)
 	if (money > 0)
 	{
 		goods_pack->GetItemSlot()->RemoveItem(); // what gonna be happen with item ??
-		GarbageEntities::Instance().Add(goods_pack);
+		EntityGarbage::Instance().Add(goods_pack);
 	}
 }
        

@@ -16,33 +16,33 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "GarbageEntities.hpp"
+#include "EntityGarbage.hpp"
 #include "../common/myStr.hpp"
 #include "../common/Logger.hpp"
 #include "../common/Base.hpp"
 #include "../common/EntityManager.hpp"
 
-GarbageEntities& GarbageEntities::Instance()
+EntityGarbage& EntityGarbage::Instance()
 {
-	static GarbageEntities instance;
+	static EntityGarbage instance;
 	return instance;
 }
 
-GarbageEntities::~GarbageEntities()
+EntityGarbage::~EntityGarbage()
 {}
                   
-void GarbageEntities::Add(Base* entitiy) 
+void EntityGarbage::Add(Base* entitiy) 
 {
 	entities_vec.push_back(entitiy);
 }
 
-void GarbageEntities::Clear()
+void EntityGarbage::Clear()
 {  
    	for(unsigned int i=0; i<entities_vec.size(); i++)
     	{ 
 		EntityManager::Instance().RemoveEntity(entities_vec[i]);
     		#if CREATEDESTROY_LOG_ENABLED == 1
-    		Logger::Instance().Log("________GarbageEntities delete " + getTypeStr(entities_vec[i]->GetTypeId()) + "(" +int2str(entities_vec[i]->GetTypeId()) +") " + getTypeStr(entities_vec[i]->GetSubTypeId()) + "(" + int2str(entities_vec[i]->GetSubTypeId()) + ") id=" + int2str(entities_vec[i]->GetId()));
+    		Logger::Instance().Log("________EntityGarbage delete " + getTypeStr(entities_vec[i]->GetTypeId()) + "(" +int2str(entities_vec[i]->GetTypeId()) +") " + getTypeStr(entities_vec[i]->GetSubTypeId()) + "(" + int2str(entities_vec[i]->GetSubTypeId()) + ") id=" + int2str(entities_vec[i]->GetId()));
 		#endif
 		delete entities_vec[i];
 	}
