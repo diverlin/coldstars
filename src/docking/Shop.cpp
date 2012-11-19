@@ -77,20 +77,22 @@ int Shop::GetPrice(int subtype_id) const
 }
 
                 
-bool Shop::SellGoods(Vehicle* vehicle, int subtype_id, int amount)
+bool Shop::SellGoods(Npc* npc, int subtype_id, int amount)
 {    
 	int sign = -1;
-	int money = Deal(sign, subtype_id, amount);
+	int price = Deal(sign, subtype_id, amount);
 	
-	if (money > 0)
-	{
-		GoodsPack* goods_pack = GetNewGoodsPack(subtype_id);
-		goods_pack->Increase(amount);	
+	if (price > 0)
+	{		
+		if (npc->WithdrawCredits(price) == true)
+		{
+			GoodsPack* goods_pack = GetNewGoodsPack(subtype_id);
+			goods_pack->Increase(amount);	
 		
-		vehicle->AddItemToCargoSlot(goods_pack);
-		vehicle->GetOwnerNpc()->DecreaseCredits(money);
-		
-		return true;
+			npc->GetVehicle()->AddItemToCargoSlot(goods_pack);
+				
+			return true;
+		}
 	}	  
 	
 	return false;
@@ -100,12 +102,14 @@ bool Shop::SellGoods(Vehicle* vehicle, int subtype_id, int amount)
 int Shop::BuyGoods(GoodsPack* goods_pack)
 { 	
 	int sign = 1;	
-	int money = Deal(sign, goods_pack->GetSubTypeId(), goods_pack->GetMass());	
-	if (money > 0)
+	int price = Deal(sign, goods_pack->GetSubTypeId(), goods_pack->GetMass());	
+	if (price > 0)
 	{
-		goods_pack->GetItemSlot()->RemoveItem(); // what gonna be happen with item ??
+		goods_pack->GetItemSlot()->RemoveItem(); 
 		EntityGarbage::Instance().Add(goods_pack);
 	}
+	
+	return price;
 }
        
 int Shop::Deal(int sign, int subtype_id, int amount)

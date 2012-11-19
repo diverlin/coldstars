@@ -138,7 +138,7 @@ void GuiAngar::ButtonsAction() const
 	   				{  			
 	   				      	button->PressEvent();
 	   					
-	   					player->GetNpc()->GetVehicle()->BuyArmorAsMuchAsPossible();
+	   					player->GetNpc()->GetVehicle()->BuyKorpusRepair();
 	   					return; 
 	   				}
 	   						

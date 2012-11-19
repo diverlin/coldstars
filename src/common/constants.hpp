@@ -29,7 +29,7 @@
 	#define STARSYSTEMADDREMOVE_LOG_ENABLED 1
 	#define AISCENARIO_LOG_ENABLED 1
 	#define SAVELOAD_LOG_ENABLED 1
-	#define CREATEDESTROY_LOG_ENABLED 1
+	#define CREATEDESTROY_LOG_ENABLED 0
 
 	const int GRAPPLE_QUEUE_LOG_DIP = 1;
 	const int DRIVECOMPLEX_LOG_DIP = 1;
@@ -54,6 +54,7 @@ const std::string GAME_TITLE = "cold star V0.0.4.58 (SFML/C++)";
 const float RADAR_SCALE = 1/50.0;
 
 const float REPAIR_ITEM_PRICE_RATE = 0.1f;
+const float REPAIR_VEHICLEKORPUS_PRICE_RATE = 0.01f;
 
 const int TURN_TIME = 150;  //turn time, depends on game fps
 
