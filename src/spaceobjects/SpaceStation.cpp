@@ -41,7 +41,7 @@ SpaceStation::SpaceStation(int id)
 /* virtual */
 SpaceStation::~SpaceStation() 
 {
-	delete land;
+	//delete land;
 }    
  
 void SpaceStation::BindLand(BaseLand* land)       		

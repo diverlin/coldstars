@@ -120,6 +120,14 @@ EntityManager& EntityManager::Instance()
 
 void EntityManager::Clear()
 {
+	for (std::map<int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
+	{	
+	    	#if CREATEDESTROY_LOG_ENABLED == 1
+    		Logger::Instance().Log("________EntityManager::Clear() delete " + getTypeStr(iterator->second->GetTypeId()) + "(" +int2str(iterator->second->GetTypeId()) +") " + getTypeStr(iterator->second->GetSubTypeId()) + "(" + int2str(iterator->second->GetSubTypeId()) + ") id=" + int2str(iterator->second->GetId()));
+		#endif	
+		delete iterator->second;
+	}
+
 	entity_map.clear();
 }
 		

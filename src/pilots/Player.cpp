@@ -276,20 +276,19 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
    
         	starsystem->DrawBackground(Screen::Instance().GetRect().GetBottomLeft());           
 		camera(Screen::Instance().GetRect().GetBottomLeft().x, Screen::Instance().GetRect().GetBottomLeft().y);    
-	        
 
 		starsystem->RestoreDefaultColor();
 		enable_BLEND();
 			for(unsigned int i=0; i<visible_STAR_vec.size(); i++) 
 			{ 
-        			visible_STAR_vec[i]->Render_NEW(); 
+        			visible_STAR_vec[i]->Render_NEW();
     			}
-    		disable_BLEND();
+    		disable_BLEND(); 	
 		starsystem->RestoreSceneColor();
 	Screen::Instance().GetFbo0().Deactivate();
 
 	// POST PROCESS BLOOM (many FBO)
-	Screen::Instance().GetBloom().Proceed(w, h, Screen::Instance().GetFbo0().GetTexture(), visible_STAR_vec[0]->GetBrightThreshold());
+	Screen::Instance().GetBloom().Proceed(w, h, Screen::Instance().GetFbo0().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
 
 	// RENDER to FBO1, VOLUMETRIC LIGHT
 	Screen::Instance().GetFbo1().Activate(w, h);
@@ -308,9 +307,8 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 			drawFullScreenQuad(w, h, -999.0);
 		glUseProgram(0);
 		glActiveTexture(GL_TEXTURE0);
-	Screen::Instance().GetFbo1().Deactivate();
-
-
+	Screen::Instance().GetFbo1().Deactivate();	
+	   	          	        	
 	Screen::Instance().GetFbo2().Activate(w, h);
 		drawFullScreenTexturedQuad(Screen::Instance().GetFbo1().GetTexture(), w, h, -999.0);
            
@@ -333,7 +331,6 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
     			}  	
     		disable_DEPTH();
 
-    	          
 		enable_BLEND();		
 		    	for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
     			{ 
