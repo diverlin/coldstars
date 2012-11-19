@@ -48,8 +48,6 @@ class DriveComplex
         	ItemSlot* GetBakSlot()   const { return bak_slot; };
                   
                 BaseSpaceEntity* GetTarget() const { return target; };                
-    		
-   		void CalcPath();      
     			        
     		bool PathExists() const;
     		
@@ -93,6 +91,7 @@ class DriveComplex
                 //PathVisual visual_debug_midLeft_path;
 
 		void ClearPath();
+   		void CalcPath();      
                 bool CalcRoundPath();
                 void CalcDirectPath();
                 bool ValidateTarget() const;

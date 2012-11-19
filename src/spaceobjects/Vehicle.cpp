@@ -757,7 +757,7 @@ void Vehicle::UpdatePropertiesSpeed()
                                 }
 
            			
-           			drive_complex.CalcPath();
+           			drive_complex.UpdatePath();
            		}
         	}
         }

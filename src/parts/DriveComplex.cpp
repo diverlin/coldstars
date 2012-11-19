@@ -65,11 +65,11 @@ void DriveComplex::ResetTarget()
 	#if DRIVECOMPLEX_LOG_ENABLED == 1 
 	if (target == NULL)
 	{
-		Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" RESET DriveComplex Target", 2); 
+		Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" RESET DriveComplex Target", DRIVECOMPLEX_LOG_DIP); 
 	}
 	else
 	{
-		Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" RESET DriveComplex target =" + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), 2); 
+		Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" RESET DriveComplex target =" + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), DRIVECOMPLEX_LOG_DIP); 
 	}
 	#endif    
 	
@@ -85,13 +85,17 @@ void DriveComplex::ResetTarget()
 }
       
 void DriveComplex::SetStaticTargetCoords(const vec2f& target_pos)
-{    
+{	
     	ResetTarget();
-        
-    	this->target_pos = target_pos;
     	has_target = true;
+    	        
+    	this->target_pos = target_pos;
         
        	UpdatePath();
+
+	#if DRIVECOMPLEX_LOG_ENABLED == 1 
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" SetStaticTargetCoords:"+int2str((int)target_pos.x)+", "+int2str((int)target_pos.y), DRIVECOMPLEX_LOG_DIP); 
+	#endif  
 }      
          		
 void DriveComplex::SetTarget(BaseSpaceEntity* target, int _action_id)
@@ -115,7 +119,7 @@ void DriveComplex::SetTarget(BaseSpaceEntity* target, int _action_id)
 	UpdatePath();
 	
 	#if DRIVECOMPLEX_LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex GOT Target " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " navigator_action = " + getNavigatorActionStr(action_id), 2); 
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex GOT Target " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " navigator_action = " + getNavigatorActionStr(action_id), DRIVECOMPLEX_LOG_DIP); 
 	#endif    
 }
   
