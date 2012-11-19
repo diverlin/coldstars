@@ -104,7 +104,7 @@ class Vehicle : public BaseSpaceEntity
         	
         	GoodsPack* GetGoodsPack() const;
                        	
-         	bool ExternalRepairEvent();
+         	bool BuyKorpusRepair();
         	       
         	void UpdateSpecialAction();         
         	virtual void UpdateInSpace(int, bool) = 0;
@@ -141,7 +141,6 @@ class Vehicle : public BaseSpaceEntity
 		bool IsArmorFull() const;
 		int GetArmorMiss() const;
 		void IncreaseArmor(int);
-		void BuyArmorAsMuchAsPossible();
 		
 		bool IsFuelFull() const;
 		int GetFuelMiss() const;
@@ -211,7 +210,10 @@ class Vehicle : public BaseSpaceEntity
 
         private:
         	bool god_mode;
-        
+        	int price;
+        	
+                void RepairKorpusEvent(int);
+                 	
              	void DropRandomItemToSpace();   
                 bool MergeIdenticalGoods(BaseItem*);
                 

@@ -112,7 +112,7 @@ void Slider::ButtonsAction(Shop* shop)
         					}
         					
         					
-						shop->SellGoods(player->GetNpc()->GetVehicle(), goods_subtype_id, ammount_selected);
+						shop->SellGoods(player->GetNpc(), goods_subtype_id, ammount_selected);
 						
         					SetSubTypeId(NONE_ID);
         					button->Reset(); //untrigger        				

@@ -68,12 +68,24 @@ Npc::~Npc()
 {}  
 
 StarSystem* Npc::GetStarSystem() const { return vehicle->GetStarSystem(); }
-		
+
+bool Npc::WithdrawCredits(int amount)
+{
+	if (credits > amount)
+	{
+		credits -= amount;
+		return true;
+	}
+	
+	return false;
+}
+
+				
 void Npc::MindInKosmoport()
 {   		
 	if (needsToDo.REPAIR_KORPUS == true)
 	{
-                vehicle->ExternalRepairEvent();
+                vehicle->BuyKorpusRepair();
 		needsToDo.REPAIR_KORPUS = false;
 	}
 	
@@ -279,7 +291,7 @@ bool Npc::BuyGoods()
 	int amount = getMin<int>(amount_to_hold, amount_to_buy, amount_available);
 	if (amount != 0)		
 	{
-		shop->SellGoods(GetVehicle(), subtype_id, amount); 
+		shop->SellGoods(this, subtype_id, amount); 
 	}
 }
   

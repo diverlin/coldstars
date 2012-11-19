@@ -87,9 +87,8 @@ void Angar::AddItemSlot(ItemSlot* item_slot)
 bool Angar::RepairItem(Npc* npc, BaseItem* item) const
 {
 	int price = item->GetPrice() * REPAIR_ITEM_PRICE_RATE;
-	if (npc->GetCredits() > price)
+	if (npc->WithdrawCredits(price) == true)
 	{
-		npc->DecreaseCredits(price);
 		item->RepairEvent();
 	}
 }

@@ -87,6 +87,8 @@ Vehicle::Vehicle()
         freezer_slot   = NULL;
         
         land  = NULL;
+        
+        price = 1000;
 }
 
 /*virtual*/
@@ -1019,23 +1021,41 @@ void Vehicle::RenderGrappleRange()
 	}
 }
 
-bool Vehicle::ExternalRepairEvent()
-{
-        unsigned int _fix = data_korpus.armor - data_life.armor;
-        unsigned int _price = _fix/10;
-        
-        if (owner_npc->GetCredits() > _price)
+bool Vehicle::BuyKorpusRepair()
+{        
+        int price_for_one = price * REPAIR_VEHICLEKORPUS_PRICE_RATE;
+	int repair_max =  owner_npc->GetCredits() / price_for_one;
+	int repair_need = data_korpus.armor - data_life.armor;
+	
+	int repair_amount = 0;
+	if (repair_max > repair_need)
+	{		
+		repair_amount = repair_need;
+	}
+	else
+	{
+		repair_amount = repair_max;
+	}
+	
+	
+        if (owner_npc->WithdrawCredits(repair_amount*price_for_one) == true)
         {
-                data_life.armor = data_korpus.armor;
-                owner_npc->DecreaseCredits(_price);
+                RepairKorpusEvent(repair_amount);
                 return true;  
         }
         
         return false;        
 }
 
-
-
+void Vehicle::RepairKorpusEvent(int amount)
+{
+	data_life.armor += amount;
+	
+	if (data_life.armor  > data_korpus.armor)
+	{
+		data_life.armor  > data_korpus.armor;
+	}
+}
 
 bool Vehicle::IsArmorFull() const
 {
@@ -1051,28 +1071,6 @@ int Vehicle::GetArmorMiss() const
 {
 	return (data_korpus.armor - data_life.armor);
 }
-
-void Vehicle::BuyArmorAsMuchAsPossible()
-{
-	int price_for_one = ((Kosmoport*)land)->GetAngar()->GetPriceArmor();
-	int armor_to_buy_max = owner_npc->GetCredits() / price_for_one;
-	int armor_to_buy_need = GetArmorMiss();
-	
-	int armor;
-	if (armor_to_buy_max > armor_to_buy_need )
-	{		
-		armor = armor_to_buy_need;
-	}
-	else
-	{
-		armor = armor_to_buy_max;
-	}
-
-	owner_npc->DecreaseCredits(armor * price_for_one);
-	data_life.armor += armor;
-}
-
-
 
 bool Vehicle::IsFuelFull() const
 {
@@ -1102,7 +1100,7 @@ void Vehicle::BuyFuelAsMuchAsPossible()
 	int fuel_to_buy_need = GetFuelMiss();
 	
 	int fuel;
-	if (fuel_to_buy_max > fuel_to_buy_need )
+	if (fuel_to_buy_max > fuel_to_buy_need)
 	{		
 		fuel = fuel_to_buy_need;
 	}
@@ -1111,8 +1109,10 @@ void Vehicle::BuyFuelAsMuchAsPossible()
 		fuel = fuel_to_buy_max;
 	}
 
-	owner_npc->DecreaseCredits(fuel * price_for_one);
-	GetDriveComplex().GetBakSlot()->GetBakEquipment()->IncreaseFuel(fuel);
+	if (owner_npc->WithdrawCredits(fuel*price_for_one) == true)
+	{
+		GetDriveComplex().GetBakSlot()->GetBakEquipment()->IncreaseFuel(fuel);
+	}
 }
 
 void Vehicle::LockItemInItemSlot(ItemSlot* item_slot, int locked_turns)

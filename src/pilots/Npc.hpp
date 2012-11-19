@@ -64,7 +64,7 @@ class Npc : public Base
 		StarSystem* GetStarSystem() const;
 
 		void IncreaseCredits(int credits) { this->credits += credits; };
-		void DecreaseCredits(int credits) { this->credits -= credits; };
+		bool WithdrawCredits(int);
      
      		void AddExpirience(int, bool);
      		
