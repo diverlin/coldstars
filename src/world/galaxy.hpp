@@ -31,6 +31,8 @@ class Galaxy : public Base
      		Galaxy(int);
      		~Galaxy();
                 
+                void PutChildsToGarbage() const;
+                
      		void Add(StarSystem*, const vec2f&);
      		
      		StarSystem* GetRandomStarSystem(int condition_id = NONE_ID);

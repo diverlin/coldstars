@@ -25,6 +25,7 @@
 #include <string>
 
 #include "../common/Base.hpp"
+class GarbageEntities;
 
 
 class EntityManager
@@ -38,7 +39,6 @@ class EntityManager
 		Base* GetPlayer() const;
 		
 		void Clear();
-		void RemoveEntity(Base*);
 		
 		void SaveEvent();
 		void LoadPass0();
@@ -50,6 +50,10 @@ class EntityManager
 		EntityManager& operator=(const EntityManager&);
 
 		std::map<int, Base*> entity_map;
+
+		void RemoveEntity(Base*);
+				
+		friend class GarbageEntities;
 };
 
 

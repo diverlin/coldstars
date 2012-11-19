@@ -32,6 +32,8 @@
 #include "src/pilots/Npc.hpp"
 #include "src/spaceobjects/Planet.hpp"
 
+#include "src/garbage/GarbageEntities.hpp"
+
 int main()
 {           
 	//runPureTest();
@@ -89,6 +91,8 @@ int main()
 			galaxy = loaded_player->GetNpc()->GetVehicle()->GetStarSystem()->GetGalaxy();
 		}
 		/* client code end */
+		
+		GarbageEntities::Instance().Clear();
 	}
 
 	return EXIT_SUCCESS;

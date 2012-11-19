@@ -28,6 +28,8 @@
 #include "../slots/ItemSlot.hpp"
 #include "../pilots/Npc.hpp"
 
+#include "../garbage/GarbageEntities.hpp"
+
 Shop::Shop(int id)
 {
 	data_id.id = id;
@@ -45,9 +47,7 @@ Shop::Shop(int id)
 }
 
 Shop::~Shop()
-{
-	EntityManager::Instance().RemoveEntity(this);
-}                
+{}                
 
 
 int Shop::GetAmount(int subtype_id) const
@@ -103,9 +103,8 @@ int Shop::BuyGoods(GoodsPack* goods_pack)
 	int money = Deal(sign, goods_pack->GetSubTypeId(), goods_pack->GetMass());	
 	if (money > 0)
 	{
-		goods_pack->GetItemSlot()->RemoveItem();
-		EntityManager::Instance().RemoveEntity(goods_pack);
-		delete goods_pack;
+		goods_pack->GetItemSlot()->RemoveItem(); // what gonna be happen with item ??
+		GarbageEntities::Instance().Add(goods_pack);
 	}
 }
        

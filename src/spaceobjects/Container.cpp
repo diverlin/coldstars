@@ -28,6 +28,8 @@
 #include "../render/Render.hpp"
 #include "../effects/particlesystem/ExplosionEffect.hpp"
 
+#include "../garbage/GarbageEntities.hpp"
+
 Container::Container(int id)
 {
 	data_id.id         = id;
@@ -43,11 +45,14 @@ Container::Container(int id)
 
 /* virtual */   
 Container::~Container()
-{
-	delete item_slot;
-	item_slot = NULL;
-}
+{}
 
+void Container::PutChildsToGarbage() const
+{
+	item_slot->PutChildsToGarbage();
+	GarbageEntities::Instance().Add(item_slot);
+}
+        	
 void Container::BindItemSlot(ItemSlot* item_slot) 
 { 
 	this->item_slot = item_slot; 
@@ -118,12 +123,6 @@ void Container::SilentKill()
 void Container::Render2D()
 { 
     	drawDynamic(textureOb, points.GetCenter(), angle.z, points.GetPosZ());
-}
-
-void Container::RemoveChildFromEntityManager()
-{
-	EntityManager::Instance().RemoveEntity(item_slot);	
-	item_slot->RemoveChildFromEntityManager();
 }
 
 void Container::SaveDataUniqueContainer(boost::property_tree::ptree& save_ptree, const std::string& root) const	

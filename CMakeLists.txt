@@ -224,8 +224,8 @@ set (SOURCES
 	src/world/galaxy.cpp
 	src/world/starsystem.cpp 
 
-	src/world/garbageEffects.cpp  
-	src/world/GarbageEntities.cpp 
+	src/garbage/garbageEffects.cpp  
+	src/garbage/GarbageEntities.cpp 
 
 	src/effects/BaseBackGroundEffect.cpp
 	src/effects/DistantNebulaEffect.cpp

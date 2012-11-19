@@ -26,6 +26,8 @@
 #include "../slots/ItemSlot.hpp" 
 #include "../pilots/Npc.hpp"
 
+#include "../garbage/GarbageEntities.hpp"
+
 Angar::Angar(int id)
 {
 	data_id.id = id;
@@ -36,24 +38,24 @@ Angar::Angar(int id)
 }
 
 Angar::~Angar()
-{
-	EntityManager::Instance().RemoveEntity(this); // ??
-        
+{        
         #if CREATEDESTROY_LOG_ENABLED == 1
 	Logger::Instance().Log("___::~Angar(), id="+int2str(GetId()));
 	#endif
+}
 
+void Angar::PutChildsToGarbage() const
+{
 	for(unsigned int i=0; i<vehicle_total_slot_vec.size(); i++)
 	{
-		EntityManager::Instance().RemoveEntity(vehicle_total_slot_vec[i]);
-		delete vehicle_total_slot_vec[i];
-		
+		vehicle_total_slot_vec[i]->PutChildsToGarbage();
+		GarbageEntities::Instance().Add(vehicle_total_slot_vec[i]);
 	}
 
 	for(unsigned int i=0; i<item_slot_vec.size(); i++)
 	{
-		EntityManager::Instance().RemoveEntity(item_slot_vec[i]);
-		delete item_slot_vec[i];
+		item_slot_vec[i]->PutChildsToGarbage();
+		GarbageEntities::Instance().Add(item_slot_vec[i]);
 	}
 }
        

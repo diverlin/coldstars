@@ -43,8 +43,7 @@ class BaseParticleSystem;
 class ShockWaveEffect;
 class LazerTraceEffect;
 
-#include "../world/GarbageEntities.hpp"
-#include "../world/garbageEffects.hpp"
+#include "../garbage/garbageEffects.hpp"
 #include "HyperSpace.hpp"
 
 
@@ -59,6 +58,8 @@ class StarSystem : public BaseSpaceEntity
 	public:
 		StarSystem(int);
 		~StarSystem();
+		
+		void PutChildsToGarbage() const;
 
 		void SetGalaxy(Galaxy* galaxy)  { this->galaxy = galaxy; };
 						
@@ -148,7 +149,6 @@ class StarSystem : public BaseSpaceEntity
     		std::vector<ShockWaveEffect*>     effect_SHOCKWAVE_vec;    		
     		std::vector<VerticalFlowText*> 	  text_DAMAGE_vec;
                     		  	
-    		GarbageEntities garbage_entities;
     		GarbageEffects  garbage_effects;
  		    		            
     		UnresolvedDataUniqueStarSystem data_unresolved_StarSystem;

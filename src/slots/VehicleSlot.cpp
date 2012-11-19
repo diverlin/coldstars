@@ -25,6 +25,8 @@
 #include "../docking/Angar.hpp"
 #include "../common/EntityManager.hpp"
 
+#include "../garbage/GarbageEntities.hpp"
+
 VehicleSlot::VehicleSlot(int id)
 {   
 	data_id.id = id;
@@ -36,6 +38,14 @@ VehicleSlot::VehicleSlot(int id)
 VehicleSlot::~VehicleSlot()
 {}
       
+void VehicleSlot::PutChildsToGarbage() const
+{
+	if (vehicle)
+	{
+		GarbageEntities::Instance().Add(vehicle);
+	} 
+}
+                      
 void VehicleSlot::InsertVehicle(Vehicle* vehicle)
 {
         this->vehicle = vehicle;

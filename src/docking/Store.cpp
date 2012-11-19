@@ -26,6 +26,8 @@
 #include "../slots/ItemSlot.hpp"
 #include "../pilots/Npc.hpp"
 
+#include "../garbage/GarbageEntities.hpp"
+
 Store::Store(int id)
 {
 	data_id.id = id;
@@ -33,14 +35,15 @@ Store::Store(int id)
 }
 
 Store::~Store()
-{
-	EntityManager::Instance().RemoveEntity(this);
-			
+{}
+
+void Store::PutChildsToGarbage() const
+{			
 	for(unsigned int i=0; i<slot_total_vec.size(); i++)
 	{
-		delete slot_total_vec[i];
+		slot_total_vec[i]->PutChildsToGarbage();
+		GarbageEntities::Instance().Add(slot_total_vec[i]);
 	}
-	slot_total_vec.clear();
 }
 
 void Store::AddItemSlot(ItemSlot* slot) 
