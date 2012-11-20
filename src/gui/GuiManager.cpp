@@ -459,4 +459,20 @@ bool GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
      	    	       	
 	//bool interaction = gui_kosmoport.UpdateButtonsMouseInteraction(data_mouse);
 	//gui_kosmoport.ButtonsAction();
+	
+									
+			NatureLand* natureland = (NatureLand*)player->GetNpc()->GetVehicle()->GetLand();
+			gui_natureland.BindNatureLand(natureland);
+
+			//update  
+			bool interaction = gui_natureland.UpdateButtonsMouseInteraction(data_mouse);
+			gui_natureland.ButtonsAction();
+	        	
+	        	//render
+			resetRenderTransformation();
+			gui_natureland->RenderBackground(screen_rect);
+			enable_BLEND();   
+	        		gui_natureland.RenderButtons();
+				gui_natureland.RenderFocusedButtonInfo(data_mouse); 
+			disable_BLEND(); 
 }

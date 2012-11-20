@@ -250,6 +250,7 @@ set (SOURCES
 	src/gui/Cursor.cpp
 	src/gui/UserInput.cpp
 	src/gui/GuiKosmoport.cpp   
+	src/gui/GuiNatureLand.cpp	
 	src/gui/GuiManager.cpp
 	
 	src/world/HyperSpace.cpp
