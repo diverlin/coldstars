@@ -124,7 +124,7 @@ std::string getTypeStr(int type_id)
 		case ENTITY::GOODS_ID: 		{ return "GOODS_ID"; break; }
 		case ENTITY::PLAYER_ID: 		{ return "PLAYER_ID"; break; }
 		case ENTITY::KOSMOPORT_ID: 		{ return "KOSMOPORT_ID"; break; }
-		case ENTITY::LAND_ID: 			{ return "LAND_ID"; break; }
+		case ENTITY::NATURELAND_ID: 			{ return "NATURELAND_ID"; break; }
 		case ENTITY::SPACE_ID: 		{ return "SPACE_ID"; break; }
 		case ENTITY::HYPER_SPACE_ID: 		{ return "HYPER_SPACE_ID"; break; }
 		case ENTITY::GOVERMENT_ID: 		{ return "GOVERMENT_ID"; break; }

@@ -136,19 +136,16 @@ void Planet::SaveDataUniquePlanet(boost::property_tree::ptree& save_ptree, const
 {
 	//SaveManager::Instance().Put(root+"race_id", race_id);
 	save_ptree.put(root+"population", population);
-	save_ptree.put(root+"unresolved.land_id", land->GetId());
 }
 
-void Planet::LoadDataUniquePlanet(const boost::property_tree::ptree& ptree)
+void Planet::LoadDataUniquePlanet(const boost::property_tree::ptree& load_ptree)
 {
 	//race_id = SaveManager::Instance().Get<int>(root+"race_id");
-	population = ptree.get<int>("population");	
-	data_unresolved_Planet.land_id = ptree.get<int>("unresolved.land_id");
+	population = load_ptree.get<int>("population");	
 }
 
 void Planet::ResolveDataUniquePlanet()
 {
-	BindLand((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Planet.land_id));	
 	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, parent, data_unresolved_BasePlanet.orbit_it); 
 }
 	

@@ -23,10 +23,9 @@
 #include "BasePlanet.hpp"
 #include "../docking/BaseLand.hpp"
 
-struct UnresolvedDataUniquePlanet
-{
-	int land_id;
-};
+//struct UnresolvedDataUniquePlanet
+//{
+//};
 
 
 class Planet : public BasePlanet
@@ -70,8 +69,6 @@ class Planet : public BasePlanet
 
 		void RenderAtmosphere_NEW(const vec2f&) const;
 		
-		UnresolvedDataUniquePlanet data_unresolved_Planet;
-
 		void SaveDataUniquePlanet(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniquePlanet(const boost::property_tree::ptree&);
 		void ResolveDataUniquePlanet();

@@ -35,7 +35,6 @@ Angar::Angar(int id)
 	data_id.type_id = ENTITY::ANGAR_ID;
 	
 	price_fuel = PRICE_FUEL;
-        price_armor = PRICE_ARMOR;
 }
 
 Angar::~Angar()

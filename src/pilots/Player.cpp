@@ -996,6 +996,11 @@ void Player::SessionInKosmoport()
 	gui_manager.RunSessionInKosmoport(cursor.GetMouseData());        
 }
 
+void Player::SessionInNatureLand()
+{   	
+	gui_manager.RunSessionInNatureLand(cursor.GetMouseData());        
+}
+
 void Player::RunSession(const TurnTimer& turn_timer)
 {
 	cursor.UpdateMouseStuff();
@@ -1005,6 +1010,7 @@ void Player::RunSession(const TurnTimer& turn_timer)
        		case ENTITY::SPACE_ID: 		{ SessionInSpace(npc->GetVehicle()->GetStarSystem(), turn_timer); break; }
        		case ENTITY::HYPER_SPACE_ID: 	{ SessionInSpace((StarSystem*)npc->GetVehicle()->GetDriveComplex().GetTarget(), turn_timer); break; }
        		case ENTITY::KOSMOPORT_ID:  	{ SessionInKosmoport(); break; }
+       		case ENTITY::NATURELAND_ID:  	{ SessionInNatureLand(); break; }
        	}        	
        	
        	cursor.RenderFocusedObjectInfo();

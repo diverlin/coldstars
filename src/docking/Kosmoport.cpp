@@ -32,7 +32,7 @@ Kosmoport::Kosmoport(int id)
 {
 	data_id.id = id;
 	data_id.type_id = ENTITY::KOSMOPORT_ID;
-	race_id = RACE::R0_ID;
+	race_id = RACE::R0_ID; //wrong
 	
 	angar     = NULL;
         store     = NULL;

@@ -148,16 +148,10 @@ void SpaceStation::ResolveData()
 }
 
 void SpaceStation::SaveDataUniqueSpaceStation(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-	save_ptree.put(root+"unresolved.land_id", land->GetId());
-}
+{}
 
 void SpaceStation::LoadDataUniqueSpaceStation(const boost::property_tree::ptree& load_ptree)
-{
-	data_unresolved_SpaceStation.land_id = load_ptree.get<int>("unresolved.land_id");
-}
+{}
 
 void SpaceStation::ResolveDataUniqueSpaceStation()
-{
-	BindLand((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_SpaceStation.land_id));	                       
-}
+{}

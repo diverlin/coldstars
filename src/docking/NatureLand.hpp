@@ -21,15 +21,21 @@
 #define NATURELAND_H
 
 #include "BaseLand.hpp"
+class ItemSlot;
+
+struct UnresolvedDataUniqueNatureLand
+{
+	std::string textureOb_background_path;
+};
 
 class NatureLand : public BaseLand
 {
         public:
-                NatureLand();
+                NatureLand(int);
                 virtual ~NatureLand();
 
                 virtual bool AddVehicle(Vehicle*);
-                //virtual bool RemoveVehicle(Vehicle*);
+                virtual bool RemoveVehicle(Vehicle*);
                 
                 virtual bool GetPermissionToLand() const;
                                 
@@ -40,6 +46,17 @@ class NatureLand : public BaseLand
                 void SaveData(boost::property_tree::ptree&) const;
     		void LoadData(const boost::property_tree::ptree&);
     		void ResolveData(); 
+    	
+    	private:
+    		TextureOb* textureOb_background;
+    		
+    		std::vector<Vehicle*> VEHICLE_vec;
+    		std::vector<ItemSlot*> ITEMSLOT_vec;
+
+		UnresolvedDataUniqueNatureLand data_unresolved_NatureLand;
+		void SaveDataUniqueNatureLand(boost::property_tree::ptree&, const std::string&) const;		
+		void LoadDataUniqueNatureLand(const boost::property_tree::ptree&);
+		void ResolveDataUniqueNatureLand();
 };
 
 #endif

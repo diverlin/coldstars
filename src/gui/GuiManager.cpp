@@ -447,3 +447,16 @@ bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
 	
 	return interaction;
 }
+
+
+bool GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
+{    	
+	Rect screen_rect(0, 0, Screen::Instance().GetWindow().GetWidth(), Screen::Instance().GetWindow().GetHeight());   
+	vec2f center_screen(Screen::Instance().GetWindow().GetWidth()/2, Screen::Instance().GetWindow().GetHeight()/2);       			
+        			
+ 	UserInput::Instance().UpdateInKosmoport(player);
+     	player->GetCursor().Update(); 
+     	    	       	
+	//bool interaction = gui_kosmoport.UpdateButtonsMouseInteraction(data_mouse);
+	//gui_kosmoport.ButtonsAction();
+}

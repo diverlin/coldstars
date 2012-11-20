@@ -19,9 +19,14 @@
 #include "NatureLand.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../common/constants.hpp"
+#include "../common/myStr.hpp"
+#include "../resources/TextureManager.hpp"
 
-NatureLand::NatureLand()
-{}
+NatureLand::NatureLand(int id)
+{
+	data_id.id = id;
+	data_id.type_id = ENTITY::NATURELAND_ID;
+}
 
 /* virtual */
 NatureLand::~NatureLand()
@@ -32,28 +37,31 @@ NatureLand::~NatureLand()
 /* virtual */
 bool NatureLand::AddVehicle(Vehicle* vehicle)
 {
-        vehicle->SetPlaceTypeId(ENTITY::PLANET_ID);
-        //VEHICLE_vec.push_back(vehicle);
+       	vehicle->SetPlaceTypeId(data_id.type_id); 
+       	vehicle->SetLand(this);
+       	
+        VEHICLE_vec.push_back(vehicle);
         
         return true;
 }
 
 /*virtual */
-//bool NatureLand::RemoveVehicle(Vehicle* vehicle)
-//{
-        //bool is_removed = false;
+bool NatureLand::RemoveVehicle(Vehicle* vehicle)
+{
+        bool is_removed = false;
         
-        //for (unsigned int i = 0; i < VEHICLE_vec.size(); i++) 
-        //{
-                //if (VEHICLE_vec[i] == vehicle)
-                //{
-                        //VEHICLE_vec.erase(VEHICLE_vec.begin() + i);
-                        //is_removed = true;
-                //}
-        //}
+        for (unsigned int i=0; i<VEHICLE_vec.size(); i++) 
+        {
+                if (VEHICLE_vec[i]->GetId() == vehicle->GetId())
+                {
+                        VEHICLE_vec.erase(VEHICLE_vec.begin() + i);
+                        is_removed = true;
+                        break;
+                }
+        }
         
-        //return is_removed;
-//}
+        return is_removed;
+}
 
 
 /* virtual */
@@ -74,17 +82,40 @@ void NatureLand::UpdateInSpaceInStatic()
 /*virtual*/
 void NatureLand::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	//const std::string root = "rocket."+int2str(data_id.id)+".";
+	const std::string root = "natureland."+int2str(data_id.id)+".";
+        SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueBaseLand(save_ptree, root);
+	SaveDataUniqueNatureLand(save_ptree, root);
 }
 
 /*virtual*/
 void NatureLand::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-
+        LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueBaseLand(load_ptree);
+	LoadDataUniqueNatureLand(load_ptree);
 }
 
 /*virtual*/
 void NatureLand::ResolveData()
 {
+        ResolveDataUniqueBase();
+	ResolveDataUniqueBaseLand();
+	ResolveDataUniqueNatureLand();
+}
 
+
+void NatureLand::SaveDataUniqueNatureLand(boost::property_tree::ptree& save_ptree, const std::string& root) const
+{
+	save_ptree.put(root+"data_unresolved_NatureLand.textureOb_background_path", owner->GetId());
+}
+
+void NatureLand::LoadDataUniqueNatureLand(const boost::property_tree::ptree& load_ptree)
+{
+	data_unresolved_NatureLand.textureOb_background_path = load_ptree.get<int>("data_unresolved_NatureLand.textureOb_background_path");
+}
+
+void NatureLand::ResolveDataUniqueNatureLand()
+{
+	textureOb_background = TextureManager::Instance().GetTextureObByPath(data_unresolved_NatureLand.textureOb_background_path);
 }

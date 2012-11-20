@@ -42,7 +42,8 @@ class GuiManager
 		void RenderInSpace(const MouseData&);
 		
 		bool RunSessionInKosmoport(const MouseData&);
-				
+		bool RunSessionInNatureLand(const MouseData&);
+						
 		GuiRadar& GetGuiRadar() { return gui_radar; };
 		GuiVehicle& GetGuiVehicleScan() { return gui_vehicle_scan; };
 		GuiVehicle2& GetGuiVehiclePlayer() { return gui_vehicle_player; };
