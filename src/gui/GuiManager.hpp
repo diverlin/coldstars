@@ -29,6 +29,7 @@
 #include "../gui/GuiShop.hpp"
 #include "../gui/GuiSpace.hpp"
 #include "../gui/GuiGalaxyMap.hpp"
+#include "../gui/GuiNatureLand.hpp"
 				
 class GuiManager
 {
@@ -69,7 +70,8 @@ class GuiManager
       		GuiSpace     	gui_space;      
 		GuiGalaxyMap    gui_galaxymap;      		
        		GuiRadar 	gui_radar;
-       		
+       		GuiNatureLand 	gui_natureland;
+       		       		
        		Slider slider;  
 		       		
      		bool UpdateMouseInteractionWithScanVehicle(const MouseData&, Vehicle*, bool allow_full_control = false);     		

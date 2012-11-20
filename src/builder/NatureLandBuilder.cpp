@@ -23,6 +23,8 @@
 #include "../common/Logger.hpp"
 #include "../common/EntityManager.hpp"
 
+#include "../resources/TextureManager.hpp"
+
 NatureLandBuilder& NatureLandBuilder::Instance()
 {
 	static NatureLandBuilder instance;
@@ -65,7 +67,7 @@ NatureLand* NatureLandBuilder::GetNewNatureLand() const
        	
 void NatureLandBuilder::CreateNewInternals(NatureLand* natureland) const
 {
-	
+	natureland->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TEXTURE::LAND_BACKGROUND_ID));
 }
 
   	
