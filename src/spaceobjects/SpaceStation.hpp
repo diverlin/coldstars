@@ -23,10 +23,8 @@
 #include "Vehicle.hpp"
 #include "../docking/BaseLand.hpp"
 
-struct UnresolvedDataUniqueSpaceStation
-{
-	int land_id;
-};
+//struct UnresolvedDataUniqueSpaceStation
+//{};
 
 class SpaceStation : public Vehicle
 {
@@ -51,9 +49,7 @@ class SpaceStation : public Vehicle
     		
         private:
                 BaseLand* land;
-                
-                UnresolvedDataUniqueSpaceStation data_unresolved_SpaceStation;
-                
+              
                 void SaveDataUniqueSpaceStation(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueSpaceStation(const boost::property_tree::ptree&);
 		void ResolveDataUniqueSpaceStation();

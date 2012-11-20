@@ -190,6 +190,7 @@ set (SOURCES
 	src/builder/GovermentBuilder.cpp
 	src/builder/ShopBuilder.cpp
 	src/builder/KosmoportBuilder.cpp
+	src/builder/NatureLandBuilder.cpp
 
 	src/builder/God.cpp
 

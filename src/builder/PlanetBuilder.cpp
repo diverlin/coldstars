@@ -26,6 +26,7 @@
 #include "../common/rand.hpp"
 #include "../resources/TextureManager.hpp"
 #include "../builder/KosmoportBuilder.hpp"
+#include "../builder/NatureLandBuilder.hpp"
 #include "../docking/NatureLand.hpp"
 #include "../resources/MeshCollector.hpp"
 
@@ -101,7 +102,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
 	}
         else                
         { 
-        	land = new NatureLand(); 
+        	land = NatureLandBuilder::Instance().GetNewNatureLand(); 
         }
         	
 	planet->BindLand(land);

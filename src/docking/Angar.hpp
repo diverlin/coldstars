@@ -46,7 +46,6 @@ class Angar : public Room
                 int GetFreeVehicleSlotTotalNum() const;
                 
                 int GetPriceFuel() const { return price_fuel; };
-                int GetPriceArmor() const { return price_armor; };
                              
                 std::string GetDockVehicleStr() const;
                                                 
@@ -62,7 +61,6 @@ class Angar : public Room
                 std::vector<ItemSlot*> item_slot_vec;
                                                                                 
                 int price_fuel;
-                int price_armor;
                 
                 void SaveDataUniqueAngar(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueAngar(const boost::property_tree::ptree&);

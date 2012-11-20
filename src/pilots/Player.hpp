@@ -125,7 +125,8 @@ class Player : public Base
     		
     		void SessionInSpace(StarSystem*, const TurnTimer&);
     		void SessionInKosmoport();
-    		
+    		void SessionInNatureLand();
+    		    		
     		bool MouseInteractionWithSpaceObjectsInSpace(const MouseData&);
     		bool MouseInteractionWithRockets(const MouseData&);
     		bool MouseInteractionWithContainers(const MouseData&);

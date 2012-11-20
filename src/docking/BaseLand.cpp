@@ -18,11 +18,12 @@
 
 #include "BaseLand.hpp"
 #include "../common/EntityManager.hpp"
+#include "../common/constants.hpp"
+#include "../spaceobjects/Planet.hpp"
+#include "../spaceobjects/SpaceStation.hpp"
 
-BaseLand::BaseLand()
-{
-	owner = NULL;
-}
+BaseLand::BaseLand():owner(NULL)
+{}
 
 /* virtual */
 BaseLand::~BaseLand()
@@ -30,10 +31,33 @@ BaseLand::~BaseLand()
 
 
 void BaseLand::SaveDataUniqueBaseLand(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{}
+{
+	save_ptree.put(root+"data_unresolved_BaseLand.owner_id", owner->GetId());
+}
 
 void BaseLand::LoadDataUniqueBaseLand(const boost::property_tree::ptree& load_ptree)
-{}
+{
+	data_unresolved_BaseLand.owner_id = load_ptree.get<int>("data_unresolved_BaseLand.owner_id");
+}
 
 void BaseLand::ResolveDataUniqueBaseLand()
-{}
+{
+	Base* owner = EntityManager::Instance().GetEntityById(data_unresolved_BaseLand.owner_id);
+	switch(owner->GetTypeId())
+	{
+		case ENTITY::PLANET_ID:
+		{
+			((Planet*)owner)->BindLand(this);
+			break;
+		}
+
+		case ENTITY::VEHICLE_ID:
+		{
+			if (owner->GetSubTypeId() == ENTITY::SPACESTATION_ID)
+			{
+				((SpaceStation*)owner)->BindLand(this);
+			}
+			break;
+		}
+	}
+}

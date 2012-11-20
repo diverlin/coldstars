@@ -26,10 +26,7 @@ class Vehicle;
 
 struct UnresolvedDataUniqueBaseLand
 {
-	std::vector<int> npc_vec ;
-	std::vector<int> vehicle_vec;
-	std::vector<int> npc_launching_vec;
-	std::vector<int> npc_docking_vec;
+	int owner_id;
 };
 
 class BaseLand : public Base
@@ -44,7 +41,7 @@ class BaseLand : public Base
 		virtual bool GetPermissionToLand() const = 0;
 		                
                 virtual bool AddVehicle(Vehicle*) = 0;
-                //virtual bool RemoveVehicle(Vehicle*) = 0; 
+                virtual bool RemoveVehicle(Vehicle*) {}; 
                 
                 virtual void UpdateInSpaceInStatic() = 0;  
                 
@@ -53,7 +50,7 @@ class BaseLand : public Base
         protected:
                 BaseSpaceEntity* owner;
              
-                UnresolvedDataUniqueBaseLand data_unresolved_BaseLand;
+             	UnresolvedDataUniqueBaseLand data_unresolved_BaseLand;
                 void SaveDataUniqueBaseLand(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueBaseLand(const boost::property_tree::ptree&);
 		void ResolveDataUniqueBaseLand();
