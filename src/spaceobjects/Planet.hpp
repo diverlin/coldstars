@@ -39,6 +39,7 @@ class Planet : public BasePlanet
 		void BindLand(BaseLand* land);
 		void SetPopulation(unsigned long int population) 	{ this->population = population; };
 		
+		unsigned long int GetPopulation() const { return population; }; 
 		int GetDockingRadius() const { return scale; };
 		BaseLand* GetLand() const { return land; };
 
