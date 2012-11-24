@@ -617,29 +617,38 @@ void Vehicle::DockingEvent()
 void Vehicle::LaunchingEvent()
 {
 	SetSpecialActionId(SPECIAL_ACTION::INITIATE_LAUNCHING_ID);
-
-	switch(parent_vehicleslot->GetOwner()->GetTypeId())
-	{
-		case ENTITY::ANGAR_ID:
-		{
-			int angleInD = getRandInt(0, 360);
-			vec2f offset_pos = getRandVec2f(40, 100);
+	color.a = 0.1;
 	
-			Base* place = ((Angar*)parent_vehicleslot->GetOwner())->GetOwnerKosmoport()->GetOwner();
-		     	starsystem->AddVehicle(this, ((Planet*)place)->GetPoints().GetCenter() + offset_pos, angleInD, NULL);
-			parent_vehicleslot->Release(); 
-			
-			break;
-		}
-			
-		case ENTITY::VEHICLE_ID:
+	if (parent_vehicleslot != NULL)
+	{
+		switch(parent_vehicleslot->GetOwner()->GetTypeId())
 		{
-			//..
-			break;
+			case ENTITY::ANGAR_ID:
+			{
+				int angleInD = getRandInt(0, 360);
+				vec2f offset_pos = getRandVec2f(40, 100);
+	
+			     	starsystem->AddVehicle(this, ((BaseSpaceEntity*)land->GetOwner())->GetPoints().GetCenter() + offset_pos, angleInD, NULL);
+				land->RemoveVehicle(this);
+				
+				break;
+			}
+				
+			case ENTITY::VEHICLE_ID:
+			{
+				//..
+				break;
+			}
 		}
 	}
-	
-	color.a = 0.1;
+	else
+	{
+		int angleInD = getRandInt(0, 360);
+		vec2f offset_pos = getRandVec2f(40, 100);
+
+	     	starsystem->AddVehicle(this, ((BaseSpaceEntity*)land->GetOwner())->GetPoints().GetCenter() + offset_pos, angleInD, NULL);
+		land->RemoveVehicle(this); 
+	}
 	
 	#if LOG_ENABLED == 1 
 	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" launchingEvent()", 2); 

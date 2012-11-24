@@ -170,7 +170,6 @@ std::string Angar::GetDockVehicleStr() const
 }
                 
 
-
 void Angar::SaveDataUniqueAngar(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {}
 

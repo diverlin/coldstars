@@ -67,7 +67,7 @@ NatureLand* NatureLandBuilder::GetNewNatureLand() const
        	
 void NatureLandBuilder::CreateNewInternals(NatureLand* natureland) const
 {
-	natureland->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TEXTURE::LAND_BACKGROUND_ID));
+	natureland->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TEXTURE::NATURELAND_BACKGROUND_ID));
 }
 
   	

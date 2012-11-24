@@ -34,8 +34,10 @@ class NatureLand : public BaseLand
                 NatureLand(int);
                 virtual ~NatureLand();
 
-		void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; }
-
+		void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
+		
+		TextureOb* GetBackgroundTextureOb() const { return textureOb_background; };
+                
                 virtual bool AddVehicle(Vehicle*);
                 virtual bool RemoveVehicle(Vehicle*);
                 

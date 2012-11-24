@@ -36,6 +36,8 @@ class GuiNatureLand : public BaseGui
 
        		void ButtonsAction() const;   
          	
+         	void RenderBackground(const Rect& rect) const;
+         	                
        	private:
        	        NatureLand* natureland;
        	                

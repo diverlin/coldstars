@@ -48,7 +48,7 @@ class Angar : public Room
                 int GetPriceFuel() const { return price_fuel; };
                              
                 std::string GetDockVehicleStr() const;
-                                                
+                                  	                      
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();

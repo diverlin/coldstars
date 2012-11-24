@@ -68,6 +68,8 @@ class Vehicle : public BaseSpaceEntity
         	BaseLand* GetLand() const { return land; };
         	int GetSpecialActionId() const { return special_action_id; };
         	
+        	VehicleSlot* GetParentVehicleSlot() const { return parent_vehicleslot; };
+        	
         	const VehiclePropetries& GetPropetries() const { return propetries; };
                 VehicleKorpusData& GetKorpusData() { return data_korpus; };
                 			

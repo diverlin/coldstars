@@ -42,25 +42,26 @@ bool NatureLand::AddVehicle(Vehicle* vehicle)
        	
         VEHICLE_vec.push_back(vehicle);
         
+        if (vehicle->GetStarSystem() == NULL) // used if vehicle added directly after creation
+        {
+                vehicle->SetStarSystem(owner->GetStarSystem());
+        }
         return true;
 }
 
 /*virtual */
 bool NatureLand::RemoveVehicle(Vehicle* vehicle)
-{
-        bool is_removed = false;
-        
+{       
         for (unsigned int i=0; i<VEHICLE_vec.size(); i++) 
         {
                 if (VEHICLE_vec[i]->GetId() == vehicle->GetId())
                 {
                         VEHICLE_vec.erase(VEHICLE_vec.begin() + i);
-                        is_removed = true;
-                        break;
+                        return true;
                 }
         }
         
-        return is_removed;
+        return false;
 }
 
 

@@ -27,6 +27,7 @@
 #include "../docking/Goverment.hpp"
 
 #include "../garbage/EntityGarbage.hpp"
+#include "../slots/VehicleSlot.hpp"
 
 Kosmoport::Kosmoport(int id) 
 {
@@ -108,10 +109,11 @@ bool Kosmoport::AddVehicle(Vehicle* vehicle)
 }
 
 //* virtual */
-//bool Kosmoport::RemoveVehicle(Vehicle* vehicle)
-//{        
-    	//return angar->RemoveVehicle(vehicle);
-//}
+bool Kosmoport::RemoveVehicle(Vehicle* vehicle)
+{        
+    	vehicle->GetParentVehicleSlot()->Release();
+	return true;
+}
 
 
 /* virtual */

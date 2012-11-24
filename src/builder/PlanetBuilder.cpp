@@ -93,8 +93,9 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
         planet->SetPlanetData(planet_data);
 
         unsigned long int population = getRandInt(1000, 4000);
-        planet->SetPopulation(population);
 	//unsigned long int population = 0;
+        planet->SetPopulation(population);
+        
 	BaseLand* land;
 	if (population > 0) 
 	{ 

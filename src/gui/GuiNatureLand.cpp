@@ -29,6 +29,8 @@
 
 #include "../docking/NatureLand.hpp"
 
+#include "../render/Render.hpp"
+
 GuiNatureLand::GuiNatureLand():natureland(NULL)
 {
 	int screen_w = Config::Instance().SCREEN_WIDTH;
@@ -73,8 +75,8 @@ void GuiNatureLand::ButtonsAction() const
 		BaseButton* button = iterator->second;
 		if (button->GetPressed() == true)
 		{
-			switch(button->GetSubTypeId())
-	   		{
+			switch(button->GetSubTypeId())	   		
+			{
 	   			
 	   			case GUI::BUTTON::GETLAUNCH_ID:
 	   			{      					
@@ -117,5 +119,8 @@ bool GuiNatureLand::UpdateMouseVehicleSlotsInteraction(const MouseData& data_mou
         return false;
 }
 
-
+void GuiNatureLand::RenderBackground(const Rect& rect) const
+{
+     	drawTexturedRect(natureland->GetBackgroundTextureOb(), rect, -2);  
+}
            
