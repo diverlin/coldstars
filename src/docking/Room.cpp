@@ -28,8 +28,7 @@ Room::Room()
 }
 
 Room::~Room()
-{}      
-               
+{}            
 
 void Room::RenderBackground(const Rect& rect) const
 {

@@ -42,7 +42,7 @@ class BaseGui
   		
        		void RenderButtons() const;
        		void RenderFocusedButtonInfo(const MouseData&) const;  
-                  	
+              	
        	protected:
       		Player* player;
        		int button_w, button_h;

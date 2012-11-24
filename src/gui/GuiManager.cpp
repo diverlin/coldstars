@@ -50,7 +50,9 @@ void GuiManager::SetPlayer(Player* player)
       	gui_kosmoport.SetPlayer(player);
 	gui_galaxymap.SetPlayer(player); 
 	gui_radar.SetPlayer(player); 
-		
+
+	gui_natureland.SetPlayer(player); 
+			
 	slider.SetPlayer(player);
 }		
 
@@ -470,7 +472,7 @@ bool GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 	        	
 	        	//render
 			resetRenderTransformation();
-			gui_natureland->RenderBackground(screen_rect);
+			gui_natureland.RenderBackground(screen_rect);
 			enable_BLEND();   
 	        		gui_natureland.RenderButtons();
 				gui_natureland.RenderFocusedButtonInfo(data_mouse); 

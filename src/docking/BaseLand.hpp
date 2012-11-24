@@ -41,7 +41,7 @@ class BaseLand : public Base
 		virtual bool GetPermissionToLand() const = 0;
 		                
                 virtual bool AddVehicle(Vehicle*) = 0;
-                virtual bool RemoveVehicle(Vehicle*) {}; 
+                virtual bool RemoveVehicle(Vehicle*) = 0; 
                 
                 virtual void UpdateInSpaceInStatic() = 0;  
                 

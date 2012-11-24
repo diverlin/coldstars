@@ -167,7 +167,7 @@ void TextureManager::Add(TextureOb* texOb)
     		case TEXTURE::BLACKHOLE_ID: { blackhole_texOb_vec.push_back(texOb); break; }
 
 		// LAND
-    		case TEXTURE::LAND_BACKGROUND_ID: { landBg_texOb_vec.push_back(texOb); break; }
+    		case TEXTURE::NATURELAND_BACKGROUND_ID: { landBg_texOb_vec.push_back(texOb); break; }
 
 		// IN KOSMOPORT
     		case TEXTURE::ANGAR_BACKGROUND_ID: { angarBg_texOb_vec.push_back(texOb); break; }
@@ -453,7 +453,9 @@ TextureOb* TextureManager::GetRandomTextureOb(int texture_type_id)
 																				
 		case TEXTURE::TURREL_ID:           { return GetRandomTextureObFromVec(turrel_texOb_vec);               break; }
 		case TEXTURE::LAZER_EFFECT_ID:     { return GetRandomTextureObFromVec(lazerEffect_texOb_vec);          break; }
-				
+		
+		case TEXTURE::NATURELAND_BACKGROUND_ID: { return GetRandomTextureObFromVec(landBg_texOb_vec); break; }
+			    			
 		case TEXTURE::ANGAR_BACKGROUND_ID:         { return GetRandomTextureObFromVec(angarBg_texOb_vec);              break; }				
 		case TEXTURE::STORE_BACKGROUND_ID:         { return GetRandomTextureObFromVec(storeBg_texOb_vec);              break; }	
 		case TEXTURE::SHOP_BACKGROUND_ID:          { return GetRandomTextureObFromVec(shopBg_texOb_vec);               break; }	

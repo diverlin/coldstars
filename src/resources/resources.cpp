@@ -693,17 +693,17 @@ void loadImages()
 //################################ TEXTURE::LAND_BACKGROUND_ID ###################################
 {
 	std::vector<int> arg; 
-	TextureManager::Instance().Add( new TextureOb(TEXTURE::LAND_BACKGROUND_ID, "data/bg_uninhabited/b_000.jpg", false, &arg) );
+	TextureManager::Instance().Add( new TextureOb(TEXTURE::NATURELAND_BACKGROUND_ID, "data/bg_uninhabited/b_000.jpg", false, &arg) );
 }
 
 {
 	std::vector<int> arg; 
-	TextureManager::Instance().Add( new TextureOb(TEXTURE::LAND_BACKGROUND_ID, "data/bg_uninhabited/b_001.png", false, &arg) );
+	TextureManager::Instance().Add( new TextureOb(TEXTURE::NATURELAND_BACKGROUND_ID, "data/bg_uninhabited/b_001.png", false, &arg) );
 }
 
 {
 	std::vector<int> arg; 
-	TextureManager::Instance().Add( new TextureOb(TEXTURE::LAND_BACKGROUND_ID, "data/bg_uninhabited/b_002.png", false, &arg) );
+	TextureManager::Instance().Add( new TextureOb(TEXTURE::NATURELAND_BACKGROUND_ID, "data/bg_uninhabited/b_002.png", false, &arg) );
 }
 
 //################################ KOSMOPORT_BG_TEXTURE_ID ###############################

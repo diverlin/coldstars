@@ -22,7 +22,6 @@
 BaseGui::BaseGui()
 {}
 
-
 BaseGui::~BaseGui()
 {
 	for (std::map<int, BaseButton*>::iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)

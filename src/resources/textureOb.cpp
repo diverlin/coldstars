@@ -72,7 +72,7 @@ TextureOb::TextureOb(int _type_id, std::string _path, bool _use_alpha, std::vect
          
     		case TEXTURE::ATMOSPHERE_ID: { atmosphereArgManager(pTo_arg); break; }
  
-    		case TEXTURE::LAND_BACKGROUND_ID: { landBgArgManager(pTo_arg); break; }
+    		case TEXTURE::NATURELAND_BACKGROUND_ID: { landBgArgManager(pTo_arg); break; }
     		
     		// KOSMOPORT
     		case TEXTURE::ANGAR_BACKGROUND_ID: { angarBgArgManager(pTo_arg); break; }
