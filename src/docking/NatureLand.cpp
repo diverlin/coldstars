@@ -81,6 +81,18 @@ void NatureLand::UpdateInSpaceInStatic()
 }  
 
 /*virtual*/
+std::string NatureLand::GetDockVehicleStr() const
+{
+	std::string str;
+        for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+        {
+               	str += "_" + int2str(VEHICLE_vec[i]->GetId());
+        }
+
+        return str;
+}
+              
+/*virtual*/
 void NatureLand::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	const std::string root = "natureland."+int2str(data_id.id)+".";

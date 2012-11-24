@@ -45,7 +45,7 @@ class NatureLand : public BaseLand
                                 
                 virtual void UpdateInSpaceInStatic();      
                 
-                virtual std::string GetDockVehicleStr() const { return "not_implemented yet"; };
+                virtual std::string GetDockVehicleStr() const;
                                 
                 void SaveData(boost::property_tree::ptree&) const;
     		void LoadData(const boost::property_tree::ptree&);

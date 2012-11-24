@@ -232,13 +232,63 @@ void StarSystem::Add(DistantStarEffect* ds)                  { distantStarEffect
 //// ******* TRANSITION ******* 
   		           
 // poor                
-Planet* StarSystem::GetClosestPlanet(const vec2f& _pos) const
+Planet* StarSystem::GetClosestInhabitedPlanet(const vec2f& _pos) const
+{    	
+     	Planet* requested_planet = NULL;
+     	
+     	std::vector<Planet*> tmp_planet_vec;     	
+	for(unsigned int i=0; i<PLANET_vec.size(); i++)
+	{
+		if (PLANET_vec[i]->GetPopulation() > 0)
+		{
+			tmp_planet_vec.push_back(PLANET_vec[i]);
+		}
+	}
+	
+	if (tmp_planet_vec.size() >= 1)
+	{
+		requested_planet = tmp_planet_vec[0];
+		float dist_min = distBetweenPoints(_pos, tmp_planet_vec[0]->GetPoints().GetCenter());
+		if (tmp_planet_vec.size() > 1)
+		{
+			for (unsigned int i=1; i<tmp_planet_vec.size(); i++)
+			{
+				float dist = distBetweenPoints(_pos, tmp_planet_vec[i]->GetPoints().GetCenter());
+				if (dist < dist_min)
+				{
+					requested_planet = tmp_planet_vec[i];
+					dist_min = dist;
+				}
+			}
+		
+		}
+	}
+	
+	return requested_planet;
+}
+Planet* StarSystem::GetRandomInhabitedPlanet() const
 {
-     	return PLANET_vec[getRandInt(0, PLANET_vec.size()-1)];
+	Planet* requested_planet = NULL;
+
+	std::vector<Planet*> tmp_planet_vec;
+	for(unsigned int i=0; i<PLANET_vec.size(); i++)
+	{
+		if (PLANET_vec[i]->GetPopulation() > 0)
+		{
+			tmp_planet_vec.push_back(PLANET_vec[i]);
+		}
+	}
+	
+     	if (tmp_planet_vec.size() >= 1) 
+     	{
+     		requested_planet = tmp_planet_vec[getRandInt(0, tmp_planet_vec.size()-1)];
+     	}
+
+	return requested_planet;
 }
 Planet* StarSystem::GetRandomPlanet() const
 {
-     	return PLANET_vec[getRandInt(0, PLANET_vec.size()-1)];
+	return PLANET_vec[getRandInt(0, PLANET_vec.size()-1)];
 }
 
 Vehicle* StarSystem::GetRandomVehicle() const
