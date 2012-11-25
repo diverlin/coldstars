@@ -21,6 +21,8 @@
 #include "../common/myStr.hpp"
 #include "../common/Logger.hpp"
 
+#include "../spaceobjects/Vehicle.hpp"
+
 BaseSlot::BaseSlot()
 {
         equiped = false;
@@ -64,13 +66,11 @@ void BaseSlot::ResolveData()
 void BaseSlot::SaveDataUniqueBaseSlot(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {       
         if (owner) 
-        {
-        	save_ptree.put(root+"unresolved.owner_type_id", owner->GetTypeId());        	
+        {   	
         	save_ptree.put(root+"unresolved.owner_id", owner->GetId());
         }
         else
         {
-                save_ptree.put(root+"unresolved.owner_type_id", NONE_ID);
                 save_ptree.put(root+"unresolved.owner_id", NONE_ID);	
 	}
 
@@ -78,7 +78,6 @@ void BaseSlot::SaveDataUniqueBaseSlot(boost::property_tree::ptree& save_ptree, c
 
 void BaseSlot::LoadDataUniqueBaseSlot(const boost::property_tree::ptree& load_ptree)
 {   
-        unresolved_BaseSlot.owner_type_id = load_ptree.get<int>("unresolved.owner_type_id"); 
         unresolved_BaseSlot.owner_id = load_ptree.get<int>("unresolved.owner_id"); 
 }
 

@@ -170,7 +170,7 @@ void GuiAngar::ButtonsAction() const
         }
 }
 
-bool GuiAngar::UpdateMouseVehicleSlotsInteraction(const MouseData& data_mouse)
+bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mouse)
 {	
         for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
         { 
@@ -219,7 +219,7 @@ bool GuiAngar::UpdateMouseVehicleSlotsInteraction(const MouseData& data_mouse)
 }
 
 
-void GuiAngar::RenderVehicleSlots() const
+void GuiAngar::RenderVehicleAndItemSlots() const
 {
 	glPushMatrix();
 		glTranslatef(offset.x, offset.y, 0);

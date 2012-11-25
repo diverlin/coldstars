@@ -70,7 +70,7 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
 	bool interaction = gui_vehicle_scan.UpdateMouseInteractionInSpace(data_mouse, allow_full_control);        
 	if ( (interaction == true) and (allow_full_control == true) )
 	{
-		interaction = gui_skill.UpdateButtonsMouseInteraction(data_mouse);
+		interaction = gui_skill.UpdateMouseInteractionWithButtons(data_mouse);
 		gui_skill.ButtonsAction(scan_vehicle->GetOwnerNpc()->GetSkill());
 	}
 
@@ -97,8 +97,6 @@ bool GuiManager::UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData& 
 
 void GuiManager::RenderScanVehicle(const MouseData& data_mouse, Vehicle* vehicle, bool show_skill) const
 {	
-if (vehicle == NULL)
-return;	
 	if (player->GetCursor().GetItemSlot()->GetEquiped() == true)
 	{
        		gui_vehicle_scan.RenderVehicle(data_mouse, player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId());
@@ -163,7 +161,7 @@ bool GuiManager::UpdateInSpace(const MouseData& data_mouse)
 	}
 
 	//update
-        bool interaction = gui_space.UpdateButtonsMouseInteraction(data_mouse);				
+        bool interaction = gui_space.UpdateMouseInteractionWithButtons(data_mouse);				
         gui_space.ButtonsAction(player);   
                                                
 	if (show_gui_galaxymap == true)  
@@ -187,7 +185,7 @@ bool GuiManager::UpdateInSpace(const MouseData& data_mouse)
         {
         	if (interaction == false)
                 {
-                 	interaction = gui_vehicle_player.UpdateButtonsMouseInteraction(data_mouse);
+                 	interaction = gui_vehicle_player.UpdateMouseInteractionWithButtons(data_mouse);
                 }
                         
                 gui_radar.Update();                                
@@ -254,7 +252,7 @@ bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
  	UserInput::Instance().UpdateInKosmoport(player);
      	player->GetCursor().Update(); 
      	    	       	
-	bool interaction = gui_kosmoport.UpdateButtonsMouseInteraction(data_mouse);
+	bool interaction = gui_kosmoport.UpdateMouseInteractionWithButtons(data_mouse);
 	gui_kosmoport.ButtonsAction();
 													
 	switch(gui_kosmoport.GetActiveScreenId())
@@ -272,10 +270,10 @@ bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
 			gui_angar.CheckButtonsLock();
 			if (interaction == false)
 			{					
-				interaction = gui_angar.UpdateButtonsMouseInteraction(data_mouse);
+				interaction = gui_angar.UpdateMouseInteractionWithButtons(data_mouse);
 				if (interaction == false)
 				{
-					interaction = gui_angar.UpdateMouseVehicleSlotsInteraction(data_mouse);
+					interaction = gui_angar.UpdateMouseInteractionWithVehicleSlots(data_mouse);
 				}
 
 				gui_angar.ButtonsAction();
@@ -292,7 +290,7 @@ bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
 			resetRenderTransformation();
 			angar->RenderBackground(screen_rect);
 			enable_BLEND();   
-	        		gui_angar.RenderVehicleSlots();
+	        		gui_angar.RenderVehicleAndItemSlots();
 	        		
 				if (scan_vehicle != NULL) 	
 				{ 
@@ -369,13 +367,13 @@ bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
 			
 			if (interaction == false)
 			{
-				interaction = gui_shop.UpdateButtonsMouseInteraction(data_mouse);
+				interaction = gui_shop.UpdateMouseInteractionWithButtons(data_mouse);
 				if (interaction == false)
 				{
 					if (slider.GetSubTypeId() != NONE_ID)
 					{
 						slider.UpdateSlidePosition(data_mouse);
-						interaction = slider.UpdateButtonsMouseInteraction(data_mouse);
+						interaction = slider.UpdateMouseInteractionWithButtons(data_mouse);
 					}
 				}	
 	        	}
@@ -459,7 +457,7 @@ bool GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
  	UserInput::Instance().UpdateInKosmoport(player);
      	player->GetCursor().Update(); 
      	    	       	
-	//bool interaction = gui_kosmoport.UpdateButtonsMouseInteraction(data_mouse);
+	//bool interaction = gui_kosmoport.UpdateMouseInteractionWithButtons(data_mouse);
 	//gui_kosmoport.ButtonsAction();
 	
 									
@@ -467,13 +465,18 @@ bool GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 			gui_natureland.BindNatureLand(natureland);
 
 			//update  
-			bool interaction = gui_natureland.UpdateButtonsMouseInteraction(data_mouse);
+			bool interaction = gui_natureland.UpdateMouseInteractionWithButtons(data_mouse);
+			if (interaction == false)
+			{
+				interaction = gui_natureland.UpdateMouseInteractionWithItemSlots(data_mouse);
+			}
 			gui_natureland.ButtonsAction();
 	        	
 	        	//render
 			resetRenderTransformation();
 			gui_natureland.RenderBackground(screen_rect);
 			enable_BLEND();   
+	        		gui_natureland.RenderItemSlots();
 	        		gui_natureland.RenderButtons();
 				gui_natureland.RenderFocusedButtonInfo(data_mouse); 
 			disable_BLEND(); 

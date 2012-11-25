@@ -19,6 +19,7 @@
 #include "TurnTimer.hpp"
 #include "constants.hpp"
 #include "GameDate.hpp"
+#include "SaveLoadManager.hpp"
 #include "../config/config.hpp"
 
 TurnTimer::TurnTimer():
@@ -31,21 +32,27 @@ TurnTimer::~TurnTimer()
 
 void TurnTimer::NextTurn() 
 {
+	if (Config::Instance().AUTO_SAVE_MODE == true)
+	{
+	        std::cout<<"        *** proceeding autosave(AUTO_SAVE_MODE=ON)"<<std::endl;
+		SaveLoadManager::Instance().PerformDelayedSave();
+	}
+			
 	turn_tick = TURN_TIME;
-        //day++;
-        //printf("        *** turn END was activated, day = %i\n", day); 
+	turn_ended = false;
+	
+	//game_date.NextDay();
 }
 						
 void TurnTimer::Update(GameDate& game_date)
 {
-        turn_tick -= Config::Instance().GAMESPEED;        
+        turn_tick -= Config::Instance().GAME_SPEED;        
         
        	/////////// AUTO-TURN /////////////
-       	if ( (turn_tick < -50) and (Config::Instance().AUTOTURN_MODE == true) )
+       	if ( (turn_tick < -50) and (Config::Instance().AUTO_TURN_MODE == true) )
        	{  
-       		turn_tick = TURN_TIME;
-        	game_date.NextDay();
-        	printf("        *** auto turn END was activated\n");
+        	std::cout<<"        *** turn_end(AUTO_TURN_MODE=ON)"<<std::endl;
+       		NextTurn();
         }     
         
         if (turn_tick < 0)

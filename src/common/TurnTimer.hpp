@@ -29,6 +29,7 @@ class TurnTimer
 		
 		bool GetTurnEnded()  const { return turn_ended; };
 		int GetTurnTick() const { return turn_tick; };
+				
 		void NextTurn();
 		
 		void Update(GameDate&);

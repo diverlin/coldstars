@@ -68,7 +68,7 @@ int main()
 		/* server code start */
 		turn_timer.Update(game_date);
 
-		for (int i=0; i<Config::Instance().GAMESPEED; i++)  // fake implementation (static ai should not be run several times at once)
+		for (int i=0; i<Config::Instance().GAME_SPEED; i++)  // fake implementation (static ai should not be run several times at once)
 		{
 			galaxy->Update(player, turn_timer.GetTurnTick());
 		}
@@ -83,12 +83,14 @@ int main()
 		player->RunSession(turn_timer);
 		player->UpdatePostTransactionEvent(turn_timer);      
 		
-		
-		Player* loaded_player = SaveLoadManager::Instance().Update(player);
-		if (loaded_player != NULL)
-		{
-			player = loaded_player;
-			galaxy = loaded_player->GetNpc()->GetVehicle()->GetStarSystem()->GetGalaxy();
+		if (turn_timer.GetTurnEnded() == true)
+		{	
+			Player* loaded_player = SaveLoadManager::Instance().Update(player);
+			if (loaded_player != NULL)
+			{
+				player = loaded_player;
+				galaxy = loaded_player->GetNpc()->GetVehicle()->GetStarSystem()->GetGalaxy();
+			}
 		}
 		/* client code end */
 		

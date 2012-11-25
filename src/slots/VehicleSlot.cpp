@@ -102,11 +102,13 @@ void VehicleSlot::LoadDataUniqueVehicleSlot(const boost::property_tree::ptree& l
 
 void VehicleSlot::ResolveDataUniqueVehicleSlot()
 {       
-        switch(unresolved_BaseSlot.owner_type_id)
+
+	owner = EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id);
+        switch(owner->GetTypeId())
         {
-	       //case ENTITY::VEHICLE_ID: 	{	((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
-	       //case ENTITY::CONTAINER_ID:     	{	((Container*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }
-	       //case ENTITY::STORE_ID:         	{ 	((Store*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddSlot(this); break; }
-	       case ENTITY::ANGAR_ID:         	{ ((Angar*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddVehicleSlot(this); break; }
+	       //case ENTITY::VEHICLE_ID: 	{ ((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
+	       //case ENTITY::CONTAINER_ID:     { ((Container*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }
+	       //case ENTITY::STORE_ID:         { ((Store*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddSlot(this); break; }
+	       case ENTITY::ANGAR_ID:         	{ ((Angar*)owner)->AddVehicleSlot(this); break; }
 	}
 }

@@ -38,7 +38,7 @@ class BaseGui
   		void SetOffset(const vec2f& offset) { this->offset = offset; };
   		void SetPlayer(Player* player) { this->player = player; };
   		
-  		bool UpdateButtonsMouseInteraction(const MouseData&);
+  		bool UpdateMouseInteractionWithButtons(const MouseData&);
   		
        		void RenderButtons() const;
        		void RenderFocusedButtonInfo(const MouseData&) const;  

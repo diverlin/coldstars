@@ -132,7 +132,7 @@ bool Cursor::UpdateInSpace()
 						//if (ship->GetId() != player->GetNpc()->GetVehicle()->GetId())
 						//{
 							//SetOffset(ship->GetPoints().GetCenter() - Screen::Instance().GetRect().GetBottomLeft());	
-							//return UpdateButtonsMouseInteraction(data_mouse);
+							//return UpdateMouseInteractionWithButtons(data_mouse);
 					        //}
 					        //else
 					        //{
