@@ -23,6 +23,7 @@
 #include "../common/id.hpp"
 #include "../common/Logger.hpp"
 #include "../common/EntityManager.hpp"
+#include "../common/rand.hpp"
 
 #include "../resources/TextureManager.hpp"
 
@@ -30,6 +31,8 @@
 #include "items/artefacts/ProtectorArtefactBuilder.hpp"
 #include "../items/artefacts/GravityArtefact.hpp"
 #include "../items/artefacts/ProtectorArtefact.hpp"
+
+#include "../builder/ItemSlotBuilder.hpp"
 
 NatureLandBuilder& NatureLandBuilder::Instance()
 {
@@ -75,15 +78,34 @@ void NatureLandBuilder::CreateNewInternals(NatureLand* natureland) const
 {
 	natureland->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TEXTURE::NATURELAND_BACKGROUND_ID));
 	
-	for (unsigned int i=0; i<2; i++) 
-    	{        
-        	natureland->AddItem(GravityArtefactBuilder::Instance().GetNewGravityArtefact());
-    	}   
-
-    	for (unsigned int i=0; i<2; i++) 
-    	{        
-        	natureland->AddItem(ProtectorArtefactBuilder::Instance().GetNewProtectorArtefact());
-    	}  
+	int item_slot_num = getRandInt(NATURELAND_ITEM_SLOT_MIN, NATURELAND_ITEM_SLOT_MAX);
+	for (unsigned int i=0; i<item_slot_num; i++)
+	{
+		ItemSlot* item_slot = GetNewItemSlot(ENTITY::CARGO_SLOT_ID);   
+		natureland->AddItemSlot(item_slot);
+	}
+	
+	for (unsigned int i=0; i<item_slot_num; i++)
+	{
+		if (natureland->CanAcceptNewItem() == true)
+		{
+			int type_id = getRandInt(ENTITY::GRAVITY_ARTEFACT_ID, ENTITY::PROTECTOR_ARTEFACT_ID);
+			switch (type_id)
+			{
+				case ENTITY::GRAVITY_ARTEFACT_ID:
+				{
+					natureland->AddItem(GravityArtefactBuilder::Instance().GetNewGravityArtefact());
+					break;
+				}
+				
+				case ENTITY::PROTECTOR_ARTEFACT_ID:
+				{
+					natureland->AddItem(ProtectorArtefactBuilder::Instance().GetNewProtectorArtefact());
+					break;
+				}
+			}
+		}
+	}	
 }
 
   	

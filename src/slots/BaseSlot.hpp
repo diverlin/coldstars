@@ -43,18 +43,17 @@ class BaseSlot : public Base
                 
 		void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
 		void SetOwner(Base* owner) { this->owner = owner; };
+		void SetPosition(const vec2f& position) { this->position = position; };
 		void SelectEvent() { selected = true; };
 		void DeselectEvent() { selected = false; };
 				
 		bool GetSelected() const { return selected; };
 		bool GetEquiped() const { return equiped; };
 		
+		const vec2f& GetPosition() const { return position; };
+		
 		Vehicle* GetOwnerVehicle() const { return (Vehicle*)owner; };
 		Base* GetOwner() const { return owner; };
-        
-        	virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
 		
         protected:
                 bool equiped;  
@@ -63,6 +62,8 @@ class BaseSlot : public Base
                 TextureOb* textureOb;
                                 
                 Base* owner; 
+                
+                vec2f position;
              
                 UnresolvedDataUniqueBaseSlot unresolved_BaseSlot;
                 void SaveDataUniqueBaseSlot(boost::property_tree::ptree&, const std::string&) const;
