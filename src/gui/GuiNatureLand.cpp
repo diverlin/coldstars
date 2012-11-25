@@ -62,8 +62,8 @@ void GuiNatureLand::BindNatureLand(NatureLand* natureland)
 
         for (int i=0; i<natureland->item_slot_vec.size(); i++)
  	{
- 		Rect _rect(natureland->item_slot_pos_vec[i].x/100.f*(screen_w - GUI::ITEMSLOT::WIDTH_FOR_ANGAR), 
- 			   natureland->item_slot_pos_vec[i].y/100.f*(screen_h - GUI::ITEMSLOT::HEIGHT_FOR_ANGAR), 
+ 		Rect _rect(natureland->item_slot_vec[i]->GetPosition().x/100.f*(screen_w - GUI::ITEMSLOT::WIDTH_FOR_ANGAR), 
+ 			   natureland->item_slot_vec[i]->GetPosition().y/100.f*(screen_h - GUI::ITEMSLOT::HEIGHT_FOR_ANGAR), 
  			   GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
         	rect_itemslot_vec.push_back(GuiPair<Rect, ItemSlot*>(_rect, natureland->item_slot_vec[i]));
 	}
@@ -91,24 +91,24 @@ void GuiNatureLand::ButtonsAction() const
         }
 }
 
-bool GuiNatureLand::UpdateMouseInteractionWithItemSlots(const MouseData& data_mouse)
+bool GuiNatureLand::UpdateMouseInteractionWithEquipedItemSlots(const MouseData& data_mouse)
 {
-       for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
-        { 
-                if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.mx, data_mouse.my) == true)
-                {
-                	BaseItem* item = rect_itemslot_vec[i].second->GetItem();
-                        if (item != NULL)
-                        {    
+       	for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
+       	{
+		BaseItem* item = rect_itemslot_vec[i].second->GetItem();
+		if (item != NULL)
+		{	 
+	                if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.mx, data_mouse.my) == true)
+	                {	
                 		if (data_mouse.left_click == true)
                         	{
                         		player->GetNpc()->GetVehicle()->AddItemToCargoSlot(item);
                         	}
                      
                			player->GetCursor().SetFocusedObject(item);
-                	}
-                }
-        }
+        		}
+		}
+       	}
                 
         return false;
 }
@@ -119,13 +119,16 @@ void GuiNatureLand::RenderBackground(const Rect& rect) const
 }
            
 
-void GuiNatureLand::RenderItemSlots() const
+void GuiNatureLand::RenderEquipedItemSlots() const
 {
 	glPushMatrix();
 		glTranslatef(offset.x, offset.y, 0);
         	for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
         	{
-                	rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, offset);
+        		if (rect_itemslot_vec[i].second->GetEquiped() == true)
+        		{
+                		rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, offset);
+        		}
         	}
         glPopMatrix();
 }

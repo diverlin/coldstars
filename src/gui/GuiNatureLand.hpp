@@ -32,12 +32,12 @@ class GuiNatureLand : public BaseGui
 		
 		void BindNatureLand(NatureLand*);
 		
-       		bool UpdateMouseInteractionWithItemSlots(const MouseData&);
+       		bool UpdateMouseInteractionWithEquipedItemSlots(const MouseData&);
 
        		void ButtonsAction() const;   
          	
          	void RenderBackground(const Rect& rect) const;
-                void RenderItemSlots() const;
+                void RenderEquipedItemSlots() const;
          	                
        	private:
        	        NatureLand* natureland;

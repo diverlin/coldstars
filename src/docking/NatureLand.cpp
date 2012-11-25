@@ -24,12 +24,7 @@
 #include "../resources/TextureManager.hpp"
 #include "../resources/textureOb.hpp"
 
-#include "../builder/ItemSlotBuilder.hpp"
-
-#include <boost/property_tree/ptree.hpp>
-#include <boost/foreach.hpp>
-
-#include "../garbage/EntityGarbage.hpp"
+#include "../slots/ItemSlot.hpp"
 
 NatureLand::NatureLand(int id)
 {
@@ -43,13 +38,39 @@ NatureLand::~NatureLand()
 
 
 //// ******* TRANSITION ******* 
-void NatureLand::AddItem(BaseItem* item)
+bool NatureLand::CanAcceptNewItem() const
 {
-	ItemSlot* item_slot = GetNewItemSlot(ENTITY::CARGO_SLOT_ID);   
+	for (unsigned int i=0; i<item_slot_vec.size(); i++)
+	{
+		if (item_slot_vec[i]->GetEquiped() == false)
+		{
+			return true;
+		}
+	}
+	
+	return false;
+}
+                
+void NatureLand::AddItemSlot(ItemSlot* item_slot)
+{
 	item_slot->SetOwner(this);
-	item_slot->InsertItem(item);
 	item_slot_vec.push_back(item_slot);
-	item_slot_pos_vec.push_back(vec2f(getRandInt(0, 100), getRandInt(0, 100)));
+}
+
+bool NatureLand::AddItem(BaseItem* item)
+{
+	for (unsigned int i=0; i<item_slot_vec.size(); i++)
+	{
+		if (item_slot_vec[i]->GetEquiped() == false)
+		{
+			item_slot_vec[i]->InsertItem(item);
+			item_slot_vec[i]->SetPosition(vec2f(getRandInt(0, 100), getRandInt(0, 100)));
+			
+			return true;
+		}
+	}
+	
+	return false;
 }
 
 
@@ -92,16 +113,7 @@ bool NatureLand::GetPermissionToLand() const
 
 /* virtual */
 void NatureLand::UpdateInSpaceInStatic()
-{
-	for (unsigned int i=0; i<item_slot_vec.size(); i++)
-	{
-		if (item_slot_vec[i]->GetEquiped() == false)
-		{
-			EntityGarbage::Instance().Add(item_slot_vec[i]);
-			item_slot_pos_vec.erase(item_slot_pos_vec.begin() + i);
-		}
-	}
-}  
+{}  
 
 /*virtual*/
 std::string NatureLand::GetDockVehicleStr() const
@@ -144,23 +156,11 @@ void NatureLand::ResolveData()
 void NatureLand::SaveDataUniqueNatureLand(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	save_ptree.put(root+"data_unresolved_NatureLand.textureOb_background_path", textureOb_background->path);
-	for (unsigned int i=0; i<item_slot_pos_vec.size(); i++)
-	{
-		save_ptree.put(root+"item_slot_pos_vec."+int2str(i)+".x", item_slot_pos_vec[i].x);
-		save_ptree.put(root+"item_slot_pos_vec."+int2str(i)+".y", item_slot_pos_vec[i].y);
-	}
 }
 
 void NatureLand::LoadDataUniqueNatureLand(const boost::property_tree::ptree& load_ptree)
 {
 	data_unresolved_NatureLand.textureOb_background_path = load_ptree.get<std::string>("data_unresolved_NatureLand.textureOb_background_path");
-        if (load_ptree.get_child_optional("item_slot_pos_vec"))
-	{
-		BOOST_FOREACH(const boost::property_tree::ptree::value_type &v, load_ptree.get_child("item_slot_pos_vec"))
-		{
-			item_slot_pos_vec.push_back(vec2f(v.second.get<int>("x"), v.second.get<int>("y")));
-		}
-	}
 }
 
 void NatureLand::ResolveDataUniqueNatureLand()

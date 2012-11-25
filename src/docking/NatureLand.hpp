@@ -39,8 +39,11 @@ class NatureLand : public BaseLand
 		
 		TextureOb* GetBackgroundTextureOb() const { return textureOb_background; };
 
-                void AddItem(BaseItem*);
-                                
+		void AddItemSlot(ItemSlot*);
+
+                bool AddItem(BaseItem*);
+                bool CanAcceptNewItem() const;
+                          
                 virtual bool AddVehicle(Vehicle*);
                 virtual bool RemoveVehicle(Vehicle*);
                 
@@ -59,7 +62,6 @@ class NatureLand : public BaseLand
     		
     		std::vector<Vehicle*> VEHICLE_vec;
     		std::vector<ItemSlot*> item_slot_vec;
-    		std::vector<vec2f> item_slot_pos_vec; 
 
 		UnresolvedDataUniqueNatureLand data_unresolved_NatureLand;
 		void SaveDataUniqueNatureLand(boost::property_tree::ptree&, const std::string&) const;		

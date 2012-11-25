@@ -41,28 +41,6 @@ BaseSlot::~BaseSlot()
 	#endif
 }
                 
-/*virtual*/
-void BaseSlot::SaveData(boost::property_tree::ptree& save_ptree) const
-{
-	const std::string root = "item_slot." + int2str(GetId()) + ".";
-	SaveDataUniqueBase(save_ptree, root);
-	SaveDataUniqueBaseSlot(save_ptree, root);
-}
-
-/*virtual*/		
-void BaseSlot::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-	LoadDataUniqueBase(load_ptree);
-	LoadDataUniqueBaseSlot(load_ptree);
-}
-	
-/*virtual*/	
-void BaseSlot::ResolveData()
-{
-	ResolveDataUniqueBase();
-	ResolveDataUniqueBaseSlot();
-}
-
 void BaseSlot::SaveDataUniqueBaseSlot(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {       
         if (owner) 
@@ -73,12 +51,16 @@ void BaseSlot::SaveDataUniqueBaseSlot(boost::property_tree::ptree& save_ptree, c
         {
                 save_ptree.put(root+"unresolved.owner_id", NONE_ID);	
 	}
-
+	
+	save_ptree.put(root+"position.x", position.x);
+	save_ptree.put(root+"position.y", position.y);
 }
 
 void BaseSlot::LoadDataUniqueBaseSlot(const boost::property_tree::ptree& load_ptree)
 {   
         unresolved_BaseSlot.owner_id = load_ptree.get<int>("unresolved.owner_id"); 
+	position.Set(load_ptree.get<int>("position.x"), load_ptree.get<int>("position.y"));
+
 }
 
 void BaseSlot::ResolveDataUniqueBaseSlot()

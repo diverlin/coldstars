@@ -461,23 +461,23 @@ bool GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 	//gui_kosmoport.ButtonsAction();
 	
 									
-			NatureLand* natureland = (NatureLand*)player->GetNpc()->GetVehicle()->GetLand();
-			gui_natureland.BindNatureLand(natureland);
+	NatureLand* natureland = (NatureLand*)player->GetNpc()->GetVehicle()->GetLand();
+	gui_natureland.BindNatureLand(natureland);
 
-			//update  
-			bool interaction = gui_natureland.UpdateMouseInteractionWithButtons(data_mouse);
-			if (interaction == false)
-			{
-				interaction = gui_natureland.UpdateMouseInteractionWithItemSlots(data_mouse);
-			}
-			gui_natureland.ButtonsAction();
-	        	
-	        	//render
-			resetRenderTransformation();
-			gui_natureland.RenderBackground(screen_rect);
-			enable_BLEND();   
-	        		gui_natureland.RenderItemSlots();
-	        		gui_natureland.RenderButtons();
-				gui_natureland.RenderFocusedButtonInfo(data_mouse); 
-			disable_BLEND(); 
+	//update  
+	bool interaction = gui_natureland.UpdateMouseInteractionWithButtons(data_mouse);
+	if (interaction == false)
+	{
+		interaction = gui_natureland.UpdateMouseInteractionWithEquipedItemSlots(data_mouse);
+	}
+	gui_natureland.ButtonsAction();
+	
+	//render
+	resetRenderTransformation();
+	gui_natureland.RenderBackground(screen_rect);
+	enable_BLEND();   
+		gui_natureland.RenderEquipedItemSlots();
+		gui_natureland.RenderButtons();
+		gui_natureland.RenderFocusedButtonInfo(data_mouse); 
+	disable_BLEND(); 
 }
