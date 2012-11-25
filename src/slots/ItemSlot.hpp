@@ -127,7 +127,7 @@ class ItemSlot : public BaseSlot
 
            	PathVisual range_visual;
            	      
-           	bool FakeInsertItem(BaseItem*) const;  
+           	bool CheckItemInsertion(BaseItem*) const;  
            	      		        
            	bool CheckAlive(BaseSpaceEntity*) const;
            	bool CheckPlaceTypeId(BaseSpaceEntity*) const;  

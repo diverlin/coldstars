@@ -19,8 +19,9 @@ struct Config
 
 		bool DEBUG_MODE;
 		
-		bool AUTOTURN_MODE;
-		int GAMESPEED;
+		bool AUTO_TURN_MODE;
+		bool AUTO_SAVE_MODE;
+		int GAME_SPEED;
 		
 		int SCROLL_VELOCITY_MAX;
 		int SCROLL_VELOCITY_STEP;

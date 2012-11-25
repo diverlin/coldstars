@@ -23,6 +23,7 @@
 #include "../items/BaseItem.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../pilots/Player.hpp"
+#include "../common/rand.hpp"
 
 #include "../pilots/Npc.hpp"
 //#include "../builder/ItemSlotBuilder.hpp"
@@ -52,19 +53,19 @@ GuiNatureLand::~GuiNatureLand()
 	
 void GuiNatureLand::BindNatureLand(NatureLand* natureland)
 {
+	int screen_w = Config::Instance().SCREEN_WIDTH;
+	int screen_h = Config::Instance().SCREEN_HEIGHT;
+	
 	this->natureland = natureland;
 	
 	rect_itemslot_vec.clear();
 
-	int column_counter = 0;
-        int row_counter = 0;
         for (int i=0; i<natureland->item_slot_vec.size(); i++)
  	{
- 		Rect _rect(column_counter*GUI::ITEMSLOT::WIDTH_FOR_ANGAR, row_counter*GUI::ITEMSLOT::HEIGHT_FOR_ANGAR, 
+ 		Rect _rect(natureland->item_slot_pos_vec[i].x/100.f*(screen_w - GUI::ITEMSLOT::WIDTH_FOR_ANGAR), 
+ 			   natureland->item_slot_pos_vec[i].y/100.f*(screen_h - GUI::ITEMSLOT::HEIGHT_FOR_ANGAR), 
  			   GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
         	rect_itemslot_vec.push_back(GuiPair<Rect, ItemSlot*>(_rect, natureland->item_slot_vec[i]));
-                
-                row_counter++;                
 	}
 }
 
@@ -90,28 +91,21 @@ void GuiNatureLand::ButtonsAction() const
         }
 }
 
-bool GuiNatureLand::UpdateMouseVehicleSlotsInteraction(const MouseData& data_mouse)
+bool GuiNatureLand::UpdateMouseInteractionWithItemSlots(const MouseData& data_mouse)
 {
        for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
         { 
                 if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.mx, data_mouse.my) == true)
                 {
-                	//if (data_mouse.left_click == true)
-                        //{
-                		//if (rect_itemslot_vec[i].second->GetSubTypeId() != ENTITY::REPAIR_SLOT_ID)
-				//{	
-  					//player->GetCursor().GetItemSlot()->SwapItem(rect_itemslot_vec[i].second);
-                        	//}
-                        	//else
-                        	//{
-                        		//angar->RepairItem(player->GetNpc(), player->GetCursor().GetItemSlot()->GetItem());
-                        	//}
-                        	
-                        //}
-                        	
-                        if (rect_itemslot_vec[i].second->GetItem() != NULL)
-                        {                         
-                		player->GetCursor().SetFocusedObject(rect_itemslot_vec[i].second->GetItem());
+                	BaseItem* item = rect_itemslot_vec[i].second->GetItem();
+                        if (item != NULL)
+                        {    
+                		if (data_mouse.left_click == true)
+                        	{
+                        		player->GetNpc()->GetVehicle()->AddItemToCargoSlot(item);
+                        	}
+                     
+               			player->GetCursor().SetFocusedObject(item);
                 	}
                 }
         }
@@ -124,3 +118,14 @@ void GuiNatureLand::RenderBackground(const Rect& rect) const
      	drawTexturedRect(natureland->GetBackgroundTextureOb(), rect, -2);  
 }
            
+
+void GuiNatureLand::RenderItemSlots() const
+{
+	glPushMatrix();
+		glTranslatef(offset.x, offset.y, 0);
+        	for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
+        	{
+                	rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, offset);
+        	}
+        glPopMatrix();
+}

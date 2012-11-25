@@ -63,6 +63,7 @@
 
 #include "../docking/Shop.hpp"
 #include "../docking/Store.hpp"
+#include "../docking/NatureLand.hpp"
 
 #include "../garbage/EntityGarbage.hpp"
 
@@ -1204,7 +1205,7 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
        		save_ptree.put(root+"unresolved.drive_complex_action_id", NONE_ID);
 	}
 	       	
-       	if (land != NULL) 
+       	if (place_type_id == ENTITY::NATURELAND_ID) 
        	{
        		save_ptree.put(root+"unresolved.land_id", land->GetId());
        	}
@@ -1297,6 +1298,14 @@ void Vehicle::ResolveDataUniqueVehicle()
 			//std::cout<<"xxx="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
 			((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.starsystem_hyper_id))->GetHyperSpace().AddVehicle(this);
 			//std::cout<<"yyy="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
+			
+			break;
+		}
+		
+		case ENTITY::NATURELAND_ID:
+		{
+			((NatureLand*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.land_id))->AddVehicle(this); 
+			break;
 		}
 	}
 	

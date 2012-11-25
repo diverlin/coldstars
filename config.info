@@ -16,8 +16,9 @@ DEBUG_MODE 0
 
 Gameplay
 {
-AUTOTURN_MODE false
-GAMESPEED 1    
+AUTO_TURN_MODE 0
+AUTO_SAVE_MODE 1
+GAME_SPEED 1    
 }
 
 Control

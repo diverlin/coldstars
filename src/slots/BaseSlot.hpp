@@ -29,13 +29,8 @@ class Rect;
 
 struct UnresolvedDataUniqueBaseSlot
 {
-	UnresolvedDataUniqueBaseSlot()
-	{
-		owner_type_id = NONE_ID;
-		owner_id = NONE_ID;
-	};
+	UnresolvedDataUniqueBaseSlot():owner_id(NONE_ID) {};
 	
-	int owner_type_id;
 	int owner_id;    
 };
 

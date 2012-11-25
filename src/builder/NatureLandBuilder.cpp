@@ -17,6 +17,7 @@
 */
 
 #include "NatureLandBuilder.hpp"
+
 #include "../docking/NatureLand.hpp"
 
 #include "../common/id.hpp"
@@ -24,6 +25,11 @@
 #include "../common/EntityManager.hpp"
 
 #include "../resources/TextureManager.hpp"
+
+#include "items/artefacts/GravityArtefactBuilder.hpp"
+#include "items/artefacts/ProtectorArtefactBuilder.hpp"
+#include "../items/artefacts/GravityArtefact.hpp"
+#include "../items/artefacts/ProtectorArtefact.hpp"
 
 NatureLandBuilder& NatureLandBuilder::Instance()
 {
@@ -68,6 +74,16 @@ NatureLand* NatureLandBuilder::GetNewNatureLand() const
 void NatureLandBuilder::CreateNewInternals(NatureLand* natureland) const
 {
 	natureland->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TEXTURE::NATURELAND_BACKGROUND_ID));
+	
+	for (unsigned int i=0; i<2; i++) 
+    	{        
+        	natureland->AddItem(GravityArtefactBuilder::Instance().GetNewGravityArtefact());
+    	}   
+
+    	for (unsigned int i=0; i<2; i++) 
+    	{        
+        	natureland->AddItem(ProtectorArtefactBuilder::Instance().GetNewProtectorArtefact());
+    	}  
 }
 
   	

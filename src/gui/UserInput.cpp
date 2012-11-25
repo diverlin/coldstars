@@ -345,7 +345,13 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 			player->GetNpc()->GetVehicle()->SetGodMode(!player->GetNpc()->GetVehicle()->GetGodMode());			
 			break;
 		}
-		
+
+		case sf::Key::F4: // auto save mode
+		{		
+			Config::Instance().AUTO_SAVE_MODE = !Config::Instance().AUTO_SAVE_MODE;			
+			break;
+		}
+				
 		case sf::Key::F5: // save event
 		{		
 			SaveLoadManager::Instance().PerformDelayedSave();			
@@ -354,32 +360,25 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 		
 		case sf::Key::F6: // slow down GAME SPEED 
 		{
-			if (Config::Instance().GAMESPEED > 1)
+			if (Config::Instance().GAME_SPEED > 1)
 			{
-				Config::Instance().GAMESPEED--;
+				Config::Instance().GAME_SPEED--;
 			}
 			break;
 		}
 
 		case sf::Key::F7: // speed up GAME SPEED 
 		{
-			if (Config::Instance().GAMESPEED < 10)
+			if (Config::Instance().GAME_SPEED < 10)
 			{
-				Config::Instance().GAMESPEED++;
+				Config::Instance().GAME_SPEED++;
 			}	             			
 			break;
 		}
 		
 		case sf::Key::F8: // AutoTurn
 		{
-			if (Config::Instance().AUTOTURN_MODE == false)
-			{
-				Config::Instance().AUTOTURN_MODE = true;
-			}
-			else
-			{
-				Config::Instance().AUTOTURN_MODE = false;
-			}
+			Config::Instance().AUTO_TURN_MODE = !Config::Instance().AUTO_TURN_MODE;
 			break;
 		}
 		

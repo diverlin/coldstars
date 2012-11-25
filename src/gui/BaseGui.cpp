@@ -43,7 +43,7 @@ BaseButton* BaseGui::GetButton(int request_subtype_id) const
 	return NULL;
 }       
 
-bool BaseGui::UpdateButtonsMouseInteraction(const MouseData& data_mouse)
+bool BaseGui::UpdateMouseInteractionWithButtons(const MouseData& data_mouse)
 {
 	for (std::map<int, BaseButton*>::iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{

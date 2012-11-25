@@ -74,6 +74,7 @@
 #include "../builder/SatelliteBuilder.hpp"
 #include "../builder/RocketBulletBuilder.hpp"
 
+#include "../builder/NatureLandBuilder.hpp"
 #include "../builder/KosmoportBuilder.hpp"
 #include "../builder/AngarBuilder.hpp"
 #include "../builder/StoreBuilder.hpp"
@@ -108,9 +109,11 @@
 #include "../items/artefacts/ProtectorArtefact.hpp"
 
 #include "../docking/Goverment.hpp"
+#include "../docking/NatureLand.hpp"
 #include "../docking/Kosmoport.hpp"
 
 #include "../slots/VehicleSlot.hpp"
+#include "../common/myStr.hpp"
 
 EntityManager& EntityManager::Instance()
 {
@@ -150,6 +153,10 @@ Base* EntityManager::GetEntityById(int id) const
 
 	assert(slice->second);
 
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log("    EntityManager.GetEntityById() type_id=" + getTypeStr(slice->second->GetTypeId()));
+	#endif
+	
 	return slice->second;
 }
 
@@ -588,7 +595,17 @@ void EntityManager::LoadPass0()
 			rocket_bullet->LoadData(v.second);
 		}
 	}
-		
+
+        if (load_ptree.get_child_optional("natureland"))
+	{	
+		Logger::Instance().Log("loading naturelands...");
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("natureland"))
+		{
+			NatureLand* natureland = NatureLandBuilder::Instance().GetNewNatureLandTemplate(v.second.get<int>("data_id.id"));
+			natureland->LoadData(v.second);
+		}
+	}
+			
         if (load_ptree.get_child_optional("kosmoport"))
 	{	
 		Logger::Instance().Log("loading kosmoports...");
@@ -648,7 +665,7 @@ void EntityManager::LoadPass1() const
 	Logger::Instance().Log("RESOLVING DEPENDENCY START");
 	for (std::map<int, Base*>::const_iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
 	{
-		Logger::Instance().Log("ResolveData() in " + getTypeStr(iterator->second->GetTypeId()));
+		Logger::Instance().Log("ResolveData() in " + getTypeStr(iterator->second->GetTypeId()) + " id="+int2str(iterator->second->GetId()));
 		iterator->second->ResolveData();
 	}
 

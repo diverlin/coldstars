@@ -38,9 +38,9 @@
 #include "../docking/Angar.hpp"
 
 #include "../common/Logger.hpp"
-#include "../common/EntityManager.hpp"
 
 #include "../garbage/EntityGarbage.hpp"
+#include "../common/EntityManager.hpp"
 
 ItemSlot::ItemSlot(int id)
 {
@@ -78,7 +78,7 @@ void ItemSlot::PutChildsToGarbage() const
 	}
 }
 
-bool ItemSlot::FakeInsertItem(BaseItem* item) const
+bool ItemSlot::CheckItemInsertion(BaseItem* item) const
 {
 	if (data_id.subtype_id == ENTITY::CARGO_SLOT_ID) 
 	{
@@ -275,7 +275,7 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
        		if (item->GetTypeId() == slot->GetItem()->GetTypeId())
        		{
        			BaseItem* tmp_item = slot->GetItem();
-       			if ( (slot->FakeInsertItem(item) == true) and (FakeInsertItem(tmp_item) == true) )
+       			if ( (slot->CheckItemInsertion(item) == true) and (CheckItemInsertion(tmp_item) == true) )
        			{       				
        				slot->InsertItem(item);
        				tmp_item->SetItemSlot(NULL);
@@ -401,12 +401,14 @@ void ItemSlot::LoadDataUniqueItemSlot(const boost::property_tree::ptree& load_pt
 {}
 
 void ItemSlot::ResolveDataUniqueItemSlot()
-{        
-        switch(unresolved_BaseSlot.owner_type_id)
+{
+	owner = EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id);
+        switch(owner->GetTypeId())
         {
-	       case ENTITY::VEHICLE_ID: 	{	((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
-	       case ENTITY::CONTAINER_ID:     	{	((Container*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }
-	       case ENTITY::STORE_ID:         	{ 	((Store*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
-	       case ENTITY::ANGAR_ID:         	{ 	((Angar*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
+	       case ENTITY::VEHICLE_ID: 	{	((Vehicle*)owner)->AddItemSlot(this); break; }
+	       case ENTITY::CONTAINER_ID:     	{	((Container*)owner)->BindItemSlot(this); break; }
+	       case ENTITY::STORE_ID:         	{ 	((Store*)owner)->AddItemSlot(this); break; }
+	       case ENTITY::ANGAR_ID:         	{ 	((Angar*)owner)->AddItemSlot(this); break; }
+	       //case ENTITY::NATURELAND_ID:      { 	((NatureLand*)owner)->AddItemSlot(this); break; }
 	}
 }
