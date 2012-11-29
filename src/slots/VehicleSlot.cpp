@@ -23,6 +23,7 @@
 #include "../common/myStr.hpp"
 
 #include "../docking/Angar.hpp"
+#include "../docking/Store.hpp"
 #include "../common/EntityManager.hpp"
 
 #include "../garbage/EntityGarbage.hpp"
@@ -49,15 +50,24 @@ void VehicleSlot::PutChildsToGarbage() const
 void VehicleSlot::InsertVehicle(Vehicle* vehicle)
 {
         this->vehicle = vehicle;
-        
+        equiped = true;
+
         vehicle->SetPlaceTypeId(data_id.type_id);
         vehicle->SetParentVehicleSlot(this);
 }
 
 void VehicleSlot::Release()
 {
+        equiped = false;
         vehicle = NULL;
 } 
+
+void VehicleSlot::SwapVehicle(VehicleSlot* vehicle_slot)
+{
+	Vehicle* tmp_vehicle = vehicle_slot->GetVehicle();
+	vehicle_slot->InsertVehicle(GetVehicle());
+	InsertVehicle(tmp_vehicle);
+}
 
 void VehicleSlot::Render(const Rect& rect) const
 {
@@ -101,14 +111,13 @@ void VehicleSlot::LoadDataUniqueVehicleSlot(const boost::property_tree::ptree& l
 {}
 
 void VehicleSlot::ResolveDataUniqueVehicleSlot()
-{       
-
+{
 	owner = EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id);
         switch(owner->GetTypeId())
         {
 	       //case ENTITY::VEHICLE_ID: 	{ ((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
 	       //case ENTITY::CONTAINER_ID:     { ((Container*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }
-	       //case ENTITY::STORE_ID:         { ((Store*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddSlot(this); break; }
+	       case ENTITY::STORE_ID:           { ((Store*)owner)->AddVehicleSlot(this); break; }
 	       case ENTITY::ANGAR_ID:         	{ ((Angar*)owner)->AddVehicleSlot(this); break; }
 	}
 }

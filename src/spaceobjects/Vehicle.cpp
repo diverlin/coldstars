@@ -88,8 +88,6 @@ Vehicle::Vehicle()
         freezer_slot   = NULL;
         
         land  = NULL;
-        
-        price = 1000;
 }
 
 /*virtual*/
@@ -201,6 +199,27 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
 		
 }
 
+bool Vehicle::GetAllItemsFromVehicle(Vehicle* vehicle)
+{
+	bool result = true;
+	for(unsigned int i=0; i<vehicle->slot_total_vec.size(); i++)
+	{ 
+		if (vehicle->slot_total_vec[i]->GetEquiped() == true)
+		{
+			if (vehicle->slot_total_vec[i]->GetSubTypeId() == ENTITY::CARGO_SLOT_ID)
+			{
+				result = AddItemToCargoSlot(vehicle->slot_total_vec[i]->GetItem());
+			}
+			else
+			{
+				result = AddAndManageItem(vehicle->slot_total_vec[i]->GetItem());
+			}
+		}
+	}
+	
+	return result;
+}
+                
 bool Vehicle::ManageItem(BaseItem* item)
 {
 	switch(item->GetTypeId())
@@ -979,7 +998,7 @@ void Vehicle::RenderInfo(const vec2f& center, int offset_x, int offset_y)
 {  
 	UpdateInfo(); // virtual
      	drawInfoIn2Column(info.title_list, info.value_list, center.x - offset_x, center.y - offset_y);
-     	
+
      	if (owner_npc != NULL)
      	{
      		owner_npc->RenderInfo(vec2f(center.x + 190 - offset_x, center.y - offset_y));
@@ -1033,7 +1052,7 @@ void Vehicle::RenderGrappleRange()
 
 bool Vehicle::BuyKorpusRepair()
 {        
-        int price_for_one = price * REPAIR_VEHICLEKORPUS_PRICE_RATE;
+        int price_for_one = data_korpus.price * REPAIR_VEHICLEKORPUS_PRICE_RATE;
 	int repair_max =  owner_npc->GetCredits() / price_for_one;
 	int repair_need = data_korpus.armor - data_life.armor;
 	
@@ -1177,6 +1196,10 @@ void Vehicle::UpdateGrappleMicroProgram()
 				
 void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" SaveDataUniqueVehicle()  id=" + int2str(GetId()) + " START");
+	#endif
+
        	save_ptree.put(root+"data_korpus.space", data_korpus.space);       	
        	save_ptree.put(root+"data_korpus.armor", data_korpus.armor);  
        	save_ptree.put(root+"data_korpus.protection", data_korpus.protection); 
@@ -1196,22 +1219,22 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
 
        	if (drive_complex.GetTarget() != NULL) 
        	{
-       		save_ptree.put(root+"unresolved.drive_complex_target_id", drive_complex.GetTarget()->GetId());
-       		save_ptree.put(root+"unresolved.drive_complex_action_id", drive_complex.GetActionId());
+       		save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_target_id", drive_complex.GetTarget()->GetId());
+       		save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_action_id", drive_complex.GetActionId());
        	}
 	else 
 	{
-       		save_ptree.put(root+"unresolved.drive_complex_target_id", NONE_ID);
-       		save_ptree.put(root+"unresolved.drive_complex_action_id", NONE_ID);
+       		save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_target_id", NONE_ID);
+       		save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_action_id", NONE_ID);
 	}
 	       	
        	if (place_type_id == ENTITY::NATURELAND_ID) 
        	{
-       		save_ptree.put(root+"unresolved.land_id", land->GetId());
+       		save_ptree.put(root+"data_unresolved_Vehicle.land_id", land->GetId());
        	}
 	else 
 	{
-		save_ptree.put(root+"unresolved.land_id", NONE_ID);
+		save_ptree.put(root+"data_unresolved_Vehicle.land_id", NONE_ID);
 	}
 	
        	if (place_type_id == ENTITY::VEHICLE_SLOT_ID) 
@@ -1235,6 +1258,10 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
 
 void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptree)
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" LoadDataUniqueVehicle()  id=" + int2str(GetId()) + " START");
+	#endif
+	
    	data_korpus.space       = load_ptree.get<int>("data_korpus.space");     
    	data_korpus.armor       = load_ptree.get<int>("data_korpus.armor");   
    	data_korpus.protection  = load_ptree.get<int>("data_korpus.protection"); 
@@ -1251,17 +1278,21 @@ void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptre
    	data_korpus.slot_freezer_num   = load_ptree.get<int>("data_korpus.slot_freezer_num"); 
    	data_korpus.slot_weapon_num    = load_ptree.get<int>("data_korpus.slot_weapon_num"); 
 
-   	data_unresolved_Vehicle.drive_complex_target_id   = load_ptree.get<int>("unresolved.drive_complex_target_id"); 
-   	data_unresolved_Vehicle.drive_complex_action_id   = load_ptree.get<int>("unresolved.drive_complex_action_id");    	
+   	data_unresolved_Vehicle.drive_complex_target_id   = load_ptree.get<int>("data_unresolved_Vehicle.drive_complex_target_id"); 
+   	data_unresolved_Vehicle.drive_complex_action_id   = load_ptree.get<int>("data_unresolved_Vehicle.drive_complex_action_id");    	
    	//data_unresolved_Vehicle.textureOb_gui_path = load_ptree.get<std::string>("data_unresolved_Vehicle.textureOb_gui_path"); 
    	data_unresolved_Vehicle.parent_vehicleslot_id = load_ptree.get<int>("data_unresolved_Vehicle.parent_vehicleslot_id"); 
-   	data_unresolved_Vehicle.land_id = load_ptree.get<int>("unresolved.land_id");
+   	data_unresolved_Vehicle.land_id = load_ptree.get<int>("data_unresolved_Vehicle.land_id");
    	data_unresolved_Vehicle.starsystem_hyper_id = load_ptree.get<int>("data_unresolved_Vehicle.starsystem_hyper_id"); 
    	
 }
 
 void Vehicle::ResolveDataUniqueVehicle()
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" ResolveDataUniqueVehicle()  id=" + int2str(GetId()) + " START");
+	#endif
+	
        	BaseVehicleBuilder::Instance().CreateKorpusGeometry(this);
         CreateDriveComplexTextureDependedStuff();
         if (data_id.subtype_id != ENTITY::ROCKETBULLET_ID)

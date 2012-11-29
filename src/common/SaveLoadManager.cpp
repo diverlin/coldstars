@@ -20,6 +20,13 @@
 #include <boost/property_tree/info_parser.hpp>
 #include "../pilots/Npc.hpp"
 
+//template<typename T>
+//T getValFromPropertyTree(const boost::property_tree::ptree& ptree, const std::string& str)
+//{
+	//std::cout<<str<<std::endl;
+	//return  ptree.get<T>(str);
+//}
+
 SaveLoadManager& SaveLoadManager::Instance()
 {
 	static SaveLoadManager instance;

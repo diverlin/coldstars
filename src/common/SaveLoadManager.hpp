@@ -25,6 +25,9 @@
 #include "../common/EntityManager.hpp"
 #include "../world/starsystem.hpp"
 
+//template<typename T>
+//T Get(const boost::property_tree::ptree&, const std::string&);
+
 class SaveLoadManager
 {
 	public:

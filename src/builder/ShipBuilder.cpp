@@ -64,6 +64,19 @@ Ship* ShipBuilder::GetNewShip(int race_id, int subsubtype_id, int size_id, int w
         return ship;
 }
 
+Ship* ShipBuilder::GetNewShip() const
+{
+	int race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+	int subsubtype_id = ENTITY::WARRIOR_ID;
+	int size_id = getRandInt(1, 9);
+	int weapons_num = size_id;
+        	
+        Ship* ship = GetNewShipTemplate();
+        CreateNewInternals(ship, race_id, subsubtype_id, size_id, weapons_num);     
+        
+        return ship;
+}
+
 void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id, int size_id, int weapons_num) const
 {
 	TextureOb* texOb = TextureManager::Instance().GetRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id); 

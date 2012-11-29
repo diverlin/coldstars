@@ -37,7 +37,7 @@ class BaseLand : public Base
 
 		void SetOwner(BaseSpaceEntity* owner)  { this->owner = owner; } 
 		
-		Base* GetOwner() const { return owner; };
+		BaseSpaceEntity* GetOwner() const { return owner; };
 		virtual bool GetPermissionToLand() const = 0;
 		                
                 virtual bool AddVehicle(Vehicle*) = 0;

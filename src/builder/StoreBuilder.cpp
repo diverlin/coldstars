@@ -25,6 +25,7 @@
 #include "../resources/TextureManager.hpp"
 
 #include "../builder/ItemSlotBuilder.hpp"
+#include "../builder/VehicleSlotBuilder.hpp"
 
 #include "../items/equipment/BakEquipment.hpp"
 #include "../items/equipment/DriveEquipment.hpp"
@@ -50,6 +51,7 @@
 #include "../builder/items/equipment/FreezerEquipmentBuilder.hpp"
 #include "../builder/items/equipment/EnergizerEquipmentBuilder.hpp"
 
+#include "../builder/ShipBuilder.hpp"
 
 StoreBuilder& StoreBuilder::Instance()
 {
@@ -100,6 +102,12 @@ void StoreBuilder::CreateNewInternals(Store* store) const
                 store->AddItemSlot(item_slot);
         }
 
+        for (unsigned int i=0; i<STORE_VEHICLE_SLOTS_NUM; i++)
+        {
+		VehicleSlot* vehicle_slot = GetNewVehicleSlot();
+                store->AddVehicleSlot(vehicle_slot);
+        }
+        
 	store->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TEXTURE::STORE_BACKGROUND_ID));
 }
 
@@ -109,7 +117,8 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
         //int race_id = RACES_GOOD_LIST[getRandInt(0, RACES_GOOD_LIST.size() - 1)];
         //int revision_id = 0;
 
-        //unsigned int korpus_num      = 3;
+        unsigned int vehicle_num     = 3;
+        
         unsigned int lazer_num       = 3;
         unsigned int rocket_num      = 2;
         //unsigned int torped_num      = 2;
@@ -122,7 +131,12 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
         unsigned int scaner_num      = 1;
         unsigned int freezer_num     = 1;
         unsigned int energyBlock_num = 1;
-        
+
+        for (unsigned int i=0; i<vehicle_num; i++)
+        { 
+       		store->AddVehicle(ShipBuilder::Instance().GetNewShip()); 
+        }
+                
         for (unsigned int i=0; i<lazer_num; i++)
         { 
        		store->AddItem(LazerEquipmentBuilder::Instance().GetNewLazerEquipment()); 
