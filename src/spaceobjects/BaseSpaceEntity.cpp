@@ -123,6 +123,10 @@ void BaseSpaceEntity::RenderInfo(const vec2f& center)
 
 void BaseSpaceEntity::SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" SaveDataUniqueBaseSpaceEntity()  id=" + int2str(GetId()) + " START");
+	#endif
+	
 	save_ptree.put(root+"data_life.is_alive",   data_life.is_alive);
 	save_ptree.put(root+"data_life.armor",      data_life.armor);
 	save_ptree.put(root+"data_life.dying_time", data_life.dying_time);
@@ -152,7 +156,9 @@ void BaseSpaceEntity::SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree&
 	if (parent) save_ptree.put(root+"data_unresolved_BaseSpaceEntity.parent_id", parent->GetId());
 	else        save_ptree.put(root+"data_unresolved_BaseSpaceEntity.parent_id", NONE_ID);
 
-	save_ptree.put(root+"data_unresolved_BaseSpaceEntity.starsystem_id", starsystem->GetId());
+	if (starsystem)	save_ptree.put(root+"data_unresolved_BaseSpaceEntity.starsystem_id", starsystem->GetId());
+	else	        save_ptree.put(root+"data_unresolved_BaseSpaceEntity.starsystem_id", NONE_ID);
+		
 	save_ptree.put(root+"place_type_id", place_type_id);
 			
 	save_ptree.put(root+"data_unresolved_BaseSpaceEntity.center.x", points.GetCenter().x);
@@ -164,6 +170,10 @@ void BaseSpaceEntity::SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree&
 
 void BaseSpaceEntity::LoadDataUniqueBaseSpaceEntity(const boost::property_tree::ptree& load_ptree)
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" LoadDataUniqueBaseSpaceEntity()  id=" + int2str(GetId()) + " START");
+	#endif
+	
 	data_life.is_alive   = load_ptree.get<bool>("data_life.is_alive");
 	data_life.armor      = load_ptree.get<int>("data_life.armor");
 	data_life.dying_time = load_ptree.get<int>("data_life.dying_time");
@@ -199,6 +209,10 @@ void BaseSpaceEntity::LoadDataUniqueBaseSpaceEntity(const boost::property_tree::
 
 void BaseSpaceEntity::ResolveDataUniqueBaseSpaceEntity()
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" ResolveDataUniqueBaseSpaceEntity()  id=" + int2str(GetId()) + " START");
+	#endif
+	
 	if (data_unresolved_BaseSpaceEntity.mesh_type_id != NONE_ID)
 	{
 		mesh = MeshCollector::Instance().GetMeshByTypeId(data_unresolved_BaseSpaceEntity.mesh_type_id); 
@@ -211,5 +225,8 @@ void BaseSpaceEntity::ResolveDataUniqueBaseSpaceEntity()
 		parent = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.parent_id);
 	}
 
-	starsystem = (StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id);
+	if (data_unresolved_BaseSpaceEntity.starsystem_id != NONE_ID)
+	{
+		starsystem = (StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id);
+	}
 }

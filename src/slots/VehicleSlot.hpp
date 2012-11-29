@@ -36,7 +36,8 @@ class VehicleSlot : public BaseSlot
                 Vehicle* GetVehicle() const { return vehicle; };
                 void InsertVehicle(Vehicle*);
                 void Release(); 
-        
+        	void SwapVehicle(VehicleSlot*);
+        	
                 void Render(const Rect&) const;
                 
                 virtual void SaveData(boost::property_tree::ptree&) const;

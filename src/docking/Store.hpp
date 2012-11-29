@@ -24,6 +24,8 @@
 class ItemSlot;
 class BaseItem; 
 class Npc;
+class VehicleSlot;
+class Vehicle;
 
 class Store : public Room
 {
@@ -32,21 +34,26 @@ class Store : public Room
                 ~Store();
                 
                 void PutChildsToGarbage() const;
-                
+
+		void AddVehicleSlot(VehicleSlot*);                  
 		void AddItemSlot(ItemSlot*);                
                 bool AddItem(BaseItem*);
-
-                ItemSlot* GetEmptySlot();
-
+                bool AddVehicle(Vehicle*);
+                
+                ItemSlot* GetEmptyItemSlot() const;
+                VehicleSlot* GetEmptyVehicleSlot() const;
+                
                 int BuyItem(BaseItem*); 
+                void SellVehicle(Npc*, VehicleSlot*, int);
                 
                 void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 		
         private:             
-                std::vector<ItemSlot*> slot_total_vec;
-                
+                std::vector<ItemSlot*> item_slot_vec;
+                std::vector<VehicleSlot*> vehicle_slot_vec;
+                                
                 void SaveDataUniqueStore(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueStore(const boost::property_tree::ptree&);
 		void ResolveDataUniqueStore();

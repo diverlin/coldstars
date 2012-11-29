@@ -58,7 +58,8 @@ void Ship::UpdateInfo()
 	info.clear();
 
     	info.addTitleStr("SHIP");
-    	info.addNameStr("id/ss_id:");          	info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->GetId()) );
+    	if (starsystem) {	info.addNameStr("id/ss_id:");          	info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->GetId()) ); }
+    	else     	{	info.addNameStr("id/ss_id:");          	info.addValueStr( int2str(data_id.id) ); }
     	info.addNameStr("race:");   		info.addValueStr( getRaceStr(textureOb->race_id) ); 
     	info.addNameStr("class:");   		info.addValueStr( getTypeStr(data_id.subsubtype_id) );     	
     	info.addNameStr("armor/max:");     	info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) );
@@ -72,7 +73,8 @@ void Ship::UpdateInfo()
     	info.addNameStr("repair:");        	info.addValueStr( int2str(propetries.repair) );
     	info.addNameStr("scan:");        	info.addValueStr( int2str(propetries.scan) );
 	info.addNameStr("speed:");       	info.addValueStr( boost::lexical_cast<std::string>(propetries.speed) );
-
+	info.addNameStr("price:");       	info.addValueStr( int2str(data_korpus.price) );
+	
 	if (propetries.grab_radius > 0)
 	{
 		std::string grab_str = GetGrappleSlot()->GetGrappleEquipment()->GetTargetStr();
@@ -84,8 +86,6 @@ void Ship::UpdateInfo()
 
 	//info.addNameStr("attackR:");       	info.addValueStr( boost::lexical_cast<std::string>(propetries.attack_rate_normalized) );	
 	//info.addNameStr("defenceR:");       	info.addValueStr( boost::lexical_cast<std::string>(propetries.defence_rate_normalized) );	
-
-	
 }
 
 /* virtual */
@@ -184,10 +184,22 @@ void Ship::ResolveData()
 }
 
 void Ship::SaveDataUniqueShip(boost::property_tree::ptree&, const std::string&) const
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" SaveDataUniqueShip()  id=" + int2str(GetId()) + " START");
+	#endif
+}
 
 void Ship::LoadDataUniqueShip(const boost::property_tree::ptree&)
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" LoadDataUniqueShip()  id=" + int2str(GetId()) + " START");
+	#endif
+}
 
 void Ship::ResolveDataUniqueShip()
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" ResolveDataUniqueShip()  id=" + int2str(GetId()) + " START");
+	#endif
+}

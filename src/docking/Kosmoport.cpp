@@ -59,8 +59,7 @@ void Kosmoport::PutChildsToGarbage() const
 void Kosmoport::BindAngar(Angar* angar) 			
 { 
 	this->angar= angar; 
-	this->angar->SetOwnerKosmoport(this);
-	
+	this->angar->SetOwnerKosmoport(this);	
 }
 
 void Kosmoport::BindStore(Store* store) 			
@@ -95,16 +94,14 @@ bool Kosmoport::GetPermissionToLand() const
 /* virtual */
 bool Kosmoport::AddVehicle(Vehicle* vehicle)
 {        
-        angar->AddVehicle(vehicle);        
-
-       	vehicle->SetPlaceTypeId(data_id.type_id); 
-       	vehicle->SetLand(this);
+        angar->AddVehicle(vehicle);  
         
+        vehicle->SetLand(this);        
         if (vehicle->GetStarSystem() == NULL) // used if vehicle added directly after creation
         {
                 vehicle->SetStarSystem(owner->GetStarSystem());
         }
-
+              
         return true;
 }
 

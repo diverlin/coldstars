@@ -74,10 +74,12 @@ class Vehicle : public BaseSpaceEntity
                 VehicleKorpusData& GetKorpusData() { return data_korpus; };
                 			
                 void AddItemSlot(ItemSlot*); 
-
+                
+                bool GetAllItemsFromVehicle(Vehicle*);
+                
                 bool AddItemToCargoSlot(BaseItem*);
                 bool AddAndManageItem(BaseItem*);
-                
+               
                 void ManageItemsInCargo();
                 void SellItemsInCargo();
                 
@@ -212,7 +214,6 @@ class Vehicle : public BaseSpaceEntity
 
         private:
         	bool god_mode;
-        	int price;
         	
                 void RepairKorpusEvent(int);
                  	

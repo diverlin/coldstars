@@ -49,7 +49,7 @@ class Npc : public Base
      		void SetAiModel(BaseAiModel* ai_model)		{ this->ai_model = ai_model; };
 		void SetAlive(bool is_alive)			{ this->is_alive = is_alive; }
 		void SetScanTarget(Vehicle* vehicle_to_scan)	{ this->vehicle_to_scan = vehicle_to_scan; };
-		void SetUpperControl(bool upper_control)       { this->upper_control = upper_control; };
+		void SetUpperControl(bool upper_control)        { this->upper_control = upper_control; };
 		void SetVehicle(Vehicle* vehicle) 		{ this->vehicle = vehicle; };
 
 		int GetRaceId()				const { return race_id; };

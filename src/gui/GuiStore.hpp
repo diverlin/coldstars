@@ -21,7 +21,9 @@
 
 #include "BaseGui.hpp"
 #include "GuiPair.hpp"
-#include "../docking/Store.hpp"
+class Store;
+class ItemSlot;
+class VehicleSlot;
 
 class GuiStore : public BaseGui
 {
@@ -36,7 +38,8 @@ class GuiStore : public BaseGui
         	void RenderSlots(int) const;                
                 
         private:
-              	std::vector<GuiPair<Rect, ItemSlot*>> rect_slot_vec;          
+              	std::vector<GuiPair<Rect, ItemSlot*>> rect_itemslot_vec;          
+              	std::vector<GuiPair<Rect, VehicleSlot*>> rect_vehicleslot_vec;
 };
 
 #endif

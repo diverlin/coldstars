@@ -31,7 +31,8 @@ class ShipBuilder : public BaseVehicleBuilder
 		
 		Ship* GetNewShipTemplate(int id = NONE_ID) const;
                 Ship* GetNewShip(int, int, int, int) const;        
-       
+                Ship* GetNewShip() const;   
+                       
         private:
         	ShipBuilder() {};   	
         	ShipBuilder(const ShipBuilder&) = delete; 
