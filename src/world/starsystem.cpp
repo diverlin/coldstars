@@ -138,13 +138,11 @@ void StarSystem::PutChildsToGarbage() const
 void StarSystem::AddVehicle(Vehicle* vehicle, const vec2f& center, float angle, BaseSpaceEntity* parent)
 {
 	#if STARSYSTEMADDREMOVE_LOG_ENABLED == 1
-	Logger::Instance().Log("starsysten_id="+int2str(GetId())+ " AddVehicle, vehicle_id=" + int2str(vehicle->GetId()));
+	Logger::Instance().Log("starsysten_id="+int2str(GetId())+ " AddVehicle, vehicle_id=" + int2str(vehicle->GetId()), STARSYSTEMADDREMOVE_LOG_DIP);
 	#endif
 	
      	vehicle->SetPlaceTypeId(ENTITY::SPACE_ID);
      	vehicle->SetStarSystem(this);  
-
-	vehicle->SetColor(STAR_vec[0]->GetColor());
 			
 	vehicle->GetPoints().SetCenter(center); 
     	vehicle->GetPoints().SetAngle(angle);   
@@ -188,6 +186,7 @@ void StarSystem::Add(BasePlanet* object, BaseSpaceEntity* parent, int it)
 	{
 		case ENTITY::STAR_ID:
 		{
+			color = ((Star*)object)->GetColor();
 			STAR_vec.push_back((Star*)object);
 			break;
 		}

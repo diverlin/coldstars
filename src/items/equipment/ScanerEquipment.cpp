@@ -19,6 +19,7 @@
 #include "ScanerEquipment.hpp"
 #include "../../common/constants.hpp"
 #include "../../common/myStr.hpp"
+#include "../../common/Logger.hpp"
 #include "../../items/modules/ScanerModule.hpp"
 
 ScanerEquipment::ScanerEquipment(int id)
@@ -106,15 +107,27 @@ void ScanerEquipment::ResolveData()
 
 void ScanerEquipment::SaveDataUniqueScanerEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" SaveDataUniqueScanerEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
         save_ptree.put(root+"scan_orig", scan_orig);
 }
                 
 void ScanerEquipment::LoadDataUniqueScanerEquipment(const boost::property_tree::ptree& load_ptree)
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" LoadDataUniqueScanerEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
         scan_orig = load_ptree.get<int>("scan_orig"); 
 }                
 
 void ScanerEquipment::ResolveDataUniqueScanerEquipment()
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" ResolveDataUniqueScanerEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+}
 
 

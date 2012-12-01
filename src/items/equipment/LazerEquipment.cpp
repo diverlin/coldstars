@@ -19,6 +19,7 @@
 #include "LazerEquipment.hpp"
 #include "../../common/constants.hpp"
 #include "../../common/myStr.hpp"
+#include "../../common/Logger.hpp"
 #include "../../resources/TextureManager.hpp"
 #include "../../items/modules/LazerModule.hpp"
 #include "../../effects/lazerTrace.hpp"
@@ -159,16 +160,28 @@ void LazerEquipment::ResolveData()
 
 void LazerEquipment::SaveDataUniqueLazerEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" SaveDataUniqueLazerEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
         save_ptree.put(root+"damage_orig", damage_orig);
         save_ptree.put(root+"radius_orig", radius_orig);
 }
                 
 void LazerEquipment::LoadDataUniqueLazerEquipment(const boost::property_tree::ptree& load_ptree)
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" LoadDataUniqueLazerEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
         damage_orig = load_ptree.get<int>("damage_orig");     
         radius_orig = load_ptree.get<int>("radius_orig");   
 }                
 
 void LazerEquipment::ResolveDataUniqueLazerEquipment()
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" ResolveDataUniqueLazerEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+}
 

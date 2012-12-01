@@ -19,6 +19,7 @@
 #include "SpaceStation.hpp"
 #include "../common/rand.hpp"
 #include "../common/myStr.hpp"
+#include "../common/Logger.hpp"
 #include "../common/EntityManager.hpp"
 #include "../world/starsystem.hpp"
 #include "../docking/Kosmoport.hpp"
@@ -148,10 +149,22 @@ void SpaceStation::ResolveData()
 }
 
 void SpaceStation::SaveDataUniqueSpaceStation(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" SaveDataUniqueSpaceStation()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+}
 
 void SpaceStation::LoadDataUniqueSpaceStation(const boost::property_tree::ptree& load_ptree)
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" LoadDataUniqueSpaceStation()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+}
 
 void SpaceStation::ResolveDataUniqueSpaceStation()
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" ResolveDataUniqueSpaceStation()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+}

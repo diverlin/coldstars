@@ -284,6 +284,10 @@ void GrappleEquipment::ResolveData()
 
 void GrappleEquipment::SaveDataUniqueGrappleEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" SaveDataUniqueGrappleEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
         save_ptree.put(root+"strength_orig", strength_orig);
         save_ptree.put(root+"radius_orig", radius_orig);
         save_ptree.put(root+"speed_orig", speed_orig);
@@ -291,11 +295,19 @@ void GrappleEquipment::SaveDataUniqueGrappleEquipment(boost::property_tree::ptre
                 
 void GrappleEquipment::LoadDataUniqueGrappleEquipment(const boost::property_tree::ptree& load_ptree)
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" LoadDataUniqueGrappleEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
         strength_orig = load_ptree.get<int>("strength_orig");     
         radius_orig = load_ptree.get<int>("radius_orig");   
         speed_orig = load_ptree.get<int>("speed_orig");           
 }                
 
 void GrappleEquipment::ResolveDataUniqueGrappleEquipment()
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" ResolveDataUniqueGrappleEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+}
 

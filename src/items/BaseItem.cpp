@@ -128,6 +128,10 @@ void BaseItem::Render(const Rect& rect, const vec2f& gui_offset, bool draw_text)
 
 void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" SaveDataUniqueBaseItem()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
         save_ptree.put(root+"price", price);
         save_ptree.put(root+"condition", condition);
         save_ptree.put(root+"locked_turns", locked_turns);
@@ -150,6 +154,10 @@ void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, c
 
 void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_ptree)
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" LoadDataUniqueBaseItem()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
         price = load_ptree.get<int>("price");
         condition = load_ptree.get<int>("condition");
         locked_turns = load_ptree.get<int>("locked_turns");
@@ -169,6 +177,10 @@ void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_pt
                 
 void BaseItem::ResolveDataUniqueBaseItem()
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" ResolveDataUniqueBaseItem()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
 	textureOb = TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path);
 		
 	UpdatePropetries(); // this function must be performed before inserting to slot!!!

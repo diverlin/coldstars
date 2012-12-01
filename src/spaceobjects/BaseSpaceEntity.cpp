@@ -124,7 +124,7 @@ void BaseSpaceEntity::RenderInfo(const vec2f& center)
 void BaseSpaceEntity::SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" SaveDataUniqueBaseSpaceEntity()  id=" + int2str(GetId()) + " START");
+	Logger::Instance().Log(" SaveDataUniqueBaseSpaceEntity()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
 	#endif
 	
 	save_ptree.put(root+"data_life.is_alive",   data_life.is_alive);
@@ -171,7 +171,7 @@ void BaseSpaceEntity::SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree&
 void BaseSpaceEntity::LoadDataUniqueBaseSpaceEntity(const boost::property_tree::ptree& load_ptree)
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" LoadDataUniqueBaseSpaceEntity()  id=" + int2str(GetId()) + " START");
+	Logger::Instance().Log(" LoadDataUniqueBaseSpaceEntity()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
 	#endif
 	
 	data_life.is_alive   = load_ptree.get<bool>("data_life.is_alive");
@@ -210,7 +210,7 @@ void BaseSpaceEntity::LoadDataUniqueBaseSpaceEntity(const boost::property_tree::
 void BaseSpaceEntity::ResolveDataUniqueBaseSpaceEntity()
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" ResolveDataUniqueBaseSpaceEntity()  id=" + int2str(GetId()) + " START");
+	Logger::Instance().Log(" ResolveDataUniqueBaseSpaceEntity()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
 	#endif
 	
 	if (data_unresolved_BaseSpaceEntity.mesh_type_id != NONE_ID)

@@ -19,6 +19,7 @@
 #include "DroidEquipment.hpp"
 #include "../../common/constants.hpp"
 #include "../../common/myStr.hpp"
+#include "../../common/Logger.hpp"
 #include "../../items/modules/DroidModule.hpp"
 #include "../../spaceobjects/Vehicle.hpp"
 #include "../../slots/ItemSlot.hpp"
@@ -122,15 +123,27 @@ void DroidEquipment::ResolveData()
 
 void DroidEquipment::SaveDataUniqueDroidEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" SaveDataUniqueDroidEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
         save_ptree.put(root+"repair_orig", repair_orig);
 }
                 
 void DroidEquipment::LoadDataUniqueDroidEquipment(const boost::property_tree::ptree& load_ptree)
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" LoadDataUniqueDroidEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
         repair_orig = load_ptree.get<int>("repair_orig");
 }                
 
 void DroidEquipment::ResolveDataUniqueDroidEquipment()
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" ResolveDataUniqueDroidEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+}
 
 

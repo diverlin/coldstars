@@ -46,8 +46,8 @@ int main()
         Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy();
 	Player* player = PlayerBuilder::Instance().GetNewPlayer();
 
-        bool put_into_space = false;
-        if (put_into_space == true)
+        bool player2space = true;
+        if (player2space == true)
         {
                 vec2f center(400, 400);
                 float angle = 0;  
@@ -58,6 +58,7 @@ int main()
                 galaxy->GetRandomStarSystem()->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
         }
         
+        player->GetNpc()->GetVehicle()->SetGodMode(true);
         player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
 
 	//Screen::Instance().Resize(Config::Instance().SCREEN_WIDTH/1.5, Config::Instance().SCREEN_HEIGHT);

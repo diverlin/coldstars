@@ -19,6 +19,7 @@
 #include "ProtectorEquipment.hpp"
 #include "../../common/constants.hpp"
 #include "../../common/myStr.hpp"
+#include "../../common/Logger.hpp"
 #include "../../items/modules/ProtectorModule.hpp"
 
 ProtectorEquipment::ProtectorEquipment(int id)
@@ -104,15 +105,27 @@ void ProtectorEquipment::ResolveData()
 
 void ProtectorEquipment::SaveDataUniqueProtectorEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" SaveDataUniqueProtectorEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
         save_ptree.put(root+"protection_orig", protection_orig);
 }
                 
 void ProtectorEquipment::LoadDataUniqueProtectorEquipment(const boost::property_tree::ptree& load_ptree)
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" LoadDataUniqueProtectorEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
         protection_orig = load_ptree.get<int>("protection_orig");     
 }                
 
 void ProtectorEquipment::ResolveDataUniqueProtectorEquipment()
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" ResolveDataUniqueProtectorEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+}
 
 

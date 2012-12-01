@@ -186,20 +186,20 @@ void Ship::ResolveData()
 void Ship::SaveDataUniqueShip(boost::property_tree::ptree&, const std::string&) const
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" SaveDataUniqueShip()  id=" + int2str(GetId()) + " START");
+	Logger::Instance().Log(" SaveDataUniqueShip()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
 	#endif
 }
 
 void Ship::LoadDataUniqueShip(const boost::property_tree::ptree&)
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" LoadDataUniqueShip()  id=" + int2str(GetId()) + " START");
+	Logger::Instance().Log(" LoadDataUniqueShip()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
 	#endif
 }
 
 void Ship::ResolveDataUniqueShip()
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" ResolveDataUniqueShip()  id=" + int2str(GetId()) + " START");
+	Logger::Instance().Log(" ResolveDataUniqueShip()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
 	#endif
 }

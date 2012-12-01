@@ -56,7 +56,7 @@ class BaseSlot : public Base
 		Base* GetOwner() const { return owner; };
 		
         protected:
-                bool equiped;  
+                bool equiped;               
                 bool selected;                     
                 
                 TextureOb* textureOb;
