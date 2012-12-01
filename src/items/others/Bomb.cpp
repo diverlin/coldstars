@@ -19,6 +19,7 @@
 #include "Bomb.hpp"
 #include "../../common/constants.hpp"
 #include "../../common/myStr.hpp"
+#include "../../common/Logger.hpp"
 
 Bomb::Bomb(int id)
 { 
@@ -82,17 +83,29 @@ void Bomb::ResolveData()
 
 void Bomb::SaveDataUniqueBomb(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" SaveDataUniqueBomb()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
         save_ptree.put(root+"damage", damage);
         save_ptree.put(root+"radius", radius);
 }
  		
 void Bomb::LoadDataUniqueBomb(const boost::property_tree::ptree& load_ptree)
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" LoadDataUniqueBomb()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
         damage = load_ptree.get<int>("damage");
         radius = load_ptree.get<int>("radius");
 }
 
 void Bomb::ResolveDataUniqueBomb()
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" ResolveDataUniqueBomb()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+}
 
 

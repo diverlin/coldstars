@@ -160,6 +160,7 @@ void Player::AddIfVisible(Vehicle* vehicle)
         {	  
                 if ( npc->GetVehicle()->IsObjectWithinRadarRange(vehicle) )
                 {
+                	vehicle->SetColor(vehicle->GetStarSystem()->GetColor());
 			switch(vehicle->GetSubTypeId())
 			{			
 				case ENTITY::SHIP_ID:         { visible_SHIP_vec.push_back((Ship*)vehicle); break; }

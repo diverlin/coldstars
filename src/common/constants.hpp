@@ -29,15 +29,17 @@
 	#define WEAPONSTARGET_LOG_ENABLED 0
 	#define AISCENARIO_LOG_ENABLED 0
 	#define SAVELOAD_LOG_ENABLED 1
-	#define STARSYSTEMADDREMOVE_LOG_ENABLED 0
+	#define STARSYSTEMADDREMOVE_LOG_ENABLED 1
 	#define CREATEDESTROY_LOG_ENABLED 0
-
+	#define UPDATEVEHICLEPROPETRIES_LOG_ENABLED 1
+	
 	const int GRAPPLE_QUEUE_LOG_DIP = 1;
 	const int DRIVECOMPLEX_LOG_DIP = 1;
 	const int STARSYSTEMADDREMOVE_LOG_DIP = 1;
 	const int AISCENARIO_LOG_DIP = 2;
 	const int SAVELOAD_LOG_DIP = 1;
 	const int CREATEDESTROY_LOG_DIP = 0;
+	const int UPDATEVEHICLEPROPETRIES_LOG_DIP = 2;
 #endif
 
 #define DEBUG_ITEMDAMAGELOCKVIAGUI 1  // 1 - is locking/unlocking item by right mouse click; 2 - is damaging/undamaging item by right mouse click
@@ -274,11 +276,11 @@ namespace ENTITY
 	{
 		const int PARSEC = 200;
 				
-		const int STARSYSTEM_SEGMENT_WIDTH_NUM = 1;
-		const int STARSYSTEM_SEGMENT_HEIGHT_NUM = 1;
+		const int STARSYSTEM_SEGMENT_WIDTH_NUM = 2;
+		const int STARSYSTEM_SEGMENT_HEIGHT_NUM = 2;
 
-		const int STARSYSTEM_INSEGMENT_NUM_MIN = 1;
-		const int STARSYSTEM_INSEGMENT_NUM_MAX = 1;
+		const int STARSYSTEM_INSEGMENT_NUM_MIN = 2;
+		const int STARSYSTEM_INSEGMENT_NUM_MAX = 3;
 
 		const int DISTANTSTAR_SIZE_MIN = 3; 
 		const int DISTANTSTAR_SIZE_MAX = 15;

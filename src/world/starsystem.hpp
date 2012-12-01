@@ -63,6 +63,7 @@ class StarSystem : public BaseSpaceEntity
 
 		void SetGalaxy(Galaxy* galaxy)  { this->galaxy = galaxy; };
 						
+		const Color4f& GetColor() const { return color; };
 		//bool GetDetailedSimulationFlag() const { return detalied_simulation; };
 		int GetConditionId()     const { return condition_id; };
 		int GetRaceId()          const { return race_id; };
@@ -127,6 +128,7 @@ class StarSystem : public BaseSpaceEntity
     		int condition_id;
     		
     		Galaxy* galaxy;
+    		Color4f color;
     	
     		// ENTITY VECTORS
 		//std::vector<Player*> 	   PLAYER_vec;

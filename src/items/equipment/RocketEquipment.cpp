@@ -20,6 +20,7 @@
 #include "../../common/constants.hpp"
 #include "../../common/rand.hpp"
 #include "../../common/myStr.hpp"
+#include "../../common/Logger.hpp"
 #include "../../items/modules/RocketModule.hpp"
 #include "../../builder/RocketBulletBuilder.hpp"
 #include "../../world/starsystem.hpp"
@@ -229,6 +230,10 @@ void RocketEquipment::ResolveData()
 
 void RocketEquipment::SaveDataUniqueRocketEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" SaveDataUniqueRocketEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
         save_ptree.put(root+"ammo_max_orig", ammo_max_orig);
         save_ptree.put(root+"ammo", ammo);
         save_ptree.put(root+"damage_orig", damage_orig);
@@ -240,6 +245,10 @@ void RocketEquipment::SaveDataUniqueRocketEquipment(boost::property_tree::ptree&
                 
 void RocketEquipment::LoadDataUniqueRocketEquipment(const boost::property_tree::ptree& load_ptree)
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" LoadDataUniqueRocketEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
         ammo_max_orig = load_ptree.get<int>("ammo_max_orig"); 
         ammo = load_ptree.get<int>("ammo"); 
         damage_orig = load_ptree.get<int>("damage_orig");  
@@ -251,6 +260,10 @@ void RocketEquipment::LoadDataUniqueRocketEquipment(const boost::property_tree::
 
 void RocketEquipment::ResolveDataUniqueRocketEquipment()
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" ResolveDataUniqueRocketEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
         data_bullet.ResolveData();
 }
 

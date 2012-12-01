@@ -19,6 +19,7 @@
 #include "GravityArtefact.hpp"
 #include "../../common/constants.hpp"
 #include "../../common/myStr.hpp"
+#include "../../common/Logger.hpp"
 
 GravityArtefact::GravityArtefact(int id)
 {
@@ -73,13 +74,25 @@ void GravityArtefact::ResolveData()
 		
 void GravityArtefact::SaveDataUniqueGravityArtefact(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" SaveDataUniqueGravityArtefact()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
         save_ptree.put(root+"gravity", gravity); 
 }
 
 void GravityArtefact::LoadDataUniqueGravityArtefact(const boost::property_tree::ptree& load_ptree)
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" LoadDataUniqueGravityArtefact()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+	
 	gravity = load_ptree.get<int>("gravity");
 }
 
 void GravityArtefact::ResolveDataUniqueGravityArtefact()
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" ResolveDataUniqueGravityArtefact()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+}

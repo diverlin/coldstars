@@ -19,6 +19,7 @@
 #include "GoodsPack.hpp"
 #include "../../common/constants.hpp"
 #include "../../common/myStr.hpp"
+#include "../../common/Logger.hpp"
 
 #include "../../common/id.hpp"
 #include "../../common/EntityManager.hpp"
@@ -90,13 +91,25 @@ void GoodsPack::ResolveData()
 }
 
 void GoodsPack::SaveDataUniqueGoodsPack(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" SaveDataUniqueGoodsPack()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+}
  		
 void GoodsPack::LoadDataUniqueGoodsPack(const boost::property_tree::ptree& load_ptree)
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" LoadDataUniqueGoodsPack()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+}
 
 void GoodsPack::ResolveDataUniqueGoodsPack()
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" ResolveDataUniqueGoodsPack()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	#endif
+}
 
 
 GoodsPack* GetNewGoodsPack(int subtype_id, int id)

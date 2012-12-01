@@ -742,6 +742,10 @@ void Vehicle::UpdateAllFunctionalItemsInStatic()
 
 void Vehicle::IncreaseMass(int d_mass)
 {
+	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
+	Logger::Instance().Log(" IncreaseMass()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#endif
+	
 	mass += d_mass;
     	propetries.free_space = data_korpus.space - mass;
 	UpdatePropertiesSpeed(); // as the mass influence speed this action is necessary here
@@ -749,6 +753,10 @@ void Vehicle::IncreaseMass(int d_mass)
 
 void Vehicle::DecreaseMass(int d_mass)
 {
+	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
+	Logger::Instance().Log(" DecreaseMass()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#endif
+	
 	mass -= d_mass;
     	propetries.free_space = data_korpus.space - mass;
 	UpdatePropertiesSpeed(); // as the mass influence speed this action is necessary here
@@ -756,6 +764,10 @@ void Vehicle::DecreaseMass(int d_mass)
 
 void Vehicle::UpdatePropertiesSpeed()
 {
+	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
+	Logger::Instance().Log(" UpdatePropertiesSpeed()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#endif
+	
      	// speed calculation ////
      	propetries.speed = 0;
 
@@ -794,12 +806,20 @@ void Vehicle::UpdatePropertiesSpeed()
 
 void Vehicle::UpdatePropertiesFire()
 {
+	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
+	Logger::Instance().Log(" UpdatePropertiesFire()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#endif
+	
      	weapon_complex.UpdateFireAbility();
      	weapon_complex.PrepareWeapons();
 }
 
 void Vehicle::UpdatePropertiesRadar()
 {
+	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
+	Logger::Instance().Log(" UpdatePropertiesRadar()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#endif
+	
         propetries.radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
         propetries.equipment_radar = false;
 	
@@ -816,7 +836,11 @@ void Vehicle::UpdatePropertiesRadar()
 
 
 void Vehicle::UpdatePropertiesJump()
-{    
+{
+	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
+	Logger::Instance().Log(" UpdatePropertiesJump()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#endif
+	    
 	propetries.hyper = 0;
 
      	if (drive_complex.GetDriveSlot()->GetEquiped() == true)
@@ -840,6 +864,10 @@ void Vehicle::UpdatePropertiesJump()
 
 //void Vehicle::UpdateEnergyAbility()
 //{
+	//#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
+	//Logger::Instance().Log(" UpdateEnergyAbility()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	//#endif
+	
      	//propetries.energy = 0;
      	//ableTo.ENERGIZE = false;
 
@@ -855,6 +883,10 @@ void Vehicle::UpdatePropertiesJump()
 
 void Vehicle::UpdatePropertiesProtection()
 {
+	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
+	Logger::Instance().Log(" UpdatePropertiesProtection()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#endif
+	
         propetries.protection = data_korpus.protection;
         propetries.equipment_protector = false;
 
@@ -875,6 +907,10 @@ void Vehicle::UpdatePropertiesProtection()
 
 void Vehicle::UpdatePropertiesRepair()
 {
+	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
+	Logger::Instance().Log(" UpdatePropertiesRepair()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#endif
+	
      	propetries.repair = 0;
 
      	if (droid_slot->GetEquiped() == true)
@@ -889,6 +925,10 @@ void Vehicle::UpdatePropertiesRepair()
 
 void Vehicle::IncreaseArmor(int repair)
 {
+	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
+	Logger::Instance().Log(" IncreaseArmor()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#endif
+	
 	data_life.armor += repair;
 	
 	if (data_life.armor > data_korpus.armor)
@@ -899,6 +939,10 @@ void Vehicle::IncreaseArmor(int repair)
 
 //void Vehicle::UpdateFreezeAbility()
 //{
+	//#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
+	//Logger::Instance().Log(" UpdateFreezeAbility()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	//#endif
+	
      	//propetries.freeze = 0;
      	//ableTo.FREEZE = false;
 
@@ -914,6 +958,10 @@ void Vehicle::IncreaseArmor(int repair)
 
 void Vehicle::UpdatePropertiesScan()
 {
+	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
+	Logger::Instance().Log(" UpdatePropertiesScan()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#endif
+	
      	propetries.scan = 0;
 
      	if (scaner_slot->GetEquiped() == true)
@@ -927,6 +975,10 @@ void Vehicle::UpdatePropertiesScan()
 
 void Vehicle::UpdatePropertiesGrab()
 {
+	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
+	Logger::Instance().Log(" UpdatePropertiesGrab()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#endif
+
         propetries.grab_strength = 0;
         propetries.grab_radius = 0;
                       			      			
@@ -945,6 +997,10 @@ void Vehicle::UpdatePropertiesGrab()
         
 void Vehicle::UpdateArtefactInfluence()
 {
+	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
+	Logger::Instance().Log(" UpdateArtefactInfluence()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#endif
+	
 	propetries.artefact_gravity = 0;
 	propetries.artefact_protection = 0;
 	
@@ -1197,7 +1253,7 @@ void Vehicle::UpdateGrappleMicroProgram()
 void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" SaveDataUniqueVehicle()  id=" + int2str(GetId()) + " START");
+	Logger::Instance().Log(" SaveDataUniqueVehicle()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
 	#endif
 
        	save_ptree.put(root+"data_korpus.space", data_korpus.space);       	
@@ -1259,7 +1315,7 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
 void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptree)
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" LoadDataUniqueVehicle()  id=" + int2str(GetId()) + " START");
+	Logger::Instance().Log(" LoadDataUniqueVehicle()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
 	#endif
 	
    	data_korpus.space       = load_ptree.get<int>("data_korpus.space");     
@@ -1290,12 +1346,12 @@ void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptre
 void Vehicle::ResolveDataUniqueVehicle()
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" ResolveDataUniqueVehicle()  id=" + int2str(GetId()) + " START");
+	Logger::Instance().Log(" ResolveDataUniqueVehicle()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
 	#endif
 	
        	BaseVehicleBuilder::Instance().CreateKorpusGeometry(this);
         CreateDriveComplexTextureDependedStuff();
-        if (data_id.subtype_id != ENTITY::ROCKETBULLET_ID)
+        if (data_id.subtype_id != ENTITY::ROCKETBULLET_ID) // remove this
         {
         	CreateProtectionComplexTextureDependedStuff();
         }
@@ -1314,7 +1370,7 @@ void Vehicle::ResolveDataUniqueVehicle()
         {
         	case ENTITY::SPACE_ID: 
         	{
-			((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddVehicle(this, data_unresolved_BaseSpaceEntity.center, data_unresolved_BaseSpaceEntity.angle, parent); 
+			starsystem->AddVehicle(this, data_unresolved_BaseSpaceEntity.center, data_unresolved_BaseSpaceEntity.angle, parent); 
 			break;
 		}
 		

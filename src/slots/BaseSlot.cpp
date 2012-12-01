@@ -23,15 +23,12 @@
 
 #include "../spaceobjects/Vehicle.hpp"
 
-BaseSlot::BaseSlot()
-{
-        equiped = false;
-        selected = false;
-
-        owner   = NULL; 
-
-        textureOb  = NULL;
-}
+BaseSlot::BaseSlot():
+equiped(false),
+selected(false),
+owner(NULL),
+textureOb(NULL)
+{}
 
 /* virtual */
 BaseSlot::~BaseSlot()
