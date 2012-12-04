@@ -49,6 +49,4 @@ class GuiVehicle2 : public BaseGui
         	Vehicle* vehicle;
 };
 
-
-
 #endif
