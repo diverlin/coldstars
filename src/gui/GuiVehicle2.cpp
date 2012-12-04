@@ -122,11 +122,17 @@ void GuiVehicle2::ButtonsAction(Player* player) const
 	{
 		if (button_slot_vec[i].first->GetPressed() == true)
 		{
-			button_slot_vec[i].second->SelectEvent();
+			if (button_slot_vec[i].second->GetSelected() == false)
+			{
+				button_slot_vec[i].second->SelectEvent();
+			}
 		}
 		else
 		{
-			button_slot_vec[i].second->DeselectEvent();
+			if (button_slot_vec[i].second->GetSelected() == true)
+			{
+				button_slot_vec[i].second->DeselectEvent();
+			}
 		}       		
 	}
 }
