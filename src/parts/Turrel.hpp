@@ -24,6 +24,7 @@ class BaseSpaceEntity;
 class TextureOb;
 
 #include "../common/points.hpp"
+#include "../common/constants.hpp"
 
 class Turrel
 {
@@ -33,17 +34,18 @@ class Turrel
 
                 void SetTextureOb(TextureOb* textureOb)	{ this->textureOb = textureOb; };
                               
-                void SetTarget(BaseSpaceEntity* target) 	{ this->target = target; };
-                void SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget) { this->target = target; this->subtarget = subtarget; };
+                void SetTarget(BaseSpaceEntity* target) 			{ this->target = target; };
+                void SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget) 	{ this->target = target; this->subtarget = subtarget; };
                 
                 Points& GetPoints()		{ return points; };
                 
                 BaseSpaceEntity* GetTarget() const { return target; };
                 ItemSlot* GetSubTarget() const { return subtarget; };
-                       
+
+
+                void ValidateTarget();                    
                 void ResetTarget();
-                       
-                void CheckTarget();                
+           
                 bool CheckAmmo() const;
                 
                 bool FireEvent(int, bool);
