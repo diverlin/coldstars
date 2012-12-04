@@ -109,7 +109,7 @@ class ItemSlot : public BaseSlot
                 void UpdateRange(TextureOb*);
            	void DrawRange(const vec2f&);
            	
-           	bool CheckTarget(BaseSpaceEntity*) const;
+           	bool CheckTarget(BaseSpaceEntity* target, ItemSlot* subtarget = NULL) const;
         
         	void SelectEvent();
         	void DeselectEvent();

@@ -18,6 +18,8 @@
 
 #include "WeaponComplex.hpp"
 #include "../common/rand.hpp"
+#include "../common/Logger.hpp"
+#include "../common/myStr.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 
@@ -205,14 +207,20 @@ void WeaponComplex::SetTarget(BaseSpaceEntity* target)
 {                          
         float dist = distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), target->GetPoints().GetCenter());
         
+        #if WEAPONSTARGET_LOG_ENABLED == 1 
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" WeaponComplex::SetTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), WEAPONSTARGET_LOG_DIP); 
+	#endif   
+	
         for (unsigned int i = 0; i < slot_weapon_equiped_vec.size(); i++)
         {
         	if (slot_weapon_equiped_vec[i]->GetSelected() == true )
         	{
            		if ( slot_weapon_equiped_vec[i]->GetTurrel()->GetTarget() == NULL )
            		{
-         			slot_weapon_equiped_vec[i]->GetTurrel()->SetTarget(target);
-                                slot_weapon_equiped_vec[i]->GetTurrel()->CheckTarget();                                        
+           			if (slot_weapon_equiped_vec[i]->CheckTarget(target) == true)
+         			{
+         				slot_weapon_equiped_vec[i]->GetTurrel()->SetTarget(target);
+                                }
                         }
                 } 
         }
@@ -222,14 +230,20 @@ void WeaponComplex::SetPreciseFireTarget(BaseSpaceEntity* target, ItemSlot* item
 {                          
         float dist = distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), target->GetPoints().GetCenter());
         
+        #if WEAPONSTARGET_LOG_ENABLED == 1 
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+ " WeaponComplex::SetPreciseFireTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " item_subtype_id=" + getTypeStr(item_slot->GetItem()->GetSubTypeId()) + " id=" + int2str(item_slot->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
+	#endif   
+	
         for (unsigned int i=0; i<slot_weapon_equiped_vec.size(); i++)
         {
         	if (slot_weapon_equiped_vec[i]->GetSelected() == true)
         	{
            		if (slot_weapon_equiped_vec[i]->GetTurrel()->GetTarget() == NULL)
            		{
-         			slot_weapon_equiped_vec[i]->GetTurrel()->SetTarget(target, item_slot);
-                                slot_weapon_equiped_vec[i]->GetTurrel()->CheckTarget();                                        
+           		        if (slot_weapon_equiped_vec[i]->CheckTarget(target, item_slot) == true)
+         			{
+         				slot_weapon_equiped_vec[i]->GetTurrel()->SetTarget(target, item_slot);
+                        	}
                         }
                 } 
         }
@@ -241,7 +255,7 @@ void WeaponComplex::Fire(int timer, int attack_skill, bool show_effect)
      	{
         	for (std::vector<ItemSlot*>::iterator it=slot_weapon_reloaded_vec.begin(); it<slot_weapon_reloaded_vec.end(); it++)
         	{	
-                        (*it)->GetTurrel()->CheckTarget();
+                        (*it)->GetTurrel()->ValidateTarget();
                         if ((*it)->GetTurrel()->GetTarget() != NULL)
                         {
       				(*it)->GetTurrel()->FireEvent(attack_skill, show_effect);
@@ -264,7 +278,7 @@ void WeaponComplex::ValidateAllWeaponsTarget()
                 {
          		if (slot_weapon_vec[i]->GetEquiped() == true) 
                 	{
-             			slot_weapon_reloaded_vec[i]->GetTurrel()->CheckTarget();
+             			slot_weapon_reloaded_vec[i]->GetTurrel()->ValidateTarget();
                 	}
                 	else
                 	{

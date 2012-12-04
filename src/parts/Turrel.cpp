@@ -22,6 +22,7 @@
 #include "../slots/ItemSlot.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../common/myStr.hpp"
+#include "../common/Logger.hpp"
 
 #include "../world/starsystem.hpp"
 #include "../render/Render.hpp"
@@ -31,22 +32,22 @@ Turrel::Turrel(ItemSlot* slot)
 {
         this->slot = slot;
       
-        target  = NULL;
+        target    = NULL;
         subtarget = NULL;
 }
 
 Turrel::~Turrel()
 {}
 
-void Turrel::CheckTarget()
+void Turrel::ValidateTarget()
 {
+        #if WEAPONSTARGET_LOG_ENABLED == 1 
+	Logger::Instance().Log("vehicle_id="+int2str(slot->GetOwnerVehicle()->GetId())+" Turrel::ValidateTarget", WEAPONSTARGET_LOG_DIP); 
+	#endif 
+	
         if (target != NULL)
         {
-                if (slot->CheckTarget(target) == true)
-                {
-                        return;
-                }
-                else
+                if (slot->CheckTarget(target) == false)
                 {
                         ResetTarget();
                 }
@@ -55,7 +56,11 @@ void Turrel::CheckTarget()
 
 void Turrel::ResetTarget()
 { 
-	target = NULL; 
+        #if WEAPONSTARGET_LOG_ENABLED == 1 
+	Logger::Instance().Log("vehicle_id="+int2str(slot->GetOwnerVehicle()->GetId())+" Turrel::ResetTarget", WEAPONSTARGET_LOG_DIP); 
+	#endif 
+	
+	target    = NULL; 
 	subtarget = NULL; 
 }
 
@@ -72,7 +77,14 @@ bool Turrel::CheckAmmo() const
 
 
 bool Turrel::FireEvent(int attack_skill, bool show_effect)
-{       			
+{    
+        #if WEAPONSTARGET_LOG_ENABLED == 1 
+        if (subtarget == NULL)
+        Logger::Instance().Log("vehicle_id="+int2str(slot->GetOwnerVehicle()->GetId())+" Turrel::FireEvent type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), WEAPONSTARGET_LOG_DIP); 
+        else
+	Logger::Instance().Log("vehicle_id="+int2str(slot->GetOwnerVehicle()->GetId())+" Turrel::FireEvent type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " itemslot_subtype_id=" + getTypeStr(subtarget->GetItem()->GetSubTypeId()) + " id=" + int2str(subtarget->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
+	#endif   
+	   			
 	switch(slot->GetItem()->GetSubTypeId())
 	{
     		case ENTITY::LAZER_EQUIPMENT_ID:
@@ -95,6 +107,7 @@ bool Turrel::FireEvent(int attack_skill, bool show_effect)
        			if (target->GetAlive() == false)
        			{
        				slot->GetOwnerVehicle()->GetOwnerNpc()->AddExpirience(target->GetGivenExpirience(), show_effect);
+       				ResetTarget();
        			}
        			
        			return true; break;  

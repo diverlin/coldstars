@@ -319,15 +319,15 @@ void ItemSlot::DrawRange(const vec2f& offset)
     	range_visual.Draw(offset);
 }
 
-bool ItemSlot::CheckTarget(BaseSpaceEntity* _target) const
+bool ItemSlot::CheckTarget(BaseSpaceEntity* target, ItemSlot* subtarget) const
 {
-        if (CheckAlive(_target) == true)
+        if (CheckAlive(target) == true)
         {
-        	if (CheckPlaceTypeId(_target) == true)
+        	if (CheckPlaceTypeId(target) == true)
         	{
-                	if (CheckStarSystem(_target) == true)
+                	if (CheckStarSystem(target) == true)
                 	{
-                        	if (CheckDistance(_target) == true)
+                        	if (CheckDistance(target) == true)
                         	{
                                 	return true;
                         	}
