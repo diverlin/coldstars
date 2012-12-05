@@ -111,18 +111,18 @@ void LazerEquipment::FireEvent(bool show_effect)
     		{
         		_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
                         	                             	      item_slot->GetTurrel()->GetPoints().GetpCenter(), 
-                                	                              item_slot->GetTurrel()->GetTarget()->GetPoints().GetpCenter());
+                                	                              item_slot->GetTarget()->GetPoints().GetpCenter());
         	}
     		else
     		{
         		_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
                         	                                      item_slot->GetOwnerVehicle()->GetPoints().GetpCenter(), 
-                                	                              item_slot->GetTurrel()->GetTarget()->GetPoints().GetpCenter());
+                                	                              item_slot->GetTarget()->GetPoints().GetpCenter());
         	}
     		item_slot->GetOwnerVehicle()->GetStarSystem()->Add(_lazer_trace_effect);
     	    
     		// DamageEffect
-		DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, item_slot->GetTurrel()->GetTarget());
+		DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, item_slot->GetTarget());
     		_lazer_trace_effect->setDamageEffect(_damage_effect);
     		item_slot->GetOwnerVehicle()->GetStarSystem()->Add(_damage_effect);
 	}

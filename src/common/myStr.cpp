@@ -134,6 +134,8 @@ std::string getTypeStr(int type_id)
 		case ENTITY::ANGAR_ID: 		{ return "ANGAR_ID"; break; }
 		
 		case ENTITY::VEHICLE_SLOT_ID: 		{ return "VEHICLE_SLOT_ID"; break; }
+		case ENTITY::VEHICLE_MILITARY_SLOT_ID: 		{ return "VEHICLE_MILITARY_SLOT_ID"; break; }
+		case ENTITY::VEHICLE_VISITORS_SLOT_ID: 		{ return "VEHICLE_VISITORS_SLOT_ID"; break; }
 		case ENTITY::ITEM_SLOT_ID: 		{ return "ITEM_SLOT_ID"; break; }
 		
 		case ENTITY::CARGO_SLOT_ID: 		{ return "CARGO_SLOT_ID"; break; }	
@@ -175,7 +177,7 @@ std::string getTypeStr(int type_id)
 		case ENTITY::DROID_EQUIPMENT_ID: 	{ return "DROID_EQUIPMENT_ID"; break; }
 		case ENTITY::FREEZER_EQUIPMENT_ID: 	{ return "FREEZER_EQUIPMENT_ID"; break; }
 		case ENTITY::GRAPPLE_EQUIPMENT_ID: 	{ return "GRAPPLE_EQUIPMENT_ID"; break; }
-		case ENTITY::SCANER_EQUIPMENT_ID: 	{ return "GRAPPLE_EQUIPMENT_ID"; break; }
+		case ENTITY::SCANER_EQUIPMENT_ID: 	{ return "SCANER_EQUIPMENT_ID"; break; }
 
 		case ENTITY::LAZER_MODULE_ID: 		{ return "LAZER_MODULE_ID"; break; }
 		case ENTITY::ROCKET_MODULE_ID: 	{ return "ROCKET_MODULE_ID"; break; }

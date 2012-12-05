@@ -194,6 +194,11 @@ void EntityManager::SaveEvent()
 {
 	boost::property_tree::ptree save_ptree;
 	
+	for (unsigned int i=ENTITY::ENUM_START+1; i<ENTITY::ENUM_END; i++)
+	{
+		save_ptree.put(getTypeStr(i), i);
+	}
+	
 	for (std::map<int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
 	{
 		#if SAVELOAD_LOG_ENABLED == 1

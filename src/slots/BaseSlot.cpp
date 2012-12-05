@@ -20,6 +20,7 @@
 #include "../common/constants.hpp"
 #include "../common/myStr.hpp"
 #include "../common/Logger.hpp"
+#include "../common/EntityManager.hpp"
 
 #include "../spaceobjects/Vehicle.hpp"
 
@@ -40,14 +41,8 @@ BaseSlot::~BaseSlot()
                 
 void BaseSlot::SaveDataUniqueBaseSlot(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {       
-        if (owner) 
-        {   	
-        	save_ptree.put(root+"unresolved.owner_id", owner->GetId());
-        }
-        else
-        {
-                save_ptree.put(root+"unresolved.owner_id", NONE_ID);	
-	}
+        if (owner) { save_ptree.put(root+"unresolved.owner_id", owner->GetId()); }
+        else       { save_ptree.put(root+"unresolved.owner_id", NONE_ID); }
 	
 	save_ptree.put(root+"position.x", position.x);
 	save_ptree.put(root+"position.y", position.y);
@@ -61,4 +56,8 @@ void BaseSlot::LoadDataUniqueBaseSlot(const boost::property_tree::ptree& load_pt
 }
 
 void BaseSlot::ResolveDataUniqueBaseSlot()
-{}
+{
+	owner = EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id);
+}
+
+

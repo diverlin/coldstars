@@ -33,22 +33,8 @@ class Turrel
                 ~Turrel();
 
                 void SetTextureOb(TextureOb* textureOb)	{ this->textureOb = textureOb; };
-                              
-                void SetTarget(BaseSpaceEntity* target) 			{ this->target = target; };
-                void SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget) 	{ this->target = target; this->subtarget = subtarget; };
                 
-                Points& GetPoints()		{ return points; };
-                
-                BaseSpaceEntity* GetTarget() const { return target; };
-                ItemSlot* GetSubTarget() const { return subtarget; };
-
-
-                void ValidateTarget();                    
-                void ResetTarget();
-           
-                bool CheckAmmo() const;
-                
-                bool FireEvent(int, bool);
+                Points& GetPoints() { return points; };
                 
                 void Render(float);                 
                
@@ -56,8 +42,6 @@ class Turrel
                 TextureOb* textureOb;
                         
                 ItemSlot* slot;
-                BaseSpaceEntity* target;
-                ItemSlot* subtarget;              
                
                 Points points;         
 }; 
