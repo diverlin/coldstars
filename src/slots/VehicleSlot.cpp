@@ -112,7 +112,6 @@ void VehicleSlot::LoadDataUniqueVehicleSlot(const boost::property_tree::ptree& l
 
 void VehicleSlot::ResolveDataUniqueVehicleSlot()
 {
-	owner = EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id);
         switch(owner->GetTypeId())
         {
 	       //case ENTITY::VEHICLE_ID: 	{ ((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }

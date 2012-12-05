@@ -22,6 +22,7 @@
 #include "../common/myStr.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../spaceobjects/Container.hpp"
+#include "../pilots/Npc.hpp"
 #include "../render/Render.hpp"
 #include "../world/starsystem.hpp"
 #include "../resources/TextureManager.hpp"
@@ -53,7 +54,11 @@ ItemSlot::ItemSlot(int id)
 	data_id.id         = id;
         data_id.type_id    = ENTITY::ITEM_SLOT_ID;
                         
-        turrel     = NULL;                
+        turrel     = NULL;   
+                      
+        target    = NULL;
+        subtarget = NULL;
+                     
         item   	   = NULL;
 }
 
@@ -76,6 +81,103 @@ void ItemSlot::PutChildsToGarbage() const
 		
 		EntityGarbage::Instance().Add(item);
 	}
+}
+
+void ItemSlot::SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget) 	
+{ 
+	#if WEAPONSTARGET_LOG_ENABLED == 1 
+        if (subtarget == NULL)
+        Logger::Instance().Log("vehicle_id="+int2str(GetOwnerVehicle()->GetId())+" ItemSlot::SetTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), WEAPONSTARGET_LOG_DIP); 
+        else
+	Logger::Instance().Log("vehicle_id="+int2str(GetOwnerVehicle()->GetId())+" ItemSlot::SetTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " itemslot_subtype_id=" + getTypeStr(subtarget->GetItem()->GetSubTypeId()) + " id=" + int2str(subtarget->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
+	#endif
+	
+	this->target    = target; 
+	this->subtarget = subtarget;
+}
+        
+void ItemSlot::ValidateTarget()
+{
+        #if WEAPONSTARGET_LOG_ENABLED == 1 
+	Logger::Instance().Log("vehicle_id="+int2str(GetOwnerVehicle()->GetId())+" ItemSlot::ValidateTarget", WEAPONSTARGET_LOG_DIP); 
+	#endif 
+	
+        if (target != NULL)
+        {
+                if (CheckTarget(target) == false)
+                {
+                        ResetTarget();
+                }
+        }
+}
+
+void ItemSlot::ResetTarget()
+{ 
+        #if WEAPONSTARGET_LOG_ENABLED == 1 
+	Logger::Instance().Log("vehicle_id="+int2str(GetOwnerVehicle()->GetId())+" ItemSlot::ResetTarget", WEAPONSTARGET_LOG_DIP); 
+	#endif 
+	
+	target    = NULL; 
+	subtarget = NULL; 
+}
+
+bool ItemSlot::CheckAmmo() const
+{
+	switch(GetItem()->GetSubTypeId())
+	{
+    		case ENTITY::LAZER_EQUIPMENT_ID:  { /*if check energy */  return true; break; }
+    		case ENTITY::ROCKET_EQUIPMENT_ID: { if (GetRocketEquipment()->GetAmmo() > 0) return true; break; }
+	}
+	
+    	return false;           
+}
+
+bool ItemSlot::FireEvent(int attack_skill, bool show_effect)
+{    
+        #if WEAPONSTARGET_LOG_ENABLED == 1 
+        if (GetSubTarget() == NULL)
+        Logger::Instance().Log("vehicle_id="+int2str(GetOwnerVehicle()->GetId())+" ItemSlot::FireEvent type_id= " + getTypeStr(GetTarget()->GetTypeId()) + " id=" + int2str(GetTarget()->GetId()), WEAPONSTARGET_LOG_DIP); 
+        else
+	Logger::Instance().Log("vehicle_id="+int2str(GetOwnerVehicle()->GetId())+" ItemSlot::FireEvent type_id= " + getTypeStr(GetTarget()->GetTypeId()) + " id=" + int2str(GetTarget()->GetId()) + " itemslot_subtype_id=" + getTypeStr(subtarget->GetItem()->GetSubTypeId()) + " id=" + int2str(subtarget->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
+	#endif   
+	   			
+	switch(GetItem()->GetSubTypeId())
+	{
+    		case ENTITY::LAZER_EQUIPMENT_ID:
+    		{   
+			int damage = GetLazerEquipment()->GetDamage() * attack_skill * SKILL::ATTACK_NORMALIZED_RATE;						
+			if (GetSubTarget() != NULL) // precise fire
+			{
+				if (GetTarget()->GetTypeId() == ENTITY::VEHICLE_ID)
+				{			       		
+					//if (getRandInt(1, 2) == 1)
+					{
+						((Vehicle*)target)->LockItemInItemSlot(GetSubTarget(), 1);
+					}
+					damage /= 3; // lower damage is used for precise fire
+				}	
+			}
+       			GetLazerEquipment()->FireEvent(show_effect); 
+			GetTarget()->Hit(damage, show_effect);
+									       			
+       			if (GetTarget()->GetAlive() == false)
+       			{
+       				GetOwnerVehicle()->GetOwnerNpc()->AddExpirience(GetTarget()->GetGivenExpirience(), show_effect);
+       				ResetTarget();
+       			}
+       			
+       			return true; break;  
+    		}
+
+    		case ENTITY::ROCKET_EQUIPMENT_ID:
+    		{       
+                	GetRocketEquipment()->FireEvent(attack_skill * SKILL::ATTACK_NORMALIZED_RATE);
+                	return true; break;              
+    		}
+
+	}
+	
+    	return false;
 }
 
 bool ItemSlot::CheckItemInsertion(BaseItem* item) const
@@ -157,7 +259,7 @@ void ItemSlot::DeselectEvent()
 	{ 	
 		switch(data_id.subtype_id)
 		{
-			case ENTITY::WEAPON_SLOT_ID: 	{ turrel->ResetTarget(); break; }
+			case ENTITY::WEAPON_SLOT_ID: 	{ ResetTarget(); break; }
                         case ENTITY::DRIVE_SLOT_ID: 	{
   					  			GetOwnerVehicle()->UpdatePropertiesSpeed();
 								//GetOwnerVehicle()->UpdatePropertiesJump();
@@ -395,14 +497,32 @@ void ItemSlot::ResolveData()
 }
 
 void ItemSlot::SaveDataUniqueItemSlot(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{}
+{
+        if (target) { save_ptree.put(root+"unresolved_ItemSlot.target_id", target->GetId()); }
+        else        { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE_ID); }
+
+        if (subtarget) { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", subtarget->GetId()); }
+        else           { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", NONE_ID); }
+}
 
 void ItemSlot::LoadDataUniqueItemSlot(const boost::property_tree::ptree& load_ptree)
-{}
+{
+        unresolved_ItemSlot.target_id    = load_ptree.get<int>("unresolved_ItemSlot.target_id"); 
+        unresolved_ItemSlot.subtarget_id = load_ptree.get<int>("unresolved_ItemSlot.subtarget_id"); 
+}
 
 void ItemSlot::ResolveDataUniqueItemSlot()
 {
-	owner = EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id);
+	if (unresolved_ItemSlot.target_id != NONE_ID)
+	{
+		target = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.target_id);
+	}
+
+	if (unresolved_ItemSlot.subtarget_id != NONE_ID)
+	{
+		subtarget = (ItemSlot*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.subtarget_id);
+	}
+
         switch(owner->GetTypeId())
         {
 	       case ENTITY::VEHICLE_ID: 	{	((Vehicle*)owner)->AddItemSlot(this); break; }

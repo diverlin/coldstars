@@ -52,6 +52,16 @@ class GrappleModule;
 class Bomb; 
 class GoodsPack; 
 #include "../render/PathVisual.hpp"
+#include "../common/constants.hpp"
+
+struct UnresolvedDataUniqueItemSlot
+{
+	UnresolvedDataUniqueItemSlot():target_id(NONE_ID), subtarget_id(NONE_ID) 
+	{};
+	
+	int target_id;    
+	int subtarget_id; 
+};
 
 class ItemSlot : public BaseSlot
 {   
@@ -61,8 +71,12 @@ class ItemSlot : public BaseSlot
 	
 	        void PutChildsToGarbage() const;
 	        	
+	        void SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget = NULL);
 		void SetTurrel(Turrel* turrel) { this->turrel = turrel; };
-                                
+                      
+                BaseSpaceEntity* GetTarget() const { return target; };
+                ItemSlot* GetSubTarget() const { return subtarget; };          
+		
 		Turrel* GetTurrel() const { return turrel; };
 		
 		BaseItem* GetItem()                         const { return item; };                
@@ -97,6 +111,11 @@ class ItemSlot : public BaseSlot
 		bool InsertItem(BaseItem*);            
 		void RemoveItem();
 		
+		void ValidateTarget();                    
+                void ResetTarget();
+                bool CheckAmmo() const;
+                bool FireEvent(int, bool);
+                
 		void UpdateVehiclePropetries() const;
                 
 		virtual void Render(const Rect&, const vec2f&, bool draw_text = true) const;
@@ -125,6 +144,9 @@ class ItemSlot : public BaseSlot
                 
                 BaseItem* item;
 
+                BaseSpaceEntity* target;
+                ItemSlot* subtarget;      
+                
            	PathVisual range_visual;
            	      
            	bool CheckItemInsertion(BaseItem*) const;  
@@ -134,6 +156,7 @@ class ItemSlot : public BaseSlot
                 bool CheckStarSystem(BaseSpaceEntity*) const;
            	bool CheckDistance(BaseSpaceEntity*) const;
                 
+                UnresolvedDataUniqueItemSlot unresolved_ItemSlot;
                 void SaveDataUniqueItemSlot(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueItemSlot(const boost::property_tree::ptree&);
 		void ResolveDataUniqueItemSlot();

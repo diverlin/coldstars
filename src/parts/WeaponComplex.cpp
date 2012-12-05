@@ -124,7 +124,7 @@ void WeaponComplex::ReloadAllWeapons()
      	slot_weapon_reloaded_vec.clear();
      	for (unsigned int i=0; i<slot_weapon_equiped_vec.size(); i++)
         {
-         	if (slot_weapon_equiped_vec[i]->GetTurrel()->CheckAmmo() == true)
+         	if (slot_weapon_equiped_vec[i]->CheckAmmo() == true)
                 {
              		slot_weapon_reloaded_vec.push_back(slot_weapon_equiped_vec[i]);
                 }
@@ -215,11 +215,11 @@ void WeaponComplex::SetTarget(BaseSpaceEntity* target)
         {
         	if (slot_weapon_equiped_vec[i]->GetSelected() == true )
         	{
-           		if ( slot_weapon_equiped_vec[i]->GetTurrel()->GetTarget() == NULL )
+           		if ( slot_weapon_equiped_vec[i]->GetTarget() == NULL )
            		{
            			if (slot_weapon_equiped_vec[i]->CheckTarget(target) == true)
          			{
-         				slot_weapon_equiped_vec[i]->GetTurrel()->SetTarget(target);
+         				slot_weapon_equiped_vec[i]->SetTarget(target);
                                 }
                         }
                 } 
@@ -238,11 +238,11 @@ void WeaponComplex::SetPreciseFireTarget(BaseSpaceEntity* target, ItemSlot* item
         {
         	if (slot_weapon_equiped_vec[i]->GetSelected() == true)
         	{
-           		if (slot_weapon_equiped_vec[i]->GetTurrel()->GetTarget() == NULL)
+           		if (slot_weapon_equiped_vec[i]->GetTarget() == NULL)
            		{
            		        if (slot_weapon_equiped_vec[i]->CheckTarget(target, item_slot) == true)
          			{
-         				slot_weapon_equiped_vec[i]->GetTurrel()->SetTarget(target, item_slot);
+         				slot_weapon_equiped_vec[i]->SetTarget(target, item_slot);
                         	}
                         }
                 } 
@@ -255,12 +255,12 @@ void WeaponComplex::Fire(int timer, int attack_skill, bool show_effect)
      	{
         	for (std::vector<ItemSlot*>::iterator it=slot_weapon_reloaded_vec.begin(); it<slot_weapon_reloaded_vec.end(); it++)
         	{	
-                        (*it)->GetTurrel()->ValidateTarget();
-                        if ((*it)->GetTurrel()->GetTarget() != NULL)
+                        (*it)->ValidateTarget();
+                        if ((*it)->GetTarget() != NULL)
                         {
-      				(*it)->GetTurrel()->FireEvent(attack_skill, show_effect);
+      				(*it)->FireEvent(attack_skill, show_effect);
 				it = slot_weapon_reloaded_vec.erase(it);
-				if ((*it)->GetTurrel()->GetSubTarget() == NULL)
+				if ((*it)->GetSubTarget() == NULL)
            			{
            				fire_delay += d_fire_delay;
            				break;
@@ -274,11 +274,11 @@ void WeaponComplex::ValidateAllWeaponsTarget()
 {
 	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
         {
-                if (slot_weapon_vec[i]->GetTurrel()->GetTarget() != NULL) 
+                if (slot_weapon_vec[i]->GetTarget() != NULL) 
                 {
          		if (slot_weapon_vec[i]->GetEquiped() == true) 
                 	{
-             			slot_weapon_reloaded_vec[i]->GetTurrel()->ValidateTarget();
+             			slot_weapon_vec[i]->ValidateTarget();
                 	}
                 	else
                 	{
@@ -363,10 +363,9 @@ void WeaponComplex::RenderWeaponIcons() const
 {       
         for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
         {
-                Turrel* _turrel = slot_weapon_vec[i]->GetTurrel();
-                if (_turrel->GetTarget() != NULL )
+                if (slot_weapon_vec[i]->GetTarget() != NULL )
                 {       
-                        Rect _rect(_turrel->GetTarget()->GetPoints().GetCenter().x - 40/2 + 23*i, _turrel->GetTarget()->GetPoints().GetCenter().y + 40/2, 20, 20);
+                        Rect _rect(slot_weapon_vec[i]->GetTarget()->GetPoints().GetCenter().x - 40/2 + 23*i, slot_weapon_vec[i]->GetTarget()->GetPoints().GetCenter().y + 40/2, 20, 20);
                         drawTexturedRect(slot_weapon_vec[i]->GetItem()->GetTextureOb(), _rect, -2.0);
                 }        
         }

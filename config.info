@@ -18,7 +18,7 @@ Gameplay
 {
 AUTO_TURN_MODE 0
 AUTO_SAVE_MODE 0
-GAME_SPEED 1  
+GAME_SPEED 10  
 }
 
 Control

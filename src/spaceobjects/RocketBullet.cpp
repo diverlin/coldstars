@@ -78,8 +78,7 @@ void RocketBullet::UpdateInSpace(int time, bool show_effect)
                         }
                 }      
     		points.SetAngle(angle_inD);
-    		points.SetCenter(points.GetCenter() + d_pos);
-    
+    		points.SetCenter(points.GetCenter() + d_pos);    
 
     		data_bullet.live_time -= 1;
     	}

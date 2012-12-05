@@ -170,7 +170,7 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
     		}  
         
                 rocket_bullet->SetOwnerId(item_slot->GetOwnerVehicle()->GetId());
-        	rocket_bullet->SetTarget(item_slot->GetTurrel()->GetTarget());
+        	rocket_bullet->SetTarget(item_slot->GetTarget());
         
     		item_slot->GetOwnerVehicle()->GetStarSystem()->AddBullet(rocket_bullet, start_pos, angle_inD);
     		num++;
