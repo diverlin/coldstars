@@ -76,7 +76,7 @@ class BaseItem : public Base
                 void UseNormalDeterioration();
                 void UseOverloadDeterioration();
                 
-                void CheckDamage();
+                void DamageEvent();
                 
                 void DeteriorationEvent(); 
                 void LockEvent(int); 

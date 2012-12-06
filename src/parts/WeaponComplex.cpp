@@ -55,20 +55,6 @@ TextureOb* WeaponComplex::GetItemTextureOb(int index) const
 	return NULL;	
 }
                        	
-//bool WeaponComplex::AddItem(BaseItem* item)
-//{
-        //for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
-        //{
-                //if (slot_weapon_vec[i]->GetEquiped() == false)
-                //{
-                     //slot_weapon_vec[i]->InsertItem(item);
-                     //return true;   
-                //}
-        //}
-        
-        //return false;
-//}
- 
 ItemSlot* WeaponComplex::GetEmptyWeaponSlot() const
 {
         for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
@@ -115,8 +101,20 @@ ItemSlot* WeaponComplex::GetEquipedWeakestWeaponSlot() const
 void WeaponComplex::PrepareWeapons()
 {       
      	// used once at the begining of turn
+     	slot_weapon_equiped_vec.clear();     	
+     	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
+     	{ 
+        	if (slot_weapon_vec[i]->GetEquiped() == true)
+        	{
+           		if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
+           		{
+              			slot_weapon_equiped_vec.push_back(slot_weapon_vec[i]); 
+           		}
+           	}
+     	}     	
+     	
 	ReloadAllWeapons();
-	ValidateAllWeaponsTarget();
+	//ValidateAllWeaponsTarget(); // cause bug during loading, anyway this step looks like useless here
 }
     
 void WeaponComplex::ReloadAllWeapons()
@@ -187,22 +185,6 @@ bool WeaponComplex::IsAnyWeaponSelected() const
 	return false;
 }
 
-//bool WeaponComplex::IsAllPreciseWeaponsSelected() const
-//{
-	//for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
-	//{
-		//if (slot_weapon_reloaded_vec[i]->GetItem()->GetSubTypeId() != ENTITY::ROCKET_EQUIPMENT_ID)
-		//{
-       			//if (slot_weapon_reloaded_vec[i]->GetTurrel()->GetSelectedStatus() == false)
-       			//{	 
-       				//return false;		
-			//}
-		//}
-	//}
-	
-	//return true;
-//}
-
 void WeaponComplex::SetTarget(BaseSpaceEntity* target)
 {                          
         float dist = distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), target->GetPoints().GetCenter());
@@ -251,23 +233,34 @@ void WeaponComplex::SetPreciseFireTarget(BaseSpaceEntity* target, ItemSlot* item
 
 void WeaponComplex::Fire(int timer, int attack_skill, bool show_effect)
 {
-     	if (timer < TURN_TIME - fire_delay)
+        #if WEAPONSTARGET_LOG_ENABLED == 1 
+        Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" WeaponComplex::Fire START", WEAPONSTARGET_LOG_DIP); 
+        #endif   
+	
+     	//if (timer < TURN_TIME - fire_delay)
      	{
-        	for (std::vector<ItemSlot*>::iterator it=slot_weapon_reloaded_vec.begin(); it<slot_weapon_reloaded_vec.end(); it++)
+        	for (std::vector<ItemSlot*>::iterator it=slot_weapon_reloaded_vec.begin(); it<slot_weapon_reloaded_vec.end(); ++it)
         	{	
-                        (*it)->ValidateTarget();
-                        if ((*it)->GetTarget() != NULL)
+                        if ((*it)->ValidateTarget() == true)
                         {
       				(*it)->FireEvent(attack_skill, show_effect);
-				it = slot_weapon_reloaded_vec.erase(it);
-				if ((*it)->GetSubTarget() == NULL)
-           			{
-           				fire_delay += d_fire_delay;
-           				break;
-           			}
+				//if ((*it)->GetSubTarget() == NULL)
+           			//{
+           				//fire_delay += d_fire_delay;
+               			//}
+        		}
+        		else
+        		{
+        			(*it)->ResetTarget();
         		}    
+        		
+        		it = slot_weapon_reloaded_vec.erase(it);
         	}
         } 	
+        
+        #if WEAPONSTARGET_LOG_ENABLED == 1 
+        Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" WeaponComplex::Fire END", WEAPONSTARGET_LOG_DIP); 
+        #endif   
 }
 
 void WeaponComplex::ValidateAllWeaponsTarget()
@@ -288,56 +281,45 @@ void WeaponComplex::ValidateAllWeaponsTarget()
         }
 }
 
-bool WeaponComplex::UpdateFireAbility()
-{
+//bool WeaponComplex::UpdateFireAbility()
+//{
      	//total_damage = 0;
      	//avr_damage =
      	//avr_radius =  
      	
      	//int sum_fire_radius = 0;
 	
-	weapon_radius_min = 0;
+	//weapon_radius_min = 0;
      	
-     	slot_weapon_equiped_vec.clear();     	
-     	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
-     	{ 
-        	if (slot_weapon_vec[i]->GetEquiped() == true)
-        	{
-           		if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
-           		{
-              			slot_weapon_equiped_vec.push_back(slot_weapon_vec[i]); 
+     	//slot_weapon_equiped_vec.clear();     	
+     	//for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
+     	//{ 
+        	//if (slot_weapon_vec[i]->GetEquiped() == true)
+        	//{
+           		//if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
+           		//{
+              			//slot_weapon_equiped_vec.push_back(slot_weapon_vec[i]); 
               			
-              			int weapon_radius = slot_weapon_vec[i]->GetItemRadius();
-              			if ( (weapon_radius < weapon_radius_min) or (weapon_radius_min == 0) )
-              			{
-              				weapon_radius_min = weapon_radius;
-              			}
-              			//sum_damage      += slot_weapon_vec[i]->getItemDamage(); 
-              			//sum_fire_radius += slot_weapon_vec[i]->getItemRadius(); 
-           		}
-           	}
-     	}
-
+              			//int weapon_radius = slot_weapon_vec[i]->GetItemRadius();
+              			//if ( (weapon_radius < weapon_radius_min) or (weapon_radius_min == 0) )
+              			//{
+              				//weapon_radius_min = weapon_radius;
+              			//}
+              			////sum_damage      += slot_weapon_vec[i]->getItemDamage(); 
+              			////sum_fire_radius += slot_weapon_vec[i]->getItemRadius(); 
+           		//}
+           	//}
+     	//}
+ 	
      	//if (slot_weapon_equiped_vec.size() != 0)
      	//{
-        	//propetries.average_fire_radius = sum_fire_radius/slot_weapon_equiped_vec.size();
-        	//ableTo.FIRE = true;
+        	//return true;
      	//}
      	//else
      	//{
-        	//propetries.average_fire_radius = 0;
-        	//ableTo.FIRE = false;
+        	//return false;
      	//} 
-     	
-     	if (slot_weapon_equiped_vec.size() != 0)
-     	{
-        	return true;
-     	}
-     	else
-     	{
-        	return false;
-     	} 
-}
+//}
 
 void WeaponComplex::RenderTurrels() const
 {

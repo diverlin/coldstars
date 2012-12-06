@@ -31,7 +31,7 @@
 	#define SAVELOAD_LOG_ENABLED 1
 	#define STARSYSTEMADDREMOVE_LOG_ENABLED 0
 	#define CREATEDESTROY_LOG_ENABLED 1
-	#define UPDATEVEHICLEPROPETRIES_LOG_ENABLED 1
+	#define ITEMINFLUENCE_LOG_ENABLED 1
 	
 	const int GRAPPLE_QUEUE_LOG_DIP = 1;
 	const int DRIVECOMPLEX_LOG_DIP = 1;
@@ -40,7 +40,7 @@
 	const int AISCENARIO_LOG_DIP = 2;
 	const int SAVELOAD_LOG_DIP = 1;
 	const int CREATEDESTROY_LOG_DIP = 0;
-	const int UPDATEVEHICLEPROPETRIES_LOG_DIP = 2;
+	const int ITEMINFLUENCE_LOG_DIP = 2;
 #endif
 
 #define DEBUG_ITEMDAMAGELOCKVIAGUI 1  // 1 - is locking/unlocking item by right mouse click; 2 - is damaging/undamaging item by right mouse click

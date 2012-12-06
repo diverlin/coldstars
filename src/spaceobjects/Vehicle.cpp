@@ -586,7 +586,7 @@ bool Vehicle::UpdateFadeOutEffect()
 void Vehicle::HyperJumpEvent(StarSystem* starsystem)
 {
         #if LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" jumpEvent()", 2); 
+	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" Vehicle::HyperJumpEvent", 2); 
 	#endif   
 	
         special_action_id = SPECIAL_ACTION::INITIATE_JUMPOUT_ID;
@@ -595,7 +595,11 @@ void Vehicle::HyperJumpEvent(StarSystem* starsystem)
                 
                 
 void Vehicle::DockingEvent()
-{           
+{
+        #if LOG_ENABLED == 1 
+	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" Vehicle::LaunchingEvent", 2); 
+	#endif
+	           
         switch(drive_complex.GetTarget()->GetTypeId())         	     	     	
      	{
      		case ENTITY::PLANET_ID:
@@ -628,10 +632,6 @@ void Vehicle::DockingEvent()
 	}
         
         GetDriveComplex().ResetTarget();
-        
-        #if LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" DockingEvent()", 2); 
-	#endif
 }
 
 void Vehicle::LaunchingEvent()
@@ -671,7 +671,7 @@ void Vehicle::LaunchingEvent()
 	}
 	
 	#if LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" launchingEvent()", 2); 
+	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" Vehicle::launchingEvent()", 2); 
 	#endif
 }
 //// 
@@ -742,8 +742,8 @@ void Vehicle::UpdateAllFunctionalItemsInStatic()
 
 void Vehicle::IncreaseMass(int d_mass)
 {
-	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
-	Logger::Instance().Log(" IncreaseMass()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#if ITEMINFLUENCE_LOG_ENABLED == 1
+	Logger::Instance().Log("vehicle_id=" + int2str(GetId()) + " Vehicle::IncreaseMass", ITEMINFLUENCE_LOG_DIP);
 	#endif
 	
 	mass += d_mass;
@@ -753,8 +753,8 @@ void Vehicle::IncreaseMass(int d_mass)
 
 void Vehicle::DecreaseMass(int d_mass)
 {
-	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
-	Logger::Instance().Log(" DecreaseMass()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#if ITEMINFLUENCE_LOG_ENABLED == 1
+	Logger::Instance().Log("vehicle_id=" + int2str(GetId()) + " Vehicle::DecreaseMass", ITEMINFLUENCE_LOG_DIP);
 	#endif
 	
 	mass -= d_mass;
@@ -764,8 +764,8 @@ void Vehicle::DecreaseMass(int d_mass)
 
 void Vehicle::UpdatePropertiesSpeed()
 {
-	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
-	Logger::Instance().Log(" UpdatePropertiesSpeed()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#if ITEMINFLUENCE_LOG_ENABLED == 1
+	Logger::Instance().Log("vehicle_id=" + int2str(GetId()) + " Vehicle::UpdatePropertiesSpeed", ITEMINFLUENCE_LOG_DIP);
 	#endif
 	
      	// speed calculation ////
@@ -806,18 +806,18 @@ void Vehicle::UpdatePropertiesSpeed()
 
 void Vehicle::UpdatePropertiesFire()
 {
-	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
-	Logger::Instance().Log(" UpdatePropertiesFire()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#if ITEMINFLUENCE_LOG_ENABLED == 1
+	Logger::Instance().Log(" vehicle_id=" + int2str(GetId()) + " Vehicle::UpdatePropertiesFire", ITEMINFLUENCE_LOG_DIP);
 	#endif
 	
-     	weapon_complex.UpdateFireAbility();
-     	weapon_complex.PrepareWeapons();
+     	//weapon_complex.UpdateFireAbility();
+     	//weapon_complex.PrepareWeapons();
 }
 
 void Vehicle::UpdatePropertiesRadar()
 {
-	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
-	Logger::Instance().Log(" UpdatePropertiesRadar()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#if ITEMINFLUENCE_LOG_ENABLED == 1
+	Logger::Instance().Log(" vehicle_id=" + int2str(GetId()) + " Vehicle::UpdatePropertiesRadar", ITEMINFLUENCE_LOG_DIP);
 	#endif
 	
         propetries.radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
@@ -837,8 +837,8 @@ void Vehicle::UpdatePropertiesRadar()
 
 void Vehicle::UpdatePropertiesJump()
 {
-	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
-	Logger::Instance().Log(" UpdatePropertiesJump()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#if ITEMINFLUENCE_LOG_ENABLED == 1
+	Logger::Instance().Log(" vehicle_id=" + int2str(GetId()) + " Vehicle::UpdatePropertiesJump", ITEMINFLUENCE_LOG_DIP);
 	#endif
 	    
 	propetries.hyper = 0;
@@ -864,8 +864,8 @@ void Vehicle::UpdatePropertiesJump()
 
 //void Vehicle::UpdateEnergyAbility()
 //{
-	//#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
-	//Logger::Instance().Log(" UpdateEnergyAbility()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	//#if ITEMINFLUENCE_LOG_ENABLED == 1
+	//Logger::Instance().Log(" vehicle_id=" + int2str(GetId()) + " Vehicle::UpdateEnergyAbility", ITEMINFLUENCE_LOG_DIP);
 	//#endif
 	
      	//propetries.energy = 0;
@@ -883,8 +883,8 @@ void Vehicle::UpdatePropertiesJump()
 
 void Vehicle::UpdatePropertiesProtection()
 {
-	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
-	Logger::Instance().Log(" UpdatePropertiesProtection()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#if ITEMINFLUENCE_LOG_ENABLED == 1
+	Logger::Instance().Log(" vehicle_id=" + int2str(GetId()) + " Vehicle::UpdatePropertiesProtection", ITEMINFLUENCE_LOG_DIP);
 	#endif
 	
         propetries.protection = data_korpus.protection;
@@ -907,8 +907,8 @@ void Vehicle::UpdatePropertiesProtection()
 
 void Vehicle::UpdatePropertiesRepair()
 {
-	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
-	Logger::Instance().Log(" UpdatePropertiesRepair()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#if ITEMINFLUENCE_LOG_ENABLED == 1
+	Logger::Instance().Log(" vehicle_id=" + int2str(GetId()) + " Vehicle::UpdatePropertiesRepair", ITEMINFLUENCE_LOG_DIP);
 	#endif
 	
      	propetries.repair = 0;
@@ -925,8 +925,8 @@ void Vehicle::UpdatePropertiesRepair()
 
 void Vehicle::IncreaseArmor(int repair)
 {
-	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
-	Logger::Instance().Log(" IncreaseArmor()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#if ITEMINFLUENCE_LOG_ENABLED == 1
+	Logger::Instance().Log(" vehicle_id=" + int2str(GetId()) + " Vehicle::IncreaseArmor", ITEMINFLUENCE_LOG_DIP);
 	#endif
 	
 	data_life.armor += repair;
@@ -939,8 +939,8 @@ void Vehicle::IncreaseArmor(int repair)
 
 //void Vehicle::UpdateFreezeAbility()
 //{
-	//#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
-	//Logger::Instance().Log(" UpdateFreezeAbility()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	//#if ITEMINFLUENCE_LOG_ENABLED == 1
+	//Logger::Instance().Log(" vehicle_id=" + int2str(GetId()) + " Vehicle::UpdateFreezeAbility", ITEMINFLUENCE_LOG_DIP);
 	//#endif
 	
      	//propetries.freeze = 0;
@@ -958,8 +958,8 @@ void Vehicle::IncreaseArmor(int repair)
 
 void Vehicle::UpdatePropertiesScan()
 {
-	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
-	Logger::Instance().Log(" UpdatePropertiesScan()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#if ITEMINFLUENCE_LOG_ENABLED == 1
+	Logger::Instance().Log(" vehicle_id=" + int2str(GetId()) + " Vehicle::UpdatePropertiesScan", ITEMINFLUENCE_LOG_DIP);
 	#endif
 	
      	propetries.scan = 0;
@@ -975,8 +975,8 @@ void Vehicle::UpdatePropertiesScan()
 
 void Vehicle::UpdatePropertiesGrab()
 {
-	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
-	Logger::Instance().Log(" UpdatePropertiesGrab()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#if ITEMINFLUENCE_LOG_ENABLED == 1
+	Logger::Instance().Log(" vehicle_id=" + int2str(GetId()) + " Vehicle::UpdatePropertiesGrab", ITEMINFLUENCE_LOG_DIP);
 	#endif
 
         propetries.grab_strength = 0;
@@ -997,8 +997,8 @@ void Vehicle::UpdatePropertiesGrab()
         
 void Vehicle::UpdateArtefactInfluence()
 {
-	#if UPDATEVEHICLEPROPETRIES_LOG_ENABLED == 1
-	Logger::Instance().Log(" UpdateArtefactInfluence()  id=" + int2str(GetId()) + " START", UPDATEVEHICLEPROPETRIES_LOG_DIP);
+	#if ITEMINFLUENCE_LOG_ENABLED == 1
+	Logger::Instance().Log(" vehicle_id=" + int2str(GetId()) + " Vehicle::UpdateArtefactInfluence", ITEMINFLUENCE_LOG_DIP);
 	#endif
 	
 	propetries.artefact_gravity = 0;

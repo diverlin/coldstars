@@ -89,8 +89,8 @@ void BaseSpaceEntity::Hit(int damage, bool show_effect)
 
 void BaseSpaceEntity::SilentKill()
 {
-	data_life.armor = 0;
-	data_life.is_alive = false;
+	data_life.is_alive      = false;  
+	data_life.garbage_ready = true;
 }
 
 void BaseSpaceEntity::CheckDeath(bool show_effect)

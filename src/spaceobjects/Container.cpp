@@ -111,14 +111,6 @@ void Container::UpdateInSpace(int time, bool show_effect)
      		}  
      	}
 }
-
-
-void Container::SilentKill()
-{
-	data_life.is_alive      = false;  
-	data_life.garbage_ready = true;  // ??? death(false);
-}
-   
        		
 void Container::Render2D()
 { 

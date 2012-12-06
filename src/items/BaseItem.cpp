@@ -50,6 +50,10 @@ BaseItem::~BaseItem()
 
 void BaseItem::LockEvent(int locked_turns)
 {
+	#if ITEMINFLUENCE_LOG_ENABLED == 1
+	Logger::Instance().Log("BaseItem::LockEvent", ITEMINFLUENCE_LOG_DIP);
+	#endif
+	
 	bool was_working = false;
 	if (this->locked_turns == 0)
 	{
@@ -73,19 +77,23 @@ void BaseItem::UseOverloadDeterioration()
         deterioration = data_item.deterioration_normal * data_item.deterioration_overload_rate;
 }
  
-void BaseItem::CheckDamage()
+void BaseItem::DamageEvent()
 {
-        if (condition <= 0)
-    	{
-                condition = 0;
-                item_slot->UpdateVehiclePropetries();
-       	}   
+	#if ITEMINFLUENCE_LOG_ENABLED == 1
+	Logger::Instance().Log("BaseItem::DamageEvent", ITEMINFLUENCE_LOG_DIP);
+	#endif
+
+        item_slot->UpdateVehiclePropetries();
 }
                 
 void BaseItem::DeteriorationEvent()
 {
         condition -= deterioration;
-        CheckDamage();
+        if (condition <= 0)
+    	{
+    	        condition = 0;
+        	DamageEvent();
+	}
 }         
                 
 void BaseItem::RepairEvent()
