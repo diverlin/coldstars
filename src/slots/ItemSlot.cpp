@@ -434,6 +434,10 @@ void ItemSlot::DrawRange(const vec2f& offset)
 
 bool ItemSlot::CheckTarget(BaseSpaceEntity* _target, ItemSlot* _subtarget) const
 {
+	#if WEAPONSTARGET_LOG_ENABLED == 1 
+        Logger::Instance().Log(" ItemSlot::CheckTarget");
+	#endif     
+	
         if (CheckAlive(_target) == true)
         {
         	if (CheckPlaceTypeId(_target) == true)

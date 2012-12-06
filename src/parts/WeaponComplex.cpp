@@ -114,7 +114,7 @@ void WeaponComplex::PrepareWeapons()
      	}     	
      	
 	ReloadAllWeapons();
-	//ValidateAllWeaponsTarget(); // cause bug during loading, anyway this step looks like useless here
+	ValidateAllWeaponsTarget(); // cause bug during loading, anyway this step looks like useless here
 }
     
 void WeaponComplex::ReloadAllWeapons()
@@ -193,7 +193,7 @@ void WeaponComplex::SetTarget(BaseSpaceEntity* target)
 	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" WeaponComplex::SetTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), WEAPONSTARGET_LOG_DIP); 
 	#endif   
 	
-        for (unsigned int i = 0; i < slot_weapon_equiped_vec.size(); i++)
+        for (unsigned int i=0; i<slot_weapon_equiped_vec.size(); i++)
         {
         	if (slot_weapon_equiped_vec[i]->GetSelected() == true )
         	{

@@ -35,7 +35,7 @@ DriveComplex::DriveComplex()
 	owner_vehicle = NULL;
         
 	target = NULL;
-    		
+    			
 	target_distance = 0.0;
 	action_id = NAVIGATOR_ACTION::NONE_ID;
 	
@@ -64,20 +64,16 @@ void DriveComplex::ResetTarget()
 {
 	#if DRIVECOMPLEX_LOG_ENABLED == 1 
 	if (target == NULL)
-	{
-		Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" RESET DriveComplex Target", DRIVECOMPLEX_LOG_DIP); 
-	}
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::ResetTarget", DRIVECOMPLEX_LOG_DIP); 
 	else
-	{
-		Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" RESET DriveComplex target =" + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), DRIVECOMPLEX_LOG_DIP); 
-	}
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::ResetTarget" + getTypeStr(target->GetTypeId()) + " target_id=" + int2str(target->GetId()), DRIVECOMPLEX_LOG_DIP); 
 	#endif    
 	
 	target = NULL;
     		
 	target_distance = 0.0;
-	target_offset.Set(0, 0);
-	target_pos.Set(0, 0);
+	target_offset.Set(0.0, 0.0);
+	target_pos.Set(0.0, 0.0);
 	action_id = NAVIGATOR_ACTION::NONE_ID;
 	
         has_target = false;
@@ -94,7 +90,7 @@ void DriveComplex::SetStaticTargetCoords(const vec2f& target_pos)
        	UpdatePath();
 
 	#if DRIVECOMPLEX_LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" SetStaticTargetCoords:"+int2str((int)target_pos.x)+", "+int2str((int)target_pos.y), DRIVECOMPLEX_LOG_DIP); 
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::SetStaticTargetCoords:"+int2str((int)target_pos.x)+", "+int2str((int)target_pos.y), DRIVECOMPLEX_LOG_DIP); 
 	#endif  
 }      
          		
@@ -114,13 +110,14 @@ void DriveComplex::SetTarget(BaseSpaceEntity* target, int _action_id)
 	else
 	{
 		DefineDistance(_action_id);
+		UpdateDynamicTargetCoord();
 	}
-       
-	UpdatePath();
-	
+
 	#if DRIVECOMPLEX_LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex GOT Target " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " navigator_action = " + getNavigatorActionStr(action_id), DRIVECOMPLEX_LOG_DIP); 
-	#endif    
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::SetTarget " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " navigator_action = " + getNavigatorActionStr(action_id), DRIVECOMPLEX_LOG_DIP); 
+	#endif   
+	       
+	UpdatePath();
 }
   
 
@@ -290,6 +287,10 @@ void DriveComplex::ClearPath()
 
 void DriveComplex::CalcPath()
 {
+	#if DRIVECOMPLEX_LOG_ENABLED == 1 
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::CalcPath" + "target_pos(int, int)=" + int2str((int)target_pos.x) + "," + int2str((int)target_pos.y), DRIVECOMPLEX_LOG_DIP); 
+	#endif   
+	
 	ClearPath();
                         
         if (CalcRoundPath() == true)
