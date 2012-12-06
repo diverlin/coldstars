@@ -40,7 +40,6 @@ class Container : public BaseSpaceEntity
             	
         	void UpdateInSpace(int, bool);
         	
-		void SilentKill();
           	void CalcCollisionrRadius();
         	void Render2D();
                                 

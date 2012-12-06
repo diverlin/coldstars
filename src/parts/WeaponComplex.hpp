@@ -39,7 +39,6 @@ class WeaponComplex
                	int GetWeaponRadiusMin() const { return weapon_radius_min; };
                
                 bool AddSlot(ItemSlot*);
-                //bool AddItem(BaseItem*);
                 ItemSlot* GetEmptyWeaponSlot() const;
                 ItemSlot* GetEquipedWeakestWeaponSlot() const;
         	
@@ -56,9 +55,8 @@ class WeaponComplex
 		void DeactivateWeaponsBySubTypeId(int);
 
         	bool IsAnyWeaponSelected() const; 
-        	//bool IsAllPreciseWeaponsSelected() const;
         	
-        	bool UpdateFireAbility();
+        	//bool UpdateFireAbility();
         	
         	void RenderWeaponIcons() const;
         	void RenderWeaponsRange();
@@ -75,8 +73,7 @@ class WeaponComplex
         	std::vector<ItemSlot*> slot_weapon_reloaded_vec;
    	
         	void ReloadAllWeapons();  
-        	void ValidateAllWeaponsTarget();
-      		
+        	void ValidateAllWeaponsTarget();      		
 };
 
 

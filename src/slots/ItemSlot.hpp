@@ -111,7 +111,7 @@ class ItemSlot : public BaseSlot
 		bool InsertItem(BaseItem*);            
 		void RemoveItem();
 		
-		void ValidateTarget();                    
+		bool ValidateTarget();                    
                 void ResetTarget();
                 bool CheckAmmo() const;
                 bool FireEvent(int, bool);
@@ -160,6 +160,9 @@ class ItemSlot : public BaseSlot
                 void SaveDataUniqueItemSlot(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueItemSlot(const boost::property_tree::ptree&);
 		void ResolveDataUniqueItemSlot();
+		
+		void LogSimpleTarget(const std::string&) const;
+		void LogComplexTarget(const std::string&) const;
 }; 
 
 #endif

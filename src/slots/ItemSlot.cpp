@@ -84,41 +84,52 @@ void ItemSlot::PutChildsToGarbage() const
 }
 
 void ItemSlot::SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget) 	
-{ 
-	#if WEAPONSTARGET_LOG_ENABLED == 1 
-        if (subtarget == NULL)
-        Logger::Instance().Log("vehicle_id="+int2str(GetOwnerVehicle()->GetId())+" ItemSlot::SetTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), WEAPONSTARGET_LOG_DIP); 
-        else
-	Logger::Instance().Log("vehicle_id="+int2str(GetOwnerVehicle()->GetId())+" ItemSlot::SetTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " itemslot_subtype_id=" + getTypeStr(subtarget->GetItem()->GetSubTypeId()) + " id=" + int2str(subtarget->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
-	#endif
-	
+{
 	this->target    = target; 
 	this->subtarget = subtarget;
+
+	#if WEAPONSTARGET_LOG_ENABLED == 1 
+        std::string func_name = " ItemSlot::SetTarget";
+        if (GetSubTarget() == NULL)
+        LogSimpleTarget(func_name);
+        else
+	LogComplexTarget(func_name); 
+	#endif     
 }
         
-void ItemSlot::ValidateTarget()
-{
-        #if WEAPONSTARGET_LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(GetOwnerVehicle()->GetId())+" ItemSlot::ValidateTarget", WEAPONSTARGET_LOG_DIP); 
-	#endif 
-	
+bool ItemSlot::ValidateTarget()
+{	
         if (target != NULL)
         {
-                if (CheckTarget(target) == false)
-                {
-                        ResetTarget();
-                }
+                #if WEAPONSTARGET_LOG_ENABLED == 1 
+	        std::string func_name = " ItemSlot::ValidateTarget";
+	        if (GetSubTarget() == NULL)
+	        LogSimpleTarget(func_name);
+	        else
+		LogComplexTarget(func_name); 
+		#endif   
+	
+                return CheckTarget(target);
         }
+        
+        return false;
 }
 
 void ItemSlot::ResetTarget()
 { 
-        #if WEAPONSTARGET_LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(GetOwnerVehicle()->GetId())+" ItemSlot::ResetTarget", WEAPONSTARGET_LOG_DIP); 
-	#endif 
+        if (target != NULL)
+        {
+        	#if WEAPONSTARGET_LOG_ENABLED == 1 
+	        std::string func_name = " ItemSlot::ResetTarget";
+	        if (GetSubTarget() == NULL)
+	        LogSimpleTarget(func_name);
+	        else
+		LogComplexTarget(func_name); 
+		#endif   
 	
-	target    = NULL; 
-	subtarget = NULL; 
+		target    = NULL; 
+		subtarget = NULL; 
+	}
 }
 
 bool ItemSlot::CheckAmmo() const
@@ -135,10 +146,11 @@ bool ItemSlot::CheckAmmo() const
 bool ItemSlot::FireEvent(int attack_skill, bool show_effect)
 {    
         #if WEAPONSTARGET_LOG_ENABLED == 1 
+        std::string func_name = " ItemSlot::FireEvent";
         if (GetSubTarget() == NULL)
-        Logger::Instance().Log("vehicle_id="+int2str(GetOwnerVehicle()->GetId())+" ItemSlot::FireEvent type_id= " + getTypeStr(GetTarget()->GetTypeId()) + " id=" + int2str(GetTarget()->GetId()), WEAPONSTARGET_LOG_DIP); 
+        LogSimpleTarget(func_name);
         else
-	Logger::Instance().Log("vehicle_id="+int2str(GetOwnerVehicle()->GetId())+" ItemSlot::FireEvent type_id= " + getTypeStr(GetTarget()->GetTypeId()) + " id=" + int2str(GetTarget()->GetId()) + " itemslot_subtype_id=" + getTypeStr(subtarget->GetItem()->GetSubTypeId()) + " id=" + int2str(subtarget->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
+	LogComplexTarget(func_name); 
 	#endif   
 	   			
 	switch(GetItem()->GetSubTypeId())
@@ -163,7 +175,6 @@ bool ItemSlot::FireEvent(int attack_skill, bool show_effect)
        			if (GetTarget()->GetAlive() == false)
        			{
        				GetOwnerVehicle()->GetOwnerNpc()->AddExpirience(GetTarget()->GetGivenExpirience(), show_effect);
-       				ResetTarget();
        			}
        			
        			return true; break;  
@@ -421,15 +432,15 @@ void ItemSlot::DrawRange(const vec2f& offset)
     	range_visual.Draw(offset);
 }
 
-bool ItemSlot::CheckTarget(BaseSpaceEntity* target, ItemSlot* subtarget) const
+bool ItemSlot::CheckTarget(BaseSpaceEntity* _target, ItemSlot* _subtarget) const
 {
-        if (CheckAlive(target) == true)
+        if (CheckAlive(_target) == true)
         {
-        	if (CheckPlaceTypeId(target) == true)
+        	if (CheckPlaceTypeId(_target) == true)
         	{
-                	if (CheckStarSystem(target) == true)
+                	if (CheckStarSystem(_target) == true)
                 	{
-                        	if (CheckDistance(target) == true)
+                        	if (CheckDistance(_target) == true)
                         	{
                                 	return true;
                         	}
@@ -452,7 +463,7 @@ bool ItemSlot::CheckPlaceTypeId(BaseSpaceEntity* _target) const
 
 bool ItemSlot::CheckStarSystem(BaseSpaceEntity* _target) const
 {
-        return (_target->GetStarSystem() == ((Vehicle*)owner)->GetStarSystem());
+        return (_target->GetStarSystem()->GetId() == ((Vehicle*)owner)->GetStarSystem()->GetId());
 }                
 
 bool ItemSlot::CheckDistance(BaseSpaceEntity* _target) const
@@ -531,4 +542,14 @@ void ItemSlot::ResolveDataUniqueItemSlot()
 	       case ENTITY::ANGAR_ID:         	{ 	((Angar*)owner)->AddItemSlot(this); break; }
 	       //case ENTITY::NATURELAND_ID:      { 	((NatureLand*)owner)->AddItemSlot(this); break; }
 	}
+}
+
+void ItemSlot::LogSimpleTarget(const std::string& func_name) const
+{
+	 Logger::Instance().Log("ItemSlot subsubtype_id/Item subtype_id="+getTypeStr(GetSubSubTypeId())+"/"+getTypeStr(item->GetSubTypeId())+func_name + " target_type_id= " + getTypeStr(GetTarget()->GetTypeId()) + " id=" + int2str(GetTarget()->GetId()), WEAPONSTARGET_LOG_DIP); 
+}
+
+void ItemSlot::LogComplexTarget(const std::string& func_name) const
+{
+	Logger::Instance().Log("ItemSlot subsubtype_id/Item subtype_id="+getTypeStr(GetSubSubTypeId())+"/"+getTypeStr(item->GetSubTypeId())+func_name+"target_type_id= " + getTypeStr(GetTarget()->GetTypeId()) + " id=" + int2str(GetTarget()->GetId()) + " item_subtype_id=" + getTypeStr(subtarget->GetItem()->GetSubTypeId()) + " id=" + int2str(subtarget->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
 }
