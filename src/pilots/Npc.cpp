@@ -22,6 +22,7 @@
 #include "../common/myStr.hpp"
 #include "../common/rand.hpp"
 #include "../common/EntityManager.hpp"
+#include "../common/Logger.hpp"
 #include "../common/common.hpp"
 #include "../ai/aiModel/AiModelCollector.hpp"
 #include "../render/Render.hpp"
@@ -110,6 +111,10 @@ void Npc::MindInKosmoport()
 
 void Npc::MindInSpace()
 {
+	#if AI_LOG_ENABLED == 1 
+	Logger::Instance().Log("npc_id="+int2str(GetId())+" Npc::MindInSpace START", AI_LOG_DIP); 
+	#endif 
+	
 	vehicle->GetWeaponComplex().PrepareWeapons();
 	// this check is performed in Dynamic, no need to repeat in Static
 	//if (vehicle->ableTo.GRAB == true) 
@@ -137,6 +142,10 @@ void Npc::MindInSpace()
         }
 
         vehicle->GetDriveComplex().UpdatePath();
+        
+        #if AI_LOG_ENABLED == 1 
+	Logger::Instance().Log("npc_id="+int2str(GetId())+" Npc::MindInSpace END", AI_LOG_DIP); 
+	#endif 
 }
 
 void Npc::AddExpirience(int expirience, bool show_effect)
