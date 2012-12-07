@@ -47,7 +47,7 @@ class DriveComplex
       		ItemSlot* GetDriveSlot() const { return drive_slot; };
         	ItemSlot* GetBakSlot()   const { return bak_slot; };
                   
-                BaseSpaceEntity* GetTarget() const { return target; };                
+                //BaseSpaceEntity* GetTarget() const { return target; };                
     			        
     		bool PathExists() const;
     		
@@ -68,7 +68,7 @@ class DriveComplex
         	ItemSlot* bak_slot;
 
       		Vehicle* owner_vehicle;
-      		BaseSpaceEntity* target;
+      		//BaseSpaceEntity* target;
 
 		DriveEffect* drive_effect; 
 

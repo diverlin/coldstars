@@ -22,6 +22,8 @@
 #include "../spaceobjects/Asteroid.hpp"
 #include "../spaceobjects/SpaceStation.hpp"
 
+#include "../slots/ItemSlot.hpp"
+
 #include "../common/myVector.hpp"
 #include "../common/Collision.hpp"
 #include "../common/constants.hpp"
@@ -33,8 +35,6 @@
 DriveComplex::DriveComplex()
 {      
 	owner_vehicle = NULL;
-        
-	target = NULL;
     			
 	target_distance = 0.0;
 	action_id = NAVIGATOR_ACTION::NONE_ID;
@@ -63,13 +63,13 @@ bool DriveComplex::PathExists() const
 void DriveComplex::ResetTarget()
 {
 	#if DRIVECOMPLEX_LOG_ENABLED == 1 
-	if (target == NULL)
+	if (drive_slot->GetTarget() == NULL)
 	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::ResetTarget", DRIVECOMPLEX_LOG_DIP); 
 	else
-	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::ResetTarget" + getTypeStr(target->GetTypeId()) + " target_id=" + int2str(target->GetId()), DRIVECOMPLEX_LOG_DIP); 
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::ResetTarget" + getTypeStr(drive_slot->GetTarget()->GetTypeId()) + " target_id=" + int2str(drive_slot->GetTarget()->GetId()), DRIVECOMPLEX_LOG_DIP); 
 	#endif    
 	
-	target = NULL;
+	drive_slot->ResetTarget();
     		
 	target_distance = 0.0;
 	target_offset.Set(0.0, 0.0);
@@ -103,7 +103,7 @@ void DriveComplex::SetTarget(BaseSpaceEntity* target, int _action_id)
 	#endif 
 	
     	has_target = true;
-	this->target = target;    
+	drive_slot->SetTarget(target);    
 
 	if (target->GetTypeId() == ENTITY::STARSYSTEM_ID)
 	{
@@ -128,8 +128,8 @@ void DriveComplex::DefineDistance(int action_id)
     	{	
     		case NAVIGATOR_ACTION::DOCKING_ID:
     		{
-    			target_distance = target->GetCollisionRadius()/4;
-    			target_offset = getRandVec2f(target->GetCollisionRadius()/5, target->GetCollisionRadius()/2); 
+    			target_distance = drive_slot->GetTarget()->GetCollisionRadius()/4;
+    			target_offset = getRandVec2f(drive_slot->GetTarget()->GetCollisionRadius()/5, drive_slot->GetTarget()->GetCollisionRadius()/2); 
     			
     			break;   
     		}
@@ -137,7 +137,7 @@ void DriveComplex::DefineDistance(int action_id)
     		case NAVIGATOR_ACTION::COLLECTING_ID:
     		{
     		    	target_distance = owner_vehicle->GetPropetries().grab_radius/2; 
-    			target_offset = getRandVec2f(target->GetCollisionRadius()/2, target->GetCollisionRadius()); 
+    			target_offset = getRandVec2f(drive_slot->GetTarget()->GetCollisionRadius()/2, drive_slot->GetTarget()->GetCollisionRadius()); 
     			
     			break;    		
     		}
@@ -156,24 +156,24 @@ void DriveComplex::DefineDistance(int action_id)
     		    		
     		case NAVIGATOR_ACTION::KEEP_CLOSE_ID:
     		{
-    		    	target_distance = target->GetCollisionRadius()*1.5;
-    			target_offset = getRandVec2f(target->GetCollisionRadius()/5, target->GetCollisionRadius()/2); 
+    		    	target_distance = drive_slot->GetTarget()->GetCollisionRadius()*1.5;
+    			target_offset = getRandVec2f(drive_slot->GetTarget()->GetCollisionRadius()/5, drive_slot->GetTarget()->GetCollisionRadius()/2); 
     			
     			break;    		
     		}
 
     		case NAVIGATOR_ACTION::KEEP_MIDDLE_ID:
     		{
-    		    	target_distance = target->GetCollisionRadius()*4;
-    			target_offset = getRandVec2f(target->GetCollisionRadius()/2, target->GetCollisionRadius()); 
+    		    	target_distance = drive_slot->GetTarget()->GetCollisionRadius()*4;
+    			target_offset = getRandVec2f(drive_slot->GetTarget()->GetCollisionRadius()/2, drive_slot->GetTarget()->GetCollisionRadius()); 
     			
     			break;    		
     		}
     		
     		case NAVIGATOR_ACTION::KEEP_FAR_ID:
     		{
-    		    	target_distance = target->GetCollisionRadius()*8;
-    			target_offset = getRandVec2f(target->GetCollisionRadius()/2, target->GetCollisionRadius()); 
+    		    	target_distance = drive_slot->GetTarget()->GetCollisionRadius()*8;
+    			target_offset = getRandVec2f(drive_slot->GetTarget()->GetCollisionRadius()/2, drive_slot->GetTarget()->GetCollisionRadius()); 
     			
     			break;    
     		}
@@ -183,7 +183,7 @@ void DriveComplex::DefineDistance(int action_id)
                   
 void DriveComplex::UpdatePath()
 {
-	if (target != NULL)
+	if (drive_slot->GetTarget() != NULL)
 	{
 		if (ValidateTarget() == true)
 		{
@@ -203,9 +203,9 @@ void DriveComplex::UpdatePath()
 
 bool DriveComplex::ValidateTarget() const
 {
-        if (target->GetAlive() == true)
+        if (drive_slot->GetTarget()->GetAlive() == true)
 	{
-		if (target->GetPlaceTypeId() == ENTITY::SPACE_ID)
+		if (drive_slot->GetTarget()->GetPlaceTypeId() == ENTITY::SPACE_ID)
 		{
 			return true;
 		}
@@ -218,42 +218,42 @@ bool DriveComplex::ValidateTarget() const
 
 void DriveComplex::UpdateDynamicTargetCoord()
 {		
-	switch(target->GetTypeId())
+	switch(drive_slot->GetTarget()->GetTypeId())
 	{
     		case ENTITY::PLANET_ID:
     		{ 
-        		target_pos = ((Planet*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;         	
+        		target_pos = ((Planet*)drive_slot->GetTarget())->GetOrbit()->GetNextTurnPosition() + target_offset;         	
 		       	break;		       	
     		} 
 
     		case ENTITY::ASTEROID_ID:
     		{ 
-        		target_pos = ((Asteroid*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;         	
+        		target_pos = ((Asteroid*)drive_slot->GetTarget())->GetOrbit()->GetNextTurnPosition() + target_offset;         	
         		break;
     		} 
     	     
     		case ENTITY::VEHICLE_ID:
     		{ 
-			target_pos = target->GetPoints().GetCenter() + target_offset;  
+			target_pos = drive_slot->GetTarget()->GetPoints().GetCenter() + target_offset;  
         		break;    
     		}
 
     		case ENTITY::CONTAINER_ID:
     		{ 
-			target_pos = target->GetPoints().GetCenter() + target_offset;  
+			target_pos = drive_slot->GetTarget()->GetPoints().GetCenter() + target_offset;  
         		break;    
     		}
     	}
 
 	#if DRIVECOMPLEX_LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos(int, int)=" + int2str((int)target_pos.x) + "," + int2str((int)target_pos.y) + "target_center(int, int) =" + int2str((int)target->GetPoints().GetCenter().x) + ", " + int2str((int)target->GetPoints().GetCenter().y), DRIVECOMPLEX_LOG_DIP); 
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos(int, int)=" + int2str((int)target_pos.x) + "," + int2str((int)target_pos.y) + "target_center(int, int) =" + int2str((int)drive_slot->GetTarget()->GetPoints().GetCenter().x) + ", " + int2str((int)drive_slot->GetTarget()->GetPoints().GetCenter().y), DRIVECOMPLEX_LOG_DIP); 
 	#endif 
 }
 
 
 bool DriveComplex::CheckTargetEchievement()
 {
-	if (target != NULL)
+	if (drive_slot->GetTarget() != NULL)
 	{
      		if (collisionBetweenCenters(owner_vehicle->GetPoints(), target_pos, target_distance) == true)
      		{
@@ -267,14 +267,14 @@ bool DriveComplex::CheckTargetEchievement()
 
 bool DriveComplex::GetDockingPermission()
 {
-	switch(target->GetTypeId())
+	switch(drive_slot->GetTarget()->GetTypeId())
 	{
-		case ENTITY::PLANET_ID:       { return ((Planet*)target)->GetLand()->GetPermissionToLand(); break; }
+		case ENTITY::PLANET_ID:       { return ((Planet*)drive_slot->GetTarget())->GetLand()->GetPermissionToLand(); break; }
 		case ENTITY::VEHICLE_ID: 
 		{ 
-			switch(target->GetSubTypeId())
+			switch(drive_slot->GetTarget()->GetSubTypeId())
 			{
-				case ENTITY::SPACESTATION_ID: { return ((SpaceStation*)target)->GetLand()->GetPermissionToLand(); break; }
+				case ENTITY::SPACESTATION_ID: { return ((SpaceStation*)drive_slot->GetTarget())->GetLand()->GetPermissionToLand(); break; }
 				//case SHIP_ID:   { return targetOb->GetVehicle()->getPermissionToLand(); break; }
 			}
 			break;
