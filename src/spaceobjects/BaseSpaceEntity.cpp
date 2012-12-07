@@ -66,7 +66,6 @@ void BaseSpaceEntity::UpdateRotation()
 void BaseSpaceEntity::MovingByExternalForce(const vec2f& _target_pos, float force)
 {
 	get_dPos_ToPoint(points.GetCenter(), _target_pos, force, d_pos);
-	points.SetCenter(points.GetCenter() + d_pos);
 }
 
 /* virtual */

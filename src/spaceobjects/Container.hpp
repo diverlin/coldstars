@@ -30,7 +30,7 @@ class Container : public BaseSpaceEntity
         	
         	void PutChildsToGarbage() const;
         	
-        	void SetTargetPos(const vec2f& target_pos) { this->target_pos = target_pos; keep_moving = true; };
+        	void SetTargetPos(const vec2f& target_pos, float velocity) { this->target_pos = target_pos; this->velocity = velocity; };
         	void BindItemSlot(ItemSlot*);
         	ItemSlot* GetItemSlot() const { return item_slot; };
 
@@ -55,7 +55,6 @@ class Container : public BaseSpaceEntity
         	vec2f d_pos;
         	
         	float velocity;
-        	bool keep_moving;
         	
         	void SaveDataUniqueContainer(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueContainer(const boost::property_tree::ptree&);
