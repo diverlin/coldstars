@@ -1009,7 +1009,7 @@ void Player::RunSession(const TurnTimer& turn_timer)
        	switch(npc->GetVehicle()->GetPlaceTypeId())
        	{
        		case ENTITY::SPACE_ID: 		{ SessionInSpace(npc->GetVehicle()->GetStarSystem(), turn_timer); break; }
-       		case ENTITY::HYPER_SPACE_ID: 	{ SessionInSpace((StarSystem*)npc->GetVehicle()->GetDriveComplex().GetTarget(), turn_timer); break; }
+       		case ENTITY::HYPER_SPACE_ID: 	{ SessionInSpace((StarSystem*)npc->GetVehicle()->GetDriveComplex().GetDriveSlot()->GetTarget(), turn_timer); break; }
        		case ENTITY::VEHICLE_SLOT_ID:  	{ SessionInKosmoport(); break; }
        		case ENTITY::NATURELAND_ID:  	{ SessionInNatureLand(); break; }
        	}        	

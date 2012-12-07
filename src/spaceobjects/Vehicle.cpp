@@ -533,7 +533,7 @@ void Vehicle::UpdateSpecialAction()
 			{
 				if (UpdateFadeInEffect() == true)
 				{
-			                HyperJumpEvent(drive_complex.GetTarget()->GetStarSystem());
+			                HyperJumpEvent(drive_complex.GetDriveSlot()->GetTarget()->GetStarSystem());
 			        }
 			
 				break;
@@ -600,22 +600,22 @@ void Vehicle::DockingEvent()
 	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" Vehicle::LaunchingEvent", 2); 
 	#endif
 	           
-        switch(drive_complex.GetTarget()->GetTypeId())         	     	     	
+        switch(drive_complex.GetDriveSlot()->GetTarget()->GetTypeId())         	     	     	
      	{
      		case ENTITY::PLANET_ID:
      		{
-                	Planet* planet = ((Planet*)drive_complex.GetTarget());                
+                	Planet* planet = ((Planet*)drive_complex.GetDriveSlot()->GetTarget());                
      			planet->GetLand()->AddVehicle(this);
 			break;
 		}
 	
 		case ENTITY::VEHICLE_ID:
 		{	 
-			switch(drive_complex.GetTarget()->GetSubTypeId())
+			switch(drive_complex.GetDriveSlot()->GetTarget()->GetSubTypeId())
 			{
 				case ENTITY::SPACESTATION_ID:
 				{
-                			SpaceStation* spacestation = ((SpaceStation*)drive_complex.GetTarget());
+                			SpaceStation* spacestation = ((SpaceStation*)drive_complex.GetDriveSlot()->GetTarget());
                         		spacestation->GetLand()->AddVehicle(this);
 					break;
 				}
@@ -1273,9 +1273,9 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
        	save_ptree.put(root+"data_korpus.slot_weapon_num", data_korpus.slot_weapon_num);       	
        	
 
-       	if (drive_complex.GetTarget() != NULL) 
+       	if (drive_complex.GetDriveSlot()->GetTarget() != NULL) 
        	{
-       		save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_target_id", drive_complex.GetTarget()->GetId());
+       		save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_target_id", drive_complex.GetDriveSlot()->GetTarget()->GetId());
        		save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_action_id", drive_complex.GetActionId());
        	}
 	else 
@@ -1304,7 +1304,7 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
 
        	if (place_type_id == ENTITY::HYPER_SPACE_ID) 
        	{ 
-       		save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", drive_complex.GetTarget()->GetId()); 
+       		save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", drive_complex.GetDriveSlot()->GetTarget()->GetId()); 
        	}
        	else 
        	{ 
