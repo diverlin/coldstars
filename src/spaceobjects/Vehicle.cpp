@@ -810,7 +810,7 @@ void Vehicle::UpdatePropertiesFire()
 	Logger::Instance().Log(" vehicle_id=" + int2str(GetId()) + " Vehicle::UpdatePropertiesFire", ITEMINFLUENCE_LOG_DIP);
 	#endif
 	
-     	//weapon_complex.UpdateFireAbility();
+     	weapon_complex.UpdateFireAbility();
      	//weapon_complex.PrepareWeapons();
 }
 

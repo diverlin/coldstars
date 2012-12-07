@@ -371,7 +371,7 @@ void StarSystem::UpdateStates()
 {
 	if (CONTAINER_vec.size() < 100)
 	{
-		AsteroidManager_s(3);
+		AsteroidManager_s(300);
 	}
 	     	
 	if (CRASH_TEST_ON == true)

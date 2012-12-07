@@ -71,48 +71,34 @@ ItemSlot* WeaponComplex::GetEmptyWeaponSlot() const
 ItemSlot* WeaponComplex::GetEquipedWeakestWeaponSlot() const
 {
 	int min_price = 0;
-	int i_min = 0;
-	
-	if (slot_weapon_equiped_vec.size() == 1)
-	{
-		return slot_weapon_equiped_vec[0];
-        }
-
-	if (slot_weapon_equiped_vec.size() > 1)
-	{
-		min_price = slot_weapon_equiped_vec[0]->GetItem()->GetPrice();
+	int i_min = NONE_ID;
 		
-		for(unsigned int i=1; i<slot_weapon_equiped_vec.size(); i++)
-        	{
-        		int price = slot_weapon_equiped_vec[i]->GetItem()->GetPrice();
-                	if (min_price > price)
-                	{
-                		min_price = price;
-                		i_min = i;
-                	}
-        	}
-        	
-        	return slot_weapon_equiped_vec[i_min];
-        }
-        
-        return NULL;
+	for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
+	{
+		if (slot_weapon_vec[i]->GetEquiped() == true)
+		{
+			int price = slot_weapon_vec[i]->GetItem()->GetPrice();
+			if ((min_price > price) or (min_price == 0))
+			{
+				min_price = price;
+				i_min = i;
+			}
+		}
+	}
+	
+	if (i_min != NONE_ID)
+	{
+		return slot_weapon_vec[i_min];
+	}
+	else
+	{
+		return NULL;
+	}
 }
                 
 void WeaponComplex::PrepareWeapons()
 {       
      	// used once at the begining of turn
-     	slot_weapon_equiped_vec.clear();     	
-     	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
-     	{ 
-        	if (slot_weapon_vec[i]->GetEquiped() == true)
-        	{
-           		if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
-           		{
-              			slot_weapon_equiped_vec.push_back(slot_weapon_vec[i]); 
-           		}
-           	}
-     	}     	
-     	
 	ReloadAllWeapons();
 	ValidateAllWeaponsTarget(); // cause bug during loading, anyway this step looks like useless here
 }
@@ -120,12 +106,18 @@ void WeaponComplex::PrepareWeapons()
 void WeaponComplex::ReloadAllWeapons()
 {
      	slot_weapon_reloaded_vec.clear();
-     	for (unsigned int i=0; i<slot_weapon_equiped_vec.size(); i++)
+     	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
         {
-         	if (slot_weapon_equiped_vec[i]->CheckAmmo() == true)
-                {
-             		slot_weapon_reloaded_vec.push_back(slot_weapon_equiped_vec[i]);
-                }
+                if (slot_weapon_vec[i]->GetEquiped() == true)
+        	{
+           		if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
+           		{
+           	         	if (slot_weapon_vec[i]->CheckAmmo() == true)
+                		{
+             				slot_weapon_reloaded_vec.push_back(slot_weapon_vec[i]);
+                		}
+        		}
+        	}
         }
         
      	fire_delay = getRandInt(7,15);
@@ -185,50 +177,36 @@ bool WeaponComplex::IsAnyWeaponSelected() const
 	return false;
 }
 
-void WeaponComplex::SetTarget(BaseSpaceEntity* target)
+void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
 {                          
         float dist = distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), target->GetPoints().GetCenter());
         
         #if WEAPONSTARGET_LOG_ENABLED == 1 
+        if (item_slot == NULL)
 	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" WeaponComplex::SetTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), WEAPONSTARGET_LOG_DIP); 
-	#endif   
-	
-        for (unsigned int i=0; i<slot_weapon_equiped_vec.size(); i++)
-        {
-        	if (slot_weapon_equiped_vec[i]->GetSelected() == true )
-        	{
-           		if ( slot_weapon_equiped_vec[i]->GetTarget() == NULL )
-           		{
-           			if (slot_weapon_equiped_vec[i]->CheckTarget(target) == true)
-         			{
-         				slot_weapon_equiped_vec[i]->SetTarget(target);
-                                }
-                        }
-                } 
-        }
-}
-
-void WeaponComplex::SetPreciseFireTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
-{                          
-        float dist = distBetweenPoints(owner_vehicle->GetPoints().GetCenter(), target->GetPoints().GetCenter());
-        
-        #if WEAPONSTARGET_LOG_ENABLED == 1 
+	else
 	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+ " WeaponComplex::SetPreciseFireTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " item_subtype_id=" + getTypeStr(item_slot->GetItem()->GetSubTypeId()) + " id=" + int2str(item_slot->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
 	#endif   
 	
-        for (unsigned int i=0; i<slot_weapon_equiped_vec.size(); i++)
+        for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
         {
-        	if (slot_weapon_equiped_vec[i]->GetSelected() == true)
+                if (slot_weapon_vec[i]->GetSelected() == true )
         	{
-           		if (slot_weapon_equiped_vec[i]->GetTarget() == NULL)
-           		{
-           		        if (slot_weapon_equiped_vec[i]->CheckTarget(target, item_slot) == true)
-         			{
-         				slot_weapon_equiped_vec[i]->SetTarget(target, item_slot);
-                        	}
-                        }
-                } 
-        }
+	                if (slot_weapon_vec[i]->GetEquiped() == true)
+	        	{
+	           		if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
+	           		{
+	     	      	   		if ( slot_weapon_vec[i]->GetTarget() == NULL )
+           				{
+	           				if (slot_weapon_vec[i]->CheckTarget(target) == true)
+	         				{
+	         					slot_weapon_vec[i]->SetTarget(target, item_slot);
+	                                	}
+	                        	}
+                		} 
+        		}
+		}
+	}
 }
 
 void WeaponComplex::Fire(int timer, int attack_skill, bool show_effect)
@@ -281,51 +259,45 @@ void WeaponComplex::ValidateAllWeaponsTarget()
         }
 }
 
-//bool WeaponComplex::UpdateFireAbility()
-//{
+void WeaponComplex::UpdateFireAbility()
+{
      	//total_damage = 0;
      	//avr_damage =
      	//avr_radius =  
      	
      	//int sum_fire_radius = 0;
 	
-	//weapon_radius_min = 0;
-     	
-     	//slot_weapon_equiped_vec.clear();     	
-     	//for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
-     	//{ 
-        	//if (slot_weapon_vec[i]->GetEquiped() == true)
-        	//{
-           		//if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
-           		//{
-              			//slot_weapon_equiped_vec.push_back(slot_weapon_vec[i]); 
-              			
-              			//int weapon_radius = slot_weapon_vec[i]->GetItemRadius();
-              			//if ( (weapon_radius < weapon_radius_min) or (weapon_radius_min == 0) )
-              			//{
-              				//weapon_radius_min = weapon_radius;
-              			//}
-              			////sum_damage      += slot_weapon_vec[i]->getItemDamage(); 
-              			////sum_fire_radius += slot_weapon_vec[i]->getItemRadius(); 
-           		//}
-           	//}
-     	//}
- 	
-     	//if (slot_weapon_equiped_vec.size() != 0)
-     	//{
-        	//return true;
-     	//}
-     	//else
-     	//{
-        	//return false;
-     	//} 
-//}
+	weapon_radius_min = 0;
+	
+     	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
+     	{
+     		if (slot_weapon_vec[i]->GetEquiped() == true)
+		{ 
+			if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
+			{		
+				int weapon_radius = slot_weapon_vec[i]->GetItemRadius();
+				if ( (weapon_radius < weapon_radius_min) or (weapon_radius_min == 0) )
+				{
+					weapon_radius_min = weapon_radius;
+				}
+				//sum_damage      += slot_weapon_vec[i]->getItemDamage(); 
+				//sum_fire_radius += slot_weapon_vec[i]->getItemRadius(); 
+			}
+		}
+     	}
+}
 
 void WeaponComplex::RenderTurrels() const
 {
-    	for(unsigned int i=0; i<slot_weapon_equiped_vec.size(); i++)
+    	for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
     	{
-        	slot_weapon_equiped_vec[i]->GetTurrel()->Render(owner_vehicle->GetPoints().GetAngleDegree());        
+    	     	if (slot_weapon_vec[i]->GetEquiped() == true)
+		{ 
+			if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
+			{	
+    		       		slot_weapon_vec[i]->GetTurrel()->Render(owner_vehicle->GetPoints().GetAngleDegree());        
+    			}
+    		}
     	} 
 }
 

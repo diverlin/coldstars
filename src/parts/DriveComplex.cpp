@@ -97,8 +97,12 @@ void DriveComplex::SetStaticTargetCoords(const vec2f& target_pos)
 void DriveComplex::SetTarget(BaseSpaceEntity* target, int _action_id)
 {
     	ResetTarget();
+
+	#if DRIVECOMPLEX_LOG_ENABLED == 1 
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::SetTarget " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " navigator_action = " + getNavigatorActionStr(_action_id), DRIVECOMPLEX_LOG_DIP); 
+	#endif 
+	
     	has_target = true;
-        
 	this->target = target;    
 
 	if (target->GetTypeId() == ENTITY::STARSYSTEM_ID)
@@ -110,12 +114,7 @@ void DriveComplex::SetTarget(BaseSpaceEntity* target, int _action_id)
 	else
 	{
 		DefineDistance(_action_id);
-		UpdateDynamicTargetCoord();
 	}
-
-	#if DRIVECOMPLEX_LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::SetTarget " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " navigator_action = " + getNavigatorActionStr(action_id), DRIVECOMPLEX_LOG_DIP); 
-	#endif   
 	       
 	UpdatePath();
 }
@@ -146,8 +145,11 @@ void DriveComplex::DefineDistance(int action_id)
     		case NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE_ID:
     		{
     			int weapon_radius_min = owner_vehicle->GetWeaponComplex().GetWeaponRadiusMin();
-    		    	target_distance = 0; 
-    			target_offset = getRandVec2f(weapon_radius_min/4, weapon_radius_min/1.9); 
+    		    	target_distance = 0;
+    		    	if (weapon_radius_min != 0)
+    		    	{ 
+    				target_offset = getRandVec2f(weapon_radius_min/4, weapon_radius_min/2); 
+    			}
     			
     			break;    		
     		}
@@ -221,27 +223,31 @@ void DriveComplex::UpdateDynamicTargetCoord()
     		case ENTITY::PLANET_ID:
     		{ 
         		target_pos = ((Planet*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;         	
-		       	return; break;		       	
+		       	break;		       	
     		} 
 
     		case ENTITY::ASTEROID_ID:
     		{ 
         		target_pos = ((Asteroid*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;         	
-        		return; break;
+        		break;
     		} 
     	     
     		case ENTITY::VEHICLE_ID:
     		{ 
 			target_pos = target->GetPoints().GetCenter() + target_offset;  
-        		return; break;    
+        		break;    
     		}
 
     		case ENTITY::CONTAINER_ID:
     		{ 
 			target_pos = target->GetPoints().GetCenter() + target_offset;  
-        		return; break;    
+        		break;    
     		}
     	}
+
+	#if DRIVECOMPLEX_LOG_ENABLED == 1 
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos(int, int)=" + int2str((int)target_pos.x) + "," + int2str((int)target_pos.y) + "target_center(int, int) =" + int2str((int)target->GetPoints().GetCenter().x) + ", " + int2str((int)target->GetPoints().GetCenter().y), DRIVECOMPLEX_LOG_DIP); 
+	#endif 
 }
 
 
@@ -288,7 +294,7 @@ void DriveComplex::ClearPath()
 void DriveComplex::CalcPath()
 {
 	#if DRIVECOMPLEX_LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::CalcPath" + "target_pos(int, int)=" + int2str((int)target_pos.x) + "," + int2str((int)target_pos.y), DRIVECOMPLEX_LOG_DIP); 
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::CalcPath " + "target_pos(int, int)=" + int2str((int)target_pos.x) + "," + int2str((int)target_pos.y), DRIVECOMPLEX_LOG_DIP); 
 	#endif   
 	
 	ClearPath();

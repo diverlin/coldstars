@@ -26,6 +26,7 @@ class ItemSlot;
 class BaseItem;
 class BaseSpaceEntity;
 class TextureOb;
+#include "../common/constants.hpp"
 
 class WeaponComplex
 {
@@ -44,8 +45,7 @@ class WeaponComplex
         	
                	void PrepareWeapons();
                      
-                void SetTarget(BaseSpaceEntity*);     
-                void SetPreciseFireTarget(BaseSpaceEntity*, ItemSlot*);     
+                void SetTarget(BaseSpaceEntity*, ItemSlot* item_slot = NULL);     
                        
         	void Fire(int, int, bool);
         	
@@ -56,7 +56,7 @@ class WeaponComplex
 
         	bool IsAnyWeaponSelected() const; 
         	
-        	//bool UpdateFireAbility();
+        	void UpdateFireAbility();
         	
         	void RenderWeaponIcons() const;
         	void RenderWeaponsRange();
@@ -69,7 +69,6 @@ class WeaponComplex
       		
       		int fire_delay, d_fire_delay;
         	std::vector<ItemSlot*> slot_weapon_vec;
-        	std::vector<ItemSlot*> slot_weapon_equiped_vec;
         	std::vector<ItemSlot*> slot_weapon_reloaded_vec;
    	
         	void ReloadAllWeapons();  
