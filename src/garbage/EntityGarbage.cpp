@@ -31,9 +31,19 @@ EntityGarbage& EntityGarbage::Instance()
 EntityGarbage::~EntityGarbage()
 {}
                   
-void EntityGarbage::Add(Base* entitiy) 
+void EntityGarbage::Add(Base* entity) 
 {
-	entities_vec.push_back(entitiy);
+	#if CREATEDESTROY_LOG_ENABLED == 1
+    	for (unsigned int i=0; i<entities_vec.size(); i++)
+	{
+		if (entities_vec[i]->GetId() == entity->GetId())
+		{
+			Logger::Instance().Log("________EntityGarbage::Add dublicated entity found(fix that) " + getTypeStr(entities_vec[i]->GetTypeId()) + "(" +int2str(entities_vec[i]->GetTypeId()) +") " + getTypeStr(entities_vec[i]->GetSubTypeId()) + "(" + int2str(entities_vec[i]->GetSubTypeId()) + ") id=" + int2str(entities_vec[i]->GetId()));
+		}
+	}
+	#endif
+		
+	entities_vec.push_back(entity);
 }
 
 void EntityGarbage::Clear()
@@ -42,7 +52,7 @@ void EntityGarbage::Clear()
     	{ 
 		EntityManager::Instance().RemoveEntity(entities_vec[i]);
     		#if CREATEDESTROY_LOG_ENABLED == 1
-    		Logger::Instance().Log("________EntityGarbage delete " + getTypeStr(entities_vec[i]->GetTypeId()) + "(" +int2str(entities_vec[i]->GetTypeId()) +") " + getTypeStr(entities_vec[i]->GetSubTypeId()) + "(" + int2str(entities_vec[i]->GetSubTypeId()) + ") id=" + int2str(entities_vec[i]->GetId()));
+    		Logger::Instance().Log("________EntityGarbage::Clear delete entity " + getTypeStr(entities_vec[i]->GetTypeId()) + "(" +int2str(entities_vec[i]->GetTypeId()) +") " + getTypeStr(entities_vec[i]->GetSubTypeId()) + "(" + int2str(entities_vec[i]->GetSubTypeId()) + ") id=" + int2str(entities_vec[i]->GetId()));
 		#endif
 		delete entities_vec[i];
 	}

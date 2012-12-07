@@ -86,7 +86,7 @@ bool GuiManager::UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData& 
 	{
 		if (selected_item_slot->GetEquiped() == true)
 		{
-			player->GetNpc()->GetVehicle()->GetWeaponComplex().SetPreciseFireTarget(selected_item_slot->GetOwnerVehicle(), selected_item_slot);
+			player->GetNpc()->GetVehicle()->GetWeaponComplex().SetTarget(selected_item_slot->GetOwnerVehicle(), selected_item_slot);
 			gui_vehicle_target.Reset();
 			return true;
 		}

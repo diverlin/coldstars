@@ -126,7 +126,7 @@ void EntityManager::Clear()
 	for (std::map<int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
 	{	
 	    	#if CREATEDESTROY_LOG_ENABLED == 1
-    		Logger::Instance().Log("________EntityManager::Clear() delete " + getTypeStr(iterator->second->GetTypeId()) + "(" +int2str(iterator->second->GetTypeId()) +") " + getTypeStr(iterator->second->GetSubTypeId()) + "(" + int2str(iterator->second->GetSubTypeId()) + ") id=" + int2str(iterator->second->GetId()));
+    		Logger::Instance().Log("________EntityManager::Clear, delete " + getTypeStr(iterator->second->GetTypeId()) + "(" +int2str(iterator->second->GetTypeId()) +") " + getTypeStr(iterator->second->GetSubTypeId()) + "(" + int2str(iterator->second->GetSubTypeId()) + ") id=" + int2str(iterator->second->GetId()));
 		#endif	
 		delete iterator->second;
 	}
@@ -137,7 +137,7 @@ void EntityManager::Clear()
 void EntityManager::RegisterEntity(Base* entity)
 {
 	#if CREATEDESTROY_LOG_ENABLED == 1
-	Logger::Instance().Log("+++++++EntityManager register " + getTypeStr(entity->GetTypeId()) + "(" +int2str(entity->GetTypeId()) +") " + getTypeStr(entity->GetSubTypeId()) + "(" + int2str(entity->GetSubTypeId()) + ") id=" + int2str(entity->GetId()));
+	Logger::Instance().Log("+++++++EntityManager::RegisterEntity " + getTypeStr(entity->GetTypeId()) + "(" +int2str(entity->GetTypeId()) +") " + getTypeStr(entity->GetSubTypeId()) + "(" + int2str(entity->GetSubTypeId()) + ") id=" + int2str(entity->GetId()));
 	#endif
 	
 	entity_map.insert(std::make_pair(entity->GetId(), entity));
@@ -146,7 +146,7 @@ void EntityManager::RegisterEntity(Base* entity)
 Base* EntityManager::GetEntityById(int id) const
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log("    EntityManager.GetEntityById() requested_id=" + int2str(id));
+	Logger::Instance().Log("    EntityManager::GetEntityById requested_id=" + int2str(id));
 	#endif
 	
 	std::map<int, Base*>::const_iterator slice = entity_map.find(id);
@@ -154,7 +154,7 @@ Base* EntityManager::GetEntityById(int id) const
 	assert(slice->second);
 
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log("    EntityManager.GetEntityById() type_id=" + getTypeStr(slice->second->GetTypeId()));
+	Logger::Instance().Log("    EntityManager::GetEntityById type_id=" + getTypeStr(slice->second->GetTypeId()));
 	#endif
 	
 	return slice->second;
@@ -176,7 +176,7 @@ Base* EntityManager::GetPlayer() const
 void EntityManager::RemoveEntity(Base* entity)
 {    
 	#if CREATEDESTROY_LOG_ENABLED == 1
-	Logger::Instance().Log("________EntityManager remove " + getTypeStr(entity->GetTypeId()) + "(" +int2str(entity->GetTypeId()) +") " + getTypeStr(entity->GetSubTypeId()) + "(" + int2str(entity->GetSubTypeId()) + ") id=" + int2str(entity->GetId()));
+	Logger::Instance().Log("________EntityManager::RemoveEntity " + getTypeStr(entity->GetTypeId()) + "(" +int2str(entity->GetTypeId()) +") " + getTypeStr(entity->GetSubTypeId()) + "(" + int2str(entity->GetSubTypeId()) + ") id=" + int2str(entity->GetId()));
 	#endif
 		
 	if (entity_map.count(entity->GetId()) == 1)
