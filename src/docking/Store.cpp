@@ -92,7 +92,7 @@ ItemSlot* Store::GetEmptyItemSlot() const
 {
         for (unsigned int i=0; i<item_slot_vec.size(); i++)
         {
-                if (item_slot_vec[i]->GetEquiped() == false)
+                if (item_slot_vec[i]->GetItem() == NULL)
                 {
                         return item_slot_vec[i];
         	}
@@ -105,7 +105,7 @@ VehicleSlot* Store::GetEmptyVehicleSlot() const
 {
         for (unsigned int i=0; i<vehicle_slot_vec.size(); i++)
         {
-                if (vehicle_slot_vec[i]->GetEquiped() == false)
+                if (vehicle_slot_vec[i]->GetVehicle() == NULL)
                 {
                         return vehicle_slot_vec[i];
         	}

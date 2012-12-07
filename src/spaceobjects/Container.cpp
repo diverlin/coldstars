@@ -119,10 +119,10 @@ void Container::Render2D()
 
 void Container::SaveDataUniqueContainer(boost::property_tree::ptree& save_ptree, const std::string& root) const	
 {
-	save_ptree.put(root+"target_pos.x",   target_pos.x);
-	save_ptree.put(root+"target_pos.y",   target_pos.y);
+	save_ptree.put(root+"target_pos.x", target_pos.x);
+	save_ptree.put(root+"target_pos.y", target_pos.y);
 
-	save_ptree.put(root+"velocity",   velocity);
+	save_ptree.put(root+"velocity", velocity);
 }
 
 void Container::LoadDataUniqueContainer(const boost::property_tree::ptree& load_ptree)

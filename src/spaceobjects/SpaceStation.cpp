@@ -102,7 +102,7 @@ void SpaceStation::RenderInSpace() const
 		//renderDriveTrail();
     	//}
     	
-    	if (protection_complex.GetProtectorSlot()->GetEquiped() == true)
+    	if (protection_complex.GetProtectorSlot()->GetItem() != NULL)
     	{
         	RenderShieldEffect(1.0 - color.a); 
         }

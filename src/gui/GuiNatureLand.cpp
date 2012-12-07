@@ -125,7 +125,7 @@ void GuiNatureLand::RenderEquipedItemSlots() const
 		glTranslatef(offset.x, offset.y, 0);
         	for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
         	{
-        		if (rect_itemslot_vec[i].second->GetEquiped() == true)
+        		if (rect_itemslot_vec[i].second->GetItem() != NULL)
         		{
                 		rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, offset);
         		}

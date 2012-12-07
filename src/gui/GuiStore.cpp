@@ -78,7 +78,7 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse, Store* store)
 {
         for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
         { 
-                if (rect_itemslot_vec[i].second->GetEquiped() == true)
+                if (rect_itemslot_vec[i].second->GetItem() != NULL)
                 {
                 	if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
                 	{
@@ -98,7 +98,7 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse, Store* store)
 
         for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
         { 
-                if (rect_vehicleslot_vec[i].second->GetEquiped() == true)
+                if (rect_vehicleslot_vec[i].second->GetVehicle() != NULL)
                 {
                 	if (rect_vehicleslot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
                 	{
@@ -127,7 +127,7 @@ void GuiStore::RenderSlots(int credits) const
         	for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
         	{
                 	rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, offset);
-                	if (rect_itemslot_vec[i].second->GetEquiped() == true)
+                	if (rect_itemslot_vec[i].second->GetItem() != NULL)
                 	{
                 		if (rect_itemslot_vec[i].second->GetItem()->GetPrice() > credits)
                 		{
@@ -139,7 +139,7 @@ void GuiStore::RenderSlots(int credits) const
         	for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
         	{
                 	rect_vehicleslot_vec[i].second->Render(rect_vehicleslot_vec[i].first);
-                	if (rect_vehicleslot_vec[i].second->GetEquiped() == true)
+                	if (rect_vehicleslot_vec[i].second->GetVehicle() != NULL)
                 	{
                 		//if (rect_vehicleslot_vec[i].second->GetItem()->GetPrice() > credits)
                 		//{

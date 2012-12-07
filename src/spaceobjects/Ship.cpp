@@ -133,7 +133,7 @@ void Ship::RenderInSpace() const
 		RenderDriveEffect(1.0 - color.a);
     	}
     	
-    	if (protection_complex.GetProtectorSlot()->GetEquiped() == true)
+    	if (protection_complex.GetProtectorSlot()->GetItem() != NULL)
     	{
         	RenderShieldEffect(1.0 - color.a); 
         }

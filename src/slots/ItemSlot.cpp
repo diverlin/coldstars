@@ -72,7 +72,7 @@ ItemSlot::~ItemSlot()
     
 void ItemSlot::PutChildsToGarbage() const
 {
-	if (equiped == true)
+	if (item != NULL)
 	{
 		if (item->GetTypeId() == ENTITY::EQUIPMENT_ID)
 		{
@@ -211,7 +211,6 @@ bool ItemSlot::InsertItem(BaseItem* item)
 	if (data_id.subtype_id == ENTITY::CARGO_SLOT_ID) 
 	{           
 		this->item = item;
-		equiped = true; 
 		if (item->GetItemSlot() != NULL)
 		{
 			item->GetItemSlot()->RemoveItem();
@@ -224,7 +223,6 @@ bool ItemSlot::InsertItem(BaseItem* item)
 	if (data_id.subtype_id == item->GetParentSubTypeId())
 	{                                     
 		this->item = item;
-		equiped = true; 
 		if (item->GetItemSlot() != NULL)
 		{
 			item->GetItemSlot()->RemoveItem();
@@ -241,7 +239,6 @@ bool ItemSlot::InsertItem(BaseItem* item)
 void ItemSlot::RemoveItem()
 {	
         item = NULL;
-    	equiped = false;
     	
     	if (data_id.subtype_id != ENTITY::CARGO_SLOT_ID) 
 	{    
@@ -318,7 +315,7 @@ void ItemSlot::UpdateVehiclePropetries() const
 void ItemSlot::Render(const Rect& rect, const vec2f& gui_offset, bool draw_text) const
 {
        	drawTexturedRect(textureOb, rect, -1.5);    
-       	if (equiped == true)
+       	if (item != NULL)
        	{
        		item->Render(rect, gui_offset, draw_text);	
         }
@@ -367,7 +364,7 @@ void ItemSlot::DropItemToSpace(Vehicle* vehicle)
         
 bool ItemSlot::SwapItem(ItemSlot* slot)
 {
-       	if ( (equiped == false) and (slot->GetEquiped() == true) )
+       	if ( (item == NULL) and (slot->GetItem() != NULL) )
        	{      
        		if (InsertItem(slot->GetItem()) == true) 
        		{  			
@@ -375,7 +372,7 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
        		}             
 	}
 	
-	if ( (equiped == true) and (slot->GetEquiped() == false) )
+	if ( (item != NULL) and (slot->GetItem() == NULL) )
        	{ 
 		if (slot->InsertItem(GetItem()) == true)
 		{			
@@ -383,7 +380,7 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
 		}
 	}
 
-	if ( (equiped == true) and (slot->GetEquiped() == true) )
+	if ( (item != NULL) and (slot->GetItem() != NULL) )
        	{        
        		if (item->GetTypeId() == slot->GetItem()->GetTypeId())
        		{

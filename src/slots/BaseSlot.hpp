@@ -49,15 +49,13 @@ class BaseSlot : public Base
 		void DeselectEvent() { selected = false; };
 				
 		bool GetSelected() const { return selected; };
-		bool GetEquiped() const { return equiped; };
 		
 		const vec2f& GetPosition() const { return position; };
 		
 		Vehicle* GetOwnerVehicle() const { return (Vehicle*)owner; };
 		Base* GetOwner() const { return owner; };
 		
-        protected:
-                bool equiped;               
+        protected:        
                 bool selected;                     
                 
                 TextureOb* textureOb;
