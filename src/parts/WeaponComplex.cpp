@@ -46,7 +46,7 @@ TextureOb* WeaponComplex::GetItemTextureOb(int index) const
 	index--;
 	if (index < slot_weapon_vec.size())
 	{
-		if (slot_weapon_vec[index]->GetEquiped() == true)
+		if (slot_weapon_vec[index]->GetItem() != NULL)
                 {
                      	return slot_weapon_vec[index]->GetItem()->GetTextureOb();   
                 }
@@ -59,7 +59,7 @@ ItemSlot* WeaponComplex::GetEmptyWeaponSlot() const
 {
         for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
         {
-                if (slot_weapon_vec[i]->GetEquiped() == false)
+                if (slot_weapon_vec[i]->GetItem() == NULL)
                 {
                     	return slot_weapon_vec[i];
                 }
@@ -75,7 +75,7 @@ ItemSlot* WeaponComplex::GetEquipedWeakestWeaponSlot() const
 		
 	for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
 	{
-		if (slot_weapon_vec[i]->GetEquiped() == true)
+		if (slot_weapon_vec[i]->GetItem() != NULL)
 		{
 			int price = slot_weapon_vec[i]->GetItem()->GetPrice();
 			if ((min_price > price) or (min_price == 0))
@@ -100,7 +100,7 @@ void WeaponComplex::PrepareWeapons()
 {       
      	// used once at the begining of turn
 	ReloadAllWeapons();
-	ValidateAllWeaponsTarget(); // cause bug during loading, anyway this step looks like useless here
+	ValidateAllWeaponsTarget(); 
 }
     
 void WeaponComplex::ReloadAllWeapons()
@@ -108,7 +108,7 @@ void WeaponComplex::ReloadAllWeapons()
      	slot_weapon_reloaded_vec.clear();
      	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
         {
-                if (slot_weapon_vec[i]->GetEquiped() == true)
+                if (slot_weapon_vec[i]->GetItem() != NULL)
         	{
            		if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
            		{
@@ -192,7 +192,7 @@ void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
         {
                 if (slot_weapon_vec[i]->GetSelected() == true )
         	{
-	                if (slot_weapon_vec[i]->GetEquiped() == true)
+	                if (slot_weapon_vec[i]->GetItem() != NULL)
 	        	{
 	           		if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
 	           		{
@@ -247,14 +247,17 @@ void WeaponComplex::ValidateAllWeaponsTarget()
         {
                 if (slot_weapon_vec[i]->GetTarget() != NULL) 
                 {
-         		if (slot_weapon_vec[i]->GetEquiped() == true) 
+         		if (slot_weapon_vec[i]->GetItem() != NULL) 
                 	{
-             			slot_weapon_vec[i]->ValidateTarget();
+             			if (slot_weapon_vec[i]->ValidateTarget() == false)
+             			{
+             				slot_weapon_vec[i]->ResetTarget();
+             			}
                 	}
-                	else
-                	{
-                		slot_weapon_vec[i]->DeselectEvent();
-                	}
+                	//else
+                	//{
+                		//slot_weapon_vec[i]->DeselectEvent();
+                	//}
                 }
         }
 }
@@ -271,7 +274,7 @@ void WeaponComplex::UpdateFireAbility()
 	
      	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
      	{
-     		if (slot_weapon_vec[i]->GetEquiped() == true)
+     		if (slot_weapon_vec[i]->GetItem() != NULL)
 		{ 
 			if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
 			{		
@@ -291,7 +294,7 @@ void WeaponComplex::RenderTurrels() const
 {
     	for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
     	{
-    	     	if (slot_weapon_vec[i]->GetEquiped() == true)
+    	     	if (slot_weapon_vec[i]->GetItem() != NULL)
 		{ 
 			if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
 			{	

@@ -25,7 +25,6 @@
 #include "../spaceobjects/Vehicle.hpp"
 
 BaseSlot::BaseSlot():
-equiped(false),
 selected(false),
 owner(NULL),
 textureOb(NULL)

@@ -50,7 +50,6 @@ void VehicleSlot::PutChildsToGarbage() const
 void VehicleSlot::InsertVehicle(Vehicle* vehicle)
 {
         this->vehicle = vehicle;
-        equiped = true;
 
         vehicle->SetPlaceTypeId(data_id.type_id);
         vehicle->SetParentVehicleSlot(this);
@@ -58,7 +57,6 @@ void VehicleSlot::InsertVehicle(Vehicle* vehicle)
 
 void VehicleSlot::Release()
 {
-        equiped = false;
         vehicle = NULL;
 } 
 

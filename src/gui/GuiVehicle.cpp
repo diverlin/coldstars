@@ -241,7 +241,7 @@ bool GuiVehicle::UpdateMouseInteractionInSpace(const MouseData& data_mouse, bool
 	{ 
 		if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
 		{  
-			if ( (rect_slot_vec[i].second->GetEquiped() == true) and (player->GetCursor().GetItemSlot()->GetEquiped() == false) )
+			if ( (rect_slot_vec[i].second->GetItem() != NULL) and (player->GetCursor().GetItemSlot()->GetItem() == NULL) )
 			{
 				player->GetCursor().SetFocusedObject(rect_slot_vec[i].second->GetItem());
 			}
@@ -254,7 +254,7 @@ bool GuiVehicle::UpdateMouseInteractionInSpace(const MouseData& data_mouse, bool
 				}
 				else
 				{
-					if (player->GetCursor().GetItemSlot()->GetEquiped() == true)
+					if (player->GetCursor().GetItemSlot()->GetItem() != NULL)
 					{
 						if (player->GetNpc()->GetVehicle()->GetPlaceTypeId() == ENTITY::SPACE_ID)
 						{
@@ -274,7 +274,7 @@ bool GuiVehicle::UpdateMouseInteractionInSpace(const MouseData& data_mouse, bool
 				{
 					case 1:
 					{
-						if (rect_slot_vec[i].second->GetEquiped() == true)
+						if (rect_slot_vec[i].second->GetItem() != NULL)
 						{
 							if (data_mouse.right_click == true)
 							{
@@ -295,7 +295,7 @@ bool GuiVehicle::UpdateMouseInteractionInSpace(const MouseData& data_mouse, bool
 					
 					case 2:
 					{						
-						if (rect_slot_vec[i].second->GetEquiped() == true)
+						if (rect_slot_vec[i].second->GetItem() != NULL)
 						{
 							if (data_mouse.right_click == true)
 							{
@@ -330,7 +330,7 @@ bool GuiVehicle::UpdateMouseInteractionInStore(const MouseData& data_mouse, Vehi
 	{ 
 		if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
 		{  
-			if (rect_slot_vec[i].second->GetEquiped() == true)
+			if (rect_slot_vec[i].second->GetItem() != NULL)
 			{
 				player->GetCursor().SetFocusedObject(rect_slot_vec[i].second->GetItem());
 							
@@ -372,7 +372,7 @@ void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, int mark_
 {
 	for(unsigned int i=0; i<rect_slot_vec.size(); i++)
 	{
-		if (rect_slot_vec[i].second->GetEquiped() == false) 
+		if (rect_slot_vec[i].second->GetItem() == NULL) 
 		{
 			if ( (rect_slot_vec[i].second->GetSubTypeId() != ENTITY::CARGO_SLOT_ID) and (rect_slot_vec[i].second->GetSubTypeId() != ENTITY::GATE_SLOT_ID) )
                		{

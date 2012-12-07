@@ -84,7 +84,7 @@ bool GuiManager::UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData& 
 	ItemSlot* selected_item_slot = gui_vehicle_target.GetInreactedItemSlot(data_mouse);	
 	if (selected_item_slot != NULL)
 	{
-		if (selected_item_slot->GetEquiped() == true)
+		if (selected_item_slot->GetItem() != NULL)
 		{
 			player->GetNpc()->GetVehicle()->GetWeaponComplex().SetTarget(selected_item_slot->GetOwnerVehicle(), selected_item_slot);
 			gui_vehicle_target.Reset();
@@ -97,7 +97,7 @@ bool GuiManager::UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData& 
 
 void GuiManager::RenderScanVehicle(const MouseData& data_mouse, Vehicle* vehicle, bool show_skill) const
 {	
-	if (player->GetCursor().GetItemSlot()->GetEquiped() == true)
+	if (player->GetCursor().GetItemSlot()->GetItem() != NULL)
 	{
        		gui_vehicle_scan.RenderVehicle(data_mouse, player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId());
 		player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetRect(), vec2f(0, 0));		

@@ -92,7 +92,7 @@ void GuiVehicle2::UpdateEquipmentIcons() const
 {
 	for (unsigned int i=0; i<button_slot_vec.size(); i++)
 	{
-		if (button_slot_vec[i].second->GetEquiped() == true)
+		if (button_slot_vec[i].second->GetItem() != NULL)
 		{
 			button_slot_vec[i].first->SetTextureObAdditional(button_slot_vec[i].second->GetItem()->GetTextureOb());
 			button_slot_vec[i].first->SetTextureObMask(NULL);
