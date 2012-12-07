@@ -210,7 +210,7 @@ void StarSystem::Add(Container* container, const vec2f& center)
 	container->SetStarSystem(this);
         container->SetPlaceTypeId(ENTITY::SPACE_ID);
     	container->GetPoints().SetCenter(center);
-    	container->SetTargetPos(center+getRandVec2f(60, 100));
+    	container->SetTargetPos(center+getRandVec2f(60, 100), 4.0);
         
         CONTAINER_vec.push_back(container);
 }

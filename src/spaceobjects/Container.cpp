@@ -104,11 +104,18 @@ void Container::UpdateInSpace(int time, bool show_effect)
 		
 	if (time > 0)
 	{
-     		if (keep_moving == true)
+     		if (fabs(velocity) > 0.2f)
      		{
-        		keep_moving = get_dPos_ToPoint(points.GetCenter(), target_pos, velocity, d_pos);
-        		points.SetCenter(points.GetCenter().x + d_pos.x, points.GetCenter().y + d_pos.y);
+			velocity -= 0.1f;
+        		get_dPos_ToPoint(points.GetCenter(), target_pos, velocity, d_pos);
+
      		}  
+     		else
+     		{
+     			d_pos.Set(0.0f, 0.0f);
+     		}
+
+		points.SetCenter(points.GetCenter().x + d_pos.x, points.GetCenter().y + d_pos.y);
      	}
 }
        		
