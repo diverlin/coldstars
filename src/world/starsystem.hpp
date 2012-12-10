@@ -78,7 +78,7 @@ class StarSystem : public BaseSpaceEntity
 		void AddBullet(RocketBullet*, const vec2f&, float);
 								
 		void Add(BasePlanet*, BaseSpaceEntity* parent = NULL, int it = 0);
-		void Add(Container*, const vec2f&);
+		void AddContainer(Container*, const vec2f&);
 		void Add(BlackHole*, const vec2f&);
 
 		// effects
@@ -121,10 +121,9 @@ class StarSystem : public BaseSpaceEntity
     	private:
                 int race_id, conqueror_race_id;
                 
-    		//bool detalied_simulation;
-    		bool calculation_per_turn_allowed; 
-    		bool calculation_per_turn_allowed_inDynamic; 
-    		    		
+    		bool unique_update_inDymanic_done;
+    		bool unique_update_inStatic_done;
+    		
     		int condition_id;
     		
     		Galaxy* galaxy;

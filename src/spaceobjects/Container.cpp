@@ -142,7 +142,7 @@ void Container::LoadDataUniqueContainer(const boost::property_tree::ptree& load_
 
 void Container::ResolveDataUniqueContainer()
 {
-	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, vec2f(data_unresolved_BaseSpaceEntity.center.x, data_unresolved_BaseSpaceEntity.center.y)); 
+	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddContainer(this, vec2f(data_unresolved_BaseSpaceEntity.center.x, data_unresolved_BaseSpaceEntity.center.y)); 
 }		
 
 /*virtual*/

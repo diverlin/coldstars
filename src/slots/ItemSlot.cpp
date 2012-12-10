@@ -359,7 +359,7 @@ void ItemSlot::DropItemToSpace(Vehicle* vehicle)
         
         Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, item);
         
-	vehicle->GetStarSystem()->Add(container, vehicle->GetPoints().GetCenter());	
+	vehicle->GetStarSystem()->AddContainer(container, vehicle->GetPoints().GetCenter());	
 }
         
 bool ItemSlot::SwapItem(ItemSlot* slot)
@@ -547,10 +547,10 @@ void ItemSlot::ResolveDataUniqueItemSlot()
 
 void ItemSlot::LogSimpleTarget(const std::string& func_name) const
 {
-	 Logger::Instance().Log("ItemSlot subsubtype_id/Item subtype_id="+getTypeStr(GetSubSubTypeId())+"/"+getTypeStr(item->GetSubTypeId())+func_name + " target_type_id= " + getTypeStr(GetTarget()->GetTypeId()) + " id=" + int2str(GetTarget()->GetId()), WEAPONSTARGET_LOG_DIP); 
+	Logger::Instance().Log("owner_type_id/id="+getTypeStr(owner->GetTypeId())+"/"+int2str(owner->GetId())+" itemslot_subtype_id/itemslot_subsubtype_id/Item subtype_id="+getTypeStr(GetSubTypeId())+"/"+getTypeStr(GetSubSubTypeId())+"/"+getTypeStr(item->GetSubTypeId())+func_name + " target_type_id= " + getTypeStr(GetTarget()->GetTypeId()) + " id=" + int2str(GetTarget()->GetId()), WEAPONSTARGET_LOG_DIP); 
 }
 
 void ItemSlot::LogComplexTarget(const std::string& func_name) const
 {
-	Logger::Instance().Log("ItemSlot subsubtype_id/Item subtype_id="+getTypeStr(GetSubSubTypeId())+"/"+getTypeStr(item->GetSubTypeId())+func_name+"target_type_id= " + getTypeStr(GetTarget()->GetTypeId()) + " id=" + int2str(GetTarget()->GetId()) + " item_subtype_id=" + getTypeStr(subtarget->GetItem()->GetSubTypeId()) + " id=" + int2str(subtarget->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
+	Logger::Instance().Log("owner_type_id/id="+getTypeStr(owner->GetTypeId())+"/"+int2str(owner->GetId())+" itemslot_subtype_id/itemslot_subsubtype_id/Item subtype_id="+getTypeStr(GetSubTypeId())+"/"+getTypeStr(GetSubSubTypeId())+"/"+getTypeStr(item->GetSubTypeId())+func_name+"target_type_id= " + getTypeStr(GetTarget()->GetTypeId()) + " id=" + int2str(GetTarget()->GetId()) + " item_subtype_id=" + getTypeStr(subtarget->GetItem()->GetSubTypeId()) + " id=" + int2str(subtarget->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
 }

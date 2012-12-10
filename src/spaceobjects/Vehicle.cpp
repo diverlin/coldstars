@@ -585,8 +585,8 @@ bool Vehicle::UpdateFadeOutEffect()
 //// ******** DOCKING/LAUNCHING ******** 
 void Vehicle::HyperJumpEvent(StarSystem* starsystem)
 {
-        #if LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" Vehicle::HyperJumpEvent", 2); 
+        #if ENTITY_TRANSACTION_LOG_ENABLED == 1 
+	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::HyperJumpEvent", ENTITY_TRANSACTION_LOG_DIP); 
 	#endif   
 	
         special_action_id = SPECIAL_ACTION::INITIATE_JUMPOUT_ID;
@@ -596,8 +596,8 @@ void Vehicle::HyperJumpEvent(StarSystem* starsystem)
                 
 void Vehicle::DockingEvent()
 {
-        #if LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" Vehicle::LaunchingEvent", 2); 
+        #if ENTITY_TRANSACTION_LOG_ENABLED == 1 
+	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::DockingEvent", ENTITY_TRANSACTION_LOG_DIP); 
 	#endif
 	           
         switch(drive_complex.GetDriveSlot()->GetTarget()->GetTypeId())         	     	     	
@@ -636,6 +636,10 @@ void Vehicle::DockingEvent()
 
 void Vehicle::LaunchingEvent()
 {
+        #if ENTITY_TRANSACTION_LOG_ENABLED == 1 
+	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::LaunchingEvent", ENTITY_TRANSACTION_LOG_DIP); 
+	#endif
+	
 	SetSpecialActionId(SPECIAL_ACTION::INITIATE_LAUNCHING_ID);
 	color.a = 0.1;
 	
@@ -669,10 +673,6 @@ void Vehicle::LaunchingEvent()
 	     	starsystem->AddVehicle(this, ((BaseSpaceEntity*)land->GetOwner())->GetPoints().GetCenter() + offset_pos, angleInD, NULL);
 		land->RemoveVehicle(this); 
 	}
-	
-	#if LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(GetId())+" Vehicle::launchingEvent()", 2); 
-	#endif
 }
 //// 
 

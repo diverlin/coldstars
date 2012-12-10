@@ -20,6 +20,7 @@
 #define MYSTR_H
 
 #include <string>
+class Base;
 
 std::string int2str(int var); 
 std::string bool2str(bool var); 
@@ -29,5 +30,7 @@ std::string getAiModelStr(int);
 std::string getRaceStr(int); 
 std::string getNavigatorActionStr(int);
 std::string getTypeStr(int);
+
+std::string getBaseInfoStr(Base*);
 
 #endif

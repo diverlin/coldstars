@@ -85,7 +85,7 @@ void Galaxy::Update(Player* player, int time)
 		{
 			simulation_detalied = true;
 		}
-			 
+		 
      		STARSYSTEM_vec[i]->Update(time, simulation_detalied);
      	}
 }

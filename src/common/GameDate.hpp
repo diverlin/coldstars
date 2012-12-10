@@ -27,8 +27,10 @@ class Date
 		Date();
 		Date(unsigned int, unsigned int, unsigned int);
 		~Date();
+		
+		unsigned int GetDay() const { return day; };
 						
-		std::string GetDateString() const;
+		std::string GetStr() const;
 
 		unsigned int day;
 		unsigned int month;
@@ -39,14 +41,19 @@ class Date
 class GameDate
 {
 	public:
-		GameDate(unsigned int, unsigned int, unsigned int);
+		static GameDate& Instance();
 		~GameDate();
 		
+		void SetDate(unsigned int, unsigned int, unsigned int);
 		void NextDay();
-		std::string GetDateString() const;
+		const Date& GetDate() const { return date; };
 	
 	private:
-	Date date;
+		GameDate();
+		GameDate(const GameDate&) = delete;
+		GameDate& operator=(const GameDate&) = delete;
+		
+		Date date;
 };
 
 #endif

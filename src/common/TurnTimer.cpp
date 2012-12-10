@@ -20,11 +20,19 @@
 #include "constants.hpp"
 #include "GameDate.hpp"
 #include "SaveLoadManager.hpp"
+#include "Logger.hpp"
 #include "../config/config.hpp"
+
+TurnTimer& TurnTimer::Instance()
+{
+	static TurnTimer instance;
+	return instance;
+}
 
 TurnTimer::TurnTimer():
 turn_tick(-1),
-turn_ended(true)
+turn_ended(true),
+turn_counter(0)
 {}
 
 TurnTimer::~TurnTimer()
@@ -34,24 +42,27 @@ void TurnTimer::NextTurn()
 {
 	if (Config::Instance().AUTO_SAVE_MODE == true)
 	{
-	        std::cout<<"        *** proceeding autosave(AUTO_SAVE_MODE=ON)"<<std::endl;
+	        Logger::Instance().Log("*** proceeding autosave(AUTO_SAVE_MODE=ON)");
 		SaveLoadManager::Instance().PerformDelayedSave();
 	}
 			
 	turn_tick = TURN_TIME;
 	turn_ended = false;
 	
-	//game_date.NextDay();
+	turn_counter++;
+	
+	GameDate::Instance().NextDay();
+	Logger::Instance().Log("*** NEXT TURN, date:"+GameDate::Instance().GetDate().GetStr());
 }
 						
-void TurnTimer::Update(GameDate& game_date)
+void TurnTimer::Update()
 {
         turn_tick -= Config::Instance().GAME_SPEED;        
         
        	/////////// AUTO-TURN /////////////
        	if ( (turn_tick < -50) and (Config::Instance().AUTO_TURN_MODE == true) )
        	{  
-        	std::cout<<"        *** turn_end(AUTO_TURN_MODE=ON)"<<std::endl;
+        	Logger::Instance().Log("*** AUTO_TURN_MODE proceed END TURN");
        		NextTurn();
         }     
         

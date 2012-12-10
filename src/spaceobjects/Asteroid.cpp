@@ -65,7 +65,7 @@ void Asteroid::PostDeathUniqueEvent(bool show_effect)
                 goods_pack->Increase(4);
 
                 Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb, goods_pack);
-		starsystem->Add(container, points.GetCenter());
+		starsystem->AddContainer(container, points.GetCenter());
    	}
    	
    	if (show_effect == true)

@@ -211,10 +211,6 @@ void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
 
 void WeaponComplex::Fire(int timer, int attack_skill, bool show_effect)
 {
-        #if WEAPONSTARGET_LOG_ENABLED == 1 
-        Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" WeaponComplex::Fire START", WEAPONSTARGET_LOG_DIP); 
-        #endif   
-	
      	//if (timer < TURN_TIME - fire_delay)
      	{
         	for (std::vector<ItemSlot*>::iterator it=slot_weapon_reloaded_vec.begin(); it<slot_weapon_reloaded_vec.end(); ++it)
@@ -225,6 +221,8 @@ void WeaponComplex::Fire(int timer, int attack_skill, bool show_effect)
 				//if ((*it)->GetSubTarget() == NULL)
            			//{
            				//fire_delay += d_fire_delay;
+           				//slot_weapon_reloaded_vec.erase(it);
+           				//break;
                			//}
         		}
         		else
@@ -235,19 +233,15 @@ void WeaponComplex::Fire(int timer, int attack_skill, bool show_effect)
         		it = slot_weapon_reloaded_vec.erase(it);
         	}
         } 	
-        
-        #if WEAPONSTARGET_LOG_ENABLED == 1 
-        Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" WeaponComplex::Fire END", WEAPONSTARGET_LOG_DIP); 
-        #endif   
 }
 
 void WeaponComplex::ValidateAllWeaponsTarget()
 {
 	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
         {
-                if (slot_weapon_vec[i]->GetTarget() != NULL) 
-                {
-         		if (slot_weapon_vec[i]->GetItem() != NULL) 
+       		if (slot_weapon_vec[i]->GetItem() != NULL) 
+               	{
+                	if (slot_weapon_vec[i]->GetTarget() != NULL) 
                 	{
              			if (slot_weapon_vec[i]->ValidateTarget() == false)
              			{

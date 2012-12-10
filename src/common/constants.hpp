@@ -30,14 +30,15 @@
 	#define AISCENARIO_LOG_ENABLED 1
 	#define AI_LOG_ENABLED 1
 	#define SAVELOAD_LOG_ENABLED 1
-	#define STARSYSTEMADDREMOVE_LOG_ENABLED 1
+	//#define ENTITY_TRANSACTION_LOG_ENABLED 1
+	#define ENTITY_TRANSACTION_LOG_ENABLED 1
 	#define CREATEDESTROY_LOG_ENABLED 1
 	#define ITEMINFLUENCE_LOG_ENABLED 1
 	
 	const int GRAPPLE_QUEUE_LOG_DIP = 1;
 	const int DRIVECOMPLEX_LOG_DIP = 1;
 	const int WEAPONSTARGET_LOG_DIP = 1;
-	const int STARSYSTEMADDREMOVE_LOG_DIP = 1;
+	const int ENTITY_TRANSACTION_LOG_DIP = 1;
 	const int AISCENARIO_LOG_DIP = 2;
 	const int AI_LOG_DIP = 2;
 	const int SAVELOAD_LOG_DIP = 1;
@@ -47,8 +48,18 @@
 
 #define DEBUG_ITEMDAMAGELOCKVIAGUI 1  // 1 - is locking/unlocking item by right mouse click; 2 - is damaging/undamaging item by right mouse click
 
+//enum GAME_RUNTIME_STAGE
+//{
+	//STAGE1_DYNAMIC_UNIQUE_EVENTS,
+	//STAGE2_DYNAMIC_REGULAR,
+	//STAGE3_STATIC_ENTITY_MIND,
+	//STAGE4_STATIC_GARBAGE_CLEAR,
+	//STAGE5_STATIC_CONTROL_SAVE
+
+//};
+
 const bool TEST_ON = false;
-const bool CRASH_TEST_ON = false;
+const bool CRASH_TEST_ON = true;
 
 const double NO_DELAY = 0.0f;
 const int NO_ADDITIONAL_INFO = 0;
@@ -286,8 +297,8 @@ namespace ENTITY
 		const int STARSYSTEM_SEGMENT_WIDTH_NUM = 2;
 		const int STARSYSTEM_SEGMENT_HEIGHT_NUM = 2;
 
-		const int STARSYSTEM_INSEGMENT_NUM_MIN = 2;
-		const int STARSYSTEM_INSEGMENT_NUM_MAX = 3;
+		const int STARSYSTEM_INSEGMENT_NUM_MIN = 1;
+		const int STARSYSTEM_INSEGMENT_NUM_MAX = 1;
 
 		const int DISTANTSTAR_SIZE_MIN = 3; 
 		const int DISTANTSTAR_SIZE_MAX = 15;

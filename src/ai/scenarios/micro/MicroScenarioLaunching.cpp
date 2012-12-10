@@ -62,8 +62,8 @@ void MicroScenarioLaunching::UpdateInDynamicInSpace(Npc* npc) const
 /* virtual */
 void MicroScenarioLaunching::UpdateInStaticInDock(Npc* npc) const
 {
-	npc->GetVehicle()->LaunchingEvent();
-	npc->GetVehicle()->SetSpecialActionId(SPECIAL_ACTION::INITIATE_LAUNCHING_ID);
+	//npc->GetVehicle()->LaunchingEvent();
+	//npc->GetVehicle()->SetSpecialActionId(SPECIAL_ACTION::INITIATE_LAUNCHING_ID);
 }
 
 /* virtual */
