@@ -34,11 +34,11 @@ class EntityGarbage
 		void Clear();
 	
 	private:
-		std::vector<Base*> entities_vec;
-
 		EntityGarbage() {};
 		EntityGarbage(const EntityGarbage&) = delete;
 		EntityGarbage& operator=(const EntityGarbage&) = delete;
+
+		std::vector<Base*> entities_vec;
 };
      		
 #endif 

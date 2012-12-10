@@ -36,19 +36,27 @@ Date::Date(unsigned int day, unsigned int month, unsigned int year)
 Date::~Date()
 {}
 	
-std::string Date::GetDateString() const { return "day:" + int2str(day) + " month:" + int2str(month) + " year:" + int2str(year); };
+std::string Date::GetStr() const { return "day:" + int2str(day) + " month:" + int2str(month) + " year:" + int2str(year); };
 
 
+GameDate& GameDate::Instance()
+{
+	static GameDate instance;
+	return instance;
+}
 
-GameDate::GameDate(unsigned int day, unsigned int month, unsigned int year)
+GameDate::GameDate()
+{}
+
+GameDate::~GameDate()
+{}
+
+void GameDate::SetDate(unsigned int day, unsigned int month, unsigned int year)
 {
 	date.day = day;
 	date.month = month;
 	date.year = year;	
 }
-
-GameDate::~GameDate()
-{}
 
 void GameDate::NextDay() 
 {

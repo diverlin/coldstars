@@ -18,12 +18,22 @@
 
 #include "constants.hpp"
 #include <sstream>
+#include "Base.hpp"
 
-std::string int2str(int var) 
+std::string int2str(int val) 
 {
-    	std::ostringstream stm;
-    	stm << var;
-    	return stm.str() ;
+	if (val >= 0)
+	{
+    		std::ostringstream stm;
+    		stm<<val;
+    		return stm.str();
+	}    	
+    	else
+    	{
+    		std::ostringstream stm;
+    		stm<<abs(val);
+    		return "-"+stm.str();
+    	}
 }
 
 std::string bool2str(bool var) 
@@ -202,6 +212,11 @@ std::string getTypeStr(int type_id)
 							
 		default: { return "UNKNOWN ID"; }
 	}
+}
+
+std::string getBaseInfoStr(Base* base)
+{
+	return " id=" + int2str(base->GetId()) + " type=" + getTypeStr(base->GetTypeId()) + "/" + getTypeStr(base->GetSubTypeId()) + "/" + getTypeStr(base->GetSubSubTypeId());
 }
 
 

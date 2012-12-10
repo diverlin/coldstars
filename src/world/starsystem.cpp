@@ -61,7 +61,9 @@
 
 #include "../garbage/EntityGarbage.hpp"
 
-StarSystem::StarSystem(int id)
+StarSystem::StarSystem(int id):
+unique_update_inDymanic_done(false),
+unique_update_inStatic_done(false)
 { 
     	data_id.id = id;
     	data_id.type_id = ENTITY::STARSYSTEM_ID;
@@ -73,11 +75,6 @@ StarSystem::StarSystem(int id)
     	race_id = RACE::R0_ID;
     	conqueror_race_id = NONE_ID;
 
-    	calculation_per_turn_allowed = true;
-    	calculation_per_turn_allowed_inDynamic = true;
-
-    	//detalied_simulation = false; // will be changing depending on player presence
-
     	galaxy = NULL;    	
     	this->SetStarSystem(this);
 }
@@ -85,8 +82,8 @@ StarSystem::StarSystem(int id)
 StarSystem::~StarSystem()
 {	
     	// effects	
-        for(unsigned int i=0; i<distantNebulaEffect_vec.size(); i++) { delete distantNebulaEffect_vec[i]; } 
-        for(unsigned int i=0; i<distantStarEffect_vec.size(); i++)   { delete distantStarEffect_vec[i];   } 
+        for(unsigned int i=0; i<distantNebulaEffect_vec.size(); i++)   { delete distantNebulaEffect_vec[i]; } 
+        for(unsigned int i=0; i<distantStarEffect_vec.size(); i++)     { delete distantStarEffect_vec[i];   } 
         for(unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)     { delete effect_LAZERTRACE_vec[i]; } 
         for(unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { delete effect_PARTICLESYSTEM_vec[i]; } 
         for(unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)      { delete effect_SHOCKWAVE_vec[i]; } 
@@ -137,8 +134,17 @@ void StarSystem::PutChildsToGarbage() const
 
 void StarSystem::AddVehicle(Vehicle* vehicle, const vec2f& center, float angle, BaseSpaceEntity* parent)
 {
-	#if STARSYSTEMADDREMOVE_LOG_ENABLED == 1
-	Logger::Instance().Log("starsysten_id="+int2str(GetId())+ " AddVehicle, vehicle_id=" + int2str(vehicle->GetId()), STARSYSTEMADDREMOVE_LOG_DIP);
+	#if ENTITY_TRANSACTION_LOG_ENABLED == 1
+	Logger::Instance().Log(" StarSystem(id=" + int2str(GetId()) + ")::AddVehicle(id=" + int2str(vehicle->GetId())+")", ENTITY_TRANSACTION_LOG_DIP);
+	
+	for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+	{
+		if (VEHICLE_vec[i]->GetId() == vehicle->GetId())
+		{
+			Logger::Instance().Log("StarSystem::AddVehicle dublicated vehicle found(fix that)" + getBaseInfoStr(vehicle));
+			exit(0);
+		}
+	}
 	#endif
 	
      	vehicle->SetPlaceTypeId(ENTITY::SPACE_ID);
@@ -205,8 +211,22 @@ void StarSystem::Add(BasePlanet* object, BaseSpaceEntity* parent, int it)
 	}
 }
                 
-void StarSystem::Add(Container* container, const vec2f& center)
+void StarSystem::AddContainer(Container* container, const vec2f& center)
 {
+	#if ENTITY_TRANSACTION_LOG_ENABLED == 1
+	Logger::Instance().Log(" StarSystem(id=" + int2str(GetId()) + ")::AddVehicle(id=" + int2str(container->GetId()) + ")", ENTITY_TRANSACTION_LOG_DIP);
+	
+	
+	for (unsigned int i=0; i<CONTAINER_vec.size(); i++)
+	{
+		if (CONTAINER_vec[i]->GetId() == container->GetId())
+		{
+			Logger::Instance().Log("StarSystem::AddContainer dublicated container found(fix that)" + getBaseInfoStr(container));
+			exit(0);
+		}
+	}
+	#endif
+	
 	container->SetStarSystem(this);
         container->SetPlaceTypeId(ENTITY::SPACE_ID);
     	container->GetPoints().SetCenter(center);
@@ -471,46 +491,46 @@ void StarSystem::UpdateStates()
 
 
 void StarSystem::Update(int time, bool detalied_simulation)
-{
-        ManageUnavaliableObjects_s();
-        ManageDeadObjects_s();         // no need to update so frequently, pri /6
-        //std::cout<<hyperspace.GetQueueSize()<<std::endl;
-                 
+{                
 	UpdateEntities_s(time, detalied_simulation);
 	    		
 	if (time > 0)
 	{
-		if (calculation_per_turn_allowed_inDynamic == true)
+		if (unique_update_inDymanic_done == false)
 		{
                         hyperspace.PostHyperJumpEvent(this);
-                        LaunchingEvent();
-
-			calculation_per_turn_allowed_inDynamic = false;
+                        //LaunchingEvent();
+                        
+                        unique_update_inDymanic_done = true;
+			unique_update_inStatic_done  = false;
 		}
 
     		rocketCollision_s(detalied_simulation);   // pri/2
     		asteroidCollision_s(detalied_simulation); // pri/2
-
-		calculation_per_turn_allowed = true;
+    		
+    		if (CONTAINER_vec.size() > 200)
+        	{
+               		CONTAINER_vec[getRandInt(0, 199)]->Hit(100, true);
+        	}
 	}
 	else
 	{
-		if (calculation_per_turn_allowed == true)
+		if (unique_update_inStatic_done == false)
 		{    		
 			UpdateStates();
 		
     			MindEntitiesInStatic_s();     			
 
-    			calculation_per_turn_allowed = false;
-    			calculation_per_turn_allowed_inDynamic = true;
-
 			garbage_effects.clear(); 
+			
+			unique_update_inDymanic_done = false;
+    			unique_update_inStatic_done  = true;
     		}    		
 	}
+
+        ManageUnavaliableObjects_s();
+        ManageDeadObjects_s();         // no need to update so frequently, pri /6
 }
-
-
-
 
 void StarSystem::rocketCollision_s(bool show_effect)
 {
@@ -637,7 +657,7 @@ void StarSystem::MindEntitiesInStatic_s()
      		}
      	}
      	
-    	for (unsigned int i=0; i<PLANET_vec.size(); i++)     		{ PLANET_vec[i]->UpdateInSpaceInStatic(); }
+    	for (unsigned int i=0; i<PLANET_vec.size(); i++)     	{ PLANET_vec[i]->UpdateInSpaceInStatic(); }
 }      
 
 void StarSystem::FindRenderVisibleEntities_c(Player* player)
@@ -778,11 +798,22 @@ void StarSystem::ShipManager_s(unsigned int num)
 
 void StarSystem::ManageUnavaliableObjects_s()
 {
+        //for (std::vector<Vehicle*>::iterator it=CONTAINER_vec.begin(); it<CONTAINER_vec.end(); ++it)
+        //{
+               	//if ((*it)->GetPlaceTypeId() != ENTITY::SPACE_ID)
+               	//{	
+               		//#if ENTITY_TRANSACTION_LOG_ENABLED == 1
+			//Logger::Instance().Log("starsysten_id="+int2str(GetId())+ " RemoveContainer, container_id=" + int2str((*it)->GetId()));
+			//#endif
+               		//it = Container_vec.erase(it);
+               	//}
+        //}
+                
         for (std::vector<Vehicle*>::iterator it=VEHICLE_vec.begin(); it<VEHICLE_vec.end(); ++it)
         {
                	if ((*it)->GetPlaceTypeId() != ENTITY::SPACE_ID)
                	{	
-               		#if STARSYSTEMADDREMOVE_LOG_ENABLED == 1
+               		#if ENTITY_TRANSACTION_LOG_ENABLED == 1
 			Logger::Instance().Log("starsysten_id="+int2str(GetId())+ " RemoveVehicle, vehicle_id=" + int2str((*it)->GetId()));
 			#endif
                		it = VEHICLE_vec.erase(it);
@@ -878,13 +909,13 @@ void StarSystem::ManageDeadObjects_s()
 }    
     
 
-void StarSystem::LaunchingEvent() const
-{
-	for (unsigned int i=0; i<PLANET_vec.size(); i++)
-	{
-		//PLANET_vec[i]->GetLand()->ManageLaunching();
-	}
-}		
+//void StarSystem::LaunchingEvent() const
+//{
+	//for (unsigned int i=0; i<PLANET_vec.size(); i++)
+	//{
+		////PLANET_vec[i]->GetLand()->ManageLaunching();
+	//}
+//}		
 
 void StarSystem::BombExplosionEvent(Container* container, bool show_effect)
 {

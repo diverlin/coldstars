@@ -40,8 +40,7 @@ int main()
 
 	init();  
         
-	TurnTimer turn_timer;
-	GameDate game_date(1,1,4000);
+	GameDate::Instance().SetDate(1,1,4000);
 
         Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy();
 	Player* player = PlayerBuilder::Instance().GetNewPlayer();
@@ -67,24 +66,24 @@ int main()
 	while (Screen::Instance().GetWindow().IsOpened())
 	{    
 		/* server code start */
-		turn_timer.Update(game_date);
+		TurnTimer::Instance().Update();
 
 		for (int i=0; i<Config::Instance().GAME_SPEED; i++)  // fake implementation (static ai should not be run several times at once)
 		{
-			galaxy->Update(player, turn_timer.GetTurnTick());
+			galaxy->Update(player, TurnTimer::Instance().GetTurnTick());
 		}
 
-		if ((turn_timer.GetTurnEnded() == true) and (UserInput::Instance().GetNextTurnReady()))
+		if ((TurnTimer::Instance().GetTurnEnded() == true) and (UserInput::Instance().GetNextTurnReady()))
 		{
-			turn_timer.NextTurn();
+			TurnTimer::Instance().NextTurn();
 		} 
 		/* server code end */
 
 		/* client code start */
-		player->RunSession(turn_timer);
-		player->UpdatePostTransactionEvent(turn_timer);      
+		player->RunSession(TurnTimer::Instance());
+		player->UpdatePostTransactionEvent(TurnTimer::Instance());      
 		
-		if (turn_timer.GetTurnEnded() == true)
+		if (TurnTimer::Instance().GetTurnEnded() == true)
 		{	
 			Player* loaded_player = SaveLoadManager::Instance().Update(player);
 			if (loaded_player != NULL)
@@ -95,7 +94,10 @@ int main()
 		}
 		/* client code end */
 		
-		EntityGarbage::Instance().Clear();
+		if (TurnTimer::Instance().GetTurnTick() < 0)
+		{
+			EntityGarbage::Instance().Clear();
+		}
 	}
 
 	return EXIT_SUCCESS;
