@@ -19,6 +19,7 @@
 #include "constants.hpp"
 #include <sstream>
 #include "Base.hpp"
+#include "myVector.hpp"
 
 std::string int2str(int val) 
 {
@@ -44,6 +45,11 @@ std::string bool2str(bool var)
     	else
        		stm << "false";   
     	return stm.str() ;
+}
+
+std::string vec2f2str(const vec2f& vec)
+{
+	return int2str((int)vec.x)+","+int2str((int)vec.y);
 }
 
 std::string getSpecialActionStr(int id)

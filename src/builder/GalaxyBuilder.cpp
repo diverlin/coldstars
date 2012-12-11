@@ -63,10 +63,26 @@ Galaxy* GalaxyBuilder::GetNewGalaxyTemplate(int id) const
 Galaxy* GalaxyBuilder::GetNewGalaxy() const
 {
 	Galaxy* galaxy = GetNewGalaxyTemplate();
-	CreateNewInternals(galaxy);
 	
+	switch(Config::Instance().GetGameMode())
+        {
+        	case GAME_MODE::NORMAL_RUN:
+        	{
+        	        CreateNewInternals(galaxy);
+        		break;
+        	}
+
+        	case GAME_MODE::SIMPLE_RUN:
+        	{
+        	        CreateNewInternals_SIMPLE_RUN(galaxy);
+        		break;
+        	}
+        }
+        
 	return galaxy;
 } 
+
+
         	
 void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy) const
 {     
@@ -97,6 +113,20 @@ void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy) const
  		}
  	}
 }
+
+       	
+void GalaxyBuilder::CreateNewInternals_SIMPLE_RUN(Galaxy* galaxy) const
+{     
+	vec2f center(getRandInt(200, 400), getRandInt(200, 400));
+			
+	StarSystem* starsystem = StarSystemBuilder::Instance().GetNewStarSystem();
+	galaxy->Add(starsystem, center);
+	
+	//God::Instance().CreateLifeInStarSystem(starsystem);
+}
+
+                
+
 
                 
 

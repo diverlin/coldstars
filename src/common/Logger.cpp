@@ -27,11 +27,8 @@ Logger& Logger::Instance()
 	return instance;
 }
 
-Logger::Logger():mode(LOG::TOSCREENTOFILE), line_counter(0)
-{	
-	turn_counter = TurnTimer::Instance().GetTurnCounter();
-	file.open(int2str(turn_counter) + ".log");
-}
+Logger::Logger():mode(LOG::TOFILE), line_counter(0), turn_counter(-1)
+{}
 		
 Logger::~Logger()
 {
@@ -40,14 +37,6 @@ Logger::~Logger()
 
 void Logger::Log(const std::string& str, int dip)
 {
-	if (turn_counter != TurnTimer::Instance().GetTurnCounter())
-	{
-		file.close();
-		line_counter = 0;
-		turn_counter = TurnTimer::Instance().GetTurnCounter();
-		file.open(int2str(turn_counter) + ".log");
-	}
-
 	std::string spaces;
 	for (int i=0; i<3*dip; i++)
 	{
@@ -86,6 +75,17 @@ void Logger::ToScreen(const std::string& str)
 
 void Logger::ToFile(const std::string& str)
 {
+	if (turn_counter != TurnTimer::Instance().GetTurnCounter())
+	{
+		if (file)
+		{
+			file.close();
+		}
+		line_counter = 0;
+		turn_counter = TurnTimer::Instance().GetTurnCounter();
+		file.open(int2str(turn_counter) + ".log");
+	}
+	
 	line_counter++;
 	file<<str<<std::endl;
 }

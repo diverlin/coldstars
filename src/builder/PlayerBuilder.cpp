@@ -73,7 +73,7 @@ void PlayerBuilder::CreateNewInternals(Player* player) const
         
         Npc* npc = NpcBuilder::Instance().GetNewNpc(prace_id, psubtype_id);
         Ship* ship = ShipBuilder::Instance().GetNewShip(prace_id, psubtype_id, size_id, weapons_num);
-        int tech_level = 5;
+        int tech_level = 3;
 	ShipBuilder::Instance().Equip(ship, tech_level);   
         
         ship->BindOwnerNpc(npc);

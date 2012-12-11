@@ -21,9 +21,11 @@
 
 #include <string>
 class Base;
+class vec2f;
 
 std::string int2str(int var); 
 std::string bool2str(bool var); 
+std::string vec2f2str(const vec2f&);
 
 std::string getSpecialActionStr(int);
 std::string getAiModelStr(int);

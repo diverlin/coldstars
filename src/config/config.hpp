@@ -9,6 +9,8 @@ struct Config
 	public:
 		static Config& Instance();
 
+		int GetGameMode() const { return game_mode; };
+		
 		int SCREEN_WIDTH;
 		int SCREEN_HEIGHT;
 		int BPP;
@@ -25,6 +27,8 @@ struct Config
 		
 		int SCROLL_VELOCITY_MAX;
 		int SCROLL_VELOCITY_STEP;
+		
+
 							
 	private:
 		Config();
@@ -32,7 +36,10 @@ struct Config
 		~Config();
 		Config& operator=(const Config&) = delete;
 		
+		int game_mode;
+		
 		boost::property_tree::ptree ptree;
+
 };
 
 #endif //CONFIG_HPP

@@ -30,6 +30,7 @@
 #include "../common/EntityManager.hpp"
 #include "../common/rand.hpp"
 #include "../common/myStr.hpp"
+#include "../config/config.hpp"
 #include "../render/Render.hpp"
 
 #include "../items/others/Bomb.hpp"
@@ -394,7 +395,7 @@ void StarSystem::UpdateStates()
 		AsteroidManager_s(3);
 	}
 	     	
-	if (CRASH_TEST_ON == true)
+	if (Config::Instance().GetGameMode() == GAME_MODE::CRASH_TEST)
 	{
 		AsteroidManager_s(50);
 		ShipManager_s(50);

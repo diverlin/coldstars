@@ -30,13 +30,14 @@ class GalaxyBuilder
 
         	Galaxy* GetNewGalaxyTemplate(int id = NONE_ID) const; 
         	Galaxy* GetNewGalaxy() const; 
-        	        	 		                
+        	        	        	 		                
         private:
 		GalaxyBuilder() {};
 		GalaxyBuilder(const GalaxyBuilder&) = delete;
 		GalaxyBuilder& operator=(const GalaxyBuilder&) = delete;
 
                 void CreateNewInternals(Galaxy*) const;
+                void CreateNewInternals_SIMPLE_RUN(Galaxy*) const;
 }; 
 
 
