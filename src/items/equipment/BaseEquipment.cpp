@@ -131,9 +131,10 @@ void BaseEquipment::Render(const Rect& rect1, const vec2f& gui_offset, bool draw
     		drawTexturedRect(GuiTextureObCollector::Instance().slot_mark_reject , rect, -1.0f);	
 	}
 	if (GetLocked() == true)
-	{		
+	{
+		int font_size = 12;		
     		drawTexturedRect(GuiTextureObCollector::Instance().slot_mark_accept, rect, -1.0f);
-    		drawSimpleText(int2str(locked_turns), 12, rect.GetCenter().x + gui_offset.x, rect.GetCenter().y + gui_offset.y);	
+    		drawSimpleText(int2str(locked_turns), font_size, rect.GetCenter().x - font_size/2 + gui_offset.x, rect.GetTopRight().y - font_size + gui_offset.y);	
 	}
 
 	if (draw_text == true)

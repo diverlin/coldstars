@@ -65,6 +65,7 @@ bool GuiGalaxyMap::UpdateMouseInteraction(const MouseData& data_mouse, Galaxy* g
                       				{ 
               						Task microtask(MICROSCENARIO::JUMP_ID, galaxy->STARSYSTEM_vec[i]->GetId());
                						player->GetNpc()->GetStateMachine().SetCurrentMicroTask(microtask);
+               						player->GetNpc()->GetVehicle()->GetDriveComplex().UpdatePath();
                				
                           				return true;
                       				} 
