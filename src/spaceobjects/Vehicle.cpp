@@ -87,6 +87,7 @@ Vehicle::Vehicle()
         droid_slot     = NULL;
         freezer_slot   = NULL;
         
+        parent_vehicleslot = NULL;
         land  = NULL;
 }
 
@@ -654,7 +655,7 @@ void Vehicle::LaunchingEvent()
 	
 			     	starsystem->AddVehicle(this, ((BaseSpaceEntity*)land->GetOwner())->GetPoints().GetCenter() + offset_pos, angleInD, NULL);
 				land->RemoveVehicle(this);
-				
+	
 				break;
 			}
 				
