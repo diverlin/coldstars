@@ -107,8 +107,9 @@ void StarSystemBuilder::CreateBackground(StarSystem* starsystem, int distNebula_
                         	                
 void StarSystemBuilder::CreateStar(StarSystem* starsystem) const
 {
-        Star* star = StarBuilder::Instance().GetNewStar();    
+        Star* star = StarBuilder::Instance().GetNewStar(); 
         starsystem->Add(star);
+	starsystem->SetColor(star->GetColor());
 }
 
 void StarSystemBuilder::CreatePlanets(StarSystem* starsystem, int planet_per_system) const

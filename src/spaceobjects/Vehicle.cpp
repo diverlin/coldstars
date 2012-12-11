@@ -511,7 +511,7 @@ void Vehicle::UpdateSpecialAction()
 		{
 			case SPECIAL_ACTION::INITIATE_DOCKING_ID:
 			{
-				//if (UpdateFadeInEffect() == true)
+				if (UpdateFadeInEffect() == true)
 				{
 					DockingEvent();
 					special_action_id = NONE_ID;
@@ -641,9 +641,6 @@ void Vehicle::LaunchingEvent()
 	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::LaunchingEvent", ENTITY_TRANSACTION_LOG_DIP); 
 	#endif
 	
-	SetSpecialActionId(SPECIAL_ACTION::INITIATE_LAUNCHING_ID);
-	color.a = 0.1;
-	
 	if (parent_vehicleslot != NULL)
 	{
 		switch(parent_vehicleslot->GetOwner()->GetTypeId())
@@ -674,6 +671,10 @@ void Vehicle::LaunchingEvent()
 	     	starsystem->AddVehicle(this, ((BaseSpaceEntity*)land->GetOwner())->GetPoints().GetCenter() + offset_pos, angleInD, NULL);
 		land->RemoveVehicle(this); 
 	}
+
+
+	SetSpecialActionId(SPECIAL_ACTION::INITIATE_LAUNCHING_ID);
+	color.a = 0.1;
 }
 //// 
 

@@ -12,7 +12,7 @@ MODERN_EFFECTS 1
 General
 {
 DEBUG_MODE 0
-game_mode 1 		# 0/1/2=NORMAL_RUN/SIMPLE_RUN/CRASH_TEST
+game_mode 2 		# 0/1/2=NORMAL_RUN/SIMPLE_RUN/CRASH_TEST
 }
 
 Gameplay

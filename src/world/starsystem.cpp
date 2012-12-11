@@ -156,7 +156,8 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const vec2f& center, float angle, 
     	vehicle->GetPoints().Update();  
     	
 	vehicle->SetParent(parent);
-
+        vehicle->SetColor(GetColor());
+                	
 	VEHICLE_vec.push_back(vehicle);  
 
 	if (vehicle->GetSubTypeId() == ENTITY::SATELLITE_ID)
@@ -193,7 +194,6 @@ void StarSystem::Add(BasePlanet* object, BaseSpaceEntity* parent, int it)
 	{
 		case ENTITY::STAR_ID:
 		{
-			color = ((Star*)object)->GetColor();
 			STAR_vec.push_back((Star*)object);
 			break;
 		}
@@ -669,7 +669,7 @@ void StarSystem::FindRenderVisibleEntities_c(Player* player)
         for (unsigned int i=0; i<PLANET_vec.size(); i++)       	{ player->AddIfVisible(PLANET_vec[i]); }
         for (unsigned int i=0; i<ASTEROID_vec.size(); i++)     	{ player->AddIfVisible(ASTEROID_vec[i]); } 
         for (unsigned int i=0; i<CONTAINER_vec.size(); i++)    	{ player->AddIfVisible(CONTAINER_vec[i]); }
-    	for (unsigned int i=0; i<VEHICLE_vec.size(); i++) 		{ player->AddIfVisible(VEHICLE_vec[i]); } 
+    	for (unsigned int i=0; i<VEHICLE_vec.size(); i++) 	{ player->AddIfVisible(VEHICLE_vec[i]); } 
     	for (unsigned int i=0; i<ROCKET_vec.size(); i++)       	{ player->AddIfVisible(ROCKET_vec[i]); }
     	for (unsigned int i=0; i<BLACKHOLE_vec.size(); i++)    	{ player->AddIfVisible(BLACKHOLE_vec[i]); } 
            		
@@ -952,6 +952,12 @@ void StarSystem::PostDeathUniqueEvent(bool)
 void StarSystem::SaveDataUniqueStarSystem(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	save_ptree.put(root+"galaxy_id", galaxy->GetId());
+	
+	save_ptree.put(root+"color.r", color.r);
+	save_ptree.put(root+"color.g", color.g);
+	save_ptree.put(root+"color.b", color.b);
+	save_ptree.put(root+"color.a", color.a);
+			
 	for (unsigned int i=0; i<distantStarEffect_vec.size(); i++)
 	{
 		distantStarEffect_vec[i]->SaveData(save_ptree, root);
@@ -968,6 +974,11 @@ void StarSystem::LoadDataUniqueStarSystem(const boost::property_tree::ptree& loa
 {
 	data_unresolved_StarSystem.galaxy_id = load_ptree.get<int>("galaxy_id");
 	
+	color.r = load_ptree.get<float>("color.r");
+	color.g = load_ptree.get<float>("color.g");
+	color.b = load_ptree.get<float>("color.b");
+	color.a = load_ptree.get<float>("color.a");
+					
 	boost::property_tree::ptree tmp_ptree = load_ptree;
 	if (tmp_ptree.get_child_optional("distant_nebula_effect"))
 	{	

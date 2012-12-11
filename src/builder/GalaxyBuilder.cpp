@@ -77,6 +77,12 @@ Galaxy* GalaxyBuilder::GetNewGalaxy() const
         	        CreateNewInternals_SIMPLE_RUN(galaxy);
         		break;
         	}
+
+        	case GAME_MODE::CRASH_TEST:
+        	{
+        	        CreateNewInternals(galaxy);
+        		break;
+        	}
         }
         
 	return galaxy;
@@ -117,7 +123,7 @@ void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy) const
        	
 void GalaxyBuilder::CreateNewInternals_SIMPLE_RUN(Galaxy* galaxy) const
 {     
-	vec2f center(getRandInt(200, 400), getRandInt(200, 400));
+	vec2f center(getRandInt(10, 90), getRandInt(10, 90));
 			
 	StarSystem* starsystem = StarSystemBuilder::Instance().GetNewStarSystem();
 	galaxy->Add(starsystem, center);

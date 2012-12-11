@@ -62,7 +62,8 @@ class StarSystem : public BaseSpaceEntity
 		void PutChildsToGarbage() const;
 
 		void SetGalaxy(Galaxy* galaxy)  { this->galaxy = galaxy; };
-						
+		void SetColor(const Color4f& color)  { this->color = color; };
+								
 		const Color4f& GetColor() const { return color; };
 		//bool GetDetailedSimulationFlag() const { return detalied_simulation; };
 		int GetConditionId()     const { return condition_id; };

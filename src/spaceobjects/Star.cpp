@@ -20,6 +20,7 @@
 #include "../common/constants.hpp"
 #include "../common/EntityManager.hpp"
 #include "../common/myStr.hpp"
+#include "../common/common.hpp"
 #include "../resources/TextureManager.hpp"
 #include "../world/starsystem.hpp"
 #include "../render/Render.hpp"
@@ -40,21 +41,7 @@ Star::~Star()
     
 void Star::CalcColor()
 {
-        if (textureOb->color_id == COLOR::YELLOW_ID)
-	{
-		color.r = 255/255.0;
-		color.g = 255/255.0;
-		color.b = 255/220.0;
-		color.a = 1.0;
-	}
-	
-	if (textureOb->color_id == COLOR::BLUE_ID)
-	{
-		color.r = 220/255.0;
-		color.g = 255/255.0;
-		color.b = 255/255.0;
-		color.a = 1.0;
-	}
+	fillColor4fById(textureOb->color_id, color);
 }
        
 void Star::UpdateInSpace(int time, bool show_effect)
