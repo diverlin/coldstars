@@ -42,7 +42,7 @@ int main()
         
 	GameDate::Instance().SetDate(1,1,4000);
 
-        Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy();
+	Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy();
 	Player* player = PlayerBuilder::Instance().GetNewPlayer();
 
         bool player2space = true;

@@ -65,7 +65,10 @@ void MicroScenarioDocking::UpdateInDynamicInSpace(Npc* npc) const
      	{
      		if (npc->GetVehicle()->GetDriveComplex().GetDockingPermission() == true)
      		{
-     			npc->GetVehicle()->SetSpecialActionId(SPECIAL_ACTION::INITIATE_DOCKING_ID);
+     			if (npc->GetVehicle()->GetSpecialActionId() != SPECIAL_ACTION::INITIATE_DOCKING_ID)
+     			{
+     				npc->GetVehicle()->SetSpecialActionId(SPECIAL_ACTION::INITIATE_DOCKING_ID);
+     			}
      		}
      		else
      		{

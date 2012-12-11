@@ -621,6 +621,7 @@ bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
                			else
                			{
                				npc->GetVehicle()->GetDriveComplex().SetTarget(visible_ROCKET_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
+               				npc->GetVehicle()->GetDriveComplex().UpdatePath();
                			}
 			}
 				
@@ -689,6 +690,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
               			else
                			{
                				npc->GetVehicle()->GetDriveComplex().SetTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);   // make it like a ai scenario (follow obj)
+               				npc->GetVehicle()->GetDriveComplex().UpdatePath();
                			}
 			}
 
@@ -728,8 +730,6 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
        		if (object_cursor_dist < visible_ASTEROID_vec[i]->GetCollisionRadius())
        		{   
                         cursor.SetFocusedObject(visible_ASTEROID_vec[i]);        
-                        //visible_ASTEROID_vec[i]->GetOrbit()->Draw();
-			
 			
                 	if (data_mouse.left_click == true)
 			{
@@ -740,6 +740,7 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
                    		else
                    		{
                    			npc->GetVehicle()->GetDriveComplex().SetTarget(visible_ASTEROID_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
+                   			npc->GetVehicle()->GetDriveComplex().UpdatePath();
                    		}
                    	}
 			
@@ -772,6 +773,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
                				else
                				{
                					npc->GetVehicle()->GetDriveComplex().SetTarget(visible_SHIP_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
+               				        npc->GetVehicle()->GetDriveComplex().UpdatePath();
                				}
 				}
 
@@ -855,6 +857,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
                			{
                				Task microtask(MICROSCENARIO::DOCKING_ID, visible_SPACESTATION_vec[i]->GetId());
                				npc->GetStateMachine().SetCurrentMicroTask(microtask);
+               				npc->GetVehicle()->GetDriveComplex().UpdatePath();
                			}
 			}
 
@@ -898,6 +901,7 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
                		{
        				Task microtask(MICROSCENARIO::DOCKING_ID, visible_PLANET_vec[i]->GetId());
               			npc->GetStateMachine().SetCurrentMicroTask(microtask);
+              			npc->GetVehicle()->GetDriveComplex().UpdatePath();
               		}   
 		
 				

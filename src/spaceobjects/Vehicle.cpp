@@ -510,7 +510,7 @@ void Vehicle::UpdateSpecialAction()
 		{
 			case SPECIAL_ACTION::INITIATE_DOCKING_ID:
 			{
-				if (UpdateFadeInEffect() == true)
+				//if (UpdateFadeInEffect() == true)
 				{
 					DockingEvent();
 					special_action_id = NONE_ID;
@@ -533,7 +533,7 @@ void Vehicle::UpdateSpecialAction()
 			{
 				if (UpdateFadeInEffect() == true)
 				{
-			                HyperJumpEvent(drive_complex.GetDriveSlot()->GetTarget()->GetStarSystem());
+			                HyperJumpEvent(drive_complex.GetTarget()->GetStarSystem());
 			        }
 			
 				break;
@@ -600,22 +600,22 @@ void Vehicle::DockingEvent()
 	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::DockingEvent", ENTITY_TRANSACTION_LOG_DIP); 
 	#endif
 	           
-        switch(drive_complex.GetDriveSlot()->GetTarget()->GetTypeId())         	     	     	
+        switch(drive_complex.GetTarget()->GetTypeId())         	     	     	
      	{
      		case ENTITY::PLANET_ID:
      		{
-                	Planet* planet = ((Planet*)drive_complex.GetDriveSlot()->GetTarget());                
+                	Planet* planet = ((Planet*)drive_complex.GetTarget());                
      			planet->GetLand()->AddVehicle(this);
 			break;
 		}
 	
 		case ENTITY::VEHICLE_ID:
 		{	 
-			switch(drive_complex.GetDriveSlot()->GetTarget()->GetSubTypeId())
+			switch(drive_complex.GetTarget()->GetSubTypeId())
 			{
 				case ENTITY::SPACESTATION_ID:
 				{
-                			SpaceStation* spacestation = ((SpaceStation*)drive_complex.GetDriveSlot()->GetTarget());
+                			SpaceStation* spacestation = ((SpaceStation*)drive_complex.GetTarget());
                         		spacestation->GetLand()->AddVehicle(this);
 					break;
 				}
@@ -1273,9 +1273,9 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
        	save_ptree.put(root+"data_korpus.slot_weapon_num", data_korpus.slot_weapon_num);       	
        	
 
-       	if (drive_complex.GetDriveSlot()->GetTarget() != NULL) 
+       	if (drive_complex.GetTarget() != NULL) 
        	{
-       		save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_target_id", drive_complex.GetDriveSlot()->GetTarget()->GetId());
+       		save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_target_id", drive_complex.GetTarget()->GetId());
        		save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_action_id", drive_complex.GetActionId());
        	}
 	else 
@@ -1351,10 +1351,7 @@ void Vehicle::ResolveDataUniqueVehicle()
 	
        	BaseVehicleBuilder::Instance().CreateKorpusGeometry(this);
         CreateDriveComplexTextureDependedStuff();
-        if (data_id.subtype_id != ENTITY::ROCKETBULLET_ID) // remove this
-        {
-        	CreateProtectionComplexTextureDependedStuff();
-        }
+       	CreateProtectionComplexTextureDependedStuff();
 
        	if (data_unresolved_Vehicle.drive_complex_target_id != NONE_ID) 
         { 

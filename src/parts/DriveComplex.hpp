@@ -47,7 +47,7 @@ class DriveComplex
       		ItemSlot* GetDriveSlot() const { return drive_slot; };
         	ItemSlot* GetBakSlot()   const { return bak_slot; };
                   
-                //BaseSpaceEntity* GetTarget() const { return target; };                
+                BaseSpaceEntity* GetTarget() const { return target; };                
     			        
     		bool PathExists() const;
     		
@@ -62,13 +62,13 @@ class DriveComplex
 
                 void UpdatePathVisualisation();                
                 void DrawPath();
-
+    		
       	private:
                 ItemSlot* drive_slot;
         	ItemSlot* bak_slot;
 
       		Vehicle* owner_vehicle;
-      		//BaseSpaceEntity* target;
+      		BaseSpaceEntity* target;
 
 		DriveEffect* drive_effect; 
 
@@ -98,7 +98,7 @@ class DriveComplex
 	
 	        void UpdateDynamicTargetCoord();
 
-		void DefineDistance(int);
+		void DefineDistance();
 };
 
 

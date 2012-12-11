@@ -1,4 +1,5 @@
 #include "config.hpp"
+#include "../common/constants.hpp"
 
 Config& Config::Instance()
 {
@@ -17,6 +18,7 @@ FPS_LIMIT(60),
 MODERN_EFFECTS(false),
 
 DEBUG_MODE(false),
+game_mode(GAME_MODE::NORMAL_RUN),
 
 AUTO_TURN_MODE(false),
 AUTO_SAVE_MODE(false),
@@ -37,6 +39,7 @@ SCROLL_VELOCITY_STEP(1)
 	MODERN_EFFECTS 	= ptree.get<bool>("Window.MODERN_EFFECTS");
 
 	DEBUG_MODE 	= ptree.get<bool>("General.DEBUG_MODE");
+	game_mode 	= ptree.get<int>("General.game_mode");
 	
 	AUTO_TURN_MODE 	= ptree.get<bool>("Gameplay.AUTO_TURN_MODE");
 	AUTO_SAVE_MODE 	= ptree.get<bool>("Gameplay.AUTO_SAVE_MODE");
