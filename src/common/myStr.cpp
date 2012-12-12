@@ -220,9 +220,9 @@ std::string getTypeStr(int type_id)
 	}
 }
 
-std::string getBaseInfoStr(Base* base)
+std::string getBaseInfoStr(const Base* base)
 {
-	return " id=" + int2str(base->GetId()) + " type=" + getTypeStr(base->GetTypeId()) + "/" + getTypeStr(base->GetSubTypeId()) + "/" + getTypeStr(base->GetSubSubTypeId());
+	return int2str(base->GetId()) + "/" + getTypeStr(base->GetTypeId()) + "/" + getTypeStr(base->GetSubTypeId()) + "/" + getTypeStr(base->GetSubSubTypeId());
 }
 
 

@@ -33,6 +33,6 @@ std::string getRaceStr(int);
 std::string getNavigatorActionStr(int);
 std::string getTypeStr(int);
 
-std::string getBaseInfoStr(Base*);
+std::string getBaseInfoStr(const Base*);
 
 #endif

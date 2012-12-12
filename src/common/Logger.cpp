@@ -27,7 +27,7 @@ Logger& Logger::Instance()
 	return instance;
 }
 
-Logger::Logger():mode(LOG::TOFILE), line_counter(0), turn_counter(-1)
+Logger::Logger():mode(LOG::TOSCREENTOFILE), line_counter(0), turn_counter(-1)
 {}
 		
 Logger::~Logger()

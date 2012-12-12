@@ -39,7 +39,11 @@ BaseSlot::~BaseSlot()
 }
                 
 void BaseSlot::SaveDataUniqueBaseSlot(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{       
+{   
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" BaseSlot("+int2str(GetId())+")::SaveDataUniqueBaseSlot", SAVELOAD_LOG_DIP);
+	#endif
+	    
         if (owner) { save_ptree.put(root+"unresolved.owner_id", owner->GetId()); }
         else       { save_ptree.put(root+"unresolved.owner_id", NONE_ID); }
 	
@@ -48,7 +52,11 @@ void BaseSlot::SaveDataUniqueBaseSlot(boost::property_tree::ptree& save_ptree, c
 }
 
 void BaseSlot::LoadDataUniqueBaseSlot(const boost::property_tree::ptree& load_ptree)
-{   
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" BaseSlot("+int2str(GetId())+")::LoadDataUniqueBaseSlot", SAVELOAD_LOG_DIP);
+	#endif
+	   
         unresolved_BaseSlot.owner_id = load_ptree.get<int>("unresolved.owner_id"); 
 	position.Set(load_ptree.get<int>("position.x"), load_ptree.get<int>("position.y"));
 
@@ -56,6 +64,10 @@ void BaseSlot::LoadDataUniqueBaseSlot(const boost::property_tree::ptree& load_pt
 
 void BaseSlot::ResolveDataUniqueBaseSlot()
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" BaseSlot("+int2str(GetId())+")::ResolveDataUniqueBaseSlot", SAVELOAD_LOG_DIP);
+	#endif
+	
 	owner = EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id);
 }
 
