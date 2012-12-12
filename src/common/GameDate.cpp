@@ -36,7 +36,7 @@ Date::Date(unsigned int day, unsigned int month, unsigned int year)
 Date::~Date()
 {}
 	
-std::string Date::GetStr() const { return "day:" + int2str(day) + " month:" + int2str(month) + " year:" + int2str(year); };
+std::string Date::GetStr() const { return int2str(day) + "/" + int2str(month) + "/" + int2str(year); };
 
 
 GameDate& GameDate::Instance()

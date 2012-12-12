@@ -1286,27 +1286,15 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
        		save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_action_id", NONE_ID);
 	}
 	       	
-       	if (place_type_id == ENTITY::NATURELAND_ID) 
-       	{
-       		save_ptree.put(root+"data_unresolved_Vehicle.land_id", land->GetId());
-       	}
-	else 
-	{
-		save_ptree.put(root+"data_unresolved_Vehicle.land_id", NONE_ID);
-	}
+       	if (land != NULL) { save_ptree.put(root+"data_unresolved_Vehicle.land_id", land->GetId()); }
+	else 	          { save_ptree.put(root+"data_unresolved_Vehicle.land_id", NONE_ID); }
 	
-       	if (place_type_id == ENTITY::VEHICLE_SLOT_ID) 
-       	{ 
-       		save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", parent_vehicleslot->GetId()); 
-       	}
-       	else 
-       	{ 
-       		save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); 
-       	}  	
-
+       	if (parent_vehicleslot != NULL) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", parent_vehicleslot->GetId()); }
+       	else  			       	{ save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); }
+      
        	if (place_type_id == ENTITY::HYPER_SPACE_ID) 
        	{ 
-       		save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", drive_complex.GetDriveSlot()->GetTarget()->GetId()); 
+       		save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", drive_complex.GetTarget()->GetId()); 
        	}
        	else 
        	{ 

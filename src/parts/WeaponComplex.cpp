@@ -239,20 +239,17 @@ void WeaponComplex::ValidateAllWeaponsTarget()
 {
 	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
         {
-       		if (slot_weapon_vec[i]->GetItem() != NULL) 
+               	if (slot_weapon_vec[i]->GetTarget() != NULL) 
                	{
-                	if (slot_weapon_vec[i]->GetTarget() != NULL) 
-                	{
-             			if (slot_weapon_vec[i]->ValidateTarget() == false)
-             			{
-             				slot_weapon_vec[i]->ResetTarget();
-             			}
-                	}
-                	//else
-                	//{
-                		//slot_weapon_vec[i]->DeselectEvent();
-                	//}
-                }
+      			if (slot_weapon_vec[i]->ValidateTarget() == false)
+       			{
+       				slot_weapon_vec[i]->ResetTarget();
+       			}
+               	}
+               	//else
+               	//{
+               		//slot_weapon_vec[i]->DeselectEvent();
+               	//}
         }
 }
 

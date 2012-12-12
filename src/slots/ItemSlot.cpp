@@ -89,11 +89,7 @@ void ItemSlot::SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget)
 	this->subtarget = subtarget;
 
 	#if WEAPONSTARGET_LOG_ENABLED == 1 
-        std::string func_name = " ItemSlot::SetTarget";
-        if (GetSubTarget() == NULL)
-        LogSimpleTarget(func_name);
-        else
-	LogComplexTarget(func_name); 
+        Log("SetTarget");
 	#endif     
 }
         
@@ -102,11 +98,7 @@ bool ItemSlot::ValidateTarget()
         if (target != NULL)
         {
                 #if WEAPONSTARGET_LOG_ENABLED == 1 
-	        std::string func_name = " ItemSlot::ValidateTarget";
-	        if (GetSubTarget() == NULL)
-	        LogSimpleTarget(func_name);
-	        else
-		LogComplexTarget(func_name); 
+		Log("ValidateTarget");
 		#endif   
 	
                 return CheckTarget(target);
@@ -117,19 +109,12 @@ bool ItemSlot::ValidateTarget()
 
 void ItemSlot::ResetTarget()
 { 
-        if (target != NULL)
-        {
-        	#if WEAPONSTARGET_LOG_ENABLED == 1 
-	        std::string func_name = " ItemSlot::ResetTarget";
-	        if (GetSubTarget() == NULL)
-	        LogSimpleTarget(func_name);
-	        else
-		LogComplexTarget(func_name); 
-		#endif   
-	
-		target    = NULL; 
-		subtarget = NULL; 
-	}
+       	#if WEAPONSTARGET_LOG_ENABLED == 1 
+	Log("ResetTarget");
+	#endif   
+		
+	target    = NULL; 
+	subtarget = NULL;		
 }
 
 bool ItemSlot::CheckAmmo() const
@@ -146,11 +131,7 @@ bool ItemSlot::CheckAmmo() const
 bool ItemSlot::FireEvent(int attack_skill, bool show_effect)
 {    
         #if WEAPONSTARGET_LOG_ENABLED == 1 
-        std::string func_name = " ItemSlot::FireEvent";
-        if (GetSubTarget() == NULL)
-        LogSimpleTarget(func_name);
-        else
-	LogComplexTarget(func_name); 
+	Log("FireEvent");
 	#endif   
 	   			
 	switch(GetItem()->GetSubTypeId())
@@ -239,6 +220,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 void ItemSlot::RemoveItem()
 {	
         item = NULL;
+    	ResetTarget();
     	
     	if (data_id.subtype_id != ENTITY::CARGO_SLOT_ID) 
 	{    
@@ -267,7 +249,7 @@ void ItemSlot::DeselectEvent()
 	{ 	
 		switch(data_id.subtype_id)
 		{
-			case ENTITY::WEAPON_SLOT_ID: 	{ ResetTarget(); break; }
+			case ENTITY::WEAPON_SLOT_ID: 	{ 	ResetTarget(); break; }
                         case ENTITY::DRIVE_SLOT_ID: 	{
   					  			GetOwnerVehicle()->UpdatePropertiesSpeed();
 								//GetOwnerVehicle()->UpdatePropertiesJump();
@@ -432,7 +414,7 @@ void ItemSlot::DrawRange(const vec2f& offset)
 bool ItemSlot::CheckTarget(BaseSpaceEntity* _target, ItemSlot* _subtarget) const
 {
 	#if WEAPONSTARGET_LOG_ENABLED == 1 
-        Logger::Instance().Log(" ItemSlot::CheckTarget");
+        Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::CheckTarget");
 	#endif     
 	
         if (CheckAlive(_target) == true)
@@ -510,21 +492,33 @@ void ItemSlot::ResolveData()
 
 void ItemSlot::SaveDataUniqueItemSlot(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-        if (target) { save_ptree.put(root+"unresolved_ItemSlot.target_id", target->GetId()); }
-        else        { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE_ID); }
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::SaveDataUniqueItemSlot", SAVELOAD_LOG_DIP);
+	#endif
+	
+        if (target != NULL) { save_ptree.put(root+"unresolved_ItemSlot.target_id", target->GetId()); }
+        else                { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE_ID); }
 
-        if (subtarget) { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", subtarget->GetId()); }
-        else           { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", NONE_ID); }
+        if (subtarget != NULL) { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", subtarget->GetId()); }
+        else          	       { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", NONE_ID); }
 }
 
 void ItemSlot::LoadDataUniqueItemSlot(const boost::property_tree::ptree& load_ptree)
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::LoadDataUniqueItemSlot", SAVELOAD_LOG_DIP);
+	#endif
+	
         unresolved_ItemSlot.target_id    = load_ptree.get<int>("unresolved_ItemSlot.target_id"); 
         unresolved_ItemSlot.subtarget_id = load_ptree.get<int>("unresolved_ItemSlot.subtarget_id"); 
 }
 
 void ItemSlot::ResolveDataUniqueItemSlot()
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::ResolveDataUniqueItemSlot", SAVELOAD_LOG_DIP);
+	#endif
+	
 	if (unresolved_ItemSlot.target_id != NONE_ID)
 	{
 		target = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.target_id);
@@ -545,12 +539,28 @@ void ItemSlot::ResolveDataUniqueItemSlot()
 	}
 }
 
-void ItemSlot::LogSimpleTarget(const std::string& func_name) const
+void ItemSlot::Log(const std::string& func_name) const
 {
-	Logger::Instance().Log("owner_type_id/id="+getTypeStr(owner->GetTypeId())+"/"+int2str(owner->GetId())+" itemslot_subtype_id/itemslot_subsubtype_id/Item subtype_id="+getTypeStr(GetSubTypeId())+"/"+getTypeStr(GetSubSubTypeId())+"/"+getTypeStr(item->GetSubTypeId())+func_name + " target_type_id= " + getTypeStr(GetTarget()->GetTypeId()) + " id=" + int2str(GetTarget()->GetId()), WEAPONSTARGET_LOG_DIP); 
+	Logger::Instance().Log("ItemSlot::"+func_name+"("+int2str(GetId())+") "+getBaseInfoStr(this));
+	
+	if (owner != NULL)
+	{
+		Logger::Instance().Log(" owner="+getBaseInfoStr(owner), WEAPONSTARGET_LOG_DIP); 
+	}
+	
+	if (item != NULL)
+	{
+		Logger::Instance().Log("item="+getBaseInfoStr(item), WEAPONSTARGET_LOG_DIP); 
+	}
+	
+	if (target != NULL)
+	{
+		Logger::Instance().Log("target="+getBaseInfoStr(target), WEAPONSTARGET_LOG_DIP); 		
+	}
+	
+	if (subtarget != NULL)
+	{
+		Logger::Instance().Log("subtarget="+getBaseInfoStr(subtarget), WEAPONSTARGET_LOG_DIP); 	
+	}
 }
 
-void ItemSlot::LogComplexTarget(const std::string& func_name) const
-{
-	Logger::Instance().Log("owner_type_id/id="+getTypeStr(owner->GetTypeId())+"/"+int2str(owner->GetId())+" itemslot_subtype_id/itemslot_subsubtype_id/Item subtype_id="+getTypeStr(GetSubTypeId())+"/"+getTypeStr(GetSubSubTypeId())+"/"+getTypeStr(item->GetSubTypeId())+func_name+"target_type_id= " + getTypeStr(GetTarget()->GetTypeId()) + " id=" + int2str(GetTarget()->GetId()) + " item_subtype_id=" + getTypeStr(subtarget->GetItem()->GetSubTypeId()) + " id=" + int2str(subtarget->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
-}

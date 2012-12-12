@@ -161,8 +161,7 @@ class ItemSlot : public BaseSlot
 		void LoadDataUniqueItemSlot(const boost::property_tree::ptree&);
 		void ResolveDataUniqueItemSlot();
 		
-		void LogSimpleTarget(const std::string&) const;
-		void LogComplexTarget(const std::string&) const;
+		void Log(const std::string&) const;
 }; 
 
 #endif

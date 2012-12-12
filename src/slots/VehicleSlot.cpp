@@ -21,6 +21,7 @@
 #include "../spaceobjects/Ship.hpp"
 #include "../render/Render.hpp"
 #include "../common/myStr.hpp"
+#include "../common/Logger.hpp"
 
 #include "../docking/Angar.hpp"
 #include "../docking/Store.hpp"
@@ -103,13 +104,25 @@ void VehicleSlot::ResolveData()
 
 
 void VehicleSlot::SaveDataUniqueVehicleSlot(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" VehicleSlot("+int2str(GetId())+")::SaveDataUniqueVehicleSlot", SAVELOAD_LOG_DIP);
+	#endif
+}
 
 void VehicleSlot::LoadDataUniqueVehicleSlot(const boost::property_tree::ptree& load_ptree)
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" VehicleSlot("+int2str(GetId())+")::LoadDataUniqueVehicleSlot", SAVELOAD_LOG_DIP);
+	#endif
+}
 
 void VehicleSlot::ResolveDataUniqueVehicleSlot()
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" VehicleSlot("+int2str(GetId())+")::ResolveDataUniqueVehicleSlot", SAVELOAD_LOG_DIP);
+	#endif
+
         switch(owner->GetTypeId())
         {
 	       //case ENTITY::VEHICLE_ID: 	{ ((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
