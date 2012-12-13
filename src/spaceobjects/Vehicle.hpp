@@ -34,6 +34,9 @@ class BaseEquipment;
 #include "../parts/VehicleKorpusData.hpp"
 #include "../parts/VehiclePropetries.hpp"
 
+class BaseParticleSystem;
+class ShockWaveEffect;
+
 struct UnresolvedDataUniqueVehicle
 {
 	int drive_complex_target_id;
@@ -91,8 +94,9 @@ class Vehicle : public BaseSpaceEntity
                 int GetFreeSpace() const { return propetries.free_space; };
 
                 void BindOwnerNpc(Npc*);
+                
 		bool IsObjectWithinRadarRange(BaseSpaceEntity*) const;
-		                              
+		
                 WeaponComplex& GetWeaponComplex() { return weapon_complex; };
                 DriveComplex& GetDriveComplex()   { return drive_complex; };                
                 ProtectionComplex& GetProtectionComplex() { return protection_complex; };

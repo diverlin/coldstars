@@ -138,9 +138,6 @@ class Player : public Base
     		bool MouseInteractionWithPlanets(const MouseData&);
     		bool MouseInteractionWithStars(const MouseData&);
     		void MouseNavigation(const MouseData&) const;
-    		
-    		bool IsObjectOnScreen(const Points&) const;
-    		bool IsObjectOnScreen(const vec2f&, float) const;
 
     		UnresolvedDataUniquePlayer data_unresolved_player;    		
     		void SaveDataUniquePlayer(boost::property_tree::ptree&, const std::string&) const;		
@@ -150,6 +147,15 @@ class Player : public Base
     		friend class UserInput;
 };
 
+bool isObjectOnScreen(const Points&);
+bool isObjectOnScreen(const vec2f&, float);
+bool isPointOnScreen(const vec2f&);
+
+bool isObjectWithinRadarRange(BaseParticleSystem*, Vehicle*);		                              
+bool isObjectWithinRadarRange(ShockWaveEffect*, Vehicle*);
+bool isObjectWithinRadarRange(LazerTraceEffect*, Vehicle*);
+bool isObjectWithinRadarRange(VerticalFlowText*, Vehicle*);
+    		
 #endif 
 
 

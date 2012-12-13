@@ -40,6 +40,7 @@ class BaseParticleSystem
                 void SetParticleData(ParticleData);
                 
 		bool GetAlive() const;
+		const vec2f& GetCenter() const { return center; };
 		
        		virtual void Update() = 0;
        		virtual void Render() = 0;

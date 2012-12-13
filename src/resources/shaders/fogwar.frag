@@ -7,10 +7,10 @@ uniform vec2 resolution;
 
 void main(void)
 {
-	vec2 pos = (world_coord + gl_FragCoord.xy)/resolution.xy;
+	vec2 pos = world_coord + gl_FragCoord.xy/resolution.xy;
 	pos.x *= resolution.x/resolution.y;
 
-	vec2 center1 = center/resolution.xy;
+	vec2 center1 = center;
 	center1.x *= resolution.x/resolution.y;
 
  	vec4 color = texture2D(sceneTex, gl_TexCoord[0].xy);

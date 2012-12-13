@@ -32,6 +32,9 @@ class LazerTraceEffect
 		void setDamageEffect(DamageEffect* _damage_effect) { damage_effect = _damage_effect; };
 		bool GetAlive() const { return is_alive; };
 		
+		const vec2f& GetStartPos() const { return *pTo_start_pos; };
+		const vec2f& GetEndPos() const { return *pTo_end_pos; };
+				
        		void update();
        		void Render();
             		
