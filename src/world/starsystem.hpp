@@ -94,6 +94,7 @@ class StarSystem : public BaseSpaceEntity
 		//
 
 		void BombExplosionEvent(Container*, bool);
+		void StarSparkEvent(float) const;
 		
 		void FindRenderVisibleEntities_c(Player*);  
 		void FindRadarVisibleEntities_c(Player*);  
@@ -163,7 +164,7 @@ class StarSystem : public BaseSpaceEntity
     		
     		void UpdateStates();
     		
-    		void damageEventInsideCircle(vec2f epicentr, float radius, int damage, bool show_effect);
+    		void DamageEventInsideCircle(const vec2f&, float, int, bool);
     		
     		void PostDeathUniqueEvent(bool);
 

@@ -27,7 +27,7 @@ Logger& Logger::Instance()
 	return instance;
 }
 
-Logger::Logger():mode(LOG::TOSCREENTOFILE), line_counter(0), turn_counter(-1)
+Logger::Logger():mode(LOG::NONE), line_counter(0), turn_counter(-1)
 {}
 		
 Logger::~Logger()
@@ -46,25 +46,31 @@ void Logger::Log(const std::string& str, int dip)
 	std::string result = int2str(line_counter) + ": " + GameDate::Instance().GetDate().GetStr() + " " + int2str(TurnTimer::Instance().GetTurnTick()) + " " + spaces + str;
 	switch(mode)
 	{
-		case LOG::TOSCREEN:
+		case LOG::SCREEN:
 		{
 			ToScreen(result);
 			break;
 		}
 		
-		case LOG::TOFILE:
+		case LOG::FILE:
 		{
 			ToFile(result);
 			break;		
 		}
 		
-		case LOG::TOSCREENTOFILE:
+		case LOG::SCREENFILE:
 		{
 			ToScreen(result);
 			ToFile(result);
 			break;
 		}
-	
+
+		case LOG::NONE:
+		{
+			ToScreen(result);
+			ToFile(result);
+			break;
+		}	
 	}
 }
   	  	

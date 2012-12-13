@@ -922,9 +922,9 @@ void StarSystem::BombExplosionEvent(Container* container, bool show_effect)
 {
 	float radius = ((Bomb*)container->GetItemSlot()->GetItem())->GetRadius();
 	float damage = ((Bomb*)container->GetItemSlot()->GetItem())->GetDamage(); 
-	vec2f epicentr = container->GetPoints().GetCenter();
+	vec2f center = container->GetPoints().GetCenter();
 	
-	damageEventInsideCircle(epicentr, radius, damage, show_effect);
+	DamageEventInsideCircle(center, radius, damage, show_effect);
 		
 	if (show_effect == true)
 	{
@@ -932,12 +932,25 @@ void StarSystem::BombExplosionEvent(Container* container, bool show_effect)
 	}
 }
 
-
-void StarSystem::damageEventInsideCircle(vec2f epicentr, float radius, int damage, bool show_effect)
+void StarSystem::StarSparkEvent(float radius) const
 {
 	for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
     	{
-       	        if ( distBetweenPoints(VEHICLE_vec[i]->GetPoints().GetCenter(), epicentr) < radius )
+       	        if ( distBetweenPoints(VEHICLE_vec[i]->GetPoints().GetCenter(), GetStar()->GetPoints().GetCenter()) < radius )
+               	{
+               		if (VEHICLE_vec[i]->GetRadarSlot()->GetItem() != NULL)
+               		{
+       				VEHICLE_vec[i]->GetRadarSlot()->GetItem()->LockEvent(2); 
+       			}
+       		}
+    	}
+}
+
+void StarSystem::DamageEventInsideCircle(const vec2f& center, float radius, int damage, bool show_effect)
+{
+	for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+    	{
+       	        if ( distBetweenPoints(VEHICLE_vec[i]->GetPoints().GetCenter(), center) < radius )
                	{
        			VEHICLE_vec[i]->Hit(damage, show_effect); 
        		}

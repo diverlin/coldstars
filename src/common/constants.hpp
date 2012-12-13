@@ -138,7 +138,7 @@ namespace MESH
         
 namespace LOG
 {
-	enum { TOSCREEN, TOFILE, TOSCREENTOFILE };
+	enum { SCREEN, FILE, SCREENFILE, NONE };
 }
 
 // trigonomerty

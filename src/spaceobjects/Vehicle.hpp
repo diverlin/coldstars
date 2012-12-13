@@ -154,7 +154,6 @@ class Vehicle : public BaseSpaceEntity
 		int GetFuelMiss() const;
 		void BuyFuelAsMuchAsPossible();
 
-		void LockItemInItemSlot(ItemSlot*, int);
 		void LockRandomItem(int);
 		
 		void TEST_DamageAndLockRandItems();
