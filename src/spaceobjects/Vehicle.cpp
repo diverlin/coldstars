@@ -66,6 +66,7 @@
 #include "../docking/NatureLand.hpp"
 
 #include "../garbage/EntityGarbage.hpp"
+#include "../effects/ShockWaveEffect.hpp"
 
 Vehicle::Vehicle()
 {

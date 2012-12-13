@@ -95,7 +95,7 @@ void Player::ClearVisibleEntities()
     		
 void Player::AddIfVisible(Star* star)
 {
-        if (IsObjectOnScreen(star->GetPoints()))
+        if (isObjectOnScreen(star->GetPoints()))
         {         
 		visible_STAR_vec.push_back(star);
 	}
@@ -103,7 +103,7 @@ void Player::AddIfVisible(Star* star)
 
 void Player::AddIfVisible(Planet* planet)
 {
-        if (IsObjectOnScreen(planet->GetPoints()))
+        if (isObjectOnScreen(planet->GetPoints()))
         {  
 		visible_PLANET_vec.push_back(planet);
 	}
@@ -111,7 +111,7 @@ void Player::AddIfVisible(Planet* planet)
 
 void Player::AddIfVisible(Asteroid* asteroid)     		
 {
-	if (IsObjectOnScreen(asteroid->GetPoints()))
+	if (isObjectOnScreen(asteroid->GetPoints()))
         {   	
                 if ( npc->GetVehicle()->IsObjectWithinRadarRange(asteroid) )
                 {
@@ -122,7 +122,7 @@ void Player::AddIfVisible(Asteroid* asteroid)
 
 void Player::AddIfVisible(Container* container)     	
 {
-        if (IsObjectOnScreen(container->GetPoints()))
+        if (isObjectOnScreen(container->GetPoints()))
         {    
                 if ( npc->GetVehicle()->IsObjectWithinRadarRange(container) )
                 {
@@ -133,7 +133,7 @@ void Player::AddIfVisible(Container* container)
 
 void Player::AddIfVisible(RocketBullet* rocket)  
 {
-        if (IsObjectOnScreen(rocket->GetPoints()))  
+        if (isObjectOnScreen(rocket->GetPoints()))  
         {  
                 if ( npc->GetVehicle()->IsObjectWithinRadarRange(rocket) )
                 {
@@ -144,7 +144,7 @@ void Player::AddIfVisible(RocketBullet* rocket)
 
 void Player::AddIfVisible(BlackHole* blackhole)  
 {
-        if (IsObjectOnScreen(blackhole->GetPoints()))  
+        if (isObjectOnScreen(blackhole->GetPoints()))  
         {  
                 if ( npc->GetVehicle()->IsObjectWithinRadarRange(blackhole) )
                 {
@@ -156,7 +156,7 @@ void Player::AddIfVisible(BlackHole* blackhole)
 
 void Player::AddIfVisible(Vehicle* vehicle) 
 {
-        if (IsObjectOnScreen(vehicle->GetPoints()))
+        if (isObjectOnScreen(vehicle->GetPoints()))
         {	  
                 if ( npc->GetVehicle()->IsObjectWithinRadarRange(vehicle) )
                 {
@@ -172,25 +172,46 @@ void Player::AddIfVisible(Vehicle* vehicle)
         
 void Player::AddIfVisible(ShockWaveEffect* effect)
 {
-        if (IsObjectOnScreen(effect->GetCenter(), 600))
+        if (isObjectOnScreen(effect->GetCenter(), 600))
         {
-		visible_effect_SHOCKWAVE_vec.push_back(effect);
+                if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
+                {
+			visible_effect_SHOCKWAVE_vec.push_back(effect);
+		}
 	}
 }
 
 void Player::AddIfVisible(LazerTraceEffect* effect)
 {
-	visible_effect_LAZERTRACE_vec.push_back(effect);
+        if ( (isPointOnScreen(effect->GetStartPos()) == true) or (isPointOnScreen(effect->GetEndPos()) == true) )
+        {
+                if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
+                {
+			visible_effect_LAZERTRACE_vec.push_back(effect);
+		}
+	}
 }
  
 void Player::AddIfVisible(BaseParticleSystem* effect)
 {
-	visible_effect_PARTICLESYSTEM_vec.push_back(effect);
+        if (isObjectOnScreen(effect->GetCenter(), 600))
+        {
+                if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
+                {
+			visible_effect_PARTICLESYSTEM_vec.push_back(effect);
+		}
+	}
 }
 
 void Player::AddIfVisible(VerticalFlowText* effect)
 {
-	visible_text_DAMAGE_vec.push_back(effect);
+        if (isPointOnScreen(effect->GetPos()))
+        {
+                if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
+                {
+			visible_text_DAMAGE_vec.push_back(effect);
+		}
+	}
 }     		
 
 void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
@@ -269,13 +290,14 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 {   
 	int w = Screen::Instance().GetWindow().GetWidth();
 	int h = Screen::Instance().GetWindow().GetHeight();
+	vec2f world_coord(Screen::Instance().GetRect().GetBottomLeft());
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	Screen::Instance().GetFbo0().Activate(w, h);
    
-        	starsystem->DrawBackground(Screen::Instance().GetRect().GetBottomLeft());           
-		camera(Screen::Instance().GetRect().GetBottomLeft().x, Screen::Instance().GetRect().GetBottomLeft().y);    
+        	starsystem->DrawBackground(world_coord);           
+		camera(world_coord.x, world_coord.y);    
 
 		starsystem->RestoreDefaultColor();
 		enable_BLEND();
@@ -301,7 +323,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetBloom().GetTextureBlured());
 			glUniform1i(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "BlurSampler"), 1);
 
-			glUniform4f(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "sun_pos"), -Screen::Instance().GetRect().GetBottomLeft().x/w, -Screen::Instance().GetRect().GetBottomLeft().y/h, -100.0, 1.0);
+			glUniform4f(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "sun_pos"), -world_coord.x/w, -world_coord.y/h, -100.0, 1.0);
           
 			glActiveTexture(GL_TEXTURE0);
 			drawFullScreenQuad(w, h, -999.0);
@@ -312,22 +334,22 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 	Screen::Instance().GetFbo2().Activate(w, h);
 		drawFullScreenTexturedQuad(Screen::Instance().GetFbo1().GetTexture(), w, h, -999.0);
            
-          	camera(Screen::Instance().GetRect().GetBottomLeft().x, Screen::Instance().GetRect().GetBottomLeft().y);    
+          	camera(world_coord.x, world_coord.y);    
         
 		enable_DEPTH();  
     			for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 
     			{ 
-       				visible_PLANET_vec[i]->Render_NEW(Screen::Instance().GetRect().GetBottomLeft()); 
+       				visible_PLANET_vec[i]->Render_NEW(world_coord); 
     			}
     		
     			for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
     			{ 
-       				visible_ASTEROID_vec[i]->Render_NEW(Screen::Instance().GetRect().GetBottomLeft()); 
+       				visible_ASTEROID_vec[i]->Render_NEW(world_coord); 
     			}
 
     			for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
 			{ 
-        			visible_BLACKHOLE_vec[i]->Render_NEW(Screen::Instance().GetRect().GetBottomLeft());         			
+        			visible_BLACKHOLE_vec[i]->Render_NEW(world_coord);         			
     			}  	
     		disable_DEPTH();
 
@@ -378,8 +400,8 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 
 		for (unsigned int i=0; i<visible_effect_SHOCKWAVE_vec.size(); i++)
 		{         
-			center_array[i][0] = visible_effect_SHOCKWAVE_vec[i]->center.x/w - Screen::Instance().GetRect().GetBottomLeft().x/w;
-			center_array[i][1] = visible_effect_SHOCKWAVE_vec[i]->center.y/h - Screen::Instance().GetRect().GetBottomLeft().y/h;
+			center_array[i][0] = (visible_effect_SHOCKWAVE_vec[i]->center.x - world_coord.x)/w;
+			center_array[i][1] = (visible_effect_SHOCKWAVE_vec[i]->center.y - world_coord.y)/h;
 			xyz_array[i][0] = visible_effect_SHOCKWAVE_vec[i]->parameter.x;
 			xyz_array[i][1] = visible_effect_SHOCKWAVE_vec[i]->parameter.y;
 			xyz_array[i][2] = visible_effect_SHOCKWAVE_vec[i]->parameter.z;
@@ -394,7 +416,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 			glUniform1i (glGetUniformLocation(ShaderCollector::Instance().shockwave, "sceneTex"), 0);
 
 			int len_effect_SHOCKWAVE_list = visible_effect_SHOCKWAVE_vec.size();
-			glUniform1i (glGetUniformLocation(ShaderCollector::Instance().shockwave, "imax"),        len_effect_SHOCKWAVE_list);
+			glUniform1i (glGetUniformLocation(ShaderCollector::Instance().shockwave, "distortion_num"),        len_effect_SHOCKWAVE_list);
 			glUniform2fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "center"),      len_effect_SHOCKWAVE_list, *center_array);
 			glUniform3fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "shockParams"), len_effect_SHOCKWAVE_list, *xyz_array);
 			glUniform1fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "time"),        len_effect_SHOCKWAVE_list, time_array);
@@ -414,23 +436,24 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 
 	//drawFullScreenTexturedQuad(Screen::Instance().GetFbo3().GetTexture(), w, h, -999.0);
 	//drawFullScreenTexturedQuad(pTo_fbo0->texture, w, h, -999.0);  // debug
+	
 	// draw fogwar and final scene
     	glUseProgram(ShaderCollector::Instance().fogwar);
 		glActiveTexture(GL_TEXTURE0);                                
 		glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetFbo3().GetTexture());
 		glUniform1i (glGetUniformLocation(ShaderCollector::Instance().fogwar, "sceneTex"), 0);
 
-		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "resolution"), Screen::Instance().GetRect().GetWidth(), Screen::Instance().GetRect().GetHeight());
-		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "center"), npc->GetVehicle()->GetPoints().GetCenter().x, npc->GetVehicle()->GetPoints().GetCenter().y);
-		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "radius"), (float)npc->GetVehicle()->GetPropetries().radar/w);
-		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "world_coord"), Screen::Instance().GetRect().GetBottomLeft().x, Screen::Instance().GetRect().GetBottomLeft().y);
+		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "resolution"), w, h);
+		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "center"), npc->GetVehicle()->GetPoints().GetCenter().x/w, npc->GetVehicle()->GetPoints().GetCenter().y/h);
+		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "radius"), (float)npc->GetVehicle()->GetPropetries().radar/h);
+		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "world_coord"), world_coord.x/w, world_coord.y/h);
 
 		drawFullScreenQuad(w, h, -999.0);
 	glUseProgram(0); 
 
 
 
-	camera(Screen::Instance().GetRect().GetBottomLeft().x, Screen::Instance().GetRect().GetBottomLeft().y);
+	camera(world_coord.x, world_coord.y);
 	
 	enable_BLEND();
 		for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
@@ -448,21 +471,20 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 
     	for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
     	{ 
-        	visible_text_DAMAGE_vec[i]->Render(Screen::Instance().GetRect().GetBottomLeft()); 
+        	visible_text_DAMAGE_vec[i]->Render(world_coord); 
     	}   
     		    	
     	starsystem->RestoreSceneColor();
 }
     
-
-	
-  
 void Player::RenderInSpace_OLD(StarSystem* starsystem)
-{   
+{
+	vec2f world_coord(Screen::Instance().GetRect().GetBottomLeft());
+	   
 	glLoadIdentity();
-        starsystem->DrawBackground(Screen::Instance().GetRect().GetBottomLeft());
+        starsystem->DrawBackground(world_coord);
 	
-        camera(Screen::Instance().GetRect().GetBottomLeft().x, Screen::Instance().GetRect().GetBottomLeft().y);
+        camera(world_coord.x, world_coord.y);
         
         disable_BLEND();
         enable_DEPTH();
@@ -539,7 +561,7 @@ void Player::RenderInSpace_OLD(StarSystem* starsystem)
 	// text
         for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
     	{ 
-        	visible_text_DAMAGE_vec[i]->Render(Screen::Instance().GetRect().GetBottomLeft()); 
+        	visible_text_DAMAGE_vec[i]->Render(world_coord); 
     	}    		
               
     	starsystem->RestoreSceneColor();
@@ -937,35 +959,6 @@ void Player::MouseNavigation(const MouseData& data_mouse) const
 	}
 }
 
-bool Player::IsObjectOnScreen(const Points& points) const
-{      
-        if (points.GetCenter().x < (Screen::Instance().GetRect().GetBottomLeft().x - points.GetWidth()))
-                return false;
-        if (points.GetCenter().x > (Screen::Instance().GetRect().GetTopRight().x   + points.GetWidth()))
-                return false;
-        if (points.GetCenter().y < (Screen::Instance().GetRect().GetBottomLeft().y - points.GetHeight()))
-                return false;
-        if (points.GetCenter().y > (Screen::Instance().GetRect().GetTopRight().y   + points.GetHeight()))
-                return false;
-
-        return true;
-}
-
-bool Player::IsObjectOnScreen(const vec2f& ob_center, float sizeInPixels) const
-{       
-        if (ob_center.x < (Screen::Instance().GetRect().GetBottomLeft().x - sizeInPixels))
-                return false;
-        if (ob_center.x > (Screen::Instance().GetRect().GetTopRight().x + sizeInPixels))
-                return false;
-        if (ob_center.y < (Screen::Instance().GetRect().GetBottomLeft().y - sizeInPixels))
-                return false;
-        if (ob_center.y > (Screen::Instance().GetRect().GetTopRight().y + sizeInPixels))
-                return false;
-
-        return true;
-}
-
-
 void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 {	
 	starsystem->FindRenderVisibleEntities_c(this);
@@ -1070,3 +1063,105 @@ void Player::ResolveDataUniquePlayer()
         Screen::Instance().GetRect().SetBottomLeft(data_unresolved_player.screen_pos);
 }		
 
+
+
+
+
+
+
+
+
+
+bool isObjectWithinRadarRange(BaseParticleSystem* effect, Vehicle* vehicle)
+{
+        float dist = distBetweenPoints(vehicle->GetPoints().GetCenter(), effect->GetCenter());
+        if (dist < vehicle->GetPropetries().radar)
+        {
+               	return true;
+        }
+        
+        return false;
+}
+
+
+
+bool isObjectOnScreen(const Points& points)
+{      
+        if (points.GetCenter().x < (Screen::Instance().GetRect().GetBottomLeft().x - points.GetWidth()))
+                return false;
+        if (points.GetCenter().x > (Screen::Instance().GetRect().GetTopRight().x   + points.GetWidth()))
+                return false;
+        if (points.GetCenter().y < (Screen::Instance().GetRect().GetBottomLeft().y - points.GetHeight()))
+                return false;
+        if (points.GetCenter().y > (Screen::Instance().GetRect().GetTopRight().y   + points.GetHeight()))
+                return false;
+
+        return true;
+}
+
+bool isObjectOnScreen(const vec2f& ob_center, float sizeInPixels)
+{       
+        if (ob_center.x < (Screen::Instance().GetRect().GetBottomLeft().x - sizeInPixels))
+                return false;
+        if (ob_center.x > (Screen::Instance().GetRect().GetTopRight().x + sizeInPixels))
+                return false;
+        if (ob_center.y < (Screen::Instance().GetRect().GetBottomLeft().y - sizeInPixels))
+                return false;
+        if (ob_center.y > (Screen::Instance().GetRect().GetTopRight().y + sizeInPixels))
+                return false;
+
+        return true;
+}
+
+bool isPointOnScreen(const vec2f& p)
+{       
+        if (p.x < (Screen::Instance().GetRect().GetBottomLeft().x))
+                return false;
+        if (p.x > (Screen::Instance().GetRect().GetTopRight().x))
+                return false;
+        if (p.y < (Screen::Instance().GetRect().GetBottomLeft().y))
+                return false;
+        if (p.y > (Screen::Instance().GetRect().GetTopRight().y))
+                return false;
+
+        return true;
+}
+
+bool isObjectWithinRadarRange(ShockWaveEffect* effect, Vehicle* vehicle)
+{
+        float dist = distBetweenPoints(vehicle->GetPoints().GetCenter(), effect->GetCenter());
+        if (dist < vehicle->GetPropetries().radar)
+        {
+               	return true;
+        }
+        
+        return false;
+}
+
+bool isObjectWithinRadarRange(LazerTraceEffect* effect, Vehicle* vehicle)
+{
+        float dist = distBetweenPoints(vehicle->GetPoints().GetCenter(), effect->GetStartPos());
+        if (dist < vehicle->GetPropetries().radar)
+        {
+               	return true;
+        }
+        
+        dist = distBetweenPoints(vehicle->GetPoints().GetCenter(), effect->GetEndPos());
+        if (dist < vehicle->GetPropetries().radar)
+        {
+               	return true;
+        }
+        
+        return false;
+}
+
+bool isObjectWithinRadarRange(VerticalFlowText* effect, Vehicle* vehicle)
+{
+        float dist = distBetweenPoints(vehicle->GetPoints().GetCenter(), effect->GetPos());
+        if (dist < vehicle->GetPropetries().radar)
+        {
+               	return true;
+        }
+        
+        return false;
+}

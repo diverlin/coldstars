@@ -29,6 +29,8 @@ class VerticalFlowText
                 ~VerticalFlowText();
 
 		bool GetAlive() const { return is_alive; };
+		
+		const vec2f& GetPos() const { return pos; };
 
                 void update();
                 void Render(const vec2f&) const;
