@@ -1203,10 +1203,6 @@ void Vehicle::BuyFuelAsMuchAsPossible()
 	}
 }
 
-void Vehicle::LockItemInItemSlot(ItemSlot* item_slot, int locked_turns)
-{
-	item_slot->GetItem()->LockEvent(locked_turns);	
-}
 
 void Vehicle::LockRandomItem(int locked_turns)
 {
@@ -1394,7 +1390,7 @@ void Vehicle::TEST_DamageAndLockRandItems()
 	{
 		rand_index1 = getRandInt(0, slot_funct_vec.size()-1);	
 	}
-	LockItemInItemSlot(slot_funct_vec[rand_index1], 3);
+	slot_funct_vec[rand_index1]->GetItem()->LockEvent(3);
 
 	int rand_index2 = getRandInt(0, slot_funct_vec.size()-1);
 	while (slot_funct_vec[rand_index2]->GetItem() == NULL)

@@ -145,7 +145,7 @@ bool ItemSlot::FireEvent(int attack_skill, bool show_effect)
 				{			       		
 					//if (getRandInt(1, 2) == 1)
 					{
-						((Vehicle*)target)->LockItemInItemSlot(GetSubTarget(), 1);
+						GetSubTarget()->GetItem()->LockEvent(1);
 					}
 					damage /= 3; // lower damage is used for precise fire
 				}	

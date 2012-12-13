@@ -21,6 +21,7 @@
 #include "../common/EntityManager.hpp"
 #include "../common/myStr.hpp"
 #include "../common/common.hpp"
+#include "../common/rand.hpp"
 #include "../resources/TextureManager.hpp"
 #include "../world/starsystem.hpp"
 #include "../render/Render.hpp"
@@ -34,6 +35,11 @@ Star::Star(int id)
 	
    	texture_offset1 = 0.0;
     	texture_offset2 = 0.0;
+    	
+    	d_color = 0.0;
+    	
+    	spark_on = false;
+    	spark_done = true;
 }
     
 Star::~Star()
@@ -44,14 +50,46 @@ void Star::CalcColor()
 	fillColor4fById(textureOb->color_id, color);
 }
        
+void Star::InitiateSpark()
+{
+	spark_on   = true;
+    	spark_done = false;
+}
+       		
 void Star::UpdateInSpace(int time, bool show_effect)
 {
         texture_offset1 += 0.0002;
         texture_offset2 += 0.0003;
 
+if ( (getRandInt(1, 300) == 1) and (spark_done == true) ) InitiateSpark(); // debug
+
+	if (spark_done == false)
+	{		
+		if (spark_on == true)
+		{
+			d_color += 0.02;
+			scale += 0.2;
+			if (d_color > 1.0)
+			{
+				starsystem->StarSparkEvent(getRandInt(600, 1200));
+				spark_on = false;
+			}
+		}
+		else
+		{
+	
+			d_color -= 0.005;	
+			scale -= 0.05;
+			if (d_color < 0.0)
+			{
+				spark_done = true;
+			}
+
+		}
+	}
+	
 	//UpdateRotation(); // not relevant for render NEW
-}
-    
+}    
     
 void Star::Render_NEW() const
 {

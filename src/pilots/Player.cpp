@@ -448,6 +448,9 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "radius"), (float)npc->GetVehicle()->GetPropetries().radar/h);
 		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "world_coord"), world_coord.x/w, world_coord.y/h);
 
+		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "dcolor"), npc->GetVehicle()->GetStarSystem()->GetStar()->GetDColor());
+
+
 		drawFullScreenQuad(w, h, -999.0);
 	glUseProgram(0); 
 

@@ -4,6 +4,7 @@ uniform float radius;
 uniform vec2 center;
 uniform vec2 world_coord;
 uniform vec2 resolution;
+uniform float dcolor;
 
 void main(void)
 {
@@ -20,6 +21,8 @@ void main(void)
 	{
 		color -= vec4(0.1, 0.1, 0.1, 0.0);
 	}
+
+	color += dcolor;
 
 	gl_FragColor = color;
 }
