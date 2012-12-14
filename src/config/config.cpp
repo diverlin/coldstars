@@ -41,6 +41,8 @@ SCROLL_VELOCITY_STEP(1)
 	DEBUG_MODE 	= ptree.get<bool>("General.DEBUG_MODE");
 	game_mode 	= ptree.get<int>("General.game_mode");
 	
+	log_mode 	= ptree.get<int>("General.log_mode");
+		
 	AUTO_TURN_MODE 	= ptree.get<bool>("Gameplay.AUTO_TURN_MODE");
 	AUTO_SAVE_MODE 	= ptree.get<bool>("Gameplay.AUTO_SAVE_MODE");
 	GAME_SPEED 	= ptree.get<int>("Gameplay.GAME_SPEED");

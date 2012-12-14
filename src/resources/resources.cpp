@@ -1367,11 +1367,11 @@ void loadShaders()
 	}
 
 	{
-	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/fogwar.vert")); 
-	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/fogwar.frag")); 
+	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/fogwarspark.vert")); 
+	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/fogwarspark.frag")); 
 
-	ShaderCollector::Instance().fogwar = glCreateProgram();
-	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShaderCollector::Instance().fogwar);
+	ShaderCollector::Instance().fogwarspark = glCreateProgram();
+	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShaderCollector::Instance().fogwarspark);
 	}
 }
 

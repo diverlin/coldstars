@@ -20,6 +20,7 @@
 #include "myStr.hpp"
 #include "TurnTimer.hpp"
 #include "GameDate.hpp"
+#include "../config/config.hpp"
 
 Logger& Logger::Instance()
 {
@@ -27,8 +28,10 @@ Logger& Logger::Instance()
 	return instance;
 }
 
-Logger::Logger():mode(LOG::NONE), line_counter(0), turn_counter(-1)
-{}
+Logger::Logger(): line_counter(0), turn_counter(-1)
+{
+	mode = Config::Instance().GetLogMode();
+}
 		
 Logger::~Logger()
 {
@@ -67,8 +70,6 @@ void Logger::Log(const std::string& str, int dip)
 
 		case LOG::NONE:
 		{
-			ToScreen(result);
-			ToFile(result);
 			break;
 		}	
 	}
