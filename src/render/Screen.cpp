@@ -40,7 +40,8 @@ void Screen::InitPostEffects(int width, int height)
 	fbo1.Create();	
 	fbo2.Create();
 	fbo3.Create();
-	
+	fbo4.Create();
+		
 	bloom.Create(ShaderCollector::Instance().blur, ShaderCollector::Instance().extractbright, ShaderCollector::Instance().combine);
 	
 	ResizePostEffects(width, height);
@@ -78,7 +79,8 @@ void Screen::ResizePostEffects(int width, int height)
 	fbo1.Resize(width, height);	
 	fbo2.Resize(width, height);
 	fbo3.Resize(width, height);
-	
+	fbo4.Resize(width, height);
+		
 	bloom.Resize(width, height);
 }
 

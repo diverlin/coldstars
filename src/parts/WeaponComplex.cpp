@@ -211,19 +211,19 @@ void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
 
 void WeaponComplex::Fire(int timer, int attack_skill, bool show_effect)
 {
-     	//if (timer < TURN_TIME - fire_delay)
+     	if (timer < TURN_TIME - fire_delay)
      	{
         	for (std::vector<ItemSlot*>::iterator it=slot_weapon_reloaded_vec.begin(); it<slot_weapon_reloaded_vec.end(); ++it)
         	{	
                         if ((*it)->ValidateTarget() == true)
                         {
       				(*it)->FireEvent(attack_skill, show_effect);
-				//if ((*it)->GetSubTarget() == NULL)
-           			//{
-           				//fire_delay += d_fire_delay;
-           				//slot_weapon_reloaded_vec.erase(it);
-           				//break;
-               			//}
+				if ((*it)->GetSubTarget() == NULL)
+           			{
+           				fire_delay += d_fire_delay;
+           				slot_weapon_reloaded_vec.erase(it);
+           				break;
+               			}
         		}
         		else
         		{

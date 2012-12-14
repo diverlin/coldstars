@@ -27,6 +27,7 @@ class Screen:private sf::NonCopyable
 		Fbo& GetFbo1() { return fbo1; };
 		Fbo& GetFbo2() { return fbo2; };
 		Fbo& GetFbo3() { return fbo3; }
+		Fbo& GetFbo4() { return fbo4; }
 		BloomEffect& GetBloom() { return bloom; };	
 		
 		const sf::Clock& GetPreciseClock() const { return precise_clock; };
@@ -60,7 +61,8 @@ class Screen:private sf::NonCopyable
 		Fbo fbo1;
 		Fbo fbo2;
 		Fbo fbo3;
-
+		Fbo fbo4;
+		
 		BloomEffect bloom;
       		
       		Rect rect;

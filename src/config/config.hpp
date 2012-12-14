@@ -10,7 +10,8 @@ struct Config
 		static Config& Instance();
 
 		int GetGameMode() const { return game_mode; };
-		
+		int GetLogMode() const { return log_mode; };
+				
 		int SCREEN_WIDTH;
 		int SCREEN_HEIGHT;
 		int BPP;
@@ -37,7 +38,8 @@ struct Config
 		Config& operator=(const Config&) = delete;
 		
 		int game_mode;
-		
+		int log_mode;
+				
 		boost::property_tree::ptree ptree;
 
 };

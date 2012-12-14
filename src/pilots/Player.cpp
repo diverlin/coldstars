@@ -294,6 +294,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	// render background and star to FBO0
 	Screen::Instance().GetFbo0().Activate(w, h);
    
         	starsystem->DrawBackground(world_coord);           
@@ -309,10 +310,10 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 		starsystem->RestoreSceneColor();
 	Screen::Instance().GetFbo0().Deactivate();
 
-	// POST PROCESS BLOOM (many FBO)
+	// BLOOM background and star (uses many FBO)
 	Screen::Instance().GetBloom().Proceed(w, h, Screen::Instance().GetFbo0().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
 
-	// RENDER to FBO1, VOLUMETRIC LIGHT
+	// VOLUMETRIC LIGHT to FBO1
 	Screen::Instance().GetFbo1().Activate(w, h);
 		glUseProgram(ShaderCollector::Instance().volumetriclight);
 			glActiveTexture(GL_TEXTURE0);                                
@@ -330,7 +331,8 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 		glUseProgram(0);
 		glActiveTexture(GL_TEXTURE0);
 	Screen::Instance().GetFbo1().Deactivate();	
-	   	          	        	
+	   	          	   
+	// render space entites to FBO2     	
 	Screen::Instance().GetFbo2().Activate(w, h);
 		drawFullScreenTexturedQuad(Screen::Instance().GetFbo1().GetTexture(), w, h, -999.0);
            
@@ -391,7 +393,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
     	Screen::Instance().GetFbo2().Deactivate();
 
 
-	// POST PROCESS WAVE SHOCK into FBO2
+	// SHOCKWAVE post process to Fbo3
 	Screen::Instance().GetFbo3().Activate(w, h);
 
 		float center_array[10][2];
@@ -426,52 +428,52 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 	
 	Screen::Instance().GetFbo3().Deactivate();
 
-
-	// render from FBO
+	// render effects not distorted by SHOCKWAVE
+	Screen::Instance().GetFbo4().Activate(w, h);
+		drawFullScreenTexturedQuad(Screen::Instance().GetFbo3().GetTexture(), w, h, -999.0);
+		
+		camera(world_coord.x, world_coord.y);
+		
+		enable_BLEND();
+			for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
+	    		{ 
+	        		visible_effect_LAZERTRACE_vec[i]->Render(); 
+	    		}
+	
+	    		enable_POINTSPRITE();
+	    			for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
+	    			{ 
+	        			visible_effect_PARTICLESYSTEM_vec[i]->Render(); 
+	    			}
+	    		disable_POINTSPRITE();
+	    	disable_BLEND();
+	Screen::Instance().GetFbo4().Deactivate();
+		    	
+		    	
+	// FOGWAR and STARSPARK to final scene
 	glEnable(GL_TEXTURE_2D);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);      // unbind fbo
-
-	clearScreen();
-	resetRenderTransformation();
-
-	//drawFullScreenTexturedQuad(Screen::Instance().GetFbo3().GetTexture(), w, h, -999.0);
-	//drawFullScreenTexturedQuad(pTo_fbo0->texture, w, h, -999.0);  // debug
 	
-	// draw fogwar and final scene
-    	glUseProgram(ShaderCollector::Instance().fogwar);
+	clearScreen();
+	resetRenderTransformation();	
+		
+    	glUseProgram(ShaderCollector::Instance().fogwarspark);
 		glActiveTexture(GL_TEXTURE0);                                
-		glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetFbo3().GetTexture());
-		glUniform1i (glGetUniformLocation(ShaderCollector::Instance().fogwar, "sceneTex"), 0);
+		glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetFbo4().GetTexture());
+		glUniform1i (glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "sceneTex"), 0);
 
-		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "resolution"), w, h);
-		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "center"), npc->GetVehicle()->GetPoints().GetCenter().x/w, npc->GetVehicle()->GetPoints().GetCenter().y/h);
-		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "radius"), (float)npc->GetVehicle()->GetPropetries().radar/h);
-		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "world_coord"), world_coord.x/w, world_coord.y/h);
+		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "resolution"), w, h);
+		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "center"), npc->GetVehicle()->GetPoints().GetCenter().x/w, npc->GetVehicle()->GetPoints().GetCenter().y/h);
+		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "radius"), (float)npc->GetVehicle()->GetPropetries().radar/h);
+		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "world_coord"), world_coord.x/w, world_coord.y/h);
 
-		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwar, "dcolor"), npc->GetVehicle()->GetStarSystem()->GetStar()->GetDColor());
-
+		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "dcolor"), npc->GetVehicle()->GetStarSystem()->GetStar()->GetDColor());
 
 		drawFullScreenQuad(w, h, -999.0);
-	glUseProgram(0); 
-
-
-
+	glUseProgram(0); 	    	
+	    	
+	// render text
 	camera(world_coord.x, world_coord.y);
-	
-	enable_BLEND();
-		for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
-    		{ 
-        		visible_effect_LAZERTRACE_vec[i]->Render(); 
-    		}
-
-    		enable_POINTSPRITE();
-    			for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
-    			{ 
-        			visible_effect_PARTICLESYSTEM_vec[i]->Render(); 
-    			}
-    		disable_POINTSPRITE();
-    	disable_BLEND();
-
     	for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
     	{ 
         	visible_text_DAMAGE_vec[i]->Render(world_coord); 
