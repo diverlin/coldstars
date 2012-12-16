@@ -9,9 +9,15 @@ struct Config
 	public:
 		static Config& Instance();
 
+		void SetAutoSaveMode(bool auto_save_mode) { this->auto_save_mode = auto_save_mode; }
+		void SetAutoLoadMode(bool auto_load_mode) { this->auto_load_mode = auto_load_mode; }
+		
 		int GetGameMode() const { return game_mode; };
 		int GetLogMode() const { return log_mode; };
-				
+
+		bool GetAutoSaveMode() const { return auto_save_mode; }
+		bool GetAutoLoadMode() const { return auto_load_mode; }
+								
 		int SCREEN_WIDTH;
 		int SCREEN_HEIGHT;
 		int BPP;
@@ -23,7 +29,6 @@ struct Config
 		bool DEBUG_MODE;
 		
 		bool AUTO_TURN_MODE;
-		bool AUTO_SAVE_MODE;
 		int GAME_SPEED;
 		
 		int SCROLL_VELOCITY_MAX;
@@ -39,7 +44,10 @@ struct Config
 		
 		int game_mode;
 		int log_mode;
-				
+		
+		bool auto_save_mode;
+		bool auto_load_mode;
+						
 		boost::property_tree::ptree ptree;
 
 };

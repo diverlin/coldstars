@@ -137,7 +137,7 @@ void StarSystem::PutChildsToGarbage() const
 void StarSystem::AddVehicle(Vehicle* vehicle, const vec2f& center, float angle, BaseSpaceEntity* parent)
 {
 	#if ENTITY_TRANSACTION_LOG_ENABLED == 1
-	Logger::Instance().Log(" StarSystem(id=" + int2str(GetId()) + ")::AddVehicle(id=" + int2str(vehicle->GetId())+")", ENTITY_TRANSACTION_LOG_DIP);
+	Logger::Instance().Log(" StarSystem(" + int2str(GetId()) + ")::AddVehicle(" + int2str(vehicle->GetId())+")", ENTITY_TRANSACTION_LOG_DIP);
 	
 	for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
 	{
@@ -216,7 +216,7 @@ void StarSystem::Add(BasePlanet* object, BaseSpaceEntity* parent, int it)
 void StarSystem::AddContainer(Container* container, const vec2f& center)
 {
 	#if ENTITY_TRANSACTION_LOG_ENABLED == 1
-	Logger::Instance().Log(" StarSystem(id=" + int2str(GetId()) + ")::AddVehicle(id=" + int2str(container->GetId()) + ")", ENTITY_TRANSACTION_LOG_DIP);
+	Logger::Instance().Log(" StarSystem(" + int2str(GetId()) + ")::AddVehicle(" + int2str(container->GetId()) + ")", ENTITY_TRANSACTION_LOG_DIP);
 	
 	
 	for (unsigned int i=0; i<CONTAINER_vec.size(); i++)
@@ -811,7 +811,7 @@ void StarSystem::ManageUnavaliableObjects_s()
                	if ((*it)->GetPlaceTypeId() != ENTITY::SPACE_ID)
                	{	
                		#if ENTITY_TRANSACTION_LOG_ENABLED == 1
-			Logger::Instance().Log("starsysten_id="+int2str(GetId())+ " RemoveVehicle, vehicle_id=" + int2str((*it)->GetId()));
+			Logger::Instance().Log("starsysten("+int2str(GetId())+ ")::RemoveVehicle(" + int2str((*it)->GetId())+")");
 			#endif
                		it = VEHICLE_vec.erase(it);
                	}

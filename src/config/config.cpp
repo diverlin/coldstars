@@ -21,7 +21,8 @@ DEBUG_MODE(false),
 game_mode(GAME_MODE::NORMAL_RUN),
 
 AUTO_TURN_MODE(false),
-AUTO_SAVE_MODE(false),
+auto_save_mode(false),
+auto_load_mode(false),
 GAME_SPEED(1),
 
 SCROLL_VELOCITY_MAX(20),
@@ -44,7 +45,8 @@ SCROLL_VELOCITY_STEP(1)
 	log_mode 	= ptree.get<int>("General.log_mode");
 		
 	AUTO_TURN_MODE 	= ptree.get<bool>("Gameplay.AUTO_TURN_MODE");
-	AUTO_SAVE_MODE 	= ptree.get<bool>("Gameplay.AUTO_SAVE_MODE");
+	auto_save_mode 	= ptree.get<bool>("Gameplay.auto_save_mode");
+	auto_load_mode 	= ptree.get<bool>("Gameplay.auto_load_mode");
 	GAME_SPEED 	= ptree.get<int>("Gameplay.GAME_SPEED");
 	
 	SCROLL_VELOCITY_MAX 	= ptree.get<int>("Control.SCROLL_VELOCITY_MAX");

@@ -44,9 +44,6 @@ class EntityManager
 
 		bool UpdateSaveRequest();		
 		bool UpdateLoadRequest();
-
-		void SaveFile(const std::string&, boost::property_tree::ptree&) const;
-		void LoadFile(const std::string&, boost::property_tree::ptree&) const;
 		
 	private:
 		EntityManager():save_request(false), load_request(false){}
@@ -60,9 +57,9 @@ class EntityManager
 		void RemoveEntity(Base*);
 
 		void Clear();
-		
-		void SaveEvent();
-		void LoadPass0();
+				
+		void SaveEvent(const std::string&);
+		void LoadPass0(const std::string&);
 		void LoadPass1() const;
 						
 		friend class EntityGarbage;

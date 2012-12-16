@@ -95,16 +95,11 @@ void ItemSlot::SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget)
         
 bool ItemSlot::ValidateTarget()
 {	
-        if (target != NULL)
-        {
-                #if WEAPONSTARGET_LOG_ENABLED == 1 
-		Log("ValidateTarget");
-		#endif   
+	#if WEAPONSTARGET_LOG_ENABLED == 1 
+	Log("ValidateTarget");
+	#endif   
 	
-                return CheckTarget(target);
-        }
-        
-        return false;
+        return CheckTarget(target);
 }
 
 void ItemSlot::ResetTarget()
@@ -541,7 +536,7 @@ void ItemSlot::ResolveDataUniqueItemSlot()
 
 void ItemSlot::Log(const std::string& func_name) const
 {
-	Logger::Instance().Log("ItemSlot::"+func_name+"("+int2str(GetId())+") "+getBaseInfoStr(this));
+	Logger::Instance().Log("ItemSlot("+int2str(GetId())+")::"+func_name+getBaseInfoStr(this));
 	
 	if (owner != NULL)
 	{

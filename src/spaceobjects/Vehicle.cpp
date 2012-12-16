@@ -591,6 +591,8 @@ void Vehicle::HyperJumpEvent(StarSystem* starsystem)
 	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::HyperJumpEvent", ENTITY_TRANSACTION_LOG_DIP); 
 	#endif   
 	
+	weapon_complex.DeactivateAllWeapons();
+	
         special_action_id = SPECIAL_ACTION::INITIATE_JUMPOUT_ID;
         starsystem->GetHyperSpace().AddVehicle(this);
 }
@@ -601,7 +603,9 @@ void Vehicle::DockingEvent()
         #if ENTITY_TRANSACTION_LOG_ENABLED == 1 
 	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::DockingEvent", ENTITY_TRANSACTION_LOG_DIP); 
 	#endif
-	           
+	          
+	weapon_complex.DeactivateAllWeapons();
+	          	 
         switch(drive_complex.GetTarget()->GetTypeId())         	     	     	
      	{
      		case ENTITY::PLANET_ID:

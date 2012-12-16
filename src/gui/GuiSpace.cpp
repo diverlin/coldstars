@@ -22,6 +22,7 @@
 #include "../common/EntityManager.hpp"
 #include "../common/myStr.hpp"
 #include "../common/constants.hpp"
+#include "../common/GameDate.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../render/Screen.hpp"
 #include "../render/Render.hpp"
@@ -113,11 +114,11 @@ void GuiSpace::RenderBar() const
 
 void GuiSpace::RenderText(const vec2f& scroll_coords) const
 {
-	std::string _coord_str = "world coord: " + int2str(scroll_coords.x) + "," + int2str(scroll_coords.y);
+	std::string _coord_str = "date:"+ GameDate::Instance().GetDate().GetStr()+" world coord: " + int2str(scroll_coords.x) + "," + int2str(scroll_coords.y);
 
 	sf::String _str(_coord_str, Screen::Instance().GetFont(), 12);
 	_str.SetColor(sf::Color(255, 255, 255));
-	_str.SetPosition(Screen::Instance().GetWindow().GetWidth() - 200, 5); 
+	_str.SetPosition(Screen::Instance().GetWindow().GetWidth() - 400, 5); 
 
 	Screen::Instance().GetWindow().Draw(_str);    
 }

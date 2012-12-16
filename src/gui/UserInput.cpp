@@ -346,9 +346,15 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 			break;
 		}
 
-		case sf::Key::F4: // auto save mode
+		case sf::Key::F3: // auto save mode
 		{		
-			Config::Instance().AUTO_SAVE_MODE = !Config::Instance().AUTO_SAVE_MODE;			
+			Config::Instance().SetAutoSaveMode(!Config::Instance().GetAutoSaveMode());			
+			break;
+		}
+		
+		case sf::Key::F4: // auto load mode
+		{		
+			Config::Instance().SetAutoLoadMode(!Config::Instance().GetAutoLoadMode());		
 			break;
 		}
 				

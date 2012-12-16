@@ -38,7 +38,7 @@ BlackHole::BlackHole(int id)
 /* virtual */
 BlackHole::~BlackHole() 
 {
-	//delete shockwave; delete from outside, starsystem of shockwaves effects vec in destructor
+	delete shockwave; 
 } 
  
 void BlackHole::SetCenter(const vec2f& center) { points.SetCenter(center); shockwave->SetCenter(center); }

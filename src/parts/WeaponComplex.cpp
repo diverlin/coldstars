@@ -134,9 +134,9 @@ void WeaponComplex::ActivateAllWeapons()
 
 void WeaponComplex::DeactivateAllWeapons()
 {
-	for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
+	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
 	{
-               	slot_weapon_reloaded_vec[i]->DeselectEvent();
+               	slot_weapon_vec[i]->DeselectEvent();
 	}
 }
 
@@ -215,22 +215,25 @@ void WeaponComplex::Fire(int timer, int attack_skill, bool show_effect)
      	{
         	for (std::vector<ItemSlot*>::iterator it=slot_weapon_reloaded_vec.begin(); it<slot_weapon_reloaded_vec.end(); ++it)
         	{	
-                        if ((*it)->ValidateTarget() == true)
-                        {
-      				(*it)->FireEvent(attack_skill, show_effect);
-				if ((*it)->GetSubTarget() == NULL)
-           			{
-           				fire_delay += d_fire_delay;
-           				slot_weapon_reloaded_vec.erase(it);
-           				break;
-               			}
-        		}
-        		else
+        		if ((*it)->GetTarget() != NULL)
         		{
-        			(*it)->ResetTarget();
-        		}    
-        		
-        		it = slot_weapon_reloaded_vec.erase(it);
+	                        if ((*it)->ValidateTarget() == true)
+	                        {
+	      				(*it)->FireEvent(attack_skill, show_effect);
+					if ((*it)->GetSubTarget() == NULL)
+	           			{
+	           				fire_delay += d_fire_delay;
+	           				slot_weapon_reloaded_vec.erase(it);
+	           				break;
+	               			}
+	        		}
+	        		else
+	        		{
+	        			(*it)->ResetTarget();
+	        		}    
+	        		
+	        		it = slot_weapon_reloaded_vec.erase(it);
+        		}
         	}
         } 	
 }
