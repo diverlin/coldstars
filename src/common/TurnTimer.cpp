@@ -43,7 +43,7 @@ void TurnTimer::NextTurn()
 	if (Config::Instance().AUTO_SAVE_MODE == true)
 	{
 	        Logger::Instance().Log("*** proceeding autosave(AUTO_SAVE_MODE=ON)");
-		EntityManager::Instance().SetSaveFlagTrue();
+		EntityManager::Instance().SaveRequest();
 	}
 			
 	turn_tick = TURN_TIME;
