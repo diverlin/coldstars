@@ -93,6 +93,7 @@ struct LifeData
 	bool is_alive;
 	int armor;
 
+	int life_time;
 	int dying_time;
 
 	bool garbage_ready;
@@ -100,6 +101,7 @@ struct LifeData
 	LifeData():
 	is_alive(true),
         armor(1),
+        life_time(0),
         dying_time(0),
         garbage_ready(false) {};
         

@@ -21,9 +21,11 @@
 #include "../common/constants.hpp"
 #include "../common/myStr.hpp"
 #include "../common/rand.hpp"
+#include "../common/Logger.hpp"
 
 #include "../common/id.hpp"
 #include "../resources/TextureManager.hpp"
+#include "../world/starsystem.hpp"
 
 BlackHole::BlackHole(int id)
 {        
@@ -31,26 +33,38 @@ BlackHole::BlackHole(int id)
 	data_id.type_id = ENTITY::BLACKHOLE_ID;
 	
     	mass = getRandInt(1000, 4000);
-    	
-    	int size = 4;
-    	bool dynamic = false;
-       	shock_wave = GetNewShockWave(size, dynamic); 
 }
 
 /* virtual */
 BlackHole::~BlackHole() 
 {
-	//delete shock_wave; delete from outside, starsystem of shockwaves effects vec in destructor
+	//delete shockwave; delete from outside, starsystem of shockwaves effects vec in destructor
 } 
  
+void BlackHole::SetCenter(const vec2f& center) { points.SetCenter(center); shockwave->SetCenter(center); }
+ 		
 void BlackHole::UpdateInSpace(int time, bool show_effect)
 {
+	CheckDeath(show_effect);
+
 	UpdateRotation();
 	if (time > 0)
 	{
 		points.SetCenter(points.GetCenter()+getRandVec2f(1, 2));
-		shock_wave->SetCenter(points.GetCenter());
+		shockwave->SetCenter(points.GetCenter());
+	
+		data_life.life_time--;
+		if (data_life.life_time < 0)
+		{
+			scale -= 0.1;
+			if (scale < 1.0)
+			{
+				data_life.is_alive = false;
+			}
+		}
 	}
+
+	shockwave->Update();
 }
 
 void BlackHole::UpdateInfo()
@@ -59,7 +73,6 @@ void BlackHole::UpdateInfo()
 
     	info.addTitleStr("BLACKHOLE");
 
-    	//info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
     	info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 }
@@ -73,52 +86,54 @@ void BlackHole::Render_OLD() const
 {
 	RenderMesh_OLD();	
 }
-      
-/*virtual*/
-void BlackHole::SaveData(boost::property_tree::ptree&) const
+     
+void BlackHole::SaveDataUniqueBlackHole(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" BlackHole("+int2str(GetId())+")::SaveDataUniqueBlackHole", SAVELOAD_LOG_DIP);
+	#endif
+}
 
+void BlackHole::LoadDataUniqueBlackHole(const boost::property_tree::ptree& load_ptree)
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" BlackHole("+int2str(GetId())+")::LoadDataUniqueBlackHole", SAVELOAD_LOG_DIP);
+	#endif
+}
+
+void BlackHole::ResolveDataUniqueBlackHole()
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" BlackHole("+int2str(GetId())+")::ResolveDataUniqueBlackHole", SAVELOAD_LOG_DIP);
+	#endif
+	
+	starsystem->Add(this, data_unresolved_BaseSpaceEntity.center); 
+}
+ 
+/*virtual*/
+void BlackHole::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	std::string root = "blackhole." + int2str(GetId())+".";
+	SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
+	SaveDataUniqueBasePlanet(save_ptree, root);
+	SaveDataUniqueBlackHole(save_ptree, root);
 }
 
 /*virtual*/		
-void BlackHole::LoadData(const boost::property_tree::ptree&)
+void BlackHole::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-
+	LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueBaseSpaceEntity(load_ptree);
+	LoadDataUniqueBasePlanet(load_ptree);
+	LoadDataUniqueBlackHole(load_ptree);
 }
 	
 /*virtual*/	
 void BlackHole::ResolveData()
 {
-
+	ResolveDataUniqueBase();
+	ResolveDataUniqueBaseSpaceEntity();
+	ResolveDataUniqueBasePlanet();
+	ResolveDataUniqueBlackHole();
 }
-
-BlackHole* GetNewBlackHole()
-{
-        int id = SimpleIdGenerator::Instance().GetNextId();
-        
-        LifeData data_life;
-        data_life.is_alive   = true;
-        data_life.garbage_ready = false;
-    	data_life.armor      = 100000;
-        data_life.dying_time = 30;        
-        
-	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BLACKHOLE_ID); 
-	vec3f d_angle(0.0, 0.0, 10.0); 		
-       
-	BlackHole* blackhole = new BlackHole(id);
-                
-	blackhole->SetLifeData(data_life);
-	blackhole->SetTextureOb(texOb);
-	blackhole->SetMesh(MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_NORMAL_ID));	
-	
-	blackhole->SetDeltaAngle(d_angle);
-	blackhole->SetScale(30);
-	
-	blackhole->CalcCollisionrRadius();
-	
-	return blackhole;
-}
-
-
-
-

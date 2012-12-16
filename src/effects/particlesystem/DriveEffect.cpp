@@ -98,7 +98,7 @@ void DriveEffect::Update()
 void DriveEffect::Render(float parent_d_alpha)
 {
        	enable_POINTSPRITE();       	
-     		glBindTexture(GL_TEXTURE_2D, texOb->texture);
+     		glBindTexture(GL_TEXTURE_2D, textureOb->texture);
      		for (unsigned int i=0; i<particles_vec.size(); i++) 
      		{
          		particles_vec[i]->Render(parent_d_alpha);

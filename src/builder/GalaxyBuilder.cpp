@@ -18,6 +18,7 @@
 
 #include "GalaxyBuilder.hpp"
 #include "StarSystemBuilder.hpp"
+#include "../world/galaxy.hpp"
 #include "../world/starsystem.hpp"
 
 #include "../config/config.hpp"

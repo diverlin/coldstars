@@ -19,9 +19,9 @@
 #include "TurnTimer.hpp"
 #include "constants.hpp"
 #include "GameDate.hpp"
-#include "SaveLoadManager.hpp"
 #include "Logger.hpp"
 #include "../config/config.hpp"
+#include "EntityManager.hpp"
 
 TurnTimer& TurnTimer::Instance()
 {
@@ -43,7 +43,7 @@ void TurnTimer::NextTurn()
 	if (Config::Instance().AUTO_SAVE_MODE == true)
 	{
 	        Logger::Instance().Log("*** proceeding autosave(AUTO_SAVE_MODE=ON)");
-		SaveLoadManager::Instance().PerformDelayedSave();
+		EntityManager::Instance().SetSaveFlagTrue();
 	}
 			
 	turn_tick = TURN_TIME;

@@ -18,7 +18,7 @@
 
 #include "UserInput.hpp"
 #include "BaseButton.hpp"
-#include "../common/SaveLoadManager.hpp"
+#include "../common/EntityManager.hpp"
 #include "../config/config.hpp"
 #include "../render/Screen.hpp"
 #include "../parts/WeaponComplex.hpp"
@@ -354,7 +354,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 				
 		case sf::Key::F5: // save event
 		{		
-			SaveLoadManager::Instance().PerformDelayedSave();			
+			EntityManager::Instance().SetSaveFlagTrue();			
 			break;
 		}
 		
@@ -384,7 +384,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 		
 		case sf::Key::F9:
 		{
-			SaveLoadManager::Instance().PerformDelayedLoad();
+			EntityManager::Instance().SetLoadFlagTrue();
 			break;
 		}
 	}   

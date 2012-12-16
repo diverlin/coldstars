@@ -65,7 +65,7 @@ void DamageEffect::Update()
 
 void DamageEffect::Render()
 {
-     	glBindTexture(GL_TEXTURE_2D, texOb->texture);
+     	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
 	for (unsigned int i = 0; i < num_particles; i++)
 	{
        		particles_vec[i]->Render();
@@ -113,6 +113,7 @@ DamageEffect* getNewDamageEffect(int color_id, BaseSpaceEntity* parent)
         damage->SetParticlesNum(particles_num);
                 
         damage->SetParent(parent);
+        damage->SetCenter(parent->GetPoints().GetCenter());
                 
         damage->CreateParticles();
                 

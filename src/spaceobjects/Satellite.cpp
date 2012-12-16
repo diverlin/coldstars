@@ -166,21 +166,21 @@ void Satellite::ResolveData()
 void Satellite::SaveDataUniqueSatellite(boost::property_tree::ptree&, const std::string&) const
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" SaveDataUniqueSatellite()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	Logger::Instance().Log(" Satellite("+int2str(GetId())+")::SaveDataUniqueSatellite", SAVELOAD_LOG_DIP);
 	#endif
 }
 
 void Satellite::LoadDataUniqueSatellite(const boost::property_tree::ptree&)
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" LoadDataUniqueSatellite()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	Logger::Instance().Log(" Satellite("+int2str(GetId())+")::LoadDataUniqueSatellite", SAVELOAD_LOG_DIP);
 	#endif
 }
 
 void Satellite::ResolveDataUniqueSatellite()
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" ResolveDataUniqueSatellite()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	Logger::Instance().Log(" Satellite("+int2str(GetId())+")::ResolveDataUniqueSatellite", SAVELOAD_LOG_DIP);
 	#endif
 }
 

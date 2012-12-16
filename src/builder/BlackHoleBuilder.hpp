@@ -16,29 +16,27 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#ifndef BLACKHOLEBUILDER_H
+#define BLACKHOLEBUILDER_H
 
-#ifndef GALAXYBUILDER_H
-#define GALAXYBUILDER_H
-
-class Galaxy;
+class BlackHole;
 #include "../common/constants.hpp"
 
-class GalaxyBuilder
+class BlackHoleBuilder
 {
 	public:
-		static GalaxyBuilder& Instance();
-		~GalaxyBuilder();
+		static BlackHoleBuilder& Instance();
+		~BlackHoleBuilder();
 
-        	Galaxy* GetNewGalaxyTemplate(int id = NONE_ID) const; 
-        	Galaxy* GetNewGalaxy() const; 
-        	        	        	 		                
+        	BlackHole* GetNewBlackHoleTemplate(int id = NONE_ID) const; 
+                BlackHole* GetNewBlackHole() const;
+        	 		                
         private:
-		GalaxyBuilder() {};
-		GalaxyBuilder(const GalaxyBuilder&) = delete;
-		GalaxyBuilder& operator=(const GalaxyBuilder&) = delete;
+		BlackHoleBuilder() {};
+		BlackHoleBuilder(const BlackHoleBuilder&) = delete;
+		BlackHoleBuilder& operator=(const BlackHoleBuilder&) = delete;
 
-                void CreateNewInternals(Galaxy*) const;
-                void CreateNewInternals_SIMPLE_RUN(Galaxy*) const;
+                void CreateNewInternals(BlackHole*) const;
 }; 
 
 

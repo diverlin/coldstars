@@ -396,32 +396,43 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 	// SHOCKWAVE post process to Fbo3
 	Screen::Instance().GetFbo3().Activate(w, h);
 
-		float center_array[10][2];
-		float xyz_array[10][3];
-		float time_array[10];
+		float center_array[SHOCKWAVES_MAX_NUM][2];
+		float xyz_array[SHOCKWAVES_MAX_NUM][3];
+		float time_array[SHOCKWAVES_MAX_NUM];
 
-		for (unsigned int i=0; i<visible_effect_SHOCKWAVE_vec.size(); i++)
+		unsigned int i=0;
+		for (i=0; ((i<visible_BLACKHOLE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); i++)
 		{         
-			center_array[i][0] = (visible_effect_SHOCKWAVE_vec[i]->center.x - world_coord.x)/w;
-			center_array[i][1] = (visible_effect_SHOCKWAVE_vec[i]->center.y - world_coord.y)/h;
-			xyz_array[i][0] = visible_effect_SHOCKWAVE_vec[i]->parameter.x;
-			xyz_array[i][1] = visible_effect_SHOCKWAVE_vec[i]->parameter.y;
-			xyz_array[i][2] = visible_effect_SHOCKWAVE_vec[i]->parameter.z;
+			ShockWaveEffect* shockwave = visible_BLACKHOLE_vec[i]->GetShockWaveEffect();
+			
+			center_array[i][0] = (shockwave->center.x - world_coord.x)/w;
+			center_array[i][1] = (shockwave->center.y - world_coord.y)/h;
+			xyz_array[i][0] = shockwave->parameter.x;
+			xyz_array[i][1] = shockwave->parameter.y;
+			xyz_array[i][2] = shockwave->parameter.z;
 				
-			time_array[i] = visible_effect_SHOCKWAVE_vec[i]->time;
+			time_array[i] = shockwave->time;
+		}
+		for (unsigned int j=0; ((j<visible_effect_SHOCKWAVE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); j++, i++)
+		{         
+			center_array[i][0] = (visible_effect_SHOCKWAVE_vec[j]->center.x - world_coord.x)/w;
+			center_array[i][1] = (visible_effect_SHOCKWAVE_vec[j]->center.y - world_coord.y)/h;
+			xyz_array[i][0] = visible_effect_SHOCKWAVE_vec[j]->parameter.x;
+			xyz_array[i][1] = visible_effect_SHOCKWAVE_vec[j]->parameter.y;
+			xyz_array[i][2] = visible_effect_SHOCKWAVE_vec[j]->parameter.z;
+				
+			time_array[i] = visible_effect_SHOCKWAVE_vec[j]->time;
 		}
        
-
 		glUseProgram(ShaderCollector::Instance().shockwave);
 			glActiveTexture(GL_TEXTURE0);                                
 			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetFbo2().GetTexture());
 			glUniform1i (glGetUniformLocation(ShaderCollector::Instance().shockwave, "sceneTex"), 0);
 
-			int len_effect_SHOCKWAVE_list = visible_effect_SHOCKWAVE_vec.size();
-			glUniform1i (glGetUniformLocation(ShaderCollector::Instance().shockwave, "distortion_num"),        len_effect_SHOCKWAVE_list);
-			glUniform2fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "center"),      len_effect_SHOCKWAVE_list, *center_array);
-			glUniform3fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "shockParams"), len_effect_SHOCKWAVE_list, *xyz_array);
-			glUniform1fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "time"),        len_effect_SHOCKWAVE_list, time_array);
+			glUniform1i (glGetUniformLocation(ShaderCollector::Instance().shockwave, "distortion_num"), i);
+			glUniform2fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "center"),      i, *center_array);
+			glUniform3fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "shockParams"), i, *xyz_array);
+			glUniform1fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "time"),        i, time_array);
 
 			drawFullScreenQuad(w, h, -999.0);
 		glUseProgram(0);

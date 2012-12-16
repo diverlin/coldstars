@@ -63,7 +63,7 @@ void ExplosionEffect::Update()
 
 void ExplosionEffect::Render()
 {
-	glBindTexture(GL_TEXTURE_2D, texOb->texture);
+	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
     	for(unsigned int i = 0; i < num_particles; i++)
     	{
 		particles_vec[i]->Render();
@@ -117,7 +117,7 @@ void  createExplosion(StarSystem* starsystem, vec2f center, int obSize)
 
 		explosion = new ExplosionEffect();
                 explosion->SetTextureOb(texOb_particle);
-                explosion->SetPosition(center);
+                explosion->SetCenter(center);
                 explosion->SetParticleData(data_particle);
                 explosion->SetParticlesNum(particles_num);
                 
@@ -135,7 +135,7 @@ void  createExplosion(StarSystem* starsystem, vec2f center, int obSize)
 		
 		explosion = new ExplosionEffect();
                 explosion->SetTextureOb(texOb_particle);
-                explosion->SetPosition(center);
+                explosion->SetCenter(center);
                 explosion->SetParticleData(data_particle);
                 explosion->SetParticlesNum(particles_num);
                 
@@ -152,7 +152,7 @@ void  createExplosion(StarSystem* starsystem, vec2f center, int obSize)
 
 		explosion = new ExplosionEffect();
                 explosion->SetTextureOb(texOb_particle);
-                explosion->SetPosition(center);
+                explosion->SetCenter(center);
                 explosion->SetParticleData(data_particle);
                 explosion->SetParticlesNum(particles_num);
                 
@@ -169,7 +169,7 @@ void  createExplosion(StarSystem* starsystem, vec2f center, int obSize)
 		
 		explosion = new ExplosionEffect();
                 explosion->SetTextureOb(texOb_particle);
-                explosion->SetPosition(center);
+                explosion->SetCenter(center);
                 explosion->SetParticleData(data_particle);
                 explosion->SetParticlesNum(particles_num);
                 
@@ -179,7 +179,7 @@ void  createExplosion(StarSystem* starsystem, vec2f center, int obSize)
                 }
 	} 	       
  
- 	if ( (obSize > 3) && (starsystem->GetShockWaveNum() < SHOCKWAVESEXPLOSION_MAX_NUM) )
+ 	if ( (obSize > 3) && (starsystem->GetShockWaveNum() < SHOCKWAVES_MAX_NUM) )
 	{
 		starsystem->Add(GetNewShockWave(obSize), center);
 	}

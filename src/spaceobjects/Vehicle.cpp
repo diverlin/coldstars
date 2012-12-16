@@ -1252,7 +1252,7 @@ void Vehicle::UpdateGrappleMicroProgram()
 void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" SaveDataUniqueVehicle()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	Logger::Instance().Log(" Vehicle("+int2str(GetId())+")::SaveDataUniqueVehicle", SAVELOAD_LOG_DIP);
 	#endif
 
        	save_ptree.put(root+"data_korpus.space", data_korpus.space);       	
@@ -1302,7 +1302,7 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
 void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptree)
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" LoadDataUniqueVehicle()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	Logger::Instance().Log(" Vehicle("+int2str(GetId())+")::LoadDataUniqueVehicle", SAVELOAD_LOG_DIP);
 	#endif
 	
    	data_korpus.space       = load_ptree.get<int>("data_korpus.space");     
@@ -1333,7 +1333,7 @@ void Vehicle::LoadDataUniqueVehicle(const boost::property_tree::ptree& load_ptre
 void Vehicle::ResolveDataUniqueVehicle()
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" ResolveDataUniqueVehicle()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	Logger::Instance().Log(" Vehicle("+int2str(GetId())+")::ResolveDataUniqueVehicle", SAVELOAD_LOG_DIP);
 	#endif
 	
        	BaseVehicleBuilder::Instance().CreateKorpusGeometry(this);

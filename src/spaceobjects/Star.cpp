@@ -27,6 +27,8 @@
 #include "../render/Render.hpp"
 #include "../resources/ShaderCollector.hpp"
 
+#include "../common/Logger.hpp"
+
    
 Star::Star(int id)
 { 
@@ -61,7 +63,7 @@ void Star::UpdateInSpace(int time, bool show_effect)
         texture_offset1 += 0.0002;
         texture_offset2 += 0.0003;
 
-if ( (getRandInt(1, 300) == 1) and (spark_done == true) ) InitiateSpark(); // debug
+//if ( (getRandInt(1, 300) == 1) and (spark_done == true) ) InitiateSpark(); // debug
 
 	if (spark_done == false)
 	{		
@@ -130,13 +132,25 @@ void Star::PostDeathUniqueEvent(bool)
 
    
 void Star::SaveDataUniqueStar(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" Star("+int2str(GetId())+")::SaveDataUniqueStar", SAVELOAD_LOG_DIP);
+	#endif
+}
 
 void Star::LoadDataUniqueStar(const boost::property_tree::ptree& load_ptree)
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" Star("+int2str(GetId())+")::LoadDataUniqueStar", SAVELOAD_LOG_DIP);
+	#endif
+}
 
 void Star::ResolveDataUniqueStar()
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" Star("+int2str(GetId())+")::ResolveDataUniqueStar", SAVELOAD_LOG_DIP);
+	#endif
+	
 	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this); 	
 }
 

@@ -151,20 +151,20 @@ void SpaceStation::ResolveData()
 void SpaceStation::SaveDataUniqueSpaceStation(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" SaveDataUniqueSpaceStation()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	Logger::Instance().Log(" SpaceStation("+int2str(GetId())+")::SaveDataUniqueSpaceStation", SAVELOAD_LOG_DIP);
 	#endif
 }
 
 void SpaceStation::LoadDataUniqueSpaceStation(const boost::property_tree::ptree& load_ptree)
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" LoadDataUniqueSpaceStation()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	Logger::Instance().Log(" SpaceStation("+int2str(GetId())+")::LoadDataUniqueSpaceStation", SAVELOAD_LOG_DIP);
 	#endif
 }
 
 void SpaceStation::ResolveDataUniqueSpaceStation()
 {
 	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" ResolveDataUniqueSpaceStation()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+	Logger::Instance().Log(" SpaceStation("+int2str(GetId())+")::ResolveDataUniqueSpaceStation", SAVELOAD_LOG_DIP);
 	#endif
 }
