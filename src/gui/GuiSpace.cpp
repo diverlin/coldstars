@@ -19,11 +19,13 @@
 #include "GuiSpace.hpp"
 #include "ButtonTrigger.hpp"
 #include "ButtonSingle.hpp"
-#include "../common/SaveLoadManager.hpp"
+#include "../common/EntityManager.hpp"
 #include "../common/myStr.hpp"
+#include "../common/constants.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../render/Screen.hpp"
 #include "../render/Render.hpp"
+#include "../pilots/Player.hpp"
 
 GuiSpace::GuiSpace()
 {   	
@@ -78,7 +80,7 @@ void GuiSpace::ButtonsAction(Player* player) const
        			{
        				if (button->GetPressed() == true) 
        				{
-       					SaveLoadManager::Instance().PerformDelayedSave();
+       					EntityManager::Instance().SetSaveFlagTrue();
        					break;
        				} 
        			}   
@@ -87,7 +89,7 @@ void GuiSpace::ButtonsAction(Player* player) const
        			{ 
        			       	if (button->GetPressed() == true) 
        				{
-       					SaveLoadManager::Instance().PerformDelayedLoad();
+       					EntityManager::Instance().SetLoadFlagTrue();
        					break;
        				} 
        			}   

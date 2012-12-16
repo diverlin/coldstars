@@ -88,6 +88,10 @@ void BasePlanet::RenderMesh_OLD() const
 
 void BasePlanet::SaveDataUniqueBasePlanet(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" BasePlanet("+int2str(GetId())+")::SaveDataUniqueBasePlanet", SAVELOAD_LOG_DIP);
+	#endif
+	
 	save_ptree.put(root+"data.orbit_center.x", data_planet.orbit_center.x);	
 	save_ptree.put(root+"data.orbit_center.y", data_planet.orbit_center.y);	
 	save_ptree.put(root+"data.radius_A", data_planet.radius_A);	
@@ -101,6 +105,10 @@ void BasePlanet::SaveDataUniqueBasePlanet(boost::property_tree::ptree& save_ptre
 
 void BasePlanet::LoadDataUniqueBasePlanet(const boost::property_tree::ptree& load_ptree)
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" BasePlanet("+int2str(GetId())+")::LoadDataUniqueBasePlanet", SAVELOAD_LOG_DIP);
+	#endif
+	
 	data_planet.orbit_center.x = load_ptree.get<float>("data.orbit_center.x");	
 	data_planet.orbit_center.y = load_ptree.get<float>("data.orbit_center.y");	
 	data_planet.radius_A = load_ptree.get<float>("data.radius_A");	
@@ -114,6 +122,10 @@ void BasePlanet::LoadDataUniqueBasePlanet(const boost::property_tree::ptree& loa
 
 void BasePlanet::ResolveDataUniqueBasePlanet()
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" BasePlanet("+int2str(GetId())+")::ResolveDataUniqueBasePlanet", SAVELOAD_LOG_DIP);
+	#endif
+	
 	CalcCollisionrRadius();
 	//orbit->SetIt(data_unresolved_BasePlanet.orbit_it); // moved into planet/asteroid class
 }

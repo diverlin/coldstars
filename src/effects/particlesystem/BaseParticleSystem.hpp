@@ -32,14 +32,14 @@ class BaseParticleSystem
     		BaseParticleSystem();
     		virtual ~BaseParticleSystem();
 
-      		void SetDying();
-                void SetTextureOb(TextureOb*);
-                void SetParent(BaseSpaceEntity*);
-                void SetPosition(vec2f);
-                void SetParticlesNum(int);
-                void SetParticleData(ParticleData);
+      		void SetDying() { is_dying = true; };
+		void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
+                void SetParent(BaseSpaceEntity* parent) { this->parent = parent; };
+                void SetCenter(const vec2f& center) { this->center = center; };
+                void SetParticlesNum(int num_particles)  { this->num_particles = num_particles; };
+                void SetParticleData(const ParticleData& data_particle) { this->data_particle = data_particle; };
                 
-		bool GetAlive() const;
+		bool GetAlive() const { return is_alive; };
 		const vec2f& GetCenter() const { return center; };
 		
        		virtual void Update() = 0;
@@ -49,7 +49,7 @@ class BaseParticleSystem
        		int subtype_id;
        		int num_particles;
        		
-       		TextureOb* texOb;
+       		TextureOb* textureOb;
        		ParticleData data_particle;
        		vec2f center;
                 BaseSpaceEntity* parent;

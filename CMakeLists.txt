@@ -40,7 +40,6 @@ set (SOURCES
 	src/gui/Slider.cpp
 	src/common/Logger.cpp
 	src/config/config.cpp
-	src/common/SaveLoadManager.cpp
 	src/gui/GuiShop.cpp
 
 	src/common/common.cpp
@@ -171,6 +170,7 @@ set (SOURCES
 	src/builder/StarBuilder.cpp
 	src/builder/PlanetBuilder.cpp
 	src/builder/AsteroidBuilder.cpp
+	src/builder/BlackHoleBuilder.cpp
 	src/builder/ContainerBuilder.cpp
 	src/builder/BaseVehicleBuilder.cpp
 	src/builder/ShipBuilder.cpp

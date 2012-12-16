@@ -27,6 +27,8 @@
 #include "../world/starsystem.hpp"
 #include "../effects/particlesystem/ExplosionEffect.hpp"
 
+#include "../common/Logger.hpp"
+
 Asteroid::Asteroid(int id)
 {   
 	data_id.id = id;
@@ -98,13 +100,25 @@ void Asteroid::Render_OLD() const
 }
 
 void Asteroid::SaveDataUniqueAsteroid(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" Asteroid("+int2str(GetId())+")::SaveDataUniqueAsteroid", SAVELOAD_LOG_DIP);
+	#endif
+}
 
 void Asteroid::LoadDataUniqueAsteroid(const boost::property_tree::ptree& ptree)
-{}
+{
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" Asteroid("+int2str(GetId())+")::LoadDataUniqueAsteroid", SAVELOAD_LOG_DIP);
+	#endif
+}
 
 void Asteroid::ResolveDataUniqueAsteroid()
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" Asteroid("+int2str(GetId())+")::ResolveDataUniqueAsteroid", SAVELOAD_LOG_DIP);
+	#endif
+	
 	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, parent, data_unresolved_BasePlanet.orbit_it); 
 }
 	

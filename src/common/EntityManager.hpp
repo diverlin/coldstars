@@ -26,6 +26,7 @@
 
 #include "../common/Base.hpp"
 class EntityGarbage;
+class Player;
 
 
 class EntityManager
@@ -33,26 +34,37 @@ class EntityManager
 	public:
 		static EntityManager& Instance();
 
+		void SetSaveFlagTrue() { perform_save = true; };
+		void SetLoadFlagTrue() { perform_load = true; };
+		
 		void RegisterEntity(Base*);
 	
 		Base* GetEntityById(int) const;
-		Base* GetPlayer() const;
+		Player* GetPlayer() const;
+
+		bool UpdateSaveRequest();		
+		bool UpdateLoadRequest();
+
+		void SaveFile(const std::string&, boost::property_tree::ptree&) const;
+		void LoadFile(const std::string&, boost::property_tree::ptree&) const;
 		
+	private:
+		EntityManager():perform_save(false), perform_load(false){}
+		EntityManager(const EntityManager&);
+		EntityManager& operator=(const EntityManager&);
+
+		bool perform_save, perform_load;
+		
+		std::map<int, Base*> entity_map;
+
+		void RemoveEntity(Base*);
+
 		void Clear();
 		
 		void SaveEvent();
 		void LoadPass0();
 		void LoadPass1() const;
-		
-	private:
-		EntityManager(){}
-		EntityManager(const EntityManager&);
-		EntityManager& operator=(const EntityManager&);
-
-		std::map<int, Base*> entity_map;
-
-		void RemoveEntity(Base*);
-				
+						
 		friend class EntityGarbage;
 };
 

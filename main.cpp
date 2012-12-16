@@ -23,7 +23,7 @@
 #include "src/builder/GalaxyBuilder.hpp"
 #include "src/builder/PlayerBuilder.hpp"
 #include "src/config/config.hpp"
-#include "src/common/SaveLoadManager.hpp"
+#include "src/common/EntityManager.hpp"
 
 #include "src/render/Screen.hpp"
 #include "src/gui/UserInput.hpp"
@@ -31,6 +31,9 @@
 #include "src/common/TurnTimer.hpp"
 #include "src/pilots/Npc.hpp"
 #include "src/spaceobjects/Planet.hpp"
+
+#include "src/world/galaxy.hpp"
+#include "src/world/starsystem.hpp"
 
 #include "src/garbage/EntityGarbage.hpp"
 
@@ -58,7 +61,7 @@ int main()
         }
         
         player->GetNpc()->GetVehicle()->SetGodMode(true);
-        player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
+        //player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
 
 	//Screen::Instance().Resize(Config::Instance().SCREEN_WIDTH/1.5, Config::Instance().SCREEN_HEIGHT);
 
@@ -82,21 +85,19 @@ int main()
 		/* client code start */
 		player->RunSession(TurnTimer::Instance());
 		player->UpdatePostTransactionEvent(TurnTimer::Instance());      
-		
-		if (TurnTimer::Instance().GetTurnEnded() == true)
-		{	
-			Player* loaded_player = SaveLoadManager::Instance().Update(player);
-			if (loaded_player != NULL)
-			{
-				player = loaded_player;
-				galaxy = loaded_player->GetNpc()->GetVehicle()->GetStarSystem()->GetGalaxy();
-			}
-		}
 		/* client code end */
 		
-		if (TurnTimer::Instance().GetTurnTick() < 0)
+		if (TurnTimer::Instance().GetTurnEnded() == true)
 		{
 			EntityGarbage::Instance().Clear();
+
+			bool save_event = EntityManager::Instance().UpdateSaveRequest();
+			bool load_event = EntityManager::Instance().UpdateLoadRequest();
+			if (load_event == true)
+			{
+				player = EntityManager::Instance().GetPlayer();
+				galaxy = player->GetNpc()->GetVehicle()->GetStarSystem()->GetGalaxy();
+			}
 		}
 	}
 

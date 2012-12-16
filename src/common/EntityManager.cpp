@@ -18,17 +18,23 @@
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>
+#include <boost/property_tree/info_parser.hpp>
 
 #include "EntityManager.hpp"
 #include "../common/Logger.hpp"
-#include "../common/SaveLoadManager.hpp"
 #include "../common/myStr.hpp"
 
 #include "../spaceobjects/Star.hpp"
 #include "../spaceobjects/Planet.hpp"
 #include "../spaceobjects/Asteroid.hpp"
+#include "../spaceobjects/BlackHole.hpp"
 #include "../spaceobjects/Container.hpp"
 #include "../spaceobjects/RocketBullet.hpp"
+
+#include "../pilots/Player.hpp"
+
+#include "../world/galaxy.hpp"
+#include "../world/starsystem.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
@@ -67,6 +73,7 @@
 #include "../builder/StarBuilder.hpp"
 #include "../builder/PlanetBuilder.hpp"
 #include "../builder/AsteroidBuilder.hpp"
+#include "../builder/BlackHoleBuilder.hpp"
 #include "../builder/ContainerBuilder.hpp"
 #include "../builder/NpcBuilder.hpp"
 #include "../builder/ShipBuilder.hpp"
@@ -160,13 +167,13 @@ Base* EntityManager::GetEntityById(int id) const
 	return slice->second;
 }
 
-Base* EntityManager::GetPlayer() const
+Player* EntityManager::GetPlayer() const
 {
 	for (std::map<int, Base*>::const_iterator it=entity_map.begin(); it!=entity_map.end(); ++it)
 	{
 		if (it->second->GetTypeId() == ENTITY::PLAYER_ID)
 		{
-			return it->second;
+			return (Player*)it->second;
 		}
 	}
 
@@ -184,8 +191,10 @@ void EntityManager::RemoveEntity(Base* entity)
 		entity_map.erase(entity_map.find(entity->GetId()));
 	}
 	else
-	{
-		std::cout<<"fix the BUG ---EntityManager::RemoveEntity fails"<<std::endl;
+	{	
+		#if CREATEDESTROY_LOG_ENABLED == 1
+		Logger::Instance().Log("fix the BUG ---EntityManager::RemoveEntity fails " + getTypeStr(entity->GetTypeId()) + "(" +int2str(entity->GetTypeId()) +") " + getTypeStr(entity->GetSubTypeId()) + "(" + int2str(entity->GetSubTypeId()) + ") id=" + int2str(entity->GetId()));
+		#endif
 	}
 } 
 
@@ -207,7 +216,7 @@ void EntityManager::SaveEvent()
 		iterator->second->SaveData(save_ptree);
 	}
 	
-	SaveLoadManager::Instance().SaveFile("save.info", save_ptree);
+	SaveFile("save.info", save_ptree);
 }
 		
 void EntityManager::LoadPass0()
@@ -215,7 +224,7 @@ void EntityManager::LoadPass0()
 	Logger::Instance().Log("LOADING STARTED");
 	
 	boost::property_tree::ptree load_ptree;
-	SaveLoadManager::Instance().LoadFile("save.info", load_ptree);
+	LoadFile("save.info", load_ptree);
 	
 	if (load_ptree.get_child_optional("galaxy"))
 	{		
@@ -276,7 +285,17 @@ void EntityManager::LoadPass0()
 			asteroid->LoadData(v.second);
 		}
 	}
-	
+
+	if (load_ptree.get_child_optional("blackhole"))
+	{
+		Logger::Instance().Log("loading blackhole...");
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("blackhole"))
+		{
+			BlackHole* blackhole = BlackHoleBuilder::Instance().GetNewBlackHoleTemplate(v.second.get<int>("data_id.id"));
+			blackhole->LoadData(v.second);
+		}
+	}
+		
 	//artefact
 	if (load_ptree.get_child_optional("gravity_artefact"))
 	{
@@ -678,4 +697,45 @@ void EntityManager::LoadPass1() const
 
 	Logger::Instance().Log("RESOLVING DEPENDENCY FINISHED");
 }
+
+
+bool EntityManager::UpdateSaveRequest()
+{		
+	if (perform_save == true)
+	{
+		SaveEvent();
+		perform_save = false;
+		
+		return true;
+	}
+	
+	return false;
+}
+
+bool EntityManager::UpdateLoadRequest()
+{
+	if (perform_load == true)
+	{
+		Clear();
+		LoadPass0();
+		LoadPass1();
+						
+		perform_load = false;
+		
+		return true;
+	}
+	
+	return false;
+}
+
+void EntityManager::SaveFile(const std::string& filename, boost::property_tree::ptree& ptree) const
+{		
+	write_info(filename, ptree);
+}
+
+void EntityManager::LoadFile(const std::string& filename, boost::property_tree::ptree& ptree) const
+{
+	read_info(filename, ptree);
+}
+
 

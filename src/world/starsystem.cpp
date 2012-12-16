@@ -24,6 +24,7 @@
 
 #include "../effects/particlesystem/ExplosionEffect.hpp"
 #include "../builder/AsteroidBuilder.hpp"
+#include "../builder/BlackHoleBuilder.hpp"
 #include "../builder/ShipBuilder.hpp"
 #include "../builder/NpcBuilder.hpp"
 #include "../common/Collision.hpp"
@@ -238,9 +239,10 @@ void StarSystem::AddContainer(Container* container, const vec2f& center)
 
 void StarSystem::Add(BlackHole* blackhole, const vec2f& center)
 {
+	blackhole->SetStarSystem(this);
+        blackhole->SetPlaceTypeId(ENTITY::SPACE_ID);
 	blackhole->SetCenter(center);
 	BLACKHOLE_vec.push_back(blackhole);
-	Add(blackhole->GetShockWaveEffect(), center);
 }    
     		
 void StarSystem::Add(ShockWaveEffect* shockwave, const vec2f& center)           { shockwave->SetCenter(center); effect_SHOCKWAVE_vec.push_back(shockwave); }
@@ -399,6 +401,11 @@ void StarSystem::UpdateStates()
 	{
 		AsteroidManager_s(50);
 		ShipManager_s(50);
+		
+		if (BLACKHOLE_vec.size() < 5)
+		{
+			Add(BlackHoleBuilder::Instance().GetNewBlackHole(), getRandVec2f(200, 1200));
+		}
 	}
 	
 	//if (PLAYER_vec.size() > 0)
@@ -798,18 +805,7 @@ void StarSystem::ShipManager_s(unsigned int num)
 
 
 void StarSystem::ManageUnavaliableObjects_s()
-{
-        //for (std::vector<Vehicle*>::iterator it=CONTAINER_vec.begin(); it<CONTAINER_vec.end(); ++it)
-        //{
-               	//if ((*it)->GetPlaceTypeId() != ENTITY::SPACE_ID)
-               	//{	
-               		//#if ENTITY_TRANSACTION_LOG_ENABLED == 1
-			//Logger::Instance().Log("starsysten_id="+int2str(GetId())+ " RemoveContainer, container_id=" + int2str((*it)->GetId()));
-			//#endif
-               		//it = Container_vec.erase(it);
-               	//}
-        //}
-                
+{               
         for (std::vector<Vehicle*>::iterator it=VEHICLE_vec.begin(); it<VEHICLE_vec.end(); ++it)
         {
                	if ((*it)->GetPlaceTypeId() != ENTITY::SPACE_ID)
@@ -842,7 +838,16 @@ void StarSystem::ManageDeadObjects_s()
             		it = VEHICLE_vec.erase(it);
         	} 
     	}
-    	
+
+   	for(std::vector<BlackHole*>::iterator it=BLACKHOLE_vec.begin(); it<BLACKHOLE_vec.end(); ++it)
+    	{
+        	if ((*it)->GetGarbageReady() == true)
+        	{
+            		EntityGarbage::Instance().Add(*it);
+            		it = BLACKHOLE_vec.erase(it);
+            	}
+        }  
+            	
    	for(std::vector<Asteroid*>::iterator it=ASTEROID_vec.begin(); it<ASTEROID_vec.end(); ++it)
     	{
         	if ((*it)->GetGarbageReady() == true)

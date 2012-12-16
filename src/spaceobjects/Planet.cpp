@@ -28,6 +28,7 @@
 #include "../spaceobjects/Vehicle.hpp"
 
 #include "../garbage/EntityGarbage.hpp"
+#include "../common/Logger.hpp"
 
 Planet::Planet(int id)
 {    
@@ -134,18 +135,30 @@ void Planet::RenderAtmosphere_NEW(const vec2f& scroll_coords) const
 
 void Planet::SaveDataUniquePlanet(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" Planet("+int2str(GetId())+")::SaveDataUniquePlanet", SAVELOAD_LOG_DIP);
+	#endif
+	
 	//SaveManager::Instance().Put(root+"race_id", race_id);
 	save_ptree.put(root+"population", population);
 }
 
 void Planet::LoadDataUniquePlanet(const boost::property_tree::ptree& load_ptree)
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" Planet("+int2str(GetId())+")::LoadDataUniquePlanet", SAVELOAD_LOG_DIP);
+	#endif
+	
 	//race_id = SaveManager::Instance().Get<int>(root+"race_id");
 	population = load_ptree.get<int>("population");	
 }
 
 void Planet::ResolveDataUniquePlanet()
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" Planet("+int2str(GetId())+")::ResolveDataUniquePlanet", SAVELOAD_LOG_DIP);
+	#endif
+	
 	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, parent, data_unresolved_BasePlanet.orbit_it); 
 }
 	

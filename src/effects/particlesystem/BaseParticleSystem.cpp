@@ -38,19 +38,7 @@ BaseParticleSystem::~BaseParticleSystem()
   		delete particles_vec[i];
      	}
 }
-
-
-void BaseParticleSystem::SetTextureOb(TextureOb* texOb) { this->texOb = texOb; }
                 
-void BaseParticleSystem::SetDying()                  { is_dying = true; }
-void BaseParticleSystem::SetParent(BaseSpaceEntity* parent) { this->parent = parent; } 
-void BaseParticleSystem::SetPosition(vec2f center)          { this->center = center; }
-void BaseParticleSystem::SetParticlesNum(int num_particles) { this->num_particles = num_particles; }
-void BaseParticleSystem::SetParticleData(ParticleData data_particle) { this->data_particle = data_particle; }
-                
-bool BaseParticleSystem::GetAlive() const { return is_alive; }
-
-
 vec2f BaseParticleSystem::GetRandomVelocity()
 {
      	if (getRandBool() == true)
@@ -93,7 +81,6 @@ vec2f BaseParticleSystem::GetRandomAccurateVelocity()
         
         return d_pos;
 }  
-
 
 
 //void BaseParticleSystem::calcAccurateRandomVelocity2(vec2f center)

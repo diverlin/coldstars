@@ -311,10 +311,13 @@ void WeaponComplex::RenderWeaponIcons() const
 {       
         for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
         {
-                if (slot_weapon_vec[i]->GetTarget() != NULL )
-                {       
-                        Rect _rect(slot_weapon_vec[i]->GetTarget()->GetPoints().GetCenter().x - 40/2 + 23*i, slot_weapon_vec[i]->GetTarget()->GetPoints().GetCenter().y + 40/2, 20, 20);
-                        drawTexturedRect(slot_weapon_vec[i]->GetItem()->GetTextureOb(), _rect, -2.0);
-                }        
+                if (slot_weapon_vec[i]->GetItem() != NULL ) //?? ideally this is not needed, if item == NULL< the target set to NULL
+                {  
+	                if (slot_weapon_vec[i]->GetTarget() != NULL )
+	                {       
+	                        Rect _rect(slot_weapon_vec[i]->GetTarget()->GetPoints().GetCenter().x - 40/2 + 23*i, slot_weapon_vec[i]->GetTarget()->GetPoints().GetCenter().y + 40/2, 20, 20);
+	                        drawTexturedRect(slot_weapon_vec[i]->GetItem()->GetTextureOb(), _rect, -2.0);
+	                }        
+        	}
         }
 }

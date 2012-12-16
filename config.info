@@ -13,7 +13,7 @@ General
 {
 DEBUG_MODE 0
 game_mode 2 		# 0 = NORMAL_RUN 1 = SIMPLE_RUN 2 = CRASH_TEST
-log_mode 3		# 0 = SCREEN, 1 = FILE, 2 = SCREENFILE, 3 = NONE
+log_mode 1		# 0 = SCREEN, 1 = FILE, 2 = SCREENFILE, 3 = NONE
 }
 
 Gameplay

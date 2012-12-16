@@ -29,6 +29,7 @@
 #include "../effects/particlesystem/ExplosionEffect.hpp"
 
 #include "../garbage/EntityGarbage.hpp"
+#include "../common/Logger.hpp"
 
 Container::Container(int id)
 {
@@ -126,6 +127,10 @@ void Container::Render2D()
 
 void Container::SaveDataUniqueContainer(boost::property_tree::ptree& save_ptree, const std::string& root) const	
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" Container("+int2str(GetId())+")::SaveDataUniqueContainer", SAVELOAD_LOG_DIP);
+	#endif
+	
 	save_ptree.put(root+"target_pos.x", target_pos.x);
 	save_ptree.put(root+"target_pos.y", target_pos.y);
 
@@ -134,6 +139,10 @@ void Container::SaveDataUniqueContainer(boost::property_tree::ptree& save_ptree,
 
 void Container::LoadDataUniqueContainer(const boost::property_tree::ptree& load_ptree)
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" Container("+int2str(GetId())+")::LoadDataUniqueContainer", SAVELOAD_LOG_DIP);
+	#endif
+	
 	target_pos.x   = load_ptree.get<float>("target_pos.x");
 	target_pos.y   = load_ptree.get<float>("target_pos.y");
 	
@@ -142,6 +151,10 @@ void Container::LoadDataUniqueContainer(const boost::property_tree::ptree& load_
 
 void Container::ResolveDataUniqueContainer()
 {
+	#if SAVELOAD_LOG_ENABLED == 1
+	Logger::Instance().Log(" Container("+int2str(GetId())+")::ResolveDataUniqueContainer", SAVELOAD_LOG_DIP);
+	#endif
+	
 	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddContainer(this, vec2f(data_unresolved_BaseSpaceEntity.center.x, data_unresolved_BaseSpaceEntity.center.y)); 
 }		
 
