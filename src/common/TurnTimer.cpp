@@ -40,12 +40,18 @@ TurnTimer::~TurnTimer()
 
 void TurnTimer::NextTurn() 
 {
-	if (Config::Instance().AUTO_SAVE_MODE == true)
+	if (Config::Instance().GetAutoSaveMode() == true)
 	{
-	        Logger::Instance().Log("*** proceeding autosave(AUTO_SAVE_MODE=ON)");
+	        Logger::Instance().Log("*** AUTO (SaveRequest)");
 		EntityManager::Instance().SaveRequest();
 	}
-			
+
+	if (Config::Instance().GetAutoLoadMode() == true)
+	{
+	        Logger::Instance().Log("*** AUTO (LoadRequest)");
+		EntityManager::Instance().LoadRequest();
+	}
+				
 	turn_tick = TURN_TIME;
 	turn_ended = false;
 	

@@ -13,14 +13,15 @@ General
 {
 DEBUG_MODE 0
 game_mode 2 		# 0 = NORMAL_RUN 1 = SIMPLE_RUN 2 = CRASH_TEST
-log_mode 1		# 0 = SCREEN, 1 = FILE, 2 = SCREENFILE, 3 = NONE
+log_mode 0		# 0 = NONE, 1 = SCREEN, 2 = FILE, 3 = SCREENFILE
 }
 
 Gameplay
 {
-AUTO_TURN_MODE 0
-AUTO_SAVE_MODE 0
-GAME_SPEED 1 		# 1-10
+AUTO_TURN_MODE 1
+auto_save_mode 0
+auto_load_mode 0
+GAME_SPEED 10 		# 1-10
 }
 
 Control

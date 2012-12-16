@@ -121,6 +121,7 @@
 
 #include "../slots/VehicleSlot.hpp"
 #include "../common/myStr.hpp"
+#include "../common/TurnTimer.hpp"
 
 EntityManager& EntityManager::Instance()
 {
@@ -199,7 +200,7 @@ void EntityManager::RemoveEntity(Base* entity)
 } 
 
 		
-void EntityManager::SaveEvent()
+void EntityManager::SaveEvent(const std::string& filename)
 {
 	boost::property_tree::ptree save_ptree;
 	
@@ -216,15 +217,16 @@ void EntityManager::SaveEvent()
 		iterator->second->SaveData(save_ptree);
 	}
 	
-	SaveFile("save.info", save_ptree);
+	//write_info(filename, save_ptree);
+	write_info("save_last.info", save_ptree);
 }
 		
-void EntityManager::LoadPass0()
+void EntityManager::LoadPass0(const std::string & filename)
 {
 	Logger::Instance().Log("LOADING STARTED");
 	
 	boost::property_tree::ptree load_ptree;
-	LoadFile("save.info", load_ptree);
+	read_info(filename, load_ptree);
 	
 	if (load_ptree.get_child_optional("galaxy"))
 	{		
@@ -703,7 +705,7 @@ bool EntityManager::UpdateSaveRequest()
 {		
 	if (save_request == true)
 	{
-		SaveEvent();
+		SaveEvent("save"+int2str(TurnTimer::Instance().GetTurnCounter())+".info");
 		save_request = false;
 		
 		return true;
@@ -717,7 +719,7 @@ bool EntityManager::UpdateLoadRequest()
 	if (load_request == true)
 	{
 		Clear();
-		LoadPass0();
+		LoadPass0("save_last.info");
 		LoadPass1();
 						
 		load_request = false;
@@ -728,14 +730,6 @@ bool EntityManager::UpdateLoadRequest()
 	return false;
 }
 
-void EntityManager::SaveFile(const std::string& filename, boost::property_tree::ptree& ptree) const
-{		
-	write_info(filename, ptree);
-}
 
-void EntityManager::LoadFile(const std::string& filename, boost::property_tree::ptree& ptree) const
-{
-	read_info(filename, ptree);
-}
 
 

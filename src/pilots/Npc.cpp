@@ -114,14 +114,14 @@ void Npc::MindInSpace()
 	#if AI_LOG_ENABLED == 1 
 	Logger::Instance().Log("npc_id="+int2str(GetId())+" Npc::MindInSpace START", AI_LOG_DIP); 
 	#endif 
-	
+
+        vehicle->UpdateAllFunctionalItemsInStatic();	
 	vehicle->GetWeaponComplex().PrepareWeapons();
 	// this check is performed in Dynamic, no need to repeat in Static
 	//if (vehicle->ableTo.GRAB == true) 
 	//{
         	//vehicle->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets(); 
         //}
-        vehicle->UpdateAllFunctionalItemsInStatic();
         
 	if (upper_control == false)
 	{
