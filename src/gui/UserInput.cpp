@@ -354,7 +354,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 				
 		case sf::Key::F5: // save event
 		{		
-			EntityManager::Instance().SetSaveFlagTrue();			
+			EntityManager::Instance().SaveRequest();			
 			break;
 		}
 		
@@ -384,7 +384,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 		
 		case sf::Key::F9:
 		{
-			EntityManager::Instance().SetLoadFlagTrue();
+			EntityManager::Instance().LoadRequest();
 			break;
 		}
 	}   

@@ -34,8 +34,8 @@ class EntityManager
 	public:
 		static EntityManager& Instance();
 
-		void SetSaveFlagTrue() { perform_save = true; };
-		void SetLoadFlagTrue() { perform_load = true; };
+		void SaveRequest() { save_request = true; };
+		void LoadRequest() { load_request = true; };
 		
 		void RegisterEntity(Base*);
 	
@@ -49,11 +49,11 @@ class EntityManager
 		void LoadFile(const std::string&, boost::property_tree::ptree&) const;
 		
 	private:
-		EntityManager():perform_save(false), perform_load(false){}
+		EntityManager():save_request(false), load_request(false){}
 		EntityManager(const EntityManager&);
 		EntityManager& operator=(const EntityManager&);
 
-		bool perform_save, perform_load;
+		bool save_request, load_request;
 		
 		std::map<int, Base*> entity_map;
 

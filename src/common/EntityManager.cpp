@@ -701,10 +701,10 @@ void EntityManager::LoadPass1() const
 
 bool EntityManager::UpdateSaveRequest()
 {		
-	if (perform_save == true)
+	if (save_request == true)
 	{
 		SaveEvent();
-		perform_save = false;
+		save_request = false;
 		
 		return true;
 	}
@@ -714,13 +714,13 @@ bool EntityManager::UpdateSaveRequest()
 
 bool EntityManager::UpdateLoadRequest()
 {
-	if (perform_load == true)
+	if (load_request == true)
 	{
 		Clear();
 		LoadPass0();
 		LoadPass1();
 						
-		perform_load = false;
+		load_request = false;
 		
 		return true;
 	}

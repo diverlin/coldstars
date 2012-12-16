@@ -80,7 +80,7 @@ void GuiSpace::ButtonsAction(Player* player) const
        			{
        				if (button->GetPressed() == true) 
        				{
-       					EntityManager::Instance().SetSaveFlagTrue();
+       					EntityManager::Instance().SaveRequest();
        					break;
        				} 
        			}   
@@ -89,7 +89,7 @@ void GuiSpace::ButtonsAction(Player* player) const
        			{ 
        			       	if (button->GetPressed() == true) 
        				{
-       					EntityManager::Instance().SetLoadFlagTrue();
+       					EntityManager::Instance().LoadRequest();
        					break;
        				} 
        			}   
