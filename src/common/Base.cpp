@@ -17,6 +17,8 @@
 */
 
 #include "Base.hpp"
+#include "Logger.hpp" 
+#include "myStr.hpp"
 
 Base::Base()
 {}
@@ -25,7 +27,7 @@ Base::Base()
 Base::~Base()
 {
 	#if CREATEDESTROY_LOG_ENABLED == 1
-	Logger::Instance().Log("___::~Base(), id="+int2str(GetId()));
+	Logger::Instance().Log("___::~Base("+int2str(GetId())+")");
 	#endif
 }
 

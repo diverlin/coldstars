@@ -54,7 +54,7 @@ class Vehicle : public BaseSpaceEntity
        	        Vehicle();
         	virtual ~Vehicle(); 
 
-		void PutChildsToGarbage() const;
+		virtual void PutChildsToGarbage() const;
 		
 		void SetGodMode(bool god_mode) { this->god_mode = god_mode; };
 		void SetSpecialActionId(int special_action_id) { this->special_action_id = special_action_id; };

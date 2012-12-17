@@ -46,6 +46,7 @@ void EntityGarbage::Add(Base* entity)
 	#endif
 		
 	entities_vec.push_back(entity);
+	entity->PutChildsToGarbage();
 }
 
 void EntityGarbage::Clear()

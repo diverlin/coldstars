@@ -21,6 +21,7 @@
 #include "../common/constants.hpp"
 #include "../common/myStr.hpp"
 #include "../common/EntityManager.hpp"
+#include "../common/Logger.hpp"
 #include "../resources/TextureManager.hpp"
 #include "../world/starsystem.hpp"
 #include "../builder/RocketBulletBuilder.hpp"
@@ -39,8 +40,13 @@ RocketBullet::RocketBullet(int id)
 	target = NULL;
 }
 
+/* virtual */
 RocketBullet::~RocketBullet()
 {
+	#if CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~RocketBullet("+int2str(GetId())+")");
+	#endif
+
 	delete drive_effect;
 }
 

@@ -59,7 +59,7 @@ class StarSystem : public BaseSpaceEntity
 		StarSystem(int);
 		~StarSystem();
 		
-		void PutChildsToGarbage() const;
+		virtual void PutChildsToGarbage() const;
 
 		void SetGalaxy(Galaxy* galaxy)  { this->galaxy = galaxy; };
 		void SetColor(const Color4f& color)  { this->color = color; };

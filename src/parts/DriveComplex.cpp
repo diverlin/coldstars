@@ -116,7 +116,6 @@ void DriveComplex::DefineDistance()
     		case NAVIGATOR_ACTION::DOCKING_ID:
     		{
     			target_distance = target->GetCollisionRadius()/4;
-    			//target_distance = 150;
     			target_offset = getRandVec2f(target->GetCollisionRadius()/5, target->GetCollisionRadius()/2); 
     			
     			break;   
@@ -133,11 +132,12 @@ void DriveComplex::DefineDistance()
     		case NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE_ID:
     		{
     			int weapon_radius_min = owner_vehicle->GetWeaponComplex().GetWeaponRadiusMin();
-    		    	target_distance = 150;
-    		    	//if (weapon_radius_min > 10) // cause the bug
-    		    	//{ 
-    				//target_offset = getRandVec2f(weapon_radius_min/4, weapon_radius_min/2); 
-    			//}
+    			if (weapon_radius_min < 10) // in some cases case thee the bug (HACK)
+    			{
+    		    		target_distance = 150;    			
+    			}
+    			
+			target_offset = getRandVec2f(weapon_radius_min/4, weapon_radius_min/2); 
     			
     			break;    		
     		}

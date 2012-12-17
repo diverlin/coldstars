@@ -46,11 +46,15 @@ Container::Container(int id)
 
 /* virtual */   
 Container::~Container()
-{}
+{
+	#if CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~Container("+int2str(GetId())+")");
+	#endif
+}
 
+/* virtual */
 void Container::PutChildsToGarbage() const
 {
-	item_slot->PutChildsToGarbage();
 	EntityGarbage::Instance().Add(item_slot);
 }
         	

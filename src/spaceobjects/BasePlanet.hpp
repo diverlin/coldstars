@@ -35,6 +35,8 @@ class BasePlanet : public BaseSpaceEntity
 		BasePlanet();
 		virtual ~BasePlanet();
 
+      		virtual void PutChildsToGarbage() const {};
+      		
 		void SetPlanetData(PlanetData data_planet) { this->data_planet = data_planet; };
 		Orbit* GetOrbit() const { return orbit; };
 

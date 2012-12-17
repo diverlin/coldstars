@@ -18,10 +18,10 @@ log_mode 0		# 0 = NONE, 1 = SCREEN, 2 = FILE, 3 = SCREENFILE
 
 Gameplay
 {
-AUTO_TURN_MODE 1
+AUTO_TURN_MODE 0
 auto_save_mode 0
 auto_load_mode 0
-GAME_SPEED 10 		# 1-10
+GAME_SPEED 1 		# 1-10
 }
 
 Control

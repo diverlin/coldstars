@@ -38,9 +38,9 @@
 #include "src/garbage/EntityGarbage.hpp"
 
 int main()
-{           
-	//runPureTest();
-
+{          
+	//pureTest3(); 
+	
 	init();  
         
 	GameDate::Instance().SetDate(1,1,4000);

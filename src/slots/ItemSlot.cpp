@@ -66,19 +66,15 @@ ItemSlot::ItemSlot(int id)
 ItemSlot::~ItemSlot()
 {
 	#if CREATEDESTROY_LOG_ENABLED == 1
-	Logger::Instance().Log("___::~ItemSlot(), id="+int2str(GetId()));
+	Logger::Instance().Log("___::~ItemSlot("+int2str(GetId())+")");
 	#endif
 }  
-    
+  
+/* virtual */  
 void ItemSlot::PutChildsToGarbage() const
 {
 	if (item != NULL)
 	{
-		if (item->GetTypeId() == ENTITY::EQUIPMENT_ID)
-		{
-			((BaseEquipment*)item)->PutChildsToGarbage();
-		}
-		
 		EntityGarbage::Instance().Add(item);
 	}
 }

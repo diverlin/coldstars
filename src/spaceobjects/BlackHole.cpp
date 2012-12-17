@@ -38,6 +38,10 @@ BlackHole::BlackHole(int id)
 /* virtual */
 BlackHole::~BlackHole() 
 {
+	#if CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~BlackHole("+int2str(GetId())+")");
+	#endif
+	
 	delete shockwave; 
 } 
  

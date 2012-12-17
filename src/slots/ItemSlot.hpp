@@ -69,7 +69,7 @@ class ItemSlot : public BaseSlot
 		ItemSlot(int id);
 		virtual ~ItemSlot();                
 	
-	        void PutChildsToGarbage() const;
+	        virtual void PutChildsToGarbage() const;
 	        	
 	        void SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget = NULL);
 		void SetTurrel(Turrel* turrel) { this->turrel = turrel; };

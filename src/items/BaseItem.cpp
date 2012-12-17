@@ -44,7 +44,7 @@ BaseItem::BaseItem()
 BaseItem::~BaseItem()
 {
 	#if CREATEDESTROY_LOG_ENABLED == 1
-	Logger::Instance().Log("___::~BaseItem(), id="+int2str(GetId()));
+	Logger::Instance().Log("___::~BaseItem("+int2str(GetId())+")");
 	#endif
 }
 

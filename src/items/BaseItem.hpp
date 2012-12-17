@@ -56,6 +56,8 @@ class BaseItem : public Base
       		BaseItem();
       		virtual ~BaseItem();
 
+      		virtual void PutChildsToGarbage() const {};
+      		
 		void SetTextureOb(TextureOb* textureOb)  { this->textureOb = textureOb; };
 		void SetParentSubTypeId(int parent_subtype_id) { this->parent_subtype_id = parent_subtype_id; };
 		void SetItemCommonData(const ItemCommonData& data_item) { this->data_item = data_item; deterioration = data_item.deterioration_normal; };

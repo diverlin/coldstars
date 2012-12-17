@@ -28,7 +28,7 @@ class Container : public BaseSpaceEntity
         	Container(int);
         	virtual ~Container();
         	
-        	void PutChildsToGarbage() const;
+        	virtual void PutChildsToGarbage() const;
         	
         	void SetTargetPos(const vec2f& target_pos, float velocity) { this->target_pos = target_pos; this->velocity = velocity; };
         	void BindItemSlot(ItemSlot*);

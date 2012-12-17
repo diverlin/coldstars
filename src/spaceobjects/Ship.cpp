@@ -47,7 +47,7 @@ Ship::Ship(int id)
 Ship::~Ship()
 {
 	#if CREATEDESTROY_LOG_ENABLED == 1
-	Logger::Instance().Log("___::~Ship(), id="+int2str(GetId()));
+	Logger::Instance().Log("___::~Ship("+int2str(GetId())+")");
 	#endif
 } 
 

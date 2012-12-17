@@ -34,7 +34,7 @@ textureOb(NULL)
 BaseSlot::~BaseSlot()
 {
 	#if CREATEDESTROY_LOG_ENABLED == 1
-	Logger::Instance().Log("___::~BaseSlot(), id="+int2str(GetId()));
+	Logger::Instance().Log("___::~BaseSlot("+int2str(GetId())+")");
 	#endif
 }
                 

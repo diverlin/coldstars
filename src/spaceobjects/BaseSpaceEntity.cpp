@@ -47,7 +47,7 @@ BaseSpaceEntity::BaseSpaceEntity():starsystem(NULL), mesh(NULL), textureOb(NULL)
 BaseSpaceEntity::~BaseSpaceEntity()
 {
 	#if CREATEDESTROY_LOG_ENABLED == 1
-	Logger::Instance().Log("___::~BaseSpaceEntity(), id="+int2str(GetId()));
+	Logger::Instance().Log("___::~BaseSpaceEntity("+int2str(GetId())+")");
 	#endif
 }
 

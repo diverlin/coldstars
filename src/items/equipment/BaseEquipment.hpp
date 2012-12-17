@@ -29,7 +29,7 @@ class BaseEquipment : public BaseItem
      		BaseEquipment();
      		virtual ~BaseEquipment();
 
-		void PutChildsToGarbage() const;
+		virtual void PutChildsToGarbage() const;
 
       		bool InsertModule(BaseModule*);
       		

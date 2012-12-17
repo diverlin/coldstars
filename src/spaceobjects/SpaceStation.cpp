@@ -21,6 +21,9 @@
 #include "../common/myStr.hpp"
 #include "../common/Logger.hpp"
 #include "../common/EntityManager.hpp"
+
+#include "../garbage/EntityGarbage.hpp"
+
 #include "../world/starsystem.hpp"
 #include "../docking/Kosmoport.hpp"
 #include "../effects/Shield.hpp"
@@ -42,9 +45,22 @@ SpaceStation::SpaceStation(int id)
 /* virtual */
 SpaceStation::~SpaceStation() 
 {
-	//delete land;
+	#if CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~SpaceStation("+int2str(GetId())+")");
+	#endif
 }    
  
+/* virtual */
+void SpaceStation::PutChildsToGarbage() const
+{
+	for(unsigned int i=0; i<slot_total_vec.size(); i++)
+	{
+		EntityGarbage::Instance().Add(slot_total_vec[i]);	
+	}	
+	
+	EntityGarbage::Instance().Add(land);
+}
+
 void SpaceStation::BindLand(BaseLand* land)       		
 {
 	this->land = land;

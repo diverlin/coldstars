@@ -32,7 +32,7 @@ class Kosmoport : public BaseLand
                 Kosmoport(int);
                 virtual ~Kosmoport();
                 
-                void PutChildsToGarbage() const;
+                virtual void PutChildsToGarbage() const;
 
                 Angar*     	GetAngar()    	const { return angar; };
                 Store*    	GetStore()    	const { return store; };
