@@ -74,19 +74,11 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
        		tech_level = 1; 
 	}
 
-	float tech_rate = 1.0f;
-	if (tech_level > 1)
-	{
-		tech_rate = tech_level * EQUIPMENT::TECHLEVEL_RATE;
-	}
-	
-    	tech_rate *= 1; //getRaceTechRate(race_id); 
-
         TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::DRIVE_EQUIPMENT_ID);   
         //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::DRIVE_EQUIPMENT_ID, revision_id) 
 
-        speed_orig      = getRandInt(EQUIPMENT::DRIVE::SPEED_MIN, EQUIPMENT::DRIVE::SPEED_MAX) * tech_rate;
-        hyper_orig      = getRandInt(EQUIPMENT::DRIVE::HYPER_MIN, EQUIPMENT::DRIVE::HYPER_MAX) * tech_rate;
+        speed_orig      = getRandInt(EQUIPMENT::DRIVE::SPEED_MIN, EQUIPMENT::DRIVE::SPEED_MAX) * (1 + EQUIPMENT::DRIVE::SPEED_TECHLEVEL_RATE*tech_level);
+        hyper_orig      = getRandInt(EQUIPMENT::DRIVE::HYPER_MIN, EQUIPMENT::DRIVE::HYPER_MAX) * (1 + EQUIPMENT::DRIVE::HYPER_TECHLEVEL_RATE*tech_level);
     
         ItemCommonData common_data;
         common_data.tech_level 		= tech_level;

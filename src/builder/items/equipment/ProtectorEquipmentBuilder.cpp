@@ -76,24 +76,16 @@ void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector
        		tech_level = 1; 
 	}
 
-	float tech_rate = 1.0f;
-	if (tech_level > 1)
-	{
-		tech_rate = tech_level * EQUIPMENT::TECHLEVEL_RATE;
-	}
-	
-    	tech_rate *= 1; //getRaceTechRate(race_id); 
-
     	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::PROTECTOR_EQUIPMENT_ID);   
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::PROTECTOR_EQUIPMENT_ID, revision_id) 
 
-    	protection_orig = getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX);
+    	protection_orig = getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX) * (1 + EQUIPMENT::PROTECTOR::PROTECTION_TECHLEVEL_RATE * tech_level);
     	
     	ItemCommonData common_data;
         common_data.tech_level 	    = tech_level;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::PROTECTOR::MODULES_NUM_MIN, EQUIPMENT::PROTECTOR::MODULES_NUM_MAX);
     	common_data.mass            = getRandInt(EQUIPMENT::PROTECTOR::MASS_MIN,        EQUIPMENT::PROTECTOR::MASS_MAX);
-    	common_data.condition_max   = getRandInt(EQUIPMENT::PROTECTOR::CONDITION_MIN,   EQUIPMENT::PROTECTOR::CONDITION_MAX) * tech_rate;
+    	common_data.condition_max   = getRandInt(EQUIPMENT::PROTECTOR::CONDITION_MIN,   EQUIPMENT::PROTECTOR::CONDITION_MAX);
     	common_data.deterioration_normal = 1;
 
         protector_equipment->SetProtectionOrig(protection_orig);  

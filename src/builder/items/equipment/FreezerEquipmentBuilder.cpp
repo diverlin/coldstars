@@ -75,24 +75,16 @@ void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equip
        		tech_level = 1; 
 	}
 
-	float tech_rate = 1.0f;
-	if (tech_level > 1)
-	{
-		tech_rate = tech_level * EQUIPMENT::TECHLEVEL_RATE;
-	}
-	
-    	tech_rate *= 1; //getRaceTechRate(race_id); 
-
     	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::FREEZER_EQUIPMENT_ID);    
     	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
 
-    	freeze_orig     = getRandInt(EQUIPMENT::FREEZER::FREEZE_MIN, EQUIPMENT::FREEZER::FREEZE_MAX);
+    	freeze_orig     = getRandInt(EQUIPMENT::FREEZER::FREEZE_MIN, EQUIPMENT::FREEZER::FREEZE_MAX) * (1 + EQUIPMENT::FREEZER::FREEZE_TECHLEVEL_RATE*tech_level);
     	
     	ItemCommonData common_data;
     	common_data.tech_level 	    = tech_level;
     	common_data.modules_num_max = getRandInt(EQUIPMENT::FREEZER::MODULES_NUM_MIN, EQUIPMENT::FREEZER::MODULES_NUM_MAX);
     	common_data.mass            = getRandInt(EQUIPMENT::FREEZER::MASS_MIN,        EQUIPMENT::FREEZER::MASS_MAX);
-    	common_data.condition_max   = getRandInt(EQUIPMENT::FREEZER::CONDITION_MIN,   EQUIPMENT::FREEZER::CONDITION_MAX) * tech_rate;
+    	common_data.condition_max   = getRandInt(EQUIPMENT::FREEZER::CONDITION_MIN,   EQUIPMENT::FREEZER::CONDITION_MAX);
     	common_data.deterioration_normal = 1;
         
         freezer_equipment->SetFreezeOrig(freeze_orig);  

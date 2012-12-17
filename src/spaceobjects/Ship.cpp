@@ -59,20 +59,21 @@ void Ship::UpdateInfo()
 
     	info.addTitleStr("SHIP");
     	if (starsystem) {	info.addNameStr("id/ss_id:");          	info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->GetId()) ); }
-    	else     	{	info.addNameStr("id/ss_id:");          	info.addValueStr( int2str(data_id.id) ); }
+    	else     	{	info.addNameStr("id:");          	info.addValueStr( int2str(data_id.id) ); }
     	info.addNameStr("race:");   		info.addValueStr( getRaceStr(textureOb->race_id) ); 
     	info.addNameStr("class:");   		info.addValueStr( getTypeStr(data_id.subsubtype_id) );     	
     	info.addNameStr("armor/max:");     	info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) );
     	info.addNameStr("size id:");     	info.addValueStr( int2str(textureOb->size_id) );
     	info.addNameStr("space/free:");   	info.addValueStr( int2str(data_korpus.space) + "/" + int2str(propetries.free_space) );
     	info.addNameStr("mass:");   		info.addValueStr( int2str(mass) );
+	info.addNameStr("speed:");       	info.addValueStr( boost::lexical_cast<std::string>(propetries.speed) );
+	info.addNameStr("speed dm:");       	info.addValueStr( boost::lexical_cast<std::string>(mass*MASS_DECREASE_SPEED_RATE) );
     	info.addNameStr("energy:");            	info.addValueStr( int2str(propetries.energy) );
 	info.addNameStr("temp.:");       	info.addValueStr( int2str(data_korpus.temperature) );
         info.addNameStr("radar:");    		info.addValueStr( int2str(propetries.radar) );
     	info.addNameStr("protect:");        	info.addValueStr( int2str(propetries.protection) );
     	info.addNameStr("repair:");        	info.addValueStr( int2str(propetries.repair) );
     	info.addNameStr("scan:");        	info.addValueStr( int2str(propetries.scan) );
-	info.addNameStr("speed:");       	info.addValueStr( boost::lexical_cast<std::string>(propetries.speed) );
 	info.addNameStr("price:");       	info.addValueStr( int2str(data_korpus.price) );
 	
 	if (propetries.grab_radius > 0)
