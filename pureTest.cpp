@@ -3,7 +3,7 @@
 #include <iostream>
 #include "src/items/equipment/RadarEquipment.hpp"
 #include "src/common/gameStruct.hpp"
-
+#include "src/common/rand.hpp"
 
 void pureTest1()
 {
@@ -38,6 +38,8 @@ void pureTest2()
 
 	Base* base = new RadarEquipment(2);
 	delete base;	
+	
+	for (unsigned int i=0; i<100; i++) std::cout<<getRandInt(0,2)<<std::endl;
 	
 	exit(0);
 		

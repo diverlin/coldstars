@@ -29,10 +29,11 @@
 	#define WEAPONSTARGET_LOG_ENABLED 0
 	#define AISCENARIO_LOG_ENABLED 0
 	#define AI_LOG_ENABLED 0
-	#define SAVELOAD_LOG_ENABLED 1
-	#define ENTITY_TRANSACTION_LOG_ENABLED 1
-	#define CREATEDESTROY_LOG_ENABLED 1
+	#define SAVELOAD_LOG_ENABLED 0
+	#define ENTITY_TRANSACTION_LOG_ENABLED 0
+	#define CREATEDESTROY_LOG_ENABLED 0
 	#define ITEMINFLUENCE_LOG_ENABLED 0
+	#define TEXTURE_MANAGER_LOG_ENABLED 1
 	
 	const int GRAPPLE_QUEUE_LOG_DIP = 1;
 	const int DRIVECOMPLEX_LOG_DIP = 1;
@@ -43,6 +44,7 @@
 	const int SAVELOAD_LOG_DIP = 1;
 	const int CREATEDESTROY_LOG_DIP = 0;
 	const int ITEMINFLUENCE_LOG_DIP = 2;
+	const int TEXTURE_MANAGER_LOG_DIP = 0;
 #endif
 
 #define DEBUG_ITEMDAMAGELOCKVIAGUI 1  // 1 - is locking/unlocking item by right mouse click; 2 - is damaging/undamaging item by right mouse click
@@ -57,7 +59,7 @@ enum GAME_MODE
 const double NO_DELAY = 0.0f;
 const int NO_ADDITIONAL_INFO = 0;
 
-const std::string GAME_TITLE = "cold star V0.0.4.58 (SFML/C++)";
+const std::string GAME_TITLE = "cold star V0.0.4.59 (SFML/C++)";
 
 const float RADAR_SCALE = 1/50.0;
 
@@ -69,9 +71,8 @@ const int TURN_TIME = 150;  //turn time, depends on game fps
 const int COLLISION_RADIUS_FOR_STATIC_COORD = 5;
 
 const int VISIBLE_DISTANCE_WITHOUT_RADAR = 200;
+const float MASS_DECREASE_SPEED_RATE = 0.4;
 
-//const int SHOCKWAVESBLACKHOLES_MAX_NUM = 3;
-//const int SHOCKWAVESEXPLOSION_MAX_NUM = 7;
 const int SHOCKWAVES_MAX_NUM = 10;
 
 const int PRICE_FUEL = 10;
@@ -384,16 +385,18 @@ namespace ENTITY
 
 namespace EQUIPMENT
 {       
-	const float TECHLEVEL_RATE = 1.1f;
-
 	namespace ENERGIZER
 	{
 		const int ENERGY_MIN = 2000;
 		const int ENERGY_MAX = 10000;
+		const float ENERGY_TECHLEVEL_RATE = 0.1f;
+		
 		const int RESTORATION_MIN = 20;
 		const int RESTORATION_MAX = 100;
-		const int MODULES_NUM_MIN = 1;
-		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		const float RESTORATION_TECHLEVEL_RATE = 0.1f;
+				
+		const int MODULES_NUM_MIN = 0;
+		const int MODULES_NUM_MAX = 2;
 		
 		const int MASS_MIN = 20;
 		const int MASS_MAX = 80;
@@ -409,8 +412,10 @@ namespace EQUIPMENT
 	{
 		const int FREEZE_MIN = 1;
 		const int FREEZE_MAX = 5;
+		const float FREEZE_TECHLEVEL_RATE = 0.1f;
+				
 		const int MODULES_NUM_MIN = 0;
-		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		const int MODULES_NUM_MAX = 2;
 		const int MASS_MIN = 10;
 		const int MASS_MAX = 20;
 		const int CONDITION_MIN = 3000;
@@ -424,12 +429,18 @@ namespace EQUIPMENT
 	{
 		const int STRENGTH_MIN = 6;
 		const int STRENGTH_MAX = 50;
+		const float STRENGTH_TECHLEVEL_RATE = 0.1f;
+		
 		const int RADIUS_MIN = 100;
 		const int RADIUS_MAX = 200;
+		const float RADIUS_TECHLEVEL_RATE = 0.1f;
+				
 		const int SPEED_MIN = 100;
 		const int SPEED_MAX = 170;
+		const float SPEED_TECHLEVEL_RATE = 0.1f;
+		
 		const int MODULES_NUM_MIN = 0;
-		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		const int MODULES_NUM_MAX = 2;
 		const int MASS_MIN = 10;
 		const int MASS_MAX = 40;
 		const int CONDITION_MIN = 100;
@@ -444,10 +455,13 @@ namespace EQUIPMENT
 
 	namespace RADAR
 	{
-		const int RADIUS_MIN = 1000; //700
-		const int RADIUS_MAX = 1500; //1500
+		const int RADIUS_MIN = 700;
+		const int RADIUS_MAX = 1500;
+		const float RADIUS_TECHLEVEL_RATE = 0.1f;
+				
 		const int MODULES_NUM_MIN = 0;
-		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		const int MODULES_NUM_MAX = 2;
+				
 		const int MASS_MIN = 10;
 		const int MASS_MAX = 50;
 		const int CONDITION_MIN = 2000;
@@ -462,13 +476,16 @@ namespace EQUIPMENT
                 const float OVERLOAD_RATE = 1.5f;
                 const float OVERLOAD_DETERIORATION_RATE = 4.0f;
                                 
-		const int SPEED_MIN = 130;   
-		const int SPEED_MAX = 300;   
-		
+		const int SPEED_MIN = 300;   
+		const int SPEED_MAX = 400; 
+		const float SPEED_TECHLEVEL_RATE = 0.1f;
+				
 		const int HYPER_MIN = 7;
 		const int HYPER_MAX = 20;
+		const float HYPER_TECHLEVEL_RATE = 0.1f;
+				
 		const int MODULES_NUM_MIN = 0;
-		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		const int MODULES_NUM_MAX = 2;
 		
 		const int MASS_MIN = 20;
 		const int MASS_MAX = 70;
@@ -484,8 +501,10 @@ namespace EQUIPMENT
 	{
 		const int PROTECTION_MIN = 3;
 		const int PROTECTION_MAX = 30;
-		const int MODULES_NUM_MIN = 1;
-		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		const float PROTECTION_TECHLEVEL_RATE = 0.1f;
+				
+		const int MODULES_NUM_MIN = 0;
+		const int MODULES_NUM_MAX = 2;
 		
 		const int CONDITION_MIN = 2000;
 		const int CONDITION_MAX = 10000;
@@ -499,9 +518,11 @@ namespace EQUIPMENT
 	namespace BAK
 	{
 		const int FUEL_MIN = 10;    
-		const int FUEL_MAX = 30;    
+		const int FUEL_MAX = 30;
+		const float FUEL_TECHLEVEL_RATE = 0.1f;
+				    
 		const int MODULES_NUM_MIN = 0;
-		const int MODULES_NUM_MAX = 1;
+		const int MODULES_NUM_MAX = 2;
 		
 		const int MASS_MIN = 10;
 		const int MASS_MAX = 40;
@@ -516,8 +537,10 @@ namespace EQUIPMENT
 	{
 		const int REPAIR_MIN = 1;
 		const int REPAIR_MAX = 15;
+		const float REPAIR_TECHLEVEL_RATE = 0.1f;
+				
 		const int MODULES_NUM_MIN = 0;
-		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		const int MODULES_NUM_MAX = 2;
 		
 		const int MASS_MIN = 10;
 		const int MASS_MAX = 50;
@@ -532,8 +555,10 @@ namespace EQUIPMENT
 	{
 		const int SCAN_MIN = 2;
 		const int SCAN_MAX = 40;
+		const float SCAN_TECHLEVEL_RATE = 0.1f;
+				
 		const int MODULES_NUM_MIN = 0;
-		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		const int MODULES_NUM_MAX = 2;
 		
 		const int MASS_MIN = 7;
 		const int MASS_MAX = 38;
@@ -548,10 +573,14 @@ namespace EQUIPMENT
 	{
 		const int RADIUS_MIN = 200;
 		const int RADIUS_MAX = 500;
+		const float RADIUS_TECHLEVEL_RATE = 0.1f;
+				
 		const int DAMAGE_MIN = 40;
 		const int DAMAGE_MAX = 200;
+		const float DAMAGE_TECHLEVEL_RATE = 0.1f;
+				
 		const int MODULES_NUM_MIN = 0;
-		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		const int MODULES_NUM_MAX = 2;
 		
 		const int MASS_MIN = 10;
 		const int MASS_MAX = 40;
@@ -567,12 +596,18 @@ namespace EQUIPMENT
 	{
 		const int AMMO_MIN = 20;
 		const int AMMO_MAX = 40;
+		const float AMMO_TECHLEVEL_RATE = 0.1f;
+				
 		const int RADIUS_MIN = 350;
 		const int RADIUS_MAX = 750;
+		const float RADIUS_TECHLEVEL_RATE = 0.1f;
+				
 		const int DAMAGE_MIN = 10;
 		const int DAMAGE_MAX = 20;
+		const float DAMAGE_TECHLEVEL_RATE = 0.1f;
+				
 		const int MODULES_NUM_MIN = 0;
-		const int MODULES_NUM_MAX = 3;   // 2 + 1(hack)
+		const int MODULES_NUM_MAX = 2;
 		
 		const int MASS_MIN = 30;
 		const int MASS_MAX = 60;

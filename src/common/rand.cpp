@@ -22,9 +22,9 @@
 #include "constants.hpp"
 #include "gameStruct.hpp"
 
-int getRandIntFromVec(const std::vector<int>& list)
+int getRandIntFromVec(const std::vector<int>& vec)
 {
-       	return list[getRandInt(0, list.size())];
+       	return vec[getRandInt(0, vec.size()-1)];
 }
         
         
@@ -36,7 +36,7 @@ float getRandFloat(float low, float high)
 
 int getRandInt(int low, int high)
 {
-	return (low != high) ? rand()%(high-low) + low : low;
+	return (low != high) ? rand()%(high+1-low) + low : low;
 }
 
 int getRandSign()

@@ -785,7 +785,7 @@ void Vehicle::UpdatePropertiesSpeed()
      	{
         	if (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)  
         	{
-           		float actual_speed = (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetSpeed() - (float)mass/10); //20 = MINIM_SHIP_SPACE, probably should be used unique value for each ship size
+           		float actual_speed = (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetSpeed() - mass*MASS_DECREASE_SPEED_RATE); 
            		if (actual_speed > 0)
            		{ 
            			if (propetries.artefact_gravity > 0)
@@ -1245,9 +1245,7 @@ void Vehicle::DropRandomItemToSpace()
 	
 	if (_equiped_slot_vec.size() > 0)
 	{
-		unsigned int _rand = getRandInt(0, _equiped_slot_vec.size());
-	
-		_equiped_slot_vec[_rand]->DropItemToSpace(this);
+		_equiped_slot_vec[getRandInt(0, _equiped_slot_vec.size()-1)]->DropItemToSpace(this);
 	}		
 }
 
