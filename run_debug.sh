@@ -1,3 +1,3 @@
 #!/bin/bash 
-gdb ./run --command=gdb_command
+gdb ./game --command=gdb_command
 

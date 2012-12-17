@@ -55,6 +55,8 @@ class Player : public Base
     		Player(int);
      		~Player();
 
+		virtual void PutChildsToGarbage() const {};
+		
 		Show& GetShow() { return show; };
 		GuiManager& GetGuiManager() { return gui_manager; };
           	

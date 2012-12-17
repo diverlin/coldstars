@@ -23,8 +23,6 @@
 #include "Vehicle.hpp"
 #include "../docking/BaseLand.hpp"
 
-//struct UnresolvedDataUniqueSpaceStation
-//{};
 
 class SpaceStation : public Vehicle
 {
@@ -32,6 +30,8 @@ class SpaceStation : public Vehicle
         	SpaceStation(int);
         	virtual ~SpaceStation();
         	
+        	virtual void PutChildsToGarbage() const;
+        		
 		BaseLand* GetLand() const { return land; };
 		void BindLand(BaseLand* land);
 

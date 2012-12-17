@@ -20,6 +20,9 @@
 #include "../resources/ShaderCollector.hpp"
 #include "../render/Render.hpp"
 
+#include "../common/Logger.hpp" 
+#include "../common/myStr.hpp"
+
 BasePlanet::BasePlanet()
 {
 	orbit = new Orbit();
@@ -28,6 +31,10 @@ BasePlanet::BasePlanet()
 /* virtual */
 BasePlanet::~BasePlanet()
 {
+	#if CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~BasePlanet("+int2str(GetId())+")");
+	#endif
+	
 	delete orbit;
 }
 

@@ -29,8 +29,10 @@ class RocketBullet : public BaseSpaceEntity
         public:
                 RocketBullet(int);
                 	     
-                ~RocketBullet();
-                                
+                virtual ~RocketBullet();
+                      
+                virtual void PutChildsToGarbage() const {};
+                      		          
 		void SetBulletData(BulletData data_bullet) { this->data_bullet = data_bullet; speed = data_bullet.speed_init; };
 		void SetOwnerId(int owner_id) { this->owner_id = owner_id; };
 		void SetTarget(BaseSpaceEntity* target) { this->target = target; };

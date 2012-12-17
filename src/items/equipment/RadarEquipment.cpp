@@ -32,7 +32,11 @@ RadarEquipment::RadarEquipment(int id)
 
 /* virtual */
 RadarEquipment::~RadarEquipment() 
-{}
+{
+	#if CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~RadarEquipment("+int2str(GetId())+")");
+	#endif	
+}
 
 /* virtual */
 void RadarEquipment::UpdatePropetries()

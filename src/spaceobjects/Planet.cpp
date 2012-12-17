@@ -45,10 +45,15 @@ Planet::Planet(int id)
 	land = NULL;
 }
 
-
+/* virtual */
 Planet::~Planet()
-{}
+{
+	#if CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~Planet("+int2str(GetId())+")");
+	#endif	
+}
 
+/* virtual */
 void Planet::PutChildsToGarbage() const
 {
 	EntityGarbage::Instance().Add(land);

@@ -43,12 +43,13 @@ BaseEquipment::BaseEquipment()
 BaseEquipment::~BaseEquipment()
 {
 	#if CREATEDESTROY_LOG_ENABLED == 1
-	Logger::Instance().Log("___::~BaseEquipment(), id="+int2str(GetId()));
+	Logger::Instance().Log("___::~BaseEquipment("+int2str(GetId())+")");
 	#endif
     	
     	delete animation_notfunctioning;
 }
 
+/* virtual */
 void BaseEquipment::PutChildsToGarbage() const
 {
 	for (unsigned int i=0; i<modules_vec.size(); i++)

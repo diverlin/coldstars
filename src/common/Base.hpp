@@ -29,7 +29,9 @@ class Base
 		Base();
 		virtual ~Base();
 
-		void SetSubTypeId(int subtype_id) { data_id.subtype_id = subtype_id; }
+		virtual void PutChildsToGarbage() const = 0;
+
+		void SetSubTypeId(int subtype_id)       { data_id.subtype_id = subtype_id; }
 		void SetSubSubTypeId(int subsubtype_id) { data_id.subsubtype_id = subsubtype_id; }
 		
 		int GetId()        	const { return data_id.id; }   

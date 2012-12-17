@@ -40,6 +40,7 @@ VehicleSlot::VehicleSlot(int id)
 VehicleSlot::~VehicleSlot()
 {}
       
+/* virtual */
 void VehicleSlot::PutChildsToGarbage() const
 {
 	if (vehicle)

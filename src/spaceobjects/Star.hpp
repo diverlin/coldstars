@@ -31,7 +31,7 @@ class Star : public BasePlanet
     		float texture_offset1, texture_offset2;    
    		
     		Star(int);
-    		~Star();
+    		virtual ~Star();
                 
 		Color4f GetColor()         const { return color; }
 		int GetColorId()           const { return textureOb->color_id; }

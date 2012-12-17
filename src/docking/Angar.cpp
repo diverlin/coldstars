@@ -44,17 +44,16 @@ Angar::~Angar()
 	#endif
 }
 
+/* virtual */
 void Angar::PutChildsToGarbage() const
 {
 	for(unsigned int i=0; i<vehicle_total_slot_vec.size(); i++)
 	{
-		vehicle_total_slot_vec[i]->PutChildsToGarbage();
 		EntityGarbage::Instance().Add(vehicle_total_slot_vec[i]);
 	}
 
 	for(unsigned int i=0; i<item_slot_vec.size(); i++)
 	{
-		item_slot_vec[i]->PutChildsToGarbage();
 		EntityGarbage::Instance().Add(item_slot_vec[i]);
 	}
 }

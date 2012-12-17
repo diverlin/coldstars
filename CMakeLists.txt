@@ -265,5 +265,5 @@ target_link_libraries (${PROJECT})
 ADD_CUSTOM_COMMAND(
   TARGET ${PROJECT}
   POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT} ../install/${PROJECT}
+  COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT} ../${PROJECT}
   )

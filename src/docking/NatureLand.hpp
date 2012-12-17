@@ -35,6 +35,8 @@ class NatureLand : public BaseLand
                 NatureLand(int);
                 virtual ~NatureLand();
 
+		virtual void PutChildsToGarbage() const;
+		
 		void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
 		
 		TextureOb* GetBackgroundTextureOb() const { return textureOb_background; };

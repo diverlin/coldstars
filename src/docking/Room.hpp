@@ -37,6 +37,8 @@ class Room : public Base
                 Room();
                 ~Room();
                 
+                virtual void PutChildsToGarbage() const {};
+                
                 void SetOwnerKosmoport(Kosmoport* owner_kosmoport) { this->owner_kosmoport = owner_kosmoport; }
                 void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
                 

@@ -42,6 +42,10 @@ Satellite::Satellite(int id)
 /* virtual */
 Satellite::~Satellite() 
 {
+	#if CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~Satellite("+int2str(GetId())+")");
+	#endif
+
 	delete orbit;
 }
 

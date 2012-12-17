@@ -33,7 +33,7 @@ class Store : public Room
                 Store(int);                      
                 ~Store();
                 
-                void PutChildsToGarbage() const;
+                virtual void PutChildsToGarbage() const;
 
 		void AddVehicleSlot(VehicleSlot*);                  
 		void AddItemSlot(ItemSlot*);                

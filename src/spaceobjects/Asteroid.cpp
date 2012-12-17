@@ -40,7 +40,11 @@ Asteroid::Asteroid(int id)
     
 /* virtual */
 Asteroid::~Asteroid()
-{}
+{
+	#if CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~Asteroid("+int2str(GetId())+")");
+	#endif
+}
 
 void Asteroid::UpdateInSpace(int time, bool show_effect)
 {    

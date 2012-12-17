@@ -43,9 +43,14 @@ Star::Star(int id)
     	spark_on = false;
     	spark_done = true;
 }
-    
+  
+/* virtual */  
 Star::~Star()
-{}
+{
+	#if CREATEDESTROY_LOG_ENABLED == 1
+	Logger::Instance().Log("___::~Star("+int2str(GetId())+")");
+	#endif	
+}
     
 void Star::CalcColor()
 {

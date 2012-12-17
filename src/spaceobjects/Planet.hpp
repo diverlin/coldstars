@@ -23,18 +23,14 @@
 #include "BasePlanet.hpp"
 #include "../docking/BaseLand.hpp"
 
-//struct UnresolvedDataUniquePlanet
-//{
-//};
-
 
 class Planet : public BasePlanet
 {
 	public:
 		Planet(int);
-		~Planet();
+		virtual ~Planet();
 		
-		void PutChildsToGarbage() const;
+		virtual void PutChildsToGarbage() const;
 
 		void BindLand(BaseLand* land);
 		void SetPopulation(unsigned long int population) 	{ this->population = population; };

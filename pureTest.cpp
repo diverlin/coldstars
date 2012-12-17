@@ -1,8 +1,11 @@
 
 #include <vector>
 #include <iostream>
+#include "src/items/equipment/RadarEquipment.hpp"
+#include "src/common/gameStruct.hpp"
 
-void runPureTest()
+
+void pureTest1()
 {
         std::vector<int> int_vec;
         for (int i=0; i<20; i++)
@@ -25,4 +28,17 @@ void runPureTest()
         std::cout<<std::endl;
 
         exit(0);          
+}
+
+
+void pureTest2()
+{
+	RadarEquipment* radar = new RadarEquipment(1);
+	delete radar;
+
+	Base* base = new RadarEquipment(2);
+	delete base;	
+	
+	exit(0);
+		
 }

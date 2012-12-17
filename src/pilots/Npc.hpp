@@ -43,7 +43,9 @@ class Npc : public Base
 {
    	public:
               	Npc(int);              	    
-     		virtual ~Npc();    		
+     		virtual ~Npc();    	
+     		
+     		virtual void PutChildsToGarbage() const {};	
      		
      		void SetRaceId(int race_id)			{ this->race_id = race_id; };
      		void SetAiModel(BaseAiModel* ai_model)		{ this->ai_model = ai_model; };

@@ -38,11 +38,11 @@ Store::Store(int id)
 Store::~Store()
 {}
 
+/* virtual */
 void Store::PutChildsToGarbage() const
 {			
 	for(unsigned int i=0; i<item_slot_vec.size(); i++)
 	{
-		item_slot_vec[i]->PutChildsToGarbage();
 		EntityGarbage::Instance().Add(item_slot_vec[i]);
 	}
 }

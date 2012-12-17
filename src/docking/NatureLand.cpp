@@ -25,6 +25,7 @@
 #include "../resources/textureOb.hpp"
 
 #include "../slots/ItemSlot.hpp"
+#include "../garbage/EntityGarbage.hpp"
 
 NatureLand::NatureLand(int id)
 {
@@ -36,6 +37,20 @@ NatureLand::NatureLand(int id)
 NatureLand::~NatureLand()
 {}
 
+/* virtual */ 
+void NatureLand::PutChildsToGarbage() const
+{
+    	for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+    	{
+    		EntityGarbage::Instance().Add(VEHICLE_vec[i]);
+    	}
+
+    	for (unsigned int i=0; i<item_slot_vec.size(); i++)
+    	{
+    		EntityGarbage::Instance().Add(item_slot_vec[i]);
+    	}
+    		
+}
 
 //// ******* TRANSITION ******* 
 bool NatureLand::CanAcceptNewItem() const

@@ -96,16 +96,19 @@ Vehicle::Vehicle()
 Vehicle::~Vehicle()
 {
 	#if CREATEDESTROY_LOG_ENABLED == 1
-	Logger::Instance().Log("___::~Vehicle(), id="+int2str(GetId()));
+	Logger::Instance().Log("___::~Vehicle("+int2str(GetId())+")");
 	#endif
 } 
 
+/* virtual */
 void Vehicle::PutChildsToGarbage() const
 {
+	owner_npc->SetAlive(false);
+	EntityGarbage::Instance().Add(owner_npc);
+	
 	for(unsigned int i=0; i<slot_total_vec.size(); i++)
 	{
 		EntityGarbage::Instance().Add(slot_total_vec[i]);	
-		slot_total_vec[i]->PutChildsToGarbage();
 	}
 }
 
@@ -782,7 +785,7 @@ void Vehicle::UpdatePropertiesSpeed()
      	{
         	if (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)  
         	{
-           		float actual_speed = (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetSpeed() - (float)mass/70); //70 = MINIM_SHIP_SPACE, probably shuld be used unique value for each ship size
+           		float actual_speed = (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetSpeed() - (float)mass/10); //20 = MINIM_SHIP_SPACE, probably should be used unique value for each ship size
            		if (actual_speed > 0)
            		{ 
            			if (propetries.artefact_gravity > 0)

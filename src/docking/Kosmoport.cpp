@@ -45,13 +45,11 @@ Kosmoport::Kosmoport(int id)
 Kosmoport::~Kosmoport()
 {}
 
+/* virtual */
 void Kosmoport::PutChildsToGarbage() const
 {
-	angar->PutChildsToGarbage();
-	store->PutChildsToGarbage();
-
 	EntityGarbage::Instance().Add(angar);
-	EntityGarbage::Instance().Add(store);
+	EntityGarbage::Instance().Add(store);	
 	EntityGarbage::Instance().Add(shop);
 	EntityGarbage::Instance().Add(goverment);
 }
