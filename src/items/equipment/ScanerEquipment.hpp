@@ -31,7 +31,7 @@ class ScanerEquipment : public BaseEquipment
                 void SetScanOrig(int scan_orig)  { this->scan_orig = scan_orig; };
 		int GetScan() const { return scan; };
    		
-    		virtual void UpdatePropetries();
+    		virtual void UpdateProperties();
                
     		void CountPrice();
                     		

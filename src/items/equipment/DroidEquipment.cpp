@@ -37,7 +37,7 @@ DroidEquipment::~DroidEquipment()
 {}
 
 /* virtual */
-void DroidEquipment::UpdatePropetries()
+void DroidEquipment::UpdateProperties()
 {
     	repair_add = 0;
         

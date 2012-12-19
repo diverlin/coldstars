@@ -114,7 +114,7 @@ class ItemSlot : public BaseSlot
 		bool ValidateTarget();                    
                 void ResetTarget();
                 bool CheckAmmo() const;
-                bool FireEvent(int, bool);
+                void FireEvent(int, bool);
                 
 		void UpdateVehiclePropetries() const;
                 
@@ -128,8 +128,9 @@ class ItemSlot : public BaseSlot
                 void UpdateRange(TextureOb*);
            	void DrawRange(const vec2f&);
            	
-           	bool CheckTarget(BaseSpaceEntity* target, ItemSlot* subtarget = NULL) const;
-        
+           	bool CheckSubTarget(ItemSlot*) const;
+           	bool CheckTarget(BaseSpaceEntity*) const;
+       
         	void SelectEvent();
         	void DeselectEvent();
         

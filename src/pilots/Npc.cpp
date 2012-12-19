@@ -242,7 +242,7 @@ bool Npc::CheckPossibilityToScan(Vehicle* vehicle)
         	return true;
         }
  
-     	if (this->vehicle->GetPropetries().scan > vehicle->GetPropetries().protection) 
+     	if (this->vehicle->GetProperties().scan > vehicle->GetProperties().protection) 
      	{
 		return true;
         }

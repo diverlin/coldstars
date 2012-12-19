@@ -45,7 +45,7 @@ void BakEquipment::IncreaseFuel(int fuel)
 }	
                 					
 /* virtual */			
-void BakEquipment::UpdatePropetries()
+void BakEquipment::UpdateProperties()
 {
     	fuel_max_add = 0;
     	

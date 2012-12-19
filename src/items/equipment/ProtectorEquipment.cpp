@@ -35,7 +35,7 @@ ProtectorEquipment::~ProtectorEquipment()
 {}
 
 /* virtual */
-void ProtectorEquipment::UpdatePropetries()
+void ProtectorEquipment::UpdateProperties()
 {   
         protection_add  = 0;
         

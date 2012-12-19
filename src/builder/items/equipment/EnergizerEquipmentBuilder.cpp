@@ -96,7 +96,7 @@ void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer
         energizer_equipment->SetItemCommonData(common_data);
         energizer_equipment->SetCondition(common_data.condition_max);
                         
-        energizer_equipment->UpdatePropetries();
+        energizer_equipment->UpdateProperties();
     	energizer_equipment->CountPrice();
 }
 

@@ -475,7 +475,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 
 		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "resolution"), w, h);
 		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "center"), npc->GetVehicle()->GetPoints().GetCenter().x/w, npc->GetVehicle()->GetPoints().GetCenter().y/h);
-		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "radius"), (float)npc->GetVehicle()->GetPropetries().radar/h);
+		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "radius"), (float)npc->GetVehicle()->GetProperties().radar/h);
 		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "world_coord"), world_coord.x/w, world_coord.y/h);
 
 		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "dcolor"), npc->GetVehicle()->GetStarSystem()->GetStar()->GetDColor());
@@ -685,7 +685,7 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
       			}
        			if (data_mouse.right_click == true)
    			{
-      				if (npc->GetVehicle()->GetPropetries().grab_radius > 0)
+      				if (npc->GetVehicle()->GetProperties().grab_radius > 0)
       				{
        					if (npc->GetVehicle()->GetGrappleSlot()->CheckTarget(visible_CONTAINER_vec[i]) == true)
        					{
@@ -1091,7 +1091,7 @@ void Player::ResolveDataUniquePlayer()
 bool isObjectWithinRadarRange(BaseParticleSystem* effect, Vehicle* vehicle)
 {
         float dist = distBetweenPoints(vehicle->GetPoints().GetCenter(), effect->GetCenter());
-        if (dist < vehicle->GetPropetries().radar)
+        if (dist < vehicle->GetProperties().radar)
         {
                	return true;
         }
@@ -1146,7 +1146,7 @@ bool isPointOnScreen(const vec2f& p)
 bool isObjectWithinRadarRange(ShockWaveEffect* effect, Vehicle* vehicle)
 {
         float dist = distBetweenPoints(vehicle->GetPoints().GetCenter(), effect->GetCenter());
-        if (dist < vehicle->GetPropetries().radar)
+        if (dist < vehicle->GetProperties().radar)
         {
                	return true;
         }
@@ -1157,13 +1157,13 @@ bool isObjectWithinRadarRange(ShockWaveEffect* effect, Vehicle* vehicle)
 bool isObjectWithinRadarRange(LazerTraceEffect* effect, Vehicle* vehicle)
 {
         float dist = distBetweenPoints(vehicle->GetPoints().GetCenter(), effect->GetStartPos());
-        if (dist < vehicle->GetPropetries().radar)
+        if (dist < vehicle->GetProperties().radar)
         {
                	return true;
         }
         
         dist = distBetweenPoints(vehicle->GetPoints().GetCenter(), effect->GetEndPos());
-        if (dist < vehicle->GetPropetries().radar)
+        if (dist < vehicle->GetProperties().radar)
         {
                	return true;
         }
@@ -1174,7 +1174,7 @@ bool isObjectWithinRadarRange(LazerTraceEffect* effect, Vehicle* vehicle)
 bool isObjectWithinRadarRange(VerticalFlowText* effect, Vehicle* vehicle)
 {
         float dist = distBetweenPoints(vehicle->GetPoints().GetCenter(), effect->GetPos());
-        if (dist < vehicle->GetPropetries().radar)
+        if (dist < vehicle->GetProperties().radar)
         {
                	return true;
         }

@@ -31,7 +31,7 @@ class ProtectorEquipment  : public BaseEquipment
                 void SetProtectionOrig(int protection_orig) { this->protection_orig = protection_orig; };
 		int GetProtection() const { return protection; };
       		
-      		virtual void UpdatePropetries();
+      		virtual void UpdateProperties();
       		
                 void CountPrice();
                                 

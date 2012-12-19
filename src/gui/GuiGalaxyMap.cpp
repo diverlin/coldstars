@@ -49,7 +49,7 @@ GuiGalaxyMap::~GuiGalaxyMap()
 
 bool GuiGalaxyMap::UpdateMouseInteraction(const MouseData& data_mouse, Galaxy* galaxy)
 {
-     	if (player->GetNpc()->GetVehicle()->GetPropetries().hyper > 0)
+     	if (player->GetNpc()->GetVehicle()->GetProperties().hyper > 0)
      	{      
         	for (unsigned int i=0; i<galaxy->STARSYSTEM_vec.size(); i++)
         	{
@@ -59,7 +59,7 @@ bool GuiGalaxyMap::UpdateMouseInteraction(const MouseData& data_mouse, Galaxy* g
                 		if (ss_cursor_dist < 10)
                 		{ 
                    			int ss_ss_dist = distBetweenPoints(galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter(), player->GetNpc()->GetStarSystem()->GetPoints().GetCenter() );
-                   			if (ss_ss_dist < player->GetNpc()->GetVehicle()->GetPropetries().hyper)
+                   			if (ss_ss_dist < player->GetNpc()->GetVehicle()->GetProperties().hyper)
                       			{
                       				if (data_mouse.left_click == true)
                       				{ 
@@ -112,7 +112,7 @@ void GuiGalaxyMap::Render(Galaxy* galaxy)
         drawTexturedPoint(GuiTextureObCollector::Instance().starsystem_mark_player->texture, player->GetNpc()->GetStarSystem()->GetPoints().GetCenter()*scale_parsec2screencoord, 40.0, -2.0);
         
         visual_hyperjump_range.FillData(GuiTextureObCollector::Instance().dot_yellow, 
-        				scale_parsec2screencoord*player->GetNpc()->GetVehicle()->GetPropetries().hyper, 
+        				scale_parsec2screencoord*player->GetNpc()->GetVehicle()->GetProperties().hyper, 
         				10);
 	visual_hyperjump_range.Draw(player->GetNpc()->GetVehicle()->GetStarSystem()->GetPoints().GetCenter()*scale_parsec2screencoord);
        		

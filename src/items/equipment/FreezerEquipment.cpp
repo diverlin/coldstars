@@ -35,7 +35,7 @@ FreezerEquipment::~FreezerEquipment()
 {}
 
 /* virtual */
-void FreezerEquipment::UpdatePropetries()
+void FreezerEquipment::UpdateProperties()
 {
     	freeze_add  = 0;
         

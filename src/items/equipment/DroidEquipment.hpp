@@ -31,7 +31,7 @@ class DroidEquipment : public BaseEquipment
 		void SetRepairOrig(int repair_orig) { this->repair_orig = repair_orig; };
 		int GetRepair() const { return repair; };
 
-      		virtual void UpdatePropetries();
+      		virtual void UpdateProperties();
       		virtual void UpdateInStatic();
                 
       		void CountPrice();

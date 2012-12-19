@@ -35,7 +35,7 @@ ScanerEquipment::~ScanerEquipment()
 {}
 
 /* virtual */
-void ScanerEquipment::UpdatePropetries()
+void ScanerEquipment::UpdateProperties()
 {
         scan_add = 0;
         

@@ -182,7 +182,7 @@ void GrappleEquipment::RenderGrabTrail() const
 
 
 /* virtual */
-void GrappleEquipment::UpdatePropetries()
+void GrappleEquipment::UpdateProperties()
 {
     	strength_add   = 0;
     	radius_add     = 0;

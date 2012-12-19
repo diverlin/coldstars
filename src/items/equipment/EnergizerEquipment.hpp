@@ -35,7 +35,7 @@ class EnergizerEquipment : public BaseEquipment
       		int GetEnergy() const { return energy; };
 
       		void CountPrice();
-      		virtual void UpdatePropetries();
+      		virtual void UpdateProperties();
       		      		
       		virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);

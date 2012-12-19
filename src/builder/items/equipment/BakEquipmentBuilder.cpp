@@ -95,7 +95,7 @@ void BakEquipmentBuilder::CreateNewInternals(BakEquipment* bak_equipment, int te
         bak_equipment->SetItemCommonData(common_data);
         bak_equipment->SetCondition(common_data.condition_max);
                                         
-        bak_equipment->UpdatePropetries();
+        bak_equipment->UpdateProperties();
     	bak_equipment->CountPrice();
 }
 

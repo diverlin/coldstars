@@ -38,7 +38,7 @@ EnergizerEquipment::~EnergizerEquipment()
 {}
 
 /* virtual */
-void EnergizerEquipment::UpdatePropetries()
+void EnergizerEquipment::UpdateProperties()
 {
     	energy_max_add   = 0;
     	restoration_add  = 0;

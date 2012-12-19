@@ -85,7 +85,7 @@ class BaseItem : public Base
                 
                 void RepairEvent();
 
-		virtual void UpdatePropetries() {};
+		virtual void UpdateProperties() {};
 		virtual void UpdateInStatic() { UpdateLock(); };
                 
 		void UpdateInfo();

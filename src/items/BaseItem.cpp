@@ -191,7 +191,7 @@ void BaseItem::ResolveDataUniqueBaseItem()
 	
 	textureOb = TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path);
 		
-	UpdatePropetries(); // this function must be performed before inserting to slot!!!
+	UpdateProperties(); // this function must be performed before inserting to slot!!!
 		
 	if(data_unresolved_BaseItem.item_slot_id != NONE_ID) // item_slot can be NULL in case of inserted module
 	{

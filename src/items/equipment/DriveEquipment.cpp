@@ -36,7 +36,7 @@ DriveEquipment::~DriveEquipment()
 {}
 
 /* virtual */
-void DriveEquipment::UpdatePropetries()
+void DriveEquipment::UpdateProperties()
 {     
      	speed_add        = 0;
      	hyper_add        = 0;

@@ -123,7 +123,7 @@ void DriveComplex::DefineDistance()
     		
     		case NAVIGATOR_ACTION::COLLECTING_ID:
     		{
-    		    	target_distance = owner_vehicle->GetPropetries().grab_radius/2; 
+    		    	target_distance = owner_vehicle->GetProperties().grab_radius/2; 
     			target_offset = getRandVec2f(target->GetCollisionRadius()/2, target->GetCollisionRadius()); 
     			
     			break;    		
@@ -323,7 +323,7 @@ bool DriveComplex::CalcRoundPath()
     	float target_angle_diff_start = target_angle_diff;    	
     	float angle_inD = owner_vehicle->GetPoints().GetAngleDegree();
        
-    	float step = owner_vehicle->GetPropetries().speed/100.0;  // remove from here 
+    	float step = owner_vehicle->GetProperties().speed/100.0;  // remove from here 
     	float d_angle = 1.0f*step;
         
     	int it_max = 360.0f/d_angle + 1;
@@ -388,9 +388,9 @@ void DriveComplex::CalcDirectPath()
     	vec2f ll(target_pos - start_pos);
     	vec2f new_pos(start_pos);
 
-        if ( (owner_vehicle->GetPropetries().speed > FLOAT_EPSILON) and (ll.IsNull() == false) )
+        if ( (owner_vehicle->GetProperties().speed > FLOAT_EPSILON) and (ll.IsNull() == false) )
     	{
-    		float step = owner_vehicle->GetPropetries().speed/100.0;  // remove from here    
+    		float step = owner_vehicle->GetProperties().speed/100.0;  // remove from here    
        		    		
 		vec2f vstep = ll.GetNorm() * step;
 
@@ -419,7 +419,7 @@ void DriveComplex::CalcDirectPath()
     	//vec2f new_pos(start_pos);
     	//for (unsigned int i=0; i<500; i++)
 	//{
-	    	//float step = owner_vehicle->GetPropetries().speed/100.0 + i*10;  // remove from here      		    		
+	    	//float step = owner_vehicle->GetProperties().speed/100.0 + i*10;  // remove from here      		    		
 		//vec2f vstep = ll.GetNorm() * step;
 	
         	//new_pos += vstep;
