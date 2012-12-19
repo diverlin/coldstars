@@ -95,7 +95,7 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
         drive_equipment->SetItemCommonData(common_data);
         drive_equipment->SetCondition(common_data.condition_max);
         
-        drive_equipment->UpdatePropetries();
+        drive_equipment->UpdateProperties();
      	drive_equipment->CountPrice();
 }
 

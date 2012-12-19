@@ -94,7 +94,7 @@ void RadarEquipmentBuilder::CreateNewInternals(RadarEquipment* radar_equipment, 
         radar_equipment->SetItemCommonData(common_data);
         radar_equipment->SetCondition(common_data.condition_max);
  
-    	radar_equipment->UpdatePropetries();
+    	radar_equipment->UpdateProperties();
     	radar_equipment->CountPrice();
 }
 

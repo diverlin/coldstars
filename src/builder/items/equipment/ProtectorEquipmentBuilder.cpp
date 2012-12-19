@@ -94,7 +94,7 @@ void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector
         protector_equipment->SetItemCommonData(common_data);
         protector_equipment->SetCondition(common_data.condition_max);
                 
-        protector_equipment->UpdatePropetries();
+        protector_equipment->UpdateProperties();
     	protector_equipment->CountPrice();
 }
 

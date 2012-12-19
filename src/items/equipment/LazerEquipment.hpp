@@ -20,6 +20,8 @@
 #define LAZEREQUIPMENT_H
 
 #include "BaseEquipment.hpp"
+class BaseSpaceEntity;
+class ItemSlot;
 
 class LazerEquipment : public BaseEquipment
 {
@@ -33,9 +35,9 @@ class LazerEquipment : public BaseEquipment
 		int GetDamage() const { return damage; };
 		int GetRadius() const { return radius; };
 		
-      		void FireEvent(bool);
+      		void FireEvent(BaseSpaceEntity*, ItemSlot*, float, bool);
       		
-       	      	virtual void UpdatePropetries();
+       	      	virtual void UpdateProperties();
                 
       		void CountPrice();
     		

@@ -39,7 +39,7 @@ RadarEquipment::~RadarEquipment()
 }
 
 /* virtual */
-void RadarEquipment::UpdatePropetries()
+void RadarEquipment::UpdateProperties()
 {
     	radius_add  = 0;
     	

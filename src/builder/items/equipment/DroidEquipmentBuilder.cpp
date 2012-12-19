@@ -92,7 +92,7 @@ void DroidEquipmentBuilder::CreateNewInternals(DroidEquipment* droid_equipment, 
         droid_equipment->SetItemCommonData(common_data);
         droid_equipment->SetCondition(common_data.condition_max);
                 
-    	droid_equipment->UpdatePropetries();
+    	droid_equipment->UpdateProperties();
     	droid_equipment->CountPrice();
 }
 

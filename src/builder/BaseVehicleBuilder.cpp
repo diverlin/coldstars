@@ -30,6 +30,7 @@
 #include "../items/equipment/RadarEquipment.hpp"
 #include "../items/equipment/RocketEquipment.hpp"
 #include "../items/equipment/ScanerEquipment.hpp"
+#include "../items/equipment/EnergizerEquipment.hpp"
 
 #include "../items/modules/LazerModule.hpp"
 #include "../items/modules/RocketModule.hpp"
@@ -169,7 +170,7 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle, int tech_level) const
     	vehicle->AddAndManageItem(DriveEquipmentBuilder::Instance().GetNewDriveEquipment(tech_level)); 
 
     	vehicle->AddAndManageItem(BakEquipmentBuilder::Instance().GetNewBakEquipment(tech_level));         
-    	//vehicle->AddAndManageItem(EnergizerEquipmentBuilder::Instance().GetNewEnergizerEquipment(tech_level));     
+    	vehicle->AddAndManageItem(EnergizerEquipmentBuilder::Instance().GetNewEnergizerEquipment(tech_level));     
    	//vehicle->AddAndManageItem(FreezerEquipmentBuilder::Instance().GetNewFreezerEquipment(tech_level));  
    	
    	vehicle->AddAndManageItem(ProtectorEquipmentBuilder::Instance().GetNewProtectorEquipment(tech_level)); 

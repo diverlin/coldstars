@@ -98,7 +98,7 @@ void GrappleEquipmentBuilder::CreateNewInternals(GrappleEquipment* grapple_equip
         grapple_equipment->SetItemCommonData(common_data);        
         grapple_equipment->SetCondition(common_data.condition_max);
         
-    	grapple_equipment->UpdatePropetries();
+    	grapple_equipment->UpdateProperties();
     	grapple_equipment->CountPrice();
 }
 

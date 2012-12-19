@@ -96,7 +96,7 @@ void LazerEquipmentBuilder::CreateNewInternals(LazerEquipment* lazer_equipment, 
         lazer_equipment->SetItemCommonData(common_data);
         lazer_equipment->SetCondition(common_data.condition_max);
                 
-   	lazer_equipment->UpdatePropetries();
+   	lazer_equipment->UpdateProperties();
    	lazer_equipment->CountPrice();
 }
 

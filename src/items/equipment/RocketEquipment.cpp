@@ -77,7 +77,7 @@ RocketEquipment::~RocketEquipment()
 {}
 
 /* virtual */
-void RocketEquipment::UpdatePropetries()
+void RocketEquipment::UpdateProperties()
 {
         ammo_max_add = 0;
         damage_add   = 0;

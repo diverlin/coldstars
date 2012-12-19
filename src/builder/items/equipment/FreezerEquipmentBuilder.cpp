@@ -93,7 +93,7 @@ void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equip
         freezer_equipment->SetItemCommonData(common_data);
         freezer_equipment->SetCondition(common_data.condition_max);
           
-      	freezer_equipment->UpdatePropetries();
+      	freezer_equipment->UpdateProperties();
     	freezer_equipment->CountPrice();
 }
 

@@ -85,7 +85,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
     			module->SetEquipmentOwner(this);
 	       		modules_vec.push_back(module);                
                         
-        		UpdatePropetries();
+        		UpdateProperties();
         		item_slot->UpdateVehiclePropetries();
 
         		return true;
@@ -94,14 +94,6 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 
        	return false;   
 } 
-
-void BaseEquipment::RemoveChildFromEntityManager()
-{
-    	for (unsigned int i=0; i<modules_vec.size(); i++)
-    	{
-		EntityGarbage::Instance().Add(modules_vec[i]);
-    	}
-}
 
 /* virtual */
 void BaseEquipment::Render(const Rect& rect1, const vec2f& gui_offset, bool draw_text)

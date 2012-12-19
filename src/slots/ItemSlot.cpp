@@ -95,6 +95,14 @@ bool ItemSlot::ValidateTarget()
 	Log("ValidateTarget");
 	#endif   
 	
+	if (subtarget != NULL)
+	{
+		if (CheckSubTarget(subtarget) == false)
+		{
+			subtarget = NULL; // reseting only subtarget, firemode for target will be used
+		}
+	}
+	
         return CheckTarget(target);
 }
 
@@ -119,48 +127,34 @@ bool ItemSlot::CheckAmmo() const
     	return false;           
 }
 
-bool ItemSlot::FireEvent(int attack_skill, bool show_effect)
+void ItemSlot::FireEvent(int attack_skill, bool show_effect)
 {    
         #if WEAPONSTARGET_LOG_ENABLED == 1 
 	Log("FireEvent");
 	#endif   
-	   			
+
+	float damage_rate = attack_skill * SKILL::ATTACK_NORMALIZED_RATE;
+
 	switch(GetItem()->GetSubTypeId())
 	{
     		case ENTITY::LAZER_EQUIPMENT_ID:
     		{   
-			int damage = GetLazerEquipment()->GetDamage() * attack_skill * SKILL::ATTACK_NORMALIZED_RATE;						
-			if (GetSubTarget() != NULL) // precise fire
-			{
-				if (GetTarget()->GetTypeId() == ENTITY::VEHICLE_ID)
-				{			       		
-					//if (getRandInt(1, 2) == 1)
-					{
-						GetSubTarget()->GetItem()->LockEvent(1);
-					}
-					damage /= 3; // lower damage is used for precise fire
-				}	
-			}
-       			GetLazerEquipment()->FireEvent(show_effect); 
-			GetTarget()->Hit(damage, show_effect);
-									       			
-       			if (GetTarget()->GetAlive() == false)
-       			{
-       				GetOwnerVehicle()->GetOwnerNpc()->AddExpirience(GetTarget()->GetGivenExpirience(), show_effect);
-       			}
-       			
-       			return true; break;  
+       			GetLazerEquipment()->FireEvent(GetTarget(), GetSubTarget(), damage_rate, show_effect); 
+       			break;  
     		}
 
     		case ENTITY::ROCKET_EQUIPMENT_ID:
     		{       
-                	GetRocketEquipment()->FireEvent(attack_skill * SKILL::ATTACK_NORMALIZED_RATE);
-                	return true; break;              
+                	GetRocketEquipment()->FireEvent(damage_rate);
+                	break;              
     		}
 
 	}
-	
-    	return false;
+
+	if (GetTarget()->GetAlive() == false)
+	{
+		GetOwnerVehicle()->GetOwnerNpc()->AddExpirience(GetTarget()->GetGivenExpirience(), show_effect);
+	}
 }
 
 bool ItemSlot::CheckItemInsertion(BaseItem* item) const
@@ -273,10 +267,10 @@ void ItemSlot::UpdateVehiclePropetries() const
 							}
 				
 			case ENTITY::DROID_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesRepair(); break; }
-			//case ENTITY::ENERGIZER_SLOT_ID: 	{ GetOwnerVehicle()->UpdateEnergyAbility(); break; }
-			//case ENTITY::FREEZER_SLOT_ID: 	{ GetOwnerVehicle()->UpdateFreezeAbility(); break; }
+			case ENTITY::ENERGIZER_SLOT_ID: { GetOwnerVehicle()->UpdatePropertiesEnergy(); break; }
+			case ENTITY::FREEZER_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesFreeze(); break; }
 			case ENTITY::GRAPPLE_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesGrab(); break; }
-			case ENTITY::PROTECTOR_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesProtection(); break; }
+			case ENTITY::PROTECTOR_SLOT_ID: { GetOwnerVehicle()->UpdatePropertiesProtection(); break; }
 			case ENTITY::RADAR_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesRadar(); break; }
 			
 			case ENTITY::ARTEFACT_SLOT_ID: { GetOwnerVehicle()->UpdateArtefactInfluence(); break; }
@@ -402,13 +396,28 @@ void ItemSlot::DrawRange(const vec2f& offset)
     	range_visual.Draw(offset);
 }
 
-bool ItemSlot::CheckTarget(BaseSpaceEntity* _target, ItemSlot* _subtarget) const
+bool ItemSlot::CheckSubTarget(ItemSlot* _subtarget) const
+{
+	#if WEAPONSTARGET_LOG_ENABLED == 1 
+        Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::CheckSubTarget");
+	#endif     
+	
+	if (_subtarget->GetItem() != NULL)
+	{
+		return true;
+	}
+	
+	return false;        
+}
+
+
+bool ItemSlot::CheckTarget(BaseSpaceEntity* _target) const
 {
 	#if WEAPONSTARGET_LOG_ENABLED == 1 
         Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::CheckTarget");
 	#endif     
 	
-        if (CheckAlive(_target) == true)
+	if (CheckAlive(_target) == true)
         {
         	if (CheckPlaceTypeId(_target) == true)
         	{

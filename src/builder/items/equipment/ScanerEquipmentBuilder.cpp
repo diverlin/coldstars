@@ -94,7 +94,7 @@ void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipmen
         scaner_equipment->SetItemCommonData(common_data);
         scaner_equipment->SetCondition(common_data.condition_max);
                    
-    	scaner_equipment->UpdatePropetries();
+    	scaner_equipment->UpdateProperties();
     	scaner_equipment->CountPrice();
 }
 

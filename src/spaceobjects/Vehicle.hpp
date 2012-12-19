@@ -73,7 +73,7 @@ class Vehicle : public BaseSpaceEntity
         	
         	VehicleSlot* GetParentVehicleSlot() const { return parent_vehicleslot; };
         	
-        	const VehiclePropetries& GetPropetries() const { return propetries; };
+        	const VehiclePropetries& GetProperties() const { return properties; };
                 VehicleKorpusData& GetKorpusData() { return data_korpus; };
                 			
                 void AddItemSlot(ItemSlot*); 
@@ -91,7 +91,7 @@ class Vehicle : public BaseSpaceEntity
                                                 
                 bool UnpackContainerItemToCargoSlot(Container*);
                 
-                int GetFreeSpace() const { return propetries.free_space; };
+                int GetFreeSpace() const { return properties.free_space; };
 
                 void BindOwnerNpc(Npc*);
                 
@@ -121,17 +121,19 @@ class Vehicle : public BaseSpaceEntity
         	virtual void PostDeathUniqueEvent(bool); 
         	
         	void UpdateAllFunctionalItemsInStatic();
-             		void IncreaseMass(int);
-             		void DecreaseMass(int);
-             		void UpdatePropertiesSpeed();
-             		void UpdatePropertiesFire();
-             		void UpdatePropertiesRadar();
-             		void UpdatePropertiesJump();
-             		void UpdatePropertiesProtection();
-             		void UpdatePropertiesRepair();
-             		void UpdatePropertiesScan();
-             		void UpdatePropertiesGrab();
-             		void UpdateArtefactInfluence();
+             	void IncreaseMass(int);
+             	void DecreaseMass(int);
+             	void UpdatePropertiesEnergy();
+             	void UpdatePropertiesFreeze();
+             	void UpdatePropertiesSpeed();
+             	void UpdatePropertiesFire();
+             	void UpdatePropertiesRadar();
+             	void UpdatePropertiesJump();
+             	void UpdatePropertiesProtection();
+             	void UpdatePropertiesRepair();
+             	void UpdatePropertiesScan();
+             	void UpdatePropertiesGrab();
+             	void UpdateArtefactInfluence();
 
         	void HyperJumpEvent(StarSystem*);
         	void DockingEvent();
@@ -161,7 +163,7 @@ class Vehicle : public BaseSpaceEntity
 	protected:
 		int special_action_id;
 	
-	        VehiclePropetries propetries;
+	        VehiclePropetries properties;
                 VehicleKorpusData data_korpus;
                 
         	WeaponComplex     weapon_complex;

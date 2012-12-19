@@ -111,7 +111,7 @@ void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipmen
         rocket_equipment->SetItemCommonData(common_data);
         rocket_equipment->SetCondition(common_data.condition_max);
                 
-        rocket_equipment->UpdatePropetries();
+        rocket_equipment->UpdateProperties();
         rocket_equipment->CountPrice();
 }
 

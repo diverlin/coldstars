@@ -64,19 +64,19 @@ void Ship::UpdateInfo()
     	info.addNameStr("class:");   		info.addValueStr( getTypeStr(data_id.subsubtype_id) );     	
     	info.addNameStr("armor/max:");     	info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) );
     	info.addNameStr("size id:");     	info.addValueStr( int2str(textureOb->size_id) );
-    	info.addNameStr("space/free:");   	info.addValueStr( int2str(data_korpus.space) + "/" + int2str(propetries.free_space) );
+    	info.addNameStr("space/free:");   	info.addValueStr( int2str(data_korpus.space) + "/" + int2str(properties.free_space) );
     	info.addNameStr("mass:");   		info.addValueStr( int2str(mass) );
-	info.addNameStr("speed:");       	info.addValueStr( boost::lexical_cast<std::string>(propetries.speed) );
+	info.addNameStr("speed:");       	info.addValueStr( boost::lexical_cast<std::string>(properties.speed) );
 	info.addNameStr("speed dm:");       	info.addValueStr( boost::lexical_cast<std::string>(mass*MASS_DECREASE_SPEED_RATE) );
-    	info.addNameStr("energy:");            	info.addValueStr( int2str(propetries.energy) );
+    	info.addNameStr("energy:");            	info.addValueStr( int2str(properties.energy) );
 	info.addNameStr("temp.:");       	info.addValueStr( int2str(data_korpus.temperature) );
-        info.addNameStr("radar:");    		info.addValueStr( int2str(propetries.radar) );
-    	info.addNameStr("protect:");        	info.addValueStr( int2str(propetries.protection) );
-    	info.addNameStr("repair:");        	info.addValueStr( int2str(propetries.repair) );
-    	info.addNameStr("scan:");        	info.addValueStr( int2str(propetries.scan) );
+        info.addNameStr("radar:");    		info.addValueStr( int2str(properties.radar) );
+    	info.addNameStr("protect:");        	info.addValueStr( int2str(properties.protection) );
+    	info.addNameStr("repair:");        	info.addValueStr( int2str(properties.repair) );
+    	info.addNameStr("scan:");        	info.addValueStr( int2str(properties.scan) );
 	info.addNameStr("price:");       	info.addValueStr( int2str(data_korpus.price) );
 	
-	if (propetries.grab_radius > 0)
+	if (properties.grab_radius > 0)
 	{
 		std::string grab_str = GetGrappleSlot()->GetGrappleEquipment()->GetTargetStr();
 		if (grab_str.size() > 0)
@@ -102,12 +102,12 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 		points.Update();   
 		weapon_complex.Fire(time, owner_npc->GetSkill().GetAttack(), show_effect);
 
-    		if (propetries.speed > 0) 
+    		if (properties.speed > 0) 
     		{ 
        			drive_complex.UpdatePosition();
     		}
     
-    		if (propetries.grab_radius > 0)
+    		if (properties.grab_radius > 0)
     		{
     			UpdateGrappleMicroProgram();
     		}
@@ -117,7 +117,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 void Ship::RenderInSpace() const
 {   
 	setColor4f(color);
-        if (propetries.grab_radius > 0)
+        if (properties.grab_radius > 0)
         {
                 RenderGrabTrail();
         }
@@ -129,7 +129,7 @@ void Ship::RenderInSpace() const
         	weapon_complex.RenderTurrels();
         }
 
-    	if (propetries.speed > 0)
+    	if (properties.speed > 0)
     	{
 		RenderDriveEffect(1.0 - color.a);
     	}

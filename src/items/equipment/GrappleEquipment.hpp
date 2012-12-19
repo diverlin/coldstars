@@ -48,7 +48,7 @@ class GrappleEquipment : public BaseEquipment
 		void UpdateGrabScenarioProgram();
 		void RenderGrabTrail() const;
 				              
-      		virtual void UpdatePropetries();  
+      		virtual void UpdateProperties();  
                                 
                 void CountPrice();
                       		
