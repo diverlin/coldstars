@@ -90,7 +90,7 @@ void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer
 
         energizer_equipment->SetEnergyMaxOrig(energy_max_orig);
         energizer_equipment->SetRestorationOrig(restoration_orig);
-        energizer_equipment->SetEnergy(energy_max_orig);
+        energizer_equipment->SetEnergy(0.05*energy_max_orig);
         energizer_equipment->SetTextureOb(texOb_item);    	
         energizer_equipment->SetParentSubTypeId(ENTITY::ENERGIZER_SLOT_ID);
         energizer_equipment->SetItemCommonData(common_data);
