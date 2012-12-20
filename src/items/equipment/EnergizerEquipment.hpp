@@ -32,10 +32,15 @@ class EnergizerEquipment : public BaseEquipment
                 void SetRestorationOrig(int restoration_orig) { this->restoration_orig = restoration_orig; };
       		void SetEnergy(int energy) { this->energy  = energy; };
                                                       
+      		int GetEnergyMax() const { return energy_max; };
       		int GetEnergy() const { return energy; };
-
+      		
+      		void DecreaseEnergy(int energy) { this->energy -= energy; };
+      		      		
       		void CountPrice();
       		virtual void UpdateProperties();
+      		      		
+      		virtual void UpdateInStatic();
       		      		
       		virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);

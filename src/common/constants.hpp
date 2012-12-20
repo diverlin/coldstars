@@ -32,8 +32,8 @@
 	#define SAVELOAD_LOG_ENABLED 0
 	#define ENTITY_TRANSACTION_LOG_ENABLED 0
 	#define CREATEDESTROY_LOG_ENABLED 0
-	#define ITEMINFLUENCE_LOG_ENABLED 0
-	#define TEXTURE_MANAGER_LOG_ENABLED 1
+	#define ITEMINFLUENCE_LOG_ENABLED 1
+	#define TEXTURE_MANAGER_LOG_ENABLED 0
 	
 	const int GRAPPLE_QUEUE_LOG_DIP = 1;
 	const int DRIVECOMPLEX_LOG_DIP = 1;
@@ -572,7 +572,7 @@ namespace EQUIPMENT
 	namespace LAZER
 	{
 		const int RADIUS_MIN = 200;
-		const int RADIUS_MAX = 500;
+		const int RADIUS_MAX = 400;
 		const float RADIUS_TECHLEVEL_RATE = 0.1f;
 				
 		const int DAMAGE_MIN = 40;
@@ -599,7 +599,7 @@ namespace EQUIPMENT
 		const float AMMO_TECHLEVEL_RATE = 0.1f;
 				
 		const int RADIUS_MIN = 350;
-		const int RADIUS_MAX = 750;
+		const int RADIUS_MAX = 550;
 		const float RADIUS_TECHLEVEL_RATE = 0.1f;
 				
 		const int DAMAGE_MIN = 10;

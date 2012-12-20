@@ -19,15 +19,16 @@
 #ifndef VEHICLEPROPETRIES_H
 #define VEHICLEPROPETRIES_H
 
+/* this data is changed during game play, the propetries depends on many factors */
 struct VehiclePropetries
 {    
-	/* this data is changed during game play, the propetries depends on many factors */
 	int free_space;
 	
 	int protection;
 	int radar;
 	int speed;  // depends on mass and drive
 
+	int energy;
 	int hyper;  // depends on drive
 	int fuel;    // depends on bak
 	int repair; // depends on droid
@@ -37,7 +38,6 @@ struct VehiclePropetries
         int grab_strength;
         int grab_radius;
         
-	int energy;
 	int temperature;
 	
 	int artefact_gravity;

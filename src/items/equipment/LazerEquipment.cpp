@@ -103,10 +103,8 @@ std::string LazerEquipment::GetRadiusStr()
 
 void LazerEquipment::FireEvent(BaseSpaceEntity* target, ItemSlot* subtarget, float damage_rate, bool show_effect)
 { 
-	if (item_slot->GetOwnerVehicle()->GetProperties().energy > damage)
+	if (item_slot->GetOwnerVehicle()->TryToConsumeEnergy(damage) == true)
 	{
-		//item_slot->GetOwnerVehicle()->GetProperties().energy -= damage;
-		
 		if (subtarget != NULL) // precise fire
 		{
 			//if (getRandInt(1, 2) == 1)
