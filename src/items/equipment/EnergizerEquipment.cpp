@@ -22,6 +22,9 @@
 #include "../../common/Logger.hpp"
 #include "../../items/modules/EnergizerModule.hpp"
 
+#include "../../slots/ItemSlot.hpp"
+#include "../../spaceobjects/Vehicle.hpp"
+
 EnergizerEquipment::EnergizerEquipment(int id)
 {
         data_id.id         = id;
@@ -51,6 +54,22 @@ void EnergizerEquipment::UpdateProperties()
     	
     	energy_max  = energy_max_orig  + energy_max_add;
     	restoration = restoration_orig + restoration_add;
+}
+
+
+/* virtual */
+void EnergizerEquipment::UpdateInStatic()
+{
+	if (GetFunctioning() == true)	
+	{
+		if (item_slot->GetOwnerVehicle()->TryToGenerateEnergy(restoration) == true)
+		{
+			energy += restoration;
+			DeteriorationEvent();
+		}
+	}
+	
+	UpdateLock();
 }
 
 void EnergizerEquipment::CountPrice()

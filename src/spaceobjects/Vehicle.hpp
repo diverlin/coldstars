@@ -74,6 +74,7 @@ class Vehicle : public BaseSpaceEntity
         	VehicleSlot* GetParentVehicleSlot() const { return parent_vehicleslot; };
         	
         	const VehiclePropetries& GetProperties() const { return properties; };
+                               
                 VehicleKorpusData& GetKorpusData() { return data_korpus; };
                 			
                 void AddItemSlot(ItemSlot*); 
@@ -157,7 +158,10 @@ class Vehicle : public BaseSpaceEntity
 		void BuyFuelAsMuchAsPossible();
 
 		void LockRandomItem(int);
-		
+
+                bool TryToConsumeEnergy(int);
+                bool TryToGenerateEnergy(int);
+                                		
 		void TEST_DamageAndLockRandItems();
 
 	protected:
