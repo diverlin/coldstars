@@ -48,7 +48,8 @@ struct VehiclePropetries
 	int average_fire_radius;
 	
 	bool equipment_radar;
-	bool equipment_protector;
+	bool shield_effect_enabled;
+	bool hibernate_mode_enabled;
 
 	VehiclePropetries():
 	free_space(0),
@@ -69,9 +70,10 @@ struct VehiclePropetries
         artefact_protection(0),
         
         average_damage(0),
-        average_fire_radius(0) ,
+        average_fire_radius(0),
         equipment_radar(false),
-        equipment_protector(false)
+        shield_effect_enabled(false),
+        hibernate_mode_enabled(false)
         {}
 };
 

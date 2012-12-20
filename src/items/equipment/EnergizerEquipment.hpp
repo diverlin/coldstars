@@ -34,7 +34,8 @@ class EnergizerEquipment : public BaseEquipment
                                                       
       		int GetEnergyMax() const { return energy_max; };
       		int GetEnergy() const { return energy; };
-      		
+
+      		void IncreaseEnergy(int energy) { this->energy += energy; };      		
       		void DecreaseEnergy(int energy) { this->energy -= energy; };
       		      		
       		void CountPrice();

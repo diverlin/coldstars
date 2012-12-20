@@ -58,8 +58,8 @@ void Ship::UpdateInfo()
 	info.clear();
 
     	info.addTitleStr("SHIP");
-    	if (starsystem) {	info.addNameStr("id/ss_id:");          	info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->GetId()) ); }
-    	else     	{	info.addNameStr("id:");          	info.addValueStr( int2str(data_id.id) ); }
+    	if (starsystem) { info.addNameStr("id/ss_id:"); info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->GetId()) ); }
+    	else     	{ info.addNameStr("id:");       info.addValueStr( int2str(data_id.id) ); }
     	info.addNameStr("race:");   		info.addValueStr( getRaceStr(textureOb->race_id) ); 
     	info.addNameStr("class:");   		info.addValueStr( getTypeStr(data_id.subsubtype_id) );     	
     	info.addNameStr("armor/max:");     	info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) );
@@ -134,7 +134,7 @@ void Ship::RenderInSpace() const
 		RenderDriveEffect(1.0 - color.a);
     	}
     	
-    	if (protection_complex.GetProtectorSlot()->GetItem() != NULL)
+    	if (properties.shield_effect_enabled == true)
     	{
         	RenderShieldEffect(1.0 - color.a); 
         }

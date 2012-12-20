@@ -64,7 +64,6 @@ void EnergizerEquipment::UpdateInStatic()
 	{
 		if (item_slot->GetOwnerVehicle()->TryToGenerateEnergy(restoration) == true)
 		{
-			energy += restoration;
 			DeteriorationEvent();
 		}
 	}
@@ -96,9 +95,9 @@ void EnergizerEquipment::AddUniqueInfo()
 std::string EnergizerEquipment::GetEnergyStr()
 {
     	if (energy_max_add == 0)
-        	return int2str(energy_max_orig) + "/" + int2str(energy);
+        	return int2str(energy) + "/" + int2str(energy_max_orig);
     	else
-        	return int2str(energy_max_orig) + "+" + int2str(energy_max_add) + "/" + int2str(energy);
+        	return int2str(energy) + "/" + int2str(energy_max_orig) + "+" + int2str(energy_max_add);
 }
 
 std::string EnergizerEquipment::GetRestorationStr()

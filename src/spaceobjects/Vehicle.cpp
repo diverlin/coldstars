@@ -692,8 +692,18 @@ void Vehicle::LaunchingEvent()
 /* virtual */
 void Vehicle::Hit(int damage, bool show_effect)
 {
+	#if WEAPONSTARGET_LOG_ENABLED == 1
+	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::Hit", WEAPONSTARGET_LOG_DIP);
+	#endif
+	
 	if (god_mode == false)
 	{
+	
+	if (properties.energy < damage)
+	{
+		properties.hibernate_mode_enabled = true;
+		UpdatePropertiesProtection();
+	}
 	
 	damage = damage * ( 1.0 - (owner_npc->GetSkill().GetDefence()*SKILL::DEFENCE_NORMALIZED_RATE + properties.protection*0.01f) );
 	
@@ -897,16 +907,19 @@ void Vehicle::UpdatePropertiesProtection()
 	#endif
 	
         properties.protection = data_korpus.protection;
-        properties.equipment_protector = false;
+        properties.shield_effect_enabled = false;
 
-     	if (protection_complex.GetProtectorSlot()->GetItem() != NULL)
-     	{
-        	if (protection_complex.GetProtectorSlot()->GetProtectorEquipment()->GetFunctioning() == true)
-        	{
-           		properties.protection += protection_complex.GetProtectorSlot()->GetProtectorEquipment()->GetProtection();
-           		properties.equipment_protector = true;
-        	}       
-     	}   
+	if (properties.hibernate_mode_enabled == false)
+	{
+     		if (protection_complex.GetProtectorSlot()->GetItem() != NULL)
+     		{
+        		if (protection_complex.GetProtectorSlot()->GetProtectorEquipment()->GetFunctioning() == true)
+        		{
+           			properties.protection += protection_complex.GetProtectorSlot()->GetProtectorEquipment()->GetProtection();
+           			properties.shield_effect_enabled = true;
+        		}
+     		}
+     	}
      	
      	if (properties.artefact_protection > 0)
      	{
@@ -1260,6 +1273,15 @@ bool Vehicle::TryToGenerateEnergy(int energy)
 		}
 		
 		properties.energy += energy;
+		energizer_slot->GetEnergizerEquipment()->IncreaseEnergy(energy); 
+		
+		if (properties.hibernate_mode_enabled == true)
+		{
+			if (properties.energy > HIBERNATION_ENERGY_THRESHOLD)
+			{
+				UpdatePropertiesProtection();
+			}
+		}
 		
 		return true;
 	}
