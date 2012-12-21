@@ -127,7 +127,7 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const vec2f& center, float angle, 
     	vehicle->GetPoints().Update();  
     	
 	vehicle->SetParent(parent);
-        vehicle->SetColor(GetColor());
+        vehicle->SetColor(color);
                 	
 	VEHICLE_vec.push_back(vehicle);  
 
@@ -674,7 +674,7 @@ void StarSystem::FindRadarVisibleEntities_c(Player* player)
       
 void StarSystem::RestoreSceneColor()
 {
-        setColor4f(STAR_vec[0]->GetColor());
+        setColor4f(color);
 }     
 
 void StarSystem::RestoreDefaultColor()

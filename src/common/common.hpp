@@ -48,6 +48,6 @@ inline T getMin(T val1, T val2, T val3)
 	return getMin(min2, val3);
 }
 
-void fillColor4fById(int, Color4f&);
+Color4f fillColor4fById(int);
 
 #endif
