@@ -41,7 +41,8 @@ class Star : public BasePlanet
 		void Hit(int, bool) {};
 		void InitiateSpark();
 
-                void CalcColor();    		
+                void CalcColor();    	
+                void UpdateInSpaceInStatic();	
     		void UpdateInSpace(int, bool);
     		
     		void Render_NEW() const;
@@ -55,8 +56,11 @@ class Star : public BasePlanet
         	Color4f color;
         	float d_color;
         	
-        	bool spark_done;
-        	bool spark_on;
+        	bool spark_active;
+        	bool spark_grows;
+        	
+        	int turn_since_last_spark_counter;
+        	int turn_spark_threshold;
         	
     		void UpdateInfo();
     		void PostDeathUniqueEvent(bool);

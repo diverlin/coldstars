@@ -40,6 +40,11 @@ God& God::Instance()
 God::~God()
 {}
 
+void God::UpdateInStatic()
+{
+	//war manager
+}
+
 void God::CreateLifeInStarSystem(StarSystem* starsystem) const
 {
 	CreateLifeToPlanets(starsystem);

@@ -29,6 +29,8 @@ class God
 		~God();
 
 		void CreateLifeInStarSystem(StarSystem*) const;
+		
+		void UpdateInStatic();
                        	 		                
         private:
 		God() {};
