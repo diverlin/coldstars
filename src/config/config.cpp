@@ -26,7 +26,8 @@ auto_load_mode(false),
 GAME_SPEED(1),
 
 SCROLL_VELOCITY_MAX(20),
-SCROLL_VELOCITY_STEP(1)
+SCROLL_VELOCITY_STEP(1),
+mouse_camera_scroll(false)
 		
 {
 	boost::property_tree::info_parser::read_info("config.info", ptree);
@@ -48,9 +49,10 @@ SCROLL_VELOCITY_STEP(1)
 	auto_save_mode 	= ptree.get<bool>("Gameplay.auto_save_mode");
 	auto_load_mode 	= ptree.get<bool>("Gameplay.auto_load_mode");
 	GAME_SPEED 	= ptree.get<int>("Gameplay.GAME_SPEED");
-	
+		
 	SCROLL_VELOCITY_MAX 	= ptree.get<int>("Control.SCROLL_VELOCITY_MAX");
 	SCROLL_VELOCITY_STEP 	= ptree.get<int>("Control.SCROLL_VELOCITY_STEP");
+	mouse_camera_scroll = ptree.get<bool>("Control.mouse_camera_scroll");
 }
 
 Config::~Config(){}

@@ -40,10 +40,8 @@ class UserInput
 		UserInput(const UserInput&) = delete;
 		UserInput& operator=(const UserInput&) = delete;
 		
-	        bool keyboardLeftPressed;
-        	bool keyboardRightPressed;    
-        	bool keyboardUpPressed;    
-        	bool keyboardDownPressed;  
+	        int moveCamera_axis_x;
+        	int moveCamera_axis_y;
         
         	sf::Event event;
         	

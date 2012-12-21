@@ -17,7 +17,9 @@ struct Config
 
 		bool GetAutoSaveMode() const { return auto_save_mode; }
 		bool GetAutoLoadMode() const { return auto_load_mode; }
-								
+
+		bool GetMouseCameraScroll() const { return mouse_camera_scroll; }
+										
 		int SCREEN_WIDTH;
 		int SCREEN_HEIGHT;
 		int BPP;
@@ -47,6 +49,8 @@ struct Config
 		
 		bool auto_save_mode;
 		bool auto_load_mode;
+		
+		bool mouse_camera_scroll;
 						
 		boost::property_tree::ptree ptree;
 

@@ -890,14 +890,18 @@ void Vehicle::UpdatePropertiesEnergy()
 	#endif
 	
      	properties.energy = 0;
+	properties.hibernate_mode_enabled = true;
 
      	if (energizer_slot->GetItem() != NULL)
      	{
         	if (energizer_slot->GetEnergizerEquipment()->GetFunctioning() == true)
         	{
            		properties.energy = energizer_slot->GetEnergizerEquipment()->GetEnergy();
+           		properties.hibernate_mode_enabled = false;
         	}
         }
+        
+        UpdatePropertiesProtection();
 }
 
 void Vehicle::UpdatePropertiesProtection()
