@@ -32,11 +32,9 @@ UserInput& UserInput::Instance()
 
 UserInput::UserInput()
 {
-    	keyboardLeftPressed  = false;
-    	keyboardRightPressed = false;    
-    	keyboardUpPressed    = false;    
-    	keyboardDownPressed  = false;  
-    
+    	moveCamera_axis_x = CAMERADIRECTION::NONE;
+        moveCamera_axis_y = CAMERADIRECTION::NONE;
+            
 	next_turn_ready = false;
 }
 
@@ -468,12 +466,35 @@ void UserInput::GetSimpleInputsInKosmoport(Player* player)
 void UserInput::GetRealTimeInputs(Player* player)
 {       
         const sf::Input& Input = Screen::Instance().GetWindow().GetInput();
-              
-        keyboardLeftPressed  = Input.IsKeyDown(sf::Key::Left);   
-        keyboardRightPressed = Input.IsKeyDown(sf::Key::Right);  
         
-        keyboardUpPressed    = Input.IsKeyDown(sf::Key::Up);   
-        keyboardDownPressed  = Input.IsKeyDown(sf::Key::Down);  
+        moveCamera_axis_x  = CAMERADIRECTION::NONE;
+        moveCamera_axis_y  = CAMERADIRECTION::NONE;
+           
+        int mx = player->GetCursor().GetMouseData().mx;
+        int my = player->GetCursor().GetMouseData().my;
+        int screen_w = Screen::Instance().GetWindow().GetWidth();
+        int screen_h = Screen::Instance().GetWindow().GetHeight();
+        
+        bool mouse_camera_scroll = Config::Instance().GetMouseCameraScroll();
+                           	
+        if ( (Input.IsKeyDown(sf::Key::Left) == true) or ((mouse_camera_scroll)and(mx < SCROLL_BORDER_OFFSET)) )
+        {
+      		moveCamera_axis_x = CAMERADIRECTION::LEFT;
+        }   
+        if ( (Input.IsKeyDown(sf::Key::Right) == true) or ((mouse_camera_scroll)and(mx > (screen_w - SCROLL_BORDER_OFFSET))) )
+        {
+        	moveCamera_axis_x = CAMERADIRECTION::RIGHT;
+        }   
+        if ( (Input.IsKeyDown(sf::Key::Up) == true) or ((mouse_camera_scroll)and(my > (screen_h - SCROLL_BORDER_OFFSET))) )
+        {
+       		moveCamera_axis_y = CAMERADIRECTION::UP;
+        }   
+        if ( (Input.IsKeyDown(sf::Key::Down) == true) or ((mouse_camera_scroll)and(my < SCROLL_BORDER_OFFSET)) )
+        {
+        	moveCamera_axis_y = CAMERADIRECTION::DOWN;
+        }   
+        
+        
 }
 
 void UserInput::ScrollCamera(Player* player)
@@ -482,76 +503,87 @@ void UserInput::ScrollCamera(Player* player)
 	int SCROLL_VELOCITY_MAX  = Config::Instance().SCROLL_VELOCITY_MAX;	
 	
         // SCROLLING X AXIS         
-        if(keyboardLeftPressed)
+        switch (moveCamera_axis_x)
         {
-            	scroll_accel.x -= SCROLL_VELOCITY_STEP;
-            	if (abs(scroll_accel.x) > abs(SCROLL_VELOCITY_MAX))
-            	{
-                	scroll_accel.x = -SCROLL_VELOCITY_MAX;
-            	}
-        }
+        	case CAMERADIRECTION::LEFT:
+	        {
+	            	scroll_accel.x -= SCROLL_VELOCITY_STEP;
+	            	if (abs(scroll_accel.x) > abs(SCROLL_VELOCITY_MAX))
+	            	{
+	                	scroll_accel.x = -SCROLL_VELOCITY_MAX;
+	            	}
+	            	
+	            	break;
+	        }
         
-        if(keyboardRightPressed)
-        {
-            	scroll_accel.x += SCROLL_VELOCITY_STEP;
-            	if (abs(scroll_accel.x) > abs(SCROLL_VELOCITY_MAX))
-            	{
-                	scroll_accel.x = SCROLL_VELOCITY_MAX;
-            	}
-        }
-        
-        
-        if(!keyboardLeftPressed && !keyboardRightPressed)
-        {
-            	if (scroll_accel.x != 0)
-            	{
-                	if (scroll_accel.x > 0)
-                	{
-                    		scroll_accel.x -= SCROLL_VELOCITY_STEP; 
-                	} 
-                	else if (scroll_accel.x < 0)
-                	{
-                    		scroll_accel.x += SCROLL_VELOCITY_STEP; 
-                	}   
-            	}
-        }
+        	case CAMERADIRECTION::RIGHT:
+	        {
+	            	scroll_accel.x += SCROLL_VELOCITY_STEP;
+	            	if (abs(scroll_accel.x) > abs(SCROLL_VELOCITY_MAX))
+	            	{
+	                	scroll_accel.x = SCROLL_VELOCITY_MAX;
+	            	}
+	 
+	 		break;
+	        }
 
+		case CAMERADIRECTION::NONE:
+		{
+			if (scroll_accel.x != 0)
+	            	{
+	                	if (scroll_accel.x > 0)
+	                	{
+	                    		scroll_accel.x -= SCROLL_VELOCITY_STEP; 
+	                	} 
+	                	else if (scroll_accel.x < 0)
+	                	{
+	                    		scroll_accel.x += SCROLL_VELOCITY_STEP; 
+	                	}   
+	            	}	
+		}
+	}
 
-
-        // SCROLLING Y AXIS         
-        if(keyboardUpPressed)
-        {
-            	scroll_accel.y += SCROLL_VELOCITY_STEP;
-            	if (abs(scroll_accel.y) > abs(SCROLL_VELOCITY_MAX))
-            	{
-                	scroll_accel.y = SCROLL_VELOCITY_MAX;
-            	}
-        }
-        
-        if(keyboardDownPressed)
-        {
-            	scroll_accel.y -= SCROLL_VELOCITY_STEP;
-            	if (abs(scroll_accel.y) > abs(SCROLL_VELOCITY_MAX))
-            	{
-                	scroll_accel.y = -SCROLL_VELOCITY_MAX;
-            	}
-        }
-        
-        
-        if(!keyboardUpPressed && !keyboardDownPressed)
-        {
-            	if (scroll_accel.y != 0)
-            	{
-                	if (scroll_accel.y > 0)
-                	{
-                    		scroll_accel.y -= SCROLL_VELOCITY_STEP; 
-                	} 
-                	else if (scroll_accel.y < 0)
-                	{
-                    		scroll_accel.y += SCROLL_VELOCITY_STEP; 
-                	}   
-            	}
-        }
-      
+	switch(moveCamera_axis_y)
+	{
+	        case CAMERADIRECTION::UP:
+	        {
+	            	scroll_accel.y += SCROLL_VELOCITY_STEP;
+	            	if (abs(scroll_accel.y) > abs(SCROLL_VELOCITY_MAX))
+	            	{
+	                	scroll_accel.y = SCROLL_VELOCITY_MAX;
+	            	}
+	            	
+	            	break;
+	        }
+	        
+	        case CAMERADIRECTION::DOWN:
+	        {
+	            	scroll_accel.y -= SCROLL_VELOCITY_STEP;
+	            	if (abs(scroll_accel.y) > abs(SCROLL_VELOCITY_MAX))
+	            	{
+	                	scroll_accel.y = -SCROLL_VELOCITY_MAX;
+	            	}
+	            	
+	            	break;
+	        }
+	        
+	        case CAMERADIRECTION::NONE:
+	        {
+	            	if (scroll_accel.y != 0)
+	            	{
+	                	if (scroll_accel.y > 0)
+	                	{
+	                    		scroll_accel.y -= SCROLL_VELOCITY_STEP; 
+	                	} 
+	                	else if (scroll_accel.y < 0)
+	                	{
+	                    		scroll_accel.y += SCROLL_VELOCITY_STEP; 
+	                	}   
+	            	}
+	        	
+	        	break;
+	        }
+	}
+     
       	Screen::Instance().MovingBy(scroll_accel);
 }

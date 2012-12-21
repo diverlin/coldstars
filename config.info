@@ -28,4 +28,5 @@ Control
 {
 SCROLL_VELOCITY_MAX 20
 SCROLL_VELOCITY_STEP 1
+mouse_camera_scroll 0   
 }

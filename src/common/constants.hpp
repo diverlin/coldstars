@@ -56,8 +56,14 @@ enum GAME_MODE
 	CRASH_TEST
 };
 
-const int HIBERNATION_ENERGY_THRESHOLD = 500;
+enum CAMERADIRECTION
+{
+	NONE, LEFT, RIGHT, UP, DOWN
+};
 
+const int HIBERNATION_ENERGY_THRESHOLD = 500;
+const int SCROLL_BORDER_OFFSET = 10;
+        
 const double NO_DELAY = 0.0f;
 const int NO_ADDITIONAL_INFO = 0;
 
