@@ -25,7 +25,7 @@
 
 #include "../docking/Angar.hpp"
 #include "../docking/Store.hpp"
-#include "../common/EntityManager.hpp"
+#include "../managers/EntityManager.hpp"
 
 #include "../garbage/EntityGarbage.hpp"
 

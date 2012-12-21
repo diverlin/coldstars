@@ -19,7 +19,7 @@
 #include "galaxy.hpp"
 #include "starsystem.hpp"
 #include "../common/constants.hpp"
-#include "../common/EntityManager.hpp"
+#include "../managers/EntityManager.hpp"
 #include "../common/rand.hpp"
 #include "../common/myStr.hpp"
 #include "../pilots/Player.hpp"

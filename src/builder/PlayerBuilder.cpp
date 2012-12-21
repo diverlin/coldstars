@@ -22,7 +22,7 @@
 
 #include "../common/id.hpp"
 #include "../common/Logger.hpp"
-#include "../common/EntityManager.hpp"
+#include "../managers/EntityManager.hpp"
 #include "../pilots/Player.hpp"
  
 PlayerBuilder& PlayerBuilder::Instance()

@@ -18,7 +18,7 @@
 
 #include "UserInput.hpp"
 #include "BaseButton.hpp"
-#include "../common/EntityManager.hpp"
+#include "../managers/EntityManager.hpp"
 #include "../config/config.hpp"
 #include "../render/Screen.hpp"
 #include "../parts/WeaponComplex.hpp"

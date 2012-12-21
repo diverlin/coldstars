@@ -41,7 +41,7 @@
 #include "../common/Logger.hpp"
 
 #include "../garbage/EntityGarbage.hpp"
-#include "../common/EntityManager.hpp"
+#include "../managers/EntityManager.hpp"
 
 ItemSlot::ItemSlot(int id)
 {

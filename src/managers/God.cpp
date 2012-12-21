@@ -19,10 +19,10 @@
 #include "God.hpp"
 
 #include "../spaceobjects/Planet.hpp"
-#include "NpcBuilder.hpp"
-#include "SpaceStationBuilder.hpp"
-#include "SatelliteBuilder.hpp"
-#include "ShipBuilder.hpp"
+#include "../builder/NpcBuilder.hpp"
+#include "../builder/SpaceStationBuilder.hpp"
+#include "../builder/SatelliteBuilder.hpp"
+#include "../builder/ShipBuilder.hpp"
 #include "../spaceobjects/BlackHole.hpp"
 
 #include "../common/Logger.hpp"

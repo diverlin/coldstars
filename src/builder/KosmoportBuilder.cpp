@@ -26,7 +26,7 @@
 
 #include "../common/id.hpp"
 #include "../common/Logger.hpp"
-#include "../common/EntityManager.hpp"
+#include "../managers/EntityManager.hpp"
 
 KosmoportBuilder& KosmoportBuilder::Instance()
 {
