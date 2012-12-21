@@ -40,8 +40,11 @@ Star::Star(int id)
     	
     	d_color = 0.0;
     	
-    	spark_on = false;
-    	spark_done = true;
+    	spark_active = false;
+    	spark_grows = false;
+    	
+    	turn_since_last_spark_counter = 0;
+    	turn_spark_threshold = getRandInt(STARSPAK_TURN_THRESHOLD_MIN, STARSPAK_TURN_THRESHOLD_MAX);
 }
   
 /* virtual */  
@@ -59,8 +62,24 @@ void Star::CalcColor()
        
 void Star::InitiateSpark()
 {
-	spark_on   = true;
-    	spark_done = false;
+	spark_active = true;
+	spark_grows = true;
+    	turn_since_last_spark_counter = 0;
+}
+
+void Star::UpdateInSpaceInStatic()
+{
+	if (turn_since_last_spark_counter > turn_spark_threshold)
+	{
+		if (getRandInt(1, 2) == 1) 
+		{
+			InitiateSpark(); 
+		}
+	}
+	else
+	{
+		turn_since_last_spark_counter++;	
+	}
 }
        		
 void Star::UpdateInSpace(int time, bool show_effect)
@@ -68,33 +87,40 @@ void Star::UpdateInSpace(int time, bool show_effect)
         texture_offset1 += 0.0002;
         texture_offset2 += 0.0003;
 
-//if ( (getRandInt(1, 300) == 1) and (spark_done == true) ) InitiateSpark(); // debug
-
-	if (spark_done == false)
-	{		
-		if (spark_on == true)
+	if (spark_active == true)
+	{
+		if (show_effect == true)
 		{
-			d_color += 0.02;
-			scale += 0.2;
-			if (d_color > 1.0)
+			if (spark_grows == true)
 			{
-				starsystem->StarSparkEvent(getRandInt(600, 1200));
-				spark_on = false;
+				d_color += 0.02;
+				scale += 0.2;
+				if (d_color > 1.0)
+				{
+					d_color = 1.0;
+					starsystem->StarSparkEvent(getRandInt(600, 1200));
+					spark_grows = false;
+				}
+			} 
+			else
+			{		
+				d_color -= 0.005;	
+				scale -= 0.05;
+				if (d_color < 0.0)
+				{
+					d_color = 0;
+					spark_active = false;
+				}
+
 			}
 		}
 		else
 		{
-	
-			d_color -= 0.005;	
-			scale -= 0.05;
-			if (d_color < 0.0)
-			{
-				spark_done = true;
-			}
-
+			starsystem->StarSparkEvent(getRandInt(600, 1200));
+			spark_active = false;
 		}
 	}
-	
+
 	//UpdateRotation(); // not relevant for render NEW
 }    
     
@@ -141,6 +167,9 @@ void Star::SaveDataUniqueStar(boost::property_tree::ptree& save_ptree, const std
 	#if SAVELOAD_LOG_ENABLED == 1
 	Logger::Instance().Log(" Star("+int2str(GetId())+")::SaveDataUniqueStar", SAVELOAD_LOG_DIP);
 	#endif
+	
+	save_ptree.put(root+"turn_since_last_spark_counter", turn_since_last_spark_counter);
+	save_ptree.put(root+"turn_spark_threshold", turn_spark_threshold);
 }
 
 void Star::LoadDataUniqueStar(const boost::property_tree::ptree& load_ptree)
@@ -148,6 +177,9 @@ void Star::LoadDataUniqueStar(const boost::property_tree::ptree& load_ptree)
 	#if SAVELOAD_LOG_ENABLED == 1
 	Logger::Instance().Log(" Star("+int2str(GetId())+")::LoadDataUniqueStar", SAVELOAD_LOG_DIP);
 	#endif
+	
+	turn_since_last_spark_counter = load_ptree.get<int>("turn_since_last_spark_counter");
+	turn_spark_threshold = load_ptree.get<int>("turn_spark_threshold");	
 }
 
 void Star::ResolveDataUniqueStar()

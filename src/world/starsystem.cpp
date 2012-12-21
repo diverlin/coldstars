@@ -634,7 +634,8 @@ void StarSystem::MindEntitiesInStatic_s()
      			((SpaceStation*)VEHICLE_vec[i])->GetLand()->UpdateInSpaceInStatic();
      		}
      	}
-     	
+
+    	for (unsigned int i=0; i<STAR_vec.size(); i++)     	{ STAR_vec[i]->UpdateInSpaceInStatic(); }     	
     	for (unsigned int i=0; i<PLANET_vec.size(); i++)     	{ PLANET_vec[i]->UpdateInSpaceInStatic(); }
 }      
 
