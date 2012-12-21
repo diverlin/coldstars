@@ -21,7 +21,7 @@
 #include "GameDate.hpp"
 #include "Logger.hpp"
 #include "../config/config.hpp"
-#include "EntityManager.hpp"
+#include "../managers/EntityManager.hpp"
 
 TurnTimer& TurnTimer::Instance()
 {

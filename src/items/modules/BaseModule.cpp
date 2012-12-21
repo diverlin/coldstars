@@ -20,7 +20,7 @@
 #include "../../common/constants.hpp"
 #include "../../common/myStr.hpp"
 #include "../../common/Logger.hpp"
-#include "../../common/EntityManager.hpp"
+#include "../../managers/EntityManager.hpp"
 #include "../../items/equipment/BaseEquipment.hpp"
 
 BaseModule::BaseModule()

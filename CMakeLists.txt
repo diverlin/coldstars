@@ -43,7 +43,7 @@ set (SOURCES
 	src/gui/GuiShop.cpp
 
 	src/common/common.cpp
-	src/common/EntityManager.cpp
+	src/managers/EntityManager.cpp
 	src/common/Collision.cpp
 
 	src/resources/MeshCollector.cpp
@@ -192,7 +192,7 @@ set (SOURCES
 	src/builder/KosmoportBuilder.cpp
 	src/builder/NatureLandBuilder.cpp
 
-	src/builder/God.cpp
+	src/managers/God.cpp
 
 	src/pilots/Player.cpp
 	src/pilots/Npc.cpp           

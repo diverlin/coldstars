@@ -20,7 +20,7 @@
 #include "../common/constants.hpp"
 #include "../common/rand.hpp"
 #include "../common/myStr.hpp"
-#include "../common/EntityManager.hpp"
+#include "../managers/EntityManager.hpp"
 #include "../resources/TextureManager.hpp"
 #include "../items/others/GoodsPack.hpp"
 #include "../builder/ContainerBuilder.hpp"

@@ -29,7 +29,7 @@
 #include "../spaceobjects/Star.hpp"
 
 #include "../common/id.hpp"
-#include "../common/EntityManager.hpp"
+#include "../managers/EntityManager.hpp"
 #include "../common/Logger.hpp"
 #include "../common/rand.hpp"
 

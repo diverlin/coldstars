@@ -23,7 +23,7 @@
 #include "../common/rand.hpp"
 #include "../common/common.hpp"
 #include "../common/myStr.hpp"
-#include "../common/EntityManager.hpp"
+#include "../managers/EntityManager.hpp"
 #include "../world/starsystem.hpp"
 #include "../render/Render.hpp"
 #include "../text/VerticalFlowText.hpp" 

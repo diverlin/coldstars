@@ -25,7 +25,7 @@
 
 #include "../common/rand.hpp"
 #include "../common/myStr.hpp"
-#include "../common/EntityManager.hpp"
+#include "../managers/EntityManager.hpp"
 
 #include "../ai/Task.hpp"
 #include "../ai/StateMachine.hpp"

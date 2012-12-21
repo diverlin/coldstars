@@ -18,7 +18,7 @@
 
 #include "MacroTaskManager.hpp"
 #include "scenarios/ScenarioCollector.hpp"
-#include "../common/EntityManager.hpp"
+#include "../managers/EntityManager.hpp"
 
 MacroTaskManager::MacroTaskManager()
 {

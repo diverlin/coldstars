@@ -18,7 +18,7 @@
 
 #include "Planet.hpp"
 #include "../common/constants.hpp"
-#include "../common/EntityManager.hpp"
+#include "../managers/EntityManager.hpp"
 #include "../common/myStr.hpp"
 #include "../resources/TextureManager.hpp"
 #include "../world/starsystem.hpp"

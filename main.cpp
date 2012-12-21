@@ -23,7 +23,7 @@
 #include "src/builder/GalaxyBuilder.hpp"
 #include "src/builder/PlayerBuilder.hpp"
 #include "src/config/config.hpp"
-#include "src/common/EntityManager.hpp"
+#include "src/managers/EntityManager.hpp"
 
 #include "src/render/Screen.hpp"
 #include "src/gui/UserInput.hpp"
