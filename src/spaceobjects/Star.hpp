@@ -33,7 +33,7 @@ class Star : public BasePlanet
     		Star(int);
     		virtual ~Star();
                 
-		Color4f GetColor()         const { return color; }
+		const Color4f& GetColor() const { return color; }
 		int GetColorId()           const { return textureOb->color_id; }
 		float GetBrightThreshold() const { return textureOb->brightThreshold; }
 		float GetDColor() const { return d_color; }

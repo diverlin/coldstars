@@ -20,6 +20,7 @@
 
 #include "common.hpp"
 #include "constants.hpp"
+#include "Logger.hpp"
 
 int getObjectSize(int w, int h)
 {
@@ -87,16 +88,19 @@ bool get_dPos_ToPoint(const vec2f& p1, const vec2f& p2, float velocity, vec2f& d
     	}    	
 }
 
-void fillColor4fById(int color_id, Color4f& color)
+Color4f fillColor4fById(int color_id)
 {
+	Color4f color;
         switch(color_id)
         {	
         	case COLOR::YELLOW_ID:
 		{
 			color.r = 255/255.0;
 			color.g = 255/255.0;
-			color.b = 255/220.0;
+			color.b = 235/255.0;
 			color.a = 1.0;
+			
+			break;
 		}
 	
 		case COLOR::BLUE_ID:
@@ -105,6 +109,10 @@ void fillColor4fById(int color_id, Color4f& color)
 			color.g = 255/255.0;
 			color.b = 255/255.0;
 			color.a = 1.0;
+			
+			break;
 		}
 	}
+	
+	return color;
 }
