@@ -16,27 +16,37 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GAMEDATE_H
-#define GAMEDATE_H
+#ifndef AGRESSORDATA_H
+#define AGRESSORDATA_H
 
-#include "Date.hpp"
+#include "../common/Date.hpp"
 
-class GameDate
+struct AgressorData
 {
-	public:
-		static GameDate& Instance();
-		~GameDate();
-		
-		void SetDate(unsigned int, unsigned int, unsigned int);
-		void NextDay();
-		const Date& GetDate() const { return date; };
+	int npc_id;
+	Date last_date;
+	int counter;
 	
-	private:
-		GameDate();
-		GameDate(const GameDate&) = delete;
-		GameDate& operator=(const GameDate&) = delete;
-		
-		Date date;
+	AgressorData(int npc_id, const Date& last_date, int counter):npc_id(npc_id), last_date(last_date), counter(counter) {}
+   
+	bool operator<(const AgressorData& rhs) 
+	{ 
+		if (counter < rhs.counter) 
+			return true;
+		else
+			return false;
+	}
 };
 
-#endif
+struct AgressorDataComparator
+{
+	bool operator() (const AgressorData& lhs, const AgressorData& rhs) const
+	{
+		if (lhs.counter < rhs.counter) 
+			return true;
+		else
+			return false;
+    	}
+};	
+#endif 
+

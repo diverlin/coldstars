@@ -27,6 +27,7 @@ class ObjMeshInstance;
 #include "../common/points.hpp"
 #include "../text/InfoTable.hpp" 
 class TextureOb;
+class Vehicle;
 
 struct UnresolvedDataUniqueBaseSpaceEntity
 {
@@ -76,6 +77,7 @@ class BaseSpaceEntity : public Base
 
 		void MovingByExternalForce(const vec2f&, float);
 
+		virtual void TakeIntoAccountAgressor(Vehicle*) {};
 		virtual void Hit(int, bool);
 		void SilentKill();
 		

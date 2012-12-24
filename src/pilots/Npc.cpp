@@ -40,6 +40,8 @@
 #include "../docking/Shop.hpp"
 #include "../text/VerticalFlowText.hpp" 
 
+#include "../common/GameDate.hpp" 
+
 Npc::Npc(int id)
 { 
 	is_alive = true;
@@ -158,7 +160,27 @@ void Npc::AddExpirience(int expirience, bool show_effect)
        		vehicle->GetStarSystem()->Add(text); 
 	}
 }
-     		
+     	
+void Npc::TakeIntoAccountAgressor(Vehicle* agressor)
+{
+	for (std::set<AgressorData>::iterator it=data_agressor_set.begin(); it!=data_agressor_set.end(); ++it)
+	{
+		if (it->npc_id == agressor->GetOwnerNpc()->GetId())
+		{
+			int counter = it->counter;
+			data_agressor_set.erase(it);
+			
+			AgressorData agressor_data(agressor->GetOwnerNpc()->GetId(), GameDate::Instance().GetDate(), counter++);	
+			data_agressor_set.insert(agressor_data);
+	
+			return;
+		}
+	}
+	
+	AgressorData agressor_data(agressor->GetOwnerNpc()->GetId(), GameDate::Instance().GetDate(), 1);	
+	data_agressor_set.insert(agressor_data);
+}
+     	     			
 void Npc::UpdateInSpace(int time, bool show_effect)
 {
         if (time > 0)

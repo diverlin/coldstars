@@ -117,6 +117,8 @@ class Vehicle : public BaseSpaceEntity
         	       
         	void UpdateSpecialAction();         
         	virtual void UpdateInSpace(int, bool) = 0;
+        	
+        	virtual void TakeIntoAccountAgressor(Vehicle*);
         	virtual void Hit(int, bool);
 
         	virtual void PostDeathUniqueEvent(bool); 

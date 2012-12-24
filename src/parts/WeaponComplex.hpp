@@ -37,7 +37,9 @@ class WeaponComplex
                	void SetOwnerVehicle(Vehicle* owner_vehicle) { this->owner_vehicle = owner_vehicle; };
                	TextureOb* GetItemTextureOb(int) const; // used for gui, additional icons
                
-               	int GetWeaponRadiusMin() const { return weapon_radius_min; };
+               	int GetRadiusMin() const { return radius_min; };
+                int GetTotalRadius() const { return total_radius; };
+                int GetTotalDamage() const { return total_damage; };
                
                 bool AddSlot(ItemSlot*);
                 ItemSlot* GetEmptyWeaponSlot() const;
@@ -47,7 +49,7 @@ class WeaponComplex
                      
                 void SetTarget(BaseSpaceEntity*, ItemSlot* item_slot = NULL);     
                        
-        	void Fire(int, int, bool);
+        	void Fire(int, float, bool);
         	
      		void ActivateAllWeapons();
      		void DeactivateAllWeapons();
@@ -64,7 +66,10 @@ class WeaponComplex
         	void RenderTurrels() const;
         	
       	private:
-      		int weapon_radius_min;
+      		int total_damage;
+      		int total_radius;
+      		int radius_min;
+      		
       		Vehicle* owner_vehicle;
       		
       		int fire_delay, d_fire_delay;

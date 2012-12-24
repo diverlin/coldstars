@@ -688,6 +688,11 @@ void Vehicle::LaunchingEvent()
 }
 //// 
 
+/* virtual */
+void Vehicle::TakeIntoAccountAgressor(Vehicle* agressor)
+{
+	owner_npc->TakeIntoAccountAgressor(agressor);
+}
 
 /* virtual */
 void Vehicle::Hit(int damage, bool show_effect)
@@ -705,7 +710,8 @@ void Vehicle::Hit(int damage, bool show_effect)
 		UpdatePropertiesProtection();
 	}
 	
-	damage = damage * ( 1.0 - (owner_npc->GetSkill().GetDefence()*SKILL::DEFENCE_NORMALIZED_RATE + properties.protection*0.01f) );
+	damage *= (1.0 - properties.protection*0.01f);
+	damage *= owner_npc->GetSkill().GetDefenceNormalized();
 	
 	data_life.armor -= damage;
 	
@@ -833,7 +839,9 @@ void Vehicle::UpdatePropertiesFire()
 	#endif
 	
      	weapon_complex.UpdateFireAbility();
-     	//weapon_complex.PrepareWeapons();
+     	
+	properties.total_damage = weapon_complex.GetTotalDamage();
+	properties.total_radius = weapon_complex.GetTotalRadius();
 }
 
 void Vehicle::UpdatePropertiesRadar()
@@ -854,8 +862,6 @@ void Vehicle::UpdatePropertiesRadar()
       		}
       	}
 }
-
-
 
 void Vehicle::UpdatePropertiesJump()
 {

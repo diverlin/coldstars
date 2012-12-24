@@ -33,6 +33,7 @@ set (SOURCES
 	src/common/rect.cpp
 	src/common/points.cpp
 	src/common/TurnTimer.cpp
+	src/common/Date.cpp
 	src/common/GameDate.cpp
 
 	src/resources/GuiTextureObCollector.cpp

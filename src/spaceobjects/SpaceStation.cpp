@@ -72,7 +72,7 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
 	CheckDeath(show_effect);
 	if (time > 0)
 	{
-		weapon_complex.Fire(time, owner_npc->GetSkill().GetAttack(), show_effect);
+		weapon_complex.Fire(time, owner_npc->GetSkill().GetAttackNormalized(), show_effect);
 	}
 }
 

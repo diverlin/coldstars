@@ -19,26 +19,6 @@
 #include "GameDate.hpp"
 #include "myStr.hpp"
 
-Date::Date()
-{
-	day = 0;
-	month = 0;
-	year = 0;
-}
-
-Date::Date(unsigned int day, unsigned int month, unsigned int year)
-{
-	this->day = day;
-	this->month = month;
-	this->year = year;
-}
-
-Date::~Date()
-{}
-	
-std::string Date::GetStr() const { return int2str(day) + "/" + int2str(month) + "/" + int2str(year); };
-
-
 GameDate& GameDate::Instance()
 {
 	static GameDate instance;

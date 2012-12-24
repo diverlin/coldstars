@@ -21,6 +21,7 @@
 #define SKILL_H
 
 #include <boost/property_tree/ptree.hpp>
+#include "../common/constants.hpp"
 
 class Skill
 { 
@@ -33,6 +34,9 @@ class Skill
 		int GetExpirienceNextLevel() const 	{ return expirience_nextlevel; };
 		int GetLevel() const { return level; };
 
+		int GetAttackNormalized()   const { return attack  * SKILL::ATTACK_NORMALIZED_RATE; };   
+		int GetDefenceNormalized()  const { return defence * SKILL::DEFENCE_NORMALIZED_RATE; }; 
+		
 		int GetAttack()   const { return attack; };   
 		int GetDefence()  const { return defence; };  
 		int GetLeader()   const { return leader; };  

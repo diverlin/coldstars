@@ -51,9 +51,7 @@ class Container : public BaseSpaceEntity
                 ItemSlot* item_slot;        
         	void UpdateInfo();  
                 
-                vec2f target_pos;
-        	vec2f d_pos;
-        	
+                vec2f target_pos;    	
         	float velocity;
         	
         	void SaveDataUniqueContainer(boost::property_tree::ptree&, const std::string&) const;		
