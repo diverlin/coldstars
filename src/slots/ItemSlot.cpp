@@ -127,25 +127,23 @@ bool ItemSlot::CheckAmmo() const
     	return false;           
 }
 
-void ItemSlot::FireEvent(int attack_skill, bool show_effect)
+void ItemSlot::FireEvent(float attack_rate, bool show_effect)
 {    
         #if WEAPONSTARGET_LOG_ENABLED == 1 
 	Log("FireEvent");
 	#endif   
 
-	float damage_rate = attack_skill * SKILL::ATTACK_NORMALIZED_RATE;
-
 	switch(GetItem()->GetSubTypeId())
 	{
     		case ENTITY::LAZER_EQUIPMENT_ID:
     		{   
-       			GetLazerEquipment()->FireEvent(GetTarget(), GetSubTarget(), damage_rate, show_effect); 
+       			GetLazerEquipment()->FireEvent(GetTarget(), GetSubTarget(), attack_rate, show_effect); 
        			break;  
     		}
 
     		case ENTITY::ROCKET_EQUIPMENT_ID:
     		{       
-                	GetRocketEquipment()->FireEvent(damage_rate);
+                	GetRocketEquipment()->FireEvent(attack_rate);
                 	break;              
     		}
 
@@ -301,11 +299,11 @@ int ItemSlot::GetItemRadius() const
                 {
                         switch (item->GetSubTypeId())
                         {
-                                case ENTITY::LAZER_EQUIPMENT_ID:   { return ((LazerEquipment*)item)->GetRadius();  break; };
-                                case ENTITY::ROCKET_EQUIPMENT_ID:  { return ((RocketEquipment*)item)->GetRadius(); break; };
+                                case ENTITY::LAZER_EQUIPMENT_ID:   { return GetLazerEquipment()->GetRadius();  break; };
+                                case ENTITY::ROCKET_EQUIPMENT_ID:  { return GetRocketEquipment()->GetRadius(); break; };
 		
-                                case ENTITY::GRAPPLE_EQUIPMENT_ID: { return ((GrappleEquipment*)item)->GetRadius(); break; };
-                                case ENTITY::RADAR_EQUIPMENT_ID:   { return ((RadarEquipment*)item)->GetRadius();   break; };
+                                case ENTITY::GRAPPLE_EQUIPMENT_ID: { return GetGrappleEquipment()->GetRadius(); break; };
+                                case ENTITY::RADAR_EQUIPMENT_ID:   { return GetRadarEquipment()->GetRadius();   break; };
                         }
                         
                         break;
@@ -313,7 +311,31 @@ int ItemSlot::GetItemRadius() const
                 
                 case ENTITY::BOMB_ID:
                 {
-                        return ((Bomb*)item)->GetRadius();   break; 
+                        return GetBomb()->GetRadius();   break; 
+                }
+        }
+        
+        return 0;
+}
+
+int ItemSlot::GetItemDamage() const
+{       
+        switch(item->GetTypeId())
+        {
+                case ENTITY::EQUIPMENT_ID:
+                {
+                        switch (item->GetSubTypeId())
+                        {
+                                case ENTITY::LAZER_EQUIPMENT_ID:   { return GetLazerEquipment()->GetDamage();  break; };
+                                case ENTITY::ROCKET_EQUIPMENT_ID:  { return GetRocketEquipment()->GetDamage(); break; };
+                        }
+                        
+                        break;
+                }
+                
+                case ENTITY::BOMB_ID:
+                {
+                        return GetBomb()->GetDamage();   break; 
                 }
         }
         

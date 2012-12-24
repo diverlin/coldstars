@@ -19,6 +19,8 @@
 #ifndef NPC_H
 #define NPC_H
 
+#include <set>
+
 #include "../common/Base.hpp"
 class BaseAiModel;
 #include "../pilots/Skill.hpp"
@@ -29,6 +31,7 @@ class Planet;
 class GoodsPack;
 class StarSystem;
 #include "../text/InfoTable.hpp"
+#include "../pilots/AgressorData.hpp"
 
 struct UnresolvedDataUniqueNpc
 {
@@ -71,6 +74,7 @@ class Npc : public Base
      		void AddExpirience(int, bool);
      		
      		// AI
+     		void TakeIntoAccountAgressor(Vehicle*);
      		void UpdateInSpace(int, bool);
 
      		void MindInSpace();         		     		
@@ -107,13 +111,14 @@ class Npc : public Base
    	     	     		     		
    	     	Vehicle* vehicle;
    	     	
-   	     	Skill skill; 
-
+   	     	Skill skill;
 
      		BaseAiModel* ai_model;
      		StateMachine state_machine;
    		     	
    		InfoTable info;
+   		
+   		std::set<AgressorData, AgressorDataComparator> data_agressor_set;
      		 	
      		Vehicle* vehicle_to_scan;
      		

@@ -188,6 +188,8 @@ void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
 	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+ " WeaponComplex::SetPreciseFireTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " item_subtype_id=" + getTypeStr(item_slot->GetItem()->GetSubTypeId()) + " id=" + int2str(item_slot->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
 	#endif   
 	
+	target->TakeIntoAccountAgressor(owner_vehicle);
+	
         for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
         {
                 if (slot_weapon_vec[i]->GetSelected() == true )
@@ -209,7 +211,7 @@ void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
 	}
 }
 
-void WeaponComplex::Fire(int timer, int attack_skill, bool show_effect)
+void WeaponComplex::Fire(int timer, float attack_rate, bool show_effect)
 {
      	if (timer < TURN_TIME - fire_delay)
      	{
@@ -219,7 +221,7 @@ void WeaponComplex::Fire(int timer, int attack_skill, bool show_effect)
         		{
 	                        if ((*it)->ValidateTarget() == true)
 	                        {
-	      				(*it)->FireEvent(attack_skill, show_effect);
+	      				(*it)->FireEvent(attack_rate, show_effect);
 					if ((*it)->GetSubTarget() == NULL)
 	           			{
 	           				fire_delay += d_fire_delay;
@@ -258,13 +260,9 @@ void WeaponComplex::ValidateAllWeaponsTarget()
 
 void WeaponComplex::UpdateFireAbility()
 {
-     	//total_damage = 0;
-     	//avr_damage =
-     	//avr_radius =  
-     	
-     	//int sum_fire_radius = 0;
-	
-	weapon_radius_min = 0;
+     	total_damage = 0;
+     	total_radius = 0;
+     	radius_min = 0;
 	
      	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
      	{
@@ -272,13 +270,13 @@ void WeaponComplex::UpdateFireAbility()
 		{ 
 			if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
 			{		
-				int weapon_radius = slot_weapon_vec[i]->GetItemRadius();
-				if ( (weapon_radius < weapon_radius_min) or (weapon_radius_min == 0) )
+				int radius = slot_weapon_vec[i]->GetItemRadius();
+				if ( (radius < radius_min) or (radius_min == 0) )
 				{
-					weapon_radius_min = weapon_radius;
+					radius_min = radius;
 				}
-				//sum_damage      += slot_weapon_vec[i]->getItemDamage(); 
-				//sum_fire_radius += slot_weapon_vec[i]->getItemRadius(); 
+				total_damage += slot_weapon_vec[i]->GetItemDamage(); 
+				total_radius += slot_weapon_vec[i]->GetItemRadius(); 
 			}
 		}
      	}

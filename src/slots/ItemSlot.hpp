@@ -114,7 +114,7 @@ class ItemSlot : public BaseSlot
 		bool ValidateTarget();                    
                 void ResetTarget();
                 bool CheckAmmo() const;
-                void FireEvent(int, bool);
+                void FireEvent(float, bool);
                 
 		void UpdateVehiclePropetries() const;
                 
@@ -139,7 +139,8 @@ class ItemSlot : public BaseSlot
 		virtual void ResolveData();
 
            	int GetItemRadius() const;
-           			
+           	int GetItemDamage() const;
+           	           			
         private:                               
                 Turrel* turrel;          // only for weapons slot
                 
