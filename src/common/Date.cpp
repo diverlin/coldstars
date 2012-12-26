@@ -35,6 +35,23 @@ Date::Date(unsigned int day, unsigned int month, unsigned int year)
 
 Date::~Date()
 {}
-	
+
+bool Date::operator==(const Date& rhs) const
+{
+        return ((day == rhs.day) and (month == rhs.month) and (year == rhs.year));
+}
+
+bool Date::operator!=(const Date& rhs) const
+{
+        return ((day != rhs.day) or (month != rhs.month) or (year != rhs.year));
+}
+  
+void Date::operator=(const Date& rhs)
+{
+        day   = rhs.day;
+	month = rhs.month;
+	year  = rhs.year;
+}
+                
 std::string Date::GetStr() const { return int2str(day) + "/" + int2str(month) + "/" + int2str(year); };
 

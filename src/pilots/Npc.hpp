@@ -61,7 +61,7 @@ class Npc : public Base
 		StarSystem* GetFailBackStarSystem() 	const { return failback_starsystem; };
 		Vehicle* GetVehicle()           	const { return vehicle; };
 		Skill& GetSkill() 			{ return skill; };
-		Vehicle* GetScanTarget()        	const { return vehicle_to_scan; };	
+		Vehicle* GetScanTarget()        	const { return vehicle_to_scan; };
 		Observation& GetObservation()   	{ return observation; };
 		unsigned long int GetCredits()  	const { return credits; };   
 		StateMachine& GetStateMachine() { return state_machine; };
@@ -77,7 +77,7 @@ class Npc : public Base
      		void TakeIntoAccountAgressor(Vehicle*);
      		void UpdateInSpace(int, bool);
 
-     		void MindInSpace();         		     		
+     		void MindInSpace();
      		void MindInKosmoport();
                 //
 
@@ -97,9 +97,11 @@ class Npc : public Base
                 //bool BuyArmorAsMuchAsPossible();
                 bool BuyGoods();
                                 
-                void SaveData(boost::property_tree::ptree&) const;		
+                void SaveData(boost::property_tree::ptree&) const;
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
+                
+                std::string GetAgressorSetString() const;
 		
    	private:
    		bool is_alive;
@@ -108,7 +110,7 @@ class Npc : public Base
      		bool upper_control;
 
    	     	StarSystem* failback_starsystem;
-   	     	     		     		
+
    	     	Vehicle* vehicle;
    	     	
    	     	Skill skill;
@@ -127,9 +129,11 @@ class Npc : public Base
 		UnresolvedDataUniqueNpc data_unresolved_npc;
 
                 void AsteroidScenario();
+                void EnemyScenario();
+                                
                 void CheckNeeds();
-                                    		
-		void UpdateInfo();	     	
+                                
+		void UpdateInfo();
     		
      		void SaveDataUniqueNpc(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueNpc(const boost::property_tree::ptree&);
