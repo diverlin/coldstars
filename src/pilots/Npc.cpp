@@ -114,16 +114,11 @@ void Npc::MindInKosmoport()
 void Npc::MindInSpace()
 {
 	#if AI_LOG_ENABLED == 1 
-	Logger::Instance().Log("npc_id="+int2str(GetId())+" Npc::MindInSpace START", AI_LOG_DIP); 
+	Logger::Instance().Log("Npc("+int2str(GetId())+")::MindInSpace START", AI_LOG_DIP); 
 	#endif 
 
-        vehicle->UpdateAllFunctionalItemsInStatic();	
+        vehicle->UpdateAllFunctionalItemsInStatic();
 	vehicle->GetWeaponComplex().PrepareWeapons();
-	// this check is performed in Dynamic, no need to repeat in Static
-	//if (vehicle->ableTo.GRAB == true) 
-	//{
-        	//vehicle->GetGrappleSlot()->GetGrappleEquipment()->ValidateTargets(); 
-        //}
         
 	if (upper_control == false)
 	{
@@ -135,18 +130,22 @@ void Npc::MindInSpace()
 			ai_model->UpdateInStatic(this);
 		}
       
+                EnemyScenario();
+      
 		if (observation.see.ASTEROID == true)
 		{
                 	AsteroidScenario();
 		}             
 
-       		state_machine.UpdateInStaticInSpace();                 
+       		state_machine.UpdateInStaticInSpace(); 
+                
+
         }
 
         vehicle->GetDriveComplex().UpdatePath();
         
         #if AI_LOG_ENABLED == 1 
-	Logger::Instance().Log("npc_id="+int2str(GetId())+" Npc::MindInSpace END", AI_LOG_DIP); 
+	Logger::Instance().Log("Npc("+int2str(GetId())+")::MindInSpace END", AI_LOG_DIP); 
 	#endif 
 }
 
@@ -167,20 +166,23 @@ void Npc::TakeIntoAccountAgressor(Vehicle* agressor)
 	{
 		if (it->npc_id == agressor->GetOwnerNpc()->GetId())
 		{
-			int counter = it->counter;
-			data_agressor_set.erase(it);
-			
-			AgressorData agressor_data(agressor->GetOwnerNpc()->GetId(), GameDate::Instance().GetDate(), counter++);	
-			data_agressor_set.insert(agressor_data);
-	
-			return;
+                        if (it->last_date != GameDate::Instance().GetDate())
+                        {
+                                int counter = it->counter;
+                                data_agressor_set.erase(it);
+                                
+                                AgressorData agressor_data(agressor->GetOwnerNpc()->GetId(), GameDate::Instance().GetDate(), ++counter);
+                                data_agressor_set.insert(agressor_data);
+                        }
+
+                        return;
 		}
 	}
-	
+
 	AgressorData agressor_data(agressor->GetOwnerNpc()->GetId(), GameDate::Instance().GetDate(), 1);	
 	data_agressor_set.insert(agressor_data);
 }
-     	     			
+
 void Npc::UpdateInSpace(int time, bool show_effect)
 {
         if (time > 0)
@@ -231,6 +233,25 @@ void Npc::CheckNeeds()
    	needsToDo.SELL = false;        
 }
 
+void Npc::EnemyScenario()
+{
+        for (unsigned int i=0; i<observation.visible_VEHICLE_pair_vec.size(); i++)
+        {
+                for (std::set<AgressorData>::iterator it = data_agressor_set.begin(); it != data_agressor_set.end(); ++it)
+                {
+                        if (observation.visible_VEHICLE_pair_vec[i].object->GetOwnerNpc()->GetId() == it->npc_id)
+                        {
+                                vehicle->GetWeaponComplex().DeactivateAllWeapons();
+
+                                vehicle->GetWeaponComplex().ActivateAllWeapons();
+                                vehicle->GetWeaponComplex().SetTarget(observation.visible_VEHICLE_pair_vec[i].object);
+                        
+                                return;
+                        }
+                }
+        }           
+}
+
 void Npc::AsteroidScenario()
 {
         vehicle->GetWeaponComplex().DeactivateAllWeapons();
@@ -240,7 +261,6 @@ void Npc::AsteroidScenario()
                 
         //printf("TARGET => ship_id, asteroid id = %i/%i\n", ship->GetId(), sorted_visible_ASTEROID_pList[0]->GetId());
 }
-
 
 Planet* Npc::GetPlanetForDocking()
 {
@@ -290,6 +310,8 @@ void Npc::UpdateInfo()
     	info.addNameStr("expirience:");   info.addValueStr( int2str(skill.GetExpirience()) + " / " + int2str(skill.GetExpirienceNextLevel()) );	
     	info.addNameStr("skills:");   info.addValueStr( int2str(skill.GetAvailiablePoints()) );	
 	
+        info.addNameStr("npc_agress:"); info.addValueStr( GetAgressorSetString() );
+        
     	if (state_machine.GetMacroTaskManager().GetScenario() != NULL)
     	{ 	
     	info.addNameStr("macro_task:");   info.addValueStr( state_machine.GetMacroTaskManager().GetScenario()->GetDescription(this) ); 
@@ -400,4 +422,15 @@ void Npc::ResolveDataUniqueNpc()
 	{
 		state_machine.SetCurrentMicroTask(data_unresolved_npc.microtask);
 	}
-}		
+}
+
+std::string Npc::GetAgressorSetString() const
+{
+        std::string str;
+        for (std::set<AgressorData>::iterator it = data_agressor_set.begin(); it != data_agressor_set.end(); ++it)
+        {
+                str += int2str(it->npc_id) + ":" + int2str(it->counter) + " ";
+        }
+        
+        return str;
+}
