@@ -28,6 +28,8 @@
 #include "../../world/starsystem.hpp"
 #include "../../parts/Turrel.hpp"
 
+#include "../../common/Logger.hpp"
+
 LazerEquipment::LazerEquipment(int id)
 {
         data_id.id         = id;
@@ -114,7 +116,7 @@ void LazerEquipment::FireEvent(BaseSpaceEntity* target, ItemSlot* subtarget, flo
 			damage_rate /= 3; // lower damage is used for precise fire
 			
 		}
-		 
+
 		target->Hit(damage*damage_rate, show_effect);
 		DeteriorationEvent();
 	

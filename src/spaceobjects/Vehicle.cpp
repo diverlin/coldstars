@@ -52,7 +52,7 @@
 
 #include "../spaceobjects/Planet.hpp"
 #include "../spaceobjects/SpaceStation.hpp"
-#include "Container.hpp"
+#include "../spaceobjects/Container.hpp"
 #include "../parts/WeaponComplex.hpp"
 
 #include "../text/VerticalFlowText.hpp" 
