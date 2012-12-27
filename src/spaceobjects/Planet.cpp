@@ -59,10 +59,11 @@ void Planet::PutChildsToGarbage() const
 	EntityGarbage::Instance().Add(land);
 }
 
-void Planet::BindLand(BaseLand* land)       		
+void Planet::BindLand(BaseLand* land)
 {
 	this->land = land;
 	this->land->SetOwner(this);
+        SetSubTypeId(land->GetTypeId());
 }
 	
 void Planet::AddVehicle(Vehicle* vehicle) const

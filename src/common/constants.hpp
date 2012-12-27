@@ -173,16 +173,11 @@ const int SIZE_7_AREA = 160*160;
 const int SIZE_8_AREA = 200*200;
 const int SIZE_9_AREA = 240*240;
 
-const int SIZE_1_ID = 1;
-const int SIZE_2_ID = 2;
-const int SIZE_3_ID = 3; 
-const int SIZE_4_ID = 4;  
-const int SIZE_5_ID = 5;  
-const int SIZE_6_ID = 6;  
-const int SIZE_7_ID = 7;  
-const int SIZE_8_ID = 8;  
-const int SIZE_9_ID = 9;  
-const int SIZE_10_ID = 10;  
+enum SIZE
+{
+        SIZE_1_ID=1, SIZE_2_ID, SIZE_3_ID, SIZE_4_ID, SIZE_5_ID, 
+        SIZE_6_ID, SIZE_7_ID, SIZE_8_ID, SIZE_9_ID, SIZE_10_ID 
+};
 
 const int NONE_ID = -1;
 const int FAIL_ID = 1;

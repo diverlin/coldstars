@@ -19,11 +19,17 @@
 #include "God.hpp"
 
 #include "../spaceobjects/Planet.hpp"
+#include "../spaceobjects/BlackHole.hpp"
+
+#include "../docking/Kosmoport.hpp"
+#include "../docking/NatureLand.hpp"
+
+#include "../builder/KosmoportBuilder.hpp"
+#include "../builder/NatureLandBuilder.hpp"
 #include "../builder/NpcBuilder.hpp"
+#include "../builder/ShipBuilder.hpp"
 #include "../builder/SpaceStationBuilder.hpp"
 #include "../builder/SatelliteBuilder.hpp"
-#include "../builder/ShipBuilder.hpp"
-#include "../spaceobjects/BlackHole.hpp"
 
 #include "../common/Logger.hpp"
 #include "../common/rand.hpp"
@@ -60,45 +66,60 @@ void God::CreateLifeInStarSystem(StarSystem* starsystem) const
 	        CreateSpaceStations(starsystem, spacestation_num);
 	}	
 }
-  		
-  		             	                
+        
 void God::CreateLifeToPlanets(StarSystem* starsystem) const
 {
         for(int i=0; i<starsystem->PLANET_vec.size(); i++)
-        {         
-        	{      
-                	Satellite* satellite = SatelliteBuilder::Instance().GetNewSatellite();
-                	SatelliteBuilder::Instance().Equip(satellite);           		// improove
-                 
-                	{       	
-                		int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
-                		int npc_subtype_id = ENTITY::WARRIOR_ID;
+        {        
+                Planet* planet = starsystem->PLANET_vec[i];
                 
-        			Npc* npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id);
-                		satellite->BindOwnerNpc(npc);
-                	}
+                unsigned long int population = 0;
+                getRandBool() ? population = getRandInt(1000, 4000) : population = 0;
+                planet->SetPopulation(population);
                 
-                	starsystem->AddVehicle(satellite, vec2f(0, 0), 0, starsystem->PLANET_vec[i]);
-		}
-		
-		for (int j=0; j<4; j++)
-		{
-			int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
-			int npc_subtype_id = getRandNpcSubTypeId(npc_race_id);
-			
-		        int ship_race_id = npc_race_id;         
-        		int ship_subtype_id = npc_subtype_id;  
-	        	int ship_size_id = getRandInt(1, 9);
-	        	int weapons_num = getRandInt(1, 5);
-	
-	        	Ship* new_ship = ShipBuilder::Instance().GetNewShip(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
-	        	ShipBuilder::Instance().Equip(new_ship); // improove
-	
-	        	Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id);
-	        	new_ship->BindOwnerNpc(new_npc);
-	        	
-	        	starsystem->PLANET_vec[i]->AddVehicle(new_ship);
-		}
+                BaseLand* land = NULL;
+                if (population > 0) { land = KosmoportBuilder::Instance().GetNewKosmoport(); }
+                else                { land = NatureLandBuilder::Instance().GetNewNatureLand(); }
+                        
+                planet->BindLand(land);
+        
+                if (population > 0) 
+                {
+                        for (int j=0; j<1; j++)
+                        {      
+                                Satellite* satellite = SatelliteBuilder::Instance().GetNewSatellite();
+                                SatelliteBuilder::Instance().Equip(satellite);           		// improove
+                         
+                                {
+                                        int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+                                        int npc_subtype_id = ENTITY::WARRIOR_ID;
+                        
+                                        Npc* npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id);
+                                        satellite->BindOwnerNpc(npc);
+                                }
+                        
+                                starsystem->AddVehicle(satellite, vec2f(0, 0), 0, planet);
+                        }
+                        
+                        for (int j=0; j<4; j++)
+                        {
+                                int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+                                int npc_subtype_id = getRandNpcSubTypeId(npc_race_id);
+                                
+                                int ship_race_id = npc_race_id;         
+                                int ship_subtype_id = npc_subtype_id;  
+                                int ship_size_id = getRandInt(SIZE_1_ID, SIZE_9_ID);
+                                int weapons_num = getRandInt(1, 5);
+                
+                                Ship* new_ship = ShipBuilder::Instance().GetNewShip(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
+                                ShipBuilder::Instance().Equip(new_ship); // improove
+                
+                                Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id);
+                                new_ship->BindOwnerNpc(new_npc);
+                                
+                                planet->AddVehicle(new_ship);
+                        }
+                }
         }
 }
 
