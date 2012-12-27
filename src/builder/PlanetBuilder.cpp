@@ -18,20 +18,13 @@
 
 #include "PlanetBuilder.hpp"
 #include "../spaceobjects/Planet.hpp"
-#include "../docking/Kosmoport.hpp"
 
 #include "../common/id.hpp"
 #include "../common/Logger.hpp"
 #include "../managers/EntityManager.hpp"
 #include "../common/rand.hpp"
 #include "../resources/TextureManager.hpp"
-#include "../builder/KosmoportBuilder.hpp"
-#include "../builder/NatureLandBuilder.hpp"
-#include "../docking/NatureLand.hpp"
 #include "../resources/MeshCollector.hpp"
-
-#include "../builder/NpcBuilder.hpp"
-#include "../builder/ShipBuilder.hpp"
 
 PlanetBuilder& PlanetBuilder::Instance()
 {
@@ -91,27 +84,10 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
         TextureOb* textureOb_atmosphere = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ATMOSPHERE_ID); 
         
         planet->SetPlanetData(planet_data);
-
-	unsigned long int population = 0;
-	getRandBool() ? population = getRandInt(1000, 4000) : population = 0;
-        planet->SetPopulation(population);
-        
-	BaseLand* land;
-	if (population > 0) 
-	{ 
-		land = KosmoportBuilder::Instance().GetNewKosmoport();
-	}
-        else                
-        { 
-        	land = NatureLandBuilder::Instance().GetNewNatureLand(); 
-        }
-        	
-	planet->BindLand(land);
 	
 	planet->SetTextureOb(textureOb);
-	planet->SetSubTypeId(ENTITY::KOSMOPORT_ID);
 	planet->SetLifeData(data_life);
-	planet->SetMesh(MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_NORMAL_ID));	
+	planet->SetMesh(MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_NORMAL_ID));
 	planet->SetScale(getRandInt(ENTITY::PLANET::SIZE_MIN_, ENTITY::PLANET::SIZE_MAX_));
 
 	planet->CalcCollisionrRadius();

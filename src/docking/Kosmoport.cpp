@@ -54,10 +54,10 @@ void Kosmoport::PutChildsToGarbage() const
 	EntityGarbage::Instance().Add(goverment);
 }
        
-void Kosmoport::BindAngar(Angar* angar) 			
+void Kosmoport::BindAngar(Angar* angar)
 { 
 	this->angar= angar; 
-	this->angar->SetOwnerKosmoport(this);	
+	this->angar->SetOwnerKosmoport(this);
 }
 
 void Kosmoport::BindStore(Store* store) 			
