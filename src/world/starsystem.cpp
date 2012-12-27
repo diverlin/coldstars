@@ -497,7 +497,7 @@ void StarSystem::Update(int time, bool detalied_simulation)
 		{    		
 			UpdateStates();
 		
-    			MindEntitiesInStatic_s();     			
+    			UpdateInSpaceInStatic_s();     			
 
 			garbage_effects.clear(); 
 			
@@ -624,14 +624,14 @@ void StarSystem::UpdateEntities_s(int time, bool show_effect)
 	for (unsigned int i=0; i<distantNebulaEffect_vec.size(); i++) { distantNebulaEffect_vec[i]->Update(); } 
 }  
       
-void StarSystem::MindEntitiesInStatic_s()
+void StarSystem::UpdateInSpaceInStatic_s()
 {
      	for (unsigned int i=0; i<VEHICLE_vec.size(); i++) 		
      	{ 
-     		VEHICLE_vec[i]->GetOwnerNpc()->MindInSpace(); 
+     		VEHICLE_vec[i]->GetOwnerNpc()->UpdateInSpaceInStatic(); 
      		if (VEHICLE_vec[i]->GetSubTypeId() == ENTITY::SPACESTATION_ID)
      		{
-     			((SpaceStation*)VEHICLE_vec[i])->GetLand()->UpdateInSpaceInStatic();
+     			((SpaceStation*)VEHICLE_vec[i])->GetLand()->UpdateInStatic();
      		}
      	}
 

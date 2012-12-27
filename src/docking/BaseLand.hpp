@@ -43,7 +43,7 @@ class BaseLand : public Base
                 virtual bool AddVehicle(Vehicle*) = 0;
                 virtual bool RemoveVehicle(Vehicle*) = 0; 
                 
-                virtual void UpdateInSpaceInStatic() = 0;  
+                virtual void UpdateInStatic() = 0;  
                 
                 virtual std::string GetDockVehicleStr() const = 0;
 		  

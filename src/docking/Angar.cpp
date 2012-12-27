@@ -91,7 +91,7 @@ bool Angar::RepairItem(Npc* npc, BaseItem* item) const
 	}
 }
                          
-void Angar::Ai() const
+void Angar::UpdateInStatic() const
 {
         for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++)
         {
@@ -99,7 +99,7 @@ void Angar::Ai() const
                 {
                 	if (vehicle_visitors_slot_vec[i]->GetVehicle()->GetOwnerNpc() != NULL)
                 	{
-                        	vehicle_visitors_slot_vec[i]->GetVehicle()->GetOwnerNpc()->MindInKosmoport();
+                        	vehicle_visitors_slot_vec[i]->GetVehicle()->GetOwnerNpc()->UpdateInKosmoportInStatic();
                 	}
                	}
         }

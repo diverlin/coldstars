@@ -33,6 +33,7 @@ class BaseEquipment;
 #include "../parts/ProtectionComplex.hpp"
 #include "../parts/VehicleKorpusData.hpp"
 #include "../parts/VehiclePropetries.hpp"
+#include "../parts/VehicleNeeds.hpp"
 
 class BaseParticleSystem;
 class ShockWaveEffect;
@@ -45,7 +46,7 @@ struct UnresolvedDataUniqueVehicle
 	int starsystem_hyper_id;
 	int parent_vehicleslot_id;
 	int land_id;
-	//std::string textureOb_gui_path; 	
+	//std::string textureOb_gui_path; 
 };
 
 class Vehicle : public BaseSpaceEntity
@@ -74,9 +75,12 @@ class Vehicle : public BaseSpaceEntity
         	VehicleSlot* GetParentVehicleSlot() const { return parent_vehicleslot; };
         	
         	const VehiclePropetries& GetProperties() const { return properties; };
+                const VehicleNeeds& GetNeeds() const { return needs; };
                                
                 VehicleKorpusData& GetKorpusData() { return data_korpus; };
                 			
+                StarSystem* GetFailBackStarSystem() const { return failback_starsystem; };
+                                
                 void AddItemSlot(ItemSlot*); 
                 
                 bool GetAllItemsFromVehicle(Vehicle*);
@@ -123,6 +127,7 @@ class Vehicle : public BaseSpaceEntity
 
         	virtual void PostDeathUniqueEvent(bool); 
         	
+                void CheckNeeds();
         	void UpdateAllFunctionalItemsInStatic();
              	void IncreaseMass(int);
              	void DecreaseMass(int);
@@ -170,6 +175,7 @@ class Vehicle : public BaseSpaceEntity
 		int special_action_id;
 	
 	        VehiclePropetries properties;
+                VehicleNeeds needs;
                 VehicleKorpusData data_korpus;
                 
         	WeaponComplex     weapon_complex;
@@ -196,6 +202,8 @@ class Vehicle : public BaseSpaceEntity
                                 
                 VehicleSlot* parent_vehicleslot;
                         
+                StarSystem* failback_starsystem;
+                                        
                 ItemSlot* GetFuctionalSlot(int) const;
        	        ItemSlot* GetEmptyCargoSlot();
        	        ItemSlot* GetEmptyArtefactSlot() const;

@@ -23,7 +23,7 @@
 struct VehiclePropetries
 {    
 	int free_space;
-	
+
 	int protection;
 	int radar;
 	int speed;  // depends on mass and drive
@@ -42,15 +42,15 @@ struct VehiclePropetries
 	
 	int artefact_gravity;
 	int artefact_protection;
-		
+
 	// simplification
 	int average_damage;
 	int average_fire_radius;
-	
+
 	bool equipment_radar;
 	bool shield_effect_enabled;
 	bool hibernate_mode_enabled;
-	
+
 	int total_damage;
         int total_radius;
         

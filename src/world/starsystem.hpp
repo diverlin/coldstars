@@ -159,8 +159,8 @@ class StarSystem : public BaseSpaceEntity
     		            		    
                 void LaunchingEvent() const;
     		
-    		void MindEntitiesInStatic_s();
-    		void UpdateEntities_s(int, bool);   		
+    		void UpdateInSpaceInStatic_s();
+    		void UpdateEntities_s(int, bool);
     		
     		void UpdateStates();
     		

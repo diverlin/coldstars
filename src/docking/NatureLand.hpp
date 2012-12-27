@@ -51,7 +51,7 @@ class NatureLand : public BaseLand
                 
                 virtual bool GetPermissionToLand() const;
                                 
-                virtual void UpdateInSpaceInStatic();      
+                virtual void UpdateInStatic();      
                 
                 virtual std::string GetDockVehicleStr() const;
                                 

@@ -112,9 +112,9 @@ bool Kosmoport::RemoveVehicle(Vehicle* vehicle)
 
 
 /* virtual */
-void Kosmoport::UpdateInSpaceInStatic()
+void Kosmoport::UpdateInStatic()
 {
-	angar->Ai();	
+	angar->UpdateInStatic();
 }
 
 /* virtual */

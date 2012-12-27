@@ -45,21 +45,18 @@
 Npc::Npc(int id)
 { 
 	is_alive = true;
-	data_id.id = id;
-    	data_id.type_id    = ENTITY::NPC_ID;
+	data_id.id      = id;
+    	data_id.type_id = ENTITY::NPC_ID;
     	race_id = NONE_ID;
-    	
+
     	upper_control = false;
 
-    	credits = 1000;   	
-
+    	credits = 1000;
 
         vehicle    = NULL;
-    	
+
     	vehicle_to_scan = NULL;
-    	
-    	failback_starsystem = NULL;
- 		
+
         observation.SetNpcOwner(this);
         state_machine.SetNpcOwner(this);   
         
@@ -83,13 +80,12 @@ bool Npc::WithdrawCredits(int amount)
 	return false;
 }
 
-				
-void Npc::MindInKosmoport()
-{   		
-	if (needsToDo.REPAIR_KORPUS == true)
+void Npc::UpdateInKosmoportInStatic()
+{
+	if (vehicle->GetNeeds().repair_korpus == true)
 	{
                 vehicle->BuyKorpusRepair();
-		needsToDo.REPAIR_KORPUS = false;
+		//vehicle->GetNeeds().repair_korpus = false;
 	}
 	
 	// if all things are DONE
@@ -111,10 +107,10 @@ void Npc::MindInKosmoport()
 
 }
 
-void Npc::MindInSpace()
+void Npc::UpdateInSpaceInStatic()
 {
 	#if AI_LOG_ENABLED == 1 
-	Logger::Instance().Log("Npc("+int2str(GetId())+")::MindInSpace START", AI_LOG_DIP); 
+	Logger::Instance().Log("Npc("+int2str(GetId())+")::UpdateInSpaceInStatic START", AI_LOG_DIP); 
 	#endif 
 
         vehicle->UpdateAllFunctionalItemsInStatic();
@@ -122,7 +118,7 @@ void Npc::MindInSpace()
         
 	if (upper_control == false)
 	{
-        	CheckNeeds();
+        	vehicle->CheckNeeds();
         	observation.ObserveAllInSpace();  
                         
         	if (ai_model)
@@ -130,22 +126,20 @@ void Npc::MindInSpace()
 			ai_model->UpdateInStatic(this);
 		}
       
-                EnemyScenario();
+                ScenarioFireVehicleAgressor();
       
 		if (observation.see.ASTEROID == true)
 		{
-                	AsteroidScenario();
+                	ScenarioFireAsteroid();
 		}             
 
-       		state_machine.UpdateInStaticInSpace(); 
-                
-
+       		state_machine.UpdateInStaticInSpace();
         }
 
         vehicle->GetDriveComplex().UpdatePath();
         
         #if AI_LOG_ENABLED == 1 
-	Logger::Instance().Log("Npc("+int2str(GetId())+")::MindInSpace END", AI_LOG_DIP); 
+	Logger::Instance().Log("Npc("+int2str(GetId())+")::UpdateInSpaceInStatic END", AI_LOG_DIP); 
 	#endif 
 }
 
@@ -191,49 +185,7 @@ void Npc::UpdateInSpace(int time, bool show_effect)
        	}
 }     	
 
-void Npc::CheckNeeds()
-{
-        if (vehicle->GetArmor() < 0.5*vehicle->GetKorpusData().armor)   // move to ship
-	{
-		needsToDo.REPAIR_KORPUS = true;
-		//if (quest_self != g_QUEST_SELF_SAFETY)
-		//{
-			//quest_self = g_QUEST_SELF_SAFETY;
-		//}
-	}
-        else
-        {
-		needsToDo.REPAIR_KORPUS = false;                
-        }
-
-        // check conditions of all items here and set REPAIR_EQUIPMENT flag accordingly
-        needsToDo.REPAIR_EQUIPMENT = false;
-        
-        // checkhjump
-        failback_starsystem = GetClosestStarSystem(false);
-        if (failback_starsystem != NULL)
-        {
-   		needsToDo.GET_FUEL = false;
-   	}
-   	else
-   	{
-   	   	needsToDo.GET_FUEL = true;
-   	}
-        
-        // check if rockets are ended
-   	needsToDo.GET_BULLETS = false;
-        
-        // check credits
-        needsToDo.GET_CREDITS = false;
-        
-   	// ???
-        needsToDo.BUY = false;
-        
-        // check otsec and free space        
-   	needsToDo.SELL = false;        
-}
-
-void Npc::EnemyScenario()
+void Npc::ScenarioFireVehicleAgressor()
 {
         for (unsigned int i=0; i<observation.visible_VEHICLE_pair_vec.size(); i++)
         {
@@ -252,14 +204,12 @@ void Npc::EnemyScenario()
         }           
 }
 
-void Npc::AsteroidScenario()
+void Npc::ScenarioFireAsteroid()
 {
         vehicle->GetWeaponComplex().DeactivateAllWeapons();
 
         vehicle->GetWeaponComplex().ActivateAllWeapons();
         vehicle->GetWeaponComplex().SetTarget(observation.visible_ASTEROID_pair_vec[0].object);
-                
-        //printf("TARGET => ship_id, asteroid id = %i/%i\n", ship->GetId(), sorted_visible_ASTEROID_pList[0]->GetId());
 }
 
 Planet* Npc::GetPlanetForDocking()
