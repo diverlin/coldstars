@@ -21,7 +21,7 @@
 
 #include "../resources/ObjMeshInstance.hpp"
 #include "../common/myVector.hpp"
-
+#include "../common/constants.hpp"
 
 class RaceInformationCollector
 {
@@ -71,23 +71,6 @@ struct PlanetData
     	{};
 };
 
-
-
-struct NeedsToDo
-{
-	NeedsToDo();
-
-	bool REPAIR_KORPUS;
-	bool REPAIR_EQUIPMENT;
-
-	bool GET_FUEL;
-	bool GET_BULLETS;
-	bool GET_CREDITS;
-
-	bool BUY;
-	bool SELL;
-};
-
 struct LifeData
 {
 	bool is_alive;
@@ -103,19 +86,25 @@ struct LifeData
         armor(1),
         life_time(0),
         dying_time(0),
-        garbage_ready(false) {};
+        garbage_ready(false) 
+        {};
         
 };
 
 
 struct IdData  
 {
-	IdData();
-
 	int id;
 	int type_id;
 	int subtype_id;
 	int subsubtype_id;
+
+	IdData():
+        id(NONE_ID),
+	type_id(NONE_ID),
+	subtype_id(NONE_ID),
+	subsubtype_id(NONE_ID)
+        {}
 };
 
 

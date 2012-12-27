@@ -21,6 +21,7 @@
 #include "../../../spaceobjects/Planet.hpp"
 #include "../../../ai/StateMachine.hpp"
 #include "../../../ai/Task.hpp"
+#include "../../../spaceobjects/Vehicle.hpp"
 
 MacroScenarioSelfSafety::MacroScenarioSelfSafety() 
 {
@@ -44,9 +45,12 @@ void MacroScenarioSelfSafety::UpdateInStaticInSpace(Npc* npc) const
 	{
 		if (npc->GetStateMachine().GetMacroTaskManager().GetTarget()->GetTypeId() != ENTITY::STARSYSTEM_ID)
 		{
-			Task microtask(MICROSCENARIO::JUMP_ID, npc->GetFailBackStarSystem()->GetId());
-			npc->GetStateMachine().SetCurrentMicroTask(microtask);
-		}
+                        if (npc->GetVehicle()->GetFailBackStarSystem() != NULL)
+                        {
+                                Task microtask(MICROSCENARIO::JUMP_ID, npc->GetVehicle()->GetFailBackStarSystem()->GetId());
+                                npc->GetStateMachine().SetCurrentMicroTask(microtask);
+                        }
+                }
 	}        
 }
 

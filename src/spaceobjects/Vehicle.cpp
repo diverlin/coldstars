@@ -78,7 +78,8 @@ Vehicle::Vehicle()
 	
 	owner_npc = NULL;
        	starsystem = NULL; 
-      	
+        failback_starsystem = NULL;
+
     	weapon_complex.SetOwnerVehicle(this);
     	drive_complex.SetOwnerVehicle(this);
     	protection_complex.SetOwnerVehicle(this);
@@ -747,6 +748,33 @@ void Vehicle::PostDeathUniqueEvent(bool show_effect)
      	{
         	createExplosion(starsystem, points.GetCenter(), textureOb->size_id);        		
         }
+}
+
+
+void Vehicle::CheckNeeds()
+{
+        if (data_life.armor < 0.5*data_korpus.armor) { needs.repair_korpus = true; }
+        else                                         { needs.repair_korpus = false; }
+
+
+        needs.repair_equipment = false;
+        
+        // checkhjump
+        failback_starsystem = owner_npc->GetClosestStarSystem(false);
+        if (failback_starsystem != NULL)
+        {
+   		needs.get_fuel = false;
+   	}
+   	else
+   	{
+   	   	needs.get_fuel = true;
+   	}
+        
+        // check if rockets are ended
+   	needs.get_ammo = false;
+        
+        // check credits
+        needs.get_credits = false;     
 }
 
 void Vehicle::UpdateAllFunctionalItemsInStatic()

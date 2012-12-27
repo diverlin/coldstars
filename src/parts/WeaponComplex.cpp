@@ -158,7 +158,7 @@ void WeaponComplex::DeactivateWeaponsBySubTypeId(int weapon_subtype_id)
 	{
 		if (slot_weapon_reloaded_vec[i]->GetItem()->GetSubTypeId() == weapon_subtype_id)
 		{
-               		slot_weapon_reloaded_vec[i]->DeselectEvent();	
+               		slot_weapon_reloaded_vec[i]->DeselectEvent();
 		}
 	}
 }
@@ -251,10 +251,6 @@ void WeaponComplex::ValidateAllWeaponsTarget()
        				slot_weapon_vec[i]->ResetTarget();
        			}
                	}
-               	//else
-               	//{
-               		//slot_weapon_vec[i]->DeselectEvent();
-               	//}
         }
 }
 

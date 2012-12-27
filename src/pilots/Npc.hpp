@@ -46,9 +46,9 @@ class Npc : public Base
 {
    	public:
               	Npc(int);              	    
-     		virtual ~Npc();    	
+     		virtual ~Npc();
      		
-     		virtual void PutChildsToGarbage() const {};	
+     		virtual void PutChildsToGarbage() const {};
      		
      		void SetRaceId(int race_id)			{ this->race_id = race_id; };
      		void SetAiModel(BaseAiModel* ai_model)		{ this->ai_model = ai_model; };
@@ -58,7 +58,7 @@ class Npc : public Base
 		void SetVehicle(Vehicle* vehicle) 		{ this->vehicle = vehicle; };
 
 		int GetRaceId()				const { return race_id; };
-		StarSystem* GetFailBackStarSystem() 	const { return failback_starsystem; };
+
 		Vehicle* GetVehicle()           	const { return vehicle; };
 		Skill& GetSkill() 			{ return skill; };
 		Vehicle* GetScanTarget()        	const { return vehicle_to_scan; };
@@ -77,8 +77,8 @@ class Npc : public Base
      		void TakeIntoAccountAgressor(Vehicle*);
      		void UpdateInSpace(int, bool);
 
-     		void MindInSpace();
-     		void MindInKosmoport();
+     		void UpdateInSpaceInStatic();
+     		void UpdateInKosmoportInStatic();
                 //
 
      		//// scanning
@@ -89,8 +89,6 @@ class Npc : public Base
      		
      		Planet* GetPlanetForDocking();
     		StarSystem* GetClosestStarSystem(int);
-    		
-                NeedsToDo needsToDo;
 
 		void RenderInfo(const vec2f&);
 		                   
@@ -109,8 +107,6 @@ class Npc : public Base
      		unsigned long int credits; 
      		bool upper_control;
 
-   	     	StarSystem* failback_starsystem;
-
    	     	Vehicle* vehicle;
    	     	
    	     	Skill skill;
@@ -128,10 +124,8 @@ class Npc : public Base
 
 		UnresolvedDataUniqueNpc data_unresolved_npc;
 
-                void AsteroidScenario();
-                void EnemyScenario();
-                                
-                void CheckNeeds();
+                void ScenarioFireVehicleAgressor();
+                void ScenarioFireAsteroid();
                                 
 		void UpdateInfo();
     		

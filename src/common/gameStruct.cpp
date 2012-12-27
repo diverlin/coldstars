@@ -39,27 +39,6 @@ bool RaceInformationCollector::IsGood(int race_id) const
 	return false;
 }		
 		
-NeedsToDo::NeedsToDo()
-{
-  	REPAIR_KORPUS    = false;
-  	REPAIR_EQUIPMENT = false;
-        
-  	GET_FUEL    = false;
-   	GET_BULLETS = false;
-        GET_CREDITS = false;
-        
-   	BUY         = false;
-   	SELL        = false;
-}
-
-IdData::IdData()
-{
-	id            = NONE_ID;
-	type_id       = NONE_ID;
-	subtype_id    = NONE_ID;
-	subsubtype_id = NONE_ID;
-}
-
 
 ParticleData::ParticleData()
 {	

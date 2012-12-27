@@ -127,7 +127,7 @@ bool NatureLand::GetPermissionToLand() const
 }
 
 /* virtual */
-void NatureLand::UpdateInSpaceInStatic()
+void NatureLand::UpdateInStatic()
 {}  
 
 /*virtual*/

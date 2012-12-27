@@ -88,7 +88,7 @@ void Planet::UpdateInSpace(int time, bool show_effect)
 
 void Planet::UpdateInSpaceInStatic()
 {
-	land->UpdateInSpaceInStatic();
+	land->UpdateInStatic();
 }
 
 void Planet::UpdateInfo()

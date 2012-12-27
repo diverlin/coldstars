@@ -49,7 +49,7 @@ class Kosmoport : public BaseLand
                 virtual bool AddVehicle(Vehicle*);
                 virtual bool RemoveVehicle(Vehicle*);
                 
-                virtual void UpdateInSpaceInStatic();
+                virtual void UpdateInStatic();
                 
                 virtual std::string GetDockVehicleStr() const;
                                 
