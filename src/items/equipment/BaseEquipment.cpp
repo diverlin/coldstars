@@ -134,7 +134,7 @@ void BaseEquipment::Render(const Rect& rect1, const vec2f& gui_offset, bool draw
 	{
     		if (data_id.subtype_id == ENTITY::ROCKET_EQUIPMENT_ID)
         	{
-        		drawSimpleText(int2str(((RocketEquipment*)this)->GetAmmoMax()) + '/' + int2str(((RocketEquipment*)this)->GetAmmo()), 12, rect.GetCenter().x - rect.GetWidth()/2 + gui_offset.x, rect.GetCenter().y + gui_offset.y);
+        		drawSimpleText( int2str(((RocketEquipment*)this)->GetAmmo()) + "/" + int2str(((RocketEquipment*)this)->GetAmmoMax()), 12, rect.GetCenter().x - rect.GetWidth()/2 + gui_offset.x, rect.GetCenter().y + gui_offset.y);
 		}
 	}
 }

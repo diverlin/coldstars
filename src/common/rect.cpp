@@ -44,7 +44,8 @@ Rect::~Rect()
 void Rect::Scale(float scale)
 {
       	w *= scale;
-      	h *= scale;     	
+      	h *= scale;
+        center *= scale;
 	bottomLeft.x = center.x - w/2; 
 	bottomLeft.y = center.y - h/2; 
 }

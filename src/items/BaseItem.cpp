@@ -96,10 +96,12 @@ void BaseItem::DeteriorationEvent()
 	}
 }         
                 
-void BaseItem::RepairEvent()
+bool BaseItem::RepairEvent()
 {
     	condition = data_item.condition_max;
       	item_slot->UpdateVehiclePropetries();  
+        
+        return true;
 }
 
 void BaseItem::UpdateLock()

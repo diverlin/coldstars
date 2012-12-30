@@ -23,7 +23,6 @@ class Show
 {
 	private:
 		bool gui_scan;
-		bool gui_galaxymap;
                 bool gui_radar;
                 
 		bool all_path;
@@ -37,7 +36,6 @@ class Show
 	public:
 		Show():
 		gui_scan(false),
-		gui_galaxymap(false),    
                 gui_radar(false),            
 		all_path(false),
                 all_orbits(false),                
@@ -48,13 +46,11 @@ class Show
                 
 		~Show() {};
 		
-		void SetGuiGalaxyMap(bool gui_galaxymap) { this->gui_galaxymap = gui_galaxymap; };
 		void SetGuiRadar(bool gui_radar) { this->gui_radar = gui_radar; };
                 		
 		bool GetAllOrbits()    const { return all_orbits; };
 		bool GetAllPath()      const { return all_path; };
 
-		bool GetGuiGalaxyMap() const { return gui_galaxymap; };
 		bool GetGuiRadar() const { return gui_radar; };
                 
 		bool GetInfoShips() const { return info_ships; };

@@ -73,7 +73,21 @@ void GuiSpace::ButtonsAction(Player* player) const
        		{
        			case GUI::BUTTON::GALAXYMAP_ID:   
        			{ 
-       				player->GetShow().SetGuiGalaxyMap(button->GetPressed()); 
+                                if (button->GetPressed() == true)
+       				{
+                                        if (player->GetGuiManager().GetShowGuiGalaxyMap() == false)
+                                        {
+                                                player->GetGuiManager().EnterGalaxyMapInSpace();
+                                        }
+                                }
+                                else
+                                {
+                                        if (player->GetGuiManager().GetShowGuiGalaxyMap() == true)
+                                        {
+                                                player->GetGuiManager().ExitGalaxyMapInSpace();
+                                        }
+                                }
+
        				break; 
        			}   
 
@@ -82,8 +96,8 @@ void GuiSpace::ButtonsAction(Player* player) const
        				if (button->GetPressed() == true) 
        				{
        					EntityManager::Instance().SaveRequest();
-       					break;
        				} 
+                                break;
        			}   
 
      			case GUI::BUTTON::LOAD_ID:   
@@ -91,8 +105,8 @@ void GuiSpace::ButtonsAction(Player* player) const
        			       	if (button->GetPressed() == true) 
        				{
        					EntityManager::Instance().LoadRequest();
-       					break;
        				} 
+                                break;
        			}   
        		}
 	}

@@ -28,7 +28,7 @@ class GuiSkill : public BaseGui
    	public:
       		GuiSkill();
       		~GuiSkill();
-  				
+
                 void Acknowledge();
                                                 
      		void ButtonsAction(Skill&);

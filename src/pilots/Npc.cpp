@@ -82,11 +82,7 @@ bool Npc::WithdrawCredits(int amount)
 
 void Npc::UpdateInKosmoportInStatic()
 {
-	if (vehicle->GetNeeds().repair_korpus == true)
-	{
-                vehicle->BuyKorpusRepair();
-		//vehicle->GetNeeds().repair_korpus = false;
-	}
+	vehicle->ResolveNeedsInKosmoportInStatic();
 	
 	// if all things are DONE
 	//((Planet*)vehicle->GetDriveComplex()->GetTarget())->GetLand()->AddToLaunchingQueue(this); // improove by adding spacestation
@@ -118,7 +114,7 @@ void Npc::UpdateInSpaceInStatic()
         
 	if (upper_control == false)
 	{
-        	vehicle->CheckNeeds();
+        	vehicle->CheckNeedsInStatic();
         	observation.ObserveAllInSpace();  
                         
         	if (ai_model)

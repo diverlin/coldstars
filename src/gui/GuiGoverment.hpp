@@ -16,41 +16,25 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GUIANGAR_H
-#define GUIANGAR_H
+#ifndef GUIGOVERMENT_H
+#define GUIGOVERMENT_H
 
 #include "BaseGui.hpp"
-class Angar;
-class ItemSlot;
-class VehicleSlot;
-#include "GuiPair.hpp"
+class Goverment;
 
-class GuiAngar : public BaseGui
+class GuiGoverment : public BaseGui
 {
     	public:
-       		GuiAngar();
-       		~GuiAngar();
+       		GuiGoverment();
+       		~GuiGoverment();
 		
-		void BindAngar(Angar*);
-		void UnbindAngar();
+		void BindGoverment(Goverment*);
+		void UnbindGoverment();
 				
-		Angar* GetAngar() const { return angar; };
-		
-       		bool UpdateMouseInteractionWithVehicleSlots(const MouseData&);
-
-		void CheckButtonsLock();
-       		void ButtonsAction() const;   
-
-       		void RenderVehicleAndItemSlots() const;      
+		Goverment* GetGoverment() const { return goverment; };   
        	
        	private:
-       	        Angar* angar;
-       	        
-       	        ItemSlot* repair_slot;
-                ItemSlot* charge_slot;
-                
-       	      	std::vector<GuiPair<Rect, VehicleSlot*>> rect_vehicleslot_vec;
-       	      	std::vector<GuiPair<Rect, ItemSlot*>> rect_itemslot_vec;
+       	        Goverment* goverment;
 };
 
 

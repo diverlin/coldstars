@@ -43,17 +43,17 @@ UserInput::~UserInput()
 		
 void UserInput::UpdateInSpace(Player* player, GuiManager& gui_manager)
 {
-	GetSimpleInputsInSpace(player, gui_manager);
-        GetRealTimeInputs(player);
+	ManageInputsInSpace(player, gui_manager);
+        ManageRealTimeInputsInSpace(player);
        	ScrollCamera(player);
 }
 
-void UserInput::UpdateInKosmoport(Player* player)
+void UserInput::UpdateInKosmoport(Player* player, GuiManager& gui_manager)
 {
-	GetSimpleInputsInKosmoport(player);
+	ManageInputsInKosmoport(player, gui_manager);
 }
 
-void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
+bool UserInput::KeyPressedCommon(Player* player, GuiManager& gui_manager)
 {
 	switch(event.Key.Code) 
         {
@@ -66,13 +66,33 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
        		  			player->GetGuiManager().GetGuiSkill().Acknowledge();
        		  		}
  
-          	  		player->GetNpc()->ResetScanTarget();
-          	  		player->GetGuiManager().GetGuiVehicleTarget().Reset();
+                                if (player->GetNpc()->GetScanTarget() != NULL)
+                                {
+                                        player->GetGuiManager().ExitGuiScan();
+                                }
+                                
+                                if (player->GetGuiManager().GetGuiVehicleTarget().GetVehicle() != NULL)
+                                {
+                                        player->GetGuiManager().GetGuiVehicleTarget().Reset();
+                                }
          		}
          		
-         		break;
+         		return true; break;
          	}
+	}
+	
+	return false;
+}
 
+void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
+{
+	if (KeyPressedCommon(player, gui_manager) == true)
+	{
+		return; 
+	}
+	
+	switch(event.Key.Code) 
+        {
          	case sf::Key::Space:
 		{
 			if (next_turn_ready == false)
@@ -395,25 +415,11 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 }
         
         
-void UserInput::KeyPressedInKosmoport(Player* player)
+void UserInput::KeyPressedInKosmoport(Player* player, GuiManager& gui_manager)
 {
-	switch(event.Key.Code) 
-        {
-        	case sf::Key::Escape:
-        	{
- 			if (player->GetNpc()->GetScanTarget() != NULL)
- 			{
-       		  		if (player->GetNpc()->GetScanTarget()->GetId() == player->GetNpc()->GetVehicle()->GetId())
-       		  		{
-       		  			player->GetGuiManager().GetGuiSkill().Acknowledge();
-       		  		}
- 
-          	  		player->GetNpc()->ResetScanTarget();
-         			player->GetGuiManager().GetGuiVehicleTarget().Reset();
-         		}
-         		
-         		break;
-         	}
+	if (KeyPressedCommon(player, gui_manager) == true)
+	{
+		return; 
 	}
 }
 
@@ -431,7 +437,7 @@ void UserInput::ResetFlags(Player* player)
 	next_turn_ready = false;
 }
                 		
-void UserInput::GetSimpleInputsInSpace(Player* player, GuiManager& gui_manager)
+void UserInput::ManageInputsInSpace(Player* player, GuiManager& gui_manager)
 {
 	ResetFlags(player);
 			
@@ -440,14 +446,14 @@ void UserInput::GetSimpleInputsInSpace(Player* player, GuiManager& gui_manager)
 		switch(event.Type)
 	        {
 	        	case sf::Event::Closed:     		{ Screen::Instance().GetWindow().Close(); break; }
-                        case sf::Event::Resized:    		{ glViewport(0, 0, event.Size.Width, event.Size.Height); /*Screen::Instance().Resize(event.Size.Width, event.Size.Height);*/ break; }
+                        case sf::Event::Resized:    		{ Screen::Instance().Resize(event.Size.Width, event.Size.Height); break; }
 	        	case sf::Event::KeyPressed: 		{ KeyPressedInSpace(player, gui_manager); break; }
 	                case sf::Event::MouseButtonPressed: 	{ MouseButtonPressed(player); break; }
 	        }	      
 	 }
 }
              		
-void UserInput::GetSimpleInputsInKosmoport(Player* player)
+void UserInput::ManageInputsInKosmoport(Player* player, GuiManager& gui_manager)
 {
 	ResetFlags(player);
 			
@@ -456,14 +462,14 @@ void UserInput::GetSimpleInputsInKosmoport(Player* player)
 		switch(event.Type)
 	        {
 	        	case sf::Event::Closed:     		{ Screen::Instance().GetWindow().Close(); break; }
-                        case sf::Event::Resized:    		{ glViewport(0, 0, event.Size.Width, event.Size.Height); /*Screen::Instance().Resize(event.Size.Width, event.Size.Height);*/ break; }
-	        	case sf::Event::KeyPressed: 		{ KeyPressedInKosmoport(player); break; }
+                        case sf::Event::Resized:    		{ Screen::Instance().Resize(event.Size.Width, event.Size.Height); break; }
+	        	case sf::Event::KeyPressed: 		{ KeyPressedInKosmoport(player, gui_manager); break; }
 	                case sf::Event::MouseButtonPressed: 	{ MouseButtonPressed(player); break; }
 	        }	      
 	 }
 }
 
-void UserInput::GetRealTimeInputs(Player* player)
+void UserInput::ManageRealTimeInputsInSpace(Player* player)
 {       
         const sf::Input& Input = Screen::Instance().GetWindow().GetInput();
         

@@ -33,7 +33,7 @@
 #include "../spaceobjects/Star.hpp"
 #include "../pilots/Npc.hpp"
 
-GuiGalaxyMap::GuiGalaxyMap()
+GuiGalaxyMap::GuiGalaxyMap():galaxy(NULL)
 { 
     	rect.Set(GUI::MAP::BORDER_X, 
     		 GUI::MAP::BORDER_Y, 
@@ -47,7 +47,17 @@ GuiGalaxyMap::GuiGalaxyMap()
 GuiGalaxyMap::~GuiGalaxyMap()
 {}
 
-bool GuiGalaxyMap::UpdateMouseInteraction(const MouseData& data_mouse, Galaxy* galaxy)
+void GuiGalaxyMap::BindGalaxy(Galaxy* galaxy)
+{
+        this->galaxy = galaxy;
+}
+                
+void GuiGalaxyMap::UnbindGalaxy()
+{
+        galaxy = NULL;
+}
+                
+bool GuiGalaxyMap::UpdateMouseInteraction(const MouseData& data_mouse)
 {
      	if (player->GetNpc()->GetVehicle()->GetProperties().hyper > 0)
      	{      
@@ -86,7 +96,7 @@ bool GuiGalaxyMap::UpdateMouseInteraction(const MouseData& data_mouse, Galaxy* g
 
 
 
-void GuiGalaxyMap::Render(Galaxy* galaxy)
+void GuiGalaxyMap::Render()
 {
 	drawTexturedRect(texOb_background, rect, -1.0);
     	

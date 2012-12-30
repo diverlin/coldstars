@@ -39,10 +39,11 @@ class Room : public Base
                 
                 virtual void PutChildsToGarbage() const {};
                 
-                void SetOwnerKosmoport(Kosmoport* owner_kosmoport) { this->owner_kosmoport = owner_kosmoport; }
+                void SetOwnerKosmoport(Kosmoport* owner_kosmoport) { this->owner_kosmoport = owner_kosmoport; };
                 void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
                 
-                Kosmoport* GetOwnerKosmoport() { return owner_kosmoport; }  
+                Kosmoport* const GetOwnerKosmoport() { return owner_kosmoport; };
+                TextureOb* GetBackgroundTextureOb() const { return textureOb_background; };
 
                 void RenderBackground(const Rect&) const;
                 		
