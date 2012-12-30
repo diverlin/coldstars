@@ -28,13 +28,20 @@ class GuiGalaxyMap : public BaseGui
   	public:
      		GuiGalaxyMap();
      		~GuiGalaxyMap();
-   
-     		bool UpdateMouseInteraction(const MouseData&, Galaxy*);
-     		void Render(Galaxy*);
+                
+                void BindGalaxy(Galaxy* galaxy);
+                void UnbindGalaxy();
+                   
+                Galaxy* GetGalaxy() const { return galaxy; };
+                   
+     		bool UpdateMouseInteraction(const MouseData&);
+     		void Render();
 
      	private:
      		float scale_parsec2screencoord;
      		
+                Galaxy* galaxy;
+                
      		Rect rect;
      		
      		TextureOb* texOb_background;

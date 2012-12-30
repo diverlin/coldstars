@@ -41,7 +41,6 @@ set (SOURCES
 	src/gui/Slider.cpp
 	src/common/Logger.cpp
 	src/config/config.cpp
-	src/gui/GuiShop.cpp
 
 	src/common/common.cpp
 	src/managers/EntityManager.cpp
@@ -245,6 +244,8 @@ set (SOURCES
 	src/gui/GuiSpace.cpp
 	src/gui/GuiAngar.cpp
 	src/gui/GuiStore.cpp
+	src/gui/GuiShop.cpp
+	src/gui/GuiGoverment.cpp
 	src/gui/GuiVehicle.cpp
 	src/gui/GuiVehicle2.cpp
 	src/gui/GuiGalaxyMap.cpp

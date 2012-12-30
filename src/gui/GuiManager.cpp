@@ -27,12 +27,16 @@
 #include "../parts/WeaponComplex.hpp"
 #include "../items/BaseItem.hpp"
 
+#include "../docking/Angar.hpp"
 #include "../docking/Goverment.hpp"
+
 #include "../pilots/Npc.hpp"
 
 GuiManager::GuiManager()
 {
 	player = NULL;
+        
+        show_gui_scan = false;
 }
 
 GuiManager::~GuiManager()
@@ -56,22 +60,22 @@ void GuiManager::SetPlayer(Player* player)
 	slider.SetPlayer(player);
 }		
 
-bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mouse, Vehicle* scan_vehicle, bool allow_full_control)
+bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mouse, bool allow_full_control)
 {
 	if (allow_full_control == false)
 	{
-        	if (scan_vehicle->GetId() == player->GetNpc()->GetVehicle()->GetId())
+        	if (gui_vehicle_scan.GetVehicle()->GetId() == player->GetNpc()->GetVehicle()->GetId())
     		{
         		allow_full_control = true;  
         	    	// modify full control for friend ships         
         	}
         }
 
-	bool interaction = gui_vehicle_scan.UpdateMouseInteractionInSpace(data_mouse, allow_full_control);        
+	bool interaction = gui_vehicle_scan.UpdateMouseInteraction(data_mouse, allow_full_control);        
 	if ( (interaction == true) and (allow_full_control == true) )
 	{
 		interaction = gui_skill.UpdateMouseInteractionWithButtons(data_mouse);
-		gui_skill.ButtonsAction(scan_vehicle->GetOwnerNpc()->GetSkill());
+		gui_skill.ButtonsAction(gui_vehicle_scan.GetVehicle()->GetOwnerNpc()->GetSkill());
 	}
 
 	return interaction;
@@ -95,7 +99,7 @@ bool GuiManager::UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData& 
 	return false;
 }
 
-void GuiManager::RenderScanVehicle(const MouseData& data_mouse, Vehicle* vehicle, bool show_skill) const
+void GuiManager::RenderScanVehicle(const MouseData& data_mouse, bool show_skill) const
 {	
 	if (player->GetCursor().GetItemSlot()->GetItem() != NULL)
 	{
@@ -107,39 +111,160 @@ void GuiManager::RenderScanVehicle(const MouseData& data_mouse, Vehicle* vehicle
 		gui_vehicle_scan.RenderVehicle(data_mouse, NONE_ID);
 	}
 					
-	if ( (show_skill == true) and (vehicle->GetOwnerNpc() != NULL) )
+	if ( (show_skill == true) and (gui_vehicle_scan.GetVehicle()->GetOwnerNpc() != NULL) )
 	{
 		gui_skill.RenderButtons();
-		gui_skill.RenderSkills(vehicle->GetOwnerNpc()->GetSkill());
+		gui_skill.RenderSkills(gui_vehicle_scan.GetVehicle()->GetOwnerNpc()->GetSkill());
 		gui_skill.RenderFocusedButtonInfo(data_mouse);
 	}   					                 
 }
 
+void GuiManager::EnterGalaxyMapInSpace()
+{
+        show_gui_galaxymap = true;
+        
+        if (show_gui_scan == true)
+        {
+                ExitGuiScan();
+        }
+
+        show_gui_radar = false;  
+        
+        Galaxy* galaxy = player->GetNpc()->GetStarSystem()->GetGalaxy();
+        gui_galaxymap.BindGalaxy(galaxy);
+}
+
+void GuiManager::ExitGalaxyMapInSpace()
+{
+        show_gui_galaxymap = false;
+        show_gui_radar = true;  
+        
+        gui_galaxymap.UnbindGalaxy();
+}
+    
+void GuiManager::EnterGuiScanInSpace()
+{
+        int screen_w = Screen::Instance().GetWindow().GetWidth();
+        int screen_h = Screen::Instance().GetWindow().GetHeight();
+	vec2f center_screen(screen_w/2, screen_h/2);
+        
+        show_gui_scan = true;
+        gui_vehicle_scan.BindVehicle(player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET);
+        gui_skill.SetOffset(center_screen + GUI_SKILL_INSPACE_OFFSET);
+                        
+        show_gui_radar = false;
+}
+
+void GuiManager::EnterGuiScanInAngar()
+{        
+        int screen_w = Screen::Instance().GetWindow().GetWidth();
+        int screen_h = Screen::Instance().GetWindow().GetHeight();
+	vec2f center_screen(screen_w/2, screen_h/2);
+        
+        show_gui_scan = true;
+        gui_vehicle_scan.BindVehicle(player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INANGAR_OFFSET);
+        gui_skill.SetOffset(center_screen + GUI_SKILL_INANGAR_OFFSET);
+}
+
+void GuiManager::ExitGuiScan()
+{                
+        show_gui_scan = false;
+        player->GetNpc()->ResetScanTarget();
+        gui_vehicle_scan.UnbindVehicle();
+        
+        show_gui_radar = true;
+}
+
+void GuiManager::EnterGuiAngarScreen()
+{
+	Angar* angar = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetAngar();
+	gui_angar.BindAngar(angar);
+}
+
+void GuiManager::ExitGuiAngarScreen()
+{
+	gui_angar.UnbindAngar();
+	if (show_gui_scan == true)
+	{
+		ExitGuiScan();
+	}
+}
+
+void GuiManager::EnterGuiStoreScreen()
+{
+        int screen_w = Screen::Instance().GetWindow().GetWidth();
+        int screen_h = Screen::Instance().GetWindow().GetHeight();
+	vec2f center_screen(screen_w/2, screen_h/2);
+        
+        gui_store.SetOffset(center_screen + GUI_STORE_OFFSET);
+
+	player->GetNpc()->SetScanTarget(player->GetNpc()->GetVehicle());
+        gui_vehicle_scan.BindVehicle(player->GetNpc()->GetVehicle(), center_screen + GUI_VEHICLE_INSTORE_OFFSET);
+
+        Store* store = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetStore();
+        gui_store.BindStore(store);
+}
+
+void GuiManager::ExitGuiStoreScreen()
+{
+        ExitGuiScan();
+        gui_store.UnbindStore();
+}
+		
+void GuiManager::EnterGuiShopScreen()
+{
+        Shop* shop = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetShop();
+        gui_shop.BindShop(shop);        
+}
+
+void GuiManager::ExitGuiShopScreen()
+{
+        gui_shop.UnbindShop();
+}
+
+void GuiManager::EnterGuiGalaxyMapScreen()
+{
+        Galaxy* galaxy = player->GetNpc()->GetStarSystem()->GetGalaxy();
+        gui_galaxymap.BindGalaxy(galaxy);
+}
+
+void GuiManager::ExitGuiGalaxyMapScreen()
+{
+        gui_galaxymap.UnbindGalaxy();
+}
+
+void GuiManager::EnterGuiGovermentScreen()
+{
+        Goverment* goverment = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetGoverment();
+        gui_goverment.BindGoverment(goverment);
+}
+
+void GuiManager::ExitGuiGovermentScreen()
+{
+        gui_goverment.UnbindGoverment();
+}    
+
+void GuiManager::ExitCurrentScreen()
+{
+	switch (gui_kosmoport.GetActiveScreenId())
+	{
+		case GUI::SCREEN::ANGAR_ID: { ExitGuiAngarScreen(); break; }
+		case GUI::SCREEN::STORE_ID: { ExitGuiStoreScreen(); break; }
+		case GUI::SCREEN::SHOP_ID:  { ExitGuiShopScreen(); break; }
+		case GUI::SCREEN::GALAXYMAP_ID: { ExitGuiGalaxyMapScreen(); break; }
+		case GUI::SCREEN::GOVERMENT_ID: { ExitGuiGovermentScreen(); break; }
+	}
+}
+                            
 bool GuiManager::UpdateInSpace(const MouseData& data_mouse)
 {
-	Rect screen_rect(0, 0, Screen::Instance().GetWindow().GetWidth(), Screen::Instance().GetWindow().GetHeight());   
-	vec2f center_screen(Screen::Instance().GetWindow().GetWidth()/2, Screen::Instance().GetWindow().GetHeight()/2);        			
+	int screen_w = Screen::Instance().GetWindow().GetWidth();
+        int screen_h = Screen::Instance().GetWindow().GetHeight();
+        Rect screen_rect(0, 0, screen_w, screen_h);   
+	vec2f center_screen(screen_w/2, screen_h/2);
                             
        	UserInput::Instance().UpdateInSpace(player, *this);
      	player->GetCursor().Update();  
-     	       	
-        // configure which part of gui should be managed/drawn       	
-        show_gui_galaxymap = false;                                                                                
-        show_gui_scan = false;
-        show_gui_radar = false;
-
-        show_gui_galaxymap = player->GetShow().GetGuiGalaxyMap();  
-
-        if ( (player->GetNpc()->GetScanTarget() != NULL) and (show_gui_galaxymap == false) )
-        {
-        	show_gui_scan = true;
-	}                        
-               
-        if ( (show_gui_scan == false) and (show_gui_galaxymap == false) )
-        {
-        	show_gui_radar = true;  
-        }             
-        //
 
 	if (gui_vehicle_player.GetVehicle() == NULL)
 	{
@@ -147,14 +272,7 @@ bool GuiManager::UpdateInSpace(const MouseData& data_mouse)
          	gui_vehicle_player.SetOffset(gui_radar.GetRect().GetCenter());                        
 	}
 	gui_vehicle_player.UpdateEquipmentIcons();
-			
-                        
-        if (show_gui_scan)
-        {
-               	gui_vehicle_scan.SetOffset(center_screen + GUI_VEHICLE_INSPACE_OFFSET);
-		gui_skill.SetOffset(center_screen + GUI_SKILL_INSPACE_OFFSET);
-	}
-			
+
 	if (gui_vehicle_target.GetVehicle() != NULL)
 	{
 		gui_vehicle_target.UpdateOffset();
@@ -168,11 +286,11 @@ bool GuiManager::UpdateInSpace(const MouseData& data_mouse)
 	{
 		if (interaction == false)
                 {
-                	interaction = gui_galaxymap.UpdateMouseInteraction(data_mouse, player->GetNpc()->GetStarSystem()->GetGalaxy()); 	
+                	interaction = gui_galaxymap.UpdateMouseInteraction(data_mouse); 	
                 }
         }
 			
-        if (show_gui_scan == true)
+        if (gui_vehicle_scan.GetVehicle() != NULL)
 	{	
 		if (interaction == false)
 		{
@@ -221,10 +339,10 @@ void GuiManager::RenderInSpace(const MouseData& data_mouse)
 					
 		if (show_gui_galaxymap == true)  
 		{
-			gui_galaxymap.Render(player->GetNpc()->GetStarSystem()->GetGalaxy());    
+			gui_galaxymap.Render();    
 		}
 	                                
-		if (show_gui_scan == true)
+		if (gui_vehicle_scan.GetVehicle() != NULL)
 		{
 			RenderScanVehicle(data_mouse, player->GetNpc()->GetScanTarget()); 				                 
 		}
@@ -249,7 +367,7 @@ bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
 	Rect screen_rect(0, 0, Screen::Instance().GetWindow().GetWidth(), Screen::Instance().GetWindow().GetHeight());   
 	vec2f center_screen(Screen::Instance().GetWindow().GetWidth()/2, Screen::Instance().GetWindow().GetHeight()/2);       			
         			
- 	UserInput::Instance().UpdateInKosmoport(player);
+ 	UserInput::Instance().UpdateInKosmoport(player, *this);
      	player->GetCursor().Update(); 
      	    	       	
 	bool interaction = gui_kosmoport.UpdateMouseInteractionWithButtons(data_mouse);
@@ -259,13 +377,11 @@ bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
 	{
 		case GUI::SCREEN::ANGAR_ID:
 		{
-			gui_vehicle_scan.SetOffset(center_screen + GUI_VEHICLE_INANGAR_OFFSET);
-			gui_skill.SetOffset(center_screen + GUI_SKILL_INANGAR_OFFSET);
-										
-			Angar* angar = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetAngar();
-			Vehicle* scan_vehicle = player->GetNpc()->GetScanTarget();
-			gui_angar.BindAngar(angar);
-
+			if (gui_angar.GetAngar() == NULL) // this needs to initialize gui_angar in first time when player has landed
+			{
+				EnterGuiAngarScreen();
+			}
+			
 			//update  
 			gui_angar.CheckButtonsLock();
 			if (interaction == false)
@@ -277,24 +393,24 @@ bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
 				}
 
 				gui_angar.ButtonsAction();
-			    	if ( interaction == false)
+			    	if (interaction == false)
 			    	{
-					if (scan_vehicle != NULL) 
+					if (show_gui_scan == true) 
 					{ 
-						interaction = UpdateMouseInteractionWithScanVehicle(data_mouse, scan_vehicle);
-					}					    	
+						interaction = UpdateMouseInteractionWithScanVehicle(data_mouse, gui_vehicle_scan.GetVehicle());
+					}
 			    	} 
 	        	}
 	        	
 	        	//render
 			resetRenderTransformation();
-			angar->RenderBackground(screen_rect);
+			gui_angar.GetAngar()->RenderBackground(screen_rect);
 			enable_BLEND();   
 	        		gui_angar.RenderVehicleAndItemSlots();
 	        		
-				if (scan_vehicle != NULL) 	
+				if (show_gui_scan == true)
 				{ 
-					RenderScanVehicle(data_mouse, scan_vehicle); 
+					RenderScanVehicle(data_mouse); 
 				}
 				
 	        		gui_kosmoport.RenderButtons(); 
@@ -308,61 +424,44 @@ bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
 
 		case GUI::SCREEN::STORE_ID:
 		{
-			gui_vehicle_scan.SetOffset(center_screen + GUI_VEHICLE_INSTORE_OFFSET);
-			gui_store.SetOffset(center_screen + GUI_STORE_OFFSET);
-					
-			//if (npc->GetScanTarget() != npc->GetVehicle())
-			{
-				player->GetNpc()->SetScanTarget(player->GetNpc()->GetVehicle());
-			}
-		    
-			Store* store = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetStore();
-			Vehicle* vehicle = player->GetNpc()->GetScanTarget();    
-			gui_store.BindStore(store);    				
-			gui_vehicle_scan.BindVehicle(vehicle);
-			
-			//update
+                        //update
 			if (interaction == false)
 			{
-				interaction = gui_store.UpdateMouseInteraction(data_mouse, store);
+				interaction = gui_store.UpdateMouseInteraction(data_mouse);
 			    	if (interaction == false)
 			    	{
-			    		interaction = gui_vehicle_scan.UpdateMouseInteractionInStore(data_mouse, vehicle, store);
+			    		interaction = gui_vehicle_scan.UpdateMouseInteractionInStore(data_mouse, gui_store.GetStore());
 			    	}
 			}
-						        	
+
 	        	//render
 			resetRenderTransformation();
-			store->RenderBackground(screen_rect);
+			gui_store.GetStore()->RenderBackground(screen_rect);
 
 			enable_BLEND();
 				gui_store.RenderSlots(player->GetNpc()->GetCredits());
 
 				bool show_skill = false;
-				RenderScanVehicle(data_mouse, vehicle, show_skill);
+				RenderScanVehicle(data_mouse, show_skill);
 				
 	        		gui_kosmoport.RenderButtons(); 
 				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 
 			disable_BLEND();
 			drawSimpleText("credits:"+int2str(player->GetNpc()->GetCredits()), 12, 600, 200);
 			//
-			
-			player->GetNpc()->ResetScanTarget();
-			
+
 			break;
 		}
 
 		case GUI::SCREEN::SHOP_ID:
 		{
-			Shop* shop = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetShop();
-			
-			//update	
-			gui_shop.UpdateLables(shop);			
-			gui_shop.ButtonsAction(shop, slider);
+			//update
+			gui_shop.UpdateLables();
+			gui_shop.ButtonsAction(slider);
 			if (slider.GetSubTypeId() != NONE_ID)
 			{
 				slider.CheckButtonsLock();
-				slider.ButtonsAction(shop);
+				slider.ButtonsAction(gui_shop.GetShop());
 			}
 			
 			if (interaction == false)
@@ -380,7 +479,7 @@ bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
 	        	
 	        	//render
 			resetRenderTransformation();
-			shop->RenderBackground(screen_rect);
+			gui_shop.GetShop()->RenderBackground(screen_rect);
 			enable_BLEND();   
 				gui_shop.RenderButtons();
 				
@@ -399,18 +498,17 @@ bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
 
 		case GUI::SCREEN::GALAXYMAP_ID:
 		{
-			Galaxy* galaxy = player->GetNpc()->GetStarSystem()->GetGalaxy();
 			//update
 			if ( interaction == false)
 			{
-				interaction = gui_galaxymap.UpdateMouseInteraction(data_mouse, galaxy);
+				interaction = gui_galaxymap.UpdateMouseInteraction(data_mouse);
 	        	}					   
 		
 			//render
 			clearScreen(); //becase there is no background
 	        	resetRenderTransformation();
 			enable_BLEND();   
-				gui_galaxymap.Render(galaxy);
+				gui_galaxymap.Render();
 				
 				gui_kosmoport.RenderButtons(); 
 				gui_kosmoport.RenderFocusedButtonInfo(data_mouse); 
@@ -422,17 +520,15 @@ bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
 
 		case GUI::SCREEN::GOVERMENT_ID:
 		{
-			Goverment* goverment = ((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand())->GetGoverment();
-			
 			//update
 			if (interaction == false)
 			{
-				//interaction = gui_goverment->UpdateMouseInteraction(goverment, mxvp, myvp, lmb, rmb);
+				//interaction = gui_goverment.UpdateMouseInteraction(data_mouse);
 	        	}
 	        	
 	        	//render
 	        	resetRenderTransformation();
-			goverment->RenderBackground(screen_rect);
+			gui_goverment.GetGoverment()->RenderBackground(screen_rect);
 			enable_BLEND();   
 				//gui_goverment->RenderInternals(goverment);
 				
@@ -454,7 +550,7 @@ bool GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 	Rect screen_rect(0, 0, Screen::Instance().GetWindow().GetWidth(), Screen::Instance().GetWindow().GetHeight());   
 	vec2f center_screen(Screen::Instance().GetWindow().GetWidth()/2, Screen::Instance().GetWindow().GetHeight()/2);       			
         			
- 	UserInput::Instance().UpdateInKosmoport(player);
+ 	UserInput::Instance().UpdateInKosmoport(player, *this);
      	player->GetCursor().Update(); 
      	    	       	
 	//bool interaction = gui_kosmoport.UpdateMouseInteractionWithButtons(data_mouse);

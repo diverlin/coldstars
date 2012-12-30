@@ -27,6 +27,7 @@
 #include "../gui/GuiAngar.hpp"
 #include "../gui/GuiStore.hpp"
 #include "../gui/GuiShop.hpp"
+#include "../gui/GuiGoverment.hpp"
 #include "../gui/GuiSpace.hpp"
 #include "../gui/GuiGalaxyMap.hpp"
 #include "../gui/GuiNatureLand.hpp"
@@ -38,27 +39,52 @@ class GuiManager
       		~GuiManager();
 
 		void SetPlayer(Player*);
-		
-		bool UpdateInSpace(const MouseData&);
-		void RenderInSpace(const MouseData&);
-		
-		bool RunSessionInKosmoport(const MouseData&);
-		bool RunSessionInNatureLand(const MouseData&);
-						
+
+                bool GetShowGuiGalaxyMap() const { return show_gui_galaxymap; };
+
 		GuiRadar& GetGuiRadar() { return gui_radar; };
 		GuiVehicle& GetGuiVehicleScan() { return gui_vehicle_scan; };
 		GuiVehicle2& GetGuiVehiclePlayer() { return gui_vehicle_player; };
 		GuiVehicle2& GetGuiVehicleTarget() { return gui_vehicle_target; };
 		GuiSkill& GetGuiSkill() { return gui_skill; };
-								      		
+
+		bool UpdateInSpace(const MouseData&);
+		void RenderInSpace(const MouseData&);
+		
+		bool RunSessionInKosmoport(const MouseData&);
+		bool RunSessionInNatureLand(const MouseData&);
+                
+                void EnterGalaxyMapInSpace();
+                void ExitGalaxyMapInSpace();
+                
+                void EnterGuiScanInSpace();
+                void EnterGuiScanInAngar();
+                void ExitGuiScan();
+                
+                void EnterGuiAngarScreen();
+                void ExitGuiAngarScreen();
+               
+		void EnterGuiStoreScreen();
+                void ExitGuiStoreScreen();
+                                
+                void EnterGuiShopScreen();
+                void ExitGuiShopScreen();
+
+                void EnterGuiGalaxyMapScreen();
+                void ExitGuiGalaxyMapScreen();
+                
+                void EnterGuiGovermentScreen();
+                void ExitGuiGovermentScreen();
+                
+                void ExitCurrentScreen();
+                                
       	private:
       		Player* player;
-	
+
 		bool show_gui_galaxymap;                                                                                
         	bool show_gui_scan;
         	bool show_gui_radar;
-        
-	
+
       		GuiVehicle 	gui_vehicle_scan;
       		GuiVehicle2 	gui_vehicle_player;
       		GuiVehicle2 	gui_vehicle_target;
@@ -67,17 +93,18 @@ class GuiManager
       		GuiAngar 	gui_angar;
                 GuiStore 	gui_store;
                 GuiShop        	gui_shop;
+                GuiGoverment    gui_goverment;
       		GuiSpace     	gui_space;      
-		GuiGalaxyMap    gui_galaxymap;      		
+		GuiGalaxyMap    gui_galaxymap;
        		GuiRadar 	gui_radar;
        		GuiNatureLand 	gui_natureland;
-       		       		
+
        		Slider slider;  
-		       		
-     		bool UpdateMouseInteractionWithScanVehicle(const MouseData&, Vehicle*, bool allow_full_control = false);     		
+
+     		bool UpdateMouseInteractionWithScanVehicle(const MouseData&, bool allow_full_control = false);     		
      		bool UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData&);   
      		
-     		void RenderScanVehicle(const MouseData&, Vehicle*, bool show_skill = true) const;  	
+     		void RenderScanVehicle(const MouseData&, bool show_skill = true) const;
 };
 
 

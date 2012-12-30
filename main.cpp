@@ -48,7 +48,7 @@ int main()
 	Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy();
 	Player* player = PlayerBuilder::Instance().GetNewPlayer();
 
-        bool player2space = true;
+        bool player2space = false;
         if (player2space == true)
         {
                 vec2f center(400, 400);
@@ -104,7 +104,7 @@ int main()
 	return EXIT_SUCCESS;
 }
 
-//######################## UPRAVLENIE
+//######################## CONTROL
 //# 1,2,3...9 aktivacija oruzhija
 //# a - aktivacija/deaktivacija vsex slotov oruzhija odnovremenno
 //# g - aktivacija/deaktivacija zaxvata 

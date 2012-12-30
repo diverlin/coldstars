@@ -25,7 +25,7 @@
 #include "../slots/VehicleSlot.hpp"
 #include "../pilots/Npc.hpp"
 
-GuiStore::GuiStore()
+GuiStore::GuiStore():store(NULL)
 {}
 
 GuiStore::~GuiStore()
@@ -33,9 +33,8 @@ GuiStore::~GuiStore()
 
 void GuiStore::BindStore(Store* store)
 {
-	rect_itemslot_vec.clear();
-	rect_vehicleslot_vec.clear();
-	
+        this->store = store;
+        
         int clm = 0;
         int row = 0;
         for (unsigned int i=0; i<store->item_slot_vec.size(); i++)
@@ -73,8 +72,16 @@ void GuiStore::BindStore(Store* store)
         	}
         }
 }
+
+void GuiStore::UnbindStore()
+{
+        store = NULL;
+                
+        rect_itemslot_vec.clear();
+	rect_vehicleslot_vec.clear();
+}
         
-bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse, Store* store)
+bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
 {
         for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
         { 

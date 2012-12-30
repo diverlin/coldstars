@@ -21,6 +21,7 @@
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../render/Screen.hpp"
 #include "../common/constants.hpp"
+#include "../pilots/Player.hpp"
 
 GuiKosmoport::GuiKosmoport()
 {
@@ -82,41 +83,51 @@ void GuiKosmoport::ButtonsAction()
 	   		{
 	   			case GUI::BUTTON::ANGAR_ID: 
 	   			{
-   				      	button->PressEvent();	   					
+   				      	button->PressEvent();   
+                                        player->GetGuiManager().ExitCurrentScreen();
    					active_screen_id = GUI::SCREEN::ANGAR_ID;
-	   					
+                                        player->GetGuiManager().EnterGuiAngarScreen();
+                                        
    					return; break;
 	  	 		}
 
 	   			case GUI::BUTTON::STORE_ID: 
 	   			{
-   				      	button->PressEvent();	   					
-   					active_screen_id = GUI::SCREEN::STORE_ID;
-	   					
+   				      	button->PressEvent();
+                                        player->GetGuiManager().ExitCurrentScreen();
+                                        active_screen_id = GUI::SCREEN::STORE_ID;
+                                        player->GetGuiManager().EnterGuiStoreScreen();
+                                        
    					return; break;
 	  	 		}
 
 	   			case GUI::BUTTON::SHOP_ID: 
 	   			{
-   				      	button->PressEvent();	   					
+   				      	button->PressEvent();
+                                        player->GetGuiManager().ExitCurrentScreen();
    					active_screen_id = GUI::SCREEN::SHOP_ID;
-	   					
+                                        player->GetGuiManager().EnterGuiShopScreen();
+                                        
    					return; break;
 	  	 		}
 
 	   			case GUI::BUTTON::GALAXYMAP_ID: 
 	   			{
-   				      	button->PressEvent();	   					
+   				      	button->PressEvent();
+                                        player->GetGuiManager().ExitCurrentScreen();                                                                                
    					active_screen_id = GUI::SCREEN::GALAXYMAP_ID;
-	   					
+                                        player->GetGuiManager().EnterGuiGalaxyMapScreen();
+                                        
    					return; break;
 	  	 		}
 
 	   			case GUI::BUTTON::GOVERMENT_ID: 
 	   			{
-   				      	button->PressEvent();	   					
+   				      	button->PressEvent();
+                                        player->GetGuiManager().ExitCurrentScreen();
    					active_screen_id = GUI::SCREEN::GOVERMENT_ID;
-	   					
+                                        player->GetGuiManager().EnterGuiGovermentScreen();
+                                        
    					return; break;
 	  	 		}
 	  	 	}

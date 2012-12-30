@@ -88,6 +88,11 @@
 #include "../builder/ShopBuilder.hpp"
 #include "../builder/GovermentBuilder.hpp"
 
+#include "../docking/Angar.hpp"
+#include "../docking/Store.hpp"
+#include "../docking/Shop.hpp"
+#include "../docking/Goverment.hpp"
+
 #include "../items/equipment/BakEquipment.hpp"
 #include "../items/equipment/DriveEquipment.hpp"
 #include "../items/equipment/DroidEquipment.hpp"

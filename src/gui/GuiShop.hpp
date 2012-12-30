@@ -22,7 +22,7 @@
 
 #include "../gui/BaseGui.hpp"
 #include "../gui/Slider.hpp"
-#include "../docking/Shop.hpp"
+class Shop;
 
 class GuiShop : public BaseGui
 {
@@ -30,10 +30,17 @@ class GuiShop : public BaseGui
                 GuiShop();                      
                 ~GuiShop();
 		 
-        	void UpdateLables(Shop*) const;    
-        	void ButtonsAction(Shop*, Slider&);            
+                void BindShop(Shop*);
+                void UnbindShop();
+                
+                Shop* GetShop() const { return shop; };
+                 
+        	void UpdateLables() const;    
+        	void ButtonsAction(Slider&);            
                 
         private:     
+                Shop* shop;
+        
 };
            
            

@@ -31,6 +31,7 @@
 
 #include "../common/Logger.hpp"
 
+#include "../items/equipment/RocketEquipment.hpp"
 #include "../items/equipment/EnergizerEquipment.hpp"
 #include "../items/equipment/FreezerEquipment.hpp"
 #include "../items/equipment/RadarEquipment.hpp"
@@ -78,7 +79,6 @@ Vehicle::Vehicle()
 	
 	owner_npc = NULL;
        	starsystem = NULL; 
-        failback_starsystem = NULL;
 
     	weapon_complex.SetOwnerVehicle(this);
     	drive_complex.SetOwnerVehicle(this);
@@ -751,30 +751,106 @@ void Vehicle::PostDeathUniqueEvent(bool show_effect)
 }
 
 
-void Vehicle::CheckNeeds()
+void Vehicle::CheckNeedsInStatic()
 {
+        // check armor
         if (data_life.armor < 0.5*data_korpus.armor) { needs.repair_korpus = true; }
         else                                         { needs.repair_korpus = false; }
 
-
+        //check item damages
         needs.repair_equipment = false;
-        
-        // checkhjump
-        failback_starsystem = owner_npc->GetClosestStarSystem(false);
-        if (failback_starsystem != NULL)
+        for (unsigned int i=0; i<slot_funct_vec.size(); i++)
         {
-   		needs.get_fuel = false;
-   	}
-   	else
-   	{
-   	   	needs.get_fuel = true;
-   	}
+                if (slot_funct_vec[i]->GetItem() != NULL)
+                {
+                        if (slot_funct_vec[i]->GetItem()->GetDamaged() == true)
+                        {
+                                needs.repair_equipment = true;                                
+                        }
+                }
+        }
         
-        // check if rockets are ended
-   	needs.get_ammo = false;
+        //check ammo
+        needs.get_ammo = false;
+        for (unsigned int i=0; i<slot_funct_vec.size(); i++)
+        {
+                if (slot_funct_vec[i]->GetItem() != NULL)
+                {
+                        if (slot_funct_vec[i]->GetItem()->GetSubTypeId() == ENTITY::ROCKET_EQUIPMENT_ID) 
+                        {
+                                if (slot_funct_vec[i]->GetRocketEquipment()->GetAmmo() == 0)
+                                {
+                                        needs.get_ammo = true; 
+                                }
+                        }
+                }
+        }
         
+        // check fuel
+        needs.get_fuel = false;
+        if (drive_complex.GetBakSlot()->GetItem() != NULL)
+        {
+                if (drive_complex.GetBakSlot()->GetBakEquipment()->GetFuel() < 0.8*drive_complex.GetBakSlot()->GetBakEquipment()->GetFuelMax())
+                {
+                        needs.get_fuel = true;
+                } 
+        }   
+       
         // check credits
-        needs.get_credits = false;     
+        if (owner_npc->GetCredits() < 1000) { needs.get_credits = true; }
+        else                                { needs.get_credits = false; }
+}
+
+
+void Vehicle::ResolveNeedsInKosmoportInStatic()
+{
+        bool result = true;
+        
+        // buy repair korpus
+        if ( (needs.repair_korpus == true) and (result == true) )
+        {
+                result = ((Angar*)parent_vehicleslot->GetOwner())->RepairVehicle(this);
+        }
+        
+        // buy ammo
+        if ( (needs.get_ammo == true) and (result == true) )
+        {
+                for (unsigned int i=0; i<slot_funct_vec.size(); i++)
+                {
+                        if (slot_funct_vec[i]->GetItem() != NULL)
+                        {
+                                if (slot_funct_vec[i]->GetItem()->GetSubTypeId() == ENTITY::ROCKET_EQUIPMENT_ID)
+                                {
+                                        result = ((Angar*)parent_vehicleslot->GetOwner())->ChargeRocketEquipment(owner_npc, slot_funct_vec[i]->GetRocketEquipment());
+                                }
+                        }
+                }
+        }
+        
+        // repair equipment
+        if ( (needs.repair_equipment == true) and (result == true) )
+        {
+                for (unsigned int i=0; i<slot_funct_vec.size(); i++)
+                {
+                        if (slot_funct_vec[i]->GetItem() != NULL)
+                        {
+                                if (slot_funct_vec[i]->GetItem()->GetDamaged() == true)
+                                {
+                                        result = ((Angar*)parent_vehicleslot->GetOwner())->RepairItem(owner_npc, slot_funct_vec[i]->GetItem());
+                                }
+                        }
+                }
+        }        
+        
+        // tank up
+        if ( (needs.get_fuel == true) and (result == true) )
+        {
+                result = ((Angar*)parent_vehicleslot->GetOwner())->TankUpVehicle(this);
+        }
+       
+        //// check credits
+        //if (owner_npc->GetCredits() < 1000) { needs.get_credits = true; }
+        //else                                { needs.get_credits = false; }
 }
 
 void Vehicle::UpdateAllFunctionalItemsInStatic()
@@ -1164,39 +1240,12 @@ void Vehicle::RenderGrappleRange()
 	}
 }
 
-bool Vehicle::BuyKorpusRepair()
-{        
-        int price_for_one = data_korpus.price * REPAIR_VEHICLEKORPUS_PRICE_RATE;
-	int repair_max =  owner_npc->GetCredits() / price_for_one;
-	int repair_need = data_korpus.armor - data_life.armor;
-	
-	int repair_amount = 0;
-	if (repair_max > repair_need)
-	{		
-		repair_amount = repair_need;
-	}
-	else
-	{
-		repair_amount = repair_max;
-	}
-	
-	
-        if (owner_npc->WithdrawCredits(repair_amount*price_for_one) == true)
-        {
-                RepairKorpusEvent(repair_amount);
-                return true;  
-        }
-        
-        return false;        
-}
-
-void Vehicle::RepairKorpusEvent(int amount)
+void Vehicle::RepairKorpusOnAmount(int amount)
 {
 	data_life.armor += amount;
-	
-	if (data_life.armor  > data_korpus.armor)
+	if (data_life.armor > data_korpus.armor)
 	{
-		data_life.armor  > data_korpus.armor;
+		data_life.armor = data_korpus.armor;
 	}
 }
 
@@ -1235,29 +1284,6 @@ int Vehicle::GetFuelMiss() const
 {
 	return drive_complex.GetBakSlot()->GetBakEquipment()->GetFuelMiss();
 }
-
-void Vehicle::BuyFuelAsMuchAsPossible()
-{
-	int price_for_one = ((Kosmoport*)land)->GetAngar()->GetPriceFuel();
-	int fuel_to_buy_max =  owner_npc->GetCredits() / price_for_one;
-	int fuel_to_buy_need = GetFuelMiss();
-	
-	int fuel;
-	if (fuel_to_buy_max > fuel_to_buy_need)
-	{		
-		fuel = fuel_to_buy_need;
-	}
-	else
-	{
-		fuel = fuel_to_buy_max;
-	}
-
-	if (owner_npc->WithdrawCredits(fuel*price_for_one) == true)
-	{
-		GetDriveComplex().GetBakSlot()->GetBakEquipment()->IncreaseFuel(fuel);
-	}
-}
-
 
 void Vehicle::LockRandomItem(int locked_turns)
 {

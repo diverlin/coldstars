@@ -72,8 +72,9 @@ class BaseItem : public Base
 		int GetPrice()              	const { return price; };
 		int GetParentSubTypeId() const { return parent_subtype_id; };
 
-		bool GetLocked()	const { return (locked_turns > 0); }
-                int GetFunctioning()    const { return ( (condition > 0) and (locked_turns == 0) ); }
+                bool GetDamaged()       const { return (condition < 0); };
+		bool GetLocked()	const { return (locked_turns > 0); };
+                int GetFunctioning()    const { return ( (condition > 0) and (locked_turns == 0) ); };
                 
                 void UseNormalDeterioration();
                 void UseOverloadDeterioration();
@@ -83,7 +84,7 @@ class BaseItem : public Base
                 void DeteriorationEvent(); 
                 void LockEvent(int); 
                 
-                void RepairEvent();
+                bool RepairEvent();
 
 		virtual void UpdateProperties() {};
 		virtual void UpdateInStatic() { UpdateLock(); };

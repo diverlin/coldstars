@@ -25,6 +25,7 @@ class VehicleSlot;
 class Vehicle;
 class Npc;
 class BaseItem;
+class RocketEquipment;
 
 class Angar : public Room
 {
@@ -42,14 +43,18 @@ class Angar : public Room
                 bool AddVehicle(Vehicle*);
                 
                 bool RepairItem(Npc*, BaseItem*) const;
-
+                bool ChargeRocketEquipment(Npc*, RocketEquipment*) const;
+                                
+                bool RepairVehicle(Vehicle*) const; 
+                bool TankUpVehicle(Vehicle*) const; 
+                
                 int GetFreeVehicleSlotTotalNum() const;
                 
                 int GetPriceFuel() const { return price_fuel; };
                              
                 std::string GetDockVehicleStr() const;
-                                  	                      
-                void SaveData(boost::property_tree::ptree&) const;		
+                                                        
+                void SaveData(boost::property_tree::ptree&) const;
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 		

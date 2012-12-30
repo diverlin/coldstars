@@ -57,13 +57,13 @@ class Npc : public Base
 		void SetUpperControl(bool upper_control)        { this->upper_control = upper_control; };
 		void SetVehicle(Vehicle* vehicle) 		{ this->vehicle = vehicle; };
 
-		int GetRaceId()				const { return race_id; };
+		int GetRaceId()			const { return race_id; };
 
-		Vehicle* GetVehicle()           	const { return vehicle; };
-		Skill& GetSkill() 			{ return skill; };
-		Vehicle* GetScanTarget()        	const { return vehicle_to_scan; };
-		Observation& GetObservation()   	{ return observation; };
-		unsigned long int GetCredits()  	const { return credits; };   
+		Vehicle* GetVehicle()           const { return vehicle; };
+		Skill& GetSkill() 		{ return skill; };
+		Vehicle* GetScanTarget()        const { return vehicle_to_scan; };
+		Observation& GetObservation()   { return observation; };
+		unsigned long int GetCredits()  const { return credits; };   
 		StateMachine& GetStateMachine() { return state_machine; };
 
 		StarSystem* GetStarSystem() const;

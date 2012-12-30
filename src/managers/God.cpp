@@ -74,7 +74,7 @@ void God::CreateLifeToPlanets(StarSystem* starsystem) const
                 Planet* planet = starsystem->PLANET_vec[i];
                 
                 unsigned long int population = 0;
-                getRandBool() ? population = getRandInt(1000, 4000) : population = 0;
+                getRandBool() ? population = getRandInt(1000, 4000) : population = 1;
                 planet->SetPopulation(population);
                 
                 BaseLand* land = NULL;

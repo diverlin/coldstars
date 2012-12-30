@@ -697,7 +697,7 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
        						{
        							npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->RemoveTarget(visible_CONTAINER_vec[i]);
        						}
-       					}       						
+       					}
        				}
        			}
 
@@ -747,7 +747,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
                			        if ( npc->CheckPossibilityToScan(visible_SATELLITE_vec[i]) == true )
                				{
                       				npc->SetScanTarget(visible_SATELLITE_vec[i]);
-                      				gui_manager.GetGuiVehicleScan().BindVehicle(visible_SATELLITE_vec[i]);
+                      				gui_manager.EnterGuiScanInSpace();
                				}
 
       				}
@@ -834,8 +834,8 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 	                				if (npc->GetVehicle()->GetWeaponComplex().IsAnyWeaponSelected() == false)
 	                				{
 	                      					npc->SetScanTarget(visible_SHIP_vec[i]);
-	                      					gui_manager.GetGuiVehicleScan().BindVehicle(visible_SHIP_vec[i]);
-	                				}                			
+	                      					gui_manager.EnterGuiScanInSpace();
+	                				}            
 	                				else
 	                				{
 	               						gui_manager.GetGuiVehicleTarget().BindVehicle(visible_SHIP_vec[i], 0.6f);
@@ -849,7 +849,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
        				if (data_mouse.right_click == true)
                			{
                				npc->SetScanTarget(visible_SHIP_vec[i]);
-	                      		gui_manager.GetGuiVehicleScan().BindVehicle(visible_SHIP_vec[i]);
+                                        gui_manager.EnterGuiScanInSpace();
                			}
        			}
 						
@@ -914,7 +914,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
                			        if ( npc->CheckPossibilityToScan(visible_SPACESTATION_vec[i]) == true )
                				{
                       				npc->SetScanTarget(visible_SPACESTATION_vec[i]);
-                      				gui_manager.GetGuiVehicleScan().BindVehicle(visible_SPACESTATION_vec[i]);
+                      				gui_manager.EnterGuiScanInSpace();
                				}
        				}
        			}
@@ -983,12 +983,12 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 		starsystem->FindRadarVisibleEntities_c(this);
 	}
 	
-	bool mouse_interaction = gui_manager.UpdateInSpace(cursor.GetMouseData()); 	
+	bool mouse_interaction = gui_manager.UpdateInSpace(cursor.GetMouseData());
 	if (mouse_interaction == false)
 	{    	
 		if (turn_timer.GetTurnEnded() == true)  
 		{
-			if ( (npc->GetScanTarget() == NULL) && (show.GetGuiGalaxyMap() == false) )
+			if ( (npc->GetScanTarget() == NULL) && (gui_manager.GetShowGuiGalaxyMap() == false) )
 			{
 				mouse_interaction = MouseInteractionWithSpaceObjectsInSpace(cursor.GetMouseData());  
 				//mouse_interaction = cursor.UpdateInSpace();

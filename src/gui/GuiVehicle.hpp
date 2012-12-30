@@ -31,11 +31,14 @@ class GuiVehicle : public BaseGui
       		GuiVehicle();
       		~GuiVehicle();
 
-		void BindVehicle(Vehicle*, float scale = 1.0f);
-        	
-     		bool UpdateMouseInteractionInSpace(const MouseData&, bool);   
-                bool UpdateMouseInteractionInStore(const MouseData&, Vehicle*, Store*); 
-                        			
+                Vehicle* GetVehicle() const { return vehicle; };
+
+		void BindVehicle(Vehicle*, const vec2f& offset, float scale = 1.0f);
+        	void UnbindVehicle();
+                
+     		bool UpdateMouseInteraction(const MouseData&, bool);   
+                bool UpdateMouseInteractionInStore(const MouseData&, Store*); 
+
       		void RenderVehicle(const MouseData&, int mark_slot_subtype_id = NONE_ID) const;
       		
       	private:
@@ -43,6 +46,7 @@ class GuiVehicle : public BaseGui
                 TextureOb* textureOb_korpus;
                 	
                 ItemSlot* gate_slot;
+                Vehicle* vehicle;
                                 
       		std::vector<GuiPair<Rect, ItemSlot*>> rect_slot_vec;
       		      	

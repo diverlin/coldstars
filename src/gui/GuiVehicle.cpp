@@ -31,6 +31,7 @@
 GuiVehicle::GuiVehicle()
 {
 	textureOb_korpus = NULL;
+        vehicle = NULL;
 	gate_slot   = GetNewItemSlotWithoutSaveAbility(ENTITY::GATE_SLOT_ID);
 }
 
@@ -39,17 +40,26 @@ GuiVehicle::~GuiVehicle()
 	delete gate_slot;
 }
 
-void GuiVehicle::BindVehicle(Vehicle* vehicle, float scale)
-{
+void GuiVehicle::BindVehicle(Vehicle* vehicle, const vec2f& offset, float scale)
+{      
+        this->vehicle = vehicle;  
+        this->offset = offset;
+                
 	textureOb_korpus = NULL;
 
 	CreateKorpusGui(vehicle, scale);
 	CreateItemSlotsGeometry(vehicle, scale);
-}	
-	
+}
+
+void GuiVehicle::UnbindVehicle()
+{
+        rect_slot_vec.clear();
+        vehicle = NULL;
+}
+
 void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
 {
-	textureOb_korpus = vehicle->GetTextureOb();         	
+	textureOb_korpus = vehicle->GetTextureOb();
 
     	float kontur_w, kontur_h;
     	if (textureOb_korpus->GetFrameWidth() > textureOb_korpus->GetFrameHeight())
@@ -68,13 +78,11 @@ void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
   
 void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
 {        
-	rect_slot_vec.clear();
-	
 	int weapon_slot_counter = 0;
 	int otsec_slot_counter = 0;
 	int artef_slot_counter = 0;
         for (unsigned int i=0; i<vehicle->slot_total_vec.size(); i++)
-        {		
+        {
         	switch (vehicle->slot_total_vec[i]->GetSubTypeId())
         	{        
         		case ENTITY::WEAPON_SLOT_ID:
@@ -235,7 +243,7 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
 	rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, gate_slot));    		
 } 
 
-bool GuiVehicle::UpdateMouseInteractionInSpace(const MouseData& data_mouse, bool control)
+bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse, bool control)
 {
 	for(unsigned int i=0; i<rect_slot_vec.size(); i++)
 	{ 
@@ -324,7 +332,7 @@ bool GuiVehicle::UpdateMouseInteractionInSpace(const MouseData& data_mouse, bool
 	return false;
 }
 
-bool GuiVehicle::UpdateMouseInteractionInStore(const MouseData& data_mouse, Vehicle* vehicle, Store* store)
+bool GuiVehicle::UpdateMouseInteractionInStore(const MouseData& data_mouse, Store* store)
 {
 	for(unsigned int i=0; i<rect_slot_vec.size(); i++)
 	{ 

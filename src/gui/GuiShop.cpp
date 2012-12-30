@@ -17,6 +17,8 @@
 */
 
 #include "GuiShop.hpp"
+#include "../docking/Shop.hpp"
+
 #include "../common/rect.hpp"
 #include "../gui/Cursor.hpp"
 #include "../render/Screen.hpp"
@@ -25,12 +27,12 @@
 #include "../common/myStr.hpp"
 #include "../common/constants.hpp"
 
-GuiShop::GuiShop()
+GuiShop::GuiShop():shop(NULL)
 {
 	vec2f center(Screen::Instance().GetWindow().GetWidth()/2, Screen::Instance().GetWindow().GetHeight()/2);
                 
        	TextureOb* _texOb = GuiTextureObCollector::Instance().text_background; 
-                	
+
         ButtonSingle* minerals_button = new ButtonSingle(_texOb, GUI::BUTTON::MINERALS_ID, "minerals");  
      	minerals_button->SetRect(Rect(center.x, center.y - 1*(GUI::ICON_SIZE + 5), 10*GUI::ICON_SIZE, GUI::ICON_SIZE));
      	button_map.insert(std::make_pair(GUI::BUTTON::MINERALS_ID, minerals_button));
@@ -59,7 +61,17 @@ GuiShop::GuiShop()
 GuiShop::~GuiShop()
 {}
 
-void GuiShop::UpdateLables(Shop* shop) const
+void GuiShop::BindShop(Shop* shop)
+{
+        this->shop = shop;
+}
+
+void GuiShop::UnbindShop()
+{
+        shop = NULL;
+}
+        
+void GuiShop::UpdateLables() const
 {
 	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{	
@@ -104,7 +116,7 @@ void GuiShop::UpdateLables(Shop* shop) const
         }
 }
         
-void GuiShop::ButtonsAction(Shop* shop, Slider& slider)
+void GuiShop::ButtonsAction(Slider& slider)
 {
 	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{

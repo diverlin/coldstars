@@ -78,8 +78,6 @@ class Vehicle : public BaseSpaceEntity
                 const VehicleNeeds& GetNeeds() const { return needs; };
                                
                 VehicleKorpusData& GetKorpusData() { return data_korpus; };
-                			
-                StarSystem* GetFailBackStarSystem() const { return failback_starsystem; };
                                 
                 void AddItemSlot(ItemSlot*); 
                 
@@ -116,9 +114,7 @@ class Vehicle : public BaseSpaceEntity
                 Npc* GetOwnerNpc() const { return owner_npc; };
         	
         	GoodsPack* GetGoodsPack() const;
-                       	
-         	bool BuyKorpusRepair();
-        	       
+     
         	void UpdateSpecialAction();         
         	virtual void UpdateInSpace(int, bool) = 0;
         	
@@ -126,8 +122,9 @@ class Vehicle : public BaseSpaceEntity
         	virtual void Hit(int, bool);
 
         	virtual void PostDeathUniqueEvent(bool); 
-        	
-                void CheckNeeds();
+
+                void CheckNeedsInStatic();
+                void ResolveNeedsInKosmoportInStatic();
         	void UpdateAllFunctionalItemsInStatic();
              	void IncreaseMass(int);
              	void DecreaseMass(int);
@@ -162,7 +159,8 @@ class Vehicle : public BaseSpaceEntity
 		
 		bool IsFuelFull() const;
 		int GetFuelMiss() const;
-		void BuyFuelAsMuchAsPossible();
+                
+                void RepairKorpusOnAmount(int);
 
 		void LockRandomItem(int);
 
@@ -201,8 +199,6 @@ class Vehicle : public BaseSpaceEntity
                 Color4f color;
                                 
                 VehicleSlot* parent_vehicleslot;
-                        
-                StarSystem* failback_starsystem;
                                         
                 ItemSlot* GetFuctionalSlot(int) const;
        	        ItemSlot* GetEmptyCargoSlot();
@@ -233,9 +229,7 @@ class Vehicle : public BaseSpaceEntity
 
         private:
         	bool god_mode;
-        	
-                void RepairKorpusEvent(int);
-                 	
+
              	void DropRandomItemToSpace();   
                 bool MergeIdenticalGoods(BaseItem*);
                 
