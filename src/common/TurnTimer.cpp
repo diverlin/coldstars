@@ -30,8 +30,7 @@ TurnTimer& TurnTimer::Instance()
 }
 
 TurnTimer::TurnTimer():
-turn_tick(-1),
-turn_ended(true),
+turn_tick(2),
 turn_counter(0)
 {}
 
@@ -84,6 +83,5 @@ void TurnTimer::Update()
 
 void TurnTimer::Draw() const
 {}
-		
-	
+
 

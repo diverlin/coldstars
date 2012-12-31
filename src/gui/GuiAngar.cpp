@@ -177,8 +177,9 @@ void GuiAngar::ButtonsAction() const
 	   			case GUI::BUTTON::GETLAUNCH_ID:
 	   			{
        					player->GetNpc()->GetVehicle()->LaunchingEvent();
+                                        //player->GetGuiManager().EnterGuiLaunchingScreen();
        		   			return; 
-       		   				      		   			
+ 
        		   			break;
        		   		}
        			}
@@ -195,7 +196,7 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                        	if (data_mouse.right_click == true)
                        	{
                  		player->GetNpc()->SetScanTarget(rect_vehicleslot_vec[i].second->GetVehicle());
-                                player->GetGuiManager().EnterGuiScanInAngar();
+                                player->GetGuiManager().GetGuiKosmoport().EnterGuiScanInAngar();
                                 return true;
                         }
                         

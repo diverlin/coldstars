@@ -32,6 +32,7 @@
 #include "../spaceobjects/RocketBullet.hpp"
 
 #include "../pilots/Player.hpp"
+#include "../pilots/Npc.hpp"
 
 #include "../world/galaxy.hpp"
 #include "../world/starsystem.hpp"

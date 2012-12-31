@@ -53,7 +53,7 @@ void VehicleSlot::InsertVehicle(Vehicle* vehicle)
 {
         this->vehicle = vehicle;
 
-        vehicle->SetPlaceTypeId(data_id.type_id);
+        //vehicle->SetPlaceTypeId(data_id.type_id);
         vehicle->SetParentVehicleSlot(this);
 }
 

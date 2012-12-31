@@ -49,7 +49,7 @@ Kosmoport::~Kosmoport()
 void Kosmoport::PutChildsToGarbage() const
 {
 	EntityGarbage::Instance().Add(angar);
-	EntityGarbage::Instance().Add(store);	
+	EntityGarbage::Instance().Add(store);
 	EntityGarbage::Instance().Add(shop);
 	EntityGarbage::Instance().Add(goverment);
 }
@@ -92,6 +92,7 @@ bool Kosmoport::GetPermissionToLand() const
 /* virtual */
 bool Kosmoport::AddVehicle(Vehicle* vehicle)
 {        
+        vehicle->SetPlaceTypeId(data_id.type_id); 
         angar->AddVehicle(vehicle);  
         
         vehicle->SetLand(this);        

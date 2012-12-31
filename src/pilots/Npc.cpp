@@ -49,11 +49,10 @@ Npc::Npc(int id)
     	data_id.type_id = ENTITY::NPC_ID;
     	race_id = NONE_ID;
 
-    	upper_control = false;
-
     	credits = 1000;
 
-        vehicle    = NULL;
+        player = NULL;
+        vehicle = NULL;
 
     	vehicle_to_scan = NULL;
 
@@ -86,7 +85,7 @@ void Npc::UpdateInKosmoportInStatic()
 	
 	// if all things are DONE
 	//((Planet*)vehicle->GetDriveComplex()->GetTarget())->GetLand()->AddToLaunchingQueue(this); // improove by adding spacestation
-	if (upper_control == false)
+	if (player == NULL)
 	{
         	//if (ai_model)
         	//{
@@ -112,7 +111,7 @@ void Npc::UpdateInSpaceInStatic()
         vehicle->UpdateAllFunctionalItemsInStatic();
 	vehicle->GetWeaponComplex().PrepareWeapons();
         
-	if (upper_control == false)
+	if (player == NULL)
 	{
         	vehicle->CheckNeedsInStatic();
         	observation.ObserveAllInSpace();  

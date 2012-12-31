@@ -40,10 +40,11 @@ GuiVehicle::~GuiVehicle()
 	delete gate_slot;
 }
 
-void GuiVehicle::BindVehicle(Vehicle* vehicle, const vec2f& offset, float scale)
+void GuiVehicle::BindVehicle(Vehicle* vehicle, const vec2f& offset, bool block_manual_closing, float scale)
 {      
         this->vehicle = vehicle;  
         this->offset = offset;
+        this->block_manual_closing = block_manual_closing;
                 
 	textureOb_korpus = NULL;
 
