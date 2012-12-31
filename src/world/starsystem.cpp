@@ -43,6 +43,7 @@
 #include "../spaceobjects/BlackHole.hpp"
 
 #include "../pilots/Player.hpp"
+#include "../pilots/Npc.hpp"
 
 #include "../effects/DistantNebulaEffect.hpp"
 #include "../effects/DistantStarEffect.hpp"
@@ -660,16 +661,16 @@ void StarSystem::FindRenderVisibleEntities_c(Player* player)
 
 void StarSystem::FindRadarVisibleEntities_c(Player* player)
 {	
-	GuiRadar& gui_radar = player->GetGuiManager().GetGuiRadar();
+	GuiRadar& gui_radar = player->GetGuiManager().GetGuiSpace().GetGuiRadar();
 	const Vehicle& vehicle = *player->GetNpc()->GetVehicle();
 	gui_radar.Reset();
 		
-        for (unsigned int i=0; i<STAR_vec.size(); i++) 	{ gui_radar.Add(STAR_vec[i]); }    
+        for (unsigned int i=0; i<STAR_vec.size(); i++)        { gui_radar.Add(STAR_vec[i]); }    
         for (unsigned int i=0; i<PLANET_vec.size(); i++)      { gui_radar.Add(PLANET_vec[i]); } 
     	for (unsigned int i=0; i<BLACKHOLE_vec.size(); i++)   { gui_radar.Add(BLACKHOLE_vec[i]); } 
     	                
         for (unsigned int i=0; i<ASTEROID_vec.size(); i++)    { gui_radar.AddIfWithinRadarRange(ASTEROID_vec[i], vehicle); }         
-    	for (unsigned int i=0; i<VEHICLE_vec.size(); i++) 	{ gui_radar.AddIfWithinRadarRange(VEHICLE_vec[i], vehicle); }    	
+    	for (unsigned int i=0; i<VEHICLE_vec.size(); i++)     { gui_radar.AddIfWithinRadarRange(VEHICLE_vec[i], vehicle); }    	
 }
 
       

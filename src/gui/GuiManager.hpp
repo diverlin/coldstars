@@ -19,19 +19,13 @@
 #ifndef GUIMANAGER_H
 #define GUIMANAGER_H
 
-#include "../gui/GuiRadar.hpp"
-#include "../gui/GuiVehicle.hpp"
-#include "../gui/GuiVehicle2.hpp"
-#include "../gui/GuiSkill.hpp"
+class GuiSkill;
+class GuiGalaxyMap;
+
 #include "../gui/GuiKosmoport.hpp"
-#include "../gui/GuiAngar.hpp"
-#include "../gui/GuiStore.hpp"
-#include "../gui/GuiShop.hpp"
-#include "../gui/GuiGoverment.hpp"
 #include "../gui/GuiSpace.hpp"
-#include "../gui/GuiGalaxyMap.hpp"
 #include "../gui/GuiNatureLand.hpp"
-				
+
 class GuiManager
 {
    	public:
@@ -40,71 +34,37 @@ class GuiManager
 
 		void SetPlayer(Player*);
 
-                bool GetShowGuiGalaxyMap() const { return show_gui_galaxymap; };
+                GuiKosmoport& GetGuiKosmoport() { return gui_kosmoport; };
+                GuiSpace& GetGuiSpace() { return gui_space; };
+                
+		GuiVehicle* GetGuiVehicleScan() const { return gui_vehicle_scan; };
+                GuiGalaxyMap* GetGuiGalaxyMap() const { return gui_galaxymap; };
 
-		GuiRadar& GetGuiRadar() { return gui_radar; };
-		GuiVehicle& GetGuiVehicleScan() { return gui_vehicle_scan; };
-		GuiVehicle2& GetGuiVehiclePlayer() { return gui_vehicle_player; };
-		GuiVehicle2& GetGuiVehicleTarget() { return gui_vehicle_target; };
-		GuiSkill& GetGuiSkill() { return gui_skill; };
-
-		bool UpdateInSpace(const MouseData&);
-		void RenderInSpace(const MouseData&);
-		
-		bool RunSessionInKosmoport(const MouseData&);
+                bool RunSessionInSpace(const MouseData&);                                
+                bool RunSessionInKosmoport(const MouseData&);
 		bool RunSessionInNatureLand(const MouseData&);
                 
-                void EnterGalaxyMapInSpace();
-                void ExitGalaxyMapInSpace();
-                
-                void EnterGuiScanInSpace();
-                void EnterGuiScanInAngar();
-                void ExitGuiScan();
-                
-                void EnterGuiAngarScreen();
-                void ExitGuiAngarScreen();
+                void EnterGuiKosmoport();
+                void ExitGuiKosmoport();                
                
-		void EnterGuiStoreScreen();
-                void ExitGuiStoreScreen();
-                                
-                void EnterGuiShopScreen();
-                void ExitGuiShopScreen();
-
-                void EnterGuiGalaxyMapScreen();
-                void ExitGuiGalaxyMapScreen();
+                void EnterGuiSpace();
+                void ExitGuiSpace(); 
                 
-                void EnterGuiGovermentScreen();
-                void ExitGuiGovermentScreen();
-                
-                void ExitCurrentScreen();
+                bool UpdateMouseInteractionWithScanVehicle(const MouseData&, bool allow_full_control = false);     		
+     		void RenderScanVehicle(const MouseData&, bool show_skill = true) const;  
                                 
       	private:
       		Player* player;
-
-		bool show_gui_galaxymap;                                                                                
-        	bool show_gui_scan;
-        	bool show_gui_radar;
-
-      		GuiVehicle 	gui_vehicle_scan;
-      		GuiVehicle2 	gui_vehicle_player;
-      		GuiVehicle2 	gui_vehicle_target;
-      		GuiSkill   	gui_skill;
+                
       		GuiKosmoport 	gui_kosmoport;
-      		GuiAngar 	gui_angar;
-                GuiStore 	gui_store;
-                GuiShop        	gui_shop;
-                GuiGoverment    gui_goverment;
-      		GuiSpace     	gui_space;      
-		GuiGalaxyMap    gui_galaxymap;
-       		GuiRadar 	gui_radar;
+      		GuiSpace     	gui_space;
        		GuiNatureLand 	gui_natureland;
 
-       		Slider slider;  
-
-     		bool UpdateMouseInteractionWithScanVehicle(const MouseData&, bool allow_full_control = false);     		
-     		bool UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData&);   
-     		
-     		void RenderScanVehicle(const MouseData&, bool show_skill = true) const;
+                // shared guis
+      		GuiVehicle* 	gui_vehicle_scan;
+                GuiSkill*   	gui_skill;
+                GuiGalaxyMap*   gui_galaxymap;
+       		Slider*         slider;  
 };
 
 

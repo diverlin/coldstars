@@ -20,19 +20,72 @@
 #define GUIKOSMOPORT_H
 
 #include "BaseGui.hpp"
+#include "../gui/GuiAngar.hpp"
+#include "../gui/GuiStore.hpp"
+#include "../gui/GuiShop.hpp"
+#include "../gui/GuiGoverment.hpp"
+
+class GuiVehicle;
+class GuiSkill;
+class GuiGalaxyMap;
+class Slider;
 
 class GuiKosmoport : public BaseGui
 {
     	public:
        		GuiKosmoport();
        		~GuiKosmoport();
+                                
+                void SetPlayer(Player*);
+                void BindKosmoport(Kosmoport*);
+                void UnbindKosmoport();
+                
+                void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkill*, Slider*);
+                void UnbindSharedGuis();                
+          
+                void EnterGuiScanInAngar();
+                void ExitGuiScan();
+                                
+                void EnterGuiStoreScreen();
+                void ExitGuiStoreScreen();
+                
+                bool GetInitDone() const { return init_done; };
+                
+                void ButtonsAction();
+                                
+                bool Update(const MouseData&);
+                void Render(const MouseData&);
+                
+        private:
+                bool init_done;                                                                             
+                                
+                int active_screen_id; 
+                
+                Kosmoport* kosmoport;
+                                
+      		GuiAngar 	gui_angar;
+                GuiStore 	gui_store;
+                GuiShop        	gui_shop;
+                GuiGoverment    gui_goverment;  
+              
+                GuiGalaxyMap* gui_galaxymap;  
+                GuiVehicle*   gui_vehicle_scan;
+                GuiSkill*     gui_skill;
+                Slider*       slider;
+                
+                void EnterGuiAngarScreen();
+                void ExitGuiAngarScreen();
+                                
+                void EnterGuiShopScreen();
+                void ExitGuiShopScreen();
 
-		int GetActiveScreenId() const { return active_screen_id; };
-		
-       		void ButtonsAction();
-               
-       	private:
-       		int active_screen_id; 
+                void EnterGuiGalaxyMapScreen();
+                void ExitGuiGalaxyMapScreen();
+                
+                void EnterGuiGovermentScreen();
+                void ExitGuiGovermentScreen();
+                
+                void ExitCurrentScreen();
 };
 
 

@@ -50,6 +50,8 @@
 #include "../common/TurnTimer.hpp"
 #include "../pilots/Npc.hpp"
 
+#include "../gui/GuiGalaxyMap.hpp"
+
 Player::Player(int id)
 { 
     	data_id.id         = id;
@@ -70,7 +72,7 @@ Player::~Player()
 void Player::BindNpc(Npc* npc)
 {
     	this->npc = npc;
-    	npc->SetUpperControl(true);
+    	npc->SetPlayer(this);
 }
 
 void Player::ClearVisibleEntities()
@@ -214,8 +216,48 @@ void Player::AddIfVisible(VerticalFlowText* effect)
 	}
 }     		
 
-void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
+void Player::UpdatePostTransaction()
 {
+        switch (npc->GetVehicle()->GetPlaceTypeId())
+        {
+                case ENTITY::KOSMOPORT_ID:
+                {
+                        if (gui_manager.GetGuiKosmoport().GetInitDone() == false)
+                        {
+                               gui_manager.EnterGuiKosmoport(); 
+                        }
+                        
+                        if (gui_manager.GetGuiSpace().GetInitDone() == true)
+                        {
+                                gui_manager.ExitGuiSpace();
+                        }
+                        
+                        break;
+                }
+        
+                case ENTITY::NATURELAND_ID:
+                {                       
+                        break;
+                }
+                case ENTITY::SPACE_ID:
+                {
+                        if (gui_manager.GetGuiKosmoport().GetInitDone() == true)
+                        {
+                                gui_manager.ExitGuiKosmoport(); 
+                        }
+                        
+                        if (gui_manager.GetGuiSpace().GetInitDone() == false)
+                        {
+                                gui_manager.EnterGuiSpace();
+                        }
+                        
+                        break;
+                }
+        }        
+}
+
+void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
+{       
 	if (starsystem == NULL) //hack
 	{
 		starsystem = npc->GetVehicle()->GetStarSystem();
@@ -747,7 +789,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
                			        if ( npc->CheckPossibilityToScan(visible_SATELLITE_vec[i]) == true )
                				{
                       				npc->SetScanTarget(visible_SATELLITE_vec[i]);
-                      				gui_manager.EnterGuiScanInSpace();
+                      				gui_manager.GetGuiSpace().EnterGuiScan();
                				}
 
       				}
@@ -834,11 +876,11 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 	                				if (npc->GetVehicle()->GetWeaponComplex().IsAnyWeaponSelected() == false)
 	                				{
 	                      					npc->SetScanTarget(visible_SHIP_vec[i]);
-	                      					gui_manager.EnterGuiScanInSpace();
+	                      					gui_manager.GetGuiSpace().EnterGuiScan();
 	                				}            
 	                				else
 	                				{
-	               						gui_manager.GetGuiVehicleTarget().BindVehicle(visible_SHIP_vec[i], 0.6f);
+	               						gui_manager.GetGuiSpace().GetGuiVehicleTarget().BindVehicle(visible_SHIP_vec[i], 0.6f);
 	                				}
 	                			}
 	       				}
@@ -849,7 +891,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
        				if (data_mouse.right_click == true)
                			{
                				npc->SetScanTarget(visible_SHIP_vec[i]);
-                                        gui_manager.EnterGuiScanInSpace();
+                                        gui_manager.GetGuiSpace().EnterGuiScan();
                			}
        			}
 						
@@ -914,7 +956,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
                			        if ( npc->CheckPossibilityToScan(visible_SPACESTATION_vec[i]) == true )
                				{
                       				npc->SetScanTarget(visible_SPACESTATION_vec[i]);
-                      				gui_manager.EnterGuiScanInSpace();
+                      				gui_manager.GetGuiSpace().EnterGuiScan();
                				}
        				}
        			}
@@ -983,12 +1025,12 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 		starsystem->FindRadarVisibleEntities_c(this);
 	}
 	
-	bool mouse_interaction = gui_manager.UpdateInSpace(cursor.GetMouseData());
+	bool mouse_interaction = gui_manager.GetGuiSpace().Update(cursor.GetMouseData());
 	if (mouse_interaction == false)
 	{    	
 		if (turn_timer.GetTurnEnded() == true)  
 		{
-			if ( (npc->GetScanTarget() == NULL) && (gui_manager.GetShowGuiGalaxyMap() == false) )
+			if ( (gui_manager.GetGuiVehicleScan()->GetVehicle() == NULL) && (gui_manager.GetGuiGalaxyMap()->GetGalaxy() == NULL) )
 			{
 				mouse_interaction = MouseInteractionWithSpaceObjectsInSpace(cursor.GetMouseData());  
 				//mouse_interaction = cursor.UpdateInSpace();
@@ -1001,13 +1043,13 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 	}
 
 	RenderInSpace(starsystem, turn_timer.GetTurnEnded(), show.GetAllOrbits(), show.GetAllPath()); 
- 	gui_manager.RenderInSpace(cursor.GetMouseData()); 
+ 	gui_manager.GetGuiSpace().Render(cursor.GetMouseData()); 
 }
 
 
 void Player::SessionInKosmoport()
 {   	
-	gui_manager.RunSessionInKosmoport(cursor.GetMouseData());        
+	gui_manager.RunSessionInKosmoport(cursor.GetMouseData());
 }
 
 void Player::SessionInNatureLand()
@@ -1023,7 +1065,7 @@ void Player::RunSession(const TurnTimer& turn_timer)
        	{
        		case ENTITY::SPACE_ID: 		{ SessionInSpace(npc->GetVehicle()->GetStarSystem(), turn_timer); break; }
        		case ENTITY::HYPER_SPACE_ID: 	{ SessionInSpace((StarSystem*)npc->GetVehicle()->GetDriveComplex().GetTarget(), turn_timer); break; }
-       		case ENTITY::VEHICLE_SLOT_ID:  	{ SessionInKosmoport(); break; }
+       		case ENTITY::KOSMOPORT_ID:  	{ SessionInKosmoport(); break; }
        		case ENTITY::NATURELAND_ID:  	{ SessionInNatureLand(); break; }
        	}        	
        	

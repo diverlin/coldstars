@@ -85,7 +85,8 @@ class Player : public Base
      		void RunSession(const TurnTimer&); 
     		
     		void ForceStateMachineReset() const;
-    		         
+                
+  		void UpdatePostTransaction();        
 		void UpdatePostTransactionEvent(TurnTimer&);
 		    		             		       
                 void SaveData(boost::property_tree::ptree&) const;		

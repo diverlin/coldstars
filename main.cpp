@@ -4,7 +4,7 @@
 	 This program is free software; you can redistribute it and/or
 	 modify it under the terms of the GNU General Public License
 	 as published by the Free Software Foundation; either version 2
-	 of the Licens-e, or (at your option) any later version.
+	 of the License, or (at your option) any later version.
 
 	 This program is distributed in the hope that it will be useful,
 	 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -40,7 +40,7 @@
 int main()
 {          
 	//pureTest2(); 
-	
+
 	init();  
         
 	GameDate::Instance().SetDate(1,1,4000);
@@ -83,8 +83,9 @@ int main()
 		/* server code end */
 
 		/* client code start */
-		player->RunSession(TurnTimer::Instance());
-		player->UpdatePostTransactionEvent(TurnTimer::Instance());      
+                player->UpdatePostTransaction();   
+		player->RunSession(TurnTimer::Instance());  
+                player->UpdatePostTransactionEvent(TurnTimer::Instance()); 
 		/* client code end */
 		
 		if (TurnTimer::Instance().GetTurnEnded() == true)

@@ -117,6 +117,8 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
                         		if (player->GetNpc()->GetCredits() >= price)
                               		{
                               			store->SellVehicle(player->GetNpc(), rect_vehicleslot_vec[i].second, price);
+                                                //player->GetGuiManager().GetGuiKosmoport().ExitGuiStoreScreen();
+                                                //player->GetGuiManager().GetGuiKosmoport().EnterGuiStoreScreen();
                         		}
                         	} 
                         	return true; 

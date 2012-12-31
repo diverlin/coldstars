@@ -618,6 +618,7 @@ void Vehicle::DockingEvent()
      		{
                 	Planet* planet = ((Planet*)drive_complex.GetTarget());                
      			planet->GetLand()->AddVehicle(this);
+                        
 			break;
 		}
 	
@@ -629,6 +630,7 @@ void Vehicle::DockingEvent()
 				{
                 			SpaceStation* spacestation = ((SpaceStation*)drive_complex.GetTarget());
                         		spacestation->GetLand()->AddVehicle(this);
+                        
 					break;
 				}
 				
@@ -640,7 +642,7 @@ void Vehicle::DockingEvent()
 			}
 			
 			break;
-		}                          		
+		}
 	}
         
         GetDriveComplex().ResetTarget();
@@ -1486,7 +1488,7 @@ void Vehicle::ResolveDataUniqueVehicle()
 			break;
 		}
 		
-		case ENTITY::VEHICLE_SLOT_ID:
+		case ENTITY::KOSMOPORT_ID:
 		{	
 			((VehicleSlot*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this); 
 			break;
