@@ -29,6 +29,7 @@
 #include "../common/myStr.hpp"
 #include "../common/constants.hpp"
 #include "../common/GameDate.hpp"
+#include "../common/Logger.hpp"
 
 #include "../resources/GuiTextureObCollector.hpp"
 
@@ -130,6 +131,10 @@ bool GuiSpace::UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData& da
 
 void GuiSpace::EnterGalaxyMap()
 {        
+	#if GUI_LOG_ENABLED == 1
+	Logger::Instance().Log("GuiSpace::EnterGalaxyMap", GUI_LOG_DIP);
+	#endif
+	
         if (gui_vehicle_scan->GetVehicle() != NULL)
         {
                 ExitGuiScan();
@@ -141,12 +146,20 @@ void GuiSpace::EnterGalaxyMap()
 
 void GuiSpace::ExitGalaxyMap()
 {
+	#if GUI_LOG_ENABLED == 1
+	Logger::Instance().Log("GuiSpace::ExitGalaxyMap", GUI_LOG_DIP);
+	#endif
+	
         show_gui_radar = true;       
         gui_galaxymap->UnbindGalaxy();
 }
     
 void GuiSpace::EnterGuiScan()
 {
+	#if GUI_LOG_ENABLED == 1
+	Logger::Instance().Log("GuiSpace::EnterGuiScan", GUI_LOG_DIP);
+	#endif
+	
         int screen_w = Screen::Instance().GetWindow().GetWidth();
         int screen_h = Screen::Instance().GetWindow().GetHeight();
 	vec2f center_screen(screen_w/2, screen_h/2);
@@ -159,6 +172,10 @@ void GuiSpace::EnterGuiScan()
 
 void GuiSpace::ExitGuiScan()
 {       
+	#if GUI_LOG_ENABLED == 1
+	Logger::Instance().Log("GuiSpace::ExitGuiScan", GUI_LOG_DIP);
+	#endif
+	
         if (gui_vehicle_scan->GetVehicle() == player->GetNpc()->GetVehicle())
        	{
                 gui_skill->Acknowledge();
