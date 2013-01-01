@@ -22,8 +22,10 @@
 
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../render/Screen.hpp"
+
 #include "../common/constants.hpp"
 #include "../common/myStr.hpp"
+#include "../common/Logger.hpp"
 
 #include "../pilots/Player.hpp"
 #include "../pilots/Npc.hpp"
@@ -108,6 +110,10 @@ void GuiKosmoport::SetPlayer(Player* player)
 
 void GuiKosmoport::BindKosmoport(Kosmoport* kosmoport)
 {
+	#if GUI_LOG_ENABLED == 1
+	Logger::Instance().Log("GuiKosmoport::BindKosmoport", GUI_LOG_DIP);
+	#endif	
+	
         this->kosmoport = kosmoport;     
                 
 	gui_angar.BindAngar(kosmoport->GetAngar());
@@ -115,7 +121,7 @@ void GuiKosmoport::BindKosmoport(Kosmoport* kosmoport)
         gui_shop.BindShop(kosmoport->GetShop()); 
         gui_goverment.BindGoverment(kosmoport->GetGoverment());
         
-        active_screen_id = GUI::SCREEN::ANGAR_ID; 
+        EnterGuiAngarScreen();
         
         init_done     = true;
 }
@@ -153,6 +159,10 @@ void GuiKosmoport::UnbindSharedGuis()
 
 void GuiKosmoport::EnterGuiScanInAngar()
 {
+	#if GUI_LOG_ENABLED == 1
+	Logger::Instance().Log("GuiKosmoport::EnterGuiScanInAngar", GUI_LOG_DIP);
+	#endif	
+
         int screen_w = Screen::Instance().GetWindow().GetWidth();
         int screen_h = Screen::Instance().GetWindow().GetHeight();
 	vec2f center_screen(screen_w/2, screen_h/2);
@@ -163,6 +173,10 @@ void GuiKosmoport::EnterGuiScanInAngar()
 
 void GuiKosmoport::ExitGuiScan()
 {       
+	#if GUI_LOG_ENABLED == 1
+	Logger::Instance().Log("GuiKosmoport::ExitGuiScan", GUI_LOG_DIP);
+	#endif	
+	
         if (gui_vehicle_scan->GetVehicle() == player->GetNpc()->GetVehicle())
        	{
                 gui_skill->Acknowledge();
@@ -173,12 +187,20 @@ void GuiKosmoport::ExitGuiScan()
 }
                
 void GuiKosmoport::EnterGuiAngarScreen()
-{        
+{      
+	#if GUI_LOG_ENABLED == 1
+	Logger::Instance().Log("GuiKosmoport::EnterGuiAngarScreen", GUI_LOG_DIP);
+	#endif	
+	  
         active_screen_id = GUI::SCREEN::ANGAR_ID;
 }
 
 void GuiKosmoport::ExitGuiAngarScreen()
 {
+	#if GUI_LOG_ENABLED == 1
+	Logger::Instance().Log("GuiKosmoport::ExitGuiAngarScreen", GUI_LOG_DIP);
+	#endif	
+	
 	if (gui_vehicle_scan->GetVehicle() != NULL)
 	{
 		ExitGuiScan();
@@ -188,13 +210,17 @@ void GuiKosmoport::ExitGuiAngarScreen()
 
 void GuiKosmoport::EnterGuiStoreScreen()
 {
+	#if GUI_LOG_ENABLED == 1
+	Logger::Instance().Log("GuiKosmoport::EnterGuiStoreScreen", GUI_LOG_DIP);
+	#endif	
+	
         int screen_w = Screen::Instance().GetWindow().GetWidth();
         int screen_h = Screen::Instance().GetWindow().GetHeight();
 	vec2f center_screen(screen_w/2, screen_h/2);
         
         gui_store.SetOffset(center_screen + GUI_STORE_OFFSET);
 
-	player->GetNpc()->SetScanTarget(player->GetNpc()->GetVehicle());
+	player->GetNpc()->SetScanTarget(player->GetNpc()->GetVehicle()); //??
         bool lock_gui_scan_vehicle = true;
         gui_vehicle_scan->BindVehicle(player->GetNpc()->GetVehicle(), center_screen + GUI_VEHICLE_INSTORE_OFFSET, lock_gui_scan_vehicle);
         
@@ -203,35 +229,63 @@ void GuiKosmoport::EnterGuiStoreScreen()
 
 void GuiKosmoport::ExitGuiStoreScreen()
 {
+	#if GUI_LOG_ENABLED == 1
+	Logger::Instance().Log("GuiKosmoport::ExitGuiStoreScreen", GUI_LOG_DIP);
+	#endif	
+	
         ExitGuiScan();
 }
 
 void GuiKosmoport::EnterGuiShopScreen()
-{       
+{     
+	#if GUI_LOG_ENABLED == 1
+	Logger::Instance().Log("GuiKosmoport::EnterGuiShopScreen", GUI_LOG_DIP);
+	#endif	
+	  
         active_screen_id = GUI::SCREEN::SHOP_ID;
 }
 
 void GuiKosmoport::ExitGuiShopScreen()
-{}
+{
+	#if GUI_LOG_ENABLED == 1
+	Logger::Instance().Log("GuiKosmoport::ExitGuiShopScreen", GUI_LOG_DIP);
+	#endif	
+}
 
 void GuiKosmoport::EnterGuiGalaxyMapScreen()
 {       
+	#if GUI_LOG_ENABLED == 1
+	Logger::Instance().Log("GuiKosmoport::EnterGuiGalaxyMapScreen", GUI_LOG_DIP);
+	#endif	
+	
         active_screen_id = GUI::SCREEN::GALAXYMAP_ID;        
         gui_galaxymap->BindGalaxy(player->GetNpc()->GetVehicle()->GetStarSystem()->GetGalaxy());
 }
 
 void GuiKosmoport::ExitGuiGalaxyMapScreen()
 {
+	#if GUI_LOG_ENABLED == 1
+	Logger::Instance().Log("GuiKosmoport::ExitGuiGalaxyMapScreen", GUI_LOG_DIP);
+	#endif	
+	
         gui_galaxymap->UnbindGalaxy(); 
 }
 
 void GuiKosmoport::EnterGuiGovermentScreen()
 {        
+	#if GUI_LOG_ENABLED == 1
+	Logger::Instance().Log("GuiKosmoport::EnterGuiGovermentScreen", GUI_LOG_DIP);
+	#endif
+	
         active_screen_id = GUI::SCREEN::GOVERMENT_ID;
 }
 
 void GuiKosmoport::ExitGuiGovermentScreen()
-{}    
+{
+	#if GUI_LOG_ENABLED == 1
+	Logger::Instance().Log("GuiKosmoport::ExitGuiGovermentScreen", GUI_LOG_DIP);
+	#endif
+}    
 
 void GuiKosmoport::ExitCurrentScreen()
 {

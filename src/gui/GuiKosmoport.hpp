@@ -56,6 +56,8 @@ class GuiKosmoport : public BaseGui
                 bool Update(const MouseData&);
                 void Render(const MouseData&);
                 
+                                void EnterGuiAngarScreen();
+                                
         private:
                 bool init_done;                                                                             
                                 
@@ -73,7 +75,7 @@ class GuiKosmoport : public BaseGui
                 GuiSkill*     gui_skill;
                 Slider*       slider;
                 
-                void EnterGuiAngarScreen();
+
                 void ExitGuiAngarScreen();
                                 
                 void EnterGuiShopScreen();
