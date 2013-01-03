@@ -18,7 +18,7 @@
 
 #include "GuiSpace.hpp"
 #include "GuiGalaxyMap.hpp"
-#include "GuiSkill.hpp"
+#include "GuiSkills.hpp"
 #include "UserInput.hpp"
 
 #include "ButtonTrigger.hpp"
@@ -46,7 +46,7 @@
 GuiSpace::GuiSpace():
 gui_galaxymap(NULL),
 gui_vehicle_scan(NULL),
-gui_skill(NULL),
+gui_skills(NULL),
 slider(NULL),
 init_done(false)
 {   	
@@ -91,11 +91,11 @@ void GuiSpace::SetPlayer(Player* player)
 	gui_radar.SetPlayer(player); 
 }
 
-void GuiSpace::BindSharedGuis(GuiGalaxyMap* gui_galaxymap, GuiVehicle* gui_vehicle_scan, GuiSkill* gui_skill, Slider* slider)
+void GuiSpace::BindSharedGuis(GuiGalaxyMap* gui_galaxymap, GuiVehicle* gui_vehicle_scan, GuiSkills* gui_skills, Slider* slider)
 {
         this->gui_galaxymap    = gui_galaxymap;
         this->gui_vehicle_scan = gui_vehicle_scan;
-        this->gui_skill        = gui_skill;
+        this->gui_skills       = gui_skills;
         this->slider           = slider;
         
         init_done = true;
@@ -105,7 +105,7 @@ void GuiSpace::UnbindSharedGuis()
 {
         gui_galaxymap    = NULL;
         gui_vehicle_scan = NULL;
-        gui_skill        = NULL;
+        gui_skills       = NULL;
         slider           = NULL;
         
         init_done = false;
@@ -165,7 +165,7 @@ void GuiSpace::EnterGuiScan()
 	vec2f center_screen(screen_w/2, screen_h/2);
         
         gui_vehicle_scan->BindVehicle(player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET);
-        gui_skill->SetOffset(center_screen + GUI_SKILL_INSPACE_OFFSET);
+        gui_skills->SetOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
                         
         show_gui_radar = false;
 }
@@ -178,7 +178,7 @@ void GuiSpace::ExitGuiScan()
 	
         if (gui_vehicle_scan->GetVehicle() == player->GetNpc()->GetVehicle())
        	{
-                gui_skill->Acknowledge();
+                gui_skills->Acknowledge();
        	}
         gui_vehicle_scan->UnbindVehicle();
 

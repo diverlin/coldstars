@@ -26,7 +26,7 @@
 #include "../gui/GuiGoverment.hpp"
 
 class GuiVehicle;
-class GuiSkill;
+class GuiSkills;
 class GuiGalaxyMap;
 class Slider;
 
@@ -40,7 +40,7 @@ class GuiKosmoport : public BaseGui
                 void BindKosmoport(Kosmoport*);
                 void UnbindKosmoport();
                 
-                void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkill*, Slider*);
+                void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkills*, Slider*);
                 void UnbindSharedGuis();                
           
                 void EnterGuiScanInAngar();
@@ -72,7 +72,7 @@ class GuiKosmoport : public BaseGui
               
                 GuiGalaxyMap* gui_galaxymap;  
                 GuiVehicle*   gui_vehicle_scan;
-                GuiSkill*     gui_skill;
+                GuiSkills*    gui_skills;
                 Slider*       slider;
                 
 

@@ -16,13 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "GuiSkill.hpp"
+#include "GuiSkills.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../common/constants.hpp"
 #include "../render/Render.hpp"
 #include "ButtonSingle.hpp"
 
-GuiSkill::GuiSkill():
+GuiSkills::GuiSkills():
 attack_undo(0),
 defence_undo(0),
 leader_undo(0),
@@ -33,8 +33,8 @@ diplomat_undo(0)
      	textureOb_skill = GuiTextureObCollector::Instance().skill;
      	textureOb_skill_transparent = GuiTextureObCollector::Instance().skill_transparent;     	     	
 
-     	button_w = GUI::BUTTON::SKILL::BUTTON_WIDTH;  
-     	button_h = GUI::BUTTON::SKILL::BUTTON_HEIGHT; 
+     	button_w = GUI::BUTTON::SKILLS::BUTTON_WIDTH;  
+     	button_h = GUI::BUTTON::SKILLS::BUTTON_HEIGHT; 
      	
      	TextureOb* texOb_icon_plus  = GuiTextureObCollector::Instance().icon_plus;
      	TextureOb* texOb_icon_minus = GuiTextureObCollector::Instance().icon_minus;
@@ -91,14 +91,14 @@ diplomat_undo(0)
      	Decrement_diplomat_button->SetRect(Rect(5*button_w, -2*button_h, button_w, button_h));
      	button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_DIPLOMAT_ID, Decrement_diplomat_button));    
 
-	background_rect.Set(0, 0, 6*button_w, SKILL::ATTACK_MAX*button_h);	
+	background_rect.Set(0, 0, 6*button_w, SKILLS::ATTACK_MAX*button_h);	
 	textureOb_background = GuiTextureObCollector::Instance().text_background;
 }
 
-GuiSkill::~GuiSkill()
+GuiSkills::~GuiSkills()
 {}
 
-void GuiSkill::Acknowledge()
+void GuiSkills::Acknowledge()
 {
 	attack_undo   = 0;
 	defence_undo  = 0;
@@ -108,7 +108,7 @@ void GuiSkill::Acknowledge()
 	diplomat_undo = 0;
 }
 
-void GuiSkill::ButtonsAction(Skill& skill)
+void GuiSkills::ButtonsAction(Skills& skills)
 {
 	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{
@@ -119,7 +119,7 @@ void GuiSkill::ButtonsAction(Skill& skill)
         		{
         			case GUI::BUTTON::INCREMENT_ATTACK_ID:   
                                 {
-                                        if (skill.IncrementAttack() == true) 
+                                        if (skills.IncrementAttack() == true) 
                                         {
                                         	attack_undo++; 
                                         }
@@ -130,7 +130,7 @@ void GuiSkill::ButtonsAction(Skill& skill)
                                 {       
                                         if (attack_undo > 0)
                                         {
-                                                skill.DecrementAttack();
+                                                skills.DecrementAttack();
                                                 attack_undo--;
                                         }
                                         
@@ -139,7 +139,7 @@ void GuiSkill::ButtonsAction(Skill& skill)
            		   	      	
         			case GUI::BUTTON::INCREMENT_DEFENCE_ID:  
                                 { 
-                                        if (skill.IncrementDefence() == true) 
+                                        if (skills.IncrementDefence() == true) 
                                         {
                                         	defence_undo++;
                                         }
@@ -150,7 +150,7 @@ void GuiSkill::ButtonsAction(Skill& skill)
                                 { 
                                         if (defence_undo > 0)
                                         {
-                                                skill.DecrementDefence();
+                                                skills.DecrementDefence();
                                                 defence_undo--; 
                                         }
                                         
@@ -159,7 +159,7 @@ void GuiSkill::ButtonsAction(Skill& skill)
           		   	      	
         			case GUI::BUTTON::INCREMENT_LEADER_ID:   
                                 { 
-                                        if (skill.IncrementLeader() == true) 
+                                        if (skills.IncrementLeader() == true) 
                                         {
                                         	leader_undo++;
                                         }
@@ -170,7 +170,7 @@ void GuiSkill::ButtonsAction(Skill& skill)
                                 { 
                                         if (leader_undo > 0)
                                         {
-                                                skill.DecrementLeader(); 
+                                                skills.DecrementLeader(); 
                                                 leader_undo--;
                                         }
                                         
@@ -179,7 +179,7 @@ void GuiSkill::ButtonsAction(Skill& skill)
            		   	      	
         			case GUI::BUTTON::INCREMENT_TRADER_ID:   
                                 { 
-                                        if (skill.IncrementTrader() == true)
+                                        if (skills.IncrementTrader() == true)
                                         {
                                         	trader_undo++;
                                         }
@@ -190,7 +190,7 @@ void GuiSkill::ButtonsAction(Skill& skill)
                                 { 
                                         if (trader_undo > 0)
                                         {
-                                                skill.DecrementTrader(); 
+                                                skills.DecrementTrader(); 
                                                 trader_undo--;
                                         }
                                         
@@ -199,7 +199,7 @@ void GuiSkill::ButtonsAction(Skill& skill)
 
         			case GUI::BUTTON::INCREMENT_TECHNIC_ID:  
                                 { 
-                                	if (skill.IncrementTechnic() == true) 
+                                	if (skills.IncrementTechnic() == true) 
                                         {
                                         	technic_undo++;
                                         }
@@ -210,7 +210,7 @@ void GuiSkill::ButtonsAction(Skill& skill)
                                 {
                                         if (technic_undo > 0) 
                                         {
-                                                skill.DecrementTechnic(); 
+                                                skills.DecrementTechnic(); 
                                                 technic_undo--;
                                         }
                                         
@@ -219,7 +219,7 @@ void GuiSkill::ButtonsAction(Skill& skill)
            		   	      	
         			case GUI::BUTTON::INCREMENT_DIPLOMAT_ID: 
                                 { 
-                                        if (skill.IncrementDiplomat() == true) 
+                                        if (skills.IncrementDiplomat() == true) 
                                         {
                                         	diplomat_undo++;
                                         }
@@ -230,7 +230,7 @@ void GuiSkill::ButtonsAction(Skill& skill)
                                 {
                                         if (diplomat_undo > 0)
                                         {
-                                                skill.DecrementDiplomat(); 
+                                                skills.DecrementDiplomat(); 
                                                 diplomat_undo--;
                                         }
                                         break; 
@@ -241,7 +241,7 @@ void GuiSkill::ButtonsAction(Skill& skill)
 }
 
 
-void GuiSkill::RenderSkills(const Skill& skill) const
+void GuiSkills::RenderSkills(const Skills& skills) const
 {
 	glPushMatrix();
 	{
@@ -251,17 +251,17 @@ void GuiSkill::RenderSkills(const Skill& skill) const
 		for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 		{
 			BaseButton* button = iterator->second;
-			switch(button->GetSubTypeId())		
+			switch(button->GetSubTypeId())
 			{
 				case GUI::BUTTON::INCREMENT_ATTACK_ID:
 				{  			
-		     			for (int i=0; i<SKILL::ATTACK_MAX; i++) 
+		     			for (int i=0; i<SKILLS::ATTACK_MAX; i++) 
      					{ 
          					Rect tmp_rect(button->GetRect().GetCenter().x - button_w/2, 
          		      				      button->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		      				      button_w, button_h);
 
-     						if (i<skill.GetAttack()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+     						if (i<skills.GetAttack()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
      						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
      					}
  			
@@ -270,12 +270,12 @@ void GuiSkill::RenderSkills(const Skill& skill) const
 			
 				case GUI::BUTTON::INCREMENT_DEFENCE_ID:
 				{
-		     			for (int i=0; i<SKILL::DEFENCE_MAX; i++) 
+		     			for (int i=0; i<SKILLS::DEFENCE_MAX; i++) 
      					{		 
          					Rect tmp_rect(button->GetRect().GetCenter().x - button_w/2, 
          		      				      button->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		      				      button_w, button_h);
-         					if (i<skill.GetDefence()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+         					if (i<skills.GetDefence()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
      						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
      					}
 				
@@ -284,12 +284,12 @@ void GuiSkill::RenderSkills(const Skill& skill) const
 
 				case GUI::BUTTON::INCREMENT_LEADER_ID:
 				{
-	   		     		for (int i=0; i<SKILL::LEADER_MAX; i++) 
+	   		     		for (int i=0; i<SKILLS::LEADER_MAX; i++) 
      					{ 
          					Rect tmp_rect(button->GetRect().GetCenter().x - button_w/2, 
          		      				      button->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		      				      button_w, button_h);
-         					if (i<skill.GetLeader()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+         					if (i<skills.GetLeader()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
      						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
      					}
 				
@@ -298,12 +298,12 @@ void GuiSkill::RenderSkills(const Skill& skill) const
 
 	   			case GUI::BUTTON::INCREMENT_TRADER_ID:
 	   			{
-	   	     			for (int i=0; i<SKILL::TRADER_MAX; i++) 
+	   	     			for (int i=0; i<SKILLS::TRADER_MAX; i++) 
      					{ 
          					Rect tmp_rect(button->GetRect().GetCenter().x - button_w/2, 
          		     				      button->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		     				      button_w, button_h);
-         					if (i<skill.GetTrader()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+         					if (i<skills.GetTrader()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
      						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
     					}
 				
@@ -312,12 +312,12 @@ void GuiSkill::RenderSkills(const Skill& skill) const
 			
 	   			case GUI::BUTTON::INCREMENT_TECHNIC_ID:
 	   			{
-	   	     			for (int i=0; i<SKILL::TECHNIC_MAX; i++) 
+	   	     			for (int i=0; i<SKILLS::TECHNIC_MAX; i++) 
      					{ 
          					Rect tmp_rect(button->GetRect().GetCenter().x - button_w/2, 
          		      				      button->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		      				      button_w, button_h);
-         					if (i<skill.GetTechnic()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+         					if (i<skills.GetTechnic()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
      						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
      					}     
 	   				break;
@@ -325,12 +325,12 @@ void GuiSkill::RenderSkills(const Skill& skill) const
 
 	   			case GUI::BUTTON::INCREMENT_DIPLOMAT_ID:
 	   			{
-	   				for (int i=0; i<SKILL::DIPLOMAT_MAX; i++) 
+	   				for (int i=0; i<SKILLS::DIPLOMAT_MAX; i++) 
      					{ 
          					Rect tmp_rect(button->GetRect().GetCenter().x - button_w/2, 
          		      				      button->GetRect().GetCenter().y + button_h/2 + i*button_h, 
          		     				      button_w, button_h);
-         					if (i<skill.GetDiplomat()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+         					if (i<skills.GetDiplomat()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
      						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
      					}
 	   				break;

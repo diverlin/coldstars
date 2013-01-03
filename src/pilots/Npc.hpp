@@ -23,7 +23,7 @@
 
 #include "../common/Base.hpp"
 class BaseAiModel;
-#include "../pilots/Skill.hpp"
+#include "../pilots/Skills.hpp"
 #include "../ai/StateMachine.hpp"
 class Vehicle;
 class Player;
@@ -62,7 +62,7 @@ class Npc : public Base
 
                 Player* GetPlayer() const { return player; };
 		Vehicle* GetVehicle()           const { return vehicle; };
-		Skill& GetSkill() 		{ return skill; };
+		Skills& GetSkills() 		{ return skills; };
 		Vehicle* GetScanTarget()        const { return vehicle_to_scan; };
 		Observation& GetObservation()   { return observation; };
 		unsigned long int GetCredits()  const { return credits; };   
@@ -101,8 +101,10 @@ class Npc : public Base
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
                 
-                std::string GetAgressorSetString() const;
-		
+                void ApplySkillsStrategy();
+                                
+                std::string GetAgressorSetString() const;              
+
    	private:
    		bool is_alive;
      		int race_id;
@@ -111,7 +113,7 @@ class Npc : public Base
                 Player* player;
    	     	Vehicle* vehicle;
    	     	
-   	     	Skill skill;
+   	     	Skills skills;
 
      		BaseAiModel* ai_model;
      		StateMachine state_machine;

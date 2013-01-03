@@ -62,7 +62,7 @@ class GuiManager
 
                 // shared guis
       		GuiVehicle* 	gui_vehicle_scan;
-                GuiSkill*   	gui_skill;
+                GuiSkills*   	gui_skills;
                 GuiGalaxyMap*   gui_galaxymap;
        		Slider*         slider;  
 };

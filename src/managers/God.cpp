@@ -92,9 +92,10 @@ void God::CreateLifeToPlanets(StarSystem* starsystem) const
                          
                                 {
                                         int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
-                                        int npc_subtype_id = ENTITY::WARRIOR_ID;
+                                        int npc_subtype_id    = ENTITY::WARRIOR_ID;
+                                        int npc_subsubtype_id = ENTITY::WARRIOR_ID;
                         
-                                        Npc* npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id);
+                                        Npc* npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
                                         satellite->BindOwnerNpc(npc);
                                 }
                         
@@ -104,7 +105,8 @@ void God::CreateLifeToPlanets(StarSystem* starsystem) const
                         for (int j=0; j<4; j++)
                         {
                                 int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
-                                int npc_subtype_id = getRandNpcSubTypeId(npc_race_id);
+                                int npc_subtype_id    = getRandNpcSubTypeId(npc_race_id);
+                                int npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
                                 
                                 int ship_race_id = npc_race_id;         
                                 int ship_subtype_id = npc_subtype_id;  
@@ -114,7 +116,7 @@ void God::CreateLifeToPlanets(StarSystem* starsystem) const
                                 Ship* new_ship = ShipBuilder::Instance().GetNewShip(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
                                 ShipBuilder::Instance().Equip(new_ship); // improove
                 
-                                Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id);
+                                Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
                                 new_ship->BindOwnerNpc(new_npc);
                                 
                                 planet->AddVehicle(new_ship);
@@ -128,8 +130,9 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
     	for (int i=0; i<spacestation_per_system; i++)
     	{     
     		int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
-                int npc_subtype_id = ENTITY::WARRIOR_ID;
-
+                int npc_subtype_id    = ENTITY::WARRIOR_ID;
+                int npc_subsubtype_id = ENTITY::WARRIOR_ID;
+                
         	int ship_race_id = npc_race_id;         // RACES_ALL_vec[getRandInt(0, RACES_ALL_vec.size())];
         	int ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
         	int ship_size_id = getRandInt(1, 9);
@@ -138,7 +141,7 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
         	SpaceStation* spacestation = SpaceStationBuilder::Instance().GetNewSpaceStation();
         	SpaceStationBuilder::Instance().Equip(spacestation);       	// improove
 
-                Npc* npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id);
+                Npc* npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         	spacestation->BindOwnerNpc(npc);
 
 		vec2f center = getRandVec2f(700, 1500);
@@ -150,7 +153,7 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
                 Satellite* satellite = SatelliteBuilder::Instance().GetNewSatellite();
                 SatelliteBuilder::Instance().Equip(satellite);           		// improove
 
-                Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id);
+                Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
                 satellite->BindOwnerNpc(new_npc);
                 
                 starsystem->AddVehicle(satellite, vec2f(0, 0), 0, spacestation);
@@ -158,22 +161,25 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
     	}        
 }
 
-void God::CreateShipsInSpace(StarSystem* starsystem, int npc_race_id, int ship_num, int requestedclass) const
+void God::CreateShipsInSpace(StarSystem* starsystem, int npc_race_id, int ship_num, int subtype_id, int subsubtype_id) const
 {
-    	int npc_subtype_id = NONE_ID;
+    	int npc_subtype_id;
+        int npc_subsubtype_id;
 
     	for (int i=0; i<ship_num; i++)
     	{     
-    		if (requestedclass == NONE_ID)
+    		if (subtype_id == NONE_ID)
     		{
-			npc_subtype_id = getRandNpcSubTypeId(npc_race_id);
+			npc_subtype_id    = getRandNpcSubTypeId(npc_race_id);
+                        npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
                 }
                 else
                 {
-                	npc_subtype_id = requestedclass;
+                	npc_subtype_id    = subtype_id;
+                        npc_subsubtype_id = subsubtype_id;
                 }   
 
-        	int ship_race_id = npc_race_id;         
+        	int ship_race_id    = npc_race_id;         
         	int ship_subtype_id = npc_subtype_id;  
         	int ship_size_id = getRandInt(1, 9);
         	int weapons_num = getRandInt(1, 5);
@@ -181,7 +187,7 @@ void God::CreateShipsInSpace(StarSystem* starsystem, int npc_race_id, int ship_n
         	Ship* new_ship = ShipBuilder::Instance().GetNewShip(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
         	ShipBuilder::Instance().Equip(new_ship); // improove
 
-        	Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id);
+        	Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         	new_ship->BindOwnerNpc(new_npc);
 
 		vec2f center = getRandVec2f(300, 1200);

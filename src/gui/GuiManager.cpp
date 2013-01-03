@@ -29,7 +29,7 @@
 
 #include "../pilots/Npc.hpp"
 
-#include "../gui/GuiSkill.hpp"
+#include "../gui/GuiSkills.hpp"
 #include "../gui/GuiGalaxyMap.hpp"
 
 GuiManager::GuiManager()
@@ -37,7 +37,7 @@ GuiManager::GuiManager()
 	player = NULL;
         
         gui_vehicle_scan = new GuiVehicle();
-        gui_skill        = new GuiSkill();
+        gui_skills       = new GuiSkills();
         gui_galaxymap    = new GuiGalaxyMap();
        	slider           = new Slider();  
 }
@@ -45,7 +45,7 @@ GuiManager::GuiManager()
 GuiManager::~GuiManager()
 {
         delete gui_vehicle_scan;
-        delete gui_skill;
+        delete gui_skills;
         delete gui_galaxymap;
        	delete slider;  
 }
@@ -77,8 +77,8 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
 	bool interaction = gui_vehicle_scan->UpdateMouseInteraction(data_mouse, allow_full_control);        
 	if ( (interaction == true) and (allow_full_control == true) )
 	{
-		interaction = gui_skill->UpdateMouseInteractionWithButtons(data_mouse);
-		gui_skill->ButtonsAction(gui_vehicle_scan->GetVehicle()->GetOwnerNpc()->GetSkill());
+		interaction = gui_skills->UpdateMouseInteractionWithButtons(data_mouse);
+		gui_skills->ButtonsAction(gui_vehicle_scan->GetVehicle()->GetOwnerNpc()->GetSkills());
 	}
 
 	return interaction;
@@ -98,16 +98,16 @@ void GuiManager::RenderScanVehicle(const MouseData& data_mouse, bool show_skill)
 					
 	if ( (show_skill == true) and (gui_vehicle_scan->GetVehicle()->GetOwnerNpc() != NULL) )
 	{
-		gui_skill->RenderButtons();
-		gui_skill->RenderSkills(gui_vehicle_scan->GetVehicle()->GetOwnerNpc()->GetSkill());
-		gui_skill->RenderFocusedButtonInfo(data_mouse);
+		gui_skills->RenderButtons();
+		gui_skills->RenderSkills(gui_vehicle_scan->GetVehicle()->GetOwnerNpc()->GetSkills());
+		gui_skills->RenderFocusedButtonInfo(data_mouse);
 	}   					                 
 }
 
 void GuiManager::EnterGuiKosmoport()
 {
         gui_kosmoport.BindKosmoport((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand());
-        gui_kosmoport.BindSharedGuis(gui_galaxymap, gui_vehicle_scan, gui_skill, slider);
+        gui_kosmoport.BindSharedGuis(gui_galaxymap, gui_vehicle_scan, gui_skills, slider);
 }
         
 void GuiManager::ExitGuiKosmoport()
@@ -118,7 +118,7 @@ void GuiManager::ExitGuiKosmoport()
 
 void GuiManager::EnterGuiSpace()
 {
-        gui_space.BindSharedGuis(gui_galaxymap, gui_vehicle_scan, gui_skill, slider);
+        gui_space.BindSharedGuis(gui_galaxymap, gui_vehicle_scan, gui_skills, slider);
 }
 
 void GuiManager::ExitGuiSpace()

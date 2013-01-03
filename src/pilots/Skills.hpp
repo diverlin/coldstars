@@ -17,25 +17,27 @@
 */
 
 
-#ifndef SKILL_H
-#define SKILL_H
+#ifndef SKILLS_H
+#define SKILLS_H
 
 #include <boost/property_tree/ptree.hpp>
 #include "../common/constants.hpp"
 
-class Skill
+class Skills
 { 
 	public:
-		Skill();
-		~Skill();
+		Skills();
+		~Skills();
 
-		int GetAvailiablePoints() const	{ return available_points; };
-		int GetExpirience() 	  const		{ return expirience; };
-		int GetExpirienceNextLevel() const 	{ return expirience_nextlevel; };
+                void BindStrategy(const int*);
+                
+		int GetAvailablePoints() const	{ return available_points; };
+		int GetExpirience()  const { return expirience; };
+		int GetExpirienceNextLevel() const { return expirience_nextlevel; };
 		int GetLevel() const { return level; };
 
-		float GetAttackNormalized()   const { return attack  * SKILL::ATTACK_NORMALIZED_RATE; };   
-		float GetDefenceNormalized()  const { return defence * SKILL::DEFENCE_NORMALIZED_RATE; }; 
+		float GetAttackNormalized()   const { return attack  * SKILLS::ATTACK_NORMALIZED_RATE; };   
+		float GetDefenceNormalized()  const { return defence * SKILLS::DEFENCE_NORMALIZED_RATE; }; 
 		
 		int GetAttack()   const { return attack; };   
 		int GetDefence()  const { return defence; };  
@@ -63,6 +65,8 @@ class Skill
 
 		bool IncrementDiplomat();
 		void DecrementDiplomat();
+                
+                void ManageAccordingToStrategy();
 
 		void SaveData(boost::property_tree::ptree&, const std::string&) const;
 		void LoadData(const boost::property_tree::ptree&);
@@ -81,7 +85,17 @@ class Skill
 		
 		unsigned long int expirience;
 		unsigned long int expirience_nextlevel;
+                
+                int strategy[SKILLS_NUM];
+                        
+                void ImcrementSkillDependingOnArrayIndex(int);
+                int GetSkillDependingOnArrayIndex(int); 
+                
+                bool CheckLevelUp();               
 };
+
+const int* getArrayDependingOnClassTypeId(int);
+const int* getArrayDependingOnRaceId(int);
 
 #endif
 

@@ -51,6 +51,21 @@
 
 #define DEBUG_ITEMDAMAGELOCKVIAGUI 1  // 1 - is locking/unlocking item by right mouse click; 2 - is damaging/undamaging item by right mouse click
 
+// attack / defence / leader / trader / technic / diplomat   
+const int SKILLS_NUM = 6;            
+const int SKILLS_STRATEGY_WARRIOR[SKILLS_NUM]  = {4,4,1,1,1,1};
+const int SKILLS_STRATEGY_PIRAT[SKILLS_NUM]    = {2,2,1,1,1,1};
+const int SKILLS_STRATEGY_TRADER[SKILLS_NUM]   = {2,2,1,4,1,1};
+const int SKILLS_STRATEGY_DIPLOMAT[SKILLS_NUM] = {1,1,1,1,1,1};
+
+const int SKILLS_STRATEGY_RACE0[SKILLS_NUM] = {1,1,1,1,1,1};
+const int SKILLS_STRATEGY_RACE1[SKILLS_NUM] = {1,1,1,1,1,1};
+const int SKILLS_STRATEGY_RACE2[SKILLS_NUM] = {1,1,1,1,1,1};
+const int SKILLS_STRATEGY_RACE3[SKILLS_NUM] = {1,1,1,1,1,1};
+const int SKILLS_STRATEGY_RACE4[SKILLS_NUM] = {1,1,1,1,1,1};
+const int SKILLS_STRATEGY_RACE6[SKILLS_NUM] = {1,1,1,1,1,1};
+const int SKILLS_STRATEGY_RACE7[SKILLS_NUM] = {1,1,1,1,1,1};
+
 enum GAME_MODE
 { 
 	NORMAL_RUN=0,
@@ -96,8 +111,8 @@ const vec2f GUI_VEHICLE_INSPACE_OFFSET(-180, 0);
 const vec2f GUI_VEHICLE_INANGAR_OFFSET(-180, 0);
 const vec2f GUI_VEHICLE_INSTORE_OFFSET(-180, -200);
 
-const vec2f GUI_SKILL_INSPACE_OFFSET(100, 0);
-const vec2f GUI_SKILL_INANGAR_OFFSET(100, 0);
+const vec2f GUI_SKILLS_INSPACE_OFFSET(100, 0);
+const vec2f GUI_SKILLS_INANGAR_OFFSET(100, 0);
 const vec2f GUI_STORE_OFFSET(-200, 200);
 
 const int NATURELAND_ITEM_SLOT_MIN = 2;
@@ -227,7 +242,7 @@ namespace MICROSCENARIO
 	};
 }
  
-namespace SKILL
+namespace SKILLS
 {
 	const int ATTACK_MIN = 1;
 	const int DEFENCE_MIN = 1;
@@ -295,7 +310,7 @@ namespace ENTITY
 		
 		ENUM_END
 	};
-
+ 
 	namespace GALAXY
 	{
 		const int PARSEC = 200;
@@ -801,7 +816,7 @@ namespace GUI
 			ACTION_ATTACK_ID, ACTION_PRECISEATTACK_ID, ACTION_SCAN_ID, ACTION_GRAB_ID, ACTION_FOLLOW_ID
 		};
 		
-		namespace SKILL
+		namespace SKILLS
 		{
 			const int BUTTON_WIDTH = 20;
 			const int BUTTON_HEIGHT = 14;

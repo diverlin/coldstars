@@ -26,7 +26,7 @@
 #include "../gui/GuiVehicle2.hpp"
 
 class GuiVehicle;
-class GuiSkill;
+class GuiSkills;
 class GuiGalaxyMap;
 class Slider;
 
@@ -44,7 +44,7 @@ class GuiSpace : public BaseGui
                 GuiVehicle2& GetGuiVehiclePlayer() { return gui_vehicle_player; };
 		GuiVehicle2& GetGuiVehicleTarget() { return gui_vehicle_target; };
                 
-                void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkill*, Slider*);
+                void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkills*, Slider*);
                 void UnbindSharedGuis();
                 
 		bool Update(const MouseData&);
@@ -78,7 +78,7 @@ class GuiSpace : public BaseGui
                 
                 GuiGalaxyMap* gui_galaxymap;  
                 GuiVehicle*   gui_vehicle_scan;
-                GuiSkill*     gui_skill;
+                GuiSkills*    gui_skills;
                 Slider*       slider;
                 
      		bool UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData&);  

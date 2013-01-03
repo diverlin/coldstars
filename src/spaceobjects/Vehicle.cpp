@@ -714,7 +714,7 @@ void Vehicle::Hit(int damage, bool show_effect)
 	}
 	
 	damage *= (1.0 - properties.protection*0.01f);
-	damage *= owner_npc->GetSkill().GetDefenceNormalized();
+	damage *= owner_npc->GetSkills().GetDefenceNormalized();
 	
 	data_life.armor -= damage;
 	

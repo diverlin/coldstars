@@ -196,7 +196,7 @@ set (SOURCES
 
 	src/pilots/Player.cpp
 	src/pilots/Npc.cpp           
-	src/pilots/Skill.cpp
+	src/pilots/Skills.cpp
 	src/pilots/Observation.cpp 
 
 	src/slots/BaseSlot.cpp
@@ -239,7 +239,7 @@ set (SOURCES
 	src/gui/BaseButton.cpp
 	src/gui/ButtonTrigger.cpp
 	src/gui/ButtonSingle.cpp
-	src/gui/GuiSkill.cpp
+	src/gui/GuiSkills.cpp
 	src/gui/GuiRadar.cpp
 	src/gui/GuiSpace.cpp
 	src/gui/GuiAngar.cpp

@@ -69,3 +69,15 @@ int getRandNpcSubTypeId(int race_id)
               	case RACE::R7_ID: { return getRandIntFromVec(RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec);  break; }
 	}
 }
+
+int getRandNpcSubSubTypeId(int subtype_id)
+{
+        if (subtype_id == ENTITY::RANGER_ID)
+        {
+                return getRandIntFromVec(RaceInformationCollector::Instance().SUBSUBTYPE_vec);
+        }
+        else
+        {
+                return subtype_id;
+        }
+}

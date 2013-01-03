@@ -29,5 +29,6 @@ int getRandSign();
 bool getRandBool();
 
 int getRandNpcSubTypeId(int);
+int getRandNpcSubSubTypeId(int);
 
 #endif
