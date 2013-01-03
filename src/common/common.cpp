@@ -88,7 +88,7 @@ bool get_dPos_ToPoint(const vec2f& p1, const vec2f& p2, float velocity, vec2f& d
     	}    	
 }
 
-Color4f fillColor4fById(int color_id)
+Color4f getColor4fById(int color_id)
 {
 	Color4f color;
         switch(color_id)

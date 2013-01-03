@@ -17,22 +17,22 @@
 */
 
 
-#ifndef GUISKILL_H
-#define GUISKILL_H
+#ifndef GUISKILLS_H
+#define GUISKILLS_H
 
 #include "BaseGui.hpp"
-#include "../pilots/Skill.hpp"
+#include "../pilots/Skills.hpp"
 
-class GuiSkill : public BaseGui
+class GuiSkills : public BaseGui
 {
    	public:
-      		GuiSkill();
-      		~GuiSkill();
+      		GuiSkills();
+      		~GuiSkills();
 
                 void Acknowledge();
                                                 
-     		void ButtonsAction(Skill&);
-      		void RenderSkills(const Skill&) const;
+     		void ButtonsAction(Skills&);
+      		void RenderSkills(const Skills&) const;
 
       	private:
         	int attack_undo;

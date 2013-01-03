@@ -39,7 +39,7 @@ class God
 		                
         	void CreateLifeToPlanets(StarSystem*) const;
         	void CreateSpaceStations(StarSystem*, int) const;
-        	void CreateShipsInSpace(StarSystem*, int, int, int requestedclass = NONE_ID) const;   
+        	void CreateShipsInSpace(StarSystem*, int, int, int subtype_id = NONE_ID, int subsubtype_id = NONE_ID) const;   
 }; 
 
 #endif 

@@ -29,7 +29,7 @@
 #include "../docking/Kosmoport.hpp"
 
 #include "../ai/aiModel/BaseAiModel.hpp"
-#include "../pilots/Skill.hpp"
+#include "../pilots/Skills.hpp"
 
 #include "../spaceobjects/Vehicle.hpp"
 #include "../spaceobjects/Asteroid.hpp"
@@ -114,6 +114,12 @@ void Npc::UpdateInSpaceInStatic()
 	if (player == NULL)
 	{
         	vehicle->CheckNeedsInStatic();
+                
+                if (skills.GetAvailablePoints() > 0)
+                {
+                        skills.ManageAccordingToStrategy();
+                }
+                
         	observation.ObserveAllInSpace();  
                         
         	if (ai_model)
@@ -140,7 +146,7 @@ void Npc::UpdateInSpaceInStatic()
 
 void Npc::AddExpirience(int expirience, bool show_effect)
 {
-       	skill.AddExpirience(expirience);
+       	skills.AddExpirience(expirience);
 	
 	if (show_effect == true)
 	{
@@ -249,11 +255,12 @@ void Npc::UpdateInfo()
     	info.addTitleStr("NPC");
     	info.addNameStr("id:");           info.addValueStr( int2str(data_id.id)  );
     	info.addNameStr("race:");   	  info.addValueStr( getRaceStr(race_id) ); 
-    	info.addNameStr("class:");   	  info.addValueStr( getTypeStr(data_id.subtype_id) );  
+    	info.addNameStr("subype_id:");    info.addValueStr( getTypeStr(data_id.subtype_id) );  
+        info.addNameStr("subsubype_id:"); info.addValueStr( getTypeStr(data_id.subsubtype_id) );  
     	info.addNameStr("model_ai:");     info.addValueStr( getAiModelStr(ai_model->GetTypeId()) );  
     	info.addNameStr("credits:");   	  info.addValueStr( int2str(credits) );	
-    	info.addNameStr("expirience:");   info.addValueStr( int2str(skill.GetExpirience()) + " / " + int2str(skill.GetExpirienceNextLevel()) );	
-    	info.addNameStr("skills:");   info.addValueStr( int2str(skill.GetAvailiablePoints()) );	
+    	info.addNameStr("expirience:");   info.addValueStr( int2str(skills.GetExpirience()) + " / " + int2str(skills.GetExpirienceNextLevel()) );	
+    	info.addNameStr("free skills:");  info.addValueStr( int2str(skills.GetAvailablePoints()) );	
 	
         info.addNameStr("npc_agress:"); info.addValueStr( GetAgressorSetString() );
         
@@ -317,7 +324,7 @@ void Npc::SaveDataUniqueNpc(boost::property_tree::ptree& save_ptree, const std::
 	save_ptree.put(root+"race_id", race_id);
         save_ptree.put(root+"unresolved.vehicle_id", vehicle->GetId());
         save_ptree.put(root+"unresolved.aiModel_id", ai_model->GetTypeId());
-	skill.SaveData(save_ptree, root);
+	skills.SaveData(save_ptree, root);
 	if (state_machine.GetMacroTaskManager().GetScenario() != NULL)
 	{
 		const std::string child_root = root + "macrotask.";
@@ -338,7 +345,7 @@ void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
 	data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresolved.vehicle_id");
 	data_unresolved_npc.aiModel_id = load_ptree.get<int>("unresolved.aiModel_id");
 	
-	skill.LoadData(load_ptree.get_child("skill"));
+	skills.LoadData(load_ptree.get_child("skill"));
 
 	if (load_ptree.get_child_optional("macrotask"))
 	{
@@ -353,10 +360,12 @@ void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
 
 void Npc::ResolveDataUniqueNpc()
 {
+        ApplySkillsStrategy();
+        
         ((Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_npc.vehicle_id))->BindOwnerNpc(this);
         SetAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
 
-	skill.ResolveData();
+	skills.ResolveData();
 	
 	if (data_unresolved_npc.macrotask.GetScenarioTypeId() != NONE_ID)
 	{
@@ -367,6 +376,26 @@ void Npc::ResolveDataUniqueNpc()
 	{
 		state_machine.SetCurrentMicroTask(data_unresolved_npc.microtask);
 	}
+}
+
+void Npc::ApplySkillsStrategy()
+{
+        int class_type_id = data_id.subtype_id;
+        if (data_id.subtype_id == ENTITY::RANGER_ID)
+        {
+                class_type_id = data_id.subsubtype_id;
+        }
+                       
+        int skills_strategy[SKILLS_NUM];
+        const int* strategy_class_type = getArrayDependingOnClassTypeId(class_type_id);
+        const int* strategy_race       = getArrayDependingOnRaceId(race_id);
+
+        for (unsigned int i=0; i<SKILLS_NUM; i++)
+        {
+                skills_strategy[i] = strategy_class_type[i] * strategy_race[i];
+        }
+        
+        skills.BindStrategy(skills_strategy);
 }
 
 std::string Npc::GetAgressorSetString() const

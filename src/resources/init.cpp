@@ -58,6 +58,11 @@ void init()
     	RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(RACE::R6_ID);
     	RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(RACE::R7_ID);  
         
+        RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(ENTITY::WARRIOR_ID);  
+        RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(ENTITY::PIRAT_ID);  
+        RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(ENTITY::TRADER_ID);  
+        RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(ENTITY::DIPLOMAT_ID);  
+
     	loadGameData();           
         TextureManager::Instance().FillShipSubTypeList();        
     	

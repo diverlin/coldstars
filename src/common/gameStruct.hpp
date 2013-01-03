@@ -40,6 +40,8 @@ class RaceInformationCollector
 		std::vector<int> RACE4_ALLOWED_SUBTYPE_vec;
 		std::vector<int> RACE6_ALLOWED_SUBTYPE_vec;
 		std::vector<int> RACE7_ALLOWED_SUBTYPE_vec;
+                
+                std::vector<int> SUBSUBTYPE_vec;
 		
 		bool IsGood(int) const;
 	

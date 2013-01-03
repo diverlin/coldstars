@@ -57,7 +57,7 @@ Star::~Star()
     
 void Star::CalcColor()
 {
-	color = fillColor4fById(textureOb->color_id);
+	color = getColor4fById(textureOb->color_id);
 }
        
 void Star::InitiateSpark()

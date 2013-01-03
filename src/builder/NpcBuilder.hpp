@@ -29,14 +29,14 @@ class NpcBuilder
 		~NpcBuilder();
 
         	Npc* GetNewNpcTemplate(int id = NONE_ID) const; 
-                Npc* GetNewNpc(int, int) const;
-                        	 		                
+                Npc* GetNewNpc(int, int, int) const;
+                                       
         private:            
 		NpcBuilder() {};
 		NpcBuilder(const NpcBuilder&) = delete;
 		NpcBuilder& operator=(const NpcBuilder&) = delete;
                 
-                void CreateNewInternals(Npc*, int, int) const;
+                void CreateNewInternals(Npc*, int, int, int) const;
 }; 
 
 

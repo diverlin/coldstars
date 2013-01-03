@@ -758,11 +758,12 @@ void StarSystem::ShipManager_s(unsigned int num)
 			prace_id = RACE::R6_ID;
 		}
 		
-      		int psubtype_id = ENTITY::WARRIOR_ID;
+      		int psubtype_id    = ENTITY::WARRIOR_ID;
+      		int psubsubtype_id = ENTITY::WARRIOR_ID;
       		int size_id     = SIZE_4_ID;
       		int weapons_num = 7;
         
-       		Npc* new_pnpc = NpcBuilder::Instance().GetNewNpc(prace_id, psubtype_id);
+       		Npc* new_pnpc = NpcBuilder::Instance().GetNewNpc(prace_id, psubtype_id, psubsubtype_id);
         	Ship* new_pship = ShipBuilder::Instance().GetNewShip(prace_id, psubtype_id, size_id, weapons_num);
         	ShipBuilder::Instance().Equip(new_pship);   // improove
         

@@ -48,6 +48,32 @@ inline T getMin(T val1, T val2, T val3)
 	return getMin(min2, val3);
 }
 
-Color4f fillColor4fById(int);
+Color4f getColor4fById(int);
+
+//template <typename T>
+//void copyArray(T* src, T* res, int size)
+//{
+        //for (unsigned int i=0; i<size; i++)
+        //{
+                //res[i] = src[i];
+        //}
+//}
+
+template <typename T>
+int getIndexWithMinVal(const T* array, int size)
+{
+        int index_min = 0;
+        T val_min = array[index_min];
+        for (unsigned int i=1; i<size; i++)
+        {
+                if (array[i]<val_min)
+                {
+                        val_min = array[i];
+                        index_min = i;
+                }
+        }
+        
+        return index_min;
+}
 
 #endif
