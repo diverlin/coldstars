@@ -86,7 +86,8 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
 	asteroid->SetLifeData(data_life);
 	asteroid->SetMesh(MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_DEFORMED_ID));
 	asteroid->SetScale(getRandInt(ENTITY::ASTEROID::SIZE_MIN_, ENTITY::ASTEROID::SIZE_MAX_));	
-       	
+       	asteroid->SetGivenExpirience(ASTEROD_GIVEN_EXPIRIENCE);
+        
         asteroid->CalcCollisionrRadius();
 }
 

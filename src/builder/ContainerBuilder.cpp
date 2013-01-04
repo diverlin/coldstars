@@ -76,7 +76,8 @@ void ContainerBuilder::CreateNewInternals(Container* container, TextureOb* textu
         container->SetLifeData(data_life);
 	container->SetTextureOb(textureOb);
 	container->SetDeltaAngle(d_angle);
-
+       	container->SetGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
+        
    	container->CalcCollisionrRadius();
    	container->BindItemSlot(GetNewItemSlot(ENTITY::CARGO_SLOT_ID));
         container->GetItemSlot()->InsertItem(item);

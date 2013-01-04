@@ -154,7 +154,13 @@ GoodsPack* Vehicle::GetGoodsPack() const
 	
 	return NULL;
 }
-        	
+        
+/* virtual */
+int Vehicle::GetGivenExpirience() const
+{
+        return owner_npc->GetSkills().GetExpirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
+}
+                
 void Vehicle::AddItemSlot(ItemSlot* slot) 
 { 
         slot->SetOwner(this); 

@@ -66,8 +66,8 @@ class Vehicle : public BaseSpaceEntity
         	        
                 void SetKorpusData(const VehicleKorpusData&);
                 void CreateDriveComplexTextureDependedStuff();
-                void CreateProtectionComplexTextureDependedStuff();
-                
+                void CreateProtectionComplexTextureDependedStuff();                
+
                 bool GetGodMode() const { return god_mode; };
         	BaseLand* GetLand() const { return land; };
         	int GetSpecialActionId() const { return special_action_id; };
@@ -78,7 +78,9 @@ class Vehicle : public BaseSpaceEntity
                 const VehicleNeeds& GetNeeds() const { return needs; };
                                
                 VehicleKorpusData& GetKorpusData() { return data_korpus; };
-                                
+                                             
+                virtual int GetGivenExpirience() const;
+                                                
                 void AddItemSlot(ItemSlot*); 
                 
                 bool GetAllItemsFromVehicle(Vehicle*);
