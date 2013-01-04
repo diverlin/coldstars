@@ -52,6 +52,8 @@ class BaseSpaceEntity : public Base
 		void SetStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
 		void SetPlaceTypeId(int place_type_id)      { this->place_type_id = place_type_id;  }
 
+		int SetGivenExpirience(int given_expirience) { this->given_expirience = given_expirience; }
+                
 		void SetAngle(const vec3f& angle)           { this->angle = angle; }
 		void SetDeltaAngle(const vec3f& d_angle)    { this->d_angle = d_angle; }
 
@@ -62,7 +64,7 @@ class BaseSpaceEntity : public Base
 		int GetPlaceTypeId()        const { return place_type_id; }
 		Points& GetPoints()          { return points; }
 
-		int GetGivenExpirience() const { return given_expirience; }
+		virtual int GetGivenExpirience() const { return given_expirience; }
 		int GetCollisionRadius() const { return collision_radius; }   
 		bool GetAlive()          const { return data_life.is_alive; }
 		bool GetGarbageReady()   const { return data_life.garbage_ready; }             
