@@ -42,7 +42,7 @@ Satellite* SatelliteBuilder::GetNewSatelliteTemplate(int id) const
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
 	}
-	 	
+
 	try 
         { 
         	satellite = new Satellite(id);
@@ -68,7 +68,7 @@ Satellite* SatelliteBuilder::GetNewSatellite() const
 void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const 
 {
 	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SATELLITE_ID);  
-	
+
        	int protection_rate = 1;
        	//if (subtype_id == ENTITY::WARRIOR_ID)
         //{
@@ -82,9 +82,19 @@ void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const
     	data_korpus.temperature = 100;
         data_korpus.price       = 1000;
 
-        data_korpus.slot_grapple_num = 1;
-        data_korpus.slot_weapon_num  = 2;
- 
+        data_korpus.slot_bak_num       = 0;
+        data_korpus.slot_drive_num     = 0;
+        data_korpus.slot_droid_num     = 1;
+        data_korpus.slot_energizer_num = 1;
+        data_korpus.slot_grapple_num   = 0;
+        data_korpus.slot_protector_num = 1;
+        data_korpus.slot_radar_num     = 1;
+        data_korpus.slot_scaner_num    = 0;
+        data_korpus.slot_freezer_num   = 0;
+	data_korpus.slot_weapon_num   = 2; 
+ 	data_korpus.slot_artefact_num = 0;  
+        data_korpus.slot_otsec_num    = 1;
+        
         LifeData data_life;
         data_life.armor      = data_korpus.armor;
         data_life.dying_time = 10*texOb->size_id;

@@ -191,7 +191,7 @@ void GrappleEquipment::UpdateProperties()
         for (unsigned int i = 0; i < modules_vec.size(); i++)
     	{
     		strength_add   += ((GrappleModule*)modules_vec[i])->GetStrengthAdd();
-        	radius_add     += ((GrappleModule*)modules_vec[i])->GetRadiusAdd();        	
+        	radius_add     += ((GrappleModule*)modules_vec[i])->GetRadiusAdd();
         	speed_add      += ((GrappleModule*)modules_vec[i])->GetSpeedAdd();
     	}
     		        	

@@ -27,6 +27,8 @@
 #include "../../../slots/ItemSlot.hpp"
 #include "../../../pilots/Npc.hpp"
 
+#include "../../../world/starsystem.hpp"
+
 MicroScenarioGrab::MicroScenarioGrab()
 {
 	type_id = MICROSCENARIO::GRAB_ID;
@@ -49,12 +51,28 @@ void MicroScenarioGrab::Enter(Npc* npc) const
 /* virtual */
 bool MicroScenarioGrab::Validate(Npc* npc) const
 {
-	if (npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetPlaceTypeId() == ENTITY::SPACE_ID)
-	{
-		return true;
-	}
-	
-	return false;
+        // shortcut
+        BaseSpaceEntity* target = npc->GetStateMachine().GetMicroTaskManager().GetTarget();
+        
+        // check if equipment is able to perform current task
+        bool euipment_is_ok = false;
+        if (npc->GetVehicle()->GetGrappleSlot()->GetItem() != NULL)
+        {
+                if (npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->GetFunctioning() == true)
+                {
+                        euipment_is_ok = true;
+                }
+        }
+        
+        // check if target is ok
+        bool target_is_ok = npc->GetVehicle()->GetGrappleSlot()->CheckTargetPure(target);
+        
+	if ( (euipment_is_ok == true) and (target_is_ok == true) )
+        {
+                return true;
+        }
+
+        return false;
 }
 
 /* virtual */

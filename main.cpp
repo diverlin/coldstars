@@ -37,6 +37,8 @@
 
 #include "src/garbage/EntityGarbage.hpp"
 
+#include "src/managers/God.hpp"
+
 int main()
 {          
 	//pureTest2(); 
@@ -46,6 +48,8 @@ int main()
 	GameDate::Instance().SetDate(1,1,4000);
 
 	Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy();
+	God::Instance().SetGalaxy(galaxy);
+        God::Instance().CreateLife();
 	Player* player = PlayerBuilder::Instance().GetNewPlayer();
 
         bool player2space = false;
@@ -71,6 +75,7 @@ int main()
 		/* server code start */
 		TurnTimer::Instance().Update();
 
+		God::Instance().Update(GameDate::Instance().GetDate());
 		for (int i=0; i<Config::Instance().GAME_SPEED; i++)  // fake implementation (static ai should not be run several times at once)
 		{
 			galaxy->Update(player, TurnTimer::Instance().GetTurnTick());

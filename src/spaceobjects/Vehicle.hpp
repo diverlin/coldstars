@@ -80,7 +80,8 @@ class Vehicle : public BaseSpaceEntity
                 VehicleKorpusData& GetKorpusData() { return data_korpus; };
                                              
                 virtual int GetGivenExpirience() const;
-                                                
+                bool CheckItemSlotPresenceBySubTypeId(int) const;
+                                                                
                 void AddItemSlot(ItemSlot*); 
                 
                 bool GetAllItemsFromVehicle(Vehicle*);
@@ -115,6 +116,7 @@ class Vehicle : public BaseSpaceEntity
 
                 Npc* GetOwnerNpc() const { return owner_npc; };
         	
+                ItemSlot* GetEmptyCargoSlot();
         	GoodsPack* GetGoodsPack() const;
      
         	void UpdateSpecialAction();         
@@ -203,7 +205,6 @@ class Vehicle : public BaseSpaceEntity
                 VehicleSlot* parent_vehicleslot;
                                         
                 ItemSlot* GetFuctionalSlot(int) const;
-       	        ItemSlot* GetEmptyCargoSlot();
        	        ItemSlot* GetEmptyArtefactSlot() const;
        	        ItemSlot* GetCargoSlotWithGoods(int);
        	        

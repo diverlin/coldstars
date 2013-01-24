@@ -18,6 +18,7 @@
 
 #include "GameDate.hpp"
 #include "myStr.hpp"
+#include "constants.hpp"
 
 Date::Date()
 {
@@ -36,6 +37,13 @@ Date::Date(unsigned int day, unsigned int month, unsigned int year)
 Date::~Date()
 {}
 
+void Date::operator=(const Date& rhs)
+{
+        day   = rhs.day;
+	month = rhs.month;
+	year  = rhs.year;
+}
+    
 bool Date::operator==(const Date& rhs) const
 {
         return ((day == rhs.day) and (month == rhs.month) and (year == rhs.year));
@@ -45,13 +53,16 @@ bool Date::operator!=(const Date& rhs) const
 {
         return ((day != rhs.day) or (month != rhs.month) or (year != rhs.year));
 }
-  
-void Date::operator=(const Date& rhs)
+            
+int Date::GetDaysPassSince(const Date& rhs) const
 {
-        day   = rhs.day;
-	month = rhs.month;
-	year  = rhs.year;
+	int diff_day   = rhs.day - day;
+	int diff_month = rhs.month - month;
+	int diff_year = rhs.year - year;
+		
+	int days = diff_day + (diff_month * DAYSINMONTH) + (diff_year * DAYSINYEAR);
+	return days;
 }
-                
+                            
 std::string Date::GetStr() const { return int2str(day) + "/" + int2str(month) + "/" + int2str(year); };
 

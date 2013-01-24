@@ -19,6 +19,8 @@
 #include "BaseVehicleBuilder.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 
+#include "../garbage/EntityGarbage.hpp"
+
 #include "../parts/WeaponComplex.hpp"
 
 #include "../items/equipment/BakEquipment.hpp"
@@ -68,6 +70,7 @@
 #include "../builder/items/modules/ScanerModuleBuilder.hpp"
 #include "../builder/items/modules/DroidModuleBuilder.hpp"
 #include "../builder/items/modules/RadarModuleBuilder.hpp"
+//#include "../builder/items/equipment/EnergizerModuleBuilder.hpp"
 
 #include "../builder/items/artefacts/GravityArtefactBuilder.hpp"
 #include "../builder/items/artefacts/ProtectorArtefactBuilder.hpp"
@@ -103,87 +106,192 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
         	weapon_slot->SetSubSubTypeId(ENTITY::WEAPON_SLOT1_ID + i);   
         	vehicle->AddItemSlot(weapon_slot);
         }
+            
+        if (vehicle->GetKorpusData().slot_radar_num)
+        {
+                ItemSlot* radar_slot = GetNewItemSlot(ENTITY::RADAR_SLOT_ID);
+                vehicle->AddItemSlot(radar_slot);
+	}
                 
-	ItemSlot* radar_slot = GetNewItemSlot(ENTITY::RADAR_SLOT_ID);
-	vehicle->AddItemSlot(radar_slot);	
+        if (vehicle->GetKorpusData().slot_scaner_num)
+        {
+                ItemSlot* scaner_slot = GetNewItemSlot(ENTITY::SCANER_SLOT_ID); 
+                vehicle->AddItemSlot(scaner_slot);
+        }
 	
-	ItemSlot* scaner_slot = GetNewItemSlot(ENTITY::SCANER_SLOT_ID); 
-	vehicle->AddItemSlot(scaner_slot);	
-	
-	ItemSlot* energizer_slot = GetNewItemSlot(ENTITY::ENERGIZER_SLOT_ID); 
-	vehicle->AddItemSlot(energizer_slot);
-    		
-    	if (vehicle->GetKorpusData().slot_grapple_num != 0)
+        if (vehicle->GetKorpusData().slot_energizer_num)
+        {
+                ItemSlot* energizer_slot = GetNewItemSlot(ENTITY::ENERGIZER_SLOT_ID); 
+                vehicle->AddItemSlot(energizer_slot);
+        }
+        
+    	if (vehicle->GetKorpusData().slot_grapple_num)
 	{
-		ItemSlot* grapple_slot = GetNewItemSlot(ENTITY::GRAPPLE_SLOT_ID);			 
+		ItemSlot* grapple_slot = GetNewItemSlot(ENTITY::GRAPPLE_SLOT_ID);
     		vehicle->AddItemSlot(grapple_slot); 
     	}
     	
-	ItemSlot* droid_slot = GetNewItemSlot(ENTITY::DROID_SLOT_ID);	    
-    	vehicle->AddItemSlot(droid_slot); 
-    	    	
-	ItemSlot* freezer_slot = GetNewItemSlot(ENTITY::FREEZER_SLOT_ID);
-	vehicle->AddItemSlot(freezer_slot);           
+        if (vehicle->GetKorpusData().slot_droid_num)
+        {
+                ItemSlot* droid_slot = GetNewItemSlot(ENTITY::DROID_SLOT_ID);  
+                vehicle->AddItemSlot(droid_slot); 
+        }
         
-        ItemSlot* protector_slot = GetNewItemSlot(ENTITY::PROTECTOR_SLOT_ID);  
-    	vehicle->AddItemSlot(protector_slot);         
+        if (vehicle->GetKorpusData().slot_freezer_num)
+        {
+                //ItemSlot* freezer_slot = GetNewItemSlot(ENTITY::FREEZER_SLOT_ID);
+                //vehicle->AddItemSlot(freezer_slot);           
+        }
         
-        ItemSlot* drive_slot = GetNewItemSlot(ENTITY::DRIVE_SLOT_ID); 
-	vehicle->AddItemSlot(drive_slot);	
-	
-        ItemSlot* bak_slot = GetNewItemSlot(ENTITY::BAK_SLOT_ID);  
-	vehicle->AddItemSlot(bak_slot);
-
-    	//////////// ARTEFACT SLOT /////////////////////////  	  	
-    	for (int i=0; i<4; i++)
+        if (vehicle->GetKorpusData().slot_protector_num)
+        {
+                ItemSlot* protector_slot = GetNewItemSlot(ENTITY::PROTECTOR_SLOT_ID);  
+                vehicle->AddItemSlot(protector_slot);         
+        }
+        
+        if (vehicle->GetKorpusData().slot_drive_num)
+        {
+                ItemSlot* drive_slot = GetNewItemSlot(ENTITY::DRIVE_SLOT_ID); 
+                vehicle->AddItemSlot(drive_slot);
+        }
+        
+        if (vehicle->GetKorpusData().slot_bak_num)
+        {
+                ItemSlot* bak_slot = GetNewItemSlot(ENTITY::BAK_SLOT_ID);  
+                vehicle->AddItemSlot(bak_slot);
+        }
+        
+    	//////////// ARTEFACT SLOT /////////////////////////
+    	int artefact_num = vehicle->GetKorpusData().slot_artefact_num;
+        for (int i=0; i<artefact_num; i++)
     	{
     		ItemSlot* artefact_slot = GetNewItemSlot(ENTITY::ARTEFACT_SLOT_ID);
     		vehicle->AddItemSlot(artefact_slot);         
     	} 
-    	
+
     	//////// OTSEC SLOT ////////////////////////////////
-    	for (int i=0; i<=10; i++)
+        int otsec_num = vehicle->GetKorpusData().slot_otsec_num;
+    	for (int i=0; i<otsec_num; i++)
     	{
-         	ItemSlot* otsec_slot = GetNewItemSlot(ENTITY::CARGO_SLOT_ID);   					
+         	ItemSlot* otsec_slot = GetNewItemSlot(ENTITY::CARGO_SLOT_ID);   
          	vehicle->AddItemSlot(otsec_slot);         
     	}
-}	
+}
 
-void BaseVehicleBuilder::Equip(Vehicle* vehicle, int tech_level) const
+void BaseVehicleBuilder::EquipEquipment(Vehicle* vehicle, int tech_level) const
 {
-    	for (unsigned int i=0; i<vehicle->GetKorpusData().slot_weapon_num + 2; i++)
+        int weapons_num = getRandInt(1, vehicle->GetKorpusData().slot_weapon_num);
+    	for (unsigned int i=0; i<weapons_num; i++)
     	{
     		if (getRandBool())
     		{
-       			vehicle->AddAndManageItem(RocketEquipmentBuilder::Instance().GetNewRocketEquipment(tech_level));
+                        RocketEquipment* rocket_equipment = RocketEquipmentBuilder::Instance().GetNewRocketEquipment(tech_level);
+       			if (vehicle->AddAndManageItem(rocket_equipment) == false)
+                        {
+                                EntityGarbage::Instance().Add(rocket_equipment);
+                        }
 		}
 		else
 		{
-       			vehicle->AddAndManageItem(LazerEquipmentBuilder::Instance().GetNewLazerEquipment(tech_level)); 
+                        LazerEquipment* lazer_equipment = LazerEquipmentBuilder::Instance().GetNewLazerEquipment(tech_level);
+       			if (vehicle->AddAndManageItem(lazer_equipment) == false)
+                        {
+                                EntityGarbage::Instance().Add(lazer_equipment); 
+                        }
        		}
     	}   
-           
-    	vehicle->AddAndManageItem(RadarEquipmentBuilder::Instance().GetNewRadarEquipment(tech_level)); 
-
-    	vehicle->AddAndManageItem(DriveEquipmentBuilder::Instance().GetNewDriveEquipment(1)); 
-    	vehicle->AddAndManageItem(DriveEquipmentBuilder::Instance().GetNewDriveEquipment(3)); 
-    	vehicle->AddAndManageItem(DriveEquipmentBuilder::Instance().GetNewDriveEquipment(tech_level)); 
-
-    	vehicle->AddAndManageItem(BakEquipmentBuilder::Instance().GetNewBakEquipment(tech_level));         
-    	vehicle->AddAndManageItem(EnergizerEquipmentBuilder::Instance().GetNewEnergizerEquipment(tech_level));     
-   	//vehicle->AddAndManageItem(FreezerEquipmentBuilder::Instance().GetNewFreezerEquipment(tech_level));  
-   	
-   	vehicle->AddAndManageItem(ProtectorEquipmentBuilder::Instance().GetNewProtectorEquipment(tech_level)); 
-   	vehicle->AddAndManageItem(DroidEquipmentBuilder::Instance().GetNewDroidEquipment(tech_level)); 
-   	vehicle->AddAndManageItem(ScanerEquipmentBuilder::Instance().GetNewScanerEquipment(tech_level)); 
-    
-    	if (vehicle->GetKorpusData().slot_grapple_num != 0) 
-    	{
-      		vehicle->AddAndManageItem(GrappleEquipmentBuilder::Instance().GetNewGrappleEquipment(tech_level)); 
+        
+        if (vehicle->CheckItemSlotPresenceBySubTypeId(ENTITY::RADAR_SLOT_ID) == true)
+        {
+                RadarEquipment* radar_equipment = RadarEquipmentBuilder::Instance().GetNewRadarEquipment(tech_level);
+                if (vehicle->AddAndManageItem(radar_equipment) == false)
+                {
+                        EntityGarbage::Instance().Add(radar_equipment); 
+                }
+        }
+        
+        if (vehicle->CheckItemSlotPresenceBySubTypeId(ENTITY::DRIVE_SLOT_ID) == true)
+        {
+                DriveEquipment* drive_equipment = DriveEquipmentBuilder::Instance().GetNewDriveEquipment(tech_level);
+                if (vehicle->AddAndManageItem(drive_equipment) == false)
+                {
+                        EntityGarbage::Instance().Add(drive_equipment); 
+                }
+        }
+        
+        if (vehicle->CheckItemSlotPresenceBySubTypeId(ENTITY::BAK_SLOT_ID) == true)
+        {
+                BakEquipment* bak_equipment = BakEquipmentBuilder::Instance().GetNewBakEquipment(tech_level);
+                if (vehicle->AddAndManageItem(bak_equipment) == false)
+                {
+                        EntityGarbage::Instance().Add(bak_equipment); 
+                } 
+        }
+        
+        if (vehicle->CheckItemSlotPresenceBySubTypeId(ENTITY::ENERGIZER_SLOT_ID) == true)
+        {
+                EnergizerEquipment* energizer_equipment = EnergizerEquipmentBuilder::Instance().GetNewEnergizerEquipment(tech_level);
+                if (vehicle->AddAndManageItem(energizer_equipment) == false)
+                {
+                        EntityGarbage::Instance().Add(energizer_equipment); 
+                }     
    	}
-    	
+        
+        if (vehicle->CheckItemSlotPresenceBySubTypeId(ENTITY::FREEZER_SLOT_ID) == true)
+        {
+                //FreezerEquipment* freezer_equipment = FreezerEquipmentBuilder::Instance().GetNewFreezerEquipment(tech_level);
+                //if (vehicle->AddAndManageItem(freezer_equipment) == false)
+                //{
+                        //EntityGarbage::Instance().Add(freezer_equipment); 
+                //}  
+        }
+        
+        if (vehicle->CheckItemSlotPresenceBySubTypeId(ENTITY::PROTECTOR_SLOT_ID) == true)
+        {
+                ProtectorEquipment* protector_equipment = ProtectorEquipmentBuilder::Instance().GetNewProtectorEquipment(tech_level);
+                if (vehicle->AddAndManageItem(protector_equipment) == false)
+                {
+                        EntityGarbage::Instance().Add(protector_equipment); 
+                }  
+   	}
+        
+        if (vehicle->CheckItemSlotPresenceBySubTypeId(ENTITY::DROID_SLOT_ID) == true)
+        {
+                DroidEquipment* droid_equipment = DroidEquipmentBuilder::Instance().GetNewDroidEquipment(tech_level);
+                if (vehicle->AddAndManageItem(droid_equipment) == false)
+                {
+                        EntityGarbage::Instance().Add(droid_equipment); 
+                }  
+   	}
+        
+        if (vehicle->CheckItemSlotPresenceBySubTypeId(ENTITY::SCANER_SLOT_ID) == true)
+        {
+                ScanerEquipment* scaner_equipment = ScanerEquipmentBuilder::Instance().GetNewScanerEquipment(tech_level);
+                if (vehicle->AddAndManageItem(scaner_equipment) == false)
+                {
+                        EntityGarbage::Instance().Add(scaner_equipment); 
+                }  
+        }
+        
+        if (vehicle->CheckItemSlotPresenceBySubTypeId(ENTITY::GRAPPLE_SLOT_ID) == true)
+        {
+                GrappleEquipment* grapple_equipment = GrappleEquipmentBuilder::Instance().GetNewGrappleEquipment(tech_level);
+                if (vehicle->AddAndManageItem(grapple_equipment) == false)
+                {
+                        EntityGarbage::Instance().Add(grapple_equipment); 
+                } 
+   	}
+}
+
+void BaseVehicleBuilder::EquipModules(Vehicle* vehicle, int tech_level) const
+{
     	for (unsigned int i=0; i<4; i++) 
     	{     
+                if (vehicle->GetEmptyCargoSlot() == NULL)
+                {
+                        return;
+                }
+                
     		int module_subtype_id = getRandInt(ENTITY::LAZER_MODULE_ID, ENTITY::SCANER_MODULE_ID); 
     		switch(module_subtype_id)  
     		{
@@ -199,25 +307,39 @@ void BaseVehicleBuilder::Equip(Vehicle* vehicle, int tech_level) const
     			case ENTITY::GRAPPLE_MODULE_ID: 	{ vehicle->AddItemToCargoSlot(GrappleModuleBuilder::Instance().GetNewGrappleModule()); break; }
     			case ENTITY::SCANER_MODULE_ID: 		{ vehicle->AddItemToCargoSlot(ScanerModuleBuilder::Instance().GetNewScanerModule()); break; }
     		}
-    	}  
-    	    	
-    	for (unsigned int i=0; i<1; i++) 
-    	{        
-        	vehicle->AddItemToCargoSlot(BombBuilder::Instance().GetNewBomb());
-    	}   
+    	}
+}
 
+void BaseVehicleBuilder::EquipArtefacts(Vehicle* vehicle, int tech_level) const
+{
     	for (unsigned int i=0; i<2; i++) 
-    	{        
+    	{
+                if (vehicle->GetEmptyCargoSlot() == NULL)
+                {
+                        return;
+                }
+                        
         	vehicle->AddAndManageItem(GravityArtefactBuilder::Instance().GetNewGravityArtefact());
     	}   
 
     	for (unsigned int i=0; i<2; i++) 
     	{        
+                if (vehicle->GetEmptyCargoSlot() == NULL)
+                {
+                        return;
+                }
+                
         	vehicle->AddAndManageItem(ProtectorArtefactBuilder::Instance().GetNewProtectorArtefact());
     	}  
 }
 
-
+void BaseVehicleBuilder::EquipBomb(Vehicle* vehicle, int tech_level) const
+{
+        for (unsigned int i=0; i<2; i++) 
+    	{        
+        	vehicle->AddItemToCargoSlot(BombBuilder::Instance().GetNewBomb());
+    	}    
+}
 
 
 

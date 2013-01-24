@@ -23,7 +23,10 @@
 #include "../common/id.hpp"
 #include "../common/Logger.hpp"
 #include "../managers/EntityManager.hpp"
+
 #include "../pilots/Player.hpp"
+
+#include "../spaceobjects/Ship.hpp"
  
 PlayerBuilder& PlayerBuilder::Instance()
 {
@@ -66,17 +69,21 @@ Player* PlayerBuilder::GetNewPlayer() const
 
 void PlayerBuilder::CreateNewInternals(Player* player) const
 {    
-	int prace_id    = RACE::R0_ID;
+	int prace_id       = RACE::R0_ID;
       	int psubtype_id    = ENTITY::RANGER_ID;
         int psubsubtype_id = ENTITY::WARRIOR_ID;
-      	int size_id     = SIZE_4_ID;
-      	int weapons_num = 4;
-        
+      	int size_id        = SIZE_4_ID;
+      	int weapons_num    = 4;
+        int tech_level     = 3;
+                
         Npc* npc = NpcBuilder::Instance().GetNewNpc(prace_id, psubtype_id, psubsubtype_id);
         Ship* ship = ShipBuilder::Instance().GetNewShip(prace_id, psubtype_id, size_id, weapons_num);
-        int tech_level = 3;
-	ShipBuilder::Instance().Equip(ship, tech_level);   
-        
+
+	ShipBuilder::Instance().EquipEquipment(ship, tech_level);   
+        ShipBuilder::Instance().EquipModules(ship, tech_level); 
+	//ShipBuilder::Instance().EquipArtefacts(ship, tech_level); 
+        ShipBuilder::Instance().EquipBomb(ship, tech_level); 
+                
         ship->BindOwnerNpc(npc);
    	player->BindNpc(npc);
 }

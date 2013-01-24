@@ -27,13 +27,17 @@ class Date
 		Date();
 		Date(unsigned int, unsigned int, unsigned int);
 		~Date();
-		
+
+                void operator=(const Date&);
+                		
                 bool operator==(const Date&) const;
                 bool operator!=(const Date&) const;
-                void operator=(const Date&);
                                 
-		unsigned int GetDay() const { return day; };
-						
+                int GetDaysPassSince(const Date&) const;
+		//unsigned int GetDay() const { return day; };
+		//unsigned int GetMonth() const {return month; };
+		//unsigned int GetYear() const {return year; };				
+
 		std::string GetStr() const;
 
 		unsigned int day;

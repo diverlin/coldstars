@@ -34,8 +34,9 @@
 	#define CREATEDESTROY_LOG_ENABLED 0
 	#define ITEMINFLUENCE_LOG_ENABLED 0
 	#define TEXTURE_MANAGER_LOG_ENABLED 0
-	#define GUI_LOG_ENABLED 1
-		
+	#define GUI_LOG_ENABLED 0
+	#define GOD_LOG_ENABLED 1
+			
 	const int GRAPPLE_QUEUE_LOG_DIP = 1;
 	const int DRIVECOMPLEX_LOG_DIP = 1;
 	const int WEAPONSTARGET_LOG_DIP = 1;
@@ -47,9 +48,15 @@
 	const int ITEMINFLUENCE_LOG_DIP = 2;
 	const int TEXTURE_MANAGER_LOG_DIP = 0;
 	const int GUI_LOG_DIP = 0;
+	const int GOD_LOG_DIP = 0;
 #endif
 
 #define DEBUG_ITEMDAMAGELOCKVIAGUI 1  // 1 - is locking/unlocking item by right mouse click; 2 - is damaging/undamaging item by right mouse click
+
+const int DAYSINYEAR  = 360;
+const int DAYSINMONTH = 31;
+
+const int GOD_REST_IN_DAYS = 5;
 
 // attack / defence / leader / trader / technic / diplomat   
 const int SKILLS_NUM = 6;            
@@ -69,6 +76,12 @@ const int SKILLS_STRATEGY_RACE7[SKILLS_NUM] = {1,1,1,1,1,1};
 const float GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE = 0.1;
 const int ASTEROD_GIVEN_EXPIRIENCE = 100;
 const int CONTAINER_GIVEN_EXPIRIENCE = 10;
+
+const int SHIPWARRIORS_PER_PLANET_MIN = 1;
+const int SHIPWARRIORS_PER_PLANET_MAX = 5;
+
+const int SATELLITEWARRIORS_PER_PLANET_MIN = 1;
+const int SATELLITEWARRIORS_PER_PLANET_MAX = 1;
 
 enum GAME_MODE
 { 
@@ -93,7 +106,7 @@ const int SCROLL_BORDER_OFFSET = 10;
 const double NO_DELAY = 0.0f;
 const int NO_ADDITIONAL_INFO = 0;
 
-const std::string GAME_TITLE = "cold star V0.0.4.60 (SFML/C++)";
+const std::string GAME_TITLE = "cold star V0.0.4.61 (SFML/C++)";
 
 const float RADAR_SCALE = 1/50.0;
 
@@ -338,8 +351,8 @@ namespace ENTITY
 		
 		const int SHIP_INIT_MIN = 4;
 		const int SHIP_INIT_MAX = 7;
-		const int SHIPENEMY_INIT_MIN = 10;
-		const int SHIPENEMY_INIT_MAX = 20;
+		const int SHIPENEMY_INIT_MIN = 50;
+		const int SHIPENEMY_INIT_MAX = 100;
 
 		const int SPACESTATION_INIT_MIN = 1;
 		const int SPACESTATION_INIT_MAX = 3;
@@ -889,7 +902,7 @@ namespace TEXTURE
 		VEHICLE_SLOT_ID, ITEM_SLOT_ID, TURREL_ID,
 	
 		SPACESTATION_ID, SATELLITE_ID, SHIP_ID, STAR_ID, PLANET_ID, ATMOSPHERE_ID,
-		ASTEROID_ID, MINERAL_ID, CONTAINER_ID, BOMB_ID, BLACKHOLE_ID, 		
+		ASTEROID_ID, MINERAL_ID, CONTAINER_ID, BOMB_ID, BLACKHOLE_ID,
 	
 		PARTICLE_EFFECT_ID, LAZER_EFFECT_ID, SHIELD_EFFECT_ID, 
 

@@ -130,7 +130,8 @@ class ItemSlot : public BaseSlot
            	
            	bool CheckSubTarget(ItemSlot*) const;
            	bool CheckTarget(BaseSpaceEntity*) const;
-       
+                bool CheckTargetPure(BaseSpaceEntity*) const;
+                        
         	void SelectEvent();
         	void DeselectEvent();
         
@@ -153,10 +154,10 @@ class ItemSlot : public BaseSlot
            	      
            	bool CheckItemInsertion(BaseItem*) const;  
            	      		        
-           	bool CheckAlive(BaseSpaceEntity*) const;
-           	bool CheckPlaceTypeId(BaseSpaceEntity*) const;  
-                bool CheckStarSystem(BaseSpaceEntity*) const;
-           	bool CheckDistance(BaseSpaceEntity*) const;
+           	bool IsTargetAlive(BaseSpaceEntity*) const;
+           	bool IsTargetInSpace(BaseSpaceEntity*) const;  
+                bool IsTargetInSameStarSystem(BaseSpaceEntity*) const;
+           	bool CheckDistanceToTarget(BaseSpaceEntity*) const;
                 
                 UnresolvedDataUniqueItemSlot unresolved_ItemSlot;
                 void SaveDataUniqueItemSlot(boost::property_tree::ptree&, const std::string&) const;

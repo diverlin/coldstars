@@ -344,11 +344,17 @@ int ItemSlot::GetItemDamage() const
 
 void ItemSlot::DropItemToSpace(Vehicle* vehicle)
 {
-        TextureOb* textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::CONTAINER_ID);   
-        
+        TextureOb* textureOb_ = NULL;  
+                
+        switch (item->GetTypeId())
+        {
+                case ENTITY::BOMB_ID: { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BOMB_ID); break; }
+                default:      { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::CONTAINER_ID); break; }
+        }
+         
         Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, item);
         
-	vehicle->GetStarSystem()->AddContainer(container, vehicle->GetPoints().GetCenter());	
+	vehicle->GetStarSystem()->AddContainer(container, vehicle->GetPoints().GetCenter());
 }
         
 bool ItemSlot::SwapItem(ItemSlot* slot)
@@ -439,39 +445,55 @@ bool ItemSlot::CheckTarget(BaseSpaceEntity* _target) const
         Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::CheckTarget");
 	#endif     
 	
-	if (CheckAlive(_target) == true)
+	if (CheckTargetPure(_target) == true)
         {
-        	if (CheckPlaceTypeId(_target) == true)
+                if (CheckDistanceToTarget(_target) == true)
+                {
+                        return true;
+                }
+        }
+        
+        return false;
+}
+      
+      
+      
+bool ItemSlot::CheckTargetPure(BaseSpaceEntity* _target) const
+{
+	#if WEAPONSTARGET_LOG_ENABLED == 1 
+        Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::CheckTargetPure");
+	#endif     
+	
+	if (IsTargetAlive(_target) == true)
+        {
+        	if (IsTargetInSpace(_target) == true)
         	{
-                	if (CheckStarSystem(_target) == true)
-                	{
-                        	if (CheckDistance(_target) == true)
-                        	{
-                                	return true;
-                        	}
+                	if (IsTargetInSameStarSystem(_target) == true)
+                        {
+                                return true;
                         }
                 }
         }
         
         return false;
 }
-
-bool ItemSlot::CheckAlive(BaseSpaceEntity* _target) const
+          
+bool ItemSlot::IsTargetAlive(BaseSpaceEntity* _target) const
 {
 	return _target->GetAlive();
 }
 
-bool ItemSlot::CheckPlaceTypeId(BaseSpaceEntity* _target) const  
+bool ItemSlot::IsTargetInSpace(BaseSpaceEntity* _target) const  
 {
 	return (_target->GetPlaceTypeId() == ENTITY::SPACE_ID);
 }           	
 
-bool ItemSlot::CheckStarSystem(BaseSpaceEntity* _target) const
+bool ItemSlot::IsTargetInSameStarSystem(BaseSpaceEntity* _target) const
 {
         return (_target->GetStarSystem()->GetId() == ((Vehicle*)owner)->GetStarSystem()->GetId());
 }                
 
-bool ItemSlot::CheckDistance(BaseSpaceEntity* _target) const
+bool ItemSlot::CheckDistanceToTarget(BaseSpaceEntity* _target) const
 {
 	if (_target->GetTypeId() == ENTITY::STARSYSTEM_ID)
 	{
@@ -486,7 +508,7 @@ bool ItemSlot::CheckDistance(BaseSpaceEntity* _target) const
 
        	return false;
 }
-        	
+
 /*virtual*/
 void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree) const
 {

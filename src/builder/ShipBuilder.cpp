@@ -24,19 +24,20 @@
 
 #include "../resources/TextureManager.hpp"
 #include "../resources/textureOb.hpp"
+#include "../spaceobjects/Ship.hpp"
 
 ShipBuilder& ShipBuilder::Instance()
 {	
 	static ShipBuilder instance;
 	return instance;
-}	
+}
 
 ShipBuilder::~ShipBuilder() {}
 
 Ship* ShipBuilder::GetNewShipTemplate(int id) const
 {
 	Ship* ship = NULL;
-	
+
 	if (id == NONE_ID)
 	{
 		id = SimpleIdGenerator::Instance().GetNextId();
@@ -81,10 +82,12 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id,
 {
 	TextureOb* texOb = TextureManager::Instance().GetRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id); 
 
-       	int protection_rate = 1;
-       	if (subsubtype_id == ENTITY::WARRIOR_ID)
+       	float protection_rate = 1;
+        float otsec_rate      = 1;
+        switch (subsubtype_id)
         {
-        	protection_rate = 2;
+                case ENTITY::WARRIOR_ID: { protection_rate = 2; break; }
+                case ENTITY::TRADER_ID:  { otsec_rate = 1.5; break; }
         }
         
         VehicleKorpusData data_korpus;
@@ -94,9 +97,19 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id,
     	data_korpus.temperature = 100;
         data_korpus.price       = getRandInt(200, 400)*size_id;
 
-        data_korpus.slot_grapple_num = 1;
-        data_korpus.slot_weapon_num  = weapons_num;       
-
+        data_korpus.slot_bak_num       = 1;
+        data_korpus.slot_drive_num     = 1;
+        data_korpus.slot_droid_num     = 1;
+        data_korpus.slot_energizer_num = 1;
+        data_korpus.slot_grapple_num   = 1;
+        data_korpus.slot_protector_num = 1;
+        data_korpus.slot_radar_num     = 1;
+        data_korpus.slot_scaner_num    = 1;
+        data_korpus.slot_freezer_num   = 1;
+	data_korpus.slot_weapon_num   = weapons_num;  
+	data_korpus.slot_artefact_num = getRandInt(0, 4);  
+        data_korpus.slot_otsec_num    = getRandInt(6, 8) * otsec_rate;
+        
     	LifeData data_life;
         data_life.armor      = data_korpus.armor*0.1;
         data_life.dying_time = 10*texOb->size_id;
@@ -106,7 +119,7 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id,
        		data_korpus.draw_turrels = true; 
     	else
        		data_korpus.draw_turrels = false; 
-	
+
 	ship->SetSubSubTypeId(subsubtype_id);
 	ship->SetKorpusData(data_korpus);
 	ship->SetTextureOb(texOb);

@@ -58,7 +58,7 @@ StarSystem* Galaxy::GetRandomStarSystem(int condition_id)
 {
 	if (condition_id == NONE_ID)
 	{
-		return STARSYSTEM_vec[getRandInt(0, STARSYSTEM_vec.size())];
+		return STARSYSTEM_vec[getRandInt(0, STARSYSTEM_vec.size()-1)];
 	}
 	else
 	{
@@ -72,7 +72,7 @@ StarSystem* Galaxy::GetRandomStarSystem(int condition_id)
 			}
 		}
 	
-		return ss_vec[getRandInt(0, ss_vec.size())];
+		return ss_vec[getRandInt(0, ss_vec.size()-1)];
 	}
 }
      		

@@ -70,6 +70,7 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
         	if (gui_vehicle_scan->GetVehicle()->GetId() == player->GetNpc()->GetVehicle()->GetId())
     		{
         		allow_full_control = true;  
+        		std::cout<<"ERROR"<<std::endl;
         	    	// modify full control for friend ships         
         	}
         }

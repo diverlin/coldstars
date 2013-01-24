@@ -52,7 +52,7 @@ class Galaxy : public Base
     		  	     	
   	     	friend class GuiGalaxyMap;
   	     	friend class Observation;
-  	     	friend class GalaxyBuilder;
+                friend class God;
 };
 
 

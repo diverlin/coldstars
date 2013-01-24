@@ -24,8 +24,7 @@
 #include "../common/rand.hpp"
 #include "../resources/TextureManager.hpp"
 
-#include "../builder/ItemSlotBuilder.hpp"
-#include "../builder/VehicleSlotBuilder.hpp"
+#include "../spaceobjects/Ship.hpp"
 
 #include "../items/equipment/BakEquipment.hpp"
 #include "../items/equipment/DriveEquipment.hpp"
@@ -38,6 +37,10 @@
 #include "../items/equipment/ScanerEquipment.hpp"
 #include "../items/equipment/EnergizerEquipment.hpp"
 #include "../items/equipment/FreezerEquipment.hpp"
+
+
+#include "../builder/ItemSlotBuilder.hpp"
+#include "../builder/VehicleSlotBuilder.hpp"
 
 #include "../builder/items/equipment/BakEquipmentBuilder.hpp"
 #include "../builder/items/equipment/DriveEquipmentBuilder.hpp"

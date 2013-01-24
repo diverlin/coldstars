@@ -59,28 +59,25 @@ bool UserInput::KeyPressedCommon(Player* player, GuiManager& gui_manager)
         {
         	case sf::Key::Escape:
         	{
- 			if (player->GetNpc()->GetScanTarget() != NULL)
- 			{ 
-                                if (player->GetNpc()->GetScanTarget() != NULL)
-                                {
-                                        if (player->GetGuiManager().GetGuiVehicleScan()->GetBlockManualClosing() == false)
-                                        {
-                                                if (player->GetGuiManager().GetGuiKosmoport().GetInitDone() == true)
-                                                {
-                                                        player->GetGuiManager().GetGuiKosmoport().ExitGuiScan();
-                                                }
-                                                if (player->GetGuiManager().GetGuiSpace().GetInitDone() == true)
-                                                {
-                                                        player->GetGuiManager().GetGuiSpace().ExitGuiScan();
-                                                }
-                                        }
-                                }
-                                
-                                if (player->GetGuiManager().GetGuiSpace().GetGuiVehicleTarget().GetVehicle() != NULL)
-                                {
-                                        player->GetGuiManager().GetGuiSpace().GetGuiVehicleTarget().Reset();
-                                }
-         		}
+        		if (player->GetGuiManager().GetGuiVehicleScan()->GetVehicle() != NULL)
+			{
+				if (player->GetGuiManager().GetGuiVehicleScan()->GetBlockManualClosing() == false)
+				{
+					if (player->GetGuiManager().GetGuiKosmoport().GetInitDone() == true)
+					{
+						player->GetGuiManager().GetGuiKosmoport().ExitGuiScan();
+					}
+					if (player->GetGuiManager().GetGuiSpace().GetInitDone() == true)
+					{
+						player->GetGuiManager().GetGuiSpace().ExitGuiScan();
+					}
+				}
+			}
+			
+			if (player->GetGuiManager().GetGuiSpace().GetGuiVehicleTarget().GetVehicle() != NULL)
+			{
+				player->GetGuiManager().GetGuiSpace().GetGuiVehicleTarget().Reset();
+			}
          		
          		return true; break;
          	}
