@@ -61,7 +61,7 @@ bool UserInput::KeyPressedCommon(Player* player, GuiManager& gui_manager)
         	{
         		if (player->GetGuiManager().GetGuiVehicleScan()->GetVehicle() != NULL)
 			{
-				if (player->GetGuiManager().GetGuiVehicleScan()->GetBlockManualClosing() == false)
+				if (player->GetGuiManager().GetGuiVehicleScan()->GetBlockManualExit() == false)
 				{
 					if (player->GetGuiManager().GetGuiKosmoport().GetInitDone() == true)
 					{

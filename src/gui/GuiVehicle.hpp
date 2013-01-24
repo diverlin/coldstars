@@ -32,7 +32,7 @@ class GuiVehicle : public BaseGui
       		~GuiVehicle();
 
                 Vehicle* GetVehicle() const { return vehicle; };
-                bool GetBlockManualClosing() const { return block_manual_closing; };
+                bool GetBlockManualExit() const { return block_manual_exit; };
                 
 		void BindVehicle(Vehicle*, const vec2f& offset, bool block_manual_closing = false, float scale = 1.0f);
         	void UnbindVehicle();
@@ -43,7 +43,7 @@ class GuiVehicle : public BaseGui
       		void RenderVehicle(const MouseData&, int mark_slot_subtype_id = NONE_ID) const;
       		
       	private:     
-                bool block_manual_closing;
+                bool block_manual_exit;
                 
       	        Rect rect_korpus; 
                 TextureOb* textureOb_korpus;
