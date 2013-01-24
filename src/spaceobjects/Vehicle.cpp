@@ -77,13 +77,13 @@ Vehicle::Vehicle()
 	
 	special_action_id = NONE_ID;
 	
-	owner_npc = NULL;
+	owner_npc  = NULL;
        	starsystem = NULL; 
 
     	weapon_complex.SetOwnerVehicle(this);
     	drive_complex.SetOwnerVehicle(this);
     	protection_complex.SetOwnerVehicle(this);
-    	
+
     	radar_slot     = NULL;
         scaner_slot    = NULL;
         energizer_slot = NULL;
@@ -160,7 +160,20 @@ int Vehicle::GetGivenExpirience() const
 {
         return owner_npc->GetSkills().GetExpirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
 }
-                
+    
+bool Vehicle::CheckItemSlotPresenceBySubTypeId(int slot_subtype_id) const
+{
+        for (unsigned int i=0; i<slot_total_vec.size(); i++)
+        {
+                if (slot_total_vec[i]->GetSubTypeId() == slot_subtype_id)
+                {
+                        return true;
+                }
+        }
+        
+        return false;
+}
+                    
 void Vehicle::AddItemSlot(ItemSlot* slot) 
 { 
         slot->SetOwner(this); 
@@ -414,7 +427,7 @@ bool Vehicle::AddAndManageItem(BaseItem* item)
 	{
 		ManageItem(item);
 	}
-	
+
 	return result;
 }
      
@@ -796,14 +809,17 @@ void Vehicle::CheckNeedsInStatic()
         
         // check fuel
         needs.get_fuel = false;
-        if (drive_complex.GetBakSlot()->GetItem() != NULL)
+        if (drive_complex.GetBakSlot() != NULL)
         {
-                if (drive_complex.GetBakSlot()->GetBakEquipment()->GetFuel() < 0.8*drive_complex.GetBakSlot()->GetBakEquipment()->GetFuelMax())
+                if (drive_complex.GetBakSlot()->GetItem() != NULL)
                 {
-                        needs.get_fuel = true;
-                } 
-        }   
-       
+                        if (drive_complex.GetBakSlot()->GetBakEquipment()->GetFuel() < 0.8*drive_complex.GetBakSlot()->GetBakEquipment()->GetFuelMax())
+                        {
+                                needs.get_fuel = true;
+                        } 
+                }   
+        }
+        
         // check credits
         if (owner_npc->GetCredits() < 1000) { needs.get_credits = true; }
         else                                { needs.get_credits = false; }
@@ -818,7 +834,22 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
         if ( (needs.repair_korpus == true) and (result == true) )
         {
                 result = ((Angar*)parent_vehicleslot->GetOwner())->RepairVehicle(this);
-        }
+        }        
+      
+        // repair equipment
+        if ( (needs.repair_equipment == true) and (result == true) )
+        {
+                for (unsigned int i=0; i<slot_funct_vec.size(); i++)
+                {
+                        if (slot_funct_vec[i]->GetItem() != NULL)
+                        {
+                                if (slot_funct_vec[i]->GetItem()->GetDamaged() == true)
+                                {
+                                        result = ((Angar*)parent_vehicleslot->GetOwner())->RepairItem(owner_npc, slot_funct_vec[i]->GetItem());
+                                }
+                        }
+                }
+        }        
         
         // buy ammo
         if ( (needs.get_ammo == true) and (result == true) )
@@ -834,21 +865,6 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
                         }
                 }
         }
-        
-        // repair equipment
-        if ( (needs.repair_equipment == true) and (result == true) )
-        {
-                for (unsigned int i=0; i<slot_funct_vec.size(); i++)
-                {
-                        if (slot_funct_vec[i]->GetItem() != NULL)
-                        {
-                                if (slot_funct_vec[i]->GetItem()->GetDamaged() == true)
-                                {
-                                        result = ((Angar*)parent_vehicleslot->GetOwner())->RepairItem(owner_npc, slot_funct_vec[i]->GetItem());
-                                }
-                        }
-                }
-        }        
         
         // tank up
         if ( (needs.get_fuel == true) and (result == true) )
@@ -911,36 +927,39 @@ void Vehicle::UpdatePropertiesSpeed()
      	// speed calculation ////
      	properties.speed = 0;
 
-     	if (drive_complex.GetDriveSlot()->GetItem() != NULL) 
+     	if (drive_complex.GetDriveSlot() != NULL) 
      	{
-        	if (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)  
-        	{
-           		float actual_speed = (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetSpeed() - mass*MASS_DECREASE_SPEED_RATE); 
-           		if (actual_speed > 0)
-           		{ 
-           			if (properties.artefact_gravity > 0)
-           			{
-              				properties.speed = (1.0 + properties.artefact_gravity/100.0)*actual_speed;         
-           			}
-           			else
-           			{
-           				properties.speed = actual_speed; 
-           			}
-                                
-                                if (drive_complex.GetDriveSlot()->GetSelected() == true)
-                                {
-                                        properties.speed *= EQUIPMENT::DRIVE::OVERLOAD_RATE;
-                                        drive_complex.GetDriveSlot()->GetItem()->UseOverloadDeterioration();
+                if (drive_complex.GetDriveSlot()->GetItem() != NULL) 
+                {
+                        if (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)  
+                        {
+                                float actual_speed = (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetSpeed() - mass*MASS_DECREASE_SPEED_RATE); 
+                                if (actual_speed > 0)
+                                { 
+                                        if (properties.artefact_gravity > 0)
+                                        {
+                                                properties.speed = (1.0 + properties.artefact_gravity/100.0)*actual_speed;         
+                                        }
+                                        else
+                                        {
+                                                properties.speed = actual_speed; 
+                                        }
+                                        
+                                        if (drive_complex.GetDriveSlot()->GetSelected() == true)
+                                        {
+                                                properties.speed *= EQUIPMENT::DRIVE::OVERLOAD_RATE;
+                                                drive_complex.GetDriveSlot()->GetItem()->UseOverloadDeterioration();
+                                        }
+                                        else
+                                        {
+                                                drive_complex.GetDriveSlot()->GetItem()->UseNormalDeterioration();
+                                        }
+        
+                                        
+                                        drive_complex.UpdatePath();
                                 }
-                                else
-                                {
-                                        drive_complex.GetDriveSlot()->GetItem()->UseNormalDeterioration();
-                                }
-
-           			
-           			drive_complex.UpdatePath();
-           		}
-        	}
+                        }
+                }
         }
 }
 
@@ -983,22 +1002,28 @@ void Vehicle::UpdatePropertiesJump()
 	    
 	properties.hyper = 0;
 
-     	if (drive_complex.GetDriveSlot()->GetItem() != NULL)
-     	{
-        	if (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)
-           	{
-           		if (drive_complex.GetBakSlot()->GetItem() != NULL)
-              		{
-              			if (drive_complex.GetBakSlot()->GetBakEquipment()->GetFunctioning() == true)
-              			{
-                 			if (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetHyper() > drive_complex.GetBakSlot()->GetBakEquipment()->GetFuel())
-                    				properties.hyper = drive_complex.GetDriveSlot()->GetDriveEquipment()->GetHyper();
-                 			else
-                    				properties.hyper = drive_complex.GetBakSlot()->GetBakEquipment()->GetFuel();
-              			}
-              		}    
-		}
-	}
+        if (drive_complex.GetDriveSlot() != NULL)
+        {
+                if (drive_complex.GetDriveSlot()->GetItem() != NULL)
+                {
+                        if (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)
+                        {
+                                if (drive_complex.GetBakSlot() != NULL)
+                                {
+                                        if (drive_complex.GetBakSlot()->GetItem() != NULL)
+                                        {
+                                                if (drive_complex.GetBakSlot()->GetBakEquipment()->GetFunctioning() == true)
+                                                {
+                                                        if (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetHyper() > drive_complex.GetBakSlot()->GetBakEquipment()->GetFuel())
+                                                                properties.hyper = drive_complex.GetDriveSlot()->GetDriveEquipment()->GetHyper();
+                                                        else
+                                                                properties.hyper = drive_complex.GetBakSlot()->GetBakEquipment()->GetFuel();
+                                                }
+                                        } 
+                                }
+                        }
+                }
+        }
 }
 
 void Vehicle::UpdatePropertiesEnergy()

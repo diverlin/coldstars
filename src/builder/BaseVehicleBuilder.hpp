@@ -27,8 +27,11 @@ class BaseVehicleBuilder
 		static BaseVehicleBuilder& Instance();
 		virtual ~BaseVehicleBuilder() {};
 
-        	void Equip(Vehicle*, int tech_leve = 1) const; 
-                
+        	void EquipEquipment(Vehicle*, int tech_leve = 1) const; 
+                void EquipModules(Vehicle*, int tech_leve = 1) const; 
+                void EquipArtefacts(Vehicle*, int tech_leve = 1) const; 
+                void EquipBomb(Vehicle*, int tech_leve = 1) const; 
+                                                                
                 void CreateKorpusGeometry(Vehicle*) const;      
            
                 void CreateItemSlots(Vehicle*) const;

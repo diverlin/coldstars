@@ -64,6 +64,8 @@
 
 #include "../garbage/EntityGarbage.hpp"
 
+int StarSystem::counter = 0;
+                
 StarSystem::StarSystem(int id):
 unique_update_inDymanic_done(false),
 unique_update_inStatic_done(false)
@@ -80,6 +82,8 @@ unique_update_inStatic_done(false)
 
     	galaxy = NULL;    	
     	this->SetStarSystem(this);
+        
+        counter++;
 }
 
 StarSystem::~StarSystem()
@@ -91,6 +95,8 @@ StarSystem::~StarSystem()
         for(unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { delete effect_PARTICLESYSTEM_vec[i]; } 
         for(unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)      { delete effect_SHOCKWAVE_vec[i]; } 
         for(unsigned int i=0; i<text_DAMAGE_vec.size(); i++)           { delete text_DAMAGE_vec[i]; } 
+        
+        counter--;
 }      
 
 /* virtual */
@@ -472,7 +478,9 @@ void StarSystem::UpdateStates()
 void StarSystem::Update(int time, bool detalied_simulation)
 {                
 	UpdateEntities_s(time, detalied_simulation);
-	    		
+        ManageUnavaliableObjects_s();
+        ManageDeadObjects_s();         // no need to update so frequently, pri /6
+        	    		
 	if (time > 0)
 	{
 		if (unique_update_inDymanic_done == false)
@@ -495,20 +503,13 @@ void StarSystem::Update(int time, bool detalied_simulation)
 	else
 	{
 		if (unique_update_inStatic_done == false)
-		{    		
-			UpdateStates();
-		
+		{    				
     			UpdateInSpaceInStatic_s();     			
-
-			garbage_effects.clear(); 
 			
 			unique_update_inDymanic_done = false;
     			unique_update_inStatic_done  = true;
     		}    		
 	}
-
-        ManageUnavaliableObjects_s();
-        ManageDeadObjects_s();         // no need to update so frequently, pri /6
 }
 
 void StarSystem::rocketCollision_s(bool show_effect)
@@ -627,6 +628,8 @@ void StarSystem::UpdateEntities_s(int time, bool show_effect)
       
 void StarSystem::UpdateInSpaceInStatic_s()
 {
+	UpdateStates();
+			
      	for (unsigned int i=0; i<VEHICLE_vec.size(); i++) 		
      	{ 
      		VEHICLE_vec[i]->GetOwnerNpc()->UpdateInSpaceInStatic(); 
@@ -638,6 +641,8 @@ void StarSystem::UpdateInSpaceInStatic_s()
 
     	for (unsigned int i=0; i<STAR_vec.size(); i++)     	{ STAR_vec[i]->UpdateInSpaceInStatic(); }     	
     	for (unsigned int i=0; i<PLANET_vec.size(); i++)     	{ PLANET_vec[i]->UpdateInSpaceInStatic(); }
+
+	garbage_effects.clear(); 
 }      
 
 void StarSystem::FindRenderVisibleEntities_c(Player* player)
@@ -765,7 +770,7 @@ void StarSystem::ShipManager_s(unsigned int num)
         
        		Npc* new_pnpc = NpcBuilder::Instance().GetNewNpc(prace_id, psubtype_id, psubsubtype_id);
         	Ship* new_pship = ShipBuilder::Instance().GetNewShip(prace_id, psubtype_id, size_id, weapons_num);
-        	ShipBuilder::Instance().Equip(new_pship);   // improove
+        	ShipBuilder::Instance().EquipEquipment(new_pship);   // improove
         
         	new_pship->BindOwnerNpc(new_pnpc);
 

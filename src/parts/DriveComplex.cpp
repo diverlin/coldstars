@@ -44,6 +44,9 @@ DriveComplex::DriveComplex()
 
 	target = NULL;
 	drive_effect = NULL; 
+        
+        drive_slot = NULL;
+        bak_slot   = NULL;
 }
 
 DriveComplex::~DriveComplex()

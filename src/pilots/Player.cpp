@@ -239,6 +239,7 @@ void Player::UpdatePostTransaction()
                 {                       
                         break;
                 }
+                
                 case ENTITY::SPACE_ID:
                 {
                         if (gui_manager.GetGuiKosmoport().GetInitDone() == true)

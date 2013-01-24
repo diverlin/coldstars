@@ -177,7 +177,7 @@ void GuiAngar::ButtonsAction() const
 	   			case GUI::BUTTON::GETLAUNCH_ID:
 	   			{
        					player->GetNpc()->GetVehicle()->LaunchingEvent();
-                                        //player->GetGuiManager().EnterGuiLaunchingScreen();
+
        		   			return; 
  
        		   			break;

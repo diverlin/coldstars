@@ -29,8 +29,6 @@
 #include "../common/rand.hpp"
 #include "../common/common.hpp"
 
-#include "../managers/God.hpp"
-
 GalaxyBuilder& GalaxyBuilder::Instance()
 {
 	static GalaxyBuilder instance;
@@ -114,9 +112,7 @@ void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy) const
                 	vec2f center = starsystem_segment_vec[i] + getRandVec2f(getMax(segment_w, segment_h)/7, getMax(segment_w, segment_h)/3);
                 	                
         		StarSystem* starsystem = StarSystemBuilder::Instance().GetNewStarSystem();
-        		galaxy->Add(starsystem, center);
-        		
-        		God::Instance().CreateLifeInStarSystem(starsystem);
+        		galaxy->Add(starsystem, center); 
  		}
  	}
 }

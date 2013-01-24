@@ -24,6 +24,7 @@
 #include "../common/Logger.hpp"
 #include "../common/myStr.hpp"
 
+#include "../spaceobjects/Ship.hpp"
 #include "../spaceobjects/Star.hpp"
 #include "../spaceobjects/Planet.hpp"
 #include "../spaceobjects/Asteroid.hpp"

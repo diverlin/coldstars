@@ -19,8 +19,11 @@
 #ifndef GOD_H
 #define GOD_H
 
-class StarSystem;
 #include "../common/constants.hpp"
+class Galaxy;
+class StarSystem;
+class Planet;
+#include "../common/Date.hpp";
 
 class God
 {
@@ -28,16 +31,28 @@ class God
 		static God& Instance();
 		~God();
 
-		void CreateLifeInStarSystem(StarSystem*) const;
-		
-		void UpdateInStatic();
-                       	 		                
+		void SetGalaxy(Galaxy* galaxy) { this->galaxy = galaxy; };
+                void CreateLife() const;
+                                                
+		void Update(const Date&);
+
         private:
-		God() {};
+		God();
 		God(const God&) = delete;
 		God& operator=(const God&) = delete;
-		                
-        	void CreateLifeToPlanets(StarSystem*) const;
+		    		    
+		bool invasion_took_place;       	
+        	Date last_update_date;
+        	Galaxy* galaxy;
+        	
+                void CreateLifeInStarSystem1(StarSystem*) const;
+                
+                StarSystem* GetProperStarSystemToInvade() const;
+                void InvasionInStarSystem(StarSystem*) const;
+                            
+        	void CreateLifeAtPlanets(StarSystem*) const;
+        	void CreateLifeAtPlanet(Planet*) const;
+        	
         	void CreateSpaceStations(StarSystem*, int) const;
         	void CreateShipsInSpace(StarSystem*, int, int, int subtype_id = NONE_ID, int subsubtype_id = NONE_ID) const;   
 }; 

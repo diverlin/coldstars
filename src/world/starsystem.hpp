@@ -121,6 +121,8 @@ class StarSystem : public BaseSpaceEntity
 		Vehicle* GetRandomVehicle(const std::vector<int>&) const;
 		// 
     	private:
+                static int counter;
+                
                 int race_id, conqueror_race_id;
                 
     		bool unique_update_inDymanic_done;

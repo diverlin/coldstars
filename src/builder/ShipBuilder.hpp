@@ -20,8 +20,8 @@
 #define SHIPBUILDER_H
 
 #include "BaseVehicleBuilder.hpp"
-#include "../spaceobjects/Ship.hpp"
 #include "../common/constants.hpp"
+class Ship;
 
 class ShipBuilder : public BaseVehicleBuilder
 {
@@ -34,13 +34,12 @@ class ShipBuilder : public BaseVehicleBuilder
                 Ship* GetNewShip() const;   
                        
         private:
-        	ShipBuilder() {};   	
+        	ShipBuilder() {};
         	ShipBuilder(const ShipBuilder&) = delete; 
         	ShipBuilder& operator=(const ShipBuilder&) = delete;
                 
                 void CreateNewInternals(Ship*, int, int, int, int) const;  
 }; 
-
 
 #endif 
     

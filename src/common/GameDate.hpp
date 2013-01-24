@@ -31,11 +31,15 @@ class GameDate
 		void NextDay();
 		const Date& GetDate() const { return date; };
 	
+		int operator-(const GameDate&) const;
+		
 	private:
 		GameDate();
 		GameDate(const GameDate&) = delete;
 		GameDate& operator=(const GameDate&) = delete;
 		
+		std::string GetStr() const;
+
 		Date date;
 };
 
