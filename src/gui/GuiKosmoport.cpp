@@ -50,10 +50,10 @@
 GuiKosmoport::GuiKosmoport():
 init_done(false), 
 kosmoport(NULL),
-gui_galaxymap(NULL),
-gui_vehicle_scan(NULL),
-gui_skills(NULL),
-slider(NULL)
+gui_galaxymap_shared(NULL),
+gui_vehicle_scan_shared(NULL),
+gui_skills_shared(NULL),
+slider_shared(NULL)
 {
 	int screen_w = Screen::Instance().GetWindow().GetWidth();
 	int screen_h = Screen::Instance().GetWindow().GetHeight();
@@ -141,20 +141,20 @@ void GuiKosmoport::UnbindKosmoport()
 }
 
 
-void GuiKosmoport::BindSharedGuis(GuiGalaxyMap* gui_galaxymap, GuiVehicle* gui_vehicle_scan, GuiSkills* gui_skills, Slider* slider)
+void GuiKosmoport::BindSharedGuis(GuiGalaxyMap* gui_galaxymap_shared, GuiVehicle* gui_vehicle_scan_shared, GuiSkills* gui_skills_shared, Slider* slider_shared)
 {
-        this->gui_galaxymap    = gui_galaxymap;
-        this->gui_vehicle_scan = gui_vehicle_scan;
-        this->gui_skills       = gui_skills;
-        this->slider           = slider;
+        this->gui_galaxymap_shared    = gui_galaxymap_shared;
+        this->gui_vehicle_scan_shared = gui_vehicle_scan_shared;
+        this->gui_skills_shared       = gui_skills_shared;
+        this->slider_shared           = slider_shared;
 }
 
 void GuiKosmoport::UnbindSharedGuis()
 {
-        gui_galaxymap    = NULL;
-        gui_vehicle_scan = NULL;
-        gui_skills       = NULL;
-        slider           = NULL;
+        gui_galaxymap_shared    = NULL;
+        gui_vehicle_scan_shared = NULL;
+        gui_skills_shared       = NULL;
+        slider_shared           = NULL;
 }
 
 void GuiKosmoport::EnterGuiScanInAngar()
@@ -167,8 +167,9 @@ void GuiKosmoport::EnterGuiScanInAngar()
         int screen_h = Screen::Instance().GetWindow().GetHeight();
 	vec2f center_screen(screen_w/2, screen_h/2);
         
-        gui_vehicle_scan->BindVehicle(player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET);
-        gui_skills->SetOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
+        bool allow_full_control = player->IsAbleToGetFullControlOnScanedVehicle();
+        gui_vehicle_scan_shared->BindVehicle(player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
+        gui_skills_shared->SetOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
 }
 
 void GuiKosmoport::ExitGuiScan()
@@ -177,11 +178,11 @@ void GuiKosmoport::ExitGuiScan()
 	Logger::Instance().Log("GuiKosmoport::ExitGuiScan", GUI_LOG_DIP);
 	#endif	
 	
-        if (gui_vehicle_scan->GetVehicle() == player->GetNpc()->GetVehicle())
+        if (gui_vehicle_scan_shared->GetVehicle() == player->GetNpc()->GetVehicle())
        	{
-                gui_skills->Acknowledge();
+                gui_skills_shared->Acknowledge();
        	}
-        gui_vehicle_scan->UnbindVehicle();
+        gui_vehicle_scan_shared->UnbindVehicle();
 
         player->GetNpc()->ResetScanTarget();
 }
@@ -201,7 +202,7 @@ void GuiKosmoport::ExitGuiAngarScreen()
 	Logger::Instance().Log("GuiKosmoport::ExitGuiAngarScreen", GUI_LOG_DIP);
 	#endif	
 	
-	if (gui_vehicle_scan->GetVehicle() != NULL)
+	if (gui_vehicle_scan_shared->GetVehicle() != NULL)
 	{
 		ExitGuiScan();
 	}
@@ -222,7 +223,7 @@ void GuiKosmoport::EnterGuiStoreScreen()
 
 	player->GetNpc()->SetScanTarget(player->GetNpc()->GetVehicle()); //??
         bool lock_gui_scan_vehicle = true;
-        gui_vehicle_scan->BindVehicle(player->GetNpc()->GetVehicle(), center_screen + GUI_VEHICLE_INSTORE_OFFSET, lock_gui_scan_vehicle);
+        gui_vehicle_scan_shared->BindVehicle(player->GetNpc()->GetVehicle(), center_screen + GUI_VEHICLE_INSTORE_OFFSET, lock_gui_scan_vehicle);
         
         active_screen_id = GUI::SCREEN::STORE_ID;
 }
@@ -259,7 +260,7 @@ void GuiKosmoport::EnterGuiGalaxyMapScreen()
 	#endif	
 	
         active_screen_id = GUI::SCREEN::GALAXYMAP_ID;        
-        gui_galaxymap->BindGalaxy(player->GetNpc()->GetVehicle()->GetStarSystem()->GetGalaxy());
+        gui_galaxymap_shared->BindGalaxy(player->GetNpc()->GetVehicle()->GetStarSystem()->GetGalaxy());
 }
 
 void GuiKosmoport::ExitGuiGalaxyMapScreen()
@@ -268,7 +269,7 @@ void GuiKosmoport::ExitGuiGalaxyMapScreen()
 	Logger::Instance().Log("GuiKosmoport::ExitGuiGalaxyMapScreen", GUI_LOG_DIP);
 	#endif	
 	
-        gui_galaxymap->UnbindGalaxy(); 
+        gui_galaxymap_shared->UnbindGalaxy(); 
 }
 
 void GuiKosmoport::EnterGuiGovermentScreen()
@@ -383,9 +384,9 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
 				gui_angar.ButtonsAction();
 			    	if (interaction == false)
 			    	{
-					if (gui_vehicle_scan->GetVehicle() != NULL) 
+					if (gui_vehicle_scan_shared->GetVehicle() != NULL) 
 					{ 
-						interaction = player->GetGuiManager().UpdateMouseInteractionWithScanVehicle(data_mouse, gui_vehicle_scan);
+						interaction = player->GetGuiManager().UpdateMouseInteractionWithScanVehicle(data_mouse);
 					}
 			    	} 
 	        	}
@@ -400,7 +401,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
 				interaction = gui_store.UpdateMouseInteraction(data_mouse);
 			    	if (interaction == false)
 			    	{
-			    		interaction = gui_vehicle_scan->UpdateMouseInteractionInStore(data_mouse, gui_store.GetStore());
+			    		interaction = gui_vehicle_scan_shared->UpdateMouseInteractionInStore(data_mouse, gui_store.GetStore());
 			    	}
 			}
 
@@ -410,11 +411,11 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
 		case GUI::SCREEN::SHOP_ID:
 		{
 			gui_shop.UpdateLables();
-			gui_shop.ButtonsAction(*slider);
-			if (slider->GetSubTypeId() != NONE_ID)
+			gui_shop.ButtonsAction(*slider_shared);
+			if (slider_shared->GetSubTypeId() != NONE_ID)
 			{
-				slider->CheckButtonsLock();
-				slider->ButtonsAction(gui_shop.GetShop());
+				slider_shared->CheckButtonsLock();
+				slider_shared->ButtonsAction(gui_shop.GetShop());
 			}
 			
 			if (interaction == false)
@@ -422,10 +423,10 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
 				interaction = gui_shop.UpdateMouseInteractionWithButtons(data_mouse);
 				if (interaction == false)
 				{
-					if (slider->GetSubTypeId() != NONE_ID)
+					if (slider_shared->GetSubTypeId() != NONE_ID)
 					{
-						slider->UpdateSlidePosition(data_mouse);
-						interaction = slider->UpdateMouseInteractionWithButtons(data_mouse);
+						slider_shared->UpdateSlidePosition(data_mouse);
+						interaction = slider_shared->UpdateMouseInteractionWithButtons(data_mouse);
 					}
 				}
 	        	}
@@ -438,7 +439,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
 			//update
 			if ( interaction == false)
 			{
-				interaction = gui_galaxymap->UpdateMouseInteraction(data_mouse);
+				interaction = gui_galaxymap_shared->UpdateMouseInteraction(data_mouse);
 	        	}					   
 
 			break;
@@ -473,9 +474,9 @@ void GuiKosmoport::Render(const MouseData& data_mouse)
 			enable_BLEND();   
 	        		gui_angar.RenderVehicleAndItemSlots();
 	        		
-				if (gui_vehicle_scan->GetVehicle() != NULL)
+				if (gui_vehicle_scan_shared->GetVehicle() != NULL)
 				{ 
-					player->GetGuiManager().RenderScanVehicle(data_mouse, gui_vehicle_scan); 
+					player->GetGuiManager().RenderScanVehicle(data_mouse, gui_vehicle_scan_shared); 
 				}
 				
 	        		RenderButtons(); 
@@ -513,9 +514,9 @@ void GuiKosmoport::Render(const MouseData& data_mouse)
 			enable_BLEND();   
 				gui_shop.RenderButtons();
 				
-				if (slider->GetSubTypeId() != NONE_ID)
+				if (slider_shared->GetSubTypeId() != NONE_ID)
 				{
-					slider->Render();
+					slider_shared->Render();
 				}
 				
 				RenderButtons(); 
@@ -531,7 +532,7 @@ void GuiKosmoport::Render(const MouseData& data_mouse)
 			clearScreen(); //becase there is no background
 	        	resetRenderTransformation();
 			enable_BLEND();   
-				gui_galaxymap->Render();
+				gui_galaxymap_shared->Render();
 				
 				RenderButtons(); 
 				RenderFocusedButtonInfo(data_mouse); 

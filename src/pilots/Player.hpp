@@ -82,6 +82,8 @@ class Player : public Base
      		void AddIfVisible(VerticalFlowText*); 
      		//	
   		
+  		bool IsAbleToGetFullControlOnScanedVehicle(bool force_full_control = false) const;
+  		
      		void RunSession(const TurnTimer&); 
     		
     		void ForceStateMachineReset() const;

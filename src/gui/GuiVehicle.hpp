@@ -33,17 +33,19 @@ class GuiVehicle : public BaseGui
 
                 Vehicle* GetVehicle() const { return vehicle; };
                 bool GetBlockManualExit() const { return block_manual_exit; };
-                
-		void BindVehicle(Vehicle*, const vec2f& offset, bool block_manual_closing = false, float scale = 1.0f);
+                bool GetAllowFullControl() const { return allow_full_control; };
+                                
+		void BindVehicle(Vehicle*, const vec2f& offset, bool full_control_on, bool block_manual_closing = false, float scale = 1.0f);
         	void UnbindVehicle();
                 
-     		bool UpdateMouseInteraction(const MouseData&, bool);   
+     		bool UpdateMouseInteraction(const MouseData&);   
                 bool UpdateMouseInteractionInStore(const MouseData&, Store*); 
 
       		void RenderVehicle(const MouseData&, int mark_slot_subtype_id = NONE_ID) const;
       		
       	private:     
                 bool block_manual_exit;
+                bool allow_full_control;
                 
       	        Rect rect_korpus; 
                 TextureOb* textureOb_korpus;

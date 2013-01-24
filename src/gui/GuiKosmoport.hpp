@@ -70,10 +70,10 @@ class GuiKosmoport : public BaseGui
                 GuiShop        	gui_shop;
                 GuiGoverment    gui_goverment;  
               
-                GuiGalaxyMap* gui_galaxymap;  
-                GuiVehicle*   gui_vehicle_scan;
-                GuiSkills*    gui_skills;
-                Slider*       slider;
+                GuiGalaxyMap* gui_galaxymap_shared;  
+                GuiVehicle*   gui_vehicle_scan_shared;
+                GuiSkills*    gui_skills_shared;
+                Slider*       slider_shared;
                 
 
                 void ExitGuiAngarScreen();

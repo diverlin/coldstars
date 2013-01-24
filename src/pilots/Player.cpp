@@ -75,6 +75,21 @@ void Player::BindNpc(Npc* npc)
     	npc->SetPlayer(this);
 }
 
+bool Player::IsAbleToGetFullControlOnScanedVehicle(bool force_full_control) const
+{
+	if (force_full_control == false)
+	{
+        	if (npc->GetVehicle()->GetId() == npc->GetScanTarget()->GetId())
+    		{
+        		force_full_control = true;  
+        		std::cout<<"ERROR"<<std::endl;
+        	    	// modify full control for friend ships         
+        	}
+        }
+        
+        return force_full_control;
+}
+  		
 void Player::ClearVisibleEntities()
 {
         visible_STAR_vec.clear();
