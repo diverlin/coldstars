@@ -44,10 +44,10 @@
 #include "../slots/ItemSlot.hpp"
 
 GuiSpace::GuiSpace():
-gui_galaxymap(NULL),
-gui_vehicle_scan(NULL),
-gui_skills(NULL),
-slider(NULL),
+gui_galaxymap_shared(NULL),
+gui_vehicle_scan_shared(NULL),
+gui_skills_shared(NULL),
+slider_shared(NULL),
 init_done(false)
 {   	
     	int screen_w = Screen::Instance().GetWindow().GetWidth();
@@ -91,22 +91,22 @@ void GuiSpace::SetPlayer(Player* player)
 	gui_radar.SetPlayer(player); 
 }
 
-void GuiSpace::BindSharedGuis(GuiGalaxyMap* gui_galaxymap, GuiVehicle* gui_vehicle_scan, GuiSkills* gui_skills, Slider* slider)
+void GuiSpace::BindSharedGuis(GuiGalaxyMap* gui_galaxymap_shared, GuiVehicle* gui_vehicle_scan_shared, GuiSkills* gui_skills_shared, Slider* slider_shared)
 {
-        this->gui_galaxymap    = gui_galaxymap;
-        this->gui_vehicle_scan = gui_vehicle_scan;
-        this->gui_skills       = gui_skills;
-        this->slider           = slider;
+        this->gui_galaxymap_shared    = gui_galaxymap_shared;
+        this->gui_vehicle_scan_shared = gui_vehicle_scan_shared;
+        this->gui_skills_shared       = gui_skills_shared;
+        this->slider_shared           = slider_shared;
         
         init_done = true;
 }
 
 void GuiSpace::UnbindSharedGuis()
 {
-        gui_galaxymap    = NULL;
-        gui_vehicle_scan = NULL;
-        gui_skills       = NULL;
-        slider           = NULL;
+        gui_galaxymap_shared    = NULL;
+        gui_vehicle_scan_shared = NULL;
+        gui_skills_shared       = NULL;
+        slider_shared           = NULL;
         
         init_done = false;
 }
@@ -135,13 +135,13 @@ void GuiSpace::EnterGalaxyMap()
 	Logger::Instance().Log("GuiSpace::EnterGalaxyMap", GUI_LOG_DIP);
 	#endif
 	
-        if (gui_vehicle_scan->GetVehicle() != NULL)
+        if (gui_vehicle_scan_shared->GetVehicle() != NULL)
         {
                 ExitGuiScan();
         }
 
         show_gui_radar = false;          
-        gui_galaxymap->BindGalaxy(player->GetNpc()->GetStarSystem()->GetGalaxy());
+        gui_galaxymap_shared->BindGalaxy(player->GetNpc()->GetStarSystem()->GetGalaxy());
 }
 
 void GuiSpace::ExitGalaxyMap()
@@ -151,7 +151,7 @@ void GuiSpace::ExitGalaxyMap()
 	#endif
 	
         show_gui_radar = true;       
-        gui_galaxymap->UnbindGalaxy();
+        gui_galaxymap_shared->UnbindGalaxy();
 }
     
 void GuiSpace::EnterGuiScan()
@@ -164,8 +164,9 @@ void GuiSpace::EnterGuiScan()
         int screen_h = Screen::Instance().GetWindow().GetHeight();
 	vec2f center_screen(screen_w/2, screen_h/2);
         
-        gui_vehicle_scan->BindVehicle(player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET);
-        gui_skills->SetOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
+        bool allow_full_control = player->IsAbleToGetFullControlOnScanedVehicle();
+        gui_vehicle_scan_shared->BindVehicle(player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
+        gui_skills_shared->SetOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
                         
         show_gui_radar = false;
 }
@@ -176,11 +177,11 @@ void GuiSpace::ExitGuiScan()
 	Logger::Instance().Log("GuiSpace::ExitGuiScan", GUI_LOG_DIP);
 	#endif
 	
-        if (gui_vehicle_scan->GetVehicle() == player->GetNpc()->GetVehicle())
+        if (gui_vehicle_scan_shared->GetVehicle() == player->GetNpc()->GetVehicle())
        	{
-                gui_skills->Acknowledge();
+                gui_skills_shared->Acknowledge();
        	}
-        gui_vehicle_scan->UnbindVehicle();
+        gui_vehicle_scan_shared->UnbindVehicle();
 
         player->GetNpc()->ResetScanTarget();
                 
@@ -287,19 +288,19 @@ bool GuiSpace::Update(const MouseData& data_mouse)
         bool interaction = UpdateMouseInteractionWithButtons(data_mouse);
         ButtonsAction(player);   
                                                
-	if (gui_galaxymap->GetGalaxy() != NULL)  
+	if (gui_galaxymap_shared->GetGalaxy() != NULL)  
 	{
 		if (interaction == false)
                 {
-                	interaction = gui_galaxymap->UpdateMouseInteraction(data_mouse);
+                	interaction = gui_galaxymap_shared->UpdateMouseInteraction(data_mouse);
                 }
         }
 			
-        if (gui_vehicle_scan->GetVehicle() != NULL)
+        if (gui_vehicle_scan_shared->GetVehicle() != NULL)
 	{	
 		if (interaction == false)
 		{
-			interaction = player->GetGuiManager().UpdateMouseInteractionWithScanVehicle(data_mouse, player->GetNpc()->GetScanTarget());
+			interaction = player->GetGuiManager().UpdateMouseInteractionWithScanVehicle(data_mouse);
 		}
 	}
 
@@ -340,12 +341,12 @@ void GuiSpace::Render(const MouseData& data_mouse)
 	      		gui_vehicle_player.RenderFocusedButtonInfo(data_mouse);    
 		}
 					
-		if (gui_galaxymap->GetGalaxy() != NULL)  
+		if (gui_galaxymap_shared->GetGalaxy() != NULL)  
 		{
-			gui_galaxymap->Render();    
+			gui_galaxymap_shared->Render();    
 		}
 	                                
-		if (gui_vehicle_scan->GetVehicle() != NULL)
+		if (gui_vehicle_scan_shared->GetVehicle() != NULL)
 		{
 			player->GetGuiManager().RenderScanVehicle(data_mouse, player->GetNpc()->GetScanTarget()); 				                 
 		}

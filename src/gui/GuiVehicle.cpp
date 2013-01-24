@@ -33,6 +33,9 @@ GuiVehicle::GuiVehicle()
 	textureOb_korpus = NULL;
         vehicle = NULL;
 	gate_slot   = GetNewItemSlotWithoutSaveAbility(ENTITY::GATE_SLOT_ID);
+	
+	allow_full_control = false;
+	block_manual_exit  = false;
 }
 
 GuiVehicle::~GuiVehicle()
@@ -40,10 +43,11 @@ GuiVehicle::~GuiVehicle()
 	delete gate_slot;
 }
 
-void GuiVehicle::BindVehicle(Vehicle* vehicle, const vec2f& offset, bool block_manual_exit, float scale)
+void GuiVehicle::BindVehicle(Vehicle* vehicle, const vec2f& offset, bool allow_full_control, bool block_manual_exit, float scale)
 {      
         this->vehicle = vehicle;  
         this->offset = offset;
+        this->allow_full_control = allow_full_control;
         this->block_manual_exit = block_manual_exit;
                 
 	textureOb_korpus = NULL;
@@ -244,7 +248,7 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
 	rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, gate_slot));    		
 } 
 
-bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse, bool control)
+bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 {
 	for(unsigned int i=0; i<rect_slot_vec.size(); i++)
 	{ 
@@ -255,7 +259,7 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse, bool contro
 				player->GetCursor().SetFocusedObject(rect_slot_vec[i].second->GetItem());
 			}
 						
-			if ( (data_mouse.left_click == true) and (control == true) )
+			if ( (data_mouse.left_click == true) and (allow_full_control == true) )
 			{
 				if (rect_slot_vec[i].second->GetSubTypeId() != ENTITY::GATE_SLOT_ID)
 				{

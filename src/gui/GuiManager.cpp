@@ -63,20 +63,10 @@ void GuiManager::SetPlayer(Player* player)
 	gui_natureland.SetPlayer(player); 
 }
 
-bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mouse, bool allow_full_control)
+bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mouse)
 {
-	if (allow_full_control == false)
-	{
-        	if (gui_vehicle_scan->GetVehicle()->GetId() == player->GetNpc()->GetVehicle()->GetId())
-    		{
-        		allow_full_control = true;  
-        		std::cout<<"ERROR"<<std::endl;
-        	    	// modify full control for friend ships         
-        	}
-        }
-
-	bool interaction = gui_vehicle_scan->UpdateMouseInteraction(data_mouse, allow_full_control);        
-	if ( (interaction == true) and (allow_full_control == true) )
+	bool interaction = gui_vehicle_scan->UpdateMouseInteraction(data_mouse);        
+	if ( (interaction == true) and (gui_vehicle_scan->GetAllowFullControl() == true) )
 	{
 		interaction = gui_skills->UpdateMouseInteractionWithButtons(data_mouse);
 		gui_skills->ButtonsAction(gui_vehicle_scan->GetVehicle()->GetOwnerNpc()->GetSkills());

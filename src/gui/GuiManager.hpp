@@ -50,7 +50,7 @@ class GuiManager
                 void EnterGuiSpace();
                 void ExitGuiSpace(); 
                 
-                bool UpdateMouseInteractionWithScanVehicle(const MouseData&, bool allow_full_control = false);     		
+                bool UpdateMouseInteractionWithScanVehicle(const MouseData&);     		
      		void RenderScanVehicle(const MouseData&, bool show_skill = true) const;  
                                 
       	private:
