@@ -26,6 +26,7 @@
 #include "../pilots/Npc.hpp"
 
 #include "../garbage/EntityGarbage.hpp"
+#include "StarSystemsConditionData.hpp"
 
 Galaxy::Galaxy(int id)
 {
@@ -90,6 +91,21 @@ void Galaxy::Update(Player* player, int time)
      	}
 }
 
+void Galaxy::FillStarSystemsCondition(StarSystemsConditionData& data_starsystems_condition) const
+{
+	data_starsystems_condition.Reset();
+	
+	for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
+	{
+		switch (STARSYSTEM_vec[i]->GetConditionId())
+		{
+			case ENTITY::STARSYSTEM::CONDITION::SAFE_ID: 		{ data_starsystems_condition.safe_num++; break; }
+			case ENTITY::STARSYSTEM::CONDITION::WAR_ID: 		{ data_starsystems_condition.war_num++; break; }
+			case ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID: 	{ data_starsystems_condition.captured_num++; break; }
+		}
+	}
+}
+		
 void Galaxy::SaveDataUniqueGalaxy(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {}
 

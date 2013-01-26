@@ -25,6 +25,8 @@
 class StarSystem;
 class Player;
 
+class StarSystemsConditionData;
+
 class Galaxy : public Base
 {
   	public:
@@ -39,13 +41,15 @@ class Galaxy : public Base
      		     
     		void Update(Player*, int);
 
+		void FillStarSystemsCondition(StarSystemsConditionData&) const;
+
     		void SaveData(boost::property_tree::ptree&) const;
     		void LoadData(const boost::property_tree::ptree&);
     		void ResolveData();
     		    		
      	private:
   	     	std::vector<StarSystem*> STARSYSTEM_vec;
-
+		
     		void SaveDataUniqueGalaxy(boost::property_tree::ptree&, const std::string&) const;
     		void LoadDataUniqueGalaxy(const boost::property_tree::ptree&);
     		void ResolveDataUniqueGalaxy();
