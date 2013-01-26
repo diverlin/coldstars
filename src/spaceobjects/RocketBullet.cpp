@@ -94,24 +94,17 @@ bool RocketBullet::CheckTarget() const
 {
         if (target->GetAlive() == true)
         {
-                if (CheckStarSystem() == true)
-                {
-                        return true;
+        	if (target->GetPlaceTypeId() == ENTITY::SPACE_ID)
+        	{
+        		if (target->GetStarSystem()->GetId() == starsystem->GetId())
+                	{
+                        	return true;
+                	}
                 }
         }
         
         return false;
 }
-
-bool RocketBullet::CheckStarSystem() const
-{
-        if (target->GetStarSystem()->GetId() == starsystem->GetId())
-        {
-                return true;
-        }
-        
-        return false;
-}  
 
 void RocketBullet::CollisionEvent(bool show_effect)
 {

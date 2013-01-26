@@ -78,6 +78,8 @@ init_done(false)
        	textureOb_bar_bottom 	= GuiTextureObCollector::Instance().bar_bottom;
 
        	Resize(screen_w, screen_h);
+       	
+       	show_gui_radar = true;
 }
 
 /*virtual*/
