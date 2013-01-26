@@ -24,6 +24,7 @@ class Galaxy;
 class StarSystem;
 class Planet;
 #include "../common/Date.hpp";
+#include "../world/StarSystemsConditionData.hpp"
 
 class God
 {
@@ -33,6 +34,7 @@ class God
 
 		void SetGalaxy(Galaxy* galaxy) { this->galaxy = galaxy; };
                 void CreateLife() const;
+                void InitiateInvasion() const;
                                                 
 		void Update(const Date&);
 
@@ -44,6 +46,8 @@ class God
 		bool invasion_took_place;       	
         	Date last_update_date;
         	Galaxy* galaxy;
+        	
+        	StarSystemsConditionData data_starsystems_condition;
         	
                 void CreateLifeInStarSystem1(StarSystem*) const;
                 

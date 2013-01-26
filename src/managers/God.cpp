@@ -64,6 +64,15 @@ StarSystem* God::GetProperStarSystemToInvade() const
 	return galaxy->GetRandomStarSystem();
 }
 
+void God::InitiateInvasion() const
+{
+	for (unsigned int i=0; i<3; i++)
+	{
+		StarSystem* starsystem = GetProperStarSystemToInvade();
+		InvasionInStarSystem(starsystem);
+	}
+}
+
 void God::Update(const Date& date)
 {
 	if (last_update_date.GetDaysPassSince(date) >= GOD_REST_IN_DAYS)
@@ -72,17 +81,12 @@ void God::Update(const Date& date)
 		Logger::Instance().Log("God::Update", GOD_LOG_DIP);
 		#endif
 			
-		if (invasion_took_place == false)
-		{
-			for (unsigned int i=0; i<3; i++)
-			{
-				StarSystem* starsystem = GetProperStarSystemToInvade();
-				InvasionInStarSystem(starsystem);
-			}
-			invasion_took_place = true;
-		}
-		
+		galaxy->FillStarSystemsCondition(data_starsystems_condition);
 		last_update_date = date;
+
+		#if GOD_LOG_ENABLED == 1
+		Logger::Instance().Log(data_starsystems_condition.GetStr(), GOD_LOG_DIP);
+		#endif
 	}
 }
 

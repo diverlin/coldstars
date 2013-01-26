@@ -82,7 +82,6 @@ bool Player::IsAbleToGetFullControlOnScanedVehicle(bool force_full_control) cons
         	if (npc->GetVehicle()->GetId() == npc->GetScanTarget()->GetId())
     		{
         		force_full_control = true;  
-        		std::cout<<"ERROR"<<std::endl;
         	    	// modify full control for friend ships         
         	}
         }

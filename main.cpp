@@ -50,6 +50,7 @@ int main()
 	Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy();
 	God::Instance().SetGalaxy(galaxy);
         God::Instance().CreateLife();
+        God::Instance().InitiateInvasion();
 	Player* player = PlayerBuilder::Instance().GetNewPlayer();
 
         bool player2space = false;
