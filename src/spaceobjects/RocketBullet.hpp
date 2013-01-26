@@ -70,7 +70,6 @@ class RocketBullet : public BaseSpaceEntity
                 virtual void UpdateInfo(); 
                 
                 bool CheckTarget() const;
-                bool CheckStarSystem() const;     
 
                 int unresolved_RocketBullet_target_id;              
                 void SaveDataUniqueRocketBullet(boost::property_tree::ptree&, const std::string&) const;		
