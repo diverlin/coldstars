@@ -59,14 +59,21 @@ God::God()
 God::~God()
 {}
 
-StarSystem* God::GetProperStarSystemToInvade() const
+StarSystem* God::GetProperStarSystemToInvade(StarSystem* starsystem) const
 {
-	return galaxy->GetRandomStarSystem();
+        if (starsystem == NULL)
+        {
+                return galaxy->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+        }
+        else
+        {
+                return galaxy->GetClosestStarSystemTo(starsystem, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+        }
 }
 
 void God::InitiateInvasion() const
 {
-	for (unsigned int i=0; i<3; i++)
+	for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++)
 	{
 		StarSystem* starsystem = GetProperStarSystemToInvade();
 		InvasionInStarSystem(starsystem);
