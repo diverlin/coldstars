@@ -111,11 +111,3 @@ int main()
 	return EXIT_SUCCESS;
 }
 
-//######################## CONTROL
-//# 1,2,3...9 aktivacija oruzhija
-//# a - aktivacija/deaktivacija vsex slotov oruzhija odnovremenno
-//# g - aktivacija/deaktivacija zaxvata 
-//# p - pokazat' podpisi planetam/asteroidam/mineralam
-//# o - vkl/vykl otrisovku orbit vsex nebesnyx tel
-//# SPACE - propusk xoda
-//#################################################

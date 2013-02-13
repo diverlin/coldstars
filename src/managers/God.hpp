@@ -51,7 +51,7 @@ class God
         	
                 void CreateLifeInStarSystem1(StarSystem*) const;
                 
-                StarSystem* GetProperStarSystemToInvade() const;
+                StarSystem* GetProperStarSystemToInvade(StarSystem* starsystem = NULL) const;
                 void InvasionInStarSystem(StarSystem*) const;
                             
         	void CreateLifeAtPlanets(StarSystem*) const;

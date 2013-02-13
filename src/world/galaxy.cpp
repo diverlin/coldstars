@@ -65,7 +65,7 @@ StarSystem* Galaxy::GetRandomStarSystem(int condition_id)
 	{
 		std::vector<StarSystem*> ss_vec;
 	
-		for (unsigned int i = 0; i<STARSYSTEM_vec.size(); i++)
+		for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
 		{
 			if (STARSYSTEM_vec[i]->GetConditionId() == condition_id)
 			{
@@ -75,6 +75,37 @@ StarSystem* Galaxy::GetRandomStarSystem(int condition_id)
 	
 		return ss_vec[getRandInt(0, ss_vec.size()-1)];
 	}
+}
+ 
+    		
+StarSystem* Galaxy::GetClosestStarSystemTo(StarSystem* starsystem, int condition_id)
+{
+        float dist_min = 0;
+        int index_min = -1;
+        
+        for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
+        {
+                if (STARSYSTEM_vec[i]->GetId() != starsystem->GetId())
+                {                        
+                        if ( (STARSYSTEM_vec[i]->GetConditionId() == condition_id) or (condition_id == NONE_ID) )
+                        {                                
+                                float dist = distBetweenPoints(starsystem->GetPoints().GetCenter(), STARSYSTEM_vec[i]->GetPoints().GetCenter());
+                                
+                                if ( (dist < dist_min) or (dist == 0) )
+                                {
+                                        dist_min = dist;
+                                        index_min = i;                                        
+                                }
+                        }
+                }
+        }
+
+        if (index_min != -1)
+        {
+                return STARSYSTEM_vec[index_min];
+        }
+        
+        return NULL;
 }
      		
 void Galaxy::Update(Player* player, int time)

@@ -38,7 +38,8 @@ class Galaxy : public Base
      		void Add(StarSystem*, const vec2f&);
      		
      		StarSystem* GetRandomStarSystem(int condition_id = NONE_ID);
-     		     
+                StarSystem* GetClosestStarSystemTo(StarSystem*, int condition_id = NONE_ID);
+                     
     		void Update(Player*, int);
 
 		void FillStarSystemsCondition(StarSystemsConditionData&) const;
@@ -46,7 +47,7 @@ class Galaxy : public Base
     		void SaveData(boost::property_tree::ptree&) const;
     		void LoadData(const boost::property_tree::ptree&);
     		void ResolveData();
-    		    		
+
      	private:
   	     	std::vector<StarSystem*> STARSYSTEM_vec;
 		
