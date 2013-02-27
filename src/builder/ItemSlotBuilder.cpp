@@ -19,7 +19,7 @@
 #include "ItemSlotBuilder.hpp"
 
 #include "../common/id.hpp"
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 #include "../common/Logger.hpp"
 #include "../resources/TextureManager.hpp"
 #include "../parts/Turrel.hpp"

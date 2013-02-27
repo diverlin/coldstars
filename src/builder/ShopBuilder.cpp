@@ -22,7 +22,7 @@
 
 #include "../common/id.hpp"
 #include "../common/Logger.hpp"
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 #include "../resources/TextureManager.hpp"
 
 ShopBuilder& ShopBuilder::Instance()

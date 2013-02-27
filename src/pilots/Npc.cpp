@@ -21,7 +21,7 @@
 #include "../world/starsystem.hpp"
 #include "../common/myStr.hpp"
 #include "../common/rand.hpp"
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 #include "../common/Logger.hpp"
 #include "../common/common.hpp"
 #include "../ai/aiModel/AiModelCollector.hpp"

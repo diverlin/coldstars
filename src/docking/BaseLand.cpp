@@ -17,7 +17,7 @@
 */
 
 #include "BaseLand.hpp"
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 #include "../common/constants.hpp"
 #include "../spaceobjects/Planet.hpp"
 #include "../spaceobjects/SpaceStation.hpp"

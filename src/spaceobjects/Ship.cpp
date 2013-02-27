@@ -22,7 +22,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "../common/myStr.hpp"
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 
 #include "../world/starsystem.hpp"
 

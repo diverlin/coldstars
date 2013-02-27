@@ -18,7 +18,7 @@
 
 #include "Star.hpp"
 #include "../common/constants.hpp"
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 #include "../common/myStr.hpp"
 #include "../common/common.hpp"
 #include "../common/rand.hpp"

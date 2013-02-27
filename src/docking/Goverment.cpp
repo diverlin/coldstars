@@ -21,7 +21,7 @@
 #include "Kosmoport.hpp"
 #include "../common/constants.hpp"
 #include "../common/myStr.hpp"
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 
 Goverment::Goverment(int id)
 {

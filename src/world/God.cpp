@@ -42,7 +42,7 @@
 
 #include "../ai/Task.hpp"
 #include "../pilots/Npc.hpp"
-#include "../managers/GalaxyDescription.hpp"
+#include "../world/GalaxyDescription.hpp"
 
 God& God::Instance()
 {

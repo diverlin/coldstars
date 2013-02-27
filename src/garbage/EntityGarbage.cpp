@@ -20,7 +20,7 @@
 #include "../common/myStr.hpp"
 #include "../common/Logger.hpp"
 #include "../common/Base.hpp"
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 
 EntityGarbage& EntityGarbage::Instance()
 {

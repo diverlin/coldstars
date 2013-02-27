@@ -22,7 +22,7 @@
 #include "../common/constants.hpp"
 #include "../common/myStr.hpp"
 #include "../common/rand.hpp"
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../items/others/GoodsPack.hpp"
 #include "../slots/ItemSlot.hpp"
