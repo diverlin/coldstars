@@ -68,7 +68,10 @@ void BaseSlot::ResolveDataUniqueBaseSlot()
 	Logger::Instance().Log(" BaseSlot("+int2str(GetId())+")::ResolveDataUniqueBaseSlot", SAVELOAD_LOG_DIP);
 	#endif
 	
-	owner = EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id);
+	if (unresolved_BaseSlot.owner_id != NONE_ID)
+	{
+		owner = EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id);
+	}
 }
 
 

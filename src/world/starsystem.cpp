@@ -111,6 +111,59 @@ void StarSystem::PutChildsToGarbage() const
 	for(unsigned int i=0; i<VEHICLE_vec.size(); i++)   { EntityGarbage::Instance().Add(VEHICLE_vec[i]); } 
 }      
 
+Npc* StarSystem::GetFreeLeaderByRaceId(int race_id) const
+{
+	std::vector<Npc*> tmp_npc_vec;
+	for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+	{
+		if (VEHICLE_vec[i]->GetOwnerNpc()->GetRaceId() == race_id)
+		{
+			tmp_npc_vec.push_back(VEHICLE_vec[i]->GetOwnerNpc());
+		}
+	}
+	
+	int leader_skill_max = 0;
+	int index_max = -1;
+	for (unsigned int i=0; i<tmp_npc_vec.size(); i++)
+	{
+		int leader_skill = tmp_npc_vec[i]->GetSkills().GetLeader();
+		if (leader_skill > leader_skill_max)
+		{
+			leader_skill_max = leader_skill;
+			index_max = i;
+		}
+	}
+	
+	if (index_max != -1)
+	{
+		return tmp_npc_vec[index_max];
+	}
+	
+	return NULL;
+}
+
+void StarSystem::CreateGroupAndShareTask(Npc* npc_leader, StarSystem* target_starsystem, int num_max) const
+{	
+	std::vector<Npc*> tmp_npc_vec;
+	for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+	{
+		if (VEHICLE_vec[i]->GetOwnerNpc()->GetRaceId() == npc_leader->GetRaceId())
+		{
+			tmp_npc_vec.push_back(VEHICLE_vec[i]->GetOwnerNpc());
+		}
+	}
+	
+	int num = 0;
+	for (unsigned int i=0; (i<tmp_npc_vec.size() and (num<num_max)); i++)
+	{
+		if (tmp_npc_vec[i]->GetVehicle()->IsAbleToJumpTo(target_starsystem) == true)
+		{
+			tmp_npc_vec[i]->CloneMacroTaskFrom(npc_leader);
+			num++;
+		}
+	}
+}
+		
 void StarSystem::AddVehicle(Vehicle* vehicle, const vec2f& center, float angle, BaseSpaceEntity* parent)
 {
 	#if ENTITY_TRANSACTION_LOG_ENABLED == 1

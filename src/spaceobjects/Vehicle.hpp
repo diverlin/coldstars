@@ -157,6 +157,8 @@ class Vehicle : public BaseSpaceEntity
         	void RenderRadarRange();
         	void RenderGrappleRange();        
 
+		bool IsAbleToJumpTo(StarSystem*) const;
+		
 		bool IsArmorFull() const;
 		int GetArmorMiss() const;
 		void IncreaseArmor(int);

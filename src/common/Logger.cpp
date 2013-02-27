@@ -90,7 +90,7 @@ void Logger::ToFile(const std::string& str)
 		}
 		line_counter = 0;
 		turn_counter = TurnTimer::Instance().GetTurnCounter();
-		file.open(int2str(turn_counter) + ".log");
+		file.open("log/" + int2str(turn_counter) + ".log");
 	}
 	
 	line_counter++;

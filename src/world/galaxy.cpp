@@ -63,8 +63,7 @@ StarSystem* Galaxy::GetRandomStarSystem(int condition_id)
 	}
 	else
 	{
-		std::vector<StarSystem*> ss_vec;
-	
+		std::vector<StarSystem*> ss_vec;	
 		for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
 		{
 			if (STARSYSTEM_vec[i]->GetConditionId() == condition_id)
@@ -73,9 +72,15 @@ StarSystem* Galaxy::GetRandomStarSystem(int condition_id)
 			}
 		}
 	
-		return ss_vec[getRandInt(0, ss_vec.size()-1)];
+		if (ss_vec.size() > 0)
+		{
+			return ss_vec[getRandInt(0, ss_vec.size()-1)];
+		}
 	}
+
+	return NULL;
 }
+
  
     		
 StarSystem* Galaxy::GetClosestStarSystemTo(StarSystem* starsystem, int condition_id)

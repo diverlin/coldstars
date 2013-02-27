@@ -68,6 +68,11 @@ Npc::~Npc()
 
 StarSystem* Npc::GetStarSystem() const { return vehicle->GetStarSystem(); }
 
+void Npc::CloneMacroTaskFrom(Npc* npc)
+{
+	state_machine.SetCurrentMacroTask(npc->GetStateMachine().GetMacroTaskManager().GetTask());
+}
+     		
 bool Npc::WithdrawCredits(int amount)
 {
 	if (credits > amount)

@@ -1,5 +1,8 @@
 ################### FEATURES #################
+<< VehicleSLot in some(what??) cases has no owner. This looks like a bug.
+
 << camera pos is controlled by mouse pos
+- DONE (needs to be enabled via config)
 
 << WAR FOG
 - DONE

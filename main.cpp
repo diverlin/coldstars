@@ -39,6 +39,8 @@
 
 #include "src/managers/God.hpp"
 
+#include "src/managers/GalaxyDescription.hpp"
+
 int main()
 {          
 	//pureTest2(); 
@@ -47,10 +49,12 @@ int main()
         
 	GameDate::Instance().SetDate(1,1,4000);
 
-	Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy();
-	God::Instance().SetGalaxy(galaxy);
-        God::Instance().CreateLife();
-        God::Instance().InitiateInvasion();
+	GalaxyDescription galaxy_description;
+	galaxy_description.starsystem_num = 2;
+	
+	Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_description);
+	God::Instance().Init(galaxy, galaxy_description);
+        
 	Player* player = PlayerBuilder::Instance().GetNewPlayer();
 
         bool player2space = false;

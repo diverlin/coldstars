@@ -40,6 +40,10 @@
 #include "../world/galaxy.hpp"
 #include "../world/starsystem.hpp"
 
+#include "../ai/Task.hpp"
+#include "../pilots/Npc.hpp"
+#include "../managers/GalaxyDescription.hpp"
+
 God& God::Instance()
 {
 	static God instance;
@@ -52,32 +56,66 @@ God::God()
 	last_update_date.month = 0;
 	last_update_date.year = 0;
 	
-	invasion_took_place = false;
 	galaxy = NULL;
 }
 		
 God::~God()
 {}
 
-StarSystem* God::GetProperStarSystemToInvade(StarSystem* starsystem) const
+void God::Init(Galaxy* galaxy, const GalaxyDescription& galaxy_description)
 {
-        if (starsystem == NULL)
+	this->galaxy = galaxy;
+	CreateLife(galaxy_description);
+	CreateInvasion(galaxy_description);
+}
+
+void God::CreateLife(const GalaxyDescription& galaxy_description) const
+{
+        for(unsigned int i=0; i<galaxy->STARSYSTEM_vec.size(); i++)
         {
-                return galaxy->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
-        }
-        else
-        {
-                return galaxy->GetClosestStarSystemTo(starsystem, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+		StarSystem* starsystem = galaxy->STARSYSTEM_vec[i];
+		
+	        for(int j=0; j<starsystem->PLANET_vec.size(); j++)
+	        {        
+	                CreateLifeAtPlanet(starsystem->PLANET_vec[j]);
+	        }
+
+		int spacestation_num = getRandInt(galaxy_description.spacestation_num_min, galaxy_description.spacestation_num_max);
+        	CreateSpaceStations(starsystem, spacestation_num);
         }
 }
 
-void God::InitiateInvasion() const
+void God::CreateInvasion(const GalaxyDescription& galaxy_description) const
 {
 	for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++)
 	{
-		StarSystem* starsystem = GetProperStarSystemToInvade();
-		InvasionInStarSystem(starsystem);
+		StarSystem* starsystem = galaxy->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+		int race_id = getRandInt(RACE::R6_ID, RACE::R7_ID);
+        	int ship_num = getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
+        	CreateShipsInSpace(starsystem, ship_num, race_id);   ;
 	}
+}
+
+void God::ProceedInvasion() const
+{
+	StarSystem* starsystem_invade_from = galaxy->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
+	if (starsystem_invade_from == NULL)
+	{
+		return;
+	}
+	
+	StarSystem* starsystem_invade_to   = galaxy->GetClosestStarSystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+	if (starsystem_invade_to == NULL)
+	{
+		return;
+	}
+	
+	Npc* npc_leader = starsystem_invade_from->GetFreeLeaderByRaceId(starsystem_invade_from->GetConquerorRaceId());
+	Task macrotask(MACROSCENARIO::STARSYSTEMLIBERATION_ID, starsystem_invade_to->GetId());
+	npc_leader->GetStateMachine().SetCurrentMacroTask(macrotask);
+	
+	int num_max= 10;
+	starsystem_invade_from->CreateGroupAndShareTask(npc_leader, starsystem_invade_to, num_max);
 }
 
 void God::Update(const Date& date)
@@ -90,44 +128,14 @@ void God::Update(const Date& date)
 			
 		galaxy->FillStarSystemsCondition(data_starsystems_condition);
 		last_update_date = date;
+		
+		ProceedInvasion();
 
 		#if GOD_LOG_ENABLED == 1
 		Logger::Instance().Log(data_starsystems_condition.GetStr(), GOD_LOG_DIP);
 		#endif
 	}
-}
-
-void God::CreateLife() const
-{
-        for(unsigned int i=0; i<galaxy->STARSYSTEM_vec.size(); i++)
-        {
-                CreateLifeInStarSystem1(galaxy->STARSYSTEM_vec[i]);
-        }
-}
-                
-void God::CreateLifeInStarSystem1(StarSystem* starsystem) const
-{
-	CreateLifeAtPlanets(starsystem);
-
-	int spacestation_num = getRandInt(ENTITY::STARSYSTEM::SPACESTATION_INIT_MIN, ENTITY::STARSYSTEM::SPACESTATION_INIT_MAX);
-        CreateSpaceStations(starsystem, spacestation_num);
-}
-
-void God::InvasionInStarSystem(StarSystem* starsystem) const
-{
-	int race_id = getRandInt(RACE::R6_ID, RACE::R7_ID);
-        int ship_num = getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
-        CreateShipsInSpace(starsystem, ship_num, race_id);   
-}
-        
-void God::CreateLifeAtPlanets(StarSystem* starsystem) const
-{
-        for(int i=0; i<starsystem->PLANET_vec.size(); i++)
-        {        
-                CreateLifeAtPlanet(starsystem->PLANET_vec[i]);
-        }
-}
-
+}                
      
 void God::CreateLifeAtPlanet(Planet* planet) const
 {            

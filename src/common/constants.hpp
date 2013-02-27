@@ -24,15 +24,15 @@
 
 #define LOG_ENABLED 1
 #if LOG_ENABLED == 1
-	#define GRAPPLE_QUEUE_LOG_ENABLED 0
-	#define DRIVECOMPLEX_LOG_ENABLED 0
-	#define WEAPONSTARGET_LOG_ENABLED 0
-	#define AISCENARIO_LOG_ENABLED 0
-	#define AI_LOG_ENABLED 0
-	#define SAVELOAD_LOG_ENABLED 0
-	#define ENTITY_TRANSACTION_LOG_ENABLED 0
-	#define CREATEDESTROY_LOG_ENABLED 0
-	#define ITEMINFLUENCE_LOG_ENABLED 0
+	#define GRAPPLE_QUEUE_LOG_ENABLED 1
+	#define DRIVECOMPLEX_LOG_ENABLED 1
+	#define WEAPONSTARGET_LOG_ENABLED 1
+	#define AISCENARIO_LOG_ENABLED 1
+	#define AI_LOG_ENABLED 1
+	#define SAVELOAD_LOG_ENABLED 1
+	#define ENTITY_TRANSACTION_LOG_ENABLED 1
+	#define CREATEDESTROY_LOG_ENABLED 1
+	#define ITEMINFLUENCE_LOG_ENABLED 1
 	#define TEXTURE_MANAGER_LOG_ENABLED 0
 	#define GUI_LOG_ENABLED 0
 	#define GOD_LOG_ENABLED 1
@@ -108,7 +108,7 @@ const int SCROLL_BORDER_OFFSET = 10;
 const double NO_DELAY = 0.0f;
 const int NO_ADDITIONAL_INFO = 0;
 
-const std::string GAME_TITLE = "cold star V0.0.4.62 (SFML/C++)";
+const std::string GAME_TITLE = "cold star V0.0.4.63 (SFML/C++)";
 
 const float RADAR_SCALE = 1/50.0;
 
@@ -237,6 +237,7 @@ namespace MACROSCENARIO
 {
 	enum TYPE_ID
 	{
+		WARRIORRECRUTE_ID, 
 		STARSYSTEMDEFENCE_ID, 
 		STARSYSTEMLIBERATION_ID, 
 		SELFSAFETY_ID, // replace selfsafety to survival
@@ -256,8 +257,7 @@ namespace MICROSCENARIO
 		LAUNCHING_ID,
 		GRAB_ID,
 		JUMP_ID,
-		EXPLORATION_ID
-	
+		EXPLORATION_ID	
 	};
 }
  
@@ -334,12 +334,14 @@ namespace ENTITY
 	{
 		const int PARSEC = 200;
 				
-		const int STARSYSTEM_SEGMENT_WIDTH_NUM = 4;
-		const int STARSYSTEM_SEGMENT_HEIGHT_NUM = 3;
+		const int STARSYSTEM_NUM = 20;
 
 		const int STARSYSTEM_INSEGMENT_NUM_MIN = 2;
 		const int STARSYSTEM_INSEGMENT_NUM_MAX = 4;
 
+		const int STARSYSTEM_SEGMENTS_NUM_INWIDTH = 4;
+		const int STARSYSTEM_SEGMENTS_NUM_INHEIGHT = 3;
+		
 		const int DISTANTSTAR_SIZE_MIN = 3; 
 		const int DISTANTSTAR_SIZE_MAX = 15;
 	}
@@ -348,16 +350,16 @@ namespace ENTITY
 	{
 		const int JUMPRADIUS = 1200;
 		
-		const int PLANET_MIN = 3;
-		const int PLANET_MAX = 5;
+		const int PLANET_NUM_MIN = 3;
+		const int PLANET_NUM_MAX = 5;
 		
 		const int SHIP_INIT_MIN = 4;
 		const int SHIP_INIT_MAX = 7;
 		const int SHIPENEMY_INIT_MIN = 50;
 		const int SHIPENEMY_INIT_MAX = 100;
 
-		const int SPACESTATION_INIT_MIN = 1;
-		const int SPACESTATION_INIT_MAX = 3;
+		const int SPACESTATION_NUM_MIN = 1;
+		const int SPACESTATION_NUM_MAX = 3;
 			
 		const int DISTANT_NEBULA_MIN = 6;
 		const int DISTANT_NEBULA_MAX = 8;

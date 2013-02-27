@@ -29,6 +29,8 @@
 #include "../common/rand.hpp"
 #include "../common/common.hpp"
 
+#include "../managers/GalaxyDescription.hpp"
+
 GalaxyBuilder& GalaxyBuilder::Instance()
 {
 	static GalaxyBuilder instance;
@@ -59,73 +61,45 @@ Galaxy* GalaxyBuilder::GetNewGalaxyTemplate(int id) const
         return galaxy;
 } 
 
-Galaxy* GalaxyBuilder::GetNewGalaxy() const
+Galaxy* GalaxyBuilder::GetNewGalaxy(const GalaxyDescription& galaxy_description) const
 {
 	Galaxy* galaxy = GetNewGalaxyTemplate();
-	
-	switch(Config::Instance().GetGameMode())
-        {
-        	case GAME_MODE::NORMAL_RUN:
-        	{
-        	        CreateNewInternals(galaxy);
-        		break;
-        	}
-
-        	case GAME_MODE::SIMPLE_RUN:
-        	{
-        	        CreateNewInternals_SIMPLE_RUN(galaxy);
-        		break;
-        	}
-
-        	case GAME_MODE::CRASH_TEST:
-        	{
-        	        CreateNewInternals(galaxy);
-        		break;
-        	}
-        }
+        CreateNewInternals(galaxy, galaxy_description);
         
 	return galaxy;
 } 
 
 
         	
-void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy) const
+void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy, const GalaxyDescription& galaxy_description) const
 {     
-        float h_div_w_rate = ENTITY::GALAXY::STARSYSTEM_SEGMENT_HEIGHT_NUM/(float)ENTITY::GALAXY::STARSYSTEM_SEGMENT_WIDTH_NUM;
-        int segment_w = ENTITY::GALAXY::PARSEC /((float)ENTITY::GALAXY::STARSYSTEM_SEGMENT_WIDTH_NUM + 1);
-	int segment_h = ENTITY::GALAXY::PARSEC * h_div_w_rate/((float)ENTITY::GALAXY::STARSYSTEM_SEGMENT_HEIGHT_NUM + 1);
+        float h_div_w_rate = ENTITY::GALAXY::STARSYSTEM_SEGMENTS_NUM_INHEIGHT/(float)ENTITY::GALAXY::STARSYSTEM_SEGMENTS_NUM_INWIDTH;
+        int segment_w = ENTITY::GALAXY::PARSEC /((float)ENTITY::GALAXY::STARSYSTEM_SEGMENTS_NUM_INWIDTH + 1);
+	int segment_h = ENTITY::GALAXY::PARSEC * h_div_w_rate/((float)ENTITY::GALAXY::STARSYSTEM_SEGMENTS_NUM_INHEIGHT + 1);
 		
 	std::vector<vec2f> starsystem_segment_vec;
-	for (int i=1; i<=ENTITY::GALAXY::STARSYSTEM_SEGMENT_WIDTH_NUM; i++)
+	for (int i=1; i<=ENTITY::GALAXY::STARSYSTEM_SEGMENTS_NUM_INWIDTH; i++)
 	{
-		for (int j=1; j<=ENTITY::GALAXY::STARSYSTEM_SEGMENT_HEIGHT_NUM; j++)
+		for (int j=1; j<=ENTITY::GALAXY::STARSYSTEM_SEGMENTS_NUM_INHEIGHT; j++)
 		{
 			starsystem_segment_vec.push_back(vec2f(i*segment_w/2, j*segment_h/2));
 		}		
 	}
 	
-    	for(int i=0; i<starsystem_segment_vec.size(); i++)
+	int starsystem_counter = 0;
+    	for(int i=0; (i<starsystem_segment_vec.size()) and (starsystem_counter<galaxy_description.starsystem_num); i++)
     	{  
     		int starsystem_insegment_num = getRandInt(ENTITY::GALAXY::STARSYSTEM_INSEGMENT_NUM_MIN, ENTITY::GALAXY::STARSYSTEM_INSEGMENT_NUM_MAX);
-                for (int j=0; j<starsystem_insegment_num; j++)
+                for (int j=0; (j<starsystem_insegment_num) and (starsystem_counter<galaxy_description.starsystem_num); j++)
                 {
                 	vec2f center = starsystem_segment_vec[i] + getRandVec2f(getMax(segment_w, segment_h)/7, getMax(segment_w, segment_h)/3);
                 	                
         		StarSystem* starsystem = StarSystemBuilder::Instance().GetNewStarSystem();
         		galaxy->Add(starsystem, center); 
+        		
+        		starsystem_counter++;
  		}
  	}
-}
-
-       	
-void GalaxyBuilder::CreateNewInternals_SIMPLE_RUN(Galaxy* galaxy) const
-{     
-	vec2f center(getRandInt(10, 90), getRandInt(10, 90));
-			
-	StarSystem* starsystem = StarSystemBuilder::Instance().GetNewStarSystem();
-	galaxy->Add(starsystem, center);
-	
-	//God::Instance().CreateLifeInStarSystem(starsystem);
 }
 
                 

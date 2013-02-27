@@ -6,3 +6,4 @@ install/
 game
 *.o
 save*.info
+*.log

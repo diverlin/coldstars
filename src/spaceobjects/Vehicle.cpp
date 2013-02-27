@@ -129,8 +129,8 @@ void Vehicle::CreateDriveComplexTextureDependedStuff()
 
 void Vehicle::CreateProtectionComplexTextureDependedStuff()
 {
-     protection_complex.GetShieldEffect()->SetParent(this);
-     protection_complex.GetShieldEffect()->GetPoints().initMainQuadPoints(1.2*textureOb->GetFrameWidth(), 1.2*textureOb->GetFrameHeight());	
+     	protection_complex.GetShieldEffect()->SetParent(this);
+     	protection_complex.GetShieldEffect()->GetPoints().initMainQuadPoints(1.2*textureOb->GetFrameWidth(), 1.2*textureOb->GetFrameHeight());	
 }
 
 void Vehicle::SetKorpusData(const VehicleKorpusData& data_korpus) 
@@ -1273,6 +1273,17 @@ void Vehicle::RenderGrappleRange()
 	}
 }
 
+bool Vehicle::IsAbleToJumpTo(StarSystem* target_starsystem) const
+{
+ 	float dist = distBetweenPoints(starsystem->GetPoints().GetCenter(), target_starsystem->GetPoints().GetCenter());
+	if (dist < properties.hyper)
+	{
+		return true;
+	}
+	
+	return false;
+}
+		
 void Vehicle::RepairKorpusOnAmount(int amount)
 {
 	data_life.armor += amount;

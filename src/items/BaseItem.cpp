@@ -168,18 +168,18 @@ void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_pt
 	Logger::Instance().Log(" LoadDataUniqueBaseItem()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
 	#endif
 	
-        price = load_ptree.get<int>("price");
-        condition = load_ptree.get<int>("condition");
-        locked_turns = load_ptree.get<int>("locked_turns");
-        race_id = load_ptree.get<int>("race_id");
+        price             = load_ptree.get<int>("price");
+        condition         = load_ptree.get<int>("condition");
+        locked_turns      = load_ptree.get<int>("locked_turns");
+        race_id           = load_ptree.get<int>("race_id");
         parent_subtype_id = load_ptree.get<int>("parent_subtype_id");
 
-        data_item.tech_level    = load_ptree.get<int>("data_item.tech_level");    
-        data_item.modules_num_max    = load_ptree.get<int>("data_item.modules_num_max");
-        data_item.condition_max      = load_ptree.get<int>("data_item.condition_max");                         
+        data_item.tech_level           = load_ptree.get<int>("data_item.tech_level");    
+        data_item.modules_num_max      = load_ptree.get<int>("data_item.modules_num_max");
+        data_item.condition_max        = load_ptree.get<int>("data_item.condition_max");                         
         data_item.deterioration_normal = load_ptree.get<int>("data_item.deterioration_normal");   
         data_item.deterioration_overload_rate = load_ptree.get<float>("data_item.deterioration_overload_rate");   
-        data_item.mass               = load_ptree.get<int>("data_item.mass");
+        data_item.mass                 = load_ptree.get<int>("data_item.mass");
                     
 	data_unresolved_BaseItem.textureOb_path = load_ptree.get<std::string>("unresolved.textureOb_path");
 	data_unresolved_BaseItem.item_slot_id   = load_ptree.get<int>("unresolved.item_slot_id");
@@ -192,7 +192,8 @@ void BaseItem::ResolveDataUniqueBaseItem()
 	#endif
 	
 	textureOb = TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path);
-		
+	
+	UseNormalDeterioration();	
 	UpdateProperties(); // this function must be performed before inserting to slot!!!
 		
 	if(data_unresolved_BaseItem.item_slot_id != NONE_ID) // item_slot can be NULL in case of inserted module
