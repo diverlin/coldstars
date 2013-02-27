@@ -225,15 +225,15 @@ void EntityManager::SaveEvent(const std::string& filename)
 	}
 	
 	//write_info(filename, save_ptree);
-	write_info("save_last.info", save_ptree);
+	write_info("save/save_last.info", save_ptree);
 }
 		
-void EntityManager::LoadPass0(const std::string & filename)
+void EntityManager::LoadPass0(const std::string& filename)
 {
 	Logger::Instance().Log("LOADING STARTED");
 	
 	boost::property_tree::ptree load_ptree;
-	read_info(filename, load_ptree);
+	read_info("save/" + filename, load_ptree);
 	
 	if (load_ptree.get_child_optional("galaxy"))
 	{		

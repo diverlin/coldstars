@@ -75,6 +75,8 @@ class Npc : public Base
      
      		void AddExpirience(int, bool);
      		
+     		void CloneMacroTaskFrom(Npc*);
+     		
      		// AI
      		void TakeIntoAccountAgressor(Vehicle*);
      		void UpdateInSpace(int, bool);

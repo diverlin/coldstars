@@ -21,6 +21,7 @@
 #define GALAXYBUILDER_H
 
 class Galaxy;
+class GalaxyDescription;
 #include "../common/constants.hpp"
 
 class GalaxyBuilder
@@ -30,15 +31,14 @@ class GalaxyBuilder
 		~GalaxyBuilder();
 
         	Galaxy* GetNewGalaxyTemplate(int id = NONE_ID) const; 
-        	Galaxy* GetNewGalaxy() const; 
+        	Galaxy* GetNewGalaxy(const GalaxyDescription&) const; 
         	        	        	 		                
         private:
 		GalaxyBuilder() {};
 		GalaxyBuilder(const GalaxyBuilder&) = delete;
 		GalaxyBuilder& operator=(const GalaxyBuilder&) = delete;
 
-                void CreateNewInternals(Galaxy*) const;
-                void CreateNewInternals_SIMPLE_RUN(Galaxy*) const;
+                void CreateNewInternals(Galaxy*, const GalaxyDescription&) const;
 }; 
 
 

@@ -21,6 +21,7 @@
 
 #include "../common/constants.hpp"
 class Galaxy;
+class GalaxyDescription;
 class StarSystem;
 class Planet;
 #include "../common/Date.hpp";
@@ -32,33 +33,28 @@ class God
 		static God& Instance();
 		~God();
 
-		void SetGalaxy(Galaxy* galaxy) { this->galaxy = galaxy; };
-                void CreateLife() const;
-                void InitiateInvasion() const;
-                                                
+		void Init(Galaxy*, const GalaxyDescription&);
 		void Update(const Date&);
 
         private:
 		God();
 		God(const God&) = delete;
 		God& operator=(const God&) = delete;
-		    		    
-		bool invasion_took_place;       	
+   	
         	Date last_update_date;
         	Galaxy* galaxy;
         	
         	StarSystemsConditionData data_starsystems_condition;
-        	
-                void CreateLifeInStarSystem1(StarSystem*) const;
-                
-                StarSystem* GetProperStarSystemToInvade(StarSystem* starsystem = NULL) const;
-                void InvasionInStarSystem(StarSystem*) const;
+
+                void CreateLife(const GalaxyDescription&) const;
+                void CreateInvasion(const GalaxyDescription&) const;
                             
-        	void CreateLifeAtPlanets(StarSystem*) const;
         	void CreateLifeAtPlanet(Planet*) const;
         	
         	void CreateSpaceStations(StarSystem*, int) const;
         	void CreateShipsInSpace(StarSystem*, int, int, int subtype_id = NONE_ID, int subsubtype_id = NONE_ID) const;   
+        	
+        	void ProceedInvasion() const;
 }; 
 
 #endif 

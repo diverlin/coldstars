@@ -45,7 +45,7 @@ class LazerTraceEffect;
 
 #include "../garbage/garbageEffects.hpp"
 #include "HyperSpace.hpp"
-
+class Npc;
 
 struct UnresolvedDataUniqueStarSystem
 {
@@ -73,6 +73,9 @@ class StarSystem : public BaseSpaceEntity
 		Galaxy* GetGalaxy()      const { return galaxy; };
 		int GetShockWaveNum()    const { return effect_SHOCKWAVE_vec.size(); };
 		HyperSpace& GetHyperSpace() { return hyperspace; };
+		
+		Npc* GetFreeLeaderByRaceId(int) const;
+		void CreateGroupAndShareTask(Npc*, StarSystem*, int) const;
 		
 		//// TRANSITION
 		void AddVehicle(Vehicle*, const vec2f&, float, BaseSpaceEntity* parent = NULL);

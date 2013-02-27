@@ -29,8 +29,8 @@ struct VehiclePropetries
 	int speed;  // depends on mass and drive
 
 	int energy;
-	int hyper;  // depends on drive
-	int fuel;    // depends on bak
+	int hyper;  // depends on drive and bak
+	//int fuel;   // depends on bak
 	int repair; // depends on droid
 	int freeze; // depends on freezer
 	int scan;   // depends on scaner
@@ -60,7 +60,7 @@ struct VehiclePropetries
         radar(0),
         speed(0),
         hyper(0),
-        fuel(0),
+        //fuel(0),
         repair(0),
         freeze(0),
         scan(0),    

@@ -32,64 +32,60 @@
 #include <GL/glew.h>
 
 #include "../common/myVector.hpp"
-
-#define TOKEN_VERTEX_POS "v"
-#define TOKEN_VERTEX_NOR "vn"
-#define TOKEN_VERTEX_TEX "vt"
-#define TOKEN_FACE "f"
  
 
 struct ObjMeshVertex
 {
-    vec3f pos;
-    vec2f texcoord;
-    vec3f normal;
+	vec3f pos;
+	vec2f texcoord;
+	vec3f normal;
 };
 
 /* This is a triangle, that we can render */
 struct ObjMeshFace
 {
-    ObjMeshVertex vertices[3];
+	ObjMeshVertex vertices[3];
 };
 
 /* This contains a list of triangles */
 struct ObjMesh
 {
-    std::vector<ObjMeshFace> faces;
+	std::vector<ObjMeshFace> faces;
 };
 
 /* Internal structure */
-struct _ObjMeshFaceIndex{
-    int pos_index[3];
-    int tex_index[3];
-    int nor_index[3];
+struct _ObjMeshFaceIndex
+{
+	int pos_index[3];
+	int tex_index[3];
+	int nor_index[3];
 };
 
 /* Call this function to load a model, only loads triangulated meshes */
 
 class ObjMeshInstance
 { 
-  public:
-  int type_id;
-  float a;
-  ObjMesh myMesh;
-  std::vector<vec3f>           positions;
-  std::vector<vec2f>           texcoords;
-  std::vector<vec3f>           normals;
-  std::vector<_ObjMeshFaceIndex>  faces;
-  GLuint glList; 
-  
-  std::string path;
-  
-  /*
-   * Load file, parse it
-   * Lines beginning with:
-   * '#'  are comments can be ignored
-   * 'v'  are vertices positions (3 floats that can be positive or negative)
-   * 'vt' are vertices texcoords (2 floats that can be positive or negative)
-   * 'vn' are vertices normals   (3 floats that can be positive or negative)
-   * 'f'  are faces, 3 values that contain 3 values which are separated by / and <space>
-   */
+	public:
+		int type_id;
+		//float a;
+		ObjMesh myMesh;
+		std::vector<vec3f> positions;
+		std::vector<vec2f> texcoords;
+		std::vector<vec3f> normals;
+		std::vector<_ObjMeshFaceIndex> faces;
+		GLuint glList; 
+		
+		std::string path;
+		
+		/*
+		* Load file, parse it
+		* Lines beginning with:
+		* '#'  are comments can be ignored
+		* 'v'  are vertices positions (3 floats that can be positive or negative)
+		* 'vt' are vertices texcoords (2 floats that can be positive or negative)
+		* 'vn' are vertices normals   (3 floats that can be positive or negative)
+		* 'f'  are faces, 3 values that contain 3 values which are separated by / and <space>
+		*/
       
 ObjMeshInstance(const std::string& filename, int type_id):type_id(type_id)
 {
@@ -103,36 +99,41 @@ ObjMeshInstance(const std::string& filename, int type_id):type_id(type_id)
         	std::stringstream str_stream(line_stream);
         	std::string type_str;
         	str_stream >> type_str;
-        	if(type_str == TOKEN_VERTEX_POS)
         	{
-            		vec3f pos;
-            		str_stream >> pos.x >> pos.y >> pos.z;
-            		positions.push_back(pos);
-        	}
-        	else if(type_str == TOKEN_VERTEX_TEX)
-        	{
-            		vec2f tex;
-            		str_stream >> tex.x >> tex.y;
-            		texcoords.push_back(tex);
-        	}
-        	else if(type_str == TOKEN_VERTEX_NOR)
-        	{
-            		vec3f nor;
-            		str_stream >> nor.x >> nor.y >> nor.z;
-            		normals.push_back(nor);
-        	}
-        	else if(type_str == TOKEN_FACE)
-        	{
-            		_ObjMeshFaceIndex face_index;
-            		char interupt;
-            		for(int i = 0; i < 3; ++i)
-            		{
-                		str_stream >> face_index.pos_index[i] >> interupt
-                        		   >> face_index.tex_index[i] >> interupt
-                           	   	   >> face_index.nor_index[i];
-            		}
-            		faces.push_back(face_index);
-        	}
+        		if (type_str == "v")
+	        	{
+	            		vec3f pos;
+	            		str_stream >> pos.x >> pos.y >> pos.z;
+	            		positions.push_back(pos);
+	        	}
+	        	
+        		else if (type_str == "vt")
+	        	{
+	            		vec2f tex;
+	            		str_stream >> tex.x >> tex.y;
+	            		texcoords.push_back(tex);
+	        	}
+	        	
+        		else if (type_str == "vn")
+	        	{
+	            		vec3f nor;
+	            		str_stream >> nor.x >> nor.y >> nor.z;
+	            		normals.push_back(nor);
+	        	}
+	        	
+        		else if (type_str == "f")
+	        	{
+	            		_ObjMeshFaceIndex face_index;
+	            		char interupt;
+	            		for(int i=0; i<3; ++i)
+	            		{
+	                		str_stream >> face_index.pos_index[i] >> interupt 
+	                        		   >> face_index.tex_index[i] >> interupt
+	                           	   	   >> face_index.nor_index[i];
+	            		}
+	            		faces.push_back(face_index);
+	        	}
+	        }
     	}
     	// Explicit closing of the file
     	filestream.close();

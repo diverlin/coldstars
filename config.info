@@ -1,19 +1,19 @@
 Window
 {
-	WIDTH  640
-	HEIGHT 480
+	WIDTH  1024
+	HEIGHT 768
 	BPP 32
 
 	VSYNC 1
 	FPS_LIMIT 60
-	MODERN_EFFECTS 0
+	MODERN_EFFECTS 1
 }
 
 General
 {
 	DEBUG_MODE 0
 	game_mode 0 		# 0 = NORMAL_RUN 1 = SIMPLE_RUN 2 = CRASH_TEST
-	log_mode 1		# 0 = NONE, 1 = SCREEN, 2 = FILE, 3 = SCREENFILE
+	log_mode 2		# 0 = NONE, 1 = SCREEN, 2 = FILE, 3 = SCREENFILE
 }
 
 Gameplay
