@@ -28,7 +28,7 @@
 #include "../common/Logger.hpp"
 #include "../common/rand.hpp"
 
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 #include "../resources/TextureManager.hpp"
 
 NpcBuilder& NpcBuilder::Instance()

@@ -18,7 +18,7 @@
 
 #include "MicroTaskManager.hpp"
 #include "scenarios/ScenarioCollector.hpp"
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 
 MicroTaskManager::MicroTaskManager()
 {

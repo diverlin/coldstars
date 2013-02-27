@@ -18,7 +18,7 @@
 
 #include "BaseItem.hpp"
 #include "../common/constants.hpp"
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 #include "../slots/ItemSlot.hpp"
 #include "../render/Render.hpp"
 #include "../resources/TextureManager.hpp"

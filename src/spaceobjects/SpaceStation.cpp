@@ -20,7 +20,7 @@
 #include "../common/rand.hpp"
 #include "../common/myStr.hpp"
 #include "../common/Logger.hpp"
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 
 #include "../garbage/EntityGarbage.hpp"
 

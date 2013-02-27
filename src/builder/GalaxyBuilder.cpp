@@ -25,11 +25,11 @@
 
 #include "../common/id.hpp"
 #include "../common/Logger.hpp"
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 #include "../common/rand.hpp"
 #include "../common/common.hpp"
 
-#include "../managers/GalaxyDescription.hpp"
+#include "../world/GalaxyDescription.hpp"
 
 GalaxyBuilder& GalaxyBuilder::Instance()
 {

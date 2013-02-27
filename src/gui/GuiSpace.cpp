@@ -24,7 +24,7 @@
 #include "ButtonTrigger.hpp"
 #include "ButtonSingle.hpp"
 
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 
 #include "../common/myStr.hpp"
 #include "../common/constants.hpp"

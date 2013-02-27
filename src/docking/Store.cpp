@@ -20,7 +20,7 @@
 #include "Kosmoport.hpp"
 #include "../common/constants.hpp"
 #include "../common/myStr.hpp"
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../items/BaseItem.hpp"
 #include "../slots/ItemSlot.hpp"

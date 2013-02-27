@@ -23,7 +23,7 @@
 
 #include "../common/rand.hpp"
 #include "../common/myStr.hpp"
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 #include "../world/starsystem.hpp"
 #include "../render/Render.hpp"
 #include "../effects/particlesystem/ExplosionEffect.hpp"

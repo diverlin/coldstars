@@ -22,7 +22,7 @@
 #include "../../common/Logger.hpp"
 
 #include "../../common/id.hpp"
-#include "../../managers/EntityManager.hpp"
+#include "../../world/EntityManager.hpp"
 #include "../../resources/TextureManager.hpp"
 
 GoodsPack::GoodsPack(int id)

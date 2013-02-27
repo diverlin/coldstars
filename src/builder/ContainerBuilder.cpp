@@ -21,7 +21,7 @@
 #include "../common/Logger.hpp"
 #include "../builder/ItemSlotBuilder.hpp"
 #include "../common/id.hpp"
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 #include "../common/Logger.hpp"
 #include "../common/rand.hpp"
 

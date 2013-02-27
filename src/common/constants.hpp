@@ -108,7 +108,7 @@ const int SCROLL_BORDER_OFFSET = 10;
 const double NO_DELAY = 0.0f;
 const int NO_ADDITIONAL_INFO = 0;
 
-const std::string GAME_TITLE = "cold star V0.0.4.63 (SFML/C++)";
+const std::string GAME_TITLE = "cold star V0.0.4.64 (SFML/C++)";
 
 const float RADAR_SCALE = 1/50.0;
 

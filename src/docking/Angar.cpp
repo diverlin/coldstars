@@ -18,7 +18,7 @@
 
 #include "Angar.hpp"
 #include "Kosmoport.hpp"
-#include "../managers/EntityManager.hpp"
+#include "../world/EntityManager.hpp"
 #include "../common/myStr.hpp"
 #include "../common/Logger.hpp"
 #include "../spaceobjects/Vehicle.hpp"

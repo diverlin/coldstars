@@ -23,7 +23,7 @@
 #include "src/builder/GalaxyBuilder.hpp"
 #include "src/builder/PlayerBuilder.hpp"
 #include "src/config/config.hpp"
-#include "src/managers/EntityManager.hpp"
+#include "src/world/EntityManager.hpp"
 
 #include "src/render/Screen.hpp"
 #include "src/gui/UserInput.hpp"
@@ -37,9 +37,9 @@
 
 #include "src/garbage/EntityGarbage.hpp"
 
-#include "src/managers/God.hpp"
+#include "src/world/God.hpp"
 
-#include "src/managers/GalaxyDescription.hpp"
+#include "src/world/GalaxyDescription.hpp"
 
 int main()
 {          
