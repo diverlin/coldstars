@@ -256,12 +256,13 @@ set (SOURCES
 	src/gui/GuiManager.cpp
 	
 	src/world/HyperSpace.cpp
+	src/resources/ObjMeshInstance.cpp
 
   	main.cpp
 )
 
 add_executable (${PROJECT} ${HEADERS} ${SOURCES})
-target_link_libraries (${PROJECT} ${LIBRARIES} sfml-system sfml-graphics sfml-graphics sfml-window GL GLU GLEW boost_system boost_filesystem)
+target_link_libraries (${PROJECT} ${LIBRARIES} sfml-system sfml-graphics sfml-window GL GLU GLEW boost_system boost_filesystem)
 target_link_libraries (${PROJECT})
 
 ADD_CUSTOM_COMMAND(

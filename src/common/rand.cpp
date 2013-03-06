@@ -18,6 +18,7 @@
 
 #include "rand.hpp"
 #include <stdlib.h>
+#include <cmath>
 
 #include "constants.hpp"
 #include "gameStruct.hpp"
@@ -80,4 +81,14 @@ int getRandNpcSubSubTypeId(int subtype_id)
         {
                 return subtype_id;
         }
+}
+
+vec2f getRandVec2f(int radius_min, int radius_max)
+{
+    	float alpha = (float)getRandInt(0, 360) * DEGREE_TO_RADIAN_RATE;
+    	int len = getRandInt(radius_min, radius_max);
+   
+ 	vec2f vec(sin(alpha) * len, cos(alpha) * len);
+    	
+    	return vec;
 }

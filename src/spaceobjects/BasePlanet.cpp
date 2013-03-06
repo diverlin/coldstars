@@ -80,7 +80,7 @@ void BasePlanet::RenderMesh_NEW(const vec2f& scroll_coords) const
      	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
      	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
       
-	renderMesh(mesh->glList, points.GetCenter3f(), angle, scale);
+	renderMesh(mesh->GetGlList(), points.GetCenter3f(), angle, scale);
 	
      	glUseProgram(0);
      	glActiveTexture(GL_TEXTURE0);
@@ -89,7 +89,7 @@ void BasePlanet::RenderMesh_NEW(const vec2f& scroll_coords) const
 void BasePlanet::RenderMesh_OLD() const
 {   	
 	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-	renderMesh(mesh->glList, points.GetCenter3f(), angle, scale);
+	renderMesh(mesh->GetGlList(), points.GetCenter3f(), angle, scale);
 }
 
 
