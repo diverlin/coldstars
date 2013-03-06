@@ -147,7 +147,7 @@ void BaseSpaceEntity::SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree&
 	//save_ptree.put(root+"d_pos.x", d_pos.x);
 	//save_ptree.put(root+"d_pos.y", d_pos.y);	
 		
-	if (mesh) save_ptree.put(root+"data_unresolved_BaseSpaceEntity.mesh_type_id", mesh->type_id);
+	if (mesh) save_ptree.put(root+"data_unresolved_BaseSpaceEntity.mesh_type_id", mesh->GetTypeId());
 	else      save_ptree.put(root+"data_unresolved_BaseSpaceEntity.mesh_type_id", NONE_ID);
 	
 	if (textureOb) 	save_ptree.put(root+"data_unresolved_BaseSpaceEntity.textureOb_path", textureOb->path);

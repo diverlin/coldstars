@@ -19,7 +19,6 @@
 #include "myVector.hpp"
 #include <cmath>
 #include "../common/constants.hpp"
-#include "../common/rand.hpp"
 
 
 bool vec2f::IsNull() const
@@ -179,16 +178,6 @@ vec2f getVec2f(float len, float angle)
 float getAngleInD(const vec2f& v_start, const vec2f& v_end)
 {
 	return atan2(v_start.y - v_end.y, v_start.x - v_end.x) * RADIAN_TO_DEGREE_RATE;
-}
-
-vec2f getRandVec2f(int radius_min, int radius_max)
-{
-    	float alpha = (float)getRandInt(0, 360) * DEGREE_TO_RADIAN_RATE;
-    	int len = getRandInt(radius_min, radius_max);
-   
- 	vec2f vec(sin(alpha) * len, cos(alpha) * len);
-    	
-    	return vec;
 }
 
 float getAngle(const Vector2f& v1, const Vector2f& v2)

@@ -27,7 +27,7 @@ MeshCollector& MeshCollector::Instance()
 		
 void MeshCollector::RegisterMesh(ObjMeshInstance* mesh)
 {
-	mesh_map.insert(std::make_pair(mesh->type_id, mesh));
+	mesh_map.insert(std::make_pair(mesh->GetTypeId(), mesh));
 }
 
 ObjMeshInstance* MeshCollector::GetMeshByTypeId(int type_id) const

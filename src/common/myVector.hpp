@@ -137,5 +137,4 @@ float distBetweenPoints(float x1, float y1, float x2, float y2);
 vec2f getVec2f(float len, float angle);
 float getAngleInD(const vec2f&, const vec2f&);
 
-vec2f getRandVec2f(int radius_min, int radius_max);
 #endif

@@ -1,177 +1,58 @@
-/**
- * The MIT License
- *
- * Copyright (c) 2010 Wouter Lindenhof (http://limegarden.net)
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+
 #ifndef OBJMESHINSTANCE_HPP
 #define OBJMESHINSTANCE_HPP
 
 #include <string>
 #include <vector>
-#include <sstream>
-#include <fstream>
-
-#include <GL/glew.h>
 
 #include "../common/myVector.hpp"
- 
+#include <GL/glew.h>
 
-struct ObjMeshVertex
+struct MeshVertexData
 {
-	vec3f pos;
+	vec3f position;
 	vec2f texcoord;
 	vec3f normal;
 };
 
-/* This is a triangle, that we can render */
-struct ObjMeshFace
+struct MeshFaceData
 {
-	ObjMeshVertex vertices[3];
+	MeshVertexData vertices[3];
 };
 
-/* This contains a list of triangles */
-struct ObjMesh
+struct MeshFaceIndexesData
 {
-	std::vector<ObjMeshFace> faces;
+	unsigned long int position_index[3];
+	unsigned long int texcoord_index[3];
+	unsigned long int normal_index[3];
 };
-
-/* Internal structure */
-struct _ObjMeshFaceIndex
-{
-	int pos_index[3];
-	int tex_index[3];
-	int nor_index[3];
-};
-
-/* Call this function to load a model, only loads triangulated meshes */
 
 class ObjMeshInstance
 { 
 	public:
+		int GetTypeId() const { return type_id; };
+		GLuint GetGlList() const { return glList; };
+				
+		ObjMeshInstance(const std::string&, int);
+		~ObjMeshInstance();
+	
+	private:
 		int type_id;
-		//float a;
-		ObjMesh myMesh;
+		
+		/** The data readed directly from file */
 		std::vector<vec3f> positions;
 		std::vector<vec2f> texcoords;
-		std::vector<vec3f> normals;
-		std::vector<_ObjMeshFaceIndex> faces;
+		std::vector<vec3f> normals;		
+		std::vector<MeshFaceIndexesData> faces_indexes;
+		/** */
+		
+		std::vector<MeshFaceData> faces; // reconstracted data used in render
+
 		GLuint glList; 
 		
 		std::string path;
-		
-		/*
-		* Load file, parse it
-		* Lines beginning with:
-		* '#'  are comments can be ignored
-		* 'v'  are vertices positions (3 floats that can be positive or negative)
-		* 'vt' are vertices texcoords (2 floats that can be positive or negative)
-		* 'vn' are vertices normals   (3 floats that can be positive or negative)
-		* 'f'  are faces, 3 values that contain 3 values which are separated by / and <space>
-		*/
       
-ObjMeshInstance(const std::string& filename, int type_id):type_id(type_id)
-{
-	path = filename;
-    	std::ifstream filestream;
-    	filestream.open(filename.c_str());
- 
-    	std::string line_stream;    // No longer depending on char arrays thanks to: Dale Weiler
-    	while(std::getline(filestream, line_stream))
-    	{
-        	std::stringstream str_stream(line_stream);
-        	std::string type_str;
-        	str_stream >> type_str;
-        	{
-        		if (type_str == "v")
-	        	{
-	            		vec3f pos;
-	            		str_stream >> pos.x >> pos.y >> pos.z;
-	            		positions.push_back(pos);
-	        	}
-	        	
-        		else if (type_str == "vt")
-	        	{
-	            		vec2f tex;
-	            		str_stream >> tex.x >> tex.y;
-	            		texcoords.push_back(tex);
-	        	}
-	        	
-        		else if (type_str == "vn")
-	        	{
-	            		vec3f nor;
-	            		str_stream >> nor.x >> nor.y >> nor.z;
-	            		normals.push_back(nor);
-	        	}
-	        	
-        		else if (type_str == "f")
-	        	{
-	            		_ObjMeshFaceIndex face_index;
-	            		char interupt;
-	            		for(int i=0; i<3; ++i)
-	            		{
-	                		str_stream >> face_index.pos_index[i] >> interupt 
-	                        		   >> face_index.tex_index[i] >> interupt
-	                           	   	   >> face_index.nor_index[i];
-	            		}
-	            		faces.push_back(face_index);
-	        	}
-	        }
-    	}
-    	// Explicit closing of the file
-    	filestream.close();
- 
-    	for(size_t i=0; i<faces.size(); ++i)
-    	{
-        	ObjMeshFace face;
-        	for(size_t j=0; j<3; ++j)
-        	{
-            		face.vertices[j].pos      = positions[faces[i].pos_index[j] - 1];
-            		face.vertices[j].texcoord = texcoords[faces[i].tex_index[j] - 1];
-            		face.vertices[j].normal   = normals[faces[i].nor_index[j] - 1];
-        	}
-        	myMesh.faces.push_back(face);
-    	}
-
-  	createGlList();
-}
-  
-  
-void createGlList()
-{
- 	glList = glGenLists(1);
-      	glNewList(glList, GL_COMPILE);
-      	for(unsigned int i=0; i<myMesh.faces.size(); i++)
-      	{ 
-        	glBegin(GL_POLYGON);
-         	for(unsigned int j=0; j<3; j++)
-         	{
-             		glNormal3f(  myMesh.faces[i].vertices[j].normal.x,   myMesh.faces[i].vertices[j].normal.y,   myMesh.faces[i].vertices[j].normal.z);
-             		glTexCoord2f(myMesh.faces[i].vertices[j].texcoord.x, myMesh.faces[i].vertices[j].texcoord.y);
-             		glVertex3f(  myMesh.faces[i].vertices[j].pos.x,      myMesh.faces[i].vertices[j].pos.y,      myMesh.faces[i].vertices[j].pos.z);
-         	}  
-         	glEnd();   
-      	}    
-      	glEndList();
-}
-
+		void createGlList();  
 };
 
 #endif
