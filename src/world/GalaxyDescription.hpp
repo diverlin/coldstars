@@ -20,23 +20,19 @@
 #define GALAXYDESCRIPTION_H
 
 #include "../common/constants.hpp"
+#include <vector>
+#include "StarSystemDescription.hpp"
 
 struct GalaxyDescription
 {
 	public:
 		int starsystem_num;
-		
-		int planet_num_min;
-		int planet_num_max;
-		int spacestation_num_min;
-		int spacestation_num_max;
+		bool allow_invasion;
+		std::vector<StarSystemDescription> starsystems;
 		
 		GalaxyDescription():
 		starsystem_num(ENTITY::GALAXY::STARSYSTEM_NUM),
-		planet_num_min(ENTITY::STARSYSTEM::PLANET_NUM_MIN),
-		planet_num_max(ENTITY::STARSYSTEM::PLANET_NUM_MAX),		
-		spacestation_num_min(ENTITY::STARSYSTEM::SPACESTATION_NUM_MIN),
-		spacestation_num_max(ENTITY::STARSYSTEM::SPACESTATION_NUM_MAX)
+		allow_invasion(true)
 		{};
 		
 		~GalaxyDescription() {};

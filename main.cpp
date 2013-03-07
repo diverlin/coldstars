@@ -50,6 +50,21 @@ int main()
 	GameDate::Instance().SetDate(1,1,4000);
 
 	GalaxyDescription galaxy_description;
+	galaxy_description.allow_invasion = false;
+	for (unsigned int i=0; i<galaxy_description.starsystem_num; i++)
+	{
+		StarSystemDescription starsystem_description;
+		starsystem_description.allow_satellites = false;
+		starsystem_description.allow_spacestations = false;
+		
+		starsystem_description.allow_ship_ranger   = false;
+		starsystem_description.allow_ship_warrior  = true;
+		starsystem_description.allow_ship_trader   = false;
+		starsystem_description.allow_ship_pirat    = false;
+		starsystem_description.allow_ship_diplomat = false;
+		galaxy_description.starsystems.push_back(starsystem_description);
+	}
+	
 	galaxy_description.starsystem_num = 2;
 	
 	Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_description);

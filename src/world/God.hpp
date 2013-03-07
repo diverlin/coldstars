@@ -23,6 +23,7 @@
 class Galaxy;
 class GalaxyDescription;
 class StarSystem;
+class StarSystemDescription;
 class Planet;
 #include "../common/Date.hpp";
 #include "../world/StarSystemsConditionData.hpp"
@@ -49,7 +50,7 @@ class God
                 void CreateLife(const GalaxyDescription&) const;
                 void CreateInvasion(const GalaxyDescription&) const;
                             
-        	void CreateLifeAtPlanet(Planet*) const;
+        	void CreateLifeAtPlanet(Planet*, const StarSystemDescription&) const;
         	
         	void CreateSpaceStations(StarSystem*, int) const;
         	void CreateShipsInSpace(StarSystem*, int, int, int subtype_id = NONE_ID, int subsubtype_id = NONE_ID) const;   

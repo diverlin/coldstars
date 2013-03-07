@@ -29,6 +29,9 @@ int getRandInt(int, int);
 int getRandSign();
 bool getRandBool();
 
+int getRandNpcSubTypeId(int, const std::vector<int>&);
+const std::vector<int>& getAllowedSubTypesByRaceId(int);
+
 int getRandNpcSubTypeId(int);
 int getRandNpcSubSubTypeId(int);
 

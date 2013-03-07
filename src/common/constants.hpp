@@ -53,6 +53,8 @@
 
 #define DEBUG_ITEMDAMAGELOCKVIAGUI 1  // 1 - is locking/unlocking item by right mouse click; 2 - is damaging/undamaging item by right mouse click
 
+const int POPULATION_MIN = 1000;
+const int POPULATION_MAX = 4000;
 const int DAYSINYEAR  = 360;
 const int DAYSINMONTH = 31;
 
@@ -77,8 +79,8 @@ const float GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE = 0.1;
 const int ASTEROD_GIVEN_EXPIRIENCE = 100;
 const int CONTAINER_GIVEN_EXPIRIENCE = 10;
 
-const int SHIPWARRIORS_PER_PLANET_MIN = 1;
-const int SHIPWARRIORS_PER_PLANET_MAX = 5;
+const int SHIPINIT_PER_PLANET_MIN = 1;
+const int SHIPINIT_PER_PLANET_MAX = 5;
 
 const int SATELLITEWARRIORS_PER_PLANET_MIN = 1;
 const int SATELLITEWARRIORS_PER_PLANET_MAX = 1;
