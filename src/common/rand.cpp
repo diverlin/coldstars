@@ -25,7 +25,8 @@
 
 int getRandIntFromVec(const std::vector<int>& vec)
 {
-       	return vec[getRandInt(0, vec.size()-1)];
+	if (vec.size()>0) { return vec[getRandInt(0, vec.size()-1)]; }
+	else 		  { return NONE_ID; }
 }
         
         
@@ -56,18 +57,42 @@ bool getRandBool()
 		return false; 
 }
 
+int getRandNpcSubTypeId(int race_id, const std::vector<int>& subtypes)
+{
+	std::vector<int> allowed_subtypes;
+	const std::vector<int>& allowed_race_subtypes =  getAllowedSubTypesByRaceId(race_id);
+	
+	for (unsigned int i=0; i<subtypes.size(); i++)
+	{
+		for (unsigned int j=0; j<allowed_race_subtypes.size(); j++)
+		{
+			if (subtypes[i] == allowed_race_subtypes[j])
+			{
+				allowed_subtypes.push_back(subtypes[i]);
+			}
+		}
+	}
+	
+        return getRandIntFromVec(allowed_subtypes);  
+}
 
 int getRandNpcSubTypeId(int race_id)
 {
-        switch(race_id)
+	const std::vector<int>& allowed_race_subtypes =  getAllowedSubTypesByRaceId(race_id);
+	return getRandIntFromVec(allowed_race_subtypes);
+}
+
+const std::vector<int>& getAllowedSubTypesByRaceId(int race_id)
+{
+	switch(race_id)
         {
-               	case RACE::R0_ID: { return getRandIntFromVec(RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec);  break; }
-               	case RACE::R1_ID: { return getRandIntFromVec(RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec);  break; }
-               	case RACE::R2_ID: { return getRandIntFromVec(RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec);  break; }
-               	case RACE::R3_ID: { return getRandIntFromVec(RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec);  break; }
-              	case RACE::R4_ID: { return getRandIntFromVec(RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec);  break; }
-              	case RACE::R6_ID: { return getRandIntFromVec(RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec);  break; }
-              	case RACE::R7_ID: { return getRandIntFromVec(RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec);  break; }
+               	case RACE::R0_ID: { return RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec;  break; }
+               	case RACE::R1_ID: { return RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec;  break; }
+               	case RACE::R2_ID: { return RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec;  break; }
+               	case RACE::R3_ID: { return RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec;  break; }
+              	case RACE::R4_ID: { return RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec;  break; }
+              	case RACE::R6_ID: { return RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec;  break; }
+              	case RACE::R7_ID: { return RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec;  break; }
 	}
 }
 

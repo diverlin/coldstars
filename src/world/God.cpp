@@ -66,22 +66,29 @@ void God::Init(Galaxy* galaxy, const GalaxyDescription& galaxy_description)
 {
 	this->galaxy = galaxy;
 	CreateLife(galaxy_description);
-	CreateInvasion(galaxy_description);
+	if (galaxy_description.allow_invasion == true)
+	{
+		CreateInvasion(galaxy_description);
+	}
 }
 
 void God::CreateLife(const GalaxyDescription& galaxy_description) const
 {
         for(unsigned int i=0; i<galaxy->STARSYSTEM_vec.size(); i++)
         {
+     		const StarSystemDescription& starsystem_description = galaxy_description.starsystems[i];
 		StarSystem* starsystem = galaxy->STARSYSTEM_vec[i];
 		
 	        for(int j=0; j<starsystem->PLANET_vec.size(); j++)
 	        {        
-	                CreateLifeAtPlanet(starsystem->PLANET_vec[j]);
+	                CreateLifeAtPlanet(starsystem->PLANET_vec[j], starsystem_description);
 	        }
 
-		int spacestation_num = getRandInt(galaxy_description.spacestation_num_min, galaxy_description.spacestation_num_max);
-        	CreateSpaceStations(starsystem, spacestation_num);
+		if (starsystem_description.allow_spacestations == true)
+		{
+			int spacestation_num = getRandInt(starsystem_description.spacestation_num_min, starsystem_description.spacestation_num_max);
+        		CreateSpaceStations(starsystem, spacestation_num);
+        	}
         }
 }
 
@@ -137,10 +144,10 @@ void God::Update(const Date& date)
 	}
 }                
      
-void God::CreateLifeAtPlanet(Planet* planet) const
+void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsystem_description) const
 {            
 	unsigned long int population = 0;
-	getRandBool() ? population = getRandInt(1000, 4000) : population = 0;
+	getRandBool() ? population = getRandInt(POPULATION_MIN, POPULATION_MAX) : population = 0;
 	planet->SetPopulation(population);
 	
 	BaseLand* land = NULL;
@@ -151,46 +158,59 @@ void God::CreateLifeAtPlanet(Planet* planet) const
 
 	if (population > 0) 
 	{
-		int sattelitewarriors_num = 1; //getRandInt(SATELLITEWARRIORS_PER_PLANET_MIN, SATELLITEWARRIORS_PER_PLANET_MAX);
-		for (int j=0; j<sattelitewarriors_num; j++)
-		{      
-			Satellite* satellite = SatelliteBuilder::Instance().GetNewSatellite();
-			SatelliteBuilder::Instance().EquipEquipment(satellite); // improove
-        
-			{
-				int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
-				int npc_subtype_id    = ENTITY::WARRIOR_ID;
-				int npc_subsubtype_id = ENTITY::WARRIOR_ID;
-		
-				Npc* npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
-				satellite->BindOwnerNpc(npc);
+		if (starsystem_description.allow_satellites == true)
+		{
+			int sattelitewarriors_num = 1; //getRandInt(SATELLITEWARRIORS_PER_PLANET_MIN, SATELLITEWARRIORS_PER_PLANET_MAX);
+			for (int j=0; j<sattelitewarriors_num; j++)
+			{      
+				Satellite* satellite = SatelliteBuilder::Instance().GetNewSatellite();
+				SatelliteBuilder::Instance().EquipEquipment(satellite); // improove
+	        
+				{
+					int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+					int npc_subtype_id    = ENTITY::WARRIOR_ID;
+					int npc_subsubtype_id = ENTITY::WARRIOR_ID;
+			
+					Npc* npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+					satellite->BindOwnerNpc(npc);
+				}
+			
+				planet->GetStarSystem()->AddVehicle(satellite, vec2f(0, 0), 0, planet);
 			}
-		
-			planet->GetStarSystem()->AddVehicle(satellite, vec2f(0, 0), 0, planet);
 		}
 		
-		int shipwarriors_num = getRandInt(SHIPWARRIORS_PER_PLANET_MIN, SHIPWARRIORS_PER_PLANET_MAX);
-		for (int j=0; j<shipwarriors_num; j++)
+		if (starsystem_description.allow_ships == true)
 		{
-			int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
-			int npc_subtype_id    = getRandNpcSubTypeId(npc_race_id);
-			int npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
+			std::vector<int> allowed_subtypes;
+			if (starsystem_description.allow_ship_ranger == true)  	{ allowed_subtypes.push_back(ENTITY::RANGER_ID); }		
+			if (starsystem_description.allow_ship_warrior == true) 	{ allowed_subtypes.push_back(ENTITY::WARRIOR_ID); }	
+			if (starsystem_description.allow_ship_trader == true) 	{ allowed_subtypes.push_back(ENTITY::TRADER_ID); }	
+			if (starsystem_description.allow_ship_pirat == true) 	{ allowed_subtypes.push_back(ENTITY::PIRAT_ID); }	
+			if (starsystem_description.allow_ship_diplomat == true) { allowed_subtypes.push_back(ENTITY::DIPLOMAT_ID); }	
 			
-			int ship_race_id = npc_race_id;         
-			int ship_subtype_id = npc_subtype_id;  
-			int ship_size_id = getRandInt(SIZE_1_ID, SIZE_9_ID);
-			int weapons_num = getRandInt(1, 5);
-	
-			Ship* new_ship = ShipBuilder::Instance().GetNewShip(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
-			ShipBuilder::Instance().EquipEquipment(new_ship); // improove
-                        //ShipBuilder::Instance().EquipModules(ship, tech_level); 
-                        //ShipBuilder::Instance().EquipArtefacts(ship, tech_level); 
-                        //ShipBuilder::Instance().EquipBomb(ship, tech_level); 
-        
-			Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
-			new_ship->BindOwnerNpc(new_npc);
-			
-			planet->AddVehicle(new_ship);
+			int ship_num = getRandInt(SHIPINIT_PER_PLANET_MIN, SHIPINIT_PER_PLANET_MAX);
+			for (int j=0; j<ship_num; j++)
+			{
+				int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+				int npc_subtype_id    = getRandNpcSubTypeId(npc_race_id, allowed_subtypes);
+				int npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
+				
+				int ship_race_id = npc_race_id;         
+				int ship_subtype_id = npc_subtype_id;  
+				int ship_size_id = getRandInt(SIZE_1_ID, SIZE_9_ID);
+				int weapons_num = getRandInt(1, 5);
+		
+				Ship* new_ship = ShipBuilder::Instance().GetNewShip(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
+				ShipBuilder::Instance().EquipEquipment(new_ship); // improove
+	                        //ShipBuilder::Instance().EquipModules(ship, tech_level); 
+	                        //ShipBuilder::Instance().EquipArtefacts(ship, tech_level); 
+	                        //ShipBuilder::Instance().EquipBomb(ship, tech_level); 
+	        
+				Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+				new_ship->BindOwnerNpc(new_npc);
+				
+				planet->AddVehicle(new_ship);
+			}
 		}
      	}
 }
