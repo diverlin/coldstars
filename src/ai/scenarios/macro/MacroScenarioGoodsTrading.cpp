@@ -75,7 +75,7 @@ bool MacroScenarioGoodsTrading::Validation(Npc* npc) const
 /* virtual */		
 void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
 {
-	bool see_container = npc->GetObservation().GetVisionStatus().CONTAINER;
+	bool see_pickable_container = npc->GetObservation().GetVisionStatus().pickable_CONTAINER;
 	bool able_buy      = IsAbleToBuyGoods(npc);
 	bool has_goods     = false;
 	if (npc->GetVehicle()->GetGoodsPack() != NULL)
@@ -85,29 +85,23 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
 	int microScenarioTypeId = npc->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId();
 	
 	// LOGIC
-	if ( (see_container == true) and (has_goods == false) )
+	// grab container
+	if (see_pickable_container == true)
 	{	
 		if (microScenarioTypeId != MICROSCENARIO::GRAB_ID) 
 		{
-			Container* container = npc->GetObservation().GetClosestContainer(); // find proper!
-			Task microtask(MICROSCENARIO::GRAB_ID, container->GetId());
-			npc->GetStateMachine().SetCurrentMicroTask(microtask); 
+			Container* container = npc->GetObservation().GetClosestPickableContainer(); // find proper!
+			if (npc->GetVehicle()->GetFreeSpace() > container->GetMass())
+			{
+				Task microtask(MICROSCENARIO::GRAB_ID, container->GetId());
+				npc->GetStateMachine().SetCurrentMicroTask(microtask); 
 			
-			return;
-		}
-	}
-
-	if ( (has_goods == false) and (able_buy == false) )
-	{
-		if (microScenarioTypeId != MICROSCENARIO::EXPLORATION_ID) 
-		{
-			Task microtask(MICROSCENARIO::EXPLORATION_ID);
-			npc->GetStateMachine().SetCurrentMicroTask(microtask); 
-				
-			return;
+				return;
+			}
 		}
 	}
 	
+	// buy goods
 	if ( (has_goods == false) and (able_buy == true) )
 	{
 		if (microScenarioTypeId != MICROSCENARIO::DOCKING_ID)
@@ -119,8 +113,9 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
 			return;
 		}
 	}
-			
-	if (has_goods == true)
+	
+	// sell goods		
+	if ( (has_goods == true) )
 	{
 		if (microScenarioTypeId != MICROSCENARIO::DOCKING_ID)
 		{
@@ -128,6 +123,18 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
 			Task microtask(MICROSCENARIO::DOCKING_ID, planet->GetId());
 			npc->GetStateMachine().SetCurrentMicroTask(microtask);
 			
+			return;
+		}
+	}
+
+	// explore space
+	if ( (has_goods == false) and (able_buy == false) )
+	{
+		if (microScenarioTypeId != MICROSCENARIO::EXPLORATION_ID) 
+		{
+			Task microtask(MICROSCENARIO::EXPLORATION_ID);
+			npc->GetStateMachine().SetCurrentMicroTask(microtask); 
+				
 			return;
 		}
 	}

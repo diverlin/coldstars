@@ -58,8 +58,8 @@ int main()
 		starsystem_description.allow_spacestations = false;
 		
 		starsystem_description.allow_ship_ranger   = false;
-		starsystem_description.allow_ship_warrior  = true;
-		starsystem_description.allow_ship_trader   = false;
+		starsystem_description.allow_ship_warrior  = false;
+		starsystem_description.allow_ship_trader   = true;
 		starsystem_description.allow_ship_pirat    = false;
 		starsystem_description.allow_ship_diplomat = false;
 		galaxy_description.starsystems.push_back(starsystem_description);

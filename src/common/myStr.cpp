@@ -99,13 +99,13 @@ std::string getNavigatorActionStr(int type_id)
 {
 	switch(type_id)
 	{
-		case NAVIGATOR_ACTION::NONE_ID: 		{ return "NONE_ID"; break; }
-		case NAVIGATOR_ACTION::DOCKING_ID:		{ return "DOCKING_ID"; break; }
+		case NAVIGATOR_ACTION::NONE_ID: 	{ return "NONE_ID"; break; }
+		case NAVIGATOR_ACTION::DOCKING_ID:	{ return "DOCKING_ID"; break; }
 		case NAVIGATOR_ACTION::COLLECTING_ID:	{ return "COLLECTING_ID"; break; }
-		case NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE_ID:		{ return "KEEP_FIRE_DISTANCE_ID"; break; }
+		case NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE_ID:	{ return "KEEP_FIRE_DISTANCE_ID"; break; }
 		case NAVIGATOR_ACTION::KEEP_CLOSE_ID:	{ return "KEEP_CLOSE_ID"; break; }
 		case NAVIGATOR_ACTION::KEEP_MIDDLE_ID:	{ return "KEEP_MIDDLE_ID"; break; }
-		case NAVIGATOR_ACTION::KEEP_FAR_ID: 		{ return "KEEP_FAR_ID"; break; }
+		case NAVIGATOR_ACTION::KEEP_FAR_ID: 	{ return "KEEP_FAR_ID"; break; }
 		
 		default: { return "UNKNOWN ID"; }
 	}
