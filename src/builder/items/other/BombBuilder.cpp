@@ -19,7 +19,7 @@
 #include "BombBuilder.hpp"
 #include "../../../items/others/Bomb.hpp"
 #include "../../../common/Logger.hpp"
-#include "../../../common/id.hpp"
+#include "../../../common/IdGenerator.hpp"
 #include "../../../world/EntityManager.hpp"
 
 #include "../../../resources/TextureManager.hpp"

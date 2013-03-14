@@ -29,7 +29,7 @@ set (SOURCES
 	src/common/myStr.cpp
 	src/common/rand.cpp
 	src/common/gameStruct.cpp
-	src/common/id.cpp
+	src/common/IdGenerator.cpp
 	src/common/rect.cpp
 	src/common/points.cpp
 	src/common/TurnTimer.cpp
