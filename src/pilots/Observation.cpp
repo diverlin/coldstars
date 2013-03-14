@@ -49,14 +49,14 @@ void Observation::FindEchievableStarSystems(Galaxy* galaxy)
         //Sort(&visible_STARSYSTEM_vec);
 }
 
-Container* Observation::GetClosestContainer() const
+Container* Observation::GetClosestPickableContainer() const
 {
-	return visible_CONTAINER_pair_vec[0].object;
+	return visible_pickable_CONTAINER_pair_vec[0].object;
 }
           
-Container* Observation::GetRandContainer() const
+Container* Observation::GetRandomPickableContainer() const
 {
-	return visible_CONTAINER_pair_vec[getRandInt(0, visible_CONTAINER_pair_vec.size()-1)].object;
+	return visible_pickable_CONTAINER_pair_vec[getRandInt(0, visible_pickable_CONTAINER_pair_vec.size()-1)].object;
 }
                     	
 StarSystem* Observation::GetClosestStarSystem(int requested_consdition_id) const
@@ -168,16 +168,24 @@ void Observation::FindVisibleContainersInSpaceInStatic()
 {
 	const std::vector<Container*>& container_vec = npc_owner->GetStarSystem()->CONTAINER_vec;
 	
-	see.CONTAINER   = false;
-	
+	see.CONTAINER   	= false;
+	see.pickable_CONTAINER  = false;
+		
         visible_CONTAINER_pair_vec.clear();
-
+        visible_pickable_CONTAINER_pair_vec.clear();
+        
         for (unsigned int i=0; i<container_vec.size(); i++)
         {    
         	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), container_vec[i]->GetPoints().GetCenter());
                 if (dist < npc_owner->GetVehicle()->GetProperties().radar)
                 {
                 	visible_CONTAINER_pair_vec.push_back( Pair<Container*>(container_vec[i], dist) );
+                	int container_mass = container_vec[i]->GetMass(); 
+                	if(container_mass < npc_owner->GetVehicle()->GetProperties().grab_strength)
+                	{
+                		visible_pickable_CONTAINER_pair_vec.push_back( Pair<Container*>(container_vec[i], dist) );                		
+                		see.pickable_CONTAINER = true;
+                	}
                 	see.CONTAINER = true;
                 } 
     	}

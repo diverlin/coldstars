@@ -44,7 +44,7 @@ struct VisionStatus
 {
 	VisionStatus():ASTEROID(false),
 			 CONTAINER(false),
-			 MINERAL(false),
+			 pickable_CONTAINER(false),
 			 RANGER(false),
 			 WARRIOR(false),
 			 TRADER(false),
@@ -52,7 +52,7 @@ struct VisionStatus
 			 DIPLOMAT(false) {};
 	bool ASTEROID;
 	bool CONTAINER;
-	bool MINERAL;
+	bool pickable_CONTAINER;
 
 	bool RANGER;
 	bool WARRIOR;
@@ -74,8 +74,8 @@ class Observation
  		void ObserveAllInSpace();
           	
           	void FindEchievableStarSystems(Galaxy*);
-          	Container* GetClosestContainer() const;
-          	Container* GetRandContainer() const;
+          	Container* GetClosestPickableContainer() const;
+          	Container* GetRandomPickableContainer() const;
           	StarSystem* GetClosestStarSystem(int) const;
           	Vehicle* GetClosestVisibleVehicle(const std::vector<int>&) const;
           	Vehicle* GetRandVisibleVehicle(const std::vector<int>&) const;
@@ -92,6 +92,7 @@ class Observation
 
      		std::vector< Pair<StarSystem*> > visible_STARSYSTEM_pair_vec; 
      		std::vector< Pair<Container*> > visible_CONTAINER_pair_vec;                              
+     		std::vector< Pair<Container*> > visible_pickable_CONTAINER_pair_vec; 
      		std::vector< Pair<Asteroid*> > visible_ASTEROID_pair_vec; 		
 
      		std::vector< Pair<Vehicle*> > visible_VEHICLE_pair_vec;                
