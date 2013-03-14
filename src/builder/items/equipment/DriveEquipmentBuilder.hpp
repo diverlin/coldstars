@@ -28,7 +28,7 @@ class DriveEquipmentBuilder
 		static DriveEquipmentBuilder& Instance();
 		~DriveEquipmentBuilder();
 
-        	DriveEquipment* GetNewDriveEquipmentTemplate(int id = NONE_ID) const; 
+        	DriveEquipment* GetNewDriveEquipmentTemplate(unsigned long int id = NONE_ID) const; 
                 DriveEquipment* GetNewDriveEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int speed_orig = NONE_ID, int hyper_orig = NONE_ID) const;
         	 		                
         private:

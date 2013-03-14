@@ -39,7 +39,7 @@ class EntityManager
 		
 		void RegisterEntity(Base*);
 	
-		Base* GetEntityById(int) const;
+		Base* GetEntityById(unsigned long int) const;
 		Player* GetPlayer() const;
 
 		bool UpdateSaveRequest();		
@@ -52,7 +52,7 @@ class EntityManager
 
 		bool save_request, load_request;
 		
-		std::map<int, Base*> entity_map;
+		std::map<unsigned long int, Base*> entity_map;
 
 		void RemoveEntity(Base*);
 

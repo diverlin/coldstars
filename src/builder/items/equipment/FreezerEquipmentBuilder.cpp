@@ -33,13 +33,13 @@ FreezerEquipmentBuilder& FreezerEquipmentBuilder::Instance()
 FreezerEquipmentBuilder::~FreezerEquipmentBuilder()
 {}
 
-FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipmentTemplate(int id) const
+FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipmentTemplate(unsigned long int id) const
 {
 	FreezerEquipment* freezer_equipment = NULL;
 
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
  	try 

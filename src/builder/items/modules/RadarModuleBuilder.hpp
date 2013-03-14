@@ -28,7 +28,7 @@ class RadarModuleBuilder
 		static RadarModuleBuilder& Instance();
 		~RadarModuleBuilder();
 
-        	RadarModule* GetNewRadarModuleTemplate(int id = NONE_ID) const; 
+        	RadarModule* GetNewRadarModuleTemplate(unsigned long int id = NONE_ID) const; 
                 RadarModule* GetNewRadarModule(int radius_add = NONE_ID) const;
         	 		                
         private:

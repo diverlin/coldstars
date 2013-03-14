@@ -21,6 +21,7 @@
 #include "../common/Logger.hpp"
 #include "../common/Base.hpp"
 #include "../world/EntityManager.hpp"
+#include "../common/id.hpp"
 
 EntityGarbage& EntityGarbage::Instance()
 {
@@ -57,6 +58,7 @@ void EntityGarbage::Clear()
     		#if CREATEDESTROY_LOG_ENABLED == 1
     		Logger::Instance().Log("________EntityGarbage::Clear delete entity " + getTypeStr(entities_vec[i]->GetTypeId()) + "(" +int2str(entities_vec[i]->GetTypeId()) +") " + getTypeStr(entities_vec[i]->GetSubTypeId()) + "(" + int2str(entities_vec[i]->GetSubTypeId()) + ") id=" + int2str(entities_vec[i]->GetId()));
 		#endif
+		EntityIdGenerator::Instance().AddFreeId(entities_vec[i]->GetId());
 		delete entities_vec[i];
 	}
     	entities_vec.clear();

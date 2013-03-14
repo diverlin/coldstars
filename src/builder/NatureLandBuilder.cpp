@@ -43,13 +43,13 @@ NatureLandBuilder& NatureLandBuilder::Instance()
 NatureLandBuilder::~NatureLandBuilder()
 {}
 
-NatureLand* NatureLandBuilder::GetNewNatureLandTemplate(int id) const
+NatureLand* NatureLandBuilder::GetNewNatureLandTemplate(unsigned long int id) const
 {
 	NatureLand* natureland = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

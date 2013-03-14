@@ -28,7 +28,7 @@ class ProtectorArtefactBuilder
 		static ProtectorArtefactBuilder& Instance();
 		~ProtectorArtefactBuilder();
 
-        	ProtectorArtefact* GetNewProtectorArtefactTemplate(int id = NONE_ID) const;
+        	ProtectorArtefact* GetNewProtectorArtefactTemplate(unsigned long int id = NONE_ID) const;
                 ProtectorArtefact* GetNewProtectorArtefact(int protection = NONE_ID) const;
         	 		                
         private:

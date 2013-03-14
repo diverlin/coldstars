@@ -33,13 +33,13 @@ ScanerEquipmentBuilder& ScanerEquipmentBuilder::Instance()
 ScanerEquipmentBuilder::~ScanerEquipmentBuilder()
 {}
 
-ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipmentTemplate(int id) const
+ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipmentTemplate(unsigned long int id) const
 {
 	ScanerEquipment* scaner_equipment = NULL;
 
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
 	try 

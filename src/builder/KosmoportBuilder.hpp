@@ -28,7 +28,7 @@ class KosmoportBuilder
 		static KosmoportBuilder& Instance();
 		~KosmoportBuilder();
 
-        	Kosmoport* GetNewKosmoportTemplate(int id = NONE_ID) const; 
+        	Kosmoport* GetNewKosmoportTemplate(unsigned long int id = NONE_ID) const; 
                 Kosmoport* GetNewKosmoport() const;
                        	 		                
         private:

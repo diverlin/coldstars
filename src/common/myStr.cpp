@@ -21,7 +21,7 @@
 #include "Base.hpp"
 #include "myVector.hpp"
 
-std::string int2str(int val) 
+std::string int2str(long long int val) 
 {
 	if (val >= 0)
 	{

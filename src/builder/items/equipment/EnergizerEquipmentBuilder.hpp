@@ -28,7 +28,7 @@ class EnergizerEquipmentBuilder
 		static EnergizerEquipmentBuilder& Instance();
 		~EnergizerEquipmentBuilder();
 
-        	EnergizerEquipment* GetNewEnergizerEquipmentTemplate(int id = NONE_ID)const; 
+        	EnergizerEquipment* GetNewEnergizerEquipmentTemplate(unsigned long int id = NONE_ID)const; 
                 EnergizerEquipment* GetNewEnergizerEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int energy_max_orig = NONE_ID, int restoration_orig = NONE_ID) const;
         	 		                
         private:

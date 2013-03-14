@@ -34,13 +34,13 @@ BakEquipmentBuilder& BakEquipmentBuilder::Instance()
 BakEquipmentBuilder::~BakEquipmentBuilder()
 {}
 
-BakEquipment* BakEquipmentBuilder::GetNewBakEquipmentTemplate(int id) const
+BakEquipment* BakEquipmentBuilder::GetNewBakEquipmentTemplate(unsigned long int id) const
 {
 	BakEquipment* bak_equipment = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

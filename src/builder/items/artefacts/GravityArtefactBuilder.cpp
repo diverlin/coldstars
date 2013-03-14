@@ -33,13 +33,13 @@ GravityArtefactBuilder& GravityArtefactBuilder::Instance()
 GravityArtefactBuilder::~GravityArtefactBuilder()
 {}
 
-GravityArtefact* GravityArtefactBuilder::GetNewGravityArtefactTemplate(int id) const
+GravityArtefact* GravityArtefactBuilder::GetNewGravityArtefactTemplate(unsigned long int id) const
 {
 	GravityArtefact* gravity_artefact = NULL;
 
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

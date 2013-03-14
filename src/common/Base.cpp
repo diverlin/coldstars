@@ -49,7 +49,7 @@ void Base::LoadDataUniqueBase(const boost::property_tree::ptree& load_ptree)
 	Logger::Instance().Log(" Base("+int2str(GetId())+")::LoadDataUniqueBase", SAVELOAD_LOG_DIP);
 	#endif
 	
-	data_id.id              = load_ptree.get<int>("data_id.id");
+	data_id.id              = load_ptree.get<unsigned long int>("data_id.id");
 	data_id.type_id         = load_ptree.get<int>("data_id.type_id");
 	data_id.subtype_id      = load_ptree.get<int>("data_id.subtype_id");
 	data_id.subsubtype_id   = load_ptree.get<int>("data_id.subsubtype_id");

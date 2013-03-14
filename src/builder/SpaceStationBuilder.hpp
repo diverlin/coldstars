@@ -29,7 +29,7 @@ class SpaceStationBuilder : public BaseVehicleBuilder
 		static SpaceStationBuilder& Instance();
 		~SpaceStationBuilder();
 		
-		SpaceStation* GetNewSpaceStationTemplate(int id = NONE_ID) const;							
+		SpaceStation* GetNewSpaceStationTemplate(unsigned long int id = NONE_ID) const;							
 		SpaceStation* GetNewSpaceStation() const;         
        
         private:

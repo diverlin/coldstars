@@ -33,13 +33,13 @@ BakModuleBuilder& BakModuleBuilder::Instance()
 BakModuleBuilder::~BakModuleBuilder()
 {}
 
-BakModule* BakModuleBuilder::GetNewBakModuleTemplate(int id) const
+BakModule* BakModuleBuilder::GetNewBakModuleTemplate(unsigned long int id) const
 {
 	BakModule* bak_module = NULL;
 
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

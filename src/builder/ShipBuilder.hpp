@@ -29,7 +29,7 @@ class ShipBuilder : public BaseVehicleBuilder
 		static ShipBuilder& Instance();
 		~ShipBuilder();
 		
-		Ship* GetNewShipTemplate(int id = NONE_ID) const;
+		Ship* GetNewShipTemplate(unsigned long int id = NONE_ID) const;
                 Ship* GetNewShip(int, int, int, int) const;        
                 Ship* GetNewShip() const;   
                        

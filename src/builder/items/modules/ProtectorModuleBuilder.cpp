@@ -33,13 +33,13 @@ ProtectorModuleBuilder& ProtectorModuleBuilder::Instance()
 ProtectorModuleBuilder::~ProtectorModuleBuilder()
 {}
 
-ProtectorModule* ProtectorModuleBuilder::GetNewProtectorModuleTemplate(int id) const
+ProtectorModule* ProtectorModuleBuilder::GetNewProtectorModuleTemplate(unsigned long int id) const
 {
 	ProtectorModule* protector_module = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

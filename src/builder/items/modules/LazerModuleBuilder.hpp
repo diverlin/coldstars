@@ -29,7 +29,7 @@ class LazerModuleBuilder
 		static LazerModuleBuilder& Instance();
 		~LazerModuleBuilder();
 
-        	LazerModule* GetNewLazerModuleTemplate(int id = NONE_ID) const; 
+        	LazerModule* GetNewLazerModuleTemplate(unsigned long int id = NONE_ID) const; 
                 LazerModule* GetNewLazerModule(int damage_add = NONE_ID, int radius_add = NONE_ID) const;
         	 		                
         private:

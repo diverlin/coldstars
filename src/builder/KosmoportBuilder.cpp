@@ -37,13 +37,13 @@ KosmoportBuilder& KosmoportBuilder::Instance()
 KosmoportBuilder::~KosmoportBuilder()
 {}
 
-Kosmoport* KosmoportBuilder::GetNewKosmoportTemplate(int id) const
+Kosmoport* KosmoportBuilder::GetNewKosmoportTemplate(unsigned long int id) const
 {
 	Kosmoport* kosmoport = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

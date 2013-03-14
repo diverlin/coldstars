@@ -28,7 +28,7 @@ class NpcBuilder
 		static NpcBuilder& Instance();
 		~NpcBuilder();
 
-        	Npc* GetNewNpcTemplate(int id = NONE_ID) const; 
+        	Npc* GetNewNpcTemplate(unsigned long int id = NONE_ID) const; 
                 Npc* GetNewNpc(int, int, int) const;
                                        
         private:            

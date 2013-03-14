@@ -33,12 +33,12 @@ DroidEquipmentBuilder& DroidEquipmentBuilder::Instance()
 DroidEquipmentBuilder::~DroidEquipmentBuilder()
 {}
 
-DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipmentTemplate(int id) const
+DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipmentTemplate(unsigned long int id) const
 {
 	DroidEquipment* droid_equipment = NULL;
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

@@ -33,13 +33,13 @@ GrappleEquipmentBuilder& GrappleEquipmentBuilder::Instance()
 GrappleEquipmentBuilder::~GrappleEquipmentBuilder()
 {}
 
-GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipmentTemplate(int id) const
+GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipmentTemplate(unsigned long int id) const
 {
 	GrappleEquipment* grapple_equipment = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
   	try 

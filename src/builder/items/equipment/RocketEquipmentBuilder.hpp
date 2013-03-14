@@ -28,7 +28,7 @@ class RocketEquipmentBuilder
 		static RocketEquipmentBuilder& Instance();
 		~RocketEquipmentBuilder();
 
-        	RocketEquipment* GetNewRocketEquipmentTemplate(int id = NONE_ID) const; 
+        	RocketEquipment* GetNewRocketEquipmentTemplate(unsigned long int id = NONE_ID) const; 
                 RocketEquipment* GetNewRocketEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int ammo_max_orig = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
         	 		                
         private:

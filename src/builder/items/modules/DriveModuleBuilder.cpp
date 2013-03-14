@@ -33,13 +33,13 @@ DriveModuleBuilder& DriveModuleBuilder::Instance()
 DriveModuleBuilder::~DriveModuleBuilder()
 {}
 
-DriveModule* DriveModuleBuilder::GetNewDriveModuleTemplate(int id) const
+DriveModule* DriveModuleBuilder::GetNewDriveModuleTemplate(unsigned long int id) const
 {
 	DriveModule* drive_module = NULL;
 
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

@@ -65,13 +65,13 @@ StoreBuilder& StoreBuilder::Instance()
 StoreBuilder::~StoreBuilder()
 {}
 
-Store* StoreBuilder::GetNewStoreTemplate(int id) const
+Store* StoreBuilder::GetNewStoreTemplate(unsigned long int id) const
 {
 	Store* store = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

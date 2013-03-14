@@ -28,7 +28,7 @@ class ShopBuilder
 		static ShopBuilder& Instance();
 		~ShopBuilder();
 
-        	Shop* GetNewShopTemplate(int id = NONE_ID) const; 
+        	Shop* GetNewShopTemplate(unsigned long int id = NONE_ID) const; 
                 Shop* GetNewShop() const;
                        	 		                
         private:

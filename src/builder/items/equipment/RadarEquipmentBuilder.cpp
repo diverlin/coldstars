@@ -33,13 +33,13 @@ RadarEquipmentBuilder& RadarEquipmentBuilder::Instance()
 RadarEquipmentBuilder::~RadarEquipmentBuilder()
 {}
 
-RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipmentTemplate(int id) const
+RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipmentTemplate(unsigned long int id) const
 {
 	RadarEquipment* radar_equipment = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
        	try 

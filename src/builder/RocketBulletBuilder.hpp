@@ -30,7 +30,7 @@ class RocketBulletBuilder
 		static RocketBulletBuilder& Instance();
 		~RocketBulletBuilder();
 		
-		RocketBullet* GetNewRocketBulletTemplate(int id = NONE_ID) const;							
+		RocketBullet* GetNewRocketBulletTemplate(unsigned long int id = NONE_ID) const;							
 		RocketBullet* GetNewRocketBullet(const BulletData&) const;   
 		
 		void CreateKorpusGeometry(RocketBullet*) const;   

@@ -23,7 +23,7 @@
 class VehicleSlot;
 #include "../common/constants.hpp"
 
-VehicleSlot* GetNewVehicleSlot(int id = NONE_ID);
+VehicleSlot* GetNewVehicleSlot(unsigned long int id = NONE_ID);
 
 #endif 
     

@@ -29,7 +29,7 @@ class GrappleModuleBuilder
 		static GrappleModuleBuilder& Instance();
 		~GrappleModuleBuilder();
 
-        	GrappleModule* GetNewGrappleModuleTemplate(int id = NONE_ID) const; 
+        	GrappleModule* GetNewGrappleModuleTemplate(unsigned long int id = NONE_ID) const; 
                 GrappleModule* GetNewGrappleModule(int strength_add = NONE_ID, int radius_add = NONE_ID, int speed_add = NONE_ID) const;
         	 		                
         private:

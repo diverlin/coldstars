@@ -28,7 +28,7 @@ class StarBuilder
 		static StarBuilder& Instance();
 		~StarBuilder();
 
-        	Star* GetNewStarTemplate(int id = NONE_ID) const; 
+        	Star* GetNewStarTemplate(unsigned long int id = NONE_ID) const; 
                 Star* GetNewStar() const;
         	 		                
         private:

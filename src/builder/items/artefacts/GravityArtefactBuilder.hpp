@@ -28,7 +28,7 @@ class GravityArtefactBuilder
 		static GravityArtefactBuilder& Instance();
 		~GravityArtefactBuilder();
 
-        	GravityArtefact* GetNewGravityArtefactTemplate(int id = NONE_ID) const; 
+        	GravityArtefact* GetNewGravityArtefactTemplate(unsigned long int id = NONE_ID) const; 
                 GravityArtefact* GetNewGravityArtefact(int gravity = NONE_ID) const;
         	 		                
         private:

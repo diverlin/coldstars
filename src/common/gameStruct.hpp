@@ -96,7 +96,7 @@ struct LifeData
 
 struct IdData  
 {
-	int id;
+	unsigned long int id;
 	int type_id;
 	int subtype_id;
 	int subsubtype_id;

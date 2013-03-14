@@ -33,13 +33,13 @@ DroidModuleBuilder& DroidModuleBuilder::Instance()
 DroidModuleBuilder::~DroidModuleBuilder()
 {}
 
-DroidModule* DroidModuleBuilder::GetNewDroidModuleTemplate(int id) const
+DroidModule* DroidModuleBuilder::GetNewDroidModuleTemplate(unsigned long int id) const
 {
 	DroidModule* droid_module = NULL;
 
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

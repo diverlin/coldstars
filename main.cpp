@@ -43,7 +43,7 @@
 
 int main()
 {          
-	//pureTest2(); 
+	//pureTest3(); 
 
 	init();  
         

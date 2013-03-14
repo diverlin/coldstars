@@ -28,7 +28,7 @@ class StarSystemBuilder
 		static StarSystemBuilder& Instance();
 		~StarSystemBuilder();
 
-        	StarSystem* GetNewStarSystemTemplate(int id = NONE_ID) const; 
+        	StarSystem* GetNewStarSystemTemplate(unsigned long int id = NONE_ID) const; 
                 StarSystem* GetNewStarSystem() const;
                        	 		                
         private:

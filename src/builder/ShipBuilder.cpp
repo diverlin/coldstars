@@ -34,13 +34,13 @@ ShipBuilder& ShipBuilder::Instance()
 
 ShipBuilder::~ShipBuilder() {}
 
-Ship* ShipBuilder::GetNewShipTemplate(int id) const
+Ship* ShipBuilder::GetNewShipTemplate(unsigned long int id) const
 {
 	Ship* ship = NULL;
 
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

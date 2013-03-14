@@ -35,13 +35,13 @@ PlanetBuilder& PlanetBuilder::Instance()
 PlanetBuilder::~PlanetBuilder()
 {}
 
-Planet* PlanetBuilder::GetNewPlanetTemplate(int id) const
+Planet* PlanetBuilder::GetNewPlanetTemplate(unsigned long int id) const
 {
 	Planet* planet = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
 	try 

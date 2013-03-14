@@ -34,13 +34,13 @@ GovermentBuilder& GovermentBuilder::Instance()
 GovermentBuilder::~GovermentBuilder()
 {}
 
-Goverment* GovermentBuilder::GetNewGovermentTemplate(int id) const
+Goverment* GovermentBuilder::GetNewGovermentTemplate(unsigned long int id) const
 {
 	Goverment* goverment = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

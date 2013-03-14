@@ -35,12 +35,12 @@ SatelliteBuilder& SatelliteBuilder::Instance()
 SatelliteBuilder::~SatelliteBuilder() {}
 
 
-Satellite* SatelliteBuilder::GetNewSatelliteTemplate(int id) const
+Satellite* SatelliteBuilder::GetNewSatelliteTemplate(unsigned long int id) const
 {
 	Satellite* satellite = NULL;
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
 	try 

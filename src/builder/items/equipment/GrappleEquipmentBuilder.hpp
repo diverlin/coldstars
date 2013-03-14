@@ -29,7 +29,7 @@ class GrappleEquipmentBuilder
 		static GrappleEquipmentBuilder& Instance();
 		~GrappleEquipmentBuilder();
 
-        	GrappleEquipment* GetNewGrappleEquipmentTemplate(int id = NONE_ID) const; 
+        	GrappleEquipment* GetNewGrappleEquipmentTemplate(unsigned long int id = NONE_ID) const; 
                 GrappleEquipment* GetNewGrappleEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int strength_orig = NONE_ID, int radius_orig = NONE_ID, int speed_orig = NONE_ID) const;
         	 		                
         private:

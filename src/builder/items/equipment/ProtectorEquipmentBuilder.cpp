@@ -33,13 +33,13 @@ ProtectorEquipmentBuilder& ProtectorEquipmentBuilder::Instance()
 ProtectorEquipmentBuilder::~ProtectorEquipmentBuilder()
 {}
 
-ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipmentTemplate(int id) const
+ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipmentTemplate(unsigned long int id) const
 {
 	ProtectorEquipment* protector_equipment = NULL;
 
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
 	try 

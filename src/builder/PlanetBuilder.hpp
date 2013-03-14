@@ -28,7 +28,7 @@ class PlanetBuilder
 		static PlanetBuilder& Instance();
 		~PlanetBuilder();
 
-        	Planet* GetNewPlanetTemplate(int id = NONE_ID) const; 
+        	Planet* GetNewPlanetTemplate(unsigned long int id = NONE_ID) const; 
                 Planet* GetNewPlanet(float) const;
         	 		                
         private:

@@ -28,7 +28,7 @@ class LazerEquipmentBuilder
 		static LazerEquipmentBuilder& Instance();
 		~LazerEquipmentBuilder();
 
-        	LazerEquipment* GetNewLazerEquipmentTemplate(int id = NONE_ID) const; 
+        	LazerEquipment* GetNewLazerEquipmentTemplate(unsigned long int id = NONE_ID) const; 
                 LazerEquipment* GetNewLazerEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
         	 		                
         private:

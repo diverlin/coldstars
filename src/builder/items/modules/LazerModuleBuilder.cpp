@@ -33,13 +33,13 @@ LazerModuleBuilder& LazerModuleBuilder::Instance()
 LazerModuleBuilder::~LazerModuleBuilder()
 {}
 
-LazerModule* LazerModuleBuilder::GetNewLazerModuleTemplate(int id) const
+LazerModule* LazerModuleBuilder::GetNewLazerModuleTemplate(unsigned long int id) const
 {
 	LazerModule* lazer_module = NULL;
 
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

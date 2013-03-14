@@ -34,13 +34,13 @@ ShopBuilder& ShopBuilder::Instance()
 ShopBuilder::~ShopBuilder()
 {}
 
-Shop* ShopBuilder::GetNewShopTemplate(int id) const
+Shop* ShopBuilder::GetNewShopTemplate(unsigned long int id) const
 {
 	Shop* shop = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

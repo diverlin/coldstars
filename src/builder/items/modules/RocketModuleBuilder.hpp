@@ -28,7 +28,7 @@ class RocketModuleBuilder
 		static RocketModuleBuilder& Instance();
 		~RocketModuleBuilder();
 
-        	RocketModule* GetNewRocketModuleTemplate(int id = NONE_ID) const;
+        	RocketModule* GetNewRocketModuleTemplate(unsigned long int id = NONE_ID) const;
                 RocketModule* GetNewRocketModule(int ammo_max_add = NONE_ID, int damage_add = NONE_ID, int radius_add = NONE_ID) const;
         	 		                
         private:

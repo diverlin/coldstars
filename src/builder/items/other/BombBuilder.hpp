@@ -28,7 +28,7 @@ class BombBuilder
 		static BombBuilder& Instance();
 		~BombBuilder();
 
-        	Bomb* GetNewBombTemplate(int id = NONE_ID) const; 
+        	Bomb* GetNewBombTemplate(unsigned long int id = NONE_ID) const; 
                 Bomb* GetNewBomb(int damage = NONE_ID, int radius = NONE_ID) const;
         	 		                
         private:

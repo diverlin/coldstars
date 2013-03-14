@@ -34,7 +34,7 @@ class Base
 		void SetSubTypeId(int subtype_id)       { data_id.subtype_id = subtype_id; }
 		void SetSubSubTypeId(int subsubtype_id) { data_id.subsubtype_id = subsubtype_id; }
 		
-		int GetId()        	const { return data_id.id; }   
+		unsigned long int GetId()        	const { return data_id.id; }   
 		int GetTypeId()   	const { return data_id.type_id; }
 		int GetSubTypeId() 	const { return data_id.subtype_id; }
 		int GetSubSubTypeId() 	const { return data_id.subsubtype_id; }

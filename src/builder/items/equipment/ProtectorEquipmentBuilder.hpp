@@ -29,7 +29,7 @@ class ProtectorEquipmentBuilder
 		static ProtectorEquipmentBuilder& Instance();
 		~ProtectorEquipmentBuilder();
 
-        	ProtectorEquipment* GetNewProtectorEquipmentTemplate(int id = NONE_ID) const; 
+        	ProtectorEquipment* GetNewProtectorEquipmentTemplate(unsigned long int id = NONE_ID) const; 
                 ProtectorEquipment* GetNewProtectorEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int protection_orig = NONE_ID) const;
         	 		                
         private:

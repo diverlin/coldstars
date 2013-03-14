@@ -33,13 +33,13 @@ BombBuilder& BombBuilder::Instance()
 BombBuilder::~BombBuilder()
 {}
 
-Bomb* BombBuilder::GetNewBombTemplate(int id) const
+Bomb* BombBuilder::GetNewBombTemplate(unsigned long int id) const
 {
 	Bomb* bomb = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
    	try 
