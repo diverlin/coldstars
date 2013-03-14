@@ -30,7 +30,7 @@ class GalaxyBuilder
 		static GalaxyBuilder& Instance();
 		~GalaxyBuilder();
 
-        	Galaxy* GetNewGalaxyTemplate(int id = NONE_ID) const; 
+        	Galaxy* GetNewGalaxyTemplate(unsigned long int id = NONE_ID) const; 
         	Galaxy* GetNewGalaxy(const GalaxyDescription&) const; 
         	        	        	 		                
         private:

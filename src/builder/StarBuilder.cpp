@@ -36,13 +36,13 @@ StarBuilder& StarBuilder::Instance()
 StarBuilder::~StarBuilder()
 {}
 
-Star* StarBuilder::GetNewStarTemplate(int id) const
+Star* StarBuilder::GetNewStarTemplate(unsigned long int id) const
 {
 	Star* star = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
 	try 

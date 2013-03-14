@@ -220,7 +220,7 @@ enum SIZE
         SIZE_1_ID=1, SIZE_2_ID, SIZE_3_ID, SIZE_4_ID, SIZE_5_ID, SIZE_6_ID, SIZE_7_ID, SIZE_8_ID, SIZE_9_ID, SIZE_10_ID 
 };
 
-const int NONE_ID = -1;
+const int NONE_ID = 0;
 const int FAIL_ID = 1;
 const int SUCCESS_ID = 2;
 const int PERFORM_ID = 3;

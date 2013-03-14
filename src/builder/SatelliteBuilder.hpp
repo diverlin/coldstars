@@ -29,7 +29,7 @@ class SatelliteBuilder : public BaseVehicleBuilder
 		static SatelliteBuilder& Instance();
 		~SatelliteBuilder();
 		
-		Satellite* GetNewSatelliteTemplate(int id = NONE_ID) const;							
+		Satellite* GetNewSatelliteTemplate(unsigned long int id = NONE_ID) const;							
 		Satellite* GetNewSatellite() const;
        
         private:

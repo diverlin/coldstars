@@ -29,7 +29,7 @@ class DroidModuleBuilder
 		static DroidModuleBuilder& Instance();
 		~DroidModuleBuilder();
 
-        	DroidModule* GetNewDroidModuleTemplate(int id = NONE_ID) const; 
+        	DroidModule* GetNewDroidModuleTemplate(unsigned long int id = NONE_ID) const; 
                 DroidModule* GetNewDroidModule(int repair_add = NONE_ID) const;
         	 		                
         private:

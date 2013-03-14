@@ -25,11 +25,11 @@
 #include "../parts/Turrel.hpp"
 #include "../resources/textureOb.hpp"
 
-ItemSlot* GetNewItemSlot(int subtype_id, int id)
+ItemSlot* GetNewItemSlot(int subtype_id, unsigned long int id)
 {
        	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	} 
 
 	ItemSlot* item_slot = NULL;

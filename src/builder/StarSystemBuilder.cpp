@@ -47,13 +47,13 @@ StarSystemBuilder& StarSystemBuilder::Instance()
 StarSystemBuilder::~StarSystemBuilder()
 {}
 
-StarSystem* StarSystemBuilder::GetNewStarSystemTemplate(int id) const
+StarSystem* StarSystemBuilder::GetNewStarSystemTemplate(unsigned long int id) const
 {
 	StarSystem* starsystem = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 
@@ -94,7 +94,7 @@ void StarSystemBuilder::CreateBackground(StarSystem* starsystem, int distNebula_
 {
         for(int i=0; i<distNebula_num; i++)
         { 
-		DistantNebulaEffect* dn = GetNewDistantNebulaEffect(-1);
+		DistantNebulaEffect* dn = GetNewDistantNebulaEffect();
                 starsystem->Add(dn);
         } 
 

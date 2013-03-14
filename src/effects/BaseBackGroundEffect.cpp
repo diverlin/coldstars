@@ -20,7 +20,7 @@
 #include "../resources/TextureManager.hpp"
 #include "../render/Render.hpp"
 
-int BaseBackGroundEffect::counter;
+unsigned long int BaseBackGroundEffect::counter;
 
 BaseBackGroundEffect::BaseBackGroundEffect():textureOb(NULL), scale(1.f), parallax_rate(1.f)
 {

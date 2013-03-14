@@ -40,12 +40,12 @@ GalaxyBuilder& GalaxyBuilder::Instance()
 GalaxyBuilder::~GalaxyBuilder()
 {}
 
-Galaxy* GalaxyBuilder::GetNewGalaxyTemplate(int id) const
+Galaxy* GalaxyBuilder::GetNewGalaxyTemplate(unsigned long int id) const
 {
 	Galaxy* galaxy = NULL;
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

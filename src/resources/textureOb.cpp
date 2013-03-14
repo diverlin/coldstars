@@ -28,10 +28,10 @@ TextureOb::TextureOb()
 TextureOb::TextureOb(int _type_id, std::string _path, bool _use_alpha, std::vector<int>* pTo_arg, int _columns_num, int _rows_num, int _fps)
 {
     	// textureOb attributes INIT
-    	race_id = -1;
-    	tech_level_id = -1;
+    	race_id = NONE_ID;
+    	tech_level_id = NONE_ID;
 
-    	color_id = -1;
+    	color_id = NONE_ID;
     	is_rotated = false;
     	//
 

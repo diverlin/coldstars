@@ -33,13 +33,13 @@ ScanerModuleBuilder& ScanerModuleBuilder::Instance()
 ScanerModuleBuilder::~ScanerModuleBuilder()
 {}
 
-ScanerModule* ScanerModuleBuilder::GetNewScanerModuleTemplate(int id) const
+ScanerModule* ScanerModuleBuilder::GetNewScanerModuleTemplate(unsigned long int id) const
 {
 	ScanerModule* scaner_module = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

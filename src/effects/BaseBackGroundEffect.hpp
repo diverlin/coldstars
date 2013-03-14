@@ -35,9 +35,9 @@ class BaseBackGroundEffect
 	        void SetParallaxRate(float parallax_rate) 	{ this->parallax_rate = parallax_rate; };   
       		        	
         protected:
-       		int id;
+       		unsigned long int id;
 
-      		static int counter;
+      		static unsigned long int counter;
        		
        	       	TextureOb* textureOb;
        	       	std::string textureOb_path;

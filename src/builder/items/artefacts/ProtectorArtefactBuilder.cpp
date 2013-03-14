@@ -33,13 +33,13 @@ ProtectorArtefactBuilder& ProtectorArtefactBuilder::Instance()
 ProtectorArtefactBuilder::~ProtectorArtefactBuilder()
 {}
 
-ProtectorArtefact* ProtectorArtefactBuilder::GetNewProtectorArtefactTemplate(int id) const
+ProtectorArtefact* ProtectorArtefactBuilder::GetNewProtectorArtefactTemplate(unsigned long int id) const
 {
 	ProtectorArtefact* protector_artefact = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

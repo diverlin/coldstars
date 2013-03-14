@@ -28,7 +28,7 @@ class DriveModuleBuilder
 		static DriveModuleBuilder& Instance();
 		~DriveModuleBuilder();
 
-        	DriveModule* GetNewDriveModuleTemplate(int id = NONE_ID) const; 
+        	DriveModule* GetNewDriveModuleTemplate(unsigned long int id = NONE_ID) const; 
                 DriveModule* GetNewDriveModule(int speed_add = NONE_ID, int hyper_add = NONE_ID) const;
         	 		                
         private:

@@ -112,11 +112,11 @@ void GoodsPack::ResolveDataUniqueGoodsPack()
 }
 
 
-GoodsPack* GetNewGoodsPack(int subtype_id, int id)
+GoodsPack* GetNewGoodsPack(int subtype_id, unsigned long int id)
 {
         if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
         
 	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::CONTAINER_ID); 

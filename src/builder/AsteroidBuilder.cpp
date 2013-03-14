@@ -34,13 +34,13 @@ AsteroidBuilder& AsteroidBuilder::Instance()
 AsteroidBuilder::~AsteroidBuilder()
 {}
 
-Asteroid* AsteroidBuilder::GetNewAsteroidTemplate(int id) const
+Asteroid* AsteroidBuilder::GetNewAsteroidTemplate(unsigned long int id) const
 {
 	Asteroid* asteroid = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

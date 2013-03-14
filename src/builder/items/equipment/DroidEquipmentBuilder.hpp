@@ -28,7 +28,7 @@ class DroidEquipmentBuilder
 		static DroidEquipmentBuilder& Instance();
 		~DroidEquipmentBuilder();
 
-        	DroidEquipment* GetNewDroidEquipmentTemplate(int id = NONE_ID) const; 
+        	DroidEquipment* GetNewDroidEquipmentTemplate(unsigned long int id = NONE_ID) const; 
                 DroidEquipment* GetNewDroidEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int repair_orig = NONE_ID) const;
         	 		                
         private:

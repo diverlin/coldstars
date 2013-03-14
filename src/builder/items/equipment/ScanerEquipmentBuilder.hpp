@@ -28,7 +28,7 @@ class ScanerEquipmentBuilder
 		static ScanerEquipmentBuilder& Instance();
 		~ScanerEquipmentBuilder();
 
-        	ScanerEquipment* GetNewScanerEquipmentTemplate(int id = NONE_ID) const; 
+        	ScanerEquipment* GetNewScanerEquipmentTemplate(unsigned long int id = NONE_ID) const; 
                 ScanerEquipment* GetNewScanerEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int scan_orig = NONE_ID) const;
         	 		                
         private:

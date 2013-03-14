@@ -28,7 +28,7 @@ class AngarBuilder
 		static AngarBuilder& Instance();
 		~AngarBuilder();
 
-        	Angar* GetNewAngarTemplate(int id = NONE_ID) const; 
+        	Angar* GetNewAngarTemplate(unsigned long int id = NONE_ID) const; 
                 Angar* GetNewAngar() const;
 
         private:

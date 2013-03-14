@@ -33,12 +33,12 @@ DriveEquipmentBuilder& DriveEquipmentBuilder::Instance()
 DriveEquipmentBuilder::~DriveEquipmentBuilder()
 {}
 
-DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipmentTemplate(int id) const
+DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipmentTemplate(unsigned long int id) const
 {
 	DriveEquipment* drive_equipment = NULL;
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

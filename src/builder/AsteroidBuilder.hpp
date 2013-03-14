@@ -28,7 +28,7 @@ class AsteroidBuilder
 		static AsteroidBuilder& Instance();
 		~AsteroidBuilder();
 
-        	Asteroid* GetNewAsteroidTemplate(int id = NONE_ID) const; 
+        	Asteroid* GetNewAsteroidTemplate(unsigned long int id = NONE_ID) const; 
                 Asteroid* GetNewAsteroid() const;
         	 		                
         private:

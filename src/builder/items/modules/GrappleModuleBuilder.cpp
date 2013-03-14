@@ -33,13 +33,13 @@ GrappleModuleBuilder& GrappleModuleBuilder::Instance()
 GrappleModuleBuilder::~GrappleModuleBuilder()
 {}
 
-GrappleModule* GrappleModuleBuilder::GetNewGrappleModuleTemplate(int id) const
+GrappleModule* GrappleModuleBuilder::GetNewGrappleModuleTemplate(unsigned long int id) const
 {
 	GrappleModule* grapple_module = NULL;
 
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

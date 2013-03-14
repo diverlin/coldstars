@@ -28,7 +28,7 @@ class BakModuleBuilder
 		static BakModuleBuilder& Instance();
 		~BakModuleBuilder();
 
-        	BakModule* GetNewBakModuleTemplate(int id = NONE_ID) const; 
+        	BakModule* GetNewBakModuleTemplate(unsigned long int id = NONE_ID) const; 
                 BakModule* GetNewBakModule(int fuel_max_add = NONE_ID) const;
         	 		                
         private:

@@ -28,7 +28,7 @@ class PlayerBuilder
 		static PlayerBuilder& Instance();
 		~PlayerBuilder();
 
-        	Player* GetNewPlayerTemplate(int id = NONE_ID) const;
+        	Player* GetNewPlayerTemplate(unsigned long int id = NONE_ID) const;
         	Player* GetNewPlayer() const;
         	 		                
         private:               

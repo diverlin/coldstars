@@ -33,13 +33,13 @@ RocketEquipmentBuilder& RocketEquipmentBuilder::Instance()
 RocketEquipmentBuilder::~RocketEquipmentBuilder()
 {}
 
-RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipmentTemplate(int id) const
+RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipmentTemplate(unsigned long int id) const
 {
 	RocketEquipment* rocket_equipment = NULL;
 
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
  	try 

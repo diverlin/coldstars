@@ -28,7 +28,7 @@ class NatureLandBuilder
 		static NatureLandBuilder& Instance();
 		~NatureLandBuilder();
 
-        	NatureLand* GetNewNatureLandTemplate(int id = NONE_ID) const; 
+        	NatureLand* GetNewNatureLandTemplate(unsigned long int id = NONE_ID) const; 
                 NatureLand* GetNewNatureLand() const;
                        	 		                
         private:

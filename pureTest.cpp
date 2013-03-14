@@ -4,6 +4,7 @@
 #include "src/items/equipment/RadarEquipment.hpp"
 #include "src/common/gameStruct.hpp"
 #include "src/common/rand.hpp"
+#include "src/common/myStr.hpp"
 
 void pureTest1()
 {
@@ -43,4 +44,13 @@ void pureTest2()
 	
 	exit(0);
 		
+}
+
+void pureTest3()
+{	
+	unsigned long int uli = 5286255174080033224;
+	std::cout<<uli<<std::endl;
+	std::cout<<int2str(uli)<<std::endl;
+	
+	exit(0);		
 }

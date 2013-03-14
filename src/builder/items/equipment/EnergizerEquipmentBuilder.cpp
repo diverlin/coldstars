@@ -33,13 +33,13 @@ EnergizerEquipmentBuilder& EnergizerEquipmentBuilder::Instance()
 EnergizerEquipmentBuilder::~EnergizerEquipmentBuilder()
 {}
 
-EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipmentTemplate(int id) const
+EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipmentTemplate(unsigned long int id) const
 {
 	EnergizerEquipment* energizer_equipment = NULL;
 
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
  	try 

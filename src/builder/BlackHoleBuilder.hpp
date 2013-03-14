@@ -28,7 +28,7 @@ class BlackHoleBuilder
 		static BlackHoleBuilder& Instance();
 		~BlackHoleBuilder();
 
-        	BlackHole* GetNewBlackHoleTemplate(int id = NONE_ID) const; 
+        	BlackHole* GetNewBlackHoleTemplate(unsigned long int id = NONE_ID) const; 
                 BlackHole* GetNewBlackHole() const;
         	 		                
         private:

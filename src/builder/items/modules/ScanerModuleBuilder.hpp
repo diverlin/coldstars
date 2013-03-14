@@ -28,7 +28,7 @@ class ScanerModuleBuilder
 		static ScanerModuleBuilder& Instance();
 		~ScanerModuleBuilder();
 
-        	ScanerModule* GetNewScanerModuleTemplate(int id = NONE_ID) const; 
+        	ScanerModule* GetNewScanerModuleTemplate(unsigned long int id = NONE_ID) const; 
                 ScanerModule* GetNewScanerModule(int scan_add = NONE_ID) const;
         	 		                
         private:

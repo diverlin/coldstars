@@ -28,7 +28,7 @@ class ProtectorModuleBuilder
 		static ProtectorModuleBuilder& Instance();
 		~ProtectorModuleBuilder();
 
-        	ProtectorModule* GetNewProtectorModuleTemplate(int id = NONE_ID) const; 
+        	ProtectorModule* GetNewProtectorModuleTemplate(unsigned long int id = NONE_ID) const; 
                 ProtectorModule* GetNewProtectorModule(int protection_add = NONE_ID) const;
         	 		                
         private:

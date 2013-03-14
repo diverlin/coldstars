@@ -28,7 +28,7 @@ class BakEquipmentBuilder
 		static BakEquipmentBuilder& Instance();
 		~BakEquipmentBuilder();
 
-        	BakEquipment* GetNewBakEquipmentTemplate(int id = NONE_ID) const; 
+        	BakEquipment* GetNewBakEquipmentTemplate(unsigned long int id = NONE_ID) const; 
                 BakEquipment* GetNewBakEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int fuel_max_orig = NONE_ID) const;
         	 		                
         private:                

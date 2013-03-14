@@ -37,12 +37,12 @@ PlayerBuilder& PlayerBuilder::Instance()
 PlayerBuilder::~PlayerBuilder()
 {}
 
-Player* PlayerBuilder::GetNewPlayerTemplate(int id) const
+Player* PlayerBuilder::GetNewPlayerTemplate(unsigned long int id) const
 {
 	Player* player = NULL;
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
 	try 

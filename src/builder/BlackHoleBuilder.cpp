@@ -34,13 +34,13 @@ BlackHoleBuilder& BlackHoleBuilder::Instance()
 BlackHoleBuilder::~BlackHoleBuilder()
 {}
 
-BlackHole* BlackHoleBuilder::GetNewBlackHoleTemplate(int id) const
+BlackHole* BlackHoleBuilder::GetNewBlackHoleTemplate(unsigned long int id) const
 {
 	BlackHole* blackhole = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

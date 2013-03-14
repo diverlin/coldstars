@@ -26,11 +26,11 @@
 #include "../common/rand.hpp"
 #include "../resources/TextureManager.hpp"
 
-VehicleSlot* GetNewVehicleSlot(int id)
+VehicleSlot* GetNewVehicleSlot(unsigned long int id)
 {
        	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	} 
 
 	VehicleSlot* vehicle_slot = NULL;

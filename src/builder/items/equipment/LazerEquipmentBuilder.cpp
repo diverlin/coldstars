@@ -33,13 +33,13 @@ LazerEquipmentBuilder& LazerEquipmentBuilder::Instance()
 LazerEquipmentBuilder::~LazerEquipmentBuilder()
 {}
 
-LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipmentTemplate(int id) const
+LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipmentTemplate(unsigned long int id) const
 {
 	LazerEquipment* lazer_equipment = NULL; 
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

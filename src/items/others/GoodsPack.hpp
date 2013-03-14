@@ -49,6 +49,6 @@ class GoodsPack : public BaseItem
  		
 };
 
-GoodsPack* GetNewGoodsPack(int, int id = NONE_ID);
+GoodsPack* GetNewGoodsPack(int, unsigned long int id = NONE_ID);
 
 #endif 

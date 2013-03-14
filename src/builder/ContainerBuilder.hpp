@@ -31,7 +31,7 @@ class ContainerBuilder
 		static ContainerBuilder& Instance();
 		~ContainerBuilder();
 
-        	Container* GetNewContainerTemplate(int id = NONE_ID) const; 
+        	Container* GetNewContainerTemplate(unsigned long int id = NONE_ID) const; 
                 Container* GetNewContainer(TextureOb*, BaseItem*) const;
         	 		                
         private:

@@ -28,7 +28,7 @@ class RadarEquipmentBuilder
 		static RadarEquipmentBuilder& Instance();
 		~RadarEquipmentBuilder();
 
-        	RadarEquipment* GetNewRadarEquipmentTemplate(int id = NONE_ID) const; 
+        	RadarEquipment* GetNewRadarEquipmentTemplate(unsigned long int id = NONE_ID) const; 
                 RadarEquipment* GetNewRadarEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int radius_orig = NONE_ID) const;
         	 		                
         private:

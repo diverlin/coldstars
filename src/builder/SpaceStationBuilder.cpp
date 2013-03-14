@@ -35,12 +35,12 @@ SpaceStationBuilder& SpaceStationBuilder::Instance()
 
 SpaceStationBuilder::~SpaceStationBuilder() {}
 
-SpaceStation* SpaceStationBuilder::GetNewSpaceStationTemplate(int id) const
+SpaceStation* SpaceStationBuilder::GetNewSpaceStationTemplate(unsigned long int id) const
 {
 	SpaceStation* spacestation = NULL;
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 	        
 	try 

@@ -29,7 +29,7 @@ class GovermentBuilder
 		static GovermentBuilder& Instance();
 		~GovermentBuilder();
 
-        	Goverment* GetNewGovermentTemplate(int id = NONE_ID) const; 
+        	Goverment* GetNewGovermentTemplate(unsigned long int id = NONE_ID) const; 
                 Goverment* GetNewGoverment() const;
                        	 		                
         private:

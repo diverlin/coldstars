@@ -23,8 +23,8 @@
 class Base;
 class vec2f;
 
-std::string int2str(int var); 
-std::string bool2str(bool var); 
+std::string int2str(long long int); 
+std::string bool2str(bool); 
 std::string vec2f2str(const vec2f&);
 
 std::string getSpecialActionStr(int);

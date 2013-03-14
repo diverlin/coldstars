@@ -37,13 +37,13 @@ AngarBuilder& AngarBuilder::Instance()
 AngarBuilder::~AngarBuilder()
 {}
 
-Angar* AngarBuilder::GetNewAngarTemplate(int id) const
+Angar* AngarBuilder::GetNewAngarTemplate(unsigned long int id) const
 {
 	Angar* angar = NULL;
 	
 	if (id == NONE_ID) 
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
         
         try 

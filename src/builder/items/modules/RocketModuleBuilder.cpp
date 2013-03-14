@@ -33,13 +33,13 @@ RocketModuleBuilder& RocketModuleBuilder::Instance()
 RocketModuleBuilder::~RocketModuleBuilder()
 {}
 
-RocketModule* RocketModuleBuilder::GetNewRocketModuleTemplate(int id) const
+RocketModule* RocketModuleBuilder::GetNewRocketModuleTemplate(unsigned long int id) const
 {
 	RocketModule* rocket_module = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
         try 

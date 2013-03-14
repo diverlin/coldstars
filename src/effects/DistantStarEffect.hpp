@@ -21,6 +21,7 @@
 #define DISTANTSTAREFFECT_H
 
 #include "BaseBackGroundEffect.hpp"
+#include "../common/constants.hpp"
 
 class DistantStarEffect : public BaseBackGroundEffect
 {   
@@ -42,7 +43,7 @@ class DistantStarEffect : public BaseBackGroundEffect
        	
 }; 
 
-DistantStarEffect* GetNewDistantStarEffect(int color_id = -1);
+DistantStarEffect* GetNewDistantStarEffect(int color_id = NONE_ID);
 
 
 #endif 

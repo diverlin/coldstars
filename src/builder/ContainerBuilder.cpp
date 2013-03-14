@@ -34,13 +34,13 @@ ContainerBuilder& ContainerBuilder::Instance()
 ContainerBuilder::~ContainerBuilder()
 {}
 
-Container* ContainerBuilder::GetNewContainerTemplate(int id) const
+Container* ContainerBuilder::GetNewContainerTemplate(unsigned long int id) const
 {
 	Container* container = NULL;
 	
 	if (id == NONE_ID)
 	{
-		id = SimpleIdGenerator::Instance().GetNextId();
+		id = EntityIdGenerator::Instance().GetNextId();
 	}
         
         try 
