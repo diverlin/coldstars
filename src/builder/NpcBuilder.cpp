@@ -24,7 +24,7 @@
 #include "../ai/aiModel/AiModelRanger.hpp"
 #include "../ai/aiModel/AiModelTrader.hpp"
 
-#include "../common/id.hpp"
+#include "../common/IdGenerator.hpp"
 #include "../common/Logger.hpp"
 #include "../common/rand.hpp"
 

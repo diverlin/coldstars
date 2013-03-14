@@ -18,7 +18,7 @@
 
 #include "BakEquipmentBuilder.hpp"
 #include "../../../items/equipment/BakEquipment.hpp"
-#include "../../../common/id.hpp"
+#include "../../../common/IdGenerator.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../world/EntityManager.hpp"
 #include "../../../common/rand.hpp"

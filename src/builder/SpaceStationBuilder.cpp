@@ -20,7 +20,7 @@
 #include "KosmoportBuilder.hpp"
 #include "../docking/Kosmoport.hpp"
 
-#include "../common/id.hpp"
+#include "../common/IdGenerator.hpp"
 #include "../world/EntityManager.hpp"
 #include "../common/Logger.hpp"
 #include "../common/rand.hpp"

@@ -18,7 +18,7 @@
 
 #include "ProtectorModuleBuilder.hpp"
 #include "../../../items/modules/ProtectorModule.hpp"
-#include "../../../common/id.hpp"
+#include "../../../common/IdGenerator.hpp"
 #include "../../../world/EntityManager.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/rand.hpp"

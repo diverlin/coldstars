@@ -20,7 +20,7 @@
 
 #include "../docking/Shop.hpp"
 
-#include "../common/id.hpp"
+#include "../common/IdGenerator.hpp"
 #include "../common/Logger.hpp"
 #include "../world/EntityManager.hpp"
 #include "../resources/TextureManager.hpp"
