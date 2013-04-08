@@ -55,8 +55,8 @@ gui_vehicle_scan_shared(NULL),
 gui_skills_shared(NULL),
 slider_shared(NULL)
 {
-	int screen_w = Screen::Instance().GetWindow().GetWidth();
-	int screen_h = Screen::Instance().GetWindow().GetHeight();
+	int screen_w = Screen::Instance().GetWidth();
+	int screen_h = Screen::Instance().GetHeight();
 	
         TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
 
@@ -163,8 +163,8 @@ void GuiKosmoport::EnterGuiScanInAngar()
 	Logger::Instance().Log("GuiKosmoport::EnterGuiScanInAngar", GUI_LOG_DIP);
 	#endif	
 
-        int screen_w = Screen::Instance().GetWindow().GetWidth();
-        int screen_h = Screen::Instance().GetWindow().GetHeight();
+        int screen_w = Screen::Instance().GetWidth();
+        int screen_h = Screen::Instance().GetHeight();
 	vec2f center_screen(screen_w/2, screen_h/2);
         
         bool allow_full_control = player->IsAbleToGetFullControlOnScanedVehicle();
@@ -215,8 +215,8 @@ void GuiKosmoport::EnterGuiStoreScreen()
 	Logger::Instance().Log("GuiKosmoport::EnterGuiStoreScreen", GUI_LOG_DIP);
 	#endif	
 	
-        int screen_w = Screen::Instance().GetWindow().GetWidth();
-        int screen_h = Screen::Instance().GetWindow().GetHeight();
+        int screen_w = Screen::Instance().GetWidth();
+        int screen_h = Screen::Instance().GetHeight();
 	vec2f center_screen(screen_w/2, screen_h/2);
         
         gui_store.SetOffset(center_screen + GUI_STORE_OFFSET);
@@ -462,8 +462,8 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
 
 void GuiKosmoport::Render(const MouseData& data_mouse)
 {    	
-	Rect screen_rect(0, 0, Screen::Instance().GetWindow().GetWidth(), Screen::Instance().GetWindow().GetHeight());   
-	vec2f center_screen(Screen::Instance().GetWindow().GetWidth()/2, Screen::Instance().GetWindow().GetHeight()/2);
+	Rect screen_rect(0, 0, Screen::Instance().GetWidth(), Screen::Instance().GetHeight());   
+	vec2f center_screen(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);
 
 	switch(active_screen_id)
 	{

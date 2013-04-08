@@ -345,8 +345,8 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
      		
 void Player::RenderInSpace_NEW(StarSystem* starsystem)
 {   
-	int w = Screen::Instance().GetWindow().GetWidth();
-	int h = Screen::Instance().GetWindow().GetHeight();
+	int w = Screen::Instance().GetWidth();
+	int h = Screen::Instance().GetHeight();
 	vec2f world_coord(Screen::Instance().GetRect().GetBottomLeft());
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -636,7 +636,6 @@ void Player::RenderInSpace_OLD(StarSystem* starsystem)
     	{ 
         	visible_text_DAMAGE_vec[i]->Render(world_coord); 
     	}    		
-              
     	starsystem->RestoreSceneColor();
 }
 
@@ -679,7 +678,7 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
         		}
 		}
 	
-		cursor.RenderFocusedObjectStuff();
+		//cursor.RenderFocusedObjectStuff();
 		
 	disable_BLEND();  
 } 
@@ -1048,7 +1047,6 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 			if ( (gui_manager.GetGuiVehicleScan()->GetVehicle() == NULL) && (gui_manager.GetGuiGalaxyMap()->GetGalaxy() == NULL) )
 			{
 				mouse_interaction = MouseInteractionWithSpaceObjectsInSpace(cursor.GetMouseData());  
-				//mouse_interaction = cursor.UpdateInSpace();
 				if (mouse_interaction == false)
 				{	
 					MouseNavigation(cursor.GetMouseData());  

@@ -50,8 +50,8 @@ gui_skills_shared(NULL),
 slider_shared(NULL),
 init_done(false)
 {   	
-    	int screen_w = Screen::Instance().GetWindow().GetWidth();
-    	int screen_h = Screen::Instance().GetWindow().GetHeight();
+    	int screen_w = Screen::Instance().GetWidth();
+    	int screen_h = Screen::Instance().GetHeight();
     	
     	ButtonTrigger* galaxymap_button = new ButtonTrigger(GuiTextureObCollector::Instance().icon_map, GUI::BUTTON::GALAXYMAP_ID, "galaxy map");    
     	galaxymap_button->SetRect(Rect(screen_w - (GUI::ICON_SIZE + 5),
@@ -162,8 +162,8 @@ void GuiSpace::EnterGuiScan()
 	Logger::Instance().Log("GuiSpace::EnterGuiScan", GUI_LOG_DIP);
 	#endif
 	
-        int screen_w = Screen::Instance().GetWindow().GetWidth();
-        int screen_h = Screen::Instance().GetWindow().GetHeight();
+        int screen_w = Screen::Instance().GetWidth();
+        int screen_h = Screen::Instance().GetHeight();
 	vec2f center_screen(screen_w/2, screen_h/2);
         
         bool allow_full_control = player->IsAbleToGetFullControlOnScanedVehicle();
@@ -256,18 +256,18 @@ void GuiSpace::RenderText(const vec2f& scroll_coords) const
 {
 	std::string _coord_str = "date:"+ GameDate::Instance().GetDate().GetStr()+" world coord: " + int2str(scroll_coords.x) + "," + int2str(scroll_coords.y);
 
-	sf::String _str(_coord_str, Screen::Instance().GetFont(), 12);
-	_str.SetColor(sf::Color(255, 255, 255));
-	_str.SetPosition(Screen::Instance().GetWindow().GetWidth() - 400, 5); 
+	sf::Text _str(_coord_str, Screen::Instance().GetFont(), 12);
+	_str.setColor(sf::Color(255, 255, 255));
+	_str.setPosition(Screen::Instance().GetWidth() - 400, 5); 
 
-	Screen::Instance().GetWindow().Draw(_str);    
+	Screen::Instance().DrawText(_str);    
 }
 
                                             
 bool GuiSpace::Update(const MouseData& data_mouse)
 {
-	int screen_w = Screen::Instance().GetWindow().GetWidth();
-        int screen_h = Screen::Instance().GetWindow().GetHeight();
+	int screen_w = Screen::Instance().GetWidth();
+        int screen_h = Screen::Instance().GetHeight();
         Rect screen_rect(0, 0, screen_w, screen_h);   
 	vec2f center_screen(screen_w/2, screen_h/2);
                             

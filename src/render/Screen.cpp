@@ -12,7 +12,7 @@ Screen& Screen::Instance()
       	return instance;
 }
     
-Screen::Screen()
+Screen::Screen()/*:RenderWindow(sf::VideoMode(800, 600), "SFML OpenGL", sf::Style::Default, sf::ContextSettings(32))*/
 {}
 
 Screen::~Screen()
@@ -24,11 +24,11 @@ void Screen::InitBasic(int width, int height, int bpp, bool vert_sync, const std
       	this->vert_sync = vert_sync;
       	auto_scroll = false;
       	
-      	render_window.Create(sf::VideoMode(width, height, bpp), title);
-      	render_window.SetFramerateLimit(Config::Instance().FPS_LIMIT); 
-    	render_window.UseVerticalSync(vert_sync);
-    	render_window.PreserveOpenGLStates(true);
-    	 	
+      	create(sf::VideoMode(width, height, bpp), title);
+      	setFramerateLimit(Config::Instance().FPS_LIMIT); 
+    	setVerticalSyncEnabled(vert_sync);
+
+      	glewInit();    	 	
       	initGl(width, height);
       	
       	rect.Set(0.0, 0.0, width, height);
@@ -49,11 +49,11 @@ void Screen::InitPostEffects(int width, int height)
 	       	
 void Screen::DrawFps()
 {
-	float fps = 1.f / render_window.GetFrameTime();
-      	sf::String _str(std::string("FPS:" + boost::lexical_cast<std::string>( (int)fps) +" / game_speed: x" + boost::lexical_cast<std::string>( Config::Instance().GAME_SPEED) ), font, 14);
-      	_str.SetColor(sf::Color(255, 255, 255));
-      	_str.SetPosition(100, 10);
-      	render_window.Draw(_str);
+	//float fps = 1.f / getFrameTime();
+      	//sf::Text _str(std::string("FPS:" + boost::lexical_cast<std::string>( (int)fps) +" / game_speed: x" + boost::lexical_cast<std::string>( Config::Instance().GAME_SPEED) ), font, 14);
+      	//_str.setColor(sf::Color(255, 255, 255));
+      	//_str.setPosition(100, 10);
+      	//render_window.draw(_str);
 }
     
     
@@ -62,9 +62,10 @@ void Screen::Resize(int width, int height)
 {
 	resizeGl(width, height);
 	
-	view.SetFromRect(sf::FloatRect(0, 0, width, height));
-	render_window.SetView(view);	
-	render_window.SetSize(width, height);
+	view.setViewport(sf::FloatRect(0, 0, width, height));
+	setView(view);
+	sf::Vector2u size(width, height);
+	setSize(size);
 	
 	if (Config::Instance().MODERN_EFFECTS == true)
 	{
@@ -107,9 +108,15 @@ void Screen::UpdateInSpace()
 void Screen::Draw()
 {
   	DrawFps();
-  	render_window.Display();
+  	display();
 }
 
-
+void Screen::DrawText(sf::Text& text)
+{
+	pushGLStates();
+	draw(text);
+	popGLStates();
+	     	
+}
 
    

@@ -14,6 +14,8 @@ set (LIBRARIES
 
 add_definitions (-Wall -pedantic -std=c++0x -std=gnu++0x -pedantic-errors -Wextra -w -Waddress -Wc++0x-compat)
 
+include_directories(dependencies/SFML2/include/)
+
 set (HEADERS
 
 )
@@ -258,15 +260,14 @@ set (SOURCES
 	src/world/HyperSpace.cpp
 	src/resources/ObjMeshInstance.cpp
 
-  	main.cpp
+  	src/main.cpp
 )
 
 add_executable (${PROJECT} ${HEADERS} ${SOURCES})
-target_link_libraries (${PROJECT} ${LIBRARIES} sfml-system sfml-graphics sfml-window GL GLU GLEW boost_system boost_filesystem)
-target_link_libraries (${PROJECT})
+target_link_libraries (${PROJECT} ${LIBRARIES} sfml-system sfml-graphics sfml-window GL GLU GLEW boost_system)
 
 ADD_CUSTOM_COMMAND(
   TARGET ${PROJECT}
   POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT} ../${PROJECT}
+  COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT} ../bin/${PROJECT}
   )

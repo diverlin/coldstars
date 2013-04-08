@@ -19,7 +19,6 @@
 #include "resources.hpp"
 #include "../common/constants.hpp"
 #include "../config/config.hpp"
-#include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
 #include "ShaderCollector.hpp"
 #include "GlslLoader.hpp"
 #include "../render/Screen.hpp"
@@ -42,10 +41,9 @@ void loadGameData()
     	if (Config::Instance().MODERN_EFFECTS == true)
 	{
 		loadShaders();
-		Screen::Instance().InitPostEffects(Screen::Instance().GetWindow().GetWidth(), Screen::Instance().GetWindow().GetHeight());
+		Screen::Instance().InitPostEffects(Screen::Instance().GetWidth(), Screen::Instance().GetHeight());
 	}
-	
-    	Screen::Instance().GetFont().LoadFromFile("data/font/font.ttf");
+    	Screen::Instance().GetFont().loadFromFile("data/font/font.ttf");
 }
 
 
@@ -1294,84 +1292,91 @@ void loadImages()
 
 void loadShaders()
 {
-	{
-	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/black2alpha.vert")); 
-	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/black2alpha.frag")); 
+	//{
+	//boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/black2alpha.vert")); 
+	//boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/black2alpha.frag")); 
+	//ShaderCollector::Instance().black2alpha = glCreateProgram();
+	//compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShaderCollector::Instance().black2alpha);
+	//}
 
+	{
+	const std::string pv = "data/shaders/black2alpha.vert"; 
+	const std::string pf = "data/shaders/black2alpha.frag"; 
+	
 	ShaderCollector::Instance().black2alpha = glCreateProgram();
-	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShaderCollector::Instance().black2alpha);
+	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().black2alpha);
 	}
-
+	
 	{
-	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/shockwave.vert")); 
-	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/shockwave.frag")); 
+	const std::string pv = "data/shaders/shockwave.vert"; 
+	const std::string pf = "data/shaders/shockwave.frag"; 
 
 	ShaderCollector::Instance().shockwave = glCreateProgram();
-	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShaderCollector::Instance().shockwave);
+	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().shockwave);
 	}
 
 	{
-	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/volumetricLight.vert")); 
-	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/volumetricLight.frag")); 
+	const std::string pv = "data/shaders/volumetricLight.vert"; 
+	const std::string pf = "data/shaders/volumetricLight.frag"; 
 
 	ShaderCollector::Instance().volumetriclight = glCreateProgram();
-	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShaderCollector::Instance().volumetriclight);
+	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().volumetriclight);
 	}
 
 	{
-	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/light.vert")); 
-	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/light.frag")); 
+	const std::string pv = "data/shaders/light.vert"; 
+	const std::string pf = "data/shaders/light.frag"; 
 
 	ShaderCollector::Instance().light = glCreateProgram();
-	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShaderCollector::Instance().light);
+	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().light);
 	}
 
 	{
-	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/blur.vert")); 
-	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/blur.frag")); 
+	const std::string pv = "data/shaders/blur.vert"; 
+	const std::string pf = "data/shaders/blur.frag"; 
 
 	ShaderCollector::Instance().blur = glCreateProgram();
-	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShaderCollector::Instance().blur);
+	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().blur);
 	}
 
 	{
-	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/extractBright.vert")); 
-	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/extractBright.frag")); 
+	const std::string pv = "data/shaders/extractBright.vert"; 
+	const std::string pf = "data/shaders/extractBright.frag"; 
 
 	ShaderCollector::Instance().extractbright = glCreateProgram();
-	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShaderCollector::Instance().extractbright);
+	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().extractbright);
 	}
 
 	{
-	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/combine.vert")); 
-	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/combine.frag")); 
+	const std::string pv = "data/shaders/combine.vert"; 
+	const std::string pf = "data/shaders/combine.frag"; 
 
 	ShaderCollector::Instance().combine = glCreateProgram();
-	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShaderCollector::Instance().combine);
+	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().combine);
 	}
 
 	{
-	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/multitex.vert")); 
-	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/multitex.frag")); 
+	const std::string pv = "data/shaders/multitex.vert"; 
+	const std::string pf = "data/shaders/multitex.frag"; 
 
 	ShaderCollector::Instance().multitexturing = glCreateProgram();
-	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShaderCollector::Instance().multitexturing);
+	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().multitexturing);
 	}
 
 	{
-	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/blank.vert")); 
-	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/blank.frag")); 
+	const std::string pv = "data/shaders/blank.vert"; 
+	const std::string pf = "data/shaders/blank.frag"; 
 
 	ShaderCollector::Instance().blank = glCreateProgram();
-	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShaderCollector::Instance().blank);
+	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().blank);
 	}
 
 	{
-	boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/fogwarspark.vert")); 
-	boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/fogwarspark.frag")); 
+	const std::string pv = "data/shaders/fogwarspark.vert"; 
+	const std::string pf = "data/shaders/fogwarspark.frag"; 
 
 	ShaderCollector::Instance().fogwarspark = glCreateProgram();
-	compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShaderCollector::Instance().fogwarspark);
+	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().fogwarspark);
 	}
 }
 

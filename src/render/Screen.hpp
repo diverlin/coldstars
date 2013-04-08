@@ -2,7 +2,6 @@
 #define WINDOW_H
 
 #include <GL/glew.h>
-#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
 #include "../common/myVector.hpp"
@@ -11,18 +10,20 @@
 #include "../common/rect.hpp"
 
 
-class Screen:private sf::NonCopyable
+class Screen : public sf::RenderWindow
 {
 	public:
       		static Screen& Instance();
         	void InitBasic(int width, int height, int bpp, bool vert_sync, const std::string&);
       		void InitPostEffects(int, int);
                 
-              	sf::RenderWindow& GetWindow() { return render_window; };
+                int GetWidth() const { return getSize().x; };
+                int GetHeight() const { return getSize().y; };
+                                
       		sf::Font& GetFont() { return font; };      			
        	     	
         	Rect& GetRect() { return rect; };
-        	     			
+        	     		
         	Fbo& GetFbo0() { return fbo0; };
 		Fbo& GetFbo1() { return fbo1; };
 		Fbo& GetFbo2() { return fbo2; };
@@ -39,6 +40,7 @@ class Screen:private sf::NonCopyable
         	void Resize(int, int);   
 			
 		void Draw();	
+		void DrawText(sf::Text&);
 
     	private:
       		Screen();
@@ -52,8 +54,6 @@ class Screen:private sf::NonCopyable
       		bool auto_scroll;
       		
       		sf::Clock precise_clock;
-      			
-      		sf::RenderWindow render_window;
       		sf::Font font;
       		sf::View view;
       		

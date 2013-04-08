@@ -83,12 +83,13 @@ void Cursor::UpdateMouseStuff()
    	data_mouse.left_click = false;
    	data_mouse.right_click = false;
    	
-        const sf::Input& Input = Screen::Instance().GetWindow().GetInput();
-        data_mouse.left_press  = Input.IsMouseButtonDown(sf::Mouse::Left);
-        data_mouse.right_press = Input.IsMouseButtonDown(sf::Mouse::Right);        
+        sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance());
+        
+        data_mouse.left_press  = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+        data_mouse.right_press = sf::Mouse::isButtonPressed(sf::Mouse::Right);       
 
-        data_mouse.mx = Input.GetMouseX();
-        data_mouse.my = Screen::Instance().GetWindow().GetHeight() - Input.GetMouseY();
+        data_mouse.mx = mouse_pos.x;
+        data_mouse.my = Screen::Instance().GetHeight() - mouse_pos.y;
                 
         data_mouse.mxvp = data_mouse.mx + Screen::Instance().GetRect().GetBottomLeft().x;
     	data_mouse.myvp = data_mouse.my + Screen::Instance().GetRect().GetBottomLeft().y;
