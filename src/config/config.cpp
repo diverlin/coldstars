@@ -27,8 +27,7 @@ GAME_SPEED(1),
 
 SCROLL_VELOCITY_MAX(20),
 SCROLL_VELOCITY_STEP(1),
-mouse_camera_scroll(false)
-		
+mouse_camera_scroll(false)		
 {
 	boost::property_tree::info_parser::read_info("config.info", ptree);
 

@@ -32,8 +32,8 @@ GuiRadar::GuiRadar()
 	textureOb_range		= GuiTextureObCollector::Instance().radar_range;
 			
 	scale = RADAR_SCALE;
-	int screen_w = Screen::Instance().GetWindow().GetWidth();
-    	int screen_h = Screen::Instance().GetWindow().GetHeight();
+	int screen_w = Screen::Instance().GetWidth();
+    	int screen_h = Screen::Instance().GetHeight();
     	Resize(screen_w, screen_h);
 }
 
@@ -52,7 +52,7 @@ void GuiRadar::Reset()
     
 void GuiRadar::Update()
 {
-	screenrect.Set(rect.GetCenter() + Screen::Instance().GetRect().GetBottomLeft() * scale, (int)(Screen::Instance().GetWindow().GetWidth() * scale), (int)(Screen::Instance().GetWindow().GetWidth() * scale));
+	screenrect.Set(rect.GetCenter() + Screen::Instance().GetRect().GetBottomLeft() * scale, (int)(Screen::Instance().GetWidth() * scale), (int)(Screen::Instance().GetHeight() * scale));
 }
 
 bool GuiRadar::UpdateMouseInteraction(const MouseData& data_mouse)

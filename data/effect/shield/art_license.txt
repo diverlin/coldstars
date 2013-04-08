@@ -1,8 +1,0 @@
-##################################
-# Project:      new (not named yet)
-# License:	see in << /data/license/new_art_info.txt >>
-##################################
-all png
-##################################
-
-

@@ -1,10 +1,10 @@
 
 #include <vector>
 #include <iostream>
-#include "src/items/equipment/RadarEquipment.hpp"
-#include "src/common/gameStruct.hpp"
-#include "src/common/rand.hpp"
-#include "src/common/myStr.hpp"
+#include "items/equipment/RadarEquipment.hpp"
+#include "common/gameStruct.hpp"
+#include "common/rand.hpp"
+#include "common/myStr.hpp"
 
 void pureTest1()
 {

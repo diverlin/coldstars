@@ -58,8 +58,8 @@ void Slider::Configure(int ammount_total, int price_for_one)
 	this->ammount_total = ammount_total;
 	this->price_for_one  = price_for_one;
 
-	offset.x = Screen::Instance().GetWindow().GetWidth()/2;
-	offset.y = Screen::Instance().GetWindow().GetHeight()/2;
+	offset.x = Screen::Instance().GetWidth()/2;
+	offset.y = Screen::Instance().GetHeight()/2;
 	
 	ammount_selected = 0;
 	price_selected = 0;

@@ -18,28 +18,28 @@
 
 #include "pureTest.cpp"
 
-#include "src/resources/init.hpp"
+#include "resources/init.hpp"
 
-#include "src/builder/GalaxyBuilder.hpp"
-#include "src/builder/PlayerBuilder.hpp"
-#include "src/config/config.hpp"
-#include "src/world/EntityManager.hpp"
+#include "builder/GalaxyBuilder.hpp"
+#include "builder/PlayerBuilder.hpp"
+#include "config/config.hpp"
+#include "world/EntityManager.hpp"
 
-#include "src/render/Screen.hpp"
-#include "src/gui/UserInput.hpp"
+#include "render/Screen.hpp"
+#include "gui/UserInput.hpp"
 
-#include "src/common/TurnTimer.hpp"
-#include "src/pilots/Npc.hpp"
-#include "src/spaceobjects/Planet.hpp"
+#include "common/TurnTimer.hpp"
+#include "pilots/Npc.hpp"
+#include "spaceobjects/Planet.hpp"
 
-#include "src/world/galaxy.hpp"
-#include "src/world/starsystem.hpp"
+#include "world/galaxy.hpp"
+#include "world/starsystem.hpp"
 
-#include "src/garbage/EntityGarbage.hpp"
+#include "garbage/EntityGarbage.hpp"
 
-#include "src/world/God.hpp"
+#include "world/God.hpp"
 
-#include "src/world/GalaxyDescription.hpp"
+#include "world/GalaxyDescription.hpp"
 
 int main()
 {          
@@ -72,7 +72,7 @@ int main()
         
 	Player* player = PlayerBuilder::Instance().GetNewPlayer();
 
-        bool player2space = false;
+        bool player2space = true;
         if (player2space == true)
         {
                 vec2f center(400, 400);
@@ -90,8 +90,9 @@ int main()
 	//Screen::Instance().Resize(Config::Instance().SCREEN_WIDTH/1.5, Config::Instance().SCREEN_HEIGHT);
 
 	// GAME LOOP
-	while (Screen::Instance().GetWindow().IsOpened())
+	while (Screen::Instance().isOpen())
 	{    
+		//std::cout<<"fnew_rame"<<std::endl;
 		/* server code start */
 		TurnTimer::Instance().Update();
 

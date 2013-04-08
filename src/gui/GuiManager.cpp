@@ -131,8 +131,8 @@ bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
 
 bool GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 {    	
-	Rect screen_rect(0, 0, Screen::Instance().GetWindow().GetWidth(), Screen::Instance().GetWindow().GetHeight());   
-	vec2f center_screen(Screen::Instance().GetWindow().GetWidth()/2, Screen::Instance().GetWindow().GetHeight()/2);       			
+	Rect screen_rect(0, 0, Screen::Instance().GetWidth(), Screen::Instance().GetHeight());   
+	vec2f center_screen(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);       			
         			
  	UserInput::Instance().UpdateInKosmoport(player, *this);
      	player->GetCursor().Update(); 

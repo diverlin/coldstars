@@ -16,6 +16,8 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include <SFML/Graphics/Image.hpp>
+
 #include "textureOb.hpp"
 #include "../common/constants.hpp"
 #include "../common/IdGenerator.hpp"
@@ -120,14 +122,14 @@ int TextureOb::GetFrameHeight() const { return h_slice;}
         	
 void TextureOb::loadToVRAM()
 {
-     	sf::Image Image;
-     	Image.LoadFromFile(path);
-     	w = Image.GetWidth();
-     	h = Image.GetHeight();
+     	sf::Image image;
+     	image.loadFromFile(path);
+     	w = image.getSize().x;
+     	h = image.getSize().y;
 
      	glGenTextures(1, &texture);
      	glBindTexture(GL_TEXTURE_2D, texture);
-     	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, w, h, GL_RGBA, GL_UNSIGNED_BYTE, Image.GetPixelsPtr());
+     	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, w, h, GL_RGBA, GL_UNSIGNED_BYTE, image.getPixelsPtr());
         
      	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
      	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -195,7 +197,7 @@ int TextureOb::updateAnimationFrame()
 {
 	if (is_animated)
 	{
-		float elapsed_time = Screen::Instance().GetPreciseClock().GetElapsedTime();
+		float elapsed_time = Screen::Instance().GetPreciseClock().getElapsedTime().asSeconds();
      		if (elapsed_time - last_update_time > delay)
      		{
          		frame++;
