@@ -67,15 +67,6 @@ void drawLine(TextureOb* texOb,
               float angle_inD, 
               int half_h);
 
-
-void drawSimpleText(const std::string& str, int font_size, float pos_x, float pos_y);
-             
-void drawSimpleColoredText(std::string, 
-			   int,
-			   const vec2f&, 
-			   const Color4i&,
-			   const vec2f&);
-
 void drawSimpleColoredTextWithBackground(std::string, 
 			   int,
 			   const vec2f&, 

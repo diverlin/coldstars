@@ -90,7 +90,7 @@ int main()
 	//Screen::Instance().Resize(Config::Instance().SCREEN_WIDTH/1.5, Config::Instance().SCREEN_HEIGHT);
 
 	// GAME LOOP
-	while (Screen::Instance().isOpen())
+	while (Screen::Instance().GetWindow().isOpen())
 	{    
 		//std::cout<<"fnew_rame"<<std::endl;
 		/* server code start */

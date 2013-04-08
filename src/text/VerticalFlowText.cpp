@@ -19,6 +19,7 @@
 #include "VerticalFlowText.hpp"
 #include "../common/rand.hpp"
 #include "../render/Render.hpp"
+#include "../render/Screen.hpp"
 
 VerticalFlowText::VerticalFlowText(const std::string& str, 
 					int font_size,
@@ -68,7 +69,8 @@ void VerticalFlowText::Render(const vec2f& scroll_coords) const
 {
         if (is_alive == true)
         {
-                drawSimpleColoredText(str, font_size, pos, color, scroll_coords);
+        	vec2f npos(pos.x-scroll_coords.x, pos.y+scroll_coords.y);
+                Screen::Instance().DrawText(str, font_size, npos, color);
         }
 }
  

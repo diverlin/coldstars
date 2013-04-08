@@ -20,6 +20,7 @@
 #include "BaseButton.hpp"
 #include "../common/constants.hpp"
 #include "../render/Render.hpp"
+#include "../render/Screen.hpp"
 #include "../render/AnimationEffect2D.hpp"
 
 BaseButton::BaseButton(TextureOb* textureOb, int subtype_id, const std::string& info)
@@ -114,7 +115,8 @@ void BaseButton::Render(int offset_x, int offset_y) const
    		
 	if (label != "")
 	{
-		drawSimpleText(label, 12, rect.GetBottomLeft().x + offset_x, rect.GetBottomLeft().y + rect.GetHeight() + offset_y);
+		vec2f pos(rect.GetBottomLeft().x + offset_x, rect.GetBottomLeft().y + rect.GetHeight() + offset_y);
+		Screen::Instance().DrawText(label, 12, pos);
 	}
 }
 		
