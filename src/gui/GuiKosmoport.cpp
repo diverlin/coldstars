@@ -502,7 +502,7 @@ void GuiKosmoport::Render(const MouseData& data_mouse)
 	        		RenderButtons(); 
 				RenderFocusedButtonInfo(data_mouse); 
 			disable_BLEND();
-			drawSimpleText("credits:"+int2str(player->GetNpc()->GetCredits()), 12, 600, 200);
+			Screen::Instance().DrawText("credits:"+int2str(player->GetNpc()->GetCredits()), 12, vec2f(600, 200));
 
 			break;
 		}

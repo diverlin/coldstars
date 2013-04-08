@@ -83,6 +83,7 @@ set (SOURCES
 	src/ai/StateMachine.cpp
 
 	src/render/Screen.cpp
+	src/render/WindowWrapper.cpp
 	src/render/Fbo.cpp
 	src/render/Bloom.cpp
 	src/render/Render.cpp

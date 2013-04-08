@@ -12,7 +12,7 @@ Screen& Screen::Instance()
       	return instance;
 }
     
-Screen::Screen()/*:RenderWindow(sf::VideoMode(800, 600), "SFML OpenGL", sf::Style::Default, sf::ContextSettings(32))*/
+Screen::Screen()
 {}
 
 Screen::~Screen()
@@ -20,13 +20,9 @@ Screen::~Screen()
 
 void Screen::InitBasic(int width, int height, int bpp, bool vert_sync, const std::string& title)
 {	
-      	this->bpp = bpp;
-      	this->vert_sync = vert_sync;
       	auto_scroll = false;
       	
-      	create(sf::VideoMode(width, height, bpp), title);
-      	setFramerateLimit(Config::Instance().FPS_LIMIT); 
-    	setVerticalSyncEnabled(vert_sync);
+	wrCreateWindowSpecific(width, height, bpp, vert_sync, title);
 
       	glewInit();    	 	
       	initGl(width, height);
@@ -62,10 +58,7 @@ void Screen::Resize(int width, int height)
 {
 	resizeGl(width, height);
 	
-	view.setViewport(sf::FloatRect(0, 0, width, height));
-	setView(view);
-	sf::Vector2u size(width, height);
-	setSize(size);
+	wrResizeSpecific(width, height);
 	
 	if (Config::Instance().MODERN_EFFECTS == true)
 	{
@@ -108,15 +101,8 @@ void Screen::UpdateInSpace()
 void Screen::Draw()
 {
   	DrawFps();
-  	display();
+  	wrDrawSpecific();
 }
 
-void Screen::DrawText(sf::Text& text)
-{
-	pushGLStates();
-	draw(text);
-	popGLStates();
-	     	
-}
 
    

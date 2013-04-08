@@ -254,13 +254,10 @@ void GuiSpace::RenderBar() const
 
 void GuiSpace::RenderText(const vec2f& scroll_coords) const
 {
-	std::string _coord_str = "date:"+ GameDate::Instance().GetDate().GetStr()+" world coord: " + int2str(scroll_coords.x) + "," + int2str(scroll_coords.y);
+	const std::string _coord_str = "date:"+ GameDate::Instance().GetDate().GetStr()+" world coord: " + int2str(scroll_coords.x) + "," + int2str(scroll_coords.y);
+	vec2f pos(Screen::Instance().GetWidth() - 400, 5);
 
-	sf::Text _str(_coord_str, Screen::Instance().GetFont(), 12);
-	_str.setColor(sf::Color(255, 255, 255));
-	_str.setPosition(Screen::Instance().GetWidth() - 400, 5); 
-
-	Screen::Instance().DrawText(_str);    
+	Screen::Instance().DrawText(_coord_str, 12, pos);    
 }
 
                                             

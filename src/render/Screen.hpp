@@ -2,25 +2,20 @@
 #define WINDOW_H
 
 #include <GL/glew.h>
-#include <SFML/Graphics.hpp>
 
 #include "../common/myVector.hpp"
 #include "../render/Fbo.hpp"
 #include "../render/Bloom.hpp"
 #include "../common/rect.hpp"
+#include "WindowWrapper.hpp"
 
 
-class Screen : public sf::RenderWindow
+class Screen : public WindowWrapper
 {
 	public:
       		static Screen& Instance();
         	void InitBasic(int width, int height, int bpp, bool vert_sync, const std::string&);
       		void InitPostEffects(int, int);
-                
-                int GetWidth() const { return getSize().x; };
-                int GetHeight() const { return getSize().y; };
-                                
-      		sf::Font& GetFont() { return font; };      			
        	     	
         	Rect& GetRect() { return rect; };
         	     		
@@ -31,31 +26,20 @@ class Screen : public sf::RenderWindow
 		Fbo& GetFbo4() { return fbo4; }
 		BloomEffect& GetBloom() { return bloom; };	
 		
-		const sf::Clock& GetPreciseClock() const { return precise_clock; };
-		
 		void MovingBy(const vec2f&);
 		void InitiateScrollTo(const vec2f& scroll_coord) { target_center = scroll_coord; auto_scroll = true; };
 		void UpdateInSpace();
 		
         	void Resize(int, int);   
-			
-		void Draw();	
-		void DrawText(sf::Text&);
+		void Draw();
 
     	private:
       		Screen();
       		~Screen();
       		Screen(const Screen&) = delete;
       		Screen& operator=(const Screen&) = delete;
-
-      		int bpp;
-      		bool vert_sync;
       		
       		bool auto_scroll;
-      		
-      		sf::Clock precise_clock;
-      		sf::Font font;
-      		sf::View view;
       		
       		Fbo fbo0;
 		Fbo fbo1;

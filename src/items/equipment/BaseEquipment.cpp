@@ -23,6 +23,7 @@
 #include "../../common/myStr.hpp"
 #include "../../slots/ItemSlot.hpp"
 #include "../../render/Render.hpp"
+#include "../../render/Screen.hpp"
 #include "../../resources/GuiTextureObCollector.hpp"
 #include "../../common/Logger.hpp"
 #include "../../garbage/EntityGarbage.hpp"
@@ -127,14 +128,16 @@ void BaseEquipment::Render(const Rect& rect1, const vec2f& gui_offset, bool draw
 	{
 		int font_size = 12;		
     		drawTexturedRect(GuiTextureObCollector::Instance().slot_mark_accept, rect, -1.0f);
-    		drawSimpleText(int2str(locked_turns), font_size, rect.GetCenter().x - font_size/2 + gui_offset.x, rect.GetTopRight().y - font_size + gui_offset.y);	
+    		vec2f pos(rect.GetCenter().x - font_size/2 + gui_offset.x, rect.GetTopRight().y - font_size + gui_offset.y);
+    		Screen::Instance().DrawText(int2str(locked_turns), font_size, pos);	
 	}
 
 	if (draw_text == true)
 	{
     		if (data_id.subtype_id == ENTITY::ROCKET_EQUIPMENT_ID)
         	{
-        		drawSimpleText( int2str(((RocketEquipment*)this)->GetAmmo()) + "/" + int2str(((RocketEquipment*)this)->GetAmmoMax()), 12, rect.GetCenter().x - rect.GetWidth()/2 + gui_offset.x, rect.GetCenter().y + gui_offset.y);
+        		vec2f pos(rect.GetCenter().x - rect.GetWidth()/2 + gui_offset.x, rect.GetCenter().y + gui_offset.y);
+        		Screen::Instance().DrawText(int2str(((RocketEquipment*)this)->GetAmmo()) + "/" + int2str(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);
 		}
 	}
 }

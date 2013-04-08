@@ -147,9 +147,20 @@ void Slider::Render() const
 	}
 	glPopMatrix();
 	
-	drawSimpleText("0" , 12, rect.GetBottomLeft().x + offset.x, rect.GetBottomLeft().y + rect.GetHeight() + offset.y);	
-	drawSimpleText(int2str(ammount_selected)+" :"+int2str(price_selected) + "$", 12, rect.GetBottomLeft().x + rect.GetWidth()/2 - 20 + offset.x, rect.GetBottomLeft().y + rect.GetHeight() + offset.y);	
-	drawSimpleText(int2str(ammount_total), 12, rect.GetBottomLeft().x + rect.GetWidth() - 20 + offset.x, rect.GetBottomLeft().y + rect.GetHeight() + offset.y);	
+	{
+		vec2f pos(rect.GetBottomLeft().x + offset.x, rect.GetBottomLeft().y + rect.GetHeight() + offset.y);
+		Screen::Instance().DrawText("0", 12, pos);
+	}
+
+	{
+		vec2f pos(rect.GetBottomLeft().x + rect.GetWidth()/2 - 20 + offset.x, rect.GetBottomLeft().y + rect.GetHeight() + offset.y);
+		Screen::Instance().DrawText(int2str(ammount_selected)+" :"+int2str(price_selected) + "$", 12, pos);		
+	}
+
+	{
+		vec2f pos(rect.GetBottomLeft().x + rect.GetWidth() - 20 + offset.x, rect.GetBottomLeft().y + rect.GetHeight() + offset.y);
+		Screen::Instance().DrawText(int2str(ammount_total), 12, pos);	
+	}	
 	
 	RenderButtons();
 }

@@ -443,11 +443,11 @@ void UserInput::ManageInputsInSpace(Player* player, GuiManager& gui_manager)
 {
 	ResetFlags(player);
 			
-	while (Screen::Instance().pollEvent(event))
+	while (Screen::Instance().GetWindow().pollEvent(event))
 	{
 		switch(event.type)
 	        {
-	        	case sf::Event::Closed:     		{ Screen::Instance().close(); break; }
+	        	case sf::Event::Closed:     		{ Screen::Instance().GetWindow().close(); break; }
                         //case sf::Event::Resized:    		{ Screen::Instance().Resize(event.size.x, event.size.y); break; }
 	        	case sf::Event::KeyPressed: 		{ KeyPressedInSpace(player, gui_manager); break; }
 	                case sf::Event::MouseButtonPressed: 	{ MouseButtonPressed(player); break; }
@@ -459,11 +459,11 @@ void UserInput::ManageInputsInKosmoport(Player* player, GuiManager& gui_manager)
 {
 	ResetFlags(player);
 			
-	while (Screen::Instance().pollEvent(event))
+	while (Screen::Instance().GetWindow().pollEvent(event))
 	{
 		switch(event.type)
 	        {
-	        	case sf::Event::Closed:     		{ Screen::Instance().close(); break; }
+	        	case sf::Event::Closed:     		{ Screen::Instance().GetWindow().close(); break; }
                         //case sf::Event::Resized:    		{ Screen::Instance().Resize(event.Size.Width, event.Size.Height); break; }
 	        	case sf::Event::KeyPressed: 		{ KeyPressedInKosmoport(player, gui_manager); break; }
 	                case sf::Event::MouseButtonPressed: 	{ MouseButtonPressed(player); break; }
@@ -476,7 +476,7 @@ void UserInput::ManageRealTimeInputsInSpace(Player* player)
 	moveCamera_axis_x  = CAMERADIRECTION::NONE;
         moveCamera_axis_y  = CAMERADIRECTION::NONE;
         
-        sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance());
+        sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance().GetWindow());
            
         int mx = player->GetCursor().GetMouseData().mx;
         int my = player->GetCursor().GetMouseData().my;

@@ -178,29 +178,6 @@ void drawLine(TextureOb* texOb,
     	glPopMatrix();
 }
 
-
-void drawSimpleText(const std::string& str, int font_size, float pos_x, float pos_y)
-{    	
-     	sf::Text s(str, Screen::Instance().GetFont(), font_size);
-     	s.setColor(sf::Color(255, 255, 255));
-     	s.setPosition(pos_x, (Screen::Instance().GetHeight() - pos_y)); 
-      	Screen::Instance().DrawText(s);
-}
-
-void drawSimpleColoredText(std::string str, int font_size, const vec2f& pos, const Color4i& color, const vec2f& scroll_coord)
-{     	
-         sf::Text s(str, Screen::Instance().GetFont(), font_size);
-              	
-          /* SHADOW */
-     	 //s.SetColor(sf::Color(0, 0, 0));
-         //s.SetPosition(pos.x - scroll_x - 2, (g_VIEW_HEIGHT - pos.y) + scroll_y + 2); 
-         //GetWindows().Draw(s);
-         
-         s.setColor(sf::Color(color.r, color.g, color.b));
-         s.setPosition(pos.x - scroll_coord.x, (Screen::Instance().GetHeight() - pos.y) + scroll_coord.y); 
-         Screen::Instance().DrawText(s);    
-}
-
 void drawSimpleColoredTextWithBackground(std::string str, int font_size, const vec2f& pos, const Color4i& color, const vec2f& scroll_coord)
 {
      	float char_w = font_size;
@@ -212,7 +189,8 @@ void drawSimpleColoredTextWithBackground(std::string str, int font_size, const v
      	Rect rect(pos.x - char_w - scroll_coord.x, pos.y - 0.8*char_h - scroll_coord.y, string_w, char_h);
 	drawTexturedRect(texOb_textBg, rect, -2);
 
-     	drawSimpleColoredText(str, font_size, pos, color, scroll_coord);
+	
+     	Screen::Instance().DrawText(str, font_size, pos, color);
 }
 
 void drawInfoIn2Column(
@@ -249,25 +227,24 @@ void drawInfoIn2Column(
 	glLoadIdentity();
 	drawTexturedRect(texOb_textBg, rect, -2);
 	
-     	sf::Text s(info_title_list[0], Screen::Instance().GetFont(), (font_size+1));
-     	s.setColor(sf::Color(255, 255, 255));
-     	s.setPosition(center_x + info_total_string_w/3, (Screen::Instance().GetHeight() - center_y)); 
-      	Screen::Instance().DrawText(s);
+     	vec2f pos(center_x + info_total_string_w/3, center_y); 
+      	Screen::Instance().DrawText(info_title_list[0], font_size+1, pos);
 
      	for (unsigned int i=1; i<info_title_list.size(); i++)
      	{
-         	sf::Text s(info_title_list[i], Screen::Instance().GetFont(), font_size);
-         	s.setColor(sf::Color(255, 255, 255));
-         	s.setPosition(center_x, (Screen::Instance().GetHeight() - center_y) + char_h*i); 
-          	Screen::Instance().DrawText(s);
+     	        Color4i color(250, 250, 250, 255);
+         	//s.setPosition(center_x, (Screen::Instance().GetHeight() - center_y) + char_h*i); 
+          	vec2f pos(center_x, center_y + char_h*i); 
+          	Screen::Instance().DrawText(info_title_list[i], font_size, pos, color);
+      	
      	}       
 
      	for (unsigned int i=0; i<info_value_list.size(); i++)
      	{
-         	sf::Text s(info_value_list[i], Screen::Instance().GetFont(), font_size);
-         	s.setColor(sf::Color(250, 250, 0));
-         	s.setPosition(center_x + max_info_title_str_size * (char_w - 1.2), (Screen::Instance().GetHeight() - center_y) + char_h*i + char_h); 
-          	Screen::Instance().DrawText(s);
+         	Color4i color(250, 250, 0, 255);
+         	//s.setPosition(center_x + max_info_title_str_size * (char_w - 1.2), (Screen::Instance().GetHeight() - center_y) + char_h*i + char_h); 
+          	vec2f pos(center_x + max_info_title_str_size * (char_w - 1.2), center_y + char_h*i + char_h); 
+      		Screen::Instance().DrawText(info_value_list[i], font_size, pos, color);
      	}  
 }
 

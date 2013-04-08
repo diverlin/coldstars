@@ -26,6 +26,7 @@
 #include "../world/starsystem.hpp"
 #include "../world/galaxy.hpp"
 #include "../render/Render.hpp"
+#include "../render/Screen.hpp"
 #include "../resources/TextureManager.hpp"
 #include "../ai/Task.hpp"
 #include "../ai/StateMachine.hpp"
@@ -141,10 +142,8 @@ void GuiGalaxyMap::Render()
         int font_size = 10;     
         for (unsigned int i=0; i<galaxy->STARSYSTEM_vec.size(); i++)
     	{
-		drawSimpleText(int2str(galaxy->STARSYSTEM_vec[i]->GetId()), 
-        	       	      	       font_size, 
-        	       	       	       galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter().x*scale_parsec2screencoord - 20, 
-        	       	       	       galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter().y*scale_parsec2screencoord - 20);
+    		vec2f pos(galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter().x*scale_parsec2screencoord - 20, galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter().y*scale_parsec2screencoord - 20);
+		Screen::Instance().DrawText(int2str(galaxy->STARSYSTEM_vec[i]->GetId()), font_size, pos);
    	} 
 }
 
