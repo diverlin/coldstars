@@ -245,7 +245,7 @@ void GuiSkills::RenderSkills(const Skills& skills) const
 {
 	glPushMatrix();
 	{
-		glTranslatef(offset.x, offset.y, 0);
+		glTranslatef(GetGuiOffset().x, GetGuiOffset().y, 0);
 	
 		drawTexturedRect(textureOb_background, background_rect, -1.0);
 		for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)

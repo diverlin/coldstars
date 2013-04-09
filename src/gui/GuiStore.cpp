@@ -87,7 +87,7 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
         { 
                 if (rect_itemslot_vec[i].second->GetItem() != NULL)
                 {
-                	if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
+                	if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
                 	{
 				player->GetCursor().SetFocusedObject(rect_itemslot_vec[i].second->GetItem());
                 	
@@ -107,7 +107,7 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
         { 
                 if (rect_vehicleslot_vec[i].second->GetVehicle() != NULL)
                 {
-                	if (rect_vehicleslot_vec[i].first.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
+                	if (rect_vehicleslot_vec[i].first.CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
                 	{
 				player->GetCursor().SetFocusedObject(rect_vehicleslot_vec[i].second->GetVehicle());
                 	
@@ -132,10 +132,10 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
 void GuiStore::RenderSlots(int credits) const
 {      
 	glPushMatrix();
-		glTranslatef(offset.x, offset.y, 0);
+		glTranslatef(GetGuiOffset().x, GetGuiOffset().y, 0);
         	for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
         	{
-                	rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, offset);
+                	rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, GetGuiOffset());
                 	if (rect_itemslot_vec[i].second->GetItem() != NULL)
                 	{
                 		if (rect_itemslot_vec[i].second->GetItem()->GetPrice() > credits)

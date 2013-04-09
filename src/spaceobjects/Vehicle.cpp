@@ -1209,7 +1209,8 @@ void Vehicle::UpdateArtefactInfluence()
 void Vehicle::RenderInfoInSpace(const vec2f& scroll_coords)
 {  
 	UpdateInfo(); // virtual
-     	drawInfoIn2Column(info.title_list, info.value_list, points.GetCenter().x - scroll_coords.x, points.GetCenter().y - scroll_coords.y);
+	vec2f pos(points.GetCenter().x - scroll_coords.x, points.GetCenter().y - scroll_coords.y);
+     	drawInfoIn2Column(info.title_list, info.value_list, pos);
      	
      	if (owner_npc != NULL)
      	{
@@ -1220,7 +1221,8 @@ void Vehicle::RenderInfoInSpace(const vec2f& scroll_coords)
 void Vehicle::RenderInfo(const vec2f& center, int offset_x, int offset_y)
 {  
 	UpdateInfo(); // virtual
-     	drawInfoIn2Column(info.title_list, info.value_list, center.x - offset_x, center.y - offset_y);
+	vec2f pos(center.x - offset_x, center.y - offset_y);
+     	drawInfoIn2Column(info.title_list, info.value_list, pos);
 
      	if (owner_npc != NULL)
      	{

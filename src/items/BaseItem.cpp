@@ -127,7 +127,8 @@ void BaseItem::UpdateInfo()
 void BaseItem::RenderInfo(const vec2f& pos, float offset_x, float offset_y)
 {  
 	UpdateInfo();
-     	drawInfoIn2Column(info.title_list, info.value_list, pos.x - offset_x, pos.y - offset_y);
+	vec2f pos2(pos.x - offset_x, pos.y - offset_y);
+     	drawInfoIn2Column(info.title_list, info.value_list, pos2);
 }
 
 /* virtual */
