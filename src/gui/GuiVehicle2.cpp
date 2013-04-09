@@ -141,7 +141,7 @@ ItemSlot* GuiVehicle2::GetInreactedItemSlot(const MouseData& data_mouse)
 {
 	for(unsigned int i=0; i<button_slot_vec.size(); i++)
 	{ 
-		if (button_slot_vec[i].first->GetRect().CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
+		if (button_slot_vec[i].first->GetRect().CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
 		{  
 			if (data_mouse.left_click == true)
 			{
@@ -155,5 +155,5 @@ ItemSlot* GuiVehicle2::GetInreactedItemSlot(const MouseData& data_mouse)
 
 void GuiVehicle2::UpdateOffset()
 {
-	SetOffset(vehicle->GetPoints().GetCenter() - Screen::Instance().GetRect().GetBottomLeft());
+	SetGuiOffset(vehicle->GetPoints().GetCenter() - Screen::Instance().GetRect().GetBottomLeft());
 }

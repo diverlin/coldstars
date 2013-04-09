@@ -168,7 +168,7 @@ void GuiSpace::EnterGuiScan()
         
         bool allow_full_control = player->IsAbleToGetFullControlOnScanedVehicle();
         gui_vehicle_scan_shared->BindVehicle(player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
-        gui_skills_shared->SetOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
+        gui_skills_shared->SetGuiOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
                         
         show_gui_radar = false;
 }
@@ -274,7 +274,7 @@ bool GuiSpace::Update(const MouseData& data_mouse)
 	if (gui_vehicle_player.GetVehicle() == NULL)
 	{
 		gui_vehicle_player.BindVehicle(player->GetNpc()->GetVehicle(), 0.6f);
-         	gui_vehicle_player.SetOffset(gui_radar.GetRect().GetCenter());                        
+         	gui_vehicle_player.SetGuiOffset(gui_radar.GetRect().GetCenter());                        
 	}
 	gui_vehicle_player.UpdateEquipmentIcons();
 

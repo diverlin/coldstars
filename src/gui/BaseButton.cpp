@@ -87,9 +87,10 @@ void BaseButton::SetCenter(int x, int y)
      	rect.SetCenter((float)x, (float)y);
 }
 
-void BaseButton::RenderInfo(int offset_x, int offset_y) const
+void BaseButton::RenderInfo(int gui_offset_x, int gui_offset_y) const
 {
-	drawSimpleColoredTextWithBackground(info, 12, rect.GetBottomLeft(), Color4i(), vec2f(-offset_x, -offset_y));
+	vec2f pos(rect.GetBottomLeft().x+gui_offset_x, rect.GetBottomLeft().y+gui_offset_y);
+	drawSimpleColoredTextWithBackground(info, 12, pos, Color4i());
 }
 
 void BaseButton::Render(int offset_x, int offset_y) const

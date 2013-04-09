@@ -67,17 +67,15 @@ void drawLine(TextureOb* texOb,
               float angle_inD, 
               int half_h);
 
-void drawSimpleColoredTextWithBackground(std::string, 
+void drawSimpleColoredTextWithBackground(const std::string&, 
 			   int,
 			   const vec2f&, 
-			   const Color4i&,
-			   const vec2f&);
+			   const Color4i&);
 			   
 void drawInfoIn2Column(
                 const std::vector<std::string>& pnfo_title_list, 
                 const std::vector<std::string>& info_value_list, 
-                float center_x, 
-                float center_y);
+                const vec2f& pos);
 
 void drawFullScreenQuad(int w, int h, float pos_z);
 

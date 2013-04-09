@@ -49,8 +49,7 @@ void WindowWrapper::DrawText(const std::string& str, int font_size, const vec2f&
 {
      	sf::Text text(str, font, font_size);
      	text.setColor(sf::Color(255, 255, 255));
-     	text.setPosition(pos.x, pos.y); 
-     	//text.setPosition(pos.x, GetHeight() - pos.y); 
+     	text.setPosition(pos.x,  GetHeight() - pos.y); 
      	     	     	
 	window.pushGLStates();
 	window.draw(text);
@@ -61,9 +60,7 @@ void WindowWrapper::DrawText(const std::string& str, int font_size, const vec2f&
 {
      	sf::Text text(str, font, font_size);
         text.setColor(sf::Color(color.r, color.g, color.b));
-        //s.setPosition(pos.x - scroll_coord.x, (Screen::Instance().GetHeight() - pos.y) + scroll_coord.y); 
-        text.setPosition(pos.x, pos.y); 
-        //text.setPosition(pos.x, GetHeight() - pos.y); 
+        text.setPosition(pos.x, GetHeight() - pos.y); 
                                                 
 	window.pushGLStates();
 	window.draw(text);

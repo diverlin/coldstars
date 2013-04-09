@@ -169,7 +169,7 @@ void GuiKosmoport::EnterGuiScanInAngar()
         
         bool allow_full_control = player->IsAbleToGetFullControlOnScanedVehicle();
         gui_vehicle_scan_shared->BindVehicle(player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
-        gui_skills_shared->SetOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
+        gui_skills_shared->SetGuiOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
 }
 
 void GuiKosmoport::ExitGuiScan()
@@ -219,7 +219,7 @@ void GuiKosmoport::EnterGuiStoreScreen()
         int screen_h = Screen::Instance().GetHeight();
 	vec2f center_screen(screen_w/2, screen_h/2);
         
-        gui_store.SetOffset(center_screen + GUI_STORE_OFFSET);
+        gui_store.SetGuiOffset(center_screen + GUI_STORE_OFFSET);
 
 	player->GetNpc()->SetScanTarget(player->GetNpc()->GetVehicle()); //??
         bool lock_gui_scan_vehicle = true;

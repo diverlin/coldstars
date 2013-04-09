@@ -58,9 +58,8 @@ void Slider::Configure(int ammount_total, int price_for_one)
 	this->ammount_total = ammount_total;
 	this->price_for_one  = price_for_one;
 
-	offset.x = Screen::Instance().GetWidth()/2;
-	offset.y = Screen::Instance().GetHeight()/2;
-	
+	SetGuiOffset(vec2f(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2));
+
 	ammount_selected = 0;
 	price_selected = 0;
 	
@@ -75,11 +74,11 @@ void Slider::Configure(int ammount_total, int price_for_one)
 void Slider::UpdateSlidePosition(const MouseData& data_mouse)
 {
 	ButtonSingle* slide_button = (ButtonSingle*)GetButton(GUI::BUTTON::SLIDE_ID);
-	if (rect_slide.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
+	if (rect_slide.CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
 	{
 		if (data_mouse.left_press == true)
 		{
-			slide_button->GetRect().SetBottomLeftX(data_mouse.mx - slide_button->GetRect().GetWidth()/2 - offset.x);
+			slide_button->GetRect().SetBottomLeftX(data_mouse.mx - slide_button->GetRect().GetWidth()/2 - GetGuiOffset().x);
 		}
 	}
 	
@@ -141,24 +140,24 @@ void Slider::Render() const
 {
 	glPushMatrix();
 	{
-		glTranslatef(offset.x, offset.y, 0);
+		glTranslatef(GetGuiOffset().x, GetGuiOffset().y, 0);
 		drawTexturedRect(textureOb, rect, -1);
 		drawTexturedRect(textureOb_scale, rect_slide, -1);
 	}
 	glPopMatrix();
 	
 	{
-		vec2f pos(rect.GetBottomLeft().x + offset.x, rect.GetBottomLeft().y + rect.GetHeight() + offset.y);
+		vec2f pos(rect.GetBottomLeft().x + GetGuiOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetGuiOffset().y);
 		Screen::Instance().DrawText("0", 12, pos);
 	}
 
 	{
-		vec2f pos(rect.GetBottomLeft().x + rect.GetWidth()/2 - 20 + offset.x, rect.GetBottomLeft().y + rect.GetHeight() + offset.y);
+		vec2f pos(rect.GetBottomLeft().x + rect.GetWidth()/2 - 20 + GetGuiOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetGuiOffset().y);
 		Screen::Instance().DrawText(int2str(ammount_selected)+" :"+int2str(price_selected) + "$", 12, pos);		
 	}
 
 	{
-		vec2f pos(rect.GetBottomLeft().x + rect.GetWidth() - 20 + offset.x, rect.GetBottomLeft().y + rect.GetHeight() + offset.y);
+		vec2f pos(rect.GetBottomLeft().x + rect.GetWidth() - 20 + GetGuiOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetGuiOffset().y);
 		Screen::Instance().DrawText(int2str(ammount_total), 12, pos);	
 	}	
 	

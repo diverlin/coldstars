@@ -57,7 +57,7 @@ void GuiRadar::Update()
 
 bool GuiRadar::UpdateMouseInteraction(const MouseData& data_mouse)
 {		
-       	if (rect.CheckInteraction(data_mouse.mx - offset.x, data_mouse.my - offset.y) == true)
+       	if (rect.CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
         {
         	if (data_mouse.left_press == true)
            	{
