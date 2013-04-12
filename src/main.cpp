@@ -92,7 +92,6 @@ int main()
 	// GAME LOOP
 	while (Screen::Instance().GetWindow().isOpen())
 	{    
-		//std::cout<<"fnew_rame"<<std::endl;
 		/* server code start */
 		TurnTimer::Instance().Update();
 

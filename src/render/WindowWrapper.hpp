@@ -18,8 +18,8 @@ class WindowWrapper
       		sf::Font& GetFont() { return font; }; 
       		sf::RenderWindow& GetWindow() { return window; };
       		
-		float GetTimeInSec() const { return clock.getElapsedTime().asSeconds(); };
-
+		float GetElapsedTimeInSeconds() { return clock.getElapsedTime().asSeconds(); };
+		
 		void wrResizeSpecific(int width, int height);
 
 		void wrDrawSpecific();
@@ -30,7 +30,7 @@ class WindowWrapper
     	private:
       		int bpp;
       		bool vert_sync;
-      		
+
       		sf::Clock clock;
       		sf::Font font;
       		sf::View view;

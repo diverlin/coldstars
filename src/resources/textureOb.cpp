@@ -197,7 +197,7 @@ int TextureOb::updateAnimationFrame()
 {
 	if (is_animated)
 	{
-		float elapsed_time = Screen::Instance().GetTimeInSec();
+		float elapsed_time = Screen::Instance().GetElapsedTimeInSeconds();
      		if (elapsed_time - last_update_time > delay)
      		{
          		frame++;

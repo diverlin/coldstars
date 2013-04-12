@@ -16,9 +16,11 @@ class Screen : public WindowWrapper
       		static Screen& Instance();
         	void InitBasic(int width, int height, int bpp, bool vert_sync, const std::string&);
       		void InitPostEffects(int, int);
-       	     	
+       	     			
         	Rect& GetRect() { return rect; };
         	     		
+        	void CatchLoopBeginTime() { loop_begin_time = GetElapsedTimeInSeconds(); };
+        	
         	Fbo& GetFbo0() { return fbo0; };
 		Fbo& GetFbo1() { return fbo1; };
 		Fbo& GetFbo2() { return fbo2; };
@@ -40,7 +42,10 @@ class Screen : public WindowWrapper
       		Screen& operator=(const Screen&) = delete;
       		
       		bool auto_scroll;
-      		
+
+		float fps;
+		float loop_begin_time;
+      		      		      		
       		Fbo fbo0;
 		Fbo fbo1;
 		Fbo fbo2;
