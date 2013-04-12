@@ -33,7 +33,6 @@ class TurnTimer
 		void NextTurn();
 		
 		void Update();
-		void Draw() const;
 	
 	private:
 		TurnTimer();

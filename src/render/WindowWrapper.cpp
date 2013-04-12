@@ -7,7 +7,7 @@
 #include "../common/common.hpp"
 
     
-WindowWrapper::WindowWrapper()/*:RenderWindow(sf::VideoMode(800, 600), "SFML OpenGL", sf::Style::Default, sf::ContextSettings(32))*/
+WindowWrapper::WindowWrapper()
 {}
 
 WindowWrapper::~WindowWrapper()
@@ -22,16 +22,7 @@ void WindowWrapper::wrCreateWindowSpecific(int width, int height, int bpp, bool 
       	window.setFramerateLimit(Config::Instance().FPS_LIMIT); 
     	window.setVerticalSyncEnabled(vert_sync);
 }
-	       	
-//void WindowWrapper::wrDrawFps()
-//{
-	////float fps = 1.f / getFrameTime();
-      	////sf::Text _str(std::string("FPS:" + boost::lexical_cast<std::string>( (int)fps) +" / game_speed: x" + boost::lexical_cast<std::string>( Config::Instance().GAME_SPEED) ), font, 14);
-      	////_str.setColor(sf::Color(255, 255, 255));
-      	////_str.setPosition(100, 10);
-      	////render_window.draw(_str);
-//}
-            
+         
 void WindowWrapper::wrResizeSpecific(int width, int height)
 {	
 	view.setViewport(sf::FloatRect(0, 0, width, height));
@@ -41,7 +32,7 @@ void WindowWrapper::wrResizeSpecific(int width, int height)
 }
 		
 void WindowWrapper::wrDrawSpecific()
-{
+{	
   	window.display();
 }
 

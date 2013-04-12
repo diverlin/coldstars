@@ -1,10 +1,11 @@
 #include "Screen.hpp"
-#include <boost/lexical_cast.hpp>
+#include "../common/myStr.hpp"
 
 #include "../resources/ShaderCollector.hpp"
 #include "../render/Render.hpp"
 #include "../config/config.hpp"
 #include "../common/common.hpp"
+#include "../common/rand.hpp"
 
 Screen& Screen::Instance()
 {
@@ -12,7 +13,7 @@ Screen& Screen::Instance()
       	return instance;
 }
     
-Screen::Screen()
+Screen::Screen():fps(0.0), loop_begin_time(0.0)
 {}
 
 Screen::~Screen()
@@ -44,12 +45,14 @@ void Screen::InitPostEffects(int width, int height)
 }
 	       	
 void Screen::DrawFps()
-{
-	//float fps = 1.f / getFrameTime();
-      	//sf::Text _str(std::string("FPS:" + boost::lexical_cast<std::string>( (int)fps) +" / game_speed: x" + boost::lexical_cast<std::string>( Config::Instance().GAME_SPEED) ), font, 14);
-      	//_str.setColor(sf::Color(255, 255, 255));
-      	//_str.setPosition(100, 10);
-      	//render_window.draw(_str);
+{	
+	if (getRandInt(1, 20) == 1)
+	{
+		fps = 1.f / (GetElapsedTimeInSeconds() - loop_begin_time);
+	}
+
+      	std::string fps_str = "FPS:" + int2str((int)fps) + " / game_speed: x" + int2str(Config::Instance().GAME_SPEED);
+	DrawText(fps_str, 14, vec2f(100, GetHeight()-5));
 }
     
     

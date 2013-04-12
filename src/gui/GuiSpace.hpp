@@ -84,5 +84,4 @@ class GuiSpace : public BaseGui
      		bool UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData&);  
 };
 
-
 #endif
