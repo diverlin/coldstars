@@ -27,13 +27,13 @@ struct MeshFaceIndexesData
 	unsigned long int normal_index[3];
 };
 
-class ObjMeshInstance
+class ObjMesh
 { 
 	public:
 		int GetTypeId() const { return type_id; };
 				
-		ObjMeshInstance(const std::string&, int);
-		~ObjMeshInstance();
+		ObjMesh(const std::string&, int);
+		~ObjMesh();
 		
 		void Draw() const;
 	

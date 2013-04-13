@@ -1,9 +1,9 @@
-#include "ObjMeshInstance.hpp"
+#include "ObjMesh.hpp"
 #include <sstream>
 #include <fstream>
 #include <iostream>
   
-ObjMeshInstance::ObjMeshInstance(const std::string& filename, int type_id):type_id(type_id)
+ObjMesh::ObjMesh(const std::string& filename, int type_id):type_id(type_id)
 {
 	path = filename;
     	std::ifstream filestream;
@@ -51,7 +51,7 @@ ObjMeshInstance::ObjMeshInstance(const std::string& filename, int type_id):type_
 	        	}
 	        }
     	}
-    	// Explicit closing of the file
+
     	filestream.close();
  
     	for(unsigned int i=0; i<faces_indexes.size(); ++i)
@@ -71,7 +71,7 @@ ObjMeshInstance::ObjMeshInstance(const std::string& filename, int type_id):type_
 }
   
   
-void ObjMeshInstance::createGlList()
+void ObjMesh::createGlList()
 {
  	glList = glGenLists(1);
       	glNewList(glList, GL_COMPILE);
@@ -89,7 +89,7 @@ void ObjMeshInstance::createGlList()
       	glEndList();
 }
 
-void ObjMeshInstance::createVbo()
+void ObjMesh::createVbo()
 {
 	int positions_buffer_length = faces.size()*3*3;
 	int normals_buffer_length   = faces.size()*3*3;
@@ -138,7 +138,7 @@ void ObjMeshInstance::createVbo()
         glBufferSubData(GL_ARRAY_BUFFER_ARB, sizeof(positions_array)+sizeof(normals_array), sizeof(texcoords_array), texcoords_array);  // copy texcoords after normals
 }
 
-void ObjMeshInstance::DrawVbo() const
+void ObjMesh::DrawVbo() const
 {
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
@@ -160,7 +160,7 @@ void ObjMeshInstance::DrawVbo() const
     	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
-void ObjMeshInstance::Draw() const
+void ObjMesh::Draw() const
 {
 	DrawVbo();
 }	

@@ -259,7 +259,7 @@ set (SOURCES
 	src/gui/GuiManager.cpp
 	
 	src/world/HyperSpace.cpp
-	src/resources/ObjMeshInstance.cpp
+	src/resources/ObjMesh.cpp
 
   	src/main.cpp
 )
