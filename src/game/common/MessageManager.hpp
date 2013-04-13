@@ -4,6 +4,7 @@
 #include <set>
                  
 #include "../spaceobjects/BaseSpaceEntity.hpp"   
+#include "Message.hpp"
 
 class MessageManager
 {
