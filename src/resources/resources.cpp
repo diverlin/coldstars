@@ -23,7 +23,7 @@
 #include "GlslLoader.hpp"
 #include "../render/Screen.hpp"
 #include "MeshCollector.hpp"
-#include "ObjMeshInstance.hpp"
+#include "ObjMesh.hpp"
 #include "TextureManager.hpp"
 #include "GuiTextureObCollector.hpp"
 
@@ -50,8 +50,8 @@ void loadGameData()
 
 void load3DModels()
 {    	
-	MeshCollector::Instance().RegisterMesh(new ObjMeshInstance("data/obj/sphere/planet.obj", MESH::SPHERE_NORMAL_ID));
-	MeshCollector::Instance().RegisterMesh(new ObjMeshInstance("data/obj/sphere_deformed/planet.obj", MESH::SPHERE_DEFORMED_ID));
+	MeshCollector::Instance().RegisterMesh(new ObjMesh("data/obj/sphere/planet.obj", MESH::SPHERE_NORMAL_ID));
+	MeshCollector::Instance().RegisterMesh(new ObjMesh("data/obj/sphere_deformed/planet.obj", MESH::SPHERE_DEFORMED_ID));
 }
 
 
