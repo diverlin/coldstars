@@ -41,6 +41,8 @@
 
 #include "world/GalaxyDescription.hpp"
 
+#include <iostream>
+
 int main()
 {          
 	//pureTest3(); 
@@ -125,6 +127,12 @@ int main()
 				galaxy = player->GetNpc()->GetVehicle()->GetStarSystem()->GetGalaxy();
 			}
 		}
+	}
+
+	int glErr = glGetError();
+	if (glErr != 0)
+	{
+		std::cout<<"GL_ERROR="<<glErr<<std::endl;
 	}
 
 	return EXIT_SUCCESS;

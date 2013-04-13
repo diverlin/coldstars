@@ -131,7 +131,7 @@ void Planet::RenderAtmosphere_NEW(const vec2f& scroll_coords) const
      		glBindTexture(GL_TEXTURE_2D, textureOb_atmosphere->texture);
      		glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
 
-		renderMesh(mesh->GetGlList(), points.GetCenter3f(), angle_atmosphere, scale*1.1f);
+		renderMesh(mesh, points.GetCenter3f(), angle_atmosphere, scale*1.1f);
 	glDisable(GL_BLEND);
 	
      	glUseProgram(0);

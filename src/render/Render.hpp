@@ -23,6 +23,7 @@
 #include <GL/glew.h>
 #include "../resources/textureOb.hpp"
 #include "../common/rect.hpp"
+class ObjMeshInstance;
 
 void initGl(int, int);
 void resizeGl(int, int);
@@ -85,8 +86,7 @@ void drawFullScreenTexturedQuad(GLuint texture, int w, int h, float pos_z);
 
 void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z, GLuint program_blur);
 
-
-void renderMesh(GLuint glList, const vec3f& center, const vec3f& angle, float scale);
+void renderMesh(ObjMeshInstance* mesh, const vec3f& center, const vec3f& angle, float scale);
 
 void drawParticle(float, float r, float g, float b, float a, const vec2f&);
 void drawParticle(float, const Color4f&, const vec2f&);
