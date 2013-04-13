@@ -1,4 +1,10 @@
 ################### FEATURES #################
+<< glList to VBO
+
+<< allow vehicle to have 3D model
+
+<< redesign the GUi, to have Node, or childs (matrjoshka)
+
 << VehicleSLot in some(what??) cases has no owner. This looks like a bug.
 
 << camera pos is controlled by mouse pos

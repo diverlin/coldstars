@@ -31,10 +31,11 @@ class ObjMeshInstance
 { 
 	public:
 		int GetTypeId() const { return type_id; };
-		GLuint GetGlList() const { return glList; };
 				
 		ObjMeshInstance(const std::string&, int);
 		~ObjMeshInstance();
+		
+		void Draw() const;
 	
 	private:
 		int type_id;
@@ -49,10 +50,15 @@ class ObjMeshInstance
 		std::vector<MeshFaceData> faces; // reconstracted data used in render
 
 		GLuint glList; 
+		GLuint vbo_id;
 		
 		std::string path;
       
-		void createGlList();  
+		void createGlList(); 
+		void createVbo(); 
+
+		void DrawVbo() const;
+		void DrawGlList() const;
 };
 
 #endif
