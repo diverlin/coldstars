@@ -16,8 +16,6 @@
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "pureTest.cpp"
-
 #include "resources/init.hpp"
 
 #include "builder/GalaxyBuilder.hpp"
@@ -45,8 +43,6 @@
 
 int main()
 {          
-	//pureTest3(); 
-
 	init();  
         
 	GameDate::Instance().SetDate(1,1,4000);
