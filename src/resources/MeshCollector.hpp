@@ -23,18 +23,18 @@
 #include <map>
 #include <GL/glew.h>
 
-class ObjMeshInstance;
+class ObjMesh;
 
 class MeshCollector
 {
 	public:
 		static MeshCollector& Instance();
 		
-		void RegisterMesh(ObjMeshInstance*);
-		ObjMeshInstance* GetMeshByTypeId(int) const;
+		void RegisterMesh(ObjMesh*);
+		ObjMesh* GetMeshByTypeId(int) const;
 		
 	private:
-		std::map<int, ObjMeshInstance*> mesh_map;
+		std::map<int, ObjMesh*> mesh_map;
 		
 		MeshCollector() {};
 		~MeshCollector() {};
