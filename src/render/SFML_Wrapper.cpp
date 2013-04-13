@@ -1,4 +1,4 @@
-#include "WindowWrapper.hpp"
+#include "SFML_Wrapper.hpp"
 //#include <boost/lexical_cast.hpp>
 
 #include "../resources/ShaderCollector.hpp"
@@ -7,13 +7,13 @@
 #include "../common/common.hpp"
 
     
-WindowWrapper::WindowWrapper()
+SFML_Wrapper::SFML_Wrapper()
 {}
 
-WindowWrapper::~WindowWrapper()
+SFML_Wrapper::~SFML_Wrapper()
 {}
 
-void WindowWrapper::wrCreateWindowSpecific(int width, int height, int bpp, bool vert_sync, const std::string& title)
+void SFML_Wrapper::wrCreateWindowSpecific(int width, int height, int bpp, bool vert_sync, const std::string& title)
 {	
       	this->bpp = bpp;
       	this->vert_sync = vert_sync;
@@ -23,7 +23,7 @@ void WindowWrapper::wrCreateWindowSpecific(int width, int height, int bpp, bool 
     	window.setVerticalSyncEnabled(vert_sync);
 }
          
-void WindowWrapper::wrResizeSpecific(int width, int height)
+void SFML_Wrapper::wrResizeSpecific(int width, int height)
 {	
 	view.setViewport(sf::FloatRect(0, 0, width, height));
 	window.setView(view);
@@ -31,12 +31,12 @@ void WindowWrapper::wrResizeSpecific(int width, int height)
 	window.setSize(size);
 }
 		
-void WindowWrapper::wrDrawSpecific()
+void SFML_Wrapper::wrDrawSpecific()
 {	
   	window.display();
 }
 
-void WindowWrapper::DrawText(const std::string& str, int font_size, const vec2f& pos)
+void SFML_Wrapper::DrawText(const std::string& str, int font_size, const vec2f& pos)
 {
      	sf::Text text(str, font, font_size);
      	text.setColor(sf::Color(255, 255, 255));
@@ -47,7 +47,7 @@ void WindowWrapper::DrawText(const std::string& str, int font_size, const vec2f&
 	window.popGLStates();	
 }
 		
-void WindowWrapper::DrawText(const std::string& str, int font_size, const vec2f& pos, const Color4i& color)
+void SFML_Wrapper::DrawText(const std::string& str, int font_size, const vec2f& pos, const Color4i& color)
 {
      	sf::Text text(str, font, font_size);
         text.setColor(sf::Color(color.r, color.g, color.b));

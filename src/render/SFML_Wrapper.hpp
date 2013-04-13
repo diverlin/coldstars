@@ -4,11 +4,11 @@
 #include <SFML/Graphics.hpp>
 #include "../common/myVector.hpp"
 
-class WindowWrapper
+class SFML_Wrapper
 {
 	public:
-      		WindowWrapper();
-      		~WindowWrapper();
+      		SFML_Wrapper();
+      		~SFML_Wrapper();
       		      		
         	void wrCreateWindowSpecific(int width, int height, int bpp, bool vert_sync, const std::string&);
                 
