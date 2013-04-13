@@ -7,10 +7,10 @@
 #include "../render/Fbo.hpp"
 #include "../render/Bloom.hpp"
 #include "../common/rect.hpp"
-#include "WindowWrapper.hpp"
+#include "SFML_Wrapper.hpp"
 
 
-class Screen : public WindowWrapper
+class Screen : public SFML_Wrapper
 {
 	public:
       		static Screen& Instance();
