@@ -1,4 +1,5 @@
 #include "MessageManager.hpp"
+#include "../world/EntityManager.hpp"
 
 
 MessageManager& MessageManager::Instance()
