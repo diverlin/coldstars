@@ -21,20 +21,19 @@
 #define MESHCOLLECTOR_H
 
 #include <map>
-#include <GL/glew.h>
 
-class ObjMesh;
+class Mesh;
 
 class MeshCollector
 {
 	public:
 		static MeshCollector& Instance();
 		
-		void RegisterMesh(ObjMesh*);
-		ObjMesh* GetMeshByTypeId(int) const;
+		void RegisterMesh(Mesh*);
+		Mesh* GetMeshByTypeId(int) const;
 		
 	private:
-		std::map<int, ObjMesh*> mesh_map;
+		std::map<int, Mesh*> mesh_map;
 		
 		MeshCollector() {};
 		~MeshCollector() {};

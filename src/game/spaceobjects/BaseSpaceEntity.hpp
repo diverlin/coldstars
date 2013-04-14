@@ -23,7 +23,7 @@
 #include "../common/Base.hpp"
 
 class StarSystem;
-class ObjMesh;
+class Mesh;
 #include "../common/points.hpp"
 #include "../text/InfoTable.hpp" 
 class TextureOb;
@@ -47,7 +47,7 @@ class BaseSpaceEntity : public Base
 		virtual ~BaseSpaceEntity();
 
 		void SetLifeData(const LifeData& data_life) { this->data_life = data_life; }
-		void SetMesh(ObjMesh* mesh)		    { this->mesh = mesh; }
+		void SetMesh(Mesh* mesh)		    { this->mesh = mesh; }
 		void SetTextureOb(TextureOb* textureOb)     { this->textureOb = textureOb; }
 		void SetStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
 		void SetPlaceTypeId(int place_type_id)      { this->place_type_id = place_type_id;  }
@@ -96,7 +96,7 @@ class BaseSpaceEntity : public Base
 		float collision_radius;
 
 		TextureOb* textureOb;
-		ObjMesh* mesh; 
+		Mesh* mesh; 
 
 		StarSystem* starsystem;
 		int place_type_id;
