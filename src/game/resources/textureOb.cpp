@@ -27,7 +27,7 @@
 TextureOb::TextureOb()
 {}
 
-TextureOb::TextureOb(int _type_id, std::string _path, bool _use_alpha, std::vector<int>* pTo_arg, int _columns_num, int _rows_num, int _fps)
+TextureOb::TextureOb(int type_id, const std::string& path, bool use_alpha, std::vector<int>* pTo_arg, int columns_num, int rows_num, int fps)
 {
     	// textureOb attributes INIT
     	race_id = NONE_ID;
@@ -37,14 +37,14 @@ TextureOb::TextureOb(int _type_id, std::string _path, bool _use_alpha, std::vect
     	is_rotated = false;
     	//
 
-    	type_id = _type_id; 
+    	this->type_id = type_id; 
     	id      = TextureIdGenerator::Instance().GetNextId();
     
-    	path      = _path;
-    	use_alpha = _use_alpha;
+    	this->path = path;
+    	this->use_alpha = use_alpha;
     
     
-    	if ( ((_columns_num == 1) and (_rows_num == 1)) or (_fps == 0) )
+    	if ( ((columns_num == 1) and (rows_num == 1)) or (fps == 0) )
     	{
         	is_animated = false;
     	}
@@ -54,7 +54,7 @@ TextureOb::TextureOb(int _type_id, std::string _path, bool _use_alpha, std::vect
    	}   
     	
     	loadToVRAM(); 
-        createTextureCoords(_columns_num, _rows_num, _fps); 
+        createTextureCoords(columns_num, rows_num, fps); 
         //removeFromVRAM();     
        
    	is_loaded = false;
@@ -114,6 +114,9 @@ TextureOb::TextureOb(int _type_id, std::string _path, bool _use_alpha, std::vect
     		case TEXTURE::CONTAINER_ID: { loadToVRAM(); containerArgManager(pTo_arg); break; }
 		case TEXTURE::BOMB_ID: { loadToVRAM(); bombArgManager(pTo_arg); break; }
 		case TEXTURE::BLACKHOLE_ID: { loadToVRAM(); blackholeArgManager(pTo_arg); break; }
+
+		case TEXTURE::NOTYPE_ID: { loadToVRAM(); break; }
+		
 	}
 }  
 

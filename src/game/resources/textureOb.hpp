@@ -59,7 +59,7 @@ class TextureOb
         	bool is_loaded, is_shared;
         
         	TextureOb();
-        	TextureOb(int _type_id, std::string _path, bool _use_alpha, std::vector<int>* arg, int _columns_num = 1, int _rows_num = 1, int _fps = 0);
+        	TextureOb(int type_id, const std::string& path, bool use_alpha, std::vector<int>* pTo_arg = NULL, int columns_num = 1, int rows_num = 1, int fps = 0);
 
         	int GetFrameWidth() const;
         	int GetFrameHeight() const;

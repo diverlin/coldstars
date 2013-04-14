@@ -7,7 +7,9 @@
 
 #include "../common/myVector.hpp"
 #include <GL/glew.h>
+
 class ObjLoader;
+class TextureOb;
 
 struct MeshVertexData
 {
@@ -24,17 +26,18 @@ struct MeshFaceData
 class Mesh
 { 
 	public:
+		Mesh(const std::string&, TextureOb* textureOb, int);
+		~Mesh();
+
 		int GetTypeId() const { return type_id; };
 				
-		Mesh(const std::string&, int);
-		~Mesh();
-		
 		void Draw() const;
 	
 	private:
 		int type_id;
 		
-		std::vector<MeshFaceData> faces; // reconstracted data used in render
+		TextureOb* textureOb;
+		std::vector<MeshFaceData> faces; 
 
 		GLuint glList; 
 		GLuint vbo_id;
