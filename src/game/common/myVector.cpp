@@ -113,9 +113,18 @@ void vec2f::operator()(const vec2f& v)
 
 const vec3f& vec3f::operator+=(const vec3f& rhs)
 {
-	x+=rhs.x;
-	y+=rhs.y;
-	z+=rhs.z;	
+	x += rhs.x;
+	y += rhs.y;
+	z += rhs.z;	
+	
+	return *this;
+}
+
+const vec3f& vec3f::operator/=(float val)
+{
+	x /= val;
+	y /= val;
+	z /= val;	
 	
 	return *this;
 }

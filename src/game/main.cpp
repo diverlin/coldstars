@@ -54,8 +54,8 @@ int main()
 	for (unsigned int i=0; i<galaxy_description.starsystem_num; i++)
 	{
 		StarSystemDescription starsystem_description;
-		starsystem_description.spacestation_num_min = 500;
-		starsystem_description.spacestation_num_max = 500;
+		starsystem_description.spacestation_num_min = 50;
+		starsystem_description.spacestation_num_max = 50;
 		starsystem_description.allow_satellites = false;
 		starsystem_description.allow_spacestations = true;
 		
@@ -125,12 +125,13 @@ int main()
 				galaxy = player->GetNpc()->GetVehicle()->GetStarSystem()->GetGalaxy();
 			}
 		}
-	}
 
-	int glErr = glGetError();
-	if (glErr != 0)
-	{
-		std::cout<<"GL_ERROR="<<glErr<<std::endl;
+		int glErr = glGetError();
+		if (glErr != 0)
+		{
+			std::cout<<"GL_ERROR="<<glErr<<std::endl;
+			return EXIT_FAILURE;
+		}
 	}
 
 	return EXIT_SUCCESS;

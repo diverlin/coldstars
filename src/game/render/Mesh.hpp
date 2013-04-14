@@ -30,6 +30,7 @@ class Mesh
 		~Mesh();
 
 		int GetTypeId() const { return type_id; };
+		TextureOb* GetTextureOb() const { return textureOb; };
 				
 		void Draw() const;
 	
