@@ -54,8 +54,9 @@ class ObjMesh
 		
 		std::string path;
       
-		void createGlList(); 
-		void createVbo(); 
+      		void BuildFaces();
+		void CreateGlList(); 
+		void CreateVbo(); 
 
 		void DrawVbo() const;
 		void DrawGlList() const;

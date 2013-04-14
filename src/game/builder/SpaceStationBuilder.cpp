@@ -26,6 +26,7 @@
 #include "../common/rand.hpp"
 #include "../resources/TextureManager.hpp"
 #include "../resources/textureOb.hpp"
+#include "../resources/MeshCollector.hpp"
 
 SpaceStationBuilder& SpaceStationBuilder::Instance()
 {	
@@ -68,7 +69,8 @@ SpaceStation* SpaceStationBuilder::GetNewSpaceStation() const
 void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 {
 	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SPACESTATION_ID); 
-       
+       	ObjMesh* mesh    = MeshCollector::Instance().GetMeshByTypeId(MESH::SPACESTATION_ID);
+       	
        	int protection_rate = 50;
        	//if (subtype_id == ENTITY::WARRIOR_ID)
         //{
@@ -104,6 +106,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
                            
     	spacestation->SetSubSubTypeId(SPACESTATION::MILITARY_ID);
     	spacestation->SetKorpusData(data_korpus);
+	spacestation->SetMesh(mesh);
 	spacestation->SetTextureOb(texOb);
 	spacestation->SetLifeData(data_life);
     	

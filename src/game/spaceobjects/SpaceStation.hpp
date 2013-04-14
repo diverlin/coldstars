@@ -43,6 +43,8 @@ class SpaceStation : public Vehicle
         	void RenderInSpace() const;
 		void RenderAtPlanet() const; 
         	
+        	void RenderMesh_NEW(const vec2f&);
+        			
         	void SaveData(boost::property_tree::ptree&) const;
     		void LoadData(const boost::property_tree::ptree&);
     		void ResolveData();

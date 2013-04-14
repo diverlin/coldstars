@@ -50,8 +50,9 @@ void loadGameData()
 
 void load3DModels()
 {    	
-	MeshCollector::Instance().RegisterMesh(new ObjMesh("data/obj/sphere/planet.obj", MESH::SPHERE_NORMAL_ID));
+	MeshCollector::Instance().RegisterMesh(new ObjMesh("data/obj/sphere/planet.obj", MESH::SPHERE_ID));
 	MeshCollector::Instance().RegisterMesh(new ObjMesh("data/obj/sphere_deformed/planet.obj", MESH::SPHERE_DEFORMED_ID));
+	MeshCollector::Instance().RegisterMesh(new ObjMesh("data/obj/vehicles/BabylonStation/babylon_station_mod.obj", MESH::SPACESTATION_ID));
 }
 
 

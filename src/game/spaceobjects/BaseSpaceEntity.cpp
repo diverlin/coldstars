@@ -40,7 +40,7 @@ BaseSpaceEntity::BaseSpaceEntity():starsystem(NULL), mesh(NULL), textureOb(NULL)
 	d_angle.y      = 0.0;
 	d_angle.z      = getRandInt(10, 100)*0.01;  
 	
-	scale = 1;
+	scale = 1.0;
 }
 
 /* virtual */

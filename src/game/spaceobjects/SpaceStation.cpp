@@ -32,6 +32,9 @@
 #include "../slots/ItemSlot.hpp"
 #include "../pilots/Npc.hpp"
 
+#include "../resources/ShaderCollector.hpp"
+#include "../render/Render.hpp"
+
 SpaceStation::SpaceStation(int id)
 {      
 	data_id.id = id;
@@ -100,29 +103,39 @@ void SpaceStation::UpdateRenderStuff()
 }
 
 void SpaceStation::RenderInSpace() const
-{   
-        //if (ableTo.GRAB == true)
-        //{
-                //renderGrappleTrail();
-        //}
-        
+{     
     	RenderKorpus();
     	
     	if (data_korpus.draw_turrels == true)
     	{
         	weapon_complex.RenderTurrels();
         }
-
-    	//if (ableTo.DRIVE == true)
-    	//{
-		//renderDriveTrail();
-    	//}
     	
     	if (protection_complex.GetProtectorSlot()->GetItem() != NULL)
     	{
         	RenderShieldEffect(1.0 - color.a); 
         }
 }
+
+				 		
+void SpaceStation::RenderMesh_NEW(const vec2f& scroll_coords)
+{     	
+     	glUseProgram(ShaderCollector::Instance().light);
+
+     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
+     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
+
+     	glActiveTexture(GL_TEXTURE0);
+     	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+     	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
+     	
+     	SetScale(70);
+	renderMesh(mesh, points.GetCenter3f(), angle, scale);
+		
+     	glUseProgram(0);
+     	glActiveTexture(GL_TEXTURE0);
+}
+
 
 void SpaceStation::RenderAtPlanet() const
 {
