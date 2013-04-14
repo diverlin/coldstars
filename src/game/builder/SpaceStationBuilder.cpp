@@ -113,7 +113,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 
 	spacestation->SetAngle(vec3f(getRandInt(0, 30), getRandInt(0, 30), getRandInt(0, 30)));	
 	spacestation->SetDeltaAngle(vec3f(0, 0.1, 0));
-	spacestation->SetScale(getRandInt(300, 600));
+	spacestation->SetScale(getRandInt(100, 200));
     	
 	CreateKorpusGeometry(spacestation);
 
