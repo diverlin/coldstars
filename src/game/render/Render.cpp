@@ -21,7 +21,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "../resources/GuiTextureObCollector.hpp"
-#include "../resources/ObjMesh.hpp"
+#include "Mesh.hpp"
 
 void initGl(int width, int height)
 {   
@@ -282,7 +282,7 @@ void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z
 }
     
     
-void renderMesh(ObjMesh* mesh, const vec3f& center, const vec3f& angle, float scale)
+void renderMesh(Mesh* mesh, const vec3f& center, const vec3f& angle, float scale)
 {
      	glPushMatrix();
        		glTranslatef(center.x, center.y, center.z);

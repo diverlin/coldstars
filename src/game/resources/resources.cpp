@@ -23,7 +23,7 @@
 #include "GlslLoader.hpp"
 #include "../render/Screen.hpp"
 #include "MeshCollector.hpp"
-#include "ObjMesh.hpp"
+#include "../render/Mesh.hpp"
 #include "TextureManager.hpp"
 #include "GuiTextureObCollector.hpp"
 
@@ -50,9 +50,9 @@ void loadGameData()
 
 void load3DModels()
 {    	
-	MeshCollector::Instance().RegisterMesh(new ObjMesh("data/obj/sphere/planet.obj", MESH::SPHERE_ID));
-	MeshCollector::Instance().RegisterMesh(new ObjMesh("data/obj/sphere_deformed/planet.obj", MESH::SPHERE_DEFORMED_ID));
-	MeshCollector::Instance().RegisterMesh(new ObjMesh("data/obj/vehicles/BabylonStation/babylon_station_mod.obj", MESH::SPACESTATION_ID));
+	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/sphere/planet.obj", MESH::SPHERE_ID));
+	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/sphere_deformed/planet.obj", MESH::SPHERE_DEFORMED_ID));
+	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/vehicles/BabylonStation/babylon_station_mod.obj", MESH::SPACESTATION_ID));
 }
 
 

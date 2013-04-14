@@ -19,7 +19,7 @@
 #ifndef GAMESTRUCT_H
 #define GAMESTRUCT_H
 
-#include "../resources/ObjMesh.hpp"
+#include "../render/Mesh.hpp"
 #include "../common/myVector.hpp"
 #include "../common/constants.hpp"
 

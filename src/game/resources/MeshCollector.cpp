@@ -17,7 +17,7 @@
 */
 
 #include "MeshCollector.hpp"
-#include "ObjMesh.hpp"
+#include "../render/Mesh.hpp"
 
 MeshCollector& MeshCollector::Instance()
 {
@@ -25,14 +25,14 @@ MeshCollector& MeshCollector::Instance()
 	return instance;
 }
 		
-void MeshCollector::RegisterMesh(ObjMesh* mesh)
+void MeshCollector::RegisterMesh(Mesh* mesh)
 {
 	mesh_map.insert(std::make_pair(mesh->GetTypeId(), mesh));
 }
 
-ObjMesh* MeshCollector::GetMeshByTypeId(int type_id) const
+Mesh* MeshCollector::GetMeshByTypeId(int type_id) const
 {
-	std::map<int, ObjMesh*>::const_iterator slice = mesh_map.find(type_id);
+	std::map<int, Mesh*>::const_iterator slice = mesh_map.find(type_id);
 	return slice->second;
 }
 

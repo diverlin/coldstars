@@ -69,7 +69,7 @@ SpaceStation* SpaceStationBuilder::GetNewSpaceStation() const
 void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 {
 	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SPACESTATION_ID); 
-       	ObjMesh* mesh    = MeshCollector::Instance().GetMeshByTypeId(MESH::SPACESTATION_ID);
+       	Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPACESTATION_ID);
        	
        	int protection_rate = 50;
        	//if (subtype_id == ENTITY::WARRIOR_ID)
