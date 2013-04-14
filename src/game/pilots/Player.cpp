@@ -401,6 +401,13 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
        				visible_PLANET_vec[i]->Render_NEW(world_coord); 
     			}
     		
+    			for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
+    			{ 
+    				//visible_SPACESTATION_vec[i]->UpdateRenderStuff(); 
+       				visible_SPACESTATION_vec[i]->RenderMesh_NEW(world_coord); 
+        			//starsystem->RestoreSceneColor();
+    			}
+    			
     			for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
     			{ 
        				visible_ASTEROID_vec[i]->Render_NEW(world_coord); 
@@ -413,12 +420,12 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
     		disable_DEPTH();
 
 		enable_BLEND();		
-		    	for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
-    			{ 
-    				visible_SPACESTATION_vec[i]->UpdateRenderStuff(); 
-       				visible_SPACESTATION_vec[i]->RenderInSpace(); 
-        			starsystem->RestoreSceneColor();
-    			}
+		    	//for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
+    			//{ 
+    				//visible_SPACESTATION_vec[i]->UpdateRenderStuff(); 
+       				//visible_SPACESTATION_vec[i]->RenderInSpace(); 
+        			//starsystem->RestoreSceneColor();
+    			//}
    
     			for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
     			{ 

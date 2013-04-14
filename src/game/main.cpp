@@ -49,11 +49,15 @@ int main()
 
 	GalaxyDescription galaxy_description;
 	galaxy_description.allow_invasion = false;
+	galaxy_description.starsystem_num = 2;
+	
 	for (unsigned int i=0; i<galaxy_description.starsystem_num; i++)
 	{
 		StarSystemDescription starsystem_description;
+		starsystem_description.spacestation_num_min = 500;
+		starsystem_description.spacestation_num_max = 500;
 		starsystem_description.allow_satellites = false;
-		starsystem_description.allow_spacestations = false;
+		starsystem_description.allow_spacestations = true;
 		
 		starsystem_description.allow_ship_ranger   = false;
 		starsystem_description.allow_ship_warrior  = false;
@@ -62,8 +66,6 @@ int main()
 		starsystem_description.allow_ship_diplomat = false;
 		galaxy_description.starsystems.push_back(starsystem_description);
 	}
-	
-	galaxy_description.starsystem_num = 2;
 	
 	Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_description);
 	God::Instance().Init(galaxy, galaxy_description);
