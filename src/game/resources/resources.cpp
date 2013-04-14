@@ -50,9 +50,14 @@ void loadGameData()
 
 void load3DModels()
 {    	
-	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/sphere/planet.obj", MESH::SPHERE_ID));
-	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/sphere_deformed/planet.obj", MESH::SPHERE_DEFORMED_ID));
-	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/vehicles/BabylonStation/babylon_station_mod.obj", MESH::SPACESTATION_ID));
+	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/sphere/planet.obj", NULL, MESH::SPHERE_ID));
+	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/sphere_deformed/planet.obj", NULL, MESH::SPHERE_DEFORMED_ID));
+	
+	{
+	TextureOb* textureOb = new TextureOb(TEXTURE::NOTYPE_ID, "data/obj/vehicles/BabylonStation/babylon_station_mod.png", false);
+	
+	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/vehicles/BabylonStation/babylon_station_mod.obj", NULL, MESH::SPACESTATION_ID));
+	}
 }
 
 

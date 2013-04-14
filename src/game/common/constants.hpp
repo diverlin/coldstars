@@ -920,7 +920,9 @@ namespace TEXTURE
 	
 		MODULE_ID,
 	
-		ROCKET_BULLET_ID
+		ROCKET_BULLET_ID,
+		
+		NOTYPE_ID
 	};
 } 
 
