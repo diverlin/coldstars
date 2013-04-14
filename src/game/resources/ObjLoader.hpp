@@ -28,6 +28,8 @@ class ObjLoader
 		std::vector<MeshFaceIndexesData> faces_indexes;
 		/** */
 		
+		void NormalizePositions();
+		
 	friend class Mesh;
 };
 

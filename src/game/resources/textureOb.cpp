@@ -17,6 +17,7 @@
 */
 
 #include <SFML/Graphics/Image.hpp>
+#include <iostream>
 
 #include "textureOb.hpp"
 #include "../common/constants.hpp"
@@ -38,7 +39,7 @@ TextureOb::TextureOb(int type_id, const std::string& path, bool use_alpha, std::
     	//
 
     	this->type_id = type_id; 
-    	id      = TextureIdGenerator::Instance().GetNextId();
+    	id = TextureIdGenerator::Instance().GetNextId();
     
     	this->path = path;
     	this->use_alpha = use_alpha;
@@ -126,7 +127,12 @@ int TextureOb::GetFrameHeight() const { return h_slice;}
 void TextureOb::loadToVRAM()
 {
      	sf::Image image;
-     	image.loadFromFile(path);
+     	if (!image.loadFromFile(path))
+ 	{
+ 		std::cout<<"FAULT: Not abe to open file:"<<path;
+ 		exit(EXIT_FAILURE);
+ 	}
+     	
      	w = image.getSize().x;
      	h = image.getSize().y;
 

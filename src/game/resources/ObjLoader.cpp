@@ -1,6 +1,8 @@
 #include "ObjLoader.hpp"
 #include <sstream>
 #include <fstream>
+#include <cmath>
+
 #include "../common/Logger.hpp"
 #include "../common/myStr.hpp"
   
@@ -12,7 +14,7 @@ ObjLoader::ObjLoader(const std::string& path)
  	if (filestream.is_open() == false)
  	{
  		std::cout<<"FAULT: Not abe to open file:"<<path;
- 		exit(1);
+ 		exit(EXIT_FAILURE);
  	}
  
     	std::string line;   
@@ -67,6 +69,25 @@ ObjLoader::ObjLoader(const std::string& path)
     	}
 
     	filestream.close();
+    	
+    	NormalizePositions();
+}
+
+void ObjLoader::NormalizePositions()
+{
+	float max_pos = 0;
+	for (unsigned int i=0; i<positions.size(); i++)
+	{
+		if (max_pos < fabs(positions[i].x)) max_pos = fabs(positions[i].x);
+		if (max_pos < fabs(positions[i].y)) max_pos = fabs(positions[i].y);
+		if (max_pos < fabs(positions[i].z)) max_pos = fabs(positions[i].z);
+	}
+
+	for (unsigned int i=0; i<positions.size(); i++)
+	{
+		positions[i] /= max_pos;
+	}	
+	
 }
 
   

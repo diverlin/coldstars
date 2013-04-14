@@ -38,24 +38,24 @@ void SFML_Wrapper::wrDrawSpecific()
 
 void SFML_Wrapper::DrawText(const std::string& str, int font_size, const vec2f& pos)
 {
-     	sf::Text text(str, font, font_size);
-     	text.setColor(sf::Color(255, 255, 255));
-     	text.setPosition(pos.x,  GetHeight() - pos.y); 
+     	//sf::Text text(str, font, font_size);
+     	//text.setColor(sf::Color(255, 255, 255));
+     	//text.setPosition(pos.x,  GetHeight() - pos.y); 
      	     	     	
-	window.pushGLStates();
-	window.draw(text);
-	window.popGLStates();	
+	//window.pushGLStates();
+	//window.draw(text);
+	//window.popGLStates();	
 }
 		
 void SFML_Wrapper::DrawText(const std::string& str, int font_size, const vec2f& pos, const Color4i& color)
 {
-     	sf::Text text(str, font, font_size);
-        text.setColor(sf::Color(color.r, color.g, color.b));
-        text.setPosition(pos.x, GetHeight() - pos.y); 
+     	//sf::Text text(str, font, font_size);
+        //text.setColor(sf::Color(color.r, color.g, color.b));
+        //text.setPosition(pos.x, GetHeight() - pos.y); 
                                                 
-	window.pushGLStates();
-	window.draw(text);
-	window.popGLStates();	     	
+	//window.pushGLStates();
+	//window.draw(text);
+	//window.popGLStates();	     	
 }
 
    

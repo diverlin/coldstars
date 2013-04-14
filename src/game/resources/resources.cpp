@@ -54,9 +54,8 @@ void load3DModels()
 	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/sphere_deformed/planet.obj", NULL, MESH::SPHERE_DEFORMED_ID));
 	
 	{
-	TextureOb* textureOb = new TextureOb(TEXTURE::NOTYPE_ID, "data/obj/vehicles/BabylonStation/babylon_station_mod.png", false);
-	
-	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/vehicles/BabylonStation/babylon_station_mod.obj", NULL, MESH::SPACESTATION_ID));
+	TextureOb* textureOb = new TextureOb(TEXTURE::NOTYPE_ID, "data/obj/vehicles/BabylonStation/station_texture/babylonstation.jpg", false);	
+	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/vehicles/BabylonStation/babylon_station_mod.obj", textureOb, MESH::SPACESTATION_ID));
 	}
 }
 

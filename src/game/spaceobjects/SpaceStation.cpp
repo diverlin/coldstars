@@ -72,6 +72,7 @@ void SpaceStation::BindLand(BaseLand* land)
        	
 void SpaceStation::UpdateInSpace(int time, bool show_effect)
 {
+	UpdateRotation();
 	CheckDeath(show_effect);
 	if (time > 0)
 	{
@@ -118,7 +119,7 @@ void SpaceStation::RenderInSpace() const
 }
 
 				 		
-void SpaceStation::RenderMesh_NEW(const vec2f& scroll_coords)
+void SpaceStation::RenderMesh_NEW(const vec2f& scroll_coords) const
 {     	
      	glUseProgram(ShaderCollector::Instance().light);
 
@@ -129,7 +130,6 @@ void SpaceStation::RenderMesh_NEW(const vec2f& scroll_coords)
      	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
      	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
      	
-     	SetScale(70);
 	renderMesh(mesh, points.GetCenter3f(), angle, scale);
 		
      	glUseProgram(0);

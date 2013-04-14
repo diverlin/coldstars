@@ -68,9 +68,10 @@ SpaceStation* SpaceStationBuilder::GetNewSpaceStation() const
 
 void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 {
-	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SPACESTATION_ID); 
+	//TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SPACESTATION_ID); 
        	Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPACESTATION_ID);
-       	
+	TextureOb* texOb = mesh->GetTextureOb(); 
+	       	
        	int protection_rate = 50;
        	//if (subtype_id == ENTITY::WARRIOR_ID)
         //{
@@ -109,6 +110,10 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 	spacestation->SetMesh(mesh);
 	spacestation->SetTextureOb(texOb);
 	spacestation->SetLifeData(data_life);
+
+	spacestation->SetAngle(vec3f(getRandInt(0, 30), getRandInt(0, 30), getRandInt(0, 30)));	
+	spacestation->SetDeltaAngle(vec3f(0, 0.1, 0));
+	spacestation->SetScale(getRandInt(300, 600));
     	
 	CreateKorpusGeometry(spacestation);
 
