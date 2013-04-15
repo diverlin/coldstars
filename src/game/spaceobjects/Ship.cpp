@@ -92,6 +92,7 @@ void Ship::UpdateInfo()
 /* virtual */
 void Ship::UpdateInSpace(int time, bool show_effect)
 {   
+	UpdateRotation();
 	CheckDeath(show_effect);
 	protection_complex.GetShieldEffect()->Update();
 	if (time > 0)
@@ -100,6 +101,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 	
 		owner_npc->UpdateInSpace(time, show_effect);
 		points.Update();   
+		angle.z = points.GetAngleDegree();
 		weapon_complex.Fire(time, owner_npc->GetSkills().GetAttackNormalized(), show_effect);
 
     		if (properties.speed > 0) 
@@ -114,7 +116,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
     	}
 }
 
-void Ship::RenderInSpace() const
+void Ship::RenderInSpace_2D() const
 {   
 	setColor4f(color);
         if (properties.grab_radius > 0)
@@ -141,6 +143,10 @@ void Ship::RenderInSpace() const
 	starsystem->RestoreSceneColor();
 }
 
+void Ship::RenderInSpace_3D(const vec2f& scroll_coords) const
+{
+	RenderMesh(scroll_coords);
+}
 
 void Ship::RenderAtPlanet(const vec2f& center)
 {

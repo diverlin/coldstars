@@ -108,7 +108,7 @@ void Planet::PostDeathUniqueEvent(bool)
 
 void Planet::Render_NEW(const vec2f& scroll_coords) const
 {
-	RenderMesh_NEW(scroll_coords);
+	RenderMesh(scroll_coords);
 }
 	
 void Planet::Render_OLD() const

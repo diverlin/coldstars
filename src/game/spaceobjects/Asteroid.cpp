@@ -95,7 +95,7 @@ void Asteroid::UpdateInfo()
 
 void Asteroid::Render_NEW(const vec2f& scroll_coords) const
 {
-	RenderMesh_NEW(scroll_coords);
+	RenderMesh(scroll_coords);
 }
 	
 void Asteroid::Render_OLD() const

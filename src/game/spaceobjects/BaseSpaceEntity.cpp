@@ -28,20 +28,19 @@
 #include "../render/Render.hpp"
 #include "../text/VerticalFlowText.hpp" 
 #include "../common/Logger.hpp"
+#include "../resources/ShaderCollector.hpp"
 
-BaseSpaceEntity::BaseSpaceEntity():starsystem(NULL), mesh(NULL), textureOb(NULL), parent(NULL),
-				   place_type_id(NONE_ID), collision_radius(0), mass(0), given_expirience(1)
-{
-	angle.x        = getRandInt(10, 40);
-	angle.y        = getRandInt(10, 40);
-	angle.z        = 0.0;
-
-	d_angle.x      = 0.0;
-	d_angle.y      = 0.0;
-	d_angle.z      = getRandInt(10, 100)*0.01;  
-	
-	scale = 1.0;
-}
+BaseSpaceEntity::BaseSpaceEntity():
+starsystem(NULL), 
+mesh(NULL), 
+textureOb(NULL), 
+parent(NULL),
+place_type_id(NONE_ID), 
+collision_radius(0), 
+mass(0), 
+given_expirience(0),
+scale(0)
+{}
 
 /* virtual */
 BaseSpaceEntity::~BaseSpaceEntity()
@@ -53,7 +52,14 @@ BaseSpaceEntity::~BaseSpaceEntity()
 
 void BaseSpaceEntity::RecalculateCollisionRadius()
 {
-	collision_radius = (textureOb->GetFrameWidth() + textureOb->GetFrameHeight())/3;
+	if (mesh)
+	{
+		collision_radius = scale/2; // for 3d object
+	}
+	else
+	{
+		collision_radius = (textureOb->GetFrameWidth() + textureOb->GetFrameHeight())/3; // for 2D object
+	}
 }
 
 void BaseSpaceEntity::UpdateRotation()
@@ -121,6 +127,23 @@ void BaseSpaceEntity::RenderInfo(const vec2f& center)
      	drawInfoIn2Column(info.title_list, info.value_list, center);
 }
 
+void BaseSpaceEntity::RenderMesh(const vec2f& scroll_coords) const
+{
+     	glUseProgram(ShaderCollector::Instance().light);
+
+     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
+     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
+
+     	glActiveTexture(GL_TEXTURE0);
+     	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+     	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
+     	
+	renderMesh(mesh, points.GetCenter3f(), angle, scale);
+		
+     	glUseProgram(0);
+     	glActiveTexture(GL_TEXTURE0);
+}
+		
 void BaseSpaceEntity::SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	#if SAVELOAD_LOG_ENABLED == 1

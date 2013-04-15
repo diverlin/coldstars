@@ -51,7 +51,10 @@ class BaseSpaceEntity : public Base
 		void SetTextureOb(TextureOb* textureOb)     { this->textureOb = textureOb; }
 		void SetStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
 		void SetPlaceTypeId(int place_type_id)      { this->place_type_id = place_type_id;  }
-
+		void SetMass(int mass) 			    { this->mass = mass; }
+		
+		bool Is3D() const { return (mesh != NULL); }
+		
 		int SetGivenExpirience(int given_expirience) { this->given_expirience = given_expirience; }
                 
 		void SetAngle(const vec3f& angle)           { this->angle = angle; }
@@ -114,6 +117,8 @@ class BaseSpaceEntity : public Base
 
 		void CheckDeath(bool);
 		virtual void PostDeathUniqueEvent(bool) {};
+
+		void RenderMesh(const vec2f&) const;
 
 		UnresolvedDataUniqueBaseSpaceEntity data_unresolved_BaseSpaceEntity;
 		void SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree&, const std::string&) const;

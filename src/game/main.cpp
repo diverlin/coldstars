@@ -75,7 +75,7 @@ int main()
         bool player2space = true;
         if (player2space == true)
         {
-                vec2f center(400, 400);
+                vec2f center(1400, 1400);
                 float angle = 0;  
                 galaxy->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, NULL);
 	}

@@ -25,6 +25,7 @@
 #include "../resources/TextureManager.hpp"
 #include "../resources/MeshCollector.hpp"
 
+	
 AsteroidBuilder& AsteroidBuilder::Instance()
 {
 	static AsteroidBuilder instance;
@@ -85,9 +86,12 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
 	asteroid->SetTextureOb(texOb);
 	asteroid->SetLifeData(data_life);
 	asteroid->SetMesh(MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_DEFORMED_ID));
-	asteroid->SetScale(getRandInt(ENTITY::ASTEROID::SIZE_MIN_, ENTITY::ASTEROID::SIZE_MAX_));	
-       	asteroid->SetGivenExpirience(ASTEROD_GIVEN_EXPIRIENCE);
+	asteroid->SetScale(getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX));	
+       	asteroid->SetGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
         
+        asteroid->SetAngle(vec3f(getRandInt(10, 40), getRandInt(10, 40), 0));
+	asteroid->SetDeltaAngle(vec3f(0, 0, getRandInt(10, 100)*0.01));
+	
         asteroid->CalcCollisionrRadius();
 }
 

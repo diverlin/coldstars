@@ -28,6 +28,7 @@
 #include "../resources/textureOb.hpp"
 #include "../resources/MeshCollector.hpp"
 
+
 SpaceStationBuilder& SpaceStationBuilder::Instance()
 {	
 	static SpaceStationBuilder instance;
@@ -68,10 +69,18 @@ SpaceStation* SpaceStationBuilder::GetNewSpaceStation() const
 
 void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 {
-	//TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SPACESTATION_ID); 
-       	Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPACESTATION_ID);
-	TextureOb* texOb = mesh->GetTextureOb(); 
-	       	
+	Mesh* mesh = NULL;
+	TextureOb* texOb = NULL;
+	if (getRandInt(0, 1))
+	{
+		texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SPACESTATION_ID); 
+       	}
+       	else
+       	{	
+       		mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPACESTATION_ID);
+		texOb = mesh->GetTextureOb(); 
+	}
+	
        	int protection_rate = 50;
        	//if (subtype_id == ENTITY::WARRIOR_ID)
         //{
@@ -105,15 +114,16 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
         int size_threshold = 2; 
 	data_korpus.draw_turrels = true; 
                            
-    	spacestation->SetSubSubTypeId(SPACESTATION::MILITARY_ID);
+    	spacestation->SetSubSubTypeId(ENTITY::TYPE::SPACESTATION_MILITARY_ID);
     	spacestation->SetKorpusData(data_korpus);
 	spacestation->SetMesh(mesh);
 	spacestation->SetTextureOb(texOb);
 	spacestation->SetLifeData(data_life);
 
-	spacestation->SetAngle(vec3f(getRandInt(0, 30), getRandInt(0, 30), getRandInt(0, 30)));	
-	spacestation->SetDeltaAngle(vec3f(0, 0.1, 0));
-	spacestation->SetScale(getRandInt(100, 200));
+	spacestation->SetAngle(vec3f(getRandInt(0, 360), 0, 0));	
+	spacestation->SetDeltaAngle(vec3f(0, getRandInt(10, 40)*0.01, 0));
+	spacestation->SetScale(getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX));
+    	spacestation->SetMass(getRandInt(ENTITY::SPACESTATION::MASS_MIN, ENTITY::SPACESTATION::MASS_MAX));
     	
 	CreateKorpusGeometry(spacestation);
 
