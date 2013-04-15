@@ -22,6 +22,18 @@
 #include "BaseVehicleBuilder.hpp"
 #include "../spaceobjects/SpaceStation.hpp"
 #include "../common/constants.hpp"
+	
+namespace ENTITY
+{
+	namespace SPACESTATION
+	{
+		const int SCALE_MIN = 200;
+		const int SCALE_MAX = 300;
+		
+		const int MASS_MIN = 1000;
+		const int MASS_MAX = 2000;
+	}
+}
 
 class SpaceStationBuilder : public BaseVehicleBuilder
 {

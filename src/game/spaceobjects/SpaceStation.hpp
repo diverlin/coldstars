@@ -37,13 +37,10 @@ class SpaceStation : public Vehicle
 
 		void UpdateInSpace(int, bool);
 		
-        	virtual void UpdateInfo(); 
+        	virtual void UpdateInfo();  
         	
-        	void UpdateRenderStuff();
-        	void RenderInSpace() const;
-		void RenderAtPlanet() const; 
-        	
-        	void RenderMesh_NEW(const vec2f&) const;
+        	void RenderInSpace_2D();
+        	void RenderInSpace_3D(const vec2f&) const;     	
         			
         	void SaveData(boost::property_tree::ptree&) const;
     		void LoadData(const boost::property_tree::ptree&);
@@ -55,6 +52,8 @@ class SpaceStation : public Vehicle
                 void SaveDataUniqueSpaceStation(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueSpaceStation(const boost::property_tree::ptree&);
 		void ResolveDataUniqueSpaceStation();
+
+        	void UpdateRenderStuff_2D();        	
 };
 
 

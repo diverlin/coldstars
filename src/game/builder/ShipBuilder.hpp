@@ -23,6 +23,15 @@
 #include "../common/constants.hpp"
 class Ship;
 
+namespace ENTITY
+{
+	namespace SHIP
+	{
+		const int SCALE_MIN = 100;
+		const int SCALE_MAX = 200;
+	}
+}
+
 class ShipBuilder : public BaseVehicleBuilder
 {
 	public:

@@ -35,14 +35,11 @@
 #include "../resources/ShaderCollector.hpp"
 #include "../render/Render.hpp"
 
-SpaceStation::SpaceStation(int id)
+SpaceStation::SpaceStation(int id): land(NULL)
 {      
-	data_id.id = id;
-	data_id.type_id = ENTITY::VEHICLE_ID;
+	data_id.id         = id;
+	data_id.type_id    = ENTITY::VEHICLE_ID;
 	data_id.subtype_id = ENTITY::SPACESTATION_ID;  
-	
-    	mass = getRandInt(ENTITY::SPACESTATION::MASS_MIN, ENTITY::SPACESTATION::MASS_MAX);
-	land = NULL;
 }
 
 /* virtual */
@@ -92,7 +89,7 @@ void SpaceStation::UpdateInfo()
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 } 
 
-void SpaceStation::UpdateRenderStuff()
+void SpaceStation::UpdateRenderStuff_2D()
 {
     	//points.update(); 
     	protection_complex.GetShieldEffect()->Update();
@@ -103,8 +100,10 @@ void SpaceStation::UpdateRenderStuff()
     	//}
 }
 
-void SpaceStation::RenderInSpace() const
+void SpaceStation::RenderInSpace_2D()
 {     
+	UpdateRenderStuff_2D();
+		
     	RenderKorpus();
     	
     	if (data_korpus.draw_turrels == true)
@@ -116,38 +115,15 @@ void SpaceStation::RenderInSpace() const
     	{
         	RenderShieldEffect(1.0 - color.a); 
         }
+        	
+        starsystem->RestoreSceneColor();
 }
 
 				 		
-void SpaceStation::RenderMesh_NEW(const vec2f& scroll_coords) const
+void SpaceStation::RenderInSpace_3D(const vec2f& scroll_coords) const
 {     	
-     	glUseProgram(ShaderCollector::Instance().light);
-
-     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
-     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
-
-     	glActiveTexture(GL_TEXTURE0);
-     	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-     	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
-     	
-	renderMesh(mesh, points.GetCenter3f(), angle, scale);
-		
-     	glUseProgram(0);
-     	glActiveTexture(GL_TEXTURE0);
+	RenderMesh(scroll_coords);
 }
-
-
-void SpaceStation::RenderAtPlanet() const
-{
-	//renderKorpus();
-	
-	//if (data_korpus.render_TURRELS == true)
-    	//{
-        	//weapon_complex->renderTurrels();
-        //}
-}		
-
-
 
 /*virtual*/
 void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree) const

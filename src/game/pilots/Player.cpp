@@ -178,9 +178,9 @@ void Player::AddIfVisible(Vehicle* vehicle)
                 {
 			switch(vehicle->GetSubTypeId())
 			{			
-				case ENTITY::SHIP_ID:         { visible_SHIP_vec.push_back((Ship*)vehicle); break; }
-				case ENTITY::SATELLITE_ID:    { visible_SATELLITE_vec.push_back((Satellite*)vehicle); break; }
-				case ENTITY::SPACESTATION_ID: { visible_SPACESTATION_vec.push_back((SpaceStation*)vehicle); break; }
+				case ENTITY::SHIP_ID:        	{ 	visible_SHIP_vec.push_back((Ship*)vehicle); break; }
+				case ENTITY::SATELLITE_ID:    	{ 	visible_SATELLITE_vec.push_back((Satellite*)vehicle); break; }
+				case ENTITY::SPACESTATION_ID: 	{ 	visible_SPACESTATION_vec.push_back((SpaceStation*)vehicle); break; }
 			}
 		}
 	}
@@ -403,11 +403,20 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
     		
     			for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
     			{ 
-    				//visible_SPACESTATION_vec[i]->UpdateRenderStuff(); 
-       				visible_SPACESTATION_vec[i]->RenderMesh_NEW(world_coord); 
-        			//starsystem->RestoreSceneColor();
+    				if(visible_SPACESTATION_vec[i]->Is3D())
+    				{
+       					visible_SPACESTATION_vec[i]->RenderInSpace_3D(world_coord); 
+    				}
     			}
     			
+    			for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
+    			{ 
+    				if(visible_SHIP_vec[i]->Is3D())
+       				{
+       					visible_SHIP_vec[i]->RenderInSpace_3D(world_coord); 
+    				}
+    			}
+    				
     			for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
     			{ 
        				visible_ASTEROID_vec[i]->Render_NEW(world_coord); 
@@ -420,12 +429,13 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
     		disable_DEPTH();
 
 		enable_BLEND();		
-		    	//for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
-    			//{ 
-    				//visible_SPACESTATION_vec[i]->UpdateRenderStuff(); 
-       				//visible_SPACESTATION_vec[i]->RenderInSpace(); 
-        			//starsystem->RestoreSceneColor();
-    			//}
+		    	for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
+    			{ 
+    			    	if(!visible_SPACESTATION_vec[i]->Is3D())
+    				{
+       					visible_SPACESTATION_vec[i]->RenderInSpace_2D(); 
+    				}
+    			}
    
     			for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
     			{ 
@@ -435,8 +445,10 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 
     			for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
     			{ 
-       				visible_SHIP_vec[i]->RenderInSpace(); 
-        			starsystem->RestoreSceneColor();
+    				if(!visible_SHIP_vec[i]->Is3D())
+       				{
+       					visible_SHIP_vec[i]->RenderInSpace_2D(); 
+    				}
     			}
 
 			for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
@@ -578,6 +590,22 @@ void Player::RenderInSpace_OLD(StarSystem* starsystem)
        			visible_PLANET_vec[i]->Render_OLD(); 
     		}
 
+                for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
+    		{ 
+    		    	if (visible_SPACESTATION_vec[i]->Is3D())
+    			{
+    				visible_SPACESTATION_vec[i]->RenderInSpace_3D(world_coord); 
+    			}
+    		}
+    		
+    		for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
+    		{ 
+    		    	if (visible_SHIP_vec[i]->Is3D())
+    			{    			
+       				visible_SHIP_vec[i]->RenderInSpace_3D(world_coord); 
+    			}
+    		}
+    		
     		for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
     		{ 
        			visible_ASTEROID_vec[i]->Render_OLD(); 
@@ -592,9 +620,10 @@ void Player::RenderInSpace_OLD(StarSystem* starsystem)
         enable_BLEND();
                 for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
     		{ 
-    			visible_SPACESTATION_vec[i]->UpdateRenderStuff(); 
-       			visible_SPACESTATION_vec[i]->RenderInSpace(); 
-        		starsystem->RestoreSceneColor();
+    		    	if (!visible_SPACESTATION_vec[i]->Is3D())
+    			{
+    				visible_SPACESTATION_vec[i]->RenderInSpace_2D(); 
+    			}
     		}
            
     		for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
@@ -604,8 +633,10 @@ void Player::RenderInSpace_OLD(StarSystem* starsystem)
            
     		for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
     		{ 
-       			visible_SHIP_vec[i]->RenderInSpace(); 
-        		starsystem->RestoreSceneColor();
+    		    	if (!visible_SHIP_vec[i]->Is3D())
+    			{    			
+       				visible_SHIP_vec[i]->RenderInSpace_2D(); 
+    			}
     		}
 
 		for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)

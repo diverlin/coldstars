@@ -22,6 +22,16 @@
 class Star;
 #include "../common/constants.hpp"
 
+
+namespace ENTITY
+{
+	namespace STAR
+	{ 
+		const int SCALE_MIN = 200;
+		const int SCALE_MAX = 300;
+	}
+}
+
 class StarBuilder
 {
 	public:

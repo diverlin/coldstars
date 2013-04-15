@@ -738,31 +738,31 @@ void loadImages()
 //################################ PLANET_TEXTURE ####################################
 {
 	std::vector<int> arg; 
-	arg.push_back(ENTITY::PLANET::SURFACE::EARTH_ID); arg.push_back(5);
+	arg.push_back(ENTITY::PLANET_MIXED_ID); arg.push_back(5);
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::PLANET_ID, "data/planet/p_0000.png", false, &arg) );
 }
 
 {
 	std::vector<int> arg; 
-	arg.push_back(ENTITY::PLANET::SURFACE::WATER_ID); arg.push_back(5);
+	arg.push_back(ENTITY::PLANET_WATER_ID); arg.push_back(5);
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::PLANET_ID, "data/planet/p_1000.png", false, &arg) );
 }
 
 {
 	std::vector<int> arg; 
-	arg.push_back(ENTITY::PLANET::SURFACE::LAVA_ID); arg.push_back(5);
+	arg.push_back(ENTITY::PLANET_VULCANIC_ID); arg.push_back(5);
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::PLANET_ID, "data/planet/p_2000.png", false, &arg) );
 }
 
 {
 	std::vector<int> arg; 
-	arg.push_back(ENTITY::PLANET::SURFACE::ICE_ID); arg.push_back(5);
+	arg.push_back(ENTITY::PLANET_ICE_ID); arg.push_back(5);
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::PLANET_ID, "data/planet/p_3000.png", false, &arg) );
 }
 
 {
 	std::vector<int> arg; 
-	arg.push_back(ENTITY::PLANET::SURFACE::GAS_ID); arg.push_back(5);
+	arg.push_back(ENTITY::PLANET_GAS_ID); arg.push_back(5);
 	TextureManager::Instance().Add( new TextureOb(TEXTURE::PLANET_ID, "data/planet/p_4000.png", false, &arg) );
 }
 

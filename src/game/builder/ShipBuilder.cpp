@@ -26,6 +26,8 @@
 #include "../resources/textureOb.hpp"
 #include "../spaceobjects/Ship.hpp"
 
+#include "../resources/MeshCollector.hpp"
+
 ShipBuilder& ShipBuilder::Instance()
 {	
 	static ShipBuilder instance;
@@ -80,7 +82,17 @@ Ship* ShipBuilder::GetNewShip() const
 
 void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id, int size_id, int weapons_num) const
 {
-	TextureOb* texOb = TextureManager::Instance().GetRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id); 
+	Mesh* mesh = NULL;
+	TextureOb* texOb = NULL;
+	//if (getRandInt(0, 1))
+	//{
+		//texOb = TextureManager::Instance().GetRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id); 
+       	//}
+       	//else
+       	{	
+       		mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPACESTATION_ID);
+		texOb = mesh->GetTextureOb(); 
+	}
 
        	float protection_rate = 1;
         float otsec_rate      = 1;
@@ -112,7 +124,7 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id,
         
     	LifeData data_life;
         data_life.armor      = data_korpus.armor*0.1;
-        data_life.dying_time = 10*texOb->size_id;
+      	data_life.dying_time = 10*texOb->size_id;
         
         int size_threshold = 2; 
     	if (texOb->size_id > size_threshold)
@@ -122,8 +134,14 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id,
 
 	ship->SetSubSubTypeId(subsubtype_id);
 	ship->SetKorpusData(data_korpus);
+	ship->SetMesh(mesh);
 	ship->SetTextureOb(texOb);
 	ship->SetLifeData(data_life);
+	
+	ship->SetScale(getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX));
+		
+	//ship->SetAngle(vec3f(getRandInt(10, 40), getRandInt(10, 40), 0));
+	//ship->SetDeltaAngle(vec3f(0.3, 0, 0));
 	
 	CreateKorpusGeometry(ship);
 

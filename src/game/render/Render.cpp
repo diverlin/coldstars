@@ -287,9 +287,9 @@ void renderMesh(Mesh* mesh, const vec3f& center, const vec3f& angle, float scale
      	glPushMatrix();
        		glTranslatef(center.x, center.y, center.z);
        		glScalef(scale, scale, scale); 
-       		glRotatef(-angle.x, 1.0, 0.0, 0.0); 
-       		glRotatef(-angle.y, 0.0, 1.0, 0.0); 
-       		glRotatef(-angle.z, 0.0, 0.0, 1.0); 
+       		glRotatef(angle.x, 1.0, 0.0, 0.0); 
+       		glRotatef(angle.y, 0.0, 1.0, 0.0); 
+       		glRotatef(angle.z, 0.0, 0.0, 1.0); 
 
        		mesh->Draw();
      	glPopMatrix();

@@ -22,6 +22,18 @@
 class Asteroid;
 #include "../common/constants.hpp"
 
+
+namespace ENTITY
+{
+	namespace ASTEROID
+	{
+		const int SCALE_MIN = 20;
+		const int SCALE_MAX = 40;
+		
+		const int GIVEN_EXPIRIENCE = 100;
+	}
+}
+
 class AsteroidBuilder
 {
 	public:

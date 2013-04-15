@@ -44,7 +44,6 @@ class BasePlanet : public BaseSpaceEntity
 
 		void CalcCollisionrRadius();
 		
-		void RenderMesh_NEW(const vec2f&) const;
 		void RenderMesh_OLD() const;
 				
 	protected:

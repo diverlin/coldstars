@@ -22,6 +22,21 @@
 class Planet;
 #include "../common/constants.hpp"
 
+namespace ENTITY
+{
+	namespace PLANET
+	{
+		const int DISTANCE_MIN = 400;
+		const int DISTANCE_MAX = 500;
+		const int SCALE_MIN = 150;
+		const int SCALE_MAX = 250;
+		const int SPEED_MIN = 40;
+		const int SPEED_MAX = 50;
+		const int POPULATION_MIN = 6000;
+		const int POPULATION_MAX = 20000;
+	}
+}	
+	
 class PlanetBuilder
 {
 	public:

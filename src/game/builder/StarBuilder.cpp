@@ -26,7 +26,7 @@
 #include "../common/rand.hpp"
 #include "../resources/TextureManager.hpp"
 #include "../resources/MeshCollector.hpp"
-
+	
 StarBuilder& StarBuilder::Instance()
 {
 	static StarBuilder instance;
@@ -85,7 +85,7 @@ void StarBuilder::CreateNewInternals(Star* star) const
 	star->SetTextureOb(texOb);
 	star->SetLifeData(data_life);
 	star->SetMesh(MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_ID));	
-	star->SetScale(getRandInt(ENTITY::STAR::SIZE_MIN_, ENTITY::STAR::SIZE_MAX_));        	
+	star->SetScale(getRandInt(ENTITY::STAR::SCALE_MIN, ENTITY::STAR::SCALE_MAX));        	
         
         star->CalcCollisionrRadius();
  

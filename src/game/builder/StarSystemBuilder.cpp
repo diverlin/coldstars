@@ -38,6 +38,7 @@
 #include "../effects/DistantNebulaEffect.hpp"
 #include "../effects/DistantStarEffect.hpp"
 
+
 StarSystemBuilder& StarSystemBuilder::Instance()
 {
 	static StarSystemBuilder instance;

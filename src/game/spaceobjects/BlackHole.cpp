@@ -83,7 +83,7 @@ void BlackHole::UpdateInfo()
       
 void BlackHole::Render_NEW(const vec2f& scroll_coords) const
 {
-	RenderMesh_NEW(scroll_coords);
+	RenderMesh(scroll_coords);
 }
 	
 void BlackHole::Render_OLD() const

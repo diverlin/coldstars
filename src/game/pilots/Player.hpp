@@ -113,7 +113,7 @@ class Player : public Base
     		std::vector<Ship*>         visible_SHIP_vec;
     		std::vector<Satellite*>    visible_SATELLITE_vec;
     		std::vector<SpaceStation*> visible_SPACESTATION_vec;
-    		
+    		    		
     		//effects
     		std::vector<ShockWaveEffect*>    visible_effect_SHOCKWAVE_vec;
     		std::vector<LazerTraceEffect*>   visible_effect_LAZERTRACE_vec;
