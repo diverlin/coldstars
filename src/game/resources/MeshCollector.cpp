@@ -18,6 +18,7 @@
 
 #include "MeshCollector.hpp"
 #include "../render/Mesh.hpp"
+#include "../common/rand.hpp"
 
 MeshCollector& MeshCollector::Instance()
 {
@@ -27,13 +28,29 @@ MeshCollector& MeshCollector::Instance()
 		
 void MeshCollector::RegisterMesh(Mesh* mesh)
 {
-	mesh_map.insert(std::make_pair(mesh->GetTypeId(), mesh));
+	mesh_vec.push_back(mesh);
 }
 
 Mesh* MeshCollector::GetMeshByTypeId(int type_id) const
 {
-	std::map<int, Mesh*>::const_iterator slice = mesh_map.find(type_id);
-	return slice->second;
+	std::vector<Mesh*> result;
+	for (unsigned int i=0; i<mesh_vec.size(); i++)
+	{
+		if (mesh_vec[i]->GetTypeId() == type_id)
+		{
+			result.push_back(mesh_vec[i]);
+		}
+	}
+	
+	if (result.size() == 0) 
+	{
+		throw "mesh with request type is not found";
+		return NULL;
+	}
+	else
+	{
+		return result[getRandInt(0, result.size()-1)];
+	}
 }
 
 		

@@ -41,8 +41,6 @@ class BasePlanet : public BaseSpaceEntity
 		Orbit* GetOrbit() const { return orbit; };
 
 		void CreateOrbit();
-
-		void CalcCollisionrRadius();
 		
 		void RenderMesh_OLD() const;
 				

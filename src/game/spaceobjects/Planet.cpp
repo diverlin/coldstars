@@ -106,8 +106,9 @@ void Planet::UpdateInfo()
 void Planet::PostDeathUniqueEvent(bool)
 {}
 
-void Planet::Render_NEW(const vec2f& scroll_coords) const
+void Planet::Render_NEW(const vec2f& scroll_coords)
 {
+	UpdateRenderAnimation();
 	RenderMesh(scroll_coords);
 }
 	

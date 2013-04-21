@@ -26,6 +26,8 @@
 #include "../resources/TextureManager.hpp"
 #include "../resources/MeshCollector.hpp"
 
+#include "../animations/AnimationConstantRotationAxisZ.hpp"
+
 PlanetBuilder& PlanetBuilder::Instance()
 {
 	static PlanetBuilder instance;
@@ -67,7 +69,9 @@ Planet* PlanetBuilder::GetNewPlanet(float orbit_radius) const
 } 
  	
 void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
-{           
+{     
+	Mesh* mesh =MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_ID);
+      
         LifeData data_life;
 	data_life.armor = 100000;
 
@@ -87,13 +91,15 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
 	
 	planet->SetTextureOb(textureOb);
 	planet->SetLifeData(data_life);
-	planet->SetMesh(MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_ID));
+
+	planet->SetAngle(vec3f(-getRandInt(10, 40), -getRandInt(10, 40), 0));	
+	float step = getRandInt(30, 100)*0.01;
+	AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
+	planet->SetMesh(mesh, animation_program);
 	planet->SetScale(getRandInt(ENTITY::PLANET::SCALE_MIN, ENTITY::PLANET::SCALE_MAX));
-	planet->SetAngle(vec3f(-getRandInt(10, 40), -getRandInt(10, 40), 0));
-	planet->SetDeltaAngle(vec3f(0, 0, getRandInt(30, 100)*0.01));
 	planet->SetZYX(false);
 	
-	planet->CalcCollisionrRadius();
+	planet->CalculateCollisionRadius();
 }
 
 //void PlanetBuilder::CreateNewInternals2(Planet* planet)

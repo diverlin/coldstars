@@ -120,8 +120,9 @@ void SpaceStation::RenderInSpace_2D()
 }
 
 				 		
-void SpaceStation::RenderInSpace_3D(const vec2f& scroll_coords) const
+void SpaceStation::RenderInSpace_3D(const vec2f& scroll_coords)
 {     	
+	UpdateRenderAnimation();	
 	RenderMesh(scroll_coords);
 }
 

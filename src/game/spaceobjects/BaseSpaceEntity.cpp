@@ -29,12 +29,15 @@
 #include "../text/VerticalFlowText.hpp" 
 #include "../common/Logger.hpp"
 #include "../resources/ShaderCollector.hpp"
+#include "../animations/AnimationBase.hpp"
+
 
 BaseSpaceEntity::BaseSpaceEntity():
 starsystem(NULL), 
 mesh(NULL), 
 textureOb(NULL), 
 parent(NULL),
+animation_program(NULL),
 place_type_id(NONE_ID), 
 collision_radius(0), 
 mass(0), 
@@ -49,13 +52,16 @@ BaseSpaceEntity::~BaseSpaceEntity()
 	#if CREATEDESTROY_LOG_ENABLED == 1
 	Logger::Instance().Log("___::~BaseSpaceEntity("+int2str(GetId())+")");
 	#endif
+	
+	delete animation_program;
 }
 
-void BaseSpaceEntity::RecalculateCollisionRadius()
+void BaseSpaceEntity::CalculateCollisionRadius()
 {
 	if (mesh)
 	{
 		collision_radius = scale/2; // for 3d object
+		points.SetWidthHeight(collision_radius, collision_radius);  // needs for finding visible corners
 	}
 	else
 	{
@@ -126,6 +132,14 @@ void BaseSpaceEntity::RenderInfo(const vec2f& center)
 { 
 	UpdateInfo();
      	drawInfoIn2Column(info.title_list, info.value_list, center);
+}
+
+void BaseSpaceEntity::UpdateRenderAnimation()
+{
+	if (animation_program != NULL)
+	{
+		animation_program->Update(angle);
+	}
 }
 
 void BaseSpaceEntity::RenderMesh(const vec2f& scroll_coords) const

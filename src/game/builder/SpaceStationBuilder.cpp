@@ -27,7 +27,7 @@
 #include "../resources/TextureManager.hpp"
 #include "../resources/textureOb.hpp"
 #include "../resources/MeshCollector.hpp"
-
+#include "../animations/AnimationConstantRotationAxisX.hpp"
 
 SpaceStationBuilder& SpaceStationBuilder::Instance()
 {	
@@ -119,15 +119,19 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
                            
     	spacestation->SetSubSubTypeId(ENTITY::TYPE::SPACESTATION_MILITARY_ID);
     	spacestation->SetKorpusData(data_korpus);
-	spacestation->SetMesh(mesh);
 	spacestation->SetTextureOb(texOb);
 	spacestation->SetLifeData(data_life);
 
-	spacestation->SetAngle(vec3f(0, getRandInt(10, 45), getRandInt(10, 45)));	
-	spacestation->SetDeltaAngle(vec3f(getRandInt(10, 40)*0.01, 0, 0));
-	spacestation->SetZYX(true);
-		
-	spacestation->SetScale(getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX));
+	if (mesh != NULL)
+	{
+		float step = getRandInt(10, 40)*0.01;
+		AnimationConstantRotationAxisX* animation_program = new AnimationConstantRotationAxisX(step);
+		spacestation->SetMesh(mesh, animation_program);
+		spacestation->SetAngle(vec3f(0, getRandInt(10, 45), getRandInt(10, 45)));	
+		spacestation->SetZYX(true);		
+		spacestation->SetScale(getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX));
+    	}
+    	
     	spacestation->SetMass(getRandInt(ENTITY::SPACESTATION::MASS_MIN, ENTITY::SPACESTATION::MASS_MAX));
     	
 	CreateKorpusGeometry(spacestation);

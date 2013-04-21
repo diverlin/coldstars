@@ -20,7 +20,7 @@
 #ifndef MESHCOLLECTOR_H
 #define MESHCOLLECTOR_H
 
-#include <map>
+#include <vector>
 
 class Mesh;
 
@@ -33,7 +33,7 @@ class MeshCollector
 		Mesh* GetMeshByTypeId(int) const;
 		
 	private:
-		std::map<int, Mesh*> mesh_map;
+		std::vector<Mesh*> mesh_vec;
 		
 		MeshCollector() {};
 		~MeshCollector() {};

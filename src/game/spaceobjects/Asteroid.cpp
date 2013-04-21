@@ -76,7 +76,7 @@ void Asteroid::PostDeathUniqueEvent(bool show_effect)
    	
    	if (show_effect == true)
      	{
-        	createExplosion(starsystem, points.GetCenter(), scale/2);        		
+        	createExplosion(starsystem, points.GetCenter(), collision_radius/2);        		
         }
         			
 }    
@@ -93,8 +93,9 @@ void Asteroid::UpdateInfo()
 	info.addNameStr("speed x 100:"); info.addValueStr(int2str(int(data_planet.speed*100)));
 }     
 
-void Asteroid::Render_NEW(const vec2f& scroll_coords) const
+void Asteroid::Render_NEW(const vec2f& scroll_coords)
 {
+	UpdateRenderAnimation();
 	RenderMesh(scroll_coords);
 }
 	

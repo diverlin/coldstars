@@ -87,7 +87,7 @@ void BlackHoleBuilder::CreateNewInternals(BlackHole* blackhole) const
 	blackhole->SetDeltaAngle(d_angle);
 	blackhole->SetScale(30);
 	
-	blackhole->CalcCollisionrRadius();
+	blackhole->CalculateCollisionRadius();
 }
 
 

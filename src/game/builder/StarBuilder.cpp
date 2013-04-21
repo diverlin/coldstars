@@ -87,7 +87,7 @@ void StarBuilder::CreateNewInternals(Star* star) const
 	star->SetMesh(MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_ID));	
 	star->SetScale(getRandInt(ENTITY::STAR::SCALE_MIN, ENTITY::STAR::SCALE_MAX));        	
         
-        star->CalcCollisionrRadius();
+        star->CalculateCollisionRadius();
  
 	star->CalcColor();
 }
