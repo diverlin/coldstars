@@ -59,7 +59,8 @@ class BaseSpaceEntity : public Base
                 
 		void SetAngle(const vec3f& angle)           { this->angle = angle; }
 		void SetDeltaAngle(const vec3f& d_angle)    { this->d_angle = d_angle; }
-
+		void SetZYX(bool ZYX)    { this->ZYX = ZYX; }
+		
 		void SetParent(BaseSpaceEntity* parent)     { this->parent = parent; }
 		void SetScale(float scale) { this->scale = scale; }
 
@@ -95,9 +96,10 @@ class BaseSpaceEntity : public Base
 		
 		vec3f angle, d_angle;
 		vec2f d_pos;
-
+		bool ZYX;
+		
 		float collision_radius;
-
+	
 		TextureOb* textureOb;
 		Mesh* mesh; 
 

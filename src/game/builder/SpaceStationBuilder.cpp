@@ -120,8 +120,10 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 	spacestation->SetTextureOb(texOb);
 	spacestation->SetLifeData(data_life);
 
-	spacestation->SetAngle(vec3f(getRandInt(0, 360), 0, 0));	
-	spacestation->SetDeltaAngle(vec3f(0, getRandInt(10, 40)*0.01, 0));
+	spacestation->SetAngle(vec3f(0, getRandInt(10, 45), getRandInt(10, 45)));	
+	spacestation->SetDeltaAngle(vec3f(getRandInt(10, 40)*0.01, 0, 0));
+	spacestation->SetZYX(true);
+		
 	spacestation->SetScale(getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX));
     	spacestation->SetMass(getRandInt(ENTITY::SPACESTATION::MASS_MIN, ENTITY::SPACESTATION::MASS_MAX));
     	

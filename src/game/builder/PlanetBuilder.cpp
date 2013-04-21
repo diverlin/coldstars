@@ -89,9 +89,10 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
 	planet->SetLifeData(data_life);
 	planet->SetMesh(MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_ID));
 	planet->SetScale(getRandInt(ENTITY::PLANET::SCALE_MIN, ENTITY::PLANET::SCALE_MAX));
-	planet->SetAngle(vec3f(getRandInt(10, 40), getRandInt(10, 40), 0));
-	planet->SetDeltaAngle(vec3f(0, 0, getRandInt(10, 100)*0.01));
-
+	planet->SetAngle(vec3f(-getRandInt(10, 40), -getRandInt(10, 40), 0));
+	planet->SetDeltaAngle(vec3f(0, 0, getRandInt(30, 100)*0.01));
+	planet->SetZYX(false);
+	
 	planet->CalcCollisionrRadius();
 }
 
