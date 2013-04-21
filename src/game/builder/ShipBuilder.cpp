@@ -127,10 +127,10 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id,
       	data_life.dying_time = 10*texOb->size_id;
         
         int size_threshold = 2; 
-    	if (texOb->size_id > size_threshold)
-       		data_korpus.draw_turrels = true; 
-    	else
+    	if ( (texOb->size_id < size_threshold) or (mesh != NULL) )
        		data_korpus.draw_turrels = false; 
+    	else
+       		data_korpus.draw_turrels = true; 
 
 	ship->SetSubSubTypeId(subsubtype_id);
 	ship->SetKorpusData(data_korpus);
