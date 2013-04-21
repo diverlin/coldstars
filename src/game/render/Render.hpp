@@ -35,6 +35,9 @@ void camera(float x, float y);
 void setColor4f(const Color4f&);	
 void setColor4f(float, float, float, float);
 
+void enable_CULLFACE();
+void disable_CULLFACE();
+
 void enable_BLEND();
 void disable_BLEND();
 

@@ -64,7 +64,7 @@ class Planet : public BasePlanet
 
 		void PostDeathUniqueEvent(bool);
 
-		void RenderAtmosphere_NEW(const vec2f&) const;
+		void RenderAtmosphere_NEW(const vec2f&);
 		
 		void SaveDataUniquePlanet(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniquePlanet(const boost::property_tree::ptree&);

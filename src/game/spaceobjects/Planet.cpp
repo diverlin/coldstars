@@ -39,8 +39,7 @@ Planet::Planet(int id)
 		
 	textureOb_atmosphere = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ATMOSPHERE_ID);
 	
-	angle_atmosphere.Set(0.0, 0.0, 0.0);
-	d_angle_atmosphere.Set(-0.1, 0.0, 0.0);
+	d_angle_atmosphere.Set(0.0, 0.0, -0.4);
 		      	
 	land = NULL;
 }
@@ -79,7 +78,6 @@ void Planet::AddVehicle(Vehicle* vehicle) const
 	
 void Planet::UpdateInSpace(int time, bool show_effect)
 {      
-	angle_atmosphere += d_angle_atmosphere;
 	if (time > 0)
 	{
 		UpdatePosition();
@@ -109,6 +107,7 @@ void Planet::Render_NEW(const vec2f& scroll_coords)
 {
 	UpdateRenderAnimation();
 	RenderMesh(scroll_coords);
+	RenderAtmosphere_NEW(scroll_coords);
 }
 	
 void Planet::Render_OLD() const
@@ -116,19 +115,25 @@ void Planet::Render_OLD() const
 	RenderMesh_OLD();	
 }
 				 		
-void Planet::RenderAtmosphere_NEW(const vec2f& scroll_coords) const
+void Planet::RenderAtmosphere_NEW(const vec2f& scroll_coords)
 {     	
+     	const Color4f& color = starsystem->GetColor4f(); float ambient_factor = 0.25;
+     	
+	angle_atmosphere += d_angle_atmosphere;
+	
      	glUseProgram(ShaderCollector::Instance().light);
 
-     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
-     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
-
+     	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0);
+     	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0);
+     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "diffColor"), color.r, color.g, color.b, color.a);
+     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "ambientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
+     	
      	glEnable(GL_BLEND);
      		glActiveTexture(GL_TEXTURE0);                                
      		glBindTexture(GL_TEXTURE_2D, textureOb_atmosphere->texture);
      		glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
 
-		renderMesh(mesh, points.GetCenter3f(), angle_atmosphere, scale*1.1f, ZYX);
+		renderMesh(mesh, points.GetCenter3f(), angle_atmosphere, scale*1.08f, ZYX);
 	glDisable(GL_BLEND);
 	
      	glUseProgram(0);

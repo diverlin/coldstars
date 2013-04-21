@@ -45,6 +45,8 @@ void initGl(int width, int height)
       	//glDisable(GL_LIGHTING); 
       	
       	resizeGl(width, height); 
+      	
+      	glCullFace(GL_BACK); 
 }   
 
 void resizeGl(int width, int height)
@@ -70,6 +72,9 @@ void setColor4f(float r, float g, float b, float a) { glColor4f(r, g, b, a); }
 
 void enable_BLEND()  { glEnable(GL_BLEND);  }
 void disable_BLEND() { glDisable(GL_BLEND); }
+
+void enable_CULLFACE()  { glEnable(GL_CULL_FACE); }
+void disable_CULLFACE() { glDisable(GL_CULL_FACE); }
 
 void enable_DEPTH()  { glEnable(GL_DEPTH_TEST); }
 void disable_DEPTH() { glDisable(GL_DEPTH_TEST); }
