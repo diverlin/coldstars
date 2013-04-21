@@ -345,6 +345,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
      		
 void Player::RenderInSpace_NEW(StarSystem* starsystem)
 {   
+enable_CULLFACE();
 	int w = Screen::Instance().GetWidth();
 	int h = Screen::Instance().GetHeight();
 	vec2f world_coord(Screen::Instance().GetRect().GetBottomLeft());
@@ -567,6 +568,8 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
     	}   
     		    	
     	starsystem->RestoreSceneColor();
+    	
+disable_CULLFACE();
 }
     
 void Player::RenderInSpace_OLD(StarSystem* starsystem)
