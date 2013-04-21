@@ -130,11 +130,15 @@ void BaseSpaceEntity::RenderInfo(const vec2f& center)
 
 void BaseSpaceEntity::RenderMesh(const vec2f& scroll_coords) const
 {
+     	const Color4f& color = starsystem->GetColor4f(); float ambient_factor = 0.2;
+     	
      	glUseProgram(ShaderCollector::Instance().light);
 
-     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
-     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0, 0.0);
-
+     	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0);
+     	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0);
+     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "diffColor"), color.r, color.g, color.b, color.a);
+     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "ambientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
+     	     	
      	glActiveTexture(GL_TEXTURE0);
      	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
      	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
