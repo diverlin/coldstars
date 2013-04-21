@@ -28,8 +28,8 @@ namespace ENTITY
 	{
 		const int DISTANCE_MIN = 400;
 		const int DISTANCE_MAX = 500;
-		const int SCALE_MIN = 150;
-		const int SCALE_MAX = 250;
+		const int SCALE_MIN = 100;
+		const int SCALE_MAX = 190;
 		const int SPEED_MIN = 40;
 		const int SPEED_MAX = 50;
 		const int POPULATION_MIN = 6000;

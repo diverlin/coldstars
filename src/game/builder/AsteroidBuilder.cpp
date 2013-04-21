@@ -25,6 +25,7 @@
 #include "../resources/TextureManager.hpp"
 #include "../resources/MeshCollector.hpp"
 
+#include "../animations/AnimationConstantRotationAxisZ.hpp"
 	
 AsteroidBuilder& AsteroidBuilder::Instance()
 {
@@ -67,6 +68,8 @@ Asteroid* AsteroidBuilder::GetNewAsteroid() const
        	
 void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
 {           
+	Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_DEFORMED_ID);
+	
 	LifeData data_life;   
 	data_life.armor      = 10;
       	data_life.dying_time = 50;
@@ -85,14 +88,18 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
         asteroid->SetPlanetData(planet_data);
 	asteroid->SetTextureOb(texOb);
 	asteroid->SetLifeData(data_life);
-	asteroid->SetMesh(MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_DEFORMED_ID));
+
+        
+        asteroid->SetAngle(vec3f(getRandInt(10, 40), getRandInt(10, 40), 0));	        
+	float step = getRandInt(10, 100)*0.01;
+	AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
+	asteroid->SetMesh(mesh, animation_program);
+	asteroid->SetZYX(false);
+				
 	asteroid->SetScale(getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX));	
        	asteroid->SetGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
-        
-        asteroid->SetAngle(vec3f(getRandInt(10, 40), getRandInt(10, 40), 0));
-	asteroid->SetDeltaAngle(vec3f(0, 0, getRandInt(10, 100)*0.01));
 	
-        asteroid->CalcCollisionrRadius();
+        asteroid->CalculateCollisionRadius();
 }
 
 

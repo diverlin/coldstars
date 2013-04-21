@@ -27,6 +27,7 @@
 #include "../spaceobjects/Ship.hpp"
 
 #include "../resources/MeshCollector.hpp"
+#include "../animations/AnimationWiggleAxisX.hpp"
 
 ShipBuilder& ShipBuilder::Instance()
 {	
@@ -134,15 +135,19 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id,
 
 	ship->SetSubSubTypeId(subsubtype_id);
 	ship->SetKorpusData(data_korpus);
-	ship->SetMesh(mesh);
+	if (mesh != NULL)
+	{
+		float step = getRandInt(10, 20)*0.01;
+		float threshold = 10;
+		AnimationWiggleAxisX* animation_program = new AnimationWiggleAxisX(step, threshold);
+		ship->SetMesh(mesh, animation_program);
+		ship->SetZYX(true);
+		
+		ship->SetScale(getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX));
+	}
+	
 	ship->SetTextureOb(texOb);
 	ship->SetLifeData(data_life);
-	
-	ship->SetScale(getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX));
-
-	ship->SetAngle(vec3f(30, 0, 0));		
-	//ship->SetDeltaAngle(vec3f(getRandInt(10, 40)*0.01, 0, 0));
-	ship->SetZYX(true);
 	
 	CreateKorpusGeometry(ship);
 

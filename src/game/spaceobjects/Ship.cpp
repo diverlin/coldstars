@@ -36,6 +36,7 @@
 
 #include "../pilots/Npc.hpp"
 
+
 Ship::Ship(int id)
 {
 	data_id.id = id;
@@ -143,8 +144,9 @@ void Ship::RenderInSpace_2D() const
 	starsystem->RestoreSceneColor();
 }
 
-void Ship::RenderInSpace_3D(const vec2f& scroll_coords) const
+void Ship::RenderInSpace_3D(const vec2f& scroll_coords)
 {
+	UpdateRenderAnimation();
 	RenderMesh(scroll_coords);
 }
 

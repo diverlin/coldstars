@@ -84,7 +84,7 @@ void RocketBulletBuilder::CreateNewInternals(RocketBullet* rocket_bullet, const 
 
 void RocketBulletBuilder::CreateKorpusGeometry(RocketBullet* rocket_bullet) const
 {
-	rocket_bullet->RecalculateCollisionRadius();
+	rocket_bullet->CalculateCollisionRadius();
 
     	rocket_bullet->GetPoints().initMainQuadPoints(rocket_bullet->GetTextureOb()->GetFrameWidth(), rocket_bullet->GetTextureOb()->GetFrameHeight());
     	rocket_bullet->GetPoints().addMainQuadPoints();

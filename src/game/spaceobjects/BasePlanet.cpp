@@ -42,16 +42,6 @@ void BasePlanet::CreateOrbit()
 {
 	orbit->CalcPath(data_planet.radius_A, data_planet.radius_B, data_planet.speed, data_planet.orbit_phi_inD, data_planet.clockwise);
 }
-    		
-void BasePlanet::CalcCollisionrRadius()
-{
-        float scale_factor = 5.4;                                            
-        int w = scale_factor * scale;
-        int h = scale_factor * scale;
-        collision_radius = (w + h)/4; 
-        
-        points.SetWidthHeight(scale_factor*scale, scale_factor*scale);  // needs for finding visible corners
-}
 
 void BasePlanet::PostDeathUniqueEvent(bool)  /* virtual */
 {}		
@@ -116,7 +106,7 @@ void BasePlanet::ResolveDataUniqueBasePlanet()
 	Logger::Instance().Log(" BasePlanet("+int2str(GetId())+")::ResolveDataUniqueBasePlanet", SAVELOAD_LOG_DIP);
 	#endif
 	
-	CalcCollisionrRadius();
+	CalculateCollisionRadius();
 	//orbit->SetIt(data_unresolved_BasePlanet.orbit_it); // moved into planet/asteroid class
 }
 

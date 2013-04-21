@@ -28,6 +28,7 @@ class Mesh;
 #include "../text/InfoTable.hpp" 
 class TextureOb;
 class Vehicle;
+class AnimationBase;
 
 struct UnresolvedDataUniqueBaseSpaceEntity
 {
@@ -47,7 +48,7 @@ class BaseSpaceEntity : public Base
 		virtual ~BaseSpaceEntity();
 
 		void SetLifeData(const LifeData& data_life) { this->data_life = data_life; }
-		void SetMesh(Mesh* mesh)		    { this->mesh = mesh; }
+		void SetMesh(Mesh* mesh, AnimationBase* animation_program = NULL) { this->mesh = mesh; this->animation_program = animation_program; }
 		void SetTextureOb(TextureOb* textureOb)     { this->textureOb = textureOb; }
 		void SetStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
 		void SetPlaceTypeId(int place_type_id)      { this->place_type_id = place_type_id;  }
@@ -79,7 +80,7 @@ class BaseSpaceEntity : public Base
 
 		BaseSpaceEntity* GetParent() const { return parent; }
 
-		void RecalculateCollisionRadius();
+		void CalculateCollisionRadius();
 
 		void MovingByExternalForce(const vec2f&, float);
 
@@ -114,12 +115,15 @@ class BaseSpaceEntity : public Base
 		int given_expirience;
 
 		BaseSpaceEntity* parent;
-
+		
+		AnimationBase* animation_program;
+		
 		void UpdateRotation();
 
 		void CheckDeath(bool);
 		virtual void PostDeathUniqueEvent(bool) {};
 
+		void UpdateRenderAnimation();
 		void RenderMesh(const vec2f&) const;
 
 		UnresolvedDataUniqueBaseSpaceEntity data_unresolved_BaseSpaceEntity;
