@@ -41,6 +41,7 @@ ObjLoader::ObjLoader(const std::string& path)
 	        	{
 	            		vec2f tex;
 	            		line_stream >> tex.x >> tex.y;
+	            		tex.y = 1 - tex.y; // this is needed for correct texture mapping in opengl 
 	            		texcoords.push_back(tex);
 	        	}
 	        	

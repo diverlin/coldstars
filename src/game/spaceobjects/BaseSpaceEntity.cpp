@@ -130,7 +130,7 @@ void BaseSpaceEntity::RenderInfo(const vec2f& center)
 
 void BaseSpaceEntity::RenderMesh(const vec2f& scroll_coords) const
 {
-     	const Color4f& color = starsystem->GetColor4f(); float ambient_factor = 0.2;
+     	const Color4f& color = starsystem->GetColor4f(); float ambient_factor = 0.25;
      	
      	glUseProgram(ShaderCollector::Instance().light);
 
