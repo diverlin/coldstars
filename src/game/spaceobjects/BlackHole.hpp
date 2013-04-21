@@ -36,7 +36,7 @@ class BlackHole : public BasePlanet
 		
 		void UpdateInSpace(int, bool);
         	
-        	void Render_NEW(const vec2f& scroll_coords) const;	
+        	void Render_NEW(const vec2f& scroll_coords);	
 		void Render_OLD() const;
 		
         	virtual void SaveData(boost::property_tree::ptree&) const;

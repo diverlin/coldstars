@@ -89,11 +89,11 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
 	asteroid->SetTextureOb(texOb);
 	asteroid->SetLifeData(data_life);
 
-        
+	asteroid->SetMesh(mesh);        
         asteroid->SetAngle(vec3f(getRandInt(10, 40), getRandInt(10, 40), 0));	        
 	float step = getRandInt(10, 100)*0.01;
 	AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
-	asteroid->SetMesh(mesh, animation_program);
+	asteroid->SetRenderAnimation(animation_program);
 	asteroid->SetZYX(false);
 				
 	asteroid->SetScale(getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX));	

@@ -96,17 +96,9 @@ void Container::PostDeathUniqueEvent(bool show_effect)
         }
 }
 
-void Container::CalcCollisionrRadius()
-{
-        collision_radius = (textureOb->GetFrameWidth() + textureOb->GetFrameHeight())/4; 
-        
-        points.SetWidthHeight(textureOb->GetFrameWidth(), textureOb->GetFrameHeight());  // needs for finding visible corners
-}
-
 void Container::UpdateInSpace(int time, bool show_effect)
 {
 	CheckDeath(show_effect);
-	UpdateRotation();
 		
 	if (time > 0)
 	{
@@ -128,6 +120,7 @@ void Container::UpdateInSpace(int time, bool show_effect)
        		
 void Container::Render2D()
 { 
+	UpdateRenderAnimation();
     	drawDynamic(textureOb, points.GetCenter(), angle.z, points.GetPosZ());
 }
 

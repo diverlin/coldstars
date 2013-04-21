@@ -25,6 +25,8 @@
 #include "../resources/TextureManager.hpp"
 #include "../resources/MeshCollector.hpp"
 
+#include "../animations/AnimationConstantRotationAxisZ.hpp"
+
 BlackHoleBuilder& BlackHoleBuilder::Instance()
 {
 	static BlackHoleBuilder instance;
@@ -78,13 +80,16 @@ void BlackHoleBuilder::CreateNewInternals(BlackHole* blackhole) const
         data_life.dying_time = 2;        
         
 	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BLACKHOLE_ID); 
-	vec3f d_angle(0.0, 0.0, 10.0); 		
                 
 	blackhole->SetLifeData(data_life);
 	blackhole->SetTextureOb(texOb);
 	blackhole->SetMesh(MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_ID));	
 	
-	blackhole->SetDeltaAngle(d_angle);
+	float step = 10;
+	AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
+	blackhole->SetRenderAnimation(animation_program);
+	blackhole->SetZYX(false);
+	
 	blackhole->SetScale(30);
 	
 	blackhole->CalculateCollisionRadius();

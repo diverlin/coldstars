@@ -69,7 +69,6 @@ void SpaceStation::BindLand(BaseLand* land)
        	
 void SpaceStation::UpdateInSpace(int time, bool show_effect)
 {
-	UpdateRotation();
 	CheckDeath(show_effect);
 	if (time > 0)
 	{

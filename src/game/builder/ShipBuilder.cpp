@@ -137,10 +137,12 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id,
 	ship->SetKorpusData(data_korpus);
 	if (mesh != NULL)
 	{
+		ship->SetMesh(mesh);
+		
 		float step = getRandInt(10, 20)*0.01;
 		float threshold = 10;
 		AnimationWiggleAxisX* animation_program = new AnimationWiggleAxisX(step, threshold);
-		ship->SetMesh(mesh, animation_program);
+		ship->SetRenderAnimation(animation_program);
 		ship->SetZYX(true);
 		
 		ship->SetScale(getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX));

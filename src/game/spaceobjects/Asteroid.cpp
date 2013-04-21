@@ -49,7 +49,6 @@ Asteroid::~Asteroid()
 void Asteroid::UpdateInSpace(int time, bool show_effect)
 {    
 	CheckDeath(show_effect);
-	UpdateRotation();
 	if (time > 0)
 	{	
      		UpdatePosition();
