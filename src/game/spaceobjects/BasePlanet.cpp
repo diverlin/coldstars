@@ -72,7 +72,7 @@ void BasePlanet::UpdatePosition()
 void BasePlanet::RenderMesh_OLD() const
 {   	
 	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-	renderMesh(mesh, points.GetCenter3f(), angle, scale);
+	renderMesh(mesh, points.GetCenter3f(), angle, scale, ZYX);
 }
 
 

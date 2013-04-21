@@ -282,18 +282,33 @@ void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z
 }
     
     
-void renderMesh(Mesh* mesh, const vec3f& center, const vec3f& angle, float scale)
+void renderMesh(Mesh* mesh, const vec3f& center, const vec3f& angle, float scale, bool ZYX)
 {
      	glPushMatrix();
        		glTranslatef(center.x, center.y, center.z);
        		glScalef(scale, scale, scale); 
-       		glRotatef(angle.x, 1.0, 0.0, 0.0); 
-       		glRotatef(angle.y, 0.0, 1.0, 0.0); 
-       		glRotatef(angle.z, 0.0, 0.0, 1.0); 
-
+       		if (ZYX)
+       			rotateZYX(angle); // animation rotation along axis X
+		else
+       			rotateXYZ(angle); // animation rotation along axis z
+       		
        		mesh->Draw();
      	glPopMatrix();
 
+}
+
+void rotateZYX(const vec3f& angle)
+{
+	glRotatef(angle.z, 0.0, 0.0, 1.0); 
+	glRotatef(angle.y, 0.0, 1.0, 0.0); 
+	glRotatef(angle.x, 1.0, 0.0, 0.0); 
+}
+
+void rotateXYZ(const vec3f& angle)
+{
+	glRotatef(angle.x, 1.0, 0.0, 0.0); 
+	glRotatef(angle.y, 0.0, 1.0, 0.0); 
+	glRotatef(angle.z, 0.0, 0.0, 1.0); 
 }
 
 void drawParticle(float size, float r, float g, float b, float a, const vec2f& center)

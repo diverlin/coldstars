@@ -39,7 +39,8 @@ place_type_id(NONE_ID),
 collision_radius(0), 
 mass(0), 
 given_expirience(0),
-scale(0)
+scale(0),
+ZYX(false)
 {}
 
 /* virtual */
@@ -138,7 +139,7 @@ void BaseSpaceEntity::RenderMesh(const vec2f& scroll_coords) const
      	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
      	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
      	
-	renderMesh(mesh, points.GetCenter3f(), angle, scale);
+	renderMesh(mesh, points.GetCenter3f(), angle, scale, ZYX);
 		
      	glUseProgram(0);
      	glActiveTexture(GL_TEXTURE0);
