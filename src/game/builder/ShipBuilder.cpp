@@ -139,8 +139,9 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id,
 	ship->SetLifeData(data_life);
 	
 	ship->SetScale(getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX));
-		
-	ship->SetDeltaAngle(vec3f(getRandInt(10, 40)*0.01, 0, 0));
+
+	ship->SetAngle(vec3f(30, 0, 0));		
+	//ship->SetDeltaAngle(vec3f(getRandInt(10, 40)*0.01, 0, 0));
 	ship->SetZYX(true);
 	
 	CreateKorpusGeometry(ship);
