@@ -35,8 +35,6 @@ Satellite::Satellite(int id)
 	
     	mass = getRandInt(ENTITY::SATELLITE::MASS_MIN, ENTITY::SATELLITE::MASS_MAX);
     	orbit = new Orbit();
-    	
-    	d_angle.z = 1.0f;
 }
 
 /* virtual */
@@ -87,26 +85,15 @@ void Satellite::UpdateInfo()
             
 void Satellite::UpdateRenderStuff()
 {
-    	//points.update(); 
     	protection_complex.GetShieldEffect()->Update();
     	
-    	this->UpdateRotation();
 	points.SetAngle(angle.z);
-    	//printf("3. angle = %f\n", angle.z);
     	points.Update();
-    		
-    	//if (ableTo.DRIVE == true)
-    	//{
-       		//drive_trail->update();
-    	//}
 }
 
-void Satellite::RenderInSpace() const
+void Satellite::RenderInSpace()
 {   
-        //if (ableTo.GRAB == true)
-        //{
-                //renderGrappleTrail();
-        //}
+	UpdateRenderAnimation();
         
     	RenderKorpus();
     	
@@ -115,11 +102,6 @@ void Satellite::RenderInSpace() const
         	weapon_complex.RenderTurrels();
         }
 
-    	//if (ableTo.DRIVE == true)
-    	//{
-		//renderDriveTrail();
-    	//}
-    	
         if (protection_complex.GetProtectorSlot()->GetItem() != NULL)
     	{
         	RenderShieldEffect(1.0 - color.a); 

@@ -79,7 +79,6 @@ void Planet::AddVehicle(Vehicle* vehicle) const
 	
 void Planet::UpdateInSpace(int time, bool show_effect)
 {      
-	UpdateRotation();
 	angle_atmosphere += d_angle_atmosphere;
 	if (time > 0)
 	{

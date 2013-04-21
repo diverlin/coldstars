@@ -25,6 +25,8 @@
 #include "../resources/TextureManager.hpp"
 #include "../resources/textureOb.hpp"
 
+#include "../animations/AnimationConstantRotationAxisZ.hpp"
+
 SatelliteBuilder& SatelliteBuilder::Instance()
 {	
 	static SatelliteBuilder instance;
@@ -101,6 +103,10 @@ void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const
         
         int size_threshold = 2; 
 	data_korpus.draw_turrels = true;       
+	
+	float step = getRandInt(10, 100)*0.01;
+	AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
+	satellite->SetRenderAnimation(animation_program);
 	
 	satellite->SetKorpusData(data_korpus);
 	satellite->SetLifeData(data_life);

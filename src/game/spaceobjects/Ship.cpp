@@ -93,7 +93,6 @@ void Ship::UpdateInfo()
 /* virtual */
 void Ship::UpdateInSpace(int time, bool show_effect)
 {   
-	UpdateRotation();
 	CheckDeath(show_effect);
 	protection_complex.GetShieldEffect()->Update();
 	if (time > 0)

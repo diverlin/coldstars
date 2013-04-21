@@ -48,7 +48,8 @@ class BaseSpaceEntity : public Base
 		virtual ~BaseSpaceEntity();
 
 		void SetLifeData(const LifeData& data_life) { this->data_life = data_life; }
-		void SetMesh(Mesh* mesh, AnimationBase* animation_program = NULL) { this->mesh = mesh; this->animation_program = animation_program; }
+		void SetMesh(Mesh* mesh) { this->mesh = mesh; }
+		void SetRenderAnimation(AnimationBase* animation_program) { this->animation_program = animation_program; }
 		void SetTextureOb(TextureOb* textureOb)     { this->textureOb = textureOb; }
 		void SetStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
 		void SetPlaceTypeId(int place_type_id)      { this->place_type_id = place_type_id;  }
@@ -59,7 +60,6 @@ class BaseSpaceEntity : public Base
 		int SetGivenExpirience(int given_expirience) { this->given_expirience = given_expirience; }
                 
 		void SetAngle(const vec3f& angle)           { this->angle = angle; }
-		void SetDeltaAngle(const vec3f& d_angle)    { this->d_angle = d_angle; }
 		void SetZYX(bool ZYX)    { this->ZYX = ZYX; }
 		
 		void SetParent(BaseSpaceEntity* parent)     { this->parent = parent; }
@@ -95,7 +95,7 @@ class BaseSpaceEntity : public Base
 	protected:
 		LifeData data_life;
 		
-		vec3f angle, d_angle;
+		vec3f angle;
 		vec2f d_pos;
 		bool ZYX;
 		
@@ -117,8 +117,6 @@ class BaseSpaceEntity : public Base
 		BaseSpaceEntity* parent;
 		
 		AnimationBase* animation_program;
-		
-		void UpdateRotation();
 
 		void CheckDeath(bool);
 		virtual void PostDeathUniqueEvent(bool) {};

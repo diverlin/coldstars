@@ -39,8 +39,7 @@ class Container : public BaseSpaceEntity
         	virtual void PostDeathUniqueEvent(bool);
             	
         	void UpdateInSpace(int, bool);
-        	
-          	void CalcCollisionrRadius();
+
         	void Render2D();
                                 
         	virtual void SaveData(boost::property_tree::ptree&) const;

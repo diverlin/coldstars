@@ -51,7 +51,6 @@ void BlackHole::UpdateInSpace(int time, bool show_effect)
 {
 	CheckDeath(show_effect);
 
-	UpdateRotation();
 	if (time > 0)
 	{
 		points.SetCenter(points.GetCenter()+getRandVec2f(1, 2));
@@ -81,8 +80,9 @@ void BlackHole::UpdateInfo()
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 }
       
-void BlackHole::Render_NEW(const vec2f& scroll_coords) const
+void BlackHole::Render_NEW(const vec2f& scroll_coords)
 {
+	UpdateRenderAnimation();
 	RenderMesh(scroll_coords);
 }
 	

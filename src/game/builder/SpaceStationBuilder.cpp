@@ -124,9 +124,10 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 
 	if (mesh != NULL)
 	{
+		spacestation->SetMesh(mesh);
 		float step = getRandInt(10, 40)*0.01;
 		AnimationConstantRotationAxisX* animation_program = new AnimationConstantRotationAxisX(step);
-		spacestation->SetMesh(mesh, animation_program);
+		spacestation->SetRenderAnimation(animation_program);
 		spacestation->SetAngle(vec3f(0, getRandInt(10, 45), getRandInt(10, 45)));	
 		spacestation->SetZYX(true);		
 		spacestation->SetScale(getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX));

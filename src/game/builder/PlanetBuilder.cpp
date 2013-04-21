@@ -92,10 +92,12 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
 	planet->SetTextureOb(textureOb);
 	planet->SetLifeData(data_life);
 
+	planet->SetMesh(mesh);
+	
 	planet->SetAngle(vec3f(-getRandInt(10, 40), -getRandInt(10, 40), 0));	
 	float step = getRandInt(30, 100)*0.01;
 	AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
-	planet->SetMesh(mesh, animation_program);
+	planet->SetRenderAnimation(animation_program);
 	planet->SetScale(getRandInt(ENTITY::PLANET::SCALE_MIN, ENTITY::PLANET::SCALE_MAX));
 	planet->SetZYX(false);
 	

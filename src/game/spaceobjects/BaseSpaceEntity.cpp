@@ -66,14 +66,8 @@ void BaseSpaceEntity::CalculateCollisionRadius()
 	else
 	{
 		collision_radius = (textureOb->GetFrameWidth() + textureOb->GetFrameHeight())/3; // for 2D object
+		points.SetWidthHeight(textureOb->GetFrameWidth(), textureOb->GetFrameHeight());
 	}
-}
-
-void BaseSpaceEntity::UpdateRotation()
-{
-	angle.x += d_angle.x;  
-	angle.y += d_angle.y;  
-	angle.z += d_angle.z; 
 }
 
 void BaseSpaceEntity::MovingByExternalForce(const vec2f& _target_pos, float force)
@@ -178,10 +172,6 @@ void BaseSpaceEntity::SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree&
 	save_ptree.put(root+"angle.y", angle.y);
 	save_ptree.put(root+"angle.z", angle.z);
 
-	save_ptree.put(root+"d_angle.x", d_angle.x);
-	save_ptree.put(root+"d_angle.y", d_angle.y);
-	save_ptree.put(root+"d_angle.z", d_angle.z);
-
 	save_ptree.put(root+"collision_radius", collision_radius);
 
 	save_ptree.put(root+"mass", mass);
@@ -225,10 +215,6 @@ void BaseSpaceEntity::LoadDataUniqueBaseSpaceEntity(const boost::property_tree::
 	angle.x = load_ptree.get<float>("angle.x");
 	angle.y = load_ptree.get<float>("angle.y");
 	angle.z = load_ptree.get<float>("angle.z");
-
-	d_angle.x = load_ptree.get<float>("d_angle.x");
-	d_angle.y = load_ptree.get<float>("d_angle.y");
-	d_angle.z = load_ptree.get<float>("d_angle.z");
 
 	collision_radius = load_ptree.get<float>("collision_radius");
 

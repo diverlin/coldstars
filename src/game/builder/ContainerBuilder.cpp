@@ -25,6 +25,8 @@
 #include "../common/Logger.hpp"
 #include "../common/rand.hpp"
 
+#include "../animations/AnimationConstantRotationAxisZ.hpp"
+
 ContainerBuilder& ContainerBuilder::Instance()
 {
 	static ContainerBuilder instance;
@@ -75,10 +77,14 @@ void ContainerBuilder::CreateNewInternals(Container* container, TextureOb* textu
         
         container->SetLifeData(data_life);
 	container->SetTextureOb(textureOb);
-	container->SetDeltaAngle(d_angle);
+	
+	float step = getRandInt(10, 100)*0.01;
+	AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
+	container->SetRenderAnimation(animation_program);
+
        	container->SetGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
         
-   	container->CalcCollisionrRadius();
+   	container->CalculateCollisionRadius();
    	container->BindItemSlot(GetNewItemSlot(ENTITY::CARGO_SLOT_ID));
         container->GetItemSlot()->InsertItem(item);
 }

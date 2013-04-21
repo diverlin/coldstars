@@ -42,8 +42,6 @@ class ContainerBuilder
                 void CreateNewInternals(Container*, TextureOb*, BaseItem*) const;
 }; 
 
-
-
 #endif 
     
 
