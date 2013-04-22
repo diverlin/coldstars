@@ -1,3 +1,21 @@
+/*
+	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+	
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+*/
+
 #include "Screen.hpp"
 #include "../common/myStr.hpp"
 
@@ -13,7 +31,7 @@ Screen& Screen::Instance()
       	return instance;
 }
     
-Screen::Screen():fps(0.0), loop_begin_time(0.0)
+Screen::Screen():fps(0), frames_counter(0), last_time(0.0)
 {}
 
 Screen::~Screen()
@@ -46,12 +64,19 @@ void Screen::InitPostEffects(int width, int height)
 	       	
 void Screen::DrawFps()
 {	
-	if (getRandInt(1, 20) == 1)
+	float now_time = GetElapsedTimeInSeconds();
+	if ((now_time - last_time) > 1.0)
 	{
-		fps = 1.f / (GetElapsedTimeInSeconds() - loop_begin_time);
+		fps = frames_counter;
+		frames_counter = 0;
+		last_time = now_time;
 	}
-
-      	std::string fps_str = "FPS:" + int2str((int)fps) + " / game_speed: x" + int2str(Config::Instance().GAME_SPEED);
+	else
+	{
+		frames_counter++;
+	}
+	
+      	std::string fps_str = "FPS:" + int2str(fps) + " / game_speed: x" + int2str(Config::Instance().GAME_SPEED);
 	DrawText(fps_str, 14, vec2f(100, GetHeight()-5));
 }
     
