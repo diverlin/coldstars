@@ -22,7 +22,6 @@
 #include "Logger.hpp"
 #include "../config/config.hpp"
 #include "../world/EntityManager.hpp"
-#include "../render/Screen.hpp"
 
 TurnTimer& TurnTimer::Instance()
 {
@@ -62,9 +61,7 @@ void TurnTimer::NextTurn()
 }
 						
 void TurnTimer::Update()
-{
-	Screen::Instance().CatchLoopBeginTime();
-		
+{		
         turn_tick -= Config::Instance().GAME_SPEED;        
         
        	/////////// AUTO-TURN /////////////
