@@ -119,18 +119,23 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
                            
     	spacestation->SetSubSubTypeId(ENTITY::TYPE::SPACESTATION_MILITARY_ID);
     	spacestation->SetKorpusData(data_korpus);
-	spacestation->SetTextureOb(texOb);
 	spacestation->SetLifeData(data_life);
 
 	if (mesh != NULL)
 	{
-		spacestation->SetMesh(mesh);
+		float scale_comp = getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX);
+		vec3f scale(scale_comp, scale_comp, scale_comp);
+		spacestation->BindData3D(mesh, mesh->GetTextureOb(), scale);
+		
 		float step = getRandInt(10, 40)*0.01;
 		AnimationConstantRotationAxisX* animation_program = new AnimationConstantRotationAxisX(step);
 		spacestation->SetRenderAnimation(animation_program);
 		spacestation->SetAngle(vec3f(0, getRandInt(10, 45), getRandInt(10, 45)));	
 		spacestation->SetZYX(true);		
-		spacestation->SetScale(getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX));
+    	}
+    	else
+    	{
+		spacestation->BindData2D(texOb);    		
     	}
     	
     	spacestation->SetMass(getRandInt(ENTITY::SPACESTATION::MASS_MIN, ENTITY::SPACESTATION::MASS_MAX));

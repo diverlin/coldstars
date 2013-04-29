@@ -91,4 +91,19 @@ void ObjLoader::NormalizePositions()
 	
 }
 
+vec3f ObjLoader::GetBoundaryBox()
+{
+	vec3f boundary_box;
+	for (unsigned int i=0; i<positions.size(); i++)
+	{
+		if (boundary_box.x < fabs(positions[i].x)) boundary_box.x = fabs(positions[i].x);
+		if (boundary_box.y < fabs(positions[i].y)) boundary_box.y = fabs(positions[i].y);
+		if (boundary_box.z < fabs(positions[i].z)) boundary_box.z = fabs(positions[i].z);
+	}
+	
+	boundary_box *= 2.0;
+	
+	return boundary_box;
+}
+
   

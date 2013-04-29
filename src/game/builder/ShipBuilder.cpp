@@ -85,15 +85,14 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id,
 {
 	Mesh* mesh = NULL;
 	TextureOb* texOb = NULL;
-	//if (getRandInt(0, 1))
+	//if (getRandBool() == true)
 	//{
-		//texOb = TextureManager::Instance().GetRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id); 
+		texOb = TextureManager::Instance().GetRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id); 
        	//}
        	//else
-       	{	
-       		mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPACESTATION_ID);
-		texOb = mesh->GetTextureOb(); 
-	}
+       	//{	
+       		//mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPACESTATION_ID);
+	//}
 
        	float protection_rate = 1;
         float otsec_rate      = 1;
@@ -123,33 +122,40 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id,
 	data_korpus.slot_artefact_num = getRandInt(0, 4);  
         data_korpus.slot_otsec_num    = getRandInt(6, 8) * otsec_rate;
         
-    	LifeData data_life;
-        data_life.armor      = data_korpus.armor*0.1;
-      	data_life.dying_time = 10*texOb->size_id;
-        
         int size_threshold = 2; 
-    	if ( (texOb->size_id < size_threshold) or (mesh != NULL) )
-       		data_korpus.draw_turrels = false; 
-    	else
-       		data_korpus.draw_turrels = true; 
+        data_korpus.draw_turrels = false;
+    	if (mesh == NULL)
+    	{
+    		if (texOb->size_id > size_threshold)
+		{
+			data_korpus.draw_turrels = true; 
+       		}
+       	}
 
 	ship->SetSubSubTypeId(subsubtype_id);
 	ship->SetKorpusData(data_korpus);
 	if (mesh != NULL)
 	{
-		ship->SetMesh(mesh);
+		float scale_comp = getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX);
+		vec3f scale(scale_comp, scale_comp, scale_comp);
 		
 		float step = getRandInt(10, 20)*0.01;
 		float threshold = 10;
 		AnimationWiggleAxisX* animation_program = new AnimationWiggleAxisX(step, threshold);
 		ship->SetRenderAnimation(animation_program);
 		ship->SetZYX(true);
-		
-		ship->SetScale(getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX));
+
+		ship->BindData3D(mesh, mesh->GetTextureOb(), scale);
 	}
-	
-	ship->SetTextureOb(texOb);
-	ship->SetLifeData(data_life);
+	else
+	{
+		ship->BindData2D(texOb);	
+	}
+
+    	LifeData data_life;
+        data_life.armor      = data_korpus.armor * 0.1;
+      	data_life.dying_time = ship->GetCollisionRadius() * 0.1;
+      	ship->SetLifeData(data_life);
 	
 	CreateKorpusGeometry(ship);
 

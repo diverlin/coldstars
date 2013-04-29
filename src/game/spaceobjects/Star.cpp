@@ -94,7 +94,7 @@ void Star::UpdateInSpace(int time, bool show_effect)
 			if (spark_grows == true)
 			{
 				d_color += 0.02;
-				scale += 0.2;
+				//scale += 0.2;
 				if (d_color > 1.0)
 				{
 					d_color = 1.0;
@@ -105,7 +105,7 @@ void Star::UpdateInSpace(int time, bool show_effect)
 			else
 			{		
 				d_color -= 0.005;	
-				scale -= 0.05;
+				//scale -= 0.05;
 				if (d_color < 0.0)
 				{
 					d_color = 0;
@@ -138,7 +138,7 @@ void Star::Render_NEW() const
         
 	glUniform2f(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "displ"), texture_offset1, texture_offset2);
 
-	renderMesh(mesh, points.GetCenter3f(), angle, scale, false);
+	renderMesh(mesh, points.GetCenter3f(), angle, points.GetScale(), false);
 
         glUseProgram(0);
         glActiveTexture(GL_TEXTURE0);
@@ -147,7 +147,7 @@ void Star::Render_NEW() const
 void Star::Render_OLD() const
 {    
      	glBindTexture(GL_TEXTURE_2D, textureOb->texture);      		
-	renderMesh(mesh, points.GetCenter3f(), angle, scale, ZYX);
+	renderMesh(mesh, points.GetCenter3f(), angle, points.GetScale(), ZYX);
 }
 
 void Star::UpdateInfo()

@@ -32,9 +32,9 @@ class Turrel
                 Turrel(ItemSlot*);
                 ~Turrel();
 
-                void SetTextureOb(TextureOb* textureOb)	{ this->textureOb = textureOb; };
+                void SetTextureOb(TextureOb* textureOb);
                 
-                Points& GetPoints() { return points; };
+                Points& GetPoints() { return points; }
                 
                 void Render(float);                 
                

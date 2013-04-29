@@ -90,9 +90,6 @@ BaseVehicleBuilder& BaseVehicleBuilder::Instance()
 
 void BaseVehicleBuilder::CreateKorpusGeometry(Vehicle* vehicle) const
 {
-	vehicle->CalculateCollisionRadius();
-
-    	vehicle->GetPoints().initMainQuadPoints(vehicle->GetTextureOb()->GetFrameWidth(), vehicle->GetTextureOb()->GetFrameHeight());
     	vehicle->GetPoints().addMainQuadPoints();
 }
        

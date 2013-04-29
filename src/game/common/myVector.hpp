@@ -99,6 +99,7 @@ class vec3f
                 
                 void Set(float x, float y, float z) { this->x = x; this->y = y; this->z = z; };
                 const vec3f& operator+=(const vec3f&);     
+                const vec3f& operator*=(float);     
                 const vec3f& operator/=(float);   
 };
 

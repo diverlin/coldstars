@@ -75,7 +75,8 @@ void RocketBulletBuilder::CreateNewInternals(RocketBullet* rocket_bullet, const 
         rocket_bullet->SetBulletData(data_bullet);
         
         rocket_bullet->SetLifeData(data_life);
-        rocket_bullet->SetTextureOb(TextureManager::Instance().GetRandomTextureOb(TEXTURE::ROCKET_BULLET_ID));
+        TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ROCKET_BULLET_ID);
+        rocket_bullet->BindData2D(texOb);
          
         CreateKorpusGeometry(rocket_bullet);
 
@@ -84,8 +85,5 @@ void RocketBulletBuilder::CreateNewInternals(RocketBullet* rocket_bullet, const 
 
 void RocketBulletBuilder::CreateKorpusGeometry(RocketBullet* rocket_bullet) const
 {
-	rocket_bullet->CalculateCollisionRadius();
-
-    	rocket_bullet->GetPoints().initMainQuadPoints(rocket_bullet->GetTextureOb()->GetFrameWidth(), rocket_bullet->GetTextureOb()->GetFrameHeight());
     	rocket_bullet->GetPoints().addMainQuadPoints();
 }

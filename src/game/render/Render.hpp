@@ -47,17 +47,17 @@ void disable_DEPTH();
 void enable_POINTSPRITE();
 void disable_POINTSPRITE();
 
-void drawFlatQuadPerVertexIn2D(TextureOb* texOb,
-			         const vec2f& bottomLeft, 
-			         const vec2f& bottomRight, 
-			         const vec2f& topRight, 
-			         const vec2f& topLeft, 
-			         float z_pos);
+//void drawFlatQuadPerVertexIn2D(TextureOb* texOb,
+			         //const vec2f& bottomLeft, 
+			         //const vec2f& bottomRight, 
+			         //const vec2f& topRight, 
+			         //const vec2f& topLeft, 
+			         //float z_pos);
 			       
-void drawDynamic(TextureOb* texOb, 
-		 const vec2f& center, 
-		 float angleInDegree, 
-		 float pos_z);
+void drawQuad_inXYPlane(TextureOb* texOb, 
+		 const vec3f& scale,
+		 const vec3f& center, 
+		 float angleInDegree);
 
 //void drawRect(const Rect& rect, float z_pos); // the drawrect function was inverted by Y axis
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   
@@ -89,7 +89,7 @@ void drawFullScreenTexturedQuad(GLuint texture, int w, int h, float pos_z);
 
 void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z, GLuint program_blur);
 
-void renderMesh(Mesh* mesh, const vec3f& center, const vec3f& angle, float scale, bool ZYX);
+void renderMesh(Mesh* mesh, const vec3f& center, const vec3f& angle, const vec3f& scale, bool ZYX);
 void rotateZYX(const vec3f&);
 void rotateXYZ(const vec3f&);
 

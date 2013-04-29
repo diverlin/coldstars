@@ -82,42 +82,43 @@ void disable_DEPTH() { glDisable(GL_DEPTH_TEST); }
 void enable_POINTSPRITE()  { glEnable(GL_POINT_SPRITE);  }
 void disable_POINTSPRITE() { glDisable(GL_POINT_SPRITE); }
 
-void drawFlatQuadPerVertexIn2D(TextureOb* texOb, 
-			        const vec2f& bottomLeft, 
-			        const vec2f& bottomRight, 
-			        const vec2f& topRight, 
-			        const vec2f& topLeft, 
-			        float z_pos)
-{       
-    	glBindTexture(GL_TEXTURE_2D, texOb->texture);
-	int frame = texOb->updateAnimationFrame();
+//void drawFlatQuadPerVertexIn2D(TextureOb* texOb, 
+			        //const vec2f& bottomLeft, 
+			        //const vec2f& bottomRight, 
+			        //const vec2f& topRight, 
+			        //const vec2f& topLeft, 
+			        //float z_pos)
+//{       
+    	//glBindTexture(GL_TEXTURE_2D, texOb->texture);
+	//int frame = texOb->updateAnimationFrame();
 	
-    	glBegin(GL_QUADS);
-      		glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(bottomLeft.x,  bottomLeft.y , z_pos);
-      		glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f(bottomRight.x, bottomRight.y, z_pos);
-      		glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f(topRight.x,    topRight.y   , z_pos);
-      		glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(topLeft.x,     topLeft.y    , z_pos);
-    	glEnd();
-}
+    	//glBegin(GL_QUADS);
+      		//glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(bottomLeft.x,  bottomLeft.y , z_pos);
+      		//glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f(bottomRight.x, bottomRight.y, z_pos);
+      		//glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f(topRight.x,    topRight.y   , z_pos);
+      		//glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(topLeft.x,     topLeft.y    , z_pos);
+    	//glEnd();
+//}
 
 
-void drawDynamic(TextureOb* texOb,
-		 const vec2f& center, 
-		 float angleInDegree, 
-		 float pos_z)
+void drawQuad_inXYPlane(TextureOb* texOb,
+		 const vec3f& scale,
+		 const vec3f& center, 
+		 float angleInDegree)
 {
     	glBindTexture(GL_TEXTURE_2D, texOb->texture);
 	int frame = texOb->updateAnimationFrame();
 	
     	glPushMatrix();
-    		glTranslatef(center.x, center.y, 0.0);
+    		glTranslatef(center.x, center.y, center.z);
     		glRotatef(angleInDegree, 0.0, 0.0, 1.0);
-
+    	    	glScalef(scale.x, scale.y, scale.z);
+    	    	    		    	    	
     		glBegin(GL_QUADS);
-    			glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-texOb->GetFrameWidth()/2, -texOb->GetFrameHeight()/2, pos_z);
-    			glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( texOb->GetFrameWidth()/2, -texOb->GetFrameHeight()/2, pos_z);
-   			glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( texOb->GetFrameWidth()/2,  texOb->GetFrameHeight()/2,  pos_z);
-    			glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-texOb->GetFrameWidth()/2,  texOb->GetFrameHeight()/2,  pos_z);
+    			glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
+    			glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
+   			glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
+    			glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);
     		glEnd();
     	glPopMatrix();
 }
@@ -287,16 +288,16 @@ void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z
 }
     
     
-void renderMesh(Mesh* mesh, const vec3f& center, const vec3f& angle, float scale, bool ZYX)
+void renderMesh(Mesh* mesh, const vec3f& center, const vec3f& angle, const vec3f& scale, bool ZYX)
 {
      	glPushMatrix();
        		glTranslatef(center.x, center.y, center.z);
-       		glScalef(scale, scale, scale); 
        		if (ZYX)
        			rotateZYX(angle); // animation rotation along axis X
 		else
        			rotateXYZ(angle); // animation rotation along axis z
-       		
+       		glScalef(scale.x, scale.y, scale.z); 
+       		       		
        		mesh->Draw();
      	glPopMatrix();
 

@@ -52,10 +52,7 @@ RocketBullet::~RocketBullet()
 
 void RocketBullet::CreateDriveComplexTextureDependedStuff()
 {
-    	GetPoints().initMidLeftPoint();
     	GetPoints().addMidLeftPoint();
-
-    	GetPoints().initMidFarLeftPoint();
     	GetPoints().addMidFarLeftPoint();
     	
 	drive_effect = GetNewDriveEffect(GetTextureOb()->size_id, GetPoints().GetpMidLeft(), GetPoints().GetpMidFarLeft());
@@ -159,12 +156,13 @@ void RocketBullet::UpdateRenderStuff()
 
 void RocketBullet::RenderInSpace() const
 {
-    	drawFlatQuadPerVertexIn2D(textureOb,
-    				  points.GetBottomLeft(), 
-                                  points.GetBottomRight(), 
-                                  points.GetTopRight(), 
-                                  points.GetTopLeft(), 
-				  points.GetPosZ());
+    	drawQuad_inXYPlane(textureOb, points.GetScale(), points.GetCenter3f(), points.GetAngleDegree());
+    	//drawFlatQuadPerVertexIn2D(textureOb,
+    				  //points.GetBottomLeft(), 
+                                  //points.GetBottomRight(), 
+                                  //points.GetTopRight(), 
+                                  //points.GetTopLeft(), 
+				  //points.GetPosZ());
 				  
 	drive_effect->Update();
 	drive_effect->Render(0.0f);

@@ -19,8 +19,9 @@
 #ifndef SHIELD_H
 #define SHIELD_H
 
-#include "../resources/textureOb.hpp"
-#include "../spaceobjects/BaseSpaceEntity.hpp"
+#include "../common/myVector.hpp"
+class TextureOb;
+class BaseSpaceEntity;
 
 class ShieldEffect
 {  
@@ -30,18 +31,18 @@ class ShieldEffect
 
                 void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
 		void SetAlpha(float alpha) { color.a = alpha; };
-                void SetParent(BaseSpaceEntity* parent) { this->parent = parent; };
-		
-                Points& GetPoints() { return points; };
+                void SetParent(BaseSpaceEntity*);
+
         	void Update();
         	void Render(float) const;            
 
         private:       
         	Color4f color;
+        	vec3f scale;
+        	
         	float alpha_start;
         	float d_alpha;
                 
-                Points points;
                 TextureOb* textureOb;
                 BaseSpaceEntity* parent;
                 

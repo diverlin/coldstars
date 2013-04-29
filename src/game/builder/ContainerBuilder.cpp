@@ -76,7 +76,7 @@ void ContainerBuilder::CreateNewInternals(Container* container, TextureOb* textu
         d_angle.z = -getRandInt(10, 100)*0.01;      
         
         container->SetLifeData(data_life);
-	container->SetTextureOb(textureOb);
+	container->BindData2D(textureOb);
 	
 	float step = getRandInt(10, 100)*0.01;
 	AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
@@ -84,7 +84,6 @@ void ContainerBuilder::CreateNewInternals(Container* container, TextureOb* textu
 
        	container->SetGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
         
-   	container->CalculateCollisionRadius();
    	container->BindItemSlot(GetNewItemSlot(ENTITY::CARGO_SLOT_ID));
         container->GetItemSlot()->InsertItem(item);
 }

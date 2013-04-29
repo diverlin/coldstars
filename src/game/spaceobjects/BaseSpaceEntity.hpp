@@ -48,22 +48,22 @@ class BaseSpaceEntity : public Base
 		virtual ~BaseSpaceEntity();
 
 		void SetLifeData(const LifeData& data_life) { this->data_life = data_life; }
-		void SetMesh(Mesh* mesh) { this->mesh = mesh; }
+		void BindData3D(Mesh*, TextureOb*, const vec3f&);
+		void BindData2D(TextureOb*);    
 		void SetRenderAnimation(AnimationBase* animation_program) { this->animation_program = animation_program; }
-		void SetTextureOb(TextureOb* textureOb)     { this->textureOb = textureOb; }
 		void SetStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
 		void SetPlaceTypeId(int place_type_id)      { this->place_type_id = place_type_id;  }
 		void SetMass(int mass) 			    { this->mass = mass; }
 		
 		bool Is3D() const { return (mesh != NULL); }
-		
+		const vec3f& GetBoundaryBox() const { return mesh->GetBoundaryBox(); }
+				
 		int SetGivenExpirience(int given_expirience) { this->given_expirience = given_expirience; }
                 
-		void SetAngle(const vec3f& angle)           { this->angle = angle; }
+		void SetAngle(const vec3f& angle)            { this->angle = angle; }
 		void SetZYX(bool ZYX)    { this->ZYX = ZYX; }
 		
 		void SetParent(BaseSpaceEntity* parent)     { this->parent = parent; }
-		void SetScale(float scale) { this->scale = scale; }
 
 		StarSystem* GetStarSystem() const { return starsystem; }           
 		int GetPlaceTypeId()        const { return place_type_id; }
@@ -79,8 +79,6 @@ class BaseSpaceEntity : public Base
 		int GetArmor()        const { return data_life.armor; }
 
 		BaseSpaceEntity* GetParent() const { return parent; }
-
-		void CalculateCollisionRadius();
 
 		void MovingByExternalForce(const vec2f&, float);
 
@@ -111,7 +109,6 @@ class BaseSpaceEntity : public Base
 		InfoTable info;
 
 		int mass;
-		float scale;
 		int given_expirience;
 
 		BaseSpaceEntity* parent;

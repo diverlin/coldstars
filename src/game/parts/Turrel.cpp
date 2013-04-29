@@ -36,6 +36,12 @@ Turrel::Turrel(ItemSlot* slot)
 Turrel::~Turrel()
 {}
 
+void Turrel::SetTextureOb(TextureOb* textureOb)	
+{ 
+	this->textureOb = textureOb; 
+	points.SetScale(textureOb->GetFrameWidth(), textureOb->GetFrameHeight(), 1.0); 
+}
+
 void Turrel::Render(float _tur_angle_inD)
 {        
         if (slot->GetTarget() != NULL)
@@ -45,16 +51,14 @@ void Turrel::Render(float _tur_angle_inD)
 
         	float _tur_angle_inR = atan2(_tur_yl, _tur_xl);
         	_tur_angle_inD = _tur_angle_inR * RADIAN_TO_DEGREE_RATE;
-        }
+        }     
 
-    	points.SetAngle(_tur_angle_inD);
-    	points.Update();        
-
-    	drawFlatQuadPerVertexIn2D(textureOb,
-    				  points.GetBottomLeft(), 
-                                  points.GetBottomRight(), 
-                                  points.GetTopRight(), 
-                                  points.GetTopLeft(), 
-                                  points.GetPosZ());
+    	drawQuad_inXYPlane(textureOb, points.GetScale(), points.GetCenter3f(), _tur_angle_inD);
+    	//drawFlatQuadPerVertexIn2D(textureOb,
+    				  //points.GetBottomLeft(), 
+                                  //points.GetBottomRight(), 
+                                  //points.GetTopRight(), 
+                                  //points.GetTopLeft(), 
+                                  //points.GetPosZ());
 }        
                 

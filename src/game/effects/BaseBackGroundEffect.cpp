@@ -22,7 +22,7 @@
 
 unsigned long int BaseBackGroundEffect::counter;
 
-BaseBackGroundEffect::BaseBackGroundEffect():textureOb(NULL), scale(1.f), parallax_rate(1.f)
+BaseBackGroundEffect::BaseBackGroundEffect():textureOb(NULL), parallax_rate(1.f)
 {
 	counter++;
 	id = counter;
@@ -31,6 +31,14 @@ BaseBackGroundEffect::BaseBackGroundEffect():textureOb(NULL), scale(1.f), parall
 BaseBackGroundEffect::~BaseBackGroundEffect()
 {}
 
+void BaseBackGroundEffect::SetTextureOb(TextureOb* textureOb, const vec3f& scale_factor)
+{
+	this->textureOb = textureOb; 
+	scale.x = textureOb->GetFrameWidth()  * scale_factor.x;
+	scale.y = textureOb->GetFrameHeight() * scale_factor.y;
+	scale.z = 1.0 * scale_factor.z; 
+};
+	        
 void BaseBackGroundEffect::SaveDataUniqueBaseBackGroundEffect(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	save_ptree.put(root+"textureOb_path", textureOb->path);
@@ -38,8 +46,10 @@ void BaseBackGroundEffect::SaveDataUniqueBaseBackGroundEffect(boost::property_tr
 	save_ptree.put(root+"center.x", center.x);
 	save_ptree.put(root+"center.y", center.y);	
 	save_ptree.put(root+"center.z", center.z);
-	
-	save_ptree.put(root+"scale", scale);	
+
+	save_ptree.put(root+"scale.x", scale.x);
+	save_ptree.put(root+"scale.y", scale.y);	
+	save_ptree.put(root+"scale.z", scale.z);
 }
 
 void BaseBackGroundEffect::LoadDataUniqueBaseBackGroundEffect(const boost::property_tree::ptree& load_ptree)
@@ -49,7 +59,10 @@ void BaseBackGroundEffect::LoadDataUniqueBaseBackGroundEffect(const boost::prope
 	center.x = load_ptree.get<float>("center.x");
 	center.y = load_ptree.get<float>("center.y");
 	center.z = load_ptree.get<float>("center.z");
-	scale = load_ptree.get<float>("scale");
+	
+	scale.x = load_ptree.get<float>("scale.x");
+	scale.y = load_ptree.get<float>("scale.y");
+	scale.z = load_ptree.get<float>("scale.z");
 }
 		
 void BaseBackGroundEffect::ResolveDataUniqueBaseBackGroundEffect()

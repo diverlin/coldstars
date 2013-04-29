@@ -147,6 +147,15 @@ void Ship::RenderInSpace_3D(const vec2f& scroll_coords)
 {
 	UpdateRenderAnimation();
 	RenderMesh(scroll_coords);
+
+	setColor4f(color);
+	enable_BLEND();
+    	if (properties.shield_effect_enabled == true)
+    	{
+        	RenderShieldEffect(1.0 - color.a); 
+        }
+        disable_BLEND();
+	starsystem->RestoreSceneColor();
 }
 
 void Ship::RenderAtPlanet(const vec2f& center)

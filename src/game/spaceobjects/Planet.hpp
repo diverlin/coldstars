@@ -36,7 +36,7 @@ class Planet : public BasePlanet
 		void SetPopulation(unsigned long int population) 	{ this->population = population; };
 		
 		unsigned long int GetPopulation() const { return population; }; 
-		int GetDockingRadius() const { return scale; };
+		int GetDockingRadius() const { return collision_radius; };
 		BaseLand* GetLand() const { return land; };
 
 		void AddVehicle(Vehicle*) const;

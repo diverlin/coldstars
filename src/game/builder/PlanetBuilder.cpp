@@ -70,7 +70,7 @@ Planet* PlanetBuilder::GetNewPlanet(float orbit_radius) const
  	
 void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
 {     
-	Mesh* mesh =MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_ID);
+	Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_ID);
       
         LifeData data_life;
 	data_life.armor = 100000;
@@ -89,19 +89,17 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
         
         planet->SetPlanetData(planet_data);
 	
-	planet->SetTextureOb(textureOb);
 	planet->SetLifeData(data_life);
 
-	planet->SetMesh(mesh);
+	float scale_comp = getRandInt(ENTITY::PLANET::SCALE_MIN, ENTITY::PLANET::SCALE_MAX);
+	vec3f scale(scale_comp, scale_comp, scale_comp);
+	planet->BindData3D(mesh, textureOb, scale);
 	
 	planet->SetAngle(vec3f(-getRandInt(10, 40), -getRandInt(10, 40), 0));	
 	float step = getRandInt(20, 60)*0.01;
 	AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
 	planet->SetRenderAnimation(animation_program);
-	planet->SetScale(getRandInt(ENTITY::PLANET::SCALE_MIN, ENTITY::PLANET::SCALE_MAX));
 	planet->SetZYX(false);
-	
-	planet->CalculateCollisionRadius();
 }
 
 
