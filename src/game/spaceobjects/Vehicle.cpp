@@ -117,10 +117,7 @@ void Vehicle::PutChildsToGarbage() const
 
 void Vehicle::CreateDriveComplexTextureDependedStuff()
 {
-    	GetPoints().initMidLeftPoint();
     	GetPoints().addMidLeftPoint();
-
-    	GetPoints().initMidFarLeftPoint();
     	GetPoints().addMidFarLeftPoint();
     	
 	DriveEffect* drive_effect = GetNewDriveEffect(GetTextureOb()->size_id, GetPoints().GetpMidLeft(), GetPoints().GetpMidFarLeft());
@@ -130,7 +127,6 @@ void Vehicle::CreateDriveComplexTextureDependedStuff()
 void Vehicle::CreateProtectionComplexTextureDependedStuff()
 {
      	protection_complex.GetShieldEffect()->SetParent(this);
-     	protection_complex.GetShieldEffect()->GetPoints().initMainQuadPoints(1.2*textureOb->GetFrameWidth(), 1.2*textureOb->GetFrameHeight());	
 }
 
 void Vehicle::SetKorpusData(const VehicleKorpusData& data_korpus) 
@@ -182,13 +178,12 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
 	{
                 case ENTITY::WEAPON_SLOT_ID:    
                 {
-                        int w = textureOb->GetFrameWidth();
-                        int h = textureOb->GetFrameHeight();
                         float border_start = 0.2;
                         float border_end   = 0.8;
-                        int pos_x = getRandInt(border_start*w, border_end*w) - w/2;
-                        int pos_y = getRandInt(border_start*h, border_end*h) - h/2;
-                
+
+                        float pos_x = getRandFloat(border_start, border_end) - 0.5;
+                        float pos_y = getRandFloat(border_start, border_end) - 0.5;
+                                        
 			slot->GetTurrel()->GetPoints().SetParentCenter(vec2f(pos_x, pos_y));
                  	points.Add(slot->GetTurrel()->GetPoints().GetpCenter(), slot->GetTurrel()->GetPoints().GetpParentCenter()); 
                 	weapon_complex.AddSlot(slot); 
@@ -1237,12 +1232,14 @@ void Vehicle::RenderGrabTrail() const
 		
 void Vehicle::RenderKorpus() const
 {
-    	drawFlatQuadPerVertexIn2D(textureOb,
-    				  points.GetBottomLeft(), 
-                                  points.GetBottomRight(), 
-                                  points.GetTopRight(), 
-                                  points.GetTopLeft(), 
-				  points.GetPosZ());
+    	drawQuad_inXYPlane(textureOb, points.GetScale(), points.GetCenter3f(), points.GetAngleDegree());
+    	
+    	//drawFlatQuadPerVertexIn2D(textureOb,
+    				  //points.GetBottomLeft(), 
+                                  //points.GetBottomRight(), 
+                                  //points.GetTopRight(), 
+                                  //points.GetTopLeft(), 
+				  //points.GetPosZ());
 }
 
 void Vehicle::RenderDriveEffect(float parent_d_alpha) const

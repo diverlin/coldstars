@@ -735,7 +735,9 @@ bool Player::MouseInteractionWithSpaceObjectsInSpace(const MouseData& data_mouse
     	if (MouseInteractionWithBlackHoles(data_mouse)) { return true; }	
     	if (MouseInteractionWithSpaceStations(data_mouse)) { return true; }	
     	if (MouseInteractionWithPlanets(data_mouse)) { return true; }    
-    	if (MouseInteractionWithStars(data_mouse)) { return true; }    
+    	if (MouseInteractionWithStars(data_mouse)) { return true; }  
+    	
+    	return false;  
 }
 
 bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)

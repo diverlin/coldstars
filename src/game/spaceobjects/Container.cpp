@@ -121,7 +121,7 @@ void Container::UpdateInSpace(int time, bool show_effect)
 void Container::Render2D()
 { 
 	UpdateRenderAnimation();
-    	drawDynamic(textureOb, points.GetCenter(), angle.z, points.GetPosZ());
+    	drawQuad_inXYPlane(textureOb, points.GetScale(), points.GetCenter3f(), angle.z);
 }
 
 void Container::SaveDataUniqueContainer(boost::property_tree::ptree& save_ptree, const std::string& root) const	

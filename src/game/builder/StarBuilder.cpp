@@ -69,6 +69,8 @@ Star* StarBuilder::GetNewStar() const
       	
 void StarBuilder::CreateNewInternals(Star* star) const
 {     
+	Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_ID);
+	
         LifeData data_life;
         data_life.armor = 1000000; 
 
@@ -82,12 +84,10 @@ void StarBuilder::CreateNewInternals(Star* star) const
     	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::STAR_ID);
 
     	star->SetPlanetData(star_data);
-	star->SetTextureOb(texOb);
 	star->SetLifeData(data_life);
-	star->SetMesh(MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_ID));	
-	star->SetScale(getRandInt(ENTITY::STAR::SCALE_MIN, ENTITY::STAR::SCALE_MAX));        	
-        
-        star->CalculateCollisionRadius();
+	float scale_comp = getRandInt(ENTITY::STAR::SCALE_MIN, ENTITY::STAR::SCALE_MAX); 
+	vec3f scale(scale_comp, scale_comp, scale_comp);
+	star->BindData3D(mesh, texOb, scale);	
  
 	star->CalcColor();
 }

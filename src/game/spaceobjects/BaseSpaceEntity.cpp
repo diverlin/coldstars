@@ -42,7 +42,6 @@ place_type_id(NONE_ID),
 collision_radius(0), 
 mass(0), 
 given_expirience(0),
-scale(0),
 ZYX(false)
 {}
 
@@ -56,19 +55,20 @@ BaseSpaceEntity::~BaseSpaceEntity()
 	delete animation_program;
 }
 
-void BaseSpaceEntity::CalculateCollisionRadius()
+void BaseSpaceEntity::BindData3D(Mesh* mesh, TextureOb* textureOb, const vec3f& scale)
 {
-	if (mesh)
-	{
-		collision_radius = scale/2; // for 3d object
-		points.SetWidthHeight(collision_radius, collision_radius);  // needs for finding visible corners
-	}
-	else
-	{
-		collision_radius = (textureOb->GetFrameWidth() + textureOb->GetFrameHeight())/3; // for 2D object
-		points.SetWidthHeight(textureOb->GetFrameWidth(), textureOb->GetFrameHeight());
-	}
+	this->mesh = mesh;
+	this->textureOb = textureOb; 
+	points.SetScale(scale);
+	collision_radius = (scale.x + scale.y) / 3.0;
 }
+
+void BaseSpaceEntity::BindData2D(TextureOb* textureOb)
+{
+	this->textureOb = textureOb; 
+	points.SetScale(textureOb->GetFrameWidth(), textureOb->GetFrameHeight(), 1.0);
+	collision_radius = (textureOb->GetFrameWidth() + textureOb->GetFrameHeight()) / 3.0;
+} 
 
 void BaseSpaceEntity::MovingByExternalForce(const vec2f& _target_pos, float force)
 {
@@ -151,7 +151,7 @@ void BaseSpaceEntity::RenderMesh(const vec2f& scroll_coords) const
      	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
      	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
      	
-	renderMesh(mesh, points.GetCenter3f(), angle, scale, ZYX);
+	renderMesh(mesh, points.GetCenter3f(), angle, points.GetScale(), ZYX);
 		
      	glUseProgram(0);
      	glActiveTexture(GL_TEXTURE0);
@@ -175,7 +175,6 @@ void BaseSpaceEntity::SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree&
 	save_ptree.put(root+"collision_radius", collision_radius);
 
 	save_ptree.put(root+"mass", mass);
-	save_ptree.put(root+"scale", scale);	
 
 	//save_ptree.put(root+"d_pos.x", d_pos.x);
 	//save_ptree.put(root+"d_pos.y", d_pos.y);	
@@ -219,7 +218,6 @@ void BaseSpaceEntity::LoadDataUniqueBaseSpaceEntity(const boost::property_tree::
 	collision_radius = load_ptree.get<float>("collision_radius");
 
 	mass = load_ptree.get<int>("mass");
-	scale = load_ptree.get<float>("scale");
 
 	place_type_id = load_ptree.get<int>("place_type_id");	
 

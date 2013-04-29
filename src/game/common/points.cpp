@@ -21,7 +21,7 @@
 
 Points::Points():is_updated(false), angle_inD(0.0), pos_z(-500.0)
 {
-        center.Set(0, 0);
+        center.Set(0, 0);     
         parent_center.Set(0, 0);       
 }
 
@@ -33,63 +33,54 @@ void Points::Add(vec2f* point, vec2f* point_orig)
         vector_orig.push_back(point_orig);
         vector.push_back(point);
 }
-
-void Points::initMainQuadPoints(int _w, int _h)
-{ 
-        SetWidthHeight(_w, _h);  
-
-        ////// Origin entity rect (for rotation only transformation)
-        bottomLeft_origin.Set(-w/2, -h/2);
-        bottomRight_origin.Set(+w/2, -h/2);
-        topRight_origin.Set(+w/2, +h/2);
-        topLeft_origin.Set(-w/2, +h/2);
-      
-        ///////////////////////////////////////////
-        ////// Actual entity rect
-        bottomLeft.Set(-w/2, -h/2);
-        bottomRight.Set(+w/2, -h/2);
-        topRight.Set(+w/2, +h/2);
-        topLeft.Set(-w/2, +h/2);
-}
-
           
 void Points::addMainQuadPoints()
 { 
-      	/////////////////////////////////////////////////////////////
-      	////// Origin entity rect (for rotation only transformation)
-      	vector_orig.push_back(&bottomLeft_origin);
-      	vector_orig.push_back(&bottomRight_origin);
-      	vector_orig.push_back(&topRight_origin);
-      	vector_orig.push_back(&topLeft_origin);
+	//float w = 1.0;
+	//float h = 1.0;
+	
+        //////// Origin entity rect (for rotation only transformation)
+        //bottomLeft_origin.Set(-w/2.0, -h/2.0);
+        //bottomRight_origin.Set(+w/2.0, -h/2.0);
+        //topRight_origin.Set(+w/2.0, +h/2.0);
+        //topLeft_origin.Set(-w/2.0, +h/2.0);
       
-      	///////////////////////////////////////////
-      	////// Actual entity rect
-      	vector.push_back(&bottomLeft);     
-      	vector.push_back(&bottomRight);      
-      	vector.push_back(&topRight);                 
-      	vector.push_back(&topLeft);
-}
-
-void Points::initMidLeftPoint()
-{
-     	midLeft_origin.Set(-w/2, 0);
-     	midLeft.Set(-w/2, 0);
+        /////////////////////////////////////////////
+        //////// Actual entity rect
+        //bottomLeft.Set(-w/2.0, -h/2.0);
+        //bottomRight.Set(+w/2.0, -h/2.0);
+        //topRight.Set(+w/2.0, +h/2.0);
+        //topLeft.Set(-w/2.0, +h/2.0);
+        
+      	///////////////////////////////////////////////////////////////
+      	//////// Origin entity rect (for rotation only transformation)
+      	//vector_orig.push_back(&bottomLeft_origin);
+      	//vector_orig.push_back(&bottomRight_origin);
+      	//vector_orig.push_back(&topRight_origin);
+      	//vector_orig.push_back(&topLeft_origin);
+      
+      	/////////////////////////////////////////////
+      	//////// Actual entity rect
+      	//vector.push_back(&bottomLeft);     
+      	//vector.push_back(&bottomRight);      
+      	//vector.push_back(&topRight);                 
+      	//vector.push_back(&topLeft);
 }
 
 void Points :: addMidLeftPoint()
 {
+     	midLeft_origin.Set(-0.5, 0.0);
+     	midLeft.Set(-0.5, 0.0);
+     	
      	vector_orig.push_back(&midLeft_origin);
      	vector.push_back(&midLeft);
 }
 
-void Points::initMidFarLeftPoint()
-{
-     	midFarLeft_origin.Set(-w, 0);
-     	midFarLeft.Set(-w, 0);
-}
-
 void Points::addMidFarLeftPoint()
 {
+     	midFarLeft_origin.Set(-1.0, 0.0);
+     	midFarLeft.Set(-1.0, 0.0);
+     	
      	vector_orig.push_back(&midFarLeft_origin);
      	vector.push_back(&midFarLeft);
 }
@@ -109,8 +100,8 @@ void Points::Update()
         	for (unsigned int i=0; i<vector.size(); i++)
         	{   
            		////// rotation around center
-            		vector[i]->x = vector_orig[i]->x * cosa - vector_orig[i]->y * sina;
-            		vector[i]->y = vector_orig[i]->x * sina + vector_orig[i]->y * cosa;  
+            		vector[i]->x = cosa*scale.x*vector_orig[i]->x - sina*scale.y*vector_orig[i]->y;
+            		vector[i]->y = sina*scale.x*vector_orig[i]->x + cosa*scale.y*vector_orig[i]->y;  
             		////// moving to position
             		vector[i]->x += pos.x;
             		vector[i]->y += pos.y;

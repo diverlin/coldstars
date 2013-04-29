@@ -41,7 +41,7 @@ class DistantNebulaEffect : public BaseBackGroundEffect
 		
         private:
         	float angle_inD, d_angle_inD;
-        	
+		        	
         	void SaveDataUniqueDistantNebulaEffect(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueDistantNebulaEffect(const boost::property_tree::ptree&);
 		void ResolveDataUniqueDistantNebulaEffect();  

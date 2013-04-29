@@ -29,10 +29,7 @@ ProtectionComplex::ProtectionComplex()
  	shield_effect = new ShieldEffect();
         TextureOb* texOb_shield = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SHIELD_EFFECT_ID); 
         shield_effect->SetTextureOb(texOb_shield);
-
-        
-    	shield_effect->GetPoints().addMainQuadPoints();
-        
+     
         protector_slot = NULL;
 }
 

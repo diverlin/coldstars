@@ -10,11 +10,12 @@ Mesh::Mesh(const std::string& path, TextureOb* textureOb, int type_id):textureOb
      	ObjLoader objLoader(path);
      	     
  	BuildFaces(objLoader);
+ 	boundary_box = objLoader.GetBoundaryBox();
   	
   	//CreateGlList();
   	CreateVbo();
 }
-  
+
 void Mesh::BuildFaces(const ObjLoader& objLoader)
 {
     	for(unsigned int i=0; i<objLoader.faces_indexes.size(); ++i)

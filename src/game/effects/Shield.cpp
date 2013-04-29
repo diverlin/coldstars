@@ -18,6 +18,8 @@
 
 #include "Shield.hpp"
 #include "../render/Render.hpp"
+#include "../resources/textureOb.hpp"
+#include "../spaceobjects/BaseSpaceEntity.hpp"
 
 ShieldEffect::ShieldEffect()
 {       
@@ -36,12 +38,17 @@ ShieldEffect::ShieldEffect()
 ShieldEffect::~ShieldEffect()
 {}
 
+void ShieldEffect::SetParent(BaseSpaceEntity* parent) 
+{ 
+	this->parent = parent; 
+	
+	float rate = 1.3; 
+	scale.Set(rate*parent->GetPoints().GetScale().x, rate*parent->GetPoints().GetScale().y, rate*parent->GetPoints().GetScale().z); 
+}
+
+
 void ShieldEffect::Update()
-{
-        points.SetCenter(parent->GetPoints().GetCenter());
-        points.SetAngle(parent->GetPoints().GetAngleDegree());
-        points.Update();
-       
+{      
     	if (color.a > alpha_start)
        		color.a -= d_alpha;
     	else
@@ -52,12 +59,10 @@ void ShieldEffect::Render(float parent_d_alpha) const
 {
     	setColor4f(color.r, color.g, color.b, color.a - parent_d_alpha);
 
-    	drawFlatQuadPerVertexIn2D(textureOb,
-    				  points.GetBottomLeft(), 
-     			     	  points.GetBottomRight(), 
-     			      	  points.GetTopRight(), 
-     			      	  points.GetTopLeft(), 
-     			      	  points.GetPosZ());
+	drawQuad_inXYPlane(textureOb,
+		    scale,  
+		    parent->GetPoints().GetCenter3f(), 
+		    parent->GetPoints().GetAngleDegree());
 }
 
 

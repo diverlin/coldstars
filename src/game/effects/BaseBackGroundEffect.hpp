@@ -28,11 +28,12 @@ class BaseBackGroundEffect
     	public:
 	        BaseBackGroundEffect();
 	        ~BaseBackGroundEffect();
-	        
-	        void SetTextureOb(TextureOb* textureOb) 	{ this->textureOb = textureOb; };
-	        void SetCenter(const vec3f& center)		{ this->center = center; };	
-	        void SetScale(float scale)			{ this->scale = scale; };     
-	        void SetParallaxRate(float parallax_rate) 	{ this->parallax_rate = parallax_rate; };   
+
+		void SetTextureOb(TextureOb* textureOb, const vec3f& scale_factor = vec3f(1.0, 1.0, 1.0));
+
+		void SetScale(const vec3f& scale) 		{ this->scale = scale; }
+	        void SetCenter(const vec3f& center)		{ this->center = center; }
+	        void SetParallaxRate(float parallax_rate) 	{ this->parallax_rate = parallax_rate; } 
       		        	
         protected:
        		unsigned long int id;
@@ -43,8 +44,8 @@ class BaseBackGroundEffect
        	       	std::string textureOb_path;
        	       	
         	vec3f center;
+		vec3f scale;		
 
-		float scale;
 		float parallax_rate;
         	
      		void SaveDataUniqueBaseBackGroundEffect(boost::property_tree::ptree&, const std::string&) const;		

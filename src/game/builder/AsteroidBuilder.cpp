@@ -82,24 +82,23 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
     	planet_data.orbit_phi_inD = getRandInt(0, 360);
     	planet_data.speed         = 0.1;
     	planet_data.clockwise     = getRandBool();
-    	
-        TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ASTEROID_ID); 
         
         asteroid->SetPlanetData(planet_data);
-	asteroid->SetTextureOb(texOb);
 	asteroid->SetLifeData(data_life);
 
-	asteroid->SetMesh(mesh);        
+	float scale_comp = getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX);
+	vec3f scale(scale_comp, scale_comp, scale_comp);
+	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ASTEROID_ID); 
+	      
+	asteroid->BindData3D(mesh, texOb, scale);        
         asteroid->SetAngle(vec3f(getRandInt(10, 40), getRandInt(10, 40), 0));	        
+	
 	float step = getRandInt(10, 100)*0.01;
 	AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
 	asteroid->SetRenderAnimation(animation_program);
 	asteroid->SetZYX(false);
 				
-	asteroid->SetScale(getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX));	
        	asteroid->SetGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
-	
-        asteroid->CalculateCollisionRadius();
 }
 
 

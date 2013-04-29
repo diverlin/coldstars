@@ -31,7 +31,8 @@ class Mesh
 
 		int GetTypeId() const { return type_id; };
 		TextureOb* GetTextureOb() const { return textureOb; };
-				
+		const vec3f& GetBoundaryBox() const { return boundary_box; };
+						
 		void Draw() const;
 	
 	private:
@@ -39,10 +40,11 @@ class Mesh
 		
 		TextureOb* textureOb;
 		std::vector<MeshFaceData> faces; 
+		vec3f boundary_box;
 
 		GLuint glList; 
 		GLuint vbo_id;
-      
+      		
       		void BuildFaces(const ObjLoader&);
 		void CreateGlList(); 
 		void CreateVbo(); 

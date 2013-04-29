@@ -41,15 +41,16 @@ class Points
                 void SetParentCenter(vec2f parent_center) { this->parent_center.Set(parent_center); };
                 
                 void SetCenter(float x, float y)	{ center.Set(x, y); 		is_updated = false; };
-                void SetCenter(vec2f center)		{ this->center = center;  	is_updated = false; };
+                void SetCenter(const vec2f& center) { this->center = center;  	is_updated = false; };
                 void SetAngle(float angle_inD) 	{ this->angle_inD = angle_inD; 	is_updated = false; };
 
                 void SetPosZ(float pos_z) { this->pos_z = pos_z; }
                 
-                void SetWidthHeight(int w, int h) { this->w = w; this->h = h; };
-                        
-        	int GetWidth() const  { return w; };
-        	int GetHeight() const { return h; };
+                void SetScale(float x, float y, float z) { scale.Set(x,y,z); };
+                void SetScale(const vec3f scale) { this->scale = scale; };
+                                        
+        	float GetWidth() const  { return scale.x; };
+        	float GetHeight() const { return scale.y; };
         
                 float GetAngleDegree() const { return angle_inD; }  ;
                 float* GetpAngleDegree() { return &angle_inD; };
@@ -58,6 +59,8 @@ class Points
                         
                 const vec2f& GetCenter()  const { return center; };   
                 const vec3f GetCenter3f() const { return vec3f(center.x, center.y, pos_z); }; 
+                const vec3f GetScale() 	  const { return scale; }; 
+                
                 vec2f* GetpCenter() { return &center; };  
                 vec2f* GetpParentCenter() { return &parent_center; };   
                       
@@ -74,53 +77,44 @@ class Points
                 Points();
                 ~Points();
 
-                void initMainQuadPoints(int, int);
                 void addMainQuadPoints();
 
                 void Add(vec2f*, vec2f*);
 
-                void initMidLeftPoint();
                 void addMidLeftPoint();
-                void initMidFarLeftPoint();
                 void addMidFarLeftPoint();
 
                 void Update();                
                 
         private:
                 bool is_updated;
-                        
+                
+                vec3f scale;
+                float angle_inD;
+                float pos_z;
+            
+                vec2f center;     
+                vec2f parent_center; 
+              
                 std::vector<vec2f*> vector_orig;
                 std::vector<vec2f*> vector;
-                                              
+                                             
                 // Origin entity rect (for rotation only transformation)
                 vec2f bottomLeft_origin;  
                 vec2f bottomRight_origin; 
                 vec2f topRight_origin;    
                 vec2f topLeft_origin;    
+
+		// jet normilized
+		vec2f midLeft_origin;
+		vec2f midFarLeft_origin;
                 
-                // Actual entity rect
-                int w, h; 		// used for collisions
-                float angle_inD;
-                float pos_z;
-                
-                vec2f center;     
-                vec2f parent_center; 
-                    
+                // Actual entity rect                       
                 vec2f bottomLeft;  
                 vec2f bottomRight; 
                 vec2f topRight;    
                 vec2f topLeft;
                 
-            
-                // Origin shield quad (for rotation only transformation)
-                vec2f bottomLeftShield_origin;
-                vec2f bottomRightShield_origin;
-                vec2f topRightShield_origin;
-                vec2f topLeftShield_origin;
-                      
-                // jet origin
-                vec2f midLeft_origin;
-                vec2f midFarLeft_origin;
                 // jet actual
                 vec2f midLeft;
                 vec2f midFarLeft;

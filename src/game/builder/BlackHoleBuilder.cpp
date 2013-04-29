@@ -72,6 +72,8 @@ BlackHole* BlackHoleBuilder::GetNewBlackHole() const
        	
 void BlackHoleBuilder::CreateNewInternals(BlackHole* blackhole) const
 {           
+	Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_ID);
+	
         LifeData data_life;
         data_life.is_alive   = true;
         data_life.garbage_ready = false;
@@ -82,17 +84,15 @@ void BlackHoleBuilder::CreateNewInternals(BlackHole* blackhole) const
 	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BLACKHOLE_ID); 
                 
 	blackhole->SetLifeData(data_life);
-	blackhole->SetTextureOb(texOb);
-	blackhole->SetMesh(MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_ID));	
+	
+	float scale_comp = 30;
+	vec3f scale(scale_comp, scale_comp, scale_comp);	
+	blackhole->BindData3D(mesh, texOb, scale);	
 	
 	float step = 10;
 	AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
 	blackhole->SetRenderAnimation(animation_program);
 	blackhole->SetZYX(false);
-	
-	blackhole->SetScale(30);
-	
-	blackhole->CalculateCollisionRadius();
 }
 
 

@@ -59,8 +59,8 @@ void BlackHole::UpdateInSpace(int time, bool show_effect)
 		data_life.life_time--;
 		if (data_life.life_time < 0)
 		{
-			scale -= 0.1;
-			if (scale < 1.0)
+			//scale -= 0.1;
+			//if (scale < 1.0)
 			{
 				data_life.is_alive = false;
 			}

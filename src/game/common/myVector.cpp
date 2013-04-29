@@ -120,6 +120,15 @@ const vec3f& vec3f::operator+=(const vec3f& rhs)
 	return *this;
 }
 
+const vec3f& vec3f::operator*=(float val)
+{
+	x *= val;
+	y *= val;
+	z *= val;	
+	
+	return *this;
+}
+
 const vec3f& vec3f::operator/=(float val)
 {
 	x /= val;

@@ -62,7 +62,7 @@ void BasePlanet::UpdatePosition()
 void BasePlanet::RenderMesh_OLD() const
 {   	
 	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-	renderMesh(mesh, points.GetCenter3f(), angle, scale, ZYX);
+	renderMesh(mesh, points.GetCenter3f(), angle, points.GetScale(), ZYX);
 }
 
 
@@ -105,9 +105,6 @@ void BasePlanet::ResolveDataUniqueBasePlanet()
 	#if SAVELOAD_LOG_ENABLED == 1
 	Logger::Instance().Log(" BasePlanet("+int2str(GetId())+")::ResolveDataUniqueBasePlanet", SAVELOAD_LOG_DIP);
 	#endif
-	
-	CalculateCollisionRadius();
-	//orbit->SetIt(data_unresolved_BasePlanet.orbit_it); // moved into planet/asteroid class
 }
 
 
