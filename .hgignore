@@ -5,7 +5,7 @@ externals/
 bin/
 .*.swp
 *~
-game
 *.o
 save*.info
 *.log
+coldstars

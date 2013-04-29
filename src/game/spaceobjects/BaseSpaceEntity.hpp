@@ -57,6 +57,7 @@ class BaseSpaceEntity : public Base
 		
 		bool Is3D() const { return (mesh != NULL); }
 		const vec3f& GetBoundaryBox() const { return mesh->GetBoundaryBox(); }
+		Mesh* GetMesh() const { return mesh; }
 				
 		int SetGivenExpirience(int given_expirience) { this->given_expirience = given_expirience; }
                 
