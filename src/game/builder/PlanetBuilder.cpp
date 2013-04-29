@@ -27,6 +27,7 @@
 #include "../resources/MeshCollector.hpp"
 
 #include "../animations/AnimationConstantRotationAxisZ.hpp"
+#include "../effects/Atmosphere.hpp"
 
 PlanetBuilder& PlanetBuilder::Instance()
 {
@@ -85,7 +86,6 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     	planet_data.clockwise     = getRandBool();
 
         TextureOb* textureOb 	        = TextureManager::Instance().GetRandomTextureOb(TEXTURE::PLANET_ID); 
-        TextureOb* textureOb_atmosphere = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ATMOSPHERE_ID); 
         
         planet->SetPlanetData(planet_data);
 	
@@ -100,6 +100,13 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
 	AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
 	planet->SetRenderAnimation(animation_program);
 	planet->SetZYX(false);
+	
+	if (getRandBool()) 
+	{
+	        TextureOb* textureOb_atmosphere = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ATMOSPHERE_ID); 
+		Atmosphere* atmosphere = new Atmosphere(textureOb_atmosphere);
+		planet->BindAtmosphere(atmosphere);
+	}
 }
 
 

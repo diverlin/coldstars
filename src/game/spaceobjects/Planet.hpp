@@ -21,7 +21,8 @@
 #define PLANET_H
 
 #include "BasePlanet.hpp"
-#include "../docking/BaseLand.hpp"
+class BaseLand;
+class Atmosphere;
 
 
 class Planet : public BasePlanet
@@ -32,12 +33,12 @@ class Planet : public BasePlanet
 		
 		virtual void PutChildsToGarbage() const;
 
-		void BindLand(BaseLand* land);
-		void SetPopulation(unsigned long int population) 	{ this->population = population; };
+		void BindAtmosphere(Atmosphere*);
+		void BindLand(BaseLand*);
+		void SetPopulation(unsigned long int population)  { this->population = population; }
 		
-		unsigned long int GetPopulation() const { return population; }; 
-		int GetDockingRadius() const { return collision_radius; };
-		BaseLand* GetLand() const { return land; };
+		unsigned long int GetPopulation() const { return population; }
+		BaseLand* GetLand() const { return land; }
 
 		void AddVehicle(Vehicle*) const;
 		
@@ -52,19 +53,14 @@ class Planet : public BasePlanet
 		void ResolveData();
 		
 	private:
-		TextureOb* textureOb_atmosphere;
-		
-		vec3f angle_atmosphere;
-		vec3f d_angle_atmosphere;
-		
 		BaseLand* land;
-
+		
+		Atmosphere* atmosphere;
+		
 		unsigned long int population;
 		void UpdateInfo();
 
 		void PostDeathUniqueEvent(bool);
-
-		void RenderAtmosphere_NEW(const vec2f&);
 		
 		void SaveDataUniquePlanet(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniquePlanet(const boost::property_tree::ptree&);

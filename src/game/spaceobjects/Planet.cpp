@@ -17,6 +17,8 @@
 */
 
 #include "Planet.hpp"
+#include "../docking/BaseLand.hpp"
+#include "../effects/Atmosphere.hpp"
 #include "../common/constants.hpp"
 #include "../world/EntityManager.hpp"
 #include "../common/myStr.hpp"
@@ -30,16 +32,12 @@
 #include "../garbage/EntityGarbage.hpp"
 #include "../common/Logger.hpp"
 
-Planet::Planet(int id)
+Planet::Planet(int id):atmosphere(NULL)
 {    
 	data_id.id = id;
 	data_id.type_id = ENTITY::PLANET_ID;
 	
 	population  = 0;
-		
-	textureOb_atmosphere = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ATMOSPHERE_ID);
-	
-	d_angle_atmosphere.Set(0.0, 0.0, -0.4);
 		      	
 	land = NULL;
 }
@@ -50,6 +48,8 @@ Planet::~Planet()
 	#if CREATEDESTROY_LOG_ENABLED == 1
 	Logger::Instance().Log("___::~Planet("+int2str(GetId())+")");
 	#endif	
+	
+	delete atmosphere;
 }
 
 /* virtual */
@@ -58,6 +58,12 @@ void Planet::PutChildsToGarbage() const
 	EntityGarbage::Instance().Add(land);
 }
 
+void Planet::BindAtmosphere(Atmosphere* atmosphere) 
+{
+	this->atmosphere = atmosphere; 
+	atmosphere->SetParent(this);
+}
+		
 void Planet::BindLand(BaseLand* land)
 {
 	this->land = land;
@@ -107,40 +113,17 @@ void Planet::Render_NEW(const vec2f& scroll_coords)
 {
 	UpdateRenderAnimation();
 	RenderMesh(scroll_coords);
-	RenderAtmosphere_NEW(scroll_coords);
+	if (atmosphere != NULL)
+	{
+		atmosphere->Render(scroll_coords);
+	}
 }
 	
 void Planet::Render_OLD() const
 {
 	RenderMesh_OLD();	
 }
-				 		
-void Planet::RenderAtmosphere_NEW(const vec2f& scroll_coords)
-{     	
-     	const Color4f& color = starsystem->GetColor4f(); float ambient_factor = 0.25;
-     	
-	angle_atmosphere += d_angle_atmosphere;
 	
-     	glUseProgram(ShaderCollector::Instance().light);
-
-     	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0);
-     	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0);
-     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "diffColor"), color.r, color.g, color.b, color.a);
-     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "ambientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
-     	
-     	glEnable(GL_BLEND);
-     		glActiveTexture(GL_TEXTURE0);                                
-     		glBindTexture(GL_TEXTURE_2D, textureOb_atmosphere->texture);
-     		glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
-		float scale_rate = 1.1;
-		renderMesh(mesh, points.GetCenter3f(), angle_atmosphere, vec3f(points.GetScale().x*scale_rate, points.GetScale().y*scale_rate, points.GetScale().z*scale_rate), ZYX);
-	glDisable(GL_BLEND);
-	
-     	glUseProgram(0);
-     	glActiveTexture(GL_TEXTURE0);
-}
-
-
 void Planet::SaveDataUniquePlanet(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	#if SAVELOAD_LOG_ENABLED == 1
